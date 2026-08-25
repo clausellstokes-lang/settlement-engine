@@ -13,12 +13,13 @@ def load(name, path):
     return m
 
 BASE = os.path.dirname(os.path.abspath(__file__))
+CORPUS = os.path.dirname(BASE)
 M = load("mfs1m", os.path.join(BASE, "MFS1-measure.py"))
 A = load("mfs1a", os.path.join(BASE, "MFS1-aesthetic.py"))
 
 for stem in sys.argv[1:]:
-    full = os.path.join(BASE, "map-refs", stem + ".png")
-    prev = os.path.join(BASE, "map-refs", "prev-" + stem + ".jpg")
+    full = os.path.join(CORPUS, "plates", stem + ".png")
+    prev = os.path.join(CORPUS, "previews", "prev-" + stem + ".jpg")
     row = {"stem": stem}
     try:
         row["measure_full"] = M.analyze(full, full)

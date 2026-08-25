@@ -11,28 +11,20 @@
  */
 
 import { useState } from 'react';
+import { Edit3, BookMarked, RotateCcw, Lock } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { GOLD, GOLD_BG, INK, sans, FS } from '../theme.js';
+import { GOLD, GOLD_BG, INK, sans, FS, R } from '../theme.js';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import Button from '../primitives/Button.jsx';
 import { t } from '../../copy/index.js';
 
 const COLORS = {
-  draft: { bg: '#f3ead8', fg: '#6a4a1c', border: '#c8a96a', label: 'Draft' },
-  canon: { bg: '#1a3a2a', fg: '#e0d6b8', border: '#2d5a44', label: 'Canon' },
+  draft: { bg: '#f3ead8', fg: '#6a4a1c', border: '#c8a96a', icon: Edit3,      label: 'Draft' },
+  canon: { bg: '#1a3a2a', fg: '#e0d6b8', border: '#2d5a44', icon: BookMarked, label: 'Canon' },
 };
 
-/**
- * @param {object} [props]
- * @param {boolean} [props.chipOnly=false]  When true, render ONLY the Draft/Canon
- *   status chip (and the clock-bound status), suppressing the Mark Canon / Reset
- *   ACTION buttons. The saved-view header uses this in read mode (owner order
- *   2026-07-22): the verbs live in the Actions panel now, so the header keeps only
- *   nav + identity + status chips. Edit mode passes chipOnly=false to keep the
- *   inline Mark Canon / Reset affordance where the Actions rail is not shown.
- */
-export default function PhaseBadge({ chipOnly = false }) {
+export default function PhaseBadge() {
   const phase     = useStore(s => s.phase);
   const canonize  = useStore(s => s.canonize);
   const uncanonize = useStore(s => s.uncanonize);
@@ -45,6 +37,7 @@ export default function PhaseBadge({ chipOnly = false }) {
   const [confirmAction, setConfirmAction] = useState(null);
 
   const c = COLORS[phase] || COLORS.draft;
+  const Icon = c.icon;
 
   const onCanonize = () => {
     setConfirmAction('canonize');
@@ -83,29 +76,31 @@ export default function PhaseBadge({ chipOnly = false }) {
             display: 'inline-flex', alignItems: 'center', gap: 4,
             padding: '3px 8px',
             background: c.bg, color: c.fg,
-            border: `1px solid ${c.border}`,
+            border: `1px solid ${c.border}`, borderRadius: R.sm,
             fontSize: FS.xs, fontWeight: 800, fontFamily: sans, letterSpacing: '0.04em',
           }}
         >
-          {c.label.toUpperCase()}
+          <Icon size={11} /> {c.label.toUpperCase()}
           {phase === 'canon' && eventCount > 0 && (
             <span style={{ opacity: 0.7, marginLeft: 4 }}>· {eventCount}</span>
           )}
         </span>
-        {!chipOnly && phase === 'draft' && (
+        {phase === 'draft' && (
           <Button
             variant="gold"
             size="sm"
+            icon={<BookMarked size={11} />}
             onClick={onCanonize}
             title="Mark as canon. Start tracking in-world events on a timeline"
           >
             {t('canon.markCanon')}
           </Button>
         )}
-        {!chipOnly && phase === 'canon' && !clockBound && (
+        {phase === 'canon' && !clockBound && (
           <Button
             variant="danger"
             size="sm"
+            icon={<RotateCcw size={11} />}
             onClick={onReset}
             title="Reset to draft and clear the event timeline"
           >
@@ -114,16 +109,16 @@ export default function PhaseBadge({ chipOnly = false }) {
         )}
         {phase === 'canon' && clockBound && (
           <span
-            title="On the world-map clock. Reset is at the map level (undo a World Pulse). The settlement can't be individually reset to draft."
+            title="On the world-map clock — reset is at the map level (undo a World Pulse). The settlement can't be individually reset to draft."
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 4,
               padding: '3px 8px',
               background: GOLD_BG, color: INK,
-              border: `1px solid ${GOLD}`,
+              border: `1px solid ${GOLD}`, borderRadius: R.sm,
               fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
             }}
           >
-            Clock-bound
+            <Lock size={10} /> Clock-bound
           </span>
         )}
       </div>

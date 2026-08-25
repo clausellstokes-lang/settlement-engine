@@ -21,18 +21,16 @@
  * @param {string} props.section                 active section id
  * @param {(id:string)=>void} props.setSection   section setter
  * @param {boolean} [props.isElevated=false]     show the Developer-Admin affordance
- * @param {boolean} [props.showAiKeys=true]      show the Surveyor-gated "AI & keys" row
- * @param {number} [props.unreadCount=0]         shared unopened-message count
  * @param {() => void} [props.onNavigateAdmin]   admin-panel navigator
  */
-import { useMemo } from 'react';
+import { Shield, ChevronRight } from 'lucide-react';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
-  INK, SECOND, BORDER, GOLD_TXT, GOLD_SOFT, FS, SP, sans } from '../theme.js';
+  INK, SECOND, MUTED, BORDER, GOLD_TXT, GOLD_SOFT, FS, R, SP, sans,
+} from '../theme.js';
 import { space } from '../../design/tokens.js';
 import Button from '../primitives/Button.jsx';
 import MobileTabStrip from '../primitives/MobileTabStrip.jsx';
-import UnreadMessageBadge, { normalizeUnreadCount } from './UnreadMessageBadge.jsx';
 
 /**
  * The canonical section order. Profile leads (the default landing section);
@@ -43,11 +41,9 @@ export const ACCOUNT_SECTIONS = [
   { id: 'profile', label: 'Profile' },
   { id: 'security', label: 'Security' },
   { id: 'subscription', label: 'Subscription' },
-  { id: 'messages', label: 'Messages' },
   { id: 'support', label: 'Support' },
   { id: 'data', label: 'Data' },
   { id: 'preferences', label: 'Preferences' },
-  { id: 'ai', label: 'AI & keys' },
 ];
 
 /** Synthetic tab id for the elevated-only admin affordance on mobile. */
@@ -57,26 +53,18 @@ export default function AccountNav({
   section,
   setSection,
   isElevated = false,
-  showAiKeys = true,
-  unreadCount = 0,
   onNavigateAdmin,
 }) {
   const isMobile = useIsMobile();
   const showAdmin = Boolean(isElevated && onNavigateAdmin);
-  // The "AI & keys" row is Surveyor-gated (owner ruling 2026-07-19): hidden
-  // entirely for non-entitled accounts — no lock-tease, matching the door.
-  const sections = useMemo(() => (
-    (showAiKeys ? ACCOUNT_SECTIONS : ACCOUNT_SECTIONS.filter((s) => s.id !== 'ai'))
-      .map(row => row.id === 'messages' ? ({ ...row, label: <MessageLabel count={unreadCount} /> }) : row)
-  ), [showAiKeys, unreadCount]);
 
   // ── Mobile: the shipped tab strip, no section hidden ──────────────────────
   // The admin link rides as a trailing tab so the elevated affordance survives
   // the reflow; selecting it navigates away rather than switching a panel.
   if (isMobile) {
     const tabs = showAdmin
-      ? [...sections, { id: ADMIN_TAB_ID, label: 'Admin' }]
-      : sections;
+      ? [...ACCOUNT_SECTIONS, { id: ADMIN_TAB_ID, label: 'Admin' }]
+      : ACCOUNT_SECTIONS;
     return (
       <MobileTabStrip
         tabs={tabs}
@@ -94,7 +82,7 @@ export default function AccountNav({
   // ── Desktop: a vertical rail of ghost rows ────────────────────────────────
   return (
     <nav aria-label="Account settings" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
-      {sections.map(({ id, label }) => {
+      {ACCOUNT_SECTIONS.map(({ id, label }) => {
         const active = section === id;
         return (
           <Button
@@ -111,6 +99,7 @@ export default function AccountNav({
               fontWeight: active ? 800 : 600,
               color: active ? GOLD_TXT : SECOND,
               background: active ? GOLD_SOFT : 'transparent',
+              borderRadius: R.lg,
             }}
           >
             <span style={{ flex: 1, textAlign: 'left' }}>{label}</span>
@@ -129,6 +118,8 @@ export default function AccountNav({
             size="md"
             fullWidth
             onClick={onNavigateAdmin}
+            icon={<Shield size={16} color={SECOND} />}
+            trailingIcon={<ChevronRight size={16} color={MUTED} style={{ marginLeft: 'auto' }} />}
             style={{ justifyContent: 'flex-start', fontFamily: sans, textAlign: 'left' }}
           >
             <span style={{ flex: 1, textAlign: 'left' }}>
@@ -139,16 +130,5 @@ export default function AccountNav({
         </>
       )}
     </nav>
-  );
-}
-
-function MessageLabel({ count }) {
-  const unread = normalizeUnreadCount(count);
-  return (
-    <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs }}>
-      <span aria-hidden={unread > 0 ? 'true' : undefined}>Messages</span>
-      <UnreadMessageBadge count={unread} />
-      {unread > 0 && <span className="sr-only">Messages, {unread} unread message{unread === 1 ? '' : 's'}</span>}
-    </span>
   );
 }

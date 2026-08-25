@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { MUTED as MUT, SECOND as SEC, BORDER as BOR, FS, swatch } from '../theme.js';
 import { useStore } from '../../store/index.js';
-import EntityPicker, { missingReferenceLabel } from '../EntityPicker.jsx';
+import EntityPicker from '../EntityPicker.jsx';
 import { buildRegistry, customRefIdFromItem } from '../../lib/customRegistry.js';
-import { CUSTOM_CATEGORIES } from './customCategories.js';
+import { CUSTOM_CATEGORIES } from './CustomContent.jsx';
 
 // Maps a dependency field (as stored on ANOTHER custom item) to the relationship
 // verb from THIS item's perspective. Powers the derived reverse-links below:
@@ -79,12 +79,7 @@ export function DependencySummary({ deps, item }) {
     if (refIds.length === 0) return null;
     const entries = refIds.map(r => {
       const e = registry.resolve(r);
-      return {
-        refId: r,
-        name: e?.name || missingReferenceLabel(r),
-        missing: !e,
-        source: e?.source,
-      };
+      return { refId: r, name: e?.name || '(missing)', missing: !e, source: e?.source };
     });
     return { dep, entries };
   }).filter(Boolean);
@@ -107,16 +102,16 @@ export function DependencySummary({ deps, item }) {
             {entries.map((e, i) => (
               <span
                 key={`${e.refId}-${i}`}
-                title={e.missing ? 'This linked item no longer exists.' : ''}
+                title={e.missing ? `Reference missing: ${e.refId}` : ''}
                 style={{
                   fontSize:FS.micro, fontWeight:700,
                   color: e.missing ? '#8b1a1a' : (e.source==='custom' ? '#7c3aed' : SEC),
                   background: e.missing ? '#fdebec' : (e.source==='custom' ? '#7c3aed14' : '#0001'),
                   border:`1px solid ${e.missing ? '#f0c8cc' : (e.source==='custom' ? '#7c3aed44' : BOR)}`,
-                  padding:'1px 5px',
+                  borderRadius:8, padding:'1px 5px',
                 }}
               >
-                {e.name}
+                {e.missing && '! '}{e.name}
               </span>
             ))}
           </div>
@@ -127,7 +122,7 @@ export function DependencySummary({ deps, item }) {
           marginTop:4, fontSize:FS.xxs, color:swatch.danger,
           fontStyle:'italic',
         }}>
-          {totalMissing} linked item{totalMissing===1?' could':'s could'} not be found. Edit this item to repair the link{totalMissing===1?'':'s'}.
+          {totalMissing} dangling reference{totalMissing===1?'':'s'}. Edit this item to fix.
         </div>
       )}
       {reverseLinks.length > 0 && (
@@ -149,7 +144,7 @@ export function DependencySummary({ deps, item }) {
                   <span key={`${verb}-${i}`} style={{
                     fontSize:FS.micro, fontWeight:700, color:CUSTOM_INK,
                     background:CUSTOM_BG, border:`1px solid ${CUSTOM_BORDER}`,
-                    padding:'1px 5px',
+                    borderRadius:8, padding:'1px 5px',
                   }}>{n}</span>
                 ))}
               </div>
@@ -193,7 +188,7 @@ export function DependenciesSection({ deps, draft, setDraft }) {
           Dependencies {total > 0 && (
             <span style={{
               marginLeft:6, background:'rgba(124,58,237,0.15)', color:swatch.magic,
-              padding:'1px 6px', fontSize:FS.micro, fontWeight:800,
+              borderRadius:8, padding:'1px 6px', fontSize:FS.micro, fontWeight:800,
             }}>{total}</span>
           )}
         </span>

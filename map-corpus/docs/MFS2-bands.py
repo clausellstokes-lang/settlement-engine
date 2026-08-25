@@ -8,7 +8,8 @@ Prints every figure MF-S2 writes into the atlas, with its cohort and n.
 """
 import csv, math, json, sys, os
 
-CSV = "/Users/cstokes/Desktop/settlement-engine/map-corpus/docs/laneHFM1-corpus-measured.csv"
+HERE = os.path.dirname(os.path.abspath(__file__))
+CSV = os.path.join(HERE, "laneHFM1-corpus-measured.csv")
 
 rows = list(csv.DictReader(open(CSV)))
 
@@ -167,6 +168,16 @@ for key, hi, claim in (("chroma", True,  "hf72 chroma 69.5 = highest in corpus")
     print("        ", [(i, round(x, 2), e) for x, i, e in extreme(key, hi)])
 print()
 
-json.dump(out, open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                 "MFS2-bands.json"), "w"), indent=1)
-print("wrote MFS2-bands.json")
+output_path = os.path.join(HERE, "MFS2-bands.json")
+if "--write" in sys.argv:
+    temp = output_path + ".tmp"
+    with open(temp, "w") as handle:
+        json.dump(out, handle, indent=1)
+        handle.write("\n")
+    os.replace(temp, output_path)
+    print("wrote MFS2-bands.json")
+else:
+    expected = json.load(open(output_path))
+    if expected != out:
+        raise SystemExit("MFS2-bands.json DRIFT — inspect, then pass --write only if the derivation changed intentionally")
+    print("MFS2-bands.json MATCHES — dry run, no write")

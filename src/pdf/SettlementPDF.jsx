@@ -39,11 +39,8 @@ import { Relationships } from './sections/Relationships.jsx';
 import { AIAppendix } from './sections/AIAppendix.jsx';
 import { SystemStateSnapshot } from './sections/SystemStateSnapshot.jsx';
 import { FaithWar } from './sections/FaithWar.jsx';
-import { Traditions } from './sections/Traditions.jsx';
-import { TownMapPlate } from './sections/TownMapPlate.jsx';
 import { Timeline as TimelineChapter } from './sections/Timeline.jsx';
 import { buildViewModel } from './lib/viewModel.js';
-import { buildTownMapModel, hasDrawableMap } from '../domain/townMap/index.js';
 import { PDF_VARIANTS, shouldInclude, faithChapterVisible } from './variants.js';
 
 export function SettlementPDF({
@@ -76,17 +73,10 @@ export function SettlementPDF({
   // Edition" badge on the cover. Defaults false so historical PDFs
   // are unaffected.
   isFounder = false,
-  // The cover's anti-scraping watermark. VERIFIED POSTURE (2026-07-30): NO
-  // production caller passes true. The single-dossier purchase export passes
-  // `false` explicitly (SingleDossierSuccessPage.jsx), and the three account
-  // export surfaces (SettlementCard, ExportDraftButton, SettlementDetail) omit
-  // it and take this default — so the watermark block in Cover.jsx is reachable
-  // only from tests. Whether a purchase / anonymous export should carry it is an
-  // open product call, recorded here, not a defect to re-find.
+  // Anonymous PDFs (single-dossier purchase, anonymous preview) carry
+  // a footer watermark. Account holders — Wanderer, Cartographer,
+  // Founder — get clean exports.
   isAnonymous = false,
-  // The export date — injectable, mirroring the World Book cover (opts.now).
-  // Null keeps the wall-clock read inside Cover, so legacy callers are unchanged.
-  now = null,
 }) {
   const safe = settlement || {};
   const vm = buildViewModel({
@@ -99,15 +89,6 @@ export function SettlementPDF({
   const inc = (key) => shouldInclude(variantSpec.chapters[key], ctx);
   const showState    = inc('systemState') && !!systemState;
   const showTimeline = inc('timeline');
-  // SM-4 — the town-map plate: variant-gated AND self-gating on real map content
-  // (a map-less settlement ⇒ no plate ⇒ byte-identical to a pre-plate export). No
-  // premium seam: the plate rides the base export ladder like the other static
-  // reference chapters. The model is a pure view-time projection (base layout;
-  // cosmetic mapEdits stay library-only) — built here once so the ToC gate and
-  // the rendered chapter agree, then handed to the plate to avoid a rebuild. Kept
-  // off viewModel.js (that module is at its max-lines ceiling).
-  const townMapModel = buildTownMapModel(settlement);
-  const showTownMap  = inc('townMapPlate') && hasDrawableMap(townMapModel);
   // The live "Faith & War" chapter — variant + canon gated, self-gating on the
   // dormant liveWorld slice, AND premium-gated (faithUnlocked). All three must
   // pass; a free/anon export (faithUnlocked=false) or a dormant slice ⇒ no
@@ -116,14 +97,6 @@ export function SettlementPDF({
     variant, phase, hasLiveWorld: !!vm.liveWorld, faithUnlocked,
     narrated: useAi, eventCount: eventLog?.length || 0,
   });
-  // The "Campaign State / War Room" variant promotes the State chapter to its
-  // layered causal-detail form (16-var grid + pressures). Every other variant
-  // keeps the default 4-dim snapshot byte-identical.
-  const stateCausalDetail = variant === 'campaign_state';
-  // THE TRADITIONS register (07B, T-5) — variant/canon gated AND self-gating on the
-  // settlement.traditions MIRROR (the townMapPlate precedent). A draft, or any export
-  // while the traditions layer is DARK (no mirror), ⇒ no chapter ⇒ byte-identical.
-  const showTraditions = inc('traditions') && Array.isArray(safe.traditions) && safe.traditions.length > 0;
 
   // ToC entries — must match the chapters actually rendered below, which
   // are now variant-gated. Build by filtering against the same `inc()`
@@ -135,17 +108,15 @@ export function SettlementPDF({
     inc('overview')            && { no: '01',  title: 'Overview', note: useAi ? 'narrative + raw' : 'systems' },
     inc('tonightAtTheTable')   && { no: '02',  title: 'Tonight at the Table', note: 'quick prep' },
     inc('npcQuickRef')         && { no: '03',  title: 'NPC Quick Reference', note: 'index' },
-    showState                  && { no: '03B', title: 'Current State', note: stateCausalDetail ? 'state + substrate' : '4-dim snapshot' },
+    showState                  && { no: '03B', title: 'Current State', note: '4-dim snapshot' },
     showTimeline               && { no: '03C', title: 'Timeline', note: `${eventLog.length} event${eventLog.length === 1 ? '' : 's'}` },
     showFaithWar               && { no: '03D', title: 'Faith & War', note: 'live campaign state' },
     inc('notableNpcs')         && { no: '04',  title: 'Notable NPCs', note: 'detailed sheets' },
     inc('plotHooks')           && { no: '05',  title: 'Plot Hooks & Quests' },
     inc('powerStructure')      && { no: '06',  title: 'Power Structure' },
     inc('identityDailyLife')   && { no: '07',  title: 'Identity & Daily Life' },
-    showTraditions             && { no: '07B', title: 'Traditions', note: 'festivals & rites' },
     inc('services')            && { no: '08A', title: 'Services', note: 'what players can buy' },
     inc('institutions')        && { no: '08B', title: 'Institutions', note: 'who runs what' },
-    showTownMap                && { no: '08C', title: 'Town Map', note: 'deterministic plan' },
     inc('economicsTrade')      && { no: '09',  title: 'Economics & Trade' },
     inc('resourcesProduction') && { no: '10',  title: 'Resources & Production' },
     inc('defenseSecurity')     && { no: '11',  title: 'Defense & Security' },
@@ -162,22 +133,20 @@ export function SettlementPDF({
       creator="SettlementForge"
       subject={`Settlement dossier${useAi ? ' (AI narrative edition)' : ''}`}
     >
-      {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} isAnonymous={isAnonymous} now={now} />}
+      {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} isAnonymous={isAnonymous} />}
       {inc('toc')                 && <TableOfContents      settlement={safe} narrativeMode={useAi} entries={tocEntries} />}
       {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('tonightAtTheTable')   && <TonightAtTheTable    settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} causalDetail={stateCausalDetail} />}
+      {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showTimeline               && <TimelineChapter      settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('notableNpcs')         && <NotableNPCs          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('identityDailyLife')   && <IdentityDailyLife    settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {showTraditions             && <Traditions           settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('services')            && <Services             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('institutions')        && <Institutions         settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {showTownMap                && <TownMapPlate          settlement={safe} narrativeMode={useAi} model={townMapModel} />}
       {inc('economicsTrade')      && <EconomicsTrade       settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('resourcesProduction') && <ResourcesProduction  settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('defenseSecurity')     && <DefenseSecurity      settlement={safe} narrativeMode={useAi} vm={vm} />}

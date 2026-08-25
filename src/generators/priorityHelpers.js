@@ -5,11 +5,6 @@
  */
 
 import {clamp} from './helpers.js';
-import {
-  isMaterializedCustomContent,
-  nativeSemanticNames,
-  nativeSemanticResourceKeys,
-} from '../domain/content/customContentSemanticAuthority.js';
 
 export const getPriorities = (config = {}) => ({
   economy:  config.priorityEconomy  ?? 50,
@@ -39,8 +34,7 @@ const PORT_INFRA_RE = /\b(?:port|docks?|harbou?r|shipyard|navy)\b/;
  * @returns {Object} Boolean presence flags
  */
 const getInstitutionNames = (institutions = []) => {
-  const names = nativeSemanticNames(institutions)
-    .map(name => name.toLowerCase());
+  const names = institutions.map(i => (i.name || '').toLowerCase());
   return {
     hasMilitaryInst:  hasAny(names, ['garrison','barracks','guard','watch','citadel','walls','militia','mercenary','navy','charter hall']),
     hasGarrison:      hasAny(names, ['garrison','barracks','professional guard','professional city watch','multiple garrison']),
@@ -123,13 +117,8 @@ export const computeEffectiveMagicPresence = (institutions = [], config = {}) =>
   };
 
   // Also treat entire Magic/Exotic category institutions with minimum practitioner weight
-  const nativeInstitutions = institutions.filter(
-    institution => !isMaterializedCustomContent(institution),
-  );
-  const instNames = nativeSemanticNames(nativeInstitutions)
-    .map(name => name.toLowerCase());
-  const instCategories = nativeInstitutions
-    .map(institution => (institution.category || '').toLowerCase());
+  const instNames = institutions.map(i => (i.name || '').toLowerCase());
+  const instCategories = institutions.map(i => (i.category || '').toLowerCase());
 
   let rawInstScore = 0;
   const instSources = [];
@@ -152,7 +141,7 @@ export const computeEffectiveMagicPresence = (institutions = [], config = {}) =>
   const instContrib = Math.min(40, rawInstScore * 0.4);
 
   // ── 3. Resource bonus (0–22) ──────────────────────────────────────────────
-  const resources = nativeSemanticResourceKeys(config);
+  const resources = config.nearbyResources || [];
   let resourceBonus = 0;
   const resourceSources = [];
 
@@ -198,8 +187,7 @@ export const hasTeleportationInfra = (institutions = [], config = {}) => {
   if (config?._magicTradeOnly === true) return true;
   // Check actual institution presence
   const hasInstitution = institutions.some(inst => {
-    if (isMaterializedCustomContent(inst)) return false;
-    const n = String(inst?.name || '').toLowerCase();
+    const n = (inst?.name || '').toLowerCase();
     return n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional') || n.includes('airship');
   });
   return hasInstitution;

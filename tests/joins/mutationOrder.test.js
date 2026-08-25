@@ -27,7 +27,6 @@ const CANONICAL_INSTITUTION_CHAIN = [
   'cascadePass',
   'isolationPass',
   'factionCorrelationPass',
-  'coherenceRepairPass',
 ];
 
 // Scratch keys → the step that declares (and writes) them.

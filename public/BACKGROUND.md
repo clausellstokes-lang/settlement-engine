@@ -53,8 +53,6 @@ name. Keep them reasonably sized (≤~500 KB) — they load as full-screen
 backgrounds. If a file is missing, the page degrades to flat parchment cream
 (`#f7f0e4`, the `background-color` fallback on `.page-bg`).
 
-> Legacy: `public/parchment-bg.jpg` was the old single global background. It was
+> Legacy: `public/parchment-bg.jpg` was the old single global background. It is
 > no longer referenced (the body is now flat cream and each view paints its own
-> background) and has been removed — `public/` was shipping the ~836 KB orphan
-> verbatim to the production origin. The `.parchment-bg` class in `index.css` is
-> now just a full-height layout wrapper (`min-height: 100vh`), not an image.
+> background) and can be removed.

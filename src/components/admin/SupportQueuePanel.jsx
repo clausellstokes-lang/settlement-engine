@@ -20,7 +20,9 @@ import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
 import { TextInputDialog } from '../primitives/Dialog.jsx';
 import {
-  INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN, GOLD, GOLD_BG, sans, serif_, SP, FS, swatch } from '../theme.js';
+  INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN, GOLD, GOLD_BG,
+  sans, serif_, SP, R, FS, swatch,
+} from '../theme.js';
 
 const STATUSES = [
   'new', 'triage', 'assigned', 'in_progress', 'waiting_on_user',
@@ -173,7 +175,7 @@ export default function SupportQueuePanel() {
         <label htmlFor="queue-status-filter" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
           Status
           <select id="queue-status-filter" value={filter} onChange={(e) => setFilter(e.target.value)}
-            style={{ marginLeft: SP.xs, fontSize: FS.sm, padding: '4px 6px', border: `1px solid ${BORDER}` }}>
+            style={{ marginLeft: SP.xs, fontSize: FS.sm, padding: '4px 6px', borderRadius: R.sm, border: `1px solid ${BORDER}` }}>
             <option value="">All</option>
             {STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s] || s}</option>)}
           </select>
@@ -189,7 +191,7 @@ export default function SupportQueuePanel() {
       {/* Queue list */}
       {tickets.length > 0 && (
         <div role="table" aria-label="Ticket queue"
-          style={{ maxHeight: 240, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}` }}>
+          style={{ maxHeight: 240, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}`, borderRadius: R.md }}>
           <div role="row" style={{
             display: 'flex', gap: SP.sm, padding: `${SP.xs}px ${SP.md}px`,
             background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
@@ -225,7 +227,7 @@ export default function SupportQueuePanel() {
 
       {/* Active ticket */}
       {active && (
-        <div style={{ border: `1px solid ${BORDER}`, padding: SP.lg, background: swatch.white }}>
+        <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, padding: SP.lg, background: swatch.white }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap', marginBottom: SP.md }}>
             <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{active.ticket_number}</span>
             {active.account_number && (
@@ -250,7 +252,7 @@ export default function SupportQueuePanel() {
                   { action: 'set_ticket_status', ticketId: id, status: e.target.value, reason: 'agent transition' },
                   `Status set to ${e.target.value}.`,
                 )}
-                style={{ fontSize: FS.sm, padding: '4px 6px', border: `1px solid ${BORDER}` }}>
+                style={{ fontSize: FS.sm, padding: '4px 6px', borderRadius: R.sm, border: `1px solid ${BORDER}` }}>
                 {STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s] || s}</option>)}
               </select>
             </label>
@@ -280,7 +282,7 @@ export default function SupportQueuePanel() {
                   { action: 'link_ticket_faq', ticketId: id, faq: e.target.value },
                   'FAQ article linked.',
                 ); }}
-                style={{ fontSize: FS.sm, padding: '4px 6px', border: `1px solid ${BORDER}` }}>
+                style={{ fontSize: FS.sm, padding: '4px 6px', borderRadius: R.sm, border: `1px solid ${BORDER}` }}>
                 <option value="">–</option>
                 {FAQ_SLUGS.map((s) => <option key={s} value={s}>{FAQ_LABELS[s] || s}</option>)}
               </select>
@@ -299,7 +301,7 @@ export default function SupportQueuePanel() {
                 <div key={ev.id} style={{
                   padding: `${SP.sm}px ${SP.md}px`,
                   background: internal ? GOLD_BG : CARD_HDR,
-                  border: `1px solid ${internal ? GOLD : BORDER2}`,
+                  border: `1px solid ${internal ? GOLD : BORDER2}`, borderRadius: R.md,
                 }}>
                   <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginBottom: 2 }}>
                     {ev.author_role || 'user'}

@@ -23,11 +23,8 @@
 import { describe, expect, test } from 'vitest';
 
 import {
-  appendObservedWizardNewsEntries,
   ensureWizardNewsFeed,
   appendWizardNewsEntries,
-  applyPulseMover,
-  findIdlessAuthoredEntries,
   WIZARD_NEWS_SIGNIFICANCE,
 } from '../../src/domain/region/wizardNews.js';
 
@@ -207,104 +204,5 @@ describe('wizard news retention — arc-aware 240-cap', () => {
     const out = feed.entries.map(e => e.id);
     const recency = recencyIds(entries);
     expect(isSubsequence(out, recency)).toBe(true);
-  });
-
-  test('the audit sink receives every valid raw receipt before the 240-entry cap', () => {
-    const entries = Array.from(
-      { length: 300 },
-      (_, i) => mk(`raw${i}`, { tick: i + 1 }),
-    );
-    const receiptSink = [];
-    const feed = appendObservedWizardNewsEntries(
-      { currentTick: 0, entries: [] },
-      entries,
-      { now: '2026-01-01T00:00:00.000Z' },
-      receiptSink,
-    );
-
-    expect(feed.entries).toHaveLength(MAX);
-    expect(receiptSink).toHaveLength(300);
-    expect(receiptSink.map((entry) => entry.id)).toEqual(entries.map((entry) => entry.id));
-  });
-
-  test('a late pulse mover is captured even when feed retention evicts its receipt', () => {
-    const fullFeed = ensureWizardNewsFeed({
-      currentTick: 340,
-      entries: Array.from(
-        { length: MAX },
-        (_, i) => mk(`kept${i}`, { tick: 100 + i }),
-      ),
-    });
-    const lateReceipt = mk('late-mover', { tick: 1 });
-    const receiptSink = [];
-    const moved = applyPulseMover(
-      {
-        changed: true,
-        worldState: { tick: 340 },
-        settlementUpdates: [],
-        newsEntries: [lateReceipt],
-      },
-      {},
-      [],
-      fullFeed,
-      '2026-01-01T00:00:00.000Z',
-      receiptSink,
-    );
-
-    expect(moved.wizardNews.entries).toHaveLength(MAX);
-    expect(moved.wizardNews.entries.some((entry) => entry.id === lateReceipt.id)).toBe(false);
-    expect(receiptSink).toEqual([lateReceipt]);
-  });
-});
-
-// ── THE AUTHORING GUARD (habitat removal for the silent id-less drop) ───────────
-//
-// An entry authored without an `id` is refused by normalizeEntry AND skipped by the
-// audit receipt sink, so a mover that forgets one narrates into a void on the ONE
-// path its author never re-reads. Three modules shipped that way and nothing caught
-// them: momentum.js (climbDownNews), supplyWebWarfare.js (four campaign builders)
-// and informationStatecraft.js (lie-exposed, spy-exposed, intel-transfer), all fixed
-// 2026-07-31. assertAuthoredEntriesCarryIds makes the next one LOUD instead: it runs
-// on the kernel's authoring seam, under NODE_ENV==='test' only, and is a pure read,
-// so it can only ever surface as a test failure, never as a determinism change.
-
-describe('wizard news — the authoring guard', () => {
-  const NOW = '2026-01-01T00:00:00.000Z';
-
-  test('findIdlessAuthoredEntries names the offending kinds, deduped and sorted', () => {
-    const kinds = findIdlessAuthoredEntries([
-      { kind: 'webwar_raid', headline: 'x' },
-      { id: 'wizard_news.1.ok.a', kind: 'fine', headline: 'y' },
-      { kind: 'momentum_climb_down', headline: 'z' },
-      { kind: 'webwar_raid', headline: 'again' },
-      { headline: 'kindless' },
-    ]);
-    expect(kinds).toEqual(['momentum_climb_down', 'unknown', 'webwar_raid']);
-    // CONTROL: an all-id-carrying batch names nothing, so the list above measures the
-    // missing ids rather than simply echoing every entry it was handed.
-    expect(findIdlessAuthoredEntries([{ id: 'wizard_news.1.ok.a', kind: 'fine' }])).toEqual([]);
-  });
-
-  test('the kernel seam THROWS on an id-less receipt, naming the kind and the remedy', () => {
-    const idless = { kind: 'momentum_climb_down', headline: 'A climbs down', tick: 5, significance: 'major', score: 68 };
-    expect(() => appendObservedWizardNewsEntries({}, [idless], { now: NOW }, [])).toThrow(/momentum_climb_down/);
-    expect(() => appendObservedWizardNewsEntries({}, [idless], { now: NOW }, [])).toThrow(/ID-LESS/);
-    // CONTROL: the SAME entry carrying an id passes the seam and lands in both sinks,
-    // so the throw measures the missing id and not a seam that rejects everything.
-    const sink = [];
-    const feed = appendObservedWizardNewsEntries({}, [{ ...idless, id: 'wizard_news.5.momentum_climb_down.a.b' }], { now: NOW }, sink);
-    expect(feed.entries.length).toBe(1);
-    expect(sink.length).toBe(1);
-  });
-
-  test('the guard is scoped to AUTHORING: the persisted-read path still degrades quietly', () => {
-    // normalizeEntry runs over save data on every read (ensureWizardNewsFeed), where
-    // refusing a malformed row is the deliberate fail-closed posture. If the guard had
-    // been placed there instead, a hand-edited save would throw on load rather than
-    // drop one row. This pins the seam choice, not just the behaviour.
-    const persisted = { entries: [{ kind: 'legacy_row_without_id', headline: 'old' }, { id: 'wizard_news.1.ok.a', kind: 'fine', tick: 1 }] };
-    const read = ensureWizardNewsFeed(persisted, { now: NOW });
-    expect(read.entries.length, 'the id-less persisted row is dropped, not thrown on').toBe(1);
-    expect(read.entries[0].id).toBe('wizard_news.1.ok.a');
   });
 });

@@ -49,7 +49,6 @@
  */
 
 import { deriveAllActiveConditions } from './activeConditions.js';
-import { liveInstitutions } from './institutions/institutionRoster.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllThreatProfiles, dedupeThreatsByPressure } from './threatProfile.js';
@@ -60,7 +59,6 @@ import { defenseLedger } from './defenseLedger.js';
 import { governanceLedger } from './governanceLedger.js';
 import { magicLedger, ARCANE_INSTITUTION_PATTERN } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
-import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
 
 // ── Types ────────────────────────────────────────────────────────────────
 
@@ -263,12 +261,8 @@ function populationOf(settlement) {
  * @returns {string[]}
  */
 function institutionNamesMatching(settlement, pattern) {
-  // LIVE roster only — a calamity-ruined institution supplies no capacity in any of the
-  // SUPPLY derivers this feeds (admin/food/transport/welfare/craft/magical) (ruin-filter class).
-  const inst = liveInstitutions(settlement);
-  return inst
-    .map(nativeSemanticName)
-    .filter(name => name && pattern.test(name));
+  const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  return inst.filter(i => pattern.test(String(i?.name || ''))).map(i => i?.name || '');
 }
 
 /**
@@ -768,10 +762,6 @@ function deriveCraft(s, ctx) {
   const rawTier = tradeRouteTier(s.config?.tradeRouteAccess);
   if (rawTier === 'major' || rawTier === 'standard') {
     supply += 4; push(supplyContributors, 'config.tradeRouteAccess', rawTier, +4, 'Trade route supplies raw materials.');
-  } else if (rawTier === 'seasonal') {
-    // A pass delivers the same materials at the same annualized discount the
-    // seasonal tier carries everywhere else (0.4 x 4, rounded).
-    supply += 2; push(supplyContributors, 'config.tradeRouteAccess', rawTier, +2, 'Seasonal pass supplies raw materials while it is open.');
   }
 
   // DEMAND: population + exports

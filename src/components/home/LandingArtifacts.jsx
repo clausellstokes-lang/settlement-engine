@@ -21,45 +21,31 @@
  * store/gallery/fixture imports here never touch first paint.
  */
 
-// NOTE: this surface now carries NO lucide at all (lane LU-2 — the icons-off
-// law suppressed its ArrowRight/Sparkles anyway, so the imports were pure first-
-// paint cost for glyphs nobody could see). The old rule here was "only icons
-// ALREADY in the vendor-icons chunk may be used", because manualChunks routes
-// every non-map lucide icon into the EAGER vendor-icons chunk regardless of
-// importer laziness — a new icon on this lazy surface still grows first paint
-// (measured: the forge button's Hammer cost +324 B against a sub-100 B margin).
-// That rule still holds for anyone tempted to add one; the icons-off gate is
-// now the first reason not to, and this cost is the second.
+// NOTE: only icons ALREADY in the first-paint vendor-icons chunk may be used
+// here (ArrowRight/Sparkles are). manualChunks routes every non-map lucide
+// icon into the eager vendor-icons chunk regardless of importer laziness, so a
+// new icon on this lazy surface would still grow first paint (measured: the
+// forge button's Hammer cost +324 B against a sub-100 B budget margin).
 import { useState } from 'react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import StateBadge from '../primitives/StateBadge.jsx';
 import Badge from '../primitives/Badge.jsx';
-import Segmented from '../primitives/Segmented.jsx';
-import { slugify } from '../../kernel/slugify.js';
 import { fontFamily, radius } from '../../design/tokens.js';
 import {
   INK, SECOND, BODY, MUTED, GOLD, GOLD_DEEP, GOLD_TXT,
   PARCH, PARCH_100, BORDER, CARD, CARD_ALT,
-  SLATE, SLATE_BG, SLATE_DEEP, RED, RED_BG, GREEN, GREEN_BG, AMBER, AMBER_BG, AMBER_DEEP,
+  VIOLET, VIOLET_BG, VIOLET_DEEP, RED, RED_BG, GREEN, GREEN_BG, AMBER, AMBER_BG, AMBER_DEEP,
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { anonAtCap } from '../../lib/anonGenCounter.js';
-import { trackLandingFixtureForge } from '../../lib/landingFunnelAnalytics.js';
+import { Funnel } from '../../lib/analytics.js';
 import { tl } from '../../copy/landing.js';
 import { fixture } from './landingFixture.js';
 
 const MONO = fontFamily.mono;
 export const SCENE = (name) => `url('/backgrounds/landing/${name}-1400.jpg')`;
-
-// Walk W1, item 8 (owner order 2026-07-21, ledger 4f71743a): the §04 Realm map preview.
-// The painted world-map/crossroads placeholder is REPLACED by W7's generated realm-map
-// preview (settlements, deterministic seed, house style), folded onto the composite tip
-// at d18768fa. This is the SINGLE swap site. Manager pick (vetoable): fallowmere /
-// parchment. NOTE: the SVG lives on the composite TIP, not this branch's base — it
-// arrives when W1 folds onto the tip, so this references the path as a string (a
-// worktree-local load 404s until the fold; that is expected).
-const REALM_MAP_PREVIEW = "url('/landing-maps/realm-preview.fallowmere.parchment.svg')";
 
 // Status-tint chip palette — all from tokens. `faith` reuses the app's
 // faith-event convention (semantic violet), the one §9-sanctioned violet
@@ -70,7 +56,7 @@ const CHIP = {
   success:  { bg: GREEN_BG,  fg: GREEN,       border: GREEN },
   danger:   { bg: RED_BG,    fg: RED,         border: RED },
   war:      { bg: RED_BG,    fg: RED,         border: RED },
-  faith:    { bg: SLATE_BG, fg: SLATE_DEEP, border: SLATE },
+  faith:    { bg: VIOLET_BG, fg: VIOLET_DEEP, border: VIOLET },
   economic: { bg: PARCH_100, fg: GOLD_TXT,    border: BORDER },
 };
 const dotColor = { danger: RED, success: GREEN, gold: GOLD, warning: AMBER };
@@ -116,10 +102,9 @@ function ForgeExactButton({ onNavigate }) {
 
   const forgeExact = async () => {
     if (forging) return;
-    // W-DOC: the landing funnel LANDED — landing_funnel_used
-    // feature:'fixture_forge' via the SM-5-pattern lazy helper (the seed is the
-    // fixture's constant — provenance, not user data).
-    trackLandingFixtureForge({ seed: fixture.seed });
+    // Optional-chained funnel tag (no new analytics plumbing) — a no-op until
+    // the analytics wave lands the event, mirroring Funnel.welcomeView.
+    Funnel.landingFixtureForge?.({ seed: fixture.seed });
     if (authTier === 'anon' && anonAtCap()) { onNavigate('generate'); return; }
     setForging(true);
     try {
@@ -250,8 +235,8 @@ export function VoiceCards() {
       <div style={{ background: CARD, border: '1px solid rgba(123,79,207,0.35)', borderRadius: R.lg, boxShadow: ELEV[1], padding: '18px 20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: SP.sm, marginBottom: SP.md }}>
           <StateBadge kind="narrated" />
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: MONO, fontSize: FS.xs, color: SLATE_DEEP }}>
-            {tl('voice.credit')}
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: MONO, fontSize: FS.xs, color: VIOLET_DEEP }}>
+            <Sparkles size={11} aria-hidden="true" />{tl('voice.credit')}
           </span>
         </div>
         <p style={{ margin: 0, fontFamily: serif_, fontStyle: 'italic', fontSize: FS['16'], lineHeight: 1.7, color: BODY }}>
@@ -278,6 +263,7 @@ export function WhyTraceCard() {
               <span style={{ fontFamily: sans, fontSize: FS['12.5'], fontWeight: 800, color: SECOND }}>{d.axis}</span>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                 <Chip tone="neutral">{d.from}</Chip>
+                <ArrowRight size={11} color={MUTED} aria-hidden="true" />
                 <Chip tone={d.tone}>{d.to}</Chip>
               </span>
             </div>
@@ -310,7 +296,7 @@ export function RealmMapCard() {
       {/* Map half */}
       <div style={{
         position: 'relative', minHeight: 320,
-        backgroundImage: REALM_MAP_PREVIEW, backgroundSize: 'cover', backgroundPosition: 'center',
+        backgroundImage: SCENE('world-map'), backgroundSize: 'cover', backgroundPosition: 'center',
       }}>
         <div style={{
           position: 'absolute', top: 14, left: 14, background: 'rgba(255,251,245,0.94)',
@@ -376,47 +362,6 @@ export function RealmMapCard() {
             </Chip>
           ))}
         </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Map artifact — frozen lens plates folded into 02 · The visual ─────────────
-// The plates are FROZEN REAL ENGINE OUTPUT: scripts/generate-landing-map-
-// plates.mjs replays the fixture's exact seed + config (drift-gated: the replay
-// must still produce the fixture town), renders the v2 layout in each lens, and
-// freezes the SVGs under public/landing-maps/. The flip swaps plates of the
-// SAME town — one town, one memory, two lenses — so the control is honest by
-// construction. Plate paths derive from the kernel slugify (the same call the
-// generator used), so the component and the script can never disagree on a name.
-// No new lucide icons here (see the header note — vendor-icons is eager).
-export function MapPlateCard() {
-  const lenses = tl('map.lenses') || [];
-  const [lens, setLens] = useState(lenses[0]?.id || 'parchment');
-  const lensLabel = (lenses.find(l => l.id === lens) || lenses[0] || {}).label || lens;
-  const src = `/landing-maps/${slugify(fixture.town.name)}.${lens}.svg`;
-  return (
-    <div style={{ ...cardStyle, maxWidth: 560, margin: `${SP.xl}px auto 0`, padding: SP.lg }}>
-      <img
-        src={src}
-        alt={tl('map.alt', { name: fixture.town.name, lens: lensLabel })}
-        width={720}
-        height={720}
-        loading="lazy"
-        style={{ display: 'block', width: '100%', height: 'auto', borderRadius: R.md, border: `1px solid ${BORDER}` }}
-      />
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: SP.md, marginTop: SP.md, flexWrap: 'wrap' }}>
-        <Segmented
-          ariaLabel={tl('map.lensLabel')}
-          size="sm"
-          options={lenses.map(l => ({ id: l.id, label: l.label }))}
-          value={lens}
-          onChange={setLens}
-        />
-        <span style={monoTag}>{seedTag()}</span>
-      </div>
-      <div style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 600, color: SECOND, marginTop: SP.sm }}>
-        {tl('map.provenance', { name: fixture.town.name })}
       </div>
     </div>
   );

@@ -1,0 +1,51 @@
+export const meta = {
+  name: 'wave-r2-mustfix',
+  description: 'R-2 must-fix: narrated Suspense fallback, voice-ratchet strings, mutation-manifest entry, premium-gate parity on the prose editor, honest lazy-leaf closure',
+  phases: [
+    { title: 'Fix', detail: '2 Fable lanes' },
+    { title: 'Reverify', detail: 'Opus re-verification per lane', model: 'opus' },
+    { title: 'Gate', detail: 'joint gate incl. FULL tests/lint + tests/copy' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge (Wave R-2 MUST-FIX pass, docs/CAPABILITY_REMEDIATION_PLAN.md). Verify claims against code; code is authoritative.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. LIVE shared tree: NO git mutations of ANY kind; re-read every file immediately before editing (shared files are being edited by concurrent sessions); touch ONLY your lane's files.
+LAWS: no same-seed drift; no persistence-shape changes; new logic = LAZY LEAF (eager deltas must be MEASURED with isolated esbuild --minify before/after, and declared honestly); sizeBaseline ceilings EXACT and never raised; ratchet baselines NEVER raised — cure the code, not the pin; copy = one string each, vetoable, and VOICE_AND_TONE §6 governs punctuation (no reader-facing em dashes, no bangs); narrated Suspense fallbacks must not begin with the word "Loading" (BARE_LOADING_PIN is exact-match). Tests single-threaded, exit codes unmasked. Baseline: verify:dist 285/285 + typecheck 0; the three known THIS-WAVE ratchet reds are yours to cure.`
+
+const LANES = [
+  {
+    key: 'readers-mf',
+    files: 'src/components/SettlementDetail.jsx (the NarrativeArchivePanel mount region ONLY) · new/updated test files',
+    brief: `Close 1 verifier finding: loadingNarrationRatchet RED — your <Suspense fallback={null}> at SettlementDetail.jsx:754 (wrapping NarrativeArchivePanel) is the 41st silent boundary against the exact pin of 40. Choose the better cure with evidence and record the choice: (a) net-zero — render the panel inside an already-counted Suspense boundary in SettlementDetail (check what boundary the sibling ChroniclePanel region uses; joining it is likely correct and adds no narration surface), or (b) a narrated fallback in the world's voice per the ratchet's doctrine — MUST NOT begin with "Loading" (sibling BARE_LOADING_PIN=34 exact-match) and must satisfy voiceMechanics (no em dash, no bang). Then run BOTH ratchets + your lane pins: npx vitest run tests/lint/loadingNarrationRatchet.test.js tests/copy/voiceMechanics.test.js <your pin files> --no-file-parallelism. sizeBaseline: SettlementDetail.jsx may be at/near its ceiling — net-zero combine if needed.`,
+  },
+  {
+    key: 'prose-mf',
+    files: 'src/components/dossier/SettlementWorkbench.jsx · src/components/dossier/WorkbenchProseEditor.jsx · src/components/dossier/SettlementWorkbenchMount.jsx (gating thread-through if needed) · src/domain/pendingEdits.js + the two pendingEdit modules the measurement named (pendingEditIntents.js, settlementPendingEdits.js) · scripts/mutation-coverage-manifest.json + scripts/mutation-sweep.sh (SHARED files — re-read immediately before editing) · your R-2 pin files · new tests',
+    brief: `Close 4 verifier findings:
+1. VOICE RATCHET (2 strings): rewrite the two reader-facing em-dash strings per VOICE_AND_TONE §6 (period/comma/colon/parentheses): SettlementWorkbench.jsx ("...role stay engine-managed for now — the NPC controls rewrite them...") and WorkbenchProseEditor.jsx ("Your text is staged for review first — nothing changes until you commit it..."). Do NOT touch the ratchet baseline. Run tests/copy/voiceMechanics.test.js.
+2. MUTATION-COVERAGE TOTALITY: tests/store/editProseQueueSpine.test.js needs its manifest entry — add a planted sweep mutation in scripts/mutation-sweep.sh (preferred per the contract) + the manifest row; NEVER an 'uncovered' entry. The manifest is shared and foreign-edited — re-read first. Run tests/lint/mutationCoverageManifest.test.js.
+3. PREMIUM-GATE PARITY (the serious one — paid-surface class): the Create-flow chain (GenerateWizard → OutputContainer readOnly=false → SettlementWorkbenchMount → EntityInspector → WorkbenchProseEditor) reaches prose authoring with NO tier check, while the sibling NPC prose path on the SAME surface requires canAuthorNpc && editMode (tier-gated: premium/founder/elevated, free → purchase modal). Cure: gate WorkbenchProseEditor rendering (or the Mount's interactive computation) on the SAME authority signal the siblings use — thread the existing canEdit/canAuthorNpc-style selector through rather than hand-rolling a new check (find the one source; R-0's deityWriteGate pattern is the model). Fail CLOSED. The Library mount's correct closure must stay intact. Record in a code comment: vetoable JUDGMENT per docs/CAPABILITY_REMEDIATION_PLAN.md Wave R-2 (parity chosen over open-by-default; veto = drop the gate condition). Pins: free/anon on Create flow gets NO prose editor (readOnly presentation instead); premium gets it; NPC-path parity unchanged; Library mount unchanged.
+4. HONEST LAZY LEAF: the measured eager delta is ≈+2,330 B across pendingEditIntents.js (+821), settlementPendingEdits.js (+1,496), pendingEdits.js (+13) — not the declared ~15 B — because the admission/commit logic landed in the ENTRY static closure. Restructure: keep in the eager chain ONLY what must be eager (the COMMITTABLE_EDIT_KINDS array member + kind string + thin dispatch stub); move the prose admission/validation/commit bodies into a lazy leaf loaded at the Workbench chunk (the flag-off surface is already lazy — follow the repo's established lazy-leaf idiom, e.g. dynamic import at the commit seam or registration-from-the-lazy-chunk, whichever the existing spine already supports; read how the G-1 spine loads its own heavy parts first). Re-measure with isolated esbuild --minify before/after and DECLARE the true residual eager delta. Run the closure/dist contract suites + your spine pins after: the edit-prose lifecycle pins (edit→commit→persist→regen→undo) must stay green with the logic lazy.`,
+  },
+]
+
+const FIX_SCHEMA = { type: 'object', required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'], properties: { filesTouched: { type: 'array', items: { type: 'string' } }, pins: { type: 'number' }, testsRun: { type: 'string' }, testOutputTail: { type: 'string' }, behaviorShift: { type: 'string' }, deferrals: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' }, error: { type: 'string' } } }
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+
+phase('Fix')
+const results = await pipeline(
+  LANES,
+  (l) => agent(COMMON + '\n\nYOUR LANE OWNS ONLY: ' + l.files + '\n\n' + l.brief, { label: 'fix:' + l.key, phase: 'Fix', schema: FIX_SCHEMA }),
+  (r, l) => r && !r.error
+    ? agent(COMMON + `\n\nYOU ARE THE OPUS RE-VERIFIER for ${l.key}. Fixer reports files=${JSON.stringify(r.filesTouched)}, pins=${r.pins}, shift="${r.behaviorShift}". Original brief:\n${l.brief}\nRepo READ-ONLY except tests. Per finding: verify landed, re-derive independently, RUN the ratchets and pins yourself (loadingNarrationRatchet, voiceMechanics, mutationCoverageManifest, the closure/dist contracts, the edit-prose lifecycle pins), re-measure the eager delta yourself with isolated esbuild --minify, and walk the Create-flow gating chain from GenerateWizard down to prove free/anon cannot reach the editor while premium can and the Library mount is unchanged. MUST_FIX only for real unresolved items.`, { label: 'verify:' + l.key, phase: 'Reverify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA }).then((v) => ({ lane: l.key, fix: r, verify: v }))
+    : { lane: l.key, fix: r, verify: null, failed: true }
+)
+
+phase('Gate')
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+const done = results.filter(Boolean)
+const gate = await agent(COMMON + `\n\nWAVE-END RE-GATE (R-2 final). Touched: ${JSON.stringify(done.map((r) => r.fix && r.fix.filesTouched))}. Run single-threaded, exit codes unmasked — and this wave's lesson: include the FULL lint and copy dirs. (1) tests/lint/ FULL dir; (2) tests/copy/ FULL dir; (3) tests/store/ FULL dir; (4) all R-0/R-1/R-2 pin files; (5) tests/joins/fieldManifest.test.js; (6) tests/architecture/; (7) pdf parity suites; (8) npm run typecheck; (9) npm run build && npm run verify:dist single-threaded. Baseline: 285/285 + typecheck 0; the three R-2 ratchet reds must be CURED. Report every red verbatim, attributed baseline/foreign/THIS-WAVE.`, { label: 'gate:r2-final', phase: 'Gate', schema: GATE_SCHEMA })
+
+return { lanes: done.map((r) => ({ lane: r.lane, failed: !!r.failed, pins: r.fix && r.fix.pins, behaviorShift: r.fix && r.fix.behaviorShift, verdict: r.verify && r.verify.verdict, mustFix: r.verify && r.verify.mustFix, deferrals: r.fix && r.fix.deferrals })), gate }

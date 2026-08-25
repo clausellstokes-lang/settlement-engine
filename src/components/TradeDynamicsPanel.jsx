@@ -61,7 +61,7 @@ function GoodCard({ good, state, onCycle }) {
       <div style={{flex:1, minWidth:0}}>
         <div style={{display:'flex', alignItems:'baseline', gap:6, flexWrap:'wrap'}}>
           <span style={{fontWeight:600, fontSize:FS.sm, color:isExcluded?MUTED:INK, textDecoration:isExcluded?'line-through':'none'}}>{good.name}</span>
-          {cc.label && <span style={{fontSize:FS.xxs, fontWeight:700, color:cc.text, background:cc.bg, padding:'0 4px'}}>{cc.label}</span>}
+          {cc.label && <span style={{fontSize:FS.xxs, fontWeight:700, color:cc.text, background:cc.bg, borderRadius:3, padding:'0 4px'}}>{cc.label}</span>}
           {good.requiredInstitution && <span style={{fontSize:FS.xxs, color:MUTED, fontStyle:'italic'}}>needs {good.requiredInstitution}</span>}
         </div>
         {good.desc && <p style={{fontSize:FS.xs, color:SECOND, lineHeight:1.3, marginTop:1, marginBottom:0}}>{good.desc}</p>}
@@ -82,12 +82,12 @@ function SectionHeader({ label, forced, allowed, _total, isOpen, onToggle }) {
     }}>
       <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
         <span style={{fontSize:FS.sm, fontWeight:700, color:INK, fontFamily:"'Crimson Text', Georgia, serif"}}>{label}</span>
-        {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forced} forced</span>}
+        {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>}
       </span>
-      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowed} allowed</span>}
+      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>}
       {forced>0 && <>
-        <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowed} allowed</span>
-        <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forced} forced</span>
+        <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>
+        <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>
       </>}
       <span style={{fontSize:FS.xxs, color:MUTED, marginLeft:4}}>{isOpen ? '▲' : '▼'}</span>
     </button>
@@ -98,7 +98,7 @@ function GoodsPanel() {
   const tier = useStore(selectTierForGrid);
   const goodsToggles = useStore(s => s.goodsToggles);
   const onGoodsToggle = useStore(s => s.toggleGood);
-  const bulkSetGoods = useStore(s => s.bulkSetGoods);
+  const setGoodsToggles = useStore(s => s.setGoodsToggles);
   const [showExport, setShowExport] = useState(false);
   const [showImport, setShowImport] = useState(false);
   const [search, setSearch] = useState('');
@@ -141,24 +141,9 @@ function GoodsPanel() {
     onGoodsToggle(getKey(good.name), next);
   };
 
-  // Bulk operations — one store action owns the write for the whole grid, the way
-  // InstitutionalGrid routes its strip through bulkSetInstitutions. bulkSetGoods
-  // builds `${tier}_good_${name}` per tier it is given, so the goods are grouped by
-  // the tier their key ALREADY resolves to (getKey's own rule: the visible tier, or
-  // under 'All tiers' the first tier that carries the good). That keeps a bulk press
-  // and a card click writing the same entries, and never reaches a tier the grid is
-  // not showing.
-  const bulkTierData = useMemo(() => {
-    const byTier = {};
-    for (const g of goods) {
-      const t = tier === 'all' ? g._tier : tier;
-      if (!byTier[t]) byTier[t] = {};
-      byTier[t][g.name] = g;
-    }
-    return byTier;
-  }, [goods, tier]);
-  const bulkForce   = () => bulkSetGoods('force', bulkTierData);
-  const bulkExclude = () => bulkSetGoods('exclude', bulkTierData);
+  // Bulk operations
+  const bulkForce   = () => goods.forEach(g => onGoodsToggle(getKey(g.name), { allow:true,  force:true,  forceExclude:false }));
+  const bulkExclude = () => goods.forEach(g => onGoodsToggle(getKey(g.name), { allow:false, force:false, forceExclude:true  }));
 
   const filtered = search
     ? goods.filter(g => g.name.toLowerCase().includes(search.toLowerCase()) || (g.desc||'').toLowerCase().includes(search.toLowerCase()) || (g.category||'').toLowerCase().includes(search.toLowerCase()))
@@ -179,7 +164,7 @@ function GoodsPanel() {
         setSearch={setSearch}
         placeholder="Search goods…"
         onForceAll={bulkForce}
-        onReset={() => bulkSetGoods('reset')}
+        onReset={() => setGoodsToggles({})}
         onExcludeAll={bulkExclude}
         onExpandAll={() => { setShowExport(true); setShowImport(true); }}
         onCollapseAll={() => { setShowExport(false); setShowImport(false); }}
@@ -213,13 +198,15 @@ function GoodsPanel() {
   );
 }
 
-// TradeDynamicsPanel mounts inside LayeredConfigurationPanel's Deep-constraints
-// Disclosure, which already supplies the "Trade Dynamics" title, collapse
-// affordance, and the wizard_step_viewed funnel fire. The component's own outer
-// collapsible was a redundant disclosure-inside-disclosure (box-soup); it (and
-// its leftover "Step 4" linear-wizard label and dead icon slot) is removed so
-// there is exactly one disclosure layer. GoodsPanel renders directly. (Restores
-// master's flattening — base of record; the double-disclosure was the merge regression.)
 export default function TradeDynamicsPanel() {
-  return <GoodsPanel />;
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{border:`1px solid ${BORDER}`, borderRadius:8}}>
+      <button type="button" onClick={()=>setOpen(v=>!v)} style={{width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:swatch['#F5EDE0'], border:'none', cursor:'pointer', textAlign:'left', borderBottom:open?'1px solid #e0d0b0':'none', fontFamily:sans}}>
+        <span style={{fontFamily:'Crimson Text, Georgia, serif', fontSize: FS['16'], fontWeight:600, color:INK, flex:1}}>Step 4: Trade Dynamics</span>
+        <span style={{fontSize:FS.xs, color:MUTED, fontWeight:500}}>{open ? 'Collapse' : 'Configure Trade'}</span>
+      </button>
+      {open && <GoodsPanel />}
+    </div>
+  );
 }

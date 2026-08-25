@@ -22,8 +22,7 @@
  */
 
 import { liveSieges } from '../../domain/display/warStatus.js';
-import { deriveTraditionAlmanac } from '../../domain/traditions/almanac.js';
-import { GOLD_TXT, BODY, SLATE_DEEP, FS, sans, swatch } from '../theme.js';
+import { GOLD_TXT, BODY, VIOLET_DEEP, FS, sans, swatch } from '../theme.js';
 
 const SIEGE_RED = swatch['#8B1A1A'];
 
@@ -127,14 +126,6 @@ export default function RealmStrip({ campaign, settlements = [] }) {
   // Phase 4b — committed member changes whose regional ripple awaits the Advance.
   const pendingPropagation = pendingPropagationSettlements(worldState);
 
-  // THE TRADITIONS almanac (T-5) — observances whose window opens later this season,
-  // read from the settlement.traditions MIRROR only. Dark/absent (no lit mirror) ⇒
-  // available:false ⇒ the segment self-hides, byte-identical to today.
-  const almanac = deriveTraditionAlmanac({
-    settlements,
-    weekTick: Number.isFinite(worldState?.calendar?.elapsedWeeks) ? worldState.calendar.elapsedWeeks : tick,
-  });
-
   return (
     <div
       data-testid="realm-strip"
@@ -157,7 +148,7 @@ export default function RealmStrip({ campaign, settlements = [] }) {
 
       {faith && (
         <Seg title={`Dominant faith: ${faith.name} (${faith.tier})`}>
-          <span style={{ color: SLATE_DEEP, fontWeight: 700 }}>{faith.name}</span>
+          <span style={{ color: VIOLET_DEEP, fontWeight: 700 }}>{faith.name}</span>
           <span style={{ color: BODY }}> · {faith.tier}</span>
         </Seg>
       )}
@@ -170,17 +161,12 @@ export default function RealmStrip({ campaign, settlements = [] }) {
         </Seg>
       )}
 
-      {almanac.available && (
-        <Seg title="Festivals whose window opens later this season (from the world's traditions).">
-          <span data-testid="realm-almanac" style={{ color: GOLD_TXT, fontWeight: 700 }}>{almanac.display}</span>
-        </Seg>
-      )}
-
       {pendingPropagation > 0 && (
         <Seg title="Committed member changes whose regional effects apply on the next Advance.">
           <span data-testid="pending-propagation-cue" style={{ color: GOLD_TXT, fontWeight: 700 }}>
-            {pendingPropagation} settlement{pendingPropagation === 1 ? '' : 's'} will change on the next Advance
+            {pendingPropagation} settlement{pendingPropagation === 1 ? '' : 's'} waiting to propagate
           </span>
+          <span style={{ color: BODY }}> – advance to apply</span>
         </Seg>
       )}
     </div>

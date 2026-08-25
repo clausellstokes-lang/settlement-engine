@@ -13,11 +13,24 @@ const ERROR = true;
 // detect device
 const MOBILE = window.innerWidth < 600 || navigator.userAgentData?.mobile;
 
-// Service worker support removed for embedded SettlementForge Map: upstream's
-// sw.js pulled workbox from a Google CDN via importScripts, which would hand a
-// CDN-controlled script persistent control of this auth-bearing origin. The
-// sw.js file is deleted; if offline support is ever wanted, vendor workbox
-// locally (pinned in VENDOR-MANIFEST.json) instead of re-adding a CDN import.
+// Service worker disabled for embedded SettlementForge Map
+if (false && PRODUCTION && "serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(err => {
+      console.error("ServiceWorker registration failed: ", err);
+    });
+  });
+
+  window.addEventListener(
+    "beforeinstallprompt",
+    async event => {
+      event.preventDefault();
+      const Installation = await import("./modules/dynamic/installation.js?v=1.89.19");
+      Installation.init(event);
+    },
+    {once: true}
+  );
+}
 
 // append svg layers (in default order)
 let svg = d3.select("#map");
@@ -302,17 +315,13 @@ async function checkLoadParameters() {
     WARN && console.warn("Load map from URL");
     const maplink = params.get("maplink");
     const pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    // besides being URL-shaped, the link must be same-origin or from a trusted
-    // host (isTrustedMapLink in modules/io/load.js) — '?maplink=' is attacker
-    // land, and fetching arbitrary origins let a crafted .map be delivered to
-    // this auth-bearing origin with a single link click
-    const valid = pattern.test(maplink) && isTrustedMapLink(decodeURIComponent(maplink));
+    const valid = pattern.test(maplink);
     if (valid) {
       setTimeout(() => {
         loadMapFromURL(maplink, 1);
       }, 1000);
       return;
-    } else showUploadErrorMessage("Map link is not a valid URL or not from a trusted host", maplink);
+    } else showUploadErrorMessage("Map link is not a valid URL", maplink);
   }
 
   // if there is a seed (user of MFCG provided), generate map for it
@@ -344,10 +353,6 @@ async function checkLoadParameters() {
 async function generateMapOnLoad() {
   await applyStyleOnLoad(); // apply previously selected default or custom style
   await generate(); // generate map
-  // SettlementForge fork patch: generate() catches its own errors and returns normally, leaving pack reset
-  // to an empty/partial object. Running the draw calls on that pack throws again (unhandled) behind the
-  // handled "please retry" dialog. Bail out cleanly when generation did not produce a usable pack.
-  if (!pack?.cells?.i?.length) return;
   applyLayersPreset(); // apply saved layers preset and reder layers
   drawLayers();
   fitMapToScreen();
@@ -362,9 +367,7 @@ function focusOn() {
 
   const fromMGCG = params.get("from") === "MFCG" && document.referrer;
   if (fromMGCG) {
-    // SettlementForge fork patch: guard the null seed. `?from=MFCG` with no seed param made params.get("seed")
-    // null, so `.length` threw a TypeError (an unhandled rejection here, outside generate()'s try/catch).
-    if (params.get("seed")?.length === 13) {
+    if (params.get("seed").length === 13) {
       // show back burg from MFCG
       const burgSeed = params.get("seed").slice(-4);
       params.set("burg", burgSeed);
@@ -406,13 +409,6 @@ function focusOn() {
 
 let isAssistantLoaded = false;
 function toggleAssistant() {
-  // SettlementForge fork patch: FMG's "Assistant" loads a remote SaaS chat widget — libs/openwidget.min.js
-  // appends <script src="https://cdn.openwidget.com/openwidget.js"> to <head> under azgaar's org id — onto
-  // our token-bearing auth+payment origin, and its chats route to azgaar's account. That is a third-party
-  // remote-code surface, not ours, so the load is disabled. Upstream code is left intact below the return for
-  // easy re-enable / upgrade reconciliation. (The /map/ CSP script-src is 'self'-only, so flipping it from
-  // Report-Only to enforced is the complementary origin-level closure.) Re-enabling is an owner decision.
-  return;
   const assistantContainer = byId("chat-widget-container");
   const showAssistant = byId("azgaarAssistant").value === "show";
 
@@ -606,13 +602,12 @@ void (function addDragToUpload() {
           _types = Array.prototype.slice.call(e.dataTransfer.types);
         }
       } catch (_) {}
-      // SettlementForge fork patch: removed the unconditional debug console.* traces that leaked the
-      // settlement id/name, raw drop coordinates and the posted message to the console on EVERY drag-drop
-      // (no DEV guard). The error-path console.warn calls below are kept (they fire only on failure).
+      console.log('[sfBridge] drop types:', _types);
       var sfPayload = e.dataTransfer && e.dataTransfer.getData
         ? e.dataTransfer.getData('application/settlementforge')
         : '';
       if (sfPayload) {
+        console.log('[sfBridge] sf drop payload:', sfPayload);
         var sfData = null;
         try { sfData = JSON.parse(sfPayload); } catch (_) { sfData = null; }
         if (sfData && sfData.id) {
@@ -621,6 +616,7 @@ void (function addDragToUpload() {
             : { left: 0, top: 0 };
           var sx = e.clientX - rect.left;
           var sy = e.clientY - rect.top;
+          console.log('[sfBridge] drop coords raw:', { clientX: e.clientX, clientY: e.clientY, rectLeft: rect.left, rectTop: rect.top, sx: sx, sy: sy });
           var mapPt = null;
           try {
             var _s2m = window.__sfScreenToMap;
@@ -628,6 +624,7 @@ void (function addDragToUpload() {
           } catch (err) {
             console.warn('[sfBridge] screenToMap threw:', err);
           }
+          console.log('[sfBridge] mapPt:', mapPt, 'screenToMapAvailable:', typeof window.__sfScreenToMap);
           if (mapPt) {
             var syntheticBurgId = 'sf_' + sfData.id + '_' + Date.now().toString(36);
             var cellId = null;
@@ -646,12 +643,20 @@ void (function addDragToUpload() {
                 y: mapPt.y,
                 cellId: cellId,
               };
-              // sf-origin.js owns the exact parent-origin handshake. Route this
-              // one FMG-native drop path through the same closure as sf-bridge;
-              // if the contract did not initialize, fail closed.
-              var __sfOriginContract = window.__sfBridgeOrigin;
-              if (__sfOriginContract && typeof __sfOriginContract.postToParent === 'function') {
-                __sfOriginContract.postToParent(msg);
+              console.log('[sfBridge] posting to parent:', msg);
+              // Same-origin parent (the React app serves /map/ from itself).
+              // FAIL-CLOSED: post only to our own concrete http(s) origin. If it
+              // can't be resolved (opaque/sandboxed/file:// iframe → "null"),
+              // REFUSE to post rather than broadcast to '*' — a wildcard target
+              // would leak placement events (settlement id/name/coords) to any
+              // origin holding a reference to this window (F6).
+              if (window.parent) {
+                var __origin = window.location.origin;
+                if (__origin && __origin !== 'null' && /^https?:\/\//.test(__origin)) {
+                  try {
+                    window.parent.postMessage(msg, __origin);
+                  } catch (e) { /* cross-origin / detached parent — drop */ }
+                }
               }
             } catch (err) {
               console.warn('[sfBridge] postMessage failed:', err);
@@ -660,7 +665,7 @@ void (function addDragToUpload() {
             console.warn('[sfBridge] no mapPt — drop ignored');
           }
         } else {
-          console.warn('[sfBridge] sf drop ignored: payload missing id'); // SettlementForge fork patch: don't echo the payload
+          console.warn('[sfBridge] sf drop had no sfData.id:', sfData);
         }
         return;
       }
@@ -797,7 +802,7 @@ function setSeed(precreatedSeed) {
     const first = !mapHistory[0];
     const params = new URL(window.location.href).searchParams;
     const urlSeed = params.get("seed");
-    if (first && params.get("from") === "MFCG" && urlSeed?.length === 13) seed = urlSeed.slice(0, -4); // SettlementForge fork patch: guard null urlSeed (?from=MFCG with no seed threw before aleaPRNG init)
+    if (first && params.get("from") === "MFCG" && urlSeed.length === 13) seed = urlSeed.slice(0, -4);
     else if (first && urlSeed) seed = urlSeed;
     else seed = generateSeed();
   } else {

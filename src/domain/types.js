@@ -46,46 +46,18 @@
  *
  * Sparse — omit a key entirely to mean "not locked". Lock targets are
  * either booleans (whole sections) or arrays of stable IDs (specific
- * items).
- *
- * THE READ SIDE is domain/locksPreservation.js (the locks engine, Phase A). It
- * is the authority on what each key does; this typedef states the SHAPE and the
- * honest scope. Every predicate there is tolerant — an unreadable or unknown
- * value degrades to "not locked" rather than throwing inside a reroll — and
- * every one is dormant on an empty map, which is why a lock-free settlement
- * regenerates byte-identically to one generated before locks were read at all.
- *
- * WHAT PHASE A HONORS:
- *   • a SECTION reroll (regenSection) refuses outright when that section is
- *     locked whole, and carries the named NPC ids through an `npcs` reroll —
- *     the lock following the id its subject inherits from the slot it took over;
- *   • a FULL regenerate honors `identity` (the name), `geography` (the terrain
- *     config is rolled again as-is) and `history` (the section is carried whole).
- *
- * PHASE B — deliberately deferred, documented, not a bug to re-find: the
- * npcs/factions/institutions ID ARRAYS across a FULL regenerate. Carrying a
- * character into an entirely new roster needs the displacement / prose-repair /
- * faction-relink tail that the npcs reroll runs, extracted to run over pipeline
- * output; that is its own lane. Until it lands a full generate DROPS the id
- * arrays (they would name a roster that no longer exists) and keeps the booleans.
- *
- * Entity-level protection is a SEPARATE, working mechanism that composes with
- * this one: the `_authored` / `locked` / `pinned` fields carried ON an entity,
- * which domain/regenerationPreservation.js honors when NPCs are rerolled. The
- * lock map is unioned with that policy — locks can only ever ADD survivors.
+ * items). The locks engine consults this before any reroll or
+ * destructive edit; locked items survive verbatim.
  *
  *  @property {boolean=} identity      name, founding lore
  *  @property {boolean=} geography     terrain, trade access, regional placement
- *  @property {boolean=} history       the history section — rerolling it refuses
- *  @property {string[]=} factions     faction identifiers to preserve (Phase B on a full generate)
- *  @property {string[]=} institutions institution identifiers to preserve (Phase B on a full generate)
- *  @property {(boolean|string[])=} npcs  `true` freezes the whole roster section
- *                                     (its reroll refuses); an array names the
- *                                     individuals a roster reroll must carry
+ *  @property {string[]=} factions     faction identifiers to preserve
+ *  @property {string[]=} institutions institution identifiers to preserve
+ *  @property {string[]=} npcs         NPC identifiers to preserve
  */
 
 /** @typedef {'ADD_INSTITUTION' | 'REMOVE_INSTITUTION' | 'DAMAGE_INSTITUTION'
- *           | 'DEPLETE_RESOURCE' | 'CUT_TRADE_ROUTE' | 'CREATE_ROUTE'
+ *           | 'DEPLETE_RESOURCE' | 'CUT_TRADE_ROUTE'
  *           | 'ADD_NPC' | 'KILL_NPC' | 'ASSIGN_NPC_TO_ROLE'
  *           | 'IMPAIR_INSTITUTION' | 'RESTORE_INSTITUTION'
  *           | 'IMPAIR_FACTION' | 'RESTORE_FACTION'

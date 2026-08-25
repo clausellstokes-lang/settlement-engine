@@ -39,36 +39,17 @@ export { EDIT_KINDS };
  *  flags_on) + spatial_active + a per-mover activity block (movers_active + coarse
  *  id-free mover_counts + migration_pop_band) read from the post-tick spatialLedgers;
  *  world_canonized (spatial path) gains spatial/version/lit-feature/digest-size props.
- *  Derivation is src/lib/spatialUsage.js (lazy side-channel).
- *  rev 8: Surveyor S1b — the analyst gains ai_analyst_rider (§3f: the model's
- *  ID-FREE, category-grade self-tag, emitted SERVER-SIDE by the ai-analyst edge on
- *  BOTH managed + BYOK paths as a condition-of-service) and ai_analyst_answer gains
- *  the §3b register-purity band beside citation coverage.
- *  rev 9: (in-flight prior lanes).
- *  rev 10: SM-5 map-layer capture — town_map_layer_used, ONE feature-discriminated
- *  event carrying the town-map GENERATION profile (feature:'render') + LEGIBILITY
- *  engagement (provenance_hover/change_view/edge_labels/annotation_add/lens_switch/
- *  panorama). Counts/enums/bands only; fired client-side from the lazy pane via
- *  src/lib/mapLayerAnalytics.js. Essential class; the engine emits nothing.
- *  rev 11: W-DOC — the Welcome landing funnel joins the SM-5 pattern:
- *  landing_funnel_used, ONE feature-discriminated event (feature:'view' once per
- *  session · 'fixture_forge' with the fixture's constant seed — no user data).
- *  Fired client-side from the lazy landing chunk via
- *  src/lib/landingFunnelAnalytics.js; lands the previously dormant
- *  Funnel.welcomeView / Funnel.landingFixtureForge seams. Essential class.
- *  rev 12: consent_updated retires from product analytics. Consent changes are
- *  durable SERVICE-class compliance records in their own store; keeping an
- *  analytics name after the emitter was removed would misstate the boundary. */
-export const EVENTS_REV = 12;
+ *  Derivation is src/lib/spatialUsage.js (lazy side-channel). */
+export const EVENTS_REV = 7;
 
 export const EVENTS = Object.freeze({
-  // ── Minimum 4-event funnel ─────────────────────────────────────────────
+  // ── Tier 8.8 — minimum 4-event funnel ─────────────────────────────────
   HOMEPAGE_VIEW:                  'homepage_view',
   ANONYMOUS_GENERATION_COMPLETED: 'anonymous_generation_completed',
   SIGNUP_AFTER_ANON:              'signup_after_anon',
   PAID_AFTER_ANON:                'paid_after_anon',
 
-  // ── Full schema ────────────────────────────────────────────────────────
+  // ── Tier 8.9 — full schema ─────────────────────────────────────────────
   ANONYMOUS_GENERATION_STARTED:   'anonymous_generation_started',
   DOSSIER_PREVIEW_VIEWED:         'dossier_preview_viewed',
   HOW_SIMULATED_OPENED:           'how_simulated_opened',
@@ -88,7 +69,7 @@ export const EVENTS = Object.freeze({
   NEIGHBOR_PREVIEW_CLICKED:       'neighbor_preview_clicked',
   UPGRADE_AFTER_NEIGHBOR_CLICKED: 'upgrade_after_neighbor_clicked',
 
-  // ── Critique-implementation expansion ──────────────────────────────────
+  // ── P100 / Pillar C — critique-implementation expansion ────────────────
   WOW_REVEAL_SHOWN:               'wow_reveal_shown',
   WOW_REVEAL_COMPLETED:           'wow_reveal_completed',
   SAVE_BUTTON_CLICKED:            'save_button_clicked',
@@ -100,7 +81,6 @@ export const EVENTS = Object.freeze({
   WELCOME_CREDIT_GRANTED:         'welcome_credit_granted',
   WELCOME_CREDIT_SPENT:           'welcome_credit_spent',
   ANON_CAP_UNLOCK_SHOWN:          'anon_cap_unlock_shown',
-  ANON_CAP_UNLOCK_CLICKED:        'anon_cap_unlock_clicked',
   LOCKED_DESTINATION_SHOWN:       'locked_destination_shown',
   DOSSIER_GROUP_TAB_CLICKED:      'dossier_group_tab_clicked',
   SIMULATION_DRAWER_OPENED:       'simulation_drawer_opened',
@@ -193,20 +173,6 @@ export const EVENTS = Object.freeze({
   MAP_ROUTE_DRAWN:                'map_route_drawn',
   MAP_SAVED:                      'map_saved',
 
-  // ── SM-5: the TOWN-MAP legibility layer. ONE feature-discriminated event (the
-  //    ai_stage_answer precedent — one name, not eight) carrying BOTH the map-
-  //    GENERATION profile (feature:'render' — layoutVersion/siteKind/morphology/
-  //    responseMode/lynchBand/retryCount/hasFabric) and LEGIBILITY ENGAGEMENT
-  //    (feature ∈ provenance_hover|change_view|edge_labels|annotation_add|
-  //    lens_switch|panorama; counts/enums/bands only). The post-launch fog +
-  //    interior layers INHERIT this event with new `feature` values (no new names).
-  //    Lens/style RADAR for AI style-compiles is already captured server-side
-  //    (ai_stage_* feature:'styleOverhaul') — this is the distinct RENDER moment.
-  TOWN_MAP_LAYER_USED:            'town_map_layer_used',
-  // W-DOC (rev 11): the Welcome landing funnel — ONE feature-discriminated event
-  // (the town_map_layer_used precedent): feature:'view' | 'fixture_forge'.
-  LANDING_FUNNEL_USED:            'landing_funnel_used',
-
   // ── v2: sharing / export ───────────────────────────────────────────────
   PDF_EXPORT_COMPLETED:           'pdf_export_completed',
   FOUNDRY_EXPORT_COMPLETED:       'foundry_export_completed',
@@ -222,68 +188,9 @@ export const EVENTS = Object.freeze({
   LIBRARY_VIEWED:                 'library_viewed',
   SESSION_STARTED:                'session_started',
 
-  // ── v2: research ───────────────────────────────────────────────────────
+  // ── v2: research / consent ─────────────────────────────────────────────
   SETTLEMENT_FINGERPRINT_CAPTURED:'settlement_fingerprint_captured',  // research
-
-  // ── Surveyor S1: the analyst (§5 eval metrics — coarse, id-free, essential) ──
-  // Props (never free text): { audience, coverageBand, registerPurityBand, refused,
-  // sliceCount, byok }. coverageBand + registerPurityBand are the §3b/§5 quality
-  // metrics, computed server-side from the answer — never from the §3f rider.
-  AI_ANALYST_ANSWER:              'ai_analyst_answer',
-  // Answer acceptance signal. Props: { accepted } (thumbs up/down on the answer).
-  AI_ANALYST_FEEDBACK:            'ai_analyst_feedback',
-  // Surveyor S1b §3f THE ENRICHMENT RIDER — the model's self-emitted, ID-FREE,
-  // category-grade traffic tag, extracted SERVER-SIDE (condition-of-service layer,
-  // managed AND BYOK, non-togglable). Props (controlled vocabulary + booleans ONLY,
-  // never content): { intent, themes[], refusal_reason, action_drafted, oov, audience,
-  // byok, refused }. INTEREST data only — never a quality metric (conflicted-witness).
-  AI_ANALYST_RIDER:               'ai_analyst_rider',
-
-  // ── Surveyor S3: the intent compiler (interpret) §5 evals — coarse, id-free ──
-  // Props (never content): { opCount, requiredCount, inferredCount, optionalCount,
-  // uncertainCount, protectedCount, unsupportedCount, coverageBand, refused, byok }.
-  // coverageBand = the sourced-op rate (the interpret analog of citation coverage).
-  AI_INTERPRET_ANSWER:            'ai_interpret_answer',
-  // The §9 CORRECTION TYPOLOGY signal (now live — the compiler ships). Props (id-free,
-  // enum only): { correctionClass } ∈ the six SURVEYOR_CLASSES. One per corrected op;
-  // the "correction-rate for interpret" eval. INTEREST data — never a quality gate.
-  AI_INTERPRET_CORRECTION:        'ai_interpret_correction',
-  // §3f THE ENRICHMENT RIDER for interpret — the model's ID-FREE, category-grade traffic
-  // tag, extracted SERVER-SIDE (condition-of-service, managed AND BYOK). Same controlled
-  // vocabulary + conflicted-witness rule as the analyst rider.
-  AI_INTERPRET_RIDER:             'ai_interpret_rider',
-
-  // ── Surveyor S3: THE PARLEY (parley) §5 evals — coarse, id-free ──────────────
-  // Props (never content): { entityClass, groundingCoverageBand, registerPurityBand,
-  // refused, byok }. groundingCoverageBand = the fraction of the persona's claims
-  // grounded in its own belief slice (the epistemic-fidelity eval).
-  AI_PARLEY_ANSWER:               'ai_parley_answer',
-  // §3f THE ENRICHMENT RIDER for the parley (ID-FREE, condition-of-service). The rider
-  // also tags entity-class + topic-class so the atlas learns what tables rehearse.
-  AI_PARLEY_RIDER:                'ai_parley_rider',
-
-  // ── Surveyor S4–S6: the WRITE stages (custom content, style overhaul, construct
-  //    settlement, construct realm) §5 evals — coarse, id-free. ONE shared answer/rider
-  //    pair for all four stages, discriminated by props.feature (eager-frugal: the
-  //    AI-surface ~0-eager rule + the shared closure margin — two names, not eight).
-  // Props (never content): { feature, stage, total, mechanicalCount, flavorCount,
-  // unsupportedCount, deviationCount, coverageBand, refused, byok, earlyAccess }.
-  // feature ∈ {customContent, styleOverhaul, constructSettlement, constructRealm}.
-  AI_STAGE_ANSWER:                'ai_stage_answer',
-  // §3f THE ENRICHMENT RIDER for the S4–S6 write stages (ID-FREE, condition-of-service,
-  // managed AND BYOK). Same controlled vocabulary + conflicted-witness rule as S1/S3;
-  // carries props.feature + the style-domain vocabulary (base lens, palette family,
-  // motif class, oov) when feature = styleOverhaul (the §3f/§4b lens roadmap radar).
-  AI_STAGE_RIDER:                 'ai_stage_rider',
-
-  // ── VISION WAVE adoption signal — the ONE id-free verdict event shared by the
-  //    new surfaces (Interview / Oracle / Corpus Factory / Interpret review),
-  //    discriminated by props (eager-frugal: one name, not one per surface). The
-  //    S4+ tuning-knobs decision reads acceptance metrics from here. Props (never
-  //    content, never an id): { surface, verdict }.
-  //    surface ∈ {interview, oracle, corpus, interpret}; verdict ∈
-  //    {answered, refused, accepted, declined, revised, drawn}.
-  SURVEYOR_ADOPTION:              'surveyor_adoption',
+  CONSENT_UPDATED:                'consent_updated',
 });
 
 /**

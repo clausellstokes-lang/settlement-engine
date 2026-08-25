@@ -1,20 +1,17 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Activity, BookMarked, CheckCircle2, Clock3, XCircle } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
-import { BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, sans } from '../theme.js';
-import { ClerkNote } from '../generate/ClerkNote.jsx';
+import { BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, RED, SECOND, sans } from '../theme.js';
 import {
   ACTIVE_UI_STAGES,
   WAR_SHAPED_TYPES,
   attackerEntity,
-  collectSettlementIds,
   digestDetails,
   human,
   involvedEntities,
   nameMapFromSaves,
   outcomeDetails,
-  outcomeSubjectDescriptor,
   percent,
   proposalDetails,
   rollIsDeterministic,
@@ -61,41 +58,18 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
       for (const id of dismissedMajorIds) decisions[String(id)] = { decision: 'dismissed' };
       const result = await resolveIntervalMajors(campaignId, decisions);
       if (result && result.ok === false) {
-        setActionError(t('errors.realmContinueFail'));
+        setActionError('The realm could not continue. Try again in a moment.');
       } else {
         setDismissedMajorIds(new Set());
       }
     } catch (err) {
-      setActionError(t('errors.resumeFail'));
+      setActionError(`Resume failed: ${err?.message || err}`);
     } finally {
       setResumeBusy(false);
     }
   }, [resumeBusy, campaignId, dismissedMajorIds, resolveIntervalMajors]);
   const saves = useStore(s => s.savedSettlements);
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
-
-  // H2 · THE FIRST ADVANCE — the almanac's new page turns in. On the session's
-  // first committed advance, the pulse page pivots at its binding (oc-m-pageturn)
-  // as it settles. Detection is read-side off the existing advance counter
-  // (worldState.pulseHistory grows by one per advance), baselined at mount; the
-  // panel mounts before the advance commits (openInspectorAt('pulse') runs ahead
-  // of the commit), so the first increase is the DM's first advance. Component-
-  // local refs keep it once — NO new store field, NO persisted state; reduced-
-  // motion collapses the turn to instant via the global [class*='oc-m-'] rule.
-  const almanacPulseLen = campaign?.worldState?.pulseHistory?.length || 0;
-  const almanacBaselineRef = useRef(null);
-  const almanacTurnedRef = useRef(false);
-  const [almanacTurn, setAlmanacTurn] = useState(false);
-  useEffect(() => {
-    if (almanacBaselineRef.current == null) { almanacBaselineRef.current = almanacPulseLen; return undefined; }
-    if (almanacTurnedRef.current) { almanacBaselineRef.current = almanacPulseLen; return undefined; }
-    if (almanacPulseLen <= almanacBaselineRef.current) return undefined;
-    almanacTurnedRef.current = true;
-    almanacBaselineRef.current = almanacPulseLen;
-    setAlmanacTurn(true);
-    const timer = setTimeout(() => setAlmanacTurn(false), 900);
-    return () => clearTimeout(timer);
-  }, [almanacPulseLen]);
 
   // M10b catch-up now fires from campaign ACTIVATION (setActiveCampaign — the
   // §0.6.1-named site), not from this panel's mount, so the world moves on every
@@ -127,14 +101,13 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
   const autonomy = politicalAutonomyOf(rules);
   const routineMajorApproval = autonomy === 'routine' && rules.routineMajorApproval === true;
   const proposalNote = autonomy === 'recommendations'
-    ? 'The realm recommends these turns and shows its reasoning with each. Apply or dismiss.'
+    ? 'The realm recommends these turns and shows its reasoning with each — apply or dismiss.'
     : autonomy === 'dm_only'
       ? 'Every major turn awaits your word. Each carries the reasoning behind it.'
       : routineMajorApproval
-        ? 'Routine life runs itself; the campaign-altering turns (a war declaration, a coup) wait here for your word. They stand down on their own if left unanswered.'
+        ? 'Routine life runs itself; the campaign-altering turns — a war declaration, a coup — wait here for your word (they stand down on their own if left unanswered).'
         : null;
-  const rolls = (latestPulse?.rollExplanations || [])
-    .filter(roll => !['state_only', 'suppression_only'].includes(roll?.recordMode));
+  const rolls = latestPulse?.rollExplanations || [];
   const resolved = latestPulse?.resolvedStressors || [];
   const appliedOutcomes = latestPulse?.selectedOutcomes || [];
   const impactDigest = latestPulse?.impactDigest || [];
@@ -150,9 +123,9 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
     try {
       const fn = action === 'apply' ? applyProposal : dismissProposal;
       const updated = await fn(campaign.id, proposalId);
-      if (!updated) setActionError(t('errors.proposalUpdateFail'));
+      if (!updated) setActionError('Proposal could not be updated.');
     } catch (err) {
-      setActionError(t('errors.proposalUpdateFail'));
+      setActionError(`Proposal update failed: ${err?.message || err}`);
     } finally {
       setBusyProposalId(null);
     }
@@ -165,7 +138,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
     try {
       await canonizeCampaignWorld(campaign.id);
     } catch (err) {
-      setActionError(t('errors.worldClockStartFail'));
+      setActionError(`Starting the world clock failed: ${err?.message || err}`);
     } finally {
       setCanonBusy(false);
     }
@@ -180,6 +153,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         flexDirection: 'column',
         background: CARD,
         border: `1px solid ${BORDER}`,
+        borderRadius: 8,
         overflow: 'hidden',
       }}>
         <header style={{
@@ -193,6 +167,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           <div style={{
             width: 34,
             height: 34,
+            borderRadius: 8,
             border: `1px solid ${BORDER2}`,
             background: CARD,
             display: 'flex',
@@ -214,17 +189,17 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         </header>
         <div style={{ padding: 16 }}>
           {actionError && (
-            <ClerkNote rubric="The realm balked" role="alert" style={{ marginBottom: 10 }}>
+            <div style={{ border: '1px solid rgba(197,74,74,0.45)', borderRadius: 8, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: 'rgba(197,74,74,0.08)' }}>
               {actionError}
-            </ClerkNote>
+            </div>
           )}
           <OutcomeCard
-            heading="Start the campaign's World Clock first"
+            title="Start the campaign's World Clock first"
             summary="World Pulse advancement starts after you lock the map, placements, and campaign assumptions and start the world clock."
             severity={0.45}
             details={['required before advancement']}
             actions={(
-              <SmallButton tone="good" onClick={runCanonizeWorld} disabled={canonBusy} hint="Start the campaign's world clock">
+              <SmallButton tone="good" onClick={runCanonizeWorld} disabled={canonBusy} title="Start the campaign's world clock">
                 <BookMarked size={13} /> {canonBusy ? 'Starting…' : t('canon.startWorldClock')}
               </SmallButton>
             )}
@@ -242,6 +217,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
       flexDirection: 'column',
       background: CARD,
       border: `1px solid ${BORDER}`,
+      borderRadius: 8,
       overflow: 'hidden',
     }}>
       <header style={{
@@ -255,6 +231,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         <div style={{
           width: 34,
           height: 34,
+          borderRadius: 8,
           border: `1px solid ${BORDER2}`,
           background: CARD,
           display: 'flex',
@@ -290,9 +267,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         </div>
       )}
 
-      <div
-        className={almanacTurn ? 'oc-m-pageturn' : undefined}
-        style={{
+      <div style={{
         flex: 1,
         minHeight: 0,
         overflowY: 'auto',
@@ -317,17 +292,17 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         <div style={{ gridColumn: '1 / -1' }}>
           <RealmVerbComposer campaign={campaign} />
         </div>
-        <Section heading="Pending Proposals" count={pending.length}>
+        <Section title="Pending Proposals" count={pending.length}>
           {actionError && (
-            <ClerkNote rubric="The realm balked" role="alert" style={{ marginBottom: 10 }}>
+            <div style={{ border: '1px solid rgba(197,74,74,0.45)', borderRadius: 8, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: 'rgba(197,74,74,0.08)' }}>
               {actionError}
-            </ClerkNote>
+            </div>
           )}
           {paused && (
-            <div data-testid="paused-verdict-surface" style={{ border: `1px solid ${GOLD}`, padding: 12, marginBottom: 10, background: GOLD_BG, display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div data-testid="paused-verdict-surface" style={{ border: `1px solid ${GOLD}`, borderRadius: 8, padding: 12, marginBottom: 10, background: GOLD_BG, display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.5 }}>
                 The advance paused for your word. {pendingMajors.length > 0
-                  ? `${pendingMajors.length} major turn${pendingMajors.length === 1 ? '' : 's'} await your verdict. Keep each (it applies as recommended) or dismiss it, then resume the interval.`
+                  ? `${pendingMajors.length} major turn${pendingMajors.length === 1 ? '' : 's'} await your verdict — keep each (it applies as recommended) or dismiss it — then resume the interval.`
                   : 'Resume or undo the advance to continue. Applying, dismissing, or naming here would be undone on resume.'}
               </div>
               {pendingMajors.map((major) => {
@@ -336,14 +311,12 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                 return (
                   <OutcomeCard
                     key={id}
-                    heading={major.headline || major.outcome?.headline || 'A major turn awaits your word'}
+                    title={major.headline || major.outcome?.headline || 'A major turn awaits your word'}
                     summary={major.summary || major.outcome?.summary || ''}
                     severity={typeof major.severity === 'number' ? major.severity : 0.8}
                     reasons={major.reasons || major.outcome?.reasons || []}
                     details={proposalDetails(major.outcome || major)}
                     involved={involvedEntities(major, nameById)}
-                    subject={outcomeSubjectDescriptor(major)}
-                    affectedIds={collectSettlementIds(major)}
                     tone={dismissed ? 'normal' : 'major'}
                     actions={(
                       <SmallButton
@@ -371,12 +344,12 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             </div>
           )}
           {pending.length > 0 && proposalNote && (
-            <ClerkNote rubric="The realm's counsel" style={{ marginBottom: 10 }}>
+            <div style={{ border: `1px solid ${BORDER2}`, borderRadius: 8, padding: 10, marginBottom: 10, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, background: GOLD_BG }}>
               {proposalNote}
-            </ClerkNote>
+            </div>
           )}
           {pending.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pending proposals.
             </div>
           ) : (
@@ -384,21 +357,19 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {pending.map(proposal => (
                 <OutcomeCard
                   key={proposal.id}
-                  heading={proposal.headline}
+                  title={proposal.headline}
                   summary={proposal.summary}
                   severity={proposal.severity}
                   reasons={proposal.reasons}
                   details={proposalDetails(proposal.outcome)}
                   involved={involvedEntities(proposal, nameById)}
-                  subject={outcomeSubjectDescriptor(proposal)}
-                  affectedIds={collectSettlementIds(proposal)}
                   tone="major"
                   actions={(
                     <>
                       <SmallButton
                         tone="good"
                         onClick={() => runProposalAction(proposal.id, 'apply')}
-                        hint={paused ? 'The realm is mid-advance. Resume or undo first' : 'Apply proposal'}
+                        title={paused ? 'The realm is mid-advance — resume or undo first' : 'Apply proposal'}
                         disabled={!!busyProposalId || paused}
                       >
                         <CheckCircle2 size={13} /> {busyProposalId === `apply:${proposal.id}` ? 'Applying' : 'Apply'}
@@ -406,7 +377,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                       <SmallButton
                         tone="danger"
                         onClick={() => runProposalAction(proposal.id, 'dismiss')}
-                        hint={paused ? 'The realm is mid-advance. Resume or undo first' : 'Dismiss proposal'}
+                        title={paused ? 'The realm is mid-advance — resume or undo first' : 'Dismiss proposal'}
                         disabled={!!busyProposalId || paused}
                       >
                         <XCircle size={13} /> {busyProposalId === `dismiss:${proposal.id}` ? 'Dismissing' : 'Dismiss'}
@@ -419,10 +390,10 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           )}
         </Section>
 
-        <Section heading="Active Stressors & Echoes" count={activeStressors.length + echoes.length}>
+        <Section title="Active Stressors & Echoes" count={activeStressors.length + echoes.length}>
           {activeStressors.length + echoes.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
-              No active stressors. The realm is quiet, for now.
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+              No active stressors. The realm is quiet — for now.
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -443,7 +414,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                       label: `Named the force behind ${stressor.label || human(stressor.type)}`,
                     });
                   } catch (err) {
-                    setActionError(t('errors.namingFail'));
+                    setActionError(`Naming failed: ${err?.message || err}`);
                   } finally {
                     setNamingStressorId(null);
                   }
@@ -451,7 +422,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                 return (
                   <OutcomeCard
                     key={stressor.id}
-                    heading={stressor.label || human(stressor.type)}
+                    title={stressor.label || human(stressor.type)}
                     summary={stressorSummary(stressor)}
                     severity={stressor.severity}
                     details={stressorDetails(stressor)}
@@ -473,7 +444,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {echoes.map(stressor => (
                 <OutcomeCard
                   key={`echo-${stressor.id}`}
-                  heading={`${stressor.label || human(stressor.type)}, in living memory`}
+                  title={`${stressor.label || human(stressor.type)} — in living memory`}
                   summary="Resolved, not forgotten: this echo still colors new events and can re-ignite while warm."
                   severity={stressor.memoryStrength ?? 0}
                   details={[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}
@@ -484,15 +455,15 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           )}
         </Section>
 
-        <Section heading="Latest Pulse" count={latestPulse ? selected : 0}>
+        <Section title="Latest Pulse" count={latestPulse ? selected : 0}>
           {!latestPulse ? (
-            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pulse history yet.
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <OutcomeCard
-                heading={`Tick ${latestPulse.tick} advanced`}
+                title={`Tick ${latestPulse.tick} advanced`}
                 summary={`${latestPulse.autoAppliedCount || 0} drift item(s), ${latestPulse.proposalCount || 0} proposal(s), ${latestPulse.candidateCount || 0} candidate(s).`}
                 severity={Math.min(1, selected / 8)}
                 reasons={[latestPulse.interval, latestPulse.calendar?.season, `${rolls.length} rolls`].filter(Boolean)}
@@ -500,39 +471,36 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {appliedOutcomes.slice(0, 10).map(outcome => (
                 <OutcomeCard
                   key={outcome.id}
-                  heading={outcome.headline || human(outcome.candidateType)}
+                  title={outcome.headline || human(outcome.candidateType)}
                   summary={outcome.summary}
                   severity={outcome.severity}
                   reasons={outcome.reasons}
                   details={outcomeDetails(outcome, nameById)}
                   involved={involvedEntities(outcome, nameById)}
-                  subject={outcomeSubjectDescriptor(outcome)}
-                  affectedIds={collectSettlementIds(outcome)}
                   tone={outcome.applyMode === 'proposal' ? 'major' : 'normal'}
                 />
               ))}
               {resolved.map(stressor => (
                 <OutcomeCard
                   key={stressor.id}
-                  heading={`${stressor.label} resolved`}
+                  title={`${stressor.label} resolved`}
                   summary={`Resolution roll ${percent(stressor.resolutionRoll)} against ${percent(stressor.resolutionChance)} chance.`}
                   severity={stressor.resolutionChance}
                   reasons={['time bounded stressor', human(stressor.type)]}
                   involved={involvedEntities(stressor, nameById)}
-                  affectedIds={collectSettlementIds(stressor)}
                 />
               ))}
             </div>
           )}
         </Section>
 
-        <Section heading="Impact Digest" count={impactDigest.length}>
+        <Section title="Impact Digest" count={impactDigest.length}>
           {!latestPulse ? (
-            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pulse history yet.
             </div>
           ) : impactDigest.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No regional impacts recorded for this pulse.
             </div>
           ) : (
@@ -540,14 +508,12 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {impactDigest.slice(0, 12).map(entry => (
                 <OutcomeCard
                   key={entry.id}
-                  heading={entry.headline}
+                  title={entry.headline}
                   summary={entry.summary}
                   severity={entry.severity ?? Math.min(1, (entry.score || 0) / 100)}
                   reasons={entry.reasons}
                   details={digestDetails(entry, nameById)}
                   involved={involvedEntities(entry, nameById)}
-                  subject={outcomeSubjectDescriptor(entry)}
-                  affectedIds={collectSettlementIds(entry)}
                   tone={entry.significance === 'major' ? 'major' : 'normal'}
                 />
               ))}
@@ -555,9 +521,9 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           )}
         </Section>
 
-        <Section heading="Roll Explanations" count={rolls.length}>
+        <Section title="Roll Explanations" count={rolls.length}>
           {rolls.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No rolls recorded.
             </div>
           ) : (
@@ -572,6 +538,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                     gap: 8,
                     padding: 10,
                     border: `1px solid ${passed ? GOLD : BORDER}`,
+                    borderRadius: 8,
                     background: passed ? GOLD_BG : CARD,
                   }}>
                     <Clock3 size={15} color={passed ? GOLD : MUTED} style={{ marginTop: 2 }} />

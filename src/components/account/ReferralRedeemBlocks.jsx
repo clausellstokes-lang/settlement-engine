@@ -19,13 +19,16 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
+import { Copy, Check, ArrowRight } from 'lucide-react';
 import { t } from '../../copy/index.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { auth as authService } from '../../lib/auth.js';
 import { validateRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } from '../../lib/referralRedeem.js';
 import Button from '../primitives/Button.jsx';
 import {
-  GOLD_BG, GOLD_TXT, INK, BODY, SECOND, BORDER, sans, SP, FS, swatch, AMBER_DEEP } from '../theme.js';
+  GOLD_BG, GOLD_TXT, INK, BODY, SECOND, BORDER, sans, SP, R, FS, swatch,
+  AMBER_DEEP,
+} from '../theme.js';
 import { TINT_GOLD, TINT_VIOLET } from './accountTheme.js';
 
 // Matches the "Purchase Credits" block-label idiom in the parent section.
@@ -71,7 +74,7 @@ export function ReferralCard({ auth }) {
     <div style={{ marginTop: SP.lg }}>
       <div style={BLOCK_LABEL}>{t('account.referralLabel')}</div>
       <div style={{
-        background: GOLD_BG, padding: SP.lg,
+        background: GOLD_BG, borderRadius: R.lg, padding: SP.lg,
         display: 'flex', flexDirection: 'column', gap: SP.sm,
       }}>
         <span style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.55, fontFamily: sans }}>
@@ -86,7 +89,7 @@ export function ReferralCard({ auth }) {
               style={{
                 padding: `${SP.xs}px ${SP.sm}px`,
                 background: TINT_GOLD, color: GOLD_TXT,
-                border: `1px solid ${BORDER}`,
+                border: `1px solid ${BORDER}`, borderRadius: R.sm,
                 fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
                 fontSize: FS.sm, fontWeight: 700, letterSpacing: '0.04em',
               }}
@@ -96,7 +99,8 @@ export function ReferralCard({ auth }) {
             <Button
               variant="secondary"
               size="md"
-                  onClick={copyId}
+              icon={copied ? <Check size={14} /> : <Copy size={14} />}
+              onClick={copyId}
               aria-label={t('account.referralCopy')}
               style={{ minHeight: 44 }}
             >
@@ -170,7 +174,7 @@ export function RedeemBlock({ onNavigatePricing }) {
     <div style={{ marginTop: SP.lg }}>
       <div style={BLOCK_LABEL}>{t('account.redeemLabel')}</div>
       <div style={{
-        background: TINT_VIOLET, padding: SP.lg,
+        background: TINT_VIOLET, borderRadius: R.lg, padding: SP.lg,
         display: 'flex', flexDirection: 'column', gap: SP.sm,
       }}>
         <span style={{ fontSize: FS.xs, color: SECOND, lineHeight: 1.5 }}>
@@ -187,7 +191,7 @@ export function RedeemBlock({ onNavigatePricing }) {
             style={{
               flex: '1 1 180px', minWidth: 180, minHeight: 44,
               padding: `${SP.sm}px ${SP.md}px`,
-              border: `1px solid ${BORDER}`,
+              border: `1px solid ${BORDER}`, borderRadius: R.md,
               fontSize: FS.sm, fontFamily: sans, color: INK,
             }}
           />
@@ -217,6 +221,7 @@ export function RedeemBlock({ onNavigatePricing }) {
           <Button
             variant="secondary"
             size="md"
+            trailingIcon={<ArrowRight size={14} />}
             onClick={onNavigatePricing}
             style={{ alignSelf: 'flex-start', minHeight: 44 }}
           >

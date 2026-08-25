@@ -48,16 +48,10 @@ import {
 import { advanceCredibility } from './informationStatecraft.js';
 import { forceCalamityStrike, buildExodusOutcome, applyExodusToUpdates } from './calamityKernel.js';
 import { collectRealizedEmigrationEvents, dispatchMigrations } from './migrationKernel.js';
-import { settlementLifecycleActive, forceFoundSteading } from './settlementLifecycleKernel.js';
-import { satellitesOf, foldSatellitesLedger } from './satellitesLedger.js';
+import { settlementLifecycleActive, forceFoundSteading, satellitesOf } from './settlementLifecycleKernel.js';
 import { forceAbandonSettlement, forceResettleSettlement } from './settlementLifecycleFirstClass.js';
 import { calamityEnabled } from '../spatial/calamity.js';
 import { realmVerbFor, realmVetoProse } from '../events/realmManifest.js';
-import { repudiateTreaty, repudiableTreatyPairs } from './treatyBreach.js';
-import { dispositionTransitionNewsEntries } from './dispositionNews.js';
-import { readSovereigntyAsset, sovereigntyTradeActive } from './sovereigntyAssets.js';
-import { executeSovereigntyTransfer } from './sovereigntyTransfer.js';
-import { applyLegitimacyDeltasToUpdates } from './generosityUpdates.js';
 
 /** The one payload kind the applier dispatches on (the siege_initiation idiom). */
 export const REALM_VERB_PAYLOAD_KIND = 'realm_verb_order';
@@ -113,12 +107,9 @@ const nameOf = (/** @type {Mut} */ snapshot, /** @type {unknown} */ id) => {
 /** Which arg names the ACTING settlement, per verb (targetSaveId + the
  * pendingActorMajorFor dedup key — the M10a "acting settlement" convention). */
 const ACTOR_ARG = Object.freeze({
-  DECLARE_CASUS: 'fromId', SUE_FOR_PEACE: 'partyId', REPUDIATE_TREATY: 'fromId',
+  DECLARE_CASUS: 'fromId', SUE_FOR_PEACE: 'partyId',
   ORDER_SUPPLY_RAID: 'aggressorId', DECLARE_TRADE_EMBARGO: 'aggressorId',
   ORDER_INTERVENTION: 'patronId', ORDER_CONVOY: 'ownerId', DECLARE_BLOCKADE: 'ownerId',
-  // The conveying court is DERIVED (see the mint below), never dialled — but it is
-  // still the ACTING settlement, so the dedup key and targetSaveId read it here.
-  TRANSFER_SOVEREIGNTY: 'sellerId',
   FORCE_RECONSIDERATION: 'targetId', FORCE_CALAMITY: 'targetId',
   FORCE_FOUND_STEADING: 'parentId', FORCE_ABANDON: 'targetId', FORCE_RESETTLE: 'targetId',
 });
@@ -130,8 +121,6 @@ function headlineFor(verb, args, snapshot) {
   switch (verb) {
     case 'DECLARE_CASUS': return `${n(args.fromId)} declares a reason for war against ${n(args.toId)}`;
     case 'SUE_FOR_PEACE': return `${n(args.partyId)} sues for peace`;
-    case 'REPUDIATE_TREATY': return `${n(args.fromId)} repudiates its treaty with ${n(args.toId)}`;
-    case 'TRANSFER_SOVEREIGNTY': return `${n(args.sellerId)} conveys ${n(args.assetId)} to ${n(args.buyerId)}`;
     case 'ORDER_SUPPLY_RAID': return `${n(args.aggressorId)} opens a supply-web campaign against ${n(args.targetId)}`;
     case 'DECLARE_TRADE_EMBARGO': return `${n(args.aggressorId)} declares a trade embargo on ${n(args.targetId)}`;
     case 'ORDER_INTERVENTION': return `${n(args.patronId)} commits an army to the contest at ${n(args.targetId)}`;
@@ -174,69 +163,10 @@ export function buildRealmVerbOutcome({ verb, args, worldState, snapshot, tick }
     a.strength = round4(Math.max(1, num(a.strength, Math.max(1, p01 * 100) * (1 + merc.factor))));
     a.motive = String(a.motive || 'dm_order');
   }
-  if (verb === 'REPUDIATE_TREATY') {
-    a.fromId = String(a.fromId ?? '').trim();
-    a.toId = String(a.toId ?? '').trim();
-  }
-  /** @type {ReturnType<typeof readSovereigntyAsset>|null} */
-  let conveyed = null;
-  if (verb === 'TRANSFER_SOVEREIGNTY') {
-    a.assetId = String(a.assetId ?? '').trim();
-    a.buyerId = String(a.buyerId ?? '').trim();
-    // THE SELLER IS A READ, NOT AN ANSWER. Who holds a steading or a vassalage is a
-    // fact the ledgers already carry, so the mint derives it rather than trusting a
-    // dial that could name a court which never held the place. The apply arm runs the
-    // SAME read against the then-current world, which is what makes a holding that
-    // changed hands between the order and the word refuse instead of convey.
-    conveyed = readSovereigntyAsset(worldState, a.assetId);
-    if (conveyed.tradeable === true && conveyed.holderId) a.sellerId = String(conveyed.holderId);
-    else delete a.sellerId;
-  }
   const actorId = String(a[/** @type {Record<string, string>} */ (ACTOR_ARG)[verb]] ?? a.targetId ?? '');
-  const treatyParties = verb === 'REPUDIATE_TREATY'
-    ? [...new Set([String(a.fromId ?? ''), String(a.toId ?? '')].filter(Boolean))]
-    : [];
   // The manifest predicate verdict, surfaced for the mint's bounded-by-
   // construction gate (LAW 1). Total: never throws on a dark world.
   const predicate = entry.predicate(worldState, { settlements: asObject(snapshot).settlements || [], tick: nowTick });
-  // The manifest can prove that SOME NAP exists, but its two target dials share
-  // one flat party list. Refuse a cross-pact combination before it reaches the
-  // queue; approval still rechecks the same pair against the then-current world.
-  if (predicate.available && verb === 'REPUDIATE_TREATY') {
-    const fromId = String(a.fromId ?? '');
-    const toId = String(a.toId ?? '');
-    const invalid = !fromId || !toId || fromId === toId;
-    const exact = !invalid && repudiableTreatyPairs(worldState, nowTick)
-      .some(pair => pair.fromId === fromId && pair.toId === toId);
-    if (!exact) {
-      const code = invalid ? 'treaty_breach_invalid' : 'treaty_breach_no_live_nap';
-      return { ok: false, code, prose: realmVetoProse(code) };
-    }
-  }
-  // The manifest predicate can prove SOME holding is conveyable; it cannot prove that
-  // THIS one is, or that the named buyer is anyone but its current holder. Refuse the
-  // doomed order before it reaches the queue (the REPUDIATE_TREATY preflight's shape);
-  // approval re-reads the same eligibility against the then-current world regardless.
-  if (predicate.available && verb === 'TRANSFER_SOVEREIGNTY') {
-    if (!conveyed || conveyed.tradeable !== true || !conveyed.holderId) {
-      return {
-        ok: false,
-        code: 'sovereignty_ineligible',
-        prose: realmVetoProse('sovereignty_ineligible', conveyed ? conveyed.receipt : ''),
-      };
-    }
-    const buyerId = String(a.buyerId ?? '');
-    if (!buyerId || buyerId === String(conveyed.holderId) || buyerId === String(a.assetId ?? '')) {
-      return {
-        ok: false,
-        code: 'sovereignty_ineligible',
-        prose: realmVetoProse(
-          'sovereignty_ineligible',
-          'a conveyance needs a buying court that is neither the holding itself nor the court already holding it.',
-        ),
-      };
-    }
-  }
   return {
     ok: true,
     predicate,
@@ -247,11 +177,8 @@ export function buildRealmVerbOutcome({ verb, args, worldState, snapshot, tick }
       targetSaveId: actorId,
       headline: headlineFor(verb, a, snapshot),
       summary: `A realm order staged from the composer: ${String(entry.label).toLowerCase()}. It applies on approval; the world's own walls still hold.`,
-      severity: entry.candidateType === 'treaty_breached' ? 1
-        : entry.candidateType === 'intervention_ordered' || entry.candidateType === 'blockade_declared'
-          || entry.candidateType === 'settlement_terminal_death'
-          || entry.candidateType === 'sovereignty_conveyed' ? 0.7 : 0.5,
-      ...(treatyParties.length ? { affectedSettlementIds: treatyParties, sourceEventTargetId: String(a.toId ?? '') } : {}),
+      severity: entry.candidateType === 'intervention_ordered' || entry.candidateType === 'blockade_declared'
+        || entry.candidateType === 'settlement_terminal_death' ? 0.7 : 0.5,
       reasons: ['Ordered from the realm composer (DM provenance).'],
       applyMode: 'proposal',
       forced: true,
@@ -356,116 +283,6 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
         `${nameOf(shim, partyId)}'s army is ordered home — the recall resolves through the standing withdrawal next tick.`,
         [partyId, foeId].filter(Boolean), nowTick, now)]);
     }
-    case 'REPUDIATE_TREATY': {
-      const r = repudiateTreaty(state, { fromId: args.fromId, toId: args.toId, tick: nowTick });
-      if (r.ok !== true) return refused(refuse(r.code, r.detail));
-      // No side-channel orderNews: the standing outcome curation lane emits the
-      // single treaty_breached beat, addressed to both parties by the outcome.
-      // Substitute only its reader prose: the proposal summary truthfully described
-      // a staged order, but approval has now broken the pact and must not repeat the
-      // stale "applies on approval" sentence as an accomplished event.
-      const breakerName = nameOf(shim, args.fromId);
-      const otherName = nameOf(shim, args.toId);
-      const dispositionNews = dispositionTransitionNewsEntries({
-        transitions: Array.isArray(r.dispositionTransitions) ? r.dispositionTransitions : [],
-        snapshot: shim,
-        worldState: r.worldState,
-        now,
-      });
-      return applied(r.worldState, dispositionNews, null, {
-        ...outcome,
-        summary: `${breakerName} openly broke its pact with ${otherName}. Every promise under it ended, and ${otherName} now has cause to answer the breach.`,
-        reasons: ['The oath was repudiated in public; its restraints no longer bind either court.'],
-      });
-    }
-    // ── TRANSFER_SOVEREIGNTY — the conveyance, through the ONE writer ──────
-    // The DM road and the engine road are the same road: this arm re-runs the verb's
-    // own gates against the CURRENT world and then calls executeSovereigntyTransfer,
-    // which is also what a treaty's mint calls. There is no bypass arm and there is
-    // nothing here for one to bypass — THE SOVEREIGN-HAND LAW *IS* THE ELIGIBILITY
-    // READ. A free settlement (which includes every settlement a DM ever placed) is
-    // not tradeable, so the verb refuses it with the read's own receipt; no flag is
-    // consulted because no flag exists, and none is needed when the only way in is a
-    // ledger that names a holder.
-    case 'TRANSFER_SOVEREIGNTY': {
-      if (!sovereigntyTradeActive(state)) return refused(refuse('sovereignty_gate_dark'));
-      const assetId = String(args.assetId ?? '');
-      const buyerId = String(args.buyerId ?? '');
-      const asset = readSovereigntyAsset(state, assetId);
-      if (asset.tradeable !== true || !asset.holderId) return refused(refuse('sovereignty_ineligible', asset.receipt));
-      // THE SELLER IS RE-READ AND COMPARED, NEVER REPLAYED. The order carries the
-      // holder the ledgers named when it was staged, and the DM approved THAT premise
-      // — "this court gives up this place". If the holding changed hands in between,
-      // conveying it anyway would take a settlement from a court that never appeared
-      // in the order. The lapse refuses visibly instead (the §10 queue-mouth law, and
-      // the REPUDIATE_TREATY preflight's own "approval rechecks the exact pair").
-      const sellerId = String(asset.holderId);
-      const stagedSeller = String(args.sellerId ?? '');
-      if (stagedSeller && stagedSeller !== sellerId) {
-        return refused(refuse('sovereignty_ineligible',
-          `${nameOf(shim, assetId)} has changed hands since the order was staged: ${asset.receipt}`));
-      }
-      if (!buyerId || buyerId === sellerId || buyerId === assetId) {
-        return refused(refuse('sovereignty_ineligible',
-          'a conveyance needs a buying court that is neither the holding itself nor the court already holding it.'));
-      }
-      // ⚠ THE GEOGRAPHIC BOUND IS DELIBERATELY *NOT* RE-RUN HERE, and the reason was
-      // measured rather than assumed. `sovereigntyReach` is the MARKET's candidate-set
-      // shaper — its own header says failing it is SILENCE, not a receipt — and it is
-      // not a gate inside the writer, so "force ≡ organic" (route through the wave's
-      // own kernel function and refuse exactly what it refuses) does not reach it. It
-      // also cannot judge half the vocabulary: a steading is a row in the satellites
-      // ledger and has NO cell in the spatial digest, so `hopWeeks(digest, buyer,
-      // steadingId)` is null and the reach read returns `unmapped` for EVERY satellite
-      // in every campaign forever. A reach wall here would therefore have refused an
-      // entire asset kind by construction — the dead-arm class — while looking like
-      // rigour. The wall this verb does have is the eligibility read above, which is
-      // the wall amendment S actually names.
-      const graphEdges = asObject(/** @type {Mut} */ (shim).regionalGraph).edges;
-      const done = executeSovereigntyTransfer({
-        worldState: state,
-        term: { type: 'sovereignty_transfer', assetId },
-        sellerId, buyerId, tick: nowTick,
-        edges: Array.isArray(graphEdges) ? graphEdges : [],
-        now,
-      });
-      // The writer's own truth-side refusal (a lapse it saw and this arm did not):
-      // surfaced as the same visible refusal, never a silent no-op.
-      if (done.executed !== true) return refused(refuse('sovereignty_ineligible', done.receipts[0] || asset.receipt));
-      // The legitimacy dent rides the estate's ONE publicLegitimacy applicator over
-      // pending settlement writes — the same call the treaty-mint fold makes, so the
-      // decreed conveyance and the negotiated one dent the same field the same way.
-      // It is DECLARED REGEN-VOLATILE (§4): the durable fragility is the occupation
-      // record's resistance, which this arm never touches directly.
-      /** @type {Array<{ saveId: string, settlement: Mut }>} */
-      const legitimacyWorking = [];
-      /** @type {Map<string, number>} */
-      const legitimacyIndex = new Map();
-      for (const row of done.legitimacyDeltas) {
-        const held = settlementUpdates.get(String(row.id));
-        if (!held || !held.settlement) continue;
-        legitimacyIndex.set(String(row.id), legitimacyWorking.length);
-        legitimacyWorking.push({ saveId: String(row.id), settlement: /** @type {Mut} */ (held.settlement) });
-      }
-      const dented = applyLegitimacyDeltasToUpdates(
-        /** @type {never} */ (/** @type {unknown} */ (legitimacyWorking)),
-        legitimacyIndex,
-        /** @type {never} */ (/** @type {unknown} */ (new Map(done.legitimacyDeltas.map((row) => [row.id, row.delta])))),
-      );
-      const patches = dented === /** @type {unknown} */ (legitimacyWorking)
-        ? null
-        : new Map(/** @type {Array<{ saveId: string, settlement: Mut }>} */ (/** @type {unknown} */ (dented))
-          .map((u) => [String(u.saveId), u.settlement]));
-      // The writer's typed newsSeeds are deliberately NOT pushed: their fifteen
-      // authored Herald kinds are a sibling lane's, and a beat whose kind has no
-      // registry row is refused by normalizeEntry and narrated into a void. This
-      // arm's own registered beat is the receipt the feed can actually carry.
-      return applied(done.worldState, [orderNews(verb,
-        headlineFor(verb, { ...args, sellerId }, shim),
-        `${nameOf(shim, assetId)} answers to ${nameOf(shim, buyerId)} now; ${done.receipts.join(' ')}`,
-        [sellerId, buyerId, assetId], nowTick, now)], patches);
-    }
-
     case 'ORDER_SUPPLY_RAID':
     case 'DECLARE_TRADE_EMBARGO': {
       const fn = verb === 'ORDER_SUPPLY_RAID' ? orderSupplyRaid : declareTradeEmbargo;
@@ -653,11 +470,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
             [{ saveId: actorId, settlement: entry.settlement }], new Map([[actorId, -crack.legitimacyHit]]));
           patches = new Map([[actorId, /** @type {Mut} */ (patched[0].settlement)]]);
         }
-        // 'forced' is the id-provenance segment (momentum.js climbDownNews): this verb and
-        // the organic crack pass can price the SAME (actor, target) on the same tick, and the
-        // news feed dedupes by id, so without it the DM's reversal and the emergent one would
-        // silently merge into a single beat.
-        news.push(climbDownNews(actorId, target, (/** @type {string} */ id) => nameOf(shim, id), stock, th.cliff, crack, '', nowTick, 'forced'));
+        news.push(climbDownNews(actorId, target, (/** @type {string} */ id) => nameOf(shim, id), stock, th.cliff, crack, '', nowTick));
       } else {
         news.push(orderNews(verb, `${nameOf(shim, actorId)} reconsiders its course`,
           `The pressed court lets its course (${courseKey}) go — below its cliff, the reversal is felt but not priced.`,
@@ -746,9 +559,6 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
         sats: /** @type {import('./settlementLifecycleKernel.js').SatelliteRecord[]} */ (/** @type {unknown} */ (sats)), tick: nowTick, forkFn,
         name: args.name != null && String(args.name).trim() ? String(args.name) : null,
         resourceKey: args.resource != null && String(args.resource).trim() ? String(args.resource) : null,
-        // W-E (J-D4): a DECREED founding samples the same frozen ground an organic
-        // one does (force ≡ organic, extended to topography). Null when aspatial.
-        digest: /** @type {Mut} */ (activeSpatialDigest(/** @type {Mut} */ (state))),
       });
       if ('refusal' in minted) return refused(refuse('steading_refused', minted.refusal));
       // The kernel's ledger fold shape: entry { steadings: { [rec.id]: rec } }.
@@ -758,13 +568,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
         steadings: { ...asObject(parentCell.steadings), [String(minted.record.id)]: minted.record },
         lastSeedTick: nowTick,
       };
-      // THE ONE SATELLITES WRITE (chair ruling CR-WR10-I). This line used to spell the
-      // fold itself, which made this verb a SECOND authority on the ledger the shrink-only
-      // writer census exists to keep singular. Routing it through the pen's own fold
-      // ratchets that census DOWN to one member, and the bytes are identical: the ledger
-      // it hands over always carries the cell just minted, so the drop-when-empty branch
-      // inside cannot fire here.
-      const ws = foldSatellitesLedger(state, { ...satLedger, [parentId]: nextCell });
+      const ws = setSpatialLedger(state, 'satellites', { ...satLedger, [parentId]: nextCell });
       // The parent debit through the kernel's shiftPopulation contract:
       // population decrement + a receipted populationHistory entry.
       const parent = asObject(entry.settlement);

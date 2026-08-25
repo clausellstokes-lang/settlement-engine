@@ -48,6 +48,7 @@ export {
   queueRegionalImpacts,
   relationshipChannelBundle,
   setRegionalChannelStatus,
+  setRegionalChannelVisibility,
   setRegionalImpactStatus,
   stablePart,
   syncRelationshipChannelBundle,
@@ -71,9 +72,7 @@ export {
 export {
   WIZARD_NEWS_SIGNIFICANCE,
   advanceWizardNewsFeed,
-  appendObservedWizardNewsEntries,
   appendWizardNewsEntries,
-  applyPulseMover,
   deriveNewsThreads,
   deriveWizardNewsEntriesFromGraphChange,
   ensureWizardNewsFeed,

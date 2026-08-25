@@ -27,8 +27,8 @@ import { Funnel } from '../../lib/analytics.js';
 
 const PARCH = swatch['#FBF5E6'];
 const PARCH_GRAD_HI = swatch['#FCF6E7'];
-const SLATE = swatch['#5A6E82'];
-const SLATE_DIM = swatch['#E4E9EE80'];
+const VIOLET = swatch['#7B4FCF'];
+const VIOLET_DIM = swatch['#EBE2FA80'];
 const GOLD = swatch['#C9A24C'];
 const INK = swatch['#1B1408'];
 const BODY = swatch['#4A3B22'];
@@ -45,7 +45,7 @@ const serif = '"Crimson Text", Georgia, serif';
  * @param {string} props.body                   — one-paragraph pitch
  * @param {string} [props.previewImageSrc]      — optional screenshot src
  * @param {string} [props.previewAlt]           — alt text for the screenshot
- * @param {string} [props.ctaLabel='Upgrade to Cartographer']
+ * @param {string} [props.ctaLabel='Upgrade — $6/mo']
  * @param {Function} [props.onCta]              — defaults to opening the purchase modal
  * @param {string} [props.secondaryLink]        — optional "See sample →" link href
  * @param {string} [props.trackEvent]           — analytics event fired on mount
@@ -57,7 +57,7 @@ export default function LockedDestination({
   body,
   previewImageSrc,
   previewAlt,
-  ctaLabel = 'Upgrade to Cartographer',
+  ctaLabel = 'Upgrade — $6/mo',
   onCta,
   secondaryLink,
   trackEvent,
@@ -97,14 +97,17 @@ export default function LockedDestination({
         padding: 32,
         background: `linear-gradient(135deg, ${PARCH_GRAD_HI}, ${PARCH})`,
         border: `1px solid ${BORDER}`,
+        borderRadius: 12,
+        boxShadow: '0 6px 24px rgba(27,20,8,0.10)',
         fontFamily: sans,
       }}
     >
       <div style={{
         display: 'inline-block',
         padding: '3px 10px',
-        background: SLATE_DIM,
-        color: SLATE,
+        background: VIOLET_DIM,
+        color: VIOLET,
+        borderRadius: 4,
         fontSize: FS.xxs, fontWeight: 800,
         letterSpacing: '0.14em', textTransform: 'uppercase',
       }}>
@@ -133,6 +136,8 @@ export default function LockedDestination({
           padding: 8,
           background: swatch.white,
           border: `1px solid ${BORDER}`,
+          borderRadius: 6,
+          boxShadow: '0 4px 16px rgba(27,20,8,0.08)',
           position: 'relative',
           overflow: 'hidden',
         }}>
@@ -145,11 +150,13 @@ export default function LockedDestination({
               objectFit: 'cover', objectPosition: 'top',
               opacity: 0.55,
               filter: 'saturate(0.7)',
+              borderRadius: 4,
             }}
           />
           <div style={{
             position: 'absolute', inset: 8,
             background: `linear-gradient(to bottom, transparent 30%, ${PARCH} 90%)`,
+            borderRadius: 4,
             pointerEvents: 'none',
           }} />
         </div>
@@ -164,10 +171,11 @@ export default function LockedDestination({
           onClick={handleCta}
           style={{
             padding: '10px 18px',
-            background: SLATE, color: swatch.white,
-            border: 'none',
+            background: VIOLET, color: swatch.white,
+            border: 'none', borderRadius: 4,
             fontSize: FS.md, fontWeight: 700, fontFamily: sans,
             cursor: 'pointer',
+            boxShadow: '0 2px 8px rgba(123,79,207,0.35)',
           }}
         >
           {ctaLabel}

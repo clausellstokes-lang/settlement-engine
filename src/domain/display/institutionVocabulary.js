@@ -137,21 +137,14 @@ export const INSTITUTION_IDENTITY = Object.freeze({
   "Thieves' guild chapter": 'A chartered chapter of organized theft that regulates its members, fences their takings, and enforces its own law.',
   'Multiple criminal factions': 'Rival gangs contesting the same streets, whose turf disputes spill into open violence.',
   'Black market': 'A hidden trade in contraband and forbidden goods, meeting where the watch does not look.',
-  'Underground network': 'A dug warren of tunnels and cellars beneath the settlement, used for discreet passage, untaxed storage, and no-questions transport. Everyone knows it exists; no one holds a map.',
   'Contract killer': 'A lone killer or small cell working below the notice of any guild, hired through criminal go-betweens. Deniable and never reliable.',
   'Kidnapping ring': 'A crew that seizes free people and sells them on with forged papers, feeding whatever market will take them.',
   'Human trafficking network': 'A clandestine operation moving people across borders outside all law, with its own safe houses and bought officials.',
   "Thieves' guild (powerful)": 'A dominant criminal syndicate tolerated because open gang war would be worse. It taxes crime and keeps it quiet.',
   'Black market bazaar': 'A permanent underground market for contraband, forged documents, and services no lawful trade will touch.',
-  // [W-I INFORMATION BROKERAGES] I1. The four houses that deal in what is known.
-  'Listening post': 'A licensed house that pays for road news and keeps the register of who arrived, from where, and carrying word of what. It exists wherever traffic does.',
-  "Chroniclers' exchange": 'The guild form of the listening house, with paid correspondents on several roads and an archive that checks one road against another. The only counter in the city where a claim is graded before it is sold.',
-  Rookery: 'A loft of message birds run by people who file no returns. Word arrives unsigned and ahead of the watch, and only a standing criminal organization can keep a loft like it safe.',
-  'Whisper market': 'A covert guild of brokers who buy and sell knowledge by the piece, grade what they sell, and will build a claim for a patron who pays enough. It sites itself among the fences and the late houses.',
   'Underground city': 'Repurposed tunnels and catacombs sheltering criminals, refugees, and everything that needs to stay out of daylight.',
   "Assassins' guild": 'A professional order of killers working through cut-outs and cover, acknowledged by no one and used by many.',
   'Citizen militia': 'Ordinary residents who drill and muster against local threats. Part-time soldiers with their own tools and no pay.',
-  'Household levy': 'One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.',
   'Palisade or earthworks': 'A wooden palisade or earthen bank thrown up to slow raiders and beasts. Rough defence for a place that cannot afford stone.',
   "Veteran's lodge": 'A drinking hall for old soldiers and mercenaries. Informal muscle, tall tales, and the occasional job for a band that needs swords.',
   'Town walls': 'Stone walls and gates ringing a town. Costly to raise and costly to keep, but they decide who gets in.',
@@ -223,7 +216,7 @@ export const INSTITUTION_IDENTITY = Object.freeze({
   'Apothecary district': 'A cluster of competing apothecaries whose rivalry breeds specialists in surgery, herbs, and imported medicine.',
   'Mint (official)': 'A chartered mint striking standard coin for a region, and a steady source of revenue for the authority behind it.',
   'Auction house': 'A formal venue for selling high-value goods: estates, ships, art, livestock, and occasionally people, all on a premium.',
-  "Harbour master's office": 'The office that governs navigable-water traffic: berths, anchorage fees, manifests, and port law.',
+  "Harbour master's office": 'The office that governs a port: berths, anchorage fees, and the enforcement of maritime law.',
   "Furrier's district": 'A quarter of fur processors and traders dealing in a high-value luxury good.',
   'District markets (5-10)': 'Several specialized market districts, each given over to one thing: grain, cloth, metals, livestock, or exotica.',
   'Merchant guilds (50-100+)': 'Dozens of merchant guilds forming, in effect, a parliament of trade.',
@@ -670,3 +663,4 @@ export function badgeForInstitution(inst) {
   };
   return byPc[pc] || 'Institution';
 }
+

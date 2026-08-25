@@ -6,7 +6,6 @@
  */
 
 import './resolveConfig.js';
-import './buildGenerationContext.js';
 import './resolveResources.js';
 import './resolveStress.js';
 import './resolveNeighbour.js';
@@ -19,11 +18,10 @@ import './generateEconomy.js';
 import './generatePower.js';
 import './neighbourFactions.js';
 import './factionCorrelationPass.js';
-import './coherenceRepairPass.js';
 import './economyReconcilePass.js';
-import './powerEconomyReconcilePass.js';
 import './structuralValidationPass.js';
 import './generatePopulation.js';
 import './corruptionPass.js';
+import './seedStartingPantheon.js';
 import './generateNarratives.js';
 import './assembleSettlement.js';

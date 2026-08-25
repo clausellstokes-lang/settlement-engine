@@ -12,12 +12,11 @@
  *   - Native culture regions
  */
 
-import { X, Check, Lock } from 'lucide-react';
+import { X, Check } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { useStore } from '../../store';
-import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';
 import { REGIONAL_CHANNEL_TYPES } from '../../domain/region/index.js';
 import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
 // components-map-3: the relationship palette is single-sourced from
@@ -28,14 +27,6 @@ import { REL_TYPES } from './relationshipEdgeStyle.js';
 const REGIONAL_IMPACT_STATUS_FILTERS = ['queued', 'applied', 'resolved', 'ignored', 'expired'];
 const DEFAULT_REGIONAL_IMPACT_FILTER = ['queued', 'applied', 'resolved'];
 
-// DESIGN_THE_ROADS §13 — the Travelers overlay sub-layers. Armies + migrant columns read
-// live ledgers (always available); envoys are present only when the roads ledger is lit.
-const TRAVELER_SUBLAYERS = [
-  { id: 'armies', label: 'Armies', color: swatch.danger },
-  { id: 'migrants', label: 'Migrant columns', color: swatch['#5A6E82'] },
-  { id: 'envoys', label: 'Envoys', color: swatch['#A0762A'] },
-];
-
 function human(value) {
   return String(value || '').replace(/_/g, ' ');
 }
@@ -44,15 +35,6 @@ export default function LayersPanel({ onClose }) {
   const layers         = useStore(s => s.mapState.layers);
   const toggleLayer    = useStore(s => s.toggleLayer);
   const setLayerFilter = useStore(s => s.setLayerFilter);
-  // mapChains tier gate (Owner Ruling #5 — "enforce mapChains"): the Supply
-  // chains toggle is the affordance, so the gate lives HERE (and at the
-  // MapOverlay render + RoutesToolbar twin), never in the derivation. Locked =
-  // visible-but-locked per the RealmDashboardLocked "reachable, not hidden"
-  // precedent; a click on the locked row fires the map-family pricing moment
-  // instead of toggling (no store write — the stored layers.chains survives an
-  // upgrade untouched, so chains reappear without re-toggling).
-  const mapChainsUnlocked = useStore(s => typeof s.canUseMapChains === 'function' && s.canUseMapChains());
-  const authTier = useStore(s => s.auth?.tier);
 
   const relFilter = new Set(Array.isArray(layers.relationshipFilter) ? layers.relationshipFilter : []);
   const regionalChannelFilter = new Set(
@@ -90,22 +72,11 @@ export default function LayersPanel({ onClose }) {
     setLayerFilter('regionalImpactStatusFilter', Array.from(next));
   }
 
-  const travelersFilter = new Set(
-    Array.isArray(layers.travelersFilter) && layers.travelersFilter.length
-      ? layers.travelersFilter
-      : TRAVELER_SUBLAYERS.map(s => s.id)
-  );
-  function toggleTravelerSub(id) {
-    const next = new Set(travelersFilter);
-    if (next.has(id)) next.delete(id); else next.add(id);
-    setLayerFilter('travelersFilter', next.size === TRAVELER_SUBLAYERS.length ? null : Array.from(next));
-  }
-
   return (
     <div style={{
       width: 240, minHeight: 0,
       display: 'flex', flexDirection: 'column',
-      background: CARD, border: `1px solid ${BORDER}`,
+      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
       overflow: 'hidden',
     }}>
       {/* Header */}
@@ -157,16 +128,8 @@ export default function LayersPanel({ onClose }) {
 
         <LayerToggle
           label="Supply chains"
-          checked={mapChainsUnlocked && !!layers.chains}
-          locked={!mapChainsUnlocked}
-          lockedHint="Supply chains unlock with Cartographer"
-          onChange={() => {
-            if (!mapChainsUnlocked) {
-              triggerPricingMoment('map_realm_teaser', useStore.getState().setActivePricingMoment, { tier: authTier });
-              return;
-            }
-            toggleLayer('chains');
-          }}
+          checked={!!layers.chains}
+          onChange={() => toggleLayer('chains')}
         />
         <LayerToggle
           label="Regional channels"
@@ -246,24 +209,6 @@ export default function LayersPanel({ onClose }) {
           onChange={() => toggleLayer('roads')}
         />
         <LayerToggle
-          label="Travelers & columns"
-          checked={!!layers.travelers}
-          onChange={() => toggleLayer('travelers')}
-        />
-        {layers.travelers && (
-          <div style={{ marginLeft: SP.md, marginBottom: SP.sm }}>
-            {TRAVELER_SUBLAYERS.map(s => (
-              <FilterChip
-                key={s.id}
-                label={s.label}
-                color={s.color}
-                active={travelersFilter.has(s.id)}
-                onClick={() => toggleTravelerSub(s.id)}
-              />
-            ))}
-          </div>
-        )}
-        <LayerToggle
           label="Labels"
           checked={!!layers.labels}
           onChange={() => toggleLayer('labels')}
@@ -301,7 +246,7 @@ export default function LayersPanel({ onClose }) {
   );
 }
 
-function LayerToggle({ label, checked, onChange, locked = false, lockedHint }) {
+function LayerToggle({ label, checked, onChange }) {
   const inputId = `layer-toggle-${String(label).replace(/\s+/g, '-').toLowerCase()}`;
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- handlers only apply decorative hover styling to this label-for-checkbox; no interactive behavior added
@@ -311,7 +256,8 @@ function LayerToggle({ label, checked, onChange, locked = false, lockedHint }) {
       display: 'flex', alignItems: 'center', gap: SP.xs,
       padding: `${SP.xs}px ${SP.sm}px`,
       cursor: 'pointer', userSelect: 'none',
-      fontSize: FS.sm, color: locked ? MUTED : INK,
+      borderRadius: R.sm,
+      fontSize: FS.sm, color: INK,
     }}
       onMouseEnter={e => (e.currentTarget.style.background = '#faf6ef')}
       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
@@ -319,18 +265,12 @@ function LayerToggle({ label, checked, onChange, locked = false, lockedHint }) {
       <input
         id={inputId}
         type="checkbox"
-        aria-label={locked && lockedHint ? `${label}: ${lockedHint}` : label}
+        aria-label={label}
         checked={checked}
         onChange={onChange}
         style={{ accentColor: GOLD, cursor: 'pointer' }}
       />
       <span style={{ fontWeight: 600 }}>{label}</span>
-      {/* The gate moment stays VISIBLE (premium-seam law: a locked affordance,
-          not a hidden one) — the unlock path rides the aria-label hint (NOT a
-          native title= tooltip: the shrink-only title census, guidanceRegistry
-          walker, is the house doctrine against those); clicking fires the
-          pricing moment upstream. */}
-      {locked && <Lock size={11} color={GOLD} aria-hidden data-testid={`${inputId}-lock`} />}
     </label>
   );
 }
@@ -350,6 +290,7 @@ function FilterChip({ label, color, active, onClick }) {
         background: active ? color : 'transparent',
         color: active ? '#fff' : INK,
         border: `1px solid ${color}`,
+        borderRadius: 12,
         fontSize: FS.xxs, fontWeight: 700, fontFamily: sans,
         boxShadow: 'none',
       }}

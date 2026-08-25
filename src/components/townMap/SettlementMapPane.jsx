@@ -36,217 +36,91 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  AMBER, AMBER_BG, BLUE, BORDER, BORDER_STRONG, CARD, GOLD, INK, MUTED, PARCH, RED, RED_BG, sans } from '../theme.js';
+  AMBER, AMBER_BG, BLUE, BODY, BORDER, BORDER_STRONG, CARD, CARD_ALT, ELEV, FS,
+  GOLD, INK, MUTED, PARCH, R, RED, RED_BG, SP, sans,
+} from '../theme.js';
+import InstitutionCard from '../primitives/InstitutionCard.jsx';
+import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
+import { buildTownMapModel } from '../../domain/townMap/index.js';
 import {
-  TOWN_MAP_LENS_IDS, buildTownMapPanoramaDrawList, buildChangeView,
-} from '../../domain/townMap/index.js';
-import {
-  readLegendPrefs, readStyleLens,
-  withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref, withStyleLens,
+  readMapEdits, readLegendPrefs, normalizeMapEdits,
+  withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref,
 } from '../../domain/townMap/mapEdits.js';
-import { useActiveSkin } from './useActiveSkin.js';
-import { useFinePointer } from './useFinePointer.js';
-import { useTownMapPresentation } from './useTownMapPresentation.js';
-import { useTownScenePaneBridge } from './useTownScenePaneBridge.js';
 import { deriveAllDistricts } from '../../domain/districtProfile.js';
 import { buildingHoverModel } from './hoverModel.js';
-import { districtProvenance, mapProvenanceStory } from './provenanceModel.js';
-import { buildEdgeAnnotations } from './edgeAnnotations.js';
 import { districtColor } from './palette.js';
-import SettlementMapNotes from './SettlementMapNotes.jsx';
-import SettlementMapEdgeLabels from './SettlementMapEdgeLabels.jsx';
-import SettlementMapAnnotations from './SettlementMapAnnotations.jsx';
-import AnnotationComposer from './AnnotationComposer.jsx';
-import { useMapCamera } from './useMapCamera.js';
-import { useMapAnnotations } from './useMapAnnotations.js';
-import { useMapLayerAnalytics } from './useMapLayerAnalytics.js';
 import SettlementMapEditControls from './SettlementMapEditControls.jsx';
-import SettlementMapExportMenu from './SettlementMapExportMenu.jsx';
-import SettlementMapPresentation from './SettlementMapPresentation.jsx';
-import SettlementMapActiveCard from './SettlementMapActiveCard.jsx';
-// THE NON-WATER LANDFORM (task #38 fenced follow-up) — the marsh/dune/mountain terrain
-// texture, drawn under the urban layer from the SAME marks the exports use. A lazy leaf
-// (re-export idiom) so the max-lines-capped pane grows by one element, not a block.
-import SettlementMapLandform from './SettlementMapLandform.jsx';
-// THE VTT GRID + THE ILLUSTRATED UNDERLAY — two static map-space leaves (the landform
-// precedent), kept out-of-file so the max-lines-capped pane grows by a call, not a block.
-// The underlay is the illustrated lens's SINGLE art source (the same buildTownMapDrawList
-// the exports use), mounted under the interactive layers whose fills go transparent.
-import SettlementMapGrid from './SettlementMapGrid.jsx';
-import SettlementMapIllustratedUnderlay from './SettlementMapIllustratedUnderlay.jsx';
-import SettlementMapAgeOverlay from './SettlementMapAgeOverlay.jsx'; // V-15 THE AGED MAP (self-gates on the shared timelapseTick; toggle-off ⇒ byte-exact)
-// IT3-c — the DM season-override control (a lazy leaf; the pane is max-lines-capped so this
-// stays out-of-file, mounted only in illustrated edit mode).
-import SettlementMapSeasonControl from './SettlementMapSeasonControl.jsx';
-// DOOR 2 — THE TABLE LAYER (fog of war). The pane threads three leaves: the map-space overlay
-// (+ the reveal-brush capture), the wiring hook (optimistic mirror + persist + controller), and
-// the DM chrome (controls + lazy player view + handout export). Kept out-of-file so the pane
-// (a max-lines-capped hot file) grows by a handful of lines, not a block (lazy leaf + re-export).
-import SettlementMapFog, { FogBrushCapture } from './fog/SettlementMapFog.jsx';
-import SettlementMapFogChrome from './fog/SettlementMapFogChrome.jsx';
-import { useFogLayer } from './fog/useFogLayer.js';
 
-/**
- * Build sentinel (the TOWN_SCENE_3D_LAZY_SENTINEL precedent), stamped onto the
- * pane's root element so minification cannot drop it. The town-map MODEL has its
- * own fork-key fingerprint, but that literal is also minted in the dossier
- * backdrop, so it cannot answer "which chunk is THIS component in". TC-0's
- * chunk-separation pin (tests/build/mapTabShellLazy.test.js) needs an exact one.
- */
-export const TOWN_MAP_PANE_LAZY_SENTINEL = 'settlementforge:town-map-pane:lazy-v1';
-
+const clampScale = (s) => Math.max(0.2, Math.min(8, s));
 const pointsOf = (polygon) => polygon.map(([x, y]) => `${x},${y}`).join(' ');
 // Apply a transient drag-preview offset (map units) to a polygon / point.
 const offsetPoints = (polygon, p) => (p ? polygon.map(([x, y]) => [x + p.dx, y + p.dy]) : polygon);
 const offsetXY = (x, y, p) => (p ? { x: x + p.dx, y: y + p.dy } : { x, y });
 
+/** True when the device has a fine pointer (desktop) — the edit posture. Absent
+ *  matchMedia (SSR / jsdom) ⇒ treat as desktop so the affordances are testable;
+ *  real mobile browsers report coarse and hide them. */
+function detectFinePointer() {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return true;
+  try { return window.matchMedia('(pointer: fine)').matches; } catch { return true; }
+}
+
 /**
- * @param {{
- *   settlement: any,
- *   canEdit?: boolean,
- *   saveId?: string|number|null,
- *   worldState?: any,
- *   regionalGraph?: any,
- *   audience?: 'dm'|'player'|'public',
- *   presentation?: 'plan'|'panorama'|'portrait3d'|null,
- *   onPresentationChange?: ((view: string) => void)|null,
- * }} props
- * `presentation` / `onPresentationChange` (TC-0, §12 / J-TC-8, OPTIONAL and absent by
- * default) hand the projection choice to the dossier Map tab's SUB-TAB SHELL. Supplied ⇒
- * the shell's strip is the only view switch (this pane's own Segmented stands down) and
- * every change from below — including the silent scene fallback — is reported up. Absent
- * (the public gallery dossier, the library hero) ⇒ byte-identical to before.
- * `worldState` (IT-3, OPTIONAL) is the campaign's live clock context — its `.calendar.season`
- * paints the illustrated map's SEASON and its `.rngSeed` re-derives the year's severity (via
- * resolveMapDress). `regionalGraph` (OPTIONAL) feeds the siege-works STATE read. Absent (a
- * standalone library detail / the public gallery) ⇒ seasonless base bytes (the dormancy law).
- * Never stored on the settlement.
+ * @param {{ settlement: any, canEdit?: boolean, saveId?: string|number|null }} props
  */
-export default function SettlementMapPane({
-  settlement: sourceSettlement,
-  canEdit = false,
-  saveId = null,
-  worldState = null,
-  regionalGraph = null,
-  audience = 'dm',
-  presentation = null, onPresentationChange = null,
-}) {
+export default function SettlementMapPane({ settlement, canEdit = false, saveId = null }) {
   const applyMapEdit = useStore(s => s.applyMapEdit);
-  const desktop = useFinePointer();
 
-  const {
-    settlement, settlementKey, mapEdits, lensOverride, setLensOverride,
-    model, dress, authoringSaveId, editing, sceneSelectable,
-    presentedViewMode, commitEdits, canUndoEdits, canRedoEdits,
-    undoEdits, redoEdits, selectView, rememberLens, handleSceneFallback,
-  } = useTownMapPresentation({
-    sourceSettlement, audience, canEdit, desktop, saveId,
-    worldState, regionalGraph, applyMapEdit,
-    controlledView: presentation, onControlledViewChange: onPresentationChange,
-  });
+  // ── SM-3 cosmetic edit state ────────────────────────────────────────────────
+  // Local OPTIMISTIC working edits (the PlacementsLayer dragPreview precedent):
+  // the model re-derives instantly, while applyMapEdit persists the blob-resident
+  // truth. Seeded from the settlement's persisted mapEdits; re-seeded when a
+  // DIFFERENT settlement is opened (keyed on its stable id). Absent ⇒ null ⇒ the
+  // model is byte-identical to view-only (the dormancy law).
+  const settlementKey = settlement?.id ?? settlement?._seed ?? null;
+  const [mapEdits, setMapEdits] = useState(() => readMapEdits(settlement));
+  // Re-seed the optimistic edits when a DIFFERENT settlement is opened — the
+  // React "adjust state on prop change" pattern (a setState DURING render, not in
+  // an effect: it re-renders before commit, no cascading effect). Keyed on the
+  // stable settlement id so re-renders of the SAME settlement keep the working edits.
+  const [seededKey, setSeededKey] = useState(settlementKey);
+  if (seededKey !== settlementKey) {
+    setSeededKey(settlementKey);
+    setMapEdits(readMapEdits(settlement));
+  }
+
+  const [desktop, setDesktop] = useState(detectFinePointer);
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return undefined;
+    let mq; try { mq = window.matchMedia('(pointer: fine)'); } catch { return undefined; }
+    const onChange = () => setDesktop(!!mq.matches);
+    mq.addEventListener?.('change', onChange);
+    return () => mq.removeEventListener?.('change', onChange);
+  }, []);
+
+  const editing = !!canEdit && saveId != null && desktop;
   const legendPrefs = readLegendPrefs(mapEdits);
-  const portraitActive = presentedViewMode === 'portrait3d';
 
-  // The active lens = the ephemeral override, else the persisted choice. For the
-  // DEFAULT (parchment) the pane keeps its theme-adaptive tokens (its pre-existing
-  // print-twin/screen divergence); a chosen lens paints from the style's concrete
-  // palette (imported from the src/design token zone — no raw hex in this file).
-  const activeLens = lensOverride ?? readStyleLens(mapEdits);
-  const handlePortraitFallback = useCallback(
-    (detail) => handleSceneFallback(detail, activeLens),
-    [activeLens, handleSceneFallback],
-  );
-  // THE SKIN REGISTRY (IT-4): the ACTIVE style OBJECT (a worn skin resolved through the settlement's
-  // bespoke collection), the viewer palette, the glyph-underlay flag, and the saved-skin list for
-  // the picker — a lazy leaf so the max-lines-capped pane grows by one call. All read the RESOLVED
-  // style OBJECT, so a skin's palette/glyphSet reach the viewer in lockstep with every export.
-  const { activeStyle, savedSkins, pal, illustrated } = useActiveSkin(mapEdits, activeLens);
-  // Role → concrete color: the lens palette when a lens is active, else theme tokens.
-  const C = {
-    water: pal ? pal.water : BLUE,
-    road: pal ? pal.road : MUTED,
-    street: pal ? pal.street : BORDER_STRONG,
-    anchorFill: pal ? pal.anchor : GOLD,
-    anchorStroke: pal ? pal.anchorStroke : INK,
-    wall: pal ? pal.wall : INK,
-    gateFill: pal ? pal.gate : PARCH,
-    gateStroke: pal ? pal.gateStroke : INK,
-    buildingIdle: pal ? pal.buildingFill : CARD,
-    ink: pal ? pal.ink : INK,
-    bg: pal ? pal.bg : PARCH,
-    hazHi: pal ? pal.hazardHigh : RED,
-    hazHiBg: pal ? pal.hazardHighBg : RED_BG,
-    hazMid: pal ? pal.hazardMid : AMBER,
-    hazMidBg: pal ? pal.hazardMidBg : AMBER_BG,
-  };
-  const districtTint = pal ? pal.district : districtColor;
-  const gridStep = pal ? pal.grid : 0;
-  // `illustrated` (from useActiveSkin) is true when the active style names a glyphSet: the pane
-  // mounts the static op-list underlay as the SOLE visual and turns the interactive layers into
-  // transparent hit-targets, so on-screen art and exports never diverge (design §4, two-paths cure).
+  // The single writer: update the optimistic view AND persist to the blob.
+  const commitEdits = useCallback((next) => {
+    const norm = normalizeMapEdits(next);
+    setMapEdits(norm);
+    if (saveId != null && typeof applyMapEdit === 'function') applyMapEdit(saveId, norm);
+  }, [saveId, applyMapEdit]);
 
-  // THE SEASON/STATE PORTRAIT (IT-3): the bounded MapDress resolved from the live worldState —
-  // threaded into the illustrated underlay + every export so the season paints ONE geometry.
-  // Absent worldState ⇒ null ⇒ seasonless base bytes (the dormancy law). Never persisted.
-  // The oblique panorama draw-ops — computed only in panorama mode, under the active
-  // lens (so it re-poses the SAME model the plan shows, honoring edits + lens). The `dress`
-  // composes the season/state portrait onto the illustrated panorama (IT5-b), matching the
-  // plan-view underlay for WYSIWYG; a base lens ignores it (dormancy ⇒ byte-identical).
-  const panoramaOps = useMemo(
-    () => (presentedViewMode === 'panorama'
-      ? buildTownMapPanoramaDrawList(model, activeStyle, dress)
-      : null),
-    [presentedViewMode, model, activeStyle, dress],
-  );
+  const model = useMemo(() => buildTownMapModel(settlement, mapEdits), [settlement, mapEdits]);
   const districtsById = useMemo(() => {
     const m = new Map();
     for (const d of deriveAllDistricts(settlement)) m.set(d.id, d);
     return m;
   }, [settlement]);
-  // THE LEGIBILITY DRAWER (SM-5) — the map-level surveyor's read (response mode +
-  // site cause + declined-advantage map). Null for a v1 map ⇒ the drawer self-gates.
-  const mapStory = useMemo(() => mapProvenanceStory(model), [model]);
-  // THE CHANGE VIEW (SM-5) — the chronicle's spatial twin. Empty-when-dark by the
-  // fabricRead contract; the drawer shows a whisper then. `rebuiltClasses` drives a
-  // restrained on-map cue (dashed accent) on quarters rebuilt after a catastrophe.
-  const changeView = useMemo(() => buildChangeView(settlement), [settlement]);
-  const rebuiltClasses = useMemo(() => new Set(changeView.rebuiltClasses), [changeView]);
-  // EDGE ANNOTATIONS (SM-5) — the map's exits labelled to named neighbours. Honest:
-  // names + relationship only (the town-scale data carries no distance), no invented
-  // numbers. Empty ⇒ no labels, no drawer section (a neighbour-less town is unchanged).
-  const edgeAnnotations = useMemo(() => buildEdgeAnnotations(model, settlement), [model, settlement]);
 
   const wrapperRef = useRef(null);
   const gRef = useRef(null);
   const transformRef = useRef({ tx: 0, ty: 0, scale: 1, width: 0, height: 0 });
   const fittedRef = useRef(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
-
-  // THE DM PIN/ANNOTATION LAYER (SM-5) — annotate-mode, the click-to-place composer,
-  // and the persisted markers (mapEdits.annotations). Editing rides the SAME `editing`
-  // gate as every cosmetic edit; the final free/premium split is one predicate away
-  // (owner-pending). Markers ride the blob and show for every viewer of the owner map.
-  // MAP-LAYER ANALYTICS (SM-5) — the generation profile + legibility engagement, one
-  // feature-discriminated event, best-effort, from the UI layer only.
-  const mapAnalytics = useMapLayerAnalytics({ model, settlement, hasEdgeLabels: edgeAnnotations.length > 0 });
-  const ann = useMapAnnotations({
-    mapEdits, editing, commitEdits, wrapperRef, transformRef,
-    onAdded: (count) => mapAnalytics.fire('annotation_add', { count }),
-  });
-  // DOOR 2 THE TABLE LAYER — the fog wiring (optimistic mirror + persist + reveal-brush/session
-  // controller), bundled in a leaf so the pane grows by one call. Analytics ride SM-5's map-layer
-  // helper, feature-discriminated (fog_session / fog_reveal), enums/counts only, best-effort.
-  const fog = useFogLayer({
-    settlement,
-    settlementKey,
-    model,
-    editing,
-    saveId: authoringSaveId,
-    wrapperRef,
-    transformRef,
-    fire: mapAnalytics.fire,
-  });
 
   // Interaction state machine: displayed card = pinned ?? hovered.
   // Each entry: { kind:'building'|'district'|'hazard'|'condition', payload, anchor:{x,y} }.
@@ -292,8 +166,85 @@ export default function SettlementMapPane({
     }
   }, [size.width, size.height, writeTransform]);
 
-  // ── Self-owned pan / wheel-zoom / two-pointer pinch (extracted leaf) ─────────
-  useMapCamera({ wrapperRef, transformRef, writeTransform });
+  // ── Self-owned pan / wheel-zoom / two-pointer pinch ─────────────────────────
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return undefined;
+    const pointers = new Map();
+    let panning = false; let lastX = 0; let lastY = 0;
+    /** @type {{ dist:number, cx:number, cy:number, scale:number, tx:number, ty:number }|null} */
+    let pinch = null;
+    // Pan starts only on the map background (svg / wrapper / the bg rect) —
+    // buildings and districts own their own hover/click. MapOverlay precedent.
+    const isBackground = (target) => target === el || target.tagName === 'svg'
+      || target.getAttribute?.('data-town-bg') != null;
+
+    const beginPinch = () => {
+      const pts = [...pointers.values()];
+      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+      const rect = el.getBoundingClientRect();
+      pinch = {
+        dist,
+        cx: (pts[0].x + pts[1].x) / 2 - rect.left,
+        cy: (pts[0].y + pts[1].y) / 2 - rect.top,
+        scale: transformRef.current.scale,
+        tx: transformRef.current.tx,
+        ty: transformRef.current.ty,
+      };
+    };
+
+    const onDown = (e) => {
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pointers.size === 2) { panning = false; beginPinch(); return; }
+      if (pointers.size !== 1) return;
+      if (e.button != null && e.button > 0) return; // primary / touch only
+      if (!isBackground(e.target)) return;
+      panning = true; lastX = e.clientX; lastY = e.clientY;
+      try { el.setPointerCapture?.(e.pointerId); } catch { /* ignore */ }
+    };
+    const onMove = (e) => {
+      if (pointers.has(e.pointerId)) pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pinch && pointers.size >= 2) {
+        const pts = [...pointers.values()];
+        const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+        const next = clampScale(pinch.scale * (dist / pinch.dist));
+        const k = next / pinch.scale;
+        writeTransform({ scale: next, tx: pinch.cx - (pinch.cx - pinch.tx) * k, ty: pinch.cy - (pinch.cy - pinch.ty) * k });
+        return;
+      }
+      if (!panning) return;
+      writeTransform({ tx: transformRef.current.tx + (e.clientX - lastX), ty: transformRef.current.ty + (e.clientY - lastY) });
+      lastX = e.clientX; lastY = e.clientY;
+    };
+    const onUp = (e) => {
+      pointers.delete(e.pointerId);
+      if (pointers.size < 2) pinch = null;
+      if (pointers.size === 0) panning = false;
+      try { el.releasePointerCapture?.(e.pointerId); } catch { /* ignore */ }
+    };
+    const onWheel = (e) => {
+      e.preventDefault();
+      const rect = el.getBoundingClientRect();
+      const cx = e.clientX - rect.left; const cy = e.clientY - rect.top;
+      const factor = e.deltaY < 0 ? 1.1 : 1 / 1.1;
+      const next = clampScale(transformRef.current.scale * factor);
+      const k = next / transformRef.current.scale;
+      writeTransform({ scale: next, tx: cx - (cx - transformRef.current.tx) * k, ty: cy - (cy - transformRef.current.ty) * k });
+    };
+
+    el.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      el.removeEventListener('pointerdown', onDown);
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
+      el.removeEventListener('wheel', onWheel);
+    };
+  }, [writeTransform]);
 
   // ── Hover / pin handlers (touch drops hover; tap pins) ──────────────────────
   const anchorFrom = (e) => ({ x: e.clientX, y: e.clientY });
@@ -311,30 +262,13 @@ export default function SettlementMapPane({
   };
 
   const districtCardFor = (mapDistrict) => districtsById.get(mapDistrict.id) || null;
-  // THE MAP EXPLAINS ITSELF (SM-5) — the v2 engine's recorded cause(s) for this
-  // quarter, joined by district id. A v1 model has no provenance ⇒ [] ⇒ the card
-  // shows no section (graceful degradation, never a broken affordance).
-  const districtPayload = (mapDistrict) => ({
-    mapDistrict,
-    profile: districtCardFor(mapDistrict),
-    provenance: districtProvenance(model, mapDistrict.id),
-  });
-  const sceneBridge = useTownScenePaneBridge({
-    settlement, mapEdits, worldState, regionalGraph, audience, editing,
-    commitEdits, model, wrapperRef, districtPayload, setPinned,
-    authoringSaveId, selectView, activeLens, mapAnalytics,
-    selectedNodeId: pinned?.sceneId || null,
-    canUndoEdits, canRedoEdits, undoEdits, redoEdits,
-  });
   const onDistrictEnter = (mapDistrict) => (e) => {
     if (e.pointerType === 'touch') return;
-    const payload = districtPayload(mapDistrict);
-    if (payload.provenance.length > 0) mapAnalytics.fireOnce('provenance_hover');
-    setHovered({ kind: 'district', payload, anchor: anchorFrom(e) });
+    setHovered({ kind: 'district', payload: { mapDistrict, profile: districtCardFor(mapDistrict) }, anchor: anchorFrom(e) });
   };
   const onDistrictClick = (mapDistrict) => (e) => {
     e.stopPropagation();
-    setPinned({ kind: 'district', payload: districtPayload(mapDistrict), anchor: anchorFrom(e) });
+    setPinned({ kind: 'district', payload: { mapDistrict, profile: districtCardFor(mapDistrict) }, anchor: anchorFrom(e) });
   };
 
   const onOverlayEnter = (kind, payload) => (e) => {
@@ -396,16 +330,6 @@ export default function SettlementMapPane({
   const doToggleLabels = () => commitEdits(withLegendPref(mapEdits, 'showLabels', !legendPrefs.showLabels));
   const doToggleLegend = () => commitEdits(withLegendPref(mapEdits, 'showLegend', !legendPrefs.showLegend));
   const doReset = () => commitEdits(null);
-  // Pick a lens: always update the ephemeral view; PERSIST it when the owner can
-  // edit (rides applyMapEdit into the blob, honored on every full-blob read). Free
-  // + instant + non-destructive — a re-skin never touches geometry or an edit. The
-  // trailing writeLastMapView records the device-local last-lens for THE LIVING
-  // BACKDROP (localStorage only; independent of the blob).
-  const doPickLens = (id) => {
-    setLensOverride(id); if (editing) commitEdits(withStyleLens(mapEdits, id));
-    mapAnalytics.fire('lens_switch', { lens: id });
-    rememberLens(id);
-  };
   const hasEdits = !!mapEdits;
 
   const active = pinned ?? hovered;
@@ -426,31 +350,22 @@ export default function SettlementMapPane({
   return (
     <div
       ref={wrapperRef}
-      data-town-map={TOWN_MAP_PANE_LAZY_SENTINEL}
+      data-town-map
       style={{
         position: 'relative',
         width: '100%',
         height: 'min(72vh, 720px)',
         minHeight: 360,
         border: `1px solid ${BORDER}`,
-        background: C.bg,
+        borderRadius: R.lg,
+        background: PARCH,
         overflow: 'hidden',
-        // The 2D plan owns pan/pinch gestures. Portrait contains a stacked,
-        // scrollable semantic companion on narrow screens, so its outer surface
-        // must permit vertical navigation; the WebGL canvas opts itself back
-        // into `touch-action:none` for orbit and pinch.
-        touchAction: presentedViewMode === 'portrait3d' ? 'pan-y' : 'none',
+        touchAction: 'none',
         cursor: 'grab',
       }}
     >
       <svg
-        aria-hidden={portraitActive ? 'true' : undefined}
-        inert={portraitActive ? true : undefined}
-        style={{
-          display: 'block', width: '100%', height: '100%', overflow: 'hidden',
-          visibility: portraitActive ? 'hidden' : 'visible',
-          pointerEvents: portraitActive ? 'none' : 'auto',
-        }}
+        style={{ display: 'block', width: '100%', height: '100%', overflow: 'hidden' }}
         viewBox={`0 0 ${size.width || 1} ${size.height || 1}`}
         preserveAspectRatio="none"
         role="img"
@@ -463,66 +378,51 @@ export default function SettlementMapPane({
           data-town-bg
           x={0} y={0} width={size.width || 1} height={size.height || 1}
           fill="transparent"
-          onClick={(e) => { if (ann.beginCompose(e)) return; clearPin(); }}
-          style={{ pointerEvents: 'all', cursor: ann.annotateMode ? 'crosshair' : undefined }}
+          onClick={clearPin}
+          style={{ pointerEvents: 'all' }}
         />
         <g ref={gRef}>
-          {/* ── THE ILLUSTRATED UNDERLAY — the illustrated lens's SINGLE art source (the
-              same buildTownMapDrawList the exports use), mounted UNDER the interactive
-              layers; the plain visual layers below self-suppress and the interactive
-              fills go transparent for hit-testing (design §4, the two-paths cure). ─── */}
-          {illustrated && <SettlementMapIllustratedUnderlay model={model} lens={activeStyle} dress={dress} />}
-          <SettlementMapAgeOverlay model={model} settlement={settlement} ink={C.ink} />
-
-          {/* ── VTT coordinate grid (a functional lens; drawn beneath the map) ── */}
-          <SettlementMapGrid step={gridStep} ink={C.ink} />
-
-          {/* ── water (suppressed under the illustrated underlay) ──────────── */}
-          {!illustrated && frame.water && (
+          {/* ── water ─────────────────────────────────────────────────────── */}
+          {frame.water && (
             frame.water.kind === 'coast'
               ? (
                 <polygon
                   data-town-water
                   points={`${pointsOf(frame.water.path)} 1000,1000 0,1000`}
-                  fill={C.water} fillOpacity={0.16} stroke={C.water} strokeOpacity={0.5} strokeWidth={2}
+                  fill={BLUE} fillOpacity={0.16} stroke={BLUE} strokeOpacity={0.5} strokeWidth={2}
                 />
               )
               : (
                 <polyline
                   data-town-water
                   points={pointsOf(frame.water.path)}
-                  fill="none" stroke={C.water} strokeOpacity={0.55} strokeWidth={14} strokeLinecap="round" strokeLinejoin="round"
+                  fill="none" stroke={BLUE} strokeOpacity={0.55} strokeWidth={14} strokeLinecap="round" strokeLinejoin="round"
                 />
               )
           )}
 
-          {/* ── non-water landform (marsh reeds / dune contours / mountain
-              hachures) — terrain texture beneath the urban layer. Renders nothing
-              for a water/plain/v1 site. Honors the active lens (WYSIWYG). ────── */}
-          {!illustrated && <SettlementMapLandform landform={frame.landform} lens={activeStyle} ink={C.ink} />}
-
           {/* ── approach roads ────────────────────────────────────────────── */}
-          {!illustrated && frame.roads.map((r) => (
+          {frame.roads.map((r) => (
             <line
               key={r.id}
               x1={r.from[0]} y1={r.from[1]} x2={r.to[0]} y2={r.to[1]}
-              stroke={C.road} strokeOpacity={0.5} strokeWidth={2 + r.weight} strokeLinecap="round"
+              stroke={MUTED} strokeOpacity={0.5} strokeWidth={2 + r.weight} strokeLinecap="round"
             />
           ))}
 
-          {/* ── skeleton streets + anchor (suppressed under the illustrated underlay) ─ */}
-          {!illustrated && skeleton.streets.map((st, i) => (
+          {/* ── skeleton streets + anchor ─────────────────────────────────── */}
+          {skeleton.streets.map((st, i) => (
             <line
               key={`street.${i}`}
               x1={st.from.x} y1={st.from.y} x2={st.to.x} y2={st.to.y}
-              stroke={C.street} strokeOpacity={0.55} strokeWidth={3} strokeLinecap="round"
+              stroke={BORDER_STRONG} strokeOpacity={0.55} strokeWidth={3} strokeLinecap="round"
             />
           ))}
-          {!illustrated && <circle cx={skeleton.anchor.x} cy={skeleton.anchor.y} r={8} fill={C.anchorFill} stroke={C.anchorStroke} strokeWidth={1.5} />}
+          <circle cx={skeleton.anchor.x} cy={skeleton.anchor.y} r={8} fill={GOLD} stroke={INK} strokeWidth={1.5} />
 
           {/* ── district polygons (drawn first → buildings win z-order) ────── */}
           {districts.map((d) => {
-            const color = districtTint(d.category);
+            const color = districtColor(d.category);
             const on = hoverKey === d.id;
             const pv = previewFor(d.anchorKey);
             const poly = offsetPoints(d.polygon, pv);
@@ -532,9 +432,9 @@ export default function SettlementMapPane({
                   data-town-district={d.id}
                   points={pointsOf(poly)}
                   fill={color}
-                  fillOpacity={illustrated ? (on ? 0.24 : 0) : (on ? 0.24 : 0.14)}
+                  fillOpacity={on ? 0.24 : 0.14}
                   stroke={color}
-                  strokeOpacity={illustrated ? (on ? 0.95 : 0) : (on ? 0.95 : 0.45)}
+                  strokeOpacity={on ? 0.95 : 0.45}
                   strokeWidth={on ? 3 : 1.5}
                   style={{ cursor: editing ? 'move' : 'pointer', pointerEvents: 'auto' }}
                   onPointerEnter={onDistrictEnter(d)}
@@ -545,26 +445,12 @@ export default function SettlementMapPane({
                   onPointerCancel={editing ? endDrag : undefined}
                   onClick={(e) => { if (consumedDragClick()) return; onDistrictClick(d)(e); }}
                 />
-                {/* aggregate lodging/mass-residential → a subtle district-fill accent
-                    (suppressed under the illustrated underlay, which draws it) */}
-                {!illustrated && districtsWithFill.has(d.id) && (
+                {/* aggregate lodging/mass-residential → a subtle district-fill accent */}
+                {districtsWithFill.has(d.id) && (
                   <polygon
                     points={pointsOf(poly)}
                     fill={color} fillOpacity={0.08}
                     stroke="none"
-                    style={{ pointerEvents: 'none' }}
-                  />
-                )}
-                {/* THE CHANGE VIEW (SM-5) — a restrained dashed accent on quarters
-                    rebuilt after a catastrophe (fabric rebirths). Dormant when the
-                    fabric records no rebuild ⇒ the common map is visually unchanged. */}
-                {rebuiltClasses.has(d.category) && (
-                  <polygon
-                    data-town-rebuilt={d.id}
-                    points={pointsOf(poly)}
-                    fill="none"
-                    stroke={C.ink} strokeOpacity={0.7} strokeWidth={2}
-                    strokeDasharray="6 4"
                     style={{ pointerEvents: 'none' }}
                   />
                 )}
@@ -574,8 +460,8 @@ export default function SettlementMapPane({
                   return (
                     <text
                       x={c.x} y={c.y} textAnchor="middle" dominantBaseline="central"
-                      fill={C.ink} fontFamily={sans} fontSize={13} fontWeight={700}
-                      stroke={C.bg} strokeWidth={3} paintOrder="stroke"
+                      fill={INK} fontFamily={sans} fontSize={13} fontWeight={700}
+                      stroke={PARCH} strokeWidth={3} paintOrder="stroke"
                       style={{ pointerEvents: 'none', userSelect: 'none' }}
                     >
                       {d.name}
@@ -586,24 +472,24 @@ export default function SettlementMapPane({
             );
           })}
 
-          {/* ── fortifications (walls + gates; suppressed under the illustrated underlay) ─ */}
-          {!illustrated && fortifications && (
+          {/* ── fortifications (walls + gates) ────────────────────────────── */}
+          {fortifications && (
             <g style={{ pointerEvents: 'none' }}>
               <polygon
                 data-town-walls
                 points={pointsOf(fortifications.walls)}
-                fill="none" stroke={C.wall} strokeOpacity={0.8}
+                fill="none" stroke={INK} strokeOpacity={0.8}
                 strokeWidth={1.5 + fortifications.wallWeight} strokeLinejoin="round"
               />
               {fortifications.gates.map((g, i) => (
-                <circle key={`gate.${i}`} cx={g.x} cy={g.y} r={7} fill={C.gateFill} stroke={C.gateStroke} strokeWidth={2} />
+                <circle key={`gate.${i}`} cx={g.x} cy={g.y} r={7} fill={PARCH} stroke={INK} strokeWidth={2} />
               ))}
             </g>
           )}
 
           {/* ── building landmarks (fill buildings render as the accent above) ─ */}
           {buildings.filter((b) => b.kind === 'landmark').map((b) => {
-            const color = districtTint(districts.find((d) => d.id === b.districtId)?.category);
+            const color = districtColor(districts.find((d) => d.id === b.districtId)?.category);
             const on = hoverKey === b.anchorKey;
             const s = on ? 11 : 8;
             const pv = previewFor(b.anchorKey);
@@ -614,9 +500,9 @@ export default function SettlementMapPane({
                 data-town-building={b.anchorKey}
                 x={pos.x - s} y={pos.y - s} width={s * 2} height={s * 2}
                 rx={3}
-                fill={illustrated ? 'transparent' : (on ? color : C.buildingIdle)}
+                fill={on ? color : CARD}
                 fillOpacity={on ? 0.9 : 1}
-                stroke={illustrated ? (on ? color : 'transparent') : color} strokeWidth={on ? 2.5 : 1.5}
+                stroke={color} strokeWidth={on ? 2.5 : 1.5}
                 style={{ cursor: editing ? 'move' : 'pointer', pointerEvents: 'auto' }}
                 onPointerEnter={onBuildingEnter(b)}
                 onPointerLeave={clearHover}
@@ -646,9 +532,9 @@ export default function SettlementMapPane({
                 onClick={onOverlayClick('condition', c)}
               >
                 <rect x={-9} y={-9} width={18} height={18} rx={4}
-                  fill={illustrated && !on ? 'transparent' : (high ? C.hazHiBg : C.hazMidBg)} stroke={illustrated && !on ? 'transparent' : (high ? C.hazHi : C.hazMid)}
+                  fill={high ? RED_BG : AMBER_BG} stroke={high ? RED : AMBER}
                   strokeWidth={on ? 2.5 : 1.5} />
-                <circle cx={0} cy={0} r={2.5} fill={illustrated && !on ? 'transparent' : (high ? C.hazHi : C.hazMid)} />
+                <circle cx={0} cy={0} r={2.5} fill={high ? RED : AMBER} />
               </g>
             );
           })}
@@ -668,89 +554,15 @@ export default function SettlementMapPane({
                 onClick={onOverlayClick('hazard', h)}
               >
                 <path d="M 0 -10 L 9 6 L -9 6 Z"
-                  fill={illustrated && !on ? 'transparent' : (high ? C.hazHiBg : C.hazMidBg)} stroke={illustrated && !on ? 'transparent' : (high ? C.hazHi : C.hazMid)}
+                  fill={high ? RED_BG : AMBER_BG} stroke={high ? RED : AMBER}
                   strokeWidth={on ? 2.5 : 1.5} strokeLinejoin="round" />
-                <rect x={-1} y={-4} width={2} height={5} fill={illustrated && !on ? 'transparent' : (high ? C.hazHi : C.hazMid)} />
-                <rect x={-1} y={2} width={2} height={2} fill={illustrated && !on ? 'transparent' : (high ? C.hazHi : C.hazMid)} />
+                <rect x={-1} y={-4} width={2} height={5} fill={high ? RED : AMBER} />
+                <rect x={-1} y={2} width={2} height={2} fill={high ? RED : AMBER} />
               </g>
             );
           })}
-
-          {/* ── EDGE ANNOTATIONS (SM-5) — the map's exits labelled to named
-              neighbours (drawn last so labels read over the linework). ──────── */}
-          <SettlementMapEdgeLabels annotations={edgeAnnotations} ink={C.ink} bg={C.bg} />
-
-          {/* ── DM PIN/ANNOTATION LAYER (SM-5) — the owner's persisted markers;
-              DM-only vs player-visible distinguished visually. ─────────────── */}
-          <SettlementMapAnnotations
-            annotations={ann.annotations}
-            editing={ann.annotateMode}
-            onRemove={ann.removeAnnotation}
-            ink={C.ink} bg={C.bg} accent={C.anchorFill}
-          />
-
-          {/* ── DOOR 2 THE TABLE LAYER — the fog overlay (last child ⇒ on top of the
-              linework, in 0..1000 map space so it pans/zooms). The DM sees a light
-              tint marking what players cannot see; the player view / handout render
-              the SAME mask opaque (WYSIWYG). pointerEvents:none — the brush + hover
-              handlers underneath still fire. ─────────────────────────────────── */}
-          <SettlementMapFog model={model} reveal={fog.activeReveal} color={C.ink} />
         </g>
-
-        {/* ── DOOR 2 the reveal-BRUSH capture (screen space, on top of <g> so a click
-            anywhere on the map snaps to the nearest feature). ─────────────────── */}
-        <FogBrushCapture fog={fog} width={size.width} height={size.height} enabled={presentedViewMode === 'plan'} />
       </svg>
-
-      {/* Projection overlays + switch. The leaf owns the nested lazy boundary,
-          so Three, the worker, and scene geometry stay absent until Portrait is
-          explicitly selected (or later promoted on an eligible device). */}
-      {(districts.length > 0 || buildings.length > 0) && (
-        <SettlementMapPresentation
-          viewMode={presentedViewMode}
-          onViewModeChange={sceneBridge.onViewChange}
-          sceneEnabled={sceneSelectable}
-          panoramaOps={panoramaOps}
-          background={C.bg}
-          settlementName={settlement?.name}
-          onSceneFallback={handlePortraitFallback}
-          sceneProps={sceneBridge.sceneProps}
-          showSwitch={presentation == null}
-        />
-      )}
-
-      {/* Export is shared chrome: its lazy actions cover both the canonical plan
-          and deterministic Portrait artifacts, so it survives either view. */}
-      {authoringSaveId != null && (districts.length > 0 || buildings.length > 0) && (
-        <SettlementMapExportMenu
-          settlement={settlement} saveId={authoringSaveId} style={activeLens}
-          dress={dress} mapEdits={mapEdits} worldState={worldState}
-          regionalGraph={regionalGraph} audience={audience}
-        />
-      )}
-
-      {/* Keep plan-only controls out of the accessibility and interaction trees
-          while Portrait is active. The canonical SVG itself remains mounted. */}
-      <div data-town-plan-chrome hidden={portraitActive} inert={portraitActive ? true : undefined}>
-        <AnnotationComposer
-          key={ann.composing ? `${ann.composing.x}:${ann.composing.y}:${ann.composing.screenX}` : 'idle'}
-          composing={ann.composing}
-          onAdd={ann.addAnnotation}
-          onCancel={ann.cancelCompose}
-        />
-
-      {/* ── IT3-c THE SEASON OVERRIDE — a DM pins the illustrated map's season (self-contained
-          lazy leaf; only in illustrated EDIT mode, writing a persisted mapEdits key). ── */}
-      {illustrated && editing && <SettlementMapSeasonControl mapEdits={mapEdits} onCommit={commitEdits} />}
-
-      {/* ── SM-5 THE LEGIBILITY DRAWER — a left-edge "Read" drawer surfacing the
-          surveyor's read (+ change view + roads out, added in their deliverables).
-          Self-gates: renders nothing when no section has content (e.g. a v1 map). ── */}
-      <SettlementMapNotes
-        settlement={settlement} story={mapStory} changes={changeView} roads={edgeAnnotations}
-        entitled={!!canEdit}
-        onOpen={() => mapAnalytics.fireOnce('change_view')}
-      />
 
       {/* ── SM-3 edit chrome (desktop + canEdit + a saved blob only) + the
           legend (a legendPref honored for every viewer once set) ──────────── */}
@@ -760,34 +572,142 @@ export default function SettlementMapPane({
         legendPrefs={legendPrefs}
         hasEdits={hasEdits}
         districts={districts}
-        styleIds={TOWN_MAP_LENS_IDS} bespokeSkins={savedSkins}
-        activeLens={activeLens}
-        lensPersisted={editing}
-        onPickLens={doPickLens}
         onReroll={doReroll}
         onToggleLabels={doToggleLabels}
         onToggleLegend={doToggleLegend}
         onReset={doReset}
-        annotating={ann.annotateMode}
-        onToggleAnnotate={ann.toggleAnnotate}
-        entitled={!!canEdit}
-        savedMap={authoringSaveId != null}
       />
 
-      {/* ── DOOR 2 THE TABLE LAYER — the DM fog chrome (controls + live player view +
-          handout export). Owner-only by construction (saveId present); the panel self-
-          gates its edit affordances on `editing`. All rendering lives in the leaf. ── */}
-      {authoringSaveId != null && (districts.length > 0 || buildings.length > 0) && (
-        <SettlementMapFogChrome fog={fog} editing={editing} entitled={!!canEdit} settlement={settlement} activeLens={activeLens} fire={mapAnalytics.fire} />
+      {/* ── Cards / labels (displayed = pinned ?? hovered) ─────────────────── */}
+      {active && active.kind === 'building' && isPinned && active.payload.show && (
+        <InstitutionCard
+          open
+          institution={active.payload.institution}
+          settlement={settlement}
+          onClose={clearPin}
+        />
       )}
+      {active && active.kind === 'building' && !isPinned && active.payload.show && (
+        <FloatingLabel anchor={active.anchor}>
+          <strong style={{ color: INK, fontWeight: 800 }}>{active.payload.institution?.name}</strong>
+          <span style={{ color: MUTED }}> — click for profile</span>
+        </FloatingLabel>
+      )}
+      {active && active.kind === 'district' && (
+        <DistrictCard
+          anchor={active.anchor}
+          mapDistrict={active.payload.mapDistrict}
+          profile={active.payload.profile}
+          pinned={isPinned}
+          onClose={clearPin}
+        />
+      )}
+      {active && (active.kind === 'hazard' || active.kind === 'condition') && (
+        <FloatingLabel anchor={active.anchor}>
+          <strong style={{ color: INK, fontWeight: 800 }}>{active.payload.label || active.payload.archetype}</strong>
+          <span style={{ color: MUTED }}>{` · ${active.payload.severityBand || ''}`}</span>
+        </FloatingLabel>
+      )}
+    </div>
+  );
+}
 
-      <SettlementMapActiveCard
-        active={active}
-        isPinned={isPinned}
-        settlement={settlement}
-        onClose={clearPin}
-      />
+// ── Small floating popover shell, viewport-clamped ────────────────────────────
+function clampAnchor(anchor, w, h) {
+  if (typeof window === 'undefined') return { left: (anchor?.x || 0) + 14, top: (anchor?.y || 0) + 14 };
+  const vw = window.innerWidth || 1024;
+  const vh = window.innerHeight || 768;
+  const left = Math.min((anchor?.x || 0) + 14, vw - w - 12);
+  const top = Math.min((anchor?.y || 0) + 14, vh - h - 12);
+  return { left: Math.max(12, left), top: Math.max(12, top) };
+}
+
+/** @param {{ anchor:{x:number,y:number}, children: import('react').ReactNode }} props */
+function FloatingLabel({ anchor, children }) {
+  const { left, top } = clampAnchor(anchor, 240, 44);
+  return (
+    <div
+      role="tooltip"
+      style={{
+        position: 'fixed', left, top, zIndex: 260, pointerEvents: 'none',
+        maxWidth: 260, padding: `${SP.xs}px ${SP.md}px`,
+        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
+        boxShadow: ELEV[2], fontFamily: sans, fontSize: FS.sm, lineHeight: 1.4,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/**
+ * Map-native district card (deriveAllDistricts, joined by id). Kept at
+ * InstitutionCard's visual weight but non-modal (a hover/pin popover).
+ * @param {{ anchor:{x:number,y:number}, mapDistrict:any, profile:any, pinned:boolean, onClose:()=>void }} props
+ */
+function DistrictCard({ anchor, mapDistrict, profile, pinned, onClose }) {
+  const { left, top } = clampAnchor(anchor, 320, 260);
+  const name = profile?.name || mapDistrict?.name || 'District';
+  const category = profile?.category || mapDistrict?.category || 'other';
+  const color = districtColor(category);
+  const insts = Array.isArray(profile?.institutions) ? profile.institutions : [];
+  return (
+    <div
+      role={pinned ? 'dialog' : 'tooltip'}
+      aria-label={`${name} — district`}
+      style={{
+        position: 'fixed', left, top, zIndex: 260,
+        width: 'min(92vw, 320px)', maxHeight: 'min(70vh, 420px)', overflow: 'auto',
+        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg, boxShadow: ELEV[3],
+        pointerEvents: pinned ? 'auto' : 'none',
+      }}
+    >
+      <div style={{
+        display: 'flex', alignItems: 'flex-start', gap: SP.md,
+        padding: `${SP.md}px ${SP.md}px ${SP.sm}px`, borderBottom: `1px solid ${BORDER}`, background: CARD_ALT,
+      }}>
+        <span style={{ width: 12, height: 12, borderRadius: 3, background: color, marginTop: 4, flexShrink: 0 }} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: FS.md, fontWeight: 900, lineHeight: 1.25 }}>{name}</div>
+          <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>
+            {category}
+          </div>
+        </div>
+        {pinned && (
+          <Button variant="ghost" size="sm" onClick={onClose} aria-label="Close district card" style={{ minHeight: 0, padding: '2px 8px' }}>
+            ×
+          </Button>
+        )}
       </div>
+      <div style={{ padding: SP.md, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+        <Row label="Wealth" value={profile?.wealth || mapDistrict?.wealth} />
+        <Row label="Safety" value={profile?.safety || mapDistrict?.safety} />
+        {profile?.dominantFaction?.name && <Row label="Dominant faction" value={profile.dominantFaction.name} />}
+        {insts.length > 0 && (
+          <Row label="Institutions" value={insts.slice(0, 4).map((i) => i.label).join(', ') + (insts.length > 4 ? `, +${insts.length - 4} more` : '')} />
+        )}
+        {profile?.hook && (
+          <div style={{ marginTop: 2, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.45 }}>{profile.hook}</div>
+        )}
+        {!profile && (
+          <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.45 }}>
+            An outlying cluster with no distinct quarter.
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** @param {{ label:string, value:any }} props */
+function Row({ label, value }) {
+  if (value == null || value === '') return null;
+  return (
+    <div style={{ display: 'flex', gap: SP.sm, alignItems: 'baseline' }}>
+      <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', minWidth: 96, flexShrink: 0 }}>
+        {label}
+      </span>
+      <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm }}>{value}</span>
     </div>
   );
 }

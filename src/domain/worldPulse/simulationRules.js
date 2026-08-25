@@ -155,111 +155,6 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
 });
 
 /**
- * ENGINE-GATED VIRTUAL RULE KEYS (chair ruling CR-WR10-C, 2026-08-04).
- *
- * A VIRTUAL key is one the engine strictly gates on (`rules.<key> === true`) while
- * appearing in NEITHER `DEFAULT_SIMULATION_RULES` NOR any preset override spread —
- * the deep-couplings law-1 idiom, whose whole point is that a dark layer costs a
- * campaign zero persisted bytes. The certification census
- * (`subsystemCertification.simulationRuleKeys`) reads exactly those two surfaces,
- * so a virtual key was invisible to it and its subsystem could never be certified.
- *
- * The WR-9a fork offered two cures: declare each key `false` in the
- * `full_simulation` spread (+32 serialized bytes per key on every NEW campaign, a
- * moved new-campaign state hash) or teach the census to enumerate the keys the
- * engine actually gates on (zero bytes on every path). CR-WR10-C ruled the second.
- * This list is that enumeration: it is UNIONED INTO THE CENSUS ONLY. Nothing here
- * is written into a rules object, spread into a preset, or persisted — declaring a
- * key here moves no world byte in any campaign, installed or new.
- *
- * MEMBERSHIP IS NOT A JUDGMENT CALL: a key belongs here when `src/` gates on it
- * with the strict idiom and neither surface above declares it.
- * `tests/lint/engineGatedRuleKeys.walker.test.js` source-scans the tree and proves
- * the list BOTH ways — every member is really gated, and every gated-but-undeclared
- * key is really accounted for — so this cannot drift into fiction in either
- * direction. A member also owes a certification row (or a declared pending entry);
- * the totality walker demands it the moment the census grows.
- *
- * @type {ReadonlyArray<string>}
- */
-export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
-  'beliefAxesEnabled',
-  // Joined 2026-08-05 by FP wave SP-B under CR-WR10-C item 4 (the compiled charter's §3
-  // flag law), all three in the SAME commit as their first real gate reads — the three
-  // by-name strict reads inside beliefAxes.subjectAxesActive, which is the ONE door the
-  // subject families pass through — and their three authored certification rows. Each is
-  // a CONJUNCTION with beliefAxesEnabled (a family cannot be lit under dark axes), which
-  // is why the by-name read matters: a frozen-list `.every()` would hide all three from
-  // this census.
-  'believedConditionsEnabled',
-  'believedDevotionEnabled',
-  'believedScarcityEnabled',
-  // Joined 2026-08-04 by FP wave TR-1 under CR-WR10-C item 4 (the compiled charter's §3
-  // flag law), in the SAME commit as its first real gate reads — commercialReasons.js's
-  // own `casusCommerciiActive` and tradeWar.js's severance-magnitude seam, both read by
-  // name with the strict `=== true` idiom — and its declared-pending certification entry
-  // (TR architecture Q4: each TR wave lands PENDING, TR-9 converts all eight to rows, so
-  // certification tracks reality instead of preceding it).
-  'casusCommerciiEnabled',
-  'conquestDoctrineEnabled',
-  // Joined 2026-08-06 by FP wave SP-D under CR-WR10-C item 4 (the compiled charter's §3
-  // flag law), in the SAME commit as its first real gate read
-  // (errandMint.errandSpineActive, the ONE `=== true` by-name read of this key in the
-  // tree) and its AUTHORED certification row. TWO FILES NAME THIS KEY AND ONLY ONE OF
-  // THEM IS A GATE ON THIS LAYER: espionage/espionageGate.js reads `!== true` as a
-  // LIGHTING-ORDER precondition — ES-0 refusing to host missions on a spine that is not
-  // lit — and that negative spelling was written deliberately, at a commit where this
-  // key had no manifest entry to justify a positive one. Both doors are pinned with
-  // their exact polarity in tests/property/errandSpineDormancyFence.test.js, so a third
-  // site or a flipped form reds.
-  'errandSpineEnabled',
-  // Joined 2026-08-05 by FP wave ES-0 under CR-WR10-C item 4 (the compiled charter's §3
-  // flag law), in the SAME commit as its first real gate read
-  // (espionage/espionageGate.espionageActive, read BY NAME with the strict === true
-  // idiom) and its AUTHORED certification row — never a pending entry, because
-  // manifesting is itself the act that makes a virtual key censusable and therefore the
-  // act that comes due. The gate is a THREE-DOOR conjunction (beliefs live, the errand
-  // spine lit, then the flag); the by-name read is what keeps all three visible to the
-  // engine-gated-key census, which a frozen-list `.every()` would hide.
-  'espionageEnabled',
-  'infoStatecraftEnabled',
-  'migrationRumorsEnabled',
-  // Joined 2026-08-04 by FP wave GR-1 under CR-WR10-C item 4 (the compiled charter's
-  // §3 flag law), in the SAME commit as its first real gate read
-  // (oathHolder.oathHolderActive, read by name) and its certification row.
-  'oathHolderEnabled',
-  // Joined 2026-08-06 by FP wave GR-2 under CR-WR10-C item 4 (the compiled charter's §3
-  // flag law), in the SAME commit as its first real gate read
-  // (pactProposals.pactFormationActive, the ONE `pactFormationEnabled === true` in the
-  // tree) and its AUTHORED certification row. THE GATE SITS AT THE LEDGER'S ONE WRITER
-  // rather than in a file named for the flag, which is the errandSpineActive precedent:
-  // the key governs `spatialLedgers.pactProposals`, and a gate standing at that door is a
-  // gate nothing can write past. Read by NAME because a frozen-list `.every()` conjunction
-  // is a computed member access that attributes to no key and would hide a fully wired flag
-  // from this very census; read ONCE because two doors on one flag is how a deleted guard
-  // hides behind a surviving one.
-  'pactFormationEnabled',
-  // Joined 2026-08-04 by lane WW-A under CR-WR10-C item 4, in the SAME commit as its
-  // first real gate read (sovereigntyAssets.sovereigntyTradeActive) and its
-  // certification row — certification tracking reality instead of preceding it.
-  'sovereigntyTradeEnabled',
-  // Joined 2026-08-06 by FP wave SP-C under CR-WR10-C item 4 (the compiled charter's §3
-  // flag law), in the SAME commit as its first real gate read
-  // (strategicPosture.strategicPostureActive, the ONE by-name strict read of this key in
-  // the tree) and its AUTHORED certification row. The writer it governs — the appetite
-  // facet on dispositionStats — sits inside the WR-2 channel writer's lit arm, so the
-  // gate is a TWO-DOOR conjunction and each door is pinned separately; the by-name read
-  // is what keeps this key visible to the engine-gated-key census, which a frozen-list
-  // `.every()` would hide.
-  'strategicPostureEnabled',
-  // Joined 2026-08-04 by FP wave GR-0 under CR-WR10-C item 4 (the compiled charter's §3
-  // flag law), in the SAME commit as its first real gate read
-  // (treatyLifecycleVoice.treatyLifecycleVoiceActive, read by name with the strict
-  // === true idiom) and its certification row.
-  'treatyLifecycleVoiceEnabled',
-]);
-
-/**
  * Compact preset constructor — every preset spreads DEFAULT_SIMULATION_RULES so
  * new flags inherit their defaults and presetId stays stable (guarded by
  * simulationRulesPreset.stability.test). NOTE the catalog carries NO summary
@@ -294,97 +189,6 @@ const OPEN = Object.freeze({
   migrationMode: 'distributed',
 });
 
-// ── THE NINE ENGINE-WAVE GATES (W-R2-LIGHT owner ruling, 2026-07-16) ──────────
-// The post-close anti-stasis stack's virtual gate flags, lit TOGETHER in the
-// three world-alive presets (dramatic_campaign / living_realm / full_simulation).
-// Like disastersEnabled / commodityFlowEnabled, these keys are ABSENT from
-// DEFAULT_SIMULATION_RULES — VIRTUAL, so they ride the ...overrides spread and add
-// NO persisted bytes to an existing campaign (normalize({}) carries none; the
-// engine gates read `=== true`, absent ⇒ dormant no-op ⇒ every dark-config golden
-// byte-identical). They are NOT RULE_COMPARISON_KEYS (not in DEFAULT), so preset
-// IDENTITY is unaffected: a legacy save missing them still infers its preset (the
-// disastersEnabled precedent). intervention/peaceEngine/supplyWebWarfare are
-// additionally AND-gated with warLayerEnabled (lit in all three); naval also needs
-// a spatially-canonized realm at runtime. Shared object (the QUIET/OPEN dedupe
-// idiom) so "the nine" have one source of truth. Byte-budget: the preset catalog
-// rides the eager store slice (normalizeSimulationRules → presetIdForRules), so
-// this adds a measured +252 B to the first-paint closure — well inside its margin.
-const WAVES = Object.freeze({
-  momentumEnabled: true,
-  navalEnabled: true,
-  interventionEnabled: true,
-  settlementLifecycleEnabled: true,
-  peaceEngineEnabled: true,
-  supplyWebWarfareEnabled: true,
-  upswingArcsEnabled: true,
-  resourceDynamicsEnabled: true,
-  constructiveFlowsEnabled: true,
-});
-
-// ── THE ONE REGEN — EIGHT ENGINE LIFTS + THE ROADS ADJUNCT (2026-07-28) ─────
-// These are the eight chartered dark engines, plus roadsEnabled (the later
-// owner-ratified adjunct), lit together at the single declared golden boundary.
-// They stay VIRTUAL: adding them to DEFAULT_SIMULATION_RULES would serialize new
-// bytes into legacy saves and enlist them in BOOLEAN_KEYS/RULE_COMPARISON_KEYS,
-// collapsing preset identity. Like WAVES, they therefore ride only the preset
-// override spread and every gate reads `=== true`.
-//
-// memoryWeaveEnabled is deliberately NOT a member. It belongs to the separately
-// commissioned deep-couplings cohort, whose One-Regen membership remains dark.
-const ONE_REGEN = Object.freeze({
-  distancePricedNewsEnabled: true,
-  reframeEnabled: true,
-  provenanceLedgerEnabled: true,
-  urbanFabricEnabled: true,
-  npcGrowthEnabled: true,
-  spatialConsequenceEnabled: true,
-  npcLadderEnabled: true,
-  traditionsEnabled: true,
-  roadsEnabled: true,
-});
-
-// ── THE NEUTRAL-CONNECTED DEFAULT (realm directive 2 / J-D2, 2026-07-31) ────
-// `neutralNeighborsEnabled` is a VIRTUAL flag of the same class as WAVES /
-// ONE_REGEN / memoryWeaveEnabled: NO entry in DEFAULT_SIMULATION_RULES, read
-// `=== true` at its single seam (region/neutralNeighbourEdges.js, wired into
-// buildWorldSnapshot). Lit, it gives each campaign member a neutral, channel-less
-// regional edge to its K NEAREST fellows, which RAISES cross-settlement
-// interaction density by design (the small-N stasis evidence).
-//
-// DELIBERATELY LIT IN NO PRESET (recorded, not an oversight) — and the blocker
-// is ASYMPTOTIC, not merely a golden re-record. MEASURED 2026-07-31 (B1): adding
-// `neutralNeighborsEnabled: true` to the ONE_REGEN spread (so the three
-// world-alive presets carry it) REDS tests/perf/tickScanBudget.test.js —
-// "scanOps grew 3.320x (1007 -> 3343) when S doubled (> 2.6)". The reason was
-// structural: B1's default CONNECTED EVERY PAIR, so the regional graph became
-// COMPLETE and its edge count C(S,2) — quadratic in settlements.
-//
-// B1b (2026-07-31) FIXED THE POPULATION AND RE-MEASURED. The pair selection is now
-// k-NEAREST (k=3, region/neutralNeighbourEdges.js), and the edge population is
-// LINEAR: the selection takes 6 / 16 / 31 pairs at S = 4 / 8 / 16 against a
-// complete graph's 6 / 28 / 120, always within S·k. THE RATCHET IS STILL RED WHEN
-// LIT — measured on the same fixture, 12 ticks, full_simulation rules:
-//     dark            scanOps 1205 / 2521 /  5893   ratios 4→8 2.092  8→16 2.338
-//     lit  k-nearest  scanOps 1007 / 3918 / 10266   ratios 4→8 3.891  8→16 2.620
-//     lit  all-pairs  scanOps 1001 / 3315 / 11913   ratios 4→8 3.312  8→16 3.594
-// So k-nearest genuinely beats all-pairs where the asymptote lives (8→16: 2.620 vs
-// 3.594, with 46 edges instead of 128), yet no lit window clears the 2.6 ceiling.
-// The 4→8 window in particular is STRUCTURALLY UNWINNABLE while J-D2 requires the
-// default to be COMPLETE at S <= 4: the lit S=4 fixture is already saturated (7 → 8
-// edges, +1) while lit S=8 gains +9, so lighting can only inflate that ratio, no
-// matter how small k is. The ceiling itself is a 4→8 calibration against the DARK
-// fixture's density, not a scale-free law — the dark ratio climbs too (2.092 →
-// 2.338 at 8→16).
-//
-// Realm-wide lighting therefore remains a PERFORMANCE-ARCHITECTURE decision
-// (OWNER-GATED): it requires re-calibrating what tickScanBudget measures — either
-// a window/ceiling that admits the lit density, or the remaining unpriced shape
-// (make the default edge a lighter class the hot indices skip, so a defaulted pair
-// costs nothing until it evolves). Until one is chosen and measured, the flag
-// stays dark and the engine keeps its ceiling. (The T5 charter flags were also lit
-// only at "the single declared golden boundary" — the ONE REGEN batch — so a
-// mid-wave lighting would be off-sequence regardless.)
-//
 // KEY ORDER IS LOAD-BEARING: presetIdForRules INFERS by first structural match,
 // so the LEGACY trio (quiet_local / realistic_regional / dramatic_campaign —
 // resolvable forever: old saves carry their ids, the realm toolbar chips apply
@@ -404,20 +208,13 @@ const ONE_REGEN = Object.freeze({
 export const SIMULATION_RULE_PRESETS = Object.freeze({
   quiet_local: preset('quiet_local', 'Quiet Local', {
     ...QUIET,
-    // The tempo governor is a presentation/backpressure layer over real state
-    // changes: quiet worlds still simulate, but independent drama births arrive
-    // at the quietest supported cadence.
-    narrativeTempo: 'quiet_local',
     factionCompetitionEnabled: false,
     tradeFlowsEnabled: false,
   }),
-  realistic_regional: preset(DEFAULT_SIMULATION_PRESET_ID, 'Realistic Regional', {
-    narrativeTempo: 'realistic_regional',
-  }),
+  realistic_regional: preset(DEFAULT_SIMULATION_PRESET_ID, 'Realistic Regional', {}),
   dramatic_campaign: preset('dramatic_campaign', 'Dramatic Campaign', {
     ...OPEN,
     intensity: 'dramatic',
-    narrativeTempo: 'dramatic_campaign',
     // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): dramatic_campaign
     // now carries the real drama set — a running war layer, settlement war strategy,
     // faith spread, seasons, and calamities. It stays LIGHTER than full_simulation
@@ -435,11 +232,6 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     religionDynamicsEnabled: true,
     seasonsEnabled: true,
     disastersEnabled: true,
-    // W-R2-LIGHT: the nine engine-wave gates — dramatic_campaign is a world-alive
-    // preset, so it runs the full anti-stasis stack (virtual flags; see WAVES).
-    ...WAVES,
-    // T5 THE ONE REGEN: the chartered eight engine lifts plus Roads.
-    ...ONE_REGEN,
   }),
   static_campaign: preset('static_campaign', 'Static Campaign', {
     propagationMode: 'off',
@@ -460,34 +252,19 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
   }),
   narrative_campaign: preset('narrative_campaign', 'Narrative Campaign', {
     ...QUIET,
-    narrativeTempo: 'quiet_local',
     politicalAutonomy: 'recommendations',
   }),
   living_realm: preset('living_realm', 'Living Realm', {
-    // Living Realm keeps the measured regional cadence; its distinction from
-    // Full Simulation is depth/autonomy, not a noisier Chronicle.
-    narrativeTempo: 'realistic_regional',
     politicalAutonomy: 'routine',
     seasonsEnabled: true,
     // STEP 3.5: the §11 sleeper — true news that travels by road. Inert until
     // the realm canonizes a spatial digest (the engine gate); NOT a comparison
     // key, so pre-3.5 saves carrying this preset keep their identity.
     infoMode: 'perfect_delayed',
-    // W-R2-LIGHT: a "living realm" without the living-engine waves would lie — its
-    // distinction from full_simulation is APPROVAL POSTURE (routine autonomy), not
-    // engine depth, so it runs the same nine engine-wave gates (owner ruling).
-    // warLayerEnabled stays inherited-false, so the three warLayer-AND-gated waves
-    // (intervention/peaceEngine/supplyWebWarfare) sleep here until war is lit —
-    // living_realm's world moves, but does not start wars on its own.
-    ...WAVES,
-    ...ONE_REGEN,
   }),
   full_simulation: preset('full_simulation', 'Full Simulation', {
     ...OPEN,
     intensity: 'normal',
-    // E0 graduated from opt-in-only after the behavioral observer proved that
-    // the everything-on preset otherwise bypassed its own Chronicle governor.
-    narrativeTempo: 'full_simulation',
     warLayerEnabled: true,
     settlementStrategyEnabled: true,
     faithSpreadEnabled: true,
@@ -503,39 +280,6 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     warForageEnabled: true,
     warLevyEnabled: true,
     warDispositionEnabled: true,
-    // WR-1: the pure termination read is structurally present but remains DARK
-    // until its WR-9 receipt fold can measure the deciding-term distribution.
-    // This virtual key is deliberately absent from DEFAULT_SIMULATION_RULES and
-    // every other preset; declaring false here puts it under certification without
-    // lighting behavior or changing preset inference.
-    warTerminationEnabled: false,
-    // WR-2: four learned disposition channels, DECLARED DARK. This virtual key is
-    // absent from DEFAULT_SIMULATION_RULES and every other preset; false here makes
-    // the slice visible to certification without migrating a single installed save.
-    // Every gate reads `=== true`, and lighting belongs to the later measured batch.
-    dispositionChannelsEnabled: false,
-    // WR-3: campaign-member lineage claims and their kinship mirror, DECLARED
-    // DARK. Like the WR-1/WR-2 keys above, this is virtual: absent from the
-    // default bank and every other preset, false only on the ceiling so
-    // certification can hold the slice without changing installed saves or
-    // preset identity. The eventual read must gate on exact true; lighting waits
-    // for the member-graduation seam and WR-9 story-mix evidence.
-    lineageClaimEnabled: false,
-    // WR-6: scored coalition calls, bilateral allied fronts, and derived
-    // expenditure/settlement reads, DECLARED DARK. This virtual key is absent
-    // from the default bank and every other preset; false only on the ceiling
-    // makes the slice visible to subsystem certification without migrating an
-    // installed save or changing preset identity. Every behavioral seam reads
-    // exact true, and lighting waits for WR-9's eligible-call, decision-mix,
-    // expenditure, payment, and governed-family observations.
-    coalitionLedgerEnabled: false,
-    // WR-7: H1-durable peace envoys moving over the lived route network,
-    // DECLARED DARK. The key is virtual (absent from defaults and every other
-    // preset) and every behavior mouth requires it, the war/peace stack, NPC
-    // consequences, and route lifecycle to be exact true. Declaring false here
-    // exposes the lane to certification without lighting it or changing preset
-    // identity; WR-9 must measure the seven governed errand families first.
-    envoyDiplomacyEnabled: false,
     seasonsEnabled: true,
     // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): the ceiling
     // runs the calamity mover. disastersEnabled is an opt-in key ABSENT from
@@ -555,140 +299,6 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     worldProgression: 'autonomous',
     commodityFlowEnabled: true,
     allyIntelSharingEnabled: true,
-    // W-H1: THE NPC CONSEQUENCE ECONOMY, DECLARED DARK. `npcConsequencesEnabled` is a
-    // VIRTUAL flag of the WAVES / ONE_REGEN class (no entry in DEFAULT_SIMULATION_RULES,
-    // every gate reads `=== true`), and it is declared here at FALSE rather than lit.
-    //
-    // WHY DECLARE A FALSE KEY AT ALL. The subsystem-certification totality walker
-    // partitions the rule keys reachable from DEFAULT_SIMULATION_RULES and the preset
-    // override spreads; a key reachable from NEITHER is invisible to it, and a
-    // subsystem behind an invisible key can ship completely dead without any check ever
-    // asking (npcCredibilityEnabled is exactly that shape today, and carries no
-    // certification row as a result). Declaring the key here is what puts W-H's lane
-    // under the contract from its FIRST commit rather than retroactively.
-    //
-    // WHY FALSE IS NOT A HALF-MEASURE. Preset IDENTITY is unaffected: RULE_COMPARISON_KEYS
-    // derives from DEFAULT_SIMULATION_RULES, which this key is absent from, so preset
-    // inference is untouched (the disastersEnabled precedent). Every consumer reads
-    // `=== true`, so a declared false is behaviourally identical to absent, and the
-    // certification receipt grades this row DORMANT_BY_CONFIG — the honest verdict for a
-    // dark slice, and one that becomes ALIVE-or-SILENT the moment it is lit.
-    //
-    // LIGHTING IT is deliberately NOT done here: it belongs at the single declared
-    // golden boundary (the ONE REGEN batch discipline), after H2/H3/H4 land the verdict
-    // table, circulation and the DM verbs. Flip this one value there.
-    npcConsequencesEnabled: false,
-    // W-J1: THE ORGANIC ROUTE LIFECYCLE, DECLARED DARK — the same shape, and for the
-    // same reason, as the W-H1 declaration directly above. `routeLifecycleEnabled` is
-    // a VIRTUAL flag (no DEFAULT_SIMULATION_RULES entry; every gate reads `=== true`,
-    // so a declared false is behaviourally identical to absent and cannot perturb a
-    // byte), declared here at FALSE so the subsystem-certification totality walker can
-    // SEE the key and hold W-J's lane under the contract from its first commit.
-    // Without this line the key is reachable from neither the defaults nor any preset
-    // spread, the walker cannot census it, and a certification row naming it reads back
-    // as `unknownRows` — measured against the live registry before this was written.
-    // Preset identity is untouched: RULE_COMPARISON_KEYS derives from
-    // DEFAULT_SIMULATION_RULES, which this key is absent from (the disastersEnabled
-    // precedent). LIGHTING IT belongs at the declared golden boundary once J2's flows,
-    // J3's charter/decay events and J4's consumers land; flip this one value there.
-    routeLifecycleEnabled: false,
-    // W-K1: THE MAGIC ECONOMY LANE, DECLARED DARK — the same shape, and for the same
-    // reason, as the W-H1 and W-J1 declarations directly above. `magicEconomyEnabled`
-    // is a VIRTUAL flag (no DEFAULT_SIMULATION_RULES entry; every gate reads
-    // `=== true`, so a declared false is behaviourally identical to absent and cannot
-    // perturb a byte), declared here at FALSE so the subsystem-certification totality
-    // walker can SEE the key and hold W-K's lane under the contract from its first
-    // commit rather than retroactively.
-    //
-    // THE KEY GATES MORE THAN MAGIC, DELIBERATELY. Slice K1 is the GENERAL institution
-    // status system (operational/impaired/shell), which is magic-INDEPENDENT and ships
-    // first precisely so every institution benefits before magic does
-    // (docs/DESIGN_MAGIC_ECONOMY.md §13). It rides this key anyway because §3c's status
-    // vocabulary is one of the magic economy's constitutional laws (law 1, NO
-    // EXEMPTION: magic's infrastructure obeys the same status vocabulary as every
-    // institution), so splitting the two behind separate switches would let a world
-    // exist in which magic's infrastructure and everything else spoke different status
-    // words. LIGHTING IT belongs at the declared golden boundary once K2's regimes,
-    // K3's buffer and K4's substitution land; flip this one value there.
-    magicEconomyEnabled: false,
-    // W-I2: THE INFORMATION BROKERAGES, DECLARED DARK — the same shape, and for the same
-    // reason, as the W-H1, W-J1 and W-K1 declarations directly above.
-    // `informationBrokeragesEnabled` is a VIRTUAL flag (no DEFAULT_SIMULATION_RULES entry;
-    // brokerageStamps.brokerageEffectsActive reads `=== true`, so a declared false is
-    // behaviourally identical to absent and cannot perturb a byte), declared here at FALSE
-    // so the subsystem-certification totality walker can SEE the key and hold W-I's lane
-    // under the contract from the commit that first gives it effects.
-    //
-    // THE GATE IS A CONJUNCTION, DELIBERATELY (design Law 5): the brokerage effects need
-    // this key AND infoStatecraftActive, which is itself beliefsActive plus
-    // infoStatecraftEnabled. A settlement cannot grade information that its world does not
-    // model as travelling, so lighting this key alone is a no-op by construction rather
-    // than by a second check. LIGHTING IT belongs at the declared golden boundary once I3's
-    // services and I4's market land; flip this one value there.
-    informationBrokeragesEnabled: false,
-    // WAVE P: THE DEMOGRAPHIC ENGINE, DECLARED DARK — the same shape, and for the same
-    // reason, as the W-H1, W-J1, W-K1 and W-I2 declarations directly above.
-    // `demographicsEnabled` is a VIRTUAL flag (no DEFAULT_SIMULATION_RULES entry; every
-    // gate reads `=== true`, so a declared false is behaviourally identical to absent and
-    // cannot perturb a byte), declared here at FALSE so the subsystem-certification
-    // totality walker can SEE the key and hold wave P's lane under the contract from the
-    // commit that first gives it effects.
-    //
-    // WHAT LIGHTING IT DOES, so the reader knows this is not a cosmetic switch: it hands
-    // the population's GROWTH side to demographicsKernel.js (births minus deaths against
-    // min(K_food, D_tier)) and simultaneously stops populationDynamics emitting its raw
-    // proportional growth candidate. That pair is the cure for the 300-year soak's
-    // unbounded x1.07/year compounding, and it is a deliberate, measurable behaviour
-    // change — which is exactly why it does NOT ship lit here. LIGHTING IT belongs at the
-    // owner-signed soak redo, after P2's overflow valves, P3's migration homeostat and
-    // P4's stressor couplings land; flip this one value there.
-    demographicsEnabled: false,
-    // TC-1: THE TOWN CARTOGRAPHY PROGRAM, DECLARED DARK — the same shape, and for the
-    // same reason, as the W-H1, W-J1, W-K1, W-I2 and wave-P declarations directly above.
-    // `townCartographyEnabled` is a VIRTUAL flag (no DEFAULT_SIMULATION_RULES entry;
-    // townCartographyActive reads `=== true`, so a declared false is behaviourally
-    // identical to absent and cannot perturb a byte), declared here at FALSE so the
-    // subsystem-certification totality walker can SEE the key and hold the cartography
-    // lane under the contract from its FIRST commit rather than retroactively.
-    //
-    // A PRESENTATION-SIDE KEY IS UNUSUAL HERE, AND DELIBERATE. Every other key in this
-    // object gates engine arithmetic; this one gates whether the town-scene compiler
-    // emits four additional manifest layers (docs/DESIGN_TOWN_CARTOGRAPHY.md §8). It
-    // still belongs in this object because the flag has to travel with the campaign's
-    // rules to reach the scene compiler's authorization wall, and because a subsystem
-    // whose key no census can see is exactly the shape that ships completely dead. Its
-    // certification row states plainly that NO soak receipt can observe it, which is the
-    // honest declaration rather than a channel this lane does not have.
-    //
-    // LIGHTING IT belongs at the promotion contract (design §8: local matrix, rendered
-    // matrix, device evidence, a11y evidence, the owner's eye, field soak), after the
-    // synthesis, painter and join slices land; flip this one value there.
-    townCartographyEnabled: false,
-    // MG-2: THE REALM'S MAGIC DEFAULT, DECLARED AT ITS INERT VALUE
-    // (docs/DESIGN_REALM_MAGIC_TOGGLE §4). `realmMagicDefault` is a VIRTUAL key of
-    // the same class as the flags above — absent from DEFAULT_SIMULATION_RULES,
-    // absent from every other preset, and read `=== 'mundane'` at its single seam,
-    // so the value declared here is behaviourally identical to absence and cannot
-    // perturb a byte. Preset identity is untouched: RULE_COMPARISON_KEYS derives
-    // from DEFAULT_SIMULATION_RULES' BOOLEAN surface, and this key is neither in
-    // the defaults nor a boolean.
-    //
-    // IT IS NOT A SUBSYSTEM GATE, WHICH IS WHY IT CARRIES NO CERTIFICATION ROW.
-    // The realm's magic answer is not consulted by any generator, mover, or
-    // display path (MG-LAW-1) — it is stamped into each member's own config at
-    // mint, and every consumer reads that. What survives at realm scope is a
-    // DEFAULT-FOR-LATER whose one reader is the single-settlement wizard's
-    // pre-selection. Declaring it here is documentation for the next reader of
-    // this catalog, not a claim of engine behavior; the subsystem-certification
-    // census is boolean-only (subsystemCertification.simulationRuleKeys), so a
-    // string key is invisible to it either way.
-    realmMagicDefault: 'magical',
-    // W-R2-LIGHT: the ceiling is everything-on by name — it runs the full nine-wave
-    // anti-stasis stack (warLayer is lit above, so intervention/peaceEngine/
-    // supplyWebWarfare fire here; the composition smoke + whole-world soak drive
-    // this preset verbatim, so they now cover the full stack automatically).
-    ...WAVES,
-    ...ONE_REGEN,
   }),
 });
 
@@ -740,29 +350,6 @@ function enumValue(value, allowed, fallback) {
 export function worldProgressionOf(rules) {
   const v = rules && typeof rules === 'object' ? rules.worldProgression : null;
   return (v === 'frozen' || v === 'living' || v === 'autonomous') ? v : 'dm_advanced';
-}
-
-/**
- * MG-2: is this realm's DEFAULT for a newly generated settlement a mundane one?
- * (docs/DESIGN_REALM_MAGIC_TOGGLE §4.)
- *
- * THE ONE READER of `realmMagicDefault`, so the two surfaces that consume it —
- * the single-settlement wizard's pre-selection and the campaign's read-only
- * stance line — can never drift on what the key means. Exact-match on 'mundane'
- * and total on garbage: the key is VIRTUAL (it rides `...input` unnormalized),
- * so absent, misspelled, or corrupt all mean the same thing they meant before
- * this key existed — a world of magic.
- *
- * IT IS NOT AN ENGINE GATE (MG-LAW-1). No generator, mover, or display path may
- * call this: a settlement's magic is its own config's `magicExists`, which the
- * composer stamped at mint. This answers only "what should the NEXT settlement's
- * config start as", which is a UI default, not a world fact.
- *
- * @param {Record<string, unknown> | null | undefined} rules
- * @returns {boolean}
- */
-export function realmMagicIsMundane(rules) {
-  return !!rules && typeof rules === 'object' && rules.realmMagicDefault === 'mundane';
 }
 
 /**

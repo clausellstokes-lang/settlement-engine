@@ -1,0 +1,92 @@
+export const meta = {
+  name: 'burn-repair-round-cycle7',
+  description: 'Repair the burn REJECT: a green gate step the burn turned red, a receipt scoped to one of two typecheckers, a ratchet frozen at a grandparent, and a TCD-1 pin corpus that is single-tier and unseeded.',
+  phases: [
+    { title: 'Gate', detail: 'restore domain-strict, re-baseline the ratchet, scope the receipt law' },
+    { title: 'Pins', detail: "TCD-1's corpus trap, its unenforced single-writer claim, its undeclared shift" },
+    { title: 'Verify', detail: 'two adversarial lenses, read-only' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE. Build tree ${TREE} (branch claude/composite-r4). Hard-gate every state-mutating compound with the \`cd\` FIRST: \`cd ${TREE} && [ "$(git branch --show-current)" = "claude/composite-r4" ] || exit 1\`.
+
+⭐ \`sh scripts/gate-mutex.sh --wait && sh scripts/gate-tail.sh <cmd>\` — ONE \`&&\` chain, never two statements.
+⛔⛔ **NEVER READ AN EXIT CODE THROUGH A PIPE.** \`node script.mjs | tail -6; echo $?\` reports **tail's** status, not the script's. This bit the parent chair AGAIN one turn before this brief was written, while checking the very regression you are fixing. Use \`sh scripts/gate-tail.sh\`, or capture the status before piping.
+⚠ **EVERY FIGURE IN AN INTEGRITY-COUNTED \`git archive\` OF A COMMITTED SHA** (\`git archive -o f.tar <sha>\` + \`tar -xf\`, never through a pipe; \`git ls-tree -r <sha> | wc -l\` vs \`find -type f | wc -l\`; \`rm -f\` the node_modules SYMLINK before deleting a tree; ONE at a time — disk ~10 GiB).
+
+⛔⛔ **A SECOND LANE IS LIVE AND ITS WORK IS UNCOMMITTED IN THIS TREE** — the reader-without-a-writer walker. Its files: \`scripts/check-observed-shape-readers.mjs\`, \`scripts/lib/observed-shape-corpus.mjs\`, \`scripts/lib/reader-shape-scan.mjs\`, \`tests/lint/observedShapeReaders.walker.test.js\`, \`scripts/.observed-shape-readers-baseline.json\`, **and it has \`package.json\` and \`scripts/mutation-coverage-manifest.json\` MODIFIED right now.** ⛔ **DO NOT EDIT package.json OR mutation-coverage-manifest.json** — you would clobber uncommitted foreign work. If a fix seems to need package.json, STOP and report it instead. Never stage, clean or stash a file you did not author. EXPLICIT PATHSPECS; verify \`git diff --cached --name-only\` against your EXPECTED set BY NAME AND COUNT before every commit.
+
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE.`
+
+phase('Gate')
+const gate = await agent(LAWS + `
+
+YOU ARE THE GATE REPAIR LANE. The burn round was REJECTED by two of three verifiers. Its code was substantively right; its **receipts were scoped wrong and it broke a gate step it never measured.** Fix that.
+
+**BR-1 + BR-2 — THE BURN TURNED A GREEN GATE STEP RED.** \`scripts/check-domain-strict.mjs\` is step 10 of the \`npm run check\` chain. At the burn's start (\`eca65c8a\`) it printed \`✓ no regressions — and 10 fewer errors than baseline (1303 < 1313)\` — **GREEN**. It is now **RED**, confirmed live:
+\`\`\`
+src/domain/worldPulse/peaceTerms.js: 30 strict errors (baseline 29) — +1
+src/domain/worldPulse/warCoalitionPulse.js: 9 strict errors (baseline 8) — +1
+\`\`\`
+The exact two new rows, message-normalized across archives: \`peaceTerms.js:610 TS2322: Type 'Record<string, unknown> | undefined' is not assignable to type 'Record<string, unknown>'\` and \`warCoalitionPulse.js:73 TS2345: Argument of type 'number | null' is not assignable\`.
+⚠⚠ **\`peaceTerms.js\` APPEARS IN NO BURN COMMIT'S FILE LIST** — it was never opened. This is a pure SPILLOVER: the sweep's JSDoc annotations on OTHER files narrowed inferred types that flow into it. That is the blast-radius signature, and it is why a per-file "I only touched my files" claim is not a safety argument.
+**FIX BOTH TO GREEN.** ⛔ Do NOT widen \`scripts/.domain-strict-baseline.json\` — the script's own message says "fix or annotate; do not widen the baseline", and widening a ratchet to absorb your own regression is the exact move these ratchets exist to prevent.
+
+**BR-3 — THE RECEIPT LAW THIS ROUND MINTED.** The sweep reported \`introducedCount: 0\`. Independently reproduced as TRUE under \`tsconfig.full.json\` (174 removed / 0 introduced, no file grew, no new erroring file) and FALSE under \`tsconfig.domain-strict.json\` (+2). **A "zero introduced" claim scoped to one typechecker, when the gate chain runs two, reads as total and is not.** After fixing, **state the figure under BOTH configs**, and write the rule into the repo where a future lane will hit it — \`CONTRIBUTING.md\` or the ratchet script header, wherever the existing gate documentation lives.
+
+**BR-5 — THE NEW RATCHET WAS FROZEN AT A GRANDPARENT, AND ITS STATED REASON IS CONTRADICTED BY GIT.** \`scripts/.full-typecheck-baseline.json\` carries \`measuredAtSha: 1977db07\`, \`total: 188\`. It LANDED at \`a9691e73\`, whose DIRECT PARENT \`9ecec2a2\` measures **179 / 40 files** in an integrity-counted archive. \`tests/lint/fullTypecheckRatchet.test.js\` explains the 9-error gap as another lane's uncommitted work — **and git contradicts that.** So the ratchet is **9 errors looser than the tree it guards**, which is exactly the slack a regression hides in.
+**RE-BASELINE at YOUR OWN committed sha** with \`--update\`, and **correct the false explanation in the test's prose** rather than leaving a wrong story in the repo. ⚠ Re-measure the true count yourself in an archive; do not inherit 179 or 188 from this brief.
+
+**BR-4 — AN ALREADY-RED RATCHET GREW ITS INVENTORY BEHIND A BYTE-IDENTICAL FAILING ROW** (the recorded hazard, firing again). \`tests/lint/domainAnyCastBaseline.test.js\` fails identically at both ends (2 files / 3 tests), but its OVERRUN SET went from **2 files** at \`eca65c8a\` (commercialReasons.js 31 vs baseline 0; warDeployment.js 17 vs baseline 16 — both pre-existing) to **4 files** at HEAD. **Identify the two new overruns via \`sh scripts/ratchet-inventory.sh\`, and either fix them or record them as declared debt with the commit that caused each.** Do not leave them invisible.
+
+Gate through the mutex chain and quote real output. Commit body carries \`⏳ OPUS-ERA — FABLE SURVEY OWED\`.
+
+RETURN JSON.`, { label: 'repair:gate', phase: 'Gate', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, domainStrictGreen: { type: 'boolean' }, peaceTermsFix: { type: 'string' }, warCoalitionPulseFix: { type: 'string' }, baselineWidened: { type: 'boolean' }, errorsUnderFullConfig: { type: 'number' }, errorsUnderDomainStrict: { type: 'number' }, ratchetRebaselinedAt: { type: 'string' }, ratchetNewTotal: { type: 'number' }, falseExplanationCorrected: { type: 'string' }, anyCastNewOverruns: { type: 'array', items: { type: 'string' } }, receiptLawDocumentedAt: { type: 'string' }, commits: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Pins')
+const pins = await agent(LAWS + `
+
+YOU ARE THE PIN REPAIR LANE. TCD-1's SUBSTANCE IS CONFIRMED CORRECT — a verifier re-proved it on its own 50-settlement seed set, 50/50, zero mismatches. **What is broken is its PINS.** Three findings.
+
+The gate lane just landed: ` + JSON.stringify(gate || {}).slice(0, 2500) + `
+
+**PIN-1 — ⚠⚠ THE PIN CORPUS IS SINGLE-TIER AND UNSEEDED, WHILE THE COMMIT AND THE REPORT BOTH CLAIM "6 seeds × 5 tiers".** \`tests/domain/warSeatBooksFactionAddress.test.js:41\` calls \`generateSettlementPipeline({ tier }, seed)\`. **TWO independent defects in ONE call, and this is the RECORDED config-slot silent key trap firing again:**
+  (a) **\`tier\` IS NOT A CONFIG KEY — the generator reads \`settType\`.** Executed: all 30 corpus rows return \`settlement.tier === 'village'\`; \`distinct tiers ['village']\`. The five-tier claim is false.
+  (b) **The numeric seed lands in the \`importedNeighbour\` slot**, which the pipeline's fail-closed guard only rejects for some shapes — so the seed is silently discarded and the corpus is not seed-varied at all.
+**FIX BOTH, and add the guard the recorded hazard prescribes: assert \`_seed\` ACTUALLY ARRIVED**, and assert the distinct-tier set has the cardinality you claim. A corpus that silently collapses to one tier and one seed is a lottery wearing a denominator. ⚠ Re-run the pin after fixing and confirm it still passes on a corpus that is now genuinely varied — if it fails, the finding is bigger than the pin.
+
+**PIN-2 — ⚠⚠ THE SINGLE-WRITER CLAIM IS ASSERTED, NOT ENFORCED.** A verifier planted the exact pre-fix spelling back at the call site — \`src/domain/worldPulse/applyWorldPulse.js:966\`, \`const governingFactionId = String(governingFaction?.id || installerFactionId || '');\` — left the new helper untouched, and ran **9 suites: ALL GREEN.** So the drift TCD-1 repaired can be reintroduced tomorrow with the whole gate green. **Write the pin that reds on that exact plant, then PROVE it by planting it back yourself and watching it fail.** ⚠ Anchor on the WRITER's real output over real generated worlds, never on a fixture — a fixture of the reader's shape is what hid this defect class four times.
+
+**PIN-3 — A PERSISTED-VALUE CHANGE WAS OMITTED FROM THE DECLARED SHIFT.** The commit's "DECLARED GOLDEN SHIFT" section lists the prose-variant shift and "two new field appearances" — but \`applyWorldPulse.js:966\`'s \`governingFactionId\` **moves from \`installerFactionId\` (a real, generally different id) to \`ladderFactionKey(governing)\` on every approved \`government_change\`.** That is a VALUE CHANGE on an existing persisted field, not a new field appearance. **Measure it and add it to the declared shift, in the ledger row and the record.** ⚠ A behaviour shift that rides silently is the one thing this program forbids outright — and re-recording a golden later without naming the cause is how it becomes permanent.
+
+⛔ Do NOT re-open the substance of TCD-1/2/3 — all three verified CORRECT. This lane fixes pins and receipts only. If fixing a pin reveals the substance is wrong, STOP and report rather than rewriting the fix.
+
+Gate through the mutex chain. Commit body carries \`⏳ OPUS-ERA — FABLE SURVEY OWED\`.
+
+RETURN JSON.`, { label: 'repair:pins', phase: 'Pins', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, corpusTiersNow: { type: 'string' }, seedArrivalAsserted: { type: 'boolean' }, pinStillPasses: { type: 'boolean' }, plantBackRedsNow: { type: 'string' }, shiftMeasured: { type: 'string' }, commits: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Verify')
+const LENSES = [
+  { k: 'gate-truly-green', p: 'Execute BOTH typecheckers yourself in integrity-counted archives at the final sha and report both counts. Confirm `check-domain-strict.mjs` is GREEN and that `scripts/.domain-strict-baseline.json` was NOT widened (diff it against eca65c8a — any raised per-file ceiling is a REJECT). Confirm the full-typecheck baseline now matches a real measurement AT ITS OWN SHA, and that the false explanation in fullTypecheckRatchet.test.js is gone. Then run `npm run check` and report the FIRST failing step by name, or that it completed. Plant a fresh error in a governed file and confirm each ratchet REDS.' },
+  { k: 'pins-actually-bite', p: 'Are the repaired pins real? (1) Re-run the TCD-1 corpus builder yourself and independently confirm the distinct-tier set and that `_seed` genuinely arrives — do not trust the assertion, verify the corpus. (2) **Plant the pre-fix spelling back at applyWorldPulse.js:966 in a throwaway archive and confirm the new pin REDS** — this is the whole point of PIN-2 and the previous round failed exactly here. (3) Verify the declared shift figure by measuring it, not by reading it. (4) Check every new/edited pin for the recorded vacuity shapes: self-supplied anchor, empty-collection loop negative, a `// anchored:` marker not on the immediately-preceding line, and a pin authored past its own trigger.' },
+]
+
+const verdicts = await parallel(LENSES.map(l => () => agent(LAWS + `
+
+YOU ARE AN ADVERSARIAL VERIFIER — ${l.k.toUpperCase()}. Default posture: WRONG until executed evidence. REFUTE. **READ-ONLY in the shared tree** (planting mutants inside a throwaway ARCHIVE is expected and required).
+
+Gate lane: ` + JSON.stringify(gate || {}).slice(0, 5000) + `
+Pin lane: ` + JSON.stringify(pins || {}).slice(0, 5000) + `
+
+${l.p}
+
+⚠ The previous round's three verifiers all returned REJECT and every finding was real. The code has been right and the RECEIPTS have been wrong, repeatedly. Re-run everything quoted. Archives ONE AT A TIME, integrity-counted, deleted between.
+
+RETURN structured JSON only.`, { label: `verify:${l.k}`, phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })))
+
+const live = verdicts.filter(Boolean)
+const rejects = live.filter(v => v.verdict === 'REJECT')
+log(`verify: ${live.length}/2 returned, ${rejects.length} REJECT`)
+return { gate, pins, verdicts: live, verdict: rejects.length ? 'REJECT' : 'PASS' }

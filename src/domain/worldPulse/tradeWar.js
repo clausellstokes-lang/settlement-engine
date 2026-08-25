@@ -13,9 +13,9 @@
  *
  * A flip re-points C's primary trade_dependency channel to the winner, stamps a
  * trade-realignment condition, and (confidence-gated) either WINDS the defeated
- * incumbent DOWN (a peaceful cold_war on A↔B) or lets A ESCALATE — A turns
- * the pair hostile and deposits a war intent for the one war opener to judge
- * next tick (conquest path stays open, never automatic).
+ * incumbent DOWN (a peaceful cold_war on A↔B) or lets A ESCALATE — A emits a
+ * hostility/war_front the war layer picks up next tick (conquest path stays
+ * open, never automatic).
  *
  * HARD OVERRIDE — vassalage: if C is a vassal of X and the overlord compels the
  * trade, X wins regardless of the roll. The forced commitment is ROUTED THROUGH
@@ -61,12 +61,6 @@ import { stablePart } from './worldState.js';
 // active morally-loaded institutions penalizes that supplier's trade score. Absent objection
 // ⇒ mult 1 ⇒ byte-identical partner selection (the neutrality interlock the brief names).
 import { effectiveToleranceOf, institutionConscience } from './institutionTolerance.js';
-import { canonicalRelationshipSeed } from './relationshipEdgeSeed.js';
-// TR-1 / CPL-1 TRADE→WAR (couplingRegistryTrade.js). ONE evidence factory, two signs:
-// the defeated incumbent's standing commercial case against the winner, and the standing
-// partnership that argues against cutting the tie. Absent flag or absent ledger ⇒ both
-// read 0 ⇒ byte-identical. One-directional: commercialReasons never imports this module.
-import { makeCommercialPressureRead } from './commercialReasons.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js).
@@ -90,15 +84,9 @@ const FLIP_COOLDOWN_TICKS = 6;
 // FLIP_COOLDOWN_TICKS). Rides the EXISTING tradeWarState ledger (a new lastCoercionTick
 // field on the per-prize entry — no new top-level worldState key).
 const COERCION_RENEWAL_TICKS = 6;
-// Escalation gate: only a CONFIDENT defeated incumbent can request a march
-// (the one opener still judges it; most losers wind down).
+// Escalation gate: only a CONFIDENT defeated incumbent can open a war
+// (conquest stays reachable but not automatic — most losers wind down).
 const ESCALATION_CONFIDENCE = 0.5;
-// TR-1 THE CASUS COMMERCII SEAM (the ONE trade-war edit that wave makes). How much a
-// standing commercial grievance — net of the standing partnership that argues against
-// breaking the tie — may move the escalation probability. It moves the PROBABILITY only,
-// never the strength short-circuit above it, so the number of rng draws is identical in
-// both flag states and a dark world is byte-identical rather than merely similar.
-const COMMERCIAL_PRESSURE_W = 0.25;
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -318,7 +306,7 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * @param {Rng} args.rng
  * @param {number} args.tick
  * @param {string|null} [args.now]
- * @param {{ warLayerEnabled?: boolean, casusCommerciiEnabled?: boolean }} args.rules
+ * @param {{ warLayerEnabled?: boolean }} args.rules
  * @returns {{ outcomes: any[], graphChannels: any[], tradeWarState: Record<string, any>, dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number}> }}
  */
 export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = null, rules = {} }) {
@@ -328,13 +316,6 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
     return { outcomes: [], graphChannels: [], tradeWarState: existingState, dispositionDeltas: [] };
   }
 
-  // TR-1's gate, read BY NAME with the strict idiom — a flag read only through a frozen
-  // list conjunction is invisible to the engine-gated-key census, which is a hole this
-  // estate has already been bitten by once. Dark ⇒ null ⇒ the escalation arithmetic below
-  // never sees a commercial term and the ledger is never opened.
-  const commercialPressure = rules?.casusCommerciiEnabled === true
-    ? makeCommercialPressureRead(worldState)
-    : null;
   const strengthFor = buildStrengthLookup(snapshot);
   // item 2c: per-settlement effective tolerance (patron conviction + trade drift) + a supplier's
   // standing institutions, for the conscience embargo. Absent ledger ⇒ tolerance is the patron
@@ -503,43 +484,6 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       // prior stamp. CONDITIONALLY MATERIALIZED: a prize that was never coerced
       // carries no lastCoercionTick key ⇒ its tradeWarState entry stays byte-identical.
       const nextCoercionTick = coercionEmitted ? tick : (Number.isFinite(priorEntry.lastCoercionTick) ? priorEntry.lastCoercionTick : null);
-      // Preserve every supplier that actually HELD this prize and remains
-      // displaced, together with ITS OWN loss tick. A single `incumbentId` is
-      // only the most recent loser; a global lastFlipTick would falsely re-date
-      // older losses whenever a third supplier later took the crown.
-      /** @type {Record<string, number>} */
-      const lostSupplierSinceTick = {};
-      for (const [id, lostTick] of Object.entries(priorEntry.lostSupplierSinceTick || {})) {
-        if (id && Number.isFinite(lostTick) && lostTick >= 0) {
-          lostSupplierSinceTick[String(id)] = Number(lostTick);
-        }
-      }
-      // Adopt the short-lived WR-4 draft shape, if one arrived through an
-      // in-flight save, using the only clock that shape carried.
-      if (Number.isFinite(priorEntry.lastFlipTick)) {
-        for (const id of Array.isArray(priorEntry.lostSupplierIds)
-          ? priorEntry.lostSupplierIds
-          : []) {
-          if (id && !Object.hasOwn(lostSupplierSinceTick, String(id))) {
-            lostSupplierSinceTick[String(id)] = Number(priorEntry.lastFlipTick);
-          }
-        }
-        // A pre-WR-4 flip row already distinguishes its winner from the
-        // displaced incumbent. Migrate that still-readable fact on adoption.
-        if (priorEntry.incumbentId
-          && priorEntry.winnerId
-          && priorEntry.incumbentId !== priorEntry.winnerId
-          && !Object.hasOwn(lostSupplierSinceTick, String(priorEntry.incumbentId))) {
-          lostSupplierSinceTick[String(priorEntry.incumbentId)] = Number(priorEntry.lastFlipTick);
-        }
-      }
-      if (result.changed && result.incumbentId && result.incumbentId !== result.winnerId) {
-        lostSupplierSinceTick[String(result.incumbentId)] = tick;
-      }
-      delete lostSupplierSinceTick[String(result.winnerId || '')];
-      const orderedLostSupplierSinceTick = Object.fromEntries(
-        Object.entries(lostSupplierSinceTick).sort(([a], [b]) => codepoint(a, b)),
-      );
       tradeWarState[prizeId] = {
         winnerId: result.winnerId,
         incumbentId: result.incumbentId,
@@ -547,9 +491,6 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
         commodityId: String(commodityId),
         lastFlipTick: result.changed ? tick : (Number.isFinite(priorEntry.lastFlipTick) ? priorEntry.lastFlipTick : null),
         updatedTick: tick,
-        ...(Object.keys(orderedLostSupplierSinceTick).length
-          ? { lostSupplierSinceTick: orderedLostSupplierSinceTick }
-          : {}),
         ...(nextCoercionTick != null ? { lastCoercionTick: nextCoercionTick } : {}),
       };
 
@@ -558,18 +499,11 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       // ── FLIP: re-point C's primary trade_dependency channel to the winner. ─
       const winnerId = result.winnerId;
       const defeatedId = result.incumbentId;
-      const dispositionSourceEventId = `world_outcome.trade_realignment.${prizeId}.${tick}`;
       // Disposition ratchet: the new primary partner banked a trade WIN; the displaced
       // incumbent a LOSS. (Only on a real flip — a held prize banks nothing.)
-      dispositionDeltas.push({
-        id: String(winnerId), outcome: 'win', magnitude: 1,
-        sourceEventId: dispositionSourceEventId,
-      });
+      dispositionDeltas.push({ id: String(winnerId), outcome: 'win', magnitude: 1 });
       if (defeatedId && defeatedId !== winnerId) {
-        dispositionDeltas.push({
-          id: String(defeatedId), outcome: 'loss', magnitude: 1,
-          sourceEventId: dispositionSourceEventId,
-        });
+        dispositionDeltas.push({ id: String(defeatedId), outcome: 'loss', magnitude: 1 });
       }
       const winnerStrength = clamp01(0.55 + (contenders.find(c => c.id === winnerId)?.scoreFor || 0) * 0.35);
       // Shared goods set: channelIdFor keys on goods, so the winner-mint and the
@@ -618,7 +552,7 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
         ? `Trade with ${nameFor(defeatedId)} curtailed: the plane objects to the ${String(defeatedEmbargo.worst).toLowerCase()}.`
         : null;
       outcomes.push(conditionOutcome({
-        id: dispositionSourceEventId,
+        id: `world_outcome.trade_realignment.${prizeId}.${tick}`,
         archetype: 'trade_realignment',
         targetSaveId: buyerId,
         severity: 0.4,
@@ -639,73 +573,34 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       if (defeatedId && defeatedId !== winnerId && snapshot?.byId?.has?.(defeatedId)) {
         const escalationRng = rng.fork(`trade_escalation:${prizeId}:${tick}`);
         const defeatedStrength = strengthFor(defeatedId);
-        // TR-1 THE SEVERANCE-MAGNITUDE READ. A court that already holds a typed, receipted
-        // grievance against the winner reaches for the sword a little sooner; a court that
-        // holds a real partnership with it reaches a little later. Both signs come off the
-        // SAME ledger rows, so the pressure and its counterforce can never disagree about
-        // what happened. Dark ⇒ severance and restraint are both 0 ⇒ the addend is exactly
-        // 0 ⇒ this expression is the pre-TR-1 expression, bit for bit.
-        const severance = commercialPressure?.severancePressureOf(defeatedId, winnerId) || null;
-        const restraint = commercialPressure?.partnershipRestraintOf(defeatedId, winnerId) || null;
-        const commercialTilt = clamp01(severance?.magnitude01 || 0) - clamp01(restraint?.magnitude01 || 0);
         const escalates = defeatedStrength >= ESCALATION_CONFIDENCE
-          && escalationRng.random() < clamp01(defeatedStrength - ESCALATION_CONFIDENCE + 0.2
-            + commercialTilt * COMMERCIAL_PRESSURE_W);
+          && escalationRng.random() < clamp01(defeatedStrength - ESCALATION_CONFIDENCE + 0.2);
         if (escalates) {
-          // ESCALATE THROUGH THE ONE OPENER. Hostility makes the pair eligible;
-          // warIntent names the march the trade loser wants. The apply pass owns
-          // both writes and the war layer still decides next tick whether posture,
-          // treaty, one-army, and feasibility gates permit a real deployment.
-          // When the pair had no authored edge, carry a deterministic seed so the
-          // apply pass can establish it before using the ordinary label-change lane.
-          const existingRelationship = relationshipBetween(snapshot, defeatedId, winnerId);
-          const relationshipSeed = existingRelationship
-            ? null
-            : canonicalRelationshipSeed(defeatedId, winnerId);
-          const relationshipKey = existingRelationship
-            ? relationshipKeyFromEdge(existingRelationship.edge)
-            : relationshipSeed?.relationshipKey;
-          if (!relationshipKey) continue;
-          const fromType = existingRelationship?.relState?.relationshipType || 'neutral';
-          outcomes.push({
-            ...conditionOutcome({
-              id: `world_outcome.trade_war_escalation.${prizeId}.${tick}`,
-              archetype: 'war_pressure',
-              targetSaveId: winnerId,
-              severity: clamp01(0.4 + defeatedStrength * 0.2),
-              headline: `${nameFor(defeatedId)} answers lost trade with the sword`,
-              summary: `Defeated in the contest for ${nameFor(buyerId)}'s ${commodityLabelFor(commodityId)} trade, ${nameFor(defeatedId)} opens hostilities against ${nameFor(winnerId)}.`,
-              // THE COUPLING'S RECEIPT FIELD (CPL-1.TRADE_TO_WAR.TR-1.severance_pressure).
-              // When a commercial grievance moved the gate, the march says which one, in
-              // the ledger's own authored words. Dark ⇒ the spread is empty ⇒ this array
-              // is the pre-TR-1 array.
-              reasons: [
-                `Defeated incumbent strength ${defeatedStrength.toFixed(2)} cleared the escalation gate.`,
-                ...(severance?.receipt ? [severance.receipt] : []),
-              ],
-              tick,
-              sourceEventTargetId: defeatedId,
-              causes: [{ source: defeatedId, effect: 'war_pressure', reason: `${nameFor(defeatedId)} escalated a lost trade war.` }],
-            }),
-            affectedSettlementIds: [String(defeatedId), String(winnerId)],
-            relationshipKey,
-            relationshipPatch: { proposedRelationshipType: 'hostile', trajectory: 'transitioning' },
-            proposalPayload: {
-              kind: 'relationship_label_change',
-              relationshipKey,
-              fromType,
-              toType: 'hostile',
-              reason: `${nameFor(defeatedId)} escalated a lost trade war against ${nameFor(winnerId)}.`,
-            },
-            metadata: {
-              fromSaveId: String(defeatedId),
-              toSaveId: String(winnerId),
-              fromType,
-              toType: 'hostile',
-              warIntent: { fromId: String(defeatedId), targetId: String(winnerId) },
-              ...(relationshipSeed ? { relationshipSeed } : {}),
-            },
-          });
+          // ESCALATE: A opens a war_front toward the winner — the war layer
+          // resolves the siege next tick (conquest stays reachable, not automatic).
+          graphChannels.push(mintDirectedChannel({
+            type: 'war_front',
+            from: defeatedId,
+            to: winnerId,
+            strength: clamp01(0.45 + defeatedStrength * 0.3),
+            confidence: 0.75,
+            explanation: `${nameFor(defeatedId)} escalates the lost trade war against ${nameFor(winnerId)}.`,
+            relationshipKey: `war_front.${stablePart(defeatedId)}.${stablePart(winnerId)}`,
+            source: 'trade_war_escalation',
+            now,
+          }));
+          outcomes.push(conditionOutcome({
+            id: `world_outcome.trade_war_escalation.${prizeId}.${tick}`,
+            archetype: 'war_pressure',
+            targetSaveId: winnerId,
+            severity: clamp01(0.4 + defeatedStrength * 0.2),
+            headline: `${nameFor(defeatedId)} answers lost trade with the sword`,
+            summary: `Defeated in the contest for ${nameFor(buyerId)}'s ${commodityLabelFor(commodityId)} trade, ${nameFor(defeatedId)} opens hostilities against ${nameFor(winnerId)}.`,
+            reasons: [`Defeated incumbent strength ${defeatedStrength.toFixed(2)} cleared the escalation gate.`],
+            tick,
+            sourceEventTargetId: defeatedId,
+            causes: [{ source: defeatedId, effect: 'war_pressure', reason: `${nameFor(defeatedId)} escalated a lost trade war.` }],
+          }));
         } else {
           // WIND DOWN: a peaceful economic adjustment — a reversible cold_war
           // strain condition on the defeated incumbent (the market loss bites,

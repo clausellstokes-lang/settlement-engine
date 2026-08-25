@@ -32,8 +32,6 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
-
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_125 = resolve(dir, '125_action_velocity_guards.sql');
 const allExist = existsSync(MIG_125);
@@ -41,7 +39,7 @@ const allExist = existsSync(MIG_125);
 /** Extract a function definition verbatim: from `create or replace function
  *  public.<name>` to the first `$$;`. */
 function extractFn(src, name) {
-  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
+  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
   if (!m) throw new Error(`could not extract ${name} from migration 125`);
   return m[0];
 }
@@ -53,7 +51,7 @@ function netCurrentFn(name) {
   let last = null;
   for (const f of files) {
     const src = readFileSync(resolve(dir, f), 'utf-8');
-    const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'igm');
+    const re = new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'ig');
     let m;
     while ((m = re.exec(src)) !== null) last = m[0];
   }
@@ -128,7 +126,7 @@ describe.runIf(allExist)('action velocity guards — execution against the real 
     await db.exec(extractFn(src, '_consume_action_rate_limit'));
     await db.exec(extractFn(src, 'toggle_gallery_vote'));
     await db.exec(extractFn(src, 'add_gallery_comment'));
-  }, PGLITE_BOOT_TIMEOUT_MS);
+  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
 
   beforeEach(async () => {
     await db.exec('truncate public.settlements, public.gallery_votes, public.gallery_comments, public.user_action_rate_limits cascade;');

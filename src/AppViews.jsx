@@ -7,9 +7,8 @@
  * legible and gives the view table a single home. `Loading` lives here because both
  * the shell's Suspense fallback and the guarded-view loaders need it.
  *
- * Render selection remains prop-driven, so this component re-renders only when
- * the shell passes new values. The campaignLazy module loaders consult the store
- * only while arming a campaign-capable route; AppViews itself does not subscribe.
+ * Pure presentational: every input is a prop (no store reads), so it re-renders only
+ * when the shell passes new values.
  *
  * NOTE on HomeLanding: the redesign template imported it statically (the Welcome
  * landing IS first paint for anon). This tree's first-paint byte budget is tighter
@@ -18,40 +17,21 @@
  * lazy here — the shell's Suspense shows the brief Loading fallback before the hero.
  * Its proof card lazy-loads from inside HomeLanding.
  */
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { IconsContext } from './components/primitives/IconsContext.js';
 import { MUTED, sans } from './components/theme.js';
-import HouseDevice from './components/brand/HouseDevice.jsx';
-import { useStore } from './store/index.js';
-import {
-  createRetryableCampaignLazy,
-  createRetryableLazy,
-} from './store/campaignRuntimeView.js';
-
-const campaignLazy = importer => createRetryableCampaignLazy(useStore, importer, {
-  fallback: <Loading />,
-});
-// Every route lives beneath App's recoverable boundary. Use a fresh lazy
-// identity on its explicit retry so ordinary chunk failures recover just as
-// campaign-runtime failures do, without arming the campaign capsule.
-const lazy = importer => createRetryableLazy(importer, {
-  fallback: <Loading />,
-});
 
 // Lazy-loaded views (code-split off the first-paint graph).
 const HomeLanding     = lazy(() => import('./components/HomeLanding.jsx'));
-const GenerateWizard  = campaignLazy(() => import('./components/GenerateWizard.jsx'));
-const SettlementsPanel = campaignLazy(() => import('./components/SettlementsPanel'));
+const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
+const SettlementsPanel = lazy(() => import('./components/SettlementsPanel'));
 const CompendiumPanel = lazy(() => import('./components/CompendiumPanel'));
 const HowToUse        = lazy(() => import('./components/HowToUse'));
-// THE ABOUT SPLIT (docs/DESIGN_ABOUT_PAGES.md): the conceptual page. The
-// operational half is HowToUse above, now /about/guide.
-const AboutWhatThisIs = lazy(() => import('./components/about/AboutWhatThisIs.jsx'));
-const WorldMap         = campaignLazy(() => import('./components/WorldMap.jsx'));
-const AccountPage      = campaignLazy(() => import('./components/AccountPage.jsx'));
-const AdminPanel       = campaignLazy(() => import('./components/AdminPanel.jsx'));
+const WorldMap         = lazy(() => import('./components/WorldMap.jsx'));
+const AccountPage      = lazy(() => import('./components/AccountPage.jsx'));
+const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
 const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
-const GalleryPage      = campaignLazy(() => import('./components/GalleryPage.jsx'));
+const GalleryPage      = lazy(() => import('./components/GalleryPage.jsx'));
 const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
 // Dedicated auth routes (/signin · /register · /reset-password · /verify-email
 // · /set-new-password · /confirm-email). Thin page wrappers around the same
@@ -72,32 +52,10 @@ const ConfirmEmailPage  = lazy(() => import('./components/auth/ConfirmEmailPage.
 // there is no separate RefundsPage chunk.
 const TermsPage         = lazy(() => import('./components/legal/TermsPage.jsx'));
 const PrivacyPage       = lazy(() => import('./components/legal/PrivacyPage.jsx'));
-// R-7/R-9 trust pages + V-18 the DM Screen — all lazy (off the first-paint graph).
-const CovenantPage      = lazy(() => import('./components/legal/CovenantPage.jsx'));
-const BountyPage        = lazy(() => import('./components/legal/BountyPage.jsx'));
-const DmScreen          = campaignLazy(() => import('./components/screen/DmScreen.jsx'));
-// THE FOUNDERS' HALL (/founders) — thirty chairs, all by invitation, none ever
-// sold. Lazy — off the first-paint graph; its chair read (lib/foundersHall.js) and
-// its letterbox seam (lib/founderChairRequest.js) are both dynamically imported on
-// mount and fail closed. Supersedes the seat-LINEAGE page of the retired
-// transferable-seat design (docs/DESIGN_FOUNDERS_HALL.md §1/§2).
-const FoundersHallPage  = lazy(() => import('./components/founders/FoundersHallPage.jsx'));
-// The First Hundred honor roll (/first-hundred) and the public roadmap (/roadmap).
-// Lazy — off the first-paint graph; each renders from a committed data module.
-const FirstHundredPage  = lazy(() => import('./components/founders/FirstHundredPage.jsx'));
-const RoadmapPage       = lazy(() => import('./components/howto/RoadmapPage.jsx'));
-// THE SEED POST (V-13): /world/<code> regenerates a shared world client-side.
-// Lazy — its dynamic import of the composer/engine stays off the first-paint graph
-// (tests/build/worldPageLazy.test.js).
-const WorldPage         = lazy(() => import('./components/WorldPage.jsx'));
 
 export function Loading() {
-  // The diegetic loading emblem — the still house device over the plain word
-  // (owner placement addendum #2: no spinner-replacement theatrics; a still ink
-  // mark, reduced-motion safe by construction since nothing animates).
   return (
     <div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>
-      <HouseDevice size={40} mode="light" weight="standard" style={{ display: 'block', margin: '0 auto 10px', opacity: 0.85 }} />
       Loading...
     </div>
   );
@@ -124,35 +82,17 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
       {(view === 'realm' || view === 'map') && (
         <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
       )}
-      {view === 'compendium'  && <CompendiumPanel standalone routeEntry={params.entry} />}
-      {/* THE ABOUT FAMILY. `howto`, `about` and the compare* views are retired
-          redirect surfaces (App's redirect effect bounces them here with the
-          right anchor), so they render nothing — one frame of blank beats one
-          frame of the page they are leaving. */}
-      {view === 'about-what-this-is' && <AboutWhatThisIs />}
-      {view === 'about-guide' && <HowToUse />}
+      {view === 'compendium'  && <CompendiumPanel standalone />}
+      {view === 'howto'       && <HowToUse standalone />}
       {/* Guarded views: render only once authorized. The guard effect
           redirects unauthorized visitors; until the session resolves we
           show the loader rather than flash (or crash on) gated content. */}
-      {view === 'account'     && (authLoading ? <Loading /> : authTier !== 'anon' ? (
-        <AccountPage
-          onNavigateAdmin={() => setView('admin')}
-          routeSection={params.section}
-          routeMessageId={params.message}
-        />
-      ) : null)}
+      {view === 'account'     && (authLoading ? <Loading /> : authTier !== 'anon' ? <AccountPage onNavigateAdmin={() => setView('admin')} /> : null)}
       {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
       {view === 'pricing'     && <PricingPage onNavigate={setView} />}
-      {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} routeHub={params.hub} />}
-      {view === 'founders'    && <FoundersHallPage onNavigate={setView} />}
-      {view === 'first-hundred' && <FirstHundredPage onNavigate={setView} />}
-      {view === 'roadmap'     && <RoadmapPage onNavigate={setView} />}
-      {view === 'world'       && <WorldPage code={params.code} onNavigate={setView} />}
+      {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} />}
       {view === 'terms'       && <TermsPage />}
       {view === 'privacy'     && <PrivacyPage />}
-      {view === 'covenant'    && <CovenantPage />}
-      {view === 'bounty'      && <BountyPage />}
-      {view === 'screen'      && <DmScreen />}
       {/* /refunds is retired as a standalone page — its content is now the Terms
           "Refunds and cancellation" section. The old URL still resolves: it
           renders Terms and scrolls to that subsection, so no emailed/shared

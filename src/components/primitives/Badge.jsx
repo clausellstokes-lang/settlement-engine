@@ -1,20 +1,19 @@
 import { X } from 'lucide-react';
 import {
-  AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BORDER, CARD_ALT, FS, GOLD_BG, GOLD_TXT,
-  GREEN, GREEN_BG, MUTED, RED, RED_BG, R, SECOND, SP, SLATE_BG, SLATE_DEEP,
+  AMBER, AMBER_BG, BLUE, BLUE_BG, BORDER, CARD_ALT, FS, GOLD, GOLD_BG,
+  GREEN, GREEN_BG, MUTED, RED, RED_BG, R, SECOND, SP, VIOLET, VIOLET_BG,
   sans,
 } from '../theme.js';
-import { useIconsOn } from './IconsContext.js';
 
 const TONES = {
   neutral: { bg: CARD_ALT, fg: SECOND, border: BORDER },
   muted: { bg: CARD_ALT, fg: MUTED, border: BORDER },
-  gold: { bg: GOLD_BG, fg: GOLD_TXT, border: BORDER },
+  gold: { bg: GOLD_BG, fg: GOLD, border: BORDER },
   success: { bg: GREEN_BG, fg: GREEN, border: BORDER },
-  warning: { bg: AMBER_BG, fg: AMBER_DEEP, border: BORDER },
+  warning: { bg: AMBER_BG, fg: AMBER, border: BORDER },
   danger: { bg: RED_BG, fg: RED, border: BORDER },
   info: { bg: BLUE_BG, fg: BLUE, border: BORDER },
-  ai: { bg: SLATE_BG, fg: SLATE_DEEP, border: BORDER },
+  ai: { bg: VIOLET_BG, fg: VIOLET, border: BORDER },
 };
 
 const SIZES = {
@@ -33,7 +32,6 @@ export default function Badge({
 }) {
   const t = TONES[tone] || TONES.neutral;
   const s = SIZES[size] || SIZES.sm;
-  const iconsOn = useIconsOn();
 
   return (
     <span
@@ -55,7 +53,7 @@ export default function Badge({
         ...style,
       }}
     >
-      {iconsOn ? icon : null}
+      {icon}
       {children}
       {onRemove && (
         <button
@@ -74,9 +72,7 @@ export default function Badge({
             cursor: 'pointer',
           }}
         >
-          {iconsOn
-            ? <X size={s.icon} />
-            : <span aria-hidden="true" style={{ fontSize: s.icon + 2, lineHeight: 1, fontWeight: 700 }}>×</span>}
+          <X size={s.icon} />
         </button>
       )}
     </span>

@@ -25,10 +25,6 @@
  */
 
 import { deepClone } from '../clone.js';
-// The civility guard's VEIL mode. civility.js is a pure leaf (its only import is
-// the authored word lists), so this domain→lib edge stays headless — no React,
-// no store, nothing that could taint the engine spine through the back door.
-import { veilDeep } from '../../lib/civility.js';
 
 // ── Public top-level allowlist ──────────────────────────────────────────────
 // Character-identical (order-independent) to the FUSED migration 123's
@@ -100,21 +96,6 @@ export const PUBLIC_TOPLEVEL_KEYS = Object.freeze([
 // private key from coverage.
 export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|dossierNotes|tabNotes|\bnotes?\b|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap|latentPantheon|seed|_config)/i;
 
-// ── Public NPC field allowlist ──────────────────────────────────────────────
-// Character-identical (order-independent) to the SQL npc_allowed array in
-// _gallery_sanitize_public_json (033, recreated net-current through 189) and to
-// the publicNpc() object literal below. KEEP publicNpc a plain object literal —
-// tests/security/gallerySanitizer.pglite.test.js parses that literal by regex
-// and pins it to the SQL npc_allowed; this constant is behaviourally pinned to
-// both by tests/security/factionMemberPublicParity.pglite.test.js (same input
-// record must project to the same key set as npcs[] members, client == server).
-// Used by sanitizePublicValue to reduce FACTION-ROSTER member records — see the
-// faction-member gate there (migration 189 twin).
-export const NPC_PUBLIC_KEYS = Object.freeze([
-  'id', 'name', 'role', 'title', 'category', 'personality', 'physical',
-  'factionAffiliation', 'secondaryAffiliation', 'presentation', 'influence',
-]);
-
 /**
  * Recursively strip denied keys from a subtree; preserves history.currentTensions.
  * This is the DEEP denylist (defense-in-depth). The top-level ALLOWLIST gate lives
@@ -133,42 +114,12 @@ export function sanitizePublicValue(value, path = []) {
   }
   if (!value || typeof value !== 'object') return value;
 
-  // COVERT DROP (W-DOCTRINE-3 §6): an object explicitly flagged `covert:true` is hidden
-  // DM state — e.g. a covert 'corruption' impairment on institutions[].impairments whose
-  // `description` NAMES the corrupted NPC ("<NPC>'s capture quietly compromised <inst>",
-  // stamped by imposeCorruption scope:'individual_institution'). Drop the WHOLE object
-  // from every public / anon / preview projection: stripping only the `covert` KEY (as
-  // COVERT_KEY_RE does for world snapshots) would leave the naming description exposed.
-  // This is a VALUE-level rule (no PRIVATE_KEY_RE token), so the token-⊆-SQL drift pin is
-  // untouched. Mirrored server-side by _gallery_sanitize_public_json (migration 142). The
-  // settlement ROOT never reaches here (toPublicSafe gates it via the top-level allowlist),
-  // so only NESTED objects are covert-checked — matching the SQL `not is_toplevel` guard.
-  // FAIL-CLOSED, like the rest of this projection. (Only default mode; the owner's
-  // gallery_share_dm full mode keeps its own DM content — see toPublicSafe.)
-  if (/** @type {Record<string, unknown>} */ (value).covert === true) return undefined;
-
-  // FACTION-MEMBER ALLOWLIST (migration 189 twin): factions[].members[] embed the
-  // SAME full NPC records as npcs[] (factionGrouping pushes roster references;
-  // relinkFactionMembers re-points them at the enriched roster), but a member's
-  // path never contains an 'npcs' segment, so the npcs-path strip below missed
-  // them — `goal` (the NPC's DM motivation) and every non-allowlisted NPC field
-  // (gender, power, …) rode through to public / anon / preview projections
-  // (secret/plotHooks were already caught at depth by PRIVATE_KEY_RE). Reduce
-  // member objects to the public NPC allowlist, exactly as the server's
-  // is_npc_obj gate does for paths ending in 'members' under a 'factions'
-  // ancestor. The ancestor rule deliberately also covers deeper rosters (e.g. a
-  // powerStructure.factions[].members) — fail-closed, hiding more.
-  const isFactionMember = path.length > 0
-    && path[path.length - 1] === 'members'
-    && path.includes('factions');
-
   /** @type {Record<string, unknown>} */
   const out = {};
   for (const [key, child] of Object.entries(value)) {
     const childPath = [...path, key];
     if (PRIVATE_KEY_RE.test(key)) continue;
     if (childPath.includes('npcs') && ['goal', 'secret', 'plotHooks', 'relationships'].includes(key)) continue;
-    if (isFactionMember && !NPC_PUBLIC_KEYS.includes(key)) continue;
     if (childPath.includes('history') && key === 'currentTensions') {
       out[key] = sanitizePublicValue(child, childPath);
       continue;
@@ -365,96 +316,5 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
       })
       .filter(npc => npc.name || npc.role);
   }
-
-  // ── THE CIVILITY VEIL (DESIGN_PROFILE_IMAGE.md §9, the VEIL mode) ───────────
-  // The LAST thing that happens to a public projection, and the right place for
-  // it for three reasons that together make this the only correct seam:
-  //
-  //   1. ORIGIN. Everything reaching this line is PRIVATE-ORIGIN text — an NPC
-  //      secret, a plot hook, a goal, the DM Compass — written in a private world
-  //      and carried into public by the owner's shareDm opt-in. §9's ruling is
-  //      that such text is VEILED, never BLOCKED: "those are originally
-  //      private... people may forget". The author did nothing public-facing
-  //      wrong, so nothing is refused and no friction is applied. Text the author
-  //      wrote FOR the public (a display name, a comment, a gallery description)
-  //      is a different mode entirely and is gated at ITS entry, not here.
-  //
-  //   2. ONE TRANSFORM, EVERY FORM. §9 requires the mask to apply "in the public
-  //      VIEW and in the SHARED/IMPORT PAYLOAD identically". ⚠️ CORRECTED (VH-1):
-  //      this comment used to claim the gallery dossier read and the world export
-  //      "both already flow through this one function", and that was WRONG — only
-  //      the settlement SUB-OBJECT flows through here. Each of those payloads
-  //      HOISTS a raw display name beside the projection (gallery.js's `row.name`,
-  //      worldExport's member name and realm name), and those hoists rode out
-  //      unveiled, so the veiled copy was only ever a fallback. The seam is
-  //      therefore not "inside toPublicSafe" but "the boundary of every public
-  //      payload builder", and it is spelled ONCE as `veilPublicPayload` below.
-  //
-  //   3. THE STORAGE LAW. This is a projection that never writes. The author's
-  //      stored note is untouched and survives every share, unshare and reimport
-  //      byte-intact; only what LEAVES privacy wears the veil.
-  //
-  // Applied to BOTH modes, not just `full`. Default mode already strips DM
-  // blocks, but user-authored strings still ride it (names, renames), and a veil
-  // is harmless on clean text — veilDeep returns the SAME references when nothing
-  // is flagged, so this costs no allocation on the overwhelmingly common path.
-  //
-  // ⚠️ CLIENT MIRROR ONLY, and the honesty matters: the SERVER's
-  // _gallery_sanitize_public_json is the authoritative boundary for stored public
-  // reads, and it does NOT yet veil (migration 195 ships the block-mode server
-  // mirror; masking inside JSON prose in SQL is recorded as deferred). Until then
-  // the veil is defense-in-depth on every path that renders through this module,
-  // which is every path this client serves.
-  return veilPublicPayload(result);
-}
-
-/**
- * THE PUBLIC-PAYLOAD VEIL SEAM — the ONE call every public payload ends in
- * (DESIGN_PROFILE_IMAGE.md §9, VEIL mode; the one-resolver law).
- *
- * WHY THIS EXISTS AS A NAMED EXPORT rather than a bare `veilDeep` at four call
- * sites. The veil hole this closes was not a missing transform — `veilDeep` was
- * already applied inside `toPublicSafe`. It was a MISPLACED SEAM: the veil sat
- * inside one sub-object while each payload builder hoisted a raw display name
- * beside it, and the raw sibling is the one the page actually rendered
- * (`{dossier.name || dossier.settlement?.name}` — the veiled copy was the
- * FALLBACK). A per-field cure would have to be remembered again by the next
- * field; moving the seam to the payload BOUNDARY cures the class, because a
- * payload cannot be assembled without passing its own boundary.
- *
- * THE LAW, in one line: a value that leaves privacy leaves through this call.
- * Every builder of a public/anonymous/shared/exported payload — `toPublicSafe`
- * itself, gallery.js's tile / dossier / import projections, and worldExport's
- * realm payload — RETURNS the result of this function. The invariant is pinned
- * by tests/security/publicPayloadVeilTotality.test.js, which stamps a vector
- * term into every input field of every builder and asserts the serialized
- * payload carries ZERO plain occurrences — so a NEW hoisted raw field reds the
- * pin instead of shipping.
- *
- * IDENTIFIERS ARE NOT EXEMPT, and that is deliberate rather than an oversight.
- * Masking is applied to ids and keys too, so a join between two veiled sides
- * still matches: `veilText` is deterministic, so the same raw id veils to the
- * same string wherever it appears in the payload. This is only safe because the
- * two identifiers that must round-trip to the SERVER verbatim cannot carry a
- * flaggable token by construction — `public_slug` is 12 hex characters from
- * `_make_public_slug()` (migration 008) and the row `id` is a uuid, neither of
- * which contains a word. Should a NAME-DERIVED slug ever become a server-facing
- * identifier, this rule needs an explicit round-trip exemption; recorded here so
- * the next reader does not have to rediscover why it is currently unnecessary.
- *
- * NOT APPLIED to the admin report projection (gallery.js `sanitizeReport`): a
- * moderator reviewing a report must see the reported text VERBATIM, and masking
- * it would defeat the backstop lane the guard's own header names as layer two.
- * That surface is admin-gated, never public. Deliberate exemption, not a gap.
- *
- * Delegates to the one validator (lib/civility.js `veilDeep`) — no masking logic
- * is invented here, and the structural-sharing property means a clean payload
- * comes back by identity, so this costs no allocation on the common path.
- *
- * @template T
- * @param {T} payload
- * @returns {T}
- */
-export function veilPublicPayload(payload) {
-  return veilDeep(payload);
+  return result;
 }

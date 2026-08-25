@@ -24,10 +24,6 @@ import RelationshipEdges from './map/RelationshipEdges.jsx';
 import ChainEdges        from './map/ChainEdges.jsx';
 import RegionalCausalityLayer from './map/RegionalCausalityLayer.jsx';
 import WarFaithMapOverlay from './map/WarFaithMapOverlay.jsx';
-import TravelersLayer    from './map/TravelersLayer.jsx';
-// V-3 THE TIMELAPSE — STATIC within this already-lazy map chunk (the FP-R idiom:
-// a lazy() would mint a preload entry). @enforced-by tests/build/vendorPdfLazy.test.js
-import TimelapseLayer    from './map/TimelapseLayer.jsx';
 import RoadsLayer        from './map/RoadsLayer.jsx';
 import LabelsLayer       from './map/LabelsLayer.jsx';
 import MarkersLayer      from './map/MarkersLayer.jsx';
@@ -42,8 +38,6 @@ export default function MapOverlay({ bridge, transformOut }) {
   const mapMode       = useStore(s => s.mapMode);
   const annotateTool  = useStore(s => s.annotateTool);
   const layers        = useStore(s => s.mapState.layers);
-  // V-3 THE TIMELAPSE: the overlay mounts only while scrubbing (timelapseTick set).
-  const timelapseActive = useStore(s => s.timelapseTick != null);
   const isDraggingOver = useStore(s => s.isDraggingOver);
   const updateLabel = useStore(s => s.updateLabel);
   const updateMarker = useStore(s => s.updateMarker);
@@ -53,13 +47,6 @@ export default function MapOverlay({ bridge, transformOut }) {
   // no FMG iframe / bridge viewport to mirror).
   const customBackdrop = useStore(s => s.mapState.customBackdrop);
   const imageMode = !!customBackdrop?.imageUrl;
-  // mapChains tier gate (Owner Ruling #5, 2026-07-17 — "enforce mapChains"):
-  // TIER_GATE marks supply-chain map edges premium-only; the gate wraps the
-  // AFFORDANCE (this render + the LayersPanel/RoutesToolbar toggles), never the
-  // derivation — ChainEdges/computeMapChains stay tier-blind. Selector-call
-  // pattern per SettlementDetail's canExportFreely (elevated roles pass inside
-  // canUseMapChains itself).
-  const mapChainsUnlocked = useStore(s => typeof s.canUseMapChains === 'function' && s.canUseMapChains());
 
   const wrapperRef = useRef(null);
   const gRef = useRef(null);
@@ -220,13 +207,6 @@ export default function MapOverlay({ bridge, transformOut }) {
     }, 500);
   }
 
-  // Cancel any armed persist on unmount: without this, a 500ms timer that fires
-  // after the overlay tears down (e.g. a campaign switch replaces the map slice)
-  // would write campaign A's stale camera into the newly-restored viewport.
-  useEffect(() => () => {
-    if (persistTimerRef.current) clearTimeout(persistTimerRef.current);
-  }, []);
-
   // ── Pointer-events gating ────────────────────────────────────────────
   // View mode: overlay is entirely passive (clicks pass through to iframe).
   // Terrain mode: also passive (FMG handles its own editor clicks).
@@ -258,7 +238,6 @@ export default function MapOverlay({ bridge, transformOut }) {
   return (
     <div ref={wrapperRef} style={wrapperStyle}>
       <svg
-        data-map-overlay-svg=""
         style={svgStyle}
         viewBox={`0 0 ${vbW} ${vbH}`}
         preserveAspectRatio="none"
@@ -324,21 +303,13 @@ export default function MapOverlay({ bridge, transformOut }) {
           {/* Geography-derived charted trails need FMG pack.cells — omitted in
               image mode (relationship/chain straight-line edges still render). */}
           {layers.roads && !imageMode && <RoadsLayer bridge={bridge} />}
-          {layers.chains && mapChainsUnlocked && <ChainEdges />}
+          {layers.chains        && <ChainEdges />}
           {layers.relationships && <RelationshipEdges />}
-          {/* V-3 THE TIMELAPSE — history pulses + grew/declined tint at the scrub
-              tick. A background lens (drawn early so glyphs + pins sit on top);
-              mounts only while scrubbing; DM-secret + dormant otherwise. */}
-          {timelapseActive && <TimelapseLayer />}
           <RegionalCausalityLayer />
           {/* UX Phase 5 — spatial war/faith glyphs (deployment arrows, siege rings +
               coalition badge, occupation shading, trade-war prize). Self-gates to
               null when no campaign / no live war state; honors channel visibility. */}
           <WarFaithMapOverlay />
-          {/* DESIGN_THE_ROADS §13 — moving armies / migrant columns / named-NPC envoys over
-              the road graph. Opt-in DM-truth lens (default off); dormant ledgers render
-              nothing. Above war glyphs, below the settlement pins. */}
-          {layers.travelers && <TravelersLayer />}
           {layers.placements !== false && <PlacementsLayer transformRef={transformRef} />}
           {layers.markers       && <MarkersLayer onEditMarker={marker => setEditDialog({ kind: 'marker', item: marker })} />}
           {layers.labels        && <LabelsLayer onEditLabel={label => setEditDialog({ kind: 'label', item: label })} />}

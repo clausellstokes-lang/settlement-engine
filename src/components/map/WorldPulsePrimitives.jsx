@@ -7,11 +7,8 @@ import { useState } from 'react';
 import { ShieldAlert } from 'lucide-react';
 
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
-import { human } from './WorldPulseData.js';
-import { newsReasonPhrases } from '../../domain/display/newsBody.js';
+import { human, percent } from './WorldPulseData.js';
 import Button from '../primitives/Button.jsx';
-import { AddressChain, AffectedSettlements } from './AddressChain.jsx';
-import { severityBand } from './heraldFilter.js';
 
 export function Pill({ children, tone = 'neutral' }) {
   const bg = tone === 'major' ? GOLD_BG : tone === 'good' ? swatch.successBg : CARD_ALT;
@@ -23,6 +20,7 @@ export function Pill({ children, tone = 'neutral' }) {
       minHeight: 22,
       padding: '2px 7px',
       border: `1px solid ${BORDER2}`,
+      borderRadius: 6,
       background: bg,
       color,
       fontFamily: sans,
@@ -40,7 +38,7 @@ export function EntityPill({ label, value }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', minHeight: 22, maxWidth: '100%',
-      padding: '2px 8px', border: `1px solid ${BORDER2}`,
+      padding: '2px 8px', border: `1px solid ${BORDER2}`, borderRadius: 6,
       background: swatch.infoBg, color: INK,
       fontFamily: sans, fontSize: FS.xxs, fontWeight: 700,
     }}>
@@ -66,13 +64,13 @@ export function NameAttackerControl({ stressor, onName, busy }) {
         aria-label={`Name the force behind ${stressor.label || human(stressor.type)}`}
         style={{
           flex: 1, minWidth: 0, minHeight: 30, padding: '5px 9px',
-          border: `1px solid ${BORDER2}`,
+          border: `1px solid ${BORDER2}`, borderRadius: 6,
           background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs,
         }}
       />
       <SmallButton
         tone="good"
-        hint="Name attacker"
+        title="Name attacker"
         disabled={busy || !value.trim()}
         onClick={() => onName(value.trim())}
       >
@@ -82,24 +80,12 @@ export function NameAttackerControl({ stressor, onName, busy }) {
   );
 }
 
-export function OutcomeCard({
-  heading,
-  summary,
-  severity,
-  reasons = [],
-  actions = null,
-  tone = 'normal',
-  details = [],
-  involved = [],
-  subject = null,
-  affectedIds = [],
-}) {
+export function OutcomeCard({ title, summary, severity, reasons = [], actions = null, tone = 'normal', details = [], involved = [] }) {
   const major = tone === 'major' || severity >= 0.7;
-  const severityLabel = severityBand({ severity });
-  const reasonPhrases = newsReasonPhrases({ reasons });
   return (
     <article style={{
       border: `1px solid ${major ? GOLD : BORDER}`,
+      borderRadius: 8,
       background: major ? GOLD_BG : CARD,
       padding: 12,
       display: 'flex',
@@ -118,7 +104,7 @@ export function OutcomeCard({
             lineHeight: 1.25,
             overflowWrap: 'anywhere',
           }}>
-            {heading}
+            {title}
           </h4>
           {summary && (
             <p style={{
@@ -132,25 +118,17 @@ export function OutcomeCard({
               {summary}
             </p>
           )}
-          {/* THE NEWS ADDRESS LAW: the subject's linked address chain
-              (settlement › power › faction › npc), as deep as the record
-              identifies. Renders nothing when the outcome names no addressable
-              subject (a subjectless event) — no fabrication. */}
-          {subject && <AddressChain descriptor={subject} style={{ marginTop: 6 }} />}
         </div>
       </div>
-      {affectedIds.length > 0 && (
-        <AffectedSettlements ids={affectedIds} />
-      )}
       {involved.length > 0 && (
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
           {involved.map((entity, index) => <EntityPill key={`${entity.label}-${index}`} label={entity.label} value={entity.value} />)}
         </div>
       )}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-        <Pill tone={major ? 'major' : 'neutral'}>{severityLabel}</Pill>
+        <Pill tone={major ? 'major' : 'neutral'}>Severity {percent(severity)}</Pill>
         {details.slice(0, 5).map((detail, index) => <Pill key={`${detail}-${index}`}>{detail}</Pill>)}
-        {reasonPhrases.slice(0, 3).map((reason, index) => <Pill key={`${reason}-${index}`}>{reason}</Pill>)}
+        {reasons.slice(0, 3).map((reason, index) => <Pill key={`${reason}-${index}`}>{reason}</Pill>)}
       </div>
       {actions && (
         <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 2 }}>
@@ -161,20 +139,14 @@ export function OutcomeCard({
   );
 }
 
-export function SmallButton({
-  children,
-  onClick,
-  tone = 'neutral',
-  hint,
-  disabled = false,
-}) {
+export function SmallButton({ children, onClick, tone = 'neutral', title, disabled = false }) {
   const variant = tone === 'good' ? 'success' : tone === 'danger' ? 'danger' : 'secondary';
   return (
     <Button
       variant={variant}
       size="sm"
       onClick={onClick}
-      title={hint}
+      title={title}
       disabled={disabled}
     >
       {children}
@@ -182,12 +154,12 @@ export function SmallButton({
   );
 }
 
-export function Section({ heading, count, children }) {
+export function Section({ title, count, children }) {
   return (
     <section style={{ minWidth: 0 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
         <h3 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
-          {heading}
+          {title}
         </h3>
         <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
           {count}

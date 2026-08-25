@@ -1,19 +1,6 @@
 import { clamp01 } from '../../kernel/math.js';
-import {
-  decayFactionPairStates,
-  factionPairOf,
-  mintFactionPairIncident,
-  selectWarDecisionIncident,
-} from './factionPairLedger.js';
 import { stablePart } from './worldState.js';
 import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes.js';
-import { governingCoalition } from './beliefMap.js';
-import { memoryWeaveActive } from './relationshipEvolution.js';
-import { compareCodepoint } from '../deterministicSort.js';
-import { governingFactionOf } from '../rulingPower.js';
-// ES-5b — a REAL cross-layer pair (INFO→INTERIOR), TAKEN rather than avoided, and
-// licensed in this same commit by CPL-20 `ES5B_ABSENCE_BENCH_COUPLING`. Never baselined.
-import { presenceSharesFor } from './espionage/espionagePresence.js';
 
 // Canonical archetype → factionCompetition's local vocabulary (the FACTION_POWER_BASES
 // keys). Folds the archetypes this layer doesn't model: government/other → civic,
@@ -95,19 +82,6 @@ function factionId(saveId, faction, index) {
   return `${saveId}:${stablePart(name)}`;
 }
 
-/**
- * Canonical faction-plane identity shared with cross-module producers. A raw
- * generator faction id is not itself a factionCompetition id: the settlement
- * scope is load-bearing because otherwise two realms may alias the same local
- * token and a deposited pair grievance becomes unreadable by this owner.
- * @param {unknown} saveId
- * @param {import('../settlement.schema.js').SimFaction} faction
- * @param {number} [index]
- */
-export function factionCompetitionId(saveId, faction, index = 0) {
-  return factionId(saveId, faction, index);
-}
-
 function inferFactionArchetype(faction = {}) {
   // Delegates to the shared canonical detector so world-pulse classifies a faction
   // the same way factionProfile / factionResponses / factionRoles do. (The legacy
@@ -137,83 +111,21 @@ function institutionsFor(item) {
     .map((/** @type {any} */ entry, /** @type {any} */ index) => ({
       id: stablePart(entry.id || entry.name || entry.label || `institution_${index}`),
       name: entry.name || entry.label || entry.id || `Institution ${index + 1}`,
-      status: entry.status,
-      inactive: entry._worldPulseInactive === true,
-      impairments: Array.isArray(entry.impairments) ? entry.impairments : [],
     }))
     .slice(0, 12);
 }
 
-/** @typedef {{ id: string, name: string }} InstitutionTarget */
-/** @typedef {{ id?: string, name?: string, status?: string, _worldPulseInactive?: boolean, impairments?: import('../entities/status.js').Impairment[] }} SuppressionInstitution */
-/** @typedef {{ status?: string, outcome?: { proposalPayload?: { kind?: string, factionId?: unknown } } }} FactionProposal */
-
-/** Resolve the same standing institution the apply seam will impair.
- * @param {import('./pulseShapes.js').SettlementItem} item
- * @param {InstitutionTarget} target
- * @returns {SuppressionInstitution}
- */
-function standingInstitutionFor(item, target) {
-  const pools = [
-    item.settlement?.institutions,
-    item.settlement?.services,
-    item.settlement?.infrastructure,
-  ];
-  for (const pool of pools) {
-    if (!Array.isArray(pool)) continue;
-    const found = pool.find((entry, index) => (
-      stablePart(entry?.id || entry?.name || entry?.label || `institution_${index}`) === String(target.id)
-      || String(entry?.name || entry?.label || '').toLowerCase() === String(target.name).toLowerCase()
-    ));
-    if (found) return /** @type {SuppressionInstitution} */ (found);
-  }
-  return target;
-}
-
-/**
- * The top three factions and their CONTEST WEIGHT — the one producer of `entry.power`,
- * which four candidate rules read as a severity term and `candidateBase` records as
- * `metadata.power`.
- *
- * ES-5b — §3.11 THE ABSENCE COST. Under `espionageActive` a faction's contest weight is
- * discounted by the share of its roster that is abroad; `presenceSharesFor` returns null
- * in a dark world, so every existing world takes the identical branch and is
- * byte-identical. The arm is gated TWICE: candidateEvents.js admits `evaluateFactionRules`
- * only when `factionCompetitionEnabled` is true, and the leaf refuses unless espionage is
- * lit.
- *
- * ⭐ SELECTION STAYS ON RAW POWER, AND THAT IS THE LOAD-BEARING JUDGMENT (D8, chair
- * CONFIRMED at §13b). This function does two jobs in one expression: it computes a
- * WEIGHT and it SELECTS which three factions are evaluated at all. Discounting the sort
- * key too would let a lightened faction fall OUT of the evaluated set and silence all
- * four of its rules — a coverage cliff, and the opposite of the amendment's intent, which
- * is that an absent faction WEIGHS less, not that it DISAPPEARS. `rawPower` is carried
- * solely for the sort; nothing else reads it, and it equals the pre-change `power`
- * exactly, so the candidate SET is byte-stable in every world.
- *
- * ⚠ THE DECLARED ONE-TICK LAG (§0.2, CR-ES5B-2). The share reads a whereabouts mirror
- * `advanceRoads` does not write until the consequence_fold stage, LATER in this same
- * tick, so this consumer — like the two bloc consumers — sees LAST tick's whereabouts.
- * The lag is uniform at exactly one tick, it is forced (L1 banks pulseKernel.js), and it
- * is pinned rather than left to be rediscovered. See espionagePresence.js's header.
- * @param {any} item @param {unknown} [worldState]
- */
-function topFactionEntries(item, worldState = null) {
-  const shares = presenceSharesFor(worldState, item);
+/** @param {any} item */
+function topFactionEntries(item) {
   return settlementFactions(item)
-    .map((/** @type {any} */ faction, /** @type {any} */ index) => {
-      const id = factionId(item.id, faction, index);
-      const rawPower = factionPower(faction, index);
-      return {
-        faction,
-        index,
-        id,
-        rawPower,
-        power: shares ? clamp01(rawPower * (shares.byFactionId.get(id) ?? 1)) : rawPower,
-        archetype: inferFactionArchetype(faction),
-      };
-    })
-    .sort((/** @type {any} */ a, /** @type {any} */ b) => b.rawPower - a.rawPower)
+    .map((/** @type {any} */ faction, /** @type {any} */ index) => ({
+      faction,
+      index,
+      id: factionId(item.id, faction, index),
+      power: factionPower(faction, index),
+      archetype: inferFactionArchetype(faction),
+    }))
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => b.power - a.power)
     .slice(0, 3);
 }
 
@@ -276,11 +188,7 @@ export function ensureFactionStates(worldState, snapshot, rng) {
       .map((/** @type {any} */ other) => other.factionId);
   }
 
-  // DESIGN_DEEP_COUPLINGS §10.5 D-7c/e — THE COALITION COOPERATION deposit rides HERE (this is the
-  // per-advance faction pass that carries the snapshot roster governingCoalition needs; pulseKernel
-  // is frozen so the deposit cannot get its own call site). memoryWeave DARK ⇒ a byte-safe no-op.
-  const weeks = Math.floor(Number(worldState?.calendar?.elapsedWeeks ?? worldState?.tick ?? 0) || 0);
-  return depositCoalitionTrust({ ...worldState, factionStates }, snapshot, weeks);
+  return { ...worldState, factionStates };
 }
 
 // Grace window before a roster-absent faction state is pruned: long enough to
@@ -374,78 +282,7 @@ export function relaxFactionStates(worldState) {
   for (const [id, s] of Object.entries(factionStates)) {
     factionStates[id] = { ...s, momentum: clamp01((s.momentum || 0) * 0.85) };
   }
-  const relaxed = { ...worldState, factionStates };
-  // D-7c: the faction-pair ledger's D5-band decay rides the SAME relax pass. Absent
-  // factionPairStates (memoryWeave never lit a pair) ⇒ a byte-safe no-op (dormancy).
-  const weeks = Math.floor(Number(worldState?.calendar?.elapsedWeeks ?? worldState?.tick ?? 0) || 0);
-  return decayFactionPairStates(relaxed, weeks);
-}
-
-// ── DESIGN_DEEP_COUPLINGS §10.5 D-7c/D-7e — THE COALITION COOPERATION deposit ──────────────
-// Factions standing together in a settlement's GOVERNING COALITION slowly BUILD alliance-trust —
-// the POSITIVE sign of the symmetric faction-pair ledger, the mirror of the contest-loss resentment
-// deposit. A slow accrual (a TRUST step per co-governing YEAR), gated off the pair's OWN incident
-// history so it never spams the ≤8 incident ring, and decayed by relaxFactionStates on the 156-week
-// half-life. memoryWeave-gated: DARK ⇒ zero deposit, byte-identical (the dormancy contract). The
-// pair ledger's OWN writer (mintFactionPairIncident) does the write — single-writer preserved.
-export const COALITION_TRUST_TUNING = Object.freeze({
-  YEAR_WEEKS: 52,       // year-cadence gate: at most one deposit per co-governing pair per ~year
-  TRUST_STEP: 0.15,     // trust accrued per co-governing year (equilibrium ≈ 0.7 under the D5 decay)
-  SEV: 0.3,             // the coalition_standing incident severity
-  MAX_PAIRS_PER_SETTLEMENT: 6, // bound the per-tick write fan-out (deterministic: codepoint-sorted ids)
-});
-
-/**
- * The co-governing faction IDs of a settlement item: the roster factions whose archetype sits in the
- * GOVERNING COALITION's members and not among its opponents (the SEAT's real declared-rivals politics,
- * via governingCoalition — NOT the auto-seeded factionStates peers). Faction ids match factionPairKey.
- * Codepoint-sorted for deterministic pairing under the cap. Pure.
- * @param {import('./beliefMap.js').SnapItem} item @returns {string[]}
- */
-function coGoverningFactionIds(item) {
-  const coalition = governingCoalition(item);
-  const members = coalition.members instanceof Set ? coalition.members : new Set();
-  const opponents = coalition.opponents instanceof Set ? coalition.opponents : new Set();
-  /** @type {string[]} */
-  const ids = [];
-  settlementFactions(item).forEach((/** @type {import('../settlement.schema.js').SimFaction} */ faction, /** @type {number} */ index) => {
-    const a = factionArchetype(faction);
-    if (a && a !== FA.OTHER && members.has(a) && !opponents.has(a)) ids.push(factionId(item.id, faction, index));
-  });
-  return ids.sort(compareCodepoint);
-}
-
-/**
- * Deposit the coalition-cooperation trust for every co-governing faction pair across the snapshot's
- * settlements (year-cadence gated per pair; capped fan-out). memoryWeave DARK ⇒ the ORIGINAL worldState
- * back (no factionPairStates touched ⇒ byte-identical). Pure.
- * @param {Record<string, unknown>} worldState @param {import('./beliefMap.js').BeliefSnapshot} snapshot
- * @param {number} weeks @returns {Record<string, unknown>}
- */
-export function depositCoalitionTrust(worldState, snapshot, weeks) {
-  if (!memoryWeaveActive(worldState)) return worldState;
-  const T = COALITION_TRUST_TUNING;
-  const now = Math.floor(Number(weeks) || 0);
-  const items = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
-  let ws = worldState;
-  for (const item of items) {
-    const ids = coGoverningFactionIds(item);
-    if (ids.length < 2) continue;
-    let deposited = 0;
-    for (let i = 0; i < ids.length && deposited < T.MAX_PAIRS_PER_SETTLEMENT; i++) {
-      for (let j = i + 1; j < ids.length && deposited < T.MAX_PAIRS_PER_SETTLEMENT; j++) {
-        // Year-cadence: skip a pair that already banked a coalition_standing incident this year (the
-        // pair's incident history IS the tenure clock — no new persisted field, catch-up-tolerant).
-        const rec = factionPairOf(ws, ids[i], ids[j]);
-        const banked = !!(rec && Array.isArray(rec.incidents) && rec.incidents.some(
-          (/** @type {{ type?: string, tick?: number }} */ inc) => inc && inc.type === 'coalition_standing' && (now - Math.floor(Number(inc.tick) || 0)) < T.YEAR_WEEKS));
-        if (banked) continue;
-        ws = mintFactionPairIncident(ws, { a: ids[i], b: ids[j], type: 'coalition_standing', trustDelta: T.TRUST_STEP, sev: T.SEV, tick: now, weeks: now });
-        deposited += 1;
-      }
-    }
-  }
-  return ws;
+  return { ...worldState, factionStates };
 }
 
 // Coherence: seat each settlement's NPCs into the faction they belong to, so a
@@ -503,10 +340,6 @@ export function factionMomentumBand(momentum) {
   const m = Number.isFinite(momentum) ? momentum : 0;
   return (/** @type {any} */ (MOMENTUM_BANDS.find(b => m >= b.min))).band;
 }
-
-// Shared with the apply seam so the producer's "already live" check cannot
-// drift from the impairment an approved suppression actually writes.
-export const INSTITUTION_SUPPRESSION_SEVERITY = 0.4;
 
 /** @param {any} a @param {any} b */
 function sameStringList(a, b) {
@@ -628,7 +461,7 @@ function factionVerbPhrase(candidateType) {
   return { may: `act on its ${stem}`, did: `acts on its ${stem}` };
 }
 
-function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateType, ruleId, severity, probability, applyMode, recordMode = null, reasons, factionPatch, proposalPayload = null, condition = null, metadata = {}, conflictTags = [] }) {
+function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateType, ruleId, severity, probability, applyMode, reasons, factionPatch, proposalPayload = null, condition = null, metadata = {}, conflictTags = [] }) {
   const verb = factionVerbPhrase(candidateType);
   return {
     id: `candidate.faction.${stablePart(candidateType)}.${stablePart(state.factionId)}.${tick}`,
@@ -641,7 +474,6 @@ function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateT
     severity: clamp01(severity),
     probability: clamp01(probability),
     applyMode,
-    ...(recordMode ? { recordMode } : {}),
     headline: `${state.name} may ${verb.may}`,
     // The applied twin (the de-hedger reads outcome.appliedHeadline first).
     appliedHeadline: `${state.name} ${verb.did}`,
@@ -661,47 +493,11 @@ function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateT
   };
 }
 
-/**
- * Newest bounded WR-5 war-decision grievance held by this challenger against
- * the current governing faction. The pair plane owns storage/decay; this is a
- * read-only pressure contribution, never an automatic coup.
- * @param {any} item @param {any} worldState @param {string} challengerId
- */
-function warDecisionOpposition(item, worldState, challengerId) {
-  if (worldState?.simulationRules?.warLayerEnabled !== true
-    || worldState?.simulationRules?.warTerminationEnabled !== true) return null;
-  const factions = settlementFactions(item);
-  const governing = governingFactionOf(item?.settlement);
-  if (!governing) return null;
-  const governingIndex = factions.indexOf(governing);
-  const governingId = factionId(item.id, governing, Math.max(0, governingIndex));
-  const incident = selectWarDecisionIncident(worldState, governingId, challengerId);
-  if (!incident) return null;
-  return {
-    pressure01: clamp01(Number(incident.sev) || 0),
-    decisionId: String(incident.context.decisionId || ''),
-    demand: {
-      actorId: String(incident.context.actorId || ''),
-      targetId: String(incident.context.targetId || ''),
-      decisionId: String(incident.context.decisionId || ''),
-      desiredAction: String(incident.context.desiredAction || ''),
-    },
-  };
-}
-
-/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} conflict @param {any} warOpposition */
-function governmentChallenge(item, entry, state, tick, legitimacy, conflict, warOpposition = null) {
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} conflict */
+function governmentChallenge(item, entry, state, tick, legitimacy, conflict) {
   const band = legitimacyBand(legitimacy);
-  const warPressure = clamp01(Number(warOpposition?.pressure01) || 0);
-  // A secure seat can weather ordinary opposition; only an exceptional, live
-  // coalition grievance opens its normal challenge lane while legitimacy is
-  // otherwise stable.
-  if (band === 'stable' && warPressure < 0.68) return null;
-  // Preserve the legacy challenge exactly when WR-5 contributes no grievance;
-  // its pressure is an independent bounded addition, not a rewrite of the base.
-  const baseSeverity = clamp01(legitimacy * 0.48 + entry.power * 0.28
-    + state.riskTolerance * 0.14 + conflict * 0.1);
-  const severity = clamp01(baseSeverity + (1 - baseSeverity) * warPressure * 0.22);
+  if (band === 'stable') return null;
+  const severity = clamp01(legitimacy * 0.48 + entry.power * 0.28 + state.riskTolerance * 0.14 + conflict * 0.1);
   if (severity < (band === 'crisis' ? 0.5 : 0.58)) return null;
   return candidateBase({
     item,
@@ -711,14 +507,11 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict, war
     candidateType: 'faction_government_challenge',
     ruleId: `faction_${band}_government_challenge`,
     severity,
-    probability: (band === 'crisis' ? 0.12 : 0.04)
-      + severity * (band === 'crisis' ? 0.34 : 0.22)
-      + warPressure * 0.08,
+    probability: (band === 'crisis' ? 0.12 : 0.04) + severity * (band === 'crisis' ? 0.34 : 0.22),
     applyMode: 'proposal',
     reasons: [
       `Government legitimacy is ${band}.`,
       `${state.name} is one of the top three factions and prefers ${state.governmentPreference.replace(/_/g, ' ')}.`,
-      ...(warPressure > 0 ? ['A recent war decision has organized this faction against the governing seat.'] : []),
       'Government changes preserve existing institutions unless a separate institution event changes them.',
     ],
     factionPatch: {
@@ -735,10 +528,6 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict, war
       governmentPreference: state.governmentPreference,
       legitimacyBand: band,
       preserveInstitutions: true,
-      ...(warOpposition?.decisionId ? {
-        warDecisionId: warOpposition.decisionId,
-        warDemand: warOpposition.demand,
-      } : {}),
     },
     condition: {
       archetype: 'faction_challenge',
@@ -752,22 +541,12 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict, war
       causes: [{ source: state.factionId, effect: 'legitimacy_challenge', reason: 'Faction competition intensified under weak legitimacy.' }],
     },
     conflictTags: [`settlement:${item.id}:government_change`],
-    metadata: {
-      legitimacyBand: band,
-      ...(warPressure > 0 ? {
-        warDecisionOpposition: true,
-        warDecisionId: warOpposition.decisionId,
-      } : {}),
-    },
+    metadata: { legitimacyBand: band },
   });
 }
 
 /** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} trade @param {any} crime */
-function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime, pendingIntent = false) {
-  // Capture and suppression are two forms of one institution-control intent.
-  // Until the DM resolves the faction's existing question, rotating the target
-  // must not mint a fresh backlog entry every week.
-  if (pendingIntent) return null;
+function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime) {
   const institutions = institutionsFor(item);
   if (!institutions.length) return null;
   const target = institutions[Math.floor((entry.index + tick) % institutions.length)];
@@ -776,21 +555,6 @@ function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime
   const criminalSuppression = state.archetype === 'criminal' || crime > 0.58;
   const candidateType = criminalSuppression ? 'faction_institution_suppression' : 'faction_institution_capture';
   const severity = clamp01(pressureScore * 0.44 + entry.power * 0.24 + state.momentum * 0.16 + state.riskTolerance * 0.08);
-  const suppressionCause = `faction_suppression:${state.factionId}:${target.id}`;
-  const standingInstitution = standingInstitutionFor(item, target);
-  const suppressionLive = criminalSuppression
-    && (state.suppressedInstitutions || []).map(String).includes(String(target.id))
-    && standingInstitution?._worldPulseInactive !== true
-    && !['removed', 'destroyed'].includes(String(standingInstitution?.status || '').toLowerCase())
-    && (standingInstitution?.impairments || []).some((impairment) => (
-      impairment?.type === 'legitimacy'
-      && impairment?.causeEventId === suppressionCause
-      && Number(impairment?.severity) === INSTITUTION_SUPPRESSION_SEVERITY
-    ));
-  const nextMomentum = clamp01((state.momentum || 0) + severity * 0.12);
-  const suppressionBandChanged = suppressionLive
-    && factionMomentumBand(nextMomentum) !== factionMomentumBand(state.momentum);
-  const asksForApproval = criminalSuppression ? !suppressionLive : severity >= 0.68;
   return candidateBase({
     item,
     entry,
@@ -800,8 +564,7 @@ function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime
     ruleId: candidateType,
     severity,
     probability: 0.08 + severity * 0.3,
-    applyMode: asksForApproval ? 'proposal' : 'auto',
-    recordMode: suppressionLive && !suppressionBandChanged ? 'state_only' : null,
+    applyMode: severity >= 0.68 || criminalSuppression ? 'proposal' : 'auto',
     reasons: [
       `${state.name} can convert pressure into institution ${criminalSuppression ? 'suppression' : 'control'}.`,
       `Target institution: ${target.name}.`,
@@ -809,12 +572,12 @@ function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime
     factionPatch: {
       controlledInstitutions: criminalSuppression ? state.controlledInstitutions || [] : [...new Set([...(state.controlledInstitutions || []), target.id])],
       suppressedInstitutions: criminalSuppression ? [...new Set([...(state.suppressedInstitutions || []), target.id])] : state.suppressedInstitutions || [],
-      momentum: nextMomentum,
+      momentum: clamp01((state.momentum || 0) + severity * 0.12),
       exhaustion: clamp01((state.exhaustion || 0) + severity * 0.04),
       lastActedTick: tick,
       recentAction: criminalSuppression ? 'suppress_institution' : 'capture_institution',
     },
-    proposalPayload: asksForApproval
+    proposalPayload: severity >= 0.68 || criminalSuppression
       ? {
           kind: criminalSuppression ? 'institution_suppression' : 'institution_capture',
           factionId: state.factionId,
@@ -934,15 +697,6 @@ function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conf
 export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
   const tick = options.tick ?? snapshot.worldState.tick + 1;
   const out = [];
-  const pendingInstitutionIntentByFaction = new Set(
-    (snapshot.worldState?.proposals || [])
-      .filter((/** @type {FactionProposal} */ proposal) => (
-        proposal?.status === 'pending'
-        && ['institution_capture', 'institution_suppression'].includes(String(proposal?.outcome?.proposalPayload?.kind || ''))
-        && proposal?.outcome?.proposalPayload?.factionId != null
-      ))
-      .map((/** @type {FactionProposal} */ proposal) => String(proposal.outcome?.proposalPayload?.factionId)),
-  );
 
   for (const item of snapshot.settlements) {
     const legitimacy = pressure(pressureIdx, item.id, 'legitimacy');
@@ -951,7 +705,7 @@ export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
     const crime = pressure(pressureIdx, item.id, 'crime');
     const food = pressure(pressureIdx, item.id, 'food');
     const disease = pressure(pressureIdx, item.id, 'disease');
-    const entries = topFactionEntries(item, snapshot.worldState);
+    const entries = topFactionEntries(item);
 
     for (const entry of entries) {
       const state = snapshot.worldState.factionStates?.[entry.id];
@@ -959,25 +713,8 @@ export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
       const cooldown = state.lastActedTick != null && tick - state.lastActedTick < 2;
       if (cooldown && (state.exhaustion || 0) < 0.62) continue;
       const candidates = [
-        governmentChallenge(
-          item,
-          entry,
-          state,
-          tick,
-          legitimacy,
-          conflict,
-          warDecisionOpposition(item, snapshot.worldState, String(state.factionId)),
-        ),
-        institutionCandidate(
-          item,
-          entry,
-          state,
-          tick,
-          legitimacy,
-          trade,
-          crime,
-          pendingInstitutionIntentByFaction.has(String(state.factionId)),
-        ),
+        governmentChallenge(item, entry, state, tick, legitimacy, conflict),
+        institutionCandidate(item, entry, state, tick, legitimacy, trade, crime),
         serviceOrLawCandidate(item, entry, state, tick, food, disease, trade),
         rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conflict),
       ].filter(Boolean);

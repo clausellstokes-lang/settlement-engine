@@ -22,30 +22,11 @@ import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, space, toneBg, pt, swatch } from '../theme.js';
 import { EditableText, EditableProse } from './Editable.jsx';
-import { stripZwnj, safe } from '../lib/format.js';
+import { stripZwnj } from '../lib/format.js';
 
 // strip ZWNJ from anything destined for an uppercase-styled Text node
 function up(s) {
   return typeof s === 'string' ? stripZwnj(s) : s;
-}
-
-// val — the mirror of up() for normal-case VALUES: defuse f-ligatures (ffi/ffl/
-// fi/fl/ff) so an engine string like "Griffin Hall" or "Fflam" can't render as
-// tofu with the embedded fonts. Idempotent, no-op for non-strings and f-free
-// strings, so it is byte-identical except where it actually prevents a ligature.
-// Applying it here — at the shared Dense primitives most sections render through —
-// makes ligature-safety structural, not a per-call-site convention.
-function val(s) {
-  return (typeof s === 'string' || typeof s === 'number') ? safe(s) : s;
-}
-
-/**
- * SafeText — a drop-in <Text> that defuses f-ligatures on string children. Use it
- * for any section rendering a raw engine string outside the Dense primitives, so
- * the ligature guard has a single reusable chokepoint.
- */
-export function SafeText({ children, ...props }) {
-  return <Text {...props}>{val(children)}</Text>;
 }
 
 // ── ChapterBand: dense section opener ───────────────────────────────────────
@@ -68,10 +49,10 @@ export function ChapterBand({ eyebrow, title, accent, sub }) {
             {up(eyebrow)}
           </Text>
         )}
-        <Text style={{ ...type.section, color: palette.ink, fontSize: pt['16'] }}>{val(title)}</Text>
+        <Text style={{ ...type.section, color: palette.ink, fontSize: pt['16'] }}>{title}</Text>
       </View>
       {sub && (
-        <Text style={{ ...type.caption, color: palette.muted, fontStyle: 'italic' }}>{val(sub)}</Text>
+        <Text style={{ ...type.caption, color: palette.muted, fontStyle: 'italic' }}>{sub}</Text>
       )}
     </View>
   );
@@ -146,11 +127,11 @@ export function StatStrip({ stats, marginBottom = space.sm }) {
               marginTop: 1,
             }}
           >
-            {s.value === 0 || s.value ? val(s.value) : '–'}
+            {s.value === 0 || s.value ? s.value : '—'}
           </Text>
           {s.sublabel && (
             <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], marginTop: 1 }}>
-              {val(s.sublabel)}
+              {s.sublabel}
             </Text>
           )}
         </View>
@@ -175,7 +156,7 @@ export function KeyValRow({ pairs, separator = ' · ', style }) {
           )}
           <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
             <Text style={{ color: palette.faint }}>{up(p.label)}</Text>
-            <Text style={{ color: palette.ink, fontWeight: 700 }}>{val(` ${p.value}`)}</Text>
+            <Text style={{ color: palette.ink, fontWeight: 700 }}>{` ${p.value}`}</Text>
           </Text>
         </React.Fragment>
       ))}
@@ -250,7 +231,7 @@ export function BulletList({
                 />
               </View>
             ) : (
-              <Text style={{ ...type.body, flex: 1, fontSize: pt['9.5'] }}>{val(text)}</Text>
+              <Text style={{ ...type.body, flex: 1, fontSize: pt['9.5'] }}>{text}</Text>
             )}
           </View>
         );

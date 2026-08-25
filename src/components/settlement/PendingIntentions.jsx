@@ -13,7 +13,7 @@
 import { useMemo } from 'react';
 import { Hourglass, X, Pencil } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { MUTED, INK, BORDER, CARD, sans, FS, SP } from '../theme.js';
+import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { lapseOf, campaignPeerCountFor } from '../../domain/display/docketLapse.js';
 import { eventToComposerIntent } from './eventComposer/editSeed.js';
@@ -75,7 +75,7 @@ export default function PendingIntentions() {
 
   return (
     <div style={{
-      background: CARD, border: `1px solid ${BORDER}`,
+      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
       padding: SP.sm, marginTop: SP.sm,
     }}>
       <div style={{
@@ -98,18 +98,18 @@ export default function PendingIntentions() {
             <div key={item.queueId} style={{
               display: 'flex', alignItems: 'center', gap: 8,
               padding: SP.sm, background: CARD,
-              border: `1px solid ${BORDER}`,
+              border: `1px solid ${BORDER}`, borderRadius: R.sm,
             }}>
               <span style={{ flex: 1, fontSize: FS.xs, color: INK, fontFamily: sans }}>
                 {labelFor(item.event)}
                 {lapsed && (
                   <>
                     <span style={{
-                      marginLeft: 8, padding: '1px 6px',
+                      marginLeft: 8, padding: '1px 6px', borderRadius: R.sm,
                       border: `1px solid ${BORDER}`, color: MUTED,
                       fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.04em',
                     }}>
-                      LAPSED: needs your attention
+                      LAPSED — needs your attention
                     </span>
                     <span style={{ display: 'block', fontSize: FS.xxs, color: MUTED, marginTop: 2 }}>
                       {lapsed} Left as-is, the tick will refuse it visibly.
@@ -126,7 +126,7 @@ export default function PendingIntentions() {
                   const anchor = document.querySelector('[data-anchor="event-composer"]');
                   if (anchor?.scrollIntoView) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
-                aria-label="Reopen this queued order in the composer. Applying replaces it in place"
+                aria-label="Reopen this queued order in the composer — applying replaces it in place"
               >
                 Edit
               </Button>

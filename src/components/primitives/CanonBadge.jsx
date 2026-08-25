@@ -1,5 +1,5 @@
 /**
- * primitives/CanonBadge
+ * primitives/CanonBadge — Tier 5.3 surface.
  *
  * Inline chip that surfaces an entity's canon tag (source +
  * canonStatus + locked). Drops next to entity names in the dossier
@@ -130,6 +130,7 @@ export function CanonBadge({ entity, verbose = false, showLock = true, style = {
         ...style,
       }}
     >
+      <span aria-hidden="true">{v.glyph}</span>
       <span>{v.label}</span>
       {showLock && tag.locked && (
         <span aria-hidden="true" style={{ marginLeft: 2 }}>🔒</span>

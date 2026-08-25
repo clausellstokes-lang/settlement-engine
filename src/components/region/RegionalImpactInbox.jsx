@@ -1,3 +1,4 @@
+import { Check, CircleSlash, GitBranch, RadioTower, Undo2 } from 'lucide-react';
 import { useMemo } from 'react';
 
 import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
@@ -19,13 +20,6 @@ function statusColor(status) {
   if (status === 'resolved') return SECOND;
   if (status === 'ignored') return MUTED;
   return GOLD;
-}
-
-function statusLabel(status) {
-  if (status === 'applied') return 'applied';
-  if (status === 'resolved') return 'resolved';
-  if (status === 'ignored') return 'ignored';
-  return 'queued';
 }
 
 export default function RegionalImpactInbox({ saveId, onApplied }) {
@@ -85,11 +79,13 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
     <section style={{
       background: CARD,
       border: `1px solid ${BORDER}`,
+      borderRadius: 8,
       padding: '12px 14px',
       marginTop: 12,
       marginBottom: 12,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 9 }}>
+        <GitBranch size={14} color={GOLD} />
         <div style={{ fontSize: FS.xs, fontWeight: 800, color: INK, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           Regional Causality
         </div>
@@ -104,7 +100,6 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
             const sourceName = context.nodeNames.get(String(impact.sourceSettlementId)) || impact.sourceSettlementName || impact.sourceSettlementId;
             const color = statusColor(impact.status);
             const available = isRegionalImpactAvailable(impact);
-            const delayTicks = Math.max(0, impact.delayTicks || 0);
             return (
               <div
                 key={impact.id}
@@ -114,41 +109,30 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                   gap: 8,
                   padding: '7px 8px',
                   border: `1px solid ${BORDER}`,
+                  borderRadius: 6,
                   background: impact.status === 'applied' ? swatch.successBg : GOLD_BG,
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
-                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: color }} />
-                  <span style={{ fontSize: FS.xxs, fontWeight: 700, color, fontFamily: sans, textTransform: 'lowercase' }}>
-                    {statusLabel(impact.status)}
-                  </span>
-                </div>
+                <div style={{ width: 7, height: 7, borderRadius: '50%', background: color, flexShrink: 0 }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: FS.xs, color: BODY, fontWeight: 800, fontFamily: sans }}>
                     {kindLabel(impact.kind)}
                   </div>
-                  <div style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans, lineHeight: 1.35 }}>
+                  <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, lineHeight: 1.35 }}>
                     {sourceName} · {goodsLabel(impact)} · {Math.round((impact.severity || 0) * 100)}%
-                    {impact.status === 'queued' && !available && delayTicks > 0 && (
-                      <span style={{ color: SECOND, fontWeight: 700 }}> · matures in {delayTicks} tick{delayTicks === 1 ? '' : 's'} (advance the realm to apply)</span>
-                    )}
                   </div>
                 </div>
                 {impact.status === 'queued' && (
                   <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
                     <IconButton
-                      glyph="✓"
-                      label={available
-                        ? 'Apply regional impact'
-                        : delayTicks > 0
-                          ? `Delayed: matures in ${delayTicks} tick${delayTicks === 1 ? '' : 's'}; advance the realm to apply`
-                          : 'Impact is delayed'}
+                      Icon={Check}
+                      label={available ? 'Apply regional impact' : 'Impact is delayed'}
                       tone="primary"
                       disabled={!available}
                       onClick={() => handleApply(impact.id)}
                     />
                     <IconButton
-                      glyph="⊘"
+                      Icon={CircleSlash}
                       label="Ignore regional impact"
                       onClick={() => handleIgnore(impact.id)}
                     />
@@ -157,7 +141,7 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                 {impact.status === 'applied' && (
                   <div style={{ flexShrink: 0 }}>
                     <IconButton
-                      glyph="↶"
+                      Icon={Undo2}
                       label="Resolve regional impact"
                       onClick={() => handleResolve(impact.id)}
                     />
@@ -173,6 +157,7 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
         <div style={{ marginTop: context.incoming.length ? 10 : 0, display: 'flex', flexDirection: 'column', gap: 5 }}>
           {context.outgoingEvents.map(event => (
             <div key={event.id} style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: FS.xxs, color: SECOND, fontFamily: sans }}>
+              <RadioTower size={11} color={MUTED} />
               <span style={{ color: INK, fontWeight: 700 }}>{event.sourceEvent?.type || 'Regional event'}</span>
               <span>sent {event.impactIds?.length || 0} impact{(event.impactIds?.length || 0) === 1 ? '' : 's'}</span>
             </div>

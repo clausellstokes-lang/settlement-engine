@@ -42,7 +42,6 @@
  */
 
 import { hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
-import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 // ── Tuning (documented; retuned in the M6d + checkpoint soaks) ────────────────
 export const TRADE_FLOW_TUNING = Object.freeze({
@@ -128,9 +127,7 @@ export function settlementModalityWeight(settlement) {
   let sea = hasSeaPort(settlement);
   let airship = false;
   let teleport = false;
-  // LIVE roster only — a calamity-destroyed harbour / airship dock / teleport circle no
-  // longer moves goods, so it must not stack modality throughput weight (ruin-filter class).
-  for (const inst of liveInstitutions(settlement)) {
+  for (const inst of Array.isArray(settlement?.institutions) ? settlement.institutions : []) {
     const n = String(inst?.name || '');
     // Classify each institution to AT MOST one modality — airship / teleport win so an
     // "airship dock" reads as AIR, never SEA (the generic dock/port match is the fallback).

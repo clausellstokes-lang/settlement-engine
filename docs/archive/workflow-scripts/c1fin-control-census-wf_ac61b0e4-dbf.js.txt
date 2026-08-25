@@ -1,0 +1,117 @@
+export const meta = {
+  name: 'c1fin-control-census',
+  description: 'Pre-build the create-page control census for the C1-fin base re-cut',
+  phases: [
+    { title: 'Inventory', detail: '4 parallel readers: composite wizard, master config stage, orphan panel, hero drift' },
+    { title: 'Synthesize', detail: 'merge into the census table with per-control dispositions' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a39bc277a620ae767'
+const PREAMBLE = `READ-ONLY TASK — you may run git/grep/read commands but MUST NOT edit files, create files, or run any state-mutating git command (no checkout/stash/commit/add/reset). The repo worktree is ${WT} on branch claude/deep-craft, expected tip fb5e8031. FIRST verify: git -C ${WT} branch --show-current (must print claude/deep-craft) and git -C ${WT} rev-parse --short HEAD. If either mismatches, STOP and report the mismatch as your result. cwd resets between commands — always use git -C ${WT} or absolute paths. Master's UI base of record is commit d024286e; read master file versions with: git -C ${WT} show d024286e:<path>. Component paths may be src/components/<Name>.jsx or src/components/generate/<Name>.jsx or src/components/new/<Name>.jsx — locate with git -C ${WT} ls-files | grep before assuming.`
+
+const INVENTORY_SCHEMA = {
+  type: 'object',
+  required: ['verified_tip', 'controls', 'notes'],
+  properties: {
+    verified_tip: { type: 'string', description: 'the rev-parse output you verified, or the master ref you read' },
+    controls: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['id', 'kind', 'binds_to', 'hosted_in'],
+        properties: {
+          id: { type: 'string', description: 'stable identifier: visible label or prop/field name' },
+          kind: { type: 'string', description: 'select | toggle | slider | text | button | chip | group | etc.' },
+          binds_to: { type: 'string', description: 'the config/state field it reads+writes (trace the setter), or "action:<what>" for buttons' },
+          hosted_in: { type: 'string', description: 'component file + step/layer that hosts it' },
+          gating: { type: 'string', description: 'flag / tier / anon gating if any, else empty' },
+          notes: { type: 'string' }
+        }
+      }
+    },
+    analytics_events: { type: 'array', items: { type: 'string' }, description: 'event names fired from this flow' },
+    guidance_mounts: { type: 'array', items: { type: 'string' }, description: 'whisper/guidance components mounted in this flow' },
+    notes: { type: 'string', description: 'anything structural the census must know' }
+  }
+}
+
+const DRIFT_SCHEMA = {
+  type: 'object',
+  required: ['verdict', 'details'],
+  properties: {
+    verdict: { type: 'string' },
+    import_health: { type: 'array', items: { type: 'string' }, description: 'per-import: resolves-at-tip or BROKEN (module missing/renamed)' },
+    props_contract: { type: 'string', description: 'what the parent must pass; drift vs master usage' },
+    details: { type: 'string' },
+    red_flags: { type: 'array', items: { type: 'string' } }
+  }
+}
+
+phase('Inventory')
+const [composite, master, orphan, hero] = await parallel([
+  () => agent(`${PREAMBLE}
+
+INVENTORY THE COMPOSITE'S STEPPED ADVANCED WIZARD (worktree tip, current state). Scope: the pre-generation config stage of GenerateWizard.jsx (the StepIndicator flow) and every component it steps through: ConfigurationPanel, InstitutionalGrid, ServicesTogglePanel, TradeDynamicsPanel, plus WizardCommitBand, WizardChipRow (flag wizardChromeDiet), WizardCloseout. For EVERY user-reachable control: its label/identifier, control kind, the config/state field it reads AND writes (trace the setter to the store or local state — do not guess from the label), the hosting component + step index, and any flag/tier/anonymous gating. Also list analytics events fired from this flow and any guidance/whisper components mounted in it. This census is the functionality-retention baseline for a restructure — MISSING A CONTROL CAUSES A FUNCTIONALITY LOSS. Be exhaustive; read whole files, not excerpts.`,
+    { label: 'inventory:composite-wizard', phase: 'Inventory', model: 'opus', schema: INVENTORY_SCHEMA }),
+
+  () => agent(`${PREAMBLE}
+
+INVENTORY MASTER'S CONFIG STAGE (the UI base of record, read via git -C ${WT} show d024286e:<path> — the files at the worktree tip are NOT what you inventory here). Scope: master's GenerateWizard.jsx pre-generation config stage, master's LayeredConfigurationPanel.jsx (the single collapsed panel: Character preset -> Foundations -> Fine-tune -> Deep constraints -> Place-in-Region), master's WizardCloseout.jsx, and any panel component master's flow references (e.g. its ConfigurationPanel if used inside a layer). For EVERY control: label/identifier, kind, the config field it binds (trace the setter in master's code), which LAYER of the panel hosts it, any gating. Also record LayeredConfigurationPanel's props contract (exactly what master's GenerateWizard passes it) and the "Generate Draft" commit path. Use git -C ${WT} show d024286e:<path> for every read; locate master paths with git -C ${WT} ls-tree -r --name-only d024286e | grep -i <name>.`,
+    { label: 'inventory:master-config', phase: 'Inventory', model: 'opus', schema: INVENTORY_SCHEMA }),
+
+  () => agent(`${PREAMBLE}
+
+ORPHAN DRIFT CHECK. The file LayeredConfigurationPanel.jsx exists in the worktree tree but nothing renders it (the stepped wizard replaced it at merge 0168e287). Locate it (git -C ${WT} ls-files | grep -i layeredconfig). Compare the tip version against master's (git -C ${WT} show d024286e:<same-or-master-path>): are they byte-identical or diverged (summarize the diff if diverged)? Then audit IMPORT HEALTH at the tip: for every module the orphan imports, verify that module still exists in the worktree tree and still exports what the orphan uses (887 commits of drift — modules may have been renamed, moved to lazy leaves, or had exports changed). Report the props contract it expects from its parent and how that compares to what master's GenerateWizard passed. List every red flag that would break a naive revival.`,
+    { label: 'drift:orphan-panel', phase: 'Inventory', model: 'opus', schema: DRIFT_SCHEMA }),
+
+  () => agent(`${PREAMBLE}
+
+HERO / EMPTY-STATE DRIFT for the re-audit step. Files: WizardEmptyState.jsx and HomeHero.jsx (locate both). Produce three reads: (1) MASTER's versions (git -C ${WT} show d024286e:<path>) — structure summary: hero card frame (LANDING_MAX), SizeButton construction (Button primitive?), which sizes render, ModeSelector variant, proof-pair composition. (2) The WORKTREE TIP's versions — same summary, PLUS exactly what the deep-craft lane's landed phases changed on these files: git -C ${WT} log --oneline -15 -- <both paths> and read the relevant diffs (the lane's commits run c335c355..fb5e8031; the six-station gauge from TIER_ORDER, the data-settlement-size locator, InstantWorldEntry placement, evolution backdrops if present). (3) THE MOVE LIST: for each thing the lane added, state where it lives now and what would have to move for it to live INSIDE master's compact hero card composition (owner law: anonymous render shows Hamlet/Village/Town ONLY; signed-in may show the full ladder; ONE commissioning plate: headline + gauge + one gold Forge CTA + one honesty line; Advanced entirely behind an unfolding leaf; at most 1 visible clerk's note; demo artifacts below the fold). Also report which behavioral tests pin these files (grep tests/ for HomeHero, data-settlement-size, WizardEmptyState).`,
+    { label: 'drift:hero-emptystate', phase: 'Inventory', model: 'opus', schema: DRIFT_SCHEMA }),
+])
+
+phase('Synthesize')
+const missing = [composite, master, orphan, hero].map((r, i) => r ? null : ['composite','master','orphan','hero'][i]).filter(Boolean)
+if (missing.length) log(`WARNING: inventory slots failed and are absent from synthesis: ${missing.join(', ')}`)
+
+const CENSUS_SCHEMA = {
+  type: 'object',
+  required: ['census', 'reseat_plan', 'red_flags', 'checklist'],
+  properties: {
+    census: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['control', 'binds_to', 'in_master', 'disposition'],
+        properties: {
+          control: { type: 'string' },
+          binds_to: { type: 'string' },
+          in_master: { type: 'boolean' },
+          disposition: { type: 'string', description: 'KEEP (master panel already hosts it) | RESEAT:<target layer> (post-master addition to re-seat into LayeredConfigurationPanel) | DEFER-CANDIDATE (flag for the implementer to defer-with-reason — do not decide)' },
+          notes: { type: 'string' }
+        }
+      }
+    },
+    reseat_plan: { type: 'string', description: 'ordered narrative: which layer of the panel receives each RESEAT control and why' },
+    red_flags: { type: 'array', items: { type: 'string' } },
+    checklist: { type: 'array', items: { type: 'string' }, description: 'the implementer step-1 execution checklist, in order' }
+  }
+}
+
+const synthesis = await agent(`You are synthesizing a control census for a UI restructure in the SettlementForge repo. Below are four structured inventories (read-only surveys, already verified against the tree). Merge them into THE CENSUS TABLE: every control from the COMPOSITE inventory mapped to whether MASTER's single LayeredConfigurationPanel already hosts an equivalent (match by binds_to field, not by label). Dispositions: KEEP if master's panel already hosts the binding; RESEAT:<layer> if it is a post-master addition that must be re-seated into a named layer of the panel (Character preset / Foundations / Fine-tune / Deep constraints / Place-in-Region — choose by semantic fit with the layer's existing contents); DEFER-CANDIDATE only if re-seating looks genuinely structural (do NOT decide deferrals — flag them). Every composite control MUST appear exactly once — a dropped row is a functionality loss. Carry ALL red flags from the orphan and hero surveys forward verbatim, and fold the analytics/guidance mounts into the checklist (they must survive the restructure). Then write the implementer's ordered step-1 checklist: revive-orphan fixes first, then the GenerateWizard config-stage swap, then the WizardEmptyState/HomeHero base-set, with the hero move-list items placed. Be complete over brief.
+
+COMPOSITE STEPPED WIZARD INVENTORY:
+${JSON.stringify(composite)}
+
+MASTER CONFIG STAGE INVENTORY:
+${JSON.stringify(master)}
+
+ORPHAN LayeredConfigurationPanel DRIFT:
+${JSON.stringify(orphan)}
+
+HERO/EMPTY-STATE DRIFT + MOVE LIST:
+${JSON.stringify(hero)}`,
+  { label: 'synthesize:census', phase: 'Synthesize', model: 'opus', effort: 'high', schema: CENSUS_SCHEMA })
+
+return { synthesis, raw: { composite, master, orphan, hero } }

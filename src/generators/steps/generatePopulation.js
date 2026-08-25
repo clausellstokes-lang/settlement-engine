@@ -24,31 +24,18 @@ const FACTION_ATTRACTION = {
 };
 
 registerStep('generatePopulation', {
-  deps: ['coherenceRepairPass', 'powerEconomyReconcilePass'],
-  reads: ['culture', 'economicState', 'effectiveConfig', 'generationContext', 'institutions', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  deps: ['factionCorrelationPass', 'generatePower'],
+  reads: ['culture', 'economicState', 'effectiveConfig', 'institutions', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['npcs', 'relationships', 'factions', 'conflicts'],
   phase: 'population',
 }, (ctx, rng) => {
-  const {
-    tier,
-    institutions,
-    culture,
-    effectiveConfig,
-    generationContext,
-    powerStructure,
-    economicState,
-  } = ctx;
+  const { tier, institutions, culture, effectiveConfig, powerStructure, economicState } = ctx;
 
   // generateNPCs reads settlement.powerStructure (noble roles) and
   // settlement.economicState (goal commodity/faction tokens). This step depends on
   // generatePower, so both are present on ctx — pass them through or those branches
   // silently fall back.
-  const npcs = generateNPCs(
-    { tier, institutions, powerStructure, economicState },
-    culture,
-    effectiveConfig,
-    generationContext,
-  );
+  const npcs = generateNPCs({ tier, institutions, powerStructure, economicState }, culture, effectiveConfig);
   const relationships = generateRelationships(npcs, effectiveConfig, institutions);
   const factions = generateFactions(npcs, relationships);
 
@@ -109,10 +96,6 @@ registerStep('generatePopulation', {
       cumulative += pf.power || 0;
       if (roll <= cumulative) { scattered = pf; break; }
     }
-    // No power factions at all (empty powerStructure.factions ⇒ governingPF
-    // undefined and the loop never runs): nothing to attribute this group to, so
-    // leave it unassigned rather than dereferencing undefined and crashing the step.
-    if (!scattered) return;
     fg.powerFactionName     = scattered.faction;
     fg.powerFactionPower    = scattered.power;
     fg.powerFactionCat      = scattered.category;

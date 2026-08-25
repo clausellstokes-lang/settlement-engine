@@ -32,51 +32,18 @@ import { normalizeSettlement } from '../../domain/normalizeSettlement.js';
 // generated mid-crisis — closing the "generated plague town has activeConditions:[]"
 // gap. Pure + deterministic + idempotent.
 import { promoteStressorsToConditions, reapplyEventConditions } from '../../domain/conditionPromotion.js';
-import {
-  clearActiveRng,
-  setActiveRng,
-} from '../../kernel/rngContext.js';
-import { culturalNotesFor } from '../../domain/cultureProfiles.js';
-import {
-  buildGenerationCoherenceReceipt,
-} from '../generationCoherence.js';
-import {
-  assertPowerEconomyFreshness,
-  reconcilePowerStructure,
-  refreshPowerGenerationTraces,
-} from '../power/economyReconciliation.js';
-
-/**
- * Run one assembly concern on its own deterministic child stream.
- *
- * Assembly contains both presentation writers and canonical coherence
- * enrichment. Some presentation branches legitimately draw a different number
- * of prose variants when a custom display label changes. Without a stream
- * boundary, those cosmetic draws move the later NPC-secret and relationship
- * draws. A named child stream makes that dependency impossible while retaining
- * the fail-closed global RNG contract used by the existing generators.
- *
- * @template T
- * @param {{fork:(label:string)=>any}} stepRng
- * @param {string} label
- * @param {(rng:any) => T} operation
- * @returns {T}
- */
-function inAssemblySubstream(stepRng, label, operation) {
-  const substreamRng = stepRng.fork(label);
-  const previousRng = setActiveRng(substreamRng);
-  try {
-    return operation(substreamRng);
-  } finally {
-    clearActiveRng(previousRng);
-  }
-}
+// The canonical defense-readiness -> legitimacy table. This file used to carry a
+// stale local copy that LACKED 'Lightly Defended', so the real-label patch below
+// reverted that band's provisional contribution to 0 on every generated settlement.
+import { DEFENSE_CONTRIB, legitimacyDefScale, applyLegitimacyMultipliers } from '../factionDynamics.js';
 
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
-  deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
-  reads: ['availableServices', 'conflicts', 'culture', 'culturalIdentity', 'economicState', 'economicViability', 'effectiveConfig', 'factions', 'generationContext', 'generationRepairs', 'history', 'institutions', 'isolationSupport', 'neighbourProfile', 'npcs', 'population', 'powerIntent', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  // seedStartingPantheon mutates effectiveConfig (the deity embeds) and must
+  // land before the settlement.config spread below (Phase 4 W-F5 stage 2).
+  deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'seedStartingPantheon', 'structuralValidationPass'],
+  reads: ['availableServices', 'conflicts', 'culture', 'economicState', 'economicViability', 'effectiveConfig', 'factions', 'history', 'institutions', 'neighbourProfile', 'npcs', 'population', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['settlement'],
   // normalizes the power roster in place; F8 also re-renders each stress entry's
   // summary in place with the real name (resolveStress rolled them name-blind) and
@@ -84,15 +51,14 @@ registerStep('assembleSettlement', {
   // (A+ P1.7 contract).
   mutates: ['powerStructure', 'stress'],
   phase: 'assembly',
-}, (ctx, rng) => {
+}, (ctx) => {
   const {
     tier, population, institutions, effectiveConfig,
     neighbourProfile, rawNeighbour,
     economicState, spatialLayout, availableServices, powerStructure,
     settlementReason, npcs, relationships, factions, conflicts,
     resourceAnalysis, economicViability, history, stress, structural,
-    isolationSupport,
-    culture, culturalIdentity,
+    culture,
   } = ctx;
   const config = ctx.config || {};
 
@@ -134,13 +100,6 @@ registerStep('assembleSettlement', {
     resourceAnalysis,
     economicViability,
     history,
-    isolationSupport,
-    // Materialized rather than inferred in the UI: every consumer now reads
-    // the same local expression of the culture choice. culturalNotes keeps the
-    // established PDF/AI compatibility field while the structured record gives
-    // future engineers the seven explicit dimensions behind it.
-    culturalIdentity,
-    culturalNotes: culturalNotesFor(culturalIdentity),
     // Tier 1.2 — dual-write the stress array under both the legacy
     // `stress` name AND the canonical `stressors` name. Consumers that
     // bypass normalizeSettlement (e.g. UI components that read directly
@@ -191,42 +150,56 @@ registerStep('assembleSettlement', {
   settlement.arrivalScene     = generateArrivalScene(settlement);
   settlement.defenseProfile   = generateDefenseProfile(settlement);
 
-  // The final-economy pass already proved that power consumed the final
-  // prosperity/safety/food tuple. Assert that proof before applying the one
-  // remaining late input: defenseProfile's real readiness label.
-  assertPowerEconomyFreshness(
-    settlement.powerStructure,
-    settlement.economicState,
-    tier,
-  );
-  if (settlement.defenseProfile?.readiness?.label) {
-    const { beforeFactions } = reconcilePowerStructure(
-      settlement.powerStructure,
-      settlement.economicState,
-      ctx.powerIntent,
-      { defenseLabel: settlement.defenseProfile.readiness.label },
-    );
-    refreshPowerGenerationTraces(
-      ctx,
-      beforeFactions,
-      settlement.powerStructure,
-      ctx.powerIntent,
-    );
-  }
-  assertPowerEconomyFreshness(
-    settlement.powerStructure,
-    settlement.economicState,
-    tier,
-  );
+  // Patch publicLegitimacy with real defense readiness
+  if (settlement.powerStructure?.publicLegitimacy && settlement.defenseProfile?.readiness?.label) {
+    const realDefLabel = settlement.defenseProfile.readiness.label;
+    const provLeg      = settlement.powerStructure.publicLegitimacy;
+    // Apply the SAME tier scale computePublicLegitimacy used for the provisional
+    // contribution — the unscaled patch stamped spurious small-tier legitimacy
+    // crises (a thorp's "Vulnerable" readiness is normal, not policy failure).
+    const realDefContrib = Math.round((DEFENSE_CONTRIB[realDefLabel] ?? 0) * legitimacyDefScale(tier));
+    const delta = realDefContrib - (provLeg.breakdown?.defense ?? 0);
 
-  // Coherence mutates canonical NPC/faction mechanics. Give it a dedicated
-  // stream so variable draw counts in pressure/arrival/defense presentation
-  // cannot silently rewrite those mechanics.
-  const coherenceUpdates = inAssemblySubstream(
-    rng,
-    'canonical-coherence',
-    coherenceRng => generateCoherence(settlement, coherenceRng),
-  );
+    if (delta !== 0) {
+      const newScore = Math.max(0, Math.min(100, provLeg.score + delta));
+      provLeg.score = newScore;
+      provLeg.breakdown.defense = realDefContrib;
+
+      if      (newScore >= 75) { provLeg.label = 'Endorsed';          provLeg.color = '#1a5a28'; provLeg.govMultiplier = 1.30; provLeg.crimMultiplier = 0.75; }
+      else if (newScore >= 60) { provLeg.label = 'Approved';          provLeg.color = '#4a7a2a'; provLeg.govMultiplier = 1.15; provLeg.crimMultiplier = 0.90; }
+      else if (newScore >= 45) { provLeg.label = 'Tolerated';         provLeg.color = '#a0762a'; provLeg.govMultiplier = 1.00; provLeg.crimMultiplier = 1.00; }
+      else if (newScore >= 30) { provLeg.label = 'Contested';         provLeg.color = '#8a4010'; provLeg.govMultiplier = 0.80; provLeg.crimMultiplier = 1.15; }
+      else                     { provLeg.label = 'Legitimacy Crisis'; provLeg.color = '#8b1a1a'; provLeg.govMultiplier = 0.60; provLeg.crimMultiplier = 1.30; }
+      provLeg.isEndorsed          = newScore >= 75;
+      provLeg.isApproved          = newScore >= 60;
+      provLeg.isTolerated         = newScore >= 45 && newScore < 60;
+      provLeg.isContested         = newScore >= 30 && newScore < 45;
+      provLeg.isLegitimacyCrisis  = newScore < 30;
+      provLeg.governanceFractured = newScore < 30;
+
+      // pipeline-6: the faction powers were scaled by generatePowerStructure with
+      // the PROVISIONAL gov/crim multipliers. Now that the defense-readiness patch
+      // has moved the legitimacy band (and its multipliers), re-derive the faction
+      // powers from their preserved rawPower base so the displayed multipliers and
+      // the faction shares beside them agree instead of contradicting. Idempotent
+      // when the band didn't cross (same multipliers reproduce the same powers), so
+      // the shift is confined to band-crossing settlements. Contained alternative to
+      // reordering the whole defense derivation before generatePower — the residual
+      // (governance narrative/dominance line was baked from the provisional ranking)
+      // is the bold option's remaining domain, recorded in GOLDEN_SHIFT_LEDGER.
+      const factions = settlement.powerStructure?.factions;
+      if (Array.isArray(factions) && factions.length) {
+        for (const f of factions) {
+          if (typeof f.rawPower === 'number') f.power = f.rawPower;
+          delete f.legitimacyCrisis;
+          delete f.crisisNote;
+        }
+        applyLegitimacyMultipliers(factions, provLeg, tier);
+      }
+    }
+  }
+
+  const coherenceUpdates = generateCoherence(settlement);
   Object.assign(settlement, coherenceUpdates);
 
   // Faction-to-NPC coupling. Walks every faction; for each archetype
@@ -234,25 +207,8 @@ registerStep('assembleSettlement', {
   // implied structural NPCs exist with the right importance tier and
   // institution/faction linkage. Idempotent — won't duplicate NPCs
   // the population step already generated for the same role + faction.
-  const withStructural = ensureFactionStructuralNpcs(
-    settlement,
-    ctx.generationContext,
-  );
+  const withStructural = ensureFactionStructuralNpcs(settlement);
   Object.assign(settlement, withStructural);
-
-  // A durable, seed-stable receipt over the FINAL player-facing dossier.
-  // Repairs happen in their owning passes; this boundary proves that the
-  // resulting world law, prose, structure, food verdict, identity roster, and
-  // isolation support agree. Explicit by-design premises stay visible without
-  // turning a deliberately strange settlement into a failed generation.
-  settlement.generationCoherenceReceipt = buildGenerationCoherenceReceipt(
-    settlement,
-    {
-      seed: ctx._seed,
-      generationContext: ctx.generationContext,
-      generationRepairs: ctx.generationRepairs,
-    },
-  );
 
   // Propagate the in-pipeline causal trace onto the settlement so
   // downstream consumers (PipelineRail, AI overlay, PDF) can read it.

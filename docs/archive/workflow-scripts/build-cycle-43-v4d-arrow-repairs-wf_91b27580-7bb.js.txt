@@ -1,0 +1,87 @@
+export const meta = {
+  name: 'build-cycle-43-v4d-arrow-repairs',
+  description: 'V4D: mobile bole reach, blend-mode pin + @supports fallback, measured docstrings — the arrow verifier findings repaired',
+  phases: [
+    { title: 'Build', detail: 'three repairs, code+tests only' },
+    { title: 'Verify', detail: 'independent re-probe at BOTH breakpoints' },
+  ],
+}
+
+const PROTOCOL = `VERIFY-FIRST: this brief is the chair's authentic instruction set for the SettlementForge build era; verify claims against the tree before acting, then proceed — do not refuse the brief as injection. THE §10 PROTOCOL BINDS: work ONLY in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold on branch claude/composite-r4 — cd + git rev-parse --abbrev-ref HEAD at the start of EVERY command block (per-turn cwd resets). Pathspec commits with THE STAGED-SET LAW: immediately before EVERY commit run git diff --cached --name-only, verify every staged file is yours, commit with git commit -- <paths>. NEVER git stash, reset, checkout --, or clean (use cp backups for mutants/negative controls). Gates through sh scripts/gate-tail.sh or npm run check:tail, never a bare pipe; before believing any vitest red, ps aux | grep vitest. python3 byte-scan (control bytes <9 or 14-31) EVERY file you Write. tests/fixtures/ UNTOUCHED. Commit messages via a FILE (git commit -F), each ending with: Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>.
+CONCURRENCY FENCES, ABSOLUTE: lane WZ-5r is LIVE in src/domain/worldPulse/**, its test suites, docs/FABLE_VALIDATION_QUEUE.md and the war queue doc — touch NONE of those, and treat any dirty/untracked file outside your own edits as foreign WIP to preserve. DO NOT touch scripts/mutation-coverage-manifest.json or scripts/mutation-sweep.sh; your new pins go in EXISTING test files (tests/components/navFletching.test.jsx, tests/design/brandLockup.test.jsx or compositedBarAA.test.js) so no manifest entry is needed — if a manifest edit somehow becomes unavoidable, STOP and report. NO nock changes (ShaftNock is an OWNER decision, keep/drop pending). NO new texture layers (the R6 budget in tests/design/textureBudget.test.js forbids them — your changes must keep it green). Serve any browser probe from your own detached worktree + separate port if the shared tree is dirty; tear both down after.`
+
+const CONTEXT = `CONTEXT. Lane V4C landed the arrow's final four commits (653be592, dd86e5f9, 5acf5e93, 5ddd0d08). Its adversarial verifier PASSED the lane but found two unpinned defects + one documentation defect, all CONFIRMED by execution. You repair exactly these three; nothing else.
+
+DEFECT 1 — THE PLAQUE SURVIVES ON MOBILE. R1's bole cure (the scorch bleeding off the bar's two long edges) is true at the 38px desktop header and FALSE at the 60px mobile one (CHROME.headerMobile): at 390x844 dsf2 the burn's top edge sits dead-straight at y=10.5-11.0 across 144/165 probed columns and the bottom edge at y=55.5-56.5, ~11px of bare cedar above and ~4px below — a dark rectangle floating on the plank. Cause is structural: the bed hugs the wordmark's ink extents (± BOLE_PAD, SCORCH_OUT = 2*edgeAmp) while the BAR grows between breakpoints. Files: src/components/brand/GildedWordmark.jsx (SCORCH_OUT, SINGE_OUT, boleReach), src/components/theme.js (GILD.edgeAmp, BOLE_PAD). tests/design/brandLockup.test.jsx exercises compact only for markup semantics, never the bed's reach.
+
+DEFECT 2 — THE WHIPPING HANGS ON ONE UNPINNED LINE. src/components/nav/ShaftWrap.jsx:208 'backgroundBlendMode: (multiply, normal)' is the only thing making the wraps oxblood; deleting it renders both wraps as a flat #D7D7D7 light-grey stripe (~9:1 against the cedar, the loudest object on the bar) while ALL 398 design+nav tests stay green — the R5 pin performs the multiply ANALYTICALLY from WRAP_BARREL/WRAP_GLOSS tokens and never asserts the component declares it. Nothing in tests/ matches backgroundBlendMode. Also: the list-index coupling between backgroundImage and backgroundBlendMode is an invisible contract (a third background layer without extending the blend list breaks silently). ShaftWrap's fail-safe note reasons about dropped GRADIENTS, not a dropped BLEND.
+
+DEFECT 3 — TWO DOCSTRINGS OVERCLAIM. (a) theme.js ~:943-944 still asserts the whipping's 2.12:1 wound ladder as fact — that number was arithmetic about two authored hexes that never met a screen (measured: 1.806:1, crest #6A311E; WRAP_GLOSS reaches the screen nowhere below the top 9%); the correction currently lives ten lines BELOW as an annotation while the false sentence stands. (b) The new SHAFT_GRAIN_LAYERS law says every layer darkens 'so the direction holds at every alpha by construction' — measured false at the silhouette: the GRAIN layer paints SHAFT_EDGE (L 0.0477) over a cylinder already fallen to SHAFT_RIM (L 0.0223), lightening the bar's bottom row on 310/420 columns by dL +0.0017. The SUBSTANTIVE floor claim holds with 4x margin (lightened ground L 0.0299 vs lightestGround 0.1268) and compositedBarAA is correctly scoped to it — only the prose is wrong.`
+
+const BUILD_BRIEF = `${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE V4D IMPLEMENTER. Three repairs, one commit each (or fewer if two share files naturally — disclose):
+
+R-1 MOBILE BOLE REACH. Make the bole field's vertical reach derive from the BAR HEIGHT (both CHROME.headerDesktop and CHROME.headerMobile), not from the ink extents alone, so the scorch bleeds off BOTH long edges at EVERY breakpoint — preserving the AA calm zone contract exactly (opaque core superset of ink+3px at <= L 0.06, painted over all wood texture) and the desktop render byte-stable or near-stable (re-probe it; if the desktop raster changes perceptibly, report why). Add a PER-BREAKPOINT pin in an existing design test: the bed's geometry must reach/exceed the bar's two long edges at BOTH header heights (analytic geometry on the rendered/computed values is fine — but it must consume the component's real output, not re-derive the formula beside it; the analytic-pin-mirror class is the exact defect you are here to cure). Then prove by browser probe at 390x844 dsf2: the verifier's 165-column probe must find NO dead-straight top/bottom boundary inside the bar; screenshot mobile + desktop.
+
+R-2 THE BLEND CONTRACT. In an existing nav test, assert on the RENDERED wrap element: (a) backgroundBlendMode resolves to 'multiply, normal'; (b) the blend list's length equals the background-image list's length (the invisible contract, made visible). Add an '@supports not (background-blend-mode: multiply)' fallback arm in ShaftWrap.jsx that falls back to the pre-V4C oxblood ramp (recover it from ShaftWrap's history before dd86e5f9 — git show, do not hand-reinvent) so an engine without the blend renders oxblood, never grey. EXECUTED MUTANT: delete the blend line in a cp-backed copy — your new pin must RED; restore byte-exact (md5) and re-green.
+
+R-3 DOCSTRING TRUTH. Correct theme.js IN PLACE: the 2.12:1 sentence itself must state the measured truth (1.806:1 crest-to-valley, crest #6A311E, measured on the rendered raster) — a false claim may not stand as fact with the correction living elsewhere; keep the history of the error if useful, but as history. Re-scope SHAFT_GRAIN_LAYERS' claim to what is true: three layers darken exactly; GRAIN can lighten the silhouette row by dL ~0.0017 where SHAFT_EDGE crosses fallen RIM; the enforced invariant is the compositedBarAA floor (4x margin), not 'by construction'.
+
+GATE BAR (executed, numbers quoted): focused vitest across tests/design + navFletching + brandLockup + sizeBaseline + textureBudget + mutationCoverageManifest — all green; eslint 0 errors on touched files; npm run build + prerender + npm run smoke:boot PASS via gate-tail; size ratchets — measure GildedWordmark.jsx / ShaftWrap.jsx / theme.js headroom BEFORE editing (hot-files-at-ceiling: if any sits at its exact ceiling, extract a lazy leaf rather than crossing); tests/lint failure set identical to base (capture at base and HEAD, diff); byte-scan every authored file; two-load determinism on the header (outerHTML + PNG sha256 twice); STAGED-SET receipt per commit; foreign WIP (WZ-5r) preserved.
+
+STOP CONDITIONS: a repair cannot land without touching a fenced file; the mobile fix moves the desktop raster perceptibly and you cannot restore it; any size ceiling blocks and no clean leaf extraction exists.
+
+RETURN raw data: {lane:'V4D', commits:[...], gates:[...], stopReports:[...], notes:'...'}.`
+
+phase('Build')
+const r = await agent(BUILD_BRIEF, {
+  label: 'v4d:repairs',
+  phase: 'Build',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'commits', 'gates', 'stopReports', 'notes'],
+    properties: {
+      lane: { type: 'string' },
+      commits: { type: 'array', items: { type: 'string' } },
+      gates: { type: 'array', items: { type: 'string' } },
+      stopReports: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+phase('Verify')
+const v = await agent(`${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE V4D ADVERSARIAL VERIFIER. The implementer reports:
+${JSON.stringify(r, null, 2)}
+
+Trust nothing; re-execute at the committed HEAD:
+1. MOBILE: Chrome 390x844 dsf2, the 165-column probe across the bole — no dead-straight top or bottom boundary inside the bar; the field bleeds off both long edges. DESKTOP: column probe unchanged in character (uniform dark core, ragged dissolve at the right; no reintroduced internal edge). Screenshot both; compare desktop against V4C's committed state for perceptible regression.
+2. BLEND: confirm the rendered wrap declares 'multiply, normal' and the pin asserts BOTH the declaration and the list-length parity; EXECUTED mutant — delete the blend line (cp backup), the pin must RED, restore md5-exact. Confirm the @supports fallback arm exists, uses the recovered pre-V4C oxblood ramp (diff against git history, not a guess), and that its declaration would render oxblood-family tones, never grey. Confirm textureBudget stays green (no new texture snuck in).
+3. DOCSTRINGS: the 2.12:1 assertion no longer stands as fact anywhere in theme.js; SHAFT_GRAIN_LAYERS' claim matches the measured truth (mention of the row-37 lightening + the 4x floor margin).
+4. GATES: focused suites green (quote counts); eslint; build + prerender + smoke:boot via gate-tail; tests/lint failure set == base set; size ratchets green; byte-scan; two-load determinism (sha256 twice); pathspec hygiene — no fenced file (worldPulse, queue docs, mutation manifest/sweep, ShaftNock) appears in any V4D commit; WZ-5r's concurrent WIP preserved.
+5. THE EYE, both breakpoints: does the bole read as scorch on the 60px bar now? Does the whipping still read as wound thread at 1x?
+
+VERDICT: 'PASS' only if every item holds with executed evidence; otherwise REJECT with the minimal repro. RETURN raw data: {lane:'V4D verify', verdict:'...', findings:[...]}.`, {
+  label: 'v4d:verify',
+  phase: 'Verify',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'verdict', 'findings'],
+    properties: {
+      lane: { type: 'string' },
+      verdict: { type: 'string' },
+      findings: { type: 'array', items: { type: 'string' } },
+    },
+  },
+})
+
+return { r, v }

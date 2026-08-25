@@ -17,12 +17,6 @@
  * Copy is VERBATIM from the landing spec §6 (typographic punctuation preserved).
  * No emoji or icon glyphs live in these strings — the ✦ / 🔒 / arrows in the
  * spec render as Lucide icons in the components (spec §3.5).
- *
- * CLAIMS PARITY (bar 13): the checkable capability claims in this file (the anon
- * daily-forge count, the anon size ceiling, wars-that-end, never-invents-facts,
- * same-seed determinism) are bound to their enforcing config/suites by
- * tests/copy/landingClaimsParity.test.js — rewording a bound claim or changing
- * the underlying enforcement reds that gate so the binding is revisited.
  */
 
 export const landing = {
@@ -52,17 +46,12 @@ export const landing = {
     ceiling: 'Without an account, forge up to a Town. Sign in free for every size, saving, and full Basic / Advanced control.',
     draftTitle: 'Instant draft',
     draftHint:  'pick a size and go',
-    // Population bands mirror the engine canon (src/data/constants.js
-    // POPULATION_RANGES) exactly — the same figures the Create-page gauge reads
-    // live. Walk W1 (owner order 2026-07-21, ledger 70a19ce5) corrected these:
-    // they were stale by ~a tier (Hamlet 20–80 etc.), contradicting the Create
-    // page. En-dash separator + 'min+' for the open top tier match HomeHero.popFigure.
     sizes: [
-      { name: 'Hamlet',     range: '61–400' },
-      { name: 'Village',    range: '401–900',    selected: true },
-      { name: 'Town',       range: '901–5,000' },
-      { name: 'City',       range: '5,001–25,000', locked: true },
-      { name: 'Metropolis', range: '25,001+',   locked: true },
+      { name: 'Hamlet',     range: '20–80' },
+      { name: 'Village',    range: '80–400',    selected: true },
+      { name: 'Town',       range: '400–3,000' },
+      { name: 'City',       range: '3,000–12k', locked: true },
+      { name: 'Metropolis', range: '12,000+',   locked: true },
     ],
     modeBasic:    'Basic',
     modeAdvanced: 'Advanced',
@@ -75,7 +64,7 @@ export const landing = {
   // src/components/home/landingFixture.js (the Briarhollow/Maera demo copy is
   // retired). Only connective strings live here.
   brief: {
-    waypoint: '02 · The visual',
+    waypoint: '02 · The brief',
     h2:      'Read the Summary tab. That’s your session prep.',
     body:    'Every settlement arrives as a dossier: the town in four sentences, who matters tonight, what’s about to break, and why. Systems, factions, and history sit one tab deeper, for when the party starts digging.',
     library: 'Sign in free to keep every town in your Library, organized by campaign.',
@@ -101,15 +90,11 @@ export const landing = {
     waypoint: '03 · The voice',
     h2:     'The same facts, in a voice for the table.',
     body:   'The Narrative Layer turns raw simulation into table-ready prose. It never invents facts. Everything it needs is already in the brief.',
-    // Owner directive: disclose the AI up front (not prominent). The Narrative
-    // Layer is no longer the ONLY AI surface (the Surveyor workshop is another),
-    // so this line evolved (W-DOC reconcile, brief §4) from the stale "only AI
-    // feature" claim to the SCHEMA-WALL promise: every AI feature reads and
-    // proposes; only the deterministic engine writes canon (structural, not
-    // policy). The promise is true of the Narrative Layer and every AI surface.
-    aiNote: 'The Narrative Layer is powered by AI. Every AI feature here reads and proposes; only the deterministic engine writes canon.',
+    // Owner directive: disclose the AI up front (not prominent). This is the one
+    // AI feature; the whole rest of the product is derived by the engine.
+    aiNote: 'The Narrative Layer is powered by AI. It is the only feature in SettlementForge that is.',
     rawTag: 'what the engine derived',
-    credit:      '5 credits',
+    credit:      '1 credit',
     cta:         'Narrate',
     pricingLink: 'Credit pricing',
   },
@@ -136,26 +121,6 @@ export const landing = {
     chronicleTag:   'writes itself',
   },
 
-  // ── The map artifact (folded into 02 · The visual) ──────────────────────────
-  // W-DOC (brief §4): the plates are FROZEN REAL ENGINE OUTPUT
-  // (the fixture idiom extended to the map layer): scripts/generate-landing-map-
-  // plates.mjs replays the fixture's exact seed + config, verifies the replay
-  // still produces the fixture town (the drift gate), and renders the v2 map in
-  // two lenses (public/landing-maps/). Same town as §02's dossier — the seed tag
-  // is the receipt. Art law (brief §5): the product's own output is the art.
-  map: {
-    h2:    'The same town, drawn. Every street has a reason.',
-    body:  'The v2 map engine lays out districts, walls, and lanes from the same constraints that wrote the dossier. Nothing is decorated into place. Flip the lens: one town, one memory, any style.',
-    provenance: 'This is {name} from the brief above: same seed, same town, drawn.',
-    tease: 'Hover a district in the app and the map answers why it is there. The map remembers what the town remembers.',
-    lensLabel: 'Lens',
-    lenses: [
-      { id: 'parchment',  label: 'Parchment' },
-      { id: 'watercolor', label: 'Watercolor' },
-    ],
-    alt: 'The generated town map of {name}, drawn in the {lens} lens by the v2 map engine.',
-  },
-
   // ── 05 · The commons ────────────────────────────────────────────────────────
   // Owner amendment W-L2/3: up to FOUR real published gallery settlements render
   // here (fetched on below-fold mount, ranked by the strongest signal gallery.js
@@ -171,18 +136,11 @@ export const landing = {
     fork: 'Fork',
     open: 'Open',
     votes: '{n} votes',
-    // Walk W1 (owner order 2026-07-21, ledger 4f71743a): the commons strip shows
-    // SIX slots, fed dynamically from the community gallery (real published towns
-    // fill first, ranked top_voted). These decorative entries are the PLACEHOLDER
-    // backfill for any slot without a real town — the renderer labels each backfilled
-    // card ' (placeholder)' beside its name. When six real towns exist, none show.
     cards: [
       { name: 'The Drowned Spire', author: 'mistwarden', pop: '412', size: 'City',    scene: 'city',    pos: 'center 30%' },
       { name: 'Ashfall Crossing',  author: 'dm_corvid',  pop: '388', size: 'Town',    scene: 'thorpe',  pos: 'center 55%' },
       { name: 'Greyharbor',        author: 'quiethand',  pop: '291', size: 'Village', scene: 'village', pos: 'center 40%' },
       { name: 'Saltmere Ford',     author: 'lanternkeep', pop: '203', size: 'Village', scene: 'thorpe',  pos: 'center 20%' },
-      { name: 'Hollowmere',        author: 'oldferry',   pop: '156', size: 'Hamlet',  scene: 'village', pos: 'center 50%' },
-      { name: 'Thornbrook',        author: 'saltpath',   pop: '97',  size: 'Hamlet',  scene: 'thorpe',  pos: 'center 35%' },
     ],
   },
 
@@ -193,19 +151,10 @@ export const landing = {
     sub:      'Forge a town before the kettle boils. Keep it if it’s good.',
     cta:      'Forge your first settlement',
     // 'Free. No account needed.' removed here (owner) — the hero already says it.
-    // Walk W1 (owner order 2026-07-21, ledger): the ANONYMOUS tier card was REMOVED
-    // from the set-out strip; the remaining cards fill the row naturally (no forced
-    // 2x2). The hero already carries the "free, no account" line, so the anon daily-
-    // cap claim no longer lives here (its landing claims-parity binding was retired
-    // in tests/copy/landingClaimsParity.test.js). W-DOC reconcile (brief §4): the
-    // remaining numeric fact ({freeSaves}) stays CONFIG-SOURCED — TierStrip interpolates
-    // it from config/tierFacts.js (FREE_SAVE_LIMIT), never hand-typed. Surveyor renders
-    // as the WALLED violet AI-channel early-access band (ruling #3), not a subscription
-    // tier — it is the optional AI workshop, priced per task.
     tiers: [
-      { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size with full settlement customization, a Library with up to {freeSaves} saves, and sharing to the Gallery.' },
+      { name: 'Anonymous',    badge: 'Free · no account', body: 'Up to three forges a day, completely randomized, no sign-up. Up to Town size, nothing kept.' },
+      { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size with full settlement customization, a Library with up to three saves, and sharing to the Gallery.' },
       { name: 'Cartographer', badge: 'Premium',           body: 'The living simulation: the Realm, wars that end themselves, custom content, and gallery import. Unlimited saves and unlimited exports.', accent: true },
-      { name: 'Surveyor',     badge: 'AI · early access', body: 'The optional AI workshop: an analyst for your world, prose briefs, and session interpretation that proposes edits for you to approve. It never writes canon. Bring your own key.', aiWall: true },
       { name: 'Founder',      badge: 'Premium · Lifetime', body: 'Everything Cartographer runs, forever. One payment, no clock.', seatLive: true },
     ],
     fullPricing: 'Full pricing',

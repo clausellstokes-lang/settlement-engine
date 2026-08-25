@@ -5,14 +5,9 @@
  * responses. DeltaRow is also reused by BatchCart, so it is exported.
  */
 
-import { SP, CARD, GOLD, FS, sans, INK, MUTED, SECOND, swatch } from '../../theme.js';
+import { SP, CARD, GOLD, R, FS, sans, INK, MUTED, SECOND, swatch } from '../../theme.js';
 import { vetoProse } from '../../../domain/events/affordanceManifest.js';
 import { PARTY, PARTY_BG } from './helpers.js';
-
-export const CLOCK_BOUND_SCOPE_NOTICE = [
-  'Clock-bound campaign: applying this change stages it for the next World Pulse.',
-  'Any preview uses the settlement as it stands now; earlier queued orders and intervening world changes may alter the eventual result.',
-].join(' ');
 
 export function PreviewPanel({ preview, stale = false, queued = false }) {
   if (!preview) return null;
@@ -22,19 +17,19 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
   return (
     <div style={{
       marginTop: SP.sm, padding: SP.sm,
-      background: CARD, border: `1px solid ${vetoed ? swatch.danger : GOLD}`,
+      background: CARD, border: `1px solid ${vetoed ? swatch.danger : GOLD}`, borderRadius: R.sm,
       // THE STALENESS LAW (§5): a preview whose payload-key or settlement
       // diverged is visibly voided — grayed while the live re-derivation lands.
       opacity: stale ? 0.55 : 1,
     }}>
       {stale && (
         <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic', marginBottom: 4 }}>
-          Preview is stale. Updating to the edited change…
+          Preview is stale — updating to the edited change…
         </div>
       )}
       {vetoed && (
         <div style={{ fontSize: FS.xs, fontFamily: sans, color: swatch.danger, fontWeight: 800, marginBottom: 4 }}>
-          ✕ The world refuses this change. Nothing will be committed.
+          ✕ The world refuses this change — nothing will be committed.
         </div>
       )}
       {partyCaused && (
@@ -44,7 +39,7 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
           background: PARTY_BG, color: PARTY, border: `1px solid ${PARTY}`,
           fontSize: FS.xxs, fontFamily: sans, fontWeight: 800, letterSpacing: '0.04em',
         }}>
-          Party-caused
+          ⚔ Party-caused
         </div>
       )}
       <div style={{ fontSize: FS.sm, fontFamily: sans, color: INK, fontWeight: 700, marginBottom: 4 }}>
@@ -64,12 +59,10 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
           {deltas.map((d, i) => <DeltaRow key={i} d={d} />)}
         </div>
       )}
-      {/* Queued-vs-now (§5): this preview evaluates one event against the
-          current settlement. It does not simulate the queue entries or realm
-          evolution that will precede a clock-bound application. */}
+      {/* Queued-vs-now (§5): the pane says it plainly. */}
       {queued && !vetoed && (
         <div style={{ marginTop: 6, fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic' }}>
-          Isolated-scope review. {CLOCK_BOUND_SCOPE_NOTICE}
+          Applies at the next World Pulse advance (clock-bound campaign).
         </div>
       )}
       {factionResponses?.length > 0 && (

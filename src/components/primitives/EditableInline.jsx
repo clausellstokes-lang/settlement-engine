@@ -2,8 +2,8 @@
  * EditableInline.jsx — Click-to-edit primitive used everywhere a single
  * piece of dossier text becomes editable.
  *
- * The dossier is the artifact the DM edits, not a read-only view, which
- * would otherwise force three or four bespoke
+ * The critique's E-1 ("the dossier is the artifact the DM edits, not a
+ * read-only view") would otherwise force three or four bespoke
  * click-to-edit implementations across the codebase (NPC names,
  * faction labels, summary prose, the sample-card teaching fields).
  * Each would drift on focus management, commit semantics, escape
@@ -26,7 +26,7 @@
  *   through Funnel.track + records a `userEdit` via the existing
  *   domain/userEdits.js module IF `provenance` is provided. The
  *   provenance shape — { kind, entityId } — is the same one the
- *   AI-overlay verifier already consumes, so edits become
+ *   AI-overlay verifier (P49) already consumes, so edits become
  *   traceable end-to-end without a new contract.
  *
  * Accessibility:
@@ -188,6 +188,7 @@ export default function EditableInline({
       margin: '-2px -4px',
       background: '#fff',
       border: `1px solid ${error ? '#A23434' : GOLD}`,
+      borderRadius: 3,
       outline: 'none',
       fontFamily: 'inherit',
       ...textStyle,
@@ -230,6 +231,7 @@ export default function EditableInline({
             background: swatch.white,
             padding: '2px 6px',
             border: `1px solid #A23434`,
+            borderRadius: 3,
             whiteSpace: 'nowrap',
             zIndex: 10,
           }}>

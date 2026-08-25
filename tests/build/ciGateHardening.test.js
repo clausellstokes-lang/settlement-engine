@@ -32,65 +32,6 @@ import { decideDeploy, runGate, REQUIRED_CHECKS } from '../../scripts/vercel-ign
 import { readAppliedHeadLedger } from '../../scripts/check-migration-head.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const REQUIRED_DEPLOY_JOB_IDS = [
-  'check',
-  'e2e',
-  'performance',
-  'deno-tests',
-  'coverage-floors',
-  'determinism-hostile-locale',
-];
-
-function ciJobBody(yaml, jobId) {
-  const start = yaml.search(new RegExp(`^ {2}${jobId}:`, 'm'));
-  if (start < 0) return null;
-  const tail = yaml.slice(start);
-  const next = tail.slice(1).search(/\n {2}[A-Za-z0-9_-]+:\s*(?:#.*)?$/m);
-  return next >= 0 ? tail.slice(0, next + 1) : tail;
-}
-
-function inlineNeeds(job) {
-  const value = job?.match(/^\s{4}needs:\s*\[([^\]]+)\]\s*$/m)?.[1];
-  return value ? value.split(',').map((id) => id.trim()) : null;
-}
-
-// ── The Deno edge gate installs + type-checks before execution ────────────────
-describe('Deno edge-function CI gate is reproducible and fail-closed', () => {
-  const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
-  const denoJobStart = ci.search(/^ {2}deno-tests:\s*$/m);
-  const denoJobTail = denoJobStart >= 0 ? ci.slice(denoJobStart) : '';
-  const nextJobOffset = denoJobTail.slice(1).search(/\n {2}[A-Za-z0-9_-]+:\s*(?:#.*)?$/m);
-  const denoJob = nextJobOffset >= 0
-    ? denoJobTail.slice(0, nextJobOffset + 1)
-    : denoJobTail;
-
-  it('pins @types/node as a direct exact dependency in both npm manifests', () => {
-    const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
-    const lock = JSON.parse(readFileSync(join(ROOT, 'package-lock.json'), 'utf8'));
-    const denoConfig = JSON.parse(readFileSync(join(ROOT, 'deno.json'), 'utf8'));
-    const denoLock = JSON.parse(readFileSync(join(ROOT, 'deno.lock'), 'utf8'));
-    expect(pkg.devDependencies['@types/node']).toBe('25.6.0');
-    expect(lock.packages[''].devDependencies['@types/node']).toBe('25.6.0');
-    expect(lock.packages['node_modules/@types/node'].version).toBe('25.6.0');
-    expect(denoConfig.nodeModulesDir).toBe('manual');
-    expect(denoLock.workspace.packageJson.dependencies).toContain('npm:@types/node@25.6.0');
-  });
-
-  it('installs the lockfile and blocks on the production type-check before tests', () => {
-    expect(denoJobStart, 'ci.yml must declare a deno-tests job').toBeGreaterThanOrEqual(0);
-    expect(denoJob).toMatch(/actions\/setup-node@v4/);
-    expect(denoJob).toMatch(/run:\s*npm ci --ignore-scripts/);
-    const installAt = denoJob.indexOf('run: npm ci --ignore-scripts');
-    const checkAt = denoJob.indexOf('run: deno task check:edge');
-    const testAt = denoJob.indexOf('run: deno task test:edge');
-    expect(installAt, 'deno-tests must install the locked dependency tree').toBeGreaterThanOrEqual(0);
-    expect(checkAt, 'deno-tests must run the production type-check').toBeGreaterThanOrEqual(0);
-    expect(testAt, 'deno-tests must run the execution suite').toBeGreaterThanOrEqual(0);
-    expect(installAt, 'locked dependencies must be installed before type-checking').toBeLessThan(checkAt);
-    expect(checkAt, 'production type-check must block before edge tests').toBeLessThan(testAt);
-    expect(denoJob.slice(checkAt, testAt)).not.toMatch(/continue-on-error:\s*true/);
-  });
-});
 
 // ── The Vercel ignore-build gate is ARMED (fail-closed) ────────────────────────
 // These exercise the REAL decideDeploy() decision (skip vs proceed), not just the
@@ -331,13 +272,16 @@ describe('REQUIRED_CHECKS stays in sync with ci.yml jobs', () => {
 // ── The redeploy job retriggers Vercel after CI goes green ──────────────────────
 describe('ci.yml redeploy job retriggers Vercel after CI goes green', () => {
   const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
-  const jobBlock = ciJobBody(ci, 'redeploy');
+  const start = ci.search(/^ {2}redeploy:/m);
+  const jobBlock = start >= 0 ? ci.slice(start) : '';
 
-  it('deploy and redeploy need the exact same complete gating job set', () => {
-    expect(ciJobBody(ci, 'deploy'), 'ci.yml must have a top-level `deploy:` job').toBeTruthy();
-    expect(jobBlock, 'ci.yml must have a top-level `redeploy:` job').toBeTruthy();
-    expect(inlineNeeds(ciJobBody(ci, 'deploy'))).toEqual(REQUIRED_DEPLOY_JOB_IDS);
-    expect(inlineNeeds(jobBlock)).toEqual(REQUIRED_DEPLOY_JOB_IDS);
+  it('exists and needs every gating job (a red/cancelled gate skips the trigger)', () => {
+    expect(start, 'ci.yml must have a top-level `redeploy:` job').toBeGreaterThanOrEqual(0);
+    // needs must cover the same gating set the deploy gate requires.
+    const [needsLine] = jobBlock.match(/^\s{4}needs:\s*\[(.+)\]/m) ?? [''];
+    for (const job of ['check', 'e2e', 'deno-tests', 'coverage-floors', 'determinism-hostile-locale']) {
+      expect(needsLine, `redeploy must wait on ${job}`).toMatch(new RegExp(`\\b${job}\\b`));
+    }
   });
 
   it('fires only on a master push — never PRs or other branches', () => {

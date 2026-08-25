@@ -44,10 +44,7 @@ export function applyEvent({ settlement, systemState, event, now = null }) {
   // see undoEvent.js). Everything else an event writes carries event-id
   // provenance and is scrubbed by it on undo; for these the snapshot is the
   // only exact way back. Null for every other event type.
-  // A vetoed envelope is a refusal, not a timeline candidate. In particular,
-  // ADD_* snapshots must not make a rejected duplicate look loggable to a
-  // caller inspecting the returned envelope before it checks `veto`.
-  const undo = veto ? null : captureEventUndoSnapshot(settlement, event);
+  const undo = captureEventUndoSnapshot(settlement, event);
 
   const logEntry = /** @type {EventLogEntry} */ ({
     event,

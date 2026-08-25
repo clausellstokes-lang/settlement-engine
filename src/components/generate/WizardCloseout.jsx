@@ -17,7 +17,8 @@ import { useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { buildRegistry } from '../../lib/customRegistry.js';
 import {
-  GOLD_TXT, GOLD_BG, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP } from '../theme.js';
+  GOLD_TXT, GOLD_BG, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, R,
+} from '../theme.js';
 
 /** Title-case a config enum value; collapse any `random*` value to "Random". */
 function humanize(v) {
@@ -113,13 +114,10 @@ export function buildCloseoutSummary(config = {}, toggles = {}) {
   // the simulator roll them, so they count as deliberate steering.
   const nonDefaultEnums = [
     ['Tier',        config.settType],
-    ['Tradition',   config.culture],
+    ['Culture',     config.culture],
     ['Trade route', config.tradeRouteAccess],
     ['Threat',      config.monsterThreat],
   ].filter(([, v]) => !isDefaultEnum(v));
-  if (config.contentProfile && config.contentProfile !== 'grounded') {
-    nonDefaultEnums.push(['Themes', config.contentProfile]);
-  }
   const magicOff = config.magicExists === false;
 
   const procedural =
@@ -129,8 +127,7 @@ export function buildCloseoutSummary(config = {}, toggles = {}) {
   return {
     facts: [
       { label: 'Tier',        value: humanize(config.settType) },
-      { label: 'Tradition',   value: humanize(config.culture) },
-      { label: 'Themes',      value: humanize(config.contentProfile || 'grounded') },
+      { label: 'Culture',     value: humanize(config.culture) },
       { label: 'Trade route', value: humanize(config.tradeRouteAccess) },
       { label: 'Threat',      value: humanize(config.monsterThreat) },
       { label: 'Magic',       value: magicOff ? 'Off' : 'On' },
@@ -175,7 +172,7 @@ export default function WizardCloseout() {
       role="group"
       aria-label="Configuration summary"
       style={{
-        border: `1px solid ${BORDER}`,
+        border: `1px solid ${BORDER}`, borderRadius: R.lg,
         overflow: 'hidden', marginBottom: SP.sm,
         background: CARD,
         // Subordinate to the Generate button below; border + header tint fence
@@ -235,7 +232,7 @@ export default function WizardCloseout() {
             <span key={f.label} style={{
               display: 'inline-flex', alignItems: 'baseline', gap: 5,
               padding: '3px 10px', background: GOLD_BG,
-              border: `1px solid ${BORDER}`,
+              border: `1px solid ${BORDER}`, borderRadius: 12,
               fontSize: FS.xs,
             }}>
               <span style={{ color: MUTED, fontWeight: 600 }}>{f.label}</span>

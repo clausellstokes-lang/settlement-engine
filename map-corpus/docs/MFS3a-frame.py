@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """MF-S3a SAMPLING FRAME.
-Builds the studiable plate roster: 313 plates minus the CONSERVATIVE holdout
+Builds the studiable plate roster: 313 plates minus the CONSERVATIVE evaluation
 union (every plate id named anywhere in laneHFM1-holdout-proposal.json, which
 covers `proposed`, `kept`, `added`, `dropped` and the 12-swap `minimal_swap`
 arms).  Also emits the lettering-scrub set (geometry OK, naming DISQUALIFIED)
 parsed from laneHF4-receipt.md section 'SCRUB LIST'.
 Outputs MFS3a-frame.json.
 """
-import json, os, re, csv, collections
+import json, os, re, csv, collections, sys
 
-CORPUS = "/Users/cstokes/Desktop/settlement-engine/map-corpus"
-DOCS = os.path.join(CORPUS, "docs")
+DOCS = os.path.dirname(os.path.abspath(__file__))
+CORPUS = os.path.dirname(DOCS)
 
-# ---- holdout: conservative union of every hf-id named anywhere in the file ----
+# ---- legacy evaluation roster: conservative union of every named arm ----
 ho = json.load(open(os.path.join(DOCS, "laneHFM1-holdout-proposal.json")))
 hold = set()
 def walk(x):
@@ -27,7 +27,11 @@ walk(ho)
 # ---- scrub list (LETTERING/NAMING disqualified only) ----
 txt = open(os.path.join(DOCS, "laneHF4-receipt.md")).read()
 m = re.search(r"### .{0,4}SCRUB LIST.*?\n(.*?)\n---", txt, re.S)
-scrub = set(re.findall(r"hf\d+", m.group(1))) if m else set()
+scrub_text = m.group(1) if m else ""
+# Item 5 names hf373 only as the CURED replacement for contaminated hf329.
+# Strip that positive instruction before collecting contaminated ids.
+scrub_text = re.sub(r"Use \*\*hf\d+\*\* as the cured.*", "", scrub_text)
+scrub = set(re.findall(r"hf\d+", scrub_text))
 
 # ---- roster from the measured CSV (has category/tier/era per plate) ----
 rows = list(csv.DictReader(open(os.path.join(DOCS, "laneHFM1-corpus-measured.csv"))))
@@ -58,7 +62,19 @@ era = collections.Counter(v["era"] for v in frame["plates"].values())
 frame["studiable_by_category"] = dict(cat)
 frame["studiable_by_tier"] = dict(tier)
 frame["studiable_by_era"] = dict(era)
-json.dump(frame, open(os.path.join(os.path.dirname(__file__), "MFS3a-frame.json"), "w"), indent=1)
+output_path = os.path.join(os.path.dirname(__file__), "MFS3a-frame.json")
+if "--write" in sys.argv:
+    temp = output_path + ".tmp"
+    with open(temp, "w") as handle:
+        json.dump(frame, handle, indent=1)
+        handle.write("\n")
+    os.replace(temp, output_path)
+    print("wrote", output_path)
+else:
+    expected = json.load(open(output_path))
+    if expected != frame:
+        raise SystemExit("MFS3a-frame.json DRIFT — inspect, then pass --write only for an intentional roster change")
+    print("MFS3a-frame.json MATCHES — dry run, no write")
 print("corpus", frame["corpus_n"], "| holdout excluded", frame["holdout_excluded_n"],
       "| STUDIABLE", frame["studiable_n"], "| lettering-scrub", frame["scrub_lettering_n"])
 print("by category:", dict(cat))

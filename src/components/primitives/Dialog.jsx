@@ -1,28 +1,49 @@
-import { useId } from 'react';
+import { useEffect, useId, useRef } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import {
-  BODY, BORDER, CARD, CARD_ALT, FS, GOLD, INK, MUTED, R, SP,
+  BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, SP,
   RED, AMBER, sans,
 } from '../theme.js';
 import Button from './Button.jsx';
-import { useDialogFocusTrap } from './useDialogFocusTrap.js';
-import { useIconsOn } from './IconsContext.js';
+
+const FOCUSABLE = 'a[href],button:not([disabled]),textarea:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
 function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
-  // Shared focus trap: focus-in on open, Tab cycling, Escape-to-cancel, and
-  // focus restore on close. onCancel is read through a ref inside the hook so a
-  // new handler identity on a parent re-render does NOT re-run focus-in
-  // mid-typing.
-  const dialogRef = useDialogFocusTrap(open, onCancel);
+  const dialogRef = useRef(null);
+  const restoreRef = useRef(null);
 
-  const iconsOn = useIconsOn();
+  useEffect(() => {
+    if (!open) return undefined;
+    // aria-modal promises the background is inert — back it with real focus
+    // management: remember the trigger, move focus in, trap Tab, and restore on close.
+    restoreRef.current = typeof document !== 'undefined' ? document.activeElement : null;
+    const node = dialogRef.current;
+    const focusables = () => node ? Array.from(node.querySelectorAll(FOCUSABLE)) : [];
+    (focusables()[0] || node)?.focus?.();
+
+    const onKey = event => {
+      if (event.key === 'Escape') { onCancel?.(); return; }
+      if (event.key !== 'Tab' || !node) return;
+      const items = focusables();
+      if (!items.length) { event.preventDefault(); node.focus?.(); return; }
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      restoreRef.current?.focus?.();
+    };
+  }, [open, onCancel]);
+
   if (!open) return null;
   const iconColor = tone === 'danger' ? RED : tone === 'warning' ? AMBER : GOLD;
 
   return (
     <div
       role="presentation"
-      className="oc-m-warmdim"
       style={{
         position: 'fixed',
         inset: 0,
@@ -31,10 +52,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
         alignItems: 'center',
         justifyContent: 'center',
         padding: SP.lg,
-        // The room dims warm behind the plate (organic motion #10 warm-dim). The
-        // rgba is the token warm-dim value (58% ink-deepest, matching oc-m-warmdim);
-        // the class supplies the fade-in, reduced-motion-safe.
-        background: 'rgba(27,20,8,0.58)',
+        background: 'rgba(27,20,8,0.46)',
       }}
       onMouseDown={event => {
         if (event.target === event.currentTarget) onCancel?.();
@@ -51,13 +69,9 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
           maxHeight: 'min(90vh, 680px)',
           overflow: 'auto',
           border: `1px solid ${BORDER}`,
-          // The plate is rule-framed, not rounded, and holds no z-axis — depth is
-          // the warm-dim ground, never elevation (organic craft §3/§6). The radius
-          // and shadow lines are kept as value-swaps so the kill-list stays exact;
-          // both are would-be burn-down deletions.
-          borderRadius: 0,
+          borderRadius: R.lg,
           background: CARD,
-          boxShadow: 'none',
+          boxShadow: ELEV[3],
         }}
       >
         <header style={{
@@ -68,11 +82,10 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
           borderBottom: `1px solid ${BORDER}`,
           background: CARD_ALT,
         }}>
-          {iconsOn && (
           <div style={{
             width: 32,
             height: 32,
-            borderRadius: 0,
+            borderRadius: R.lg,
             border: `1px solid ${BORDER}`,
             background: CARD,
             display: 'flex',
@@ -83,7 +96,6 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
           }}>
             <AlertTriangle size={16} />
           </div>
-          )}
           <div style={{ flex: 1, minWidth: 0 }}>
             <h2 style={{
               margin: 0,
@@ -120,9 +132,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
               display: 'inline-flex',
             }}
           >
-            {iconsOn
-              ? <X size={16} />
-              : <span aria-hidden="true" style={{ fontSize: FS.xl, lineHeight: 1, fontWeight: 700 }}>×</span>}
+            <X size={16} />
           </button>
         </header>
         <div style={{ padding: SP.lg }}>
@@ -135,30 +145,19 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
 
 export function ConfirmDialog({
   open,
-  heading,
   title,
   body,
-  // Optional extra content rendered ABOVE the action row — e.g. a toggle row or a
-  // short scope list. Kept null by default so every existing call site renders
-  // byte-identically (no extra DOM node when unused).
-  extra = null,
   confirmLabel = 'Confirm',
   cancelLabel = 'Cancel',
-  // Optional: disable the confirm action while a precondition is unmet (e.g. an
-  // Advance dialog whose realm must be canonized first). Default false keeps every
-  // existing call site unchanged.
-  confirmDisabled = false,
   tone = 'danger',
   onConfirm,
   onCancel,
 }) {
-  const resolvedTitle = heading ?? title;
   return (
-    <Shell open={open} title={resolvedTitle} body={body} tone={tone} onCancel={onCancel}>
-      {extra}
+    <Shell open={open} title={title} body={body} tone={tone} onCancel={onCancel}>
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm, flexWrap: 'wrap' }}>
         <Button variant="secondary" onClick={onCancel}>{cancelLabel}</Button>
-        <Button variant={tone === 'danger' ? 'danger' : 'primary'} onClick={onConfirm} disabled={confirmDisabled}>{confirmLabel}</Button>
+        <Button variant={tone === 'danger' ? 'danger' : 'primary'} onClick={onConfirm}>{confirmLabel}</Button>
       </div>
     </Shell>
   );
@@ -169,29 +168,17 @@ export function ChoiceDialog({
   title,
   body,
   choices = [],
-  // Optional: which choice takes focus when the dialog opens. Without it the
-  // shared focus trap falls back to the first focusable, which is the header's
-  // Close button — fine for a warning, wrong for a question whose recommended
-  // answer should be one Enter away. Default null keeps every existing call site
-  // rendering byte-identically (no autofocus attribute emitted).
-  defaultChoiceId = null,
   cancelLabel = 'Cancel',
-  // 'warning' is the shipped default (a fork the DM is being warned about);
-  // 'default' is for a plain question that carries no hazard, e.g. the realm's
-  // magic stance. Passed through to Shell's icon tone only.
-  tone = 'warning',
   onChoose,
   onCancel,
 }) {
   return (
-    <Shell open={open} title={title} body={body} tone={tone} onCancel={onCancel}>
+    <Shell open={open} title={title} body={body} tone="warning" onCancel={onCancel}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
         {choices.map(choice => (
           <button
             key={choice.id}
             type="button"
-            // eslint-disable-next-line jsx-a11y/no-autofocus -- intentional: the recommended answer takes focus when the question opens
-            autoFocus={defaultChoiceId != null && choice.id === defaultChoiceId}
             onClick={() => onChoose?.(choice.id)}
             style={{
               display: 'block',

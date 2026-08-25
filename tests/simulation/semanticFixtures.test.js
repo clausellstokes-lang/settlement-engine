@@ -25,7 +25,6 @@
  */
 
 import { describe, test, expect, beforeAll } from 'vitest';
-import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import {
   gen,
   stressEntries,
@@ -321,15 +320,14 @@ describe('RESOURCE-COLLAPSE MINE (mining resources depleted + isolation)', () =>
 
   test('COHERENCE: the depleted seams drop out of the productive base', () => {
     const available = s.resourceAnalysis?.availableResources || [];
-    // The depleted metal/coal seams no longer feed the economy, while the ONE
-    // surviving seam does — stone_quarry is the liveness anchor for each exclusion,
-    // so an availableResources list that drifted away reds instead of passing.
-    for (const worked of ['iron_deposits', 'coal_deposits', 'precious_metals']) {
-      expectAbsentWithAnchor(available, worked, 'stone_quarry', 'the productive base');
-    }
+    // depleted metal/coal seams no longer feed the economy...
+    expect(available).not.toContain('iron_deposits');
+    expect(available).not.toContain('coal_deposits');
+    expect(available).not.toContain('precious_metals');
+    // ...only the surviving stone seam does.
     expect(available).toContain('stone_quarry');
     const chains = (s.resourceAnalysis?.resourceChains || []).map((c) => c.rawResource);
-    expectAbsentWithAnchor(chains, 'iron', 'stone', 'the surviving raw-resource chains');
+    expect(chains).not.toContain('iron');
     expect(chains).toContain('stone');
   });
 

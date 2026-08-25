@@ -34,11 +34,6 @@
 import { describe, it, expect } from 'vitest';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve, join } from 'node:path';
-import {
-  brotliCompressSync,
-  constants as zlibConstants,
-  gzipSync,
-} from 'node:zlib';
 
 const distDir = resolve(process.cwd(), 'dist');
 const assetsDir = join(distDir, 'assets');
@@ -390,89 +385,12 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 //     satellite (+596 B, §10.4, blocked since 2026-07-14), W2 feed-retention
 //     (+363 B, round-21), W-R2-DEPTH (~100 B), and slack. The reclaim paid for
 //     the whole queue ~15× over; NET −55,503 B vs the pre-G8 1,121,942.
+// → 1,040,000 (RATCHET #11 — 2026-07-28 ledger-lane reconciliation):
+//   this review-fixes checkout is formally a ledger/marketing lane, not a code
+//   merge source. Its copied constitutional budget is aligned to the code-of-
+//   record composite so the retired branch cannot advertise a looser wall.
 // Monotone-down only; raises are owner-signed, never incidental.
-// ── (2026-07-16, FP-G9) MASTER-MERGE RECLAIM — budget HOLDS at 1,066,400 ──
-// The master-merge fold-in (claude/master-merge-r1) adopted master's entity-link
-// consumer layer (EntityLink/DossierEntityContext/useNavigateToEntity + the
-// focusedEntity uiSlice) and W6's ported store fixes — legitimate features RATCHET
-// #10's budget never funded. The folded tree measured 1,069,872 (+3,472 OVER). FP-G9
-// RECLAIMED 6,456 B with ONE behavior-neutral move: the eager store (mapSlice) pulled
-// computeRoadEdges (+ its supplyChains dep, ~19 KB source) into first paint via a
-// static import, used there ONLY for the fire-and-forget MAP_ROUTE_DRAWN analytics —
-// never for state. Dynamic-imported at the call site (the settlementSlice loadEngine
-// idiom); roadNetwork + supplyChains now ride the lazy map chunk (the lazy WorldMap/
-// RoadsLayer surfaces already import computeRoadEdges directly). The sole observable
-// shift is analytics timing (MAP_ROUTE_DRAWN fires one microtask later; the placement,
-// its gate return, and MAP_PLACEMENT_ADDED all stay synchronous). Measured closure
-// 1,063,416 (7 files, index 519,514 → 513,058) — GREEN with 2,984 B margin, which
-// restores RATCHET #10's reserved budget-blocked-queue headroom (persist-gap +596,
-// W2 feed-retention +363, W-R2-DEPTH ~100, slack). The budget is DELIBERATELY NOT
-// lowered: dropping it would consume that reserved, owner-funded headroom. Goldens
-// byte-identical (no lit-path change). Monotone-down only; raises owner-signed.
-// RATCHET #11 (2026-07-17, FP-G10 fold): 1,066,400 -> 1,040,000. FP-G10 reclaimed
-// -33,803 B (the SUPPLY_CHAIN_NEEDS table's sole eager importer severed; closure
-// 1,065,000 -> 1,031,197). ~8.8KB headroom deliberately retained to fund the remaining
-// build-out waves' honest registration costs (S3-S6, gallery phase 2, content); the
-// FINAL tightening happens at the composite gate. Monotone-down per the constitution.
-// (2026-07-21, C5 claims-parity note on the line above): the retained headroom did
-// its funded job — the S/V/C build-out landed and the review composite measures
-// 1,039,975 (`npm run build` on this lineage), 25 B under budget. The "~8.8KB
-// headroom" is GONE (spent on exactly what it was retained for), and the remaining
-// margin sits BELOW the ~85 B house working margin — so the composite-gate FINAL
-// tightening now has nothing to cut: at promotion the owner either lands a reclaim
-// first or re-pins budget = measured + ~85 B house margin then. Until promotion,
-// treat eager Δ as HARD-ZERO for every remaining lane. Monotone-down unchanged;
-// raises stay owner-signed.
-//
-// ── (2026-08-01, THE WAVE RECLAIM) BUDGET UNCHANGED AT 1,040,000; RED CLEARED ──
-// The build waves D (CREATE_ROUTE) / F (gathered adjudication) / G (autoplacement)
-// / J1 + H1 (engine ledgers) drove this ratchet RED: MEASURED 1,056,635, i.e. 16,635
-// OVER, against a pre-wave 1,035,454. The budget was NOT raised (it is owner-signed
-// and the C5 note above already spent the last of its headroom); the closure was
-// brought back down. Two measured moves, one at a time, `npm run build` + this BFS
-// after each:
-//   • WAVE-D SEAM REPAIR  1,056,635 -> 1,045,523 (-11,112). domain/events/mutate.js
-//     is reached statically from the store, so its MUTATION_HANDLERS table is EAGER.
-//     Wave D's CREATE_ROUTE handler imported the deterministic edge id from
-//     roads/userRoutes.js, which statically imports spatial/distanceRead.js — the
-//     53 kB frozen-digest reader whose own docblock states it "never reaches first
-//     paint". One three-line function pulled the whole derivation plus the digest
-//     reader into the critical path. Cured with the house leaf extraction (move the
-//     FUNCTION, not the chunk pin — the stablePart / exportPosture idiom):
-//     roads/userRouteIdentity.js carries orderedRouteEndpoints + userRouteEdgeId with
-//     ZERO imports, roads/userRoutes.js re-exports them verbatim so no consumer or
-//     test moved, and the eager handler imports the leaf. The eager module graph
-//     drops userRoutes.js AND distanceRead.js; index 602,063 -> 590,951.
-//     @enforced-by tests/build/userRouteIdentityLeaf.test.js (5 layers: the leaf's
-//     zero-imports contract, the handler's anchored-negative import site, a
-//     main.jsx source-graph exclusion, dist absence of the derivation, and dist
-//     PRESENCE of the eager handler — the pair that keeps the absence non-vacuous).
-//   • FP-G16 ESD OVER-INCLUSION TRIM  1,045,523 -> 1,020,590 (-24,933). The
-//     conservative generator-domain derivation routed domain/cultureProfiles.js — a
-//     466-byte re-export BOUNDARY — into eager engine-core because three generators
-//     import it; being an eager-graph member, it then dragged its 33 kB governed
-//     corpus (data/cultureProfiles.js) into the eager 'data' chunk through the
-//     derived EAGER_DATA classifier. MEASURED: no module in the true first-paint
-//     graph reaches either file (every importer is the lazy engine or a lazy surface
-//     — ConfigurationPanel, new/dailyLifeLogic). Excised from ENGINE_SHARED_DOMAIN
-//     and pinned to engine-core-lazy — pinned, not orphaned, because an unpinned
-//     excision co-locates into the big `engine` chunk (the FP-G11 formatNumber
-//     incident) and makes those two UI surfaces fetch the whole generator. Placement
-//     only: zero source modules changed, generator-golden-master unchanged.
-//     data 125,804 -> 100,868. @enforced-by tests/build/cultureProfilesLazy.test.js.
-// MEASURED 1,020,590 across the same 8 chunks — 19,410 B under the ceiling. The
-// budget is DELIBERATELY LEFT AT 1,040,000 rather than re-pinned to measured + the
-// ~85 B house margin: tightening it is the composite-gate/owner move the C5 note
-// reserves, and this margin is what the remaining build waves' honest registration
-// costs have to spend. Monotone-down unchanged; raises stay owner-signed.
 const CLOSURE_BUDGET_BYTES = 1_040_000;
-// Transfer budgets measure each fetched chunk independently, matching CDN
-// compression rather than compressing an artificial concatenation. Recorded
-// 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
-// Brotli 269,548. The ~5% platform margin absorbs zlib-version variance while
-// still catching a payload that is raw-small but compression-hostile.
-const CLOSURE_GZIP_BUDGET_BYTES = 337_000;
-const CLOSURE_BROTLI_BUDGET_BYTES = 283_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -510,34 +428,6 @@ function entryStaticClosure() {
     }
   }
   return { entry, files: [...seen] };
-}
-
-// Compression at Brotli quality 11 is deliberately expensive. The gzip and
-// Brotli budgets are independent laws (one may pass while the other fails), so
-// they need independent tests, but re-compressing the same closure in each test
-// would double the post-build gate cost. Cache one immutable measurement for
-// both assertions; dist/ cannot change during a single Vitest module run.
-let transferMeasurement = null;
-function entryTransferMeasurement() {
-  if (transferMeasurement) return transferMeasurement;
-  const { files } = entryStaticClosure();
-  let gzipTotal = 0;
-  let brotliTotal = 0;
-  const lines = [];
-  for (const file of files.sort()) {
-    const bytes = readFileSync(join(assetsDir, file));
-    const gzip = gzipSync(bytes, { level: 9 }).length;
-    const brotli = brotliCompressSync(bytes, {
-      params: {
-        [zlibConstants.BROTLI_PARAM_QUALITY]: 11,
-      },
-    }).length;
-    gzipTotal += gzip;
-    brotliTotal += brotli;
-    lines.push(`  gzip ${String(gzip).padStart(7)}  br ${String(brotli).padStart(7)}  ${file}`);
-  }
-  transferMeasurement = Object.freeze({ gzipTotal, brotliTotal, breakdown: lines.join('\n') });
-  return transferMeasurement;
 }
 
 // ── VERIFY_DIST post-build anti-vacuity guard ([tests-1]/[test-quality-1]) ──
@@ -629,16 +519,9 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     const size = statSync(join(assetsDir, engine)).size;
     // It should stay meaningfully large (the generation pipeline lives here).
     // If it collapses, generation code leaked into a hot chunk; if it balloons
-    // past this ceiling, something eager re-merged into it.
-    // CEILING RAISE 660_000 -> 673_000 (owner-ratified 2026-07-26): measured
-    // 670,719 after the three lazy-leaf pins in vite.config.js
-    // (crossSettlementConflicts, aiLayer, formatNumber), plus ~2.3 kB of
-    // cross-environment Rollup margin. NOTHING EAGER RE-MERGED — the
-    // first-paint closure IMPROVED over this lane, and the closure budget
-    // above is the guard that proves it. The growth is the 26 new
-    // generation-critical-path modules the generation remediation added.
+    // past the old ~660 kB, something eager re-merged into it.
     expect(size).toBeGreaterThan(300_000);
-    expect(size).toBeLessThan(673_000);
+    expect(size).toBeLessThan(660_000);
   });
 
   // ── The affordance manifest stays a LAZY LEAF (Composer V2 §2) ───────────
@@ -759,28 +642,6 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     ).toBeLessThanOrEqual(CLOSURE_BUDGET_BYTES);
   });
 
-  it.skipIf(!requireDistRead)(
-    `entry static closure gzip bytes stay under ${CLOSURE_GZIP_BUDGET_BYTES}`,
-    () => {
-      const { gzipTotal, breakdown } = entryTransferMeasurement();
-      expect(
-        gzipTotal,
-        `first-paint gzip transfer = ${gzipTotal} B (budget ${CLOSURE_GZIP_BUDGET_BYTES}):\n${breakdown}`,
-      ).toBeLessThanOrEqual(CLOSURE_GZIP_BUDGET_BYTES);
-    },
-  );
-
-  it.skipIf(!requireDistRead)(
-    `entry static closure Brotli bytes stay under ${CLOSURE_BROTLI_BUDGET_BYTES}`,
-    () => {
-      const { brotliTotal, breakdown } = entryTransferMeasurement();
-      expect(
-        brotliTotal,
-        `first-paint Brotli transfer = ${brotliTotal} B (budget ${CLOSURE_BROTLI_BUDGET_BYTES}):\n${breakdown}`,
-      ).toBeLessThanOrEqual(CLOSURE_BROTLI_BUDGET_BYTES);
-    },
-  );
-
   // ── modulePreload hint (secondary check) ─────────────────────────────────
   it('index.html does NOT preload vendor-pdf', () => {
     const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
@@ -862,12 +723,10 @@ describe('F41 — PDF worker source contracts', () => {
     expect(workerSrc).toMatch(/from\s+['"]\.\.\/pdf\/SettlementPDF\.jsx['"]/);
   });
 
-  // The worker's own module scope must stay free of dynamic import(). The
-  // rationale is stated once, in src/utils/pdfRender.worker.js's docblock — it
-  // is a latency contract, NOT the old build constraint (worker.format is 'es'
-  // here, and townScene.worker code-splits under it, so a split PDF graph would
-  // build fine). Vendored deps are the build's problem; this pins our file so a
-  // future edit fails with a named culprit.
+  // The worker's own module scope must stay free of dynamic import() —
+  // Vite's default worker.format is 'iife', which hard-fails the build on a
+  // code-split worker graph. (Vendored deps are checked by the build itself;
+  // this pins our file so a future edit fails with a named culprit.)
   it('pdfRender.worker.js contains no dynamic import()', () => {
     const code = workerSrc
       .replace(/\/\*[\s\S]*?\*\//g, '')

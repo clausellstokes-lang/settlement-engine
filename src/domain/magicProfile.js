@@ -20,12 +20,10 @@
  */
 
 import { deriveAllFactionProfiles } from './factionProfile.js';
-import { liveInstitutions } from './institutions/institutionRoster.js';
 import { deriveCausalState } from './causalState.js';
 import { deriveCapacityProfile } from './capacityModel.js';
 import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN, magicLedger } from './magicLedger.js';
 import { HEALING_INSTITUTION_PATTERN as HEALING_PATTERN } from './healingLedger.js';
-import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
 // Phase 4 W-F5 stage 2 (axis retirement re-plumb): temper is DERIVED from the
 // alignment axes — never read off the stored temperamentAxis field — so the
 // regulatory-orthodoxy read can no longer disagree with the niche/warbound/
@@ -95,10 +93,8 @@ const ROLE_BANDS = Object.freeze([
  * @returns {MagicInstitution[]}
  */
 function institutionsByPattern(s, pattern) {
-  // LIVE roster only — a calamity-ruined mage-tower/temple confers no magic capability
-  // (availability / institutional control / roles) (ruin-filter class).
-  const inst = liveInstitutions(s);
-  return inst.filter(i => pattern.test(nativeSemanticName(i)));
+  const inst = Array.isArray(s?.institutions) ? s.institutions : [];
+  return inst.filter(i => pattern.test(String(i?.name || '')));
 }
 
 // ── Derivers ─────────────────────────────────────────────────────────────
@@ -395,47 +391,6 @@ export function deriveMagicProfile(settlement) {
         source: 'config.magicExists',
         effect: 'no_magic',
         reason: 'Magic does not function in this world — no availability, legality, cost, or risk to profile.',
-      }],
-    };
-  }
-
-  // MG-3d (leak L7) — THE DISPLAY ASYMMETRY.
-  //
-  // A settlement whose world HAS magic but whose own dial is zero (magicExists true,
-  // priorityMagic 0 ⇒ canonical band 'none') fell straight past the dead-magic
-  // short-circuit above into the band ladder, where MAGIC_LEVEL_VALUES.none reads
-  // availability 'rare' and deriveLegality's else-arm reads legality 'restricted'. The
-  // page therefore claimed a rare, restricted magic trade in a town where generation
-  // produced no magic at all — and restricted-ness implies an authority bothering to
-  // restrict something. Nothing is not rare; it is nothing.
-  //
-  // TWO GUARDS, both load-bearing:
-  //   • PRESENT — magicLedger's neutral envelope for a settlement with NO magic axis is
-  //     itself band 'none'. Without this guard every axis-less legacy record would flip
-  //     from its long-standing 'limited' profile to 'absent'. Only a settlement that
-  //     actually carries the axis and reads zero is short-circuited.
-  //   • AUTHORED PREMISE (MG-LAW-4, JUDGMENT — vetoable) — a zero dial with an arcane
-  //     institution standing in the roster is a DM's deliberate act, not a generator
-  //     artefact (world law refuses to MINT arcane institutions at a zero dial). Magic
-  //     plainly is available there, so the ladder still runs and the tower still shows;
-  //     MG-3e's validator warning is what carries the strangeness. Erasing an authored
-  //     premise to satisfy a display rule would trade one lie for another.
-  const ledger = magicLedger(settlement);
-  if (ledger.present && ledger.magicLevel === 'none'
-      && institutionsByPattern(settlement, ARCANE_PATTERN).length === 0) {
-    return {
-      magicExists: true,
-      availability: 'absent',
-      legality: 'absent',
-      institutionalControl: 'unregulated',
-      cost: 'absent',
-      risk: 'absent',
-      religiousAcceptance: 'indifferent',
-      roles: { economic: 'absent', military: 'absent', medical: 'absent', infrastructure: 'absent' },
-      contributors: [{
-        source: 'config.priorityMagic',
-        effect: 'no_practice',
-        reason: 'Magic works in this world, but none of it is practised here — nothing to profile.',
       }],
     };
   }

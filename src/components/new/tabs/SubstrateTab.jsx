@@ -16,9 +16,8 @@
  */
 
 import { useMemo } from 'react';
-import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
-import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
-import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
+import { deriveCausalState } from '../../../domain/causalState.js';
+import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, RED_BG, sans, SP, R, swatch } from '../../theme.js';
 
 // Humanized labels for the 16 SYSTEM_VARIABLES (mirrors causalState.js's internal
 // VARIABLE_LABEL, kept here so the display layer owns its own copy).
@@ -52,32 +51,14 @@ const BAND_TONE = {
 };
 const BAND_RANK = { collapsed: 0, critical: 1, strained: 2, adequate: 3, surplus: 4 };
 
-// Convert the raw score onto the same higher-is-healthier axis used to compute
-// the band. Sorting this ascending therefore keeps the most pressured row first
-// inside a shared band without treating high criminal opportunity as healthy.
-function healthOrientedScore(row) {
-  if (typeof row.score !== 'number' || !Number.isFinite(row.score)) return 100;
-  const score = row.score;
-  return variablePolarity(row.key) === 'lower_is_better' ? 100 - score : score;
-}
-
-/**
- * `band` is the MODEL band (the machine value, kept on data-band so tests and
- * tooling still read one vocabulary); `word` is what a human sees. They differ
- * for the lone lower-is-better variable: criminal_opportunity bands off the
- * INVERTED score, so maximal crime carries band 'collapsed' and this pill used to
- * print "COLLAPSED" beside it, which reads as "the crime is gone". causalBandWord
- * is the function that already existed to fix precisely this, and had no caller.
- */
-function BandPill({ variable, band }) {
+function BandPill({ band }) {
   const tone = BAND_TONE[band] || MUTED;
-  const word = causalBandWord(variable, band);
   return (
     <span data-band={band} style={{
-      display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px',
+      display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px', borderRadius: R.sm,
       fontSize: FS.pico, fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase',
       color: swatch.white, background: tone,
-    }}>{word}</span>
+    }}>{band}</span>
   );
 }
 
@@ -92,22 +73,21 @@ export default function SubstrateTab({ settlement }) {
     return Object.entries(model.variables)
       .map(([key, v]) => ({
         key,
-        label: VAR_LABEL[key] || humanizeToken(key) || 'Recorded condition',
+        label: VAR_LABEL[key] || key,
         band: v.band,
         score: typeof v.score === 'number' ? v.score : (model.scores?.[key] ?? null),
       }))
-      // Pressures first: worst band, then worst polarity-oriented score, then
-      // stable by label.
+      // Pressures first: worst band, then lowest score, then stable by label.
       .sort((a, b) =>
         (BAND_RANK[a.band] ?? 5) - (BAND_RANK[b.band] ?? 5)
-        || healthOrientedScore(a) - healthOrientedScore(b)
+        || (a.score ?? 100) - (b.score ?? 100)
         || a.label.localeCompare(b.label));
   }, [model]);
 
   if (!model || rows.length === 0) {
     return (
       <div data-testid="substrate-tab" style={{ padding: 24, color: MUTED, fontFamily: sans, fontSize: FS.sm }}>
-        The settlement&apos;s underlying conditions have not been assessed.
+        The causal substrate has not been assessed for this settlement.
       </div>
     );
   }
@@ -117,24 +97,23 @@ export default function SubstrateTab({ settlement }) {
     ...(summary.collapsed || []),
     ...(summary.critical || []),
     ...(summary.strained || []),
-  ].map(k => VAR_LABEL[k] || humanizeToken(k) || 'Recorded condition');
+  ].map(k => VAR_LABEL[k] || k);
 
   return (
     <div data-testid="substrate-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
-      <div style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4 }}>
-        What is holding, what is strained
-      </div>
+      <div style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4 }}>Causal substrate</div>
       <p style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>
-        Food, authority, defense, trade, and the other foundations that keep this settlement standing.
-        Each reading already includes its recorded siege, drawdown, outbreak, and other current conditions.
+        The sixteen forces the engine simulates — food, legitimacy, defense, trade, and the rest.
+        Bands read the settlement&apos;s own conditions; a live siege, drawdown, or outbreak is already
+        pressed into the scores below.
       </p>
 
       {/* Pressures callout — the systems the model flags strained-or-worse. */}
       <div data-testid="substrate-pressures" style={{
-        background: CARD_ALT,
+        background: pressures.length ? RED_BG : CARD_ALT,
         border: `1px solid ${pressures.length ? BORDER : BORDER2}`,
         borderLeft: `3px solid ${pressures.length ? RED : GREEN}`,
-        padding: `${SP.sm}px ${SP.md}px`, marginBottom: 12,
+        borderRadius: R.md, padding: `${SP.sm}px ${SP.md}px`, marginBottom: 12,
       }}>
         {pressures.length ? (
           <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
@@ -142,17 +121,17 @@ export default function SubstrateTab({ settlement }) {
           </div>
         ) : (
           <div style={{ fontSize: FS.sm, color: GREEN, lineHeight: 1.5 }}>
-            <strong>All foundations holding.</strong> No condition reads strained or worse.
+            <strong>All systems holding.</strong> No variable reads strained or worse.
           </div>
         )}
       </div>
 
       {/* The 16-variable grid. */}
-      <div style={{ background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
+      <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md, overflow: 'hidden' }}>
         <div style={{
           fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
           background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
-        }}>Settlement foundations</div>
+        }}>System variables</div>
         <div style={{ padding: `0 ${SP.md}px` }}>
           {rows.map(row => (
             <div key={row.key} data-substrate-row style={{
@@ -160,7 +139,10 @@ export default function SubstrateTab({ settlement }) {
               padding: `${SP.sm}px 0`, borderBottom: `1px solid ${BORDER}`,
             }}>
               <span style={{ flex: 1, fontSize: FS.sm, fontWeight: 600, color: INK }}>{row.label}</span>
-              <BandPill variable={row.key} band={row.band} />
+              {row.score != null && (
+                <span style={{ fontSize: FS.xs, fontWeight: 700, color: MUTED, minWidth: 26, textAlign: 'right' }}>{row.score}</span>
+              )}
+              <BandPill band={row.band} />
             </div>
           ))}
         </div>

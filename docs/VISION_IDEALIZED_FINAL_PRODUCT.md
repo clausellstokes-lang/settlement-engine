@@ -109,14 +109,14 @@ present; this war is dying") and beliefs diverging ("both courts think they are 
 Briefs compress scale: the weekly digest, the session-prep sheet, faction dossiers, the
 player-safe brief composed only from the public projection so it cannot leak. The PDFs are
 shelf-worthy artifacts — the dossier, the campaign war room with its treaty table. THE
-SETTLEMENT MAP (owner-commissioned 2026-07-14, design frozen: DESIGN_SETTLEMENT_MAP.md) joins
-the library: a [Dossier|Map] toggle above every saved settlement, the town drawn
-deterministically from its own dossier — hover any building and the institution explains
-itself, districts carry their wealth and their dangers, and because the map is a pure
-projection of the dossier, whatever impacts one impacts the other, always. And at the road's
-end, the parked last thing: the map's DEEP LIVING form — persistent scarring history, the
-burned quarter still scarred years later, the boom district visibly risen, the temple grown two
-sizes since the plague made it beloved.
+SETTLEMENT MAP joins the library as one strict-plan, one-leaf survey artifact: a [Dossier|Map]
+toggle above every saved settlement, with every semantic body hoverable and explainable. It is
+derived deterministically from the dossier **and dated world history** into canonical spatial
+truth, then observed through temporal dress and projected without renderer-authored facts. Typed
+portrait edits preserve their provenance; canonical edits/events cross the same operation and
+receipt door as the simulator. The living form is therefore not a parked second map: persistent
+scars, later construction, abandonment, seasonal state and a beloved temple's expansion are
+successive observations of the same causal artifact (ODQ §287; GENERATION-SPEC §§6–10).
 
 ## LAYER 5 — THE INTERPRETER (Surveyor)
 Natural language as the second control surface over the same operation layer. ASK anything and

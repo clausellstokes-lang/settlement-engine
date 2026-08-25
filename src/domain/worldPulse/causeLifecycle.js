@@ -375,8 +375,7 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
       const foreignLeash = webLit ? resolveLeash(/** @type {SimNpc} */ (npc), /** @type {SimSettlement} */ (settlement)) : null;
       const foreignEndpointGone = !!(foreignLeash && foreignLeash.foreign
         && !foreignEndpointLive({ foreign: foreignLeash.foreign, settlementId: foreignLeash.settlementId },
-          /** @type {Parameters<typeof foreignEndpointLive>[1]} */ (snapshot),
-          /** @type {Record<string, unknown> | undefined} */ (worldState?.occupations)));
+          /** @type {Parameters<typeof foreignEndpointLive>[1]} */ (snapshot)));
       if (!rec.readjudicated && (localSustainerGone || foreignEndpointGone)) {
         const climate = reformClimate01(/** @type {CauseContext} */ (ctx), settlement);
         const alt = present.filter((cls) => cls !== rec.causeClass);

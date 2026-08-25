@@ -33,19 +33,11 @@ import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { FREE_SAVE_LIMIT } from '../config/tierFacts.js';
 import { supportMailto } from '../copy/support.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
-import { flag } from '../lib/flags.js';
-import { GOLD, INK, BORDER, CARD, sans, serif_, SP, FS, swatch, GREEN, RED } from './theme.js';
+import { GOLD, INK, BORDER, CARD, sans, serif_, SP, R, FS, swatch, GREEN, RED } from './theme.js';
 import Button from './primitives/Button.jsx';
-import CaptchaGate from './perimeter/CaptchaGate.jsx';
 
 const MUTED = swatch['#6B5340'];
 const BODY  = swatch['#4A3B22'];
-
-// M11: with Turnstile active, how long the INITIAL verify holds for the widget's
-// token before firing without one. The tokenless fire is the pre-gate fallback —
-// the server never blocks a paid buyer on a missing token — so the deadline only
-// bounds how long we wait for the stronger call, never whether delivery happens.
-const CAPTCHA_TOKEN_DEADLINE_MS = 4000;
 
 /** Resolve the returning purchase: URL (session_id + dt) first, then the stash. */
 function resolveReturn() {
@@ -89,25 +81,13 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
 
   const autoDownloadedRef = useRef(false);
   const analyticsFiredRef = useRef(false);
-  // Wave-D human verification (INERT until activated): a managed-Turnstile token
-  // held in a ref so it rides the verify call WITHOUT re-running the mount-time
-  // verification. This is a POST-PAYMENT step — verify-single-dossier verifies the
-  // token ONLY IF present and NEVER blocks a paid buyer on a missing/blocked one.
-  // M11: the widget mints that token ASYNCHRONOUSLY, so with Turnstile active the
-  // INITIAL verify is gated (see the mount effect): it waits for the token — firing
-  // the moment it lands — or for CAPTCHA_TOKEN_DEADLINE_MS, whichever comes first.
-  const captchaTokenRef = useRef(null);
-  // The M11 gate lives in refs (not state) so the widget's onToken callback can
-  // release it without re-rendering or re-running the mount effect. `fire` is
-  // installed by the mount effect while Turnstile is active and nulled once used.
-  const initialGateRef = useRef({ timer: null, fire: null });
 
   // The async verification. Kept free of any SYNCHRONOUS setState so it is safe
   // to invoke directly from the mount effect (results land only in .then/.catch).
   const doVerify = useCallback(() => {
     if (!canAttempt) return () => {};
     let cancelled = false;
-    verifySingleDossierPurchase(sessionId, token, captchaTokenRef.current || undefined)
+    verifySingleDossierPurchase(sessionId, token)
       .then(data => {
         if (cancelled) return;
         // Prefer the server-persisted settlement; fall back to the local stash.
@@ -140,34 +120,9 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
     doVerify();
   }, [doVerify]);
 
-  // Token (or null on degradation) from the managed widget: stash it for the
-  // verify call, and release a still-waiting initial verify at once — a null
-  // means no token is coming, so waiting out the deadline would be pure delay.
-  const handleCaptchaToken = useCallback((tok) => {
-    captchaTokenRef.current = tok;
-    if (initialGateRef.current.fire) initialGateRef.current.fire();
-  }, []);
-
   useEffect(() => {
-    // Flag off (the default) or nothing to attempt: fire synchronously — the
-    // exact pre-gate behavior, no timer (doVerify no-ops when !canAttempt).
-    if (!flag('perimeterCaptcha') || !canAttempt) return doVerify();
-    // Turnstile active (M11): hold the initial verify for the minted token or
-    // the deadline, whichever lands first. Both release paths funnel through
-    // gate.fire, which disarms itself so a token/timer race cannot double-fire.
-    let cancelVerify = null;
-    const gate = initialGateRef.current;
-    gate.fire = () => {
-      gate.fire = null;
-      if (gate.timer) { clearTimeout(gate.timer); gate.timer = null; }
-      cancelVerify = doVerify();
-    };
-    gate.timer = setTimeout(() => { if (gate.fire) gate.fire(); }, CAPTCHA_TOKEN_DEADLINE_MS);
-    return () => {
-      gate.fire = null;
-      if (gate.timer) { clearTimeout(gate.timer); gate.timer = null; }
-      if (cancelVerify) cancelVerify();
-    };
+    const cancel = doVerify();
+    return cancel;
     // Run once on mount; Retry re-invokes doVerify imperatively.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -226,7 +181,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
       <div style={{
         maxWidth: 560, margin: `${SP.xxl}px auto`,
         padding: `${SP.xxl}px ${SP.xl}px`,
-        background: CARD, border: `1px solid ${BORDER}`,
+        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.xl,
         fontFamily: sans, color: INK, textAlign: 'center',
       }}>
         <AlertCircle size={32} color={GOLD} style={{ margin: '0 auto' }} />
@@ -248,9 +203,8 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           style={{
             display: 'inline-block', marginTop: SP.lg,
             padding: `${SP.sm + 2}px ${SP.lg}px`,
-            // Ink-on-gold (the house AA badge pairing), square-cut instrument.
-            background: GOLD, color: INK,
-            border: 'none',
+            background: GOLD, color: swatch.white,
+            border: 'none', borderRadius: R.button,
             fontFamily: sans, fontSize: FS.md, fontWeight: 700,
             textDecoration: 'none',
           }}
@@ -267,7 +221,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
       <div style={{
         maxWidth: 560, margin: `${SP.xxl}px auto`,
         padding: `${SP.xxl}px ${SP.xl}px`,
-        background: CARD, border: `1px solid ${BORDER}`,
+        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.xl,
         fontFamily: sans, color: INK, textAlign: 'center',
       }}>
         <AlertCircle size={32} color={GOLD} style={{ margin: '0 auto' }} />
@@ -279,7 +233,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           fontSize: FS.md, color: BODY, lineHeight: 1.55,
         }}>
           {verification.error || 'We hit a temporary snag confirming the payment.'}
-          {' '}Your dossier is safe. This usually clears in a few seconds.
+          {' '}Your dossier is safe — this usually clears in a few seconds.
         </p>
         <Button variant="primary" size="lg" icon={<RefreshCw size={16} />} onClick={retryVerify}>
           Try again
@@ -297,33 +251,27 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
     return (
       <div style={{
         maxWidth: 560, margin: `${SP.xxl}px auto`, padding: `${SP.xxl}px ${SP.xl}px`,
-        background: CARD, border: `1px solid ${BORDER}`,
+        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.xl,
         fontFamily: sans, color: INK, textAlign: 'center',
       }}>
         <h1 style={{ margin: 0, fontFamily: serif_, fontSize: FS.xxl }}>Confirming your purchase</h1>
         <p style={{ margin: `${SP.sm}px 0 0`, color: BODY }}>Checking the paid Stripe session before preparing the PDF.</p>
-        {/* Wave-D human verification (INERT until activated). Managed/invisible;
-            mints a best-effort token for the verify call and releases the M11
-            initial-verify gate. This is post-payment, so the server never blocks
-            delivery on a missing token — renders nothing while the
-            perimeterCaptcha flag is off. */}
-        <CaptchaGate action="verify" onToken={handleCaptchaToken} />
       </div>
     );
   }
 
   return (
     <div style={{
-      // The receipt artifact — a plate on the warm parchment ground; the frame
-      // is a hairline rule, not a rounded shadow-card (depth is ink, not lift).
       maxWidth: 640, margin: `${SP.xxl}px auto`,
       padding: `${SP.xxl}px ${SP.xl}px`,
       background: `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
       border: `1px solid ${BORDER}`,
+      borderRadius: R.xl + 2,
       fontFamily: sans, color: INK, textAlign: 'center',
+      boxShadow: '0 8px 28px rgba(27,20,8,0.12)',
     }}>
       <div style={{
-        width: 56, height: 56,
+        width: 56, height: 56, borderRadius: '50%',
         background: GREEN, color: swatch.white,
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         margin: '0 auto',
@@ -371,34 +319,20 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           </div>
         )}
 
-        {/* The ruled record block — the receipt artifact: item · price · date,
-            framed by rules (no box). The price stays config-fed. */}
-        <div style={{
-          margin: `${SP.md}px auto 0`, maxWidth: 340,
-          borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}`,
-          padding: `${SP.sm}px 0`, textAlign: 'left',
-          display: 'grid', gap: 4, fontFamily: sans,
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: SP.sm }}>
-            <span style={{ fontSize: FS.sm, color: BODY }}>Single dossier</span>
-            <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>{SINGLE_DOSSIER.priceLabel}</span>
-          </div>
-          <div style={{ fontSize: FS.xs, color: MUTED }}>
-            {new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(new Date())}
-          </div>
-        </div>
         <p style={{
           margin: `${SP.sm}px auto 0`, maxWidth: 420,
           fontSize: FS.xs, color: MUTED, lineHeight: 1.55,
         }}>
-          Receipt sent to the email you entered at checkout.
+          Receipt sent to the email you entered at checkout. Your purchase total
+          was {SINGLE_DOSSIER.priceLabel}.
         </p>
       </div>
 
       {/* Sign-up upsell */}
       <div style={{
         marginTop: SP.xxl, padding: `${SP.lg}px ${SP.xl}px`,
-        background: CARD, border: `1px solid ${BORDER}`,
+        background: 'rgba(255,251,245,0.7)', border: `1px solid ${BORDER}`,
+        borderRadius: R.xl,
       }}>
         <h2 style={{
           margin: 0, fontFamily: serif_, fontSize: FS.xl, color: INK,
@@ -432,15 +366,6 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
             Generate another
           </Button>
         </div>
-      </div>
-
-      {/* The colophon — the maker's mark at the receipt's foot, under a rule. */}
-      <div style={{
-        marginTop: SP.xl, paddingTop: SP.md, borderTop: `1px solid ${BORDER}`,
-        fontFamily: serif_, fontSize: FS.xs, letterSpacing: '0.14em',
-        textTransform: 'uppercase', color: MUTED,
-      }}>
-        SettlementForge
       </div>
     </div>
   );

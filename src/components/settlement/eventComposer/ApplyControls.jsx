@@ -12,7 +12,7 @@
 
 import { X, Check } from 'lucide-react';
 import Button from '../../primitives/Button.jsx';
-import { INK, CARD, sans, FS, SP, swatch } from '../../theme.js';
+import { INK, CARD, sans, FS, SP, R, swatch } from '../../theme.js';
 
 export function ApplyControls({
   type, phase, isLinkNeighbour, canSubmit, settlement,
@@ -31,19 +31,16 @@ export function ApplyControls({
         Preview
       </Button>
       {isDestroy && (
-        <div style={{ width: '100%', marginTop: 6, padding: '8px 10px', border: `1px solid ${swatch.danger}`, background: swatch.dangerBg }}>
+        <div style={{ width: '100%', marginTop: 6, padding: '8px 10px', border: `1px solid ${swatch.danger}`, borderRadius: R.sm, background: swatch.dangerBg }}>
           <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch.danger, marginBottom: 5, lineHeight: 1.4 }}>
-            {/* Wave R-1 (atlas queue #4): the recovery claim names the ACTUAL model —
-                undo from the Timeline, latest entry only — instead of the vague
-                "deliberate action". One string, vetoable. */}
-            This destroys {settlement?.name || 'the settlement'}. Services go dark, institutions are impaired, and partner relationships sour. Recoverable only by Undo on the Timeline, and only while this remains the latest event.
+            ⚠ This destroys {settlement?.name || 'the settlement'} — services go dark, institutions are impaired, and partner relationships sour. Recoverable, but only by deliberate action.
           </div>
           <input
             value={destroyConfirm}
             onChange={(e) => setDestroyConfirm(e.target.value)}
             placeholder={`Type "${settlement?.name || ''}" to confirm`}
             aria-label="Type the settlement name to confirm destruction"
-            style={{ width: '100%', padding: '5px 8px', border: `1px solid ${swatch.danger}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, boxSizing: 'border-box' }}
+            style={{ width: '100%', padding: '5px 8px', border: `1px solid ${swatch.danger}`, borderRadius: 4, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, boxSizing: 'border-box' }}
           />
         </div>
       )}

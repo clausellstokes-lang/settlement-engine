@@ -22,9 +22,7 @@ import { relationshipsHeadline } from '../lib/headlines.js';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, relColors, pt, swatch } from '../theme.js';
-import {
-  cap, label, hookText, humanize, prominentPair, prominentType, prominentProse,
-} from '../lib/format.js';
+import { cap, label, hookText, humanize } from '../lib/format.js';
 
 const REL_LABELS = {
   rival:            'Rival',
@@ -74,11 +72,11 @@ export function Relationships({ settlement, narrativeMode, vm }) {
         <Callout
           tone="cool"
           kicker="PROMINENT RELATIONSHIP"
-          title={`${prominentPair(r.prominentRelationship) || 'Notable pair'} · ${prominentType(r.prominentRelationship) || 'Linked'}`}
+          title={`${humanize(r.prominentRelationship.otherSettlement || 'Neighbour')} · ${REL_LABELS[r.prominentRelationship.relationshipType] || cap(r.prominentRelationship.relationshipType || 'linked')}`}
         >
           <EditableProse
             name="relationships.prominent.note"
-            defaultValue={prominentProse(r.prominentRelationship)}
+            defaultValue={r.prominentRelationship.description || r.prominentRelationship.flavour || r.prominentRelationship.flavor || ''}
             lines={2}
             style={{ ...type.body, fontSize: pt['9.5'] }}
           />

@@ -16,8 +16,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, pt } from '../theme.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
-import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
-import { compareCodepoint } from '../../domain/deterministicSort.js';
+import { exactGoodId } from '../../domain/region/goodsCatalog.js';
 import { safe } from '../lib/format.js';
 
 // chainId -> definition (for upstream import labels + fallback outputs).
@@ -27,13 +26,11 @@ Object.values(SUPPLY_CHAIN_NEEDS || {}).forEach((cat) => {
 });
 
 const STATUS = {
-  running:             { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running' },
-  operational:         { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running' },
-  entrepot:            { color: '#a0762a', bg: '#faf6ec', border: '#d8c090', label: 'Entrepot' },
-  magically_sustained: { color: '#5a2a8a', bg: '#f8f0ff', border: '#c0a0e0', label: 'Magically Sustained' },
-  vulnerable:          { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Vulnerable' },
-  impaired:            { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Impaired' },
-  broken:              { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Broken' },
+  running:     { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running' },
+  operational: { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running' },
+  vulnerable:  { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Vulnerable' },
+  impaired:    { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Impaired' },
+  broken:      { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Broken' },
 };
 const getStatus = (s) => STATUS[s] || STATUS.vulnerable;
 
@@ -87,13 +84,9 @@ function ChainRow({ chain, instNames, primaryExports }) {
       label: o,
       isExport: isExportable && (
         (oid != null && exportIds.has(oid)) ||
-        (primaryExports || []).some((ex) => {
-          // ex may be a bare string OR the {good/name/label} object shape —
-          // goodText() keeps `.toLowerCase()` from crashing the whole PDF render.
-          const e = goodText(ex).toLowerCase();
-          return e.includes(String(o).toLowerCase().split(' ')[0]) ||
-            String(o).toLowerCase().includes(e.split(' ')[0]);
-        })
+        (primaryExports || []).some((ex) =>
+          ex.toLowerCase().includes(String(o).toLowerCase().split(' ')[0]) ||
+          String(o).toLowerCase().includes(ex.toLowerCase().split(' ')[0]))
       ),
     };
   });
@@ -238,11 +231,7 @@ export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], t
       g.chains.filter((c) => c.status === 'impaired' || c.status === 'broken').length * 100 +
       g.chains.filter((c) => c.status === 'vulnerable').length * 10;
     const sorted = Object.values(groups).sort(
-      // Determinism: the paid PDF export is same-seed constitutional, so the name
-      // tie-break must NOT use localeCompare (host ICU tables order non-ASCII labels
-      // differently across machines) — codepoint order is the cross-device-stable total
-      // order. [determinism-pdf-locale-collation]
-      (a, b) => severity(b) - severity(a) || compareCodepoint(a.needLabel, b.needLabel),
+      (a, b) => severity(b) - severity(a) || String(a.needLabel || '').localeCompare(String(b.needLabel || '')),
     );
     return (
       <View>

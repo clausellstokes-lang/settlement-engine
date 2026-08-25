@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { FS, swatch, CARD, EMPTY_VALUE } from '../../theme.js';
 
-import { sans } from '../Primitives';
+import { sans, TabIntro } from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
 import Button from '../../primitives/Button.jsx';
-import { useLiveAiCostResolver } from '../../../hooks/useLivePricing.js';
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
@@ -22,7 +21,7 @@ function AnchorFact({ label, value, accent }) {
       background: accent ? `${accent}0d` : '#faf8f4',
       border: `1px solid ${accent ? `${accent}30` : BORDER}`,
       borderLeft: `3px solid ${accent || '#c8b89a'}`,
-      padding: '5px 9px',
+      borderRadius: 5, padding: '5px 9px',
     }}>
       <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
       <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || EMPTY_VALUE}</div>
@@ -50,7 +49,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const mobile = useIsMobile();
 
   const requestDailyLife = useStore(s => s.requestDailyLife);
-  const getCost = useLiveAiCostResolver();
+  const getCost = useStore(s => s.getCost);
   const aiDailyLife = useStore(s => s.aiDailyLife);
   const storeAiLoading = useStore(s => s.aiLoading);
   const storeAiRegenerating = useStore(s => s.aiRegenerating);
@@ -135,7 +134,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   // Button label logic — first-time generate vs regenerate. Both spend credits;
   // we name the action plainly so users know.
   const buttonLabel = (() => {
-    if (!dailyLifeEnabled) return 'Save settlement to enable Daily Life narrative';
+    if (!dailyLifeEnabled) return '✦ Save settlement to enable Daily Life narrative';
     if (loading) {
       return (isConfigured ? storeAiProgress : loadMsg) || (hasContent ? 'Regenerating…' : 'Generating…');
     }
@@ -145,12 +144,13 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
         : '↺ Regenerate Daily Life: Narrative refinement';
     }
     return isConfigured
-      ? `Generate Daily Life (${getCost('dailyLife')} credits)`
-      : 'Generate Daily Life: Narrative refinement';
+      ? `✦ Generate Daily Life (${getCost('dailyLife')} credits)`
+      : '✦ Generate Daily Life: Narrative refinement';
   })();
 
   return (
     <div style={{ fontFamily: sans, padding: mobile ? '12px 10px' : '16px 18px', maxWidth: 720, margin: '0 auto' }}>
+      <TabIntro tabKey="dailyLife" />
 
       {/* ── ANCHOR FACTS ─────────────────────────────────────────────────── */}
       <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginBottom: 14 }}>
@@ -189,14 +189,15 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
         <div
           style={{
             padding: '10px 14px', marginBottom: 16,
-            background: PARCH,
+            background: 'linear-gradient(135deg, rgba(122,70,26,0.06), rgba(160,118,42,0.04))',
             border: `1px solid ${BORDER}`,
             borderLeft: '3px solid #a0762a',
+            borderRadius: 6,
             fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
             fontFamily: sans,
           }}
         >
-          <strong style={{ color: swatch['#7A5A1A'] }}>Save this settlement</strong>
+          <strong style={{ color: swatch['#7A5A1A'] }}>✦ Save this settlement</strong>
           {' '}to refine Daily Life into narrative. Five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
         </div>
       ) : (
@@ -220,8 +221,8 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
       {/* ── ERROR ─────────────────────────────────────────────────────────── */}
       {error && (
         <div style={{
-          background: swatch['#FAF8F4'], border: '1px solid #e8c0c0',
-          padding: '12px 14px', marginBottom: 14,
+          background: swatch.dangerBg, border: '1px solid #e8c0c0',
+          borderRadius: 7, padding: '12px 14px', marginBottom: 14,
           fontSize: FS['11.5'], color: swatch.danger,
         }}>
           <strong>Error:</strong> {error}
@@ -235,10 +236,11 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           {regenerating && (
             <div style={{
               position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
-              zIndex: 20, background: INK, color: CARD,
-              padding: '8px 16px', border: '1px solid #c4803c',
+              zIndex: 20, background: 'rgba(122,70,26,0.95)', color: CARD,
+              padding: '8px 16px', borderRadius: 20, border: '1px solid rgba(196,128,60,0.6)',
               fontSize: FS['11.5'], fontWeight: 700, fontFamily: sans,
               display: 'flex', alignItems: 'center', gap: 8,
+              boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
             }}>
               <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>⟳</span>
               {storeAiProgress || 'Regenerating…'}
@@ -247,6 +249,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           <div style={{
             background: PARCH,
             border: `1px solid ${BORDER}`,
+            borderRadius: 8,
             padding: mobile ? '16px 14px' : '20px 22px',
             opacity: regenerating ? 0.55 : 1,
             transition: 'opacity 0.2s',
@@ -271,7 +274,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
       {!hasContent && !loading && !error && (
         <div style={{
           background: swatch['#FAF8F4'], border: `1px solid ${BORDER}`,
-          padding: '32px 20px', textAlign: 'center',
+          borderRadius: 8, padding: '32px 20px', textAlign: 'center',
         }}>
           <div style={{ fontSize: FS.md, fontWeight: 600, color: SECOND, marginBottom: 6 }}>
             What is daily life like here?

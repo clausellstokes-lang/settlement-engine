@@ -1,24 +1,14 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { FS, MUTED, swatch } from '../theme.js';
-import { Lock, Pin, Unlock } from 'lucide-react';
+import { Pin } from 'lucide-react';
 import { catColor } from './design';
 import {Ti, serif, PlotHook} from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
-import Button from '../primitives/Button.jsx';
 import ProseParagraph from '../ProseParagraph.jsx';
 import { useStore } from '../../store/index.js';
-import { flag } from '../../lib/flags.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
-import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
-import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
-import {
-  NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
-} from '../../domain/npc/npcBank.js';
-import NpcLifecycleControls, {
-  hasNpcLifecycleAction, humanizeNpcFacet,
-} from './NpcLifecycleControls.jsx';
 
 /**
  * Stable identifier used to pin an NPC. Matches the backend filter contract
@@ -31,65 +21,7 @@ function npcPinKey(npc) {
   return null;
 }
 
-function durableNpcId(npc) {
-  const id = npc?.id == null ? '' : String(npc.id).trim();
-  return id || null;
-}
-
-/**
- * THE ROW LOCK — the per-character half of the locks engine (Phase A).
- *
- * Two promises now sit on one roster row and they must never blur into each
- * other, so each gets its own glyph, its own colour and its own sentence:
- *   • PIN (purple, a pin) guards a character's PROSE from the AI rewriting it.
- *   • LOCK (bronze, a padlock) keeps the PERSON through a roster reroll.
- * Neither sentence uses the other's word — the same rule the section-level twin
- * (components/dossier/LockControls.jsx) states in its header.
- *
- * WHY THE THIRD LINE. `locks.npcs` carries two forms: `true` freezes the whole
- * roster, an array names individuals (domain/locksPreservation.js normalizes
- * both). When the section lock is on, every person is already kept, and writing
- * an array over that boolean would silently UNLOCK the section. The row says so
- * and refuses instead.
- */
-// Phase B made the individual promise total: a locked character now survives a
-// FULL regenerate too, taking a place in the brand-new town, so these two strings
-// say "any new roll" instead of "rerolls". The whole-roster boolean did NOT gain
-// that reach — freezing an entire cast through a fresh roll would nullify the
-// roll — so its line states the boundary rather than letting the reader
-// generalize from the row beside it.
-const NPC_LOCK_COPY = Object.freeze({
-  locked:  'Locked. This person stays through any new roll.',
-  open:    'Lock this person so they stay through any new roll.',
-  section: 'The whole roster is locked. Rerolls keep everyone; a brand-new settlement starts a new cast.',
-});
-
-/** Bronze, deliberately not the pin's purple: a glance must tell the two apart. */
-const LOCK_TONE = swatch['#8A5A1A'];
-const LOCK_TONE_BG = swatch['#F5ECD8'];
-
-function uniqueNpcIndex(npcs, npcId) {
-  if (!Array.isArray(npcs) || !npcId) return -1;
-  let match = -1;
-  for (let index = 0; index < npcs.length; index += 1) {
-    if (durableNpcId(npcs[index]) !== npcId) continue;
-    if (match >= 0) return -1;
-    match = index;
-  }
-  return match;
-}
-
-export function NPCCategoryGroup({
-  category,
-  label,
-  group,
-  impFilter,
-  search,
-  relationships = [],
-  pinnedIds,
-  onTogglePin,
-  canAuthorNpc = false,
-}) {
+export function NPCCategoryGroup({category, label, group, impFilter, search, relationships=[], pinnedIds, onTogglePin}) {
   const [open, setOpen] = useState(true);
   const color = catColor(category);
   const displayLabel = label || (category.charAt(0).toUpperCase() + category.slice(1));
@@ -118,21 +50,12 @@ export function NPCCategoryGroup({
         <div style={{height:1,flex:1,background:`${color}35`}}/>
         <span style={{fontSize:FS.xs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.07em',flexShrink:0}}>{displayLabel} ({filtered.length})</span>
         {sorted.filter(n=>n.influence==='high').length > 0 &&
-          <span style={{fontSize:FS.micro,fontWeight:700,color,background:`${color}18`,padding:'0 4px',flexShrink:0}}>●●● ×{sorted.filter(n=>n.influence==='high').length}</span>
+          <span style={{fontSize:FS.micro,fontWeight:700,color,background:`${color}18`,borderRadius:3,padding:'0 4px',flexShrink:0}}>●●● ×{sorted.filter(n=>n.influence==='high').length}</span>
         }
         <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
       </button>
-      {open && sorted.map((npc, index) => (
-        <NPCInlineCard
-          key={durableNpcId(npc) || `legacy-presentation-${index}`}
-          npc={npc}
-          relationships={relationships}
-          pinnedIds={pinnedIds}
-          onTogglePin={onTogglePin}
-          canAuthorNpc={canAuthorNpc}
-        />
-      ))}
+      {open && sorted.map(npc => <NPCInlineCard key={npc.id||npc.name} npc={npc} relationships={relationships} pinnedIds={pinnedIds} onTogglePin={onTogglePin}/>)}
     </div>
   );
 }
@@ -141,24 +64,24 @@ export function NPCCategoryGroup({
 export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}) {
   const [open,setOpen]=useState(false);
   return (
-    <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,overflow:'hidden',marginBottom:10}}>
+    <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,borderRadius:7,overflow:'hidden',marginBottom:10}}>
       <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:3}}>
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc1Name}</span>
-              <span style={{fontSize:FS.micro,fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
+              <span style={{fontSize:FS.micro,fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Name}</span>
-              {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px'}}>◆ EMERGENT</span>}
+              {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],borderRadius:3,padding:'1px 6px'}}>◆ EMERGENT</span>}
             </div>
             <div style={{fontSize:FS.xs,color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
           </div>
           <span style={{fontSize:FS.xs,color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
         </div>
       </button>
-      {open&&<div style={{padding:'10px 14px',background:swatch['#FAF8F4'],borderTop:`1px solid ${style.border}`}}>
+      {open&&<div style={{padding:'10px 14px',background:'rgba(250,248,244,0.97)',borderTop:`1px solid ${style.border}`}}>
         <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 10px'}}>{rel.description}</p>
-        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'7px 10px',fontSize:FS.sm,color:swatch['#5A3A10'],lineHeight:1.5}}>{rel.tension}</div>}
+        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',borderRadius:5,padding:'7px 10px',fontSize:FS.sm,color:swatch['#5A3A10'],lineHeight:1.5}}>{rel.tension}</div>}
       </div>}
     </div>
   );
@@ -169,9 +92,9 @@ export function ConflictCard({conflict:c}) {
   const intStyle={high:{color:'#8b1a1a',label:'HIGH TENSION'},moderate:{color:'#a0762a',label:'MODERATE TENSION'},low:{color:'#1a5a28',label:'LOW TENSION'}};
   const d=intStyle[c.intensity]||intStyle.moderate;
   return (
-    <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
+    <div style={{background:swatch.dangerBg,border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:7,padding:'12px 14px',marginBottom:10}}>
       <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:6}}>
-        <span style={{fontSize:FS.micro,fontWeight:800,color:d.color,background:`${d.color}18`,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
+        <span style={{fontSize:FS.micro,fontWeight:800,color:d.color,background:`${d.color}18`,borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
         <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
       </div>
       <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}>{c.desc||c.description}</p>
@@ -185,38 +108,23 @@ export function ConflictCard({conflict:c}) {
 
 
 // Inline NPC card — replaces the removed NPCCard export
-function NPCInlineCard({
-  npc,
-  _relationships = [],
-  pinnedIds,
-  onTogglePin,
-  canAuthorNpc = false,
-}) {
-  // Tier 5.4 — manual prose editing. The save/revert handlers resolve only a
-  // unique durable id at edit time, so duplicate legacy names and roster
-  // reordering cannot redirect a secret edit to another person.
+function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
+  // Tier 5.4 — manual prose editing. editMode is the global toggle on
+  // the dossier header. The save/revert handlers look up the NPC's
+  // index by id at edit time so the action targets the right entity
+  // even if the npcs array has been re-sorted upstream.
   const editMode             = useStore(s => s.editMode);
   const applyUserEditAction  = useStore(s => s.applyUserEditAction);
   const revertUserEditAction = useStore(s => s.revertUserEditAction);
   const settlement           = useStore(s => s.settlement);
-  const savedSettlements     = useStore(s => s.savedSettlements);
-  const focusEntity          = useStore(s => s.focusEntity);
-  // DESIGN_THE_ROADS §12 — the ONE dossier whereabouts line + short badge (display-read only;
-  // DM-SECRET by construction — npc.whereabouts never ships, §15). Resolves place ids to names
-  // from the saved roster so "Held in Dulwich" reads over a raw id.
-  const resolvePlaceName = useMemo(() => {
-    const map = new Map((savedSettlements || []).map((s) => [String(s?.id), s?.settlement?.name || s?.name]));
-    return (id) => map.get(String(id)) || null;
-  }, [savedSettlements]);
-  const wLine = whereaboutsLine(npc.whereabouts, resolvePlaceName);
-  const wBadge = whereaboutsBadge(npc.whereabouts);
-  const npcId = durableNpcId(npc);
-  const resolveNpcIndex = () => uniqueNpcIndex(settlement?.npcs, npcId);
-  const authorEditMode = canAuthorNpc && editMode;
-  const canEditSecret = authorEditMode && resolveNpcIndex() >= 0;
-  const secretText = typeof npc.secret === 'string'
-    ? npc.secret
-    : (npc.secret?.what || '');
+  const npcKey               = npc?.id != null ? String(npc.id) : (npc?.name != null ? String(npc.name) : null);
+  const resolveNpcIndex = () => {
+    if (!settlement?.npcs || !npcKey) return -1;
+    return settlement.npcs.findIndex(n => {
+      const k = n?.id != null ? String(n.id) : (n?.name != null ? String(n.name) : null);
+      return k === npcKey;
+    });
+  };
   const secretIsEdited = isEdited(npc, 'secret.what');
   const secretOriginal = getOriginalValue(npc, 'secret.what');
   const onSaveSecret = (value) => {
@@ -233,31 +141,6 @@ function NPCInlineCard({
   const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
   const traits = normalizeNpcTraits(npc);
   const publicTraits = traits.filter(t => t.visibility !== 'gm');
-  // Bank edits declare a role archetype and goal facet. Preserve the NPC's richer
-  // authored office/title while making the declared archetype visible, and only
-  // humanize values that are known engine vocabulary so free-authored prose is
-  // never rewritten at the presentation boundary.
-  const roleFacet = npcFacetOf(npc, 'role');
-  const roleArchetype = NPC_ROLE_ARCHETYPES.includes(roleFacet)
-    ? humanizeNpcFacet(roleFacet)
-    : '';
-  const nativeRole = NPC_ROLE_ARCHETYPES.includes(npc.role)
-    ? humanizeNpcFacet(npc.role)
-    : (npc.role || '');
-  const showRoleArchetype = roleArchetype
-    && String(roleFacet) !== String(npc.role || '');
-  const goalFacet = npcFacetOf(npc, 'goal');
-  const goalText = NPC_GOALS.includes(goalFacet)
-    ? humanizeNpcFacet(goalFacet)
-    : (npc.goal?.short || goalFacet || '');
-  // DESIGN_VISION_WAVE V-24c — INTERIORITY-LITE: the composed "disposition & wants" read-model
-  // (a pure display projection over existing state; no new store, no writes). Player-safe here —
-  // the DM-truth block (bonds/grudges/credibility) is gated in the leaf and left for a
-  // worldState-bearing surface; this card reads the mirror-safe view (secrets seam honoured).
-  const interiority = npcInteriority({ npc });
-  const interiorityWants = (interiority?.wants || []).map(value => (
-    NPC_GOALS.includes(value) ? humanizeNpcFacet(value) : value
-  ));
   // W-C5/W2: the worldPulse-attributed cause + lifecycle stage, rendered through
   // the W2 conjunction ladder (specific -> role -> class -> the W-C5 generic
   // floor). Null unless the world pulse touched this compromise. The npc pin key
@@ -273,33 +156,14 @@ function NPCInlineCard({
   const isPinned = pinAvailable && pinnedIds instanceof Set && pinnedIds.has(pinKey);
   const pinColor = swatch['#6A2A9A']; // purple — ties visually to the narrative accent.
 
-  // THE ROW LOCK (see NPC_LOCK_COPY). Gated on the same authoring right as the
-  // Reroll button this lock disarms: a viewer who cannot roll the roster is never
-  // shown a control over that roll. It also needs a DURABLE id — locks name
-  // `npc.id`, never the pin's name fallback, because the preservation engine
-  // matches ids and remaps them when a survivor inherits a fresh slot.
-  const locks = useStore(s => s.locks);
-  const setLock = useStore(s => s.setLock);
-  const rosterLocked = locks?.npcs === true;
-  const lockedIds = Array.isArray(locks?.npcs) ? locks.npcs.map(String) : [];
-  const lockAvailable = canAuthorNpc && npcId != null;
-  const isLocked = rosterLocked || (npcId != null && lockedIds.includes(npcId));
-  const lockNote = rosterLocked ? NPC_LOCK_COPY.section
-    : (isLocked ? NPC_LOCK_COPY.locked : NPC_LOCK_COPY.open);
-  const toggleLock = () => {
-    if (rosterLocked || npcId == null) return;
-    const next = lockedIds.includes(npcId)
-      ? lockedIds.filter(id => id !== npcId)
-      : [...lockedIds, npcId];
-    setLock('npcs', next);
-  };
-
   return (
     <div id={entityAnchor('npc', npc)} style={{
       background:swatch['#FAF8F4'],
       border:`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`,
       borderLeft:`3px solid ${isPinned ? pinColor : color}`,
-      marginBottom:6,overflow:'hidden',
+      borderRadius:6,marginBottom:6,overflow:'hidden',
+      // Subtle tint when pinned — mirrors the narrative panel's purple wash.
+      boxShadow: isPinned ? `inset 2px 0 0 rgba(106,42,154,0.08)` : 'none',
     }}>
       <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{flex:1,minWidth:0}}>
@@ -308,11 +172,7 @@ function NPCInlineCard({
             <span style={{fontSize:FS.xxs,color:MUTED}}>{npc.title}</span>
             <span style={{fontSize:FS.xs,fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
           </div>
-          <div style={{fontSize:FS.xs,color:swatch.inkMag3}}>
-            {nativeRole}
-            {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
-            {npc.factionAffiliation ? ` · ${npc.factionAffiliation}` : ''}
-          </div>
+          <div style={{fontSize:FS.xs,color:swatch.inkMag3}}>{npc.role}{npc.factionAffiliation ? ` · ${npc.factionAffiliation}` : ''}</div>
         </div>
         {pinAvailable && (
           <span
@@ -321,13 +181,14 @@ function NPCInlineCard({
             onClick={(e)=>{ e.stopPropagation(); onTogglePin(pinKey); }}
             onKeyDown={(e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); onTogglePin(pinKey); } }}
             title={isPinned
-              ? 'Pinned. The AI will not rewrite this NPC.'
-              : 'Pin this NPC so the AI leaves it unchanged.'}
+              ? 'Pinned. This NPC will not be rewritten by regenerate/progress.'
+              : 'Pin this NPC so regenerate/progress leaves it unchanged.'}
             style={{
               display:'inline-flex',alignItems:'center',justifyContent:'center',
               width:22,height:22,flexShrink:0,
-              background: isPinned ? swatch['#F0EBFF'] : 'transparent',
-              border: `1px solid ${isPinned ? pinColor : 'transparent'}`,
+              borderRadius:4,
+              background: isPinned ? 'rgba(106,42,154,0.12)' : 'transparent',
+              border: `1px solid ${isPinned ? 'rgba(160,100,220,0.45)' : 'transparent'}`,
               color: isPinned ? pinColor : '#b8a898',
               cursor:'pointer',
               transition:'all 0.15s',
@@ -336,50 +197,13 @@ function NPCInlineCard({
             <Pin size={12} fill={isPinned ? pinColor : 'none'} strokeWidth={isPinned ? 2 : 1.7}/>
           </span>
         )}
-        {lockAvailable && (
-          <span
-            role="button"
-            tabIndex={rosterLocked ? -1 : 0}
-            aria-pressed={isLocked}
-            aria-label={lockNote}
-            aria-disabled={rosterLocked || undefined}
-            onClick={(e)=>{ e.stopPropagation(); toggleLock(); }}
-            onKeyDown={(e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); toggleLock(); } }}
-            // No native OS tooltip here: the aria-label above ALREADY carries
-            // `lockNote` verbatim, so a hover tooltip would only duplicate the
-            // accessible name — the GUIDE-2 tranche-1 ruling on the two
-            // WorldMapToolbar selects, and the R-3 NarrativeArchivePanel ruling
-            // (drop the tooltip; never let one displace an accessible name).
-            // The glyph pair carries the state visually; the sentence is read.
-            style={{
-              display:'inline-flex',alignItems:'center',justifyContent:'center',
-              width:22,height:22,flexShrink:0,
-              background: isLocked ? LOCK_TONE_BG : 'transparent',
-              border: `1px solid ${isLocked ? LOCK_TONE : 'transparent'}`,
-              color: isLocked ? LOCK_TONE : '#b8a898',
-              cursor: rosterLocked ? 'help' : 'pointer',
-              transition:'all 0.15s',
-            }}
-          >
-            {isLocked
-              ? <Lock size={12} strokeWidth={2}/>
-              : <Unlock size={12} strokeWidth={1.7}/>}
-          </span>
-        )}
         <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
       </button>
       {open && (
         <div style={{padding:'0 12px 10px',borderTop:`1px solid ${color}15`}}>
-          {flag('settlementWorkbench') && canAuthorNpc && npc?.id != null && (
-            <div style={{display:'flex',justifyContent:'flex-end',marginTop:6}}>
-              <Button variant="ghost" size="sm" onClick={() => focusEntity?.(String(npc.id))}>
-                Inspect person
-              </Button>
-            </div>
-          )}
           {publicTraits.length > 0 && (
             <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:6,marginTop:6}}>
-              {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:FS.xxs,color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span>)}
+              {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:FS.xxs,color:swatch.inkMag3,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 5px'}}>{t.label}: {t.value}</span>)}
             </div>
           )}
           {(npc.corrupt || npc.ousted) && (
@@ -391,16 +215,16 @@ function NPCInlineCard({
                 <span style={{
                   fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
                   ...(compromiseLc?.tone === 'muted'
-                    ? { color:swatch.inkMag3, border:`1px solid ${swatch.inkMag3}` }
+                    ? { color:swatch.inkMag3, background:'rgba(120,90,40,0.10)', border:'1px solid rgba(120,90,40,0.35)' }
                     : compromiseLc?.tone === 'exposed'
-                      ? { color:swatch.inkMag3, border:`1px solid ${swatch.inkMag3}` }
-                      : { color:swatch.danger, border:`1px solid ${swatch.danger}` }),
-                  padding:'1px 6px',
+                      ? { color:swatch.inkMag3, background:'rgba(120,90,40,0.12)', border:'1px solid rgba(120,90,40,0.4)' }
+                      : { color:swatch.danger, background:'rgba(139,26,26,0.12)', border:'1px solid rgba(139,26,26,0.4)' }),
+                  borderRadius:4,padding:'1px 6px',
                 }}>{(compromiseLc?.badge) || 'Compromised'}</span>
               ) : (
                 <span style={{
                   fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',color:swatch.inkMag3,
-                  border:`1px solid ${swatch.inkMag3}`,padding:'1px 6px',
+                  background:'rgba(120,90,40,0.12)',border:'1px solid rgba(120,90,40,0.4)',borderRadius:4,padding:'1px 6px',
                 }}>Exposed</span>
               )}
               {npc.corrupt && npc.corruptTies?.criminalInstitution && (
@@ -413,24 +237,12 @@ function NPCInlineCard({
           )}
           {npc.replacedNpc && (
             <div style={{margin:'6px 0',fontSize:FS.xs,color:swatch.inkMag3,fontStyle:'italic'}}>
-              Newly installed. Replaced {npc.replacedNpc} after a corruption scandal.
+              Newly installed — replaced {npc.replacedNpc} after a corruption scandal.
             </div>
           )}
-          {/* DESIGN_THE_ROADS §12 — the whereabouts line (away/held). Present only when the
-              mover wrote the mirror; DM-SECRET by construction (§15). */}
-          {wLine && (
-            <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:FS.xs}}>
-              {/* Flat material (deep-craft): a colored uppercase label, no box/tint/radius. */}
-              <span style={{
-                fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
-                color: wBadge === 'Held' ? swatch.danger : swatch.inkMag3,
-              }}>{wBadge}</span>
-              <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{wLine}</span>
-            </div>
-          )}
-          {goalText && (
+          {npc.goal?.short && (
             <p style={{fontSize:FS.sm,color:swatch.inkMag2,margin:'4px 0',lineHeight:1.4}}>
-              <span style={{color:swatch['#A0762A'],fontWeight:700}}>→ </span><ProseParagraph text={goalText} />
+              <span style={{color:swatch['#A0762A'],fontWeight:700}}>→ </span><ProseParagraph text={npc.goal.short} />
             </p>
           )}
           {npc.structuralPosition && (
@@ -441,49 +253,21 @@ function NPCInlineCard({
               <span style={{fontWeight:700}}>Constraint: </span>{npc.activeConstraint}
             </p>
           )}
-          {interiority && (interiorityWants.length > 0 || interiority.disposition.length > 0) && (
-            <div style={{margin:'6px 0',display:'flex',flexDirection:'column',gap:2}}>
-              {interiorityWants.length > 0 && (
-                <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4}}>
-                  <span style={{fontWeight:700,color:swatch['#A0762A']}}>Wants </span>{interiorityWants.join(' · ')}
-                </div>
-              )}
-              {interiority.disposition.length > 0 && (
-                <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4}}>
-                  <span style={{fontWeight:700,color:MUTED}}>Disposition </span>{interiority.disposition.join(', ')}
-                </div>
-              )}
-            </div>
-          )}
-          {(npc.secret || authorEditMode) && (
-            <div style={{marginTop:6,background:swatch['#F5F0E8'],padding:'5px 8px'}}>
+          {(npc.secret || editMode) && (
+            <div style={{marginTop:6,background:swatch['#F5F0E8'],borderRadius:4,padding:'5px 8px'}}>
               <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3}}>Secret: </span>
-              {canAuthorNpc ? (
-                <EditableText
-                  value={secretText}
-                  originalValue={secretOriginal}
-                  isEdited={secretIsEdited}
-                  editMode={canEditSecret}
-                  onSave={canEditSecret ? onSaveSecret : undefined}
-                  onRevert={canEditSecret ? onRevertSecret : undefined}
-                  placeholder="Add a secret…"
-                  ariaLabel={`Secret for ${npc.name}`}
-                  textStyle={{fontSize:FS.xs,color:swatch.inkMag2}}
-                />
-              ) : (
-                <span style={{fontSize:FS.xs,color:swatch.inkMag2}}>{secretText}</span>
-              )}
+              <EditableText
+                value={typeof npc.secret === 'string' ? npc.secret : (npc.secret?.what || '')}
+                originalValue={secretOriginal}
+                isEdited={secretIsEdited}
+                editMode={editMode}
+                onSave={onSaveSecret}
+                onRevert={onRevertSecret}
+                placeholder="Add a secret…"
+                ariaLabel={`Secret for ${npc.name}`}
+                textStyle={{fontSize:FS.xs,color:'#3d2b1a'}}
+              />
             </div>
-          )}
-          {/* Bank-bounded editing stays behind edit mode. Party decisions that
-              cannot wait (hostage/road actions) also appear on an owner's normal
-              saved-dossier view, never on a public/player dossier. */}
-          {canAuthorNpc && (authorEditMode || hasNpcLifecycleAction(npc)) && (
-            <NpcLifecycleControls
-              npc={npc}
-              canAuthorNpc={canAuthorNpc}
-              showEditor={authorEditMode}
-            />
           )}
         </div>
       )}

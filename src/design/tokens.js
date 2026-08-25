@@ -52,49 +52,29 @@ const lightColors = Object.freeze({
   'ink-600': '#4A3B22',  // tertiary text, BODY COPY (replaces legacy MUTED for body)
 
   // Gold — primary accent, CTAs, brand
-  'gold-500': '#C9A24C',  // primary CTA fill, brand mark, badges, gold borders
+  'gold-500': '#C9A24C',  // primary CTA, brand mark, badges
   'gold-400': '#D9B566',  // CTA hover
-  'gold-700': '#8C6F32',  // active/pressed gold, strong gold borders
-  'gold-800': '#6A511F',  // gold TEXT on light / gold-tint surfaces (WCAG AA — gold-500 fails)
-  'gold-100': '#F3E7C6',  // opaque soft-gold fill (tertiary gold button surface)
+  'gold-700': '#8C6F32',  // active/pressed gold
 
   // Muted — chrome-only secondary text (NEVER body copy — fails WCAG)
   'muted-500': '#9C8068',
 
-  // Slate — the AI register (THE SLATE CONVERSION, C13 owner ruling 2026-07-18:
-  // "slate replaces violet, never removes the distinction"). The single visual
-  // marker that means "this surface is AI-authored / gated / opt-in / spends
-  // credits". Never used for anything else, never collapses with gold. Ratios
-  // mirror the retired violet trio (tests/design/contrast.test.js recomputes):
-  // white on slate-500 = 5.27 (AA) · slate-700 on slate-100 = 6.40 (AA) ·
-  // slate-500 as text on slate-100 = 4.31 (just under AA — the deliberate
-  // negative pin: the fill hue is never text on its own tint).
-  'slate-500': '#5A6E82',  // AI affordance — fills, borders, icons
-  'slate-700': '#435463',  // AI TEXT on slate-100
-  'slate-100': '#E4E9EE',
+  // Violet — AI affordances. The single visual marker that means
+  // "this surface is gated / opt-in / spends credits". Never used for
+  // anything else, never collapses with gold.
+  'violet-500': '#7B4FCF',
+  'violet-100': '#EBE2FA',
 
-  // Red — destructive actions and hard errors; the only non-destructive use is
-  // the named operatorAlert semantic alias, fenced to unread-count chrome.
+  // Red — destructive actions and hard errors only
   'red-600': '#A23434',
   'red-100': '#F4DEDE',
 
   // Green — confirmation, canon-phase badge
   'green-600': '#4A7A3A',
-  'green-700': '#3F6831',  // green TEXT on green-100 tints (green-600 as text is 4.23:1, just under AA)
 
   // Amber — warnings, drift-detected banners, founder lifetime pill
-  'amber-500': '#D08020',  // amber fill / icon / border
-  'amber-700': '#8A5212',  // amber TEXT on amber-100 (WCAG AA — amber-500 on amber-100 is 2.85:1)
+  'amber-500': '#D08020',
   'amber-100': '#FDF4EC',
-
-  // THE ROLE RINGS (docs/DESIGN_FOUNDERS_HALL.md §2) — the two staff hues worn
-  // as a ring around a Founders' Hall plate when a chair-holder is ALSO staff.
-  // Deliberately outside the gold family: a role is what you are to the product,
-  // a chair is an honor you hold, and a staff mark must never read as purchasable
-  // prestige. Used ONLY through the founderRing* named tokens below; the ring is
-  // never the sole carrier of the fact (the plate also names the role in text).
-  'ring-blue-400':  '#5B8FD6',  // Developer ring on the Hall's dark ceremonial field
-  'ring-mauve-400': '#C86FB0',  // Admin ring — the purplish-pink of the owner's order
 });
 
 export const color = lightColors;
@@ -108,14 +88,7 @@ export const semantic = Object.freeze({
   pageBg:        color['parchment-50'],
   cardBg:        color['parchment-50'],
   cardHover:     color['parchment-100'],
-  // THE MATERIALS BRIDGE (Organic Craft, 2026-07-18): the app-wide card border /
-  // divider is now the feint-rule material — the organic ink ramp's hairline tone
-  // (design/organic/ink.js INK.hairline), the receding subdivision rule of the
-  // manuscript grammar. One value swap, zero structural change; every surface
-  // reading BORDER/cardBorder renders the new material. parchment-200 itself is
-  // unchanged (exact-value swatch references keep their promise). Decorative
-  // dividers carry no WCAG floor; interactive boundaries still use BORDER_STRONG.
-  cardBorder:    '#C8B89A',
+  cardBorder:    color['parchment-200'],
 
   // Text
   textPrimary:   color['ink-900'],
@@ -127,20 +100,10 @@ export const semantic = Object.freeze({
   ctaPrimary:        color['gold-500'],
   ctaPrimaryHover:   color['gold-400'],
   ctaPrimaryActive:  color['gold-700'],
-  ctaAi:             color['slate-500'],
-  ctaAiBg:           color['slate-100'],
-  // THE SLATE PAIR (C13 ruling): the semantic light/dim register for
-  // AI-authored surfaces — `slateLight` washes draft-slip surfaces, `slateDim`
-  // carries the legible slate text/rule. New AI surfaces read THESE names;
-  // the SLATE* flats below carry the same values (renamed from VIOLET* at
-  // fold batch 2, 2026-07-19 — see the flats' comment).
-  slateLight:        color['slate-100'],
-  slateDim:          color['slate-700'],
+  ctaAi:             color['violet-500'],
+  ctaAiBg:           color['violet-100'],
 
   // Status
-  // Operator-message unread count ONLY. This is an operational chrome alert,
-  // not a general emphasis colour and never a reader/manuscript accent.
-  operatorAlert:  color['red-600'],
   destructive:    color['red-600'],
   destructiveBg:  color['red-100'],
   success:        color['green-600'],
@@ -149,27 +112,9 @@ export const semantic = Object.freeze({
   infoBg:         '#f0f4ff',
   warning:        color['amber-500'],
   warningBg:      color['amber-100'],
-
-  // Status banner hairlines — the danger/success banners across the Account
-  // sections were hand-typing '#e8b0b0' / '#b0d8b0' for their 1px borders.
-  // Tokenized here so the boundary colour themes and contrast-audits centrally
-  // with the fills it pairs with (destructiveBg / successBg).
-  destructiveBorder: '#e8b0b0',
-  successBorder:     '#b0d8b0',
-
-  // Semantic stat-card tint surfaces (Account Subscription ledger). The
-  // tier/credits/saves tiles group by a faint same-hue wash — gold/violet/green
-  // for the value, with a deeper step for the conditional upsell footer. Routed
-  // through tokens so the tints theme and audit centrally instead of as inline
-  // rgba() literals scattered across the section.
-  tintGoldSurface:     'rgba(201,162,76,0.12)',
-  tintVioletSurface:   'rgba(124,58,237,0.06)',
-  tintVioletSurfaceHi: 'rgba(124,58,237,0.10)',
-  tintGreenSurface:    'rgba(42,122,42,0.06)',
-  tintAmberSurfaceHi:  'rgba(208,128,32,0.10)',
 });
 
-// ── Exact-value migration swatchbook (colour burn-down) ──────────────────────
+// ── Exact-value migration swatchbook (P120 / V-2 colour burn-down) ───────────
 // The burn-down found ~140 distinct raw hex colours inline across the screen
 // UI — a long tail of near-duplicate browns, creams, reds, greens, blues and
 // purples accumulated over many phases. Consolidating them onto the curated
@@ -190,7 +135,6 @@ export const swatch = Object.freeze({
   '#1B1408': '#1b1408',
   '#1C1409': '#1c1409',
   '#2A3A7A': '#2a3a7a',
-  '#E8E2D6': '#e8e2d6',
   '#2C2210': '#2c2210',
   '#3A3A6A': '#3a3a6a',
   '#3A5A2A': '#3a5a2a',
@@ -201,7 +145,6 @@ export const swatch = Object.freeze({
   '#7C3AED12': '#7c3aed12',
   '#7C3AED40': '#7c3aed40',
   '#8A2F4A': '#8a2f4a',
-  '#8A5A1A': '#8a5a1a',
   '#8B1A1A': '#8b1a1a',
   '#8C6F32': '#8c6f32',
   '#9C8068': '#9c8068',
@@ -215,12 +158,8 @@ export const swatch = Object.freeze({
   '#E0D0B0': '#e0d0b0',
   '#E0E8F0': '#e0e8f0',
   '#E8D9B0': '#e8d9b0',
-  // THE SLATE CONVERSION (C13): the two violet-wash keys repointed to the slate
-  // wash; at fold batch 2 (2026-07-19) the retired violet KEY spellings were
-  // dropped and the keys renamed to the honest slate hex (value === key, the
-  // swatchbook convention) — call sites updated in the same commit.
-  '#E4E9EE': '#e4e9ee',
-  '#E4E9EE80': '#e4e9ee80',
+  '#EBE2FA': '#ebe2fa',
+  '#EBE2FA80': '#ebe2fa80',
   '#F4DEDE': '#f4dede',
   '#F5ECD8': '#f5ecd8',
   '#F7EBF0': '#f7ebf0',
@@ -249,7 +188,7 @@ export const swatch = Object.freeze({
   stressAmber: '#ffd080',
   mutedBrown: '#9c8068',
   '#4A3B22': '#4a3b22',
-  '#5A6E82': '#5a6e82', // THE SLATE CONVERSION (C13) — was the retired violet key '#7B4FCF'; renamed to the honest slate hex at fold batch 2 (2026-07-19)
+  '#7B4FCF': '#7b4fcf',
   // Long tail — keyed by exact hex (consolidation deferred)
   '#1A2A5A': '#1a2a5a',
   '#1A3A8B': '#1a3a8b',
@@ -388,36 +327,6 @@ export const swatch = Object.freeze({
   '#FAF3E8': '#faf3e8', // pdf primitives/sections (Dense, StatTile, PowerStructure, …)
   '#FBF5E6': '#fbf5e6', // pdf Cover
   '#F5F0FF': '#f5f0ff', // pdf Relationships / ViabilityAssessment
-  // ConfigurationPanel NearbyResources four-state chips (a11y burndown). The
-  // four-state model was carried by inline hex outside the token system; routed
-  // here with zero rendered change. The abundant/depleted fg are paired with
-  // their bg in tests/design/contrast.test.js (>=4.5:1); the chip BORDERS are UI
-  // boundaries (1.4.11, >=3:1 not required for the soft tints but tokenized).
-  '#C8B89A': '#c8b89a', // allow chip border
-  '#88C880': '#88c880', // abundant chip border
-  '#E08040': '#e08040', // depleted chip border
-  '#FFF7F0': '#fff7f0', // depleted chip bg
-  '#C8B8A0': '#c8b8a0', // incompatible-resource dashed border
-  '#C8A84A': '#c8a84a', // random-pool chip border
-  '#A0B0E0': '#a0b0e0', // ConfigurationPanel magical-trade-infrastructure info box border
-  '#0F766E': '#0f766e', // LiveWarStatus trade-war accent (teal — second channel keyed by tone)
-  // THE HOUSE DEVICE (the eager brand mark, components/brand/HouseDevice.jsx).
-  // The organic-craft rubric oxblood + the dim-field ink/rubric — canonical
-  // definitions live in src/design/organic/{rubrication,ink}.js (lazy); these
-  // swatch keys give the EAGER header/loading/error mark token-routed access
-  // without pulling the organic layer into the first-paint closure.
-  '#8B2E2E': '#8b2e2e', // rubric oxblood — the device seal-point (light)
-  '#ECE0C6': '#ece0c6', // dim-field ink — the device strokes on dark grounds
-  '#E8A860': '#e8a860', // dim-field rubric — the device seal-point on dark grounds
-  // Dossier reading-palette (src/components/new/tabs/tabPalette.js) — the darker
-  // status/category colors the dense dossier tabs use (a deliberate print-legibility
-  // palette on parchment, distinct from the lighter screen chrome tokens). Most
-  // already exist above; these five were the still-absent ones.
-  '#8A4010': '#8a4010', // TAB_WEAK — amber-brown "weak" score band
-  '#7A4A1A': '#7a4a1a', // category: Crafts
-  '#1A4A5A': '#1a4a5a', // category: Infrastructure
-  '#7A1A5A': '#7a1a5a', // category: Entertainment
-  '#1A5A3A': '#1a5a3a', // category: Adventuring
 });
 
 // ── Typography ─────────────────────────────────────────────────────────────
@@ -430,19 +339,11 @@ export const fontFamily = Object.freeze({
   mono:  '"JetBrains Mono", "Fira Code", Consolas, monospace',
 });
 
-// The DISPLAY face is swappable at runtime via the `--oc-display-face` CSS custom
-// property (V-27d IM Fell scaffold): UNSET (the default), var() falls back to the
-// Crimson serif — byte-identical to the historical rendering; SET (e.g. to the IM
-// Fell display face, src/lib/imFellFace.js) it swaps hero + section titles ONLY,
-// leaving prose/body on the serif. Applied as an inline style value, so the browser
-// resolves var() per element. Nothing lights it by default — see imFellFace.js.
-const displaySerif = 'var(--oc-display-face, "Crimson Text"), Georgia, serif';
-
 export const type = Object.freeze({
-  // Display — Crimson serif (runtime-swappable display face), hero + section titles
-  'display-xl': { family: displaySerif, size: 40, weight: 600, lineHeight: 1.15 },
-  'display-l':  { family: displaySerif, size: 32, weight: 600, lineHeight: 1.2 },
-  'display-m':  { family: displaySerif, size: 22, weight: 600, lineHeight: 1.25 },
+  // Display — Crimson serif, used for hero + section titles
+  'display-xl': { family: fontFamily.serif, size: 40, weight: 600, lineHeight: 1.15 },
+  'display-l':  { family: fontFamily.serif, size: 32, weight: 600, lineHeight: 1.2 },
+  'display-m':  { family: fontFamily.serif, size: 22, weight: 600, lineHeight: 1.25 },
 
   // Prose — Crimson serif, used for dossier body
   'prose-l':    { family: fontFamily.serif, size: 18, weight: 400, lineHeight: 1.65, style: 'italic' },
@@ -491,60 +392,7 @@ export const elevation = Object.freeze({
   '3': '0 12px 32px rgba(27,20,8,0.18)', // modals, popovers
 });
 
-// ── Bound Book surface steps ───────────────────────────────────────────────
-// The three authored parchment grounds. AE-1 only establishes the vocabulary;
-// existing semantic/legacy card aliases are deliberately NOT repointed until
-// the elevation sweep can be judged as a visual change.
-export const PARCHMENT_STEPS = Object.freeze({
-  page:   color['parchment-50'],
-  card:   color['parchment-100'],
-  nested: color['parchment-200'],
-});
-
 // ── Motion ─────────────────────────────────────────────────────────────────
-// Primitive values for the already-live twelve-behavior paper-physics grammar.
-// `design/organic/motion.js` re-exports these names; keeping their values here
-// satisfies the token-home law without changing a class, CSS variable, or pixel.
-export const MOTION_PRIMITIVES = Object.freeze({
-  duration: Object.freeze({
-    press: '120ms',
-    ink: '180ms',
-    strike: '300ms',
-    settle: '420ms',
-    lay: '640ms',
-  }),
-  easing: Object.freeze({
-    ink: 'cubic-bezier(0.33, 0, 0.2, 1)',
-    settle: 'cubic-bezier(0.22, 1, 0.36, 1)',
-    press: 'cubic-bezier(0.4, 0, 0.6, 1)',
-  }),
-});
-
-// High-level SURFACE orchestration. This closed vocabulary classifies whether a
-// composed surface resolves once, follows scroll, or stays still. It does not
-// replace the lower-level organic gestures above; AE-4 will map declarations to
-// those gestures. Every moving entry names an equal static composition.
-export const MOTION = Object.freeze({
-  none: Object.freeze({
-    owner: 'static', durationMs: 0, easing: 'linear', iterations: 1,
-    staticComposition: 'present',
-  }),
-  settle: Object.freeze({
-    owner: 'time', durationMs: 320, easing: 'cubic-bezier(.2,.7,.3,1)', iterations: 1,
-    staticComposition: 'settled', translateYPx: 6,
-  }),
-  reveal: Object.freeze({
-    owner: 'time', durationMs: 640, easing: 'cubic-bezier(0.22,1,0.36,1)', iterations: 1,
-    staticComposition: 'resolved',
-  }),
-  scrub: Object.freeze({
-    owner: 'scroll', durationMs: null, easing: 'linear', iterations: 1,
-    staticComposition: 'poster',
-  }),
-});
-
-// Deprecated compatibility table. It has no live in-repo consumers, but AE-1 is
-// data-only and therefore preserves the public export until a dedicated cleanup.
 export const motion = Object.freeze({
   quick:   { duration: 120, easing: 'ease-out' },                       // hover, focus
   base:    { duration: 220, easing: 'cubic-bezier(.2,.7,.3,1)' },       // modal open, tab switch
@@ -568,13 +416,9 @@ export const motion = Object.freeze({
 //   form  — genuine single-task forms (sign-in / sign-up / success). These
 //           stay narrow on purpose; a 1200px-wide login form is bad UX.
 export const layout = Object.freeze({
-  page:    1200,
-  prose:   820,
-  // The Create landing column (HomeHero + the cards stacked under it:
-  // WelcomeBackCard, the mode picker). One shared cap so those surfaces share a
-  // single column edge instead of nesting four bespoke widths (720/520/560).
-  landing: 720,
-  form:    460,
+  page:  1200,
+  prose: 820,
+  form:  460,
 });
 
 // ── CSS custom property emission ────────────────────────────────────────────
@@ -591,12 +435,6 @@ export function emitCssTokens(target = document.documentElement) {
   for (const [k, v] of Object.entries(space))     set(`--${k}`, `${v}px`);
   for (const [k, v] of Object.entries(radius))    set(`--radius-${k}`, typeof v === 'number' ? `${v}px` : v);
   for (const [k, v] of Object.entries(elevation)) set(`--elevation-${k}`, v);
-  for (const [k, v] of Object.entries(PARCHMENT_STEPS)) set(`--parchment-step-${k}`, v);
-  for (const [k, v] of Object.entries(MOTION)) {
-    if (v.durationMs !== null) set(`--motion-${k}-duration`, `${v.durationMs}ms`);
-    set(`--motion-${k}-easing`, v.easing);
-    if ('translateYPx' in v) set(`--motion-${k}-translate-y`, `${v.translateYPx}px`);
-  }
 }
 
 // ── Backward-compat shim ───────────────────────────────────────────────────
@@ -617,64 +455,42 @@ export const legacy = Object.freeze({
   // ratio on parchment is what AA mandates and what MUTED fails.
   BODY:     color['ink-600'],
   SECOND:   color['ink-800'],
-  // THE MATERIALS BRIDGE: BORDER is the feint-rule hairline (see semantic.cardBorder).
-  BORDER:   '#C8B89A',
+  BORDER:   color['parchment-200'],
   BORDER2:  '#F0E5C8',            // a lighter parchment-150
   CARD:     '#FFFBF5',            // slightly warmer than parchment-50 for cards
   PARCH:    color['parchment-50'],
   CARD_ALT: '#FAF6EF',
   CARD_HDR: '#FAF4E8',
 
-  // Flat aliases for palette colours that previously had only dashed keys.
-  // Added in the colour burn-down so exact-match call sites can route through
-  // a flat name like the rest.
-  // THE SLATE CONVERSION (C13, owner ruling 2026-07-18) — COMPLETED at fold
-  // batch 2 (2026-07-19): the AI register's flats are named SLATE* to match
-  // the slate values they have carried since C13. The deferred identifier
-  // rename (VIOLET*→SLATE*) landed as the batch's closing commit — every
-  // consumer renamed at once (the all-or-none law), no VIOLET* alias left
-  // behind. New AI surfaces read semantic.slateLight/slateDim or ctaAi/ctaAiBg.
-  SLATE:    color['slate-500'],
-  SLATE_DEEP: color['slate-700'],   // legible AI text on slate-100
-  SLATE_BG: color['slate-100'],
+  // Flat aliases for palette colours that previously had only dashed keys
+  // (color['violet-500'] etc.). Added in the P120 / V-2 colour burn-down so
+  // exact-match call sites can route through a flat name like the rest.
+  VIOLET:    color['violet-500'],
+  VIOLET_BG: color['violet-100'],
   RED:       color['red-600'],
   RED_BG:    color['red-100'],
   GREEN:     color['green-600'],
-  GREEN_DEEP: color['green-700'],   // legible green text on green-100 tints
   GREEN_BG:  semantic.successBg,
   AMBER:     color['amber-500'],
   AMBER_BG:  semantic.warningBg,
-  AMBER_DEEP: color['amber-700'],   // legible amber text on amber-100
   BLUE:      semantic.info,
   BLUE_BG:   semantic.infoBg,
   GOLD_DEEP: color['gold-700'],
-  GOLD_TXT:  color['gold-800'],      // legible gold text on light / gold-tint surfaces
-  GOLD_SOFT: color['gold-100'],      // opaque soft-gold fill (tertiary gold button)
-  // BORDER_STRONG — interactive-control border (buttons, inputs) at >=3:1 vs
-  // both card (#FFFBF5) and page (#FBF5E6), satisfying WCAG 1.4.11 for UI
-  // boundaries. The lighter BORDER (parchment-200) stays for decorative
-  // dividers/card edges where the surface itself isn't the only affordance cue.
-  BORDER_STRONG: '#A6863C',
   PARCH_100: color['parchment-100'],
 
   sans:   fontFamily.sans,
   serif_: fontFamily.serif,
 
-  // xxxl/huge expose space-7 (32) and space-8 (48) — the between-SECTION rhythm
-  // P5 prescribes. The xs..xxl run (4..24) is the within-cluster scale; xxxl/huge
-  // are the decisive perceptual jumps between major chunks (hero -> body), so the
-  // grouping reads from spacing alone rather than a borrowed border.
   SP: { xs: space['space-1'], sm: space['space-2'], md: space['space-3'],
-        lg: space['space-4'], xl: space['space-5'], xxl: space['space-6'],
-        xxxl: space['space-7'], huge: space['space-8'] },
+        lg: space['space-4'], xl: space['space-5'], xxl: space['space-6'] },
   R:  { sm: radius.sm, md: radius.md, lg: radius.lg, xl: radius.xl },
   // pico/nano/micro extend the scale below xxs for the dense micro-typography
   // (badges, pills, eyebrows) the app legitimately uses. Ordered by SI magnitude
-  // (pico < nano < micro < …) so 7 < 8 < 9 reads correctly. These give the
-  // ~400 raw sub-10px sizes exact tokens to migrate to (zero visual change).
+  // (pico < nano < micro < …) so 7 < 8 < 9 reads correctly. Added in P140 so the
+  // ~400 raw sub-10px sizes have exact tokens to migrate to (zero visual change).
   //
   // The half-step and gap/display sizes below were added in the visual-budget
-  // burn-down so EVERY raw inline fontSize in the screen UI has
+  // burn-down (P120 close-out) so EVERY raw inline fontSize in the screen UI has
   // an exact token to route through — keyed by size so the migration is
   // pixel-identical (zero visual change). The curated t-shirt steps above remain
   // the preferred vocabulary for new code; a future pass can consolidate the
@@ -691,17 +507,16 @@ export const legacy = Object.freeze({
   },
   // ELEV — the 3-tier elevation (box-shadow) scale, exposed to legacy
   // importers. 1 = default cards, 2 = hover/sticky chrome, 3 = modals/popovers.
-  // Added so components stop inventing bespoke shadows.
+  // Added in P141/V-4 so components stop inventing bespoke shadows.
   ELEV: elevation,
 
   // Layout — shared page content widths (see `layout` above). Added so every
   // top-level page references one cap instead of inventing its own narrow
   // column. PAGE_MAX for content pages, PROSE_MAX for reading columns inside
   // them, FORM_MAX for genuine forms that should stay narrow.
-  PAGE_MAX:    layout.page,
-  PROSE_MAX:   layout.prose,
-  LANDING_MAX: layout.landing,
-  FORM_MAX:    layout.form,
+  PAGE_MAX:  layout.page,
+  PROSE_MAX: layout.prose,
+  FORM_MAX:  layout.form,
 });
 
 // ── Realm/map chrome tokens (tree-shakeable standalone exports) ──────────────
@@ -716,16 +531,3 @@ export const legacy = Object.freeze({
 export const GOLD_TXT  = '#6A511F';  // legible gold TEXT on light / gold-tint surfaces (WCAG AA)
 export const GOLD_SOFT = '#F3E7C6';  // opaque soft-gold fill (tertiary gold button surface)
 export const BORDER_STRONG = '#A6863C'; // interactive-control border ≥3:1 vs card + page (WCAG 1.4.11)
-
-// ── Founders' Hall role rings (tree-shakeable standalone exports) ────────────
-// Same discipline as the Realm/map chrome above, and for the same reason: these
-// are consumed ONLY by the lazily-loaded Hall chunk (components/founders/*), so
-// they stay OUT of the eager `legacy` object. Deliberately NOT re-exported through
-// components/theme.js — that shim is eager, and welding two ceremonial hues into
-// first paint to save an import path would spend the closure budget on a route
-// most visitors never open.
-//
-// The ring is never the sole carrier of the fact: ChairPlate also names the role
-// in text, so the hue is reinforcement, not information (WCAG 1.4.1).
-export const founderRingDeveloper = '#5B8FD6'; // Developer ring — the Hall's blue
-export const founderRingAdmin     = '#C86FB0'; // Admin ring — the purplish-pink of the owner's order

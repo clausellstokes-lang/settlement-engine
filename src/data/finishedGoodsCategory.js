@@ -121,8 +121,8 @@ export const INSTITUTION_FINISHED_GOODS_DEMAND = {
     },
     importLabels: [
       'Rope, oakum, and rigging supplies',
-      'Cordage, canvas, and vessel-maintenance supplies',
-      'Cordage, tar, timber fittings, and bulk vessel supplies',
+      'Sailcloth, cordage, and naval stores',
+      'Sailcloth, cordage, tar, and bulk naval stores',
     ],
     exportBonus: null,
     minTier: 'hamlet',

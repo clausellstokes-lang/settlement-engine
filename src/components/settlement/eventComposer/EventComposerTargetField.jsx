@@ -23,7 +23,7 @@ import {
 } from './EventComposerConstants.js';
 
 export function EventComposerTargetField({
-  type, target, setTarget, setDesc, spec, settlement,
+  type, target, setTarget, spec, settlement,
   setAddCategory, setStressorPick, stressorPick,
   setCustomResourceName, customResourceName,
   setSwapWithNpcId, swapWithNpcId,
@@ -80,34 +80,23 @@ export function EventComposerTargetField({
     return (
       <Field label="New ruling power" hint={spec?.targetPrompt}>
         <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
-          <option value="">Pick a faction</option>
+          <option value="">— Pick a faction —</option>
           {rulingPowerOptions.map(o => (
             <option key={o.id} value={o.id}>{o.name}</option>
           ))}
         </select>
         {rulingPowerOptions.length === 0 && (
           <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
-            No other faction holds power here. Add a faction first.
+            No other faction holds power here — add a faction first.
           </span>
         )}
       </Field>
     );
   }
   if (type === 'ADD_FACTION') {
-    // Picking a CUSTOM faction prefills the editable Description with its
-    // authored compendium description — that is the only channel by which the
-    // authored text reaches the created faction (event.description →
-    // addFaction → faction.description). Built-in picks leave Description
-    // alone (descriptors carry no prose, and the DM may have typed their own).
-    const pickFaction = (name) => {
-      setTarget(name);
-      const custom = factionGroups.find(g => g.category === 'custom')
-        ?.options.find(o => o.name === name);
-      if (custom?.description) setDesc(custom.description);
-    };
     return (
       <Field label="Faction" hint="Choose a faction that isn't here yet">
-        <select value={target} onChange={e => pickFaction(e.target.value)} aria-label="Faction" style={selectStyle}>
+        <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
           <option value="">Select a faction</option>
           {factionGroups.map(g => (
             <optgroup key={g.category} label={g.label}>
@@ -117,7 +106,7 @@ export function EventComposerTargetField({
         </select>
         {factionGroups.length === 0 && (
           <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
-            Every catalogued faction is already present. Author a new one in your Compendium and it appears here.
+            Every catalogued faction is already present. Name a new one in Description.
           </span>
         )}
       </Field>
@@ -152,7 +141,7 @@ export function EventComposerTargetField({
           onChange={e => { setTarget(e.target.value); setCustomResourceName(''); }}
           style={selectStyle}
         >
-          <option value="">Pick a resource</option>
+          <option value="">— Pick a resource —</option>
           {resourceCatalogOptions.map(o => (
             <option key={o.id} value={o.id}>{o.name}</option>
           ))}
@@ -183,7 +172,7 @@ export function EventComposerTargetField({
             onChange={e => { setTarget(e.target.value); setSwapWithNpcId(''); }}
             style={selectStyle}
           >
-            <option value="">Pick an NPC</option>
+            <option value="">— Pick an NPC —</option>
             {npcSwapGroups.map(g => (
               <optgroup key={g.faction} label={g.faction}>
                 {g.npcs.map(n => <option key={n.id} value={n.id}>{n.name}</option>)}
@@ -193,7 +182,7 @@ export function EventComposerTargetField({
         </Field>
         <Field
           label={type === 'PROMOTE_NPC' ? 'Displaces' : 'Displaced by'}
-          hint="Same faction: the two swap standing"
+          hint="Same faction — the two swap standing"
         >
           <select
             value={swapWithNpcId}
@@ -201,7 +190,7 @@ export function EventComposerTargetField({
             style={selectStyle}
             disabled={!target}
           >
-            <option value="">Pick the counterpart</option>
+            <option value="">— Pick the counterpart —</option>
             {counterparts.map(n => (
               <option key={n.id} value={n.id}>{n.name}</option>
             ))}
@@ -230,7 +219,7 @@ export function EventComposerTargetField({
           onChange={e => setTarget(e.target.value)}
           style={selectStyle}
         >
-          <option value="">Pick a {collectionKey.replace(/s$/, '')}</option>
+          <option value="">— Pick a {collectionKey.replace(/s$/, '')} —</option>
           {targetOpts.map(o => (
             <option key={o.id} value={o.id}>{o.name}</option>
           ))}

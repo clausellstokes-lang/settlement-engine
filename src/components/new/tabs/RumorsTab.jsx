@@ -27,7 +27,7 @@ import {
   activatedDeityNamesFrom,
 } from '../../../domain/display/settlementRumors.js';
 import {
-  BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, sans,
+  BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, R, SECOND, sans,
 } from '../../theme.js';
 
 const CONFIDENCE_LABEL = {
@@ -45,7 +45,8 @@ function RumorCard({ rumor, nameFor }) {
   return (
     <article style={{
       border: `1px solid ${major ? GOLD : BORDER}`,
-      background: CARD,
+      borderRadius: R.md,
+      background: major ? GOLD_BG : CARD,
       padding: '10px 12px',
     }}>
       <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
@@ -66,7 +67,7 @@ function RumorCard({ rumor, nameFor }) {
         {rumor.agoTicks > 0 && ` · heard ${rumor.agoTicks} ${rumor.agoTicks === 1 ? 'week' : 'weeks'} ago`}
       </div>
       {truth && (
-        <details style={{ marginTop: 8, border: `1px solid ${BORDER2}`, background: CARD_ALT, overflow: 'hidden' }}>
+        <details style={{ marginTop: 8, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD_ALT, overflow: 'hidden' }}>
           <summary style={{ cursor: 'pointer', padding: '5px 9px', color: GOLD, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>
             DM truth
           </summary>
@@ -103,7 +104,7 @@ function Column({ title, rumors, emptyText, nameFor }) {
         <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>{rumors.length}</span>
       </div>
       {rumors.length === 0 ? (
-        <div style={{ border: `1px dashed ${BORDER}`, padding: 14, color: MUTED, fontFamily: sans, fontSize: FS.xs, background: CARD_ALT }}>
+        <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.md, padding: 14, color: MUTED, fontFamily: sans, fontSize: FS.xs, background: CARD_ALT }}>
           {emptyText}
         </div>
       ) : (
@@ -173,7 +174,7 @@ export default function RumorsTab({ settlement, saveId = null, playerView = fals
   if (!view) {
     return (
       <div data-testid="rumors-tab" style={{ padding: '12px 14px', fontFamily: sans, color: MUTED, fontSize: FS.sm }}>
-        No word travels here yet. The realm's news reaches {settlement?.name || 'this settlement'} the moment it happens.
+        No word travels here yet — the realm's news reaches {settlement?.name || 'this settlement'} the moment it happens.
       </div>
     );
   }
@@ -181,7 +182,7 @@ export default function RumorsTab({ settlement, saveId = null, playerView = fals
   return (
     <div data-testid="rumors-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
       <p style={{ margin: '0 0 12px', color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
-        What {settlement?.name || 'this settlement'} has heard, as it believes it. Word travels the
+        What {settlement?.name || 'this settlement'} has heard, as it believes it — word travels the
         trade roads, and the roads are long.
       </p>
       <div style={{

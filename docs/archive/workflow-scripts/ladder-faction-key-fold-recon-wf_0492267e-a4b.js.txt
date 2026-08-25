@@ -1,0 +1,340 @@
+export const meta = {
+  name: 'ladder-faction-key-fold-recon',
+  description: 'Verify the npcLadder faction-key bug on the composite tip, census sibling readers, and map the cherry-pick conflict surface',
+  phases: [
+    { title: 'Reproduce', detail: 'empirically prove record shape + bug on composite tip' },
+    { title: 'Census', detail: 'find sibling .name-only faction readers the fix may miss' },
+    { title: 'Synthesize', detail: 'completeness critic over the findings' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd'
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine--claude-worktrees-loving-kapitsa-e597f0/f8133321-d61d-4f4d-992b-57eb10e4ee46/scratchpad'
+
+const GROUND = `
+CONTEXT — read carefully before acting.
+
+Repo: /Users/cstokes/Desktop/settlement-engine (SettlementForge). The branch under study is
+claude/the-composite @ aad6265e, whose worktree is ${WT}.
+
+*** ABSOLUTE RULES ***
+- You are READ-ONLY with respect to every git worktree. Do NOT edit, stage, commit, checkout,
+  stash, reset, or clean ANYTHING. \`git stash\` is FORBIDDEN repo-wide.
+- Do NOT run \`npm run build\` or any command that writes into a worktree.
+- Scratch files go ONLY in ${SCRATCH}. Probe scripts there are fine.
+- You may run \`node\` probes and \`npx vitest run <file>\` READ-ONLY test invocations from
+  inside ${WT} (it has its own node_modules).
+- \`cd ${WT}\` before any repo-relative command; the wrong-lineage-worktree trap has bitten this
+  program 6+ times. Confirm with \`git branch --show-current\` (must print claude/the-composite).
+- Never read a gate through a pipe to \`tail\`/\`head\` when you need its exit code; run it bare.
+- grep/diff go silently empty on NUL-bearing files in this repo — pass \`-a\` when it matters.
+
+THE BUG UNDER STUDY (a claim to be verified, not assumed):
+src/domain/worldPulse/npcLadderState.js exports \`ladderFactionKey(faction)\` and
+\`npcInFaction(npc, faction, fkey)\`. Both read the faction's display name from \`.name\` (and id
+from \`.id\`). The claim is that REAL powerStructure.factions records produced by the generator
+(src/generators/power/rulingStructure.js) carry the display name in \`.faction\` instead — with no
+\`.name\` and no \`.id\`. If true, every real faction slugifies to the literal key \`fac.unknown\`,
+so npcLadderKernel.js's first-wins loop (around line 298, \`if (factions[fkey]) continue;\`)
+merges every faction of a settlement into a single ladder, and npcInFaction never matches a
+real affiliated NPC, leaving ladders empty or merged when the npcLadderEnabled flag is lit.
+The read side is src/domain/townMap/ladderRead.js \`factionKeyOf\` (~line 178), whose key MUST
+match the write-side key byte-for-byte.
+`
+
+phase('Reproduce')
+
+const repro = await parallel([
+  () => agent(`${GROUND}
+
+YOUR TASK — prove or refute the record-shape claim with EXECUTED evidence.
+
+1. Read src/generators/power/rulingStructure.js in full. Find where the objects that end up in
+   powerStructure.factions are constructed. Report the EXACT literal keys of that record type.
+2. Then actually RUN the generator (or the narrowest function that mints those records) via a
+   node probe written to ${SCRATCH}, and print a real record with JSON.stringify. If the
+   generator needs a seed/rng/settlement argument, read its signature and supply a minimal real
+   one. If importing it standalone is impractical, find an existing test or fixture that builds a
+   real powerStructure and reuse that path.
+3. Report: does a real record have .faction? .name? .id? .label? Quote the printed JSON.
+
+If you cannot get a real record to print after genuine effort (at least 3 distinct approaches),
+say so explicitly and report the static-read evidence instead, labelled PLAUSIBLE not CONFIRMED.`,
+    { label: 'repro:record-shape', phase: 'Reproduce', schema: {
+      type: 'object',
+      required: ['confirmed', 'keys', 'evidence', 'notes'],
+      properties: {
+        confirmed: { type: 'boolean', description: 'true only if a real record was actually printed by an executed probe' },
+        keys: { type: 'array', items: { type: 'string' }, description: 'exact literal keys of a real powerStructure.factions record' },
+        hasFaction: { type: 'boolean' }, hasName: { type: 'boolean' }, hasId: { type: 'boolean' }, hasLabel: { type: 'boolean' },
+        evidence: { type: 'string', description: 'quoted printed JSON or quoted source lines with file:line' },
+        notes: { type: 'string' },
+      },
+    } }),
+
+  () => agent(`${GROUND}
+
+YOUR TASK — prove or refute the BEHAVIORAL bug with an EXECUTED probe.
+
+Write a node probe in ${SCRATCH} that imports, from the composite worktree source:
+  - ladderFactionKey and npcInFaction from src/domain/worldPulse/npcLadderState.js
+Feed it BOTH shapes:
+  (a) real-shaped faction records (whatever shape the generator actually mints — determine this
+      yourself by reading src/generators/power/rulingStructure.js), at least two DISTINCT factions;
+  (b) fixture-shaped records using .name.
+Print, for each: the returned key, and whether two distinct factions collide on the same key.
+Also construct a plausible NPC carrying a faction affiliation handle (read npcFactionHandle in
+npcLadderState.js for the accepted field names) and print npcInFaction's verdict for the real shape.
+
+Then read npcLadderKernel.js around the factions loop (~line 298) and confirm in source whether a
+key collision causes a first-wins merge (quote the lines).
+
+Report exactly what the probe printed. Do not assume — run it.`,
+    { label: 'repro:behavior', phase: 'Reproduce', schema: {
+      type: 'object',
+      required: ['bugReproduced', 'realShapeKeys', 'fixtureShapeKeys', 'collision', 'npcInFactionRealShape', 'kernelMergeConfirmed', 'evidence'],
+      properties: {
+        bugReproduced: { type: 'boolean' },
+        realShapeKeys: { type: 'array', items: { type: 'string' } },
+        fixtureShapeKeys: { type: 'array', items: { type: 'string' } },
+        collision: { type: 'boolean', description: 'two distinct real factions produced the same key' },
+        npcInFactionRealShape: { type: 'boolean', description: 'what npcInFaction returned for a genuinely-affiliated npc under the real shape' },
+        kernelMergeConfirmed: { type: 'boolean' },
+        evidence: { type: 'string', description: 'verbatim probe output + quoted kernel lines' },
+      },
+    } }),
+
+  () => agent(`${GROUND}
+
+YOUR TASK — locate and report the design-doc context.
+
+The task brief cites "DESIGN_DEEP_COUPLINGS.md sections 2 and 8" as recording this issue as a gate
+for a "contested-goals slice (D-4)". docs/DESIGN_DEEP_COUPLINGS.md does NOT exist at that path on
+the composite tip.
+
+1. Search the whole repo (all branches' worktrees are on disk under
+   /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/ and sibling dirs) for a file named
+   DESIGN_DEEP_COUPLINGS.md or any doc containing "deep couplings" / "contested goals" / "D-4".
+   Also try \`git log --all --diff-filter=A --name-only\` filtered for the filename.
+2. If found, read the relevant sections and report what they actually say about the faction-key
+   issue and the D-4 gate — quote it.
+3. Also read docs/DESIGN_THE_LADDER.md (if present) for what it says about the faction key
+   contract, and report whether the doc needs updating alongside this fix.
+
+Report what you found, with paths and quotes. If the doc genuinely does not exist anywhere, say so
+plainly — that is a legitimate finding (the brief may cite a doc from an unmerged lane).`,
+    { label: 'repro:design-doc', phase: 'Reproduce', schema: {
+      type: 'object',
+      required: ['docFound', 'paths', 'quotes', 'docNeedsUpdate', 'notes'],
+      properties: {
+        docFound: { type: 'boolean' },
+        paths: { type: 'array', items: { type: 'string' } },
+        quotes: { type: 'string' },
+        docNeedsUpdate: { type: 'boolean' },
+        notes: { type: 'string' },
+      },
+    } }),
+])
+
+phase('Census')
+
+const census = await parallel([
+  () => agent(`${GROUND}
+
+YOUR TASK — a CONSUMER CENSUS with a denominator. The fix in commit 14e8a2fa (on branch
+claude/the-ladder, NOT yet on the composite) touches only two source files:
+src/domain/worldPulse/npcLadderState.js and src/domain/townMap/ladderRead.js. Your job is to
+determine whether that is COMPLETE, or whether sibling code still reads a faction record's
+display name via \`.name\` only and would stay broken.
+
+Method:
+1. Establish the denominator. Search well past the obvious symbol: grep for reads of
+   \`powerStructure.factions\`, \`.factions\`, \`factionKey\`, \`ladderFactionKey\`, \`factionKeyOf\`,
+   \`fac.\`, \`npcInFaction\`, \`nameOf\`, and for \`\\.faction\\b\` across src/ and tests/.
+2. For EVERY site that consumes a faction record, disposition it: (a) fixed by 14e8a2fa,
+   (b) already correct because it reads .faction, (c) STILL BROKEN — reads .name/.id only,
+   (d) not-applicable with a reason.
+3. Pay particular attention to: src/domain/worldPulse/npcLadderKernel.js, anything named
+   *Coup*, rulingPower accessors, the townMap read layer, PDF viewModel, and any UI panel that
+   renders a ladder.
+
+Report the full ledger with file:line for every site. Give a count: N sites found, X fixed by the
+commit, Y already correct, Z still broken. Z > 0 is a genuinely important finding — do not
+manufacture it, but do not miss it either.`,
+    { label: 'census:consumers', phase: 'Census', schema: {
+      type: 'object',
+      required: ['totalSites', 'fixedByCommit', 'alreadyCorrect', 'stillBroken', 'notApplicable', 'ledger', 'verdict'],
+      properties: {
+        totalSites: { type: 'number' },
+        fixedByCommit: { type: 'number' },
+        alreadyCorrect: { type: 'number' },
+        stillBroken: { type: 'number' },
+        notApplicable: { type: 'number' },
+        ledger: { type: 'array', items: { type: 'object', properties: {
+          site: { type: 'string' }, disposition: { type: 'string' }, reason: { type: 'string' },
+        } } },
+        verdict: { type: 'string', description: 'is the two-file fix complete? state plainly' },
+      },
+    } }),
+
+  () => agent(`${GROUND}
+
+YOUR TASK — map the CHERRY-PICK CONFLICT SURFACE precisely.
+
+Commit 14e8a2fa (branch claude/the-ladder) is to be folded onto claude/the-composite @ aad6265e.
+Its parent is db6b505e, which IS already an ancestor of the composite. But the composite has since
+drifted at least one of the touched files.
+
+1. For each of the three paths touched by 14e8a2fa
+   (src/domain/worldPulse/npcLadderState.js, src/domain/townMap/ladderRead.js,
+    tests/domain/npcLadderFactionKey.test.js), run
+   \`git diff db6b505e..aad6265e -- <path>\` and report the drift verbatim.
+2. Identify precisely which hunks of 14e8a2fa will conflict and why.
+3. Find the commit(s) on the composite that introduced the drift
+   (\`git log db6b505e..aad6265e --oneline -- <path>\`) and report their subjects — this tells us
+   the INTENT of the drift, which the conflict resolution must preserve.
+4. State the correct merged form of the conflicting function in full, preserving BOTH the
+   composite's intent and the fix's intent. Do not write it to any file — report it as text.
+5. CRITICAL: verify whether the composite's drift changed the KEY STRING that factionKeyOf
+   produces relative to npcLadderState.ladderFactionKey. Both must produce byte-identical keys.
+   Read src/kernel/slugify.js and compare its output to the inline regex it replaced — are they
+   equivalent for all inputs, or is there an input class where they differ? This matters: a
+   silent write/read key drift is the exact bug class we are fixing.
+
+Report drift, conflict points, drift-intent, the merged form, and the slugify-equivalence verdict.`,
+    { label: 'census:conflict', phase: 'Census', schema: {
+      type: 'object',
+      required: ['drift', 'conflictHunks', 'driftCommits', 'mergedForm', 'slugifyEquivalent', 'slugifyNotes'],
+      properties: {
+        drift: { type: 'string', description: 'verbatim diffs per path' },
+        conflictHunks: { type: 'array', items: { type: 'string' } },
+        driftCommits: { type: 'array', items: { type: 'string' } },
+        mergedForm: { type: 'string', description: 'the correct resolved source text of the conflicting function(s)' },
+        slugifyEquivalent: { type: 'boolean' },
+        slugifyNotes: { type: 'string', description: 'any input class where slugify and the old inline regex diverge' },
+      },
+    } }),
+
+  () => agent(`${GROUND}
+
+YOUR TASK — audit the PIN TEST that 14e8a2fa adds, and the dormancy/byte-identity claim.
+
+1. Read the added test file from the commit:
+   \`cd ${WT} && git show 14e8a2fa:tests/domain/npcLadderFactionKey.test.js\`
+2. Assess it critically as a regression pin. Does it actually drive the REAL record shape (as
+   established by reading src/generators/power/rulingStructure.js), or does it hand-wave the shape?
+   Would it FAIL on the pre-fix code? Identify precisely which assertions are load-bearing.
+3. The commit message claims "Dormancy byte-identity holds (dark => factor 1.0 regardless of key
+   value)". Verify this claim against the composite's source: find the npcLadderEnabled flag
+   check and confirm that when the flag is dark, the faction key value cannot affect any emitted
+   state or golden output. Quote the guard.
+4. Check whether the test file's imports and helpers all resolve against the COMPOSITE tip (the
+   composite drifted; e.g. ladderRead.js now imports kernel/slugify.js). Would the test as written
+   run green on the composite after the source fix is applied? Flag anything that would need
+   adjusting.
+
+Report your assessment. Be skeptical — your job is to find what is wrong with the pin, not to
+bless it.`,
+    { label: 'census:pin-audit', phase: 'Census', schema: {
+      type: 'object',
+      required: ['pinDrivesRealShape', 'wouldFailPreFix', 'loadBearingAssertions', 'dormancyClaimVerified', 'dormancyGuardQuote', 'appliesCleanlyToComposite', 'problems'],
+      properties: {
+        pinDrivesRealShape: { type: 'boolean' },
+        wouldFailPreFix: { type: 'boolean' },
+        loadBearingAssertions: { type: 'array', items: { type: 'string' } },
+        dormancyClaimVerified: { type: 'boolean' },
+        dormancyGuardQuote: { type: 'string' },
+        appliesCleanlyToComposite: { type: 'boolean' },
+        problems: { type: 'array', items: { type: 'string' } },
+      },
+    } }),
+
+  () => agent(`${GROUND}
+
+YOUR TASK — determine the GATE and BUDGET consequences of folding this fix into the composite.
+
+Known program state: the composite's first-paint eager closure measures 1,040,998 bytes against a
+budget of 1,040,000 — already 998 B over, and that breach is OWNER-GATED (it blocks verify:dist
+and any push). Any fold that increases eager closure worsens a gated breach.
+
+1. Determine whether src/domain/worldPulse/npcLadderState.js and src/domain/townMap/ladderRead.js
+   are EAGER (in the first-paint closure) or LAZY leaves. Read the module comments, and find how
+   the repo measures the closure — look for a script (scripts/*.mjs), a test, or an npm script
+   mentioning first-paint / closure / budget. Report the exact command that measures it.
+   Do NOT run a build (that writes to the worktree) — just identify the command.
+2. Read package.json scripts and any CLAUDE.md / docs describing the gate commands. Report the
+   exact fast/quick/full gate commands this repo uses, and which focused test files cover
+   npcLadder, ladderRead, and rulingPowerCoup.
+3. Report whether adding a new tests/domain/*.test.js file trips any ratchet (max-lines, domain
+   strict typecheck, an inventory ratchet, a registration manifest). Search for ratchet/manifest
+   tests that enumerate files.
+4. Report whether the two source files are under a max-lines ceiling and how close to it they are
+   (the fix adds ~15 lines to npcLadderState.js and ~4 to ladderRead.js).
+
+Report exact commands and exact numbers. This determines the verification plan.`,
+    { label: 'census:gates', phase: 'Census', schema: {
+      type: 'object',
+      required: ['eagerOrLazy', 'closureCommand', 'gateCommands', 'focusedTestFiles', 'ratchetRisks', 'maxLinesHeadroom'],
+      properties: {
+        eagerOrLazy: { type: 'string', description: 'per file: eager or lazy, with evidence' },
+        closureCommand: { type: 'string' },
+        gateCommands: { type: 'object', properties: { fast: { type: 'string' }, quick: { type: 'string' }, full: { type: 'string' } } },
+        focusedTestFiles: { type: 'array', items: { type: 'string' } },
+        ratchetRisks: { type: 'array', items: { type: 'string' } },
+        maxLinesHeadroom: { type: 'string' },
+      },
+    } }),
+])
+
+phase('Synthesize')
+
+const [shape, behavior, doc] = repro
+const [consumers, conflict, pin, gates] = census
+
+const critic = await agent(`${GROUND}
+
+YOUR TASK — completeness critic over a recon bundle. Below are structured findings from six
+independent agents studying whether to fold commit 14e8a2fa onto claude/the-composite.
+
+RECORD SHAPE: ${JSON.stringify(shape)}
+
+BEHAVIOR REPRO: ${JSON.stringify(behavior)}
+
+DESIGN DOC: ${JSON.stringify(doc)}
+
+CONSUMER CENSUS: ${JSON.stringify(consumers)}
+
+CONFLICT SURFACE: ${JSON.stringify(conflict)}
+
+PIN AUDIT: ${JSON.stringify(pin)}
+
+GATES: ${JSON.stringify(gates)}
+
+Your job is to find what is MISSING or WRONG, not to summarize.
+- Which claims are asserted from reading rather than from executed evidence? Name them.
+- Do any two agents CONTRADICT each other? Quote both sides.
+- What lifecycle path of this state was not traced (create / read / persist / regenerate / undo /
+  migrate)? The ladder writes a mirror — was the persisted-mirror path considered? If a settlement
+  was already advanced with the buggy key and a mirror persisted under \`fac.unknown\`, does the
+  fix strand or corrupt that stored state? THIS IS THE MOST IMPORTANT QUESTION — investigate it
+  yourself in the source and report a real answer, not a caveat.
+- Is there any risk the fix CHANGES OUTPUT for an already-lit or already-persisted world?
+- What single check, if run, would most reduce remaining uncertainty?
+
+You may read source in ${WT} (read-only) to answer these yourself. Do so — do not merely list
+open questions you could have closed.`,
+  { label: 'critic:completeness', phase: 'Synthesize', effort: 'high', schema: {
+    type: 'object',
+    required: ['unexecutedClaims', 'contradictions', 'lifecycleGaps', 'persistedMirrorVerdict', 'outputChangeRisk', 'highestValueCheck', 'blockers'],
+    properties: {
+      unexecutedClaims: { type: 'array', items: { type: 'string' } },
+      contradictions: { type: 'array', items: { type: 'string' } },
+      lifecycleGaps: { type: 'array', items: { type: 'string' } },
+      persistedMirrorVerdict: { type: 'string', description: 'a real investigated answer about stored fac.unknown mirrors' },
+      outputChangeRisk: { type: 'string' },
+      highestValueCheck: { type: 'string' },
+      blockers: { type: 'array', items: { type: 'string' } },
+    },
+  } })
+
+return { shape, behavior, doc, consumers, conflict, pin, gates, critic }

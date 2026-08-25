@@ -33,8 +33,6 @@ import {
   activeDeployments,
   liveTradeWars,
   dispositionStandings,
-  REALM_CONTEST_RECORD_HELP,
-  REALM_CONTEST_RECORD_LABEL,
 } from '../../domain/display/warStatus.js';
 import { mobilizationStandings } from '../../domain/display/mobilizationStatus.js';
 import { occupationStandings } from '../../domain/display/occupationStatus.js';
@@ -44,14 +42,9 @@ import { hasPantheon } from './PantheonPanel.jsx';
 import LivingWorldGates from '../settlements/LivingWorldGates.jsx';
 import WhileYouWereAway from './WhileYouWereAway.jsx';
 import { PANTHEON_TUNING } from '../../domain/worldPulse/pantheon.js';
-import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, SP, sans } from '../theme.js';
+import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, R, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
-// V-10 THE CERTIFICATE — trust as a visible feature. STATIC within this already-
-// lazy dashboard chunk (the FP-R idiom: a lazy() would mint a preload entry and
-// tip the first-paint ratchet). @enforced-by tests/build/vendorPdfLazy.test.js
-import WorldCertificationPanel from '../settlement/WorldCertificationPanel.jsx';
 
 const SEASON_LABEL = { spring: 'Spring', summer: 'Summer', autumn: 'Autumn', fall: 'Autumn', winter: 'Winter' };
 
@@ -127,6 +120,7 @@ function Stat({ Icon, label, value, sub, subTitle, tone, delta, focal = false, v
       borderLeft: accent ? `3px solid ${accent}` : 'none',
       paddingLeft: accent ? SP.sm : (focal ? SP.md : 0),
       background: focal && accent ? CARD : undefined,
+      borderRadius: focal && accent ? R.md : undefined,
     }}>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         {Icon && <Icon size={12} />}{label}
@@ -215,6 +209,7 @@ function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
       display: 'grid', gap: SP.md,
       padding: SP.lg,
       border: `1px solid ${GOLD}`,
+      borderRadius: R.lg,
       background: CARD_ALT,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -238,7 +233,7 @@ function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
           aria-label={`Your realm's conflict band: ${previewTension.label} (unlock to read live)`}
           style={{
             display: 'grid', gap: 3,
-            padding: `${SP.sm}px ${SP.md}px`,
+            padding: `${SP.sm}px ${SP.md}px`, borderRadius: R.md,
             background: CARD, borderLeft: `3px solid ${previewTension.tone === 'crisis' ? RED : previewTension.tone === 'hot' ? AMBER_DEEP : GOLD}`,
           }}
         >
@@ -343,7 +338,7 @@ export default function RealmDashboard({
   // headcount-share here (no per-settlement strength on the dashboard); the DEPTH
   // reason half passes real land+naval strength. Descriptive-always; DM baptism (a
   // persisted canon label) is a separate store lane — omitted here by design.
-  const hegemony = hegemonyRead({ worldState, nameFor: (id) => nameById?.get(String(id)) || 'an unnamed seat' });
+  const hegemony = hegemonyRead({ worldState, nameFor: (id) => nameById?.get(String(id)) || String(id) });
   const topSphere = hegemony.spheres[0] || null;
 
   // One focal Conflict digest: the tension band is the headline, and the four
@@ -356,9 +351,7 @@ export default function RealmDashboard({
   if (occupations.length) conflictParts.push(`${occupations.length} occupied`);
   if (mobilizing.length) conflictParts.push(`${mobilizing.length} mobilizing${mobilizing.some(m => m.covert) ? ' (some covert)' : ''}`);
   if (weariest && weariest.warExhaustion >= 0.6) {
-    // Never a raw settlement id in a headline (C3 finding 12) — a missed name
-    // lookup degrades to an in-fiction generic, not a database key.
-    conflictParts.push(`${nameById?.get(String(weariest.id)) || 'a settlement'} war-weary`);
+    conflictParts.push(`${nameById?.get(String(weariest.id)) || weariest.id} war-weary`);
   }
   const conflictSub = conflictParts.length ? conflictParts.join(' · ') : 'No sieges, occupations, or mobilizations';
   const conflictTone = tension.tone === 'crisis' ? 'crisis'
@@ -414,7 +407,7 @@ export default function RealmDashboard({
         <Stat
           Icon={Flame}
           label="War-weariest"
-          value={weariest ? (nameById?.get(String(weariest.id)) || 'a settlement') : '–'}
+          value={weariest ? (nameById?.get(String(weariest.id)) || weariest.id) : '–'}
           sub={weariest ? warExhaustionBand(weariest.warExhaustion) : 'None war-weary'}
           tone={weariest && weariest.warExhaustion >= 0.6 ? 'hot' : undefined}
         />
@@ -451,16 +444,15 @@ export default function RealmDashboard({
             ? tradeWars.slice(0, 2).map(t => t.commodityLabel).filter(Boolean).join(' · ')
             : 'No supplier has been displaced'}
         />
-        {/* The realm contest record (dispositionStandings). Names the top scorer
-            by net resolved-contest W/L. Dormant ⇒ "–". */}
+        {/* The cross-settlement aggressor record (dispositionStandings). Names the
+            top scorer by net win/loss. Dormant ⇒ "–". */}
         <Stat
           Icon={Flame}
-          label={REALM_CONTEST_RECORD_LABEL}
-          value={topAggressor ? (nameById?.get(String(topAggressor.id)) || 'a settlement') : '–'}
+          label="Top aggressor"
+          value={topAggressor ? (nameById?.get(String(topAggressor.id)) || topAggressor.id) : '–'}
           sub={topAggressor
             ? `${topAggressor.wins}W / ${topAggressor.losses}L`
-            : 'No resolved contests yet'}
-          subTitle={REALM_CONTEST_RECORD_HELP}
+            : 'No win record yet'}
         />
         {/* ambition-fit-2: the unnamed-empire count. Dormant ⇒ "–", same null idiom
             as the cluster's other reads. */}
@@ -469,7 +461,7 @@ export default function RealmDashboard({
           label="Spheres of influence"
           value={hegemony.spheres.length ? hegemony.spheres.length : '–'}
           sub={topSphere ? topSphere.brief : 'No hegemony has formed'}
-          subTitle="A center holding three or more tributary, compelled, or puppet ties forms a sphere, an unnamed empire the topology exhibits. Its name is the DM's to give."
+          subTitle="A center holding three or more tributary, compelled, or puppet ties forms a sphere — an unnamed empire the topology exhibits. Its name is the DM's to give."
         />
       </div>
 
@@ -483,18 +475,12 @@ export default function RealmDashboard({
           </div>
           {hegemony.spheres.map((s) => (
             <div key={String(s.centerId)} style={{ color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>
-              {/* THE NEWS ADDRESS LAW: the sphere's center settlement, LINKED. */}
-              <RealmEntityLink settlementSaveId={s.centerId} label={s.label} style={{ fontWeight: 700, color: INK }} />
-              {': '}{s.brief} <span style={{ color: SECOND }}>{s.strain.phrase}.</span>
+              <span style={{ fontWeight: 700, color: INK }}>{s.label}</span>
+              {' — '}{s.brief} <span style={{ color: SECOND }}>{s.strain.phrase}.</span>
             </div>
           ))}
         </div>
       )}
-
-      {/* V-10 THE CERTIFICATE — the world's soak-endurance badge. Inert-honest
-          until the owner's soak writes the first manifest band (reads PENDING);
-          claims-parity holds by construction (buildWorldCertification). */}
-      <WorldCertificationPanel presetId={campaign?.worldState?.simulationRules?.presetId ?? null} />
     </div>
   );
 }

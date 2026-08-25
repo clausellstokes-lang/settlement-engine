@@ -1,0 +1,66 @@
+export const meta = {
+  name: 'pricing-compare-opus-fable',
+  description: 'Pricing surface three-way comparison — Opus surveys, Fable verification, as-shipped ruling respected',
+  phases: [
+    { title: 'Survey', detail: 'two Opus readers', model: 'opus' },
+    { title: 'Verify', detail: 'one Fable verifier', model: 'fable' },
+  ],
+}
+
+const OURS = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/amazing-euclid-6b4519'
+const THEIRS = '/Users/cstokes/Desktop/settlement-generator/settlement-engine'
+
+const SURVEY_SCHEMA = {
+  type: 'object',
+  required: ['topic', 'structure', 'deltas', 'notable'],
+  properties: {
+    topic: { type: 'string' },
+    structure: { type: 'string', description: 'top-to-bottom outline with file:line anchors; placements and gates' },
+    deltas: { type: 'array', items: { type: 'object', required: ['what', 'ours', 'alt', 'assessment'], properties: { what: { type: 'string' }, ours: { type: 'string' }, alt: { type: 'string' }, assessment: { type: 'string' } } } },
+    notable: { type: 'string' },
+  },
+}
+const VERIFY_SCHEMA = {
+  type: 'object',
+  required: ['surface', 'verified_deltas', 'corrections', 'faith_seam', 'adoption_summary'],
+  properties: {
+    surface: { type: 'string' },
+    verified_deltas: { type: 'array', items: { type: 'object', required: ['what', 'verdict', 'evidence', 'disposition'], properties: { what: { type: 'string' }, verdict: { type: 'string', enum: ['CONFIRMED', 'CORRECTED', 'REFUTED'] }, evidence: { type: 'string' }, disposition: { type: 'string' } } } },
+    corrections: { type: 'string' },
+    faith_seam: { type: 'string' },
+    adoption_summary: { type: 'string' },
+  },
+}
+
+const COMMON = `SettlementForge three-lineage PRICING analysis. READ-ONLY — do not modify any file.
+Trees: OURS (live floor) = ${OURS}. EXPORT = ${THEIRS}. MASTER (GitHub, design reference) = \`git show master:<path>\` inside OURS.
+Byte-identity facts (pre-computed): PricingPage.jsx, pricing/FounderTile.jsx, config/pricing.js are IDENTICAL between master and export. Master diverges from export on exactly: pricing/PricingMomentCard.jsx, PurchaseModal.jsx, BuyThisDossier.jsx — on those, master is the ratified design reference.
+STANDING OWNER RULING (2026-07-10 reconciliation, decision 'pricing as-shipped'): OUR pricing model/copy ships as-is. So reference deltas here are PROPOSALS for the owner, not owed parity — flag them as owner-decision unless they are pure a11y/layout polish with zero pricing-semantics impact.
+Focus: LAYOUT, DESIGN, BUTTON/FEATURE PLACEMENT, and the pricing-moment choreography (when/where upsell cards appear, what they say structurally — not the prices themselves). Cite file:line from live reads. Note also W5-relevant context: the dead $2.99 landing CTA was a ledger LIVE DEFECT (PL row) — check whether it is fixed on OUR floor today.`
+
+phase('Survey')
+const surveys = await parallel([
+  () => agent(`${COMMON}
+
+TOPIC: OUR pricing surface. Trace src/components/PricingPage.jsx (tier cards, credit packs, FounderTile, redeem block, simulation-copy flag), PurchaseModal.jsx (open triggers, pack list, checkout handoff, reconcile spine mentions), pricing/PricingMomentCard.jsx (which moments exist, where they mount — App shell? dossier? — and their triggers via triggerPricingMoment call sites), BuyThisDossier.jsx (placements: dossier band? detail header? home?), AnonTierTeaser.jsx, SingleDossierSuccessPage.jsx, the redeem-code UI locations, and HomeHero's $2.99 side-door status TODAY. Full visual stack + placements + gates.`, { label: 'survey:pricing:ours', phase: 'Survey', model: 'opus', schema: SURVEY_SCHEMA }),
+  () => agent(`${COMMON}
+
+TOPIC: the reference pricing surface — EXPORT baseline, MASTER for the three diverging files (pricing/PricingMomentCard.jsx, PurchaseModal.jsx, BuyThisDossier.jsx: git show master:<path>, DIFF against export, report master-vs-export deltas separately). Trace ${THEIRS}/src/components/PricingPage.jsx, PurchaseModal.jsx, pricing/PricingMomentCard.jsx (moment vocabulary + mount points + trigger sites), BuyThisDossier.jsx (durable-rights branch, size variants, placements), AnonTierTeaser.jsx, SingleDossierSuccessPage.jsx, redeem placements. Full visual stack + placements + gates.`, { label: 'survey:pricing:ref', phase: 'Survey', model: 'opus', schema: SURVEY_SCHEMA }),
+])
+
+phase('Verify')
+const [ours, ref] = surveys.filter(Boolean)
+const verified = await agent(`${COMMON}
+
+You are the FABLE VERIFIER for the PRICING surface. Two Opus surveys below. ADVERSARIAL VERIFICATION, not summary:
+1. Re-check at minimum 8 load-bearing claims per survey yourself (open cited file at cited line, quote 1 line each); refute/correct anything wrong.
+2. Grep-verify every trigger-site and placement claim (triggerPricingMoment call sites, BuyThisDossier importers).
+3. Verify the $2.99 landing side-door status on OUR floor yourself.
+4. Apply the 'pricing as-shipped' ruling to dispositions: semantics-touching deltas = owner-decision; pure layout/a11y polish = adoptable.
+5. Produce the verified delta table + a dense owner-facing adoption summary.
+
+SURVEY A (ours): ${JSON.stringify(ours)}
+
+SURVEY B (reference): ${JSON.stringify(ref)}`, { label: 'verify:pricing', phase: 'Verify', model: 'fable', schema: VERIFY_SCHEMA })
+
+return { verified }

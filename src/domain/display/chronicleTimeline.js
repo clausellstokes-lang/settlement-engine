@@ -20,7 +20,6 @@
  */
 
 import { compareCausalState, deriveCausalState } from '../causalState.js';
-import { newsReaderSummary } from './newsBody.js';
 
 /** @param {any} v @returns {number} */
 const tickOf = (v) => (Number.isFinite(v?.tick) ? Number(v.tick) : 0);
@@ -70,7 +69,7 @@ export function chronicleTimeline({ chronicles, pulseHistory } = /** @type {any}
       s.headlines.push({
         id: o.id,
         headline: o.headline || 'World pulse outcome',
-        summary: newsReaderSummary(o),
+        summary: o.summary || '',
         settlementIds,
         severity: Number.isFinite(o.severity) ? o.severity : null,
       });

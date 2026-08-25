@@ -1,0 +1,58 @@
+export const meta = {
+  name: 'w-r2-fix-batch-1',
+  description: 'Round-2 fix waves batch 1: SEAMS + INTENT + DOCS — three Opus implementers in isolated worktrees',
+  phases: [
+    { title: 'Batch-1', detail: 'W-R2-SEAMS (engine kernels) ∥ W-R2-INTENT (store/composer) ∥ W-R2-DOCS (evergreen docs + pins)', model: 'opus' },
+  ],
+}
+
+const REPORT_SCHEMA = {
+  type: 'object',
+  required: ['wave', 'branch', 'baseHash', 'commits', 'dispositions', 'gateNumbers', 'report'],
+  properties: {
+    wave: { type: 'string' },
+    branch: { type: 'string' },
+    baseHash: { type: 'string', description: 'the hash you actually built from' },
+    commits: { type: 'array', items: { type: 'string' }, description: 'hash + one-line subject per commit on your branch' },
+    dispositions: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['id', 'status', 'evidence'],
+        properties: {
+          id: { type: 'string' },
+          status: { type: 'string', enum: ['fixed', 'deferred', 'excluded', 'stopped_golden_shifting'] },
+          evidence: { type: 'string', description: 'what proves it: test name + result, or the deferral record location, or the golden-shift evidence' },
+        },
+      },
+    },
+    testsAdded: { type: 'number' },
+    gateNumbers: { type: 'string', description: 'full-gate result verbatim: files/tests passed, verify:dist, exit code' },
+    byteEvidence: { type: 'string', description: 'dormancy/lit golden results + first-paint budget check result' },
+    judgments: { type: 'array', items: { type: 'string' }, description: 'JUDGMENT: chose X over Y because Z — vetoable' },
+    deferrals: { type: 'array', items: { type: 'string' } },
+    report: { type: 'string', description: 'the standalone final report per the protocol; complete sentences' },
+  },
+}
+
+const BASE = '853bc923'
+const WAVES = [
+  { key: 'SEAMS', brief: 'docs/briefs/W_R2_SEAMS_BRIEF.md', branch: 'claude/w-r2-seams' },
+  { key: 'INTENT', brief: 'docs/briefs/W_R2_INTENT_BRIEF.md', branch: 'claude/w-r2-intent' },
+  { key: 'DOCS', brief: 'docs/briefs/W_R2_DOCS_BRIEF.md', branch: 'claude/w-r2-docs' },
+]
+
+function prompt(w) {
+  return 'You are the W-R2-' + w.key + ' implementer for SettlementForge (round-2 fix program). You are working in YOUR OWN isolated git worktree of /Users/cstokes/Desktop/settlement-engine.\n\n' +
+    'FIRST: read docs/briefs/W_R2_COMMON_PROTOCOL.md (the binding protocol — verify-first, forbidden operations, constitution, gates, report format). THEN read your wave brief: ' + w.brief + '. Execute the wave COMPLETELY.\n\n' +
+    'Expected base: ' + BASE + ' on the review-fixes-2026-07-08 lineage — verify per the protocol before any edit, then create your branch ' + w.branch + ' from it. Work only inside your worktree. Commit your work on your branch (never merge to review-fixes). Run the full gate before your final commit and quote its numbers.\n\n' +
+    'Your structured output is the managers §0.3 review input — fill every field honestly; failures verbatim, never smoothed.'
+}
+
+log('Dispatching 3 Opus implementers off base ' + BASE)
+const results = await parallel(WAVES.map(w => () =>
+  agent(prompt(w), { label: 'impl:' + w.key, phase: 'Batch-1', schema: REPORT_SCHEMA, model: 'opus', isolation: 'worktree' })
+))
+const landed = results.filter(Boolean)
+log('Batch 1 complete: ' + landed.length + '/3 implementers returned')
+return { waves: landed, missing: WAVES.filter((w, i) => !results[i]).map(w => w.key) }

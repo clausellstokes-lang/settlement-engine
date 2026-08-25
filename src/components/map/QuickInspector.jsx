@@ -31,10 +31,9 @@
  */
 
 import { useMemo } from 'react';
-import { FS, SLATE, swatch, EMPTY_VALUE } from '../theme.js';
+import { FS, VIOLET, swatch, EMPTY_VALUE } from '../theme.js';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
-import { settlementSizeLabel } from '../../domain/display/humanizeEngineTokens.js';
 
 const GOLD = swatch['#C9A24C'];
 const INK = swatch['#1B1408'];
@@ -51,17 +50,17 @@ export default function QuickInspector() {
   const saves = useStore(s => s.savedSettlements);
 
   const save = useMemo(() => {
-    if (hoveredId == null) return null;
-    return (saves || []).find(s => String(s.id) === String(hoveredId)) || null;
+    if (!hoveredId) return null;
+    return (saves || []).find(s => s.id === hoveredId) || null;
   }, [hoveredId, saves]);
 
-  if (hoveredId == null) return null;
-  if (selectedId != null) return null;  // click-selection takes the slot
+  if (!hoveredId) return null;
+  if (selectedId) return null;  // click-selection takes the slot
   if (!save) return null;
 
   const s = save.settlement || save;
   const name = s.name || save.name || 'Unnamed';
-  const size = settlementSizeLabel(s.tier || save.tier, EMPTY_VALUE);
+  const tier = s.tier || save.tier || EMPTY_VALUE;
   const pop = formatCount(s.population || 0);
   const pressure = s.pressureSentence || '';
   const topHook = (() => {
@@ -88,6 +87,7 @@ export default function QuickInspector() {
         background: PARCH,
         border: `1px solid ${BORDER}`,
         borderLeft: `3px solid ${GOLD}`,
+        borderRadius: 5,
         boxShadow: '0 4px 14px rgba(0,0,0,0.20)',
         fontFamily: sans,
         pointerEvents: 'none',  // never blocks clicks on the map underneath
@@ -115,7 +115,7 @@ export default function QuickInspector() {
       <div style={{
         fontSize: FS.xxs, color: MUTED, marginTop: 1,
       }}>
-        {size} · {pop} pop
+        {String(tier).toUpperCase()} · {pop} pop
       </div>
       {pressure && (
         <div style={{
@@ -131,12 +131,12 @@ export default function QuickInspector() {
       )}
       {topHook && (
         <div style={{
-          fontSize: FS.xs, color: SLATE, marginTop: 6,
+          fontSize: FS.xs, color: VIOLET, marginTop: 6,
           display: 'flex', gap: 5, alignItems: 'baseline',
         }}>
           <span style={{
             fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.08em',
-            textTransform: 'uppercase', color: SLATE,
+            textTransform: 'uppercase', color: VIOLET,
           }}>
             Hook
           </span>

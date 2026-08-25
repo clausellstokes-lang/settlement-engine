@@ -10,14 +10,12 @@
  * it to tear down the dead bridge, mount a fresh iframe (keyed on the same value
  * in WorldMapStage), and re-arm the watchdog.
  *
- * Side-effect hook: returns only the runtime-resolved iframe URL. All store
- * reads/writes are passed in as stable setters so the hook stays a wiring
- * layer; mapRuntimeConfig remains the sole URL/origin authority.
+ * Side-effect hook: returns nothing. All store reads/writes are passed in as
+ * stable setters so the hook stays a pure wiring layer.
  */
 
 import { useEffect } from 'react';
 import { createBridgeSingleton } from '../lib/mapBridge.js';
-import { readMapRuntimeConfig } from '../lib/mapRuntimeConfig.js';
 import { registerSpatialCaptureBridge, unregisterSpatialCaptureBridge } from '../lib/spatialCaptureRegistry.js';
 
 const LOAD_TIMEOUT_MS = 15000;
@@ -25,55 +23,21 @@ const LOAD_TIMEOUT_MS = 15000;
 // Generic reject copy for a placement that arrives via the FMG bridge and is
 // refused by the store's authoritative gate. Mirrors WorldMap.handleDrop's UI
 // copy (minus the settlement name, which the bridge event doesn't carry).
-// Exported: KeyboardPlacementControl speaks the SAME refusal copy through the
-// palette's live region, so the gate never has two spellings (E-I).
-export const PLACEMENT_REJECT_COPY = {
+const PLACEMENT_REJECT_COPY = {
   'no-campaign': 'Select a campaign before placing settlements on the map.',
   'not-canon':   'Only canon settlements can be placed. Canonize it first.',
   'duplicate':   'That settlement is already on this map.',
 };
 
 export function useMapBridge({
-  enabled = true,
   iframeRef, bridgeRef, reloadKey,
   setMapReady, setMapLoading, setMapError, setBridgeReady,
   setMapSnapshot, setMapTemplates, setSelectedBurgId,
   addPlacement, removePlacementLocal, clearAllPlacementsLocal,
   showToast,
 }) {
-  const {
-    frameUrl,
-    frameOrigin: targetOrigin,
-    configurationError,
-  } = readMapRuntimeConfig();
-
   useEffect(() => {
-    if (!enabled) return undefined;
-    if (!targetOrigin) {
-      setMapReady(false);
-      setBridgeReady(false);
-      setMapLoading(false);
-      setMapError(configurationError || 'The terrain engine is not securely configured.');
-      return undefined;
-    }
-
-    setMapReady(false);
-    setBridgeReady(false);
-    setMapError(null);
-    setMapLoading(true);
-    let bridge;
-    try {
-      bridge = createBridgeSingleton(
-        () => iframeRef.current,
-        { targetOrigin },
-      );
-    } catch (error) {
-      setMapReady(false);
-      setBridgeReady(false);
-      setMapLoading(false);
-      setMapError(error instanceof Error ? error.message : String(error));
-      return undefined;
-    }
+    const bridge = createBridgeSingleton(() => iframeRef.current);
     bridgeRef.current = bridge;
     // Expose the live bridge to the (lazy) spatial-canonize path, which lives in a
     // different subtree than the World Map and so can't receive it via props.
@@ -139,7 +103,5 @@ export function useMapBridge({
       bridgeRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enabled, reloadKey, frameUrl, targetOrigin, configurationError]);
-
-  return frameUrl;
+  }, [reloadKey]);
 }

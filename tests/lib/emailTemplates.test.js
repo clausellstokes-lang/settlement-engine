@@ -31,12 +31,10 @@ const ALL_KEYS = [
   'credit_low',
   'founder_thank_you',
   'cap_warning',
-  'retention_warning',
-  'ops_error_alert',
 ];
 
 describe('Tier 8.5 — TEMPLATES inventory', () => {
-  it('ships every lifecycle template (keys parity)', () => {
+  it('ships all six lifecycle templates', () => {
     expect(listTemplateKeys().sort()).toEqual([...ALL_KEYS].sort());
   });
 

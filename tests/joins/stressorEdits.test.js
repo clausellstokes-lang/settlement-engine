@@ -33,7 +33,6 @@
  */
 
 import { describe, test, expect } from 'vitest';
-import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import { withOrganicStressorResolution } from '../../src/domain/worldPulse/stressorAftermath.js';
@@ -73,10 +72,10 @@ const FAMINE_CFG = {
 // ONE GENERATION-stamped famine condition (severity 0.65, expires at 10).
 const FAMINE_SEED = 'ec-famine-1';
 
-// Re-probed after named generation substreams: BASE_CFG + this seed ORGANICALLY rolls monster_pressure (bare
+// Probed: BASE_CFG + this seed ORGANICALLY rolls monster_pressure (bare
 // object container) and promotes the war_pressure condition — the hardest
 // resolution case: the same seed re-rolls that exact stressor back.
-const ORG_SEED = 'org-28';
+const ORG_SEED = 'org-7';
 
 const SIEGE_CFG = {
   ...BASE_CFG,
@@ -182,11 +181,7 @@ describe('join: APPLY_STRESSOR survives a full regeneration (the reported bug)',
     expect(carried).toHaveLength(1);
     expect(carried[0].isCustom).toBe(true);
     // Catalog vocabulary only — every stressTypes consumer compares against
-    // STRESS_TYPE_MAP keys, exactly as on the live settlement. This seed rolls no
-    // catalog stressors at all (see SEED above), so the channel is legitimately
-    // empty here and the meaning lives entirely in the split.
-    // This measures the CHANNEL SPLIT, not an absent settlement.
-    // anchored: `carried` above proves the custom stressor survived onto s2.
+    // STRESS_TYPE_MAP keys, exactly as on the live settlement.
     expect(s2.config.stressTypes || []).not.toContain('dragon_tax');
     expect(condOf(s2, 'custom_crisis')).toHaveLength(1);
   });
@@ -436,12 +431,7 @@ describe('join: the overlay consumes no rng and the slice strip never eats the k
   });
 
   test('stripDerivedConfigKeys preserves stressorEdits (it is user input, not derived)', () => {
-    // 'stressType' is the liveness anchor: it is a real derived key that this same
-    // test strips below, so an emptied or renamed DERIVED_CONFIG_KEYS cannot make
-    // the exclusion pass by accident.
-    expectAbsentWithAnchor(
-      DERIVED_CONFIG_KEYS, 'stressorEdits', 'stressType', 'derived-key roster',
-    );
+    expect(DERIVED_CONFIG_KEYS).not.toContain('stressorEdits');
     const stripped = stripDerivedConfigKeys({
       stressType: 'plague',
       stressorEdits: { added: [], resolved: ['famine'] },

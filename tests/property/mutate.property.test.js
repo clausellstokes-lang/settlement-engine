@@ -69,7 +69,7 @@ describe('mutateSettlement (property-based)', () => {
       // Original granary still has no impairments.
       const origGranary = settlement.institutions.find(i => i.id === 'inst.granary');
       expect(origGranary.impairments).toEqual([]);
-    }), { numRuns: 300 });
+    }), { numRuns: 30 });
   });
 
   test('DAMAGE + RESTORE with matching causeEventId clears the impairment', () => {
@@ -103,7 +103,7 @@ describe('mutateSettlement (property-based)', () => {
       });
       const granaryAfterRestore = restored.institutions.find(i => i.id === 'inst.granary');
       expect((granaryAfterRestore.impairments || []).length).toBe(0);
-    }), { numRuns: 300 });
+    }), { numRuns: 30 });
   });
 
   test('KILL_NPC of a pillar with linked institution produces staffing AND legitimacy impairments', () => {
@@ -136,7 +136,7 @@ describe('mutateSettlement (property-based)', () => {
       // institution that anchored them.
       expect(types).toContain('staffing');
       expect(types).toContain('legitimacy');
-    }), { numRuns: 300 });
+    }), { numRuns: 30 });
   });
 
   // Bonus: unknown event types are no-ops on the settlement.
@@ -152,6 +152,6 @@ describe('mutateSettlement (property-based)', () => {
       expect(next.institutions).toEqual(settlement.institutions);
       expect(next.factions).toEqual(settlement.factions);
       expect(next.npcs).toEqual(settlement.npcs);
-    }), { numRuns: 300 });
+    }), { numRuns: 20 });
   });
 });

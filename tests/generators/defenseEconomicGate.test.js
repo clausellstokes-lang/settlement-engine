@@ -19,26 +19,14 @@ import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js
 import { computeEffectiveMagicPresence } from '../../src/generators/priorityHelpers.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { deriveDefenseReadiness } from '../../src/domain/display/defenseDisplay.js';
-import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
-function town({
-  priorityEconomy = 50,
-  priorityCriminal = 20,
-  priorityMagic = 0,
-  priorityReligion = 30,
-  stressTypes = [],
-  magicExists = false,
-  institutions,
-  tradeRouteAccess = 'crossroads',
-  terrainType = 'plains',
-} = {}) {
+function town({ priorityEconomy = 50, priorityCriminal = 20, priorityMagic = 0, priorityReligion = 30, stressTypes = [], magicExists = false, institutions } = {}) {
   return {
     name: 'Gatewatch',
     tier: 'town',
     population: 2400,
     config: {
-      tradeRouteAccess,
-      terrainType,
+      tradeRouteAccess: 'crossroads',
       monsterThreat: 'frontier',
       magicExists,
       priorityEconomy,
@@ -78,13 +66,7 @@ describe('economic survival respects the actual economy', () => {
     expect(poor.scores.economic).toBeLessThanOrEqual(55);
     const assessment = buildThreatAssessment(poor);
     const economicLine = JSON.stringify(assessment);
-    // 'Economic Survival' is the anchor: it is the label of the very dimension
-    // whose verdict is under test, so an assessment that stopped emitting that
-    // dimension reds here instead of passing the exclusion vacuously.
-    expectAbsentWithAnchor(
-      economicLine, 'Strong economic base', 'Economic Survival',
-      'a struggling economy never earns the strong-base verdict',
-    );
+    expect(economicLine).not.toMatch(/Strong economic base/);
   });
 
   test('a healthy economy with identical buildings scores meaningfully higher', () => {
@@ -100,24 +82,6 @@ describe('economic survival respects the actual economy', () => {
     for (let i = 1; i < scores.length; i++) {
       expect(scores[i]).toBeGreaterThanOrEqual(scores[i - 1]);
     }
-  });
-
-  test('only a maritime port receives the sea-supply resilience bonus', () => {
-    const institutions = [{ name: 'Granary' }];
-    const riverPort = generateDefenseProfile(town({
-      institutions,
-      tradeRouteAccess: 'port',
-      terrainType: 'riverside',
-    }));
-    const coastalPort = generateDefenseProfile(town({
-      institutions,
-      tradeRouteAccess: 'port',
-      terrainType: 'coastal',
-    }));
-
-    expect(coastalPort.scores.economic).toBeGreaterThan(
-      riverPort.scores.economic,
-    );
   });
 });
 

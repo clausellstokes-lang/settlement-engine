@@ -1,0 +1,58 @@
+export const meta = {
+  name: 'disabled-guards-and-census-ratchet-down',
+  description: 'The test census froze four ENFORCEMENT WALKER rows, which turns guards off rather than recording debt. Move that debt to where it belongs, and bank the five entries that are genuinely fixed.',
+  phases: [
+    { title: 'Guards', detail: 'four walker rows that are holes, not debt' },
+    { title: 'Verify', detail: 'prove a NEW violation reds again' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE. Build tree ${TREE} (branch claude/composite-r4). **Re-read HEAD yourself; briefs here have pinned stale HEADs three times.** Hard-gate every state-mutating compound with the \`cd\` FIRST.
+
+⭐ \`sh scripts/gate-mutex.sh --wait && sh scripts/gate-tail.sh <cmd>\` — ONE \`&&\` chain. ⛔ NEVER read an exit code through a pipe (7 recorded instances, twice by the chair).
+⚠ EVERY figure in an INTEGRITY-COUNTED \`git archive\` of a committed sha. ⚠⚠ \`edgeSharedBundleReproducibility\`, \`committedSecretsScan\` and \`sovereigntyLightingContract\` **shell out to git** — the archive must be \`git init\`ed and committed or those three lie. Disk ~9 GiB; one archive at a time.
+⛔ **AN OWNER-STARTED SESSION HOLDS FOUR DIRTY FILES**: \`src/domain/worldPulse/{commercialReasons,pactProposals}.js\`, \`src/lib/spatialUsage.js\`, \`tests/lib/spatialUsage.test.js\`. **DO NOT TOUCH, STAGE OR CLEAN THEM.** Explicit pathspecs; verify the staged set BY NAME AND COUNT before every commit — a \`git add\` aborts ATOMICALLY on one bad pathspec.
+
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE.`
+
+phase('Guards')
+const guards = await agent(LAWS + `
+
+YOU ARE FIXING A HOLE THE CHAIR CREATED THIS MORNING. Read this framing before touching anything, because the whole task turns on it.
+
+⭐⭐ **A FAILING TEST IS DEBT. A FAILING WALKER IS A DISABLED GUARD. THEY MUST NEVER BE FROZEN BY THE SAME MECHANISM.**
+The step-12 per-test ratchet (\`scripts/.test-ratchet-baseline.json\`, 49 entries frozen at \`c658fb44\`) did exactly that. **Four of its entries are rows of ENFORCEMENT WALKERS** — \`tests/lint/negativeAssertionAnchor.walker.test.js\` and \`tests/lint/seedLoopTotality.walker.test.js\` — including *"no NEW un-anchored negative assertion"* and *"the four generation-facing trees stay at EXACT zero"*. Recorded causes: 78 un-anchored negative assertions and 8 bare seed loops already present.
+**CONSEQUENCE: a NEW violation does not redden the gate, because the failing row is already tolerated.** The hazard census named this "the worst kind of document, one that looks solved" — a class recorded as SHIPPED machinery whose enforcer is baselined red. **Verify that consequence yourself by EXECUTION before you fix it**: plant a fresh un-anchored negative assertion in a generation-facing test tree and confirm \`npm run test:ratchet\` stays GREEN. If it reds, my premise is wrong and you should STOP and say so.
+
+**THE CURE — AND THE DESIGN CALL IS YOURS TO MAKE AND RECORD VETOABLY.** These walkers already have their own shrink-only inventory mechanism; the pre-existing 78 and 8 are legitimate debt that has to live SOMEWHERE. The framing that should guide you: **debt belongs in the walker's OWN baseline, where it is shrink-only AND where a NEW violation still reds. It does not belong in the test census, where the whole row is tolerated wholesale.** Decide the shape — move the counts into the walkers' own frozen inventories, split the assertions so the "no NEW" arm can be green while the "total is zero" arm carries the debt, or something better you can defend — then **state which you chose, why, and what you rejected.**
+⛔ Do NOT simply delete the four rows and leave the walkers red at the gate — that trades a hidden hole for a loud one and blocks the chain.
+⛔ Do NOT burn down the 78 and 8 in this lane. That is a separate wave. **Inventory them, do not fix them.**
+
+**THE ACCEPTANCE TEST IS NON-NEGOTIABLE: after your change, a NEWLY PLANTED violation must RED, and the pre-existing debt must stay green.** Prove both by execution — plant, run, restore \`cmp\`-clean.
+
+**SECOND, CHEAPER TASK — BANK THE WINS.** The determinism lane measured that **11 of the 49 baselined entries PASS** in a clean archive. Six are artifacts that prove nothing (3× \`edgeSharedBundleReproducibility\`, 3× \`ai*Bundle.freshness\` — the dirty-tree/built-artifact class, which can only fail in a dirty tree; **leave those frozen and say why**). **The other five look like genuinely landed repairs and are real ratchet-down candidates**: \`layerBoundaries\`, 2× \`domainGeneratorsBoundary\`, \`userRouteIdentityLeaf\`, \`mapOverlayTransformContract\`. **Re-verify each yourself in a clean archive at HEAD before removing it** — \`--update\` is REMOVE-ONLY by design, so a removal you cannot reproduce is a silent widening.
+
+Append a ledger row in \`docs/FABLE_VALIDATION_QUEUE.md\` at the LIVE tail, re-derived immediately before applying. Commit body carries \`⏳ OPUS-ERA — FABLE SURVEY OWED\`.
+
+RETURN JSON.`, { label: 'guards:walker-rows', phase: 'Guards', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, premiseConfirmedByPlant: { type: 'string' }, designChosen: { type: 'string' }, designRejected: { type: 'string' }, newViolationRedsNow: { type: 'string' }, preExistingDebtStillGreen: { type: 'string' }, debtInventory: { type: 'string' }, censusRemoved: { type: 'array', items: { type: 'string' } }, censusKeptWithReason: { type: 'array', items: { type: 'string' } }, commits: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Verify')
+const verdict = await agent(LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER. Default posture: WRONG until executed evidence. REFUTE. READ-ONLY in the shared tree; mutants in throwaway archives. You hold the gate slot alone.
+
+Lane reported: ` + JSON.stringify(guards || {}).slice(0, 8000) + `
+
+**THE ONE QUESTION THAT MATTERS: is the guard actually back on?**
+1. **Plant a fresh un-anchored negative assertion, and separately a bare seed loop, in a generation-facing test tree — your own plants, not the lane's — and confirm each REDS.** If either stays green the fix is theatre and this is a REJECT.
+2. **Confirm the pre-existing debt did not get burned down or silently reduced** — the lane was told to inventory it, not fix it. Compare the 78 / 8 counts against HEAD's parent.
+3. **Confirm the five removed census entries genuinely pass** in your own integrity-counted archive (git-init'ed, since three tests shell out to git). A removal you cannot reproduce is a silent widening of the ratchet.
+4. **Confirm the six artifact entries were KEPT** — they can only fail in a dirty tree, so removing them would be a false win.
+5. Run \`npm run check\` stepwise, status captured immediately, and report the first failing step by name or that all 16 exit 0.
+6. Diff every baseline against the round's parent and REJECT anything that grew without a stated legitimate cause.
+
+RETURN structured JSON only.`, { label: 'guards:verify', phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, ownPlantsRed: { type: 'string' }, debtUnchanged: { type: 'boolean' }, removalsReproduced: { type: 'string' }, artifactsKept: { type: 'boolean' }, checkFirstFailingStep: { type: 'string' }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+return { guards, verdict }

@@ -28,7 +28,7 @@ function Quote(q) {
       <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,minWidth:0}}>{q.label}</span>
       <span style={{fontSize:FS.sm,color:swatch.inkMag2}}>{q.priced}</span>
       {q.tag !== 'steady' && (
-        <span style={{fontSize:FS.micro,fontWeight:800,color,background:`${color}15`,padding:'0 5px',textTransform:'uppercase',letterSpacing:'0.05em'}}>{q.tag}</span>
+        <span style={{fontSize:FS.micro,fontWeight:800,color,background:`${color}15`,borderRadius:3,padding:'0 5px',textTransform:'uppercase',letterSpacing:'0.05em'}}>{q.tag}</span>
       )}
     </div>
   );
@@ -64,7 +64,7 @@ export default function MarketPricesSection({ prices }) {
         )}
       </div>
       <p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'8px 0 0',lineHeight:1.4}}>
-        Quoted in local coin: a market-crier&rsquo;s coarse reckoning off the founding trade profile and the live scarcity of the roads, not a fixed rate.
+        Quoted in local coin — a market-crier&rsquo;s coarse reckoning off the founding trade profile and the live scarcity of the roads, not a fixed rate.
       </p>
     </Section>
   );

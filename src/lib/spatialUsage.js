@@ -95,13 +95,6 @@ function simConfig(rules) {
     travel_mode: enumStr(r.travelMode),
     migration_mode: enumStr(r.migrationMode),
     intensity: enumStr(r.intensity),
-    // MG-2: the realm's arcane stance. It rides here as an ENUM rather than as a
-    // TRACKED_FLAGS member, because `realmMagicDefault` is a string key and that
-    // list is filtered on `=== true` — adding the name there would emit nothing
-    // at all while looking measured, which is worse than being absent. Undefined
-    // for every realm built before the question existed, and for every magical
-    // one, so the reading is honestly "how many worlds chose mundane".
-    realm_magic: enumStr(r.realmMagicDefault),
     flags_on: flagsOn,
   };
 }
@@ -146,24 +139,6 @@ export function extractSpatialUsage(worldState) {
     corruption_exposed: recCount(L.exposedCorruption), // W-DOCTRINE-3 revealed corruption
     satellites: recCount(L.satellites),              // settlement-lifecycle satellites
     war_campaigns: recCount(L.campaignPlans),        // W-DOCTRINE-1 supply-web campaigns
-    // W-J THE ORGANIC ROUTE LIFECYCLE. The ledger nests two containers, so the
-    // adoption signal is the EDGE count, never the container's own key count
-    // (Object.keys of the ledger itself would read a constant 2 and mean nothing).
-    route_edges: recCount(isObj(L.routeNetwork) ? L.routeNetwork.edges : null),
-    // WAVE P3 THE DEMOGRAPHIC VALVES. One row per settlement that is carrying a plan,
-    // holding a cooldown, or has banked a completed public work — the ledger is
-    // drop-when-empty, so a nonzero count means the valve lane genuinely fired.
-    demographic_plans: recCount(L.demographicPlans),
-    // GR-2 THE PEACETIME PACT QUEUE. One row per offer standing between two courts,
-    // opened at a tick and owed an answer on a date the ROADS priced (two hopWeeks legs
-    // plus a deliberation) — a thing in flight with an arrival time, the armyTransit /
-    // spatialArrivals shape. Settled rows prune before this read, so the count is OPEN
-    // conversations only.
-    // ⚠ THE ONLY ARRAY-VALUED SUB-LEDGER in either manifest list. `recCount` reads it
-    // correctly — `Object.keys` of an array yields its indices, so this IS the row count
-    // — and it is left as recCount on purpose: do NOT "fix" it to `.length` and fork the
-    // one reader idiom every other ledger here is read through.
-    pacts_awaiting_answer: recCount(L.pactProposals),
   };
   const migrationPop = sumLeaf(L.migration, r => r?.arrivals);
 
@@ -193,9 +168,6 @@ export function extractSpatialUsage(worldState) {
     ['corruption_exposed', counts.corruption_exposed],
     ['satellites', counts.satellites],
     ['war_campaign', counts.war_campaigns],
-    ['route_network', counts.route_edges],           // W-J lived route network
-    ['demographic_plans', counts.demographic_plans], // wave P3 the overflow valves
-    ['pact_formation', counts.pacts_awaiting_answer], // GR-2 peacetime offers afoot
   ];
   const moversActive = MOVER_PRESENCE.filter(([, n]) => n > 0).map(([name]) => name);
 
@@ -229,48 +201,6 @@ export const TRACKED_LEDGER_KEYS = Object.freeze([
   'tradeFlow', 'rumorLedgers', 'beliefMaps', 'moralDrift', 'dispatchWillingness',
   'spatialArrivals', 'navalTransit', 'epidemic', 'disinfo', 'credibility', 'upswing',
   'commitments', 'interventions', 'exposedCorruption', 'satellites', 'campaignPlans',
-  // W-J. TRACKED rather than EXEMPT, deliberately: the exemption list is for
-  // ledgers whose adoption is ALREADY visible through a tracked mover or a tracked
-  // flag, and the route network's is visible through neither — routeLifecycleEnabled
-  // is a virtual flag lit in no preset, so it is absent from TRACKED_FLAGS too. A
-  // reading of zero while the layer is dark is the truth, not a blind spot.
-  'routeNetwork',
-  // WAVE P3. TRACKED for the same reason as routeNetwork and not the exemption's: the
-  // demographic valve lane's adoption is visible through no existing mover and no
-  // tracked flag, because `demographicsEnabled` is a virtual flag lit in no preset. A
-  // reading of zero while the wave is dark is the truth rather than a blind spot.
-  'demographicPlans',
-  // GR-2 THE PEACETIME PACT QUEUE (pactProposals.js, its ONE writer). TRACKED for
-  // routeNetwork's and demographicPlans' reason, and the exemption's conjunction fails
-  // in BOTH of its halves here, which is what makes the call unopposed rather than
-  // merely defensible. NO TRACKED FLAG: `pactFormationEnabled` is virtual, lit in no
-  // preset, so it is absent from TRACKED_FLAGS — and `settlementLifecycleEnabled`, which
-  // IS tracked, does not gate it either, because the pact stage runs ABOVE its host
-  // kernel's dormancy gate and its writes survive a dark host. NO TRACKED MOVER: a
-  // signed offer mints a `treaties` record, which is itself EXEMPT as the outcome
-  // register; a refused one becomes a banded trust delta carrying no key at all; an
-  // expired one simply goes. Nothing else in this list can see the lane.
-  //
-  // AND POSITIVELY, which is what separates it from the `warIntents` exemption: a
-  // proposal is a DEPOSIT, not a re-derivation. It is opened at a tick and PERSISTS,
-  // carrying an answerDueTick the roads priced, until it is answered — a thing in flight
-  // with an arrival time, which is the armyTransit / supplyShipments / navalTransit /
-  // spatialArrivals shape, and all four of those are TRACKED. `warIntents` is exempt on
-  // a footing that does not reach here: settlementStrategyEnabled and warLayerEnabled are
-  // BOTH in TRACKED_FLAGS, and the movement its order causes is already legible as
-  // armyTransit. Prop hygiene does not bar it either — the rows name SETTLEMENTS, not
-  // people, and we emit the key COUNT and never a key (the vengeanceLicenses row draws
-  // that same distinction explicitly).
-  //
-  // ⚠ TWO HONEST LIMITS ON WHAT THE COUNT MEANS, recorded rather than smoothed over.
-  // (1) `prunePactProposals` runs before this read, so the number is UNFINISHED
-  // conversations, never a tally of pacts signed — what the lane achieved lands in
-  // `treaties` and in the convergence collector's negotiated-versus-dictated ratio.
-  // (2) The writer returns inert BEFORE the prune when the flag is dark, so a campaign
-  // that lights the flag, opens rows, then unlights it STRANDS those rows open and this
-  // mover will report them as live forever. That is the one path on which the ledger
-  // does not drain.
-  'pactProposals',
 ]);
 
 /**
@@ -280,7 +210,6 @@ export const TRACKED_LEDGER_KEYS = Object.freeze([
  * separate presence signal would be redundant noise, not new information.
  */
 export const EXEMPT_LEDGER_KEYS = Object.freeze({
-  warIntents: 'JOIN 1 THE RESOLVED MARCH (worldPulse/warIntent.js) — the settlement strategy chooser\'s deploy decision, deposited as a per-besieger ORDER naming the target its seat resolved on, which the ONE war opener consumes on the next tick. EXEMPT on the manifest\'s own criterion: this is an INSTRUCTION IN FLIGHT for at most two ticks, not an exercised mover, and both of the things a count could tell you are already told better elsewhere. Adoption of the lane is legible from the tracked flags directly — settlementStrategyEnabled and warLayerEnabled are both in TRACKED_FLAGS and both must be lit before a single row can exist. The MOVEMENT the order causes is legible as the army itself: a row that was obeyed becomes a deployment and an armyTransit record (the tracked field_combat mover), and a row that was not obeyed expires silently. A count would therefore read as noise between those two: high while orders pile up against a feasibility gate that keeps refusing them, and near zero in exactly the world where the most wars are actually being fought, because every order there is consumed the tick after it is written.',
   commodityStocks: 'supply-web closed-inventory SUBSTRATE (commodityFlow); the trade_flow/caravans movers already signal the trade layer',
   merchantAppetite: 'supply-web economic pressure STOCK, not a distinct exercised mover',
   tradeOverture: 'E1d generosity per-pair warmth STOCK (the merchantAppetite idiom, drop-when-cold) feeding the existing trade-partner evolution rule — not a distinct mover',
@@ -293,35 +222,5 @@ export const EXEMPT_LEDGER_KEYS = Object.freeze({
   sightPostures: 'infoStatecraft SEE posture sub-state (ditto)',
   peaceReasons: 'W-PEACE-1 typed peace-reason ANNOTATIONS (metadata on the war/peace layer, not a mover)',
   warReasons: 'W-PEACE-1 typed war-reason ANNOTATIONS (metadata on the war/peace layer, not a mover)',
-  commercialReasons: 'TR-1 THE CASUS COMMERCII (docs/DESIGN_FP_TRADE.md §TR-1; commercialReasons.js, its ONE writer) — a directed per-pair ledger of typed severance grievances and their partnership mirrors, eight walker-enforced pairs over ONE read each. EXEMPT ON THE HEADER CRITERION ABOVE, whose two clauses both hold. (1) IT IS A REASON-ANNOTATION, the warReasons / peaceReasons / reframes kind: it is RECOMPUTED EACH PULSE FROM EXISTING STATE, so decay is inherent and a healed cause DROPS rather than ratcheting, and nothing is banked — a count would report how much friction the CURRENT commercial state contains, which is a photograph of the realm\'s trading mood rather than a reading of what this layer did. It moves nothing; it says WHY commerce is as it is, and tradeWar\'s T9 escalation deposit consumes a magnitude as pressure exactly as war\'s own reason ledger is consumed. ⚠ THIS IS A SHARED KIND, NOT A SHARED LAYER: J-TR-2 in the writer\'s header is BINDING — this is not war\'s reasons layer in a trade costume, it imports no war table and mints no casus belli, and warReasonTaxonomy.js was the SHAPE template and nothing more. (2) THE OWNING LAYER IS COMMERCE, whose adoption is already carried by the tracked entrepots / trade_flow / caravans movers and by the tracked commodityFlowEnabled and tradeFlowsEnabled flags. A separate presence signal is redundant noise rather than new information, which is the exemption\'s stated test. ⚠⚠ WHAT IS DELIBERATELY *NOT* THE REASON, recorded so nobody re-derives it and reaches the wrong answer: advanceCommercialReasons has NO CALLER IN src/ (measured — the leaf\'s only cross-module import is tradeWar.js\'s makeCommercialPressureRead, which READS the ledger), so the container is unreachable today. That is TRUE and it is NOT a ground for exemption in this file, because routeNetwork is unmounted in exactly the same way — writeRouteNetwork is reached only from accrueRouteFlows and ensureGenesisRouteNetwork, and neither has a caller — and routeNetwork is TRACKED, on the stated ruling that a dark lane\'s zero is the truth rather than a blind spot. The classification here therefore must survive the wiring wave the lane\'s certification row calls for, and it does: warReasons is EXEMPT while fully mounted. Do not revisit this row when the mount lands.',
   treaties: 'peace-OUTCOME state record (the diplomatic result of the war/peace layer, not a distinct mover)',
-  npcLadder: 'THE LADDER intra-faction standings SIDECAR (recorded rank/standing stocks + challenge state; annotation/state ledger like reframes/warReasons — the faction movers already signal that layer, not a distinct mover)',
-  reframes: 'D7 per-pair motive-INTERPRETATION annotations (belief-side reframe readings — metadata on the war/peace/corruption layer, like warReasons/peaceReasons, not a distinct mover)',
-  provenance: 'THE PROVENANCE LEDGER causal-edge ANNOTATIONS (receipt→parent cause-edges recorded at commit for the chronicle; structural metadata over every layer, like warReasons/reframes, not a distinct exercised mover — adoption is the provenanceLedgerEnabled flag)',
-  urbanFabric: 'THE URBAN FABRIC LAYER district prominence/scars/drift STOCKS (the map\'s memory, projected onto settlement.urbanFabric for the town-map layout engine; a read-model over every layer\'s durable outcomes, not a distinct exercised mover — adoption is the urbanFabricEnabled flag)',
-  traditions: 'THE TRADITIONS per-settlement observance SIDECAR (founding set + occurrence outcomes + ownership, projected onto settlement.traditions for the dossier tab; a flag-gated per-settlement culture state record like npcLadder/urbanFabric — adoption is the traditionsEnabled flag, and the tradition news beats already surface activity, not a distinct spatial-adoption mover)',
-  commonsVoice: 'V-22/V-23 (Vision lane V-K) THE COMMONS\' VOICE per-settlement crowd-action rung STATE (petition/gathering/riot-band + grievance kind + escalation clock, deterministic from legitimacy/corruption/unrest reads; a flag-gated per-settlement collective-action state record like traditions/npcLadder — adoption is the commonsVoiceEnabled flag, and the commons news beats already surface activity, and the assize reads it for the petition→judgment coupling — not a distinct spatial-adoption mover)',
-  roads: 'THE ROADS named-NPC travel/captivity SIDECAR (missions/ransoms/cadence, projected onto npc.whereabouts; a flag-gated per-mission state record like traditions/npcLadder — adoption is the roadsEnabled flag, and the roads news beats already surface activity, not a distinct spatial-adoption mover)',
-  roadsReturnedCaptives: 'THE ROADS §10 returned-captive CHANNEL deposit (captor→home conduit pins the corruption web consumes at its own creation pass — a hand-off/annotation ledger like provenance/reframes, gated by roadsEnabled + corruptionWebActive, not a distinct exercised mover)',
-  roadsRansomSettlements: 'DEEP COUPLINGS D-5 §9 third-party ransom DEBT deposit (home→payer ransom_relief conduit the generosity mover consumes into an obligation on its next pass — a one-tick hand-off ledger like roadsReturnedCaptives, gated by thirdPartyRansomEnabled + roadsEnabled + constructiveFlowsEnabled, not a distinct exercised mover)',
-  roadsBondEvents: 'DEEP COUPLINGS D-5 §9 third-party ransom GRATITUDE deposit (captive→friend-payer bond-formation events the ladder kernel consumes into person bonds via mintBond on its next pass — a one-tick hand-off ledger like roadsReturnedCaptives, gated by thirdPartyRansomEnabled + roadsEnabled + memoryWeaveEnabled, not a distinct exercised mover)',
-  gratitudeBondEvents: 'DEEP COUPLINGS D-7e (ii) generosity GRATITUDE deposit (a completed mercy act — grain gift / warning gifted — deposits a court-to-court bond-formation event the ladder kernel consumes into the receiving ruling-seat NPC\'s bonds via mintBond LATER THE SAME TICK — a one-tick hand-off ledger like roadsBondEvents, generosity-written only, gated by memoryWeaveEnabled, not a distinct exercised mover)',
-  npcCredibility: 'DEEP COUPLINGS D-2 per-NPC credibility STOCK sidecar (spokesperson bluff exposure + lie stigma, the boy-who-cried-wolf discount; a flag-gated personal-reputation state record like npcLadder — adoption is the npcCredibilityEnabled flag, and the settlement-level credibility/disinfo movers already signal the info layer, not a distinct exercised mover)',
-  bluffExposures: 'DEEP COUPLINGS D-4→D-2 contradicted-bluff exposure DEPOSIT (the ladder deposits a contest-bluffer-who-lost record; informationStatecraft consumes it one tick later into a personal credibility charge — a hand-off/annotation ledger like roadsReturnedCaptives/provenance, gated by contestedGoalsEnabled ∧ npcCredibilityEnabled, not a distinct exercised mover — adoption is those flags + the npcCredibility stock)',
-  intelTransfers: 'DEEP COUPLINGS D-3 intel-transfer RECORD ledger (INTEL_TRANSFERS_LEDGER — generosity OWNS + prunes it, statecraft reads; a single-writer cross-wave transfer record like obligations, and the disinfo/credibility movers already signal the info layer, not a distinct exercised mover — adoption is intelTradeEnabled ∧ infoStatecraftEnabled)',
-  intelCooldown: 'DEEP COUPLINGS D-3 intel-transfer per-pair COOLDOWN stock (INTEL_COOLDOWN_LEDGER — rate-limit bookkeeping for the intel-transfer layer, the merchantAppetite STOCK idiom; substrate, not a distinct exercised mover)',
-  roadsEmbassies: 'THE ROADS embassy SIDECAR (EMBASSY_LEDGER_KEY — per-pair diplomatic embassy state on the roads layer; a flag-gated per-mission/annotation state record like roads/traditions — adoption is roadsEnabled, and the roads news beats already surface activity, not a distinct spatial-adoption mover)',
-  foreignGuestHolds: 'WR-7b THE FOREIGN-GUEST HOLD (docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md §5) — the captor-side custody record for a travelling envoy held away from home (person, errand, encounter, captor, venue, cause, and the exact interrupted journey handed back on release), which H2\'s jailed verdict structurally cannot express because that path requires a local roster npc plus a corruption exposure. EXEMPT RATHER THAN TRACKED for the two reasons npcLedger is, and they are different reasons. (1) Adoption is legible from the flags alone: no row can exist unless the whole WR-7 six-law conjunction is exact-true, and envoyDiplomacyEnabled is a virtual flag lit in no preset. (2) MORE IMPORTANTLY, and this is what outweighs the routeNetwork/demographicPlans argument that an invisible lane should be TRACKED, the records are PEOPLE IN CAPTIVITY: this module\'s prop-hygiene law forbids emitting an npc id or name, and a hold is DM truth under law 7 until an actual observation earns it publicly, so the only telemetry-legal reading would be a bare key count. That count would also be an ARTEFACT OF RARITY in the magicBuffer sense — a hold opens only where an interception happened to land on a travelling envoy, and it DRAINS on release, escape, or death through the one writer, so the same realm reads one key or zero depending only on how recently a captor struck and whether a ransom cleared. What the layer actually DID is carried in the interception and hold receipts, which name the captor, the venue, and the cause.',
-  npcGrowth: 'NPC GROWTH per-NPC advancement STOCK (npcGrowthKernel recorded skill/standing growth projected onto the NPC card; a flag-gated personal state record like npcLadder/npcCredibility — adoption is the npc-growth flag, and the faction/ladder movers already signal that layer, not a distinct exercised mover)',
-  npcLedger: 'W-H1 THE WORLD NPC LEDGER — durable cross-settlement identities (roamers / placed / exclusions) minted at the first cross-settlement consequence; a flag-gated per-person state record like npcLadder/npcGrowth/npcCredibility, so it is classified the same way. TWO REASONS IT IS EXEMPT RATHER THAN TRACKED, and they are different reasons. (1) Adoption is already legible from the npcConsequencesEnabled flag itself, exactly as it is for the sibling personal-state ledgers. (2) MORE IMPORTANTLY, the records are PEOPLE: this module\'s prop-hygiene law forbids emitting an NPC id or name, and the ledger\'s per-record payload is identity plus DM truth (a compromise source is covert intelligence under law 7), so the only telemetry-legal reading would be a bare key count. A count that is structurally zero until the flag is lit, and that duplicates what the flag already says, is redundant noise rather than new information. If a future wave wants circulation ADOPTION telemetry, the honest signal is a banded pool-size / transition-rate derived inside this module from counts alone, never a projection of the records.',
-  npcRulings: 'W-H4 THE DM RULING REGISTER — the address-chain news items the three DM verbs (assign / kill / pardon) hand down, capped and drop-when-empty, which the Wanderers door reads back as the realm\'s recent rulings. EXEMPT RATHER THAN TRACKED, and for a reason none of its siblings share: it is not written by a MOVER AT ALL. Every other key in both lists is deposited by an engine kernel during an advance; this one is deposited only when a human presses a button, so a key count would measure how often a DM used the surface, not how much the world moved. That is product telemetry about a UI, and this module\'s charter is spatial-adoption telemetry about the simulation. TWO FURTHER REASONS IT COULD NOT BE TRACKED EVEN IF THE FIRST DID NOT HOLD, both inherited from the npcLedger row above: the entries are about PEOPLE, so the prop-hygiene law forbids emitting their ids or names, and each entry carries a dmTruth receipt which is covert intelligence under law 7. Adoption of the lane is already legible from the npcConsequencesEnabled flag, exactly as it is for npcLedger itself.',
-  institutionStatus: 'W-K1 THE GENERAL INSTITUTION STATUS SYSTEM (docs/DESIGN_MAGIC_ECONOMY.md §3c) — the cause-bound impairment annotations and the shell\'s warm-start memory, keyed settlement to institution; a flag-gated per-settlement entity-state record like traditions/commonsVoice/npcLadder, so it is classified the same way. EXEMPT RATHER THAN TRACKED for the reason those siblings are: adoption is already legible from the magicEconomyEnabled flag, and the ledger stores no mover at all. It stores only the DURABLE half of a status (when an impairment began, the DM\'s severity override, the capacity a shell remembers) because cause PRESENCE is re-derived from live state every advance rather than persisted, which is how the no-orphan law is made structural. A key count would therefore measure how many institutions currently remember something, not how much the layer moved, and the impairment and shell transitions are surfaced as events instead.',
-  magicRegime: 'W-K2 THE ECONOMY REGIME LADDER (docs/DESIGN_MAGIC_ECONOMY.md §3a) — one banded word per settlement (subsistence, funded, patronized, industrial) plus the tick it was entered, which is the durable half of a state that is path-dependent through hysteresis and therefore cannot be re-derived from the economy reading alone. EXEMPT RATHER THAN TRACKED on the manifest\'s own stated criterion: a regime is a per-settlement STATE STOCK in the merchantAppetite and npcLadder sense, not an exercised mover, and the movement itself is the CROSSING, which is surfaced as an event rather than as a key. A count would answer how many settlements currently sit above the bottom rung, which is a photograph of the realm\'s wealth rather than a reading of how much this layer did. THE KEY IS ALSO STRUCTURALLY UNABLE TO MEAN WHAT A MOVER COUNT WOULD IMPLY, in the other direction from magicBuffer\'s rarity problem: the base rung is stored as the ABSENCE of a record, so a realm every settlement of which is poor reads exactly zero, and a realm that grew rich and then fell back to poverty returns to zero as its records drain. Zero is therefore ambiguous between never-grew and grew-and-fell, and only the crossing events tell those apart. Adoption of the lane is legible from the magicEconomyEnabled flag exactly as it is for institutionStatus and magicBuffer.',
-  magicBuffer: 'W-K3 THE DISASTER BUFFER ward reserve (docs/DESIGN_MAGIC_ECONOMY.md §5) — one number per settlement, the fraction of its mitigation capacity still in hand, drawn down when a calamity is blunted and refilled on a banded dwell keyed to the economy. EXEMPT RATHER THAN TRACKED, and for a reason that is nearly the inverse of its siblings\'. The other exemptions are ledgers whose adoption is visible elsewhere; this one is a ledger whose POPULATION IS AN ARTEFACT OF RARITY. A key appears only where a calamity actually struck a lit settlement and the wards actually held, and calamity is a one-strike-per-fifteen-realm-years draw with an eight-year per-settlement cooldown, so the count over any realistic observation window measures how unlucky the realm has been, not how adopted the layer is. Worse, the key DRAINS: a reserve that has recovered to full is dropped, because full is what an untouched settlement already reads, so the same realm reads one key or zero depending only on how recently it was hit. A mover count off that signal would be noise with a plausible shape, which is the most dangerous kind. Adoption is legible from the magicEconomyEnabled flag exactly as it is for institutionStatus and magicRegime, and what the layer actually DID is carried in the strike receipt, which names what the wards held and which named stocks paid for it.',
-  vengeanceLicenses: 'WR-8 amendment R2 (docs/DESIGN_REALM_DIRECTIVES.md; chair ruling CR-WR8-E) THE VENGEANCE LICENSE — the durable world fact a razing mints: one record per razing, naming the razer, the burned settlement, the tick it happened, and the victim-adequate settlements that thereby hold the right to answer it once. EXEMPT RATHER THAN TRACKED, and NOT for the reason the sibling per-entity ledgers are — these records are about SETTLEMENTS, so the prop-hygiene argument that exempts npcLedger/foreignGuestHolds does not apply here at all. The reason is magicBuffer\'s, which is nearly the inverse of the others\': THE POPULATION IS AN ARTEFACT OF RARITY, AND THE KEY DRAINS. A record exists only where a razing actually happened, AND somebody\'s relationship to the burned settlement cleared the adequacy band, AND that somebody already shared a regional-graph edge with the razer (CR-WR8-A: a razing mints no edge to strangers) — a conjunction the amendment itself calls rare, since razing is gated on evil-exclusive initiation plus a relationship extreme plus a won siege. And `pruneVengeanceLicenses` DROPS each record the moment it is consumed, extinguished, or ages past its generational band, dropping the whole sub-ledger when the last one goes, so the same realm reads one key or zero depending only on how recently a city burned and whether the debt has been collected. A mover count off that signal would measure the realm\'s recent luck rather than the layer\'s adoption — noise with a plausible shape, which is the most dangerous kind. WHAT THE LAYER ACTUALLY DID IS ALREADY MEASURED PROPERLY ELSEWHERE, which is the second and stronger half: WR-9\'s endings-mix envelope tracks `punitive_sack(initiation)` and `punitive_sack(vengeance)` as SEPARATE shares and treats their ratio as a health metric — a world where most razings are vengeance is a world where evil is being answered — so the honest instrument for this layer is the soak\'s endings envelope, not an adoption key count. Adoption of the lane is legible from the conquestDoctrineEnabled flag exactly as it is for institutionStatus/magicRegime/magicBuffer.',
-  // NOTE: DOOR 1's `spatialSubstrate` sidecar is deliberately NOT listed here. The
-  // walker governs ONLY spatialLedgers keys WRITTEN via setSpatialLedger inside
-  // src/domain (engine movers). The substrate is derived + written at CANONIZE, from
-  // the store (campaignWorldPulseSlice), because the projection law forbids the engine
-  // reading the layout — so it is outside the domain-mover walker's scope by design.
 });

@@ -15,7 +15,6 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 
 // ── Shared mocks ─────────────────────────────────────────────────────────────
 const flagMock = vi.fn(() => false);
-const warResolveCapture = vi.hoisted(() => ({ props: null }));
 vi.mock('../../src/lib/flags.js', () => ({ flag: (...args) => flagMock(...args) }));
 
 let storeState = {};
@@ -25,21 +24,9 @@ vi.mock('../../src/store', () => ({ useStore: (selector) => selector(storeState)
 // RealmDashboard is heavy + lazy; a stub keeps the fallback dashboard render trivial
 // (we only assert on the tab row + the resolve empty state, never the dashboard body).
 vi.mock('../../src/components/map/RealmDashboard.jsx', () => ({ default: () => 'dashboard-stub' }));
-// hasPantheon → false so the Faith door's pantheon block stays quiet, keeping this
-// test focused on the War door's flag-gated War & Resolve fold-in.
+// hasPantheon → false so the Pantheon tab (and its AssignDeityFromMap) stay hidden,
+// keeping this test focused on the resolve tab.
 vi.mock('../../src/components/map/PantheonPanel.jsx', () => ({ default: () => null, hasPantheon: () => false }));
-// THE HERALD (2026-07-22): War & Resolve is no longer a standalone door — it folds
-// into the War door under the warEconomySurfacing flag. Stub the War door's other
-// live blocks so the assertion targets only the WarResolveSection fold-in.
-vi.mock('../../src/components/map/LiveWarStatus.jsx', () => ({ default: () => null }));
-vi.mock('../../src/components/map/RealmIntrigue.jsx', () => ({ default: () => null }));
-vi.mock('../../src/components/map/BeliefDivergenceBand.jsx', () => ({ default: () => null }));
-vi.mock('../../src/components/map/WarResolveSection.jsx', () => ({
-  default: (props) => {
-    warResolveCapture.props = props;
-    return 'war-resolve-mounted';
-  },
-}));
 
 import RealmInspector from '../../src/components/map/RealmInspector.jsx';
 import WarFaithMapOverlay from '../../src/components/map/WarFaithMapOverlay.jsx';
@@ -49,11 +36,10 @@ afterEach(() => {
   cleanup();
   vi.clearAllMocks();
   flagMock.mockReturnValue(false);
-  warResolveCapture.props = null;
 });
 
-// ── 1. War & Resolve fold-in — flag + campaign gating ────────────────────────
-describe('RealmInspector War door — War & Resolve fold-in', () => {
+// ── 1. War & Resolve tab — flag + premium gating ─────────────────────────────
+describe('RealmInspector War & Resolve tab', () => {
   beforeEach(() => { storeState = { savedSettlements: [] }; });
 
   const baseProps = {
@@ -66,29 +52,24 @@ describe('RealmInspector War door — War & Resolve fold-in', () => {
     onSetSize: vi.fn(),
   };
 
-  test('flag OFF ⇒ War & Resolve does not surface in the War door (unreachable even for premium)', async () => {
+  test('flag OFF ⇒ the War & Resolve tab is not present (unreachable even for premium)', async () => {
     flagMock.mockReturnValue(false);
-    render(<RealmInspector {...baseProps} section="war" campaign={{ id: 'c1', name: 'Realm' }} />);
-    // The War door renders; the flag is consulted; the fold-in stays dark.
-    await waitFor(() => expect(screen.getByText('War')).toBeTruthy());
-    expect(screen.queryByText('war-resolve-mounted')).toBeNull();
+    render(<RealmInspector {...baseProps} section="resolve" campaign={null} />);
+    await waitFor(() => expect(screen.getByText('Dashboard')).toBeTruthy());
+    expect(screen.queryByText('War & Resolve')).toBeNull();
     expect(flagMock).toHaveBeenCalledWith('warEconomySurfacing');
   });
 
-  test('flag ON ⇒ War & Resolve folds into the War door', async () => {
-    flagMock.mockImplementation(name => name === 'warEconomySurfacing');
-    const saves = [{ id: 's1', settlement: { name: 'Marchwall' } }];
-    storeState = { savedSettlements: saves };
-    render(<RealmInspector {...baseProps} section="war" campaign={{ id: 'c1', name: 'Realm' }} />);
-    await waitFor(() => expect(screen.getByText('war-resolve-mounted')).toBeTruthy());
-    expect(warResolveCapture.props.saves).toBe(saves);
+  test('flag ON ⇒ the War & Resolve tab appears', async () => {
+    flagMock.mockReturnValue(true);
+    render(<RealmInspector {...baseProps} section="dashboard" campaign={{ id: 'c1', name: 'Realm' }} />);
+    await waitFor(() => expect(screen.getByText('War & Resolve')).toBeTruthy());
   });
 
-  test('flag ON + no campaign ⇒ the War door shows the empty state, never war data (premium gate)', async () => {
-    flagMock.mockImplementation(name => name === 'warEconomySurfacing');
-    render(<RealmInspector {...baseProps} section="war" campaign={null} />);
-    await waitFor(() => expect(screen.getByText(/fills once a campaign is live/i)).toBeTruthy());
-    expect(screen.queryByText('war-resolve-mounted')).toBeNull();
+  test('flag ON + no campaign ⇒ the tab shows the empty state, never war data (premium gate)', async () => {
+    flagMock.mockReturnValue(true);
+    render(<RealmInspector {...baseProps} section="resolve" campaign={null} />);
+    await waitFor(() => expect(screen.getByText(/appears once a campaign is live/i)).toBeTruthy());
   });
 });
 

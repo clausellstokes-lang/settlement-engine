@@ -1,7 +1,7 @@
 {
-  "total": 2221,
-  "totalAny": 2183,
-  "totalSuppress": 38,
+  "total": 2230,
+  "totalAny": 2191,
+  "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
       "any": 22,
@@ -52,11 +52,11 @@
       "suppress": 1
     },
     "src/domain/corruption.js": {
-      "any": 5,
+      "any": 20,
       "suppress": 0
     },
     "src/domain/counterfactual.js": {
-      "any": 6,
+      "any": 18,
       "suppress": 0
     },
     "src/domain/crisisLifecycle.js": {
@@ -76,7 +76,7 @@
       "suppress": 0
     },
     "src/domain/display/deityEffects.js": {
-      "any": 9,
+      "any": 6,
       "suppress": 0
     },
     "src/domain/display/dossierViewModel.js": {
@@ -109,14 +109,6 @@
     },
     "src/domain/display/regionWakeReplay.js": {
       "any": 5,
-      "suppress": 0
-    },
-    "src/domain/display/stateProse/causalDossierProse.js": {
-      "any": 1,
-      "suppress": 0
-    },
-    "src/domain/display/stateProse/dmFieldProjection.js": {
-      "any": 1,
       "suppress": 0
     },
     "src/domain/display/threatAssessment.js": {
@@ -192,7 +184,7 @@
       "suppress": 0
     },
     "src/domain/historyBeats.js": {
-      "any": 3,
+      "any": 15,
       "suppress": 0
     },
     "src/domain/hookEscalation.js": {
@@ -201,11 +193,7 @@
     },
     "src/domain/inferSupplyChains.js": {
       "any": 0,
-      "suppress": 3
-    },
-    "src/domain/institutions/institutionRoster.js": {
-      "any": 1,
-      "suppress": 0
+      "suppress": 4
     },
     "src/domain/magicLedger.js": {
       "any": 1,
@@ -216,11 +204,11 @@
       "suppress": 0
     },
     "src/domain/npcProfile.js": {
-      "any": 5,
+      "any": 21,
       "suppress": 0
     },
     "src/domain/pendingEdits.js": {
-      "any": 11,
+      "any": 13,
       "suppress": 0
     },
     "src/domain/region/contestOverThirdParty.js": {
@@ -232,11 +220,11 @@
       "suppress": 0
     },
     "src/domain/region/discoverDependencyCandidates.js": {
-      "any": 4,
+      "any": 6,
       "suppress": 0
     },
     "src/domain/region/graph.js": {
-      "any": 14,
+      "any": 20,
       "suppress": 0
     },
     "src/domain/region/propagation.js": {
@@ -264,7 +252,7 @@
       "suppress": 0
     },
     "src/domain/simulationSpine.js": {
-      "any": 9,
+      "any": 11,
       "suppress": 0
     },
     "src/domain/stressorPicker.js": {
@@ -283,14 +271,6 @@
       "any": 0,
       "suppress": 2
     },
-    "src/domain/townMap/arch/grammarIR.js": {
-      "any": 1,
-      "suppress": 0
-    },
-    "src/domain/townMap/arch/ops.js": {
-      "any": 3,
-      "suppress": 0
-    },
     "src/domain/types.js": {
       "any": 1,
       "suppress": 0
@@ -300,31 +280,11 @@
       "suppress": 0
     },
     "src/domain/worldPulse/advanceInterval.js": {
-      "any": 28,
+      "any": 21,
       "suppress": 0
     },
     "src/domain/worldPulse/applyWorldPulse.js": {
-      "any": 27,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/applyWorldPulseBetrayal.js": {
-      "any": 3,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js": {
-      "any": 5,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/applyWorldPulsePrimitives.js": {
-      "any": 6,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/applyWorldPulseRelationshipGraph.js": {
-      "any": 12,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/applyWorldPulseStressorMerge.js": {
-      "any": 5,
+      "any": 68,
       "suppress": 0
     },
     "src/domain/worldPulse/attrition.js": {
@@ -367,24 +327,12 @@
       "any": 6,
       "suppress": 0
     },
-    "src/domain/worldPulse/dispositionChannels.js": {
-      "any": 2,
-      "suppress": 0
-    },
     "src/domain/worldPulse/dispositionDeltas.js": {
-      "any": 5,
+      "any": 2,
       "suppress": 0
     },
     "src/domain/worldPulse/dispositionLedger.js": {
-      "any": 22,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/dispositionProfile.js": {
-      "any": 5,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/eliteBleed.js": {
-      "any": 2,
+      "any": 7,
       "suppress": 0
     },
     "src/domain/worldPulse/factionCapture.js": {
@@ -392,11 +340,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/factionCompetition.js": {
-      "any": 96,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/factionPairLedger.js": {
-      "any": 9,
+      "any": 93,
       "suppress": 0
     },
     "src/domain/worldPulse/feasibilityGate.js": {
@@ -408,11 +352,11 @@
       "suppress": 0
     },
     "src/domain/worldPulse/foodStockpile.js": {
-      "any": 14,
+      "any": 15,
       "suppress": 0
     },
     "src/domain/worldPulse/institutionLifecycle.js": {
-      "any": 78,
+      "any": 80,
       "suppress": 0
     },
     "src/domain/worldPulse/militaryStrength.js": {
@@ -432,15 +376,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/npcAgency.js": {
-      "any": 87,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/npcDmVerbs.js": {
-      "any": 1,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/npcLadderKernel.js": {
-      "any": 2,
+      "any": 88,
       "suppress": 0
     },
     "src/domain/worldPulse/occupation.js": {
@@ -453,10 +389,6 @@
     },
     "src/domain/worldPulse/partyImpact.js": {
       "any": 24,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/peaceTerms.js": {
-      "any": 1,
       "suppress": 0
     },
     "src/domain/worldPulse/populationDynamics.js": {
@@ -496,7 +428,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/relationshipEvolution.js": {
-      "any": 24,
+      "any": 21,
       "suppress": 0
     },
     "src/domain/worldPulse/relationshipHierarchy.js": {
@@ -524,7 +456,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/religionLegitimacy.js": {
-      "any": 20,
+      "any": 22,
       "suppress": 0
     },
     "src/domain/worldPulse/religionState.js": {
@@ -540,7 +472,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/resourceTaxonomy.js": {
-      "any": 5,
+      "any": 6,
       "suppress": 0
     },
     "src/domain/worldPulse/settlementStrategy.js": {
@@ -560,7 +492,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/stressorDynamics.js": {
-      "any": 59,
+      "any": 60,
       "suppress": 0
     },
     "src/domain/worldPulse/stressorGates.js": {
@@ -607,60 +539,12 @@
       "any": 19,
       "suppress": 0
     },
-    "src/domain/worldPulse/traditionsKernel.js": {
-      "any": 1,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/treatyBreach.js": {
-      "any": 1,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/warArmyRecord.js": {
-      "any": 2,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/warCapacityReads.js": {
-      "any": 16,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/warCoalitionExpenditure.js": {
-      "any": 1,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/warCoalitionSettlement.js": {
-      "any": 4,
-      "suppress": 0
-    },
     "src/domain/worldPulse/warDeployment.js": {
-      "any": 16,
+      "any": 64,
       "suppress": 0
     },
     "src/domain/worldPulse/warFrontReads.js": {
       "any": 8,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/warHomeCosts.js": {
-      "any": 5,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/warMagicGate.js": {
-      "any": 3,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/warPeaceDecision.js": {
-      "any": 5,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/warPoliticalLoop.js": {
-      "any": 8,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/warSeatBooks.js": {
-      "any": 2,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/warSiegeVerdict.js": {
-      "any": 14,
       "suppress": 0
     },
     "src/domain/worldPulse/worldSnapshot.js": {

@@ -1,9 +1,15 @@
-"""HF-M1 holdout re-balance: deterministic local search (seed 7) over the ELIGIBLE pool.
+"""HF-M1 historical roster re-balance: deterministic local search (seed 7).
 Objective = era-share error + category-share error + the six aesthetic KS/critical ratios.
 Eligibility mirrors HF-4c's own stated rules: no scrub-list plate, no A/B or
-figure-derivation plate, no specification sheet, no 'best in corpus' claim."""
-import json, random, statistics as st, collections, math
-rows=json.load(open("laneHFM1-corpus-measured.json")); R={r["id"]:r for r in rows}
+figure-derivation plate, no specification sheet, no 'best in corpus' claim.
+
+Read-only by default. Pass --write only when intentionally replacing the
+historical proposal; the adopted minimal_swap object is preserved.
+"""
+import json, random, statistics as st, collections, math, os, sys
+HERE=os.path.dirname(os.path.abspath(__file__))
+PROPOSAL=os.path.join(HERE,"laneHFM1-holdout-proposal.json")
+rows=json.load(open(os.path.join(HERE,"laneHFM1-corpus-measured.json"))); R={r["id"]:r for r in rows}
 HOLD=set("""hf87 hf89 hf92 hf94 hf126 hf127 hf231 hf237 hf285 hf129 hf130 hf132 hf240 hf267 hf269 hf272
 hf275 hf288 hf333 hf134 hf136 hf273 hf289 hf326 hf346 hf102 hf105 hf143 hf145 hf147 hf221 hf223
 hf230 hf349 hf354 hf122 hf259 hf265 hf266 hf311 hf168 hf172 hf234 hf282 hf176 hf180 hf183 hf191
@@ -18,7 +24,7 @@ SPEC=set("""hf303 hf320 hf321 hf322 hf377 hf323 hf304 hf379 hf319 hf378 hf388 hf
 hf314 hf315 hf390 hf206 hf207 hf208 hf71 hf112 hf113 hf114 hf115 hf116 hf261""".split())
 BEST=set("hf303 hf338 hf389 hf386 hf379 hf327 hf356 hf360 hf291 hf348".split())
 BAD=SCRUB|AB|SPEC|BEST
-pool=[r["id"] for r in rows if r["id"] not in BAD]
+pool=sorted((r["id"] for r in rows if r["id"] not in BAD), key=lambda x:int(x[2:]))
 print("eligible pool:",len(pool),"  current holdout inside pool:",len(HOLD&set(pool)),"of",len(HOLD))
 AX=["register_index","paper_L","chroma","wash_within_sigma","fill_tone_iqr","ink_L","stroke_ratio_p90_p25"]
 allrows=rows
@@ -45,7 +51,7 @@ S=set(list(HOLD&set(pool)))
 while len(S)<N: S.add(random.choice([p for p in pool if p not in S]))
 cur=score(S)
 for it in range(60000):
-    out=random.choice(list(S)); inn=random.choice(pool)
+    out=random.choice(sorted(S,key=lambda x:int(x[2:]))); inn=random.choice(pool)
     if inn in S: continue
     T=set(S); T.remove(out); T.add(inn)
     sc=score(T)
@@ -65,4 +71,16 @@ kept=sorted(set(S)&HOLD,key=lambda x:int(x[2:])); added=sorted(set(S)-HOLD,key=l
 print("\nKEPT (%d): %s"%(len(kept)," ".join(kept)))
 print("\nADDED (%d): %s"%(len(added)," ".join("%s[%s,%s]"%(a,R[a]["era"],R[a]["category"]) for a in added)))
 print("\nDROPPED (%d): %s"%(len(dropped)," ".join("%s[%s,%s]"%(a,R[a]["era"],R[a]["category"]) for a in dropped)))
-json.dump({"proposed":S,"kept":kept,"added":added,"dropped":dropped}, open("laneHFM1-holdout-proposal.json","w"), indent=1)
+result={"proposed":S,"kept":kept,"added":added,"dropped":dropped}
+if "--write" in sys.argv:
+    prior=json.load(open(PROPOSAL)) if os.path.exists(PROPOSAL) else {}
+    if "minimal_swap" in prior:
+        result["minimal_swap"]=prior["minimal_swap"]
+    temp=PROPOSAL+".tmp"
+    with open(temp,"w") as handle:
+        json.dump(result,handle,indent=1)
+        handle.write("\n")
+    os.replace(temp,PROPOSAL)
+    print("wrote",PROPOSAL,"(minimal_swap preserved)")
+else:
+    print("DRY RUN — proposal not written; pass --write to replace it")

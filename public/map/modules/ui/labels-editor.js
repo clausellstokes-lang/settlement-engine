@@ -313,11 +313,8 @@ function editLabel() {
     const lines = input.split("|");
     if (lines.length > 1) {
       const top = (lines.length - 1) / -2; // y offset
-      // SettlementForge fork patch: escape label text before it hits the SVG innerHTML.
-      el.innerHTML = lines
-        .map((line, index) => `<tspan x="0" dy="${index ? 1 : top}em">${escapeHtml(line)}</tspan>`)
-        .join("");
-    } else el.innerHTML = `<tspan x="0">${escapeHtml(lines)}</tspan>`;
+      el.innerHTML = lines.map((line, index) => `<tspan x="0" dy="${index ? 1 : top}em">${line}</tspan>`).join("");
+    } else el.innerHTML = `<tspan x="0">${lines}</tspan>`;
 
     if (elSelected.attr("id").slice(0, 10) === "stateLabel")
       tip("Use States Editor to change an actual state name, not just a label", false, "warning");

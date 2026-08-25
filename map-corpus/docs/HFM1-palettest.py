@@ -1,5 +1,7 @@
 from PIL import Image
-import re, sys, time
+import re, sys, time, os
+HERE=os.path.dirname(os.path.abspath(__file__))
+CORPUS=os.path.dirname(HERE)
 ATLAS={"hf10":("#F9ECDC","#513F34"),"hf12":("#F7E1C8","#39251A"),"hf11":("#F3DFC6","#120F0A"),
        "hf3":("#FAECDA","#44372E"),"hf72":("#FAE2C5","#5E3420"),"hf40":("#FEF5E8","#332720"),
        "hf24":("#FBEAD5","#684633"),"hf5":("#F8E4CD","#000000"),"hf35":("#FFFFFF","#5A3D2C")}
@@ -22,11 +24,12 @@ def calc(im, inset):
     return mean(br), mean(dk)
 BASES=[]
 for pid,stem in STEM.items():
-    im_full=Image.open("map-refs/%s.png"%stem)
+    im_full=Image.open(os.path.join(CORPUS,"plates","%s.png"%stem))
     W,H=im_full.size
     small=im_full.convert("RGB").resize((640,int(round(H*640.0/W))), Image.BILINEAR)
-    p1500=Image.open("MFS1-prev/%s.jpg"%stem) if __import__("os").path.exists("MFS1-prev/%s.jpg"%stem) else None
-    p1100=Image.open("map-refs/prev-%s.jpg"%stem)
+    legacy=os.path.join(HERE,"MFS1-prev","%s.jpg"%stem)
+    p1500=Image.open(legacy) if os.path.exists(legacy) else None
+    p1100=Image.open(os.path.join(CORPUS,"previews","prev-%s.jpg"%stem))
     tests={"640_inset":(small,True),"640_noinset":(small,False),
            "1100_inset":(p1100,True),"1100_noinset":(p1100,False),
            "full_inset":(im_full,True)}

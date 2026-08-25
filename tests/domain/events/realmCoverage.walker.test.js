@@ -66,10 +66,7 @@ function scanWorldPulse() {
 // The pure-mutation verbs (declare/sue/raid/embargo) carry no factory literal —
 // their registrable shape is the exported gated fn + VETO_PROSE feed. Their
 // claim is asserted by name below (the census is closed by the prose-feed scan).
-// (WR-10's TRANSFER_SOVEREIGNTY joins them: its writer is an exported gated fn in
-// sovereigntyTransfer.js with no factory literal, so the source scan cannot see it and
-// its claim is asserted by name here — the same shape as the decree four.)
-const PURE_MUTATION_VERBS = ['DECLARE_CASUS', 'SUE_FOR_PEACE', 'REPUDIATE_TREATY', 'ORDER_SUPPLY_RAID', 'DECLARE_TRADE_EMBARGO', 'TRANSFER_SOVEREIGNTY'];
+const PURE_MUTATION_VERBS = ['DECLARE_CASUS', 'SUE_FOR_PEACE', 'ORDER_SUPPLY_RAID', 'DECLARE_TRADE_EMBARGO'];
 
 describe('realm coverage walker (parked shapes → realm manifest, fail-closed)', () => {
   const { factoryVerbs, entryFactoryTypes, parkMarkers } = scanWorldPulse();
@@ -102,10 +99,9 @@ describe('realm coverage walker (parked shapes → realm manifest, fail-closed)'
     }
   });
 
-  it('the lift census holds: 16 realm verbs — 14 executable, 2 honestly deferred', () => {
-    // 15 at the W-COMPOSER-2 lift; +1 at WR-10's wiring wave (TRANSFER_SOVEREIGNTY).
-    expect(realmVerbs()).toHaveLength(16);
-    expect(executableRealmVerbs()).toHaveLength(14);
+  it('the lift census holds: 14 realm verbs — 12 executable, 2 honestly deferred', () => {
+    expect(realmVerbs()).toHaveLength(14);
+    expect(executableRealmVerbs()).toHaveLength(12);
     const deferred = realmVerbs().filter(v => v.lane === 'deferred').map(v => v.verb).sort();
     expect(deferred).toEqual(['INTERCEPT', 'REINFORCE']);
   });

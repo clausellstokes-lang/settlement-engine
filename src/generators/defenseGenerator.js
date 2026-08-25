@@ -11,11 +11,6 @@
 
 import {getInstFlags, getPriorities} from './helpers.js';
 import {computeEffectiveMagicPresence} from './priorityHelpers.js';
-import {
-  nativeSemanticName,
-} from '../domain/content/customContentSemanticAuthority.js';
-import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
-import { resolveGenerationWorldLaw } from './generationContext.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
@@ -26,7 +21,7 @@ import { resolveGenerationWorldLaw } from './generationContext.js';
  */
 const getDefenseInstitutions = (institutions) => {
   const matches = (inst, keywords) =>
-    keywords.some(kw => nativeSemanticName(inst).toLowerCase().includes(kw));
+    keywords.some(kw => inst.name.toLowerCase().includes(kw));
 
   return {
     walls: institutions.filter(i => matches(i, [
@@ -97,7 +92,7 @@ const computeDefenseScores = (
   // ── Tradition detection ─────────────────────────────────────────────────────
   const institutions = config._institutions || [];
   const hasInst = (...kws) => institutions.some(i =>
-    kws.some(kw => nativeSemanticName(i).toLowerCase().includes(kw)));
+    kws.some(kw => (i.name||'').toLowerCase().includes(kw)));
 
   // Arcane: wizard/mage/sorcerer/enchanter
   const hasArcane   = magicOn && magPri >= 35 && (
@@ -271,7 +266,6 @@ const computeDefenseScores = (
   // gates the ability to mobilize it (see econHealthMult below) — a destitute
   // town does not get "Strong economic base" for owning a granary building.
   const foodSec = config._foodSecurity;
-  const worldLaw = resolveGenerationWorldLaw(null, config);
   const storageMonths = foodSec?.storageMonths ?? (inst.hasGranary ? 4 : 1);
   // Storage → score: 0mo=0, 1mo=10, 3mo=25, 6mo=45, 12mo=70 (diminishing returns)
   const storageScore = Math.min(70, Math.round(storageMonths <= 1 ? storageMonths * 10
@@ -280,9 +274,7 @@ const computeDefenseScores = (
   let economic = storageScore;
   if (inst.hasMarket)   economic += 10;  // financial capacity and merchant access
   if (inst.hasHospital) economic += 10;  // medical resilience
-  if (route === 'port' && worldLaw.supportsMaritime()) {
-    economic += 10; // sea supply cannot be cut by a land siege
-  }
+  if (route === 'port')       economic += 10; // sea supply can't be cut by land siege
   if (route === 'crossroads') economic +=  8; // multiple supply routes
   economic = Math.min(100, economic + Math.round(econOutput * 0.2));
   // Alchemy extends granary effective capacity (preservation, food extension)
@@ -586,11 +578,7 @@ export function generateDefenseProfile(settlement) {
   // killing the +5/+6/+4 credit at city/metropolis. But an ISOLATED settlement
   // genuinely cannot import, so a missing/weak upstream there KEEPS the penalty.
   // A real LOCAL impairment (trade dependency / active substitute) is never healthy.
-  const canProvision = hasTradeRouteConnection(
-    settlement.config?.tradeRouteAccess
-      || settlement.tradeRoute
-      || 'road',
-  );
+  const canProvision = (settlement.config?.tradeRouteAccess || settlement.tradeRoute || 'road') !== 'isolated';
   const chainHealthy = (c) =>
     !!c && (c.status === 'operational' || c.status === 'running' ||
       (c.status === 'vulnerable' && !c.dependency && !c.substituteActive && canProvision &&

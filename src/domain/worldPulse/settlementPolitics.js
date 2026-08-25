@@ -42,15 +42,9 @@
 import { clamp, clamp01 } from '../../kernel/math.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { stablePart } from './stablePart.js';
-import { treatyOrientationOf } from './treatyOrientation.js';
 import { faithAlignmentQuadrant, rulingPowerFromArchetype } from '../spatial/cohesionWeave.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { mobilizationSeverity } from './mobilization.js';
-// ES-5b — §3.11's bench discount. ⚠ THIS EDGE IS CROSS-LAYER AND THE RATCHET CANNOT SEE
-// IT: this module is UNLAYERED and `scanCrossLayerPairs` iterates LAYERED importers only,
-// so no pair key is minted here. That is FAIL-OPEN INVISIBILITY, not absence — CR-ES5B-4
-// mints the CPL-20 row anyway and names this edge in its docstring.
-import { presenceSharesFor } from './espionage/espionagePresence.js';
 
 /** @typedef {import('../settlement.schema.js').SimSettlement} SimSettlement */
 /** A settlement item as it appears on the pre-tick snapshot.
@@ -377,14 +371,6 @@ function pairInterest(a, b, kinship01) {
   let interest = structuralAffinity(a.archetype, b.archetype) * quadrantGate(kinship01);
   // rivals[] repulsion — a declared faction rivalry is a standing structural repulsion.
   if (a.rivalKeys.has(b.key) || b.rivalKeys.has(a.key)) interest *= 0.6;
-  // D3 SEAM (DELIBERATELY DEFERRED — DESIGN_SIM_DEPTH_R2 D3 x-cut "COUPLING (light)"): the crown's
-  // doctrine-course commitment (commitmentStockOf on doctrine:<deityRef>) should tilt the
-  // bloc-formation interest here (±, §G-clamped) — a zealot king pressing doctrine past its cliff
-  // is what doctrine-glued blocs form around/against ("the zealot king's court splits"). NOT wired
-  // this wave: pairInterest is pure (no worldState); threading the commitment in + biasing the
-  // formation draw shifts the lit-path settlementPolitics goldens (owner-gated golden-shift), and
-  // it AND-requires momentum ∧ beliefs ∧ faith lit + an imposed cult. The doctrine glue kind + the
-  // course both exist; the read is one commitmentStockOf call when this seam is closed.
   return round4(clamp(interest, 0, 3));
 }
 
@@ -549,29 +535,12 @@ export function rulingBlocOf(worldState, cid, item) {
   // Build a name→{power,isGoverning} map straight off the roster (the roster carries the
   // live power + isGoverning; factionStates are not needed for this read).
   const roster = rosterFactions(item);
-  // ES-5b — §3.11 THE ABSENCE COST, applied at the ONE chokepoint. `coalitionConsolidation01`
-  // and `blocDecisionFactor` each call this function independently, so a single insertion
-  // here serves all four downstream consumers (the war chooser, the NPC ladder, the war seat
-  // books, the corruption web) and no second insertion is owed. Dark ⇒ `shares` is null and
-  // the power sum is computed exactly as it is today, byte-identically.
-  //
-  // ⚠ THE DISCLOSED SHIFT (⟨F6⟩, FP §9 seam row 6). In a LIT world this MOVES bloc math,
-  // and the move is anticipated by name at DESIGN_FP_ARCH_ES.md:1123-1128. It is a
-  // one-time declared shift fenced by its own golden pair — never a silent re-record.
-  //
-  // ⚠ THE DECLARED ONE-TICK LAG (§0.2, CR-ES5B-2). `advanceRoads` writes the whereabouts
-  // mirror LATER in this same tick, so this read — like the other two bloc consumers —
-  // sees LAST tick's whereabouts. Uniform, forced by L1, declared, and pinned by case A5.
-  const shares = presenceSharesFor(worldState, item);
   let totalPower = 0;
   /** @type {Map<string, { power: number, isGoverning: boolean }>} */
   const byKey = new Map();
   for (const f of roster) {
     const key = stablePart(factionNameOf(f));
-    // ONE line reaches the numerator and the denominator together: `power` feeds both
-    // `totalPower` and `byKey`, and the share test below divides one by the other.
-    // An unjoinable name key yields the IDENTITY multiplier, never 0.
-    const power = factionPowerOf(f) * (shares ? (shares.byNameKey.get(key) ?? 1) : 1);
+    const power = factionPowerOf(f);
     totalPower += power;
     if (key && !byKey.has(key)) byKey.set(key, { power, isGoverning: f.isGoverning === true });
   }
@@ -659,16 +628,9 @@ export function factionRevanchism01(worldState, cid, factionName) {
 
 // ── §4 DIFFERENTIAL PEACE-TERM BURDEN (the revanchism input) ──────────────────────
 /**
- * The differential peace-term burden a settlement bears as THE PARTY A TREATY BINDS
- * (0..1) — the max burden01 across the terms landed on it in the treaties ledger. 0 when
- * the peace layer is dark or the settlement bears no term (byte-neutral). Pure.
- *
- * THE OBLIGOR IS READ THROUGH THE ONE ORIENTATION READER (CR-WR10-G), never off
- * `loserId`: revanchism is a story about bearing terms, and on a WR-10 sale the party
- * bearing them is the BUYER that is still paying for the town. The raw spelling read a
- * victor-free sale as the string "undefined", so a bought court's burden never reached
- * the strain ladder at all — a silence, not an error.
- *
+ * The differential peace-term burden a settlement bears as a treaty LOSER (0..1) — the
+ * max burden01 across the terms landed on it in the treaties ledger. 0 when the peace
+ * layer is dark or the settlement bears no term (byte-neutral). Pure.
  * @param {Record<string, unknown> | null | undefined} worldState
  * @param {string} cid
  * @returns {number}
@@ -679,7 +641,7 @@ function treatyBurdenFor(worldState, cid) {
   let burden = 0;
   for (const k of Object.keys(treaties).sort(compareCodepoint)) {
     const t = asObject(treaties[k]);
-    if (treatyOrientationOf(t).obligorId !== String(cid)) continue;
+    if (String(t.loserId ?? '') !== String(cid)) continue;
     const terms = Array.isArray(t.terms) ? t.terms : [];
     for (const term of terms) {
       const b = Number(asObject(term).burden01);

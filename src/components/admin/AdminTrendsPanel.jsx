@@ -26,7 +26,9 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { supabase } from '../../lib/supabase.js';
 import {
-  GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, RED, sans, serif_, SP, FS, swatch } from '../theme.js';
+  GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_HDR,
+  RED, sans, serif_, SP, R, FS, swatch,
+} from '../theme.js';
 import {
   PALETTE, fmtInt, deltaInfo, isoDaysAgo, todayIso,
 } from './AdminTrendsShared.js';
@@ -189,13 +191,10 @@ export default function AdminTrendsPanel() {
     setLoading(false);
   }, [from, to, granularity, mixField, distField, rowField, colField, activeMetrics]);
 
-  // Data-load effect: load() sets loading/rows on mount + dep change. Intentional.
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, [load]);
 
   // Fetch per-config variance when a signature is chosen.
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- clears/loads variance on signature change
     if (!configSig) { setVariance(null); return; }
     let ignore = false;
     setVarianceLoading(true);
@@ -256,14 +255,11 @@ export default function AdminTrendsPanel() {
   const hasAny = Object.values(data).some((d) => (d?.rows || []).length);
 
   // ── render ──────────────────────────────────────────────────────────────────
-  // P5 anti-box-soup: render flat. This panel only mounts inside AdminPanel's
-  // <Section>, which already supplies the card frame + the "Usage Trends" <h2>
-  // and its body padding — so no self-framed card-in-card, no duplicate <h3>
-  // title, no marginTop double-spacing inside the parent's padding.
   return (
-    <section aria-label="Usage trends">
-      {/* control bar — controls anchor right now that the title lives on the Section header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+    <section aria-label="Usage trends" style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD_HDR, padding: SP.lg, marginTop: SP.lg }}>
+      {/* control bar */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap', justifyContent: 'space-between' }}>
+        <h3 style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK_DEEP, margin: 0 }}>Usage Trends</h3>
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
           <div role="group" aria-label="Quick range" style={{ display: 'flex', gap: 2 }}>
             {PRESETS.map((p) => (
@@ -271,10 +267,10 @@ export default function AdminTrendsPanel() {
             ))}
           </div>
           <input type="date" value={from} max={to} onChange={(e) => setFrom(e.target.value)} aria-label="From"
-            style={{ fontFamily: sans, fontSize: FS.xs, color: INK, border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
+            style={{ fontFamily: sans, fontSize: FS.xs, color: INK, border: `1px solid ${BORDER}`, borderRadius: R.md, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
           <span style={{ color: MUTED, fontSize: FS.xs }}>→</span>
           <input type="date" value={to} min={from} max={todayIso()} onChange={(e) => setTo(e.target.value)} aria-label="To"
-            style={{ fontFamily: sans, fontSize: FS.xs, color: INK, border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
+            style={{ fontFamily: sans, fontSize: FS.xs, color: INK, border: `1px solid ${BORDER}`, borderRadius: R.md, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
           <Select label="by" value={granularity} onChange={setGranularity} options={GRANULARITIES.map((g) => ({ key: g, label: g }))} />
           <Button variant="gold" size="sm" onClick={load} busy={loading}>{loading ? 'Loading…' : 'Refresh'}</Button>
         </div>
@@ -282,7 +278,7 @@ export default function AdminTrendsPanel() {
       {refreshedAt && <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginTop: 4 }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</div>}
       {softError && (
         <p style={{ fontSize: FS.xs, color: swatch.danger || RED, fontFamily: sans, marginTop: SP.xs }}>
-          Some panels could not load: {softError}.
+          Some panels couldn’t load: {softError}. (Needs migrations 036–040 deployed.)
         </p>
       )}
 
@@ -299,7 +295,7 @@ export default function AdminTrendsPanel() {
 
       {/* tuning signals */}
       {signals.length > 0 && (
-        <div style={{ border: `1px solid ${GOLD}`, background: GOLD_BG, padding: SP.md, margin: `0 0 ${SP.md}px` }}>
+        <div style={{ border: `1px solid ${GOLD}`, background: GOLD_BG, borderRadius: R.md, padding: SP.md, margin: `0 0 ${SP.md}px` }}>
           <div style={{ fontFamily: serif_, fontSize: FS.sm, fontWeight: 700, color: INK_DEEP, marginBottom: SP.xs }}>Tuning signals</div>
           <ul style={{ margin: 0, paddingLeft: SP.lg, fontFamily: sans, fontSize: FS.xs, color: SECOND, lineHeight: 1.6 }}>
             {signals.map((s, i) => <li key={i}>{s}</li>)}
@@ -353,7 +349,7 @@ export default function AdminTrendsPanel() {
 
       {/* ── System behaviour: what the CODE does (pulse / stressor / variance) ── */}
       <h3 style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK_DEEP, margin: `${SP.lg}px 0 ${SP.sm}px` }}>
-        System behaviour <span style={{ fontFamily: sans, fontSize: FS.xxs, fontWeight: 500, color: MUTED }}>(what the simulation records)</span>
+        System behaviour <span style={{ fontFamily: sans, fontSize: FS.xxs, fontWeight: 500, color: MUTED }}>— what the engine mutates (much of this is research-tier)</span>
       </h3>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: SP.md }}>
         <Card title="World-pulse mutations">
@@ -456,7 +452,7 @@ function buildSignals({ summaryByMetric, dist, distField, mix, mixField }) {
   if (total >= 20 && entries.length) {
     const [topKey, topVal] = entries[0];
     const share = (topVal / total) * 100;
-    if (share >= 70) out.push(`${label(DIST_FIELDS, distField)} is heavily concentrated: “${topKey}” is ${share.toFixed(0)}% of generations. Other options are barely exercised.`);
+    if (share >= 70) out.push(`${label(DIST_FIELDS, distField)} is heavily concentrated: “${topKey}” is ${share.toFixed(0)}% of generations — other options are barely exercised.`);
     const unused = entries.filter(([, v]) => v === 0).length;
     if (unused > 0) out.push(`${unused} ${label(DIST_FIELDS, distField).toLowerCase()} value(s) never appeared in range.`);
   }

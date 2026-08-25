@@ -24,10 +24,9 @@
  */
 
 import { useStore } from '../../store';
-import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, MUTED, sans, FS, SP, swatch } from '../theme.js';
-import { Link as LinkIcon, AlertTriangle, ChevronRight, Eye, EyeOff, Lock } from 'lucide-react';
+import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, MUTED, sans, FS, SP, R, swatch } from '../theme.js';
+import { Link as LinkIcon, AlertTriangle, ChevronRight, Eye, EyeOff } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
-import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 // components-map-3: the filter chips draw from the canonical relationship palette
 // (relationshipEdgeStyle) — this toolbar used to show a gold "Client" dot beside a
 // purple drawn edge, a live cross-surface contradiction (P11).
@@ -42,13 +41,6 @@ export default function RoutesToolbar() {
   // map; we surface the WORST one as a single "your network is
   // strained" callout rather than enumerating every burg.
   const activeSettlement = useStore(s => s.settlement);
-  // mapChains tier gate (Owner Ruling #5 — "enforce mapChains"): this Chains
-  // eye-toggle is the second toggle affordance (LayersPanel's Supply-chains row
-  // is the first; the MapOverlay render is the third wiring point). Locked =
-  // visible with a Lock glyph; clicking fires the map-family pricing moment
-  // instead of toggling. The derivation (computeMapChains) stays tier-blind.
-  const mapChainsUnlocked = useStore(s => typeof s.canUseMapChains === 'function' && s.canUseMapChains());
-  const authTier = useStore(s => s.auth?.tier);
 
   const activeFilter = Array.isArray(layers?.relationshipFilter)
     ? layers.relationshipFilter
@@ -79,7 +71,7 @@ export default function RoutesToolbar() {
     <div style={{
       display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
       padding: `${SP.sm}px ${SP.md}px`,
-      background: CARD, border: `1px solid ${BORDER}`,
+      background: CARD, borderRadius: R.lg, border: `1px solid ${BORDER}`,
     }}>
       {/* Eyebrow */}
       <div style={{
@@ -115,12 +107,13 @@ export default function RoutesToolbar() {
                 padding: '3px 8px',
                 background: active ? `${rt.color}1A` : 'transparent',
                 border: `1px solid ${active ? rt.color : BORDER2}`,
+                borderRadius: R.sm,
                 color: active ? INK : SECOND,
                 fontWeight: active ? 700 : 500,
               }}
             >
               <span style={{
-                width: 8, height: 8,
+                width: 8, height: 8, borderRadius: 4,
                 background: rt.color,
                 opacity: active ? 1 : 0.45,
               }} />
@@ -151,20 +144,14 @@ export default function RoutesToolbar() {
         Roads
       </Button>
 
-      {/* Chains toggle — tier-gated (see mapChainsUnlocked above) */}
+      {/* Chains toggle */}
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => {
-          if (!mapChainsUnlocked) {
-            triggerPricingMoment('map_realm_teaser', useStore.getState().setActivePricingMoment, { tier: authTier });
-            return;
-          }
-          toggleLayer('chains');
-        }}
-        title={mapChainsUnlocked ? 'Toggle the supply-chain layer' : 'Supply chains unlock with Cartographer'}
-        aria-pressed={mapChainsUnlocked && !!layers?.chains}
-        icon={!mapChainsUnlocked ? <Lock size={11} data-testid="routes-chains-lock" /> : layers?.chains ? <Eye size={11} /> : <EyeOff size={11} />}
+        onClick={() => toggleLayer('chains')}
+        title="Toggle the supply-chain layer"
+        aria-pressed={!!layers?.chains}
+        icon={layers?.chains ? <Eye size={11} /> : <EyeOff size={11} />}
       >
         Chains
       </Button>
@@ -179,6 +166,7 @@ export default function RoutesToolbar() {
           background: 'rgba(162,52,52,0.08)',
           border: '1px solid rgba(162,52,52,0.35)',
           borderLeft: '3px solid #A23434',
+          borderRadius: R.sm,
           fontSize: FS.xs, fontFamily: sans,
         }}>
           <AlertTriangle size={11} color="#A23434" />

@@ -25,7 +25,7 @@
  * paid download; it only forgoes the later auto-upgrade.
  */
 
-import { useEffect, useState, useId } from 'react';
+import { useEffect, useState } from 'react';
 import { Download, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout } from '../lib/stripe.js';
@@ -35,11 +35,9 @@ import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { isConfigured } from '../lib/supabase.js';
 import { viewToPath } from '../lib/routes.js';
 import { t } from '../copy/index.js';
-import { sans, FS, RED, BODY, INK, PARCH } from './theme.js';
+import { sans, FS, RED, BODY } from './theme.js';
 import Button from './primitives/Button.jsx';
 import DossierLadderModal from './dossier/DossierLadderModal.jsx';
-import ExportUnlockDialog from './dossier/ExportUnlockDialog.jsx';
-import CaptchaGate from './perimeter/CaptchaGate.jsx';
 
 /**
  * Pure export-access decision — exported for direct unit testing without a React
@@ -85,18 +83,6 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
   const [busy, setBusy]   = useState(false);
   const [error, setError] = useState(null);
   const [ladderOpen, setLadderOpen] = useState(false);
-  // The durable-buy pitch is a popup now (owner order 2026-07-22) — the button
-  // opens ExportUnlockDialog instead of dropping a static explainer caption.
-  const [unlockOpen, setUnlockOpen] = useState(false);
-  // Wave-D human verification (INERT until the perimeterCaptcha flag + Turnstile
-  // keys are set): a managed-Turnstile token, ADDITIVE onto the create-checkout
-  // body. Null while the flag is off, so the checkout body is byte-identical.
-  const [captchaToken, setCaptchaToken] = useState(null);
-  // Order W2-b — the anon reassurance caption rides a hover/focus tooltip pill
-  // rather than a permanent line. captionHover drives its visibility; noteId wires
-  // the button's aria-describedby to the (always-in-DOM) pill text.
-  const [captionHover, setCaptionHover] = useState(false);
-  const noteId = useId();
 
   const access = resolveExportAccess({ tier, canExportFreely, saveId: effectiveSaveId, entitled: cached === true });
 
@@ -130,7 +116,7 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
       }
       // Best-effort retro-claim voucher — a failure must not block a paid download.
       try { stashDossierClaim({ settlement, checkoutToken }); } catch { /* non-fatal */ }
-      await startCheckout('single_dossier', { checkoutToken, settlement, captchaToken: captchaToken || undefined });
+      await startCheckout('single_dossier', { checkoutToken, settlement });
       // startCheckout redirects on success; we only reach here on failure.
     } catch (e) {
       setError(e.message || t('dossierExport.buySaved.error'));
@@ -152,16 +138,11 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
     setBusy(true); setError(null);
     try {
       const { saves: savesService } = await import('../lib/saves.js');
-      // V2 DEFAULT-MINT (create chokepoint 3/3): the save-first rung persists a NEW settlement —
-      // mint layout v2 onto its fresh blob (non-clobbering; an existing mapEdits container is
-      // preserved verbatim). Lazy import keeps first-paint byte-identical.
-      const { newSettlementMapEdits } = await import('../domain/townMap/mapEdits.js');
-      const minted = settlement.mapEdits ? settlement : { ...settlement, mapEdits: newSettlementMapEdits() };
-      const config = minted._config || null;
+      const config = settlement._config || null;
       const newSaveId = await savesService.save({
-        name: minted.name || 'Untitled Settlement',
-        tier: minted.tier || 'unknown',
-        settlement: minted,
+        name: settlement.name || 'Untitled Settlement',
+        tier: settlement.tier || 'unknown',
+        settlement,
         config,
       });
       // Stamp the active save id AND hold it locally so the rung advances to
@@ -180,51 +161,37 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
     }
   }
 
-  // ── The signed-in durable purchase now lives in ExportUnlockDialog (owner
-  // order 2026-07-22): the durable single-dossier checkout runs from the popup's
-  // confirm through the same startCheckout('single_dossier', { saveId }) seam, so
-  // this component no longer holds a runSavedCheckout of its own. (Wave-D captcha
-  // is inert today; when it activates, thread its token into ExportUnlockDialog —
-  // the anon one-time path below still carries the CaptchaGate.)
+  // ── The signed-in durable purchase, keyed to this saved dossier ─────────────
+  async function runSavedCheckout() {
+    setBusy(true); setError(null);
+    try {
+      await startCheckout('single_dossier', { checkoutToken: createDossierCheckoutToken(), saveId });
+      // Redirects on success.
+    } catch (e) {
+      setError(e.message || t('dossierExport.buySaved.error'));
+      setBusy(false);
+    }
+  }
 
   // ── State: ANON → the ladder popup ──────────────────────────────────────────
   if (access.reason === 'anon') {
     return (
       <div style={wrapStyle}>
-        {/* The Buy button + its hover pill. The reassurance caption (order W2-b,
-            owner-dictated) rides a hover/focus tooltip instead of a permanent line.
-            It stays in the DOM and is wired through the button's aria-describedby via
-            an OPACITY toggle (never display/visibility) — so it never leaves the a11y
-            tree and screen readers announce it even while the pill is visually hidden.
-            (The manager flagged mobile-invisibility to the owner separately; the
-            string's aria-describedby home keeps it reachable regardless.) */}
-        <div style={{ position: 'relative', display: 'inline-flex' }}>
-          <Button
-            type="button"
-            variant="primary"
-            size={size}
-            icon={<Download size={12} />}
-            disabled={!isConfigured}
-            aria-describedby={noteId}
-            onClick={() => { setError(null); setLadderOpen(true); }}
-            onMouseEnter={() => setCaptionHover(true)}
-            onMouseLeave={() => setCaptionHover(false)}
-            onFocus={() => setCaptionHover(true)}
-            onBlur={() => setCaptionHover(false)}
-            style={{ minHeight: 44 }}
-            title={isConfigured
-              ? `Buy this dossier as a PDF for ${SINGLE_DOSSIER.priceLabel}. No account required.`
-              : 'Payments are not configured in this environment.'}
-          >
-            {`Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
-          </Button>
-          <span id={noteId} role="tooltip" style={{ ...pillStyle, opacity: captionHover ? 1 : 0 }}>
-            One-time, no account needed.
-          </span>
-        </div>
-        {/* Wave-D human verification (INERT until activated). Managed/invisible;
-            the token is captured before the ladder's one-time checkout fires. */}
-        <CaptchaGate action="dossier" onToken={setCaptchaToken} />
+        <Button
+          type="button"
+          variant="primary"
+          size={size}
+          icon={<Download size={12} />}
+          disabled={!isConfigured}
+          onClick={() => { setError(null); setLadderOpen(true); }}
+          style={{ minHeight: 44 }}
+          title={isConfigured
+            ? `Buy this dossier as a PDF for ${SINGLE_DOSSIER.priceLabel}. No account required.`
+            : 'Payments are not configured in this environment.'}
+        >
+          {`Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
+        </Button>
+        <span style={captionStyle}>One-time, no account needed.</span>
         {error && <span style={errStyle}>{error}</span>}
         {ladderOpen && (
           <DossierLadderModal
@@ -241,13 +208,6 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
 
   // ── State: signed-in, no export gate, UNSAVED draft → save-first CTA ─────────
   if (access.reason === 'unsaved') {
-    // Owner order (2026-07-22, order-6 extension): the save-first EXPORT-pitch
-    // explainer no longer renders as a static caption. The button label already
-    // states the action ("Save this settlement to unlock its exports"), so the
-    // save-first path needs no static pitch (JUDGMENT: plain removal, not a dialog
-    // variant — the click's behavior is self-evident from its label). The at-cap
-    // WARNING (why saving is blocked) is not an export pitch and stays, surfaced
-    // only when the account is at its save limit.
     return (
       <div style={wrapStyle}>
         <Button
@@ -258,22 +218,24 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
           busy={busy}
           onClick={runSaveFirst}
           style={{ minHeight: 44 }}
-          title={canSave ? undefined : t('dossierExport.saveFirst.atCap')}
+          title={canSave
+            ? t('dossierExport.saveFirst.subline', { price: SINGLE_DOSSIER.priceLabel })
+            : t('dossierExport.saveFirst.atCap')}
         >
           {t('dossierExport.saveFirst.cta')}
         </Button>
-        {!canSave && <span style={captionStyle}>{t('dossierExport.saveFirst.atCap')}</span>}
+        <span style={captionStyle}>
+          {canSave
+            ? t('dossierExport.saveFirst.subline', { price: SINGLE_DOSSIER.priceLabel })
+            : t('dossierExport.saveFirst.atCap')}
+        </span>
         {error && <span style={errStyle}>{error}</span>}
       </div>
     );
   }
 
   // ── State: signed-in, no export gate, SAVED, not entitled → durable $2.99 ────
-  // (access.reason === 'unpurchased'). Owner order (2026-07-22): the explainer no
-  // longer sits as a static caption — the button opens the ExportUnlockDialog
-  // popup, which carries the same "Unlock all exports … $2.99" title + explainer
-  // and runs the durable checkout on confirm. Entitled owners never reach here
-  // (access.allowed short-circuits to null above), so the export runs directly.
+  // (access.reason === 'unpurchased')
   return (
     <div style={wrapStyle}>
       <Button
@@ -281,15 +243,18 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
         variant="secondary"
         size={size}
         icon={<Download size={12} />}
+        busy={busy}
         disabled={!isConfigured}
-        onClick={() => { setError(null); setUnlockOpen(true); }}
+        onClick={runSavedCheckout}
         style={{ minHeight: 44 }}
-        title={t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
+        title={t('dossierExport.buySaved.subline')}
       >
-        {t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
+        {busy
+          ? t('dossierExport.buySaved.busy')
+          : t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
       </Button>
+      <span style={captionStyle}>{t('dossierExport.buySaved.subline')}</span>
       {error && <span style={errStyle}>{error}</span>}
-      <ExportUnlockDialog open={unlockOpen} saveId={effectiveSaveId} onClose={() => setUnlockOpen(false)} />
     </div>
   );
 }
@@ -305,14 +270,3 @@ const errStyle = { fontSize: FS.xs, color: RED, textAlign: 'center' };
 // BODY (ink-600) is the WCAG-passing helper-text color; MUTED fails 4.5:1 and
 // must not carry the price/rationale a purchaser needs.
 const captionStyle = { fontSize: FS.xs, color: BODY, textAlign: 'center', lineHeight: 1.4 };
-// Order W2-b — the anon reassurance as a hover/focus tooltip. Absolutely positioned
-// above the button so it never shifts layout; toggled by OPACITY only (stays in the
-// DOM + a11y tree so aria-describedby keeps announcing it). A flat dark ink plate /
-// parchment text (the deep-craft rule-framed idiom — no rounded corner, no z-axis
-// shadow); pointer-events off so it never eats a click.
-const pillStyle = {
-  position: 'absolute', bottom: 'calc(100% + 6px)', left: '50%', transform: 'translateX(-50%)',
-  whiteSpace: 'nowrap', padding: '4px 10px',
-  background: INK, color: PARCH, fontSize: FS.xs, fontFamily: sans, lineHeight: 1.4,
-  pointerEvents: 'none', transition: 'opacity 0.15s ease', zIndex: 5,
-};

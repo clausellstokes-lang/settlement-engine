@@ -1,0 +1,28 @@
+export const meta = {
+  name: 'design-council-ribbon-v2',
+  description: 'Fable-max design counsel: the ribbon judged whole — overhaul permitted, photorealism interrogated, harmony with the site behind it',
+  phases: [{ title: 'Counsel', detail: 'one Fable agent at max effort, exhaustive research, advisory only' }],
+}
+const SPEC = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/1c189f3d-9fc3-4fc9-9cb7-b767525d28d5/scratchpad/ribbon-v4-spec.md'
+const S = { type:'object', required:['assessment','photorealismVerdict','recommendations','research','risks'], properties:{assessment:{type:'string'},photorealismVerdict:{type:'string'},recommendations:{type:'array',items:{type:'string'}},research:{type:'array',items:{type:'string'}},risks:{type:'array',items:{type:'string'}}}}
+phase('Counsel')
+const c = await agent(`YOU ARE THE DESIGN COUNSEL — advisory ONLY, you implement NOTHING, you edit NO repo file (scratchpad notes fine). The owner of SettlementForge wants your unbounded judgment on the site's top ribbon, with THREE explicit licenses they granted in their own words:
+(1) "a design overhaul is not out of the question" — you may propose a fundamental rethink, not just refinements, if your judgment says the current direction underserves the intent;
+(2) they want your honest thoughts on THE IDEA OF PHOTOREALISM ITSELF — is photoreal-through-texture the right pursuit for this header, or would a different register (painterly, woodcut, engraved-line, flat-heraldic, or something you argue for) serve the intent better? Give a real verdict with reasoning, not a both-sides shrug;
+(3) the ribbon must LOOK GOOD WITH THE REST OF THE SITE BEHIND IT — judge it as part of the whole page (the parchment body, the painted map-table hero art, the aged-paper cards, the dossier surfaces, the dark mobile bottom bar), not as an isolated component. Whole-page harmony is a first-class criterion, equal to the motif itself.
+
+THE INTENT (fixed; everything else is yours to question): the ribbon evokes HALF OF A WAR ARROW — a shaft, with Create/Library/Realm emphasized as the feather fletching (the workflow trio visually feeding one into the next toward Realm), thread whipping, and the gilded "SettlementForge" wordmark with a wax-seal o as the identity. Medieval, artisanal, craft-honest.
+
+CONTEXT TO ABSORB FIRST: read ${SPEC} (the accepted V4 spec now being built: cedar shaft, bole-bedded gold leaf, gilded seal-o, four mirrored parallel feather slashes, quill-line indicator, photoreal texture with 1x/retina thresholds). Live code: /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold — src/components/nav/*, src/components/brand/*, src/components/theme.js; a dev server may serve http://localhost:5201 (screenshot the REAL page with the site behind the ribbon if browser tools are available to you — that whole-page view is your criterion (3) evidence). Prior banked research (build on, do not redo): Blizzard UI textures pixel-censused (tier-by-material, near-black fields, flat emblems); OSRS measured (chroma <1%, 1px keylines, grit-not-gloss); heraldic craft (5:6 heater, tincture as code, engraving-fails-on-dark, redraw-for-size); letter-substitution marks; SVG determinism (degenerate seeds).
+
+BINDING LAWS (respect, or argue to change with the cost priced): WCAG AA per rider on COMPOSITED grounds; paint-only overhang (fixed header box); deterministic rendering; one light; seal only in the drawn wordmark; plain typed text; focus rings; no ancestor filters; the wood dead-band law (body ≤ L 0.13 given parchment labels — unless your palette proposal re-derives the registers honestly); THE PROMISE (seeded content shifts only under ruled windows — chrome styling is free of it).
+
+YOUR MANDATE: extensive and exhaustive research WHEREVER YOUR JUDGMENT WANTS — real bowyer/fletching photography, illuminated manuscripts, woodcut and engraving traditions, game/film UI and prop design beyond the banked teardowns, typography on textured grounds, header/hero composition on content-rich sites, motion and state design — then deliver:
+(a) ASSESSMENT — the current direction judged whole against the intent AND against the page behind it: what is excellent and untouchable, what is improvable, what is a wrong turn.
+(b) PHOTOREALISM VERDICT — your ruling on the register question with full reasoning: keep photoreal-through-texture, temper it, or change register; if change, to what, and why it serves the arrow intent and the page harmony better.
+(c) RECOMMENDATIONS — ranked and concrete, from smallest refinement to (if warranted) the overhaul: what, why it serves the intent and the whole page, rough cost, which law it touches. Include the identity system (wordmark/seal/device) and how far the arrow language should extend beyond the header.
+(d) RESEARCH — what you consulted and the load-bearing findings.
+(e) RISKS — where each direction tips over (kitsch, noise, mud-on-parchment, banner-blindness, performance), with tripwires.
+Advisory only. Depth over speed. Your structured output is what the owner reads.`,
+  {label:'counsel:ribbon-whole', phase:'Counsel', model:'fable', effort:'max', schema:S})
+return { counsel: c }

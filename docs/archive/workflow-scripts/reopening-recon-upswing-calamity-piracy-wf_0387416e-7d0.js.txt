@@ -1,0 +1,50 @@
+export const meta = {
+  name: 'reopening-recon-upswing-calamity-piracy',
+  description: 'Parallel recon: calamity implementation map, upswing design corpus, bandit-parity facts',
+  phases: [{ title: 'Recon', detail: '3 parallel surveyor reads' }],
+}
+
+const SCHEMA = {
+  type: 'object',
+  properties: {
+    report: { type: 'string', description: 'The full recon report in complete sentences, organized by the numbered questions' },
+    citations: { type: 'array', items: { type: 'string' }, description: 'file:line references for every load-bearing claim' },
+  },
+  required: ['report', 'citations'],
+}
+
+phase('Recon')
+const [calamity, upswing, bandits] = await parallel([
+  () => agent(`You are a READ-ONLY surveyor in the SettlementForge repo at /Users/cstokes/Desktop/settlement-engine (deterministic D&D settlement/world simulator). Do not edit anything. Map the M11b CALAMITY system end-to-end (it landed at commit 62c81a0c, "CALAMITY: the riverside town's flood-year, and an emergent tail that runs itself"). Answer precisely, with file:line citations:
+1. TYPING: Is calamity typed by disaster kind (flood vs fire vs quake...) anywhere in MECHANICS — different effect shapes per type — or is it already a single mechanical bucket? List every place the words flood/riverside/drought/fire/quake appear in calamity-related engine code, and classify each occurrence as: (a) mechanical branching, (b) probability weighting, (c) receipt/chronicle prose, (d) comment only.
+2. EFFECTS: Enumerate the full effect set a calamity applies (population, economy, infrastructure/institutions, stressors, the "emergent tail") and where each is computed.
+3. INITIATION: What loads the dice — terrain/geography (river/coast), season, prior state? Cite the fork key + the weight inputs.
+4. COUNTERPART: Does calamity have a forceable dossier verb / affordance-manifest entry / dials / preview (the counterpart criterion)? If not, note its absence explicitly.
+5. LEGIBILITY: What prose does the chronicle/news emit for a calamity — quote the actual strings/copy keys. Are they flood-specific?
+6. GATES + PINS: What flag gates calamity, and which goldens/tests pin its current behavior (list test files)? Which of those would shift if the receipts/prose were made flavor-agnostic?
+7. CONVERSION COST: Enumerate every site that would change to make calamity a fully flavor-agnostic bucket (severity-banded effects, geography-derived EXPOSURE weighting the dice without naming a disaster type, cosmetic-only flavor hint). Be exhaustive — this becomes an implementer work-list.
+Your final text is structured output consumed by the coordinator; be complete and factual.`, { label: 'recon:calamity', phase: 'Recon', schema: SCHEMA }),
+
+  () => agent(`You are a READ-ONLY surveyor in the SettlementForge repo at /Users/cstokes/Desktop/settlement-engine. Do not edit anything. Locate and summarize the frozen W-UPSWING design (the reconstruction / boom / golden-age counterweight — the designed-but-unbuilt upside arc). Search docs/ for: upswing, reconstruction, boom, golden age, recovery, flourish — likely homes: DESIGN_COHESION_WEAVE.md (a §F or similar), UPSWING or RELATIONSHIP_FLOWS docs, PHASE55 docs. Answer with citations:
+1. WHERE is the design frozen (exact doc + section), and QUOTE its load-bearing mandates (triggers, mechanics, instruments, verbs, pins).
+2. What SUBSTRATE already exists in code: any recovery/rebuild/reconstruction mechanics, post-calamity tails, prosperity growth paths, morale/cohesion upswing reads. Enumerate with file:line.
+3. What SEAMS would an implementer wire into (pulse kernel phases, drama classes, stressor lifecycle, the generosity/cohesion modules, peace dividends)? List the exact functions/files.
+4. GAPS: what the design mandates that has NO substrate yet.
+5. Any pins/goldens that constrain the build (dormancy method, byte-identity).
+Your final text is structured output consumed by the coordinator; be complete and factual.`, { label: 'recon:upswing', phase: 'Recon', schema: SCHEMA }),
+
+  () => agent(`You are a READ-ONLY surveyor in the SettlementForge repo at /Users/cstokes/Desktop/settlement-engine. Do not edit anything. Map LAND BANDITRY + EMBATTLEMENT exactly, so sea piracy can be specified as EXACT parity ("treat pirates the same as bandits in embattled regions/roads"). Answer with citations:
+1. How is a region/road/settlement marked EMBATTLED — the exact state, who writes it, its lifecycle.
+2. What does route/edge DANGER read for land travel — enumerate every input to the danger/embattlement score (grep scoreRoute, danger, embattl, bandit, raider in src/domain/spatial and worldPulse).
+3. Do land bandits/raiders couple to criminal facets or thievesGuildStrength anywhere? To broadcast wealth (the generosity raider coupling)? To garrison/patrol/military presence as a damper? Cite each coupling that EXISTS and note explicitly which do NOT exist.
+4. What counterplay exists against land banditry (patrols, escorts, verbs, instruments)?
+5. SEA TODAY: what does M8 sea-lane routing currently read for danger on sea edges — is port-node embattlement already treated as piracy (there is a pin near tests/domain/seaLanes.test.js:364)? What is the exact current sea-edge danger computation?
+6. Deliver the PARITY SPEC: the minimal change set that makes sea edges price piracy exactly as land edges price banditry — same inputs, same shape, nothing pirate-specific added or omitted.
+Your final text is structured output consumed by the coordinator; be complete and factual.`, { label: 'recon:bandit-parity', phase: 'Recon', schema: SCHEMA }),
+])
+
+return {
+  calamity: calamity || null,
+  upswing: upswing || null,
+  bandits: bandits || null,
+}

@@ -1,13 +1,9 @@
-import { Component } from 'react';
+import React from 'react';
+import { FS, swatch } from './components/theme.js';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import './styles/a11y.css';
-// THE ORGANIC CRAFT layer (pure CSS — the primitive classes + the generated
-// :root token vars). Eager CSS so every surface can speak the manuscript
-// grammar; the organic JS stays lazy (tests/design/organicVars.test.js pins it).
-import './styles/organic.css';
-import './styles/organicVars.css';
 import { useStore } from './store';
 import { emitCssTokens } from './design/tokens.js';
 import { installAnalyticsProvider } from './lib/analyticsProvider.js';
@@ -15,26 +11,11 @@ import { installAnalyticsQueue, setAnalyticsElevated } from './lib/analyticsQueu
 import { track, EVENTS } from './lib/analytics.js';
 import { returnVisitBand, stampVisit } from './lib/session.js';
 import { reportError, installGlobalErrorHandlers } from './lib/errorReporter.js';
-import OperatorMessagesProvider from './components/account/OperatorMessagesProvider.jsx';
 
 // Emit design tokens as CSS custom properties on :root so stylesheets and
 // inline styles can read them as `var(--color-gold-500)`, `var(--space-4)`,
 // `var(--sem-text-body)`, etc. JS imports keep working unchanged.
 emitCssTokens();
-
-// V-27d IM FELL DISPLAY FACE — taste-gated, OFF by default. ZERO EAGER: both the
-// flag registry (lib/flags.js, its own lazy chunk) and the face module load ONLY
-// when the flag is on, via dynamic import — so the default flag-off path adds no
-// static import to the first-paint closure and injects no @font-face. Lighting it
-// is the owner's taste flip AND requires vendoring the IM Fell woff2 (imFellFace.js).
-import('./lib/flags.js')
-  .then(({ flag }) => {
-    if (flag('imFellDisplayFace')) {
-      return import('./lib/imFellFace.js').then((m) => m.applyImFellDisplayFace());
-    }
-    return undefined;
-  })
-  .catch(() => {});
 
 // Tier 8.8 - install the analytics provider (Plausible by default, when
 // VITE_PLAUSIBLE_DOMAIN is set; PostHog as an opt-in alternative). No-op
@@ -125,23 +106,25 @@ if (import.meta.env.DEV) {
   window.__store = useStore;
 }
 
-class ErrorBoundary extends Component {
+class ErrorBoundary extends React.Component {
   constructor(props) { super(props); this.state = { error: null }; }
   static getDerivedStateFromError(e) { return { error: e }; }
   componentDidCatch(e, info) {
-    // reportError always logs locally before forwarding the structured crash
-    // envelope. A second console dump here duplicated the same failure four
-    // times without adding evidence.
+    console.error('=== RENDER ERROR ===');
+    console.error('Error:', e.message);
+    console.error('Stack:', e.stack);
+    console.error('Component stack:', info.componentStack);
     reportError(e, { kind: 'react.render', componentStack: info?.componentStack });
   }
   render() {
-    const { error } = this.state;
-    if (error) {
-      return (
-        <div className="root-error-boundary">
-          <h2>Render Error</h2>
-          <pre>{error.stack || error.message}</pre>
-        </div>
+    if (this.state.error) {
+      return React.createElement('div', {
+        style: { padding: 24, fontFamily: 'monospace', background: swatch.dangerBg, border: `2px solid ${swatch.danger}`, margin: 16, borderRadius: 8 }
+      },
+        React.createElement('h2', null, 'Render Error'),
+        React.createElement('pre', { style: { whiteSpace: 'pre-wrap', fontSize: FS.sm } },
+          this.state.error.message + '\n\n' + this.state.error.stack
+        )
       );
     }
     return this.props.children;
@@ -149,9 +132,7 @@ class ErrorBoundary extends Component {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <ErrorBoundary>
-    <OperatorMessagesProvider>
-      <App />
-    </OperatorMessagesProvider>
-  </ErrorBoundary>,
+  React.createElement(ErrorBoundary, null,
+    React.createElement(App)
+  )
 );

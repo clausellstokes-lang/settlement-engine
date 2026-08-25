@@ -19,18 +19,10 @@ import { clamp01 } from '../../kernel/math.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS, prosperityRank, popToTier } from '../../data/constants.js';
 import { formatCount } from '../formatNumber.js';
 import { stablePart } from './stablePart.js';
-import { settlementHasUnderways } from './clandestineFacet.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { distributeMigrants } from './populationDynamics.js';
 import { SETTLEMENT_LIFECYCLE_TUNING, drawSteadingName } from './settlementLifecycleKernel.js';
-// WAVE P1a — the viability ladder (docs/DESIGN_DEMOGRAPHIC_ENGINE.md §7b) reads the
-// demographic engine's ONE dormancy gate; it never opens a second one.
-import { demographicsActive } from './demographicsRates.js';
-// WAVE P4 (design §7b): the NAMED rung of the ladder P1a's head-count read opened. A
-// pure read, stamped onto the terminal receipt; it opens no second descent and gates
-// nothing here (the death gate is P1a's, unchanged).
-import { viabilityGradeOf } from './demographicsLadder.js';
 import { withEventConditionsSynced } from '../activeConditions.js';
 
 /** @typedef {import('./settlementLifecycleKernel.js').LcSettlement} LcSettlement */
@@ -107,7 +99,7 @@ function supportOf(pIndex, id) {
   ));
 }
 
-/** @typedef {{ declineSince?: number, zeroSince?: number, lastDeathCandidateTick?: number }} LcTickMeta */
+/** @typedef {{ declineSince?: number, lastDeathCandidateTick?: number }} LcTickMeta */
 /** @typedef {Record<string, unknown>} LcCandidate */
 
 // ── THE SHARED OUTCOME BUILDERS (force ≡ organic BY CONSTRUCTION) ──────────────
@@ -122,23 +114,9 @@ function supportOf(pIndex, id) {
  * @param {number} args.dwell @param {number} args.support
  * @param {string} args.applyMode
  * @param {boolean} [args.forced]
- * @param {boolean} [args.emptied] the empty-settlement fast path fired (dwell at/
- *   below the effective-zero floor met — certain emission, no lottery)
- * @param {boolean} [args.viabilityLadder] WAVE P1a: this death was authorized at the
- *   bottom of the ladder by the CENSUS rather than by the tier label (the settlement is
- *   thorp-scale in fact while its record still reads higher). Stamped onto the patch so
- *   the writer's self-re-verify, which sees only (settlement, outcome) and may run many
- *   ticks later from a parked proposal, can honor the same reading instead of refusing
- *   the outcome its own evaluator emitted. Absent ⇒ the legacy label-only contract.
- * @param {string|null} [args.viabilityGrade] WAVE P4 (design §7b): the NAMED rung the
- *   ONE grade read put this settlement on, stamped onto the receipt's lifecycle
- *   metadata so the descent is legible as a ladder rather than as a single verdict.
- *   Declared on THIS typedef — the owning one — beside `viabilityLadder`, and
- *   OPTIONAL for the same reason: null (a dark demographic engine, or either force
- *   verb) drops the key entirely and serializes exactly as it did before the wave.
  * @returns {LcCandidate}
  */
-export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatialActive, dwell, support, applyMode, forced = false, emptied = false, viabilityLadder = false, viabilityGrade = null }) {
+export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatialActive, dwell, support, applyMode, forced = false }) {
   const s = item.settlement || {};
   const cid = String(item.id ?? '');
   const name = String(item.name || s.name || cid);
@@ -146,24 +124,11 @@ export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatia
   const depth = clamp01(1 - support);
   /** @type {Array<{ saveId: string, delta: number, reason: string }>} */
   const populationDeltas = [{
-    saveId: cid, delta: pop > 0 ? -pop : 0, // never -0 (an empty death moves nobody)
+    saveId: cid, delta: -pop,
     reason: 'The last residents leave with the wagons — the settlement dies.',
   }];
   /** @type {Record<string, unknown>} */
-  // WAVE P4 (design §7b): the NAMED rung this death was reached at, recorded on the
-  // receipt so the descent is legible as a ladder rather than as a single verdict.
-  // Conditional and drop-when-absent: a dark world stamps nothing and serializes
-  // exactly as it did before this wave.
-  const metadata = {
-    tick,
-    dwell,
-    lifecycle: {
-      residual: pop,
-      forced,
-      ...(emptied ? { emptied: true } : {}),
-      ...(viabilityGrade ? { viabilityGrade: String(viabilityGrade) } : {}),
-    },
-  };
+  const metadata = { tick, dwell, lifecycle: { residual: pop, forced } };
   if (spatialActive) {
     // M4 realized-debit dispatch: the shed pool the migrationKernel reads
     // POST-APPLY (conservation asserted in dispatchMigrations).
@@ -185,29 +150,21 @@ export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatia
     ruleFamily: 'lifecycle',
     targetSaveId: item.id,
     severity: clamp01(0.7 + depth * 0.25),
-    // CERTAIN for a forced verb AND for the empty-settlement fast path: an empty
-    // town rolls no survival lottery. The ordinary ladder keeps its rare draw.
-    probability: forced || emptied ? 1 : clamp01(T.DEATH_EMIT_P + depth * T.DEATH_DEPTH_WEIGHT),
+    probability: forced ? 1 : clamp01(T.DEATH_EMIT_P + depth * T.DEATH_DEPTH_WEIGHT),
     applyMode,
     headline: `${name} is dying`,
     summary: forced
       ? `${name} is abandoned by decree; its last ${formatCount(pop)} residents scatter for good.`
-      : emptied
-        ? `${name} has stood all but empty for ${dwell} ticks; the last hearths are cold and the settlement passes from the living map.`
-        : `${name} has dwelled in terminal decline for ${dwell} ticks; its last ${formatCount(pop)} residents may scatter for good.`,
+      : `${name} has dwelled in terminal decline for ${dwell} ticks; its last ${formatCount(pop)} residents may scatter for good.`,
     reasons: [
       forced
         ? 'FORCE_ABANDON — the DM-authority terminal-death verb (dwell-bypassing; resolves through the organic path).'
-        : emptied
-          ? `Effectively empty (population ${formatCount(pop)}, at or below the ${T.ZERO_POP_FLOOR}-soul floor); an empty settlement is the strongest terminal signal.`
-          : `Demoted to the ladder's bottom rung and unsupported (support ${support.toFixed(2)}).`,
-      forced ? null : emptied
-        ? `Empty dwell ${dwell} at or past ${T.ZERO_POP_DWELL}; certain, never a lottery (an empty town cannot endure).`
-        : `Terminal dwell ${dwell} ≥ ${T.TERMINAL_DWELL} — extended, never sudden.`,
+        : `Demoted to the ladder's bottom rung and unsupported (support ${support.toFixed(2)}).`,
+      forced ? null : `Terminal dwell ${dwell} ≥ ${T.TERMINAL_DWELL} — extended, never sudden.`,
       'The last residents disperse with fates UNRESOLVED — the engine kills no named character, ever.',
     ].filter((r) => r != null).map(String),
     populationDeltas,
-    lifecyclePatch: { kind: 'terminal_death', saveId: item.id, ...(viabilityLadder ? { viabilityLadder: true } : {}) },
+    lifecyclePatch: { kind: 'terminal_death', saveId: item.id },
     proposalPayload: { kind: 'settlement_terminal_death', saveId: item.id },
     generatedAtTick: tick,
     metadata,
@@ -298,9 +255,7 @@ export function buildResettleOutcome({ item, donorPool, tick, forkFn, applyMode,
 
 /**
  * THE CANDIDATE EVALUATOR (the tierResourceDynamics lane) — terminal death for a
- * first-class settlement that demoted to thorp and DWELLED in terminal decline
- * (plus the EMPTY-SETTLEMENT FAST PATH: an effectively-empty thorp dies with
- * certainty after a short dedicated dwell that trickle bounces cannot reset),
+ * first-class settlement that demoted to thorp and DWELLED in terminal decline,
  * and resettlement of a remnant. Pure over (worldState, snapshot, pIndex, rng);
  * threads worldState (the decline dwell nests under
  * settlementTickStates[cid].settlementLifecycle, byte-neutral when empty).
@@ -329,9 +284,6 @@ export function evaluateSettlementLifecycle(worldState, snapshot, pIndex, contex
 
   const tick = Number.isFinite(context.tick) ? Number(context.tick) : Number(worldState?.tick) || 0;
   const spatialActive = context.spatialActive === true;
-  // WAVE P1a: the viability ladder's gate, read ONCE through the wave's single flag
-  // reader. Dark ⇒ every expression that consults it below is the legacy one.
-  const demographicsLit = demographicsActive({ simulationRules: rules });
   const forkFn = context.rng && typeof context.rng.fork === 'function' ? context.rng.fork.bind(context.rng) : null;
   const settlementTickStates = { ...(/** @type {Record<string, Record<string, unknown>>} */ (worldState?.settlementTickStates) || {}) };
   /** @type {LcCandidate[]} */
@@ -395,20 +347,8 @@ export function evaluateSettlementLifecycle(worldState, snapshot, pIndex, contex
 
     // ── TERMINAL DEATH (design §2): thorp-tier + extended decline dwell. ──
     const tier = String(s.tier || popToTier(num(s.population, 0)));
-    const pop = Math.max(0, Math.round(num(s.population, 0)));
     const prior = /** @type {LcTickMeta|null} */ (settlementTickStates[cid]?.settlementLifecycle || null);
-    // ── WAVE P1a, THE BOTTOM OF THE LADDER (design §7b) ───────────────────────
-    // The precondition is the ladder's last rung and it stays the last rung; what wave
-    // P1a fixes is that the rung was read from the LABEL alone. A settlement's tier is
-    // written by tier drift, which is streak-gated, probabilistic, and proposal-gateable,
-    // so a place can hold forty people while its record still says town, and the label
-    // lag alone made it immortal. Lit, the rung is read from the HEAD COUNT as well: a
-    // settlement that is thorp-scale in fact is at the bottom of the ladder whatever it
-    // is still called. This adds no second demotion writer and mints no tier: the tier
-    // stays exactly what tier drift says it is, and only the death gate learns to look
-    // at the census. Dark, the expression is the original label test, unchanged.
-    const atBottom = tier === 'thorp' || (demographicsLit && popToTier(pop) === 'thorp');
-    if (!atBottom) {
+    if (tier !== 'thorp') {
       // Recovered above the bottom rung: the dwell clears (drop the sub-key).
       if (prior && settlementTickStates[cid]) {
         const rest = { ...settlementTickStates[cid] };
@@ -417,6 +357,7 @@ export function evaluateSettlementLifecycle(worldState, snapshot, pIndex, contex
       }
       continue;
     }
+    const pop = Math.max(0, Math.round(num(s.population, 0)));
     const support = supportOf(pIndex, cid);
     const thorpMin = num(/** @type {{ min?: number }} */ ((/** @type {Record<string, unknown>} */ (POPULATION_RANGES)).thorp || {}).min, 8);
     const declining = support <= T.DEATH_SUPPORT_FLOOR || pop < thorpMin;
@@ -424,48 +365,24 @@ export function evaluateSettlementLifecycle(worldState, snapshot, pIndex, contex
     /** @type {LcTickMeta} */
     const meta = {};
     if (Number.isFinite(prior?.lastDeathCandidateTick)) meta.lastDeathCandidateTick = num(prior?.lastDeathCandidateTick, 0);
-    const cooled = meta.lastDeathCandidateTick == null
-      || (tick - num(meta.lastDeathCandidateTick, 0)) >= T.DEATH_RETRY_COOLDOWN;
-
-    // ── THE EMPTY-SETTLEMENT FAST PATH (owner-signed 2026-07-31): population at/
-    // below the effective-zero floor is the STRONGEST terminal signal, never a
-    // disqualifier. The dedicated dwell is a tick STAMP that HOLDS through
-    // trickle bounces below ZERO_POP_CLEAR (a 0↔24 migrant-credit oscillation
-    // must not immunize a corpse) and clears only on real recovery. Dwell met
-    // while empty NOW ⇒ the candidate emits with CERTAINTY (tuning rationale in
-    // SETTLEMENT_LIFECYCLE_TUNING). ──
-    const priorZero = Number.isFinite(prior?.zeroSince) ? num(prior?.zeroSince, tick) : null;
-    const zeroSince = pop <= T.ZERO_POP_FLOOR
-      ? (priorZero ?? tick)
-      : (priorZero != null && pop < T.ZERO_POP_CLEAR ? priorZero : null);
-    if (zeroSince != null) meta.zeroSince = zeroSince;
-    const emptied = pop <= T.ZERO_POP_FLOOR && zeroSince != null && (tick - zeroSince) >= T.ZERO_POP_DWELL;
-
     if (declining) {
       // The decline dwell is a tick STAMP (integer arithmetic — survives the
       // M10b one-interval catch-up collapse).
       const since = Number.isFinite(prior?.declineSince) ? num(prior?.declineSince, tick) : tick;
       meta.declineSince = since;
-    }
-    const declineDwell = meta.declineSince != null ? tick - num(meta.declineSince, tick) : 0;
-    if (cooled && !pendingLifecycle.has(cid) && (emptied || (declining && declineDwell >= T.TERMINAL_DWELL))) {
-      meta.lastDeathCandidateTick = tick;
-      // CAMPAIGN-ALTERING + proposal-gated: honors majorChangesRequireProposal
-      // (the tier_change precedent), forced to proposal under
-      // dm_only/recommendations by authorityFor.
-      candidates.push(buildTerminalDeathOutcome({
-        item, snapshot, pIndex, tick, spatialActive, support, emptied,
-        // Stamped ONLY when the census, not the label, is what put this settlement on
-        // the bottom rung. A label-thorp death is the legacy outcome, byte for byte.
-        viabilityLadder: tier !== 'thorp',
-        // WAVE P4: the NAMED rung, from the ONE grade read. Null when the wave is dark,
-        // which drops the key entirely (the P1a viabilityLadder precedent exactly).
-        viabilityGrade: demographicsLit
-          ? viabilityGradeOf(s, worldState, cid).grade
-          : null,
-        dwell: emptied && zeroSince != null ? tick - zeroSince : declineDwell,
-        applyMode: authorityFor(rules, 'settlement_terminal_death', /** @type {{ majorChangesRequireProposal?: boolean }} */ (rules).majorChangesRequireProposal ? 'proposal' : 'auto'),
-      }));
+      const dwell = tick - since;
+      const cooled = meta.lastDeathCandidateTick == null
+        || (tick - num(meta.lastDeathCandidateTick, 0)) >= T.DEATH_RETRY_COOLDOWN;
+      if (dwell >= T.TERMINAL_DWELL && cooled && !pendingLifecycle.has(cid) && pop > 0) {
+        meta.lastDeathCandidateTick = tick;
+        // CAMPAIGN-ALTERING + proposal-gated: honors majorChangesRequireProposal
+        // (the tier_change precedent), forced to proposal under
+        // dm_only/recommendations by authorityFor.
+        candidates.push(buildTerminalDeathOutcome({
+          item, snapshot, pIndex, tick, spatialActive, dwell, support,
+          applyMode: authorityFor(rules, 'settlement_terminal_death', /** @type {{ majorChangesRequireProposal?: boolean }} */ (rules).majorChangesRequireProposal ? 'proposal' : 'auto'),
+        }));
+      }
     }
 
     // Conditional materialization (byte-neutral when nothing is tracked).
@@ -487,7 +404,7 @@ const MAX_CAMPAIGN_HISTORY_EVENTS = 20; // mirrors stressorAftermath's campaign-
 /** Append a campaign-era historicalEvents entry (dedup by campaignEventId; the
  *  oldest campaign-era entry is pruned past the cap — generation history never).
  *  @param {LcSettlement} settlement
- *  @param {{ id: string, name: string, type: string, description: string, severity: string, lastingEffects?: string[] }} event
+ *  @param {{ id: string, name: string, type: string, description: string, severity: string }} event
  *  @param {number|null} tick @returns {LcSettlement} */
 function withLifecycleHistoryEvent(settlement, event, tick) {
   const history = /** @type {{ historicalEvents?: Array<Record<string, unknown>> }} */ (settlement.history || {});
@@ -497,11 +414,7 @@ function withLifecycleHistoryEvent(settlement, event, tick) {
   const entry = {
     campaignEventId: eventId, campaignEra: true, tick: tick ?? null, yearsAgo: 0,
     name: event.name, type: event.type, description: event.description,
-    severity: event.severity,
-    // Authored lasting-effects prose (taste-vetoable). STRING ARRAY contract
-    // (stressorAftermath.js:67-70): the history consumers .join/.map on it.
-    lastingEffects: Array.isArray(event.lastingEffects) ? event.lastingEffects : [],
-    plotHooks: [], anchored: true,
+    severity: event.severity, lastingEffects: [], plotHooks: [], anchored: true,
   };
   const campaignEvents = events.filter((e) => e?.campaignEra);
   let nextEvents = [...events, entry];
@@ -536,9 +449,7 @@ function withLifecycleHistoryEvent(settlement, event, tick) {
  * and a stale rebirth (the site is no longer a remnant) safely no-op.
  *
  * @param {LcSettlement} settlement
- * @param {{ id?: string, lifecyclePatch?: { kind?: string, name?: string, viabilityLadder?: boolean }, metadata?: { tick?: number } }} outcome
- *   `viabilityLadder` is wave P1a's conditional key, declared HERE on the owning patch
- *   typedef rather than reached for through a cast; absent is the legacy contract.
+ * @param {{ id?: string, lifecyclePatch?: { kind?: string, name?: string }, metadata?: { tick?: number } }} outcome
  * @returns {LcSettlement}
  */
 export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome) {
@@ -549,16 +460,8 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
 
   if (patch.kind === 'terminal_death') {
     if (lifecycleStatusOf(settlement)) return settlement; // already a remnant
-    const pop = num(settlement.population, 0);
-    const tier = String(settlement.tier || popToTier(pop));
-    // WAVE P1a: a ladder-authorized death re-verifies against the CENSUS, which is what
-    // authorized it. The staleness contract is unchanged in substance: a settlement that
-    // recovered off the bottom rung still refuses, it is simply asked the same question
-    // the evaluator asked. Without the stamp this is the original label test, so every
-    // dark outcome and every label-thorp death reads exactly as before.
-    const atBottom = tier === 'thorp'
-      || (patch.viabilityLadder === true && popToTier(pop) === 'thorp');
-    if (!atBottom) return settlement;                     // stale — the settlement recovered
+    const tier = String(settlement.tier || popToTier(num(settlement.population, 0)));
+    if (tier !== 'thorp') return settlement;              // stale — the settlement recovered
     const grade = remnantGradeOf(settlement);             // THE SCARCITY PIN (live peakTier)
 
     // Institutions clear — deactivated as archaeology, never erased from the record.
@@ -568,15 +471,9 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
         : inst));
 
     // THE FATES PIN: dispersal stamps only — no record removed, no fate resolved.
-    // D6 THE UNDERWAYS (coupling 4 — the escape lane): a dying town with clandestine
-    // tunnels disperses its people "through the underways" — a receipt only, never a fate
-    // resolution. Absent the facet the note is byte-identical to before.
-    const dispersalNote = settlementHasUnderways(settlement)
-      ? 'Escaped through the underways — fate unresolved.'
-      : 'Left with the last wagons — fate unresolved.';
     const npcs = (Array.isArray(settlement.npcs) ? settlement.npcs : [])
       .map((npc) => (npc && !npc.dispersed
-        ? { ...npc, dispersed: true, dispersedAtTick: tick, dispersalNote }
+        ? { ...npc, dispersed: true, dispersedAtTick: tick, dispersalNote: 'Left with the last wagons — fate unresolved.' }
         : npc));
 
     const residual = Math.max(0, Math.round(num(settlement.population, 0)));
@@ -616,16 +513,6 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
         ? `${name} — once a great city — dwindled to a final thorp and died; its stones stand as a relic ruin. The last residents left with the wagons, their fates unresolved.`
         : `${name} dwindled and was abandoned; a quiet site marks where it stood. The last residents left with the wagons, their fates unresolved.`,
       severity: 'major',
-      lastingEffects: grade === 'relic_ruin'
-        ? [
-            'The ruin stands as a landmark and a warning on every map that shows it.',
-            'Scavengers and the curious pick over what the last residents left behind.',
-            'The roads that once converged here slacken and fall out of use.',
-          ]
-        : [
-            'A quiet, unmarked site is all that remains where the settlement stood.',
-            'The trade ties and roads that once ran through it fade with its passing.',
-          ],
     }, tick);
     // Sync the config.eventConditions projection (+ the _config twin) to the now-empty
     // activeConditions (r2 economy-upswing-6): else a full regeneration re-promotes an
@@ -670,14 +557,6 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
         ? `${newName} was founded on the ruin of ${name} — the old stones remember, and the new thorp aspires.`
         : `${newName} was founded where ${name} once stood; the old site lives again.`,
       severity: 'moderate',
-      lastingEffects: fromGrade === 'relic_ruin'
-        ? [
-            'The new thorp rises on cleared ground and the reused foundations of the old.',
-            'The older ruins nearby still draw scavengers, pilgrims, and storytellers.',
-          ]
-        : [
-            'The resettled site inherits cleared land and the old field boundaries.',
-          ],
     }, tick);
     return next;
   }

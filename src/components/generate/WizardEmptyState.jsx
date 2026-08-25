@@ -1,89 +1,125 @@
 /**
  * WizardEmptyState.jsx — Create landing (no mode picked, no settlement).
  *
- * The empty state: HomeHero for anonymous visitors, the "Create a settlement"
- * PageHeader for signed-in, and the Basic/Advanced mode picker (gated to signed-in)
- * rendered as ONE quiet parchment card. Presentational — every value and handler
- * arrives via props; state stays in the parent. Restores master's base-of-record
- * composition (LANDING_MAX frame, PageHeader, quiet ModeSelector).
- *
- * Walk W1 (owner order 2026-07-21, ledger — CREATE-PAGE DEMOTION): the two anon
- * proof exhibits (HomeSampleDossier "Hightower's Reach" + RegionWakeReplay "watch a
- * region wake up") were UNMOUNTED from this surface — "that job has been transferred
- * to the landing page," which now carries the proof-of-depth. The two component files
- * are left intact: they have no other runtime consumer, and they are DISTINCT modules
- * (not duplicates of the landing's own fixture artifacts), so the item's delete-only-
- * duplicates permission does not apply — they stay available to be re-homed. The
- * Instant World premium card was earlier unmounted the same way (C1r-d).
+ * Extracted byte-for-byte from GenerateWizard.jsx. The empty state:
+ * HomeHero + sample dossier for anonymous visitors, the "Create a
+ * Settlement" heading for signed-in, and the Basic/Advanced mode picker
+ * (gated to signed-in) or the sign-in upsell for anon. Presentational —
+ * every value and handler arrives via props; state stays in the parent.
  */
 
-import { BORDER, GOLD, INK, BODY, sans, serif_, SP, FS, LANDING_MAX } from '../theme.js';
+import { lazy, Suspense } from 'react';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
-import PageHeader from '../primitives/PageHeader.jsx';
+import Button from '../primitives/Button.jsx';
+
+// Below-hero proof cards lazy-load; reserve their space with a height-matched
+// skeleton so the acquisition surface reads as "loading", not a blank gap that
+// pops in and shifts layout on cold connections (P9: skeletons over null).
+function ProofSkeleton({ height }) {
+  return (
+    <div aria-hidden="true" style={{
+      height, borderRadius: R.lg, border: `1px solid ${BORDER}`, background: CARD,
+      opacity: 0.6,
+    }} />
+  );
+}
+
+// P128 / H-2 — Sample dossier proof card. Self-gates on flag +
+// anonymous + no settlement yet; renders nothing once any of those
+// flip. Mounted directly below HomeHero so anon visitors see proof of
+// the moat without scrolling.
+const HomeSampleDossier = lazy(() => import('../home/HomeSampleDossier.jsx'));
+
+// "Watch a region wake up" read-only replay. Self-gates inside on
+// anon + no-settlement (same as the sample dossier), so it renders nothing
+// once the visitor has the real thing. Mounted beside the sample dossier so
+// the teaser ladder reads: proof of the static dossier → proof of the LIVING
+// world.
+const RegionWakeReplay = lazy(() => import('../home/RegionWakeReplay.jsx'));
 
 export function WizardEmptyState({
   showHomeHero,
   showModePicker,
+  isMobile,
+  wizardMode,
   setWizardMode,
+  authTier,
   onSignIn,
   onNavigate,
 }) {
-  // The signed-in Create landing is ONE card now (owner order 2026-07-22): the
-  // "Welcome back" instant-generator and the "Want full control?" mode picker were
-  // two stacked parchment plates; they merge into a single plate split by a gold
-  // rule (the SAME GOLD token the Generate button uses). Structure, not rewrite:
-  // HomeHero renders `bare` (its plate chrome dropped) as the top section, and the
-  // mode picker's content sits below the divider — both keep every behavior.
-  const merged = showHomeHero && showModePicker;
-
-  // The mode-picker content (heading + one-liner + the Basic/Advanced selector),
-  // rendered inside the merged card below the gold divider.
-  const modeSection = (
-    <>
-      <h2 style={{ margin: 0, fontFamily: serif_, fontWeight: 600, fontSize: FS.xl, color: INK, lineHeight: 1.2 }}>
-        Want full control?
-      </h2>
-      <p style={{ margin: `${SP.xs}px auto 0`, maxWidth: 480, fontFamily: serif_, fontStyle: 'italic', fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
-        Use one of the modes below.
-      </p>
-      {/* No mode is selected on this landing, so no card is active — ModeSelector
-          reads `mode` as undefined. */}
-      <ModeSelector mode={undefined} onModeChange={setWizardMode} />
-    </>
-  );
-
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: LANDING_MAX, margin: '0 auto', padding: `${SP.xl}px 0` }}>
-      {merged ? (
-        <section
-          aria-label="Create a settlement"
-          style={{
-            // ONE flat parchment plate holding both sections (the gold rule below
-            // the instant-generator hero divides it from the mode picker).
-            maxWidth: LANDING_MAX, margin: '0 auto',
-            padding: `${SP.xxl}px ${SP.xl}px`,
-            background: 'linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)',
-            border: `1px solid ${BORDER}`,
+    <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 860, margin: '0 auto', padding: `${SP.xl}px 0` }}>
+      {showHomeHero && (
+        <>
+          <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
+          {/* The two anon proof cards sit side by side on wider screens and
+              stack on narrow ones (see .sf-proof-pair), so they stop doubling
+              the landing's vertical length: proof of the static dossier beside
+              proof of the living world. Both self-gate anon-only, so signed-in
+              users see nothing here. */}
+          <div className="sf-proof-pair">
+            <Suspense fallback={<ProofSkeleton height={360} />}>
+              <HomeSampleDossier />
+            </Suspense>
+            <Suspense fallback={<ProofSkeleton height={360} />}>
+              <RegionWakeReplay onUpgrade={() => onNavigate?.('pricing')} />
+            </Suspense>
+          </div>
+        </>
+      )}
+      {!showHomeHero && (
+        <div style={{ textAlign: 'center', padding: `${SP.md}px 0` }}>
+          <h2 style={{
+            fontFamily: serif_,
+            fontSize: isMobile ? FS.xxl : 32,
+            fontWeight: 700,
+            color: INK,
+            margin: 0,
+            marginBottom: SP.sm,
+          }}>
+            Create a Settlement
+          </h2>
+          <p style={{
             fontFamily: sans,
-            textAlign: 'center',
-          }}
-        >
-          <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} bare />
-          {/* The divider — the SAME GOLD as the Generate button (the GOLD token,
-              never a new hex). */}
-          <hr aria-hidden="true" style={{ border: 0, borderTop: `2px solid ${GOLD}`, maxWidth: 480, margin: `${SP.xl}px auto` }} />
-          {modeSection}
-        </section>
-      ) : showHomeHero ? (
-        <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
-      ) : (
-        <PageHeader
-          eyebrow="Forge a settlement"
-          title="Create a settlement"
-          subtitle="Choose a generation mode to get started."
-          size="lg"
-        />
+            fontSize: FS.md,
+            color: MUTED,
+            margin: 0,
+          }}>
+            Choose a generation mode to get started.
+          </p>
+        </div>
+      )}
+      {showModePicker && (
+        <>
+          <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
+            Want full control? Use one of the modes below.
+          </div>
+          <ModeSelector mode={wizardMode} onModeChange={setWizardMode} large />
+        </>
+      )}
+      {/* Anonymous visitors get instant generation (the hero) only; Basic and
+          Advanced are gated to signed-in users. Surface the (free) path so the
+          gate is discoverable rather than a silently-missing feature. */}
+      {!showModePicker && authTier === 'anon' && (
+        <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
+          Want full control?{' '}
+          {/* P99 mobile pointer-target floor: the sm ghost button is 28px tall.
+              Grow the TAP target to the 44px floor with vertical padding, then
+              pull it back with equal negative margin so the inline text line
+              stays exactly where it was (transparent ghost bg → zero visual
+              regression; only the hit area grows). */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onSignIn}
+            style={{ display: 'inline-flex', textDecoration: 'underline', minHeight: 44, paddingTop: 10, paddingBottom: 10, marginTop: -8, marginBottom: -8 }}
+          >
+            Sign in (free)
+          </Button>
+          {' '}to unlock Basic &amp; Advanced generation.
+        </div>
       )}
     </div>
   );

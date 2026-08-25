@@ -1,3 +1,4 @@
+import { Check, ChevronDown, ChevronRight, CircleSlash, SlidersHorizontal, Undo2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { conditionFromRegionalImpact, ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
@@ -79,7 +80,7 @@ export default function RegionalCausalChainViewer({
   if (!model.rows.length) return null;
 
   return (
-    <div style={{ marginTop: 9, border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden' }}>
+    <div style={{ marginTop: 9, border: `1px solid ${BORDER}`, borderRadius: 6, background: CARD, overflow: 'hidden' }}>
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -88,19 +89,20 @@ export default function RegionalCausalChainViewer({
         borderBottom: `1px solid ${BORDER}`,
         flexWrap: 'wrap',
       }}>
+        <SlidersHorizontal size={12} color={GOLD} />
         <span style={{ fontSize: FS.xxs, color: INK, fontWeight: 800, fontFamily: sans }}>
           Causal chains
         </span>
-        <select aria-label="Filter by status" value={statusFilter} onChange={e => setStatusFilter(e.target.value)} style={selectStyle}>
+        <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} style={selectStyle}>
           {['all', 'queued', 'applied', 'resolved', 'ignored', 'expired'].map(value => (
             <option key={value} value={value}>{optionLabel(value)}</option>
           ))}
         </select>
-        <select aria-label="Filter by channel" value={typeFilter} onChange={e => setTypeFilter(e.target.value)} style={selectStyle}>
+        <select value={typeFilter} onChange={e => setTypeFilter(e.target.value)} style={selectStyle}>
           <option value="all">All channels</option>
           {model.types.map(type => <option key={type} value={type}>{human(type)}</option>)}
         </select>
-        <select aria-label="Filter by source" value={sourceFilter} onChange={e => setSourceFilter(e.target.value)} style={selectStyle}>
+        <select value={sourceFilter} onChange={e => setSourceFilter(e.target.value)} style={selectStyle}>
           <option value="all">All sources</option>
           {model.sources.map(([id, name]) => <option key={id} value={id}>{name}</option>)}
         </select>
@@ -149,7 +151,7 @@ export default function RegionalCausalChainViewer({
                 {row.impact.status === 'queued' && (
                   <>
                     <IconButton
-                      glyph="✓"
+                      Icon={Check}
                       label={available ? 'Apply regional impact' : 'Impact is delayed'}
                       tone="primary"
                       size="sm"
@@ -157,7 +159,7 @@ export default function RegionalCausalChainViewer({
                       onClick={() => onApplyImpact?.(campaign.id, row.impact.id)}
                     />
                     <IconButton
-                      glyph="⊘"
+                      Icon={CircleSlash}
                       label="Ignore regional impact"
                       size="sm"
                       onClick={() => onIgnoreImpact?.(campaign.id, row.impact.id)}
@@ -166,14 +168,14 @@ export default function RegionalCausalChainViewer({
                 )}
                 {row.impact.status === 'applied' && (
                   <IconButton
-                    glyph="↶"
+                    Icon={Undo2}
                     label="Resolve applied regional impact"
                     size="sm"
                     onClick={() => onResolveImpact?.(campaign.id, row.impact.id)}
                   />
                 )}
                 <IconButton
-                  glyph={expandedImpactId === row.impact.id ? '⌄' : '›'}
+                  Icon={expandedImpactId === row.impact.id ? ChevronDown : ChevronRight}
                   label={expandedImpactId === row.impact.id ? 'Hide causal details' : 'Show causal details'}
                   size="sm"
                   pressed={expandedImpactId === row.impact.id}
@@ -188,6 +190,7 @@ export default function RegionalCausalChainViewer({
                   gap: 7,
                   padding: '7px 8px',
                   borderTop: `1px solid ${BORDER}`,
+                  borderRadius: 5,
                   background: GOLD_BG,
                 }}>
                   <DetailBlock
@@ -243,6 +246,7 @@ export default function RegionalCausalChainViewer({
 
 const selectStyle = {
   border: `1px solid ${BORDER}`,
+  borderRadius: 5,
   background: CARD,
   color: SECOND,
   fontFamily: sans,

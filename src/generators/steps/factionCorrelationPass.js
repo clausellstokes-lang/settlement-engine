@@ -12,15 +12,13 @@
  * generateEconomy. Instead it records whether it changed the roster
  * (_rosterChangedAfterEconomy); economyReconcilePass then re-derives the
  * economy/services/spatial from the FINAL roster so faction-pulled
- * institutions join chains, income, and services. The next bounded power
- * reconcile refreshes economy-dependent power projections from the original
- * power intent; it never calls this institution-producing pass again. Demand
- * imports moved to economyReconcilePass for the same reason.
+ * institutions join chains, income, and services. Demand imports moved to
+ * economyReconcilePass for the same reason.
  */
 
 import { registerStep } from '../pipeline.js';
 import { deriveFactionBoosts, applyFactionInstitutionBoosts } from '../factionCorrelation.js';
-import { cullPlanarWithoutCircle } from '../isolationGenerator.js';
+import { stripArcaneInstitutions, cullPlanarWithoutCircle } from '../isolationGenerator.js';
 import { applySubsumption } from './subsumptionPass.js';
 import { collapseUpgradeChains } from './assembleInstitutions.js';
 import { recordTrace } from '../../domain/trace.js';
@@ -30,8 +28,8 @@ function instId(name) {
 }
 
 registerStep('factionCorrelationPass', {
-  deps: ['neighbourFactions', 'generateEconomy', 'buildGenerationContext'],
-  reads: ['categoryToggles', 'effectiveConfig', 'generationContext', 'institutionToggles', 'institutions', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  deps: ['neighbourFactions', 'generateEconomy'],
+  reads: ['categoryToggles', 'effectiveConfig', 'institutionToggles', 'institutions', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
   mutates: ['institutions'],                 // re-correlates roster vs factions in place (A+ P1.7)
   scratch: ['_rosterChangedAfterEconomy'],   // internal flag for downstream steps
@@ -40,9 +38,8 @@ registerStep('factionCorrelationPass', {
   const {
     institutions, tier, effectiveConfig,
     institutionToggles, categoryToggles,
-    powerStructure, generationContext,
+    powerStructure,
   } = ctx;
-  const { worldLaw } = generationContext;
 
   // Snapshot so economyReconcilePass knows whether the economy (computed at
   // step 9 from the pre-pull roster) must be re-derived.
@@ -51,14 +48,9 @@ registerStep('factionCorrelationPass', {
   // Faction-institution correlation loop
   const factionBoosts = deriveFactionBoosts(powerStructure?.factions || [], tier);
   if (factionBoosts.length > 0) {
-    const boostCandidates = applyFactionInstitutionBoosts(
+    const boostAdditions = applyFactionInstitutionBoosts(
       factionBoosts, institutions, tier, effectiveConfig,
       institutionToggles, categoryToggles
-    );
-    // Faction pressure may raise an eligible institution's odds; it cannot
-    // manufacture a function the world's resolved laws prohibit.
-    const boostAdditions = boostCandidates.filter(
-      institution => worldLaw.allowsInstitution(institution),
     );
     if (boostAdditions.length > 0) {
       institutions.push(...boostAdditions);
@@ -125,15 +117,10 @@ registerStep('factionCorrelationPass', {
     }
   }
 
-  // Final institution safety-net. This closes every later addition path
-  // (including priority-zero worlds, which the old `magicExists === false`
-  // strip missed) against the same law assembly and cascade already used.
+  // Arcane institution safety-net — strips arcane institutions when
+  // the world's magicExists flag is false.
   const beforeStrip = new Set(institutions.map(i => i.name));
-  for (let index = institutions.length - 1; index >= 0; index -= 1) {
-    if (!worldLaw.allowsInstitution(institutions[index])) {
-      institutions.splice(index, 1);
-    }
-  }
+  stripArcaneInstitutions(institutions, effectiveConfig);
   const afterStrip = new Set(institutions.map(i => i.name));
   for (const name of beforeStrip) {
     if (!afterStrip.has(name)) {
@@ -141,10 +128,10 @@ registerStep('factionCorrelationPass', {
         targetType: 'institution',
         targetId:   instId(name),
         step:       'factionCorrelationPass',
-        result:     'world_law_stripped',
+        result:     'arcane_stripped',
         causes: [
-          { source: 'world.generationLaw', effect: 'removed',
-            reason: `"${name}" is not permitted by this world's resolved laws or generated-content boundaries.` },
+          { source: 'world.magicExists=false', effect: 'removed',
+            reason: `"${name}" was an arcane institution; this world has magic disabled.` },
         ],
       });
     }

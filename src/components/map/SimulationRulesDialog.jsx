@@ -3,14 +3,16 @@ import { Eye, Settings2, X } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import {
-  SIMULATION_RULE_PRESETS, normalizeSimulationRules, worldProgressionOf, } from '../../domain/worldPulse/simulationRules.js';
+  SIMULATION_RULE_PRESETS,
+  normalizeSimulationRules,
+  worldProgressionOf,
+} from '../../domain/worldPulse/simulationRules.js';
 import { validateSimulationProfile } from '../../domain/worldPulse/simulationProfile.js';
-import { isPublicOutcome } from '../../domain/worldPulse/pulseHelpers.js';
-import { DomainRows, EngineWaves, WorldLawAxes } from './SimulationRulesAxes.jsx';
+import { DomainRows, WorldLawAxes } from './SimulationRulesAxes.jsx';
 import {
-  BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, GOLD_BG, INK, MUTED, RED, SP, sans } from '../theme.js';
+  BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, GOLD_BG, INK, MUTED, R, RED, SP, sans,
+} from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import { t } from '../../copy/index.js';
 import IconButton from '../primitives/IconButton.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
@@ -113,6 +115,7 @@ function Select({ id, value, options, onChange, disabled = false }) {
         minHeight: 36,
         padding: `${SP.xs}px ${SP.sm}px`,
         border: `1px solid ${BORDER}`,
+        borderRadius: R.md,
         background: CARD,
         color: INK,
         fontFamily: sans,
@@ -137,6 +140,7 @@ function Toggle({ checked, label, onChange, disabled = false }) {
       minHeight: 32,
       padding: '6px 8px',
       border: `1px solid ${BORDER2}`,
+      borderRadius: R.md,
       background: checked ? GOLD_BG : CARD,
       color: INK,
       fontFamily: sans,
@@ -166,6 +170,7 @@ function Metric({ label, value }) {
       minWidth: 0,
       padding: SP.sm,
       border: `1px solid ${BORDER2}`,
+      borderRadius: R.md,
       background: CARD,
     }}>
       <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850, textTransform: 'uppercase' }}>
@@ -220,12 +225,6 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
 
   const activePreset = SIMULATION_RULE_PRESETS[draft.presetId] || null;
   const previewOutcomes = previewResult?.pulseRecord?.selectedOutcomes || previewResult?.selected || [];
-  const previewCandidateCount = previewResult?.pulseRecord?.candidateCount
-    ?? previewResult?.candidates?.filter(isPublicOutcome).length
-    ?? 0;
-  const previewAppliedCount = previewResult?.pulseRecord?.autoAppliedCount
-    ?? previewResult?.autoApplied?.filter(isPublicOutcome).length
-    ?? 0;
 
   // The dependency-gating record for the CURRENT draft — coercions as data
   // (validateSimulationProfile), consumed for the honest disabled states.
@@ -279,9 +278,9 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
     try {
       const result = await Promise.resolve(previewWorldPulse(campaign.id, 'one_month', { simulationRules: draft }));
       setPreviewResult(result);
-      if (!result) setError(t('errors.previewFail'));
+      if (!result) setError('Preview could not be generated.');
     } catch (err) {
-      setError(t('errors.previewFail'));
+      setError(`Preview failed: ${err?.message || err}`);
     } finally {
       setPreviewBusy(false);
     }
@@ -292,14 +291,14 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
     // The store no-ops the rules write while the realm advances; refuse here so
     // Save never reports success over a dropped write. The button is also disabled
     // off advanceBlocked — this is the belt-and-braces guard.
-    if (advanceBlocked) { setError(t('errors.realmAdvancingSaveLater')); return; }
+    if (advanceBlocked) { setError('The realm is advancing. Give it a moment, then save your rules.'); return; }
     setBusy(true);
     setError(null);
     try {
       await updateRules(campaign.id, draft);
       onClose?.();
     } catch (err) {
-      setError(t('errors.rulesSaveFail'));
+      setError(`Rules could not be saved: ${err?.message || err}`);
     } finally {
       setBusy(false);
     }
@@ -340,6 +339,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           maxHeight: 'min(92vh, 800px)',
           overflow: 'auto',
           border: `1px solid ${BORDER}`,
+          borderRadius: R.lg,
           background: CARD_ALT,
           boxShadow: ELEV[3],
         }}
@@ -355,6 +355,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           <div style={{
             width: 34,
             height: 34,
+            borderRadius: R.lg,
             border: `1px solid ${BORDER}`,
             background: CARD_ALT,
             display: 'flex',
@@ -398,7 +399,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           {advanceBlocked && (
             <div
               data-testid="rules-advance-blocked" role="status" aria-live="polite"
-              style={{ border: `1px solid ${GOLD}`, padding: SP.sm, background: GOLD_BG, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
+              style={{ border: `1px solid ${GOLD}`, borderRadius: R.md, padding: SP.sm, background: GOLD_BG, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
             >
               The realm is advancing. Give it a moment, then save your rules.
             </div>
@@ -406,6 +407,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           {error && (
             <div style={{
               border: '1px solid rgba(197,74,74,0.45)',
+              borderRadius: R.md,
               padding: SP.sm,
               background: 'rgba(197,74,74,0.08)',
               color: RED,
@@ -442,6 +444,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                       padding: SP.sm,
                       textAlign: 'left',
                       border: `1px solid ${selected ? GOLD : BORDER2}`,
+                      borderRadius: R.md,
                       background: selected ? GOLD_BG : CARD,
                       color: INK,
                       cursor: advanceBlocked ? 'default' : 'pointer',
@@ -460,7 +463,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             </div>
             {!GRID_PRESETS.some(([presetId]) => presetId === draft.presetId) && (
               <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
-                {activePreset ? `${activePreset.label} (a classic preset)` : 'Custom: this world follows its own laws.'}
+                {activePreset ? `${activePreset.label} (a classic preset)` : 'Custom — this world follows its own laws.'}
               </div>
             )}
           </div>
@@ -479,15 +482,6 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             draft={draft}
             advanceBlocked={advanceBlocked}
             onSetDomain={setDomainEnabled}
-          />
-          {/* ── The nine engine-wave gates (W-R2-LIGHT): the deep anti-stasis
-              systems the world-alive presets light, exposed individually so a DM
-              can compose their own world. War-coupled waves lock until War is lit. */}
-          <EngineWaves
-            draft={draft}
-            advanceBlocked={advanceBlocked}
-            spatialMapped={!!campaign?.worldState?.spatialCanonVersion}
-            onSetField={setField}
           />
 
           {/* ── DETAIL altitude: the propagation/intensity/migration selects and
@@ -542,6 +536,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             gap: SP.sm,
             padding: SP.md,
             border: `1px solid ${BORDER}`,
+            borderRadius: R.md,
             background: CARD,
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
@@ -560,13 +555,13 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                 onClick={runPreview}
                 busy={previewBusy}
                 disabled={!campaign?.id || frozen}
-                title={frozen ? 'Time is frozen. There is nothing to preview until it thaws.' : undefined}
+                title={frozen ? 'Time is frozen — there is nothing to preview until it thaws.' : undefined}
               >
                 Preview
               </Button>
             </div>
             {frozen ? (
-              <div data-testid="rules-frozen-note" style={{ border: `1px dashed ${BORDER2}`, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+              <div data-testid="rules-frozen-note" style={{ border: `1px dashed ${BORDER2}`, borderRadius: R.md, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
                 Time is frozen: the world will not advance (the Advance action is disabled) until you set Time back to “On your mark”. Everything is preserved exactly as it stands.
               </div>
             ) : previewResult ? (
@@ -576,9 +571,9 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                   gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 110px), 1fr))',
                   gap: SP.sm,
                 }}>
-                  <Metric label="Candidates" value={previewCandidateCount} />
+                  <Metric label="Candidates" value={previewResult.pulseRecord?.candidateCount ?? previewResult.candidates?.length ?? 0} />
                   <Metric label="Selected" value={previewResult.pulseRecord?.selectedCount ?? previewOutcomes.length} />
-                  <Metric label="Applied" value={previewAppliedCount} />
+                  <Metric label="Applied" value={previewResult.pulseRecord?.autoAppliedCount ?? previewResult.autoApplied?.length ?? 0} />
                   <Metric label="Proposals" value={previewResult.pulseRecord?.proposalCount ?? previewResult.proposals?.length ?? 0} />
                 </div>
                 {previewOutcomes.length > 0 && (
@@ -605,7 +600,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                 )}
               </>
             ) : (
-              <div style={{ border: `1px dashed ${BORDER2}`, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+              <div style={{ border: `1px dashed ${BORDER2}`, borderRadius: R.md, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
                 No preview yet.
               </div>
             )}

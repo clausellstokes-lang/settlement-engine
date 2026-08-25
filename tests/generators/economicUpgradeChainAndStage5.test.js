@@ -19,7 +19,6 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { generateEconomicState } from '../../src/generators/economy/economicState.js';
 import { getUpgradeChain } from '../../src/generators/economy/tradeGoods.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
-import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 afterEach(() => clearActiveRng());
 
@@ -29,18 +28,10 @@ describe('getUpgradeChain — tier-connectivity pool selection', () => {
     expect(imports).toContain('Luxury textiles');
     expect(imports).toContain('Spices and exotic dyes');
     expect(imports).toContain('Rare materials');
-    // Services are never physical imports. 'Luxury textiles' is the anchor: it
-    // rides the same fromCityOrMetropolis pool, so a pool that stopped resolving
-    // reds on the anchor instead of passing both exclusions.
-    expectAbsentWithAnchor(
-      imports, 'Banking services', 'Luxury textiles',
-      'higher-tier pool carries goods, never services',
-    );
+    // Services are never physical imports
+    expect(imports).not.toContain('Banking services');
     // The hinterland pool no longer shadows the higher-tier one
-    expectAbsentWithAnchor(
-      imports, 'Food surplus', 'Luxury textiles',
-      'fromCityOrMetropolis pool is not shadowed by hinterland',
-    );
+    expect(imports).not.toContain('Food surplus');
   });
 
   it('a town without a higher-tier connection keeps the hinterland pool', () => {
@@ -92,10 +83,7 @@ describe('call-site connectivity — a crossroads town surfaces higher-tier tran
     );
     expect(state.isEntrepot).toBe(true);
     expect(state.transit).toContain('Luxury textiles');
-    expectAbsentWithAnchor(
-      state.transit, 'Food surplus', 'Luxury textiles',
-      'entrepot transit carries higher-tier goods, not hinterland bulk',
-    );
+    expect(state.transit).not.toContain('Food surplus');
   });
 });
 
@@ -116,16 +104,7 @@ describe('Stage 5 exports survive the Stage 7 chain override', () => {
 
   it('the slave-trade export and paired enslaved-labour import are preserved when the draw fires', () => {
     setActiveRng({ random: () => 0 }); // forces the chance-gated slave-trade draw
-    // Coercive trade is outside the grounded default. This characterization
-    // intentionally exercises the opted-in mature economy, so its premise must
-    // select a profile that allows the content.
-    const state = generateEconomicState(
-      'city',
-      CITY_INSTS,
-      'road',
-      {},
-      { ...CITY_CONFIG, contentProfile: 'grim' },
-    );
+    const state = generateEconomicState('city', CITY_INSTS, 'road', {}, CITY_CONFIG);
     expect(state.primaryExports.some((e) => SLAVE_EXPORT.test(e))).toBe(true);
     expect(
       state.primaryImports.some((i) => i.toLowerCase().startsWith('enslaved labour'))

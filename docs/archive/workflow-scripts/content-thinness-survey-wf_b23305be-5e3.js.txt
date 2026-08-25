@@ -1,0 +1,49 @@
+export const meta = {
+  name: 'content-thinness-survey',
+  description: 'Map thin content surfaces + view-time/generation-time classification for the content-volume program',
+  phases: [{ title: 'Survey', detail: 'six read-only corpus readers' }],
+}
+
+const SCHEMA = {
+  type: 'object',
+  required: ['surfaces'],
+  properties: {
+    surfaces: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['name', 'file', 'variant_count', 'classification', 'thinness'],
+        properties: {
+          name: { type: 'string' },
+          file: { type: 'string', description: 'repo-relative path(s)' },
+          variant_count: { type: 'string', description: 'measured counts per slot/kind (e.g. "3-5 phrasings per event kind, 14 kinds")' },
+          classification: { type: 'string', enum: ['view-time', 'generation-time', 'mixed'], description: 'does the text persist into world/save data (generation-time) or render fresh from state (view-time)?' },
+          classification_evidence: { type: 'string', description: 'HOW you determined it — the write/read path traced' },
+          thinness: { type: 'string', enum: ['critical', 'thin', 'adequate', 'rich'] },
+          repetition_risk: { type: 'string', description: 'what a year-long chronicle would expose' },
+          notes: { type: 'string' },
+        },
+      },
+    },
+    summary: { type: 'string' },
+  },
+}
+
+phase('Survey')
+
+const READERS = [
+  { key: 'event-prose', prompt: 'world-pulse EVENT + outcome + reason prose: warReasons/peaceReasons vocabularies, drama-class event phrasings, impact digests, calamity/boom/discovery strings' },
+  { key: 'rumors-crier', prompt: 'the rumor/crier register: settlementRumors display phrases, whatPhrase corpora, crier-voice lines, whisper prose' },
+  { key: 'dossier', prompt: 'dossier/settlement prose: institution descriptions/flavor, hooks, NPC role blurbs, geography/terrain descriptions, founding/history text' },
+  { key: 'names', prompt: 'naming: naming cultures (people/places), institution name tables, faction/deity names, goal/temperament vocabulary' },
+  { key: 'chronicle-briefs', prompt: 'the chronicle + S2 brief register: thread/chapter/headline phrasings in the new chronicle read-models, brief composer prose slots, advance-report copy' },
+  { key: 'glossary-guidance', prompt: 'the glossary/compendium entries + guidance registry prose + refusal prose (realm veto prose, gate_dark strings)' },
+]
+
+const results = await parallel(READERS.map(r => () =>
+  agent(`READ-ONLY survey in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd (the w7-prep worktree — READ ONLY, modify NOTHING, run no gates). Your slice: ${r.prompt}. For EVERY content surface in your slice: locate the file(s); MEASURE variant counts per slot (grep/count, not estimates); trace whether the text PERSISTS into world/save/golden data (generation-time) or renders fresh at view time (view-time) — cite the write/read path as evidence; rate thinness (critical/thin/adequate/rich) against the standard "a year-long advance report should not visibly repeat"; note repetition risk. NUL gotcha: use grep -a on generosityKernel.js/generosityEV.js. Return via the schema.`, { label: `survey:${r.key}`, phase: 'Survey', schema: SCHEMA, effort: 'medium' })
+))
+
+const out = {}
+READERS.forEach((r, i) => { out[r.key] = results[i] })
+return out

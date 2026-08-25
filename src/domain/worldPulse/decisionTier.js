@@ -48,13 +48,6 @@ const CAMPAIGN_ALTERING_CANDIDATE_TYPES = new Set([
   // W-NAVY: a navy throwing a blockade across a hostile port's sea approaches (a siege
   // from the water — the siege-initiation twin).
   'blockade_declared',
-  // WR-0c: an actor openly tears up a live non-aggression pact, lifting every
-  // restraint and furnishing the other court with a full treaty-default casus.
-  'treaty_breached',
-  // WR-10 (amendment S): a settlement is CONVEYED — a steading or a settled vassalage
-  // changes hands by deed rather than by siege. Sovereignty moves, which is the same
-  // structural shape as a conquest reached by another road.
-  'sovereignty_conveyed',
   // W-LIFECYCLE: a settlement's TERMINAL DEATH — the map itself changes (the entity
   // keeps its digest cell as a remnant, but the living roster shrinks). The DM sees
   // it coming (the extended terminal dwell) and can force or veto.
@@ -147,10 +140,9 @@ export function resolveProposalToOutcome(outcome) {
 // by an eager module — so it costs ZERO first-paint bytes.
 
 /**
- * The eight drama classes (design §2; D7 added the 8th, `reframe`). Priority order is
- * codepoint-deterministic for the simultaneity tiebreak (defer the LOWEST-priority class
- * first) — never rng.
- * @typedef {'war'|'succession_coup'|'plague'|'calamity'|'schism_contest'|'economic_shock'|'boom_flourishing'|'reframe'} DramaClass
+ * The seven drama classes (design §2). Priority order is codepoint-deterministic
+ * for the simultaneity tiebreak (defer the LOWEST-priority class first) — never rng.
+ * @typedef {'war'|'succession_coup'|'plague'|'calamity'|'schism_contest'|'economic_shock'|'boom_flourishing'} DramaClass
  */
 
 /**
@@ -168,13 +160,13 @@ export function resolveProposalToOutcome(outcome) {
 /**
  * Simultaneity priority (design §5.3): when live realm arcs saturate ARC_MAX, the
  * LOWEST-priority pending class defers first. Codepoint-stable, zero rng. Covers all
- * eight classes exactly once (walker-enforced). `reframe` (D7) sits LAST — a story-grade
- * reinterpretation is the least urgent to force ahead of a war/plague, and it is already
- * self-paced by its own cap + hysteresis (a bypass producer, like boom_flourishing).
+ * seven classes exactly once (walker-enforced). boom_flourishing is DECLARED here but
+ * has no producer yet (a future rung) — it appears in the priority list, not the
+ * registry.
  * @type {ReadonlyArray<DramaClass>}
  */
 export const DRAMA_CLASS_PRIORITY = Object.freeze([
-  'war', 'succession_coup', 'plague', 'calamity', 'schism_contest', 'economic_shock', 'boom_flourishing', 'reframe',
+  'war', 'succession_coup', 'plague', 'calamity', 'schism_contest', 'economic_shock', 'boom_flourishing',
 ]);
 
 /**
@@ -232,12 +224,6 @@ export const DRAMA_CLASS_REGISTRY = Object.freeze({
   satellite_founded: { class: 'boom_flourishing', birthKind: 'spontaneous', wired: false, module: 'settlementLifecycleKernel.js', rationale: 'A steading founding is a growth-class birth at the pulse mover seam (integrator + cooldown + tier caps pace it); a bypass producer like upswing_flourishing.' },
   settlement_terminal_death: { class: 'calamity', birthKind: 'consequence', wired: false, module: 'settlementLifecycleKernel.js', rationale: 'Terminal death is the CONSEQUENCE of a years-dwelled decline arc, not a spontaneous birth — governing it would defer a certified death. Registered so the taxonomy names it; never governed.' },
   settlement_resettled: { class: 'boom_flourishing', birthKind: 'spontaneous', wired: false, module: 'settlementLifecycleKernel.js', rationale: 'A rebirth on the old stones is a growth-class arc; already VERY-RARE by its own fallow dwell + emit probability, so governor wiring is deliberately withheld (registered-ungoverned).' },
-  // D7 THE REFRAME LAYER: a motive-reinterpretation transition ("the grain years are now a
-  // debt unpaid") is a story-grade drama birth. A BYPASS PRODUCER (like upswing_flourishing):
-  // it births in reframeKernel's own deterministic fold behind reframeEnabled, self-paced by a
-  // global cap + hysteresis + stickiness, never at the rollCandidates seam — so governor wiring
-  // is withheld (wired:false ⇒ dramaClassOf null ⇒ the governor never touches it).
-  reframe_transition: { class: 'reframe', birthKind: 'spontaneous', wired: false, module: 'reframeKernel.js', rationale: 'A reframe transition births in the deterministic reframe fold (cap + hysteresis + stickiness pace it), not rollCandidates; a bypass producer like upswing_flourishing, registered-ungoverned.' },
 });
 
 /**

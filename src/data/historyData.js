@@ -8,10 +8,7 @@
 //   2. The genuine history-generation data (AGE_BY_TIER, HISTORICAL_EVENTS_DATA,
 //      EVENT_TYPE_NAMES) consumed by historyGenerator.js.
 
-import { HISTORY_DESC_VARIANTS } from './historyDescVariants.js';
-import { pickVariant } from '../kernel/proseHash.js';
-
-// Notable power-holder roles by domain (government, religious, crafts,
+// Notable power-holder roles by domain (government, religious, noble, crafts,
 // military, economy, criminal, magic, other). Each entry describes a role that
 // can hold influence in a settlement and the conditions under which it appears.
 // Consumed by getUpgradeOpportunities to surface tier-appropriate roles.
@@ -167,85 +164,6 @@ export const POWER_ROLES_BY_CATEGORY = {
       minTier: 'town',
       goalCategories: ['wealth', 'justice'],
     },
-    // ── Noble / feudal leadership ────────────────────────────────────────────
-    // Merged from the former POWER_ROLES_BY_CATEGORY.noble bucket. 'noble' was a
-    // dead bucket key: getUpgradeOpportunities (economy/upgradeOpportunities.js)
-    // surfaces a bucket's roles only when some institution carries
-    // priorityCategory/category equal to the bucket key, but no catalog entry
-    // uses 'noble' on either axis and the closed-set category vocabulary
-    // (src/data/categoryVocabulary.js) never admits one — so the bucket never
-    // matched a settlement. The domain layer already aliases 'noble' to
-    // 'government' (deriveNpcProfile maps noble leverage to government; see
-    // src/domain/npcProfile.js, pinned by tests/domain/wave1CohesionFixes.test.js),
-    // so these feudal leadership roles belong in the reachable 'government'
-    // bucket, where they now surface for any settlement with a government
-    // institution at the right tier. goalCategories and the requiresInstKeyword
-    // coherence gates are preserved exactly as they stood in the noble bucket.
-    {
-      role: 'Lord/Lady of the Manor',
-      title: 'noble',
-      priority: 8,
-      minTier: 'village',
-      goalCategories: ['power', 'wealth'],
-    },
-    {
-      role: 'Baron/Baroness',
-      title: 'noble',
-      priority: 9,
-      minTier: 'town',
-      goalCategories: ['power', 'wealth'],
-    },
-    {
-      role: 'Court Advisor',
-      title: 'advisor',
-      priority: 7,
-      minTier: 'town',
-      goalCategories: ['power', 'knowledge'],
-    },
-    {
-      role: 'House Steward',
-      title: 'steward',
-      priority: 6,
-      minTier: 'village',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Noble Heir',
-      title: 'noble',
-      priority: 5,
-      minTier: 'hamlet',
-      goalCategories: ['personal', 'power'],
-    },
-    {
-      role: 'Land Agent',
-      title: 'agent',
-      priority: 5,
-      minTier: 'village',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Knight/Dame',
-      title: 'knight',
-      priority: 7,
-      minTier: 'village',
-      goalCategories: ['protection', 'personal'],
-    },
-    {
-      role: 'Duke/Duchess',
-      title: 'noble',
-      priority: 10,
-      minTier: 'metropolis',
-      goalCategories: ['power', 'wealth'],
-      requiresInstKeyword: ['palace', 'royal seat', "noble governor", "government complex"],
-    },
-    {
-      role: 'Royal Chamberlain',
-      title: 'noble',
-      priority: 8,
-      minTier: 'city',
-      goalCategories: ['power', 'personal'],
-      requiresInstKeyword: ['palace', 'royal seat', "government complex"],
-    },
   ],
   religious: [
     {
@@ -363,6 +281,73 @@ export const POWER_ROLES_BY_CATEGORY = {
       minTier: 'town',
       goalCategories: ['spiritual', 'justice'],
       requiresInstKeyword: ['monastery', 'cathedral', 'friary'],
+    },
+  ],
+  noble: [
+    {
+      role: 'Lord/Lady of the Manor',
+      title: 'noble',
+      priority: 8,
+      minTier: 'village',
+      goalCategories: ['power', 'wealth'],
+    },
+    {
+      role: 'Baron/Baroness',
+      title: 'noble',
+      priority: 9,
+      minTier: 'town',
+      goalCategories: ['power', 'wealth'],
+    },
+    {
+      role: 'Court Advisor',
+      title: 'advisor',
+      priority: 7,
+      minTier: 'town',
+      goalCategories: ['power', 'knowledge'],
+    },
+    {
+      role: 'House Steward',
+      title: 'steward',
+      priority: 6,
+      minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
+    },
+    {
+      role: 'Noble Heir',
+      title: 'noble',
+      priority: 5,
+      minTier: 'hamlet',
+      goalCategories: ['personal', 'power'],
+    },
+    {
+      role: 'Land Agent',
+      title: 'agent',
+      priority: 5,
+      minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
+    },
+    {
+      role: 'Knight/Dame',
+      title: 'knight',
+      priority: 7,
+      minTier: 'village',
+      goalCategories: ['protection', 'personal'],
+    },
+    {
+      role: 'Duke/Duchess',
+      title: 'noble',
+      priority: 10,
+      minTier: 'metropolis',
+      goalCategories: ['power', 'wealth'],
+      requiresInstKeyword: ['palace', 'royal seat', "noble governor", "government complex"],
+    },
+    {
+      role: 'Royal Chamberlain',
+      title: 'noble',
+      priority: 8,
+      minTier: 'city',
+      goalCategories: ['power', 'personal'],
+      requiresInstKeyword: ['palace', 'royal seat', "government complex"],
     },
   ],
   crafts: [
@@ -1122,14 +1107,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'succession_crisis',
     description: 'The ruler of the time was aging or ill, and potential heirs jockeyed for position',
     factions: ['Legitimate heir', 'Popular candidate', 'Power behind throne'],
-    lastingEffects: [
-      'Rival claimant bloodlines still contest ceremonial precedence',
-      'Succession now governed by a charter drafted in the aftermath',
-    ],
     plotHooks: [
       "A would-be heir approaches outsiders to investigate a rival's past",
       'The ailing ruler wants a final errand completed before naming a successor',
-      'Someone is poisoning the ruler slowly, and the physician knows',
+      'Someone is poisoning the ruler slowly — and the physician knows',
     ],
     severity: ['minor', 'major'],
   },
@@ -1137,12 +1118,8 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'economic_disparity',
     description: 'Growing wealth gap between merchant class and common laborers creates resentment',
     factions: ['Wealthy merchants', 'Poor workers', 'Moderate reformers'],
-    lastingEffects: [
-      'Wage disputes settled by a standing arbitration council since founded',
-      "The merchant quarter and the labourers' quarter remain walled apart",
-    ],
     plotHooks: [
-      'A reformer has been found dead. Suicide or silenced?',
+      'A reformer has been found dead — suicide or silenced?',
       "A hidden ledger documenting wage theft is circulating in the workers' quarter",
       'A merchant is funding both the reform movement and the suppression of it',
     ],
@@ -1152,14 +1129,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'religious_tension',
     description: 'Different faiths or interpretations competed for influence and converts',
     factions: ['Orthodox believers', 'Reformists', 'Secular faction'],
-    lastingEffects: [
-      "Two rival congregations still divide the settlement's faithful",
-      'Public preaching restricted to licensed grounds after the unrest',
-    ],
     plotHooks: [
       'A relic claimed by both sides has resurfaced in a private collection',
       'The reformist leader is being blackmailed into silence',
-      'Someone is staging miracles for one side. The question is who benefits',
+      'Someone is staging miracles for one side — the question is who benefits',
     ],
     severity: ['minor', 'major'],
   },
@@ -1167,10 +1140,6 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'guild_conflict',
     description: 'Rival guilds competed for market share and political influence',
     factions: ['Established guilds', 'Upstart guilds', 'Non-guild workers'],
-    lastingEffects: [
-      'Guild membership rolls now audited by an outside adjudicator',
-      "One guild's charter was revoked and never fully restored",
-    ],
     plotHooks: [
       "A guild master's records have gone missing ahead of an audit",
       'A journeyman denied mastership has proof the exam was rigged',
@@ -1182,10 +1151,6 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'external_threat',
     description: 'News of approaching danger divided the community on how to respond',
     factions: ['Prepare for war', 'Seek diplomacy', 'Flee/hide'],
-    lastingEffects: [
-      'Watch towers and muster drills maintained since the alarm',
-      'A standing levy roster kept ready in the town archive',
-    ],
     plotHooks: [
       'The threat is being exaggerated by someone who profits from wartime contracts',
       'A diplomatic channel exists that the war faction is suppressing',
@@ -1197,13 +1162,9 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'resource_scarcity',
     description: 'A critical resource became scarce, causing hoarding and price gouging',
     factions: ['Hoarders', 'Desperate poor', 'Price regulators'],
-    lastingEffects: [
-      'Emergency granary reserves mandated by ordinance since the shortage',
-      'Price ceilings on the affected goods still enforced in lean seasons',
-    ],
     plotHooks: [
       'A warehouse full of the resource is being held off the market deliberately',
-      'The scarcity was engineered. Someone destroyed the competing supply route',
+      'The scarcity was engineered — someone destroyed the competing supply route',
       'An alternative source exists but the information is being suppressed',
     ],
     severity: ['minor', 'major'],
@@ -1212,12 +1173,8 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'crime_wave',
     description: 'A surge in criminal activity overwhelmed the authorities; vigilantes began to form',
     factions: ['Official guards', 'Vigilantes', 'Criminal organisations'],
-    lastingEffects: [
-      'An expanded watch and a night curfew survive from the crackdown',
-      'Vigilante bands never fully disbanded and still operate quietly',
-    ],
     plotHooks: [
-      'The crime wave is coordinated. Someone is directing it to create a pretext',
+      'The crime wave is coordinated — someone is directing it to create a pretext',
       'A guard captain is on the payroll of the criminal network',
       'The vigilantes have begun targeting innocents based on bad information',
     ],
@@ -1227,10 +1184,6 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'magical_controversy',
     description: 'Debate over the role and regulation of magic divided the community',
     factions: ['Pro-magic', 'Anti-magic', 'Regulation advocates'],
-    lastingEffects: [
-      'Spellcasting now requires a licence from the local authority',
-      'The site of the disputed working remains cordoned and warded',
-    ],
     plotHooks: [
       'A recent magical accident was covered up and the victims silenced',
       'An anti-magic agitator is secretly using magic themselves',
@@ -1242,14 +1195,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'generational_divide',
     description: 'Old ways vs new ideas creates conflict between age groups',
     factions: ['Traditionalists', 'Progressives', 'Pragmatic middle'],
-    lastingEffects: [
-      'Council seats now formally split between the old and young factions',
-      'A youth assembly won a permanent advisory voice in the aftermath',
-    ],
     plotHooks: [
       "A traditional practice conceals something the elders don't want examined",
       "A young reformer has uncovered records that undermine the old guard's legitimacy",
-      "The 'new idea' being promoted was actually tried once before, and failed badly",
+      "The 'new idea' being promoted was actually tried once before — and failed badly",
     ],
     severity: ['minor'],
   },
@@ -1257,13 +1206,9 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'corruption_scandal',
     description: 'Evidence of official corruption has surfaced but powerful figures resist investigation',
     factions: ['Corrupt officials', 'Reformers', 'Complicit beneficiaries'],
-    lastingEffects: [
-      'An oversight office was established to audit officials afterward',
-      'Several old families carry names still quietly disgraced',
-    ],
     plotHooks: [
       'The investigator who uncovered the corruption has received a death threat',
-      "A key witness can be found, but won't speak without protection",
+      "A key witness can be found — but won't speak without protection",
       'The corruption goes higher than anyone yet suspects; the reformers are being used',
     ],
     severity: ['major'],
@@ -1276,14 +1221,10 @@ export const HISTORICAL_EVENTS_DATA = [
       'Those who will bear the cost',
       'Those who profited and escaped',
     ],
-    lastingEffects: [
-      'Tribute payments to the external creditor continue on a schedule',
-      'Municipal borrowing now capped by a charter clause',
-    ],
     plotHooks: [
       'The original loan documents contain a clause that was never disclosed publicly',
       "A creditor's agent is in town conducting a quiet assessment before enforcement",
-      'The debt could be voided, if someone can prove it was obtained through fraud',
+      'The debt could be voided — if someone can prove it was obtained through fraud',
     ],
     severity: ['major'],
   },
@@ -1296,10 +1237,6 @@ export const HISTORICAL_EVENTS_DATA = [
       'Former resistance',
       'New generation wanting to move on',
     ],
-    lastingEffects: [
-      'Collaborator and resistance families still keep to separate quarters',
-      'Wartime property seizures remain legally unresolved',
-    ],
     plotHooks: [
       "A collaborator family's wartime fortune was built on betrayals that are finally surfacing",
       'Resistance fighters kept records that would expose people still in power',
@@ -1310,20 +1247,16 @@ export const HISTORICAL_EVENTS_DATA = [
   {
     type: 'infiltration_fear',
     description:
-      'Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations',
+      'Rumours — some true — of enemy agents within the settlement caused suspicion and denunciations',
     factions: [
       'Security hardliners',
       'Civil libertarians',
       'Actual agents exploiting the confusion',
     ],
-    lastingEffects: [
-      'A standing security office and informant network persist',
-      'Denunciation records from the panic remain sealed in the archive',
-    ],
     plotHooks: [
       'One of the loudest voices warning about infiltration is themselves an agent',
       'An innocent person has been identified as a spy and is about to be executed',
-      "The agents' handler is someone in a position of trust, and the PCs have already met them",
+      "The agents' handler is someone in a position of trust — and the PCs have already met them",
     ],
     severity: ['major'],
   },
@@ -1336,13 +1269,9 @@ export const HISTORICAL_EVENTS_DATA = [
       'Current occupants',
       'Legal class profiting from ambiguity',
     ],
-    lastingEffects: [
-      'The contested parcel remains legally unassigned and unbuilt',
-      'Rival charters over the land are both still lodged with the court',
-    ],
     plotHooks: [
       'The original charter is held in a private archive whose owner has gone missing',
-      'Something of value was found on the disputed land, which is why the claim is suddenly being pressed',
+      'Something of value was found on the disputed land — which is why the claim is suddenly being pressed',
       "A forged document is about to be introduced as evidence; someone knows it's fake",
     ],
     severity: ['minor', 'major'],
@@ -1356,12 +1285,8 @@ export const HISTORICAL_EVENTS_DATA = [
       'Newcomers',
       'Merchants who benefit from cheap newcomer labour',
     ],
-    lastingEffects: [
-      'Newcomer and old-family districts remain socially distinct',
-      'A resettlement compact governs where new arrivals may hold property',
-    ],
     plotHooks: [
-      'The newcomers fled something, and that something has sent agents after them',
+      'The newcomers fled something — and that something has sent agents after them',
       "A series of 'accidents' targeting newcomers is being attributed to chance",
       'An old family is deliberately inflaming tensions to drive out a newcomer who knows something',
     ],
@@ -1376,12 +1301,8 @@ export const HISTORICAL_EVENTS_DATA = [
       'Pragmatists who want stability',
       'Those who prefer the vacuum',
     ],
-    lastingEffects: [
-      'Rival claimants still hold competing partial authority',
-      'A regency council formed in the interim never fully dissolved',
-    ],
     plotHooks: [
-      "The departed leader left a sealed document designating a successor, and someone wants it destroyed before it's read",
+      "The departed leader left a sealed document designating a successor — and someone wants it destroyed before it's read",
       'One claimant has manufactured evidence of a mandate they actually lack',
       'The vacuum is being maintained deliberately by an outside power that benefits from the instability',
     ],
@@ -1393,13 +1314,13 @@ export const HISTORICAL_EVENTS_DATA = [
   // ~8 events) and to deepen the thin disaster/religious/magical categories.
   // Same voice/shape as the arcs above: one-line setup, three factions, three
   // present-tense hooks, a severity band. Tokens ({resource}, {location}, etc.)
-  // resolve through the history renderer for both timelines and current tensions.
+  // resolve in generateEventNarrative's defaultTokens.
   {
     type: 'market_crash',
     description: 'A speculative frenzy in {resource} and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation',
     factions: ['Ruined speculators', 'Creditors calling in debts', 'Those who sold in time'],
     plotHooks: [
-      'A ledger names who was warned to sell before the collapse, and who was not',
+      'A ledger names who was warned to sell before the collapse — and who was not',
       'A ruined family blames a rival for engineering the panic, and wants proof',
       'The debts that survived the crash were quietly bought up by a single hidden buyer',
     ],
@@ -1410,7 +1331,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'The {route_type} trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years',
     factions: ['Displaced traders', 'Workers left without wages', 'Rivals who profited from the diversion'],
     plotHooks: [
-      'The route could be reopened, but someone with power prefers it stay closed',
+      'The route could be reopened — but someone with power prefers it stay closed',
       'A caravan master swears the collapse was arranged, and kept the correspondence to prove it',
       'An old contract still obliges a distant partner to trade here, if anyone can enforce it',
     ],
@@ -1421,7 +1342,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'A fire that began in {location} consumed {building_type} across whole districts before it could be checked',
     factions: ['Survivors seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'],
     plotHooks: [
-      'The fire spared exactly the properties one faction wanted cleared. Coincidence is doubted',
+      'The fire spared exactly the properties one faction wanted cleared — coincidence is doubted',
       'A confession was extracted from a scapegoat; the real arsonist still lives in town',
       'Rebuilding uncovered something in the ashes that predates the settlement',
     ],
@@ -1440,11 +1361,11 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'great_flood',
-    description: 'Waters rose with little warning and reshaped {location}, drowning livelihoods and redrawing who owned what',
+    description: 'Waters rose with little warning and reshaped the {location}, drowning livelihoods and redrawing who owned what',
     factions: ['Displaced families', 'Landowners pressing newly-convenient claims', 'Those who profited from the redrawing'],
     plotHooks: [
       'The old property boundaries washed away, and the new map favours whoever drew it',
-      'A structure meant to hold back the water had been quietly left to rot, and someone knew',
+      'A structure meant to hold back the water had been quietly left to rot — and someone knew',
       'The flood exposed a foundation, a wreck, or a cache that had been submerged for lifetimes',
     ],
     severity: ['major', 'catastrophic'],
@@ -1465,7 +1386,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'A claimed miracle or relic drew pilgrims in numbers the settlement was never built to hold, and the flood of coin and strangers changed it for good',
     factions: ['Temple beneficiaries', 'Overwhelmed old residents', 'Sceptics who doubt the miracle'],
     plotHooks: [
-      'The miracle can be explained mundanely, and the person who can explain it is being kept quiet',
+      'The miracle can be explained mundanely — and the person who can explain it is being kept quiet',
       'The pilgrim trade made one family rich enough to buy the office that authenticates relics',
       'A rival shrine claims the relic is theirs, stolen, and has sent someone to recover it',
     ],
@@ -1498,7 +1419,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'An uncontrolled surge of magic left its mark on {quarter} and on the people who were there, and the effects have never fully faded',
     factions: ['The changed and their descendants', 'Those who fear them', 'Scholars studying the residue'],
     plotHooks: [
-      'The surge was no accident. An experiment went wrong, and the notes were hidden, not destroyed',
+      'The surge was no accident — an experiment went wrong, and the notes were hidden, not destroyed',
       'A bloodline touched by the surge is now manifesting something the family cannot conceal',
       'The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise',
     ],
@@ -1514,7 +1435,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'The right of the current authority to rule was openly and widely questioned, and no one could agree on who, if anyone, held a legitimate claim',
     factions: ['The sitting authority', 'Those who deny its mandate', 'Pragmatists who want any stable answer'],
     plotHooks: [
-      'A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost',
+      'A document that would settle the question of legitimacy exists — and both sides would rather it stayed lost',
       'The authority is quietly manufacturing the consent it can no longer command',
       'A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with',
     ],
@@ -1522,7 +1443,7 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'demographic_pressure',
-    description: 'The population changed faster than the settlement’s institutions could absorb (through arrivals, departures, or both) and the strain reshaped daily life',
+    description: 'The population changed faster than the settlement’s institutions could absorb — through arrivals, departures, or both — and the strain reshaped daily life',
     factions: ['Established residents', 'The newly arrived or departing', 'Those profiting from the churn'],
     plotHooks: [
       'The relief meant for the newcomers is being skimmed, and the shortfall is being blamed on the newcomers',
@@ -1582,21 +1503,3 @@ export const EVENT_TYPE_NAMES = {
   demographic_pressure: 'The Influx',
   trade_dispute:       'The Trade Dispute',
 }
-
-/**
- * CONTENT-GT-FINAL (Charge 1): choose a historical-event description among the catalog
- * canonical (index 0) + its authored variants (historyDescVariants.js), by a pure fnv
- * hash of a stable per-event seed — ZERO rng draws (kernel/proseHash.pickVariant,
- * canonical-at-zero). A falsy seed, or a type with no variants, returns the canonical.
- * Lives here (not in the code-capped historyGenerator.js) and folds into that file's
- * existing historyData import — the hot-file "lazy leaf" rule.
- * @param {{type?: string, description: string}} eventTemplate
- * @param {string|number|null} [seed]
- * @returns {string}
- */
-export const historyDescription = (eventTemplate, seed) => {
-  const variants = HISTORY_DESC_VARIANTS[eventTemplate.type];
-  return variants
-    ? pickVariant([eventTemplate.description, ...variants], seed)
-    : eventTemplate.description;
-};

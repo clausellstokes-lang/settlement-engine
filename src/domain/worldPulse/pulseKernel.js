@@ -9,7 +9,7 @@ import { createPRNG } from '../../kernel/prng.js';
 import { advanceTime } from '../timeProgression.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
-import { ensureWorldState, advanceWorldCalendar, pulseIdFor, seasonForTick, appendPulseHistoryWithProvenance } from './provenanceKernel.js';
+import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor, seasonForTick } from './worldState.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
@@ -35,7 +35,7 @@ import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js
 import { seasonalContextFor, seasonalBoundaryEntries, seasonalThawEntries } from './seasons.js';
 import { applyBlockadeTransportImpairment } from './blockadeTransport.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
-import { ensureAllRelationshipStates, relaxRelationshipStates, settlementStrength, buildPressureSummary, buildMemoryHorizonResolver } from './relationshipEvolution.js';
+import { ensureAllRelationshipStates, relaxRelationshipStates, settlementStrength, buildPressureSummary } from './relationshipEvolution.js';
 import { ensureNpcStates, pruneNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
 import { applyCorruptionImpairments, advanceInstitutionReform } from './corruptionImpair.js';
 import {
@@ -43,21 +43,19 @@ import {
   captureTransitionNewsEntries, recordCaptureTransitionsIntoHistory,
 } from './factionCapture.js';
 import { computeGuildStrengthBy, applyGuildToSettlement } from './thievesGuild.js';
-import { applyOrganicNpcVerdicts } from './npcVerdictPulse.js';
+import { replaceOustedNpcs } from './successorNpc.js';
 import {
   ensureFactionStates, pruneFactionStates, relaxFactionStates, seatNpcsIntoFactions,
   projectFactionStatesOntoSettlement,
 } from './factionCompetition.js';
-import { admitGuaranteedProposalOutcomes, buildProposalDocket, evaluateWorldPulseRules, rollCandidates, suppressEquivalentPendingProposalCandidates, supersedeLegacyRecordModeProposals, volatilityMultiplier } from './candidateEvents.js';
-import { buildTempoContext, foldNarrativeTempo, tempoReceiptEntries, sublinearBudget, REALM_SCALING } from './narrativeTempo.js';
-import { dispositionFactorMap } from './dispositionLedger.js';
-import { advancePulseDisposition, advanceTreatiesWithDisposition, collectPulseDispositionDeltas } from './dispositionChannels.js';
+import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
+import { buildTempoContext, foldNarrativeTempo, tempoReceiptEntries } from './narrativeTempo.js';
+import { applyDispositionDeltas, dispositionFactorMap } from './dispositionLedger.js';
 import { advancePantheon, collectFaithDeltas } from './pantheon.js';
 import { computeDispositionFactorMap, computeLawfulness, computeMalice } from './disposition.js';
 import { computeTradeSalienceMap, computeSecondaryStatusOverlay } from './tradeSalience.js';
+import { collectDispositionDeltas } from './dispositionDeltas.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
-import { reconcileSupersededProposalNews, stateOnlyRumorSeedsFromHistory } from './worldPulseFeedCuration.js';
-import { mechanicalPulseRecordFields, partitionPulseOutcomeLanes, publicPulseSurfaces } from './pulseOutcomePartition.js';
 import { advanceRumorLedgers } from '../spatial/rumorNetwork.js';
 import { advanceEmbattlement, rampThreat, embattlementActive } from '../spatial/embattlement.js';
 import { activeSpatialDigest, activeSeasonalOverlay } from '../spatial/distanceRead.js';
@@ -68,44 +66,27 @@ import { releaseMigrationArrivals, dispatchMigrations, collectRealizedEmigration
 import { migrationActive } from '../spatial/migration.js';
 import { advanceCalamity } from './calamityKernel.js';
 import { advanceArmyTransit } from './armyTransitKernel.js';
-import { rumorCarrierParams } from '../spatial/migrationRumors.js';
+import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
-import { advanceGenerosity, advanceObligationDecay } from './generosityKernel.js';
+import { advanceGenerosity } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
-import { applyLineageBirthsToGraph } from './lineageMemberBirth.js';
 import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
 import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons, peaceReasonsFor } from './peaceReasons.js';
-import { readWarTerminations } from './warTermination.js';
-import { warAuthorityVerdictsForPulse } from './warAuthorityVerdict.js';
-import { priorWarCostReceipt } from './warCosts.js';
-import { warCostTransitionNewsEntries } from './warCostsNews.js';
-import { coalitionLedgerActive, coalitionSunkCostPressureFor } from './warCoalitionExpenditure.js';
-import { warCoalitionEvidenceFromOutcomes } from './warCoalitionEvidence.js';
-import { warCoalitionNewsEntries } from './warCoalitionNews.js';
-import {
-  coalitionStandingTransitionEvidence,
-  mergeWarCoalitionEvidence,
-  readCoalitionStandingFronts,
-} from './warCoalitionPulse.js';
-import { applyVerdictWarDissolutions } from './warRulingsEvidence.js';
-import { warRulingNewsEntries } from './warRulingsNews.js';
-import { advanceEnvoyDiplomacyPulse } from './envoyPulse.js';
-import { advanceAssignedNpcTransits } from './npcDmVerbs.js';
 import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold, makeCommitmentDiscountFn, advanceMomentumCracks, MOMENTUM_TUNING } from './momentum.js';
+import { advanceTreaties } from './peaceTerms.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceNaval, navalActive } from './navalKernel.js';
 import { advanceSupplyWebWarfare, supplyWebWarfareActive } from './supplyWebWarfare.js';
-import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize } from './assizeKernel.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
 import { advanceInformationStatecraft, infoStatecraftActive, makeCredibilityWeightFn, makeBlaineyCredibilityFn, makeSightFn } from './informationStatecraft.js';
 import { advanceMoralDrift, moralReckoningNewsEntries } from '../spatial/moralDrift.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
-import { appendObservedWizardNewsEntries, applyPulseMover } from '../region/index.js';
+import { appendWizardNewsEntries } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
 import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateResourceDynamics } from './resourceDynamicsKernel.js';
@@ -116,7 +97,7 @@ import { advanceCauseLifecycle, projectCauseLifecycleOntoSettlement, causeLifecy
 import { normalizeSimulationRules, isFaithSpreadEnabled } from './simulationRules.js';
 import { deriveDecisionTier } from './decisionTier.js';
 import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
-import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval, capPersistedRollExplanations, isPublicOutcome } from './pulseHelpers.js';
+import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval, capPersistedRollExplanations } from './pulseHelpers.js';
 import { assertNoResidueLeak } from './residueStripGuard.js';
 
 /**
@@ -219,9 +200,8 @@ function nextWorldStateForPulse(worldState, campaign, interval) {
  *   proposal minted DURING the advance is not expired-to-declined before the DM
  *   opens the panel. Absent ⇒ defaults to the current tick (single-tick advance;
  *   byte-identical). [worldpulse-core-3]
- * @param {import('../region/wizardNews.js').RawWizardNewsEntry[]|null} [args.newsReceiptSink] Audit-only raw Wizard News sink.
  */
-export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null, intervalStartTick, newsReceiptSink = null } = {}) {
+export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null, intervalStartTick } = {}) {
   // Structural pin-`now` guard: an unpinned call is reproducible-forfeiting, so in a
   // test run it throws (never silently divergent bytes); production pins `now` and
   // falls back to the wall clock only here, at the boundary.
@@ -285,7 +265,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // strip), and pins which pause/dismiss equivalence test covers each site. A NEW
   // layer that banks residue must add a strip + its marker + a registry entry, or the
   // gate blocks. All strips are byte-neutral when nothing is suppressed.
-  // @pulse-stage: bootstrap
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
   const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules);
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`);
@@ -302,7 +281,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   worldState = expireStaleActorMajors(worldState, worldState.tick, now, intervalStartTick);
   let snapshot = buildWorldSnapshot({ campaign, saves, worldState });
 
-  // @pulse-stage: actor_memory
   worldState = ensureAllRelationshipStates(worldState, snapshot);
   worldState = ensureNpcStates(worldState, snapshot, rng.fork('npc-state'));
   worldState = ensureFactionStates(worldState, snapshot, rng.fork('faction-state'));
@@ -319,10 +297,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // Mean-reversion: relax momentum / heat / resentment toward baseline each
   // tick so quiet periods cool the world down instead of ratcheting it up.
   worldState = relaxNpcStates(worldState);
-  // D5 lifespan-scaled memory: resolve each relationship edge's memory horizon from
-  // its endpoints' declared/inferred bands (facet law). Absent any declaration every
-  // settlement is 'generational' ⇒ multiplier 1 ⇒ byte-identical 12%/tick reversion.
-  worldState = relaxRelationshipStates(worldState, buildMemoryHorizonResolver(snapshot));
+  worldState = relaxRelationshipStates(worldState);
   worldState = relaxFactionStates(worldState);
   // Per-tick corruption onset + organic exposure over npcStates.
   // Clean eligible NPCs turn under crime pressure; corrupt NPCs are exposed
@@ -389,7 +364,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // they were superseded in the same pulse.
   snapshot = buildWorldSnapshot({ campaign: { ...campaign, worldState }, saves, worldState });
 
-  // @pulse-stage: condition_aging
   const agedStressors = simulationRules.stressorsEnabled
     ? ageRoamingStressors(worldState.stressors, snapshot, rng.fork('stressors'), { tick: worldState.tick, now })
     : { stressors: worldState.stressors || [], resolved: [], residualOutcomes: [], graduated: [] };
@@ -422,7 +396,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       })
     : [];
 
-  // @pulse-stage: settlement_clock
   const localSettlements = new Map();
   const settlementTickStates = { ...(worldState.settlementTickStates || {}) };
   const timeTicks = [];
@@ -527,11 +500,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // institution/faction. Flows through settlementMap →
   // settlementUpdates → persistence. (The replacement NPC is seeded further below.)
   const reformEvents = [];
-  // H2 verdicts are richer than npcAgency's organic exposure. Keep both products
-  // ephemeral here; only WR-5's exact two-flag receipt projection may persist the
-  // global NPC identity used to retire a founding corruption cause.
-  const h2AuthorityVerdicts = [];
-  const npcVerdictNewsEntries = [];
   // M9a DISSENT: the PRIOR-tick per-faction belief maps (read-last/write-next — the
   // advance runs below). Null (skipped) when beliefs are dormant ⇒ byte-identical.
   const beliefMapsPrior = beliefsActive(worldState) ? getSpatialLedger(worldState, 'beliefMaps') : null;
@@ -572,28 +540,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // legitimacy from the guild's strength, and stamp thievesGuildStrength.
     const gStrength = guildStrengthBy.get(String(sid));
     if (gStrength) s = applyGuildToSettlement(s, gStrength);
-    // H2 sentences each exact organically-ousted roster identity BEFORE the
-    // established successor pass. The successor must inherit the PRE-STRIP seat,
-    // while the disgraced person's saved alias copies remain stripped; otherwise
-    // either the new authority loses the office or the old faction copy keeps it.
-    const oustedNames = oustedExps.map((e) => e.name);
-    if (oustedNames.length) {
-      const snapshotItem = snapshot.byId.get(String(sid));
-      const verdicts = applyOrganicNpcVerdicts({
-        worldState,
-        settlement: s,
-        exposures: oustedExps,
-        settlementSeed: String(snapshotItem?.save?.seed || snapshotItem?.settlement?.seed || sid),
-        settlementId: String(sid),
-        settlementName: String(snapshotItem?.name || s?.name || sid),
-        tick: worldState.tick,
-        successorRng: rng.fork(`replace:${sid}:${worldState.tick}`),
-      });
-      worldState = verdicts.worldState;
-      s = verdicts.settlement;
-      h2AuthorityVerdicts.push(...verdicts.authorityVerdicts);
-      npcVerdictNewsEntries.push(...verdicts.newsEntries);
-    }
+    // An ousted NPC is replaced by a fresh successor
+    // who inherits their seat in the faction/power.
+    const oustedNames = exps.filter((e) => e.kind === 'ousted').map((e) => e.name);
+    if (oustedNames.length) s = replaceOustedNpcs(s, oustedNames, rng.fork(`replace:${sid}:${worldState.tick}`));
     // M9a DISSENT → council_schism: a faction reading the world materially
     // differently from the ruling coalition splits the council — a legible internal
     // stressor (an activeCondition; no mechanical coup this wave). Pure detection off
@@ -681,7 +631,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     if (pruned) worldState = { ...worldState, npcStates };
   }
 
-  // @pulse-stage: mover_planes
   // Phase 5.5 mover M2 — CARAVANS / SUPPLY-STARVATION. Before the war layer (so a
   // supply-starved besieged town's weakened hold feeds THIS tick's siege verdict via
   // M2b): advance the AGGREGATE in-transit shipment ledger over the active consuming
@@ -784,9 +733,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // NOT commit, else the paused world ramps a war footing whose mobilization is parked.
     // So unlike the dismiss path (which drops the whole outcome), the defer path KEEPS the
     // footing outcome and strips only the ledger/graph residue, keyed by the settlement id
-    // of each deferred PUBLIC footing major (mechanical exact recurrences still commit).
+    // of each deferred footing major (war_mobilization is always a major).
     const deferredMobilizerIds = suppressDeferredMajorResidue
-      ? new Set(effects.outcomes.filter(o => isPublicOutcome(o) && deriveDecisionTier(o) === 'major' && o?.targetSaveId != null).map(o => String(o.targetSaveId)))
+      ? new Set(effects.outcomes.filter(o => deriveDecisionTier(o) === 'major' && o?.targetSaveId != null).map(o => String(o.targetSaveId)))
       : null;
     // Drop the warPosture ledger key for any settlement whose war_mobilization the DM
     // dismissed (effects.dismissedIds) or whose footing major this paused tick deferred:
@@ -850,18 +799,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     now,
     rules: simulationRules,
   });
-  /** @type {any[]} */ let warReturnOutcomes = [], tradeWarOutcomes = [], occupationOutcomes = [];
+  let warReturnOutcomes = [];
+  let tradeWarOutcomes = [];
   // Occupation-layer outcomes (occupation_resistance / occupation_burden /
   // war_spoils / vassalization). Empty unless the war layer is ON and an occupation
   // exists — so the conditional `occupations` ledger never materializes and the apply
   // set is byte-identical on the OFF path / a campaign with no conquests.
+  /** @type {any[]} */
+  let occupationOutcomes = [];
   // Disposition write-side accumulator: the id-stable win/loss deltas from the
   // contests resolved this tick (siege conquests + trade-war flips). Empty unless
   // the war layer is ON and something actually resolved — so the post-apply fold
   // is byte-neutral (applyDispositionDeltas returns the input ledger on []) on the
   // OFF path and on quiet ticks.
   /** @type {any[]} */
-  let pendingDispositionDeltas = [], dispositionTransitions;
+  let pendingDispositionDeltas = [];
   if (simulationRules.warLayerEnabled) {
     // The war-outcome suppression id set, computed ONCE up front (the dismissed majors on
     // the resume path, EVERY major on the pause path, null otherwise). Reused below for
@@ -911,25 +863,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // Persist the updated one-army ledger so it survives to the next tick. The
     // war-exhaustion scar ledger rides alongside it (non-reverting; ratcheted by the
     // evaluator, decayed slowly when armies come home) — read-last/write-next.
-    // WR-8 R2 — THE RAZING'S LICENSE LEDGER COMES HOME HERE, and this is the one
-    // line that lands it. `evaluateWarLayer` returns a BAG and cannot mutate
-    // worldState, so a razing's mint/consume rides back as a FROZEN patch and the
-    // kernel spreads it into the single re-seat it already writes: the shape of
-    // this line changes, its count does not (R-BLD-10 banks this file at 1580
-    // effective with tolerance zero, and comments are skipped by max-lines).
-    //
-    // ORDER IS DELIBERATE. The patch spreads AFTER the whole prior worldState (so
-    // the ledger it carries is authoritative — it was DERIVED from that same
-    // worldState this tick) and BEFORE the two keys this line has always written,
-    // so it can never overwrite the deployment / exhaustion re-seat.
-    //
-    // BYTE-NEUTRAL BY REFERENCE, not merely by equality: in every world that
-    // burned no town the layer returns the SAME frozen EMPTY_PATCH object, and
-    // spreading an empty object adds no key at all. Every existing campaign is
-    // untouched. THE WIND-DOWN RE-SEAT BELOW MUST NEVER GAIN THIS SPREAD — that
-    // branch resolves every deployment as a WITHDRAWAL, where no siege can be won
-    // and therefore no town can burn; `warDeployment.test.js` forbids it forever.
-    worldState = { ...worldState, ...war.worldStatePatch, deployments: war.deployments, warExhaustion: war.warExhaustion };
+    worldState = { ...worldState, deployments: war.deployments, warExhaustion: war.warExhaustion };
     // Defender-attrition SPIKE (flag-gated): persist the per-target defender siege
     // ledger only when the flag produced one. Null on the default path ⇒ the key is
     // never added, so worldState stays byte-identical for every existing campaign.
@@ -971,7 +905,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       snapshot: postTimeSnapshot,
       graph: postTimeSnapshot.regionalGraph,
       rng: rng.fork('war-layer'),
-      tick: worldState.tick, worldState, // (worldState = DOOR 1 siege-breach precision; dark ⇒ no-op)
+      tick: worldState.tick,
       // NOTE: no warEconomy flag threaded — the homecoming credit is gated on the
       // record's BANKED deployedPopulation (whether population was actually debited),
       // not the live flag, so conservation holds under any flag combination and
@@ -981,8 +915,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // The trade-war layer. The per-commodity primary-supplier contest composes
     // with the war layer inside the SAME gated block: a flip re-points C's primary
     // trade_dependency channel and (confidence-gated) either winds the defeated
-    // incumbent down or deposits hostility + a war intent. The ONE opener reads that
-    // intent next tick and may still refuse it on treaty/posture/army/feasibility gates.
+    // incumbent down or escalates to a war_front the war layer picks up next tick.
     // Reads the SAME post-mint snapshot (so the war layer's fresh fronts are
     // visible) and persists its per-prize cooldown ledger onto worldState.tradeWarState.
     const tradeWar = evaluateTradeWar({
@@ -1081,7 +1014,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // after outcomes apply — the READ-LAST/WRITE-NEXT timing discipline. The occupation
     // layer contributes its own consolidation-win / liberation-loss deltas (deterministic,
     // id-stable) alongside the war/trade contests.
-    pendingDispositionDeltas = collectPulseDispositionDeltas(war, tradeWar, occupation, simulationRules.dispositionChannelsEnabled === true);
+    pendingDispositionDeltas = [...collectDispositionDeltas(war, tradeWar), ...occupation.dispositionDeltas];
     // A DM-DISMISSED conquest must leave NO disposition ledger residue either: the war
     // layer banks a conqueror WIN + a conquered LOSS for each conquest it resolved (the
     // out-of-band ratchet), so a dismissed conquest would otherwise still tilt next-tick
@@ -1130,7 +1063,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       snapshot: postTimeSnapshot,
       graph: postTimeSnapshot.regionalGraph,
       rng: rng.fork('war-layer'),
-      tick: worldState.tick, worldState, // (worldState = DOOR 1 siege-breach precision; dark ⇒ no-op)
+      tick: worldState.tick,
     });
   }
   // Religion dynamics: the deity contest + conversion spread +
@@ -1202,77 +1135,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
   }
   const warOutcomes = [...mobilizationOutcomes, ...war.outcomes, ...warReturnOutcomes, ...tradeWarOutcomes, ...occupationOutcomes, ...religiousOutcomes];
-  const pressures = deriveSettlementPressures(postTimeSnapshot); const pIndex = pressureIndex(pressures);
-  const warAuthorityVerdicts = warAuthorityVerdictsForPulse(simulationRules, h2AuthorityVerdicts);
-  // Preserve WR-1's exact dark sentinel. A callback that returns `undefined`
-  // is not equivalent to no callback here: WR-1 deliberately distinguishes its
-  // null injection from the attrition/exhaustion fallback. Install the WR-6
-  // callback only under the complete four-flag coalition gate.
-  const coalitionSunkCostPressure = coalitionLedgerActive(worldState)
-    ? coalitionSunkCostPressureFor({
-        worldState,
-        snapshot: postTimeSnapshot,
-        tick: worldState.tick,
-      })
-    : null;
-  const warTermination = simulationRules.warLayerEnabled === true && simulationRules.warTerminationEnabled === true ? readWarTerminations({
-    worldState,
-    snapshot: postTimeSnapshot,
-    pIndex,
-    tick: worldState.tick,
-    authorityVerdicts: warAuthorityVerdicts,
-    sunkCostPressureFor: coalitionSunkCostPressure,
-  }) : null;
-  const warCostNewsEntries = warTermination?.receipts.flatMap((receipt) => (
-    warCostTransitionNewsEntries({
-      current: receipt,
-      previous: priorWarCostReceipt(
-        worldState,
-        receipt.attackerId,
-        receipt.targetId,
-        receipt.tick,
-        Number.isFinite(worldState?.deployments?.[receipt.attackerId]?.sinceTick)
-          ? worldState.deployments[receipt.attackerId].sinceTick
-          : receipt.tick,
-      ),
-      snapshot: postTimeSnapshot,
-      now,
-    })
-  )) || [];
-  const verdictDissolutions = applyVerdictWarDissolutions({
-    worldState,
-    receipts: warTermination?.receipts || [],
-    tick: worldState.tick,
-  });
-  worldState = verdictDissolutions.worldState;
-  postTimeSnapshot = { ...postTimeSnapshot, worldState };
-  const warRulingTransitionNewsEntries = warRulingNewsEntries({
-    evidence: verdictDissolutions.evidence,
-    snapshot: postTimeSnapshot,
-    now,
-  });
-  // WR-6 G/G2 reads after authority-driven recalls have landed. A joined ally
-  // therefore decides against the real surviving origin episode, never the
-  // pre-verdict picture that existed at the start of this same pulse.
-  const coalitionStanding = readCoalitionStandingFronts({
-    worldState,
-    snapshot: postTimeSnapshot,
-    pIndex,
-    tick: worldState.tick,
-  });
-  const warTerminationByAttacker = new Map(warTermination?.byAttacker || []);
-  for (const decision of coalitionStanding.decisions) {
-    warTerminationByAttacker.set(String(decision.partyId), decision.termination);
-  }
-  const standingCoalitionTransitionEvidence = coalitionStandingTransitionEvidence(
-    worldState,
-    coalitionStanding.evidence,
-  );
-  const coalitionStandingNewsEntries = warCoalitionNewsEntries({
-    evidence: standingCoalitionTransitionEvidence,
-    snapshot: postTimeSnapshot,
-    now,
-  });
+  const pressures = deriveSettlementPressures(postTimeSnapshot);
+  const pIndex = pressureIndex(pressures);
   const tierResource = evaluateTierResourceDynamics(worldState, postTimeSnapshot, pIndex, {
     tick: worldState.tick,
     interval: tickInterval,
@@ -1360,7 +1224,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   //     no-signal settlement is omitted ⇒ still 1.0 (`{}`-equivalent). This map
   //     SUPERSEDES dispositionFactorMap (history is folded in via
   //     readDispositionMultiplier — they are never both applied).
-  const dispositionFactor = simulationRules.warLayerEnabled ? computeDispositionFactorMap(postTimeSnapshot, worldState) : dispositionFactorMap(worldState.dispositionStats);
+  const dispositionFactor = simulationRules.warLayerEnabled
+    ? computeDispositionFactorMap(postTimeSnapshot, worldState)
+    : dispositionFactorMap(worldState.dispositionStats);
   // STRATEGIC TRADE → REDUCED HOSTILITY. Compute the per-edge trade-
   // salience map (a centered-on-1.0 factor that DAMPENS hostile/escalation
   // candidates when a VALUABLE trade tie exists) ONLY under the war layer — off ⇒
@@ -1371,7 +1237,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const tradeSalienceResult = simulationRules.warLayerEnabled
     ? computeTradeSalienceMap(postTimeSnapshot, worldState, { tick: worldState.tick })
     : { factors: {}, salience: {} };
-  // @pulse-stage: candidate_selection
   const candidates = evaluateWorldPulseRules(postTimeSnapshot, {
     pressures,
     pressureIndex: pIndex,
@@ -1381,56 +1246,78 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     dispositionFactor,
     tradeSalienceFactor: tradeSalienceResult.factors,
     tradeSalienceInfo: tradeSalienceResult.salience,
-    warTerminationByAttacker,
-    coalitionDecisionByParty: coalitionStanding.byParty,
     // Thread a stable fork to the settlement strategy chooser (the ONLY
     // candidate rule that samples). Forked from the master pulse rng on a constant
     // key; the chooser re-forks per settlement (`strategy:<S>:<tick>`) so the draw
     // is order-free. The chooser short-circuits before touching it when OFF.
     rng: rng.fork('settlement-strategy'),
   });
-  const stochasticCandidates = [...candidates, ...suppressEquivalentPendingProposalCandidates([...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates], worldState)];
+  const stochasticCandidates = [...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates];
   // E0 NARRATIVE TEMPO GOVERNOR — READ hook (design §7.2). Build the pre-tick tempo
   // context from `worldState` (still the pre-tick state here; NOT yet memoryState).
   // Dormant (no `narrativeTempo` axis) ⇒ { active:false } ⇒ the seam is byte-identical.
-  // D2 THE SCALING LAW: realm-global decision budgets grow √-sublinearly in realm size N
-  // (saves.length; design §D2a/§D2c). At N ≤ BASE_REALM every bonus is 0 ⇒ classMax /
-  // maxAuto / maxProposals are byte-identical to today.
-  const tempoContext = buildTempoContext(worldState, simulationRules, saves.length);
-  // Guaranteed organic proposals (population, coup, held war decisions) get
-  // first claim on the same read-only docket snapshot; stochastic questions
-  // may fill only the capacity that remains.
-  const deterministicAdmission = admitGuaranteedProposalOutcomes(buildProposalDocket(worldState, saves.length), [...coupOutcomes, ...warOutcomes, ...structuralCandidates]); const admittedDeterministicOutcomes = deterministicAdmission.outcomes;
-  const { selected, rollExplanations, deferred: tempoDeferred, proposalDocket: rolledProposalDocket } = rollCandidates(
+  const tempoContext = buildTempoContext(worldState, simulationRules);
+  const { selected, rollExplanations, deferred: tempoDeferred } = rollCandidates(
     [...agedStressors.residualOutcomes.filter(o => !isCoupResidualOutcome(o)), ...stochasticCandidates],
     rng.fork('candidate-rolls'),
-    { maxAuto: sublinearBudget(7, saves.length, REALM_SCALING.BASE_REALM, REALM_SCALING.AUTO_SCALE_PER_ROOT), maxProposals: sublinearBudget(5, saves.length, REALM_SCALING.BASE_REALM, REALM_SCALING.PROPOSAL_SCALE_PER_ROOT), volatility: volatilityMultiplier(worldState.volatility), tempo: tempoContext, proposalDocket: deterministicAdmission.docket },
-  ); let organicProposalDocket = rolledProposalDocket || deterministicAdmission.docket;
-  worldState = supersedeLegacyRecordModeProposals(worldState, { tick: worldState.tick, now });
-  const reconciledNews = reconcileSupersededProposalNews(worldState, campaign?.wizardNews);
-  worldState = reconciledNews.worldState;
-  // @pulse-stage: permission_and_apply
-  const {
-    deterministicExplanations,
-    selectedForApply,
-    publicSelectedOutcomes,
-    deferredMajors,
-    outcomesToApply,
-    selectedForConsequences,
-    publicSelectedForConsequences,
-  } = partitionPulseOutcomeLanes({
-    coupOutcomes: admittedDeterministicOutcomes,
-    selected,
-    deferMajors,
-    activeDismissals,
-  });
+    { maxAuto: 7, maxProposals: 5, volatility: volatilityMultiplier(worldState.volatility), tempo: tempoContext },
+  );
+  const deterministicExplanations = [...coupOutcomes, ...warOutcomes, ...structuralCandidates].map(candidate => ({
+    candidateId: candidate.id,
+    candidateType: candidate.candidateType,
+    ruleId: candidate.ruleId || null,
+    ruleFamily: candidate.ruleFamily || null,
+    targetSaveId: candidate.targetSaveId || null,
+    relationshipKey: candidate.relationshipKey || null,
+    npcId: candidate.npcId || null,
+    factionId: candidate.factionId || null,
+    severity: candidate.severity,
+    probability: 1,
+    roll: 0,
+    passed: true,
+    gates: candidate.reasons || [],
+    applyMode: candidate.applyMode,
+    proposalPayload: candidate.proposalPayload || null,
+    conflictResolution: { selected: true, deterministic: true },
+  }));
+  const selectedForApply = [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...selected];
+
+  // Advance-scaling Stage 3 PAUSE BOUNDARY: partition the selected set into the
+  // structural MAJORS (the campaign-altering subset the DM should get a say on)
+  // and everything else (the MINORS, auto-resolved as usual). When deferMajors is
+  // ON, only the minors are routed through this tick's apply pass; the majors are
+  // returned on `deferredMajors` for the orchestrator to resolve (autoresolve ON)
+  // or park (autoresolve OFF). When OFF, the partition is inert — the full set
+  // applies in one pass, byte-identical to today.
+  const deferredMajors = deferMajors ? selectedForApply.filter(o => deriveDecisionTier(o) === 'major') : [];
+  // RESUME re-run filter: when the DM dismissed specific majors, drop them from the
+  // apply set on the re-run (deferMajors OFF). Empty/null ⇒ no exclusion ⇒
+  // byte-identical to the autoresolve-ON tick. `activeDismissals` (computed up front)
+  // is the SAME set the occupation layer was filtered against above, so a dismissed
+  // conquest is excluded from BOTH the occupation seed AND the apply set — no residue.
+  const outcomesToApply = deferMajors
+    ? selectedForApply.filter(o => deriveDecisionTier(o) !== 'major')
+    : (activeDismissals
+        ? selectedForApply.filter(o => !(deriveDecisionTier(o) === 'major' && activeDismissals.has(String(o.id))))
+        : selectedForApply);
+  // r2 worldpulse-tick-core-1: the post-apply CONSEQUENCE readers (moral drift, misjudgment
+  // news, the tempo birth fold) must see the same dismissal discipline the apply pass does — a
+  // DM-VETOED major never happened, so it must not drift alignment, emit a "marches on a
+  // misjudgment" receipt, or count as a landed birth. We subtract ONLY the DISMISSED majors
+  // (activeDismissals), NOT the merely-DEFERRED ones: on the pause path a deferred major is still
+  // pending-apply and legitimately counts (activeDismissals is null there ⇒ the full set, so the
+  // tempo birth ledger is unchanged). On an ordinary tick activeDismissals is null ⇒ this is the
+  // SAME reference as selectedForApply ⇒ byte-identical. pulseRecord below keeps the FULL set.
+  const selectedForConsequences = activeDismissals
+    ? selectedForApply.filter(o => !(deriveDecisionTier(o) === 'major' && activeDismissals.has(String(o.id))))
+    : selectedForApply;
 
   const settlementMap = buildSettlementMap(postTimeSnapshot, localSettlements);
   const applied = applyWorldPulseOutcomes({
     snapshot: postTimeSnapshot,
     worldState,
     regionalGraph: postTimeSnapshot.regionalGraph,
-    wizardNews: reconciledNews.wizardNews,
+    wizardNews: campaign?.wizardNews,
     settlementMap,
     outcomes: outcomesToApply,
     tick: worldState.tick,
@@ -1438,49 +1325,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     season: roadSeason,
     simulationRules,
   });
-  let envoyEvidence = Array.isArray(applied.envoyEvidence) ? [...applied.envoyEvidence] : [];
-  let lateEnvoyApplied = [];
-  /**
-   * Direct evidence returned by late movers rather than generic outcomes.
-   *
-   * ⚠️⚠️ THESE TWO CARRY NO `= []` INITIALIZER, AND THE ABSENCE IS THE RULING
-   * (chair CR-PK-1, 2026-08-04, vetoable). Both were declared `= []`, both were
-   * flagged by `no-useless-assignment`, and lane WZ-2 recorded the repair as
-   * UNSAFE — "`reasonCoalitionEvidence`'s reassignment sits INSIDE the
-   * peace-engine conditional, so dropping the `= []` hands `undefined` to
-   * `mergeWarCoalitionEvidence` on the peace-dark path". THAT ANALYSIS IS FALSE
-   * ON BOTH LEGS, and the correction belongs in the source and not only in the
-   * record:
-   *
-   *   1. THE REASSIGNMENT IS NOT INSIDE A CONDITIONAL. Its enclosing chain,
-   *      read off the parse tree rather than off the indentation, is
-   *      FunctionDeclaration > BlockStatement(the body) > BlockStatement — a
-   *      BARE lexical block whose only job is to scope `peaceCausal`. There is
-   *      no `if` anywhere above it, and the treaty assignment sits at body
-   *      level with no block at all. Both run on every path that reaches the
-   *      merge below, which is precisely why eslint could prove the two
-   *      initializers dead in the first place.
-   *
-   *   2. AND EVEN IF ONE WERE CONDITIONAL, `undefined` AND `[]` ARE THE SAME
-   *      ARGUMENT AT THIS CONSUMER. `mergeWarCoalitionEvidence(...groups)`
-   *      iterates `Array.isArray(group) ? group : []`, so a missing group
-   *      contributes exactly nothing — identical to an empty one BY
-   *      CONSTRUCTION, not by luck. The named hazard could not have fired.
-   *
-   * So preference (a) of the ruling applies and preference (b) — a disable
-   * comment — is not reached: the declarations keep their line count and lose a
-   * default that was never read and that described a dataflow which does not
-   * exist. A same-seed WHOLE-PIPELINE hash over three rule sets × two seeds is
-   * byte-identical across this change, and a negative control proves the
-   * harness can see this merge.
-   */
-  let treatyCoalitionEvidence;
-  let reasonCoalitionEvidence;
+
   // applied.worldState already carries this tick's posture/memory stamp:
   // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
   // inputs this duplicate call used to re-derive byte-identically).
-  // @pulse-stage: consequence_fold
-  let memoryState = advanceObligationDecay(applied.worldState, worldState.tick); if (Array.isArray(newsReceiptSink)) newsReceiptSink.push(...applied.newsEntries);
+  let memoryState = applied.worldState;
   // E0 NARRATIVE TEMPO GOVERNOR — WRITE hook (design §7.2). Fold this tick's landed
   // spontaneous major births + the seam's deferrals into the next narrativeTempo
   // ledger, window-stamped on the PRE-TICK `worldState.calendar.elapsedWeeks`
@@ -1489,7 +1338,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // legacy campaign has no narrativeTempo key and none is added (byte-neutral).
   const nextTempo = foldNarrativeTempo(
     memoryState.narrativeTempo,
-    publicSelectedForConsequences, // v4: mechanical refreshes are not behavioral births
+    selectedForConsequences, // r2 tick-core-1: a DM-dismissed major is not a landed birth
     tempoDeferred,
     worldState.calendar?.elapsedWeeks ?? 0,
     simulationRules,
@@ -1503,9 +1352,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // Disposition write-side, the READ-LAST/WRITE-NEXT seam: fold this tick's
   // resolved-contest win/loss deltas into NEXT-tick dispositionStats. The deltas
   // were READ from contests that resolved THIS tick; the ledger they produce is
-  // first READ at candidate-build NEXT tick — never mid-tick. The leaf keeps the
-  // legacy writer exact when dark and owns the lit decay/transition orchestration.
-  ({ worldState: memoryState, transitions: dispositionTransitions } = advancePulseDisposition(memoryState, pendingDispositionDeltas, { enabled: simulationRules.dispositionChannelsEnabled === true, tick: worldState.tick }));
+  // first READ at candidate-build NEXT tick — never mid-tick. applyDispositionDeltas
+  // sorts by id (commutative, order-independent) and returns the input ledger
+  // unchanged for [] — so this is byte-neutral on the OFF path / quiet ticks.
+  if (pendingDispositionDeltas.length) {
+    memoryState = {
+      ...memoryState,
+      dispositionStats: applyDispositionDeltas(memoryState.dispositionStats, pendingDispositionDeltas),
+    };
+  }
   // The SECONDARY-STATUS OVERLAY (compatibility-enforced). Trade
   // ties create/reinforce LAYERED secondary statuses (critical/preferred/military
   // supplier; smuggling for a battlefield primary) on each edge, OVER the primary
@@ -1738,7 +1593,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
     return projected === update.settlement ? update : { ...update, settlement: projected };
   });
-  const publicSurfaces = publicPulseSurfaces([...admittedDeterministicOutcomes, ...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates], [...deterministicExplanations, ...rollExplanations]);
   const pulseRecord = {
     id: pulseIdFor(campaign?.id, worldState.tick),
     tick: worldState.tick,
@@ -1746,12 +1600,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     committed: commit,
     createdAt: now,
     calendar: memoryState.calendar,
-    candidateCount: publicSurfaces.candidateCount,
-    selectedCount: publicSelectedOutcomes.length,
-    autoAppliedCount: applied.autoApplied.filter(isPublicOutcome).length,
+    candidateCount: candidates.length + tierResource.candidates.length + resourceDyn.candidates.length + instLifecycle.candidates.length + moralInst.candidates.length + structuralCandidates.length + coupOutcomes.length + warOutcomes.length,
+    selectedCount: selectedForApply.length,
+    autoAppliedCount: applied.autoApplied.length,
     proposalCount: applied.proposals.length,
-    selectedOutcomes: publicSelectedOutcomes.slice(0, 24).map(compactOutcomeForHistory),
-    ...mechanicalPulseRecordFields({ applied, selectedForApply }),
+    selectedOutcomes: selectedForApply.slice(0, 24).map(compactOutcomeForHistory),
     impactDigest: compactImpactDigest(applied.newsEntries),
     resolvedStressors: agedStressors.resolved.map(stressor => ({
       id: stressor.id,
@@ -1768,7 +1621,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // performance-scale-5: cap the PERSISTED explanations (this record rides every
     // upsert / cache write / undo snapshot). The RETURN value below keeps the full set
     // for the session UI. Byte-identical on any record within the missed-roll cap.
-    rollExplanations: capPersistedRollExplanations([], publicSurfaces.rollExplanations),
+    rollExplanations: capPersistedRollExplanations(deterministicExplanations, rollExplanations),
     timeTicks: timeTicks.map(t => ({ saveId: t.saveId, summary: t.tick.summary })),
     corruptionEvents: [...(corruption.exposures || []), ...reformEvents].slice(0, 24).map((/** @type {any} */ e) => ({
       settlementId: e.settlementId, name: e.name, kind: e.kind,
@@ -1786,8 +1639,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         ageBand: e.ageBand, conjunctionKey: e.conjunctionKey,
       })),
     } : {}),
-    ...(warAuthorityVerdicts.length ? { warAuthorityVerdicts } : {}),
-    ...(warTermination?.receipts.length ? { warTerminationReads: warTermination.receipts } : {}),
   };
   // Realm-scope arcs: promote stressors shared across many settlements into
   // named realm-wide Wizard News ("The Great Hunger", "The War"), plus the
@@ -1857,7 +1708,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // what was believed, what was true, and how stale the read was. Empty (byte-
   // neutral) when beliefs are dormant or every acting belief was sound.
   const beliefMisjudgmentNews = beliefMisjudgmentNewsEntries(
-    selectedForConsequences, settlementNameFor, worldState.tick, now, // derived consequence remains visible even when its source refresh is mechanical-only
+    selectedForConsequences, settlementNameFor, worldState.tick, now, // r2 tick-core-1: no receipt for a vetoed march
   );
   // SEASONS-A: the season boundary markers — the ONE new news kind
   // ('season_marker': harvest at the autumn boundary, hungry_gap at month 12).
@@ -1896,13 +1747,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const tempoReceiptNews = (tempoContext.active && tempoDeferred.length)
     ? tempoReceiptEntries(tempoDeferred, worldState.tick)
     : [];
-  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...npcVerdictNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...warCostNewsEntries, ...warRulingTransitionNewsEntries, ...coalitionStandingNewsEntries, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries, ...tempoReceiptNews];
+  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries, ...tempoReceiptNews];
   // Thread the pinned `now` (same as applyWorldPulse's regional-news append) so the
   // feed's `updatedAt` stamps the deterministic tick time, not the wall clock. Without
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,
   // pantheon) leaked wall-clock time into the composed output — a latent determinism/
   // equivalence break that only bit once an advance reached such a tick.
-  let wizardNews = newsToAppend.length ? appendObservedWizardNewsEntries(applied.wizardNews, newsToAppend, { now }, newsReceiptSink) : applied.wizardNews;
+  let wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend, { now }) : applied.wizardNews;
   // STEP 3.5 — RUMORS & NEWS (trade carrier). AFTER the tick's feed is fully
   // composed (the seeds read the same entries the DM reads), the rumor network
   // advances one step: expire by tick-age, seed this window's significant
@@ -1914,33 +1765,32 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // byte-identical. Proposal/party applies outside this kernel seed at the
   // next pulse via the module's feed lookback (idempotent per event+witness).
   {
-    // D-0 (deep-couplings): the rumor CARRIER params (army + smuggle + refugee paths + the
-    // migration-flight seed entries) assemble in the migrationRumors leaf — pulseKernel is
-    // FROZEN at its effective-line ceiling, so the assembly lives outside it. armyPaths/
-    // smugglePaths read the POST-apply memoryState (byte-identical to the inline builders they
-    // replace); the migration columns read startingWorldState PRE-DRAIN (the early release pass
-    // already drained the due columns from memoryState) and light ONLY behind
-    // migrationRumorsEnabled (dark ⇒ null migrantPaths + no flight entries ⇒ byte-identical).
-    const carrier = rumorCarrierParams({ carrierState: memoryState, migrationState: startingWorldState, rules: simulationRules });
-    // v4 state-only headlines are not public feed rows, but remain exact rumor
-    // inputs so hiding a metronome never changes beliefs or later actions.
-    const internalRumorSeeds = [
-      ...stateOnlyRumorSeedsFromHistory(memoryState.pulseHistory, wizardNews?.entries),
-      ...(applied.rumorSeedEntries || []),
-    ];
-    const feedEntries = carrier.flightEntries.length || internalRumorSeeds.length
-      ? [...(wizardNews?.entries || []), ...internalRumorSeeds, ...carrier.flightEntries]
-      : (wizardNews?.entries || []);
+    // M5 army carrier: the prior-tick in-transit armies' routes (empty when none
+    // afield ⇒ the army lane is dormant ⇒ byte-identical). Armies carry rumors along
+    // their path (round 9), same shape as the trade carrier.
+    const transitLedger = armyTransitLedger(memoryState);
+    const armyPaths = transitLedger
+      ? Object.keys(transitLedger).sort().map((id) => transitLedger[id].path).filter((p) => Array.isArray(p) && p.length > 1)
+      : null;
+    // M7 criminal carrier: this tick's SMUGGLE runs (marked on the supplyShipments ledger)
+    // relay news between the towns they run — a [source, destination] leg per run. EMPTY when
+    // no smuggle runs are afield ⇒ the criminal lane is dormant ⇒ byte-identical.
+    const shipLedger = /** @type {Record<string, { smuggle?: unknown, sourceId?: unknown, settlementId?: unknown }> | null} */ (
+      getSpatialLedger(memoryState, 'supplyShipments'));
+    const smugglePaths = shipLedger
+      ? Object.keys(shipLedger).sort().map((k) => shipLedger[k])
+          .filter((r) => r && r.smuggle === true && r.sourceId && r.settlementId && String(r.sourceId) !== String(r.settlementId))
+          .map((r) => [String(r.sourceId), String(r.settlementId)])
+      : null;
     const rumors = advanceRumorLedgers({
       worldState: memoryState,
-      feedEntries,
+      feedEntries: wizardNews?.entries || [],
       graph: applied.regionalGraph,
       tick: worldState.tick,
       season: roadSeason,
       rng,
-      armyPaths: carrier.armyPaths,
-      smugglePaths: carrier.smugglePaths,
-      migrantPaths: carrier.migrantPaths,
+      armyPaths,
+      smugglePaths: smugglePaths && smugglePaths.length ? smugglePaths : null,
     });
     if (rumors.changed) {
       if (rumors.next) {
@@ -2006,11 +1856,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       // W-DOCTRINE-2b: the SEE/HIDE per-pair sight modifier (an active sight/secrecy posture
       // slows/speeds this pair's belief decay + floors its fidelity). Reads the postures
       // written LAST tick (read-last/write-next). null when dormant / no posture ⇒ byte-identical.
-      //
-      // W-I I2 THE BROKERAGE FIDELITY TERM rides this SAME slot, composed inside
-      // advanceBeliefMaps rather than here (beliefMap.js, the brokerage floor): the belief
-      // engine already holds the snapshot index and the distance digest the floor needs, and
-      // this kernel file is at its frozen size ceiling. Nothing changes on this line.
       sightOf: makeSightFn(memoryState),
     });
     if (beliefs.changed) {
@@ -2022,45 +1867,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       }
     }
   }
-  // WR-7a — THE PHYSICAL MESSAGE. Rumors and beliefs move first so the
-  // traveler's closed picture can hear only what is available where they stand.
-  // A home delivery then re-enters the ordinary outcome applicator; until that
-  // exact moment the hostile edge, political books, stressors, and armies remain
-  // untouched. Dark/partial configurations return every reference unchanged.
-  {
-    const envoys = advanceEnvoyDiplomacyPulse({
-      worldState: memoryState,
-      snapshot: postTimeSnapshot,
-      regionalGraph: applied.regionalGraph,
-      wizardNews,
-      settlementUpdates,
-      tick: worldState.tick,
-      now,
-      season: roadSeason,
-      simulationRules,
-    });
-    memoryState = envoys.worldState;
-    settlementUpdates = envoys.settlementUpdates;
-    wizardNews = envoys.wizardNews;
-    applied.regionalGraph = envoys.regionalGraph;
-    if (envoys.evidence.length) envoyEvidence.push(...envoys.evidence);
-    if (envoys.autoApplied.length) {
-      lateEnvoyApplied = [...envoys.autoApplied];
-      applied.autoApplied.push(...envoys.autoApplied);
-    }
-    if (envoys.newsEntries.length) {
-      applied.newsEntries.push(...envoys.newsEntries);
-      if (Array.isArray(newsReceiptSink)) newsReceiptSink.push(...envoys.newsEntries);
-    }
-  }
-  // WR-7a — DM ASSIGN is also lived named-person transit while J4 is lit.
-  // Advance at most one route transition after the envoy projection so both
-  // named-person lanes read the same settled rumor/belief/world state.
-  memoryState = advanceAssignedNpcTransits({
-    worldState: memoryState,
-    tick: worldState.tick,
-    season: roadSeason,
-  }).worldState;
   // W-DOCTRINE-2 — INFORMATION STATECRAFT (DESIGN_INFORMATION_STATECRAFT.md). AFTER the
   // belief advance (the LIE writes onto/against the just-formed beliefs): runs the LIE
   // lifecycle (seed a garrison bluff into believed-hostile neighbours → contradict →
@@ -2089,7 +1895,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (infowar.changed) memoryState = /** @type {typeof memoryState} */ (infowar.worldState);
     if (infowar.newsEntries.length) {
-      wizardNews = appendObservedWizardNewsEntries(wizardNews, infowar.newsEntries, { now }, newsReceiptSink);
+      wizardNews = appendWizardNewsEntries(wizardNews, infowar.newsEntries, { now });
     }
   }
   // W-DOCTRINE-1 — SUPPLY-WEB WARFARE (DESIGN_SUPPLY_WEB_WARFARE.md). The indirect-war
@@ -2116,7 +1922,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (webwar.changed) memoryState = webwar.worldState;
     if (webwar.newsEntries.length) {
-      wizardNews = appendObservedWizardNewsEntries(wizardNews, webwar.newsEntries, { now }, newsReceiptSink);
+      wizardNews = appendWizardNewsEntries(wizardNews, webwar.newsEntries, { now });
     }
     webwarAtrocities = webwar.atrocities;
   }
@@ -2187,7 +1993,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       // The reckoning receipts (a good polity's conscience curdling) reach the Chronicle,
       // appended like the army-transit news. Empty ⇒ byte-neutral.
       if (drift.reckonings.length) {
-        wizardNews = appendObservedWizardNewsEntries(wizardNews, moralReckoningNewsEntries(drift.reckonings, settlementNameFor, worldState.tick, now), { now }, newsReceiptSink);
+        wizardNews = appendWizardNewsEntries(wizardNews, moralReckoningNewsEntries(drift.reckonings, settlementNameFor, worldState.tick, now), { now });
       }
     }
   }
@@ -2288,7 +2094,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (armyTransit.changed) memoryState = armyTransit.worldState;
     if (armyTransit.newsEntries.length) {
-      wizardNews = appendObservedWizardNewsEntries(wizardNews, armyTransit.newsEntries, { now }, newsReceiptSink);
+      wizardNews = appendWizardNewsEntries(wizardNews, armyTransit.newsEntries, { now });
     }
   }
   // W-NAVY — THE SEA HALF (DESIGN_NAVY.md). The maritime twin of army-transit, immediately
@@ -2309,12 +2115,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       rng: rng.fork('naval'),
       season: roadSeason,
       tick: worldState.tick,
-      now, proposalDocket: organicProposalDocket,
+      now,
     });
-    if (naval.proposalDocket) organicProposalDocket = naval.proposalDocket;
     if (naval.changed) memoryState = /** @type {typeof memoryState} */ (naval.worldState);
     if (naval.newsEntries.length) {
-      wizardNews = appendObservedWizardNewsEntries(wizardNews, naval.newsEntries, { now }, newsReceiptSink);
+      wizardNews = appendWizardNewsEntries(wizardNews, naval.newsEntries, { now });
     }
   }
   // Phase 5.5 mover M11a — PESTILENCE (the traveling plague). AFTER the war/army layer +
@@ -2342,7 +2147,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (pestilence.changed) memoryState = pestilence.worldState;
     if (pestilence.newsEntries.length) {
-      wizardNews = appendObservedWizardNewsEntries(wizardNews, pestilence.newsEntries, { now }, newsReceiptSink);
+      wizardNews = appendWizardNewsEntries(wizardNews, pestilence.newsEntries, { now });
     }
   }
   // Phase 5.5 mover M11b — CALAMITY (the natural disaster). LAST in the tick (its
@@ -2379,7 +2184,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       memoryState = calamity.worldState;
       settlementUpdates = calamity.settlementUpdates;
       if (calamity.newsEntries.length) {
-        wizardNews = appendObservedWizardNewsEntries(wizardNews, calamity.newsEntries, { now }, newsReceiptSink);
+        wizardNews = appendWizardNewsEntries(wizardNews, calamity.newsEntries, { now });
       }
     }
   }
@@ -2409,7 +2214,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       memoryState = generosity.worldState;
       settlementUpdates = generosity.settlementUpdates;
       if (generosity.newsEntries.length) {
-        wizardNews = appendObservedWizardNewsEntries(wizardNews, generosity.newsEntries, { now }, newsReceiptSink);
+        wizardNews = appendWizardNewsEntries(wizardNews, generosity.newsEntries, { now });
       }
     }
   }
@@ -2430,11 +2235,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       graph: applied.regionalGraph,
       rng: rng.fork('intervention'),
       tick: worldState.tick,
-      now, proposalDocket: organicProposalDocket,
+      now,
     });
     if (intervention.changed) memoryState = /** @type {typeof memoryState} */ (intervention.worldState);
     if (intervention.newsEntries.length) {
-      wizardNews = appendObservedWizardNewsEntries(wizardNews, intervention.newsEntries, { now }, newsReceiptSink);
+      wizardNews = appendWizardNewsEntries(wizardNews, intervention.newsEntries, { now });
     }
   }
   // W-UPSWING — THE UPSWING MOVER (DESIGN_UPSWING.md). Runs AFTER generosity so the
@@ -2448,10 +2253,24 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // behind the virtual upswingArcsEnabled flag ⇒ a complete no-op (zero forks, zero
   // keys) — the upswing dormancy golden proves the wired-but-dormant mover is byte-
   // identical to pre-wire. AGGREGATE-only.
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceUpswing({
-    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
-    graph: applied.regionalGraph, rng, tick: worldState.tick, now,
-  }), memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
+  {
+    const upswing = advanceUpswing({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      settlementUpdates,
+      graph: applied.regionalGraph,
+      rng,
+      tick: worldState.tick,
+      now,
+    });
+    if (upswing.changed) {
+      memoryState = upswing.worldState;
+      settlementUpdates = upswing.settlementUpdates;
+      if (upswing.newsEntries.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, upswing.newsEntries, { now });
+      }
+    }
+  }
   // W-LIFECYCLE — THE SATELLITE LANE + peakTier (DESIGN_SETTLEMENT_LIFECYCLE.md).
   // Runs AFTER upswing so a boom minted THIS tick feeds the seeding drive, and
   // AFTER the apply pass so a W-DISCOVERY resource_strike condition planted this
@@ -2464,106 +2283,24 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // everything. DORMANT behind the virtual settlementLifecycleEnabled flag ⇒ a
   // complete no-op (zero forks, zero keys) — the fenced pre-wire dormancy golden
   // (aspatial + spatial) proves wired-but-dormant is byte-identical. AGGREGATE-only.
-  const lifecycleAdvance = advanceSettlementLifecycle({
-    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
-    pIndex, rng, tick: worldState.tick, now,
-  });
-  const memberBirths = Array.isArray(lifecycleAdvance.memberBirths)
-    ? lifecycleAdvance.memberBirths
-    : [];
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(
-    lifecycleAdvance,
-    memoryState,
-    settlementUpdates,
-    wizardNews,
-    now,
-    newsReceiptSink,
-  ));
-  // THE GROWTH LAYER — acquired/temporary NPC traits (owner commission #36). Runs LAST of
-  // the per-settlement movers so its deposits read THIS tick's fully-settled durable
-  // outcomes — the calamity stamped, the boom/bust/flourishing/reconstruction condition
-  // minted by upswing, the siege lifted, the betrayal revealed. The D3 course machinery at
-  // person scale: durable outcomes deposit weighted experience toward candidate bank traits
-  // (distance-from-core-resisted), a threshold-crossing mints a RARE STICKY trait (hysteresis
-  // + cap + BOTH signs — unreinforced traits decay away, D5-band-scaled), and the minted set
-  // is MIRRORED onto the roster's NON-core npc.acquiredTraits[] (the overlay the existing
-  // consumer reads append — core personality NEVER written; state-never-fate holds). DORMANT
-  // behind the virtual npcGrowthEnabled flag ⇒ a complete no-op (zero deposits, zero
-  // npcGrowth key, zero mirror) — the growth dormancy golden proves wired-but-dormant is
-  // byte-identical to pre-wire. NO rng (deposits are reads).
-  // THE URBAN FABRIC LAYER (owner commission #39) rides the SAME seam, composed AFTER
-  // growth inside advanceNpcGrowthWithFabric (urbanFabricKernel.js — the ceiling-safe
-  // name swap, the provenanceKernel idiom): the growth layer for STONE. Per-settlement
-  // district prominence stocks deposit from durable outcomes (ruling power, standing
-  // institutions, faith share, income, trade flow, population, food disparity) and
-  // decay on masonry half-lives over CALENDAR WEEKS; alignment = the drift-rate of new
-  // fabric; stressor scars decay on typed clocks; catastrophe (a fresh calamity stamp)
-  // is the ONE fast path — struck classes reset + a rebirth marker. Authoritative
-  // sidecar spatialLedgers.urbanFabric + a compact settlement.urbanFabric mirror (the
-  // acquiredTraits idiom) read by townMap/fabricRead.js when #38 lights. DORMANT behind
-  // the virtual urbanFabricEnabled flag ⇒ a complete no-op (zero key, zero mirror) —
-  // the fabric dormancy golden proves it. NO rng (deposits are reads).
-  // DOOR 1 — THE SPATIAL CONSEQUENCE LAYER (owner ruling #8; the map→engine coupling)
-  // rides the SAME seam, composed AFTER fabric inside advanceNpcGrowthWithFabricAndCon-
-  // sequence (spatialConsequenceKernel.js — the ceiling-safe name swap). A pure engine
-  // CONSUMER (the projection law: the engine never reads the layout — the compact SPATIAL
-  // SUBSTRATE is derived at canonize, OUTSIDE the engine, and read from
-  // spatialLedgers.spatialSubstrate). It reads THIS tick's fresh calamity stamps + the
-  // settled outcomes and narrates two WHERE consumers — a fresh calamity's district toll
-  // field (totals untouched) and a fresh covert exposure's district diffusion (magnitudes
-  // untouched); the siege-breach consumer is seamed at the war layer (deploymentReturn) +
-  // the fabric scar reader over the same substrate. DORMANT behind the virtual
-  // spatialConsequenceEnabled flag ⇒ a complete no-op (zero read, zero beat, NO worldState
-  // mutation) — the spatial-consequence dormancy golden proves it. NO rng.
-  // THE LADDER (ENGINE LIFT #3) rides the SAME seam, composed AFTER the consequence
-  // reader inside advanceNpcGrowthWithFabricAndConsequenceAndLadder (npcLadderKernel.js
-  // — the ceiling-safe name swap, the provenanceKernel idiom): the missing MIDDLE rung
-  // between the growth layer (person-change) and coups (regime-change). Per faction, a
-  // persistent contested rank ladder derives at first-lit from the existing structural-
-  // position indicators (dotRank/internalSeats), each holder's standing is an integrator
-  // stock, dynamic goals are typed conditions over registered S7 signals, and windowed
-  // challenges swap rungs (conservation law) via E0-classed rare-sticky contests.
-  // Authoritative sidecar spatialLedgers.npcLadder + a compact settlement.npcLadder mirror
-  // read by townMap/ladderRead.js when lit. DORMANT behind the virtual npcLadderEnabled
-  // flag ⇒ a complete no-op (zero key, zero mirror) — the ladder dormancy golden proves
-  // it. NO rng (contests draw from the seed fork + registered signals only).
-  // THE TRADITIONS (ENGINE LIFT #4: culture) rides the SAME seam, composed AFTER the
-  // ladder inside advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions
-  // (traditionsKernel.js — the ceiling-safe name swap, the ladder/provenanceKernel idiom):
-  // per-settlement holidays/festivals minted at first-lit tick (byte-identical to the T-1
-  // view-time preview), occurring on the calendar, succeeding or failing by a weighted
-  // world-seed roll, and feeding economy + legitimacy + faith through the bounded §5
-  // applicators. Authoritative sidecar spatialLedgers.traditions + a compact
-  // settlement.traditions mirror read by the dossier Traditions tab. DORMANT behind the
-  // virtual traditionsEnabled flag ⇒ a complete no-op (zero key, zero mirror, zero news) —
-  // the traditions dormancy golden proves it. The ONE draw per (tradition, year) is a
-  // tick-invariant world-seed fork (never the per-tick pulse rng).
-  // THE ROADS (ENGINE LIFT #5: named-NPC travel · capture · ransom · conversion) rides the
-  // SAME seam, composed AFTER traditions inside advanceNpcGrowthWithFabricAndConsequenceAnd-
-  // LadderAndTraditionsAndRoads (roadsKernel.js — the ceiling-safe name swap): a lazy leaf
-  // that moves middle-rank envoys to neighbour settlements on purposed missions, rolls the
-  // gauntlet against TRUTH while routing on the KNOWN picture, and shelves a captured named
-  // NPC off-stage (the isOffStage chokepoint) until ransom/rescue/expulsion/covert
-  // conversion. Authoritative sidecar spatialLedgers.roads + a compact npc.whereabouts
-  // display mirror. DORMANT behind the virtual roadsEnabled flag AND the spatial-canon gate
-  // ⇒ a complete no-op (zero key, zero mirror, zero news) — the roads dormancy golden proves
-  // wired-but-dormant is byte-identical to pre-wire. Cadence forks a tick-invariant world
-  // seed; hazards fork the per-tick pulse rng confluence with stable labels.
-  // V-K (Vision): THE COMMONS' VOICE (V-23) + THE ASSIZE (V-22) are composed onto the growth
-  // chain's tail (…AndRoadsAndCommonsAndAssize — the roads-onto-traditions name-swap idiom, so
-  // the FROZEN pulseKernel changes by name only). Commons runs first (a deterministic per-
-  // settlement petition→gathering→riot-band escalation over the tick's settled legitimacy/
-  // unrest/corruption reads, its influence through the legitimacy applicator + stressor writer),
-  // then the assize (each AGE-ONE exposure — fresh exposedCorruption / lieExposure, read
-  // NON-destructively — becomes a seated public judgment; person-half fine/rank + masses-half
-  // just-relief-or-sham-unrest route through existing writers, stigma rides the ladder's own
-  // mark). The commons deposits a petition the assize can answer THIS tick (the cohesive loop);
-  // the organic legitimacy/unrest feedback closes it NEXT tick. Both DORMANT behind their virtual
-  // flags ⇒ complete no-ops (the assize + commons-voice dormancy goldens prove byte-identity). No rng.
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize({
-    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates, saves,
-    graph: applied.regionalGraph, tick: worldState.tick, now,
-  }), memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
+  {
+    const lifecycle = advanceSettlementLifecycle({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      settlementUpdates,
+      pIndex,
+      rng,
+      tick: worldState.tick,
+      now,
+    });
+    if (lifecycle.changed) {
+      memoryState = lifecycle.worldState;
+      settlementUpdates = lifecycle.settlementUpdates;
+      if (lifecycle.newsEntries.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, lifecycle.newsEntries, { now });
+      }
+    }
+  }
   // W-PEACE-2 — THE PRICE OF PEACE (DESIGN_PEACE_ENGINE.md §11-15). When a war
   // winds down through the existing sue-for-peace path (a fresh recalled.cause =
   // sue_for_peace* stamp, not yet consumed by the war layer), the believed-stronger
@@ -2574,24 +2311,22 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // feeds warReasons.treaty_default and the strain feeds the loser's resentment THIS
   // tick. DORMANT behind peaceCausalActive ⇒ a complete no-op (zero treaty keys — the
   // peace-causal dormancy golden, extended to fence the treaties ledger, proves it).
-  // The stream terms move REAL grain, so this mover now threads settlementUpdates like
-  // the generosity/upswing movers do — hence the applyPulseMover form (byte-identical to
-  // the inline block it replaces: an unchanged mover returns the same references).
-  const treatyAdvance = advanceTreatiesWithDisposition({
-    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
-    graph: applied.regionalGraph, pIndex, tick: worldState.tick, now,
-    dispositionEnabled: simulationRules.dispositionChannelsEnabled === true, dispositionTransitions,
-  });
-  treatyCoalitionEvidence = mergeWarCoalitionEvidence(treatyAdvance.coalitionEvidence);
-  const treatyCoalitionNews = warCoalitionNewsEntries({
-    evidence: treatyCoalitionEvidence,
-    snapshot: postTimeSnapshot,
-    now,
-  });
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover({
-    ...treatyAdvance,
-    newsEntries: [...(treatyAdvance.newsEntries || []), ...treatyCoalitionNews],
-  }, memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
+  {
+    const treaties = advanceTreaties({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      graph: applied.regionalGraph,
+      pIndex,
+      tick: worldState.tick,
+      now,
+    });
+    if (treaties.changed) {
+      memoryState = treaties.worldState;
+      if (treaties.newsEntries.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, treaties.newsEntries, { now });
+      }
+    }
+  }
   // W-PEACE-1 — THE CAUSAL REASONS LAYER (DESIGN_PEACE_ENGINE.md §14). Two
   // DETERMINISTIC movers (no rng — reasons are reads, not rolls): typed,
   // receipted REASONS FOR WAR accumulate per directed edge pair (grievance /
@@ -2610,12 +2345,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       worldState: memoryState,
       graph: applied.regionalGraph,
       pIndex,
-      tick: worldState.tick, wizardNews,
+      tick: worldState.tick,
     });
     if (warCausal.changed) memoryState = warCausal.worldState;
-    if (warCausal.newsEntries.length) {
-      wizardNews = appendObservedWizardNewsEntries(wizardNews, warCausal.newsEntries, { now }, newsReceiptSink);
-    }
   }
   {
     const peaceCausal = advancePeaceReasons({
@@ -2629,17 +2361,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       // when dormant / no credibility ledger ⇒ byte-identical.
       blaineyCredibility: makeBlaineyCredibilityFn(memoryState, worldState.tick),
     });
-    reasonCoalitionEvidence = mergeWarCoalitionEvidence(peaceCausal.coalitionEvidence);
     if (peaceCausal.changed) memoryState = peaceCausal.worldState;
-    const peaceCoalitionNews = warCoalitionNewsEntries({
-      evidence: reasonCoalitionEvidence,
-      snapshot: postTimeSnapshot,
-      now,
-    });
-    const peaceNews = [...peaceCausal.newsEntries, ...peaceCoalitionNews];
-    if (peaceNews.length) {
-      wizardNews = appendObservedWizardNewsEntries(wizardNews, peaceNews, { now }, newsReceiptSink);
-    }
   }
   // W-MOMENTUM — THE COMMITMENT LEDGER (DESIGN_MOMENTUM.md §1). LAST of the read-movers,
   // AFTER the causal-reason movers so the deposits read THIS tick's fully-settled public
@@ -2709,67 +2431,17 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       memoryState = /** @type {typeof memoryState} */ (cracks.worldState);
       settlementUpdates = cracks.settlementUpdates;
       if (cracks.newsEntries.length) {
-        wizardNews = appendObservedWizardNewsEntries(wizardNews, cracks.newsEntries, { now }, newsReceiptSink);
+        wizardNews = appendWizardNewsEntries(wizardNews, cracks.newsEntries, { now });
       }
     }
   }
-  // @pulse-stage: finalize_receipt
-  const finalRegionalGraph = applyLineageBirthsToGraph(applied.regionalGraph, memberBirths, now);
-  const appliedCoalitionEvidence = warCoalitionEvidenceFromOutcomes(applied.autoApplied);
-  const warCoalitionEvidence = mergeWarCoalitionEvidence(
-    standingCoalitionTransitionEvidence,
-    appliedCoalitionEvidence,
-    treatyCoalitionEvidence,
-    reasonCoalitionEvidence,
-  );
-  const returnedSettlementIds = coalitionLedgerActive(simulationRules)
-    ? [...new Set((war.resolvedDeployments || [])
-      .map((row) => String(row?.attackerId || ''))
-      .filter(Boolean))].sort()
-    : [];
-  const envoyPulseRecord = {
-    ...pulseRecord,
-    // Late home delivery re-enters the ordinary apply lane after the initial
-    // shell was assembled, so refresh every mechanical receipt field from the
-    // final applied census rather than leaving state and evidence divergent.
-    ...mechanicalPulseRecordFields({
-      applied,
-      selectedForApply: [...selectedForApply, ...lateEnvoyApplied],
-    }),
-    ...(envoyEvidence.length ? { envoyEvidence } : {}),
-    impactDigest: compactImpactDigest(applied.newsEntries),
-  };
-  const coalitionReturnRecord = returnedSettlementIds.length
-    ? { ...envoyPulseRecord, warReturnedSettlementIds: returnedSettlementIds }
-    : envoyPulseRecord;
-  const coalitionPulseRecord = warCoalitionEvidence.length
-    // Standing rows are already transition-only (one stay per joined episode;
-    // expenditure only on a worsening band), while the other producers are
-    // exact event facts. Preserve the whole finite per-pulse census: an arbitrary
-    // 48-row cut could erase the once-only witness for the twenty-fifth ally and
-    // make its public stay repeat forever on later ticks.
-    ? { ...coalitionReturnRecord, warCoalitionEvidence }
-    : coalitionReturnRecord;
-  const finalPulseRecord = memberBirths.length
-    ? {
-        ...coalitionPulseRecord,
-        memberBirths: memberBirths.map(birth => ({
-          birthId: birth.birthId,
-          saveId: birth.saveId,
-          parentId: birth.parentId,
-          satelliteId: birth.satelliteId,
-          edgeId: birth.graphEdge.id,
-          kind: 'lineage_edge_recorded',
-        })),
-      }
-    : coalitionPulseRecord;
-  const finalWorldState = appendPulseHistoryWithProvenance(memoryState, finalPulseRecord, applied);
+  const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
   // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
   // residue must have been stripped. Read-only + NODE_ENV==='test' only (byte-neutral to
   // the simulation), so a forgotten/drifted strip in a known residue store reds a test
   // across the WHOLE suite rather than surfacing as a silent determinism drift. Inert
   // (deferredMajors is empty) on the autoresolve path.
-  assertNoResidueLeak(finalWorldState, finalRegionalGraph, deferredMajors);
+  assertNoResidueLeak(finalWorldState, applied.regionalGraph, deferredMajors);
 
   return {
     campaignId: campaign?.id,
@@ -2777,15 +2449,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     tick: finalWorldState.tick,
     calendar: finalWorldState.calendar,
     worldState: finalWorldState,
-    regionalGraph: finalRegionalGraph,
+    regionalGraph: applied.regionalGraph,
     wizardNews,
     settlementUpdates: settlementUpdates.map(update => ({
       ...update,
       settlement: clone(update.settlement),
     })),
-    candidates: publicSurfaces.candidates,
-    selected: publicSelectedOutcomes,
-    rollExplanations: publicSurfaces.rollExplanations,
+    candidates: [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates],
+    selected: selectedForApply,
+    rollExplanations: [...deterministicExplanations, ...rollExplanations],
     autoApplied: applied.autoApplied,
     proposals: applied.proposals,
     resolvedStressors: agedStressors.resolved,
@@ -2793,7 +2465,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // outcomes, classified on structural markers (deriveDecisionTier), NOT
     // applied-on-pause. Stage 2 still auto-resolves everything — majors[] is a
     // read-only annotation so Stages 3+ can pause on it. Behavior is unchanged.
-    majors: publicSelectedOutcomes.filter(outcome => deriveDecisionTier(outcome) === 'major'),
+    majors: selectedForApply.filter(outcome => deriveDecisionTier(outcome) === 'major'),
     // Advance-scaling Stage 3 PAUSE: the structural majors WITHHELD from this
     // tick's apply pass (only populated when deferMajors is on). The orchestrator
     // batches these onto `pendingMajors` and RE-DERIVES them on resume by re-running
@@ -2805,16 +2477,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // storms). Present ONLY when non-empty (governor active + something deferred) — so
     // the dormant/OFF path never adds this key (byte-identical). Test-observable.
     ...(tempoDeferred.length ? { tempoDeferred } : {}),
-    ...(memberBirths.length ? {
-      memberBirths: memberBirths.map(birth => ({
-        ...birth,
-        save: {
-          ...birth.save,
-          settlement: clone(birth.save.settlement),
-          campaignState: clone(birth.save.campaignState),
-        },
-      })),
-    } : {}),
-    pulseRecord: finalPulseRecord,
+    pulseRecord,
   };
 }

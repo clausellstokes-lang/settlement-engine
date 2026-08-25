@@ -32,7 +32,7 @@ import { mapDirtyFingerprint } from './mapDirtyFingerprint.js';
 
 const GOLD = swatch['#C9A24C'];
 const AMBER = swatch['#D08020'];
-const SLATE = swatch['#5A6E82'];
+const VIOLET = swatch['#7B4FCF'];
 const MUTED = swatch['#9C8068'];
 const sans = '"Nunito", system-ui, sans-serif';
 
@@ -58,9 +58,7 @@ const fingerprint = mapDirtyFingerprint;
 export default function AutoSaveChip({ saving = false }) {
   const activeCampaignId = useStore(s => s.activeCampaignId);
   const campaign = useStore(s =>
-    activeCampaignId != null
-      ? (s.campaigns || []).find(c => String(c.id) === String(activeCampaignId))
-      : null,
+    activeCampaignId ? (s.campaigns || []).find(c => c.id === activeCampaignId) : null,
   );
   const liveMapState = useStore(s => s.mapState);
 
@@ -77,7 +75,7 @@ export default function AutoSaveChip({ saving = false }) {
     return fingerprint(liveMapState) !== fingerprint(campaign.mapState);
   }, [liveMapState, campaign?.mapState]);
 
-  if (activeCampaignId == null || !campaign) return null;
+  if (!activeCampaignId || !campaign) return null;
 
   let dotColor = GOLD;
   let label = 'Saved';
@@ -85,7 +83,7 @@ export default function AutoSaveChip({ saving = false }) {
   const relative = formatRelative(saved);
 
   if (saving) {
-    dotColor = SLATE;
+    dotColor = VIOLET;
     label = 'Saving…';
   } else if (dirty) {
     dotColor = AMBER;
@@ -107,13 +105,14 @@ export default function AutoSaveChip({ saving = false }) {
         padding: '3px 9px',
         background: `${dotColor}10`,
         border: `1px solid ${dotColor}45`,
+        borderRadius: 12,
         fontSize: FS.xs, color: dirty || saving ? '#3A2F18' : MUTED,
         fontFamily: sans, fontWeight: 600,
         userSelect: 'none',
       }}
     >
       <span style={{
-        width: 6, height: 6,
+        width: 6, height: 6, borderRadius: 3,
         background: dotColor,
         boxShadow: saving ? `0 0 0 2px ${dotColor}30` : 'none',
         animation: saving ? 'sf-asc-pulse 1.2s ease-in-out infinite' : 'none',

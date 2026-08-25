@@ -28,14 +28,13 @@
  */
 
 import { useMemo } from 'react';
+import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { FS, ELEV, swatch } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
 import { isFaithEventEntry } from '../../domain/display/faithEventFilter.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
-import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
-import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
 import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
@@ -52,14 +51,14 @@ const MUTED = swatch['#9C8068'];
 const PARCH = swatch['#FBF5E6'];
 const BORDER = swatch['#E8D9B0'];
 const GREEN = swatch['#4A7A3A'];
-const SLATE = swatch['#5A6E82'];
+const VIOLET = swatch['#7B4FCF'];
 const AMBER = swatch['#D08020'];
 const RED = swatch['#A23434'];
 
 const serif = '"Crimson Text", Georgia, serif';
 const sans = '"Nunito", system-ui, sans-serif';
 
-const KIND_ACCENT = { NPC: GREEN, HOOK: AMBER, TWIST: SLATE, RED };
+const KIND_ACCENT = { NPC: GREEN, HOOK: AMBER, TWIST: VIOLET, RED };
 
 const BAND_TONE = {
   Stable: GREEN, Strained: AMBER, Vulnerable: AMBER, Critical: RED,
@@ -83,6 +82,7 @@ function Card({ accent = null, children }) {
       background: swatch.white,
       border: `1px solid ${BORDER}`,
       borderLeft: accent ? `4px solid ${accent}` : `1px solid ${BORDER}`,
+      borderRadius: 6,
     }}>
       {children}
     </div>
@@ -138,10 +138,10 @@ function WarPanel({ war }) {
       : `Held by ${occupied.occupierName || 'an occupier'}.`]);
   }
   if (mobilization) {
-    rows.push(['Mobilizing', AMBER, `${mobilization.phrase}${mobilization.ticksToDeploy > 0 ? `, roughly ${mobilization.ticksToDeploy} ${mobilization.ticksToDeploy === 1 ? 'week' : 'weeks'} from marching.` : '.'}`]);
+    rows.push(['Mobilizing', AMBER, `${mobilization.phrase}${mobilization.ticksToDeploy > 0 ? ` — roughly ${mobilization.ticksToDeploy} ${mobilization.ticksToDeploy === 1 ? 'week' : 'weeks'} from marching.` : '.'}`]);
   }
   if (holdings?.holds?.length) {
-    rows.push(['Occupier', AMBER, `Holds ${holdings.holds.map(h => h.name).join(', ')}${holdings.stretchedThin ? ', stretched thin.' : '.'}`]);
+    rows.push(['Occupier', AMBER, `Holds ${holdings.holds.map(h => h.name).join(', ')}${holdings.stretchedThin ? ' — stretched thin.' : '.'}`]);
   }
   if (exhaustionBand && exhaustionBand !== 'rested') {
     rows.push(['War-weary', AMBER, `This settlement's war fatigue reads ${exhaustionBand}.`]);
@@ -181,10 +181,6 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   const isPremium = tier === 'premium' || elevated;
 
-  const guide = useMemo(
-    () => composeSettlementQuickGuide(settlement),
-    [settlement],
-  );
   const entries = useMemo(() => tonightAtTheTable(settlement), [settlement]);
   const hooks = useMemo(() => collectPlotHooks(settlement || {}), [settlement]);
   const npcs = useMemo(() => (settlement?.npcs || [])
@@ -215,7 +211,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   // which keeps render free of ref reads.
   const nav = [
     entries.length ? ["Tonight", "sf-session-tonight"] : null,
-    (dims.length || recent.length || guide.immediatePressure.text) ? ["State", "sf-session-state"] : null,
+    (dims.length || recent.length || settlement?.pressureSentence) ? ["State", "sf-session-state"] : null,
     war ? ["War", "sf-session-war"] : null,
     faithVisible ? ["Faith", "sf-session-faith"] : null,
     npcs.length ? ["NPCs", "sf-session-npcs"] : null,
@@ -257,7 +253,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
             {phase === 'canon' && <> · CANON</>}
           </div>
         </div>
-        <IconButton glyph="×" label="Close session mode" onClick={onClose} tone="ghost" size="lg" />
+        <IconButton Icon={X} label="Close session mode" onClick={onClose} tone="ghost" size="lg" />
       </header>
 
       {/* Body: quick-nav rail + content column */}
@@ -289,75 +285,21 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
           display: 'flex', flexDirection: 'column', gap: 26,
           scrollPaddingTop: 12,
         }}>
-          {/* Shared first glance: identity + three canonical defining truths. */}
-          <section aria-label="Settlement quick guide">
-            <SectionTitle>Settlement quick guide</SectionTitle>
-            <div style={{
-              padding: '12px 16px', background: swatch.white,
-              border: `1px solid ${BORDER}`,
-            }}>
-              <div style={{
-                fontFamily: serif, fontSize: FS.lg,
-                color: INK_DEEP, lineHeight: 1.5,
-              }}>
-                {guide.identitySentence}
-              </div>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                gap: 10, marginTop: 10,
-              }}>
-                {guide.definingTruths.map((truth) => (
-                  <div key={truth.id} style={{
-                    paddingLeft: 9,
-                    borderLeft: `2px solid ${BORDER}`,
-                  }}>
-                    <div style={{
-                      fontSize: FS.nano, fontWeight: 800,
-                      letterSpacing: '0.07em', textTransform: 'uppercase',
-                      color: MUTED,
-                    }}>
-                      {truth.label}
-                    </div>
-                    <div style={{
-                      marginTop: 2,
-                      fontSize: FS.sm, color: BODY, lineHeight: 1.45,
-                    }}>
-                      {truth.text}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {/* ECONOMY FRESHNESS (Wave R-4) — JUDGMENT, vetoable: this surface
-                  IS wired rather than frozen-deferred. The register argument
-                  ("session play should stay in-fiction") does not separate it
-                  from TableView, which is equally a run-of-play takeover and is
-                  covered; and the audience of both is the DM, for whom a
-                  staleness caveat is accuracy, not narration. It renders the
-                  identical "How it lives" truth (composeMaterialTruth over the
-                  generation-time economicState), and sessionMode ships TRUE in
-                  flagRegistry, so the obligation is live. Conditional and inside
-                  the guide card, so an un-shifted session renders byte-identically
-                  and the distraction-free promise is kept in the normal case. */}
-              <EconomyFreshnessNote settlement={settlement} variant="tallies" margin="10px 0 0" />
-            </div>
-          </section>
-
           {/* Pressure line — the one-sentence tension, front and center. */}
-          {guide.immediatePressure.text && (
+          {settlement?.pressureSentence && (
             <div style={{
               padding: '12px 16px', background: swatch.white,
               border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD_ACCENT}`,
-              fontFamily: serif, fontSize: FS.xl,
+              borderRadius: 6, fontFamily: serif, fontSize: FS.xl,
               fontStyle: 'italic', color: INK_DEEP, lineHeight: 1.5,
             }}>
-              {guide.immediatePressure.text}
+              {settlement.pressureSentence}
             </div>
           )}
 
           {entries.length > 0 && (
             <section id="sf-session-tonight" aria-label="Tonight at the table">
-              <SectionTitle>Tonight at the table</SectionTitle>
+              <SectionTitle>🕯 Tonight at the table</SectionTitle>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {entries.map((row, i) => (
                   <Card key={i} accent={KIND_ACCENT[row.kind] || GOLD_ACCENT}>
@@ -380,7 +322,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                   {dims.map(([name, d]) => (
                     <div key={name} style={{
                       flex: '1 1 140px', padding: '8px 10px', background: swatch.white,
-                      border: `1px solid ${BORDER}`,
+                      border: `1px solid ${BORDER}`, borderRadius: 6,
                     }}>
                       <div style={{ fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: MUTED }}>{name}</div>
                       <div style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.lg, color: BAND_TONE[d.band] || INK }}>
@@ -395,7 +337,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                   {recent.map((en, i) => (
                     <div key={i} style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
                       <strong style={{ color: INK }}>{en?.event?.description || en?.event?.type || 'Event'}</strong>
-                      {en?.narrativeSummary ? <>: {en.narrativeSummary}</> : null}
+                      {en?.narrativeSummary ? <> — {en.narrativeSummary}</> : null}
                     </div>
                   ))}
                 </div>
@@ -405,7 +347,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
 
           {war && (
             <section id="sf-session-war" aria-label="Live war state">
-              <SectionTitle>The war right now</SectionTitle>
+              <SectionTitle>⚔ The war right now</SectionTitle>
               <WarPanel war={war} />
             </section>
           )}
@@ -439,7 +381,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                       {tell && <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}>{tell}</div>}
                       {goal && <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}><em>Wants:</em> {goal}</div>}
                       {secret && (
-                        <div style={{ marginTop: 4, fontSize: FS.xs, color: SLATE, lineHeight: 1.45 }}>
+                        <div style={{ marginTop: 4, fontSize: FS.xs, color: VIOLET, lineHeight: 1.45 }}>
                           <span style={{ fontWeight: 800, letterSpacing: '0.06em', fontSize: FS.nano }}>SECRET</span> {secret}
                         </div>
                       )}

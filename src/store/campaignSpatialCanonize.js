@@ -40,22 +40,11 @@ const SPATIAL_DIGEST_MAX_BYTES = 400_000;
  * deferred live-iframe seam) writes NOTHING — a byte-invisible typed no-op.
  *
  * @param {{ set: Function, get: Function, campaignId: string,
- *   sessionFence?: any, isSessionCurrent?: (sessionFence:any)=>boolean,
  *   options?: { captureSpatialPack?: (ctx:{campaignId:string, get:Function}) =>
  *     Promise<{pack:any, placements:Array<{id:any,cellId:any}>}|null> } }} args
  * @returns {Promise<{ok:boolean, reason?:string, spatialCanonVersion?:number, digestBytes?:number}>}
  */
-export async function runSpatialCanonize({
-  set,
-  get,
-  campaignId,
-  options = {},
-  sessionFence = null,
-  isSessionCurrent = null,
-}) {
-  const sessionStillCurrent = () => (
-    typeof isSessionCurrent !== 'function' || isSessionCurrent(sessionFence) !== false
-  );
+export async function runSpatialCanonize({ set, get, campaignId, options = {} }) {
   // The LIVE read-only iframe capture is the default (ITEM 0 — the keystone's
   // deferred seam, now wired); tests inject a deterministic fixture capture. When
   // no map view is mounted the live capture returns null ⇒ a byte-invisible no-op
@@ -64,21 +53,12 @@ export async function runSpatialCanonize({
     ? options.captureSpatialPack
     : liveCaptureSpatialPack;
   const captured = await capture({ campaignId, get });
-  if (!sessionStillCurrent()) return { ok: false, reason: 'auth_session_changed' };
   if (!captured || !captured.pack) return { ok: false, reason: 'spatial_capture_unavailable' };
-  // V-6 BIOME TRUTH (DARK): the additive biome sub-digest lights ONLY under the VIRTUAL
-  // biomeTruthEnabled flag (ABSENT from DEFAULT_SIMULATION_RULES — the npcLadder/heirs idiom).
-  // Absent ⇒ biomeTexture false ⇒ NO biomes key ⇒ byte-identical (every existing canon/golden).
-  // Lit ⇒ a §V.1 receipted re-canonize freezes the per-settlement/per-leg biome into the canon.
-  const priorRules = /** @type {{ biomeTruthEnabled?: unknown }} */ (
-    (findActiveCampaign(get().campaigns, campaignId)?.worldState || {}).simulationRules || {});
-  const biomeTexture = priorRules.biomeTruthEnabled === true;
   const digest = buildSpatialDigest({
     pack: captured.pack,
     placements: captured.placements,
     spatialGeometryVersion: SPATIAL_GEOMETRY_VERSION,
     costLawVersion: COST_LAW_VERSION,
-    biomeTexture,
     // SEASONS-B (M3): a NEW canon lights the seasonal-road overlay (per-season ×
     // per-terrain cost law) under overlayVersion SEASONAL_OVERLAY_VERSION — the
     // §V.1 receipted re-canonize. Existing saved canons keep their frozen v1 (no
@@ -111,11 +91,6 @@ export async function runSpatialCanonize({
   // neutral (freeze changes no enumerable value); the size guard above already ran on
   // the same object.
   deepFreeze(digest);
-  // Capture and digest construction both yield. An advance may have started
-  // after the slice's synchronous prefix, so refuse at the actual write boundary.
-  if (get().isAdvanceInFlight(campaignId)) return { ok: false, reason: 'advance_in_flight' };
-  if (get().getPausedAdvance(campaignId)) return { ok: false, reason: 'advance_paused' };
-  if (!sessionStillCurrent()) return { ok: false, reason: 'auth_session_changed' };
   let campaignPersist = /** @type {any} */ (null);
   let nextVersion = 0;
   let realmShapeSummary = /** @type {any} */ (null);
@@ -147,19 +122,6 @@ export async function runSpatialCanonize({
   // keys the k=200-campaigns floor for the sellable topology cells. uuid-validated
   // server-side (ingest uuidOrNull → subject_id); a non-uuid campaignId is dropped.
   }, { subjectId: campaignId });
-  try {
-    await syncCampaignSnapshot(
-      campaignPersist.snapshot,
-      campaignId,
-      campaignPersist,
-      sessionStillCurrent,
-    );
-  } catch (error) {
-    if (error?.code === 'auth_session_changed') {
-      return { ok: false, reason: 'auth_session_changed' };
-    }
-    throw error;
-  }
-  if (!sessionStillCurrent()) return { ok: false, reason: 'auth_session_changed' };
+  await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
   return { ok: true, spatialCanonVersion: nextVersion, digestBytes };
 }

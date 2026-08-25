@@ -18,12 +18,7 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 vi.mock('../../src/lib/saves.js', () => ({
-  saves: {
-    update: vi.fn(() => Promise.resolve()),
-    upsert: vi.fn(entry => Promise.resolve(entry?.id)),
-    delete: vi.fn(id => Promise.resolve(id)),
-    isConfigured: true,
-  },
+  saves: { update: vi.fn(() => Promise.resolve()), isConfigured: true },
 }));
 
 vi.mock('../../src/lib/campaigns.js', () => ({
@@ -42,16 +37,13 @@ import { campaigns } from '../../src/lib/campaigns.js';
 import {
   persistSaveUpdate,
   persistSaveUpdates,
-  persistSaveDeletes,
   flushWorldPulsePersist,
   clearPersistFingerprintCache,
   clearCampaignSyncBookkeeping,
-  CAMPAIGN_SESSION_READER,
   initPersistFailureReporter,
-  persistCampaignState,
   retryOutboxPersist,
 } from '../../src/store/campaignSliceShared.js';
-import { activateOutboxOwner, resetOutbox, peekOps, getStatus } from '../../src/store/outbox.js';
+import { resetOutbox, peekOps, getStatus } from '../../src/store/outbox.js';
 
 function makeUpdate(saveId, { tick = 1, blob = 'x'.repeat(200) } = {}) {
   return {
@@ -64,42 +56,12 @@ function makeUpdate(saveId, { tick = 1, blob = 'x'.repeat(200) } = {}) {
 beforeEach(() => {
   saves.update.mockReset();
   saves.update.mockResolvedValue(undefined);
-  saves.upsert.mockReset();
-  saves.upsert.mockImplementation(entry => Promise.resolve(entry?.id));
-  saves.delete.mockReset();
-  saves.delete.mockImplementation(id => Promise.resolve(id));
   campaigns.upsert.mockReset();
   campaigns.upsert.mockImplementation(c => Promise.resolve(c?.id));
   clearPersistFingerprintCache();
   clearCampaignSyncBookkeeping();
   initPersistFailureReporter(null);
   resetOutbox();
-  activateOutboxOwner('test-owner');
-});
-
-describe('campaign-session persistence fence', () => {
-  test('same-owner generation rotation aborts a state persist before cloud upsert', async () => {
-    let liveState = {
-      auth: { user: { id: 'owner-a' } },
-      campaignSessionGeneration: 73,
-    };
-    const sourceState = {
-      ...liveState,
-      [CAMPAIGN_SESSION_READER]: () => liveState,
-      campaigns: [{
-        id: 'camp-session-fence',
-        name: 'Old session snapshot',
-        accessState: 'active',
-        updatedAt: '2026-07-24T00:00:00.000Z',
-      }],
-    };
-
-    const pending = persistCampaignState(sourceState, 'camp-session-fence', { strict: true });
-    liveState = { ...liveState, campaignSessionGeneration: 74 };
-
-    await expect(pending).rejects.toMatchObject({ code: 'auth_session_changed' });
-    expect(campaigns.upsert).not.toHaveBeenCalled();
-  });
 });
 
 describe('parallel-flush contract', () => {
@@ -234,18 +196,6 @@ describe('differential persistence', () => {
     expect(saves.update).toHaveBeenCalledTimes(2);
   });
 
-  test('a fingerprint from one account never suppresses another account write', async () => {
-    const updates = [makeUpdate('same-save-id')];
-    await persistSaveUpdates(updates);
-    expect(saves.update).toHaveBeenCalledTimes(1);
-
-    activateOutboxOwner('different-owner');
-    const second = await persistSaveUpdates(updates);
-
-    expect(saves.update).toHaveBeenCalledTimes(2);
-    expect(second).toMatchObject({ attempted: 1, skipped: 0 });
-  });
-
   test('a FAILED persist does not record the fingerprint — the retry re-uploads', async () => {
     initPersistFailureReporter(vi.fn());
     saves.update.mockRejectedValueOnce(new Error('down')); // first attempt fails
@@ -266,108 +216,6 @@ describe('differential persistence', () => {
     const third = await persistSaveUpdates(updates);
     expect(saves.update).toHaveBeenCalledTimes(2);
     expect(third).toMatchObject({ attempted: 0, skipped: 1 });
-  });
-
-  test('a successful birth delete clears its fingerprint so the same birth can be restored', async () => {
-    const birth = {
-      saveId: 'lineage-child',
-      createSave: {
-        id: 'lineage-child',
-        name: 'Weirbrook',
-        settlement: { name: 'Weirbrook', parentRef: { birthId: 'lineage.birth.child' } },
-        campaignState: { phase: 'canon' },
-      },
-    };
-
-    const first = await persistSaveUpdates([birth]);
-    expect(first).toMatchObject({ attempted: 1, skipped: 0 });
-    expect(saves.upsert).toHaveBeenCalledTimes(1);
-
-    await persistSaveDeletes([birth.saveId]);
-    expect(saves.delete).toHaveBeenCalledTimes(1);
-
-    const restored = await persistSaveUpdates([birth]);
-    expect(restored).toMatchObject({ attempted: 1, skipped: 0 });
-    expect(saves.upsert).toHaveBeenCalledTimes(2);
-  });
-
-  test('a birth tombstone supersedes a parked create instead of waiting for it to resurrect', async () => {
-    initPersistFailureReporter(vi.fn());
-    const birth = {
-      saveId: 'lineage-offline-child',
-      createSave: {
-        id: 'lineage-offline-child',
-        name: 'Weirbrook',
-        settlement: { name: 'Weirbrook', parentRef: { birthId: 'lineage.birth.offline' } },
-        campaignState: { phase: 'canon' },
-      },
-    };
-    saves.upsert.mockRejectedValueOnce(new Error('offline'));
-
-    const failedCreate = await persistSaveUpdates([birth]);
-    expect(failedCreate).toMatchObject({ attempted: 1, failed: 1 });
-    expect(peekOps().some(op => op.kind === 'world_pulse_save_upsert')).toBe(true);
-
-    const deleted = await persistSaveDeletes([birth.saveId]);
-    expect(deleted).toMatchObject({ attempted: 1, failed: 0 });
-    expect(saves.delete).toHaveBeenCalledWith(birth.saveId, 'test-owner');
-    expect(peekOps().filter(op => op.kind !== 'barrier')).toHaveLength(0);
-
-    // Connectivity returning cannot replay the superseded create.
-    saves.upsert.mockResolvedValue(birth.saveId);
-    await retryOutboxPersist();
-    expect(saves.upsert).toHaveBeenCalledTimes(1);
-  });
-
-  test('a birth tombstone follows then supersedes an inflight create that fails', async () => {
-    let rejectCreate;
-    saves.upsert.mockImplementationOnce(() => new Promise((resolve, reject) => {
-      rejectCreate = reject;
-    }));
-    const birth = {
-      saveId: 'lineage-inflight-child',
-      createSave: {
-        id: 'lineage-inflight-child',
-        name: 'Weirbrook',
-        settlement: { name: 'Weirbrook', parentRef: { birthId: 'lineage.birth.inflight' } },
-        campaignState: { phase: 'canon' },
-      },
-    };
-
-    const creating = persistSaveUpdates([birth]);
-    while (!rejectCreate) await Promise.resolve();
-    const deleting = persistSaveDeletes([birth.saveId]);
-    rejectCreate(new Error('response lost'));
-
-    const [failedCreate, deleted] = await Promise.all([creating, deleting]);
-    expect(failedCreate).toMatchObject({ attempted: 1, failed: 1 });
-    expect(deleted).toMatchObject({ attempted: 1, failed: 0 });
-    expect(saves.delete).toHaveBeenCalledWith(birth.saveId, 'test-owner');
-    expect(peekOps().filter(op => op.kind !== 'barrier')).toHaveLength(0);
-  });
-
-  test('a failed tombstone cannot make an identical re-birth differential-skip', async () => {
-    const birth = {
-      saveId: 'lineage-redo-child',
-      createSave: {
-        id: 'lineage-redo-child',
-        name: 'Weirbrook',
-        settlement: { name: 'Weirbrook', parentRef: { birthId: 'lineage.birth.redo' } },
-        campaignState: { phase: 'canon' },
-      },
-    };
-    await persistSaveUpdates([birth]);
-    expect(saves.upsert).toHaveBeenCalledTimes(1);
-
-    saves.delete.mockRejectedValueOnce(new Error('offline'));
-    const failedDelete = await persistSaveDeletes([birth.saveId]);
-    expect(failedDelete).toMatchObject({ attempted: 1, failed: 1 });
-    expect(peekOps().some(op => op.kind === 'world_pulse_save_delete')).toBe(true);
-
-    const restored = await persistSaveUpdates([birth]);
-    expect(restored).toMatchObject({ attempted: 1, skipped: 0, failed: 0 });
-    expect(saves.upsert).toHaveBeenCalledTimes(2);
-    expect(peekOps().filter(op => op.kind !== 'barrier')).toHaveLength(0);
   });
 });
 

@@ -45,29 +45,15 @@ export default function PlacementsLayer({ transformRef }) {
   // settlements are frozen in place (adding is still allowed elsewhere). We
   // disable drag-to-move here; updatePlacement is the store-level backstop.
   const mapCanonized = useStore(s => {
-    const camp = s.activeCampaignId != null
-      ? s.campaigns?.find(c => String(c.id) === String(s.activeCampaignId))
-      : null;
+    const camp = s.campaigns?.find(c => c.id === s.activeCampaignId);
     return !!camp?.worldState?.canonizedAt;
   });
   // W-LIFECYCLE: the active campaign's satellite-steading ledger (keyed by
   // parent settlement id). null for every world without the lifecycle layer —
   // the orbit render below is then a no-op (zero footprint).
   const satellitesLedger = useStore(s => {
-    const camp = s.activeCampaignId != null
-      ? s.campaigns?.find(c => String(c.id) === String(s.activeCampaignId))
-      : null;
+    const camp = s.campaigns?.find(c => c.id === s.activeCampaignId);
     return camp?.worldState?.spatialLedgers?.satellites || null;
-  });
-  // H2 · THE FIRST ADVANCE — the active campaign's living-world state, read so
-  // the medallion ink-pulse (below) can detect the session's first committed
-  // advance off the EXISTING advance counter (worldState.pulseHistory grows by
-  // one record per advance). null for every world without a campaign.
-  const advanceWorldState = useStore(s => {
-    const camp = s.activeCampaignId != null
-      ? s.campaigns?.find(c => String(c.id) === String(s.activeCampaignId))
-      : null;
-    return camp?.worldState || null;
   });
 
   // Drag-to-move state for the currently-selected placement.
@@ -89,7 +75,7 @@ export default function PlacementsLayer({ transformRef }) {
 
   const saveById = useMemo(() => {
     const m = new Map();
-    for (const s of saves || []) m.set(String(s.id), s);
+    for (const s of saves || []) m.set(s.id, s);
     return m;
   }, [saves]);
 
@@ -97,7 +83,7 @@ export default function PlacementsLayer({ transformRef }) {
     const out = [];
     for (const [burgId, p] of Object.entries(placements || {})) {
       if (typeof p?.x !== 'number' || typeof p?.y !== 'number') continue;
-      const settlement = p.settlementId != null ? saveById.get(String(p.settlementId)) || null : null;
+      const settlement = saveById.get(p.settlementId) || null;
       const tier = tierFor(settlement || { population: p.population });
       // W-LIFECYCLE: a dead settlement KEEPS its cell — drawn as ruins, never
       // removed (geometry survives death). Tolerant read across save shapes.
@@ -110,23 +96,6 @@ export default function PlacementsLayer({ transformRef }) {
       const ancientRuin = settlement?.history?.ancientRuin
         || settlement?.settlement?.history?.ancientRuin
         || null;
-      // Trade-route access is persisted on the CONFIG, never at the top level
-      // of a save row: `tradeRouteAccess`/`port` have no writer there at all, so
-      // the old `settlement?.tradeRouteAccess === 'port' || settlement?.port`
-      // read was one level too shallow and PortBadge could NEVER appear.
-      // The value here is always the RESOLVED route — resolveConfig.js records
-      // the 'random_trade' sentinel separately as `_routeIntent` and writes the
-      // rolled route into effectiveConfig, so no sentinel can reach this read.
-      //
-      // ⚠ DELIBERATELY NOT a `settlement?.settlement?.config` fallback: that
-      // wrapper hop would be a FOURTH `settlement on settlement` read against a
-      // frozen ceiling of 3 (scripts/.observed-shape-readers-baseline.json), and
-      // that ratchet is shrink-only. The save-row `config` column carries the
-      // resolved route in every save-museum fixture, so the hop buys nothing
-      // measurable here; if a wrapper-only shape ever turns up, the honest fix
-      // is to hoist ONE unwrap for all four reads in this loop, not to add a
-      // fifth.
-      const tradeRouteAccess = settlement?.config?.tradeRouteAccess || '';
       const sid = p.settlementId != null ? String(p.settlementId) : null;
       const steadingsMap = (sid && satellitesLedger && satellitesLedger[sid]?.steadings) || null;
       const steadings = steadingsMap
@@ -134,11 +103,11 @@ export default function PlacementsLayer({ transformRef }) {
         : [];
       out.push({
         burgId,
-        settlementId: p.settlementId ?? null,
+        settlementId: p.settlementId || null,
         x: p.x, y: p.y,
         tier,
         name: settlement?.name || p.name || '',
-        port:    tradeRouteAccess === 'port',
+        port:    !!(settlement?.tradeRouteAccess === 'port' || settlement?.port),
         capital: !!(settlement?.capital || settlement?.isCapital),
         lifecycleStatus,
         ancientRuin,
@@ -147,59 +116,6 @@ export default function PlacementsLayer({ transformRef }) {
     }
     return out;
   }, [placements, saveById, satellitesLedger]);
-
-  // ── H2 · THE FIRST ADVANCE — the medallion ink-pulse ───────────────────
-  // On the FIRST committed advance of the session, every medallion the tick
-  // TOUCHED breathes once (oc-m-inkpulse), staggered in reading order. The
-  // pulse marks CHANGE, not spectacle: a settlement the advance left alone
-  // never pulses (DESIGN_DEEP_CRAFT_PAGES.md H2 LAW). Detection is read-side
-  // off the existing advance counter — worldState.pulseHistory grows by one
-  // record per advance (an interval collapses to one record). We baseline its
-  // length at mount and fire on the first increase; component-local refs keep
-  // it once-per-session with NO new store field and NO persisted state. A
-  // reload remounts this layer and re-baselines, so an already-advanced world
-  // never re-pulses. Motion is className-only; reduced-motion collapses it to
-  // an instant no-op via the global [class*='oc-m-'] rule.
-  const pulseCount = advanceWorldState?.pulseHistory?.length || 0;
-  const pulseBaselineRef = useRef(null);
-  const heroFiredRef = useRef(false);
-  const [firstAdvancePulse, setFirstAdvancePulse] = useState(null);
-  useEffect(() => {
-    // Establish the baseline the first time a real world is present (after any
-    // open-time catch-up has already landed its records).
-    if (pulseBaselineRef.current == null) { pulseBaselineRef.current = pulseCount; return undefined; }
-    if (heroFiredRef.current) { pulseBaselineRef.current = pulseCount; return undefined; }
-    if (pulseCount <= pulseBaselineRef.current) return undefined;
-    heroFiredRef.current = true;
-    pulseBaselineRef.current = pulseCount;
-    const hist = advanceWorldState?.pulseHistory || [];
-    const last = hist[hist.length - 1];
-    const touched = new Set();
-    for (const o of (last?.selectedOutcomes || [])) {
-      for (const sid of (o?.settlementIds || o?.affectedSettlementIds || [])) {
-        if (sid != null) touched.add(String(sid));
-      }
-    }
-    if (!touched.size) return undefined;
-    // Reading order = top-to-bottom then left-to-right; the stagger index is
-    // capped at 8 so the whole cascade still settles under the 1.4s hero budget
-    // no matter how many settlements the tick touched (ranks beyond 8 pulse
-    // together, mirroring THE ARRIVAL's final-rank rule).
-    const order = new Map();
-    items
-      .filter(it => it.settlementId != null && touched.has(String(it.settlementId)))
-      .slice()
-      .sort((a, b) => (a.y - b.y) || (a.x - b.x))
-      .forEach((it, i) => order.set(String(it.settlementId), Math.min(i, 8)));
-    // Synchronizing a one-shot ceremony to an external counter (the store's
-    // advance history) — the canonical exception the codebase already takes
-    // where React-side motion must fire on an external-state transition.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setFirstAdvancePulse({ ids: touched, order });
-    // Clear after one cycle so the class does not linger on the medallions.
-    const timer = setTimeout(() => setFirstAdvancePulse(null), 1600);
-    return () => clearTimeout(timer);
-  }, [pulseCount, advanceWorldState, items]);
 
   if (!items.length) return null;
 
@@ -223,7 +139,7 @@ export default function PlacementsLayer({ transformRef }) {
     // click on a non-selected icon (which should just select it).
     const isSelected =
       String(selectedBurgId) === String(it.burgId) ||
-      (it.settlementId != null && String(selectedSettlementId) === String(it.settlementId));
+      (it.settlementId && String(selectedSettlementId) === String(it.settlementId));
     if (!isSelected) return;
     if (e.button !== undefined && e.button !== 0) return;
     const pt = screenToMap(e);
@@ -272,22 +188,15 @@ export default function PlacementsLayer({ transformRef }) {
       {items.map(it => {
         const isSelected =
           String(selectedBurgId) === String(it.burgId) ||
-          (it.settlementId != null && String(selectedSettlementId) === String(it.settlementId));
+          (it.settlementId && String(selectedSettlementId) === String(it.settlementId));
         const preview = (dragPreview && dragPreview.burgId === it.burgId) ? dragPreview : null;
         const x = preview ? preview.x : it.x;
         const y = preview ? preview.y : it.y;
-        // H2: this medallion breathes once iff the first advance of the session
-        // touched its settlement; the reading-order rank drives the stagger.
-        const pulsing = !!(firstAdvancePulse && it.settlementId != null && firstAdvancePulse.ids.has(String(it.settlementId)));
-        const pulseDelay = pulsing ? (firstAdvancePulse.order.get(String(it.settlementId)) || 0) : 0;
         return (
           <g
             key={it.burgId}
-            className={pulsing ? 'oc-m-inkpulse' : undefined}
-            style={pulsing
-              ? { pointerEvents: 'auto', animationDelay: `calc(var(--oc-motion-ink) * ${pulseDelay} / 2)` }
-              : { pointerEvents: 'auto' }}
-            data-hover-settlement-id={it.settlementId ?? undefined}
+            style={{ pointerEvents: 'auto' }}
+            data-hover-settlement-id={it.settlementId || undefined}
             onPointerEnter={(e) => {
               // Hover-peek is a fine-pointer affordance. On touch a tap fires
               // pointerenter with no paired pointerleave, which would leave the
@@ -297,7 +206,7 @@ export default function PlacementsLayer({ transformRef }) {
               // QuickInspector's own selection gate suppresses the peek while a
               // settlement is selected, so no selection check is needed here.
               if (e.pointerType === 'touch') return;
-              if (it.settlementId == null) return;
+              if (!it.settlementId) return;
               setHovered?.(it.settlementId);
             }}
             onPointerLeave={() => clearHovered?.()}
@@ -316,7 +225,7 @@ export default function PlacementsLayer({ transformRef }) {
                   return (
                     <g key={rec.id}>
                       <circle cx={cx} cy={cy} r={r} fill={LIFECYCLE_GLYPH_STYLE.steading.fill} stroke={LIFECYCLE_GLYPH_STYLE.steading.stroke} strokeWidth={0.6 / scale}>
-                        <title>{`${rec.name}: ${rec.tier}, ${rec.population} folk${rec.charterPending ? ' (a charter awaits)' : ''}`}</title>
+                        <title>{`${rec.name} — ${rec.tier}, ${rec.population} folk${rec.charterPending ? ' (a charter awaits)' : ''}`}</title>
                       </circle>
                       {rec.charterPending && (
                         <circle cx={cx} cy={cy} r={r + 1.4 / scale} fill="none" stroke={LIFECYCLE_GLYPH_STYLE.charterRing.stroke} strokeWidth={0.6 / scale} />
@@ -346,7 +255,7 @@ export default function PlacementsLayer({ transformRef }) {
                   selected={isSelected}
                   scale={scale}
                   label={it.lifecycleStatus
-                    ? `${it.name}: ${it.lifecycleStatus === 'relic_ruin' ? 'ruins' : 'abandoned'}`
+                    ? `${it.name} — ${it.lifecycleStatus === 'relic_ruin' ? 'ruins' : 'abandoned'}`
                     : it.name}
                   cursor={isSelected && !mapCanonized ? 'grab' : 'pointer'}
                   onClick={(e) => {

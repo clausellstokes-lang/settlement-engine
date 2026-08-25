@@ -1,0 +1,436 @@
+# THE A+ EXECUTION ARCHITECTURE — the buildable spec per tranche (Fable, 2026-07-21)
+
+Companion to THE_APLUS_CONVERGENCE_BLUEPRINT.md (which says WHICH bar each step moves).
+This says HOW: each work package = {build, where, enforcer contract, pin, closes, owner?}.
+Tranches 1-3 are MINE (provable, no owner/soak). Tranche 4-6 = the OWNER MANIFEST at the end.
+Sequencing law throughout: correctness-asserting enforcers land LAST over honest data
+(never enshrine a lie); shrink-only ratchets may land over still-imperfect substrate.
+
+═══════════════════════════════════════════════════════════════════════════
+## TRANCHE 2 — THE ENFORCER BUILD (mine; the real A+ lift; dispatch after fix-to-zero folds)
+═══════════════════════════════════════════════════════════════════════════
+Each is a STANDING remover that converts "defect absent" into "defect-class has no habitat."
+Parallelizable: all are tests/walkers (~0 eager), file-disjoint by target. 7 packages.
+
+### E-A · MUTATION-SWEEP TOTALITY  → closes bar 1 (CORRECTNESS)
+BUILD: extend scripts/mutation-sweep.sh from 12 planted regressions to cover EVERY
+correctness-asserting invariant in the suite (each ratchet/walker/golden family gets a
+planted mutation proving it reddens). WHERE: scripts/mutation-sweep.sh + a coverage-manifest
+listing invariant→mutation. CONTRACT: every invariant either has a planted mutation that the
+gate catches, or a documented rationale for why it can't be mutation-tested. PIN: a
+meta-test asserting the manifest covers the enumerated invariant set (shrink-only on the
+"uncovered" list, drive to 0). CLOSES: bar 1 to A+ (every found class has a proven remover).
+
+### E-B · CANDIDATETYPE EXHAUSTIVENESS WALKER  → closes bar 2 (COHESION, provable half)
+BUILD: a walker that enumerates every `candidateType: '<literal>'` minted across worldPulse
+kernels and asserts each binds to an apply-arm in applyWorldPulse OR is tagged news-only.
+WHERE: tests/domain/candidateTypeExhaustiveness.test.js. CONTRACT: no candidateType can emit
+news yet mutate no state without an explicit news-only tag (kills "a force citing no law").
+PIN: the walker itself; baseline shrink-only if any current gap, drive to 0. CLOSES: the
+"every force is intended-and-typed or impossible" half of bar 2 (the RECORDED-law half is
+tranche 4/ONE REGEN).
+
+### E-C · LIFECYCLE ROUND-TRIP WALKER  → closes bar 12 (STATE-LIFECYCLE)
+BUILD: a test that, for every persisted state family, round-trips it through create→persist→
+regen→undo→clone→migrate→import and asserts byte-exact survival (extends the save-museum idiom
+to ALL families, not sampled). WHERE: tests/store/lifecycleRoundTrip.test.js. CONTRACT: no
+write orphaned by any path. PIN: the walker; a registry of state families it must cover +
+a completeness assert (new family unregistered → red). CLOSES: bar 12 to A+.
+
+### E-D · PER-AI-SURFACE SOURCE-SCAN + NO-LOAD-BEARING-AI PROOF  → closes bar 19 (AI STRUCTURE)
+BUILD: (1) generalize the import-wall source-scan into a walker that, for EVERY AI surface
+(census the 9), asserts no model output writes a mechanical/typed field (the finite-semantics
+wall, proven per-surface not just at the one wall). (2) a test that the product renders every
+AI-surface's deterministic FALLBACK with AI disabled (no load-bearing AI). WHERE:
+tests/security/aiSurfaceSourceScan.test.js + tests/domain/aiFallbackTotality.test.js. CONTRACT:
+AI is dressing on typed truth everywhere; product fully functional AI-off. PIN: both walkers +
+the 9-surface census that fails when a 10th surface appears unscanned. CLOSES: bar 19 to A+.
+
+### E-E · VOICE WALKER → JSX EXTENSION  → advances bar 8 (CONTENT/VOICE) + 18 (IMMERSION)
+BUILD: extend E2 voiceMechanics + E1 proseLeak to scan JSX component string literals (the
+recorded gap — E2 scans registries + data, not components). WHERE: extend tests/copy/
+voiceMechanics.test.js + proseLeak. CONTRACT: em-dash/'!'/engine-token bans hold in COMPONENTS
+too. PIN: the extended walkers, shrink-only baseline over current JSX offenders → drive down.
+CLOSES: the repo-provable half of 8 (golden-bound prose + the ONE-REGEN letter wiring remain
+tranche 4); feeds bar 18's census burn-down (tranche 3).
+
+### E-F · DETERMINISTIC TICK OP-COUNT BUDGET  → advances bar 5 (PERFORMANCE)
+BUILD: a machine-independent op-count budget on the tick pipeline (the townMapOpBudget idiom
+generalized to the advance loop — count kernel ops, generous ceiling), catching constant-factor
+regressions the wall-time trend can't. WHERE: tests/perf/tickOpBudget.test.js. CONTRACT: a
+constant-factor blow-up in the tick reddens deterministically (no flaky ms threshold — owner
+rejected those). PIN: the budget test. CLOSES: the repo-provable half of bar 5 (the TTI/INP
+prod ratification + soak sign the rest — tranche 4/6).
+
+### E-G · NARRATIVE-PARITY WALKER  → advances bar 20 (THE STORY) + 2 (COHESION)
+BUILD: THE capstone enforcer — a test that composes the SAME seeded decade through letter,
+chronicle, timelapse, world-book, and cause-walk and asserts they narrate ONE story from ONE
+substrate: no surface names a beat the others don't, no surface embellishes beyond the ledgers
+(claims-parity applied to NARRATIVE). WHERE: tests/simulation/narrativeParity.test.js (pairs
+with the arc-soak already built). CONTRACT: every reader surface is a projection of one
+narrative truth; a surface inventing a beat reddens. PIN: the walker. CLOSES: the "one story,
+all surfaces" half of bar 20 (the recorded-DEPTH enhancement + LIVED sign the rest — tranche 5/6).
+
+═══════════════════════════════════════════════════════════════════════════
+### E-H · PER-MECHANISM LIT-WALKTHROUGH WALKER  → closes bar 4 (SUBSTANCE, provable half)
+(Added 2026-07-21 under NO-COMPROMISES — previously deferred by C1 as "its own lane"; that
+was a compromise. It is buildable and mine.) BUILD: a walker that enumerates every worldPulse
+MECHANISM (the ~152 kernels/movers) and asserts each ships a flag-ON LIT walkthrough test (not
+just a flag-OFF dormancy golden) — i.e. every mechanism has an executed proof of its lit
+behavior, not only its dark byte-identity. WHERE: tests/property/mechanismLitCoverage.test.js +
+a REGISTRY of mechanisms ⇄ their lit tests, completeness-asserted (a new mechanism with only a
+dormancy golden REDS). Land shrink-only baselined to the current lit-coverage gap, drive to 0.
+CONTRACT: "a lit walkthrough runs for every mechanism" becomes STRUCTURAL, not convention.
+CLOSES the repo-provable half of bar 4 (the soak still signs the RATES). Eager Δ 0 (test-only).
+
+### E-I · KEYBOARD MAP-PLACEMENT (bar 9 ACCESSIBILITY) — buildable BUT budget-gated
+(Added 2026-07-21 under NO-COMPROMISES — previously a "scoped follow-on"; packaged now WITH its
+real constraint.) BUILD: a keyboard interaction for placing settlements on the world map — a
+focusable control + arrow/enter placement committing through the existing addPlacement store gate
+(or the bridge), so a keyboard/SR user is not dead-ended. ⚠ CONSTRAINT (why it's not free): the
+natural home, WorldMap.jsx, is at its TOLERANCE-0 sizeBaseline ceiling (600) and composite headroom
+is ~29 B — so this is REAL UI code that can add eager. ARCH to stay in budget: a LAZY-LEAF keyboard
+controller (its own chunk) wired via a net-zero hook in WorldMap, NOT inline growth; measure closure,
+and if it can't land eager-neutral it WAITS for the owner eager reclaim (the ONE REGEN restores
+headroom). CLOSES the repo-provable half of bar 9 (SR PARITY is still lived-certified). Pin: a
+keyboard-driven placement round-trips to the store.
+
+### E-J · KERNEL OUTCOME→OUTCOME DEPTH ADOPTION (bar 20 THE STORY) — SPLIT: TIER-1 BUILDING / TIER-2 OWNER-GATED
+✅ OWNER GO-AHEAD (2026-07-21): owner directed "do what is objectively better, plan+validate with Fable,
+comprehensively clean the fallout." Re-grounding at code showed the earlier blanket ⛔ over-deferred the
+CLEAN half. The immediate-parent reference ALREADY EXISTS on every derived receipt (propagation.js:471
+`sourceImpactId: sourceImpact.id`, `waveDepth: depth`); `causedBy` is an EXISTING field (roadsKernel V-24d
+ships a dark-gated edge already); the ledger is behind the VIRTUAL `provenanceLedgerActive` flag (absent from
+all presets ⇒ byte-neutral off). So TIER-1 — resolve `sourceImpactId` → the parent's RECORDED KEY
+(`wizard_news.${tick}.${transition}.${id}`) and mint the ADDITIVE immediate-parent `causedBy` edge on the
+region-wave d≥1 receipts + conquest/occupation applied-outcomes that ALREADY reach the ledger — is buildable
+DARK now, NO new persisted field, NO golden shift. DISPATCHED to Opus @ claude/e-j-recorded-depth (base
+b339e178) with a VERIFY-FIRST gate (STOP+report if reachability/parent-key-derivability fail; do NOT force it)
+and a DARK-BYTE-IDENTITY master invariant. STILL OWNER-GATED (unchanged, NOT built): (a) the default-on flip
+`provenanceLedgerEnabled` in a preset = the ONE REGEN; (b) TIER-2 = moving pulseKernel.js:~1615's impactDigest
+snapshot to AFTER movers run to record contest/generosity beats — risks the SHIPPED applied.newsEntries path,
+changes recorded-set composition broadly. Tier-2 + the flip are the owner-manifest tail; Tier-1 is mine under
+the go-ahead. See [[enforcer-ej-v2-recorded-depth-shipped]] once it lands.
+─────────────────────────────────────────────────────────────────────────
+⛔⛔ CORRECTION (2026-07-21, proven by the E-J investigation — enforcer-ej-depth-blocked-finding.md):
+the earlier "buildable DARK now" claim was WRONG. Proven at code + by a 15y everything-on drive:
+contest/generosity/roads mover beats NEVER reach the recorded ledger — impactDigest is snapshotted at
+pulseKernel.js:1615 BEFORE the movers run, so their beats (appended to wizardNews, not applied.newsEntries)
+are structurally excluded; plus a namespace mismatch (ledger keys = `wizard_news.${tick}.${transition}.${id}`
+receipts; causedBy values = raw ids). Lit drive = byte-identical 3144 entries, ZERO deep chains. Recorded
+DEPTH therefore requires a PROVENANCE-SEMANTICS change touching CENTRAL files (applyWorldPulse / region
+propagation / the war layer) + new parent-receipt-tick tracking so a child receipt can name its immediate
+parent's recorded receipt KEY — an OWNER-GATED persistence/attribution-shape decision, NOT an isolated dark
+kernel edit. RECOMMENDED PATH (owner sign-off): mint additive causedBy at the level that reaches the ledger
+(the queued regional-wave d≥1 receipt → its immediate-parent impact's recorded key, adding parent-tick
+tracking through the queue; and/or conquest/occupation applied-outcome → the mobilization/deploy
+applied-outcome key), keep the root edge, gate dark; then arc-soak deepChains lights for a real drive.
+⇒ E-J is REMOVED from the buildable set and MOVED to the OWNER MANIFEST (tranche 5, story-depth).
+Bar 20's BUILDABLE ceiling = E-G narrative-parity (done) + story census (done) + the fixes = A-; recorded
+DEPTH + LIVED "moves someone" are owner/human-gated. HONEST NOTE: this corrects the exhaustive-to-buildable
+claim — the buildable ceiling is real, but recorded-depth was over-attributed to it. ORIGINAL (now void):
+buildable-dark — BUILD: have 2-3 high-value kernels (ladder contests,
+generosity→gratitude, war→occupation) mint RECORDED outcome→outcome `causedBy` edges — moving the
+provenance ledger from one-hop-to-ROOT toward genuine MULTI-HOP chains (today only roads V-24d mints
+one, outside full_simulation; see [[recorded-causal-depth-reality]]). ARCH: build the edges behind
+the existing provenanceLedgerEnabled flag (DARK by default) so NO shipped golden shifts — the code
+lands now, the default-on flip rides the owner's ONE REGEN. Needs the ContestRec.openedTick schema
+field (a persisted-shape add — the ONE part that IS owner-gated; build the kernel code to consume it,
+flag the schema add). Pin: the arc-soak's deepChains metric (already wired, dark) lights up ≥ a
+measured floor when the flag + these kernels are on. CLOSES the recorded-DEPTH half of bar 20 that
+the narrative-parity walker (E-G) + story census can't reach alone (the LIVED "moves someone" stays
+human). Eager Δ 0 (engine-lazy, dark-default).
+
+## TRANCHE 3 — RATCHET BURN-DOWN (mine, except owner-taste entries)  → bars 17, 18, 8
+═══════════════════════════════════════════════════════════════════════════
+Drive the shrink-only ratchets to their ZERO targets where the work is mechanical, not taste:
+- SPELL-BREAK CENSUS → 0 for the NON-golden-bound breaks (the letter tickSpeak / chronicle
+  rawId that are golden-bound pass to tranche 4). WHERE: the census baseline. (bar 18)
+- ERROR-COPY register → 0 (register every raw error literal to t()). (bar 8/18)
+- DEEPCRAFT KILL-LIST → drive the NON-taste entries down; the ~510 de-round styling lines are
+  an OWNER TASTE call (tranche 5), NOT mine to force. Land what's mechanical; flag the taste
+  remainder. (bar 17)
+- TITLE census, rawColor, mapPalette, anyCast → hold at their frozen targets (already there).
+RULE: each burn-down step declares the goldens it touches; golden-bound remainder → tranche 4.
+
+═══════════════════════════════════════════════════════════════════════════
+## TRANCHE 3b — THE BUILDABLE-CEILING CLOSERS (owner LIFTED the stop line for
+## EXACTLY this trio, 2026-07-21; spec'd for the post-account-switch successor)
+═══════════════════════════════════════════════════════════════════════════
+Origin: the owner asked "is this the maximum for each bar?" — adversarial
+re-audit found THREE bars below their buildable ceiling. Scope is CLOSED: these
+three packages and the fold, nothing else; the halt resumes after the 3b fold.
+BASE for all lanes: composite-r4 @ bff01718 — but VERIFY `git rev-parse
+claude/composite-r4` still says bff01718 before dispatch; if moved, read the
+ledger top rows first and base on the actual tip. ⚠️ Fresh-session hazard
+(t3b-orphans-wrong-lineage memory): a new session can land on an ANCESTOR
+(d024286e) — cd + rev-parse in the named worktree before trusting anything.
+Dispatch all three in PARALLEL (file-disjoint); Opus for 3b-A/3b-C, Fable-tier
+for 3b-B (voice work per the model split). Every brief: VERIFY-FIRST preamble,
+FORBID git stash, explicit staging, never push/fold, memory file per lane.
+
+### 3b-A · E-H LIT BURN-DOWN → bar 4 (SUBSTANCE) A → A+
+WHERE: worktree .claude/worktrees/vision-i (holds folded e-a-mutation; reuse),
+branch claude/t3b-lit-burndown off bff01718. Opus.
+BUILD: strike ALL 12 baselined entries in
+tests/fixtures/mechanism-lit-coverage-baseline.json — 9 modules
+(canonRelationshipImpact · generosityNews · generosityUpdates ·
+mobilizationEffects · relationshipRuleHelpers · relationshipRulesAdversarial ·
+relationshipRulesCore · stablePart · stressorSeverity) + 3 dark F3-era flags
+with ZERO flag-ON drives anywhere (ladderPoliticalWindowsEnabled ·
+underwaysOrganicFoundingEnabled · warDispositionEnabled).
+METHOD: per module, a lit test that DIRECT-imports the module (⚠️ barrel
+imports via worldPulse/index.js earn NO credit — E-H law) and drives it
+flag-ON with real behavioral assertions (anti-vacuity: non-zero effects, not
+import-and-run); where an existing test already proves it indirectly, a
+validated LIT_COVERED_BY registry entry instead. Per flag, a drive with the
+LITERAL `<flag>: true` in the rules object (⚠️ the detector is
+literal-sensitive; variable-fed flags are invisible — registry those). Strike
+each baseline entry IN THE SAME CHANGE (the walker is strict-equality forced-
+shrink: gained coverage with an unstruck entry REDS — by design, cite E-H).
+Tests-only ⇒ eager Δ 0 structurally. Lit drives set rules explicitly in test
+fixtures — NO preset change, NO golden shift, dark flags stay dark in shipped
+worlds. Hazards: dormancy/byteIdentity tests deliberately earn no credit;
+determinism bans (no wall-clock/random; fs.writeFileSync for probe output).
+GATE: mechanismLitCoverage walker green with baseline [] (or the honest
+remainder, each flagged with WHY unlightable); domain-strict BARE 0; tsc 0;
+eslint 0 new; focused suites; NUL scan 0. Full suite not required (fold covers).
+CLOSES: bar 4 to A+ (100% lit coverage) — the last non-owner PROVEN-tier gap.
+
+### 3b-B · JSX VOICE BURN → bar 8 (VOICE) A− → A
+WHERE: worktree .claude/worktrees/vision-j (holds folded t3-errorcopy; reuse),
+branch claude/t3b-voice-burn off bff01718. FABLE-TIER (voice judgment).
+BUILD: burn tests/copy/.voice-mechanics-jsx-baseline.json toward ZERO — 396
+em-dashes + 10 exclamation points across 133 src/**/*.jsx files (E-E's Tier-3
+substrate; components are NOT under the letter golden and the voice ban is
+LAW, not taste — E2 already burned data/domain prose to 0; components were
+just never covered until E-E).
+METHOD: rewrite every counted string-literal/JSXText/template segment in the
+house voice — em-dash → period-separated sentences / comma / colon (read the
+error-copy register + VOICE_AND_TONE first and match); bangs → plain
+statements ("Credits added!" → "Credits added."). Bank every fall in the
+exact-match baseline file-by-file; NEVER raise it. CSS-in-JS `<style>`
+template-literal comment edge cases: rewrite the comment text (the AST walker
+counts cooked segments) — verify per-site rather than blanket-exempting.
+HAZARDS: ⚠️ ceiling files ARE in scope (App.jsx 732 exact) — copy edits must
+stay same-line-count there; ⚠️ 23 B closure margin — em-dash (3 B UTF-8) →
+". " (2 B) SHRINKS eager bytes where the file is eager, but PROVE it:
+npm run build + VERIFY_DIST=1 (the ratchet is skipIf(!VERIFY_DIST) — plain
+runs silently green); report the exact closure vs 1,039,977, Δ must be ≤ 0;
+⚠️ E-I's placement pins + palette a11y must stay green (announcer strings
+already banked em:0 — don't reintroduce); ⚠️ meaning-preserving rewrites only
+— this is user-facing help/settings/toast prose; where a rewrite would damage
+meaning or voice, leave it counted and FLAG it (an honest small remainder
+beats degraded copy; target 0, report what voice allows).
+GATE: voiceMechanics green at the banked baseline; proseLeak; full tests/copy
++ tests/design + tests/lint families; letter golden byte-identical; eslint;
+tsc; domain-strict; VERIFY_DIST closure; NUL scan.
+CLOSES: bar 8 to A (A+ stays gated on the ONE REGEN letter debt); assists 18.
+
+### 3b-C · E-J FAMILY-2 REACHABILITY PROBE → bar 20 depth (grade-neutral now)
+WHERE: worktree .claude/worktrees/vision-e (holds folded t3-spellbreak; reuse),
+branch claude/t3b-family2-probe off bff01718. Opus. VERIFY-FIRST, E-J-v2's
+exact discipline: PROVE preconditions before ANY edit; a disproof that stops
+with evidence is a COMPLETE, VALUED result.
+QUESTION: can a conquest/occupation applied-outcome receipt name its
+mobilization/deploy parent's RECORDED key, dark, with NO persisted-shape
+change? (Deferred by E-J-v2 precisely because this is the CROSS-TICK case —
+mobilization happens ticks before conquest, so the same-advance transient
+derivation that carried family-1 does NOT apply.)
+V1 REACHABILITY: do conquest/occupation applied-outcomes reach
+recordProvenanceLedger's recorded set on a full_simulation drive? Probe:
+dump recorded keys via fs.writeFileSync (vitest eats console.log on pass).
+V2 CROSS-TICK PARENT-KEY: is the mobilization tick ALREADY PERSISTED on the
+army/transit state (armyTransitKernel — an ArmyRec departure/mobilization
+tick field) such that `wizard_news.<parentTick>.<transition>.<parentId>` is
+derivable transiently at record time? If YES → buildable. If it requires a
+NEW persisted field or a migration → STOP, write the blocked finding, move it
+to the owner manifest (the E-J-v1 outcome shape) — do NOT force it.
+IF PROVEN: mint the additive causedBy edge in LAZY provenanceKernel.js ONLY
+(⚠️ wizardNews.js is EAGER — the +284 B lesson), keep the root edge, dark
+behind provenanceLedgerActive. GATE: E-J-v2's V3-V7 verbatim (dark
+byte-identity vs base via temp worktree; lit deepChains grows above 6;
+same-seed determinism; eager Δ 0 with VERIFY_DIST; domain-strict/tsc/NUL).
+CLOSES: nothing lettered today (bar 20 stays A until the owner's flip) — it
+deepens the DAG the flip lights; the probe's answer is valuable either way.
+
+### 3b FOLD + RE-GRADE (manager, after all three land)
+Merge the three branches into composite-r4 (--no-ff each), full two-shard
+suite (EXACTLY the 4 parked golden families tolerated), authoritative closure
+BFS (report vs 1,039,977 / ceiling 1,040,000), ledger row with the re-graded
+bars (4 → A+, 8 → A, 20-depth note), updated RESUME marker, memory. Then THE
+HALT RESUMES — the owner queue (tranches 4-6) is untouched by 3b.
+
+═══════════════════════════════════════════════════════════════════════════
+## TRANCHE 3c — THE DISCOURSE KERNEL (owner-authorized NEW CAPABILITY,
+## 2026-07-21; dispatch AFTER the 3b fold; one lane + its own gated fold)
+═══════════════════════════════════════════════════════════════════════════
+ORIGIN + AUTHORIZATION: the owner asked for "a very rudimentary LLM inherent
+in the system" whose ONLY purpose is connecting the cause-walk's reasons into
+seamless prose (today: a logically-correct but prose-disconnected
+chronological list). RULING (agreed in-session): a neural LM is the WRONG
+mechanism for exactly that goal — tiny LMs are the least coherent writers,
+cross-device float inference threatens THE PROMISE, and generative free text
+on a truth surface violates THE FINITE-SEMANTICS LAW (AI is never the
+writer). The RIGHT mechanism is CLASSICAL DISCOURSE REALIZATION: a
+deterministic, finite-lexicon prose-connection kernel over the recorded
+cause DAG. The owner authorized THIS. It is new capability (not repair) —
+that sign-off is THIS section; do not re-ask.
+
+### WHAT IT IS
+A pure display-layer kernel that turns a resolved cause-walk (a typed chain
+of recorded receipts, now MULTI-HOP via E-J-v2's `causedBy` edges) into ONE
+connected passage instead of N disconnected lines. Four classical moves:
+1. CONNECTIVE SELECTION — a finite RELATION→CONNECTIVE lexicon: causal edges
+   draw from the because/so/"which in turn" family; same-tick/parallel hops
+   from meanwhile/"at the same time"; adversative outcomes from
+   despite/"even so". Relation typing derives from the hop's existing
+   `type` (dramaClass || kind — causeWalk.js:101) + tick deltas — a FINITE
+   enumeration; ⚠️ the impactKind walker law: kinds are LITERAL — enumerate
+   from the real vocabulary, never invent.
+2. ENTITY TRACKING (anaphora) — first mention = full name via the CANONICAL
+   helpers (nameOf/governingFactionOf/factionArchetype — the faction-key law,
+   NEVER hand-rolled; ⚠️ graph.js defaults node.name to its id — a
+   name-shaped id is that defect class, resolve through the helpers);
+   subsequent mentions = pronoun (settlements/institutions 'it', persons
+   they/them unless the record carries pronouns).
+3. AGGREGATION — adjacent same-subject clauses fuse into one sentence
+   (deterministic, capped clause count per sentence); repeated shapes
+   coalesce (the C2 dedup idiom).
+4. TENSE/PACING — tick-distance banding: deep-past hops in past perfect, the
+   pivot in simple past; reuse tickCalendarLabel for any spoken time.
+
+### WHERE IT LIVES (the architecture)
+- NEW lazy leaf `src/domain/display/discourseKernel.js` — pure function
+  `realizeCauseWalk(walk, { seedId }) → { text, clauses: [{ text,
+  receiptKey }] }`. NO store access, NO Date/random/localeCompare (the
+  determinism bans); variant choice, if any, = the conjunction ladder's
+  PURE-HASH idiom (seedId,key) — no rng stream.
+- ⚠️⚠️ PRIOR ART IS LAW — READ FIRST, EXTEND, NEVER FORK: the CONJUNCTION
+  CONTENT LADDER already exists (causeConjunctionContent.js + Role/Class
+  tables + causeLifecycleVocabulary.causeLifecyclePhrase floor) — it is
+  NPC-lifecycle SINGLE-LINE content selection, not cross-hop discourse, so
+  the kernel is genuinely new — but it CALLS INTO those ladders for per-hop
+  phrasing where keys match, adopts their tiered-specificity + pure-hash +
+  lazy-only laws verbatim, and duplicates ZERO content. Also read
+  newsVoice.js + humanizeEngineTokens.js before writing any word.
+- CONSUMER: CauseWalkPanel.jsx (the one renderer) chooses realizer by flag;
+  flag OFF ⇒ the EXACT current rendering path, byte-identical (dormancy law).
+  Preserve the covert/redaction contract untouched: REDACTED_HOP /
+  NO_DEEPER_MEMORY / LEDGER_DARK_LINE stay verbatim (E-G's secrets test
+  pins redaction — the kernel must never paraphrase a redaction line).
+- DARK GATE: virtual flag `discourseProseEnabled`, ABSENT from every preset
+  (the provenanceLedgerEnabled idiom — read defensively, byte-neutral off).
+  The owner's flip can ride the same ONE-REGEN batch that lights the ledger:
+  the DAG and its connected prose light TOGETHER (amend T4 item 1's note).
+- SCOPE CLOSED: Phase 1 = the cause-walk ONLY. Decree reasons + chronicle
+  thread intros = recorded Phase-2 follow-ons (owner queue), NOT this lane.
+
+### THE ENFORCERS (built in the SAME commit — the kernel ships pre-audited)
+a. CLAUSE-PROVENANCE PIN — every emitted clause carries its receiptKey and
+   the pin asserts each maps to a REAL recorded receipt (the E-G
+   claims-parity idiom): connected prose that embellishes = RED. This is the
+   anti-LLM guarantee made executable.
+b. LIT NARRATIVE-PARITY VARIANT — a flag-ON drive through the E-G walker's
+   claims/direction checks: discourse output introduces ZERO contradictions
+   and ZERO unrecorded claims.
+c. DETERMINISM PIN — same seed ×2 ⇒ byte-equal text (deep-equal clauses).
+d. LEXICON TOTALITY WALKER — every relation type in the live vocabulary has
+   a connective entry or the explicit default; a NEW kind with no entry REDS
+   (deposit-and-consume; the E-A manifest will demand this walker's own
+   planted mutation at fold — plant it in the same change).
+e. DORMANCY BYTE-IDENTITY — flag OFF, CauseWalkPanel output byte-equal to
+   base (the temp-worktree diff method, E-J-v2's V3 verbatim).
+f. VOICE — the lexicon lives where voiceMechanics scans it (or extend the
+   scan): NO em-dashes, NO exclamations, house register (read VOICE_AND_TONE
+   + the letter frame first). Lexicon copy is FABLE-TIER work: implement
+   machinery on Opus; the connective lexicon text gets a Fable-tier
+   authoring/review pass before the lane commits.
+
+### HAZARDS (each has bitten; honor or re-verify)
+⚠️ EAGER Δ 0 HARD — margin 23 B: new file must stay out of the entry
+closure (CauseWalkPanel is lazy — VERIFY with the closure BFS, never assume;
+the ratchet is skipIf(!VERIFY_DIST) — plain runs are silently green).
+⚠️ spellBreakCensus SCANS causeWalk strings — its drive uses default rules
+(flag off) so the baseline must be UNCHANGED; verify, and add the flag-ON
+census expectation as part of the lit variant (b) rather than shifting the
+frozen baseline. ⚠️ em-dash in JSDoc @tags breaks tsc-strict (V-G). ⚠️ new
+file + walkers: a new tests/ invariant file will red the E-A totality
+manifest at fold until it gets its planted mutation or rationale — that red
+is the contract; budget for it. ⚠️ deterministic ordering: kernel sorts by
+(tick, id codepoint) — never insertion order, never localeCompare.
+⚠️ chronicle `stress` is a single OBJECT, not an array, if touched for
+context reads.
+
+### LANE MECHANICS
+WHERE: any freed worktree AFTER the 3b fold (vision-i/j/e rotate; cd +
+rev-parse first — the ancestor-landing trap). Branch
+`claude/t3c-discourse-kernel` off the POST-3b composite tip (read the ledger
+for the hash; verify with rev-parse). Staffing: Opus implementer + the
+Fable-tier lexicon pass (f). VERIFY-FIRST preamble, FORBID stash, explicit
+staging, never push/fold from the lane.
+GATE (verbatim receipts): domain-strict BARE 0 · tsc 0 · eslint 0 new ·
+enforcers a–f green · focused causeWalk/CauseWalkPanel/narrativeParity/
+spellBreakCensus suites · npm run build + VERIFY_DIST=1 closure (exact
+number vs ceiling; Δ ≤ 0) · letter golden byte-identical · python NUL 0 ·
+4-parked-only tolerated.
+FOLD: manager merges post-3b-fold, full two-shard, authoritative BFS, ledger
+row, RESUME marker update, memory.
+CLOSES: nothing lettered while dark (bar 2/20 QUALITY when the owner's flip
+lights it — the cause-walk then reads as one thread, every clause still
+tracing to its receipt). The capstone's display half, done the engine's way.
+═══════════════════════════════════════════════════════════════════════════
+Everything above gets the product to: Group-1 bars A+, Group-2 at "A+ pending ONE act below",
+Group-3 at "A+ pending soak/lived." These acts finish it. Ordered by leverage.
+
+### TRANCHE 4 — THE ONE REGEN (single owner-signed batch; the highest-leverage act)
+1. LIGHT THE PROVENANCE LEDGER in a preset (provenanceLedgerEnabled on in full_simulation).
+   UNLOCKS: the RECORDED-law half of bars 2, 4, and 20 AT ONCE (cause-walk renders, chronicle
+   records instead of infers, arcs trace). REC: do it — it's the single act that most moves the
+   capstone; the instruments (arc-soak) already prove it produces real structure when lit.
+   AMENDED (2026-07-21, §3c): flip `discourseProseEnabled` IN THE SAME BATCH once the
+   discourse kernel lands — the multi-hop DAG (E-J-v2) and its connected prose (§3c)
+   light TOGETHER: the cause-walk becomes one readable thread, every clause receipted.
+2. REGEN THE GOLDEN-BOUND PROSE: the deferred eventProse/roads/tradition em-dash sweep + the
+   letter-humanizer wiring (tickCalendarLabel/humanizeFlagKey into letterToPlainText). UNLOCKS:
+   bars 8 + 18 golden-bound remainder. REC: batch with #1.
+3. THE TUNING: idx21 (tier/population narration), idx19 (durable-memory turning points), and
+   SS2's obligations-decay architecture gap (F6+F19 — add one unconditional per-tick decay pass).
+   REC: the obligations-decay is the one real architectural fix here — worth doing; the other two
+   are narration polish.
+4. RE-RECORD the 4 parked golden families ONCE (generatorGoldenMaster/beliefMap/deity/pdf
+   viewModel) — after 1-3 land, so the regen captures every legitimate shift together.
+   REC: this is THE moment the suite goes fully green; declare the one-time shift, never re-mint
+   piecemeal. Sign the tuning manifest.
+
+### TRANCHE 5 — OWNER POSTURE ACTS (independent; each closes a bar tail)
+5. CSP Report-Only → ENFORCE flip (vercel.json). UNLOCKS: bar 6 A+ (containment real, not just
+   sinks closed). REC: do it post-soak-of-the-map — the connect-src already excludes the LLM
+   hosts; low risk, high bar-6 value.
+6. COGS/MARGIN admin readout deploy (the report_ai_cogs fn + migration). UNLOCKS: bar 7 A+
+   (owner reads unit economics). REC: build-to-edge is mine; the migration+deploy is yours.
+7. DR RUNBOOK REHEARSAL (the tooling exists, unrehearsed). UNLOCKS: bar 15 A+. REC: one dry run.
+8. KERNEL outcome→outcome causedBy ADOPTION for STORY DEPTH. UNLOCKS: bar 20's recorded-DEPTH
+   (today one-hop-to-root; deepChains metric is wired, dark). REC: a scoped enhancement lane —
+   have 2-3 high-value kernels (ladder contests, generosity→gratitude) mint outcome→outcome
+   edges; ties to the contests-openedTick schema add. Not required for A+-provable, but it's what
+   makes the cause-walk trace literal multi-hop chains — the deepest version of the capstone.
+9. DE-ROUND TASTE CALL (kill-list → 0). UNLOCKS: bar 17 full A+. REC: yours by constitution
+   (taste); I flag the ~510 lines, you decide de-round vs keep.
+10. AI-GENERATOR re-enable decision (FMG BYOK). REC: leave disabled unless you want the feature;
+    it's a product call, orthogonal to the bars.
+
+### TRANCHE 6 — CERTIFICATION RUNS (reality-gated; the CERTIFIED + LIVED tiers)
+11. THE SOAK — signs the RATES/boundedness: bar 4 (arc rates), bar 5 (time at scale), bar 20
+    (pacing bands). Pre-declared bands in the tuning manifest; your run. Converts "instrumented"
+    → "CERTIFIED" for those bars.
+12. THE LIVED TIER — real DMs/tables sign: bar 10 (joy), bar 3 (felt-in-ten-minutes), bar 9
+    (screen-reader parity), bar 20 (does the story MOVE someone). No repo act substitutes; the
+    census/instruments sign everything the repo controls, humans sign the rest.
+
+## THE FINAL STATE (honest)
+After tranches 1-3: every PROVABLE bar at A+, the rest at "A+ pending a named owner/soak/lived act."
+After tranche 4-5: Groups 1+2 fully A+. After tranche 6: A+ ACROSS THE BOARD in the only sense
+the standard permits — everything provable PROVEN, everything certifiable SIGNED, nothing on hope.
+The word "everything to A+" is TRUE only with 4-6, and 4-6 are owner/reality-gated BY DESIGN
+(THE PROMISE + the three-tier doctrine). I execute 1-3 and build-to-edge 4-6; you sign 4-6.

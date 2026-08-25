@@ -189,14 +189,6 @@ function transitionSummary(t, settlementName) {
   return `${t.name} has loosened the underworld's arrangements (now ${t.to.replace(/_/g, ' ')}).`;
 }
 
-/** @param {{ name: string, from: string, to: string }} t */
-function transitionReason(t) {
-  if (t.to === 'capture') return `${t.name} has taken the settlement's governing machinery into its hands.`;
-  if (t.from === 'capture') return `${t.name}'s grip on the governing machinery has been broken.`;
-  if (t.to === 'corrupted') return `${t.name}'s influence has passed from isolated bargains into systematic corruption.`;
-  return `${t.name}'s hold over public decisions has weakened.`;
-}
-
 /**
  * Wizard-News entries for this tick's faction-capture transitions. Factual
  * headlines; 'major' significance for full capture and liberation (crossing
@@ -226,17 +218,11 @@ export function captureTransitionNewsEntries(transitions = [], nameFor = (/** @t
       channelType: null,
       severity: Math.max(0, LADDER.indexOf(t.to)) / (LADDER.length - 1),
       settlementIds: [String(t.settlementId)],
-      // THE NEWS ADDRESS LAW's actor layer: the faction IS the subject of a
-      // capture beat, and its id here is already the canonical world-pulse
-      // faction id (`<saveId>:<stablePart(name)>` — the same spelling
-      // realmEntityWeb.realmFactionPulseId recomputes and resolves), so the
-      // Herald links the faction instead of reading its name out of the headline.
-      factionIds: [String(t.factionId)],
       impactIds: [],
       channelIds: [],
       sourceEventId: t.factionId,
       tags: ['world_pulse', 'faction', 'capture', t.to],
-      reasons: [transitionReason(t)],
+      reasons: [`${t.name} moved ${t.from.replace(/_/g, ' ')} → ${t.to.replace(/_/g, ' ')} on the capture ladder.`],
       createdAt: now,
     };
   });

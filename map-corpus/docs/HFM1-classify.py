@@ -7,7 +7,10 @@ then the OVERRIDE table. Two axes are recorded:
 This is HF-M1's own classification; it does NOT exactly reproduce laneHF4 §6's tally
 (which is not fully enumerated). Divergences are reported in the receipt.
 """
-import re, json
+import re, json, os, sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+PLATES = os.path.join(os.path.dirname(HERE), "plates")
 
 RULES = [
  ("EXP-",        "exp"),        ("-fant-",   "fantastical"), ("-under-", "underground"),
@@ -90,12 +93,22 @@ def classify(stem):
     return pid, cat, tier
 
 if __name__ == "__main__":
-    stems = [l.strip() for l in open("HFM1-stems.txt")]
+    stems = sorted((os.path.splitext(name)[0] for name in os.listdir(PLATES)
+                    if name.endswith(".png")), key=lambda s: int(re.match(r"hf(\d+)", s).group(1)))
     out = {}
     for s in stems:
         pid, cat, tier = classify(s)
         out[pid] = {"stem": s, "category": cat, "tier": tier}
-    json.dump(out, open("HFM1-class.json","w"), indent=1)
+    if "--write" in sys.argv:
+        path = os.path.join(HERE, "HFM1-class.json")
+        temp = path + ".tmp"
+        with open(temp, "w") as handle:
+            json.dump(out, handle, indent=1)
+            handle.write("\n")
+        os.replace(temp, path)
+        print("wrote", path)
+    else:
+        print("DRY RUN — classification not written; pass --write to persist")
     import collections
     print("CATEGORY:", json.dumps(collections.Counter(v["category"] for v in out.values()).most_common(), indent=0))
     print("TIER    :", json.dumps(collections.Counter(v["tier"] for v in out.values()).most_common(), indent=0))

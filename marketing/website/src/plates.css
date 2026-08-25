@@ -1,0 +1,61 @@
+/* The plate system — parchment plates in place of the generic glass kit.
+   Craft law: no backdrop blur, no drop shadows, no gradients-as-chrome.
+   A plate is paper: near-opaque parchment, an ink frame, an offset outline
+   (the double-frame of a mounted document), and rules for structure. */
+
+.plate {
+  position: relative;
+  background: rgba(239, 230, 212, 0.94);
+  border: 1px solid var(--line);
+  outline: 1px solid var(--line-faint);
+  outline-offset: 4px;
+  padding: clamp(1.6rem, 3vw, 2.6rem);
+  max-width: 34rem;
+}
+
+/* The ruled plate opens under a double rule — the section-head convention. */
+.plate--ruled { border-top: 3px double var(--ink); }
+
+/* ── Instruments ─────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-label);
+  font-weight: 800;
+  font-size: 0.86rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.78rem 1.5rem;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+  transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
+}
+
+/* The one gold action. Hover darkens ink — nothing lifts, nothing glows. */
+.btn--gold {
+  background: var(--gold);
+  border-color: var(--gold-deep);
+  color: var(--umber);
+}
+.btn--gold:hover { background: var(--gold-deep); color: var(--parchment); }
+
+.btn--quiet {
+  background: rgba(239, 230, 212, 0.72);
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn--quiet:hover { background: var(--parchment); border-color: var(--ink); }
+
+.btn--big { font-size: 1rem; padding: 1rem 2.1rem; }
+
+.nav .btn--quiet {
+  background: transparent;
+  border-color: rgba(239, 230, 212, 0.4);
+  color: var(--parchment-2);
+}
+.nav .btn--quiet:hover {
+  background: rgba(239, 230, 212, 0.12);
+  border-color: var(--gold);
+  color: var(--gold);
+}

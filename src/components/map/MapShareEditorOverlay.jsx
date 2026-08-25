@@ -21,7 +21,8 @@ import MapShareEditor from '../gallery/MapShareEditor.jsx';
 import { IconButton } from './IconButton.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import {
-  BORDER, CARD, CARD_HDR, ELEV, INK, SP, sans, serif_, FS } from '../theme.js';
+  BORDER, CARD, CARD_HDR, ELEV, INK, R, SP, sans, serif_, FS,
+} from '../theme.js';
 
 /**
  * @param {Object} props
@@ -44,9 +45,7 @@ export default function MapShareEditorOverlay({ open, onClose, bridgeRef = null 
   }, [bridgeRef]);
 
   const activeCampaign = useMemo(
-    () => activeCampaignId != null
-      ? (campaigns || []).find(c => String(c.id) === String(activeCampaignId)) || null
-      : null,
+    () => (campaigns || []).find(c => c.id === activeCampaignId) || null,
     [campaigns, activeCampaignId],
   );
 
@@ -56,9 +55,9 @@ export default function MapShareEditorOverlay({ open, onClose, bridgeRef = null 
   // member list matches what the campaign map actually deploys.
   const members = useMemo(() => {
     if (!activeCampaign) return [];
-    const ids = new Set((activeCampaign.settlementIds || []).map(String));
+    const ids = new Set(activeCampaign.settlementIds || []);
     return (saves || [])
-      .filter(s => ids.has(String(s.id)) && isCanonSave(s))
+      .filter(s => ids.has(s.id) && isCanonSave(s))
       .map(s => ({ name: s.name, tier: s.tier, settlement: s.settlement }));
   }, [activeCampaign, saves]);
 
@@ -87,7 +86,7 @@ export default function MapShareEditorOverlay({ open, onClose, bridgeRef = null 
         tabIndex={-1}
         style={{
           width: '100%', maxWidth: 620, marginTop: SP.xl,
-          background: CARD, border: `1px solid ${BORDER}`,
+          background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
           boxShadow: ELEV[2], overflow: 'hidden',
         }}
       >

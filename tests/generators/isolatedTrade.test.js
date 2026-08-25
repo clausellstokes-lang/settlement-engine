@@ -19,7 +19,6 @@ import { generateFoodSecurity } from '../../src/generators/foodGenerator.js';
 import { cullPlanarWithoutCircle } from '../../src/generators/isolationGenerator.js';
 import { subsumeTradeGoods, reconcileTradeLists } from '../../src/domain/region/goodsCatalog.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const ISOLATED_CONFIG = {
   tradeRouteAccess: 'isolated',
@@ -111,7 +110,7 @@ describe('planar institutions require a teleportation circle', () => {
   });
 
   test('generated metropolises never list planar institutions without a circle', () => {
-    const failures = collectSeedFailures([3, 11, 27, 42, 64], (seed) => {
+    for (const seed of [3, 11, 27, 42, 64]) {
       const s = generateSettlementPipeline(
         { settType: 'metropolis', priorityMagic: 80 }, null, { seed, customContent: {} }
       );
@@ -119,8 +118,7 @@ describe('planar institutions require a teleportation circle', () => {
       const hasPlanar = names.some(n => n.includes('planar trader') || n.includes('planar embassy'));
       const hasCircle = names.some(n => n.includes('teleportation circle'));
       if (hasPlanar) expect(hasCircle).toBe(true);
-    });
-    expectNoSeedFailures(failures, 'no generated metropolis lists a planar institution without a circle');
+    }
   });
 });
 
@@ -156,7 +154,7 @@ describe('trade-goods subsumption', () => {
   });
 
   test('generated settlements carry no duplicate canonical goods in imports or exports', () => {
-    const failures = collectSeedFailures([5, 17, 23], (seed) => {
+    for (const seed of [5, 17, 23]) {
       const s = generateSettlementPipeline(
         { settType: 'metropolis' }, null, { seed, customContent: {} }
       );
@@ -164,7 +162,6 @@ describe('trade-goods subsumption', () => {
         const after = subsumeTradeGoods(list);
         expect(after).toEqual(list); // already canonical — re-applying is a no-op
       }
-    });
-    expectNoSeedFailures(failures, 'generated imports/exports carry no duplicate canonical goods');
+    }
   });
 });

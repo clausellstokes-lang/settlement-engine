@@ -1,0 +1,85 @@
+export const meta = {
+  name: 'process-changes-repair-round',
+  description: 'Repair the process-change REJECT: a manifest totality gone red, a lint step red the moment it became reachable, a weakened guard, a misattributed census, and the walker\'s identity-swap blindness.',
+  phases: [
+    { title: 'Ratchets', detail: 'manifest totality, lint red, the census attribution' },
+    { title: 'Guards', detail: 'the weakened pin, the latent widening, identity-swap blindness' },
+    { title: 'Verify', detail: 'two adversarial lenses, read-only' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE. Build tree ${TREE} (branch claude/composite-r4). Hard-gate every state-mutating compound with the \`cd\` FIRST: \`cd ${TREE} && [ "$(git branch --show-current)" = "claude/composite-r4" ] || exit 1\`.
+
+⭐ \`sh scripts/gate-mutex.sh --wait && sh scripts/gate-tail.sh <cmd>\` — ONE \`&&\` chain.
+⛔⛔ **NEVER READ AN EXIT CODE THROUGH A PIPE** — \`cmd | tail; echo $?\` reports tail's status.
+⚠ **EVERY FIGURE IN AN INTEGRITY-COUNTED \`git archive\` OF A COMMITTED SHA.** One at a time; \`rm -f\` the node_modules symlink before deleting; disk ~10 GiB.
+
+⛔⛔ **A SECOND LANE IS LIVE**: the burn repair round, working in \`src/domain/worldPulse/peaceTerms.js\`, \`warCoalitionPulse.js\`, \`applyWorldPulse.js\`, \`scripts/.domain-strict-baseline.json\`, \`scripts/.full-typecheck-baseline.json\`, \`tests/lint/fullTypecheckRatchet.test.js\` and \`tests/domain/warSeatBooksFactionAddress.test.js\`. **DO NOT EDIT ANY OF THOSE.** Two of your findings touch that lane's files — where they do, **report the fix rather than landing it**, and say so explicitly. Never stage, clean or stash a file you did not author. EXPLICIT PATHSPECS; verify the staged set BY NAME AND COUNT before every commit.
+
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE.`
+
+phase('Ratchets')
+const ratchets = await agent(LAWS + `
+
+YOU ARE THE RATCHET REPAIR LANE. The process-change round landed two good instruments and broke three ratchets doing it. Fix what is yours; report what belongs to the live lane.
+
+**R-1 ⛔ THE MANIFEST TOTALITY IS RED, CAUSED BY THE GATE LANE.** \`a9691e73\` added the invariant test file \`tests/lint/fullTypecheckRatchet.test.js\` with **no \`scripts/mutation-coverage-manifest.json\` entry**, so \`tests/lint/mutationCoverageManifest.test.js\` TOTALITY now fails. Proven with the project's own tool: \`sh scripts/ratchet-inventory.sh tests/lint/mutationCoverageManifest.test.js 9ecec2a2 1d3cdf73\`.
+⚠ The gate lane's meta-test **already ran 8 script mutants and killed all 8** — so the evidence for the manifest row exists and needs recording, not manufacturing. ⛔ \`tests/lint/fullTypecheckRatchet.test.js\` belongs to the LIVE repair lane — **edit only \`scripts/mutation-coverage-manifest.json\`**, and if the row genuinely needs a change inside the test file, STOP and report it.
+⚠ Recorded law: **ONE label per entry — a file's second invariant goes under \`meta:\`**, and a sweep plant is a TWO-FILE edit (label + claim). Read the manifest's own conventions before adding.
+
+**R-2 ⛔ \`npm run lint\` IS RED — AND IT WAS ONLY DISCOVERABLE BECAUSE STEP 9 GOT FIXED.** 29 problems / **2 errors**: \`src/domain/worldPulse/settlementStrategy.js:1275\` \`no-useless-assignment\` ('chosen' assigned but never used) and \`tests/domain/warCoalitionExpenditure.test.js:166\` \`no-unexpected-multiline\`.
+⭐ **\`no-unexpected-multiline\` IS NOT A STYLE NIT — it means the parser joined two lines you meant as separate statements, so read that site for a real behavioural bug before formatting it away.** Same for the unused assignment: find out whether \`chosen\` was supposed to be used and something else got returned.
+⚠ **\`.github/workflows/ci.yml\` carries a comment asserting "The tree currently lints clean (0 problems)" — THAT IS FALSE.** Correct it to what you measure. ⚠ \`settlementStrategy.js\` is in \`scripts/.size-baseline.json\` at 812 — **do not let the file shrink**, the below-demands-ratchet-down rule fires on shrinkage.
+
+**R-3 ⚠⚠ THE LIGHTING CENSUS WAS MISATTRIBUTED, AND THE GATE LANE GREW IT SILENTLY.** The walker lane's receipt says its parent's +3 was "owed by the concurrent lane's three TCD test pins". **Measured per sha from git** (\`git ls-tree -r <sha> | grep -cE '^tests/.*\\.test\\.(js|jsx)$'\`): \`1977db07\`=2346 (the frozen figure) · \`9ecec2a2\`=2347 · **\`a9691e73\`=2348 (THE GATE LANE)** · \`b19038ec\`=2349 · \`3800bcb6\`=2349 · \`1d3cdf73\`=2350. **So TCD-3 added ZERO and the gate lane added ONE** — and the gate lane never mentioned it, while that ratchet was ALREADY RED. That is the recorded *a RED ratchet's contents grow INVISIBLY* hazard firing again.
+**Correct the attribution in the record, and rule on the re-record.** ⚠ The walker lane deferred the re-record because banking it freezes FIVE figures whose title/suite-title layers come from another lane's tests it had not read — **that reasoning was sound**; decide whether it still holds now that the tree has settled, and either re-record with every figure re-derived, or record the deferral with its reason so nobody re-finds it as a bug.
+
+Gate through the mutex chain. Commit body carries \`⏳ OPUS-ERA — FABLE SURVEY OWED\`.
+
+RETURN JSON.`, { label: 'repair2:ratchets', phase: 'Ratchets', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, manifestRowAdded: { type: 'boolean' }, manifestTotalityGreen: { type: 'boolean' }, lintErrorsFixed: { type: 'number' }, lintWasRealBug: { type: 'string' }, ciCommentCorrected: { type: 'boolean' }, censusAttributionCorrected: { type: 'string' }, censusRerecordRuling: { type: 'string' }, commits: { type: 'array', items: { type: 'string' } }, reportedNotLanded: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Guards')
+const guards = await agent(LAWS + `
+
+YOU ARE THE GUARD REPAIR LANE. Three findings about guards that look stronger than they are.
+
+The ratchet lane just landed: ` + JSON.stringify(ratchets || {}).slice(0, 2500) + `
+
+**G-1 ⛔ A GUARD WAS WEAKENED WHILE BEING "FIXED".** The gate lane relaxed the enforcement-claims pin from \`expect(CHECK_SUBNAMES).toEqual(expect.arrayContaining(['typecheck','lint','test']))\` to \`expect(CHECK_SUBNAMES.filter(n => /^typecheck(:|$)/.test(n))).not.toEqual([])\`. The rename made the old literal wrong, so a change WAS needed — but the replacement is satisfied by \`typecheck:domain:strict\` alone, so **deleting \`typecheck:ratchet\` from the chain entirely would leave this pin GREEN.** Verified by a vacuity test against HEAD's package.json.
+**Write the pin that actually reds when the full-typecheck step leaves the chain**, and **PROVE it by deleting that step from a throwaway copy of package.json and watching it fail.** ⛔ \`package.json\` may be touched by the live lane — if it is dirty when you start, STOP and report rather than editing it; the pin itself lives in \`tests/docs/enforcement-claims.test.js\`, which is yours.
+
+**G-2 ⚠ A LATENT WIDENING IN THE SAME COMMIT.** The one-hop \`CHECK_CMDS\` resolver concatenates the ENTIRE TEXT of every \`scripts/*.{mjs,js,cjs,sh}\` named in the check chain — **comments included** — so a future \`@enforced-by <path>\` can resolve off a mere comment mention rather than executed enforcement. For the motivating target it is genuinely grounded (\`tsconfig.full.json\` appears in EXECUTED code), but the mechanism is a hole.
+**Narrow it to executed text**: strip comments before matching, or match only within the script's actual command/argument strings. **Prove the narrowing works both ways** — the real target still resolves, and a comment-only mention no longer does.
+
+**G-3 ⚠ THE NEW WALKER IS COUNT-BASED PER FILE, SO A DEFECT CAN LAND BY IDENTITY SWAP.** \`scripts/check-observed-shape-readers.mjs\` holds a per-file COUNT ceiling. A verifier demonstrated live on \`src/domain/rulingPower.js\` (ceiling 10) that a file's FINDINGS CAN CHANGE IDENTITY AT CONSTANT COUNT — remove one real finding, add a new one, and the ratchet stays green while a fresh reader-without-a-writer lands.
+**Cure it: make the baseline content-addressed per file, not count-addressed** — store the finding identities (or a stable digest of them) so a swap reds. ⚠ Keep it SHRINK-ONLY and keep the inventory legible; **re-freeze the baseline at your own committed sha** and state the sha. **PROVE the cure with the exact mutant that beat the old form**: swap one finding for another at constant count and watch it red. If a content-addressed baseline is genuinely too large or too churny to be practical, say so with the measured size and **record the limitation prominently in the script header** rather than leaving it undocumented — a known blind spot that is written down is a deferral; an unwritten one is a defect.
+
+Gate through the mutex chain. Commit body carries \`⏳ OPUS-ERA — FABLE SURVEY OWED\`.
+
+RETURN JSON.`, { label: 'repair2:guards', phase: 'Guards', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, g1PinRedsOnDeletion: { type: 'string' }, g2NarrowedBothWays: { type: 'string' }, g3ContentAddressed: { type: 'boolean' }, g3SwapMutantReds: { type: 'string' }, g3DeferredWithReason: { type: 'string' }, rebaselinedAtSha: { type: 'string' }, commits: { type: 'array', items: { type: 'string' } }, reportedNotLanded: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Verify')
+const LENSES = [
+  { k: 'guards-bite', p: "Do the repaired guards actually bite? (1) Delete the full-typecheck step from a throwaway package.json in an archive and confirm the enforcement-claims pin REDS — the previous form stayed green and that is the whole finding. (2) Confirm the CHECK_CMDS narrowing rejects a comment-only mention AND still resolves the real target — plant both. (3) For the walker: perform the identity swap at constant count yourself and confirm it now REDS, or verify the deferral is documented in the script header with a measured reason. (4) Confirm the manifest totality is green and its new row's evidence is real, not manufactured." },
+  { k: 'no-new-damage', p: "What did this round break? Run `npm run check` in an integrity-counted archive at the final sha and report the FIRST failing step by name, or that it completed — quote it verbatim. Diff the full typecheck error set under BOTH tsconfig.full.json AND tsconfig.domain-strict.json (the previous round's whole failure was reporting one and implying both). Run `sh scripts/ratchet-inventory.sh` on every red ratchet across this round's span and confirm no inventory grew behind a byte-identical failing row. Re-derive the lighting census per sha from git and confirm the corrected attribution is accurate to the unit. Confirm no file the LIVE burn-repair lane owns was touched." },
+]
+
+const verdicts = await parallel(LENSES.map(l => () => agent(LAWS + `
+
+YOU ARE AN ADVERSARIAL VERIFIER — ${l.k.toUpperCase()}. Default posture: WRONG until executed evidence. REFUTE. **READ-ONLY in the shared tree**; mutants go in throwaway archives.
+
+Ratchet lane: ` + JSON.stringify(ratchets || {}).slice(0, 5000) + `
+Guard lane: ` + JSON.stringify(guards || {}).slice(0, 5000) + `
+
+${l.p}
+
+⚠ Across the last two rounds, FIVE of six verifier verdicts were REJECT and every finding was real. The code keeps being right and the receipts keep being wrong. Re-run everything quoted; trust nothing asserted.
+
+RETURN structured JSON only.`, { label: `verify:${l.k}`, phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })))
+
+const live = verdicts.filter(Boolean)
+const rejects = live.filter(v => v.verdict === 'REJECT')
+log(`verify: ${live.length}/2 returned, ${rejects.length} REJECT`)
+return { ratchets, guards, verdicts: live, verdict: rejects.length ? 'REJECT' : 'PASS' }

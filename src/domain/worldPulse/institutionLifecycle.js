@@ -37,17 +37,11 @@ import { canonExports } from '../canonicalAccessors.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { TIER_ORDER, tierAtLeast } from '../../data/constants.js';
 import { computeActiveChains, institutionMatchesProcessor } from '../../generators/computeActiveChains.js';
-import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
-// The provenance law (domain→domain, no generator edge): `required` is scoped to
-// the tier whose catalog declares it, so every read below asks the law instead of
-// the raw flag — which is what covers settlements PERSISTED before the cascade fix.
-import { hasCascadeProvenance, hasOwnRequiredContract } from '../generationOwnership.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import { stablePart } from './worldState.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
 import { normalizeSimulationRules, intensityMultiplier } from './simulationRules.js';
 import { entriesForTier, catalogEntryByName, existingInstitutionNames } from './tierResourceDynamics.js';
-import { facetOf } from '../spatial/cohesionWeave.js';
 // W-F8: the moral/martial abolition applier re-verifies the lean at apply time; the build
 // lane tilts martial-gap emergence toward militarized towns (the war-supply birth
 // distribution). readinessOf 0 (no martial record) ⇒ tilt 1 ⇒ byte-identical seeding.
@@ -61,10 +55,6 @@ import { martialEmergenceTilt } from './moralInstitutionPressure.js';
 import { conquestProsperityFor } from './conquestFeeds.js';
 import { mercProsperityCostOf } from './mercenaryMarket.js';
 import { tollProsperityFor } from '../spatial/entrepots.js';
-import {
-  nativeLifecycleDepletedResources,
-  nativeLifecycleResourceList,
-} from './institutionLifecycleResourceRead.js';
 
 const clamp = (/** @type {any} */ x, /** @type {any} */ lo, /** @type {any} */ hi) => Math.max(lo, Math.min(hi, x));
 
@@ -159,6 +149,23 @@ function activeInstitutions(/** @type {any} */ settlement) {
   );
 }
 
+function resourceList(/** @type {any} */ settlement) {
+  return [
+    ...(settlement?.config?.nearbyResources || []),
+    ...(settlement?.nearbyResources || []),
+  ].filter(Boolean).map(String).filter((value, index, arr) => arr.indexOf(value) === index);
+}
+
+function depletedResources(/** @type {any} */ settlement) {
+  const depleted = new Set(settlement?.config?.nearbyResourcesDepleted || settlement?.nearbyResourcesDepleted || []);
+  const states = settlement?.config?.nearbyResourcesState || {};
+  for (const [key, state] of Object.entries(states)) {
+    if (state === 'depleted') depleted.add(key);
+    else depleted.delete(key);
+  }
+  return [...depleted];
+}
+
 function settlementTier(/** @type {any} */ settlement) {
   return TIER_ORDER.includes(settlement?.tier) ? settlement.tier : 'village';
 }
@@ -174,11 +181,11 @@ export function deriveLifecycleChains(/** @type {any} */ settlement) {
   const insts = activeInstitutions(settlement);
   return computeActiveChains(
     insts,
-    nativeLifecycleResourceList(settlement),
+    resourceList(settlement),
     tier,
     tradeAccess(settlement),
     [],
-    nativeLifecycleDepletedResources(settlement),
+    depletedResources(settlement),
     Number.isFinite(settlement?.config?.priorityMagic) ? settlement.config.priorityMagic : 50,
   );
 }
@@ -299,19 +306,12 @@ function buildableEntryForProcessor(/** @type {any} */ pattern, /** @type {any} 
  * Returns [{name, category, spec, nativeTier, kind, affinity, reason, context}]
  * sorted best-first, deduped by institution name. Pure + deterministic.
  */
-export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {any} */ precomputedChains = null, /** @type {{ underwaysFoundingLit?: boolean }} */ options = {}) {
+export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {any} */ precomputedChains = null) {
   if (!settlement) return [];
-  // D6 THE UNDERWAYS organic founding is dormant behind a virtual flag (default absent): the
-  // catalog resolver is now correct, but LIGHTING the clandestine gap shifts same-seed worldPulse
-  // goldens for vice-bearing village+ worlds ⇒ owner-gated (rides the G2 + lighting regen). Dark ⇒
-  // no clandestine gap emitted ⇒ byte-identical.
-  const underwaysFoundingLit = options && options.underwaysFoundingLit === true;
   const chains = precomputedChains || deriveLifecycleChains(settlement);
   const existingNames = existingInstitutionNames(settlement);
-  const localResources = nativeLifecycleResourceList(settlement);
-  const depletedSet = new Set(
-    nativeLifecycleDepletedResources(settlement),
-  );
+  const localResources = resourceList(settlement);
+  const depletedSet = new Set(depletedResources(settlement));
   const tier = settlementTier(settlement);
   const affinityOf = /** @type {any} */ (INSTITUTION_LIFECYCLE_TUNING.gapAffinity);
   const found = new Map();
@@ -417,29 +417,6 @@ export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {
     }
   }
 
-  // D6 THE UNDERWAYS (coupling 5 — organic founding): sustained criminal presence at a
-  // village+ settlement calls for excavated tunnels (the mine-founds-itself pattern;
-  // excavation needs labor, so village+). The engine hook is wired HERE; the G2 catalog
-  // entry 'Underground network' now EXISTS on this lineage, so the resolver resolves — the
-  // dormancy is now the FLAG (underwaysFoundingLit), not a dead lookup. Dark ⇒ no clandestine
-  // gap ⇒ byte-identical; lit (owner, at the G2 + lighting regen) ⇒ it founds. Facet-read
-  // (never a name string): a 'vice'-nature institution is the criminal-underground signal;
-  // skip if tunnels exist. The catalog lookup is by NAME, so pass the catalog NAME (the prior
-  // 'underground_network' SLUG never matched catalogEntryByName's exact-name resolve — dead).
-  if (underwaysFoundingLit && tierRankOf(tier) >= tierRankOf('village')) {
-    const insts = /** @type {ReadonlyArray<unknown>} */ (Array.isArray(settlement.institutions) ? settlement.institutions : []);
-    const hasVice = insts.some((i) => facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (i), 'institutionNature') === 'vice');
-    const hasUnderways = insts.some((i) => facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (i), 'institutionFunction') === 'clandestine');
-    if (hasVice && !hasUnderways) {
-      addGap(
-        buildableCatalogEntry('Underground network', settlement, existingNames),
-        'clandestine',
-        'A thriving criminal underground calls for excavated tunnels — smugglers’ warrens and escape ways.',
-        { via: 'underways' },
-      );
-    }
-  }
-
   return [...found.values()].sort((a, b) => b.affinity - a.affinity || byCodepoint(a.name, b.name));
 }
 
@@ -532,33 +509,18 @@ export function institutionImpairmentLoad(/** @type {any} */ inst) {
  * instance lacks the generation-time `required` flag (legacy/imported
  * rosters): catalogEntryByName alone returns the LOWEST tier's spec, and
  * e.g. 'Weekly market' is optional at village but required at town.
- *
- * THE THREE `required` READS ARE NOT THE SAME QUESTION (2026-07-26):
- *   1. the INSTANCE flag — asked through hasOwnRequiredContract, because a
- *      cascade seat carries the SOURCE tier's borrowed flag and a settlement
- *      saved before the producer fix still has that lie on disk;
- *   2. the NAME-KEYED CATALOG rescue (catalogEntryByName → the LOWEST tier that
- *      declares the name) — the legacy/imported backstop above, and the reason
- *      ~68 borrowed names stayed un-closable even once the instance flag told
- *      the truth. It is skipped for a record with full cascade provenance: that
- *      record can answer from its own stamps, so it needs no rescue;
- *   3. the SETTLEMENT'S OWN TIER (entriesForTier below) — deliberately NOT
- *      provenance-scoped. It asks whether this name is a contract at the tier
- *      the settlement is standing at right now, which is the correct answer
- *      regardless of how the record got here (a demoted city's cascade seat may
- *      genuinely be required at its new tier).
  */
 export function isClosableInstitution(/** @type {any} */ inst, /** @type {any} */ settlement = null) {
   if (!inst || !inst.name) return false;
   if (inst.status === 'removed' || inst.status === 'destroyed' || inst._worldPulseInactive) return false;
-  if (hasOwnRequiredContract(inst) || inst.requiredForTier) return false;
-  if (isMaterializedCustomContent(inst)) return false;
+  if (inst.required || inst.requiredForTier) return false;
+  if (inst.isCustom || inst.source === 'custom') return false;
   if (/criminal/i.test(String(inst.category || '')) || institutionHasTag(inst, TAG.CRIMINAL)) return false;
   const tags = Array.isArray(inst.tags) ? inst.tags : [];
   if (tags.includes('essential')) return false;
   const entry = catalogEntryByName(inst.name);
   if (entry) {
-    if (entry.spec.required && !hasCascadeProvenance(inst)) return false;
+    if (entry.spec.required) return false;
     if ((entry.spec.tags || []).includes('essential')) return false;
     if (['government', 'waterSupply'].includes(entry.spec.exclusiveGroup)) return false;
   }
@@ -568,30 +530,6 @@ export function isClosableInstitution(/** @type {any} */ inst, /** @type {any} *
     if (tierEntry?.spec?.required) return false;
   }
   return true;
-}
-
-// ── coherence-12: the political-control read (dark behind institutionPoliticalControlEnabled) ──
-// A faction-CONTROLLED institution resists closure (its patron shields it); a SUPPRESSED one closes
-// first (starved of support). Multiplicative on the vulnerability sort-key; 1 (identity) for any
-// institution neither list touches, so a settlement without control writes is byte-identical. Vetoable.
-const CONTROLLED_CLOSE_SHIELD = 0.5;
-const SUPPRESSED_CLOSE_EXPOSE = 1.5;
-/**
- * The union of faction-CONTROLLED and faction-SUPPRESSED institution slugs on a settlement, read from
- * the powerStructure.factions arrays factionCompetition writes (stablePart(id) slugs — the SAME slug
- * `stablePart(inst.id || inst.name)` resolves to on the read side). Pure.
- * @param {{ powerStructure?: ({ factions?: Array<Record<string, unknown>> }|null) }|null|undefined} settlement
- * @returns {{ controlled: Set<string>, suppressed: Set<string> }}
- */
-function factionControlSets(settlement) {
-  /** @type {Set<string>} */ const controlled = new Set();
-  /** @type {Set<string>} */ const suppressed = new Set();
-  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
-  for (const f of factions) {
-    for (const id of (Array.isArray(f?.controlledInstitutions) ? f.controlledInstitutions : [])) controlled.add(String(id));
-    for (const id of (Array.isArray(f?.suppressedInstitutions) ? f.suppressedInstitutions : [])) suppressed.add(String(id));
-  }
-  return { controlled, suppressed };
 }
 
 // ── Damped chances ───────────────────────────────────────────────────────────
@@ -656,13 +594,6 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
   const rules = normalizeSimulationRules(context.simulationRules || worldState?.simulationRules);
   const tick = Number.isFinite(context.tick) ? context.tick : worldState?.tick || 0;
   if (!rules.institutionLifecycleEnabled) return { worldState, candidates: [] };
-  // D6 underways organic founding — a virtual flag read defensively from the RAW rules (absent from
-  // DEFAULT_SIMULATION_RULES; the thirdPartyRansomEnabled idiom). Dark ⇒ no clandestine gap.
-  const underwaysFoundingLit = (context.simulationRules || worldState?.simulationRules || {}).underwaysOrganicFoundingEnabled === true;
-  // coherence-12 institution political control — a virtual flag read defensively from the RAW rules
-  // (absent from DEFAULT_SIMULATION_RULES; the underwaysFoundingLit idiom). Dark ⇒ closure ranking
-  // ignores controlled/suppressed ⇒ byte-identical (institutionLifecycleEnabled is default-true).
-  const politicalControlLit = (context.simulationRules || worldState?.simulationRules || {}).institutionPoliticalControlEnabled === true;
 
   const settlementTickStates = { ...(worldState?.settlementTickStates || {}) };
   const candidates = [];
@@ -719,7 +650,7 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
       if (drift.streak < t.requiredStreak) continue;
       if (drift.lastCandidateTick != null && tick - drift.lastCandidateTick < t.cooldownTicks) continue;
       const chains = deriveLifecycleChains(settlement);
-      const gaps = detectInstitutionGaps(settlement, chains, { underwaysFoundingLit });
+      const gaps = detectInstitutionGaps(settlement, chains);
       if (!gaps.length) continue;
       // W-F8 EMERGENCE WEIGHTING: a militarized town seeds MARTIAL institutions sooner
       // (garrison/armoury — the war-supply birth distribution). Lift the affinity of any
@@ -786,20 +717,11 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
       const closable = activeInstitutions(settlement).filter((/** @type {any} */ inst) => isClosableInstitution(inst, settlement));
       if (!closable.length) continue;
       // Most vulnerable first: contributing least and impaired most.
-      // coherence-12: when lit, a faction-controlled institution resists closure and a suppressed one
-      // closes first (multiplicative on the sort-key). Null sets when dark ⇒ factor 1 ⇒ byte-identical.
-      const controlSets = politicalControlLit ? factionControlSets(settlement) : null;
       const ranked = closable
         .map((/** @type {any} */ inst) => {
           const contribution = institutionContribution(settlement, inst, chains);
           const impairment = institutionImpairmentLoad(inst);
-          let vulnerability = (1 - contribution) * 0.6 + impairment * 0.4;
-          if (controlSets) {
-            const slug = stablePart(inst.id || inst.name);
-            if (controlSets.controlled.has(slug)) vulnerability *= CONTROLLED_CLOSE_SHIELD;
-            else if (controlSets.suppressed.has(slug)) vulnerability *= SUPPRESSED_CLOSE_EXPOSE;
-          }
-          return { inst, contribution, impairment, vulnerability };
+          return { inst, contribution, impairment, vulnerability: (1 - contribution) * 0.6 + impairment * 0.4 };
         })
         .sort((/** @type {any} */ a, /** @type {any} */ b) => b.vulnerability - a.vulnerability || byCodepoint(a.inst.name, b.inst.name));
       const target = ranked[0];
@@ -871,14 +793,7 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
   if (!settlement || !patch?.name) return settlement;
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
   const needle = String(patch.name).toLowerCase();
-  // Lifecycle patches are built-in simulation actions. Current custom
-  // definitions are exact owners, not name aliases: a custom "Smelter" cannot
-  // block, receive, or be reopened by the native Smelter patch. Unstamped
-  // legacy rows intentionally retain the historical name-only behavior.
-  const index = institutions.findIndex((/** @type {any} */ inst) => (
-    !isMaterializedCustomContent(inst)
-    && String(inst?.name || '').toLowerCase() === needle
-  ));
+  const index = institutions.findIndex((/** @type {any} */ inst) => String(inst?.name || '').toLowerCase() === needle);
 
   if (patch.action === 'build') {
     if (index >= 0) {
@@ -980,14 +895,11 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
   // these morally-loaded-but-NON-criminal). Re-verifies at apply time (self-contained,
   // proposal-safe): the institution must STILL be present, morally-coded or martial, and
   // NOT required/essential/tier-required (a patron cannot abolish the town's granary).
-  // The required read is SCOPED (hasOwnRequiredContract): a cascade seat's flag is the
-  // source tier's, borrowed, so it never buys immunity here — including on a settlement
-  // persisted before the producer fix, which still carries required:true on disk.
   if (patch.action === 'abolish') {
     if (index < 0) return settlement;
     const target = institutions[index];
     if (target._worldPulseInactive || ['removed', 'destroyed', 'remnant'].includes(String(target.status || '').toLowerCase())) return settlement;
-    if (hasOwnRequiredContract(target) || target.requiredForTier) return settlement;
+    if (target.required || target.requiredForTier) return settlement;
     const stillLoaded = institutionMoralLean(target) || institutionMartialLean(target);
     if (!stillLoaded) return settlement;
     const fate = patch.fate || 'abolished';

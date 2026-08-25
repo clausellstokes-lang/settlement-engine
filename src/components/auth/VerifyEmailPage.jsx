@@ -15,11 +15,11 @@
  * result, so there's nothing here to spoof or replay.
  */
 import { useEffect } from 'react';
+import { CheckCircle, AlertCircle, Loader } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { navigate, navigatePath } from '../../hooks/useRoute.js';
-import { SECOND, FS, SP } from '../theme.js';
+import { GOLD, SECOND, MUTED, FS, SP } from '../theme.js';
 import { AuthPageShell, Button, Alert } from './authUI.jsx';
-import { t } from '../../copy/index.js';
 
 export default function VerifyEmailPage() {
   const authTier = useStore(s => s.auth.tier);
@@ -36,34 +36,34 @@ export default function VerifyEmailPage() {
   }, [confirmed]);
 
   return (
-    <AuthPageShell title={t('auth.verify.title')}>
+    <AuthPageShell title="Verify your email">
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
         {authLoading ? (
           <>
-            <p
-              role="status"
-              aria-live="polite"
-              style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}
-            >
-              {t('auth.verify.confirming')}
+            <Loader size={40} color={GOLD} style={{ margin: '0 auto' }} />
+            <p style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}>
+              Confirming your email…
             </p>
           </>
         ) : confirmed ? (
           <>
+            <CheckCircle size={40} color={GOLD} style={{ margin: '0 auto' }} />
             <Alert type="success">
-              {t('auth.verify.confirmed')}
+              Your email is confirmed. Taking you to your settlements…
             </Alert>
             <Button onClick={() => navigatePath('/create', { replace: true })}>
-              {t('auth.verify.continue')}
+              Continue
             </Button>
           </>
         ) : (
           <>
+            <AlertCircle size={40} color={MUTED} style={{ margin: '0 auto' }} />
             <Alert type="error">
-              {t('auth.verify.expired')}
+              This confirmation link is invalid or has expired. Try signing in,
+              if your account isn't active yet, request a fresh link.
             </Alert>
             <Button variant="ghost" onClick={() => navigate('signin')}>
-              {t('auth.verify.goSignIn')}
+              Go to Sign In
             </Button>
           </>
         )}

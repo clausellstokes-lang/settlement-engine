@@ -22,10 +22,10 @@
 
 import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { FS, swatch } from '../theme.js';
+import { X } from 'lucide-react';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 
 const PipelineRail = lazy(() => import('../PipelineRail.jsx'));
 
@@ -58,10 +58,16 @@ export default function SimulationDrawer({ variant = 'inline' }) {
     }
   }, [open]);
 
-  // Back the aria-modal="true" promise with real focus management: move focus
-  // into the panel on open, trap Tab, restore focus on close, and dismiss on
-  // Escape (stack-aware — subsumes the old bespoke window keydown listener).
-  const dialogRef = useDialogFocusTrap(open, () => setOpen(false));
+  // Esc-to-close keyboard handling — lives in an effect so the
+  // listener is bound only while the drawer is open.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
 
   return (
     <>
@@ -69,7 +75,7 @@ export default function SimulationDrawer({ variant = 'inline' }) {
         variant={toolbar ? 'secondary' : 'ghost'}
         size={toolbar ? 'md' : 'sm'}
         onClick={() => setOpen(true)}
-        title="See the stages and decisions that built this settlement"
+        title="See the 17-step simulation pipeline that built this settlement"
         icon={toolbar ? undefined : <span style={{ color: GOLD }}>✦</span>}
         style={toolbar ? undefined : {
           border: `1px solid ${BORDER}`,
@@ -99,7 +105,6 @@ export default function SimulationDrawer({ variant = 'inline' }) {
           />
           {/* Panel */}
           <aside
-            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-label="How this was simulated"
@@ -139,12 +144,12 @@ export default function SimulationDrawer({ variant = 'inline' }) {
                   marginTop: 4, fontSize: FS['11.5'], color: BODY,
                   lineHeight: 1.5, fontFamily: sans,
                 }}>
-                  The same choices and seed rebuild the same settlement.
-                  Open a stage to see what it decided and why.
+                  Seventeen pure-functional steps, deterministic per seed.
+                  Tap a step to see what it decided and why.
                 </div>
               </div>
               <IconButton
-                glyph="×"
+                Icon={X}
                 label="Close"
                 tone="ghost"
                 size="lg"
@@ -159,7 +164,7 @@ export default function SimulationDrawer({ variant = 'inline' }) {
                   padding: 16, color: MUTED, fontSize: FS.sm,
                   fontFamily: sans, textAlign: 'center',
                 }}>
-                  Loading simulation record…
+                  Loading pipeline…
                 </div>
               }>
                 <PipelineRail compact={false} />

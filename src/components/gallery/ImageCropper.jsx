@@ -1,5 +1,5 @@
 /**
- * ImageCropper.jsx — landscape pan/zoom cropper.
+ * ImageCropper.jsx — landscape pan/zoom cropper (§3).
  *
  * Shows the chosen image inside a fixed-aspect (landscape) viewport, behaving
  * like CSS `object-fit: cover` at minimum zoom. The user drags to reposition
@@ -8,41 +8,24 @@
  * the unit-tested cropGeometry module — this file is interaction + canvas only.
  *
  * No upload here: the parent (CoverImageField) owns file selection + storage.
- *
- * ── THE OUTPUT IS PARAMETERISED (profile-identity lane, DESIGN_PROFILE_IMAGE §3.2)
- * The profile-image crop is the SAME gesture over a different frame: a square
- * selection previewed as a circle. Rather than fork a second cropper — and with
- * it a second copy of the pan/zoom/clamp maths that is the easy part to get
- * subtly wrong — the output shape is now props. EVERY new prop defaults to the
- * cover's existing behavior (1280-wide JPEG at 0.85, square corners), so the
- * gallery cover path is byte-identical to before this change; the pins in
- * tests/components/imageCropperOutput.test.jsx assert exactly that.
- *
- * `circular` is a PREVIEW treatment only. The asset stays SQUARE at rest and the
- * frame is circular at render (§2) — never store a pre-masked circle, or every
- * future surface inherits this one's ring decision.
  */
 import { useEffect, useRef, useState } from 'react';
+import { ZoomIn, RotateCcw, Check, X } from 'lucide-react';
 
 import {
-  clampOffset, centeredOffset, cropRectFromTransform, outputSize, } from './cropGeometry.js';
-import { BORDER2, CARD_ALT, GOLD, MUTED, RED, SP, FS, sans } from '../theme.js';
-import { t } from '../../copy/index.js';
+  clampOffset,
+  centeredOffset,
+  cropRectFromTransform,
+  outputSize,
+} from './cropGeometry.js';
+import { BORDER2, CARD_ALT, GOLD, MUTED, R, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
 const MAX_ZOOM = 4;
 const ZOOM_STEPS = 0.01;
 
-/** Local file selections (blob:/data:) are same-origin; only remote URLs need CORS. */
-const needsCrossOrigin = (src) => typeof src === 'string' && !/^(blob:|data:)/i.test(src);
-
-export default function ImageCropper({
-  src, aspect = 16 / 9, onCancel, onCommit, busy = false,
-  // Output shape — every default is the gallery cover's pre-existing behavior.
-  outputMaxWidth = 1280, outputType = 'image/jpeg', outputQuality = 0.85,
-  circular = false, applyLabel = 'Apply crop',
-}) {
+export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit, busy = false }) {
   const viewportRef = useRef(null);
   const imgRef = useRef(null);
   const dragRef = useRef(null);     // { startX, startY, ox, oy }
@@ -54,7 +37,6 @@ export default function ImageCropper({
   const [zoom, setZoomState] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
-  const [error, setError] = useState(null);
 
   // Single setter that keeps the ref mirror in lock-step with state.
   const setZoom = (z) => { zoomRef.current = z; setZoomState(z); };
@@ -139,27 +121,16 @@ export default function ImageCropper({
   const commit = () => {
     const img = imgRef.current;
     if (!img || !natural || !viewport.w) return;
-    setError(null);
-    // Drawing a cross-origin image without an anonymous CORS grant taints the
-    // canvas, so toBlob throws (or yields null). Surface a real error instead of
-    // a silently dead Apply button.
-    try {
-      const rect = cropRectFromTransform({ natural, viewport, zoom, offset });
-      const out = outputSize(aspect, outputMaxWidth);
-      const canvas = document.createElement('canvas');
-      canvas.width = out.w;
-      canvas.height = out.h;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) { setError(t('errors.cropPrepFail')); return; }
-      ctx.imageSmoothingQuality = 'high';
-      ctx.drawImage(img, rect.sx, rect.sy, rect.sWidth, rect.sHeight, 0, 0, out.w, out.h);
-      canvas.toBlob((blob) => {
-        if (blob) onCommit?.(blob);
-        else setError(t('errors.cropExportFail'));
-      }, outputType, outputQuality);
-    } catch {
-      setError(t('errors.cropExportFail'));
-    }
+    const rect = cropRectFromTransform({ natural, viewport, zoom, offset });
+    const out = outputSize(aspect, 1280);
+    const canvas = document.createElement('canvas');
+    canvas.width = out.w;
+    canvas.height = out.h;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(img, rect.sx, rect.sy, rect.sWidth, rect.sHeight, 0, 0, out.w, out.h);
+    canvas.toBlob((blob) => { if (blob) onCommit?.(blob); }, 'image/jpeg', 0.85);
   };
 
   return (
@@ -178,27 +149,21 @@ export default function ImageCropper({
           width: '100%',
           aspectRatio: String(aspect),
           overflow: 'hidden',
+          borderRadius: R.md,
           border: `1px solid ${BORDER2}`,
           background: CARD_ALT,
           cursor: dragging ? 'grabbing' : 'grab',
           touchAction: 'none',
           userSelect: 'none',
-          // Preview treatment only — the exported asset is always the full
-          // square. See the header: never store a pre-masked circle.
-          ...(circular ? { borderRadius: '50%' } : null),
         }}
       >
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- onLoad/onError are resource-load lifecycle events (onLoad reads naturalWidth/Height to drive crop geometry), not user interactions */}
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- onLoad is a resource-load lifecycle event (reads naturalWidth/Height to drive crop geometry), not a user interaction */}
         <img
           ref={imgRef}
           src={src}
           alt=""
           draggable={false}
-          // Request an anonymous CORS grant for remote images so the canvas
-          // isn't tainted on commit. Omitted for blob:/data: (same-origin).
-          {...(needsCrossOrigin(src) ? { crossOrigin: 'anonymous' } : {})}
           onLoad={onImgLoad}
-          onError={() => setError(t('errors.imageLoadFail'))}
           style={{
             position: 'absolute',
             left: 0,
@@ -213,16 +178,15 @@ export default function ImageCropper({
             pointerEvents: 'none',
           }}
         />
-        {/* Subtle framing hint — follows the viewport's own shape. */}
+        {/* Subtle landscape framing hint */}
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
           boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.25)',
-          ...(circular ? { borderRadius: '50%' } : null),
         }} />
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        <span style={{ color: MUTED, flexShrink: 0, fontSize: FS.xxs, fontWeight: 800 }}>Zoom</span>
+        <ZoomIn size={14} style={{ color: MUTED, flexShrink: 0 }} />
         <input
           type="range"
           min={1}
@@ -234,7 +198,7 @@ export default function ImageCropper({
           style={{ flex: 1, accentColor: GOLD, cursor: 'pointer' }}
         />
         <IconButton
-          glyph="↺"
+          Icon={RotateCcw}
           label="Reset zoom and position"
           onClick={reset}
           tone="default"
@@ -246,6 +210,7 @@ export default function ImageCropper({
         <Button
           variant="ghost"
           size="sm"
+          icon={<X size={13} />}
           onClick={onCancel}
           disabled={busy}
         >
@@ -254,19 +219,14 @@ export default function ImageCropper({
         <Button
           variant="gold"
           size="sm"
+          icon={<Check size={13} />}
           onClick={commit}
           busy={busy}
           disabled={!natural}
         >
-          {busy ? 'Uploading…' : applyLabel}
+          {busy ? 'Uploading…' : 'Apply crop'}
         </Button>
       </div>
-
-      {error && (
-        <div role="alert" data-testid="cropper-error" style={{ color: RED, fontFamily: sans, fontSize: FS.xs }}>
-          {error}
-        </div>
-      )}
     </div>
   );
 }

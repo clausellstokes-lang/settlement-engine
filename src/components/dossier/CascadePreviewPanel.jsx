@@ -1,12 +1,12 @@
 /**
- * CascadePreviewPanel.jsx — side-panel cascade preview.
+ * CascadePreviewPanel.jsx — P105 / E-2 side-panel cascade preview.
  *
  * Opens when the user clicks "Preview cascade" in PendingChangesBar.
  * Reads the live settlement + pending queue, calls
- * the lazy preview read model, and renders the structured
+ * `domain/pendingEdits.previewCascade()`, and renders the structured
  * delta: counts, narrative impact, warnings.
  *
- * The point is "no mystery edits". Before commit:
+ * The point is "no mystery edits" (E-2's headline). Before commit:
  *   - what counts change (institutions, resources, stressors)
  *   - what gets renamed
  *   - what the narrative layer's status becomes
@@ -16,162 +16,105 @@
  * sheet on mobile. Backdrop click closes.
  */
 
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { previewCascade } from '../../domain/pendingEditsPreview.js';
-import {
-  pendingEditOwnerScope,
-  selectPendingEditOwnerScope,
-} from '../../domain/pendingEditIntents.js';
-import { sans, serif_, FS, SP, swatch, PARCH, GOLD_DEEP } from '../theme.js';
-import { INK as OINK } from '../../design/organic/ink.js';
-import { RUBRIC } from '../../design/organic/rubrication.js';
+import { previewCascade } from '../../domain/pendingEdits.js';
+import { sans, serif_, FS, SP, R, swatch, PARCH, GOLD_DEEP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import useDialogFocusTrap from '../primitives/useDialogFocusTrap.js';
 
-// THE PREVIEW INSTRUMENT PLATE (Deep Craft — the dossier's instrument register):
-// the cascade preview reads as a rule-framed plate of labeled impact lines, not
-// tinted SaaS callout washes stacked in a shadowed panel. Print has no z-axis —
-// the plate edge is a rule, never elevation. The apparatus speaks in TWO rationed
-// rubric tones (both contrast-PINNED as text on parchment): the gold entry mark
-// for the informational lines, the oxblood for the critical Warning line. The
-// category is carried by each line's title word, never colour alone.
-const APPARATUS = RUBRIC.entry;   // informational impact lines — the gold entry apparatus
-const CRITICAL = RUBRIC.rubric;   // the Warning line — oxblood, the critical voice
-const RULE = OINK.hairline;       // the feint ledger rule between lines (decorative)
+const VIOLET = swatch['#7B4FCF'];
+const VIOLET_BG = swatch['#EBE2FA'];
+const AMBER = swatch['#D08020'];
+const AMBER_BG = swatch['#FBEAD0'];
+const GREEN = swatch['#4A7A3A'];
+const GREEN_BG = swatch['#E2EEDB'];
+const BLUE = swatch['#2A5A7A'];
+const BLUE_BG = swatch['#E0E8F0'];
+const RED = swatch['#A23434'];
+const RED_BG = swatch['#F4DEDE'];
 const INK = swatch['#1B1408'];
 const BORDER = swatch['#E8D9B0'];
 
-function ImpactRow({ accent, title, body }) {
+function ImpactRow({ accent, accentBg, title, body }) {
   return (
     <div style={{
       padding: SP.sm,
+      background: accentBg,
       borderLeft: `3px solid ${accent}`,
-      borderBottom: `1px solid ${RULE}`,
+      borderRadius: R.sm,
       fontSize: FS.xs,
-      color: OINK.body,
+      color: swatch['#3A2F18'],
       lineHeight: 1.5,
     }}>
-      <b style={{ color: accent, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{title}</b>{' '}
+      <b style={{ color: accent }}>{title}</b>{' '}
       {body}
     </div>
   );
 }
 
-function structuralDeltaText(delta) {
-  const verb = delta?.direction === 'remove' ? 'Would remove' : 'Would add';
-  const subject = String(delta?.subject || 'item');
-  const label = String(delta?.targetLabel || '').trim();
-  return label
-    ? `${verb} ${subject}: ${label}`
-    : `${verb} ${subject}; the queued change did not record a display name.`;
-}
-
 export default function CascadePreviewPanel({ onClose, onCommit }) {
   const settlement = useStore(s => s.settlement);
   const queue = useStore(s => s.pendingEditsQueue || []);
-  const ownerKey = useStore(s => pendingEditOwnerScope(s).ownerKey);
   const savedSettlements = useStore(s => s.savedSettlements || []);
-  const scopedQueue = useMemo(
-    () => selectPendingEditOwnerScope(queue, ownerKey),
-    [queue, ownerKey],
-  );
 
   // Re-derive the preview whenever the queue or settlement changes. Pure
   // function — no side effects, safe to call on every render.
   const preview = useMemo(
-    () => previewCascade(settlement, scopedQueue),
-    [settlement, scopedQueue],
+    () => previewCascade(settlement, queue),
+    [settlement, queue],
   );
 
   // The domain module can't see saved settlements; we fill linkedSaves
   // count here from the store-side data.
   const linkedSaves = useMemo(() => {
     if (!settlement || !Array.isArray(savedSettlements)) return 0;
-    // The neighbour list lives at settlement.neighbourNetwork (mirrored to the
-    // Supabase row's neighbour_links); the old top-level save.neighbourLinks
-    // field never exists, so the previous read always returned 0. A neighbour
-    // entry carries the linked save's id as `id` (see useChangeQueueCascade),
-    // with `targetId` as the alternate key (see map/RelationshipEdges).
     return savedSettlements.filter(s =>
-      (s.settlement?.neighbourNetwork || s.neighbour_links || [])
-        .some(link => (link?.id ?? link?.targetId) === settlement.id)
+      s.neighbourLinks?.some(link => link.targetId === settlement.id)
     ).length;
   }, [settlement, savedSettlements]);
 
-  // Shared modal focus management: trap Tab inside the panel, restore focus to the
-  // trigger on close, and dismiss on Escape (topmost dialog only). Backs the
-  // aria-modal promise below with real focus behavior.
-  const dialogRef = useDialogFocusTrap(true, onClose);
+  // Esc closes
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose?.(); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
 
-  // Older preview adapters may omit the richer proof fields. Treat those as the
-  // established available shape; only an explicit unavailable state may claim
-  // that the model could not complete its work.
-  const availability = preview.availability || { status: 'available', reason: null };
-  const structural = preview.structural || { status: 'none', deltas: [] };
-  const exactDeltas = Array.isArray(structural.deltas) ? structural.deltas : [];
-  const summaryLines = Array.isArray(preview.summaryLines) ? preview.summaryLines : [];
-  const warnings = Array.isArray(preview.warnings) ? preview.warnings : [];
-  const previewComplete = availability.status === 'available';
-  const previewClass = preview.epistemic?.class || (
-    availability.status === 'unavailable'
-      ? 'unavailable'
-      : availability.status === 'partial'
-        ? 'partial_projection'
-        : 'bounded_projection'
-  );
-  const scopeCount = Number(preview.scope?.count);
-  const reviewedCount = Number.isFinite(scopeCount) ? scopeCount : scopedQueue.length;
-  const summaryText = availability.status === 'unavailable'
-    ? 'Preview unavailable.'
-    : availability.status === 'partial' && summaryLines.length === 0
-      ? 'Some effects remain unassessed.'
-      : summaryLines.length
-        ? summaryLines.join(' · ')
-        : structural.status === 'balanced'
-          ? `${exactDeltas.length} structural changes balance to no net count change.`
-          : 'No structural effect is projected for this supported review.';
-  const visibleWarnings = warnings.filter(
-    warning => warning !== availability.reason,
-  );
+  const summaryText = preview.summaryLines.length
+    ? preview.summaryLines.join(' · ')
+    : 'No structural changes.';
 
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 9100 }}>
-      {/* Presentational backdrop — click dismisses; the KEYBOARD dismiss is Escape,
-          handled by the shared focus trap (useDialogFocusTrap) on the dialog, so the
-          backdrop needs no key handler of its own. A sibling (not a parent) of the
-          dialog, so a click on the panel never reaches it and no stopPropagation is
-          needed. */}
-      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events -- dismiss-only backdrop; Escape (focus trap) is the keyboard path */}
-      <div
-        onClick={onClose}
-        style={{
-          position: 'absolute', inset: 0,
-          background: 'rgba(24,20,16,0.5)',
-          backdropFilter: 'blur(4px)',
-        }}
-      />
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- overlay backdrop: click/key here is dismiss-only; Escape also closes (see useEffect above)
+    <div
+      role="dialog"
+      aria-label="Cascade preview"
+      onClick={onClose}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose?.(); }}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9100,
+        background: 'rgba(24,20,16,0.5)',
+        backdropFilter: 'blur(4px)',
+      }}
+    >
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- panel container: handlers only stop backdrop click/key from bubbling, not an interactive control */}
       <aside
-        ref={dialogRef}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Cascade preview"
-        data-preview-class={previewClass}
+        onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
         style={{
           position: 'absolute', right: 0, top: 0, bottom: 0,
           width: 'min(400px, 100vw)',
           background: PARCH,
           borderLeft: `1px solid ${BORDER}`,
+          boxShadow: '-12px 0 32px rgba(0,0,0,0.25)',
           display: 'flex', flexDirection: 'column',
           fontFamily: sans,
         }}
       >
         <header style={{
           padding: SP.lg,
-          // Top-pinned fixed panel: fold in the device safe-area inset so the
-          // header clears a notch on mobile. Resolves to 0 on desktop.
-          paddingTop: `calc(${SP.lg}px + env(safe-area-inset-top, 0px))`,
           borderBottom: `1px solid ${BORDER}`,
           display: 'flex', alignItems: 'baseline', gap: SP.sm,
         }}>
@@ -182,7 +125,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             Cascade preview
           </h2>
           <IconButton
-            glyph="×"
+            Icon={X}
             label="Close"
             onClick={onClose}
             tone="ghost"
@@ -196,7 +139,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             textTransform: 'uppercase', color: GOLD_DEEP,
             marginBottom: SP.xs,
           }}>
-            Expected effect
+            Summary
           </div>
           <div style={{
             fontFamily: serif_, fontSize: FS.md,
@@ -205,120 +148,63 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             {summaryText}
           </div>
 
-          <ImpactRow
-            accent={APPARATUS}
-            title="Known scope"
-            body={`Exactly ${reviewedCount} queued ${reviewedCount === 1 ? 'change' : 'changes'} in this review.`}
-          />
+          {preview.summaryLines.length > 0 && (
+            <ImpactRow
+              accent={GREEN}
+              accentBg={GREEN_BG}
+              title="Structure"
+              body={summaryText}
+            />
+          )}
 
           <div style={{ height: SP.sm }} />
 
           <ImpactRow
-            accent={APPARATUS}
-            title="Preview class"
+            accent={AMBER}
+            accentBg={AMBER_BG}
+            title="Downstream"
             body={
-              previewClass === 'unavailable'
-                ? 'Unavailable. No effect claim is made.'
-                : previewClass === 'partial_projection'
-                  ? 'Partial projection. Known queued changes are shown, but some consequences are not simulated.'
-                  : 'Bounded projection. This uses the queued intents and current read model; commit has not run.'
+              `${preview.downstreamCounts.npcs ?? 0} NPCs, ` +
+              `${preview.downstreamCounts.factions ?? 0} factions, ` +
+              `${preview.downstreamCounts.hooks ?? 0} hooks reference this town.`
             }
           />
 
           <div style={{ height: SP.sm }} />
 
-          {availability.status === 'unavailable' && (
+          {preview.narrativeImpact !== 'none' && (
             <>
               <ImpactRow
-                accent={CRITICAL}
-                title="Preview unavailable"
-                body={availability.reason || 'The requested changes could not be evaluated.'}
-              />
-              <div style={{ height: SP.sm }} />
-            </>
-          )}
-
-          {availability.status === 'partial' && (
-            <>
-              <ImpactRow
-                accent={CRITICAL}
-                title="Partial preview"
-                body={availability.reason || 'Some downstream effects could not be evaluated.'}
-              />
-              <div style={{ height: SP.sm }} />
-            </>
-          )}
-
-          {exactDeltas.map((delta, index) => (
-            <div
-              key={delta.intentId || `${delta.kind || 'structural'}:${index}`}
-              data-testid="cascade-exact-delta"
-              style={{ marginTop: SP.sm }}
-            >
-              <ImpactRow
-                accent={APPARATUS}
-                title="Expected change"
-                body={structuralDeltaText(delta)}
-              />
-            </div>
-          ))}
-
-          {structural.status === 'balanced' && previewComplete && (
-            <div style={{ marginTop: SP.sm }}>
-              <ImpactRow
-                accent={APPARATUS}
-                title="Expected balance"
-                body="Overall counts are expected to balance, while every named addition and removal remains part of the queued batch."
-              />
-            </div>
-          )}
-
-          {previewComplete && (
-            <>
-              <div style={{ height: SP.sm }} />
-              <ImpactRow
-                accent={APPARATUS}
-                title="Known related records"
-                body={
-                  `The current settlement contains ${preview.downstreamCounts.npcs ?? 0} NPCs, ` +
-                  `${preview.downstreamCounts.factions ?? 0} factions, ` +
-                  `and ${preview.downstreamCounts.hooks ?? 0} hooks. This is context, not a claim that every record will change.`
-                }
-              />
-              <div style={{ height: SP.sm }} />
-            </>
-          )}
-
-          {previewComplete && preview.narrativeImpact !== 'none' && (
-            <>
-              <ImpactRow
-                accent={APPARATUS}
-                title="Expected narrative effect"
+                accent={VIOLET}
+                accentBg={VIOLET_BG}
+                title="Narrative"
                 body={
                   preview.narrativeImpact === 'regenerate-needed'
-                    ? 'A fresh Narrative Layer pass is expected to be needed after these changes.'
-                    : 'A narrative pass is expected to carry the prose forward over the renames.'
+                    ? 'The narrative layer will need regeneration to stay coherent with these changes.'
+                    : 'A narrative progression pass is suggested to evolve the prose against the renames.'
                 }
               />
               <div style={{ height: SP.sm }} />
             </>
           )}
 
-          {previewComplete && linkedSaves > 0 && (
+          {linkedSaves > 0 && (
             <>
               <ImpactRow
-                accent={APPARATUS}
-                title="Known links"
-                body={`${linkedSaves} ${linkedSaves === 1 ? 'save links' : 'saves link'} to this settlement; those links may need review after apply.`}
+                accent={BLUE}
+                accentBg={BLUE_BG}
+                title="Linked saves"
+                body={`${linkedSaves} ${linkedSaves === 1 ? 'save' : 'saves'} reference this settlement. They may see a flag.`}
               />
               <div style={{ height: SP.sm }} />
             </>
           )}
 
-          {visibleWarnings.map((w, i) => (
+          {preview.warnings.map((w, i) => (
             <div key={i} style={{ marginBottom: SP.sm }}>
               <ImpactRow
-                accent={CRITICAL}
+                accent={RED}
+                accentBg={RED_BG}
                 title="Warning"
                 body={w}
               />

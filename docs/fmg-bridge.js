@@ -1,16 +1,14 @@
 /**
  * SettlementForge ↔ Azgaar FMG Bridge
  *
- * Historical bridge example. Production uses public/map/sf-origin.js plus
- * public/map/sf-bridge.js; this file mirrors their origin contract so copying
- * the example cannot reintroduce a wildcard postMessage boundary.
+ * Inject this script into your Azgaar Fantasy Map Generator fork to enable
+ * two-way communication with the SettlementForge via postMessage.
  *
  * Installation:
  *   1. Fork https://github.com/Azgaar/Fantasy-Map-Generator
- *   2. Load public/map/sf-origin.js before this bridge
+ *   2. Add <script src="fmg-bridge.js"></script> before </body> in index.html
  *   3. Deploy the fork (Vercel, Netlify, or any static host)
- *   4. Set VITE_FMG_URL to the CSP-approved HTTPS fork URL; the app appends
- *      the exact parentOrigin handshake required by sf-origin.js
+ *   4. Set VITE_FMG_URL in your SettlementForge .env to the fork's URL
  *
  * Protocol:
  *   FMG → Parent:
@@ -31,10 +29,8 @@
   // Only run when embedded in an iframe
   if (window === window.top) return;
 
-  const originContract = window.__sfBridgeOrigin;
-  const parentOrigin = originContract?.parentOrigin || null;
-  if (!parentOrigin || typeof originContract?.postToParent !== 'function') return;
-  const post = originContract.postToParent;
+  const PARENT = window.parent;
+  const post = (msg) => PARENT.postMessage(msg, '*');
 
   // ── Wait for FMG to finish loading ──────────────────────────────────────────
   // Azgaar's FMG sets `window.pack` once the map is generated.
@@ -223,7 +219,6 @@
   }
 
   window.addEventListener('message', (event) => {
-    if (event.origin !== parentOrigin || event.source !== window.parent) return;
     const data = event.data;
     if (!data || typeof data !== 'object') return;
 

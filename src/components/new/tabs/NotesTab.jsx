@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Save } from 'lucide-react';
 import { useStore } from '../../../store/index.js';
 import { FS, swatch } from '../../theme.js';
-import { t } from '../../../copy/index.js';
-import { sans } from '../Primitives';
+import { sans, TabIntro } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
 const BORDER = swatch['#E0D0B0'];
@@ -27,7 +26,7 @@ const GOLD = swatch['#A0762A'];
  */
 export default function NotesTab({ saveId, notes, section }) {
   const updateDossierNotes = useStore(s => s.updateDossierNotes);
-  const notesSourceKey = `${notes?.dmNotes || ''}|${notes?.aiGuidance || ''}`;
+  const notesSourceKey = `${notes?.dmNotes || ''}\u0000${notes?.aiGuidance || ''}`;
   const [draft, setDraft] = useState(() => ({
     sourceKey: notesSourceKey,
     dmNotes: notes?.dmNotes || '',
@@ -35,7 +34,6 @@ export default function NotesTab({ saveId, notes, section }) {
   }));
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [error, setError] = useState(null);
 
   if (!saving && draft.sourceKey !== notesSourceKey) {
     setDraft({
@@ -58,24 +56,10 @@ export default function NotesTab({ saveId, notes, section }) {
     if (!saveId) return;
     setSaving(true);
     setSaved(false);
-    setError(null);
     try {
       await updateDossierNotes(saveId, { dmNotes, aiGuidance });
-      // Reconcile the draft's sourceKey to the values we just saved so the
-      // render-phase sync below does NOT overwrite the boxes when setSaving(false)
-      // re-renders. Without this, any keystrokes typed DURING the round-trip
-      // (draft still carries the old sourceKey) get clobbered back to the props
-      // value once saving clears. We reconcile against the text we sent, not the
-      // incoming props, so in-flight edits survive.
-      setDraft(current => ({ ...current, sourceKey: `${dmNotes}|${aiGuidance}` }));
       setSaved(true);
       setTimeout(() => setSaved(false), 1800);
-    } catch {
-      // updateDossierNotes updates local state optimistically and rethrows when
-      // the cloud write fails — without this catch the rejection was unhandled and
-      // the user saw no error, then the notes vanished on reload (cloud never got
-      // them). Surface it so they can retry; the draft text is still in the boxes.
-      setError(t('errors.notesSaveFail'));
     } finally {
       setSaving(false);
     }
@@ -87,6 +71,7 @@ export default function NotesTab({ saveId, notes, section }) {
     resize: 'vertical',
     boxSizing: 'border-box',
     border: `1px solid ${BORDER}`,
+    borderRadius: 6,
     padding: '10px 12px',
     fontSize: FS.sm,
     lineHeight: 1.55,
@@ -97,9 +82,10 @@ export default function NotesTab({ saveId, notes, section }) {
 
   return (
     <div style={{ padding: 18 }}>
+      <TabIntro tabKey="notes" />
       <div style={{ display: 'grid', gap: 14 }}>
         {showDm && (
-          <section style={{ border: `1px solid ${BORDER}`, padding: 14, background: swatch['#FAF8F4'] }}>
+          <section style={{ border: `1px solid ${BORDER}`, borderRadius: 8, padding: 14, background: swatch['#FAF8F4'] }}>
             <div style={{ ...sans, fontSize: FS.xxs, fontWeight: 800, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
               DM Notes
             </div>
@@ -114,7 +100,7 @@ export default function NotesTab({ saveId, notes, section }) {
         )}
 
         {showAi && (
-          <section style={{ border: `1px solid ${BORDER}`, padding: 14, background: swatch['#F7F0E4'] }}>
+          <section style={{ border: `1px solid ${BORDER}`, borderRadius: 8, padding: 14, background: swatch['#F7F0E4'] }}>
             <div style={{ ...sans, fontSize: FS.xxs, fontWeight: 800, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
               Campaign Context
             </div>
@@ -126,29 +112,22 @@ export default function NotesTab({ saveId, notes, section }) {
               style={textareaStyle}
             />
             <p style={{ margin: '8px 0 0', fontSize: FS.xs, color: SECOND, lineHeight: 1.5 }}>
-              Woven into AI narration as established campaign flavor. Settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
+              Woven into AI narration as established campaign flavor — settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
             </p>
           </section>
         )}
 
         {saveId ? (
-          <div style={{ display: 'grid', gap: 8, justifyItems: 'start' }}>
-            <Button
-              type="button"
-              variant="primary"
-              onClick={save}
-              disabled={saving}
-              icon={<Save size={15} />}
-              style={{ justifySelf: 'start' }}
-            >
-              {saving ? 'Saving...' : saved ? 'Saved' : 'Save notes'}
-            </Button>
-            {error && (
-              <p role="alert" style={{ margin: 0, fontSize: FS.xs, color: swatch['#8B1A1A'], lineHeight: 1.5 }}>
-                {error}
-              </p>
-            )}
-          </div>
+          <Button
+            type="button"
+            variant="primary"
+            onClick={save}
+            disabled={saving}
+            icon={<Save size={15} />}
+            style={{ justifySelf: 'start' }}
+          >
+            {saving ? 'Saving...' : saved ? 'Saved' : 'Save notes'}
+          </Button>
         ) : (
           <p style={{ margin: 0, fontSize: FS.xs, color: SECOND, fontStyle: 'italic', lineHeight: 1.5 }}>
             Type freely. Save this settlement to keep your notes with it.

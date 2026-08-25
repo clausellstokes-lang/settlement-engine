@@ -2,10 +2,6 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 import { EVENTS, EVENT_CLASS, EVENT_NAME_RE, EDIT_KINDS } from '../_shared/analyticsEventsBundle.js';
-// The ONE writer of the two actor mapping tables — first-contact claiming that
-// yields to the stored row instead of discarding a losing insert. Import-free so
-// tests/edgeFunctions/ingestActorLinks.test.js can execute the race for real.
-import { resolveDeviceActor, resolveUserActor } from './actorLinks.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
@@ -102,6 +98,30 @@ export function stripProps(props: unknown): Record<string, unknown> {
   return stripPropValue(props, 0) as Record<string, unknown>;
 }
 
+// deno-lint-ignore no-explicit-any
+async function resolveDeviceActor(admin: any, deviceKey: string): Promise<string> {
+  const { data } = await admin.from('analytics_device_links').select('actor_id').eq('device_key', deviceKey).maybeSingle();
+  if (data?.actor_id) return data.actor_id;
+  const actor = crypto.randomUUID();
+  await admin.from('analytics_device_links').insert({ device_key: deviceKey, actor_id: actor });
+  return actor;
+}
+
+// deno-lint-ignore no-explicit-any
+async function resolveUserActor(admin: any, userId: string, deviceKey: string | null): Promise<string> {
+  const { data } = await admin.from('analytics_identity_links').select('actor_id').eq('user_id', userId).maybeSingle();
+  if (data?.actor_id) return data.actor_id;
+  // No actor yet — adopt the device's actor so the anon funnel stitches to signup.
+  let actor: string | null = null;
+  if (deviceKey) {
+    const { data: dev } = await admin.from('analytics_device_links').select('actor_id').eq('device_key', deviceKey).maybeSingle();
+    if (dev?.actor_id) actor = dev.actor_id;
+  }
+  if (!actor) actor = crypto.randomUUID();
+  await admin.from('analytics_identity_links').upsert({ user_id: userId, actor_id: actor }, { onConflict: 'user_id', ignoreDuplicates: true });
+  return actor;
+}
+
 // Body cap in BYTES, not UTF-16 code units: `text.length` let ~192KB of 3-byte
 // UTF-8 under a 64KB "cap" (the same bug generate-narrative and
 // generate-chronicle fixed with regression tests).
@@ -113,67 +133,6 @@ const MAX_BODY_BYTES = 64 * 1024;
 // silently lose member snapshots. Overflow beyond this is COUNTED in `rejected`
 // (reason 'snapshot_cap_exceeded'), never dropped silently the way the old slice(0, 2) did.
 const SERVER_SNAPSHOT_CAP = 20;
-
-// ── Bot-wave velocity telemetry (item 4 — cadence-anomaly detection) ─────────
-// A coarse cadence-anomaly signal derived HERE at the ingestion edge and STAMPED
-// as an ADDITIVE prop (`_vband`) on the ingested analytics_events. It obeys the
-// analytics seam laws: NO new event NAME (the enrich-vs-new-name doctrine — this
-// rides existing events), ZERO new eager bytes (server-only Deno; nothing added
-// to the client bundle), and NO migration (reuses the events.props jsonb column).
-// Privacy-first: the band is a 3-value enum; raw counts and the IP are never
-// stored (the IP only keys an in-memory window, then is discarded — analytics_events
-// has never persisted IP; country is the only geo, already coarse).
-//
-// Detection is a per-instance in-memory sliding window (the create-checkout
-// `withinBackstop` idiom): best-effort BY DESIGN. It ADDS cadence detail beneath
-// the cross-instance hourly `ipall:` gate (2000/hr) that is the real wall — a
-// bot-wave rotating device tokens behind one IP surfaces on the IP window. A
-// cross-instance DB-backed velocity signal would be stronger but needs a new
-// table/RPC (owner-gated migration) — deliberately deferred to the owner batch.
-// `elevated` is NOT proof of abuse (a shared corporate NAT of honest users trips
-// it); it is a lead for the admin analytics surface, never an auto-block.
-// Thresholds are operator-legible; tune here.
-const VELOCITY_WINDOW_MS = 60_000;
-const IP_ELEVATED = 20;
-const IP_BURST = 60;
-const ACTOR_ELEVATED = 15;
-const ACTOR_BURST = 40;
-
-const _ipWindows = new Map<string, number[]>();
-const _actorWindows = new Map<string, number[]>();
-
-/**
- * Record `now` under `key`, prune samples outside the window, return the
- * in-window count. Best-effort memory bound: when the map grows large, forget
- * keys whose latest sample has aged out. Exported for the regression pin.
- */
-export function recordVelocity(
-  map: Map<string, number[]>,
-  key: string,
-  now: number,
-  windowMs = VELOCITY_WINDOW_MS,
-): number {
-  const cutoff = now - windowMs;
-  const arr = (map.get(key) || []).filter((t) => t > cutoff);
-  arr.push(now);
-  map.set(key, arr);
-  if (map.size > 5000) {
-    for (const [k, ts] of map) {
-      if (ts.length === 0 || ts[ts.length - 1] <= cutoff) map.delete(k);
-    }
-  }
-  return arr.length;
-}
-
-/**
- * Pure band decision from the two window counts. '' = normal (no stamp).
- * Exported for the regression pin.
- */
-export function bandForCounts(ipCount: number, actorCount: number): '' | 'elevated' | 'burst' {
-  if (ipCount > IP_BURST || actorCount > ACTOR_BURST) return 'burst';
-  if (ipCount > IP_ELEVATED || actorCount > ACTOR_ELEVATED) return 'elevated';
-  return '';
-}
 
 export async function handleIngestEvents(req: Request): Promise<Response> {
   const headers = corsHeaders(req);
@@ -252,15 +211,6 @@ export async function handleIngestEvents(req: Request): Promise<Response> {
   const { data: underRate, error: rateErr } = await admin.rpc('ingest_check_rate', { p_key: rateKey });
   if (rateErr || underRate === false) return json({ error: 'rate_limited' }, 429, headers);
 
-  // Bot-wave cadence signal (see the velocity block above): record this ADMITTED
-  // request against a per-IP and per-actor in-memory window and derive a coarse
-  // band. When elevated/burst, it is stamped as `_vband` on the event rows below
-  // (additive prop, no new event name). Normal traffic gets no stamp.
-  const _now = Date.now();
-  const ipVelocity = recordVelocity(_ipWindows, meta.ip, _now);
-  const actorVelocity = recordVelocity(_actorWindows, actorId || deviceKey || `ip:${meta.ip}`, _now);
-  const velocityBand = bandForCounts(ipVelocity, actorVelocity);
-
   const batchId = uuidOrNull(body.batchId) || crypto.randomUUID();
   const sessionId = uuidOrNull(body.sessionId);
   const country = (req.headers.get('cf-ipcountry') || req.headers.get('x-vercel-ip-country') || '').slice(0, 2).toUpperCase() || null;
@@ -285,11 +235,7 @@ export async function handleIngestEvents(req: Request): Promise<Response> {
     if (RESEARCH_NAMES.has(name) && tier !== 'research') { rejected.push({ seq: e?.seq, reason: 'consent_insufficient' }); continue; }
     eventRows.push({
       event: name, actor_id: actorId, session_id: sessionId, subject_id: uuidOrNull(e.subjectId),
-      // Enrich (not a new event): stamp the coarse velocity band only when the
-      // per-IP/per-actor cadence is elevated/burst, so bot-waves are queryable
-      // via props->>'_vband' without a new eager event name or a schema change.
-      props: velocityBand ? { ...stripProps(e.props), _vband: velocityBand } : stripProps(e.props),
-      consent_tier: tier, country, app_version: strShort(body.appVersion),
+      props: stripProps(e.props), consent_tier: tier, country, app_version: strShort(body.appVersion),
       events_rev: eventsRev, client_ts: tsOrNull(e.ts), batch_id: batchId, seq: Number(e.seq) || eventRows.length,
       // Market plane + provenance (132): the sellable rollups read these; fail-closed
       // defaults (false / null) keep legacy + non-opted-in rows out of the market corpus.

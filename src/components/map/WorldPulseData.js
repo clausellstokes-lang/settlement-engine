@@ -3,10 +3,6 @@
 // the strings the World Pulse cards read. No JSX, no state — pure functions and
 // the small constant Sets the panel filters stressors against.
 import { formatCount } from '../../domain/formatNumber.js';
-import {
-  humanizeToken,
-  settlementSizeLabel,
-} from '../../domain/display/humanizeEngineTokens.js';
 
 export function percent(value) {
   return `${Math.round((Number.isFinite(value) ? value : 0) * 100)}%`;
@@ -52,25 +48,6 @@ export function collectSettlementIds(item = {}) {
   return unique(ids.map(String));
 }
 
-// THE NEWS ADDRESS LAW subject descriptor for a pulse item: the TYPED ids the
-// address-chain resolver joins on (never prose). The realm web resolves npcId
-// (settlement-prefixed) to the deep settlement › power › faction › npc chain;
-// falls to a faction (factionId, or factionName scoped to the containing
-// settlement); falls to the settlement itself; resolves to nothing (subjectless,
-// e.g. a plague) when the record names no addressable actor.
-export function outcomeSubjectDescriptor(item = {}) {
-  const o = item.outcome || item;
-  const payload = o.proposalPayload || item.proposalPayload || {};
-  const ids = collectSettlementIds(item);
-  const settlementId = o.targetSaveId ?? o.settlementId ?? payload.settlementId ?? ids[0] ?? null;
-  return {
-    npcId: o.npcId || item.npcId || null,
-    factionId: o.factionId || item.factionId || null,
-    factionName: o.factionName || payload.factionName || item.factionName || null,
-    settlementId,
-  };
-}
-
 // The named entities involved in a pulse item, in reader-priority order.
 export function involvedEntities(item = {}, nameById = new Map()) {
   const o = item.outcome || item;
@@ -97,47 +74,33 @@ export function involvedEntities(item = {}, nameById = new Map()) {
 export function proposalDetails(outcome = {}) {
   const payload = outcome.proposalPayload || {};
   if (payload.kind === 'tier_change') {
-    return [
-      `Size ${settlementSizeLabel(payload.fromTier, 'unknown')} → ${settlementSizeLabel(payload.toTier, 'unknown')}`,
-      humanizeToken(payload.direction),
-    ].filter(Boolean);
+    return [`${human(payload.fromTier)} -> ${human(payload.toTier)}`, human(payload.direction)];
   }
   if (payload.kind === 'relationship_label_change') {
-    return [`${humanizeToken(payload.fromType)} → ${humanizeToken(payload.toType)}`];
+    return [`${human(payload.fromType)} -> ${human(payload.toType)}`, human(outcome.ruleId || outcome.ruleFamily)];
   }
   if (payload.kind === 'npc_action') {
     return [
-      humanizeToken(payload.actionFamily),
-      payload.dotRankBefore && payload.dotRankAfter
-        ? `${payload.dotRankBefore} dot → ${payload.dotRankAfter} dot`
-        : humanizeToken(payload.roleArchetype),
+      human(payload.actionFamily),
+      payload.dotRankBefore && payload.dotRankAfter ? `${payload.dotRankBefore} dot -> ${payload.dotRankAfter} dot` : human(payload.roleArchetype),
     ].filter(Boolean);
   }
   if (payload.kind === 'government_change') {
-    return [
-      humanizeToken(payload.governmentPreference),
-      humanizeToken(payload.legitimacyBand),
-      'preserve institutions',
-    ];
+    return [human(payload.governmentPreference), human(payload.legitimacyBand), 'preserve institutions'];
   }
   if (payload.kind === 'institution_suppression' || payload.kind === 'institution_capture') {
-    return [humanizeToken(payload.kind), payload.institutionName].filter(Boolean);
+    return [human(payload.kind), payload.institutionName].filter(Boolean);
   }
   if (payload.kind === 'faction_power_shift') {
-    return [humanizeToken(payload.kind), humanizeToken(payload.cause)].filter(Boolean);
+    return [human(payload.kind), human(payload.cause)].filter(Boolean);
   }
-  // ruleFamily/ruleId are implementation addresses, not reader facts. When a
-  // proposal carries no typed display payload, the card's authored headline and
-  // summary remain the honest detail rather than laundering an internal id.
-  return [];
+  return [human(outcome.ruleFamily), human(outcome.ruleId)].filter(Boolean).slice(0, 2);
 }
 
 export function outcomeDetails(outcome = {}, nameById = new Map()) {
   const details = [...proposalDetails(outcome)];
   if (outcome.tierChange) {
-    details.push(
-      `Size ${settlementSizeLabel(outcome.tierChange.fromTier, 'unknown')} → ${settlementSizeLabel(outcome.tierChange.toTier, 'unknown')}`,
-    );
+    details.push(`${human(outcome.tierChange.fromTier)} -> ${human(outcome.tierChange.toTier)}`);
   }
   if (outcome.populationDeltas?.length) {
     details.push(...outcome.populationDeltas.slice(0, 3).map(delta => `${nameById.get(String(delta.saveId)) || 'Settlement'}: ${signedNumber(delta.delta)}`));
@@ -186,7 +149,7 @@ export function stressorDetails(stressor = {}) {
   const cf = stressor.counterforce;
   if (cf && Number.isFinite(cf.score)) {
     const trend = cf.score > 0.55 ? 'recovering fast' : cf.score < 0.45 ? 'wallowing' : 'holding';
-    details.push(`resilience ${percent(cf.score)}: ${trend}${cf.floorsMet === false ? ' (a pillar is missing)' : ''}`);
+    details.push(`resilience ${percent(cf.score)} — ${trend}${cf.floorsMet === false ? ' (a pillar is missing)' : ''}`);
   }
   if (stressor.synergy?.companions?.length) {
     details.push(`entangled with ${stressor.synergy.companions.slice(0, 2).map(human).join(', ')}`);
@@ -196,36 +159,20 @@ export function stressorDetails(stressor = {}) {
   return unique(details).slice(0, 5);
 }
 
-export const WAR_SHAPED_TYPES = new Set([
-  'siege', 'wartime', 'occupation', 'monster_raider_pressure',
-  // §S3 — the pulse-born war-layer stressors also read as war-shaped so their
-  // attacker/coalition context surfaces in the same cards.
-  'war_drain', 'army_deployed', 'religious_conversion_fracture',
-]);
+export const WAR_SHAPED_TYPES = new Set(['siege', 'wartime', 'occupation', 'monster_raider_pressure']);
 
 export function stressorSummary(stressor = {}) {
   const parts = [];
   if (stressor.originContext?.reason) parts.push(stressor.originContext.reason);
   const hooks = stressor.originContext?.hooks || [];
   if (hooks.length) parts.push(`Hooks: ${hooks.slice(0, 2).join(' • ')}`);
-  return parts.join('. ');
+  return parts.join(' — ');
 }
 
 export function attackerEntity(stressor = {}, nameById = new Map()) {
   const ctx = stressor.originContext;
   if (!ctx) return null;
-  // §S3 — a coalition siege names its instigator + supporters. When the resolver
-  // attached a coalition (primaryInstigatorId + supporterIds, codepoint-stable),
-  // surface the whole coalition; a single named force still reads "Attacker".
-  const coalition = unique([ctx.primaryInstigatorId, ...(ctx.supporterIds || [])].filter(Boolean).map(String))
-    .map(id => nameById.get(id) || id);
-  if (coalition.length > 1) {
-    return { label: 'Coalition', value: coalition.slice(0, 4).join(', ') };
-  }
   if (ctx.attackerLabel) return { label: 'Attacker', value: ctx.attackerLabel };
-  if (ctx.primaryInstigatorId) {
-    return { label: 'Attacker', value: nameById.get(String(ctx.primaryInstigatorId)) || String(ctx.primaryInstigatorId) };
-  }
   if (ctx.attackerSettlementId) {
     return { label: 'Attacker', value: nameById.get(String(ctx.attackerSettlementId)) || String(ctx.attackerSettlementId) };
   }

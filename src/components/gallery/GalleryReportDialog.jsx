@@ -1,34 +1,31 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
+import { Flag, X } from 'lucide-react';
 
 import {
   BODY,
   BORDER,
   CARD,
   CARD_ALT,
+  ELEV,
   FS,
+  GOLD,
   INK,
+  R,
   RED,
+  RED_BG,
   SP,
   sans,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
-import { t } from '../../copy/index.js';
 import { REPORT_REASON_OPTIONS } from './galleryUtils.js';
 
-export default function GalleryReportDialog({ dossier, auth, disabled, onReport, label = 'settlement' }) {
+export default function GalleryReportDialog({ dossier, auth, disabled, onReport }) {
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState('unsafe_content');
   const [body, setBody] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
-
-  // Inherit the primitives' modal focus trap (focus-in, Tab cycling, Escape,
-  // focus restore) instead of hand-rolling it. Escape is ignored while a report
-  // is mid-flight so the user can't dismiss an in-progress submit.
-  const onCancel = useCallback(() => { if (!busy) setOpen(false); }, [busy]);
-  const dialogRef = useDialogFocusTrap(open, onCancel);
 
   const requestOpen = async () => {
     if (!auth?.user) {
@@ -51,10 +48,10 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
         setBody('');
         setReason('unsafe_content');
       } else {
-        setError(t('errors.reportSendFail'));
+        setError('Report could not be sent.');
       }
     } catch (err) {
-      setError(err?.message || t('errors.reportSendFail'));
+      setError(err?.message || 'Report could not be sent.');
     } finally {
       setBusy(false);
     }
@@ -67,16 +64,16 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
         size="sm"
         onClick={requestOpen}
         disabled={disabled}
-        title={`Report ${label}`}
+        title="Report settlement"
+        icon={<Flag size={13} />}
       >
         Report
       </Button>
       {open && (
         <div
           role="presentation"
-          className="oc-m-warmdim"
           onMouseDown={event => {
-            if (event.target === event.currentTarget) onCancel();
+            if (event.target === event.currentTarget && !busy) setOpen(false);
           }}
           style={{
             position: 'fixed',
@@ -86,21 +83,20 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
             alignItems: 'center',
             justifyContent: 'center',
             padding: SP.lg,
+            background: 'rgba(27,20,8,0.46)',
           }}
         >
           <form
-            ref={dialogRef}
             role="dialog"
             aria-modal="true"
-            aria-label={`Report ${label}`}
+            aria-label="Report settlement"
             onSubmit={submit}
             style={{
               width: 'min(100%, 480px)',
-              // The clerk's form as a plate on the warm-dim ground — hairline
-              // frame, no rounded corner, no elevation shadow (depth is the dim
-              // room, not a z-axis lift).
               border: `1px solid ${BORDER}`,
+              borderRadius: R.lg,
               background: CARD,
+              boxShadow: ELEV[3],
               overflow: 'hidden',
             }}
           >
@@ -112,11 +108,12 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
               borderBottom: `1px solid ${BORDER}`,
               background: CARD_ALT,
             }}>
+              <Flag size={16} color={GOLD} />
               <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, fontWeight: 950 }}>
-                Report {label}
+                Report Settlement
               </h2>
               <IconButton
-                glyph="×"
+                Icon={X}
                 label="Close"
                 tone="ghost"
                 size="lg"
@@ -133,8 +130,9 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
                   value={reason}
                   onChange={event => setReason(event.target.value)}
                   style={{
-                    minHeight: 44,
+                    minHeight: 38,
                     border: `1px solid ${BORDER}`,
+                    borderRadius: R.md,
                     background: CARD_ALT,
                     color: INK,
                     fontFamily: sans,
@@ -158,6 +156,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
                   style={{
                     resize: 'vertical',
                     border: `1px solid ${BORDER}`,
+                    borderRadius: R.md,
                     background: CARD_ALT,
                     color: INK,
                     fontFamily: sans,
@@ -171,12 +170,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
                 Reports are reviewed by developer/admin accounts.
               </div>
               {error && (
-                // The tinted error box becomes a rubric-ruled note (errors as
-                // rubric notes, not washes): oxblood left rule, oxblood text.
-                // role=alert (SB5): the failure appears after the user acts, so
-                // it must interrupt assistive tech (WCAG 4.1.3, the Alert
-                // primitive's tone→liveness contract).
-                <div role="alert" style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}>
+                <div style={{ border: `1px solid ${RED}`, borderRadius: R.md, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
                   {error}
                 </div>
               )}

@@ -2,13 +2,17 @@
  * SummaryTabV2.jsx — P129 / D-2 magazine-spread Summary.
  *
  * Two-column layout:
- *   LEFT  — the shared settlement quick guide: one identity sentence,
- *           three defining truths, and one immediate pressure.
- *   RIGHT — the same guide's three important people and one entry point.
+ *   LEFT (flex 1.2) — "The town in 4 sentences"
+ *     Serif elevator pitch with an italic accent line on the key tension.
+ *     Pulls from settlement.pressureSentence + arrivalScene, with
+ *     the italic accent picked from settlement.pressureSentence
+ *     itself (the sentence the engine already wrote as the
+ *     headline tension).
  *
- * The composer is shared with Table View, Session Mode, and the PDF. Summary
- * therefore stays a projection of canonical settlement data rather than growing
- * a second, hand-maintained interpretation of the generated dossier.
+ *   RIGHT (flex 0.95) — "Tonight at the table"
+ *     NPC / Hook / Twist / Red flag cards composed by
+ *     domain/summary/tonightAtTheTable.js. Color-coded left borders
+ *     mirror the canvas mockup.
  *
  *   FOOTER — "📱 Open in Table View" button that triggers the
  *     P142 / D-6 Table View flag in user preferences.
@@ -24,9 +28,7 @@
 import { useMemo } from 'react';
 import { FS, swatch } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
-import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
-import EconomyFreshnessNote from './EconomyFreshnessNote.jsx';
-import ReadSystemStateBar from '../settlement/ReadSystemStateBar.jsx';
+import { tonightAtTheTable, prosperityLabel } from '../../domain/summary/tonightAtTheTable.js';
 import Button from '../primitives/Button.jsx';
 
 const GOLD = swatch['#8C6F32'];
@@ -38,21 +40,73 @@ const PARCH = swatch['#FBF5E6'];
 const BORDER = swatch['#E8D9B0'];
 
 const GREEN = swatch['#4A7A3A'];
+const VIOLET = swatch['#7B4FCF'];
 const AMBER = swatch['#D08020'];
 const RED = swatch['#A23434'];
 
 const serif = '"Crimson Text", Georgia, serif';
 const sans = '"Nunito", system-ui, sans-serif';
 
+const KIND_ACCENT = {
+  NPC:   GREEN,
+  HOOK:  AMBER,
+  TWIST: VIOLET,
+  RED:   RED,
+};
+
+const KIND_LABEL = {
+  NPC:   'NPC',
+  HOOK:  'HOOK',
+  TWIST: 'TWIST',
+  RED:   'RED',
+};
+
+/**
+ * Pick the italic accent line — the one phrase that names the headline
+ * tension. We prefer pressureSentence if it's a single sentence with a
+ * clear "because" / "stopped pretending" / "runs a quiet" pattern,
+ * else we just take the first sentence of pressureSentence.
+ */
+function pickAccentLine(pressureSentence) {
+  if (!pressureSentence) return null;
+  const trimmed = String(pressureSentence).trim();
+  // Try to find an italicizable clause — the part after a comma or
+  // dash if there is one, which often carries the punch.
+  const dashMatch = trimmed.match(/—\s*([^.!?—]+[.!?]?)/);
+  if (dashMatch && dashMatch[1].length > 12 && dashMatch[1].length < 90) {
+    return dashMatch[1].trim();
+  }
+  // Otherwise, the whole sentence (capped at the first .).
+  const dot = trimmed.indexOf('.');
+  if (dot > 24) return trimmed.slice(0, dot + 1);
+  return trimmed;
+}
+
 export default function SummaryTabV2({ settlement, onOpenTableView }) {
   // NOTE: keep ALL hooks above any early return. React Hooks must be
   // called in the same order every render — gating the useMemos behind
   // an early `if (!settlement)` would create a hooks-order violation
   // flagged by react-hooks/rules-of-hooks.
-  const guide = useMemo(
-    () => composeSettlementQuickGuide(settlement),
+  const tableEntries = useMemo(
+    () => tonightAtTheTable(settlement),
     [settlement],
   );
+
+  const pressure = settlement?.pressureSentence || '';
+  const arrival = settlement?.arrivalScene || '';
+  // components-dossier-library-3: prosperity is a STRING label, not a { tier }
+  // object — the tolerant read finally lets the prosperity + stressors block render.
+  const prosperityText = prosperityLabel(settlement?.economicState?.prosperity);
+  const accent = useMemo(() => pickAccentLine(pressure), [pressure]);
+  const pressureTail = useMemo(() => {
+    if (!accent || !pressure) return pressure;
+    // Strip the accent from the pressure sentence so we don't repeat
+    // the phrase. The accent renders inside the prose as the
+    // italicized clause.
+    const idx = pressure.indexOf(accent);
+    if (idx < 0) return pressure;
+    return pressure.replace(accent, '').replace(/\s{2,}/g, ' ').trim();
+  }, [pressure, accent]);
 
   // Plot hooks moved out to their own Summary sub-tab (PlotHooksTab, spec §8)
   // so DM Summary and Plot Hooks read as distinct surfaces.
@@ -101,117 +155,74 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
         </div>
       </header>
 
-      {/* The 4-dimension glance (R-5b #22). The Summary used to open at
-          "sentence" with no glance above it; the strip restores the top rung of
-          the legibility ladder for read-mode and public-gallery readers, who
-          previously could not see these four dimensions at all (the store-bound
-          SystemStateBar is edit-mode only). The strip renders nothing only when
-          there is no settlement at all — deriveSystemState is total, so a
-          sanitized gallery projection degrades to neutral bands rather than
-          vanishing (measured, pinned). Derivation stays INSIDE the strip —
-          this tab remains read-only on its props, no store. */}
-      <div style={{ padding: '14px 18px 0' }}>
-        <ReadSystemStateBar settlement={settlement} />
-      </div>
-
       {/* Two-column body */}
       <div style={{
         display: 'flex', gap: 14,
         padding: '16px 18px',
         alignItems: 'flex-start',
       }}>
-        {/* LEFT — one identity, three truths, one pressure. */}
+        {/* LEFT — identity prose */}
         <div style={{ flex: 1.2, minWidth: 0 }}>
           <div style={{
             fontSize: FS.micro, fontWeight: 800,
             letterSpacing: '0.14em', textTransform: 'uppercase',
             color: GOLD,
           }}>
-            Settlement quick guide
+            The town in 4 sentences
           </div>
 
-          <p className="oc-dropcap-prose" style={{
+          <p style={{
             margin: '8px 0 0',
             fontFamily: serif, fontSize: FS['14.5'],
             color: INK_DEEP, lineHeight: 1.65,
           }}>
-            {guide.identitySentence}
+            {accent && (
+              <em style={{ color: GOLD, fontStyle: 'italic' }}>
+                {accent}
+              </em>
+            )}
+            {accent && pressureTail && ' '}
+            {pressureTail}
+            {arrival && (
+              <>
+                {' '}
+                <span style={{ color: MUTED }}>{arrival}</span>
+              </>
+            )}
           </p>
 
-          <div style={{
-            display: 'flex', flexDirection: 'column', gap: 8,
-            marginTop: 12,
-          }}>
-            {guide.definingTruths.map((truth) => (
-              <div
-                key={truth.id}
-                style={{
-                  paddingLeft: 9,
-                  borderLeft: `2px solid ${BORDER}`,
-                }}
-              >
-                <div style={{
-                  fontSize: FS.nano, fontWeight: 800,
-                  letterSpacing: '0.09em', textTransform: 'uppercase',
-                  color: MUTED,
-                }}>
-                  {truth.label}
-                </div>
-                <div style={{
-                  marginTop: 1,
-                  fontSize: FS.xs, color: BODY, lineHeight: 1.5,
-                }}>
-                  {truth.text}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* ECONOMY FRESHNESS (Wave R-4) — the third defining truth ("How it
-              lives") is composeMaterialTruth's fold of economicState prosperity /
-              food security / primary exports, the same generation-time read-model
-              EconomicsTab tallies. It is not re-derived when an event lands, so
-              this surface carries the same one shared sentence. Anchored under the
-              truths so it qualifies THEM, not the pressure line or the cheat sheet.
-              Conditional: a fresh settlement renders byte-identically. */}
-          <EconomyFreshnessNote settlement={settlement} variant="tallies" margin="10px 0 0" />
-
-          <div style={{
-            marginTop: 13,
-            padding: '9px 11px',
-            background: PARCH,
-            border: `1px solid ${BORDER}`,
-            borderLeft: `3px solid ${RED}`,
-          }}>
+          {prosperityText && (
             <div style={{
-              fontSize: FS.nano, fontWeight: 800,
-              letterSpacing: '0.09em', textTransform: 'uppercase',
-              color: RED,
+              marginTop: 14,
+              fontSize: FS.xs, color: BODY, lineHeight: 1.6,
             }}>
-              {guide.immediatePressure.label}
+              <strong style={{ color: GOLD, letterSpacing: '0.04em' }}>
+                {prosperityText.toUpperCase()}
+              </strong>{' '}
+              prosperity tier.{' '}
+              {settlement.stressors?.length > 0 && (
+                <>
+                  Active stressors: {settlement.stressors.map(s => s.label || s.type).join(', ')}.
+                </>
+              )}
             </div>
-            <div style={{
-              marginTop: 2,
-              fontFamily: serif, fontSize: FS.sm, fontStyle: 'italic',
-              color: INK_DEEP, lineHeight: 1.5,
-            }}>
-              {guide.immediatePressure.text}
-            </div>
-          </div>
+          )}
         </div>
 
-        {/* RIGHT — three people and one entry point. */}
+        {/* RIGHT — Tonight at the table */}
         <aside style={{
           flex: 0.95,
           padding: 12,
           background: PARCH,
           border: `1px solid ${BORDER}`,
+          borderRadius: 6,
           display: 'flex', flexDirection: 'column', gap: 6,
         }}>
           <div style={{
             display: 'flex', alignItems: 'center', gap: 6,
             marginBottom: 2,
           }}>
+            <span style={{ fontSize: FS.xs, color: AMBER }}>🕯</span>
             <span style={{
               fontSize: FS.micro, fontWeight: 800,
               letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -225,87 +236,59 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             </span>
           </div>
 
-          <div style={{
-            padding: '7px 9px',
-            background: swatch.white,
-            border: `1px solid ${BORDER}`,
-            borderLeft: `3px solid ${AMBER}`,
-          }}>
-            <div style={{
-              display: 'flex', justifyContent: 'space-between',
-              alignItems: 'baseline', gap: 6,
-            }}>
-              <span style={{
-                fontFamily: serif, fontWeight: 700, fontSize: FS['11.5'],
-                color: INK,
-              }}>
-                {guide.entryPoint.label}
-              </span>
-              <span style={{
-                fontSize: FS['7.5'], fontWeight: 800,
-                color: AMBER, letterSpacing: '0.08em',
-              }}>
-                HOOK
-              </span>
-            </div>
-            <div style={{
-              marginTop: 2,
-              fontSize: FS.xxs, color: BODY, lineHeight: 1.4,
-            }}>
-              {guide.entryPoint.text}
-            </div>
-          </div>
-
-          {guide.importantPeople.length === 0 ? (
+          {tableEntries.length === 0 ? (
             <div style={{
               padding: '8px 6px',
               fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
             }}>
-              No important people have been generated yet.
+              No table-night entries derived yet. Generate a richer
+              settlement or run the narrative layer.
             </div>
-          ) : guide.importantPeople.map((person) => (
-            <div
-              key={person.id}
-              style={{
-                padding: '7px 9px',
-                background: swatch.white,
-                border: `1px solid ${BORDER}`,
-                borderLeft: `3px solid ${GREEN}`,
-              }}
-            >
-              <div style={{
-                display: 'flex', justifyContent: 'space-between',
-                alignItems: 'baseline', gap: 6,
-              }}>
-                <span style={{
-                  fontFamily: serif, fontWeight: 700, fontSize: FS['11.5'],
-                  color: INK, minWidth: 0, overflow: 'hidden',
-                  textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                }}>
-                  {person.name}
-                </span>
-                <span style={{
-                  fontSize: FS['7.5'], fontWeight: 800,
-                  color: GREEN, letterSpacing: '0.08em',
-                  flexShrink: 0,
-                }}>
-                  NPC
-                </span>
-              </div>
-              <div style={{
-                marginTop: 1,
-                fontSize: FS.nano, color: MUTED, lineHeight: 1.35,
-              }}>
-                {person.role}
-              </div>
-              <div style={{
-                marginTop: 2,
-                fontSize: FS.xxs, color: BODY, lineHeight: 1.4,
-              }}>
-                {person.detail}
-              </div>
-            </div>
-          ))}
+          ) : (
+            tableEntries.map((row, i) => {
+              const accent = KIND_ACCENT[row.kind] || GOLD;
+              return (
+                <div
+                  key={i}
+                  style={{
+                    padding: '6px 8px',
+                    background: swatch.white,
+                    border: `1px solid ${BORDER}`,
+                    borderLeft: `3px solid ${accent}`,
+                    borderRadius: 4,
+                  }}
+                >
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'baseline',
+                    gap: 6,
+                  }}>
+                    <span style={{
+                      fontFamily: serif, fontWeight: 700, fontSize: FS['11.5'],
+                      color: INK, minWidth: 0, overflow: 'hidden',
+                      textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                    }}>
+                      {row.title}
+                    </span>
+                    <span style={{
+                      fontSize: FS['7.5'], fontWeight: 800,
+                      color: accent, letterSpacing: '0.08em',
+                      flexShrink: 0,
+                    }}>
+                      {KIND_LABEL[row.kind] || row.kind}
+                    </span>
+                  </div>
+                  <div style={{
+                    fontSize: FS.xxs, color: BODY,
+                    marginTop: 2, lineHeight: 1.4,
+                  }}>
+                    {row.body}
+                  </div>
+                </div>
+              );
+            })
+          )}
 
           {typeof onOpenTableView === 'function' && (
             <Button
@@ -316,7 +299,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
               onClick={onOpenTableView}
               style={{ marginTop: 6 }}
             >
-              Open in Table View
+              📱 Open in Table View
             </Button>
           )}
         </aside>

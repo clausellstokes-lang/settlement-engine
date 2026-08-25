@@ -28,14 +28,10 @@
  *
  * AND `_authored: true` is set on the entity so the existing
  * domain/canonStatus.js tagger automatically promotes it to
- * `source: 'user'`, `canonStatus: 'canon'`, `locked: true`.
- *
- * That tag is what carries an edited NPC through a section reroll:
- * domain/regenerationPreservation.js reads it via regenerationMode's
- * preservation rules and re-seats the character in the fresh roster.
- * SCOPE — only the NPC reroll has a preservation tail. An edited
- * institution, faction, or history beat is still replaced wholesale by
- * its own regenerate path.
+ * `source: 'user'`, `canonStatus: 'canon'`, `locked: true`. Downstream
+ * consumers (AI grounding, overlay verifier, engine regenerate)
+ * already respect that flag — no new wiring needed for canon
+ * preservation.
  *
  * Pure, synchronous, no I/O. Callers either pass a draft (Immer) or a
  * mutable clone they own.
@@ -415,7 +411,7 @@ export function summarizeUserEdits(settlement) {
   const tuples = walkUserEdits(settlement);
   return tuples.map(({ kind, entity, entityIndex, path }) => {
     if (kind === 'settlement') return `settlement > ${path}`;
-    const label = entity?.faction || entity?.name || `#${entityIndex}`;
+    const label = entity?.name || entity?.faction || `#${entityIndex}`;
     return `${kind}: ${label} > ${path}`;
   });
 }

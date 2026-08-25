@@ -23,23 +23,15 @@
 
 import { Crown, UserPlus, X, ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
-import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 
 export default function SuccessorPrompt() {
   const pending  = useStore(s => s.pendingSuccession);
   const settlement = useStore(s => s.settlement);
   const stageComposerIntent = useStore(s => s.stageComposerIntent);
   const dismiss      = useStore(s => s.dismissPendingSuccession);
-
-  // Back aria-modal="true" with focus-in / Tab-trap / Escape / focus-restore, using the
-  // SHARED trap the sibling modals use (a11y audit R7 — a bare aria-modal that doesn't
-  // trap focus strands keyboard + screen-reader users). Called unconditionally BEFORE the
-  // early return (Rules of Hooks); "open" is false when the prompt isn't shown, so the
-  // trap stays inert until the modal actually renders.
-  const dialogRef = useDialogFocusTrap(Boolean(pending && settlement), dismiss);
 
   if (!pending || !settlement) return null;
 
@@ -114,7 +106,6 @@ export default function SuccessorPrompt() {
     // keyboard users dismiss via the labelled IconButton or footer button.
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
-      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby="succession-title"
@@ -175,6 +166,7 @@ export default function SuccessorPrompt() {
               padding: SP.sm,
               background: swatch['#FFF7EC'],
               border: `1px solid #e0b070`,
+              borderRadius: R.sm,
               fontSize: FS.xs, fontFamily: sans, color: swatch['#7A4F0F'],
               marginBottom: 12, lineHeight: 1.5,
             }}>
@@ -220,7 +212,7 @@ const sheetStyle = {
   width: 'min(440px, calc(100vw - 32px))',
   maxHeight: 'calc(100vh - 32px)', overflow: 'auto',
   background: CARD,
-  border: `1px solid ${BORDER}`,
+  border: `1px solid ${BORDER}`, borderRadius: R.md,
   boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
 };
 const headerStyle = {
@@ -241,7 +233,7 @@ const successorBtnStyle = {
   display: 'flex', alignItems: 'center', gap: 8,
   padding: '8px 10px',
   background: '#fffbf5',
-  border: `1px solid ${BORDER}`,
+  border: `1px solid ${BORDER}`, borderRadius: R.sm,
   cursor: 'pointer', textAlign: 'left',
   fontFamily: sans,
 };

@@ -20,9 +20,7 @@ import { ChapterBand, ChapterHeadline, KeyValRow, HairRule, Tag } from '../primi
 import { npcsHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { label, hookText, humanize, safe } from '../lib/format.js';
-import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
-import { ProseText } from '../primitives/ProseText.jsx';
+import { label, hookText, humanize, stripZwnj } from '../lib/format.js';
 
 /**
  * TextRow — Label · prose value pair, but the value is rendered as plain
@@ -31,7 +29,7 @@ import { ProseText } from '../primitives/ProseText.jsx';
  * displayed correctly but was invisible to pdftotext, leaving DMs with
  * "blank" sections when they grep'd the file.
  */
-function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBottom = 3, index = null }) {
+function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBottom = 3 }) {
   if (value == null || value === '') return null;
   return (
     <View style={{ flexDirection: 'row', marginBottom, alignItems: 'flex-start' }}>
@@ -47,10 +45,7 @@ function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBo
         {String(l || '').toUpperCase()}
       </Text>
       <Text style={{ ...type.body, fontSize: pt['9.5'], flex: 1, lineHeight: multiline ? 1.4 : 1.3 }}>
-        {/* When an entity index is supplied, the value may carry ⟦entity:…⟧
-            tokens (NPC goal prose) — render through ProseText so they become
-            inline EntityRef links; otherwise it's plain text. */}
-        {index ? <ProseText text={String(value)} index={index} /> : safe(value)}
+        {String(value)}
       </Text>
     </View>
   );
@@ -58,13 +53,10 @@ function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBo
 
 export function NotableNPCs({ settlement, narrativeMode, vm }) {
   const all = vm.npcs.sorted; // already sorted desc by power
-  const index = vm.entityIndex; // Phase-D: id»card resolver (anchors + links)
-  // Relative tiering: top 3 (or any with power ≥ 8) → major; next 4 → notable.
-  // NPC power is a 1-10 scale (npcGenerator: high 8-10, mid 4-7, low 1-3); the
-  // old 80 threshold was 0-100 and could never promote anyone.
+  // Relative tiering: top 3 (or any with power ≥ 80) → major; next 4 → notable.
   const majorMin = 3;
   const notableMin = 4;
-  const HIGH_POWER = 8;
+  const HIGH_POWER = 80;
   const major = [];
   const notable = [];
   const other = [];
@@ -104,7 +96,7 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
             MAJOR FIGURES
           </Text>
           {major.map((npc, i) => (
-            <FullCard key={`maj-${i}`} npc={npc} index={index} />
+            <FullCard key={`maj-${i}`} npc={npc} />
           ))}
         </View>
       )}
@@ -115,7 +107,7 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             NOTABLE FIGURES
           </Text>
-          <CompactGrid items={notable} index={index} />
+          <CompactGrid items={notable} />
         </View>
       )}
 
@@ -125,23 +117,18 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
           <Text style={{ ...type.label, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
             OTHER NAMES OF NOTE
           </Text>
-          <OtherNamesGrid items={other} index={index} />
+          <OtherNamesGrid items={other} />
         </View>
       )}
     </PageChrome>
   );
 }
 
-function FullCard({ npc, index }) {
-  const name = safe(npc.name || 'Unnamed');
-  const title = safe(npc.title || '');
-  // Phase-D: this card is the anchor TARGET for any npc.id reference.
-  const anchor = anchorTarget(index, npc.id);
-  // The faction affiliation links to the faction card when it resolves in-doc.
-  const factionLinks = !!(index && npc.factionLink && index.resolve?.(npc.factionLink));
+function FullCard({ npc }) {
+  const name = stripZwnj(npc.name || 'Unnamed');
+  const title = stripZwnj(npc.title || '');
   return (
     <View
-      id={anchor}
       style={{
         marginBottom: 8,
         padding: 8,
@@ -150,13 +137,7 @@ function FullCard({ npc, index }) {
         borderRadius: 2,
         backgroundColor: palette.card,
       }}
-      // Was wrap={false}: for a top-power NPC with a long AI blurb + several
-      // secrets/plot-hooks, the (unbounded) card exceeds a full page, and react-pdf
-      // cannot split a no-wrap block — so it CLIPPED the overflow tail, silently
-      // dropping secrets/hooks on the settlement's most important NPC. Allowing the
-      // card to wrap breaks it across a page boundary instead: never lossy. The
-      // occasional split card is an acceptable cost vs. dropping DM-critical content.
-      wrap
+      wrap={false}
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
         <View style={{ flex: 1 }}>
@@ -170,13 +151,7 @@ function FullCard({ npc, index }) {
           )}
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
-          {npc.factionLabel && (
-            <Pill tone="cool">
-              {factionLinks
-                ? <EntityRef id={npc.factionLink} index={index} type="faction" fallback={npc.factionLabel} />
-                : npc.factionLabel}
-            </Pill>
-          )}
+          {npc.factionLabel && <Pill tone="cool">{npc.factionLabel}</Pill>}
           <View style={{ width: 4 }} />
           <Pill tone="gold">PWR {npc.power}</Pill>
         </View>
@@ -194,7 +169,7 @@ function FullCard({ npc, index }) {
 
       {npc.influenceDescription && (
         <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2, fontStyle: 'italic' }}>
-          {safe(npc.influenceDescription)}
+          {npc.influenceDescription}
         </Text>
       )}
 
@@ -202,7 +177,7 @@ function FullCard({ npc, index }) {
       {npc.blurb && (
         <View style={{ marginTop: 4 }}>
           <Text style={{ ...type.body, fontSize: pt['9.5'], lineHeight: 1.4 }}>
-            {safe(npc.blurb)}
+            {stripZwnj(npc.blurb)}
           </Text>
         </View>
       )}
@@ -211,7 +186,7 @@ function FullCard({ npc, index }) {
       <View style={{ marginTop: 4 }}>
         <TextRow label="PERSONALITY" value={npc.personality} multiline />
         <TextRow label="APPEARANCE"  value={npc.appearance}  multiline />
-        <TextRow label="MOTIVATION"  value={npc.motivation}  multiline index={index} />
+        <TextRow label="MOTIVATION"  value={npc.motivation}  multiline />
       </View>
 
       {/* Secrets */}
@@ -221,19 +196,12 @@ function FullCard({ npc, index }) {
             SECRETS
           </Text>
           {npc.secrets.map((s, si) => {
-            // Mirror cleanSecrets' admittance criteria (viewModel.js): object secrets
-            // can carry only what/stakes/label. The old text||description-only read
-            // dropped those even though the slice deliberately preserved them.
-            const t = typeof s === 'string'
-              ? s
-              : (s?.text || s?.description ||
-                 (s?.what ? (s.stakes ? `${s.what}: ${s.stakes}` : s.what) : '') ||
-                 s?.stakes || s?.label || '');
+            const t = typeof s === 'string' ? s : (s?.text || s?.description || '');
             if (!t) return null;
             return (
               <View key={`sec-${si}`} style={{ flexDirection: 'row', marginBottom: 1, alignItems: 'flex-start' }}>
                 <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>·</Text>
-                <Text style={{ ...type.body, fontSize: pt['9'], flex: 1 }}>{safe(t)}</Text>
+                <Text style={{ ...type.body, fontSize: pt['9'], flex: 1 }}>{t}</Text>
               </View>
             );
           })}
@@ -268,8 +236,8 @@ function FullCard({ npc, index }) {
           {npc.relationships.map((r, ri) => (
             <Text key={`rel-${ri}`} style={{ ...type.caption, color: palette.second, fontSize: pt['8'] }}>
               · {label(r?.with || r?.target || r?.name)}
-              {r?.type ? safe(` - ${r.type}`) : ''}
-              {r?.description ? safe(` - ${r.description}`) : ''}
+              {r?.type ? ` - ${r.type}` : ''}
+              {r?.description ? ` - ${r.description}` : ''}
             </Text>
           ))}
         </View>
@@ -282,7 +250,7 @@ function FullCard({ npc, index }) {
  * OtherNamesGrid — 2-col tight list for the long-tail "also exists" tier.
  * Each row is a single line: name · title · faction · PWR.
  */
-function OtherNamesGrid({ items, index }) {
+function OtherNamesGrid({ items }) {
   const rows = [];
   for (let i = 0; i < items.length; i += 2) {
     rows.push([items[i], items[i + 1] || null]);
@@ -292,10 +260,10 @@ function OtherNamesGrid({ items, index }) {
       {rows.map((pair, ri) => (
         <View key={`og-${ri}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
           <View style={{ flex: 1, marginRight: 6 }}>
-            {pair[0] && <OtherNameRow npc={pair[0]} index={index} />}
+            {pair[0] && <OtherNameRow npc={pair[0]} />}
           </View>
           <View style={{ flex: 1 }}>
-            {pair[1] && <OtherNameRow npc={pair[1]} index={index} />}
+            {pair[1] && <OtherNameRow npc={pair[1]} />}
           </View>
         </View>
       ))}
@@ -303,11 +271,9 @@ function OtherNamesGrid({ items, index }) {
   );
 }
 
-function OtherNameRow({ npc, index }) {
-  const anchor = anchorTarget(index, npc.id);
+function OtherNameRow({ npc }) {
   return (
     <View
-      id={anchor}
       style={{
         flexDirection: 'row',
         alignItems: 'baseline',
@@ -317,17 +283,17 @@ function OtherNameRow({ npc, index }) {
       wrap={false}
     >
       <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>
-        {safe(npc.name || 'Unnamed')}
+        {stripZwnj(npc.name || 'Unnamed')}
       </Text>
       {npc.title && (
         <Text style={{ ...type.body, color: palette.second, fontSize: pt['8.5'], marginLeft: 4, flex: 1 }}>
-          · {safe(npc.title)}
+          · {stripZwnj(npc.title)}
         </Text>
       )}
       {!npc.title && <View style={{ flex: 1 }} />}
       {npc.factionLabel && (
         <Text style={{ ...type.caption, color: palette.cool, fontSize: pt['7.5'], marginLeft: 4 }}>
-          {safe(npc.factionLabel)}
+          {npc.factionLabel}
         </Text>
       )}
       <Text style={{ ...type.label, color: palette.muted, marginLeft: 5, fontSize: pt['7'] }}>
@@ -342,7 +308,7 @@ function OtherNameRow({ npc, index }) {
  * vertical footprint so the chapter fits more characters per page without
  * crowding the Major Figures cards.
  */
-function CompactGrid({ items, index }) {
+function CompactGrid({ items }) {
   const rows = [];
   for (let i = 0; i < items.length; i += 2) {
     rows.push([items[i], items[i + 1] || null]);
@@ -352,10 +318,10 @@ function CompactGrid({ items, index }) {
       {rows.map((pair, ri) => (
         <View key={`cg-${ri}`} style={{ flexDirection: 'row', marginBottom: 4 }}>
           <View style={{ flex: 1, marginRight: 5 }}>
-            {pair[0] && <CompactCard npc={pair[0]} index={index} />}
+            {pair[0] && <CompactCard npc={pair[0]} />}
           </View>
           <View style={{ flex: 1 }}>
-            {pair[1] && <CompactCard npc={pair[1]} index={index} />}
+            {pair[1] && <CompactCard npc={pair[1]} />}
           </View>
         </View>
       ))}
@@ -363,14 +329,11 @@ function CompactGrid({ items, index }) {
   );
 }
 
-function CompactCard({ npc, index }) {
-  const name = safe(npc.name || 'Unnamed');
-  const title = safe(npc.title || '');
-  const anchor = anchorTarget(index, npc.id);
-  const factionLinks = !!(index && npc.factionLink && index.resolve?.(npc.factionLink));
+function CompactCard({ npc }) {
+  const name = stripZwnj(npc.name || 'Unnamed');
+  const title = stripZwnj(npc.title || '');
   return (
     <View
-      id={anchor}
       style={{
         padding: 6,
         border: `0.4pt solid ${palette.border}`,
@@ -393,19 +356,13 @@ function CompactCard({ npc, index }) {
               {title}
             </Text>
           )}
-          {npc.factionLabel && (
-            <Tag tone="cool">
-              {factionLinks
-                ? <EntityRef id={npc.factionLink} index={index} type="faction" fallback={npc.factionLabel} />
-                : npc.factionLabel}
-            </Tag>
-          )}
+          {npc.factionLabel && <Tag tone="cool">{npc.factionLabel}</Tag>}
         </View>
       )}
       {npc.motivation && (
         <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, marginTop: 2, lineHeight: 1.3 }}>
           <Text style={{ color: palette.faint }}>Motive: </Text>
-          {safe(npc.motivation)}
+          {npc.motivation}
         </Text>
       )}
       {npc.plotHooks?.length > 0 && (

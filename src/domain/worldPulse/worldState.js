@@ -3,12 +3,6 @@ import { normalizeSimulationRules } from './simulationRules.js';
 import { wallClockNow } from '../clock.js';
 import { deepClone } from '../clone.js';
 import { stablePart } from './stablePart.js';
-import { INTERVAL_WEEKS } from './intervalWeeks.js';
-import { migrateTreatyClockMarkers } from './treatyClock.js';
-import { compareCodepoint } from '../deterministicSort.js';
-import { isWarReasonType } from './warReasonTaxonomy.js';
-import { normalizeJoinAnchor } from './warCoalitionLedger.js';
-import { migrateDispositionStats } from './dispositionLedger.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 2;
 
@@ -30,11 +24,14 @@ const MAX_PENDING = 400;
 // (never accumulates float months), so coarse == weekly holds by integer
 // construction.
 //
-// The dependency-free intervalWeeks.js leaf is the SINGLE-SOURCE interval →
-// week-count table (weeksPerInterval in advanceInterval.js re-exports it
-// verbatim; keep them one object). This historic import path remains an identity
-// re-export for every existing consumer.
-export { INTERVAL_WEEKS };
+// This is the SINGLE-SOURCE interval → week-count table (weeksPerInterval in
+// advanceInterval.js re-exports it verbatim; keep them one object).
+export const INTERVAL_WEEKS = Object.freeze({
+  one_week: 1,
+  one_month: 4,
+  one_season: 13,
+  one_year: 52,
+});
 
 const MONTHS_PER_YEAR = 12;  // regular 12-month display year over 52 weeks
 const WEEKS_PER_YEAR = 52;
@@ -104,51 +101,6 @@ function deepCloneLedger(value) {
   return value && typeof value === 'object' && !Array.isArray(value) ? deepClone(value) : {};
 }
 
-// WR-1 persistence law: deployments are a durable war ledger, but their founding
-// casus list is a CLOSED taxonomy rather than an arbitrary import surface. Rebuild
-// the outer ledger in deterministic key order, retain every deployment field, and
-// keep only well-shaped reasons whose type the live taxonomy knows. An invalid or
-// exhausted casus list disappears instead of surviving as an empty artifact. The
-// whole input is cloned first, so retained nested receipts never alias the loaded
-// save; no schema bump is needed because the additive field remains optional.
-/** @param {unknown} value */
-function normalizeDeployments(value) {
-  const cloned = deepCloneLedger(value);
-  /** @type {Record<string, unknown>} */
-  const normalized = {};
-  for (const key of Object.keys(cloned).sort(compareCodepoint)) {
-    const record = cloned[key];
-    if (!record || typeof record !== 'object' || Array.isArray(record)) {
-      normalized[key] = record;
-      continue;
-    }
-    const next = { ...record };
-    if (Object.prototype.hasOwnProperty.call(next, 'casusReasons')) {
-      const reasons = Array.isArray(next.casusReasons)
-        ? next.casusReasons.filter((/** @type {unknown} */ reason) => (
-          reason && typeof reason === 'object' && !Array.isArray(reason)
-          && isWarReasonType((/** @type {Record<string, unknown>} */ (reason)).type)
-        ))
-        : [];
-      if (reasons.length) next.casusReasons = reasons;
-      else delete next.casusReasons;
-    }
-    // WR-6: `joinLedger` is exactly one closed anchor, never an extensible
-    // membership surface.  Validate it against the owning deployment key and
-    // target; malformed, empty, or multi-row imports disappear fail-closed.
-    if (Object.prototype.hasOwnProperty.call(next, 'joinLedger')) {
-      const anchor = Array.isArray(next.joinLedger) && next.joinLedger.length === 1
-        && Number.isInteger(Number(next.sinceTick)) && Number(next.sinceTick) >= 0
-        ? normalizeJoinAnchor(next.joinLedger[0], key, next.targetId, next.sinceTick)
-        : null;
-      if (anchor) next.joinLedger = [anchor];
-      else delete next.joinLedger;
-    }
-    normalized[key] = next;
-  }
-  return normalized;
-}
-
 // CONDITIONAL ledger clone (the pantheon). UNLIKE the additive ledgers above, the
 // pantheon is CONDITIONALLY MATERIALIZED: it must be ABSENT from worldState while
 // religion is dormant so a legacy/deity-free campaign stays byte-identical under
@@ -161,17 +113,6 @@ function deepCloneConditionalLedger(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
   if (Object.keys(value).length === 0) return undefined;
   return deepClone(value);
-}
-
-// FIRST-PAINT TRUST BOUNDARY. Live world state has already crossed persisted
-// hydration or the envoy family's single writer. The hot normalizer therefore
-// preserves and DEEP-clones the admitted rows; it must not import the cold,
-// strict DTO family. Raw cache/cloud/RPC rows enter through
-// worldStateHydration.js, which injects that validator into the same body below.
-// @enforced-by tests/build/envoyPersistenceHydrationLazy.test.js
-/** @param {unknown} value */
-function cloneAdmittedEnvoyErrands(value) {
-  return Array.isArray(value) ? deepClone(value) : [];
 }
 
 // DEEP-FREEZE (idempotent): recursively Object.freeze an object/array graph. Used
@@ -223,10 +164,11 @@ function freezeConditionalLedger(value) {
 // is written across ticks and MUST keep deep-cloning to avoid pre-tick-snapshot aliasing.
 const FROZEN_CONDITIONAL_LEDGER_KEYS = new Set(['spatialDigest']);
 
-// Forward-compatible VERSIONED worldState migration chain. Modelled on
-// settlementMigrations: each entry bumps a breaking shape, while additive ledgers
-// still normalize from absence without a schema bump. Same-version nested repairs
-// run explicitly after this ordered chain (see runWorldStateMigrations below).
+// Forward-compatible worldState migration chain. Empty today (schemaVersion stays
+// 1; the new ledgers are ADDITIVE and need no migration — an absent key normalizes
+// to its empty default). Modelled on settlementMigrations: each entry bumps a
+// breaking shape. The first future BREAKING change registers its step here so the
+// upgrade path is explicit and ordered, never an ad-hoc inline coercion.
 /** @type {ReadonlyArray<{ to: number, migrate: (raw: any) => any }>} */
 const WORLD_STATE_MIGRATIONS = Object.freeze([
   // v2 — the per-settlement pantheon renamed its leading deity from "chief" to
@@ -262,11 +204,7 @@ const WORLD_STATE_MIGRATIONS = Object.freeze([
 /** @param {any} raw */
 export function runWorldStateMigrations(raw = {}) {
   const input = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
-  const versioned = WORLD_STATE_MIGRATIONS.reduce((state, step) => step.migrate(state), input);
-  // Treaty clock markers are a SAME-VERSION nested migration: the outer world
-  // shape remains v2, while pre-correction treaties retain their historical
-  // twelve-tick horizons and marked treaties preserve their authored clock.
-  return migrateTreatyClockMarkers(versioned);
+  return WORLD_STATE_MIGRATIONS.reduce((state, step) => step.migrate(state), input);
 }
 
 /** @param {any} campaign */
@@ -425,21 +363,6 @@ export const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   // settlementPolitics mover forms ≥1 bloc under its virtual flag; absent/empty ⇒
   // key omitted ⇒ byte-identical-dormant (the narrativeTempo precedent). APPEND-ONLY.
   'politicsLedgers',
-  // D-7c FACTION-PAIR LEDGER (worldState.factionPairStates, DESIGN_DEEP_COUPLINGS D-7c):
-  // { pairKey → { trust, resentment, ... } } — mutable across ticks (pair trust/resentment
-  // build + decay), additive, absent-when-dark, drop-when-empty: identical lifecycle to
-  // politicsLedgers/narrativeTempo. Missing from this list left it BOTH un-empty-stripped
-  // (an empty {} survived ensureWorldState, breaking dormancy byte-identity) and un-deep-
-  // cloned (undo/clone shared the ledger by reference). Rides the mutable
-  // deepCloneConditionalLedger branch. Materialized ONLY under the memoryWeave flag;
-  // absent/empty ⇒ key omitted ⇒ byte-identical-dormant. APPEND-ONLY. [lifecycle-2]
-  'factionPairStates',
-  // WR-7a THE ERRAND — the only top-level conditional ARRAY.  Accepted peace
-  // offers can remain physically in transit across save/reload and undo, so the
-  // durable traveller rows belong in worldState rather than proposal or news
-  // state.  The owning normalizer validates, bounds, sorts, and deep-clones the
-  // closed records; absent/non-array/empty ⇒ key omitted. APPEND-ONLY.
-  'envoyErrands',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR
@@ -457,21 +380,10 @@ function normalizeSpatialCanonVersion(value) {
   return Number.isInteger(value) && value > 0 ? value : null;
 }
 
-/**
- * Shared world-state materializer. The third argument is an internal composition
- * seam: eager live callers use the deep structural clone; the cold persisted
- * hydrator injects the envoy family's strict validator exactly once.
- */
-export function ensureWorldStateWithEnvoyNormalizer(
-  rawInput = {},
-  campaign = {},
-  normalizeEnvoyRows = cloneAdmittedEnvoyErrands,
-) {
+export function ensureWorldState(rawInput = {}, campaign = {}) {
   const raw = runWorldStateMigrations(rawInput);
   const base = createDefaultWorldState(campaign);
   const calendar = raw?.calendar && typeof raw.calendar === 'object' ? raw.calendar : {};
-  const tick = Math.max(0, Math.floor(finite(raw?.tick, 0)));
-  const simulationRules = normalizeSimulationRules(raw?.simulationRules);
   // The SHALLOW `...cloneObject(raw)` spread would otherwise carry a
   // present-but-EMPTY conditional ledger (e.g. `pantheon:{}`) through to the
   // result, breaking dormancy. Strip every conditional key from the shallow
@@ -492,21 +404,17 @@ export function ensureWorldStateWithEnvoyNormalizer(
     // The FROZEN keys (spatialDigest) are shared by reference (deep-frozen) so the
     // ~11 ensures per tick stop cloning the 47-400KB digest and hand back a stable
     // identity; every other conditional ledger deep-clones (mutable across ticks).
-    const materialized = key === 'envoyErrands'
-      ? normalizeEnvoyRows(raw?.[key])
-      : FROZEN_CONDITIONAL_LEDGER_KEYS.has(key)
-        ? freezeConditionalLedger(raw?.[key])
-        : deepCloneConditionalLedger(raw?.[key]);
-    if (Array.isArray(materialized)
-      ? materialized.length > 0
-      : materialized !== undefined) conditionalLedgers[key] = materialized;
+    const materialized = FROZEN_CONDITIONAL_LEDGER_KEYS.has(key)
+      ? freezeConditionalLedger(raw?.[key])
+      : deepCloneConditionalLedger(raw?.[key]);
+    if (materialized !== undefined) conditionalLedgers[key] = materialized;
   }
   return {
     ...base,
     ...shallowRaw,
     schemaVersion: WORLD_STATE_SCHEMA_VERSION,
     canonizedAt: raw?.canonizedAt || null,
-    tick,
+    tick: Math.max(0, Math.floor(finite(raw?.tick, 0))),
     calendar: {
       ...base.calendar,
       ...calendar,
@@ -528,7 +436,7 @@ export function ensureWorldStateWithEnvoyNormalizer(
     },
     rngSeed: raw?.rngSeed || base.rngSeed,
     volatility: ['calm', 'normal', 'turbulent'].includes(raw?.volatility) ? raw.volatility : base.volatility,
-    simulationRules,
+    simulationRules: normalizeSimulationRules(raw?.simulationRules),
     stressors: cloneStressors(raw?.stressors),
     relationshipStates: cloneObject(raw?.relationshipStates),
     npcStates: cloneObject(raw?.npcStates),
@@ -539,14 +447,8 @@ export function ensureWorldStateWithEnvoyNormalizer(
     pendingEvents: cloneArray(raw?.pendingEvents).slice(-MAX_PENDING),
     // DEEP-cloned (not the shallow `...cloneObject(raw)` spread above) so a
     // pre-tick snapshot never aliases live ledger state across ticks.
-    // WR-2 is a same-schema, flag-gated extension of the EXISTING ledger. Absent or
-    // explicit false preserves the legacy shape exactly. Only an explicit true folds
-    // the old signed score into martial stock and materializes the other neutral
-    // channels; dispositionLedger owns that migration so it remains the one writer.
-    dispositionStats: simulationRules.dispositionChannelsEnabled === true
-      ? migrateDispositionStats(deepCloneLedger(raw?.dispositionStats), tick)
-      : deepCloneLedger(raw?.dispositionStats),
-    deployments: normalizeDeployments(raw?.deployments),
+    dispositionStats: deepCloneLedger(raw?.dispositionStats),
+    deployments: deepCloneLedger(raw?.deployments),
     tradeWarState: deepCloneLedger(raw?.tradeWarState),
     warExhaustion: deepCloneLedger(raw?.warExhaustion),
     // Spatial-canon marker — present ONLY when the raw carried a valid version
@@ -560,19 +462,6 @@ export function ensureWorldStateWithEnvoyNormalizer(
     // ONLY when its deep-cloned value is present and non-empty.
     ...conditionalLedgers,
   };
-}
-
-/**
- * Hot/live normalization. `envoyErrands` must already be admitted; persisted or
- * otherwise untrusted worlds must use `hydratePersistedWorldState` from the cold
- * hydration module instead.
- */
-export function ensureWorldState(rawInput = {}, campaign = {}) {
-  return ensureWorldStateWithEnvoyNormalizer(
-    rawInput,
-    campaign,
-    cloneAdmittedEnvoyErrands,
-  );
 }
 
 /**

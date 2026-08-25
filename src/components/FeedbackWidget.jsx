@@ -22,13 +22,13 @@
  * open/submit state) so that mount is a one-liner. Styling uses this tree's
  * theme vocabulary only — no new raw colors.
  */
-import { useState, useEffect } from 'react';
-import { X, Check } from 'lucide-react';
+import { useState } from 'react';
+import { MessageSquare, X, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase, isConfigured } from '../lib/supabase.js';
 import { deriveGenerationId } from '../lib/generationTelemetry.js';
 import useIsMobile from '../hooks/useIsMobile.js';
-import { INK, BODY, MUTED, BORDER, CARD, sans, SP, FS, swatch, CHROME, bottomClearance } from './theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, sans, SP, R, FS, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 
 export default function FeedbackWidget({ visible = true }) {
@@ -44,14 +44,6 @@ export default function FeedbackWidget({ visible = true }) {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(null);
-
-  // The floating button was retired (order W2-a-REVISED). The panel now opens from
-  // the footer's 'Feedback & support' control, which dispatches this app-wide event.
-  useEffect(() => {
-    const openPanel = () => setOpen(true);
-    window.addEventListener('sf:open-feedback', openPanel);
-    return () => window.removeEventListener('sf:open-feedback', openPanel);
-  }, []);
 
   if (!visible) return null;
 
@@ -93,22 +85,30 @@ export default function FeedbackWidget({ visible = true }) {
     }
   };
 
-  // The panel is footer-triggered now (the floating button was retired, W2-a-REVISED),
-  // but it still anchors bottom-right and clears the mobile bottom nav + home indicator
-  // via the shared bottomClearance(CHROME.fabLift) token while it is open.
+  // Sit above the mobile bottom nav; clear of the desktop edge otherwise.
   const anchor = {
     position: 'fixed',
     right: SP.lg,
-    bottom: isMobile ? bottomClearance(CHROME.fabLift) : SP.lg,
-    // M10: the FEEDBACK layer (910), one step above the post-generate coach
-    // (PostGenCoach, 900). Both are fixed bottom-right panels; before this they
-    // shared zIndex 900 and stacked ambiguously when shown together. An opened
-    // feedback panel now deterministically wins the corner. See the Z_LAYERS
-    // manifest (scripts/.ui-a11y-contract.json).
-    zIndex: 910,
+    bottom: isMobile ? 76 : SP.lg,
+    zIndex: 900,
   };
 
-  if (!open) return null; // no floating button — the panel shows only when opened
+  if (!open) {
+    return (
+      <div style={anchor}>
+        <Button
+          variant="primary"
+          size="md"
+          icon={<MessageSquare size={14} />}
+          onClick={() => setOpen(true)}
+          style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.18)' }}
+          aria-haspopup="dialog"
+        >
+          Feedback
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -120,13 +120,15 @@ export default function FeedbackWidget({ visible = true }) {
         maxWidth: 'calc(100vw - 32px)',
         background: CARD,
         border: `1px solid ${BORDER}`,
+        borderRadius: R.xl,
+        boxShadow: '0 8px 28px rgba(0,0,0,0.22)',
         padding: SP.lg,
         display: 'flex', flexDirection: 'column', gap: SP.md,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: SP.sm }}>
         <span style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: INK }}>
-          Feedback &amp; support
+          Send feedback
         </span>
         <Button variant="ghost" size="sm" icon={<X size={16} />} onClick={handleClose} aria-label="Close feedback" />
       </div>
@@ -142,11 +144,11 @@ export default function FeedbackWidget({ visible = true }) {
       ) : (
         <>
           <p style={{ fontSize: FS.sm, color: BODY, margin: 0, lineHeight: 1.5 }}>
-            Feedback, questions, comments, concerns, or troubleshooting. It goes straight to the team.
+            Tell us what is working or what is not. It goes straight to the team.
           </p>
 
           {error && (
-            <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch['#FAF8F4'], borderLeft: `3px solid ${swatch.danger}`, fontSize: FS.sm, color: swatch.danger }}>
+            <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
               {error}
             </div>
           )}
@@ -160,7 +162,7 @@ export default function FeedbackWidget({ visible = true }) {
               onChange={e => setEmail(e.target.value)}
               style={{
                 width: '100%', padding: `${SP.sm + 2}px ${SP.md}px`,
-                border: `1px solid ${BORDER}`,
+                border: `1px solid ${BORDER}`, borderRadius: R.md,
                 fontSize: FS.sm, fontFamily: sans, outline: 'none', boxSizing: 'border-box',
               }}
             />
@@ -174,7 +176,7 @@ export default function FeedbackWidget({ visible = true }) {
             rows={4}
             style={{
               width: '100%', padding: `${SP.sm + 2}px ${SP.md}px`,
-              border: `1px solid ${BORDER}`,
+              border: `1px solid ${BORDER}`, borderRadius: R.md,
               fontSize: FS.sm, fontFamily: sans, outline: 'none',
               resize: 'vertical', boxSizing: 'border-box',
             }}
@@ -183,16 +185,6 @@ export default function FeedbackWidget({ visible = true }) {
           {generationRef && (
             <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
               This note will include a reference to the settlement you are viewing, so we can find it.
-            </div>
-          )}
-
-          {/* Auto-ID (W2-a-REVISED): a signed-in submission carries the account's
-              unique id (auth.user.id → the support_messages.user_id column, already
-              on the payload above), disclosed in the same microcopy voice. Anonymous
-              submitters send with just their email and no account id. */}
-          {signedIn && (
-            <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
-              Sent from your account, so we can follow up.
             </div>
           )}
 

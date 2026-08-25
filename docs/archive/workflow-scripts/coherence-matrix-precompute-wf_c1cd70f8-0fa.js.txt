@@ -1,0 +1,103 @@
+export const meta = {
+  name: 'coherence-matrix-precompute',
+  description: 'Pre-compute the Round-3 coherence pair-matrix: classify every system-pair coupling and surface gated completion candidates',
+  phases: [
+    { title: 'Rows', detail: 'one agent per system evaluates its couplings to all others' },
+    { title: 'Synthesis', detail: 'dedup the matrix, apply the four gates, rank candidates' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd'
+const ROADS_WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/the-roads'
+
+const SYSTEMS = [
+  { key: 'war', desc: 'warfare/deployment/supply-web-warfare — armies, fronts, sieges, mobilization' },
+  { key: 'occupation', desc: 'the occupation 5-rung ladder — a settlement held/vassalized by another' },
+  { key: 'migration', desc: 'population migration — masses moving between settlements (counts, named-NPC-safe)' },
+  { key: 'trade', desc: 'trade/supply web, commodity flow, smuggling, sea lanes, entrepots' },
+  { key: 'rumor_intel', desc: 'information statecraft — rumor network, belief-map propagation, infoMode, espionage' },
+  { key: 'beliefs', desc: 'belief-maps — what a settlement believes about others (strength/relationship/faith)' },
+  { key: 'traditions', desc: 'traditions/culture kernel — festivals, observances, culture vectors, reframes' },
+  { key: 'ladder', desc: 'the intra-faction rank ladder — promotions, challenges, standing decay, rivalries' },
+  { key: 'corruption', desc: 'the corruption/compromised web — covert/revealed, foreign patrons, scarcity gates' },
+  { key: 'generosity', desc: 'the generosity engine — the six instruments, gifts/debts' },
+  { key: 'calamity_upswing', desc: 'calamity + upswing arcs — disasters, recoveries, discovery, the arc bucket' },
+  { key: 'roads', desc: 'THE ROADS (NEW, on claude/the-roads @ the-roads worktree, NOT yet folded into the composite) — named-NPC travel, capture, ransom, conversion, embassies' },
+  { key: 'politics', desc: 'politics/legitimacy/ownership — publicLegitimacy, ownership stakes, coups, seats, factionCompetition' },
+  { key: 'prosperity', desc: 'prosperity/economy — prosperity bands, economic state, resource dynamics' },
+  { key: 'religion', desc: 'religion — deities, religious legitimacy, faith arcs, clergy' },
+]
+
+const ROW_SCHEMA = {
+  type: 'object',
+  required: ['home', 'pairs'],
+  properties: {
+    home: { type: 'string' },
+    home_anchors: { type: 'array', items: { type: 'string' }, description: 'file:line anchors for the home system itself' },
+    pairs: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['other', 'classification', 'rationale'],
+        properties: {
+          other: { type: 'string', description: 'the other system key' },
+          classification: { type: 'string', enum: ['COHERENT', 'INCOHERENT_DEFECT', 'MISSING_WITH_FOUNDATION', 'MISSING_NO_FOUNDATION', 'ORTHOGONAL'] },
+          home_reads_other: { type: 'boolean' },
+          other_reads_home: { type: 'boolean' },
+          rationale: { type: 'string', description: '1-3 sentences: what the coupling is or why it is absent' },
+          evidence: { type: 'string', description: 'file:line anchors supporting the classification (or "none — logical inference" if absent-by-design)' },
+          candidate_gate_verdict: { type: 'string', description: 'ONLY for MISSING_WITH_FOUNDATION: the four gates — existing-machinery-both-sides? dormancy-safe? soak-bandable? not-owner-parked? — PASS/FAIL each with one clause, plus a one-line build sketch' },
+        },
+      },
+    },
+  },
+}
+
+phase('Rows')
+const PRE = (home) => `READ-ONLY coherence recon on the SettlementForge simulation engine. Home tree: the composite worktree at ${WT} (branch claude/the-composite @ aad6265e — verify with git -C ${WT} log --oneline -1; mismatch = say so in home_anchors and continue). For the ROADS system ONLY, its code lives on a SEPARATE worktree ${ROADS_WT} (branch claude/the-roads, NOT yet folded) — read there for roads, and when classifying any pair that INVOLVES roads, mark it provisional (prefix rationale with "PENDING-ROADS-FOLD:"). You make ZERO edits and ZERO git mutations (read-only git is fine). Search src/domain (esp. src/domain/worldPulse and src/domain/spatial), src/lib, and tests.
+
+YOUR HOME SYSTEM: "${home.key}" — ${home.desc}.
+
+TASK: (1) locate the home system's implementation (kernels, state, the tick-time entry points) and record file:line anchors. (2) For EACH of the OTHER 14 systems, classify the coupling between home and that system:
+- COHERENT: a coupling exists and is sensible (home reads the other's state, or vice-versa, in a way the world's logic wants). Cite the anchor.
+- INCOHERENT_DEFECT: a coupling exists but is WRONG/inconsistent (a real defect for the loop to fix). Cite it.
+- MISSING_WITH_FOUNDATION: NO coupling today, but BOTH systems expose consumable state such that a logical/intuitive coupling COULD be built with existing machinery (this is the owner's coherence-mandate target — a CANDIDATE). Name the state on both sides and give the four-gate verdict.
+- MISSING_NO_FOUNDATION: a coupling would be logical but would require a NEW subsystem (deferred seam, not a loop build).
+- ORTHOGONAL: no logical coupling; these systems legitimately do not interact.
+
+THE FOUR GATES (for every MISSING_WITH_FOUNDATION candidate, in candidate_gate_verdict): G1 existing machinery on BOTH sides (no new subsystem)? G2 obeys the dark/dormancy constitution (a new coupling stays byte-identical when either system's flag is off)? G3 has a bounded, soak-certifiable effect? G4 not owner-parked scope? PASS/FAIL each with a one-clause reason, then a one-line build sketch (what reads what, which writer deposits).
+
+Evaluate ALL 14 other systems (the full row — the synthesis pass dedups the mirror). Ground every COHERENT/INCOHERENT/DEFECT call in a file:line anchor; MISSING/ORTHOGONAL calls may cite "none — logical inference" but must name the state that would be involved. Your output is data for a manager assembling the canonical matrix — be precise, not verbose.`
+
+const rows = await parallel(SYSTEMS.map((sys) => () =>
+  agent(PRE(sys), { label: 'row:' + sys.key, phase: 'Rows', schema: ROW_SCHEMA, model: 'sonnet' })
+))
+
+const validRows = rows.filter(Boolean)
+log(`${validRows.length}/${SYSTEMS.length} system rows returned`)
+
+phase('Synthesis')
+const SYN_SCHEMA = {
+  type: 'object',
+  required: ['pair_count', 'defects', 'candidates_gated_in', 'candidates_gated_out', 'disagreements', 'summary'],
+  properties: {
+    pair_count: { type: 'number', description: 'count of unique unordered pairs classified (should be ~105)' },
+    class_tally: { type: 'string', description: 'count per classification across the deduped upper triangle' },
+    defects: { type: 'array', items: { type: 'string' }, description: 'INCOHERENT_DEFECT pairs — "A×B: <what is wrong> [anchor]"' },
+    candidates_gated_in: { type: 'array', items: { type: 'string' }, description: 'MISSING_WITH_FOUNDATION that PASS all four gates — "A×B: <build sketch> | gates PASS" — ranked by value/effort' },
+    candidates_gated_out: { type: 'array', items: { type: 'string' }, description: 'MISSING_WITH_FOUNDATION that FAIL a gate — "A×B: <which gate failed, why> → deferred-seam / owner-queue"' },
+    disagreements: { type: 'array', items: { type: 'string' }, description: 'pairs the two endpoint-rows classified DIFFERENTLY — these are the most informative; name both verdicts' },
+    summary: { type: 'string', description: 'the state of world-coherence in 4-6 sentences: how coupled is the engine, where are the real gaps, what should the loop build first' },
+  },
+}
+const synthesis = await agent(
+  `You are assembling the canonical Round-3 COHERENCE MATRIX for the SettlementForge engine from ${validRows.length} per-system row reports (each classified that system's coupling to all others). The rows are below as JSON.
+
+DO: (1) DEDUP — each unordered pair {A,B} appears in both A's row and B's row; collapse to one canonical verdict. (2) Where the two endpoint-rows DISAGREE on a pair's classification, record it in "disagreements" with both verdicts (these reveal the subtle gaps — a system whose owner thinks it's coupled but whose counterpart doesn't see the read). (3) Collect every INCOHERENT_DEFECT into "defects". (4) Split every MISSING_WITH_FOUNDATION candidate by its four-gate verdict: all-PASS → "candidates_gated_in" (ranked most-valuable-and-cheapest first — these are what the loop BUILDS); any-FAIL → "candidates_gated_out" with the failing gate named. (5) tally classifications across the ~105-pair upper triangle. (6) Write the summary. Be rigorous: a candidate only gates IN if a fresh reader would agree all four gates pass on the cited evidence.
+
+ROW REPORTS:
+${JSON.stringify(validRows)}`,
+  { label: 'synthesize-matrix', phase: 'Synthesis', schema: SYN_SCHEMA }
+)
+
+return { rows: validRows, synthesis }

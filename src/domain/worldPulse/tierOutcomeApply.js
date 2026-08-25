@@ -19,22 +19,7 @@
 
 import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { POPULATION_RANGES, TIER_ORDER, popToTier, tierAtLeast } from '../../data/constants.js';
-import {
-  isMaterializedCustomContent,
-} from '../content/customContentSemanticAuthority.js';
 import { stablePart } from './stablePart.js';
-
-/**
- * Boolean wrapper around the shared type guard. SimInstitution is already an
- * open record, so using the guard directly in a negative branch would narrow
- * the remaining native record to `never` under strict checking.
- *
- * @param {unknown} institution
- * @returns {boolean}
- */
-function hasCustomContentProvenance(institution) {
-  return isMaterializedCustomContent(institution);
-}
 
 /** @param {any} tier */
 export function entriesForTier(tier) {
@@ -63,22 +48,10 @@ export function catalogEntryByName(name) {
   return null;
 }
 
-/**
- * Standing institutions that may satisfy native catalog obligations.
- *
- * Unstamped legacy rows retain their historical name semantics. Current
- * custom definitions carry exact provenance and must satisfy only their
- * authored mechanics, never a built-in requirement with the same label.
- *
- * @param {import('../settlement.schema.js').SimSettlement} settlement
- */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 export function existingInstitutionNames(settlement) {
   return new Set((settlement?.institutions || [])
-    .filter((/** @type {any} */ inst) => (
-      inst?.status !== 'removed'
-      && !inst?._worldPulseInactive
-      && !hasCustomContentProvenance(inst)
-    ))
+    .filter((/** @type {any} */ inst) => inst?.status !== 'removed' && !inst?._worldPulseInactive)
     .map((/** @type {any} */ inst) => String(inst.name || '').toLowerCase()));
 }
 
@@ -122,10 +95,6 @@ function promotionAdditions(settlement, toTier) {
  */
 function shouldRemoveForDemotion(inst, toTier) {
   if (!inst || inst.status === 'removed' || inst._worldPulseInactive) return false;
-  // Custom definitions obey their own reviewed tier contract. A presentation
-  // label equal to a catalog institution must never inherit that native
-  // institution's demotion fate.
-  if (hasCustomContentProvenance(inst)) return false;
   if (inst._worldPulseTierAdded && inst.requiredForTier && !tierAtLeast(toTier, inst.requiredForTier)) return true;
   const entry = catalogEntryByName(inst.name);
   if (!entry) return false;
@@ -170,58 +139,6 @@ function deactivateForDemotion(inst, outcome, toTier) {
 }
 
 /**
- * ADOPTION — a settled tier shift restamps the roster's required contracts.
- *
- * At the tier that declares the name required, the institution IS the tier's
- * contract regardless of how it arrived (manager ruling 2026-07-27). `required`
- * is scoped to the tier whose catalog declares it, and a tier shift moves the
- * settlement to a NEW catalog — so a surviving record the new tier genuinely
- * requires owes that contract from this moment on, whatever its provenance.
- *
- * The bite this closes: a demoted city's cascade-seated 'Town watch'
- * (`required: false`, `cascadeAdded: true`) lands in a town whose catalog
- * requires that exact name. Closure was already covered by
- * isClosableInstitution's settlement-tier backstop, but the FLAG-based readers
- * (calamity strikes, scale-ladder collapse, upgrade chains) cannot see the
- * settlement's tier and would still have struck the town's own watch.
- *
- * `source: 'cascade'` is left untouched — it is the historical record of where
- * the institution came from, and hasCascadeProvenance deliberately ignores it.
- * The symmetric RELEASE (a promoted settlement's now-stale `required: true`, a
- * town's 'Town watch' riding into a city) is deliberately NOT done here: that is
- * pre-existing behavior and a separate, un-asked ruling. The read-time tier
- * backstop in isClosableInstitution remains the net for saves that never pass
- * through a tier shift.
- *
- * @param {import('../settlement.schema.js').SimInstitution[]} institutions
- *   the roster AFTER demotion/promotion surgery
- * @param {string} toTier
- * @returns {import('../settlement.schema.js').SimInstitution[]}
- */
-function adoptRequiredContractsForTier(institutions, toTier) {
-  const requiredNames = new Set(
-    requiredInstitutionsForTier(toTier).map(entry => entry.name.toLowerCase()),
-  );
-  return institutions.map((inst) => {
-    if (!inst || typeof inst !== 'object') return inst;
-    // Custom definitions answer to their own reviewed contract, never a native
-    // tier requirement that happens to share their presentation label.
-    if (hasCustomContentProvenance(inst)) return inst;
-    const status = String(inst.status || 'active');
-    if (status === 'removed' || status === 'remnant' || status === 'ruined') return inst;
-    if (inst._worldPulseInactive) return inst;
-    if (!requiredNames.has(String(inst.name || '').toLowerCase())) return inst;
-    // Already its own contract — return the SAME object (no gratuitous rewrite).
-    if (inst.required === true && inst.cascadeAdded !== true) return inst;
-    // Clear the borrowed-seat stamp by ABSENCE: `cascadeAdded: true` is the only
-    // form the cascade producer ever writes, so absent is what "not borrowed"
-    // looks like everywhere else in the tree.
-    const { cascadeAdded: _borrowedSeatStamp, ...adopted } = inst;
-    return { ...adopted, required: true };
-  });
-}
-
-/**
  * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} outcome
  */
@@ -246,7 +163,6 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
     const additions = promotionAdditions(settlement, toTier);
     const reactivated = new Set();
     institutions = institutions.map(inst => {
-      if (hasCustomContentProvenance(inst)) return inst;
       const match = additions.find(entry => entry.name.toLowerCase() === String(inst?.name || '').toLowerCase());
       if (!match || !(inst.status === 'removed' || inst._worldPulseInactive)) return inst;
       reactivated.add(match.name.toLowerCase());
@@ -294,44 +210,21 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
     });
   }
 
-  // The roster has settled (demotion removals/deactivations, promotion additions
-  // and reactivations are all in) — now it answers to the NEW tier's catalog.
-  // Applied on BOTH directions: the rule is tier-keyed, not direction-keyed.
-  institutions = adoptRequiredContractsForTier(institutions, toTier);
-
   // Promotion nudges population to at least the new tier's floor. Eligibility
   // promotes at pop >= nextTier.min * 0.92, so without this a just-promoted
   // settlement sits below its own tier's currentMin and can trip
   // `strainedBelowFloor` (pop < currentMin && support < 0.45) on the very next
   // tick — a promote/demote churn loop at the boundary. Demotion leaves
   // population untouched (the population already fell; the tier is catching up).
-  //
-  // ── WAVE P1a, LAW 4: DAMAGE TRANSMUTES, PEOPLE ACCOUNT ────────────────────────
-  // (docs/DESIGN_DEMOGRAPHIC_ENGINE.md §1 law 4, §5 earned ascension, §0b's explicit
-  // finding that "PROMOTION IS NOT CONSERVED" and must be dispositioned before the
-  // conservation check can be exact.) The bump above is a MINT: it creates people out
-  // of a label change, and the realm total moves without a birth. Lit, that is illegal,
-  // and the design's answer is not a smaller mint but a stricter door: tier drift's
-  // eligibility requires the FULL next-tier minimum when the demographic engine is on,
-  // so the gap this bump was covering does not exist and nobody has to be invented to
-  // fill it. The population must already be there.
-  //
-  // The stamp rides on the OUTCOME rather than being read from the rules because a
-  // proposal applies from the stored outcome many ticks later and this applier never
-  // sees the rules. Absent (every dark campaign, and the DM SHIFT_TIER verb, which does
-  // its own sovereign rebanding before it ever reaches this line) ⇒ the legacy mint,
-  // byte for byte, which a golden depends on.
-  const populationConserved = outcome.tierChange.populationConserved === true;
-  const mints = direction === 'promotion' && !populationConserved;
   const promotedFloor = /** @type {any} */ (POPULATION_RANGES)[toTier]?.min || 0;
   const currentPopulation = Math.round(Number(settlement.population) || 0);
-  const nextPopulation = mints
+  const nextPopulation = direction === 'promotion'
     ? Math.max(currentPopulation, promotedFloor)
     : currentPopulation; // demotion leaves population untouched (already the rounded current value)
   // The anti-churn floor bump is a deliberate (unconserved) mint — leave a
   // populationHistory breadcrumb (same shape as applyPopulationOutcomeToSettlement's)
   // so the chronicle/audit surfaces can see it instead of an invisible population jump.
-  const floorBump = mints ? Math.max(0, nextPopulation - currentPopulation) : 0;
+  const floorBump = direction === 'promotion' ? Math.max(0, nextPopulation - currentPopulation) : 0;
 
   return {
     ...settlement,

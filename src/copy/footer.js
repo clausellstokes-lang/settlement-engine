@@ -33,8 +33,7 @@ export const footer = {
   discord:  'Discord',
   privacy:  'Privacy',
   terms:    'Terms',
-  refunds:  'Refunds',
-  contact:  'Feedback & support',
+  contact:  'Contact',
   copyright: '© {year} SettlementForge',
 };
 

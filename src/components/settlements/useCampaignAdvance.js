@@ -37,13 +37,13 @@ export const ADVANCE_REFUSAL_TEXT = Object.freeze({
  * @param {(campaignId: string, interval?: string) => Promise<any>} deps.advanceCampaignWorld
  * @param {(campaignId: string) => void} deps.setActiveCampaign
  * @param {(view: string) => void} [deps.onNavigate]
- * @returns {{ advanceError: string | null, setAdvanceError: (v: string | null) => void,
+ * @returns {{ advanceError: string, setAdvanceError: (v: string) => void,
  *   handleAdvanceCampaignTime: (campaignId: string, interval?: string) => Promise<void> }}
  */
 export function useCampaignAdvance({ advanceCampaignWorld, setActiveCampaign, onNavigate }) {
-  const [advanceError, setAdvanceError] = useState(null);
+  const [advanceError, setAdvanceError] = useState('');
   const handleAdvanceCampaignTime = useCallback(async (campaignId, interval = 'one_month') => {
-    setAdvanceError(null);
+    setAdvanceError('');
     const result = await advanceCampaignWorld(campaignId, interval);
     const reason = result?.ok === false ? String(result.reason || result.code || '') : '';
     // A paused advance is not an error — it parks a decision; fall through to the

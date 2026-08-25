@@ -22,22 +22,15 @@
  */
 
 import { flag } from '../../lib/flags.js';
-import { plotHookText } from '../../lib/proseSeams.js';
-import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
+import {
+  criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
+  deriveDefenseReadiness, deriveArmedForces, DEFENSE_STRESS_STATUS,
+} from '../../domain/display/defenseDisplay.js';
+import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
-import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
 import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
-import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
-import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
-import { factionIdFromName } from '../../lib/entities.js';
-import { ownerGenerationContracts } from './generationContracts.js';
-// The four settlement-body chapters and the shared small readers moved out under
-// THE DECOMPOSITION WAVE (lane D); buildViewModel below still calls them in the
-// same order with the same arguments.
-import { economicsSlice, defenseSlice, servicesSlice, resourcesSlice } from './viewModelBodySlices.js';
-import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -55,6 +48,18 @@ const TIER_LABELS = {
   town: 'Town', city: 'City', metropolis: 'Metropolis',
 };
 
+/**
+ * settlement.stress is sometimes an array, sometimes a single stress
+ * object, sometimes null/undefined — depends on which generator path
+ * produced the settlement. Normalize to array at every read site so the
+ * downstream code can iterate uniformly. Caught by the PDF section
+ * smoke tests in tests/pdf/sections.smoke.test.js.
+ */
+function stressArray(s) {
+  if (Array.isArray(s?.stress)) return s.stress;
+  if (s?.stress) return [s.stress];
+  return [];
+}
 
 /**
  * Coerce a prose value that may be a string, a {primary, ...} object, or an
@@ -69,7 +74,59 @@ function coerceProse(v) {
   return String(v);
 }
 
+/**
+ * Food-balance core fields, shared by the raw + active slices. Behind the
+ * canonicalViewModel flag these come from the display model (which reads the
+ * real dailyProduction/dailyNeed fields and applies the §1c "Not calculated"
+ * fallback); otherwise the legacy shape is preserved verbatim. `viability`
+ * is the economicViability object (not the whole settlement).
+ */
+// imports cover this % of the pre-import gap (qty ÷ rawDeficit). Mirrors the web
+// EconomicsTab ("Trade covers X% of gap"). importCoverage is a QUANTITY (lb/day),
+// NOT a percent — printing it directly produced the bogus "imports cover 15929%".
+// Falls back to 100% of the import qty when the gap is unknown.
+function coveragePct(ic, rd) {
+  return ic > 0 ? Math.round((ic / (rd || ic)) * 100) : null;
+}
 
+function foodCore(viability) {
+  const fb = viability?.metrics?.foodBalance || null;
+  if (flag('canonicalViewModel')) {
+    const m = deriveFoodBalance({ economicViability: viability });
+    return {
+      production: m.produced,
+      need:       m.needed,
+      deficit:    m.deficit || null,
+      surplus:    m.surplus || null,
+      importCoverage: m.importCoverage,
+      rawDeficit: m.rawDeficit,
+      coveragePct: coveragePct(m.importCoverage, m.rawDeficit),
+      deficitPct: m.deficitPct,
+      display:    m.display,
+      detail:     m.detail,
+    };
+  }
+  // The engine emits dailyProduction/dailyNeed; the old .production/.need reads
+  // left the flag-off PDF showing "Not calculated" and losing the deficit %.
+  const prod = fb?.dailyProduction ?? fb?.production ?? null;
+  const need = fb?.dailyNeed ?? fb?.need ?? null;
+  const legacyNeed = Number(need) || 0;
+  const legacyDef = Number(fb?.deficit) || 0;
+  return {
+    production: prod,
+    need,
+    deficit:    fb?.deficit ?? null,
+    surplus:    fb?.surplus ?? null,
+    importCoverage: fb?.importCoverage ?? null,
+    rawDeficit: fb?.rawDeficit ?? null,
+    coveragePct: coveragePct(fb?.importCoverage, fb?.rawDeficit),
+    // Residual deficit ÷ daily need — the SAME "% of need" the flag-on branch and
+    // the screen show. NOT the engine's gross fb.deficitPercent (deficit ÷
+    // adjustedNeed, pre-import), which disagrees on every import-dependent
+    // settlement. (A+ pdf.2 — one fact, one derivation, even on the killswitch path.)
+    deficitPct: legacyNeed > 0 && legacyDef > 0 ? Math.round((legacyDef / legacyNeed) * 100) : null,
+  };
+}
 
 /**
  * Viability summary (§1f). Behind canonicalViewModel, the reconciled verdict
@@ -138,19 +195,8 @@ export function buildViewModel({
     // dormant ⇒ chapter renders nothing.
     liveWorld: buildPdfLiveWorld({ settlement: raw, campaign }),
 
-    // Entity index the PDF EntityRef primitive resolves ⟦entity:…⟧ tokens
-    // against (NotableNPCs / Institutions / NPCQuickRef read vm.entityIndex).
-    // Built from the canonical `raw` save so ids are stable across the raw/ai
-    // pair; additive (derived from existing fields), so a non-narrative export
-    // is byte-identical except for the additive in-PDF <Link> anchors. When a
-    // token's id does not resolve, EntityRef degrades to plain <Text>.
-    entityIndex:   buildDossierEntityIndex(raw),
-
     summary:       summarySlice(active, ai, useAi, aiDailyLife),
-    // Identity prose may follow the selected raw/AI presentation, but generation
-    // contracts are owner facts from the canonical save. Passing both prevents a
-    // partial AI overlay from hiding or rewriting the culture/coherence receipt.
-    identity:      identitySlice(active, raw),
+    identity:      identitySlice(active),
     overview:      overviewSlice(active, ai, useAi),
     daily:         dailySlice(active, aiDailyLife),
     power:         powerSlice(active),
@@ -180,6 +226,11 @@ function getGoverningFaction(active) {
   return factions.find(f => f?.isGoverning) || null;
 }
 
+function avgScore(scores) {
+  const vals = Object.values(scores || {}).filter(v => typeof v === 'number');
+  if (!vals.length) return null;
+  return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+}
 
 // ── slice builders ──────────────────────────────────────────────────────────
 
@@ -249,7 +300,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
   };
 }
 
-function identitySlice(s, canonical = s) {
+function identitySlice(s) {
   const ec = s?.economicState || {};
   const dp = s?.defenseProfile || {};
   const sp = ec?.safetyProfile || {};
@@ -270,7 +321,6 @@ function identitySlice(s, canonical = s) {
     tradeAccess:    s?.config?.tradeRouteAccess || null,
     governmentType: s?.powerStructure?.governmentType || s?.governmentType || null,
     founding:       s?.history?.founding || null,
-    ...ownerGenerationContracts(canonical, s),
     quarters:       (s?.spatialLayout?.quarters || []).map(q => ({
       name: q?.name || 'Quarter',
       // engine field is `desc`; the old `description`-only read printed nothing.
@@ -285,7 +335,7 @@ function identitySlice(s, canonical = s) {
       safety:         sp?.safetyLabel || null,
       foodDeficit:    food.deficit ?? null,
       foodSurplus:    food.surplus ?? null,
-      culturalNotes:  canonical?.culturalNotes ?? s?.culturalNotes ?? null,
+      culturalNotes:  s?.culturalNotes || null,
       magicDependency: !!dp?.magicDependency,
       magicalCapability: dp?.magicalCapability || null,
       defenseLabel:   dp?.readiness?.label || null,
@@ -433,10 +483,6 @@ function powerSlice(active) {
   const s = active || {};
   const factionList = s?.powerStructure?.factions || s?.factions || [];
   const factions = factionList.map(f => ({
-    // Phase-D anchor identity — the canonical faction id (snake) the index keys
-    // factions by and an NPC's `factionLink` resolves to. The faction card uses
-    // it to set its own anchor target; mentions elsewhere link to it.
-    id:          factionIdFromName(f?.faction || f?.name || f?.label) || null,
     name:        f?.faction || f?.name || '',
     power:       f?.power || 0,
     rawPower:    f?.rawPower ?? null,
@@ -501,27 +547,310 @@ function powerSlice(active) {
     governanceFractured: !!s?.powerStructure?.publicLegitimacy?.governanceFractured,
     criminalCapture: s?.powerStructure?.criminalCaptureState || null,
     governmentType:  s?.powerStructure?.governmentType || s?.governmentType || null,
-    // Rule & Succession lineage — the conquest/coup provenance the engine records
-    // on `previousGovernments` (warDeployment mints a `conquest`-cause transfer
-    // when a siege falls). Self-gating: an empty array renders nothing, so a
-    // settlement with no regime history is byte-identical.
-    lineage: (Array.isArray(s?.powerStructure?.previousGovernments)
-      ? s.powerStructure.previousGovernments
-      : []).map(g => ({
-        government: g?.government || g?.governingName || g?.name || null,
-        cause: g?.cause || null,
-        tick: Number.isFinite(g?.tick) ? g.tick : null,
-        by: g?.by || g?.successor || null,
-      })).filter(g => g.government || g.cause),
     conflicts,
     tensions,
   };
 }
 
+// Pull the human resource name off an exploitation chain entry (engine stores
+// it as `rawResource`; tolerate a few legacy shapes + bare strings).
+const exploitName = (c) =>
+  typeof c === 'string' ? c : (c?.rawResource || c?.resource || c?.chainKey || c?.name || '');
 
+function economicsSlice(active) {
+  const s = active || {};
+  const ec = s?.economicState || {};
+  const v = s?.economicViability || {};
+  const ra = s?.resourceAnalysis || {};
+  const sp = ec?.safetyProfile || {};
 
+  // Economic flows / chains
+  const chains = (ec?.activeChains || []).map(c => ({
+    name: c?.name || c?.chainName || 'Chain',
+    status: c?.status || 'productive',
+    processingInstitutions: c?.processingInstitutions || c?.processing || [],
+    outputs: c?.outputs || [],
+    dependency: c?.dependency || null,
+    incomeContribution: c?.incomeContribution ?? null,
+    description: c?.description || null,
+    hooks: c?.plotHooks || [],
+    isService: c?.isService || c?.kind === 'service',
+  }));
 
+  // §14 — confirmed custom supply chains (display-only; separate from the
+  // simulated activeChains so they never feed impairment math).
+  const customChains = (ec?.customChains || []).map(c => ({
+    name: c?.label || c?.name || c?.chainId || 'Custom chain',
+    resource: c?.resource || null,
+    processingInstitutions: c?.processingInstitutions || [],
+    outputs: c?.outputs || [],
+  }));
 
+  // Shadow economy
+  const shadow = sp?.shadowEconomy || s?.shadowEconomy || {};
+
+  return {
+    prosperity:         ec.prosperity || null,
+    economicComplexity: ec.economicComplexity || null,
+    economyOutput:      ec.compound?.economyOutput ?? null,
+    tradeAccess:        ec.tradeAccess || s?.config?.tradeRouteAccess || null,
+    incomeSources:      normalizeIncomeSources(ec.incomeSources || []),
+    primaryExports:     ec.primaryExports || [],
+    primaryImports:     ec.primaryImports || [],
+    customTradeLabels:  ec.customTradeLabels || { exports: [], imports: [] },  // §14 — mark these custom
+    customCategoryExports: ec.customCategoryExports || {},  // §14 — folded category → [member good names]
+    customCategoryImports: ec.customCategoryImports || {},
+    tradeLinks:         ec.tradeLinks || [],   // §14 Phase 3b — good-level neighbour trade
+    localProduction:    ec.localProduction || [],
+    tradeDependencies:  ec.tradeDependencies || [],
+    necessityImports:   !!ec.necessityImports,
+    isEntrepot:         !!ec.isEntrepot,
+    safetyHooks:        sp?.plotHooks || [],
+    // pdf-6: the COMPLEMENT of the Viability filter — only the dependency/
+    // resource-chain/opportunity/food issues belong on the Economics chapter, so
+    // a single engine issue prints in exactly one chapter (never twice).
+    viabilityIssues:    (v?.issues || []).filter(iss => !isViabilityItem(iss) && iss?.severity !== 'by_design' && iss?.type !== 'stress_consequence').map(iss => ({
+      severity: iss?.severity,
+      title: iss?.title,
+      description: iss?.description,
+      institution: iss?.institution,
+      priorityNote: iss?.priorityNote,
+      suggestedFixes: iss?.suggestedFixes || [],
+    })),
+    viabilityHooks:     v?.plotHooks || [],
+    foodBalance: {
+      ...foodCore(v),
+      agricultureModifier: v?.metrics?.foodBalance?.agricultureModifier ?? null,
+      stressModifier: v?.metrics?.foodBalance?.stressModifier ?? null,
+      summary: v?.foodSecurity?.summary || v?.metrics?.foodBalance?.summary || null,
+    },
+    criticalImports:    ra?.imports?.critical || [],
+    chains,
+    customChains,
+    serviceChains:      chains.filter(c => c.isService),
+    shadowEconomy: {
+      captureRate:
+        shadow?.captureRate ??
+        (typeof sp?.blackMarketCapture === 'number'
+          ? sp.blackMarketCapture
+          : sp?.blackMarketCapture?.score) ??
+        null,
+      // Operations = the safety profile's criminal institutions (same source the
+      // web Economics tab uses), each tagged with its economic role.
+      operations: (sp?.criminalInstitutions || []).map((name) => ({
+        name,
+        econ: criminalOpEcon(name),
+      })),
+      // Criminal supply chains = the criminal-economy category of active chains.
+      criminalChains: (ec?.activeChains || [])
+        .filter((c) => c?.needKey === 'criminal_economy')
+        .map((c) => `${String(c?.chainId || '').replace(/_/g, ' ')} · ${c?.status || 'active'}`.trim()),
+      crimeTypes: sp?.crimeTypes || shadow?.crimeTypes || [],
+    },
+    // Normalize exploitation to resource-name arrays the section renders
+    // directly. Engine shape is { fullyExploited, partiallyExploited,
+    // unexploited }, each a chain object whose resource lives in `rawResource`.
+    resourceExploitation: {
+      full:        (ra?.exploitation?.fullyExploited || []).map(exploitName).filter(Boolean),
+      partial:     (ra?.exploitation?.partiallyExploited || []).map(exploitName).filter(Boolean),
+      unexploited: (ra?.exploitation?.unexploited || []).map(exploitName).filter(Boolean),
+    },
+    terrainCriticals: ra?.terrainCriticals || [],
+  };
+}
+
+function defenseSlice(active) {
+  const s = active || {};
+  const dp = s?.defenseProfile || {};
+  const sp = s?.economicState?.safetyProfile || {};
+  const stress = stressArray(s);
+
+  // Defense readiness rows (reframed threat assessment) + grouped armed forces,
+  // both shared with the web Defense tab via deriveDefenseReadiness/Forces.
+  const threatReadiness = deriveDefenseReadiness(s);
+  const armedForces = deriveArmedForces(s);
+
+  // Active military status override (from stress). Match on the stressor TYPE the
+  // engine emits, via the SHARED DEFENSE_STRESS_STATUS set the web DefenseTab uses,
+  // so print and screen can never drift (pdf-4).
+  const militaryStress = stress.find(x => DEFENSE_STRESS_STATUS[x?.type]);
+
+  // Criminal architecture. Operations come from the safety profile's criminal
+  // institutions (the source the web Defense tab uses), each carrying an
+  // enforcement note; criminalStructure classifies the overall organization.
+  const criminalCapture = s?.powerStructure?.criminalCaptureState || sp?.criminalCapture || null;
+  const criminalOps = (sp?.criminalInstitutions || []).map((name) => ({
+    name,
+    note: criminalOpNote(name),
+  }));
+  const criminalStructure = deriveCriminalStructure(s);
+  const criminalFaction = (s?.powerStructure?.factions || s?.factions || []).find(f => (f?.category || '').toLowerCase() === 'criminal') || null;
+  const orderHooks = sp?.plotHooks || [];
+
+  return {
+    scores:                dp.scores || {},
+    scoreAvg:              avgScore(dp.scores),
+    threatReadiness,
+    militaryStress,
+    readiness:             dp.readiness || null,
+    guardAssessment:       s?.guardAssessment || dp?.guardAssessment || null,
+    institutions:          dp.institutions || {},
+    armedForces,
+    safetyLabel:           sp.safetyLabel || null,
+    safetyRatio:           sp.safetyRatio,
+    criminalInstitutions:  sp.criminalInstitutions || [],
+    crimeTypes:            sp.crimeTypes || [],
+    blackMarketCapture:    sp.blackMarketCapture || null,
+    // foodSecurity lives on economicState (economicGenerator), not
+    // economicViability; prefer the defense profile's disaster score when the
+    // generator persists one, keep the old path for legacy saves.
+    foodResilience:        s?.defenseProfile?.scores?.disaster ??
+                           s?.economicState?.foodSecurity?.resilienceScore ??
+                           s?.economicViability?.foodSecurity?.resilienceScore ?? null,
+    tradeAccess:           s?.config?.tradeRouteAccess || null,
+    stress,
+    criminalCapture,
+    criminalOps,
+    criminalStructure,
+    criminalFaction,
+    orderHooks,
+    publicOrder: s?.publicOrder || null,
+    lawEnforcement: s?.lawEnforcement || null,
+    // Computed from defense scores + institution presence, mirroring the web
+    // Defense tab (the engine does not emit these as fields).
+    supportingCapabilities: deriveSupportingCapabilities(s),
+    vulnerabilities: dp?.vulnerabilities || s?.defenseVulnerabilities || [],
+    // Surfaced for defenseHeadline (it reads def.magicDependency).
+    magicDependency: !!dp?.magicDependency,
+    magicalCapability: dp?.magicalCapability || null,
+  };
+}
+
+function servicesSlice(active) {
+  const s = active || {};
+  const institutions = s?.institutions || [];
+  const detailed = institutions.map(inst => ({
+    name: inst?.name || inst?.label || 'Institution',
+    category: inst?.category || 'other',
+    subCategory: inst?.subCategory || inst?.type || null,
+    status: inst?.status || 'healthy',
+    statusReason: inst?.statusReason || inst?.statusNote || null,
+    servicesOffered: inst?.servicesOffered || inst?.services || [],
+    chainDepth: inst?.chainDepth ?? null,
+    source: inst?.source || null,
+    notableUnits: inst?.notableUnits || null,
+    notes: inst?.notes || null,
+    staffing: inst?.staffing || null,
+    // Extra detail: surface any narrative/structural fields the engine emits
+    description:    inst?.description || inst?.blurb || null,
+    leader:         inst?.leader || inst?.headedBy || inst?.master || null,
+    building:       inst?.building || inst?.location || inst?.quarter || null,
+    founded:        inst?.founded || inst?.foundedYear || null,
+    prominence:     inst?.prominence || inst?.scale || null,
+    capacity:       inst?.capacity || null,
+    requirements:   inst?.requirements || inst?.dependencies || [],
+    products:       inst?.products || inst?.outputs || [],
+    customers:      inst?.customers || inst?.clientele || [],
+    pressures:      inst?.pressures || inst?.stresses || [],
+    plotHooks:      inst?.plotHooks || [],
+    tags:           inst?.tags || [],
+  }));
+
+  // Health stats per category
+  const byCat = {};
+  for (const inst of detailed) {
+    const cat = inst.category;
+    if (!byCat[cat]) byCat[cat] = { total: 0, impaired: 0, degraded: 0, vulnerable: 0, healthy: 0 };
+    byCat[cat].total++;
+    const st = (inst.status || 'healthy').toLowerCase();
+    if (byCat[cat][st] != null) byCat[cat][st]++;
+  }
+
+  const totals = {
+    total: detailed.length,
+    impaired:  detailed.filter(i => (i.status || '').toLowerCase() === 'impaired').length,
+    degraded:  detailed.filter(i => (i.status || '').toLowerCase() === 'degraded').length,
+    vulnerable: detailed.filter(i => (i.status || '').toLowerCase() === 'vulnerable').length,
+  };
+
+  return {
+    available:      s?.availableServices || {},
+    activeChains:   s?.economicState?.activeChains || [],
+    tier:           s?.tier || null,
+    institutions,
+    detailed,
+    categoryHealth: Object.entries(byCat).map(([cat, h]) => ({ category: cat, ...h })),
+    totals,
+    // Computed (expected-for-tier minus available) — the engine doesn't emit
+    // this; the web ServicesTab derives it the same way.
+    notableAbsences: deriveNotableAbsences(s?.tier, s?.availableServices),
+  };
+}
+
+function resourcesSlice(active) {
+  const s = active || {};
+  const ra = s?.resourceAnalysis || {};
+  const v = s?.economicViability || {};
+  const cfg = s?.config || {};
+
+  // Convert exploitation lists into chain-flow rows. Engine keys are
+  // { fullyExploited, partiallyExploited, unexploited } (resourceGenerator
+  // evaluateInstitutions); fall back to the display key for legacy saves.
+  // Entries are RESOURCE_CHAINS objects — resource in `rawResource`,
+  // processing in `processingInstitutions[]`, outputs in `finalProducts[]`.
+  const exp = ra?.exploitation || {};
+  const EXP_KEYS = { full: 'fullyExploited', partial: 'partiallyExploited', unexploited: 'unexploited' };
+  const chainRows = [];
+  for (const [which, engineKey] of Object.entries(EXP_KEYS)) {
+    for (const item of (exp?.[engineKey] || exp?.[which] || [])) {
+      if (typeof item === 'string') {
+        if (item) chainRows.push({ resource: item, status: which, processing: null, output: null });
+      } else if (item) {
+        const resource = item?.rawResource || item?.resource || item?.chainKey || item?.name || '';
+        if (!resource) continue;
+        chainRows.push({
+          resource,
+          status: which,
+          processing: item?.processing || item?.institution ||
+                      (item?.processingInstitutions || []).join(', ') || null,
+          output: item?.output || item?.product ||
+                  (item?.finalProducts || item?.outputs || []).join(', ') || null,
+          chainStatus: item?.chainStatus || null,
+          quality: item?.quality || null,
+          accessibility: item?.accessibility || null,
+        });
+      }
+    }
+  }
+
+  // Split nearby resources into depleted vs abundant
+  const allNearby = ra.nearbyResources || cfg.nearbyResources || [];
+  const depletedSet = new Set(cfg.nearbyResourcesDepleted || []);
+  const depleted  = allNearby.filter(k => depletedSet.has(k));
+  const abundant  = allNearby.filter(k => !depletedSet.has(k));
+
+  return {
+    terrain:            ra.terrain || null,
+    strategicValue:     ra.strategicValue || null,
+    economicStrengths:  ra.economicStrengths || [],
+    exploitation:       exp,
+    imports:            ra.imports || {},
+    chainRows,
+    nearbyResources:    allNearby,
+    nearbyDepleted:     depleted,
+    nearbyAbundant:     abundant,
+    nearbyCustom:       cfg.nearbyResourcesCustom || [],   // §14 — gold-tint these
+    availableCommodities: ra?.availableResources || s?.availableResources || [],
+    // resourceAnalysis emits exports/gaps/priorityNotes (resourceGenerator); the
+    // old exportPotential/structuralGaps/v.priorityNotes reads never resolved.
+    exportPotential:    ra?.exports || ra?.exportPotential || s?.exportPotential || [],
+    priorityNotes:      ra?.priorityNotes || v?.priorityNotes || [],
+    structuralGaps:     ra?.gaps || ra?.structuralGaps || s?.structuralGaps || [],
+    terrainEffects:     ra?.terrainEffects || s?.terrainEffects || ra?.featureEffects || [],
+    terrainCriticals:   ra?.terrainCriticals || [],
+    terrainAdvantages:  ra?.terrainAdvantages || [],
+  };
+}
 
 // Arcane supply chains (mirrors computeActiveChains' arcane detection) — the
 // PDF Viability chapter renders these as "magically sustained" tags.
@@ -551,22 +880,6 @@ function viabilitySlice(active) {
   const byDesignContradictions = [...(v.issues || []), ...(s?.structuralViolations || [])]
     .filter(i => i?.severity === 'by_design');
   const activeMagicChains = (s?.economicState?.activeChains || []).filter(isArcaneChain);
-
-  // Magic legality facets — the 10-facet magic profile summarized
-  // for the Viability/Identity chapter, via the SAME summarizeMagic the screen
-  // Magic sub-tab reads. Self-gating: a dead-magic world (magicExists === false)
-  // yields { exists:false, lines:[] } ⇒ the section renders nothing extra, so a
-  // no-magic save is byte-identical. The profile is `null` for a null settlement.
-  const magicProf = deriveMagicProfile(s);
-  const magicProfile = magicProf
-    ? {
-        exists: magicProf.magicExists !== false,
-        legality: magicProf.legality || null,
-        availability: magicProf.availability || null,
-        institutionalControl: magicProf.institutionalControl || null,
-        lines: magicProf.magicExists === false ? [] : summarizeMagic(s),
-      }
-    : { exists: false, legality: null, availability: null, institutionalControl: null, lines: [] };
 
   return {
     viable:                v.viable,
@@ -599,7 +912,6 @@ function viabilitySlice(active) {
     magicDependency:       !!dp?.magicDependency,
     activeMagicChains:     v?.activeMagicChains?.length ? v.activeMagicChains : activeMagicChains,
     byDesignContradictions: v?.byDesignContradictions?.length ? v.byDesignContradictions : byDesignContradictions,
-    magicProfile,
   };
 }
 
@@ -696,14 +1008,7 @@ function npcsSlice(active) {
     }
     // Engine plotHooks is array of strings; titles aren't present as a separate field for some npcs
     const npcRace = n?.race || n?.culture || culture;
-    // Phase-D anchor identity. `id` keys this NPC's card anchor (matches the
-    // index entry built off the SAME raw npc); `factionLink` is the canonical
-    // faction id (== a faction card's id) the NPC's stated affiliation resolves
-    // to, so the affiliation chip can link to that faction with no name match.
-    const factionRefName = labelOfFactionRef(n?.factionAffiliation || n?.faction || n?.category);
     return {
-      id: n?.id || entityIdFor('npc', n),
-      factionLink: factionRefName ? factionIdFromName(factionRefName) : null,
       name: n?.name || 'Unnamed',
       title: n?.title || n?.role || n?.presentation || null,
       race: npcRace,
@@ -732,45 +1037,98 @@ function npcsSlice(active) {
   };
 }
 
-// Map the on-screen plot-hook CATEGORY (collectPlotHooks) to the PDF section's
-// SOURCE group key (PlotHooks.jsx groups + labels by `source`). Keeps the two
-// surfaces rendering the SAME hooks from the SAME aggregator.
-const HOOK_CATEGORY_TO_SOURCE = Object.freeze({
-  npc: 'npc',
-  faction: 'conflict',
-  tension: 'tension',
-  economics: 'crisis',
-  safety: 'crime',
-  history: 'history',
-  relationship: 'relationship',
-});
-
-// collectPlotHooks priority is a 0–9 NUMBER; the PDF section keys its priority
-// dot/tag off a BAND string (PRIORITY_TONE in PlotHooks.jsx).
-function hookPriorityBand(n) {
-  if (n >= 8) return 'high';
-  if (n >= 6) return 'medium';
-  return 'low';
-}
-
 function hooksSlice(active) {
   const s = active || {};
-  // PARITY: the on-screen Plot Hooks tab and the PDF chapter now BOTH derive from
-  // the shared aggregator (domain/dossier/plotHooks.collectPlotHooks) — same seven
-  // sources, same `PLOT HOOK:`-prefix cleanup, same priority sort. The previous
-  // hand aggregation here used a different source set (neighbour/prominent-
-  // relationship hooks instead of settlement.relationships), no sort, no cleanup,
-  // and a priority that was null for every plain-string hook. We adapt the shared
-  // output to the PDF section's {source, sourceName, hook, priority, category} shape.
-  const all = collectPlotHooks(s).map((h) => ({
-    source: HOOK_CATEGORY_TO_SOURCE[h.category] || 'other',
-    sourceName: h.source,
-    hook: h.text,
-    priority: hookPriorityBand(h.priority),
-    category: h.category,
-  }));
+  const hooks = [];
+  for (const npc of (s?.npcs || [])) {
+    for (const h of (npc?.plotHooks || [])) {
+      hooks.push({
+        source: 'npc',
+        sourceName: npc.name || npc.title || 'NPC',
+        hook: h,
+        priority: priorityOfHook(h),
+        category: categoryOfHook(h),
+      });
+    }
+  }
+  for (const c of (s?.conflicts || [])) {
+    for (const h of (c?.plotHooks || [])) {
+      hooks.push({
+        source: 'conflict',
+        sourceName: Array.isArray(c.parties) ? c.parties.join(' vs ') : 'Conflict',
+        hook: h,
+        priority: priorityOfHook(h),
+        category: categoryOfHook(h),
+      });
+    }
+  }
+  for (const h of (s?.economicState?.safetyProfile?.plotHooks || [])) {
+    hooks.push({
+      source: 'crime',
+      sourceName: 'Underworld',
+      hook: h,
+      priority: priorityOfHook(h),
+      category: categoryOfHook(h),
+    });
+  }
+  for (const h of (s?.economicViability?.plotHooks || [])) {
+    hooks.push({
+      source: 'crisis',
+      sourceName: 'Economic Crisis',
+      hook: h,
+      priority: priorityOfHook(h),
+      category: categoryOfHook(h),
+    });
+  }
+  // Tensions hooks
+  for (const t of (s?.history?.currentTensions || [])) {
+    for (const h of (t?.plotHooks || [])) {
+      hooks.push({
+        source: 'tension',
+        sourceName: t?.label || t?.type || 'Tension',
+        hook: h,
+        priority: priorityOfHook(h),
+        category: categoryOfHook(h),
+      });
+    }
+  }
+  // Relationship hooks
+  if (s?.prominentRelationship?.plotHooks) {
+    for (const h of s.prominentRelationship.plotHooks) {
+      hooks.push({
+        source: 'relationship',
+        sourceName: s.prominentRelationship?.otherSettlement || 'Neighbour',
+        hook: h,
+        priority: priorityOfHook(h),
+        category: categoryOfHook(h),
+      });
+    }
+  }
+  for (const n of (s?.neighbours || s?.neighbourNetwork || [])) {
+    for (const h of (n?.plotHooks || [])) {
+      hooks.push({
+        source: 'relationship',
+        sourceName: n?.neighbourName || n?.name || 'Neighbour',
+        hook: h,
+        priority: priorityOfHook(h),
+        category: categoryOfHook(h),
+      });
+    }
+  }
+  // History event hooks
+  for (const e of (s?.history?.historicalEvents || [])) {
+    for (const h of (e?.plotHooks || [])) {
+      hooks.push({
+        source: 'history',
+        sourceName: e?.type || 'Historical event',
+        hook: h,
+        priority: priorityOfHook(h),
+        category: categoryOfHook(h),
+      });
+    }
+  }
   return {
-    all,
+    all:      hooks,
     tensions: s?.history?.currentTensions || [],
   };
 }
@@ -783,26 +1141,14 @@ function relationshipsSlice(active) {
     crossConflicts:  s?.crossSettlementConflicts || [],
     crossNpcContacts: s?.crossSettlementNPCContacts || [],
     crossFactions:   s?.crossFactions || [],
-    neighbours:      (s?.neighbourNetwork || s?.neighbours || []).map(n => {
-      const name = n?.neighbourName || n?.name || 'Neighbour';
-      return {
-        // Phase-D anchor identity — matches the index's neighbourIdFor (the
-        // entry's own id, or a name-derived `neighbour.<slug>`). The card sets
-        // this as its anchor target; trade partners resolve to it.
-        id: n?.id || `neighbour.${slugifyEntity(name)}`,
-        name,
-        type: n?.relationshipType || n?.type || null,
-        // For the asymmetric pairs (overlord/vassal, patron/client), the
-        // directional label states WHICH SIDE this settlement is, naming the
-        // neighbour ("Overlord of X"); null for symmetric links / legacy rows,
-        // so the card keeps its plain titled label.
-        directionalLabel: directionalRelationshipLabel(n, name),
-        description: n?.description || null,
-        hooks: n?.plotHooks || [],
-        lastEvent: n?.lastEvent || null,
-        flavour: n?.flavour || n?.flavor || null,
-      };
-    }),
+    neighbours:      (s?.neighbourNetwork || s?.neighbours || []).map(n => ({
+      name: n?.neighbourName || n?.name || 'Neighbour',
+      type: n?.relationshipType || n?.type || null,
+      description: n?.description || null,
+      hooks: n?.plotHooks || [],
+      lastEvent: n?.lastEvent || null,
+      flavour: n?.flavour || n?.flavor || null,
+    })),
     neighborSingle:  s?.neighborRelationship || null,
     npcs:            s?.npcs || [],
     npcRelationships: s?.npcRelationships || [],
@@ -847,7 +1193,9 @@ function characterSentence(npc) {
 }
 
 function labelOfHook(h) {
-  return plotHookText(h);
+  if (!h) return '';
+  if (typeof h === 'string') return h;
+  return h.hook || h.text || h.description || h.title || '';
 }
 
 /**
@@ -886,9 +1234,41 @@ function normSeverity(s) {
  */
 function cleanHooks(arr) {
   if (!Array.isArray(arr)) return [];
-  return arr.filter(h => plotHookText(h).trim().length > 0);
+  return arr.filter(h => {
+    if (!h) return false;
+    if (typeof h === 'string') return h.trim().length > 0;
+    if (typeof h === 'object') {
+      return !!(h.hook || h.text || h.description || h.summary || h.title || h.label || h.body || h.content);
+    }
+    return false;
+  });
 }
 
+/**
+ * normalizeIncomeSources — engine emits incomeSources as either:
+ *   - array of { source, percentage }   (percentage = 0..100)
+ *   - array of { source, value }        (raw economy units)
+ * If percentages don't sum to ~100, treat as raw values and re-derive percent.
+ * The bar fill and the label MUST agree, otherwise the page reads broken.
+ */
+function normalizeIncomeSources(arr) {
+  if (!Array.isArray(arr) || arr.length === 0) return [];
+  const items = arr.map(s => ({
+    ...s,
+    raw: s?.percentage ?? s?.value ?? s?.amount ?? 0,
+  })).filter(s => Number(s.raw) > 0);
+  if (items.length === 0) return [];
+  const total = items.reduce((n, s) => n + Number(s.raw), 0);
+  // If the original "percentage" field already adds to ~100 (±5), trust it.
+  const pctSum = arr.reduce((n, s) => n + Number(s?.percentage || 0), 0);
+  const usePctField = pctSum >= 95 && pctSum <= 105;
+  return items.map(s => ({
+    ...s,
+    percentage: usePctField
+      ? Number(s.percentage || 0)
+      : (total > 0 ? (Number(s.raw) / total) * 100 : 0),
+  }));
+}
 
 /**
  * cleanRelationships — drop empty relationship entries (no target name).
@@ -905,6 +1285,18 @@ function cleanRelationships(arr) {
     }
     return false;
   });
+}
+
+function priorityOfHook(h) {
+  if (!h) return null;
+  if (typeof h === 'object') return h.priority || null;
+  return null;
+}
+
+function categoryOfHook(h) {
+  if (!h) return null;
+  if (typeof h === 'object') return h.category || null;
+  return null;
 }
 
 function firstSentence(s) {

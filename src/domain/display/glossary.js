@@ -68,41 +68,40 @@ function titleize(key) {
 
 /** capacityModel CAPACITY_BANDS — the strain instrument. */
 const STRAIN_DEFS = Object.freeze({
-  surplus:   'More capacity than the settlement needs. A cushion against a bad season.',
+  surplus:   'More capacity than the settlement needs — a cushion against a bad season.',
   adequate:  'Supply meets demand. The settlement is not straining here.',
   strained:  'Demand is outrunning supply; the margin is thin and a shock would bite.',
-  critical:  'Supply is far short of demand. This capacity is close to failing.',
+  critical:  'Supply is far short of demand — this capacity is close to failing.',
   collapsed: 'Demand dwarfs supply; the function has effectively broken down.',
-  absent:    'Neither supplied nor demanded. The capacity does not exist here at all.',
+  absent:    'Neither supplied nor demanded — the capacity does not exist here at all.',
 });
 
 /** corruption CAPTURE_LADDER — how far a criminal interest has taken a seat. */
 const CAPTURE_DEFS = Object.freeze({
-  none:        'No criminal capture. The seat answers to its lawful holder.',
+  none:        'No criminal capture — the seat answers to its lawful holder.',
   adversarial: 'A criminal interest is pushing at the seat, and the seat is pushing back.',
   equilibrium: 'The lawful holder and the criminal interest have reached an uneasy standoff.',
   corrupted:   'The criminal interest now bends the seat to its ends more often than not.',
-  capture:     'The seat is captured. The criminal interest owns its decisions outright.',
+  capture:     'The seat is captured — the criminal interest owns its decisions outright.',
 });
 
 /** affordanceManifest STRESSOR_SEVERITY_VALUES — the severity dial. */
 const SEVERITY_DEFS = Object.freeze({
-  minor:    'A light touch. The stressor nudges the settlement without upending it.',
+  minor:    'A light touch — the stressor nudges the settlement without upending it.',
   moderate: 'A real strain the settlement must reckon with, short of a crisis.',
-  severe:   'A heavy blow. The stressor forces the settlement toward crisis.',
+  severe:   'A heavy blow — the stressor forces the settlement toward crisis.',
 });
 
 /** affordanceManifest RELIEF_MAGNITUDE_VALUES — the generosity magnitude dial. */
 const MAGNITUDE_DEFS = Object.freeze({
-  token:    'A gesture: a small share of the giver’s surplus above its own floor.',
-  measured: 'A considered gift: a meaningful share of the surplus, kept sustainable.',
-  generous: 'An open hand: most of the giver’s surplus above its floor goes out.',
+  token:    'A gesture — a small share of the giver’s surplus above its own floor.',
+  measured: 'A considered gift — a meaningful share of the surplus, kept sustainable.',
+  generous: 'An open hand — most of the giver’s surplus above its floor goes out.',
 });
 
 // ── The compendium deep-link map per category (?tab= + #anchor exist) ─────────
 const LINK = Object.freeze({
-  // SystemsHub stamps id="living-world" (not "living"); point the verb lifeline there.
-  verb:            { tab: 'living', anchor: 'living-world' },
+  verb:            { tab: 'living', anchor: 'living' },
   'stability-band': { tab: 'stress', anchor: 'stress' },
   'strain-band':   { tab: 'stress', anchor: 'stress' },
   'capture-rung':  { tab: 'power', anchor: 'power' },

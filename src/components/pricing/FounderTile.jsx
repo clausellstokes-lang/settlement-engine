@@ -26,18 +26,13 @@ import { flag } from '../../lib/flags.js';
 import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
 import { startCheckout } from '../../lib/stripe.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { t } from '../../copy/index.js';
-import { sans, serif_, FS, SP, swatch } from '../theme.js';
+import { sans, serif_, FS, SP, R, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 const GOLD_500 = swatch['#C9A24C'];
 const GOLD_400 = swatch['#D9B566'];
 const INK_900 = swatch['#1B1408'];
 const INK_800 = swatch['#2C2210'];
-// The faint gold wash shared by the eyebrow badge and the P7 seat meter — named
-// once so the two reuse one value (this const replaces the eyebrow's inline
-// literal, so the file's rgba line count is unchanged).
-const GOLD_WASH = 'rgba(201,162,76,0.18)';
 
 export default function FounderTile() {
   const audience = useReaderAudience();
@@ -45,9 +40,6 @@ export default function FounderTile() {
   const recognitionEnabled = flag('founderRecognition');
   const [seatsRemaining, setSeatsRemaining] = useState(null);
   const [loading, setLoading] = useState(false);
-  // P10 — a $99 CTA that silently no-ops on failure is a dead-end worse than the
-  // sibling PricingPage path. Surface a domain-language error + a retry path.
-  const [error, setError] = useState(null);
 
   // Pull live seat counter once on mount. If the RPC errors, we leave
   // seatsRemaining null and fall back to the static "limited seats" copy.
@@ -85,23 +77,14 @@ export default function FounderTile() {
   if (!eligible) return null;
 
   const claimSeat = seatsRemaining ? FOUNDER_SEAT_CAP - seatsRemaining + 1 : null;
-  // P7 — same computation as the PricingPage founder card so the seat-scarcity
-  // meter reads identically on both surfaces (the fraction of seats taken).
-  const seatsPct = typeof seatsRemaining === 'number'
-    ? Math.min(100, Math.max(0, ((FOUNDER_SEAT_CAP - seatsRemaining) / FOUNDER_SEAT_CAP) * 100))
-    : null;
 
   async function handleClick() {
     setLoading(true);
-    setError(null);
     Funnel.track(EVENTS.FOUNDER_TILE_CLICKED, { seatsRemaining, audience });
     try {
       await startCheckout('founder_lifetime');
     } catch (e) {
-      // Keep the raw error in the console; show a recoverable, domain-language
-      // message inline so the highest-value CTA is never a silent dead-end.
       console.warn('[FounderTile] checkout failed:', e);
-      setError(t('purchase.failureMessage'));
     } finally {
       setLoading(false);
     }
@@ -112,7 +95,7 @@ export default function FounderTile() {
       maxWidth: 380, margin: `${SP.lg}px auto`,
       background: `linear-gradient(180deg, ${INK_900} 0%, ${INK_800} 100%)`,
       border: `1.5px solid ${GOLD_500}`,
-      overflow: 'hidden',
+      borderRadius: R.lg, overflow: 'hidden',
       boxShadow: '0 12px 32px rgba(27,20,8,0.40)',
       fontFamily: sans,
     }}>
@@ -123,8 +106,8 @@ export default function FounderTile() {
       }}>
         <div style={{
           display: 'inline-block',
-          padding: '3px 10px',
-          background: GOLD_WASH,
+          padding: '3px 10px', borderRadius: R.sm,
+          background: 'rgba(201,162,76,0.18)',
           color: GOLD_500, fontSize: FS.xxs, fontWeight: 800,
           letterSpacing: '0.12em', textTransform: 'uppercase',
         }}>
@@ -134,19 +117,14 @@ export default function FounderTile() {
           margin: `${SP.sm}px 0 0`, fontFamily: serif_, fontWeight: 600,
           fontSize: FS['22'], color: GOLD_500, letterSpacing: '-0.005em',
         }}>
-          Founder Lifetime
+          👑 Founder Lifetime
         </h2>
         {typeof seatsRemaining === 'number' && (
-          <div style={{ marginTop: 6, display: 'flex', flexDirection: 'column', gap: 4 }}>
-            <div style={{ fontSize: FS.xs, color: swatch['#C8B098'], fontStyle: 'italic' }}>
-              {seatsRemaining} of {FOUNDER_SEAT_CAP} seats remaining
-            </div>
-            {/* P7 — the accessible live count PLUS a thin filled meter
-                (aria-hidden), matching the PricingPage founder card's two-channel
-                scarcity idiom. Square-cut (flat idiom) — no rounded track. */}
-            <div aria-hidden="true" style={{ height: 4, overflow: 'hidden', background: GOLD_WASH }}>
-              <div style={{ height: '100%', background: GOLD_500, width: `${seatsPct}%` }} />
-            </div>
+          <div style={{
+            marginTop: 6, fontSize: FS.xs, color: swatch['#C8B098'],
+            fontStyle: 'italic',
+          }}>
+            {seatsRemaining} of {FOUNDER_SEAT_CAP} seats remaining
           </div>
         )}
       </div>
@@ -154,7 +132,7 @@ export default function FounderTile() {
         <div style={{
           padding: SP.md, background: 'rgba(201,162,76,0.06)',
           border: `1px solid rgba(201,162,76,0.20)`,
-          fontSize: FS.sm, color: swatch['#C8B098'],
+          borderRadius: R.sm, fontSize: FS.sm, color: swatch['#C8B098'],
           lineHeight: 1.6, fontFamily: serif_,
         }}>
           <div>Two years of Cartographer = <b style={{ color: GOLD_400 }}>$144</b></div>
@@ -179,26 +157,6 @@ export default function FounderTile() {
               ? `Claim seat ${claimSeat}, $99 one-time`
               : 'Claim a Founder seat, $99 one-time'}
         </Button>
-        {error && (
-          <div
-            role="alert"
-            style={{
-              marginTop: SP.sm, display: 'flex', flexDirection: 'column',
-              alignItems: 'center', gap: SP.xs,
-              fontSize: FS.sm, color: GOLD_400, textAlign: 'center',
-            }}
-          >
-            <span>{error}</span>
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={handleClick}
-              disabled={loading}
-            >
-              Try again
-            </Button>
-          </div>
-        )}
       </div>
     </div>
   );

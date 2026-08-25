@@ -31,23 +31,15 @@ import { appendWizardNewsEntries } from '../domain/region/index.js';
 // body only, so it adds nothing to the first-paint closure.
 import { canonRelationshipTargetFor } from '../domain/events/canonRelationshipLinkage.js';
 import { advancesOnOpen, worldProgressionOf, CATCH_UP_CAP_WEEKS } from '../domain/worldPulse/simulationRules.js';
-// FULL AUTO-RESOLVE (realm directive 7 / J-D7). Static import is free here: this
-// whole module is reachable only through campaignWorldPulseSlice.loadWorldEngine(),
-// the SAME dynamic import that already pulls advanceCampaignWorld → pulseKernel →
-// applyWorldPulse, so the adjudicator rides the existing lazy sim chunk and adds
-// nothing to the first-paint entry closure.
-import { autoAdjudicateAdvanceProposals } from '../domain/worldPulse/autoAdjudication.js';
 import { buildChronicleGrounding } from '../domain/worldPulse/chronicle.js';
 import {
   cloneJson, cacheCampaignState, flushWorldPulsePersist, findActiveCampaign, campaignSettlements,
-  parkedIntervalUndoSnapshot,
 } from './campaignSliceShared.js';
 import {
   capturePulseSnapshot, applyWorldPulseResultToState, drainCampaignQueueIntoState,
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { flag } from '../lib/flags.js';
-import { verifyAdvanceDeterminism } from '../lib/advanceParanoia.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
 import { getConsent } from '../lib/consent.js';
 import { enqueuePulseEffect } from '../lib/analyticsQueue.js';
@@ -59,47 +51,10 @@ import { extractSpatialUsage } from '../lib/spatialUsage.js';
 import {
   extractRegionalGraphSnapshot, extractRegionalArcs, extractRegionalPropagation,
 } from '../lib/regionalFingerprint.js';
-import {
-  contentRuntimeFromCampaignBinding,
-} from '../domain/content/contentEnvironment.js';
 
 // Per-campaign cap on retained pre-pulse snapshots (multi-step undo depth). Mirrors
 // the slice's PULSE_UNDO_CAP — the advance body that reads it now lives here.
 const PULSE_UNDO_CAP = 10;
-const AUTH_SESSION_CHANGED_RESULT = Object.freeze({ ok: false, reason: 'auth_session_changed' });
-
-function sessionCurrent(isSessionCurrent) {
-  return typeof isSessionCurrent !== 'function' || isSessionCurrent();
-}
-
-function ensureCampaignContentCutoff(get, campaignId) {
-  const state = get();
-  const campaign = findActiveCampaign(state.campaigns, campaignId);
-  if (!campaign || campaign.contentBinding) return true;
-  const signedOwner = state.auth?.user?.id;
-  // The production store owns an explicit hydration flag. Small headless stores
-  // may compose only the campaign slices; in that shape no account library can
-  // arrive later, so `{}` is already the complete legacy cutoff rather than an
-  // unresolved cloud state.
-  const hasContentHydrationBoundary = Object.hasOwn(
-    state,
-    'customContentEnvironmentHydrated',
-  );
-  if (
-    signedOwner
-    && hasContentHydrationBoundary
-    && (
-      state.customContentSyncedAt == null
-      || state.customContentEnvironmentHydrated !== true
-    )
-  ) {
-    return false;
-  }
-  state.pinLegacyCampaignContentBindings?.(state.customContent || {});
-  return Boolean(
-    findActiveCampaign(get().campaigns, campaignId)?.contentBinding,
-  );
-}
 
 /**
  * Build the pausedAdvance resume cursor from a paused interval result. Shared by
@@ -107,35 +62,11 @@ function ensureCampaignContentCutoff(get, campaignId) {
  * park an identically-shaped cursor. The PRE-tick fields are already plain deep
  * clones (threaded off the sim inputs through the kernel), so they are parked by
  * reference — a second clone would only re-copy the whole pre-tick world for no gain.
- * THE CURSOR SHAPE (persisted inside campaign.worldState.pausedAdvance, so every
- * field here rides the campaign record into localStorage + the cloud snapshot):
- *   interval, ticksTotal, ticksDone, atTick, resumeTick, autoResolve, startedAt,
- *   now, preIntervalHistoryLen, pendingMajors — the resume orchestrator's inputs.
- *   preSnapshot { worldState, regionalGraph, wizardNews, saves } — the PRE-TICK
- *     clones the PAUSED TICK re-derives from. These describe a mid-interval
- *     position, NOT a committed world: restoring them would mint a state the
- *     campaign was never in, so they are resume fuel only, never undo fuel.
- *   preIntervalUndo — OPTIONAL. The PRE-INTERVAL pulse-undo snapshot
- *     (capturePulseSnapshot output: campaign world + every member save + the
- *     live active view) that the advance also pushed onto the session
- *     pulseUndoStack. Parked here so a RELOAD into a paused interval can still
- *     arm Undo: the session stack is gone after a reload while this cursor
- *     rehydrates with the campaign. ADDITIVE + ABSENT-TOLERANT — a cursor
- *     written by an older build simply omits the key, and every reader treats
- *     its absence as "no parked undo", i.e. exactly the pre-change behaviour.
- *     No migration: the key materializes on the next pause and disappears with
- *     the cursor when the interval finishes or is undone.
- *
  * @param {any} result - a { status:'paused', … } interval result.
  * @param {string} now - the ORIGINAL advance wall-clock, re-threaded so a resume
  *   replays from the same clock the pause was computed from.
- * @param {any} [preIntervalUndo] - the pre-INTERVAL undo snapshot to park (see
- *   above). The advance path passes its own Phase-1 capture; the resume path
- *   passes the OUTGOING cursor's value VERBATIM, so a re-pause keeps pointing at
- *   where the interval BEGAN rather than at the segment just resumed — undo must
- *   return the DM to the pre-advance world, never to a mid-interval one.
  */
-export function buildPausedAdvanceCursor(result, now, preIntervalUndo = null) {
+export function buildPausedAdvanceCursor(result, now) {
   return {
     interval: result.interval,
     ticksTotal: result.ticksTotal,
@@ -153,61 +84,7 @@ export function buildPausedAdvanceCursor(result, now, preIntervalUndo = null) {
       wizardNews: result.preWizardNews,
       saves: result.preSaves || [],
     },
-    // Parked by REFERENCE (the snapshot is already a plain deep clone, and the
-    // resume path hands back a plain lift), keeping the cursor bounded at one
-    // pre-interval copy no matter how many times the interval re-pauses.
-    ...(preIntervalUndo ? { preIntervalUndo } : {}),
   };
-}
-
-/**
- * Attach the exact inverse of deterministic member births to a pre-advance
- * snapshot.  The snapshot remains absent-shape-compatible when no birth fired.
- * @param {any} snapshot
- * @param {any[]} births
- */
-function withUndoMemberBirths(snapshot, births) {
-  if (!snapshot || !Array.isArray(births) || births.length === 0) return snapshot;
-  const byId = new Map(
-    (Array.isArray(snapshot.memberBirths) ? snapshot.memberBirths : [])
-      .map(row => [String(row.saveId), row]),
-  );
-  for (const birth of births) {
-    const saveId = String(birth?.saveId || '');
-    const birthId = String(birth?.birthId || '');
-    if (saveId && birthId) byId.set(saveId, { saveId, birthId });
-  }
-  return { ...snapshot, memberBirths: [...byId.values()] };
-}
-
-/**
- * Deposit-and-consume reconcile (fix wave 2 #2). applyWorldPulseResultToState commits
- * `result.wizardNews` WHOLESALE, and that feed was derived from the pre-advance clone
- * lifted BEFORE the advance's in-flight yield. A wizardNews write that landed on the
- * LIVE feed during that yield — a confirmed table-event import (importTableEvents, the
- * one ungated wizardNews writer) — is therefore absent from `resultWizardNews` and
- * would be silently clobbered. This folds back ONLY the entries whose id is NEW since
- * the pre-advance snapshot (`preIds`); the pre-existing entries the advance's own cap
- * intentionally evicted stay evicted (their ids ARE in `preIds`), so a no-concurrent-
- * write advance is byte-identical (empty landed set ⇒ the original feed is returned by
- * reference). Idempotent: appendWizardNewsEntries dedups by stable id. Called at the
- * pre-commit point of BOTH commit paths (advance + paused-resume) so the two can never
- * diverge — the same single-source discipline the war-front reads follow.
- * @param {any} resultWizardNews the pure result feed (the wholesale-commit target)
- * @param {any} liveWizardNews    the live campaign feed at commit time (with any import)
- * @param {Set<string>} preIds    wizardNews entry ids present BEFORE the advance
- * @param {string} now
- * @returns {any} the reconciled feed (the input feed unchanged when nothing landed)
- */
-export function reconcileWizardNewsForCommit(resultWizardNews, liveWizardNews, preIds, now) {
-  if (!resultWizardNews) return resultWizardNews;
-  const liveEntries = Array.isArray(liveWizardNews?.entries) ? liveWizardNews.entries : [];
-  const guard = preIds instanceof Set ? preIds : new Set();
-  const landed = liveEntries.filter(
-    (/** @type {any} */ e) => e && e.id != null && !guard.has(String(e.id))
-  );
-  if (!landed.length) return resultWizardNews;
-  return appendWizardNewsEntries(resultWizardNews, cloneJson(landed), { now });
 }
 
 /**
@@ -223,18 +100,10 @@ export function reconcileWizardNewsForCommit(resultWizardNews, liveWizardNews, p
  *
  * @param {{ set: Function, get: Function, campaignId: string, interval?: string,
  *   options?: { now?: string, autoResolve?: boolean, weeks?: number },
- *   sessionFence?: any, isSessionCurrent?: Function,
  *   deps: { advanceCampaignWorld: Function, simulateCampaignWorldInterval: Function,
  *           runAdvanceInterval: Function } }} args
  */
-export async function runAdvanceCampaignWorld({
-  set, get, campaignId, interval = 'one_month', options = {}, sessionFence,
-  isSessionCurrent, deps,
-}) {
-    if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-    if (!ensureCampaignContentCutoff(get, campaignId)) {
-      return { ok: false, reason: 'content_binding_pending' };
-    }
+export async function runAdvanceCampaignWorld({ set, get, campaignId, interval = 'one_month', options = {}, deps }) {
     const { advanceCampaignWorld, simulateCampaignWorldInterval, runAdvanceInterval } = deps;
     // Advance-scaling Stage 1: a flag selects the advance path. OFF (killswitch) →
     // the single-tick `advanceCampaignWorld`; the flag-OFF store path is byte-
@@ -256,22 +125,6 @@ export async function runAdvanceCampaignWorld({
     // overrides per-advance; otherwise the store toggle governs. The single-tick path
     // ignores it (it never pauses).
     const autoResolve = options.autoResolve != null ? !!options.autoResolve : !!get().advanceAutoResolve;
-    // FULL AUTO-RESOLVE (realm directive 7 / J-D7): the DM's toggle says the realm
-    // rules on its own, so the majors this advance parks in the PROPOSAL DOCKET are
-    // ruled immediately — through the same accept path a hand-Apply uses — instead
-    // of piling up unread. Engagement is deliberately narrower than `autoResolve`:
-    // it requires the USER TOGGLE, i.e. NO caller passed an explicit option. The one
-    // internal caller that does (runCatchUpCampaignWorld, which derives autoResolve
-    // from world progression) therefore keeps its existing semantics BYTE-IDENTICALLY
-    // — an autonomous world's open-hook catch-up is not a decision the DM pressed, and
-    // silently changing what it does to existing seeds is exactly the unversioned
-    // semantics shift THE PROMISE forbids. Extending full-auto to catch-ups is a
-    // deliberate DEFERRAL, recorded here, not an oversight.
-    // Derived from the ALREADY-RESOLVED `autoResolve` above rather than re-reading the
-    // shared toggle: the single-chokepoint law (tests/lint/autoresolveTwoMount.walker)
-    // allows exactly ONE store read of it in this module, and that walker scans the raw
-    // source, so even a comment quoting the accessor would trip it.
-    const fullAutoResolve = options.autoResolve == null && autoResolve;
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
@@ -369,27 +222,12 @@ export async function runAdvanceCampaignWorld({
     // is the pre-advance value.
     const preTick = simCampaign?.worldState?.tick;
 
-    // Deposit-and-consume reconcile (fix wave 2 #2): the pre-advance wizardNews ids,
-    // lifted off the same pre-advance clone. result.wizardNews is derived from this
-    // clone, so any live-feed entry NOT in this set landed during the await. (When the
-    // Phase-1 set bailed — e.g. world_not_canonized — simCampaign is null ⇒ empty set,
-    // and the reconcile block below is guarded by `simCampaign` so it never runs.)
-    /** @type {Set<string>} */
-    const preAdvanceNewsIds = new Set(
-      (Array.isArray(simCampaign?.wizardNews?.entries) ? simCampaign.wizardNews.entries : [])
-        .map((/** @type {any} */ e) => String(e?.id))
-    );
-
     // Pure, heavy compute OUTSIDE the producer. The multi-tick path is awaited: the
     // orchestrator yields to the event loop between tick batches so a long advance
     // (up to 48 one-week kernel passes) does not freeze the UI. The compute is a pure
     // function over the plain clones lifted above, so the yield only changes WHEN the
     // commit lands, not WHAT it commits.
     if (simCampaign) {
-      const contentRuntime = contentRuntimeFromCampaignBinding(
-        simCampaign.contentBinding,
-      );
-      const pinnedCustomContent = contentRuntime.customContent;
       const multiTickArgs = {
         campaign: simCampaign,
         saves: simSaves,
@@ -397,7 +235,6 @@ export async function runAdvanceCampaignWorld({
         commit: true,
         now,
         autoResolve,
-        customContent: pinnedCustomContent,
         // M10b catch-up: an explicit whole-week span drives the orchestrator's tick
         // count (overriding the interval→week table); inert for a normal DM advance
         // (no weeks ⇒ the named-interval table). Threads through runAdvanceInterval's
@@ -412,7 +249,7 @@ export async function runAdvanceCampaignWorld({
         ? await (flag('simAdvanceWorker')
             ? runAdvanceInterval(multiTickArgs, {
                 fallback: simulateCampaignWorldInterval,
-                customContent: pinnedCustomContent,
+                customContent: cloneJson(get().customContent || {}),
               })
             : simulateCampaignWorldInterval(multiTickArgs))
         : advanceCampaignWorld({
@@ -420,71 +257,14 @@ export async function runAdvanceCampaignWorld({
             saves: simSaves,
             interval,
             now,
-            customContent: pinnedCustomContent,
           });
-      if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-
-      // R-18 WORKER PARANOIA MODE (dev-only, default OFF): re-run the just-completed
-      // worker advance in-thread and diff the two worldStates, surfacing any worker↔
-      // sync divergence through the R-14 pipeline. The gate (paranoiaEnabled) ANDs the
-      // flag with import.meta.env.DEV — a build-time `false` in production — so this is
-      // inert (and tree-shakeable) on every prod path; off, it is byte-neutral (one
-      // flag read, no second advance). Read-only: it never touches `result` or state.
-      // (Only the multi-tick worker path produces the composed 'complete' result this
-      // guards; the single-tick advanceCampaignWorld branch has no worker to diff.)
-      if (result && result.status === 'complete' && useMultiTick) {
-        await verifyAdvanceDeterminism({
-          workerResult: result,
-          // Re-run in-thread over a clone so the paranoia pass can neither be
-          // contaminated by nor contaminate the committed advance.
-          runSync: () => simulateCampaignWorldInterval(cloneJson(multiTickArgs)),
-        });
-        if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-      }
     }
-
-    if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
 
     // §10 (W-COMPOSER-2): the queue-mouth refusals ride the advance digest —
     // append them to the result's feed through the house appender (dedupe/cap).
     if (simCampaign && result && drainRefusalNews.length && result.wizardNews) {
       result.wizardNews = appendWizardNewsEntries(result.wizardNews, drainRefusalNews);
     }
-
-    // FULL AUTO-RESOLVE ruling pass (realm directive 7 / J-D7). Runs on the composed
-    // result BEFORE the Phase-2 commit, so the advance and every verdict it triggered
-    // land in ONE atomic commit, ONE persist, and ONE undo step — a DM who undoes the
-    // advance undoes its rulings with it. Pure + deterministic: the advance's pinned
-    // `now`, the STORED outcome replayed through applyWorldPulseProposal, no fresh RNG.
-    // Returns the input result BY REFERENCE when the advance minted no proposals, so a
-    // toggle-OFF advance (the default) is byte-identical to before this existed.
-    // Placed AFTER the §10 refusal append (those belong to the tick's own digest) and
-    // BEFORE the deposit-and-consume reconcile below, so a wizardNews entry that landed
-    // during the in-flight yield still survives the wholesale commit.
-    if (simCampaign && result && fullAutoResolve) {
-      result = autoAdjudicateAdvanceProposals({
-        campaign: simCampaign,
-        saves: simSaves,
-        result,
-        now,
-      });
-    }
-
-    // Deposit-and-consume reconcile (fix wave 2 #2): fold back any wizardNews entry
-    // (e.g. a confirmed table-event import) that landed on the LIVE feed during this
-    // advance's in-flight yield, BEFORE the wholesale commit below clobbers it. A
-    // no-concurrent-write advance is byte-identical. Covers BOTH commit paths (manual
-    // Advance AND the setActiveCampaign auto-catch-up), which share this Phase-2 commit.
-    if (simCampaign && result && result.wizardNews) {
-      result.wizardNews = reconcileWizardNewsForCommit(
-        result.wizardNews,
-        findActiveCampaign(get().campaigns, campaignId)?.wizardNews,
-        preAdvanceNewsIds,
-        now,
-      );
-    }
-
-    preSnapshot = withUndoMemberBirths(preSnapshot, result?.memberBirths || []);
 
     // ── Phase 2: commit the pure result back onto the draft.
     if (simCampaign && result) {
@@ -502,15 +282,6 @@ export async function runAdvanceCampaignWorld({
             if (oldestIdx !== -1) next.splice(oldestIdx, 1);
           }
           state.pulseUndoStack = next;
-          // R-1 MUST-FIX (ring-guard saturation): every snapshot push raises the
-          // campaign's LOGICAL advance depth (`advanceSeqByCampaign`, session-only;
-          // undoLastPulse decrements as it pops). The cap-eviction above never
-          // touches it — counting RETAINED entries saturated at PULSE_UNDO_CAP and
-          // let the proposal-ring coherence guard pass STALE pre-apply snapshots
-          // after the cap-th advance (see advanceDepthOf, campaignWorldPulseDeferred).
-          if (!state.advanceSeqByCampaign) state.advanceSeqByCampaign = {};
-          state.advanceSeqByCampaign[String(campaignId)] =
-            (Number(state.advanceSeqByCampaign[String(campaignId)]) || 0) + 1;
         }
         persistUpdates = applyWorldPulseResultToState(state, c, result, now, authoredEventBySave);
         // Advance-scaling Stage 3 PAUSE: a paused interval committed its minors
@@ -518,18 +289,8 @@ export async function runAdvanceCampaignWorld({
         // Park the resume cursor on c.worldState.pausedAdvance so the partial interval
         // + the cursor land in the SAME atomic persist. Only the multi-tick path
         // produces status:'paused', so this is inert when the flag is OFF.
-        // R-5b reload-into-paused arming: the SAME pre-interval snapshot just pushed
-        // onto the session pulseUndoStack is parked on the cursor (by reference — one
-        // object, two homes, neither mutated after capture), so a reload that clears
-        // the session stack can still offer the honest pre-advance undo. `preSnapshot`
-        // was captured in Phase 1, BEFORE the drain, and the advance refuses to start
-        // while a pause is parked, so its worldState provably carries no pausedAdvance
-        // — restoring it is also what CLEARS the pause (the documented abandon path).
         if (result.status === 'paused') {
-          c.worldState = {
-            ...c.worldState,
-            pausedAdvance: buildPausedAdvanceCursor(result, now, preSnapshot),
-          };
+          c.worldState = { ...c.worldState, pausedAdvance: buildPausedAdvanceCursor(result, now) };
         } else if (c.worldState && 'pausedAdvance' in c.worldState) {
           // A COMPLETE advance clears any stale cursor back to byte-neutral (absent).
           const { pausedAdvance: _drop, ...rest } = c.worldState;
@@ -609,15 +370,7 @@ export async function runAdvanceCampaignWorld({
       }
     }
 
-    if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-    await flushWorldPulsePersist({
-      result,
-      campaignPersist,
-      persistUpdates,
-      campaignId,
-      isSessionCurrent,
-    });
-    if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+    await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
     // Replay party-caused queued events through the party-impact pipeline — the
     // drain surfaced them; this mirrors the immediate path's rippleEventThroughWorld
     // party branch (faction/NPC world state, condition resolution, Wizard News).
@@ -626,11 +379,7 @@ export async function runAdvanceCampaignWorld({
     if (result && result.ok !== false && drainedPartyImpacts.length
         && typeof get().recordPartyImpact === 'function') {
       for (const pi of drainedPartyImpacts) {
-        if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-        try {
-          await get().recordPartyImpact(campaignId, pi.action, { sessionFence });
-        } catch { /* best-effort */ }
-        if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+        try { await get().recordPartyImpact(campaignId, pi.action); } catch { /* best-effort */ }
       }
     }
     // Lane-2 drain-path parity (domain-events-region-1 twin): replay the queued
@@ -648,15 +397,7 @@ export async function runAdvanceCampaignWorld({
     if (result && result.ok !== false && drainedCanonRel.length
         && typeof get().recordCanonRelationshipRipple === 'function') {
       for (const cr of drainedCanonRel) {
-        if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-        try {
-          await get().recordCanonRelationshipRipple(campaignId, {
-            ...cr,
-            now,
-            sessionFence,
-          });
-        } catch { /* best-effort */ }
-        if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+        try { await get().recordCanonRelationshipRipple(campaignId, { ...cr, now }); } catch { /* best-effort */ }
       }
     }
     return result;
@@ -677,16 +418,9 @@ export async function runAdvanceCampaignWorld({
  *
  * @param {{ set: Function, get: Function, campaignId: string,
  *   decisions?: Record<string, {decision?: string}>, options?: { now?: string },
- *   sessionFence?: any, isSessionCurrent?: Function,
  *   deps: { simulateCampaignWorldInterval: Function, runAdvanceInterval: Function } }} args
  */
-export async function runResolveIntervalMajors({
-  set, get, campaignId, decisions = {}, options = {}, isSessionCurrent, deps,
-}) {
-  if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-  if (!ensureCampaignContentCutoff(get, campaignId)) {
-    return { ok: false, reason: 'content_binding_pending' };
-  }
+export async function runResolveIntervalMajors({ set, get, campaignId, decisions = {}, options = {}, deps }) {
   const { simulateCampaignWorldInterval, runAdvanceInterval } = deps;
   let result = /** @type {any} */ (null);
   let persistUpdates = [];
@@ -698,38 +432,17 @@ export async function runResolveIntervalMajors({
   /** @type {any} */ let simCampaign = null;
   /** @type {any} */ let simSaves = null;
   /** @type {any} */ let cursor = null;
-  // R-5b: the parked pre-INTERVAL undo snapshot, read off the CURRENT (non-draft)
-  // state so it can be re-parked BY REFERENCE below. Deliberately NOT part of the
-  // `cursor` clone: it is the largest thing on the cursor and the resume kernel
-  // never reads it, so deep-copying it on every resume would charge a full extra
-  // pre-interval world per DM verdict for nothing. Same read window as the lift
-  // below (the advance-in-flight guard serializes both against any other writer).
-  let parkedUndo = parkedIntervalUndoSnapshot(
-    findActiveCampaign(get().campaigns, campaignId),
-  );
   set(state => {
     const c = findActiveCampaign(state.campaigns, campaignId);
     if (!c) return;
     const worldState = ensureWorldState(c.worldState, c);
-    if (!worldState.pausedAdvance) { result = { ok: false, reason: 'no_paused_advance' }; return; }
-    const { preIntervalUndo: _parked, ...resumeInputs } = worldState.pausedAdvance;
-    cursor = cloneJson(resumeInputs);
+    cursor = worldState.pausedAdvance ? cloneJson(worldState.pausedAdvance) : null;
+    if (!cursor) { result = { ok: false, reason: 'no_paused_advance' }; return; }
     simCampaign = cloneJson(c);
     simSaves = cloneJson(campaignSettlements(state, campaignId));
   });
 
   if (!simCampaign || !cursor) return result;
-
-  // Deposit-and-consume reconcile (fix wave 2 #2): the wizardNews ids on the LIVE
-  // feed before this resume's await, lifted off the same clone the commit re-derives
-  // over. Any live-feed entry NOT here at commit time (e.g. a table-event import that
-  // landed during the resume's yield) must survive the wholesale wizardNews commit.
-  // Mirrors runAdvanceCampaignWorld — the resume is the OTHER path through
-  // applyWorldPulseResultToState.
-  const preResumeNewsIds = new Set(
-    (Array.isArray(simCampaign?.wizardNews?.entries) ? simCampaign.wizardNews.entries : [])
-      .map((/** @type {any} */ e) => String(e?.id))
-  );
 
   // Determinism: replay with the advance's ORIGINAL `now` (parked on the cursor),
   // NOT a fresh wall-clock — the resume re-derives the paused tick through the
@@ -738,16 +451,12 @@ export async function runResolveIntervalMajors({
   // `now` falls back to wall-clock.
   const now = options.now || cursor.now || new Date().toISOString();
   const pre = cursor.preSnapshot || {};
-  const contentRuntime = contentRuntimeFromCampaignBinding(
-    simCampaign.contentBinding,
-  );
   const resumeArgs = {
     campaign: simCampaign,
     saves: simSaves,
     commit: true,
     now,
     autoResolve: false,
-    customContent: contentRuntime.customContent,
     resume: {
       interval: cursor.interval,
       ticksTotal: cursor.ticksTotal,
@@ -766,73 +475,22 @@ export async function runResolveIntervalMajors({
   result = await (flag('simAdvanceWorker')
     ? runAdvanceInterval(resumeArgs, {
         fallback: simulateCampaignWorldInterval,
-        customContent: resumeArgs.customContent,
+        customContent: cloneJson(get().customContent || {}),
       })
     : simulateCampaignWorldInterval(resumeArgs));
-  if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-
-  parkedUndo = withUndoMemberBirths(parkedUndo, result?.memberBirths || []);
 
   if (result && result.status) {
-    // Deposit-and-consume reconcile (fix wave 2 #2): re-append only wizardNews
-    // entries that landed during this resume's yield (see runAdvanceCampaignWorld)
-    // before the wholesale commit below clobbers them.
-    if (result.wizardNews) {
-      result.wizardNews = reconcileWizardNewsForCommit(
-        result.wizardNews,
-        findActiveCampaign(get().campaigns, campaignId)?.wizardNews,
-        preResumeNewsIds,
-        now,
-      );
-    }
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       persistUpdates = applyWorldPulseResultToState(state, c, result, now);
-      // The initial paused commit already pushed the pre-interval snapshot onto
-      // the session undo stack.  A later resume segment can mint additional
-      // deterministic members, so refresh that existing entry with the parked
-      // snapshot's accumulated birth inverses.  Without this replacement the
-      // cursor knew about the later child, but completing the interval dropped
-      // the cursor and Undo left that child orphaned.
-      if (parkedUndo && Array.isArray(state.pulseUndoStack)) {
-        for (let i = state.pulseUndoStack.length - 1; i >= 0; i -= 1) {
-          if (String(state.pulseUndoStack[i]?.campaignId) !== String(campaignId)) continue;
-          state.pulseUndoStack[i] = parkedUndo;
-          break;
-        }
-      }
       // Park a FRESH cursor if the resumed segment paused again; else CLEAR the
-      // cursor back to byte-neutral (the interval finished). The pre-INTERVAL undo
-      // snapshot rides across verbatim (R-5b): a re-pause is still the SAME advance,
-      // so undo must keep returning to where that advance began. An interval that
-      // finishes drops the cursor and its parked snapshot together — the session
-      // stack (when this session ran the advance) remains the undo source there.
+      // cursor back to byte-neutral (the interval finished).
       if (result.status === 'paused') {
-        c.worldState = {
-          ...c.worldState,
-          pausedAdvance: buildPausedAdvanceCursor(result, now, parkedUndo),
-        };
+        c.worldState = { ...c.worldState, pausedAdvance: buildPausedAdvanceCursor(result, now) };
       } else if (c.worldState && 'pausedAdvance' in c.worldState) {
         const { pausedAdvance: _drop, ...rest } = c.worldState;
         c.worldState = rest;
-      }
-      // R-5b continuity: the interval just FINISHED, so the cursor (and the
-      // pre-interval snapshot parked on it) is gone. In the session that RAN the
-      // advance that snapshot is already on pulseUndoStack and nothing is owed. After
-      // a RELOAD it lived ONLY on that cursor, and the DM has been looking at an
-      // offered "Undo Advance" the whole time they resolved verdicts — dropping it at
-      // the moment they finish would retract a capability mid-flow. Adopt it onto the
-      // session stack instead, exactly as the advance's own push would have. Guarded
-      // on the campaign having NO stack entry, so the in-session path never
-      // double-pushes; a paused interval blocks further advances on its own campaign,
-      // so this campaign's entry cannot have been cap-evicted while it was parked.
-      if (result.status !== 'paused' && parkedUndo
-          && !(state.pulseUndoStack || []).some(s => String(s.campaignId) === String(campaignId))) {
-        state.pulseUndoStack = [...(state.pulseUndoStack || []), parkedUndo];
-        if (!state.advanceSeqByCampaign) state.advanceSeqByCampaign = {};
-        state.advanceSeqByCampaign[String(campaignId)] =
-          (Number(state.advanceSeqByCampaign[String(campaignId)]) || 0) + 1;
       }
       // M10b re-stamp on RESUME (state-lifecycle-1 / performance-scale-4): the resume
       // RE-DERIVES worldState wholesale from the cursor's PRE-interval snapshot, which
@@ -865,15 +523,7 @@ export async function runResolveIntervalMajors({
     }, { subjectId: campaignId });
   }
 
-  if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
-  await flushWorldPulsePersist({
-    result,
-    campaignPersist,
-    persistUpdates,
-    campaignId,
-    isSessionCurrent,
-  });
-  if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
+  await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
   return result;
 }
 
@@ -912,20 +562,10 @@ export async function runResolveIntervalMajors({
  * living pause; 0 if blocked/thrown before the atomic commit).
  *
  * @param {{ set: Function, get: Function, campaignId: string,
- *   options?: { now?: string|number }, sessionFence?: any,
- *   isSessionCurrent?: Function }} args
+ *   options?: { now?: string|number } }} args
  * @returns {Promise<{ ok:boolean, weeksCaughtUp:number, capped:boolean, reason?:string }>}
  */
-export async function runCatchUpCampaignWorld({
-  set, get, campaignId, options = {}, isSessionCurrent,
-}) {
-  const staleResult = () => ({
-    ok: false,
-    weeksCaughtUp: 0,
-    capped: false,
-    reason: 'auth_session_changed',
-  });
-  if (!sessionCurrent(isSessionCurrent)) return staleResult();
+export async function runCatchUpCampaignWorld({ set, get, campaignId, options = {} }) {
   const campaign = findActiveCampaign(get().campaigns, campaignId);
   // The wrapper already applied the not_living guard; re-read the living campaign's
   // values here (the campaign is guaranteed living/autonomous with a worldState).
@@ -938,19 +578,11 @@ export async function runCatchUpCampaignWorld({
   // cursor yet ⇒ nothing is OWED. Seed the cursor to now, persist it (so a reload
   // doesn't re-seed and mis-count), advance nothing.
   if (cursor == null) {
-    if (!sessionCurrent(isSessionCurrent)) return staleResult();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (c && c.worldState) c.worldState.lastLivingAdvanceAt = nowStamp;
     });
-    await flushWorldPulsePersist({
-      result: true,
-      campaignPersist: cacheCampaignState(get()),
-      persistUpdates: [],
-      campaignId,
-      isSessionCurrent,
-    });
-    if (!sessionCurrent(isSessionCurrent)) return staleResult();
+    await flushWorldPulsePersist({ result: true, campaignPersist: cacheCampaignState(get()), persistUpdates: [], campaignId });
     return { ok: true, weeksCaughtUp: 0, capped: false, reason: 'seeded' };
   }
   const elapsedWeeks = Math.floor((nowMs - new Date(cursor).getTime()) / WEEK_MS);
@@ -967,7 +599,6 @@ export async function runCatchUpCampaignWorld({
   // the banner (RealmDashboard / WorldPulsePanel) shows a busy indicator during the
   // up-to-CATCH_UP_CAP_WEEKS kernel ticks. Only now that n > 0 is there real work to
   // narrate — a seeded / up-to-date / not_living open above stashed nothing.
-  if (!sessionCurrent(isSessionCurrent)) return staleResult();
   set(state => { state.livingCatchUp = { campaignId, status: 'running', weeksCaughtUp: 0, capped }; });
   let done = 0;
   /** @type {string | null} */ let error = null;
@@ -988,7 +619,6 @@ export async function runCatchUpCampaignWorld({
     // interval for the DM (parked on worldState.pausedAdvance) — they resolve via
     // resolveIntervalMajors, which resumes the remaining weeks of the SAME interval.
     const result = await get().advanceCampaignWorld(campaignId, 'one_week', { now: nowStamp, autoResolve, weeks: n });
-    if (!sessionCurrent(isSessionCurrent)) return staleResult();
     if (!result || result.ok === false) {
       // Blocked before any commit (frozen / already in flight / a parked pause from a
       // prior unresolved catch-up): nothing advanced. The whole interval is atomic, so
@@ -1011,7 +641,6 @@ export async function runCatchUpCampaignWorld({
     // weeks (done stays 0) — the catch-up rolls back whole rather than part-persisted.
     error = err && /** @type {any} */ (err).message ? String(/** @type {any} */ (err).message) : String(err);
   }
-  if (!sessionCurrent(isSessionCurrent)) return staleResult();
   // Settle the digest: the major chronicle beats over the caught-up window (built
   // from the SAME deterministic grounding the interval summary uses), plus the
   // capped flag and any failure. The banner self-gates to nothing when the active

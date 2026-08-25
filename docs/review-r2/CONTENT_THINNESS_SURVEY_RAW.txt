@@ -1,0 +1,539 @@
+{
+  "summary": "Map thin content surfaces + view-time/generation-time classification for the content-volume program",
+  "agentCount": 6,
+  "logs": [],
+  "result": {
+    "event-prose": {
+      "summary": "Surveyed the world-pulse EVENT/outcome/reason prose slice in the w7-prep worktree (read-only). Core finding: the slice splits into two content regimes. (1) GENERATION-TIME single-template prose — every kernel-emitted news entry (calamity strike, boom/bust/flourishing/reconstruction, resource discovery/exhaustion, steading lifecycle) has exactly ONE headline template and ONE summary template per event kind (occasionally a 2-branch conditional clause), and these strings persist verbatim into wizardNews (explicitly a golden surface per pulseKernel.js:1752), pulseRecord.impactDigest (80-record history ring), and for calamity even into the permanent settlement.calamityHistory stamp. A year-long advance therefore repeats each event kind's sentence verbatim except interpolated names/numbers. War/peace reason receipts are the same regime: 1 fixed receipt string per reason type (22 types total; only 3 peace types have 2-3 branch variants), persisted into the spatialLedgers.warReasons/peaceReasons world state. (2) VIEW-TIME variety — newsVoice.js is the one genuinely multi-variant surface (9 categories x 4 buckets x 3-4 lines, FNV-1a keyed per entry id, lazy-chunk display only, never persisted), but even it caps at 3-4 variants per cell. The impact digest itself (compactImpactDigest in pulseHelpers.js) authors no prose — it copies upstream headline/summary/reasons verbatim into persisted pulse history, so its thinness is inherited. Highest repetition risk: calamity (single constitutionally-mandated bucket-neutral template, permanent stamp) and the kernel news templates; the reason receipts repeat across every settlement pair holding the same casus. Note: calamity's single template is a deliberate constitutional choice (type-blind mechanism, flavor is the DM's slot) — variety work there must vary phrasing, not assert disaster kinds.",
+      "surfaces": [
+        {
+          "name": "War-reason receipts (casus belli prose)",
+          "file": "src/domain/worldPulse/warReasons.js",
+          "variant_count": "11 reason types (WAR_REASON_TYPES), exactly 1 fixed receipt string per type (scoreGrievance..scoreDependencyByDesign, lines 423-576); grievance/revanchism interpolate numbers (resentment/memory toFixed, wound count). Plus 1 decree-default receipt template ('Declared by decree: {type} against {to}.', line 835) and 3 CASUS_VETO_PROSE refusal lines.",
+          "classification": "generation-time",
+          "classification_evidence": "Write path: scorer receipt -> reasonRecord() -> foldPairReasons() -> setSpatialLedger(ws,'warReasons') in advanceWarReasons (line 764) -> worldState spatialLedgers (save/golden data; sinceTick survives refolds so a receipt can persist for many ticks). Read path: warCausalBrief (peaceReasons.js:311) -> src/components/map/WarCausalBrief.jsx:48 renders the persisted receipt verbatim.",
+          "thinness": "thin",
+          "repetition_risk": "Every directed pair in the realm holding the same casus shows the identical sentence (e.g. 'Their granaries stand full while ours thin — hunger is faster than patience.' on every resource_pressure pair). Over a year, the irony brief for any two wars reads near-identically. Interpolated numbers vary only for grievance/revanchism/coalition types.",
+          "notes": "Receipts are recomputed each tick, so the LATEST phrasing per (pair,type) is what persists — no accumulation of stale variants, but also no phrasing rotation at all. NUL gotcha did not affect this file; grep -a used throughout the survey."
+        },
+        {
+          "name": "Peace-reason receipts + irony line + treaty fraying line",
+          "file": "src/domain/worldPulse/peaceReasons.js (+ src/domain/worldPulse/peaceTerms.js for the treaty line)",
+          "variant_count": "11 reason types (PEACE_REASON_TYPES): economic_strangulation has 3 branch variants (baseline/blockade/supply-web, lines 140-145), belief_convergence 2 (converged/drifting, lines 105-107), realignment 2 (common-third/distinct-thirds); the other 8 types have 1 fixed string each (exhaustion, coalition_fracture, mediation interpolate a number/name). Plus 3 PEACE_VETO_PROSE lines; irony line is a single formula ('{N} of {M} peace reasons now present[; this war is dying]', line 333); treaty line is a single formula ('The peace holds by {h} term(s) of {t}; the {label} frays.', peaceTerms.js:1299).",
+          "classification": "mixed",
+          "classification_evidence": "Receipts: generation-time — foldPairReasons -> setSpatialLedger(ws,'peaceReasons') (advancePeaceReasons line 507), persisted into worldState. Irony line + treaty fraying line: view-time — warCausalBrief and treatyFrayingSummary are pure reads composed at render from persisted numeric/typed state (no line string is stored).",
+          "thinness": "thin",
+          "repetition_risk": "Same as war side: every belligerent pair in exhaustion prints the same sentence differing only in the two-decimal number. The formula lines never repeat objectionably (they are status readouts, not prose events).",
+          "notes": "The 3-variant economic_strangulation shows the intended pattern (branch by dominant cause) that the other 19 reason types lack."
+        },
+        {
+          "name": "Drama-class crier lines (the voice sidecar)",
+          "file": "src/domain/display/newsVoice.js",
+          "variant_count": "VOICE_LINES: 9 categories (war, faith, trade, pestilence, calamity, migration, authority, prosperity, succor) x 4 buckets (onset/impact/relief/fade). Counted per cell: war 4/4/4/4, faith 4/4/4/4, trade 4/4/4/4, pestilence 4/4/4/3, calamity 3/4/3/3, migration 3/4/3/3, authority 3/4/3/3, prosperity 4/4/3/3, succor 3/4/3/3 = 125 authored lines total; VOICE_FLOOR fallback 2-3 per category. Covers 8 of 8 drama classes indirectly (DRAMA_CLASS_PRIORITY in decisionTier.js:169 lists war, succession_coup->authority, plague->pestilence, calamity, schism_contest->faith, economic_shock->trade, boom_flourishing->prosperity, reframe->none).",
+          "classification": "view-time",
+          "classification_evidence": "Header contract (lines 8-25): pure display read-model, imported ONLY by lazy WizardNewsPanel.jsx (confirmed: sole consumer at src/components/map/WizardNewsPanel.jsx:88), never by generation or pulse kernel; returns a string, never mutates or persists. Variant chosen by FNV-1a hash of entry id (deterministic, no rng/Date).",
+          "thinness": "adequate",
+          "repetition_risk": "The richest surface in the slice, but 3-4 variants per cell means a year with ~10 war onsets shows each of 4 lines ~2-3 times in the news panel. Deterministic per-entry-id selection prevents adjacent duplicates but cannot exceed the pool. The reframe drama class has no voice category at all (dramaClassOf routes it nowhere in newsVoice)."
+        },
+        {
+          "name": "Calamity strings (strike news + permanent stamp)",
+          "file": "src/domain/worldPulse/calamityKernel.js (strikeNews, lines 709-740), src/domain/spatial/calamity.js (stampTitle line 267, DISASTER_FLAVOR_TITLE line 102)",
+          "variant_count": "Headline: 1 fixed template ('The Great Calamity of {name}, year {year}') — bucket-neutral BY CONSTITUTION. Summary: 1 template with k/deaths interpolation and a 1-vs-many grammar branch. Reasons: 1 fixed string ('The calamity struck where the land lies most exposed...'). Flavor hints: 4 labels (Great Flood/Fire/Quake/Storm) + 1 fallback, surfaced only as a DM suggestion, never in engine prose.",
+          "classification": "generation-time",
+          "classification_evidence": "Triple persistence: (1) the stamp {name: stampTitle(...)} is written into settlement.calamityHistory (calamityKernel.js:408-419, capped at 8, permanent save data); (2) strikeNews entry -> newsEntries -> appendWizardNewsEntries (pulseKernel.js:2193) -> wizardNews, which pulseKernel.js:1752 states IS a golden surface; (3) headline/summary copied into pulseRecord.impactDigest (pulseKernel.js:1614).",
+          "thinness": "critical",
+          "repetition_risk": "Highest in the slice: every calamity across the whole realm, forever, carries the byte-identical title pattern and the identical single reason line; a year with 3 calamities produces 3 near-identical chronicle beats differing only in name/year/counts. CAVEAT: the type-blind single template is a deliberate constitutional law (the engine never asserts a disaster kind; flavor is the DM's slot) — any variety work must add phrasing variants that stay bucket-neutral, not disaster-kind vocabulary.",
+          "notes": "Rated critical on the year-long-chronicle standard specifically because the stamp is PERMANENT save data (calamityHistory), not a rolling feed."
+        },
+        {
+          "name": "Boom / bust / flourishing / reconstruction strings (upswing arcs)",
+          "file": "src/domain/worldPulse/upswingKernel.js (reconstructionNews line 831, boomNews line 918, bustNews line 934, flourishingNews line 950)",
+          "variant_count": "4 event kinds x exactly 1 headline + 1 summary template each. Conditional clause branches: boom +1 optional fragility clause, bust 2 cause variants (embattled roads vs named failed artery), reconstruction +2 optional clauses (upgrade, graft), flourishing +1 optional founding clause. Reasons: 1 fixed string per kind (bust's names the artery). Effective ceiling ~2 distinct sentences per kind.",
+          "classification": "generation-time",
+          "classification_evidence": "newsEntries -> appendWizardNewsEntries (pulseKernel.js:2276) -> persisted wizardNews golden surface + compactImpactDigest into pulse history. Same path as calamity.",
+          "thinness": "thin",
+          "repetition_risk": "Every boom in a year reads '{name} is booming / Brisk and sustained trade has tipped {name} into a boom — markets swell and coin flows.' verbatim; the 7th drama class (boom_flourishing) has exactly one authored sentence per beat at generation time (the view-time prosperity crier adds 13 lines, but the persisted chronicle text never varies)."
+        },
+        {
+          "name": "Resource discovery / exhaustion strings",
+          "file": "src/domain/worldPulse/resourceDynamicsKernel.js (lines 317-318, 371-372)",
+          "variant_count": "2 event kinds (resource_strike, vein_exhausted) x 1 headline + 1 summary template each ('{label} discovered near {name} / Prospecting near {name} has struck {label}...'; '{label}'s workings near {name} have given out / ...the vein is done.'). Surface variety comes only from the interpolated resource label (33 resource keys per the taxonomy pin) and settlement name.",
+          "classification": "generation-time",
+          "classification_evidence": "RDOutcome headline/summary ride the candidate's standard apply path (file comment line 520) into selectedOutcomes/newsEntries -> wizardNews + impactDigest persistence; resourceEdits provenance record also stores outcome.headline as its reason (line 599).",
+          "thinness": "thin",
+          "repetition_risk": "A prospecting-heavy year prints the identical sentence pair for every strike; only the mineral name changes. The exhaustion beat — the arc's dramatic payoff after a 156-tick dwell — lands with one sentence."
+        },
+        {
+          "name": "Settlement lifecycle strings (steadings, death, resettlement)",
+          "file": "src/domain/worldPulse/settlementLifecycleKernel.js (lines 575-796), src/domain/worldPulse/settlementLifecycleFirstClass.js (lines 156, 235)",
+          "variant_count": "7 event kinds, 1 headline + 1 summary template each: orbit_dispersed, steading_founded (summary has 2 provenance branches: resource-strike vs growth), charter_pending, abandoned, converged, '{name} is dying', 'Settlers eye the old {name} site'. Reasons arrays: 1-3 fixed strings assembled from boolean sources (founded picks up to 3 cause lines). Population-history reason strings ('Families strike out to found...', etc.) are also 1 template per transition and persist in populationHistory.",
+          "classification": "generation-time",
+          "classification_evidence": "steadingNews -> newsEntries -> appendWizardNewsEntries (pulseKernel.js:2305 region) -> wizardNews; steading record.history strings (e.g. 'Grew into a hamlet (tick N).', 'folded into one palisade') persist in the satellite ledger itself; populationHistory reason strings persist on the settlement.",
+          "thinness": "thin",
+          "repetition_risk": "Steading foundings are the boom_flourishing class's most frequent producer; a growth decade prints 'A new steading rises near {parent}' for every founding. In-record history strings repeat verbatim across all steadings."
+        },
+        {
+          "name": "Impact digest (pulse record chronicle feed)",
+          "file": "src/domain/worldPulse/pulseHelpers.js (compactImpactDigest, line 68), src/domain/worldPulse/pulseKernel.js:1614; consumers src/domain/display/chronicleTimeline.js, chronicleGraph.js, worldSnapshotPublic.js",
+          "variant_count": "0 authored strings of its own — copies headline/summary/reasons (capped: 8 tags, 4 reasons, 18 entries score-sorted) verbatim from the tick's newsEntries; fallback literals 'World pulse impact' / 'World pulse outcome' (1 each) in pulseHelpers.js.",
+          "classification": "generation-time",
+          "classification_evidence": "Written into the persisted pulseRecord (pulseKernel.js:1614) which rides the pulse-history ring (MAX_HISTORY=80) in worldState — survives save/load and feeds Supabase upserts per the performance-scale-5 comment. Read verbatim at view time by chronicleTimeline.js:77 and chronicleGraph.js:254 with zero re-phrasing.",
+          "thinness": "adequate",
+          "repetition_risk": "Structurally sound (typed, capped, deduped) but it is a pure amplifier: whatever single-template prose the kernels mint is what a year-long chronicle timeline displays, 18 entries per tick, with no view-time rewording layer between the persisted text and the screen. Fixing upstream template thinness fixes this surface for free; fixing it here is impossible.",
+          "notes": "This is the surface where the generation-time thinness of surfaces 4-7 becomes visible to the player: the chronicle timeline renders persisted headlines directly."
+        }
+      ]
+    },
+    "rumors-crier": {
+      "summary": "Rumor/crier register survey (read-only, w7-prep worktree). Every surface in the slice is VIEW-TIME: the persisted substrate is structured tokens (rumorLedgers RumorArrivalRecords, wizardNews entry fields, commodityStocks), and all prose renders fresh through pure display sidecars (settlementRumors.js, newsVoice.js, newsBody.js, marketPrices.js, guidanceNotes.js/guidanceRegistry.js). No rumor/crier prose persists into world/save/golden data, so all corpora are freely growable without golden shifts — the modules are documented byte-inert to the engine (never imported by generation or the world-pulse kernel; walker tests enforce token coverage). The register's weakness is FRAME variety, not subject variety: whatPhrase has 77 subject phrases but only 4 fixed headline frames chosen deterministically by completeness band (zero variation within a band); newsBody has exactly 1 sentence per lifecycle transition; the market crier has 1 line template with 4 receipt clauses; the crier voice has only 3-4 lines per (category x bucket) cell selected by entry-id hash. A year-long advance report's news feed and rumor tab will visibly cycle these frames. Guidance whispers/notes are milestone-gated one-shot teaching copy where the repetition standard doesn't apply. NUL gotcha checked with grep -a: generosityKernel.js/generosityEV.js contain only comments referencing the rumor system, no display phrase corpora.",
+      "surfaces": [
+        {
+          "name": "settlementRumors player-fiction renderer (headline frames + detail sentences + band vocabulary)",
+          "file": "src/domain/display/settlementRumors.js",
+          "variant_count": "4 headline frames (firsthand / 'Merchants bring word of X in Y' / 'Travellers speak of X somewhere near Y' / 'trouble near Y') selected deterministically by completeness band — exactly 1 frame per band, zero within-band variation; 4 fixed detail sentences ('They call it X.', 'The tale names ...', 'They speak of X's hand in it.', 'The tale is thin and much-worn by the road.'); MAGNITUDE_WORDS 4; freshness 3 bands; distance 3 bands; confidence 4 bands",
+          "classification": "view-time",
+          "classification_evidence": "Write path: src/domain/spatial/rumorNetwork.js seeds RumorArrivalRecord objects into worldState.spatialLedgers.rumorLedgers containing ONLY structured fields (content.what token, whereId, partyIds, magnitude band, framing tags, fidelity numbers — verified at the seed literal ~line 585, no prose fields). Read path: RumorsTab.jsx and pdf/lib/liveWorld.js call settlementRumors() at render/export time; renderFiction() composes headline/detail fresh from the scrubbed tokens. Module header states 'PRESENTATION ONLY... goldens never import this.' PDF export (liveWorld.js:173) snapshots the rendered text into the print artifact but never back into save data.",
+          "thinness": "thin",
+          "repetition_risk": "HIGH for frames: a settlement that accumulates dozens of tellings over a simulated year shows a column where every outline-band rumor opens 'Merchants bring word of...' and every vague one 'Travellers speak of...' — frame choice is a pure function of completeness, so two rumors in the same band are word-identical except the what/where substitutions. Detail is worse: 'They call it a notable turn.' recurs verbatim on most cards. Subject variety (77 whatPhrases x settlement names) masks it partially.",
+          "notes": "projectTruth() DM divergence vocabulary is 5 fixed phrases ('details lost on the road', 'facts drifted in the telling', 'the tale has grown in the telling', 'the tale understates it', 'a name has been swapped for the wrong settlement') — adequate for a diagnostic surface. RumorsTab.jsx adds its own fixed label maps: CONFIDENCE_LABEL 4, FRESHNESS_LABEL 3, plus 3 empty-state strings — UI chrome, adequate."
+        },
+        {
+          "name": "WHAT_PHRASES / whatPhrase corpus (impactKind token -> in-world subject noun phrase)",
+          "file": "src/domain/display/settlementRumors.js (lines 69-196)",
+          "variant_count": "77 token keys, exactly 1 phrase each (measured: Object.keys(WHAT_PHRASES).length === 77); plus TRANSITION_KINDS 11 tokens neutralizing to the single word 'unrest'; unknown tokens degrade via prefix-strip + de-underscore fallback",
+          "classification": "view-time",
+          "classification_evidence": "Same read-model as above — the persisted rumor record stores the raw engine token (content.what = wizardNews impactKind); whatPhrase() maps it at render. Header comment: 'Pure display; byte-inert to the engine (goldens never import this).' Coverage enforced by tests/domain/settlementRumors.walker.test.js which source-scans every minted impactKind and reds until phrased.",
+          "thinness": "adequate",
+          "repetition_risk": "Per-token: every rumor about the same event kind uses the identical phrase forever ('a sickness spreading', 'flush times') — a year with three plagues reads the same phrase three times, but inside varying frames/places this reads as consistent vocabulary rather than repetition. Breadth (77 kinds) is the corpus's strength; single-phrase-per-token is a deliberate glossary design. If richer texture is wanted, per-token arrays + the existing hash-select idiom (newsVoice fnv1a32) would be a drop-in."
+        },
+        {
+          "name": "Crier-voice lines (herald quote on Wizard News cards)",
+          "file": "src/domain/display/newsVoice.js (rendered by src/components/map/WizardNewsPanel.jsx:88)",
+          "variant_count": "VOICE_LINES: 9 categories x 4 buckets = 36 authored cells, 3-4 lines per cell, 129 total lines (measured per-cell: war/faith/trade all 4-4-4-4; pestilence 4-4-4-3; calamity/migration/authority/succor 3-4-3-3; prosperity 4-4-3-3). VOICE_FLOOR fallback: 21 lines (2-3 per category). Variant selection: FNV-1a hash of entry id — deterministic, no rng.",
+          "classification": "view-time",
+          "classification_evidence": "Module header: 'NEVER mutates an entry... imported ONLY by the lazy news panel... must NEVER be imported by generation or the world-pulse kernel (SAME-SEED / GOLDEN laws).' Confirmed by grep: sole runtime consumer is WizardNewsPanel.jsx; wizardNews.js does not import it. The persisted wizardNews entry carries structured impactKind/channelType/kind; the quote is recomputed every render. NOTE the adjacent generation-time surface OUT of this module: entry.headline itself IS persisted engine-side (chronicleReadModel.js:289 deliberately 'reuses the persisted (already crier-voiced) top-thread headline rather than authoring new prose') — that headline corpus lives in domain/region/wizardNews.js, outside this slice.",
+          "thinness": "thin",
+          "repetition_risk": "Per-card the hash anti-repetition works (distinct ids usually hit distinct variants), but a cell holds at most 4 lines: a year-long advance report producing e.g. 6+ war-onset or trade-impact entries must repeat lines verbatim, and with only 3 lines in many relief/fade cells (calamity, migration, authority, succor, prosperity) the cycle is visible within a single busy season. These are long, distinctive sentences — verbatim recurrence is highly noticeable. The 36-cell structure is rich; the per-cell depth is the thin axis.",
+          "notes": "Set-but-unclassified guard means new impactKinds get NO voice line rather than a wrong-register one — silence, not repetition, is the failure mode for future kinds."
+        },
+        {
+          "name": "Wizard News card body + reason pills (newsBodyText / newsReasonPhrases)",
+          "file": "src/domain/display/newsBody.js",
+          "variant_count": "newsBodyText: exactly 1 sentence per lifecycle kind — 6 kinds + default + a 'heavy' severity variant on 'applied' = 8 total sentences, x3 scope phrases interpolated on applied/default. REASON_PHRASES: 13 fixed recastings, unknown reasons pass through.",
+          "classification": "view-time",
+          "classification_evidence": "Header: 'BYTE-INERT to the engine: imported ONLY by the lazy WizardNewsPanel, never by generation or the world-pulse kernel; never mutates an entry.' Re-composes from persisted structured fields (entry.kind/scope/severity) at render; the engine-composed entry.summary persists but is demoted to a hover tooltip (WizardNewsPanel.jsx:93,143).",
+          "thinness": "critical",
+          "repetition_risk": "Single variant per slot with NO hash selection: every 'applied' card in a feed says 'It is being felt across the region now.' (or the 'felt hard' heavy twin), every 'resolved' card says 'It has, for the present, run its course.' A year-long feed shows the same 8 sentences dozens of times each — this is the most nakedly repetitive prose surface in the slice. Partly deliberate (a status line, subject rides in the headline), but it fails the year-long standard hardest; it has no per-entry seed even though the sibling sidecar's fnv1a32 idiom is one import away."
+        },
+        {
+          "name": "Market crier price quote (crierLine + unit/number/receipt vocabulary)",
+          "file": "src/domain/display/marketPrices.js (rendered by src/components/new/tabs/MarketPricesSection.jsx:49)",
+          "variant_count": "1 crierLine template ('${label} runs ${priced} — ${tag}, ${receipt}.'); causalReceipt: 4 clauses (2 dear, 2 cheap, picked by drift band); UNIT_BY_GOOD 19 words + UNIT_BY_CLASS 10 + DEFAULT_UNIT; NUMBER_WORDS 13; denominate() 4 phrasing shapes ('X coin and a half' / 'X coin' / 'half a coin' / 'a coin'); 2 tag words (dear/cheap)",
+          "classification": "view-time",
+          "classification_evidence": "Pure display read over the persisted commodityStocks bands + founding trade profile; local jitter is fnv1a32(settlementId:goodId) — no rng, nothing written back. Imported only by the lazy EconomicsTab/MarketPricesSection (grep confirms no generation-side importer). MarketPricesSection copy itself frames it: 'a market-crier's coarse reckoning... not a fixed rate.'",
+          "thinness": "thin",
+          "repetition_risk": "One template and 4 receipt clauses: a dossier revisited across a year of shortage always reads 'Grain runs four silver the bushel — dear, for it comes scarce this season.' — only the good, price and receipt-pair vary. Mitigated by being a single highlight line per settlement view (strongestDeviation picks one), so within one page it never self-repeats; across settlements/time the frame is uniform. Unit vocabulary (19 specific goods) is a genuine richness point."
+        },
+        {
+          "name": "Whisper prose (guidance whispers + Surveyor's notes)",
+          "file": "src/domain/display/guidanceRegistry.js + src/domain/display/guidanceNotes.js (prose leaves in src/copy/en.js; hosts SurveyorNote.jsx, FirstDossierCallouts.jsx, etc.)",
+          "variant_count": "GUIDANCE_WHISPERS: 17 registered whispers (measured), 1 fixed text each, across 8 mounted surfaces (dossier x4, wizard-postgen, home, config x6, library, gallery, realm x3). GUIDANCE_NOTES: 4 topics x 3 moments x exactly 2 copy-key variants = 24 note variants (measured), FNV-selected over a stable id.",
+          "classification": "view-time",
+          "classification_evidence": "Both modules are zero-import lazy display leaves ('must NEVER be imported by generation or the world-pulse kernel' — guidanceNotes.js header); prose lives in src/copy/en.js resolved via t() at render; nothing is written to world/save data. Whisper eligibility is milestone-gated UI state, not world state. Enforced by tests/domain/guidanceNotes.test.js walker + the dist lazy-leaf sentinel.",
+          "thinness": "adequate",
+          "repetition_risk": "LOW by design: whispers are one-per-surface teaching copy shown at milestone moments, not chronicle content — a year-long advance report never renders them, so the no-visible-repeat standard does not bind. The 2-variants-per-note-cell floor is shallow but the Surveyor speaks at rest-points (empty library, first dossier), each seen a handful of times per account lifetime.",
+          "notes": "Included because the slice named 'whisper prose'; if the orchestrator instead meant an in-fiction whisper/rumor surface, note that no other 'whisper' prose corpus exists — grep across src shows only comments (generosityKernel.js:588, supplyWebWarfare.js:81, informationStatecraft.js:1182 'whisper-war' — all doc comments, no display strings; verified with grep -a per the NUL gotcha)."
+        }
+      ]
+    },
+    "dossier": {
+      "summary": "Surveyed the dossier/settlement prose slice in the w7-prep worktree (read-only). Nearly all dossier prose is GENERATION-TIME: it is authored during generateSettlementPipeline (steps/generateNarratives.js + steps/assembleSettlement.js + npcGenerator/historyGenerator), written onto the settlement object (history.founding, history.events/currentTensions, arrivalScene, pressureSentence, npcs[].*, institutions[].desc), and persists into save/version_history/golden data — assembleSettlement.js explicitly comments that its rendered summaries \"persist or enter the golden hash\". View-time surfaces (PDF sections, SummaryTabV2, collectPlotHooks) only re-arrange persisted strings; they author no prose except fixed labels. Measured pools are small: 29 history-event types with exactly 1 description + 3 hooks each; 15 stress types with 4 arrival vignettes and 3 (sometimes effectively 1) pressure sentences; founding slots of 3-6 variants each; institutions and services have exactly 1 desc per entry (301 + 935), identical across every settlement. Anti-repetition machinery (hookVariety.js drawUnique + plotHooks.js family dedupe) is settlement-scoped only — it prevents within-dossier repeats but nothing prevents cross-settlement or across-time repeats, so a year-long advance report re-drawing from these pools will visibly repeat. Thinnest points: single-variant PRESSURE_SENTENCES branches (insurgency/mass_migration/wartime each 1 per condition; religious_conversion picks by name.length%3, so a settlement's variant never changes), 1-desc institutions, 1-description history events, NPC_WANTS at 4 per category, and STRESS_NOTES at exactly 1 per stress type.",
+      "surfaces": [
+        {
+          "name": "Historical events catalog (descriptions + plot hooks + factions)",
+          "file": "src/data/historyData.js (HISTORICAL_EVENTS_DATA), consumed by src/generators/historyGenerator.js",
+          "variant_count": "29 event types; per type exactly 1 description, 3 plotHooks, 3 faction names (grep: 29 `type:` entries, 29 `plotHooks` arrays of 3). EVENT_TYPE_NAMES = 1 display name per type.",
+          "classification": "generation-time",
+          "classification_evidence": "historyGenerator.js:509-564 copies eventTemplate.description (token-substituted) and 2-of-3 plotHooks into event objects; generateHistory is called from steps/generateNarratives.js:53 and its result attaches to settlement.history, which persists via the save service (settlementSlice.js version_history/Supabase) and is read back by pdf/sections/Timeline.jsx and domain/dossier/plotHooks.js (settlement.history.currentTensions).",
+          "thinness": "thin",
+          "repetition_risk": "Each event TYPE has exactly one authored description sentence — every 'succession_crisis' in every settlement, and every recurrence of the type over a year-long advance, renders the identical sentence modulo faction-name substitution. Hooks: 3 per type with 2 drawn, so two settlements sharing an event type have >50% hook overlap. The 5 ECHO_PREFIXES reframing (archival 'Old records suggest…') is the only variation lever and is itself a 5-string pool.",
+          "notes": "collectPlotHooks (src/domain/dossier/plotHooks.js:210) dedupes within ONE settlement's dossier only (exact-text + family key). No cross-settlement or cross-year registry exists."
+        },
+        {
+          "name": "Founding narrative (reason / foundedBy / initialChallenge / overcoming / stressNote)",
+          "file": "src/generators/narrativeGenerator.js (genArrivalDetail, lines 440-655) + src/data/narrativeData.js (TERRAIN_NARRATIVE_HOOKS)",
+          "variant_count": "TERRAIN_NARRATIVE_HOOKS: 8 keys x 6 phrasings; COMMODITY_HOOKS: 11 commodities x 2; FOUNDERS_BY_TIER: 6 tiers x 4-5; CHALLENGES_BY_ROUTE: 5 routes x 4; OVERCOMING_BY_PROSPERITY: 4 bands x 3; STRESS_NOTES: 15 stress types x exactly 1.",
+          "classification": "generation-time",
+          "classification_evidence": "historyGenerator.js:1095 `const founding = genArrivalDetail(config, context)` -> returned inside the history object (line 1152), attached in steps/generateNarratives.js, persisted with the settlement; rendered from persisted state by pdf/sections/HistoryFounding.jsx (fields history.founding.reason/foundedBy/...) and IdentityDailyLife.jsx:265-271.",
+          "thinness": "thin",
+          "repetition_risk": "Slot-by-slot pools are 3-6 deep and keyed by tier/route/terrain/prosperity — two same-tier river towns have a 1-in-4 to 1-in-6 collision per slot; in a 20-settlement world, identical foundedBy/challenge lines are near-certain. STRESS_NOTES is a fixed single sentence per stress type: every famine settlement carries the identical founding coda. Combinatorial product masks it within one dossier but not across a campaign or after regen (regenHistoryPipeline re-rolls from the same pools)."
+        },
+        {
+          "name": "Arrival scene (opening vignette + route addon)",
+          "file": "src/generators/narrativeGenerator.js (generateArrivalScene :1084, STRESS_DESCS :192) + src/data/narrativeData.js (ARRIVAL_SCENES, ARRIVAL_ADDONS)",
+          "variant_count": "STRESS_DESCS: 15 stress types x exactly 4 vignettes (measured by arrow-count per key block, all 4). ARRIVAL_SCENES: market 2, river 2, smoke 2, guild 2, ordinary 6. ARRIVAL_ADDONS: 5 routes x 4. Fallback string: 1 ('X comes into view.').",
+          "classification": "generation-time",
+          "classification_evidence": "steps/assembleSettlement.js:150 `settlement.arrivalScene = generateArrivalScene(settlement)` — the assembled string is stamped on the settlement inside the pipeline (same file's comments state these fields persist / enter the golden hash); read back from persisted state by components/new/SummaryTabV2.jsx:96 and SummaryTab.jsx:129.",
+          "thinness": "thin",
+          "repetition_risk": "A stressed settlement draws 1 of only 4 stress vignettes — every fourth under-siege settlement opens with the same paragraph verbatim (name substituted). Non-stressed settlements on the same route draw from pools of 2 (market/river/smoke/guild), the thinnest named pools in the slice. Composition with architecturalNote/landmarkNote/addon adds surface variety, but the distinctive opening sentence is the repeat the reader notices."
+        },
+        {
+          "name": "Pressure sentence (current-crisis one-liner)",
+          "file": "src/generators/narrativeText.js (PRESSURE_SENTENCES) via narrativeGenerator.js generatePressureSentence :1007",
+          "variant_count": "15 stress types; 11 have 3 variants; insurgency/mass_migration/wartime have 2 conditional branches x 1 variant each (the branch is determined by compound stats, so effectively 1 phrasing per settlement state); religious_conversion has 3 variants selected by name.length % 3 — DETERMINISTIC per settlement name, zero re-roll variety.",
+          "classification": "generation-time",
+          "classification_evidence": "steps/assembleSettlement.js:149 `settlement.pressureSentence = generatePressureSentence(settlement)` — persisted on the settlement; consumed from persisted state by TableView.jsx:62, map/QuickInspector.jsx:65, SummaryTabV2.jsx:95 (accent line).",
+          "thinness": "critical",
+          "repetition_risk": "This is the most-surfaced line in the product (table view, map inspector, summary header). For 4 of 15 stress types there is effectively ONE sentence per settlement condition: all economically-sound wartime settlements in a world print the identical wartime paragraph; a religious_conversion settlement can never vary its sentence across regens because the selector is name.length%3, not RNG. 3-variant pools for the rest still guarantee repeats by the third same-stress settlement.",
+          "notes": "succession_void embeds a live rng() weeks-count — the only intra-template variation in the table."
+        },
+        {
+          "name": "Political character / history flavor (POLITICAL_FLAVOR)",
+          "file": "src/generators/narrativeText.js (POLITICAL_FLAVOR), consumed by narrativeGenerator.js:109-145 and historyGenerator.js:70-99",
+          "variant_count": "8 pattern keys (political_heavy, disaster_heavy, economic_heavy, catastrophic, layered_history, stable, religious_heavy, magical_heavy) with ~3-6 templates each (arrow-count 6-12 per block; each template contains an inner pickRandom2, so authored templates = roughly half the arrow count: 3, 3, 3, 6, 3, 5, 4, 4).",
+          "classification": "generation-time",
+          "classification_evidence": "Called during generateHistory / generateCoherence inside the pipeline (historyGenerator.js:70, narrativeGenerator.js:121) producing the history 'character' description that ships in the persisted history object; plus 15% of calls short-circuit to POLITICAL_FLAVOR.stable regardless of pattern (line 121), further concentrating output.",
+          "thinness": "thin",
+          "repetition_risk": "3-6 templates per pattern, with a hard-coded 15% override funneling into the 'stable' pool — across a multi-settlement world the same 'character' sentence recurs quickly, and the pattern key is derived from event-type mix, so similar settlements deterministically land in the same 3-template pool."
+        },
+        {
+          "name": "Institution descriptions (catalog flavor)",
+          "file": "src/data/institutionalCatalog.js",
+          "variant_count": "301 `desc:` strings — exactly 1 per institution entry, tier-keyed (thorp..metropolis x category). Zero alternates per institution.",
+          "classification": "generation-time",
+          "classification_evidence": "The catalog entry (incl. desc) is copied onto the rolled institution object during steps/assembleInstitutions.js / economyReconcilePass.js:153 (`desc: item.description || ''`) and persists with the settlement; PDF sections (EconomicsTrade.jsx:68, DefenseSecurity.jsx:182) and Institutions.jsx render the persisted field.",
+          "thinness": "thin",
+          "repetition_risk": "Per-slot this is critical (1 variant): every 'Market' in every settlement in every world reads 'Fair pricing through competition'-style identical flavor forever, across regens and across a year-long advance. The catalog's breadth (301 entries) hides it within one dossier but any reader of 3+ dossiers sees verbatim-identical institution blurbs. This is static reference text posing as flavor prose.",
+          "notes": "Same single-variant shape as services below; the two together are the largest fixed-prose mass in the dossier."
+        },
+        {
+          "name": "Institution service menus (per-service one-liners)",
+          "file": "src/data/institutionServices.js (INSTITUTION_SERVICES)",
+          "variant_count": "935 `desc:` strings — exactly 1 per service per institution; no alternates.",
+          "classification": "generation-time",
+          "classification_evidence": "Services are resolved onto institutions during generation (servicesGenerator.js / services steps) and persist; pdf/sections/Services.jsx renders the persisted desc strings. Fuzzy-matching fallback documented in the file header shows the desc travels with the rolled service.",
+          "thinness": "adequate",
+          "repetition_risk": "Same 1-variant-per-slot shape as the catalog, but service lines are terse utilitarian menu text ('Settles quarrels between households by custom') where verbatim repetition reads as intentional reference material rather than failed prose — lower perceived-repetition harm. Cross-settlement identity is total, though: every Village elder menu is byte-identical.",
+          "notes": "Rated adequate only because the register is menu/reference, not narrative; if the CONTENT VOLUME program wants these to feel authored, they are 1-deep."
+        },
+        {
+          "name": "NPC persona + hook pools (mannerisms, speech, wants, secrets, hooks, loyalty)",
+          "file": "src/data/npcData.js, consumed by src/generators/npcGenerator.js",
+          "variant_count": "MANNERISMS 30; SPEECH_PATTERNS 20; NPC_BUILDS 10; NPC_FEATURES 28; NPC_PLOT_HOOKS 7 categories x 8; NPC_WANTS 7 x 4; NPC_SECRETS 7 x 6; NPC_CRIMINAL_SECRETS 10 categories x ~12 (124 total); NPC_FACTION_LOYALTY 8 keys x ~10 (80 long strings); NPC_PRESENTATION_MODES ~10 modes x (impression/disposition/behaviour); STRESS_ECONOMIC_EFFECTS 18 relationship archetypes x 1 desc template.",
+          "classification": "generation-time",
+          "classification_evidence": "npcGenerator.js draws at generation (line 253 tell/speech; :674 plot hooks; :1788 relationship description from archetype.desc(npc,partner)); NPCs live on settlement.npcs which persists and is re-enriched (not re-texted) by enrichNpcCoherence; regenNPCsPipeline re-rolls from the same pools. Hooks read back at view time by collectPlotHooks from persisted npc.plotHooks.",
+          "thinness": "thin",
+          "repetition_risk": "Within one settlement, drawUnique (hookVariety.js) prevents same-pool repeats until exhaustion — but exhaustion is real: a city with 9+ NPCs in one category exhausts its 8-hook pool and the code accepts repeats explicitly. Across settlements there is NO registry: two towns' guild masters share a 4-string NPC_WANTS pool. Relationship archetypes have exactly 1 desc template each (18 total) — every 'old_debt' pair in the world is described identically. Wants (4/category) and the 18 x 1 archetype descs are the thinnest cells.",
+          "notes": "The measured 8.19% corpus / 35% worst-settlement repeat rate cited in hookVariety.js header was the pre-fix baseline; the fix is settlement-scoped only."
+        },
+        {
+          "name": "Terrain descriptions (TERRAIN_DATA)",
+          "file": "src/data/geographyData.js",
+          "variant_count": "7 terrain types x exactly 1 description string; 39 name fields. No prose alternates.",
+          "classification": "view-time",
+          "classification_evidence": "TERRAIN_DATA.description is never copied into the settlement and never rendered as dossier prose — all consumers (resourceGenerator, foodGenerator, economy/viability, assembleInstitutions :224, generateNarratives :34) read only allowedResources/agricultureCapacity/institutionModifiers. The dossier shows terrain only as a humanized label (pdf/sections/IdentityDailyLife.jsx:39, Overview.jsx:84). Geography PROSE in the dossier is actually the founding 'reason' line (surface 2).",
+          "thinness": "critical",
+          "repetition_risk": "There is effectively NO geography/surroundings prose surface in the dossier at all — no environs description, no landscape paragraph. A year-long report set across 7 terrain types has zero terrain-specific descriptive text to repeat because none is emitted; the gap is absence, not repetition. If the CONTENT VOLUME program wants geography flavor, this surface must be built, not deepened.",
+          "notes": "The 7 one-line descriptions exist but are config-UI-grade metadata ('Settlement on the ocean coast with beach or cliff access')."
+        },
+        {
+          "name": "Anti-repetition machinery (mitigation, not content)",
+          "file": "src/generators/hookVariety.js (drawUnique) + src/domain/dossier/plotHooks.js (collectPlotHooks dedupe, ECHO_PREFIXES)",
+          "variant_count": "5 ECHO_PREFIXES (archival reframings); drawUnique = settlement-scoped Set keyed by template string; dedupe = exact-text + family-id layers on the priority-sorted hook list.",
+          "classification": "mixed",
+          "classification_evidence": "drawUnique runs at generation time (seeded RNG, one roll per draw, registry lives only for the duration of one settlement's generation); collectPlotHooks runs at view time (called from OutputContainer.jsx:381, pdf PlotHooks.jsx, tonightAtTheTable.js:118) over PERSISTED hook strings — so persisted duplicates across sources are hidden at render but still stored.",
+          "thinness": "adequate",
+          "repetition_risk": "Both layers are per-settlement. Nothing in the slice tracks emission across settlements, across saves, or across simulated time — the exact scope a year-long advance report exposes. Pool-exhaustion fallback in drawUnique (accept repeat, register nothing) means large settlements silently re-enter naive-pick behavior.",
+          "notes": "This is the right architecture to EXTEND (world-scoped or chronicle-scoped registry) if pools are deepened; it does not itself add variants."
+        }
+      ]
+    },
+    "names": {
+      "summary": "Naming-slice survey of the w7-prep worktree (read-only). Five surfaces measured: NAMING_DATA cultures (rich for people, adequate for settlement names), institutionalCatalog type-name tables (one fixed label per institution, no proper-name layer anywhere), FACTION_DESCRIPTORS (critically thin — 36 names realm-wide with settlement-local-only dedupe), DEITY_POOL (24 authored gods, repetition intended by design), and the npcData goal/temperament vocabulary (goals thin at 2 per role; also NPC_WANTS is consumed as the `clothes` appearance field at npcGenerator.js:286, an apparent slot mislabel). Every surface is generation-time: the strings are written into settlement/world objects at generation or tick and persist through saves/goldens, so any repetition bakes into the world permanently; the chronicle (src/domain/worldPulse/chronicle.js) is a view-time reader that renders these persisted names, so a year-long advance report exposes faction-name and goal-text collisions across settlements immediately.",
+      "surfaces": [
+        {
+          "name": "Naming cultures (people + settlement names, titles)",
+          "file": "src/data/namingData.js (4,037 lines); consumers src/generators/npcGenerator.js, src/domain/worldPulse/settlementLifecycleKernel.js",
+          "variant_count": "11 cultures (germanic, latin, celtic, arabic, norse, slavic, east_asian, mesoamerican, south_asian, steppe, greek). Per culture, measured by import: settlementPrefixes=30, settlementSuffixes=30 (900 combos/culture), maleNames 81-119, femaleNames 68-103, surnames 62-96, titles map = 27 role keys (same key set in all 11 cultures). Total name parts per culture ~250-320.",
+          "classification": "generation-time",
+          "classification_evidence": "Write path: npcGenerator.pickFirst/pickLast draw from NAMING_DATA with the global generation rng and the resulting strings land on npc.name/npc.title; generateSettlementName (npcGenerator.js:1817) is written into settlement.name at assembleSettlement.js:71 — all persisted in the settlement object, hence saves and goldens. Additionally settlementLifecycleKernel.drawSteadingName (line ~342) draws prefix/suffix with a seeded fork AT TICK TIME when a satellite settlement is founded, and that name persists into world state. Read path: UI and chronicle render the stored strings; nothing re-derives names at view time.",
+          "thinness": "adequate",
+          "variant_countnote": null,
+          "notes": "People-name pools are the richest surface in the slice. Deliberate mechanic: pickFirst truncates the surname pool by tier ratio (thorp=12%, min 3 surnames) for kinship clustering — small settlements repeating surnames is intended. Titles are one fixed string per role per culture (27 roles), with a humanize-the-key backstop for missing roles.",
+          "repetition_risk": "Low for people (thousands of first x surname combos per culture). Moderate for settlements: 30x30=900 combos per culture, but a year-long advance report founds only a handful of steadings, so visible repeats are unlikely within one realm-year; across many realms or long horizons prefix reuse (Stein-, Wald-) becomes noticeable. Titles repeat by design (every mayor of a culture bears the same title string)."
+        },
+        {
+          "name": "Institution name tables",
+          "file": "src/data/institutionalCatalog.js; consumer src/generators/steps/assembleInstitutions.js",
+          "variant_count": "301 named institutions total: thorp=17, hamlet=36, village=58, town=81, city=84, metropolis=25 (measured by import). Exactly 1 fixed name string per institution type — zero variants per slot. No proper-name tables (tavernNames/shopNames/innNames grep: zero hits repo-wide).",
+          "classification": "generation-time",
+          "classification_evidence": "Write path: assembleInstitutions.js:261 pushes { category, name, ...inst } into settlement.institutions using the catalog key as the literal name; persisted in the settlement object -> save/golden. Read path: dozens of consumers match on the stored name string (rulingStructure.js lowercases and .includes() them; npcGenerator filterByGuild parses guild names) — the name is load-bearing as a lookup key, not just display text.",
+          "thinness": "thin",
+          "repetition_risk": "Every settlement of a tier shares identical institution labels ('Wayside shrine', 'Lord's reeve', 'Tavern'). As taxonomy this is fine; as narrative surface a year-long chronicle that names institutions across settlements repeats the exact same strings with no proper-name layer to differentiate ('the Gilded Goose' style names do not exist anywhere). CAUTION for any enrichment: institution names are matched by substring in rulingStructure/governanceNarrative/npcGenerator, so adding proper-name variants would break those keyword lookups unless a separate displayName field is added."
+        },
+        {
+          "name": "Faction names",
+          "file": "src/data/powerData.js (FACTION_DESCRIPTORS, line 3); consumer src/generators/power/factionGrouping.js",
+          "variant_count": "9 categories (economy, government, military, religious, magic, criminal, crafts, noble, other) x 4 names each = 36 total faction names, plus 5 dedupe suffixes ('Inner Circle', 'Bloc', 'Alliance', 'Faction', 'Assembly') — measured by import and file read.",
+          "classification": "generation-time",
+          "classification_evidence": "Write path: factionGrouping.js:57-67 picks from FACTION_DESCRIPTORS[dominantCategory], retries 5x against usedNames (built ONLY from that settlement's own factions, line 56), then pushes { name: chosenName, ... }; generatePopulation.js:40 stores the result on the settlement -> save/golden. Read path: worldPulse factionCompetition, eventComposer, and the chronicle all read the persisted faction.name.",
+          "thinness": "critical",
+          "repetition_risk": "Worst surface in the slice. Dedupe is settlement-local only: with 4 names per category, a realm of N settlements is guaranteed near-immediate cross-settlement collisions — many settlements each have 'The Trade Compact'. A year-long realm chronicle that names factions in inter-settlement events (wars, trade disputes, interventions) will show identical faction names on OPPOSITE sides of conflicts. Within one settlement, a 5th same-category faction gets a suffix from a pool of 5, so even local variety caps at ~9 names per category."
+        },
+        {
+          "name": "Deity names + portfolios",
+          "file": "src/generators/data/deityPool.js; consumer src/generators/steps/seedStartingPantheon.js",
+          "variant_count": "DEITY_POOL = 24 authored deities (7 good / 9 neutral / 8 evil; ranks: 4 major-ish per band, minor, cult), each with a unique name and a one-line free-text portfolio (zero mechanics per file header). Measured by import and full file read.",
+          "classification": "generation-time",
+          "classification_evidence": "Write path: seedStartingPantheon.js:111 sorts DEITY_POOL by slug and draws deterministically at generation (affinity-weighted by terrain/culture/government); drawn deities persist into the pantheon with stable refs `deity:core:<slug>` explicitly documented as STABLE ACROSS SAVES. Read path: compendium/deity views render the persisted registry entries.",
+          "thinness": "adequate",
+          "repetition_risk": "Cross-settlement repetition is EXPLICITLY the design: the file header states pool refs are stable so 'a valley of settlements sharing the Harvest-Mother archetype is the intended prevalence-clustering substrate', and custom/homebrew deities occupy their own namespace for variety. A year-long chronicle repeating 'Thessa of the Hearth' across settlements reads as a shared religion, not thin content. Only residual risk: 24 gods caps religious-conflict variety realm-wide (rival cults of the same few evil gods), and portfolios are single fixed sentences — but this is owner-ratified architecture, not a gap to fix unilaterally."
+        },
+        {
+          "name": "Goal / temperament / wants vocabulary",
+          "file": "src/data/npcData.js; consumer src/generators/npcGenerator.js",
+          "variant_count": "Measured by import: NPC_FACTION_GOALS = 26 role keys, Mayor=4 goals, all 25 other roles = 2 goals each (~54 goal templates, {commodity}/{faction} token substitution at npcGenerator.js:539-546); NPC_WANTS = 7 categories x 4 = 28; NPC_PERSONALITY_TRAITS = positive 30 / negative 30 / neutral 30 (positive = the temperament/dominant slot, negative = flaw, neutral = modifier); MANNERISMS = 30; SPEECH_PATTERNS = 20; plus per-stress STRESS_GOALS templates (e.g. under_siege = 1) taken 40% of the time under stress.",
+          "classification": "generation-time",
+          "classification_evidence": "Write path: generateNPCRelType (npcGenerator.js:~535) picks a role goal and stores it as npc.goal { short, long } (line ~101); generateReligionType picks dominant/flaw/modifier/tell/speech and they land on npc.personality; generateNPCAppearance line 286 stores NPC_WANTS text as the npc's `clothes` field. All ride the npc object into the settlement -> save/golden. Read path: NPC cards/dossier render the stored strings; corruption engine reads the persisted flaw (npcCorruptibleFlaw).",
+          "thinness": "thin",
+          "repetition_risk": "Goals: with 2 templates per role, any two same-role NPCs across the realm have >=50% identical goal text (token substitution only varies {commodity}/{faction}, and most templates lack tokens) — a year-long report profiling leaders repeats verbatim. Temperament/flaw at 30/30 is adequate within one settlement but repeats at realm scale (~30+ settlements x several NPCs each); TRAIT_PRESENCE_DISTRIBUTION deliberately nulls slots (20% temperament-only etc.), which masks some repetition. SPEECH_PATTERNS at 20 is the thinnest personality slot. SIDE FINDING: npcGenerator.js:286 `clothes: pickFromArray(NPC_WANTS[r] || NPC_WANTS.other)` — the 'wants' vocabulary is stored in the appearance `clothes` slot; either the constant is misnamed or the wrong table is wired to clothing (verify NPC_WANTS entry text before treating as a bug)."
+        }
+      ]
+    },
+    "chronicle-briefs": {
+      "summary": "Chronicle + S2 brief register survey (READ-ONLY, w7-prep worktree). The new chronicle read-models and the brief composers are deliberately prose-minimal by design: nearly all reader-visible variety is INHERITED from persisted crier-voiced outcome.headline/summary (written at generation time into worldState.pulseHistory by pulseKernel.js:1613 via compactOutcomeForHistory, ring-capped at 80 advances). The chronicle's OWN authored text is connective template tissue — 4 span frames, 1 quiet fallback, 2 landing labels, 5 standing words, 1 honest-null sentence, 3 cluster joint-story templates — all view-time, never persisted. The repetition exposure of a year-long advance report therefore splits: (a) the fixed connective sentences ('Little changed in the standings.', 'You issued no orders this advance.', the honest-null finding, 'The {span}: ...' frames) repeat VERBATIM across the 80-advance scrollback — thin but a recorded register choice ('register-safe: reuses persisted prose rather than authoring new'); (b) the payload variety is entirely owned by the event/crier phrasing slice (out of this slice), which is where a year-long chronicle would actually expose repetition. The S2 brief bundles carry 21 fixed section titles + 2 one-template authored lines (dramatic-irony conspiracy sentence, warCausalBrief peace-reason count line); the variety burden there is explicitly delegated to the AI prose layer (S1/S3), with the bundle as the zero-AI structural fallback. Boundary note: src/lib/chronicle.js is the OLDER per-settlement AI-narrative chronicle (persists snapshots into ai_data.chronicle — generation-time), unrelated to the new read-models; do not conflate the two when planning content-volume work.",
+      "surfaces": [
+        {
+          "name": "Chronicle read-model phrasings (headline frames, thread titles/arc, chapters, deputy diary)",
+          "file": "src/domain/display/chronicleReadModel.js",
+          "variant_count": "Advance headline: 4 span frames ('The week/month/season/year') x 1 template `${frame}: ${top.title}` + 1 quiet variant '${frame} passed quietly.' (headlineFor, lines 294-299). Thread title: 0 authored variants — reuses the persisted most-severe beat headline, fallback 'A quiet thread' (1) (buildThread line 210). Arc: structural began/turned/stands from persisted headlines, 0 authored prose. Chapter labels: 1 template `${season} · year ${N}` x 4 season words (line 134). Deputy-diary fallback headline: 'A ruling in your absence' (1) (line 273). Thread state: 2 enum strings ('includes-your-decree'/'ran-its-course').",
+          "classification": "view-time",
+          "classification_evidence": "Pure function chain worldState.pulseHistory -> advanceEntries -> chronicleForAdvance, consumed in AdvanceReport.jsx useMemo (lines 292-298); module doc states 'RNG-free, clock-free, non-persisting' and I found zero store/save writes — the only store write in the whole surface is setSelectedSettlementId (map highlight UI state). The TEXT it displays, however, is read from generation-time data: outcome.headline/summary persisted into pulseHistory by pulseKernel.js:1613 via compactOutcomeForHistory (pulseHelpers.js:28-43).",
+          "thinness": "thin",
+          "repetition_risk": "Over the 80-advance scrollback every entry's lead is one of 5 frame patterns; a year of weekly advances shows 'The week: ...' 52 times. The payload after the colon varies only as much as the crier's persisted headlines vary (a different slice — that slice's per-event-kind variant counts dominate the real repetition exposure). Deliberate register choice documented in-file ('register-safe: reuses the persisted crier-voiced headline rather than authoring new prose'), so any enrichment should add frame/connective variants, not new event prose.",
+          "notes": "Season constitution (4 seasons, WEEKS_PER_YEAR=52) is duplicated from worldState.js with a test pin — do not add season names without extending the pin. Fallbacks 'World pulse outcome'/'World pulse impact' exist BOTH view-time (chronicleGraph.js nodesFromRecord lines 265/280) and generation-time (compactOutcomeForHistory writes the same fallback into the durable record) — an outcome kind that ships no headline repeats identically forever in saved data."
+        },
+        {
+          "name": "Decree tracker phrasings (landing, standing, honest-null finding, reversal reasons, cluster joint stories)",
+          "file": "src/domain/display/decreeTracker.js",
+          "variant_count": "Landing labels: 2 templates ('week ${k} of ${N}' / 'during the span', lines 105-107). Standing: 5 enum words (held/absorbed/contested/undone/null) + 1 within-cluster variant 'absorbed-by-your-own-decree' (line 308). Honest-null finding: exactly 1 fixed sentence 'This decree produced no measurable downstream effect this span.' (line 218). Reversal reasons: 3 templates (relationship pushed back / moved back the other way / 'a ${stressor} struck ${target}', lines 145-158). Cluster jointStory: 3 templates + 1 fallback ('your X was undone by your Y — ...' / 'your X then Y built on one another' / 'your X and Y met in the same events' / 'two of your decrees worked against each other', lines 285-297). decreeKind: structural (verb or payload kind, 0 authored variants).",
+          "classification": "view-time",
+          "classification_evidence": "Pure, non-persisting (module doc + code): decreesForAdvance/decreeHistory read pulseHistory nodes via nodesFromRecord and return derived objects; consumed only in AdvanceReport.jsx useMemo (line 298). No write path exists — standing/cone/finding are re-derived on every render ('no durable standing field exists', a reported seam in-file).",
+          "thinness": "thin",
+          "repetition_risk": "The decree ledger is the surface the owner anchored verbatim ('it should be noted for the user because that was their choice') — and every ineffective decree across a year shows the IDENTICAL one-variant honest-null sentence, every entangled pair one of 3 joint-story templates. Because it is view-time, enriching variants later retro-applies to all history (no save migration) — cheap to fix, but any variant selection must stay deterministic (no RNG/clock) to preserve the read-model determinism pins in tests/domain/decreeTracker.test.js.",
+          "notes": "The mechanical register is partly load-bearing honesty (inferred cone/standing must not over-claim), so enrichment should vary phrasing, not certainty. Cluster/conflict text interpolates decree KINDS (raw verb slugs via human()), which reads flat ('your set relationship label was undone by your set relationship label' is possible for two relationship decrees — the two kinds can be the SAME word)."
+        },
+        {
+          "name": "AdvanceReport surface copy (empty state, section chrome, quiet-advance sentences, delta chips, footer teaching)",
+          "file": "src/components/map/AdvanceReport.jsx",
+          "variant_count": "Recurring per-advance sentences: 'Little changed in the standings.' (1, line 109), 'You issued no orders this advance.' (1, line 262) — each 1 variant. Empty-state invitation: 1 paragraph (lines 312-315). Footer whisper: 1 paragraph (lines 393-394). Section titles: 6 fixed ('What is different', 'Chapters', 'Threads', 'Events', 'Rulings in your absence', 'Your decrees'). Delta chips: 'grew'/'declined' + 4 relationship-kind slugs (war-declared/alliance-formed/peace-or-shift/relationship-change, chronicleReadModel.js lines 170-176) + tier template 'tier X → Y'. Drama-class labels: 8 (CLASS_LABEL). Reversibility chips: 2 ('consumed'/'still amendable') + 'reversibility inferred'. Scrubber: 1 template 'the ${span} to tick ${N} · k of M'.",
+          "classification": "view-time",
+          "classification_evidence": "JSX literals rendered per mount inside RealmInspector's lazy chunk; the component's only store interaction is useStore(s => s.setSelectedSettlementId) (line 288) — a UI selection write, no world/save data touched. Verified no persistence import in the file.",
+          "thinness": "adequate",
+          "repetition_risk": "Section chrome repeating is correct UI behavior (labels, not chronicle prose). The genuine thin spots are the two 1-variant recurring sentences: a stasis-prone realm (the sim's known STASIS tendency under autoresolve) shows 'Little changed in the standings.' on advance after advance — the single most likely visibly-repeated line in a year-long report. Relationship-kind chips render raw slugs through human() ('war declared', 'peace or shift') — functional but flat.",
+          "notes": "Copy lives inline in JSX, not in src/copy/en.js — a divergence from the copy-register pattern elsewhere in the repo; any content-volume pass should decide whether chronicle copy joins the register. advanceReport.test.jsx pins some strings (empty state, decree section) — copy edits will red those pins."
+        },
+        {
+          "name": "S2 brief register — composer prose slots + citation law strings",
+          "file": "src/domain/briefs/composers.js, src/domain/briefs/citations.js",
+          "variant_count": "Section titles: 21 fixed strings across 7 composers (settlementBrief 4, playerSafeBrief 4, factionBrief 2, regionalBrief 3, weeklyDigest 4, sessionPrep 3, dramaticIronyBrief 1) — 1 variant each, by design. Authored prose templates: exactly 2 in the composer layer — the dramatic-irony conspiracy line '${n} conspirac(y|ies) move behind ${m} visible bloc(s).' (composers.js line 284, 1 template with plural branches) and the war line imported from warCausalBrief ('${k} of ${N} peace reasons now present(; this war is dying)', peaceReasons.js line 333 — 1 template x 2 branch variants) used by regionalBrief + weeklyDigest. Honesty-boundary string: 1 ('the engine does not record this', citations.js line 62). Everything else in a bundle is structural data from the W-R2 read-model ingredients, zero authored prose.",
+          "classification": "view-time",
+          "classification_evidence": "Composers are pure ('Pure; no I/O; deterministic' — citations.js doc) and are invoked fresh per question by selectSlices() in src/domain/ai/stateSlicers.js (line 25 imports BRIEF_COMPOSERS; slices are built per call, lines 107-120). No bundle write path exists; the bundle grounds the S1/S3 AI prose layer at request time. (Downstream AI OUTPUT may persist elsewhere, but that is the AI layer's lifecycle, not the bundle's.)",
+          "thinness": "adequate",
+          "repetition_risk": "Low as designed: the bundle is the zero-AI structural fallback and the citation law deliberately forbids authored invention — variety is delegated to the AI prose layer, and the fixed titles/receipt tags MUST stay stable (SOURCE tokens are shared by prompt + client display + aiOperationLog, citations.js lines 21-25; the frozen PLAYER_SAFE_SOURCES set and the fail-closed assembleBrief guard mean new prose slots must be added as new sourced sections, never free text). The two authored templates are 1-variant each; if the bundle is ever surfaced raw (BYOK-off users), the weekly digest's war line and irony line repeat verbatim week over week.",
+          "notes": "Any content-volume enrichment here must respect the structural audience rule: player-audience text can only derive from PLAYER_SAFE_SOURCES, and a new section requires a registered SOURCE token or section() throws at construction. Boundary note: src/lib/chronicle.js is a DIFFERENT, older system (per-settlement AI narrative chronicle, persisted into saved settlement ai_data.chronicle — generation-time, rotation-capped) — not part of the new chronicle read-models; do not conflate when scoping fixes."
+        },
+        {
+          "name": "Persisted headline/summary substrate the chronicle reuses (dependency, out-of-slice writer)",
+          "file": "src/domain/worldPulse/pulseHelpers.js (compactOutcomeForHistory, line 28), src/domain/worldPulse/pulseKernel.js (line 1613)",
+          "variant_count": "Not measured here (the event/crier phrasing slice owns per-kind variant counts); this slice measured only the fallbacks: 'World pulse outcome' (1) + 'World pulse impact' (1), written into the durable record when an outcome ships no headline.",
+          "classification": "generation-time",
+          "classification_evidence": "Write path: pulseKernel.js:1613 `selectedOutcomes: selectedForApply.slice(0, 24).map(compactOutcomeForHistory)` persists headline/summary into worldState.pulseHistory (MAX_HISTORY=80 ring, worldState.js:9); read path: chronicleGraph.js nodesFromRecord -> thread titles, arc lines, beat rows, deputy-diary headlines, decree receipt lines. This text survives in save data and cannot be retro-enriched by view-time changes.",
+          "thinness": "thin",
+          "repetition_risk": "This is where a year-long chronicle's repetition actually lives: every chronicle thread title, arc beat, and event row is verbatim persisted crier text, so the crier's per-event-kind variant count IS the chronicle's effective variety ceiling. Flagging as the cross-slice dependency: enriching the chronicle without enriching the persisted headline generators changes nothing the reader sees, and enrichment there only affects NEW advances (old records keep their prose) — a two-class golden-discipline item for the CONTENT VOLUME program.",
+          "notes": "Measured counts for the headline generators themselves belong to the event/crier phrasing slice, not this one; reporting the seam so the parent can join the two surveys."
+        }
+      ]
+    },
+    "glossary-guidance": {
+      "summary": "Surveyed 4 content surfaces in the w7-prep worktree (read-only). Key persistence finding: realm refusal prose and applied-order news prose are GENERATION-TIME — realmVetoProse() output is baked into news entries (summary + reasons) by realmRefusalNews()/orderNews() in realmVerbExecution.js, flows through applyWorldPulse newsEntries into campaign.wizardNews (a persisted campaign column per src/lib/campaigns.js:133), and is read back by campaignChronicle.js:23 — so every refusal/order of the same code/verb repeats its single fixed sentence verbatim in a year-long chronicle. Mitigating: these entries mint only on DM orders (provenance 'dm'), never from organic ticks, so pure autoresolve years produce zero of them. Glossary, guidance-registry whispers, and Surveyor's notes are all view-time (rendered fresh from frozen code tables / t() copy keys; only dismissal booleans persist, to localStorage) and never enter the advance report — their low variant counts are reference/one-shot-teaching by design, not chronicle repetition. Thinnest slot measured: 1 phrasing per veto code (30 codes) and 1 fixed applied-summary per realm verb (~12), persisted; 2 variants per Surveyor-note cell (deliberately FNV-stable per keeper); 1 sentence per whisper (17 whispers, dismissible). Stale note: glossary.js:246 comment says \"52 entries\" but the live derivation yields 66 (31 event verbs + 14 realm verbs + 4 stability + 6 strain + 5 capture + 3 severity + 3 magnitude).",
+      "surfaces": [
+        {
+          "name": "Generated glossary + committed reference (SurveyorGlossary affordance, docs/glossary.md)",
+          "file": "src/domain/display/glossary.js; src/components/guidance/SurveyorGlossary.jsx; docs/glossary.md",
+          "variant_count": "66 entries total, exactly 1 definition each: 31 event verbs (derived from affordanceManifest labels/dials), 14 realm verbs (derived from realmManifest), 4 stability bands (read from BAND_HINT, src/domain/state/bands.js:52), 6 strain bands (STRAIN_DEFS), 5 capture rungs (CAPTURE_DEFS), 3 severity + 3 magnitude dial levels (authored, coverage-pinned). docs/glossary.md carries 64 table rows, byte-pinned by tests/docs/glossaryFreshness.test.js",
+          "classification": "view-time",
+          "classification_evidence": "buildGlossaryEntries() is a pure derivation over frozen code registries, memoized per session (glossary.js:247-251); SurveyorGlossary.jsx:119 calls glossaryEntryFor(id) at render. Nothing writes to world/save/golden data — the only committed artifact is docs/glossary.md via scripts/generate-glossary.mjs, a repo doc, not save data.",
+          "thinness": "adequate",
+          "repetition_risk": "None for the chronicle — glossary text never enters world/news/save data. Single-definition-per-term is correct for reference material; the freshness pin forces coverage of new engine terms.",
+          "notes": "Stale comment at glossary.js:246 claims 52 entries; live count is 66 (the 14 realm verbs joined after the comment). Honesty gate (unbacked term renders as plain text) verified in SurveyorGlossary.jsx:122. Deferred, documented in-file: institution facets + credibility stock have no entries."
+        },
+        {
+          "name": "Guidance registry whispers (plain-register house voice)",
+          "file": "src/domain/display/guidanceRegistry.js; src/copy/en.js (guidance.* at ~line 599)",
+          "variant_count": "17 registered whispers, exactly 1 copy key -> 1 fixed sentence each (no variant arrays): 4 dossier, 1 wizard-postgen, 1 home, 6 config compendium hints (title+body pairs: tradeRoute/terrain/culture/monsterThreat/magicLevel/tier), 3 empty-state invitations, 2 realm mechanism whispers (realmOrders, realmDocket). One-whisper-per-surface budget enforced by selectWhisper()",
+          "classification": "view-time",
+          "classification_evidence": "Registry is a zero-import lazy leaf storing copy KEYS; hosts resolve via t() at render (guidanceRegistry.js:14-16, 86). The only persisted state is the unified sf:guidance dismissal boolean in localStorage (lib/guidance) — no whisper text ever reaches worldState, saves, or goldens.",
+          "thinness": "adequate",
+          "repetition_risk": "None for the chronicle — whisper prose never persists. Single phrasing per whisper is by design: dismissible one-shot teaching gated by firsts/newborn (isWhisperEligible, guidanceRegistry.js:393-399), so a veteran never re-sees it; repetition is structurally suppressed by dismissal rather than by variant count.",
+          "notes": "The walker test (tests/domain/guidanceRegistry.walker.test.js) binds ids/copy/surfaces both directions; UNWIRED_WHISPERS burned down to empty on this branch — all 17 render through hosts."
+        },
+        {
+          "name": "Surveyor's-notes voice sidecar (in-world persona marginalia)",
+          "file": "src/domain/display/guidanceNotes.js; src/copy/en.js (guidance.notes.* at line 652)",
+          "variant_count": "4 topics x 3 moments x 2 variants = 24 authored lines, plus 2 floor lines per topic = 8, total 32 prose lines in en.js. Exactly 2 variants per (topic x moment) cell — the authored minimum the totality pin requires (>=2)",
+          "classification": "view-time",
+          "classification_evidence": "Zero-import lazy leaf; noteKeyFor() (guidanceNotes.js:161-173) FNV-1a-hashes a stable id to pick a copy KEY at render, resolved via t() by SurveyorNote.jsx. Module header explicitly bans import by generation or the world-pulse kernel (SAME-SEED/GOLDEN laws, lines 22-23); no write path into world/save data exists.",
+          "thinness": "thin",
+          "repetition_risk": "None for the chronicle (never persists), and per-user repetition is DELIBERATE: FNV over a stable id means the same keeper sees the same line at the same rest-point forever ('Same signal => same note, always', line 9). But 2 variants per cell means across the population only 2 phrasings exist per moment; any future reuse of this sidecar for per-tick or per-event prose (the newsVoice.js pattern it copies) would need a much deeper table.",
+          "notes": "Determinism/totality/register pins in tests/domain/guidanceNotes.test.js; second-person required, UI-verbs banned (en.js comment at ~line 648)."
+        },
+        {
+          "name": "Realm refusal prose (veto codes incl. 8 gate_dark strings) + dark-gate predicate reasons + applied-order news prose",
+          "file": "src/domain/events/realmManifest.js; src/domain/worldPulse/realmVerbExecution.js; src/domain/worldPulse/warReasons.js:797; src/domain/worldPulse/peaceReasons.js:568; src/domain/worldPulse/supplyWebWarfare.js:969; src/components/map/RealmVerbComposer.jsx:92",
+          "variant_count": "30 veto codes, exactly 1 fixed sentence each: REALM_VETO_PROSE_LOCAL 20 codes (realmManifest.js:444-467, of which 6 gate_dark) + CASUS_VETO_PROSE 3 (1 gate_dark) + PEACE_VETO_PROSE 3 (1 gate_dark) + WEBWAR_VETO_PROSE 4 (1 gate_dark) = 8 gate_dark strings total, near-identical boilerplate ('The X layer is not active... Pick the ... preset, or light ... under Simulation rules -> Engine waves'). 7 dark* predicate factories (realmManifest.js:71-98) duplicate the same prose as reason+unlock pairs for the composer gray-out. Plus ~12 applied-order news summaries, 1 fixed sentence per verb (orderNews call sites in realmVerbExecution.js) and 13 headlineFor templates (1 per verb).",
+          "classification": "mixed",
+          "classification_evidence": "VIEW-TIME leg: RealmVerbComposer.jsx:92 renders realmVetoProse(r.code) fresh into a transient notice; predicate reasons/unlocks render fresh in the composer. GENERATION-TIME leg: realmRefusalNews() (realmVerbExecution.js:197-215) bakes realmVetoProse(r.code, r.detail) into news entry .summary AND .reasons; orderNews() likewise bakes fixed summaries. These newsEntries return from applyRealmVerbOrder (called at applyWorldPulse.js:1044), are appended via appendWizardNewsEntries into wizardNews, which is a persisted campaign column (src/lib/campaigns.js:133) read back by src/lib/campaignChronicle.js:23 — the chronicle/advance-report substrate.",
+          "thinness": "thin",
+          "repetition_risk": "Persisted single-phrasing prose: every refusal of the same code and every applied order of the same verb writes the identical sentence into the permanent news record, so a chronicle spanning many DM orders repeats verbatim. Mitigated: these entries mint ONLY on DM orders (provenance 'dm', forced:true) — a year-long organic autoadvance produces zero of them, so the year-long-report standard is not violated by the sim itself, only by heavy composer use. The 8 gate_dark strings additionally repeat the same instructional boilerplate across codes AND are triplicated across surfaces (VETO_PROSE tables, dark* predicate factories, REALM_VETO_PROSE_LOCAL) — a wording change must be made in 2-3 places per layer.",
+          "notes": "Detail-bearing codes (e.g. intervention_busy, convoy_not_ports) interpolate settlement names, giving per-instance variation in the persisted text; the gate_dark and *_refused fallback codes do not. Unknown codes fall back to 'The order was refused (code: detail).' (realmManifest.js:479). NUL gotcha checked: generosityKernel.js/generosityEV.js are outside this slice's surfaces; all greps here ran clean."
+        }
+      ]
+    }
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Survey"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "survey:event-prose",
+      "phaseIndex": 1,
+      "phaseTitle": "Survey",
+      "agentId": "aa0a1e74668dc3c42",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1784264932970,
+      "queuedAt": 1784264932952,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Surveyed the world-pulse EVENT/outcome/reason prose slice i…",
+      "promptPreview": "READ-ONLY survey in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd (the w7-prep worktree — READ ONLY, modify NOTHING, run no gates). Your slice: world-pulse EVENT + outcome + reason prose: warReasons/peaceReasons vocabularies, drama-class event phrasings, impact digests, calamity/boom/discovery strings. For EVERY content surface in your slice: locate the file(s)…",
+      "lastProgressAt": 1784265201859,
+      "tokens": 117298,
+      "toolCalls": 22,
+      "durationMs": 268889,
+      "resultPreview": "{\"summary\":\"Surveyed the world-pulse EVENT/outcome/reason prose slice in the w7-prep worktree (read-only). Core finding: the slice splits into two content regimes. (1) GENERATION-TIME single-template prose — every kernel-emitted news entry (calamity strike, boom/bust/flourishing/reconstruction, resource discovery/exhaustion, steading lifecycle) has exactly ONE headline template and ONE summary tem…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "survey:rumors-crier",
+      "phaseIndex": 1,
+      "phaseTitle": "Survey",
+      "agentId": "a6f82b5eb648ab843",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1784264932970,
+      "queuedAt": 1784264932952,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Rumor/crier register survey (read-only, w7-prep worktree). …",
+      "promptPreview": "READ-ONLY survey in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd (the w7-prep worktree — READ ONLY, modify NOTHING, run no gates). Your slice: the rumor/crier register: settlementRumors display phrases, whatPhrase corpora, crier-voice lines, whisper prose. For EVERY content surface in your slice: locate the file(s); MEASURE variant counts per slot (grep/count,…",
+      "lastProgressAt": 1784265187285,
+      "tokens": 89163,
+      "toolCalls": 18,
+      "durationMs": 254314,
+      "resultPreview": "{\"summary\":\"Rumor/crier register survey (read-only, w7-prep worktree). Every surface in the slice is VIEW-TIME: the persisted substrate is structured tokens (rumorLedgers RumorArrivalRecords, wizardNews entry fields, commodityStocks), and all prose renders fresh through pure display sidecars (settlementRumors.js, newsVoice.js, newsBody.js, marketPrices.js, guidanceNotes.js/guidanceRegistry.js). No…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "survey:dossier",
+      "phaseIndex": 1,
+      "phaseTitle": "Survey",
+      "agentId": "a90d053f2b9f24fa6",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1784264932971,
+      "queuedAt": 1784264932952,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Surveyed the dossier/settlement prose slice in the w7-prep …",
+      "promptPreview": "READ-ONLY survey in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd (the w7-prep worktree — READ ONLY, modify NOTHING, run no gates). Your slice: dossier/settlement prose: institution descriptions/flavor, hooks, NPC role blurbs, geography/terrain descriptions, founding/history text. For EVERY content surface in your slice: locate the file(s); MEASURE variant coun…",
+      "lastProgressAt": 1784265437202,
+      "tokens": 94901,
+      "toolCalls": 40,
+      "durationMs": 504231,
+      "resultPreview": "{\"summary\":\"Surveyed the dossier/settlement prose slice in the w7-prep worktree (read-only). Nearly all dossier prose is GENERATION-TIME: it is authored during generateSettlementPipeline (steps/generateNarratives.js + steps/assembleSettlement.js + npcGenerator/historyGenerator), written onto the settlement object (history.founding, history.events/currentTensions, arrivalScene, pressureSentence, np…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "survey:names",
+      "phaseIndex": 1,
+      "phaseTitle": "Survey",
+      "agentId": "a247949b83039474e",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1784264932971,
+      "queuedAt": 1784264932953,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Naming-slice survey of the w7-prep worktree (read-only). Fi…",
+      "promptPreview": "READ-ONLY survey in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd (the w7-prep worktree — READ ONLY, modify NOTHING, run no gates). Your slice: naming: naming cultures (people/places), institution name tables, faction/deity names, goal/temperament vocabulary. For EVERY content surface in your slice: locate the file(s); MEASURE variant counts per slot (grep/coun…",
+      "lastProgressAt": 1784265221211,
+      "tokens": 70466,
+      "toolCalls": 34,
+      "durationMs": 288240,
+      "resultPreview": "{\"summary\":\"Naming-slice survey of the w7-prep worktree (read-only). Five surfaces measured: NAMING_DATA cultures (rich for people, adequate for settlement names), institutionalCatalog type-name tables (one fixed label per institution, no proper-name layer anywhere), FACTION_DESCRIPTORS (critically thin — 36 names realm-wide with settlement-local-only dedupe), DEITY_POOL (24 authored gods, repetit…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "survey:chronicle-briefs",
+      "phaseIndex": 1,
+      "phaseTitle": "Survey",
+      "agentId": "ab986cd91eb7781ff",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1784264932971,
+      "queuedAt": 1784264932953,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Chronicle + S2 brief register survey (READ-ONLY, w7-prep wo…",
+      "promptPreview": "READ-ONLY survey in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd (the w7-prep worktree — READ ONLY, modify NOTHING, run no gates). Your slice: the chronicle + S2 brief register: thread/chapter/headline phrasings in the new chronicle read-models, brief composer prose slots, advance-report copy. For EVERY content surface in your slice: locate the file(s); MEASUR…",
+      "lastProgressAt": 1784265152000,
+      "tokens": 95665,
+      "toolCalls": 22,
+      "durationMs": 219029,
+      "resultPreview": "{\"summary\":\"Chronicle + S2 brief register survey (READ-ONLY, w7-prep worktree). The new chronicle read-models and the brief composers are deliberately prose-minimal by design: nearly all reader-visible variety is INHERITED from persisted crier-voiced outcome.headline/summary (written at generation time into worldState.pulseHistory by pulseKernel.js:1613 via compactOutcomeForHistory, ring-capped at…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 6,
+      "label": "survey:glossary-guidance",
+      "phaseIndex": 1,
+      "phaseTitle": "Survey",
+      "agentId": "a40ecb0b97fd58ec9",
+      "model": "claude-fable-5",
+      "state": "done",
+      "startedAt": 1784264932971,
+      "queuedAt": 1784264932953,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Surveyed 4 content surfaces in the w7-prep worktree (read-o…",
+      "promptPreview": "READ-ONLY survey in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd (the w7-prep worktree — READ ONLY, modify NOTHING, run no gates). Your slice: the glossary/compendium entries + guidance registry prose + refusal prose (realm veto prose, gate_dark strings). For EVERY content surface in your slice: locate the file(s); MEASURE variant counts per slot (grep/count, …",
+      "lastProgressAt": 1784265136550,
+      "tokens": 101429,
+      "toolCalls": 23,
+      "durationMs": 203577,
+      "resultPreview": "{\"summary\":\"Surveyed 4 content surfaces in the w7-prep worktree (read-only). Key persistence finding: realm refusal prose and applied-order news prose are GENERATION-TIME — realmVetoProse() output is baked into news entries (summary + reasons) by realmRefusalNews()/orderNews() in realmVerbExecution.js, flows through applyWorldPulse newsEntries into campaign.wizardNews (a persisted campaign column …"
+    }
+  ],
+  "totalTokens": 568922,
+  "totalToolCalls": 159
+}

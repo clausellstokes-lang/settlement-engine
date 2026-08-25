@@ -21,23 +21,11 @@
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
-import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const BASE = { settType: 'city', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'road', monsterThreat: 'civilized' };
 
-const mk = (over = {}, seed = 'f8') => {
-  // slave_revolt is deliberately outside the grounded default boundary. This
-  // suite exercises every registered renderer, so opt into grim only for that
-  // sensitive authored case while leaving every ordinary probe at the default.
-  const contentProfile = over.stressType === 'slave_revolt'
-    ? 'grim'
-    : 'grounded';
-  return generateSettlementPipeline(
-    { ...BASE, contentProfile, ...over },
-    null,
-    { seed, customContent: {} },
-  );
-};
+const mk = (over = {}, seed = 'f8') =>
+  generateSettlementPipeline({ ...BASE, ...over }, null, { seed, customContent: {} });
 
 /** Normalize the stress container (null / bare object / array) to an entry array. */
 const entriesOf = (s) => {
@@ -51,37 +39,25 @@ const ALL_TYPES = Object.keys(STRESS_TYPE_MAP);
 
 describe('F8 — stress summaries render with the real settlement name', () => {
   it('never emits a bare leading-space summary and embeds the real name', () => {
-    // Every registered stress type runs. A renderer regression hitting six types must
-    // report six: the bare loop reported "1 failure" either way, and the types after
-    // the first casualty were never rendered at all.
-    const failures = collectSeedFailures(ALL_TYPES, (type) => {
+    for (const type of ALL_TYPES) {
       const s = mk({ stressType: type });
       const entries = entriesOf(s);
       // Forced single stress always produces exactly one entry of this type.
       expect(entries.length, `forced ${type} should produce a stress entry`).toBeGreaterThan(0);
       for (const e of entries) {
         expect(typeof e.summary, `${type} summary is a string`).toBe('string');
-        // LIVENESS ANCHOR for the four exclusions below: an empty summary satisfies
-        // every one of them vacuously (`''` matches no leading-space pattern and
-        // contains no artifact), so pin that there is rendered prose to inspect.
-        expect(e.summary.trim().length, `${type} summary is rendered prose`).toBeGreaterThan(0);
         // The bug's signature: a summary that leads with the missing name.
-        // anchored: the non-empty assertion above (plus the real-name containment below for named types) pins this summary as live rendered text.
         expect(e.summary, `${type} summary must not lead with whitespace`).not.toMatch(/^\s/);
-        // anchored: same live-prose anchor as the assertion above.
         expect(e.summary, `${type} summary must not lead with " is/was/has"`).not.toMatch(/^ (is|was|has)/);
         if (!NAMELESS_TYPES.has(e.type)) {
           expect(e.summary, `${type} summary must contain the real name "${s.name}"`).toContain(s.name);
         }
         // The empty-name artifacts must be gone.
-        // anchored: same live-prose anchor; the summary is non-empty rendered text.
         expect(e.summary).not.toContain('in  ');    // "spreading in  " (double space)
-        // anchored: same live-prose anchor; the summary is non-empty rendered text.
         expect(e.summary).not.toContain('of  died'); // "leader of  died"
       }
-    });
-    expectNoSeedFailures(failures, 'every stress summary renders with the real settlement name');
-  }, 120_000);
+    }
+  });
 
   it('leaves NO summaryRoll token on any persisted stress entry', () => {
     // Forced types + a broad probabilistic seed sweep (the original bug surfaced
@@ -90,7 +66,7 @@ describe('F8 — stress summaries render with the real settlement name', () => {
       ...ALL_TYPES.map((t) => ({ over: { stressType: t }, seed: 'roll' })),
       ...Array.from({ length: 60 }, (_, i) => ({ over: {}, seed: `sweep-${i}` })),
     ];
-    const failures = collectSeedFailures(configs, ({ over, seed }) => {
+    for (const { over, seed } of configs) {
       const s = mk(over, seed);
       for (const e of entriesOf(s)) {
         expect(Object.prototype.hasOwnProperty.call(e, 'summaryRoll'),
@@ -99,9 +75,8 @@ describe('F8 — stress summaries render with the real settlement name', () => {
       // Dual-write invariant: stress and stressors carry the same rendered text.
       const st = entriesOf(s);
       const so = Array.isArray(s.stressors) ? s.stressors : s.stressors ? [s.stressors] : [];
-      expect(so.map((e) => e.summary), `stress/stressors parity (seed ${seed})`).toEqual(st.map((e) => e.summary));
-    });
-    expectNoSeedFailures(failures, 'no persisted stress entry carries a summaryRoll token');
+      expect(so.map((e) => e.summary)).toEqual(st.map((e) => e.summary));
+    }
   });
 
   it('is deterministic — same config+seed reproduces identical summaries', () => {

@@ -57,14 +57,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { factionArchetype } from '../factionArchetypes.js';
 import { infoModeOf } from './simulationRules.js';
 import { settlementStrength, buildPressureSummary } from './relationshipEvolution.js';
-import {
-  hasSpatialLedger, getSpatialLedger, setSpatialLedger, activeSpatialDigest,
-} from '../spatial/distanceRead.js';
-import { routeAwareHopDelayTicks } from './distancePricedNews.js';
-import { embattlementLevel } from '../spatial/embattlement.js';
-import { beliefAxesActive, subjectAxesActive, axisGroundTruth, foldBeliefAxes } from './beliefAxes.js';
-import { composeBrokerageSight, makeBrokerageFloorFn } from './brokerageFidelity.js';
-import { applyPatronFeeds } from './brokerageServicesFeed.js';
+import { hasSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
 
 // ── The v1 faction slot + the M9a per-faction dimension ───────────────────────
 /** The governing seat's operational belief — the v1 map that DRIVES the war
@@ -229,108 +222,6 @@ export function beliefRecord(worldState, observerId, subjectId, factionId = GOVE
   return rec && typeof rec === 'object' && !Array.isArray(rec) ? /** @type {BeliefRecord} */ (rec) : null;
 }
 
-/** Resolve the exact existing belief row an envoy-silence inference may amend. */
-function envoySilenceTarget(worldState, observerId, subjectId, errandId) {
-  if (!beliefsActive(worldState)) return null;
-  const observer = String(observerId || '');
-  const subject = String(subjectId || '');
-  const id = String(errandId || '');
-  if (!observer || !subject || observer === subject || !id) return null;
-  const maps = asObject(getSpatialLedger(worldState, 'beliefMaps'));
-  const observerMap = asObject(maps[observer]);
-  const seat = asObject(observerMap[GOVERNING_SEAT_KEY]);
-  const prior = seat[subject];
-  if (!prior || typeof prior !== 'object' || Array.isArray(prior)) {
-    return null;
-  }
-  const existing = asObject(/** @type {Record<string,unknown>} */ (prior).hostilityInference);
-  const priorAllianceLabel = typeof /** @type {Record<string,unknown>} */ (prior).allianceLabel === 'string'
-    ? String(/** @type {Record<string,unknown>} */ (prior).allianceLabel).trim()
-    : '';
-  if (!priorAllianceLabel || Object.keys(existing).length) return null;
-  return { observer, subject, id, maps, observerMap, seat, prior, priorAllianceLabel };
-}
-
-/** Can the belief writer acknowledge this exact inference right now? */
-export function canApplyEnvoySilenceInference({ worldState, observerId, subjectId, errandId }) {
-  return !!envoySilenceTarget(worldState, observerId, subjectId, errandId);
-}
-
-/**
- * Record the court's false-capable inference from an overdue envoy without
- * inventing unobserved strength, readiness, or faith. A real prior picture is
- * required: the inference amends only that picture's relationship reading.
- *
- * @param {{worldState:Record<string,unknown>,observerId:string,subjectId:string,
- *   errandId:string,tick:number}} args
- * @returns {{worldState:Record<string,unknown>,changed:boolean}}
- */
-export function applyEnvoySilenceInference({ worldState, observerId, subjectId, errandId, tick }) {
-  const target = envoySilenceTarget(worldState, observerId, subjectId, errandId);
-  if (!target) return { worldState, changed: false };
-  const { observer, subject, id, maps, observerMap, seat, prior, priorAllianceLabel } = target;
-  const sinceTick = Math.max(0, Math.floor(finiteNumber(tick, 0)));
-  const nextMaps = {
-    ...maps,
-    [observer]: {
-      ...observerMap,
-      [GOVERNING_SEAT_KEY]: {
-        ...seat,
-        [subject]: {
-          .../** @type {Record<string,unknown>} */ (prior),
-          allianceLabel: 'hostile',
-          hostilityInference: {
-            kind: 'envoy_silence',
-            errandId: id,
-            sinceTick,
-            priorAllianceLabel,
-            priorLastUpdateTick: finiteNumber(
-              /** @type {Record<string,unknown>} */ (prior).lastUpdateTick,
-              0,
-            ),
-          },
-        },
-      },
-    },
-  };
-  return { worldState: setSpatialLedger(worldState, 'beliefMaps', nextMaps), changed: true };
-}
-
-/** Clear only the silence inference answered by this exact envoy's return. */
-export function clearEnvoySilenceInference({ worldState, observerId, subjectId, errandId }) {
-  const observer = String(observerId || '');
-  const subject = String(subjectId || '');
-  const id = String(errandId || '');
-  const maps = asObject(getSpatialLedger(worldState, 'beliefMaps'));
-  const observerMap = asObject(maps[observer]);
-  const seat = asObject(observerMap[GOVERNING_SEAT_KEY]);
-  const prior = seat[subject];
-  if (!prior || typeof prior !== 'object' || Array.isArray(prior)) {
-    return { worldState, changed: false };
-  }
-  const inference = asObject(/** @type {Record<string,unknown>} */ (prior).hostilityInference);
-  if (inference.kind !== 'envoy_silence' || String(inference.errandId || '') !== id) {
-    return { worldState, changed: false };
-  }
-  const { hostilityInference: _answered, ...withoutInference } = /** @type {Record<string,unknown>} */ (prior);
-  const restorePriorLabel = String(withoutInference.allianceLabel || '') === 'hostile'
-    && finiteNumber(withoutInference.lastUpdateTick, 0)
-      === finiteNumber(inference.priorLastUpdateTick, Number.NaN)
-    && typeof inference.priorAllianceLabel === 'string'
-    && inference.priorAllianceLabel.trim() !== '';
-  const answered = restorePriorLabel
-    ? { ...withoutInference, allianceLabel: inference.priorAllianceLabel.trim() }
-    : withoutInference;
-  const nextMaps = {
-    ...maps,
-    [observer]: {
-      ...observerMap,
-      [GOVERNING_SEAT_KEY]: { ...seat, [subject]: answered },
-    },
-  };
-  return { worldState: setSpatialLedger(worldState, 'beliefMaps', nextMaps), changed: true };
-}
-
 /**
  * @typedef {Object} BeliefRecord
  * @property {number} readiness        believed war readiness 0..1
@@ -339,13 +230,6 @@ export function clearEnvoySilenceInference({ worldState, observerId, subjectId, 
  * @property {string | null} faithLabel believed dominant faith (public deity name)
  * @property {number} confidence01     0..1
  * @property {number} lastUpdateTick   tick of the last refresh
- * @property {{kind:'envoy_silence',errandId:string,sinceTick:number,
- *   priorAllianceLabel:string,priorLastUpdateTick:number}} [hostilityInference]
- * @property {number} [populationTrendBand]  D-1 DEMOGRAPHIC axis: believed −2..+2 (emptying…swelling); present only when beliefAxesEnabled
- * @property {string | null} [observanceLabel]  D-1 CULTURAL axis: believed dominant rite `${motif}:${patron}`; present only when beliefAxesEnabled
- * @property {Record<string, string>} [scarcityBands]  SP-B: believed plenty per good class; only under believedScarcityEnabled ∧ beliefAxesEnabled
- * @property {Record<string, string>} [conditionsBands]  SP-B: believed {pullBand, routePositionBand, storesBand, tierBand}; only under believedConditionsEnabled ∧ beliefAxesEnabled
- * @property {string} [devotionBand]  SP-B: believed devotion; only under believedDevotionEnabled ∧ beliefAxesEnabled
  */
 
 /**
@@ -367,53 +251,6 @@ export function belief(observerId, subjectId, worldState) {
   if (!beliefsActive(worldState)) return { source: 'truth' };                  // dormant ⇒ byte-exact
   const rec = beliefRecord(worldState, observerId, subjectId);
   return rec ? { source: 'belief', record: rec } : { source: 'unknown' };
-}
-
-// ── D1: DISTANCE-PRICED NEWS (DESIGN_SIM_DEPTH_R2 D1) ─────────────────────────
-// Information pays for distance the way grain does: a fact about a FAR origin reads
-// STALER to a distant observer, so misjudgment (the war-starter) grows with reach.
-// A REFINEMENT of the infoMode seam, gated by the VIRTUAL flag
-// `distancePricedNewsEnabled` — ABSENT from DEFAULT_SIMULATION_RULES *and every
-// preset* ⇒ dark EVERYWHERE ⇒ byte-identical to every campaign and golden until the
-// owner lights it (the preset-lighting question is parked on the owner queue; not
-// added to the WAVES catalog here — zero eager bytes). It COMPOSES with the existing
-// rumor-relay latency (rumorNetwork stamps arrivalTick += hopWeeks per graph hop):
-// `hopDelayTicks` (distancePricedNews.js) is an ADDITIVE recency surcharge — the
-// design's `effective age = actual age + hopDelayTicks(dist(O,S))` — applied ONCE per
-// consuming path (the belief recency fold below; the player rumor display). The
-// coherence matrix's "one delay application" rule is honored: the surcharge lands at
-// the recency fold, NEVER doubled against the credibility/fidelity axes. Its size is
-// owner-retunable at NEWS_SPEED_FACTOR; DM-truth surfaces are NEVER delayed (they are
-// not world actors — the delay is on actor epistemics only).
-
-/** Is distance-priced news LIT? beliefsActive (spatial marker present AND infoMode
- *  non-omniscient) AND the virtual flag distancePricedNewsEnabled === true (absent ⇒
- *  false ⇒ dormant ⇒ byte-identical). Mirrors momentumActive's AND-gate shape.
- *  @param {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown> } | null | undefined} worldState */
-export function distancePricedNewsActive(worldState) {
-  if (!beliefsActive(worldState)) return false;
-  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
-  return !!(rules && typeof rules === 'object'
-    && /** @type {Record<string, unknown>} */ (rules).distancePricedNewsEnabled === true);
-}
-
-/** D1 believed-need coupling (the coherence-matrix discovered COUPLING): a giver
- *  learns of a receiver's distress THROUGH ITS DELAYED PICTURE, so its perceived need
- *  is the ground-truth need SCALED by how current its belief of that subject is.
- *  BeliefRecord gains NO field — the scale is DERIVED at read time from the existing
- *  confidence (fresh news ⇒ full need; a stale/silent picture under-reads it ⇒ aid
- *  lags coherently — "word of the famine reached the ally three weeks late"; a picture
- *  the observer never formed ⇒ 0, it cannot act on need it has not heard of). truth/self
- *  (dormant) ⇒ 1 (ground truth verbatim). Callers gate on distancePricedNewsActive, so
- *  dark ⇒ this is never called ⇒ byte-identical.
- *  @param {string} observerId @param {string} subjectId
- *  @param {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown>, spatialLedgers?: unknown } | null | undefined} worldState
- *  @returns {number} 0..1 */
-export function believedNeedScale(observerId, subjectId, worldState) {
-  const b = belief(observerId, subjectId, worldState);
-  if (b.source === 'truth') return 1;      // self / dormant ⇒ ground truth verbatim
-  if (b.source === 'unknown') return 0;    // marker present, no picture ⇒ cannot perceive the need
-  return clamp01(finiteNumber(b.record.confidence01, 0));
 }
 
 // ── The three chooser reads (byte-exact identity fallback) ────────────────────
@@ -483,8 +320,7 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
   const strength = item
     ? settlementStrength(item, buildPressureSummary(ctx.pressureIdx, String(subjectId)))
     : strengthOfBand(BELIEF_TUNING.NEUTRAL_STRENGTH_BAND);
-  /** @type {BeliefRecord} */
-  const record = {
+  return {
     readiness: round4(groundTruthReadiness(ctx.worldState, subjectId)),
     strengthBand: strengthBandOf(strength),
     allianceLabel: allianceLabel || 'unknown',
@@ -492,17 +328,6 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
     confidence01: 1,
     lastUpdateTick: now,
   };
-  // D-1 (deep-couplings): the two OPTIONAL axis fields, appended ONLY when the flag is lit
-  // (dormancy by absence — law 12). ABSENT ⇒ byte-identical. SP-B's three subject families
-  // ride the SAME call, and the options object is built ONLY when a family is lit: dark, this
-  // is the pre-SP-B single-argument call with no allocation and no religion-state read — the
-  // devotion source is a truth container and a dark family may not so much as look at it.
-  if (ctx.axesActive) {
-    Object.assign(record, ctx.subjectAxes
-      ? axisGroundTruth(item, { subjectAxes: ctx.subjectAxes, religionState: asObject(ctx.worldState?.religionStates)[String(subjectId)] })
-      : axisGroundTruth(item));
-  }
-  return record;
 }
 
 /**
@@ -514,7 +339,7 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
  *   relationshipStates?: unknown } | null | undefined} BeliefWorldState
  */
 
-/** @typedef {{ id?: string | number, name?: string, settlement?: { config?: { primaryDeitySnapshot?: { name?: unknown } }, populationHistory?: unknown, traditions?: unknown } }} SnapItem */
+/** @typedef {{ id?: string | number, name?: string, settlement?: { config?: { primaryDeitySnapshot?: { name?: unknown } } } }} SnapItem */
 /** @typedef {{ from?: unknown, to?: unknown, source?: unknown, target?: unknown, a?: unknown, b?: unknown, id?: unknown, relationshipType?: unknown }} RawEdge */
 /** @typedef {{ byId?: Map<string, SnapItem>, settlements?: SnapItem[], regionalGraph?: { edges?: RawEdge[] }, relationships?: RawEdge[] }} BeliefSnapshot */
 
@@ -522,10 +347,7 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
  * @typedef {Object} GroundTruthCtx
  * @property {Map<string, SnapItem>} byId     snapshot items by id
  * @property {unknown} pressureIdx            the pressure index (settlementStrength input)
- * @property {{ warPosture?: unknown, religionStates?: unknown }} worldState  the ledgers (readiness; SP-B's devotion read)
- * @property {boolean} [axesActive]           D-1: the belief-axes flag is lit (append the two axis fields)
- * @property {{ scarcity: boolean, conditions: boolean, devotion: boolean } | null} [subjectAxes]
- *   SP-B: the resolved subject-family gates, or null when no family is lit under lit axes
+ * @property {{ warPosture?: unknown }} worldState  the ledgers (readiness)
  */
 
 // ── The reconciliation rule (V.4) — the pure, testable core ───────────────────
@@ -541,8 +363,6 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
  * @property {number} score
  * @property {string} sortKey            the ledger event key (codepoint tie-break)
  * @property {string} [sourceId]         the origin telling's settlement (W-DOCTRINE-2 credibility weighting; optional — synthetic reports omit it)
- * @property {{ what?: unknown, magnitude?: unknown, partyIds?: unknown } | null} [content]  D-1: raw rumor content for the axis fold (transient, never serialized)
- * @property {string} [eventRef]         D-1: the canonical event id — the migration_flight direction (transient)
  */
 
 /** The aggregate weight + accuracy of a report set (provenance × recency ×
@@ -594,16 +414,9 @@ function aggregateReports(reports, credibilityOf = null) {
  *   resisted). Bounded below (> 0) so it only SLOWS convergence, never inverts it; the
  *   contradiction-widens-uncertainty (confidence) term below runs at FULL weight regardless —
  *   reality always eventually wins. ABSENT (1) ⇒ byte-identical (weight * 1 === weight).
- * @param {boolean} [args.axesActive]  D-1 (deep-couplings): fold the two axis fields AFTER the
- *   base reconcile (the leaf owns the logic). ABSENT/false ⇒ untouched ⇒ byte-identical.
- * @param {string} [args.subjectId]  D-1: the subject id the axis fold resolves the
- *   migration_flight direction against (unused when axesActive is false).
- * @param {{ scarcity: boolean, conditions: boolean, devotion: boolean } | null} [args.subjectAxes]
- *   SP-B: the resolved subject-family gates. ABSENT/null ⇒ the three subject arms never run
- *   ⇒ byte-identical (the fold returns exactly D-1's two fields).
  * @returns {BeliefRecord}
  */
-export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null, sightFloor01 = 0, commitmentDiscount01 = 1, axesActive = false, subjectId = '', subjectAxes = null }) {
+export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null, sightFloor01 = 0, commitmentDiscount01 = 1 }) {
   const T = BELIEF_TUNING;
   const priorConf = prior ? clamp01(prior.confidence01) : 0;
   if (!reports.length) {
@@ -636,14 +449,8 @@ export function reconcileBelief({ prior, groundTruth, reports, now, credibilityO
   const effDiscount = 1 - (1 - clamp(finiteNumber(commitmentDiscount01, 1), 0, 1)) * contradiction01;
   const blendW = weight * effDiscount;
   const denom = priorConf + blendW;
-  // DEGENERATE ZERO-WEIGHT GUARD: a NEW belief (priorConf 0) whose fresh reports aggregate to
-  // weight 0 (a completeness-0 report reaching this exported fn directly — generosityKernel and
-  // other callers can, unlike rumorNetwork which floors completeness) makes denom 0, so the
-  // weighted blend is 0/0 = NaN and would poison the byte-pinned belief ledger. Fall back to the
-  // (well-defined) observation values. NORMAL inputs have denom > 0 ⇒ this branch is never taken
-  // ⇒ byte-identical same-seed output.
-  const blendedStrength = denom > 0 ? (priorConf * priorStrengthBand + blendW * obsStrengthBand) / denom : obsStrengthBand;
-  const blendedReadiness = denom > 0 ? (priorConf * priorReadiness + blendW * obsReadiness) / denom : obsReadiness;
+  const blendedStrength = (priorConf * priorStrengthBand + blendW * obsStrengthBand) / denom;
+  const blendedReadiness = (priorConf * priorReadiness + blendW * obsReadiness) / denom;
   // Categorical attributes: ADOPT the current truth when the aggregate telling is
   // faithful enough; else the stale label survives.
   const adopt = accuracy >= T.CAT_ADOPT_ACCURACY;
@@ -655,8 +462,7 @@ export function reconcileBelief({ prior, groundTruth, reports, now, credibilityO
     ? T.CONTRA_W * (Math.abs(obsStrengthBand - priorStrengthBand) / (STRENGTH_BANDS - 1))
     : 0;
   const confidence01 = clamp01(priorConf + weight * T.CONF_GAIN - contradiction);
-  /** @type {BeliefRecord} */
-  const record = {
+  return {
     readiness: round4(clamp01(blendedReadiness)),
     strengthBand: clamp(Math.round(blendedStrength), 0, STRENGTH_BANDS - 1),
     allianceLabel,
@@ -664,10 +470,6 @@ export function reconcileBelief({ prior, groundTruth, reports, now, credibilityO
     confidence01: round4(confidence01),
     lastUpdateTick: now,
   };
-  // D-1 (deep-couplings): fold the two axes AFTER the base reconcile (the credibilityOf
-  // injection shape — the leaf owns the logic). ABSENT flag ⇒ untouched ⇒ byte-identical.
-  if (axesActive) Object.assign(record, foldBeliefAxes({ prior, groundTruth: /** @type {{ populationTrendBand: number, observanceLabel: string | null }} */ (/** @type {unknown} */ (groundTruth)), reports, subjectId, subjectAxes }));
-  return record;
 }
 
 /**
@@ -741,20 +543,14 @@ function relationshipNeighbourhood(snapshot, worldState) {
  * @param {unknown} observerLedger  worldState.rumorLedgers[observerId]
  * @param {string} observerId @param {number} now
  * @param {((framing: string[]) => boolean) | null} [matchFraming]
- * @param {import('../spatial/distanceRead.js').SpatialDigest | null} [digest]  D1
- *   distance-priced news: when present (distancePricedNewsActive), each report's
- *   effective age gains hopDelayTicks(origin→observer); null (dark) ⇒ byte-identical.
- * @param {((id: string) => number) | null} [embattlementOf]  V-24b route-status reader
- *   (sid → 0..1 embattlement level) that makes the surcharge REACT to route changes; null (dark)
- *   ⇒ the geometric surcharge ⇒ byte-identical.
  * @returns {Map<string, Array<{ report: BeliefReport, arrivalTick: number }>>}
  */
-function reportsBySubject(observerLedger, observerId, now, matchFraming = null, digest = null, embattlementOf = null) {
+function reportsBySubject(observerLedger, observerId, now, matchFraming = null) {
   /** @type {Map<string, Array<{ report: BeliefReport, arrivalTick: number }>>} */
   const out = new Map();
   const ledger = asObject(observerLedger);
   for (const key of Object.keys(ledger)) {
-    const rec = /** @type {{ arrivalTick?: unknown, content?: unknown, hopCount?: unknown, corroborationRoots?: unknown, completeness01?: unknown, accuracy01?: unknown, score?: unknown, framing?: unknown, provenance?: unknown, eventRef?: unknown } | null } */ (ledger[key]);
+    const rec = /** @type {{ arrivalTick?: unknown, content?: unknown, hopCount?: unknown, corroborationRoots?: unknown, completeness01?: unknown, accuracy01?: unknown, score?: unknown, framing?: unknown, provenance?: unknown } | null } */ (ledger[key]);
     if (!rec || typeof rec !== 'object') continue;
     const arrivalTick = Math.floor(finiteNumber(rec.arrivalTick, Infinity));
     if (arrivalTick > now) continue; // in transit — not yet heard
@@ -776,22 +572,13 @@ function reportsBySubject(observerLedger, observerId, now, matchFraming = null, 
     /** @type {BeliefReport} */
     const report = {
       hopCount: Math.max(0, Math.floor(finiteNumber(rec.hopCount, 0))),
-      // D1 + V-24b: effective info age = actual age (already rumor-relay-delayed) + the direct
-      // origin→observer distance surcharge, which REACTS to route status (0 when digest null ⇒
-      // byte-identical; the surcharge rises as the origin/observer embattles, re-pricing this
-      // in-flight report as routes sever/open — embattlementOf null ⇒ the geometric value).
-      ageTicks: Math.max(0, now - arrivalTick) + routeAwareHopDelayTicks(digest, sourceId, observerId, embattlementOf),
+      ageTicks: Math.max(0, now - arrivalTick),
       independentSources: Array.isArray(rec.corroborationRoots) ? rec.corroborationRoots.length : 1,
       completeness01: clamp01(finiteNumber(rec.completeness01, 1)),
       accuracy01: clamp01(finiteNumber(rec.accuracy01, 1)),
       score: Math.max(0, finiteNumber(rec.score, 0)),
       sortKey: String(key),
       sourceId,
-      // D-1 (deep-couplings): the leaf's axis fold reads these transient fields (the raw content
-      // for the axis kind/magnitude/parties + the canonical eventRef for the migration direction).
-      // Transient (never serialized) ⇒ byte-neutral; the base aggregate/sort ignore them.
-      content,
-      eventRef: rec.eventRef != null ? String(rec.eventRef) : '',
     };
     for (const subjectId of parties) {
       if (subjectId === String(observerId)) continue; // self is never a rumor subject
@@ -887,7 +674,7 @@ function coalitionOpponents(seatFac, roster) {
   const opponents = new Set();
   const rivals = seatFac ? seatFac.rivals : null;
   if (!Array.isArray(rivals) || !rivals.length) return opponents;
-  const rivalKeys = new Set(rivals.map((r) => String(r && typeof r === 'object' ? (r.id ?? r.faction ?? r.name ?? '') : r).toLowerCase()).filter(Boolean));
+  const rivalKeys = new Set(rivals.map((r) => String(r && typeof r === 'object' ? (r.id ?? r.name ?? r.faction ?? '') : r).toLowerCase()).filter(Boolean));
   for (const fac of roster) {
     const keys = [fac.id, fac.name, fac.faction].map((x) => String(x || '').toLowerCase()).filter(Boolean);
     if (keys.some((k) => rivalKeys.has(k))) opponents.add(factionArchetype(fac));
@@ -1185,7 +972,7 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
     if (freshReports.length) {
       const silent = priorRec ? Math.max(0, now - Math.floor(finiteNumber(priorRec.lastUpdateTick, now))) : 0;
       const decayedPrior = priorRec ? { ...priorRec, confidence01: decayedConfidence(priorRec.confidence01, silent, decayKeep01) } : null;
-      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf, sightFloor01, commitmentDiscount01, axesActive: ctx.axesActive === true, subjectId, subjectAxes: ctx.subjectAxes ?? null });
+      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf, sightFloor01, commitmentDiscount01 });
     } else {
       // Silence: decay confidence, keep the frozen value.
       const silent = Math.max(0, now - Math.floor(finiteNumber(/** @type {BeliefRecord} */ (priorRec).lastUpdateTick, now)));
@@ -1230,7 +1017,7 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
  *   ABSENT / 1 ⇒ byte-identical (the reconciliation only SLOWS convergence, never inverts it).
  * @returns {{ next: Record<string, unknown> | null, changed: boolean }}
  */
-export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, allyIntel = null, credibilityOf = null, sightOf: baseSightOf = null, commitmentDiscountFor = null }) {
+export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, allyIntel = null, credibilityOf = null, sightOf = null, commitmentDiscountFor = null }) {
   const prior = hasSpatialLedger(worldState, 'beliefMaps')
     ? asObject(getSpatialLedger(worldState, 'beliefMaps'))
     : null;
@@ -1241,13 +1028,8 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
   const byId = snapshot?.byId instanceof Map
     ? snapshot.byId
     : new Map((snapshot?.settlements || []).map((/** @type {SnapItem} */ it) => [String(it.id), it]));
-  // D-1 (deep-couplings): the belief-axes flag (requires beliefsActive — already asserted above).
-  // ABSENT ⇒ ctx.axesActive false ⇒ every ground-truth/reconcile path is byte-identical.
-  const axesActive = beliefAxesActive(worldState);
-  // SP-B: null unless a subject-family flag is lit IN CONJUNCTION with the host axis flag.
-  const subjectAxes = subjectAxesActive(worldState);
   /** @type {GroundTruthCtx} */
-  const ctx = { byId, pressureIdx, worldState, axesActive, subjectAxes };
+  const ctx = { byId, pressureIdx, worldState };
   const neighbours = relationshipNeighbourhood(snapshot, worldState);
   const canonVersion = Number(worldState?.spatialCanonVersion) || 0;
   const realObserverKeys = prior ? Object.keys(prior).filter(k => k !== BELIEF_SEED_KEY) : [];
@@ -1279,27 +1061,6 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
 
   // ── NORMAL PATH: reconcile / decay per (observer, subject). ─────────────────
   const rumorLedgers = asObject(getSpatialLedger(worldState, 'rumorLedgers'));
-  // D1: the frozen digest for the distance surcharge, read ONCE — null unless
-  // distancePricedNewsEnabled is lit (dark ⇒ every reportsBySubject below is passed
-  // null ⇒ zero surcharge ⇒ byte-identical).
-  const distancePriced = distancePricedNewsActive(worldState);
-  const newsDigest = distancePriced
-    ? activeSpatialDigest(/** @type {Parameters<typeof activeSpatialDigest>[0]} */ (worldState)) : null;
-  // V-24b PER-ROUTE RE-PROPAGATION: the route-status reader that makes each in-flight report's
-  // distance surcharge REACT to embattlement/blockade transitions. Null (dark) ⇒ the geometric
-  // surcharge ⇒ byte-identical. Bound once per advance; a pure per-settlement level read.
-  const newsEmbattlement = distancePriced ? (/** @type {string} */ sid) => embattlementLevel(worldState, sid) : null;
-  // W-I I2 THE BROKERAGE FIDELITY TERM (docs/DESIGN_INFORMATION_BROKERAGES.md §5 secondary,
-  // Law 1). Where an information house stands, that observer's aggregate fidelity is FLOORED
-  // at the house's belief competence, attenuated by news distance so the curve bends and is
-  // never abolished. It rides the EXISTING sight slot rather than a new reconcile parameter,
-  // because "paid eyes sharpen the read" is already exactly what that slot means. The
-  // composition is built here rather than in the pulse kernel because this module already
-  // holds the snapshot index and the distance digest the floor needs. makeBrokerageFloorFn
-  // returns null unless the statecraft gate AND the virtual informationBrokeragesEnabled are
-  // both lit, and composeBrokerageSight then hands back the caller's own closure BY
-  // REFERENCE, so every campaign that never lit the flag reconciles byte-identically.
-  const sightOf = composeBrokerageSight(baseSightOf, makeBrokerageFloorFn({ worldState, byId }));
   // Every observer that either holds a belief OR heard a rumor this window. The
   // reserved seed sentinel is NOT an observer — realObserverKeys already excludes
   // it. [spatial-engine-5]
@@ -1317,7 +1078,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
     const priorSeat = asObject(priorObserver[GOVERNING_SEAT_KEY]);
     const seat = reconcileSlot({
       priorSlot: priorSeat,
-      reports: reportsBySubject(rumorLedgers[observerId], observerId, now, null, newsDigest, newsEmbattlement),
+      reports: reportsBySubject(rumorLedgers[observerId], observerId, now),
       ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
     });
     if (seat.pruned) mutated = true;
@@ -1334,7 +1095,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
         const framingTag = /** @type {{ framingTag: string }} */ (slots.get(archetype)).framingTag;
         const built = reconcileSlot({
           priorSlot: asObject(priorObserver[archetype]),
-          reports: reportsBySubject(rumorLedgers[observerId], observerId, now, (f) => f.includes(framingTag), newsDigest, newsEmbattlement),
+          reports: reportsBySubject(rumorLedgers[observerId], observerId, now, (f) => f.includes(framingTag)),
           ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
         });
         if (built.pruned) mutated = true;
@@ -1344,7 +1105,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
       const publicBuilt = reconcileSlot({
         priorSlot: asObject(priorObserver[PUBLIC_FACTION_KEY]),
         reports: reportsBySubject(rumorLedgers[observerId], observerId, now,
-          (f) => f.length === 0 || f.some((t) => leakedTags.has(t)), newsDigest, newsEmbattlement),
+          (f) => f.length === 0 || f.some((t) => leakedTags.has(t))),
         ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
       });
       if (publicBuilt.pruned) mutated = true;
@@ -1372,32 +1133,13 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
   const shared = allyIntel?.enabled
     ? applyAllyIntelSharing({ maps: next, ctx, neighbours, alignmentOf: allyIntel.alignmentOf || (() => ({ lawfulness01: 0.5, malice01: 0.5 })), now })
     : next;
-  // W-I I3 THE STANDING PATRON FEED (docs/DESIGN_INFORMATION_BROKERAGES.md §6 FEED, §7).
-  // A guild-form house calibrates the power that keeps it, every pulse, on the channels it
-  // will vouch for and no others. It runs HERE, after the reconcile and after ally intel,
-  // for the reason the I2 fidelity term composes in this file: the belief engine already
-  // holds the snapshot index and the ground-truth derivation the feed needs, and the pulse
-  // kernel is at its frozen size ceiling. The feed writes into the patron's OWN slot of
-  // the ledger this function already returns, so the slice adds no worldState key.
-  // DORMANT ⇒ applyPatronFeeds returns `shared` BY REFERENCE ⇒ byte-identical by object
-  // identity, the same anchor makeBrokerageFloorFn uses.
-  const fed = applyPatronFeeds({
-    maps: shared,
-    worldState,
-    byId,
-    now,
-    truthFor: (/** @type {string} */ observerId, /** @type {string} */ subjectId) => {
-      const label = neighbours.get(observerId)?.get(subjectId);
-      return label ? groundTruthBelief(subjectId, label, ctx, now) : null;
-    },
-  });
   // Reached only when the world is SEEDED (cold-start handles never-seeded). If
   // the ledger decayed fully empty, persist the one-key seed sentinel instead of
   // dropping to null — so next tick reads "seeded-but-empty" (deep fog persists),
   // not "never seeded" (which re-cold-starts to ground truth). The sentinel is
   // CONDITIONAL: a non-empty belief-active ledger never carries it ⇒ byte-identical.
   // [spatial-engine-5]
-  const nextOrNull = Object.keys(fed).length ? fed : { [BELIEF_SEED_KEY]: canonVersion };
+  const nextOrNull = Object.keys(shared).length ? shared : { [BELIEF_SEED_KEY]: canonVersion };
   const changed = mutated || JSON.stringify(prior ?? null) !== JSON.stringify(nextOrNull);
   return { next: changed ? nextOrNull : prior, changed };
 }

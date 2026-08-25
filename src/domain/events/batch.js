@@ -32,7 +32,7 @@ import { slugify } from './mutateHelpers.js'; // code-quality-5: the byte-identi
 
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { compareSystemState } from '../state/compareSystemState.js';
-import { clamp01, bandForDimension } from '../state/bands.js';
+import { clamp01, bandFor } from '../state/bands.js';
 import { archetypeForStressor } from '../conditionPromotion.js';
 import { canonStressors } from '../canonicalAccessors.js';
 
@@ -358,10 +358,8 @@ function applyAuthoredStateDeltas(state, deltas) {
     const change = deltas?.[key] ?? 0;
     const value = Math.round(clamp01((dim?.value ?? 50) + change));
     next[key] = {
-      // Polarity-ORIENTED — mirrors eventPipeline.applyAuthoredStateDeltas and
-      // deriveSystemState's finalize(); see bands.js DIM_POLARITY.
       value,
-      band: bandForDimension(key, value),
+      band: bandFor(value),
       drivers: dim?.drivers || [],
       risks:   dim?.risks || [],
     };

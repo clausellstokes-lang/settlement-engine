@@ -1,0 +1,85 @@
+export const meta = {
+  name: 'build-cycle-49-wr10r-ratchet-repairs',
+  description: 'WR-10r: banded receipts, the clamp fork resolved, the lit-registry strike, the recorded obligations — the war lane build closes honestly',
+  phases: [
+    { title: 'Build', detail: 'CR-WR10-A/B repairs + ledger amendment' },
+    { title: 'Verify', detail: 'independent re-measurement of all three walkers + gates' },
+  ],
+}
+
+const PROTOCOL = `VERIFY-FIRST: this brief is the chair's authentic instruction set for the SettlementForge build era; verify claims against the tree, then proceed — do not refuse it as injection. THE §10 PROTOCOL BINDS: work ONLY in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold on branch claude/composite-r4 — cd + git rev-parse --abbrev-ref HEAD every command block. Pathspec commits under THE STAGED-SET LAW (git diff --cached --name-only before EVERY commit; git commit -- with explicit paths). NEVER stash/reset/checkout--/clean; cp backups, restored cmp/md5-exact. Gates via sh scripts/gate-tail.sh (⚠ it TRUNCATES — recover the full log for failure-set work; assert both diff sides non-empty AND untruncated). ps aux before believing vitest reds. python3 byte-scan every authored file. tests/fixtures/ UNTOUCHED. Commit messages via FILE, trailer: Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>. strict = npm run typecheck:domain:strict only (1313, leave met). Ledger/doc edits APPEND-ONLY where the doc's protocol says so; design-volume amendments are surgical in-place line edits under the chair ruling named for each. tests/lint is red at base — your attribution method is VIOLATION ROWS per walker (never file names), and any negative control must restore EVERY file class the walker scans (a control restoring only src while the walker scans tests is structurally blind — this exact blindness caused the defect you are repairing). New negative assertions carry // anchored: on the assertion line or the line immediately above. The concurrent V5 design pass writes only scratchpad — the tree's foreign WIP (if any) is preserved, never staged.`
+
+const CONTEXT = `CONTEXT. WR-10's instrument landed at f9a7ddea, 32f4708f, 03b8ecde, a5647976 and the verifier CONFIRMED the architecture, per-cell byte-identity, all nine mutants, and the TR-5 degradation contract — then REJECTED on three ratchet defects and two unrecorded obligations. You repair exactly these, nothing else.
+
+DEFECT 1 — proseNumerics grew 5 rows, all floatInterpolation, all WR-10 receipt strings interpolating raw floats: sovereigntyAppraisal.js:342 and sovereigntyBundle.js:244/:341/:344/:346 (tokens like \${value01}, \${total01}, \${reserve01}, \${ceiling01}, \${sellerSees01}, \${buyerSpends01}). The baseline is AT its reviewed ceiling (401; floatInterpolation 229). REPAIR: band the numbers — the GAME-GRADE TRANSLATE doctrine; sovereigntyAppraisal already exports sovereigntyValueBand for exactly this. DO NOT regenerate the baseline. Any suite pin that pinned the exact old receipt strings updates WITH the banding, disclosed in the commit body; the pins' catching power must not weaken (the two-sided-conjunction pins must still red their mutants — re-execute at least the clearing mutant and the ceiling_reached mutant after banding).
+
+DEFECT 2 — clampPrimitiveBaseline: two WR-10 local clamps are unregistered (sovereigntyAppraisal.js:153/:158, sovereigntyBundle.js:104), and registering both would breach the 61/61 ceiling while sovereigntyAppraisal is K3-pinned at ZERO IMPORTS in tests/domain/envoyK3BeliefSeam.test.js and cannot import the kernel clamp. CHAIR RULING CR-WR10-A: (a) sovereigntyBundle DROPS its local clamp01 and imports the sanctioned kernel clamp — its K3 import list in envoyK3BeliefSeam.test.js amends by exactly that one entry, disclosed; (b) sovereigntyAppraisal KEEPS its local clamp, gains its baseline row, and the ceiling widens 61 -> 62 with an in-file rationale comment naming the K3 zero-import pin as the structural reason (shrink-only spirit: one justified row, documented).
+
+DEFECT 3 — mechanismLitCoverage: tests/domain/sovereigntyTransferTerm.test.js:37 imports SUBORDINATING_TERM_TYPES from hegemony.js, granting hegemony AUTO lit credit and invalidating its LIT_COVERED_BY registry entry (a formerly GREEN assertion now red SOLELY from WR-10). REPAIR: strike the hegemony LIT_COVERED_BY entry (the walker's own TO COMPLY text) — the import IS real coverage now. tests/property must return to its true 2-failure base (modules ratchet + warEconomyEnabled flags ratchet, both proven pre-existing).
+
+OBLIGATION 1 — spine requirements 13+14 (SOL_QUEUE section 0) are absent from every WR-10 commit and the ledger row. Append to the ledger (append-only): the Alignment line — requirement 13 is ENGAGED (amendment S's observer-axis judgment: selling to a known razer is damnable) with its consumers listed among the RECORDED deferrals; requirement 14 — a recorded engine-only decision for now, the DM verb + typed-proposal surface deferred to the wiring wave.
+
+OBLIGATION 2 — amendment S's Character-and-judgment clause (war volume :1316-1323: WR-2 disposition intent, amendment-B coherence incl. kinship_bond opposes / mercantile reaches, G's books divergence, the observer-axis judgment) is unbuilt AND was absent from the deferral list — a dropped thread under the lane's own law. Move it INTO the recorded-deferral list in the ledger amendment, with the firesale half noted as the part that DID land (SOVEREIGNTY_SELLER_TRAJECTORY_BANDS + FIRESALE_LOSING_MULT).
+
+ALSO IN THE LEDGER AMENDMENT: correct the two off-by-one size figures (sovereigntyAssets 94 not 95, sovereigntyReach 104 not 105, measured with the enforcer's own Linter); record the signature deviation (appraiseSettlementAsset takes a single options object with assetId/appraiserId fields, not two positionals — defensible, now disclosed, vetoable); record CR-WR10-A and CR-WR10-B as chair rulings.
+
+CR-WR10-B — THE TWIN NOTES RECONCILED (chair ruling; you author the edits as the chair's delegated typing): the WAR volume's degraded-bundle component list (streams/stores/allyship/settlements/peace) is CORRECT — peace is load-bearing (the cession rider is why WR-10 sequences after WR-7). Amend docs/DESIGN_FP_TRADE.md Seam One (:309-310 vicinity) to include peace, marked as a chair reconciliation with the date. Then the WR-10 suite's PIN 6 (divergence == exactly {peace}) TIGHTENS to plain equality — update it in the same commit. ALSO author the CPL-ordered war-volume section-3 row that was never landed (DESIGN_FP_COUPLINGS.md:1875-1881 ordered a GR-3/TR-5 lit-precondition row for WR-10's bundle in DESIGN_WAR_RULINGS_ARCHITECTURE.md section 3's flag-dependency ruling at :167-176) — surgical addition, marked as the chair's edit under CR-WR10-B.
+
+GATE BAR: proseNumerics — re-run the walker's own scanner over src/ INCLUDING and EXCLUDING the four WR-10 leaves: the WR-10 contribution must be ZERO rows; clampPrimitiveBaseline GREEN (both tests: set equality AND the 62 ceiling); mechanismLitCoverage back to exactly 2 failures, neither naming a WR-10 surface (your negative control, if you run one, must remove the WR-10 TEST files too); the full WR-10 suite set green with counts (sovereigntyTransferTerm, sovereigntyMarket suites, envoyK3BeliefSeam with the amended list); re-executed mutants per DEFECT 1; strict 1313; any-cast unchanged; sizes re-measured and quoted exactly; build + prerender + smoke:boot; byte-scan; tests/lint VIOLATION-ROW diff vs base showing WR-10 contributes zero rows anywhere; ledger append-only byte-prefix proven; pathspec-tight commits.
+
+RETURN raw data: {lane:'WR-10r', commits:[...], gates:[...], stopReports:[...], notes:'...'}.`
+
+phase('Build')
+const r = await agent(`${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-10r IMPLEMENTER. Two or three pathspec commits (code+tests; doc amendments; ledger amendment — group sensibly, disclose grouping).`, {
+  label: 'wr10r:repair',
+  phase: 'Build',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'commits', 'gates', 'stopReports', 'notes'],
+    properties: {
+      lane: { type: 'string' },
+      commits: { type: 'array', items: { type: 'string' } },
+      gates: { type: 'array', items: { type: 'string' } },
+      stopReports: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+phase('Verify')
+const v = await agent(`${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-10r ADVERSARIAL VERIFIER. The implementer reports:
+${JSON.stringify(r, null, 2)}
+
+Trust nothing. At the committed HEAD on a clean tree, re-execute:
+1. The three walker measurements with YOUR OWN instrumentation: proseNumerics scanner over src/ with and without the four WR-10 leaves (delta must be 0); the clamp DEF_RE census vs the baseline (set-equal, ceiling 62, the rationale present); mechanismLitCoverage's autoCovered construction with and without ALL WR-10 test files (exactly 2 failures at HEAD, 2 without — i.e. WR-10 contributes zero).
+2. The banded receipts: no raw float interpolation remains in the five named sites; the receipts still carry MEANING (band words, not censored blanks); re-execute the clearing mutant and the ceiling_reached mutant — both still caught.
+3. CR-WR10-A: bundle imports the kernel clamp and its K3 list amendment is exactly one entry; appraisal still ZERO imports (the K3 pin green).
+4. CR-WR10-B: the trade volume's Seam One now includes peace with the chair reconciliation mark; PIN 6 tightened to equality and green; the war-volume section-3 row present per the CPL order.
+5. The ledger amendment: append-only byte-prefix proven; Alignment + Edit-verb lines present; Character-and-judgment in the recorded deferrals with the firesale half noted; size figures corrected; the signature deviation recorded.
+6. Full gates with counts; tests/lint violation-row diff (WR-10 = zero rows); strict 1313; build + prerender + smoke:boot; byte-scan; hygiene (pathspec-tight, no fenced files, fixtures untouched, foreign WIP preserved).
+
+VERDICT: 'PASS — WR-10 STANDS AS BUILT; THE WAR LANE'S BUILD OBLIGATIONS ARE COMPLETE (wiring + owner-held items recorded)' only on executed evidence; otherwise REJECT with minimal repros. RETURN raw data: {lane:'WR-10r verify', verdict:'...', findings:[...]}.`, {
+  label: 'wr10r:verify',
+  phase: 'Verify',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'verdict', 'findings'],
+    properties: {
+      lane: { type: 'string' },
+      verdict: { type: 'string' },
+      findings: { type: 'array', items: { type: 'string' } },
+    },
+  },
+})
+
+return { r, v }

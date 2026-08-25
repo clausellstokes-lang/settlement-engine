@@ -22,11 +22,13 @@
  * theme tokens.
  */
 import { useCallback, useEffect, useState } from 'react';
+import { useStore } from '../../store/index.js';
 import { supabase } from '../../lib/supabase.js';
-import useLivePricing from '../../hooks/useLivePricing.js';
 import Button from '../primitives/Button.jsx';
 import {
-  INK, MUTED, BODY, BORDER2, CARD_HDR, RED, GREEN, GOLD_TXT, sans, SP, FS } from '../theme.js';
+  INK, MUTED, BODY, BORDER2, CARD_HDR, RED, GREEN, GOLD_TXT,
+  sans, SP, R, FS,
+} from '../theme.js';
 
 /** Format an ISO timestamp for the "last updated" line, resilient to junk. */
 function formatUpdatedAt(iso) {
@@ -74,11 +76,12 @@ const bodyRow = {
   display: 'flex', gap: SP.sm, padding: `${SP.sm}px ${SP.md}px`,
   borderBottom: `1px solid ${BORDER2}`, fontSize: FS.sm, fontFamily: sans, color: INK,
 };
-const tableWrap = { border: `1px solid ${BORDER2}`, overflow: 'hidden' };
+const tableWrap = { border: `1px solid ${BORDER2}`, borderRadius: R.md, overflow: 'hidden' };
 
 export default function AiPricingResyncPanel() {
-  // This panel is lazy, so the live read never enters the first-paint graph.
-  const aiPricing = useLivePricing();
+  // The last schedule-update time comes from the already-fetched get_ai_pricing
+  // payload the store caches (warmed on the account page / narrate surfaces).
+  const aiPricing = useStore(s => s.aiPricing);
 
   const [dryRun, setDryRun] = useState(true);   // safe default: preview, don't write
   const [busy, setBusy] = useState(false);
@@ -150,7 +153,7 @@ export default function AiPricingResyncPanel() {
           real schedule is a pg_cron job; this block reflects + toggles it. */}
       <div aria-label="Nightly auto-resync" style={{
         padding: SP.md, marginBottom: SP.md,
-        background: CARD_HDR, border: `1px solid ${BORDER2}`,
+        background: CARD_HDR, border: `1px solid ${BORDER2}`, borderRadius: R.md,
       }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: SP.md }}>
           <span style={{
@@ -163,7 +166,7 @@ export default function AiPricingResyncPanel() {
             <span style={{
               fontSize: FS.xxs, fontWeight: 700, fontFamily: sans,
               textTransform: 'uppercase', letterSpacing: '0.06em',
-              padding: `2px ${SP.xs}px`,
+              padding: `2px ${SP.xs}px`, borderRadius: R.sm,
               color: cron.enabled ? GREEN : MUTED,
               border: `1px solid ${cron.enabled ? GREEN : BORDER2}`,
             }}>
@@ -247,7 +250,7 @@ export default function AiPricingResyncPanel() {
           <div style={{
             display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: SP.md,
             padding: SP.md, marginBottom: SP.sm,
-            background: CARD_HDR, border: `1px solid ${BORDER2}`,
+            background: CARD_HDR, border: `1px solid ${BORDER2}`, borderRadius: R.md,
           }}>
             <span style={{
               fontSize: FS.xs, fontWeight: 700, fontFamily: sans,

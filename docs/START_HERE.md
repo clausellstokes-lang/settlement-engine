@@ -3,9 +3,15 @@
 ### reading this, the owner's prior session ended (usage limit / model switch).
 ### This file assumes you know NOTHING. Read it fully before touching anything.
 
+> **2026-08-20 CURRENT POINTER:** read `docs/HANDOFF_CURRENT.md` first, then the tail of
+> `docs/OWNER_DECISION_QUEUE.md` through §287. `RESUME_STATE.md` is an automatically generated
+> 2026-08-14 snapshot whose minifold path and refs are stale; regenerate it before relying on any
+> figure. For settlement-map work, `map-corpus/docs/GENERATION-SPEC.md` §§6–10 is the build spine,
+> and §10 wins on conflict. Everything below remains historical/bootstrap context.
+
 ## ⭐⭐⭐ 0. BEFORE ANYTHING ELSE — THIS FILE IS DATED 2026-07-18 AND IS THREE WEEKS STALE
 
-**Read `docs/RESUME_STATE.md` FIRST.** Its top section is a zero-context HANDOFF written
+**HISTORICAL INSTRUCTION (superseded by the current pointer above):** read `docs/RESUME_STATE.md`. Its top section is a zero-context HANDOFF written
 2026-08-11 for a new account, and it supersedes this file wherever they disagree. It
 carries: the two-tree topology; the **private-index commit method that is now MANDATORY**
 (the main worktree's files match no branch, so `git status` there is not a safety check);

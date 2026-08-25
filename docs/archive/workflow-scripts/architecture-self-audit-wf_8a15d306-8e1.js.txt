@@ -1,0 +1,43 @@
+export const meta = {
+  name: 'architecture-self-audit',
+  description: 'Adversarial verification of tonight\'s architecture corpus for gaps and incoherence',
+  phases: [{ title: 'Verify', detail: '6 Opus verifiers over the dictation-set specs' }],
+}
+
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PRE = `VERIFY-FIRST: adversarial verifier for the SettlementForge Fable chair's own architecture (owner-authorized self-audit). Tree: ${MF} (claude/composite-r4; a concurrent implementer session is ALSO writing — treat unexpected tracked changes as its work, never revert). READ-ONLY: no edits, no commits, no gates. Your job is to REFUTE the chair's claim that these specs are exhaustive, comprehensive, and cohesive: hunt (a) OMISSIONS a builder will hit — missing states, error paths, lifecycle paths (create/persist/regen/undo/import), mobile/responsive, empty states; (b) CONTRADICTIONS with standing law (THE PROMISE, finite semantics, legibility/address laws, premium isolation, never-store-a-derivable, single-writer) or with other docs; (c) INTERNAL inconsistencies within/between tonight's specs; (d) UNVERIFIED SUBSTRATE claims (spec says X exists — check the tree). Only report findings a builder or the owner would ACT on — no style notes. Label CONFIRMED (you checked the tree/doc) or PLAUSIBLE. Structured output only.`
+
+const SCHEMA = {
+  type: 'object', required: ['findings', 'verdict'],
+  properties: {
+    findings: { type: 'array', items: { type: 'object',
+      required: ['title', 'kind', 'where', 'detail', 'confidence'],
+      properties: {
+        title: { type: 'string' },
+        kind: { type: 'string', enum: ['omission', 'contradiction', 'inconsistency', 'unverified-substrate'] },
+        where: { type: 'string' },
+        detail: { type: 'string' },
+        confidence: { type: 'string', enum: ['CONFIRMED', 'PLAUSIBLE'] },
+        fixSketch: { type: 'string' },
+      } } },
+    verdict: { type: 'string', description: 'one paragraph: is this spec buildable as-written without the implementer inventing architecture?' },
+  },
+}
+
+phase('Verify')
+const results = await parallel([
+  () => agent(`${PRE}
+SCOPE: docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md (post-amendment, incl. WR-0c + J-WR-11..13) against the amendment corpus in docs/DESIGN_REALM_DIRECTIVES.md Progress (amendments A through S + the three-causes ruling). THE TRACEABILITY QUESTION IS PRIMARY: walk every amendment clause (each ── sub-bullet is a clause) and verify it maps to a wave item, a law, a pin, or an explicit deferral in the volume — list every clause with NO home (the chair compiled A..S by hand; hand compilation drops clauses). Also verify the §2 substrate census rows post-correction against the tree (spot-check 5 rows the earlier review did NOT check).`, { label: 'wr-traceability', model: 'opus', schema: SCHEMA }),
+  () => agent(`${PRE}
+SCOPE: docs/DESIGN_LIVING_MINIATURE.md + the LD-2/LD-3/LD-3b specs in docs/FIRST_CONTACT_BACKLOG.md. Builder-blocking hunt: LD-1's fixture-v2 size claim, the promise-parity pin's replay feasibility (can the forge path actually run in a test with the fixture's config — check the forge action's dependencies), MiniatureFrame's focus-stop vs the inner OutputContainer tablist interaction, LD-2's chevron geometry at responsive widths, LD-3b's fixed-ribbon interaction with the existing scroll-scrubbed film (read the film/pin code — does anything assume the footer is in-flow?), and the LD-3 legal-row migration vs copy/footer.js single-truth.`, { label: 'ld-landing-cluster', model: 'opus', schema: SCHEMA }),
+  () => agent(`${PRE}
+SCOPE: LD-5 (ribbon dropdowns + account IA) + LD-6 (annual toggle + refund ruling) in docs/FIRST_CONTACT_BACKLOG.md. Hunt: the Account six-tab mapping vs the ACTUAL Account page sections (read the Account component — enumerate every existing section/control and verify each has a named home in the six tabs; list orphans); the routes-table capacity for the new deep links (read the routing mechanism); My Saves auth-gating vs the gallery page's current auth assumptions; LD-6's double-subscribe gate claim vs the ACTUAL current subscribe button implementation (payment link or checkout session? does a subscribed-state branch exist?); the refund ruling vs any existing Terms/refund copy in the tree (contradiction check).`, { label: 'ld-nav-money', model: 'opus', schema: SCHEMA }),
+  () => agent(`${PRE}
+SCOPE: docs/DESIGN_GALLERY_SHOWCASE.md. Hunt: the tier-badge read-time join vs the gallery's ACTUAL data shape (does the gallery list query join author profiles today? — check the gallery fetch path + RLS implications of exposing author tier publicly: is tier PUBLIC data? A privacy question the spec does not address — CONFIRM whether tier visibility is currently public anywhere); R-G1's ranking-walker feasibility (where IS the ordering function?); the sponsored record's RLS write-path claim vs actual role machinery; galleryItemKind vs the actual gallery schema (is there a kind column today?); comment/import machinery existence for the claim 'anyone can view, comment, import'.`, { label: 'gallery-showcase', model: 'opus', schema: SCHEMA }),
+  () => agent(`${PRE}
+SCOPE: docs/DESIGN_AI_CHAT_SURFACE.md against docs/DESIGN_AI_CONTROL_SURFACE.md + DESIGN_AI_CAPABILITY_LADDER.md + DESIGN_AI_INTENT_ATLAS.md. Hunt: capabilities the workshop/control-surface doc promises that the chat spec's totality walker could NOT reach through plain language (enumerate the §0 op families + the control surface's named features — counterfactuals, advance-until, dramatic-irony brief, player-safe brief — and check each has a chat-reachable shape); the per-world thread vs the grounding-bundle scoping (does the analyst substrate assume per-question slices?); upload storage claims vs actual Supabase storage usage in the tree today (does a private-bucket pattern exist?); credit-pricing-before-run vs the actual cost resolver's shape; the L-6 formative-loop wiring claim (read what L-6 requires of a new edge surface).`, { label: 'ai-chat-surface', model: 'opus', schema: SCHEMA }),
+  () => agent(`${PRE}
+SCOPE: CROSS-DOC COHESION over ALL of tonight's docs — DESIGN_WAR_RULINGS_ARCHITECTURE, DESIGN_LIVING_MINIATURE, DESIGN_GALLERY_SHOWCASE, DESIGN_AI_CHAT_SURFACE, the LD-1..LD-6 + LD-3b backlog specs, directive 11 + J-D11, P5 (DESIGN_DEMOGRAPHIC_ENGINE §15), amendments R/R2/S. Hunt ONLY cross-cutting issues: (1) vocabulary collisions (two specs minting different names for one concept, or one name for two); (2) flag-family collisions (list every flag tonight's docs introduce; check against DEFAULT_SIMULATION_RULES + existing flags for name/semantics conflicts); (3) shared-surface collisions (two specs editing the same component/page with incompatible assumptions — LandingArtifacts is touched by LD-1 AND LD-4; the pricing card by LD-6 and the Surveyor clarification; Account by LD-5 and the chat's Data-tab references); (4) sequencing contradictions (a spec assuming another lands first without saying so); (5) owner-call registry: compile the definitive list of every open owner call across tonight's docs and flag any that two docs answer DIFFERENTLY.`, { label: 'cross-doc-cohesion', model: 'opus', schema: SCHEMA }),
+])
+
+return { results: results.filter(Boolean).map((r, i) => ({ scope: ['wr-traceability','ld-landing-cluster','ld-nav-money','gallery-showcase','ai-chat-surface','cross-doc-cohesion'][i], ...r })) }

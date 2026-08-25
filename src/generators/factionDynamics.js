@@ -30,14 +30,9 @@ const PROSPERITY_CONTRIB = {
 function safetyContrib(label) {
   if (!label) return 0;
   const l = label.toLowerCase();
-  if (l.includes('critical')   || l.includes('desperate')
-      || l.includes('dangerous') || l.includes('famine'))                             return -20;
-  if (l.includes('restricted') || l.includes('volatile')
-      || l.includes('tense') || l.includes('strained'))                               return -12;
-  if (l.includes('quarantined') || l.includes('suspicious') || l.includes('unsafe'))   return  -8;
-  // An authoritarian peace suppresses ordinary crime but exacts legitimacy:
-  // order without consent is deliberately worse than Moderate, not a crisis.
-  if (l.includes('controlled'))                                                           return  -5;
+  if (l.includes('desperate') || l.includes('dangerous') || l.includes('famine'))    return -20;
+  if (l.includes('volatile')  || l.includes('tense')     || l.includes('strained'))  return -12;
+  if (l.includes('suspicious')|| l.includes('unsafe'))                                return -8;
   if (l.includes('moderate'))                                                          return  0;
   if (l.includes('very safe') || l.includes('orderly'))                               return +20;
   if (l.includes('safe'))                                                              return +15;
@@ -81,60 +76,6 @@ export const legitimacyDefScale = (tier) =>
   : 1.0;
 
 /**
- * The SINGLE public-legitimacy band derivation (cycle-3 Wave 2, chokepoint for
- * the M5 class). score → { label, color, bg, multipliers, boolean flags }. This
- * band map used to be hand-rolled in TWO places — computePublicLegitimacy (below)
- * and assembleSettlement's defense-readiness patch — which is exactly how the
- * patch drifted: it re-stamped label/color/multipliers on a band crossing but
- * forgot `bg` (M5). Both now delegate here, so the (label, color, bg, multiplier,
- * flag) tuple can never disagree across the band boundary again.
- *
- * NOTE (deferred): src/domain/timeProgression.js reBand() re-derives the same band
- * at PLAY time. It is intentionally NOT unified here: it lives in src/domain and
- * importing this generator export would trip the domain→generators boundary ratchet
- * (tests/build/domainGeneratorsBoundary.test.js), and its output feeds the parked
- * worldPulse goldens — a play-time change belongs to a worldPulse lane, not this
- * generation-side, golden-neutral wave. Documented, not a missed instance.
- *
- * @param {number} score  a 0..100 legitimacy score (already clamped by the caller).
- * @returns {{ label: string, color: string, bg: string, govMultiplier: number,
- *   crimMultiplier: number, isEndorsed: boolean, isApproved: boolean,
- *   isTolerated: boolean, isContested: boolean, isLegitimacyCrisis: boolean,
- *   governanceFractured: boolean }}
- */
-export function legitimacyBandFor(score) {
-  let label, color, bg;
-  if      (score >= 75) { label = 'Endorsed';        color = '#1a5a28'; bg = '#f0faf4'; }
-  else if (score >= 60) { label = 'Approved';         color = '#4a7a2a'; bg = '#f4faf0'; }
-  else if (score >= 45) { label = 'Tolerated';        color = '#a0762a'; bg = '#faf8ec'; }
-  else if (score >= 30) { label = 'Contested';        color = '#8a4010'; bg = '#fdf6ec'; }
-  else                  { label = 'Legitimacy Crisis';color = '#8b1a1a'; bg = '#fdf4f4'; }
-
-  const govMultiplier =
-    score >= 75 ? 1.30 :
-    score >= 60 ? 1.15 :
-    score >= 45 ? 1.00 :
-    score >= 30 ? 0.80 :
-                  0.60;
-  const crimMultiplier =
-    score >= 75 ? 0.75 :
-    score >= 60 ? 0.90 :
-    score >= 45 ? 1.00 :
-    score >= 30 ? 1.15 :
-                  1.30;
-
-  return {
-    label, color, bg, govMultiplier, crimMultiplier,
-    isEndorsed:         score >= 75,
-    isApproved:         score >= 60,
-    isTolerated:        score >= 45 && score < 60,
-    isContested:        score >= 30 && score < 45,
-    isLegitimacyCrisis: score <  30,
-    governanceFractured: score < 30,
-  };
-}
-
-/**
  * Compute the public legitimacy score (0-100) from settlement outcomes.
  * High score = population consents to governance. Low = legitimacy crisis.
  *
@@ -165,27 +106,45 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier) {
 
   const score = Math.max(0, Math.min(100, 50 + pContrib + sContrib + dContrib + fContrib));
 
-  // Label / colour / bg / multipliers / flags — via the single band derivation
-  // (legitimacyBandFor), the chokepoint assembleSettlement's patch also uses.
-  const band = legitimacyBandFor(score);
+  // Label and color
+  let label, color, bg;
+  if      (score >= 75) { label = 'Endorsed';        color = '#1a5a28'; bg = '#f0faf4'; }
+  else if (score >= 60) { label = 'Approved';         color = '#4a7a2a'; bg = '#f4faf0'; }
+  else if (score >= 45) { label = 'Tolerated';        color = '#a0762a'; bg = '#faf8ec'; }
+  else if (score >= 30) { label = 'Contested';        color = '#8a4010'; bg = '#fdf6ec'; }
+  else                  { label = 'Legitimacy Crisis';color = '#8b1a1a'; bg = '#fdf4f4'; }
 
-  // Key order preserved verbatim (this object is JSON.stringify-hashed in the
-  // generator golden master): score, label, color, bg, breakdown, then the rest.
+  // Governing authority performance multiplier
+  const govMultiplier =
+    score >= 75 ? 1.30 :
+    score >= 60 ? 1.15 :
+    score >= 45 ? 1.00 :
+    score >= 30 ? 0.80 :
+                  0.60;
+
+  // Criminal faction inverse multiplier (crime fills the vacuum governance leaves)
+  const crimMultiplier =
+    score >= 75 ? 0.75 :
+    score >= 60 ? 0.90 :
+    score >= 45 ? 1.00 :
+    score >= 30 ? 1.15 :
+                  1.30;
+
   return {
     score,
-    label:              band.label,
-    color:              band.color,
-    bg:                 band.bg,
+    label,
+    color,
+    bg,
     breakdown: { prosperity: pContrib, safety: sContrib, defense: dContrib, food: fContrib },
-    govMultiplier:      band.govMultiplier,
-    crimMultiplier:     band.crimMultiplier,
-    isEndorsed:         band.isEndorsed,
-    isApproved:         band.isApproved,
-    isTolerated:        band.isTolerated,
-    isContested:        band.isContested,
-    isLegitimacyCrisis: band.isLegitimacyCrisis,
+    govMultiplier,
+    crimMultiplier,
+    isEndorsed:        score >= 75,
+    isApproved:        score >= 60,
+    isTolerated:       score >= 45 && score < 60,
+    isContested:       score >= 30 && score < 45,
+    isLegitimacyCrisis:score <  30,
     // Governing authority fracture — internal cohesion breaks below 30
-    governanceFractured: band.governanceFractured,
+    governanceFractured: score < 30,
   };
 }
 

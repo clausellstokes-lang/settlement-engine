@@ -1,0 +1,43 @@
+export const meta = {
+  name: 'architecture-self-audit-2',
+  description: 'Second audit wave: P5, amendments logic, validation verdicts, register specs vs the moving tree',
+  phases: [{ title: 'Verify', detail: '3 Opus verifiers over the session\'s remaining architecture' }],
+}
+
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PRE = `VERIFY-FIRST: adversarial verifier for the SettlementForge Fable chair's own session architecture (owner-authorized self-audit, wave 2). Tree: ${MF} (claude/composite-r4; a concurrent implementer session is LIVE — recent commits f5a88ac1/47b4ed9d/a82a5c70 and untracked WR-0c work-in-progress files are ITS work; never revert, and treat tree state as possibly newer than any doc). READ-ONLY: no edits, no commits, no gates; focused vitest runs allowed. REFUTE the chair: hunt omissions, contradictions, arithmetic errors, unbuildable pins, and doc-vs-moved-tree drift. Only actionable findings. Label CONFIRMED (checked) or PLAUSIBLE. Structured output.`
+
+const SCHEMA = {
+  type: 'object', required: ['findings', 'verdict'],
+  properties: {
+    findings: { type: 'array', items: { type: 'object',
+      required: ['title', 'kind', 'where', 'detail', 'confidence'],
+      properties: {
+        title: { type: 'string' },
+        kind: { type: 'string', enum: ['omission', 'contradiction', 'inconsistency', 'arithmetic', 'tree-drift', 'unverified-substrate'] },
+        where: { type: 'string' },
+        detail: { type: 'string' },
+        confidence: { type: 'string', enum: ['CONFIRMED', 'PLAUSIBLE'] },
+        fixSketch: { type: 'string' },
+      } } },
+    verdict: { type: 'string' },
+  },
+}
+
+phase('Verify')
+const results = await parallel([
+  () => agent(`${PRE}
+SCOPE A — P5 + DIRECTIVE 11 + AMENDMENTS R/R2/S LOGIC.
+(1) P5 (docs/DESIGN_DEMOGRAPHIC_ENGINE.md §15): RECOMPUTE the desert arithmetic from the live tables (TERRAIN_DENSITY_ADJUST, DENSITY_CEILINGS, the works factor, POPULATION_RANGES) — does ~0.59 actually clear all five pairs at max works while staying under mountain 0.60? NOTE: Sol may have ALREADY BUILT P5 (commit 47b4ed9d 'Demographics P5') — diff the spec against what actually landed and report any spec-vs-build divergence as tree-drift. Is the P5b seam as built/specced honest to the spec's dormancy claim?
+(2) Directive 11/J-D11 (docs/DESIGN_REALM_DIRECTIVES.md): verify the substrate claims — the digest isPort read exists where claimed; seaLanes fold sea edges as DESIGN_NAVY describes; the §5c plan lane can host institution-founding (or is it settlement-response-only — would an earned-port plan need a new response kind, and does the spec say so?).
+(3) Amendments R/R2/S internal logic (same doc): hunt logical deadlocks — R2's coupled vengeance license: given the relationship dynamics that exist, is own-relationship-extreme REACHABLE for a good-aligned realm (if good alignment damps hostility drift, the license may be structurally uncollectable by good realms — the exact unreachable-conjunction class); S's bundle clearing: any circularity between believed valuation and the terms budget machinery? Also FIDELITY: quote each owner-dictated clause and check the chair's elaboration never contradicts it.`, { label: 'p5-d11-amendments', model: 'opus', schema: SCHEMA }),
+  () => agent(`${PRE}
+SCOPE B — THE VALIDATION PASS ITSELF (docs/FABLE_VALIDATION_QUEUE.md, the 2026-08-01 verdict table + new chair rows). Audit the chair's rulings for verdict-vs-evidence consistency: sample TEN rows spanning confirm/adjust (must include: the GROUNDED ANATOMY adjustment, the neighbour-mirror ruling, WAVE P ENTIRE, I1 Rookery ADJUSTED, the severity-register row, the W1 golden adjudication chair row, the batch-6 retro-validation row, the lighting-batch row) — for each, read the verdict's claims and check them against the underlying evidence (the queue's Opus rows, the cited commits/tests in the tree, the register). Hunt: verdicts asserting things the evidence doesn't support, ADJUSTs recorded without their correction landing anywhere actionable, and the batch-6 retro-validation's specific claims (gate exit 0, no goldens moved, K2..K4 vocabulary) — re-verify those three claims directly against git log/the tree.`, { label: 'validation-pass-audit', model: 'opus', schema: SCHEMA }),
+  () => agent(`${PRE}
+SCOPE C — THE REGISTER'S COMPLETION SPECS vs THE MOVING TREE.
+(1) docs/COMPREHENSIVE_REVIEW_2026-08-01.md ADDENDUM specs (prose-numerics lint, authoring-site census walker, mix-divergence probe, WR-9 receipt fields): are they buildable as specced — check detector-class feasibility against the actual template idioms (runtime expressions vs literals — the addendum itself noted 'Tick {entry.tick}' defeats literal regexes; does the spec's approach survive that?), and the authoring-census walker's tractability (count actual news-emission sites; is a frozen allowlist for legacy realistic?).
+(2) ⚠️ TREE-DRIFT PRIMARY: Sol landed 'Legibility walls: enforce prose numerics and news authoring' (a82a5c70) — diff what Sol BUILT against the addendum's specs; report divergences (a built wall weaker/different than specced = a finding; stronger = note it).
+(3) WR-0c (DESIGN_WAR_RULINGS_ARCHITECTURE.md) vs Sol's in-flight WR-0c work (untracked treatyBreach.js, relationshipEdgeSeed.js + tests): read Sol's WIP files; does the in-flight implementation match the three fix sketches (war-block at hostileTargetsOf, target unification, tradeWar through the one opener)? Report any approach divergence NOW while it is cheap — this is the audit's most time-sensitive item.`, { label: 'register-vs-moving-tree', model: 'opus', schema: SCHEMA }),
+])
+
+return { results: results.filter(Boolean).map((r, i) => ({ scope: ['p5-d11-amendments','validation-pass-audit','register-vs-moving-tree'][i], ...r })) }

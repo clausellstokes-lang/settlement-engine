@@ -13,23 +13,17 @@
  */
 
 import { registerStep } from '../pipeline.js';
+import { generatePowerStructure } from '../powerGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
 import { deriveFactionProfile } from '../../domain/factionProfile.js';
 import { isAdversarialRelationship } from '../../domain/relationships/canonicalRelationship.js';
-import {
-  createPowerGenerationIntent,
-  projectPowerGenerationIntent,
-} from '../power/economyReconciliation.js';
 
 registerStep('generatePower', {
   deps: ['generateEconomy', 'resolveNeighbour'],
   reads: ['economicState', 'effectiveConfig', 'institutions', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
-  // powerIntent is transient pipeline state. It retains the original power
-  // inputs + named RNG stream so the final economy can re-project scores
-  // without regenerating political identities or reopening institution pulls.
-  provides: ['powerIntent', 'powerStructure'],
+  provides: ['powerStructure'],
   phase: 'power',
-}, (ctx, rng) => {
+}, (ctx) => {
   const {
     tier, economicState, effectiveConfig, institutions,
   } = ctx;
@@ -38,8 +32,8 @@ registerStep('generatePower', {
   // neighbourFactions step (ctx.neighbourFacBias); generatePowerStructure
   // itself reads no neighbour bias, so none is threaded into its config.
   //
-  // The 3rd arg (neighbourRelationship) drives the hostile-neighbour stability band
-  // and the "Ongoing tensions with {neighbour}" recentConflict line. resolveNeighbour writes
+  // The 3rd arg (tradeRoute) drives the hostile-neighbour stability band and the
+  // "Ongoing tensions with {neighbour}" recentConflict line. resolveNeighbour writes
   // effectiveConfig.neighborRelationship = { neighborName, relationshipType } when a
   // neighbour is bound. Pass it ONLY for adversarial relationships — the recentConflict
   // branch fires for ANY truthy value, so an allied/trade_partner neighbour must be
@@ -50,19 +44,13 @@ registerStep('generatePower', {
   // .has('hostile')/.has('rival') were always false and the two most adversarial
   // relationships never militarized governance. isAdversarialRelationship is the
   // shared predicate (canonicalRelationship) the priorityHelpers reader also uses.
-  const neighbourRelationshipArg = neighbourRel && isAdversarialRelationship(neighbourRel.relationshipType)
+  const tradeRouteArg = neighbourRel && isAdversarialRelationship(neighbourRel.relationshipType)
     ? neighbourRel
     : null;
-  const powerIntent = createPowerGenerationIntent({
-    stepRng: rng,
-    tier,
-    neighbourRelationship: neighbourRelationshipArg,
-    config: effectiveConfig,
-    institutions,
-  });
-  const powerStructure = projectPowerGenerationIntent(
-    powerIntent,
-    economicState,
+  const powerStructure = generatePowerStructure(
+    tier, economicState, tradeRouteArg,
+    { ...effectiveConfig },
+    institutions
   );
 
   // ── Trace recording (Tier 4.1) ───────────────────────────────────────
@@ -152,5 +140,5 @@ registerStep('generatePower', {
     });
   }
 
-  return { powerIntent, powerStructure };
+  return { powerStructure };
 });

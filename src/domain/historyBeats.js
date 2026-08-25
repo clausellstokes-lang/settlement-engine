@@ -31,74 +31,6 @@
  * No imports from src/lib — domain tsconfig include stays self-contained.
  */
 
-// The ONE import this reader takes, and it takes it deliberately: the spine's
-// likely-future DERIVATION, whole. This file does not re-derive that answer and
-// must never start again — see `deriveLikelyFuture` below for the four
-// divergences that habit produced.
-import { likelyFutureFacts } from './simulationSpine.js';
-
-// ── The read shape ──────────────────────────────────────────────────────
-// These derivations are READERS: they never construct history, they only
-// interrogate it. The typedefs below are the fields this file actually
-// touches, gathered from the accesses in the derivations themselves. Every
-// field is optional because tolerance of missing history is the contract
-// stated at the top of this file, not an accident.
-
-/**
- * One entry of `settlement.history.historicalEvents[]`.
- * @typedef {{
- *   name?: string,
- *   type?: string,
- *   description?: string,
- *   yearsAgo?: number,
- *   severity?: string,
- *   lastingEffects?: Array<string|{ type?: string }>
- * }} HistoricalEvent
- */
-
-/**
- * One entry of `settlement.history.legacyAnnotations[]` — the generator's own
- * structured commentary on what an event left behind.
- * @typedef {{ annotation?: string, eventName?: string, yearsAgo?: number }} LegacyAnnotation
- */
-
-/**
- * One entry of `settlement.history.currentTensions[]`. The generator emits
- * bare strings from one path and objects from another; both are handled.
- *
- * `type` is the shape the CURRENT generator writes — a snake_case token beside
- * a `description` sentence — and it was missing from this typedef for as long
- * as the likely-future mirror was failing to read it. `label`/`name`/`text`
- * are authored-import spellings, retained for tolerance.
- * @typedef {string|{ type?: string, text?: string, description?: string, name?: string, label?: string }} CurrentTension
- */
-
-/**
- * `settlement.history.founding` — the founding arc.
- * @typedef {{
- *   age?: number|string,
- *   reason?: string,
- *   foundedBy?: string,
- *   initialChallenge?: string,
- *   overcoming?: string
- * }} FoundingRecord
- */
-
-/**
- * The slice of a settlement the beat derivations read.
- * @typedef {{
- *   history?: {
- *     founding?: FoundingRecord,
- *     historicalEvents?: HistoricalEvent[],
- *     currentTensions?: CurrentTension[],
- *     legacyAnnotations?: LegacyAnnotation[]
- *   },
- *   economicState?: { topExport?: string, primaryExport?: string },
- *   economy?: { topExport?: string, primaryExport?: string },
- *   powerStructure?: { stability?: unknown }
- * }} HistoryBeatSource
- */
-
 // ── Helpers ─────────────────────────────────────────────────────────────
 
 /**
@@ -129,10 +61,9 @@ function severityScore(s) {
 }
 
 /**
- * @template T
- * @param {T[]} arr
- * @param {(item: T) => number} scoreFn
- * @returns {T|null}
+ * @param {any[]} arr
+ * @param {(item: any) => number} scoreFn
+ * @returns {any}
  */
 function _topBy(arr, scoreFn) {
   if (!Array.isArray(arr) || !arr.length) return null;
@@ -150,7 +81,7 @@ function _topBy(arr, scoreFn) {
 
 // ── Per-beat derivations ────────────────────────────────────────────────
 
-/** @param {HistoryBeatSource} settlement */
+/** @param {any} settlement */
 function deriveFoundingCause(settlement) {
   const founding = settlement?.history?.founding;
   if (!founding) return null;
@@ -179,7 +110,7 @@ function deriveFoundingCause(settlement) {
   };
 }
 
-/** @param {HistoryBeatSource} settlement */
+/** @param {any} settlement */
 function deriveFirstProsperitySource(settlement) {
   // Strongest signal today: the topExport on the economic state — that's
   // what the settlement currently trades on. We hedge with the founding
@@ -205,7 +136,7 @@ function deriveFirstProsperitySource(settlement) {
   };
 }
 
-/** @param {HistoryBeatSource} settlement */
+/** @param {any} settlement */
 function deriveDefiningCrisis(settlement) {
   // The defining crisis is the most severe historical event. Among
   // events of equal severity, prefer the older one — those leave deeper
@@ -239,12 +170,12 @@ function deriveDefiningCrisis(settlement) {
   };
 }
 
-/** @param {HistoryBeatSource} settlement */
+/** @param {any} settlement */
 function deriveInstitutionalLegacy(settlement) {
   // Events whose lastingEffects mention 'institution' or that have an
   // institutional effect listed in some form. These are the events that
   // built the present-day structural character.
-  const events = (settlement?.history?.historicalEvents || []);
+  const events = /** @type {any[]} */ (settlement?.history?.historicalEvents || []);
   const carriers = events.filter(e => {
     const effects = e?.lastingEffects;
     if (!Array.isArray(effects) || !effects.length) return false;
@@ -290,20 +221,7 @@ function deriveInstitutionalLegacy(settlement) {
   };
 }
 
-/**
- * The one deriver that stays untyped, for two reasons the checker cannot see
- * past and this lane may not fix with a runtime edit:
- *   1. `Number.isFinite(e.yearsAgo) ? e.yearsAgo : Infinity` — Number.isFinite
- *      is not a type predicate, so with `yearsAgo?: number` the ternary is
- *      still `number|undefined` and the `<= 30` reds (TS2532);
- *   2. the legacyAnnotations fallback returns `recentAnn.annotation` straight
- *      into a beat's `text`, and `annotation` is optional — typing it honestly
- *      makes the beat `text: string|undefined`, which HistoryBeat refuses.
- * (2) is a latent hole worth a look on its own: a beat with an undefined text
- * would render blank. Recorded, not fixed here — this lane changes types only.
- *
- * @param {any} settlement
- */
+/** @param {any} settlement */
 function deriveRecentDisruption(settlement) {
   // Most recent significant disruption — within the last 30 years AND
   // severity ≥ major. Falls back to legacyAnnotations[0] if no recent
@@ -349,7 +267,7 @@ function deriveRecentDisruption(settlement) {
   return null;
 }
 
-/** @param {HistoryBeatSource} settlement */
+/** @param {any} settlement */
 function deriveUnresolvedWound(settlement) {
   // Pulled from currentTensions. The generator produces tensions as
   // strings OR objects depending on the source — handle both.
@@ -371,66 +289,52 @@ function deriveUnresolvedWound(settlement) {
   };
 }
 
-/**
- * This beat's ONLY authored property: a standalone sentence per trajectory.
- * The spine spells the same three trajectories as COMPLEMENTS, because its
- * frame word ("Its likely future is") is prepended by SPINE_RUNGS while a beat
- * stands alone. That difference in VOICE is genuine and is the only thing this
- * file still owns about the likely future. The keys are pinned TOTAL against
- * `LIKELY_FUTURE_ARCS`, so a trajectory added to the shared ladder cannot land
- * here as an undefined `text`.
- * @type {Readonly<Record<string, string>>}
- */
-export const LIKELY_FUTURE_BEAT_TEXT = Object.freeze({
-  crisis:     'A crisis is imminent if no one intervenes.',
-  test:       'The next year will test whoever holds the chair.',
-  continuity: 'Continuity, with the usual slow erosion of any settlement.',
-});
-
-/**
- * Where this is going. THIS FILE NO LONGER DERIVES THAT — it CONSUMES the
- * spine's `likelyFutureFacts` and composes a beat around the answer.
- *
- * IT USED TO MIRROR, AND A MIRROR IS A FORK. The docstring here promised for
- * years that this "mirrors the simulationSpine logic so the two derivations
- * stay consistent". A promise is not an invariant, and the two drifted FOUR
- * times: the dead `.label`/`.name` key (the arm fired zero times on real
- * settlements), the bare label read that skipped the spine's splice refusal and
- * named a DIFFERENT tension, a `toLowerCase()` that flattened "grain owed to
- * House Merrow" the spine's `lowerLabel` deliberately preserves, and a
- * `tensions[0]` read that gave up when the first entry named nothing while the
- * spine went on to the first entry it COULD name.
- *
- * The first two were repaired by importing one STEP of the spine's ladder. They
- * came back as the second two because a shared step still leaves both sides
- * owning the rest. So the shared unit is the WHOLE derivation now, and the only
- * thing composed here is this file's own voice. Do not reintroduce a local
- * tension read, a local casing rule, or a local stability ladder: each one is a
- * fork, and this rung has already proved it.
- *
- * @param {HistoryBeatSource} settlement
- */
+/** @param {any} settlement */
 function deriveLikelyFuture(settlement) {
-  const facts = likelyFutureFacts(settlement);
-
-  if (facts.arm === 'tensions') {
-    return {
-      key: 'likelyFuture',
-      label: 'Likely future',
-      // Already humanized, refused-where-refusable and cased by the shared
-      // derivation. Re-casing it here is exactly divergence (3).
-      text: `Tensions point toward ${facts.tensions[0]}.`,
-      source: 'history.currentTensions',
-    };
+  // Pull from history.currentTensions trajectory if available, else
+  // power-structure stability. Mirrors the simulationSpine logic so the
+  // two derivations stay consistent — but produces a structured beat.
+  const tensions = settlement?.history?.currentTensions;
+  if (Array.isArray(tensions) && tensions.length) {
+    const first = tensions[0];
+    const text = typeof first === 'string' ? first : firstNonEmpty(first?.label, first?.name);
+    if (text) {
+      return {
+        key: 'likelyFuture',
+        label: 'Likely future',
+        text: `Tensions point toward ${text.toLowerCase()}.`,
+        source: 'history.currentTensions',
+      };
+    }
   }
 
-  if (facts.arm === 'stability') {
-    return {
-      key: 'likelyFuture',
-      label: 'Likely future',
-      text: LIKELY_FUTURE_BEAT_TEXT[/** @type {string} */ (facts.arc)],
-      source: 'powerStructure.stability',
-    };
+  const stability = settlement?.powerStructure?.stability;
+  if (typeof stability === 'string' && stability) {
+    const lower = stability.toLowerCase();
+    if (lower.includes('critical') || lower.includes('desperate') || lower.includes('siege')) {
+      return {
+        key: 'likelyFuture',
+        label: 'Likely future',
+        text: 'A crisis is imminent if no one intervenes.',
+        source: 'powerStructure.stability',
+      };
+    }
+    if (lower.includes('unstable') || lower.includes('volatile')) {
+      return {
+        key: 'likelyFuture',
+        label: 'Likely future',
+        text: 'The next year will test whoever holds the chair.',
+        source: 'powerStructure.stability',
+      };
+    }
+    if (lower.includes('stable')) {
+      return {
+        key: 'likelyFuture',
+        label: 'Likely future',
+        text: 'Continuity, with the usual slow erosion of any settlement.',
+        source: 'powerStructure.stability',
+      };
+    }
   }
 
   return null;
@@ -480,7 +384,7 @@ export function deriveHistoryBeats(settlement) {
  * ready for the rail or PDF. Skips null beats so the consumer never
  * sees a hole.
  * @param {unknown} settlement
- * @returns {string[][]}
+ * @returns {Array<Array<any>>}
  */
 export function historyBeatRows(settlement) {
   const beats = deriveHistoryBeats(settlement);
@@ -493,7 +397,7 @@ export function historyBeatRows(settlement) {
     'unresolvedWound',
     'likelyFuture',
   ];
-  /** @type {string[][]} */
+  /** @type {Array<Array<any>>} */
   const rows = [];
   for (const k of order) {
     const b = beats[k];

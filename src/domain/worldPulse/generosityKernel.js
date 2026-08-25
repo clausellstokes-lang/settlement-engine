@@ -126,16 +126,8 @@ import {
 } from '../spatial/generosityReactions.js';
 import { faithAlignmentQuadrant, structuralLens, hasCharityFacet } from '../spatial/cohesionWeave.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
-import { applyFoodDeltasToUpdates, applyLegitimacyDeltasToUpdates, applyProsperityDeltasToUpdates } from './generosityUpdates.js';
-import {
-  intelTradeActive, enumerateIntelOpportunities, planIntelAct, intelEligible, intelYearOf,
-  intelPairKey, INTEL_TRANSFERS_LEDGER, INTEL_COOLDOWN_LEDGER, INTEL_TRADE_TUNING,
-} from '../spatial/intelActs.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
-import { consumeRansomSettlements } from '../roads/thirdPartyRansom.js';
-import { noteGratitudeBond, applyGratitudeBondLedger, seatGratitudeSevToward } from './gratitudeBonds.js';
-import { memoryWeaveActive } from './relationshipEvolution.js';
-import { reconcileBelief, beliefsActive, strengthBandOf, strengthOfBand, distancePricedNewsActive, believedNeedScale } from './beliefMap.js';
+import { reconcileBelief, beliefsActive, strengthBandOf, strengthOfBand } from './beliefMap.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { computeLawfulness, computeMalice } from './disposition.js';
 import { evil01, chaos01 } from './deityAxes.js';
@@ -491,17 +483,13 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   /** @param {string} giverId @param {string} receiverId @param {GenEdge} edge */
   const considerOrientation = (giverId, receiverId, edge) => {
     if (giverId === receiverId) return;
-    const pairKey = `${giverId}|${receiverId}`;
+    const pairKey = `${giverId} ${receiverId}`;
     if (seenPair.has(pairKey)) return;
     if (!itemById.has(giverId) || !itemById.has(receiverId)) return;
     // MOVERS SKIP REMNANTS (r2 economy-upswing-1), BOTH directions: a terminal-dead corpse
     // neither orients to give nor is a valid receiver of aid.
     if (lifecycleStatusOf(freshSettlement(giverId)) || lifecycleStatusOf(freshSettlement(receiverId))) return;
-    // D1 believed-need coupling: once distance-priced news is lit, the giver acts on the need it
-    // has HEARD OF — ground-truth need scaled by how current its belief of the receiver is (a
-    // distant famine is unknown until word arrives ⇒ aid lags). Dark ⇒ verbatim ⇒ byte-identical.
-    // One code line (this file sits at its max-lines ceiling — the scaling logic lives in beliefMap).
-    const need01 = distancePricedNewsActive(worldState) ? needOf(receiverId) * believedNeedScale(giverId, receiverId, worldState) : needOf(receiverId);
+    const need01 = needOf(receiverId);
     const kindRaw = normalizeRelationshipType(String(edge?.relationshipType || 'neutral'));
     const kind = KIND_MAP[kindRaw];
     if (!kind) return; // not a qualifying relationship kind
@@ -538,9 +526,6 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   const willingnessWrites = {};
   /** @type {Array<{ key: string, incident?: Record<string, unknown>|null, patch?: Record<string, number> }>} */
   const incidentWrites = [];
-  /** @type {Record<string, import('./gratitudeBonds.js').GratitudeBondEvent>} D-7e (ii) pass-local deposits (leaf-gated) */
-  const gratitudeBondWrites = {};
-  const weaveLit = memoryWeaveActive(worldState);
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
   /** @type {Array<{ giverId: string, receiverId: string, verdict: string, magnitude: number }>} */
@@ -710,12 +695,10 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
       (willingnessLedger[`${giverId}:${receiverId}:grain_relief`]) || null);
 
     // ── THE VERDICT. ──
-    // D-7e (i): the person-bond severity between the two courts' ruling seats (0 when memoryWeave dark).
-    const seatBond01 = seatGratitudeSevToward(worldState, { lit: weaveLit, giverSid: giverId, receiverSid: receiverId, giverSettlement: giverS, receiverSettlement: receiverS });
     const verdict = generosityEV({
-      giverId, receiverId, kind: 'grain_relief', now: tick, giverName: String(giverItem?.name || ''), receiverName: String(receiverItem?.name || ''),
+      giverId, receiverId, kind: 'grain_relief', now: tick,
       bond, history, conscience, strategy, faith, margin, commitment,
-      routeRisk, domestic, reliefCountRecent, askFraction01, seatBond01,
+      routeRisk, domestic, reliefCountRecent, askFraction01,
       quadrantMod, lensMod,
       conscienceException: false,
       priorWillingness,
@@ -795,8 +778,6 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
         const recvInc = reliefIncident({ kind: 'relief_received', tick, magnitude01: gratitude });
         if (givenInc) incidentWrites.push({ key: relKey, incident: givenInc });
         if (recvInc) incidentWrites.push({ key: relKey, incident: recvInc });
-        // D-7e (ii): mercy mints FRIENDSHIP beside the DEBT (credit/predatory = debt only).
-        if (!isCredit && leverageIntent < 0.6) noteGratitudeBond(gratitudeBondWrites, { lit: weaveLit, receiverSid: receiverId, giverSid: giverId, sev: gratitude, tick, floor: T.OBLIGATION_MIN });
 
         newsEntries.push(succorNews({
           giverId, receiverId,
@@ -1001,67 +982,13 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     }
   }
 
-  // ── THE INTEL LANE (deep-couplings D-3, dark behind intelTradeEnabled): a bounded gift/sell
-  //    of BELIEF. Generosity mints the favor-economy consideration (GIFT ⇒ a 'warning'
-  //    obligation of gratitude; SALE ⇒ a repaid/reverse 'intel_sale' debt) and DEPOSITS the
-  //    pending transfer; the statecraft mover (which runs earlier in the tick) INJECTS the
-  //    belief into the receiver on the NEXT tick — the deposit-and-consume choreography (law
-  //    5/14). Trigger-gated + per-pair cooldown + a TICK-INVARIANT yearly eligibility draw +
-  //    a per-tick cap ⇒ no whisper-war hum (law 4). Gated on intelTradeEnabled ∧ beliefsActive
-  //    ∧ infoStatecraftEnabled (so the consume actually runs), else a zero-fork no-op. ──
-  /** @type {Record<string, unknown>} */
-  const intelTransferWrites = {};
-  /** @type {Record<string, number>} */
-  const intelCooldownWrites = {};
-  const intelTransfersPrior = asObject(getSpatialLedger(worldState, INTEL_TRANSFERS_LEDGER));
-  const intelCooldownPrior = asObject(getSpatialLedger(worldState, INTEL_COOLDOWN_LEDGER));
-  const intelElapsedWeeks = num(/** @type {{ calendar?: { elapsedWeeks?: unknown } }} */ (worldState)?.calendar?.elapsedWeeks, 0);
-  if (intelTradeActive(worldState) && beliefsActive(worldState) && asObject(worldState?.simulationRules).infoStatecraftEnabled === true) {
-    const beliefMaps = asObject(getSpatialLedger(worldState, 'beliefMaps'));
-    const intelYear = intelYearOf(intelElapsedWeeks);
-    const intelSeed = String(/** @type {{ rngSeed?: unknown }} */ (worldState)?.rngSeed ?? '');
-    const IT = INTEL_TRADE_TUNING;
-    const atWar = (/** @type {string} */ a, /** @type {string} */ b) =>
-      new Set([...warFrontsInto(graph, a), ...warFrontsFrom(graph, a)].map(String)).has(String(b));
-    let intelActs = 0;
-    for (const opp of enumerateIntelOpportunities({ beliefMaps, edges, graph, relStates, obligationLedger, atWar, tick })) {
-      if (intelActs >= IT.ACTS_PER_TICK_CAP) break;
-      const pk = intelPairKey(opp.sellerId, opp.receiverId);
-      if (pk in intelCooldownWrites) continue; // one intel act per pair per tick
-      if (intelElapsedWeeks - num(intelCooldownPrior[pk], -1e9) < IT.COOLDOWN_WEEKS) continue; // per-pair cooldown
-      if (!intelEligible(intelSeed, opp.sellerId, opp.receiverId, intelYear, IT.ELIGIBILITY_BASE_CHANCE)) continue; // rare
-      intelActs += 1;
-      const plan = planIntelAct(opp, { obligationLedger, tick });
-      for (const m of plan.mints) if (num(m.magnitude, 0) >= T.OBLIGATION_MIN) obligationMints.push(/** @type {ObligationRecord} */ (m));
-      for (const rp of plan.repayments) obligationRepayments.push(/** @type {{ from: string, to: string, kind: string, amount: number }} */ (rp));
-      const edge = pairToEdge.get(`${opp.sellerId}:${opp.receiverId}`);
-      if (opp.mode === 'gift' && edge && plan.giftMag >= T.OBLIGATION_MIN) {
-        const inc = reliefIncident({ kind: 'relief_given', tick, magnitude01: plan.giftMag, summary: 'intel gift' });
-        if (inc) incidentWrites.push({ key: relationshipKeyFromEdge(edge), incident: inc });
-        // D-7e (ii): a warning gifted is mercy court-to-court — the same gratitude-bond deposit.
-        noteGratitudeBond(gratitudeBondWrites, { lit: weaveLit, receiverSid: opp.receiverId, giverSid: opp.sellerId, sev: plan.giftMag, tick, floor: T.OBLIGATION_MIN });
-      }
-      intelTransferWrites[`intel.${opp.sellerId}.${opp.receiverId}.${opp.subjectId}.${tick}`] = plan.transfer;
-      intelCooldownWrites[pk] = intelElapsedWeeks;
-    }
-  }
-
-  // ── D-5 §9 THE RANSOM-RELIEF CONSUME (deposit-and-consume, law 5): the roads mover deposits a
-  //    third-party ransom settlement (roadsRansomSettlements); this pass mints the ransom_relief
-  //    obligation home→payer the NEXT tick (the freed man walks home before the ledger knows his
-  //    price). Roads prunes the deposit the same tick ⇒ consume-once. Absent ledger ⇒ a no-op. ──
-  for (const m of consumeRansomSettlements(worldState, tick)) {
-    if (num(m.magnitude, 0) >= T.OBLIGATION_MIN) obligationMints.push(/** @type {ObligationRecord} */ (m));
-  }
-
   // ── PERSIST. Nothing decided ⇒ byte-identical (no ledger touched). ──
   let changed = false;
 
   // Obligations sub-ledger (fold this tick's mints + credit-maturity repayments, decay+prune;
   // drop-when-empty).
   if (obligationMints.length || obligationRepayments.length || obligationLedger) {
-    // pulseKernel already owns this tick's one 0.02 decay; mutate only here.
-    const nextObl = foldObligations(obligationLedger, { mints: obligationMints, repayments: obligationRepayments, now: tick, decayPerTick: 0 });
+    const nextObl = foldObligations(obligationLedger, { mints: obligationMints, repayments: obligationRepayments, now: tick });
     if (JSON.stringify(nextObl || null) !== JSON.stringify(obligationLedger || null)) {
       nextWorldState = nextObl
         ? setSpatialLedger(nextWorldState, 'obligations', nextObl)
@@ -1069,11 +996,6 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
       changed = true;
     }
   }
-
-  // D-7e (ii): the deposit ledger lives EXACTLY one tick — rebuilt-or-dropped every pass
-  // (the one-tick lifetime IS the consume-once discipline). Never-lit ⇒ untouched.
-  const grat = applyGratitudeBondLedger(worldState, nextWorldState, gratitudeBondWrites);
-  if (grat.changed) { nextWorldState = grat.worldState; changed = true; }
 
   // Willingness latch sub-ledger (upsert the refusing latches; drop cleared ones).
   {
@@ -1231,17 +1153,10 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   if (bufferSteps.length || Object.keys(bufferLedger).length) {
     /** @type {Record<string, unknown>} */
     const nextBuffer = { ...bufferLedger };
-    // Collapse to ONE discipline step per RECEIVER this tick: discipline is a per-tick property of
-    // the receiver's own granary, so a receiver relieved by N givers must NOT decay N×BUFFER_DECAY
-    // (the moral-hazard rate would scale with donor connectivity, not the tuned per-tick rate).
-    // reliefThisTick is TRUE if ANY giver moved grain; each step is order-independent (sortedRecord
-    // re-canonicalizes below), and the Map's insertion order is itself deterministic.
-    /** @type {Map<string, boolean>} */
-    const reliefByReceiver = new Map();
-    for (const s of bufferSteps) reliefByReceiver.set(s.receiverId, reliefByReceiver.get(s.receiverId) === true || s.reliefThisTick === true);
-    for (const [k, reliefThisTick] of reliefByReceiver) {
+    for (const step of bufferSteps) {
+      const k = step.receiverId; // discipline is a property of the receiver's own granary
       const prior = /** @type {Parameters<typeof bufferDisciplineStep>[0]} */ (asObject(nextBuffer[k]).discipline != null ? nextBuffer[k] : null);
-      const nextRec = bufferDisciplineStep(prior, { reliefThisTick, now: tick });
+      const nextRec = bufferDisciplineStep(prior, { reliefThisTick: step.reliefThisTick, now: tick });
       if (nextRec) nextBuffer[k] = nextRec; else delete nextBuffer[k];
     }
     const sortedBuffer = sortedRecord(nextBuffer);
@@ -1273,66 +1188,16 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     }
   }
 
-  // intelTransfers sub-ledger (D-3): mint this tick's deposits; PRUNE any from a PRIOR tick —
-  // the statecraft mover (which runs earlier in the tick) already injected them this tick, so
-  // a record whose depositTick is behind us has served its one-week courier turn (law 14).
-  // Drop-when-empty ⇒ byte-identical when the lane is dark.
-  if (Object.keys(intelTransferWrites).length || Object.keys(intelTransfersPrior).length) {
-    /** @type {Record<string, unknown>} */
-    const nextIntel = {};
-    for (const [k, v] of Object.entries(intelTransfersPrior)) {
-      if (num(asObject(v).depositTick, tick) < tick) continue; // consumed ⇒ prune
-      nextIntel[k] = v;
-    }
-    for (const [k, v] of Object.entries(intelTransferWrites)) nextIntel[k] = v;
-    const sortedIntel = sortedRecord(nextIntel);
-    if (JSON.stringify(sortedIntel) !== JSON.stringify(sortedRecord(intelTransfersPrior))) {
-      nextWorldState = Object.keys(sortedIntel).length
-        ? setSpatialLedger(nextWorldState, INTEL_TRANSFERS_LEDGER, sortedIntel)
-        : dropSpatialLedger(nextWorldState, INTEL_TRANSFERS_LEDGER);
-      changed = true;
-    }
-  }
-
-  // intelCooldown sub-ledger (D-3): upsert this tick's trades; stale-prune pairs past the
-  // cooldown horizon (the channel reopens). Keyed on the catch-up-stable elapsedWeeks clock.
-  // Drop-when-empty ⇒ byte-identical when the lane is dark.
-  if (Object.keys(intelCooldownWrites).length || Object.keys(intelCooldownPrior).length) {
-    /** @type {Record<string, unknown>} */
-    const nextCd = {};
-    for (const [k, v] of Object.entries(intelCooldownPrior)) {
-      if (intelElapsedWeeks - num(v, 0) > INTEL_TRADE_TUNING.COOLDOWN_WEEKS) continue; // reopened ⇒ prune
-      nextCd[k] = v;
-    }
-    for (const [k, v] of Object.entries(intelCooldownWrites)) nextCd[k] = v;
-    const sortedCd = sortedRecord(nextCd);
-    if (JSON.stringify(sortedCd) !== JSON.stringify(sortedRecord(intelCooldownPrior))) {
-      nextWorldState = Object.keys(sortedCd).length
-        ? setSpatialLedger(nextWorldState, INTEL_COOLDOWN_LEDGER, sortedCd)
-        : dropSpatialLedger(nextWorldState, INTEL_COOLDOWN_LEDGER);
-      changed = true;
-    }
-  }
-
   // relationshipMemory incidents (edge-backed pairs; append immutably, bounded to last 8) +
   // the credit-maturity scalar patches (SET clamped-absolute trust/resentment — the
   // applyRelationshipPatch idiom; the resentment ratchet IS the casus-belli seam).
-  //
-  // SANCTIONED BATCHING EXCEPTION (cohesion-generosity-incident-bypass): this is the ONE inline
-  // relationshipStates writer that does NOT route through applyRelationshipPatch — deliberately, so
-  // a whole tick's relief/intel incidents fold into ONE immutable rebuild instead of N patch passes.
-  // It MUST stay shape-compatible with the applicator: the incident row matches reliefIncident's
-  // shape, scalars are pre-clamped at the call sites, and updatedAt is stamped with the SAME
-  // deterministic overlay `now` the applicator uses (relationshipEvolution.js:403) — never a wall
-  // clock — so the two write paths cannot drift.
-  // @enforced-by tests/domain/generosityKernel.credit.test.js + tests/property/generosityDormancyGolden.test.js
   if (incidentWrites.length) {
     const nextStates = { ...relStates };
     for (const w of incidentWrites) {
       const cur = asObject(nextStates[w.key]);
       const prior = Array.isArray(cur.recentIncidents) ? cur.recentIncidents : [];
       /** @type {Record<string, unknown>} */
-      const nextRec = { ...cur, updatedAt: now };
+      const nextRec = { ...cur };
       if (w.incident) nextRec.recentIncidents = [...prior.slice(-7), w.incident];
       if (w.patch) for (const [k, v] of Object.entries(w.patch)) nextRec[k] = v;
       nextStates[w.key] = nextRec;
@@ -1376,5 +1241,116 @@ function sortedRecord(rec) {
   return out;
 }
 
+/**
+ * Apply the conserved per-settlement storageMonths deltas to settlementUpdates (clamped to
+ * [0, granary capacity], rounded to the tenth-month — the applyFoodStockpileOutcome idiom).
+ * @param {GenUpdate[]} updates @param {Map<string, number>} updateIndex @param {Map<string, number>} foodDeltas
+ * @returns {GenUpdate[]}
+ */
+function applyFoodDeltasToUpdates(updates, updateIndex, foodDeltas) {
+  let next = updates;
+  let cloned = false;
+  for (const [id, delta] of foodDeltas) {
+    if (!delta) continue;
+    const ui = updateIndex.get(String(id));
+    if (ui === undefined) continue;
+    const entry = next[ui];
+    const settlement = entry?.settlement;
+    const fs = settlement?.economicState?.foodSecurity;
+    if (!fs || !Number.isFinite(Number(fs.storageMonths))) continue;
+    const cap = storageCapacityMonths(asSimSettlement(settlement));
+    const nextMonths = Math.round(Math.max(0, Math.min(cap, Number(fs.storageMonths) + delta)) * 10) / 10;
+    if (nextMonths === Number(fs.storageMonths)) continue;
+    if (!cloned) { next = updates.slice(); cloned = true; }
+    next[ui] = {
+      ...entry,
+      settlement: {
+        ...settlement,
+        economicState: { ...settlement.economicState, foodSecurity: { ...fs, storageMonths: nextMonths } },
+      },
+    };
+  }
+  return next;
+}
+
+/**
+ * Apply the bounded per-giver publicLegitimacy.score deltas to settlementUpdates (§9): a
+ * hungry giver's ruler loses legitimacy for shipping food out, a comfortable one gains a
+ * small "granary city" lift. Integer, clamped [0,100] (the applyDivineMandate idiom); SKIPS
+ * a legacy bare-number or absent legitimacy (only nudges a structured {score}). Pure.
+ * @param {GenUpdate[]} updates @param {Map<string, number>} updateIndex @param {Map<string, number>} legitimacyDeltas
+ * @returns {GenUpdate[]}
+ */
+function applyLegitimacyDeltasToUpdates(updates, updateIndex, legitimacyDeltas) {
+  let next = updates;
+  let cloned = false;
+  for (const [id, delta] of legitimacyDeltas) {
+    if (!delta) continue;
+    const ui = updateIndex.get(String(id));
+    if (ui === undefined) continue;
+    const entry = next[ui];
+    const settlement = entry?.settlement;
+    if (!settlement) continue;
+    const ps = asObject(settlement.powerStructure);
+    const plRaw = ps.publicLegitimacy;
+    const pl = plRaw && typeof plRaw === 'object' && !Array.isArray(plRaw)
+      ? /** @type {Record<string, unknown>} */ (plRaw) : null;
+    if (!pl || !Number.isFinite(Number(pl.score))) continue;
+    const nextScore = Math.round(Math.max(0, Math.min(100, Number(pl.score) + delta)));
+    if (nextScore === Number(pl.score)) continue;
+    if (!cloned) { next = updates.slice(); cloned = true; }
+    next[ui] = /** @type {GenUpdate} */ ({
+      ...entry,
+      settlement: /** @type {GenSettlement} */ (/** @type {unknown} */ ({
+        ...settlement,
+        powerStructure: { ...ps, publicLegitimacy: { ...pl, score: nextScore } },
+      })),
+    });
+  }
+  return next;
+}
+
+/**
+ * Apply the PURCHASE payment prosperity BAND-STEP deltas to settlementUpdates (§4/A2 — E1d):
+ * a buyer's band-step debit + a bounded seller income nudge, both ranked on the canonical
+ * PROSPERITY_TIERS ladder (data/constants — never a hand-typed band match), clamped [0,6], and
+ * written back IN KIND (a string label stays a string; a { tier } object keeps its shape). A
+ * settlement with no readable prosperity band (numeric/absent ⇒ rank −1) is SKIPPED. Because
+ * the ladder is coarse, a single sale's sub-band nudge often rounds to no change; a settlement
+ * that sells to several buyers in one tick accumulates its credits and CAN step up a band (the
+ * "granary city grows rich on volume" story). Pure.
+ * @param {GenUpdate[]} updates @param {Map<string, number>} updateIndex @param {Map<string, number>} prosperityDeltas
+ * @returns {GenUpdate[]}
+ */
+function applyProsperityDeltasToUpdates(updates, updateIndex, prosperityDeltas) {
+  let next = updates;
+  let cloned = false;
+  const maxRank = Math.max(1, PROSPERITY_TIERS.length - 1);
+  for (const [id, delta] of prosperityDeltas) {
+    if (!delta) continue;
+    const ui = updateIndex.get(String(id));
+    if (ui === undefined) continue;
+    const entry = next[ui];
+    const settlement = entry?.settlement;
+    const ec = asObject(settlement?.economicState);
+    const cur = ec.prosperity;
+    const rank = prosperityRank(/** @type {Parameters<typeof prosperityRank>[0]} */ (cur));
+    if (rank < 0) continue; // no readable band (numeric/absent) — nothing to step
+    const nextRank = Math.round(Math.max(0, Math.min(maxRank, rank + delta)));
+    if (nextRank === rank) continue;
+    const nextLabel = PROSPERITY_TIERS[nextRank];
+    // Preserve the field shape (string label vs { tier } object).
+    const nextProsperity = cur && typeof cur === 'object' && !Array.isArray(cur)
+      ? { .../** @type {Record<string, unknown>} */ (cur), tier: nextLabel } : nextLabel;
+    if (!cloned) { next = updates.slice(); cloned = true; }
+    next[ui] = /** @type {GenUpdate} */ ({
+      ...entry,
+      settlement: /** @type {GenSettlement} */ (/** @type {unknown} */ ({
+        ...settlement, economicState: { ...ec, prosperity: nextProsperity },
+      })),
+    });
+  }
+  return next;
+}
+
 export { REACTION_TUNING };
-export { advanceObligationDecay } from './obligationDecay.js';

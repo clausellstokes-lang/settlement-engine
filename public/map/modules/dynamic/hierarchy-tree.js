@@ -386,12 +386,9 @@ function selectElement(d) {
       .filter(origin => origin)
       .map((origin, index) => {
         const {name, code} = validElements.find(r => r.i === origin) || {};
-        // SettlementForge fork patch: untrusted loaded-.map name/code → innerHTML — escape.
-        const safeName = escapeHtml(name);
-        const safeCode = escapeHtml(code);
         const type = index ? "Secondary" : "Primary";
-        const tip = `${type} origin: ${safeName}. Click to remove link to that origin`;
-        return `<button data-id="${origin}" class="hierarchyTree_selectedButton hierarchyTree_selectedOrigin" data-tip="${tip}">${safeCode}</button>`;
+        const tip = `${type} origin: ${name}. Click to remove link to that origin`;
+        return `<button data-id="${origin}" class="hierarchyTree_selectedButton hierarchyTree_selectedOrigin" data-tip="${tip}">${code}</button>`;
       })
       .join("");
 
@@ -417,10 +414,6 @@ function selectElement(d) {
     const selectableElementsHtml = selectableElements.map(({i, name, code, color}) => {
       const isPrimary = origins[0] === i ? "checked" : "";
       const isChecked = origins.includes(i) ? "checked" : "";
-      // SettlementForge fork patch: untrusted loaded-.map name/code/color → innerHTML — escape.
-      const safeName = escapeHtml(name);
-      const safeCode = escapeHtml(code);
-      const safeColor = escapeHtml(color);
 
       if (i === 0) {
         return /*html*/ `
@@ -436,8 +429,8 @@ function selectElement(d) {
           <input data-tip="Set as primary origin" type="radio" name="primary" value="${i}" ${isPrimary} />
           <input data-id="${i}" id="selectElementOrigin${i}" class="checkbox" type="checkbox" ${isChecked} />
           <label data-tip="Check to set as a secondary origin" for="selectElementOrigin${i}" class="checkbox-label">
-            <fill-box fill="${safeColor}" size=".8em" disabled></fill-box>
-            ${safeCode}: ${safeName}
+            <fill-box fill="${color}" size=".8em" disabled></fill-box>
+            ${code}: ${name}
           </label>
         </div>
       `;

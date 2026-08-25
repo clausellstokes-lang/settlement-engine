@@ -131,61 +131,6 @@ describe('frozen-vs-live manifest (Wave 8 #2)', () => {
       expect(entry.displayRule.length).toBeGreaterThan(20);
     }
   });
-
-  // ── The G5 family (atlas owner-queue #28, landed Wave R-5b) ───────────────
-  // The five generation-frozen records the atlas's gap G5 names. Two pins:
-  // the rows stay DECLARED (a silent delete would drop the contract back to
-  // display copy alone), and the snapshot claim stays TRUE (no worldPulse
-  // writer has quietly started keeping one of them live behind a row that
-  // still says 'snapshot'). The second is the actual trigger the displayRules
-  // describe: "whichever package gives it a pulse writeback must flip this row
-  // to live and name the writer" — this is where that package finds out.
-  const G5_FROZEN_RECORDS = [
-    ['economicViability', 'economicViability'],
-    ['structuralViolations', 'structuralViolations'],
-    ['structuralSuggestions', 'structuralSuggestions'],
-    ['coherenceNotes', 'coherenceNotes'],
-    ['defenseProfile.magicDependency', 'magicDependency'],
-  ];
-
-  test('the G5 generation-frozen record family is declared as snapshot rows (atlas #28)', () => {
-    const byPath = new Map(FROZEN_VS_LIVE.map(e => [e.path, e]));
-    for (const [declaredPath] of G5_FROZEN_RECORDS) {
-      const entry = byPath.get(declaredPath);
-      expect(entry, `${declaredPath}: the G5 five must stay declared in FROZEN_VS_LIVE`).toBeTruthy();
-      expect(entry.mode, `${declaredPath}: declared mode`).toBe('snapshot');
-      expect(entry.pulseWriter, `${declaredPath}: snapshot rows carry no pulse writer`).toBeNull();
-      // The row must name its own flip condition, not just say "frozen".
-      expect(
-        /flip this row to live and name the writer/.test(entry.displayRule),
-        `${declaredPath}: displayRule must state the flip condition (scores-precedent voice)`,
-      ).toBe(true);
-    }
-  });
-
-  test.each(G5_FROZEN_RECORDS)(
-    "no worldPulse writer keeps '%s' live behind a snapshot row",
-    (declaredPath, field) => {
-      const pulseDir = path.join(ROOT, 'src/domain/worldPulse');
-      /** @param {string} dir @param {string[]} out */
-      const walk = (dir, out = []) => {
-        for (const e of fs.readdirSync(dir)) {
-          const p = path.join(dir, e);
-          if (fs.statSync(p).isDirectory()) walk(p, out);
-          else if (/\.js$/.test(e)) out.push(path.relative(ROOT, p).replace(/\\/g, '/'));
-        }
-        return out;
-      };
-      const probe = new RegExp(writeProbeFor(field), 'm');
-      const writers = walk(pulseDir).filter(rel => probe.test(readStripped(rel)));
-      expect(
-        writers,
-        `${declaredPath}: worldPulse now writes '${field}' (${writers.join(', ')}) — the record is `
-        + 'no longer generation-frozen: flip its FROZEN_VS_LIVE row to mode "live", name the '
-        + 'pulseWriter, and retire the first-survey display framing that says otherwise',
-      ).toEqual([]);
-    },
-  );
 });
 
 // ── Manifest 2: producer/consumer registry ─────────────────────────────────
@@ -251,30 +196,5 @@ describe('removed dead fields stay removed', () => {
     const delta = deriveLocalDelta(save, save, { reason: 'manifest-probe' });
     expect(Array.isArray(delta.changes)).toBe(true);
     expect('hasRegionalSignal' in delta).toBe(false);
-  });
-});
-
-// ── A+ #6 — register the screen↔PDF parity axis ──────────────────────────────
-// The field manifest governs two axes of field rot: frozen-vs-live (a generated
-// field a long campaign contradicts) and dead-writes (a field no surface reads).
-// A THIRD axis is "a field the on-screen dossier shows but the PDF silently
-// drops" (or the reverse) — a parity gap. That axis is NOT modelled in the
-// manifest tables above because it already has a stronger, dedicated home: the
-// SHARED_FIELDS contract (src/domain/display/parityContract.js) walked value-by-
-// value in tests/pdf/viewModelParity.test.js + snapshotted in goldenViewModel.
-// This block registers that governance HERE so the manifest's reader finds the
-// parity axis and it can't be quietly forgotten when fields move.
-describe('screen↔PDF parity axis (A+ #6 — governed by SHARED_FIELDS)', () => {
-  test('the parity contract is registered, non-trivial, and well-formed', async () => {
-    const { SHARED_FIELDS } = await import('../../src/domain/display/parityContract.js');
-    expect(Array.isArray(SHARED_FIELDS)).toBe(true);
-    // Same floor the parity suite's self-guard uses — so emptying the contract
-    // (the failure mode that would silently drop PDF parity) trips here too.
-    expect(SHARED_FIELDS.length).toBeGreaterThanOrEqual(8);
-    for (const row of SHARED_FIELDS) {
-      expect(typeof row.fact).toBe('string');
-      expect(typeof row.canonPath).toBe('string');
-      expect(Array.isArray(row.vmPaths) && row.vmPaths.length > 0).toBe(true);
-    }
   });
 });

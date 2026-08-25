@@ -22,7 +22,6 @@ afterEach(() => {
   // Restore a clean, non-alerting store state between tests.
   useStore.setState({
     campaignSyncError: null,
-    campaignLoadError: null,
     outboxStatus: { queued: 0, failed: 0, inflight: 0 },
   });
 });
@@ -81,26 +80,5 @@ describe('CampaignSyncBanner — outbox status chip', () => {
     fireEvent.click(screen.getByLabelText('Dismiss cloud-sync warning'));
     expect(retryOutbox).toHaveBeenCalledTimes(1);
     expect(clearCampaignSyncError).toHaveBeenCalledTimes(1);
-  });
-
-  test('strict campaign admission failure is visible and Retry reloads safely', () => {
-    const loadCampaigns = vi.fn(async () => []);
-    const retryOutbox = vi.fn(async () => []);
-    useStore.setState({
-      campaignSyncError: null,
-      campaignLoadError: {
-        code: 'campaign_admission_unavailable',
-        message: 'Campaign data could not be safely loaded.',
-      },
-      outboxStatus: { queued: 0, failed: 0, inflight: 0 },
-      loadCampaigns,
-      retryOutbox,
-    });
-
-    render(<CampaignSyncBanner />);
-    expect(screen.getByRole('alert').textContent).toMatch(/safely loaded/i);
-    fireEvent.click(screen.getByText('Retry'));
-    expect(loadCampaigns).toHaveBeenCalledTimes(1);
-    expect(retryOutbox).toHaveBeenCalledTimes(1);
   });
 });

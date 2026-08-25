@@ -17,7 +17,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Zap } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { customContentForActiveContext } from '../../store/activeCustomContentContext.js';
 import { AFFORDANCE_MANIFEST, authorableVerbs, criminalOrgOptions, vetoProse } from '../../domain/events/affordanceManifest.js';
 import { eventStalenessKey } from '../../domain/events/stalenessKey.js';
 // registryFull = registry + composer prose (description/targetPrompt) — see
@@ -31,10 +30,10 @@ import { GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
 import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
-import { MUTED, BORDER, CARD, sans, FS, SP } from '../theme.js';
+import { MUTED, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import EditQueueBanner from './eventComposer/EditQueueBanner.jsx';
 import { PARTY, PARTY_BG, campaignPeerOptions } from './eventComposer/helpers.js';
-import { CLOCK_BOUND_SCOPE_NOTICE, PreviewPanel } from './eventComposer/PreviewPanel.jsx';
+import { PreviewPanel } from './eventComposer/PreviewPanel.jsx';
 import { BatchCart } from './eventComposer/BatchCart.jsx';
 import { Field } from './eventComposer/Field.jsx';
 import { EventComposerTargetField } from './eventComposer/EventComposerTargetField.jsx';
@@ -83,7 +82,7 @@ export default function EventComposer({ onLink = null }) {
   // Boolean selector — the narrative blobs are large and we only need "is
   // there one". Nothing can go stale on a raw (never-narrated) save.
   const narrated = useStore(s => !!(s.aiSettlement || s.aiDailyLife));
-  const customContent = useStore(customContentForActiveContext);
+  const customContent = useStore(s => s.customContent);
   // Faith seam — premium custom-content entitlement gates the deity field; the
   // pricing-moment seam opens the purchase modal for a free/anon upsell.
   const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
@@ -170,9 +169,7 @@ export default function EventComposer({ onLink = null }) {
     () => [...new Set(institutionCatalogItems.map(i => i.category).filter(Boolean))].sort(),
     [institutionCatalogItems],
   );
-  // Factions: descriptor database + the user's Compendium factions ('Custom'
-  // group) — the merge FactionEventBanner's arrives-through-an-event copy sells.
-  const factionGroups = useMemo(() => factionCompendium(settlement, customContent?.factions || []), [settlement, customContent?.factions]);
+  const factionGroups = useMemo(() => factionCompendium(settlement), [settlement]);
   // APPLY_STRESSOR — the FULL stressor vocabulary: generation types +
   // campaign-only types (rebellion, market shock, criminal corridor, magical
   // instability, coup d'état) + the user's custom stressors, deduped.
@@ -275,24 +272,6 @@ export default function EventComposer({ onLink = null }) {
   const isStale = !!pendingPreview
     && (pendingPreview._previewKey !== currentKey || pendingPreview._forSettlement !== settlement);
 
-  // The ONE setters bag (threaded to the verb-reset + intent-consumption
-  // helpers in ./eventComposer/applyComposerIntent.js — the max-lines split).
-  // DECLARED ABOVE the `if (!settlement) return null` below: the intent effect
-  // is registered on EVERY render, settlement-null ones included, so a const
-  // declared after that return is in its temporal dead zone when the effect
-  // fires and reading it throws. Nothing here needs a live settlement.
-  const composerSetters = {
-    registryHas: (/** @type {string} */ t) => !!EVENT_REGISTRY[t],
-    setType, setTarget, setDesc, setAddCategory, setDestroyConfirm, setRelationshipType,
-    setCriminalOrg, setCorruptScope, setCorruptBeneficiary, setStressorPick, setStressorSeverity,
-    setInstigatorNeighbour, setInstigatorRelationship, setTradeTarget, setPowerCause,
-    setTradeDirection, setTradeEntrepot, setCustomResourceName, setSwapWithNpcId, setTierDirection,
-    setDeityRef, setDeityMode, setCultRemoveRef, setNpcFlaw, setNpcTemperament, setNpcGoals,
-    setNpcConstraint, setNpcSecret, setPartnerSaveId, setLinkRelType, setCauseOverride,
-    setApplyRefusal, setEditingQueue, setSessionEventId, setRole, setInstitutionId, setQuality,
-    setImportance, setReliefMagnitude, setPartyCaused,
-  };
-
   // Composer-intent consumption (§4): an intent staged from anywhere (entity
   // card, SuccessorPrompt) populates the FORM — the one source of truth — and
   // the live preview derives from it like any hand-built composition.
@@ -333,12 +312,22 @@ export default function EventComposer({ onLink = null }) {
     .map(i => ({ id: i.id || i.name, name: i.name || i.id }))
     .filter(o => o.id && o.name);
 
+  // The ONE setters bag (threaded to the verb-reset + intent-consumption
+  // helpers in ./eventComposer/applyComposerIntent.js — the max-lines split).
+  const composerSetters = {
+    registryHas: (/** @type {string} */ t) => !!EVENT_REGISTRY[t],
+    setType, setTarget, setDesc, setAddCategory, setDestroyConfirm, setRelationshipType,
+    setCriminalOrg, setCorruptScope, setCorruptBeneficiary, setStressorPick, setStressorSeverity,
+    setInstigatorNeighbour, setInstigatorRelationship, setTradeTarget, setPowerCause,
+    setTradeDirection, setTradeEntrepot, setCustomResourceName, setSwapWithNpcId, setTierDirection,
+    setDeityRef, setDeityMode, setCultRemoveRef, setNpcFlaw, setNpcTemperament, setNpcGoals,
+    setNpcConstraint, setNpcSecret, setPartnerSaveId, setLinkRelType, setCauseOverride,
+    setApplyRefusal, setEditingQueue, setSessionEventId, setRole, setInstitutionId, setQuality,
+    setImportance, setReliefMagnitude, setPartyCaused,
+  };
   // The ONE verb-change chokepoint (select dropdown, navigator chips, staged
   // intents): resets every per-type field, re-mints the compose-session id
   // (a different verb IS a different composition — §5 identity), ends §10 edits.
-  // Safe to stay below the early return even though the intent effect calls it:
-  // a function declaration is initialized at scope entry, and the bag its body
-  // reads is declared above.
   function switchType(v) { resetComposerForVerb(v, composerSetters); }
 
   // Thin closure: thread the form state into the pure buildEvent assembler. The
@@ -430,7 +419,7 @@ export default function EventComposer({ onLink = null }) {
 
   return (
     <div data-anchor="event-composer" style={{
-      background: CARD, border: `1px solid ${BORDER}`,
+      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
       padding: SP.sm, marginTop: SP.sm,
     }}>
       <div style={{
@@ -470,7 +459,7 @@ export default function EventComposer({ onLink = null }) {
               const p = v.predicate(settlement, verbCtx);
               return (
                 <option key={v.type} value={v.type} disabled={!p.available}>
-                  {v.label}{p.available ? '' : ` (${p.reasons[0] || 'unavailable'})`}
+                  {v.label}{p.available ? '' : ` — ${p.reasons[0] || 'unavailable'}`}
                 </option>
               );
             })}
@@ -490,8 +479,8 @@ export default function EventComposer({ onLink = null }) {
         {!isDeityEvent && type !== 'SHIFT_TIER' && !isLinkNeighbour && (
           <EventComposerTargetField
             type={type}
-            target={target} setTarget={setTarget}
-            setDesc={setDesc}
+            target={target}
+            setTarget={setTarget}
             spec={spec}
             settlement={settlement}
             setAddCategory={setAddCategory}
@@ -647,7 +636,7 @@ export default function EventComposer({ onLink = null }) {
             return (
               <Field label="Role" hint={role ? `Importance: ${derivedImp}` : 'Roles available at this institution'}>
                 <select value={role} onChange={e => setRole(e.target.value)} style={selectStyle}>
-                  <option value="">Pick a role</option>
+                  <option value="">— Pick a role —</option>
                   {roleOpts.map(r => <option key={r.role} value={r.role}>{r.role}</option>)}
                 </select>
               </Field>
@@ -663,7 +652,7 @@ export default function EventComposer({ onLink = null }) {
         {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && institutionOptions.length > 0 && (
           <Field label="Institution" hint="link this NPC to an institution">
             <select value={institutionId} onChange={e => setInstitutionId(e.target.value)} style={selectStyle}>
-              <option value="">None</option>
+              <option value="">— None —</option>
               {institutionOptions.map(o => (
                 <option key={o.id} value={o.id}>{o.name}</option>
               ))}
@@ -709,7 +698,7 @@ export default function EventComposer({ onLink = null }) {
             title="Mark this change as a direct result of the party's actions. In a canon campaign it also ripples through the world."
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 6, alignSelf: 'flex-end',
-              padding: '5px 9px', cursor: 'pointer',
+              padding: '5px 9px', borderRadius: R.sm, cursor: 'pointer',
               border: `1px solid ${partyCaused ? PARTY : BORDER}`,
               background: partyCaused ? PARTY_BG : 'transparent',
               color: partyCaused ? PARTY : MUTED, fontSize: FS.xs, fontFamily: sans, fontWeight: 700,
@@ -754,7 +743,7 @@ export default function EventComposer({ onLink = null }) {
       {/* Queued-vs-now (§5): plainly said, never silent. */}
       {queuesToNextAdvance && (
         <div style={{ marginTop: 6, fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic' }}>
-          {CLOCK_BOUND_SCOPE_NOTICE}
+          Clock-bound campaign: applied changes queue and resolve at the next World Pulse advance.
         </div>
       )}
 

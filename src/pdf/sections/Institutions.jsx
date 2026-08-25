@@ -18,7 +18,6 @@ import { servicesHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, factionColors, pt } from '../theme.js';
 import { cap, label, humanize, hookText, plural } from '../lib/format.js';
-import { anchorTarget } from '../primitives/EntityRef.jsx';
 
 const CATEGORY_ORDER = [
   'government', 'military', 'religious', 'economy', 'magic',
@@ -34,7 +33,6 @@ const STATUS_TONE = {
 
 export function Institutions({ settlement, narrativeMode, vm }) {
   const s = vm.services;
-  const index = vm.entityIndex; // Phase-D id»card resolver
   const detailed = s.detailed || [];
   const grouped  = groupBy(detailed, i => (i.category || 'other').toLowerCase());
   const categories = orderedCategories(grouped);
@@ -89,7 +87,7 @@ export function Institutions({ settlement, narrativeMode, vm }) {
         return (
           <View key={`cat-${cat}`} style={{ marginBottom: space.sm }}>
             <CategoryHeader cat={cat} count={list.length} stats={catStats} />
-            <CategoryGrid items={list} catKey={cat} entityIndex={index} />
+            <CategoryGrid items={list} catKey={cat} />
           </View>
         );
       })}
@@ -137,7 +135,7 @@ function CategoryHeader({ cat, count, stats }) {
  * category sections stack tighter and the chapter fits on one page in
  * the common case.
  */
-function CategoryGrid({ items, catKey, entityIndex }) {
+function CategoryGrid({ items, catKey }) {
   const rows = [];
   for (let i = 0; i < items.length; i += 2) {
     rows.push([items[i], items[i + 1] || null]);
@@ -147,10 +145,10 @@ function CategoryGrid({ items, catKey, entityIndex }) {
       {rows.map((pair, ri) => (
         <View key={`r-${catKey}-${ri}`} style={{ flexDirection: 'row', marginBottom: 3 }}>
           <View style={{ flex: 1, marginRight: 4 }}>
-            {pair[0] && <InstitutionCard inst={pair[0]} idx={`${catKey}-${ri}-a`} entityIndex={entityIndex} />}
+            {pair[0] && <InstitutionCard inst={pair[0]} idx={`${catKey}-${ri}-a`} />}
           </View>
           <View style={{ flex: 1 }}>
-            {pair[1] && <InstitutionCard inst={pair[1]} idx={`${catKey}-${ri}-b`} entityIndex={entityIndex} />}
+            {pair[1] && <InstitutionCard inst={pair[1]} idx={`${catKey}-${ri}-b`} />}
           </View>
         </View>
       ))}
@@ -158,10 +156,8 @@ function CategoryGrid({ items, catKey, entityIndex }) {
   );
 }
 
-function InstitutionCard({ inst, idx, entityIndex }) {
+function InstitutionCard({ inst, idx }) {
   const status = (inst.status || 'healthy').toLowerCase();
-  // Phase-D: this card is the anchor TARGET for any institution id reference.
-  const anchor = anchorTarget(entityIndex, inst.id);
   const tone = STATUS_TONE[status] || 'muted';
   // §14 — custom institutions added by the user. Print equivalent of the web's
   // shimmering gold row: a gold tint (goldBg) + gold outline + a ✦ marker.
@@ -189,7 +185,6 @@ function InstitutionCard({ inst, idx, entityIndex }) {
 
   return (
     <View
-      id={anchor}
       style={{
         padding: 5,
         border: `0.4pt solid ${isCustom ? palette.gold : palette.border}`,

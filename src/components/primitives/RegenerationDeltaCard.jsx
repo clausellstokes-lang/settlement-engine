@@ -1,8 +1,8 @@
 /**
- * primitives/RegenerationDeltaCard
+ * primitives/RegenerationDeltaCard — Tier 5.1 UI surface.
  *
- * Solves the trust problem with stochastic reruns: after a user
- * change + regenerate, surface what changed so
+ * The roadmap's "trust problem with stochastic reruns" is solved
+ * here: after a user change + regenerate, surface what changed so
  * the DM can see the engine kept canon, propagated their change,
  * and made plausible procedural decisions everywhere else.
  *
@@ -26,13 +26,12 @@
  */
 
 import { useState } from 'react';
-import { causalBandWord } from '../../domain/causalState.js';
 import { FS, swatch } from '../theme.js';
 
 const COLORS = Object.freeze({
   bg:        '#fffbf5',
   border:    '#d2bd96',
-  headerBg:  swatch['#FAF8F4'],
+  headerBg:  'rgba(160,118,42,0.10)',
   ink:       '#1c1409',
   muted:     '#9c8068',
   gold:      '#a0762a',
@@ -43,7 +42,7 @@ const COLORS = Object.freeze({
   canon:     '#1a4a20',   // forest — preserved canon
   hook:      '#a0762a',   // gold — opportunities
   risk:      '#8b1a1a',   // red — risks
-  broken:    swatch['#FAF8F4'],
+  broken:    'rgba(196,128,60,0.12)',
   brokenBdr: 'rgba(196,128,60,0.4)',
 });
 
@@ -61,19 +60,7 @@ function countItems(delta) {
   );
 }
 
-/**
- * @param {Object} props
- * @param {any} props.delta
- * @param {Function} [props.onDismiss]
- * @param {string} [props.heading] — header wording. Defaults to the rerun
- *   phrasing this card was born for; the Versions-tab snapshot comparison
- *   (VersionDiffView) passes its own, because "rerun" is the wrong word for a
- *   reader comparing two points on a campaign timeline. Named `heading`, not
- *   `title`, so the native-tooltip census can tell a presentation prop from a
- *   real title= attribute (the AdminPanel Section precedent in
- *   tests/domain/guidanceRegistry.walker.test.js).
- */
-export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What changed in the rerun' }) {
+export function RegenerationDeltaCard({ delta, onDismiss }) {
   const [collapsed, setCollapsed] = useState(false);
 
   if (!delta || countItems(delta) === 0) return null;
@@ -86,6 +73,8 @@ export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What change
         margin: '8px 18px',
         background: COLORS.bg,
         border: `1px solid ${COLORS.border}`,
+        borderRadius: 6,
+        boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
         overflow: 'hidden',
         fontFamily: 'Nunito, sans-serif',
       }}
@@ -102,7 +91,7 @@ export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What change
           fontSize: FS.xs, fontWeight: 800, color: COLORS.gold,
           textTransform: 'uppercase', letterSpacing: '0.06em',
         }}>
-          {heading}
+          What changed in the rerun
         </span>
         <span style={{ fontSize: FS.xs, color: COLORS.muted, flex: 1 }}>
           {summarizeCounts(delta)}
@@ -127,7 +116,7 @@ export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What change
             title="Dismiss this delta summary. Run another regenerate to recompute."
             style={{
               background: 'none', border: `1px solid ${COLORS.border}`,
-              cursor: 'pointer',
+              borderRadius: 3, cursor: 'pointer',
               fontSize: FS.xxs, fontWeight: 700, color: COLORS.muted,
               padding: '2px 7px',
             }}
@@ -151,21 +140,12 @@ export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What change
           />
           {/* Ripple entries (compareCausalState) carry bandBefore/bandAfter;
               capacity entries (compareCapacityStates) nest the band under
-              before/after objects. Fall back across spellings either way.
-              The ripple bands print through causalBandWord: a lower-is-better
-              variable bands off the INVERTED score, so its raw band says the
-              opposite of what happened (crime at its worst reads "collapsed").
-              Only that one variable's words move; the other fifteen are
-              byte-identical, and the capacity ladder below is a different
-              vocabulary and stays raw. */}
+              before/after objects. Fall back across spellings either way. */}
           <Section title="Ripple effects"
             items={delta.rippleEffects}
             color={COLORS.ripple}
             describe={d => d.variable || d.label}
-            detail={d => formatBandChange(
-              rippleWord(d, d.bandBefore ?? d.beforeBand),
-              rippleWord(d, d.bandAfter ?? d.afterBand),
-            )}
+            detail={d => formatBandChange(d.bandBefore ?? d.beforeBand, d.bandAfter ?? d.afterBand)}
           />
           <Section title="Capacity shifts"
             items={delta.capacityShifts}
@@ -241,6 +221,7 @@ function Section({ title, items, color, describe, detail }) {
         listStyle: 'none', margin: 0, padding: 0,
         background: swatch['#FAF6EE'],
         border: `1px solid ${COLORS.border}`,
+        borderRadius: 4,
       }}>
         {items.map((item, idx) => (
           <li
@@ -274,6 +255,7 @@ function BrokenDependenciesRow({ items }) {
         padding: '6px 9px',
         background: COLORS.broken,
         border: `1px solid ${COLORS.brokenBdr}`,
+        borderRadius: 4,
         fontSize: FS.xs, color: swatch['#7A4F0F'], lineHeight: 1.5,
       }}
     >
@@ -293,17 +275,6 @@ function summarizeCounts(delta) {
   if (delta.removedEntities?.length)    parts.push(`−${delta.removedEntities.length}`);
   if (delta.brokenDependencies?.length) parts.push(`${delta.brokenDependencies.length} broken`);
   return parts.join(' · ');
-}
-
-/**
- * Display word for one side of a causal ripple's band transition. Falls back to
- * the raw band when the entry carries no variable name (a capacity or legacy
- * entry routed here by the spelling fallbacks above).
- * @param {any} entry @param {string|undefined} band
- */
-function rippleWord(entry, band) {
-  if (!band || !entry?.variable) return band;
-  return causalBandWord(entry.variable, band).toLowerCase();
 }
 
 function formatBandChange(before, after) {

@@ -1,54 +1,15 @@
 import { useMemo } from 'react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
-import { POPULATION_RANGES, TIER_ORDER } from '../data/constants.js';
-import {
-  CULTURE_PROFILES,
-  CULTURE_PROFILE_KEYS,
-} from '../domain/cultureProfiles.js';
 import {getCompatibleResources} from '../generators/terrainHelpers';
 import { GOLD, INK, MUTED, SECOND, BODY, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
 import Button from './primitives/Button.jsx';
 import Disclosure from './primitives/Disclosure.jsx';
-import { ClerkNote } from './generate/ClerkNote.jsx';
 import CharacterPresetCard from './generate/CharacterPresetCard.jsx';
 import PlaceInRegionCard from './generate/PlaceInRegionCard.jsx';
-import { useRealmMagicDefault } from './generate/useRealmMagicDefault.js';
 
 const PARCHMENT=swatch['#F7F0E4'];
-const DEFAULT_CONTENT_BOUNDARIES=Object.freeze({
-  human_trafficking:false,
-  slavery:false,
-  torture:false,
-  hard_drugs:true,
-});
-const CONTENT_BOUNDARY_OPTIONS=Object.freeze([
-  ['human_trafficking','Human trafficking'],
-  ['slavery','Slavery and forced labour'],
-  ['torture','Torture'],
-  ['hard_drugs','Hard-drug trade and use'],
-]);
-const CULTURAL_TRADITION_OPTIONS=Object.freeze(
-  CULTURE_PROFILE_KEYS.map(key => Object.freeze({
-    key,
-    label: CULTURE_PROFILES[key].label,
-  })),
-);
-
-// Population figure for a tier <option>, derived from the enforced source of
-// truth POPULATION_RANGES (already in the eager data chunk — zero closure cost).
-// Mirrors THE GAUGE's popFigure in HomeHero.jsx so the dropdown and the ranges
-// cannot drift: the top tier renders open-ended (min+). Copy-law: no hand-typed
-// population numbers here (thorp/hamlet had stale 20-80 / 81-400 bands).
-const popRange = (tier) => {
-  const r = POPULATION_RANGES[tier];
-  if (!r) return '';
-  const fmt = (n) => n.toLocaleString('en-US');
-  return TIER_ORDER[TIER_ORDER.length - 1] === tier
-    ? `${fmt(r.min)}+`
-    : `${fmt(r.min)}–${fmt(r.max)}`;
-};
 
 // The 17 archetypes + priority sliders moved to the Character preset card
 // (generate/CharacterPresetCard.jsx, data in generate/characterPresets.js).
@@ -63,23 +24,19 @@ function Lbl({children,topic}){
   if(topic)return<div style={{...base,display:'flex',alignItems:'center',gap:5}}><span>{children}</span><HelpPopover topic={topic}/></div>;
   return<div style={base}>{children}</div>;
 }
-function Sel({value,onChange,children,ariaLabel}){return<select aria-label={ariaLabel} value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
+function Sel({value,onChange,children,ariaLabel}){return<select aria-label={ariaLabel} value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
 
-export function StressPanel({config,updateConfig}){
+function StressPanel({config,updateConfig}){
   const isRandom=config.selectedStressesRandom!==false;
   const selected=config.selectedStresses||[];
   const allKeys=Object.keys(STRESS_TYPE_MAP);
   const toggleRandom=()=>updateConfig(isRandom?{selectedStressesRandom:false,selectedStresses:allKeys}:{selectedStressesRandom:true,selectedStresses:[]});
   const toggleStress=key=>{if(isRandom)return;updateConfig({selectedStresses:selected.includes(key)?selected.filter(k=>k!==key):[...selected,key]});};
-  return<div style={{background:swatch['#FDF8F0'],border:`1px solid ${BORDER2}`,padding:'12px 14px',marginTop:4}}>
+  return<div style={{background:swatch['#FDF8F0'],border:`1px solid ${BORDER2}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
     <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:10,gap:10}}>
       <div style={{flex:1}}>
         <div style={{fontSize:FS.sm,fontWeight:700,color:INK,marginBottom:2}}>Settlement Stress</div>
-        <p style={{fontSize:FS.xs,color:SECOND,margin:0,lineHeight:1.4}}>
-          {isRandom
-            ? 'Settlement conditions decide whether an eligible stress emerges. A generation may have none; occasionally a second accompanies the primary.'
-            : `${selected.length} of ${allKeys.length} stress types selected. Each selected stress is applied to the generated settlement.`}
-        </p>
+        <p style={{fontSize:FS.xs,color:SECOND,margin:0,lineHeight:1.4}}>{isRandom?'A random stress may fire each Generate (~40% chance). All types are eligible.':`${selected.length} of ${allKeys.length} stress types selected.`}</p>
       </div>
       <div style={{display:'flex',gap:5,flexShrink:0}}>
         <Button variant={isRandom?'primary':'secondary'} size="sm" aria-pressed={isRandom} onClick={toggleRandom}>{isRandom?'Random ON':'Random'}</Button>
@@ -87,21 +44,23 @@ export function StressPanel({config,updateConfig}){
       </div>
     </div>
     {!isRandom&&<div style={{display:'flex',flexDirection:'column',gap:4,maxHeight:200,overflowY:'auto'}}>
-      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<Button key={key} variant={on?'gold':'secondary'} size="sm" aria-pressed={on} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',justifyContent:'flex-start',gap:8,padding:'5px 8px',textAlign:'left',minHeight:'auto',whiteSpace:'normal',fontWeight:400,border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent'}}><span style={{fontSize: FS['14'],flexShrink:0}}>{d.icon}</span><span style={{fontSize:FS.xs,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:FS.xxs,color:d.colour||GOLD}}>✓</span>}</Button>;})}
+      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<Button key={key} variant={on?'gold':'secondary'} size="sm" aria-pressed={on} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',justifyContent:'flex-start',gap:8,padding:'5px 8px',borderRadius:4,textAlign:'left',minHeight:'auto',whiteSpace:'normal',fontWeight:400,border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent'}}><span style={{fontSize: FS['14'],flexShrink:0}}>{d.icon}</span><span style={{fontSize:FS.xs,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:FS.xxs,color:d.colour||GOLD}}>✓</span>}</Button>;})}
     </div>}
   </div>;
 }
 
-export function NearbyResourcesPanel({config,updateConfig}){
+function NearbyResourcesPanel({config,updateConfig}){
   const route=config.tradeRouteAccess||'road';
   const isRandom   = config.nearbyResourcesRandom !== false;
   const selected   = config.nearbyResources || [];
   const resState   = config.nearbyResourcesState || {};
+  const DEPLETION_PROB = {thorp:5,hamlet:10,village:20,town:35,city:55,metropolis:70};
+  const tierPct    = DEPLETION_PROB[config.settType] ?? 25;
 
   // Four-state cycle: off (unselected) → allow → abundant → depleted → off
   // 'off' has no label — just looks bland, like a stress that wasn't selected
   const _RESOURCE_STATES = ['off','allow','abundant','depleted'];
-  const STATE_LABELS  = {allow:'Allow',abundant:'Abundant',depleted:'Depleted'};
+  const STATE_LABELS  = {allow:'○ Allow',abundant:'✦ Abundant',depleted:'◐ Depleted'};
   const STATE_COLORS  = {allow:'#9c8068',abundant:'#1a5a28',depleted:'#c05000'};
   const STATE_BG      = {allow:'transparent',abundant:'#f0faf2',depleted:'#fff7f0'};
   const STATE_BORDER  = {allow:'#c8b89a',abundant:'#88c880',depleted:'#e08040'};
@@ -159,7 +118,7 @@ export function NearbyResourcesPanel({config,updateConfig}){
     }
   };
   const activeKeys=isRandom?allResources.map(r=>r.key):selected;
-  return<div style={{background:PARCHMENT,border:`1px solid ${BORDER}`,padding:'12px 14px',marginTop:4}}>
+  return<div style={{background:PARCHMENT,border:`1px solid ${BORDER}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
     <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:10,gap:10}}>
       <div style={{flex:1}}>
         <div style={{fontSize:FS.sm,fontWeight:700,color:INK,marginBottom:2,display:'flex',alignItems:'center',gap:8}}>Nearby Resources<span style={{fontSize:FS.xxs,fontWeight:400,color:MUTED}}>constrained by {route} access</span></div>
@@ -185,7 +144,7 @@ export function NearbyResourcesPanel({config,updateConfig}){
                 <Button key={r.key} variant="ghost" size="sm"
                   onClick={()=>cycleResourceState(r.key)}
                   title={incompatTip}
-                  style={{fontSize:FS.xs,padding:'3px 9px',minHeight:'auto',fontWeight:400,border:'1px dashed #c8b8a0',
+                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',fontWeight:400,border:'1px dashed #c8b8a0',
                     background:'transparent',color:MUTED,opacity:0.45}}>
                   {r.name||r.key.replace(/_/g,' ')}
                 </Button>);
@@ -196,7 +155,7 @@ export function NearbyResourcesPanel({config,updateConfig}){
               return(
                 <Button key={r.key} variant="gold" size="sm" disabled
                   title={`In random pool. Eligible for this generation. Actual selection happens at generation time based on route and terrain.`}
-                  style={{fontSize:FS.xs,padding:'3px 9px',minHeight:'auto',opacity:1,
+                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',opacity:1,
                     border:`1px solid #c8a84a`,background:`rgba(160,118,42,0.08)`,color:`#8a6020`,
                     cursor:'default',userSelect:'none',fontWeight:600}}>
                   {r.name||r.key.replace(/_/g,' ')}
@@ -209,7 +168,7 @@ export function NearbyResourcesPanel({config,updateConfig}){
             const tip = isOff
               ? 'Not included. Click to add (Allow state).'
               : st==='allow'
-              ? 'Included; availability is resolved for this settlement size. Click to guarantee Abundant.'
+              ? `Included, ~${tierPct}% chance of depleted at generation. Click to force Abundant.`
               : st==='abundant'
               ? 'Forced abundant. Full export potential. Click to force Depleted.'
               : 'Forced depleted. Local use only, import dependency at town+. Click to remove.';
@@ -223,7 +182,7 @@ export function NearbyResourcesPanel({config,updateConfig}){
                  color:STATE_COLORS[st],fontWeight:700};
             return(
               <Button key={r.key} variant="secondary" size="sm" onClick={()=>cycleResourceState(r.key)} title={tip}
-                style={{fontSize:FS.xs,padding:'3px 9px',minHeight:'auto',
+                style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',
                   WebkitTapHighlightColor:'transparent',userSelect:'none',
                   transition:'all 0.1s',...btnStyle}}>
                 {!isOff&&st!=='allow'&&<span style={{fontSize:FS.micro,marginRight:3,opacity:0.85}}>{STATE_LABELS[st].split(' ')[0]}</span>}
@@ -236,14 +195,14 @@ export function NearbyResourcesPanel({config,updateConfig}){
       <div style={{marginTop:8,paddingTop:8,borderTop:'1px solid #e8dcc8',display:'flex',gap:8,flexWrap:'wrap',alignItems:'center'}}>
         {isRandom
           ? <span style={{fontSize:FS.xxs,color:SECOND,fontStyle:'italic'}}>
-              Compatible resources are selected automatically. Some may begin depleted, with that pressure rising as settlement size grows. Toggle Random OFF to control them individually.
+              All compatible resources are in the pool. ~{tierPct}% chance of depleted per resource at <strong>{config.settType||'this tier'}</strong>. Toggle Random OFF to control individually.
             </span>
           : <>
               <span style={{fontSize:FS.xxs,color:SECOND}}>Click each resource to cycle:</span>
-              <span style={{fontSize:FS.xxs,color:MUTED,border:'1px solid #d0c0a8',padding:'1px 6px',opacity:0.7}}>Off</span>
-              <span style={{fontSize:FS.xxs,color:GOLD,background:`${GOLD}10`,border:`1px solid ${GOLD}70`,padding:'1px 6px'}}>Allow (availability resolved)</span>
-              <span style={{fontSize:FS.xxs,color:STATE_COLORS.abundant,background:STATE_BG.abundant,border:`1px solid ${STATE_BORDER.abundant}`,padding:'1px 6px'}}>Abundant</span>
-              <span style={{fontSize:FS.xxs,color:STATE_COLORS.depleted,background:STATE_BG.depleted,border:`1px solid ${STATE_BORDER.depleted}`,padding:'1px 6px'}}>Depleted</span>
+              <span style={{fontSize:FS.xxs,color:MUTED,border:'1px solid #d0c0a8',borderRadius:3,padding:'1px 6px',opacity:0.7}}>Off</span>
+              <span style={{fontSize:FS.xxs,color:GOLD,background:`${GOLD}10`,border:`1px solid ${GOLD}70`,borderRadius:3,padding:'1px 6px'}}>Allow (~{tierPct}% depleted)</span>
+              <span style={{fontSize:FS.xxs,color:STATE_COLORS.abundant,background:STATE_BG.abundant,border:`1px solid ${STATE_BORDER.abundant}`,borderRadius:3,padding:'1px 6px'}}>✦ Abundant</span>
+              <span style={{fontSize:FS.xxs,color:STATE_COLORS.depleted,background:STATE_BG.depleted,border:`1px solid ${STATE_BORDER.depleted}`,borderRadius:3,padding:'1px 6px'}}>Depleted</span>
             </>
         }
       </div>
@@ -266,65 +225,88 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
   // ── Isolation + magic constraint flags ──────────────────────────────────
   const magic       = config.priorityMagic || 0;
   const noMagic     = config.magicExists === false || magic === 0;
-  // MG-2: a settlement generated INTO a mundane realm starts from that realm's
-  // premise. Pre-selection only — the control below stays sovereign, and the
-  // line beneath it says why the answer moved.
-  const realmIsMundane = useRealmMagicDefault();
+  const isIsolated  = config.tradeRouteAccess === 'isolated';
+  const isTownPlus  = ['town','city','metropolis'].includes(config.settType);
+  // Block: no magic + isolation is incompatible with town+
+  const blockTownPlus  = noMagic && isIsolated;   // hide town+ options from tier dropdown
+  const blockIsolated  = noMagic && isTownPlus;   // hide isolated from route dropdown
 
-  return<div style={{background:CARD,border:`1px solid ${BORDER2}`}}>
+  return<div style={{background:CARD,border:`1px solid ${BORDER2}`,borderRadius:10}}>
     <div style={{padding:'0 16px 14px'}}>
       <div style={{marginBottom:12}}>
         <Lbl>Settlement Name (optional)</Lbl>
-        <input type="text" aria-label="Settlement Name (optional)" maxLength={25} placeholder="Leave blank to generate automatically" value={config.customName||''} onChange={e=>updateConfig({customName:e.target.value.slice(0,25)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box',background:config.customName?'#fffbf5':CARD}}/>
+        <input type="text" aria-label="Settlement Name (optional)" maxLength={25} placeholder="Leave blank to generate automatically" value={config.customName||''} onChange={e=>updateConfig({customName:e.target.value.slice(0,25)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box',background:config.customName?'#fffbf5':CARD}}/>
         {config.customName&&<div style={{fontSize:FS.xs,color:MUTED,marginTop:3,textAlign:'right'}}>{25-(config.customName||'').length} characters remaining</div>}
       </div>
       {/* §14b — Use custom content toggle (homebrew data layer). Default ON. */}
       {canUseCustom && customCount > 0 && (() => {
         const on = config.useCustomContent !== false;
         return (
-          <label htmlFor="useCustomContent" style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer',padding:'8px 10px',marginBottom:12,border:`1px solid ${on?swatch.magic:BORDER2}`,background:on?'rgba(124,58,237,0.06)':CARD}}>
+          <label htmlFor="useCustomContent" style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer',padding:'8px 10px',marginBottom:12,border:`1px solid ${on?swatch.magic:BORDER2}`,borderRadius:6,background:on?'rgba(124,58,237,0.06)':CARD}}>
             <input id="useCustomContent" aria-label="Use my custom content" type="checkbox" checked={on} onChange={e=>updateConfig({useCustomContent:e.target.checked})} style={{accentColor:swatch.magic,width:15,height:15,flexShrink:0}}/>
-            <span style={{fontSize:FS.sm,fontWeight:700,color:on?swatch.magic:SECOND,fontFamily:sans}}>Use my custom content</span>
+            <span style={{fontSize:FS.sm,fontWeight:700,color:on?swatch.magic:SECOND,fontFamily:sans}}>✦ Use my custom content</span>
             <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',textAlign:'right',lineHeight:1.3}}>{customCount} item{customCount===1?'':'s'} · institutions, services, resources, trade, factions, stressors &amp; chains</span>
           </label>
         );
       })()}
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl topic="tier">Population</Lbl>
-          <Sel value={config.settType} onChange={e=>updateConfig({settType:e.target.value})}>
+          <Sel value={blockTownPlus && isTownPlus ? 'village' : config.settType}
+            onChange={e=>{
+              const v = e.target.value;
+              // If blocked tier somehow selected, snap to village
+              if(blockTownPlus && ['town','city','metropolis'].includes(v)) return;
+              updateConfig({settType:v});
+            }}>
             <option value="random">Random</option>
-            <option value="thorp">{`Thorp (${popRange('thorp')})`}</option>
-            <option value="hamlet">{`Hamlet (${popRange('hamlet')})`}</option>
-            <option value="village">{`Village (${popRange('village')})`}</option>
-            <option value="town">{`Town (${popRange('town')})`}</option>
-            <option value="city">{`City (${popRange('city')})`}</option>
-            <option value="metropolis">{`Metropolis (${popRange('metropolis')})`}</option>
+            <option value="thorp">Thorp (20-80)</option>
+            <option value="hamlet">Hamlet (81-400)</option>
+            <option value="village">Village (401-900)</option>
+            {!blockTownPlus && <option value="town">Town (901-5,000)</option>}
+            {!blockTownPlus && <option value="city">City (5,001-25,000)</option>}
+            {!blockTownPlus && <option value="metropolis">Metropolis (25,001+)</option>}
+            {blockTownPlus && <option value="town" disabled style={{color:swatch['#BBBBBB']}}>Town. Requires magic or road</option>}
             <option value="custom">Custom…</option>
           </Sel>
+          {blockTownPlus && <div style={{fontSize:FS.xxs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>
+             Town+ requires a trade route or Magic slider above 0
+          </div>}
         </div>
         <div><Lbl topic="trade-route">Trade Route</Lbl>
           <Sel
-            value={config.tradeRouteAccess}
-            onChange={e=>updateConfig({tradeRouteAccess:e.target.value})}>
+            value={blockIsolated && isIsolated ? 'road' : config.tradeRouteAccess}
+            onChange={e=>{
+              const v = e.target.value;
+              if(blockIsolated && v === 'isolated') return;
+              updateConfig({tradeRouteAccess:v});
+            }}>
             <option value="random_trade">Random</option>
             <option value="road">Road</option>
             <option value="river">River</option>
             <option value="port">Port</option>
             <option value="crossroads">Crossroads</option>
-            <option value="isolated">Isolated</option>
+            {!blockIsolated && <option value="isolated">Isolated</option>}
+            {blockIsolated && <option value="isolated" disabled style={{color:swatch['#BBBBBB']}}>Isolated. Not available at town+ without magic</option>}
             <option value="mountain_pass">Mountain Pass</option>
           </Sel>
+          {blockIsolated && <div style={{fontSize:FS.xxs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>
+             Isolated unavailable at {config.settType} tier without magic infrastructure
+          </div>}
         </div>
-        {/* ── Isolation + Town+ warning — a rubric-headed clerk's note
-            (Deep Craft cluster 1; the blue tinted wash retired). */}
+        {/* ── Isolation + Town+ warning ───────────────────────────────────── */}
         {['town','city','metropolis'].includes(config.settType) &&
           config.tradeRouteAccess === 'isolated' && (
-          <ClerkNote rubric="Isolation support premise" style={{ fontSize: FS.xs }}>
-            The generator will test local food, hinterland production, reserves, seasonal access, and patronage first.
-            {noMagic
-              ? ' Without magic, any remaining support gap is preserved and labeled as an intentional tension.'
-              : ' Functional high magic is available only as a last-resort substitution for a remaining gap.'}
-          </ClerkNote>
+          <div style={{
+            background: swatch.infoBg,
+            border: '1px solid #a0b0e0',
+            borderLeft: '3px solid #3a5ab0',
+            borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, lineHeight: 1.55,
+          }}>
+            <span style={{fontWeight:700,color:swatch['#3A5AB0']}}>✦ Magical Trade Infrastructure</span><br/>
+            <span style={{color:swatch['#2A3A6A']}}>
+              A Teleportation Circle and arcane maintainer will be forced into this {config.settType}. Its only connection to the outside world. All trade flows through the circle. If it fails, the settlement collapses.
+            </span>
+          </div>
         )}
 
         <div><Lbl topic="terrain">Terrain</Lbl>
@@ -340,79 +322,24 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
           </Sel>
         </div>
       </div>
-      {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" aria-label="Custom Population" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
+      {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" aria-label="Custom Population" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
-        <div><Lbl topic="culture">Cultural tradition</Lbl>
+        <div><Lbl topic="culture">Culture</Lbl>
           <Sel value={config.culture||'random_culture'} onChange={e=>updateConfig({culture:e.target.value})}>
             <option value="random_culture">Random</option>
             <option value="mixed">Mixed</option>
-            {CULTURAL_TRADITION_OPTIONS.map(option=>(
-              <option key={option.key} value={option.key}>{option.label}</option>
-            ))}
+            <option value="germanic">Germanic</option>
+            <option value="latin">Latin/Roman</option>
+            <option value="celtic">Celtic</option>
+            <option value="norse">Norse</option>
+            <option value="arabic">Arabic</option>
+            <option value="slavic">Slavic</option>
+            <option value="east_asian">East Asian</option>
+            <option value="mesoamerican">Mesoamerican</option>
+            <option value="south_asian">South Asian</option>
+            <option value="steppe">Steppe</option>
+            <option value="greek">Greek</option>
           </Sel>
-          <p style={{fontSize:FS.xxs,color:MUTED,margin:'4px 0 0',lineHeight:1.35}}>
-            Sets names and a local design grammar for built form, civic life, foodways, exchange, worship, and defense, with modest institution likelihoods.
-          </p>
-        </div>
-        <div style={{gridColumn:config.contentProfile==='custom'?'span 2':'auto'}}>
-          <Lbl>Generated themes</Lbl>
-          <Sel
-            ariaLabel="Generated themes"
-            value={config.contentProfile||'grounded'}
-            onChange={e=>{
-              const contentProfile=e.target.value;
-              updateConfig({
-                contentProfile,
-                ...(contentProfile==='custom'&&!config.contentBoundaries
-                  ? {contentBoundaries:{...DEFAULT_CONTENT_BOUNDARIES}}
-                  : {}),
-              });
-            }}
-          >
-            <option value="heroic">Heroic</option>
-            <option value="grounded">Grounded</option>
-            <option value="grim">Grim</option>
-            <option value="custom">Custom boundaries</option>
-          </Sel>
-          <p style={{fontSize:FS.xxs,color:MUTED,margin:'4px 0 0',lineHeight:1.35}}>
-            Grounded is the default. Grim explicitly permits generated slavery, trafficking, and torture themes.
-          </p>
-          {config.contentProfile==='custom'&&(
-            <fieldset
-              aria-label="Allowed generated themes"
-              style={{
-                display:'grid',
-                gridTemplateColumns:'repeat(2,minmax(0,1fr))',
-                gap:'5px 12px',
-                margin:'8px 0 0',
-                padding:'8px 10px',
-                border:`1px solid ${BORDER2}`,
-              }}
-            >
-              <legend style={{padding:'0 4px',fontSize:FS.xxs,fontWeight:700,color:SECOND}}>
-                Allow the generator to introduce
-              </legend>
-              {CONTENT_BOUNDARY_OPTIONS.map(([key,label])=>{
-                const boundaries=config.contentBoundaries||DEFAULT_CONTENT_BOUNDARIES;
-                const inputId=`content-boundary-${key}`;
-                return(
-                  <label key={key} htmlFor={inputId} style={{display:'flex',alignItems:'flex-start',gap:6,fontSize:FS.xs,color:BODY,lineHeight:1.3}}>
-                    <input
-                      id={inputId}
-                      aria-label={`Allow generated ${label.toLowerCase()}`}
-                      type="checkbox"
-                      checked={boundaries[key]===true}
-                      onChange={e=>updateConfig({
-                        contentBoundaries:{...boundaries,[key]:e.target.checked},
-                      })}
-                      style={{marginTop:1,accentColor:GOLD}}
-                    />
-                    <span>{label}</span>
-                  </label>
-                );
-              })}
-            </fieldset>
-          )}
         </div>
         <div>
           <Lbl topic="settlement-age">Age</Lbl>
@@ -429,7 +356,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
               max={5000}
               value={config.settlementAgeYears||0}
               onChange={e=>updateConfig({settlementAgeYears:Number(e.target.value)})}
-              style={{width:'100%',marginTop:6,padding:'6px 10px',border:`1px solid ${BORDER2}`,fontSize:FS.sm,fontFamily:sans,boxSizing:'border-box'}}
+              style={{width:'100%',marginTop:6,padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,fontFamily:sans,boxSizing:'border-box'}}
             />
           )}
         </div>
@@ -448,26 +375,24 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
           <Sel ariaLabel="Magic in the World" value={config.magicExists===false?'no':'yes'}
             onChange={e=>{
               const noMagicNow = e.target.value==='no';
+              const isTownPlusNow = ['town','city','metropolis'].includes(config.settType);
+              const isIsolatedNow = config.tradeRouteAccess==='isolated';
               updateConfig({
                 magicExists: !noMagicNow,
                 ...(noMagicNow ? {priorityMagic:0} : {priorityMagic: Math.max(5, config.priorityMagic||50)}),
+                // Isolated town+ without magic is impossible — reset to road
+                ...(noMagicNow && isTownPlusNow && isIsolatedNow ? {tradeRouteAccess:'road'} : {}),
               });
             }}>
-            <option value="yes">Yes. Magic exists</option>
+            <option value="yes">✦ Yes. Magic exists</option>
             <option value="no">○ No. Historical mode</option>
           </Sel>
-          {realmIsMundane && (
-            <div data-testid="realm-mundane-note" style={{fontSize:FS.xs,color:MUTED,marginTop:4,lineHeight:1.4}}>
-              This realm was built without magic, so that is the starting answer
-              here. Change it if this one place is the exception.
-            </div>
-          )}
-          {noMagic && config.tradeRouteAccess === 'isolated'
-            && ['town','city','metropolis'].includes(config.settType) && (
+          {/* Make the cross-field consequence VISIBLE (P2): turning magic off at
+              town+ forces a physical trade route — an isolated town+ is reset to
+              Road (the magic toggle's onChange does this silently otherwise). */}
+          {noMagic && isTownPlus && (
             <div style={{fontSize:FS.xs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>
-              This explicit isolated premise will be preserved. If local food,
-              reserves, seasonal access, and patronage are insufficient, the
-              dossier will label the support gap as by design.
+              Without magic, a town or larger needs a physical trade route, so Isolated is set to Road.
             </div>
           )}
         </div>

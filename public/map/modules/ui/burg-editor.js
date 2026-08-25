@@ -60,9 +60,8 @@ function editBurg(id) {
     const id = +elSelected.attr("data-id");
     const b = pack.burgs[id];
     const province = pack.cells.province[b.cell];
-    // SettlementForge fork patch: untrusted loaded-.map province/state names → innerHTML — escape.
-    const provinceName = province ? escapeHtml(pack.provinces[province].fullName) + ", " : "";
-    const stateName = escapeHtml(pack.states[b.state].fullName || pack.states[b.state].name);
+    const provinceName = province ? pack.provinces[province].fullName + ", " : "";
+    const stateName = pack.states[b.state].fullName || pack.states[b.state].name;
     byId("burgProvinceAndState").innerHTML = provinceName + stateName;
 
     byId("burgName").value = b.name;

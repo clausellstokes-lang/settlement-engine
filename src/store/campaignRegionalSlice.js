@@ -5,10 +5,10 @@
  * These actions all operate on a campaign's regionalGraph / worldState stressors
  * and the settlements they touch. They were scattered through the campaignSlice
  * megafile; grouping them here shrinks that file and gives the regional surface a
- * single home. campaignRuntime.js constructs this body with the same set/get as
- * the eager entry delegates, then publishes its actions atomically; every
- * cross-action call still goes through get(), so return semantics do not change
- * once the route preload has armed the runtime.
+ * single home. They are composed into the same store as a spread sub-slice
+ * (store/index.js), so they share one set/get with campaignSlice — every
+ * cross-action call already goes through get(), so nothing about call semantics
+ * changes.
  *
  * The module imports only leaf helpers (shared persistence, pulse helpers, and
  * the region/worldPulse domains) and never campaignSlice, so there is no cycle.
@@ -22,17 +22,19 @@ import {
   deriveRegionalGraphFromSaves,
   ensureRegionalGraph,
   isRegionalImpactAvailable,
+  queueRegionalImpacts,
   setRegionalChannelStatus as domainSetRegionalChannelStatus,
+  setRegionalChannelVisibility as domainSetRegionalChannelVisibility,
   setRegionalImpactStatus as domainSetRegionalImpactStatus,
 } from '../domain/region/index.js';
 // Leaf-module imports (not the `export *` barrel). ensureWorldState/proposalIdFor/
 // upsertProposal are light world-state helpers; normalizeStressor/resolveStressorById
 // live in the stressor cluster (stressors → stressorDynamics/stressorGates/
-// foodStockpile). These remain SYNCHRONOUS inside injectCampaignStressor /
+// foodStockpile). These are used SYNCHRONOUSLY inside injectCampaignStressor /
 // resolveCampaignStressor / undoCampaignStressorBridge, which settlementSlice's
-// rippleEventThroughWorld calls synchronously on canon edits. The campaign route
-// gate loads this entire body first, preserving that call ordering while keeping
-// the barrel's heavier advance/AI graph out of this capsule.
+// rippleEventThroughWorld calls synchronously on canon edits — a true sync edge
+// that cannot go dynamic without changing that call ordering, so it stays static.
+// This still keeps the barrel's heavy advance/AI graph out of first paint.
 import {
   ensureWorldState,
   proposalIdFor,
@@ -47,7 +49,7 @@ import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import {
   cloneJson, persistCampaignState, persistSaveUpdate,
-  findActiveCampaign, campaignSettlements,
+  channelTypesFromImpacts, findActiveCampaign, campaignSettlements,
 } from './campaignSliceShared.js';
 import {
   campaignStateForRegionalImpact, appendWizardNewsForGraphChange,
@@ -55,8 +57,6 @@ import {
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { extractRegionalImpactDecision, extractRegionalChannelChange } from '../lib/regionalFingerprint.js';
-
-export const CAMPAIGN_REGIONAL_RUNTIME_SENTINEL = 'settlementforge_campaign_regional_body_v1';
 
 /**
  * The slice of a pending world-pulse proposal's outcome that the roaming-twin
@@ -85,13 +85,20 @@ export const CAMPAIGN_REGIONAL_RUNTIME_SENTINEL = 'settlementforge_campaign_regi
 // Intra-slice fan-out (ignore/applyAll → get().setRegionalImpactStatus etc.) is
 // SAME-slice. Graph/news mechanics live in campaignPulseHelpers.js + domain/region.
 export const createCampaignRegionalSlice = (set, get) => ({
-  // RETIRED (R-5b, owner queue #21): `ensureCampaignRegionalGraph`. It was a
-  // registered operation with no caller anywhere. The envelope it "ensured" is
-  // ensured on every live path already — rebuildCampaignRegionalGraph, the impact
-  // verbs and the pulse helpers each call `ensureRegionalGraph(c.regionalGraph)`
-  // themselves before touching it, which is the single-source shape the R-4 law
-  // asks for. A separate public verb that only did the same thing first was a
-  // second door onto one room.
+  /** Ensure a campaign has the current regional graph envelope. */
+  ensureCampaignRegionalGraph: (campaignId) => {
+    let graph = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      c.regionalGraph = ensureRegionalGraph(c.regionalGraph);
+      ensureCampaignWizardNews(c);
+      c.updatedAt = new Date().toISOString();
+      graph = c.regionalGraph;
+      persistCampaignState(state, campaignId);
+    });
+    return graph;
+  },
 
   /**
    * Rebuild the structural graph from campaign settlements. Existing channel
@@ -100,14 +107,6 @@ export const createCampaignRegionalSlice = (set, get) => ({
    * measurements and adds suggested P0 channels for new pairs.
    */
   rebuildCampaignRegionalGraph: (campaignId, options = {}) => {
-    // Advance/parked guard (store-2 / store-hooks-state-4): rebuild replaces
-    // c.regionalGraph, which a running advance's Phase-2 commit AND a resume from a
-    // PARKED pause restore WHOLESALE from the pre-interval snapshot — so a DM's
-    // "Discover channels" (SettlementsPanel → discoverCampaignRegionalChannels →
-    // here) landing in either window is silently reverted. Same null no-op as the
-    // guarded siblings; callers read the returned graph (null = no change).
-    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
-    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
     const { discover = true } = options;
     let graph = null;
     set(state => {
@@ -131,12 +130,6 @@ export const createCampaignRegionalSlice = (set, get) => ({
   },
 
   setRegionalChannelStatus: (campaignId, channelId, status) => {
-    // Advance/parked guard (store-2 / store-hooks-state-4): DM channel curation
-    // (SettlementsPanel "confirm channel") writes c.regionalGraph, which a running
-    // or PARKED advance restores wholesale — silently dropping the curation. Null
-    // no-op in both windows, matching the guarded regional siblings.
-    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
-    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
     let graph = null;
     let channelEvent = null;
     set(state => {
@@ -158,19 +151,20 @@ export const createCampaignRegionalSlice = (set, get) => ({
     return graph;
   },
 
-  // RETIRED (R-5b, owner queue #21): `setRegionalChannelVisibility`, together with
-  // its domain twin in domain/region/graph.js. It was a DM-curation door onto a
-  // channel's public/gm/hidden field that NO surface opened, in BOTH halves — the
-  // store action had no caller and the pure helper had no caller but that action,
-  // which is the "live Impl behind a dead store surface" shape the atlas kept
-  // finding, here with the Impl dead too. Its advance/parked guard was written
-  // defensively for a "hide channel" wiring that never arrived; a future one must
-  // re-add the guard with the control, which is the honest ordering. VISIBILITY
-  // ITSELF IS UNTOUCHED and still fully live: channels are BORN with a visibility
-  // (relationship bundles mint public/gm/hidden per type), ensureRegionalGraph
-  // normalizes and migrates the field, activeChannelsFrom filters on it, and the
-  // confirmed-channel preservation path carries it across a rediscovery. What is
-  // gone is only the never-opened door for CHANGING it after the fact.
+  setRegionalChannelVisibility: (campaignId, channelId, visibility) => {
+    let graph = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      c.regionalGraph = domainSetRegionalChannelVisibility(c.regionalGraph, channelId, visibility, { now });
+      ensureCampaignWizardNews(c);
+      c.updatedAt = now;
+      graph = c.regionalGraph;
+      persistCampaignState(state, campaignId);
+    });
+    return graph;
+  },
 
   /**
    * Register an authored stressor as a ROAMING world-pulse stressor. The
@@ -182,16 +176,6 @@ export const createCampaignRegionalSlice = (set, get) => ({
    * than stacks.
    */
   injectCampaignStressor: (campaignId, stressor) => {
-    // Advance/parked guard (store-2 / store-hooks-state-4): this writes
-    // c.worldState.stressors, which a running or PARKED advance restores wholesale.
-    // Reachable independently of the canon-edit bridge via the surveyor autonomy
-    // nudge (AutonomyPanel → injectCampaignStressor), so a nudge approved mid-advance
-    // would ghost. The rippleEventThroughWorld caller is upstream-gated (applyEvent
-    // routes clock-bound canon settlements through the already-guarded
-    // queueSettlementEvent), so it never runs in-flight and this guard is inert there
-    // — no split truth. Standalone nudge → clean null no-op (no coupled dossier edit).
-    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
-    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
     let injected = null;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
@@ -384,12 +368,29 @@ export const createCampaignRegionalSlice = (set, get) => ({
     return graph;
   },
 
-  // RETIRED (R-5b, owner queue #21): `queueCampaignRegionalImpacts`. Registered,
-  // described, and called by nothing. The live regional lane queues its impacts
-  // INTERNALLY — the pulse path writes them through campaignPulseHelpers and the
-  // DM curates them through setRegionalImpactStatus — so this public verb was a
-  // second entry point that would have bypassed the advance-in-flight guards its
-  // siblings carry. Retiring it removes the bypass along with the dead code.
+  queueCampaignRegionalImpacts: (campaignId, impacts = []) => {
+    let graph = null;
+    let queued = false;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      c.regionalGraph = queueRegionalImpacts(beforeGraph, impacts, { now });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
+      c.updatedAt = now;
+      graph = c.regionalGraph;
+      queued = true;
+      persistCampaignState(state, campaignId);
+    });
+    if (queued) {
+      track(EVENTS.REGIONAL_IMPACT_QUEUED, {
+        count: Array.isArray(impacts) ? impacts.length : 0,
+        channel_types: channelTypesFromImpacts(impacts),
+      });
+    }
+    return graph;
+  },
 
   setRegionalImpactStatus: (campaignId, impactId, status, patch = {}, opts = {}) => {
     // Advance-in-flight guard (store-2): a status flip on the regional graph during a

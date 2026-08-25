@@ -18,31 +18,22 @@ import { getPendingRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } fr
 import { useReferralIntent } from '../hooks/useReferralIntent.js';
 import { getTierDisplayName, getActivePacks } from '../config/pricing.js';
 import { t } from '../copy/index.js';
-import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, ELEV, swatch } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
 import RedeemCodeField from './purchase/RedeemCodeField.jsx';
 import ReferralIntentField from './purchase/ReferralIntentField.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
-import CaptchaGate from './perimeter/CaptchaGate.jsx';
 
 export default function PurchaseModal({ onClose }) {
   const creditBalance = useStore(s => s.creditBalance);
   const authTier      = useStore(s => s.auth.tier);
   const isElevated    = useStore(s => s.isElevated());
-  const isSignedIn    = useStore(s => Boolean(s.auth?.user?.id));
   const [loading, setLoading] = useState(null); // product key being purchased
   const [error, setError]     = useState(null);
-  // Auto-reload consent (§4.2): OFF by default. Drives savePaymentMethod on the
-  // credit-pack checkout so a future off-session reload can charge the saved card.
-  const [saveCard, setSaveCard] = useState(false);
   // Redeem code (107): seeded from the Account-page handoff, editable inline.
   // Advisory input only — create-checkout re-validates and reserves it.
   const [redeemCode, setRedeemCode]     = useState(() => getPendingRedeemCode());
   const [redeemNotice, setRedeemNotice] = useState(null);
-  // Wave-D human verification (INERT until the perimeterCaptcha flag + Turnstile
-  // keys are set): a managed-Turnstile token, ADDITIVE onto the create-checkout
-  // body. Null while the flag is off — the checkout body is then byte-identical.
-  const [captchaToken, setCaptchaToken] = useState(null);
   // Referral intent (107): self-gates to signed-in, unpaid, never-referred.
   const referral = useReferralIntent();
 
@@ -66,7 +57,7 @@ export default function PurchaseModal({ onClose }) {
       // before the first payment lands. recordIntent never throws and a
       // rejection surfaces as a note — it must never block the purchase.
       await referral.recordIntent();
-      const { redeemNotice: notice } = await startCheckout(product, { redeemCode, savePaymentMethod: saveCard, captchaToken: captchaToken || undefined });
+      const { redeemNotice: notice } = await startCheckout(product, { redeemCode });
       // The code is consumed (reserved or declined server-side) — drop the
       // stash so it cannot resurface on a later, unrelated purchase.
       clearPendingRedeemCode();
@@ -112,14 +103,10 @@ export default function PurchaseModal({ onClose }) {
         aria-modal="true"
         aria-labelledby="purchase-modal-title"
         style={{
-          background: CARD,
+          background: CARD, borderRadius: R.xl,
           border: `1px solid ${BORDER}`,
-          width: '90%', maxWidth: 520,
-          // Bound to the viewport and scroll inside, matching the Dialog Shell
-          // primitive (H13). The old `overflow: hidden` with no height cap
-          // clipped the lower form fields and the close button on short
-          // (landscape-phone) viewports, leaving them unreachable.
-          maxHeight: 'min(90vh, 680px)', overflowY: 'auto',
+          boxShadow: ELEV[3],
+          width: '90%', maxWidth: 520, overflow: 'hidden',
         }}
       >
         {/* Header */}
@@ -144,8 +131,8 @@ export default function PurchaseModal({ onClose }) {
         <div style={{ padding: `${SP.xxl}px ${SP.xl}px`, display: 'flex', flexDirection: 'column', gap: SP.lg }}>
           {/* Current balance */}
           <div style={{
-            padding: `${SP.md}px ${SP.lg}px`, background: swatch['#FAF8F4'],
-            border: `1px solid ${GOLD}33`,
+            padding: `${SP.md}px ${SP.lg}px`, background: GOLD_BG,
+            borderRadius: R.lg, border: `1px solid rgba(160,118,42,0.2)`,
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
           }}>
             <span style={{ fontSize: FS.sm, color: SECOND, fontFamily: sans }}>Current Balance</span>
@@ -158,8 +145,8 @@ export default function PurchaseModal({ onClose }) {
           {isElevated && (
             <div style={{
               padding: `${SP.sm + 2}px ${SP.md}px`,
-              background: swatch['#FAF8F4'], border: '1px solid #5A6E82',
-              fontSize: FS.sm, color: swatch['#7C3AED'], textAlign: 'center',
+              background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)',
+              borderRadius: R.md, fontSize: FS.sm, color: swatch['#7C3AED'], textAlign: 'center',
             }}>
               Developer accounts have unlimited credits. Purchases are not required.
             </div>
@@ -170,7 +157,7 @@ export default function PurchaseModal({ onClose }) {
             <div style={{
               display: 'flex', alignItems: 'center', gap: SP.sm,
               padding: `${SP.sm + 2}px ${SP.md}px`,
-              background: swatch['#FAF8F4'], border: '1px solid #e8b0b0', borderLeft: `3px solid ${swatch.danger}`,
+              background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md,
               fontSize: FS.sm, color: swatch.danger,
             }}>
               <AlertCircle size={16} />
@@ -214,9 +201,9 @@ export default function PurchaseModal({ onClose }) {
                   disabled={loading || !isConfigured}
                   style={{
                     flex: 1, padding: `${SP.lg}px ${SP.sm}px`,
-                    background: isBest ? swatch['#FAF8F4'] : isValue ? swatch['#FAF8F4'] : CARD,
+                    background: isBest ? 'rgba(42,122,42,0.06)' : isValue ? 'rgba(160,118,42,0.04)' : CARD,
                     border: `2px solid ${borderColor}`,
-                    cursor: loading ? 'wait' : 'pointer',
+                    borderRadius: R.xl, cursor: loading ? 'wait' : 'pointer',
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs + 2,
                     fontFamily: sans, transition: 'border-color 0.2s, transform 0.1s',
                     opacity: loading ? 0.6 : 1,
@@ -227,7 +214,7 @@ export default function PurchaseModal({ onClose }) {
                   {p.discount && (
                     <div style={{
                       position: 'absolute', top: -10, right: -4,
-                      padding: '2px 8px',
+                      padding: '2px 8px', borderRadius: R.md,
                       background: accentColor, color: swatch.white,
                       fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.02em',
                     }}>
@@ -246,26 +233,6 @@ export default function PurchaseModal({ onClose }) {
               );
             })}
           </div>
-
-          {/* Auto-reload consent (§4.2 / #13). Signed-in only (a saved card needs an
-              account). OFF by default; the whole label is the ~44px tap target. */}
-          {isSignedIn && (
-            <label htmlFor="auto-reload-consent" style={{ display: 'flex', alignItems: 'flex-start', gap: SP.sm, marginTop: SP.sm, cursor: 'pointer' }}>
-              <input
-                id="auto-reload-consent"
-                type="checkbox"
-                checked={saveCard}
-                onChange={(e) => setSaveCard(e.target.checked)}
-                style={{ marginTop: 2, width: 18, height: 18, flexShrink: 0 }}
-                aria-label="Save my card for automatic credit reloads"
-              />
-              <span style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
-                Save my card for automatic credit reloads. When your balance runs low we'll
-                top it back up to your target and charge this card. Off by default. Manage or
-                cancel anytime from your account.
-              </span>
-            </label>
-          )}
 
           {/* Redeem-code disclosure (107). The typed code rides along on
               whichever pack the reader buys; the server decides whether it fits
@@ -304,25 +271,8 @@ export default function PurchaseModal({ onClose }) {
             </div>
           )}
 
-          {/* Wave-D human verification (INERT until activated). Managed/invisible:
-              silent for humans, so it adds no visible step; renders nothing while
-              the perimeterCaptcha flag is off. */}
-          <CaptchaGate action="checkout" onToken={setCaptchaToken} className="captcha-checkout" />
-
           <div style={{ fontSize: FS.xxs, color: MUTED, textAlign: 'center', lineHeight: 1.5 }}>
             Payments processed securely by Stripe. Credits never expire.
-          </div>
-
-          {/* Point-of-purchase legal links (additive only — no paid-surface
-              behavior change). New tab so the checkout flow is never disrupted.
-              The refund/cancellation policy lives in Terms §Refunds; /refunds
-              resolves to it. */}
-          <div style={{ fontSize: FS.xxs, color: MUTED, textAlign: 'center', lineHeight: 1.5, marginTop: SP.xs }}>
-            <a href="/terms" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, textDecoration: 'underline' }}>{t('footer.terms')}</a>
-            {' · '}
-            <a href="/refunds" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, textDecoration: 'underline' }}>{t('footer.refunds')}</a>
-            {' · '}
-            <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, textDecoration: 'underline' }}>{t('footer.privacy')}</a>
           </div>
         </div>
       </div>

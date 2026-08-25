@@ -4,7 +4,6 @@
  */
 import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags, getStressFlags, pick, randInt } from '../helpers.js';
-import { createGenerationWorldLaw } from '../generationContext.js';
 
 // computeRelTension
 // buildConflictPlotHooks — build up to 3 plot hooks for a conflict between two
@@ -54,10 +53,6 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
 //   factions, relationships, config, institutions
 export const generateConflicts = (factions, relationships, config = {}, institutions = []) => {
   if (factions.length < 2) return [];
-  const worldLaw = createGenerationWorldLaw(config, {
-    tradeRoute: config.tradeRouteAccess,
-    terrainType: config.terrainType,
-  });
   const instFlags = getInstFlags(config, institutions),
     stressFlags = getStressFlags(config, institutions),
     conflicts = [],
@@ -82,13 +77,11 @@ export const generateConflicts = (factions, relationships, config = {}, institut
         issue: 'Arcane research permit regulations',
         stakes: 'Magical autonomy',
         flag: 'heresySuppression',
-        requires: 'magic',
       },
       {
         issue: 'Control of the dock taxation authority',
         stakes: 'Port revenue',
         flag: null,
-        requires: 'water_trade',
       },
       {
         issue: 'Military conscription of guild apprentices',
@@ -218,22 +211,7 @@ export const generateConflicts = (factions, relationships, config = {}, institut
         return inA && inB && ['rival', 'enemy'].includes(rel.type);
       });
     if (rivalries.length === 0 && _rng() < 0.4) continue;
-    const applicableTemplates = issueTemplates.filter((template) => {
-      if (template.flag && !stressFlags[template.flag]) return false;
-      if (template.requires === 'magic' && !worldLaw.magicFunctions()) {
-        return false;
-      }
-      if (
-        template.requires === 'water_trade'
-        && !worldLaw.supportsMaritime()
-        && !worldLaw.supportsRiverTrade()
-      ) {
-        return false;
-      }
-      return worldLaw.allowsGeneratedContent(
-        `${template.issue} ${template.stakes}`,
-      );
-    }),
+    const applicableTemplates = issueTemplates.filter((tmpl) => !tmpl.flag || stressFlags[tmpl.flag]),
       chosen = pick(applicableTemplates.length ? applicableTemplates : issueTemplates),
       intensity = rivalries.length > 1 ? 'high' : rivalries.length === 1 ? 'moderate' : 'low';
     conflicts.push({

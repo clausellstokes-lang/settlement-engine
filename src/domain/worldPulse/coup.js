@@ -115,16 +115,6 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       : 0;
     // W-CONVERGENCE: the surviving foreign interveners' signed tilt (0 when dark).
     const interventionAdj = interventionAdjFor(worldState, saveId);
-    // coherence-13 (economicCoupReadEnabled, a VIRTUAL flag ABSENT from DEFAULT_SIMULATION_RULES):
-    // a prosperous seat holds, a hollowed treasury falls. Reads the settlement's already-derived
-    // economic_capacity causal score (symmetric to ruling_authority above), centered at 50 and
-    // scaled ±0.125 exactly like authorityAdj (÷400). The flag absent ⇒ 0 ⇒ byte-identical (the
-    // warSentimentAdj/interventionAdj precedent — stressorsEnabled is default-true, so this verdict
-    // is on the shipped-lit path; the dark default MUST contribute nothing).
-    const economicCapacityScore = entry.causal?.scores?.economic_capacity;
-    const economicAdj = (rules?.economicCoupReadEnabled === true && Number.isFinite(economicCapacityScore))
-      ? (Number(economicCapacityScore) - 50) / 400
-      : 0;
     const verdict = /** @type {any} */ (resolveCoupVerdict({
       settlement: entry.settlement,
       rng,
@@ -132,7 +122,6 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       rulingAuthorityScore: entry.causal?.scores?.ruling_authority ?? null,
       warSentimentAdj,
       interventionAdj,
-      economicAdj,
     }));
     const settlementName = entry.name || entry.settlement?.name || saveId;
     const incumbentName = verdict.incumbent?.name || 'the ruling power';
@@ -166,7 +155,7 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
         summary: `The conspiracy broke against the seat. Purges and loyalty tests follow; the plotters' names are currency now.`,
         reasons: [
           verdict.reason,
-          'The contest broke in the ruling seat\'s favor.',
+          `Hold chance ${verdict.pHold}, roll ${verdict.roll}.`,
         ],
         condition: {
           archetype: 'coup_suppressed',
@@ -198,7 +187,7 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       summary: `The ${String(incumbentName).toLowerCase()} fell. ${verdict.winner.name} now commands the government, and the settlement holds its breath.`,
       reasons: [
         verdict.reason,
-        'The contest broke against the ruling seat.',
+        `Hold chance ${verdict.pHold}, roll ${verdict.roll}.`,
         ...(locked
           ? ['The governing faction is locked. The seat cannot change hands without your approval.']
           : []),

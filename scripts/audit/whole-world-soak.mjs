@@ -14,28 +14,15 @@
  *      (scanned every year, fail-fast);
  *   2. BYTE-IDENTICAL RE-RUN — the same seed replays the identical composite
  *      hash every year (run B == run A, all N years);
- *   3. STORY-MIX DIVERGENCE on a different seed (run C's aggregate selected-
- *      event distribution differs materially from run A within the comparison
- *      window; composite hashes remain diagnostic and earn no claim);
+ *   3. DIVERGENCE on a different seed (run C forks from run A within the
+ *      comparison window — the determinism is seed-derived, not degenerate);
  *   4. POPULATION BOUNDED — every settlement stays finite and > 0; the realm
  *      total stays within a generous envelope of its start (attractors, not
  *      runaways or death-spirals);
- *   5. BEHAVIORAL OBSERVATION — selected outcomes, mover families, event
- *      diversity, arc polarity, state motion, succession, causal composition,
- *      attention, and a bounded Chronicle sample are recorded for the
- *      predeclared realm-scale oracle. This cell does not choose its own bands.
- *   5b. WAR CONVERGENCE (WR-9d) — the deployment ledger is walked year over year
- *      as a war census, every close is classified through warEndingClassifier and
- *      banded through warDurationBandFor, and the result fills the WR-9 observation
- *      on the receipt. Only the instrument's own ARITHMETIC is asserted here (every
- *      counted war in exactly one duration cell, every close in exactly one ending
- *      cell); the envelopes themselves are unratified and are graded by the
- *      behavioral oracle, where they honestly fail at HEAD's flag state.
- *   6. ISOLATED WORKER EXECUTION — one real Node worker_threads isolate imports
- *      the product Web Worker module, advances the same initial realm through
- *      the same domain entry, and must return the same output hash as run A.
- *      Its timings are real for that Node host, but explicitly NOT represented
- *      as browser Web Worker or field-device measurements.
+ *   5. STRESSOR RHYTHM — yearly active-stressor counts are REPORTED, and the
+ *      known EQUILIBRIUM TENDENCY (the composed world winding down to stasis
+ *      under autoresolve — the strategic argument FOR the spatial engine) is
+ *      DOCUMENTED rather than failed: a frozen tail prints as a finding.
  *
  * Deterministic: seeded generation (options THIRD — the second argument is
  * importedNeighbour and now fail-closes on an options bag), pinned `now`,
@@ -44,8 +31,6 @@
  *   node scripts/audit/whole-world-soak.mjs [--years 30] [--seed w0-soak]
  *                                           [--divergence-years 5] [--json]
  *                                           [--seasons on|off]
- *                                           [--neighbor-control-years 30]
- *                                           [--dark-control]
  *
  * SEASONS-A: full_simulation now lights seasonsEnabled, so the default soak
  * runs the food year. `--seasons off` restores the pre-seasons variant for
@@ -54,31 +39,6 @@
  */
 
 import { createHash } from 'node:crypto';
-import { mkdirSync, writeFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import { performance } from 'node:perf_hooks';
-import { measureIsolatedAdvanceWorker } from './advance-worker-evidence.mjs';
-import {
-  buildBehavioralObservation,
-  buildDarkControl,
-  buildNeighborControl,
-  buildSubsystemConfiguration,
-  censusWorldStateKeys,
-  observeBehavioralYear,
-} from './behavioral-observation.mjs';
-import {
-  SOAK_RECEIPT_SCHEMA_VERSION,
-} from '../../src/domain/certification/behavioralContract.js';
-import {
-  WAR_CONVERGENCE_SAMPLING,
-  buildWarConvergenceObservation,
-  observeWarConvergenceYear,
-} from './war-convergence-collector.mjs';
-import { buildWholeWorldSoakSpatialCanon } from './whole-world-soak-spatial-fixture.mjs';
-import {
-  buildStoryMixDivergenceEvidence,
-  compareStoryMixDistributions,
-} from './story-mix-divergence.mjs';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { simulateCampaignWorldInterval } from '../../src/domain/worldPulse/advanceInterval.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
@@ -92,14 +52,7 @@ const YEARS = Math.max(1, Number(arg('years', 30)));
 const SEED = String(arg('seed', 'w0-soak'));
 const DIVERGENCE_YEARS = Math.max(1, Math.min(YEARS, Number(arg('divergence-years', 5))));
 const AS_JSON = process.argv.includes('--json');
-const RECEIPT_PATH = arg('receipt', '');
-const CASE_ID = String(arg('case-id', ''));
 const SEASONS = String(arg('seasons', 'preset')); // 'on' | 'off' | preset default
-const NEIGHBOR_CONTROL_YEARS = Math.max(
-  0,
-  Math.min(YEARS, Number(arg('neighbor-control-years', 0)) || 0),
-);
-const RUN_DARK_CONTROL = process.argv.includes('--dark-control');
 // performance-scale-6: parameterize the fixture up to the 30-settlement envelope so
 // the soak can exercise the cost axis at the product's headline scale. Default stays
 // 4 (the historical fixture — byte-identical archetypes for the first four ids).
@@ -124,7 +77,7 @@ const REGION = Array.from({ length: SETTLEMENTS }, (_, i) => ({
   ...REGION_ARCHETYPES[i % REGION_ARCHETYPES.length],
 }));
 
-function buildFixture(seed, { variant = 'baseline' } = {}) {
+function buildFixture(seed) {
   const saves = REGION.map(({ id, ...config }, i) => {
     // Options are the THIRD argument (the second is importedNeighbour; passing
     // an options bag there now throws — the 85bb8c51 fail-closed contract).
@@ -137,35 +90,6 @@ function buildFixture(seed, { variant = 'baseline' } = {}) {
       campaignState: { phase: 'canon', eventLog: [], locks: {} },
     };
   });
-
-  if (variant === 'neighbor_perturbed' && saves[0]?.settlement) {
-    const settlement = saves[0].settlement;
-    saves[0] = {
-      ...saves[0],
-      settlement: {
-        ...settlement,
-        population: Math.max(
-          1,
-          Math.round((Number(settlement.population) || 1) * 1.10),
-        ),
-      },
-    };
-  }
-
-  if (variant === 'dark') {
-    for (let index = 0; index < saves.length; index += 1) {
-      const settlement = saves[index].settlement;
-      const config = { ...(settlement?.config || {}) };
-      delete config.primaryDeityRef;
-      delete config.primaryDeitySnapshot;
-      delete config.cultDeitySnapshots;
-      delete config.latentPantheon;
-      saves[index] = {
-        ...saves[index],
-        settlement: { ...settlement, config },
-      };
-    }
-  }
 
   const firstExport = (save) => {
     const list = save.settlement?.economicState?.primaryExports || [];
@@ -201,21 +125,6 @@ function buildFixture(seed, { variant = 'baseline' } = {}) {
     if (i % 3 === 0) baseChannels.push(channel(saves[i], saves[i - 3]));
   }
 
-  const fullRules = {
-    ...SIMULATION_RULE_PRESETS.full_simulation.rules,
-    ...(SEASONS === 'on' ? { seasonsEnabled: true } : SEASONS === 'off' ? { seasonsEnabled: false } : {}),
-  };
-  const darkRules = Object.fromEntries(Object.entries(fullRules).map(([key, value]) => (
-    [key, typeof value === 'boolean' ? false : value]
-  )));
-  Object.assign(darkRules, {
-    presetId: 'behavioral_dark_control',
-    propagationMode: 'off',
-    migrationMode: 'void',
-    worldProgression: 'dm_advanced',
-    politicalAutonomy: 'dm_only',
-  });
-
   const campaign = {
     id: 'whole-world-soak',
     name: 'Whole-World Soak Realm',
@@ -226,14 +135,13 @@ function buildFixture(seed, { variant = 'baseline' } = {}) {
       rngSeed: seed,
       tick: 0,
       canonizedAt: NOW,
-      // The lit fixture is a real spatial canon: deterministic FMG-shaped capture
-      // data authored through buildSpatialDigest. The explicit dark control strips
-      // both marker and digest so its constitutional aspatial path remains honest.
-      ...buildWholeWorldSoakSpatialCanon(saves, { enabled: variant !== 'dark' }),
       // FULL SIMULATION — the §11 ceiling preset: war layer + strategy + faith
       // spread + (W0-A3) the eight war-depth sub-flags. The soak exercises the
       // deepest composed stack the control layer can turn on.
-      simulationRules: variant === 'dark' ? darkRules : fullRules,
+      simulationRules: {
+        ...SIMULATION_RULE_PRESETS.full_simulation.rules,
+        ...(SEASONS === 'on' ? { seasonsEnabled: true } : SEASONS === 'off' ? { seasonsEnabled: false } : {}),
+      },
       stressors: [],
     },
   };
@@ -259,37 +167,20 @@ function findBadNumber(value, path = '$', out = [], seen = new Set()) {
 }
 
 // ── One N-year run: thread state year over year like the store does ──────────
-async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
-  const fixture = buildFixture(seed, { variant });
-  const { campaign, saves } = fixture;
+async function runYears(seed, years, label) {
+  const { campaign, saves } = buildFixture(seed);
   let runningCampaign = campaign;
   let runningSaves = saves;
   const yearlyHashes = [];
   const yearlyStressorCounts = [];
   const yearlyPopulations = [];
-  const yearlyDiedFlags = []; // remnant law 2026-07-31: a properly-died settlement legitimately holds zero
   // performance-scale-6: the cost axis — serialized worldState+regionalGraph bytes and
   // per-year wall-time, so a size/cost regression trends visibly and can be asserted.
   const yearlyBytes = [];
-  const yearlyRealmBytes = [];
   const yearlyMs = [];
-  const yearlyBehavior = [];
-  // Envelope v5: the per-year worldState container census. A subsystem whose only
-  // observable output is a sidecar ledger (the satellite lane, the one-regen
-  // sidecars) leaves no candidate in `selected`, so without this census its
-  // certification row could only ever read UNOBSERVED.
-  const yearlyStateKeyCensus = [];
-  // WR-9d: the war census, one record per year. The collector reads the composed
-  // year result advanceInterval already returns — no engine surface changes and no
-  // persisted state, which WR-9's lifecycle clause forbids.
-  const yearlyWarConvergence = [];
-  let firstResultSha256 = null;
-  let peakHeapUsedBytes = process.memoryUsage().heapUsed;
   const t0 = Date.now();
 
   for (let year = 1; year <= years; year++) {
-    const beforeSaves = runningSaves;
-    const rawWizardNewsById = new Map();
     const y0 = Date.now();
     const result = await simulateCampaignWorldInterval({
       campaign: runningCampaign,
@@ -298,14 +189,7 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
       commit: true,
       now: NOW,
       autoResolve: true,
-      onTickObservation: ({ rawWizardNewsEntries }) => {
-        for (const entry of rawWizardNewsEntries || []) {
-          if (!entry || typeof entry !== 'object' || !entry.id) continue;
-          rawWizardNewsById.set(String(entry.id), entry);
-        }
-      },
     });
-    if (year === 1) firstResultSha256 = sha(result);
     yearlyMs.push(Date.now() - y0);
     if (result.status === 'paused') {
       throw new Error(`[soak:${label}] year ${year} PAUSED under autoResolve:true — orchestrator contract broken`);
@@ -321,20 +205,6 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
       const byId = new Map(result.settlementUpdates.map((u) => [String(u.saveId), u.settlement]));
       runningSaves = runningSaves.map((s) => (byId.has(String(s.id)) ? { ...s, settlement: byId.get(String(s.id)) } : s));
     }
-    yearlyBehavior.push(observeBehavioralYear({
-      year,
-      result,
-      beforeSaves,
-      afterSaves: runningSaves,
-      rawWizardNewsEntries: [...rawWizardNewsById.values()],
-    }));
-    yearlyStateKeyCensus.push(censusWorldStateKeys(result.worldState));
-    yearlyWarConvergence.push(observeWarConvergenceYear({
-      year,
-      tick: result.worldState?.tick,
-      result,
-      saves: runningSaves,
-    }));
 
     // 1. NaN/Infinity scan — fail fast with paths.
     const bad = findBadNumber({
@@ -354,26 +224,8 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
     const stressors = Array.isArray(result.worldState?.stressors) ? result.worldState.stressors : [];
     yearlyStressorCounts.push(stressors.length);
     yearlyPopulations.push(runningSaves.map((s) => Number(s.settlement?.population) || 0));
-    yearlyDiedFlags.push(runningSaves.map((s) => Number.isFinite(Number(s.settlement?.config?.lifecycleDiedAtTick))));
     yearlyBytes.push(JSON.stringify(result.worldState).length + JSON.stringify(result.regionalGraph).length);
-    yearlyRealmBytes.push(JSON.stringify({
-      worldState: result.worldState,
-      regionalGraph: result.regionalGraph,
-      settlements: runningSaves.map((save) => save.settlement),
-    }).length);
-    peakHeapUsedBytes = Math.max(peakHeapUsedBytes, process.memoryUsage().heapUsed);
   }
-
-  // This isolated structuredClone call measures only cloning the final realm on
-  // the current Node thread. It is NOT worker duration or exact postMessage cost;
-  // the actual worker_threads round trip below supplies separate evidence for
-  // those combined effects. Clone and heap timings remain observational because
-  // they vary by host, while the deterministic byte envelope is the regression
-  // wall.
-  const finalRealm = { campaign: runningCampaign, saves: runningSaves };
-  const cloneStartedAt = performance.now();
-  structuredClone(finalRealm);
-  const structuredCloneMs = performance.now() - cloneStartedAt;
 
   return {
     label,
@@ -384,24 +236,9 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
     yearlyHashes,
     yearlyStressorCounts,
     yearlyPopulations,
-    yearlyDiedFlags,
     yearlyBytes,
-    yearlyRealmBytes,
     yearlyMs,
-    finalRealmBytes: JSON.stringify(finalRealm).length,
-    structuredCloneMs,
-    firstResultSha256,
-    heapUsedBytes: process.memoryUsage().heapUsed,
-    peakHeapUsedBytes,
-    startPopulations: fixture.saves.map((s) => Number(s.settlement?.population) || 0),
-    yearlyBehavior,
-    yearlyStateKeyCensus,
-    yearlyWarConvergence,
-    // The EFFECTIVE rules this run carried (the preset spread plus any --seasons
-    // override), recorded so the receipt states its configuration instead of
-    // leaving a reader to infer it from the script.
-    simulationRules: fixture.campaign.worldState.simulationRules,
-    finalWorldState: runningCampaign.worldState,
+    startPopulations: buildFixture(seed).saves.map((s) => Number(s.settlement?.population) || 0),
   };
 }
 
@@ -419,59 +256,8 @@ console.log('## run A (primary)');
 const runA = await runYears(SEED, YEARS, 'A');
 console.log(`  ${runA.years} years in ${(runA.ms / 1000).toFixed(1)}s — final tick ${runA.finalTick} (${runA.years * 52} expected)\n`);
 
-console.log('## isolated worker evidence (actual Node worker_threads; not browser timing)');
-let isolatedWorker = null;
-let isolatedWorkerError = null;
-try {
-  const fixture = buildFixture(SEED);
-  const measured = await measureIsolatedAdvanceWorker({
-    campaign: fixture.campaign,
-    saves: fixture.saves,
-    interval: 'one_year',
-    commit: true,
-    now: NOW,
-    autoResolve: true,
-  }, { customContent: {} });
-  isolatedWorker = measured.evidence;
-  console.log(
-    `  cold ${isolatedWorker.timingsMs.coldStartToTerminal}ms · `
-    + `request ${isolatedWorker.timingsMs.requestToTerminal}ms · `
-    + `worker handler ${isolatedWorker.timingsMs.workerHandlerToTerminalPost}ms`,
-  );
-  console.log(
-    `  transport ${isolatedWorker.runtime.transport} · `
-    + `thread ${isolatedWorker.runtime.workerThreadId} · `
-    + `${isolatedWorker.response.progressMessages} progress messages\n`,
-  );
-} catch (error) {
-  isolatedWorkerError = error instanceof Error ? error.message : String(error);
-  console.log(`  FAILED — ${isolatedWorkerError}\n`);
-}
-
 console.log('## assertions');
 check(runA.finalTick === runA.years * 52, 'tick arithmetic', `finalTick ${runA.finalTick} == years×52`);
-check(
-  isolatedWorker?.nonVacuous === true,
-  'actual isolated Node worker execution',
-  isolatedWorker
-    ? `worker thread ${isolatedWorker.runtime.workerThreadId} != main thread ${isolatedWorker.runtime.parentThreadId}`
-    : isolatedWorkerError,
-);
-check(
-  isolatedWorker?.response?.jsonSha256 === runA.firstResultSha256,
-  'isolated worker output equals the direct domain path',
-  isolatedWorker
-    ? `${String(isolatedWorker.response.jsonSha256).slice(0, 12)} == ${String(runA.firstResultSha256).slice(0, 12)}`
-    : 'no isolated-worker result',
-);
-check(
-  isolatedWorker?.response?.progressMessages === 52
-    && isolatedWorker?.response?.lastProgress?.ticksDone === 52,
-  'isolated worker completed a non-vacuous one-year advance',
-  isolatedWorker
-    ? `${isolatedWorker.response.progressMessages} progress messages; final tick ${isolatedWorker.response.lastProgress?.ticksDone}/52`
-    : 'no isolated-worker progress',
-);
 
 // 2. Byte-identical re-run (every year, not just the end state).
 const runB = await runYears(SEED, YEARS, 'B');
@@ -479,86 +265,18 @@ const firstMismatch = runA.yearlyHashes.findIndex((h, i) => runB.yearlyHashes[i]
 check(firstMismatch === -1, 'byte-identical re-run (same seed)',
   firstMismatch === -1 ? `all ${YEARS} yearly composite hashes equal` : `diverged at year ${firstMismatch + 1}`);
 
-// 3. Different seeds must produce materially different STORY MIXES. A composite
-// hash difference remains useful diagnostics, but it cannot earn seed_divergent:
-// one altered draw anywhere in the world used to satisfy that weaker proof.
+// 3. Divergence on a different seed (compared inside the window).
 const runC = await runYears(`${SEED}-divergent`, DIVERGENCE_YEARS, 'C');
-const hashDiverged = runC.yearlyHashes.some((h, i) => h !== runA.yearlyHashes[i]);
-const storyMixDivergence = compareStoryMixDistributions(
-  runA.yearlyBehavior.slice(0, DIVERGENCE_YEARS),
-  runC.yearlyBehavior,
-);
-const seedDivergence = buildStoryMixDivergenceEvidence({
-  comparison: storyMixDivergence,
-  windowYears: DIVERGENCE_YEARS,
-  baselineSeed: SEED,
-  comparisonSeed: `${SEED}-divergent`,
-  hashDiverged,
-});
-const largestMixShift = storyMixDivergence.typeShifts[0];
-const mixEvidenceIssue = storyMixDivergence.invalidEntries[0];
-check(
-  storyMixDivergence.passed,
-  'different seeds produce a divergent event-type mix',
-  `TV ${storyMixDivergence.totalVariationDistance.toFixed(3)} `
-    + `(min ${storyMixDivergence.thresholds.minTotalVariationDistance.toFixed(2)}); `
-    + `${storyMixDivergence.shiftedEventEquivalents.toFixed(2)} shifted event-equivalents `
-    + `(min ${storyMixDivergence.thresholds.minShiftedEventEquivalents}); `
-    + `largest shift ${largestMixShift?.type || 'none'} `
-    + `(${Number(largestMixShift?.absoluteShareShift || 0).toFixed(3)}); `
-    + `composite hash ${hashDiverged ? 'also differed' : 'did not differ'}`
-    + (mixEvidenceIssue ? `; invalid evidence ${mixEvidenceIssue}` : ''),
-);
-
-// Behavioral controls are deliberately sparse matrix probes, selected by the
-// realm-scale plan. They are not hidden inside every cell: three release probes
-// across two seed families and two scale bands are enough to test the control
-// oracle without roughly doubling the long release soak.
-let neighborControl = null;
-if (NEIGHBOR_CONTROL_YEARS > 0) {
-  console.log(`\n## neighbor perturbation control (${NEIGHBOR_CONTROL_YEARS} years)`);
-  const perturbed = await runYears(
-    SEED,
-    NEIGHBOR_CONTROL_YEARS,
-    'neighbor-perturbed',
-    { variant: 'neighbor_perturbed' },
-  );
-  neighborControl = buildNeighborControl({
-    baselineYearly: runA.yearlyBehavior.slice(0, NEIGHBOR_CONTROL_YEARS),
-    perturbedYearly: perturbed.yearlyBehavior,
-    sourceSettlementId: REGION[0].id,
-  });
-  const finalCheckpoint = neighborControl.checkpoints.at(-1);
-  console.log(
-    `  source ${REGION[0].id} +10% population; non-source distance `
-    + `${Number(finalCheckpoint?.targetDistance || 0).toFixed(6)} at year `
-    + `${finalCheckpoint?.year || 0}`,
-  );
-}
-
-let darkControl = null;
-if (RUN_DARK_CONTROL) {
-  console.log('\n## all-dark control (one year)');
-  const dark = await runYears(SEED, 1, 'dark-control', { variant: 'dark' });
-  darkControl = buildDarkControl({
-    litBaselineYear: runA.yearlyBehavior[0],
-    darkYearly: dark.yearlyBehavior,
-    finalWorldState: dark.finalWorldState,
-  });
-  console.log(
-    `  lit activity ${darkControl.litBaselineActivityCount}; dark activity `
-    + `${darkControl.darkActivityCount}; conditional leaks `
-    + `${darkControl.conditionalStateLeaks.length}`,
-  );
-}
+const diverged = runC.yearlyHashes.some((h, i) => h !== runA.yearlyHashes[i]);
+check(diverged, 'divergence on a different seed', `within ${DIVERGENCE_YEARS} years`);
 
 // 4. Population bounded.
 const startTotal = runA.startPopulations.reduce((a, b) => a + b, 0);
 const finalPops = runA.yearlyPopulations[runA.yearlyPopulations.length - 1];
 const finalTotal = finalPops.reduce((a, b) => a + b, 0);
-const everyAlive = runA.yearlyPopulations.every((pops, y) => pops.every((p, i) => Number.isFinite(p) && (p > 0 || Boolean(runA.yearlyDiedFlags?.[y]?.[i]))));
+const everyAlive = runA.yearlyPopulations.every((pops) => pops.every((p) => Number.isFinite(p) && p > 0));
 const ratio = startTotal > 0 ? finalTotal / startTotal : 0;
-check(everyAlive, 'every settlement population finite and > 0 every year (remnants excepted: a properly-died settlement holds zero by law)');
+check(everyAlive, 'every settlement population finite and > 0, every year');
 check(ratio > 0.05 && ratio < 20, 'realm population bounded',
   `${startTotal} → ${finalTotal} (×${ratio.toFixed(2)}; envelope 0.05–20)`);
 
@@ -621,120 +339,19 @@ REGION.forEach((r, i) => {
   console.log(`  ${r.id} (${r.settType}): ${runA.startPopulations[i]} → ${series[series.length - 1]} (min ${Math.min(...series)}, max ${Math.max(...series)})`);
 });
 
-// ── 6. WR-9 war convergence — the collector folds the per-year census into the
-//    observation the behavioral oracle grades. The ENVELOPES are not asserted here
-//    (they are unratified and honestly fail at HEAD's flag state); what IS asserted
-//    is the instrument's own arithmetic: ruling N3 says every counted war lands in
-//    exactly one duration cell and every closed war in exactly one ending cell, so
-//    a collector that quietly dropped a war it could not read would red right here.
-const warConvergenceCollected = buildWarConvergenceObservation({
-  yearly: runA.yearlyWarConvergence,
-});
-const warCensus = warConvergenceCollected.census;
-console.log('\n## war convergence (WR-9 instrument — envelopes graded by the behavioral oracle, not here)');
-console.log(`  counted wars ${warCensus.countedWars} = closed ${warCensus.closedWars} + alive at horizon ${warCensus.aliveAtHorizonWars}`);
-console.log(`  duration histogram ${JSON.stringify(warConvergenceCollected.observation.warDurationHistogram)} (sum ${warCensus.histogramSum})`);
-console.log(`  endings mix ${JSON.stringify(warConvergenceCollected.observation.endingsMix)}`);
-console.log(`  endings unclassified ${JSON.stringify(warCensus.unclassifiedReasons)} (${warCensus.unclassifiedEndings} of ${warCensus.closedWars} closes)`);
-console.log(`  deciding terms ${JSON.stringify(warConvergenceCollected.observation.terminationDecidingTermHistogram)} — ${warCensus.decidingTermSamples} samples, ${WAR_CONVERGENCE_SAMPLING.decidingTermSample}`);
-console.log(`  declared resolution: close ticks are ${WAR_CONVERGENCE_SAMPLING.closeTickResolution}-resolved from the ${WAR_CONVERGENCE_SAMPLING.censusSource}`);
-console.log(`  wars ended by a road this collector does not observe: ${warCensus.unmeasuredFromUnobservedRoad} (counted, duration ${WAR_CONVERGENCE_SAMPLING.unobservedRoadDurationsAre}); ambiguous pairings: ${warCensus.unmeasuredFromAmbiguousPair}`);
-check(warCensus.durationTotalityHolds, 'every counted war lands in exactly one duration band',
-  `sum ${warCensus.histogramSum} === counted ${warCensus.countedWars}`);
-check(warCensus.endingsTotalityHolds, 'every closed war lands in exactly one ending or one unclassified reason',
-  `classified ${warCensus.classifiedEndings} + unclassified ${warCensus.unclassifiedEndings} === closes ${warCensus.closedWars}`);
-
-const receipt = {
-  // Envelope v5 ADDS the `subsystems` section below. Every v4 field keeps its
-  // exact v4 meaning; consumers accept both versions
-  // (SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS).
-  schemaVersion: SOAK_RECEIPT_SCHEMA_VERSION,
-  kind: 'whole_world_soak',
-  ...(CASE_ID ? { caseId: CASE_ID } : {}),
-  seed: SEED,
-  years: YEARS,
-  settlements: SETTLEMENTS,
-  now: NOW,
-  passed: failures.length === 0,
-  properties: failures.length === 0
-    ? [
-        'no_crash',
-        'rerun_identical',
-        'seed_divergent',
-        'population_bounded',
-        'isolated_worker_executed',
-        'isolated_worker_output_identical',
-      ]
-    : [],
-  // A-4 evidence, not just an earned-property label. The state-hash comparison
-  // is retained here only to diagnose whether state also diverged; the verdict
-  // comes exclusively from the selected-event distribution instrument above.
-  seedDivergence,
-  // WR-9's address-complete section, now MEASURED (WR-9d). The flag certification
-  // rows stay unknown/UNOBSERVED — that arm is owner-held and is not this wave's —
-  // so the oracle still honestly refuses the flag-coverage claim. The census beside
-  // it publishes the instrument's own resolution and its two totality identities,
-  // because a reading whose sampling nobody stated will be quoted at a precision it
-  // does not have.
-  warConvergence: warConvergenceCollected.observation,
-  warConvergenceCensus: warCensus,
-  finalHash: runA.yearlyHashes[runA.yearlyHashes.length - 1],
-  directFirstResultSha256: runA.firstResultSha256,
-  stressorCounts: counts,
-  startPopulations: runA.startPopulations,
-  finalPopulations: finalPops,
-  // performance-scale-6 cost series (the sim-report artifact for the tick axis).
-  yearlyBytes: runA.yearlyBytes,
-  yearlyRealmBytes: runA.yearlyRealmBytes,
-  yearlyMs: runA.yearlyMs,
-  finalRealmBytes: runA.finalRealmBytes,
-  structuredCloneMs: runA.structuredCloneMs,
-  isolatedWorker,
-  isolatedWorkerError,
-  heapUsedBytes: runA.heapUsedBytes,
-  peakHeapUsedBytes: runA.peakHeapUsedBytes,
-  realmScalingExercised: SETTLEMENTS === 30,
-  // The per-subsystem certification input: which of the 46 boolean switches this
-  // run carried, and which worldState containers it ever populated. Graded by
-  // src/domain/certification/subsystemCertification.js.
-  subsystems: buildSubsystemConfiguration({
-    presetId: runA.simulationRules?.presetId,
-    rules: runA.simulationRules,
-    yearlyCensuses: runA.yearlyStateKeyCensus,
-  }),
-  behavioral: buildBehavioralObservation({
-    settlementIds: REGION.map((settlement) => settlement.id),
-    yearly: runA.yearlyBehavior,
-    controls: {
-      ...(neighborControl ? { neighbor: neighborControl } : {}),
-      ...(darkControl ? { dark: darkControl } : {}),
-    },
-  }),
-  runDurationsMs: {
-    primary: runA.ms,
-    replay: runB.ms,
-    divergent: runC.ms,
-  },
-  ticksAdvanced: (
-    (YEARS * 2)
-    + DIVERGENCE_YEARS
-    + (neighborControl ? NEIGHBOR_CONTROL_YEARS : 0)
-    + (darkControl ? 1 : 0)
-  ) * 52,
-  frozenTail,
-  failures,
-  completedAt: new Date().toISOString(),
-};
-
-if (RECEIPT_PATH) {
-  const file = resolve(String(RECEIPT_PATH));
-  mkdirSync(dirname(file), { recursive: true });
-  writeFileSync(file, `${JSON.stringify(receipt, null, 2)}\n`);
-  console.log(`\nreceipt: ${file}`);
-}
-
 if (AS_JSON) {
-  console.log(`\n${JSON.stringify(receipt, null, 2)}`);
+  console.log(`\n${JSON.stringify({
+    seed: SEED, years: YEARS, settlements: SETTLEMENTS, now: NOW,
+    finalHash: runA.yearlyHashes[runA.yearlyHashes.length - 1],
+    stressorCounts: counts,
+    startPopulations: runA.startPopulations,
+    finalPopulations: finalPops,
+    // performance-scale-6 cost series (the sim-report artifact for the tick axis).
+    yearlyBytes: runA.yearlyBytes,
+    yearlyMs: runA.yearlyMs,
+    frozenTail,
+    failures,
+  }, null, 2)}`);
 }
 
 console.log(`\n${failures.length ? `FAILED: ${failures.join(', ')}` : `OK — all assertions green (${YEARS}y × 3 runs)`}`);

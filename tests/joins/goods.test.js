@@ -1,10 +1,5 @@
 import { afterEach, describe, expect, test } from 'vitest';
 
-import {
-  expectAbsentWithAnchor,
-  expectPresentThenAbsent,
-} from '../helpers/anchoredNegatives.js';
-
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { TRADE_DEPENDENCY_NEEDS } from '../../src/data/economicData.js';
 import { GOODS_CATEGORIES, GOODS_MODIFIERS_BY_TIER } from '../../src/data/tradeGoodsData.js';
@@ -150,7 +145,7 @@ describe('vocabulary: GOODS_MODIFIERS_BY_TIER entries carry a valid p/on export 
 describe('behavior: repaired joins produce DM-visible output', () => {
   afterEach(() => clearActiveRng());
 
-  test("inland hamlet with a Fisher's landing gains fish exports without claiming maritime trade", () => {
+  test("hamlet with a Fisher's landing gains fish exports and maritime income", () => {
     // rng pinned to 0 → every probability roll passes; output is fully
     // deterministic and the institution gate is the only variable under test.
     setActiveRng({ random: () => 0 });
@@ -162,39 +157,12 @@ describe('behavior: repaired joins produce DM-visible output', () => {
       { nearbyResources: [] }
     );
     const incomeSources = withLanding.incomeSources.map((i) => i.source);
-    expect(incomeSources).toContain('Fish & Preserved Produce');
-    // The inland label is the anchor: both labels are produced by the same fish good
-    // through the same gate, so an empty income list cannot fake the maritime denial.
-    expectAbsentWithAnchor(
-      incomeSources, 'Fish & Maritime Produce', 'Fish & Preserved Produce',
-      'an inland landing claims no maritime trade',
-    );
+    expect(incomeSources).toContain('Fish & Maritime Produce');
 
     // Without the landing the good's institution gate must block the roll.
     setActiveRng({ random: () => 0 });
     const without = generateEconomicState('hamlet', [], 'road', {}, { nearbyResources: [] });
-    expectPresentThenAbsent(
-      incomeSources, without.incomeSources.map((i) => i.source), 'Fish & Preserved Produce',
-      'the institution gate blocks the good when the landing is absent',
-    );
-  });
-
-  test("coastal port with a Fisher's landing retains the maritime income label", () => {
-    setActiveRng({ random: () => 0 });
-    const coastalPort = generateEconomicState(
-      'hamlet',
-      [{ name: "Fisher's landing", category: 'Crafts' }],
-      'port',
-      {},
-      {
-        nearbyResources: [],
-        tradeRouteAccess: 'port',
-        terrainType: 'coastal',
-      },
-    );
-
-    expect(coastalPort.incomeSources.map((income) => income.source))
-      .toContain('Fish & Maritime Produce');
+    expect(without.incomeSources.map((i) => i.source)).not.toContain('Fish & Maritime Produce');
   });
 
   test('Free company hall without local iron/grain reports a trade dependency', () => {

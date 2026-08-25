@@ -51,9 +51,9 @@ function Meter({ label, value, color = GOLD }) {
       <div
         role="img"
         aria-label={`${label}: ${pct} percent`}
-        style={{ height: 4, background: BORDER2, overflow: 'hidden' }}
+        style={{ height: 4, borderRadius: 2, background: BORDER2, overflow: 'hidden' }}
       >
-        <div style={{ width: `${pct}%`, height: '100%', background: color }} />
+        <div style={{ width: `${pct}%`, height: '100%', background: color, borderRadius: 2 }} />
       </div>
     </div>
   );
@@ -79,7 +79,7 @@ function ActiveFaith({ model }) {
       data-testid="faith-section"
       style={{
         marginTop: 16, background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD}`,
-        overflow: 'hidden', fontFamily: sans,
+        borderRadius: 8, overflow: 'hidden', fontFamily: sans,
       }}
     >
       <header style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 13px', borderBottom: `1px solid ${BORDER}`, background: CARD_ALT }}>
@@ -156,8 +156,8 @@ function ActiveFaith({ model }) {
             {piety.amplifier && (
               <Cause>
                 <span style={{ color: piety.amplifier.dir === 'up' ? GREEN : MUTED, fontWeight: 700 }}>{piety.amplifier.sentence}</span>
-                {piety.amplifier.source && (
-                  <span style={{ color: MUTED }}> {piety.amplifier.source}</span>
+                {piety.realmActive && (
+                  <span style={{ color: MUTED }}> (local ×{piety.localMult.toFixed(2)}, realm ×{piety.realmMult.toFixed(2)})</span>
                 )}
               </Cause>
             )}
@@ -173,11 +173,11 @@ function ActiveFaith({ model }) {
                 <span style={{ fontWeight: 800, color: INK }}>{d.name}</span>
                 {d.isPatron ? ' (patron)' : ''}: {d.share}% · {d.standing} ·{' '}
                 <span style={{ color: TONE_COLOR[d.band.tone], fontWeight: 700 }}>{d.band.label}</span>{' '}
-                <span style={{ color: MUTED }}>(rightful claim {Math.round(d.legitimacy * 100)}%)</span>
+                <span style={{ color: MUTED }}>(legitimacy {Math.round(d.legitimacy * 100)}%)</span>
                 <div
                   role="img"
                   aria-label={`${d.name} adherent share ${d.share} percent`}
-                  style={{ height: 5, background: BORDER2, overflow: 'hidden', marginTop: 2 }}
+                  style={{ height: 5, background: BORDER2, borderRadius: 3, overflow: 'hidden', marginTop: 2 }}
                 >
                   <div style={{ width: `${Math.max(0, Math.min(100, d.share))}%`, height: '100%', background: d.isPatron ? GOLD : SECOND }} />
                 </div>
@@ -209,7 +209,7 @@ function ActiveFaith({ model }) {
 
         {!live && (
           <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-            The faith has only just taken root. Adherent shares, legitimacy, and the tides of devotion emerge as the world turns.
+            The faith has only just taken root — adherent shares, legitimacy, and the tides of devotion emerge as the world turns.
           </div>
         )}
       </div>
@@ -233,7 +233,7 @@ function FaithTeaser({ publicDossier }) {
       data-testid="faith-teaser"
       style={{
         marginTop: 16, background: CARD_ALT, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${BORDER2}`,
-        padding: '11px 13px', fontFamily: sans, display: 'flex', flexDirection: 'column', gap: 6,
+        borderRadius: 8, padding: '11px 13px', fontFamily: sans, display: 'flex', flexDirection: 'column', gap: 6,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
@@ -241,12 +241,12 @@ function FaithTeaser({ publicDossier }) {
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>Faith</span>
       </div>
       <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
-        The people keep their own quiet observances. No single creed holds sway, and the shrines answer to no named god.
+        The people keep their own quiet observances — no single creed holds sway, and the shrines answer to no named god.
       </div>
       {!publicDossier && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
           <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-            Awaken a living pantheon (a patron god, rival cults, and the rising and ebbing of devotion) with a premium campaign.
+            Awaken a living pantheon — a patron god, rival cults, and the rising and ebbing of devotion — with a premium campaign.
           </span>
           <Button
             variant="ghost"

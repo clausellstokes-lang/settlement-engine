@@ -9,30 +9,46 @@ plot/building footprint to within ~8%, so cells_across ~= buildings across.
 import sys, json, os
 from PIL import Image
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+CORPUS = os.path.dirname(HERE)
+PROTO_OUT = os.environ.get("SF_MF_PROTO_OUT", "")
+
+def resolve_path(path):
+    """Resolve historical job labels against canonical inputs.
+
+    Corpus plates live permanently under ../plates. Sandbox render jobs require
+    an explicit SF_MF_PROTO_OUT.
+    """
+    if path.startswith("plates/"):
+        return os.path.join(CORPUS, "plates", os.path.basename(path))
+    if path.startswith("mf-proto-out/"):
+        return os.path.join(PROTO_OUT, path.removeprefix("mf-proto-out/")) if PROTO_OUT else ""
+    return path
+
 JOBS = [
  # path, x0,y0,x1,y1 (fractions of plate), label
- ("map-refs/hf10-thorp-plains.png",       .36,.38,.63,.70, "thorp"),
- ("map-refs/hf12-thorp-coastal.png",      .30,.34,.72,.78, "thorp"),
- ("map-refs/hf11-hamlet-forest.png",      .33,.33,.66,.72, "hamlet"),
- ("map-refs/hf3-village-organic.png",     .30,.28,.66,.72, "village"),
- ("map-refs/hf13-village-fishing.png",    .28,.28,.74,.74, "village"),
- ("map-refs/hf16-village-cold.png",       .18,.34,.84,.70, "village"),
- ("map-refs/hf17-village-wealthy.png",    .30,.24,.72,.78, "village"),
- ("map-refs/hf59-monster-watch.png",      .18,.34,.66,.88, "village"),
- ("map-refs/hf20-town-trade.png",         .22,.10,.80,.92, "town"),
- ("map-refs/hf21-town-temple.png",        .18,.14,.86,.90, "town"),
- ("map-refs/hf23-town-struggling.png",    .14,.12,.88,.90, "town"),
- ("map-refs/hf27-town-unrest.png",        .12,.10,.90,.92, "town"),
- ("map-refs/hf58-martial-law.png",        .12,.10,.90,.90, "town"),
- ("map-refs/hf60-spymaster-copy.png",     .14,.08,.88,.92, "town"),
- ("map-refs/hf62-bankside-town.png",      .10,.08,.88,.62, "town"),
- ("map-refs/hf72-dumbbell-town.png",      .10,.22,.92,.90, "town"),
- ("map-refs/hf30-city-river.png",         .10,.08,.92,.92, "city"),
- ("map-refs/hf33-city-chaos-warren.png",  .10,.08,.92,.92, "city"),
- ("map-refs/hf50-lens-watercolor.png",    .12,.08,.90,.92, "city"),
- ("map-refs/hf40-slum-fringe-city.png",   .10,.08,.92,.92, "city"),
- ("map-refs/hf34-metropolis-capital.png", .06,.06,.95,.95, "metropolis"),
- ("map-refs/hf4-planned-city.png",        .12,.08,.90,.92, "city"),
+ ("plates/hf10-thorp-plains.png",       .36,.38,.63,.70, "thorp"),
+ ("plates/hf12-thorp-coastal.png",      .30,.34,.72,.78, "thorp"),
+ ("plates/hf11-hamlet-forest.png",      .33,.33,.66,.72, "hamlet"),
+ ("plates/hf3-village-organic.png",     .30,.28,.66,.72, "village"),
+ ("plates/hf13-village-fishing.png",    .28,.28,.74,.74, "village"),
+ ("plates/hf16-village-cold.png",       .18,.34,.84,.70, "village"),
+ ("plates/hf17-village-wealthy.png",    .30,.24,.72,.78, "village"),
+ ("plates/hf59-monster-watch.png",      .18,.34,.66,.88, "village"),
+ ("plates/hf20-town-trade.png",         .22,.10,.80,.92, "town"),
+ ("plates/hf21-town-temple.png",        .18,.14,.86,.90, "town"),
+ ("plates/hf23-town-struggling.png",    .14,.12,.88,.90, "town"),
+ ("plates/hf27-town-unrest.png",        .12,.10,.90,.92, "town"),
+ ("plates/hf58-martial-law.png",        .12,.10,.90,.90, "town"),
+ ("plates/hf60-spymaster-copy.png",     .14,.08,.88,.92, "town"),
+ ("plates/hf62-bankside-town.png",      .10,.08,.88,.62, "town"),
+ ("plates/hf72-dumbbell-town.png",      .10,.22,.92,.90, "town"),
+ ("plates/hf30-city-river.png",         .10,.08,.92,.92, "city"),
+ ("plates/hf33-city-chaos-warren.png",  .10,.08,.92,.92, "city"),
+ ("plates/hf50-lens-watercolor.png",    .12,.08,.90,.92, "city"),
+ ("plates/hf40-slum-fringe-city.png",   .10,.08,.92,.92, "city"),
+ ("plates/hf34-metropolis-capital.png", .06,.06,.95,.95, "metropolis"),
+ ("plates/hf4-planned-city.png",        .12,.08,.90,.92, "city"),
  ("mf-proto-out/b6/thorp-thorp-parchment.svg.png",   .38,.36,.62,.62, "b6 thorp"),
  ("mf-proto-out/b6/hamlet-hamlet-parchment.svg.png", .36,.34,.68,.66, "b6 hamlet"),
  ("mf-proto-out/b6/village-village-parchment.svg.png",.43,.42,.76,.80, "b6 village"),
@@ -44,9 +60,11 @@ JOBS = [
 
 out = []
 for path, x0, y0, x1, y1, lab in JOBS:
-    if not os.path.exists(path):
-        out.append({"file": path, "error": "missing"}); continue
-    im = Image.open(path).convert("L")
+    source_path = resolve_path(path)
+    if not source_path or not os.path.exists(source_path):
+        reason = "missing canonical asset" if path.startswith("plates/") else "set SF_MF_PROTO_OUT for sandbox jobs"
+        out.append({"file": path, "error": reason}); continue
+    im = Image.open(source_path).convert("L")
     W, H = im.size
     win = im.crop((int(W*x0), int(H*y0), int(W*x1), int(H*y1)))
     ww, wh = win.size

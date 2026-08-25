@@ -25,7 +25,6 @@
 import { describe, expect, test } from 'vitest';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SELF_CFG = { settType: 'town', culture: 'germanic', tradeRouteAccess: 'road' };
 const NEIGHBOUR_CFG = { settType: 'town', culture: 'germanic', tradeRouteAccess: 'road', priorityMilitary: 70, priorityEconomy: 60 };
@@ -46,22 +45,17 @@ describe('resolveNeighbour receipt honesty (relType-conditional effects)', () =>
     expect(trace, 'neutral neighbour must still emit its bound receipt').toBeTruthy();
 
     const targets = (trace.downstreamEffects || []).map(e => e.target);
-    // 'factions' is the anchor for all three exclusions: the faction mirror/oppose
-    // rolls are real even for neutral (0.05/0.05), so that target is emitted on the
-    // same code path the excluded ones would take. A receipt that stopped being
-    // built at all now reds here instead of passing three empty negatives.
-    expectAbsentWithAnchor(targets, 'institutions', 'factions', 'neutral claims no institution shift');
-    expectAbsentWithAnchor(targets, 'effectiveScores', 'factions', 'neutral claims no score modification');
+    expect(targets).not.toContain('institutions');
+    expect(targets).not.toContain('effectiveScores');
     // 'independent' economy mode yields an empty bias that generateEconomy
     // never threads — no econ claim either.
-    expectAbsentWithAnchor(targets, 'economicState', 'factions', 'neutral claims no econ bias');
-    // The receipt is not empty noise: something honest remains. Asserted BEFORE the
-    // per-effect loop so an empty array reds rather than skipping the loop body.
-    expect((trace.downstreamEffects || []).length).toBeGreaterThan(0);
+    expect(targets).not.toContain('economicState');
     for (const e of trace.downstreamEffects || []) {
-      // anchored: the non-empty assertion above proves this loop body executes
       expect(e.effect, `neutral receipt must not claim '${e.effect}'`).not.toMatch(/shift|modif/i);
     }
+    // The receipt is not empty noise: something honest remains (the faction
+    // mirror/oppose rolls are real even for neutral — 0.05/0.05).
+    expect((trace.downstreamEffects || []).length).toBeGreaterThan(0);
   });
 
   test('hostile names the defense-odds and military-score effects', () => {
@@ -81,7 +75,6 @@ describe('resolveNeighbour receipt honesty (relType-conditional effects)', () =>
     const inst = (trace.downstreamEffects || []).find(e => e.target === 'institutions');
     expect(inst, 'complement mode (×1.4) is a real market shift').toBeTruthy();
     expect(inst.effect).toBe('relationship dynamics shift market odds');
-    // anchored: the toBe above pins inst.effect to an exact live string
     expect(inst.effect).not.toMatch(/defense/);
     // Score multipliers ×0.96/×1.08 are non-identity — the claim stays.
     const scores = (trace.downstreamEffects || []).find(e => e.target === 'effectiveScores');

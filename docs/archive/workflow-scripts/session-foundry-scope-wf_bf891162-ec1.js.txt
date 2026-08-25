@@ -1,0 +1,95 @@
+export const meta = {
+  name: 'session-foundry-scope',
+  description: 'Map SettlementForge substrate for Session Mode + Foundry export wave',
+  phases: [{ title: 'Scope', detail: 'six parallel substrate readers' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/amazing-thompson-6dd363'
+
+const REPORT = {
+  type: 'object',
+  properties: {
+    summary: { type: 'string', description: 'dense prose summary of findings' },
+    keyFacts: { type: 'array', items: { type: 'string' }, description: 'file:line-anchored facts' },
+    risks: { type: 'array', items: { type: 'string' } },
+  },
+  required: ['summary', 'keyFacts', 'risks'],
+}
+
+phase('Scope')
+
+const PROMPTS = [
+  {
+    key: 'export-wiring',
+    prompt: `Read-only scouting in ${ROOT} (a React/Zustand app). Map the PDF export WIRING so a second export format (Foundry VTT module zip) can mount beside it.
+Read: src/components/SettlementDetail.jsx (the export handler region — find where ExportSheet is opened and where generateSettlementPDF is called), src/components/settlementDetail/useNextActionRailHandlers.js, src/components/generate/ExportDraftButton.jsx.
+Answer precisely with file:line anchors:
+1. How is faithUnlocked computed at the export call site (the tier === 'premium' || isElevated() seam)? Where do tier and isElevated live (store slice? src/lib?)?
+2. What exact props/options are passed to generateSettlementPDF (campaign, systemState, eventLog, phase, variant, isFounder, isAnonymous, aiSettlement...) and where does each come from (store selector names)?
+3. How does ExportSheet get opened (state var, which component owns it), and what would be the least invasive way to add a 'Foundry Module' export option — a 4th card in ExportSheet, a format toggle, or a separate button?
+4. What analytics events exist for export (src/lib/analytics.js EVENTS.*)?
+5. Anything else a new export surface must thread (copy system t(), theme, quotas, anonymous path in SingleDossierSuccessPage?). Check whether the anonymous/single-dossier page also exports PDFs and whether Foundry should appear there.`,
+  },
+  {
+    key: 'session-substrate',
+    prompt: `Read-only scouting in ${ROOT} (React/Zustand). Map the DOSSIER/screen substrate for a new 'Session Mode' — a distraction-free table-facing run-of-play view of a saved settlement (key NPCs, hooks, current living-world state, quick navigation), composing EXISTING read-models and components (never forking them).
+Read: src/components/OutputContainer.jsx (skim structure — section list), src/components/SettlementDetail.jsx (tabs/views structure), src/components/settlement/FaithSection.jsx + faithPanelModel.js (the premium gate implementation — quote the exact gate expression), src/components/settlements/livingWorldSignals.js, src/components/dossier/ directory listing + skim the most relevant files, src/pdf/sections/TonightAtTheTable.jsx and NPCQuickRef.jsx (what read-models they use).
+Answer with file:line anchors:
+1. The exact FaithSection premium gate expression and its inputs (tier, isElevated) — where imported from.
+2. What read-models/selectors produce: notable NPCs list, plot hooks list, 'tonight at the table' content, living-world/campaign current state summary (dispositions, wars, omens?) — module paths + function names. Which are PURE (usable outside React)?
+3. How OutputContainer renders sections (registry? hardcoded?) and which existing components are small enough to compose into a session view vs which read-models to render fresh.
+4. Where the settlement + campaign 'current living-world state' is read on screen today (which components show wars/faith/pulse state) WITHOUT touching these DO-NOT-TOUCH files: src/components/map/SimulationRulesDialog.jsx, src/domain/worldPulse/simulationRules.js, changeAuthorityPolicy.js, disposition.js, worldState.js, src/store/campaignWorldPulseSlice.js. (Reading/importing existing exports from worldPulse modules NOT on that list is fine — report which read-model modules are safe.)
+5. Existing distraction-free/print/reader modes if any.`,
+  },
+  {
+    key: 'routing-budget',
+    prompt: `Read-only scouting in ${ROOT} (React/Zustand/Vite). Map ROUTING + CODE-SPLITTING + the dist budget so two new lazy surfaces can be added safely.
+Read: src/main.jsx, src/App.jsx (skim — route/view mechanism), src/AppViews.jsx, vite.config.js (manualChunks?), tests/build/ directory (read vendorPdfLazy.test.js and the dist budget test fully; also any engine-chunk contract tests), package.json scripts (verify:dist).
+Answer with file:line anchors:
+1. Route mechanism: react-router or custom view state? How is a new route/view added (exact registry/switch location)? How are views lazy-loaded (React.lazy? dynamic import?) — quote one existing lazy view example.
+2. verify:dist mechanics: which files, what budget number(s) (confirm 1,441,000 — of what: bytes of entry chunk? gzip? sum?), how chunks are attributed to first paint, what makes a chunk 'lazy' in the test's eyes, and the engine-chunk contracts. What will a new lazy route + a new worker-or-dynamic-import chunk need to satisfy?
+3. Current headroom: if a build manifest/dist exists, report actual current first-paint size vs budget; else report how to measure.
+4. The PDF worker pattern files: src/utils/pdfRender.worker.js + pdfWorkerShim.js (skim — how the worker bundles the pdf stack). Would a Foundry zip export even need a worker (it's just JSON+zip — likely main thread with dynamic import), and does any test forbid new static imports in src/utils/?
+5. Lazy route naming conventions + where lazy chunks are named (vite rollupOptions?).`,
+  },
+  {
+    key: 'data-shapes',
+    prompt: `Read-only scouting in ${ROOT}. Map the DATA SHAPES a Foundry export + Session Mode will consume.
+Read: src/domain/normalizeSettlement.js (the canonical settlement contract — enumerate top-level fields incl. npcs, hooks, buildings, economy...), src/pdf/lib/liveWorld.js (buildPdfLiveWorld output shape), docs/settlement-schema.md (skim), src/store/ directory listing + the slice that loads/saves settlements (find phase, eventLog, systemState, aiSettlement, campaign selectors), and how a SAVED settlement is loaded into the store (Supabase row -> store fields).
+Answer with file:line anchors:
+1. Canonical normalized settlement shape: top-level keys + the NPC object shape (name/role/quirk?...) + plot hook shape + services/buildings shape. Enough detail to map each to a Foundry journal page.
+2. buildPdfLiveWorld output shape (deity, war, dispositions?) and its null/dormant semantics.
+3. Store: field names for current settlement, phase, eventLog, systemState, aiSettlement, campaign (and how campaign data is assembled for the PDF export — the 'plain structured-cloneable' campaign prop). Which store slice owns saved-settlement CRUD; what identifies a saved settlement (uuid?).
+4. eventLog entry shape + systemState shape (for a timeline journal page / session-mode state panel).
+5. Anything version-stamped or migration-sensitive an export must normalize (normalizeSettlement at boundary — confirm it is enough).`,
+  },
+  {
+    key: 'summary-precedent',
+    prompt: `Read-only scouting in ${ROOT}. Evaluate src/domain/summary/buildSummaryMarkdown.js as the CONTENT PRECEDENT for a Foundry VTT export (Foundry journal pages accept markdown natively: JournalEntryPage text.format=2).
+Read buildSummaryMarkdown.js FULLY, plus whatever read-models it imports. Also skim 2-3 src/pdf/sections/*.jsx (Overview, PlotHooks, NotableNPCs) to see whether pdf sections embed presentation-only logic or reusable data extraction.
+Answer with file:line anchors:
+1. buildSummaryMarkdown: signature, what sections it emits, what inputs it takes (settlement? systemState? eventLog? campaign?), is it pure/worker-safe, does it already handle faith/war content and how is that gated (or absent)?
+2. Could Foundry journal pages be built by (a) reusing buildSummaryMarkdown wholesale, (b) reusing its imported read-models to build per-section markdown pages, or (c) fresh markdown builders over the normalized settlement? Recommend one with rationale (page granularity matters: one page per dossier section, NPCs maybe one page per NPC or one QuickRef page).
+3. List the pure read-model functions available for: overview stats, NPCs, hooks, economy/trade, defense, timeline — module paths.
+4. Any existing markdown/HTML sanitization utilities (dompurify is a dep — where used).
+5. Does anything in src/ already produce per-section markdown or HTML strings from a settlement (besides buildSummaryMarkdown)?`,
+  },
+  {
+    key: 'tests-goldens-copy',
+    prompt: `Read-only scouting in ${ROOT}. Map the TEST/GOLDENS/COPY landscape for two new surfaces (Session Mode view + Foundry export).
+Do: run \`grep -rln "golden" tests/ | head -30\` style searches (read-only), skim vitest.config / vite config test section, tests/pdf/ directory listing, src/copy/index.js (the t() copy system — how keys are added), src/lib/flags.js (feature-flag pattern — should a new surface ship behind a flag? quote 1-2 existing flag entries), and grep docs/ for 'foundry|vtt|session mode' mentions (docs/PHASE5_REUNIFICATION.md line ~73 mentions W-Session — quote its exact text and any surrounding context).
+Answer with file:line anchors:
+1. Which tests match -t "golden": file list + what each pins (byte-identical of what artifacts?). Do any cover export surfaces (PDF bytes?) that new code could disturb?
+2. Test conventions: environment (jsdom/node), directory layout (tests/pdf, tests/build, tests/components?), how component tests render (testing-library?), an example test to imitate for (a) a pure-module gate test, (b) a component gate test if any exist for FaithSection.
+3. Copy system: how t() keys are registered (one file? namespaced?), example of adding keys for a new surface.
+4. Flags: the flags.js pattern, whether recent new surfaces shipped behind flags or bare.
+5. docs mentions of W-Session/foundry/vtt (exact quotes) + any prior design intent for session mode or VTT export anywhere in docs/.`,
+  },
+]
+
+const results = await parallel(PROMPTS.map(p => () =>
+  agent(p.prompt, { label: `scope:${p.key}`, phase: 'Scope', schema: REPORT })
+    .then(r => ({ key: p.key, ...r }))
+))
+
+return { reports: results.filter(Boolean) }

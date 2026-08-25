@@ -6,10 +6,6 @@
  */
 
 import { getInstFlags, getPriorities, getStressFlags, tierAtLeast } from './helpers.js';
-import {
-  institutionMatchesNativeName,
-  institutionMatchesRegex,
-} from '../domain/institutionClassify.js';
 
 // ─── generateSafetyProfile ────────────────────────────────────────────────────
 
@@ -27,12 +23,6 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   const stress  = getStressFlags(config, institutions);
   const inst    = flags.inst;
   const threat  = config.monsterThreat || 'frontier';
-  const watchLabel =
-    tier === 'town'
-      ? 'town watch'
-      : tierAtLeast(tier, 'city')
-        ? 'city watch'
-        : 'local watch';
 
   // Active stress types
   const stresses = (config.stressTypes?.length)
@@ -44,12 +34,11 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   const safetyRatio = flags.militaryEffective / Math.max(8, flags.criminalEffective);
 
   // Small-settlement passive community order bonus (no criminal infrastructure = community watches itself)
-  const hasCriminalOrg = institutions.some(institution => (
-    institutionMatchesRegex(
-      institution,
-      /thieves|criminal|gang|smuggler|fence/i,
-    )
-  ));
+  const hasCriminalOrg = institutions.some(i => {
+    const n = (i.name || '').toLowerCase();
+    return n.includes('thieves') || n.includes('criminal') || n.includes('gang') ||
+           n.includes('smuggler') || n.includes('fence');
+  });
   // Small community flag — used to gate crime types that require criminal infrastructure
   const _isSmallCommunity = ['thorp','hamlet'].includes(tier) && !hasCriminalOrg;
 
@@ -81,12 +70,12 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
 
   // Priority stress: these override everything else
   if (hasStress('occupied')) {
-    const curfewAuthority = inst.hasGarrison
-      ? 'The garrison, now under occupier command, enforces'
-      : 'Occupation authorities enforce';
+    const garrisonRef = inst.hasGarrison
+      ? 'The garrison, now under occupier command,'
+      : 'Occupation authorities';
     safetyLabels.push('Controlled — Occupation Curfew');
     safetyDescs.push(
-      `Movement is restricted and monitored. ${curfewAuthority} curfew and checkpoint protocols. ` +
+      `Movement is restricted and monitored. ${garrisonRef} enforce curfew and checkpoint protocols. ` +
       `Common crime is suppressed by authoritarian presence — residents face little risk from thieves ` +
       `and considerably more from informers and occupation officials. Resistance activity operates underground.`
     );
@@ -220,10 +209,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     safetyDesc = safetyDescs.join(' ');
   } else if (stress.stateCrime) {
     safetyLabel = 'Controlled — Authoritarian';
-    const visibleAuthority = inst.hasGarrison
-      ? 'The garrison is visible everywhere.'
-      : 'Armed officials are visible everywhere.';
-    safetyDesc = `The streets are unusually quiet. ${visibleAuthority} Residents face little risk from ` +
+    const garRef = inst.hasGarrison ? 'The garrison' : 'Armed officials';
+    safetyDesc = `The streets are unusually quiet. ${garRef} are visible everywhere. Residents face little risk from ` +
       `common thieves and considerably more from the authorities themselves. Unofficial disappearances are not discussed openly.`;
   } else if (stress.crimeIsGovt) {
     safetyLabel = 'Dangerous — Criminal Governance';
@@ -241,16 +228,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   //   <  0.6  Dangerous   — organized crime or crisis has overwhelmed the watch
   } else if (effectiveSafety >= 3.5) {
     safetyLabel = 'Very Safe';
-    const lawRef =
-      inst.hasGarrison
-        ? inst.hasWatch
-          ? `garrison and ${watchLabel}`
-          : 'garrison'
-        : inst.hasWatch
-          ? watchLabel
-          : inst.hasMilitia
-            ? 'militia'
-            : 'law enforcement';
+    const lawRef     = inst.hasGarrison ? 'garrison and watch' : inst.hasWatch ? 'city watch' : inst.hasMilitia ? 'militia' : 'law enforcement';
     const wallNote   = inst.hasWalls ? ' Walls and controlled entry points reinforce the guard\'s ability to monitor movement.' : '';
     const charNote   = inst.hasCharterHall ? " The adventurers' charter hall handles threats the watch cannot." : '';
     // Canonical threat vocabulary is heartland/frontier/plagued ('embattled' was never emitted).
@@ -299,8 +277,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
 
   if (inst.hasMilitaryInst) {
     const lawRef =
-      inst.hasGarrison  ? inst.hasWatch ? `garrison and ${watchLabel}` : 'garrison'  :
-      inst.hasWatch      ? watchLabel       :
+      inst.hasGarrison  ? inst.hasWatch ? 'garrison and city watch' : 'garrison'  :
+      inst.hasWatch      ? 'city watch'       :
       inst.hasMilitia    ? 'citizen militia'  :
       inst.hasMercenary  ? 'mercenary company':
       inst.hasCharterHall? "adventurers' charter hall" : 'local guard';
@@ -378,30 +356,22 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const crimeRef = inst.hasThievesGuild ? "The thieves' guild" : 'Organized crime';
     crimeTypes.push({
       type: 'Criminal governance',
-      desc: `${crimeRef} has filled the power vacuum left by absent or failed civil authority. It provides a form of order and extracts a price for it.`,
+      desc: `${crimeRef} has filled the power vacuum left by absent or failed civil authority. They provide a form of order and extract a price for it.`,
     });
   }
   if (stress.arcaneBlackMarket) {
-    const providers =
-      inst.hasAlchemist && inst.hasMagesGuild
-        ? "Alchemists and members of the mages' guild"
-        : inst.hasAlchemist
-          ? 'Alchemists and other magical practitioners'
-          : inst.hasMagesGuild
-            ? "Members of the mages' guild"
-            : 'Magical practitioners';
+    const alchRef = inst.hasAlchemist ? 'Alchemists and' : '';
+    const mageRef = inst.hasMagesGuild ? "mages' guild" : 'magical practitioners';
     crimeTypes.push({
       type: 'Arcane black market',
-      desc: `${providers} who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.`,
+      desc: `${alchRef} ${mageRef} who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.`,
     });
   }
   if (stress.religiousFraud) {
-    const coverClause = inst.hasChurch
-      ? "The church's moral authority provides cover"
-      : 'Religious structures provide cover';
+    const authRef = inst.hasChurch ? "The church's moral authority" : 'Religious structures';
     crimeTypes.push({
       type: 'Religious fraud',
-      desc: `${coverClause} for sophisticated fraud — fake relics, forged dispensations, and corrupt clergy who treat their position as a commercial opportunity.`,
+      desc: `${authRef} provide cover for sophisticated fraud — fake relics, forged dispensations, and corrupt clergy who treat their position as a commercial opportunity.`,
     });
   }
   if (stress.merchantCriminalBlur) {
@@ -588,13 +558,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     'gambling district':           'Gambling District',
     'red light district':          'Red Light District',
   };
-  const criminalInstitutions = institutions
-    .map(institution => Object.entries(CRIMINAL_INST_LABELS).find(
-      ([canonicalName]) => (
-        institutionMatchesNativeName(institution, canonicalName)
-      ),
-    )?.[1] || null)
-    .filter(Boolean);
+  const criminalInstitutions = (Array.isArray(institutions) ? institutions : [])
+    .map(i => (i.name || '').toLowerCase())
+    .filter(n => CRIMINAL_INST_LABELS[n])
+    .map(n => CRIMINAL_INST_LABELS[n]);
 
   // ── Shadow economy estimate ───────────────────────────────────────────────
   const baseShadowPercent = Math.round(Math.max(0, (flags.criminalEffective - 25) / 3));

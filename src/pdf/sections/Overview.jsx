@@ -26,10 +26,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import {
-  cap, smart, label, noteText, hookText, finite, safePct, humanize, safe,
-  prominentPair, prominentType, prominentProse,
-} from '../lib/format.js';
+import { cap, smart, label, noteText, hookText, finite, safePct, humanize, safe } from '../lib/format.js';
 import { proseToPlainText } from '../primitives/ProseText.jsx';
 
 export function Overview({ settlement, narrativeMode, vm }) {
@@ -128,16 +125,8 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {/* ── Systems Health Dashboard ─────────────────────────────── */}
       {hasSystemsHealth(o) && (
         <>
-      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 1, marginTop: 4 }}>
+      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3, marginTop: 4 }}>
         SYSTEMS HEALTH
-      </Text>
-      {/* G5 first-survey framing (Wave R-2, atlas queue #28 remainder): the
-          score bars, Viability and Defense statuses are generation-frozen; the
-          caption is the byte-for-byte twin of OverviewTab's Systems Health
-          caption, with the same declared-live Food Security carve-out
-          (FROZEN_VS_LIVE grammar). One string, vetoable. */}
-      <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
-        Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.
       </Text>
       <View style={{ flexDirection: 'row', gap: space.md }}>
         <View style={{ flex: 1 }}>
@@ -331,13 +320,13 @@ export function Overview({ settlement, narrativeMode, vm }) {
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
             <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], marginRight: 4 }}>
-              {prominentPair(o.prominentRelationship) || 'Notable pair'}
+              {label(o.prominentRelationship.otherSettlement) || 'Neighbour'}
             </Text>
-            <Pill tone="cool">{prominentType(o.prominentRelationship) || 'linked'}</Pill>
+            <Pill tone="cool">{cap(o.prominentRelationship.relationshipType || o.prominentRelationship.type) || 'linked'}</Pill>
           </View>
-          {prominentProse(o.prominentRelationship) && (
+          {o.prominentRelationship.description && (
             <Text style={{ ...type.body, fontSize: pt['9'] }}>
-              {prominentProse(o.prominentRelationship)}
+              {o.prominentRelationship.description}
             </Text>
           )}
         </View>
@@ -417,12 +406,8 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {(o.warnings?.length > 0 || o.coherenceNotes?.length > 0 || o.structuralSuggestions?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          {/* G5 first-survey framing (Wave R-2): all three merged sources —
-              warnings, coherenceNotes, structuralSuggestions — are
-              generation-frozen records; the vintage mirrors the web twins
-              (OverviewTab's "Coherence Notes / Suggestions · First Survey"). */}
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
-            WARNINGS & NOTES · FIRST SURVEY
+            WARNINGS & NOTES
           </Text>
           <BulletList
             items={[

@@ -26,8 +26,6 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
-
 const MIG_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 const present = existsSync(MIG_DIR);
 
@@ -43,7 +41,7 @@ const present = existsSync(MIG_DIR);
 function netCurrentSelfUpdatePolicy() {
   const files = readdirSync(MIG_DIR).filter(f => /^\d.*\.sql$/.test(f)).sort();
   const live = new Map(); // policy name -> ddl
-  const createRe = /^create\s+policy\s+"([^"]+)"\s+on\s+public\.profiles([\s\S]*?);/gim;
+  const createRe = /create\s+policy\s+"([^"]+)"\s+on\s+public\.profiles([\s\S]*?);/gi;
   const dropRe = /drop\s+policy\s+if\s+exists\s+"([^"]+)"\s+on\s+public\.profiles/gi;
   for (const f of files) {
     const src = readFileSync(resolve(MIG_DIR, f), 'utf-8');
@@ -154,7 +152,7 @@ describe.runIf(present)('profiles RLS column-lock — executed against the NET-C
       create role nosuperuser nologin;
       grant select, update on public.profiles to nosuperuser;
     `);
-  }, PGLITE_BOOT_TIMEOUT_MS);
+  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
 
   beforeEach(reseed);
 

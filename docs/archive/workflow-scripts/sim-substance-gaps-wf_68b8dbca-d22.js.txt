@@ -1,0 +1,152 @@
+export const meta = {
+  name: 'sim-substance-gaps',
+  description: 'Ground an inventory of the existing simulation substance per domain, then hunt genuine immersion/drama gaps cross-checked against what exists, and rank them',
+  phases: [
+    { title: 'Inventory', detail: 'per-domain: what simulation substance already EXISTS (code-grounded)' },
+    { title: 'GapHunt', detail: 'diverse lenses hunt missing drama/immersion, cross-checked against the inventory' },
+    { title: 'Synthesize', detail: 'dedupe, rank by drama-leverage × architectural fit, opinionated recommendations' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+
+// ── Phase 1: inventory what EXISTS, grounded in code + design docs ─────────────
+const DOMAINS = [
+  { key: 'generation-and-place', hint: 'realm/settlement/institution GENERATION + geography: what a freshly-seeded world contains — settlement archetypes, institutions, factions, demographics, economy, terrain/geography, cultures. Look in src/domain/region/, src/domain/entities/, the generator, any generation modules.' },
+  { key: 'war-and-conflict', hint: 'the WAR cluster (W-C1..W-C5): sieges, occupation ladder, mercenaries, conquest feeds, army/field combat, attrition, war exhaustion, martial readiness, war posture. Look in src/domain/worldPulse/warDeployment.js, occupation, reinforcement, siege*, conquest*, mercenary*, and the M1/M2 spatial war seams.' },
+  { key: 'faith-and-religion', hint: 'the DEITY/faith engine: latent pantheon, primary/cult deities, religious tolerance, faith events, pantheon arcs, conjunctions, religious institutions. Look in src/domain/worldPulse/religion*, pantheon*, realmEvents, faith*, and the deity system.' },
+  { key: 'trade-and-economy', hint: 'ECONOMY + trade: supply chains, trade links, resources/goods, caravans + supply-starvation (M2), markets, prosperity, stockpiles, tiers. Look in src/domain/region/tradeLinks, goodsCatalog, src/domain/worldPulse/tradeS*, supplyCompleteness, tierResourceDynamics, src/domain/spatial/supplyShipments.js.' },
+  { key: 'politics-and-institutions', hint: 'POLITICS: factions, legitimacy, institutional ecology, political autonomy, coups/declarations, rulers/leadership, decision tiers, disposition/relationships between settlements. Look in src/domain/worldPulse/settlementStrategy.js, institutions, factions, dispositionDeltas, decisionTier, the CL-0 simulationRules control layer.' },
+  { key: 'spatial-temporal-belief', hint: 'the SPATIAL+TEMPORAL+BELIEF layer (Phase 5.5): frozen cost-field digest, distance/latency, embattlement routing (M1), caravans (M2), seasonal roads (M3), the coming movers (migration/army/entrepot/smuggle/sea-lanes), seasons/food-year, the belief map / fog of war (Wave A), rumors & news (3.5). Look in src/domain/spatial/, worldPulse/beliefMap.js, rumorNetwork.js, seasons.js, and docs/PHASE55_SPATIAL_ENGINE_DESIGN.md + PHASE55_EXECUTION_PLAYBOOK.md.' },
+  { key: 'social-cultural-character', hint: 'SOCIAL/CULTURAL/individual texture: culture, settlement alignment (lawful/chaotic etc.), NPCs, named characters, relationships, crime, public support, causes/cause-resolution lifecycle (W-C5), the legibility layer (receipts, news, DM read-models). Look in src/domain/entities/, settlementAlignment, npc*, causes/cause-resolution, src/domain/display/ read-models, wizardNews.' },
+]
+
+const INVENTORY_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['domain', 'exists', 'dramaLevers', 'thinOrAbsent'],
+  properties: {
+    domain: { type: 'string' },
+    exists: { type: 'array', items: { type: 'string' }, description: 'concrete simulation mechanics that ARE built or fully designed in this domain, each with a brief file/doc anchor — the ground truth so gap-hunters do not re-suggest these' },
+    dramaLevers: { type: 'array', items: { type: 'string' }, description: 'the sources of drama/immersion this domain ALREADY produces (e.g. "a cut supply line starves an institution and emits a receipt")' },
+    thinOrAbsent: { type: 'array', items: { type: 'string' }, description: 'things WITHIN this domain that are notably shallow, stubbed, or missing — honest self-assessment' },
+  },
+}
+
+phase('Inventory')
+const inventory = (await parallel(DOMAINS.map(d => () =>
+  agent(
+    `You are inventorying the EXISTING simulation substance of the "${d.key}" domain of SettlementForge — a deterministic D&D settlement simulator — at ${ROOT} (branch review-fixes-2026-07-08). This feeds a gap analysis, so your job is to establish GROUND TRUTH: what is genuinely built or fully designed, so the gap-hunters do not re-suggest things that already exist.
+
+Domain: ${d.hint}
+
+Read the actual code + design docs (grep/read the paths named). Be concrete and honest. For "exists", list the real mechanics WITH a file/doc anchor. For "dramaLevers", name the specific ways this domain already generates immersion or drama in play. For "thinOrAbsent", be candid about what is shallow or stubbed within this domain.
+
+Return ONLY the structured object.`,
+    { label: `inv:${d.key}`, phase: 'Inventory', schema: INVENTORY_SCHEMA }
+  )
+))).filter(Boolean)
+
+// ── Phase 2: hunt genuine gaps through diverse lenses, cross-checked ───────────
+const LENSES = [
+  { key: 'human-texture', lens: 'INDIVIDUAL HUMAN LIVES. Named characters with arcs, ambition, and mortality; births/deaths/marriages/succession; personal betrayal, rivalry, loyalty; dynasties and bloodlines; the small human stories under the systemic ones. Does the sim have PEOPLE, or only settlements/institutions/factions? Where are the individual lives that a DM and players actually bond with?' },
+  { key: 'natural-world', lens: 'THE NATURAL & UNCANNY WORLD. Disease/plague, natural disasters (fire, flood, quake, drought, blight), famine dynamics beyond supply cuts, the environment/wilderness as an actor, beasts & monsters, and — this is a FANTASY D&D world — MAGIC as a force (arcane events, curses, planar intrusion, the fantastical). Is the world only political-economic, or does nature and the numinous act on it?' },
+  { key: 'drama-engine', lens: 'THE DRAMATIC PRIMITIVES. What creates NARRATIVE tension specifically: secrets & hidden information (beyond fog-of-war), prophecy/omen/foreshadowing, succession & inheritance crises, moral dilemmas with cost, reversals of fortune, revenge cycles, conspiracies, ticking clocks. Does the sim produce STORY SHAPES, or only state changes?' },
+  { key: 'player-and-dm-agency', lens: 'THE PARTY IN THE WORLD. Emergent quest/adventure hooks, the consequences of player intervention rippling through the sim, patrons & rivals & factions courting the party, reputation/renown, the world reacting to the PCs. Is this a world to WATCH, or a world to ACT IN? What converts sim state into things a party can grab and change?' },
+  { key: 'culture-memory-myth', lens: 'CULTURE, MEMORY & MYTH-MAKING. How events become HISTORY and then LEGEND; festivals, art, monuments, holidays; ideologies and movements that spread; collective memory and grudges carried across generations; the way a realm remembers and mythologizes its own past. Does the world have a SENSE OF ITSELF over time?' },
+  { key: 'systemic-emergence', lson: 'x', lens: 'LONG-ARC SYSTEMIC EMERGENCE. Feedback loops, tipping points, cascades, black-swan events; golden ages & dark ages; the rise/decline/fall of powers over long horizons; boom/bust cycles; the difference between a world that CHANGES tick-to-tick and one that has ERAS. Given the sim tends toward equilibrium under autoresolve, what large-scale dynamics are missing that would give it epochs?' },
+]
+
+const GAP_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['lens', 'gaps'],
+  properties: {
+    lens: { type: 'string' },
+    gaps: {
+      type: 'array',
+      items: {
+        type: 'object', additionalProperties: false,
+        required: ['name', 'whatItIs', 'whyItAddsDrama', 'reallyMissing', 'architecturalFit'],
+        properties: {
+          name: { type: 'string' },
+          whatItIs: { type: 'string', description: 'the mechanic/system, concretely' },
+          whyItAddsDrama: { type: 'string', description: 'the specific immersion/drama it unlocks in actual play' },
+          reallyMissing: { type: 'string', description: 'HONEST cross-check against the inventory: is it fully absent, partially there (say what exists), or a deepening of something thin?' },
+          architecturalFit: { type: 'string', description: 'how it would fit the constitution — deterministic (same-seed byte-identity), legible (emits a cause/receipt), endogenous (emerges from mechanics), dormant-additive (off by default). Flag if it fights any of these.' },
+        },
+      },
+    },
+  },
+}
+
+phase('GapHunt')
+const invContext = JSON.stringify(inventory, null, 1)
+const gapResults = (await parallel(LENSES.map(L => () =>
+  agent(
+    `You are hunting GENUINE gaps in the simulation substance of SettlementForge through ONE lens, to answer the owner's question: "am I missing anything for more immersion, drama, etc.?"
+
+YOUR LENS — ${L.key}: ${L.lens}
+
+Below is a GROUNDED inventory of what ALREADY EXISTS across every domain (code-verified). Your gaps MUST be cross-checked against it — do NOT propose something that already exists; if something is PARTIALLY there, say what exists and propose the DEEPENING. Prefer NON-OBVIOUS, high-drama gaps over generic ones. This is a rich, deep sim (war cluster, deity engine, occupation, trade+starvation, fog-of-war belief, rumors, seasons, spatial movers) — so surface what a MAXIMALLY immersive, dramatic, deterministic living world has that THIS one, per the inventory, still lacks.
+
+For each gap: what it is (concretely), why it adds drama/immersion IN PLAY, an honest reallyMissing cross-check against the inventory, and how it would fit the constitution (deterministic / legible-cause / endogenous / dormant-additive). Propose 2-5 of your STRONGEST gaps, not a long weak list.
+
+THE INVENTORY:
+${invContext}
+
+Return ONLY the structured object.`,
+    { label: `gap:${L.key}`, phase: 'GapHunt', schema: GAP_SCHEMA, effort: 'high' }
+  )
+))).filter(Boolean)
+
+// ── Phase 3: synthesize into a ranked, opinionated set ─────────────────────────
+const SYNTH_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['alreadyStrong', 'rankedGaps', 'topRecommendations', 'oneSentence'],
+  properties: {
+    alreadyStrong: { type: 'array', items: { type: 'string' }, description: 'what the sim ALREADY covers well (so the owner sees I know what exists and am not suggesting these)' },
+    rankedGaps: {
+      type: 'array',
+      description: 'the deduped, ranked genuine gaps, highest drama-leverage × best architectural fit first',
+      items: {
+        type: 'object', additionalProperties: false,
+        required: ['name', 'category', 'theDrama', 'reallyMissing', 'howItFits', 'buildSketch', 'effort', 'leverage'],
+        properties: {
+          name: { type: 'string' },
+          category: { type: 'string', description: 'human-texture | natural-world | drama-engine | player-agency | culture-memory | systemic-emergence' },
+          theDrama: { type: 'string', description: 'the immersion/drama it unlocks, vividly' },
+          reallyMissing: { type: 'string', description: 'absent vs partial (what exists)' },
+          howItFits: { type: 'string', description: 'the deterministic/legible/endogenous/dormant path to build it' },
+          buildSketch: { type: 'string', description: 'a one-line sense of the implementation seam' },
+          effort: { type: 'string', enum: ['S', 'M', 'L', 'XL'] },
+          leverage: { type: 'string', enum: ['transformational', 'high', 'medium'] },
+        },
+      },
+    },
+    topRecommendations: { type: 'string', description: 'opinionated: the 3-5 highest-leverage additions and WHY, as prose for the owner' },
+    oneSentence: { type: 'string', description: 'the single biggest thing the sim is missing for drama/immersion, in one sentence' },
+  },
+}
+
+phase('Synthesize')
+const synthesis = await agent(
+  `You are the design lead synthesizing a gap analysis for SettlementForge's owner, who asked: "am I missing anything in terms of simulation substance for more immersion, drama, etc.?"
+
+You have (1) a code-grounded inventory of what EXISTS, and (2) gap proposals from six diverse lenses (human-texture, natural-world, drama-engine, player-agency, culture-memory, systemic-emergence). Synthesize into an opinionated, ranked answer.
+
+- DEDUPE across lenses; merge overlapping proposals.
+- RE-CHECK each surviving gap against the inventory — kill anything that already substantially exists; downgrade "partially there" ones to deepenings.
+- RANK by (immersion/drama leverage) × (fit with the deterministic + legible + endogenous + dormant-additive constitution). A gap that fights determinism or legibility ranks lower even if dramatic.
+- Be HONEST and specific. The owner is a serious systems builder; no fluff, no flattery. Name what's already strong so they trust you know the codebase.
+- topRecommendations: your genuine opinion on the 3-5 that would most transform immersion/drama, and why.
+
+THE INVENTORY:
+${invContext}
+
+THE GAP PROPOSALS (six lenses):
+${JSON.stringify(gapResults, null, 1)}
+
+Return ONLY the structured object.`,
+  { label: 'synthesize', phase: 'Synthesize', schema: SYNTH_SCHEMA, effort: 'high' }
+)
+
+return { inventory, gapResults, synthesis }

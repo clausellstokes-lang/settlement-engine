@@ -8,8 +8,8 @@
  * isn't available in this dev env.
  *
  * This closes that gap WITHOUT Docker: it loads the ACTUAL, NET-CURRENT function
- * bodies — spend_credits from migration 192 (174's forward reprice plus the
- * inert tier-multiplier seam), get_credit_balance from 110 (the IDOR-
+ * bodies — spend_credits from migration 024 (the ledger-allocation rewrite, NOT
+ * the superseded 009 counter version), get_credit_balance from 110 (the IDOR-
  * guarded net-current reader), refund_credits from the Wave-1 fused 123 (FOR
  * UPDATE + elevated-skip from 087 + no-op idempotency + ledger-recompute counter),
  * admin_grant_credits from 009 — into an in-process Postgres (pglite) and
@@ -35,8 +35,6 @@ import { describe, it, expect, beforeAll, beforeEach } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
-
-const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 
 /** Compute the NET-CURRENT set of roles holding EXECUTE on a public function,
  *  by replaying every migration's grant/revoke in file order. Implicit PUBLIC
@@ -64,7 +62,6 @@ const MIG = {
   '024': resolve(dir, '024_billing_retention_and_atomic_mutations.sql'),
   '110': resolve(dir, '110_restrict_get_credit_balance_to_owner.sql'),
   '123': resolve(dir, '123_money_and_public_projection_hardening.sql'),
-  '192': resolve(dir, '192_tier_credit_multiplier.sql'),
 };
 const allExist = Object.values(MIG).every(existsSync);
 
@@ -72,7 +69,7 @@ const allExist = Object.values(MIG).every(existsSync);
  *  `create or replace function public.<name>` to the first `$$;`. */
 function extractFn(migKey, name) {
   const src = readFileSync(MIG[migKey], 'utf-8');
-  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
+  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
   if (!m) throw new Error(`could not extract ${name} from migration ${migKey}`);
   return m[0];
 }
@@ -125,9 +122,6 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
       create or replace function public.current_user_is_privileged() returns boolean language sql stable as $fn$
         select coalesce(nullif(current_setting('test.privileged', true), '')::boolean, false)
       $fn$;
-      create or replace function public.assert_current_session() returns void language plpgsql as $fn$
-        begin return; end
-      $fn$;
       create or replace function public._audit_action(
         p_actor_id uuid, p_target_id uuid, p_action text, p_before jsonb, p_after jsonb, p_reason text
       ) returns void language plpgsql as $fn$ begin return; end $fn$;
@@ -155,13 +149,6 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
         created_at timestamptz not null default now(),
         primary key (spend_id, grant_id)
       );
-      create table public.system_config (
-        key text primary key,
-        value jsonb not null
-      );
-      create or replace function public.account_is_active(p_user_id uuid) returns boolean language sql stable as $fn$
-        select exists(select 1 from public.profiles where id = p_user_id)
-      $fn$;
     `);
     // Structural refund idempotency — the APPLIED backstop index (087, re-asserted
     // by the fused 123): at most one refund grant per spend row, keyed on the
@@ -178,10 +165,10 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     // (incremental `credits + amount` drift + raise-on-duplicate) or 009 (F1 raise).
     // get_credit_balance is the net-current 110 (IDOR-guarded).
     await db.exec(extractFn('110', 'get_credit_balance'));
-    await db.exec(extractFn('192', 'spend_credits'));
+    await db.exec(extractFn('024', 'spend_credits'));
     await db.exec(extractFn('123', 'refund_credits'));
     await db.exec(extractFn('009', 'admin_grant_credits'));
-  }, PGLITE_BOOT_TIMEOUT_MS);
+  }, 30000); // PGlite WASM cold-start is ~8s in CI/dev — beyond the 10s hook default.
 
   beforeEach(async () => {
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_ledger, public.credit_transactions cascade;');
@@ -198,19 +185,19 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     expect(await balanceOf(UID)).toBe(5); // the expired 5 is NOT counted
   });
 
-  // ── spend_credits (192 net-current ledger-allocation version) ────────────────
+  // ── spend_credits (024 ledger-allocation version) ────────────────────────────
   it('debits the feature cost from active grants and records an allocation', async () => {
     await grant(UID, 10);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 5
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 3
     expect(r.ok).toBe(true);
-    expect(r.balance).toBe(5);
-    expect(await balanceOf(UID)).toBe(5);
+    expect(r.balance).toBe(7);
+    expect(await balanceOf(UID)).toBe(7);
     expect((await scalar(`select count(*)::int n from public.credit_spend_allocations`)).n).toBe(1);
   });
 
   it('rejects an overspend and writes no spend row', async () => {
     await grant(UID, 2);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 5 > 2
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 3 > 2
     expect(r.ok).toBe(false);
     expect(r.reason).toBe('insufficient_funds');
     expect(await balanceOf(UID)).toBe(2);
@@ -220,17 +207,17 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   it('cannot spend expired credits', async () => {
     await grant(UID, 5, { source: 'promo', expiresAt: '2000-01-01T00:00:00Z' }); // expired
     await grant(UID, 5, { source: 'purchase' });                                 // active
-    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 5 -> 0 from active (narrative cost 5)
-    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(false); // only 0 active left < 5
-    expect(await balanceOf(UID)).toBe(0);
+    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 5 -> 2 from active
+    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(false); // only 2 active left < 3
+    expect(await balanceOf(UID)).toBe(2);
   });
 
   it('sequential spends stop exactly at the balance floor (atomic guard)', async () => {
-    await grant(UID, 12); // grant bumped 7→12 so TWO narrative spends (cost 5 each) still succeed before the floor-stop
-    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 12 -> 7
-    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 7 -> 2
-    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(false); // 2 < 5
-    expect(await balanceOf(UID)).toBe(2);
+    await grant(UID, 7);
+    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 7 -> 4
+    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 4 -> 1
+    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(false); // 1 < 3
+    expect(await balanceOf(UID)).toBe(1);
   });
 
   it('rejects an unknown feature', async () => {
@@ -246,7 +233,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     expect(await balanceOf(UID)).toBe(10);
     const g = await scalar(`select * from public.credit_ledger where source='refund'`);
     expect(g.metadata.refund_of).toBe(r.spend_id);
-    expect(g.amount).toBe(5); // refund grant equals the narrative spend cost (5)
+    expect(g.amount).toBe(3);
   });
 
   it('is idempotent — a second refund of the same spend is a NO-OP (one ledger row, no double-credit)', async () => {
@@ -290,8 +277,8 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   //    suite lacked (it only ever refunded as the authenticated owner).
   it('refunds under the service-role client even though auth.uid() is null (F1)', async () => {
     await grant(UID, 10);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // spent by UID, cost 5
-    expect(await balanceOf(UID)).toBe(5);
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // spent by UID, cost 3
+    expect(await balanceOf(UID)).toBe(7);
     await asService(); // auth.uid() null, role service_role — exactly the edge-fn context
     await db.query(`select public.refund_credits('${r.spend_id}', 'generation failed mid-stream')`);
     expect(await balanceOf(UID)).toBe(10);
@@ -306,7 +293,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     await asUser('');       // auth.uid() null
     await asRole('anon');   // not service_role
     await expect(db.query(`select public.refund_credits('${r.spend_id}', null)`)).rejects.toThrow(/not authenticated/i);
-    expect(await balanceOf(UID)).toBe(5); // untouched (narrative cost 5)
+    expect(await balanceOf(UID)).toBe(7); // untouched
   });
 
   it('structural idempotency: the unique index is the real guarantee behind the no-op', async () => {
@@ -321,7 +308,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     // structural guarantee the function's exception handler relies on.
     await expect(db.query(
       `insert into public.credit_ledger (user_id, kind, amount, source, metadata)
-       values ('${UID}','grant',5,'refund', jsonb_build_object('refund_of','${r.spend_id}'))`,
+       values ('${UID}','grant',3,'refund', jsonb_build_object('refund_of','${r.spend_id}'))`,
     )).rejects.toThrow(/duplicate key|unique/i);
     expect(await balanceOf(UID)).toBe(10);
   });
@@ -332,8 +319,8 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   //    ledger sum after spend → refund → refund (the duplicate is a no-op).
   it('recomputes profiles.credits from the ledger after spend then refund (no drift)', async () => {
     await grant(UID, 10);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 5 → counter 5
-    expect((await scalar(`select credits from public.profiles where id='${UID}'`)).credits).toBe(5);
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 3 → counter 7
+    expect((await scalar(`select credits from public.profiles where id='${UID}'`)).credits).toBe(7);
     await asService();
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);        // → counter 10
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);        // no-op, still 10
@@ -346,11 +333,11 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   // reconciles it to the ledger rather than carrying the drift forward.
   it('a refund heals a pre-drifted profiles.credits counter (recompute, not increment)', async () => {
     await grant(UID, 10);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // counter now 5, ledger 5
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // counter now 7, ledger 7
     await db.query(`update public.profiles set credits = 999 where id='${UID}'`); // simulate drift
     await asService();
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);
-    // Incremental arithmetic would have produced 1004 (999 + refund 5); recompute yields 10.
+    // Incremental arithmetic would have produced 1002; recompute yields 10.
     expect((await scalar(`select credits from public.profiles where id='${UID}'`)).credits).toBe(10);
   });
 
@@ -367,8 +354,8 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   // ── full round-trip ──────────────────────────────────────────────────────────
   it('spend then refund returns the account to its exact starting balance', async () => {
     await grant(UID, 12);
-    const { r } = await scalar("select public.spend_credits('progression') as r"); // cost 6
-    expect(await balanceOf(UID)).toBe(6);
+    const { r } = await scalar("select public.spend_credits('progression') as r"); // cost 5
+    expect(await balanceOf(UID)).toBe(7);
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);
     expect(await balanceOf(UID)).toBe(12);
   });

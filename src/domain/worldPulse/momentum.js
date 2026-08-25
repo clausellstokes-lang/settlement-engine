@@ -39,14 +39,11 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
-import { stablePart } from './stablePart.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { beliefsActive } from './beliefMap.js';
-import { isFaithSpreadEnabled } from './simulationRules.js';
 import { mobilizationSeverity } from './mobilization.js';
 import { ARMY_ROLES } from '../spatial/armyTransit.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
-import { acquiredTraitDescriptors } from '../../data/npcTraitWeights.js';
 // Stage 2 threshold reads (all EXPORTED, already eager via disposition ⇒ zero first-paint
 // delta when pulled through this lazy leaf): the entity's alignment coordinates + the
 // authored-importance weight + the legitimacy ledger.
@@ -103,9 +100,6 @@ export const MOMENTUM_TUNING = Object.freeze({
   LOUD_INTERVENTION: 0.5,   // an intervention — deniable, quieter
   LOUD_CAMPAIGN: 0.4,       // indirect supply-web war is COVERT by design — a quiet deposit
   LOUD_INCITEMENT: 1.0,     // rousing your own population is the LOUDEST (the owner's scenario)
-  // D3: an IMPOSED cult (a crown forcing a faith) is a loud public religious act — louder than a
-  // quiet campaign, below a full war-footing incitement. Owner-retunable.
-  LOUD_IMPOSITION: 0.6,
   // A covert act barely deposits (the rumor machinery knows what stays hidden).
   COVERT_LOUDNESS_MULT: 0.15,
 });
@@ -127,12 +121,8 @@ export function momentumActive(worldState) {
 }
 
 // ── THE BOUNDED COURSE TAXONOMY (design §1 — typed, never freetext) ──────────────
-/** The closed set of course kinds. A commitment is ALWAYS one of these — never freetext.
- *  D3 (DESIGN_SIM_DEPTH_R2): `doctrine` — a crown's religious policy (an imposed cult) becomes
- *  a belief-consuming course, so the last free reconsideration ends (all belief-using entities
- *  are bound). courseKeyOf/parseCourseKey handle it via the generic `${kind}:${target}` shape,
- *  target = the ACTIVATED deityRef (premium seam law 3: latent pantheon never named). */
-export const COURSE_KINDS = Object.freeze(['war', 'peace', 'campaign', 'contest', 'blockade', 'doctrine']);
+/** The closed set of course kinds. A commitment is ALWAYS one of these — never freetext. */
+export const COURSE_KINDS = Object.freeze(['war', 'peace', 'campaign', 'contest', 'blockade']);
 const COURSE_KIND_SET = new Set(COURSE_KINDS);
 
 /**
@@ -299,10 +289,8 @@ export function commitmentCoursesOf(worldState, tick = 0) {
  *   • INCITEMENT (warPosture mobilization on a live war) — rousing the populace is loudest;
  *     a COVERT preparation barely deposits.
  *   • SUPPLY-WEB CAMPAIGNS (campaignPlans) — course campaign:<target>, quiet (covert war).
- *   • DOCTRINE (D3) — imposed cults (religionStates heresyStain) — course doctrine:<deityRef>,
- *     gated separately on faithSpreadEnabled.
  * Empty when dormant ⇒ the fold is a no-op ⇒ byte-identical.
- * @param {{ spatialLedgers?: unknown, deployments?: unknown, warPosture?: unknown, simulationRules?: Record<string, unknown>, spatialCanonVersion?: unknown, religionStates?: unknown } | null | undefined} worldState
+ * @param {{ spatialLedgers?: unknown, deployments?: unknown, warPosture?: unknown, simulationRules?: Record<string, unknown>, spatialCanonVersion?: unknown } | null | undefined} worldState
  * @returns {CommitmentDeposit[]}
  */
 export function commitmentDepositsFor(worldState) {
@@ -381,27 +369,6 @@ export function commitmentDepositsFor(worldState) {
     const side = rec.side != null ? String(rec.side) : '';
     if (!interId || !target || !side) continue;
     push(interId, courseKeyOf({ kind: 'contest', target, side }), 'intervention', T.LOUD_INTERVENTION);
-  }
-
-  // 5. DOCTRINE (design D3 — the crown's religious policy binds too). An IMPOSED cult (a deity
-  //    carrying a heresyStain: the DM-impose / occupation force-install marker) is a live, loud,
-  //    PUBLIC religious commitment: it deposits into course doctrine:<deityRef> at the seat.
-  //    GATED SEPARATELY on faithSpreadEnabled — momentumActive gates only on beliefs ∧ momentum,
-  //    so a momentum-lit / faith-DARK world (the momentum dormancy golden) sees ZERO doctrine
-  //    deposits ⇒ byte-identical; doctrine rides momentum ∧ beliefs ∧ faith (the design's
-  //    intersection). deityRef is an ACTIVATED cult (it lives in religionStates) — the latent
-  //    pantheon is never named (premium seam law 3). Reads a top-level worldState key.
-  if (isFaithSpreadEnabled(/** @type {Record<string, unknown> | undefined} */ (ws.simulationRules))) {
-    const religionStates = asObject(ws.religionStates);
-    for (const cid of Object.keys(religionStates).sort(compareCodepoint)) {
-      const deities = asObject(asObject(religionStates[cid]).deities);
-      for (const ref of Object.keys(deities).sort(compareCodepoint)) {
-        const d = asObject(deities[ref]);
-        if (d.suppressed === true) continue;                        // a dead/suppressed cult is no live commitment
-        if (!(finiteNumber(d.heresyStain, 0) > 0)) continue;        // only an IMPOSED faith is a doctrine COMMITMENT
-        push(cid, courseKeyOf({ kind: 'doctrine', target: ref }), 'imposition', T.LOUD_IMPOSITION);
-      }
-    }
   }
 
   // SEAM NOTES — the remaining legible-act deposit sources (design §1), deferred to the
@@ -595,21 +562,15 @@ export const THRESHOLD_TUNING = Object.freeze({
 });
 
 // ── TEMPERAMENT (the leader's character, aggregated) ────────────────────────────
-/** The authored personality descriptors of an NPC PLUS the growth-layer acquired overlay
- *  (learned traits weathered onto the NON-core npc.acquiredTraits[] — commission #36; a
- *  learned `proud`/`cautious` shifts the commitment cliff. Absent ⇒ [] ⇒ byte-identical).
- *  @param {unknown} v @returns {string[]} */
+/** @param {unknown} v @returns {string[]} the authored personality descriptors of an NPC. */
 function authoredMomentumTraits(v) {
   const npc = asObject(v);
   const p = npc.personality;
-  const acquired = acquiredTraitDescriptors(npc);
-  /** @type {string[]} */
-  let core;
-  if (!p) core = [];
-  else if (typeof p === 'string') core = [p];
-  else if (Array.isArray(p)) core = p.filter((x) => typeof x === 'string');
-  else core = [asObject(p).dominant, asObject(p).flaw, asObject(p).modifier].filter((x) => typeof x === 'string').map(String);
-  return acquired.length ? [...core, ...acquired] : core;
+  if (!p) return [];
+  if (typeof p === 'string') return [p];
+  if (Array.isArray(p)) return p.filter((x) => typeof x === 'string');
+  const o = asObject(p);
+  return [o.dominant, o.flaw, o.modifier].filter((x) => typeof x === 'string').map(String);
 }
 
 /** The DECLARED npcTemperament facet on a custom NPC, or null (the facet law: a declared
@@ -1120,46 +1081,13 @@ export function applyLegitimacyHits(updates, hits) {
  * face-saving off-ramp if any).
  * @param {string} actorId @param {string} targetId @param {(id: string) => string} name
  * @param {number} stock @param {number} cliff @param {{ price01: number }} crack
- * @param {string} exitKind @param {number} tick
- * @param {string} [origin] WHICH lane priced this reversal: 'crack' (the organic pass
- *   below) or 'forced' (the DM's FORCE_RECONSIDERATION verb, realmVerbExecution.js). It
- *   is an ID SEGMENT, not decoration: this function has TWO callers that can both fire
- *   on the same tick for the same (actor, target), and the feed dedupes by id through a
- *   Map, so without it a DM-forced reversal and an organic one would SILENTLY MERGE into
- *   one beat and the world would lose a receipt it had actually earned.
- * @returns {Record<string, unknown>} */
-export function climbDownNews(actorId, targetId, name, stock, cliff, crack, exitKind, tick, origin = 'crack') {
+ * @param {string} exitKind @param {number} tick @returns {Record<string, unknown>} */
+export function climbDownNews(actorId, targetId, name, stock, cliff, crack, exitKind, tick) {
   const A = name(actorId);
   const Tn = name(targetId);
   const faced = exitKind ? String(exitKind).replace(/_/g, ' ') : '';
   const depth = cliff > 0 ? Math.round((stock / cliff) * 100) / 100 : 0;
   return {
-    // THE FEED'S ADMISSION KEY, and this receipt went WITHOUT one until 2026-07-31.
-    // wizardNews.js normalizeEntry returns null on `!entry?.id` (wizardNews.js:475) and
-    // appendObservedWizardNewsEntries pushes only id-carrying entries into the audit sink
-    // (wizardNews.js:744), so an id-less receipt was dropped from BOTH the reader-facing
-    // feed and the soak observation: this layer's entire narrative output was discarded
-    // before it reached any reader, the Herald, or a receipt.
-    //
-    // House convention (generosityNews.js:28, upswingKernel.js:926, pestilenceKernel.js:279):
-    // `wizard_news.<tick>.<slug>.<stableParts>`, normalized through stablePart so the id
-    // stays inside the dotted-id alphabet whatever characters the underlying save id
-    // carries. On today's ids that normalization is INJECTIVE (save ids are
-    // crypto.randomUUID hex-and-dash, where `-`>`_` is a bijection), so it cannot alias
-    // two settlements into one id and silently merge their beats.
-    //
-    // COLLISION-FREE PER TICK, which matters because appendWizardNewsEntries dedupes by id
-    // through a Map and would SILENTLY MERGE two beats sharing one. Two facts earn it:
-    //   WITHIN the organic pass, advanceMomentumCracks iterates each actorId exactly once
-    //   (Object.keys(deployments)), charges it at most once (the chargedTick stamp is
-    //   idempotent across both lanes and both ticks), and reads a single targetId from that
-    //   actor's one deployment, so (actor, target) cannot repeat.
-    //   ACROSS the two callers, `origin` separates them. This receipt has a SECOND author:
-    //   the DM's FORCE_RECONSIDERATION verb (realmVerbExecution.js) prices its own reversal
-    //   through this same function, and a forced reversal and an organic one can land on the
-    //   same tick for the same pair. Without the segment they would collide and one beat
-    //   would vanish; with it the Chronicle can also tell a DM order from an emergent crack.
-    id: `wizard_news.${tick}.momentum_climb_down.${stablePart(origin)}.${stablePart(actorId)}.${stablePart(targetId)}`,
     kind: 'momentum_climb_down',
     headline: faced ? `${A} climbs down from its war on ${Tn} — with honour intact` : `${A} climbs down from its war on ${Tn}`,
     summary: faced
@@ -1174,11 +1102,6 @@ export function climbDownNews(actorId, targetId, name, stock, cliff, crack, exit
     settlementIds: [String(actorId), String(targetId)],
     significance: 'major',
     score: 68,
-    // MATERIAL WEIGHT for the reader-facing meters (added with the id fix's follow-up):
-    // normalizeEntry clamps an absent severity to 0, so this major beat rendered
-    // "Severity 0%" on its card and seeded rumors at the mildest magnitude band. 0.6 =
-    // the bust/upswing 'major' register (upswingKernel bustNews).
-    severity: 0.6,
     tick,
   };
 }

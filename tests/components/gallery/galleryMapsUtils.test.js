@@ -2,15 +2,13 @@ import { describe, it, expect } from 'vitest';
 
 import {
   KIND_OPTIONS,
-  ownedCampaignBySlug,
-  suggestedTagsForCampaign,
-} from '../../../src/components/gallery/galleryMapsUtils.js';
-import {
   BACKDROP_OPTIONS,
   MAP_SORT_OPTIONS,
   deriveTagVocabulary,
   activeMapFilterCount,
-} from '../../../src/components/gallery/galleryMapsFilters.js';
+  ownedCampaignBySlug,
+  suggestedTagsForCampaign,
+} from '../../../src/components/gallery/galleryMapsUtils.js';
 
 // Fixture mirrors the list_gallery_maps tile shape (migration 065): the server
 // now returns the narrowed set, plus the real import_count + member_count.

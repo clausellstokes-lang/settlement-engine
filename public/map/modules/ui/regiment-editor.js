@@ -44,13 +44,9 @@ function editRegiment(selector) {
   function updateRegimentData(regiment) {
     byId("regimentType").className = regiment.n ? "icon-anchor" : "icon-users";
     byId("regimentName").value = regiment.name;
-    // SettlementForge fork patch: untrusted loaded-.map regiment emblem icon → innerHTML — escape
-    // (the structural twin of the markers-editor icon sink patched in wave 1).
-    const isExternalEmblem = regiment.icon.startsWith("http") || regiment.icon.startsWith("data:image");
-    const safeEmblem = escapeHtml(regiment.icon);
-    byId("regimentEmblem").innerHTML = isExternalEmblem
-      ? `<img src="${safeEmblem}" style="width: 1em; height: 1em;">`
-      : safeEmblem;
+    byId("regimentEmblem").innerHTML = regiment.icon.startsWith("http") || regiment.icon.startsWith("data:image")
+      ? `<img src="${regiment.icon}" style="width: 1em; height: 1em;">`
+      : regiment.icon;
 
     const composition = byId("regimentComposition");
     composition.innerHTML = options.military
@@ -163,9 +159,8 @@ function editRegiment(selector) {
     selectIcon(regiment.icon, value => {
       regiment.icon = value;
       const isExternal = value.startsWith("http") || value.startsWith("data:image");
-      const safeValue = escapeHtml(value); // SettlementForge fork patch: escape chosen icon before innerHTML
-      byId("regimentEmblem").innerHTML = isExternal ? `<img src="${safeValue}" style="width: 1em; height: 1em;">` : safeValue;
-      elSelected.querySelector(".regimentIcon").innerHTML = isExternal ? "" : safeValue;
+      byId("regimentEmblem").innerHTML = isExternal ? `<img src="${value}" style="width: 1em; height: 1em;">` : value;
+      elSelected.querySelector(".regimentIcon").innerHTML = isExternal ? "" : value;
       elSelected.querySelector(".regimentImage").setAttribute("href", isExternal ? value : "");
     });
   }

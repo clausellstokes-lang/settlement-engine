@@ -39,69 +39,15 @@
  * PURE + lazy: imported ONLY by the dynamically-loaded pulse kernel (a lazy engine
  * leaf) — zero first-paint bytes. No Date, no Math.random, no tier/auth reads; all
  * randomness forks off the pulse rng confluence; all folds codepoint-sorted.
- *
- * BOUNDARY (design §0.5 amendment, owner ruling 2026-07-19 — the anonymity law amended in
- * place, never crossed): paid eyes and exposed agents are ANONYMOUS AGGREGATES; a named NPC
- * may be CITED as a channel in prose but is never burned, turned, or executed by the engine.
- * PER-NPC CREDIBILITY (DEEP COUPLINGS D-2, npcCredibility.js) is the sanctioned exception: a
- * personal credibility stock and a lie-stigma standing hit are REPUTATION costs, NOT fate
- * resolutions — no exposure removes, kills, or disappears the NPC. Fates remain unresolvable
- * everywhere. The LIE verb now stamps a SPOKESPERSON (the court's mouthpiece) so the personal
- * charge can land on exposure; the deeper no-fate carve is preserved intact.
- * AMENDED (espionage era): a named NPC may carry a covert mission and be CAUGHT —
- * capture, hold, ransom, release, and reputation charges resolve no fate BY THE
- * ENGINE (the roads-hostage precedent); the engine still never executes,
- * permanently turns, or ends a named character. The double agent LEAKS (an
- * information consequence) and is never 'flipped' as a fate.
- * [Chair ruling CR-ES-2, 2026-08-05, VETOABLE IN ONE CLAUSE — it amends the
- * header of the owner ruling above while preserving its core. The BY-THE-ENGINE
- * qualifier is LOAD-BEARING and must survive every future edit:
- * FOREIGN_GUEST_HOLD_CLOSE_REASONS (foreignGuestHold.js) already contains
- * 'death' — the DM-authored close vocabulary — so an unqualified "resolves no
- * fate" would outlaw the war lane's authored closes. The twin home of this
- * amendment is DESIGN_FP_INFORMATION.md section 1b; the two amend together.]
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
-import { stablePart } from './stablePart.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, hasSpatialLedger } from '../spatial/distanceRead.js';
-import { ALLY_INTEL_TUNING, beliefsActive, GOVERNING_SEAT_KEY, strengthBandOf, governingCoalition } from './beliefMap.js';
-// IN-0C — THE DISCLOSURE SIGNING CREDIT. A pure GRAMMAR-side read of persisted treaty
-// state; this file owns the DEFAULT that consumes it (see advanceInformationStatecraft).
-import { disclosureSigningCredits } from './peaceTermsDisclosure.js';
-import { intelTradeActive, intelInjectionBelief, resolveIntelSale, INTEL_TRANSFERS_LEDGER } from '../spatial/intelActs.js';
+import { beliefsActive, GOVERNING_SEAT_KEY, strengthBandOf, governingCoalition } from './beliefMap.js';
 import { applyRelationshipPatch } from './relationshipEvolution.js';
-import { relationshipKeyFromEdge, edgeBetween } from './relationshipState.js';
-import { npcId } from './npcAgency.js';
-import { importanceWeight } from '../entities/npcs.js';
-import {
-  npcCredibilityActive, npcCredibilityWeightOf, compositeCredibilityWeight,
-  advanceNpcCredibility, hasNpcCredibilityLedger,
-} from './npcCredibility.js';
+import { relationshipKeyFromEdge } from './relationshipState.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
-// THE LIE'S LAW AND THE PLANT'S ENVELOPE live in a pure leaf of this writer family
-// (ruling R-BLD-4). This file remains the sole belief/disinfo WRITER; the leaf holds the
-// tuning, the willingness gate, the byte-stable belief-override application and the paid
-// plant's boundary validator. LIE_TUNING and lieWillingness are RE-EXPORTED below so this
-// module's public surface is unchanged — brokerageServicesPlant.js and the pin suites
-// import them from here exactly as before.
-import {
-  LIE_TUNING,
-  applyBeliefOverrides,
-  commissionedPlantAt,
-  lieWillingness,
-  seatBeliefRecord,
-} from './disinformationPlant.js';
-// IN-0a — THE HANDOFF. The carried envelope and the two receipt shapes only a bought lie
-// can produce. A pure READ leaf: this file is still the sole belief/disinfo writer.
-import {
-  appliedPlantEnvelopesAt,
-  plantExposureReasons,
-  plantTookEntry,
-} from './brokeragePlantHandoff.js';
-
-export { LIE_TUNING, lieWillingness };
 
 // ── Small pure helpers ────────────────────────────────────────────────────────
 /** @param {unknown} v @param {number} fallback @returns {number} */
@@ -254,26 +200,11 @@ export function credibilityScoreOf(worldState, id, tick) {
  */
 export function makeCredibilityWeightFn(worldState, tick) {
   if (!infoStatecraftActive(worldState)) return null;
-  // D-2: also serve the closure when only the per-NPC ledger has materialized (a composite
-  // source is still weightable). Byte-safe: a settlement-only source with no credibility
-  // ledger weighs EXACTLY 1.0 ⇒ identical to passing null.
-  if (!hasSpatialLedger(worldState, 'credibility') && !hasNpcCredibilityLedger(worldState)) return null;
+  if (!hasSpatialLedger(worldState, 'credibility')) return null;
   const ledger = asObject(getSpatialLedger(worldState, 'credibility'));
   const now = Math.floor(finiteNumber(tick, 0));
-  const npcCredLit = npcCredibilityActive(worldState);
   return (/** @type {string} */ sourceId) => {
-    const raw = String(sourceId);
-    // D-2 (§6): an NPC-attributed source is `settlement#npc` — weight settlementCred ×
-    // npcCred, clamped. No '#' ⇒ the settlement-only weight, byte-identical (no report
-    // carries a composite source until an act stamps a spokesperson).
-    const sep = raw.indexOf('#');
-    if (sep >= 0 && npcCredLit) {
-      const settId = raw.slice(0, sep);
-      const nid = raw.slice(sep + 1);
-      const settW = credibilityWeight(decayedCredibilityScore(/** @type {CredibilityEntry | undefined} */ (ledger[settId]), now));
-      return compositeCredibilityWeight(settW, npcCredibilityWeightOf(worldState, nid, now));
-    }
-    const entry = /** @type {CredibilityEntry | undefined} */ (ledger[raw]);
+    const entry = /** @type {CredibilityEntry | undefined} */ (ledger[String(sourceId)]);
     return credibilityWeight(decayedCredibilityScore(entry, now));
   };
 }
@@ -414,6 +345,122 @@ export function fractureCredibilityDeltas(worldState, tick) {
   return out;
 }
 
+// ── LIE — disinformation (design §2.3; alignment/structure-gated, blowback-priced) ──
+// The LIE seeds a false belief into the audience carrying a SYNTHETIC lineage, then
+// propagates/corroborates/contradicts/exposes like any telling — the lifecycle the
+// design pins. It is modelled as a GATED belief-injection (the twin of the LIVE
+// ally-intel deceit path applyAllyIntelSharing, which already injects a crafted hostile
+// belief at high confidence), reaching the liar's believed-hostile neighbours, with a
+// synthetic-origin record kept in the spatialLedgers.disinfo ledger for exposure
+// accounting. [JUDGMENT: belief-injection over a rumor-ledger seed — the mover runs
+// AFTER advanceBeliefMaps (~pulseKernel 1713), so a rumor SEED would need pre-rumor
+// timing (line 1659); the injection delivers seed/propagate/corroborate/contradict/
+// expose faithfully AND keeps every rumor/belief golden byte-identical (it is gated
+// off in all of them). Say "veto" to move to a pre-rumor synthetic-feed seed.]
+//
+// The canonical lie is the GARRISON BLUFF (§2.3): a settlement facing a believed-
+// hostile, believed-stronger neighbour INFLATES its own strength in that neighbour's
+// belief map to deter the war (the Blainey mechanic then consumes the false belief).
+
+export const LIE_TUNING = Object.freeze({
+  // WILLINGNESS: alignment + structure decide. A lawful-good seat will not; a deceitful
+  // or desperate one will. willingness rises with malice + desperation, falls with a
+  // lawful-good conscience (lawful AND good = strong restraint).
+  WILLING_FLOOR: 0.35,
+  MALICE_W: 0.7,
+  DESPERATION_W: 0.6,
+  LAWGOOD_RESTRAINT: 0.9,
+  // INITIATION rarity (E0 tempo — a drama-classed event, not a hum): the loaded-dice
+  // baseline (shouldInitiateAsk idiom), ramped by willingness². [JUDGMENT: rarity-gated
+  // via the existing loaded-dice idiom rather than minting a new E0 drama class — the
+  // drama-class taxonomy is a pinned-at-7 near-schema public surface; §6 frames the
+  // drama-classing as initiation TEMPO, which this achieves. Say "veto" to add a
+  // 'deception' drama class + bump the dramaClassRegistry contract to 8.]
+  INITIATE_BASE: 0.12,
+  // The inflation the bluff plants (strength bands, 0..4 scale) above the audience's
+  // current belief — bounded so a lie is a plausible exaggeration, not a fantasy.
+  INFLATE_BANDS: 2,
+  // The bluff is planted at a confidence scaled by the liar's credibility (a proven
+  // liar is believed less even before exposure — the boy who cried wolf, ex ante).
+  BASE_CONFIDENCE: 0.7,
+  // EXPOSURE: a lie is exposed when the audience's belief has re-anchored back toward
+  // truth (the normal reconcile CONTRADICTS it) past this band gap, OR it has been
+  // afield this many ticks (a long-standing bluff eventually meets independent word).
+  EXPOSE_CONTRADICT_BANDS: 2,
+  EXPOSE_MAX_AGE_TICKS: 8,
+  // The exposed-lie credibility charge magnitude (fed as a 'deception' delta — the
+  // SHARP fall side of the asymmetry).
+  EXPOSE_CHARGE01: 1,
+  // The resentment an exposed lie banks on the (audience↔liar) relationship edge — the
+  // people-held grievance the news already narrates, now WRITTEN through the E1 incident
+  // machinery. Bounded (a single lie is a wound, not instant max-hatred).
+  EXPOSE_GRIEVANCE_W: 0.3,
+});
+
+/**
+ * The liar's WILLINGNESS to seed disinformation, in [0,1] (design §2.3 gating).
+ * Alignment + structure: malice and desperation raise it; a lawful-good conscience
+ * lowers it (lawful AND good = the council that will not).
+ * @param {{ malice01: number, lawfulness01: number, desperation01: number }} inputs
+ * @returns {number}
+ */
+export function lieWillingness({ malice01, lawfulness01, desperation01 }) {
+  const m = clamp01(finiteNumber(malice01, 0.5));
+  const l = clamp01(finiteNumber(lawfulness01, 0.5));
+  const d = clamp01(finiteNumber(desperation01, 0));
+  const T = LIE_TUNING;
+  const restraint = T.LAWGOOD_RESTRAINT * l * (1 - m); // lawful-good restraint
+  return clamp01(T.MALICE_W * m + T.DESPERATION_W * d - restraint);
+}
+
+// ── The belief-map manipulation (a NEW maps, byte-stable, codepoint-sorted) ─────
+/** @typedef {import('./beliefMap.js').BeliefRecord} BeliefRecord */
+
+/** The observer's seat belief record about a subject, or null. Total on garbage.
+ *  @param {Record<string, unknown>} maps @param {string} observerId @param {string} subjectId
+ *  @returns {BeliefRecord | null} */
+function seatBeliefRecord(maps, observerId, subjectId) {
+  const observer = asObject(maps[String(observerId)]);
+  const seat = asObject(observer[GOVERNING_SEAT_KEY]);
+  const rec = seat[String(subjectId)];
+  return rec && typeof rec === 'object' && !Array.isArray(rec) ? /** @type {BeliefRecord} */ (rec) : null;
+}
+
+/**
+ * Return a NEW beliefMaps with the given (observer → subject → record) overrides
+ * applied to each observer's SEAT slot, codepoint-sorted at every level (byte-stable).
+ * Observers/subjects absent from `overrides` keep their exact prior reference.
+ * @param {Record<string, unknown>} maps
+ * @param {Map<string, Map<string, BeliefRecord>>} overrides
+ * @returns {Record<string, unknown>}
+ */
+function applyBeliefOverrides(maps, overrides) {
+  if (!overrides.size) return maps;
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  const observerIds = [...new Set([...Object.keys(maps), ...overrides.keys()])].sort(compareCodepoint);
+  for (const observerId of observerIds) {
+    const bySubject = overrides.get(observerId);
+    if (!bySubject || !bySubject.size) { out[observerId] = maps[observerId]; continue; }
+    const priorObserver = asObject(maps[observerId]);
+    const priorSeat = asObject(priorObserver[GOVERNING_SEAT_KEY]);
+    /** @type {Record<string, unknown>} */
+    const nextSeat = {};
+    const subjectIds = [...new Set([...Object.keys(priorSeat), ...bySubject.keys()])].sort(compareCodepoint);
+    for (const subjectId of subjectIds) {
+      const override = bySubject.get(subjectId);
+      nextSeat[subjectId] = override !== undefined ? override : priorSeat[subjectId];
+    }
+    /** @type {Record<string, unknown>} */
+    const nextObserver = {};
+    for (const k of Object.keys(priorObserver).sort(compareCodepoint)) {
+      nextObserver[k] = k === GOVERNING_SEAT_KEY ? nextSeat : priorObserver[k];
+    }
+    if (!(GOVERNING_SEAT_KEY in nextObserver)) nextObserver[GOVERNING_SEAT_KEY] = nextSeat;
+    out[observerId] = nextObserver;
+  }
+  return out;
+}
 
 const HOSTILE_LABELS = new Set(['hostile', 'cold_war', 'rival']);
 
@@ -427,70 +474,7 @@ const HOSTILE_LABELS = new Set(['hostile', 'cold_war', 'rival']);
  * @property {number} trueBand     the true band at seed (the contradiction reference)
  * @property {number} seededTick
  * @property {string} lineageId    the synthetic-origin telling id (deniable-until-lineage)
- * @property {string} [spokespersonNpcId] D-2: the court's mouthpiece (the named npcId that
- *   fronted the bluff) — present only when npcCredibilityEnabled is lit; on exposure the
- *   personal credibility charge + the lie-stigma land on this soul (a REPUTATION cost, §0.5).
- * @property {{receipt:Record<string,unknown>,target?:Record<string,unknown>}} [commission]
- *   paid-plant provenance retained on the plant row; ordinary court lies omit it.
  */
-
-// D-2 (design §6): only government/notable souls front a court's bluff (the mouthpiece floor
-// mirrors the ladder's RUNG_ELIGIBLE_FLOOR — a nameless extra never speaks for the court).
-const MOUTHPIECE_FLOOR = 0.4;
-
-/**
- * Pick the court's MOUTHPIECE for a bluff (design §6 attribution): a seeded, importance-
- * weighted draw over the settlement's notable+ roster (fork `npc-cred:lie:${sid}:${tick}`).
- * Returns the npcId (the eligibleMembers idiom's key) or null (no eligible soul ⇒ the court
- * speaks anonymously, the pre-D-2 behaviour). PURE. @param {{ settlement?: { npcs?: unknown } } | undefined} item
- * @param {string} sid @param {{ fork?: (label: string) => { random: () => number } } | null} rng @param {number} now
- * @returns {string | null}
- */
-function pickMouthpiece(item, sid, rng, now) {
-  const settlement = asObject(asObject(item).settlement);
-  const npcs = Array.isArray(settlement.npcs) ? /** @type {Record<string, unknown>[]} */ (settlement.npcs) : [];
-  /** @type {Array<{ nid: string, w: number }>} */
-  const roster = [];
-  npcs.forEach((npc, index) => {
-    const n = asObject(npc);
-    if (n.stasis) return;
-    const w = importanceWeight(/** @type {Parameters<typeof importanceWeight>[0]} */ (/** @type {unknown} */ (n)));
-    if (w < MOUTHPIECE_FLOOR) return;
-    roster.push({ nid: npcId(sid, /** @type {Parameters<typeof npcId>[1]} */ (n), index), w });
-  });
-  if (!roster.length) return null;
-  roster.sort((a, b) => (b.w - a.w) || compareCodepoint(a.nid, b.nid));
-  const fork = rng && typeof rng.fork === 'function' ? rng.fork(`npc-cred:lie:${sid}:${now}`) : null;
-  const u = fork && typeof fork.random === 'function' ? clamp01(finiteNumber(fork.random(), 0)) : 0;
-  const total = roster.reduce((sum, r) => sum + r.w, 0);
-  if (!(total > 0)) return roster[0].nid;
-  const target = u * total;
-  let acc = 0;
-  for (const r of roster) { acc += r.w; if (target <= acc) return r.nid; }
-  return roster[roster.length - 1].nid;
-}
-
-/** The complete set of live npcIds across the roster this tick (the D-2 prune scan — a
- *  vanished NPC's credibility key is dropped). @param {{ byId?: Map<string, unknown> }} snapshot @returns {Set<string>} */
-function buildLiveNpcIds(snapshot) {
-  const byId = snapshot && snapshot.byId instanceof Map ? snapshot.byId : new Map();
-  /** @type {Set<string>} */
-  const out = new Set();
-  for (const [sid, item] of byId) {
-    // FOLD BATCH 3 composition (THE ROADS §8 × D-2): the snapshot's settlement is the
-    // PARTICIPATION view — the master gate filters off-stage souls (hostage / DM-shelved).
-    // The prune scan reads the UNTOUCHED roster (`item.save`, the roadsKernel idiom): a
-    // captive is still a live soul — pruning their credibility key mid-captivity would
-    // reset their reputation the day they come home. Falls back to the participation view
-    // when no raw roster exists (synthetic snapshots).
-    const it = asObject(item);
-    const rawSettlement = asObject(asObject(it.save).settlement);
-    const settlement = Array.isArray(rawSettlement.npcs) ? rawSettlement : asObject(it.settlement);
-    const npcs = Array.isArray(settlement.npcs) ? /** @type {Record<string, unknown>[]} */ (settlement.npcs) : [];
-    npcs.forEach((npc, index) => { out.add(npcId(String(sid), /** @type {Parameters<typeof npcId>[1]} */ (npc), index)); });
-  }
-  return out;
-}
 
 /**
  * LIE lifecycle (design §2.3): seed → propagate → corroborate → contradict → expose →
@@ -506,44 +490,23 @@ function buildLiveNpcIds(snapshot) {
  * @param {(id: string) => number} args.strengthOf  ground-truth 0..1 strength
  * @param {(id: string) => { malice01: number, lawfulness01: number }} args.alignmentOf  derived alignment
  * @param {(id: string) => string} args.nameFor
- * @param {unknown[]} [args.commissionedPlants] paid plant envelopes from the pure brokerage producer
  * @returns {{ overrides: Map<string, Map<string, BeliefRecord>>, disinfo: Record<string, DisinfoRecord> | null,
- *   deltas: CredibilityDelta[], npcDeltas: import('./npcCredibility.js').NpcCredibilityDelta[],
- *   grievances: GrievanceWrite[], newsEntries: Array<Record<string, unknown>>,
- *   envoyPicturePatches: Array<Record<string, unknown>> }}
+ *   deltas: CredibilityDelta[], grievances: GrievanceWrite[], newsEntries: Array<Record<string, unknown>> }}
  */
-export function processLies({
-  snapshot,
-  worldState,
-  beliefMaps,
-  rng,
-  tick,
-  strengthOf,
-  alignmentOf,
-  nameFor,
-  commissionedPlants = [],
-}) {
+export function processLies({ snapshot, worldState, beliefMaps, rng, tick, strengthOf, alignmentOf, nameFor }) {
   const T = LIE_TUNING;
   const now = Math.max(0, Math.floor(finiteNumber(tick, 0)));
   const name = typeof nameFor === 'function' ? nameFor : (/** @type {string} */ id) => String(id);
   const strength = typeof strengthOf === 'function' ? strengthOf : () => 0.5;
   const byId = snapshot?.byId instanceof Map ? snapshot.byId : new Map();
-  // D-2: the LIE verb attributes a mouthpiece + charges it personally on exposure ONLY when
-  // npcCredibilityEnabled is lit (else no spokesperson is stamped, credW is settlement-only,
-  // and every existing infoStatecraft golden is byte-identical).
-  const npcCredLit = npcCredibilityActive(worldState);
   /** @type {Map<string, Map<string, BeliefRecord>>} */
   const overrides = new Map();
   /** @type {CredibilityDelta[]} */
   const deltas = [];
-  /** @type {import('./npcCredibility.js').NpcCredibilityDelta[]} */
-  const npcDeltas = [];
   /** @type {GrievanceWrite[]} */
   const grievances = [];
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
-  /** @type {Array<Record<string, unknown>>} */
-  const envoyPicturePatches = [];
 
   const priorDisinfo = asObject(getSpatialLedger(worldState, 'disinfo'));
   /** @type {Record<string, DisinfoRecord>} */
@@ -566,14 +529,6 @@ export function processLies({
     const agedOut = now - Math.floor(finiteNumber(rec.seededTick, now)) >= T.EXPOSE_MAX_AGE_TICKS;
     if (contradicted || agedOut) {
       deltas.push({ id: rec.liarId, kind: 'deception', magnitude01: T.EXPOSE_CHARGE01 });
-      // D-2 THE PERSONAL CHARGE (§6): the court takes today's deception delta unchanged AND
-      // the mouthpiece takes a personal one (sharper — the npc LIE_FALL is steeper). The
-      // magnitude band (the size of the exaggeration) rides as lieExposedBand so the ladder
-      // can scale the stigma sev. Only when a spokesperson was stamped (npcCredibility lit).
-      if (rec.spokespersonNpcId) {
-        const band = clamp(Math.abs(Math.round(finiteNumber(rec.assertedBand, 0)) - Math.round(finiteNumber(rec.trueBand, 0))), 0, 4);
-        npcDeltas.push({ id: String(rec.spokespersonNpcId), kind: 'deception', magnitude01: T.EXPOSE_CHARGE01, lieExposedBand: band });
-      }
       // THE LIE EDGE-GRIEVANCE (W-DOCTRINE-2b follow-up from 2a's boundary): beyond the
       // news receipt, the exposure banks a PEOPLE-HELD grievance on the (audience↔liar)
       // relationship edge — "the court that lies to neighbours" — applied through the E1
@@ -581,12 +536,6 @@ export function processLies({
       // the SAME tick. incidentType carries 'betray' so it lights the old-wound clock too.
       grievances.push({ a: String(rec.audienceId), b: String(rec.liarId), magnitude01: T.EXPOSE_GRIEVANCE_W, incidentType: 'deception_betrayal' });
       newsEntries.push({
-        // THE FEED'S ADMISSION KEY (see the wizardNews.js authoring guard). Without it
-        // normalizeEntry refuses the entry and the audit sink skips it, so the beat
-        // reaches no reader. COLLISION-FREE: the disinfo ledger holds at most ONE active
-        // bluff per (liar, audience) — the `lie:${liarId}:${audienceId}` key at :722 and
-        // its guard at :723 — so one exposure per pair per tick.
-        id: `wizard_news.${now}.infowar_lie_exposed.${stablePart(rec.liarId)}.${stablePart(rec.audienceId)}`,
         kind: 'infowar_lie_exposed',
         headline: `${name(rec.liarId)}'s bluff is exposed`,
         summary: `A telling ${name(rec.liarId)} planted in ${name(rec.audienceId)} — that its strength was greater than it is — has met independent word and collapsed. The lie traces to ${name(rec.liarId)}'s own court.`,
@@ -595,20 +544,9 @@ export function processLies({
             ? `${name(rec.audienceId)}'s reckoning re-anchored toward the truth; the exaggeration no longer holds.`
             : `The bluff outlived its shelf life; a lie meets contradiction in the end.`,
           `The court that lies to neighbours lies to its own people — a legitimacy wound and a people-held grievance ride with the credibility charge.`,
-          // IN-0a: a BOUGHT lie names its seller here, and its buyer where the lineage
-          // still carries one. Empty for a court's own bluff ⇒ byte-identical for every
-          // exposure a world without both information flags lit can produce.
-          ...plantExposureReasons(rec, name),
         ],
         settlementIds: [String(rec.liarId), String(rec.audienceId)],
-        // Actor layer (NEWS ADDRESS LAW): the court's stamped mouthpiece, who
-        // just took the personal credibility charge above — the one named soul
-        // this beat is genuinely ABOUT. Present only when npcCredibility was lit
-        // and a spokesperson was actually stamped; an anonymous bluff carries no
-        // actor and the entry serializes exactly as before.
-        ...(rec.spokespersonNpcId ? { npcIds: [String(rec.spokespersonNpcId)] } : {}),
         significance: 'notable',
-        severity: 0.45, // material weight for the reader-facing meters (absent clamps to 0)
         score: 61,
         tick: now,
         tags: ['world_pulse', 'infowar', 'deception', 'exposed_lie', 'grievance', 'legitimacy'],
@@ -616,29 +554,9 @@ export function processLies({
       continue; // drop the exposed lie (do not carry forward)
     }
     nextDisinfo[key] = rec; // still afield
-    // IN-0a — THE TAKE. A bought story that is still standing a week after it landed, in a
-    // court whose reckoning now sits exactly on the asserted band, has DONE what it was
-    // paid to do. DM truth only, one-shot, no new state (the leaf reads the record's own
-    // age against the belief in hand); null for every uncommissioned bluff.
-    const took = plantTookEntry({ record: rec, currentBand: curBand, tick: now, nameFor: name });
-    if (took) newsEntries.push(took);
   }
 
-  // ── (2) FOLD PAID PLANTS through this one writer. They enter the same
-  // disinfo lifecycle as an ordinary bluff; the optional envoy target emits
-  // only a typed one-rung request for the envoy writer to consume.
-  const paidPlants = (Array.isArray(commissionedPlants) ? commissionedPlants : [])
-    .map((plant) => commissionedPlantAt(plant, now))
-    .filter(Boolean)
-    .sort((left, right) => compareCodepoint(left.key, right.key));
-  for (const plant of paidPlants) {
-    if (nextDisinfo[plant.key]) continue;
-    setOverride(plant.record.audienceId, plant.record.subjectId, plant.override);
-    nextDisinfo[plant.key] = plant.record;
-    if (plant.patch) envoyPicturePatches.push(plant.patch);
-  }
-
-  // ── (3) SEED NEW LIES: a willing, desperate liar plants a garrison bluff in each
+  // ── (2) SEED NEW LIES: a willing, desperate liar plants a garrison bluff in each
   //        believed-hostile neighbour that has a channel to hear it. ────────────────
   const liarIds = [...new Set((snapshot?.settlements || []).map((s) => String(s.id)))].sort(compareCodepoint);
   for (const liarId of liarIds) {
@@ -673,22 +591,14 @@ export function processLies({
     const u = fork && typeof fork.random === 'function' ? clamp01(finiteNumber(fork.random(), 1)) : 1;
     if (u >= T.INITIATE_BASE * willingness * willingness) continue;
 
-    // D-2 ATTRIBUTION (§6): the lying court picks ONE mouthpiece for this scandal (a court
-    // speaks with one voice). Gated — dark ⇒ null ⇒ no spokesperson, settlement-only credW,
-    // byte-identical. The composite weight (settlementCred × mouthpieceCred, clamped) scales
-    // the bluff's ex-ante believability: a known liar fronting it is believed even less.
-    const mouthpiece = npcCredLit ? pickMouthpiece(item, liarId, rng, now) : null;
-    const settlementCredW = credibilityWeight(credibilityScoreOf(worldState, liarId, now));
-    const credW = mouthpiece
-      ? compositeCredibilityWeight(settlementCredW, npcCredibilityWeightOf(worldState, mouthpiece, now))
-      : settlementCredW;
+    // The liar's current credibility scales how believable the bluff is (ex-ante trust).
+    const credW = credibilityWeight(credibilityScoreOf(worldState, liarId, now));
     const assertedBand = clamp(selfBand + T.INFLATE_BANDS, 0, 4);
     for (const audienceId of hostiles) {
       // The audience must have a CHANNEL to hear it (a belief about the liar already —
       // the informational neighbourhood the carriers deliver). No channel ⇒ no reach.
       const prior = seatBeliefRecord(beliefMaps, audienceId, liarId);
       if (!prior) continue;
-      if (overrides.get(audienceId)?.has(liarId)) continue;
       const lieKey = `lie:${liarId}:${audienceId}`;
       if (nextDisinfo[lieKey]) continue; // one active bluff per (liar, audience)
       /** @type {BeliefRecord} */
@@ -705,21 +615,12 @@ export function processLies({
         liarId, subjectId: liarId, audienceId,
         assertedBand, trueBand: selfBand, seededTick: now,
         lineageId: `disinfo:${liarId}:${audienceId}:${now}`,
-        ...(mouthpiece ? { spokespersonNpcId: mouthpiece } : {}),
       };
     }
   }
 
   const disinfo = Object.keys(nextDisinfo).length ? sortDisinfo(nextDisinfo) : null;
-  return {
-    overrides,
-    disinfo,
-    deltas,
-    npcDeltas,
-    grievances,
-    newsEntries,
-    envoyPicturePatches,
-  };
+  return { overrides, disinfo, deltas, grievances, newsEntries };
 }
 
 /** Codepoint-stable disinfo ledger ordering. @param {Record<string, DisinfoRecord>} ledger
@@ -1024,10 +925,6 @@ export function processSight({ snapshot, priorSight, secrecy, beliefMaps, rng, t
           deltas.push({ id: watcherId, kind: 'deception', magnitude01: T.EXPOSE_CHARGE01 });
           grievances.push({ a: targetId, b: watcherId, magnitude01: T.EXPOSE_GRIEVANCE_W, incidentType: 'spy_exposed' });
           newsEntries.push({
-            // THE FEED'S ADMISSION KEY (see the wizardNews.js authoring guard).
-            // COLLISION-FREE: this sits inside the per-watcher walk over that watcher's
-            // own posture map, so (watcher, target) is visited at most once per tick.
-            id: `wizard_news.${now}.infowar_spy_exposed.${stablePart(watcherId)}.${stablePart(targetId)}`,
             kind: 'infowar_spy_exposed',
             headline: `${name(watcherId)}'s eyes in ${name(targetId)} go quiet`,
             summary: `${name(targetId)} closed its gates and caught the watchers within: ${name(watcherId)}'s paid eyes are exposed. The lineage traces back to ${name(watcherId)}'s own court — a covert watch, now a public grievance.`,
@@ -1037,7 +934,6 @@ export function processSight({ snapshot, priorSight, secrecy, beliefMaps, rng, t
             ],
             settlementIds: [String(watcherId), String(targetId)],
             significance: 'notable',
-            severity: 0.4, // eyes burned and a grievance banked, no walls touched
             score: 59,
             tick: now,
             tags: ['world_pulse', 'infowar', 'see', 'spy_exposed', 'grievance', 'legitimacy'],
@@ -1083,17 +979,15 @@ export function processSight({ snapshot, priorSight, secrecy, beliefMaps, rng, t
 
 // ── SHARE-SELL (design §2.4 SELL lane) — the self-policing market feedback ───────
 /**
- * One resolved intel sale/gift, ready to feed the credibility stock. `spokespersonNpcId` (D-2/
- * D-3) is the named carrier of the sold/gifted read, present only when the seller stamped a
- * mouthpiece — its presence routes the personal credibility charge (absent ⇒ settlement-only).
- * @typedef {{ sellerId: string, accurate: boolean, magnitude01?: number, spokespersonNpcId?: string }} ResolvedIntelSale
+ * One resolved intel sale, ready to feed the credibility stock.
+ * @typedef {{ sellerId: string, accurate: boolean, magnitude01?: number }} ResolvedIntelSale
  */
 
 /**
- * THE SELF-POLICING MARKET (design §2.4/§4/§7): a sold OR gifted read later proven FALSE feeds a
- * `deception` CredibilityDelta against the SELLER SETTLEMENT (bad product damages the stock → its
- * future sales are priced lower, since intelSalePrice discounts by the seller's credibility
- * weight); a read proven TRUE feeds a slow `proven_true` rise. Expressible ENTIRELY with the live
+ * THE SELF-POLICING MARKET (design §2.4/§4): a sale later proven FALSE feeds a `deception`
+ * CredibilityDelta against the SELLER (bad product damages the seller's stock → its future
+ * sales are priced lower, since intelSalePrice discounts by the seller's credibility weight);
+ * a sale proven TRUE feeds a slow `proven_true` rise. Expressible ENTIRELY with the live
  * credibility stock — no parallel ledger. Deterministic (codepoint-sorted). Pure.
  * @param {ReadonlyArray<ResolvedIntelSale>} sales @returns {CredibilityDelta[]}
  */
@@ -1111,100 +1005,19 @@ export function intelSaleCredibilityDeltas(sales) {
   return out.sort((a, b) => compareCodepoint(String(a.id), String(b.id)) || (a.kind < b.kind ? -1 : a.kind > b.kind ? 1 : 0));
 }
 
-/**
- * THE SELF-POLICING MARKET, PERSONALLY (D-2/D-3, design §6/§7): the SPOKESPERSON who carried a
- * sold/gifted read is charged on his own stock the same way — a proven-false read discounts his
- * next attributed telling (the boy who sold rumors goes broke in trust), a proven-true read pays
- * a slow rise. Only sales bearing a spokespersonNpcId produce a delta (absent ⇒ degrades to the
- * settlement-only charge above — "as today"). NO lieExposedBand: a private bad-faith sale is a
- * credibility cost, not a public court scandal — no ladder `exposed_liar` stigma (that is the
- * LIE/BLUFF path's province, design §7 charges "the seller's stock and the spokesperson's",
- * never a stigma). Deterministic (codepoint-sorted). Pure.
- * @param {ReadonlyArray<ResolvedIntelSale>} sales
- * @returns {import('./npcCredibility.js').NpcCredibilityDelta[]}
- */
-export function intelSaleNpcCredibilityDeltas(sales) {
-  /** @type {import('./npcCredibility.js').NpcCredibilityDelta[]} */
-  const out = [];
-  for (const sale of (Array.isArray(sales) ? sales : [])) {
-    if (!sale || sale.spokespersonNpcId == null) continue;
-    out.push({
-      id: String(sale.spokespersonNpcId),
-      kind: sale.accurate === true ? 'proven_true' : 'deception',
-      magnitude01: clamp01(finiteNumber(sale.magnitude01, 1)),
-    });
-  }
-  return out.sort((a, b) => compareCodepoint(String(a.id), String(b.id)) || (a.kind < b.kind ? -1 : a.kind > b.kind ? 1 : 0));
-}
-
-/**
- * IN-0C — THE COMPELLED FEED'S FIDELITY, by the obligor's OBSERVED compliance.
- *
- * A strained compelled channel degrades to ALLY-RELAY fidelity, and `RELAY_KEEP` is
- * consumed BY IMPORT rather than spelled: the semantic law is that a grudging compelled
- * feed is worth exactly what a relayed one is worth, and a second spelling of the number
- * would let the two drift apart in silence. `defaulted` and `expired` — the live fourth
- * compliance word, NOT 'lapsed' — stop the feed outright, and so does an unknown or
- * absent word. ABSENCE NEVER MEANS "TRUST FULLY"; this table fails closed.
- *
- * ⚠ IT LIVES HERE, NOT IN THE peaceTermsDisclosure LEAF, BY CHAIR RULING CR-IN0C-OPT2.
- * The ladder reads INFORMATION's own tuning, and a GRAMMAR-side leaf importing it would
- * open a new unlicensed cross-layer pair under CW-0w — which keys on the (importer,
- * imported) pair, not on reachability. Same port, same file, no coupling.
- *
- * ⚠ SHIPPED DELIBERATELY UNCONSUMED, exactly as `orderTermsByAsk` was: the feed wave that
- * calls this has not landed, so its only reader today is its acceptance case. That is a
- * recorded deferral, NOT dead code — do not re-derive it as one and do not delete it.
- */
-/** @type {Readonly<Record<string, number>>} */
-const DISCLOSURE_FIDELITY = Object.freeze({
-  honored: 1, strained: ALLY_INTEL_TUNING.RELAY_KEEP, defaulted: 0, expired: 0,
-});
-
-/** @param {string} observed a `complianceState` member @returns {number} 0..1 */
-export function disclosureFidelityFor(observed) {
-  return clamp01(DISCLOSURE_FIDELITY[String(observed)] ?? 0);
-}
-
-// The shared spatialLedgers key of the D-4→D-2 bluff-exposure deposit: the LADDER writes +
-// prunes it (its own sanctioned deposit record, design §8 write-list), this mover only READS it.
-// A string literal on the write side (npcLadderKernel) so the spatialUsage coverage walker
-// registers it (EXEMPT); read here by the same key.
-const BLUFF_EXPOSURES_LEDGER = 'bluffExposures';
-
-/**
- * THE CONTEST-BLUFF CHARGE (D-4→D-2, design §8 THE BLUFF): the ladder detected a contestant who
- * BLUFFED a rival about his progress and then LOST — a bluff CONTRADICTED by the outcome, "a lie,
- * same as intel" — and deposited it in the bluffExposures sidecar last tick. Mirror the exposed-lie
- * → per-NPC path: charge the bluffer's PERSONAL credibility (kind 'deception') and carry the band
- * as lieExposedBand so the SAME lie-stigma the exposed-lie path mints lands on the ladder one tick
- * later (design §8: "personal credibility charge + possible exposed_liar stigma"). One-tick courier
- * (law 14 — the ladder runs LAST, this mover FIRST): a deposit whose depositTick is behind `now`
- * has served its turn ⇒ charged once here, then the ladder prunes it (never a same-tick double).
- * DORMANT (no sidecar / dark) ⇒ an empty list ⇒ byte-identical. PURE.
- * @param {{ spatialLedgers?: unknown } | null | undefined} worldState @param {number} tick
- * @returns {import('./npcCredibility.js').NpcCredibilityDelta[]}
- */
-function bluffExposureNpcDeltas(worldState, tick) {
-  const pending = asObject(getSpatialLedger(worldState, BLUFF_EXPOSURES_LEDGER));
-  const now = Math.floor(finiteNumber(tick, 0));
-  /** @type {import('./npcCredibility.js').NpcCredibilityDelta[]} */
-  const out = [];
-  for (const key of Object.keys(pending).sort(compareCodepoint)) {
-    const rec = asObject(pending[key]);
-    if (rec.nid == null) continue;
-    // CONSUME-ONCE DOUBLE GUARD (courier-liveness): a bluff exposure is couriered EXACTLY one
-    // tick after the ladder deposits it (depositTick === now − 1); a same-tick deposit is not yet
-    // couriered and a STALE one (the ladder went dark, so its next-tick prune never fired) is
-    // skipped, never re-charged. Exact-age, not the old lower-bound `>= now`, closes both.
-    if (Math.floor(finiteNumber(rec.depositTick, now)) !== now - 1) continue;
-    const band = clamp(Math.round(finiteNumber(rec.band, 2)), 0, 4);
-    out.push({ id: String(rec.nid), kind: 'deception', magnitude01: clamp01(band / 4), lieExposedBand: band });
-  }
-  return out.sort((a, b) => compareCodepoint(String(a.id), String(b.id)));
-}
-
 // ── The grievance-edge writer (SEE/LIE exposure → the E1 incident machinery) ─────
+/** The REAL graph edge key between two settlements (relationshipStates is keyed by the edge's
+ *  own id, so a synthesized key would orphan the overlay). Mirrors peaceTerms.edgeKeyBetween.
+ *  @param {Array<Record<string, unknown>>} edges @param {string} a @param {string} b @returns {string | null} */
+function edgeKeyBetween(edges, a, b) {
+  for (const edge of (Array.isArray(edges) ? edges : [])) {
+    const f = edge?.from != null ? String(edge.from) : '';
+    const t = edge?.to != null ? String(edge.to) : '';
+    if ((f === a && t === b) || (f === b && t === a)) return relationshipKeyFromEdge(edge);
+  }
+  return null;
+}
+
 /**
  * Apply this tick's exposure grievances through the E1 incident machinery (applyRelationshipPatch):
  * bump the shared (a↔b) edge's resentment + stamp a typed incident — so it feeds warReasons'
@@ -1219,9 +1032,8 @@ function applyExposureGrievances(worldState, edges, grievances, now) {
     .slice()
     .sort((x, y) => compareCodepoint(`${x.a}|${x.b}`, `${y.a}|${y.b}`) || (finiteNumber(x.magnitude01, 0) - finiteNumber(y.magnitude01, 0)));
   for (const g of list) {
-    const edge = edgeBetween(edges, String(g.a), String(g.b));
-    if (!edge) continue;
-    const key = relationshipKeyFromEdge(edge);
+    const key = edgeKeyBetween(edges, String(g.a), String(g.b));
+    if (!key) continue;
     const cur = asObject(asObject(/** @type {{ relationshipStates?: unknown }} */ (ws).relationshipStates)[key]);
     const resentment = clamp01(finiteNumber(cur.resentment, 0) + finiteNumber(g.magnitude01, 0));
     ws = /** @type {Record<string, unknown>} */ (applyRelationshipPatch(ws, {
@@ -1230,7 +1042,7 @@ function applyExposureGrievances(worldState, edges, grievances, now) {
       metadata: { incidentType: g.incidentType || 'deception_betrayal' },
       severity: clamp01(finiteNumber(g.magnitude01, 0)),
       proposalPayload: null,
-    }, now, edge));
+    }, now));
   }
   return ws;
 }
@@ -1259,33 +1071,12 @@ function applyExposureGrievances(worldState, edges, grievances, now) {
  * @param {(id: string) => number} args.strengthOf  ground-truth 0..1 strength
  * @param {(id: string) => { malice01: number, lawfulness01: number }} [args.alignmentOf]  derived alignment
  * @param {(id: string) => string} [args.nameFor]
- * @param {CredibilityDelta[]|null} [args.provenTrue]  proven-true rises + resolved intel sales
- *   (SHARE-SELL self-policing). OMITTED (or non-array) ⇒ this mover DERIVES its own from
- *   persisted treaty state via `disclosureSigningCredits` (IN-0C). An explicit array ALWAYS
- *   WINS — including `[]`, which credits nothing. The default is `null` rather than `[]`
- *   precisely so "the caller passed none" stays distinguishable from "the caller passed an
- *   empty array"; with an `[]` default the two are the same value and the derivation would
- *   be unreachable.
- * @param {import('./npcCredibility.js').NpcCredibilityDelta[]} [args.npcProvenTrue]  D-2/D-3: per-NPC proven-true rises (a mouthpiece's sale/warning proved out)
- * @param {unknown[]} [args.commissionedPlants] paid plant envelopes consumed by the lie writer
- * @returns {{ worldState: unknown, changed: boolean, newsEntries: Array<Record<string, unknown>>, envoyPicturePatches: Array<Record<string, unknown>> }}
+ * @param {CredibilityDelta[]} [args.provenTrue]  proven-true rises + resolved intel sales (SHARE-SELL self-policing)
+ * @returns {{ worldState: unknown, changed: boolean, newsEntries: Array<Record<string, unknown>> }}
  */
-export function advanceInformationStatecraft({
-  snapshot,
-  worldState,
-  graph = null,
-  rng = null,
-  tick,
-  now = null,
-  strengthOf,
-  alignmentOf,
-  nameFor,
-  provenTrue = null,
-  npcProvenTrue = [],
-  commissionedPlants = [],
-}) {
+export function advanceInformationStatecraft({ snapshot, worldState, graph = null, rng = null, tick, now = null, strengthOf, alignmentOf, nameFor, provenTrue = [] }) {
   if (!infoStatecraftActive(worldState)) {
-    return { worldState, changed: false, newsEntries: [], envoyPicturePatches: [] };
+    return { worldState, changed: false, newsEntries: [] };
   }
   let state = /** @type {Record<string, unknown>} */ (worldState);
   let changed = false;
@@ -1323,23 +1114,7 @@ export function advanceInformationStatecraft({
   }
 
   // (3) THE LIE LIFECYCLE over the just-advanced beliefMaps.
-  const lie = processLies({
-    snapshot: snap,
-    worldState: state,
-    beliefMaps,
-    rng,
-    tick,
-    strengthOf: strengthFn,
-    alignmentOf: alignFn,
-    nameFor: nameFn,
-    // IN-0a — THE CONSUME READ. An explicit hand-off from a caller wins (the test seam,
-    // and any future kernel thread); otherwise this head reads the PRIOR pulse's applied
-    // commissions off the pulse record itself. Dark on either information flag ⇒ [] ⇒ the
-    // fold loop runs zero times and this mover is byte-identical.
-    commissionedPlants: commissionedPlants.length
-      ? commissionedPlants
-      : appliedPlantEnvelopesAt(state, tick),
-  });
+  const lie = processLies({ snapshot: snap, worldState: state, beliefMaps, rng, tick, strengthOf: strengthFn, alignmentOf: alignFn, nameFor: nameFn });
   if (lie.overrides.size) {
     const nextMaps = applyBeliefOverrides(beliefMaps, lie.overrides);
     state = /** @type {Record<string, unknown>} */ (setSpatialLedger(state, 'beliefMaps', nextMaps));
@@ -1355,73 +1130,6 @@ export function advanceInformationStatecraft({
     changed = true;
   }
 
-  // (3.5) THE INTEL LANE CONSUME (deep-couplings D-3): the generosity mover DEPOSITED pending
-  //       belief-transfers on a prior tick (deposit-and-consume, law 5/14 — a shared/sold read
-  //       takes a week to reach the receiver's court); INJECT each into the receiver's belief
-  //       of the subject at the seller's fidelity (the LIE-plant twin) and chronicle the
-  //       landing. Generosity OWNS + prunes intelTransfers — this mover only READS it (no
-  //       cross-writer). Dark (intelTradeEnabled absent) ⇒ no-op ⇒ byte-identical.
-  /** @type {Array<Record<string, unknown>>} */
-  const intelNews = [];
-  // D-3 SELF-POLICING (design §7): each couriered read is resolved TRUE/FALSE at arrival (the only
-  // window — generosity prunes the record the same tick) and fed to the credibility stock below.
-  /** @type {ResolvedIntelSale[]} */
-  const resolvedSales = [];
-  if (intelTradeActive(state)) {
-    const nowTick = Math.max(0, Math.floor(finiteNumber(tick, 0)));
-    const pending = asObject(getSpatialLedger(state, INTEL_TRANSFERS_LEDGER));
-    /** @type {Map<string, Map<string, BeliefRecord>>} */
-    const intelOverrides = new Map();
-    for (const key of Object.keys(pending).sort(compareCodepoint)) {
-      const rec = asObject(pending[key]);
-      // CONSUME-ONCE DOUBLE GUARD (courier-liveness): a couriered read lands EXACTLY one tick
-      // after generosity deposits it (depositTick === nowTick − 1); a same-tick deposit is not yet
-      // couriered and a STALE one (generosity went dark, so its next-tick prune never fired) is
-      // skipped, never re-injected. Exact-age, not the old lower-bound `>= nowTick`, closes both.
-      if (Math.floor(finiteNumber(rec.depositTick, nowTick)) !== nowTick - 1) continue;
-      const receiverId = String(rec.receiverId);
-      const subjectId = String(rec.subjectId);
-      const planted = /** @type {BeliefRecord|null} */ (intelInjectionBelief(rec, nowTick));
-      if (!planted) continue;
-      if (!intelOverrides.has(receiverId)) intelOverrides.set(receiverId, new Map());
-      /** @type {Map<string, BeliefRecord>} */ (intelOverrides.get(receiverId)).set(subjectId, planted);
-      // SELF-POLICING RESOLVE (design §7): was the transferred read TRUE? Compare the seller's
-      // sold band against the subject's ground-truth band NOW. A false product charges the seller
-      // (settlement + spokesperson, when stamped); a true one pays the slow trust rise.
-      const resolved = resolveIntelSale(rec, strengthBandOf(clamp01(strengthFn(subjectId))));
-      if (resolved) resolvedSales.push(resolved);
-      const gift = rec.mode === 'gift';
-      intelNews.push({
-        // THE FEED'S ADMISSION KEY (see the wizardNews.js authoring guard). All THREE
-        // parts are required: the intelTransfers ledger is keyed
-        // `intel.${sellerId}.${receiverId}.${subjectId}.${tick}` (generosityKernel.js:1044),
-        // so one seller can courier reads of several subjects to one receiver in a single
-        // tick. A (seller, receiver) id alone would collide and appendWizardNewsEntries
-        // would silently merge those beats through its by-id Map.
-        id: `wizard_news.${nowTick}.intel_transfer.${stablePart(rec.sellerId)}.${stablePart(receiverId)}.${stablePart(subjectId)}`,
-        kind: 'intel_transfer',
-        headline: gift
-          ? `Riders from ${nameFn(String(rec.sellerId))} bring ${nameFn(receiverId)} word of ${nameFn(subjectId)}`
-          : `${nameFn(receiverId)} buys ${nameFn(String(rec.sellerId))}'s read of ${nameFn(subjectId)}`,
-        summary: gift
-          ? `${nameFn(String(rec.sellerId))} shared what it knew of ${nameFn(subjectId)} — a gift of intelligence that binds like aid given in need.`
-          : `${nameFn(receiverId)} paid ${nameFn(String(rec.sellerId))} for its read of ${nameFn(subjectId)} — intelligence changing hands as a favor owed.`,
-        reasons: [`The report carries ${nameFn(String(rec.sellerId))}'s own certainty, no better — a courier's word is only as sure as its source.`],
-        settlementIds: [String(rec.sellerId), receiverId, subjectId],
-        significance: 'notable',
-        severity: 0.35, // information changing hands: the lightest material beat here
-        score: 60,
-        tick: nowTick,
-        tags: ['world_pulse', 'infowar', 'intel_trade', gift ? 'intel_gift' : 'intel_sale'],
-      });
-    }
-    if (intelOverrides.size) {
-      const curMaps = asObject(getSpatialLedger(state, 'beliefMaps'));
-      state = /** @type {Record<string, unknown>} */ (setSpatialLedger(state, 'beliefMaps', applyBeliefOverrides(curMaps, intelOverrides)));
-      changed = true;
-    }
-  }
-
   // (4) GRIEVANCE — SEE + LIE exposure grievances through the E1 incident machinery (feeds
   //     scoreGrievance/revanchism the same tick). No graph edge ⇒ a byte-safe skip.
   const edges = Array.isArray(graph?.edges) ? /** @type {Array<Record<string, unknown>>} */ (graph.edges) : [];
@@ -1432,42 +1140,17 @@ export function advanceInformationStatecraft({
   }
 
   // (5) CREDIBILITY: fold fractures (recorded-not-enforced seam) + exposed lies + exposed
-  //     spies + proven-true (incl. resolved intel sales, D-3 self-policing) into the stock.
+  //     spies + proven-true (incl. resolved intel sales) into the stock.
   const deltas = [
     ...fractureCredibilityDeltas(state, tick),
     ...sightRes.deltas,
     ...lie.deltas,
-    ...intelSaleCredibilityDeltas(resolvedSales),
-    ...(Array.isArray(provenTrue) ? provenTrue : disclosureSigningCredits(state, tick)),
+    ...(Array.isArray(provenTrue) ? provenTrue : []),
   ];
   const cred = advanceCredibility({ worldState: state, tick, deltas });
   if (cred.changed) { state = /** @type {Record<string, unknown>} */ (cred.worldState); changed = true; }
 
-  // (5b) NPC CREDIBILITY (D-2): fold the per-NPC deltas — exposed-lie mouthpieces (D-2), D-3's
-  //      resolved intel-sale self-policing spokespersons, and the D-4→D-2 contest-bluff charges
-  //      (consumed from the ladder's bluffExposures sidecar) — into the per-NPC stock; prune
-  //      vanished NPCs (the roster scan — DM remove_npc leaves no dangling key). Gated: dark ⇒ a
-  //      complete no-op (no key). The ladder consumes the lieExposure deposit NEXT tick.
-  if (npcCredibilityActive(state)) {
-    const npcDeltas = [
-      ...lie.npcDeltas,
-      ...intelSaleNpcCredibilityDeltas(resolvedSales),
-      ...bluffExposureNpcDeltas(state, tick),
-      ...(Array.isArray(npcProvenTrue) ? npcProvenTrue : []),
-    ];
-    if (npcDeltas.length || hasNpcCredibilityLedger(state)) {
-      const liveNpcIds = buildLiveNpcIds(snap);
-      const npcCred = advanceNpcCredibility({ worldState: state, tick, deltas: npcDeltas, liveNpcIds });
-      if (npcCred.changed) { state = /** @type {Record<string, unknown>} */ (npcCred.worldState); changed = true; }
-    }
-  }
-
-  return {
-    worldState: state,
-    changed,
-    newsEntries: [...sightRes.newsEntries, ...lie.newsEntries, ...intelNews],
-    envoyPicturePatches: lie.envoyPicturePatches,
-  };
+  return { worldState: state, changed, newsEntries: [...sightRes.newsEntries, ...lie.newsEntries] };
 }
 
 /* ───────────────────────────────────────────────────────────────────────────────
@@ -1499,3 +1182,4 @@ export function advanceInformationStatecraft({
  *   against a "constant whisper-war hum"; the SELL primitives are available to future wiring /
  *   the DM-verb path, mirroring how E1a registered `warning` LIVE without an autonomous spammer.
  * ─────────────────────────────────────────────────────────────────────────────── */
+

@@ -21,7 +21,6 @@ vi.mock('../../src/lib/saves.js', () => ({
 
 import { saves } from '../../src/lib/saves.js';
 import { persistSaveUpdate, initPersistFailureReporter } from '../../src/store/campaignSliceShared.js';
-import { activateOutboxOwner, resetOutbox } from '../../src/store/outbox.js';
 
 // A DEFINITION is either `function persistSaveUpdate` OR an assignment
 // `persistSaveUpdate = function|(...)=>` (const/let/var arrow). The re-export
@@ -48,12 +47,7 @@ describe('persistSaveUpdate is unified (single impl)', () => {
 });
 
 describe('persistSaveUpdate reports failures (no silent drift)', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-    initPersistFailureReporter(null);
-    resetOutbox();
-    activateOutboxOwner('test-owner');
-  });
+  beforeEach(() => { vi.clearAllMocks(); initPersistFailureReporter(null); });
 
   test('a rejected cloud save reports the failure and resolves false (awaitable)', async () => {
     const report = vi.fn();
@@ -64,19 +58,6 @@ describe('persistSaveUpdate reports failures (no silent drift)', () => {
 
     expect(result).toBe(false);
     expect(report).toHaveBeenCalledTimes(1);
-  });
-
-  test('one-argument failure registration replaces the prior legacy reporter', async () => {
-    const first = vi.fn();
-    const second = vi.fn();
-    initPersistFailureReporter(first);
-    initPersistFailureReporter(second);
-    saves.update.mockRejectedValueOnce(new Error('network down'));
-
-    await persistSaveUpdate('save-legacy-reporter', { settlement: {} });
-
-    expect(first).not.toHaveBeenCalled();
-    expect(second).toHaveBeenCalledTimes(1);
   });
 
   test('a successful cloud save resolves true and never reports', async () => {

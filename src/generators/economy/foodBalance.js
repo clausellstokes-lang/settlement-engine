@@ -2,25 +2,11 @@
  * economy/foodBalance.js — food-balance analysis and food-supply / trade-disruption plot hooks for economic viability.
  */
 
+import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
 import { SEVERITY, tierAtLeast } from '../../data/constants.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
-import {
-  getTradeRouteFeatures,
-  hasTeleportationInfra,
-} from '../helpers.js';
+import { getTradeRouteFeatures } from '../helpers.js';
 import { formatCount } from '../../domain/formatNumber.js';
-import {
-  isMaterializedCustomContent,
-  nativeSemanticName,
-  nativeSemanticNames,
-} from '../../domain/content/customContentSemanticAuthority.js';
-import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
-import { resolveTerrain } from '../../domain/resolveTerrain.js';
-import {
-  hasTradeRouteConnection,
-  isTradeRouteDisconnected,
-  SEASONAL_ROUTE_FOOD_IMPORT_RATE,
-} from '../../domain/tradeRouteSemantics.js';
 
 
 // ECONOMIC_CONSTANTS
@@ -45,9 +31,8 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   const dailyNeed = population * ECONOMIC_CONSTANTS.PER_CAPITA_NEED;
   const agriCap = terrain ? terrain.agricultureCapacity : 1;
   const stresses = config?.stressTypes || [];
-  const resources = availableNativeResourceKeys(config);
-  const instNames = nativeSemanticNames(institutions)
-    .map(name => name.toLowerCase());
+  const resources = config?.nearbyResources || [];
+  const instNames = (institutions || []).map((i) => (i.name || '').toLowerCase());
   const hasResource = (keys) => resources.some((r) => keys.some((k) => r.includes(k)));
   const hasInstitution = (keys) => instNames.some((n) => keys.some((k) => n.includes(k)));
 
@@ -103,6 +88,17 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       agriMod = Math.min(agriMod + 0.3, 0.8); // higher cap for magic
     }
   }
+  // ───────────────────────────────────────────────────────────────────────────
+  // §14 — custom food-impacting content present here shifts the food balance the
+  // way a real farm/granary would: each custom PRODUCER lifts agricultural
+  // output; each custom CONSUMER raises demand. Covers all four types — custom
+  // institutions + resources by their own presence, services by their provider
+  // institution, trade goods by their required institution. A no-op leaving
+  // agriMod/need untouched when the user has no present custom food items, so
+  // existing generations stay byte-identical.
+  const { producers: customFoodProducers, consumers: customFoodConsumers } =
+    _customDeps.foodImpactTally((institutions || []).map((i) => i.name), config?.nearbyResourcesCustom);
+  if (customFoodProducers > 0) agriMod += Math.min(customFoodProducers * 0.15, 0.6);
   const effectiveAgri = Math.min(agriCap + agriMod, 2);
 
   // Stress modifiers
@@ -127,22 +123,6 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     consumptionMult *= 1.2;
     stressNotes.push('Occupation: occupying forces consume approximately 20% of food supply beyond normal needs.');
   }
-  // [generators-domain-1] second-wave stress types with a food-relevant viabilityNote.
-  // (Defense stays coupled via the priorityHelpers effective-score multipliers — no inline
-  // defense penalty, which would double-count.) Golden-shifting (G2). Kept byte-identical to
-  // foodGenerator.js's production block.
-  if (stresses.includes('wartime')) {
-    productionMult *= 0.85;
-    stressNotes.push('Wartime: conscription has thinned the agricultural workforce, cutting local output.');
-  }
-  if (stresses.includes('slave_revolt')) {
-    productionMult *= 0.8;
-    stressNotes.push('Slave revolt: labour-dependent production is disrupted and outlying fields lie idle.');
-  }
-  if (stresses.includes('mass_migration')) {
-    consumptionMult *= 1.15;
-    stressNotes.push('Mass migration: an influx of newcomers stresses the food balance beyond normal needs.');
-  }
 
   const dailyProduction =
     (Math.floor(population * ECONOMIC_CONSTANTS.AGRICULTURAL_WORKFORCE) *
@@ -150,9 +130,9 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       effectiveAgri *
       productionMult) /
     ECONOMIC_CONSTANTS.STORAGE_BUFFER;
-  const adjustedNeed = dailyNeed * consumptionMult;
+  const adjustedNeed = dailyNeed * consumptionMult
+    + (customFoodConsumers > 0 ? dailyNeed * Math.min(customFoodConsumers * 0.1, 0.5) : 0);
   const effectiveRoute = routeOverride || config?.tradeRouteAccess || 'isolated';
-  const disconnectedRoute = isTradeRouteDisconnected(effectiveRoute);
   const surplus = dailyProduction - adjustedNeed;
   const rawDeficit = Math.abs(Math.min(surplus, 0));
   const _rawDeficitPct = adjustedNeed > 0 ? (rawDeficit / adjustedNeed) * 100 : 0;
@@ -190,7 +170,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       : _tierForTrade === 'village'
         ? FOOD_IMPORT_RATES.minorRoutesVillage
         : 0;
-  const importCoverageRate = !disconnectedRoute
+  const importCoverageRate = effectiveRoute !== 'isolated'
     ? (effectiveRoute === 'port'
       ? 0.7
       : effectiveRoute === 'crossroads'
@@ -199,12 +179,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
           ? 0.5
           : effectiveRoute === 'road'
             ? 0.35
-            // A pass is a seasonal channel: heavy caravan traffic while it is
-            // open, nothing at all once winter shuts it. The annualized rung
-            // sits below road and above the isolated trickle.
-            : effectiveRoute === 'mountain_pass'
-              ? SEASONAL_ROUTE_FOOD_IMPORT_RATE
-          : 0)
+            : 0)
     : Math.max(_magicTradeRate * _maintainerMult, _minorRouteRate);
   const canImportFood = importCoverageRate > 0 && rawDeficit > 0;
   const importCoverage = canImportFood ? Math.round(rawDeficit * importCoverageRate) : 0;
@@ -212,13 +187,10 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   // deficit); the actual display is gated on real import coverage at return time
   // (importCoverageFinal > 0), which is byte-identical to the old `!canImportFood`
   // gate on the fallback path and correct on the canonical path.
-  // The label is read by a player (dossierViewModel prints it verbatim), so the
-  // config token is de-slugged: 'mountain_pass' must arrive as "mountain pass
-  // trade". Byte-identical for every single-word route.
   const importChannelLabel = importCoverageRate <= 0
     ? null
-    : !disconnectedRoute
-      ? `${String(effectiveRoute).replace(/_/g, ' ')} trade`
+    : effectiveRoute !== 'isolated'
+      ? `${effectiveRoute} trade`
       : _magicTradeRate * _maintainerMult >= _minorRouteRate
         ? (_hasTeleportCircle ? 'teleportation circle' : _siegeIsolation ? 'airship runs (impaired by siege)' : 'airship traffic')
         : 'minor routes and sanctioned caravans';
@@ -312,24 +284,9 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
 
   if (surplusFinal < 0) {
     if (deficitPercent > 50) {
-      if (disconnectedRoute) {
-        // An uncovered deficit is a survival fact, not merely an economic
-        // mood. Isolated settlements have no routine import channel that can
-        // make this gap disappear off-screen, so the viability verdict must
-        // fail rather than claim self-sufficiency while the food ledger says
-        // otherwise.
-        issues.push({
-          severity: SEVERITY.CRITICAL,
-          category: 'Food Production',
-          title: 'Uncovered Local Food Deficit',
-          description: `Settlement cannot cover ~${Math.round(deficit)} lbs of food per day (${Math.round(deficitPercent)}% of needs) and has no dependable trade route.`,
-          impact: 'The current population cannot survive this provisioning gap without a new support path.',
-          suggestedFixes: [
-            'Strengthen the local foodshed or reduce the supported population',
-            'Establish seasonal access, patronage, or a dependable trade route',
-            'Add reserves only as a temporary buffer, not a permanent food source',
-          ],
-        });
+      if (effectiveRoute === 'isolated') {
+        // Food security deficit is already surfaced via prosperity level + situational description
+        // in the Economics tab. No need to duplicate it here as a viability concern.
       } else if (effectiveRoute === 'road') {
         issues.push({
           severity: SEVERITY.DEPENDENCY,
@@ -358,36 +315,22 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         });
         plotHooks.push({
           category: 'Trade Disruption',
-          hook: `The ${effectiveRoute} trade route is cut off (bandits/war/natural disaster). Settlement has only ${Math.round((dailyProductionFinal / dailyNeedFinal) * 30)} days of food remaining. Famine threatens within weeks.`,
+          hook: ` PLOT HOOK: The ${effectiveRoute} trade route is cut off (bandits/war/natural disaster). Settlement has only ${Math.round((dailyProductionFinal / dailyNeedFinal) * 30)} days of food remaining. Famine threatens within weeks.`,
           severity: 'high',
         });
       }
     } else if (deficitPercent > 20) {
-      if (disconnectedRoute) {
-        issues.push({
-          severity: SEVERITY.CRITICAL,
-          category: 'Food Production',
-          title: 'Uncovered Local Food Deficit',
-          description: `Settlement cannot cover ~${Math.round(deficit)} lbs of food per day (${Math.round(deficitPercent)}% of needs) and has no dependable trade route.`,
-          impact: 'The current population is not viable without another provisioning path.',
-          suggestedFixes: [
-            'Strengthen the local foodshed',
-            'Establish seasonal access, patronage, or a dependable trade route',
-          ],
-        });
-      } else {
-        warnings.push({
-          severity: SEVERITY.DEPENDENCY,
-          category: 'Food Production',
-          title: 'Food Import Requirement',
-          description: `Settlement imports ~${Math.round(deficit)} lbs of grain/day (${Math.round(deficitPercent)}% of needs) via ${effectiveRoute}.`,
-          impact: 'Creates trade dependency but manageable.',
-          suggestedFixes: ['Increase local food production', 'Maintain strategic grain reserves'],
-        });
-      }
+      warnings.push({
+        severity: SEVERITY.DEPENDENCY,
+        category: 'Food Production',
+        title: 'Food Import Requirement',
+        description: `Settlement imports ~${Math.round(deficit)} lbs of grain/day (${Math.round(deficitPercent)}% of needs) via ${effectiveRoute}.`,
+        impact: 'Creates trade dependency but manageable.',
+        suggestedFixes: ['Increase local food production', 'Maintain strategic grain reserves'],
+      });
       plotHooks.push({
         category: 'Trade Politics',
-        hook: 'Price of grain spikes due to poor harvest elsewhere. Can settlement afford imports? Do merchants exploit the situation?',
+        hook: ' PLOT HOOK: Price of grain spikes due to poor harvest elsewhere. Can settlement afford imports? Do merchants exploit the situation?',
         severity: 'medium',
       });
     }
@@ -499,18 +442,10 @@ export function hasImportProcessor(institutions, resource, config) {
   const bigTier = tierAtLeast(config?.tier, 'city');
   const r = resource.toLowerCase();
   return institutions.some((i) => {
+    const n = (i.name || '').toLowerCase();
     const t = i.tags || [];
-    if (isMaterializedCustomContent(i)) return false;
-    const n = nativeSemanticName(i).toLowerCase();
     return (
-      (r.includes('grain')  && (
-        (
-          n.includes('mill')
-          && !n.includes('sawmill')
-          && !n.includes('access to external mill')
-        )
-        || (bigTier && n.includes('granar'))
-      )) ||
+      (r.includes('grain')  && ((n.includes('mill') && !n.includes('sawmill')) || (bigTier && n.includes('granar')))) ||
       (r.includes('timber') && (n.includes('sawmill') || (bigTier && n.includes('carpenter')))) ||
       (r.includes('metal')  && (n.includes('smith') || n.includes('smelter') || (bigTier && (n.includes('metalwork') || t.includes('metalwork')))))
     );
@@ -527,17 +462,11 @@ export function hasImportProcessor(institutions, resource, config) {
  * (tier-inverted). City+ only; mutates `warnings` in place.
  *
  * @param {Array<Object>} warnings  Warning list mutated in place.
- * @param {{ tier?: string, tradeRouteAccess?: string }} config
+ * @param {{ tier?: string }} config
  * @param {{ deficitPercent?: number }} [foodBalance]
- * @param {boolean} [hasExternalSupply]
  */
-export function appendProvisioningAtScaleDeps(
-  warnings,
-  config,
-  foodBalance,
-  hasExternalSupply = config?.tradeRouteAccess !== 'none',
-) {
-  if (!tierAtLeast(config?.tier, 'city') || !hasExternalSupply) return;
+export function appendProvisioningAtScaleDeps(warnings, config, foodBalance) {
+  if (!tierAtLeast(config?.tier, 'city')) return;
 
   // Skip the staple-food baseline when the food model already shows a deficit
   // (it emits a 'Food Production' DEPENDENCY that owns the grain import), or when
@@ -592,34 +521,34 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
   const hasDeficit = foodBalance.deficit > 0;
 
   if (hasDeficit) {
-    if (route === 'isolated' || route === 'none' || route === 'road') {
+    if (route === 'isolated' || route === 'road') {
       hooks.push({
         category: 'Survival Crisis',
-        hook: 'Settlement is starving. Desperate villagers might turn to banditry, or a merchant offers to supply food... at a terrible price (debt servitude? dark pact?).',
+        hook: ' PLOT HOOK: Settlement is starving. Desperate villagers might turn to banditry, or a merchant offers to supply food... at a terrible price (debt servitude? dark pact?).',
         severity: 'critical',
       });
     } else if (route !== 'isolated') {
       hooks.push({
         category: 'Trade Monopoly',
-        hook: 'A single merchant guild controls grain imports. They raise prices 300%. Do locals rebel? Seek alternative suppliers? What price are they willing to pay?',
+        hook: ' PLOT HOOK: A single merchant guild controls grain imports. They raise prices 300%. Do locals rebel? Seek alternative suppliers? What price are they willing to pay?',
         severity: 'high',
       });
       if (route === 'river')
         hooks.push({
           category: 'River Control',
-          hook: 'Upstream settlement builds dam or diverts river. Threatens water access AND grain shipments. Diplomacy or war?',
+          hook: ' PLOT HOOK: Upstream settlement builds dam or diverts river. Threatens water access AND grain shipments. Diplomacy or war?',
           severity: 'high',
         });
-      if (route === 'port' && resolveTerrain(config) === 'coastal')
+      if (route === 'port')
         hooks.push({
           category: 'Naval Blockade',
-          hook: `Enemy fleet or pirates blockade the port. Settlement has ${Math.round((foodBalance.dailyProduction / foodBalance.dailyNeed) * 30)} days of reserves. Hire ships to break blockade? Negotiate? Starve?`,
+          hook: ` PLOT HOOK: Enemy fleet or pirates blockade the port. Settlement has ${Math.round((foodBalance.dailyProduction / foodBalance.dailyNeed) * 30)} days of reserves. Hire ships to break blockade? Negotiate? Starve?`,
           severity: 'high',
         });
       if (route === 'road' && hasDeficit)
         hooks.push({
           category: 'Bandit Raids',
-          hook: 'Bandits target food caravans. Settlement offers bounty for clearing the trade road. But are the "bandits" actually desperate refugees from elsewhere?',
+          hook: ' PLOT HOOK: Bandits target food caravans. Settlement offers bounty for clearing the trade road. But are the "bandits" actually desperate refugees from elsewhere?',
           severity: 'medium',
         });
     }
@@ -630,17 +559,9 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
   // carries mustImport. Needles must be lowercase to match the lowercased name, and
   // the grain branch excludes sawmills ('sawmill'.includes('mill') is true).
   const mustImport = terrain?.mustImport || config?.mustImport;
-  const hasExternalSupply =
-    hasTradeRouteConnection(route)
-    || (
-      route === 'isolated'
-      && FOOD_IMPORT_RATES.minorRoutes > 0
-    )
-    || hasTeleportationInfra(institutions, config);
   if (mustImport) {
     mustImport.forEach((resource) => {
       if (hasImportProcessor(institutions, resource, config)) {
-        if (!hasExternalSupply) return;
         warnings.push({
           severity: SEVERITY.DEPENDENCY,
           category: 'Resource Import',
@@ -652,13 +573,13 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
         if (resource.toLowerCase().includes('timber'))
           hooks.push({
             category: 'Resource Conflict',
-            hook: "Timber supplier forest is threatened by blight/fire/monsters. Settlement's construction and shipbuilding industries face collapse. Secure new supplier or solve crisis?",
+            hook: " PLOT HOOK: Timber supplier forest is threatened by blight/fire/monsters. Settlement's construction and shipbuilding industries face collapse. Secure new supplier or solve crisis?",
             severity: 'medium',
           });
         if (resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron'))
           hooks.push({
             category: 'Strategic Resource',
-            hook: 'War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.',
+            hook: ' PLOT HOOK: War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.',
             severity: 'medium',
           });
       }
@@ -667,12 +588,7 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
 
   // Tier-scale baseline provisioning dependency for urban centres (city+).
   // Mutates warnings in place.
-  appendProvisioningAtScaleDeps(
-    warnings,
-    config,
-    foodBalance,
-    hasExternalSupply,
-  );
+  appendProvisioningAtScaleDeps(warnings, config, foodBalance);
 
   return { issues, warnings, plotHooks: hooks };
 };

@@ -44,11 +44,6 @@ import { clamp } from '../../kernel/math.js';
 import { foodLedger } from '../foodLedger.js';
 import { effectiveStressorSeverity } from './stressorSeverity.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
-import { settlementHasUnderways, UNDERWAYS_TUNING } from './clandestineFacet.js';
-import {
-  nativeSemanticName,
-  nativeSemanticNames,
-} from '../content/customContentSemanticAuthority.js';
 
 const round1 = (/** @type {number} */ v) => Math.round(v * 10) / 10;
 // Storage moves in small steps (a one-month tithe is 0.03 months of food) —
@@ -130,7 +125,7 @@ const transportIsDown = (/** @type {any} */ inst) =>
 
 /** @param {import('../settlement.schema.js').SimInstitution} inst */
 function transportChannelOf(inst) {
-  const n = nativeSemanticName(inst).toLowerCase();
+  const n = String(inst?.name || '').toLowerCase();
   if (n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional')) return 'teleport';
   if (n.includes('airship')) return 'airship';
   return null;
@@ -183,8 +178,7 @@ function resilienceStorageComponent(months) {
  * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function storageCapacityMonths(settlement) {
-  const names = nativeSemanticNames(settlement?.institutions)
-    .map((/** @type {string} */ name) => name.toLowerCase());
+  const names = (settlement?.institutions || []).map((/** @type {any} */ i) => String(i?.name || '').toLowerCase());
   const has = (/** @type {string[]} */ ...fragments) => names.some((/** @type {string} */ n) => fragments.some(f => n.includes(f)));
   const tier = String(settlement?.tier || 'village');
   const base = has('state granary') ? (tier === 'metropolis' ? 12 : 8)
@@ -311,14 +305,9 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   // recorded in the stockpile bookkeeping so the dossier can say WHY the
   // blockade did or didn't bite (deriveBlockadeRelief reads it).
   const blockadeBypass = blockaded ? resolveBlockadeBypassChannel(settlement) : null;
-  const _bypassShare = blockadeBypass === 'teleport' ? FOOD_IMPORT_RATES.teleport
+  const _channelShare = blockadeBypass === 'teleport' ? FOOD_IMPORT_RATES.teleport
     : blockadeBypass === 'airship' ? FOOD_IMPORT_RATES.airshipBesieged
     : 0;
-  // D6 THE UNDERWAYS (coupling 2 — siege endurance): a tunneled town keeps a bounded
-  // supply trickle under siege/occupation (the underways don't care which side the wall
-  // is on). +0 without the clandestine facet ⇒ _channelShare is byte-identical.
-  const _underwaysShare = blockaded && settlementHasUnderways(settlement) ? UNDERWAYS_TUNING.FOOD_TRICKLE : 0;
-  const _channelShare = _bypassShare + _underwaysShare;
   const blockadePct = blockaded
     ? Math.max(0, clamp(ledger.importDependency, 0, 1) - _channelShare) * 100
     : 0;

@@ -65,7 +65,6 @@
  */
 
 import { hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
-import { isLiveInstitution } from '../institutions/institutionRoster.js';
 
 // ── Tuning (documented here; retuned in the M11a + checkpoint soaks) ──────────
 export const EPIDEMIC_TUNING = Object.freeze({
@@ -185,7 +184,6 @@ export function classifyCareRoster(institutions) {
   const roster = { church: 0, healingHouse: 0, druid: 0, alchemist: 0 };
   const list = Array.isArray(institutions) ? institutions : [];
   for (const inst of list) {
-    if (!isLiveInstitution(inst)) continue; // a calamity-flattened healing house is not plague care (ruin-filter class)
     const name = String((inst && typeof inst === 'object' ? inst.name : '') || '');
     if (!name) continue;
     if (CARE_PATTERNS.healingHouse.test(name)) roster.healingHouse += 1;

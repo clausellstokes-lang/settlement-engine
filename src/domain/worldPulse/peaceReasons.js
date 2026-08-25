@@ -29,10 +29,9 @@
 import {
   peaceCausalActive, reasonPairKey, foldPairReasons,
   aggregateReasons01, topReasons, REASON_TUNING,
-  WAR_REASON_TYPES, PEACE_REASON_TYPES, REASON_MIRRORS,
+  WAR_REASON_TYPES, PEACE_REASON_TYPES,
 } from './warReasons.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
-import { peaceReceipt } from './eventProse.js';
 import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
 import { readBeliefStrength } from './beliefMap.js';
 import { findCrossPressuredMediator, fracturesAbandoning, treatyDocument } from './peaceTerms.js';
@@ -44,25 +43,6 @@ import { blockadeStrangulationOf } from '../spatial/navalLayer.js';
 // W-CONVERGENCE — the foreign_clash intensity for the pair (the spheres_understanding
 // fuel). 0 when the intervention layer is dark ⇒ byte-identical. One-directional.
 import { foreignClashIntensityOf } from './convergence.js';
-// D4 (DESIGN_SIM_DEPTH_R2): balance_restored — the peace mirror of fear_of_dominance. Reads
-// the SAME belief-side hegemony sphere context; 0 when no sphere ⇒ byte-identical.
-import { makeHegemonyFear } from './hegemonyFear.js';
-// hopelessness — the §14.3-named mirror of opportunism. THE SAME believed vulnerability
-// gradient the war side reads, taken with the opposite sign, off the SAME leaf: one
-// measurement, so the casus and its mirror cannot drift. 0 when the gradient favours this
-// party (that is the war side's appetite) ⇒ byte-identical.
-import { makeOpportunismRead } from './opportunism.js';
-// common_rite — the mirror of sacred_claim, off the SAME closed faith×alignment quadrant.
-// 0 when the faith flag is dark or either town names no patron ⇒ byte-identical.
-import { makeSacredClaimRead } from './sacredClaim.js';
-import { makeLineageClaimRead } from './lineageClaim.js';
-import { joinAnchorOf, obligationDischargedReason } from './warCoalitionLedger.js';
-import { lineagePeaceTransitionNewsEntries } from './lineageNews.js';
-// D7 (DESIGN_SIM_DEPTH_R2 §D7): the two reframe peace mirrors — debt_forgiven (aid re-read as a
-// gift again) + bonds_of_commerce (the trade tie re-read as a binding mutual commerce). Pure
-// reads over THIS tick's reframe ledger (written by advanceWarReasons, which runs first). 0 when
-// the reframe layer is dark ⇒ byte-identical. reframeKernel is a leaf (never imports back).
-import { debtForgiven01, bondsOfCommerce01 } from './reframeKernel.js';
 import { seasonForTick } from './worldState.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { clamp01 } from '../../kernel/math.js';
@@ -92,57 +72,10 @@ export const PEACE_REASON_TUNING = Object.freeze({
  * @param {{ scar01: number }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreExhaustion({ scar01 }, /** @type {string | undefined} */ seed) {
+export function scoreExhaustion({ scar01 }) {
   const score = clamp01(Number(scar01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: peaceReceipt('exhaustion', seed) };
-}
-
-/** WR-6 closed witness/scorer for the ended borrowed cause. */
-export function scoreObligationDischarged({ discharged = false } = {}) {
-  return discharged
-    ? { score: 1, receipt: 'The compact or original quarrel no longer supplies a borrowed cause for war.' }
-    : { score: 0, receipt: '' };
-}
-
-/**
- * THE ATROCITY ATONED (WR-8, amendment R2; CR-WR8-C) — the sixteenth mirror, and
- * the half that makes R2's closed loop a CAUSE rather than a silence.
- *
- * WHY IT KEEPS THE ATROCITY AS ITS SUBJECT. The pair is `atrocity_answer` ↔
- * `atrocity_atoned`, not "outrage" ↔ "satisfaction": what the record must be able
- * to say is that THE ATROCITY was answered, because that is the fact the world
- * reasons from afterwards. A court that merely stopped being angry has not atoned
- * for anything, and the Herald would have no sentence to write.
- *
- * THE TWO ROADS IN, and R2 names both. `answered` is the JUST RAZING — the
- * license was collected and the atrocity's answer executed, which is exactly why
- * R2 forbids that razing from minting a fresh atrocity casus against the avenger
- * (the closed loop: vengeance is a settlement, not a chain reaction). `razerGone`
- * is the other road the amendment allows: the license is extinguished if the
- * razer is destroyed by ANY other means, and a cause that cannot be prosecuted
- * against anyone is discharged rather than left standing forever.
- *
- * FED LATER, like its war half: R's razing writer and R2's license ledger are the
- * producers. Absent ⇒ 0 ⇒ no record ⇒ byte-identical.
- *
- * @param {{ answered?: unknown, razerGone?: unknown }} args
- * @returns {{ score: number, receipt: string }}
- */
-export function scoreAtrocityAtoned({ answered = false, razerGone = false } = {}) {
-  if (answered === true) {
-    return {
-      score: 1,
-      receipt: 'The burning has been answered in kind, and the cause it raised is discharged.',
-    };
-  }
-  if (razerGone === true) {
-    return {
-      score: 1,
-      receipt: 'The court that burned the city no longer stands; there is no one left to answer for it.',
-    };
-  }
-  return { score: 0, receipt: '' };
+  return { score, receipt: `The war has worn the town to the bone — exhaustion ${score.toFixed(2)}; the seat needs peace to survive.` };
 }
 
 /**
@@ -154,7 +87,7 @@ export function scoreAtrocityAtoned({ answered = false, razerGone = false } = {}
  * @param {{ marginA: number, marginB: number }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreBeliefConvergence({ marginA, marginB }, /** @type {string | undefined} */ seed) {
+export function scoreBeliefConvergence({ marginA, marginB }) {
   const divergence = Math.abs((Number(marginA) || 0) + (Number(marginB) || 0));
   const score = clamp01(1 - divergence / PEACE_REASON_TUNING.BLAINEY_DIVERGENCE_SCALE);
   if (score <= 0) return { score: 0, receipt: '' };
@@ -162,8 +95,8 @@ export function scoreBeliefConvergence({ marginA, marginB }, /** @type {string |
   return {
     score,
     receipt: converged
-      ? peaceReceipt('belief_convergence.converged', seed)
-      : peaceReceipt('belief_convergence.drifting', seed),
+      ? 'The fighting has taught both courts the same truth — no offer insults any longer.'
+      : `The courts' reckonings drift closer (divergence ${divergence.toFixed(2)}) — the war is running out of illusions.`,
   };
 }
 
@@ -187,7 +120,7 @@ export function scoreBeliefConvergence({ marginA, marginB }, /** @type {string |
  * @param {{ trade01: number, economy01: number, strangulation01?: number, blockade01?: number }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreEconomicStrangulation({ trade01, economy01, strangulation01 = 0, blockade01 = 0 }, /** @type {string | undefined} */ seed) {
+export function scoreEconomicStrangulation({ trade01, economy01, strangulation01 = 0, blockade01 = 0 }) {
   const base = clamp01(
     PEACE_REASON_TUNING.STRANGLE_TRADE_W * clamp01(Number(trade01) || 0)
     + PEACE_REASON_TUNING.STRANGLE_ECONOMY_W * clamp01(Number(economy01) || 0),
@@ -196,9 +129,13 @@ export function scoreEconomicStrangulation({ trade01, economy01, strangulation01
   const blockade = clamp01(Number(blockade01) || 0);
   const felt = clamp01(Math.max(base, strangle, blockade));
   if (felt <= 0) return { score: 0, receipt: '' };
-  let branch = 'base';
-  if (felt > base) branch = blockade >= strangle ? 'blockade' : 'supplyweb';
-  return { score: felt, receipt: peaceReceipt(`economic_strangulation.${branch}`, seed) };
+  let receipt = 'The routes are severed and the treasury bleeds — the war costs more than its aims.';
+  if (felt > base) {
+    receipt = blockade >= strangle
+      ? 'The harbour is blockaded — no keel comes or goes and the wharves stand idle; a strangled port cannot bear the war.'
+      : 'A neighbour strangles the supply web by design — the granary villages burn and the routes are cut; the war cannot be borne.';
+  }
+  return { score: felt, receipt };
 }
 
 /**
@@ -208,14 +145,14 @@ export function scoreEconomicStrangulation({ trade01, economy01, strangulation01
  * @param {{ peakAllies: number, nowAllies: number }} args
  * @returns {{ score: number, receipt: string, evidence?: Record<string, number> }}
  */
-export function scoreCoalitionFracture({ peakAllies, nowAllies }, /** @type {string | undefined} */ seed) {
+export function scoreCoalitionFracture({ peakAllies, nowAllies }) {
   const peak = Math.max(0, Math.floor(Number(peakAllies) || 0));
   const now = Math.max(0, Math.floor(Number(nowAllies) || 0));
   if (peak <= 0 || now >= peak) return { score: 0, receipt: '' };
   const score = clamp01((peak - now) / peak);
   return {
     score,
-    receipt: peaceReceipt('coalition_fracture', seed, { peel: peak - now, peak }),
+    receipt: `The coalition thins — ${peak - now} of ${peak} co-belligerents have left the field.`,
     evidence: { peakAllies: peak, nowAllies: now },
   };
 }
@@ -228,12 +165,11 @@ export function scoreCoalitionFracture({ peakAllies, nowAllies }, /** @type {str
  * @param {{ impulse: number, mediatorName: string }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreMediation({ impulse, mediatorName }, /** @type {string | undefined} */ seed) {
+export function scoreMediation({ impulse, mediatorName }) {
   const on = clamp01(Number(impulse) || 0);
   if (on <= 0) return { score: 0, receipt: '' };
   const score = clamp01(PEACE_REASON_TUNING.MEDIATION_PRESENT * on);
-  // Every mediation variant LEADS with the mediator's name (the named-mediator receipt law).
-  return { score, receipt: peaceReceipt('mediation', seed, { mediatorName: mediatorName || 'A neighbour' }) };
+  return { score, receipt: `${mediatorName || 'A neighbour'} stands torn between the belligerents — its envoys carry terms both courts will hear.` };
 }
 
 /**
@@ -242,9 +178,9 @@ export function scoreMediation({ impulse, mediatorName }, /** @type {string | un
  * @param {{ season: string }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreHarvestPressure({ season }, /** @type {string | undefined} */ seed) {
+export function scoreHarvestPressure({ season }) {
   if (String(season) !== 'autumn') return { score: 0, receipt: '' };
-  return { score: PEACE_REASON_TUNING.HARVEST_PRESENT, receipt: peaceReceipt('harvest_pressure', seed) };
+  return { score: PEACE_REASON_TUNING.HARVEST_PRESENT, receipt: 'The harvest stands in the fields and the levies mutter of home — wars pause for bread.' };
 }
 
 /**
@@ -254,17 +190,17 @@ export function scoreHarvestPressure({ season }, /** @type {string | undefined} 
  * @param {{ commonThird: string | null, bothBesetByThirds: boolean }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreRealignment({ commonThird, bothBesetByThirds }, /** @type {string | undefined} */ seed) {
+export function scoreRealignment({ commonThird, bothBesetByThirds }) {
   if (commonThird) {
     return {
       score: PEACE_REASON_TUNING.REALIGNMENT_COMMON_THIRD,
-      receipt: peaceReceipt('realignment.common', seed),
+      receipt: 'A third banner is at both gates — signed in haste, for the horde was at the passes.',
     };
   }
   if (bothBesetByThirds) {
     return {
       score: PEACE_REASON_TUNING.REALIGNMENT_DISTINCT_THIRDS,
-      receipt: peaceReceipt('realignment.distinct', seed),
+      receipt: 'Each court is beset by another foe — this front is a luxury neither can keep.',
     };
   }
   return { score: 0, receipt: '' };
@@ -277,34 +213,10 @@ export function scoreRealignment({ commonThird, bothBesetByThirds }, /** @type {
  * understanding rises with the clash intensity. 0 when the intervention layer is dark ⇒
  * byte-identical. @param {{ clash01: number }} args @returns {{ score: number, receipt: string }}
  */
-export function scoreSpheresUnderstanding({ clash01 }, /** @type {string | undefined} */ seed) {
+export function scoreSpheresUnderstanding({ clash01 }) {
   const score = clamp01(Number(clash01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: peaceReceipt('spheres_understanding', seed) };
-}
-
-/**
- * DEBT FORGIVEN (§D7 — the DISTINCT mirror of ingratitude_debt). The both-signs reconciliation
- * lane has re-read the old aid as a gift again (gift_forgiven / unintended_kindness), and the
- * grievance loses its cause. REFRAME-FED: 0 when the reframe layer is dark ⇒ byte-identical.
- * @param {{ forgiven01?: number }} args @returns {{ score: number, receipt: string }}
- */
-export function scoreDebtForgiven({ forgiven01 }, /** @type {string | undefined} */ seed) {
-  const score = clamp01(Number(forgiven01) || 0);
-  if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: peaceReceipt('debt_forgiven', seed) };
-}
-
-/**
- * BONDS OF COMMERCE (§D7 — the DISTINCT mirror of dependency_by_design). The same trade tie,
- * re-read as a mutual bond that makes war too costly for either court (commercial
- * interdependence). REFRAME-FED: 0 when the reframe layer is dark ⇒ byte-identical.
- * @param {{ bonds01?: number }} args @returns {{ score: number, receipt: string }}
- */
-export function scoreBondsOfCommerce({ bonds01 }, /** @type {string | undefined} */ seed) {
-  const score = clamp01(Number(bonds01) || 0);
-  if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: peaceReceipt('bonds_of_commerce', seed) };
+  return { score, receipt: 'Better to draw a line between our claims than to make this proxy our own war — a sphere apiece, and the field left to them.' };
 }
 
 // ── The factor (the consumption read — bounded, centered on 1.0) ────────────
@@ -314,14 +226,14 @@ export function scoreBondsOfCommerce({ bonds01 }, /** @type {string | undefined}
  * absent; up to 1 + PEACE_FACTOR_W when the case saturates. Consumed at the
  * settlementStrategy sue_for_peace weight seam.
  * @param {Record<string, unknown> | null | undefined} worldState
- * @param {unknown} partyId @param {unknown} foeId @param {readonly string[] | null | undefined} dissolvedCauseTypes
+ * @param {unknown} partyId @param {unknown} foeId
  * @returns {number}
  */
-export function peaceReasonFactor(worldState, partyId, foeId, dissolvedCauseTypes = null) {
+export function peaceReasonFactor(worldState, partyId, foeId) {
   if (!peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */(worldState))) return 1;
   const ledger = /** @type {import('./warReasons.js').ReasonLedger | null} */ (getSpatialLedger(worldState, 'peaceReasons'));
   if (!ledger) return 1;
-  const entry = withoutDissolvedCauseMirrors(ledger[reasonPairKey(partyId, foeId)], dissolvedCauseTypes);
+  const entry = ledger[reasonPairKey(partyId, foeId)];
   const aggregate = aggregateReasons01(entry);
   if (aggregate <= 0) return 1;
   return 1 + REASON_TUNING.PEACE_FACTOR_W * aggregate;
@@ -330,29 +242,13 @@ export function peaceReasonFactor(worldState, partyId, foeId, dissolvedCauseType
 /**
  * The pair's peace-reason entry (for receipts). Null when dark/absent.
  * @param {Record<string, unknown> | null | undefined} worldState
- * @param {unknown} partyId @param {unknown} foeId @param {readonly string[] | null | undefined} dissolvedCauseTypes
+ * @param {unknown} partyId @param {unknown} foeId
  * @returns {import('./warReasons.js').ReasonPairEntry | null}
  */
-export function peaceReasonsFor(worldState, partyId, foeId, dissolvedCauseTypes = null) {
+export function peaceReasonsFor(worldState, partyId, foeId) {
   const ledger = /** @type {import('./warReasons.js').ReasonLedger | null} */ (getSpatialLedger(worldState, 'peaceReasons'));
   if (!ledger) return null;
-  return withoutDissolvedCauseMirrors(ledger[reasonPairKey(partyId, foeId)], dissolvedCauseTypes);
-}
-
-/**
- * A dissolved founding cause already contributes to the termination read. Its peace
- * mirror must not load the same sue-for-peace choice a second time.
- * @param {import('./warReasons.js').ReasonPairEntry | null | undefined} entry
- * @param {unknown} dissolvedCauseTypes
- * @returns {import('./warReasons.js').ReasonPairEntry | null}
- */
-function withoutDissolvedCauseMirrors(entry, dissolvedCauseTypes) {
-  if (!entry) return null;
-  const causes = Array.isArray(dissolvedCauseTypes) ? dissolvedCauseTypes : [];
-  const excluded = /** @type {Set<string>} */ (new Set(causes.map((type) => REASON_MIRRORS[/** @type {keyof typeof REASON_MIRRORS} */ (type)]).filter(Boolean)));
-  if (!excluded.size) return entry;
-  const reasons = Object.fromEntries(Object.entries(entry.reasons || {}).filter(([type]) => !excluded.has(type)));
-  return Object.keys(reasons).length ? { ...entry, reasons } : null;
+  return ledger[reasonPairKey(partyId, foeId)] || null;
 }
 
 // ── THE IRONY READ-MODEL (§14.4 legibility of motive) ───────────────────────
@@ -417,7 +313,6 @@ export function warCausalBrief(worldState, partyId, foeId) {
  * @property {Record<string, unknown>} worldState
  * @property {boolean} changed
  * @property {Array<Record<string, unknown>>} newsEntries
- * @property {Array<Record<string, unknown>>} coalitionEvidence
  */
 
 /**
@@ -443,21 +338,13 @@ export function warCausalBrief(worldState, partyId, foeId) {
 export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null, tick, blaineyCredibility = null }) {
   // ── DORMANCY GATE (§8): absent ⇒ an immediate no-op. No key, no read. ──
   if (!peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */(worldState))) {
-    return { worldState, changed: false, newsEntries: [], coalitionEvidence: [] };
+    return { worldState, changed: false, newsEntries: [] };
   }
 
   const deployments = /** @type {Record<string, { targetId?: unknown }>} */ (
     worldState.deployments && typeof worldState.deployments === 'object' ? worldState.deployments : {});
   const prevLedger = /** @type {import('./warReasons.js').ReasonLedger | null} */ (getSpatialLedger(worldState, 'peaceReasons'));
   const liveGraph = (graph && Array.isArray(graph.edges) ? graph : null) || snapshot?.regionalGraph || null;
-  // D4: the hegemony fear context (same belief-side read as the war side) — balance_restored
-  // rises as a feared sphere crumbles. hasSphere false ⇒ 0 everywhere ⇒ byte-identical.
-  const hegemonyFear = makeHegemonyFear({ worldState, snapshot });
-  // The predation + faith contexts, built ONCE per pass — the SAME two leaves the war
-  // mover builds, so both sides of each mirror come off one reading.
-  const opportunismRead = makeOpportunismRead({ snapshot, worldState });
-  const sacredClaimRead = makeSacredClaimRead({ snapshot, worldState });
-  const lineageClaimRead = makeLineageClaimRead({ snapshot, worldState, graph: liveGraph });
 
   // The live war pairs, both directions, codepoint-ordered.
   /** @type {Map<string, { partyId: string, foeId: string }>} */
@@ -490,12 +377,6 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
 
   /** @type {import('./warReasons.js').ReasonLedger} */
   const nextLedger = {};
-  const newsEntries = [];
-  // WR-6 governed facts are emitted beside, not inside, the legacy lineage-news
-  // stream.  The pulse composer projects this typed evidence through the single
-  // coalition receipt registry; the causal mover itself never authors a second
-  // reader surface.
-  const coalitionEvidence = [];
   for (const key of orderedKeys) {
     const { partyId, foeId } = /** @type {{ partyId: string, foeId: string }} */ (pairs.get(key));
 
@@ -535,7 +416,7 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
       const recentDeserters = fracturesAbandoning(worldState, partyId, tick).length;
       const peakAllies = Math.max(nowAllies + recentDeserters, nowAllies, Number(prevLedger?.[key]?.memo?.peakAllies) || 0);
       if (peakAllies > 0) memo = { peakAllies };
-      fracture = scoreCoalitionFracture({ peakAllies, nowAllies }, key);
+      fracture = scoreCoalitionFracture({ peakAllies, nowAllies });
     }
 
     // Mediation: the first (codepoint-ordered) third settlement cross-pressured
@@ -545,12 +426,9 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
     // Realignment: a common third attacker on both, or distinct thirds on each.
     const third = thirdThreatRead(deployments, liveGraph, partyId, foeId);
 
-    const lineageStanding = lineageClaimRead.lineageStandingOf(partyId, foeId);
-    const kinshipBond = lineageClaimRead.kinshipBondOf(partyId, foeId);
-    const obligationDischarged = obligationDischargedReason(worldState, snapshot, partyId, foeId);
     const computed = [
-      { type: 'exhaustion', ...scoreExhaustion({ scar01: Number(warExhaustion[partyId]) || 0 }, key) },
-      { type: 'belief_convergence', ...scoreBeliefConvergence({ marginA, marginB }, key) },
+      { type: 'exhaustion', ...scoreExhaustion({ scar01: Number(warExhaustion[partyId]) || 0 }) },
+      { type: 'belief_convergence', ...scoreBeliefConvergence({ marginA, marginB }) },
       {
         type: 'economic_strangulation',
         // W-DOCTRINE-1: elevate on a live supply-web strangulation of THIS belligerent
@@ -562,81 +440,30 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
           // W-MOMENTUM Stage 0(a): a blockade of THIS belligerent's own port
           // strangles its commerce (0 when no fleet holds it ⇒ byte-identical).
           blockade01: blockadeStrangulationOf(worldState, partyId),
-        }, key),
+        }),
       },
       { type: 'coalition_fracture', ...fracture },
-      { type: 'mediation', ...scoreMediation({ impulse: mediator ? 1 : 0, mediatorName: mediator?.name || '' }, key) },
-      { type: 'harvest_pressure', ...scoreHarvestPressure({ season }, key) },
-      { type: 'realignment', ...scoreRealignment(third, key) },
+      { type: 'mediation', ...scoreMediation({ impulse: mediator ? 1 : 0, mediatorName: mediator?.name || '' }) },
+      { type: 'harvest_pressure', ...scoreHarvestPressure({ season }) },
+      { type: 'realignment', ...scoreRealignment(third) },
       // W-CONVERGENCE: the mirror of foreign_clash — clashing sponsors settling spheres (0 when dark).
-      { type: 'spheres_understanding', ...scoreSpheresUnderstanding({ clash01: foreignClashIntensityOf(worldState, partyId, foeId) }, key) },
-      // D4: the balance restored as a once-feared sphere centred on foeId crumbles (0 when foeId
-      // centres no sphere, partyId is its subordinate, or no hegemony ⇒ byte-identical).
-      { type: 'balance_restored', ...hegemonyFear.balanceRestoredOf(partyId, foeId) },
-      // D7: the reframe peace mirrors — partyId has re-read foeId's old aid as a gift again, or
-      // its trade tie with foeId as a binding mutual commerce. 0 when the reframe layer is dark /
-      // no such bright reading ⇒ byte-identical (reframe reads THIS tick's fresh ledger).
-      { type: 'debt_forgiven', ...scoreDebtForgiven({ forgiven01: debtForgiven01(worldState, partyId, foeId) }, key) },
-      { type: 'bonds_of_commerce', ...scoreBondsOfCommerce({ bonds01: bondsOfCommerce01(worldState, partyId, foeId) }, key) },
-      // HOPELESSNESS: partyId believes foeId could bear this war far longer than it can —
-      // the vulnerability gradient of the war side, read from the losing end. No capability
-      // damper: being unable to march is part of being hopeless, never a reason to fight on.
-      { type: 'hopelessness', ...opportunismRead.hopelessnessOf(partyId, foeId) },
-      // COMMON RITE: the two courts already stand on one floor. Distinct from `mediation`,
-      // which is a THIRD party standing between them.
-      { type: 'common_rite', ...sacredClaimRead.commonRiteOf(partyId, foeId) },
-      // WR-3: the peace mirror is the same surviving founding-edge and inversion
-      // read as lineage_claim. Corroborated care restores the bond strongly
-      // enough to defeat the claim; no second evidence model can drift here.
-      { type: 'kinship_bond', ...kinshipBond },
-      // WR-6 mirror: the joining army's sworn cause ends when the exact
-      // caller/root episode or alliance contract ends.  The same anchor read
-      // supplies both polarities, so the reason and its discharge cannot drift.
-      { type: 'obligation_discharged', ...obligationDischarged },
+      { type: 'spheres_understanding', ...scoreSpheresUnderstanding({ clash01: foreignClashIntensityOf(worldState, partyId, foeId) }) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick, memo);
     if (entry) nextLedger[key] = entry;
-    // The peace mirror is a transition fact, not a metronome.  Emit exactly
-    // when a live, anchor-backed obligation first becomes discharged.  The
-    // shared lifecycle read above returns zero for alliance rupture, so a
-    // broken compact can never be misreported as service rendered.
-    const anchor = obligationDischarged.score > 0
-      ? joinAnchorOf(deployments[partyId], partyId)
-      : null;
-    if (anchor
-      && !prevLedger?.[key]?.reasons?.obligation_discharged
-      && entry?.reasons?.obligation_discharged) {
-      coalitionEvidence.push({
-        id: `${anchor.callId}.mirror_obligation_discharged.${Math.max(0, Math.floor(Number(tick) || 0))}`,
-        kind: 'mirror_obligation_discharged',
-        tick: Math.max(0, Math.floor(Number(tick) || 0)),
-        settlementId: partyId,
-        counterpartId: anchor.callerId,
-        thirdPartyId: foeId,
-        callId: anchor.callId,
-        relationshipKey: anchor.allianceRelationshipKey,
-      });
-    }
-    newsEntries.push(...lineagePeaceTransitionNewsEntries({
-      snapshot,
-      standing: lineageStanding,
-      previousReason: prevLedger?.[key]?.reasons?.kinship_bond,
-      currentReason: entry?.reasons?.kinship_bond,
-      tick,
-    }));
   }
 
   const hasNext = Object.keys(nextLedger).length > 0;
   const prevSerialized = JSON.stringify(prevLedger || null);
   const nextSerialized = JSON.stringify(hasNext ? nextLedger : null);
   if (prevSerialized === nextSerialized) {
-    return { worldState, changed: false, newsEntries, coalitionEvidence };
+    return { worldState, changed: false, newsEntries: [] };
   }
   const nextWorldState = hasNext
     ? setSpatialLedger(worldState, 'peaceReasons', nextLedger)
     : dropSpatialLedger(worldState, 'peaceReasons');
-  return { worldState: nextWorldState, changed: true, newsEntries, coalitionEvidence };
+  return { worldState: nextWorldState, changed: true, newsEntries: [] };
 }
 
 // ── Internal reads ───────────────────────────────────────────────────────────
@@ -696,7 +523,7 @@ function thirdThreatRead(deployments, graph, partyId, foeId) {
 
 /** The DM-facing refusal prose per veto code (W-COMPOSER-2's VETO_PROSE feed). */
 export const PEACE_VETO_PROSE = Object.freeze({
-  peace_gate_dark: 'The causal reasons layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset, or light War and “Causes of war and peace” under Simulation rules → Engine waves.',
+  peace_gate_dark: 'The causal reasons layer is not active in this campaign (warLayerEnabled + peaceEngineEnabled).',
   peace_no_deployment: 'That court has no army in the field against that foe — there is no war of theirs to wind down.',
   peace_already_ordered: 'The recall order is already given; the army marches home.',
 });

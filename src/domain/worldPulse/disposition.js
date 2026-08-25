@@ -42,10 +42,9 @@ import { governingFactionOf } from '../rulingPower.js';
 import { COUP_COERCION } from '../rulingPowerCoup.js';
 // The trait-weight leaf (FP-G3): the single source both TRAIT maps live in; npcData.js
 // re-exports them. Imported from the leaf directly to keep npcData.js off any hot path.
-import { TRAIT_AGGRESSION, TRAIT_ALIGNMENT, acquiredTraitDescriptors } from '../../data/npcTraitWeights.js';
+import { TRAIT_AGGRESSION, TRAIT_ALIGNMENT } from '../../data/npcTraitWeights.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { readDispositionMultiplier } from './dispositionLedger.js';
-import { thresholdFactorOf } from './dispositionProfile.js';
 import { deityTemper, evil01, chaos01 } from './deityAxes.js';
 // Phase 5.5 M9b — MORAL DRIFT (component 3). The unjust-instigation accumulator
 // drifts the derived alignment: its malice term folds into computeMalice's recent-
@@ -94,22 +93,16 @@ function importanceWeight(npc = {}) {
   return 0.38;
 }
 
-// AUTHORED personality strings + the growth-layer acquired overlay. Reads the
-// {dominant, flaw, modifier} slots the generator writes (npcGenerator.js:81-84);
-// tolerant of a flat string or array shape; then appends the learned traits the
-// growth kernel weathered onto the NON-core npc.acquiredTraits[] (commission #36 —
-// absent ⇒ [] ⇒ byte-identical). NEVER reads npcStates.alignment.
+// AUTHORED personality strings only. Reads the {dominant, flaw, modifier}
+// slots the generator writes (npcGenerator.js:81-84); tolerant of a flat string
+// or array shape. NEVER reads npcStates.alignment.
 /** @param {import('../settlement.schema.js').SimNpc} npc @returns {string[]} */
 function authoredTraits(npc = {}) {
   const p = npc.personality;
-  const acquired = acquiredTraitDescriptors(npc);
-  /** @type {string[]} */
-  let core;
-  if (!p) core = [];
-  else if (typeof p === 'string') core = [p];
-  else if (Array.isArray(p)) core = p.filter((x) => typeof x === 'string');
-  else core = [p.dominant, p.flaw, p.modifier].filter((x) => typeof x === 'string');
-  return acquired.length ? [...core, ...acquired] : core;
+  if (!p) return [];
+  if (typeof p === 'string') return [p];
+  if (Array.isArray(p)) return p.filter((x) => typeof x === 'string');
+  return [p.dominant, p.flaw, p.modifier].filter((x) => typeof x === 'string');
 }
 
 /** Signed aggression score for one NPC's authored personality (Σ of trait weights).
@@ -245,17 +238,9 @@ export function computeAggressiveness(item, worldState, opts = {}) {
   // History rides the SAME ledger the ratchet writes. readDispositionMultiplier
   // is already centered on 1.0 (EXACTLY 1.0 when absent/net-zero), so convert it
   // to a signed drive for the blend: (mult − 1) / SPAN ∈ roughly [−1, 1].
-  const channelsActive = worldState?.simulationRules?.dispositionChannelsEnabled === true;
-  const historyEntry = id != null ? worldState?.dispositionStats?.[id] : null;
   const histMult = Number.isFinite(opts.historyMultiplier)
     ? Number(opts.historyMultiplier)
-    : channelsActive
-      // WR-2 subordinates the legacy signed score to the martial channel. The
-      // profile returns a BAR factor (positive martial stock lowers the bar), so
-      // reflect it around one for this appetite multiplier. This is ONE read of
-      // the martial lesson — never legacy score multiplied by a second threshold.
-      ? 2 - thresholdFactorOf(historyEntry, 'martial').factor
-      : (id != null ? readDispositionMultiplier(worldState?.dispositionStats || {}, id) : 1.0);
+    : (id != null ? readDispositionMultiplier(worldState?.dispositionStats || {}, id) : 1.0);
   const hist = (histMult - 1) / MULTIPLIER_SPAN;
 
   // ONE additive warlike-deity term into the SAME drive

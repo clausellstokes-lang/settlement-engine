@@ -30,10 +30,6 @@ import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
-// The harness derives systemState on the REAL path (the same pure function every
-// store writer calls inside its own set()); the old `refreshSystemState` store
-// action existed only for harnesses and was retired with owner queue #21.
-import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import {
   deriveGraphWithDiscoveredCandidates,
@@ -108,8 +104,9 @@ describe('settlementSlice — canonize lifecycle', () => {
     store.setState(s => {
       s.settlement = fixture();
       s.lastSeed = 'test-seed';
-      s.systemState = deriveSystemState(s.settlement);
+      s.systemState = null;  // hydrate via refreshSystemState
     });
+    store.getState().refreshSystemState();
   });
 
   test('phase defaults to draft on a fresh slice', () => {
@@ -144,11 +141,8 @@ describe('settlementSlice — applyEvent mutates entities', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
-    store.setState(s => {
-      s.settlement = fixture();
-      s.lastSeed = 'test-seed';
-      s.systemState = deriveSystemState(s.settlement);
-    });
+    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'test-seed'; });
+    store.getState().refreshSystemState();
     store.getState().canonize();
   });
 
@@ -197,11 +191,8 @@ describe('settlementSlice — the staleness law + the veto refusal (Composer V2 
   let store;
   beforeEach(() => {
     store = makeStore();
-    store.setState(s => {
-      s.settlement = fixture();
-      s.lastSeed = 'test-seed';
-      s.systemState = deriveSystemState(s.settlement);
-    });
+    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'test-seed'; });
+    store.getState().refreshSystemState();
     store.getState().canonize();
   });
 
@@ -272,11 +263,8 @@ describe('settlementSlice — undoLastEvent reverses impairments', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
-    store.setState(s => {
-      s.settlement = fixture();
-      s.lastSeed = 'test-seed';
-      s.systemState = deriveSystemState(s.settlement);
-    });
+    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'test-seed'; });
+    store.getState().refreshSystemState();
     store.getState().canonize();
   });
 
@@ -460,27 +448,13 @@ describe('settlementSlice — resetSettlementIdentity chokepoint (state-lifecycl
 });
 
 describe('settlementSlice — resetSettlementIdentity is the single writer (structural prevention)', () => {
-  // The chokepoint's DEFINITION and its CALL SITES no longer live in one file:
-  // THE DECOMPOSITION WAVE (lane D) moved the definition to
-  // settlementLifecycleHelpers.js while the four callers stayed on the slice.
-  // So this pin reads a MODULE SET for the definition and the slice for the
-  // callers. Anchoring the definition search on a single filename would have
-  // gone VACUOUS on that relocation — the regex would match zero times and the
-  // "exactly one definition" claim would silently become "none, and nobody
-  // noticed". The set is asserted non-empty below for the same reason.
-  const readStore = (f) => readFileSync(new URL(`../../src/store/${f}`, import.meta.url), 'utf8');
-  const DEFINING_MODULES = ['settlementSlice.js', 'settlementLifecycleHelpers.js'];
-  const sources = DEFINING_MODULES.map(readStore);
-  const src = readStore('settlementSlice.js');            // the CALL-SITE surface
-  const defSrc = sources.find((t) => t.includes('function resetSettlementIdentity')) || '';
+  const src = readFileSync(new URL('../../src/store/settlementSlice.js', import.meta.url), 'utf8');
 
   test('the chokepoint resets the FULL residue field list', () => {
-    const from = defSrc.indexOf('function resetSettlementIdentity');
-    expect(from, 'no module in the set defines resetSettlementIdentity').toBeGreaterThanOrEqual(0);
-    const rest = defSrc.slice(from);
-    // Bound the body at the next top-level declaration, or EOF when it is last.
-    const nextDecl = rest.slice(1).search(/\nexport (?:const|function) /);
-    const body = nextDecl === -1 ? rest : rest.slice(0, nextDecl + 1);
+    const body = src.slice(
+      src.indexOf('function resetSettlementIdentity'),
+      src.indexOf('export const createSettlementSlice'),
+    );
     for (const field of [
       'pendingEditsQueue', 'pendingEditsClock', 'pendingSuccession', 'draftVersionHistory',
       'generationId', 'pipelineHistory', 'pipelineRevealActive', 'lastRegenerationDelta', 'pendingPreview',
@@ -492,16 +466,9 @@ describe('settlementSlice — resetSettlementIdentity is the single writer (stru
   test('exactly ONE definition and FOUR call sites — every identity swap routes through it', () => {
     // A new load path that hand-maintains its own inline reset list (the leak habitat)
     // would NOT bump this count; a new path that correctly routes through the chokepoint
-    // makes it 5 and trips this pin, forcing a deliberate update. Hydration is
-    // the one call allowed to preserve save-owned pending work across navigation.
-    const defCount = sources.reduce(
-      (n, t) => n + ((t.match(/function resetSettlementIdentity/g) || []).length), 0,
-    );
-    expect(defCount, 'exactly one module in the set may define the chokepoint').toBe(1);
-    const calls = src.match(
-      /resetSettlementIdentity\(state(?:,\s*\{\s*preservePendingEdits:\s*true\s*\})?\);/g,
-    ) || [];
-    expect(calls).toHaveLength(4);
+    // makes it 5 and trips this pin, forcing a deliberate update.
+    expect((src.match(/function resetSettlementIdentity/g) || []).length).toBe(1);
+    expect((src.match(/resetSettlementIdentity\(state\);/g) || []).length).toBe(4);
   });
 });
 
@@ -648,34 +615,27 @@ describe('settlementSlice — renameFaction (canonical powerStructure path)', ()
     store.setState(s => { s.settlement = fixture(); });
   });
 
-  // AWAITED: renameFaction fetches domain/factionRename.js at the call seam to
-  // keep the cascade off first paint, so the action returns a promise.
-  test('renames a faction on powerStructure.factions (was a silent no-op on the empty legacy mirror)', async () => {
+  test('renames a faction on powerStructure.factions (was a silent no-op on the empty legacy mirror)', () => {
     // The fixture has factions on powerStructure.factions and no top-level
     // settlement.factions — the exact shape the old code could not rename.
-    await store.getState().renameFaction(0, 'High Council');
+    store.getState().renameFaction(0, 'High Council');
     const factions = store.getState().settlement.powerStructure.factions;
     expect(factions[0].name).toBe('High Council');
     expect(factions[1].name).toBe('Merchants'); // sibling untouched
   });
 
-  test('keeps .faction and .name in sync when the record labels on .faction', async () => {
+  test('keeps .faction and .name in sync when the record labels on .faction', () => {
     store.setState(s => {
       s.settlement.powerStructure.factions = [{ id: 'f1', faction: 'Old Guild', name: 'Old Guild' }];
     });
-    await store.getState().renameFaction(0, 'New Guild');
+    store.getState().renameFaction(0, 'New Guild');
     const f = store.getState().settlement.powerStructure.factions[0];
     expect(f.faction).toBe('New Guild');
     expect(f.name).toBe('New Guild');
   });
 
-  test('out-of-range index is a safe no-op', async () => {
-    // `.not.toThrow()` around an ASYNC action is vacuous — an async function
-    // returns a rejected promise instead of throwing in the caller's frame, so
-    // the old shape would have passed even if the writer blew up. Assert the
-    // promise RESOLVES, and resolves to the idle envelope.
-    await expect(store.getState().renameFaction(99, 'X'))
-      .resolves.toMatchObject({ changed: false });
+  test('out-of-range index is a safe no-op', () => {
+    expect(() => store.getState().renameFaction(99, 'X')).not.toThrow();
     expect(store.getState().settlement.powerStructure.factions[0].name).toBe('Council');
   });
 });

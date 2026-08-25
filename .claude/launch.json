@@ -13,17 +13,14 @@
       "port": 5175
     },
     {
-      "name": "dev-doc-wave",
-      "runtimeExecutable": "npx",
+      "name": "tip-preview",
+      "runtimeExecutable": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a244e7a3-27d9-4152-b847-cf42cf4b08a7/scratchpad/preview-tip/node_modules/.bin/vite",
       "runtimeArgs": [
-        "vite",
-        "/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a5a179f4f9d530b14",
+        "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a244e7a3-27d9-4152-b847-cf42cf4b08a7/scratchpad/preview-tip",
         "--port",
-        "5176",
-        "--strictPort",
-        "--host"
+        "5199"
       ],
-      "port": 5176
+      "port": 5199
     },
     {
       "name": "preview-dist",

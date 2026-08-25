@@ -22,7 +22,7 @@
  * Pure module — no React, no DOM, no flags. Safe to unit test in node.
  */
 
-import { COMPENDIUM_DATA as CD } from './generated/compendiumData.generated.js';
+import { ARCHETYPES, REL_TYPES } from './catalogData.js';
 import { compareCodepoint } from '../deterministicSort.js';
 
 // Valid destination tabs — must mirror the TABS ids in CompendiumPanel EXACTLY.
@@ -31,8 +31,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 // drifted: the Living World tab was in the panel but not here, so a search could
 // never route to it) reds this until it is added (domain-region-dossier-guidance-5).
 export const COMPENDIUM_TABS = Object.freeze([
-  'overview', 'tiers', 'economy', 'power', 'institutions', 'operations', 'arcane',
-  'living', 'lenses', 'facets', 'stress', 'calamity', 'neighbour', 'az',
+  'tiers', 'economy', 'power', 'arcane', 'living', 'stress', 'neighbour', 'institutions',
 ]);
 
 /**
@@ -59,21 +58,15 @@ function slug(s) {
 // tabs render. They're concise on purpose — enough to match a query and
 // route the reader, not a second copy of the prose.
 
-// Tier keywords DERIVE their population range from CD.tiers (the engine
-// POPULATION_RANGES), so the old stale bands ('Thorp 20-80', 'Town 900-4000') can
-// never resurrect in the search surface. Only the qualitative keywords are authored.
-/** @type {Record<string, string>} */
-const TIER_KW = {
-  thorp: 'smallest single institution subsistence',
-  hamlet: 'local subsistence minimal trade',
-  village: 'surplus weekly market guilds begin',
-  town: 'specialization guilds form',
-  city: 'institutional diversity factional politics',
-  metropolis: 'largest all systems active complex factions',
-};
-const TIER_ENTRIES = CD.tiers.map((t) => ({
-  id: `tier-${slug(t.label)}`, term: t.label, category: 'Tier', tab: 'tiers', anchor: 'tiers',
-  keywords: `${TIER_KW[t.id] || ''} ${t.min}-${t.max}`,
+const TIER_ENTRIES = [
+  ['Thorp', 'smallest hamlet 20-80 single institution subsistence'],
+  ['Hamlet', '80-400 local subsistence minimal trade'],
+  ['Village', '400-900 surplus weekly market guilds begin'],
+  ['Town', '900-4000 specialization guilds form'],
+  ['City', '4000-25000 institutional diversity factional politics'],
+  ['Metropolis', '25000+ largest all systems active complex factions'],
+].map(([term, kw]) => ({
+  id: `tier-${slug(term)}`, term, category: 'Tier', tab: 'tiers', anchor: 'tiers', keywords: kw,
 }));
 
 const ROUTE_ENTRIES = [
@@ -87,23 +80,21 @@ const ROUTE_ENTRIES = [
   id: `route-${slug(term)}`, term, category: 'Trade Route', tab: 'tiers', anchor: 'trade-routes', keywords: kw,
 }));
 
-// The engine's canonical monster-threat vocabulary is heartland/frontier/plagued
-// (config display names Safe Heartland / Active Frontier / Embattled Region). The old
-// 'Safe'/'Dangerous' were phantom rungs; keep them only as search keywords.
 const THREAT_ENTRIES = [
-  ['Safe Heartland', 'heartland safe monsters rumor civilian institutions'],
-  ['Active Frontier', 'frontier active managed threat walls garrison patrols'],
-  ['Embattled Region', 'plagued embattled dangerous monster plague crisis siege-like militia war'],
+  ['Safe', 'heartland monsters rumor civilian institutions'],
+  ['Frontier', 'active managed threat walls garrison patrols'],
+  ['Dangerous', 'constant threat military dominates'],
+  ['Plagued', 'monster plague crisis siege-like militia'],
 ].map(([term, kw]) => ({
   id: `threat-${slug(term)}`, term, category: 'Monster Threat', tab: 'tiers', anchor: 'threat', keywords: kw,
 }));
 
 const ECONOMY_ENTRIES = [
-  ['Prosperity Tiers', 'subsistence to wealthy derived output wealth'],
+  ['Prosperity Tiers', 'subsistence to affluent derived output wealth'],
   ['Priority Sliders', 'shift institutional probability economy military religion magic criminal'],
   ['Exports & Imports', 'surplus production gaps trade vulnerability dependency'],
   ['Supply Chains', 'linked production sequences broken input degrades'],
-  ['Coherence Check', 'viability score coherent marginal not coherent economic logical sense fragile supporting prosperity'],
+  ['Viability Score', 'economic stress analysis fragile supporting prosperity'],
 ].map(([term, kw]) => ({
   id: `econ-${slug(term)}`, term, category: 'Economy', tab: 'economy', anchor: 'economy', keywords: kw,
 }));
@@ -152,7 +143,7 @@ const LIVING_ENTRIES = [
 
 // ── Derived entries from the shared arrays (zero-drift) ────────────────────
 
-const ARCHETYPE_ENTRIES = CD.archetypes.entries.map((a) => ({
+const ARCHETYPE_ENTRIES = ARCHETYPES.map((a) => ({
   id: `arch-${slug(a.name)}`,
   term: a.name,
   category: 'Archetype',
@@ -161,71 +152,13 @@ const ARCHETYPE_ENTRIES = CD.archetypes.entries.map((a) => ({
   keywords: `${a.cat} ${a.cond} ${a.desc}`,
 }));
 
-const REL_ENTRIES = CD.relationships.entries.map((r) => ({
+const REL_ENTRIES = REL_TYPES.map((r) => ({
   id: `rel-${slug(r.id)}`,
   term: r.label,
   category: 'Neighbour Relationship',
   tab: 'neighbour',
   anchor: 'neighbours',
   keywords: r.effect,
-}));
-
-// ── New registry hubs — derived from the generated artifact (zero-drift) ────
-// The premade-deity roster was removed (owner ruling 2026-07-21: no premade
-// deities; they enter a world only via custom-content authoring), so there is no
-// deity index entry — custom-deity authoring lives in the My Custom Content workspace.
-
-// The operation entry's display term is the authored, human label; the raw
-// camelCase opType stays searchable via keywords, and the anchor keeps the
-// op-<slug(opType)> form so existing deep-links survive.
-const OPERATION_ENTRIES = CD.operations.entries.map((o) => ({
-  id: `op-${slug(o.opType)}`,
-  term: o.label,
-  category: 'Operation',
-  tab: 'operations',
-  anchor: `op-${slug(o.opType)}`,
-  keywords: `${o.opType} ${o.klass} ${o.targetScope} ${o.receiptRef || ''} ${o.undoToken ? 'undo reversible' : 'one-way'}`,
-}));
-
-const SYSTEM_ENTRIES = CD.systems.map((s) => ({
-  id: `system-${slug(s.id)}`,
-  term: s.label,
-  category: 'Living World System',
-  tab: 'living',
-  anchor: `system-${slug(s.id)}`,
-  keywords: `${s.flag} ${s.dormant ? 'dormant' : s.presets.join(' ')} simulation`,
-}));
-
-const LENS_ENTRIES = CD.lenses.entries.map((l) => ({
-  id: `lens-${slug(l.id)}`,
-  term: l.label,
-  category: 'Map Lens',
-  tab: 'lenses',
-  anchor: `lens-${slug(l.id)}`,
-  keywords: `${l.id} map style render`,
-}));
-
-const CALAMITY_ENTRIES = CD.calamity.flavors.map((f) => ({
-  id: `calamity-${slug(f.key)}`,
-  term: f.title,
-  category: 'Calamity',
-  tab: 'calamity',
-  anchor: `calamity-${slug(f.key)}`,
-  keywords: `${f.key} disaster great calamity`,
-}));
-
-// The W6 band ladders (prosperity, priority, chain status, coherence, food security,
-// stability, strain, severity, magnitude, capture, pantheon rank, magic level/legality)
-// were unreachable via the search box. Derive one entry per ladder from CD.bandLadders
-// (registry-derived, zero-drift), so searching a rung name ('Struggling', 'Capture',
-// 'Forbidden') routes to the ladder's tab.
-const LADDER_ENTRIES = CD.bandLadders.map((l) => ({
-  id: `ladder-${slug(l.id)}`,
-  term: l.concept,
-  category: 'Concept',
-  tab: l.tab,
-  anchor: l.anchor,
-  keywords: `${l.levels.map((x) => x.name).join(' ')} ${l.blurb}`,
 }));
 
 /**
@@ -241,14 +174,9 @@ export const COMPENDIUM_INDEX = Object.freeze(/** @type {CompendiumEntry[]} */ (
   ...ARCHETYPE_ENTRIES,
   ...ARCANE_ENTRIES,
   ...LIVING_ENTRIES,
-  ...SYSTEM_ENTRIES,
   ...STRESS_ENTRIES,
   ...REL_ENTRIES,
   ...CROSS_SETTLEMENT_ENTRIES,
-  ...LADDER_ENTRIES,
-  ...OPERATION_ENTRIES,
-  ...LENS_ENTRIES,
-  ...CALAMITY_ENTRIES,
 ].map(Object.freeze)));
 
 // ── Scoring ────────────────────────────────────────────────────────────────

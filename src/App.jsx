@@ -11,40 +11,38 @@
  *   settlements — Saved settlements library
  *   realm       — The Realm hub (World Map + Pulse / Chronicle / Pantheon)
  *   compendium  — Rules & data compendium
- *   about-what-this-is — About: the trust page (thesis, covenant, positioning)
- *   about-guide — About: the Practical Guide (quick start → reference → FAQ)
- *   howto       — retired pre-split About page; redirects into the two above
+ *   howto       — About page (how-to guide + comparisons)
  *   gallery     — Community gallery
  *   terms/privacy/refunds — Legal / trust pages
  *   account     — Full account page (post-auth)
  *   admin       — Developer admin panel (elevated roles only)
  */
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
-import { Zap, Shield, X } from 'lucide-react';
-import Lockup from './components/brand/Lockup.jsx';
+import { Map as MapIcon, Zap, Shield, X } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
-import useCustomContentCloudSync from './hooks/useCustomContentCloudSync.js';
 import { useStore } from './store/index.js';
 import { initOutbox } from './store/campaignSliceShared.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
-import { allowsFloatingFeedback, guardForView, redirectForView, viewToPath, NAV } from './lib/routes.js';
+import { guardForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
+import { supportMailto } from './copy/support.js';
+// The eager shell reads ONLY footer.* copy — copy/footer.js carries that one
+// namespace with an identical t(). Importing copy/index.js here would drag the
+// whole en.js registry into the first-paint entry closure (byte budget).
+import { t } from './copy/footer.js';
 import {
-  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, ELEV, SHAFT, SHAFT_GRAIN_LAYERS, SLATE, SLATE_BG, sans, SP, R, FS, swatch, CHROME, bottomClearance,
+  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY,
+  VIOLET, VIOLET_BG, MUTED, sans, serif_, SP, R, FS, swatch,
 } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
-import NavFlowArrow from './components/nav/NavFlowArrow.jsx';
-import NavRibbon from './components/nav/NavRibbon.jsx';
-import LegalRibbonRow from './components/footer/LegalRibbonRow.jsx';
 import FeatureErrorBoundary from './components/FeatureErrorBoundary.jsx';
 import Button from './components/primitives/Button.jsx';
 import IconButton from './components/primitives/IconButton.jsx';
 // The route→component registry + shared Loading live in AppViews (extracted so
 // the shell stays legible; the view table has one home).
 import { AppViews, Loading } from './AppViews.jsx';
-import CommandPaletteHost from './components/CommandPaletteHost.jsx';
 
 // Modals stay in the shell (not view-switched): they overlay whatever view is up.
 const AuthModal     = lazy(() => import('./components/AuthModal.jsx'));
@@ -53,16 +51,13 @@ const PurchaseModal = lazy(() => import('./components/PurchaseModal.jsx'));
 // never first-paint critical — lazy so its code + icons stay off the entry's
 // static closure (first-paint byte budget).
 const CampaignSyncBanner = lazy(() => import('./components/CampaignSyncBanner.jsx'));
-const SessionEvictedBanner = lazy(() => import('./components/SessionEvictedBanner.jsx'));
-
-// The post-generate coach hosts the guidance registry's single wizard-postgen
-// whisper (the "what's next" moves). Self-gates on a settlement + the unified
-// sf:guidance dismissal; lazy keeps it off first paint (byte budget).
-const PostGenCoach = lazy(() => import('./components/PostGenCoach.jsx'));
 
 // The two DEV panels are always-mounted but NOT first-paint critical (they
 // render null in production). Lazy so their code + icon references stay off the
 // entry's static closure (first-paint byte budget — tests/build/vendorPdfLazy.test.js).
+// (The post-generation coach was retired in W-GUIDE-1: a floating fixed dialog
+// violated the immersion law; its steps are now registered first_generate
+// whispers rendered in-flow at the dossier top — see guidanceRegistry.js §5.)
 const DevFlagPanel   = lazy(() => import('./components/dev/DevFlagPanel.jsx'));
 const DevEmailBanner = lazy(() => import('./components/dev/DevEmailBanner.jsx'));
 // Active pricing-moment card — inline, not a modal. Renders when a moment fires;
@@ -71,16 +66,21 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 // Global floating feedback affordance (files a support ticket, tagged with the
 // active generation-id spine). Always mounted, self-gating on `visible`, so lazy
 // keeps its code + icons off the entry's first-paint closure.
-// The global floating-widget cluster (feedback widget + Surveyor S1 analyst panel),
-// lazy so both stay off first paint; each self-gates on `visible`.
-const FloatingAffordances = lazy(() => import('./components/FloatingAffordances.jsx'));
+const FeedbackWidget = lazy(() => import('./components/FeedbackWidget.jsx'));
+
+// Auth + checkout chrome the floating feedback widget stays off (its own
+// contract): the sign-in door, recovery, and the single-dossier landing.
+const AUTH_ROUTE_VIEWS = new Set([
+  'signin', 'register', 'reset-password', 'set-new-password',
+  'verify-email', 'confirm-email', 'dossier-success',
+]);
 
 // Mobile bottom nav: an EXPLICIT priority order rather than slicing the desktop
 // NAV order, otherwise inserting/reordering a NAV item silently evicts whatever
 // falls past the slice. The Realm is omitted (the map workspace is too
 // constrained for small screens; it stays in the desktop nav and its routes
 // still resolve). Welcome/home is reached via the mobile brand button.
-const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'gallery', 'compendium', 'about-what-this-is'];
+const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'gallery', 'compendium', 'howto'];
 
 // Is there a persisted Supabase session token on this device? A member returning
 // to the bare root should wait for their session to restore (so they aren't
@@ -114,10 +114,10 @@ export default function App() {
   useFocusOnViewChange(view, mainRef);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showScrollBottom, setShowScrollBottom] = useState(false);
-  // Auth-modal visibility lives on the store's uiSlice (restoration #16) so the
-  // signup/unlock PricingMomentCard can open sign-in, not the buy-credits wall.
-  const authModalOpen = useStore(s => s.authModalOpen);
-  const setAuthModalOpen = useStore(s => s.setAuthModalOpen);
+  // Auth-modal visibility stays LOCAL to the shell (the store's uiSlice does not
+  // yet carry it — a 4a follow-up). Same boolean-setter shape every call site
+  // already speaks, so nothing downstream changes.
+  const [authModalOpen, setAuthModalOpen] = useState(false);
 
   const authTier = useStore(s => s.auth.tier);
   const displayName = useStore(s => s.auth.displayName);
@@ -133,6 +133,7 @@ export default function App() {
   // the shell only re-renders when the settlement toggles absent↔present.
   const hasSettlement = useStore(s => !!s.settlement);
   const initAuth = useStore(s => s.initAuth);
+  const initOnboarding = useStore(s => s.initOnboarding);
   const onboardingNudge = useStore(s => s.onboardingNudge);
   const clearOnboardingNudge = useStore(s => s.clearOnboardingNudge);
   const purchaseModalOpen = useStore(s => s.purchaseModalOpen);
@@ -169,13 +170,13 @@ export default function App() {
       // anonymous one-shot buyer's PAID dossier. The handler consumes + cleans the
       // params, after which a later run of this effect redirects normally.
       if (window.location.search.includes('checkout=')) return;
-      if (window.location.pathname === '/' || window.location.pathname === '') {
-        replacePath(authTier === 'anon' ? '/home' : '/create');
-      }
+      const path = window.location.pathname;
+      const atRoot = path === '/' || path === '';
+      if (atRoot) replacePath(authTier === 'anon' ? '/home' : '/create');
     } catch { /* private mode → fall through to the default */ }
   }, [authLoading, authTier, view]);
 
-  // ── Initialize auth + reconcile post-checkout ─────────────────────────────
+  // ── Initialize auth + reconcile post-checkout + boot the outbox ────────────
   // F23: we NEVER declare success from the ?checkout=success URL alone (spoofable
   // + races the webhook). For account-bound products we verify the session
   // server-side, then poll the real entitlement (credit balance / profile tier)
@@ -183,6 +184,10 @@ export default function App() {
   // on timeout, and a terminal notice on a verified failure.
   useEffect(() => {
     initAuth();
+    initOnboarding();
+    // Track K C3 — replay the durable persistence outbox from a prior (possibly
+    // dead) tab against the local payload cache, and arm background backoff.
+    initOutbox();
     let cancelled = false;
     import('./lib/stripe.js').then(async (stripeLib) => {
       const { checkCheckoutResult, fetchCreditBalance } = stripeLib;
@@ -254,16 +259,16 @@ export default function App() {
           // consumed the URL params, so a remount can never double-fire.
           stripeLib.trackCheckoutSuccess(result.product);
           const msg = result.product === 'premium'
-            ? 'Cartographer activated.'
+            ? 'Cartographer activated!'
             : result.product === 'founder_lifetime'
-              ? 'Welcome aboard, Founder.'
-              : 'Credits added.';
+              ? 'Welcome aboard, Founder!'
+              : 'Credits added!';
           setCheckoutToast({ text: msg, persistent: false });
           setTimeout(() => { if (!cancelled) setCheckoutToast(null); }, 4000);
         } else if (outcome.outcome === OUTCOME.PROCESSING) {
           const ref = (result.sessionId || '').slice(0, 12);
           setCheckoutToast({
-            text: `Payment received. Your purchase is still processing. Refresh in a minute${ref ? ` (ref ${ref})` : ''}.`,
+            text: `Payment received — your purchase is still processing. Refresh in a minute${ref ? ` (ref ${ref})` : ''}.`,
             persistent: true,
           });
         } else {
@@ -287,7 +292,7 @@ export default function App() {
       }
     });
     return () => { cancelled = true; };
-  }, [initAuth, setCreditBalance]);
+  }, [initAuth, initOnboarding, setCreditBalance]);
 
   // Auto-dismiss the dossier retro-claim confirmation toast after a short read.
   useEffect(() => {
@@ -297,11 +302,9 @@ export default function App() {
   }, [dossierClaimToast, setDossierClaimToast]);
 
   useEffect(() => {
-    if (authLoading) return;
-    // Replay only after auth resolves; initOutbox also detaches synchronously on
-    // sign-out/account changes so one owner's payload can never drain as another.
-    initOutbox(authUserId);
-    if (authTier !== 'anon') loadCampaigns();
+    if (!authLoading && authTier !== 'anon') {
+      loadCampaigns();
+    }
   }, [authLoading, authTier, authUserId, loadCampaigns]);
 
   // Refresh the credit balance on auth transitions (in-session sign-in/out). The
@@ -360,15 +363,17 @@ export default function App() {
   }, [view, authTier, isElevated, authLoading]);
 
   // ── Demoted destinations → redirect to their new homes ─────────────────────
-  // The Workshop, the standalone World Map, and (since THE ABOUT SPLIT) the
-  // whole pre-split About family keep their route entries so old links and SEO
-  // still resolve, then bounce here. WHERE each one lands — including the
-  // `/how-to?tab=` → section-anchor translation that keeps every old deep link
-  // pointing at the content that absorbed it — is decided by routes.js's
-  // `redirectForView`, beside the routing table it belongs to.
+  // The Workshop was removed; /compare* is now a section in About; the World Map
+  // moved INTO the Realm hub. The route entries stay (so the URLs still resolve
+  // and old links / SEO keep working), but we bounce them to the new surface.
   useEffect(() => {
-    const to = redirectForView(view, typeof window !== 'undefined' ? window.location.search : '');
-    if (to) navigate(to.view, { replace: true, hash: to.hash });
+    if (view === 'workshop') {
+      navigate('generate', { replace: true });
+    } else if (view === 'map') {
+      navigate('realm', { replace: true });
+    } else if (view.startsWith('compare')) {
+      navigate('howto', { replace: true, search: '?tab=compare' });
+    }
   }, [view]);
 
   // ── Canonical-URL upgrade ──────────────────────────────────────────────────
@@ -420,15 +425,27 @@ export default function App() {
     link.href = href;
   }, [view, wizardMode, hasSettlement]);
 
-  useCustomContentCloudSync({
-    authTier,
-    authUserId,
-    authLoading,
-    isElevated,
-    migrateLocalCustomContentToCloud,
-    loadCustomContentFromCloud,
-    clearCloudCustomContent,
-  });
+  // ── Cloud sync custom content when user enters premium / elevated state ─────
+  // Triggers once per tier transition. Migrates local items on first premium
+  // sign-in (tracked via a user-scoped localStorage migration flag).
+  useEffect(() => {
+    if (authLoading) return;
+    // Cancellation guard: rapid tier transitions / remounts can start a second
+    // migrate→load chain before the first resolves, interleaving them so the
+    // displayed custom content reflects a stale snapshot. On cleanup we set
+    // ignore=true so a superseded chain bails before its load call.
+    let ignore = false;
+    const canSyncCloud = authTier === 'premium' || isElevated;
+    if (canSyncCloud) {
+      migrateLocalCustomContentToCloud()
+        .then(() => { if (!ignore) return loadCustomContentFromCloud(); })
+        .catch(err => { if (!ignore) console.error('Custom content cloud sync failed:', err); });
+    } else if (authTier === 'anon') {
+      // Sign-out: drop cloud cache, fall back to local (grandfathered) items
+      clearCloudCustomContent();
+    }
+    return () => { ignore = true; };
+  }, [authTier, authUserId, isElevated, authLoading, loadCustomContentFromCloud, migrateLocalCustomContentToCloud, clearCloudCustomContent]);
 
   // Auto-dismiss onboarding nudge after 8s
   useEffect(() => {
@@ -471,32 +488,15 @@ export default function App() {
 
   // Nav is derived wholesale from routes.js (each ROUTES entry with a `nav` block).
   // Adding / relabelling / reordering a tab is a one-place edit in routes.js.
+  const visibleNav = NAV;
   const mobileNav = MOBILE_NAV_PRIORITY
-    .map(id => NAV.find(item => item.id === id))
+    .map(id => visibleNav.find(item => item.id === id))
     .filter(Boolean)
     .slice(0, 5);
 
-  // THE SHAFT (ribbon v3, owner directive 2026-08-03 evening). Both headers are the
-  // VISIBLE HALF OF ONE ARROW SHAFT — a honey-tan barrel running full width, and
-  // deliberately unbroken under the wordmark, which is what makes the bar read as an
-  // arrow lying along the top edge rather than as a bar with feathers stuck on it.
-  // SHAFT_GRAIN_LAYERS carries both halves of the material: the CYLINDER shading
-  // (lit along the centreline at the top, falling off to a dark silhouette at the
-  // bottom) and, painted over it, the deterministic feTurbulence LONGITUDINAL grain.
-  // Asset-free, and applied as background-IMAGE over the background-COLOR, never as
-  // a shorthand — the grain is transparent in its gaps and the page would otherwise
-  // show through the barrel.
-  //
-  // ⚠️ THE BOTTOM HAIRLINE WENT WITH THE CREAM. V2 closed the plank's lower edge
-  // with a BORDER rule because a flat cream bar needed one. The barrel does not: its
-  // own SHAFT_RIM silhouette IS the bottom edge, and drawing a second line under it
-  // reads as a bar with a border rather than as a round shaft — it also cuts the
-  // fletch overhang off visually at exactly the place the overhang exists to cross.
-  // ELEV[2] still drops the house's soft sticky-chrome shadow, which is what
-  // separates the header from the page now that the wood no longer needs a rule.
   const headerStyle = {
-    backgroundColor: SHAFT, backgroundImage: SHAFT_GRAIN_LAYERS,
-    boxShadow: ELEV[2],
+    background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+    boxShadow: '0 2px 12px rgba(0,0,0,0.35)',
   };
 
   // Per-view painted background. On the Create page a generation flow blows up the
@@ -509,7 +509,7 @@ export default function App() {
           until focused (.skip-link in index.css), it lets keyboard/SR users jump
           past the header/nav straight to <main id="main-content">. */}
       <a href="#main-content" className="skip-link">Skip to content</a>
-      <Suspense fallback={null}><CampaignSyncBanner /><SessionEvictedBanner /><PostGenCoach /></Suspense>
+      <Suspense fallback={null}><CampaignSyncBanner /></Suspense>
       <div
         // Painted clean views (home/settlements/gallery/compendium/pricing/account/
         // admin/howto/legal) get `.page-painted scrim-<profile>`: a flat-cream
@@ -537,9 +537,12 @@ export default function App() {
               variant="ghost"
               onClick={() => setView('home')}
               aria-label="SettlementForge home"
+              icon={<MapIcon size={18} color={GOLD} />}
               style={{ gap: SP.xs, minHeight: 44, padding: `0 ${SP.xs}px` }}
             >
-              <Lockup compact />
+              <span aria-hidden="true" style={{ fontSize: FS.lg, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em' }}>
+                <span style={{ fontSize: '1.28em' }}>S</span>ettlement<span style={{ fontSize: '1.28em' }}>F</span>orge
+              </span>
             </Button>
 
             <AccountMenu
@@ -548,7 +551,7 @@ export default function App() {
               displayName={displayName}
               isElevated={isElevated}
               onSignIn={() => setAuthModalOpen(true)}
-              onAccount={() => setView('account')} onMessages={() => navigate('account', { search: '?section=messages' })}
+              onAccount={() => setView('account')}
               onManageSubscription={() => setView('pricing')}
             />
           </header>
@@ -556,13 +559,13 @@ export default function App() {
 
         {/* ── Desktop header ──────────────────────────────────── */}
         {!isMobile && (
-          <header style={{ ...headerStyle, minHeight: CHROME.headerDesktop, boxSizing: 'border-box', padding: `0 ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
-            {/* Brand block. The lockup itself — the maker's plate, the wordmark and
-                its wax-seal `o` — lives in components/brand/Lockup.jsx, which both
-                bars share; what stays here is only the home CONTROL it rides in. The
-                button carries the accessible name ("SettlementForge home") and the
-                lockup is aria-hidden throughout, so the mark can be as pictorial as it
-                likes without ever becoming the way the name is spelled. */}
+          <header style={{ ...headerStyle, padding: `${SP.md}px ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
+            {/* Brand block — the wordmark stands alone. "SettlementForge" reads as a
+                single bold serif word with the two capitals (S, F) set a step
+                larger. The wordmark doubles as the home link; rendered as a button
+                for keyboard + AT access, the h1 keeps heading semantics with its
+                per-letter spans hidden from AT (the button's aria-label reads the
+                plain name). */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
               <button
                 type="button"
@@ -570,14 +573,50 @@ export default function App() {
                 aria-label="SettlementForge home"
                 style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
               >
-                <Lockup />
+                <h1
+                  aria-hidden="true"
+                  style={{ margin: 0, fontSize: FS.h1, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em', lineHeight: 1.1 }}
+                >
+                  <span style={{ fontSize: '1.32em', fontWeight: 800 }}>S</span>
+                  <span>ettlement</span>
+                  <span style={{ fontSize: '1.32em', fontWeight: 800 }}>F</span>
+                  <span>orge</span>
+                </h1>
               </button>
             </div>
 
-            {/* alignSelf:stretch — the cluster spans the header row so the ribbon,
-                and through it LD-2's dividers, can reach the bar's full height. */}
-            <div style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', gap: SP.md }}>
-              <NavRibbon view={view} onNavClick={handleNavClick} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
+              <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+                {visibleNav.map(({ id, label }) => {
+                  const active = view === id;
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => handleNavClick(id)}
+                      aria-current={active ? 'page' : undefined}
+                      style={{
+                        // Active tab is a wayfinding marker, not a CTA: a gold
+                        // underline + weight, not a filled cartouche, so the Sign
+                        // In chip stays the region's single filled-gold focal point.
+                        display: 'flex', alignItems: 'center', gap: SP.xs,
+                        padding: `${SP.sm}px ${SP.lg}px`,
+                        background: 'transparent',
+                        border: 'none',
+                        borderBottom: active ? `2px solid ${GOLD}` : '2px solid transparent',
+                        borderRadius: 0, cursor: 'pointer',
+                        color: active ? GOLD : PARCH_100,
+                        fontSize: FS.sm, fontWeight: active ? 700 : 500,
+                        fontFamily: sans,
+                        letterSpacing: '0.04em', textTransform: 'none',
+                        transition: 'all 0.2s',
+                      }}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+              </nav>
 
               {/* Admin button (developer/admin only) */}
               {isElevated && (
@@ -606,9 +645,9 @@ export default function App() {
                     display: 'flex', alignItems: 'center', gap: SP.xs,
                     height: 32, padding: `0 ${SP.md}px`,
                     borderRadius: 999,
-                    background: SLATE_BG,
-                    border: `1px solid ${SLATE}`,
-                    color: SLATE,
+                    background: VIOLET_BG,
+                    border: `1px solid ${VIOLET}`,
+                    color: VIOLET,
                     fontSize: FS.sm, fontFamily: sans,
                     letterSpacing: '0.02em', cursor: 'pointer',
                     transition: 'all 0.2s', whiteSpace: 'nowrap',
@@ -629,13 +668,6 @@ export default function App() {
                   size="md"
                   icon={<Zap size={13} />}
                   onClick={() => setView('pricing')}
-                  // ⚠️ THE OVERRIDE IS BACK, AND THE ROUND TRIP IS THE POINT. On the
-                  // V2 ink bar this was PARCH_100; on the V3 honey barrel the pale
-                  // register was unreadable and ghost's own fg (SECOND) measured
-                  // 12.04:1, so the override came off. On V4's cedar shaft SECOND is
-                  // 1.97:1 — a ghost button has no ground of its own, so it reads
-                  // against the wood — and the whole bar is in the parchment register
-                  // again (theme.js's dead-band note). PARCH_100 is 5.28:1 here.
                   style={{ color: PARCH_100, letterSpacing: '0.04em', textTransform: 'uppercase' }}
                 >
                   Upgrade
@@ -648,7 +680,7 @@ export default function App() {
                 displayName={displayName}
                 isElevated={isElevated}
                 onSignIn={() => setAuthModalOpen(true)}
-                onAccount={() => setView('account')} onMessages={() => navigate('account', { search: '?section=messages' })}
+                onAccount={() => setView('account')}
                 onManageSubscription={() => setView('pricing')}
               />
             </div>
@@ -661,7 +693,7 @@ export default function App() {
             `position: sticky` for descendants (e.g. the wizard toolbar). Default
             `visible` keeps the window as the sole scroller and lets descendant
             sticky bars pin. */}
-        <main id="main-content" ref={mainRef} tabIndex={-1} className={isMobile ? 'app-route-main app-route-main--mobile' : 'app-route-main'} style={{ flex: 1, outline: 'none', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
+        <main id="main-content" ref={mainRef} tabIndex={-1} style={{ flex: 1, outline: 'none', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
           {/* A lazy chunk-load failure (stale deploy, dropped connection) throws
               from inside Suspense. Without a boundary here that throw escapes to the
               root and white-screens the whole app. The boundary sits OUTSIDE
@@ -707,22 +739,58 @@ export default function App() {
         </main>
 
         {/* ── Footer ──────────────────────────────────────────────
-            THE LANDING ROUTE IS EXEMPT (LD-3, owner-ordered): the welcome page
-            ends on its own artwork band, so the global strip would be a second
-            footer stacked under the painting. This is a ROUTE-SCOPED suppression,
-            never a deletion — every other view keeps the strip — and the row's
-            content is not lost: LandingBelowFold mounts the very same
-            LegalRibbonRow inside its band, so Pricing, Terms, Privacy and
-            Feedback stay reachable from the landing document. */}
-        {view !== 'home' && (
-          <footer style={{
-            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-            borderTop: '1px solid rgba(160,118,42,0.25)',
-            padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`,
+            Pricing | Contact | Terms | Privacy above the copyright line. Refunds
+            is no longer its own link — the refund policy now lives in the Terms
+            "Refunds and cancellation" section (the /refunds URL still resolves).
+            Contact routes through supportMailto() so the address is a one-line
+            change in copy/support.js, never a hardcoded literal in the shell. */}
+        <footer style={{
+          background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+          borderTop: '1px solid rgba(160,118,42,0.25)',
+          padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`,
+          textAlign: 'center',
+          fontFamily: sans,
+          fontSize: FS.sm,
+          color: PARCH_100,
+          letterSpacing: '0.04em',
+          userSelect: 'none',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: SP.sm,
+          alignItems: 'center',
+        }}>
+          <nav aria-label="Footer" style={{
+            display: 'flex', justifyContent: 'center', alignItems: 'center',
+            gap: SP.md, flexWrap: 'wrap',
           }}>
-            <LegalRibbonRow isMobile={isMobile} onNavigate={setView} showHome />
-          </footer>
-        )}
+            <Button variant="ghost" size="sm" onClick={() => setView('pricing')}
+              style={{ color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500, letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined }}>
+              {t('footer.pricing')}
+            </Button>
+            <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
+            <a href={supportMailto()} style={{
+              color: PARCH_100, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4,
+              padding: isMobile ? `0 ${SP.sm}px` : 0, minHeight: isMobile ? 44 : undefined,
+            }}>
+              {t('footer.contact')}
+            </a>
+            <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
+            <Button variant="ghost" size="sm" onClick={() => setView('terms')}
+              style={{ color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500, letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined }}>
+              {t('footer.terms')}
+            </Button>
+            <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
+            <Button variant="ghost" size="sm" onClick={() => setView('privacy')}
+              style={{ color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500, letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined }}>
+              {t('footer.privacy')}
+            </Button>
+          </nav>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
+            <span>{t('footer.copyright', { year: 2026 })}</span>
+            <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>·</span>
+            <span style={{ fontStyle: 'italic' }}>{t('footer.antiAi')}</span>
+          </div>
+        </footer>
 
         {/* ── Mobile bottom nav ───────────────────────────────── */}
         {isMobile && (
@@ -734,7 +802,7 @@ export default function App() {
             boxShadow: '0 -4px 20px rgba(0,0,0,0.4)',
             paddingBottom: 'env(safe-area-inset-bottom)',
           }}>
-            {mobileNav.map(({ id, label }, i) => {
+            {mobileNav.map(({ id, label }) => {
               const active = view === id;
               return (
                 <button
@@ -745,8 +813,7 @@ export default function App() {
                   style={{
                     // minWidth:0 lets a flex child shrink below its content width so
                     // the longest label ellipsis-fits at 375px. Five equal columns.
-                    // `relative` is the positioning context for the flow chevron.
-                    flex: 1, minWidth: 0, position: 'relative',
+                    flex: 1, minWidth: 0,
                     display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', gap: SP.xs,
                     minHeight: 44,
@@ -762,8 +829,6 @@ export default function App() {
                   }}
                 >
                   <span style={{ lineHeight: 1, maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>
-                  {/* Flow chevron — the mobile bar omits Realm, so Library draws none. */}
-                  <NavFlowArrow from={id} to={mobileNav[i + 1]?.id} active={active} />
                 </button>
               );
             })}
@@ -785,7 +850,7 @@ export default function App() {
         };
         return (
           <div style={{
-            position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift + 56) : SP.lg + 56, right: SP.lg, zIndex: 200,
+            position: 'fixed', bottom: isMobile ? 70 : SP.xxl, right: SP.xl, zIndex: 200,
             display: 'flex', flexDirection: 'column', gap: 8,
           }}>
             {showScrollTop && (
@@ -824,10 +889,8 @@ export default function App() {
       {/* ── Feedback widget (global floating affordance) ─────────
           Off the auth/checkout chrome; self-contained (reads the store, owns its
           open/submit state) so the mount is a one-liner. */}
-      <CommandPaletteHost />
-
       <Suspense fallback={null}>
-        <FloatingAffordances visible={allowsFloatingFeedback(view)} />
+        <FeedbackWidget visible={!AUTH_ROUTE_VIEWS.has(view)} />
       </Suspense>
 
       {/* ── Checkout result notice ────────────────────────────────

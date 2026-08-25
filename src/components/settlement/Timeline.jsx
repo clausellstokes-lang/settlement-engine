@@ -3,21 +3,17 @@
  *
  * Renders eventLog as a vertical list, newest first. Each entry shows
  * the narrative summary, the deltas, the faction responses, and an
- * undo affordance for the newest reachable mechanical entry.
+ * undo affordance for the most recent entry.
  *
  * Hidden in draft mode (no log to show).
  */
 
-import { useState } from 'react';
-import { Undo2 } from 'lucide-react';
+import { Clock, Undo2, ChevronRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { planTimelineUndo } from '../../store/settlementSliceHelpers.js';
-import { t } from '../../copy/index.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 export default function Timeline() {
-  const [undoError, setUndoError] = useState(null);
   const phase    = useStore(s => s.phase);
   const eventLog = useStore(s => s.eventLog);
   const undoLastEvent = useStore(s => s.undoLastEvent);
@@ -26,28 +22,12 @@ export default function Timeline() {
   const activeSaveId = useStore(s => s.activeSaveId);
   const clockBound = useStore(s =>
     typeof s.isSettlementClockBound === 'function' && s.isSettlementClockBound(activeSaveId));
-  const undoPlan = planTimelineUndo(eventLog);
-  const undoTargetIndex = undoPlan.ok ? undoPlan.targetIndex : -1;
-
-  const handleUndo = () => {
-    const result = undoLastEvent();
-    if (result?.ok === false) {
-      const reason = result.before?.reason;
-      setUndoError(result.userMessage || (
-        reason === 'entry_not_undoable'
-          ? t('errors.timelineUndoBlocked')
-          : t('errors.timelineUndoUnavailable')
-      ));
-      return;
-    }
-    setUndoError(null);
-  };
 
   if (phase !== 'canon') return null;
 
   return (
     <div style={{
-      background: CARD, border: `1px solid ${BORDER}`,
+      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
       padding: SP.sm, marginTop: SP.sm,
     }}>
       <div style={{
@@ -56,6 +36,7 @@ export default function Timeline() {
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.sm,
       }}>
+        <Clock size={12} />
         Campaign Timeline
         <span style={{ color: MUTED, opacity: 0.7, marginLeft: 6, textTransform: 'none', fontWeight: 400 }}>
           {eventLog.length === 0
@@ -69,17 +50,8 @@ export default function Timeline() {
           fontSize: FS.xxs, color: MUTED, fontFamily: sans, fontStyle: 'italic',
           lineHeight: 1.5, marginBottom: SP.sm,
         }}>
-          On the world-map clock. Events resolve together at each World Pulse, and
+          On the world-map clock — events resolve together at each World Pulse, and
           undo lives at the map level (“Undo last advance”).
-        </div>
-      )}
-
-      {undoError && (
-        <div role="alert" style={{
-          fontSize: FS.xxs, color: SECOND, fontFamily: sans,
-          lineHeight: 1.5, marginBottom: SP.sm,
-        }}>
-          {undoError}
         </div>
       )}
 
@@ -94,8 +66,9 @@ export default function Timeline() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
           {[...eventLog].reverse().map((entry, i) => {
             const realIdx = eventLog.length - 1 - i;
+            const isLatest = realIdx === eventLog.length - 1;
             return (
-              <Entry key={`${entry.appliedAt || entry.timestamp}-${i}`} entry={entry} canUndo={realIdx === undoTargetIndex && !clockBound} onUndo={handleUndo} />
+              <Entry key={`${entry.appliedAt}-${i}`} entry={entry} isLatest={isLatest && !clockBound} onUndo={undoLastEvent} />
             );
           })}
         </div>
@@ -104,41 +77,36 @@ export default function Timeline() {
   );
 }
 
-function Entry({ entry, canUndo, onUndo }) {
-  // Canonical applyEvent entries nest the event under `.event` and stamp
-  // `appliedAt`; the library-row flavor entries written by renameSettlement /
-  // destroySavedSettlement use a flat `timestamp` + flat `type` and carry no
-  // `event` object. Fall back across both shapes so neither renders as
-  // "Invalid Date" nor crashes on `entry.event.description`.
-  const ts = new Date(entry.appliedAt || entry.timestamp);
+function Entry({ entry, isLatest, onUndo }) {
+  const ts = new Date(entry.appliedAt);
   return (
     <div style={{
       padding: SP.sm,
       background: CARD,
-      border: `1px solid ${BORDER}`,
+      border: `1px solid ${BORDER}`, borderRadius: R.sm,
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
         <span style={{
           fontSize: FS.xs, fontWeight: 700, color: INK, fontFamily: sans, flex: 1,
         }}>
-          {entry.narrativeSummary || entry.event?.type || entry.type}
+          {entry.narrativeSummary || entry.event.type}
         </span>
         <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans }}>
           {ts.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
         </span>
-        {canUndo && (
+        {isLatest && (
           <Button
             variant="danger"
             size="sm"
             icon={<Undo2 size={10} />}
             onClick={onUndo}
-            title="Undo this event and restore its prior state"
+            title="Undo this event. Restores prior state"
           >
             Undo
           </Button>
         )}
       </div>
-      {entry.event?.description && (
+      {entry.event.description && (
         <div style={{ fontSize: FS.xxs, color: SECOND, fontFamily: sans, fontStyle: 'italic', marginTop: 2 }}>
           {entry.event.description}
         </div>
@@ -155,7 +123,7 @@ function Entry({ entry, canUndo, onUndo }) {
       {entry.factionResponses?.length > 0 && (
         <div style={{ marginTop: 4, fontSize: FS.xxs, color: INK, fontFamily: sans, lineHeight: 1.5 }}>
           {entry.factionResponses.map((r, i) => (
-            <div key={i}><strong style={{ color: GOLD }}>{r.factionName}</strong>: {r.response}</div>
+            <div key={i}><ChevronRight size={9} /> <strong style={{ color: GOLD }}>{r.factionName}</strong>: {r.response}</div>
           ))}
         </div>
       )}

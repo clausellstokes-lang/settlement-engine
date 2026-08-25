@@ -1,0 +1,12 @@
+export const meta = {
+  name: 'co-owned-kind-merge',
+  description: 'Execute the ownership ruling over the 34 co-owned kind ids',
+  phases: [{ title: 'Merge', detail: 'one agent, one ruling, 34 kinds' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const S = { type:'object', required:['kindsMerged','variantsMoved','pointersLeft','notes'], properties:{
+  kindsMerged:{type:'number'},variantsMoved:{type:'number'},pointersLeft:{type:'number'},notes:{type:'string'}}}
+phase('Merge')
+const out = await agent(`VERIFY-FIRST: legitimate chair-ruled MERGE over the content annexes in ${MF}/docs/content/ (edit only those files; no git). THE OWNERSHIP RULING (binding): ONE KIND, ONE POOL. Read the uniqueness scan report (scratchpad UNIQUENESS_SCAN_REPORT.md + the after/ re-scan) for the 79 CO-OWNED-KIND pairs across 34 kind ids — a kind id authored in TWO annexes. For each: (a) if the kind is LIVE in the tree (it appears in RECEIPT_POOLS_LEGACY.md), LEGACY OWNS IT — merge the other annex's variants INTO the LEGACY pool (append, dedupe against what is already there, keep LEGACY's variant-1 live anchor untouchable), and replace the loser's pool body with a one-line POINTER ("→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03"); (b) if the kind is dark/new (not in LEGACY), the VOLUME annex owns it and the causal/dossier file takes the pointer, EXCEPT where the duplicate side is a causal-annex clause form (those stay — the by-design class). Keep every file's section structure; floors: the merged pool keeps at least the max of both pools' counts. Return {kindsMerged, variantsMoved, pointersLeft, notes: per-kind dispositions}.`,
+  {label:'merge', phase:'Merge', model:'opus', effort:'high', schema:S})
+return out

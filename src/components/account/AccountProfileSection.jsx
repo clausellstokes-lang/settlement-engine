@@ -1,29 +1,20 @@
 /**
  * AccountProfileSection.jsx — Profile / identity section of the Account page.
  *
- * Extracted verbatim from AccountPage.jsx during decomposition. Presentational:
- * the name/model-preference state, handlers and store access stay in AccountPage
+ * Extracted verbatim from AccountPage.jsx during decomposition. Purely
+ * presentational: all state, handlers, and store access stay in AccountPage
  * and arrive via props. The RoleBadge helper moved here with it (it was only
  * used by this section).
- *
- * THE ONE EXCEPTION, and the reason it is one: the profile-image block
- * (AccountIdentitySection) is SELF-CONTAINED rather than prop-driven, following
- * the FounderCreditToggle / FounderChairBio precedent two blocks below. Its
- * column and bucket ship with a dark migration, so it has to feature-detect and
- * hide itself; threading that dormancy up through this component's props and
- * AccountPage's state would spread a temporary schema condition across three
- * files for no gain.
  */
+import {
+  User, Shield, Check, X, Edit3, Mail, Bot,
+} from 'lucide-react';
 import { AI_MODEL_OPTIONS } from '../../config/pricing.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import FounderBadge from '../primitives/FounderBadge.jsx';
-import FounderCreditToggle from './FounderCreditToggle.jsx';
-import FounderChairBio from './FounderChairBio.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import PublicAvatar from '../primitives/PublicAvatar.jsx';
-import AccountIdentitySection from './AccountIdentitySection.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
 
 function RoleBadge({ role }) {
@@ -36,46 +27,41 @@ function RoleBadge({ role }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 3,
-      padding: '3px 10px',
+      padding: '3px 10px', borderRadius: R.md,
       background: c.bg, color: c.color,
       fontSize: FS.xs, fontWeight: 700,
       textTransform: 'uppercase', letterSpacing: '0.04em',
     }}>
-      {c.label}
+      <Shield size={11} /> {c.label}
     </span>
   );
 }
 
 export default function AccountProfileSection({
   auth,
+  avatarInput, setAvatarInput,
+  emailNotifications, setEmailNotifications,
   modelPreference, setModelPreference,
   editingName, setEditingName,
   nameInput, setNameInput,
-  nameSaving, handleSaveName, nameError,
+  nameSaving, handleSaveName,
   profileError, profileSaving, profileSaved,
   handleSaveProfilePreferences,
 }) {
   return (
-    <Section title="Profile">
+    <Section title="Profile" icon={User}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: SP.lg }}>
-        {/* The account's own identity, rendered through THE SAME component every
-            public surface uses (§6). Not a lookalike: a second hand-rolled avatar
-            here is how the letter-circle's size, hue and fallback rules quietly
-            drift apart from the ones the gallery shows, and how a consent bug
-            gets to hide behind "well, the account page looked right".
-            optedIn is true because this is the user looking at themselves — the
-            consent switch governs PUBLIC surfaces, not this preview. */}
-        <PublicAvatar
-          identity={{
-            displayName: auth.displayName || auth.user.email || '',
-            imageUrl: auth.avatarUrl || '',
-            optedIn: true,
-          }}
-          rung="standard"
-          size={56}
-          ring="none"
-          eager
-        />
+        {/* Avatar */}
+        <div style={{
+          width: 56, height: 56, borderRadius: '50%', flexShrink: 0,
+          background: avatarInput
+            ? `center / cover no-repeat url("${avatarInput}")`
+            : `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          color: swatch.white, fontWeight: 700, fontSize: FS['22'], fontFamily: serif_,
+        }}>
+          {!avatarInput && (auth.displayName || auth.user.email || '?')[0].toUpperCase()}
+        </div>
 
         <div style={{ flex: 1 }}>
           {/* Display name */}
@@ -89,7 +75,7 @@ export default function AccountProfileSection({
                   onKeyDown={e => e.key === 'Enter' && handleSaveName()}
                   style={{
                     flex: 1, padding: `${SP.xs}px ${SP.sm}px`,
-                    border: `1px solid ${GOLD}`,
+                    border: `1px solid ${GOLD}`, borderRadius: R.sm,
                     fontSize: FS.lg, fontFamily: serif_, fontWeight: 600,
                     outline: 'none',
                   }}
@@ -97,7 +83,7 @@ export default function AccountProfileSection({
                   autoFocus
                 />
                 <IconButton
-                  glyph="✓"
+                  Icon={Check}
                   label="Save name"
                   onClick={handleSaveName}
                   disabled={nameSaving}
@@ -105,7 +91,7 @@ export default function AccountProfileSection({
                   size="lg"
                 />
                 <IconButton
-                  glyph="×"
+                  Icon={X}
                   label="Cancel editing"
                   onClick={() => setEditingName(false)}
                   tone="danger"
@@ -118,7 +104,7 @@ export default function AccountProfileSection({
                   {auth.displayName || t('account.setDisplayName')}
                 </span>
                 <IconButton
-                  glyph="✎"
+                  Icon={Edit3}
                   label="Edit name"
                   onClick={() => { setNameInput(auth.displayName || ''); setEditingName(true); }}
                   tone="ghost"
@@ -127,16 +113,6 @@ export default function AccountProfileSection({
               </>
             )}
           </div>
-          {/* The civility refusal (and any save failure) lands HERE, on the row
-              that caused it — not in the Save-profile error slot further down,
-              which the user is not looking at while renaming themselves. The copy
-              is non-accusatory and never echoes the matched word: checkCivility
-              does not return it, so this surface could not echo it if it tried. */}
-          {nameError && (
-            <div role="alert" style={{ marginTop: SP.xs, fontSize: FS.xs, color: swatch.danger, fontFamily: sans }}>
-              {nameError}
-            </div>
-          )}
           <div style={{ fontSize: FS.sm, color: MUTED }}>{auth.user.email}</div>
           <div style={{ marginTop: SP.sm, display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
             <RoleBadge role={auth.role} />
@@ -147,47 +123,50 @@ export default function AccountProfileSection({
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md, marginTop: SP.lg }}>
         {profileError && (
-          <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', fontSize: FS.sm, color: swatch.danger }}>
+          <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
             {profileError}
           </div>
         )}
-        {/* THE PROFILE IMAGE (DESIGN_PROFILE_IMAGE.md §3/§4).
-            This REPLACES the old free-text "Avatar URL" box, deliberately and
-            with a behavior change worth naming: pasting a remote URL hotlinked
-            an image this product did not host, could not moderate, could not
-            sweep, and whose EXIF it never touched. The upload pipeline owns all
-            four. It is also now the SINGLE WRITER of profiles.avatar_url — the
-            old box wrote the same column from the Save-profile button below, and
-            a stale draft string there would have clobbered a freshly uploaded
-            image on the next save. */}
-        <AccountIdentitySection />
+        <label htmlFor="account-avatar-url" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
+          Avatar URL
+          <input
+            id="account-avatar-url"
+            aria-label="Avatar URL"
+            value={avatarInput}
+            onChange={e => setAvatarInput(e.target.value)}
+            placeholder="https://..."
+            style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK }}
+          />
+        </label>
+        <label htmlFor="account-email-notifications" style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontSize: FS.sm, color: SECOND, fontWeight: 700 }}>
+          <input
+            id="account-email-notifications"
+            aria-label="Email notifications"
+            type="checkbox"
+            checked={emailNotifications}
+            onChange={e => setEmailNotifications(e.target.checked)}
+          />
+          <Mail size={14} color={GOLD} /> Email notifications
+        </label>
         <label htmlFor="account-model-preference" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
-          <span>AI model preference</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Bot size={14} color={GOLD} /> AI model preference</span>
           <select
             id="account-model-preference"
             value={modelPreference}
             onChange={e => setModelPreference(e.target.value)}
-            style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD }}
+            style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD }}
           >
             {AI_MODEL_OPTIONS.map(option => (
               <option key={option.key} value={option.key}>{option.label}</option>
             ))}
           </select>
         </label>
-        {/* Founder-only: opt in to the public credits roll (170). Self-gates +
-            hides itself when the migration is undeployed. */}
-        <FounderCreditToggle />
-        {/* Chair-holders only: the founder's own line on their plate in the
-            Founders' Hall. Same self-gating discipline as the toggle above — it
-            EXISTS only for an account that holds a chair (the presence law), and
-            hides itself while the chair schema is undeployed. */}
-        <FounderChairBio />
         <Button
           variant="primary"
           size="md"
           onClick={handleSaveProfilePreferences}
           busy={profileSaving}
-         
+          icon={<Check size={14} />}
           style={{ alignSelf: 'flex-start' }}
         >
           {profileSaving ? 'Saving...' : profileSaved ? 'Saved' : 'Save profile'}

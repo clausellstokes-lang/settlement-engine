@@ -177,7 +177,7 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     module: 'factionCompetition.js',
     consultsProposalFlag: false,
     rationale:
-      'A faction capture escalates at severity >= 0.68; a new or cleared criminal suppression always asks approval, while continuation of an already-approved live suppression is automatic. All are independent of the proposal flag. (institutionCandidate)',
+      'A faction capturing/suppressing an institution escalates to proposal at severity >= 0.68 (or whenever the move is a criminal suppression), independent of the flag. (institutionCandidate)',
   }),
   faction_rival_power_contest: Object.freeze({
     authority: 'severity-gated',
@@ -219,22 +219,6 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     consultsProposalFlag: false,
     rationale:
       'Every diplomatic relabel built through labelProposal emits a bare applyMode: "proposal". A visible relationship label flip (neutral->rival, allied, vassal rebellion, etc.) is a new premise and is unconditionally offered to the DM. Distinct from relationship_evolution, which is the severity-gated internal-drift path.',
-  }),
-  treaty_breached: Object.freeze({
-    authority: 'always-proposal',
-    module: 'realmVerbExecution.js',
-    consultsProposalFlag: false,
-    campaignAltering: true,
-    rationale:
-      'WR-0c: publicly repudiating a live non-aggression pact lifts every treaty restraint and creates a full treaty_default casus. It is an actor-initiated campaign premise and the realm verb lane always stages it as a proposal; no autonomy flag or severity threshold may auto-apply it.',
-  }),
-  sovereignty_conveyed: Object.freeze({
-    authority: 'always-proposal',
-    module: 'realmVerbExecution.js',
-    consultsProposalFlag: false,
-    campaignAltering: true,
-    rationale:
-      'WR-10 (amendment S): a settlement changes hands. Selling a steading or a settled vassalage moves sovereignty without a siege — the buyer inherits a holding, the sold town inherits a grievance against the court that traded it, and the realm map means something different afterwards. That is an actor-initiated campaign PREMISE, not the bounded consequence of one the DM already accepted, so the realm verb lane stages it unconditionally as a proposal and no autonomy flag or severity threshold may auto-apply it (the treaty_breached precedent, whose gate line this entry shares because the realm-verb lane has exactly one mint).',
   }),
   // ── STRUCTURAL-PROPOSAL: auto by default; one branch routes to proposal via a
   //    proposal-only lever. ───────────────────────────────────────────────────

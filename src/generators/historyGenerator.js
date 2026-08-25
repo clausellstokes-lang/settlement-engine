@@ -9,26 +9,20 @@
  *  - pickRandom2/random01 were local re-implementations; now imported from helpers
  */
 
+import { POLITICAL_FLAVOR } from './narrativeText.js';
 import { resolvePrimaryStress } from './stressPriority.js';
 import { deriveTradeCommodity } from './tradeCommodity.js';
-import { buildCurrentTensionTokens, renderHistoryTemplate } from './historyTemplate.js';
-import { pick, random01, randInt } from './helpers.js';
+import { getInstFlags, getStressFlags, pick, pickRandom2, random01, randInt } from './helpers.js';
 import { random as _rng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription } from '../data/historyData.js';
-import { resolveGenerationWorldLaw } from './generationContext.js';
-import {
-  STRESS_TO_TENSION,
-  TIMELINE_CATEGORY_TYPES,
-} from './history/historyPolicyData.js';
-import { deriveHistoryRouteContext } from './history/historyRouteContext.js';
-import { generateSafetyNarrative2, generateTradeNarrative2 } from './history/historyEventStrands.js';
-export {
-  STRESS_TO_TENSION,
-  TIMELINE_CATEGORY_TYPES,
-} from './history/historyPolicyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES } from '../data/historyData.js';
 
+// ─── priorityMult ─────────────────────────────────────────────────────────────
+// Convert a 0–100 priority/influence score to a 0–2 multiplier centred at 1.
+// (Named distinctly to avoid confusion with helpers.popToTier which maps population → tier string.)
+
+const priorityMult = (score = 50) => Math.max(0, (score ?? 50) / 50);
 
 /**
  * Return a randomised settlement age in years appropriate for its tier.
@@ -50,6 +44,66 @@ const resolveSettlementAge = (tier, config = {}) => {
   return getSettlementAge(tier);
 };
 
+// ─── HISTORICAL_EVENTS_DATA ───────────────────────────────────────────────────
+
+// ─── getSettlementHistoryNote ─────────────────────────────────────────────────
+/**
+ * Return a one-sentence historical character description based on the pattern
+ * of event types in the settlement's historical record.
+ *
+ * @param {Array}  events  - Historical event objects with .type and .severity
+ * @param {string} _tier   - Settlement tier
+ * @param {Object} _config - Settlement config
+ * @returns {string}
+ */
+const _getSettlementHistoryNote = (events, _tier, _config) => {
+  if (!events || events.length === 0) return 'recently established and still finding its character';
+
+  const disasters = events.filter(e => e.type === 'disaster').length;
+  const political = events.filter(e => e.type === 'political').length;
+  const economic = events.filter(e => e.type === 'economic').length;
+  const religious = events.filter(e => e.type === 'religious').length;
+  const magical = events.filter(e => e.type === 'magical').length;
+  const catastrophic = events.some(e => e.severity === 'catastrophic');
+
+  // Small chance to use a stable/generic description regardless
+  if (random01(0.15)) return pickRandom2(POLITICAL_FLAVOR.stable)(events);
+
+  // Choose the dominant narrative pattern
+  let pattern;
+  if (catastrophic) pattern = 'catastrophic';
+  else if (political >= 2) pattern = 'political_heavy';
+  else if (disasters >= 2) pattern = 'disaster_heavy';
+  else if (economic >= 2) pattern = 'economic_heavy';
+  else if (religious >= 1 && random01(0.6)) pattern = 'religious_heavy';
+  else if (magical >= 1 && random01(0.5)) pattern = 'magical_heavy';
+  else if (events.length >= 4 && random01(0.65)) pattern = 'layered_history';
+  else pattern = 'stable';
+
+  // Map pattern to relevant event subset
+  const eventSubsets = {
+    political_heavy: events.filter(e => e.type === 'political'),
+    disaster_heavy: events.filter(e => e.type === 'disaster'),
+    economic_heavy: events.filter(e => e.type === 'economic'),
+    religious_heavy: events.filter(e => e.type === 'religious'),
+    magical_heavy: events.filter(e => e.type === 'magical'),
+    catastrophic: events.filter(e => e.severity === 'catastrophic'),
+    stable: events,
+    layered_history: events,
+  };
+
+  const flavors = POLITICAL_FLAVOR[pattern];
+  const subset = eventSubsets[pattern];
+
+  if (!flavors || !subset || subset.length === 0) {
+    return pickRandom2(POLITICAL_FLAVOR.stable)(events);
+  }
+
+  return pickRandom2(flavors)(subset)
+    .replace(/\bthe\s+(the|a|an)\s+/gi, 'the ')
+    .replace(/\bthe\s+(The|A|An)\s+/g, 'the ');
+};
+
 // ─── buildHistoryContext ──────────────────────────────────────────────────────
 /**
  * Extract the context object used by generateTradeNarrative2 and related helpers.
@@ -61,13 +115,7 @@ const resolveSettlementAge = (tier, config = {}) => {
  * @param {Object} powerStructure - Generated power structure
  * @returns {Object} Context object with named descriptors
  */
-const buildHistoryContext = (
-  config,
-  institutions = [],
-  economicState = null,
-  powerStructure = null,
-  worldLaw,
-) => {
+const buildHistoryContext = (config, institutions = [], economicState = null, powerStructure = null) => {
   const { tradeRouteAccess: route = 'road', magicLevel = 'medium', monsterThreat: threat = 'frontier' } = config;
 
   // Determine primary trade commodity — unified scan (tradeCommodity.js); the
@@ -131,12 +179,17 @@ const buildHistoryContext = (
     i => (i.name || '').toLowerCase().includes('garrison') || (i.name || '').toLowerCase().includes('barracks'),
   );
 
-  const routeContext = deriveHistoryRouteContext(
-    route,
-    worldLaw,
-    tradeCommodity,
-    threat,
-  );
+  // Disaster profile
+  const disasterProfile =
+    route === 'port'
+      ? 'coastal'
+      : route === 'river'
+        ? 'river'
+        : tradeCommodity === 'timber'
+          ? 'forest'
+          : threat === 'plagued'
+            ? 'monster'
+            : 'general';
 
   // Magic infrastructure
   const magicInsts = institutions.filter(i => i.category === 'Magic' || (i.tags || []).includes('arcane'));
@@ -170,13 +223,230 @@ const buildHistoryContext = (
     hasWalls,
     hasCitadel,
     hasGarrison,
-    ...routeContext,
+    disasterProfile,
     magicInsts,
     hasTower,
     hasGuildMag,
   };
 };
 
+// ─── generateSafetyNarrative2 ────────────────────────────────────────────────
+// Compute a weighted probability map over history event types based on the
+// settlement's current state. Used to drive the historical event type distribution.
+
+const generateSafetyNarrative2 = (config = {}, institutions = []) => {
+  const flags = getInstFlags(config, institutions);
+  const stress = getStressFlags(config, institutions);
+  const threat = config.monsterThreat || 'frontier';
+
+  // Threat multiplier for disaster events
+  const threatMult = threat === 'plagued' ? 1.6 : threat === 'heartland' ? 0.6 : 1;
+
+  const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
+
+  // Base weights by event category
+  const weights = {
+    economic: 1.3 * priorityMult(flags.economyOutput),
+    political: 1.2 * (0.5 + 0.5 * priorityMult(Math.max(flags.militaryEffective, flags.criminalEffective))),
+    disaster: 1.0 * (0.6 + 0.4 * priorityMult(flags.militaryEffective)) * (stress.stateCrime ? 1.4 : 1) * threatMult,
+    religious: 1.0 * priorityMult(flags.religionInfluence) * (stress.crusaderSynthesis ? 1.5 : 1),
+    magical: 0.8 * priorityMult(flags.magicInfluence) * (stress.heresySuppression ? 0.4 : 1),
+    occupation_infiltration: 0.7,
+    exile_return: 0.6,
+    demographic: 0.6,
+  };
+
+  // Stress-specific boosts
+  const STRESS_BOOSTS = {
+    under_siege: { disaster: 2.5, political: 1.5 },
+    famine: { disaster: 2.0, economic: 1.8 },
+    occupied: { occupation_infiltration: 3.0, political: 2.0 },
+    politically_fractured: { political: 2.5, exile_return: 1.5 },
+    indebted: { economic: 2.5, political: 1.3 },
+    recently_betrayed: { political: 2.5, occupation_infiltration: 1.8 },
+    infiltrated: { occupation_infiltration: 3.0, political: 1.5 },
+    plague_onset: { disaster: 2.5, religious: 1.5 },
+    succession_void: { political: 3.0, exile_return: 2.0 },
+    monster_pressure: { disaster: 2.0, political: 1.3 },
+    insurgency: { political: 2.5, occupation_infiltration: 1.5 },
+    mass_migration: { demographic: 3.0, economic: 1.5 },
+    wartime: { disaster: 2.0, political: 1.8 },
+    religious_conversion: { religious: 2.5, political: 1.5 },
+    slave_revolt: { political: 2.5, demographic: 1.5 },
+  };
+
+  stresses.forEach(stressType => {
+    const boosts = STRESS_BOOSTS[stressType] || {};
+    Object.entries(boosts).forEach(([category, mult]) => {
+      if (weights[category] !== undefined) weights[category] *= mult;
+    });
+  });
+
+  return weights;
+};
+
+// ─── generateTradeNarrative2 ─────────────────────────────────────────────────
+/**
+ * Return a context object of named template variables for a specific history
+ * event category (economic, political, disaster, religious, magical).
+ */
+const generateTradeNarrative2 = (category, context) => {
+  const {
+    tradeCommodity: commodity,
+    dominantGuild,
+    primaryExports,
+    incomeSources,
+    tradeRouteAccess: route,
+    _prosperity,
+    dominantFaction,
+    govType,
+    religiousScale,
+    disasterProfile,
+    magicLevel,
+    _hasTower,
+    _hasGuildMag,
+  } = context;
+
+  const primaryExport = commodity
+    ? commodity.charAt(0).toUpperCase() + commodity.slice(1)
+    : primaryExports[0] || 'trade goods';
+
+  switch (category) {
+    case 'economic': {
+      const routeType =
+        { port: 'coastal', river: 'river', crossroads: 'overland', road: 'overland', isolated: 'mountain' }[route] ||
+        'overland';
+      const destination =
+        route === 'port'
+          ? 'distant maritime ports'
+          : route === 'river'
+            ? 'upriver markets and capitals'
+            : 'the regional capital';
+      const demands = incomeSources.some(s => s.toLowerCase().includes('guild'))
+        ? 'guild recognition and fair wages'
+        : incomeSources.some(s => s.toLowerCase().includes('port'))
+          ? 'docking rights and fair tariffs'
+          : 'better working conditions';
+      return {
+        '{resource}': primaryExport.toLowerCase(),
+        '{guild_name}': dominantGuild,
+        '{route_type}': routeType,
+        '{destination}': destination,
+        '{demands}': demands,
+        '{bank_name}': pick(['Golden Scales', 'Iron Vault', "Merchant's Crown", 'Silver Ledger']),
+        '{frequency}': route === 'crossroads' ? 'weekly' : 'seasonal',
+      };
+    }
+    case 'political': {
+      const authority =
+        {
+          noble: 'the regional duke',
+          merchant_guild: 'the merchant council',
+          crown: 'the king',
+          democratic: 'the popular assembly',
+          council: 'the council',
+        }[govType] || 'the governing authority';
+      const method = dominantFaction.toLowerCase().includes('merchant')
+        ? 'economic pressure'
+        : dominantFaction.toLowerCase().includes('military')
+          ? 'armed negotiation'
+          : dominantFaction.toLowerCase().includes('guild')
+            ? 'guild coalition'
+            : 'legal maneuvering';
+      const faction = dominantFaction.toLowerCase().includes('merchant')
+        ? 'the merchant guilds'
+        : dominantFaction.toLowerCase().includes('military')
+          ? 'the military garrison'
+          : dominantFaction.toLowerCase().includes('noble')
+            ? 'the noble families'
+            : 'the common people';
+      return {
+        '{authority}': authority,
+        '{method}': method,
+        '{faction}': faction,
+        '{former_ruler}': pick(['the previous governing family', 'the regional empire', 'the old council']),
+        '{family_name}': pick(['Aldermere', 'Greystone', 'Vanthorpe', 'Coldmoor']),
+        '{new_family}': pick(['Ironmark', 'Brightwater', 'Stormveil', 'Ashford']),
+        '{ally_settlement}': pick(['Westmarch', 'Northgate', 'Riverhold', 'Silverpeak']),
+        '{outcome}': context.stability === 'Unstable' ? 'a costly compromise' : 'negotiated settlement',
+      };
+    }
+    case 'disaster': {
+      const quarter =
+        commodity === 'timber'
+          ? 'the lumber yards and sawmill district'
+          : route === 'port'
+            ? 'the dockside warehouses'
+            : route === 'river'
+              ? 'the riverside mill quarter'
+              : 'the market quarter';
+      const buildingType =
+        commodity === 'timber'
+          ? 'timber stockpiles and workshop buildings'
+          : route === 'port'
+            ? 'ships, warehouses, and dock infrastructure'
+            : 'wooden buildings and merchant stalls';
+      return {
+        '{quarter}': quarter,
+        '{building_type}': buildingType,
+        '{location}':
+          disasterProfile === 'coastal'
+            ? 'the harbour and coastal districts'
+            : disasterProfile === 'river'
+              ? 'the riverside quarter'
+              : disasterProfile === 'forest'
+                ? 'the mill and lumber district'
+                : 'the lower districts',
+        '{percent}': randInt(20, 50),
+        '{duration}': randInt(2, 4),
+        '{dragon_color}': pick(['red', 'black', 'green', 'blue']),
+        '{reason}': disasterProfile === 'monster' ? 'a monster incursion' : 'a natural disaster',
+      };
+    }
+    case 'religious': {
+      const orderMap = {
+        cathedral: pick(['Benedictine', 'Cistercian', 'Franciscan']),
+        monastery: pick(['Franciscan', 'Dominican', 'Augustinian']),
+        church: pick(['Parish', 'Mendicant', 'Hospitaller']),
+        shrine: pick(['Hermetic', 'Pilgrim', 'Wandering']),
+      };
+      return {
+        '{deity}': pick([
+          'the patron deity of the settlement',
+          'the church of the Sun God',
+          'the faith of the Earth Mother',
+        ]),
+        '{order_name}': orderMap[religiousScale] || 'Hospitaller',
+        '{saint_name}': pick(['St. Aldric', 'St. Brigid', 'St. Marcus', 'St. Helena', 'St. Corvin']),
+        '{heresy_type}': pick(['reformist', 'mystical', 'ascetic', 'apocalyptic']),
+        '{doctrinal_dispute}': pick([
+          'the role of the laity',
+          'interpretation of sacred texts',
+          'hierarchy and authority',
+        ]),
+      };
+    }
+    case 'magical': {
+      const founderDesc = pick(
+        magicLevel === 'high'
+          ? ['a conclave of archmages', 'the regional magical authority', 'a legendary wizard']
+          : ['a solitary wizard', 'wandering mage scholars', 'a minor magical order'],
+      );
+      return {
+        '{wizard_name}': pick(['Aldric the Wise', 'Morgana Shadowweaver', 'Theron Stormcaller', 'Elara Moonwhisper']),
+        '{magical_effect}': pick(
+          magicLevel === 'high'
+            ? ['a warping of local reality', 'transformation of the affected district', 'a permanent arcane storm']
+            : ['minor reality distortions', 'lingering magical residue', 'unstable enchantments on buildings'],
+        ),
+        '{plane_name}': pick(['the Feywild', 'the Shadowfell', 'the Elemental Chaos']),
+        '{founder}': founderDesc,
+      };
+    }
+    default:
+      return {};
+  }
+};
 
 // ─── generateEventNarrative ───────────────────────────────────────────────────
 /**
@@ -184,7 +454,7 @@ const buildHistoryContext = (
  * variables and selecting effects/hooks appropriate to the event severity.
  */
 
-const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descSeed = null) => {
+const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}) => {
   // Template variable substitutions (can be overridden by extraTokens)
   const defaultTokens = {
     '{quarter}': pick(['the market quarter', 'the residential district', 'the waterfront', 'the temple district']),
@@ -236,11 +506,10 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
     ...extraTokens,
   };
 
-  // CONTENT-GT-FINAL (Charge 1): draw-free variant pick
-  // (historyData.historyDescription). The draw count remains fixed:
-  // defaultTokens builds every pick regardless of which tokens the chosen
-  // variant references, then the renderer resolves every occurrence.
-  const description = renderHistoryTemplate(historyDescription(eventTemplate, descSeed), defaultTokens);
+  let description = eventTemplate.description;
+  Object.entries(defaultTokens).forEach(([token, value]) => {
+    description = description.replace(token, String(value));
+  });
 
   // Select lasting effects based on severity
   const severity = pick(eventTemplate.severity || ['major']);
@@ -309,8 +578,6 @@ const buildHistoricalEvent = (
   economicState = null,
   config = {},
   factions = [],
-  context = {},
-  worldLaw,
 ) => {
   // Resolve active stress type
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
@@ -438,11 +705,13 @@ const buildHistoricalEvent = (
     }
   }
 
-  // Fill remaining slots from templates permitted by the run-scoped law. This
-  // covers both arcane types and the resolved generated-content boundaries.
-  const pool = HISTORICAL_EVENTS_DATA.filter(
-    event => !usedTypes.has(event.type) && worldLaw.allowsHistoryEvent(event),
-  );
+  // Fill remaining slots with random tensions
+  // Suppress magical events in no-magic worlds
+  // The real catalog type is 'magical_controversy' (see HISTORICAL_EVENTS_DATA)
+  // — the old 'magical' token matched nothing, so arcane events leaked into
+  // no-magic campaigns.
+  const magicFilter = config?.magicExists === false ? e => e.type !== 'magical_controversy' : () => true;
+  const pool = HISTORICAL_EVENTS_DATA.filter(e => !usedTypes.has(e.type) && magicFilter(e));
   while (selected.length < targetCount && pool.length > 0) {
     let candidate = pick(pool);
     // Bias toward guild conflict if guilds present
@@ -472,18 +741,11 @@ const buildHistoricalEvent = (
     return result;
   };
 
-  const tensionTokens = buildCurrentTensionTokens(context);
-  return selected
-    .filter(worldLaw.allowsHistoryEvent)
-    .map(tension => ({
-      ...tension,
-      description: renderHistoryTemplate(
-        substituteNames(tension.description),
-        tensionTokens,
-      ),
-      factions: (tension.factions || []).map(substituteNames),
-    }))
-    .filter(worldLaw.allowsHistoryEvent);
+  return selected.map(tension => ({
+    ...tension,
+    description: substituteNames(tension.description),
+    factions: (tension.factions || []).map(substituteNames),
+  }));
 };
 
 // ─── generateRelationshipEvent ────────────────────────────────────────────────
@@ -501,7 +763,47 @@ const buildHistoricalEvent = (
 // tyranny/wild_magic types deepen the pools so city/metropolis can reach 12/20.
 // Stress → tension-template mapping (hoisted from buildHistoricalEvent so the
 // registration walker can verify every target is a real HISTORICAL_EVENTS_DATA type).
-const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
+export const STRESS_TO_TENSION = {
+  under_siege: 'occupation_legacy',
+  famine: 'resource_scarcity',
+  occupied: 'occupation_legacy',
+  politically_fractured: 'leadership_vacuum',
+  indebted: 'outside_debt',
+  recently_betrayed: 'corruption_scandal',
+  infiltrated: 'infiltration_fear',
+  plague_onset: 'resource_scarcity',
+  succession_void: 'succession_crisis',
+  monster_pressure: 'external_threat',
+  insurgency: 'legitimacy_crisis',
+  mass_migration: 'demographic_pressure',
+  wartime: 'external_threat',
+  religious_conversion: 'legitimacy_crisis',
+  slave_revolt: 'legitimacy_crisis',
+};
+
+export const TIMELINE_CATEGORY_TYPES = {
+  economic: ['economic_disparity', 'outside_debt', 'resource_scarcity', 'guild_conflict', 'market_crash', 'trade_collapse'],
+  political: [
+    'succession_crisis',
+    'corruption_scandal',
+    'infiltration_fear',
+    'leadership_vacuum',
+    'occupation_legacy',
+    'disputed_land',
+    'population_friction',
+    'generational_divide',
+    'popular_uprising',
+    'tyranny',
+  ],
+  disaster: ['external_threat', 'great_fire', 'plague_years', 'great_flood'],
+  religious: ['religious_tension', 'heresy_trial', 'pilgrimage_surge'],
+  magical: ['magical_controversy', 'wild_magic'],
+  occupation_infiltration: ['infiltration_fear'],
+  exile_return: ['occupation_legacy'],
+  demographic: ['population_friction'],
+};
+
+const generateRelationshipEvent = (age, tier, config, context = null) => {
   // Number of history events (scaled by age)
   const _ageFraction = age / 100;
   // Scale event count by age — each tier gets appropriate depth
@@ -522,7 +824,8 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
 
   // Get the category weight map for this settlement
   const categoryWeights = generateSafetyNarrative2(config, context?._institutions || []);
-  if (!worldLaw.magicFunctions()) {
+  // Suppress magical history events in no-magic worlds
+  if (config?.magicExists === false) {
     delete categoryWeights['magical'];
   }
 
@@ -558,11 +861,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
     // skip this slot.
     const candidateTypes = TIMELINE_CATEGORY_TYPES[cat] || [];
     const pool = HISTORICAL_EVENTS_DATA.filter(
-      event => (
-        candidateTypes.includes(event.type)
-        && !usedNames.has(event.name || event.type || '')
-        && worldLaw.allowsHistoryEvent(event)
-      ),
+      e => candidateTypes.includes(e.type) && !usedNames.has(e.name || e.type || '')
     );
     if (!pool.length) continue;
     const tmpl = pool[Math.floor(_rng() * pool.length)];
@@ -584,7 +883,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
     // Build context tokens
     const contextTokens = context ? generateTradeNarrative2(cat, context) : {};
 
-    const event = generateEventNarrative(tmpl, yearsAgo, contextTokens, `${config?._seed ?? ''}::histEvent::${i}::${tmpl.type}`);
+    const event = generateEventNarrative(tmpl, yearsAgo, contextTokens);
     event.type = cat;
     // Preserve the stable template id alongside the display category. The final
     // dedup keys on templateType (not category), so two distinct arcs in the same
@@ -626,14 +925,9 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
     const contextTokens = generateTradeNarrative2(cat, context) || {};
     if (_rng() < 0.6) {
       const anchorType = ANCHOR_TYPE_MAP[cat];
-      const tmpl = anchorType
-        ? HISTORICAL_EVENTS_DATA.find(event => (
-            event.type === anchorType
-            && worldLaw.allowsHistoryEvent(event)
-          ))
-        : null;
+      const tmpl = anchorType ? HISTORICAL_EVENTS_DATA.find(e => e.type === anchorType) : null;
       if (!tmpl) return; // no settlement-appropriate anchor — keep the original event
-      const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens, `${config?._seed ?? ''}::histAnchor::${cat}::${tmpl.type}`);
+      const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens);
       if (replacement) {
         replacement.type = cat;
         replacement.templateType = tmpl.type; // thread the anchor's template id for the dedup
@@ -710,19 +1004,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
       anchored: false,
     });
   }
-  // [D6 THE UNDERWAYS] DEFERRED-with-reason: an underways founding mention ("dug during the
-  // siege…") belongs in this resourceEvents pool, conditioned on the excavation-competence
-  // resources (coal/iron/stone/gemstone). It is NOT added here because historyGenerator.js sits
-  // exactly at its frozen size-ratchet ceiling (scripts/.size-baseline.json = 883 effective
-  // lines) — any code line trips sizeBaseline.test.js, and the wave protocol forbids raising the
-  // baseline while decomposing this file is outside the catalog-half fence. Every other D6
-  // parity element (catalog, facets, services, geography, stress content, NPC office) shipped;
-  // this cosmetic timeline beat lands when historyGenerator.js is decomposed. (docs/review-r2/G2_SHIFT_MAP.md)
-  if (
-    worldLaw.allowsHistoryEvent('magical')
-    && hasResource(['magical_node'])
-    && _rng() < 0.45
-  ) {
+  if (hasResource(['magical_node']) && _rng() < 0.45) {
     resourceEvents.push({
       name: 'The Arcane Incident',
       description:
@@ -767,7 +1049,6 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
   // (tests/generators/historyEventTitles.test.js).
   const seenKeys = new Set();
   const deduped = events.filter(e => {
-    if (!worldLaw.allowsHistoryEvent(e)) return false;
     const typeKey = e.templateType ? `t:${e.templateType}` : null;
     const nameKey = e.name ? `n:${e.name}` : null;
     if ((typeKey && seenKeys.has(typeKey)) || (nameKey && seenKeys.has(nameKey))) return false;
@@ -796,7 +1077,6 @@ const ANCIENT_RUIN_SUFFIXES = ['akar', 'unde', 'eth', 'ovar', 'ys', 'antle', 'or
  * @param {Object} economicViability - Result of generateEconomicViability
  * @param {Object} economicState   - Result of generateEconomicState
  * @param {Object} powerStructure  - Result of generatePowerStructure
- * @param {unknown} generationContext - Run-scoped generation law/context
  * @returns {Object} History object with age, founding, events, tensions, character
  */
 export const generateHistory = (
@@ -806,29 +1086,17 @@ export const generateHistory = (
   economicViability = null,
   economicState = null,
   powerStructure = null,
-  generationContext = null,
 ) => {
-  const worldLaw = resolveGenerationWorldLaw(generationContext, config);
   const age = resolveSettlementAge(tier, config);
-  const context = buildHistoryContext(
-    config,
-    institutions,
-    economicState,
-    powerStructure,
-    worldLaw,
-  );
+  const context = buildHistoryContext(config, institutions, economicState, powerStructure);
   if (context) context._institutions = institutions;
 
-  // Founding narrative. The per-settlement seed for draw-free prose-variant selection
-  // rides on config._seed (stamped by the caller) — read at the generateEventNarrative
-  // call sites (Charge 1) and, in Charge 4, by genArrivalDetail for STRESS_NOTES.
-  const founding = genArrivalDetail(config, context, worldLaw);
+  // Founding narrative
+  const founding = genArrivalDetail(config, context);
   founding.age = age;
 
   // Historical timeline
-  const timeline = age > 0
-    ? generateRelationshipEvent(age, tier, config, context, worldLaw)
-    : [];
+  const timeline = age > 0 ? generateRelationshipEvent(age, tier, config, context) : [];
 
   // Current tensions
   const tensions = buildHistoricalEvent(
@@ -837,7 +1105,7 @@ export const generateHistory = (
     tier,
     economicState,
     config,
-    powerStructure?.factions || [], context, worldLaw,
+    powerStructure?.factions || [],
   );
 
   // Derive historical character from event pattern

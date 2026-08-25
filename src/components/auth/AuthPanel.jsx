@@ -20,16 +20,15 @@
  * withheld from sign-up so account creation stays short).
  */
 import { useState } from 'react';
+import { Mail } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, SECOND, MUTED, BORDER, sans, SP, FS } from '../theme.js';
+import { GOLD, SECOND, MUTED, BORDER, sans, SP, R, FS, GOLD_BG } from '../theme.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { getTierDisplayName } from '../../config/pricing.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
-import useIsMobile from '../../hooks/useIsMobile.js';
 import ForgotPasswordFlow from './ForgotPasswordFlow.jsx';
-import CaptchaGate from '../perimeter/CaptchaGate.jsx';
 import {
   // `Button` here is the auth-page full-width CTA (its own prop API: always
   // width:100%, variants primary/success/danger/ghost) — kept under an alias so
@@ -68,17 +67,6 @@ export default function AuthPanel({
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [magicSent, setMagicSent] = useState(false); // email sign-in link dispatched
-  // Wave-D perimeter (INERT until the perimeterCaptcha flag + Turnstile keys are
-  // set): the human-verification token for the Supabase-native captcha on
-  // signInWithPassword / signUp. Stays null while the flag is off (CaptchaGate
-  // renders nothing), and the token rides as an ADDITIVE arg — so the flag-off
-  // path is byte-identical. Server enforcement is the owner's Supabase dashboard
-  // "Enable Captcha protection" toggle. See docs/PERIMETER_RUNBOOK.md.
-  const [captchaToken, setCaptchaToken] = useState(null);
-  // The segmented Sign In / Create Account toggle is a RAW <button> (it can't be
-  // the Button primitive without breaking the seamless borderless segments), so
-  // it misses the primitive's mobile 44px tap floor — apply it inline on mobile.
-  const isMobile = useIsMobile();
 
   // User-initiated mode switch. Pages hand this to the router (changes the
   // URL); the modal switches in place. The signup → verify transition is
@@ -122,9 +110,7 @@ export default function AuthPanel({
     setError(null);
     setLoading(true);
     try {
-      // captchaToken is undefined-safe: null while the perimeterCaptcha flag is
-      // off, so this call is byte-identical to before until the owner activates it.
-      await authSignIn(email.trim(), password, rememberMe, captchaToken || undefined);
+      await authSignIn(email.trim(), password, rememberMe);
       onAuthed?.();
     } catch (e) {
       setError(e.message || 'Sign-in failed');
@@ -135,33 +121,33 @@ export default function AuthPanel({
 
   const handleSignUp = async () => {
     if (!email.trim() || !password) return;
-    if (password.length < 6) { setError(t('auth.error.passwordTooShort')); return; }
+    if (password.length < 6) { setError('Password must be at least 6 characters'); return; }
     // Confirm-password mismatch guard: a typo'd password would otherwise create
     // an account the user can never sign back into. Block submit and say so.
     if (password !== confirmPassword) { setError(t('auth.error.passwordMismatch')); return; }
     setError(null);
     setLoading(true);
     try {
-      const { needsVerification, existingAccount } = await authSignUp(email.trim(), password, captchaToken || undefined);
+      const { needsVerification, existingAccount } = await authSignUp(email.trim(), password);
       if (existingAccount) {
         // Supabase reports a signup for an already-registered email with empty
         // identities and no error / no email — the verify screen would never
         // resolve. Point the user at sign-in / reset instead of a dead end.
-        setError(t('auth.error.emailMayExist'));
+        setError('That email may already have an account. Try signing in, or reset your password.');
       } else if (needsVerification) {
         setMode('verify'); // inline "check your inbox" — no route change
       } else {
         onAuthed?.();
       }
     } catch (e) {
-      setError(e.message || t('auth.error.signUpFailed'));
+      setError(e.message || 'Sign-up failed');
     } finally {
       setLoading(false);
     }
   };
 
   const handleMagicLink = async () => {
-    if (!email.trim()) { setError(t('auth.error.emailRequired')); return; }
+    if (!email.trim()) { setError('Enter your email address'); return; }
     setError(null);
     setLoading(true);
     try {
@@ -185,6 +171,7 @@ export default function AuthPanel({
   if (magicSent) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
+        <Mail size={40} color={GOLD} style={{ margin: '0 auto' }} />
         <Alert type="success">
           {t('auth.magic.sent', { email: email.trim() })}
         </Alert>
@@ -204,6 +191,7 @@ export default function AuthPanel({
   if (mode === 'verify') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
+        <Mail size={40} color={GOLD} style={{ margin: '0 auto' }} />
         <Alert type="success">
           We sent a confirmation link to <strong>{email}</strong>. Check your inbox and click the link to activate your account.
         </Alert>
@@ -227,26 +215,21 @@ export default function AuthPanel({
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
       {showTabs && (
-        <div style={{ display: 'flex', overflow: 'hidden', border: `1px solid ${BORDER}` }}>
+        <div style={{ display: 'flex', borderRadius: R.md, overflow: 'hidden', border: `1px solid ${BORDER}` }}>
           {[['signin', 'Sign In'], ['signup', 'Create Account']].map(([id, label]) => (
-            // Bespoke segmented-control tab: flex:1 borderless square segments.
-            // The active station is marked by a DRAWN gold rule + gold ink (the
-            // nav idiom), never a tinted fill. The Button primitive forces its
-            // own border + rounding, which would break the seamless segmented
-            // look — so this stays raw (accessible via its text label).
+            // Bespoke segmented-control tab: flex:1 borderless square segments
+            // clipped by the parent's overflow:hidden, with a conditional gold
+            // active fill driven by `mode === id`. The Button primitive forces
+            // its own 1px border + R.lg rounding, which would break the seamless
+            // segmented look — so this stays raw (accessible via its text label).
             <button key={id} type="button" onClick={() => requestMode(id)}
               aria-pressed={mode === id}
               style={{
                 flex: 1, padding: `${SP.sm}px 0`,
-                background: 'transparent',
-                border: 'none',
-                borderBottom: mode === id ? `2px solid ${GOLD}` : '2px solid transparent',
-                cursor: 'pointer',
+                background: mode === id ? GOLD_BG : 'transparent',
+                border: 'none', cursor: 'pointer',
                 fontSize: FS.sm, fontWeight: mode === id ? 700 : 500,
                 color: mode === id ? GOLD : MUTED, fontFamily: sans,
-                // Mobile 44px tap floor (the primitive's floor doesn't reach this
-                // raw segment, so it is applied inline). Desktop unchanged.
-                ...(isMobile ? { minHeight: 44 } : null),
               }}
             >
               {label}
@@ -276,11 +259,6 @@ export default function AuthPanel({
         <Checkbox checked={rememberMe} onChange={setRememberMe} label={t('auth.rememberMe')} />
       )}
 
-      {/* Wave-D human verification (INERT until the perimeterCaptcha flag + keys
-          are set). Managed/invisible mode: silent for humans, so it does not add
-          a visible step to the form. Renders nothing while the flag is off. */}
-      <CaptchaGate action={mode === 'signup' ? 'signup' : 'signin'} onToken={setCaptchaToken} />
-
       <AuthCTAButton onClick={submit} disabled={loading}>
         {loading
           ? t('auth.button.working')
@@ -301,7 +279,7 @@ export default function AuthPanel({
           Sign-up does NOT offer the link — account creation is password-only
           (mirrors OAuth being withheld from sign-up). */}
       {(showDiscord || showGoogle) && (
-        <div data-testid="oauth-section" style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
           <OrDivider label={t('auth.oauth.divider')} />
           {showDiscord && (
             <OAuthButton

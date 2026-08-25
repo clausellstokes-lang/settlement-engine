@@ -13,27 +13,13 @@
  */
 
 import { describe, it, expect, afterEach } from 'vitest';
-import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 
 import HowToUse from '../../src/components/HowToUse.jsx';
 
-/** Order W2-e — the standalone About page collapses the Keeper's Handbook (which
- *  holds the Quick Start tab) by default; open it so the inversion is observable. */
-function expandHandbook(container) {
-  const btn = [...container.querySelectorAll('button[aria-expanded]')]
-    .find(b => /Keeper/i.test(b.textContent));
-  if (btn && btn.getAttribute('aria-expanded') === 'false') fireEvent.click(btn);
-}
-
 const STEPS_ANCHOR = 'First settlement in 60 seconds';
-// The About-Pricing reconciliation hoisted the living-world thesis ("It generates
-// a town in seconds, then it runs the region for years.") into the single
-// PageHeader subtitle, so that sentence now renders ABOVE the steps. The concept
-// essay is anchored instead on its own opening claim ("Most generators roll on a
-// table"), which is unique to the coda body. The inversion contract (steps lead,
-// essay demoted under "Why it works this way") is unchanged.
-const ESSAY_ANCHOR = /Most generators roll on a table/;
-const ESSAY_TEXT = 'Most generators roll on a table';
+const ESSAY_ANCHOR = /A settlement generator that thinks/;
+const ESSAY_TEXT = 'A settlement generator that thinks';
 const CODA_HEADER = 'Why it works this way';
 
 describe('HowToUse — HT-1 Quick Start inversion', () => {
@@ -53,7 +39,6 @@ describe('HowToUse — HT-1 Quick Start inversion', () => {
 
   it('inversion also applies in the standalone (full-page) layout', () => {
     const { container } = render(<HowToUse standalone />);
-    expandHandbook(container); // the handbook is collapsed by default (order W2-e)
     expect(screen.getByText(CODA_HEADER)).toBeTruthy();
     const text = container.textContent;
     expect(text.indexOf(STEPS_ANCHOR)).toBeLessThan(text.indexOf(ESSAY_TEXT));

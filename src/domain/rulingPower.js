@@ -36,23 +36,9 @@ const A = FACTION_ARCHETYPES;
 /**
  * A powerStructure faction entry (legacy generator shape — `faction` is the
  * display name field; some entries also carry `name`).
- *
- * ⚠ `id` IS DECLARED AND NO GENERATOR WRITES IT. Measured through the full
- * generateSettlementPipeline: 2,175 faction rows over 360 settlements across
- * all six tiers carry `[faction, power, desc, category, rawPower, powerLabel]`
- * plus situational `[modifier, isGoverning, legitimacyCrisis, crisisNote,
- * modifiers]` — and `id` on ZERO of them. It is declared anyway because it is
- * not a phantom key like `.archetype` (see religionLegitimacy.js, which keeps
- * that one OFF this typedef): `id` is the estate's RENAME-DECOUPLED SEAM for
- * authored/DM records, honoured as first-class-when-present by the canonical
- * accessors (`ladderFactionKey`, `npcInFaction`) and registered as an alias id
- * by the dossier link web (dossier/entityLinks.js). Every reader below must
- * therefore treat it as OPTIONAL and carry a live fallback: an unguarded
- * `f.id` read is inert on 100% of generated data.
  * @typedef {Object} RulingFaction
  * @property {string} [faction]
  * @property {string} [name]
- * @property {string} [id]
  * @property {string} [desc]
  * @property {number} [power]
  * @property {boolean} [isGoverning]
@@ -159,10 +145,6 @@ const ALT_GOVERNMENT_LABELS = Object.freeze({
   [A.NOBLE]:    'Noble Regency',
   [A.MILITARY]: 'Garrison Command',
   [A.RELIGIOUS]: 'Ecclesiastical Council',
-  // The conquest occupier's own NAME ('<power> occupation authority') CONTAINS the
-  // preferred label — the containment check below falls here so the crowned seat
-  // never reads like a duplicate of the power behind it.
-  [A.OCCUPATION]: 'Martial Administration',
 });
 
 /** @type {Readonly<Record<string, string>>} */
@@ -206,81 +188,6 @@ export function governingFactionOf(settlement) {
   return factions.find(f => f?.isGoverning)
     || factions.find(f => nameOf(f) && nameOf(f) === String(ps.governingName || ''))
     || null;
-}
-
-/**
- * Label-free epoch for legitimate-authority transfers.
- *
- * `previousGovernments` is intentionally bounded and legacy event transfers may
- * carry a null tick.  Cause/tick tuples alone can therefore collide once the
- * bound is full.  `transferRulingPower` also appends one `ascendant` marker to
- * the exact winning roster entry on every real transfer; folding only those
- * marker counts (by stable roster position/id) distinguishes that otherwise
- * invisible transfer without making a display-name edit look like succession.
- * This is a read helper only: dark campaigns gain no persisted bytes.
- *
- * ⛔ THE `faction.id` SLOT IN THE LINEAGE TUPLE STAYS ID-ONLY — DO NOT "FIX" IT
- * WITH A NAME-DERIVED KEY. It resolves null on 100% of generated data (0 of
- * 2,175 measured rows carry `id`), so a sweep of the estate's dead `.id` reads
- * naturally reaches for `ladderFactionKey` / `factionIdFromName` here as it does
- * at the two address sites (warSeatBooks.readWarSeatBooks,
- * applyWorldPulse's seat-transition row). Both of those keys are SLUGS OF THE
- * DISPLAY NAME, and this tuple is the one place in the estate where that is
- * forbidden: this epoch is the succession discriminator, so a name-derived
- * component would make every faction RENAME read as a legitimate authority
- * transfer — the exact failure the sentence above forbids. The roster `index`
- * plus the `ascendant` count carry the discrimination on generated worlds; the
- * `id` slot only sharpens it for authored records that genuinely carry a
- * rename-decoupled id. Dead-on-generated-data is CORRECT here, not a defect.
- *
- * @param {RulingPowerSettlement | null | undefined} settlement
- * @returns {string}
- */
-export function authorityTransferEpochFor(settlement) {
-  const ps = settlement?.powerStructure || {};
-  const history = Array.isArray(ps.previousGovernments) ? ps.previousGovernments : [];
-  const transfers = history.map((raw) => {
-    const row = raw && typeof raw === 'object' ? raw : {};
-    const tick = Number(row.tick);
-    return [String(row.cause || ''), Number.isFinite(tick) && row.tick != null ? Math.floor(tick) : null];
-  });
-  const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const lineage = factions.map((faction, index) => {
-    const modifiers = Array.isArray(faction?.modifiers) ? faction.modifiers : [];
-    const ascensions = modifiers.reduce((count, marker) => (
-      String(marker) === 'ascendant' ? count + 1 : count
-    ), 0);
-    return ascensions > 0 ? [index, typeof faction?.id === 'string' ? faction.id : null, ascensions] : null;
-  }).filter(Boolean);
-  return JSON.stringify([transfers, lineage]);
-}
-
-/**
- * Governing-body labels from real power transfers, newest first.
- *
- * This is a read-only compatibility bridge for name-keyed ladder membership:
- * legacy/generated NPCs may still name the old governing body after the transfer
- * reshapes that body. Consumers may use these exact history rows as aliases while
- * they migrate their own keyed state. Pure display renames never append a
- * previous-government row, so they cannot masquerade as a transfer here.
- *
- * @param {RulingPowerSettlement | null | undefined} settlement
- * @returns {string[]}
- */
-export function previousGovernmentLabelsOf(settlement) {
-  const history = settlement?.powerStructure?.previousGovernments;
-  if (!Array.isArray(history) || !history.length) return [];
-  const labels = [];
-  const seen = new Set();
-  for (let index = history.length - 1; index >= 0; index -= 1) {
-    const row = history[index];
-    if (!row || typeof row !== 'object') continue;
-    const label = String(row.label || '').trim();
-    if (!label || seen.has(label)) continue;
-    seen.add(label);
-    labels.push(label);
-  }
-  return labels;
 }
 
 // ── Coup contenders ────────────────────────────────────────────────────────
@@ -364,16 +271,12 @@ const MAX_PREVIOUS_GOVERNMENTS = 6;
  */
 function resolveGovernmentLabel(archetype, tier, factions, governing) {
   const preferred = governmentLabelFor(archetype, tier);
-  // A label is taken when another faction's name EQUALS it — or CONTAINS it: the
-  // conquest occupier 'Ironhold occupation authority' contains the OCCUPATION label
-  // 'Occupation Authority', and an exact-match check would relabel the seat into a
-  // read-alike of the power behind it (two factions both reading "occupation
-  // authority" — the round-3 warDeployment collision).
-  const names = factions.filter(f => f !== governing).map(f => nameOf(f).toLowerCase()).filter(Boolean);
-  const takenBy = (/** @type {string} */ label) => names.some(n => n === label.toLowerCase() || n.includes(label.toLowerCase()));
-  if (!takenBy(preferred)) return preferred;
+  const taken = new Set(
+    factions.filter(f => f !== governing).map(f => nameOf(f).toLowerCase()).filter(Boolean),
+  );
+  if (!taken.has(preferred.toLowerCase())) return preferred;
   const alt = ALT_GOVERNMENT_LABELS[archetype];
-  if (alt && !takenBy(alt)) return alt;
+  if (alt && !taken.has(alt.toLowerCase())) return alt;
   return `${preferred} Ascendant`;
 }
 
@@ -440,9 +343,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     if (f === winner) {
       return {
         ...f,
-        // Clamp to the 0-100 power domain (ported master fix): every downstream
-        // computation assumes it; a 95-100 winner would otherwise land at 101-106.
-        power: Math.max(0, Math.min(100, Math.round(num(f.power) + 6))),
+        power: Math.round(num(f.power) + 6),
         modifiers: [...(f.modifiers || []), 'ascendant'],
       };
     }

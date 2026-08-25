@@ -17,7 +17,6 @@ import {
   viewToPath,
   titleForView,
   guardForView,
-  allowsFloatingFeedback,
   isKnownView,
   isSafeNextPath,
 } from '../../src/lib/routes.js';
@@ -58,8 +57,6 @@ describe('routes — view ↔ path round-trip', () => {
     expect(viewToPath('generate')).toBe('/create');
     expect(viewToPath('settlements')).toBe('/settlements');
     expect(viewToPath('map')).toBe('/map');
-    // UX Phase 4 — the Realm hub.
-    expect(viewToPath('realm')).toBe('/realm');
     expect(viewToPath('howto')).toBe('/how-to');
     expect(viewToPath('signin')).toBe('/signin');
     expect(viewToPath('register')).toBe('/register');
@@ -82,15 +79,6 @@ describe('routes — resolveLocation paths', () => {
     expect(resolveLocation('/settlements/').view).toBe('settlements');
     expect(resolveLocation('/compendium?x=1#culture').view).toBe('compendium');
     expect(resolveLocation('/compare/kanka#top').view).toBe('compare-kanka');
-  });
-
-  it('preserves Account section and linked-message query state', () => {
-    expect(resolveLocation('/account?section=messages')).toMatchObject({
-      view: 'account', params: { section: 'messages' },
-    });
-    expect(resolveLocation('/account?section=support&message=msg%2Fone')).toMatchObject({
-      view: 'account', params: { section: 'support', message: 'msg/one' },
-    });
   });
 
   it('marks an unknown path as notFound but still returns the default view', () => {
@@ -163,35 +151,6 @@ describe('routes — legacy ?view= back-compat', () => {
   });
 });
 
-describe('routes — UX Phase 4 Realm IA back-compat', () => {
-  it('the Realm route resolves both ways', () => {
-    expect(viewToPath('realm')).toBe('/realm');
-    expect(resolveLocation('/realm').view).toBe('realm');
-    expect(resolveLocation('/realm').notFound).toBeFalsy();
-    expect(isKnownView('realm')).toBe(true);
-  });
-
-  it('/map still resolves (App bounces the `map` view → realm; no 404)', () => {
-    const r = resolveLocation('/map');
-    expect(r.view).toBe('map');
-    expect(r.notFound).toBeFalsy();
-  });
-
-  it('legacy ?view=map resolves straight to the Realm (the Map sub-tab home)', () => {
-    const r = resolveLocation('/?view=map');
-    expect(r.view).toBe('realm');
-    expect(r.legacy).toBe(true);
-  });
-
-  it('/settlements (the renamed-to-Library destination) is preserved', () => {
-    expect(viewToPath('settlements')).toBe('/settlements');
-    expect(resolveLocation('/settlements').view).toBe('settlements');
-    expect(resolveLocation('/?view=settlements').view).toBe('settlements');
-    // The /settlements/:id deep link still parses.
-    expect(resolveLocation('/settlements/abc').params.id).toBe('abc');
-  });
-});
-
 describe('routes — titles + guards', () => {
   it('home is the bare site name; others are suffixed', () => {
     expect(titleForView('generate')).toBe('SettlementForge');
@@ -204,22 +163,6 @@ describe('routes — titles + guards', () => {
     expect(guardForView('admin')).toBe('elevated');
     expect(guardForView('generate')).toBeUndefined();
     expect(guardForView('workshop')).toBeUndefined(); // component self-locks
-  });
-
-  it('owns floating-feedback chrome policy in the route table', () => {
-    for (const view of [
-      'signin',
-      'register',
-      'reset-password',
-      'set-new-password',
-      'verify-email',
-      'confirm-email',
-      'dossier-success',
-    ]) {
-      expect(allowsFloatingFeedback(view)).toBe(false);
-    }
-    expect(allowsFloatingFeedback('generate')).toBe(true);
-    expect(allowsFloatingFeedback('does-not-exist')).toBe(true);
   });
 
   it('isKnownView distinguishes declared views', () => {
@@ -248,19 +191,7 @@ describe('routes — wave 4 IA (home / realm / nav / legal)', () => {
 
   it('exposes NAV derived from the nav metadata, sorted by order', () => {
     const ids = NAV.map(n => n.id);
-    // THE ABOUT SPLIT: the About nav cell now points at the split's default
-    // page (`about-what-this-is` at /about/what-this-is), not the retired
-    // pre-split `howto`. Ordered behaviour change, not drift.
-    //
-    // ⚠️ OWNER-DIRECTED SPEC CHANGE, 2026-08-03 (THE FLETCHED RIBBON, lane FL):
-    // `'home'` LEFT this list. The ribbon became the back half of an arrow and the
-    // wordmark became the home button, so the Welcome ROUTE keeps its path, title
-    // and '/'-canonicalization — proved by the round-trip test at the top of this
-    // describe — while its `nav` block is retired, which is what removes it from
-    // NAV and from every surface derived from NAV. Ordered behaviour change, not
-    // drift. tests/store/appNavSsot.test.js pins the retirement's exact SHAPE (a
-    // live route with no nav metadata), so a deletion cannot pass as a retirement.
-    expect(ids).toEqual(['generate', 'settlements', 'realm', 'compendium', 'gallery', 'about-what-this-is']);
+    expect(ids).toEqual(['home', 'generate', 'settlements', 'realm', 'compendium', 'gallery', 'howto']);
     const orders = NAV.map(n => n.order);
     expect([...orders].sort((a, b) => a - b)).toEqual(orders);
     for (const n of NAV) {

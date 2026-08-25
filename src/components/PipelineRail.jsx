@@ -28,33 +28,30 @@
  */
 
 import { useState } from 'react';
-import { FS, swatch, sans, serif_ } from './theme.js';
+import { FS, swatch } from './theme.js';
+import { Cog, Feather, ChevronRight, ChevronDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { metaForStep } from '../generators/steps/stepMetadata.js';
 import { tracesByStep } from '../domain/trace.js';
 import { simulationSpineRows } from '../domain/simulationSpine.js';
-import {
-  traceEffectLabel,
-  traceResultLabel,
-  traceTargetLabel,
-  traceTokenLabel,
-} from '../domain/display/tracePresentation.js';
 import { t } from '../copy/index.js';
 
 // Visual grammar — kept here so the rail's identity is one read.
 const COG_COLOR = swatch['#8C6F32'];      // gold-700 (procedural, bronze cog)
-const QUILL_COLOR = swatch['#5A6E82'];    // violet-500 (AI refinement, quill)
+const QUILL_COLOR = swatch['#7B4FCF'];    // violet-500 (AI refinement, quill)
 const RAIL_BG = swatch['#FBF5E6'];        // parchment-50
 const RAIL_BORDER = swatch['#E8D9B0'];    // parchment-200
 const INK = swatch['#1B1408'];
 const BODY = swatch['#4A3B22'];           // ink-600 (WCAG-passing)
 const MUTED = swatch['#6B5340'];
 
-export function StepRow({ entry, isLast, traces }) {
+function StepRow({ entry, isLast, traces }) {
   const [open, setOpen] = useState(false);
   const meta = metaForStep(entry.id);
   const isAi = entry.kind === 'ai';
+  const Icon = isAi ? Feather : Cog;
   const color = isAi ? QUILL_COLOR : COG_COLOR;
+  const Chevron = open ? ChevronDown : ChevronRight;
   const stepTraces = Array.isArray(traces) ? traces : [];
 
   return (
@@ -70,16 +67,16 @@ export function StepRow({ entry, isLast, traces }) {
           width: 1, background: RAIL_BORDER,
         }} />
       )}
-      {/* Timeline node — a dot on the thread whose FILL encodes the step kind in
-          a non-colour channel (P7): a solid violet dot for an AI refinement
-          step, a hollow amber ring for a procedural step. The legend above
-          mirrors the same fill-vs-outline grammar, so the mapping survives a
-          grayscale read. */}
-      <span aria-hidden="true" style={{
-        position: 'absolute', left: 5, top: 7,
-        width: 12, height: 12, borderRadius: '50%',
-        background: isAi ? color : swatch.white, border: `1px solid ${color}`,
-      }} />
+      {/* Icon */}
+      <span style={{
+        position: 'absolute', left: 0, top: 2,
+        width: 22, height: 22, borderRadius: '50%',
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        background: swatch.white, border: `1px solid ${color}`,
+        color,
+      }}>
+        <Icon size={12} aria-hidden="true" />
+      </span>
       {/* Row content (clickable to expand) */}
       <button
         type="button"
@@ -88,17 +85,15 @@ export function StepRow({ entry, isLast, traces }) {
         style={{
           display: 'block', width: '100%', textAlign: 'left',
           background: 'transparent', border: 'none', cursor: 'pointer',
-          padding: '4px 0', minHeight: 44, color: INK,
-          fontFamily: sans,
+          padding: 0, color: INK,
+          fontFamily: 'Nunito, system-ui, sans-serif',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
           <span style={{ fontSize: FS.md, fontWeight: 600, color: INK }}>
             {meta.label}
           </span>
-          <span aria-hidden="true" style={{ flexShrink: 0, color: MUTED, fontWeight: 700, fontSize: FS.sm, lineHeight: 1 }}>
-            {open ? '−' : '+'}
-          </span>
+          <Chevron size={11} color={MUTED} style={{ flexShrink: 0, transform: 'translateY(1px)' }} aria-hidden="true" />
         </div>
         {entry.summary && (
           <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
@@ -109,14 +104,14 @@ export function StepRow({ entry, isLast, traces }) {
           <div style={{
             fontSize: FS.xs, fontStyle: 'italic',
             color: MUTED, marginTop: 6,
-            fontFamily: serif_,
+            fontFamily: 'Crimson Text, Georgia, serif',
             lineHeight: 1.55,
           }}>
             {meta.description}
           </div>
         )}
         {/* Trace decisions — only rendered when the step has emitted
-            structured traces. Today only assembleInstitutions
+            structured traces (Tier 2.1). Today only assembleInstitutions
             emits these; the rest of the pipeline will adopt incrementally.
             Each trace is rendered as a small block: "what was decided"
             on top, then the bullet causes, then downstream effects. */}
@@ -127,25 +122,23 @@ export function StepRow({ entry, isLast, traces }) {
                 padding: '6px 8px',
                 background: swatch.white,
                 border: `1px solid ${RAIL_BORDER}`,
+                borderRadius: 4,
                 fontSize: FS.xs, color: BODY, lineHeight: 1.5,
               }}>
                 <div style={{ fontWeight: 600, color: INK }}>
-                  {traceTargetLabel(trace)}{' '}
-                  <span style={{ color: MUTED, fontWeight: 400 }}>
-                    ({traceResultLabel(trace.result)})
-                  </span>
+                  {trace.targetId} <span style={{ color: MUTED, fontWeight: 400 }}>{trace.result}</span>
                 </div>
                 {Array.isArray(trace.causes) && trace.causes.length > 0 && (
                   <ul style={{ margin: '3px 0 0', paddingLeft: 14, listStyle: 'square' }}>
                     {trace.causes.map((c, j) => (
                       <li key={j} style={{ marginTop: 2 }}>
-                        <span style={{ color: INK }}>Because of {traceTokenLabel(c.source)}</span>
-                        {c.effect ? <span style={{ color: MUTED }}> · {traceEffectLabel(c.effect)}</span> : null}
+                        <span style={{ color: INK }}>{c.source}</span>
+                        {c.effect ? <span style={{ color: MUTED }}> · {c.effect}</span> : null}
                         {c.reason ? (
                           <div style={{
                             fontSize: FS['10.5'], fontStyle: 'italic',
                             color: MUTED, marginTop: 1,
-                            fontFamily: serif_,
+                            fontFamily: 'Crimson Text, Georgia, serif',
                           }}>
                             {c.reason}
                           </div>
@@ -156,14 +149,11 @@ export function StepRow({ entry, isLast, traces }) {
                 )}
                 {Array.isArray(trace.downstreamEffects) && trace.downstreamEffects.length > 0 && (
                   <div style={{ marginTop: 4, fontSize: FS.xxs, color: MUTED }}>
-                    What this shaped:{' '}
+                    Downstream:{' '}
                     {trace.downstreamEffects.map((d, k) => (
                       <span key={k}>
                         {k > 0 ? ', ' : ''}
-                        <span style={{ color: INK }}>
-                          {traceTargetLabel({ targetId: d.target })}
-                        </span>
-                        {d.effect ? ` (${traceEffectLabel(d.effect)})` : ''}
+                        <span style={{ color: INK }}>{d.target}</span> {d.effect}
                       </span>
                     ))}
                   </div>
@@ -184,7 +174,7 @@ export function StepRow({ entry, isLast, traces }) {
 
 // ── Simulation spine card ──────────────────────────────────────────────────
 // Sits at the top of the rail, above the step list. Seven-line distillation
-// of the settlement's causal identity. Renders only when at
+// of the settlement's causal identity (Tier 2.5). Renders only when at
 // least one spine line is non-placeholder.
 
 function SimulationSpine({ settlement }) {
@@ -199,7 +189,8 @@ function SimulationSpine({ settlement }) {
         background: swatch.white,
         border: `1px solid ${RAIL_BORDER}`,
         borderLeft: `3px solid ${COG_COLOR}`,
-        fontFamily: sans,
+        borderRadius: 4,
+        fontFamily: 'Nunito, system-ui, sans-serif',
       }}
     >
       <div style={{
@@ -220,7 +211,7 @@ function SimulationSpine({ settlement }) {
             </dt>
             <dd style={{
               margin: 0, fontSize: FS.sm, color: BODY, lineHeight: 1.5,
-              fontFamily: serif_,
+              fontFamily: 'Crimson Text, Georgia, serif',
             }}>
               {body}
             </dd>
@@ -246,14 +237,15 @@ export default function PipelineRail({ compact = false }) {
       style={{
         background: RAIL_BG,
         border: `1px solid ${RAIL_BORDER}`,
+        borderRadius: 8,
         padding: compact ? '12px 14px' : '16px 18px',
-        fontFamily: sans,
+        fontFamily: 'Nunito, system-ui, sans-serif',
       }}
     >
       <header style={{ marginBottom: 12 }}>
         <h3 style={{
           margin: 0,
-          fontFamily: serif_,
+          fontFamily: 'Crimson Text, Georgia, serif',
           fontSize: FS['18'], fontWeight: 600, color: INK,
         }}>
           {t('pipeline.title')}
@@ -261,7 +253,7 @@ export default function PipelineRail({ compact = false }) {
         <p style={{
           margin: '4px 0 0',
           fontSize: FS.sm, fontStyle: 'italic', color: BODY,
-          fontFamily: serif_,
+          fontFamily: 'Crimson Text, Georgia, serif',
           lineHeight: 1.5,
         }}>
           {t('pipeline.subtitle')}
@@ -275,18 +267,11 @@ export default function PipelineRail({ compact = false }) {
           textTransform: 'uppercase', letterSpacing: '0.04em',
         }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-            {/* Hollow ring = procedural, mirroring the procedural step nodes. */}
-            <span aria-hidden="true" style={{
-              width: 9, height: 9, borderRadius: '50%',
-              background: swatch.white, border: `1px solid ${COG_COLOR}`,
-            }} />
+            <Cog size={11} color={COG_COLOR} aria-hidden="true" />
             {t('pipeline.cogLabel')}
           </span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-            {/* Solid dot = AI refinement, mirroring the AI step nodes. */}
-            <span aria-hidden="true" style={{
-              width: 9, height: 9, borderRadius: '50%', background: QUILL_COLOR,
-            }} />
+            <Feather size={11} color={QUILL_COLOR} aria-hidden="true" />
             {t('pipeline.quillLabel')}
           </span>
         </div>

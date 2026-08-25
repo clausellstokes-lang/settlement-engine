@@ -1,17 +1,8 @@
-import { lazy, Suspense, useMemo, useState, useRef, useEffect } from 'react';
-import {Clock, FolderOpen, ArrowRight, Unlock, BookMarked, ChevronDown, Trash2, FileText, Flame} from 'lucide-react';
+import { useMemo, useState, useRef, useEffect } from 'react';
+import {Clock, FolderOpen, ArrowRight, Unlock, BookMarked, ChevronDown, Trash2} from 'lucide-react';
 
-// The type-the-name destruction confirm. Lazy: a Library page that never opens
-// the row pays nothing for it (mirrors the frozen-export PDF boundary below).
-const DestroySettlementControl = lazy(() => import('./DestroySettlementControl.jsx'));
-
-// AUDIT-2.2 — the paid-rights floor: a lapsed plan can always extract what it
-// made. A retention-frozen card keeps a read-only PDF export. Lazy so the jsPDF
-// chunk stays out of the Library first paint (mirrors CampaignFolder's export).
-const generateSettlementPDF = (...args) =>
-  import('../../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
 import { EFFECT_CATEGORIES, fmtMod } from '../../lib/relationshipGraph.js';
-import { GOLD, GOLD_BG, GOLD_TXT, INK, MUTED, BODY, SECOND, BORDER, BORDER_STRONG, CARD, FS, SP, swatch, sans, serif_ } from '../theme.js';
+import { GOLD, GOLD_BG, GOLD_TXT, INK, MUTED, BODY, SECOND, BORDER, CARD, FS, SP, swatch } from '../theme.js';
 import { isPlanInactiveSave, isSaveActive } from '../../lib/saveAccess.js';
 import { canonPhaseOf } from './helpers.js';
 import { settlementSignals, healthPip } from './livingWorldSignals.js';
@@ -19,96 +10,32 @@ import LivingWorldSignalRow from './LivingWorldSignalRow.jsx';
 import HealthPip from './HealthPip.jsx';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import LifecycleSpine from '../primitives/LifecycleSpine.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
-import SettlementCardMapThumb from '../townMap/SettlementCardMapThumb.jsx';
-import { emblem } from '../../design/organic/ornament/compose.js';
 import { useStore } from '../../store/index.js';
 
 // Relationship-type swatch for the neighbour chips (kept inline on OUR floor —
 // the shared cross-surface palette adoption is a separate cosmetic dedupe).
 const REL_COLORS = { rival:'#8b1a1a', cold_war:'#8b1a1a', hostile:'#8b1a1a', allied:'#1a5a28', secret_alliance:'#1a5a28', trade_partner:'#a0762a', patron:'#2a3a7a', client:'#2a3a7a', criminal_network:'#5a2a8a' };
 
-// ── Ledger cell rhythm (C3 — THE LEDGER) ──────────────────────────────────────
-// The Library list is a surveyor's ledger: a real <table> whose rows share
-// column tracks. A feint top rule per cell is the row hairline; cells top-align
-// so the tall Settlement cell governs the row height (MANIFEST 05 — generous, never
-// cramped). No rounded fills, no elevation: depth is a rule of ink, not a shadow.
-const LEDGER_CELL = { padding: `${SP.sm}px ${SP.md}px`, borderTop: `1px solid ${BORDER}`, verticalAlign: 'top' };
-// The small-caps rubric — the ledger's head/marker voice (Organic Craft law §2).
-const RUBRIC = { fontFamily: sans, fontSize: FS.xs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' };
-// Visually-hidden but focusable/clickable — the real checkbox behind the inked
-// margin tally. The label wraps both input + glyph, so a click on the glyph (or
-// keyboard focus + space) toggles the input; the tally is a pure visual re-vehicle.
-const TALLY_INPUT_HIDDEN = { position: 'absolute', width: 1, height: 1, margin: -1, padding: 0, overflow: 'hidden', clip: 'rect(0 0 0 0)', border: 0, whiteSpace: 'nowrap' };
-
-// ── Settlement Card — a ledger row (reused in campaigns + unassigned) ──────────
-// Renders a <tr>: both call sites (the unassigned pile + each CampaignFolder) wrap
-// it in a <table class ledger>, so a bare-mounted card is a <tr> under the test's
-// container (jsdom-tolerant; every query is by text/label/testid, not tag).
+// ── Settlement Card (reused in campaigns + unassigned) ────────────────────
 export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts, onReactivate, canReactivate, reactivatingId, onCanonize, worldState = null, regionalGraph = null, nameFor, onAdvanceTime, onCreateCampaign, onNavigate, canManageCampaigns = false, selectMode = false, selected = false, onToggleSelect }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [destroyOpen, setDestroyOpen] = useState(false);
   const menuRef = useRef(null);
-  const ts = (t) => {
-    // An absent or unparseable timestamp must NEVER render the literal "Invalid
-    // Date": new Date(undefined).toLocaleDateString() returns that string WITHOUT
-    // throwing, so the try/catch alone never fires. Guard on getTime() NaN and
-    // return '' so the caller can drop the whole line. (Owner-spotted defect 7b:
-    // local/anon saves stamp only the numeric `savedAt`, never a top-level
-    // `timestamp` — see saves.js localSaveEntry — so a fresh draft's `timestamp`
-    // is undefined. The render below falls back to `savedAt`, which IS present.)
-    const d = new Date(t);
-    if (Number.isNaN(d.getTime())) return '';
-    try { return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; }
-  };
+  const ts = (t) => { try { return new Date(t).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; } };
   const active = isSaveActive(s);
   const planInactive = isPlanInactiveSave(s);
   const isCanon = canonPhaseOf(s) === 'canon';
-  // A settlement the canon already records as destroyed cannot be destroyed twice.
-  const alreadyDestroyed = s.settlement?.status === 'destroyed';
   const retentionUntil = s.retentionExpiresAt ? ts(s.retentionExpiresAt) : null;
-  // The saved-on line: prefer the durable `timestamp` (Supabase updated_at), fall
-  // back to the numeric `savedAt` epoch that the local save path always stamps.
-  const savedWhen = ts(s.timestamp ?? s.savedAt);
-  const campaignMutationVersion = useStore(state => {
-    const advances = (state.advanceInFlight || []).map(String).join(',');
-    const deletions = (state.campaignMutationLocks || []).map(lock => lock.token).join(',');
-    return `${advances}|${deletions}`;
-  });
-  const mutationBlocks = useMemo(() => {
-    // The version string is a cheap subscription trigger; the actual guarded
-    // actions are read fresh so this card never closes over stale store methods.
-    // Called bare: this card is only live below AppViews' campaignLazy gate,
-    // which awaits the runtime preload, and the entry slice always installs
-    // these three. A `?.` here would not short-circuit — it would still throw.
-    void campaignMutationVersion;
-    const state = useStore.getState();
-    return {
-      deletion: !!state.getSettlementDeletionBlock([s.id]),
-      removal: !!(currentCampaignId && state.getCampaignMutationBlock(currentCampaignId)),
-      target: campaignId => !!state.getCampaignMembershipBlock(campaignId, s.id),
-    };
-  }, [campaignMutationVersion, currentCampaignId, s.id]);
 
-  // AUDIT-2.2 — read-only PDF extraction for a retention-frozen save. Exports the
-  // STORED settlement (never the live store, no worldState, no faith chapter, no
-  // reactivation), so it can never resume the simulation — the lapsed-plan owner
-  // gets out exactly what they made. Busy/error tracked so the click is never
-  // silent (mirrors CampaignFolder.handleExportPdf).
-  const [exportBusy, setExportBusy] = useState(false);
-  const [exportError, setExportError] = useState(null);
-  const handleExportFrozen = async () => {
-    if (exportBusy) return;
-    setExportError(null);
-    setExportBusy(true);
-    try {
-      await generateSettlementPDF(s.settlement, { phase: canonPhaseOf(s) });
-    } catch (err) {
-      setExportError(err?.message ? `PDF export failed: ${err.message}` : 'PDF export failed. Please try again.');
-    } finally {
-      setExportBusy(false);
-    }
-  };
+  // Lifecycle spine stage — pure derivation from fields/selectors already in
+  // scope, no new store fields (mirrors OutputContainer's derivation). A library
+  // card is at least 'saved'; canonPhaseOf returns 'draft' for un-canonized
+  // saves, but the spine floor is 'saved' since the card is in the library. We
+  // surface the FURTHEST-reached stage. The clock-bound selector null-guards.
+  const isSettlementClockBound = useStore(st => st.isSettlementClockBound);
+  const simulated = typeof isSettlementClockBound === 'function' && isSettlementClockBound(s.id);
+  const lifecycleStage = s.is_public ? 'shared' : (simulated ? 'simulated' : (isCanon ? 'canon' : 'saved'));
 
   // Close the overflow menu on an outside click / Escape so it behaves like a
   // standard menu rather than a sticky panel.
@@ -134,31 +61,12 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
   }), [s.settlement, s.id, worldState, regionalGraph, nameFor]);
   const health = useMemo(() => healthPip(s.settlement), [s.settlement]);
 
-  // The settlement's own seeded medallion (16px), memoized per name — the same
-  // ornament composer the dossier header + colophon draw from, so a settlement
-  // carries ONE mark across every surface. Decorative (aria-hidden); the name
-  // beside it is the accessible label.
-  const medallion = useMemo(() => emblem(s.name || 'settlement', { mode: 'light', size: 16 }), [s.name]);
-
-  // Memo-line — the settlement's active stressor, the SAME situation summary the
-  // dossier header consumes (OutputContainer's stressObj derivation feeds
-  // DossierHeaderRow, which renders stressObj.label). Read-only projection over the
-  // live settlement blob; a settlement with no active stressor shows no memo-line.
-  const stressObj = s.settlement?.stress
-    ? (Array.isArray(s.settlement.stress) ? s.settlement.stress[0] : s.settlement.stress)
-    : null;
-  const memoLine = stressObj?.label || null;
-
-  // The row's "world" after the interpunct — its owning campaign's name (the
-  // ledger idiom "name · world"), resolved from the campaigns roster. Null for an
-  // unassigned row (no campaign ⇒ just the name).
-  const campaignName = currentCampaignId ? (campaigns || []).find(c => c.id === currentCampaignId)?.name : null;
-
-  // Whole-row click is a MOUSE-ONLY convenience: the explicit Open button (and,
-  // in select mode, the checkbox) is the real accessible affordance, so the row
-  // carries no role/tabindex. Clicks from inside the action cluster, the kebab
-  // menu, the select checkbox, the link chips, or the delete confirmation own
-  // their own behaviour, so we early-return when the event came from within.
+  // Whole-card click is a MOUSE-ONLY convenience: the explicit Open button (and,
+  // in select mode, the checkbox) is the real accessible affordance, so the
+  // wrapper is a plain <div> — no role="button"/tabIndex. Clicks from inside the
+  // action cluster, the kebab menu, the select checkbox, the link chips, or the
+  // delete confirmation own their own behaviour, so we early-return when the event
+  // came from within.
   const fromInteractive = (e) => !!e.target.closest?.('[data-card-actions], [data-card-select], [role="menu"], input, button, a');
   const handleCardActivate = (e) => {
     if (!active || fromInteractive(e)) return;
@@ -166,116 +74,101 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
     onView?.(s);
   };
 
-  // Crisis/war drives a red semantic rail; canon a gold rail; selection wins with
-  // gold; otherwise a transparent 3px keeps every row's text on one column edge.
-  // Two-channel encoding: the rail is a second cue alongside the pips/checkbox, so
-  // phase / crisis is readable from the row edge. Reads the SAME model the pips
-  // render (signals.war + health.severity). severity >= 2 == Vulnerable/Critical.
+  // Crisis/war drives a red semantic rail; canon a gold rail; otherwise NONE
+  // (a dormant / peaceful card keeps its plain 1px border — byte-quiet). Two-
+  // channel encoding: the rail is a second cue alongside the pips, so phase /
+  // crisis is readable at a glance from the card edge. Reads the SAME model the
+  // pips render (signals.war + health.severity). severity >= 2 == Vulnerable/
+  // Critical (the bands the "Needs attention" sort + the health pip surface).
   const inCrisis = !!signals?.war || (health?.severity ?? 0) >= 2;
   const railColor = inCrisis ? swatch.danger : (isCanon ? GOLD : null);
-  const leadRail = selected ? `3px solid ${GOLD}` : railColor ? `3px solid ${railColor}` : `3px solid transparent`;
-  // Row ground: inactive keeps its muted grey-tan; active rows sit on the page
-  // parchment (no card fill — the ledger idiom is rows on the ground, parted by
-  // rules, not boxes). Selection reads off the gold rail + the checked box, so no
-  // fill is needed (elevation/tint are never spent here — kill-list).
-  const rowBg = active ? undefined : swatch['#EEE9DF'];
-  // Column count for the full-width confirmation / recovery rows. The tally column
-  // exists only in select mode: [tally?] settlement · tier · phase · standing · actions.
-  const colCount = (selectMode ? 1 : 0) + 4 + 1;
+  const railStyle = selected
+    ? { borderLeft: `3px solid ${GOLD}`, boxShadow: `0 0 0 1px ${GOLD}` }
+    : railColor
+      ? { borderLeft: `3px solid ${railColor}` }
+      : {};
 
+  // No overflow:hidden on the wrapper — would clip the action overflow menu
+  // that opens below the kebab. DeleteConfirmation below carries its own
+  // rounded corners + top margin, so nothing visually escapes.
   return (
-    <>
-      {/* Mouse-only convenience: keyboard/SR users open via the explicit "Open"
-          button, so the row carries NO role/tabindex — a keyboard handler here
-          would re-create a nested-interactive ARIA violation. */}
-      <tr
-        data-testid="settlement-card"
-        onClick={handleCardActivate}
-        style={{ background: rowBg, cursor: active ? 'pointer' : 'default', opacity: active ? 1 : 0.68 }}
-      >
+    // Mouse-only convenience: keyboard/SR users open via the explicit "Open"
+    // button (the real affordance), so the wrapper carries NO role/tabindex —
+    // adding a keyboard handler here would re-create a nested-interactive ARIA
+    // violation. The lint disable is therefore intentional.
+    /* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
+    <div
+      data-testid="settlement-card"
+      onClick={handleCardActivate}
+      style={{
+        background: active ? 'rgba(255,251,245,0.96)' : swatch['#EEE9DF'],
+        cursor: active ? 'pointer' : 'default',
+        // Inactive cards keep their original muted grey-tan edge (#c9c0b2).
+        border:`1px solid ${selected ? GOLD : (active ? BORDER : '#c9c0b2')}`,
+        borderRadius:7, opacity: active ? 1 : 0.68,
+        ...railStyle,
+      }}
+    >
+      <div style={{ display:'flex', alignItems:'center', gap:SP.sm, padding:`${SP.sm}px ${SP.md}px` }}>
         {selectMode && (
-          // The margin tally — the select checkbox re-vehicled to the ledger's
-          // left margin (SAME handler). The padded label widens the ~16px box
-          // toward the ~44px target without changing the visible control.
-          <td style={{ ...LEDGER_CELL, borderLeft: leadRail, width: 1, whiteSpace: 'nowrap' }}>
-            <label
-              data-card-select
-              htmlFor={`select-${s.id}`}
-              style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', padding:SP.xs, cursor: active ? 'pointer' : 'not-allowed' }}
-            >
-              {/* The margin tally — the select control re-vehicled to an inked
-                  ledger tick (SAME input + handler). The native checkbox chrome is
-                  visually hidden behind an inked square; the input stays the
-                  accessible, focusable control. */}
-              <input
-                id={`select-${s.id}`}
-                type="checkbox"
-                checked={selected}
-                disabled={!active}
-                onChange={() => active && onToggleSelect?.(s.id)}
-                aria-label={`Select ${s.name}`}
-                style={TALLY_INPUT_HIDDEN}
-              />
-              <span aria-hidden="true" style={{ width:14, height:14, flexShrink:0, display:'inline-flex', alignItems:'center', justifyContent:'center', border:`1px solid ${selected ? GOLD : BORDER}`, color:GOLD, fontSize:FS.xs, fontWeight:800, lineHeight:1, opacity: active ? 1 : 0.5 }}>{selected ? '✓' : ''}</span>
-            </label>
-          </td>
+          // Padded label widens the ~16px checkbox hit area toward the ~44px
+          // usability target (24px WCAG floor) without changing the visible box.
+          <label
+            data-card-select
+            htmlFor={`select-${s.id}`}
+            style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', padding:SP.sm, margin:`-${SP.sm}px`, flexShrink:0, cursor: active ? 'pointer' : 'not-allowed' }}
+          >
+            <input
+              id={`select-${s.id}`}
+              type="checkbox"
+              checked={selected}
+              disabled={!active}
+              onChange={() => active && onToggleSelect?.(s.id)}
+              aria-label={`Select ${s.name}`}
+              style={{ width:16, height:16, flexShrink:0, cursor: active ? 'pointer' : 'not-allowed', accentColor: GOLD }}
+            />
+          </label>
         )}
-
-        {/* ── Settlement — medallion + name lead the row; the retained living-world
-            detail stacks below (self-gating, byte-identical when dormant). */}
-        <td style={selectMode ? LEDGER_CELL : { ...LEDGER_CELL, borderLeft: leadRail }}>
+        {/* minWidth floor (not 0): the flexShrink:0 action cluster is the only
+            other item on this row, so without a floor this column collapses
+            toward 0 and the name ellipsis-clips to a single character. */}
+        <div style={{ flex:1, minWidth:140 }}>
+          {/* Identity tier — name + tier suffix + health, tight. The name is a
+              real heading so screen-reader users can navigate card-by-card. */}
           <div style={{ display:'flex', alignItems:'baseline', gap:SP.sm, minWidth:0 }}>
-            <span aria-hidden="true" style={{ flexShrink:0, lineHeight:0, alignSelf:'center' }} dangerouslySetInnerHTML={{ __html: medallion }} />
-            {/* The name is a real heading so screen-reader users navigate row-by-row. */}
-            <h3 style={{ margin:0, fontSize:FS.lg, fontWeight:700, color:INK, fontFamily:serif_, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', minWidth:0 }}>{s.name}</h3>
-            {/* "name · world" — the owning campaign after the interpunct. */}
-            {campaignName && <span style={{ fontSize:FS.sm, color:SECOND, whiteSpace:'nowrap', flexShrink:0 }}><span aria-hidden="true">· </span>{campaignName}</span>}
+            <h3 style={{ margin:0, fontSize:FS.xl, fontWeight:700, color:INK, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', minWidth:0 }}>{s.name}</h3>
+            <span style={{ fontSize:FS.xs, color:BODY, textTransform:'capitalize', flexShrink:0 }}>{s.tier}</span>
+            {/* Health pip — DORMANCY-QUIET: only surfaces once the worst band
+                reaches the attention threshold (Vulnerable/Critical). A healthy /
+                peaceful town shows no pip, so its card stays byte-identical. */}
+            {health && health.severity >= 2 && <span style={{ flexShrink:0, alignSelf:'center' }}><HealthPip pip={health}/></span>}
           </div>
-          {/* Memo-line — the settlement's live situation, in the surveyor's italic. */}
-          {memoLine && <div style={{ marginTop:2, fontStyle:'italic', fontSize:FS.sm, color:SECOND }}>{memoLine}</div>}
-
-          {/* Living-world detail — retained verbatim; the row is self-gating so a
-              peaceful, non-campaign, deity-free card shows only the identity line. */}
+          {/* Living-world tier — the live, change-bearing state leads, directly
+              under the name (top-left = most scannable). */}
           <div style={{ marginTop:SP.sm, display:'flex', flexDirection:'column', gap:SP.xs }}>
-            {/* SM-4 — the lazy, cached town-map thumbnail. Self-collapses to nothing
-                for a map-less settlement / a canvas-less env. IT-3: worldState threads
-                the owning campaign's season/state dress (null ⇒ seasonless base bytes). */}
-            {s.settlement && <SettlementCardMapThumb settlement={s.settlement} worldState={worldState} />}
-            {/* Living-world signal row (self-gating — nothing for a peaceful card). */}
-            <LivingWorldSignalRow model={signals} />
-            {!active && (
-              <div style={{ fontSize:FS.xs, color:GOLD_TXT, background:GOLD_BG, padding:'2px 6px', display:'inline-flex', alignItems:'center', gap:4, fontWeight:700, alignSelf:'flex-start' }}>
-                Frozen{retentionUntil ? ` until ${retentionUntil}` : ''}. Reactivate or export.
-              </div>
-            )}
-            {/* AUDIT-2.2 — a failed read-only export is surfaced here (not silent). */}
-            {exportError && (
-              <div role="alert" style={{ fontSize:FS.xs, color:swatch.danger, fontFamily:sans }}>{exportError}</div>
-            )}
-            {/* Blocked-reactivation recovery — when the slots are full, the reason +
-                the path forward render as a VISIBLE line (not the hover-only title),
-                scoped to the blocked state so reactivatable/active rows stay clean. */}
-            {!active && planInactive && !canReactivate && (
-              <div style={{ display:'flex', alignItems:'center', gap:6, flexWrap:'wrap', fontSize:FS.xs, color:BODY }}>
-                <span>Active-save slots are full.</span>
-                <Button variant="ghost" size="sm" onClick={() => onNavigate?.('pricing')}
-                  style={{ padding:'6px 10px', fontSize:FS.xs, color:GOLD_TXT, fontWeight:700 }}>
-                  Free a slot or Upgrade
-                </Button>
-              </div>
-            )}
+            {/* Signal cluster — the live, change-bearing state. */}
+            <div style={{ display:'flex', flexDirection:'column', gap:SP.xs }}>
+              {/* Living-world signal row (self-gating — nothing for a peaceful card). */}
+              <LivingWorldSignalRow model={signals} />
+              {!active && (
+                <div style={{ fontSize:FS.xs, color:GOLD_TXT, background:GOLD_BG, borderRadius:8, padding:'2px 6px', display:'inline-flex', alignItems:'center', gap:4, fontWeight:700, alignSelf:'flex-start' }}>
+                  Retained inactive{retentionUntil ? ` until ${retentionUntil}` : ''}
+                </div>
+              )}
+            </div>
 
-            {/* Connections + network metadata — STATIC reference detail. Ordered
-                neighbours → effects → regional counts. */}
+            {/* Connections + network metadata — STATIC reference detail, demoted
+                to the supporting middle tier. Ordered neighbours → effects →
+                regional counts. */}
             {(s.settlement?.neighbourNetwork?.length > 0
               || allModifiers.get(s.id)?.sources?.length > 0
               || (regionalCounts && (regionalCounts.queued || regionalCounts.applied || regionalCounts.resolved) > 0)) && (
-              <div style={{ display:'flex', flexDirection:'column', gap:SP.xs }}>
+              <div style={{ marginTop:SP.xs, display:'flex', flexDirection:'column', gap:SP.xs }}>
                 {(s.settlement?.neighbourNetwork?.length > 0) && (
                   <div style={{ display:'flex', gap:SP.xs, flexWrap:'wrap' }}>
                     {(s.settlement.neighbourNetwork||[]).slice(0,3).map((n,ni) => {
                       const nc = REL_COLORS[n.relationshipType] || MUTED;
-                      return <span key={ni} style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:`${nc}12`, padding:'1px 6px', whiteSpace:'nowrap' }}>
+                      return <span key={ni} style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:`${nc}12`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap' }}>
                         {n.neighbourName||n.name} · {(n.displayRelationshipType||n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ')}
                       </span>;
                     })}
@@ -291,8 +184,8 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                   return <div style={{display:'flex',gap:SP.xs,flexWrap:'wrap'}}>
                     {badges.map(c => {
                       const v = m.totals[c.key]; const pos = v >= 0;
-                      return <span key={c.key} title={`${c.label} ${fmtMod(v)}`} style={{ fontSize:FS.xs, fontWeight:500, color:pos?swatch.success:swatch.danger, background:pos?swatch.successBg:swatch.dangerBg, padding:'1px 5px', whiteSpace:'nowrap' }}>
-                        {c.label}: {pos ? 'helped' : 'hurt'}
+                      return <span key={c.key} style={{ fontSize:FS.xs, fontWeight:500, color:pos?swatch.success:swatch.danger, background:pos?swatch.successBg:swatch.dangerBg, borderRadius:8, padding:'1px 5px', whiteSpace:'nowrap' }}>
+                        {c.label} {fmtMod(v)}
                       </span>;
                     })}
                   </div>;
@@ -300,17 +193,17 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                 {regionalCounts && (regionalCounts.queued || regionalCounts.applied || regionalCounts.resolved) > 0 && (
                   <div style={{ display:'flex', gap:SP.xs, flexWrap:'wrap' }}>
                     {regionalCounts.queued > 0 && (
-                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:GOLD_BG, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
-                        {regionalCounts.queued} changes queued
+                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:GOLD_BG, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                        {regionalCounts.queued} queued
                       </span>
                     )}
                     {regionalCounts.applied > 0 && (
-                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.successBg, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.successBg, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
                         {regionalCounts.applied} applied
                       </span>
                     )}
                     {regionalCounts.resolved > 0 && (
-                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.infoBg, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.infoBg, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
                         {regionalCounts.resolved} resolved
                       </span>
                     )}
@@ -319,97 +212,39 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
               </div>
             )}
 
-            {/* The compact 1-5 LifecycleSpine dots were removed here (legibility
-                wave, 2026-07-22): unlabeled numbered dots contradicted the Phase
-                column two cells away (a Draft save read Phase 'Draft' while the
-                spine marked stage-2 'Saved' as current). The Phase column is now
-                the single lifecycle encoding on a row. LifecycleSpine keeps its
-                labelled non-compact uses elsewhere. */}
-            {/* Save metadata — the LEAST table-relevant fact, pushed below.
-                Dropped entirely when no parseable timestamp exists, so an absent
-                or malformed date never renders as "Invalid Date" (defect 7b). */}
-            {savedWhen && (
-              <div style={{ fontSize:FS.xs, color:BODY, display:'flex', alignItems:'center', gap:6 }}>
-                <Clock size={10}/> {savedWhen}
+            {/* Lifecycle at a glance — the compact 1-5 stepper (Draft, Saved,
+                Canon, In the Realm, Shared). Non-interactive (no onStep) so it
+                adds no tab stops to the dense card. Gated to active saves. */}
+            {active && (
+              <div style={{ marginTop:SP.xs }}>
+                <LifecycleSpine stage={lifecycleStage} compact />
               </div>
             )}
+            {/* Save metadata — the LEAST table-relevant fact, pushed below. */}
+            <div style={{ fontSize:FS.xs, color:BODY, display:'flex', alignItems:'center', gap:6, marginTop:SP.xs }}>
+              <Clock size={10}/> {ts(s.timestamp)}
+            </div>
           </div>
-        </td>
-
-        {/* ── Tier */}
-        <td style={LEDGER_CELL}>
-          <span style={{ fontSize:FS.sm, color:BODY, textTransform:'capitalize', whiteSpace:'nowrap' }}>{s.tier}</span>
-        </td>
-
-        {/* ── Phase — CANON as a small-caps rubric; drafts read quiet. A destroyed
-            settlement stacks a danger rubric UNDER its phase word: destruction is a
-            LIFECYCLE fact, and the Phase column is this row's single lifecycle
-            encoding (see the spine note above — a second encoding elsewhere is the
-            exact defect the 2026-07-22 legibility wave removed). Stacked rather than
-            substituted so the phase word survives: a destroyed row still says
-            whether its names are locked. This is the visible half of
-            DestroySettlementControl's promise that the dossier "stays in your
-            library, marked destroyed"; it reads off the SAME `alreadyDestroyed`
-            derivation that hides the destroy affordance, so the mark appears in the
-            same repaint the affordance disappears in. A standing row renders exactly
-            as before — the guard yields nothing. */}
-        <td style={LEDGER_CELL}>
-          {isCanon
-            ? <span style={{ ...RUBRIC, color:GOLD_TXT }}>Canon</span>
-            : <span style={{ fontSize:FS.sm, color:SECOND }}>Draft</span>}
-          {alreadyDestroyed && (
-            <div style={{ ...RUBRIC, color:swatch.danger, marginTop:2 }}>Destroyed</div>
-          )}
-        </td>
-
-        {/* ── Health — the worst health-band word (Stable / Strained / Vulnerable
-            / Critical), each a click-to-learn glossary term via HealthPip. The
-            bare dash previously swallowed every non-attention band (a Strained
-            town read as blank); now a settlement with derivable state always
-            carries its plain band word (legibility wave, 2026-07-22). The dash
-            remains only when no system-state can be derived. */}
-        <td style={{ ...LEDGER_CELL, whiteSpace:'nowrap' }}>
-          {health
-            ? <HealthPip pip={health}/>
-            : <span aria-hidden="true" style={{ color:MUTED }}>–</span>}
-        </td>
-
-        {/* ── Action cluster — ONE primary (Open), rare actions behind a kebab
+        </div>
+        {/* Action cluster — ONE primary (Open), rare actions behind a kebab
             overflow, destructive Delete demoted to a separated small ghost icon.
             Reactivation replaces Open for plan-inactive saves. */}
-        <td data-card-actions style={{ ...LEDGER_CELL, textAlign:'right', whiteSpace:'nowrap' }}>
-          <div style={{ display:'inline-flex', gap:SP.xs, alignItems:'center' }}>
+        <div data-card-actions style={{ display:'flex', gap:SP.xs, alignItems:'center', flexShrink:0 }}>
           {!active && planInactive ? (
-            <>
-              <Button
-                variant="gold"
-                size="sm"
-                onClick={() => onReactivate?.(s)}
-                disabled={!canReactivate || reactivatingId === s.id}
-                busy={reactivatingId === s.id}
-                icon={<Unlock size={12}/>}
-                title={canReactivate ? 'Reactivate this retained settlement' : undefined}
-              >
-                {reactivatingId === s.id ? 'Restoring...' : 'Reactivate'}
-              </Button>
-              {/* AUDIT-2.2 — read-only extraction, always available on a frozen
-                  save even without an active plan. Subordinate to the gold
-                  Reactivate: a quiet outline that never resumes the simulation. */}
-              <Button
-                variant="info"
-                size="sm"
-                onClick={handleExportFrozen}
-                disabled={exportBusy}
-                busy={exportBusy}
-                icon={<FileText size={12}/>}
-                title="Export this settlement as a PDF, yours to keep even while frozen"
-              >
-                {exportBusy ? 'Exporting…' : 'Export PDF'}
-              </Button>
-            </>
+            <Button
+              variant="gold"
+              size="sm"
+              onClick={() => onReactivate?.(s)}
+              disabled={!canReactivate || reactivatingId === s.id}
+              busy={reactivatingId === s.id}
+              icon={<Unlock size={12}/>}
+              title={canReactivate ? 'Reactivate this retained settlement' : undefined}
+            >
+              {reactivatingId === s.id ? 'Restoring...' : 'Reactivate'}
+            </Button>
           ) : (
             <>
-              {/* The whole row is the primary open target; this is the explicit,
+              {/* The whole card is the primary open target; this is the explicit,
                   subordinate echo of that action — outline, not solid. */}
               <Button variant="info" size="sm" disabled={!active} onClick={() => active && onView(s)} aria-label={`Open ${s.name}`}>Open</Button>
 
@@ -424,17 +259,14 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                     pressed={menuOpen}
                     onClick={() => setMenuOpen(o => !o)}
                   />
-                  {/* Floating chrome separates by its STRONG RULE, not a lift — the
-                      MoreMenu popover's ruled treatment (WorldMapToolbar, C5-a·iii).
-                      Print has no z-axis; the drop shadow and its rgba went with it. */}
                   {menuOpen && (
-                    <div role="menu" style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER_STRONG}`, minWidth:200, padding:4, display:'flex', flexDirection:'column', gap:1, textAlign:'left' }}>
+                    <div role="menu" style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, borderRadius:6, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:200, padding:4, display:'flex', flexDirection:'column', gap:1 }}>
                       {/* Canonize (draft → canon) or a static Canon marker. */}
                       {!isCanon ? (
                         <Button variant="ghost" fullWidth onClick={() => { onCanonize?.(s); setMenuOpen(false); }}
                           icon={<BookMarked size={13} color={GOLD}/>}
                           title="Canonize: lock names and start the campaign timeline"
-                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500 }}>
+                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500, borderRadius:3 }}>
                           Canonize
                         </Button>
                       ) : (
@@ -450,7 +282,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                         <Button variant="ghost" fullWidth
                           onClick={() => { setMenuOpen(false); onNavigate?.('pricing'); }}
                           icon={<Clock size={13} color={GOLD}/>}
-                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:GOLD_TXT, fontWeight:500 }}>
+                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:GOLD_TXT, fontWeight:500, borderRadius:3 }}>
                           Advance time and run campaigns. Upgrade
                         </Button>
                       ) : (
@@ -466,7 +298,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                             title={currentCampaignId
                               ? 'Advance the campaign world and open the post-advance results'
                               : 'Add this settlement to a campaign below to advance its world.'}
-                            style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500 }}>
+                            style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500, borderRadius:3 }}>
                             Advance Time
                           </Button>
 
@@ -474,13 +306,10 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
 
                           {/* Constructive campaign membership — add / move. */}
                           {campaigns.map(c => c.id === currentCampaignId ? null : (
-                            <Button variant="ghost" fullWidth key={c.id} disabled={mutationBlocks.target(c.id)} onClick={() => {
-                              const result = addToCampaign(c.id, s.id);
-                              if (result?.ok !== false) setMenuOpen(false);
-                            }}
+                            <Button variant="ghost" fullWidth key={c.id} onClick={() => { addToCampaign(c.id, s.id); setMenuOpen(false); }}
                               icon={<FolderOpen size={13} color={GOLD}/>}
                               title={currentCampaignId ? `Move to ${c.name}` : `Add to ${c.name}`}
-                              style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500 }}>
+                              style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500, borderRadius:3 }}>
                               {currentCampaignId ? 'Move to' : 'Add to'} {c.name}
                             </Button>
                           ))}
@@ -490,7 +319,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                             <Button variant="ghost" fullWidth onClick={() => { setMenuOpen(false); onCreateCampaign?.(); }}
                               icon={<ArrowRight size={13} color={GOLD}/>}
                               title="Create a campaign to organize this settlement"
-                              style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500 }}>
+                              style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500, borderRadius:3 }}>
                               Create a campaign
                             </Button>
                           )}
@@ -501,32 +330,9 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                       {currentCampaignId && (
                         <>
                           <div style={{ height:1, background:BORDER, margin:'2px 4px' }} />
-                          <Button variant="ghost" fullWidth disabled={mutationBlocks.removal} onClick={() => {
-                            const result = removeFromCampaign(currentCampaignId, s.id);
-                            if (result?.ok !== false) setMenuOpen(false);
-                          }}
-                            style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', fontSize:FS.sm, color:swatch.danger, fontWeight:500 }}>
+                          <Button variant="ghost" fullWidth onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMenuOpen(false); }}
+                            style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', fontSize:FS.sm, color:swatch.danger, fontWeight:500, borderRadius:3 }}>
                             Remove from campaign
-                          </Button>
-                        </>
-                      )}
-
-                      {/* Canon destruction. Different act from Delete: the save
-                          stays, and the settlement's own timeline records that the
-                          place was destroyed. One-way, so the menu only OPENS the
-                          type-the-name row below rather than firing anything.
-                          Offered on a canonized settlement that still stands. */}
-                      {isCanon && !alreadyDestroyed && (
-                        <>
-                          <div style={{ height:1, background:BORDER, margin:'2px 4px' }} />
-                          {/* No native title= tooltip (shrink-only census): the
-                              type-the-name confirm row this opens carries the
-                              full consequence copy before anything fires. */}
-                          <Button variant="ghost" fullWidth
-                            onClick={() => { setMenuOpen(false); setDestroyOpen(true); }}
-                            icon={<Flame size={13}/>}
-                            style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:swatch.danger, fontWeight:500 }}>
-                            Record its destruction
                           </Button>
                         </>
                       )}
@@ -542,62 +348,37 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                   label={`Delete ${s.name}`}
                   tone="danger"
                   size="md"
-                  disabled={!active || mutationBlocks.deletion}
+                  disabled={!active}
                   pressed={deleteId === s.id}
                   onClick={() => active && setDeleteId(deleteId === s.id ? null : s.id)}
                 />
               </span>
             </>
           )}
-          </div>
-        </td>
-      </tr>
-
-      {/* Delete confirmation — a full-width ledger row. DeleteConfirmation carries
-          its own frame + confirm/cancel controls. */}
+        </div>
+      </div>
+      {/* Blocked-reactivation recovery — when the slots are full, the reason +
+          the path forward render as a VISIBLE line (not the hover-only title),
+          scoped to the blocked state so reactivatable/active cards stay clean. */}
+      {!active && planInactive && !canReactivate && (
+        <div data-card-actions style={{ padding:`0 ${SP.md}px ${SP.sm}px`, display:'flex', alignItems:'center', gap:6, flexWrap:'wrap', fontSize:FS.xs, color:BODY }}>
+          <span>Active-save slots are full.</span>
+          <Button variant="ghost" size="sm" onClick={() => onNavigate?.('pricing')}
+            style={{ padding:'6px 10px', fontSize:FS.xs, color:GOLD_TXT, fontWeight:700 }}>
+            Free a slot or Upgrade
+          </Button>
+        </div>
+      )}
       {deleteId === s.id && (
-        <tr>
-          <td colSpan={colCount} style={{ padding:0 }}>
-            <DeleteConfirmation
-              entityName={s.name}
-              details={(s.settlement?.neighbourNetwork||[]).length > 0
-                ? `This settlement has ${s.settlement.neighbourNetwork.length} neighbour link(s). Deleting it will remove those relationships from linked settlements. This settlement will be gone for good. Export a copy first if you want to keep one.`
-                : 'This settlement will be gone for good. Export a copy first if you want to keep one.'}
-              onConfirm={() => deleteConfirmed(s.id)}
-              onCancel={() => setDeleteId(null)}
-            />
-          </td>
-        </tr>
+        <DeleteConfirmation
+          entityName={s.name}
+          details={(s.settlement?.neighbourNetwork||[]).length > 0
+            ? `This settlement has ${s.settlement.neighbourNetwork.length} neighbour link(s). Deleting it will remove those relationships from linked settlements. Any data not exported as JSON will be permanently lost.`
+            : 'All data not physically exported as a JSON file will be permanently lost.'}
+          onConfirm={() => deleteConfirmed(s.id)}
+          onCancel={() => setDeleteId(null)}
+        />
       )}
-
-      {/* Destruction confirmation — the same full-width ledger row treatment. The
-          store action is the authority on consent; this row is its front end. */}
-      {destroyOpen && (
-        // The boundary sits OUTSIDE the row so the row's own child chain matches
-        // the delete row's exactly; a fallback element between <td> and the
-        // control would also be invalid table nesting. The fallback is itself a
-        // full-width ledger row (witnessed-wait ratchet): the chunk is tiny, but
-        // a slow fetch must not leave the destruction click silent.
-        <Suspense fallback={
-          // The aria-label names the row: control-has-associated-label searches
-          // only shallowly for nested text, so the span's text cannot label the
-          // <tr> by itself. The span (not the td) carries role="status" so the
-          // wait is announced — a status role directly on the td reds
-          // no-interactive-element-to-noninteractive-role (jsx-a11y treats td
-          // as interactive).
-          <tr aria-label="Opening the destruction record">
-            <td colSpan={colCount} style={{ ...LEDGER_CELL, fontSize: FS.sm, color: MUTED, fontFamily: sans }}>
-              <span role="status">Opening the destruction record…</span>
-            </td>
-          </tr>
-        }>
-          <tr>
-            <td colSpan={colCount} style={{ padding:0 }}>
-              <DestroySettlementControl save={s} onCancel={() => setDestroyOpen(false)} />
-            </td>
-          </tr>
-        </Suspense>
-      )}
-    </>
+    </div>
   );
 }

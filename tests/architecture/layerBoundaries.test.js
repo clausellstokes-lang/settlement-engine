@@ -171,10 +171,8 @@ describe('layer boundaries (F29)', () => {
     // not an ordered walk). Killing a cycle → REMOVE its entry here (locks the
     // win). Adding one → this fails, and the answer is to break the cycle, not
     // extend the list.
-    // (Fold-in reconciliation 2026-07-16: RF's SCC machinery adopted; W6's
-    // ratchet-down honored — the CustomContent <> Dependencies cycle was broken
-    // on the merge lineage, entry removed, shrink-only resumes.)
     const ALLOWED_CYCLES = [
+      ['components/compendium/CustomContent.jsx', 'components/compendium/Dependencies.jsx'],
       ['generators/helpers.js', 'generators/priorityHelpers.js'],
     ];
 

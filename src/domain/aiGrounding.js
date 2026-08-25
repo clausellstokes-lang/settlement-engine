@@ -153,7 +153,7 @@ function collectUserEditsSummary(settlement) {
     entityIndex,
     label: kind === 'settlement'
       ? 'settlement'
-      : (entity?.faction || entity?.name || `#${entityIndex}`),
+      : (entity?.name || entity?.faction || `#${entityIndex}`),
     path,
     value: record?.value,
     editedAt: record?.editedAt || null,
@@ -316,7 +316,7 @@ export function forbiddenChanges(settlement) {
   for (const { kind, entity, entityIndex, path } of edits) {
     const entityLabel = kind === 'settlement'
       ? 'settlement'
-      : `${kind} "${entity?.faction || entity?.name || `#${entityIndex}`}"`;
+      : `${kind} "${entity?.name || entity?.faction || `#${entityIndex}`}"`;
     out.push(`MUST PRESERVE user-edited field (${path}) on ${entityLabel} — pass through verbatim.`);
   }
 

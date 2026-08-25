@@ -3,8 +3,8 @@
  *
  * tests/ui/generateWizard.smoke.test.jsx — Decomposition lock-in.
  *
- * GenerateWizard.jsx had in-file sub-components extracted into
- * src/components/generate/* (ChangeModeBar, ModeSelector,
+ * GenerateWizard.jsx had four in-file sub-components extracted into
+ * src/components/generate/* (ChangeModeBar, ModeSelector, StepIndicator,
  * SaveToLibraryButton). This is a behavior-preserving move, so the
  * regression net is simply: the wizard still mounts and renders without
  * throwing, wiring the extracted imports together correctly. If a
@@ -57,7 +57,7 @@ vi.mock('../../src/components/HomeHero.jsx', () => ({
 }));
 
 // Store mock. A mutable singleton drives every selector; subscribe and
-// getState are stubbed for the analytics effects.
+// getState are stubbed for the analytics/onboarding effects.
 const storeState = {
   // generator state (signed-in, empty: no mode picked, no settlement)
   settlement: null,
@@ -79,6 +79,11 @@ const storeState = {
   clearNeighbour: vi.fn(),
   clearSettlement: vi.fn(),
   dismissPipelineReveal: vi.fn(),
+  // onboarding slice
+  onboardingActive: false,
+  onboardingStep: 0,
+  advanceOnboarding: vi.fn(),
+  setOnboardingStep: vi.fn(),
   // analytics snapshot (read via getState in handleGenerate; unused on mount)
   institutionToggles: {},
   goodsToggles: {},

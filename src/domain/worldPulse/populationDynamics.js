@@ -1,10 +1,7 @@
 import { activeChannelsFrom } from '../region/index.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
-import { hash01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
-import { integerize } from './demographicsRates.js';
-import { residentNamedNpcCount } from './npcReplacement.js';
 import { formatCount } from '../formatNumber.js';
 
 // WEEK-denominated interval durations (the canonical grid — mirrors
@@ -81,22 +78,16 @@ const DISEASE_CRISIS_ARCHETYPES = new Set(['plague']);
 // war_drain when OFF, and a generation-occupied town already carried
 // vassal_extraction before this change — but it never lost population for it until
 // now), so a no-war campaign that never stamps either is byte-identical.
-// occupation_resistance (the occupied town's ongoing refreshed stressor) and occupation_burden
-// (the occupier's overextension) are re-emitted EVERY tick by occupation.js, unlike the one-shot
-// vassal_extraction proxy (stamped once at conquest, expiring after 6 ticks): both press the
-// population RATE while the occupation stands. All war archetypes are gated behind warLayerEnabled
-// at the source, so a no-war campaign never stamps them ⇒ byte-identical.
-const WAR_CRISIS_ARCHETYPES = new Set(['war_pressure', 'vassal_extraction', 'war_drain', 'occupation_resistance', 'occupation_burden']);
+const WAR_CRISIS_ARCHETYPES = new Set(['war_pressure', 'vassal_extraction', 'war_drain']);
 const BURDEN_ARCHETYPES = new Set(['alliance_burden', 'regional_protection_gap', 'relief_burden']);
 // siege_lifted belongs HERE and only here: it is the post-siege recovery bonus.
 const RECOVERY_ARCHETYPES = new Set(['siege_lifted', 'occupation_lifted', 'stressor_residual']);
 // One crisis-flight class feeds both the severe classifier and the
 // mass-emigration gate; recovery archetypes are deliberately absent. Occupation
-// drives REFUGEE FLIGHT — the column flees the occupier — so vassal_extraction AND
-// the occupied town's ongoing occupation_resistance join the flight set alongside
-// war_pressure; occupation_burden (the OCCUPIER's overextension) is austerity, not
-// flight — like war_drain it presses the rate, not the emigration gate, so it stays out.
-const CRISIS_FLIGHT_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'vassal_extraction', 'occupation_resistance', 'regional_migration_pressure']);
+// (vassal_extraction) drives REFUGEE FLIGHT — the column flees the occupier — so it
+// joins the flight set alongside war_pressure; war_drain is austerity, not flight,
+// so it stays out of the flight set (it presses the rate, not the emigration gate).
+const CRISIS_FLIGHT_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'vassal_extraction', 'regional_migration_pressure']);
 
 /**
  * @param {any} item
@@ -295,62 +286,15 @@ function populationPressureRate(item, pressureIdx, rules) {
  * @param {any} pressureIdx
  * @param {any} interval
  * @param {any} rules
- * @param {number} tick the dither's second key; typed rather than `any` so wave P1a
- *   adds nothing to the domain any-cast ratchet.
  */
-function deltaForSettlement(item, pressureIdx, interval, rules, tick) {
+function deltaForSettlement(item, pressureIdx, interval, rules) {
   const pop = Math.max(0, Math.round(finite(item?.settlement?.population, 0)));
   if (pop <= 0) return null;
   const magnitude = intervalMagnitude(interval);
   const rate = populationPressureRate(item, pressureIdx, rules);
   const severe = Math.abs(rate) >= 0.025 || hasConditionSignal(item, CRISIS_FLIGHT_ARCHETYPES);
   const cap = pop * (severe ? 0.18 : 0.055) * intensityMultiplier(rules);
-  const expectation = pop * rate * magnitude;
-  // ── WAVE P1a, THE FLOOR (docs/DESIGN_DEMOGRAPHIC_ENGINE.md §0 and §11) ────────
-  // THE TWO LINES BELOW ARE THE OTHER HALF OF THE 300-YEAR BIFURCATION, and it is ONE
-  // defect with the runaway P1 cured: an uncapped proportional rate read through an
-  // INTEGER DEADBAND. `Math.round` throws away any expectation under half a person, and
-  // the deadband then throws away a whole one, so a shrinking settlement shrinks until
-  // its delta rounds to -1 and FREEZES PERMANENTLY at pop* = 1.5 / (|rate| x magnitude).
-  // Executed at the soak's own configuration that is 301 people at pressure 0.70, which
-  // is exactly the 200-500 band six settlements sat in for two hundred years.
-  //
-  // MERELY LOWERING THE DEADBAND TO ONE WOULD NOT CURE IT. That moves the fixed point to
-  // 0.5 / (|rate| x magnitude), a third of the way down and no further: the same
-  // settlement refreezes near 100 people, still far above the thorp ceiling of 60, still
-  // unable to descend the tier ladder to the terminal lane. The attractor has to go, not
-  // shrink. So when the demographic engine is lit and the expectation is NEGATIVE, the
-  // decline is integerized the way the demographic kernel integerizes its own death term:
-  // the whole part lands every tick and the FRACTION IS THE PROBABILITY OF ONE MORE,
-  // through the wave's single `integerize` primitive. Expected value is preserved exactly
-  // (the measured decline curve is unchanged in expectation), and there is no population
-  // at which a negative rate stops emitting, so there is no nonzero equilibrium left.
-  //
-  // THE DRAW IS A HASH, NOT A STREAM. This evaluator is pure over (snapshot, pressures)
-  // and holds no rng, and threading one in would open a new per-tick draw in the
-  // candidate lane, which is the wave-E stream-theft hazard for no gain. `hash01` over
-  // (settlement, tick) is the house deterministic-dither idiom, replays exactly, is
-  // identical direct and in the worker, and cannot move any other lane's stream.
-  //
-  // DARK IS THE LEGACY ARITHMETIC, UNTOUCHED: `demographicsEnabled` is virtual (absent
-  // from DEFAULT_SIMULATION_RULES) so this reads `=== true` and is unreachable on every
-  // existing campaign, and the expression below is the same float expression in the same
-  // order it always was.
-  if (expectation < 0 && rules.demographicsEnabled === true) {
-    // THE H3 FLOOR COMPOSES STRUCTURALLY (design law 3: named souls are exempt). Dark,
-    // this lane never had to think about the cast, because the deadband froze every
-    // settlement thousands of souls above it. Removing the freeze is exactly what lets a
-    // decline walk down to the roster, so the floor arrives with it: the departure is
-    // drawn against the ANONYMOUS POOL, never the whole head count, the same subtraction
-    // the demographic kernel takes. The engine starves the number and never the cast.
-    const pool = Math.max(0, pop - residentNamedNpcCount(item?.settlement));
-    const shed = Math.min(pool, integerize(
-      Math.min(-expectation, cap),
-      hash01(`population.decline.${String(item?.id ?? '')}.${tick}`),
-    ));
-    return shed > 0 ? { pop, delta: -shed, severe } : null;
-  }
-  const rawDelta = Math.round(expectation);
+  const rawDelta = Math.round(pop * rate * magnitude);
   const delta = Math.round(clamp(rawDelta, -cap, cap));
   if (Math.abs(delta) < Math.max(2, Math.round(pop * 0.001))) return null;
   return { pop, delta, severe };
@@ -360,29 +304,9 @@ function deltaForSettlement(item, pressureIdx, interval, rules, tick) {
  * @param {any} options
  */
 function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tick, spatialActive }) {
-  const result = deltaForSettlement(item, pressureIdx, interval, rules, tick);
+  const result = deltaForSettlement(item, pressureIdx, interval, rules);
   if (!result) return null;
   const { pop, delta, severe } = result;
-  // ── WAVE P1, THE DEMOGRAPHIC ENGINE (docs/DESIGN_DEMOGRAPHIC_ENGINE.md law 1:
-  // "there is no growth term that is not a birth"). THIS LINE IS THE RUNAWAY. The
-  // rate above is proportional to the head count with NO carrying-capacity term, so
-  // a settlement under no pressure compounds at a smooth ~x1.07/year forever — the
-  // 300-year soak rode it to 29.1 trillion people. When `demographicsEnabled` is lit,
-  // demographicsKernel.js owns the growth side (births minus deaths against
-  // min(K_food, D_tier)) and the raw proportional growth is REPLACED here rather than
-  // added to it, or the two lanes would both mint the same people.
-  //
-  // ONLY the growth side is suppressed. Decline and mass emigration are UNCHANGED and
-  // still ride this lane: they already have a floor and the soak proved they work.
-  // P4 reconciles the decline term with the demographic death term; until then a
-  // pressured settlement is answered by both, which is conservative in the direction
-  // this wave cares about.
-  //
-  // `demographicsEnabled` is VIRTUAL (absent from DEFAULT_SIMULATION_RULES, declared
-  // false in the full_simulation preset), and normalizeSimulationRules passes unknown
-  // keys through its `...input` spread, so this reads `=== true` and is unreachable
-  // on every existing campaign: byte-identical dark.
-  if (delta > 0 && rules.demographicsEnabled === true) return null;
   const sourceId = String(item.id);
   const abs = Math.abs(delta);
   // Scale the mass-emigration bar DOWN for sub-month intervals. The fixed
@@ -441,10 +365,6 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
     severity: clamp(abs / Math.max(1, pop * 0.12), 0.12, 1),
     probability: 1,
     applyMode: major && rules.majorChangesRequireProposal ? 'proposal' : 'auto',
-    // Ordinary population drift remains real weekly state math, but is not itself
-    // a Chronicle beat. Mass emigration and every major transition stay visible
-    // (including legacy-auto major changes when proposals are disabled).
-    ...(!major && kind !== 'emigration' ? { recordMode: 'state_only' } : {}),
     headline: `${item.name || sourceId} population may ${delta > 0 ? 'grow' : 'fall'}`,
     // formatCount (not toLocaleString): a bare toLocaleString() renders `12,000`
     // on en-US ICU but `12 000`/`12.000` elsewhere, so persisted candidate

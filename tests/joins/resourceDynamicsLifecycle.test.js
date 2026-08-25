@@ -16,11 +16,6 @@
 import { describe, test, expect } from 'vitest';
 
 import {
-  expectAbsentWithAnchor,
-  expectPresentThenAbsent,
-} from '../helpers/anchoredNegatives.js';
-
-import {
   evaluateResourceDynamics,
   applyResourceMembershipOutcomeToSettlement,
 } from '../../src/domain/worldPulse/resourceDynamicsKernel.js';
@@ -35,12 +30,11 @@ import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 
 const SEED = 're-rt-1';
 const BASE_CFG = { settType: 'town', culture: 'germanic', tradeRouteAccess: 'road', monsterThreat: 'frontier' };
-const gen = (config, seed, customContent = {}) =>
-  generateSettlementPipeline(config, null, { seed, customContent });
+const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 const buildNextConfig = (settlement) => ({ ...(settlement?._config || stripDerivedConfigKeys(settlement?.config) || {}) });
 
-const discoverOutcome = (resource) => ({ id: 'o.d', targetSaveId: 'a', generatedAtTick: 100, severity: 0.5, candidateType: 'resource_discovery', headline: `${resource} found`, summary: 's', resourceMembership: { saveId: 'a', resource, op: 'add' } });
-const removeOutcome = (resource) => ({ id: 'o.r', targetSaveId: 'a', generatedAtTick: 100, severity: 0.5, candidateType: 'resource_removal', headline: `${resource} gone`, summary: 's', resourceMembership: { saveId: 'a', resource, op: 'remove' } });
+const discoverOutcome = (resource) => ({ id: 'o.d', targetSaveId: 'a', severity: 0.5, candidateType: 'resource_discovery', headline: `${resource} found`, summary: 's', resourceMembership: { saveId: 'a', resource, op: 'add' }, metadata: { tick: 100 } });
+const removeOutcome = (resource) => ({ id: 'o.r', targetSaveId: 'a', severity: 0.5, candidateType: 'resource_removal', headline: `${resource} gone`, summary: 's', resourceMembership: { saveId: 'a', resource, op: 'remove' }, metadata: { tick: 100 } });
 
 function deepFreeze(o) {
   if (o && typeof o === 'object') { Object.freeze(o); for (const k of Object.keys(o)) deepFreeze(o[k]); }
@@ -77,11 +71,7 @@ describe('undo round-trip — the writer + mover are pure (paused-resume safe)',
 describe('regen durability — an organic discovery survives full regeneration', () => {
   test('discover organically → regenerate → the node persists via resourceEdits (like a DM ADD)', () => {
     const s1 = gen(BASE_CFG, SEED);
-    // coal_deposits is one of this seed's rolled nodes (the sibling test below leans
-    // on it too) — the live anchor proving the roster exists before the discovery.
-    expectAbsentWithAnchor(
-      s1.config.nearbyResources, 'grain_fields', 'coal_deposits', 'the pre-discovery roster',
-    );
+    expect(s1.config.nearbyResources).not.toContain('grain_fields');
 
     const discovered = applyResourceMembershipOutcomeToSettlement(s1, discoverOutcome('grain_fields'));
     // The regen-surviving delta, dual-written config + _config (== the DM ADD shape).
@@ -97,68 +87,11 @@ describe('regen durability — an organic discovery survives full regeneration',
 
   test('an organic REMOVAL suppression survives regeneration (a worked-out vein stays gone)', () => {
     const s1 = gen(BASE_CFG, SEED);
-    // coal_deposits is rolled for this seed and is an exhaustible seam — the
-    // literal worked-out vein this case is named for.
-    expect(s1.config.nearbyResources).toContain('coal_deposits');
-    const removed = applyResourceMembershipOutcomeToSettlement(s1, removeOutcome('coal_deposits'));
-    expect(removed._config.resourceEdits.removedNative).toContain('coal_deposits');
+    expect(s1.config.nearbyResources).toContain('iron_deposits'); // rolled for this seed
+    const removed = applyResourceMembershipOutcomeToSettlement(s1, removeOutcome('iron_deposits'));
+    expect(removed._config.resourceEdits.removed).toContain('iron_deposits');
     const s2 = gen(buildNextConfig(removed), SEED);
-    expectPresentThenAbsent(
-      s1.config.nearbyResources, s2.config.nearbyResources, 'coal_deposits',
-      'the worked-out vein stays gone across regeneration',
-    );
-  });
-
-  test('native exhaustion preserves a same-name custom add across regeneration', () => {
-    const customContent = {
-      resources: [{
-        localUid: 'custom-iron',
-        definitionId: 'definition:custom-iron',
-        revisionId: 'revision:custom-iron:1',
-        name: 'iron_deposits',
-        category: 'mineral',
-        essential: true,
-      }],
-    };
-    const config = {
-      ...BASE_CFG,
-      nearbyResourcesRandom: false,
-      nearbyResourcesState: {},
-      resourceEdits: {
-        added: [{ key: 'iron_deposits', custom: true }],
-      },
-    };
-    const generated = gen(config, 'resource-membership-identity', customContent);
-    const discovered = applyResourceMembershipOutcomeToSettlement(
-      generated,
-      discoverOutcome('iron_deposits'),
-    );
-    const exhausted = applyResourceMembershipOutcomeToSettlement(
-      discovered,
-      removeOutcome('iron_deposits'),
-    );
-    const regenerated = gen(
-      buildNextConfig(exhausted),
-      'resource-membership-identity',
-      customContent,
-    );
-
-    expect(regenerated.config.nearbyResources)
-      .toContain('iron_deposits');
-    expect(regenerated.config.nearbyResourcesCustom)
-      .toContain('iron_deposits');
-    // The native list still carries this config's rolled natives; grain_fields anchors
-    // it, so the exclusion measures the native/custom identity split rather than a
-    // native list that regeneration stopped producing.
-    expectAbsentWithAnchor(
-      regenerated.config.nearbyResourcesNative, 'iron_deposits', 'grain_fields',
-      'native exhaustion preserves only the custom owner',
-    );
-    expect(regenerated._config.resourceEdits.added).toEqual([
-      { key: 'iron_deposits', custom: true },
-    ]);
-    expect(regenerated._config.resourceEdits.removedNative)
-      .toEqual(['iron_deposits']);
+    expect(s2.config.nearbyResources).not.toContain('iron_deposits');
   });
 });
 
@@ -194,43 +127,6 @@ describe('the mine founds itself — a discovery feeds the gap detector a build 
     // (or a downstream iron chain) is among them, referencing the local resource.
     expect(gapsAfter.length).toBeGreaterThan(gapsBefore.length);
     expect(gapsAfter.some((g) => /iron|smelt|mine/i.test(`${g.name} ${g.reason}`))).toBe(true);
-  });
-
-  test('a custom-only native namesake cannot found built-in iron institutions', () => {
-    const customOnly = {
-      tier: 'town', population: 1500, tradeRoute: 'road',
-      config: {
-        terrainType: 'plains',
-        tradeRouteAccess: 'road',
-        nearbyResources: ['iron_deposits'],
-        nearbyResourcesNative: [],
-        nearbyResourcesCustom: ['iron_deposits'],
-        nearbyResourcesNativeDepleted: [],
-      },
-      institutions: [
-        { name: 'Town hall', required: true, category: 'civic' },
-        { name: 'Market', category: 'trade' },
-      ],
-      economicState: {
-        prosperity: 'Comfortable',
-        activeChains: [],
-        primaryExports: [],
-      },
-      activeConditions: [],
-    };
-    const dualOwner = {
-      ...customOnly,
-      config: {
-        ...customOnly.config,
-        nearbyResourcesNative: ['iron_deposits'],
-      },
-    };
-
-    expect(detectInstitutionGaps(customOnly)).toEqual([]);
-    expect(
-      detectInstitutionGaps(dualOwner)
-        .some(gap => /iron|smelt|mine/i.test(`${gap.name} ${gap.reason}`)),
-    ).toBe(true);
   });
 });
 

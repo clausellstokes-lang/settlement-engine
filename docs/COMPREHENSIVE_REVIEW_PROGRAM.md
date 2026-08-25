@@ -29,6 +29,249 @@ ledger — never from a session digest.
 >   foreign-WIP notes, W5+W2 double-allocation flagged) — first fix wave of the program, closes
 >   register ids docs-knowledge-1/3/4/5, build-tooling-docs-1/2, spatial-engine-7,
 >   sim-logic-counterparts-11. Both Phase-V workflows in flight.
+> - 2026-07-27: EPISTEMIC PREVENTION PROGRAM folded @ composite-r4 e56cbeaa (73 files, minifold;
+>   owner order "do it all"). The three lane-close hazards are machinery now: anchored-negatives
+>   walker (181→2 sites; 2 survivors = deliberate findings EP-e/EP-f), seed-loop-totality walker
+>   (32→0), powered distribution envelopes (5 registered, 2 TIGHTENED, 1 loosenPending held tight,
+>   exact-binomial helper), effect-reachability corpus gate (10 effects proven firing; 3 repair
+>   strata recorded UNREACHABLE — EP-g). 6 vacuous-green instruments surfaced honestly; 0 assertions
+>   weakened. Fold gate: 19,724 passed, 9 failing files ALL name-attributed foreign (2 by execution:
+>   advancePauseResume red AT HEAD; mechanismLitCoverage red only vs foreign untracked test). Commit
+>   proven HEAD-green in a detached-worktree battery (45/45). Owner picks EP-a..EP-j in queue §9.
+>   Doctrine: GENERATION_CONTRACTS.md §Test epistemics; program doc: EPISTEMIC_PREVENTION_PLAN.md.
+> - 2026-07-28: EP-6 SRC-SIDE REPAIR folded @ composite-r4 11c295c1 (12 files; owner "continue"
+>   on EP-g/EP-l). Four measured investigations → two waves. The audit's own hard_dependency
+>   prescription proven a REGRESSION (ladder-aware fix = 41% golden keys → ONE REGEN batch,
+>   EP-g2); access_compatibility never unreachable (polarity gap; promoted + exclusion ratchet);
+>   EP-l WITHDRAWN as instrument artefact — real yield = SELF-CAPTURE fixed in 4 dark kernel
+>   arms (5th instance chip-filed, EP-p); furrier→tannery producer-eater deleted (EP-f, 46/46
+>   severing proof); §14 trace + survival_crisis receipt shipped (zero goldens, A/B-proven
+>   against the deity lane's concurrent drift). Picks: EP-g1/g3/g4, EP-n/o/p (queue §9).
+> - 2026-07-28: EXHAUSTIVE REMEDIATION RECONCILIATION recorded against code-of-record
+>   `minifold` @ 018e4119 and execution branch `codex/exhaustive-remediation`. All 202 REM rows
+>   have an explicit disposition: 18 done / 146 partial / 9 superseded / 21 true repository gaps /
+>   6 external-evidence closures / 2 demand-gated. The isolated worktree baseline is fully green:
+>   1,980 test files passed (8 skipped), 20,102 tests passed (79 skipped), build + `verify:dist`
+>   green, edge behavior 629/629, lint 0 errors (24 pre-existing warnings). Migration head remains
+>   frozen at 192 pending clone rehearsal of the existing 71-migration train; deterministic
+>   rehearsal-set SHA-256:
+>   `b353c97b91a93609c40103a2b39275ec88f2fa79ba135e0cf4a7ac2d78d1fe3d`.
+>   Binding reconciliation and fold order:
+>   `docs/EXHAUSTIVE_REMEDIATION_RECONCILIATION_018e4119.md`.
+> - 2026-07-30: THE VERIFIED-FIX WAVES landed @ composite-r4 e1adc7bd..b66e9551 (14 commits,
+>   owner order "fix all of them… I give all permission"). Pipeline: 14-agent holistic review of
+>   018e4119 (96 findings, 0 critical) → 14 Opus adversarial verifiers (39 CONFIRMED / 52
+>   ADJUSTED / 5 REFUTED; mountain_pass UPGRADED to high — fall-through scored a pass WORSE than
+>   isolated; NEW live bug found: World Book sieges printed `undefined`) → wave 1 (8 commits,
+>   48 fixes: NPC-rename single-writer convergence, pinnedNpcs regen remap, EP walkers to ALL of
+>   tests/, sweep self-diagnosis, modulePreload engine-core fix, interior seedFork scrub, edge
+>   hardening, doc truth) → wave 2 (6 commits, 22 fixes incl. FOUR OWNER RULINGS 2026-07-30:
+>   mountain_pass = seasonal tier [golden 523→525, 2 ADDED 0 CHANGED, sha-verified]; coup
+>   verdicts = guaranteed admission [golden 0/4 rows changed, saturation fixture pins it]; BYOK
+>   = fail-closed 503 with reservation release; realm exports = faithUnlocked seam fail-closed.
+>   Plus: consent → profiles.telemetry_consent, ai_data → durable outbox, draft timelines
+>   transfer on save, [generators-pipeline-5] reroll seed recorded, crypto seed minting).
+>   Full gate green at both wave folds (20,323 passed / 2,003 files at wave 2). Deliberately NOT
+>   done: production migration deploy (launch train unchanged), first-paint budget raise
+>   (constitutional). NEXT per owner order: soak:release (30y+100y grid) → soak:research (300y)
+>   → tuning pass over soak evidence → wave 3 programs (stripe coverage, manifest burn-down,
+>   negative-assertion burn-down, structural moves, src/lib+FMG review sweeps).
+> - 2026-07-31 (⛔ OWNER STOP + HANDOFF NOTICE): building STOPS after the in-flight
+>   wave C; owner may hand off to another account. A SUCCESSOR RESUMES FROM: (1) this
+>   ledger's newest rows; (2) minifold docs/DESIGN_REALM_DIRECTIVES.md Progress
+>   blockquote (the stop order + full held-queue state is recorded there); (3) the
+>   soak receipts in minifold artifacts/soak/ (release cases + the research 300y when
+>   it lands; the FAILED 100y×4s receipt is the zombie-cure evidence — the cure is
+>   committed @ 6f74870e, its proof rerun HELD). LANDED TODAY on composite-r4:
+>   verified-fix waves (14 commits), zombie cure, realm-directive waves A+B
+>   (45600de6/3183b3b9/260ddb7d), five architecture docs (realm directives ×9,
+>   cartography, NPC consequences, brokerages, route lifecycle). HELD: waves C-gate+
+>   commit (in flight at order time), then D..J, W-H/W-I/W-J, TC-0..8, cure-proof
+>   rerun, subsystem-certification build (parked 9-agent script), tuning pass.
+>   Owner-physical tail unchanged (migration train, walk, pushes, legal).
+> - 2026-07-31: THE SOAK LADDER + THE ZOMBIE CURE. Owner-ordered 30/100/300y soak
+>   (full_simulation, everything lit): scale sweep + BOTH 30y×12s seeds fully green (byte-identical
+>   30y replays, worker==direct hashes, bounded perturbation 0→0.08/30y, divergent fates, 4-majors
+>   cadence, zero unclassified events after burn-in). ⚠️ 100y×4s cell FAILED and exposed THE ZOMBIE
+>   SETTLEMENT CLASS: soak-d hit pop 0 in YEAR 4 and simulated six decades undead — root cause a
+>   pop>0 terminal-death eligibility inversion (settlementLifecycleFirstClass.js:377) + dwell reset
+>   on trickle bounces; small-realm stasis co-finding (stressors ~0 for 99y at N=4, politics mover
+>   monopoly, majors ~1/decade late-century) routed to the tuning pass. Owner ruled option 1
+>   ("do it"): the designed lane wired — empty fast path (floor 4 / clear 32 / dwell 13 ticks),
+>   certainty not lottery, organic path unchanged, conservation zero-moved, dormancy byte-identical,
+>   worldpulse goldens ZERO rows shifted. Landed @ composite-r4 (post-b66e9551), full gate green
+>   under soak load. Failing receipt preserved; 100y×4s re-run queued as cure proof after the
+>   300y×12s research leg (running) completes. Subsystem-certification build (9-agent, parked
+>   script) launches post-soak; then tuning (agenda: knowledge-lane starvation, lifecycle tempo,
+>   strategy-verb monotone, cooling slope, small-N normalization); then wave 3 programs.
+> - 2026-08-01 (⭐⭐ FABLE VALIDATION SESSION OPENS — the Fable-capable account the pause handoff
+>   awaited). Owner orders this session: exhaustive review + the FABLE_VALIDATION_QUEUE re-validation
+>   + architect everything not Fable-architected; ALL implementation assigned to the external
+>   implementer (Sol 5.6); model split reaffirmed (Fable = validation/architecture, Opus 5 =
+>   verification). LANDED @ minifold daee130d: amendments R/R2/S recorded from owner dictation (THE
+>   RAZING — punitive victory, evil-exclusive initiation, the coupled vengeance license, closed-loop;
+>   THE SOVEREIGNTY MARKET — settlements tradeable as treaties, bundles compose until believed values
+>   clear) + docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md (amendments A..S compiled into waves WR-0..WR-10,
+>   implementation-grade, self-contained for the external implementer) + the K2 sentence-split doc
+>   repair. DIRTY-TREE TRIAGE EXECUTED (read-only): cartography TC-0/1/2 tests ALL GREEN (11 files /
+>   154 tests — the "partial edits" assumption is REFUTED by execution); the three W1 reds re-executed
+>   on the settled tree and REAL: anyCast = ratchet-DOWN lock-in (warDeployment 54→53, debt shrank),
+>   beliefMapGolden drifts exactly bg-c|14|unreliable, momentumDormancyGolden exactly mo-b|8 + mo-c|6
+>   — attribution evidence in flight. IN FLIGHT: 13-agent validation-evidence workflow (all 33 queue
+>   rows) + 10-dimension holistic review with Opus verifiers. Queue verdicts + WR-0 landing ruling
+>   follow in this ledger and FABLE_VALIDATION_QUEUE.md when evidence returns.
+> - 2026-08-02 (~02:15, THE SELF-AUDIT VERDICT + AN INCIDENT). Owner asked whether the chair's
+>   architecture was exhaustive; NINE Opus verifiers answered: NO — ~134 confirmed findings
+>   across the session corpus, concentrated in the dictation-speed specs (stale-substrate drift:
+>   maps/campaigns galleries ALREADY SHIPPED, the Account six-tab IA ALREADY EXISTS, no GSAP in
+>   the film, nav parents are buttons) and in incomplete amendment propagation (the WR volume's
+>   §3/§4 still carried the vetoed disposition ledger; amendment B orphaned entirely). What HELD:
+>   the 33 validation rulings ("largely survive re-derivation" — batch-6 claims independently
+>   re-verified, the golden adjudication confirmed), P5b honest to spec, Sol's builds "stronger
+>   than specced in places," and Sol independently corrected the chair's desert arithmetic to
+>   0.55 — though the audit found the CRITERION itself equilibrium-blind (neither desert nor
+>   mountain promotes at fixed point; the interlock was a ceiling artifact). Money-shaped finds:
+>   annual invoices earn ZERO credits (price-id-gated), unknown product keys pay-and-get-nothing,
+>   live Terms PROMISE auto-refunds against the new no-refunds ruling. TWO URGENT CORRECTIONS
+>   LANDED @ e1db8fff (WR-0c(3) margin-waiver removed while Sol is mid-build there; the lighting
+>   batch gains demographicsEnabled). ⚠️ INCIDENT, honestly: that commit fired the RECORDED
+>   shared-index race IN REVERSE — it swept 11 of Sol's staged WR-9 files (warConvergenceContract,
+>   story-mix-divergence) under the chair's message; work SAFE, attribution wrong, slice possibly
+>   split across two commits; no rewrite in a live tree — recorded here instead. Cause: the chair
+>   skipped pathspec-commit discipline under urgency, hours after re-reading the hazard. RULE
+>   REAFFIRMED: every minifold commit is `git commit -- <explicit paths>` from now on. NEXT: the
+>   full correction pass over all ~134 findings (both journals preserved; crux rulings chair-held);
+>   NOTHING uncorrected ships to Sol.
+> - 2026-08-02 (~07:30, THE FP CORPUS + THE WINDOW BOUNDARY): the owner's closure ruling — THE
+>   SIMULATION ONTOLOGY IS CLOSED (vocabulary + polish only henceforth) — capped the design era.
+>   Built tonight after the last ledger row: 21 parity surveys (trade/faith/populations/
+>   information/diplomacy/interior, all vs war's grade); THE FP SPINE (twelve requirements:
+>   heuristics, counterforces, density, named actors, errands w/ declared-vs-true purposes,
+>   dossier coherence, derivable mess, coupling, temporal contract, risk posture, narration
+>   parity, pacing) @ 04935d78; SEVEN VOLUMES drafted (~615KB) + 143-finding Opus audit +
+>   correction pass under ten chair rulings — BANKED @ minifold be359d28 mid-correction (resume
+>   map: memory fp-corpus-handoff-2026-08-02). Also: directive 12 THE AGE TOGGLES (war/peace +
+>   pious/secular convergence climates, four corner ages, measured never enforced) @ f4716aa6;
+>   telemetry coverage doc @ 6a24d52d; the Founders' Hall finalized (all-invited 30, no-trade,
+>   petition, presence-sealed) + profile identity + civility guard/veil + operator messages +
+>   LD-1..11 + About split + Bound Book — the whole 08-02 dictation corpus architected and
+>   committed across ~30 minifold commits. Successor: finish the FP corrections per the memory
+>   map, deliver the accounting, then Sol's queue stands: sim-proof path first, FP corpus behind
+>   it, commons/landing parallel.
+> - 2026-08-02 (~12:45, THE FP CORRECTION PASS COMPLETE — the successor's landing). Re-dispatched
+>   the banked script as run wf_76214688-ba0 (7 volume correctors + the cohesion fixer; all 8
+>   returned, 0 errors): 162 changes; 368 [CORRECTED 2026-08-02 (fp-audit)] markers final
+>   (SPINE 9 / TRADE 46 / FAITH 50 / POP 46 / INFO 37 / GRAMMAR 66 / INTERIOR 59 / COUPLINGS 55);
+>   landed @ minifold 36862650 (pathspec, 10 files, +3807/−1109, survival check clean). The 19
+>   unresolved forks triaged in FABLE_VALIDATION_QUEUE.md's new FP block: 13 verified landed by
+>   grep receipt, 1 chair-repaired (FAITH WF-2b's pilgrim-widening deferral twin of COUPLINGS §10
+>   row 11), 4 ruled vetoably (CR-1 J-INT-13 dark prose-version-flag default, re-record
+>   owner-elective; CR-2 applyWorldPulse:322 second-fold consolidation pre-ruled for TR-4 build
+>   behind a no-behavior-change pin; CR-3 the machine-readable band registry DECLINED — SP-6's
+>   reconciliation walker is the adopted form, SP-8 stays THE AGE LAYER; CR-4 FAITH's seatBooks
+>   deferral stands as reconciled). WR-10's graceful-degradation twin note landed in the war
+>   volume. THE CORPUS NOW SHIPS TO SOL AUDITED AND CORRECTED END TO END. Budget note: the pass
+>   ran all-Fable by model inheritance (owner-flagged ~15%+ of weekly); staffing rule recorded
+>   (memory fable-budget-workflow-staffing) — bulk correctors ride Opus henceforth. Accounting
+>   delivered to the owner this session.
+> - 2026-08-02 (~14:00, THE DELEGATED-RULINGS TAIL). Owner granted full delegation; three
+>   rulings landed @ minifold fdf43790 (CR-5 syndicate = a house at the `criminal` faction type
+>   with covert books, TR-2b shape, corruption web admits syndicate-house patrons; CR-6 spine
+>   requirement 13 THE ALIGNMENT COUPLING — alignmentOf is a DERIVED two-axis read, no writer,
+>   waves declare engagement or empty; CR-7 requirement 14 THE EDIT VERB — DM verb + edits-delta
+>   survival + typed-proposal AI surface per new DM-visible state; law now, rows at build). Then
+>   the owner's hook order: DESIGN_HOOK_NONREDUNDANCY.md @ minifold e658c042 — HK-1 closed theme
+>   vocabulary / HK-2 projection-side ranked retention (DM edits sacred, clock-anchored hooks
+>   protected, persisted state untouched) / HK-3 theme-aware draws (one-roll budget, disclosed
+>   shift) — architected for Sol against the measured 8.19%/35% repeat baseline; sequenced
+>   HK-1→2→3, HK-2 before HK-3 so the visible cure ships with zero golden motion.
+> - 2026-08-02 (evening, THE CONTENT + PRODUCT TAIL). Under continued full delegation: THE
+>   RECEIPT-POOL CORPUS authored + adversarially verified @ minifold c9493790 (8 annexes, 676
+>   kinds, ~3,000 angle-distinct variants, 284 verify-pass fixes; SP-6 content-depth floor +
+>   phrase-repetition envelope lawed @ 5dca5fcd — variability measured, never assumed); the
+>   TR-2 universality clause @ 34122c46 (economic capacity universal + derived; books earned,
+>   never a birthright); SOL_QUEUE landed @ 67331032 with the terminal phase (soaks/lighting/
+>   tuning/pushes) reassigned to the Fable chair by owner order; THE REALM MAGIC TOGGLE specced
+>   @ 16231a72 (projection not gate; twelve-leak register reproduce-first; magic ≠ faith ruled
+>   vetoable). Sol banked SOL-BANK-1 (nav-flow teardown flake class) per owner order for the
+>   consolidated adversarial pass. THE WAR AMENDMENTS architected from the owner's design
+>   dialogue @ minifold d9050aa5 + 4bbf847c (DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md, SOL_QUEUE
+>   23a): CV-1..4 — the exit vocabulary {settled, defaulted, cold} + the cold edge, the
+>   turncoat's receipted shape (healthy-tie switch unreachable), alignment weights (req. 13
+>   paid for war), the betrayal market feeding shared-threat; TB-1..4 — the tribute family
+>   (five banded bases incl. the prosperity INDEX and population-as-columns, three-goal demand
+>   doctrine Herald-named, justice-scaled strain, remission, no clamps) + TB-LAW-7 THE HEALING
+>   LATTICE (five reducers — mutual-gain trade, co-belligerence, kin, common rite, affinity —
+>   saturation-gated with hysteresis). J-CT-1..10 vetoable. 
+> - 2026-08-03 (THE WAR AMENDMENTS CLOSE WHOLE @ minifold 7da2aabf). The full adversarial arc
+>   executed: 6-checker cohesion pass (128 findings — incl. the BUILT tribute/resource_share
+>   catalog rows, landed WR-1..5, the reserve floor, CPL-17's declared-empty vs the owner's
+>   population-levy order, the K4 merged-estimate inequity, gratitudeBonds' leverage refusal)
+>   → repair under chair rulings R-A..R-L → re-verify (122/127, zero HIGH) → 14 residuals
+>   cleared. Final: 2,697 lines, 23 waves (CV-1..4 · TB-1..7 + TB-1b the faith wing ·
+>   XW-1..8 incl. the secret protocol, the wedge, preventive pressure, subsidy/loan, the
+>   guarantee class, scorched earth OWNER-GATED), J-CT-1..34 each with veto consequence,
+>   remission-before-alms, the per-observer inequity read, rapprochement as the ONE new
+>   trigger token. CPL-17 carries the owner-override line; three cross-volume amendment
+>   requests recorded unassumed. SOL_QUEUE 23a final.
+> - 2026-08-03 (THE CONTENT NIGHT CLOSES — the Herald + dossier voice program complete). Laws:
+>   the frequency-scaled floor + legacy clause (88b6a042), THE CAUSAL GRAMMAR (c41855cd), two
+>   registers (af81ae32), the Herald surface contract incl. subheader + rumor links + popup
+>   convention (fcf6c4e0), THE HERALD INDEX (657ff3ab), THE TRUTH LAW + contamination fence
+>   (b8cde654), the portable popup + manipulation disclosure (f2cd6ba0) + THE MUTATED PLANT
+>   (1916de8a), the dossier extension (4dccad24) + THE DOSSIER-NATIVE REGISTER (c2f048e1) +
+>   the state-prose corpus + foreign desk (c2628351) + THE DM-FIELD PROJECTION RULE (06afec27).
+>   Corpora: chronic deepening +2,462 (1e8bf8a8) · the causal voice 78 families x 3 registers
+>   (7fc778b5) · the dossier-native register 78x6 (6e5615b7) · the state-prose corpus 77/77
+>   surfaces, 2,149 variants (9a9094a3) · the completion pass (06afec27). ~10,600 authored,
+>   adversarially verified sentences across 12 annex files; SOL_QUEUE item 24 gathers the
+>   wiring. Every verifier PASS; every chair/writer ruling recorded vetoable in-file.
+> - 2026-08-03 (THE BUILD TAKEOVER — Sol out of usage; Fable chairs, Opus implements+verifies,
+>   owner away under total delegation + pre-approval; 30-min heartbeat). FIVE CYCLES LANDED:
+>   ⭐ WR-7b WHOLE @ minifold e51ec17e (54 files +12,043/−1,264; interception/parlay/hold/
+>   two-pictures; reachability proven by stage-neuter negative controls; single-writer FAMILY
+>   per R-BLD-4; R-BLD-6 re-baselined the size ratchet at measured truth — 17 exact entries,
+>   the ratchet was broken at HEAD and the wave REPAIRED it; burn-down owed at THE
+>   DECOMPOSITION WAVE) · MG-3a-h ALL twelve magic leaks closed (R-BLD-5: the catalog tag is
+>   canonical) + MG-4 harness @ a80c0be4/eea5a6c6 · HK-1+HK-2 · the FOUNDERS' HALL C1-C6 ·
+>   profile identity + civility guard (6 commits; the veil moved to the PAYLOAD BOUNDARY @
+>   5283557a after a live bypass was caught by probe) · THE LEGACY RETROFIT LIVE @ 1b9b2b10
+>   (population desk, first pools speaking) · live defects fixed en route (factionPairOf
+>   ReferenceError; MG-4's false recorded census corrected BEFORE any band signing) · content
+>   quality chain closed (uniqueness 115→11 irreducible; one-kind-one-pool @ 50b69622).
+>   Rulings R-BLD-1..6 + method hazards in memory fable-build-era-takeover.
+> - 2026-08-02 (~04:30, THE NIGHT CLOSES WHOLE). CORRECTION PASS COMPLETE: 134 corrections
+>   across 11 docs by 7 agents (six correctors + the coherence sweeper), 20+3 unresolved
+>   forks all chair-ruled (2 routed to owner: annual credit cadence · WR-9 gate reading);
+>   landed @ minifold cca61099 + follow-ups. THE DICTATION CORPUS of 2026-08-02 fully
+>   architected: Founders' Hall (9 rulings: all-invited 30, no-trade, petition letters,
+>   alphabetical filled-only roll, bio drawers, role rings, ceremonial removal),
+>   DESIGN_PROFILE_IMAGE (+ the civility guard's block/veil two-mode), DESIGN_ABOUT_PAGES,
+>   DESIGN_GALLERY_SHOWCASE (corrected), DESIGN_AI_CHAT_SURFACE (corrected), LD-1..LD-11.
+>   Sol's queue is AUDITED CORPUS end to end. Remaining: Sol executes; owner holds soaks/
+>   tuning/lighting + the routed pair + the legal packet (Terms refunds · covenant ·
+>   consent-regionality · sponsored disclosure).
+> - 2026-08-01 (⭐⭐ THE FABLE VALIDATION PASS COMPLETE — @ minifold d38595c1). Both workflows
+>   landed (14 + 23 agents, 6.4M tokens, 0 errors). ALL 33 queue rows RULED: 27 CONFIRMED /
+>   6 ADJUSTED / 0 engineering reversals — the Opus era's engineering judgments HOLD; the one
+>   systematic lean is process metadata under-recording (missing batch-6 rows, a mislocated
+>   ruling, an unrecorded flag-lighting deviation) — protocol amendment recorded. RULINGS:
+>   W1 goldens = LEGITIMATE lit-path shift, re-record AUTHORIZED (isolation-worktree proof:
+>   base reproduces all six manifest hashes byte-exact; every moved field traces to a declared
+>   join) · neighbour-mirror = inject-dampened (×0.5, capped) at THE ONE REGEN, emergent
+>   suppression the explicit interim · THE LIGHTING BATCH ruled a first-class step before the
+>   soak redo (four directive flags FALSE in full_simulation vs the restart order's record).
+>   REVIEW: 55 verified findings (18 refuted by Opus skeptics) in minifold
+>   docs/COMPREHENSIVE_REVIEW_2026-08-01.md — top: treaty war-block UNREACHABLE at the one
+>   opener (every negotiated NAP structurally worthless — executed proof); scored-vs-ordered
+>   target divergence at the chooser; tradeWar mints a costless ageless siege outside the one
+>   opener; all three specced as WR-0c OPENER HARDENING. Volume amended: WR-2 extends the
+>   EXISTING dispositionStats (the review caught the volume's own census gap — J-WR-11);
+>   WR-3 gains the lineage-substrate gate (satellites are not war-capable settlements —
+>   J-WR-12). ESCALATED TO OWNER: desert promotion-lock (a biome that cannot ascend) ·
+>   migrationKernel SATURATION_POP 9000 vs DENSITY_CEILINGS 38k sibling divergence (reconcile
+>   BEFORE the grid). Owner rulings dictated live: amendments R/R2/S. Implementation corpus for
+>   Sol 5.6 now: WR-0..WR-10 + the 55-finding register + TC-3..8 + the 202-item REM volume.
 
 ## The owner's directive (2026-07-13, verbatim intent)
 1. Fable 5 does the survey + dimensions survey: read/review/analyze the ENTIRE codebase; deliver
@@ -972,6 +1215,5986 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER RULING #6 (2026-07-17: "after these land simply stop"):** the manager FOLDS the
+five in-flight lanes as they report, then HALTS — no further dispatches this session
+(S4-S6, generation-time content, TOWN LAYOUT v2, the composite, ROUND 3 all HOLD). The
+successor resumes from the dossier's DISPATCH ORDER section. All pre-signed authorities
+(RULING #5, THE ONE REGEN) remain standing for the resume.
+**⬛ FOLD 1/5 — GALLERY-2 PHASE 2 (2026-07-17):** folded into claude/w7-prep @ d17bc07f
+(merge of claude/gallery-p2 tip 126c95f6, 6 commits off c1d3f6eb; conflict-free — zero
+file overlap with the provenance/growth advance). All five signed deliverables: six-phrase
+reactions (votes-posture table, 120/h shared velocity, 3-way vocab parity), aliveness
+ranking (0.7·depth/80 + 0.3·ageBand, snapshot-at-publish both paths, null-when-unknown) +
+most_alive sort, Campaigns third tab (CampaignStatePanel mounted), gallery_title (one
+coalesce chokepoint), 15 facet hubs + sitemap default-ON (31 URLs, anon-render pinned).
+MIGRATIONS RENUMBERED AT FOLD 146-149→145-148 (145 freed by the BYOK renumber; validator:
+148 files contiguous — the lane's isolation-only 145-gap red DISSOLVED). Lane pins 301
+green on the merged tree; the one full-set red was the pglite load-flake, 41/41 in
+isolation. Lane full gate (pre-fold): 11,691 pass, 46 load-flaked files all green isolated,
+tsc 0, dist 145/145 fresh, +804 B eager (margin 7,164 under RATCHET #11). JUDGMENTs
+(vetoable, in the lane report): formula weights, +10 relevance cap, 120/h ceiling, top-3
+card chips, curated-in-hubs, sitemap creds-keyed default-ON. Seams: no aliveness backfill
+(re-share stamps, at_war precedent); maps/campaigns have no title lane (signed wording);
+code-ahead-of-schema window now 118→148, closes at the very-end deploy. NOTE: the lane's
+spawn-chip for the saves.js gallery_importable data-loss is ALREADY FIXED on
+claude/fix-gallery-list-importable @ e0d0c29c (unfolded; dossier resume item — NOT one of
+the five). ⚠️ SUCCESSOR: surveyor-s3's migrations 145/146 COLLIDE with the folded
+145-148 — renumber to 149/150 at S3's fold with internal-ref updates.
+**⬛ FOLD 2/5 — SURVEYOR S3 (2026-07-17):** folded into claude/w7-prep @ 9ade8e08 (merge
+of claude/surveyor-s3 tip 03b5e2b4, 5 commits off e6f14414). The three charges: A THE
+INTENT COMPILER (interpret-session; label taxonomy w/ uncertain-default, THE SCHEMA WALL
+= op registry as tool schema, protected-consent barrier structurally inert without
+consented:true, §9 correction typology LIVE via SURVEYOR_CLASSES, S1 money path verbatim
++ kill-switch gate) · C THE PARLEY (parley; epistemic fidelity structural twice — own-
+knowledge slicer + edge citation law w/ LEAK downgrade; total-grounding parity = 4 bank
+facets + 8 §2d legs, client≡edge no-drift; musings-only strips any op) · B THE SHELL
+(visible context anchor follows the page; zero-cost suggested questions, imports nothing).
+MIGRATIONS RENUMBERED AT FOLD 145/146→149/150 (the forecast collision with gallery's
+145-148; validator: 150 contiguous; full-sequence pglite green). Conflicts resolved:
+ARCHITECTURE.md count→150, DEPLOY.md head→150_surveyor_stage_kill_switch; pricing.js
+auto-merge VERIFIED (599 kept + interpret=5/parley=3). Lane pins 202 green on the merged
+tree (25 files). Lane gate (pre-fold): strict 0/0, lint 0, dist 143/143 fresh ×2, ~150 B
+eager (event-name strings only), EXEMPT_CEILING red was pre-signature-base only — clears
+here (mainline = signed 69). SIGN-OFF ASKS (ride the RULING #5 blanket; vetoable):
+interpret=5/parley=3 pricing · kill-switch semantics (absent-key⇒enabled, edge fail-
+closed, operator pauses via direct config edit, no self-service RPC) · S1-machinery-by-
+direct-import over _shared refactor · uncertain-default + protected-graze-inert. SEAMS:
+fuller §2c UI polish (docked panel, ambient glyphs, Cmd+K, first-open whisper + early-
+access copy) deferred as least-verifiable headless; accept→mint wiring from
+reviewInterpretation into applyWorldPulseProposal/recordPartyImpact = the designed next
+slice (both ends exist); personaSlicer degrades to muted facets on dormant worldState.
+**⬛ FOLD 3/5 — MAP EXPORTS (2026-07-17):** folded into claude/w7-prep @ 7ff194aa (merge
+of claude/map-exports tip 017a921c, 2 commits off c1d3f6eb; conflict-free). The matrix:
+settlement SVG (byte-pinned per (settlement,lens,resolution)) · PNG/JPEG/WebP @ 1200/2400/
+4800 (shared SVG→canvas idiom; bytes deliberately unpinned — browser-native encoders) ·
+VTT token PNG (the recorded seam CLOSED) · single-map PDF (shared renderTownMapOp — no
+plate drift) · realm composite PNG (PLAUSIBLE: statically verified against the proven
+captureCampaignThumb idiom; one browser click settles it). WYSIWYG law: exports honor
+cosmetic mapEdits + the ACTIVE lens (override > persisted styleLens). THE $2.99 EXPORT
+BUNDLE (owner ruling executed): every format gates through the EXACT single-dossier lane
+(resolveExportAccess + dossierEntitlements + BuyThisDossier as the unlock rung) — one flag
+= dossier PDF + Foundry + all map exports; premium/founder/elevated free; NO new gate
+class, NO schema change; copy renamed to the bundle (2 tests updated, owner-directed).
+Zero eager bytes (closure 1,032,077 of 1,040,000 on ITS base); dist 143/143. Lane pins 59
+green on the merged tree post-fold. SEAMS in-file (MAP-EXPORTS-2): UVTT/Foundry pre-walled
+scene (full .uvtt shape + wall-derivation + 1:1 fixture pin SPECIFIED; stock Foundry needs
+a community importer — honest caveat) · realm with/without-settlements toggle (overlay-
+skip flag + terrain-bytes-identical pin specified) · bridging the fork's native getMapURL
+exporters (would lift realm export past 1024px + add realm SVG) · anon/gallery export
+affordance (none in v1 — owner decision). JUDGMENTs (vetoable): src/utils home for the PDF
+builder (tsc-graph isolation, ~650 latent JSDoc errors proven avoided) · main-thread
+single-map PDF (tiny vector doc; F41 worker stays dossier-only) · two-commit shape (work
+preservation over per-deliverable commits — two session kills mid-lane).
+**⬛ FOLD 4/5 — THE URBAN FABRIC LAYER (2026-07-17):** folded into claude/w7-prep @
+72be500f (merge of claude/urban-fabric tip 0b9107d1, 3 commits off 9b9e525a; conflict-
+free). The map's memory, all five commissioned mechanisms: per-district prominence stocks
+(12-class integrators, interval-invariant over elapsedWeeks, no rng, categories pinned-
+not-imported to keep districtProfile out of the engine graph) · regime lingering = decay+
+deposit (two-regime fixture: 6mo dominant, ~2y overtake, ONE turn beat) · alignment-drift
+grain toward 1−lawfulness01 · typed stressor scars w/ per-kind masonry half-lives (78–260
+wk) · catastrophe fast-path (toll≥100 resets struck classes, ≥400 town-wide; REBIRTH_CAP
+6). Storage: sidecar spatialLedgers.urbanFabric (drop-when-empty) + compact settlement
+mirror (acquiredTraits idiom); measured 844 B/record, <2KB worst-case pinned. Virtual
+urbanFabricEnabled + COMMITTED dormancy golden (wired-dormant byte-identical, 1,195 pre-
+existing files green); #38 READ API fabricRead.js (empty-when-dark; drift null ≠ 0.5 —
+absence isn't neutrality). Zero eager bytes (closure 1,032,709 before AND after);
+pulseKernel name-swap only, ceiling 1387 green. Lane pins 28 green on the merged tree.
+JUDGMENT TABLES (signed under the RULING #5 blanket, vetoable): time constants (stock
+half-life 260wk, drift 104wk, scar map), deposit map (rates/week × signal01), caps/
+hysteresis (LEAD_FLOOR 1.0, TURN_MARGIN 1.15, STOCK_MAX 10). RECOVERY NOTE: the lane's
+worktree died with the rate-limit kill; remediated to .claude/worktrees/urban-fabric on
+the pre-authorized base — main tree never mutated. SEAMS: #38 layout engine consumes
+fabricRead when commissioned (hasFabric-branch + fallback); dossier/AI surfacing not
+wired (mirror available, grounding untouched); lighting rides the pre-signed regen batch.
+**⬛ FOLD 5/5 — THE MISC-SIGNED WAVE (2026-07-17):** folded into claude/w7-prep @
+07d3a1d2 (merge of claude/misc-signed tip dfd0d4ec, 2 commits off 9b9e525a; conflict-
+free; the manager's containment commits b0837797/2173e93d were soft-reset + reshaped by
+the lane as granted, content verified verbatim-preserved). ITEM 1 membership id
+normalization: String() model at campaignSettlements + getCampaignForSettlement (the in-
+code OWNER-GATED deferral retired) + four same-seam writer siblings (addToCampaign prune/
+dedupe, removeFromCampaign filter + crash-guard, SettlementsPanel listing). ⚠️ ONE-TIME
+BEHAVIOR SHIFT (signed intent, in the commit body verbatim): campaigns holding number/
+string-mismatched member ids REGAIN those members into world-pulse advances — previously
+silently dropped. Zero golden shifts (audited: no golden carries settlementIds). Red-then-
+green advance pin: string + number members BOTH advance. ITEM 2 mapChains enforcement
+(closes the mapchains-gate-unenforced memory): the ccd0d670 cherry-pick was adjudicated
+STALE (documents, doesn't enforce; QuickInspector claim outdated) — implemented fresh at
+ALL THREE affordances (MapOverlay ChainEdges render, LayersPanel row, RoutesToolbar
+toggle); locked = visible + Lock glyph + map_realm_teaser moment (reuse JUDGMENT);
+derivation tier-blind (ChainEdges/supplyChains ZERO diff, source-scan pinned); stored
+layers.chains never rewritten (upgrade restores). Lane gate: eager closure 951,955 B
+(88,045 margin — its base predates later folds), dist 143/143, 2 pre-existing name-
+identical env flakes vs base named. Fold receipt: lane pins 23 + census walker green;
+composite receipt AFTER ALL FIVE FOLDS: migration head 150 contiguous + docs suite 93/93.
+SEAM: SettlementsPanel:748 still lacks || [] on campaign.settlementIds (pre-existing
+crash exposure, out of scope, recorded).
+
+**⬛⬛ THE STOP (2026-07-17): OWNER RULING #6 EXECUTED.** All five in-flight lanes are
+FOLDED into claude/w7-prep @ 07d3a1d2 (gallery d17bc07f → S3 9ade8e08 → map-exports
+7ff194aa → urban-fabric 72be500f → misc-signed 07d3a1d2). Migration chain 001–150
+contiguous; docs gates green on the composite; every fold verified by lane pins on the
+merged tree. NOTHING PUSHED. The session halts here per the ruling. SUCCESSOR: start at
+THE WEEKLY-LIMIT RESUME DOSSIER below — the DISPATCH ORDER section is the resume point;
+all RULING #5 pre-signed authorities (incl. THE ONE REGEN) remain standing. Un-dispatched
+per the stop: S4-S6, generation-time content, TOWN LAYOUT v2 (#38), the composite full
+gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list-
+importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
+boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
+@ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ FOLD: THE DOMAIN-STRICT BURN-DOWN (2026-07-17) → w7-prep @ 9150b464** (the
+task_be620e27 chip session; branch claude/domain-strict-burndown, rebased onto 2c980e4e;
+folded hard-gated from the chip — clean tree + no MERGE_HEAD + tip-unmoved verified in
+the w7-prep worktree immediately pre-merge; ff-only). THE V2-FOLD STRICT DEBT IS DEAD:
+112 errors across the six townMap files (townLayoutV2 86 · asymmetrySources 10 ·
+townPanorama 8 · lynchRubric 6 · siteGenesis 1 · townMapModel 1) → 0 by JSDoc annotation
+ONLY (+155/−48 lines; 17 inline paren-cast sites, semantics identical, each documenting a
+proven invariant; zero new `any` — domain-any 2230 unchanged; no new import statements;
+F24 python scan clean ×2). GOVERNANCE: burn-down over re-baseline —
+scripts/.domain-strict-baseline.json UNTOUCHED at total:0, the only-shrinks intent holds.
+Scope truth: the reported ~550 was the whole tsc surface; the ratchet counts src/domain
+only (112). changeView.js (SM-5's new domain file) VERIFIED strict-clean at the tip.
+RECEIPTS (re-earned on the rebased tree, exit codes read bare per the hardened
+discipline): node scripts/check-domain-strict.mjs exit 0 — "0 errors, ceiling 0" — from
+BOTH the chip and w7-prep worktrees · vitest battery 544 files / 6,521 passed (lint +
+architecture + build + domain + townMap v1/v2/style goldens byte-identical ⇒ zero
+behavior shift) · tsc full exit 0 · dist 146/146 · eslint 0 errors. JUDGMENTs (vetoable):
+TownV2Settlement `|null`→optional collapse on config/spatialLayout/economicState/
+defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) · its
+`tier` nullability under-declaration recorded as an in-file seam (guarded at
+townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
+battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ PRE-RECONCILIATION AMENDMENT (owner challenge 2026-07-18: "can't you pre-reconcile
+the unevenness?"):** ACCEPTED — the predicted first-pass unevenness is not inevitable;
+it followed from a binary exemption valve. The census gains the MATERIALS-ONLY bridge
+tier (token/CSS-level materials swap, zero structural/behavioral change — the phase-1
+ink ramp's 1:1 mapping to shipped colors was built for exactly this), plus JOURNEY-
+CLUSTER ordering (no user flow crosses an old/new chrome seam mid-journey) and a phase-5
+SEAM CHECK. Residual unevenness after the bridge = structural grammar only, which reads
+as room-to-room variety. INSTRUMENT-EXEMPT retired as a visual state. Relayed mid-flight.
+**⬛ THE FUNCTIONALITY RETENTION LAW (owner, 2026-07-18: "even with the website
+overhaul, retain all the functionality!"):** written into the craft brief as a binding
+law for every phase — recomposition never rewrite; functional parity per surface; the
+existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
+= violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
+and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐⭐⭐ FOLD PASS 3 EXECUTED — THE VISION WAVE IS ASSEMBLED (2026-07-20,
+claude/composite-r4 @ c8c5baa8, base 4a2447ae; manager-verified: tip + clean +
+ALL 13 lane branches proven ANCESTORS of the tip + mig head 169 contiguous —
+15/15 lanes, wave-completeness CONFIRMED).** Merges: V-L 41457700 (+341; both
+edit-kinds kept, edge bundle REGENERATED, spurious churn reverted) → V-G
+d0428218+e2517ef3 (+4,570 — the predicted eager surface; operationRegistry
+union, compendium REGEN → 169 ops) → V-N a4545b5d (+20 — the slim lane's
+lazy-prose split made V-N's +270 nearly free) → V-O 3c4824c5 (+334; MIGRATION
+RENUMBERED 168→169 incl. pglite refs; caught a COINCIDENT-VALUE auto-merge lie —
+ARCHITECTURE.md count "agreed" on 168 while truth was 169, hand-fixed) → V-M
+eb9afc7f (+0, clean) → fixes c8c5baa8. THE FOLD LAW HELD: final closure
+1,038,320 ≤ 1,040,000 — MARGIN 1,680, no breach (the foreseen one dissolved:
+the tableEvents revert saved +1,863 and slim's split neutralized V-N).
+VETOABLE (agent's, manager-RATIFIED): the tableEvents→tableLedger import
+unification was REVERTED — the value-identity assertion FAILED (MAGNITUDE_BANDS
+is a NAME COLLISION: a band-names array vs a band→number map — the mirror was
+never a mirror) AND the unification measured +1,863 eager (tableEvents is eager
+via campaignSlice; importing lazy tableLedger drags it into first paint); kept
+the mirror + a dev-only value-parity drift-guard test; follow-on recorded =
+shared-constants LEAF extraction (veto = do the leaf now). DEFECTS FIXED (only
+the assembled suite could see them): trendLens named a local `window` (DOM-free
+scan blind to destructured bindings — renamed windowSize) · V-G/V-M inline slug
+builders → kernel slugify, byte-parity proven on 12 inputs, baseline back to
+36. GATE (all at c8c5baa8, VERBATIM): strict 0 · tsc 0 · lint 0 (84 files) ·
+ratchets 31 (anyCast 2242 HELD · killList no re-pin needed · errorCopy green) ·
+dist 191/191 · two-shard suite 15,187 passed / reds = EXACTLY the 4 parked
+goldens + advancePauseResume (goldens BASE-PROVEN at 4a2447ae with mismatch
+sets BYTE-IDENTICAL base↔tip, 192 keys empty diff — the fold shifted ZERO
+output despite V-L touching beliefMap/roads; the flake green 9/9 isolated).
+Memory: fold-pass-3-executed.md (indexed). THE WAVE: 15 lanes → ~28 features +
+~700 pins → ONE TREE, budget margin 1,680, zero output drift. NEXT: ROUND 3
+CYCLE 2 — cold-then-connect, twenty bars, the termination law governs. The
+owner tail (promote → PUSH#1 → soak → tuning → ONE REGEN re-records the 4
+parked goldens → walk → PUSH#2 → VERY END → PUSH#3) remains owner-gated.**
+**⬛⭐⭐ VISION LANE V-M LANDED — the party gets its window, the years export,
+the streets remember (2026-07-20, claude/vision-m @ 8816db97, base 5d9218c6, 6
+lettered commits, FOLD-READY; landed by MANAGER TAKEOVER).** The lane's agent
+built and gated everything, then STALLED in its suite-triage tail (its
+consolidating waiter died silently; 84 min no output, zero test processes — the
+watchdog rule fired). Manager takeover finished the triage: the 5 suspect
+shard-B files (catchUpCampaignWorld + the landing-decorative UI quartet) run
+GREEN IN ISOLATION 43/43 on clean CPU — contention flakes per the banked rule;
+shard A had shown only parked goldens. With the lane's own receipts (closure
+1,036,399 Δ0 EXACTLY — every surface a lazy leaf · verify:dist 174/174 · full
+tsc 0 · strict 0 · ratchets 34/34 incl. zero title= adds · lint · NUL clean)
+the lane meets the same landing bar as its siblings; pass 3's full gate
+re-covers the assembled tree. THE SIX: (a) player-safe road scene — the party
+sees the road, never the DM's ledger · (b) the campaign player view via the
+V-20 unlisted door · (c) street-level wear + district renaming echoes · (d)
+per-settlement timelapse drill + export-as-clip (deterministic frames,
+encode-free) · (e) radar lenses — trend, never prophecy · (f) the map-tour
+teaching tranche. HONEST RECORD: the agent's final per-item narrative died
+with its waiter — the commit bodies + memory file
+(vision-m-display-followons-shipped.md, agent-written) carry the detail; the
+pass-3 fold agent reads the commit bodies. HAZARD RE-BANKED: a background
+"consolidating waiter" that reports no heartbeat is a stall, not a wait —
+takeover after one watchdog tick. SLOT: the wave is FULLY LANDED (15/15
+lanes); FOLD PASS 3 DISPATCHED.**
+**⬛⭐⭐ THE SLIM LANE EXECUTED — the breach converted to surplus (2026-07-20,
+claude/composite-r4 @ 4a2447ae, 2 commits a7874d34+4a2447ae; manager-verified
+tip+clean).** JOB 1: forensics seam −5,309 B eager, CONTRACT INTACT — and a
+ROOT-CAUSE CORRECTION: vision-d's "minifier cascade" theory was a
+MISATTRIBUTION, probe-proven; the real cost was store→crashForensics→flags.js
+dragging the 4,565-B description-heavy FLAGS registry eager. Cure = the house
+registryProse idiom: lean src/lib/flagRegistry.js (defaults+resolution only,
+first-paint-safe) + flags.js becomes the LAZY prose sidecar re-exporting the
+API verbatim (~20 consumers untouched); arming stays SYNCHRONOUS at boot (the
+ratified eager-and-complete judgment preserved); NEW PIN
+crashForensicsBootTiming = real-store crash-immediately-after-boot captures the
+full whitelist (a future lazy-arming regression fails it). CLOSURE 1,038,364 →
+1,033,055; HEADROOM 1,636 → 6,945. JOB 2: the anyCast holes burned — tree won
+over the brief (34 holes, not 32; baseline total 2242, not 2252-as-count):
+JSDoc-only cures across 6 files (8 casts DROPPED as already-assignable, 6 cast
+to real types via import()), total back to EXACTLY the frozen baseline 2242,
+`.domain-any-baseline.json` UNTOUCHED, ratchet 9/9 green. Receipts: strict 0 ·
+tsc:full 0 · lint 0 · dist 26/26 forensics+budget · assize/commons dormancy
+BYTE-IDENTICAL (cast-drops runtime-neutral) · 20 flag-consumer surfaces green ·
+NUL clean. HONEST OMISSION (recorded): full two-shard suite NOT run (no
+mig/edge changes; pass 3's own full gate covers it). PASS-3 ARITHMETIC NOW:
+~+5.4K across 5 lanes vs 6,945 headroom ⇒ ~1,545 B slack — the fold law's
+halt-on-breach stands as the backstop. JUDGMENTS RATIFIED: registryProse split
+over manualChunks (probe-proven; manualChunks pins backfire here — recorded
+hazard honored) · burn-to-exact-baseline over re-freeze · timing pin as a REAL
+store integration. Memory: slim-lane-executed.md (indexed; corrects the
+cascade misattribution). GATE TO PASS 3: V-M's triage is the last landing.**
+**⬛⭐⭐⭐ FOLD PASS 2 EXECUTED — the table's ledger, the findable truth, and the
+court join the composite (2026-07-20, claude/composite-r4 @ dbbc6fb6, base
+5d9218c6, 8 commits; manager-verified tip+clean).** Merges: V-K 0ee0c9e1 (zero
+conflicts, name-swap chain intact) → V-F 7eae9a8b (registry unions hand-verified)
+→ V-J cf4fa74c (one conflict, routes union). SEAMS: DM screen mounts the
+Chronicler's Letter (public-chronicle reformat, both faces — verified no secret
+content) + Oracle (DM-only) 1d581ea7 · vercel afterFiles rewrites
+/gallery+/world→meta-shell, sitemap regen 336 URLs byte-match 4b992cc3 · worker-
+transport swap = VERIFIED NO-OP (advance already rides V-D's harness; the
+auspice's sync forecast is a recorded do-not-worker seam) · import→wall waits on
+pass 3 by design. FIXES: killList re-pin (V-F UI) · slugify defect-class cure in
+assizeKernel → canonical ladderFactionKey (baseline 36==36, ceiling NOT widened)
+· stale analytics edge bundle regen (table-event kind; spurious timestamp
+reverted) · .npcs/.institutions census dispositions (a ruined courthouse is no
+venue — isLiveInstitution). THE FOLD LAW HELD: per-merge closures 1,036,408 →
+1,037,885 → 1,038,364 ≤ 1,040,000 — ⚠⚠ HEADROOM NOW 1,636 (V-F measured +1,477;
+V-J +479 exactly as documented). Suite (clean-load, authoritative): 14,983
+passed / failures = the 4 parked goldens (pdf goldenViewModel BASE-PROVEN; the
+parked set at composite-r4 = beliefMap·generator·deity·pdfViewModel — V-K's
+memory's pipeline.property is GREEN here, the set shifted) + anyCast (below).
+A 229-load contention storm false-flagged 35 files mid-run — every one green in
+isolation; hazard re-banked. tsc 0 · strict 0 · lint 0 · dist green · migration
+head 168 (no lane minted). ⚠ THE ONE NON-PARKED RED: domainAnyCastBaseline —
+V-K+V-F's 6 new domain files add 32 house-idiom any-holes vs the OWNER-FROZEN
+ceiling 2252 (total would be 2274). JUDGMENT (manager, vetoable): TYPE BURN-DOWN
+over ceiling-raise — the ceiling is owner-frozen ("NEVER raise") and the
+termination law forbids weakening a gate to pass it; V-L proved the cure idiom
+(JSDoc/casts only). Raising stays owner-gated; veto = park the raise question to
+the owner queue instead. ⚠⚠ PASS-3 BREACH FORESEEN (manager arithmetic): V-G
+looks ~+4.5K eager (registry strings/store surface) + V-N +270 + V-O +295 + V-L
+~+312 + V-M 0 ≈ +5.4K vs 1,636 headroom ⇒ breach ~3.8K. JUDGMENT (manager,
+vetoable): PRE-PASS-3 SLIM LANE dispatched on composite-r4 — thin the R-14
+forensics EAGER seam (keep the ratified eager-and-complete semantics, shrink the
+bytes; target −5-6K) + burn the 32 any-holes; the budget raise stays owner-gated
+and pass 3 still measures per merge and halts on breach. Veto = revert the slim
+commits. Memory: fold-pass-2-executed.md (indexed).**
+**⬛⭐⭐⭐ CYCLE-2 FIX DRIVE COMPLETE @ composite-r4 b339e178 (2026-07-21,
+checker-verified).** ALL 277 findings through the pipeline: must-fix tier (28
+fixed / 10 struck) + should-fix/polish batches A (~100) + B-r1 (~37) + B-r2 (~29)
++ C-r1 (~31) + C-r2 (~42). Final batch C-r2 fold (C6 return-visit fallback + C3
+experience/UX [handbook rival-claim drift, privacy↔SQL parity, 4-member raw-id
+headline class, Ti] + C2 voice [THE Ashford-probe coherence fix: threads no
+longer conflate co-location with causation; raw ids/Unknown-settlement speak
+names or 'a far settlement'; raw JSON removed from the chronicle; verbatim
+repeats coalesced]). Two-shard = 4-parked-goldens-ONLY; letter golden
+BYTE-IDENTICAL GREEN throughout (conditional-spread discipline); closure
+1,039,971 — margin GREW 25→29B (C2 net-NEGATIVE eager by re-leading headline
+templates); F24 NUL byte caught by the python scan. THE FIX DRIVE ALSO DELIVERED
+MUCH OF TRANCHE 2 EARLY: story-census executable (C5, PASSES green) · candidateType
+voice-chokepoint walker (C1) · RLS-census 70-tbl/0-gap + AI-metering-census +
+model-drift binding + a live N-1 credit-AI session-gate gap CLOSED (C4) ·
+transcendental-Math + committed-secrets + non-JS-first-paint budget walkers (C5) ·
+handbook/privacy/loading-narration parity gates (C3). ⛔ OWNER STOP LINE: after
+the REMAINING tranche-2 enforcers + tranche-3 burn-down → HALT (no cold cycle 3 /
+convergence / confirming cycle — owner's call). LARGE ONE-REGEN QUEUE accumulated
+(C2-Q1 letter-header/em-dash/flag-key debt, C2-Q2 prose-pool variety, + every
+golden-bound composer edit) — the owner's single re-record lights it all.**
+**⬛⭐⭐ TRANCHE-2 ENFORCERS 8/9 LANDED (2026-07-21, all base b339e178, all Δ0
+eager, NOT folded).** E-C lifecycle round-trip @ e-lifecycle 31a1e2a6 · E-D AI-wall
+@ e-aiwall e1fbbbef (finding: parley has no client seam) · E-G narrative-parity @
+e-narrative 2d892d0f · E-H mechanism-lit @ e-h-mechanism de94d733 (94.4%) · E-F
+tick op-budget @ e-f-opbudget 9f5ff2bf (4,671 ops→6,500 ceiling + 12 per-component
+pins) · E-I keyboard placement @ e-i-keyboard ed704fe9 (SR-user places a
+settlement; WorldMap.jsx untouched at 600) · E-E voice→JSX @ e-e-voice aa5350f0
+(FINDING: 396 em-dashes/10 bangs in 133 JSX files now ratcheted; brief-vs-spec
+drift caught by the agent, spec won) · ⭐ E-J-v2 RECORDED MULTI-HOP DEPTH @
+e-j-recorded-depth 707a3974 under the owner's no-compromises go-ahead — wave
+receipts name their immediate parent's recorded key (additive causedBy, DARK,
+transient derivation, NO migration); deepChains 0→6 lit incl.
+conquest→info-shock→import-shortage; dark BYTE-IDENTITY + closure 1,039,971
+byte-equal CONFIRMED; agent self-caught a +284B eager first draft (wizardNews path
+is EAGER — the ratchet is skipIf(!VERIFY_DIST), silently green in plain runs) and
+re-hosted identical DAG in lazy provenanceKernel. Family-2 (war applied-outcome
+seam) deferred w/ rationale; Tier-2 digest-move + default-flip stay owner-gated.
+E-A mutation-totality sweep still running. NEXT: E-A lands → 9-branch enforcer
+fold into composite-r4 (full two-shard gate) → tranche-3 burn-down → HALT.**
+**⬛⭐⭐⭐ THE ENFORCER FOLD COMPLETE @ composite-r4 17d46413 (2026-07-21).**
+All 9 tranche-2 enforcers folded (20 commits: 9 no-ff merges + reconcile + fold
+fix), incl. E-A mutation totality @ d3ff6778 (23/23 CAUGHT; the one BROKEN row
+was the secrets gate CORRECTLY catching the sweep's own synthetic AKIA key —
+cured by the concatenation idiom). RECONCILE @ 2c706f51: E-A's totality walker
+red on the 4 newly-folded invariant files exactly as designed; closed with 3
+PLANTED MUTATIONS (all isolation-proven mutated-red/reverted-green: unregistered
+campaign family 1-red→22/22 · synthetic model-calling surface red→19/19 · letter
+headline one-char drift 3-red→9/9; a diff-floor off-by-one was tried first and
+ABSORBED by tick cadence — recorded) + 1 genuine rationale (mechanism-lit is
+self-proving-meta). FOLD FIX @ 17d46413 = the fold gate's REAL CATCH: E-I's two
+em-dash announcer strings vs E-E's frozen JSX voice baseline (both lanes green
+in isolation, combination red) — copy rewritten per the ratchet's own rule
+(grew⇒rewrite, never re-baseline up), palette banked to em:0. FINAL GATE on the
+final tree: two-shard = 15,726 passed / 23 skipped / EXACTLY the 4 parked golden
+families; closure 31/31 VERIFY_DIST green (Δ0); domain-strict 0; tsc 0; docs
+108/108; totality meta 6/6; foreign stash intact. Manifest now 347 invariants
+(23+3 mutation-proven / 125 rationaled / 199 uncovered shrink-only burn-down).
+NEXT = TRANCHE 3 (spell-break + error-copy + non-taste kill-list) → close-out →
+HALT per owner stop line.**
+**⬛⭐⭐⭐ THE DEPLOY-SAFETY SITTING: 12 RULINGS RECORDED + WAVE 8 LANDED (2026-07-26
+evening, owner order: "do all of these" over queue items 6-17).** RULINGS (all
+vetoable, recorded in-place in OWNER_DECISION_QUEUE.md): D1 CSP enforce-at-deploy
+(no pre-launch traffic to soak; zero-violation browse at deploy; one-line
+rollback) · M1 Wave 8 as its own respec'd wave WITH the policy amendment (CRIT-1
+full-clawback stands for every reversal class; goodwill = credit grants; the
+leniency half of H20 retired) · M2 pack refunds claw back in full, balance may go
+NEGATIVE · T9 rehearsal-first sequencing · D4 admin-actions after client release
+(amr machinery CONFIRMED WIRED: checkTwoKey+decodeJwtAmr @ admin-actions:48,
+enforcement ~424-435) · D7 Connect at PUSH#3 before founder-transfer activation ·
+T8 merge authorized-in-advance at THE VERY END · M35 reclaim-first (FP-2b/2c +
+92973282) · M31 keep-NUL-with-allowlist · M32 RF-shape-canonical → CLOSED EMPTY
+by measurement · M33 recovery-redirect checked at merge · M34 paid-surface
+re-affirmed · T11 no code flip exists (VITE_SUPPORT_EMAIL is the mechanism).
+WAVE 8 LANDED @ 2725780e/02ae1d6f/91ec7c22: limiter (fail-closed 30/h user +
+90/h IP), M11 token-or-deadline gate (4s), mig 189 member-privacy parity (leak
+was goal/gender/power; two-direction mutation proofs EXECUTED), mig 190
+credit-pack clawback RPC (negative-balance netting proven in pglite). Checker
+runs: vitest 246/246 · webhook deno 115/115 · validate:edge 69. THE OWNER'S DESK
+@ 478e8e13: OWNER_CONSOLE_RUNSHEET (every owner-physical act, in order) +
+LEGAL_CONSULT_PACKET (T10 packet; 4 repo copy-defects queued as M41) +
+MASTER_MERGE_PLAN re-survey addendum, both copies. ⭐⭐ THE RE-SURVEY HEADLINE:
+THE MASTER MERGE ALREADY EXECUTED 2026-07-15 @ 0168e287 (568 conflicts, W2-W6
+verified in history); master is an ANCESTOR of composite-r4; the remaining acts
+are W7 gate evidence + W8 owner FAST-FORWARD PR of ~1,577 commits. RF is a
+ledger/marketing lane — NEVER merge it toward master (M39). New queue items
+M38-M41 (historical-mig in-place edits 024/057 · RF disposition · orphan
+cherry-picks · refund-copy contradictions). COMPOSITE PUSH: still origin-less
+BY THE GATE'S OWN HONEST HAND — attempt 3 wedged when the live lane ran npm
+install (pg/three) UNDER the running test stage (546 worker crashes, killed at
+1h20m/0% CPU; new hazard class: gates and installers cannot share a tree);
+attempt 4 rejected in seconds by a fresh tsc red at settlementSlice.js:1195 —
+the live writer's comment-prose contains a literal /** @type example that tsc
+parses as a nested type comment (THEIR active hunk; not repaired, per the
+foreign-WIP law). The golden itself is now GREEN in-tree (the live lane
+re-captured it; 3/3 verified). VERDICT AFFIRMED: the push belongs to the
+remediation lane's CLOSE from a quiet tree — everything code-side is ready;
+AND THE CLOSE HAS VISIBLY BEGUN: the live lane landed its first commit
+(9201597f, tier-shift required-contract + parity ratchet) minutes after the
+tsc red. Interim backup = the Desktop bundle refreshed THROUGH 9201597f.**
+**⬛⭐⭐⭐ GOVERNANCE REUNIFIED + THE OWNER QUEUE CONSOLIDATED (2026-07-26, owner
+order: "re-unify governance in one sitting").** Four rulings, each vetoable:
+(1) THE 07-24 PIVOT RATIFIED-BY-BANKING — PRODUCT_COMPLETION_ARCHITECTURE's
+10-step order is the governing endgame FRAME; THE_REMAINING_ARCHITECTURE's ⛔
+tail acts stay binding and embed at their steps; the GAME_GRADE 07-24
+re-architecture supersedes the 8033ddbe wave plan; the command/import/custom-
+content verticals are in-scope (the 07-19 scope freeze is amended that far).
+(2) GOLDEN-REGEN ADJUDICATED — the 07-24/26 in-tree regens of the 4 families
+are documented defect-correction shifts of the remediation lane (evidence:
+GOLDEN_SHIFT_LEDGER.md), NOT the SS7 ONE REGEN; THE ONE REGEN remains OWED,
+singular, owner-signed (flags + humanization batch); law amended: "never an
+UNDECLARED regen." (3) WAVE 8 CONFIRMED NEVER RUN — all four items MISSING
+with live defect sites: amount-blind clawback arm (stripe-webhook:3021 —
+partial refund still claws back the whole seat; the operator rule stands),
+mig-142/publicSafe npcs-only allowlist vs factions[].members[], verify-
+checkout-session = the sole money endpoint without rateLimit, M11 mount-time
+verify race (SingleDossierSuccessPage:89-131). Respec before dispatch: mig
+numbers 170→189 (consumed). (4) THE QUEUE IS ONE SURFACE —
+docs/OWNER_DECISION_QUEUE.md consolidates all six feeder lists (~95 items,
+deduped, blocking points named); the feeders are frozen historical. Successor
+chain declared: START_HERE §3c → this ledger's newest rows →
+OWNER_DECISION_QUEUE → minifold CURRENT_STATE + PRODUCT_COMPLETION_
+ARCHITECTURE → lane docs.**
+**⬛⭐⭐⭐ THE BANKING FOLD @ composite-r4 2e037f62 (2026-07-26, owner order:
+"carefully and comprehensively and cohesively commit it all" + the standing
+backup authorization).** The week's ~1,046 uncommitted entries (~175k
+insertions incl. ALL migrations 175-188) banked as 13 commits: b503fe05
+perf-gate · 8c99d7a1 ops layer (4 runbooks + release identity + CSP
+enforce-flip, D1 ratification OPEN) · 74aec26e billing hardening (migs
+175-182 + the webhook obligation rewrite; NOT deployed) · 32264eb1 command
+spine (mig 183) · b8398fb1 import reconciliation (mig 184) · 29412d4e
+custom-content platform (migs 185-188, 64k lines) · d108d43e TownScene 3D
+(opt-in; default withheld by evidence) · 7372d067 game-grade proof slices
+(flags dark) · c1ea091f generation remediation LIVE-LANE SNAPSHOT · a88be4f1
+composite integration (596 files) · 5f213e4f sweep · 7a6603de tsc repair
+(the pre-push gate's first real catch; 1-line JSDoc cure, tsc=0) · 2e037f62
+close-out (E-A rationale entry for the live lane's new parity pin +
+CURRENT_STATE governance banner). Method: explicit pathspec lanes,
+staged-set audits, post-commit untracked-survival checks (ALL PASS),
+secret/NUL/oversize scans (0 hits). DISCLOSED: per-lane commits are not
+individually gate-green; the live capability-remediation session
+(CAPABILITY_REMEDIATION_PLAN.md R-0..R-5) kept writing through the fold —
+its deltas land as its own commits. PUSH VERDICT: origin push REJECTED by
+the pre-push full gate AS DESIGNED — 6 reds = 4 PROVEN LOAD-FLAKES
+(isolated single-threaded re-run: 5 files 52 passed/3 skipped in 45.7s) +
+1 manifest-totality gap (cured @ 2e037f62) + 1 GENUINE: generatorGoldenMaster's
+declared 84-city-key drift, the remediation lane's own close-out debt
+(re-capture from a QUIET tree — this tree is still live). THE COMPOSITE PUSH
+IS DEFERRED to that lane's close: re-capture → gate → push. Interim
+off-machine backup: Desktop bundle settlementforge-banking-7a6603de.bundle
+(139MB, tip 2e037f62). HEAD-truth restored: E-A no-stale-entries and both
+tip walkers now collect at HEAD.**
+**⬛⭐⭐⭐ TRANCHE 3 COMPLETE + PROGRAM HALT @ composite-r4 bff01718 (2026-07-21,
+per the owner's stop line — no cold cycle 3 / convergence / confirming cycle).**
+T3-A ERROR-COPY 48→0, NO remainder @ cb096d92: all 48 raw literals across 17
+files routed t('errors.*')/t('auth.error.*'); every offender lazy-proven before
+import; WorldMap.jsx net-zero at 598 (was exactly 600); 3 more JSX em-dashes
+banked (voice baseline down); empty-clears → null idiom. T3-B SPELL-BREAK @
+3aaf963b: chronicle camelKey 3→0 (M9a lever reason humanized at the authoring
+point, stable ×3); decrees rawId 3 = GOLDEN-BOUND BY EXPERIMENT (humanize-test
+proved decrees 3→0 and parked chronicle rawId 32→6 fall TOGETHER via
+pressureModel.js `raw.reasons` — ONE humanization at the ONE REGEN retires
+both); kill-list = ZERO safe mechanical removals (~500 live lines TASTE, 3
+comment false-positives left un-gamed, 3 orphaned zero-importer components
+owner-flagged: MemberSettlementsList/GalleryMapsSidebar/SimulationRulesGate-
+Toggle). FOLD GATE on bff01718: two-shard 15,726 pass / EXACTLY-4-parked;
+domain-strict 0; tsc 0; letter golden byte-identical both lanes; CLOSURE
+(authoritative, the ratchet's own BFS) = 1,039,977 — MARGIN 23 B (the +6 vs the
+long-quoted 1,039,971 arose in the enforcer-fold chunk composition — the known
+shared-chunk rebalance artifact class; both enforcer lanes proved Δ0
+individually; recorded, not chased at 23 B). Holds confirmed: title census,
+rawColor, mapPalette, anyCast at frozen targets (suite-green = the proof).
+═══ THE CONSOLIDATED OWNER QUEUE (the program's hand-off; every act
+owner/reality-gated BY DESIGN) ═══
+T4 · THE ONE REGEN (one signed batch, highest leverage): (1) light
+provenanceLedgerEnabled in full_simulation — NOW lights the E-J-v2 MULTI-HOP
+DAG (deepChains 0→6 incl. conquest→info-shock→import-shortage) + the recorded
+halves of bars 2/4/20; (2) letter humanizer wiring (tickCalendarLabel +
+humanizeFlagKey → letterToPlainText) — retires letter camelKey 37 + tickSpeak 1;
+(3) pressureModel `raw.reasons` humanization — retires chronicle rawId 32 +
+decrees rawId 3 in one edit (proven coupled); (4) golden-bound em-dash prose
+sweep + C2-Q1 letter-header debt + C2-Q2 prose-pool variety; (5) tuning: idx21,
+idx19, obligations-decay F6+F19 (the one real architecture fix in the batch);
+(6) re-record the 4 parked golden families ONCE, tuning manifest signed — the
+suite goes fully green at that moment.
+T5 · POSTURE ACTS (independent): CSP Report-Only→ENFORCE (vercel.json) ·
+COGS/margin readout deploy (report_ai_cogs fn + migration) · DR runbook
+rehearsal · E-J TIER-2 (pulseKernel ~1615 impactDigest snapshot AFTER movers,
+records contest/generosity beats; shipped-path risk — my rec: after soak) +
+E-J family-2 (war applied-outcome→mobilization edge; needs its own
+reachability proof) · DE-ROUND taste call (~500 lines) + the 3 orphaned
+components (delete vs wire) · FMG BYOK re-enable (product call).
+T6 · CERTIFICATION: the soak (rates/boundedness bands pre-declared) · the
+LIVED tier (real tables sign bars 3/9/10/20-felt).
+STANDING (not gated, recorded): mutation-manifest 199-file uncovered burn-down
+(shrink-only worklist) · parley has NO client seam (E-D; informational) · E-E
+content-fidelity variant = possible future enforcer (never specced; E-G covers
+the adjacent class) · support email unconfirmed pre-deploy · founder-transfer
+legal sign-off = activation gate · master-merge blockers per memory index.**
+**⬛⭐ SHOULD-FIX/POLISH BATCH B round 1 FOLDED @ composite-r4 de590e3c (2026-07-21,
+checker-verified).** SB1 store (27369696 — 6 fixed incl. dead-migration wiring +
+deterministic legacy-id remint; 4 deferred out-of-lane [fogged handout, timelapseTick
+units, useFlag, townMapThumb → townMap/components/lib waves]; ⚠ operationRegistry
+walker hazard: co-importing a slice helper on the createXSlice line drops the slice
+from census — banked) · SB2 display/pdf (a997039b — 8 fixed incl. player-book covert
+leak fixed at the collector chokepoint; ONE-REGEN queue empty) · SB3 gallery/platform/
+edge (33b91d63 — 4 fixed incl. a REAL BILLING BUG [account deletion canceled only the
+recorded sub; dual-plan 2nd sub charged forever] + unlisted-reload 404; 2 OWNER-GATED
+[dead ai_ip_rate_limit config · credit-pack refund clawback]; 10 struck-documented).
+FOLD: 3 merges 0-conflict + fold-fixes de590e3c = ruinFilter walker exempts
+tableLedger.exposureTargets (name/existence picker) + mapSnapshotImport F6 pin accepts
+backdrop.seed (importGalleryMap's share source — SECURITY INTACT, no raw snapshot on
+either path). GATE: build 0 · closure green · strict 0 · tsc 0 · edge-validate 59 ·
+fork-validator 140 · letter golden GREEN · deity drift unchanged · full two-shard =
+4-parked-ONLY (all extras isolation/negative-control-proven). Worktrees freed → BATCH
+B-r2 (SB4-seo 10 · SB5-a11y 19) DISPATCHED; C-remainder (73 product-wide bars + voice)
+prepped. Then tranche-2 enforcers (THE_APLUS_EXECUTION_ARCHITECTURE.md).**
+**⬛⭐⭐ SHOULD-FIX/POLISH BATCH A FOLDED @ composite-r4 084549e4 (2026-07-21,
+checker-verified).** SS4 enforcement (472f7f51 — determinism-ban coverage +
+ghost-column parity + migration-ref walker [CAUGHT a live skipped-pglite test]
++ claims gates; mutation-sweep 8→12) · SS2 engine (525e0979 — 17 kernel fixes,
+16 deferred-with-reason; NO green golden reddened) · SS1 FMG fork (e2b7abf8 — the
+whole panel-gated innerHTML sink-sweep across ~24 files, umami/OpenWidget dead
+beacons deleted, CVE versions recorded, runbook corrected; security suite 1101;
+7 owner-gated lib-upgrade/addLake deferrals). ~100 findings processed. FOLD: 3
+merges 0-conflict + fold-fixes 084549e4 = assize inline-slug CURED to kernel
+slugify (SS2's F5 introduced it; the slugify defect-class ratchet caught it at
+fold — assize dark ⇒ golden-neutral, assizeDormancyGolden byte-identical) +
+analytics edge bundle REGENERATED (SS4's EDIT_KIND change; aiGrounding spurious
+churn reverted). COMBINED GATE: build 0 · closure ratchet green · strict 0 ·
+tsc 0 · fork-validator 140 libs · mutation-sweep 12/12 · letter golden GREEN ·
+deity drift UNCHANGED (still gm-pulse-a|3 + gm-pulse-b|5) · full two-shard =
+4-parked-only (all extras isolation-proven contention). OWNER-SURFACE from SS2:
+obligations-ledger has no unconditional decay owner (F6+F19) · dual-clock .tick
+hazard (F18, fixed clock-agnostic — do NOT unify). ⚠ HAZARD: resumed agents
+(post usage-limit) had cwd SILENTLY RESET to minifold — guard the composite +
+verify own-branch commits on every resume. NEXT: BATCH B (store/display/gallery/
+seo/a11y) + BATCH C (voice + product-wide bars), ~139 findings, then convergence.**
+**⬛⭐⭐ CYCLE 2 MUST-FIX TIER COMPLETE — FIX WAVE 4 @ composite-r4 84a34cfa
+(2026-07-20, checker-verified).** WAVE 4 (a11y/UX/SEO, Fable): idx7 hover fixed
+at the Button/IconButton PRIMITIVES (--sf-btn-bg/hover-bg live; a11y.css hover
+rule; complete state set) + state-set completeness enforcer · idx37 keyboard
+trap KILLED (deleted the blanket CommandPalette stopPropagation; Esc/Tab/cmd-K
+reach handlers; 3 pins RED pre-fix → GREEN, dispatched from INSIDE the dialog
+where the legacy window-pin was blind) · idx28 placement copy de-dead-ended +
+QuickInspector affordance (keyboard placement commit = scoped follow-on — WorldMap
+at sizeBaseline ceiling) · idx36 canonical stamped in lockstep with og:url at the
+injectGalleryMeta chokepoint (self-canonical all route kinds). Gate: build 0 ·
+closure 1,038,150 (Δ +66, the primitives' custom props) · strict 0 · tsc 0 ·
+lint 0 · ratchets 132/132 · dist 197/197 · NUL clean. ⭐ WITH THIS THE MUST-FIX
+TIER IS CLOSED: all 28 confirmed/partial addressed (waves 1-5 + FMG-remainder +
+instruments + wave 4); remaining must-fix items are OWNER-GATED (idx21/idx19
+tuning → ONE REGEN; idx4 COGS built-to-edge; CSP enforce-flip) or folded into the
+should-fix drive (the FMG-sink-sweep is SS1). NOW RUNNING — THE SHOULD-FIX +
+POLISH DRIVE (owner: "i want ALL the fixes done", 239 findings → 0): BATCH A of
+cluster refute-and-fix waves — SS1 FMG fork polish + sink-sweep (47, Opus,
+claude/ss1-fmg-polish) · SS2 engine-kernel polish (33, Opus, claude/ss2-engine-
+polish, golden discipline) · SS4 enforcement+correctness+claims (20, Fable,
+claude/ss4-enforce) — all off e457d923, disjoint. BATCH B/C (139, store/display/
+gallery/seo/a11y + voice/product-wide bars) queued. Then convergence → confirming
+cycle → close-out.**
+**⬛⭐⭐ CYCLE 2 FIX WAVES 3+5+FMG+INSTRUMENTS FOLDED @ composite-r4 e457d923
+(2026-07-20, checker-verified).** WAVE 3 (voice/immersion, f5132f20, ran on
+Fable): the two durable ENFORCERS built — E1 proseLeak (renders 4 composers,
+scans output for flag keys/tick-speak/schema/ids/em-dash, shrink-only baseline)
++ E2 voiceMechanics (the phantom test 3 sites CLAIMED — now REAL, hard-zero
+em-dash/'!' on copy registries + per-file ratchet 112 files; kills idx3);
+idx0 inverted-claim corrected; humanizer chokepoint built + wired golden-safe;
+em-dash sweep to ZERO in copy registries + all 14 src/data prose files (493
+dashes); chroniclersLetterGolden stayed GREEN byte-identical (discipline held).
+Then PARALLEL BATCH folded (all off 8dfd2aed, 0 conflicts, file-disjoint):
+WAVE 5 interview audience gate (3db3a955 — history projected to audience,
+fail-closed, secrets pin neg-controlled) · FMG-REMAINDER (42346d93 — 2
+auto-firing innerHTML sinks escaped, Dropbox token→sessionStorage + console
+leak removed, AI egress disabled) · INSTRUMENTS (e457d923 — arc-soak +
+spell-break census standing proofs). COMBINED GATE: build 0 · closure ratchet
+GREEN (~1,038K ≤ 1,040,000; fold eager Δ ~0) · strict 0 · tsc 0 · edge-validate
+59 · fork-validator 141/141 · chroniclersLetterGolden + byte-identity GREEN
+(no shift) · security + interview-gate + both instruments GREEN · FULL TWO-SHARD
+= ONLY the 4 parked families red (6 shard-1 extras all proven CONTENTION in
+isolation 44/44; the classic pglite/ordering/advancePauseResume set). mig head
+169. ⚠ INSTRUMENT FINDING (relayed to owner + banked recorded-causal-depth-
+reality): recorded link-depth ≥2 = ZERO — provenance is one-hop-to-ROOT
+attribution, coupling IS ~9 deep but recorded chains are not; corrects the
+"9-link" claim. ONE-REGEN QUEUE GREW: chroniclersLetter.js humanizer wiring
+(reddens the green letter golden) + the deferred eventProse/roads/tradition
+prose wave (180 dashes, held shrink-only by E2). NEXT: wave 4 (a11y/UX/SEO,
+sequential — adds eager) + FMG-sink-sweep + idx4 COGS + the should-fix/polish
+tiers.**
+**⬛⭐ CYCLE 2 FIX WAVE 2 DONE @ composite-r4 8dfd2aed (2026-07-20).** Store &
+engine truth single-sourced, 3 class-kills + 1 contradiction resolved, ONE
+commit, checker-verified: `isLiveWarFront` (warFrontReads.js) is now THE read-side
+siege gate that confirmedWarFronts/liveSieges/settlementWarStatus + every consumer
+route through — a merely-hostile pair no longer renders a phantom siege (idx32),
+and the strategy-vs-war-surface contradiction (idx20) dissolves because both now
+read the same gate · `reconcileWizardNewsForCommit` merges table-event imports
+that land during an in-flight worker advance on BOTH commit paths, so a DM's
+import can't be silently clobbered (idx33) · map undo/redo stacks clear on
+campaign switch, killing the cross-campaign secret-marker leak (idx35). 3 pins;
+byte-identity goldens RE-VERIFIED GREEN by the Fable checker (no shift declared,
+independently re-run 36/36); build 0 · strict 0 · tsc 0 · lint 0 · closure
+1,038,424 (eager Δ ~0) · NUL clean. CORRECT OWNER-GATED DEFERRALS: idx21
+(tier/population narration) + idx19 (durable-memory drops turning points) both
+shift same-seed output = the ONE REGEN under THE PROMISE — queued for the
+owner-signed tuning pass, not forced. FIX WAVE 3 (voice/immersion — E1
+no-engine-token walker + E2 voiceMechanics walker + em-dash sweep under golden
+discipline) DISPATCHED as a model:'fable' subagent (session-drift-proof pinning).**
+**⬛⭐ CYCLE 2 REFUTERS + FIX WAVE 1 (2026-07-20).** Refuter pass over the 38
+must-fix findings: 17 CONFIRMED + 11 PARTIAL survive to fix waves; 10 REFUTED
+(struck WITH reason — cause-walk-dark/epistemic-drama/tempo-governor ruled
+INTENDED-dormant-by-design, deletion/export/spend-alarm/transcendental-FP
+disproven). Plan: scratchpad/CYCLE2_FIX_PLAN.md (5 waves + owner-gated
+built-to-edge; Fable-architected as CLASS-KILLS: fix at the chokepoint + a
+STANDING ENFORCER — 3 new enforcers this cycle: E1 no-engine-token-in-prose
+walker, E2 voiceMechanics walker, E3 live-truth single-source selectors).
+⭐ FIX WAVE 1 DONE @ composite-r4 257b0eed — the FMG XSS chain closed
+(ATO-class): importGalleryMap F6 mirror (idx22) · load.js sanitizeMapSvg scrub
+(idx23) · marker.icon escaped at ALL FOUR sinks incl the redrawIcon path the
+implementer MISSED and the Fable checker caught (idx24) · TinyMCE local-vendored
+off azgaar.github.io (idx26) · runbook updated. Security suite 23/23; build 0 ·
+strict 0 · tsc 0 · lint 0 · validate-map-fork 141/141 · NUL clean. ⚠ the impl
+agent STOPPED pre-commit — Fable took over verify+commit (lesson banked: XSS
+briefs must enumerate ALL sinks). CSP enforce-flip owner-queued. FIX WAVE 2
+(store/engine correctness — phantom siege, wizardNews clobber, cross-campaign
+undo, tier/war contradictions) DISPATCHED.**
+**⬛⭐⭐ ROUND 3 CYCLE 2 — PHASE S COMPLETE (cold), refuters running (2026-07-20).**
+The cold-then-connect survey of the assembled wave @ c8c5baa8 landed: ~49 cold
+reviewers across the DIMENSION fleet (20 bars + story + spell censuses + critic),
+the SUBSYSTEM fleet (26 regions), and the FMG fleets (seam 3 lenses + source 6
+regions). 6 lanes that died on the schema-retry cap were RE-RUN with raw-JSON
+output (the fix that worked for the bridge lens) and recovered. THE POOL: 277
+findings consolidated to scratchpad/CYCLE2_FINDINGS_POOL.json — 38 must-fix · 149
+should-fix · 90 polish. GRADES (first cold pass, un-refuted): A- ×8 (bars
+1,2,3,4,6,11,12,13) · B+ ×9 (5,7,9,10,14,15,18,19,20) · B ×3 (8,16,17); story
+census B, spell census B — NO bar at A+ on the cold pass, exactly as a maximal
+standard should read against a real tree. CONVERGENCE SIGNAL (the cold protocol
+working): the recorded-causality/provenance ledger shipping DARK in every preset
+was found INDEPENDENTLY by bars 2, 4, and 20 (the story capstone) — the
+single highest-leverage fix, because cause-walk + epistemic drama + arc-tracing
+all depend on it. Two FMG security must-fixes (ATO-class DOM-XSS via
+importGalleryMap; seed-never-captured) manager-CONFIRMED at code level before
+relay. NOW RUNNING: the REFUTER pass — one adversarial verifier per must-fix
+(reproduce-or-refute in real code) — before ANY fix wave. NEXT after refuters:
+Phase R (reconcile survivors vs memory per the cold-then-connect law) → fix waves
+(one commit per cluster, provenance-dark + FMG-XSS lead) → checkpoint → the
+termination law decides convergence. NOTHING pushed; prod head 117; the fix
+waves await the refuter verdicts + owner go-ahead.**
+**⬛⭐ THE FMG FORK ENTERS REVIEW SCOPE (owner order, 2026-07-20): "review
+azgaard as well. treat it as part of this system... MIT license makes it
+partially our code which we modified... make it perfect too."** The vendored
+Azgaar FMG fork (public/map/, ~30k LOC authored source + ~26k LOC minified
+libs, MODIFIED across 16+ commits since vendoring f386f48d) is no longer
+outside review — it SHIPS TO THE SAME ORIGIN as auth+payments, so its defects
+are ours. TWO cold fleets: (A) cycle2-cold-fmg-fork = OUR seam (modification
+census vs the stale 4-patch runbook claim · fork security surface · bridge
+determinism/integration); (B) cycle2-cold-fmg-source = the AZGAAR-AUTHORED code
+itself, 6 regions (generation core + orchestration · untrusted .map/JSON I/O
+[XSS/RCE on the payment origin] · editor UIs ×2 · dynamic/self-update/telemetry
+[auto-update RCE? SW disable verify? umami beacon?] · supply chain [jQuery 3.1.1
+CVE debt already ledgered in VENDOR-MANIFEST — verify reachable + recommend
+upgrade/drop]). MANAGER JUDGMENT (vetoable): "perfect" = no defect survives on
+LOAD-BEARING axes (correctness/security/determinism/dead-code/upgrade-safety);
+DELIBERATELY NOT house-standardizing untouched upstream (voice/design/ratchets)
+nor line-reviewing minified libs — because cosmetic divergence compounds the
+upstream-upgrade path (the runbook = diff-release + reapply-patches); the libs
+get the manifest/CVE/integrity track. Veto = go full house-standardization.
+fmg-fork-world-map.md memory amended. Also this session: THE SPLIT WATCHDOG —
+stall sweep every ~15 min, model-identity check every 1 min (owner: keep the
+session on Fable 5; the manager can only DETECT+FLAG a drift to Opus, `/model`
+is owner-only).**
+**⬛⭐ THE COLD-THEN-CONNECT LAW (owner order, 2026-07-20) — cycle-2 review
+methodology amended:** every cycle-2 (and confirming-cycle) survey lane runs
+COLD — no prior context in any discovery brief (charge + dimension + scope
+pointer only; no hazard lists, no expected reds, no deferral ledgers, no prior
+findings) — so discovery is never primed by the program's own memory, including
+the manager's. ONLY AFTER the cold pass does the RECONCILE phase connect
+findings to the record: cold re-finds of FIXED items are treated as possible
+regressions and re-verified by execution; cold re-finds of DEFERRED/deliberate
+rulings re-test the rationale AND count as documentation-legibility findings
+when repeated (the decision isn't discoverable in-repo); novel findings go to
+refuters unchanged. Rationale: the builder's memory is the largest blind-spot
+source in a self-reviewing program — fresh eyes must see the artifact, not the
+program's beliefs about it. Recorded in THE_VISION_RESUME.md cycle-2 section +
+the program memory file.**
+**⬛⭐⭐ VISION LANE V-N SHIPPED — the interview goes deep and wide; the handbook
+finds its voice, dark (2026-07-20, claude/vision-n @ e017c1f2, base 5d9218c6 the
+folded tip, 2 lettered commits, FOLD-READY; manager-verified tip+clean; foreign
+stash untouched). THE LAST LANE — with this landing every build of the wave
+(V-A..V-O) exists in git.** V-26a INTERVIEW FOLLOW-ONS: multi-hop + campaign
+scope REUSING V-1's entire wall — no new edge function, no new billable feature;
+each follow-up = a separate METERED re-grounded POST (every hop pays); prior Q&A
+rides its own fence between stable-prefix and volatile-question (cache ordering
+preserved), stripped + capped, data-not-instructions; empty history ⇒ first-hop
+prompt BYTE-IDENTICAL to V-1; campaign scope fans settlement briefs (cap 6, the
+128KB body guard) namespaced kind@sid:sec so every citation resolves to the
+right town; default scope byte-identical (aiAnalyst pins prove it). V-26b
+HANDBOOK REWRITE STAGED FOR TASTE: house voice on the header + concept essay
+ONLY, dark behind handbookVoice (default-off, lazy, zero first-paint); steps/
+Reference/FAQ/PowerTab/Compare stay PLAIN in both states — the clarity clause
+honored by construction; no copy test weakened; the flip is one click, yours.
+Gate: interview+scope+aiAnalyst 64/64 · edgeFunctions 528 · sessionGateCensus
+18 (interview = the 9th gated surface, unchanged) · validate:edge 59 files no
+_shared churn · domain dir 7,467 (3 parallelism flakes green 32/32 in
+ISOLATION — the banked triage rule applied) · ratchets green (errorCopy 51/20
+unraised) · strict 0 · tsc 0 · lint 0 · dist 174 · NUL clean · closure
+1,036,669 at tip = lane eager Δ +270, HEADROOM 3,331 on the folded lineage.
+JUDGMENTS RATIFIED: voiced surface minimal per clarity clause (veto = expand) ·
+multi-hop client-driven metered calls not a server loop · campaign cap 6.
+DEFERRED-RECORDED: a dedicated 'interview' billable feature = the owner-gated
+spend_credits migration follow-on (hops meter under 'analysis' today). HAZARDS
+BANKED (memory vision-n-ai-content-followons-shipped.md): errorCopy ratchet is
+SETTER-NAME-sensitive (set*Error('lit') seen; setResult({error}) not — route
+t('errors.*')) · helper-only-mutated arrays infer any[] (annotate @type) ·
+gradient-embedded hex isn't a pure-hex literal to rawColor. ⚠ PASS-3 CLOSURE
+BUDGET (manager's arithmetic): folded 1,036,399 + V-J 479 + V-N 270 + V-O 295 +
+V-F/V-L/V-G/V-M ≈0 known ⇒ ~1,037,443 + V-F's unmeasured Δ — headroom ~2,557
+MINUS V-F; pass 2's per-merge measurement decides whether the shave-or-owner
+decision fires. BUILD PHASE OF THE WAVE: COMPLETE.**
+**⬛⭐⭐ THE STANDARD RAISED TO TWENTY BARS (owner commission, 2026-07-20):**
+docs/THE_APLUS_STANDARD.md amended upward (the only permitted direction) with
+BAR 19 — AI USE & STRUCTURE, the clerk's constitution (distinct from bar 7's
+economics: finite-semantics as PROVABLE structure via per-surface source-scan
+walkers · server-resolved citations with executed phantom-ref rejection · NO
+load-bearing AI, deterministic fallback everywhere · ONE wall census-pinned ·
+model-pin/versioned-prompt drift containment with DECLARED swaps · clerk
+accuracy on labeled fixtures · whitelisted-projection prompt privacy), and
+BAR 20 — THE STORY, cohesive emergent storytelling & legibility, THE CAPSTONE
+placed LAST by the owner's ruling ("that, of everything, is the most important
+thing"): arcs not event lists, the chronicler narrates not logs, any beat
+reconstructible by a bounded receipt-walk, ONE narrative substrate across
+letter/chronicle/timelapse/book/cause-walk (claims-parity for narrative),
+epistemic drama on purpose with the layers kept straight, pacing as craft;
+instrument = THE STORY CENSUS (a seeded decade must be RETOLD as a story,
+every beat receipt-backed — "things happened" FAILS); lived tier signs whether
+it moves anyone. Cycle 2 grades against ALL TWENTY; the two new instruments
+enter the cycle-2 plan. Bars 19's structure claims are provable NOW; bar 20's
+census runs in cycle 2 and its rates await the soak.**
+**⬛⭐⭐ VISION LANE V-O SHIPPED — the platform completes itself (2026-07-20,
+claude/vision-o @ b3692333, base 212758ad, 5 lettered commits, FOLD-READY;
+manager-verified tip+clean).** V-27a LOCALIZATION SCAFFOLD: real locale registry
+(register/set/get/list + en-fallback) + derived pseudo-locale en-XA + an
+extraction-completeness WALKER pin (set-equality) — the door swings, content
+stays post-launch, zero eager. V-27b PERF HARNESS: throttled TTI/INP e2e (CDP
+4×-CPU + network), RAN GREEN (TTI 111ms · LCP 15,380ms · INP 112ms); budgets
+land as owner-gated PLACEHOLDERS (~1.6× dev baseline) — RATIFICATION QUEUED for
+a production-build run. V-27c PDF COUNTERSEAL (WB-k): structured emblem geometry
++ react-pdf seal + Cover wiring, FULL parity pins (geometry mirror + cross-
+surface selection + tree-walk NEVER bytes) 19 green — parallel-paths + parity
+chosen over a single-source draw() rewrite because the web ornament golden pins
+draw() bytes (vetoable: the bolder rewrite w/ byte-identity pin). V-27d IM FELL
+FACE: display-only --oc-display-face var seam + lazy DOM-idempotent face module,
+flag default-OFF, eager Δ +295 B total (the toggle wiring — the lane's ONLY
+eager bytes); DEFERRED-HONESTLY: the woff2 BINARY is unsourceable here — owner
+lights it by flag-flip + dropping IMFellEnglish-Regular.woff2 (SIL OFL) into
+public/fonts/; flag-on degrades to Crimson until then. V-27e CONTENT-VT-2:
+verdict ALREADY IN BASE — content-vt-2 (39a56a1d) is a git ANCESTOR of 212758ad;
+the parked-lineage premise was stale, the tree won, no work forced. V-27f
+GALLERY COMMENTS: existed-vs-built honest — gallery_comments ALREADY SHIPS
+(mig 019); built the missing MODERATION layer: report table + hide columns +
+report RPC + service-role hide RPC + list filtering, 16 pglite tests green,
+INERT until owner enables; ⚠ minted MIGRATION 168-LOCAL off head 167 — V-E's
+168 has FOLD PRECEDENCE, this one RENUMBERS TO 169 at fold (+ re-bump
+ARCHITECTURE/DEPLOY counts then); the +1-mig doc-freshness set satisfied.
+DEFERRED (recorded): the admin-actions dispatch arm — it modifies the
+security-critical JWT-role-gated Deno function untestable on this machine; a
+security change was NOT forced unverified (mirror the set_account_banned arm
+when wired). Gate: full two-shard suite 14,614 passed / 4 parked-goldens-ONLY ·
+strict 0 · tsc 0 · lint clean · dist 162 · ratchets 29 + title census 23 ·
+closure 1,025,029 at tip (headroom 14,971) · NUL clean. HAZARDS BANKED (memory
+vision-o-platform-completions-shipped.md, indexed): errorCopy baseline is a
+vision-h artifact ABSENT on this base (post-fold it exists — run it then) ·
+parallel background worktree commands can land in the WRONG worktree (pwd-guard
+every one). OWNER QUEUE +3: perf-budget ratification · IM Fell font drop +
+flip · admin dispatch arm wiring. SLOT: queue empty — vision-e wt idles.**
+**⬛⭐⭐ VISION LANE V-G SHIPPED — bring your campaign, bind the book, light the
+founding seeds, set the table's companion (2026-07-20, claude/vision-g @ 2902bdaf,
+base 212758ad, 6 lettered commits, FOLD-READY; manager-verified tip+clean; foreign
+stash untouched).** V-17 THE CAMPAIGN IMPORT: tableEvents.js = the schema-wall
+MIRROR of V-F's tableLedger (closed vocabulary, named bands = the ONLY place a
+band becomes a number, source:'table' provenance) + a DETERMINISTIC keyword
+bucketing clerk (key-free, proposes-never-writes) + importTableEvents as the sole
+write path (byte-neutral source passthrough on normalizeEntry — world entries
+serialize identically) + a resumable/abortable per-event-confirmation session +
+lazy paste/upload→review→confirm panel with a fully-manual path; source-scan pin
+PROVES no free text reaches mechanics (the finite-semantics law made code,
+twice). R-4 THE WORLD BOOK: pure collector + jsPDF painter on the campaign-PDF
+idiom; DM face binds everything, PLAYER face projects through toPublicSafe —
+zero covert marks pinned; tree-walked, never byte-compared. R-2 CURATED FIRST
+SEEDS: three probe-PROVEN openings (The Crown That Will Not Hold — a brewing
+coup · The Mill That Outlived Its Wars — a survivor · The Rot Beneath the Ore —
+corruption/insurgency), every receipt asserted by generate→assert tests; pure
+data on the lazy create chunk. R-3 THE TABLE COMPANION: audit finding — the
+surfaces were ALREADY responsive (useIsMobile + 44px floors); the gap was
+missing ENFORCEMENT, now added as 375px render pins; no src change; brief's
+Letter/Oracle/DM-screen slots are sibling-lane code absent on this base —
+correctly guarded what exists. Gate: strict 0 · tsc 0 · lint 0 · 123 focused +
+162 dist · closure 1,029,304 at tip (all feature code lazy) · NUL clean 16
+files. JUDGMENTS RATIFIED: table events ride wizardNews with source:'table'
+(one storage site, soak-excludable) · deterministic clerk with the AI-polish
+seam inert · R-2 receipts rest on GENERATED state not post-advance news
+(rngSeed derives from the random campaign id, not the settlement seed — the
+banked determinism hazard) · maps stay native-vector. ⭐ THE PASS-3 SEAM,
+PRECISELY RECORDED: at fold, tableEvents' three mirrored constants become
+IMPORTS from V-F's tableLedger (must be value-identical) + decide whether V-F's
+apply path also consumes backfilled history. HAZARDS BANKED (memory:
+vision-g-lane-shipped.md, indexed): founding rngSeed=campaign.id · em-dash
+inside JSDoc @tags breaks tsc-strict (TS1127) · deepCraftKillList counts
+import/RED_BG lines. SLOT: queue empty — the `vision-i` wt idles; remaining
+work = landings (fold pass 2 · V-O · V-M · V-N) → fold pass 3 → cycle 2.**
+**⬛⭐⭐ VISION LANE V-L SHIPPED — the recall rider, the re-priced roads, the
+readable hearts, the deeper causes (2026-07-20, claude/vision-l @ 3b33c1a6, base
+212758ad, 5 commits, FOLD-READY; manager-verified tip+clean).** V-24a RECALL-NPC:
+a typed committable edit kind (the finite-semantics law) registered in LOCKSTEP
+across pendingEdits/editFingerprint/applyNpcOp/roads ops+state — the mission flips
+to `returning`, a real future arrival, never a teleport, no new mover; hostage/
+not-traveling no-op; secrets probe green. V-24b PER-ROUTE RE-PROPAGATION:
+routeAwareHopDelayTicks recomputes on READ, so in-flight rumor paths re-price live
+as routes sever/open (belief recency fold + player rumor display); calm/dark =
+byte-identical geometric; ENDPOINT embattlement only — mid-path hop = recorded
+follow-on. V-24c INTERIORITY-LITE: pure npcInteriorityRead.js leaf, disposition &
+wants from EXISTING state only, zero persisted writes; player-safe half renders;
+DM-truth relational block composed+tested but NOT wired (the display layer carries
+no worldState — the secrets architecture; one call lights it from a future
+worldState-bearing DM surface). V-24d PROVENANCE THREADING: the ransom release
+beat carries causedBy → the exact capture receipt node, flag-dark byte-neutral.
+Gate: strict 0 · tsc 0 · lint 0 · ~109 pins · dormancy goldens byte-identical ·
+dist 162 · closure 1,025,055 at tip (eager Δ ≈ 0; only the sanctioned edit-kind
+registry strings) · NUL clean · beliefMapGolden red PROVEN pre-existing at base by
+file-revert re-run. DEFERRED-RECORDED (cycle-2 intake): contests provenance edge
+needs ContestRec.openedTick (a lit-golden-affecting schema add — flagged, not
+built) · gratitude edge lacks a durable receipt id · believed-path mid-hop
+re-pricing. HAZARDS BANKED: roadsKernel at EXACTLY its 800-line ceiling (additions
+go in leaves) · new EDIT_KIND ⇒ build-edge-shared regen AND revert the spurious
+aiGroundingBundle generatedAt churn (sourceHash unchanged) · the piped-gate
+exit-masking hazard re-bit (strict check runs BARE, never through tail). SLOT →
+V-N (the LAST queued lane: multi-hop interview + handbook rewrite staged-for-
+taste) dispatched into the rotated vision-j worktree at the folded tip 5d9218c6 —
+with this dispatch EVERY lane of the wave (V-A..V-O) is landed, folding, or hot.**
+**⬛⭐⭐⭐ THE QUINTUPLE FOLD EXECUTED — the wave's first five lanes become one
+tree (2026-07-20, claude/composite-r4 @ 5d9218c6, base a9caa573; manager-verified:
+tip + clean tree + mig-168-contiguous CONFIRMED against git).** Merge order:
+vision-i abd4c91f → vision-c 32e4149d (RealmInspector import UNION; compendium
+REGENERATED to 168 ops) → vision-h e238fa89 → SEAMS d3058c72 (EmptyState adopted
+at WizardNewsPanel's two empty threads; WizardNewsPanel ×2 PLUS vision-c's
+CorpusFactoryPanel ×2 — an unbudgeted composition arrival — migrated to t();
+error-literal budget 53→51) → vision-e dba1b31d (ci/pkg validate-step UNIONS,
+ciCheckParity green; sitemap REGENERATED 41 URLs) → vision-d e4b54995 → FIXES
+5d9218c6 (six composition defects: errorReporter mock completed · two
+doc-freshness names · worldExport inline slug → kernel slugify BYTE-IDENTICAL,
+parity-pinned · killList re-pin · migration search-path pin). THE FOLD LAW HELD:
+closure measured after EVERY merge, never breached — final 1,036,399 ≤ 1,040,000,
+⚠⚠ MARGIN 3,601 (tightest ever; vision-d's forensics is EAGER +8,002 from
+store/index.js; shave candidate = a thinner forensics seam; the budget raise
+stays owner-gated — ANY further eager growth needs headroom review first).
+Two-shard suite: 14,902 passed / 5 expected-red FILES = the 4 parked goldens
+(base-proven at a9caa573) + advancePauseResume (load-flaky under full-suite
+contention; GREEN at base AND in isolation). TRIAGE RULE BANKED: re-run any
+full-suite red in ISOLATION before treating it as a defect — pglite + long-async
+tests are contention-flaky. VETOABLE FOLD CALLS (agent's, manager-RATIFIED, owner
+queue): (1) MIGRATION 168 pg_temp PIN — all 14 SECURITY DEFINER fns get
+`set search_path = public, pg_temp` (the owner's own migrationSearchPathPin
+ratchet mandates exactly this; behavior-preserving; migration UNSHIPPED, prod
+head 117; the 20 gallery-unlisted pglite tests green) — grazes security posture,
+hence queued though ratchet-codified; (2) deepCraftKillList ceilings re-pinned to
+measured (borderRadius 100→101, tintedCallouts 161→164 — the lanes' new feature
+UI) — raises anti-SaaS ceilings; alternative if vetoed: de-round the new
+instances; (3) campaignSlice seam DEFERRED — only ONE literal exists (brief said
+×2), it sits outside the errorCopy ratchet, and no store→t() precedent exists;
+the agent correctly refused to improvise architecture on an ambiguous
+instruction. NEXT: FOLD PASS 2 dispatched (V-F c15c2311 + V-J 3f3805b7 + V-K
+b0f1dbe6; seams: vercel rewrites /gallery+/world→meta-shell · letter+oracle slot
+mounts · worker transport swap; import→wall unification WAITS for V-G = a pass-3
+seam) · V-M dispatched at the folded tip (unblocked: the V-20 door, the V-B
+displays, and EmptyState are now all in its base).**
+**⬛⭐⭐ VISION LANE V-K SHIPPED — the court sits, the crowd finds its voice
+(2026-07-20, claude/vision-k @ b0f1dbe6, base 212758ad, ONE commit, FOLD-READY;
+manager-validated).** V-22 THE ASSIZE (assizeEnabled, dark): assizeKernel.js turns
+each age-one exposure (exposedCorruption + npcCredibility lieExposure — perjury,
+which already absorbs contradicted bluffs) into a seated public judgment wherever a
+governing seat + a law-order institution (the venue) exist. Reads NON-destructive
+(exact-age freshness gate, not a drain — war-reasons/ladder-stigma/covert-diffusion
+keep their reads). Just-vs-sham = captured-bench detection via governingFactionOf +
+npcInFaction. Person-half rides the LADDER'S OWN stigma mark (no double-charge) +
+reparation fine via foldObligations + a rank incident; masses-half = unrest
+relief/raise + legitimacy lift/tax + sham belief-seeding — coup-window + migration
+push feed FREE off the deltas (THE MASSES CLAUSE honored). V-23 THE COMMONS' VOICE
+(commonsVoiceEnabled, dark): commonsVoiceKernel.js — persistent per-settlement
+sidecar; petition → gathering → riot-band escalation from legitimacy/corruption/
+unrest reads; influence through the legitimacy applicator + the stressor writer
+ONLY. THE COUPLING: a live grievance naming an accused amplifies the assize verdict
+and names the petition; the organic feedback de-escalates the crowd next tick.
+EXISTED-VS-BUILT verified FIRST: scalar rebellion stressors, faction challenges,
+the manual riot event, and the coup tier all EXIST — the only gap was a discrete,
+organically-born, NAMED commons actor between grumbling and coup; that alone was
+built, routed into the nine existing readers. Both movers composed via the
+NAME-SWAP idiom (frozen pulseKernel changed by name only). Gate: strict 0 · tsc 0 ·
+lint 0 · 84 dormancy-golden tests byte-identical (10 files) · 46 new pins (8 files)
+· dist 162 · closure 1,024,743 (lane eager Δ = 0) · NUL clean · 4 parked reds
+base-proven in a temp worktree. JUDGMENTS RATIFIED: stigma-rides-the-ladder ·
+null-crier voice (EXPECTED_VOICE: null per the engine-lift precedent; dedicated
+crier categories = a Δ0-eager upgrade path) · fine = settlement-pair reparation on
+just corruption verdicts only. DEFERRED-RECORDED: readiness nudge (no sanctioned
+writer exists) · explicit migration/tradition arrows (the legitimacy+unrest
+channels already transmit) · local-only exposures (no foreign-blowback entry ⇒ no
+trial). HAZARDS BANKED: pulseKernel is FROZEN (max-lines) — every future mover
+rides the name-swap chain, never a new block · the impactKind walker sees LITERAL
+kinds only. Memory: vision-k-assize-commons-shipped.md (indexed). SLOT → V-O
+(platform completions) dispatched into the rotated vision-e worktree; V-M/V-N wait
+on the quintuple fold — they extend V-B/V-C/V-E code that is mid-fold.**
+**⬛⭐⭐ VISION LANE V-F SHIPPED — the table writes history through the wall
+(2026-07-20, claude/vision-f @ c15c2311, FOLD-READY; manager-validated).** R-1 THE
+SESSION LEDGER: the finite-semantics law MADE CODE — tableLedger.js as a pure
+schema wall (closed vocabulary, named magnitude bands, flavor-only free text,
+source-scan pinned), table-event through pendingEdits/COMMITTABLE + the canonical
+applyEvent (cohesion over bespoke physics — ratified), source:'table' on the
+RECEIPT (the canonStatus enum untouched — owner-gated surface respected), manual
+always free + clerk optional (edge half = an owner-gated deploy, inert-honest).
+JUDGMENT ratified: 4 of 6 kinds ship; legitimacy-nudge + bond DEFERRED-WITH-SEAMS
+(no clean existing effect — the cohesion law held against its own feature). V-16
+THE AUSPICE: forecastRun reframed as a significance-tiered OMEN; THE ZERO-TRACE
+PIN EXECUTED (worldState byte-identical before/after). V-18 DM SCREEN: /screen
+(noindex) with DM|Player faces via toPublicSafe fails-closed + Letter/Oracle slots
+(fold-pass-2 mounts recorded). R-6 presets (compose-never-mutate, no new
+constants). R-7/R-9 covenant+bounty: every covenant claim BOUND to a real
+capability + over-claim guard; Page-not-LegalPage (a promise, not a disclaimer —
+ratified). Gate: strict 0 · tsc 0 · lint +0 · 113 new pins · broad suites
+518/162/801/1768 · closure 1,026,112 (Δ +1,378 B: routes + the eager dispatcher) ·
+sizeBaseline held (App 732 net-zero) · NUL clean. NOTE: title census 494→510 — 16
+verified COMPONENT props (the census's own documented false-positive class and
+raise precedent); cycle-2 may refine the regex instead. Foreign stash observed and
+untouched. FOLD-PASS-2 SEAMS: letter/oracle slot mounts + the worker transport
+swap. SLOT → V-G dispatching.**
+**⬛⭐ VISION LANE V-J SHIPPED — the findable truth (2026-07-20, claude/vision-j @
+3f3805b7, FOLD-READY [pass 2]; manager-validated).** 297 PRERENDERED DOCUMENTS
+(8 views + 289 compendium entries — ONE param route carries the long tail; sitemap
+38→327 URLs) each with baked og/Twitter/canonical/JSON-LD + a noscript crawl-graph;
+head truth SINGLE-SOURCED (headForView exported — build and runtime read one
+function, parity-pinned). THE META-SHELL: serverless resolver (the host's real
+pattern — judgment ratified over a static fallback) classifying gallery-index /
+unlisted (noindex-yet-unfurls, the party-share guarantee PINNED) / world seed
+posts; degrades honestly until V-E's RPC lands. THE PINS: dist-walk (every route's
+own card + valid JSON-LD) · sitemap==router==dist · unlisted sitemap-exclusion BY
+CONSTRUCTION · robots posture (search bots welcomed, AI crawlers reserved — Wave D
+honored) · LIVE BROWSER receipt on /compendium/tier-thorp. Gate: dist 179 · strict
+0 · tsc 0 · lint 0 · closure 1,025,213 (Δ +479 B — one param route) · NUL clean.
+JUDGMENTS RATIFIED: entry-route head-clobber deferral (the latent per-tab SEO race
+recorded, scope-disciplined) · /compendium/<id> for rank. FOLD PASS 2 SEAMS
+(recorded for after the quintuple fold): merge vision-j · vercel.json rewrites
+(/gallery + /world/:code → meta-shell) · /gallery stays OUT of the prerender
+(filesystem-before-rewrites — load-bearing, boot-confirmed) · world-card og-image
+variant. DIMENSION 14: machinery COMPLETE — B → A-grade pending fold + cycle-2's
+census. SLOT → V-L (engine textures) dispatching.**
+**⬛⭐⭐ VISION LANE V-B SHIPPED — the chronicler writes, the years replay, the
+causes trace, the town wears its history (2026-07-20, composite-r4 @ a9caa573,
+6 commits ON the trunk lane; manager-validated). THE MINIFOLD IS FREE — THE
+QUINTUPLE FOLD DISPATCHED.** V-2 LETTER + R-16/R-17: deterministic composer over a
+persisted lastReadTick — the FULL lifecycle traced+pinned (migrateCampaign
+chokepoint · createCampaign/import init · persist-clone round-trip · undo-safe
+incl. the lastReadTick>currentTick paradox); world-deepened section dark till a
+flag delta; text export via downloadBlob (no react-pdf bytes). V-4 CAUSE-WALK:
+recordedAncestors backward mirror + BFS + covert-hop redaction leak-pinned. V-3
+TIMELAPSE: pulseHistory-derived track, deterministic golden, scrubber section.
+V-15 AGED MAP: draw-time derivation — town-map goldens BYTE-IDENTICAL (proven;
+the derived-only law honored perfectly). V-10 CERTIFICATE: closed soak-property
+vocab, inert-honest empty manifest, claims-parity pinned. Gate: strict 0 · tsc 0 ·
+lint 0 · 1390+782+769 across the shards (reds = 3 parked + one 9/9-isolated load
+flake) · closure 1,025,451 (Δ +717 B — the irreducible persisted-contract cost;
+headroom 14,549). JUDGMENTS RATIFIED: shared timelapseTick field · draw-time
+derivation · seesSecrets=true owner-only with redaction pinned. DEFERRED-RECORDED:
+V-B adoption telemetry (new-name eager cost — cycle-2 decision) · letter AI
+dressing · true time-delta thickening. HAZARD BANKED: the vitest ratchets are NOT
+eslint (anyCast/rawColor/mapPalette/killList fire only in the design+lint shard;
+killList counts COMMENT lines) · SettlementMapPane at 598/600. THE FOLD: five
+branches (i·c·h·e·d) into composite-r4 under THE FOLD LAW — closure measured per
+merge, breach halts; seams applied (EmptyState adoption, error-literal strikes);
+migration 168 contiguity checked.**
+**⬛⭐ VISION LANE V-D SHIPPED — the pins the platform was missing, and an honest
+stale-brief catch (2026-07-20, claude/vision-d @ 048e584d, 5 lettered commits,
+FOLD-READY; manager-validated).** THE LOAD-BEARING FINDING (verified against git,
+correcting the manager's own clean-sweep catalog): V-8's worker harness (wave 5a:
+advanceInterval.worker + client + transport test) AND V-9's de-eagering (DE-a/b/c,
+fold batch 3, −18,036 B) were ALREADY SHIPPED — the agent verified rather than
+rebuilt (re-derive from git, not the brief; the doctrine held). SHIPPED NEW: the
+V-8 PINS (worker↔sync BYTE-IDENTITY over a real one_year advance via the
+postMessage-equivalent structuredClone + end-to-end through the real client; the
+DOM-free spine source-scan) · R-14 CRASH FORENSICS (whitelist-by-construction
+{seed,tick,flags_on} — no state, no PII, even a fat provider leaks nothing; rides
+the Wave-E reporter) · R-18 PARANOIA MODE (flag ∧ DEV — dead code in prod
+regardless; divergence reports via R-14) · R-19 SAVE MUSEUM (4 eras incl. a
+forward-version exhibit proving the tolerant loader's honest limit; provenance-
+declared real/synthetic; loads through the real saves spine) · tsc type-fixes.
+Gate: 38 pins · strict 0 · tsc 0 · lint +0 · dist 162 · NUL clean. JUDGMENTS
+RATIFIED: V-9 verify-not-rebuild · per-tick news STREAMING deferred (no consuming
+surface — "no rich state without a surface" honored; onProgress extensible when
+V-B's ticker exists) · R-14 eager-and-complete over lazy-and-unreliable-at-crash.
+⚠⚠ FOLD-CRITICAL: R-14 = +8,003 B raw eager (~5KB minifier cascade from
+store/index.js imports) → headroom at V-D's tip = 7,263 B. THE FOLD LAW TIGHTENS:
+measure closure AFTER EVERY MERGE; a breach halts the fold for a shave-or-owner
+decision (candidate shave: a thinner forensics seam into store/index). HAZARD
+BANKED (agent memory): parallel-session git ops can TRANSIENTLY materialize sibling
+files in a shared-object-store worktree listing — explicit staging + fresh status
+per commit is the shield. FIVE branches now fold-ready. SLOT → V-K (assize +
+commons) dispatching into the staged vision-e worktree.**
+**⬛⭐⭐ VISION LANE V-E SHIPPED — the world reaches the table, the truth serves
+every AI, a world fits in a sentence, and the party gets its private door
+(2026-07-20, claude/vision-e @ 9d8d3411, FOLD-READY; manager-validated).** V-11
+FOUNDRY BRIDGE: worldExport DM/player variants REUSING the server-mirrored
+redactors (never a new one — ratified); player variant deep-scanned ZERO covert
+leaks over an every-secret fixture; foundry-module/ package + validate wired. V-12
+TRUTH SERVER: dependency-free stdio MCP over a local export, 4 read-only tools,
+receipts in every response, read-only BY MANIFEST-PIN, smoke-tested over real
+frames; private:true until the owner publishes. V-13 SEED POST: versioned
+checksummed fail-closed worldCode + lazy /world/<code> regenerating client-side;
+same-digest pin RELATIVE (no new golden family — ratified). V-20+V-13F (the owner's
+three rulings): MIGRATION 168 (written-NOT-deployed); MODEL B ratified — unlisted =
+is_public=false + crypto slug (~168 bits), so every browse/featured/curated RPC
+excludes it BY CONSTRUCTION (zero edits to the security-critical chain); by-slug
+reads reuse the REAL sanitizer; owner's PRIVATE filter + badge + rotation-revokes;
+featured hidden-until-occupied + admin-only; THE PAIR EXECUTED in pglite 10/10.
+Gate: validates all OK (mig head 168 contiguous) · strict OK · tsc 0 · lint +0 ·
+dist 165 · security suite 1047 sequential · parked goldens base-proven. V-J HANDOFF
+RECORDED: unlisted URL = /gallery?slug=<42-hex>; get_unlisted_dossier/map RPCs;
+NOT sitemapped — V-J owns noindex+exclusion pins. FOLLOW-ONS documented (DM realm
+overlay, featured visual band, MapShareEditor toggle). HAZARD: +1 migration trips
+~5 doc-freshness gates + @rollback discipline (banked). SLOT → V-J DISPATCHED
+(its provisioned worktree; unblocked by this handoff); vision-e worktree idles
+ready for V-K at the next landing.**
+**⬛⭐ VISION LANE V-H SHIPPED — the palette, the visible undo, the crafted empty
+rooms (2026-07-20, claude/vision-h @ 3668f33c, 4 commits, FOLD-READY;
+manager-validated).** R-20 cmd/ctrl-K palette (eager host sliver +562 B ONLY; body/
+combobox lazy; whole-library scope — vetoable) · R-21 undo history surfacing the
+EXISTING pulseUndoStack via (k+1)× undoLastPulse walk-back, secrets-safe rows ·
+R-22 flat EmptyState primitive (clerk's-note idiom) adopted at the four barest
+renders (first-open + library already met the bar — honest reuse) · R-23 error-copy
+register: 8 literals migrated + a NEW SHRINK-ONLY RATCHET (.error-copy-baseline
+frozen 53/21 — the burn-down carries) · R-24 VERDICT: faction dedup exists+pinned;
+SETTLEMENT + NPC realm-scale name dedup ABSENT (≈15-20% settlement collision odds
+mono-culture; evidence anchored) → OWNER QUEUE (fix = generation change =
+golden-shift). Gate: strict 0 · tsc 0 · lint +0 · 149 regression+pins · dist 165 ·
+closure 1,025,296 (lane Δ +562 B, headroom 14,704) · NUL clean. FENCE SEAM-REPORTS
+for the FOLD (V-B territory, correctly untouched): WizardNewsPanel emptyText →
+EmptyState adoption; WizardNewsPanel ×2 + campaignSlice ×2 error literals → migrate
++ strike from baseline. HAZARD BANKED (agent-authored memory): sizeBaseline is
+TOLERANCE-0 EXACT (App.jsx 732; a JSX comment COUNTS) — cure = net-zero combines.
+SLOT ROTATED → V-F dispatching.**
+**⬛⭐ VISION LANE V-C SHIPPED — the world answers with receipts (2026-07-20,
+claude/vision-c @ 98e327e0, 3 commits, FOLD-READY; manager-validated).** V-1 THE
+INTERVIEW: a new edge function on the EXACT nine-surface guard stack (session gate →
+burst → active → entitlement → governor → reserve/spend/refund → aiOperationLog;
+sessionGateCensus 9), schema-walled {answer, citations, confidence}, SERVER-DERIVED
+citation kinds (unspoofable), segmented conjecture register, receipt chips → V-4;
+17 pins. V-14 THE ORACLE: deterministic no-AI core, own named rng stream, yes/no
+bent by real embattlement/turmoil with basis notes, FREE + ungated (the solo
+player's tool costs no AI — judgment ratified); 13 pins. V-5 THE CORPUS FACTORY:
+staging slice + workshop panel; THE APPROVAL BOUNDARY IS STRUCTURAL (canon =
+committed corpusStaging leaf; gen:compendium-data reads ONLY the leaf — staged can
+NEVER reach the artifact); registry lifecycle honored. Adoption rider: one id-free
+SURVEYOR_ADOPTION event (two-names idiom) across all three. Gate: strict 0 · tsc 0
+· lint +0 · validate:edge 59 · build ✓ · dist 162 · closure 1,026,262 (+1,528 B
+eager: the V-5 slice + registry rows — legitimate; headroom 13,738) · full suite
+triaged: reds = parked goldens (base-verified) + isolation-passing parallel flakes,
+NONE lane-caused. JUDGMENTS RATIFIED: interview meters under 'analysis' (dedicated
+feature = migration = owner follow-on) · promptless door link (NL routing follow-on)
+· V-5 canon fold = owner build-time step. CYCLE-2 INTAKE (confirmed, out-of-lane):
+the EXISTING analyst's SOURCE_SHAPE regex is lowercase-only and silently DROPS
+camelCase receipt tags (read:warCausal etc.) — the analyst cannot cite the slice
+that answers its flagship question; the interview shipped tolerant. DURABLE: one
+new edge fn trips ~8 doc/config gates (verifyJwtPins·docCounts·runbook·abuseModel·
+architecture·metrics·clampBaseline·killList) · an F24 NUL recurrence in a Write was
+caught by controlBytes + python-fixed. SLOT ROTATED → V-D dispatching.**
+**⬛⭐ VISION LANE V-I SHIPPED — the ops nervous system, inert-honest (2026-07-20,
+claude/vision-i @ e5e4ce1d, FOLD-READY; manager-validated).** All seven: R-15 nine
+PROPOSED soak bands (registry-mirrored manifest + validate:tuning-bands wired into
+check AND ci.yml) · R-25 load harness (target-refusal law HARD-CODED: prod domains
+unoverridably refused; exercises only the unauth gate — never spends AI budget) ·
+R-26 self-contained status.html outside the SPA bundle · R-27 VERIFIED-not-rebuilt
+(the restore drill already existed — honest reuse) · R-28 spend alarm migration-FREE
+(env-key inert, Turnstile pattern — a migration would break head-167 contiguity;
+JUDGMENT ratified) · R-29 First Hundred ships EMPTY (no fake names; distinct from
+the 30 paid Founder seats — ratified) · R-30 roadmap renders ONLY the committed
+ledger (source-scan pinned) + creator-kit manifest. 60/60 pins · strict 0 · tsc 0 ·
+lint 0 · build 168/168 · closure 1,025,216 (+482 B: two lazy routes' registry+manifest
+entries — legitimate eager route-table growth; headroom 14,784) · NUL clean. HAZARDS
+BANKED: check↔ci.yml validate-step parity is BIDIRECTIONAL (ciCheckParity bites) ·
+new components must use theme tokens never raw hex (rawColorLiteral 1403). PROCESS
+NOTE: lane worktrees cannot see the ledger-branch design doc — future briefs spell
+the two-branch geography. SLOT ROTATED → V-H (UX quartet) dispatching; V-I awaits
+fold at the next minifold boundary.**
+**⬛⭐ VISION LANE V-A SHIPPED — the map's knowledge reaches the prose, the court
+gains an heir (2026-07-20, composite-r4 @ 299f2843; manager-validated).** V-6 BIOME
+TRUTH: per-cell biome PROVED reachable at canonize (pack.biome[cellId] — no
+degradation needed); additive digest key spread LAST (absent ⇒ byte-identical);
+biomeTexture corpus leaf; road-scene per-hop texture; virtual biomeTruthEnabled —
+JUDGMENT ratified: the flag exists because the keystone golden fixture CARRIES biome
+data and unconditional emission would force a forbidden re-mint. V-7 HEIRS-LITE:
+designated heir (strongest bond, codepoint tie-break) SEATS on the coup path only
+(the faceless path; the challenge path keeps its meritocratic winner — ratified);
+bounded ≤0.4 dampened memory inheritance marked inherited:true on ALL succession
+paths; investiture beat; conservation pinned. Receipts: strict 0 · tsc 0 · lint 0 ·
+dormancy 62 · ladder+ratchets 144 · new pins 18 · dist 162 · closure 1,024,734
+(+60 B module-graph reshuffle, zero eager feature symbols — grep-proven). DEFERRED
+SEAM (recorded): roads travel-news biome texture (corpus ready; rides the roads beat
+pipeline later). CYCLE-2 VERIFY ITEM: heirs+contestedGoals lit together (the contest
+pass reassigns standings after inheritance — unexercised, flagged not defect).
+PARALLEL STATE: V-C/V-E/V-I running in their worktrees; V-B dispatching into
+minifold — 4 lanes hot per the owner's order. THE A+ STANDARD committed as
+docs/THE_APLUS_STANDARD.md — the loop's grading law from cycle 2 forward.**
+**⬛⭐⭐⭐ ROUND 3 CYCLE 1 IS CLOSED — every verified finding fixed, built, queued, or
+deferred-with-rationale (2026-07-20, composite-r4 @ 212758ad).** WAVE F4 @ 5b436227
+(13 findings: THE LADDER IS VISIBLE — PowerTab section, render+secrets pins, lazy ·
+faction re-link with the DECLARED parked-family shift · PDF collation
+locale-independent + the vacuous lens test made real · the walker sees 4 more ledgers ·
+factionPairStates undo-protected · @enforced-by existence pin (64 tags resolve) ·
+retention parity to mig 024 · money-RLS executed-policy census 30/30 · the redacting
+edge logger + CI guard · error-reporter token strip · CDN pin walker; og-image
+vendoring → owner queue). THE CHECKPOINT DID ITS JOB: the two-shard run caught 3
+non-parked reds no focused gate could see — TRIAGED @ 212758ad (the occupation LABEL
+COLLISION — a real product defect F2's correct archetype fix exposed; the title=
+census net −2 with no ratchet re-pin; the gratitudeBonds census disposition), each
+fixed at cause, probe-proven. FINAL CYCLE-1 SUITE: 14,563 passed / 4 failed = EXACTLY
+the parked golden families, zero flakes, closure 1,024,674 ≤ 1,040,000. CYCLE TALLY:
+72 findings → 50 verified (121 refuters, 1 killed) → 46 fixed/built across F1-F4 +
+triage (37 commits' worth in 5 wave commits + 2 doc commits), 13 new dark
+flags/couplings, ~90 new pins. GRADE MOVEMENT (cycle-1 close, self-assessed;
+cycle 2 re-grades independently): correctness A-→A+ · cohesion A-→A · a11y B+→A- ·
+content A-→A · determinism A→A+ · lifecycle A-→A+ · claims A-→A · security A-→A ·
+perf A+ holds · experience/substance/game-feel regrade AFTER the Vision Wave lands
+their surfaces. THE OWNER QUEUE (15 items, each with a recommendation — the full
+table in scratchpad CYCLE1_CLOSING_DRAFT.md, restated at close-out): ai-cost 1-4 ·
+narrativeTempo wire-or-remove · About covenant copy ×2 · believed-distress consumer ·
+npc-agency voice (T-5) · coherence-09 re-mint fold-in · 10c/10d festival terms
+(REC approve) · og-image vendoring · FMG pin cadence · ONE-REGEN flag membership
+(5 F3 flags + underways + heirs). DEFERRAL LEDGER: gifts-ledger UI → V-B delivers ·
+4 task-#40 seams four-gate-DEFERRED · security-2 call-site migration seeded. NEXT:
+THE VISION WAVE lanes V-A → V-G (owner-commissioned, 18 items + the R-batch,
+docs/DESIGN_VISION_WAVE.md) → CYCLE 2 resurveys the enlarged product.**
+**⬛⭐ ROUND 3 WAVE F3 SHIPPED — the missing couplings built dark (2026-07-20,
+composite-r4 @ 45dffd55; manager-validated).** 9 builds, 15 files, +422/−14, ALL
+dark: trade_route_cut cancels festivals + calamity/boom successScore terms (ride
+traditionsEnabled) · faction_captured + bloc_backed ladder challenge windows (NEW
+ladderPoliticalWindowsEnabled — the implementer's byte-safety divergence from the
+brief, ratified: factionCompetition is default-lit so a dedicated flag GUARANTEES
+identity) · institution control/suppression flips closure vulnerability ×0.5/×1.5
+(institutionPoliticalControlEnabled) · the coup counts coin (economicAdj ±0.125 into
+resolveCoupVerdict's pHold, economicCoupReadEnabled) · corruption sheds migrants
+(τ-factor, migrationCorruptionPushEnabled — direct stamped reads, NOT
+criminalStrength01Of, because supplyKernel already imports migrationKernel: an
+IMPORT-CYCLE dodge, ratified) · reconstruction skim amplifies onset hazard
+(upswingHazardReadEnabled; helper hosted in LAZY piety.js because corruption.js is
+EAGER and npcAgency sits at its 833 ceiling) · D-7e clause (i) COMPLETE: generosityEV
+gains the seatBond01 person-bond mercy term (W_SEAT_BOND 0.15, memoryWeave-gated) —
+friendship now BIASES mercy, closing the loop the gratitude lane opened. Gate:
+strict 0 · tsc full 0 · lint 0 · dormancy 47 · batches 590 + lit pins 45 ·
+baselines green · build ✓ · dist 162 · closure 1,024,585 Δ0 · anyCast unchanged.
+DEFERRED-CORRECT → OWNER QUEUE (manager verified §16 on the ledger tree): 10c
+obligations→festival-spirit + 10d corruption_exposed penalty are NOT among §16's six
+recorded seams — net-new couplings needing an owner ruling; RECOMMEND APPROVING BOTH
+(both-endpoint-converged in the matrix). Tuning magnitudes soak-vetoable. HAZARDS
+BANKED: supplyKernel↔migrationKernel import cycle · corruption.js EAGER vs piety.js
+lazy hosting · 5 new virtual flags (ladderPoliticalWindows, institutionPoliticalControl,
+economicCoupRead, migrationCorruptionPush, upswingHazardRead — all default-absent,
+ONE-REGEN membership owner-decided). WAVE F4 (final cycle-1 wave) DISPATCHED.**
+**⬛⭐ ROUND 3 WAVE F2 SHIPPED — the engine's open defects closed (2026-07-20,
+composite-r4 @ 6298d9a6; manager-validated).** 9 of 11 fixed, 21 files: THE COURIER
+LIVENESS P1 closed across all 4 seam ledgers (exact-age depositTick===tick-1 guards,
+the gratitudeBonds idiom — WITH a real code-over-brief correction: roads deposits
+stamped the WEEK clock, not the tick clock; the implementer added the depositTick
+stamp writer-side so the guard is clock-consistent) · organic underways founding
+un-deadened (slug→catalog-NAME, gated behind new dark flag
+underwaysOrganicFoundingEnabled — the identifier repair alone would have ACTIVATED
+emission; the flag preserves byte-identity, good judgment) · occupation sheds refugees
+past 6 ticks (occupation_resistance/burden join WAR_CRISIS/CRISIS_FLIGHT) · the
+occupier installs category:'occupation' (the archetype bucket reachable, end-to-end
+pin) · third-party ransom speaks the payer's true voice (3 roadsProse pools by
+payerMotive) · perf hoists byte-identical (blockade targets, obligation index) ·
+generosity incident write stamped+annotated per the refuter amendment · manual DM
+decrees record provenance (flag-gated, dark byte-neutral, both paths probed). Gate:
+strict 0 · tsc 0 · lint 0 · dormancy goldens 43 · focused 357 · build ✓ · dist 162 ·
+closure 1,024,585 IDENTICAL · NUL clean. HONEST REVERT (→ owner queue): coherence-09
+governs-resolver unification MOVED beliefMapGolden bg-a (a NON-parked-family shift is
+impossible here — bg-a is INSIDE the parked family, but the unification changes its
+content beyond the ONE-REGEN re-mint's declared causes) — reverted; the divergence
+closes only via an owner-signed re-mint decision. §11 D-3 ownership row corrected on
+this ledger branch (generosity OWNS intelTransfers; statecraft reads). Parked-family
+sub-case reds (bg-a, gm-pulse-a/b) verified base-debt at ad15e2c1 by revert-probe —
+consistent with the 4 parked families, no new red. WAVE F3 (8 dark coherence builds)
+DISPATCHED.**
+**⬛⭐ ROUND 3 WAVE F1 SHIPPED — UI correctness + a11y + voice (2026-07-20,
+composite-r4 @ ad15e2c1 + ledger doc @ fab8f91d; manager-validated).** 11 of 13
+findings fixed + 13 pins across 24 files: the P1 library white-screen closed at the
+migrateCampaign chokepoint · the paid Chronicle button made total (try/finally +
+requestCampaignChronicle totality) · fail-visible library load + owner-keyed latch ·
+THE ONE DOOR routed through useDialogFocusTrap · money-action SUCCESS announcements
+(noteAria, WCAG 4.1.3) · eyebrow AA via -700 inks (green 5.40 / slate 6.40 / amber
+5.39) · tradition beats de-jargoned (no §refs) · their-patron · no raw-id headlines
+(incl. the graph.js name-defaults-to-id discovery) · no raw JSON on the road scene.
+Gate: strict 0 · tsc 0 · lint 0 · 203/203 focused (18 files) · build ✓ · verify:dist
+162/162 · closure 1,024,585 (+74 B, in tolerance). TWO HONEST STOPS (correct):
+npc-agency crier voice DEFERRED — it would reverse the RECORDED deliberately-unvoiced
+EXPECTED_VOICE decision (a T-5 surface question → owner queue); START_HERE.md lives
+only on the ledger branch → fixed there (5→4 expected reds). REFUTER-AMENDMENT
+CORRECTED BY CODE: the a11y-3 'violet' claim was wrong for this tree (code = SLATE);
+the implementer followed the code — the layered-skepticism pipeline works both ways.
+WAVE F2 (11 engine repairs) DISPATCHED.**
+**⬛⭐⭐ BUILD-COMPLETENESS PASSED + THE HANDOFF GATE CLOSED — THE ROUND 3 LOOP IS
+OPEN (2026-07-20, the executor session).** The 8-auditor completeness workflow
+(wf_61870393-aa2, ~104 slices across every design source) returned EXACTLY ONE missing
+item: THE ROADS §0.5 kernel-header scope notes (comment-only; the functional sanction
+was already enforced) — REPAIRED @ ca244100 (traditionsKernel + migrationKernel headers
+amended verbatim; strict 0, lint 0, sizeBaseline+traditionsDormancy green). Everything
+else LANDED / DEFERRED_RECORDED / HUMAN_GATED — notable adjudications: Wave A residual
+= ALL recorded-deferral (kill-list tolerance-0 at 100/72/167/161 + 4 taste-deferrals
+pinned) · WB-g deterministic-violet closed-as-misconceived (vetoable) · WB-k PDF
+counterseal = §10 post-launch owed · fraud-pass + FF-a..d verified folded (previous
+row). docs/THE_RESURVEY_HANDOFF.md COMMITTED @ 868c1fc7 (the AI-handoff gate: the
+platform-agnostic loop brief; loop-entry baseline pinned @ ca244100). THE 13-DIMENSION
+AMENDED STANDARD recorded (the cycle-1 standard audit, vetoable): the ruling's ten +
+11 DETERMINISM/REPRODUCIBILITY + 12 STATE-LIFECYCLE INTEGRITY + 13 CLAIMS-VS-ENFORCEMENT
+PARITY — amendments only raise. CYCLE 1 RESURVEY DISPATCHED: workflow wf_1b5674b1-770 —
+15 lanes (6 Fable judgment-dense: cohesion/experience/substance/game-feel/determinism/
+claims-parity · 9 Opus breadth: correctness/perf/security/AI-cost/content/a11y/lifecycle
++ coherence-matrix-re-verify + pre-stocked-disposition) + a completeness critic.
+Loop discipline: findings → 2-of-3 adversarial refuters → clustered fix waves (full gate
+each) → cycle ledger row + grade table → converge (zero must-fix + zero gate-passing
+gaps + zero achievable grade improvements) → ONE confirming cycle → the owner tail.**
+**⬛⭐⭐⭐ THE MINI-FOLD IS COMPLETE — THE BUILD PHASE IS CLOSED (2026-07-20, the
+handed-off executor session; claude/composite-r4 @ ceb77368, worktree minifold).**
+The RESUME HERE row below is EXECUTED. Steps landed: STEP 2 strict-clean @ 2bec2f64
+(the stopped agent's uncommitted WIP was NOT discarded — verified annotation-only and
+COMPLETE: base RED 20 strict errors → GREEN 0, negative control run both directions;
+kept as the head start, vetoable) · STEP 3 THE GENEROSITY GRATITUDE LANE @ f30fd058
+(D-7e clause ii: gratitudeBonds.js leaf + one-line kernel call-sites + memoryWeave-gated
+ladder consume; court-to-court seat-to-seat via canonical governingFactionOf, foreignSid
+per D-7f; one-tick deposit-consume by double construction; sev = widow's-mite 1:1;
+credit/predatory/refuge excluded [refuge = loop-intake candidate]; walker EXEMPT literal;
+9 pins) · STEP 4 full-tsc base debt @ ceb77368 (12 pre-existing errors, 3 lib files
+[emailLifecycle/founderTransferClient/stripe], annotations only, pre-existence proven by
+construction — npm run check is now FULLY GREEN on the loop's substrate). MINI-FOLD GATE
+GREEN: build ✓ · verify:dist 162/162 exit 0, closure 1,024,511 ≤ 1,040,000 (Δ0 from base
+— the lane is entirely lazy) · domain-strict 0 · tsc full 0 · lint 0 · validate chain ✓
+(mig head 167 contiguous · 56 edge fns · 141 vendored libs) · TWO SHARDS 14,460 passed /
+4 failed = EXACTLY the parked golden families, zero flakes (shard receipts span
+f30fd058→ceb77368; step 4 is JSDoc-only/runtime-identical; the 3 touched files' focused
+suites re-run green at tip 16/16). FRAUD-PASS RECONCILIATION CLOSED: the §10 pass ran
+2026-07-19 (verdict SAFE TO FOLD @ 9d971f5c) AND its fraud-fix lane FF-a..FF-d
+(a7ecd7e2·b6e4bd98·68d8293f·d0eacd45) is an ANCESTOR of composite-r4 — all three P1s
+fixed at source pre-fold. LOOP-INTAKE ADDITIONS from this fold: the D-7e clause-(i)
+generosityEV bond READ term is CONFIRMED ABSENT (strongestBond's only consumer is the
+D-4f contest pick — MISSING-WITH-FOUNDATION) · refuge-gratitude seat-bond (deliberate
+exclusion, candidate). OWNER SESSION ORDERS IN FORCE (this session = the switched-to
+executor): Fable architect/validator/manager + Opus implementer, staffing per-task,
+Fable takeover where coverage wins · NO COMPROMISES (objectively-better-with-risk) ·
+15-min stall watchdog live · pushes REMAIN owner-gated (recorded judgment — nothing
+pushed). NEXT: build-completeness audit (8-auditor workflow wf_61870393-aa2, running) →
+THE_RESURVEY_HANDOFF.md → THE ROUND 3 LOOP (executor = THIS session; 13-dimension
+amended standard staged, recorded at the loop's opening row).**
+**⬛⭐⭐⭐ ⟵ RESUME HERE (2026-07-20, owner switching accounts to finish) — CLEAN
+STOPPING POINT.** STATE: the ENTIRE BUILD IS DONE except the mini-fold's finalization.
+Pre-fold wave folded (fold batch 3 → claude/composite-r3 @ accd0242, BUDGET GREEN
+1,024,371). All 3 post-fold lanes DONE (D-5/D-6 @ dc-roads-followon d9121e8f · Formation α
+@ dc-formation-statecraft feaf5f9f · Formation β @ dc-formation-agency 58d45d7a). THE
+MINI-FOLD is at claude/composite-r4 @ 2f65369b (worktree .claude/worktrees/minifold):
+STEP 1 (all 3 merges) DONE + COMMITTED — merge 1/3 roads, 2/3 α (npcLadderKernel
+compose-both: D-5 roadsBondEvents read + α bluffChargeLit BOTH kept; spatialUsage exempt
+union), 3/3 β. REMAINING (uncommitted WIP discarded at stop — RE-DO from recipe): STEP 2
+clear the domain:strict debt (~16 errors in intelActs/beliefAxes/beliefMap/generosityKernel
+— the D-1/D-3 leaves; the stopped agent was bisecting base-vs-merge, its OWN annotations
+EXONERATED → the errors are BASE debt from composite-r3, mechanical JSDoc 0-holing,
+runtime byte-neutral, prove via the beliefMap/beliefAxes/intelTrade dormancy goldens) +
+STEP 3 build the now-unblocked generosity-gift GRATITUDE deposit (deposit half in a
+generosity LEAF [generosityKernel 785/800 — leaf, the D-3 precedent at :994+]; consume half
+in npcLadderKernel via mintBond onto the giver-settlement ruling-seat NPC, memoryWeave-gated,
+one-tick deposit-consume) — full recipe in β's report + the mini-fold dispatch row above +
+task #40. Then the MINI-FOLD GATE (build → verify:dist ≤1,040,000 → typecheck:domain:strict=0
+→ two-shard suite = ONLY the 4 parked goldens). RESUME ORDER after the mini-fold lands
+(→ composite-r4 = the finished world): (1) BUILD-COMPLETENESS gate · (2) PRODUCE
+docs/THE_RESURVEY_HANDOFF.md (⛔MANDATORY — the self-contained platform-agnostic loop brief;
+spec in the AI-HANDOFF ruling row) · (3) THE ROUND 3 LOOP (coherence-mandated, pre-stocked:
+COHERENCE_MATRIX_R3 + fold blissful-bhaskara faction-key sweep already in composite-r3) ·
+(4) the owner tail (promote composite → PUSH#1 → soak → tuning → ONE REGEN → walk → PUSH#2
+→ THE VERY END → PUSH#3). SHARED-TREE: the-composite stays UNTOUCHED at 24f46337 (promotion
+owner-gated); parallel owner sessions advance it — re-verify the tip before any fold. Task
+#40 holds the remaining small seams (shared-war coalition, champion covenant UI,
+unbonded-conscience payer, third-party news pool) → loop intake. ⚠ benign: a git gc.log /
+loose-objects warning — do NOT `git prune` while worktrees/parallel sessions are live.
+NOTHING is lost; everything is committed; re-derive done-state from GIT, not any brief.
+**⬛⭐ FORMATION LANE β COMPLETE — THE ACTORS' AGENCY (2026-07-20,
+claude/dc-formation-agency @ 58d45d7a, 5 commits off composite-r3 — manager-verified;
+re-derived done-state from CODE not the brief, correctly). BUILT: D-4e CHAMPION PRODUCER
+(champion-npc edit kind → npc.contestBacking → the contest pass folds it into
+ContestRec.backedBy once, contest-id-scoped; the player's SIDE lever, proven end-to-end
++ persist/reload) · COALITION COOPERATION governing-arm (depositCoalitionTrust via the
+pair-ledger writer, year cadence, 156wk decay) · CONTEST-SUPPORT bond (verified pre-built
++ added the missing end-to-end pin). VETOABLE (good call): champion-npc rides
+commitPendingEdits (the ransom/rescue-npc precedent) → NO operationRegistry entry (the
+registry is store-action-keyed; a phantom op breaks the walker) — walker + compendium
+green untouched. Receipts: closure 1,024,511 ≤ budget (+140 B champion string within the
+≤300 allowance; coalition 0 eager) · §11 clean (factionPairStates only via its writer;
+backedBy only in the contest pass) · dormancy byte-identical. DEFERRED WITH RECIPES (correct
+— cross-lane/ceiling blockers): (a) GENEROSITY GRATITUDE deposit — needs α's npcLadderKernel
+consume side + generosityKernel is 785/800 (leaf) → BUILDABLE at the mini-fold once α+β
+coexist; (b) SHARED-WAR-COALITION arm (settlement→governing-faction resolution — the
+design's own fold-time concern); (c) champion COVENANT UI (needs npcLadderState mirror to
+expose nids past the secrets seam — polish, mechanism complete). ⚠⚠ β's LOAD-BEARING BASE
+FINDING: composite-r3 (accd0242) is RED on typecheck:domain:strict — 16 errors in
+intelActs/beliefAxes/beliefMap/generosityKernel (the D-1/D-3 leaves; each lane called it
+"pre-existing at my base" so NOBODY owned it; the fold took the domainAnyCast OR-branch and
+DEFERRED the strict 0-holing). This is a CEILING-0 GATE red on the loop's base — MUST be
+cleaned pre-loop (mechanical JSDoc 0-holing, no behavior change). ALL 3 POST-FOLD LANES DONE
+(D-5/D-6, α, β) → THE MINI-FOLD + strict-clean + the now-unblocked gratitude deposit
+dispatched. Deferred arms (shared-war, champion UI) → task #40 / loop intake.
+**⬛⭐ DEEP COUPLINGS D-5 + D-6 COMPLETE (2026-07-20, claude/dc-roads-followon @ d9121e8f,
+6 commits off composite-r3 accd0242 — manager-verified).** D-5 THIRD-PARTY RANSOM
+(thirdPartyRansom leaf; RansomRec +payerId/payerMotive/thirdPartyResolved): a payer≠home
+path — the refusal check (proud/loyal/zealous refuse a non-home ransom, stay captive,
+no-death), the outcome fork reusing conversionFlawFactor (a FRIEND payer → debt +
+GRATITUDE BOND [this WIRES the D-7 ransom-gratitude seam live — mintBond had zero callers];
+a RIVAL → COMPROMISED via the corruptionWeb beneficiaryId reroute), the redirected legit/
+prosperity write to the payer, generosity ransom_relief consume, ladder mintBond consume.
+D-6 SEA ROADS (seaRoads leaf; MissionRec +legModes): sea legs at dispatch + a PASS-3
+sea-hazard branch — blockade capture (captor=blockader, reads navalLayer), piracy=banditry-
+by-construction (port seat), storms PRICED not rolled (season-scaled delay, never a
+capture). Lit walkthroughs quoted (D-5: refuse/debt/compromised/friend-gratitude/captor-
+precedence + roster conservation; D-6: blockade/piracy/storm/navalEnabled-dark). Receipts:
+closure 1,024,371 IDENTICAL to base (zero eager) · dormancy byte-identical both flags ·
+§11 clean (new keys roadsRansomSettlements + roadsBondEvents EXEMPT; NO faction.power /
+relationshipStates / naval writes) · sharded suite = ONLY the 4 parked goldens (confirmed
+at base) · roadsKernel 795/800 (embassy-persist leaf-extracted for headroom). Additive, no
+migration. VETOABLE: gratitude bonds to the specific friend NPC; the unbonded-conscience
+altruist payer channel DEFERRED; embassy-over-sea DEFERRED (§15). LAST BUILD LANE:
+Formation β still running (champion + coalition + contest-support done; gratitude deposit
++ gate remaining).
+**⬛⭐ FORMATION LANE α COMPLETE — THE STATECRAFT CONSUMERS (2026-07-20,
+claude/dc-formation-statecraft @ feaf5f9f, 2 commits off composite-r3 accd0242 —
+manager-verified).** Both self-policing seams the fold flagged are closed: D-3 THE
+SELF-POLICING LOOP (intelSaleCredibilityDeltas orphan now called at courier-arrival —
+resolveIntelSale charges the seller's settlement stock AND, when a mouthpiece is stamped,
+the spokesperson's per-NPC stock, both via the credibility system's own writers; false
+sale discounts future sales, true sale pays the slow trust rise; degrades settlement-only
+without a spokesperson; 11 pins) + D-4→D-2 THE BLUFF CHARGE (void res.bluffDeposits closed
+— the ladder carries contradicted-bluff deposits into an additive bluffExposures sidecar;
+statecraft mints a per-NPC deception charge carrying lieExposedBand so the SAME exposed_liar
+stigma the lie path mints lands via the ladder a tick on; 8 pins incl. one pinning
+advanceContests' bluffDeposits production that NO prior test covered). Receipts: build 0 ·
+closure 1,024,371 delta 0 (zero eager) · two shards = ONLY the 4 parked goldens (confirmed
+at base) · dormancy byte-identical (both parent flags off) · §11 grep clean (only new write
+= bluffExposures; charges route through existing advanceCredibility). TWO DURABLE HAZARDS
+BANKED: (1) the spatialLedgerCoverage walker matches ONLY string-literal setSpatialLedger
+keys — a key written via a constant slips through unregistered (intelTransfers is currently
+walker-blind); new sidecars = literal + EXEMPT. (2) ORDERING INVARIANT: statecraft (~1881)
+→ generosity (~2205) → ladder (~2348 last); both deposit-and-consume sidecars rely on it
+(producer last, consumer first, depositTick<now = couriered). COORDINATION POINT for D-5/β:
+the seller-side spokesperson STAMP (generosity's planIntelAct picking a mouthpiece via
+pickMouthpiece) is NOT built here — the per-NPC intel-sale arm stays dormant until it lands;
+the READ + optional field are in. VETOABLE: sale accuracy resolved at courier-arrival;
+self-polices both sold AND gifted; a private bad sale = credibility cost, no court stigma.
+FINAL BUILD LANES: α DONE; D-5/D-6 + Formation β still running.
+**⬛⭐⭐⭐ FOLD BATCH 3 COMPLETE — THE WORLD IS ASSEMBLED, THE BUDGET BREACH IS CLEARED
+(2026-07-20, claude/composite-r3 @ accd0242, forked from the re-verified live tip 24f46337;
+27 fold commits = 16 merges + 11 cleanup/composition; manager-spot-checked).** ALL 15
+manifest branches folded into the staging composite (the shared claude/the-composite stays
+UNTOUCHED at 24f46337 — promotion owner-gated; main tree undisturbed). Every merge
+NUL-scanned + focused-gated. TWO MANIFEST DEFECTS the fold agent caught & cured (verify-first
+on the manager): D-0/D-1 were a SEPARATE lineage (merged additionally, not in the D-2/7/4
+stack); ruin-filter carries NO migration. Conflicts resolved per ruling: personaSlicer +
+religionLegitimacy → kept composite's nameOf(); the roads war-file settlementStrategy.js
+auto-composed (embassy multiplier ×1-when-absent verified alongside bloc factors); wave-D's
+13 perimeter conflicts all compose-both (autoReload+rateGuard, savePaymentMethod+captchaToken,
+session-gate+rate-limit). MIGRATION RENUMBER: contiguous head 167 (validator green; purge-spares
+162→165, retention cron 163→166, client-errors 156→167; token-bucket keeps 156, money keeps
+157-164). DEBT CLEANUPS GREEN: build:edge-shared regenerated (aiGrounding freshness) ·
+domainAnyCast reconciled to 2242 <2252 (JUDGMENT vetoable: baseline-update OR-branch, not
+0-holing the dormancy-pinned D-7 leaves — that's burn-down work, deferred) · spatial walker
+npcCredibility EXEMPT · a REAL composition fix (the D-2 prune scan reads the untouched
+item.save roster so a CAPTIVE'S CREDIBILITY survives captivity). CEILING RE-PINS to MEASURED:
+kill-list 906→100 / 98→72 / 234→167 / 214→161 (tolerance-0) · title 487→494 · raw-color 1403
+· size-baseline trims. ⭐ THE PAYOFF — BUDGET GREEN: first-paint closure = 1,024,371 B ≤
+1,040,000 (headroom 15,629); verify:dist exit 0. THE 1,040,998 BREACH THAT WAS OWNER-GATED ALL
+NIGHT IS CLEARED. SUITE: two shards, every non-golden red fixed+committed, all 9 isolation-
+re-run at the final tip → EXACTLY 4 reds = the 4 parked goldens (ONE REGEN re-mints).
+composite-r3 IS the loop's substrate + the base for task #40. Flagged for #40 (in-code deferral
+markers): D-3 self-policing (intelSaleCredibilityDeltas 0 callers) · D-4 bluff charge (void
+res.bluffDeposits) · D-4e champion producer (backedBy consumed-not-written) · D-5/D-6.
+**⬛⭐⭐ DEEP COUPLINGS D-4 COMPLETE — THE PRE-FOLD BUILD IS FINISHED (2026-07-19,
+claude/deep-couplings-contest @ 82c8095e, 3 commits stacked on the D-7 tip 49b145bb —
+manager-verified).** THE CONTESTED GOALS CLASS shipped dark (contestedGoalsEnabled): the
+full §8 class — settlement-wide collision genesis, knowing/unknowing discovery fog + the
+bluff, TUNNEL VISION (fixation01 from the inherited D-7a grievanceLean + traits biasing
+entry/window/heard-odds + the loss→typed-grudge loop), the HEAD-TO-HEAD resolution matrix
+(hash-jittered tie-break), D-4f SUPPORT GOALS + cascade + bond-joining (consuming D-7's
+bondedPeersAbove/strongestBond), PLAYER SIDING (backedBy first-class, folded into the
+margin), NO-DEATH (rung roster asserted a permutation every tick; loser = standing sting +
+decaying grudge via the ladder's writer). Receipts: 30 contest pins · 7 dormancy · 59
+ladder byte-identical dark · 80 security (mirror leaks nothing) · domain-strict 0 · closure
+delta 0. Deferred (compose at fold): D-4e the champion-npc STORE producer (engine
+consumption built+pinned) · the bluff→D-2 credibility charge (bluffDeposits live, the
+consume arm deferred). ContestRec owner-visible (+verb/loserNid beyond the doc, recorded).
+
+⭐ DEEP COUPLINGS PRE-FOLD BUILD COMPLETE: D-0/D-1 (627055b3) · D-2 (b986b4e8) · D-7
+(49b145bb) · D-4 (82c8095e) STACKED as one lineage; D-3 (87f52ce1) separate off composite.
+D-5/D-6 + the deferred formation seams are POST-FOLD.
+
+⬛ FOLD BATCH 3 MANIFEST (assembled; execute against the RE-VERIFIED live composite tip —
+was 24f46337, the owner's parallel sessions advance it):
+ BRANCHES: the deep-couplings STACK tip (82c8095e = D-0/1/2/7/4 in one lineage) · deep-
+ couplings-intel (87f52ce1, D-3) · roads (21bba9a1) · money-wave (d0eacd45) · ruin-filter
+ (4c1ccadc) · the completion waves (wave-a-tabs 8fdd4b95 · wave-a2-sweep 3398ecea · wave-b-
+ remainder 80db0799 · wave-b-finisher e7dc528b · wave-c-seams 295f27b8 · wave-d-perimeter
+ d93197da · wave-e-launch-ops f61f80a9 · de-eager 2c4d599b) · the faction-key sweep
+ (blissful-bhaskara b561d0d4).
+ CONFLICTS/RESOLUTIONS: (1) personaSlicer.js + religionLegitimacy.js — fixed on BOTH
+ composite (nameOf) and blissful — KEEP COMPOSITE's nameOf() version. (2) the roads
+ settlementStrategy.js edit lives in a WAR-system file — reconcile with any parallel war work.
+ (3) migration renumber: 156×N + 157-164 (money) + ruin-filter 162 + wave-b 162 + finisher
+ 163 → contiguous after the live head; names are the interface, numbers rename.
+ DEBT CLEANUPS (make green, do NOT ride past): build:edge-shared (aiGroundingBundle.freshness,
+ D-7 + D-3 inputs changed) · domainAnyCastBaseline reconcile (D-7 leaves' any-holes:
+ eliteBleed/factionPairLedger/relationshipEvolution) · spatialLedgerCoverage.walker EXEMPT
+ the D-2 npcCredibility + D-3 intelTransfers/intelCooldown + roads/D-7 sidecars · impactKinds
+ registered (done per-lane) · the D-2×D-3 credibility-loop + D-4×D-2 bluff composition +
+ D-4e champion producer land as post-fold completion commits.
+ CEILING RE-PINS: kill-list to measured (Wave-A lanes summed) · size-baseline (pulseKernel
+ 1381, generosityKernel 785, +the D-7/D-4 leaves) · de-eager reclaim → BUDGET GREEN.
+ GATE: NUL-scan (python) · --no-ff · bare full suite (two shards) · expected reds = ONLY the
+ 4 parked goldens (ONE REGEN re-mints) · closure ≤ 1,040,000 after the reclaim.
+**⬛⭐ DEEP COUPLINGS D-3 THE INTEL LANE COMPLETE (2026-07-19, claude/deep-couplings-intel
+@ 87f52ce1, 4 commits off composite 24f46337 — manager-verified).** Option A executed: the
+design premise was confirmed WRONG (warningSacrifice/intelSalePrice/intelSaleCredibilityDeltas
+are catalog-live orphans with zero callers; generosityKernel at exactly 800/800). D3-extract
+made headroom BEHAVIOR-PRESERVING (three settlementUpdates applicators → a lazy worldPulse
+leaf; kernel 800→719; generosity suite 117/117 BYTE-IDENTICAL incl. dormancy hash). D3-a the
+intel lane (new intelActs.js leaf + generosity deposit pass + statecraft consume pass; kernel
+785<800). D3-b dormancy golden (intelTradeDormancyGolden, 3 real config hashes) + lit
+walkthrough 7/7 (gift → warning obligation → statecraft injects belief conf 0.8→0.64 +
+intel_transfer beat; sale → reverse; dark → no keys). State (additive, no migration, both
+generosity-owned): intelTransfers[id]{seller,receiver,subject,mode,belief,fidelity,tick} +
+intelCooldown[pair]=lastWeek (26-week per-pair). §11 grep clean (statecraft writes only
+beliefMaps; generosity solely owns the intel ledgers) · closure delta 0 · flag intelTradeEnabled
+dark. ⚠ CORRECTLY DEFERRED (D-2 absent from THIS base — composes at fold): the self-policing
+credibility loop + per-NPC spokesperson attribution (degraded to settlement-level here);
+numeric-coin sale pricing; the DM verb. TWO DURABLE HAZARDS BANKED: (1) TIER-BLIND spatial
+scan — spatialDigest.invariants greps src/domain/spatial for `\btier\b`; a mover applicator
+writing an economic `tier` field belongs in worldPulse, NEVER spatial (caught in shards, fixed
+by relocation). (2) a `git add` including an already-moved path ABORTS the whole add — re-stage
+explicit, verify. DEEP COUPLINGS: D-0/D-1/D-2/D-3/D-7 DONE; D-4 the last pre-fold lane RUNNING;
+D-5/D-6 post-fold.
+**⬛⭐ FACTION-KEY DEFECT-CLASS CENSUS — THE SWEEP ALREADY EXISTS (2026-07-19,
+read-only).** The structural-prevention sweep I flagged for the loop is DONE on a sibling
+parallel branch: claude/blissful-bhaskara-c43dcd @ b561d0d4 ("the faction-key precedence
+sweep: one canonical name, and a guard so the class cannot regrow"), forked from dc0b6e2b
+(sibling to the composite, NOT an ancestor either way). It swept ALL 25 reversed-precedence
+`.name||.faction` sites across 12 files INCLUDING 8 in the Deno edge tree (generate-narrative/
+prompts.ts — an src-only scan misses these) + the aiGroundingBundle mirror regen, and added
+tests/lint/factionNamePrecedenceScan.test.js (a source-scan ratchet, KNOWN_OFFENDERS frozen
+empty, covers src+edge, self-tests its own regex, documents its blind spots) + tests/domain/
+factionNamePrecedence.test.js (14 pins, revert-proven 9/14 fail on old code). Census
+CONFIRMED the bug is STILL LIVE on the composite (27 sites, 13 files) and neither test exists
+in composite history. RULING → FOLD BATCH 3 FOLDS/cherry-picks b561d0d4 rather than
+re-sweeping. ⚠ TWO FOLD GOTCHAS: (1) a REAL but trivial 2-file conflict — personaSlicer.js
++ religionLegitimacy.js were fixed on BOTH branches (composite via the shared nameOf()
+accessor @ 4c1143b9/24f46337; blissful inlines f?.faction||f?.name) — resolve KEEPING
+COMPOSITE's nameOf() version (the guard's own error message recommends it). (2) the sweep
+touches the edge tree + the generated bundle → build:edge-shared at fold. CANONICAL RECORD
+SHAPES table captured (faction mints .faction not .name; conflicts have no .name; stressors
+.type/.label; NPCs no .description) — matches ChroniclePanel's "SNAPSHOT-SHAPE LAW" comment.
+RETRACTION recorded (census discipline): journalPages.js:194 LOOKED like a 5th instance but
+powerSlice() (viewModel.js:498) already normalizes upstream — CLEAN, do not re-flag. OWNER-
+GATED latent (not live): addFaction mints .description while generators mint .desc — a
+persistence-shape call, deferred. This ADVANCES the loop intake: the record-shape defect
+class is now "fold the existing guarded sweep + widen its regex to the .desc/.description
+pair," not an open hunt.
+**⬛⭐ DEEP COUPLINGS D-7 THE MEMORY WEAVE COMPLETE (2026-07-19, claude/deep-couplings-mem
+@ 49b145bb, 7 commits stacked on the D-2 branch b986b4e8 — manager-verified).** The entire
+persisted CORE of the relationship weave, all single-writer + dark + dormancy-proven:
+D7-a grievanceRead leaf (resentment+memoryScore+decade-clock incidents, NEVER the rung —
+feeds D-4 fixation) · D7-b the memory-weave core (memoryWeaveActive = 8th flag, typed
+incidents, mintMemoryWeaveIncident applicator; rite_imposed wired live; dark-weave ⇒
+relationship plane BYTE-IDENTICAL while traditions still imposes) · D7-e the PERSON-BOND
+map (LadderStanding.bonds — loyalty/gratitude/friendship, the exact grudge twin: D5 decay,
+additive stacking, single writer, succession reset; mintBond/bondSevToward/strongestBond) ·
+D7-c the FACTION-PAIR LEDGER (worldState.factionPairStates[a|b] = {trust, resentment,
+incidents≤8, week} — the wave's one new persisted shape, owner-visible; additive, absent-
+when-dark, NO migration, D5-decayed) · D7-f the ELITE BLEED (weighted importanceWeight ×
+factionPowerStanding × politicsRank, bounded settlement nudge from cross-border standing,
+ZERO new writers, elite_amity/elite_feud on threshold; THE DOUBLE-COUNT GUARD PINNED —
+state-driven never event-re-counting) · D-4f the memory-side bond-read API (bondedPeersAbove,
+support/join floors). Receipts: domain 6865/0 · property 213 (3 reds = parked goldens at
+base) · closure delta 0 · §11 grep clean · dormancy byte-identical · 51 weave pins. HONEST
+SCOPE SPLIT (correct): every SHAPE/API/dormancy-contract built now; the BEHAVIORAL
+FORMATION wiring that crosses UNFOLDED lanes is flagged not force-built — route_seized
+(post-roads-fold), bond formation deposits (generosity gratitude / coalition / D-5 ransom /
+D-4 contest-support), D-7c coalition coupling (needs settlement↔faction identity
+resolution), D-7f in-pass live-weight + the A/B lit cell (post-fold). VETOABLE: D-7c landed
+as a SIBLING factionPairStates ledger (not nested in factionStates) — say veto to nest.
+DEEP COUPLINGS STATUS: D-0/D-1/D-2/D-7 DONE · D-4 NEXT (consumes the bonds API) · D-3
+Option-A extraction lane · D-5/D-6 post-fold.
+**⬛⭐⭐ OWNER RULING (2026-07-19) — THE AI HANDOFF AT THE RESURVEY: "right before the
+resurvey prepare that I am going to switch to a different AI."** The Round 3 loop (the
+resurvey) will be executed by a DIFFERENT AI — NOT necessarily Claude, so NOT the
+continuity-order successor's assumptions (no auto-memory, no skill suite, possibly no
+Claude idioms). MANDATORY NEW GATE inserted between BUILD-COMPLETENESS and THE ROUND 3
+LOOP: produce **docs/THE_RESURVEY_HANDOFF.md** — a fully SELF-CONTAINED, PLATFORM-AGNOSTIC
+loop-execution brief a cold non-Claude AI can run with zero external context. IT MUST
+CONTAIN: (1) the live code location (composite branch + a RE-VERIFY-THE-TIP instruction —
+never a cached hash) + how to build/test/gate (concrete commands from package.json, not
+Claude tool names); (2) THE LOOP DEFINITION — resurvey→adversarially-verified-fix cycles,
+the coherence mandate, convergence = zero must-fix AND zero gate-passing coherence gaps
+AND every achievable dimension at A+ (one clean + one confirming cycle); (3) the
+PRE-STOCKED intake: COHERENCE_MATRIX_R3.md (the 105-pair matrix, defects, gated-in
+candidates) + the faction-key/record-shape structural sweep; (4) THE CONSTITUTION as
+explicit rules (eager budget ratchet, kill-list, dormancy goldens, single-writer,
+domain-strict 0, the expected 4 parked-golden reds, NUL-scan, shared-tree git discipline,
+NEVER git add -A/stash); (5) THE OWNER-GATED BOUNDARIES it must NEVER cross (pushes,
+deploy, db push, golden re-mint/ONE REGEN, budget raises, paid-surface behavior, legal,
+the parked owner-decision queue); (6) THE TAIL it hands back to the owner (PUSH#1→soak→
+tuning→ONE REGEN→walk→PUSH#2→THE VERY END→PUSH#3). It supersedes START_HERE's Claude-
+specific §6 for this successor. PRODUCED right before the loop (state is live then; writing
+it now would go stale) — but the SPEC is fixed here so it can't be shortchanged.
+**⬛⭐ DEEP COUPLINGS D-2 COMPLETE + D-3 BLOCKED ON A REAL DESIGN DEFECT (2026-07-19,
+claude/deep-couplings-cred @ b986b4e8, 4 commits atop 29f7abc9 — manager-verified).**
+D-2 PER-NPC CREDIBILITY done: lazy npcCredibility leaf + statecraft threading + the ladder
+lie-stigma hook; THE §0.5 BOUNDARY AMENDMENT landed in place (statecraft §6 "never burned/
+turned/executed" scoped so a credibility hit resolves NO fate). Lit walkthrough executed
+& quoted — a Reeve's exposed bluff drops his personal credibility, earns a ladder stigma
+(he keeps his seat, marked), and his next bluff is believed less (0.7→0.21, the boy who
+cried wolf). Owner-visible shape (§14 Q2): spatialLedgers.npcCredibility{score,lastUpdateTick,
+lieExposure?} + DisinfoRecord.spokespersonNpcId? + LadderStanding.lastLieSeen?. Receipts:
+domain shard 6814/6814 · closure delta 0 (all lazy) · reds = the 3 parked goldens at base ·
+§11 write-list clean (only npcCredibility). ⚠ D-3 INTEL LANE BLOCKED — a REAL design defect
+the lane PROVED (not a stall): the design premise "the intel act rides the live catalog data
+path, net-zero" is FALSE — the `warning`/`intel_sale` acts are catalog-registered (live:true
+data) but have NO live kernel evaluation/mint path (only grain_relief/credit/refuge/purchase/
+trade_overture are wired inline), AND generosityKernel.js is at EXACTLY 800/800 (hard ceiling)
+— so wiring needs new kernel lines the ceiling forbids. The DESIGN_DEEP_COUPLINGS §D-3
+premise + the generosityKernel:89 comment ("all six instruments ship live") are INACCURATE.
+MANAGER RULING: D-3 → Option A (dedicated leaf-extraction lane: behavior-preserving headroom
+in generosityKernel FIRST, then wire per the pinned choreography — a goldens-sensitive hot-file
+refactor deserving its own full-suite lane, NOT squeezed) — sequenced AFTER D-7/D-4 (it's the
+least-blocking of the remaining pieces and the extraction wants a quiet hot file). D-3 design
+premise correction folded into the doc's known-issues.
+**⬛⭐ DEEP COUPLINGS D-0 + D-1 COMPLETE (2026-07-19, claude/deep-couplings @ 627055b3,
+6 commits atop aad6265e — manager-verified).** D-0 MIGRATION→RUMOR CARRIER
+(migrationRumorsEnabled): refugee columns seed the rumor net via the army/smuggle idiom
+(new lazy leaf migrationRumors.js; pulseKernel name-swapped NET −6 lines 1387→1381,
+size-baseline ratcheted DOWN). D-1 THE BELIEF AXES (beliefAxesEnabled): BeliefRecord gains
+populationTrendBand (demographic −2..+2) + observanceLabel (cultural) — BOTH OPTIONAL,
+present only lit, appended (owner-visible §14 Q2). LIT PROOFS QUOTED: a 3-hop observer
+believes a GROWING city is EMPTYING (the fog end-to-end); a court still believes the OLD
+rite until the rededication news arrives (staleness proven t=12→14). Receipts: dormancy
+goldens green + byte-identical dark · closure delta 0 (all lazy leaves) · §11 write-list
+CLEAN (zero new writers — axes ride advanceBeliefMaps, rumor entries are inputs) · walker
+compliance (2 new impactKinds registered) · 120/120 wave gate. Both flags DEFAULT DARK
+(no simulationRules edit; lit at ONE REGEN). Deferred seam: ally-intel sharing drops axis
+fields momentarily (byte-identical dark, low). ⚠⚠ STRUCTURAL-PREVENTION TRIGGER — THE
+FACTION-KEY / RECORD-SHAPE DEFECT CLASS: parallel owner sessions are fixing it
+instance-by-instance (ladder 25749ae5 · chronicle-snapshot 29f7abc9 · persona-slicer
+4c1143b9 · religion-ruler-lens 24f46337 — FOUR instances, "consumer reads a canonical key
+the record doesn't carry"). Per the 3rd-same-shape rule this is now a MANDATORY LOOP
+STRUCTURAL SWEEP: find-ALL instances (a walker/lint over record-key reads vs the shapes
+records actually mint) + a RATCHET so no new instance can land. Recorded as loop cycle-1
+intake — instance-whacking alone will miss hidden readers. Composite advancing fast
+(29f7abc9 → 4c1143b9 → 24f46337); FOLD BATCH 3 targets the LIVE tip, re-verified pre-fold.
+**⬛ THE COMPOSITE IS LIVE-ADVANCING via parallel owner sessions (2026-07-19) —
+dc0b6e2b → 29f7abc9 (THE SNAPSHOT-SHAPE BUG: the chronicle modal now reads the keys its
+records actually carry — a real display bug, ChroniclePanel.jsx + test only, verified-first,
+same defect class as the ladder faction-key bug).** IMPLICATION for the autonomous drive:
+the composite tip MOVES between dispatches — every new lane VERIFY-FIRST-gates on the live
+tip and bases off it (the D-2/D-3 lane correctly STOPPED on the dc0b6e2b→29f7abc9 mismatch,
+manager ruled Option B: rebase to 29f7abc9, benign zero-overlap). FOLD BATCH 3 must
+re-verify `git rev-parse claude/the-composite` immediately pre-fold and target whatever the
+live tip is then — never a cached hash. Parallel composite-hygiene fixes are WELCOME (they
+reduce the loop's display-defect surface); the manager reconciles them at fold.
+**⬛⭐⭐ OWNER STANDING ORDER (2026-07-19) — SCOPE CLOSED, DRIVE TO THE LOOP.**
+Verbatim: "make it all cohesive, coherent, and comprehensive as always. with this I'll
+stop adding. please continue building all the way to the survey." THE BUILD PHASE IS
+CLOSED — the scope freeze is now ABSOLUTE and owner-affirmed; zero further pre-loop scope;
+every future idea → the vNext ledger, no exceptions. The manager (and the Opus successor
+at THE FABLE BOUNDARY, under the continuity order) drives AUTONOMOUSLY to convergence, NO
+owner input required to reach the loop: finish Deep Couplings (D-0..D-7 incl. the bond +
+cross-settlement completion, once the architect's final integrated doc lands) → FOLD BATCH
+3 (all fold-ready lanes onto dc0b6e2b: roads · money · ruin-filter · completion waves ·
+deep-couplings; migration renumber; ceiling re-pins; war-file reconcile; de-eager reclaim
+→ budget green) → BUILD-COMPLETENESS GATE → THE ROUND 3 LOOP (coherence-mandated,
+pre-stocked with COHERENCE_MATRIX_R3) → convergence (zero must-fix + zero gate-passing
+gaps + A+). CLOSING STANDARD: the constitution + the coherence mandate + cohesive/coherent/
+comprehensive at EVERY fold and EVERY loop cycle. The owner tail (PUSH#1 → soak → tuning →
+ONE REGEN → walk → PUSH#2 → THE VERY END → PUSH#3) awaits at the end, owner-gated.
+**⬛⭐ OWNER RULING (2026-07-19, the FINAL clause) — CROSS-SETTLEMENT NPC DIPLOMACY:
+the two memory planes joined, influence-weighted, bidirectional.** NPC competition/goals/
+relationships EXTEND BETWEEN settlements — flavored BY and SHAPING the settlement pair,
+weighted by importanceWeight(npc) × faction-power-standing × the faction's politics
+ranking. DOWNWARD: the settlement rung biases cross-border NPC pair formation (hostile =
+suspicion, trade = easier bonds; roads contact events are the formation vector). UPWARD:
+the accumulated NPC-pair standing bleeds a bounded, thresholded, typed term (elite_feud /
+elite_amity, decaying) into the settlement pair via applyRelationshipPatch — two nobodies
+feuding = noise, no mark; the governing pillar feuding with the neighbor's chancellor = a
+diplomatic incident. Personal elite relationships become interstate relations (the
+pre-modern truth). ⚠ DOUBLE-COUNTING GUARD designed in: events mark the plane they occur
+on; the bleed carries only accumulated STANDING (state-driven, never event-re-counting).
+Cross-border D-4 contests inherit the same channel. Relayed to the architect mid-
+integration. THE SCOPE FREEZE NOW CLOSES HARD: the design is complete; every further idea
+→ the vNEXT ledger, no exceptions.
+**⬛⭐ OWNER RULING (2026-07-19) — POSITIVE-BOND MEMORY, SYMMETRIC + CONSEQUENTIAL
+(D-7 COMPLETION, in-scope under the freeze; the manager conceded his "grace note" framing
+was wrong — consequential bonds are structural, not decorative).** The relationship memory
+must remember loyalty/friendship AS SHARPLY as grudges, AND it must AFFECT things, flowing
+into everything: (1) SYMMETRIC BOND MEMORY — person↔person extends the ladder-grudge
+structure to carry positive bonds (same build/decay, no parallel graph; bonds form from
+cooperation/shared-cause/being-rescued-or-ransomed/being-supported); faction↔faction
+UN-GATES D-7c and makes it SYMMETRIC (resentment AND alliance/trust per pair), feeding +
+fed by the EXISTING coalition mechanics (peaceTerms coalition_betrayal/desertion, beliefMap
+governingCoalition — bonds bias alliance formation/durability; betrayal damages; standing
+together builds). (2) LINKED/SUPPORTIVE GOALS (owner verbatim) — a goal-DEPENDENCY: NPC A's
+support goal is tied to NPC B's primary; B fails ⇒ A's support goal fails too (cascading;
+bonds drive who supports whom — the positive mirror of tunnel-vision). (3) FLOW INTO
+EVERYTHING — bonds join a contest on your side (D-4); the D-5 third-party-ransom payer can
+be a FRIEND (bond → debt/gratitude vs rival → compromised); generosity biases + builds
+bonds. Constitution held (dark, dormancy, single-writer via applyRelationshipPatch, no-death
+— a broken bond/failed support is a standing cost never a fate). Relayed to the Deep
+Couplings architect as D-7's completion. THE FREEZE STILL HOLDS: this finishes an in-batch
+piece; anything BEYOND the symmetric memory weave → vNext.
+**⬛⭐⭐ OWNER RULING (2026-07-19, "i agree") — THE SCOPE FREEZE.** The Deep Couplings
+wave (D-0..D-7 as designed, incl. the post-fold D-5/D-6) is THE BATCH THAT CLOSES THE
+BUILD PHASE. From this ruling forward: NO new pre-loop feature scope. Every new idea —
+however excellent — lands in a vNEXT LEDGER (post-launch program intake) instead of the
+pre-loop queue: recorded with the same care (spec, foundations, rationale), built AFTER
+launch. The loop's convergence definition is now reachable because the target has stopped
+moving. EXCEPTIONS (narrow, by construction): defects found by the loop are FIXES not
+scope; coherence-matrix gate-passing candidates already enumerated are loop intake as
+ruled; owner-gated items already in the queue (buyback-hold confirm, faction-pair schema
+D-7c, plague-economy re-mint, port-severs-connectivity, ONE-REGEN flag membership) remain
+live decisions, not new scope. The already-recorded deferred seams + the six-item vNext
+seed (per-NPC interiority, second founder ring, per-route re-propagation, recall-npc,
+player-safe road-scene composer, campaign-share surface + secrets toggle) form the vNext
+ledger's opening entries. THE BUILD PHASE ENDS when Deep Couplings lands; then: fold
+batch 3 (onto dc0b6e2b) → build-completeness → THE ROUND 3 LOOP → convergence → the tail.
+**⬛ THE LADDER FACTION-KEY FIX IS FOLDED (2026-07-19, owner's separate session
+task_1375e56f) — COMPOSITE ADVANCED aad6265e → dc0b6e2b.** FOLD: claude/the-ladder @
+14e8a2fa (25749ae5, the ladder reads the canonical .faction field — the CONFIRMED live
+bug that collapsed every faction to fac.unknown) + dc0b6e2b (pin-hardening: closed the
+write-read loop, pinned precedence + the traditions cross-layer join). ⚠ COMPOSITE BASE
+MOVED: all pending fold-ready lanes (roads @ 21bba9a1, money @ d0eacd45, ruin-filter @
+4c1ccadc, deep-couplings building) were cut off aad6265e — FOLD BATCH 3 now targets
+dc0b6e2b (merges reconcile the 2-commit advance; re-run the full gate post-merge). D-4
+CONTESTED-GOALS GATE RESOLVED: the ladder faction-key is now correct in the composite.
+**⬛⭐ THE RUIN-FILTER STRUCTURAL LANE COMPLETE (2026-07-19, claude/ruin-filter @
+4c1ccadc, RF-a/b/c atop aad6265e — manager-verified).** The coherence-matrix ruin-class
+defect + point bugs, fixed STRUCTURALLY. RF-a: the shared accessor
+src/domain/institutions/institutionRoster.js (isLiveInstitution/liveInstitutions, pure,
+no store import) + the TRUE DENOMINATOR routed — a 3-batch census of ALL 70 src/domain
+.institutions readers found 12 unfiltered functional aggregators (the audit named 4):
+militaryStrength · religionLegitimacy · corruptionImpair · pestilence · stressorDynamics ·
+resourceDynamicsKernel · tradeFlow · discoverDependencyCandidates · healingLedger ·
+capacityModel · magicProfile · causalState — all through the chokepoint; + the deityTemper
+revival point bug. RF-b: corruptionWeb.foreignEndpointLive reads the REAL worldState.occupations
+(the dead occupiedBy field is gone) + the bug-encoding-pin correction. RF-c: the inventory
+ratchet ruinFilterRoster.walker (structural-prevention — 70 readers, 18 compliant, 52
+exempt-with-reason manifest; a new unfiltered reader fails until dispositioned).
+⭐ NO GOLDEN SHIFT PROVEN: all four parked manifests regenerated at BOTH base and branch —
+byte-identical (the corpus has no post-calamity/ruined scenarios); nothing re-minted. Probes
+11/11 (ruined institution contributes zero to each consumer, occupied⇒dead). domain-strict 0,
+typecheck 0, lint clean, build ✓. domainAnyCast ratcheted DOWN 2230→2229. ⚠ +116 EAGER BYTES
+(institutionRoster enters first-paint via eager derivation consumers) → the de-eager reclaim
+covers it at fold (owner-gated budget, reconciled there). ⛔OWNER-QUEUED DEFERRAL: should a
+calamity that razes a PORT sever sea-lane/teleport CONNECTIVITY? The lane's siege model is
+node-starvation not edge-severance — a genuine owner design call (seaLanes/teleportEdges/
+spatialDigest NOT touched). FOLD-READY. THE FREED SLOT → DEEP COUPLINGS D-0+D-1 dispatched
+(pre-fold foundation off aad6265e).
+**⬛⭐⭐ THE ROADS WAVE IS COMPLETE — R-1..R-8 (2026-07-19, claude/the-roads @ 21bba9a1,
+25 commits atop aad6265e — manager-verified lineage).** R-8 THE EMBASSY landed all four
+charges: PEACE EMBASSY (purpose 5 — a court at open war sues the enemy, bypassing the §4
+damper; road-parley + court-suit venues; insult/humility amplifier ∈[−1,+1] → RECEIVED /
+HOSTAGE / TURNED-HOME, never worse) · THIRD-PARTY RULE + INTERCEPTION RACE (a rumour-informed
+third power at war with the target becomes a hunter with a T1 hunt-amplifier — the rider
+races the news; NO new carrier, reads one rumour key) · AMNESTY (peace frees ALL mutual
+hostages both sides, pinned bidirectional) · ESCORT REFINEMENT (escort01 freezes
+militaryQuality01 × settlementWeight01 at dispatch) + PURPOSES 6 (dominion inspection) & 7
+(rumour verification — the RETURN writes the home rumour ledger, LAW 6 write g). WAR-SEAM
+WIRED (not deferred): a heard suit deposits to roadsEmbassies; settlementStrategy's
+sue_for_peace consumes it via a gated multiplier ×1-when-absent ⇒ byte-identical, war
+goldens never move. Receipts: build ✓ · eager delta 0 (embassy all engine/lazy) · dormancy
+golden all three green · §17 write-list clean (roads + roadsReturnedCaptives + roadsEmbassies
++ rumorLedgers only) · suite = 4 parked goldens (confirmed at base) + flakes + the census
+fix (21bba9a1). DECLARED one-time lit shift (R8-b): escorts scale DOWN for a weak seat →
+marginally more captures; dark byte-identical. ⚠ FOLD-COORDINATION: the settlementStrategy.js
+edit lives in a WAR-system file — the fold/master-merge reconciles it with any parallel war
+work. THE ROADS ARE WHOLE: travel · four threat classes · capture/ransom/conversion · party
+ops · overlay · road scene · embassies. Task #35 CLOSED. Roads is FOLD-READY (fold batch 3).
+Deep Couplings D-5/D-6 (third-party ransom, sea roads) now UNBLOCK at the roads fold.
+**⬛ HELD COMMIT RELEASED (2026-07-19): DESIGN_DEEP_COUPLINGS.md committed (1,155 lines).**
+The architect folded the relationship-memory cohesion in as §10.5 D-7 THE MEMORY WEAVE
+(read-the-substrate + wire-the-ghost-events + contested-loss-writes-a-mark, pre-fold;
+D-7c faction-pair schema ⛔OWNER-GATED). Full doc D-0..D-7, §1-§16. Manager-validated
+structurally complete (recon-hazards §16 last, per house style). The blank-turn hiccup
+cost nothing — all state intact.
+**⬛⭐ THE DEEP COUPLINGS DESIGN IS WRITTEN (2026-07-19) — docs/DESIGN_DEEP_COUPLINGS.md
+(1,040 lines, uncommitted in the main tree; COMMIT HELD until the architect folds in the
+relationship-memory cohesion addendum, then manager-validate + commit the complete doc).**
+All SEVEN pieces as slices D-0..D-6, house style (frozen laws · recon-receipt landscape ·
+dependency graph · lettered commits/gates/done-whens · the THREE-BODY RANSOM matrix with
+weight formulas · verification charter with 7 dormancy goldens + per-piece lit walkthroughs
++ roster-conservation asserts + anti-hum tempo bands · owner-gated open questions). SEVEN
+FLAGS: migrationRumorsEnabled · beliefAxesEnabled · npcCredibilityEnabled · intelTradeEnabled
+· contestedGoalsEnabled (PRE-FOLD, order D-0→D-4 off aad6265e) + thirdPartyRansomEnabled ·
+seaRoadsEnabled (POST-ROADS-FOLD, re-survey mandated — roads advanced 1e962d01→99084183
+mid-design). Boundary law amended for per-NPC credibility (statecraft §6 — a credibility
+hit resolves no fate) and the contested-goals loser (a standing hit, never a fate), roads
+§0.5 pattern. ⚠ CONFIRMED LIVE BUG SURFACED (fold-dependency): the ladder faction-key
+collapses every real faction to `fac.unknown` in the composite — the one-commit FIX SITS
+UNFOLDED at claude/the-ladder 14e8a2fa; contested-goals (D-4) is GATED on it. ACTION: fold
+batch 3 MUST fold claude/the-ladder (engine lift #3, dark) AND carry its faction-key fix,
+or D-4 is dead-on-arrival. Architect's top risks: deposit-and-consume shortcuts (the §11
+write-lists are the grep target) · generosityKernel at 800/800 lines (D-3 gift wiring
+rides the instrument-catalog data path net-zero) · post-fold anchor drift (re-grep-at-fold
+mandated; shapes cited over line numbers).
+**⬛⭐ RELATIONSHIP-MEMORY RECON — VERDICT: settlement plane ALREADY organic + cohesive
+(do NOT rebuild); 4 bounded cohesion gaps to close (2026-07-19, read-only @ aad6265e).**
+The owner's "evolve organically with memory, cohesive like everything else" is largely
+SATISFIED on the settlement↔settlement plane: worldState.relationshipStates keyed per
+graph-edge, RUNG (10 types) OVER continuous 0..1 scalars (trust/resentment/fear/…),
+PERSISTED decaying event memory (recentIncidents ×8 + history ×12), ONE writer
+(applyRelationshipPatch — every subsystem routes through it, no bypass), THREE tuned
+decay mechanisms (12%/tick mean-reversion · 4-tick incident half-life · the owner's D5
+lifespan bands fleeting/generational/long/undying). Solid foundation for tunnel-vision/
+contested-goals — REUSE, don't rebuild. FOUR GAPS (all closeable with existing machinery):
+(1) READ-SIDE: ~50 consumers branch on the coarse RUNG; only 3 read the incident memory
+(war-revanchism, generosity, peace-trigger) — the rich memory is largely write-only for
+sim behavior. (2) GHOST EVENTS: roads/route capture (spatialConsequenceKernel) and
+tradition imposition (traditions/relations → occupations, not relationshipStates) leave
+NO grievance mark. (3) FACTION plane has NO pairwise memory (solo scalars + static seeded
+rivals[] + a static archetype label that never accumulates/decays). (4) NPC pairwise
+memory is negative-only + siloed (rivalryTargets no-decay + ladder grudges 3yr-half-life,
+un-unified; no positive bonds; succession deliberately resets). RECORDED DEFERRAL: the
+incident half-life isn't yet D5-band-scaled (relationshipMemory.js:13-22, wiring ready).
+DISPOSITION relayed to the Deep Couplings architect: fold gaps 1+2 in as build slices
+(read the substrate via the warReasons.scoreGrievance/scoreRevanchism template; wire the
+ghost events through applyRelationshipPatch with typed incidents route_seized/rite_imposed
+— additive, reversible, existing machinery); gap 3 (faction-pair grievance ledger = NEW
+persisted schema) designed but ⛔OWNER-GATED sign-off; gap 4 optional per the
+state-never-fate doctrine (extend the ladder grudge, never a parallel graph).
+**⬛ OWNER REFINEMENT (2026-07-19) — CONTESTED GOALS × RELATIONS = TUNNEL VISION
+(relayed to the running architect).** NPC relationship history + personality modulate
+contest behavior: a strong grievance toward a specific rival (D5 relationship-memory +
+ladder rivalry state) or a prideful/vengeful/zealous dominant makes an NPC MORE
+tunnel-visioned against THAT rival — over-commits, accepts worse odds, discounts the
+risk-tolerance calculus (fixates on beating who they hate, not what's optimal); a
+pragmatic/neutral NPC stays rational. A personality-and-history-gated modifier on contest
+ENTRY + odds-weighting; couples contested-goals → relationship-memory + personality, no
+new memory machinery; no-death + single-writer intact. The point: the contestant reads as
+a PERSON (character-driven irrationality), not a rational optimizer.
+**⬛⭐ OWNER RULING (2026-07-19) — THE CONTESTED GOALS CLASS (7th Deep-Couplings
+piece, the largest — relayed to the running architect).** A NEW CLASS of NPC goals for
+POWER/POLITICS COMPETITION, ADDED to (never replacing) the solo npcLadderGoals: two NPCs
+CONTEST — CROSS-FACTION (same goal, or opposite ends/block) OR INTRA-FACTION (rises of
+power / curb a lower rival, extending THE LADDER). KNOWING vs UNKNOWING (the belief-axis
+earns its keep — knowing = aware of the rival & deliberately suppressing, the
+incumbent-vs-insurgent motive; unknowing = blind parallel contest; INFORMATION = contest
+AGENCY). RISK-TOLERANCE mechanic (roads-style, personality-derived). THE NOVELTY:
+resolution is a HEAD-TO-HEAD CONTEST against the peer (relative power/rank/influence/
+backing/risk + knowing-advantage), NOT the solo threshold roll — needs a shared contest
+seed + a single-writer 'contests' ledger keyed by the pair. NO-DEATH HOLDS (a contest
+resolves a GOAL not a fate; loser takes a standing hit → resentful future rival). PLAYER
+CHOICE (the point): SIDE / SUPPORT / IGNORE via new edit-dispatcher kinds (the roads
+party-op precedent) — a new political affordance for the DM. Designed in
+DESIGN_DEEP_COUPLINGS as its own slice cluster (sequences after the belief-axis);
+architect may recommend a dedicated follow-on if too large. HONESTY: the most
+player-facing addition yet AND another big pre-loop piece atop an already-large
+commission — extends the build phase; lands substantially under the Opus successor.
+**⬛⭐⭐ OWNER RULING (2026-07-19) — THE DEEP COUPLINGS WAVE: build ALL SIX
+new-machinery features, highest caliber, PRE-LOOP** ("I like all of them. build them
+thoroughly and to the highest caliber before the resurvey. build it all"). The six
+MISSING_NO_FOUNDATION seams from the coherence matrix are promoted from deferred to
+COMMISSIONED: (1) beliefs×migration demographic belief axis · (2) beliefs×traditions
+cultural belief axis · (3) informationStatecraft×ladder PER-NPC credibility · (4)
+generosity×roads THIRD-PARTY RANSOM + ⭐TWO OWNER REFINEMENTS: outcome = debt OR the
+freed captive becomes COMPROMISED for the payer (existing corruption foreign-patron
+shape, personality-weighted), AND the captive can REFUSE a ransom not from their own
+settlement (personality/circumstance; refusal keeps them captive — no-death intact) · (5)
+generosity×intel the SELL/GIFT lane (respect the design's OWN anti-'whisper-war-hum'
+caution — bounded/gated, never an autonomous spammer) · (6) naval×roads MARITIME journeys
+(sea leg-type + sea hazards: pirates/storms/blockades). DEPENDENCY REALITY (the architect
+resolves): #4 and #6 are ROADS-dependent → post-fold slices; #1/#2 want the migration→rumor
+carrier (a loop candidate) first — pull it forward or sequence. Constitution binds: dark
+flags + dormancy goldens + rng discipline + single-writer write-lists + hot-file ceilings +
+lit walkthroughs for every behavior-shift; the compromised-outcome rides the EXISTING web's
+own gates (zero new corruption machinery). FABLE ARCHITECT DISPATCHED → DESIGN_DEEP_COUPLINGS.md.
+HONESTY: largest post-roads commission; extends the pre-loop phase; #4/#6 land post-fold,
+much under the Opus successor per the continuity order.
+**⬛⭐ THE FRAUD-FIX LANE COMPLETE — the 3 P1 money bugs are DEAD (2026-07-19,
+claude/money-wave @ d0eacd45, FF-a..FF-d atop 9d971f5c; each a red-first pin proven to
+FAIL on the parent + PASS on the fix).** FF-a orphan-charge refund (a nominee's $99 for
+an aborted/expired case now refunds exactly once, idempotency-keyed, never touching the
+legitimate paying session or its replay). FF-b clawback-aborts-first (the §6.7 ordering
+that was never landed: a goodwill $99 refund now aborts+refunds the live case BEFORE the
+is_founder flip, so finalize refuses wrong_state — no more $99+$49.50 double-recovery).
+FF-c buyback dispute-safety (the owner-queued reconciliation, built: "any time"
+initiation preserved; the PAYOUT parks until original_purchase_at + buyback_payout_hold_days
+[dial, default 120] — the buy→buyback→chargeback +$25/cycle arbitrage is closed; owner
+confirms before founder_buyback goes live). FF-d P2 hardening (anomaly pre-check fails
+CLOSED on read error; the §7.3 supersession audit event fires with enum-valid actor
+'system'; hashToken FNV→SHA-256). Receipts: full deno edge 402/402 (webhook 94/94,
+founder-transfer 37/37) · vitest 13,747 P, the 17 reds ALL expected (4 parked goldens +
+the fold-owned doc/numbering cluster + the title= src-ratchet, git diff proves 0 src/0
+docs/0 migration touched) · zero eager delta. Exploit probes NOT committed (inverted to
+pins — ratified). THE MONEY WAVE IS NOW FRAUD-CLEAN AND FOLD-READY. The buyback-payout-hold
+reconciliation joins the OWNER QUEUE (confirm before founder_buyback lights).
+**⬛ OWNER RULING (2026-07-19) — PUSH #3, THE ACTIVATION PUSH ("the final push after
+the very end").** THE VERY END's batch-2 deploy is NOT the last git op: activation steps
+clear on EXTERNAL timelines (MX verification, legal sign-off, Stripe Connect approval)
+and each produces a POST-LAUNCH code change — canonically the support-email flip
+(src/copy/support.js, permitted only after the MX probe + a test mail round-trips) and
+any code gated on legal (transfer activation). PUSH #3 carries those to origin +
+redeploys; it MAY fire more than once (each cleared external gate = one activation push).
+Dashboard/env activations (system_config flags, keys, toggles per runbook §11) are NOT
+git and ride no push. ⛔owner, each on a 100%-green gate. The program is not truly closed
+until every owner-gated activation surface is live or a recorded deferral. Charter §5
+amended (this commit). FULL TAIL: convergence → PUSH#1 (dark, for soak) → soak → tuning →
+ONE REGEN → WALK → PUSH#2 (lit, re-minted) → THE VERY END (batch-2 deploy + merge) →
+PUSH#3 (activation, ×N as external gates clear).
+**⬛ OWNER RULING (2026-07-19) — TWO PUSHES, NOT ONE ("there has to be one more push
+after the one regen").** The tail has TWO pushes: PUSH #1 at loop convergence ships the
+DARK soak-ready composite to origin (so machine 2 pulls it for the soak — a
+backup/transfer push, not the deploy); THE ONE REGEN then MUTATES committed code (lights
+the DEFAULT_SIMULATION_RULES flags + re-mints every shifted golden) and the walk adds
+render-layer fix commits — NONE of which exist at PUSH #1 — so PUSH #2 (after regen + walk)
+carries the flag-lit, re-minted, walk-corrected state that THE VERY END's batch-2 LIT
+deploy actually ships. Skipping #2 would deploy stale pre-regen dark code. Both are ⛔owner;
+PUSH #2's full gate must be 100% green (the regen closes the parked-golden reds). Charter
+§5 tail amended (this commit). Final tail: convergence → PUSH#1 → soak → tuning → ONE
+REGEN → WALK → PUSH#2 → THE VERY END.
+**⬛⭐⭐ THE COHERENCE MATRIX IS PRE-COMPUTED (2026-07-19) — docs/COHERENCE_MATRIX_R3.md
+committed (this commit).** The 16-agent workflow (15 rows + synthesis, 3.3M subagent
+tokens) classified all 105 system-pairs from BOTH endpoints against aad6265e: COHERENT 74
+(~70% — the engine is a MATURE coupled web, not silos) · MISSING_WITH_FOUNDATION 17 ·
+INCOHERENT_DEFECT 8 (+1 intra-cluster = 9) · ORTHOGONAL 4 · MISSING_NO_FOUNDATION 2. KEY
+FINDING: 4 of 9 defects are ONE root cause — consumers never filter _worldPulseInactive/
+status that calamityKernel.ruin() sets, so destroyed buildings still function (flattened
+garrison fights · ruined cathedral backs faith · razed building gets reform rolls ·
+flattened healing house counts as plague care). 12 candidates gate IN (loop build queue,
+ranked: migration→rumor carrier + the traditions quartet lead) · 8 gate OUT (6 roads
+seams PENDING-FOLD incl. the owner's OWN beliefs×roads flagship seed → owner-queue HIGHEST
+post-fold; prosperity×calamity → owner-signed golden re-mint). 15 disagreements recorded —
+every ruin-class defect was calamity-flagged and counterpart-missed (the "owner can't see
+its consumers' staleness" pattern). MANAGER DECISION: the CONFIRMED DEFECTS are pre-staged
+NOW (not carried through the fold into the loop) — THE RUIN-FILTER STRUCTURAL LANE
+dispatched off aad6265e (the _worldPulseInactive filtered accessor + inventory ratchet
+closing the 4-defect class + the 2 dead-read point bugs in militaryStrength.js + the
+occupation×corruption dead-field check); the gated-IN FEATURES stay loop intake per the
+mandate (behavior-additive, the loop's honesty-row discipline). Declared behavior shift
+expected (destroyed things stop functioning) — the lane declares every shifted golden,
+does NOT re-mint (the ONE REGEN / fold reconciles). Matrix doc = the loop's pre-stocked
+intake; the successor executes cycle 1 from it.
+**⬛⭐⭐ ROADS FINAL COMPLETE — RS-a + R-5..R-7 + THE §19 CHARTER (2026-07-19,
+claude/the-roads @ a9d69975, 7 commits atop fa0bd2e7; 21 total on the branch).**
+STRICT-CLEAN: the 35 type-holes annotated JSDoc-only, byte-neutral, roads goldens
+byte-identical, strict 0/ceiling 0. R-5 THE PARTY'S HAND: ransom-npc/rescue-npc via the
+marker model (whereabouts.partyRelease, single-writer preserved) — ransom keeps captor
+prosperity + spares home both hits, rescue voids conversion + inflames via the existing
+recordPartyImpact; edit-kinds + fingerprint + commitPendingEdits round-trip pinned.
+R-6 THE TRAVELERS OVERLAY: lazy TravelersLayer (armies · road-borne migrants · envoys)
++ LayersPanel row/filter + pure geometry leaf + the shared-payload secrets probe.
+R-7 THE ROAD SCENE: pure composer (3 sections, DM-only ROADS_TRUTH, zero-write,
+inert-not-crash) + "Stage the Road" + metered AI-dressing; both surfaces + the overlay
+consult viewerSeesDmSecrets (fail-closed). §19 CHARTER EXECUTED (roadsCharter 10/10):
+the 12-YEAR LIT WALKTHROUGH (named-NPC id set conserved EVERY TICK — no-death as a
+per-tick invariant · ≤1 genesis journey/NPC-year · every purpose a registered kind ·
+captives released never removed · dark twin clean) · catch-up equivalence (no store
+cursor · zero RESIDUE_STRIP entries) · the adversarial audit (no-death source scan ·
+stale-intel receipt cites knownDangerAtDispatch=0 · double-jeopardy · DM-collision fuzz
+· ledger-shape fuzz). Receipts: build+typecheck 0 · closure 1,041,483 (+422 B cumulative,
+within the §16 600 B declared ceiling; the branch-base overage is the owner-gated
+roads-wave red) · suite reds = the 4 parked goldens + one isolation-verified flake ONLY.
+DURABLE FACT: new edit kinds flow into analyticsEvents.EVENTS via EDIT_KINDS → require
+`npm run build:edge-shared` (a regen step alongside operationRegistry/gen:compendium).
+FOLD POINTS: sessionGate composes at fold (money §7.2); ROADS_TRUTH needs the server
+citation allowlist (analystCore) at fold. THE FREED SLOT → R-8 THE EMBASSY EXTENSION
+DISPATCHED (§11b: peace embassies · interception race · dominion/rumor purposes · escort
+refinement) — the LAST roads build.
+**⬛⭐⭐ THE FABLE FRAUD-PASS — VERDICT: SAFE TO FOLD, THREE P1 MONEY BUGS CAUGHT
+(2026-07-19, claude/money-wave; FP-a committed @ 9d971f5c).** The mandatory §10
+adversarial pass executed all ten families + the four flagged suspects as real attacks.
+CLEAN under executed attack: families 3/4/5/6/9 (double-payout · chargeback matrices ·
+webhook replay · state-machine fuzz · auto-reload abuse) + suspect (a) the abort-token
+bypass (forged token 403s, bypass is abort-scoped). HARDENED FP-a: founder-transfer had
+NO config.toml entry → deploy.sh would ship it JWT-gated → the tokenless run_due
+due-runner would 401 in prod, SILENTLY KILLING finalize/payout/expiry/stewardship; pinned
+verify_jwt=false, verifyJwtPins 511 green (was red). THREE P1 FINDINGS (executed probes,
+none exploitable while dark, ALL launch-blockers for the transfer/buyback surfaces):
+FP-2 a nominee's $99 for an aborted/expired case is NEVER refunded (the promised
+refunds.create was never written) · FP-4 the §6.7 "abort the live case first" ordering
+was deferred to M-7 and NEVER landed → a goodwill $99 refund double-recovers ($99 back +
+$49.50 payout + seat still moves) · FP-3 the buyback has no eligibility hold/payout floor
+→ buy $99 → buyback $25 → chargeback $99 = +$25/cycle. P2s: anomaly pre-check fails OPEN
+(should hold) · missing session_superseded_during_transfer audit event · unauthenticated
+takeover-victim abort needs a valid JWT (suspect b — owner-gated new surface). P3: the
+abort-token hash is 32-bit FNV (unguessable case_id + rate limit make it non-exploitable;
+SHA-256 = cheap defense-in-depth). The exploit probes are PRESERVED (scratchpad, NOT
+committed — they pass by demonstrating the bug; each inverts to a red-first pin when
+fixed — good judgment, ratified). MANAGER RULING (no-compromises directive): fix all
+three P1s + the cheap P2 hardening AT THE SOURCE before the money branch folds — a
+FRAUD-FIX LANE dispatched on claude/money-wave. FP-3 RECONCILIATION (owner-queued, built
+dark, vetoable): gate the buyback PAYOUT RELEASE on dispute-safety (original_purchase_at
++ ~120d, mirroring LAW 8) while PRESERVING "any time" initiation — honors the stewardship
+"any time" ruling AND the anti-fraud requirement; the owner confirms before founder_buyback
+goes live (runbook step 6). Suspect (b) unauthenticated abort → owner queue.
+**⬛⭐⭐ THE MONEY WAVE IS FULLY IMPLEMENTED (2026-07-19, claude/money-wave @ 0c2244b8,
+34 commits atop aad6265e — manager-verified lineage).** Final slices landed: M-9e
+active-session surface (lazy fetchActiveSession + relocated sign-out-everywhere +
+new_device_signin seam consumer, inert · analytics enrich superseded_prior, zero new
+eager names) · M-9f the §10.7 fraud-charter session probes (two-device claim race ·
+replayed-JWT rejection · eviction-mid-transfer session-orthogonality) WITH A REAL
+SECURITY FIX — the landed M-6 gate ran BEFORE the abort handler, making the
+session-INDEPENDENT abort escape hatch unreachable under the exact eviction it exists
+for; a token-bearing abort now skips the session gate (token hash = authorization) ·
+M-10 stewardship COMPLETE with the $25 dial bound in (seat_buyback_cents read at claim
+by buyback AND abandonment credit; transfer payout stays price/2=$49.50; ladder
+transfer>buyback PINNED; migration 164; buyback via shared performPayout; dormancy 18mo/
+abandonment 5y/90d→escheat, any sign-in aborts) · CENSUS UPGRADE — request-layer
+single-session gate on all 8 credit-spending AI surfaces (sessionGateCensus 17/17,
+both-layers pin). WHOLE-WAVE RECEIPTS: deno edge 391/0 · lane-end pins 63/63 (lifecycle
+· transition matrix · stewardship · fraud-charter · census · double-release impossible
+both payout paths · credits-election grant-once both) · closure 1,041,856 (§16 ≤900 B
+eviction allowance untouched; the standing budget red is the composite breach de-eager
+cures at fold) · full-suite reds = 4 parked goldens + the fold-owned doc/contract
+cluster (164) + one proven flake, NONE from these slices. FLAGGED FOR THE FRAUD-PASS
+(vetoable, beyond brief): the abort-token gate bypass · a fully-unauthenticated
+takeover-victim abort · the §7.3 supersession-during-transfer audit event on gated 401 ·
+founder-transfer's config.toml verify_jwt pin (deploy-config, fold/owner). NOW: THE FABLE
+FRAUD-PASS (§10 charter — MANDATORY before the fold) DISPATCHED over the assembled wave.
+**⬛ OWNER REFINEMENT (2026-07-19, same hour) — THE INTERCEPTION RACE joins R-8:**
+a third party at war with the target, IF the news of the embassy reaches it through
+the existing rumor lattice (hop-delayed, fidelity-degraded — no new carrier), becomes
+an INFORMED HUNTER: its in-reach army columns gain a hunt amplifier on that mission's
+T1 roll, and interception kills the suit unheard (the third-party capture rule).
+The race is emergent: a short road can outrun the rumor; a distant suit gives it time;
+an unreliable-mode enemy may never learn. The intel layer now matters a third time
+(routing · verification · interception). Zero new machinery. DESIGN_THE_ROADS §11b
+amended (this commit); rides the queued R-8 dispatch.
+**⬛⭐ OWNER RULING (2026-07-19) — THE EMBASSY EXTENSION (roads R-8).** Peace
+embassies join the roads: wartime sue-for-peace journeys with TWO VENUES (road parley
+when the TARGET's own army intercepts · court suit at the enemy gate), the THIRD-PARTY
+RULE (other enemies don't negotiate — standard capture), THE INSULT/HUMILITY AMPLIFIER
+(envoy rank × faction power; lowest-of-lowest = insult, highest-of-highest = humility;
+the trade-off — better envoy = better peace + richer hostage prize — is emergent and
+deliberate), honor-bound failure (hostage or turned home, never worse — the no-death
+law in period costume), and THE PEACE AMNESTY (peace releases ALL hostages both sides
+hold, immediate escorted return — the existing early-release trigger made bilateral).
+Plus purposes 6/7: DOMINION INSPECTION (occupied/vassal holdings) and RUMOR
+VERIFICATION (travel to a trusted source; the return WRITES the home rumor ledger —
+the coherence-mandate seed archetype promoted to a first-class purpose; LAW 6 write
+list gains deposit (g)). Plus the ESCORT REFINEMENT: protection gains
+settlement power + influence terms alongside military quality and NPC rank.
+ARCHITECTURE PRESERVED: the embassy DEPOSITS, the peace machinery CONSUMES (the
+returned-captive precedent; roads never writes war state; recon-first on the
+war-termination seam). §4.3's no-wartime-envoys rule amended: embassies are the
+sanctioned wartime journey. DESIGN_THE_ROADS §11b + R-8 slice added (this commit);
+R-8 dispatches AFTER the running R-5..R-7 lane closes; the running lane gets a
+scope-freeze heads-up (finish as briefed; don't pin purpose-count exhaustiveness).
+**⬛⭐⭐ WAVE A CLUSTER 2 COMPLETE — COMPLETION WAVES A-D ARE ALL LANDED (2026-07-19,
+claude/wave-a2-sweep @ 3398ecea, WA2-a..f atop aad6265e — manager-verified lineage).**
+The flat-idiom conversion for src/components OUTSIDE new/: 186 files, 6 lettered
+commits, 5 sonnet de-round subagents for bulk mechanics + hand-work for every judgment
+call (z-axis shadows removed, off-palette washes → parchment + coloured left rule "the
+word carries the state", AI/founder violet → the slate channel). SCOPE COUNTS:
+borderRadius 641→95 · boxShadow 93→72 · rgba 209→167 · tinted 184→157. FULL-TREE NOW:
+360/77/192/187 vs ceilings 906/98/234/214 — all strictly below (the declared tolerance-0
+red; the fold sums BOTH Wave-A lanes and re-pins to measured). BONUS: the import-tidy
+(~120 orphaned theme imports) SHRANK the closure 1,040,998 → 1,040,781 (−217 B).
+Receipts: build green · eslint 0 (warnings 127→6, all pre-existing) · sharded suite
+13,594 P, reds = the declared kill-list 4 + the parked goldens 4 + the budget red ·
+render-pins + WCAG contrast green (deferrals held). Deferrals documented with pin
+names: caliber atoms → the caliber-primitives lane · home/ hero surfaces → a
+taste-gated pass (owner walk / loop intake) · pinned radii/avatar/theme sources.
+WAVES A-D STATUS: A (clusters 1+2) ✓ · B (remainder + finisher, closed) ✓ · C (five
+seams, closed) ✓ · D (perimeter, code-complete) ✓ — task #31 CLOSED. THE FREED SLOT →
+THE MEMORY CONSOLIDATION (both recent lanes flagged MEMORY.md nearing its read limit;
+a conservative merge-only pass dispatched: hazards never dropped, superseded chains
+merged, every pointer kept — the successor's bootstrap gets cleaner, not thinner).
+**⬛ OWNER AMENDMENT (2026-07-19, same day) — THE WALK MOVES AFTER THE ONE REGEN.**
+Final tail order: loop convergence → PUSH → SOAK → TUNING → ONE REGEN → THE WALK →
+THE VERY END. The owner now walks the FULLY-LIT world — every flag on, the product
+exactly as users will meet it — instead of the dark twin. Manager note ratifying the
+mechanics: walk fixes are render-layer (golden-neutral), so post-regen fixes never
+force a re-regen; they gate THE VERY END. Charter §5 amended (this commit).
+**⬛ OWNER RULING (2026-07-19) — THE MACHINE BEFORE THE MIRROR: soak + tuning
+re-sequenced BEFORE the finished-site walkthrough** ("the walkthrough is pure visual
+aesthetics but the soak and tuning are the core machine. Changing the visibility is
+always easier than the interconnected machine we have underneath"). Tail order now:
+loop convergence → PUSH → SOAK (machine 2, three levels + combinatorial matrix) →
+TUNING (same-seed honesty rows per tune) → THE WALK (visual rulings) → THE ONE REGEN
+(walk fixes fold into its final 100%-green gate) → THE VERY END. Charter §5 amended
+(this commit). Rationale ratified by the manager: walk feedback is render-layer by
+nature and cheap at any point; tuning feedback changes the interconnected machine and
+must precede the goldens' final re-record.
+**⬛⭐ OWNER RULING (2026-07-19) — THE COHERENCE MANDATE joins THE ROUND 3 LOOP
+(an upward amendment of the A+ standard, per the standing ratchet clause).** Verbatim
+intent: every system must be coherent with the intended/logical/intuitive nature of
+every other system, and where a coherence piece is MISSING between two subsystems whose
+FOUNDATION exists, the loop BUILDS it — completeness, not just correctness. OPERATIONALIZED
+with convergence guardrails: (1) THE PAIR MATRIX — cycle 1 enumerates the full pairwise
+system matrix ONCE (war · occupation · migration · trade/supply · rumor/intel · beliefs ·
+traditions · ladder · corruption · generosity · calamity/upswing · roads · politics/
+legitimacy · prosperity · religion — ~15 systems, ~105 pairs), classifying each pair:
+COHERENT / INCOHERENT (= defect, fix) / MISSING-WITH-FOUNDATION (= candidate) /
+MISSING-NO-FOUNDATION (deferred seam) / ORTHOGONAL (recorded). (2) THE FOUR GATES — a
+candidate BUILDS during the loop only if it: uses existing machinery on both sides (no
+new subsystems) · obeys the dark/dormancy constitution · has a soak-bandable effect ·
+is not owner-parked scope. Gate-failures → deferred seams or the owner queue, never
+silent. (3) CONVERGENCE REDEFINED: zero must-fix findings AND zero gate-passing
+coherence gaps unbuilt (built or explicitly deferred-with-rationale). Builds land in
+early cycles; later cycles verify only. (4) The soak's leave-one-out matrix covers every
+new coupling by construction. SEED EXAMPLE recorded for the matrix: journeys READ the
+rumor network for routing but a returning traveler does not WRITE the home settlement's
+rumor ledger about the visited place — foundation exists both sides; the class's
+archetype.
+**⬛ OWNER RULING (2026-07-19, "done!") — THE $25 DIAL:** the manager's
+recommendation adopted verbatim: the TRANSFER share stays $49.50 (price/2 — the even
+split is the anti-side-deal incentive, defended and ratified); the STANDING BUYBACK and
+the ABANDONMENT CLAIMABLE CREDIT become ONE shared config dial, system_config
+seat_buyback_cents default 2500 ($25). The incentive ladder is now strictly ordered:
+transfer to a successor $49.50 > hand back to the house $25 = the credit that waits for
+a vanished holder — every rung pushing seats toward living hands. DESIGN_MONEY_WAVE
+§6.8 + §12 terms amended (this commit); the running M-10 lane relayed mid-flight
+(amount from the dial, never hand-typed; the buyback credits-election grants
+round(dial/rate)). Nothing sold, nothing deployed — zero migration pain.
+**⬛⭐ ROADS R-1..R-4 CLOSED — THE CLOSER OVERTURNED THE FLAKE HYPOTHESIS (2026-07-19,
+claude/the-roads @ fa0bd2e7, RC-a..RC-f atop b059e808).** The predecessor's "23 failed
+files = load flakes" was WRONG for SIX: real, deterministic roads-introduced
+registration/hygiene defects, each isolated + base-compared, each FIXED: RC-a ledger-key
+registration (roads + roadsReturnedCaptives) · RC-b dead significance tier minor→notable
+· RC-c impactKind 'roads' registered (unvoiced, tradition precedent) · RC-d 3 any-holes
+retyped (JSDoc-only) · RC-e militaryStrength consumer allowlist · RC-f local clamp01 →
+kernel/math (baseline at ceiling 61/61). DEFINITIVE SHARDED RE-RUN: 13,742 tests, 4
+failures = EXACTLY the parked goldens (zero flakes at halved parallelism). All §19
+receipts EXECUTED and quoted: dormancy golden all three blocks · the 3-year lit run
+(purposes, refusal by risk-tolerance, clean returns, NO-DEATH) · capture→ransom→release
+with roster conservation · web-lit/web-dark conversion gating · the census ratchet ·
+closure 1,041,061 = base +63 B minifier noise, zero roads code eager (Law 11 holds).
+§17 write-list verified: only the two sanctioned §8 belts touch participation.
+⚠ CONFIRMED FOLD-BLOCKER (pre-existing at b059e808, closer-added zero): 35
+typecheck:domain:strict errors in the lane's own files (roadsKernel 30 · roads/state 4 ·
+pulseKernel 1) — JSDoc-erasable, byte-neutral, a distinct slice. FINAL ROADS DISPATCH
+LAUNCHED: the STRICT-CLEAN slice first (byte-neutrality proven by golden re-run), then
+R-5 party ops · R-6 travelers overlay · R-7 road scene + the §19 12-year lit walkthrough
+and adversarial self-audit. HOUSEKEEPING QUEUED: MEMORY.md ~20 KB nearing the 24 KB read
+limit — a consolidate-memory pass for the manager/successor (deliberately not rushed by
+a lane).
+**⬛⭐ MONEY WAVE RESUME LANDED — M-8 + M-6f + M-9d (2026-07-19, claude/money-wave @
+91a6b2df, 3 lettered commits atop 4dfa4506).** M-8 THE PAYOUT LIMB COMPLETE: the
+predecessor's in-flight WIP read-first and carried to done; REAL GAP FOUND AND FIXED —
+a 'held' connect_cash payout was never re-claimable (claim_due only took scheduled/
+stale-releasing) → reelect_transfer_payout RPC + reelect_payout action + held→scheduled
+re-arm in payout_onboarding ("the election is re-openable while parked" now TRUE);
+receipts: founder-transfer deno 21/21 (Connect-absent→held · credits grant-once
+round(4950/rate) · key-inert 503 · reelect) + founderTransferPayout.pglite 15/15
+(DOUBLE-RELEASE IMPOSSIBLE — atomic claim proven). M-6f: transfer panel (register idiom,
+lazy) + the FoundersPage promise line; closure 1,040,998 = base EXACT. M-9d: single-
+session client + THE LIFECYCLE PIN EXECUTED (real store, real persist middleware:
+persist key BYTE-IDENTICAL through eviction · no store-reset action fires · supersession
+dedupes first-wins); evictSession registered EXEMPT (ceiling 70→71, compendium
+regenerated). ⚠ MANAGER RULING (vetoable) ON THE M-9d EAGER ESCALATION: +850 B vs the
+wave's zero-eager LAW 4 — the store-integrated design is REQUIRED (synchronous dedupe
+or the pin is vacuous); LAW 4 AMENDED with a declared ≤900 B eviction-core allowance
+(this commit); the 1,040,000 hard budget needs NO raise (post-fold ≈ ~1,024k, ~16 KB
+headroom via de-eager). FINAL MONEY DISPATCH LAUNCHED: M-9e Active-session panel + seam
+email + analytics enrich · M-9f fraud-charter session probes · M-10 stewardship (sweep
+stubs exist; performPayout is the shared machinery) · the sessionGate census upgrade —
+then the WHOLE-WAVE lane end and the Fable fraud-pass.
+**⬛⭐ WAVE B FINISHER CLOSED (2026-07-19, claude/wave-b-finisher @ e7dc528b — WBF-a..d
++ closure fixes WBFC-a/b; VERDICT: defects found, fixed, every remaining red classified).**
+The closer proved the focused-gates blind spot RE-BIT TWICE (WBF-b tripped domainAnyCast/
+rawColor/title= ; WBF-d tripped verifyJwtPosture + the doc-freshness cluster — adding a
+migration or edge fn trips ~5 full-suite doc/contract tests no focused gate covers).
+FIXES: WBFC-a 0c190db0 (three {any[]} JSDoc holes retyped to real TraditionRec shapes —
+domainAnyCastBaseline 9/9, strict 0, runtime byte-identical) · WBFC-b e7dc528b
+(retention-warning-cron registered in the verifyJwtPosture INTENDED_ANON list — RECORDS
+the shipped x-cron-secret posture, the 115 idiom; MANAGER RATIFIED, owner-vetoable).
+RECONCILED: 7 load-flake files pass in isolation · 4 parked goldens fail identically at
+base · 2 migration-gap files declared/fold-owned · doc-freshness cluster (4 files)
+FOLD-OWNED (renumber-coupled; per-lane edits would be wrong at fold). MANAGER
+ADJUDICATIONS on the two governance ratchets (vetoable): rawColorLiteral +2 (the
+traditions category color follows the grandfathered CUSTOM_CATEGORIES hex pattern) →
+FOLD RE-PINS 1403→1405 declared; the deeper all-categories token migration → LOOP
+INTAKE. guidanceRegistry title= +6 → THE FOLD EXECUTES THE RECIPE (rename the local
+Band/Mechanism `title` prop → `heading`, behavior-preserving, census drops ~14; WBF-a's
+2 real tooltips → aria-label) — reduction over re-pin. RECEIPTS CONFIRMED:
+traditionsDormancyGolden GREEN (pure leaf untouched) · kill-list counts IDENTICAL at
+ceiling vs base · closure 1,041,007 = base+9 B (one minified alias-table binding in
+engine-core, no feature code eager — declared) · lane feature tests green · WBF-c
+TASTE-VETOABLE for the walk. DURABLE FACTS BANKED TO MEMORY: the full suite now exceeds
+the 10-min Bash cap (shard 1/2+2/2 foreground) · the title= census false-positives on
+component props named title. FREED SLOT → WAVE A CLUSTER 2 DISPATCHED
+(claude/wave-a2-sweep off aad6265e: the kill-list conversion beyond new/).
+**⬛ SESSION-LIMIT STRIKE #2 (2026-07-19, resets 3pm ET) — three lanes killed
+mid-work; EMPIRICAL SURVEY: near-zero loss (the lettered-commit discipline held).**
+money-wave @ 4dfa4506 (M-7b+c THE DUE-RUNNER landed; M-8 IN FLIGHT: dirty
+founder-transfer index.ts+test + untracked 163_seat_payout_release.sql — PRESERVED,
+resume reads the diff first) · the-roads @ b059e808 (R-1..R-4 ALL LANDED clean — the
+chokepoint widen + census ratchet, gauntlet matrix, ransom schedule, returned-captive
+channel; only lane-end verification owed; prior suite showed 23 failed FILES / 16 tests
+— load-flake hallmark, isolation re-runs ordered) · wave-b-finisher @ 74a4658d (WBF-a..d
+ALL LANDED clean — frozen-card export, traditions authoring + genesis view-consumption,
+HowToUse substance restore, retention-warning cron job; lane-end verification owed).
+⚠ MIGRATION 163 NOW DOUBLE-MINTED (finisher retention job vs money payout release) —
+joins the fold's contiguous-renumber protocol (156 ×2, 157-163 money, 162 wave-b, 163
+finisher; names-only referencing proven in every lane). THREE RESUME AGENTS DISPATCHED
+(money M-8-completion→M-6f→M-9d/e/f→M-10→request-layer upgrade · roads lane-end closer ·
+finisher lane-end closer); if the pool is still exhausted pre-reset, the 15-min
+heartbeat relaunches them post-3pm-ET.
+**⬛ MONEY WAVE DISPATCH 2 — THE TRANSFER FOUNDATION LANDED, CLEAN HANDOFF
+(2026-07-19, claude/money-wave @ 6204e30d, 10 commits atop d8c7bc8d; 25 total on the
+branch).** Landed with executed receipts: the 137 REWRITE (seat register v2 + clawback
+release) · 160 case machine (RLS-zero-policy ×3, live-case partial uniques, claim-once
+transitions incl. finalize/reverse, challenge codes w/ 067 lockout, transfer lock,
+master switch + dials in one config row) — TRANSITION MATRIX 14/14 (every legal once,
+every illegal refused) · webhook seat-claim + clawback release · THE SUBSCRIPTION-PAUSE
+ADDENDUM (pause = downgrade-equivalent via handle_premium_downgrade, resume restores;
+surveyor-discriminated; 7 pins) · 161 single-session (claim/is/assert, missing-row-
+allows pinned) + _shared/sessionGate + the PAID-SURFACE CENSUS 16/16 (request-layer OR
+DB-belt everywhere; spend_credits belt landed) · the founder-transfer edge function
+(master switch → sessionGate → fail-closed velocity → challenges → nominee flow →
+case-bound checkout w/ LAW-2 trust boundary → abort+refund) · recovery lockout
+fail-closed · THE MONEY CROSSING (payment→cooling + the FULL chargeback matrix:
+cooling→abort, finalized-pre-payout→reverse, post-payout→flag). Receipts: money-wave
+vitest 97/97 · full Deno edge 365/365 · zero src/ files touched ⇒ eager delta EXACTLY 0.
+Judgments ratified (vetoable in report): finalize/reverse DB bodies in 160 · edge-
+enforced initiate-confirm invariant · pause-reuses-downgrade · dials-in-config. ONE
+JUDGMENT ESCALATED BY THE MANAGER: the 8 credit-spending AI surfaces currently rely on
+the DB belt alone — dispatch 3 ORDERS full request-layer sessionGate wiring (§7.2
+instant-eviction caliber). DISPATCH 3 LAUNCHED (same branch): M-6f panel + promise line
+· M-7b finalize edge leg · M-7c due-runner cron · M-8 Connect limb + CREDITS ELECTION +
+abort-token issuance · M-9d/e/f eviction + THE LIFECYCLE PIN + session probes · M-10
+stewardship · the request-layer census completion. Fold note registered: 161 is the
+net-current spend_credits for the guard.
+**⬛⭐ WAVE B REMAINDER + DOWNGRADE FIXES COMPLETE (2026-07-19,
+claude/wave-b-remainder @ 80db0799, 11 commits atop aad6265e — manager-verified
+lineage).** Landed: THE DOOR DISCRIMINATOR #15 (door + AI-keys gate =
+has_surveyor_entitlement OR is_founder OR elevated; CARTOGRAPHER PREMIUM EXCLUDED per the
+owner ruling; +9 pins; zero eager via lazy per-chunk entitlement read — the store-thread
+alternative measured +321 eager B, vetoable) · THE P0 PURGE FIX (migration 162: the
+retention purge SPARES settlements holding a live dossier entitlement — purge-destroys-
+paid-rights is CURED; +6 pglite pins) · retention-warning template + notify helper ·
+viability adjudication (deliberate declared shift: excluded-category issues leave the web
+tab, matching the PDF) · WhatChangedPanel WIRED with an honesty guard · a11y theads ·
+?cat= deep-link · journey_stop analytics enrichment (zero new eager names) ·
+lastingEffects authored prose (deity golden proven mechanical-only — innocent) · the
+Surveyor-comment finalization · vendorManifest atomic-rename crash-safety (the flatqueue
+class CLOSED structurally). Receipts: 13,624 P / 9 reds all accounted (4 parked goldens +
+5 migration-numbering fold-artifacts of brief-mandated 162) · closure 1,040,998 = base
+EXACT. MANAGER ADJUDICATION on WB-g (deterministic-violet re-tones): item CLOSED AS
+MISCONCEIVED (vetoable) — C13 already converted the AI-register violets; the remaining
+violets are SEMANTIC (deity/arcane/account wash) and re-toning them would erase the
+AI-vs-arcane distinction the C13 honesty law protects. DEFERRALS → THE WAVE B FINISHER
+(dispatched, claude/wave-b-finisher off aad6265e): WB-h HowToUse substance restore into
+AboutManifesto (master d024286e recipe) · WB-j traditions authoring UI + genesis
+consumption (CustomContent at ceiling — extract first; dormancy golden preserved via
+consumer-side merge) · audit-2.2 inactive-card read-only Export · the scheduled
+retention-dispatch job (inert against the seam). SUBSCRIPTION-PAUSE → RELAYED to the
+money lane (they own stripe-webhook: add customer.subscription.updated pause handling).
+WB-k counterseal stays post-launch-owed (C15 §10, recipe recorded).
+**⬛⭐ MONEY WAVE DISPATCH 1 COMPLETE — M-1..M-4 (2026-07-19, claude/money-wave @
+d8c7bc8d, 15 commits atop aad6265e — manager-verified lineage).** THE SPINE: migration
+157 money_events (append-mostly, event_key redelivery shield, FK-independent of
+settlements) + webhook mirror map (never-throw, receipt capture) + audited backfill verb
+— replayed-session-mints-once and refund-status-flip both EXECUTED (stripe-webhook 56
+original pins untouched → 71/71). THE LEDGER UI: Past-purchases panel + fail-closed
+purchaseHistory lib, kill-list clean. AUTO-RELOAD: migration 158 (one-open-attempt
+partial-unique concurrency claim; FULLY-ATOMIC claim RPC pricing delta+cap inside one
+transaction — an improvement over the spec's two-step, ratified) + consent-gated saved
+card + the trigger wired into ALL 10 debit sites + webhook-confirmed grants (replay ×2 →
+one grant, executed) + account panel; creditFlow pins 9/9 untouched. SURVEYOR LIMB:
+migration 159 (grant/revoke RPCs + the byok entitlement-gate rider) + product branches +
+subscription.deleted surveyor-before-premium discrimination + THE ALLOWANCE PRICE-ID
+GATE (the load-bearing pin: a Surveyor invoice mints NO Cartographer allowance —
+EXECUTED) + admin verbs (the manual-SQL concierge gap is CLOSED). Receipts: full edge
+suite 333/0 · contracts 202/202 · vitest 13,648 P with 9 reds ALL ACCOUNTED (4 parked
+goldens + 5 fold-owned migration-numbering consequences of the 156 double-mint — the
+migrations themselves apply cleanly) · closure 1,040,998 = base EXACTLY (zero eager,
+proven). JUDGMENTS ratified by the manager (each vetoable in the report): start-once
+subscription mirroring · atomic claim pricing · component-local panels (§4.6 "or
+equivalent") · backfill receipt_url honest-NULL. FOLD DUTIES REGISTERED: renumber +
+ARCHITECTURE/DEPLOY doc-sync · wire deps.notify → notifyCreditLow at the seam ·
+check:edge is CI-only (environmental @types/node, reproduced on untouched files).
+DISPATCH 2 LAUNCHED on the same branch: M-5..M-10 per §9 ORDERING (seat register →
+session gate a/b/c → transfer choreography → money crossing → payout limb + election →
+session client + stewardship). The Fable fraud-pass follows assembly.
+**⬛⭐ WAVE C COMPLETE — THE FIVE DARK TRADITIONS SEAMS (2026-07-19,
+claude/wave-c-seams @ 295f27b8, WC-a..WC-e + typedef fix atop aad6265e —
+manager-verified lineage).** All five DESIGN_TRADITIONS §16 deferred seams built dark to
+completion, zero stale-brief hits (each verified genuinely absent at base): festival-week
+map dress (lantern dots on the high street during observance windows; townMap goldens
+byte-identical) · reframe 'tradition' act class (vocab pin 8→9 EXTENDED, real fact
+source over suppression rows) · culture-vector tradition kinship (Jaccard motif
+signature folding into migration + contraband distance) · fair trade-lane pulse (+1
+prosperity band-step, connective-route + GOOD-gated — trade proven derived-only by an
+adversarial map, prosperity is the only writable target) · cross-settlement pilgrimage
+(nearby attendance lifts a grand host observance ≤0.1 — closes the pilgrimage seam the
+ROADS observance purpose also feeds). Receipts: suite 13,636 P / 4 F = EXACTLY the parked
+goldens (re-confirmed red at base in a temp worktree) · dormancy 18/18 EXECUTED
+(traditions/reframe/spatial byte-identity) · closure byte-for-byte 1,040,998 = base
+(ZERO eager) · no migrations, no store actions, no DB. Lane wrote its own memory.
+THE FREED SLOT → THE ROADS IMPLEMENTATION DISPATCHED (claude/the-roads off aad6265e,
+Opus, slices R-1..R-4 per DESIGN_THE_ROADS §18: state+flag → missions+routing → the
+gauntlet → captivity; R-5..R-7 on manager checkpoint).
+**⬛⭐ THE ROADS DESIGN IS FROZEN (2026-07-19) — docs/DESIGN_THE_ROADS.md committed
+(this commit; ~856 lines).** Engine Lift #5 designed against aad6265e with every owner
+ruling encoded: §0 spec spine · §0.5 the boundary amendment (exact in-place header edits;
+roads = the SOLE sanctioned named-NPC motion layer; no-death law preserves the deeper
+carve) · 14 frozen laws · SEVEN slices R-1..R-7 (state+flag `roadsEnabled` → missions+
+known-picture routing → the gauntlet → captivity → the party's hand → the travelers
+overlay → the road scene). MANAGER VALIDATION EXECUTED: the decisive claim spot-checked
+CONFIRMED — hostage machinery ALREADY EXISTS (npc.stasis + isInStasis npc/npcOps.js:151 +
+the buildWorldSnapshot participation filter with same-reference dormancy + stasis-npc/
+return-npc already in COMMITTABLE_EDIT_KINDS) — the wave EXTENDS it, never forks.
+Design strengths ratified by the manager: travel-narrative/captivity-mechanical (law 5 —
+routine trips never churn courts) · conversion applied at RELEASE via a returned-captive
+channel the corruption web's OWN creation pass consumes (zero new machinery, scarcity
+preserved) · ransom's power cost EMERGENT through ladder standing decay (faction.power
+never written — it is derivation output) · silence-decays-toward-calm as the stale-intel
+mechanism · the §8 participation census with a `.npcs`-reader ratchet pin · §15 secrets:
+whereabouts EXCLUDED from publicSafe/server allowlists BY CONSTRUCTION + the
+viewerSeesDmSecrets fail-closed predicate (no campaign-share surface exists today —
+grep-confirmed; the toggle ships WITH that surface, Q9) · §19 charter (12-year lit
+walkthrough, roster conservation every tick, the secrets data-probe, catch-up
+equivalence). Two recon lenses (power/corruption) returned stubs and were RE-DERIVED by
+the architect. TEN open questions with recs + safe defaults — ⛔owner highlights: Q1 ONE
+REGEN membership (REC yes, DEFAULT dark) · Q2 the SimNpc.whereabouts shape (the wave's
+one schema change; free to reshape until the lane runs) · Q5 escort-drain REC AGAINST ·
+Q6 web-dark-no-conversion REC ratify · Q7 guest-right ON. Implementation lane
+(claude/the-roads, Opus, R-1..R-7) queues for the next free lane slot.
+**⬛⭐ THE PERIMETER FINISHER COMPLETE — WAVE D IS FULLY CODE-COMPLETE (2026-07-19,
+claude/wave-d-perimeter @ d93197da, WD-h..WD-k atop 4b65ab82 — manager-verified
+merge-base = composite tip).** All three finisher items at code-complete: (1) TURNSTILE
+wired end-to-end — one lazy flag-gated CaptchaGate mounted at AuthPanel + PurchaseModal
++ BuyThisDossier + SingleDossierSuccessPage, token threaded through auth + checkout,
+server verify FAIL-CLOSED in create-checkout (before any Stripe call) and
+verify-if-present in verify-single-dossier (never trap a paying customer — vetoable
+judgment), CSP pinned, flag-off byte-path PROVEN (no eager chunk carries the flag);
+activation = keys + dashboard only per PERIMETER_RUNBOOK. (2) AI LIMITER — migration
+156_ai_ip_token_bucket (written-not-deployed): cross-instance atomic smooth-refill
+bucket, FAIL-CLOSED per-IP burst gate (429 over / 503 infra — never silent-open) wired
+into ALL 11 AI functions after auth before spend; ⚠ deploy law: 156 pushes WITH/BEFORE
+the edge functions. (3) PIN BACKFILL — 5 pglite files / 37 tests locking the census's
+real-but-unpinned walls (save-limit, AI idempotency, rate-limiter RPCs, deny-all RLS,
+money check constraints). Receipts: deno 317/317 · vitest reds = exactly the 4 parked
+goldens + the sibling budget red · zero eager proven · strict/lint/typecheck 0.
+⚠ CONFIRMED AT FOLD: the 156 DOUBLE-MINT (perimeter token-bucket vs wave-e admin-errors)
+— fold batch 3 executes the contiguous renumber across ALL lanes (wave-e + perimeter +
+money 157-161 + wave-b 162+; names-not-numbers proven in every lane). THE FREED LANE →
+WAVE C DISPATCHED (claude/wave-c-seams off aad6265e, Opus): the five dark traditions
+seams, buildable-dark per THE_REMAINING_ARCHITECTURE.
+**⬛⭐ OWNER RULING (2026-07-19) — THE SECRETS SEAM (general law, relayed to the
+roads architect as a frozen law):** shared campaign links WITHOUT the "show DM secrets"
+toggle must NOT render DM-truth data — NPC movements/whereabouts, military piece
+positions/directions, road-scene briefs, "amongst other data." Binding requirements:
+redaction rides the SAME chokepoint as the certified covert-leak scrub precedent (one
+seam, not a parallel one); if no share-secrets toggle exists it is designed as ONE
+default-OFF toggle behind ONE predicate; FAIL CLOSED (ambiguous share context =
+redacted); render-layer law (sim state untouched); the DATA must not ship to the client
+in redacted views — not merely CSS-hidden (verification probe specified). GENERAL SCOPE
+NOTE for THE ROUND 3 LOOP: shared-surface secret redaction is hereby an audit dimension
+across ALL surfaces, not just roads — the loop verifies every shared/public projection
+against the DM-secret classification.
+**⬛ OWNER RULING (2026-07-19) — CAPTURE FORMULA REFINEMENT (relayed to the running
+architect):** the PROTECTION term gains the home settlement's MILITARY MIGHT — protection
+= importance-scaled escort × home military quality (read from existing garrison/force
+state; "better soldiers and equipment do make a difference"). Asymmetry preserved:
+armies/occupation partially bypass protection; escort quality bites hardest on
+embattled-road threats. Optional escort-cost deepening (garrison marginally weakened
+while its best guards travel) left to the architect as a vetoable judgment — adopted
+only if it composes with existing military accounting without new bookkeeping.
+**⬛ OWNER RULING (2026-07-19) — THE ROADS WAVE GROWS TWO SURFACES (relayed to the
+running architect mid-design):** (A) THE TRAVELERS OVERLAY — a realm-map TOGGLE LAYER
+(recon-confirmed absent today: transit data exists, no renderer) drawing in-transit
+armies (position from progress-fraction along trade edges, direction, banner, ETA),
+road-borne migrant masses (only when road-borne), and traveling named NPCs along the
+roads; follows the existing map-layer toggle precedent; purely derived read-only
+rendering, lazy, zero eager; the NPC sub-layer renders only when the roads flag lights
+(dormancy-trivial), the army/migration sub-layers read live systems as plain UI — the
+wave's only not-flag-gated deliverable. (B) THE ROAD SCENE — party-travel staging for
+the DM: origin→destination picked from the map, a DETERMINISTIC scene brief composed
+from truth-state along the route (armies + allegiance + direction · migrant columns
+WITH their causal reason · traveling NPCs + purpose + escort · embattled/bandit/monster
+conditions · destination siege/occupation/festival + guest-right timing), in the
+eventProse/brief-composer idioms, optional AI dressing through the EXISTING metered
+surfaces (sessionGate applies); the party is NEVER simulated — a lens + composer, no
+sim write. Both join the slice plan with their own commits/gates.
+**⬛⭐ ROADS RECON COMPLETE — THE PREMISE IS REFUTED; THE WAVE IS GREENFIELD
+(2026-07-19, 5-lens workflow, 5/5 agents, receipts in the run journal).** MANAGER
+CORRECTION, owned: the manager told the owner NPC travel exists ("the mover") from
+program memory — WRONG. Traditions T-2's "mover" is a per-settlement CULTURE kernel
+(traditionsKernel.js:53 — "AGGREGATE culture motion… never a named soul's fate");
+migrationKernel moves population COUNTS ("NAMED-NPC-SAFE", :18); armies march as force
+tokens (warDeployment); rumors travel hop-by-hop over trade edges (rumorNetwork:5);
+NPCs have NO location field at all (npcProfile / settlement.schema:195 — nested under
+their owning settlement); no travel layer, no travel flag, no travel rng stream exists.
+NAMED-NPC TRAVEL IS ABSENT — the Roads Wave builds it from scratch. WHAT THE SUBSTRATE
+OFFERS (rich): the trade-edge graph + hopWeeks timing, the occupation 5-rung ladder +
+war fronts + embattlement layer (threat classes), rumorNetwork/infoMode (the KNOWN
+picture for intel-based routing — exactly the design's knowledge-vs-truth seam), the
+corruption web's FOREIGN-PATRON precedent (cross-settlement NPC linkage — the
+conversion mechanism's template), ladder goals (purpose vocabulary to extend with
+location-bearing missions). BOUNDARY RECONCILIATION REQUIRED: two kernel headers carve
+named-NPC protection as design law — the roads design must define itself as the SOLE
+sanctioned named-NPC motion layer under the owner's explicit "build it all!" ruling,
+amend those boundary comments in place, and preserve the deeper law via the carved
+NO-DEATH rule (travel suspends fates, never resolves them). FABLE ROADS ARCHITECT
+DISPATCHED with the full journal receipts → docs/DESIGN_THE_ROADS.md.
+**⬛ OWNER RULING (2026-07-19) — THE FALLBACK ORDER: Supabase Pro + Stripe Connect
+both BUILD-WITH-FALLBACKS; launch blocks on neither.** DESIGN_MONEY_WAVE amended in
+place: (1) THE PAYOUT ELECTION — outgoing holders (transfers AND buybacks) elect
+'connect_cash' or 'account_credits' ($49.50 of AI credits via system_grant_credits,
+'seat_payout' delivery key, same due-runner claim-once); with Connect absent at launch
+the credits form is the immediate option and cash parks at 'held' (re-electable) —
+transfers can FULLY LIGHT on legal sign-off alone, which stays the un-fallback-able hard
+gate; credits form has zero money-transmission surface. (2) PRE-PRO POSTURE — M-9's
+session gate was already plan-independent (nothing degrades user-visibly); the runbook
+gains the pre-Pro checklist: custom SMTP for auth mail (free-tier sender rate limits —
+no Pro needed), manual backup cadence, uptime-probe-as-pause-keepalive. §12 terms payout
+line rewritten to the elected-form language for the legal consult.
+**⬛⭐ OWNER RULING (2026-07-19, "build it all!") — THE ROADS WAVE IS ORDERED.** The
+full journeys-with-stakes design builds, pre-loop, as a dark engine wave: mission-purposed
+NPC travel drawing purposes from EXISTING calendars/ledgers (traditions observances ·
+trade agreements · diplomatic repair · LADDER rank missions — travel as a ladder move
+with a location requirement) · traveler selection ladder-inverse (envoys from the middle
+ranks; the great travel only for tradition-critical/personal missions) · routing reads
+the faction's KNOWN intel picture while outcomes roll against TRUTH (information
+statecraft becomes materially consequential) · FOUR threat classes: occupation/army >
+siege-during-stay > embattled roads (bandits/monsters) > HOSTILE-RECEPTION arrival (the
+owner's mid-design addition: stale-intel dispatch into a hostile court, or mid-visit
+relations souring; host detention itself costs the detainer legitimacy — self-balancing;
+optional GUEST-RIGHT tradition coupling lowers detention odds during observances) ·
+capture = threat-strength × exposure ÷ protection(importance), armies partially bypass
+protection · HOSTAGE = stasis via ONE participation-gate chokepoint (ladder, faction
+contribution, tradition roles, seats all consult one predicate) · ransom paid over time
+commensurate with ladder-derived influence, debiting existing power/legitimacy machinery;
+party intervention via the existing edit dispatcher (COMMITTABLE_EDIT_KINDS rule) ·
+low personality-weighted COVERT compromised conversion via the existing corruption system
+(beneficiary = captor) · cadence/range governed (per-NPC yearly caps, neighbor radius,
+~1-week stays, return-home default; siege/all-roads-hostile extend) · CARVED LAW: NO
+death outcomes EVER — captivity always ends in release/rescue/conversion (the owner's
+never-resolve-a-named-fate scope boundary) · dark virtual flag + byte-identical dormancy
+goldens + own rng streams + catch-up-collapse stamping compliance + full persistence
+lifecycle trace on hostage state. SEQUENCE: the 5-lens recon workflow (running) → Fable
+architect → docs/DESIGN_THE_ROADS.md (Money-Wave treatment: frozen laws, slices, gates,
+receipts) → Opus implementation lanes → adversarial dormancy verify → fold. ⛔OWNER-
+QUEUED (not self-ruled): whether the roads flag JOINS the pre-signed ONE REGEN lit set —
+default built-dark with the lighting decision separate.
+**⬛⭐ WAVE E — LAUNCH OPS COMPLETE (2026-07-19, claude/wave-e-launch-ops @ f61f80a9,
+9 lettered commits atop aad6265e — manager-verified merge-base).** The brief proved ~70%
+STALE (error pipeline, sitemap/og machinery, refund policy page all pre-existed); the
+lane trusted the repo and GAP-FILLED: client error dedup+sampling · migration 156
+(grouped error-report reads + 8/hr alert threshold) · AdminClientErrorsPanel with
+always-on alert banner · new `health` edge fn + uptime probe script · provider-neutral
+mailAdapter (Resend default/Postmark, inert) + ops_error_alert template (authed-only) ·
+og-craft.png JS-default alignment · PurchaseModal policy links (+18 B eager, DECLARED,
+absorbed by the de-eager reclaim at fold) · 3 ops runbooks. All local gates 0; suite reds
+= the 4 parked goldens + load-flaky pglite (proven pass in isolation) + the PRE-EXISTING
+budget red (base proven over at 1,040,996 — note a 2 B measurement discrepancy vs WA1's
+1,040,998; immaterial under the 18,036 B reclaim; reconcile at fold). ⚠ FOLD HAZARDS
+REGISTERED: (1) MIGRATION 156 IS DOUBLE-MINTED — wave-e 156 AND perimeter ~156, with
+money-wave designed at 157-161: fold batch 3 renumbers contiguously (pure file renames —
+no code references numbers; RPC names are the interface); (2) config.toml +
+send-email/log-client-error additive edits overlap perimeter-owned files — reconcile at
+fold. OWNER/LEGAL QUEUE +1: accountFaq.refundWindow (en.js ~1402) asserts an UNENFORCED
+"7 days if not downloaded" refund rule contradicting actual clawback behavior — surfaced,
+not changed (paid-surface policy text). DE-EAGER CONFIRMED SHIPPED @ 2c4d599b (closure
+1,022,962; Fable adversarial verify owed at fold 3). FREED LANE → WAVE B REMAINDER +
+DOWNGRADE-AUDIT FIXES dispatched (claude/wave-b-remainder off aad6265e, Opus): the
+non-money Wave B items (Class-A ×11 · HowToUse restore · Surveyor-gate comment · #15
+door discriminator) + the audit's ordered fixes (P0 purge-spares-entitlements ·
+retention email ramp · pause handling; BYOK server gate stays money-wave M-4's).
+**⬛⭐ WA1 — THE DOSSIER TABS COMPLETE (2026-07-19, claude/wave-a-tabs @ 8fdd4b95,
+10 lettered commits atop aad6265e — manager-verified merge-base = composite tip).** The
+entire src/components/new/ dossier-tab family converted to the flat rule-framed
+deep-craft idiom: 29 files / 325 offender lines censused, 28 converted; kill-list counts
+driven strictly BELOW ceilings (borderRadius 906→646 · boxShadow 98→93 · rgba 234→209 ·
+tinted 214→188) — a DECLARED tolerance-0 red until the fold re-pins ceilings to measured.
+9 deferrals documented in-commit (5 cal-prim-gated Button suppressors · 2 magicSupplyBlue
+pinned tints · 2 design.js palette-source lines). Receipts: tsc 0 · domain:strict 0 ·
+build green · eager delta ZERO proven byte-identical vs base (1,040,998 both — the budget
+red stays sibling-owned) · full suite 11F/13,599P = 4 kill-list declared + 4 parked
+goldens (confirmed-at-base) + 3 flakes (proven pass in isolation). Judgments recorded
+vetoable: squared timeline dots (outline-ring technique, kill-list-neutral) · RumorsTab
+gold wash→border · badge ink stamps. New durable gotchas surfaced: rawColorLiteral
+counts whole-string hex only; swatch hex keys are UPPERCASE. FOLD BATCH 3 QUEUE GROWS:
+wave-a-tabs joins caliber ×3 + de-eager + perimeter(+finisher) + wave-e as they land.
+THE FREED LANE → MONEY WAVE IMPLEMENTATION DISPATCHED: claude/money-wave off aad6265e,
+Opus, slices M-1→M-4 (spine · ledger UI · auto-reload · surveyor limb) per
+DESIGN_MONEY_WAVE; M-5..M-10 follow on manager checkpoint.
+**⬛ OWNER RULING (2026-07-19, "do that!") — THE STEWARDSHIP RULING: the founder
+dormancy question is CLOSED against inactivity forfeiture.** The lifetime promise stays
+whole; reclamation is voluntary-first, abandonment-last: (1) STANDING BUYBACK $49.50 any
+time via the account page (seat returns to the pool, resellable at $99 — same net as a
+transfer, zero taking); (2) DORMANCY NUDGE at 18 months of no sign-in (both exits offered;
+last-activity read from M-9's session table — free); (3) ABANDONMENT only at 5 years
+unreachable + 90-day notice sequence any sign-in aborts → escheat + $49.50 held as
+CLAIMABLE CREDIT (never fired at a dead card; no unclaimed-property exposure). The
+owner's 2-year-forfeiture proposal was recommended against (breaks the "lifetime"
+positioning, collides with the estate amendment, refund rail structurally unreliable at
+2+ years) and the owner adopted the recommendation. DESIGN_MONEY_WAVE.md amended in
+place: §6.8 + slice M-10 + fraud probe 10 (buyback abuse) + §12 terms (buyback +
+abandonment clauses; license NEVER revoked for mere non-use) + §13 Q1 narrowed to
+deleted-account orphans only. Committed this commit.
+**⬛⭐ THE MONEY WAVE DESIGN IS FROZEN (2026-07-19) — docs/DESIGN_MONEY_WAVE.md
+committed (this commit).** The Fable architect lane delivered the full wave design per the
+two owner rulings (@ 15ba006c transfers-pre-launch + @ 4fd9a927 single session): NINE
+slices M-1..M-9 — money spine (money_events, 157) · purchase ledger UI · auto-reload
+reload-to-target (158) · Surveyor provisioning + the allowance price-id gate (159) · seat
+register (137 REWRITTEN IN PLACE — never applied, prod head 117; the ruling is its
+sign-off) · transfer choreography (160, five-state case machine, emailed challenge codes,
+recovery lockout, email abort tokens) · finalize/due-runner/clawback interplay · Connect
+payout limb (key-inert) · single session (161, last-login-wins, plan-independent gate,
+the eviction-preserves-work lifecycle pin). MANAGER SPOT-CHECK CONFIRMED the doc's
+load-bearing new hazard at the composite tip: grantMonthlyAllowanceIfNeeded
+(stripe-webhook index.ts:223-227) gates on billing_reason ONLY — a Surveyor subscription
+invoice WOULD mint the 30-credit Cartographer allowance; the M-4 price-id gate is a
+load-bearing new pin. HONEST NOTE bound into the design: no TOTP exists — "2FA" in the
+owner's model = password reauth + emailed challenge codes (067 idiom), TOTP adoption is
+§13 Q4. Top risks recorded: post-payout slow disputes = accepted $49.50 residual
+(owner/legal); Wave E mail seam + perimeter ~156 numbering are parallel-lane fold
+coordination points. Implementation lane (claude/money-wave off the composite, Opus)
+dispatches when a running lane frees. OPEN OWNER DECISION: the founder-promise dormancy
+question — 2-year inactivity forfeiture (owner-proposed) vs the recommended keep-lifetime
++ 5-year unreachable-abandonment clause + $49.50 standing buyback + dormancy nudge;
+§12/§13 amend on the ruling. Fraud-pass charter (§10) is MANDATORY before ROUND 3.
+**⬛ OWNER RULING (2026-07-19) — THE SOAK LADDER · THE COMBINATORIAL MANDATE · THE
+RESEQUENCING** (verbatim intent: "soak should have three levels: subcentury, century, and
+300 century"; "we need to tune things in every conceivable toggle turned on and off in
+combination with everything else… Everything on is very different compared with everything
+on vs one thing off and any combination beneath"; "the push and deploy comes before the
+soak because I will need to run that on a different computer"). Operationalized in
+SOAK_PLAN_R2 §5 (committed this date): three levels = CERT-30 / CENTURY-100 / CENTURY-300,
+all PASS criteria at every level · combinatorial matrix over every tick-path toggle (the
+eight regen flags + nine wave gates + tempo band; enumeration generated at harness build,
+never hand-typed) — FULL FACTORIAL at L1 where it fits the measured cost budget,
+ALL-ON + LEAVE-ONE-OUT + ONLY-ONE-ON + ALL-OFF at L2, ALL-ON + flagged combos at L3 ·
+display-only flags leave the factorial ONLY via executed same-seed byte-identity proof ·
+single-flag same-seed deltas = marginal-effect reads; super-additive anomalies = named
+tuning items · the soak executes on a SEPARATE machine cloned from the pushed branches,
+certs bound to a recorded SOAK-BASE SHA. MANAGER RECOMMENDATION (vetoable, recorded): the
+soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight flags unlit,
+the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
+carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
+THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐⭐ WAVE D — THE PERIMETER COMPLETE (2026-07-19, claude/wave-d-perimeter @
+4b65ab82, 7 commits) + THE FINISHER ORDERED.** WD-a crawler governance (the
+major AI-training/assistant crawler set blocked; funnel crawlers + unfurl bots
+deliberately preserved — the og-image botGuard trap AVOIDED; noai persisted
+through SPA mount via seo.js; X-Robots-Tag noai + TDM-Reservation headers) ·
+WD-b ⭐ A REAL DEFECT FIXED: mapBridge parent-inbound source check was
+FAIL-OPEN when contentWindow was momentarily null — now fail-closed both
+directions; vendored fork untouched · WD-c the ToS anti-automation draft ·
+WD-d bot-wave telemetry (_vband additive prop, no new names, zero eager,
+band-only privacy; ingest-side velocity windows) · WD-e the rate-limit audit
+TABLE + the clean gap hardened (customer-portal per-user 20/hr + per-IP 60/hr
+fail-closed) · WD-f the wall census (an earlier claim CORRECTED —
+verify-checkout WAS pinned; real-but-unpinned backfill list delivered:
+save-limit trigger · claim_ai_request · limiter RPCs · deny-all RLS · the
+CHECK class; the load-bearing ingest_check_rate pin ADDED 5/5) · WD-g the
+Turnstile seam + PERIMETER_RUNBOOK (honest-limits verbatim-in-spirit). Eager
++3 B net (signed). Suite 13,610 / the 4 parked + sibling budget red + 2
+isolation-cleared. ⬛ MANAGER VETO on its JUDGMENT #3: the seam stopped short
+of CODE-COMPLETE wiring (render sites + verifyTurnstile call-sites left as
+documented steps) — under build-completeness, activation = keys + dashboard
+ONLY. THE PERIMETER FINISHER DISPATCHES: (1) wire Turnstile render
+(AuthPanel/PurchaseModal) + server verify call-sites (create-checkout /
+verify-single-dossier) + CSP allowance, flag-gated, key-inert, pinned; (2)
+the AI limiter goes FAIL-CLOSED + gains the IP dimension (cost-exposure
+hardening inside the commission — the token-bucket migration WRITTEN-not-
+deployed); (3) the census pin backfill list.
+**⬛⭐⭐ THE CALIBER SWEEP COMPLETE (2026-07-19) — all five owner-ordered
+conversions landed at sample-true form.** The closer, caliber-primitives @
+41c2702f: CP-a Segmented → THE DIVIDER-STRIP (sample cited to the line —
+docs/samples .oc-segmented; gold btn-border hairline + dividers; active =
+FILL + WEIGHT 800/600 two-channel BY CONSTRUCTION, grayscale-legible; ARIA
+byte-identical; 14 importers censused — the brief's 12 was stale — 61 tests
+green; foundationPrimitives needed ZERO retargets, no shape pin existed) ·
+CP-b Card DE-SHADOW + THE FLAT PIN (cardElevation retargeted from the pre-law
+ELEV[1] to boxShadow==='' + the hairline edge, jsdom serialization
+probe-verified BEFORE writing assertions; 4 Card importers censused, none
+relied on lift). Eager +0 EXACT both commits. Fold-3 ceiling deltas: radii
+906→905 · shadows 98→96 (+ map's tinted 214→208 · rgba 234→232). 4 JUDGMENTs
+vetoable (gold vs parchment border · 800/600 vs the sample's constant 700 ·
+no Card overflow clip · transparent inactive cells). Full suite triaged to
+EXACTLY: 2 declared drops + the 4 parked + load flakes + the sibling budget
+red. THE SWEEP'S FIVE: strip ✓ · flat Card ✓ · stamp chips ✓ · token scrims ✓
+· the perf harness ✓ — every "safe" call from the compromise audit now stands
+at the objectively best form.
+**⬛⭐ CALIBER MAP LANE COMPLETE (2026-07-19, claude/caliber-map @ e2b00102, 2
+commits).** CM-a AdvanceReport source-stamp re-tone: the three tinted chip
+washes → rule-framed stamps on the ChronicleTab three-tone register (thread
+gold · decree oxblood+Landmark · crosslink sepia+GitBranch — word+glyph+tone
+tellability; all tones pre-pinned AA; SLATE fully retired from the surface);
+H2 slip + fire-once + receipts + handlers grep-verified byte-identical. CM-b
+scrim tokenization WITH a correct doomed-literal divergence: the brief's
+warmdim/ink-mix suggestion would have INVERTED the ground under dark-on-light
+copy — the scrims re-grounded byte-exact on the parchment token via color-mix
+instead (vetoable toward PARCH_100 alignment); the C2L unfurl seam + drag
+inset untouched. Deltas for FOLD 3: tinted 214→208 · rgba 234→232; zero eager
+(byte-identical verify:dist across both commits). Full suite: the 4 parked +
+declared reds only after isolation-clearing a 3-sibling contention storm.
+**⬛⭐ THE WELCOME SCRUB: PLAUSIBLE → CONFIRMED (2026-07-19, manager-executed
+on the composite @ aad6265e).** Playwright drove a real Chromium through the
+full served journey (the preview-pane scroll-hang bypassed via the perf lane's
+driver): ALL SIX LEGS load in sequence · currentTime ADVANCES with scroll
+within every leg (leg-1 0→0.55→3.26s · leg-3 0→1.58→4.28 · leg-6 2.55→4.99) ·
+each boundary mounts the next leg at 0 · STOPS show video opacity 0 over the
+crisp still (the stills-floor law live) with EDGE FADES mid-transition (op
+0.13/0.61 sampled) · the journey ends FROZEN at the metropolis still. Three
+screenshots delivered to the owner. The mechanics claim is now CONFIRMED;
+only the human-hand FEEL (pacing taste) remains the walk's.
+**⬛⭐ THE PERF HARNESS BUILT + BASELINED (2026-07-19, claude/caliber-perf @
+f5e142e8, 2 commits) — the program's most-deferred item retired.** ZERO new
+dependencies (JUDGMENT: reused the e2e suite's existing Playwright + Chromium
+over the pre-authorized puppeteer add — the shared node_modules untouched with
+six lanes live). CDP 4× CPU throttle + cache-disabled cold loads; 6 journeys ×
+3 cold samples + 1 warm, median+spread; `npm run perf:throttled`; baseline
+committed at scripts/perf/baselines/ (gitCommit aad6265e, chromium 148).
+FIRST REAL NUMBERS (throttled): pricing LCP 676ms · create 648 · home 904 ·
+library 1248 · realm 1760 · THE DOSSIER JOURNEY Ready ≈10s (generation is
+CPU-bound, barely cache-movable — the empirical justification for THEATER MODE,
+and a named loop-survey target for the perf dimension). FINDING (intake): no
+URL-addressable deterministic demo-dossier route exists (the lf-033 fixture is
+inline-only) — a ?demo= hook is the enabler if wanted, flagged not built.
+Smoke rot-guard 8 tests; eslint/build green. WAVE A CLUSTER 1 (the dossier
+tabs — the residual sweep's biggest block, ~190 offenders) DISPATCHES into the
+freed capacity — seven lanes territory now: six live + cal-prim's suite closing.
+**⬛ OWNER RULINGS ×2 (2026-07-19, "with the standard I have set, do your
+recommendation for Class C"):** (1) ⭐ HOWTOUSE RESOLVED — the About/Compendium
+pivot STRUCTURE stands; master's lost Philosophy + Under-the-Hood content is
+RESTORED INTO it (census #1 closes; becomes Wave B item #12 — a content
+re-graft into the current architecture, register-matched, nothing invented).
+(2) ⭐ THE SURVEYOR GATE IS FINAL — premium-as-Surveyor is the launch
+semantics; the isSurveyorTier chokepoint stands as built; the C13 finding
+CLOSES (Wave B adds the one-line comment finalization: the chokepoint header's
+"awaiting owner clarification" becomes "OWNER-RATIFIED FINAL 2026-07-19"); a
+distinct Surveyor tier constant is post-launch work if ever. Both leave the §9
+owner queue. Class C is now PURE TASTE (film set · treatment · default lens ·
+glyphs · prose register — complete code in every position, awaiting the walk).
+**⬛⭐⭐⭐ THE COMPOSITE IS ASSEMBLED (2026-07-19, claude/the-composite @
+aad6265e — the deep-wave fold COMPLETE).** Fold 3 illustrated-town @ 857c5274:
+3 conflicts resolved as pre-studied (SettlementDetail selectors moved INTO the
+extracted SettlementDossierHero beside their consumer — vetoable; SettlementCard
+worldState prop re-expressed in the ledger row; contrast.test pure union); one
+union red (the IT3-c season select's rounded corner) cured at aad6265e per the
+C5-a select precedent. THE FRESHNESS CURE @ 7009db36: edge-shared regenerated
+(aiGrounding 48 inputs hash 72ab2db8…; declared cause; green RE-EARNED on the
+committed bytes after the hook's fix pass) — freshness LEAVES the expected set
+after weeks. THE CLOSE, QUOTED: "Test Files 4 failed | 1353 passed · Tests 4
+failed | 13,606 passed | 13 skipped" — EXACTLY the 4 parked golden families,
+ZERO flakes; verify:dist 153/154 (sole red = the owner-ruled budget breach,
+curing in the de-eager lane); closure 1,040,998 byte-identical through folds
+3–5 (the no-deepening condition held exactly). ⭐ FOUR PARALLEL LANES
+DISPATCHED off aad6265e per the owner's parallel order: DE-EAGERING (Fable —
+the ordered architecture; every persisted path dispositioned with round-trip
+pins; acceptance = verify:dist green UNDER the untouched 1,040,000) · CALIBER-
+PRIMITIVES (Segmented divider-strip + Card de-shadow/pin retarget) · CALIBER-
+MAP (AdvanceReport stamp re-tone + scrim tokens; H2 fenced) · CALIBER-PERF
+(the throttled-vitals harness BUILT + baseline recorded; devDep pre-authorized
+dev-only). Kill-list law for the batch: no lane touches it; declared reds with
+exact deltas; FOLD BATCH 3 sets ceilings to measured. Then: fold batch 3 →
+budget re-tighten → THE ROUND 3 LOOP opens (standard audit first) → THE PUSH
+at convergence.
+**⬛ THE SECOND COMPROMISE SWEEP (2026-07-19, owner-prompted: "were there any
+other compromises?").** Full-program deferral audit, three classes: ⭐ CLASS A
+(scope-law refusals, orderable — now COMMITTED MANDATORY CYCLE-1 INTAKE, fixed
+regardless of survey findings): the 13 unauthored lastingEffects event types ·
+traditions genesis declared-over-derived consumption · the traditions manual
+authoring UI · the PDF counterseal structured-path refactor (de-listed from
+post-launch) · C13's deterministic-violet re-tone list (AutoSaveChip/
+VersionsTab/MagicTab/RealmStrip faith/Pantheon tiers/AdminTrends/QuickInspector)
+· the master "Viability →" button adjudication · WhatChangedPanel wire-or-
+remove · the ?cat= compendium deep-link · folder sub-table thead a11y · the
+journey_stop analytics enrichment · vendorManifestExactSet try/finally
+hardening. CLASS B (stage-blocked, ceilings named in the loop's grade tables):
+§16 lit-dependent traditions seams · game-feel (needs players) · soak-dependent
+tuning. CLASS C (owner-owned, untouched): the taste queue · HowToUse ·
+surveyor-tier semantics · the parked teaching tranche · the owner-authored
+post-launch list. Meta: every item was findable because NONE was silent — the
+deferral discipline held program-wide.
+**⬛ OWNER ORDER (2026-07-19) — THE CALIBER SWEEP: "go back and do all of those
+decisions to the objectively best architecture, quality and caliber."** The
+audit's five conversions execute NOW, not at cycle 1: (1) Segmented → the
+design sample's divider-strip recomposition (a11y two-channel active state
+preserved by construction, not by pill); (2) Card de-shadow per "print has no
+z-axis" WITH the cardElevation pin deliberately retargeted (named, justified —
+the pin pinned the pre-law state); (3) AdvanceReport tinted chips → source-
+stamp re-tone; (4) THE THROTTLED-PERF HARNESS BUILT (CPU-throttled TTI/INP
+measurement, scripted + recorded — no longer deferrable); (5) WorldMapStage
+scrims tokenized. Of the defended three: the rename is complete (nothing owed);
+H3 stays spec-compliant; the zero×4 residual sweep remains loop cycle-1 work
+(venue, not deferral). EXECUTION: a side-branch lane off the composite tip,
+parallel with the de-eagering lane (disjoint files), both folding back before
+the loop opens.
+**⬛ OWNER CLARIFICATION + THE COMPROMISE AUDIT (2026-07-19):** "undelayable"
+meant only that the push is NOT deferred until after the resurvey loop — never
+that it outranks better architecture (the manager's over-reading produced the
+re-pin recommendation, vetoed). Owner asked: were other such compromises made?
+AUDIT ANSWER — five same-shape calls found, ALL recorded-not-silent, now
+CONVERTED from deferrals to COMMITTED LOOP INTAKE: Segmented pill→divider-strip
+recomposition · Card de-shadow + cardElevation pin retarget · AdvanceReport
+tinted-chip re-tone · the throttled TTI/INP perf harness BUILD (no longer a
+named deferral) · WorldMapStage scrim tokenization. Defended as correct (veto
+with context): zero×4→loop (venue routing, not declination) · the partial
+rename (fold-correctness, COMPLETED at fold 2) · H3 session-scoped fire-once
+(the H-spec itself barred new persisted state). PRECEDENT NOTED: "safe reclaim
+exhausted"-class labels are re-examined by the loop's standard audit — gated-
+but-better lanes are orderable, per the de-eager ruling.
+**⬛⭐⭐ OWNER RULING (2026-07-19) — "then de-eager": THE DE-EAGERING LANE IS
+ORDERED; the 998-byte breach cures by ARCHITECTURE, not by re-pin.** The owner
+chose the objectively-better path over the manager's bridge recommendation
+(recommendation recorded, vetoed — the system working as designed) and thereby
+waived the push-first sequencing: the push now fires AFTER the de-eagering
+lands and verify:dist goes green UNDER the untouched 1,040,000 budget. THE
+LANE (Fable, escalation clause — persistence blast radius): convert the
+custom-content registry/schema out of the eager closure (sync→async persisted-
+path conversion, ~41KB reclaim per the gated memory); EVERY read path
+dispositioned — slice add/update dispatch · AI accept→mint · store hydration
+from persisted saves · canonize · import/export · the server twin's
+vocab.buckets wall (must not desync) · gen:compendium-data · the
+TRADITION_*_KEYS drift-guard architecture (survives or re-homes, never
+silently dropped); dormancy goldens byte-identical; generation same-seed
+untouched (validation is write-side — verify, don't assume). AFTER LANDING:
+the manager RE-TIGHTENS the budget to the new measured floor (deliberate
+shrink, declared). Dispatch waits on the assembly's fold-3+cure completion
+(same worktree). Sequence: assembly close → de-eager lane → re-tighten →
+THE PUSH → walk → THE LOOP.
+**⬛⭐⭐ THE COMPOSITE ASSEMBLY — folds 1–2 VERIFIED, STOPPED-BY-CONSTITUTION at
+b4e0f017 (2026-07-19); ⛔ THE 998-BYTE BUDGET DECISION QUEUED (blocks the
+push).** Step 0: R2-i swept into deep-craft @ 7fe77a85 (NUL-clean incl.
+escape-spelling scan; the parked generator golden's key set proven UNCHANGED by
+temp-worktree basecheck — 187/187 drifted before AND after; content extension
+rides inside, not re-recorded). Fold 1 deep-craft @ f8593514: ancestor merge,
+zero conflicts, 287 files; suite EXACTLY the expected 5, zero flakes. Fold 2
+traditions @ 6f5d29ae + b4e0f017: 3 conflicts resolved both-intents (the
+designed tab seam WIRED — NPC-first order kept, single entry, seam comment
+updated · RealmStrip SLATE_DEEP + almanac · SettlementPDF both consts + 07B
+chapter); 2 union reds cured (TraditionsTab → flat plates, kill-list 906/214;
+walker census 486→485, the motif stamp's redundant tooltip struck); suite at
+the stop-point 13,476 green / EXACTLY the expected 5, zero flakes. ⛔ THE
+BREACH: 1,040,998 vs 1,040,000 — probe forensics DISPROVED the lazy-leak
+hypothesis (TraditionsTab/almanac/pulseKernel/prose all 0-byte innocent); the
+998 = honest registration (schema+keys ≈793 engine-core; slice/vocab/
+registration ≈375 index); each lane green alone, the sum breaches; the only
+reduction = the OWNER-GATED de-eagering. Budget test UNTOUCHED; memory
+composite-budget-breach-998b.md. QUEUED §9 with the manager recommendation:
+re-pin AT the measured 1,040,998 (zero-slack raise). MEANWHILE fold 3 +
+freshness cure PROCEED (zero-eager proven, independent of the budget) so the
+composite is one owner signature from push.
+**⬛⭐⭐ FOLD BATCH 2 COMPLETE (2026-07-19, deep-craft @ 76cccbf2 — Fable, six
+folds + the rename completion).** Per-fold NUL-clean; conflicts = only the two
+pre-identified (CustomContent leaf: the branch's consolidation TAKEN with
+HEAD's C13-b slate hex carried into the leaf — a silent violet resurrection
+prevented; CampaignFolder PROSE_MAX: union via the sibling UnassignedLedger
+idiom). Ceiling reconciliations measured per fold: FINAL FOUR = radii 906 ·
+shadows 98 · rgba 234 · tinted 214; rawColor 1403 (adversarially exact-pinned).
+THE RENAME COMPLETION (76cccbf2, 45 files): theme/tokens exports
+VIOLET*→SLATE* with NO aliases; retired swatch keys → honest slate hex across
+ALL 19 call sites (the brief's parenthetical undercounted — 14 files);
+tintedCallouts pattern drops VIOLET_BG, count law intact at 214; TINT_VIOLET
+stat-tile pair correctly excluded (genuinely violet, different register).
+EAGER TO THE BYTE: 1,039,830 / 1,040,000 (c16's +199 exact; rename −6;
+headroom 170 B). Final suite: 13,326 green / EXACTLY the 5 parked. ⚠ CAUGHT:
+the owner's chip session landed R2-i @ 27eae9e9 (noble→government bucket,
+census #22 follow-up, declared golden extension 155/187) on restoration-chrome
+AFTER the fold took aaeec163 — R2-i rides the composite assembly.
+**⬛ JUDGMENT (manager, vetoable) — PHASE D DISPOSITION:** items 2/6/8 CLOSED
+(census · eager report byte-exact · restoration ledger zero-PENDING); item 1's
+literal ZERO×4 TRANSFERS INTO THE ROUND 3 LOOP (the burn-down proved the
+residual is a ~250-file multi-wave program; the loop's A+ convergence + the
+shrink-only ratchets carry it; the owner's loop ruling supersedes the original
+sequencing); items 3/4/5 (contrast walk · seam walk · throttled perf) ride the
+loop's cycle-1 survey + the owner walk; the perf e2e harness stays a named
+deferral. Say "veto" to force the residual sweep BEFORE the composite instead.
+⭐ THE COMPOSITE ASSEMBLY DISPATCHES (Fable): R2-i → deep-craft, then
+deep-craft + traditions @ 80b8ad71 + illustrated-town @ d16d348e →
+claude/the-composite, WITH the aiGrounding freshness CURE (build:edge-shared,
+declared) — expected end-state suite: EXACTLY THE 4 PARKED GOLDEN FAMILIES.
+Then THE PUSH (hard, undelayable) → the walk → THE LOOP.
+**⬛⭐⭐ OWNER RULING (2026-07-19 morning) — THE ROUND 3 LOOP (supersedes the
+single-pass ROUND 3):** verbatim intent recorded in THE_REMAINING_ARCHITECTURE
+§4 (rewritten this date). The shape: after THE COMPOSITE assembles, run
+complete-resurvey → adversarially-verified fixes in REPEATED CYCLES until
+materially no fixes remain and every achievable dimension grades A+ — never
+stopping to wait for a push; the owner walk runs alongside non-blocking; owner
+gates survive every cycle; unreachable-at-this-stage A+ ceilings are named,
+never silently regraded. MANAGER'S RECORDED ASSUMPTIONS (each vetoable): (1)
+taste/owner-queue items stay OUT of the loop's fix authority (they await the
+walk); (2) A+ grading uses the established standards (A_PLUS_ROADMAP + the
+depth standard's five columns + THE EIGHT CROWNS); (3) the loop works within
+dormancy discipline — golden regens remain pre-signed at THE ONE REGEN only.
+Convergence = one clean cycle + one confirming cycle, both zero must-fix and
+zero achievable grade gaps.
+**⬛⭐ THE BURN-DOWN COMPLETE (2026-07-19, deep-craft @ 78f51611, 7 commits).**
+THE FINAL FOUR: borderRadius 1043→982 · boxShadow 112→108 · rgba 264→260 ·
+tinted 235→232 (every drop same-commit, tolerance-0) + rawColor BUDGET locked
+at the 1443 measured floor (zero slack — fold-2 re-triages if incoming
+branches add literals). C5-a complete across all six realm surfaces (rail/
+inspector/layers/pulse/report/stage → flat plates + ClerkNotes; H2 beats
+PRESERVED with grep evidence — PlacementsLayer never touched) · C3-e chips
+flat · residual demo (InstitutionalGrid −14). THE RENAME: partial by PROOF —
+9 local-const leaf files renamed (kill-list pattern gained SLATE_BG, count
+preserved); the remainder (6 off-limits files · theme/tokens exports · swatch
+keys · pattern cleanup) is BLOCKED by unfolded branches and lands as FOLD
+BATCH 2's closing sweep (recipe ledgered in the lane report); rename eager
+delta 0 BY CONSTRUCTION (PLAUSIBLE — confirmed at the fold's measurement).
+REMAINING-OFFENDER MAP delivered: 857 clear radii across ~250 files (top
+targets named — EconomicsTab 35, LandingBelowFold, SummaryTab 27…) + 41
+off-limits files quarantined for their folds — the residual walk to literal
+0×4 is a MULTI-WAVE program handed to Phase D sequencing, not a residual
+pass. Full suite EXACTLY the 5, zero timeouts. ⭐ FOLD BATCH 2 DISPATCHES
+(Fable): six branches in order pages → resto2 → resto3 → c14c15 → c16 →
+resto1, ceilings set to measured counts per fold, pre-ruled reconciliations
+(TableView=lamp tones · CampaignFolder=union · App.jsx regions), the rename
+COMPLETION as the batch's final commit, eager re-measured (+199 c16 signed).
+**⬛⭐ RESTORATION SWEEP 3 COMPLETE (2026-07-19, claude/restoration-compendium @
+f9b07930, 8 commits) — WITH THIS, 22 OF THE CENSUS'S 23 OWED ROWS ARE CLOSED
+(#1 HowToUse = the owner's direction call).** #9 CompendiumPanel identity +
+ARIA tablist + mobile paths · #10 GalleryPage shared identity (GalleryList's
+duplicate header removed — the lift's other half, JUDGMENT) · #11 CatalogTabs
+hierarchy + dead-first-click + honest guards + gold-as-text AA · #12
+CustomContent authoring affordances (org only, colors untouched; the two
+orphaned W-C4 leaves REVIVED to fit the 600 ratchet) · #13 GalleryDetail
+deferral + forge CTA — realmArcSummary VERDICT: RELOCATED to the Campaigns tab
+(producer chain alive), correctly NOT restored · #14 GallerySidebar BottomSheet
++ chip a11y · #8 criminal_network restored + palette re-pointed at relColor
+(the false removal-comment corrected; war_front deliberately kept #b91c1c —
+the regional-agreement pin requires it) · #17 CampaignFolder minors,
+FOLD-FLAGGED vs C3's edits (independent JSX regions, manual union expected
+clean). 7 new pin files/suites. Kill-list DECREASED to 980/103/239/217
+(declared red, counts only down). 5 non-lane reds proven pre-existing at base
+via temp worktree. Deferrals: peak-end forge CTA · ?cat= deep-link · #17
+bespoke pin — all reasoned. FOLD-READY. Only THE BURN-DOWN remains before
+FOLD BATCH 2 (actively progressing: partial rename on leaf files landed).
+**⬛⭐ RESTORATION SWEEP 2 COMPLETE (2026-07-19, claude/restoration-chrome @
+aaeec163, 8 commits).** All of census #4–7, #15–16, #22–23 restored, grafted
+onto the pages materials (never wholesale-reverted). WIP VERDICT: the dead
+agent's PrivacySettings diff was COHERENT-PARTIAL — COMPLETED per its own note
+(consent default untouched, owner policy). Highlights: #16 THE ANON BUY-WALL
+BUG FIXED with the mandatory routing pin (gold signup ⇒ setAuthModalOpen,
+NEVER the purchase modal) — required the store-lift + operationRegistry
+registration + EXEMPT_CEILING 69→70 + the compendium-data regen (⭐ NEW HAZARD
+memory'd: store actions have a DERIVED lifecycle path through the public
+Compendium artifact; compendiumDataFreshness catches skips) · #15 seat meter +
+checkout retry (square-cut, rgba-neutral via GOLD_WASH DRY) · #7 the way back
+(wordmark home link, Page frame, 44px, BORDER_STRONG) · #6 the free-tier
+upgrade CTA + P8 two-primary demotion · #22 lastingEffects to master's 16
+templates — DECLARED same-seed generator shift (all four parked goldens
+confirmed red at base, none re-recorded) · #23 all SIX cross-tier splits
+normalized (census said 4; the ported true-zero guard requires 6) + master's
+guard test live again. Kill-list held 981/103/243/217 (declared branch red,
+counts only down). Deferrals: the noble-bucket restructure (chip task_7308e7ad)
+· 13 current-authored event types have no master lastingEffects (content
+invention ≠ restoration). Full suite 13,219 / EXACTLY the 7 expected on this
+lineage. FOLD-READY. Burn-down nudged (rename + final-four still owed).
+**⬛⭐ RESTORATION SWEEP 1 COMPLETE (2026-07-19, claude/restoration-pdf @
+2e4f3282, 4 commits).** All of census §1 #18–21 restored: R1-a #20 causal-detail
+threading (inherited, re-verified) · cd4b7f40 R1-b #21 viewModel (entity-anchor
+ids · lineage · magicProfile · the shared collectPlotHooks aggregator; every
+program addition kept — pdf-3 byDesignContradictions untouched) · 29d60afd R1-c
+#18+#19 (RULE & SUCCESSION + OCCUPIED banner + PartyRef anchors; MAGIC LEGALITY
+gated liveWorld&&exists) · 2e4f3282 R1-d control-byte corruption fix (the F24
+class, caught by controlBytes.test + byte-scan). WIP VERDICT: the dead agent's
+inline WIP breached the viewModel ceiling by 24 lines — REVERTED that one file,
+REDONE cleanly. ⭐ THE CEILING OUTCOME BEAT THE PLAN: no leaf needed — the
+collectPlotHooks restoration is a net reduction; viewModel lands at 1002
+effective (master's own structure ≈1000) and the size baseline RATCHETS DOWN
+1043→1002. TWO CENSUS CLAIMS CORRECTED on inspection: relationshipsHeadline
+never existed (the real work = neighbour anchor ids); the goldenViewModel
+diff is NOT extended (it snapshots the canon deriveDossierViewModel, not
+buildViewModel) — nothing re-recorded, the parked diff stays defense 63→65 +
+institutions 54→55. 14 new element-tree pins. Full suite EXACTLY the 5 after
+isolation-clearing 7 contention flakes. Zero deferrals. FOLD-READY.
+**⚠ SESSION-LIMIT STRIKE + RELAUNCH (2026-07-19 ~04:50 EDT).** All four running
+lanes (burn-down · resto1 · resto2 · resto3) terminated early on the API session
+limit (reset 04:50). Damage: burn-down + resto3 died CLEAN (no commits/WIP lost);
+resto1 had landed R1-a (#20 causal-detail @ 8c387e30) with uncommitted viewModel
+WIP (mid-#21 magicProfile); resto2 had landed R2-a (#2+#3 admin chrome @
+e7234e93) with uncommitted PrivacySettings WIP (mid-#4 bare-prop). RECOVERY per
+the hazard protocol: four FRESH agents relaunched into the SAME worktrees at
+05:02 — dirty-file law: read the full diff, complete-if-coherent else revert
+that one file and redo; never stash, discard nothing else. A surviving recon
+subagent's idiom map (clerk-note/plate/rubric-token/rename-mechanism digest)
+was forwarded into the burn-down relaunch to skip re-recon. Four queued
+heartbeats coalesced into the relaunch action.
+**⬛⭐ C14+C15 COMPLETE (2026-07-19, claude/deep-craft-c14c15 @ 7748d49a, 3
+commits, NOT folded).** 68434851 THE LANTERN TABLE: four lamp tones on umber
+(moss 6.29 · gold 7.05 · slate 6.28 · ember 5.12 — all AA on the panel AND the
+darker desk; 4 pins + a negative control documenting the retired amber's
+failure) in a NEW lazy token module lampTones.js (single source; TableView now
+DECOUPLED from the shared violet/slate tokens — fold rule: TableView's accent
+block resolves to the lamp tones over c13's line) · wake-lock untouched
+(effects outside every edit range, pins green) · 5eea9a3d THE DISPATCH DESK
+(parcel rows, ONE gold dispatch, quiet toggles) · 7748d49a H3 (seal meets
+medallion at the dossier foot; fire-once via CSS animation-fill 'both'
+once-per-mount JUDGMENT — no persisted state; HouseColophon `ceremony` prop
+default FALSE = byte-identical elsewhere; counterseal seam intact). ⚠ SPEC
+CORRECTION ledgered: the playbook's `.oc-m-seal-impress`/`.oc-m-medallion-pulse`
+NEVER EXISTED — the closed vocabulary spells them oc-m-impress/oc-m-inkpulse;
+doc fixed. Ratchet-neutral by choice (one available rgba win handed to the
+seat-holder via fold-2 notes). Full suite 13,198 / the 5 + pre-C3-e fixture red
+(base predates the cure) + 2 isolation-cleared flakes; eager 0. RESTORATION
+SWEEP 3 dispatches (compendium/gallery cluster, sibling of sweep 2 on the pages
+lineage — disjoint files; CampaignFolder edits fold-flagged vs C3's).
+**⬛⭐⭐ FOLD BATCH 1 COMPLETE (2026-07-19, deep-craft @ aa55836a — the FABLE
+reconciler, flawless).** Three folds, ZERO conflicts, every pre-ruled
+reconciliation held EMPIRICALLY: 3430815c FOLD c2 (the whole journey-legs film
+system incl. c2l; 18 blobs NUL-clean; organicSamples verified GREEN post-fold —
+no reintroduced drift; 9 non-golden reds all isolation-cleared at machine load
+634) · 12c3120f FOLD c13 (slate chokepoint + door; tokens/theme = c13 wholesale
+by clean auto-merge; StaleNarrativeModal gold survives; en.js 20 new keys, no
+collisions; index.css both appends verified against both parents) · aa55836a
+FOLD c5 (H2 beats; zero overlap). EAGER BYTE-EXACT: pre-fold 1,038,886 → c2 +0
+→ c13 +49 (EXACTLY as pre-signed, all in the index chunk) → c5 +0 = 1,038,935;
+margin 1,065 B. Suites: fold-2 and fold-3 + the final confirmation each closed
+at EXACTLY the 5 parked goldens (13,279 green; totals grew fold-over-fold as
+branch tests registered). Folded branches ancestor-verified and cleaned up
+(worktrees + branches removed). THE BURN-DOWN LANE dispatches into the freed
+worktree with the ceiling seat + the now-unblocked identifier rename.
+**⬛⭐ C16 THE SHELL COMPLETE (2026-07-19, claude/deep-craft-c16 @ 41ae4a1e, 4
+commits, NOT folded).** Modals→plates over warm-dim (machinery byte-identical) ·
+toasts→desk-edge slips (centering moved off transform to free it for the slip —
+position unchanged) · nav→small-cap stations (App.jsx NET-ZERO at its 732
+ceiling — one value-swap line) · chassis→the oc instrument base face
+(consumer census: Button 189 files · IconButton 49 · Segmented 12 · Card 3;
+count-neutral value-swap technique; contrast pinned; mobileTapFloor green).
+MANAGER SIGN-OFF (vetoable): +199 B eager measured per-commit (+5 nav string,
++194 primitive className/token strings — unavoidable in eager primitives;
+headroom ~989 B). JUDGMENTs vetoable: primary/aiSolid shadows flattened
+("print has no z-axis") · secondary/default faces white→parchment instrument
+(the highest-blast-radius call) · Segmented pill kept (strip = recomposition,
+deferred). Deferrals: Card de-shadow (blocked by the cardElevation ELEV[1]
+pin — burn-down + pin-owner) · kill-list would-be deletions (Dialog −2 radii
+−1 shadow, Toast −1 shadow) · raw-color BUDGET lowering. NEW GOTCHA re-proven:
+the kill-list greps COMMENT text (a comment containing "boxShadow" tripped the
+ceiling — reworded inline). Full suite 13,210 / the 5 + the pre-C3-e-base
+fixture red (cured at fold); final committed-HEAD gate 124/124.
+**⬛⭐⭐ THE PHASE-D CENSUS COMPLETE (2026-07-19, committed
+docs/PHASE_D_RESTORATION_CENSUS_2026-07-19.md @ b6320795).** ALL 150 PENDING
+restoration rows dispositioned, ZERO unclassified: 23 GENUINELY-OWED (the
+census §1 list — PDF cluster #18–21 the heaviest, CustomContent #12, pricing
+conversion affordances #15–16 incl. the anon-sign-in-lands-in-buy-wall
+regression) · 4 OWNER FLAGS (§2: backend-gated profile RPCs + visibility
+defaults · research-consent posture · AdminPanel user table = SECURITY FIX
+KEEP) · 11 deletions adjudicated (§3; CausalNarrativeTable M→D mislabel
+found) · ~123 safely closable (superseded/program-ruled/matches-master).
+Topology confirmed: ZERO PENDING rows were restored by slices (the slices'
+restoration work was the already-RESTORED create-page rows). Passing
+correctness flags → ROUND 3 pre-stock. DISPATCHED: the ledger TRANSCRIPTION
+agent (main tree, single-writer window) + RESTORATION SWEEP lane 1 (the PDF
+cluster #18–21 off 97aa4f3d; viewModel at its 1043 ceiling — leaf/net-zero
+law; shifts declared at the parked golden).
+**⬛⭐ C6–C12 THE PAGES COMPLETE (2026-07-19, claude/deep-craft-pages @ 55e4a69c,
+7 lettered commits P-a..P-g, NOT folded).** Pricing bench (differentiated
+top-rules, daggers, gold stamp) · Compendium lexicon (shared Tag/Card engine
+de-round, hairline plates) · Gallery specimen drawers (inkdarken hover, clerk's
+report form) · Founders CHARTER (rule-framed; the struck-tally board DECLINED —
+the page is a deliberate NAMED lineage "portal of proof", JUDGMENT) · Auth
+restraint (ruled slips, rubric notes, same strings/flows) · Checkout receipt
+artifact + colophon · Account danger zone rubric-ruled (typed-confirmation
+delete byte-identical, pins green). C9 PAID-SURFACE PROOF: FoundersPage owns no
+checkout/seat-write; FounderTile untouched entirely; 66 founder tests green.
+121 OFFENDERS REMOVED (−71 radii/−10 shadows/−22 rgba/−18 tinted; branch counts
+983/103/243/217). ⚠ MANAGER'S BRIEF CONTRADICTION OWNED: "remove offenders but
+don't move ceilings" under tolerance-0 = the 4 kill-list sub-reds the branch
+now carries BY DESIGN — RESOLUTION PRE-RULED: fold batch 2 sets each ceiling to
+the measured post-merge count in the fold operation (shrink-only, deliberate);
+the branch's organicSamples red is the pre-C3-e base state, cured at fold. 2
+contrast JUDGMENTs (white-on-gold → ink-on-gold 7.6:1, vetoable). C13-overlap
+discipline held (AI-violet left untouched on shared files; deferral list
+ledgered). Deferrals: account sections beyond the danger zone · gallery
+detail/tabs/hubs · compendium write register + dropcap host — all legal Phase-D
+census reason-rows. Full suite 13,205 / expected-5 + the 4 by-design + the
+pre-base fixture + 1 isolation-cleared flake. THE PHASE-D CENSUS AGENT
+dispatches into the freed slot (read-only disposition sweep of the restoration
+ledger's PENDING rows — de-serializing the Phase-D gate's biggest grind).
+**⬛⭐ C3 THE LIBRARY LEDGER COMPLETE (2026-07-19, deep-craft @ 97aa4f3d, 5
+commits incl. both addenda).** d06f4a89 the list becomes a REAL semantic table
+(SettlementCard → <tr>, one renderer — JUDGMENT over a div idiom; both call
+sites wrapped; UnassignedLedger extracted as a leaf because SettlementsPanel
+sits at its 600 ceiling) · 680d3138 memo-lines (the OutputContainer stressor
+derivation, read-only) + interpunct + margin tallies (same checkbox, same
+handlers) · a6255918 THE OWED WIRING: allowRename live via the canonical
+renameSettlement store writer (NOT the live-editor queueEdit — reconciliation
+reasoned) + the LIFECYCLE TRAP traced and closed: renameDetailSettlement pure
+helper syncs the detail view (name would ghost until re-open otherwise;
+7-case unit pin) · ecfe0d1a addendum 1: the config-panel de-round (9 pills,
+ceiling 1052→1043 by the test's own counter) · 97aa4f3d addendum 2: the
+organicSamples fixture regen — cause confirmed C4c-g, diff verified +180/-0
+all `.oc-dropcap-prose` surface; THE LINEAGE RED IS CURED. Protected-behavior
+census 52/52 green across 6 suites. Kill-list now radius 1043 · shadow 112 ·
+rgba 264 · tinted 235. Full suite 13,217 / EXACTLY the expected 5 + 1
+isolation-cleared flake. 6 JUDGMENTs vetoable (incl. allowRename gated on
+readOnly&&saveId any-owner — replaces the old free-tier Edit-Names path).
+Deferrals: retained sub-content chips' radii (burn-down's) · folder sub-table
+thead a11y trade. ⭐ THE FOLD BATCH 1 DISPATCHES (Fable, escalation clause):
+c2 (contains c2l) → c13 → c5 fold into deep-craft @ 97aa4f3d — per-fold NUL
+scan, --no-ff, bare gates, FULL suite, reconciliation rules pre-stated
+(tokens.js = c13's chokepoint wins · StaleNarrativeModal = the gold re-tone
+wins · css/copy appends union). THE BURN-DOWN lane follows on the merged tip
+with the seat + the now-unblocked identifier rename.
+**⬛⭐ C5 THE REALM LANDED (2026-07-19, claude/deep-craft-c5 @ 329bde0b, 3
+commits, NOT folded) — H2 + the re-home shipped; the materials pass DEFERRED
+with the ceiling-seat reason.** 5ca47081 InstantWorldEntry RE-HOMED (the
+UNREACHABLE premium composer now mounts lazy in SettlementPalette's desktop
+empty state — subordinate placement JUDGMENT over map-overlay/CampaignEmptyState
+alternatives; reachability proven by emitted lazy chunk + binding + host pins;
+zero eager). · 4cb025ba + 329bde0b H2 THE FIRST ADVANCE: three beats (medallion
+ink-pulse touched-set stagger ≤8 · almanac page-turn · report slip), fire-once
+read-side off the EXISTING pulseHistory counter — no new persisted state;
+`.oc-m-*` only; reduced-motion collapses; regression guard 3/3. Fence census
+clean: desktop-gate title untouched · title ratchet 485 green · SM-5 pins live
+in townMap not realm chrome · WorldMapStage untouched (C2L moot). Known
+limitation documented: catch-up in living worlds may claim the first pulse
+("the map marks the first change of the session" — acceptable). C5-a chrome
+materials DEFERRED (JUDGMENT, vetoable): exact-equality kill-list + the C3
+single-writer seat make any de-round land red from this lane; the rail's core
+intent (ADVANCE = the one gold) already holds; per-file offender table recorded
+(41 radii · 5 shadows · 7 rgba · 13 tinted across 6 realm files). ⚠ FINDING:
+organicSamples.test.js red on the whole lineage — dossier-desk.html fixture
+stale vs C4c-g's .oc-dropcap-prose (the focused-gates blind spot, again) —
+HANDED to C3 as addendum #2 (deliberate regen, declared cause). ⭐ MANAGER PLAN:
+after C3 lands, THE BURN-DOWN LANE dispatches on the deep-craft branch holding
+the ceiling seat — C5-a realm materials + the accumulated would-be wins + the
+C13 identifier rename + the walk toward Phase D's kill-list ZERO×4. Full suite
+13,207 / expected-5 + 2 isolation-cleared flakes + the handed-off fixture red.
+**⬛ C1-FIN REMAINDER: STALE-BRIEF STOP (2026-07-19) — the manager's brief was
+WRONG and the lane caught it.** Items 1/2/4 (create consolidation + unfold leaf ·
+wizard tint trio · evolution backdrops) were ALREADY SHIPPED on this lineage as
+C1r-c1 5e7cbdf4 / C1r-c2 4075b499 / C1r-c3 01ad3a8f + C1r-d 88348274 — the
+manager scoped from a stale memory line instead of the lineage git log; the lane
+STOP-AND-REPORTED with receipts, wrote zero code, left the tree clean (the
+VERIFY-FIRST discipline working exactly as designed; memory
+c1fin-remainder-brief-stale.md records it). The ONE genuine remainder — the
+config-panel de-round (TradeDynamics −5 pills · ServicesToggle −4 ·
+LayeredConfigurationPanel net-neutral plate chrome) — is blocked by the
+kill-list single-writer seat and is HANDED TO C3 as a scope addendum (ceiling
+drop ~1054→1045 in the same commit, lane-verified count). The empty
+c1fin worktree/branch removed (zero commits, rev-parse-verified). SLICE C1-FIN
+IS THEREBY COMPLETE except the addendum riding C3. C14+C15 dispatch.
+**⬛⭐ C2 THE WELCOME FILM COMPLETE (2026-07-19, claude/deep-craft-c2 @ 34f4e554,
+3 commits stacked on the C2L tip, NOT folded).** 3d82a444 C2-a scroll conductor:
+shared-core EXTRACTION (projectLegFrame consumed by BOTH the clock and scroll
+drivers — extended, never forked; dependency-free rAF, redundant-frame 0.008
+guards; library rejection recorded). · 46ef7167 C2-b sections re-vehicled: 7
+current sections → 6 stops (commons shares the city stop), retention pin
+homeLanding.test.jsx GREEN UNTOUCHED; analytics = exactly 2 pre-existing
+LANDING_FUNNEL_USED firings, preserved by name, zero new eager names. ·
+34f4e554 C2-c floor proofs + zero-eager ratchet. LAWS: stills floor CONFIRMED at
+test level AND live (flag-off ⇒ videoCount 0, zero mp4 fetches; fixed-backdrop
+stacking risk cleared); eager delta 0 B (fingerprint absent from the entry
+closure, verify:dist 154); per-leg prefetch inherited; desktop-fine-pointer +
+taste-gate welcomeJourneyFilm (+ shared set toggle). JUDGMENT (vetoable at the
+walk): LEG-SPACER architecture — sections keep their painted backgrounds, the
+film shows through transparent travel legs (retention-maximal); the full-bleed
+glass-sections alternative is the recorded veto direction. Deferrals →
+walk/queue: section-background harmonization (§04 city art vs town stop) ·
+journey_stop analytics enrichment · the visual scrub is PLAUSIBLE pending the
+owner's manual walk (recipe in the lane report; the browser pane hangs on
+programmatic scroll of this app — environment limit, reproduced on unmodified
+base). Full suite 13,245 / EXACTLY the 5 + 1 isolation-cleared flake (its
+isolated runtime 31.6s exceeds the 20s cap under 3-lane load). C1-FIN REMAINDER
+dispatches.
+**⬛⭐⭐ C13 THE ONE DOOR COMPLETE (2026-07-19, claude/deep-craft-c13 @ 4ccb2766,
+FABLE lane, 3 commits, NOT folded).** 7a2e0c14 the door+router: entry census
+found exactly 2 non-carve-out entries (analyst launcher, workshop compass) —
+both RETIRED into the single left-edge slate tab; promptless register links keep
+open-without-a-prompt; Polish/Narrate carve-out verified untouched. Router =
+pure zero-cost client fore-stage of the S3 compiler (domain/intent/doorRouter;
+context-first as the default ring; rejected alternatives ledgered: edge
+round-trip routing = credits for routing; door slice = breaks the floating-widget
+idiom; panel merge = machinery churn). · c2289e10 THE SLATE CONVERSION by
+VALUE-REPOINT at the tokens chokepoint (the kill-list pins the VIOLET_BG line
+count, making a rename gate-illegal from that lane — identifier rename DEFERRED
+to the kill-list burn-down, mechanism documented in tokens.js): 34 consumer
+files atomically slate; contrast math executed (5.27/6.40/4.84 AA); 3 pinning
+suites pass UNMODIFIED; adjacent purple families (deity/magic/swatch.ai/print)
+correctly NOT swept; the StaleNarrativeModal exclusion honored. · 4ccb2766
+slips/stamps/correspondence: "PROPOSED — the engine writes canon" verbatim on
+all 5 proposal surfaces; canon-writing accepts = gold STAMP, spend stays slate
+(JUDGMENT: spending is the AI act, stamping the canon act). ⚠⭐ OWNER FINDING
+(queued §9): NO Surveyor tier constant exists in the ladder — TIER_GATE is
+anon|free|premium and pricingDisplay says Surveyor "is NOT a subscription
+tier"; the door gates on the isSurveyorTier(tier)==='premium' chokepoint
+(one-line flip when the owner clarifies "surveyor premium"); recorded tension:
+free users lose all in-app AI entry per the no-lock-tease ruling. MANAGER
+SIGN-OFF (vetoable): +49 B eager measured (door anchor + slate pair; headroom
+now 1,176 B — the 1,412 figure was stale; lineage closure 1,038,824/1,040,000).
+2 pin retargets named (lazy-chain strengthened; launcher-click → controlled
+open). NEW HAZARD memory'd: the kill-list counts raw line matches INCLUDING
+COMMENTS. Full suite 13,185 / EXACTLY the 5. Deferrals: identifier rename ·
+per-surface deterministic-violet re-toning (C14 owns KIND_ACCENT.TWIST) ·
+browser walk at the fold. C6–C12 pages lane dispatches.
+**⬛⭐⭐ THE TRADITIONS LANE COMPLETE (2026-07-19, claude/traditions @ 80b8ad71) —
+T-1..T-5 ALL LANDED, DARK.** T-5's four commits: 396f500f register glyphs (corpus
+`glyph` display-only — mint byte-identical) + mutationLog provenance line + the
+self-hiding realm almanac (no engine import) · fddb8423 prose pools (own FNV
+picker — keeps eventProse's ~560 lines OUT of dossier/PDF chunks, vetoable dup) +
+tension-category tradition hooks (source:'Traditions'; dedicated category needs a
+token path — vetoable) + PDF 07B mirror-only section (BYTE-IDENTICAL while dark;
+goldenViewModel's only diff verified base-red institutions 54→55; NO golden
+re-recorded; becomes additive at the regen — declared) · 2db3f8b7 custom_content
+'traditions' bucket + validator + AI seam + MIGRATION 155 WRITTEN-NOT-DEPLOYED
+(049 template; head gate green, PENDING non-fatal) · 80b8a71→80b8ad71 lane-end
+ratchet reconciliation. Full suite 13,143 / EXACTLY the expected 5; ~16 pglite
+setup-timeout flakes isolation-cleared. TASTE VETOABLES: the 16 motif glyphs +
+the prose register (walk samples); PDF uses text motif labels (react-pdf fonts
+lack the dingbats — tofu). OPEN SEAMS recorded (memory
+traditions-lane-complete.md): genesis declared-over-derived consumption · manual
+authoring UI for the bucket · faction.power routing at the folds. Shared-file
+fold flags: ARCHITECTURE.md + DEPLOY.md migration-head lines. THE LANE IS
+FOLD-READY; traditionsEnabled joins the regen's eight flags. C5 dispatches.
+**⬛⭐ SLICE C4 COMPLETE (2026-07-19, deep-craft @ b6c91dbe) — the dossier is
+DONE: base (panels A–D) + craft (6 registers) + grammar + tint pins.** 6040919d
+C4c-g manuscript grammar: 2-line illuminated initials via new `.oc-dropcap-prose`
+(root-ink-ramp, initial-letter + float fallback, ≤520px degrade) on the Overview
+arrival band (light gold on umber) + the DM Summary lede (dark on parchment);
+Plot Hooks DECLINED — it is a data register, the law bars grammar there;
+MARGINALIA DECLINED on all three (no re-vehiclable annotation exists without
+inventing chrome — drop caps alone satisfy the grammar). · b6c91dbe C4c-h
+ServicesTab state tints re-grounded to warm parchment (rose/amber/gold-parchment
++ warm healthy; the one cool-mint off-palette tone eliminated) with 5 NEW
+per-state contrast pins (8.3/7.3/5.6/5.9:1, color never the sole channel).
+JUDGMENTs vetoable: 2-line initial size · two ground tones · state-leaning
+washes kept for scanning. Kill-list unchanged 1054/113/265/235 (tolerance-0
+re-proven at tip); eager 0 (36 CSS lines on organic.css). Focused gates green
+both commits; full suite deliberately not re-run (surfaces-bounded per brief;
+next full pass at the fold). Slice C4 deferral set CLOSED-with-reasons; the
+config-side panels remain the C1-fin remainder's. C3 DISPATCHES into the freed
+worktree (incl. the Panel-A allowRename CALLER WIRING owed to C3).
+**⬛⭐ C2L THE LOADING JOURNEYS LANDED (2026-07-19, claude/deep-craft-c2l @
+a8b5d313, 3 commits, NOT folded).** eedb67bf generation film = PipelineReveal's
+z0 backdrop (THEATER-ONCE stands; store-key pins untouched; reveal timing
+untouched) · fbfa3c0b realm/FMG reality-mode unfurl in WorldMapStage (WorldMap
+is a 600-cap hot file — mount JUDGMENT) · a8b5d313 shared-clamp ratchet fix.
+ONE conductor (useJourneyConductor: pure computeJourneyFrame + the arrival
+gate); THE UNIFYING LAW unit-tested ("CANNOT finish no matter how much
+wall-clock passes"). JUDGMENTs (vetoable): generation arrived=!!settlement
+(pure theater — the artifact exists at mount; reality machinery ships on the
+realm surface where it's native, holdBoundary 0.9) · taste-gate loadingJourneyFilm
+default OFF (stills-floor ships; the walk flips ?flag.loadingJourneyFilm=true;
+loadingJourneySetBg toggles bg↔journey sets live). Media: BOTH sets copied to
+public/media/journey-legs/ (bg 43 MB · journey 11 MB; losing set DELETED at the
+walk — recorded owner call). Stills floor proven (film-absent + video-error
+renders); per-leg prefetch (hidden preload of leg N+1); eager delta 0 B
+EMPIRICALLY (new loadingJourneyLazy fingerprint test, non-vacuous). Full suite
+13,187 / expected-5 + 2 isolation-cleared flakes (49/49). ⚠ FINDING: NO realm
+scroll-unfurl master EXISTS in the archive (the playbook's assumption was
+wrong) — C2L-b ships the machine + parchment floor + a documented <video>
+drop-in seam (public/media/realm-unfurl/); producing/choosing the unfurl film
+JOINS THE OWNER QUEUE (walk item). MEMORY.md near its read cap (~20.3 KB) —
+consolidation pass queued for a quiet moment. C2 dispatches STACKED on the C2L
+tip (claude/deep-craft-c2 off a8b5d313) to REUSE the conductor + media.
+**⬛⭐ C4 CRAFT STEP-3 MAIN PASS LANDED (2026-07-19, deep-craft @ 409a326f, 6
+commits).** Six dossier panels → their registers, each a lettered commit with
+gates green + ceilings lowered in lockstep: C4c-a ChronicleTab=ANNALS · C4c-b
+DeityAssignmentPanel=VOTIVE (violet accent → RUBRIC gold, vetoable) · C4c-c
+CascadePreviewPanel=PREVIEW PLATE (five tints → two-tone rubric, vetoable) ·
+C4c-d WhatChangedPanel=ERRATUM SLIP · C4c-e ServicesTab=POSTED BILL (radii −14)
+· C4c-f StaleNarrativeModal=INSTRUMENT PLATE (regenerate primary re-toned gold —
+deterministic regen, not AI authorship; C13 lane instructed to EXCLUDE it from
+the slate sweep; fold reconciles). Cumulative burn: radii 1077→1054 · shadows
+115→113 · rgba 270→265 · tinted 246→235 (tolerance-0 held). Zero eager; zero
+new contrast pins needed (pinned ink/rubric tones on parchment grounds only).
+Full suite 13,188 / expected-5 + 3 isolation-cleared flakes (39/39). MANAGER
+RULINGS on the lane's asks: (1) Trade/Config/ServicesToggle panels (all inside
+LayeredConfigurationPanel) → DEFERRED to a C1-FIN REMAINDER slice (C1 territory;
+queued, not grazed); (2) ServicesTab state-tint re-tone + its per-state contrast
+pins → rides C4c-g; (3) manuscript grammar (prose surfaces) = the C4 spec's
+remaining half → C4c-g DISPATCHES NOW (Opus; deep-craft worktree freed); (4)
+WhatChangedPanel has NO live importer (tested, mounted nowhere) → filed to
+ROUND 3 pre-stock (wire-or-remove adjudication). Durable gotcha ledgered: the
+no-raw-color rule counts bare hex ONLY in color/background/fill/stroke/border*Color
+props — border shorthand strings, rgba(), and token refs are exempt.
+**⬛ OWNER CORRECTION (2026-07-19) — THE DEADLINE IS 11:59:59 PM PT **JULY 19**
+(= 02:59:59 EDT July 20), not tonight: ~25.5 hours of runway from issuance, all
+of it inside the free-Fable window.** Strategy adjusted: Fable escalations are
+affordable throughout (folds reconciliation + verification pre-planned on Fable);
+sustained 4-lane saturation targets the full pre-resurvey build (remaining §2
+slices → Phase D → the folds → the push) inside the window; the continuity order
+now governs TOMORROW night's boundary. Heartbeat re-armed with the corrected
+boundary text.
+**⬛ OWNER NIGHT ORDERS (2026-07-19 ~22:20 PT) — LANE SATURATION + THE FABLE
+DEADLINE:** "there should never be an empty lane, check every 15 minutes to see
+if a lane has stalled. I need to complete this by the end of 11:59:59 PM PT
+because that is when Fable free for users ends." Operationalized: 15-minute
+lane-keeper heartbeat armed (session cron; liveness by fresh commits/processes;
+stalled lanes resumed with corrective orders; freed worktrees refilled from the
+§2 queue). FOUR lanes saturated: C4 craft (deep-craft) · C2L (side-branch) · T-5
+(traditions) · ⭐ C13 THE ONE DOOR dispatched on a FABLE implementer (escalation
+clause spent deliberately inside the free-Fable window; side-branch
+claude/deep-craft-c13 off 67586c86; architecture-before-sweep build order;
+all-or-none violet→slate with fold-reconciliation file list). At the boundary
+(~03:00 EDT) THE CONTINUITY ORDER governs: the Opus ultracode successor
+continues the heartbeat + queue with full standing authority (START_HERE §6b);
+the ledger stays the source of truth commit-by-commit.
+**⬛ OWNER RE-RATIFICATION (2026-07-19, night) — the overnight delegation + the
+bold-over-safe law, verbatim intent:** "yes keep continuing. If there comes
+decisions to be made, I delegate them to you according to the standards that we
+have set… if you ever have to choose between maximal safety and something that is
+objectively better but introduces risk, you will choose the latter every single
+time and fix the consequences. I'm trying to get my code to work to its utmost
+perfect best. in which case no compromises." Standing synthesis unchanged and
+re-affirmed: boldness applies WITHIN the constitution — the owner's own gates
+(byte-identity/dormancy proofs, pins, ratchets, ⛔ classes) are what "fix the
+consequences" is proven WITH, not obstacles to it. Judgments continue to be
+recorded vetoably; owner-gated classes still never self-ruled.
+**⬛ OWNER AMENDMENT (2026-07-19) — table-reporting cadence refined: the
+remaining-work table updates on each COMPLETED LIST ITEM (slice/wave/phase/gate),
+not on every commit.**
+**⬛ OWNER AMENDMENT (2026-07-19, same day) — THE ESCALATION CLAUSE COVERS
+VERIFICATION TOO:** "that also goes to verification." Fable verifiers allowed
+case-by-case for difficult verifications, never default; same criteria and
+reversion rule. Verification candidates: adversarial verification where a
+plausible-but-wrong finding could survive standard review · byte-identity/
+dormancy adjudication at the folds · soak metric verdicts.
+**⬛ OWNER RULING (2026-07-19) — THE ESCALATION CLAUSE (staffing amendment):**
+"where you deem it necessary, but not the default, implementation for difficult
+tasks can upgrade to fable before going back to opus. Judge on each case by case."
+Opus 4.8 stays the standing implementer/verifier tier; the manager may staff a
+FABLE implementer for a specific difficult task, case-by-case, reason recorded,
+reverting to Opus after. Manager's criteria (recorded): judgment density + blast
+radius + architectural ambiguity — pre-identified candidates: fold conflict
+reconciliation · the master merge execution · ROUND 3 adversarial verification of
+subtle engine findings · C13 ONE DOOR consolidation · the soak combinatorial
+harness design. Mechanical/spec-clear slices never escalate. Also 2026-07-19,
+standing reporting order: every commit report carries the updated remaining-work
+table (memory: owner-reporting-table-preference).
+**⬛⭐ T-4 RELATIONS LANDED (2026-07-19, claude/traditions @ dbd3eb2f, 2 commits) —
+CULTURES NOW INTERACT, DARK.** 70d12d40 T4-a: §8 imposition/suppression/restoration
+in a new pure leaf src/domain/traditions/relations.js — occupation ledger sole
+trigger (vassalized, rung 4), overlord's highest-scale rite imposed as a SECOND
+record (adoptedFrom + overlord expression, scale capped to vassal tier band), local
+rite suppressedBy{overlordId,sinceYear,traded} never deleted, index-0 founding core
+immutable; liberation clears suppression, removes the copy, stamps 'restoration';
+suppressed rites don't resolve outcomes · dbd3eb2f T4-b: §9 adoption (rolling
+3-yr influxLog on the founding core, 12% threshold, tier-cap replacement of the
+lowest non-founding, 'displaced' recorded) + aspatial dormancy PROVEN byte-identical
+(teleport path: JSON.stringify(ledger)===input). ⭐ THE PRE-DRAIN DIVERGENCE
+(judgment-ledger §6, prominently recorded): the design's literal "read due columns
+pre-drain in the last-running mover" is STRUCTURALLY IMPOSSIBLE — release drains at
+pulseKernel:688 discarding originId, the mover runs post-drain at :2342, and
+pulseKernel sits at its EXACT 1387-line ceiling (cannot reorder). Shipped: read
+in-transit columns at each column's last-visible-before-drain tick
+(tick === max(departTick, arrivalTick−1)) — fires exactly once per column,
+observationally equivalent for the 3-yr/12% detection, and more robust than a
+cross-pass stash. VETO reverts to a name-swap capture at the release site.
+Dials (soak-tunable, vetoable): IMPOSE_CHANCE 0.3/vassalized-yr ·
+ADOPTION_THRESHOLD 0.12 · INFLUX_WINDOW 3yr; 10 JUDGMENTs in the lane report incl.
+'imposition' logged as a mutation kind on both records. DECLARED for THE ONE REGEN:
+influxLog is new lit-only state (materializes when traditionsEnabled lights on
+spatial campaigns). Deferrals stand: faction.power routing (interim full-weight,
+§16) · culture-vector affinity (highest-scale proxy). Gates: 19+83 focused green ·
+strict/tsc/build/eager all clean · FULL SUITE 13,281 green / 7 reds = the expected
+5 + the flatqueue vendor-test damage (REPAIRED from .bak in-lane, tree clean) + 1
+isolation-cleared timeout flake. T-5 SURFACES dispatches (the lane's final slice).
+**⬛⭐ C4 PANEL D LANDED (2026-07-19, deep-craft @ 67586c86) — THE DOSSIER BASE
+COMPLETE (all four panels).** PostGenCoach revived as HOST of the wizard-postgen
+whisper exactly per the ledgered recipe (registry component swap; WizardNextSteps
+deleted → LEGACY; the one-whisper-per-surface budget pin enforced unweakened).
+Repo contradiction resolved by trusting the repo: nextSteps.js is master's pure
+builder, byte-identical at the tip — KEPT (the brief's "remove nextSteps.js
+wiring" read wrong). Functionality census: 7 behaviors retained · "Generate
+another" DEFERRED-with-reason (master's coach never rendered the builder's
+detached footer — base-of-record) · a11y wrapper follows master (role=dialog).
+ONE pin retarget named: tierFacts.contract SURFACES → nextSteps.js (host file
+deleted; guard unweakened; Panel-A precedent). JUDGMENTs (vetoable): deep-craft
+materials over master's dark card (tolerance-0 kill-list bars the rgba raise) ·
+forward-moves only, no duplicate teaching · co-located lazy mount with App.jsx
+net-zero at its EXACT 732 max-lines ceiling · DECLARED behavior shift: the coach
+is app-level on any route while undismissed (master's placement) vs the old
+in-page create-only card. Gates: focused all green · verify:dist 150/150 · full
+suite 13,092 green / expected-5 + 13 pglite isolation-cleared load flakes.
+RESTORATION-LEDGER: PostGenCoach row → RESTORED @ 67586c86; App.jsx → PARTIAL
+(C16 shell/nav remains). ⚠ NEW HAZARDS (memory'd): App.jsx sits at its exact
+732 ceiling; a JSX {/* */} comment COUNTS as a code line under max-lines.
+**⬛⭐ THE ILLUSTRATED TOWN WAVE COMPLETE (2026-07-19, claude/illustrated-town @
+d16d348e).** IT-5 verified retroactively COMPLETE (the prior agent died
+pre-gates; every gate now executed green; the IT5-b re-mint proven
+DECLARED-ADDITIVE — only the illustrated per-lens row moved, +2,586 ops, all
+five base-lens hashes byte-identical). IT-6 THE FACE shipped as two TEST-ONLY
+commits: 9cb2ece2 census guard (done-when #9 as executed proof — every existing
+map affordance reachable in illustrated mode) · d16d348e free-face invariant pin
+(illustrated FREE locked cross-module; LENS_COUNT=5 untouched — altering the
+advertised paid count is an owner-gated paid-surface claim). §8 DONE-WHEN walked
+9/9 with executed evidence; full suite 13,193 green / EXACTLY the expected-5 +
+isolation-cleared contention flakes. Default lens NOT flipped (⛔owner taste
+call at the walk; the one-click picker is the decision surface). Deferrals
+stand: 08C conversion at the regen · curated-pack gate at the 2nd pack · the
+§10 register. Wave PARKED fold-ready; completion memory
+illustrated-town-it5-it6-shipped.md.
+**⚠ FLATQUEUE ROOT-CAUSED (2026-07-19) — the manager's earlier "git lstat
+artifact" diagnosis is RETRACTED.** tests/build/vendorManifestExactSet.test.js
+proves its walker by NON-ATOMICALLY mv-ing public/map/libs/flatqueue.js aside
+during suite runs; crashed/contended mid-mv it strands the file deleted with a
+.bak — currently TRUE in the traditions worktree (repair queued for after its
+running suite: restore from .bak). The IT worktree's transient D was the same
+mv window observed mid-flight. FILED to ROUND 3 pre-stock: make the test
+crash-safe (try/finally restoration).
+**⬛ OWNER RULING (2026-07-19) — THE MASTER FORK: "bg and journey" — BOTH.** The C2
+leg derivation encodes BOTH candidate masters for comparison at the taste walk:
+bg.mp4 (marketing/website/public/bg.mp4, 76.3 MB, 30.25s ⇒ 5.042s legs — the film
+the microsite plays, already all-keyframe per the BRAND-landing doctrine) AND
+settlementforge-journey-scrub.mp4 (Desktop archive, 20.7 MB, 15.042s ⇒ 2.507s
+legs — the playbook's named master). Output sets land in derived-legs/bg/ and
+derived-legs/journey/ (separate subdirs, no collision); the walk picks which set
+C2 ships. ffmpeg unblocked same day: owner installed Homebrew 6.0.11 (their
+password step); manager runs brew install ffmpeg + both encodes + verification.
+**⬛⭐ THE LADDER FACTION-KEY BUG RETIRED (2026-07-19, claude/the-ladder @ 14e8a2fa).**
+The ROUND 3 pre-stocked item, pulled forward to an idle worktree and CONFIRMED on
+genuine generator data: all six real factions keyed `fac.unknown` and — worse than
+the recorded hypothesis — `advanceNpcLadder` produced ZERO ladders on real data
+(npcInFaction blind too). Fix: `factionName` accessor chokepoint
+(`.faction||.name||.label`, id precedence kept) in npcLadderState consumed by
+ladderFactionKey + npcInFaction, PLUS the read-side mirror `factionKeyOf`
+(townMap/ladderRead.js:176) — live on the coup path via rulingPowerCoup ⇒ fixing
+only the write side would have desynced write/read keys (the lockstep test guards
+the pair). Denominator: 3 identity sites fixed; classification consumers
+(clashOf/faithRuptured/mintGoal) N/A — already correct via factionArchetype; no
+out-of-lane sites (the idiom pre-existed, the lane's fresh code had omitted it).
+Real-shape pin npcLadderFactionKey.test.js: 5 fail pre-fix / 9 pass post-fix,
+proven by patch-revert (no stash; the foreign analytics stash untouched). Gates:
+ladder suite 7 files/65 tests green incl. dormancy golden · coup consumers 43
+tests green (dark-path factor 1.0 byte-identity) · eslint/tsc clean. Full suite
+deliberately at fold (parked branch). npcLadderEnabled is now SAFE to light at the
+regen; the traditions faction.power seam (§16) waits only on the folds. Manager
+checker pass verified commit/tree/files against the report. No
+ffmpeg/ffprobe/equivalent exists on this machine (exhaustively probed; Homebrew absent;
+installs forbidden to agents). Delivered to ~/Desktop/settlementforge-marketing-masters/
+derived-legs/: MANIFEST.md (source analysis, both boundary tables, asset inventory) +
+encode-legs.sh (parse-checked; applies the C2 all-keyframe law, 720p, CRF-escalates to
+≤8 MB/leg, cuts the 7 stop stills, prints all-keyframe proof) — one command once ffmpeg
+exists (or run on the soak machine). ⛔OWNER FORK SURFACED, not self-ruled: the brief's
+master journey-scrub (1920×1080, 15.042s ⇒ 2.507s legs) vs the film the microsite
+ACTUALLY plays, bg.mp4 (1600×900, 30.25s ⇒ 5.042s legs; the existing six masters are a
+prior full-res cut of it; conductor boundary law = duration/6). Manager recommendation:
+bg.mp4 — the owner approved the microsite's played film by pointing at it; flip if
+journey-scrub is the intended newer edit. marketing/assets/videos/ no longer exists in
+the repo (masters archived out 2026-07-18) — the Desktop archive is the only copy.
+**⬛⭐ T-3 POLITICS LANDED (2026-07-18, claude/traditions @ b79ea3d7, 2 commits).**
+0b7f410a ownership at mint (motif-fit; seat/faction/institution; keys on the REAL
+.faction shape via nameOf — the §17 hazard dodged) + owner-targeted legitimacy
+(seat full-weight, faction/institution HALF + news names them; the instability
+term self-lit) · b79ea3d7 reassignment checkpoints (seat-follow · ascendant claim
+0.35 · orphan→seat) + §7 mutations (rededication/scale-up/reanchor/drift; 8yr
+hysteresis on slow kinds; structural kinds fire on-event) — every mutation appends
+mutationLog {year,kind,cause}. LIT WALKTHROUGH REAL: a coup re-anchored the
+Founding Feast to The Iron Compact with a named log row; growth stepped scaleBand
+3→4; core motif + NAME IMMUTABLE (JUDGMENT: grandeur rides trappings, never a
+rename — stable dossier identity). Suite 13,263 / expected-5 + 1 isolation-cleared
+flake; dark golden byte-identical; zero eager. T-4 INTERFACE (binding): assign
+ownership to NEW records only (assignOwnership clobbers if re-run whole-set);
+index 0 = the founding core = the tier/fabric SENSOR — imposition suppresses,
+adoption replaces lowest non-founding, index 0 never moves; new mutationLog kinds
+restoration/adoption are STRUCTURAL (on-event). Dials soak-tunable. REMAINING:
+T-4 · T-5 · IT-6 · C4 Panel D (recipe ledgered) + craft · C2/C2L film · C3/C5-C16
+· Phase D — all briefs derivable from the frozen designs + these rows per
+START_HERE §5.
+**⬛⭐ C4 PANELS A-C LANDED (2026-07-18, deep-craft @ 2abed50e) — THE DOSSIER BASE
+IS SET.** 507662c0 Panel A DossierHeaderRow (header reroll REMOVED — stays in tab
+bodies; HEADER_FACT #D8C8A8 high-contrast; allowRename REVIVED at the component —
+caller wiring = C3 scope; emblem + formatCount kept [display-determinism JUDGMENT])
+· 50f2ba14 Panel B TAB_GROUPS World NPC-FIRST restored (npcs·relationships·rumors·
+daily_life·traditions·history·neighbours; traditions = INERT data-seam until the
+lane folds) · 2abed50e Panel C OverviewTab (actionable "Full relationship web →"
+onNavigateTab Button + Spatial Layout own top-level Section; radii 1078→1077
+locked). Step-2 PLUG-IN verified complete; step-3 CRAFT deferred (base-first per
+the owner). Full suite 13,195 / 11 reds = expected-5 + 6 isolation-cleared load
+flakes. ONE legal pin retarget, named: renameConsolidation case 1 (the composite
+had pinned allowRename-as-INERT — the exact regression being reversed).
+RESTORATION-LEDGER: 6 S1 rows → RESTORED (transcribe from this row); WizardNextSteps/
+PostGenCoach row stays PENDING. ⛔ PANEL D (PostGenCoach revival) DELIBERATELY
+STOPPED — it collides with the guidance-registry walker (W-GUIDE-1 retired
+PostGenCoach; budget pin = one whisper/surface). SUCCESSOR RECIPE RECORDED in the
+C4 report + here in brief: revive master's PostGenCoach as the HOST of the
+wizard-postgen whisper (registry component swap), remove in-page WizardNextSteps
+(→ LEGACY ledger), update walker census/budget pins, reconcile 6 named test files,
+FULL suite (App-mount + walker = blind-spot risk). Deferral recorded: master's
+"Viability →" button (not map-flagged; follow-up candidate, not smuggled).
+**⬛⭐ THE CONTINUITY ORDER (owner, 2026-07-18): "if i run out of fable,
+automatically switch and continue all the work with opus 4.8 ultracode fast.
+don't wait on me."** — Recorded in START_HERE §6b: an Opus 4.8 successor (fast,
+ultracode) inherits full standing authority at the model boundary with NO pause;
+resumes per START_HERE §5; delegation + vetoable-record duty + ⛔owner gates all
+carry verbatim. The program never stops at a quota line.
+**⬛⭐⭐ T-2 + IT-4 LANDED (2026-07-18) — culture OCCURS and skins are WEARABLE.**
+T-2 (claude/traditions @ 63c37358, 3 commits): the tick-time mover DARK behind
+traditionsEnabled — first-lit mint proven byte-identical to the T-1 preview;
+occurrence/skip/outcome engine live; pulseKernel name-swap at UNCHANGED effective
+lines (1387); dormancy golden 7/7 (dark pulse = same refs); a REAL 3-year lit
+walkthrough (5 founding traditions, outcome draws per year, prosperity
+Comfortable→Wealthy, legitimacy 55→76 — the upward-drift note is a §13 soak dial,
+not a defect). Vetoable: no foundedYear rebase (preserves mint==preview) · local
+applicator reimplementation · conservation-preserving faith transfer · skip
+thresholds · TRAD_TUNING dials. Interim: legitimacy routes to the seat until T-3
+owners land. Honest receipt caveat recorded: full suite exceeded the 10-min tool
+ceiling under load — first-run (9 reds: 2 self-caught walker regs FIXED + the
+expected 5) + base-verified parked set + isolation-cleared pglite flake stand as
+the evidence. IT-4 (claude/illustrated-town @ d7685332, 2 commits): THE DEAD SEAM
+CLOSED — saved AI skins SELECT + WEAR on pane/image-export/PDF/thumbnail in
+lockstep and flip back; wall extended (glyphSet/dress/seasonBias, bounded);
+townGlyphs = a registration manifest (the GENRE DOOR is now a registerGlyphSet
+call); ⚠ react-pdf renderToBuffer NON-deterministic — walk the element tree, never
+compare PDF bytes (recorded hazard); all town-map goldens byte-identical, zero
+eager. REMAINING per the docs: T-3..T-5 · IT-5..IT-6 · the deep-craft chain (C4
+next) — briefs derivable from the frozen designs + these reports.
+**⬛ THE LOADING JOURNEYS COMMISSIONED (owner, 2026-07-18):** generation loading =
+the journey film desk→target-tier, PROGRESS-SCRUBBED off the real pipeline steps
+(manager insight ratified into the spec: scrub beats timing — the film always lands
+with the dossier); realm loading = the scroll-unfurl film while FMG boots. New
+slice C2L in the architecture doc; six film laws inherited; thorp-speed = walk
+taste call.
+**⬛⭐ THE LIVING BACKDROP LANDED (2026-07-18, deep-craft @ a7afc9cc, 3 commits).**
+d308c579 fail-silent localStorage leaf (sf.lastMapView.<saveId> {view,lens}; the
+mapEdits blob NEVER touched; net-ZERO pane growth — statement-merge absorbed the
+import at the exact 600-line ceiling) · a2b30a1d the lazy wash leaf mounted in
+SettlementDossierHero (inline data-URI SVG, object-fit cover, pointerEvents none,
+zIndex under content) · a7afc9cc contrast pin + round-trip tests. PROOFS: eager
+closure BYTE-IDENTICAL base-vs-tip (1,038,624 B / 7 files, delta 0; town-map
+fingerprint absent from entry closure) · WASH_INK_OPACITY 0.10 contrast-pinned
+(heading 13.5:1, body 8.0:1 — AA clear; the pin imports the constant so retuning
+re-proves) · full suite 13,204 passed / EXACTLY the expected 5, no flakes · live
+negative path verified on 5199 + real-Chromium stacking probe (jsdom can't prove
+paint order — the probe did). Vetoable: opacity 0.10 · read-mode-only ·
+data-URI-img render. Recorded seam: bespoke lens ids wash as parchment (writer only
+ever writes base ids — matches the thumbnail). Transient local draft "Pantevrysi"
+created during live verification — discardable. THE OWNER'S BACKDROP RULING IS
+BUILT END-TO-END; upgrades to the illustrated/seasonal portrait automatically at
+the IT fold.
+**⬛⭐ ILLUSTRATED TOWN IT-3 LANDED (2026-07-18, claude/illustrated-town @
+5324c246, 4 commits).** Season dress as parameter swaps on groundDressOps (winter
+snow/bare trees/muted furrows · autumn stubble · drought crack · severity deepens);
+state dress (siege ring — trig-free, rides wall/road geometry · scar grain ·
+rebirth scaffold), all read-only + dormant-absent; seasonOverride mapEdits key in
+the exact styleLens shape (naming-trap green, drop-when-default). PROOFS:
+seasonless byte-identity AT GOLDEN STRENGTH (base illustrated golden = EMPTY git
+diff, not re-minted); blob byte-identity; accessible lens zero-dress asserted; ops
+88 seasonless / 153 full-stack vs cap 160. Seasonal golden ADDITIVE (104 configs).
+JUDGMENT (sound, recorded): threaded worldState not bare calendar (severity needs
+rngSeed); scar dress whole-fabric (no per-district ids exist). Suite: 5 expected +
+1 confirmed load flake + 1 self-caught any-cast regression fixed in-lane.
+⚠ PROCESS RATCHET: domainAnyCastBaseline caught BOTH T-1 and IT-3 only at lane end
+— it now joins the PER-COMMIT gate list for any lane touching src/domain (T-2's
+brief already carries it; standing rule for all future briefs). IT-4 (the registry
+— the dead-seam closure) dispatches.
+**⬛⭐ TRADITIONS T-1 LANDED (2026-07-18, claude/traditions @ 686d2cb9, 3 commits).**
+cfe352b1 genesis leaf (400-line pure domain) + corpus data leaf + 51 tests ·
+1d649950 the World-group TraditionsTab (lazy; data-only registration; drafts get the
+view-time founding preview; the engine-mirror branch pre-wired so T-2 lights the
+surface with zero tab changes) · 686d2cb9 the 3 any-holes typed away (ratchet 9/9,
+baseline never widened). PROOFS: mint-time ruling CONFIRMED (drift capture base-vs-
+lane byte-IDENTICAL, 187/187 both — genesis provably never touches generation) ·
+determinism 220 configs/0 mismatches, frozen-input untouched · ZERO eager bytes
+(engine-core chunk hash identical) · tier bands empirical thorp{1,2}→capital{6,8}.
+BONUS: pre-existing engineChunkLazy regex fragility found + fixed (hash-order-
+dependent matcher → identity lookahead). Six vetoable JUDGMENTs (16-motif
+vocabulary · 5-template name grammar · Seedtime/Highsun/Harvest/Deepwinter labels ·
+capital band 6-8 · grand-act two-week windows). foundedYear is SETTLEMENT-RELATIVE
+(T-2 may rebase at mint — recorded). T-2 (the mover) dispatches.
+**⬛⭐ C1r-d + SURFACE 2 LANDED (2026-07-18, deep-craft @ a8d9fff0, 4 commits).**
+88348274 C1r-d = THE OWNER'S WALK FIXES LIVE (Instant World card removed; "instant
+generation" folded into the hero line; proof-pair top-aligned + new pin) ·
+eba0be75 S2r-a/b = master's TWO-COLUMN dossierHero RESTORED with NextActionRail +
+ActionRail REVIVED from the merge's deletions (guidance-collision superseded,
+recorded; only adaptation = retired strings.js COPY → t() templates; hero extracted
+to SettlementDossierHero.jsx per the max-lines extraction doctrine;
+suppressNarrativeCta revived so the rail owns paid CTAs while the free raw/narrated
+toggle survives) · 41757691 + a8d9fff0 = materials (flat, tokenized; kill-list
+ROUND-TRIPPED to frozen base 1078/115/270/246; raw-color budget net 0). Final full
+suite: 13,191 passed / 5 failed = EXACTLY the expected set, NO flakes. Protected-
+behavior census: all preserved, ZERO test retargets. Eager +10 B (restructure).
+8 restoration-ledger rows transcribed. TWO RECORDED DEFERRALS: (1) ⚠ InstantWorldEntry
+is now UNREACHABLE in the app (card removed per the owner; inline doorway crossed the
+brief's thresholds) — MANAGER RULING (vetoable): re-home it in THE REALM's empty
+state at slice C5 (it composes a realm; that is its natural host) — C5 brief amended;
+(2) THE LIVING BACKDROP decomposed by the agent → dispatched as its own focused
+session (device-local tuple + lazy wash leaf + contrast pins).
+**⬛⭐ ILLUSTRATED TOWN IT-2 LANDED (2026-07-18) — the ground dress, three commits
+on claude/illustrated-town @ 7f3664eb.** db62302c groundDressOps (pure domain
+module; furrows/tree-stipple/ripples/meadow-dots/hedge-ticks; v1 COVERAGE LAW
+proven — every golden config dressed, min 19 ops on the sparsest) · f40ed162 the
+ONE NW LIGHT extracted (SHADOW_DIR; wall shadows + mountain-flank relief;
+extraction proven byte-identical before depth added) · 7f3664eb contrast pins +
+DRESS_CAP op-budget guard. Op counts: parchment 92 UNCHANGED; illustrated 277→360
+on the largest metropolis (ceiling 2200, no raise). All five re-skin lenses + the
+accessible lens byte-identical (dormancy: no dress field ⇒ []); illustratedTownGolden
+re-minted twice, additively, causes declared. Slice seal 101/101; verify:dist
+150/150; zero eager bytes; domain:strict 0. Lane-end full suite triaged under
+MACHINE LOAD 130-225 (concurrent sessions): every non-expected red = 20s-timeout
+LOAD FLAKE (fourth confirmation tonight); lane provably cannot reach any failing
+test (diff-scope + import proof). Vetoable JUDGMENTs recorded: dress densities ·
+all-ink marks (no tinted water ripples) · SE-only wall shadows · offsets. Foreign
+stash (analytics-intelligence-layer) preserved untouched. IT-3 (THE SEASONS)
+dispatches next with IT-2's interface contract (parameter-swaps on groundDressOps ·
+SHADOW_DIR canonical · dormancy-gate mirror for worldCalendar · season folded into
+the geometry-digest seed · DRESS_CAP 160).
+**⬛⬛ THE DOSSIER CONTENT MODEL IS CLOSED (owner, 2026-07-18: "with this the
+dossiers are done. i was missing culture and this added that in for me"):** with
+Traditions placed in the World group, the owner declares the dossier CONTENT-
+COMPLETE — the tab inventory is FINAL: Summary (overview · summary · plot hooks ·
+DM compass) / Systems (services · economics · power · defense · resources ·
+viability · substrate · magic · war&faith) / World (NPCs-first · relationships ·
+rumors · daily life · TRADITIONS · history · neighbours) / Notes (DM notes · AI
+notes · chronicle · versions). This is SCOPE CLOSURE for the dossier: C4 restores
++ polishes toward a now-fixed target; ROUND 3 reviews against a closed model; any
+future tab addition is a new owner ruling by definition. The settlement record now
+spans economy, power, arms, faith, people, bonds, days, culture, memory, and
+neighbors — the complete anthropology the product promised.
+**⬛⬛⭐ THE TRADITIONS COMMISSIONED — ENGINE LIFT #4 (owner, 2026-07-18: "lets bring
+in culture" → "yes do it"):** per-settlement traditions (holidays · festivals ·
+events · fairs) as the culture layer. Owner spec ratified: seeded genesis from the
+settlement's ORIGIN · immutable CORE MOTIF with slow, checkpoint-gated expression
+mutations (tier crossing / ownership change / deity change / imposition / migration
+threshold / generational drift — hysteresis + caps, reframe-class discipline) ·
+calendar-timebound (season+month mechanics, fictional week in prose) · weighted-PRNG
+outcome TIERS (triumph→failure, plus CANCELLED≠FAILED — manager's determination per
+owner delegation) with weights from prosperity band, stressors, owner-power health,
+seasonal severity, scale-vs-means mismatch · POWER OWNERSHIP with legitimacy stakes
+and state-driven re-assignment · vassal IMPOSITION with the suppressed-core
+return-on-liberation emergent · migration ADOPTION via mover origins · count scales
+by tier (thorp 1-2 → metropolis many). Effects = READ-MANY, WRITE-BOUNDED pulses
+through existing channels (trade, legitimacy, faith standing, news, chronicle,
+hooks) — never new write paths into other kernels. Surfaces: dossier Traditions
+tab REGISTERED IN THE WORLD GROUP (owner placement, same day: "the tab should exist
+in the world tab of the dossier" — a data-only TAB_GROUPS/TABS registration per the
+reconciled-base plug-in pattern; world group stays NPC-first per master's ordering
+law; manager judgment, vetoable: Traditions slots beside daily_life — culture next
+to daily life) · almanac · chronicle · map festival dress (IT-3 coupling) ·
+exports · facet-law custom kind (S4; AI proposals Surveyor-gated). Backfill for existing
+settlements at flag-light (veteran-backfill pattern). traditionsEnabled = THE
+EIGHTH FLAG in the pre-signed ONE REGEN; genesis content parks red on generator
+goldens (generation-time precedent); ROUND 3 reviews; SOAK certifies occurrence
+cadence + mutation rarity as named metrics. Recon workflow dispatched (time/calendar
++ catch-up-collapse hazard · powers/legitimacy · movement/relations incl. mover
+origins + vassal state · event/content machinery); DESIGN_TRADITIONS.md freezes on
+its receipts. Task #37.
+**⬛ ONE DOOR VISIBILITY CLARIFIED (owner, 2026-07-18: "the floating AI button
+should only show for the surveyor premium"):** the left-edge marker renders ONLY
+for Surveyor-tier users — no lock-tease, no placeholder; the margin stays empty
+for everyone else. SUPERSEDES the manager's lock-glyph-tease default in the One
+Door row below. AI-tier discovery = Pricing page + tierFacts surfaces, never
+in-app chrome. Polish/Narrate (own credit track) unaffected. C13 spec amended.
+**⬛ WALK FEEDBACK #1 (owner, 2026-07-18, the cluster-1 walk's first verdicts):**
+(1) REMOVE the Instant World premium card from the create page ENTIRELY; (2) fold
+"instant generation" into the line "Pick a size. Roll a settlement. Every size from
+thorp to metropolis." (manager judgment, vetoable: the phrase doubles as the
+entitlement-gated entry to the instant flow so the capability keeps a doorway —
+plain-copy + recorded deferral if wiring is awkward); (3) the two demo miniature
+boxes must START AT THE SAME HEIGHT (top-align the exhibit pair). Lands as C1r-d in
+the deep-craft lane; then the lane proceeds to SURFACE 2 (library settlement view)
+restoration per the reconciliation-map S2 spec + THE LIVING BACKDROP ruling.
+**⬛ DELEGATION #2 EXECUTED (owner: "use your best judgement for #2… support@
+settlementforge.com is suppose to redirect to settlementforge@gmail.com",
+2026-07-18):** (1) MARKETING MASTERS MOVED per the recorded default — ~381MB
+archived to ~/Desktop/settlementforge-marketing-masters/ (file-count parity
+verified), git rm'd @ ced265b8 w/ README pointer; art-direction MANIFEST restored
+to git @ b0c74a4d (doctrine text, not a master); microsite bg.mp4 (73MB, under
+GitHub's 100MB hard limit) deliberately retained so the prototype stays runnable.
+Tracked marketing weight 474MB → 92MB — THE PUSH-SIZE BLOCKER IS CLEARED.
+(2) SUPPORT EMAIL: owner intent = branded address forwarding to the gmail; MX
+probe EMPTY (no mail routing exists yet) ⇒ FAIL-SAFE SEQUENCING ruled: code
+default stays settlementforge@gmail.com until the owner configures DNS email
+routing + a test mail round-trips, THEN the one-line flip to the branded address
+rides the deploy batch (§8 carve-out rewritten; memory reopened). Never flip
+before the test.
+**⬛ MINIATURES CHIP FOLDED (2026-07-18): claude/deep-craft-miniatures @ 332fdf56
+(owner-started session task_2bb0e68e, signed off there) merged → deep-craft @
+9906d793 (NUL-clean, geometry verified, focused gates + build + verify:dist all
+exit 0). The demo panels are half-scale FLAT exhibits via an opt-in `compact` prop;
+⚠ THE 44px LAW recorded in its memory (shrink chrome, never hit-targets). THE
+CREATE PAGE IS NOW WHOLE INCLUDING THE MINIATURES — the owner walk at 5199 shows
+everything.
+**⬛⭐ ILLUSTRATED TOWN IT-1 LANDED (2026-07-18) — the glyph spine, four commits on
+claude/illustrated-town @ e2d1f0de (base 78a04afc, NOT folded).** 490cf93a THE
+GLYPHS (glyphAssign + medieval library + compiler emitting ONLY the existing 5 op
+kinds) · 6ef45afd THE ILLUSTRATED LENS (sibling-registry id; five existing lenses
+byte-identical) · e8646987 THE PANE UNDERLAY + LOD + op-budget guard (the
+two-render-paths divergence class CLOSED for illustrated mode) · e2d1f0de
+illustratedTownGolden family MINTED. FULL SUITE 13,201 passed / 6 failed —
+TRIAGED: 4 parked golden families (expected) + advancePauseResume 20s timeout
+(LOAD FLAKE, 9/9 green in isolation — second confirmation of the concurrent-lane
+flake class same evening) + aiGroundingBundle.freshness. FRESHNESS FORENSIC:
+PROVEN PRE-EXISTING at the composite base — the recorded bundle's 48 inputs
+intersect IT-1's diff at ZERO files. ⚠ HONESTY FLAG: the composite assembly row
+listed "freshness regen" among its 10 dispositioned reds, yet the red exists at
+78a04afc — the regen either didn't land or re-drifted at assembly; CURE QUEUED at
+the deep-wave fold (npm run build:edge-shared, declared cause, mechanical re-pin).
+Expected-red set on the composite lineage is 4 parked + freshness until that cure.
+IT-2 (ground dress) next in the same worktree.
+**⬛⭐ C1 COMPLETE — THE COMMISSIONING DESK IS WHOLE (2026-07-18, deep-craft tip
+01ad3a8f).** C1r-c landed in three commits: 5e7cbdf4 THE LEAF (one commissioning
+plate; Advanced entirely behind .oc-m-unfold; InstantWorldEntry RE-HOMED below the
+fold — the recorded deferral PAID, mounted in WizardEmptyState) · 4075b499 THE TINT
+TRIO (wizard banners → clerk's notes; ceilings lowered in-commit) · 01ad3a8f THE
+STAGE BACKDROP (six evolution stills as gauge backdrops — optimized jpgs 133-150 KB
+each under public/evolution/, static media ZERO eager JS, new pin
+homeHeroStageBackdrop.test.jsx). Gates: verify:dist 150/150 · FULL SUITE 13,148
+passed / 5 failed = EXACTLY the expected five (4 parked golden families +
+aiGrounding freshness). ⚠ FLAKE CLASS RECORDED: the first full-suite run showed 5
+EXTRA reds — all tests/security/*.pglite.test.js, all "Hook timed out in 10000ms" —
+under concurrent-lane machine load; isolation re-run 51/51 green in 5.6s. Protocol
+note for every future fold: pglite hook-timeout reds under load are retriaged by
+ISOLATION RE-RUN before any diagnosis. Also confirmed in passing: the FMG fork's
+supply-chain gate (validate-map-fork VENDOR-MANIFEST checks) EXISTS and is
+test-exercised — partially answers the ROUND 3 intake item. THE CREATE PAGE IS THE
+FIRST SURFACE THROUGH ALL THREE STEPS (base → functionality → craft): master's
+skeleton, every control, the consolidation ruling, the evolution echo. OWNER WALK
+READY at localhost:5199 (vite serves the worktree live).
+**⬛ THE LIVING BACKDROP + EDIT-GATE RATIFICATION (owner, 2026-07-18):** (1) the
+library settlement view's BACKGROUND = that settlement's last-viewed map — persisted
+as the state tuple {view: plan|panorama, lens/skin}, re-rendered deterministically as
+a low-opacity ink wash under the dossier plates (never a raster; always current with
+world state; contrast pins extended over it; no blur — wash only). Never-viewed ⇒
+default plan lens (no settlement page is bare). JUDGMENT (vetoable): persistence
+starts DEVICE-LOCAL (localStorage keyed by settlement) — the mapEdits blob would
+churn saves on mere viewing and is an owner-gated persistence surface; cross-device
+promotion = owner call. Lands with the C3/C4 library-view restoration; upgrades
+automatically to the illustrated/seasonal portrait when THE ILLUSTRATED TOWN folds.
+(2) "settlement map edits are gated by premium" RATIFIES the standing entitlement
+ladder verbatim (2026-07-17: FREE = view/hover/5 lenses/panorama; CARTOGRAPHER =
+editing/pins/change-view depth/fog/interiors/v2-redraw; SURVEYOR = AI) — no change
+needed; if the owner meant stricter-than-Cartographer, amend on their word.
+**⬛ THE ONE DOOR RULING (owner, 2026-07-18: "on the left hand side of the page only…
+a floating marker for AI or an 'ask me anything'. it is the only access to AI in the
+document besides the polish for dossiers. all prompts go through it and it should be
+smart enough to work with what its got first defaulting to thinking that every
+request is on the page it is on before moving outward"):** AI front-of-house
+consolidates to ONE left-edge floating marker (slate tab, marginalia position, no
+text until hover; "Ask the Surveyor" wording vetoable). Carve-outs, named and
+closed: dossier Polish/Narrate + proposal-slip stamps (results, not entries). The S3
+intent compiler becomes the router; S1/S4/S5/S6/style/S7 panels become destinations,
+never entry points. CONTEXT-FIRST LAW: grounding envelope = current surface → 
+settlement → world → product, escalating only on classifier verdict — the
+token-efficiency doctrine in UX form. Schema wall / kill-switches / early-access
+labels survive verbatim. Lands at deep-wave slice C13 (architecture doc amended);
+guide whispers unaffected (deterministic registry, not AI).
+**⬛⭐ C1r BASE RESTORATION LANDED (2026-07-18) — the create page wears master's
+skeleton again.** claude/deep-craft fb5e8031 → C1r-a @ c722c99b (config stage =
+master's single LayeredConfigurationPanel; wizardStep stepping DELETED per ruling;
+StepIndicator/WizardCommitBand removed [importers checked; WizardChipRow retained —
+ChangeModeBar imports it]; TradeDynamicsPanel double-disclosure flattened) → C1r-b @
+2a12cc9c (theme.js LANDING_MAX surfaced; WizardEmptyState + HomeHero = master's
+remediated composition; ANON GAUGE LAW ENFORCED + new absence pin
+homeHeroAnonGauge.test.jsx — the law violation no e2e caught is closed). Receipts:
+all gates bare-green per commit; FULL SUITE 13,185/12 skipped/5 failed = the 4
+parked golden families + aiGroundingBundle.freshness (pre-existing at base — diff
+touches zero generator/aiGrounding inputs; generatorGoldenMaster UNSHIFTED =
+generation-neutral proven). Census: all 63 KEEP controls verified reachable; only
+the 3 step-nav controls deleted (ruled). Ratchets 1090/117/273/248 →
+1082/115/270/247 (ceilings lowered in-commit). Eager 1,038,588 → 1,038,614 B
+(+26 B, the LANDING_MAX export; headroom 1,386 B). TEN JUDGMENT rows recorded
+vetoably in the lane report + memory c1fin-base-recut-shipped.md — load-bearing:
+setEntryPath-not-in-store (brief contradiction caught by VERIFY-FIRST; live exit
+machinery kept), tierFacts.contract requires the config import (master's hardcoded
+$2.99 would fail it), master's STRUCTURE + deep-craft MATERIAL (flat plates/
+ClerkNote over master's rounded+shadowed — tolerance-0 kill-list), InstantWorldEntry
+temporarily UNMOUNTED (re-home below the fold = C1r-c's recorded deferral, must
+land). REMAINING: C1r-c craft consolidation (one commissioning plate · Advanced
+behind the .oc-m-unfold leaf · demo miniatures · tint trio · evolution backdrops
+measured · InstantWorldEntry re-home) — fresh implementer, same worktree. The
+restored create page is SERVABLE from the worktree for the owner walk.
+**⬛⬛⭐ THE EIGHT CROWNS RATIFIED (owner, 2026-07-18: "work hard and get me the best
+website! With this, we would have one of if not the best:"):** the benchmark expands
+from four crowns to EIGHT — 1 settlement map generators · 2 world map generators ·
+3 settlement substance generators · 4 casual game engines · 5 prose & hooks
+generators · 6 setting & world builder · 7 world simulator for TTRPGs · 8 AI usages
+for TTRPG creation and framing. Manager scorecard recorded honestly: WON on 3
+(substance — the deepest moat), 7 (simulator — category of one; the soak is the only
+opponent), 8 (the schema-wall trust architecture no competitor can tell); WINNABLE
+IN-PROGRAM on 1 (ILLUSTRATED TOWN closes Watabou's beauty axis), 5 (grounded prose;
+ROUND 3 content dimension), 6 (generative-not-wiki redefinition); CROWN 2 RE-SCORED
+(⬛ ERRATUM + owner correction, same day: "our FMG fork is literally azgaar's
+system" — VERIFIED in-tree: public/map/ = 636-file vendored fork of Azgaar's FMG
+(MIT, LICENSE-FMG.txt carried), iframe + typed postMessage RPC via
+public/map/sf-bridge.js (~1,136 lines), 4 inline main.js patches, upgrade runbook
+docs/fmg-fork.md, setup docs/azgaar-bridge.md — "the map provides geography…your
+settlements provide depth." The manager's earlier "world map gap vs Azgaar" scoring
+and the proposed import bridge were written WITHOUT checking the tree — the bridge
+already IS the architecture, and FMG's native .map load means bring-your-own-Azgaar-
+world is largely inherent. CROWN 2 THEREFORE STANDS FAR STRONGER THAN SCORED:
+Azgaar-class world generation by construction + the living layer no FMG install
+has. Remaining crown-2 work re-scoped: (a) house coherence of the realm surface
+(deep-craft C5 chrome — already specced); (b) OPTIONAL: a house FMG style preset so
+the world map wears the parchment-and-ink hand (FMG's own style system; small,
+vetoable) — THE ILLUSTRATED REALM as a from-scratch build is SUPERSEDED by this;
+(c) ROUND 3 intake ADDS: sf-bridge postMessage RPC security/origin audit + the
+public/map gate-coverage question (the fork sits outside eslint/tsc/vitest by
+design — verify what its only gates actually cover) + FMG-upgrade currency check.
+MIT attribution rides the existing ⛔OWNER legal-consult carve-out) and 4 (the casual-game reframe: the loop
+exists — verbs/Forecast/Docket/SessionMode/tempo — but game-feel was never surveyed
+as a discipline → GAME-FEEL added as a named ROUND 3 dimension). ROUND 3's
+experience charge re-aimed at the eight (architecture doc §4 amended). The strategic
+through-line recorded: seven crowns rest on one moat — meaning under everything —
+and the eighth is the website the deep wave is building.
+**⬛⭐ THE ILLUSTRATED TOWN COMMISSIONED (owner, 2026-07-18: "do it!" + the reskin
+note):** the owner's map critique ratified as a wave — the settlement map lacks
+terrain/season art, reads as a flat bird's-eye diagram of blocks, and needs the
+cartographer's-illustration treatment: the BIRD'S-FLIGHT idiom (planimetric streets,
+buildings drawn as oblique miniatures — church w/ spire, mill w/ wheel), ground dress
+(fields/woods/water/relief hachures extending the landforms mark vocabulary), season
++ live-state dress (winter/harvest/siege/scars from sim reads), paper-depth effects
+(one light source, ink-hatched shadows) — NO literal WebGL 3D (rejected: breaks house
+style, wrong cost). Ships as a NEW LENS; the plan view SURVIVES as the orthographic
+source of truth for UVTT/exports; own additive golden family; existing map goldens
+untouched. FIRST-CLASS (owner directive, same message): THE SKIN REGISTRY — glyph
+sets/palettes/dress rules as DATA per the facet law, so the AI surfaces (S4 custom
+content / StyleOverhaul accept→mint) can mint RESKINS and GENRE skins (the genre-pack
+door made concrete at the map layer); manual picks persist via mapEdits/bespokeStyles.
+Vetoable placements (recorded): illustrated lens FREE as the default presentation
+face; curated alternate skin packs CARTOGRAPHER; AI-minted skins SURVEYOR. Task #36;
+recon workflow dispatched (render architecture · AI style seam · live-state reads ·
+export constraints); design doc DESIGN_ILLUSTRATED_TOWN.md next, then the lane.
+**⬛ THE WELCOME FILM RULING (owner, 2026-07-18: "i want the microsite animation for
+my welcome page… after each settlement tier it shows the different sections of the
+current welcome page before moving to the next. isn't that the 10,000 or million
+dollar website landing page?"):** the app Welcome gets the REAL scroll-scrubbed
+growth film — the microsite's travel-and-stop mechanic with the existing Welcome
+sections presenting at the frozen stops. REVERSES the manager's stills-only ruling
+(honesty note recorded: the eager budget guards the JS closure; streamed media never
+touched it — the true cost was network weight, now engineered instead of avoided).
+Slice C2 re-specced in THE_REMAINING_ARCHITECTURE.md with six engineering laws:
+stills-as-floor always (network-blocked walk proves the page whole without one video
+byte) · zero eager JS · six chapter-split all-keyframe legs ≤ ~8 MB each with
+idle-fetch + prefetch-ahead · desktop fine-pointer only (touch/reduced-motion = the
+stills journey) · taste-gate toggle for the walk · derivatives-only in git. Annex
+Welcome entry rewritten; the SVG map-journey design demoted to RECORDED ALTERNATIVE.
+**⬛⬛⭐ THE BASE RECONCILIATION MAP + MERGE FORENSICS LANDED (2026-07-18) — the owner's
+alternative-tree diagnosis CONFIRMED with one culprit.** docs/THE_BASE_RECONCILIATION_MAP.md
+committed: per-surface master(d024286e)-vs-composite(78a04afc) diff, classified, with a
+RECONCILED BASE spec per page. Three surfaces regressed (S1 dossier: header reroll
+reintroduced · world group no longer NPC-first · relationship-web jump downgraded to
+static text · Spatial Layout demoted · floating PostGenCoach lost; S2 library: the
+two-column NextActionRail right rail REMOVED; S3 create: master's single
+LayeredConfigurationPanel replaced by the old stepped wizard — the very thing the
+owner's "too many pieces" veto names); S4 nav ALREADY ALIGNED. FORENSICS: the entire
+regression class traces to ONE commit — merge `0168e287` "MASTER MERGE W1"
+(2026-07-15, 568 conflicts), which resolved ~147 contested UI files to the program
+("ours") side and discarded master's parallel P7–P12 organization (master was the
+SECOND parent; its refinements never entered the lineage; the 886 later commits built
+on the regressed skeleton, no later restoration — tip==merge on every probe). The
+owner's mechanism ("worked continuously on an alternative tree; structure lost after
+the remerge") is exactly right. Restoration recipe recorded in the map + §1b of
+THE_REMAINING_ARCHITECTURE.md: per path, `git diff 0168e287^2 0168e287 -- <path>`
+shows what was discarded; master's version lives intact at `d024286e:<path>`;
+~138 collateral files beyond the nine surveyed (pricing, library toolbar, settlements
+cards, how-to, primitives, copy, theme) get the same master-first walk by their owning
+slices. C1-fin re-cut to build from master's WizardEmptyState/HomeHero/
+LayeredConfigurationPanel. Next: the deep-craft lane resumes under the three-step
+order (SET THE BASE → PLUG IN → CRAFT).
+**⬛⬛ THE BASE RULING (owner clarification ×2, 2026-07-18) — SUPERSEDES the same-day
+dossier-model row's "preserve-and-polish only" framing:** the GITHUB SITE (origin/master
+@ d024286e) is THE UI BASE OF RECORD — its page organization, button placement, and
+layout discipline. The current local lineage's pages are a REGRESSED STARTING POINT,
+not the endpoint. TWOFOLD GOAL, no order: (1) absorb into that base ALL functionality
+built since (guide · AI · maps · exports · entitlements · seal · everything); (2) run
+the craft overhaul FROM that base — HEAVIER TREATMENT WELCOME once the base is set
+properly. EMPIRICAL DISCOVERY: master is a STRICT ANCESTOR of the composite (0 vs 887
+commits; merge-base = master's tip) — no cross-lineage merge exists at the UI level;
+the regression lives somewhere in the 887 and is repaired by per-page structural
+restoration, not by merging. THE BASE RECONCILIATION MAP survey dispatched (read-only:
+master vs composite per surface, differences classified ORGANIZATION-REGRESSION vs
+FUNCTIONALITY-ADDITION vs NEUTRAL-RESTYLE → the reconciled base spec per page). The
+deep wave's slices now run: SET THE BASE → plug in the new functionality → craft
+treatment on top. The anon gauge veto (hamlet→town) and create-consolidation rulings
+stand unchanged.
+**⬛ THE DOSSIER MODEL RULING + TWO VETOES (owner, 2026-07-18, four screenshots):**
+(1) THE DOSSIER LAYOUT MODEL = the screenshots' information architecture (identity band ·
+crisis banner+hook · Systems Health status-cards-over-meters · collapsible
+Origin/Geography/Layout · institutions chip-row · the Draft→Saved→Canon→Realm→Shared
+stepper · persistent header actions · right-rail Narrate/Export/Edit · anon footer
+save+buy pair · DARK PROSE BANDS as the two-register solution). C4 REFRAMED: preserve-
+and-polish that IA — craft applies as MATERIALS+TYPE only (plates/rules/serif/oxblood/
+medallion/colophon); manuscript grammar scoped to PROSE surfaces (Overview, DM Summary);
+ADD the wave functionality the layout predates (provenance hover · map-stack entries ·
+annals · slate AI + stamp · entitlement gates · config figures). (2) VETO of deep-wave
+JUDGMENT #3: the anonymous gauge shows HAMLET→TOWN ONLY — capped tiers out of anon
+sight. (3) CREATE CONSOLIDATION: pre-generation = ONE commissioning plate (headline +
+gauge + one gold Forge + one honesty line); Advanced entirely behind the leaf; clerk's
+notes ≤1 visible; demo artifacts below the fold as exhibits.
+**⬛⭐ THE REMAINING ARCHITECTURE COMMITTED (owner order, 2026-07-18: "architect what
+must be done out exhaustively... I may run out of fable").** docs/
+THE_REMAINING_ARCHITECTURE.md is now THE SUCCESSOR DOCUMENT for everything left:
+successor protocol + state + every deep-wave slice (C1-fin…C16 with per-slice laws,
+protected behaviors, done-whens) + phase D + the fold + the push completion (w/ the
+LFS/move decision) + ROUND 3 staffing & pre-stocked intake + soak + tuning + THE ONE
+REGEN steps + THE VERY END + the owner decision queue + post-launch owed + the hazard
+compendium (every trap that has fired). Any session — Fable or not — executes FROM
+that doc. The ledger remains the record of what then happened.
+**⬛⬛ DEEP WAVE 0b→1c LANDED (2026-07-18) @ 78431763 — THE OWNER WALK OPENS.** Seven
+commits: 0b MATERIAL (FNV-seeded byte-stable grain tiles 3.1/2.9 kB, ink-bite frames,
+feTurbulence-ban pin) · 0c MOTION (the closed twelve, ≤700ms, reduced-motion collapse
+pinned, keyframes transform/opacity-only) · 0d HERO SPECS in-tree · 0e PLATES (six
+replaced w/ .orig preserved, ten added, webp twins < budget, consumers intact) ·
+1a THE GAUGE (six stations from TIER_ORDER, figures from POPULATION_RANGES at render,
+E2E locator + walker contracts preserved) · 1b THE ARRIVAL (token-computed ≤2s law,
+content in DOM at t=0, reduced-motion instant) · 1c CLERK'S NOTES (one primitive, five
+callouts converted, role=alert kept). RATCHETS MOVED: radii 1097→1090 · shadows 118→117 ·
+rgba 275→273 · callouts 251→248. EAGER DELTA 0 B (closure 1,038,588 at base and tip).
+SIX JUDGMENTs vetoable (16:9 plates uncropped · ARRIVAL replays on remount · gauge shows
+capped tiers to anons as pitch · ink-darken color-transition sanction · progression webp
+twin · annex/survey naming discrepancy recorded). CLUSTER 1 PARTIAL by name: advanced
+second leaf · slate slips (deferred to the AI cluster) · demo miniatures · Wizard tint
+trio · evolution-still gauge backdrops (own measured slice) all NOT built. Hard stop
+honored; the walk runs on 78431763; the completion slice dispatches AFTER owner feedback.
+**⬛ DEEP WAVE PHASE 0a LANDED (2026-07-18) @ c335c355 on claude/deep-craft.** THE
+KILL-LIST RATCHETS committed shrink-only-exact (title-census idiom), THE FOUR STARTING
+COUNTS frozen at the composite base: borderRadius 1,097 · boxShadow 118 · rgba() washes
+275 · tinted callout tokens 251. Receipts: 4/4 ratchet tests green, eslint clean,
+hard-gated commit, post-commit survival clean. The lane then STOPPED HONESTLY at the
+commit boundary on context exhaustion (JUDGMENT ratified: verified-resumable over
+half-built). Handoff facts banked: eager headroom ~3,000 B · Welcome = stills+CSS only ·
+the pre-existing reds are CURED on this base (only the four parked golden families red).
+FRESH-CONTEXT LANE dispatched for phase 0b→cluster 1: works IN the standing worktree
+(the branch is checked out there; a new worktree cannot hold it), self-contained brief,
+commit-at-boundaries discipline, hard stop after cluster 1 for the owner walk.
+**⬛ THE DEEP WAVE RESUMES (owner, 2026-07-18: "continue with the deep wave according to
+everything that we have now").** The two open plate regenerations CLOSED first
+(settlements-mappa: saints/halos/crosses out, sun-face + vines + sea-serpent kept, quiet
+center-right · about-fireside: ordinary travelers around the storyteller, zero fantasy
+costume). The lane re-dispatched with THE ACCUMULATED LAW SET: the original deep-wave
+order (phase-0 ratchets/material/motion/heroes → commissioning-desk cluster → OWNER STOP
+→ remaining clusters) + THE INSTRUMENT PRINCIPLE + the reference library as BINDING art
+direction (MANIFEST translation notes; alive-world people ruling) + THE PLATE INTEGRATION
+CHARGE (improved plates through the optimize pipeline into public/backgrounds, replacing
+the audited originals; evolution stills = the tier/journey backdrops) + THE WELCOME =
+the Survey of One Settlement in its app form (stills + CSS travel-and-stop per the annex;
+the microsite at marketing/website is the working reference implementation; the 76MB film
+NEVER enters the app — stills only; eager budget guarded).
+**⬛⬛ THE SURVEY OF ONE SETTLEMENT — THE MICROSITE BUILT (2026-07-18).** The owner's
+travel-and-stop design executed end to end: SIX CHAINED FILM LEGS generated (Seedance
+start/end-frame anchoring — desk-dive + five growth legs, each landing ON the approved
+evolution plate; 270 credits), concatenated to a 30.25s all-keyframe scrub film (900p
+CRF24, 76MB prototype-grade); the microsite REBUILT as travel-and-stop: legs drive film
+chapters, stops freeze the film and crossfade to the crisp stage stills (no ScrollTrigger
+pins anywhere — content height can never desync the film), stills-as-floor layering
+covers unbuffered seeks, touch/reduced-motion get the stills-only journey. Six stops =
+Forge@thorp · Brief@hamlet · Voice@village · LivingWorld@town ("you have just watched
+this town grow — that is the engine, working") · Artifacts+audience@city ·
+Ledger+Door@metropolis. CONFIRMED by DOM receipts: conductor maps mid-leg-2 → t=12.6/30.25
+w/ film visible; stop-4 → film hidden, frozen at the town landing frame (t=20.12),
+still-4 crossfading in. Build green (vite). ⚠️ pane screenshots unreliable after scripted
+scrolls (stale-frame defect) — logic receipts stand; the visual walk is the owner's.
+Preview: cd marketing/website && npm run dev → http://localhost:5301. The app's Welcome
+inherits this design per the annex (stills + CSS travel, film optional).
+**⬛ BATCH-2 PLATE AUDITS (2026-07-18):** settlements.jpg = REGENERATE (mappa-mundi
+concept KEPT for the Library; strip the enthroned saint + haloed figure + crosses
+[invented-faith only], illegible-only text, house palette, quiet zones; sun-face + vine
+borders + sea-serpent KEPT as period cartographic furniture — vetoable ruling) ·
+about.jpg = REGENERATE (fireside-storytelling concept KEPT; the elf/dwarf/starred-wizard/
+goggled-gnome party = the generic-fantasy tell — recast as ordinary travelers around the
+teller; fire, dusk road, listeners stay). Journey prototype film rendering (Seedance job
+d81b0186; deliver on completion). Remaining audits: pricing, account, progression, landing/.
+**⬛ THE JOURNEY MECHANIC COMMISSIONED (owner, 2026-07-18):** the home page becomes a
+scroll-driven cartographic journey — the traveling line along a road on a real engine-
+rendered map, waypoints unfurling the existing sections as paper plates. RULING: built
+as SVG + DOM bound to scroll progress (synced-to-content, cheap, accessible, dissociation-
+safe), NEVER scrubbed video; video reserved for the optional hero intro + ambient loop
+(taste-gated). Annex's Welcome entry rewritten (supersedes THE ROAD tune). Prototype
+map-travel film generated via Seedance for eyes-on comparison at checkpoint 1. The
+reference-library session also delivered: THE EVOLUTION SERIES (six chained ages of one
+settlement, landmark lineage held), the alive-world people ruling (staffage welcomed;
+crier + scriptorium rehabilitated), and the ~250MB raw-masters note (LFS/move before push).
+**⬛ THE INSTRUMENT PRINCIPLE + THE REFERENCE LIBRARY (owner, 2026-07-18):** the wave
+paused at "wait stop" gains its art direction first. Owner reframe, now law: THE WEBSITE
+IS THE PRODUCT, not an advertisement for one — it must be simultaneously navigable,
+aesthetic WITHOUT being busy, immersive, intuitive: self-advertisement + database +
+simulator + generator + gallery in one working instrument. Commission: generate AS MANY
+reference images as needed (Higgsfield MCP, premium tier, best photoreal model by
+exploration) as THE ART-DIRECTION LIBRARY for the deep wave — organized by register
+recipe (environment/materials/artifact/ledger/lexicon/charter/write-desk/map-kit/
+specimen-drawer/dispatch/dim-lantern/hero moments), each with a TRANSLATION NOTE (what
+the UI takes: grammar/hierarchy/texture; what it never takes: period density/clutter).
+Real product assets (the seal, a real map export) feed generations as reference
+elements. References only — nothing ships without the taste veto; the canonical mark
+is always our vector, never a model's approximation. Library → marketing/assets/
+references/ + manifest; the deep-craft lane receives it as binding art direction.
+**⬛ OWNER GO (2026-07-18): THE DEEP CRAFT WAVE DISPATCHES — "let's rework the website
+first. keep everything that you developed and lets develop from there."** The wave runs
+BEFORE ROUND 3 (inside the standing preview-pause). Governing spec =
+docs/DESIGN_DEEP_CRAFT_PAGES.md (the per-page annex: foundation additions — material
+layer, 12-behavior motion grammar, 4 hero moments — five register recipes across every
+route, kill-list ratchets to zero, functionality pins untouched). Base = THE COMPOSITE
+@ 78a04afc on new branch claude/deep-craft (everything built is kept and developed FROM
+— nothing reverts). Execution: the warm craft lane, sequential clusters, phase 0 first
+w/ ratchets committed before any surface moves; OWNER CHECKPOINT after cluster 1 +
+THE ARRIVAL (hard stop for the live walk); manager by-exception review at every boundary;
+full suite at the fold. ROUND 3 stays held until the wave folds + the owner's finished-
+site walk. THE PUSH (#23) executes in parallel per the stated plan (probe → measured →
+backgrounded → per-branch verified).
+**⬛⬛ THE COMPOSITE ASSEMBLED + GATED (2026-07-18) @ 78a04afc on claude/the-composite.**
+Merges: w-r2-g2 @ aec57981 (2 conflicts: npcProfile resolved by SUBSUMPTION — the incoming
+normalizeNpcRank provably contains the ported master fix; grounding bundle REGENERATED,
+never hand-merged) + content-gt-final @ 23c77444 (clean; generation-time-content confirmed
+already inside — the recorded supersession) . STATIC GATES first-pass green: build 0 ·
+dist 150/150 · tsc 0 · strict 0/0 · lint 0. FULL SUITE 13,149 passed; the 10 reds
+dispositioned BY NAME: (1) npcProfile ×2 = REAL cross-branch semantic collision — g2's
+rank-vocabulary rename (subordinate→secondary) half-landed; COMPLETED at assembly (9 tier
+keys + the pre-rename test migrated, tier content asserted unchanged — declared shift,
+label only) · (2) sizeBaseline ×2 = narrativeGenerator SHRANK 905→730 (the content wave's
+win) — left the baseline · (3) compendiumDataFreshness = regen on the merged tree ·
+(4) dossierContent = G2's DECLARED "Underways catalog half (RED by design)" content debt —
+PAID: Underground network desc variants AUTHORED at three tiers in the corpus register
+(the coverage contract caught a cross-branch IOU exactly as built to) · (5-8) the FOUR
+PARKED GOLDEN FAMILIES (generatorGoldenMaster · beliefMapGolden · worldpulseDeityGolden ·
+pdf goldenViewModel) — verified pure output diffs, re-mint at THE ONE REGEN, the standing
+plan's expected red set. TASK #5 CLOSES. THE PUSH (#23) executes next; ROUND 3 remains
+HELD at the owner's preview-pause gate (+ the open owner decision: THE DEEP COMPOSITION
+WAVE recommendation, answer pending).
+**⬛ OWNER GATE INSERTED (2026-07-18): PREVIEW-PAUSE BEFORE ROUND 3.** Owner order:
+"before the resurvey, pause and show me a preview." ROUND 3 (task #6) does NOT
+auto-dispatch at the push. Sequence amended: composite suite → red audit → ledger →
+PUSH (#23, standing order) → SERVE THE COMPOSITE LIVE (vite from the composite branch,
+lineage-probed) → OWNER WALK-THROUGH → ROUND 3 dispatches only on the owner's word.
+**⬛⬛ FOLD: THE ORGANIC CRAFT WAVE → w7-prep @ 8a5b10a1 (2026-07-18) — AND THE FIRST
+ALL-GREEN FULL SUITE.** Merge 9124110b (no-ff, zero conflicts, NUL scan clean, 89 files)
++ two triage commits. THE SEVEN FULL-SUITE REDS CURED, not baselined: mutedBg → hex-key
+swatch entry (-2 raw literals) · npcLadder EXEMPT classification (LADDER-FOLD ESCAPE —
+the focused-gates protocol's known blind spot, now proven: globals only run at manager
+folds) · crisisTripleSync +3 sanctioned S7 refs · relationshipCompatibility +1
+(signalRegistry vocabulary read) · raw-button baseline swap (doc-wave restructure; debt
+flat) · THREE slugify inliners MIGRATED to the kernel primitive (growth ceiling refused
+the baseline path — correctly; parity-proven byte-identical incl. ladder join keys; new
+parity cases committed; ladderRead gains its first import — kernel, consistent with the
+zero-ENGINE-import law) · raw-color BUDGET 1427→1450 LOUD EXCEPTION (23 literals shipped
+across six focused-gated folds; ROUND 3 carries the named tokenize-down task) ·
+SettlementMapPane 601→600 (import collapse; also cured sizeBaseline). RECEIPTS: tsc 0 ·
+strict 0/0 · lint 0 errors · build 0 · verify:dist 150/150 · CERTIFYING FULL SUITE
+1297/1297 files, 12,972 passed / 0 failed / 12 skipped, EXIT 0 — no tolerated reds
+remain. ERRATum owned: my review parenthetical "there is no Wanderer" was WRONG (it is
+TIER_NAMES.free); the lane enforced the principle, not my name ban. Wrong-lineage trap
+fired once mid-triage (11th; read-only; zero damage). Lane JUDGMENTs standing vetoable:
+dim-ink header device · PDF counterseal deferred (react-pdf seam) · gate title kept
+under the functionality law · TableView dim deferred at the legibility floor. TASK #32
+CLOSES. NEXT: THE COMPOSITE (task #5) — w7-prep + w-r2-g2 @ aec57981 + content-gt-final
+@ 23c77444 + generation-time-content @ f9720b5a on claude/the-composite.
+**⬛ THE SEAL APPROVED — IMPLEMENT + PLACE (owner, 2026-07-18: "i like the seal;logo
+impliment it also place it appropriately"):** the simplified device is the APPROVED house
+mark (favicon A stands). Placement register relayed to the running lane — core (already
+dispatched): tab favicon set · header wordmark lockup on every page · About seal moment
+w/ motto caption · export colophon w/ settlement-medallion counterseal. ADDENDUM
+placements (manager judgment under "appropriately", vetoable): site-footer colophon
+(small device, the printer's-mark position) · the loading emblem (the device as the
+diegetic app-loading mark) · error/404 clerk's-slip stamp (small device on the slip —
+the fiction holds even when lost) · OG/social share image (device on parchment for link
+unfurls; static asset, zero eager). Rule held everywhere: the mark never carries text;
+the name is always adjacent type.
+**⬛ TASTE VETO PASSED + PHASES 3-5 DISPATCHED (2026-07-18, owner: "run: 1. Craft
+phases 3-5... 2. The craft fold... 3. THE COMPOSITE"):** the five-sample direction is
+APPROVED by the owner's build order; the STOP releases. Dispatched to the standing craft
+lane (context intact): the census-enforced app-wide sweep → mobile/tablet companions →
+verification ratchet, carrying the four review revisions, the guidance checkpoints, the
+depth standard, and THE FINAL LOGO (the simplified device: ring/roofline/triangle/seal-
+point; hand-inked vectors; wordmark lockup; motto-as-caption ceremonial only; FAVICON A
+adopted per manager recommendation VETOABLE — one device everywhere, SVG+prefers-color-
+scheme with the Safari PNG dark fallback, maskable safe zone, ICO+apple-touch; header
+mark; export colophon = house device + the settlement's seeded medallion counterseal;
+the About seal moment). Gates: focused-only in-lane; the full suite runs at MY fold,
+where the pre-existing base reds (SettlementMapPane 601>600 + 7 suite failures at clean
+base) get name-identity triage. Then THE COMPOSITE (task #5) → PUSH (#23) → ROUND 3 (#6)
+per the standing sequence.
+**⬛ OWNER SIMPLIFICATION RULING (2026-07-18, "simplify it — too many elements"):** the
+mark reduces to its IRREDUCIBLE DEVICE — ring broken by the roofline, station triangle,
+red seal-point. STRUCK: rim legend, motto, field pellets, double ring, the SF from the
+primary mark. The name + motto move OUT of the device into the wordmark lockup (type
+beside the mark) and ceremonial captions (export colophon sets the motto as a line under
+the device, not inside it). Favicon = OWNER CHOICE PENDING: (A) the same device redrawn
+heavier — RECOMMENDED, one mark everywhere · (B) the SF signet surviving only in the tab.
+The accretion was the process's fault, not the owner's — each element entered justified;
+Rand's reduction discipline is the answer, and the struck elements remain available to
+ceremonial contexts by typography, never inside the mark.
+**⬛ OWNER SEAL AMENDMENT (2026-07-18):** the Colophon drops the SF monogram — the
+STATION (triangle + red dot) enlarges as the sole central device between rim legend and
+skyline; the name lives entirely in the legend + motto (pure sigillographic composition:
+device signals the class, legend individuates). The SIGNET keeps the monogram (period-
+correct: signets carried initials; a clean division of labor between registers). Manager
+additions under "fix anything else": device stroke raised to rule-family weight (no
+hairlines), interpunct anchors flanking the legend, two subordinate field pellets
+(worked-field discipline; VETOABLE — say the word and they go), triangle optically
+centered in the field. Final drawn vectors ride the phases-3-5 dispatch.
+**⬛ MANAGER PREVIEW REVIEW: PASS WITH REVISIONS (2026-07-18) + THE LOGO RECONCILIATION.**
+Review ran from the LANE worktree via a scratchpad static server (main-tree preview hazard
+honored; lineage curl-probed). VERDICT: the composition system reads authored at desk,
+field, and dim — the library ledger (memo-line italics, phase-glyph standing, CANON small
+caps) is the strongest instrument proof; pricing's differentiated bench + dagger markers
+kill the uniform-cards tell; the field/dim dossier (gold-on-umber lamplight) is the best
+single screen of the set. FOUR REVISIONS for phases 3-5 (none veto-blocking): (1) desk-width
+cartouche crowds its frame — title touches the right inner edge, tower device straddles the
+border (field-width composes correctly ⇒ width-dependent bug; optical padding pass owed);
+(2) field stack renders an ORPHANED duplicate tower glyph below the cartouche; (3) fixture
+typo "Dcovey Ash"; (4) sample-fiction values (tier name "Wanderer", hand-typed $5.99/30-
+credit figures) must bind config + copy registries at live wiring — never leak from samples.
+OWNER TASTE VETO NOW OPEN (server left running: http://127.0.0.1:8642/docs/samples/
+organic-craft/index.html). LOGO RESEARCH LANDED (4 lenses, ~40 sourced principles).
+RECONCILIATION RULINGS (vetoable): two-register system VINDICATED by both canons (great-
+seal→signet register descent; UNC/NASA/Wisconsin redraw-don't-shrink; names stay Colophon/
+Signet) · the Colophon gains the LEGEND (sigillography: the legend, not the device, is the
+load-bearing identifier) — name on the rim + the house MOTTO "STATE · NEVER · FATE" (the
+Aldus/Plantin emblem+motto formula, drawn from the covenant line already shipped) · the
+Signet stays text-light (SF only); letterless ring+skyline+dot fallback PRE-AUTHORIZED if
+SF aliases at true 16px (Starbucks-siren precedent; the red station dot is the wayfinding
+accent) · stroke floor at signet scale (Material 2dp-equivalent; redraw never shrink) ·
+Safari ignores SVG-favicon prefers-color-scheme ⇒ PNG dark fallback REQUIRED at wiring ·
+maskable safe zone (central 80%) for touch icons · SEAL+COUNTERSEAL INSIGHT: exports carry
+the house Signet beside the settlement's own seeded cartouche medallion — authentication
+layering straight from sigillography, zero new machinery (the craft wave's 96-slot
+medallion IS the counterseal) · register-governance table (which mark where, who
+authorizes) = a phase-3 law-doc section. Round seal = civic/secular register: correct.
+Rand caution BANKED: the mark's meaning arrives by association, not decoding — "logos are
+never love at first sight."
+**⬛ CRAFT WAVE PHASES 1-2 COMPLETE — STOP HONORED (2026-07-18):** claude/organic-craft
+@ b94f13c8 (base 019d1a2e, 6 commits, clean). Foundation (ink ramp · rubric · fluid scale ·
+three-posture usePosture · rule family · instruments · seeded-ornament library w/ byte-stable
+golden family) + 5-screen sample set as self-contained drift-guarded HTML
+(docs/samples/organic-craft/) + the census scaffold (30 routes + modals, all PENDING).
+Receipts: ~115 lane tests green · tsc 0 · strict 0 · lint-on-touched 0 · build 0 ·
+verify:dist 150/150 · EAGER DELTA 0 B (organic layer fully tree-shaken). Contrast AA
+CONFIRMED per state at the letterform. 8 JUDGMENTs recorded w/ rejected alternatives
+(depth-standard compliant; shadows-retirement + IM-Fell display binary = named deferrals).
+⚠️ CRITICAL PRE-EXISTING FINDING: base tip 019d1a2e itself reds — SettlementMapPane.jsx
+601>600 lint ceiling (not in .size-baseline.json) + 7 full-suite failures REPRODUCED at a
+clean base checkout (relationshipCompatibility · crisisTripleSync · rawButtonBaseline ·
+rawColorLiteral · sizeBaseline · slugifyIdiomBaseline · swatchResolves; some possibly
+worktree-environmental — VENDOR-MANIFEST empty in that run). NOT this lane's; TRIAGE OWED
+AT THE COMPOSITE (name-identity vs base discipline). NEXT: manager preview legibility
+review (desk/field/dim from the LANE worktree — never the main-tree preview) → owner
+taste veto → phases 3-5 dispatch.
+**⬛ GUIDANCE-COHERENCE CHECKPOINTS PINNED (2026-07-18, owner coherence question):** four
+binding checkpoints added to the craft brief for phases 3-5 (whispers→marginalia w/ registry
+intact · title census monotone down w/ the false-positive caveat · Handbook + WorldMapToolbar
+deferrals re-flagged not absorbed · dissociation test × artifact test compose). The two
+waves are one philosophy at two layers; the sweep lands them as one system.
+**⬛ OWNER RESCISSION (2026-07-18, minutes later): LOCALIZATION STOPPED.** On hearing
+the scope boundary (UI chrome localizes; engine prose = per-language corpora + goldens,
+a content-layer rewrite per language), the owner stopped the wave: "then stop the
+localization." The recon workflow was killed mid-flight (no results consumed); NO brief
+will be written (docs/briefs/W_LOCALIZATION_WAVE.md does not exist); NO build lane
+dispatches; NO extraction law rides the craft phases-3-5 sweep. Standing disposition
+restored: localization = post-launch roadmap BY NAME (depth-standard gap-5 re-corrected);
+the copy registries keep the door structurally open; English-first at launch. The
+override row above stands as history.
+**⬛ OWNER OVERRIDE (2026-07-18): LOCALIZATION MOVES PRE-ROUND-3.** The depth
+standard's gap-5 disposition ("post-launch roadmap by name") is superseded the same day it
+was written: the owner rules localization is built BEFORE the resurvey so ROUND 3
+validates it. Recon fan-out dispatched over the w7-prep lineage (copy architecture ·
+hard-coded-string prevalence · formatting/plural sites · engine-prose boundary ·
+budget/persistence). Wave brief = docs/briefs/W_LOCALIZATION_WAVE.md. Build sequencing:
+L1 infrastructure lane dispatches at the craft phases-1-2 fold (both waves rewrite
+src/copy — never in parallel); the extraction law rides the craft phases-3-5 census sweep
+(one app-wide pass, two laws).
+**⬛ THE DEPTH STANDARD RATIFIED (owner, 2026-07-17: the $10k-vs-$1M framework + "I
+want the absolute best that Fable can do"):** the standing check on all website work —
+the bar is DEPTH/CONSISTENCY/VALIDATION/WHOLE-EXPERIENCE EXECUTION, never screenshot
+beauty. Five columns added to the craft-wave fold gates (whole-experience coherence via
+the census · system-not-instances · evidence-not-vibes incl. rejected-alternatives
+recording · content-is-design · the honest gaps named). MAPPING BANKED: the program
+already fills the framework's expensive columns structurally (six research corpora =
+the documented research · the census = the past-the-front-door law · the law doc +
+golden-disciplined ornament = the design system · drift contracts + the JUDGMENT ledger
+= testing-and-evidence incl. why-rejected · the lane structure = the multidisciplinary
+team). THE TWO HONEST GAPS: real-user task validation = POST-LAUNCH OWED (all surfaces
+ship instrumented; ROUND 3's product-fit = the internal proxy) · LOCALIZATION = absent,
+now a NAMED post-launch roadmap item (copy registries keep the door open). ROUND 3's
+claims/product audit inherits the five columns. Relayed to the live craft lane.
+**⬛⬛ FOLD: THE LADDER @ e160177f (2026-07-17) — ENGINE LIFT #3 LANDS; THE ENGINE'S
+CONSTRUCTION ENDS FOR THE THIRD AND FINAL TIME.** 7 commits (17 files NUL-clean; ~1,790
+engine lines in lazy leaves; pulseKernel net-zero): the standing integrator · dynamic
+goals over the REUSED S7 registry w/ the attribution rule + honest lapsed · the
+challenge engine (windows, non-short-circuiting receipts, seeded resolution, the
+three-body single-pass, conservation swap/drop, four brakes, the stigma tax, D5
+grudges) · §8's standing loop closing BOTH ways single-writer (leadership quality
+consumed in coupContenders — a well-led faction RESISTS coups, turmoil INVITES them;
+dark-safe factor===1) · coup truncation · the faith-rupture permanent window · the
+npc_ladder beat. ALL NAMED FIXTURES PINNED: three-body, both-succeed-greater-deed,
+stigma-halved, multi-claimant attribution, sustained-margin-spike-never-wins, the
+ANTI-STASIS CENTURY BAND both bounds. All 19 prior dormancy goldens green + its own;
+fold receipts 65/65 + tsc 0 + strict 0/0 + dist 150/150. **npcLadderEnabled JOINS THE
+ONE REGEN (seven flags).** Tuning tables documented as soak dials (CHALLENGE_RATE 0.05,
+COOLDOWN 104wk, STIGMA_TAX 0.5, half-life 156wk…). SEAMS → ROUND-3/owner stock:
+pantheon rising-lift + war-god methods · explicit alignment modulation · the growth-
+trait entrenchment deposit (needs a growth-kernel signal input — single-writer
+preserved) · chained vacancy succession · provenance edges · display stock (NPC-card
+rung/goal, Power-tab read) · the open-bottom amendment STILL OWNER-PENDING. **ONE LANE
+REMAINS: THE CRAFT WAVE (phases 1-2). Construction is otherwise OVER.**
+**⬛⬛ FOLD: THE DOCUMENTATION WAVE 2/2 @ 08486264 (+ reconciliation 019d1a2e) — THE
+DOCUMENTATION WAVE COMPLETES, ALL FOUR PAGES SHIPPED.** ABOUT = the six-band trust page
+(the whole-loop schematic in the engraving register · the philosophy ladder w/ the DM
+prose surviving · THE COVENANT w/ six VERIFIED receipts — state-never-fate quoted from
+source, retention pinned to migration 023, the AI no-write-path proven over all 164 ops ·
+the tick diagram before its text · the concession-first AI section · the audit close;
+UnderTheHoodTab reaped). COMPENDIUM = THE REGISTRY-RENDER LAW real (one generated
+artifact + the freshness contract — divergence FAILS CI; the op registry PUBLIC in its
+real shape, 164 ops walker-pinned; hubs: Operations/Deities/Lenses/Facets/Calamity/the
+REAL 16 Living-World systems w/ preset truth from configs; tier bands CORRECTED from
+source — a disclosed on-screen fix; the A-Z crawlable index). THE CONTRACT'S IN-TREE
+CATCHES: the '14' stale comment (flagged, engine file ladder-fenced) · the wrong Thorp
+band (fixed) · brief premises honestly refined (archetypes AUTHORED-labeled — no engine
+source exists; calamity = the one bucket; the 9 PRESSURE_KINDS real but the old
+parenthetical wrong). **THE THIRD CROSS-LANE CATCH AT FOLD:** the doc-count contracts
+red (24 vs 25 edge functions — S7 crossed the branch point); reconciled @ 019d1a2e.
+JUDGMENTs incl. THE MAKER'S-NAME WITHHOLD (publishing the owner's real name on the
+public About = owner-gated; the one-builder framing + /founders link used — **OWNER
+QUEUE: name/face publication**) + the demo world = the sanctioned lf-033 fixture seed.
+SEAMS: custom-mode↔S4 vocabulary reconciliation deferred-with-reason · the preset
+war-gate nuance labeled. Receipts on the merged tree: 101/104→green after
+reconciliation (19/19 doc contracts) · tsc 0 · dist 150/150.
+**⬛⬛ THE ORGANIC CRAFT WAVE DISPATCHED (phases 1-2 + MANDATORY STOP at the taste
+veto)** — claude/organic-craft off 019d1a2e: the foundation (ink ramp · the rule family ·
+rubrication · fluid scales · the three-posture model · subset fonts · the seeded-ornament
+library v1 + its NEW golden family) + the five-screen sample set → STOP for the manager's
+preview legibility review + the owner's veto; phases 3-5 (the census-enforced app-wide
+sweep + the mobile/tablet companions + the verification ratchet) await the go. **THE
+PROGRAM'S FINAL BUILD DISPATCH. Live: THE LADDER + THE CRAFT WAVE — everything else is
+folded, parked, or proof.**
+**⬛ THE SURFACE CENSUS (owner confirmation: the craft wave covers "every single page"):**
+the wave brief gains a required enumeration deliverable — every route/view/panel/modal
+dispositioned (recomposed / instrument-exempt-with-reason / deferred-with-reason); the
+phases close at zero undispositioned entries; the preview review walks the census.
+Coverage = every page + every empty state/error/loader under the one-fiction pass, three
+postures each; the artifact/instrument split governs WITHIN pages, never exempts one.
+**⬛ FOLD: NON-WATER LANDFORMS (2026-07-17) → w7-prep @ d01a85ab** (5cb92caa off the fog
+tip; 12 files NUL-clean; clean merge across the gate-wiring pane edits). THE SITE IS
+VISIBLE: marsh/dunes/mountain-flank render across the flat map, all five lenses
+(pattern-never-colour), the panorama (per-kind pseudo-elevation — the flank stands
+proud), and every export through the ONE geometry source. THE WALL held (two numeric
+roles); provenance hover explains each kind for free; the v2 golden re-minted
+DECLARED-ADDITIVE w/ the 12/20-byte-identical-first proof; the style golden proven
+untouched-correct (v1 models carry no landform — the reasoned divergence from the SM-5
+precedent). Fold receipts: 37/37 (landform pins + BOTH goldens + panorama + gate
+cross-check) · tsc 0 · dist 150/150. Aesthetics join the standing v2 TASTE-VETO posture
+(samples on request). JUDGMENTs ×3 vetoable (mark vocabularies/densities · ink weights ·
+panorama lifts). **THE LAST TWO BUILDS: THE LADDER · DOC-WAVE-2.**
+**⬛ PARK: CONTENT-GT-FINAL @ 23c77444 (2026-07-17) — THE CONTENT PROGRAM COMPLETES.**
+9 commits stacked on 577179fb (spot-checked: 19 files, NUL-clean; the stall cure's 7th
+save mid-finale). ALL SIX CHARGES: history events 29 types ×3 (the 58 banked variants
+recovered + token-parity-verified) · institutions EXHAUSTIVE 301/301 ×3 (the 56
+taste-approved originals byte-identical; the walker now an exhaustiveness ratchet) · NPC
+pools grown w/ lockstep mirrors (neg/neutral split honorably deferred) · vignettes
+(probes made pool-robust FIRST) · AMENDMENT A: the clunker class STRUCTURALLY IMPOSSIBLE
+(descriptor-swap-first w/ dedup-only pool; proof realm 21/21 distinct 0 clunkers) ·
+AMENDMENT B: the casing pass at the TRUE 13 sites (not the estimated 9 — the enumeration
+rule found 4 more; a declared one-time shift, legal in the parked lineage). THE PROOF:
+base-vs-tree structural diff over the 187-grid = PASS, only prose paths moved (18
+display paths, zero structural/numeric); the golden-red set = EXACTLY ONE FILE
+(generatorGoldenMaster — the parents' parked red; the ONE REGEN owns it). Gates on the
+final tree all green; dist 145/145 zero-eager on its lineage. JUDGMENTs ×6 vetoable
+(13-not-9 · prefix-not-suffix disambiguation · unweighted new traits — owner-gated
+follow-on · goals deferred · batch commit shape · the timeout disposition). **THE
+COMPOSITE now takes 23c77444 as the content stack's single tip.** Remaining live: THE
+LADDER · DOC-WAVE-2 · LANDFORMS — the program's last three builds.
+**⬛ FOLD: THE MAP-SURFACE GATE WIRING (2026-07-17) → w7-prep @ 9d1c9702** (772877f5 off
+the fog tip; 5 files NUL-clean; receipts 17/17 gate pins + tsc 0 + dist 150/150; 0 eager
+by construction, pane 597/600). THE LADDER RULING'S MAP CONSUMERS LANDED: DM pins gated
+(locked-visible padlock on saved maps; stored annotations untouched; viewing free;
+anon/gallery unaffected) · change-view depth gated (free = the newest change per band —
+the honest teaser floor; premium = full depth; the derivation tier-blind, pinned). TWO
+HONEST STOP-AND-REPORTS ACCEPTED: interiors have NO consumer yet (the enter-from-map
+hook = the recorded unbuilt seam; the pure most-prominent-institution free-sample rule
+RECOMMENDED for when it lands) · the v1→v2 redraw affordance is PREMATURE until the
+owner's taste veto. ROUND-3 STOCK GAINED: the built-but-unwired interior hook · the
+invisibly-gated map-edit chrome (hidden, no teaser — "lock-glyph-teaser everywhere"
+wants one) · interior-export monetization intent superseded by the ladder (owner
+surface). REMAINING LIVE: the ladder · doc-wave-2 · landforms · big content. The
+entitlement ladder is now FULLY WIRED at every existing affordance.
+**⬛ THE CHALLENGE ROUND (owner: "feel free to challenge me" — four challenges
+delivered):** (1) **OPEN-BOTTOM AMENDMENT proposed, OWNER-PENDING** — the closed
+displacement ladder over a fixed cast reaches equilibrium (person-scale stasis, the
+program's oldest disease); recommendation: conservation holds above the floor, the
+bottom rung opens to population/REASSIGN entrants; contradicts the owner's literal rule
+⇒ theirs to decide. (2) **THE ATTRIBUTION RULE — RULED (delegated, vetoable), relayed**:
+shared-signal goals credit by DOMAIN + OFFICE w/ fractional out-of-domain pay + honest
+receipts; the multi-claimant free-riding fixture mandated. (3) **THE ANTI-STASIS BOUND —
+RULED, relayed**: the cadence dial carries BOTH bounds; the soak certifies
+successions-per-faction-century within a band (never zero, never churn). (4) **THE SCOPE
+LINE, stated to the owner**: the ladder = the recommended LAST new pre-launch mechanism
+(fourth engine reopening); further ideas → the post-launch corpus with honors unless
+fixes — "the best thing to add now is a launch date."
+**⬛ THE LADDER §11 THE LONG GAME (owner, 2026-07-17: "a promotion isn't supposed to
+happen every other week… goals should span weeks to years… a cumulation of impact where
+failure takes it away… a three-way rise"):** STANDING = an integrator STOCK (fabric
+prominence idiom; deposits/withdrawals/decay; challenges draw the stock, never a streak)
+· FOUR PACING BRAKES (sustained margin — spikes never fire · windows · years-scale
+post-succession cooldown = the interregnum · the E0 realm cap); cadence = a per-faction
+succession every few sim-years, A DIAL for the tuning window · GOAL HORIZONS mint with
+stakes (weeks→years; partial progress deposits; LAPSED vs failed honest-null resolution
+on situation shifts) · THE THREE-BODY LADDER (one stock defends below and challenges
+above; MOUNTING A CHALLENGE WEAKENS YOUR OWN DEFENSE — the bottom's best moment is the
+middle's boldest; chain-capped vacancy cascades; adjacent rungs only, always). Frozen +
+relayed w/ the three-body fixture mandated. The design is now 11 sections + matrix —
+the most owner-refined mechanism of the program (5 refinement rounds, matching v2's map
+record).
+**⬛ THE LADDER §10 THE STIGMA MARK (owner, 2026-07-17: "if they are exposed for
+corruption, it becomes twice as hard for them to get promoted for a long time"):**
+exposure now cuts BOTH ways — the widest window against a defender AND a challengeScore
+×0.5 stigma on any climber for a lifespan-scaled duration (D5 bands; decaying;
+refresh-on-reexposure; receipted by name in challenge receipts; deposits toward cynical).
+The evil/leverage path survives but crime costs years. Frozen §10 + relayed to the live
+lane w/ the exposed-climber-halved fixture mandated.
+**⬛ THE LADDER §8+§9 (owner refinements, relayed mid-flight):** THE STANDING LOOP —
+ladder→faction feedback closes the circuit (leadership quality lifts effective power ·
+churn priced as decaying instability · legitimacy reads the HOW of succession, public
+legitimacy taxed on norm-breaking governing usurpations · ENTRENCHMENT: long tenure
+deposits rigidity which raises clash as the world drifts — success plants the fall,
+dynasties rot mechanically) + WEIGHTED DEEDS — stakes priced at goal-mint (state-distance
+× scope × adversity × domain), settled at outcome; **the greater deed beats the smaller
+even when both succeed** (the owner's rule verbatim, fixture-pinned); flaws = risk
+appetite; anti-farming by weight-averaged windows; deed-acquired growth as evidence.
+Single-writer preserved (sidecar modifiers; reads consume when lit; absent ⇒ 1.0 ⇒
+dark byte-identity holds). Frozen in the corpus; relayed to the live lane w/ the named
+pin set incl. the both-succeed fixture.
+**⬛⬛ THE LADDER COMMISSIONED (owner: "build it… cohesive completely with the NPC's
+entire description and the settlement's entire state and shape") — ENGINE LIFT #3.**
+Design FROZEN w/ the full coherence matrix: docs/DESIGN_THE_LADDER.md @ w7-prep —
+displacement-only conservation (every promotion has a named loser) · window-gated
+challenges w/ structural defender's advantage + the challenger's stake · the three
+determinants (faction power trajectory · DYNAMIC GOALS as derived reads REUSING the S7
+registry/evaluator, flaws biasing selection, goals reminting on rung/state change · the
+growth layer's opposition metric as the clash price) · the §4 coherence mandate per the
+owner's comprehensiveness order (alignment methods: lawful-through-windows/chaotic-
+discounted/good-on-service/evil-on-leverage · patron-deity faith coherence + the
+pantheon lift + the faith-rupture permanent window · compromised leverage/time-bomb ·
+traits both directions through the existing deposit map · D5 grudge-hardening · reframe
+via existing act classes only · STATE-NEVER-FATE: ranks move, people remain) · dormant
+npcLadderEnabled + mandatory dormancy golden + sidecar/mirror storage + the name-swap
+kernel chain + zero migrations. Lane dispatched (claude/the-ladder off a4e73651).
+**⬛ FOLD: THE DOCUMENTATION WAVE 1/2 @ a585a891 (+ the reconciliation a4e73651):**
+WELCOME + PRICING born-complete (live-browser verified by the lane): the map waypoint w/
+drift-gated frozen lens plates of the fixture's own town · the schema-wall disclosure ·
+Surveyor RENDERED (walled violet, task-priced, BYOK) · THE FOUNDER CHARTER (live meter,
+derived arithmetic, never-reopens ON-PAGE) · the one-time lane + THE TASK MENU (11→12
+tasks, ≈$ anchor, worked months, labeled estimates) · **THE FAILURE POLICY VERIFIED AT
+BOTH REFUND EDGES BEFORE WRITTEN** (partial-polish nuance in the FAQ, not dropped) ·
+THE ENTITLEMENT LADDER rendered w/ per-row enforcement markers (ruled-vs-derived visible
+to ROUND 3's claims audit) · the 8-pin drift contract + copy-source guard. +680 B raw
+eager SIGNED (~45 B semantic; minifier layout churn attributed; the composite arbitrates).
+**THE DRIFT CONTRACT'S FIRST CATCH AT FOLD:** S7's autonomy task entered config after the
+lane branched — the task-menu walker FAILED the fold until the copy gained its entry
+(reconciliation a4e73651; 8/8 green) — cross-lane doc-drift caught by machinery, not
+eyes. About+Compendium = DOC-WAVE-2 DISPATCHED (claude/doc-wave-2) w/ the two banked
+contradictions RULED: the op-registry page grounds in the REAL shape (klass/scope/
+receipt — no invented schema enum; the read/propose/write story = S-stage architecture)
+· all counts render from source (the "nine pressures" claim dies). PLAUSIBLE banked for
+ROUND 3: credits-never-expire is enforcement-by-absence. Tasks #21/#22 CLOSED; #19/#20
+ride doc-wave-2; the craft wave (#32) dispatches at ITS fold.
+**⬛ FOLD ×2: THE RULINGS WIRING @ 14c504a4 + SURVEYOR S7 @ e1631619 (2026-07-17).**
+**RULINGS WIRING (charges 1+2; charge 3 = an honored stop-and-report):** v2 DEFAULT-MINT
+live at the three create chokepoints + the anon→signup arm (THE ONE DIAL
+NEW_SETTLEMENT_LAYOUT_LAW_VERSION=2 — a taste veto reverts in one line; BEHAVIOR SHIFT
+ruled+recorded: new saves render v2) · BESPOKE-STYLE PERSISTENCE (mapEdits.bespokeStyles;
+fail-closed reads; drop-when-empty; applyMapEdit chokepoint; deleted-never-strands
+pinned) · **CHARGE 3 QUEUED TO THE OWNER**: no sanctioned client path to the audit spine
+exists — every route violates a standing fence (service-role-only RPC · no edge action ·
+the Track-K no-new-shape clause); the record renders in ReceiptLine by design; THREE
+OPTIONS on the owner queue (edge apply-log endpoint [manager rec] · signed 155+ RPC ·
+blob key). Receipts on merged tree: 72/72 + tsc + dist 150/150; +38 B.
+**S7 — THE TRUST LADDER IS COMPLETE S1→S7:** the signal registry v1 (47 proven reads,
+additive-only w/ meaning-drift refusal — the tuning window mints INTO it) · StopConditions
+behind the wall (determinism pinned through the REAL kernel: same seed ⇒ same stop tick,
+receipts JSON-identical) · nudges CONSUME injectCampaignStressor (recon: no new primitive
+needed; ceiling lockstep w/ realm severe) · standing instructions (suffix-only — the
+static prefix byte-identical with/without, pinned; fence-breakout stripped) · the edge on
+the S4-S6 spine + kill-switch 'autonomy' · the panel as the workshop's 5th stage
+(picker-only; THE STOP RECEIPT w/ seed+engine version) · migrations 153/154 (head 154
+contiguous) · +173 B. Receipts on merged tree: S7 battery 66/66 + strict 0/0 + dist
+150/150. LANE CORRECTIONS BANKED: no Compendium op-page generator exists yet (my
+dispatch overclaimed — it is the DOC WAVE's charge, flagged not invented) · S3-S6
+compile-suffix adoption of standing instructions = a small follow-up seam (ROUND-3
+stock) · DEPLOY.md posture prose was pre-existing stale ('eleven true' at fifteen) —
+corrected+disclosed · ⚠️ NEW HAZARD MEMORIZED by the lane (preview-tool-serves-main-tree
+— wrong-lineage recurrence #10 via a new vector; probe recipe inside). JUDGMENTs ×8
+vetoable in the report (47-seed set · no-NOT combinators · cap=CATCH_UP_CAP_WEEKS
+imported · 4cr provisional · shared analytics events). REMAINING LIVE: doc wave · big
+content (parks) · landforms · gate wiring — then the craft wave at the doc fold →
+COMPOSITE → PUSH → ROUND 3.
+**⬛ FOLD: DOOR 2 — THE TABLE LAYER (fog v1) (2026-07-17) → w7-prep @ 08613d1b** (merge
+of claude/fog-table-layer tip 9f41b75f, 6 commits off d0857995; 21 files NUL-clean; the
+lane survived one limit strike + two stall cures). THE LAST MAP WAVE IS HOME: fogSessions
+sidecar (interiorEdits idiom; denylist-safe pinned; dormancy byte-identical; reveals
+keyed on stable model ids — a reroll never loses a reveal; bounded 12 sessions/400 ids) ·
+semantic-snap brush along real edges (version-agnostic street synthesis) · SVG mask union
+(overlap-correct; townMapDraw untouched) · the fogged handout through the WHOLE export
+matrix (absent ⇒ byte-identical, toBe-pinned) · TWO AUDIENCES ONE PROJECTION (the live
+player view renders EXACTLY the handout export — equality by construction) · fail-closed
+(fogSessions ∉ PUBLIC_TOPLEVEL_KEYS, pinned) · THE PREMIUM GATE per the ladder ruling
+(locked-VISIBLE drawn padlock + purchase moment; stored sessions never rewritten locked) ·
+SM-5 analytics inherited (3 features, zero new names). Lane: 112/112 pins, +209 B eager
+measured vs base (under the line), strict-clean own files. FOLD RECEIPTS on the merged
+tree: fog pins subset 22/22 · tsc 0 · build ✓ · dist 150/150; **the clean full suite =
+the composite gate by design** (the lane's full-suite runs were owner-parallel-load
+flakes — every red green isolated + base-proven; both its real reds were its own and
+fixed with proof). JUDGMENTs ×5 vetoable in the lane report (sidecar-over-mapEdits ·
+mask-over-drawops · trampoline+lazy-body · purchase-modal-not-new-moment ·
+handout-in-panel). SEAMS: §6 gallery full-mode strip rides the owner-gated gallery
+opt-in · PDF/VTT fogged variants absent by design v1 · panorama shows no fog (a
+presentation view). **ALL SEVEN MAP WAVES ARE NOW FOLDED.** LANDFORMS + GATE-WIRING
+DISPATCH at this fold per the standing queue. THE SECOND LIMIT STRIKE (4 lanes killed
+late-stage) recovered clean: doc-wave 4 commits + checkpoint · S7 six · rulings-wiring
+two (one red file from done) · content-gt-final ELEVEN — the commit-early armor held
+everywhere; all four resumed with focused-gate instructions.
+**⬛ ERRATUM: THE W2 RE-DISPATCH WAS STALE (2026-07-17, the lane's stop-and-report —
+verify-first catching the MANAGER's error at 17-tool-call cost):** W2 feed-retention was
+ALREADY FOLDED 2026-07-16 via cherry-pick 4cf84a40 (patch-id identical to the parked
+2f4f7b58; ancestor of the tip; retention 7/7 + the 0.45 anti-monoculture gate 3/3 green
+on the current base; its bytes already inside the measured 1,034,683 closure). The
+ledger's own 2026-07-16 satellite-queue row recorded exactly this ("W2 4cf84a40 already
+ancestors — stale blocked-notes corrected") — the FP-G11 fold row's "W2 UNLOCKED"
+dispatch reasoned from the stale round-21 memory without cross-checking that correction.
+Task #33 closed ALREADY-DONE; the empty lane branch deletion BLOCKED by its worktree
+checkout — left pinned like every other lane worktree (the lane's keep-judgment stands
+after all; this row is the record either way). THE PROCESS LESSON, now standing: **a "parked/blocked" note is dead the moment
+any ledger row resolves it — before dispatching ANY satellite, grep the ledger for its
+LATEST mention, not its memory entry**; the round-21 memory is trued to match.
+**⬛ FOLD: FP-G11 (2026-07-17) → w7-prep @ b745c20c** (one config-only commit; spot-checked
+vite.config.js alone; build ✓ + dist 150/150 on the merged tree). RECLAIM: formatNumber
+excised from eager engine-core (**−341 B**; resolves the FP-G7 deferral; no first-paint
+importer existed). Closure **1,034,683**, margin **5,317**; RATCHET **HELD at 1,040,000**
+(ratified — final tightening at the composite, the FP-G10 precedent). THE HEADLINE
+CORRECTED + BANKED TO MEMORY (customregistry-deeagering-gated): ~41KB is real but the
+whale tables do NOT drop and the blocker is a sync→async conversion on persisted-event-
+writing deity actions — an owner-gated lane if ever needed, never a byte-wave rider; the
+safe-reclaim space is now EXHAUSTED (every remaining eager table has a genuine first-paint
+consumer). Spatial-slimmer deferral ratified (sub-350B real vs a dormancy-golden seam).
+**W2 UNLOCKED: the five-day "re-apply when byte-free" precondition is MET** (+363 B
+affordable) — the re-apply lane DISPATCHED per the standing rule (claude/w2-feed-retention
+off b745c20c; re-express the change never merge the ancient branch; revalidate
+feedDistribution 0.45 + goldens + true delta on THIS tree; the first lane briefed under
+the new focused-gate protocol). Task #33; the composite waits.
+**⬛ FOLD: CONTENT-VT-2 (2026-07-17) → w7-prep @ 1c22428c** (merge of claude/content-vt-2
+tip 39a56a1d, 4 commits off a4343044; spot-checked: exactly 8 files, fence held, NUL
+clean). The view-time-thin surfaces CONTENT-VT deferred-with-reason are GROWN: newsBody
+1→4/cell · rumor headline frames 1→4/band (seeded on eventRef — the same event frames
+identically at every settlement that hears it) · chronicle quiet-advance framing 1→4/span
+· the market crier 1→4/tag. Every mechanism CANONICAL-AT-ZERO (all legacy/id-less callers
+byte-identical); facts ride every frame unchanged; **0 eager bytes grep-proven** (all 14
+new strings in lazy chunks only); **zero golden/snapshot movement** (the rumor golden
+hashes structured ledger records, never headlines). Charge-4 sweep dispositioned every
+other 1-variant view-time surface (surveyor's notes/whispers/S2 titles correctly
+deferred w/ survey-grounded reasons). Lane ran the FULL gate green pre-protocol-change
+(suite exit 0, strict 0/0, dist 150/150); fold receipts on the merged tree: pins 61/61 ·
+tsc 0 · build ✓ · dist 150/150. JUDGMENTs ×4 vetoable (local fnv copies per the
+chunk-isolation idiom · the market-crier exact-frame assertion evolved to a fact-pin —
+a unit-assertion update, NOT a golden re-record · chronicle populated-branch untouched ·
+eventRef seeding). One honest view-time note recorded: WHICH equally-valid variant
+renders differs for id-bearing entries — the intended variety, nothing persisted moves.
+**⬛ THE GATE PROTOCOL CHANGE (2026-07-17, owner: "if we switched gates to fable will it
+be faster?" — answered + adopted, vetoable):** model-switching would NOT speed gates
+(vitest wall-clock is machine-bound; Fable-as-implementer would also invert the standing
+model split). THE REAL SPEEDUP ADOPTED: **lanes run FOCUSED gates only** (own tests +
+tsc + strict + lint + build + dist + closure); **the FULL suite runs ONCE PER FOLD, by
+the manager, in the fold tree, foreground.** Three wins: full-suite runs drop from
+per-lane to per-fold · the stall class's trigger (babysitting long suites) mostly
+disappears · contention flakes fade (the 18s-alone/77s-under-load advancePauseResume
+receipt). Honest cost: cross-suite regressions surface at fold, not in-lane — same
+checker, hours later, still pre-merge. Applies to all future briefs; the two in-flight
+gate-stage lanes keep their current instructions.
+**⬛ SWEEP #6 BANKED + LAW §10b (2026-07-17):** the tablet research corrected the law
+before anyone built from it — **TABLET GRIP INVERTS THE PHONE** (thumbs at the side
+edges/corners; bottom bars ergonomically hostile on a held tablet — the FIELD bottom-
+third law does NOT port to THE SPREAD) · landscape = the SYNTHETIC SPREAD (paired
+recto/verso compositions, never portrait-but-wider) · the Van de Graaf/Tschichold canon
+as COMPUTABLE text-block geometry (manuscript grammar by construction, not padding) ·
+Flipboard-class FOLIO TEMPLATES for generated content (bespoke-looking output from
+procedural input — the exact match for a generator product) · one signature handleable-
+artifact interaction, maintained. §10b committed on w7-prep. ALL SIX RESEARCH SWEEPS
+NOW BANKED (30 agents, 0 errors). **DECREE-PROVENANCE TIMING (owner asked "does any of
+this need to be fixed?"):** the one real fix from the refutation (approved proposals
+apply without provenance recording) STAYS IN ROUND 3's pre-approved stock — vetoable
+JUDGMENT: the fix touches the world-pulse apply path contested by two live lanes
+(FP-G11's slice hook + rulings-wiring's audit-spine); the flag is dark until the regen
+so no user-visible window exists; ROUND 3's fix waves verify it adversarially. Pulls
+forward on the owner's word once those lanes fold. Fog re-stalled (5th instance) +
+re-cured by demand #2; its code committed @ 3234076b before the stall — zero risk.
+**⬛⬛ THE THREADING REFUTATION (2026-07-17) — ENGINE LIFT #2 CLOSES AS
+INVESTIGATED-AND-REFUTED, the stop-and-report doctrine at its best.** The lane made ZERO
+edits and disproved the commission's premise with EXECUTED PROBES on lit runs: (1) all
+50 recorded edges in real advances are same-tick news→outcome — causedBy is 100%
+unthreaded exactly as the seam said; (2) the engine's true causality is CROSS-ADVANCE
+and ENTITY-KEYED (coups resolve from stressor.id; returns from deployment ledger keys —
+entity keys, never durable receipt ids; the parent receipt lives in a PRIOR advance);
+(3) the chronicle reader scopes recorded cones to SAME-ADVANCE co-minted node pairs —
+so kernel-threaded edges would be stored and never surfaced. The only true-edge paths:
+persist parent-receipt ids onto world-state entities (VIOLATES THE SHAPE LAW) or a
+cross-advance chronicle reader (a DISPLAY capability, out of fence, the brief's named
+design-smell). THE COMPLETE MINT-SITE CENSUS is dispositioned in the lane report
+(cross-advance/entity-keyed ×9 families · root-cause ×6 · no-mint ×16; the one
+same-advance candidate found and rejected as sibling-not-parent). CONTINGENCY HAZARD
+BANKED: worldState.proposals clones outcomes (applyWorldPulse:1000) — any future
+causedBy context leaks there; scrub + whole-worldState residue pin required. VERDICT:
+freely-given ruling #8 VINDICATED on grounds unknown when the owner overrode it; the
+sanction closes honorably (the owner approved a premise the probes then refuted — the
+refutation IS the deliverable). THE REAL UNLOCK named + owner-queued post-launch: **the
+cross-advance recorded-cone chronicle reader** (display lift; the ledger already stores
+cross-advance edges it would consume). ROUND 3 inherits the census + probes as
+causality-review instruments. Decree-effects finding for ROUND 3 stock: approved
+proposals apply WITHOUT provenance recording (applyWorldPulseProposal path) — a genuine
+recorded-causality gap worth a fix wave.
+**⬛ THE TABLET COMPANION MANDATE (owner, 2026-07-17: "we need a tablet companion… This
+one can include the realm. do all the fixings"):** the THIRD POSTURE joins the law —
+DESK / FIELD / **THE SPREAD** (tablet: the open book + the shared table surface;
+**REALM-CAPABLE by owner ruling** — the desktop gate becomes desk+spread). Law §10
+committed on w7-prep; brief phase 4b added; sweep #6 dispatched (wf_3c80f28a: premium
+tablet craft · the tablet at the TTRPG table (GM-screen + the flat player-facing shared
+surface — the fog layer's true home under the visibility split) · touch-first complex
+tools (drag-placement precision) · the posture-model breakpoint problem + the FMG-touch
+critic). The preview review gains the tablet viewport, both orientations.
+**⬛ THE SUBSTANCE SWEEP BANKED (wf_c143a10f, 5/5):** the external substance bar for
+ROUND 3 — headline principles: THE PLAYER-MODEL PRINCIPLE (Sylvester: unperceived depth
+is noise; grade every kernel by its perceivable surface — the Ultima Online unnoticed-
+ecology cautionary tale) · STORY GENERATOR NOT SKILL TEST (disproportionate pushback +
+recovery arcs; loss transforms, never merely terminates) · APOPHENIA AS THE CONVERSION
+ENGINE (abstracted feedback + long-term relevance; under-specify interior states,
+over-specify identity + consequence — a receipt that states feelings leaves nothing to
+author) · ANTI-NUMERIC CONSEQUENCE (Adams: "lost an eye" retells, "-12 HP" doesn't;
+scars/grudges/heirlooms over modifier-soup) · **WRITE THE TARGET STORIES FIRST** (the
+DF method: golden narratives as acceptance tests — if no mechanism could produce the
+story, backlog; if it can't be PERCEIVED producing it, bug) · THE PLAYER-AS-ACTOR
+(receipts should regularly say "because you…"; spectator chronicles get retold by
+nobody). ROUND 3's substance graders hold the composite to these; the golden-narrative
+corpus is recommended as a standing ROUND 3 instrument.
+**⬛ THE ORGANIC CRAFT LAW FROZEN + THE WAVE BRIEF COMMITTED (2026-07-17):** both craft
+sweeps banked (10/10 agents) → docs/DESIGN_ORGANIC_CRAFT.md frozen on w7-prep (the one
+fiction = THE SURVEYOR'S WORKING DESK; the artifact/instrument split; manuscript grammar
+— scale/ink/position/rubrication replace containers; typography tiers w/ faux-small-caps
+ban; seeded ornament UNDER GOLDEN DISCIPLINE; the legibility floor; the mobile field
+companion §7 w/ the realm desktop-gate; the performance law §8) +
+docs/briefs/W_ORGANIC_CRAFT_WAVE.md (5 phases w/ the taste veto BETWEEN sample-set and
+app-wide sweep; inherited rulings incl. **OFFLINE SCOPED OUT** — the service-worker/
+iOS-eviction/snapshot-vs-migration-staleness complex is owner-queued as its own charge,
+no offline promise in copy (the worse-than-nothing precedent); the /map/ webmanifest
+partial-scope install trap recorded). The critics' repo-verified catches ruled in:
+mid-range-device budgets join tests/build as a ratchet; fonts subset w/ byte budget;
+turbulence/blend-mode bans; the existing isMobile layer extended never greenfielded.
+The wave is successor-dispatchable from the brief at the doc-wave fold.
+**⬛ THE SUBSTANCE BENCHMARK SWEEP DISPATCHED (2026-07-17, owner interjection: "what
+about the substance?" — the form/substance symmetry closed):** the design waves got four
+external-excellence sweeps; the substance had only ever been benchmarked against ITSELF
+(its constitution, its own rounds). Sweep #5 (wf_c143a10f) builds the missing external
+bar: the emergent-narrative canon (Tarn Adams / Sylvester's story-generator doctrine /
+CK3 drama design; the anecdote-factory principle + the stat-soup failure mode) · TTRPG
+TABLE-substance (the GM-craft canon: what world-detail generates SESSIONS vs shelf-weight
+— the lonely-lore problem; fronts/clocks) · living history (what makes generated history
+FEEL like history, not a log — the history-soup fix) · THE DEPTH-PERCEPTION GAP (the
+Nemesis-system solved case: what makes players CORRECTLY believe a world is deep — this
+product's own recorded risk, twice graded product-below-code). The critic adds the
+determinism-as-story-value + DM-as-audience angles. OUTPUT FEEDS ROUND 3: the substance
+graders hold the product to these five principles alongside the four crowns; the gap
+register inherits any misses. Substance census of the live machine at dispatch: 5 of 8
+build lanes are substance (content ×2, provenance threading, S7, rulings wiring); the
+entire tail (ROUND 3 → soak → tuning) is substance-verification by design.
+**⬛ RESEARCH SWEEP #3 BANKED (wf_cd021516, 5/5 agents, 0 errors — the organic craft
+corpus):** headline first principles for the law: **AUTHORSHIP VISIBLE** (the handmade
+read = evidence a person decided — signed/dated elements, one voice, structures only
+this product could have; the CMS-slot smell is the tell) · **CONTENT-FIRST ASSEMBLAGE**
+(Chimero's grain: layout emerges from what it holds; no scroll-jacking slickness) ·
+**BREAK THE CONTAINER HABIT** (Müller: containers-in-containers IS the sameness; compose
+spreads, not stacks — the hero/three-cards/feature-rows skeleton is the template tell
+whatever skin it wears) · **BESPOKE FORM PER SURFACE** (The Pudding: dossier ≠ gallery ≠
+settings in composition; one type/color system, different forms) · **CRAFT LIVES IN
+TYPOGRAPHIC MICRO-DECISIONS** (Tufte/Butterick: measure, sidenotes, true small caps,
+body-colored underlined links) · **DENSITY WITH THE ICEBERG** (Gwern: dropcaps, collapse,
+near-monochrome discipline + the design-graveyard removal discipline) · **DRAWN-FOR-
+PURPOSE MARKS** (Appleton: icon-library glyphs at display level = a named AI-slop tell) ·
+**ONE FICTION, TOTAL COMMITMENT** (Poolsuite: the surveyor's working desk lives in every
+empty state and error message; thin theming over standard components reads as a skin) ·
+**WHIMSY UNREPEATED** (a quirk repeated becomes a system). Full results + journal paths
+in DOSSIER v2's recovery block (wf_cd021516-430). Sweep #4 (mobile) still running; the
+corpus law + reconciliation brief write when both are banked; the wave builds at the
+doc-wave fold.
+**⬛ THE MOBILE COMPANION MANDATE + REALM DESKTOP-ONLY (owner, 2026-07-17: "make sure
+there is a 10,000 mobile companion piece as well… make sure realm is desktop only"):**
+the mobile experience carries the SAME $10k bar — a crafted FIELD COMPANION, never a
+collapsed desktop. Research sweep #4 DISPATCHED (wf_65e6aacd: premium mobile craft ·
+document-layout collapse · THE AT-TABLE COMPANION use-case (the DM's phone at the game
+table — glanceability, one hand, dim rooms, interruption-resilient; DM Summary/Daily
+Life are the vehicle) · graceful desktop-gating patterns + critic). PRODUCT RULING
+RECORDED: **THE REALM (world map + canonize + advance controls) IS DESKTOP-ONLY** —
+mobile meets a confident built-for-the-bigger-canvas gate with continuity (never
+apologetic error-speak); town maps/interiors/dossiers stay mobile (pending the sweep's
+verdict on map-viewing ergonomics). The organic craft wave (#32) absorbs the mobile
+companion charge; the preview legibility review now runs BOTH viewports incl. a
+dim-environment pass. The doc wave received the mobile addendum live (authored
+single-column collapse, mobile-tuned type, realm framed desktop-confident).
+**⬛ THE QUALITY BAR (owner, 2026-07-17, verbatim: "make it look like a $10,000 website
+with all of these functions and principles. thank you so much!"):** the organic craft
+wave + the documentation wave build to BESPOKE-AGENCY STANDARD — every choice authored,
+never defaulted; optical alignment, tuned small-caps tracking, held baseline rhythm; ONE
+hand across every page (the house rules/rose/rubrication family); RESTRAINT AS LUXURY
+(the $10k look is impeccable typography/spacing/hierarchy, not ornament volume). Relayed
+to the live doc wave; binds the organic wave's brief; the preview legibility review
+judges against THIS bar.
+**⬛⬛ THE ORGANIC CRAFT LAW RATIFIED (2026-07-17, owner: "Do it! But before you do, look
+online at the best examples… identify first principles… then reconcile… and build
+everything appropriately" + the preview legibility mandate):** the UI redesigns under the
+product's own map laws — asymmetry with provenance (SEEDED ornament via the FNV idiom,
+never jitter) · period craft never age damage (engraved rules in 2-3 ink weights,
+rubrication over callout boxes, manuscript grouping — rules/marginalia/initials — over
+card grids, ink-tone elevation, NO drop shadows) · THE ARTIFACT/INSTRUMENT SPLIT (display
+surfaces organic; interaction targets geometric, quiet, accessible — the surveyor's field
+kit: hand-drawn world, machined instruments) · product-output-as-art · boxes rare and
+meaningful (seal/plate/charter only). MOTIVE on record: the owner rejects the
+platform/AI-made subconscious read; immersion maximized WITH digestibility. SEQUENCE (the
+owner's ordered method): research sweep #3 DISPATCHED (wf_cd021516: handcrafted-web
+first principles · print-craft chrome · diegetic game UI · legibility-on-craft w/ the
+audit checklist + critic) → the manager writes the corpus law + reconciliation brief →
+THE ORGANIC CRAFT WAVE builds AT THE DOC-WAVE FOLD (single-writer on tokens/primitives;
+task #32) → **THE PREVIEW LEGIBILITY REVIEW gates the fold** (owner-mandated: the manager
+drives the app in the browser preview — every surface readable against its background,
+navigable; the research's audit checklist is the instrument) → owner taste veto on a
+sample screen set before the app-wide sweep. The doc wave received the direction as a
+mid-flight addendum (rules-over-boxes · ink-tone elevation · the split · seeded ornament ·
+legibility floor) so the four pages are BORN under the law. Presentation only — zero
+logic, zero goldens.
+**⬛ ENGINE LIFT #2 SANCTIONED (2026-07-17, owner: "i also approve this" — the
+provenance causedBy threading; OVERRIDES freely-given ruling #8):** the owner personally
+sanctions the second engine-frozen lift. Lane claude/provenance-threading off a4343044,
+EIGHT lanes live. THE SHAPE LAW (the safety that makes this sane at max concurrency):
+causality flows as CALL-CONTEXT to the provenance writer — outcome objects never gain
+fields; world state byte-identical dark AND lit except the provenance sidecar; ALL
+dormancy goldens must stay green untouched. Deliverables: kernels thread cause-references
+at their mint sites (additive optional params, ceiling-safe lazy leaves) · THE THREADING
+CENSUS (every mint site dispositioned threaded/no-known-cause/deferred — committed doc,
+walker-pinned, no silent partial coverage) · flags-on multi-hop cone proof (decree →
+outcome → downstream RECORDED) · zero chronicle changes (the recorded/inferred labels
+get truer for free — a needed chronicle change = design smell, stop-and-report) ·
+edge-rate/eviction verified vs the 750 KB ceiling. ROUND 3 reviews it with everything.
+**⬛⬛ THE FREELY-GIVEN RULINGS (2026-07-17, owner: "i give my decision freely where
+appropriate for this!" — the Class B/D decisions made by the manager under explicit
+grant; EVERY ITEM VETOABLE):** (1) **PROSE TASTE: APPROVED** — the sample holds the
+register (fact + complication, dry, specific; "The theology was settled quickly. The
+estate is where the fighting is."); TWO REQUIRED AMENDMENTS: the faction de-clunk rule
+(descriptor-swap-first, banned-stack guard — "The Commercial Circle Inner Circle" class
+dies) + the govFaction casing pass (all 9, deliberate shift in the parked lineage). THE
+BIG CONTENT WAVE DISPATCHED (claude/content-gt-final stacked on 577179fb; parks;
+supersedes both content parents in the composite). (2) **V2 MAP TASTE: PROVISIONAL
+PASS** — engineering criteria conclusive (Lynch ≥0.66 across 20 configs, determinism,
+morphology coverage); the aesthetic veto STAYS OPEN until the regen (revert = one
+config line); default-mint wiring dispatched. (3) **ATLAS SAMPLES: PROVISIONAL PASS**
+(same logic; display-only, instantly revertible). (4) **THE ENTITLEMENT LADDER: RULED
+as recommended** — FREE: map view · provenance hover · five lenses · panorama · gallery
+view. CARTOGRAPHER: map editing · DM pins · change-view depth · fog · interiors (ONE
+free sample per settlement) · v1→v2 redraw. Bundle $2.99 unchanged. SURVEYOR: AI.
+Engine NEVER tier-gated (constitutional). Lock-glyph-teaser everywhere. Relayed
+mid-flight to fog + the doc wave; SM-5-pins/interiors wiring at the fog fold (#30).
+(5) **BESPOKE-STYLE STORAGE: mapEdits.bespokeStyles** (blob-resident, zero migration;
+per-account library = post-launch stock). (6) **AUDIT-SPINE: build additively** (155+
+only if unavoidable; server-surface gaps stop-and-report). Both in the RULINGS-WIRING
+lane (claude/rulings-wiring). (7) **ANON/GALLERY EXPORT: NO for v1** (caps-on-actions-
+never-render; sign-in is the conversion step). (8) **PROVENANCE causedBy THREADING:
+STAYS POST-LAUNCH** — decided on merits (kernel-wide ceiling-file edits at max
+concurrency vs a payoff that matters only lit-and-launched). SEVEN LANES NOW LIVE (fog ·
+doc wave · S7 · content-vt-2 · fp-g11 · content-gt-final · rulings-wiring).
+**⬛ THE PULL-FORWARD SWEEP (2026-07-17, owner: "is there anything waiting post-resurvey
+or post-soak that we can build now for the resurvey to validate?"):** the deferred stock
+audited into three classes. **CLASS A — DISPATCHED NOW:** CONTENT-VT-2 (the view-time
+selection mechanisms CONTENT-VT deferred-with-reason; lands free, claude/content-vt-2)
+· FP-G11 (the byte reclaim pulled ahead of the composite; headline candidate = the
+customRegistry de-eagering −46KB ceiling; claude/fp-g11; W2 feed-retention viability
+verdict included) · NON-WATER LANDFORM RENDERING (the v2 fenced follow-up — marsh/dunes/
+flank become VISIBLE; queued at the fog fold, shared map surface). FIVE LANES now live.
+**CLASS B — BLOCKED ON THE OWNER, NOT THE SOAK (deciding these tonight puts all of it in
+front of ROUND 3):** the v2 map taste veto (→ default-mint wiring) · the prose taste
+sample (→ THE BIG CONTENT WAVE: ~245 institution descs, NPC pools, history-event wiring)
+· the entitlement ladder (→ gate wiring across SM-5 pins/interiors/fog/pricing cards) ·
+the bespoke-style storage ruling (→ persistence builds) · the AI-op audit-spine ruling ·
+the anon/gallery export affordance decision. **CLASS C — GENUINELY IMMOVABLE:** dial
+values, knob entries, tuning counsel, re-certs (all soak-OUTPUT-dependent by definition)
+· S4+ content-plane knobs (owner-gated on LIVE post-launch acceptance metrics) · fog
+realtime v2 (scope discipline, recommend keeping post-launch). **CLASS D — OWNER-CHOICE
+ENGINE ITEM (flagged, not taken):** provenance causedBy kernel threading (dark ⇒
+byte-identical; would deepen ROUND 3's causality review; needs another engine-frozen
+lift — the owner's call, not the manager's).
+**⬛ THE LIMIT STRIKE + TRIPLE RESUME (2026-07-17 evening): the session limit killed all
+three live lanes mid-work (fog · doc wave · S7); the dossier's law held — limits kill
+reasoning, not disk.** Survived state, verified before resuming: fog banked commit
+59dde1ea (engine core: reveal sidecar + snap geometry + fogged export) + 4 WIP files ·
+doc wave 2 WIP files, ZERO commits (⚠️ the near-loss case — its resume instruction
+escalates commit cadence to per-page minimum) · S7 clean-tree exploration, findings safe
+in-transcript (key: injectCampaignStressor IS the existing nudge op to consume; no
+existing registry/StopCondition machinery — build both). ALL THREE RESUMED from
+transcripts with checkpoint-first instructions. PROCESS LESSON for every future brief:
+the commit-early rule is limit-armor, not tidiness — a lane with zero commits is one
+limit away from losing everything but its transcript.
+**⬛ S7 RE-SLOTTED PRE-ROUND-3 + DISPATCHED (2026-07-17, owner: "I want it built now for
+the resurvey to check for any bugs" — THE MACHINERY-NOW/VOCABULARY-GROWS COMPROMISE):**
+the tuning-window slot held S7 only because StopConditions wanted the knob vocabulary;
+the compromise splits them — S7's MACHINERY builds NOW (typed StopCondition evaluator
+behind a schema wall referencing only REGISTERED signals · acceleration ops as pressure
+nudges through existing dial/op vocabulary, never state-jumps · standing campaign
+instructions as compile-suffix injection, never engine state · the panel w/ kill-switch +
+early-access + money moments) while THE SIGNAL REGISTRY v1 seeds from the proven stable
+set (the 16 causal variables, 9 pressures, war/peace states, bands, ticks — golden-pinned
+for months) and grows ADDITIVE-ONLY: the tuning window mints knob entries into the SAME
+registry as DATA (the A3 empty-registry-rails + facet-law precedents; zero machinery
+rework by design). ROUND 3 now reviews real autonomy code — the owner's goal. Lane:
+claude/surveyor-s7 off a4343044, migrations 153+, fence-disjoint from BOTH live siblings
+(fog: townMap; doc wave: pages — S7's op-registry additions surface on the Compendium's
+generated page automatically). THREE LANES NOW LIVE; the composite waits for all; task
+#9 (tuning) keeps knob-minting + registry EXTENSION + counsel.
+**⬛ THE DOCUMENTATION WAVE DISPATCHED (2026-07-17, owner: "can you run this now?" —
+early dispatch owner-ordered, ahead of the fog fold):** ONE Opus lane, claude/doc-wave
+off a4343044, executing docs/briefs/W_DOCUMENTATION_WAVE.md as law + both banked research
+sweeps as inputs. CONCURRENCY SAFETY (checked at dispatch): zero file overlap with the
+live fog lane (pages/copy vs map internals; the wave consumes map modules READ-ONLY for
+fixtures/catalogs; townMap components explicitly fenced OUT of the wave). Notable
+brief-plus additions in the dispatch: the failure-policy sentence ("never charged for a
+failed task") must be VERIFIED against actual edge behavior before it may be written —
+stop-and-report if the edge does not refund (a marketing claim is a claim); the demo-world
+seed = one config constant (the owner picks the final seed); the two source ratchets that
+bit the panels lane (inline slugify, native title=) pre-warned. Tasks #19-#22 in flight
+together. The fog-fold blocker on the wave is OWNER-OVERRIDDEN; the composite still waits
+for BOTH.
+**⬛ FOLD: THE AI SURFACE PANELS (2026-07-17) → w7-prep @ a4343044** (merge of
+claude/ai-panels tip a221c40c, 4 commits off eb958f4b; spot-checked — FENCE HELD (zero
+townMap-component/engine/edge-function edits), 15 files NUL-clean; recovered from the
+stall class by the status demand — the cure is 4-for-4). The write stages are CLICK-ABLE:
+custom content w/ per-field Mechanical/Flavor/Unsupported badges + the honest
+no-rule-for-that list · style overhaul w/ LIVE map preview through the pure renderer +
+flip-back to the permanent base lenses, decline-persists-nothing · construction w/ the
+config wall, the real comparator's deviations in plain speech, bounded DELTA-ONLY revise
+("sends only the N deviations — no re-grounding"), settlement-lands-as-draft +
+realm-canonizes-nothing surfaced honestly · accept→mint w/ the explicit consent barrier,
+unroutable-surfaced-never-dropped, and the reproducibility receipt rendered (engine ver ·
+seed · N applied). One Surveyor's-workshop launcher (right-dock, JUDGMENT #1); S1 money
+moments verbatim; kill-switch refusals cordial + "nothing was charged"; early-access
+badges fail-honest (absent ⇒ shown). Lane gates foreground: suite 12,519/2 (both =
+the recorded advancePauseResume load-flake, green isolated) · +184 B eager CONFIRMED
+vs a temp-worktree base build (under the line) · lazy-membership contract + anti-vacuity.
+FOLD RECEIPTS on the merged tree: lane pins 26/26+1skip · tsc 0 · **domain:strict RUN
+EXPLICITLY: 0/0 ceiling** (the chip burn-down HOLDS with panels merged) · build ✓ · dist
+150/150. JUDGMENTs ×5 vetoable (launcher shape · the townMapStyleWall annotation touch —
+ACCEPTED, it kept tsc green · session-held style collection pending the owner's storage
+ruling · draft-save commit path · transport shape-tolerance w/ client-side re-validation).
+SEAMS: edge round-trips PLAUSIBLE-by-pattern (one browser click per stage at the soak) ·
+panel analytics events exist but unfired (small follow-up — ROUND-3/doc-wave stock) ·
+edge body field-name alignment checked at ROUND 3. **ONLY FOG REMAINS** — then the
+documentation wave → composite → PUSH → ROUND 3.
+**⬛ RULING #7 THIRD AMENDMENT (2026-07-17, owner: "do the push after the composite"):**
+the chain is now: fog + panels fold → THE DOCUMENTATION WAVE → **THE COMPOSITE (full
+gate)** → **THE PUSH (the backed-up state = the gate-verified whole; the composite
+branch joins the push list)** → ROUND 3 → the tail unchanged. Task #12 deleted/recreated
+as #23 to avoid a dependency cycle (composite no longer waits on the push; the push
+waits on the composite; ROUND 3 waits on the push). The single-machine window now runs
+through the composite gate — the owner's accepted trade, restated once. ALSO: the panels
+lane stalled in the identical background-wait class (4th instance) — status demand
+issued (the cure's record now 3-for-3 pending its result); the fog lane's brief already
+carried the foreground warning; future briefs escalate the wording from warning to the
+hard rule with the sibling stall count.
+**⬛ RULING #7 RE-AMENDED (2026-07-17, owner: "do it before the push"): THE
+DOCUMENTATION WAVE BUILDS BEFORE THE FIRST PUSH.** The prior push-before-doc-wave
+judgment is OWNER-VETOED; the chain is now: fog + panels fold → THE DOCUMENTATION WAVE
+(#19-#22, the committed brief) → THE PUSH (everything built, everything backed up) →
+composite (+ FP-G11 if demanded) → ROUND 3 → the tail unchanged. Recorded without
+re-litigation: the single-machine window extends through the doc wave — the owner's
+accepted trade, consistent with the literal "after everything is built" ruling. ALSO
+RATIFIED INTO THE LEDGER: the owner-side chip session FOLDED the domain-strict burn-down
+directly onto w7-prep @ 9150b464 (six v2 files annotated strict-clean, 112→0, ceiling
+stays 0 — burn-down over re-baseline, the better fix); the SM-5 spurious-gate finding is
+CLOSED; the piped-exit-masking hazard has its own memory.
+**⬛ FOLD: DOOR 1 — THE SPATIAL CONSEQUENCE LAYER (2026-07-17) → w7-prep @ 2c980e4e**
+(merge of claude/spatial-consequence 3fee34ee off 66eda8e8; spot-checked, 17 files NUL-
+clean; recovered from the stall class by the status demand — the cure is 3-for-3). THE
+ENGINE'S SANCTIONED REOPENING IS BUILT AND DARK: the sidecar substrate derived at
+canonize from buildTownMapModel's OWN OUTPUT (coherence by construction — the
+commissioned JUDGMENT, ratified), structural-signature reuse, flag-gated dynamic import
+keeping townMap out of the engine graph; three consumers behind virtual
+spatialConsequenceEnabled — calamity WHERE-not-HOW-MUCH (toll totals untouched BY
+CONSTRUCTION: the reader kernel cannot return a worldState; bucket-neutral quarter
+beats, regex-pinned) · deterministic siege breach ({wallSegmentId, districtId} into
+siege_lifted; fabric scar gains seg/did strictly-additively; approach = stable FNV pair
+hash, aspatial-safe) · covert diffusion along real district adjacency, leash-bounded,
+magnitudes untouched. DORMANCY GOLDEN COMMITTED (dark byte-identical over real pulse
+ticks + contract + lit anti-vacuity). Lane gates all FOREGROUND: 12,125 tests / 0 fail
+(3 chunks) · +34 tests · tsc 0 · four validators · dist 145-green on its base · F24 scan
+15/15. FOLD RECEIPTS on the merged tree: lane pins + fabric dormancy cross-check 43/43 ·
+tsc 0 · build ✓ · dist 146/146. **MANAGER SIGN-OFF EXECUTED (vetoable): the +652 B eager
+delta SIGNED as-built** (the flag-gated canonize hook in the eager slice; the lane
+stop-and-reported per the brief; re-shaping a verified store seam for ~350 B was judged
+worse than the bytes — the slimmer-hook option is recorded FP-G11 stock; margin ≈5,249).
+JUDGMENTs ×9 vetoable in the lane report (flammability/adjacency/strength tables; ONE
+new recorded dial family CALAMITY_LEASH .55 / COVERT_LEASH .5 / DIFFUSION_HOPS 2 =
+tuning-window stock). SEAMS: fabricRead render-side breach surfacing = map-UI stock ·
+conquest-ended sieges scar-less (unchanged) · the 112-error townMap strict debt
+CONFIRMED pre-existing at pristine base (the chip session owns it). REMAINING LANES:
+fog + panels — then THE PUSH.
+**⬛ FOLD: SM-5 THE MAP LEGIBILITY WAVE (2026-07-17) → w7-prep @ d0857995** (merge of
+claude/sm-5-legibility tip f2e3d755, 8 commits off 66eda8e8; spot-checked, 32 files NUL-
+clean). ALL SEVEN delivered: provenance hover + the surveyor's-read drawer (self-gates on
+v1) · the change view (mirror-not-rederive; dark-fabric whisper; NO fabricated deltas —
+prominence has no baseline, honestly omitted) · edge annotations as honest wayfinding
+signs (VERIFIED no distance data exists ⇒ no invented numbers; real-weeks digest = a
+recorded seam) · the 5th ACCESSIBLE lens (Okabe-Ito; the four existing lenses proven
+byte-identical BEFORE the additive re-mint) · the DM pin layer (denylist-safe
+mapEdits.annotations, audience fail-closed, export appends — the draw-list golden never
+perturbed) · atlas-identity craft samples (docs/samples/atlas/ — TASTE VETO #3 QUEUED;
+realm-lens unification = an owner-gated seam, FMG-bound) · MAP-LAYER ANALYTICS (ONE
+feature-discriminated town_map_layer_used, EVENTS_REV 10, +43 B = the only eager byte
+cost; fog/interiors inherit the helper). FOLD RECEIPTS on the merged tree: 123 tests /
+12 files (pins + style/edits goldens + interior cross-checks) · tsc 0 · build ✓ · dist
+146/146. Closure 1,034,099 (margin 5,901). ⚠️ LANE FINDING (pre-existing, NOT SM-5's):
+**the v2 fold's domain:strict gate passed spuriously — the baseline is stale (~550
+noImplicitAny in the six townLayoutV2-family files, byte-identical to base)**; the
+owner-side chip session (task_be620e27) is fixing exactly this; fold-receipt discipline
+gains "run domain:strict explicitly, never via tail-pipe". Also confirmed pre-existing:
+the advancePauseResume 20s-timeout flake (passes at 90s). JUDGMENTs ×4 vetoable in the
+lane report (palette-not-pattern a11y · baseLenses stays 4 for AI composition ·
+glyph-only export markers · pins ride the existing editing gate pending the ladder).
+**FOG (DOOR 2) DISPATCHED off d0857995** — the last map wave; then panels remain.
+**⬛ THE DOCUMENTATION WAVE BRIEF COMMITTED (2026-07-17):
+docs/briefs/W_DOCUMENTATION_WAVE.md** — both sweeps banked (10/10 agents) and RECONCILED;
+the critics' contradictions ADJUDICATED (8 rulings, each vetoable): About = pure trust
+page (no ladder) · "credits" survives as wallet unit, pages lead with named-task
+dollar-anchored menus + the failure policy · badge Cartographer, WALL Surveyor, founder
+= charter-seal object · the AI claim lives in About+op-registry, never hero/pricing ·
+the data-longevity covenant assembled · receipts generated-never-hand-typed w/ the
+publishable list OWNER-GATED · Compendium seeds from a canonical demo world (seed =
+owner call) · no third sweep. Page skeletons fixed (About 6-band manifesto arc w/ the
+tick diagram + same-seed demo · Compendium hub-and-spoke w/ per-entry pages + A-Z index ·
+Pricing 5-band w/ the $2.99 bundle LEADING the one-time lane + Cartographer-as-service
+framing · Welcome additive). ART LAW: period craft never age damage; one house rose;
+the product's own output is the art; no stock, no AI illustration. The wave is now
+successor-dispatchable from the brief alone.
+**⬛ WELCOME PAGE ASSESSED + COMMISSIONED (2026-07-17; task #22 — THE DOCUMENTATION
+WAVE's fourth member): RECONCILE, DON'T REBUILD.** The best-aligned page of the four
+(~75% on-purpose): the salt-road narrative, the REAL-ENGINE-OUTPUT fixture w/ the
+"Forge this exact town / Same seed, same town, every time" determinism proof, real
+gallery cards w/ zero-shift fallback, the honest AI disclosure, hero-only-eager perf —
+ALL PROTECTED. The wave adds: (1) THE MAP WAYPOINT (the missing crown on the road — v2
+map + lens flip + provenance tease via the fixture idiom); (2) the Voice section's "the
+only AI feature" line EVOLVES before it becomes false at launch (keep the disclosure
+instinct; move to the schema-wall promise); (3) the closer's tier strip gains Surveyor +
+config-sourced facts (VERIFY the anon "completely randomized" line vs tierFacts); (4)
+landing-funnel analytics reconciled w/ the map-layer pattern. JUDGMENT (vetoable): no
+third research sweep — sweeps 1+2 cover landing patterns.
+**⬛ RESEARCH SWEEP 1 BANKED (wf_7ada24b2-812, 5/5 agents, 0 errors):** manifesto/
+medieval-art/market/digestibility + critic — full results at the task output file +
+journal.jsonl (paths in DOSSIER v2). Headline patterns for the brief: the Obsidian
+covenant (immutable one-sentence promises + the maker's face) · Ink &amp; Switch numbered
+ideals + honest comparison matrix · Ghost live-receipts (verifiable artifacts over
+claims) · the Ciechanowski dependency-order explainer (one annotated tick diagram) ·
+Anthropic's pre-emptive concession for the AI section · Tarsnap threat-model disclosure.
+Sweep 2 (wf_01b77ea7) still running. ⚠️ THE SPATIAL LANE STALLED in the recorded
+phantom-monitor class ("wait for the monitor's notification") — the SendMessage status
+demand issued (the cure is 2-for-2 across the program).
+**⬛⬛ THE RESUME DOSSIER v2 (2026-07-17 evening — the owner expects the 5-hour window
+cut; A SUCCESSOR STARTS HERE).**
+**STATE:** code truth = `claude/w7-prep` @ **eb958f4b** (worktree
+.claude/worktrees/agent-a04d3f325c72e62dd). Main tree = LEDGER-ONLY (the wrong-lineage
+trap is at 9 recurrences; THE HARD GATE: `[ "$(git branch --show-current)" = "<expected>" ]
+|| exit 1` as the FIRST clause of every state-mutating compound; python replace() with an
+absent anchor no-ops silently — assert anchors). Folded this session: gallery-fix
+469db96a → S4-S6 9d86991e (migrations 151/152, head 152 contiguous) → layout-v2 66eda8e8
+→ interiors eb958f4b. PARKED for the composite: claude/generation-time-content-dossier @
+577179fb (SUPERSEDES claude/generation-time-content — take the dossier branch) ·
+claude/w-r2-g2 @ aec57981. Budget margin ≈5,944 B (FP-G11 reclaim likely at the
+composite). EXEMPT_CEILING signed 69. All RULING #5/#8 authorities standing; THE ONE
+REGEN pre-signed (six flags incl. spatialConsequenceEnabled).
+**THREE LANES LIVE (worktrees/commits survive limits):** 1. claude/sm-5-legibility (off
+66eda8e8; agent-a6f40f33f3d58a4ef): six legibility deliverables + map-layer analytics
+(7th, relayed). 2. claude/spatial-consequence (off 66eda8e8; agent-aca12ee96c53c8ba6):
+the sanctioned engine reopening — sidecar substrate, dormancy golden MANDATORY,
+WHERE-not-HOW-MUCH. 3. claude/ai-panels (off eb958f4b; agent-ad2c6c73ecd19e0da): the
+write-stage interfaces. Charges in full in the task-board descriptions + the ledger rows
+above. ALSO RUNNING owner-side: the domain-strict-baseline chip (task_be620e27) — DONE
+(2026-07-17): folded → w7-prep @ 9150b464 (ledger row above). FOLD PROTOCOL: spot-check (show --stat + python NUL count vs claimed
+scope) → merge in the w7-prep WORKTREE (hard-gate every command) → lane pins on merged
+tree → ledger row HERE → task update.
+**QUEUED:** fog (door 2) dispatches at the SM-5 fold (charge = task #16) · THE
+DOCUMENTATION WAVE (#19 About / #20 Compendium / #21 Pricing / #22 Welcome — one lane,
+post-folds pre-ROUND-3) needs the two research sweeps' syntheses: run transcripts at
+~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4e5bd424-21ab-4307-ba41-bd048bb9061e/subagents/workflows/
+wf_7ada24b2-812 + wf_01b77ea7-fb1 (read journal.jsonl for banked results; scripts saved
+alongside — RE-RUN if unreadable; a new session cannot resume the runs).
+**THE ORDER (JUDGMENT, vetoable): PUSH (RULING #7 as amended) fires when the map waves +
+panels + fog fold — BEFORE the documentation wave (backup sooner; the wave rides the
+standing re-push)** → doc wave → THE COMPOSITE (w7-prep + w-r2-g2 + the DOSSIER content
+branch; full gate; audit BYOK's claimed base reds; final ratchet call) → ROUND 3 (#6: the
+commission verbatim + THE FOUR CROWNS rubric + ai-cost-efficiency dim; pre-approved
+stock: W6 delta · SettlementsPanel:748 guard · S1-S3 token retrofit · doc-wave claims
+audit) → gap register → THE SOAK (SOAK_PLAN_R2; CENTURY-300 first; flags-on incl.
+spatial) → tuning window (dials + knob registry + S7 #35) → re-certs → THE ONE REGEN
+(pre-signed, no pause) → final gate → THE VERY END (PR + deploy batch; ~35 migrations;
+carve-outs: LEGAL CONSULT + SUPPORT EMAIL; merge button + db-push = the owner's hands).
+**OWNER QUEUE (open, none blocking lanes):** taste vetoes ×3 (v2 samples
+docs/samples/town-map-v2/ · prose docs/CONTENT_GT_DOSSIER_TASTE_SAMPLE.md · atlas
+identity at the SM-5 fold) · THE ENTITLEMENT-LADDER ruling (SM-5 pins + interiors export
++ pricing cards all render it) · bespoke-style storage surface · AI-op audit-spine
+persistence · provisional AI prices 6/3/6/8 · new-mint-v2 default (rides taste veto).
+Hazards: memory/MEMORY.md. The stall cure: a SendMessage status demand recovers silent
+agents (3h precedent).
+**⬛ THE SECOND DESIGN-RESEARCH SWEEP (2026-07-17, owner: "look for the best examples
+both design and layout, online to emulate and then reconcile"):** wf_01b77ea7 dispatched
+for the documentation wave's other two members — pricing-page design excellence ·
+hobby/TTRPG market pricing norms (subscription-fatigue framing) · credit/usage-economy
+honest presentation (outcomes-not-tokens menus, BYOK framing) · reference/codex design
+(Civilopedia-class enumeration delight, docs-as-SEO) + completeness critic. BOTH sweeps
+(this + wf_7ada24b2 for About) reconcile into ONE documentation-wave brief when banked;
+the brief is the manager's synthesis artifact; the lane executes it at the wave's slot.
+**⬛ OWNER COMMISSION: THE PRICING PAGE OVERHAUL (2026-07-17, "do the same for the
+pricing page"; task #21 — THE DOCUMENTATION WAVE's third member, one lane w/ #19+#20):**
+assessment finding: the best-ENGINEERED page of the three (config-sourced law real,
+one-primary discipline, honest states, live founder meter w/ safe fallback) with a
+two-generation-old product shape. GAINS: (1) **THE SURVEYOR TIER RENDERED** — the $19.99
+AI tier has NO purchase surface today (the launch-whole ruling makes this a launch
+requirement); BYOK named on the card; prices stay owner-ruled config. (2) **THE
+TASK-PRICE MENU** — "users buy outcomes, not tokens" enforced: per-task credit costs
+rendered from operator config under the wave's drift contract; the stale
+one-settlement-prose credit gloss dies. (3) Export-bundle visibility row (vetoable
+revisit of the in-context-only judgment — the bundle is now dossier+maps+VTT per
+settlement; Cartographer includes it). (4) Feature lists + BOTH A/B variants rewritten
+to the finished product in mechanism terms; the tier cards render THE ENTITLEMENT-LADDER
+RULING when the owner makes it (current truth if still pending at build). (5) A "free
+forever" section — honesty as conversion. NO price changes ever from this lane. Same
+slot: post-folds, pre-ROUND-3; ROUND 3 audits. The three pages are ONE ARGUMENT
+(About=why trust → Compendium=proof → Pricing=convert) and build as one wave.
+**⬛ OWNER COMMISSION: THE COMPENDIUM OVERHAUL (2026-07-17, "do that as well"; task
+#20 — joins #19 as THE DOCUMENTATION WAVE, one lane, post-folds pre-ROUND-3):** the law
+library, generated-not-copied. THE REGISTRY-RENDER LAW (structural, the headline): every
+enumerable + number renders from the engine's own constants via the analytics-dictionary
++ drift-contract pattern — a tuned threshold diverging from the page FAILS CI; "cannot
+lie" becomes an enforced invariant before the tuning window can mint doc-lies. DIES: the
+hand-copied Economy/Arcane thresholds · the inline Tiers arrays · catalogData.js as a
+copy-module (re-sourced) · the Stress tab's silent hand-written fallback (fail-visible).
+REGENERATED: the Living World tab from the actual system registries — the full endgame
+engine + the preset-lighting truth (the off-by-default copy is stale post-ruling). NEW
+CATALOGS: deities/pantheon bank · composer verbs · THE OP REGISTRY RENDERED PUBLIC (the
+schema wall as a trust artifact — "every operation the AI is allowed to perform,
+enumerated") · lenses/styles · facet vocabularies · calamity buckets · the knob registry
+when minted. Custom mode reconciled with S4 (shared facet/injection-point vocabulary).
+KEPT: per-tab SEO metadata (extended) · anchor deep-links (the HelpPopover lifeline law) ·
+global search (index regenerates from the new sources). ROUND 3 audits the page's claims
+with everything else.
+**⬛ OWNER COMMISSION: THE ABOUT PAGE OVERHAUL (2026-07-17, in-session; task #19):**
+purpose ratified in-session — "the place where the invisible becomes believable": the
+constitution translated for civilians (promises-as-guarantees: determinism · receipts ·
+state-never-fate · the schema wall · truth-projection; LIMITS stated proudly; the ladder
+in mechanism terms; the maker's face; philosophy retained + whole-system appreciation).
+Owner direction: digestible; medieval-century art/artistic schematics where appropriate;
+EMULATE THE BEST ONLINE EXAMPLES (research sweep wf_7ada24b2 dispatched: manifesto pages ·
+medieval art direction + public-domain sources · TTRPG market pages · digestible-depth
+patterns · completeness critic) then reconcile with what exists. SURVIVES the overhaul:
+the How-To inversion · the DM Philosophy tab · Compendium delegation (becomes the
+governing doc-pattern) · the Living World claim+coherence+reversible shape. DIES: the two
+hardcoded Cartographer price title= strings (config-sourced facts law) · the mangled
+punctuation · the pre-Surveyor AI framing · the 3-rung ladder. ART LAW: the product's own
+output is the art (v2 craft samples, panorama) + period-style schematics; public-domain
+vocabulary only. BUILD SLOT: post-folds (describe the FINISHED product), pre-ROUND-3 —
+ROUND 3 audits every About claim against the real product (receipts culture applied to
+marketing). Manual weight sheds into the guidance layer/Compendium per the purpose ruling.
+**⬛ THE 100% AUDIT + THE PANELS LANE (2026-07-17, triggered by the owner's "its going
+to be 100% by the end of this correct?"):** the completeness audit found ONE unslotted
+launch-required item — the AI write-stage PANELS (S4/S5/S6 + accept→mint interfaces;
+pure halves built+pinned, interfaces seamed with no build slot; Ruling #4 launch-whole
+requires them). CLOSED: claude/ai-panels DISPATCHED off eb958f4b (fence-disjoint from
+both running lanes: AI components only) — custom-content labels flow · style-overhaul
+live-preview accept/decline · construction config-draft + comparator-deviations + delta
+revise · accept→mint surfaced w/ receipts; all lazy, kill-switch-aware, early-access
+labeled, S1 money moments. Task #18; the push + composite wait for it (it is part of
+"everything built"). THE 100% DEFINITION recorded for honesty: 100% = the LAUNCH-WHOLE
+scope. Deliberately OUTSIDE it (recorded, unbuilt-by-design): fog's hosted realtime v2 ·
+S4+ knobs/packs (gated on live acceptance metrics, post-launch by design) · seat-transfer
+mechanism (concierge, month 12) · gallery comments · radar-driven future lenses · deeper
+provenance kernel threading · CONTENT-VT-2 view-time stock. HUMAN-GATED (cannot be 100%
+without the owner): the taste vetoes (v2 maps · prose sample · atlas identity) · the
+entitlement-ladder ruling · counsel (drafts not-in-force) · support email · merge button
++ db push. Content-depth deferrals (institution descs, NPC pools, history-event wiring)
+ride the taste approvals into a post-taste content wave before the regen.
+**⬛ FOLD: DOOR 3 — THE KEYED SCALE (2026-07-17) → w7-prep @ eb958f4b** (merge of
+claude/interiors tip a4bc218a off 66eda8e8; spot-checked: fence HELD — zero townMap
+edits, all new files). Seeded semantic interiors: `${_seed}::interior:v1:<id>` fork,
+integer-only geometry (quarter-turn rotations, cross-machine stable) · facet-law grammar
+(NATURE kind via cohesionWeave.facetOf, declared ?? inferred ?? generic; FUNCTION variant
+rooms: heals⇒infirmary, judges⇒chamber) · THE ENVELOPE LAW vs the ACTIVE layout model
+(v2 else v1; entrance on the district-facing edge — the v1 16×16-landmark footprint rule
+= JUDGMENT #1) · prosperity-scaled furnishing · **corruption semantics: REVEALED ⇒
+visible evidence room; COVERT ⇒ a concealed chamber that never alters public geometry —
+fail-closed scrub pinned (publicSafe never derives it; both public paths byte-identical;
+covert walls never reach UVTT line-of-sight)** · UVTT pre-walled by construction ·
+scoped interiorEdits sidecar · all four lenses, zero new colors · store-free lazy
+InteriorView. NEW ADDITIVE GOLDEN FAMILY: 48-entry seed×tier×kind sha matrix (v1 town
+goldens untouched). Lane gate: full suite 12,495/0 · tsc 0 · strict 0 · validators green ·
+eager delta 0 B. FOLD RECEIPTS on merged tree: interior pins 49/49 · tsc 0 · build ✓ ·
+verify:dist 146/146 (the interiorLazy contract joins). SEAMS: enter-from-map hook =
+manager wires at the SM-5 fold (fence-forced, correct) · pricing = interiorExportGateReady
+predicate riding resolveExportAccess (OWNER LADDER PENDING). JUDGMENTs ×3 vetoable in the
+lane report. Lane memory written by the lane. ONE MAP WAVE DOWN, TWO BUILDING (SM-5 ·
+spatial-consequence); fog dispatches at the SM-5 fold.
+**⬛ OWNER COMMISSION: MAP-LAYER ANALYTICS (2026-07-17, in-session: "make sure the
+analytics also capture the data regarding settlement map layer generation as well"):**
+the map layer joins the telemetry seam. RELAYED to the live SM-5 lane (it owns the map
+surface): capture the v2 GENERATION PROFILE at map render (layoutVersion, siteKind,
+morphology, responseMode, Lynch-score band, retryCount, hasFabric, panorama use) ·
+legibility-feature engagement (SM-5's own deliverables born instrumented: hover-provenance
+opens, change-view use, pin creation, a11y lens selection) · v1→v2 redraw opt-ins ·
+lens/style selection where not already covered by the style radar. DISCIPLINE (the seam
+architecture + the S4 precedent): ENRICH existing events with properties over minting
+names; where a name is unavoidable, the shared feature-discriminated pattern (the
+ai_stage_answer two-event precedent); EVENTS_REV + dictionary + drift contract updated;
+event-name strings are EAGER — counted against the 5,944 B margin. PRIVACY: enums/bands/
+counts only — never map content, prose, or coordinates; consent tiers via the seam as
+everywhere. BOUNDARIES: the engine emits nothing (Door 1's substrate stays
+analytics-free — constitutional); doors 2/3 INHERIT the SM-5 instrumentation pattern at
+their folds (fog session starts/reveals; interior opens/exports — same enrich-first law).
+ROUND 3's survey checks map-analytics coverage against this row.
+**⬛ LANE PARKED: CONTENT-GT-DOSSIER (2026-07-17, the owner-started session) — the
+DOSSIER+NAMING half of task #27 PARKED @ 577179fb on claude/generation-time-content-dossier
+(4 commits STACKED on the sibling generation-time branch @ f9720b5a — spot-checked; ⚠️ THE
+COMPOSITE TAKES THIS BRANCH, it supersedes the sibling).** THE LOAD-BEARING LAW: per-step
+PRNG forks + one-_roll()-per-pick ⇒ in-place pool growth is DRAW-COUNT INVARIANT; 0-draw
+surfaces use a pure fnv leaf (kernel/proseHash.js, canonical-at-zero). VERIFICATION BAR:
+base-vs-tree STRUCTURAL DIFF over the 187-row generator-golden grid — ONLY prose paths
+moved, zero structural/numeric fields (stronger than goldens-green). Grown: pressure
+sentences (the survey's CRITICAL) · POLITICAL_FLAVOR · arrival scenes · 56-institution
+desc sample · WORLD-SCOPED FACTION DEDUP (the survey's worst surface; pure rng-free
+post-pass in composeInstantWorld; ⚠️ rename by IDENTITY not name-match — the
+two-same-named-factions collapse bug found+pinned). Gate: 12,446 pass / 1 PARK RED =
+generatorGoldenMaster only (regen at THE ONE REGEN; never re-record early) · dist 145/145.
+DEFERRED-WITH-REASON in-branch (history-event wiring, ~245 institution descs, NPC pools,
+vignettes); OWNER-GATED untouched (displayName schema, deity growth). **OWNER TASTE GATE
+QUEUED: docs/CONTENT_GT_DOSSIER_TASTE_SAMPLE.md** (+ the faction-rename strategy call +
+the 9-instance sentence-casing quirk noted). The content stack now parks TWO deep for the
+composite; the ONE REGEN batch grows accordingly.
+**⬛ THE FOUR CROWNS (owner, 2026-07-17, verbatim goals — THE AMBITION RUBRIC):** "i am
+trying to go for technologically and potentially: 1. best map generator 2. best settlement
+generator 3. best campaign simulator 4. best TTRPG use of AI — those are my goals that I
+feel with my coherency engine I can beat before anyone else." BINDING ON ROUND 3: the
+resurvey's ambition-fit dimension grades against THESE FOUR explicitly (per-crown: where
+the build stands vs best-in-class, what blocks the crown, fix stock derived per crown).
+The manager's standing read (recorded for the graders): the four compound — the coherency
+engine makes each defensible BECAUSE the others exist (maps that mean things require the
+settlement engine; safe AI requires the simulator's op layer) — so competitors must beat
+all four at once to durably beat any one. Contested axes per crown: (1) aesthetics vs the
+hand-painted ceiling; (2) first-session legibility of already-won depth; (3) soak
+certification of century-scale aliveness; (4) panel UX + acceptance metrics + a fresh
+market scan (training-vintage competitor knowledge, pre-launch check recommended).
+**⬛ FOLD: TOWN LAYOUT v2 + PANORAMA (2026-07-17) → w7-prep** (merge of
+claude/town-layout-v2 tip cbbf04c5 off 07d3a1d2; spot-checked incl. the python NUL
+byte-count — 19 src/tests files CLEAN; conflict-free). ALL FIVE owner refinements built
+in: the staged pipeline (SITE genesis w/ realm-coherence law + exploit/endure/fortify
+response modes recorded as provenance → economic field w/ sourced asymmetry + NO uniform
+jitter, source-less towns provably seed-independent-formal → core nucleates ON the field
+→ roads/districts → Lynch bounded-retry composition w/ plan-response wall) · per-element
+provenance retained (cause-less deformation impossible by construction) · latent
+advantage map + THE RECONCILIATION LAW (lawful-fortify HOLDS doctrine — reconcile-hold
+pinned; chaotic encroaches; dark fabric ⇒ founding form persists) · panorama (oblique
+2.5D, composes w/ every lens, Plan/Panorama toggle). VERSIONING: v1 BYTE-IDENTICAL
+(default fork untouched), v2 opt-in via mapEdits.layoutLawVersion, v2 goldens EXTEND
+(20-config corpus, min Lynch 0.66 vs floor 0.5, all 5 morphologies + both fabric
+branches) — the lane LANDED FREE. FOLD RECEIPTS on the merged tree: lane pins 83/83 ·
+full property/golden suite 195/195 (v1+v2+style goldens together) · tsc 0 · build ✓ ·
+dist 145/145. ⚠️ F24 RECURRENCE: NUL bytes had crept into 6 template-literal separators
+in-lane — caught and cleaned by the lane, verified clean at fold by the byte-count
+recipe. JUDGMENTs (vetoable, in-file): LYNCH_ACCEPT_FLOOR 0.5 (golden-affecting to
+change) · MAX_RETRIES 6 · attractor/landform tables · reconciliation magnitudes 14/30 ·
+wall-embrace 45th percentile. SEAMS: **new-settlements-mint-v2 NOT auto-wired** (built +
+pinned; the 3 create chokepoints named; OWNER-GATED + rides the TASTE VETO — 9 craft
+samples at docs/samples/town-map-v2/ PENDING) · non-water landforms are model-data +
+placement influence only (bespoke draw-ops = fenced follow-up) · one pre-existing
+advancePauseResume flake noted, not lane-caused. **THE BUILD-OUT LANES ARE BOTH FOLDED —
+the three map waves (SM-5 ∥ DOOR 1 ∥ DOOR 3) DISPATCH NOW off the double-folded tip.**
+**⬛ FOLD: SURVEYOR S4-S6 (2026-07-17) → w7-prep @ 9d86991e** (merge of
+claude/surveyor-s4-s6 tip b486f9ff, 6 commits off 07d3a1d2; spot-checked; CONFLICT-FREE).
+The AI control surface completes construction: ACCEPT→MINT (typed ApplyIntents through
+store verbs, per-item, reproducibility receipts; unroutable ops surfaced never dropped) ·
+S4 CUSTOM CONTENT (two-layer schema wall: registered-bucket landing + per-field
+MECHANICAL/FLAVOR/UNSUPPORTED labels — hallucinated mechanics structurally dead) · AI
+STYLE OVERHAUL (validateBespokeStyle resolves onto parchment keeping only known-role
+visual fields; truth-projection by construction; additive saves, base lenses permanent;
+cross-lens edit pin EXTENDS to bespoke, proven) · S5/S6 CONSTRUCTION (config-vocabulary-
+is-the-op w/ config-seam walker pin; DETERMINISTIC delta-only comparator, zero AI,
+generalizes to realm; canonizes-nothing-until-commit pinned at composeInstantWorld) ·
+BORN-EFFICIENT TOKEN LAYER (static-first prompts pinned byte-identical per task class;
+routing/max_tokens/slice+token budgets = operator config aiTaskConfig.js; canonicalJson +
+visible truncation, never silent grounding cuts; anomaly flags stamped+logged). Each
+stage: S1 money path verbatim + own kill-switch + early-access register. MIGRATIONS
+151/152 (credit costs + stage switches; head 152 contiguous, validator-confirmed).
+FOLD RECEIPTS on the merged tree: lane pins 107/107 · tsc 0 · build ✓ · verify:dist
+145/145 (closure ratchet green — lane-measured 1,034,056 B, margin 5,944) · four
+validators green. JUDGMENTs ×5 (vetoable, in the lane report): prices 6/3/6/8 provisional-
+per-the-blanket · two shared events (EVENTS_REV 9) · fast/balanced routing defaults ·
+apply-log rides existing surfaces (audit-spine persistence = OWNER-GATED follow-up) ·
+bespoke-style STORAGE SURFACE = owner-gated schema (flagged, mapEdits pins untouched).
+SEAMS: React panels (S3's least-verifiable-headless precedent) · style viewer-surface
+wiring (~6 surfaces → resolveActiveStyle) · edge shells PLAUSIBLE-by-pattern (CI deno
+check). Lane full suite pre-fold: 12,378/1 (the pglite load-flake class, green isolated).
+**⬛ RULING #7 AMENDED (2026-07-17, owner: "move git push to after everything is built"):
+THE PUSH MOVES TO POST-BUILD-OUT.** The first push now fires when the ENTIRE build-out is
+folded — both running lanes, all three map-wave dispatches (SM-5 ∥ door 1 ∥ door 3, then
+door 2), and the owner-side dossier-prose session — instead of at the original three-lane
+point. The chain becomes: build-out complete → PUSH (branches-as-backup; no PR/merge/
+deploy) → THE COMPOSITE → ROUND 3 → soak → tuning → re-certs → ONE REGEN → THE VERY END
+(PR + deploy). Standing re-push-at-milestones unchanged after the first push. Recorded
+without re-litigation: the single-machine exposure window now extends through the full
+build-out — the owner's accepted trade.
+**⬛ THE RECONCILIATION LAW (2026-07-17, owner-delegated "i let you decide how that
+works" — architect's mechanism, vetoable): how optimality relates to lawful↔chaos OVER
+TIME.** The FOUNDING response mode (exploit/endure/fortify; optimal or suboptimal) is the
+starting point and stays character-derived. Over time the town reconciles with its site,
+and ALIGNMENT GOVERNS THE STYLE OF RECONCILIATION, not its morality: **LAWFUL = planned
+coherence toward the CHOSEN doctrine's optimum** — discrete, engineered, legible
+corrections (the drained quarter, the built quay, the aligned extension toward the
+harbor); a lawful fortress town MAINTAINS its fortified suboptimum deliberately (lawful
+= ordered execution of the doctrine, not trade-optimality worship). **CHAOTIC = greedy
+local opportunism** — continuous encroachment toward whatever advantage is locally
+available now (riverbank grabs, sprawl toward the trade gate), gaining fast and
+accumulating disorder (congestion grain, palimpsest over the old bones). Both signs are
+even-handed (state-never-fate; no alignment moralizing). MECHANISM (zero engine change —
+the fabric layer is folded and already carries the signals): the v2 engine computes and
+RETAINS **THE LATENT ADVANTAGE MAP** at generation (the site's unexploited attractors —
+the declined harbor, the unused ford — a natural byproduct of stages 0-1); the v2
+hasFabric branch INTERPRETS the existing fabric signals (alignment-drift grain toward
+1−lawfulness01 + prominence stocks) as reconciliation: direction from the latent map,
+style+coordination from lawfulness, magnitude+timing from fabric stocks. Dark fabric ⇒
+founding form persists (correct: no history yet). SM-5's change view narrates
+reconciliation turns for free. Lands wholly in the #38 lane (relay #5); latent-map
+retention joins the provenance annotations; pins: lawful-vs-chaotic reconciliation
+fixtures on the same site + same founding mode.
+**⬛ OWNER DESIGN REFINEMENT: SITE GENESIS — STAGE 0 (2026-07-17, in-session, folded
+into #38): "randomly generate a river or a mountain or a side of a mountain or sand dunes
+or a marsh or whatever makes sense from the combination of nearby resources, trade route
+and terrain. only then apply the principles of urban design... appropriately to take
+advantage OR NOT of the surroundings."** The pipeline gains its true first stage: (0)
+**THE SITE** — the physical canvas itself is GENERATED from the dossier's regional
+context: realm-map terrain/biome at the settlement's location (REALM-COHERENCE LAW: the
+town site is a zoom-in of its realm position and may not contradict it), nearby resources
+implying landforms (mines⇒slopes/rock faces, fisheries⇒shore/river, peat⇒marsh,
+salt⇒flats/dunes), trade routes implying physical carriers (a river trade lane means the
+river physically enters/exits along its bearings; overland routes shape passes/gaps).
+SUBSTANCE-FROM-DOSSIER / EXPRESSION-FROM-SEED extends to the site: WHETHER the river
+exists = substance; its meander, which mountain flank, the dune extent = seeded
+expression. Standalone settlements (no realm context) derive the site from resources +
+trade alone, neutral default. **THE "OR NOT" CLAUSE (owner nuance, made law):** the
+response mode to the site — EXPLOIT / ENDURE / FORTIFY — derives from the settlement's
+character and history (a fortress-origin town takes the defensible flank over the
+trade-optimal bank; the marsh town endures on stilts); deliberate suboptimality where the
+fiction justifies it. TEMPORAL ARC CONFIRMED AS-BUILT: growth-era change rides the urban
+fabric layer at stone's pace (owner: "as we currently designed"); the site itself is
+immutable short of catastrophe (fabric's rebirth path). RELAYED to the v2 lane (relay #4).
+**⬛ OWNER DESIGN REFINEMENT: ECONOMY-FIRST GENESIS (2026-07-17, in-session, folded into
+#38): "depending on the resources and terrain and everything else, procedurally and
+randomly generate that economic shape first onto the settlement map and only then apply
+all the other principles."** The v2 pipeline ORDER is now explicit: (0) terrain/water →
+(1) **THE ECONOMIC FIELD, FIRST** — attractor points + gradients derived from the
+dossier's ACTUAL economy (income sources, resource sites, trade-route bearings, fertile/
+navigable terrain) laid onto the map with seeded organic variation → (2) the genesis core
+NUCLEATES ON the field (the market where routes converge, the core at the ford) → (3)
+roads-before-buildings FOLLOW the economic gradients → (4) districts/growth rings/semantic
+placement pull toward their attractors → (5) the composition pass (Lynch rubric,
+historical form vocabulary, plan-response, wall-obeys-town, tier grammar) applies LAST.
+TWO LAWS ATTACHED (architect, vetoable): **EXPRESSION-NOT-SUBSTANCE** — seeded variation
+moves the economic field's expression (which bank, which bearing, offsets), never its
+substance (the dossier decides WHAT exists; truth-projection law) · **"randomly" = SEEDED**
+(the v2 fork; determinism constitutional). SYNERGY: the economic field IS the primary
+sourced-asymmetry layer — stage-1 attractors become the provenance sourceRefs, making
+asymmetry-with-provenance automatic-by-construction. RELAYED mid-flight to the v2 lane.
+ALSO: the deferred CONTENT-GT-DOSSIER taste-sample lane (task_56fe7e02) was STARTED BY
+THE OWNER in a separate session — tracked on the board; the composite waits for its
+outcome like any lane.
+**⬛ LANE PARKED: GENERATION-TIME CONTENT (2026-07-17) — task #27's remaining half
+BUILT + PARKED on claude/generation-time-content @ f9720b5a (3 commits off 07d3a1d2;
+spot-checked: files/base/shift-map match the report; UNFOLDED by design — joins the
+composite).** The three headliners grown via one pure mechanism (src/domain/worldPulse/
+eventProse.js, FNV-1a pickLine, CANONICAL-AT-ZERO — falsy seed ⇒ index 0 ⇒ the exact old
+string; no rng consumed, structural fields provably unmovable): calamity title/summary/
+reason pools BUCKET-NEUTRAL (law guard green) · all 22 war/peace/hegemony receipts seeded
+on the directed pair key (stable per pair, varies across pairs) · kernel news framing
+variety (upswing 4 / resource 2 / lifecycle 5) with every semantic token threaded
+unchanged. Lane gates: FULL SUITE 12,408/0 · tsc+domain-strict+lint 0 · dist 145/145 ·
+eager Δ≈0 (prose lives in lazy chunks only). +129 guard tests (register laws, 57-pool
+full reachability, determinism). **HONEST FINDING (refines the parks-RED expectation):
+the observable golden-red set is EMPTY** — the slice is golden-BINDING (varied prose
+persists into wizardNews/calamityHistory/reason ledgers and will populate regenerated
+goldens at THE ONE REGEN) but the current suite exact-pins almost none of it; the one
+predicted red resolved green by hash coincidence (verified by direct eval). DEFERRED-
+WITH-REASON (queued stock, lane-spawned follow-up): the dossier/naming generation-time
+surfaces (pressure sentence, faction names ⇒ needs a world-scoped dedupe registry,
+institution displayName ⇒ owner-gated schema field, persona/history/founding prose) =
+the taste-sample class — a sibling lane with owner samples, NOT blind bulk into the
+permanent regen; realm order/refusal prose untouched (code-matched realmVetoProse is
+load-bearing). JUDGMENTs ×2 recorded vetoably in the lane report (fence-at-event-prose;
+stampTitle stays canonical). Lane memory written by the lane.
+**⬛ RULING #8 SEQUENCING CONFIRMED BY THE OWNER (2026-07-17, "this should all sequence
+before the resurvey and soak"):** the doors + SM-5 build-out completes IN FULL before
+ROUND 3 and the soak — now an explicit owner statement, not a manager judgment. The
+binding chain: three running lanes fold → PUSH (RULING #7) → SM-5 ∥ door1 ∥ door3 (at the
+v2 fold) → door2 (at the SM-5 fold) → THE COMPOSITE (all folds in) → ROUND 3 resurveys
+THE WHOLE incl. every door → gap register → THE SOAK (engine certified WITH
+spatialConsequenceEnabled flags-on) → tuning → re-certs → ONE REGEN → THE VERY END.
+**⬛ OWNER RULING #8 (2026-07-17, "no include them before launch"): THE DOORS MOVE
+PRE-LAUNCH.** Supersedes the same-day post-launch placement. Corpus re-slotted @ w7-prep
+aca1a132 (doc renamed docs/DESIGN_MAP_DOORS.md). THE SHAPE: door 1 SPATIAL CONSEQUENCE =
+the named wave for which the engine-frozen rule lifts (its commission IS the corpus
+reopening); builds dormant w/ committed dormancy golden; **spatialConsequenceEnabled JOINS
+THE ONE REGEN lighting list** (commission-signed under this ruling, vetoable). Doors 2-3
+(TABLE LAYER v1 zero-server · KEYED SCALE interiors) ship at launch under the launch-whole
+precedent — instrumented, ROUND 3 reviews them; fog's hosted realtime v2 REMAINS
+post-launch gated (recorded in-doc). DISPATCH TOPOLOGY (manager, vetoable): at the
+town-layout-v2 fold → SM-5 ∥ DOOR 1 ∥ DOOR 3 (fences: SM-5 owns existing map UI · door 1
+engine-side + canonize substrate · door 3 new interior files, entry-hook seamed at fold);
+at the SM-5 fold → DOOR 2. Composite waits for all doors; ROUND 3 reviews the whole.
+HONEST COST NOTE (recorded, not re-litigated): the pre-launch tail grows by three lanes
+incl. one engine wave — launch moves later; the soak now certifies the engine WITH
+spatial consequence flags-on (charter unchanged: harness is flags-on by design).
+**⬛ THE DOORS' CORPUS CITIZENSHIP (2026-07-17, owner clarification: "i meant to include
+all of these" — quoting the three doors WITH their post-launch placement):** the doors are
+now FULL corpus entries @ w7-prep 5bd601ea — docs/DESIGN_MAP_POST_LAUNCH_DOORS.md holds
+frozen designs + coherence matrices + build gates for THE SPATIAL CONSEQUENCE LAYER
+(map→engine via a derived sidecar spatial substrate; fields-not-entities; the
+WHERE-not-HOW-MUCH calamity law; virtual spatialConsequenceEnabled w/ dormancy golden;
+lights only in an owner-signed regen), THE TABLE LAYER (semantic-snap fog over the v2
+graph; zero-server v1 / realtime v2 separately gated; VTT-complement positioning), and
+THE KEYED SCALE (facet-law interiors under the envelope law; pre-walled UVTT by
+construction; institution-interiors-only charter clause). Map doc §14 reduced to a
+pointer. BUILD SLOT unchanged: post-launch roadmap, by the owner's own quoted placement;
+recommended order (vetoable) interiors → spatial consequence → fog, demand-checked via
+the radar pattern. The doors-vs-docs assumption from the prior row is RESOLVED: docs.
+**⬛ THE CORPUS AMENDMENT (2026-07-17, owner: "that includes the corpus"): the session's
+commissions are FROZEN INTO THE DESIGN CORPUS on the code lineage @ w7-prep 41d09959** —
+DESIGN_SETTLEMENT_MAP.md §12 (sourced asymmetry: provenance-annotated deformations,
+plan-response law, no-uniform-jitter) + §13 (SM-5 legibility wave w/ compact coherence
+matrix per the standing designs-freeze-with-matrices practice) + §14 (the three post-launch
+doors recorded as designed-intent, deliberately unbuilt) and DESIGN_AI_CONTROL_SURFACE.md
+§7 (the token-efficiency doctrine: 7 levers, quality bar, commercial frame). The §11 recon
+staleness is annotated resolved in-doc. ASSUMPTION STATED VETOABLY: "includes the corpus"
+read as freeze-the-designs-into-the-corpus, NOT as build-the-three-doors-now — if the owner
+meant the doors, the corpus entries just written are their design prerequisite and lanes
+dispatch on the word.
+**⬛ OWNER COMMISSION: THE MAP LEGIBILITY WAVE (SM-5) (2026-07-17, in-session: "do it all
+appropriately!" — the manager's map-layer proposal commissioned in full, sequencing
+delegated).** SIX DELIVERABLES, one Opus lane, SERIALIZED BEHIND the town-layout-v2 fold
+(same map-UI file surface — single-writer; dispatch at the v2 fold): (1) THE MAP EXPLAINS
+ITSELF — hover provenance for deformed/placed elements rendered from the v2 model's
+provenance annotations (the retention directive relayed to the v2 lane THIS SESSION: per-
+element {sourceFamily, sourceRef, effect}, presence-pinned as the no-uniform-jitter
+enforcement); InstitutionCard-hover precedent; Surveyor's-notes register. (2) THE CHANGE
+VIEW — a "what changed" mode over fabricRead (prominence shifts, new scars, rebuilt
+blocks since last visit / over N advances) + calamityHistory; graceful empty-state while
+fabric is dark pre-regen (whisper explains); the chronicle's spatial twin. (3) EDGE
+ANNOTATIONS — roads exiting the map labeled to named neighbors w/ travel time derived
+from existing neighbour_links/route distance data (verify source in-repo). (4) THE ATLAS
+IDENTITY — unified lens treatment across realm+town exports (one-atlas feeling; craft
+samples, owner taste veto). (5) DM PIN/ANNOTATION LAYER — DM-only vs player-visible
+markers riding the existing handout/reference export split; VERIFY-FIRST what mapEdits
+already covers before building; pins live in mapEdits keys (must dodge PRIVATE_KEY_RE
+substrings); no new gate class, no schema change. (6) COLORBLIND-SAFE/PATTERN-FILL lens
+variant via the style schema (one more bounded lens). SEQUENCING JUDGMENTS (vetoable):
+the first push (RULING #7) is NOT delayed — it fires when the original three lanes land;
+SM-5 folds after v2 and rides the standing re-push; ROUND 3 reviews SM-5 with everything
+else. **POST-LAUNCH ROADMAP STOCK (recorded so the doors are never lost, deliberately NOT
+built in this tail):** map→engine coupling at town scale (fire along adjacent buildings,
+siege damage by wall segment — new engine capability, corpus-closed) · in-app fog-of-war/
+session mode (the UVTT meet-VTTs-where-they-are strategy holds for launch) · building
+interiors (a new scale). Zero eager bytes expected across all six (map surface is lazy).
+**⬛ OWNER DESIGN REFINEMENT: SOURCED ASYMMETRY (2026-07-17, in-session, folded into #38):
+"nothing should be perfectly organic. there will always be slight or minor organic
+asymmetry from the region, resources, people's habits, etc. The best that we as people can
+do is to plan around it or use them to our natural advantage."** The refinement sharpens
+the v2 commission's "seeded irregularity within constraints" from cosmetic jitter to
+ASYMMETRY WITH PROVENANCE — every deformation has a named cause from the dossier: (1)
+REGION — terrain/water/slope already first-class (water-first morphologies); (2) RESOURCES
+— the settlement's actual income sources and resource sites pull districts, roads, and
+work-quarters toward them (the tannery-downstream exemplar generalized); (3) PEOPLE'S
+HABITS — desire paths cutting formal grids, market accretion at the gates facing the
+farmland/trade routes, habitual routes worn permanent (derived from institution adjacency
++ trade-route bearings + high-traffic pairs — an inference layer, shapes vetoable). THE
+PLAN-RESPONSE LAW (the owner's second clause): the planned elements READ AS RESPONSES to
+the asymmetries — walls kink to include what matters, grids deform where the stream cuts,
+the square sits where the desire paths converge — plan-around or exploit, never suppress.
+DISCIPLINE: no uniform jitter (global noise reads as noise, not history); irregularity is
+applied PER-CAUSE, deterministic from the seed fork + dossier only. COMPOSES with Lynch:
+imageability *needs* distinctive irregularity — sourced asymmetry should raise rubric
+scores, not fight them. All other #38 principles stand unchanged. RELAYED mid-flight to
+the town-layout-v2 lane.
+**⬛ OWNER COMMISSION: AI TOKEN EFFICIENCY (2026-07-17, in-session): "where you believe it
+is possible without giving up quality, please optimize how AI is used to reasonably reduce
+any unnecessary spending of tokens. Because that could detract users from using it."**
+The architect's doctrine (Fable, this session — each lever vetoable): (1) RETRIEVAL SLICING
+BUDGETS — per-task slice budgets in the slicer registry; send only the slices the task
+class needs; compact canonical encodings of read-model slices over raw dumps; measure real
+prompt sizes per task and record them via the existing usage meter. (2) PROMPT-CACHE
+DISCIPLINE — static-first prompt assembly (system prompt, op-registry tool schema, design
+corpus, lens definitions FIRST; per-request slices LAST) so provider prompt caching prices
+the schema wall once, not per call. (3) ROUTING CLASSES ENFORCED — fast/balanced/deep per
+task type (§3 design) becomes enforced config, not convention: musings/suggested-questions
+fast-class; interpret balanced; construction compiles deep only where the comparator
+demands. (4) OPS-NOT-ESSAYS OUTPUT BOUNDING — structured op output with bounded max_tokens
+per task class; the compiler emits ops, never prose padding. (5) DELTA REVISE LOOPS —
+S5/S6 revise passes send DEVIATIONS ONLY, never full re-context. (6) ZERO-AI-WHERE-
+DETERMINISTIC — brief bundles/read-models stay pure code with AI prose only on top;
+suggested questions stay zero-cost (the Shell precedent). (7) PER-TASK TOKEN BUDGETS +
+ANOMALY FLAGS at the edge meter (a task blowing past its class budget is flagged to the
+operator; estimates stay labeled estimates). THE QUALITY BAR (non-negotiable): the
+grounding-parity + citation-law pins stay green — slicing may NEVER trim grounding below
+what the epistemic-fidelity law needs; acceptance metrics (§5) are the regression check.
+COMMERCIAL FRAME: task-priced credits mean efficiency = house margin on managed + visible
+cost relief for BYOK — the owner's adoption concern lands hardest on BYOK visible spend.
+EXECUTION: born-efficient directives RELAYED to the in-flight surveyor-s4-s6 lane (the
+map-exports mid-flight-relay precedent); the S1–S3 retrofit joins ROUND 3's fix stock as
+a named charge with an efficiency dimension in the survey.
+**⬛ OWNER RULING #7 (2026-07-17, in-session, verbatim: "after all of this lands, i first
+want you to push to github, then continue with the resurvey round 3 and onwards and so
+forth"): THE EARLY PUSH.** The push moves from THE VERY END to POST-FOLD / PRE-ROUND-3:
+when the three build-out lanes land, push to origin
+(github.com/clausellstokes-lang/settlement-engine) claude/w7-prep + the
+review-fixes-2026-07-08 ledger + every parked lane branch (claude/w-r2-g2,
+claude/generation-time-content) — BRANCHES AS BACKUP ONLY: no PR yet, no merge, no
+deploy; the merge button + db-push remain physically the owner's; the PR + deploy batch
+stay at THE VERY END. Motivation on record: the single-machine extinction risk named in
+the manager's assessment this session. STANDING PRACTICE from then on (manager JUDGMENT,
+vetoable): re-push at each subsequent milestone (post-ROUND-3 waves, post-soak,
+post-regen) so the remote never trails by more than one phase. The tail is otherwise
+unchanged: push → composite → ROUND 3 → gap register → soak → tuning → re-certs → ONE
+REGEN → final gate → THE VERY END (PR + deploy batch; the two carve-outs stand).
+**⬛⬛ THE RESUME (2026-07-17, successor session): DISPATCH ORDER EXECUTED.** Task board
+rebuilt (11 tasks mirroring the tail). THREE LANES DISPATCHED off w7-prep @ 07d3a1d2
+(Opus implementers, isolated worktrees, STEP -1 location guards + verify-first preambles):
+claude/surveyor-s4-s6 (the accept→mint seam + S4 custom content + AI style overhaul
+#28-p2 + S5 settlement construction + S6 realm construction; migrations 151+; launch-whole
+instrumentation + per-stage kill-switches per RULING #4) · claude/generation-time-content
+(calamity prose variety kept type-blind, war/peace reason receipts ×22, kernel news
+variants; predict-first shift map committed in-branch; PARKS RED, joins the composite) ·
+claude/town-layout-v2 (#38 semantic urban planning, Lynch five-element self-scoring rubric,
+town-map:v2 fork w/ versioning-law pins, fabricRead consumption w/ dark fallback, THE
+PANORAMA projection; v2 goldens EXTEND — lands free). **GALLERY OPT-IN FIX FOLDED @
+469db96a** (merge e0d0c29c; the SELECT-string conflict vs gallery-p2's gallery_title
+resolved by UNION in both list projections + both row mappings; receipts on the merged
+tree: lane pins 8/8, saves/gallery collision suites 20 files / 134 tests green, tsc 0 —
+the dossier resume item is CLOSED). SIDE-BRANCH AUDIT (git truth over stale memory):
+map-styles, instant-world, surveyor-s1b, fix-resource-taxonomy-boundaries are ALL already
+ancestors of w7-prep — the only genuinely unmerged side branches were w-r2-g2 (parks for
+the composite, by design) and the now-folded gallery fix; memory notes corrected. ROUND-3
+NOTE: the owner re-issued the original commission verbatim this session (Fable
+survey/dimensions + holistic code/product/fit assessment → Opus Ultracode verify+fix,
+bold-over-safe, substantive sim-logic cohesion in scope) — it executes at its slot (task
+#6, on the composite) per RULING #3; nothing about the re-issue changes the sequencing.
+**⬛⬛ THE WEEKLY-LIMIT RESUME DOSSIER (2026-07-17) — A SUCCESSOR STARTS HERE.**
+**STATE:** code truth = `claude/w7-prep` (worktree .claude/worktrees/agent-a04d3f325c72e62dd)
+@ 9b9e525a; this main tree is LEDGER-ONLY — never build here. Budget 1,040,000 (RATCHET
+#11). EXEMPT_CEILING signed 69 (gates fully green). ALL sign-offs granted (RULING #5; THE
+ONE REGEN PRE-SIGNED; carve-outs: legal consult + support email).
+**FIVE LANES IN FLIGHT — worktrees/commits survive limits (limits kill reasoning, not disk):**
+1. claude/surveyor-s3 (agent-ae9ac861328f9e062, →53eaf814): compiler+Shell+Parley; mig 145+.
+2. claude/map-exports (agent-aed2165ea573f9147): exports + $2.99 bundle + UVTT Foundry +
+   realm toggle — possibly UNCOMMITTED (16 files): commit first at fold.
+3. claude/gallery-p2 (agent-a6db22641bc1c2dd3, 4/5 →179f7e17): five signed deliverables;
+   mig 146+.
+4. claude/urban-fabric (agent-ab9c0863330e9ab28, off 9b9e525a): the last engine brick.
+5. claude/misc-signed @ b0837797+WIP2 (agent-a828509d4ac41f3e0): membership norm + mapChains
+   — ⚠️ ITS CHECKOUT FELL BACK TO THE MAIN TREE (contained: WIP committed on its branch by
+   the manager, main tree restored, agent relocated to its worktree).
+ALSO: the owner's separate-session sharer-edit gallery-flags fix ended — locate + fold.
+**FOLD PROTOCOL:** spot-check (show --stat vs claimed scope) → merge into w7-prep IN ITS
+WORKTREE (cd + verify branch EVERY call — the cwd resets and lands in ACTIVE trees) → lane
+pins on merged tree → ledger row HERE (cd main; verify branch = review-fixes-2026-07-08) →
+task update. Migration collisions renumber at fold (143/144 precedent).
+**DISPATCH ORDER:** S4+S5+S6 after S3 · generation-time content after urban-fabric (PARKS
+RED, G2 pattern) · TOWN LAYOUT v2 (#38) + panorama after map-exports · seams as reported.
+Briefs: pwd + base-hash guards, FOREGROUND-BLOCKING gates (no background waits — phantom-
+monitor stalls ×5; SendMessage resume cures; a status demand recovered a 3h-silent agent).
+**THE TAIL (pre-signed; pauses only at counsel + the merge button):** THE COMPOSITE (w7-prep
++ claude/w-r2-g2 @ aec57981 + the parked generation-time branch; local) → ROUND 3 (#25: the
+original commission VERBATIM + the two censuses) → gap register (#24) → THE SOAK
+(docs/SOAK_PLAN_R2.md; CENTURY-300 first; instant-world composer+canonize = harness; LOCAL
+COMPUTE — under token scarcity run as long-lived background bash banking to files) → tuning
+window (dials; knob registry mints; #35 builds) → re-certs → **THE ONE REGEN (PRE-SIGNED —
+no pause): light distancePricedNewsEnabled + reframeEnabled + provenanceLedgerEnabled +
+urbanFabricEnabled + npcGrowthEnabled in the three world-alive presets; merge G2 +
+generation-time; regen goldens ONCE** → final gate → **THE VERY END (#22): push + PR
+(pre-authorized; MERGE BUTTON = owner's) + deploy batch (~27 migrations 118→head; envs
+byok_secret + SURVEYOR_CANARY_SECRET; covert-scrub SQL twin; sitemap; applied-head; SUPPORT
+EMAIL verification; LEGAL CONSULT — drafts NOT-IN-FORCE until counsel).** Hazards:
+memory/MEMORY.md.
+**✅ THE GROWTH LAYER RATIFIED + FOLDED (2026-07-17; clean merge — no conflict with
+provenance; both engine finales' pins 57/57 together on the merged tree) — **THE ENGINE'S
+CONSTRUCTION ERA IS OVER.** People learn: acquiredTraits w/ provenance/intensity/decay ·
+the npcGrowthKernel mover (D3 courses at person scale, POST-apply reads, no rng) · THE
+DISTANCE-FROM-CORE METRIC VERIFIED (bold→cautious 0.15 opposition — the owner's case —
+vs cruel-from-compassionate 0.86, near-unmintable) · overlays never core mutation (pinned) ·
+narratable npc_growth chronicle beats · sidecar storage (spatialLedgers.npcGrowth + mirror —
+defeats the ghost-write class). JUDGMENT TABLES SIGNED under Ruling #5's blanket (the
+recommended shapes): mintable set {cautious, proud, cynical, tenacious} · the 8-signal
+deposit map · the 2-vector opposition metric · sidecar+mirror storage. BONUS RATCHET: the
+mover-apply extraction LOWERED pulseKernel's ceiling 1410→1387 (a shrink locked on the
+engine's hottest file). CENSUS-HONEST SEAMS: political kinship reads a deliberately separate
+axis (premise refuted, deferred) · npcAgency reached transitively (no edit needed) ·
+clergyTraitPlane inert-extendable. Recovery note: this wave went silent 3h and was recovered
+by a status demand to full delivery — the stall class remains procedural, never fatal.
+**THE THREE WAITING WAVES NOW UNBLOCKED AND DISPATCHING: URBAN FABRIC (#39) ·
+GENERATION-TIME CONTENT (parks red) · THE MISC-SIGNED WAVE (membership normalization +
+mapChains).**
+**✅ THE PROVENANCE LEDGER RATIFIED + FOLDED (2026-07-17; merged; pins green on the merged
+tree) — ENGINE FINALE #1: RECORDED CAUSALITY IS REAL.** One writer (provenanceKernel lazy
+leaf at the appendPulseHistory chokepoint, net-zero pulseKernel wiring, 'provenance' in
+EXEMPT_LEDGER_KEYS); virtual provenanceLedgerEnabled (dark now; PRE-SIGNED to light at the
+regen); the chronicle upgraded — decree cones = EXACT recorded transitive descendants where
+edges exist, inference elsewhere, labels honest end-to-end. STORAGE SIGNED under Ruling #5's
+blanket (the recommended shape): in-blob at spatialLedgers.provenance, ~184 B/edge, ~18
+edges/advance, ~250 KB/80-advance window, MAX_PROVENANCE_EDGES=4096 (~750 KB ceiling,
+lowest-tick eviction). Dormancy PROVEN (golden + contract + additive-only; all 153 existing
+goldens green with the writer wired). JUDGMENTs ratified ×4 (in-blob · 4096 · one-hop
+news→outcome edges recorded — they light the recorded path in real advances · leaf
+re-export wiring). SEAM: the causedBy cross-outcome edge is unthreaded by kernels today —
+deeper recorded cones await kernel threading (post-launch stock; the machinery is ready).
+**⬛ REALM EXPORT LAYER CHOICE (owner, 2026-07-17; relayed in-flight):** realm map exports
+offer WITH-SETTLEMENTS vs TERRAIN-ONLY (the placements layer is an inclusion flag — it
+already composites separately); pin: same realm, same settings, the two variants differ
+ONLY by the placements layer. Named use-cases: player handouts (unexplored world) vs the
+DM's annotated reference.
+**⬛ FOUNDRY EXPORT UPGRADED (owner, 2026-07-17; relayed in-flight to map-exports):** beyond
+the token raster — a UNIVERSAL VTT scene export (.dd2vtt-class interchange): image + grid
+config + LINE-OF-SIGHT WALLS derived from the draw-list's real geometry (footprints/walls →
+vision-blocking segments; gates → portals) — Foundry imports arrive PRE-WALLED for dynamic
+lighting (no generator offers this; our geometry is semantic). Same $2.99/premium export
+bundle gate. 1:1 wall-geometry pin mandated; module-requirement honesty required in the
+report; seam as MAP-EXPORTS-2 if the wave is already gating.
+**⬛ OWNER COMMISSION: THE URBAN FABRIC LAYER (2026-07-17, task #39) + LAYOUT v2 TEMPORAL
+EXTENSION.** The map gains MEMORY: a pure projection of current state cannot show gradual
+history ("buildings and city designs are resistant to rapid change except in the case of
+catastrophe and rebirth") — so THE FABRIC LAYER = the growth layer for stone: district
+prominence integrators (deposits from ruling power / faith dominance / income sources /
+trade volume / population / food disparity; SLOW decay — the merchant quarter's prosperity
+lingers after the guild falls, gradually replaced) · ALIGNMENT = the drift rate of NEW
+fabric (lawful rubric-faithful; chaotic encroachment over the old planned bones — the
+palimpsest) · STRESSOR SCARS as decaying entries · CATASTROPHE the one fast path
+(calamityHistory → district rebirth). Map = projection(dossier + fabric); maps confirmed
+dynamic-with-the-dossier, now dynamic-with-history at stone's pace. Flag-gated engine
+integrator (mover pattern, consumer-census inputs), dark ⇒ byte-identical; #38 consumes
+when lit. Dispatches when the Growth Layer folds. The chronicle narrates fabric turns.
+**⬛ LAYOUT v2 REFINED (owner, 2026-07-17): MEDIEVAL FORM, MODERN COMPOSITION.** Form
+vocabulary from ACTUAL historical settlements (Carcassonne-concentric, Lübeck harbor-fan,
+Durham river-spine, bastide grids where fiction justifies; lot grain, growth scars,
+wall+faubourg rhythm) composed under highest-order modern principles: **Lynch's five
+imageability elements as the engine's SELF-SCORING RUBRIC** (a layout must rate on
+paths/edges/districts/nodes/landmarks inside the bounded-retry loop before acceptance) ·
+Jacobs mixed-use/short-blocks · Alexander positive outdoor space · Gehl plaza enclosure ·
+sight-line axes, figure-ground, density gradients. "Shaped like history built it; reads
+like a master planner checked it." Folded into task #38.
+**⬛ OWNER COMMISSION: TOWN LAYOUT v2 (2026-07-17, task #38) — semantic urban planning.**
+First-draft maps follow real urban-morphology principles ("look and feel like it makes
+sense and be dynamic"): genesis cores + growth rings · water/terrain-first morphologies ·
+roads-before-buildings with convergence squares · SEMANTIC placement from the dossier (the
+actual tannery downstream — the advantage no generic generator has: a simulation-grade town
+behind the map) · wall-obeys-town · tier scale grammar · seeded irregularity within
+constraints. VERSIONING LAW: the town-map:v2 fork — new settlements v2, existing v1
+untouched, opt-in non-destructive redraw (edits survive, pinned), v2 goldens EXTEND (v1
+stands). Lenses/exports inherit automatically. Craft samples return for owner veto.
+Dispatches when MAP EXPORTS folds (same lane).
+**✅ CONTENT-VT RATIFIED + FOLDED (2026-07-17; commit 222806be merged; pins 34/34 on the
+merged tree incl. the SIGNED ceiling).** The news voice 129 → 342 lines (≥7/cell floor,
+9→10 categories): **THE REFRAME VOICE EXISTS** (both lanes — gifts curdling AND debts
+forgiven), portable-specificity held (catalog generics only; calamity kept bucket-neutral
+per the constitution), all existing lines preserved verbatim, zero eager (the lazy panel
+chunk), register guards + 200-id full-reachability green. DURABLE FINDING (vetoable
+judgment, ratified): the reframe voice is DORMANT-FORWARD-LOOKING — the reframe kernel
+mints no news beat today (newsEntries:[] on every path); the routing reserves the token so
+a future beat inherits its crier; no existing impactKind was hijacked. HONEST BEHAVIOR NOTE
+(recorded): pool growth changes which variant an existing entry id renders (the FNV divisor)
+— view-time, byte-inert, the intended variety effect. SCOPE JUDGMENT ratified: the OTHER
+view-time-thin surfaces (newsBody single-variants, rumor frames, chronicle copy) deferred-
+with-reason — each needs a NEW selection mechanism, not pool growth; queued as CONTENT-VT-2
+stock (or ROUND-3 fodder). Task #27's remaining half = the GENERATION-TIME park wave
+(post-engine-finales, rides the regen).
+**⬛ EXPORT PRICING RULED (owner, 2026-07-17, overrides the manager's free-images rec):**
+free tier pays the SAME $2.99 — the existing single-dossier entitlement UPGRADES into a
+per-settlement EXPORT BUNDLE: one purchase unlocks dossier PDF + VTT/Foundry raster + ALL
+map image formats for that settlement; premium = everything everywhere. Same lane, no new
+gate class, one pricing moment on every export affordance. Relayed to the in-flight
+map-exports implementer (fold-in ordered).
+**⬛ OWNER COMMISSION: MAP EXPORTS (2026-07-17, task #37, DISPATCHED).** Settlement + realm
+maps export in SVG (native draw-list) / PNG / JPEG / WebP (rasterizer idiom, selectable
+resolutions) / single-map PDF (the plate precedent) — EXPORTS HONOR THE CURRENT LENS incl.
+bespoke styles (pinned); the VTT token-raster download button (the recorded map-styles seam)
+closes in-wave; realm map via the FMG bridge's surveyed export surface (browser-bound ⇒
+PLAUSIBLE-class, stated honestly). PRICING (manager rec, vetoable): image exports FREE to
+the account owner; single-map PDF rides the existing PDF entitlement lane; anon/gallery
+export = a recorded seam for an owner decision. SIX lanes now live: S3 · provenance ·
+growth · content-vt · gallery-p2 · map-exports.
+**⬛ OWNER RULING #5 (2026-07-17: "i give all remaining signoffs ahead of schedule") — THE
+BLANKET GRANT, executed with two carve-outs.** EXECUTED IMMEDIATELY: EXEMPT_CEILING 66→69
+signed at its source (operationRegistry.js @ c1a36002 — **THE PROGRAM'S LAST STANDING RED
+CLEARS; gates are fully green** modulo isolation-proven flakes) · Cartographer priceCents
+600→599 (reconciled to the DISPLAYED $5.99, customer-facing prevails; pin honestly
+rebaselined @ c1d3f6eb) · **GALLERY PHASE 2 DISPATCHED** with all five signed (aliveness
+as designed · the six reaction lines VERBATIM · the Campaigns third tab · gallery_title ·
+facet hubs + sitemap fan-out ON; migrations 146+). PRE-SIGNED FOR THEIR MOMENTS: the three
+lighting questions (D1 news + reframeEnabled + provenanceLedgerEnabled light in the
+world-alive presets at the regen) · **THE ONE REGEN ITSELF** (executes at its post-soak slot
+without a further pause) · all migration shapes 137–144 + incoming per recommendations
+(founder ×4 asks per the manager's recommendations) · the four lenses + craft furniture
+(taste veto satisfied) · THE PANORAMA (build approved; queued behind S3 for the AI-file
+collision) · pgcrypto-as-built · provisional AI pricing · membership normalization +
+mapChains enforcement (a signed-misc wave queued behind the engine finales) · the W6 delta
+(pre-approved ROUND-3 fix stock). DEFAULTED VETOABLY (a two-option fork with no recorded
+recommendation): the daily-life fork stays TWO-SPEND as built. **THE TWO CARVE-OUTS a
+blanket grant cannot reach:** the LEGAL PACKAGE (ToS/privacy ship only through the
+professional consult — drafts stay not-in-force) and the SUPPORT-EMAIL verification (a
+factual check, stays on the deploy checklist). The push/PR remains pre-authorized as before;
+the merge button + db-push remain physically the owner's.
+**✅ TRIPLE FOLD + RATCHET #11 (2026-07-17 ~07:30; tips 1709e333/15b0fc6e/addd4011/e6f14414).**
+**BYOK SURFACE folded**: verify-by-test-call (never stored-healthy-unverified), provider-error
+classes → §3d refusals w/ switch-to-managed doors + persisted key health, the usage meter +
+user governors enforced at the edge door; migrations RENUMBERED at fold into the 143 gap
+(143_byok_health, 144_usage_governors + internal refs; chain contiguous head=144); the three
+shared docs reconciled (18 functions, 144 migrations, surveyor-byok in the deploy block).
+OWNER QUEUE: does BYOK skip the managed analysis-credit debit? (S1 behavior double-charges by
+design today — pricing call) · surveyor-byok joins the deploy list · envs at deploy:
+app.settings.byok_secret + SURVEYOR_CANARY_SECRET · price-estimates = operator config · its
+4 claimed "pre-existing base reds" CONTRADICT the gallery agent's clean gate on the same base
+— audited at the composite gate. **FP-G10 folded**: −33,803 B (SUPPLY_CHAIN_NEEDS' sole eager
+importer severed; byte-identity proven, slug-form guard pinned); FUTURE CANDIDATE RECORDED:
+full customRegistry de-eagering (−46KB ceiling, needs async deity-resolver refactor).
+**MAP STYLES folded**: the style layer (bounded data-only definitions in src/design; THE WALL
+pinned ×4; geometry-untouched proven), FOUR LENSES (parchment byte-identical to pre-refactor;
+watercolor; dark fantasy; VTT w/ grid+scale+token-raster export), the (seed,style) GOLDEN
+(18×4 sha-pinned), cross-lens edit pin, craft pass (corner washes/cartouche/compass — TASTE
+VETO PENDING at the published artifact), style schema → DESIGN_CONTENT_PLANE §7. JUDGMENTs
+ratified ×4 (mapEdits.styleLens over a new container · screen-adaptive parchment · plate
+inherits skin only · pane split for the ceiling). SEAMS: VTT download affordance · anon-
+gallery lens honor waits on the owner-gated §6 mapEdits opt-in · OG share image never renders
+the town map (pre-existing). **RATCHET #11 (manager's call at fold): 1,066,400 → 1,040,000**
+(−26.4KB banked; ~8.8KB headroom retained for S3–S6/gallery-2/content registrations; FINAL
+tightening at the composite gate). verify:dist 143/143 on a fresh build. S3 DISPATCHING.
+**✅ GALLERY-2 (PHASE 1) RATIFIED + FOLDED (2026-07-17 ~05:00; merge ad9f3067) — THE
+COVERT-CORRUPTION SCRUB IS BUILT + CERTIFIED.** The recorded leak (covert corruption
+impairments NAMING the corrupted NPC riding institutions[] through get_gallery_dossier to
+the anon gallery) is CLOSED: value-level covert-object drop in publicSafe.js + the SQL twin
+(migration 142), **field-for-field twin parity proven in real Postgres**; fail-closed pin
+(the naming description appears NOWHERE in the projection); the adversarial check joins the
+owner-facing visibility audit. Branch gate 11,856/1 (sole red EXEMPT_CEILING, NO flakes).
+Eager ≈ +34 B honest. Deploy of 142 rides the very-end batch. **THE VERIFY-FIRST FINDING:
+~70-80% of the GALLERY-2 brief ALREADY EXISTS** (gallery_votes w/ rate-limit · 12+ facet
+filters from canonical modules · relevance_score ranking w/ 9 sort keys · share_kind
+map-vs-campaign distinction · sharer editing minus title · OG/JSON-LD/sitemap-fan-out SEO ·
+the anon-cap trap SOLVED as caps-on-actions-never-render; residual: client-rendered body =
+the one open crawlability item) — the agent correctly refused to duplicate live
+infrastructure. JUDGMENTs ratified ×3 (scrub takes 142, contiguity-forced — **BYOK's 144/145
+renumber to 143/144 at its fold** · full-mode-keeps-covert (DM-publish is explicit) ·
+inherited doc-drift fixed+disclosed). **OWNER SIGN-OFF LIST (gallery phase 2 — the genuinely
+net-new): (1) ALIVENESS ranking** — formula weighting + snapshotted-column shape (design
+ready, the 063→071→076 drop-recreate precedent); **(2) REACTIONS** — the 6-item drafted
+fiction-register vocabulary awaits taste veto + green-light (engagement schema); **(3) the
+Campaigns third tab** — or does map_with_campaign already satisfy campaign-share?;
+**(4) gallery_title column**; **(5) facet hubs + the sitemap gallery fan-out flag** (depends
+on 1/3). Comments stay deferred post-launch per the standing ruling.
+**⬛ OWNER COMMISSION: THE GROWTH LAYER (2026-07-17, task #36) — acquired/temporary NPC
+traits.** Owner verbatim: core traits/flaws are "their constitutional core as people... they
+can also have learned or temporary traits... bold by nature being more cautious after losing
+several battles... traits or flaws further from their core personality should need more
+frequent or more severe events... they should all reflect in that NPC's decision making,
+stances, and goals." DESIGN (the D7 pattern at person scale — core frozen, growth derived):
+acquiredTraits[] from the SAME bank vocabulary w/ provenance+intensity+decay · acquisition
+via the D3 course machinery (weighted deposits, rare sticky hysteresis transitions, capped,
+both signs) · THE DISTANCE-FROM-CORE deposit-resistance rule · effects as derived
+effective-personality OVERLAYS entering the existing consumer reads (never core mutation —
+state-never-fate holds: the engine weathers a person, never rewrites them) · couplings ×D5
+(lifespan-scaled decay) ×D7 (growth shifts interpretation) ×chronicle (receipted beats)
+×decree-tracker ×no-dead-facet. Virtual flag, dark ⇒ byte-identical, lazy kernel leaf.
+ENGINE WORK ⇒ the pre-soak slot beside the Provenance Ledger — the engine's final two builds
+ride together; the soak certifies worlds where people learn.
+**✅ THE NPC LIFECYCLE RATIFIED + FOLDED (2026-07-17 ~04:00; merge f33e295b + bundle regen
+6dff8493).** NPCs are residents: THE BANK (consolidated vocabularies zero-drift-pinned + the
+22-goal TRANSITION-TYPED catalog with onAchieve/onFail — the survey CONFIRMED the owner's
+achieve-transitions exist (npcGoalCulmination 0.8 threshold) and found NO declarative
+successor table + NO symmetric fail transition before this wave) · THE OPS through the
+covenant (EDIT_NPC bank-bounded; REASSIGN with people-held-travels/seat-held-stays; STASIS
+typed+reversible with memory flowing + dormancy pass-through pinned; decree-tracker cones
+asserted) · INSTANT NPC (seeded, tier-blind, counterpart-pinned) · THE FACET-CONSUMER WALKER
+(EXEMPT_FACETS ceiling 0 — the no-dead-facet law enforced). 53 pins; honest +267 B eager
+(trimmed from +690 after the mid-flight budget warning — THE WARNING WORKED); margin ~1.36KB.
+JUDGMENTs ratified ×4 (delegated-helper dispatch — settlementSlice AT its 1345 ceiling ·
+temperament+goal propagate LIVE while alignment/role stay display+future — the npcAgency
+ceiling seam, documented · covenant-trusting thin dispatcher · self-contained seeded
+generator). **REAL PRE-EXISTING FINDING → ROUND 3: createNpc DROPS user-supplied
+flaw/temperament/goal/secret** (the ADD_NPC path claims verbatim landing and silently
+discards — domain/entities/npcs.js:113). SEAMS: npcState adoption of alignment/role edits
+(npcAgency headroom) · instant-NPC button host · REASSIGN target-picker UI · the op whisper.
+Freshness drift cleared at fold (bundle regen). NEW CEILING HAZARD memorialized:
+settlementSlice.js AT 1345 — store actions via delegated (get,set) helpers only.
+**⬛ RULING #4 RATIONALE (owner, verbatim): "because the AI still costs tokens and money,
+the audience would want the full capabilities and not feel cheated at launch rather than
+rollout."** The task-priced model makes this rigorous: breadth is free to non-users and
+fairly priced to users — staging under pay-per-task pricing reads as withheld inventory,
+not prudence. Early-access labels + kill-switches keep what staging actually protected.
+**⬛ OWNER RULING #4 (2026-07-17: "I want all the ai capabilities at launch") — THE
+LAUNCH-WHOLE AMENDMENT (§2b @ c12b1a95 on w7-prep).** ALL Surveyor stages ship at launch.
+What survives: SAFETY (the schema wall — never the ladder — carries it; worst case stays a
+refused draft). What converts: the trust ladder becomes a MONITORING framework — every stage
+instrumented from day one, PER-STAGE KILL-SWITCHES at the entitlement layer, honest
+early-access labels on write stages until live metrics mature. PREREQUISITE-DRIVEN BUILD:
+S3 intent compiler + S4 custom content + S5/S6 construction (the instant-world composer =
+the compile target) build NOW alongside ROUND 3/soak (edge/display, engine-frozen-safe);
+S7 autonomy + tuning counsel + S4+ knobs/packs build in the post-soak tuning window (their
+prerequisites — the knob registry + the world-health library — are born there). Everything
+lands before THE VERY END = at launch. Tasks #33/#34/#35 boarded (~5 more waves; days at
+current velocity). ROUND 3 reviews the S3–S6 builds; the post-window builds get a targeted
+review before the regen.
+**✅ ToS DRAFTS FOLDED + CONTENT SURVEY BANKED (2026-07-17 ~03:30).** docs/legal/
+TERMS_OF_USE_DRAFT.md + PRIVACY_POLICY_DRAFT.md merged (headed DRAFT—NOT IN FORCE; live pages
+untouched by design; every claim source-mapped; the 4-question legal-consult list in-draft).
+TWO REAL FINDINGS → OWNER QUEUE: (1) Cartographer PRICING DISCREPANCY — the pricing page
+shows $5.99/mo while config/pricing.js sets $6.00 (600¢): reconcile to one canonical figure;
+(2) the live PrivacyPage names only 3 of 4 consent purposes — the market plane / Aggregate
+Interest Atlas missing (the draft closes it; the live page updates in the pre-launch batch,
+REQUIRED before collection starts per §4b purpose-limitation). Its gate also surfaced a
+mainline docs-freshness drift (ARCHITECTURE.md "~880 test files" vs 1,174 real) — FIXED at
+fold @ 6d2ce3be (8/8). **THE CONTENT THINNESS SURVEY (6 agents, banked @
+docs/review-r2/CONTENT_THINNESS_SURVEY_RAW.txt):** headline verdicts — CALAMITY prose
+CRITICAL (one constitutionally type-blind template stamped PERMANENTLY into
+settlement.calamityHistory + the golden wizardNews surface; variety work must vary phrasing,
+never assert disaster kinds) · war/peace REASON RECEIPTS THIN (1 fixed sentence per type ×22
+types, persisted per settlement-pair — the same casus reads identically on every pair) ·
+newsVoice ADEQUATE (125 authored lines, the one multi-variant surface; the reframe drama
+class has NO voice category — a gap to fill) · kernel news templates 1-per-event-kind.
+Generation-time surfaces confirmed golden-bound ⇒ their volume waves PARK for the regen;
+view-time (newsVoice etc.) lands free. The generation-wave dispatch derives from this map.
+**⬛ THE FULL-BATCH DISPATCH (owner: "why don't you run these?", 2026-07-17 ~03:10):** all
+five staged waves + one funding lane launched concurrently off c765a032, disjoint fences,
+pre-assigned migrations (gallery 142+143 · BYOK 144+), STEP -1 location guards everywhere:
+MAP STYLES (#28) · BYOK SURFACE (#29) · ToS DRAFT (#30, docs/legal only, draft-not-in-force)
+· GALLERY-2 (#31 — **the covert-corruption scrub builds FIRST inside it**, JUDGMENT: the
+owner's gallery commission + recorded precondition authorize the BUILD; the SQL twin still
+DEPLOYS only in the very-end batch) · the CONTENT THINNESS SURVEY fleet (#27, 6 read-only
+agents: variant counts + view-time/generation-time classification per surface) ·
+**FP-G10** (reclaim ≥1.5KB from the closure interior, fenced away from all sibling files —
+the batch funds its own registration costs; ratchet-down decision stays the manager's at
+fold). Seven lanes live incl. the NPC wave. ROUND 3 opens when all of it + the provenance
+ledger (#32, serialized after NPC) have folded.
+**⬛ THE PROVENANCE LEDGER COMMISSIONED (owner, 2026-07-17: "commission"; task #32).**
+Recorded-not-reconstructed causality: a durable per-campaign receipt ledger with true
+cause-edges. ARCHITECT RULINGS (vetoable): flag-gated virtual writer (dark ⇒ byte-identical;
+joins the lighting/regen queue; the chronicle reads RECORDED edges where present, inferred
+elsewhere — the labels already distinguish) · size-model-before-shape (tiny prose-free
+entries; storage home proposed WITH NUMBERS — in-blob+compaction vs table — presented for
+signature). SEQUENCING: serializes AFTER the NPC wave (dispatcher-chokepoint collision) and
+BEFORE the soak (engine freeze) — the last engine-adjacent build of the program.
+**✅ THE CHRONICLE RATIFIED + FOLDED (2026-07-17 ~02:40; merged into w7-prep).** The advance
+report is real: the zoom pyramid (week⇒events … year⇒full pyramid, full descent always),
+thread extraction typed by the 8 drama classes, season chapters, delta-first, the deputy's
+diary, THE DECREE TRACKER with §5b entanglement clustering (two-decree conflict → ONE cluster
+naming the conflict, pin-executed; honest nulls as findings; every decree exactly once).
+40 new pins green; ZERO eager (lands in the lazy RealmInspector chunk — closure-BFS-verified);
+zero engine changes; durable-sourcing STRUCTURAL (source-scan: never reads wizardNews).
+JUDGMENTs ratified ×3 (pinned taxonomy dup over engine import · no doc-dup of §5b · guidance
+inline w/ map-pane registration deferred to the map pass). **⚠️ THE LOAD-BEARING SURVEY
+FINDING — THE PROVENANCE-DAG GAP (OWNER DECISION QUEUED):** the world's receipts do NOT form
+a durable parent→child causal DAG — derive-on-read Receipt edges name entities, not parent
+receipt ids; applied ops persist no stable causal id; the durable substrate is
+pulseHistory (CAPPED 80 advances, collapsed per-advance) + chronicles (24). Consequently
+decree CONES and thread CHAINS are ENTITY-INFERRED (shared keys + typed reasons + temporal
+order), honestly labelled `inferred` throughout the UI. THE DECISION: (a) accept inferred
+cones as shipped, or (b) commission THE PROVENANCE LEDGER — a durable per-campaign decree/
+receipt ledger with cause-edges (engine-adjacent writer + schema, owner-gated shape) giving
+EXACT cones, cross-advance thread stitching, and a stronger receipts thesis product-wide;
+if commissioned it must land BEFORE the soak (engine freeze). Also seamed: per-advance
+collapse loses interior-week placement; D7 decree-reception irony (named future).
+**⬛ TWO OWNER COMMISSIONS (2026-07-17, tasks #30/#31): TERMS OF USE + GALLERY-2.**
+(#30) ToS comprehensive redraft — tiers/credits/founder covenant/Surveyor conduct/BYOK +
+Forgetting-Law promises-never-exceeding-contracts/§3f rider disclosure/custom-content
+ownership (display license only)/§3c(7) extraction prohibition/moderation — drafted complete,
+SHIPS ONLY through the consolidated pre-launch LEGAL CONSULT. (#31) GALLERY-2, "the native
+marketer... has to be perfect": three tabs = three artifact classes (Settlements · Maps ·
+Campaigns; the realm's MAP-share vs CAMPAIGN-share newly modeled — distinct flags, schema
+presented for signature) · facets from the existing controlled vocabularies (one taxonomy:
+analytics+Surveyor+discovery) · ranking incl. the ALIVENESS signal (deep-history worlds rank
+up) · authed receipted votes at launch, structured fiction-register reactions, full
+commentary POST-launch (the comment surface = the largest attack class) · sharer editing ·
+SEO (per-item OG/schema.org, dynamic sitemap, programmatic facet hubs; the anon-cap-vs-
+crawlability trap solved deliberately) · **PRECONDITION: the owner-gated covert-corruption
+anon-gallery scrub lands BEFORE amplification** (joins this wave's batch). ROUND 3's
+product-dimension centerpiece. Build-out queue: 2 running + 5 staged.
+**✅ INSTANT WORLD RATIFIED + FOLDED (2026-07-17 ~02:00; merged into w7-prep).** The
+one-click premium realm: the COMPOSER (conductor over existing generators — zero
+generator/engine/wizard changes; tier-blind, source-scan-pinned) → tier-mixed canon members
+placed on a deterministic FMG map → discovered regionalGraph → tone preset applied to a
+worldState PROVEN spatially UN-canonized (the owner's places-everything-canonizes-nothing
+law, pin-executed). THE CAMPAIGN ANSWER: the survey confirmed reading (a) — a realm IS a
+campaign; presence inherent, asserted in the equivalence pin. Pins 19/19 on the merged tree;
+composition-equivalence = the manual pre-canonize state. JUDGMENTs ratified ×4 (N-mapping
+5/9/14 tier pyramids · map-kind = the curated FMG template set · tone = Quiet/Realistic/
+Dramatic · composer homed in src/lib per the domain-ratchet rationale). SEAMS: the soak
+harness = composer+canonize (client #2, API ready); analytics event deferred (eager string
+vs thin margin — recorded); map materialization browser-bound ⇒ PLAUSIBLE (FMG iframe cannot
+run headless; the staged tableau is fully usable without it). ⚠️ EAGER HONESTY (manager
+measurement): the wave's TRUE delta ≈ +687 B (mode-picker entry + macro registration +
+WorldMap line — existing eager files growing; its own chunks confirmed absent from the
+closure). Budget contract 26/26 green on the merged build; **estimated margin now ~1.4KB —
+TIGHT**: both running lanes warned (strict-lazy discipline, stop-and-report above ~300 B);
+the remedy if a future fold busts = an FP-G10 reclaim wave (reclaim-first law, never raise).
+**⬛ OWNER COMMISSION: THE BYOK MANAGEMENT SURFACE (2026-07-17, task #29).** Provider pick →
+verify-by-test-call (never prefix-guess) → dynamic model dropdown from the key's ACTUAL
+list-models ∩ adapter-supported, per-task defaults + override, §3e retention class shown in
+the picker · failure classification → §3d graceful refusals (out-of-credit names the top-up
+door + switch-to-managed) + persistent key-health status · HONEST BOUNDARY: no provider
+exposes balance APIs — reactive detection; "our meter is your trend, your console is your
+truth" said in-UI · USAGE DASHBOARD (edge-metered token counts by day/task/model, estimated
+costs labeled estimates) + USER GOVERNORS (caps, warn-at-threshold, pause) enforced at the
+single edge door. The receipts culture applied to the user's own wallet.
+**⬛ MAP STYLES: NON-DESTRUCTIVE GUARANTEE (owner confirmation, 2026-07-17, folded into
+#28):** bespoke AI styles are ADDITIVE saved definitions — named, kept (credits bought an
+artifact, not a render), re-selectable; the four base lenses remain permanently available;
+flip-back instant/free/non-destructive (derived view). The cross-lens edit pin EXTENDS to
+bespoke definitions (one semantic edit renders correctly under every style incl. custom).
+No path exists by which styling can lose edits, damage the map, or lock the user in.
+**⬛ MAP TRUTH-PROJECTION LAW + THE PANORAMA QUESTION (owner example, 2026-07-17):** the
+owner's worked example (underground lava-ringed cyberpunk custom settlement, parchment×
+cyberpunk blend, slanted side-view) confirms + sharpens the design: (1) THE MAP DEPICTS WHAT
+THE WORLD IS — setting substance comes from the (custom) settlement's dossier; a style may
+never paint what the data doesn't hold (the honest path for mismatches: offer the world-edit,
+then the map follows). (2) Bespoke definitions are COMPOSITIONAL (parchment ground ×
+cyberpunk glyph vocabulary = legal, intended). (3) ⚠️ SIDE-VIEW/OBLIQUE = a PROJECTION, not
+a style: needs pseudo-elevations (derivable deterministically from tier/institution/wall
+data) + a transform — real new capability; **OWNER-QUEUED DECISION: fold the PANORAMA
+PROJECTION into task #28 or park as map-v2** (once built it composes with every lens). The
+example is also the lens roadmap radar's first demand-proven entry (oov capture working as
+designed).
+**⬛ AI STYLE OVERHAUL REFINED (owner, 2026-07-17):** the compile context is THREE layers —
+the settlement DOSSIER (what it is) + the user's INPUT PROMPT (what they want) + THE DESIGN
+CORPUS itself (the four lens definitions + style schema as grounding — the AI composes
+WITHIN the house design language, never from nothing). ANALYTICS CAPTURE EXPLICIT (§3f/§4b
+apply as everywhere): style-overhaul riders carry style-domain vocabulary (base lens,
+palette family, motif class, oov flag) → aggregated style intent = THE LENS ROADMAP RADAR
+(demand-proven next lenses/genre packs from what users ask for that the vocabulary can't
+yet express). Folded into task #28.
+**⬛ MAP LENSES + AI OVERHAUL (owner extension, 2026-07-17, task #28 re-scoped):** FOUR
+NAMED LENSES at launch — parchment / watercolor / dark fantasy / VTT ("different lenses of
+the same settlement upon first generation"); switching instant+free forever (derived view);
+VTT = a FUNCTIONAL lens (grid/scale/contrast/token-res export — the style schema gains
+functional attributes); CROSS-LENS EDIT PIN (semantic mapEdits render correctly under every
+lens, fixture-proven). AI STYLE OVERHAUL (phase 2): credits-priced task — the AI composes a
+bespoke bounded style definition FROM the settlement's dossier → preview → accept/decline;
+TRUST-LADDER PLACEMENT (design ruling, vetoable): the rung between S2 and S3 — the AI's
+FIRST compile target, where failure is purely cosmetic (the schema wall guarantees
+ugly-never-unsafe); provisional pricing joins the owner queue.
+**⬛ OWNER COMMISSION: MAP BEAUTIFICATION + GENRE CARTOGRAPHY (2026-07-17, task #28).**
+Beautify the settlement maps; genre styles (cyberpunk/sci-fi/noir) for Content-Plane
+settlements. DESIGN: the semantic-draw-ops/renderer split (built for determinism) IS the
+theming architecture — (1) THE STYLE LAYER (all visual decisions read from a bounded style
+definition; geometry untouched; viewer/plate/thumbnail inherit one pass; determinism
+re-minted (seed,style)→bytes; mapEdits semantic ⇒ survive re-skins) · (2) THE FANTASY CRAFT
+PASS (owner taste-sample) · (3) THE STYLE SCHEMA into DESIGN_CONTENT_PLANE — a map style =
+rung-3 pack display content (market district stays a market district; the skin is the
+genre); THE WALL: styles select from fixed renderer capabilities, never arbitrary SVG/code
+(worst case ugly, never unsafe). Genre styles land with packs at S4+. Display lane;
+dispatches when a build-out lane frees.
+**✅ SURVEYOR-S1b RATIFIED + FOLDED (2026-07-17 ~00:55; merge 114b0c7c + rollback-note fix
+bf10b52f) — THE AI CONSTITUTION IS FULLY IN CODE.** One mid-wave stall (agent parked on a
+monitor event that never fires — the known pattern; SendMessage resume worked, zero loss).
+All four seamed items shipped + pinned: §3b TWO-VOICES (claims[]/musings[] structural,
+sanitizeMusings strips smuggled actionable fields, registerPurity deterministic eval, the
+panel's "Surveyor muses" register) · §3c(4) CANARY (derived salted tracer, logged, PINNED
+never-in-output) · §3c(5) META-PROBE (migration 141: canary + meta_probe columns, writer
+DROP+recreated at 17 params; full throttle detector a documented seam) · §3f RIDER (frozen
+controlled vocab, id-free ai_analyst_rider event on BOTH managed and BYOK paths pinned by
+source scan, EVENTS_REV 7→8, CONFLICTED-WITNESS PINNED: a flattering rider beside bad claims
+still scores honestly). Branch gate 11,800/2 (EXEMPT_CEILING + the 137 rollback-note miss —
+**a REAL pre-existing find: the founder lane's focused gate never ran the discipline test;
+FIXED at fold @ bf10b52f**, discipline 4/4 + founder pins 11/11 green on the merged tree).
++36 B eager (the event name — the S1 precedent class); margin 2,054. JUDGMENTs ratified ×6
+(direct service-role analytics insert · derived-not-stored canary · deterministic purity
+regex · EVENTS_REV bump · musings-only = a charged valid turn · starter taxonomy w/ oov
+growth seam). OWNER QUEUE: migration 141 sign-off (verbatim in the agent report) ·
+SURVEYOR_CANARY_SECRET env at deploy. Chain head = 141 contiguous.
+**⬛ SURFACING CONFIRMATION (owner, 2026-07-17: does all the hidden machinery have its
+appropriate visible place for dossiers/realm, navigable and intuitive?).** DESIGN ANSWER:
+yes by architecture (machinery→read-model→surface; the scope hierarchy dossier/realm-
+dashboard/pulse/briefs/map/compendium + the chronicle as the incoming default doorway + the
+Surveyor as the universal where-do-I-look escape hatch; invisibility deliberate for decay
+rates/pacing/plumbing). KNOWN RECORDED GAPS (the census's first work list): calamityLedger
+live surface (W-UPSWING deferral) · doctrine commitment-stocks read · interventions-ledger
+direct view · D7 whisper/glossary seam. STRUCTURAL ADOPTION: ROUND 3 gains **EVERY LEDGER
+SHIPS ITS READ** — an executable census walker: every durable store maps to ≥1 registered
+display consumer OR an explicit INVISIBLE_BY_DESIGN ruling with reason; unsurfaced = build
+failure. Cross-scope navigation intuitiveness = a named ROUND-3 product-dimension re-read.
+**⬛ NPC WAVE: THE NO-DEAD-FACET LAW (owner, 2026-07-17: "every facet of an NPC's generation
+and their agent movement is coherent with the surrounding world every facet. nothing is
+useless").** Two directions, walker-enforced: (1) GENERATION READS THE WORLD — no facet
+rolled in a vacuum: minting reads settlement conditions / institution type / local faith and
+alignment climate / naming culture / active drama; goal chains seed from the settlement's
+actual condition; instant NPCs identical (constraints narrow context, never replace it).
+(2) THE WORLD READS EVERY FACET — every bank facet has ≥1 registered consumer (agency read,
+politics/corruption/reframe input, or display surface); agent movement traces to facets and
+every facet can move the agent. ENFORCEMENT: a FACET-CONSUMER WALKER (the operation-registry/
+whisper-census pattern) — a facet without a context source or a consumer fails the build.
+Folded into task #26.
+**⬛ NPC WAVE EXTENDED ×4 (owner, 2026-07-17, same night):** (1) OWNER CORRECTION FOLDED:
+goal EVOLUTION already exists (achieve/fail transitions) — the gap was added-NPC citizenship;
+the goal catalog becomes TRANSITION-TYPED (on-achieve successors / on-fail fallbacks,
+bounded), added NPCs declare or inherit-by-role a goal CHAIN and ride the same machinery
+(counterpart criterion). Only personality/alignment DRIFT remains the parked
+future question. (2) REASSIGN_NPC: moves between institutions/settlements — coherence
+answered by the EXISTING bloc-glue typology (people-held ties TRAVEL, seat-held ties STAY;
+vacancy → existing role-fill). (3) STASIS: revocable typed state (journey/imprisoned/
+missing/sequestered) — participation excluded, seat vacates, MEMORY KEEPS FLOWING per D5
+(the reunion inherits what the interim did); return receipted; a shelf not a grave. (4)
+INSTANT NPC: seeded, bank-valid, optionally constrained, counterpart-pinned; premium per
+the instant-settlement precedent (flagged). Task #26 re-scoped accordingly.
+**⬛ TWO OWNER COMMISSIONS (2026-07-17, "extremely important"): CONTENT VOLUME + NPC
+EDITABILITY (tasks #27/#26).** (1) CONTENT: more volume/variety/specificity everywhere thin,
+under PORTABLE SPECIFICITY (catalog-anchored, never canon proper nouns — "just enough generic
+so that it can be put into any campaign"); AI-bulk + register-guard validation + owner
+taste-sample; ⚠️ THE DETERMINISM CATCH recorded: growing seeded corpora shifts same-seed picks
+⇒ every corpus classifies VIEW-TIME (lands free) vs GENERATION-TIME (parks red, batches into
+THE ONE REGEN). Survey fleet maps thin spots first. (2) NPC BANK + EDIT_NPC: the facet law
+applied to NPCs — typed EDIT_NPC ops through the covenant (auto-integrates with the Decree
+Tracker), THE BANK (consolidated axes/temperaments/roles + the new TYPED GOAL CATALOG,
+bounded selection never free-text), EDITS CHANGE THE FUTURE NEVER THE PAST (receipted event;
+propagation via existing chokepointed reads), state-never-fate CLARIFIED (binds the engine;
+DM sovereignty is whom it protects), added NPCs become FULL CITIZENS via the counterpart
+criterion. Named future question (owner's, not smuggled): organic personality drift = new
+engine capability. Both queue behind the three running build-out lanes.
+**⬛ CHRONICLE AMENDMENT §5b (2026-07-17, @ 4b2f675b on w7-prep): ENTANGLEMENT
+CONSOLIDATION.** Owner: queued decrees "directly entangle with each other. so that is an
+area to consolidate." Entangled decree cones (chained / shared / conflicting / synergistic,
+detected over the receipts graph) render as ONE cluster — joint story, per-decree standings
+within, shared descendants attributed once, SELF-CONFLICT a first-class named finding, and
+honest-nulls extended ("absorbed by your own decree Y" ≠ "absorbed"). Two-decree conflict
+fixture pin mandatory. Relayed to the in-flight chronicle implementer (early, survey phase).
+**⬛ OWNER COMMISSION: THE CHRONICLE (2026-07-17, advance legibility) — DESIGN FROZEN @
+09130996 (docs/DESIGN_CHRONICLE_LEGIBILITY.md), WAVE DISPATCHED.** The world-pulse/wizard-news/
+autoresolver surfaces must be "perfect and readible and digestible and navigable and workable"
+across advance spans (week→month→season→year), and DM-queued changes applied across a long
+advance get a dedicated reflection surface ("it should be noted for the user because that was
+their choice"). THE DESIGN: the zoom law (hierarchical never-truncating pyramid:
+headline→chapters→threads→events, scaffolding scaled by span) · threads-over-timeline
+(causal-chain extraction typed by the 8 drama classes; the tempo governor's boundedness IS the
+tractability guarantee) · delta-first framing · the deputy's diary (auto-verdicts as beats in
+threads + rulings-in-your-absence w/ reversibility; accept-by-thread) · **THE DECREE TRACKER**
+(per applied DM op: landing week, direct receipt, the CAUSAL CONE of downstream descendants,
+span-end standing held/absorbed/contested/undone, HONEST NULLS reported as findings; always
+present, never top-forced, never lost) · durable-store sourcing rule (never read capped
+feeds) · pure read-models, deterministic, zero eager, zero engine. Diagnosis recorded: data
+layer A, presentation layer B- — the whole gap is display work. D7 decree-reception irony =
+named seam. Build-out at THREE concurrent waves: SURVEYOR-S1b · INSTANT WORLD · THE CHRONICLE.
+**⚠️ INCIDENT (contained, zero damage): the chronicle agent's base-guard checkout executed in
+the MAIN TREE** (the agent-cwd-fallback hazard — the wrong-lineage class's 8th firing, first
+of the fallback-hits-main-tree variant tonight): the main tree briefly sat on claude/chronicle;
+caught clean within minutes (no commits, no writes — the manager's own ledger insert no-op'd
+harmlessly on the wrong lineage's doc), main tree restored to review-fixes, the agent
+redirected to its own worktree with pwd-verification orders. RULE: dispatch prompts must add
+"verify pwd is inside your worktree path before STEP 0" — adopted for all future briefs.
+**✅ SURVEYOR S1+S2 RATIFIED + FOLDED (2026-07-17 ~00:30; merge a17d71b0) — THE FIRST AI
+SHIP.** 4 commits off 4052fc9c: the 7 PURE brief composers (player-safe settlement section
+asserted byte-for-byte ≡ toPublicSafe) · S1 core (state-slicers, citation law — hallucinated
+citations downgrade to "the engine does not record this", credit reserve→spend→refund
+round-trip) · the ai-analyst edge fn (JWT → surveyor entitlement interface-gate fail-closed →
+creditFlow → BYOK-or-server key never-logged → Anthropic adapter claude-opus-4-8 → citation
+enforcement → audit write) · lazy client panel (audience toggle = the structural rule's
+visible face; App.jsx ceiling respected via a 0-net-line wrapper). All 5 mandatory pins
+vitest-executed; branch gate 11,707 passed / sole real red EXEMPT_CEILING (+2 load-flakes
+proven 33/33 isolated); verify:dist 143/143; zero eager beyond 2 event names + the cost map.
+AMENDMENTS: §3c/§3d/§3e FOLDED + PINNED (retentionClass REQUIRED on the adapter contract —
+Anthropic declared 'bounded' conservatively w/ re-verify-at-deploy note; graceful refusals w/
+refusal-quality eval; naming hygiene) · §3b/§3f/canary/meta_probe SEAMED = **SURVEYOR-S1b**
+(dispatching). MERGE JUDGMENT executed: the agent's 137_surveyor_reserved placeholder DELETED
+in the merge commit (founder's real 137 keeps the slot; chain contiguous at head 140;
+migrationSequence 8/8; merged-tree pins 64/64). **OWNER SIGN-OFF QUEUE ADDITIONS (deploy
+batch):** migration 138 audit-spine shape · 139 entitlement + BYOK vault (pgcrypto+GUC
+fail-closed — VETOABLE if Supabase Vault/pgsodium preferred) · 140 provisional pricing
+analysis=3/brief=4 (final Surveyor pricing owner-queued) · BYOK requires app.settings.
+byok_secret at deploy (DEPLOY.md). Pending-deploy window now 23 migrations (118–140).
+**⬛ INSTANT WORLD SHAPE AMENDED (owner, mid-flight):** config gains a MAP-KIND knob (which
+world-map type to design in), and the instant world **PLACES EVERYTHING, CANONIZES NOTHING**
+— a fully-staged tableau amendable at t=0; canonization stays the user's deliberate act.
+Spec sharpened accordingly: INSTANT WORLD ≡ the state a completed manual wizard session
+reaches pre-canonize (composition-equivalence pin); the soak harness client = composer +
+canonize; the button = composer only.
+**⬛ OWNER COMMISSION: INSTANT WORLD GENERATION (2026-07-16 late night, "before the soak") —
+PREMIUM-GATED per owner correction.** One-click coherent dynamic realm: basic config (3 knobs:
+realm size / tone→existing presets / surprise-me within curated bounds; the advanced wizard
+stays as the alternative), map + appropriate tier-mixed settlement count + auto-canonize with
+a DETERMINISTIC bounded validation-retry loop + the organic relationship/connection machinery.
+ARCHITECTURE: a COMPOSER (conductor over existing generators — zero generator changes, zero
+engine contact, new orchestration leaf) with THREE CLIENTS: the product's Instant World button
+(PREMIUM-GATED — the gate wraps the interface entry only; tier NEVER reaches the composer,
+pin-asserted) · THE SOAK HARNESS (the run families build worlds through the same composer —
+the century soak certifies the exact artifact class the button mints) · later Surveyor S5's
+compile target. Owner VETOED the manager's free-tier recommendation → instantness = the paid
+convenience, manual = the free road (instant-settlement precedent). Pins: same-seed
+fingerprint, output coherence invariants, appropriate-N mapping (presented vetoably),
+zero-eager, interface-only gate. SEQUENCE: dispatches when the Surveyor folds; ROUND 3
+reviews it; the soak runs through it.
+**✅ W-R2-D7 RATIFIED + FOLDED (2026-07-16 ~23:45; merge 7d11428e) — THE REFRAME LAYER
+LANDS, and better than planned: ZERO golden shifts** (reframeEnabled purely virtual — dark
+even on peace-lit presets; the whole golden suite green on its branch), so D7 folds to the
+MAINLINE instead of parking — **THE COMPOSITE SIMPLIFIES TO mainline + G2 ONLY.** 7 commits
+788b5aa6→5a20b4d7: the reframeKernel lazy leaf (interpretationOf over the immutable
+obligations ledger — frozen-facts pin proves no interp path writes a transfer ledger) · both
+signs incl. the BRIGHT lane (enemies→allies via misreading, debtForgiven01 fuels the peace
+mirror) · consumer 1: ingratitude_debt + dependency_by_design casus with MINTED mirrors
+debt_forgiven + bonds_of_commerce (bijection walker 11/side, strict) · restitution term
+(economic family — peaceTerms at 788/800 ceiling) · corruption-leash bounded input · THE
+LEDGER OF GIFTS AND DEBTS irony read (DM sees true≠believed; player sees only their reading)
+· the 8th drama class. Branch gate 11,704/1 (sole red EXEMPT_CEILING) · verify:dist 143/143 ·
+zero eager (1,063,701) · merged-tree pins 70/70. JUDGMENTs ratified ×4 (deterministic
+transitions over rng — reads-not-rolls; advanceReframe folded atop advanceWarReasons with
+its own gate — pulseKernel ceiling respected; the minted mirrors; economic-family
+restitution). SEAMS: act-class v2 transition enumeration (intelligence/mediation/religion/
+kinship vocab-complete) · consumer-6 whisper/glossary (needs a UI host — display pass) ·
+generosityEV stale comment (ROUND-3 fodder). OWNER QUEUE: the reframeEnabled LIGHTING
+question joins D1's. Hazard recurred + caught: NUL-as-Set-key (controlBytes pin worked).
+**⬛ CONTROL-SURFACE AMENDMENT §3f (2026-07-16 ~23:30, @ 4e2dbc37 on w7-prep): THE
+ENRICHMENT RIDER.** Owner: capture the data before the provider forgets it + the rented AI
+deciphers its own traffic + "enforceable even if the user is providing their own API...
+part of the contract of using our services." Adopted with guardrails: controlled-vocabulary
+self-tagging rider in the answer contract · TWO capture layers (id-free category-grade =
+condition-of-service on managed AND BYOK — the id-free design is what makes the framing
+defensible, flagged to the consolidated pre-launch LEGAL CONSULT; content-grade corpus
+capture stays separately consent-gated) · BYOK enforceability is STRUCTURAL (keys server-side
+only ⇒ one edge path ⇒ no bypass; the ToS discloses what architecture guarantees; <~1% token
+overhead disclosed) · THE CONFLICTED-WITNESS RULE (quality metrics never self-reported —
+independent scoring gates the trust ladder) · honest boundary recorded (binds OUR surface;
+exported-data-in-outside-tools is beyond any contract). Fourth + final addendum sent to the
+in-flight Surveyor implementer; all four may seam as SURVEYOR-S1b if it is already gating.
+THE AI-LAYER CONSTITUTION CLOSES AT §3f (3b two-voices · 3c extraction defense · 3d
+action-readiness · 3e forgetting · 3f enrichment rider).
+**⬛ CONTROL-SURFACE AMENDMENT §3e (2026-07-16 ~23:15, @ f4bf8da9 on w7-prep): THE
+FORGETTING LAW.** Owner ("any AI using this from my website has to delete their information
+after use") adopted on the manager's shape after discussion: enforced at the three REAL
+layers — statelessness by construction · contractual no-training + bounded/zero retention
+floor (verify provider terms at implementation, never from memory) · retentionClass as a
+REQUIRED walker-pinned adapter property with routing floors ('training'-class unroutable for
+world data; BYOK posture surfaced honestly). LOUD-NOT-HIDDEN (the commitment goes in the
+privacy policy; only the plumbing is invisible — the owner's "hidden" framing amended with
+consent). Prompt-based deletion claims PROHIBITED as retention theater. Promises never
+exceed contracts. Third addendum sent to the in-flight Surveyor implementer (adapter
+retentionClass + pin ship with S1).
+**⬛ CONTROL-SURFACE AMENDMENT §3d (2026-07-16 ~23:00, @ 3c69b34c on w7-prep): THE
+ACTION-READINESS LAW.** Owner: the AI accesses creation + realm management + post-creation
+edits, "always ready to take action where necessary and cordial and clear where it cannot."
+Scope CONFIRMED (the AI drives the same doors the human has — composer verbs/forecast/docket,
+S3 interpretation, S4/S4+ content, S5 construction — trust-ladder order, standing ops lane).
+BIAS-TO-THE-FORM (actionable intent ⇒ a drafted, previewed proposal one approval away; never
+action without approval) + THE GRACEFUL REFUSAL CONTRACT (every no names the boundary + the
+nearest door; extends the W-R2-LIGHT refusal-prose culture to the AI; refusal QUALITY joins
+the evals). Second addendum sent to the in-flight Surveyor implementer (S1 refusal contract).
+**⬛ CONTROL-SURFACE AMENDMENTS §3b+§3c (2026-07-16 ~22:45, @ 73cd69ff on w7-prep).**
+Owner: the Surveyor CONVERSES (ideas/expansions/clarifications) → §3b THE TWO-VOICES LAW
+(report register citation-bound / musings register clearly marked; the split is STRUCTURAL in
+the answer contract — client renders them differently by construction; register-purity joins
+the evals). Owner: protect the architecture from AI-assisted extraction → §3c EXTRACTION
+DEFENSE (foundation: the provider model NEVER sees the engine — derived slices only; honest
+floor recorded: observable behavior is inferable, the moat is execution depth; the stack:
+nothing-secret packets · disclosure hygiene · naming hygiene · per-account canaries ·
+audit-spine probe detection · economic deterrence · ToS clause). Scope addendum SENT to the
+in-flight Surveyor S1 implementer (fold-if-in-flight / seam-if-gating).
+**✅ FOUNDER LANE RATIFIED + FOLDED (2026-07-16 ~22:30; FF @ c733e5f4).** Three commits:
+c733e5f4 terms (#terms-founder: transferable lifetime individual license, cap-never-grows,
+Founder reserved for the 30, transfer-right reservation, no investment framing) · cc57835f
+the public /founders SEAT-LINEAGE page (lazy route, fail-closed 1..30 skeleton, all-Open
+pre-launch state, opted-approved names only, sitemap→16 URLs, Pricing-page nav — App.jsx AT
+its 732 ceiling so no footer link, JUDGMENT ratified) · af5757b1 DRAFT migration
+**137_founder_seats WRITTEN-NOT-APPLIED** (applied-head NOT bumped; 11 shape pins incl.
+fail-closed definer projection + pg_temp + append-only transfer ledger). EAGER HONESTY:
++366 B real route-registration cost (closure 1,064,067, margin 2,333) — the same cost every
+public route pays; NOT rounded to zero. Pins 42/42 on the merged tree. JUDGMENTs ratified ×5.
+**OWNER SIGN-OFF QUEUE (schema shape = owner-gated; presented, manager recommendations
+recorded):** (1) twin-log transfer table — RECOMMEND YES (append-only receipts culture);
+(2) gallery_author_slug beyond the brief's field list — RECOMMEND KEEP (the portal-of-proof
+link IS the page's strategic point per the owner's stated strategy); (3) definer projection
+RPC over bare SELECT policy — RECOMMEND YES (fail-closed column subset, established pattern);
+(4) transfer figures in Terms framed "currently" — RECOMMEND KEEP (terms are the contract;
+F22's numbers convention governed marketing surfaces). Deploy of 137 stays in the VERY-END
+db-push batch regardless. Seams: stripe-webhook claim hook proposed-not-wired (concierge v1);
+prior-holder scrub-right noted.
+**⬛ W8 GREEN LOCAL — THE MAINLINE FREEZES (2026-07-16 ~21:50, tip 5aa11dec + brief 4052fc9c).**
+The full constitutional gate on the unified tip carrying ALL of Phase O's folds (LIGHT ·
+GUIDE-2b · SM-4 · title tranche · DEPTH D1–D6 complete · 3 design amendments): **11,680
+passed / 11 skipped / 1 failed — the sole red is EXEMPT_CEILING 69>66 (owner-gated,
+exactly the enumerated set)** · verify:dist 143/143 exit 0 · build clean. NO PUSH.
+**THE BUILD-OUT FLEET IS DISPATCHED (3 Opus implementers, disjoint fences, all off
+4052fc9c):** W-R2-D7 the reframe layer (engine; parks dormant; reframeEnabled lighting =
+owner question) · SURVEYOR S1+S2 (edge/AI lane; migrations 138+; audience rule structural;
+BYOK never-logged) · THE FOUNDER LANE (display/schema; migration 137 DRAFT presented for
+signature). Migration numbers pre-assigned to prevent the 135-collision class. On their
+folds: THE COMPOSITE assembles (mainline+G2+D7) → ROUND 3 opens (task #25).
+**⬛ OWNER RULING #3 (2026-07-16 night, verbatim: "rather than regrade, i meant that I wanted
+to change the regrade into a complete resurvey similar to the orignal prompt... after
+building out everything, then the soak is last after that which then leads to tuning, and
+the very end."): ROUND 3 REPLACES THE RE-GRADE.** The dimensions-only re-grade is superseded
+by a COMPLETE round-3 review+fix program under the original commission verbatim (full
+exhaustive survey → objective holistic assessment → Opus-ultracode fixes for every finding,
+BOLD-OVER-SAFE — "objectively better with risk... every time" — Fable as architect/manager/
+checker after each fix). THE FINAL BINDING ORDER: W8 gate → BUILD-OUT (D7 parks-red ∥
+Surveyor S1+S2 ∥ founder lane) → THE COMPOSITE (mainline+G2+D7; local; never pushed) →
+**ROUND 3 on the composite** (the survey must see the COMPLETE shipping code; golden-shifting
+fixes batch with the regen — MANAGER JUDGMENT, vetoable: composite-as-substrate preserves
+the ONE-REGEN law; the alternative, an early signed regen + mainline round 3, costs a second
+golden event) → A+ gap register (task #24 — round 3 IS the deferred "final review") →
+**THE SOAK LAST** on the post-fix composite (the same certifies-the-shipping-engine logic as
+ruling #2, applied to the review as well: survey nothing twice, soak nothing stale) →
+verdicts → tuning + knob-registry enumeration → targeted re-certs → **THE ONE REGEN** (owner-
+signed: G2+Underways+D7+round-3 shifts+tuning) → composite merges home, mainline gate green →
+**THE VERY END** (push + PR + deploy batch). Tasks re-boarded: #25 ROUND 3 created; #24 + #7
+re-scoped. Timeline honesty recorded: round 2 ran ~2 days at full intensity; round 3
+comparable, likely faster on a twice-hardened tree.
+**✅ W-R2-DEPTH-2 RATIFIED + FOLDED (2026-07-16 ~21:20; merge 5aa11dec) — THE DEPTH WAVE IS
+COMPLETE (D1–D6 all landed).** Branch gate 11,677/1 (sole red EXEMPT_CEILING), verify:dist
+143/143, zero eager (closure 1,063,701, margin 2,699), 0 any-holes. **D1** distance-priced
+news (1971526b): flag PURELY VIRTUAL (not in WAVES/presets — dark everywhere until the owner
+lights it); belief recency-fold hop delay additive on rumor-relay latency; player rumor
+freshness distance-priced, DM truth NEVER delayed; the believed-need coupling reads
+ground-truth need × belief confidence (BeliefRecord unchanged per ruling 1). **D4** hegemony
++ fear_of_dominance (71aa6493): computation in worldPulse/hegemony.js with display as thin
+re-export (ruling 3 — its 9 tests pass verbatim); fear_of_dominance + DISTINCT mirror
+balance_restored (ruling 2 — bijection walker strict); belief-side sphere read (fogged land
++ public naval, the matrix's naval coupling); DENIAL counter-intervention amplifier in
+convergence. **D3** doctrine courses (3041387c): 'doctrine' COURSE_KINDS + imposed-cult
+deposits gated SEPARATELY on faithSpreadEnabled (momentum golden byte-identical); reversal
+priced once via the course-generic crack + synod off-ramp. JUDGMENTs ratified ×4 (provenance
+scalar origin; unknown⇒0 believed-need; fear formula NAVAL_STRENGTH_NORM=100; soak-tunable
+constants NEWS_SPEED_FACTOR/LOUD_IMPOSITION/DENIAL_HEGEMON_FEAR_W — these three JOIN THE
+TUNING WINDOW'S dial list). SEAMS recorded in-file (all golden-shifting-when-lit, belonging
+to the tuning/regen batch): D4 treaty-term weighting (defensive/mutual_defense don't exist
+yet), D3 pin-2b patron-contest bias, D3 bloc-glue pairInterest threading, D3 organic
+doctrine-crack detection. **OWNER QUEUE ADDITION: the D1 lighting question** — does
+distancePricedNewsEnabled join the three world-alive presets? (Shipped dark; lighting =
+owner call; if lit, it rides the regen batch.) The wrong-lineage trap fired a 7TH time; the
+brief guard corrected it. **W8 FULL GATE now running on the unified tip 5aa11dec** — on
+green, the mainline freezes and D7 + Surveyor S1+S2 dispatch per RE-SEQUENCING RULING #2.
+**⬛ OWNER RE-SEQUENCING RULING #2 (2026-07-16 evening: "should we move the soak until after
+the regrade? because if there are bugs that block certain pathways and we fix that after the
+soak, then what is the point?") — THE SOAK CERTIFIES THE SHIPPING ENGINE.** The soak moves
+AFTER all engine content exists (not after the re-grade — the re-grade consumes soak
+evidence; tuning must still follow a soak because tuning targets ARE soak measurements).
+THE REVISED BINDING ORDER: DEPTH-2 fold → W8 full gate (mainline freezes green) → **D7
+BUILDS NOW** (parks red-by-design like G2 — its tuning-window slot existed only for shift
+batching, which the regen batch preserves) → **THE SOAK TIP composes**: a LOCAL integration
+branch = mainline + G2 + D7 (goldens red there by design; the soak harness builds worlds
+programmatically flags-on and never reads golden files; branch never pushes) → **THE SOAK
+runs on the composite** — organic underways, reframes, catalog fixes all exercised; any
+pathway-blocking bug fixes land on the composite and affected families re-run → verdicts →
+tuning (+ knob-registry enumeration mints) → NOW-genuinely-targeted re-certs → **THE ONE
+REGEN stays ONE** (G2+Underways+D7+tuning sign together; composite merges home; mainline
+gate green) → re-grade → gap register → THE VERY END. Cost: soak starts one D7-build later
+(Surveyor S1+S2 + founder lane run in parallel during it). Benefit: certification is of the
+final bytes; the re-cert step shrinks from a hidden second soak to an honest small one.
+**✅ MAP TITLE TRANCHE RATIFIED + FOLDED (2026-07-16 ~20:20; fd16993d merged).** WorldMap-
+Toolbar's 16 native title= surveyed: 13 → the new MapControlsHelp "?" panel (role=note, the
+GUIDE-2b house pattern; visible labels stay the accessible names) · 1 → aria-label (Inspector
+— its dynamic unreviewed-count was the only spoken channel, preserved not lost) · 1 dropped
+(ResumeChip, dormant + duplicate aria-label) · 1 KEPT native with reason (Undo Advance —
+dynamic interval copy pinned by advanceMultiTickToolbar). **Title census 500 → 485.** Zero
+eager (closure unchanged 1,063,603); pins 32/32 on the MERGED tree. JUDGMENTs ratified ×3
+(comprehensive panel; text-glyph "?" to differentiate from the lucide tour button; the three
+per-title dispositions). ⚠️ NEW HAZARD (agent-surfaced): with multiple worktrees on different
+lineages, MAIN-TREE ABSOLUTE PATHS silently read the ledger lineage's file (Read/grep against
+/Users/.../settlement-engine/src/... returned baseline-471 content while the worktree held
+485) — always path into the worktree and `git rev-parse HEAD` before trusting file content.
+**⬛ W-R2-DEPTH: 3 OF 6 SHIPPED + FOLDED (2026-07-16 ~20:00; true merge f69fd96b) — the
+agent stopped disciplined rather than rush a fourth build; D1/D3/D4 hand off with complete
+recon.** SHIPPED (each byte-identical-dormant BY PROOF, pinned, zero eager, branch gate
+11,623/1 sole-red EXEMPT_CEILING, verify:dist 143/143): **D5** lifespan-scaled memory
+(memoryHorizon facet, 4 bands via facetOf, both signs scale, undying erodes only via
+reconciliation; 6811b41a) · **D6 engine couplings** (new lazy clandestineFacet leaf —
+smuggle boost, siege land-leg food trickle, conspiracy ease, escape receipts,
+detectInstitutionGaps hook that no-ops until G2's catalog merges — custom-facet parity
+proven; 78045726) · **D2 THE SCALING LAW** (realmScaling leaf: √N sublinear tempo classMax +
+rollCandidates maxAuto/maxProposals; BASE_REALM=24 above every golden/soak N ⇒ dormancy by
+arithmetic; D2b VERIFIED supplyShipments top-k is per-destination local — correctly
+unchanged, pinned; 365036c2) + gate reconciliation (any-cast ratchet + aiGrounding bundle
+regen — cohesionWeave became a transitive input; de5031cb). Freshness re-verified on the
+MERGED tree (34/34). DEFERRALS-WITH-SEAMS ratified (all recorded in-file): D5 incident
+half-life scaling · D6 naval-interdiction leg (warDeployment AT ceiling) + exposure-discount
+leg (npcAgency AT ceiling; corruption.js is EAGER — a covertShelter param measured +23 B and
+was correctly reverted) · D2 proposal-ring/retention threading (their receipted-eviction
+prerequisite verified already landed via tick-core-2). The wrong-lineage trap hit a 6th time
+(worktree on d024286e master lineage) — the base-guard recipe corrected it again.
+**⚠️ HAZARD MEMORIALIZED: five hot engine files sit AT their max-lines ceilings**
+(pulseKernel, npcAgency, warDeployment among them; ceilings unraisable) — future engine
+waves must put logic in NEW LAZY LEAVES reached via re-exports (the D2 narrativeTempo
+re-export pattern), never add imports/lines to the capped files directly.
+**ARCHITECT RULINGS for the D1/D3/D4 remainder (recorded vetoably; dispatching W-R2-DEPTH-2):**
+(1) **D1 believed-need channel:** BeliefRecord gains NO new field (a persisted-shape change —
+owner-gated class); believed need is DERIVED AT READ TIME from the observer's delayed
+belief/rumor picture — facts frozen, meaning derived, byte-identical when the flag is dark.
+(2) **D4 peace mirror:** the war↔peace bijection walker stays STRICT — fear_of_dominance
+gets its own distinct mirror **balance_restored** (Blainey-consistent: the war-reason dies
+when the believed imbalance does), which FEEDS spheres_understanding rather than reusing
+foreign_clash's mirror. (3) **D4 layering:** the hegemony COMPUTATION belongs domain-side
+(worldPulse lazy leaf); display/hegemonyRead becomes a thin wrapper — display reads domain,
+never the reverse; warReasons imports the domain leaf.
+**✅ SM-4 RATIFIED + MERGED (2026-07-16 ~19:45; true merge 335d7856, zero conflicts).** The
+settlement-map endgame: the deterministic DRAW projection substrate (townMapDraw pure
+draw-ops + fixed export palette in src/design) → the PDF town-map PLATE (chapter 08C, first
+vector Svg in the PDF tree, in draft/canon variants, FaithWar-shaped self-gate) → the
+library-card THUMBNAIL (lazy IntersectionObserver + FNV-keyed in-memory cache, cap 200) →
+GALLERY OPT-IN (rides gallery_share_dm, fail-closed, renders the sanitized PUBLIC projection
+— mapEdits-stripped base layout). All four required pins present (plate render-leaf, thumb
+contract, opt-in default-off, same-seed→identical-plate-bytes). ZERO eager (closure 1,063,603,
+margin 2,797); branch gate 11,633/1 (sole red EXEMPT_CEILING); cross-ratchet interaction with
+GUIDE-2b verified on the merged tree (guidance walker 23/23; raw-color + SM-4 pins 47/47);
+FULL gate deferred to the post-DEPTH unified tip. JUDGMENTs ratified ×4 (existing-flag reuse
+over a new migration; base-layout plate; in-memory cache; palette homed in src/design).
+DEFERRALS recorded in-file: the design-§6 coupled step (cosmetic mapEdits in gallery +
+dedicated share flag + SQL-twin) and persisted thumbnail storage — both owner-gated. DURABLE
+FACTS: viewModel.js sits AT its 1043 max-lines ceiling (new PDF derivations go in
+SettlementPDF.jsx or another home); the title= census regex counts component props AND
+comment text (never write the literal token); pure export palettes belong in src/design (the
+raw-color sanctioned zone).
+**QUICKINSPECTOR MAP-HOVER: ALREADY LANDED (verified 2026-07-16).** The owner-commissioned
+wiring (4d669b32, 2026-07-14) is an ancestor of the unified lineage; PlacementsLayer pointer
+handlers + touch guard live; guard test 4/4 green. The commission is CLOSED — nothing to
+build. The map-coordinated pass therefore shrinks to ONE item: the WorldMapToolbar
+teaching-title tranche (GUIDE-2b's writer-boundary deferral) — dispatching off 335d7856.
+**A+ GAP REGISTER: STOPPED per owner ("wait stop. do that after the final review")** — the
+five-reader sweep runs AFTER the dimensions-only re-grade (task #24; script preserved).
+**TUNING-WINDOW SCOPE ADDITION (owner-confirmed intent, 2026-07-16 evening):** when the
+post-soak tuning window opens, the tunable-constants enumeration is MINTED IN THE
+KNOB-REGISTRY SHAPE (DESIGN_CONTENT_PLANE §6's build-early artifact — "one enumeration
+serves both"): the tuning pass and Surveyor S4+ rung 2 share one registry, so the Content
+Plane inherits the enumeration instead of re-deriving it. Owner also confirmed the full
+updated AI/custom-content design (core + §1b extension tiers + §4b analytical coupling) is
+IN the shipping corpus; pre-launch builds = S1+S2, the soak evaluators (Coupling 2's raw
+material), the knob-registry enumeration; S3+/knobs/packs/streaming-health/closed-loop stay
+gated on the trust ladder's LIVE acceptance metrics (post-launch by construction).
+**✅ GUIDE-2b RATIFIED + FOLDED (2026-07-16 ~20:10; FF @ 457f2caa).** Two commits: 3a6f82f9
+(the Keeper's Handbook Reference tab stops re-describing the catalog and DELEGATES — eight
+/compendium deep-links + the custom-mode link, drift-prone duplicate prose deleted) ·
+457f2caa (deep title tranche: LivingWorldGates' two native title= tooltips → an in-theme "?"
+help panel; **title census RATCHET-DOWN 502→500**). Whisper-host item CONFIRMED
+already-satisfied (UNWIRED_WHISPERS ceiling 0; every post-SURFACE-2 host renders via the
+strict walker). Zero eager delta (closure byte-identical 1,063,596); gate green (11,598
+passed; 3 load-flakes 18/18 isolated; sole red EXEMPT_CEILING). JUDGMENT ratified: the FULL
+Handbook narrative rewrite + /how-to route rename stays DEFERRED as owner-voice/SEO-surface
+work (the W-GUIDE-2 deferral's own "rather than rushed" caution) — landed the enforceable
+delegation subset; HowToUse stays on the guidance legacy ledger as a partial disposition.
+DEFERRAL RECORDED: the WorldMapToolbar teaching-title tranche waits for a MAP-COORDINATED
+pass (SM-4 owns that lane concurrently — writer boundary respected). CENSUS MECHANISM FACT
+(for future tranche waves): the title-census regex counts React component props
+(<Insight title=> etc.) as native tooltips — the baseline is inflated with false positives
+(HowToUse alone contributes 22); the design's "~340 native tooltips" ≠ the census number,
+and removing component props also ratchets it down.
+**✅ W-R2-LIGHT RATIFIED + FOLDED (2026-07-16 ~19:00) — the engine is reachable.** The lighting
+wave landed in 4 commits (0b28f032 presets via the shared frozen WAVES object + stability/
+coverage pins · 84af8c3a the dialog Engine Waves section · f3169cab dark-gate refusal prose
+names the preset + dialog path, closing sim-cohesion-counterparts-4 · db07979b the shift map)
+and was FAST-FORWARDED into claude/w7-prep @ db07979b — MERGE JUDGMENT (vetoable): the brief's
+park-red-like-G2 disposition existed only for predicted golden shifts, and **the tree refuted
+the prediction: THE GOLDEN-SHIFT SET IS EMPTY** (every committed golden driver hand-writes its
+simulationRules object; none reads SIMULATION_RULE_PRESETS.*.rules), so the branch gated green
+(11,604 passed / sole red EXEMPT_CEILING; verify:dist 143/143) and parking served nothing.
+CONSEQUENCE FOR THE REGEN MOMENT: **THE ONE REGEN batch is now G2 + Underways + tuning + D7
+only — LIGHT contributes zero shifts.** Eager truth: +252 B measured (the preset catalog rides
+the eager closure via campaignWorldPulseSlice→presetIdForRules — the brief's "zero eager" was
+wrong); closure 1,063,596 ≤ 1,066,400, margin 2,804 B. Implementer JUDGMENTs ratified ×4, chief
+among them: **living_realm lights the nine but keeps warLayerEnabled inherited-false** (the
+three war-AND-gated waves stay dormant there — a living realm moves but does not start wars;
+veto = also light War on living_realm). **W-R2-DEPTH DISPATCHED** off db07979b (D1–D5 + D6
+engine-couplings half, dormancy-gated by construction, zero-shift law binding).
+**⬛ W7 GREEN LOCAL — push held per owner ruling (2026-07-16 ~17:40).** The full constitutional
+gate on the reconciled tree, branch `claude/w7-prep` tip b1e6aa24: validate:data /
+migration-head / edge / map ALL green · typecheck (full + domain:strict) exit 0 · lint 0 errors
+(15 pre-existing warnings in untouched files) · suite **11,599 passed / 11 skipped / 1 failed —
+the SOLE red is EXEMPT_CEILING 69>66 (owner-gated, exactly the runbook's enumerated set)** ·
+verify:dist 143/143 on a fresh build (closure ≤ 1,066,400 — RATCHET #10 holds) · goldens
+byte-identical in-suite. THE +3 EXEMPT ENUMERATED for the owner: focusEntity /
+clearFocusedEntity / hydrateServicesToggles (master-lineage ephemeral view-state, same class as
+the 66) — sign the ceiling at 69 OR commission adopting the three into the operation surface.
+**W7-PREP BURN-DOWN RATIFIED (agent-delivered, checker-verified diffs-match-scope):**
+41f6eaca (typecheck exit 2→0; viewModel 1041→1043 + aiSlice 941→961 re-mints, 5th
+type-honestly-at-merge instance) · fc6cb5cd (useMapAutosave = the TRUE union: RF's shared
+fingerprint + master's flush-on-leave data-loss guard PORTED — an edit inside the 3.5s debounce
+window no longer dies on unmount/pagehide; lazy chunk, zero eager) · df2ba8f1 (4 UI tails:
+dead accountDataPrivacy shell removed · authMobileReflow isMobile prop threaded ·
+advanceMultiTickToolbar aria copy adapted to RF's fix-wave truth · SuccessorPrompt focus trap
+WIRED — a real aria-modal defect fixed) · batchCartAdvanceGuard test REMOVED (advanceBusy was
+dead-unwired even in master; RF's refusalNotice supersedes; content sits in 18949a38 per the
+incident row below). All four agent JUDGMENTs ratified incl. the branch identity: the brief's
+`claude/master-merge-r1` name was STALE (still @ 22bec368); the agent verified-first and cut
+`claude/w7-prep` off the true expected content b1bf0346 (fold-in + FP-G9 + Surveyor docs) —
+**claude/w7-prep is now the program's working lineage; LIGHT cuts from b1e6aa24.**
+**THE ANALYTICAL-COUPLING AMENDMENT TRULY LANDS @ ca6c4ec7** (§4b in DESIGN_CONTENT_PLANE.md:
+intent end-to-end · the world-health metric suite — one evaluator library, two clients ·
+the closed tuning loop that wakes the inert §10 rails; endogeneity-extends-to-telemetry enters
+the law set; matrix rows ×ANALYTICS SEAM + ×SOAK PLAN). Edge bundles regenerated @ b1e6aa24
+(aiGrounding freshness restored; analyticsEvents picks up ANON_CAP_UNLOCK_CLICKED). Housekeeping:
+the abandoned 100-line draft docs/AI_AND_CUSTOM_CONTENT.md (truncated mid-write, superseded by
+THE_CONTENT_PLANE.md @ 023da30b) relocated to the session scratchpad, not deleted.
+**INCIDENT (2026-07-16 ~17:05, manager-caused, contained):** while the W7-prep agent worked
+in the merge worktree, the manager committed docs there and SWEPT the agent's staged deletion
+(tests/ui/batchCartAdvanceGuard.test.jsx) into 18949a38 under an unrelated docs message — the
+FP-G3 concurrent-writer class, this time the manager's own violation of the one-writer rule.
+Contained: agent notified with both disposition paths; manager writes to the worktree FROZEN
+until the agent's final report; the analytical-coupling design amendment QUEUED (scratchpad)
+for post-agent application. Ledger truth: 18949a38's content = the AGENT's disposition, not
+docs. RULE REAFFIRMED: one writer per worktree — the manager queues, never co-writes.
+**⬛ THE FOLD-IN IS COMMITTED @ 22bec368 (2026-07-16 ~16:20) — THE DUAL-LINEAGE ERA IS OVER.**
+One tree: master's two years + the spatial engine + 15 waves + the full round-2 fix program.
+Conflicts: 11 total, all reconciled (layerBoundaries = RF's SCC machinery + W6's ratchet-down,
+test-arbitrated 3/3; wizardNextSteps = RF's version, component exists; 6 both-sides-fixed
+components → RF fix-wave versions; the doc trio = THE UNION — RF base + W6's ungated-edge
+hazard set + the extended 057–136 MUST-APPLY security block — ALL 16 doc pin files 93/93
+green; settlementSlice ceiling → 1345 fold-in-union truth, reconciliation #4).
+**PREDICTION RESULTS: goldens BYTE-IDENTICAL 147/147 ✓ (the engine survived the fold-in).
+Budget MOSTLY cured: +4,723-over-old-budget → +3,472 over RATCHET #10's far tighter 1,066,400**
+(provenance: master's adopted entity-link + focus features RF's budget never funded) →
+**FP-G9 dispatched** (target ≥3,600 B; candidates: the canon-via-aiSlice split the trim census
+named, the entity-link chunk, a fresh merged-tree over-inclusion census). W7 runs after G9.
 **✅ W6 COMPLETE (2026-07-16 ~15:55, closing confirmation @ 830e2b23):** final suite
 5 failed / 11,367 passed — the red set EXACTLY the enumerated five (budget fold-in-cured ·
 EXEMPT_CEILING owner · 2× edge-bundle W7 · the documented flake 5/5 isolated). 220→5. One

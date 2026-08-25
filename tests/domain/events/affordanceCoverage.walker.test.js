@@ -95,14 +95,11 @@ describe('affordance coverage walker (registry → manifest, fail-closed)', () =
     }
   });
 
-  it('the 32/9 split holds (32 authorable, 9 folded, 41 total)', () => {
+  it('the 31/9 split holds (31 authorable, 9 folded, 40 total)', () => {
     // 38/29/9 → 40/31/9 (FP-G3): the generosity counterpart verbs FORCE_RELIEF +
     // OFFER_CREDIT ship authorable (the Counterpart Criterion paid).
-    // 40/31/9 → 41/32/9 (W-D, directive 3): CREATE_ROUTE ships authorable. Its
-    // target roster is cross-save, so it carries no targetsFrom; the shared
-    // validator in domain/roads/userRoutes.js is its real gate.
-    expect(EVENT_TYPES).toHaveLength(41);
-    expect(authorableVerbs()).toHaveLength(32);
+    expect(EVENT_TYPES).toHaveLength(40);
+    expect(authorableVerbs()).toHaveLength(31);
     expect(Object.values(AFFORDANCE_MANIFEST).filter(e => e.foldedInto)).toHaveLength(9);
   });
 });

@@ -3,9 +3,13 @@
 read off directly. Eye-bounds set on these images are [E] by definition (atlas §2.8.3)."""
 import sys, os
 from PIL import Image, ImageDraw
+HERE=os.path.dirname(os.path.abspath(__file__))
+CORPUS=os.path.dirname(HERE)
+OUT=os.path.join(HERE,"HFM1-grid")
+os.makedirs(OUT,exist_ok=True)
 W=1000
 for stem in sys.argv[1:]:
-    src="map-refs/%s.png"%stem
+    src=os.path.join(CORPUS,"plates","%s.png"%stem)
     im=Image.open(src).convert("RGB")
     w,h=im.size; H=int(round(h*W/w))
     im=im.resize((W,H), Image.BILINEAR)
@@ -19,4 +23,4 @@ for stem in sys.argv[1:]:
         if i%2==0: continue
         x=int(W*i/20.0); d.line([(x,0),(x,10)], fill=(255,0,0)); d.line([(x,H-10),(x,H)], fill=(255,0,0))
         y=int(H*i/20.0); d.line([(0,y),(10,y)], fill=(0,90,255)); d.line([(W-10,y),(W,y)], fill=(0,90,255))
-    im.save("HFM1-grid/%s.jpg"%stem, quality=82)
+    im.save(os.path.join(OUT,"%s.jpg"%stem), quality=82)

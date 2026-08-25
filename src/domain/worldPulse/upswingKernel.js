@@ -32,9 +32,6 @@
  */
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
-// The provenance law (domain→domain): the upgrade RENAMES the record in place, so
-// only an institution whose `required` is genuinely its OWN contract is exempt.
-import { hasOwnRequiredContract } from '../generationOwnership.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { computeMalice } from './disposition.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
@@ -46,7 +43,6 @@ import { withCampaignHistoryEvent } from './stressorAftermath.js';
 import { promotesTo } from './calamityKernel.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
-import { pickLine, UPSWING_NEWS } from './eventProse.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ name?: string, required?: boolean, category?: string, status?: string,
@@ -264,7 +260,7 @@ function upgradeCandidate(s) {
   const insts = Array.isArray(s?.institutions) ? s.institutions : [];
   const standing = new Set(insts.map((i) => String(i?.name || '').toLowerCase()));
   const eligible = insts
-    .filter((i) => i && !hasOwnRequiredContract(i) && String(i.status || 'active') === 'active' && String(i.name || ''))
+    .filter((i) => i && i.required !== true && String(i.status || 'active') === 'active' && String(i.name || ''))
     .map((i) => String(i.name))
     .sort();
   for (const name of eligible) {
@@ -790,10 +786,10 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
   }
 
   // Mature consumed ally obligations (the conservation debit) into the obligations ledger.
-  // SINGLE-DECAY LAW (r2 economy-upswing-4): decayPerTick:0 — pulseKernel's
-  // unconditional owner already decayed this ledger once THIS tick. A second
-  // whole-ledger decay here would erode every debt faster than the tuned rate.
-  // This pass is repayment-only.
+  // SINGLE-DECAY LAW (r2 economy-upswing-4): decayPerTick:0 — advanceGenerosity (and, when
+  // intervening, convergence) already folded+decayed this same ledger earlier THIS tick; a
+  // second whole-ledger decay here would erode every debt faster than the tuned rate. This
+  // pass is repayment-only.
   if (obligationRepayments.length) {
     const prevObl = /** @type {Record<string, unknown>|null} */ (getSpatialLedger(worldState, 'obligations'));
     const nextObl = foldObligations(prevObl, { mints: [], repayments: obligationRepayments, now: tick, decayPerTick: 0 });
@@ -842,13 +838,13 @@ function reconstructionNews(id, name, upgrade, skimmed, year, tick, now) {
   return {
     id: `wizard_news.${tick}.reconstruction.${id}`,
     tick, createdAt: now, scope: 'local', significance: 'notable', severity: 0.4, score: 62,
-    headline: pickLine(UPSWING_NEWS.reconstruction.headline, `${id}:${tick}:h`, { name }),
-    summary: pickLine(UPSWING_NEWS.reconstruction.summary, `${id}:${tick}:s`, { name, year, built, graft }),
+    headline: `${name} is rebuilt`,
+    summary: `${name} has finished rebuilding in the year ${year}, its wounds closed by its own hands and its allies'.${built}${graft}`,
     kind: 'applied', impactKind: 'reconstruction', channelType: 'settlement',
     settlementIds: [id], impactIds: [], channelIds: [],
     sourceEventId: `reconstruction.${id}.${tick}`,
     tags: ['world_pulse', 'upswing', 'reconstruction'],
-    reasons: [pickLine(UPSWING_NEWS.reconstruction.reasons, `${id}:${tick}:r`)],
+    reasons: ['A conserved rebuild — its own prosperity, builders, peace, and its allies\' investment repaid.'],
   };
 }
 
@@ -925,13 +921,13 @@ function boomNews(id, name, arteries, fragile, tick, now) {
   return {
     id: `wizard_news.${tick}.boom.${id}`,
     tick, createdAt: now, scope: 'regional', significance: 'notable', severity: 0.4, score: 60,
-    headline: pickLine(UPSWING_NEWS.boom.headline, `${id}:${tick}:h`, { name }),
-    summary: pickLine(UPSWING_NEWS.boom.summary, `${id}:${tick}:s`, { name, dep }),
+    headline: `${name} is booming`,
+    summary: `Brisk and sustained trade has tipped ${name} into a boom — markets swell and coin flows.${dep}`,
     kind: 'applied', impactKind: 'boom', channelType: 'trade_route',
     settlementIds: [id], impactIds: [], channelIds: [],
     sourceEventId: `boom.${id}.${tick}`,
     tags: ['world_pulse', 'upswing', 'boom'],
-    reasons: [pickLine(UPSWING_NEWS.boom.reasons, `${id}:${tick}:r`, { arteries: arteries.length, arteryS: arteries.length === 1 ? '' : 's' })],
+    reasons: [`The boom is fed by ${arteries.length} trade artery${arteries.length === 1 ? '' : 's'} — a composition the trade movers already built.`],
   };
 }
 
@@ -942,13 +938,13 @@ function bustNews(id, name, arteries, embattled, tick, now) {
   return {
     id: `wizard_news.${tick}.bust.${id}`,
     tick, createdAt: now, scope: 'regional', significance: 'major', severity: 0.6, score: 70,
-    headline: pickLine(UPSWING_NEWS.bust.headline, `${id}:${tick}:h`, { name }),
-    summary: pickLine(UPSWING_NEWS.bust.summary, `${id}:${tick}:s`, { name, cause }),
+    headline: `${name}'s boom has busted`,
+    summary: `The trade that made ${name} rich has collapsed — ${cause}, and the boom curdles into flight and empty stalls.`,
     kind: 'applied', impactKind: 'bust', channelType: 'trade_route',
     settlementIds: [id], impactIds: [], channelIds: [],
     sourceEventId: `bust.${id}.${tick}`,
     tags: ['world_pulse', 'upswing', 'bust'],
-    reasons: [pickLine(UPSWING_NEWS.bust.reasons, `${id}:${tick}:r`, { arteryClause: arteries[0] ? ` — the ${arteries[0]} artery` : '' })],
+    reasons: [`The boom's own dependency concentration was its undoing${arteries[0] ? ` — the ${arteries[0]} artery` : ''}.`],
   };
 }
 
@@ -959,12 +955,12 @@ function flourishingNews(id, name, founded, tick, now) {
   return {
     id: `wizard_news.${tick}.flourishing.${id}`,
     tick, createdAt: now, scope: 'regional', significance: 'notable', severity: 0.3, score: 55,
-    headline: pickLine(UPSWING_NEWS.flourishing.headline, `${id}:${tick}:h`, { name }),
-    summary: pickLine(UPSWING_NEWS.flourishing.summary, `${id}:${tick}:s`, { name, built }),
+    headline: `${name} enters a golden age`,
+    summary: `A long peace and steady rule have made ${name} culturally fertile — tolerance broadens and the temples keep warm.${built}`,
     kind: 'applied', impactKind: 'flourishing', channelType: 'settlement',
     settlementIds: [id], impactIds: [], channelIds: [],
     sourceEventId: `flourishing.${id}.${tick}`,
     tags: ['world_pulse', 'upswing', 'flourishing', 'boom_flourishing'],
-    reasons: [pickLine(UPSWING_NEWS.flourishing.reasons, `${id}:${tick}:r`)],
+    reasons: ['A bounded cultural attractor — no army, no treasury swell, only the fertility of a long peace.'],
   };
 }

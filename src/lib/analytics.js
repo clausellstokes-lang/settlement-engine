@@ -139,15 +139,10 @@ export const Funnel = Object.freeze({
   track,
 
   homepageView() {
-    // sessionStorage can throw (Safari private mode, storage-blocked browsers).
-    // The dedup guard is best-effort; on any storage error we skip it and still
-    // fire the event, so this documented never-throws path stays true.
-    try {
-      if (typeof sessionStorage !== 'undefined') {
-        if (sessionStorage.getItem('sf_homepage_view_sent') === '1') return;
-        sessionStorage.setItem('sf_homepage_view_sent', '1');
-      }
-    } catch { /* storage unavailable — fall through and fire the event */ }
+    if (typeof sessionStorage !== 'undefined') {
+      if (sessionStorage.getItem('sf_homepage_view_sent') === '1') return;
+      sessionStorage.setItem('sf_homepage_view_sent', '1');
+    }
     track(EVENTS.HOMEPAGE_VIEW);
   },
 

@@ -3,10 +3,11 @@
 recorded as fractions of the plate (the MFS1-grain2 convention)."""
 import sys, os
 from PIL import Image, ImageDraw
-CORP="/Users/cstokes/Desktop/settlement-engine/map-corpus"
+HERE=os.path.dirname(os.path.abspath(__file__))
+CORP=os.path.dirname(HERE)
 def sheet(ids, out, cols=3, cell=760):
     import json
-    fr=json.load(open("MFS3a-frame.json"))["plates"]
+    fr=json.load(open(os.path.join(HERE,"MFS3a-frame.json")))["plates"]
     rows=(len(ids)+cols-1)//cols
     ch=int(cell*3392/5056)
     sh=Image.new("RGB",(cols*cell, rows*(ch+22)),(20,20,20))

@@ -1,8 +1,18 @@
+import { SlidersHorizontal, X } from 'lucide-react';
 import { useId } from 'react';
 
 import { TIER_LABELS } from '../new/design.js';
 import Button from '../primitives/Button.jsx';
-import { FS, INK, sans } from '../theme.js';
+import {
+  BORDER,
+  CARD_ALT,
+  FS,
+  GOLD,
+  INK,
+  R,
+  SP,
+  sans,
+} from '../theme.js';
 import {
   activeFilterCount,
   CULTURE_OPTIONS,
@@ -12,27 +22,62 @@ import {
   TERRAIN_OPTIONS,
   TIER_OPTIONS,
 } from './galleryUtils.js';
-import GalleryFilterShell, { SidebarSection } from './GalleryFilterShell.jsx';
+
+function SidebarSection({ title, count = 0, children }) {
+  return (
+    <section style={{ display: 'grid', gap: 8 }}>
+      <h3 style={{
+        margin: 0,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6,
+        color: INK,
+        fontFamily: sans,
+        fontSize: FS.xs,
+        fontWeight: 950,
+        textTransform: 'uppercase',
+        letterSpacing: 0,
+      }}>
+        {title}
+        {count > 0 && (
+          <span style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minWidth: 16,
+            height: 16,
+            padding: '0 5px',
+            borderRadius: 999,
+            background: GOLD,
+            color: INK,
+            fontFamily: sans,
+            fontSize: FS.xxs,
+            fontWeight: 950,
+          }}>
+            {count}
+          </span>
+        )}
+      </h3>
+      {children}
+    </section>
+  );
+}
 
 function FilterChips({ options, value = [], onToggle }) {
   const selected = new Set(value);
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-      {options.map(option => {
-        const isOn = selected.has(option);
-        return (
-          <Button
-            key={option}
-            variant={isOn ? 'gold' : 'secondary'}
-            size="sm"
-            onClick={() => onToggle(option)}
-            aria-pressed={isOn}
-            style={{ textTransform: 'capitalize' }}
-          >
-            {human(TIER_LABELS[option] || option)}
-          </Button>
-        );
-      })}
+      {options.map(option => (
+        <Button
+          key={option}
+          variant={selected.has(option) ? 'gold' : 'secondary'}
+          size="sm"
+          onClick={() => onToggle(option)}
+          style={{ textTransform: 'capitalize' }}
+        >
+          {human(TIER_LABELS[option] || option)}
+        </Button>
+      ))}
     </div>
   );
 }
@@ -56,23 +101,40 @@ function ToggleRow({ checked, label, onChange }) {
   );
 }
 
-/**
- * The filter facet body, shared by the desktop sidebar and the mobile bottom
- * sheet. The Clear control is rendered by the chrome (desktop header / sheet
- * body) so this holds only the facet sections.
- */
-function FilterBody({ filters, onToggleArray, onToggleBool, isSignedIn }) {
+export default function GallerySidebar({ filters, onToggleArray, onToggleBool, onClear, isSignedIn }) {
   return (
-    <>
+    <aside className="gallery-sidebar-panel" style={{
+      display: 'grid',
+      gap: SP.lg,
+      alignSelf: 'start',
+      padding: SP.md,
+      border: `1px solid ${BORDER}`,
+      borderRadius: R.lg,
+      background: CARD_ALT,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <SlidersHorizontal size={15} color={GOLD} />
+        <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950 }}>
+          Filters
+        </h2>
+        {activeFilterCount(filters) > 0 && (
+          <Button
+            variant="ghost"
+            size="sm"
+            icon={<X size={12} />}
+            onClick={onClear}
+            style={{ marginLeft: 'auto', color: GOLD }}
+          >
+            Clear
+          </Button>
+        )}
+      </div>
       {isSignedIn && (
         <SidebarSection title="Yours">
-          <div style={{ display: 'grid', gap: 8 }}>
-            <ToggleRow checked={!!filters.mine} label="My settlements only" onChange={value => onToggleBool('mine', value)} />
-            <ToggleRow checked={!!filters.unlistedMine} label="My unlisted only" onChange={value => onToggleBool('unlistedMine', value)} />
-          </div>
+          <ToggleRow checked={!!filters.mine} label="My settlements only" onChange={value => onToggleBool('mine', value)} />
         </SidebarSection>
       )}
-      {!filters.mine && !filters.unlistedMine && (<>
+      {!filters.mine && (<>
       <SidebarSection title="Tier" count={filters.tier?.length || 0}>
         <FilterChips options={TIER_OPTIONS} value={filters.tier} onToggle={option => onToggleArray('tier', option)} />
       </SidebarSection>
@@ -95,25 +157,9 @@ function FilterBody({ filters, onToggleArray, onToggleBool, isSignedIn }) {
           <ToggleRow checked={filters.hasImage} label="Has image" onChange={value => onToggleBool('hasImage', value)} />
           <ToggleRow checked={filters.hasComments} label="Has comments" onChange={value => onToggleBool('hasComments', value)} />
           <ToggleRow checked={filters.curatedOnly} label="Curated only" onChange={value => onToggleBool('curatedOnly', value)} />
-          <ToggleRow checked={filters.featuredOnly} label="Featured only" onChange={value => onToggleBool('featuredOnly', value)} />
         </div>
       </SidebarSection>
       </>)}
-    </>
-  );
-}
-
-/**
- * Gallery settlements filter facets. The chrome (bordered aside + Filters header +
- * Clear, or the mobile BottomSheet) is the shared GalleryFilterShell (owner order
- * 2026-07-22 — the three gallery tabs share one filter design); this component
- * supplies only the settlement facet body.
- */
-export default function GallerySidebar({ filters, onToggleArray, onToggleBool, onClear, isSignedIn }) {
-  const active = activeFilterCount(filters);
-  return (
-    <GalleryFilterShell activeCount={active} onClear={onClear}>
-      <FilterBody filters={filters} onToggleArray={onToggleArray} onToggleBool={onToggleBool} isSignedIn={isSignedIn} />
-    </GalleryFilterShell>
+    </aside>
   );
 }

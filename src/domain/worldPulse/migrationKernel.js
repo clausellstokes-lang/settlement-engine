@@ -17,8 +17,7 @@
  *
  * AGGREGATE, NAMED-NPC-SAFE (owner boundary): this moves population COUNTS only. It
  * reads no npc roster and returns no npc mutation — named NPCs are the §4h protected
- * excursion model — their sanctioned mover is the roads layer (DESIGN_THE_ROADS),
- * never this kernel.
+ * excursion model, never emigration/mortality.
  *
  * DORMANT (constitutional): a no-op without the spatial-canon marker (migrationActive
  * false) — an aspatial world keeps populationDynamics' exact path (byte-identical), no
@@ -40,13 +39,11 @@ import {
 import { cultureAffinity } from '../spatial/cultureDistance.js';
 import { pathCost, hopWeeks, distanceWeight, isMapped, setSpatialLedger, dropSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
 import { chooseRoute, riskToleranceFromAlignment } from '../spatial/embattlement.js';
-import { demographicReadings } from './demographicsPushPull.js';
-import { pressureOf } from './demographicsRates.js';
 
 // ── Kernel-local read-shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ population?: number, config?: { primaryDeitySnapshot?: { alignmentAxis?: string, lawAxis?: string } | null },
  *   economicState?: { prosperity?: unknown, foodSecurity?: { storageMonths?: number } | null },
- *   powerStructure?: { governingName?: string } | null, traditions?: unknown,
+ *   powerStructure?: { governingName?: string } | null,
  *   populationHistory?: Array<{ tick: number|null, delta: number, population: number, reason: string, outcomeId?: string }> } } MigSettlement */
 /** @typedef {{ id?: (string|number), name?: string, settlement?: MigSettlement,
  *   causal?: { scores?: { economic_capacity?: number, trade_connectivity?: number } } }} MigSnapItem */
@@ -65,10 +62,9 @@ function num(v, fallback) {
 
 // ── Congestion + carrying-capacity anchors (documented tuning) ────────────────
 export const MIGRATION_KERNEL_TUNING = Object.freeze({
-  // DARK-ARM LEGACY ONLY (P5b): the population at which a destination reads
-  // "saturated" (capacityPressure→1) while the demographic engine is absent. A
-  // per-capita pull-decay anchor, not a hard cap. Lit worlds delegate to the
-  // demographic engine's effective bound through sizeSaturationOf below.
+  // The population at which a destination reads "saturated" (capacityPressure→1) on
+  // the SIZE axis alone — a big city's pull decays as it approaches this. A
+  // per-capita saturation anchor, not a hard cap (the pull just fades). Retunable.
   SATURATION_POP: 9000,
   // Congestion pressure = the max of size-saturation, crowding food deficit, and
   // size-scaled crime (§II.3-3): a hub that is BIG, HUNGRY, or CRIME-RIDDEN pushes
@@ -87,67 +83,13 @@ export const MIGRATION_KERNEL_TUNING = Object.freeze({
   // A merchant-caravan-grade danger-reading fidelity for the refugee route choice
   // when the origin has no alignment signal (mirrors supplyKernel's steady default).
   DEFAULT_RISK_TOLERANCE: 0.5,
-  // coherence-15: the maximum fraction a fully corruption-captured origin lowers its
-  // carrying-capacity tolerance by (a sharper out-migration shed). At grip 1 ⇒ τ×0.75.
-  // Only applied when migrationCorruptionPushEnabled is lit ⇒ otherwise ×1. Vetoable.
-  CORRUPTION_PUSH_MAX: 0.25,
 });
-
-/**
- * THE ONE DESTINATION-CAPACITY TRUTH (wave P5b). The legacy migration lane keeps
- * its per-capita 9,000-person pull-decay anchor while demography is dark. Once the
- * demographic engine is lit, this read delegates to its canonical three-reading
- * seam and uses the sanctioned effective-bound pressure denominator. `settlementId`
- * is load-bearing: the canonical reader needs it to see live routes, completed works,
- * and relief obligations rather than silently computing a context-free twin.
- *
- * @param {MigSettlement|null|undefined} settlement
- * @param {Record<string, unknown>|null|undefined} worldState
- * @param {string} [settlementId]
- * @returns {number}
- */
-export function sizeSaturationOf(settlement, worldState, settlementId = '') {
-  const pop = Math.max(0, num(settlement?.population, 0));
-  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
-  if (!rules || typeof rules !== 'object'
-      || /** @type {Record<string, unknown>} */ (rules).demographicsEnabled !== true) {
-    return clamp01(pop / MIGRATION_KERNEL_TUNING.SATURATION_POP);
-  }
-  const readings = demographicReadings(
-    /** @type {import('./demographicsRates.js').DemoSettlement} */ (/** @type {unknown} */ (settlement)),
-    /** @type {{ spatialLedgers?: unknown, simulationRules?: unknown }} */ (worldState),
-    settlementId,
-  );
-  return clamp01(pressureOf(readings.population, readings.bound));
-}
 
 // ── Live culture-vector extraction (the §II.5-2 LIVE read) ────────────────────
 /**
- * The settlement's active tradition motif-ELEMENT signature (Wave C — DESIGN_TRADITIONS §1/§16:
- * "the culture VECTOR MAY read tradition state as one input"). Read from the settlement.traditions
- * MIRROR (present ONLY when the traditions layer is lit); the deduped, sorted (byte-stable) set of
- * motif elements of its ACTIVE (non-suppressed) observances. Absent/dark ⇒ [] ⇒ a no-signal that
- * closes no distance (byte-identical when traditions are dark). Pure, total.
- * @param {unknown} traditions @returns {string[]}
- */
-function traditionElementsOf(traditions) {
-  if (!Array.isArray(traditions)) return [];
-  /** @type {Set<string>} */
-  const set = new Set();
-  for (const rec of traditions) {
-    if (!rec || typeof rec !== 'object' || /** @type {Record<string, unknown>} */ (rec).suppressedBy) continue;
-    const motif = /** @type {Record<string, unknown>} */ (rec).coreMotif;
-    const el = motif && typeof motif === 'object' && typeof /** @type {Record<string, unknown>} */ (motif).element === 'string'
-      ? String(/** @type {Record<string, unknown>} */ (motif).element) : '';
-    if (el) set.add(el);
-  }
-  return [...set].sort();
-}
-
-/**
  * Build a settlement's CULTURE VECTOR from CURRENT worldState (never the frozen
  * digest): dominant-deity axes, W0 alignment, economic character, governing archetype
- * + identity, and (Wave C) its active tradition motif signature. Pure live read.
+ * + identity. Pure live read.
  * @param {MigSnapItem} item @param {Record<string, unknown>} worldState
  * @returns {CultureVector}
  */
@@ -169,7 +111,6 @@ export function buildCultureVector(item, worldState) {
     economy01: clamp01(econCapacity),
     archetype: factionArchetype(governing || settlement?.powerStructure?.governingName || null),
     governingName: String(settlement?.powerStructure?.governingName || ''),
-    traditionElements: traditionElementsOf(settlement?.traditions),
   };
 }
 
@@ -237,7 +178,8 @@ function buildDestinationCandidate({ digest, worldState, originId, destItem, ori
 
   // Congestion pressure (§II.3-3 brake input): the hub's pull decays as it fills.
   const K = MIGRATION_KERNEL_TUNING;
-  const sizeSat = sizeSaturationOf(destItem?.settlement, worldState, destId);
+  const pop = Math.max(0, num(destItem?.settlement?.population, 0));
+  const sizeSat = clamp01(pop / K.SATURATION_POP);
   const foodDeficit = clamp01(num(pIndex.get(destId, 'food')?.score, 0));
   const crime = clamp01(num(pIndex.get(destId, 'crime')?.score, 0));
   const capacityPressure01 = clamp01(Math.max(
@@ -284,40 +226,6 @@ export function originTolerance(originItem, reachableCount) {
     /** @type {Parameters<typeof storageCapacityMonths>[0]} */ (/** @type {unknown} */ (settlement))), 12));
   const granary01 = clamp01(storageMonths / capMonths);
   return carryingCapacityTolerance({ prosperity01, connectivity01, granary01 });
-}
-
-/**
- * coherence-15: the origin's criminal-network GRIP (0..1) — the stamped thievesGuildStrength, or a
- * floor read from the criminalCaptureState ladder (corrupted/capture) when the guild stamp is absent.
- * A DIRECT settlement read: importing supplyKernel's criminalStrength01Of would CYCLE (supplyKernel
- * already imports buildCultureVector from this module). Pure, total.
- * @param {{ thievesGuildStrength?: number, powerStructure?: (Record<string, unknown>|null) }|null|undefined} settlement
- * @returns {number}
- */
-function originCriminalGrip01(settlement) {
-  const s = settlement || {};
-  const guild = num(s.thievesGuildStrength, 0);
-  if (guild > 0) return clamp01(guild);
-  const cap = String((s.powerStructure || {}).criminalCaptureState || 'none');
-  return cap === 'capture' ? 0.85 : cap === 'corrupted' ? 0.6 : 0;
-}
-
-/**
- * coherence-15: a corruption-riddled origin sheds harder — the underworld's grip LOWERS the
- * carrying-capacity tolerance (a ≤1 multiplier on τ ⇒ a higher origin death rate in planMigration).
- * DARK unless migrationCorruptionPushEnabled is lit (a VIRTUAL flag, absent from
- * DEFAULT_SIMULATION_RULES — thievesGuildStrength/captureState are PRESENT in any corruption-lit
- * world, so a bare signal-absent multiplier would NOT be byte-identical; the flag is the gate) ⇒ 1;
- * also 1 when the origin carries no criminal grip. Pure.
- * @param {Record<string, unknown>} worldState
- * @param {{ thievesGuildStrength?: number, powerStructure?: (Record<string, unknown>|null) }|null|undefined} settlement
- * @returns {number}
- */
-export function migrationCorruptionPushMult(worldState, settlement) {
-  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
-  if (!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).migrationCorruptionPushEnabled === true)) return 1;
-  const grip = originCriminalGrip01(settlement);
-  return grip > 0 ? 1 - MIGRATION_KERNEL_TUNING.CORRUPTION_PUSH_MAX * grip : 1;
 }
 
 // ── RELEASE — credit the in-transit arrivals that have landed (early) ──────────
@@ -482,8 +390,7 @@ export function dispatchMigrations({ events, snapshot, pIndex, digest, worldStat
       if (cand) candidates.push(cand);
     }
 
-    // coherence-15: a corruption-captured origin sheds harder (×1 when the flag is dark or no grip).
-    const tolerance = originTolerance(originItem, reachable.length) * migrationCorruptionPushMult(worldState, originItem.settlement);
+    const tolerance = originTolerance(originItem, reachable.length);
     const plan = planMigration({
       originId, departures: loss, tolerance, candidates, season,
       rng: rng && typeof rng.fork === 'function' ? rng.fork(`migration:${originId}:${tick}`) : null,

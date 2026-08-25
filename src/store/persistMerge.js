@@ -19,28 +19,16 @@
  * @returns {any} the merged state the store adopts on rehydrate
  */
 import { DEFAULT_CONFIG } from './configSlice.js';
-import { DEFAULT_DISPLAY_PREFS } from './displayPrefsSlice.js';
-import {
-  inferLegacyUserContentTunableIntent,
-  normalizeUserContentTunableIntent,
-} from '../domain/content/userContentTunableIntent.js';
 
 export function mergePersistedState(persistedState, currentState) {
   const persisted = /** @type {Record<string, any>} */ (persistedState || {});
   const current = /** @type {Record<string, any>} */ (currentState || {});
-  const configExplicitFields = Object.hasOwn(persisted, 'configExplicitFields')
-    ? normalizeUserContentTunableIntent(persisted.configExplicitFields)
-    : inferLegacyUserContentTunableIntent(persisted.config);
   return {
     ...current,
     ...persisted,
     // Deep-merge config over DEFAULT_CONFIG so newly-added default keys survive for a
     // returning user whose persisted config predates them.
     config: { ...DEFAULT_CONFIG, ...(persisted.config || {}) },
-    // Pre-intent blobs can prove only non-default authored values. Default-valued
-    // fields stay unmarked so an environment can supply its own defaults rather
-    // than every materialized DEFAULT_CONFIG key becoming an accidental veto.
-    configExplicitFields,
     // The toggle maps default to {} today, so this currently equals the shallow merge —
     // but it makes them robust the moment any gains a seeded default, closing the same
     // class for those keys too.
@@ -48,10 +36,5 @@ export function mergePersistedState(persistedState, currentState) {
     categoryToggles:    { ...(current.categoryToggles || {}),    ...(persisted.categoryToggles || {}) },
     goodsToggles:       { ...(current.goodsToggles || {}),       ...(persisted.goodsToggles || {}) },
     servicesToggles:    { ...(current.servicesToggles || {}),    ...(persisted.servicesToggles || {}) },
-    // Same cohort-fork cure as `config`, for the persisted display-preference bag
-    // (R-5b): a blob written before a preference existed — including one written
-    // before the bag itself existed — backfills to the shipped default instead of
-    // reading undefined at the consumer.
-    displayPrefs:       { ...DEFAULT_DISPLAY_PREFS, ...(persisted.displayPrefs || {}) },
   };
 }

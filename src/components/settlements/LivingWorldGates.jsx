@@ -35,15 +35,13 @@
  * control, it does not die).
  */
 import { useId, useMemo, useState } from 'react';
-import { HelpCircle } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 // code-quality-6: import the leaf, not the 22-module worldPulse barrel — a static
 // barrel import would drag the whole pulse engine into this component's chunk.
 import { normalizeSimulationRules } from '../../domain/worldPulse/simulationRules.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import Button from '../primitives/Button.jsx';
-import IconButton from '../primitives/IconButton.jsx';
-import { INK, BODY, MUTED, BORDER2, CARD, GOLD, sans, FS, SP } from '../theme.js';
+import { INK, BODY, MUTED, BORDER2, CARD, GOLD, sans, FS, R, SP } from '../theme.js';
 
 export const LIVING_WORLD_GATES = Object.freeze([
   Object.freeze({
@@ -62,15 +60,11 @@ export const LIVING_WORLD_GATES = Object.freeze([
     key: 'faithSpreadEnabled',
     label: 'Faith spread',
     moment: 'pantheon_preview',
-    description: 'Faith crosses BETWEEN settlements: a dominant creed spreads along trade, alliance, and war ties into its neighbours. Off: each settlement still grows its own pantheon, but no creed reaches across the borders.',
+    description: 'Faith crosses BETWEEN settlements — a dominant creed spreads along trade, alliance, and war ties into its neighbours. Off: each settlement still grows its own pantheon, but no creed reaches across the borders.',
   }),
 ]);
 
 const DRIFT_REASON = 'Needs Relationship drift: war is a relationship dynamic, so a frozen web cannot raise fronts.';
-// GUIDE-2b — the geography control's teaching, surfaced in the in-theme help
-// panel below (was a native title= OS tooltip; the deep title tranche migrates
-// text-bearing controls off foreign chrome onto the study's own cloth).
-const GEOGRAPHY_HELP = 'Map geography freezes this realm’s territories, routes, and distances into canon the simulation reads. Re-map to refreeze after new placements.';
 
 /**
  * Phase 5.5 KEYSTONE — the ENTITLED spatial opt-in, surfaced beside the living-
@@ -136,7 +130,9 @@ function SpatialCanonGate({ campaign, canWrite }) {
         variant={mapped ? 'gold' : 'secondary'}
         size="sm"
         busy={busy}
-        aria-label={mapped ? `Geography mapped, spatial canon v${version}` : 'Map geography'}
+        title={mapped
+          ? `Geography mapped (spatial canon v${version}). Re-map to refreeze after new placements.`
+          : 'Freeze this realm’s geography — territories, routes, and distances become canon the simulation reads.'}
         onClick={onClick}
         style={{ fontSize: FS.xxs, fontWeight: 900, minHeight: 26, padding: '4px 8px' }}
       >
@@ -195,9 +191,10 @@ function Gate({ gate, rules, campaignId, canWrite, busyKey, setBusyKey }) {
     <label
       htmlFor={controlId}
       data-testid={`living-world-gate-${gate.key}`}
+      title={blockedByDrift ? DRIFT_REASON : gate.description}
       style={{
         display: 'flex', alignItems: 'center', gap: 6, padding: '4px 8px',
-        border: `1px solid ${checked ? GOLD : BORDER2}`,
+        border: `1px solid ${checked ? GOLD : BORDER2}`, borderRadius: R.md,
         background: checked ? 'rgba(201,162,76,0.12)' : CARD,
         cursor: canWrite && !blockedByDrift ? 'pointer' : 'default',
         opacity: blockedByDrift ? 0.6 : 1,
@@ -221,37 +218,6 @@ function Gate({ gate, rules, campaignId, canWrite, busyKey, setBusyKey }) {
 }
 
 /**
- * The in-theme help panel — GUIDE-2b's replacement for the native title= OS
- * tooltips the gates and the geography button used to carry. Comprehension-
- * first (visible on demand, mobile-reachable — a hover title reached neither),
- * rendered from the study's own tokens rather than foreign chrome. The gate
- * descriptions are the single source; the war gate appends its drift
- * dependency, and the spatial control speaks last.
- */
-function LivingWorldHelp() {
-  return (
-    <div
-      role="note"
-      data-testid="living-world-help"
-      style={{ display: 'grid', gap: 6, padding: '7px 9px', border: `1px solid ${BORDER2}`, background: CARD }}
-    >
-      {LIVING_WORLD_GATES.map(g => (
-        <div key={g.key} style={{ display: 'grid', gap: 1 }}>
-          <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>{g.label}</span>
-          <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 600, lineHeight: 1.45 }}>
-            {g.key === 'warLayerEnabled' ? `${g.description} ${DRIFT_REASON}` : g.description}
-          </span>
-        </div>
-      ))}
-      <div style={{ display: 'grid', gap: 1 }}>
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>Map geography</span>
-        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 600, lineHeight: 1.45 }}>{GEOGRAPHY_HELP}</span>
-      </div>
-    </div>
-  );
-}
-
-/**
  * @param {{ campaign?: any, canWrite?: boolean, showHint?: boolean }} props
  *   campaign: the owning campaign (reads worldState.simulationRules).
  *   canWrite: canManageCampaigns for the current user (premium write gate).
@@ -259,7 +225,6 @@ function LivingWorldHelp() {
  */
 export default function LivingWorldGates({ campaign, canWrite = false, showHint = false }) {
   const [busyKey, setBusyKey] = useState(null);
-  const [helpOpen, setHelpOpen] = useState(false);
   const rules = useMemo(
     () => normalizeSimulationRules(campaign?.worldState?.simulationRules),
     [campaign],
@@ -285,16 +250,7 @@ export default function LivingWorldGates({ campaign, canWrite = false, showHint 
           />
         ))}
         <SpatialCanonGate campaign={campaign} canWrite={canWrite} />
-        <IconButton
-          Icon={HelpCircle}
-          label="About the living-world controls"
-          tone="ghost"
-          size="sm"
-          pressed={helpOpen}
-          onClick={() => setHelpOpen(o => !o)}
-        />
       </div>
-      {helpOpen && <LivingWorldHelp />}
       {showHint && driftOff && (
         <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}>
           Relationship drift is off: settlements keep evolving on their own, but the ties between them hold until you change them.

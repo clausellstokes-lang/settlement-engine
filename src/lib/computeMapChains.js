@@ -8,11 +8,7 @@
  * edges — otherwise there's nothing to draw between. Chains are pairwise
  * (length 2 path); multi-hop tracing can come later if useful.
  *
- * ChainEdges.jsx consumes this shape directly (it calls computeMapChains in a
- * useMemo over savedSettlements + placements — there is no supplyChains store
- * slice; see its header). This module is deliberately TIER-BLIND: the mapChains
- * premium gate wraps the affordances (MapOverlay render + layer toggles), never
- * this derivation — pinned by tests/components/mapChainsTierGate.test.jsx.
+ * ChainEdges.jsx consumes this shape directly via `useStore(s => s.supplyChains)`.
  */
 
 import { CHAIN_DEFS, buildChainEdges } from './supplyChains.js';
@@ -32,6 +28,12 @@ export function computeMapChains(saves, placements) {
 
   const placedSaves = saves.filter(s => s?.id && placedIds.has(String(s.id)));
 
+  const byName = new Map();
+  for (const s of placedSaves) {
+    const name = s.name || s.settlement?.name;
+    if (name) byName.set(name, s);
+  }
+
   const out = [];
   const seen = new Set();  // dedupe symmetric pairs per chain/direction
 
@@ -44,12 +46,10 @@ export function computeMapChains(saves, placements) {
 
       const edges = buildChainEdges(settA, settB);
       for (const e of edges) {
-        // buildChainEdges returns {from, to} as display NAMES, but we called it
-        // with (settA, settB) mapping to saves (a, b). Resolve the endpoints by
-        // the edge's direction rather than by name — a name lookup would misroute
-        // (or self-edge) whenever two placed settlements share a display name.
-        const fromSave = e.direction === 'B→A' ? b : a;
-        const toSave   = e.direction === 'B→A' ? a : b;
+        // buildChainEdges returns {from, to} as names — map back to ids.
+        const fromSave = byName.get(e.from);
+        const toSave   = byName.get(e.to);
+        if (!fromSave || !toSave) continue;
 
         const key = `${e.chainId}:${fromSave.id}→${toSave.id}`;
         if (seen.has(key)) continue;

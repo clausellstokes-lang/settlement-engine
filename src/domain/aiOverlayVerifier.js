@@ -43,7 +43,7 @@ import { walkUserEdits } from './userEdits.js';
 
 /**
  * An entity node the AI overlay might touch (npc / faction / institution /
- * root hook / condition / supply chain). Identity is carried on `id`, `name`, or
+ * hook / condition / supply chain). Identity is carried on `id`, `name`, or
  * the legacy `faction` alias; canon-status fields are inherited so the same
  * value can be handed to {@link tagEntityCanon}.
  * @typedef {import('./canonStatus.js').CanonTaggable & {
@@ -98,13 +98,8 @@ export const VIOLATION_KINDS = Object.freeze([
 // ── Helpers ─────────────────────────────────────────────────────────────
 
 /**
- * Stable identifier for an entity: explicit `id` first, then `faction`,
- * then `name`. That order is NOT arbitrary — it is rulingPower.nameOf's
- * precedence (`.faction || .name`), and this key must agree with it: a
- * powerStructure.factions record's canonical display name lives in
- * `.faction`, while `.name` is a legacy alias some records also carry.
- * Reading the alias first would key a renamed faction under its stale name
- * and misclassify the rename as a remove+invent pair.
+ * Stable identifier for an entity: explicit `id` first, then `name`,
+ * then `faction` (legacy alias used by some power-structure entries).
  * The same identity function MUST be used for both sides so we don't
  * spuriously flag rename-as-id-change.
  */
@@ -115,8 +110,8 @@ export const VIOLATION_KINDS = Object.freeze([
 function entityKey(e) {
   if (!e || typeof e !== 'object') return null;
   if (e.id != null) return `id:${String(e.id)}`;
-  if (typeof e.faction === 'string' && e.faction.length) return `name:${e.faction}`;
   if (typeof e.name === 'string' && e.name.length) return `name:${e.name}`;
+  if (typeof e.faction === 'string' && e.faction.length) return `name:${e.faction}`;
   return null;
 }
 
@@ -125,7 +120,7 @@ function entityKey(e) {
  * @returns {unknown}
  */
 function displayName(e) {
-  return (e && typeof e === 'object' && (e.faction || e.name)) || null;
+  return (e && typeof e === 'object' && (e.name || e.faction)) || null;
 }
 
 /**
@@ -365,7 +360,7 @@ function compareUserFields(original, refined) {
     if (expected === undefined) continue;
     if (expected === actual) continue;
     const ent = locateEntity(refined, kind, entityIndex) || locateEntity(original, kind, entityIndex);
-    const label = ent?.faction || ent?.name || (kind === 'settlement' ? 'settlement' : `#${entityIndex}`);
+    const label = ent?.name || ent?.faction || (kind === 'settlement' ? 'settlement' : `#${entityIndex}`);
     violations.push({
       kind: 'changed_user_field',
       field: kind === 'settlement' ? path : `${kind}[${entityIndex}].${path}`,
@@ -480,9 +475,7 @@ export function verifyAiOverlay(original, refined) {
   // Root-level facts.
   violations.push(...compareRootFacts(original, refined));
 
-  // Entity arrays — institutions, factions, npcs, ROOT hooks, chains,
-  // conditions. `dmCompass.hooks` is intentionally a different nested address:
-  // AI-authored compass prompts never enter this root entity contract.
+  // Entity arrays — institutions, factions, npcs, hooks, chains, conditions.
   violations.push(...compareEntityArrays('institutions', original.institutions, refined.institutions));
   violations.push(...compareEntityArrays(
     'powerStructure.factions',

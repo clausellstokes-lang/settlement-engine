@@ -8,10 +8,6 @@
 import { deriveAllActiveConditions } from '../activeConditions.js';
 import { deriveCausalState, compareCausalState } from '../causalState.js';
 import { deriveAllSupplyChainStates } from '../supplyChainState.js';
-import {
-  nativeSemanticDepletedResourceKeys,
-  nativeSemanticResourceKeys,
-} from '../content/customContentSemanticAuthority.js';
 import { normalizeGood, normalizeGoodsList } from './goodsCatalog.js';
 import { TIER_ORDER } from '../../data/constants.js';
 
@@ -37,11 +33,7 @@ const UNHEALTHY_CHAIN_STATUSES = new Set(['strained', 'scarce', 'blocked', 'capt
  * @property {unknown[]} [_cutRoutes]
  * @property {string} [tradeRouteAccess]
  * @property {string[]} [nearbyResources]
- * @property {string[]} [nearbyResourcesNative]
- * @property {string[]} [nearbyResourcesCustom]
- * @property {string[]} [nearbyResourcesDepleted]
- * @property {string[]} [nearbyResourcesNativeDepleted]
- * @property {Record<string, string>} [nearbyResourcesState]
+ * @property {Record<string, unknown>} [nearbyResourcesState]
  */
 /**
  * @typedef {Object} RegionSettlement
@@ -190,63 +182,22 @@ function importLabels(settlement) {
 /** @param {RegionSettlement | null | undefined} settlement @returns {RegionGoodInput[]} */
 function localProductionLabels(settlement) {
   const econ = economicOf(settlement);
-  const nativeResources = nativeSemanticResourceKeys(
-    /** @type {Record<string, unknown>} */ (settlement?.config || {}),
-  );
   return [
     ...(econ.localProduction || []),
-    ...nativeResources.map(resource => ({ id: resource, label: resource })),
+    ...((settlement?.config?.nearbyResources || []).map(r => ({ id: r, label: r }))),
   ];
 }
 
 /** @param {RegionSettlement | null | undefined} settlement @returns {RegionGood[]} */
 function resourceDepletionState(settlement) {
-  const config = settlement?.config || {};
-  const state = config.nearbyResourcesState || {};
-  const nativeResources = nativeSemanticResourceKeys(
-    /** @type {Record<string, unknown>} */ (config),
-    Array.isArray(config.nearbyResources)
-      ? config.nearbyResources
-      : (
-          Array.isArray(config.nearbyResourcesNative)
-            ? config.nearbyResourcesNative
-            : Object.keys(state)
-        ),
-  );
-  const nativeByKey = new Map(
-    nativeResources.map(resource => [
-      String(resource).toLowerCase(),
-      String(resource),
-    ]),
-  );
-  const depletedByKey = new Map(
-    nativeSemanticDepletedResourceKeys(
-      /** @type {Record<string, unknown>} */ (config),
-    ).map(resource => [
-      String(resource).toLowerCase(),
-      String(resource),
-    ]),
-  );
-  // State-map reconciliation is a legacy compatibility path only. In current
-  // saves its mixed display row may be depleted solely because an exact custom
-  // namesake is depleted; the native-depletion sidecar is authoritative.
-  if (!Array.isArray(config.nearbyResourcesNativeDepleted)) {
-    for (const [label, status] of Object.entries(state)) {
-      const key = String(label).toLowerCase();
-      if (!nativeByKey.has(key)) continue;
-      if (status === 'depleted') {
-        const nativeLabel = nativeByKey.get(key);
-        if (nativeLabel) depletedByKey.set(key, nativeLabel);
-      } else {
-        depletedByKey.delete(key);
-      }
-    }
-  }
+  const state = settlement?.config?.nearbyResourcesState || {};
   /** @type {RegionGood[]} */
   const depleted = [];
-  for (const label of depletedByKey.values()) {
-    const good = normalizeGood(label);
-    if (good) depleted.push(good);
+  for (const [label, status] of Object.entries(state)) {
+    if (status === 'depleted') {
+      const good = normalizeGood(label);
+      if (good) depleted.push(good);
+    }
   }
   return uniqueById(depleted);
 }

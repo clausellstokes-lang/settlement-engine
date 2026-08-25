@@ -22,7 +22,7 @@
  * with neutral defaults. Never throws.
  */
 
-import { bandForDimension, clamp01 } from './bands.js';
+import { bandFor, clamp01 } from './bands.js';
 // Import the posture LEAF, not dossierViewModel — this module is EAGER
 // (store → event pipeline), and the full display model would drag ~35 kB
 // (dossierViewModel + magicProfile) into the first-paint entry closure
@@ -174,7 +174,7 @@ function deriveResilience(s) {
     risks.push(`${impaired} impaired institution${impaired === 1 ? '' : 's'}`);
   }
 
-  return finalize('resilience', value, drivers, risks);
+  return finalize(value, drivers, risks);
 }
 
 // ── Volatility ─────────────────────────────────────────────────────────────
@@ -252,7 +252,7 @@ function deriveVolatility(s) {
     risks.push(`${stresses.length} active stressors`);
   }
 
-  return finalize('volatility', value, drivers, risks);
+  return finalize(value, drivers, risks);
 }
 
 // ── External Threat ────────────────────────────────────────────────────────
@@ -270,14 +270,14 @@ function deriveExternalThreat(s) {
   /** @type {string[]} */
   const risks = [];
 
-  const monsterThreat = s.config?.monsterThreat || 'heartland';
+  const monsterThreat = s.config?.monsterThreat || 'safe';
   if (monsterThreat === 'plagued') {
     value += 30;
     risks.push('Region is plagued by monsters');
   } else if (monsterThreat === 'frontier') {
     value += 15;
     risks.push('Frontier conditions — monsters present');
-  } else if (monsterThreat === 'heartland') {
+  } else if (monsterThreat === 'safe' || monsterThreat === 'civilized') {
     value -= 5;
     drivers.push('Monster activity minimal');
   }
@@ -296,7 +296,7 @@ function deriveExternalThreat(s) {
   const stressList = canonStressors(s);
   const threatStresses = stressList.filter(st => {
     const t = String(st.type || st.name || '').toLowerCase();
-    return t.includes('siege') || t.includes('occupied') || t.includes('raid')
+    return t.includes('siege') || t.includes('occupation') || t.includes('raid')
         || t.includes('plague') || t.includes('war') || t.includes('refugee');
   });
   if (threatStresses.length > 0) {
@@ -304,7 +304,7 @@ function deriveExternalThreat(s) {
     risks.push(`Active threat: ${threatStresses.map(t => t.name || t.type).join(', ')}`);
   }
 
-  return finalize('externalThreat', value, drivers, risks);
+  return finalize(value, drivers, risks);
 }
 
 // ── Resource Pressure ──────────────────────────────────────────────────────
@@ -352,7 +352,7 @@ function deriveResourcePressure(s) {
     drivers.push(`${imports} imports via ${tradeAccess}`);
   }
 
-  return finalize('resourcePressure', value, drivers, risks);
+  return finalize(value, drivers, risks);
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -386,22 +386,16 @@ function countByStatus(items, statuses, { excludeCovertOnly = false } = {}) {
  * label and clamped value. Centralizing this means every dimension comes
  * out of derivation in the same shape — no surprises for the UI consumer.
  *
- * The band is ORIENTED by the dimension's polarity (bands.js DIM_POLARITY).
- * Three of these four dimensions are lower-is-better; banding them through the
- * bare higher-is-better ladder printed the opposite of the truth on every
- * surface that reads `dim.band`. The `value` is unchanged — only the word.
- *
- * @param {string} key  the dimension key, which carries its polarity
  * @param {number} rawValue
  * @param {string[]} drivers
  * @param {string[]} risks
  * @returns {StateDimension}
  */
-function finalize(key, rawValue, drivers, risks) {
+function finalize(rawValue, drivers, risks) {
   const value = Math.round(clamp01(rawValue));
   return {
     value,
-    band: bandForDimension(key, value),
+    band: bandFor(value),
     drivers: drivers.length ? drivers : ['No notable factors'],
     risks,
   };

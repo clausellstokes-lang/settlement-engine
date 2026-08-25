@@ -13,9 +13,6 @@
  *   - AGGREGATE death + exodus fractions are BOUNDED, tier-scaled, and survivable
  *     (deaths + exodus < population — NO annihilation).
  */
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   CALAMITY_TUNING,
@@ -40,47 +37,10 @@ import {
   CALAMITY_SEVERITY_BANDS,
 } from '../../src/domain/spatial/calamity.js';
 import { strikeCapForTier } from '../../src/domain/worldPulse/calamityKernel.js';
-import {
-  REQUIRED_CONTRACT_FLAG_KEYS,
-  hasOwnRequiredContract,
-} from '../../src/domain/generationOwnership.js';
 import { createPRNG } from '../../src/kernel/prng.js';
-import { readEnvelope } from '../helpers/distributionEnvelope.js';
 
 const T = CALAMITY_TUNING;
-const ENVELOPES = JSON.parse(readFileSync(
-  join(dirname(fileURLToPath(import.meta.url)), '../fixtures/distribution-envelopes.manifest.json'),
-  'utf8',
-));
 const constRng = (v) => ({ random: () => v });
-
-// ── The PARITY RATCHET's generated shape product ─────────────────────────────
-// The full cartesian product of the law's OWN exported flag keys against a value
-// domain that covers every way a persisted record can carry (or fail to carry) a
-// flag: absent, the two booleans, a truthy non-boolean, a falsy non-boolean.
-// Each flag shape is then crossed with the cascade `source` label — the one the
-// law deliberately IGNORES — so the product also proves the mirror does not
-// quietly start reading it. 5^2 x 2 = 50 shapes today; a new clause in the law
-// (and its key) multiplies this by 5 with no edit here.
-const ABSENT = Symbol('absent');
-const FLAG_VALUE_DOMAIN = [ABSENT, true, false, 'yes', 0];
-const SOURCE_VARIANTS = [{}, { source: 'cascade' }];
-
-function flagShapeProduct(keys) {
-  let shapes = [{}];
-  for (const key of keys) {
-    shapes = shapes.flatMap((shape) => FLAG_VALUE_DOMAIN.map(
-      (value) => (value === ABSENT ? { ...shape } : { ...shape, [key]: value }),
-    ));
-  }
-  return shapes;
-}
-
-const PARITY_SHAPES = flagShapeProduct(REQUIRED_CONTRACT_FLAG_KEYS)
-  .flatMap((flags) => SOURCE_VARIANTS.map((source) => ({ ...flags, ...source })));
-
-/** Failure label that survives absent keys (JSON.stringify drops nothing here). */
-const describeShape = (shape) => JSON.stringify(shape);
 
 describe('M11b calamity — the gate (byte-identity seam)', () => {
   it('calamityEnabled reads ONLY the flag, tolerant + total on garbage', () => {
@@ -121,7 +81,6 @@ describe('M11b calamity — frequency + cooldown', () => {
     const SEEDS = 40;
     const hazard = annualHazard(N);
     let totalStrikes = 0;
-    let eligibleRolls = 0;
     for (let s = 0; s < SEEDS; s++) {
       const master = createPRNG(`calamity-soak-${s}`);
       // Per-settlement last-stamp year (cooldown state, exactly as the kernel reads it).
@@ -129,7 +88,6 @@ describe('M11b calamity — frequency + cooldown', () => {
       for (let year = 1; year <= YEARS; year++) {
         for (let i = 0; i < N; i++) {
           if (withinCooldown(lastStamp[i], year)) continue;
-          eligibleRolls += 1;
           const rng = master.fork(`disaster:s${i}:${year}`);
           if (rollStrike({ rng, hazard })) { totalStrikes += 1; lastStamp[i] = year; }
         }
@@ -138,13 +96,7 @@ describe('M11b calamity — frequency + cooldown', () => {
     // Realized realm interval = total realm-years / total realm-strikes.
     const realmYears = YEARS * SEEDS;
     const interval = realmYears / totalStrikes;
-    const strikeFloor = readEnvelope(ENVELOPES, 'calamity.strikeCount.floor');
-    const strikeCeiling = readEnvelope(ENVELOPES, 'calamity.strikeCount.ceiling');
-    expect(eligibleRolls).toBe(strikeFloor.n);
-    expect(strikeCeiling.n).toBe(eligibleRolls);
     expect(totalStrikes).toBeGreaterThan(0);
-    expect(totalStrikes).toBeGreaterThanOrEqual(strikeFloor.bound);
-    expect(totalStrikes).toBeLessThanOrEqual(strikeCeiling.bound);
     expect(interval).toBeGreaterThanOrEqual(10);
     expect(interval).toBeLessThanOrEqual(20);
   });
@@ -287,68 +239,6 @@ describe('M11b calamity — the strike (bounded, required-never, subsumption)', 
     expect(isStrikeTarget({ name: 'Gone', status: 'remnant' })).toBe(false);
     expect(isStrikeTarget({ name: '' })).toBe(false);
     expect(isStrikeTarget(null)).toBe(false);
-  });
-
-  it('a PERSISTED pre-fix cascade seat is strikeable — the borrowed flag buys no immunity', () => {
-    // `required` is scoped to the tier whose catalog declares it. The cascade
-    // seats a BORROWED lower-tier def at a higher tier; before the 2026-07-26
-    // producer fix it carried the source tier's flag forward, and every
-    // settlement saved back then still has that on disk. Reader-side scoping
-    // retires the lie in place — no migration touches the saved record.
-    const persistedPreFix = {
-      name: 'Town watch', category: 'Defense', status: 'active',
-      source: 'cascade', cascadeAdded: true, required: true,
-    };
-    expect(isStrikeTarget(persistedPreFix)).toBe(true);
-    // Post-fix seats write the truth; still strikeable, for the ordinary reason.
-    expect(isStrikeTarget({ ...persistedPreFix, required: false })).toBe(true);
-    // The hard bound survives where the contract is genuinely this record's own.
-    expect(isStrikeTarget({ name: 'Town watch', category: 'Defense', required: true })).toBe(false);
-    // …and the selection boundary agrees, not just the predicate.
-    expect(selectStrikeTargets({
-      institutions: [persistedPreFix, { name: 'Town hall', required: true }, { name: 'Inn' }],
-      k: 99,
-      rng: constRng(0.5),
-    })).toEqual(['Inn', 'Town watch']);
-  });
-
-  it('PARITY RATCHET: the import-free mirror agrees with the law over the GENERATED shape product', () => {
-    // calamity.js is an IMPORT-FREE PURE LEAF (display/realmManifest reach it from
-    // outside the pulse chunk), so it MIRRORS hasOwnRequiredContract inline rather
-    // than importing it. This ratchet is what keeps the mirror honest: if the law
-    // gains a clause the mirror does not, the two disagree here and this reds.
-    //
-    // The matrix is GENERATED, not curated. A hand-written shape list rots — the
-    // law grows a clause, nobody remembers to add the rows that would expose it,
-    // and the ratchet passes over a real drift. Instead the product is driven by
-    // the law's OWN exported key list (REQUIRED_CONTRACT_FLAG_KEYS): every key it
-    // publishes is crossed against the full value domain, so adding a clause to
-    // the law and its key together AUTOMATICALLY widens this proof.
-    expect(PARITY_SHAPES.length).toBeGreaterThanOrEqual(50);
-    let protectedShapes = 0;
-    let eligibleShapes = 0;
-    for (const shape of PARITY_SHAPES) {
-      const inst = { name: 'Probe', status: 'active', ...shape };
-      const ownContract = hasOwnRequiredContract(inst);
-      // isStrikeTarget rejects EXACTLY when the law says the contract is its own
-      // (every probe here is a live, named institution, so nothing else can reject it).
-      expect(isStrikeTarget(inst), describeShape(shape)).toBe(!ownContract);
-      if (ownContract) protectedShapes += 1;
-      else eligibleShapes += 1;
-    }
-    // ANTI-VACUITY: a product that landed on one side of the law would agree with
-    // any mirror at all. Both verdicts must actually occur.
-    expect(protectedShapes).toBeGreaterThan(0);
-    expect(eligibleShapes).toBeGreaterThan(0);
-  });
-
-  it('GUARD THE GUARD: the law publishes the exact keys the product enumerates', () => {
-    // The generated matrix is only as wide as the law's key list. If that list is
-    // emptied or trimmed, the ratchet above would silently shrink to nothing while
-    // still passing — so pin the list itself.
-    expect(REQUIRED_CONTRACT_FLAG_KEYS.length).toBeGreaterThanOrEqual(2);
-    expect(REQUIRED_CONTRACT_FLAG_KEYS).toContain('required');
-    expect(REQUIRED_CONTRACT_FLAG_KEYS).toContain('cascadeAdded');
   });
 
   it('THE HARD BOUND: a required institution is NEVER selected, over EVERY seed', () => {

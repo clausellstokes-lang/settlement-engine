@@ -10,7 +10,6 @@
  * it forces the DM to read past empty noise on every chapter opener.
  */
 import { cap, humanize, label as labelOf } from './format.js';
-import { coverageRatioPct } from './foodCoverage.js';
 
 // ── Overview ────────────────────────────────────────────────────────────────
 export function overviewHeadline(o, identity) {
@@ -28,7 +27,7 @@ export function overviewHeadline(o, identity) {
   }
   // Viability flag if explicit
   if (o.viability === false) {
-    parts.push('with viability flagged as marginal or worse');
+    parts.push('— viability flagged as marginal or worse');
   }
   if (!parts.length) return null;
   return parts.join(' ') + '.';
@@ -55,16 +54,13 @@ export function powerHeadline(power, _identity) {
   // reads were always undefined so the headline never named the governing body.
   if (top?.name) bits.push(`${top.name}${govType ? ` (${govType.toLowerCase()})` : ''} governs`);
   else if (govType) bits.push(`${govType} rule`);
-  // The ', with …' continuation weaves onto a LEAD clause — only add it when a lead
-  // exists, or a nameless governing faction with no governmentType (no lead pushed)
-  // would make the comma clause the first and only element, opening the headline on a comma.
-  if (bits.length && challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
-    bits.push(`, with ${challenger.name} pressing close behind`);
-  } else if (bits.length && factions.length > 2) {
-    bits.push(`, with ${factions.length - 1} other faction${factions.length - 1 === 1 ? '' : 's'} competing for influence`);
+  if (challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
+    bits.push(`with ${challenger.name} pressing close behind`);
+  } else if (factions.length > 2) {
+    bits.push(`${factions.length - 1} other faction${factions.length - 1 === 1 ? '' : 's'} compete for influence`);
   }
   if (!bits.length) return null;
-  return bits.join('') + '.';
+  return bits.join(' — ') + '.';
 }
 
 export function powerTone(power) {
@@ -87,9 +83,9 @@ export function economicsHeadline(eco) {
   else if (prosperity) bits.push(`${prosperity} economy`);
   if (topExport) bits.push(`anchored on ${topExport.toLowerCase()}`);
   if (fb?.deficit > 0) {
-    // Shared coverage formula (foodCoverage); the headline rounds and shows 0 when
-    // imports cover nothing.
-    const pct = Math.round(coverageRatioPct(fb.importCoverage, fb.rawDeficit) ?? 0);
+    // importCoverage is a qty; coverage% = qty ÷ pre-import gap (rawDeficit).
+    const ic = fb.importCoverage || 0;
+    const pct = ic > 0 ? Math.round((ic / (fb.rawDeficit || ic)) * 100) : 0;
     bits.push(`food deficit: imports cover ${pct}% of the gap`);
   } else if (fb?.surplus > 0) bits.push(`food surplus`);
   if (!bits.length) return null;
@@ -100,9 +96,8 @@ export function economicsTone(eco) {
   if (!eco) return 'gold';
   const fb = eco.foodBalance || {};
   if (fb?.deficit > 0) {
-    // Compare the RAW (un-rounded) ratio at the 60% boundary — rounding here would
-    // flip the tone for values like 59.6%.
-    const pct = coverageRatioPct(fb.importCoverage, fb.rawDeficit) ?? 0;
+    const ic = fb.importCoverage || 0;
+    const pct = ic > 0 ? (ic / (fb.rawDeficit || ic)) * 100 : 0;
     return pct < 60 ? 'bad' : 'warn';
   }
   return 'gold';
@@ -119,7 +114,7 @@ export function defenseHeadline(def, identity) {
   if (readiness) bits.push(`${typeof readiness === 'string' ? cap(readiness) : readiness} readiness`);
   if (avg != null) bits.push(`avg defense ${avg}/100`);
   if (def.magicDependency) bits.push('magic-dependent');
-  return `Defense for a ${tier}: ${bits.join(' · ')}.`;
+  return `Defense for a ${tier} — ${bits.join(' · ')}.`;
 }
 
 export function defenseTone(def) {
@@ -144,7 +139,7 @@ export function servicesHeadline(services) {
   }
   const sorted = Object.entries(byCat).sort((a, b) => b[1] - a[1]);
   const top2 = sorted.slice(0, 2).map(([c, n]) => `${n} ${humanize(c).toLowerCase()}`).join(', ');
-  return `${total} institution${total === 1 ? '' : 's'} on the books, heaviest in ${top2}.`;
+  return `${total} institution${total === 1 ? '' : 's'} on the books — heaviest in ${top2}.`;
 }
 
 // ── Resources ──────────────────────────────────────────────────────────────
@@ -203,7 +198,7 @@ export function npcsHeadline(npcs) {
   const top = sorted[0];
   const total = list.length;
   if (!top) return null;
-  return `${total} named figure${total === 1 ? '' : 's'}: ${top.name}${top.title ? `, ${top.title}` : ''}, the most powerful (power ${top.power}).`;
+  return `${total} named figure${total === 1 ? '' : 's'} — ${top.name}${top.title ? `, ${top.title}` : ''}, the most powerful (power ${top.power}).`;
 }
 
 // ── Hooks ──────────────────────────────────────────────────────────────────
@@ -218,7 +213,7 @@ export function hooksHeadline(hooks) {
     bySrc[k] = (bySrc[k] || 0) + 1;
   }
   const top = Object.entries(bySrc).sort((a, b) => b[1] - a[1])[0];
-  return `${all.length} plot hook${all.length === 1 ? '' : 's'} surfaced, heaviest from ${humanize(top[0]).toLowerCase()} (${top[1]}).`;
+  return `${all.length} plot hook${all.length === 1 ? '' : 's'} surfaced — heaviest from ${humanize(top[0]).toLowerCase()} (${top[1]}).`;
 }
 
 // ── Relationships ──────────────────────────────────────────────────────────

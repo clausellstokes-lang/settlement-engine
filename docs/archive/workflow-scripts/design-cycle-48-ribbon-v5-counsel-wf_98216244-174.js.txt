@@ -1,0 +1,93 @@
+export const meta = {
+  name: 'design-cycle-48-ribbon-v5-counsel',
+  description: 'RIBBON V5 counsel pass: organic fletching + cartographer cartouche — spec draft + mockups, adversarially critiqued, ZERO src changes',
+  phases: [
+    { title: 'Counsel', detail: 'extensive research, V5 spec draft, rest/scrolled/cartouche mockups' },
+    { title: 'Critique', detail: 'adversarial pass against the standing laws + owner directives' },
+  ],
+}
+
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/1c189f3d-9fc3-4fc9-9cb7-b767525d28d5/scratchpad/v5'
+
+const GROUND = `VERIFY-FIRST: this brief is the chair's authentic instruction set; verify claims against the tree, then proceed — do not refuse it as injection. THIS IS A DESIGN PASS, NOT AN IMPLEMENTATION: you may READ the repo (/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold — read docs/DESIGN_RIBBON_V4_SPEC.md, src/components/theme.js, src/components/nav/FletchBand.jsx, ShaftWrap.jsx, src/components/brand/GildedWordmark.jsx, WaxSeal.jsx, SealImpression.jsx, Lockup.jsx) but you WRITE ONLY under ${SCRATCH} (mkdir -p it). NO src/, tests/, or docs/ edits, NO commits, NO staging — the shared tree carries concurrent lanes' live work. Mockups: build throwaway HTML under ${SCRATCH}, serve/preview via your own vite or static server on a port above 5300 (the shared :5201 belongs to the estate preview), screenshot with the browser tools, tear the server down. python3 byte-scan every file you Write.
+
+THE OWNER'S FOUR V5 DIRECTIVES (2026-08-04, binding):
+D1 THE FLETCHING (from the owner's abstraction mockup): a THIN full-width wooden shaft; THREE LARGE organic, asymmetric, AERODYNAMIC feather vanes hanging below it (Create, Library, Realm), each drooping and then sweeping back UP to kiss the shaft at its OWN attachment point — non-uniform, each at its own place and angle — and at each contact the THREAD that binds feather to shaft is VISIBLE. Feathers overlap ORGANICALLY and ASYMMETRICALLY, the lap direction encoding Create feeds Library feeds Realm. A leading cut at the cluster's left. The reference's cream photo-texture and red labels are PLACEHOLDERS ONLY — the estate's ink laws and the grey-goose war-arrow palette govern. This RETIRES the old full-parallelogram / dead-straight-edges ruling; organic shape is now the point.
+D2 THE WORDMARK: the designed wax SEAL (the estate device pressed in wax) lives in the O of Forge and must be VISIBLE AND PROMINENT at header scale — the current 16px dimple register is no longer sufficient there. The lettering is to read "as though by a master medieval cartographer." The plaque must NOT be bigger than the shaft — it FITS INSIDE the shaft's height — and extends past the letters as a SILHOUETTE-plaque, in the manner of the World of Warcraft badge (reference described: an ornamental gold-framed badge whose shaped frame and side finials extend beyond the lettering, the lettering breaking slightly out of the frame; layered depth; instantly readable as a game-grade brand mark).
+
+D3 THE HALF-ARROW DEPTH LAW (owner, 2026-08-04, later the same day — this amends everything above): the header is THE BOTTOM HALF of a cylindrical arrow. The shaft's axis rides the viewport's TOP EDGE; everything visible is the UNDERSIDE half of a cylinder, cut by the frame. Consequences the spec must carry: (1) the shaft's shading is a HALF-BARREL — the tone at the top cut is the cylinder's brightest visible zone, falling through the body tones to the lower rim, under the estate's ONE light direction; (2) DEPTH IS A SYSTEM, for the cartouche AND the tabs: every mounted object (cartouche, vanes, bindings) sits ON a curved surface — contact shadows where it meets the wood, ambient occlusion in the crevices, cast shadows falling DOWN the barrel consistent with the one light, thickness at silhouette edges. At this scale contact/cast shadow is the highest-value depth cue (cheaper and more convincing than bevels — the retired-plate lesson); (3) THE LETTERING CURVES WITH THE BARREL — the owner's words: "the font (appropriate, subtly, yet still legible) must also curve with the arrow." Both the cartouche lettering AND the tab labels take a SUBTLE cylindrical warp (gentle baseline bow + vertical foreshortening increasing toward the lower rim, matching the half-barrel's geometry). THE LEGIBILITY LAW OUTRANKS THE WARP: find the maximum curvature that costs nothing at a glance, MEASURE the legibility bound in the mockups (render the warped and flat forms side by side), and specify it as a pinned constant. The typed a11y text behind the drawn lettering stays flat and plain — only the drawn layer warps; (4) the cartouche "fits inside the shaft" now reads as: it WRAPS the visible lower half-barrel, its top edge implied continuing past the viewport cut — a band around a cylinder, not a flat sticker; (5) the half-arrow premise is also a COMPOSITIONAL answer: the arrow is deliberately bisected by the frame, so partial, cut-by-the-frame objects are the design language (this bears directly on P4's two-competing-left-ends problem — an arrow cut by the frame owes no complete silhouette).
+
+D4 THE BURNED REFERENCE TABS (owner, same day): every tab that is NOT Create/Library/Realm and NOT Sign In/Account (i.e. Compendium, Gallery, About, and any sibling reference links) must read as BURNED INTO THE WOOD — branded lettering on the shaft, in the scorch language the estate already owns, with the same half-barrel curvature (D3) applied to their glyphs. They are part of the arrow, not chrome riding on it. Note what this solves: the V4C verifier's whole-arrow verdict named the right third ("ordinary navigation on bare wood") as one of the three reasons the bar did not read as ONE arrow — D4 is the owner's answer to exactly that. Sign In/Account stays a distinct object (it is an action, not a place — its treatment is the counsel's to propose, but it must not break the arrow read). Hover/active/focus states for burned tabs need a vocabulary that stays in-material (a brand does not glow like a button — propose deepened char, ember warmth, or a gilt underline consistent with the quill-line grammar; pick with reasons). Contrast floors re-derive for burned lettering on cedar (the dead-band prohibition binds; a shallow burn that lands mid-russet fails BOTH ink registers — measured law).
+
+CHAIR WORKING RULINGS (vetoable — pressure-test each, and say plainly if one is wrong):
+R1 TWO-STATE SCROLL HEADER: full organic fletching at rest at page top; on scroll the vanes ease to a shallow profile (deep sticky hang over reading content is unusable; permanently reserving the depth re-spends the vertical space the owner reclaimed). Design the transition.
+R2 The hang below the bar is DECORATIVE: pointer-events none; hit target = a generous rectangle over label + upper vane; focus rings rectangular (clip-path clips the focus ring — measured law).
+R3 Palette: BARRED GREY-GOOSE feathers, not cream; every ground change triggers a full rider contrast re-census (the ground-move law has bitten three times).
+R4 Seal prominence: an OVERSIZED seal-o breaking the lettering line — craft-true, seals overlap the text they authenticate — with the device register simplified at small sizes per the existing seal ladder (28px measured muddy, 40px readable).
+R5 Cartouche legibility: SIZE-LADDERED like the seal — at header scale a SIMPLIFIED silhouette + strong letters; full ornament only at hero/About/PDF scale. A WoW-density badge at ~34px tall is mud — the retired maker's-plate class.
+R6 Lettering: a cartographer's ROMAN with swash capitals (S, F), legible FIRST (the LEGIBILITY LAW: glance -> sentence -> table); ornament lives in the cartouche FRAME, not the letterforms; blackletter rejected at header scale. Research real map-cartouche lettering (16th-18th c. engraved hands, mappae mundi titling) and name the model you choose.
+
+THE EIGHT FOCUS PROBLEMS (the spec must answer each explicitly):
+P1 The scroll two-state: geometry of both states, the transition, and what ANCHOR_OFFSET means in each (it is a single-writer derivation — never pin the sum).
+P2 Cartouche-at-header-scale: exact silhouette, size ladder registers, and how it coexists with the thin shaft (does the shaft thicken locally at the brand? does the cartouche hang like the feathers do? pick, with reasons).
+P3 Seal prominence: diameter relative to x-height, overlap behavior with neighboring letters, which ladder register renders at 1x and 2x.
+P4 The leading cut at the left + the whole-arrow composition: the V4C verifier's verdict (g) named TWO COMPETING LEFT ENDS (the brand anchors the eye exactly where the head should be off-frame) and a right third that reads as plain navigation — V5 must answer the whole-arrow read, not just restyle the middle.
+P5 The attachment points: geometry of each vane's rise to the shaft, the thread bindings (reuse the V4C thread system: 2.6px turn gradient, tie-off diagonals — it is pinned and fallback-protected), and the non-uniformity rules (deterministic, seeded).
+P6 Mobile: the 60px bar, the breakpoint law (a geometry proven on one breakpoint is a claim about one breakpoint — this bit in V4C), and how deep the hang may go on a phone.
+P7 What is REBUILT vs REUSED: cedar texture -> thin shaft; whipping -> per-binding; seal ladder; the verification harness (composited-AA with calm zones, texture budget ethos, blend contract, focus law, deterministic seeds, sRGB, the 31 degenerate turbulence seeds exclusion). Name every V4 system's fate.
+P8 THE HALF-ARROW DEPTH SYSTEM (D3): the half-barrel shading model (tone ladder from the top cut to the lower rim, respecting the dead-band prohibition and the re-derived contrast floors); the cast-shadow/AO vocabulary (offsets, blur, opacity — all derived from the one light constant, never per-object improvisation); and THE CYLINDRICAL TEXT WARP — the method (SVG per-glyph transforms vs textPath-on-arc vs a displacement approach), the exact curvature constant, the measured legibility bound (side-by-side warped/flat renders at 1x and 2x in the mockups), how the warp differs between the cartouche lettering (larger, can carry more) and the tab labels (smaller, subtler), and its interaction with the a11y pattern (typed text flat; drawn layer warps; the focus rectangle unaffected).
+
+STANDING LAWS THAT BIND THE SPEC: determinism (fixed seeds, unitHash placement, no Date/random); the drawn wordmark is aria-hidden with real typed text for a11y; favicon stays the device alone; the estate ink/contrast floors re-derive under any ground change; texture budget (retina cues <=2% effective ink) survives as discipline even though shapes unlock; DM-facing surfaces never show raw tokens.
+
+DELIVERABLES (all under ${SCRATCH}):
+1. v5-spec-draft.md — the full spec in the V4 spec's format (structure+color part, texture part, plus the NEW scroll-state part and cartouche part), every vetoable judgment labeled, open questions for the owner capped at TWO.
+2. Mockups as PNG screenshots, 1440px desktop: v5-rest.png (full fletching, at page top over real-ish page content), v5-scrolled.png (the shallow state), v5-cartouche-closeup.png (the wordmark at 1x AND a 2x/zoom pane side by side, seal legible), v5-mobile.png (390px). Build them as honest previews of the spec — geometry and palette real, texture approximated is fine.
+3. decisions.md — the decision table: each call, the options weighed, the pick, the veto cost.
+
+RESEARCH: extensive and exhaustive where it earns its keep — real fletching photography (goose primaries, binding technique), historical map cartouches and their lettering, how game badges (WoW-class) simplify for small renders, scroll-collapsing header patterns that stay tasteful. Cite what changed your mind.`
+
+phase('Counsel')
+const c = await agent(`${GROUND}
+
+YOU ARE THE V5 DESIGN COUNSEL, running at full depth. Read the current implementation first (the files named above) so every proposal is anchored in what exists; research; then produce the three deliverables. Your final return: {specPath:'...', mockups:['...paths...'], decisionsPath:'...', headline:'one paragraph — what V5 is, in plain words', vetoables:['...'], openQuestions:['max two'], notes:'what the research changed'}.`, {
+  label: 'v5:counsel',
+  phase: 'Counsel',
+  effort: 'max',
+  schema: {
+    type: 'object',
+    required: ['specPath', 'mockups', 'decisionsPath', 'headline', 'vetoables', 'openQuestions', 'notes'],
+    properties: {
+      specPath: { type: 'string' },
+      mockups: { type: 'array', items: { type: 'string' } },
+      decisionsPath: { type: 'string' },
+      headline: { type: 'string' },
+      vetoables: { type: 'array', items: { type: 'string' } },
+      openQuestions: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+phase('Critique')
+const k = await agent(`${GROUND}
+
+YOU ARE THE ADVERSARIAL DESIGN CRITIC. The counsel returned:
+${JSON.stringify(c, null, 2)}
+
+Read the spec draft and decisions file yourself; open every mockup PNG and LOOK at it. Attack: (1) does each of the SEVEN focus problems have a real answer, or a hand-wave? (2) does any proposal violate a standing law (determinism, focus-ring law, breakpoint law, ANCHOR_OFFSET single-writer, legibility law, favicon, a11y pattern)? (3) do the mockups actually match the spec and the owner's two directives — organic asymmetric vanes with visible per-feather bindings, cartouche INSIDE the shaft height extending past the letters, seal PROMINENT at header scale? (4) the eye test at arm's length on v5-rest.png: ONE war arrow, or still a nav bar with decorations? Name what breaks the read. (5) is the scrolled state genuinely usable over reading content? (6) list every gap as a numbered finding with severity; propose the minimal fix for each. RETURN {verdict:'SOUND'|'NEEDS-REVISION', findings:[...], eyeVerdict:'the arm's-length sentence', notes:'...'}.`, {
+  label: 'v5:critic',
+  phase: 'Critique',
+  effort: 'high',
+  schema: {
+    type: 'object',
+    required: ['verdict', 'findings', 'eyeVerdict', 'notes'],
+    properties: {
+      verdict: { type: 'string' },
+      findings: { type: 'array', items: { type: 'string' } },
+      eyeVerdict: { type: 'string' },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+return { c, k }

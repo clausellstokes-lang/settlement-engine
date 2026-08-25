@@ -11,7 +11,7 @@
  * These pins drive the REAL global store (with the cloud seam stubbed), so a click
  * / drag is proven end-to-end into savedSettlements[id].settlement.mapEdits.
  */
-import { describe, test, expect, beforeAll, beforeEach, afterEach, vi } from 'vitest';
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 
 vi.mock('../../src/lib/saves.js', () => ({
@@ -20,14 +20,7 @@ vi.mock('../../src/lib/saves.js', () => ({
 
 import SettlementMapPane from '../../src/components/townMap/SettlementMapPane.jsx';
 import { useStore } from '../../src/store/index.js';
-import { preloadCampaignRuntimeForStore } from '../../src/store/campaignRuntimeBridge.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
-
-// The pane's bridge reads getCampaignForSettlement during render; since 6e7acc4d
-// that delegate THROWS until the campaign runtime preloads, and production mounts
-// the pane only behind AppViews' `campaignLazy` gate, which awaits this preload
-// (pinned by tests/store/campaignRuntimeRouteGate.test.js).
-beforeAll(async () => { await preloadCampaignRuntimeForStore(useStore); });
 
 const SAVE_ID = 'sm3-ui-save';
 
@@ -170,53 +163,5 @@ describe('SettlementMapPane — edit affordances commit to the blob', () => {
     fireEvent.pointerUp(building, { pointerId: 2, clientX: 102, clientY: 101 });
 
     expect(savedMapEdits()).toBeUndefined(); // no pin, no container
-  });
-});
-
-describe('SettlementMapPane — MAP STYLES lens switcher', () => {
-  test('view and lens controls occupy separate clickable toolbar rows', () => {
-    const { container } = render(<SettlementMapPane settlement={fixture} canEdit={false} saveId={null} />);
-    const viewSwitch = container.querySelector('[data-town-view-toggle]');
-    const lensSwitch = container.querySelector('[data-town-lens-switcher]');
-
-    expect(viewSwitch).toBeTruthy();
-    expect(lensSwitch).toBeTruthy();
-    expect(Number.parseFloat(lensSwitch.style.top))
-      .toBeGreaterThan(Number.parseFloat(viewSwitch.style.top) + 32);
-  });
-
-  test('the switcher (all four lenses) is shown for EVERY viewer, even read-only', () => {
-    const { container } = render(<SettlementMapPane settlement={fixture} canEdit={false} saveId={null} />);
-    expect(container.querySelector('[data-town-lens-switcher]')).toBeTruthy();
-    for (const id of ['parchment', 'watercolor', 'darkFantasy', 'vtt']) {
-      expect(container.querySelector(`[data-town-lens="${id}"]`)).toBeTruthy();
-    }
-    expect(container.querySelector('[data-town-grid]')).toBeNull(); // parchment default: no grid
-  });
-
-  test('an EDITOR picking a lens PERSISTS it and re-skins the view', () => {
-    const { container } = render(<SettlementMapPane settlement={fixture} canEdit saveId={SAVE_ID} />);
-    fireEvent.click(container.querySelector('[data-town-lens="vtt"]'));
-    expect(savedMapEdits()).toEqual({ styleLens: 'vtt' });
-    expect(container.querySelector('[data-town-grid]')).toBeTruthy(); // VTT grid now drawn
-
-    // Back to parchment clears the key (byte-identity dormancy).
-    fireEvent.click(container.querySelector('[data-town-lens="parchment"]'));
-    expect(savedMapEdits()).toBeUndefined();
-    expect(container.querySelector('[data-town-grid]')).toBeNull();
-  });
-
-  test('a NON-editor picking a lens re-skins EPHEMERALLY (nothing persists)', () => {
-    const { container } = render(<SettlementMapPane settlement={fixture} canEdit={false} saveId={SAVE_ID} />);
-    fireEvent.click(container.querySelector('[data-town-lens="vtt"]'));
-    expect(container.querySelector('[data-town-grid]')).toBeTruthy(); // the derived view switched
-    expect(savedMapEdits()).toBeUndefined();                          // but nothing was written
-  });
-
-  test('a persisted lens is HONORED on load (rides the blob into the viewer)', () => {
-    const { container } = render(
-      <SettlementMapPane settlement={{ ...fixture, mapEdits: { styleLens: 'vtt' } }} canEdit={false} saveId={null} />,
-    );
-    expect(container.querySelector('[data-town-grid]')).toBeTruthy(); // opens already in VTT
   });
 });

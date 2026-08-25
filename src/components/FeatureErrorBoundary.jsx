@@ -26,8 +26,7 @@
 import { Component } from 'react';
 import { reportError } from '../lib/errorReporter.js';
 import Button from './primitives/Button.jsx';
-import HouseDevice from './brand/HouseDevice.jsx';
-import { FS, SP, sans, swatch } from './theme.js';
+import { FS, SP, R, sans, swatch } from './theme.js';
 
 /** Shallow per-element comparison of two resetKeys arrays. */
 function keysChanged(a, b) {
@@ -84,7 +83,7 @@ export default class FeatureErrorBoundary extends Component {
       if (typeof fallback === 'function') return fallback(this.state.error, this.handleRetry);
       if (fallback !== undefined && fallback !== null) return fallback;
 
-      const title = this.props.fallbackTitle || 'This page would not open.';
+      const title = this.props.fallbackTitle || 'Something went wrong rendering this view.';
       return (
         <div
           role="alert"
@@ -92,18 +91,16 @@ export default class FeatureErrorBoundary extends Component {
             margin: SP.md,
             padding: SP.lg,
             border: `1px solid ${swatch.danger}`,
-            background: swatch['#FAF8F4'],
+            borderRadius: R.lg,
+            background: swatch.dangerBg,
             color: swatch.danger,
             fontSize: FS.sm,
             fontFamily: sans,
           }}
         >
-          {/* The clerk's-slip stamp — the house device holds the fiction even
-              when a view fails (owner placement addendum #3). */}
-          <HouseDevice size={22} mode="light" style={{ display: 'block', marginBottom: SP.xs, opacity: 0.7 }} />
           <div style={{ fontWeight: 700, marginBottom: SP.xs }}>{title}</div>
           <div style={{ marginBottom: SP.sm, color: swatch.mutedBrown }}>
-            The rest of the realm stands. Try again, or turn elsewhere.
+            The rest of the app is still working. You can try again or navigate away.
           </div>
           <Button variant="danger" size="sm" onClick={this.handleRetry} style={{ minHeight: 44 }}>
             Try again

@@ -45,19 +45,9 @@
  *     mover seam) and applyWorldPulse (the stage-2 writer), never the entry
  *     closure. The satellites ledger nests under the FP-R `spatialLedgers`
  *     namespace ⇒ ZERO eager bytes for the state.
- *   • RNG — stable keyed forks only (`satellite:<parent>:<tick>`, and the W-E
- *     sibling `satellite:<parent>:<tick>:site`), §H situation-loaded; no fork when
- *     dark; draw order inside a fork is fixed (codepoint-ordered iteration) so the
- *     parent stream is never touched. The site fork is a DISTINCT key precisely so
- *     that adding topographic placement left the existing satellite stream's draw
- *     sequence (name, founders, starve, converge) byte-identical.
- *   • TOPOGRAPHY (W-E / J-D4) — a founding SAMPLES the frozen spatial rasters
- *     READ-ONLY (steadingTopography.js: the territory partition, the integer cost
- *     field, the gates' named terrain classes) to pick a site inside the parent's
- *     own country and to derive starting resources through the EXISTING
- *     resource-strike vocabulary. The digest is never written and satellites never
- *     join it. An ASPATIAL world (no active digest) samples nothing, so its records
- *     carry neither `site` nor `resources` and are byte-identical to pre-W-E.
+ *   • RNG — stable keyed forks only (`satellite:<parent>:<tick>`), §H
+ *     situation-loaded; no fork when dark; draw order inside a fork is fixed
+ *     (codepoint-ordered iteration) so the parent stream is never touched.
  *   • CATCH-UP INTEGRITY — every dwell/cooldown is a TICK STAMP compared by
  *     integer subtraction (tick − since), never an incrementing counter, so the
  *     M10b one-interval catch-up collapse cannot lose or double-count dwell.
@@ -66,35 +56,9 @@
 import { clamp01 } from '../../kernel/math.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { NAMING_DATA } from '../../data/namingData.js';
-import { activeSpatialDigest } from '../spatial/distanceRead.js';
-// THE STEADING PEN'S LEDGER HALF (chair ruling CR-WR10-I). The ledger reads, the
-// conveyance row-move and the ONE fold live in a dependency-free leaf so the WR-10
-// market stage can mount in this file without closing an import cycle: the measured
-// path sovereigntyIntent → peaceReasons → peaceTerms → sovereigntyTransfer ran back
-// HERE, for the single symbol `conveySteading`, and that was the only edge from the
-// worldPulse cycle family into this kernel. The RECORD is still authored here
-// (`mintSteading`); what moved is where the ledger is written. All three names are
-// re-exported below, so no consumer's import path changed.
-import {
-  satellitesLedgerOf, satellitesOf, conveySteading, foldSatellitesLedger,
-} from './satellitesLedger.js';
+import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
 import { stablePart } from './stablePart.js';
-import { advanceDemographics } from './demographicsKernel.js';
-// WR-10 THE SOVEREIGNTY MARKET (amendment S). A plan-lane SIBLING, mounted here for
-// the demographics precedent's reason: it is gated by its OWN flag conjunction and
-// must not inherit this module's switch. It runs BEFORE advanceDemographics because
-// its episode gate reads the demographic plan ledger's `band` cell as the PRIOR band —
-// after that call the cell already holds this tick's, and every crossing would read as
-// a non-crossing forever. Dark ⇒ both input references come straight back.
-import { advanceSovereigntyMarket } from './sovereigntyMarketStage.js';
-import { advancePeacetimePacts } from './pactFormation.js';
-import { lineageReceipt, pickLine, LIFECYCLE_NEWS } from './eventProse.js';
-import { chooseSteadingSite, deriveSteadingResources, landformPlaceName, resourcePhrase } from './steadingTopography.js';
-import {
-  buildLineageMemberBirth,
-  lineageMemberBirthActive,
-} from './lineageMemberBirth.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ archetype?: string, id?: string, triggeredAt?: { sourceEventTargetId?: string } }} LcCondition */
@@ -112,30 +76,36 @@ import {
  *   history?: { historicalEvents?: Array<Record<string, unknown>> },
  *   institutions?: Array<Record<string, unknown>>,
  *   npcs?: Array<Record<string, unknown>>,
- *   economicState?: { prosperity?: unknown, foodSecurity?: unknown },
+ *   economicState?: { prosperity?: unknown },
  *   activeConditions?: LcCondition[],
  *   populationHistory?: LcPopHistoryEntry[] }} LcSettlement
- *
- * `economicState` carries BOTH readings on purpose, and carries them in the spelling
- * the siblings already use (migrationKernel / upswingKernel / generosityKernel all
- * declare prosperity beside foodSecurity on one settlement read shape). The lifecycle
- * lane reads prosperity; wave P4 hands the same record to the demographic readers,
- * whose DemoSettlement declares `foodSecurity?: unknown`. Declaring only prosperity
- * here did not make the food half absent from the record — it made the two read
- * shapes structurally disjoint, which is what a `has no properties in common`
- * mismatch is. One record, one spelling, no third shape minted.
  */
 /** @typedef {{ id?: (string|number), name?: string, settlement?: LcSettlement }} LcSnapItem */
-/** @typedef {{ campaign?: { id?: (string|number) }, settlements?: LcSnapItem[] }} LcSnapshot */
+/** @typedef {{ settlements?: LcSnapItem[] }} LcSnapshot */
 /** @typedef {{ saveId?: (string|number), settlement?: LcSettlement }} LcUpdate */
 /** @typedef {{ get?: (id: string, kind: string) => ({ score?: number } | undefined) }} LcPressureIdx */
 /** @typedef {{ fork?: (k: string) => { random: () => number } }} LcRng */
-/** THE STEADING RECORD SHAPES live with the ledger that holds them (CR-WR10-I).
- *  Re-declared here as aliases so `import('./settlementLifecycleKernel.js').SatelliteRecord`
- *  — the spelling `realmVerbExecution.js` and `lineageMemberBirth.js` both use — keeps
- *  resolving: THE TYPE SURFACE IS PUBLIC SURFACE, and an extraction may not move it. */
-/** @typedef {import('./satellitesLedger.js').SatelliteRecord} SatelliteRecord */
-/** @typedef {import('./satellitesLedger.js').ParentSatellites} ParentSatellites */
+/**
+ * One satellite steading record (SUB-SETTLEMENT — never a digest member, never a
+ * mover-loop member, no npc roster).
+ * @typedef {Object} SatelliteRecord
+ * @property {string} id            deterministic (`steading.<parent>.<tick>`)
+ * @property {string} name          seeded from NAMING_DATA on the satellite fork
+ * @property {string} parentId
+ * @property {'thorp'|'hamlet'} tier the in-orbit ladder (village ⇒ CHARTER-PENDING)
+ * @property {number} population    integer; every head debited from the parent
+ * @property {number} foundedTick
+ * @property {'growth'|'resource_strike'|'resettlement'|'forced'} provenance
+ * @property {string} [resourceKey] the struck vein a mining-camp exists for
+ * @property {number} orbit         cosmetic orbit slot (deterministic, unique per parent)
+ * @property {number} inflow        cumulative in-migration tally (people moved in)
+ * @property {number} backing01     last computed backing read (display/receipt)
+ * @property {number} [starvingSince] tick stamp — the decline dwell (catch-up-safe)
+ * @property {boolean} [charterPending] village scale reached; awaits the V2 charter
+ * @property {number} [charterPendingSince]
+ * @property {string[]} history     bounded chronicle lines (slice cap)
+ */
+/** @typedef {{ seedAcc?: number, lastSeedTick?: number, steadings: Record<string, SatelliteRecord> }} ParentSatellites */
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 function num(v, fallback) {
@@ -227,21 +197,6 @@ export const SETTLEMENT_LIFECYCLE_TUNING = Object.freeze({
   DEATH_EMIT_P: 0.05,               // base emit probability once dwelled (rollCandidates rolls it)
   DEATH_DEPTH_WEIGHT: 0.08,         // deeper decline ⇒ likelier draw
   DEATH_RETRY_COOLDOWN: 8,          // ticks between death candidates at one settlement
-  // THE EMPTY-SETTLEMENT FAST PATH (owner-signed 2026-07-31 — the zombie cure).
-  // Population at/below ZERO_POP_FLOOR is the STRONGEST terminal signal, never a
-  // disqualifier (the diagnosed soak defect: a `pop > 0` eligibility gate meant a
-  // settlement at population zero could neither die nor recover — it zombied for
-  // decades). A DEDICATED dwell (`zeroSince`, a tick STAMP — catch-up-safe) starts
-  // at the first effectively-empty sighting and HOLDS through trickle bounces
-  // below ZERO_POP_CLEAR (the observed zombie oscillated 0↔24 on migrant credits;
-  // every crossing reset the terminal dwell and immunized the corpse). Once the
-  // dwell is met AND the settlement is empty NOW, the death candidate emits with
-  // CERTAINTY (probability 1): an empty town rolls no survival lottery. The dwell
-  // is ONE SEASON — the satellite lane's STARVE_DWELL "quickly die" precedent at
-  // first-class scale — not the two-year TERMINAL_DWELL.
-  ZERO_POP_FLOOR: 4,                // at/below this the settlement is effectively empty (a last handful)
-  ZERO_POP_CLEAR: 32,               // recovery to at/above this clears the zero dwell (4x the thorp floor; above the 24-head trickle)
-  ZERO_POP_DWELL: 13,               // ticks effectively empty before certain death (~a season — the STARVE_DWELL rhythm)
   // The aspatial dispersal reconciliation (populationDynamics/calamity parity):
   // 45% of the residual disperses as credited migrants; the remainder is the
   // origin-loss proxy. Spatial worlds ride the M4 realized-debit path instead.
@@ -263,13 +218,25 @@ const T = SETTLEMENT_LIFECYCLE_TUNING;
 // The fixed id of a parent's tributary lift condition (idempotent upsert).
 export const STEADING_TRIBUTARY_ARCHETYPE = 'steading_tributary';
 
-// ── Ledger reads (re-exported from the pen's ledger leaf — CR-WR10-I) ────────
-// `satellitesLedgerOf` / `satellitesOf` / `conveySteading` moved to satellitesLedger.js
-// and are re-exported HERE under their historic names, so every consumer that has ever
-// imported them from this path — realmVerbExecution.js, sovereigntyAssets.js and five
-// test batteries — keeps its import site. The extraction's reason is the measured
-// import cycle recorded in that leaf's header.
-export { satellitesLedgerOf, satellitesOf, conveySteading };
+// ── Ledger reads ───────────────────────────────────────────────────────────────
+/** The satellites ledger (`spatialLedgers.satellites`), or null when absent.
+ *  @param {Record<string, unknown>|null|undefined} worldState
+ *  @returns {Record<string, ParentSatellites>|null} */
+export function satellitesLedgerOf(worldState) {
+  const led = getSpatialLedger(/** @type {Record<string, unknown>} */ (worldState || {}), 'satellites');
+  return led && typeof led === 'object' && !Array.isArray(led)
+    ? /** @type {Record<string, ParentSatellites>} */ (led)
+    : null;
+}
+
+/** Every satellite of one parent, codepoint-ordered by id (deterministic iteration).
+ *  @param {Record<string, ParentSatellites>|null} ledger @param {string} parentId
+ *  @returns {SatelliteRecord[]} */
+export function satellitesOf(ledger, parentId) {
+  const entry = ledger ? ledger[parentId] : null;
+  const steadings = entry && entry.steadings && typeof entry.steadings === 'object' ? entry.steadings : {};
+  return Object.keys(steadings).sort(codepoint).map((k) => steadings[k]).filter(Boolean);
+}
 
 /** The parent's bounded tributary read: satellite population share, saturating at
  *  TRIBUTARY_POP_SHARE_CAP (the boundedness pin derives from the live tuning).
@@ -395,20 +362,9 @@ export function drawSteadingName(culture, draw) {
  * @param {string|null} [args.nameOverride]   FORCE dial: freetext name (cosmetic)
  * @param {string|null} [args.resourceKey]    the struck vein (resource_strike / force dial)
  * @param {SatelliteRecord['provenance']} args.provenance
- * @param {import('./steadingTopography.js').TopoDigest|null} [args.digest] the FROZEN
- *   spatial digest, READ-ONLY (W-E). Absent/null ⇒ no ground is sampled and the
- *   record is byte-identical to a pre-W-E founding.
- * @param {(() => number)|null} [args.siteDraw] the SITE fork's sequential draw
- *   (`satellite:<parent>:<tick>:site`) — a distinct stream from `draw`
- * @param {import('./steadingTopography.js').SteadingSite|null} [args.siteOverride]
- *   WAVE P3: ground ALREADY chosen and already proved legal against the §5b proximity
- *   band. Supplied, it is used verbatim and no site is picked here — a settlement that
- *   committed to founding a steading committed to a PLACE, and re-picking the ground on
- *   the last day would be the reroll §5c forbids wearing a plan's clothes. Absent (every
- *   organic and forced founding), the seeded pick below runs exactly as before.
  * @returns {{ record: SatelliteRecord, debit: number } | { refusal: string }}
  */
-export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride = null, resourceKey = null, provenance, digest = null, siteDraw = null, siteOverride = null }) {
+export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride = null, resourceKey = null, provenance }) {
   const parentTier = String(parent?.tier || 'village');
   const cap = num(/** @type {Record<string, unknown>} */ (T.SATELLITE_CAPS)[parentTier], 0);
   if (!cap) return { refusal: 'only town-or-higher parents seed steadings' };
@@ -426,38 +382,19 @@ export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride 
   let orbit = 0;
   while (usedOrbits.has(orbit)) orbit += 1;
   const key = String(resourceKey || '');
-  // ── W-E / J-D4: SAMPLE THE GROUND (read-only; absent digest ⇒ absent site). ──
-  // The site draw runs on its OWN keyed fork, so the founding's name/founders
-  // draws above (and every later draw on the satellite fork this tick) are
-  // unchanged by the existence of this feature.
-  const site = siteOverride || (digest && typeof siteDraw === 'function'
-    ? chooseSteadingSite({
-      digest, parentId, draw: siteDraw, resourceKey: key || null,
-      occupied: sats.map((r) => num(r.site?.cell, -1)).filter((c) => c >= 0),
-    })
-    : null);
-  const resources = site && typeof siteDraw === 'function'
-    ? deriveSteadingResources({
-      landform: site.landform, draw: siteDraw, resourceKey: key || null,
-      parentResources: Array.isArray(parent?.config?.nearbyResources) ? parent.config.nearbyResources : [],
-    })
-    : [];
-  const ground = site ? ` on ${landformPlaceName(site.landform)}` : '';
   /** @type {SatelliteRecord} */
   const record = {
     id: `steading.${stablePart(parentId)}.${tick}`,
     name, parentId, tier: 'thorp', population: debit,
     foundedTick: tick, provenance,
     ...(key ? { resourceKey: key } : {}),
-    ...(site ? { site } : {}),
-    ...(resources.length ? { resources } : {}),
     orbit, inflow: debit, backing01: 0,
     history: [
       provenance === 'resource_strike'
-        ? `Founded on the new ${key.replace(/_/g, ' ')} workings${ground} (tick ${tick}).`
+        ? `Founded on the new ${key.replace(/_/g, ' ')} workings (tick ${tick}).`
         : provenance === 'forced'
-          ? `Founded by decree${ground}: ${debit} settlers out of ${String(parent?.name || parentId)} (tick ${tick}).`
-          : `Founded by ${debit} settlers out of ${String(parent?.name || parentId)}${ground} (tick ${tick}).`,
+          ? `Founded by decree — ${debit} settlers out of ${String(parent?.name || parentId)} (tick ${tick}).`
+          : `Founded by ${debit} settlers out of ${String(parent?.name || parentId)} (tick ${tick}).`,
     ],
   };
   return { record, debit };
@@ -489,7 +426,6 @@ function steadingNews(kind, parentId, tick, now, body) {
  * @property {boolean} changed
  * @property {Array<Record<string, unknown>>} newsEntries
  * @property {Array<Record<string, unknown>>} receipts
- * @property {Array<ReturnType<typeof buildLineageMemberBirth>>} [memberBirths]
  */
 
 /**
@@ -513,100 +449,11 @@ function steadingNews(kind, parentId, tick, now, body) {
  * @param {string|null} args.now
  * @returns {LifecycleAdvanceResult}
  */
-export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldState, settlementUpdates, pIndex, rng, tick, now }) {
-  // ── THE DEMOGRAPHIC STEP (WAVE P1 — docs/DESIGN_DEMOGRAPHIC_ENGINE.md §8 names
-  // this module the HOST). It runs BEFORE this module's own dormancy gate, because
-  // demography is gated by its OWN virtual flag (`demographicsEnabled`) and must not
-  // inherit the settlement-lifecycle switch. DARK ⇒ advanceDemographics returns the
-  // SAME worldState and settlementUpdates REFERENCES, so wiring it in cannot perturb
-  // a byte — the fenced dormancy golden asserts object IDENTITY, not deep equality
-  // (the J1 precedent). LIT, it REPLACES the raw proportional growth line: the same
-  // flag stops populationDynamics emitting its organic-growth candidate, because law
-  // 1 says there is no growth term that is not a birth. The decline and terminal
-  // lanes below are UNCHANGED; the soak proved they work. ──
-  // WAVE P2 threads the pressure index this seam ALREADY holds: the push drivers read
-  // live defense, crime and hostility pressure through it, and the defense guard fails
-  // closed without it (no threat evidence, no flight over a low readiness score).
-  // WAVE P3 threads three things this seam ALREADY holds, so the demographic lane
-  // never has to re-declare another layer's law: whether the satellite lane exists at
-  // all (its own flag, read HERE and passed down — a read the other way would close an
-  // import cycle), the FROZEN rasters the §5b proximity band measures against, and
-  // wave E's own per-tier cap table. Passing the caps rather than copying them is what
-  // keeps "which parents may seed" a single authored fact.
-  const demoDigest = /** @type {import('./demographicsLand.js').LandDigest|null} */ (
-    /** @type {unknown} */ (activeSpatialDigest(/** @type {never} */ (hostWorldState))));
-  const market = advanceSovereigntyMarket({
-    snapshot, worldState: hostWorldState, digest: demoDigest, tick, now,
-    settlementUpdates: /** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (settlementUpdates)),
-    season: typeof asObject(asObject(hostWorldState).calendar).season === 'string'
-      ? String(asObject(asObject(hostWorldState).calendar).season) : null,
-  });
-  // ── GR-2: THE PEACETIME PACT LANE, the sovereignty market's sibling in every structural
-  // respect (own-flag-before-host-gate; dark ⇒ the stage body is never entered ⇒ the SAME
-  // worldState and settlementUpdates REFERENCES back, so wiring it in cannot perturb a byte).
-  // STAGE ORDER IS FIXED — market first, pacts second (JUDGMENT, vetoable): a court that
-  // has just sold a holding is a court whose believed books changed this tick, and the pact
-  // trigger should read the POST-SALE world. It runs before advanceDemographics for the
-  // same reason the market does — the crossing reads must not see this tick's own
-  // demographic writes.
-  // ⚠ THE WORD "PINNED" WAS AN OVERSTATEMENT UNTIL GR-2's REPAIR ROUND. A verifier swapped
-  // the two stages wholesale and 191 tests stayed green, because no test in the estate drove
-  // this function with the pact flag lit at all. The claim is now carried by an EXECUTED
-  // pin — tests/domain/pactKernelMount.test.js asserts the call ORDER and the IDENTITY CHAIN
-  // (pacts receives the market's returned worldState object; demographics receives the
-  // pacts'), which is what a swap actually breaks. Do not restore a bare "PINNED" here
-  // without an enforcer address beside it. ──
-  const pacts = advancePeacetimePacts({
-    snapshot, worldState: market.worldState, digest: demoDigest, tick,
-    settlementUpdates: market.settlementUpdates,
-    season: typeof asObject(asObject(hostWorldState).calendar).season === 'string'
-      ? String(asObject(asObject(hostWorldState).calendar).season) : null,
-  });
-  const demo = advanceDemographics({
-    snapshot: /** @type {import('./demographicsKernel.js').DemoSnapshot} */ (/** @type {unknown} */ (snapshot)),
-    worldState: pacts.worldState,
-    settlementUpdates: /** @type {import('./demographicsKernel.js').DemoUpdate[]} */ (/** @type {unknown} */ (pacts.settlementUpdates)),
-    rng, tick,
-    pIndex: /** @type {import('./demographicsKernel.js').DemoPressureIndex|null} */ (
-      /** @type {unknown} */ (pIndex || null)),
-    season: typeof asObject(asObject(hostWorldState).calendar).season === 'string'
-      ? String(asObject(asObject(hostWorldState).calendar).season)
-      : null,
-    satelliteLaneLit: settlementLifecycleActive(hostWorldState),
-    digest: demoDigest,
-    satelliteCaps: /** @type {Record<string, number>} */ (T.SATELLITE_CAPS),
-  });
-  const worldState = demo.worldState;
-  const updates = /** @type {LcUpdate[]} */ (/** @type {unknown} */ (demo.settlementUpdates));
+export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpdates, pIndex, rng, tick, now }) {
+  const updates = Array.isArray(settlementUpdates) ? settlementUpdates : [];
   // ── DORMANCY GATE: flag absent ⇒ an immediate no-op. No fork, no key. ──
   if (!settlementLifecycleActive(worldState)) {
-    return {
-      worldState,
-      settlementUpdates: updates,
-      // ⚠⚠ EVERY STAGE THAT RAN ABOVE THIS GATE VOTES ON `changed`, AND THE DARK PATH IS
-      // THE ONE THAT MATTERS MOST. Each of the three stages carries its OWN virtual flag,
-      // so the ORDINARY configuration for any one of them is "lit while this module's own
-      // flag is absent" — and this return is what that configuration takes. applyPulseMover
-      // opens with `if (!result || !result.changed) return { worldState, … }`, so a stage
-      // that wrote a real ledger under a `false` vote has its whole worldState DISCARDED at
-      // the mount and the feature is inert in exactly the world it was built for. GR-2's
-      // repair round found `pacts` missing here and `market` missing here too; both are
-      // folded, and tests/domain/pactKernelMount.test.js pins EACH stage's vote through its
-      // OWN door so deleting any one clause reds by name rather than being absorbed by a
-      // sibling that happened to be lit in the fixture.
-      changed: demo.changed || market.changed || pacts.changed,
-      // WAVE P4: the demographic lane's Herald lines are ITS news, gated by ITS flag, so
-      // they must survive this module's own dormancy gate. Dark demographics returns an
-      // empty array here, which is the same [] this path always returned.
-      newsEntries: [...market.newsEntries, ...pacts.newsEntries, ...demo.newsEntries],
-      receipts: [
-        ...market.receipts,
-        ...pacts.receipts,
-        .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
-        ...demo.migrationReceipts,
-        ...demo.planReceipts,
-      ],
-    };
+    return { worldState, settlementUpdates: updates, changed: false, newsEntries: [], receipts: [] };
   }
 
   const items = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
@@ -625,12 +472,6 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
     return itemById.get(String(id))?.settlement;
   };
 
-  // W-E / J-D4: the FROZEN spatial rasters, READ-ONLY, resolved once per tick
-  // through the ONE constitutional gate (activeSpatialDigest). Null on every
-  // aspatial world ⇒ no ground is sampled anywhere below.
-  const spatialDigest = /** @type {import('./steadingTopography.js').TopoDigest|null} */ (
-    /** @type {unknown} */ (activeSpatialDigest(/** @type {never} */ (worldState))));
-
   const priorLedger = satellitesLedgerOf(worldState);
   /** @type {Record<string, ParentSatellites>} the working copy (folded at the end) */
   const nextLedger = {};
@@ -640,24 +481,9 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   }
 
   /** @type {Array<Record<string, unknown>>} */
-  // WR-10's beats and receipts are ITS flag's, so they survive this module's own gate on
-  // both paths — the same law wave P4's demographic lines already obey here.
-  const newsEntries = [...market.newsEntries, ...pacts.newsEntries];
+  const newsEntries = [];
   /** @type {Array<Record<string, unknown>>} */
-  const receipts = [
-    ...market.receipts,
-    ...pacts.receipts,
-    .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
-    ...demo.migrationReceipts,
-    ...demo.planReceipts,
-  ];
-  /** @type {Array<ReturnType<typeof buildLineageMemberBirth>>} */
-  const memberBirths = [];
-  // WAVE P3: completed satellite plans, indexed by the parent that committed to them.
-  // The plan lane decided; this lane founds, through the ONE mint.
-  /** @type {Map<string, import('./demographicsPlans.js').FoundIntent>} */
-  const foundIntents = new Map();
-  for (const intent of demo.foundIntents) foundIntents.set(String(intent.parentId), intent);
+  const receipts = [];
   let ledgerChanged = false;
 
   // ── Settlement-record surgery helpers (population transfers, conserved). ──
@@ -746,10 +572,8 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
           reason: 'parent terminal death — the orbit dispersed with the settlement',
         });
         newsEntries.push(steadingNews('steading_orbit_dispersed', parentId, tick, now, {
-          headline: pickLine(LIFECYCLE_NEWS.orbit_dispersed.headline, `${parentId}:${tick}:h`, { parent: String(parent0.name || parentId) }),
-          summary: pickLine(LIFECYCLE_NEWS.orbit_dispersed.summary, `${parentId}:${tick}:s`, {
-            parent: String(parent0.name || parentId), count: orphanSats.length, countS: orphanSats.length === 1 ? '' : 's', dispersed,
-          }),
+          headline: `The steadings around ${String(parent0.name || parentId)} empty out`,
+          summary: `With ${String(parent0.name || parentId)} dead, its ${orphanSats.length} outlying steading${orphanSats.length === 1 ? '' : 's'} emptied — ${dispersed} folk scattered to the wider world with the town's own.`,
           severity: 0.35,
           reasons: ['A dead parent cannot hold its orbit; the frontier folk dispersed with the last wagons.'],
         }));
@@ -774,37 +598,17 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
       const { drive, boom, strike, inflow } = seedingDrive({ settlement: parent0, tick });
       seedAcc = stepSeeding(seedAcc, drive);
       const cooled = lastSeedTick == null || (tick - lastSeedTick) >= T.SEED_COOLDOWN;
-      // WAVE P3: a COMPLETED satellite plan arms the founding on its own. The plan
-      // already spent a season and its stores raising the undertaking (design §5c),
-      // already asked the homeostat whether the realm had room for these people
-      // (design §11 P2), and already proved its ground legal against the §5b band, so
-      // it does not also have to wait on the spontaneous seeding integrator. The tier
-      // CAP still binds, because that is wave E's law and this lane owns it.
-      const intent = foundIntents.get(parentId) || null;
-      const armed = (seedAcc >= T.SEED_FLOOR && cooled) || intent !== null;
+      const armed = seedAcc >= T.SEED_FLOOR && cooled;
       if (armed && sats.length >= cap) {
         // Deferral-visible (the caps + cadence pin): armed but cap-held.
         receipts.push({ id: parentId, kind: 'satellite_deferred', reason: 'cap', cap, count: sats.length });
       } else if (armed) {
         // FOUND THE STEADING — through the ONE shared mint (the force verb uses
-        // the same path: force ≡ organic by construction). The SITE fork is
-        // created only here, on the founding tick, and only when a digest is
-        // active: an aspatial world forks nothing new and stays byte-identical.
-        const siteFork = spatialDigest && rng && typeof rng.fork === 'function'
-          ? rng.fork(`satellite:${parentId}:${tick}:site`)
-          : null;
+        // the same path: force ≡ organic by construction).
         const minted = mintSteading({
           parent: parent0, parentId, sats, tick, draw,
           resourceKey: strike ? String(strike.triggeredAt?.sourceEventTargetId || '') : null,
-          // The provenance vocabulary stays CLOSED at its four words. A plan-driven
-          // founding IS growth pressure — the plan is how the pressure was deliberated,
-          // not a different reason — and the deliberation is carried in the receipt's
-          // own `planId` and `because` rather than by widening a vocabulary other
-          // surfaces already enumerate.
           provenance: strike ? 'resource_strike' : 'growth',
-          digest: spatialDigest,
-          siteDraw: siteFork ? () => siteFork.random() : null,
-          siteOverride: intent ? intent.site : null,
         });
         if ('record' in minted) {
           const { record: rec, debit } = minted;
@@ -823,30 +627,17 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
           receipts.push({
             id: parentId, kind: 'satellite_founded', satId: rec.id, name: rec.name, founders: debit,
             provenance: rec.provenance, ...(rec.resourceKey ? { resourceKey: rec.resourceKey } : {}), orbit: rec.orbit,
-            ...(rec.site ? { site: rec.site } : {}),
-            ...(rec.resources ? { resources: rec.resources } : {}),
-            ...(intent ? { planId: intent.planId, because: [...intent.because], provisionSpent: intent.provisionSpent } : {}),
-            sources: { boom, strike: !!strike, inflow, plan: !!intent },
+            sources: { boom, strike: !!strike, inflow },
           });
-          // THE GROUND, NAMED IN-WORLD (W-E). A sampled site swaps the growth
-          // summary for the site pool; a strike keeps its own voice (the workings
-          // are the stronger fact) and carries the ground in its reasons.
-          const place = rec.site ? landformPlaceName(rec.site.landform) : '';
           newsEntries.push(steadingNews('steading_founded', parentId, tick, now, {
-            headline: pickLine(LIFECYCLE_NEWS.founded.headline, `${parentId}:${rec.id}:${tick}:h`, { parent: String(parent0.name || parentId) }),
+            headline: `A new steading rises near ${String(parent0.name || parentId)}`,
             summary: rec.provenance === 'resource_strike'
-              ? pickLine(LIFECYCLE_NEWS.founded.summary_strike, `${parentId}:${rec.id}:${tick}:s`, { debit, name: rec.name, resource: String(rec.resourceKey || '').replace(/_/g, ' ') })
-              : rec.site
-                ? pickLine(LIFECYCLE_NEWS.founded.summary_site, `${parentId}:${rec.id}:${tick}:s`, { debit, name: rec.name, parent: String(parent0.name || parentId), place })
-                : pickLine(LIFECYCLE_NEWS.founded.summary_growth, `${parentId}:${rec.id}:${tick}:s`, { debit, name: rec.name, parent: String(parent0.name || parentId) }),
+              ? `${debit} settlers have raised the steading of ${rec.name} on the new ${String(rec.resourceKey || '').replace(/_/g, ' ')} workings.`
+              : `${debit} settlers have struck out from ${String(parent0.name || parentId)} to found the steading of ${rec.name}.`,
             reasons: [
               boom ? 'A boom sends capital and families looking outward.' : null,
               strike ? 'A fresh resource strike wants hands at the vein.' : null,
               inflow ? 'Newcomers the town cannot absorb become the frontier.' : null,
-              rec.site ? `The settlers chose ${place}, inside the town's own country.` : null,
-              rec.resources && rec.resources.length
-                ? `The ground offers ${rec.resources.map(resourcePhrase).join(', ')}.`
-                : null,
             ].filter((r) => r != null).map(String),
           }));
         }
@@ -860,82 +651,6 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
       const backing01 = steadingBacking01(parentLive, pIndex, parentId);
       /** @type {SatelliteRecord} */
       let next = { ...rec, backing01: Math.round(backing01 * 10000) / 10000 };
-
-      // WR-3 — APPROVE THE VILLAGE CHARTER.  `charterPending` is deliberately
-      // observed on a later pass: the threshold tick remains visible, then the
-      // next tick makes the population a first-class member.  Removing the
-      // satellite and minting the birth in ONE result conserves population —
-      // those people were already debited from the parent while the steading
-      // grew, so graduation performs no second transfer.
-      if (next.charterPending && lineageMemberBirthActive(worldState)) {
-        const campaignId = snapshot?.campaign?.id != null
-          ? String(snapshot.campaign.id)
-          : '';
-        if (campaignId) {
-          const birth = buildLineageMemberBirth({
-            campaignId,
-            parentId,
-            parent: /** @type {Record<string, unknown>} */ (parentLive || {}),
-            satellite: next,
-            tick,
-            now,
-          });
-          memberBirths.push(birth);
-          const parentName = String(parentLive?.name || '').trim();
-          const childName = String(next.name || '').trim();
-          if (!parentName || !childName) throw new Error('lineage member birth requires authored settlement names');
-          const steadings = { ...(nextLedger[parentId]?.steadings || {}) };
-          delete steadings[next.id];
-          nextLedger[parentId] = { ...(nextLedger[parentId] || {}), steadings };
-          ledgerChanged = true;
-          receipts.push({
-            id: birth.birthId,
-            kind: 'lineage_edge_recorded',
-            parentId,
-            childId: birth.saveId,
-            satelliteId: next.id,
-            edgeId: birth.graphEdge.id,
-            reason: `${parentName} recognized ${childName} as a settlement in its own right.`,
-          });
-          const voice = lineageReceipt('lineage_edge_recorded', birth.birthId, {
-            settlement: childName,
-            counterpart: parentName,
-          });
-          if (!voice) throw new Error('lineage_edge_recorded receipt vocabulary is incomplete');
-          newsEntries.push({
-            id: `wizard_news.${tick}.lineage_edge_recorded.${parentId}.${birth.saveId}`,
-            tick,
-            createdAt: now,
-            scope: 'regional',
-            significance: voice.significance,
-            severity: 0.55,
-            score: 66,
-            headline: `${childName} takes a charter of its own`,
-            summary: voice.line,
-            kind: 'applied',
-            impactKind: 'lineage_edge_recorded',
-            channelType: 'political_authority',
-            settlementIds: [parentId, birth.saveId],
-            settlementNames: [parentName, childName],
-            impactIds: [],
-            channelIds: [],
-            sourceEventId: birth.birthId,
-            familyId: voice.familyId,
-            audience: voice.audience,
-            section: voice.section,
-            tags: ['world_pulse', 'lifecycle', 'lineage_edge_recorded'],
-            reasons: ['The former steading now keeps its own books and seat, while its founding line remains remembered.'],
-            ...(voice.audience === 'dm-only' ? { covert: true } : {}),
-          });
-          continue;
-        }
-        receipts.push({
-          id: parentId,
-          kind: 'satellite_charter_deferred',
-          satId: next.id,
-          reason: 'campaign identity unavailable',
-        });
-      }
 
       if (backing01 >= T.GROW_BACKING_FLOOR && !next.charterPending) {
         // GROW — a parent→steading transfer (conserved; headroom-capped).
@@ -970,8 +685,8 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
           next.history = [...next.history.slice(-(T.HISTORY_CAP - 1)), 'The steading has outgrown its parent\'s shadow; a charter awaits.'];
           receipts.push({ id: parentId, kind: 'satellite_charter_pending', satId: next.id, name: next.name, population: next.population, deferredTo: 'V2 graduation (owner-parked)' });
           newsEntries.push(steadingNews('steading_charter_pending', parentId, tick, now, {
-            headline: pickLine(LIFECYCLE_NEWS.charter_pending.headline, `${parentId}:${next.id}:${tick}:h`, { name: next.name }),
-            summary: pickLine(LIFECYCLE_NEWS.charter_pending.summary, `${parentId}:${next.id}:${tick}:s`, { name: next.name }),
+            headline: `${next.name} has outgrown its parent's shadow`,
+            summary: `The steading of ${next.name} has reached village scale — a charter awaits.`,
             significance: 'notable', severity: 0.35,
             reasons: ['Graduation to a chartered settlement is owner-ruled to fire at village scale (V2 executes pending charters).'],
           }));
@@ -1002,8 +717,8 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
             residualReturned: residual, dwell, remnant: 'none — a satellite never mints a ruin (the scarcity law)',
           });
           newsEntries.push(steadingNews('steading_abandoned', parentId, tick, now, {
-            headline: pickLine(LIFECYCLE_NEWS.abandoned.headline, `${parentId}:${next.id}:${tick}:h`, { name: next.name }),
-            summary: pickLine(LIFECYCLE_NEWS.abandoned.summary, `${parentId}:${next.id}:${tick}:s`, { name: next.name, parent: String(parentLive?.name || parentId) }),
+            headline: `The steading of ${next.name} is abandoned`,
+            summary: `Without backing or newcomers, ${next.name} failed; its last folk walked back to ${String(parentLive?.name || parentId)}.`,
             severity: 0.3,
             reasons: [`Backing fell to ${Math.round(backing01 * 100)}% and stayed there for ${dwell} ticks.`],
           }));
@@ -1068,8 +783,8 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
             names: [a.name, b.name], population: folded.population, tier: 'hamlet',
           });
           newsEntries.push(steadingNews('steadings_converged', parentId, tick, now, {
-            headline: pickLine(LIFECYCLE_NEWS.coalesced.headline, `${parentId}:${a.name}:${b.name}:${tick}:h`, { a: a.name, b: b.name }),
-            summary: pickLine(LIFECYCLE_NEWS.coalesced.summary, `${parentId}:${a.name}:${b.name}:${tick}:s`, { a: a.name, b: b.name, pop: folded.population }),
+            headline: `${a.name} and ${b.name} fold into one palisade`,
+            summary: `The neighbouring steadings of ${a.name} and ${b.name} have grown together into a single hamlet of ${folded.population}.`,
             severity: 0.3, significance: 'notable',
             reasons: ['A second, distinct hamlet-birth path: coalescence of a frontier, not promotion of a steading.'],
           }));
@@ -1145,24 +860,15 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
 
   // ── PERSIST (drop-when-empty at the namespace key too). ──
   let nextWorldState = worldState;
-  // The demographic step's own write counts as change even when the satellite lane
-  // held still, or applyPulseMover would drop its settlementUpdates on the floor.
-  // The SAME law binds every sibling stage: market and pacts each ran above, each may have
-  // written a ledger, and a lane that held still contributes a harmless `false`.
-  let changed = cloned || demo.changed || market.changed || pacts.changed;
+  let changed = cloned;
   if (ledgerChanged) {
-    nextWorldState = foldSatellitesLedger(nextWorldState, nextLedger);
+    nextWorldState = Object.keys(nextLedger).length
+      ? setSpatialLedger(nextWorldState, 'satellites', nextLedger)
+      : dropSpatialLedger(nextWorldState, 'satellites');
     changed = true;
   }
 
-  return {
-    worldState: nextWorldState,
-    settlementUpdates: nextUpdates,
-    changed,
-    newsEntries,
-    receipts,
-    ...(memberBirths.length ? { memberBirths } : {}),
-  };
+  return { worldState: nextWorldState, settlementUpdates: nextUpdates, changed, newsEntries, receipts };
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -1186,18 +892,13 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
  * @param {(k: string) => { random: () => number }} args.forkFn
  * @param {string|null} [args.name]        freetext name (cosmetic dial)
  * @param {string|null} [args.resourceKey] optional resource assignment
- * @param {import('./steadingTopography.js').TopoDigest|null} [args.digest] the FROZEN
- *   rasters, READ-ONLY (W-E) — threaded so a DECREED founding samples the same
- *   ground an organic one would (force ≡ organic, extended to topography)
  * @returns {{ record: SatelliteRecord, debit: number, receipt: Record<string, unknown> } | { refusal: string }}
  */
-export function forceFoundSteading({ parent, parentId, sats, tick, forkFn, name = null, resourceKey = null, digest = null }) {
+export function forceFoundSteading({ parent, parentId, sats, tick, forkFn, name = null, resourceKey = null }) {
   const fork = forkFn(`satellite:${parentId}:${tick}`);
-  const siteFork = digest ? forkFn(`satellite:${parentId}:${tick}:site`) : null;
   const minted = mintSteading({
     parent, parentId, sats, tick, draw: () => fork.random(),
     nameOverride: name, resourceKey, provenance: 'forced',
-    digest, siteDraw: siteFork ? () => siteFork.random() : null,
   });
   if ('refusal' in minted) return minted;
   return {
@@ -1206,8 +907,6 @@ export function forceFoundSteading({ parent, parentId, sats, tick, forkFn, name 
       id: parentId, kind: 'satellite_founded', forced: true,
       satId: minted.record.id, name: minted.record.name, founders: minted.debit,
       provenance: 'forced', ...(minted.record.resourceKey ? { resourceKey: minted.record.resourceKey } : {}),
-      ...(minted.record.site ? { site: minted.record.site } : {}),
-      ...(minted.record.resources ? { resources: minted.record.resources } : {}),
       orbit: minted.record.orbit,
     },
   };

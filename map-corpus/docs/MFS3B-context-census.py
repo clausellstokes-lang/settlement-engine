@@ -6,8 +6,8 @@ WHAT IT MEASURES, AND WHAT IT DOES NOT.
 This instrument parses `laneHF-CALIBRATION.md` into one record per plate and
 counts the incidence of CONTEXT features (water works, defence members,
 extramural land uses, terrain accommodation, circulation furniture) across the
-plates that are ELIGIBLE for study — i.e. the 313-plate corpus minus the blind
-holdout (the union of laneHFM1-holdout-proposal.json's `proposed` list, its
+plates that are ELIGIBLE for study — i.e. the 313-plate corpus minus the closed
+legacy evaluation exclusion (the union of laneHFM1-holdout-proposal.json's `proposed` list, its
 `minimal_swap.proposed` list and that swap's `added` list).
 
 ⚠ HONESTY BOUND, restated in every consuming document:
@@ -137,8 +137,8 @@ FAMILY = {
 #   1. laneHF-CALIBRATION.md — one bullet row per plate for hf85 onward (the
 #      HF-2/3/4 growth rounds).
 #   2. laneMFS1-urbanism-atlas.md PART 1 — a multi-line prose block per plate
-#      for the 35 HF-1-era plates (hf3-hf84), which the calibration index only
-#      lists by name. Without this source those 35 read as zero on every
+#      for the 49 initial Atlas plates, which the calibration index only lists
+#      by name. Without this source those 49 read as zero on every
 #      feature, which would silently deflate every share in this census.
 ROW_RE = re.compile(r"^\s*-\s+\*\*(hf\d+)\b(.*)$")
 ATLAS = os.path.join(HERE, "laneMFS1-urbanism-atlas.md")

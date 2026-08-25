@@ -78,10 +78,6 @@ function overviewMilitary() {
       const getForces = u => s.military.reduce((s, r) => s + (r.u[u.name] || 0), 0);
       const total = options.military.reduce((s, u) => s + getForces(u) * u.crew, 0);
       const rate = (total / population) * 100;
-      // SettlementForge fork patch: untrusted loaded-.map strings → innerHTML — escape.
-      const stateName = escapeHtml(s.name);
-      const stateFullName = escapeHtml(s.fullName);
-      const stateColor = escapeHtml(s.color);
 
       const sortData = options.military.map(u => `data-${u.name.toLowerCase()}="${getForces(u)}"`).join(" ");
       const lineData = options.military
@@ -91,15 +87,15 @@ function overviewMilitary() {
       lines += /* html */ `<div
         class="states"
         data-id=${s.i}
-        data-state="${stateName}"
+        data-state="${s.name}"
         ${sortData}
         data-total="${total}"
         data-population="${population}"
         data-rate="${rate}"
         data-alert="${s.alert}"
       >
-        <fill-box data-tip="${stateFullName}" fill="${stateColor}" disabled></fill-box>
-        <input data-tip="${stateFullName}" style="width:6em" value="${stateName}" readonly />
+        <fill-box data-tip="${s.fullName}" fill="${s.color}" disabled></fill-box>
+        <input data-tip="${s.fullName}" style="width:6em" value="${s.name}" readonly />
         ${lineData}
         <div data-type="total" data-tip="Total state military personnel (considering crew)" style="font-weight: bold">${si(
           total
@@ -136,11 +132,7 @@ function overviewMilitary() {
 
   function changeAlert(state, line, alert) {
     const s = pack.states[state];
-    // SettlementForge fork patch: guard divide-by-zero. Upstream `s.alert || alert ? alert / s.alert : 0`
-    // parses as `(s.alert || alert) ? alert / s.alert : 0`, so a 0 old-alert with a positive new alert
-    // yielded Infinity → every unit count Infinity → null on JSON save (corrupted military data). When the
-    // old alert is 0 there is no valid ratio, so leave the counts unchanged (dif = 1).
-    const dif = s.alert ? alert / s.alert : 1; // modifier
+    const dif = s.alert || alert ? alert / s.alert : 0; // modifier
     s.alert = line.dataset.alert = alert;
 
     s.military.forEach(r => {
@@ -294,11 +286,9 @@ function overviewMilitary() {
 
       if (type === "icon") {
         return selectIcon(el.textContent, function (value) {
-          // SettlementForge fork patch: escape the chosen icon before innerHTML (both branches).
-          const safe = escapeHtml(value);
           el.innerHTML = value.startsWith("http") || value.startsWith("data:image")
-            ? `<img src="${safe}" style="width:1.2em;height:1.2em;pointer-events:none;">`
-            : safe;
+            ? `<img src="${value}" style="width:1.2em;height:1.2em;pointer-events:none;">`
+            : value;
         });
       }
 
@@ -332,20 +322,16 @@ function overviewMilitary() {
 
     function addUnitLine(unit) {
       const {type, icon, name, rural, urban, power, crew, separate} = unit;
-      // SettlementForge fork patch: unit type name/icon and the limitation names are untrusted
-      // loaded-.map strings rendered into innerHTML — escape before interpolation.
-      const safeIcon = escapeHtml(icon);
-      const safeName = escapeHtml(name);
       const row = document.createElement("tr");
       const typeOptions = types
-        .map(t => `<option ${type === t ? "selected" : ""} value="${escapeHtml(t)}">${escapeHtml(t)}</option>`)
+        .map(t => `<option ${type === t ? "selected" : ""} value="${t}">${t}</option>`)
         .join(" ");
 
       const getLimitButton = attr =>
-        `<button
+        `<button 
           data-tip="Select allowed ${attr}"
           data-type="${attr}"
-          title="${escapeHtml(getLimitTip(unit[attr], pack[attr]))}"
+          title="${getLimitTip(unit[attr], pack[attr])}"
           data-value="${getLimitValue(unit[attr])}">
           ${getLimitText(unit[attr])}
         </button>`;
@@ -354,12 +340,12 @@ function overviewMilitary() {
           <button data-type="icon" data-tip="Click to select unit icon">
             ${
               icon.startsWith("http") || icon.startsWith("data:image")
-                ? `<img src="${safeIcon}" style="width:1.2em;height:1.2em;pointer-events:none;">`
-                : safeIcon || ""
+                ? `<img src="${icon}" style="width:1.2em;height:1.2em;pointer-events:none;">`
+                : icon || ""
             }
           </button>
         </td>
-        <td><input data-tip="Type unit name. If name is changed for existing unit, old unit will be replaced" value="${safeName}" /></td>
+        <td><input data-tip="Type unit name. If name is changed for existing unit, old unit will be replaced" value="${name}" /></td>
         <td>${getLimitButton("biomes")}</td>
         <td>${getLimitButton("states")}</td>
         <td>${getLimitButton("cultures")}</td>
@@ -374,8 +360,8 @@ function overviewMilitary() {
           </select>
         </td>
         <td data-tip="Check if unit is <b>separate</b> and can be stacked only with the same units">
-          <input id="${safeName}Separate" type="checkbox" class="checkbox" ${separate ? "checked" : ""} />
-          <label for="${safeName}Separate" class="checkbox-label"></label>
+          <input id="${name}Separate" type="checkbox" class="checkbox" ${separate ? "checked" : ""} />
+          <label for="${name}Separate" class="checkbox-label"></label>
         </td>
         <td data-tip="Remove the unit">
           <span data-tip="Remove unit type" class="icon-trash-empty pointer" onclick="this.parentElement.parentElement.remove();"></span>
@@ -396,12 +382,12 @@ function overviewMilitary() {
       const filtered = data.filter(datum => datum.i && !datum.removed);
       const lines = filtered.map(
         ({i, name, fullName, color}) => /* html */ `
-          <tr data-tip="${escapeHtml(name)}">
-            <td><span style="color:${escapeHtml(color)}">⬤</span></td>
+          <tr data-tip="${name}">
+            <td><span style="color:${color}">⬤</span></td>
             <td>
               <input data-i="${i}" id="el${i}" type="checkbox" class="checkbox"
                 ${!initial.length || initial.includes(i) ? "checked" : ""} >
-              <label for="el${i}" class="checkbox-label">${escapeHtml(fullName || name)}</label>
+              <label for="el${i}" class="checkbox-label">${fullName || name}</label>
             </td>
           </tr>`
       );

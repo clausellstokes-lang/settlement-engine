@@ -17,11 +17,11 @@
  */
 
 import { useState, useSyncExternalStore } from 'react';
-import { FS, swatch, GOLD, PARCH, SLATE, SLATE_BG, BODY, CHROME, bottomClearance } from '../theme.js';
+import { X } from 'lucide-react';
+import { FS, swatch, GOLD, PARCH, VIOLET, VIOLET_BG, BODY } from '../theme.js';
 import { FLAGS, flag, setFlagOverride } from '../../lib/flags.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import useIsMobile from '../../hooks/useIsMobile.js';
 
 const STORAGE_KEY = 'flag.__devPanelOpen';
 
@@ -57,8 +57,6 @@ export default function DevFlagPanel() {
   });
   // Force re-renders when any flag override changes.
   useSyncExternalStore(subscribe, getTick, () => 0);
-  // Called before the DEV gate below so hook order is stable across dev/prod.
-  const isMobile = useIsMobile();
 
   // Hard-gate on DEV. The component renders nothing in prod builds; Vite
   // tree-shakes the rest of this file out via dead-code elimination once
@@ -74,11 +72,7 @@ export default function DevFlagPanel() {
   }
 
   const baseStyle = {
-    // W2-a — the DEV-only chip moves to the bottom-LEFT so it no longer piles into
-    // the coordinated bottom-right prod stack (Feedback + scroll controls); mobile
-    // lifts it clear of the bottom nav + home indicator via the shared token. Stays
-    // DEV-gated (this whole component tree-shakes out of prod above).
-    position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift) : 12, left: 12, zIndex: 10000,
+    position: 'fixed', bottom: 12, right: 12, zIndex: 10000,
     fontFamily: 'system-ui, -apple-system, sans-serif',
     fontSize: FS.sm, color: '#1c1409',
   };
@@ -95,11 +89,11 @@ export default function DevFlagPanel() {
           ...baseStyle,
           padding: '6px 10px',
           background: swatch.inkMag, color: GOLD,
-          border: '1px solid #c9a24c',
+          border: '1px solid #c9a24c', borderRadius: 6,
           boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
         }}
       >
-        flags
+        ⚑ flags
       </Button>
     );
   }
@@ -112,6 +106,7 @@ export default function DevFlagPanel() {
       width: 340, maxHeight: '70vh',
       display: 'flex', flexDirection: 'column',
       background: PARCH, border: '2px solid #1c1409',
+      borderRadius: 8,
       boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
       overflow: 'hidden',
     }}>
@@ -124,10 +119,10 @@ export default function DevFlagPanel() {
         borderBottom: '1px solid #1c1409',
       }}>
         <span style={{ fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: FS.xs }}>
-          Feature flags (DEV)
+          ⚑ Feature flags (DEV)
         </span>
         <IconButton
-          glyph="×"
+          Icon={X}
           label="Close flag panel"
           tone="ghost"
           size="sm"
@@ -171,9 +166,9 @@ export default function DevFlagPanel() {
                   {name}
                   {overridden && (
                     <span title="Override set (clear to use default)" style={{
-                      fontSize: FS.micro, fontWeight: 700, color: SLATE,
-                      background: SLATE_BG, border: '1px solid #5A6E82',
-                      padding: '0 4px', letterSpacing: '0.04em',
+                      fontSize: FS.micro, fontWeight: 700, color: VIOLET,
+                      background: VIOLET_BG, border: '1px solid #7B4FCF',
+                      borderRadius: 3, padding: '0 4px', letterSpacing: '0.04em',
                     }}>
                       OVERRIDE
                     </span>

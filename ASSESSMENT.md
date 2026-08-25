@@ -2,8 +2,7 @@
 
 > **⚠️ Historical snapshot (superseded).** This was an early external review.
 > Several of its findings have since been addressed and no longer describe the
-> codebase: the engine now has thousands of tests (it said "zero tests in
-> 76kloc"; the live count is whatever CI runs),
+> codebase: the engine now has ~2,400 tests (it said "zero tests in 76kloc"),
 > `SettlementsPanel` and the dossier tabs are code-split (it said "2.1 MB
 > chunk"), and the domain layer is JSDoc-typechecked in CI. It's kept for the
 > still-relevant **product** thinking (thesis, pricing, onboarding) and the

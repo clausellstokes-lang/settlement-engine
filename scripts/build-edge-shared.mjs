@@ -10,9 +10,6 @@
  * Entries (add one line to ENTRIES to bundle another module):
  *   - aiGrounding      (src/domain/aiGrounding.js)      → aiGroundingBundle.js
  *   - analyticsEvents  (src/lib/analyticsEvents.js)     → analyticsEventsBundle.js
- *   - aiCharter        (src/domain/aiCharter.js)        → aiCharterBundle.js
- *   - intentAtlas      (src/domain/intentAtlas.js)      → intentAtlasBundle.js
- *   - aiOutputSchema   (src/domain/aiOutputSchema.js)   → aiOutputSchemaBundle.js
  *
  * Freshness contract: re-run after editing any module a bundle transitively
  * imports. The per-bundle *.freshness.test.js tests fail on stale bundles.
@@ -33,9 +30,6 @@ const OUT_DIR = join(ROOT, 'supabase', 'functions', '_shared');
 const ENTRIES = [
   { label: 'aiGrounding',     entry: 'src/domain/aiGrounding.js',  out: 'aiGroundingBundle.js',     meta: 'aiGroundingBundle.meta.json' },
   { label: 'analyticsEvents', entry: 'src/lib/analyticsEvents.js', out: 'analyticsEventsBundle.js', meta: 'analyticsEventsBundle.meta.json' },
-  { label: 'aiCharter',       entry: 'src/domain/aiCharter.js',    out: 'aiCharterBundle.js',       meta: 'aiCharterBundle.meta.json' },
-  { label: 'intentAtlas',     entry: 'src/domain/intentAtlas.js',  out: 'intentAtlasBundle.js',     meta: 'intentAtlasBundle.meta.json' },
-  { label: 'aiOutputSchema',  entry: 'src/domain/aiOutputSchema.js', out: 'aiOutputSchemaBundle.js', meta: 'aiOutputSchemaBundle.meta.json' },
 ];
 
 function banner(entryRel) {
@@ -86,16 +80,8 @@ async function buildOne({ label, entry, out, meta }) {
     inputs: inputPaths,
   }, null, 2) + '\n');
 
-  // Strip JSDoc blocks that carry an `import(...)` TYPE reference before writing.
-  // Bundled app source may thread `@param {import('../settlement.schema.js').SimX}`
-  // annotations; esbuild (minify:false) preserves comments, so those would leak into
-  // the bundle and break `deno check` — Deno resolves JSDoc import types, and
-  // settlement.schema.js does not exist under supabase/functions/_shared/. The types
-  // are runtime-irrelevant here; the DO-NOT-EDIT banner carries no `import(` so it is
-  // preserved. The recorded sourceHash is computed from INPUT source (above), so this
-  // output-only strip does not affect freshness.
-  const bundleSrc = readFileSync(OUT_FILE, 'utf8')
-    .replace(/\/\*\*[^]*?\*\//g, (block) => (block.includes('import(') ? '' : block));
+  // Embed the hash into the banner for in-band checking (idempotent).
+  const bundleSrc = readFileSync(OUT_FILE, 'utf8');
   const finalSrc = bundleSrc.includes('Source hash:')
     ? bundleSrc
     : bundleSrc.replace('DO NOT EDIT BY HAND.', `DO NOT EDIT BY HAND.\n * Source hash: ${sourceHash}`);

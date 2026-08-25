@@ -69,7 +69,6 @@ export const TARGET_ENTITY_BY_EVENT = Object.freeze({
   DEPLETE_RESOURCE:     'resources',
   RECOVERED_RESOURCE:   'resources',
   CUT_TRADE_ROUTE:      null,
-  CREATE_ROUTE:         null,
   SETTLEMENT_DISPUTE:   'neighbours',
   BROKERED_ALLIANCE:    'neighbours',
   OPENED_TRADE_ROUTE:   'neighbours',
@@ -120,15 +119,6 @@ export const NON_AUTHORABLE_EVENTS = new Set([
 
 // ── Target options (moved from eventComposer/helpers.js buildTargetOptions —
 // domain-pure; helpers.js re-exports for its old callers) ────────────────────
-//
-// A SECOND DESK MIRRORS THESE, DELIBERATELY: the Session Ledger offers the same
-// institution/resource rosters from domain/events/targetRosters.js. Single-
-// sourcing them here was tried and REVERTED — a leaf imported by two different
-// LAZY chunks (this manifest's and the ledger's) is hoisted by Rollup into the
-// entry chunk, which measured +3,985 B of first paint and blew the closure
-// budget. The mirror is the cheaper half of that trade; parity is pinned in
-// tests/domain/tableLedger.test.js against the very entries below, so the two
-// copies cannot drift without a red.
 
 /** Build {id, name} options from a dossier collection for the target picker.
  * @param {Mut} settlement
@@ -181,7 +171,7 @@ export function buildTargetOptions(settlement, collectionKey) {
   const out = [];
   for (const item of list) {
     const id = item.id || item.faction || item.name;
-    const name = item.faction || item.name || item.id;
+    const name = item.name || item.faction || item.id;
     if (!id || !name) continue;
     if (seen.has(id)) continue;
     seen.add(id);
@@ -421,7 +411,7 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
   // ── Power ──────────────────────────────────────────────────────────────
   ADD_FACTION: entry({
     type: 'ADD_FACTION', family: 'Power', entityKind: 'settlement',
-    coversVetoCodes: ['empty_target', 'faction_already_present'],
+    coversVetoCodes: ['empty_target'],
     predicate: () => ok(),
   }),
   IMPAIR_FACTION: entry({
@@ -580,23 +570,6 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
     targetOptions: qualifyingNeighbourOptions,
     predicate: generosityVerbPredicate,
   }),
-  // Directive 3 — the DM charters a road to ANOTHER SAVE, so its target roster is
-  // cross-settlement and this settlement object simply cannot see it (targetsFrom
-  // stays null; the composer supplies the roster the way the neighbour-link idiom
-  // already does). The real legality gate is therefore deliberately NOT duplicated
-  // here as a half-informed guess: domain/roads/userRoutes.js validateUserRoute is
-  // the ONE gate, and the picker and the command runtime both run it. A permissive
-  // predicate that admits a verb the shared gate then judges is honest; a
-  // restrictive one written against data this layer lacks would only be wrong.
-  CREATE_ROUTE: entry({
-    type: 'CREATE_ROUTE', family: 'Relations', entityKind: 'settlement',
-    coversVetoCodes: [
-      'route_endpoints_incomplete',
-      'route_mode_unsupported',
-      'route_identity_mismatch',
-    ],
-    predicate: () => ok(),
-  }),
   OFFER_CREDIT: entry({
     type: 'OFFER_CREDIT', family: 'Relations',
     coversVetoCodes: ['credit_unqualified', 'credit_nothing_to_lend'],
@@ -664,7 +637,6 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
 const VETO_PROSE = {
   institution_not_found: d => `No institution "${d}" is here to act on.`,
   faction_not_found: d => `No faction "${d}" is here to act on.`,
-  faction_already_present: d => `${d || 'That faction'} is already present; impair or restore it instead of adding it again.`,
   npc_not_found: d => `No NPC "${d}" is here to act on.`,
   target_not_found: d => `No corrupt NPC, faction, or institution "${d}" to expose.`,
   npc_already_corrupt: d => `${d || 'That NPC'} is already compromised.`,

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { FS, swatch, MUTED, EMPTY_VALUE, ANCHOR_OFFSET } from '../theme.js';
+import { FS, swatch, MUTED, EMPTY_VALUE } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
 import { TIER_LABELS, catColor } from './design';
-import { serif } from './Primitives';
+import { serif, TabIntro } from './Primitives';
 import { BODY, FACTION_COLORS } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
-import { scoreBand, scoreColor } from '../../domain/display/defenseScoreBands.js';
-import EconomyFreshnessNote from './EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in domain/display/economyFreshness.js
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -50,7 +48,7 @@ function FactionBar({ factions }) {
   };
   return (
     <div>
-      <div style={{display:'flex',height:20,overflow:'hidden',gap:1,marginBottom:10}}>
+      <div style={{display:'flex',height:20,borderRadius:4,overflow:'hidden',gap:1,marginBottom:10}}>
         {factions.map((f,i)=>{
           const pct=Math.round((f.power||0)/total*100);
           const c=FACTION_COLORS[i%FACTION_COLORS.length];
@@ -63,12 +61,12 @@ function FactionBar({ factions }) {
         {factions.map((f,i)=>{
           const c=FACTION_COLORS[i%FACTION_COLORS.length];
           const mods=(f.modifiers||[]).concat(f.modifier?[f.modifier]:[]);
-          return <div id={entityAnchor('faction', { id:f.id || f.faction, name:f.faction })} key={i} style={{display:'flex',alignItems:'center',gap:7,scrollMarginTop:ANCHOR_OFFSET}}>
-            <div style={{width:10,height:10,background:c,flexShrink:0}}/>
+          return <div id={entityAnchor('faction', { id:f.id || f.faction, name:f.faction })} key={i} style={{display:'flex',alignItems:'center',gap:7,scrollMarginTop:80}}>
+            <div style={{width:10,height:10,borderRadius:2,background:c,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:600,color:ink,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{f.faction}</span>
             {mods.slice(0,2).map((mod,j)=>{
               const ms=modStyle[mod]||{c:'#6b5340',bg:'#f5f0e8',br:'#c8b89a',label:mod};
-              return <span key={j} style={{fontSize:FS.micro,fontWeight:600,color:ms.c,background:ms.bg,border:`1px solid ${ms.br}`,padding:'0 4px',letterSpacing:'0.03em',textTransform:'uppercase',flexShrink:0}}>{ms.label}</span>;
+              return <span key={j} style={{fontSize:FS.micro,fontWeight:600,color:ms.c,background:ms.bg,border:`1px solid ${ms.br}`,borderRadius:3,padding:'0 4px',letterSpacing:'0.03em',textTransform:'uppercase',flexShrink:0}}>{ms.label}</span>;
             })}
             <span style={{fontSize:FS.xs,fontWeight:700,color:c,flexShrink:0}}>{f.power}%</span>
           </div>;
@@ -83,7 +81,7 @@ function FactionBar({ factions }) {
 // Used as <SitTile/> in the SITUATION ROW below.
 function SitTile({ label, value, color, sub }) {
   return (
-    <div style={{flex:1,minWidth:0,background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,padding:'8px 10px'}}>
+    <div style={{flex:1,minWidth:0,background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px'}}>
       <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>
       <div style={{fontSize:FS.sm,fontWeight:700,color:ink,lineHeight:1.3,marginBottom:sub?2:0}}>{value}</div>
       {sub&&<div style={{fontSize:FS.xxs,color:muted,lineHeight:1.3}}>{sub}</div>}
@@ -147,13 +145,9 @@ function SummaryTab({ settlement:r }) {
   const ecoTileColor=eco.prosperity==='Thriving'||eco.prosperity==='Prosperous'?'#1a5a28':eco.prosperity==='Struggling'||eco.prosperity==='Poor'||eco.prosperity==='Impoverished'?'#8b1a1a':'#a0762a';
   const ecoSub=foodCanon.deficit>0?`Food deficit ${foodCanon.deficitPct}%`:foodCanon.surplus>0?'Food surplus':'';
 
-  // Defense tile. R-5b item #20: the sub-line was "Avg. score N/100" — the raw
-  // mean of the same five scores OverviewTab now bands, and the least legible
-  // number on the surface. It reads as the band word instead, off the shared
-  // defenseScoreBands ladder (which also takes over the local 70/45/25 colour
-  // twin, so the tile's colour and its word can never disagree).
+  // Defense tile
   const defScore=dp.scores?Math.round((dp.scores.military+dp.scores.monster+dp.scores.internal+dp.scores.economic+dp.scores.magical)/5):null;
-  const defColor=scoreColor(defScore);
+  const defColor=defScore>=70?'#1a5a28':defScore>=45?'#a0762a':defScore>=25?'#8a4010':'#8b1a1a';
 
   // Power stability color
   const powStab=ps?.stability||'';
@@ -161,16 +155,17 @@ function SummaryTab({ settlement:r }) {
 
   return (
     <div>
+      <TabIntro tabKey="summary" />
 
       {/* ── IDENTITY HEADER ──────────────────────────────────────────────── */}
-      <div style={{background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 70%,#1c1409 100%)',padding:isMobile?'14px':'16px 20px',marginBottom:16}}>
+      <div style={{background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 70%,#1c1409 100%)',borderRadius:8,padding:isMobile?'14px':'16px 20px',marginBottom:16}}>
         <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:10,marginBottom:8}}>
           <div style={{minWidth:0,flex:1}}>
             <div style={{...serif,fontSize:isMobile?22:28,fontWeight:600,color:swatch['#C49A3C'],lineHeight:1.1,marginBottom:4}}>{name}</div>
             <div style={{fontSize:FS.xs,color:swatch.inkMag3,letterSpacing:'0.02em'}}>{tierLabel} · {formatCount(pop)} pop. · {tradeAccess} · est. {hist?.age?`~${hist.age} yrs ago`:'unknown'}</div>
           </div>
           <Button variant="gold" size="md" onClick={copyText} style={{flexShrink:0}}>
-            {copied?'✓ Copied':'Copy'}
+            {copied?'✓ Copied!':'Copy'}
           </Button>
         </div>
         <p style={{fontSize: FS['13.5'],...serif,color:swatch['#E8D8B0'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>
@@ -181,10 +176,11 @@ function SummaryTab({ settlement:r }) {
       {/* ── ACTIVE CRISIS (if any) ───────────────────────────────────────── */}
       {stresses.length>0&&<div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:14}}>
         {stresses.map((v,i)=>(
-          <div key={i} style={{border:`2px solid ${v.colour}`,padding:'14px 16px',background:`${v.colour}10`}}>
+          <div key={i} style={{border:`2px solid ${v.colour}`,borderRadius:8,padding:'14px 16px',background:`${v.colour}10`}}>
             <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:8}}>
+              <span style={{fontSize: FS['22'],lineHeight:1}}>{v.icon}</span>
               <span style={{...serif,fontSize: FS['18'],fontWeight:700,color:v.colour}}>{v.label}</span>
-              <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,background:v.colour,padding:'2px 7px',letterSpacing:'0.07em'}}>ACTIVE CRISIS</span>
+              <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,background:v.colour,borderRadius:4,padding:'2px 7px',letterSpacing:'0.07em'}}>ACTIVE CRISIS</span>
             </div>
             <p style={{fontSize:FS.md,color:ink,lineHeight:1.55,marginBottom:8}}>{v.summary}</p>
             <div style={{borderTop:`1px solid ${v.colour}35`,paddingTop:8}}>
@@ -196,13 +192,13 @@ function SummaryTab({ settlement:r }) {
       </div>}
 
       {/* ── ARRIVAL SCENE ────────────────────────────────────────────────── */}
-      {r.arrivalScene&&<div style={{background:swatch.inkMag,padding:'14px 18px',marginBottom:14,border:'1px solid #3a2a10'}}>
+      {r.arrivalScene&&<div style={{background:swatch.inkMag,borderRadius:8,padding:'14px 18px',marginBottom:14,border:'1px solid #3a2a10'}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:gold,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:8}}>Arrival</div>
         <p style={{...serif,fontSize: FS['14'],color:swatch['#F0E8D8'],lineHeight:1.8,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>
       </div>}
 
       {/* Pressure sentence if no arrivalScene */}
-      {r.pressureSentence&&!r.arrivalScene&&<div style={{background:stresses.length?'#faf6ef':'#1c1409',border:stresses.length?'1px solid #e0d0b0':'1px solid #3a2a10',borderLeft:stresses.length?'3px solid #a0762a':undefined,padding:'10px 14px',marginBottom:14}}>
+      {r.pressureSentence&&!r.arrivalScene&&<div style={{background:stresses.length?'#faf6ef':'#1c1409',border:stresses.length?'1px solid #e0d0b0':'1px solid #3a2a10',borderLeft:stresses.length?'3px solid #a0762a':undefined,borderRadius:7,padding:'10px 14px',marginBottom:14}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:gold,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Current Situation</div>
         <p style={{fontSize:FS.md,color:stresses.length?'#3a2a10':'#f0e8d8',lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>
       </div>}
@@ -211,35 +207,26 @@ function SummaryTab({ settlement:r }) {
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         <SitTile label="Power" value={powStab.split(';')[0].split('(')[0].split('—')[0].trim()} color={powColor} sub={allFactions[0]?.faction}/>
         <SitTile label="Economy" value={eco.prosperity||EMPTY_VALUE} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split('—')[0].trim()}/>
-        <SitTile label="Defense" value={dp.readiness?.label||EMPTY_VALUE} color={defColor} sub={defScore?`Systems average: ${scoreBand(defScore)}`:undefined}/>
+        <SitTile label="Defense" value={dp.readiness?.label||EMPTY_VALUE} color={defColor} sub={defScore?`Avg. score ${defScore}/100`:undefined}/>
       </div>
 
-      {/* ── ECONOMY FRESHNESS (R-3 declaration, R-4 shared leaf) — the honest
-          stale-window note for the Economy tile above: applied events are not
-          re-derived into prosperity / food balance until the next full survey.
-          Anchored HERE rather than at the top of the tab so it qualifies the one
-          stale tile instead of reading as an ambient caveat over the whole
-          dossier; the tighter margin pulls it under the tile row. Conditional on
-          the reconciliationLog detector; absent trail ⇒ byte-identical tab. */}
-      <EconomyFreshnessNote settlement={r} variant="tallies" margin="-6px 0 12px" />
-
       {/* ── POWER + CONFLICTS ────────────────────────────────────────────── */}
-      <div style={{background:swatch['#F4F6FD'],border:'1px solid #b8c8e8',borderLeft:'3px solid #2a3a7a',padding:'12px 14px',marginBottom:12}}>
+      <div style={{background:swatch['#F4F6FD'],border:'1px solid #b8c8e8',borderLeft:'3px solid #2a3a7a',borderRadius:8,padding:'12px 14px',marginBottom:12}}>
         <div style={{fontSize:FS.xxs,fontWeight:800,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Power & Conflict</div>
         <FactionBar factions={allFactions.slice(0,5)}/>
-        {ps?.recentConflict&&<p style={{fontSize:FS.xs,color:swatch.danger,marginTop:8,lineHeight:1.4}}>{ps.recentConflict}</p>}
+        {ps?.recentConflict&&<p style={{fontSize:FS.xs,color:swatch.danger,marginTop:8,lineHeight:1.4}}>⚠ {ps.recentConflict}</p>}
         {allConflicts.length>0&&<>
           <div style={{height:1,background:swatch['#C0CCE8'],margin:'10px 0'}}/>
           <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:6}}>Active Conflicts</div>
           <div style={{display:'flex',flexDirection:'column',gap:5}}>
             {allConflicts.map((c,i)=>{
               const iHigh=c.intensity==='high';
-              return <div key={i} style={{display:'flex',alignItems:'flex-start',gap:8,padding:'6px 8px',background:swatch['#FAF8F4'],borderLeft:`3px solid ${iHigh?'#8b1a1a':'#a0762a'}`}}>
+              return <div key={i} style={{display:'flex',alignItems:'flex-start',gap:8,padding:'6px 8px',background:'rgba(250,248,244,0.97)',borderRadius:5,borderLeft:`3px solid ${iHigh?'#8b1a1a':'#a0762a'}`}}>
                 <div style={{flex:1,minWidth:0}}>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:ink}}>{c.parties?.[0]}</span>
                   <span style={{fontSize:FS.xs,color:muted}}> vs </span>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:ink}}>{c.parties?.[1]}</span>
-                  <span style={{fontSize:FS.xxs,fontWeight:700,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf4e8',padding:'0 4px',marginLeft:6}}>{iHigh?'HIGH':'MOD'}</span>
+                  <span style={{fontSize:FS.xxs,fontWeight:700,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf4e8',borderRadius:3,padding:'0 4px',marginLeft:6}}>{iHigh?'HIGH':'MOD'}</span>
                   {c.issue&&<p style={{fontSize:FS.xs,color:second,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
                 </div>
               </div>;
@@ -249,14 +236,14 @@ function SummaryTab({ settlement:r }) {
       </div>
 
       {/* ── PROMINENT RELATIONSHIP ────────────────────────────────────────── */}
-      {pr?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'9px 13px',marginBottom:12}}>
+      {pr?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',borderRadius:7,padding:'9px 13px',marginBottom:12}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Notable Connection</div>
         <p style={{fontSize: FS['12.5'],...serif,color:swatch['#3A2A10'],lineHeight:1.6,margin:0,fontStyle:'italic'}}>{pr.phrasing}</p>
         <p style={{fontSize:FS.xxs,color:muted,margin:'5px 0 0'}}>→ See Relationships tab for the full web.</p>
       </div>}
 
       {/* ── KEY FIGURES (roster grid) ─────────────────────────────────────── */}
-      <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #3d2b1a',padding:'12px 14px',marginBottom:12}}>
+      <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #3d2b1a',borderRadius:8,padding:'12px 14px',marginBottom:12}}>
         <div style={{fontSize:FS.xxs,fontWeight:800,color:swatch.inkMag2,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Key Figures</div>
         {topNPCs.length>0
           ?<div style={{display:'grid',gridTemplateColumns:isMobile?'1fr':'1fr 1fr',gap:'8px 16px'}}>
@@ -264,8 +251,8 @@ function SummaryTab({ settlement:r }) {
               const traits=normalizeNpcTraits(v);
               const visibleTraits=traits.filter(t=>t.visibility!=='gm').slice(0,5);
               const catCol=catColor(v.category)||gold;
-              return <div id={entityAnchor('npc', v)} key={i} style={{display:'flex',gap:8,alignItems:'flex-start',padding:'6px 0',borderBottom:i<topNPCs.length-2||isMobile?'1px solid #f0ead8':'none',scrollMarginTop:ANCHOR_OFFSET}}>
-                <div style={{width:3,background:catCol,alignSelf:'stretch',flexShrink:0,minHeight:32}}/>
+              return <div id={entityAnchor('npc', v)} key={i} style={{display:'flex',gap:8,alignItems:'flex-start',padding:'6px 0',borderBottom:i<topNPCs.length-2||isMobile?'1px solid #f0ead8':'none',scrollMarginTop:80}}>
+                <div style={{width:3,borderRadius:2,background:catCol,alignSelf:'stretch',flexShrink:0,minHeight:32}}/>
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{display:'flex',alignItems:'baseline',gap:5,marginBottom:2,flexWrap:'wrap'}}>
                     <span style={{fontSize:FS.md,fontWeight:700,color:ink}}>{v.name}</span>
@@ -273,7 +260,7 @@ function SummaryTab({ settlement:r }) {
                     {v.influence==='high'&&<span style={{fontSize:FS.micro,color:gold,fontWeight:700}}>●●●</span>}
                   </div>
                   {visibleTraits.length>0&&<div style={{display:'flex',gap:3,flexWrap:'wrap',marginBottom:3}}>
-                    {visibleTraits.map((t,j)=><span key={`${t.key}-${j}`} title={t.value} style={{fontSize:FS.xxs,color:second,background:swatch['#EDE3CC'],padding:'0 4px'}}>{t.label}: {t.value}</span>)}
+                    {visibleTraits.map((t,j)=><span key={`${t.key}-${j}`} title={t.value} style={{fontSize:FS.xxs,color:second,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 4px'}}>{t.label}: {t.value}</span>)}
                   </div>}
                   {(v.goal?.short||v.goals?.[0])&&<p style={{fontSize:FS.xs,color:swatch.inkMag2,margin:0,lineHeight:1.3}}>
                     <span style={{color:gold,fontWeight:700}}>→ </span>{v.goal?.short||v.goals?.[0]}
@@ -287,7 +274,7 @@ function SummaryTab({ settlement:r }) {
       </div>
 
       {/* ── PLOT HOOKS (collapsible) ───────────────────────────────────────── */}
-      {allHooks.length>0&&<div style={{border:'1px solid #c8b0e0',borderLeft:'3px solid #5a2a8a',overflow:'hidden',marginBottom:12}}>
+      {allHooks.length>0&&<div style={{border:'1px solid #c8b0e0',borderLeft:'3px solid #5a2a8a',borderRadius:8,overflow:'hidden',marginBottom:12}}>
         <Button variant="ghost" aria-expanded={hooksOpen} aria-pressed={hooksOpen} onClick={()=>setHooksOpen(v=>!v)} fullWidth trailingIcon={<span style={{fontSize:FS.xs,color:muted}}>{hooksOpen?'▲':'▼'}</span>} style={{justifyContent:'space-between',padding:'9px 13px',background:hooksOpen?'#f4f0fd':'#f8f4fd',border:'none',borderRadius:0,WebkitTapHighlightColor:'transparent'}}>
           <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em'}}>Plot Hooks ({allHooks.length})</span>
         </Button>
@@ -295,15 +282,15 @@ function SummaryTab({ settlement:r }) {
           <div style={{display:'flex',gap:5,flexWrap:'wrap',marginBottom:10}}>
             {Object.entries(hookCounts).map(([cat,count])=>{
               const meta=PLOT_HOOK_CATEGORIES[cat]||PLOT_HOOK_CATEGORIES.tension;
-              return <span key={cat} style={{fontSize:FS.xxs,fontWeight:700,color:meta.color,background:`${meta.color}12`,border:`1px solid ${meta.color}30`,padding:'1px 6px'}}>{meta.label} {count}</span>;
+              return <span key={cat} style={{fontSize:FS.xxs,fontWeight:700,color:meta.color,background:`${meta.color}12`,border:`1px solid ${meta.color}30`,borderRadius:4,padding:'1px 6px'}}>{meta.label} {count}</span>;
             })}
           </div>
           <div style={{display:'flex',flexDirection:'column',gap:8}}>
             {allHooks.map((v,i)=>{
               const meta=PLOT_HOOK_CATEGORIES[v.category]||PLOT_HOOK_CATEGORIES.tension;
               return (
-              <div id={entityAnchor('hook', { id:`${v.category}-${i}`, name:v.text.slice(0,40) })} key={i} style={{display:'flex',gap:10,alignItems:'flex-start',scrollMarginTop:ANCHOR_OFFSET}}>
-                <span style={{width:4,alignSelf:'stretch',background:meta.color,opacity:v.accent?1:0.55,flexShrink:0}}/>
+              <div id={entityAnchor('hook', { id:`${v.category}-${i}`, name:v.text.slice(0,40) })} key={i} style={{display:'flex',gap:10,alignItems:'flex-start',scrollMarginTop:80}}>
+                <span style={{width:4,alignSelf:'stretch',borderRadius:2,background:meta.color,opacity:v.accent?1:0.55,flexShrink:0}}/>
                 <div style={{flex:1,minWidth:0}}>
                   <span style={{fontSize:FS.xxs,fontWeight:700,color:meta.color,textTransform:'uppercase',letterSpacing:'0.04em',marginRight:6}}>{v.source}</span>
                   {v.role&&<span style={{fontSize:FS.xxs,color:muted,marginRight:6}}>{v.role}</span>}
@@ -312,7 +299,7 @@ function SummaryTab({ settlement:r }) {
                   {v.links?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap',marginTop:4}}>
                     {v.links.slice(0,4).map((link,j)=>{
                       const anchor=entityAnchor(link.kind, { id:link.id, name:link.label });
-                      return <a key={`${link.kind}-${j}`} href={`#${anchor}`} style={{fontSize:FS.micro,fontWeight:700,color:meta.color,background:`${meta.color}10`,border:`1px solid ${meta.color}25`,padding:'1px 5px',textDecoration:'none'}}>{link.label}</a>;
+                      return <a key={`${link.kind}-${j}`} href={`#${anchor}`} style={{fontSize:FS.micro,fontWeight:700,color:meta.color,background:`${meta.color}10`,border:`1px solid ${meta.color}25`,borderRadius:3,padding:'1px 5px',textDecoration:'none'}}>{link.label}</a>;
                     })}
                   </div>}
                 </div>
@@ -323,7 +310,7 @@ function SummaryTab({ settlement:r }) {
       </div>}
 
       {/* ── SETTING accordion ─────────────────────────────────────────────── */}
-      {(firstQuarter||spatial?.layout||hist?.historicalCharacter||Array.isArray(reason))&&<div style={{border:'1px solid #c8d8b0',overflow:'hidden',marginBottom:10}}>
+      {(firstQuarter||spatial?.layout||hist?.historicalCharacter||Array.isArray(reason))&&<div style={{border:'1px solid #c8d8b0',borderRadius:8,overflow:'hidden',marginBottom:10}}>
         <Button variant="ghost" aria-expanded={settingOpen} aria-pressed={settingOpen} onClick={()=>setSettingOpen(v=>!v)} fullWidth trailingIcon={<span style={{fontSize:FS.xs,color:muted}}>{settingOpen?'▲':'▼'}</span>} style={{justifyContent:'space-between',padding:'9px 13px',background:settingOpen?'#edf5e8':'#f4faf0',border:'none',borderRadius:0,WebkitTapHighlightColor:'transparent'}}>
           <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#1A4A2A'],textTransform:'uppercase',letterSpacing:'0.06em'}}>Setting & Context</span>
         </Button>
@@ -346,14 +333,14 @@ function SummaryTab({ settlement:r }) {
             <div style={{fontSize:FS.xxs,fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:4}}>Why This Settlement Exists</div>
             {reason.map((line,i)=><p key={i} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,paddingLeft:10,borderLeft:'2px solid #e0d0b0',margin:'0 0 4px'}}>{line}</p>)}
           </div>}
-          {r.pressureSentence&&stresses.length>0&&<div style={{marginTop:10,background:swatch['#F7F0E4'],borderLeft:'3px solid #a0762a',padding:'7px 10px'}}>
+          {r.pressureSentence&&stresses.length>0&&<div style={{marginTop:10,background:swatch['#F7F0E4'],borderLeft:'3px solid #a0762a',borderRadius:4,padding:'7px 10px'}}>
             <p style={{fontSize:FS.sm,color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}>{r.pressureSentence}</p>
           </div>}
         </div>}
       </div>}
 
       {/* ── INSTITUTIONS (categorized) ────────────────────────────────────── */}
-      <div style={{border:'1px solid #e0d0b0',overflow:'hidden'}}>
+      <div style={{border:'1px solid #e0d0b0',borderRadius:8,overflow:'hidden'}}>
         <button type="button" aria-expanded={instOpen} onClick={()=>setInstOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
           <div style={{display:'flex',alignItems:'center',gap:10}}>
             <span style={{fontSize:FS.xs,fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
@@ -361,7 +348,7 @@ function SummaryTab({ settlement:r }) {
           </div>
           <div style={{display:'flex',gap:8,alignItems:'center'}}>
             {catOrder.filter(c=>instByCat[c]?.length).map(c=>(
-              <span key={c} style={{fontSize:FS.xxs,fontWeight:600,color:catColor(c),background:`${catColor(c)}15`,padding:'1px 6px'}}>{instByCat[c].length}</span>
+              <span key={c} style={{fontSize:FS.xxs,fontWeight:600,color:catColor(c),background:`${catColor(c)}15`,borderRadius:3,padding:'1px 6px'}}>{instByCat[c].length}</span>
             ))}
             <span style={{fontSize:FS.xs,color:muted,marginLeft:4}}>{instOpen?'▲':'▼'}</span>
           </div>
@@ -373,7 +360,7 @@ function SummaryTab({ settlement:r }) {
               <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                 {instByCat[cat].sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
                   const srcColor=inst.source==='required'?gold:inst.source==='forced'?'#1a5a28':inst.source==='auto-resolved'?'#2a3a7a':'#6b5340';
-                  return <span id={entityAnchor('institution', inst)} key={i} style={{fontSize:FS.xs,padding:'2px 8px',background:`${srcColor}10`,border:`1px solid ${srcColor}30`,color:ink,fontWeight:500,scrollMarginTop:ANCHOR_OFFSET}}>{inst.name}</span>;
+                  return <span id={entityAnchor('institution', inst)} key={i} style={{fontSize:FS.xs,padding:'2px 8px',borderRadius:4,background:`${srcColor}10`,border:`1px solid ${srcColor}30`,color:ink,fontWeight:500,scrollMarginTop:80}}>{inst.name}</span>;
                 })}
               </div>
             </div>

@@ -43,80 +43,39 @@
  */
 
 import { clamp01 } from '../../kernel/math.js';
-import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { slugify } from '../../kernel/slugify.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { RETIRED_CHAIN_ALIASES } from '../../data/supplyChainResourceIndex.js';
 import { getCompatibleResources, getTerrainType } from '../../generators/terrainHelpers.js';
-import {
-  computeActiveChains,
-  deriveExportsFromChains,
-  deriveLocalProductionFromChains,
-} from '../../generators/computeActiveChains.js';
-import {
-  isMaterializedCustomContent,
-  nativeSemanticDepletedResourceKeys,
-  nativeSemanticName,
-  nativeSemanticResourceKeys,
-} from '../content/customContentSemanticAuthority.js';
+import { computeActiveChains } from '../../generators/computeActiveChains.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { stablePart } from './worldState.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { classifyResource } from './resourceTaxonomy.js';
 import { lifecycleStatusOf } from './settlementLifecycleFirstClass.js';
-import { pickLine, RESOURCE_NEWS } from './eventProse.js';
 
 // ── The loose sim shapes this mover reads (concrete typedefs — no `any`) ────────
 /** @typedef {{ get?: (id: string, kind: string) => ({ score?: number } | undefined) }} PressureIdx */
 /** @typedef {{ key?: string, custom?: boolean }} ResourceEdit */
-/** @typedef {{
- *   added?: ResourceEdit[],
- *   removed?: string[],
- *   removedNative?: string[],
- *   depleted?: string[],
- *   depletedCustomDefinitionIds?: string[],
- *   recovered?: string[]
- * }} ResourceEdits */
+/** @typedef {{ added?: ResourceEdit[], removed?: string[], depleted?: string[], recovered?: string[] }} ResourceEdits */
 /**
  * @typedef {{ terrainType?: string, tradeRouteAccess?: string, terrainOverride?: (string|null),
  *   magicExists?: boolean, priorityMagic?: number, nearbyResources?: string[],
- *   nearbyResourcesNative?: string[], nearbyResourcesCustom?: string[],
- *   nearbyResourcesDepleted?: string[], nearbyResourcesNativeDepleted?: string[],
- *   nearbyResourceDefinitions?: Record<string, unknown>[],
- *   nearbyResourceDefinitionsDepleted?: Record<string, unknown>[],
- *   nearbyResourcesState?: Record<string, string>, resourceEdits?: ResourceEdits,
- *   stressTypes?: string[] }} RDConfig
+ *   nearbyResourcesCustom?: string[], nearbyResourcesDepleted?: string[],
+ *   nearbyResourcesState?: Record<string, string>, resourceEdits?: ResourceEdits }} RDConfig
  */
 /** @typedef {{ archetype?: string }} RDCondition */
 /** @typedef {{ id?: unknown, name?: unknown }} RDInstitution */
-/** @typedef {{
- *   needKey?: string,
- *   chainId?: string,
- *   label?: string,
- *   outputs?: unknown[],
- *   exportable?: boolean,
- *   status?: string,
- *   resourceKey?: string|null,
- *   resourceCondition?: string,
- *   resourceInputKey?: string|null,
- *   resourceInputCondition?: string,
- *   resourceInputAvailable?: boolean,
- *   resourceDepleted?: boolean,
- *   substituteActive?: boolean
- * }} RDChain */
-/** @typedef {{
- *   activeChains?: RDChain[],
- *   primaryExports?: unknown[],
- *   localProduction?: unknown[]
- * }} RDEconomicState */
+/** @typedef {{ needKey?: string, chainId?: string, outputs?: unknown[], exportable?: boolean }} RDChain */
+/** @typedef {{ activeChains?: RDChain[], primaryExports?: unknown[] }} RDEconomicState */
 /**
  * @typedef {{ config?: RDConfig, institutions?: RDInstitution[], activeConditions?: RDCondition[],
  *   tier?: string, tradeRoute?: string, name?: string, economicState?: RDEconomicState,
  *   resourceHistory?: unknown[], _config?: Record<string, unknown> }} RDSettlement
  */
 /** @typedef {{ saveId?: unknown, resource?: string, op?: string }} RDMembership */
-/** @typedef {{ id?: string, severity?: number, headline?: string, summary?: string, candidateType?: string, generatedAtTick?: number, resourceMembership?: RDMembership }} RDOutcome */
+/** @typedef {{ id?: string, severity?: number, headline?: string, summary?: string, candidateType?: string, resourceMembership?: RDMembership, metadata?: { tick?: number } }} RDOutcome */
 /** @typedef {{ id?: unknown, name?: unknown, settlement?: RDSettlement }} RDSnapItem */
 /** @typedef {{ settlements?: RDSnapItem[] }} RDSnapshot */
 /** @typedef {{ tick?: number, settlementTickStates?: Record<string, Record<string, unknown>>, simulationRules?: Record<string, unknown> }} RDWorldState */
@@ -231,24 +190,15 @@ export function latentResourcePool(config, settlement) {
   const terrain = terrainOf(config);
   const route = routeOf(settlement, config);
   const noMagic = config?.magicExists === false;
-  // Organic discovery mints native catalog membership. A custom definition
-  // with the same display label is not that native resource and must not block
-  // discovery. The shared authority handles both current source sidecars and
-  // the conservative legacy fallback.
-  const nativeResources = nativeSemanticResourceKeys(
-    /** @type {Record<string, unknown>} */ (config || {}),
-  );
-  const held = new Set(nativeResources.map(normKey));
+  // Current roster + custom nodes (never re-mint a node we already hold).
+  const held = new Set([
+    ...(Array.isArray(config?.nearbyResources) ? config.nearbyResources : []),
+    ...(Array.isArray(config?.nearbyResourcesCustom) ? config.nearbyResourcesCustom : []),
+  ].map(normKey));
   // Previously-removed keys — a worked-out vein does not return (JUDGMENT, vetoable).
   const removed = new Set(
-    [
-      ...(Array.isArray(config?.resourceEdits?.removed)
-        ? config.resourceEdits.removed
-        : []),
-      ...(Array.isArray(config?.resourceEdits?.removedNative)
-        ? config.resourceEdits.removedNative
-        : []),
-    ].map(normKey),
+    (config?.resourceEdits?.removed && Array.isArray(config.resourceEdits.removed) ? config.resourceEdits.removed : [])
+      .map(normKey),
   );
   /** @type {string[]} */
   const pool = [];
@@ -273,13 +223,13 @@ export function isOrganicallyRemovable(resource) {
   return classifyResource(resource).recoveryMode === 'manual';
 }
 
-/** The live native-depletion state of a roster key.
+/** The live depletion state of a roster key (mirrors tierResourceDynamics.resourceState).
  *  @param {RDConfig} config @param {string} resource @returns {boolean} */
 function isDepleted(config, resource) {
-  const wanted = normKey(resource);
-  return nativeSemanticDepletedResourceKeys(
-    /** @type {Record<string, unknown>} */ (config || {}),
-  ).some(key => normKey(key) === wanted);
+  const explicit = config?.nearbyResourcesState?.[resource];
+  if (explicit) return explicit === 'depleted';
+  const set = new Set(Array.isArray(config?.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : []);
+  return set.has(resource);
 }
 
 /** The prospecting DRIVE (0..1) — the §H load on discovery. @param {RDSettlement} settlement
@@ -290,15 +240,7 @@ function prospectDrive(settlement, config, pressureIdx, cid) {
   const boom = conds.some((c) => c?.archetype === 'boom') ? T.DISCOVERY_BOOM_BONUS : 0;
   const insts = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const hasExtraction = insts.some((i) => {
-    // Native institution ids/names retain their historical discovery bonus.
-    // A current custom entity's presentation fields carry no implicit native
-    // extraction authority, even when the author calls it "Mine".
-    const nativeAddress =
-      `${String(i?.id ?? '')} ${nativeSemanticName(i)}`.toLowerCase();
-    const custom = isMaterializedCustomContent(
-      /** @type {unknown} */ (i),
-    );
-    const hay = custom ? '' : nativeAddress;
+    const hay = `${i?.id || ''} ${i?.name || ''}`.toLowerCase();
     return EXTRACTION_KEYWORDS.some(kw => hay.includes(kw));
   });
   const extraction = hasExtraction ? T.DISCOVERY_EXTRACTION_BONUS : 0;
@@ -369,12 +311,11 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
         ruleId: 'resource_discovery',
         ruleFamily: 'resource',
         targetSaveId: item.id,
-        generatedAtTick: tick,
         severity: clamp01(0.3 + nextAcc * 0.35),
         probability: clamp01(T.DISCOVERY_EMIT_P + nextAcc * 0.22),
         applyMode: authorityFor(rules, 'resource_discovery', 'auto'),
-        headline: pickLine(RESOURCE_NEWS.discovery.headline, `${cid}:${resource}:${tick}:h`, { label, labelLower: label.toLowerCase(), name }),
-        summary: pickLine(RESOURCE_NEWS.discovery.summary, `${cid}:${resource}:${tick}:s`, { label, labelLower: label.toLowerCase(), name }),
+        headline: `${label} discovered near ${name}`,
+        summary: `Prospecting near ${name} has struck ${label.toLowerCase()} — a new resource for the local economy.`,
         reasons: [
           `Sustained prospecting pressure has built to ${Math.round(nextAcc * 100)}% (an arc, not a decree).`,
           `${label} is terrain-legal here — the ground could always have held it.`,
@@ -387,9 +328,7 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
     }
 
     // ── REMOVAL dwell (nonrenewable, depleted ≥ REMOVAL_DWELL ticks) ───────────
-    const roster = nativeSemanticResourceKeys(
-      /** @type {Record<string, unknown>} */ (config),
-    );
+    const roster = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
     const prevDepletedSince = (prev && prev.depletedSince && typeof prev.depletedSince === 'object')
       ? prev.depletedSince : {};
     /** @type {Record<string, number>} */
@@ -426,12 +365,11 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
         ruleId: 'resource_removal',
         ruleFamily: 'resource',
         targetSaveId: item.id,
-        generatedAtTick: tick,
         severity,
         probability: clamp01(T.REMOVAL_EMIT_P + severity * 0.28),
         applyMode: authorityFor(rules, 'resource_removal', 'auto'),
-        headline: pickLine(RESOURCE_NEWS.removal.headline, `${cid}:${resource}:${tick}:h`, { label, labelLower: label.toLowerCase(), name }),
-        summary: pickLine(RESOURCE_NEWS.removal.summary, `${cid}:${resource}:${tick}:s`, { label, labelLower: label.toLowerCase(), name }),
+        headline: `${label}'s workings near ${name} have given out`,
+        summary: `The ${label.toLowerCase()} near ${name} has been worked out — after long depletion the vein is done.`,
         reasons: [
           `${label} has dwelled depleted for ${dwell} ticks (≥ ${T.REMOVAL_DWELL}).`,
           `A nonrenewable resource (${taxonomy.kind}) does not recover once truly exhausted.`,
@@ -475,26 +413,13 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
 
 /** Normalized resourceEdits view (mirrors mutateWorld.resourceEditsOf).
  *  @param {RDConfig} config
- *  @returns {{
- *    added: ResourceEdit[],
- *    removed: string[],
- *    removedNative: string[],
- *    depleted: string[],
- *    depletedCustomDefinitionIds: string[],
- *    recovered: string[]
- *  }} */
+ *  @returns {{ added: ResourceEdit[], removed: string[], depleted: string[], recovered: string[] }} */
 function editsOf(config) {
   const re = config?.resourceEdits || {};
   return {
     added: Array.isArray(re.added) ? re.added : [],
     removed: Array.isArray(re.removed) ? re.removed : [],
-    removedNative: Array.isArray(re.removedNative) ? re.removedNative : [],
     depleted: Array.isArray(re.depleted) ? re.depleted : [],
-    depletedCustomDefinitionIds: Array.isArray(
-      re.depletedCustomDefinitionIds,
-    )
-      ? re.depletedCustomDefinitionIds
-      : [],
     recovered: Array.isArray(re.recovered) ? re.recovered : [],
   };
 }
@@ -518,11 +443,7 @@ export function reconcileProductionAfterResourceChange(economicState, ctx) {
   if (!economicState || typeof economicState !== 'object') return economicState || {};
   const { settlement, oldResources, newResources, oldDepleted, newDepleted } = ctx;
   const config = settlement?.config || {};
-  // LIVE roster only — a calamity-ruined mill/smithy is not a live chain processor, so a
-  // resource change must not (re)activate a production chain on a destroyed building
-  // (ruin-filter class). computeActiveChains itself is generation-shared (no ruin at gen),
-  // so the filter is applied here at the pulse-side call, not in the shared generator.
-  const institutions = liveInstitutions(settlement);
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const tier = String(settlement?.tier || 'village');
   const route = routeOf(settlement, config);
   const magic = config.magicExists === false ? 0 : (Number.isFinite(config.priorityMagic) ? Number(config.priorityMagic) : 50);
@@ -536,71 +457,11 @@ export function reconcileProductionAfterResourceChange(economicState, ctx) {
   const afterIds = new Set(after.map(cidOf));
   const addedChains = after.filter((c) => !beforeIds.has(cidOf(c)));
   const removedIds = new Set(before.filter((c) => !afterIds.has(cidOf(c))).map(cidOf));
-  const afterById = new Map(after.map(chain => [cidOf(chain), chain]));
-  const stamped = Array.isArray(economicState.activeChains)
-    ? economicState.activeChains
-    : [];
-  /**
-   * Compare only the generated facts a resource transition owns. Persisted
-   * chains may carry additional runtime/provenance fields; those must survive
-   * the surgical merge.
-   * @param {RDChain} chain
-   */
-  const resourceProjection = chain => JSON.stringify({
-    label: chain.label,
-    outputs: chain.outputs,
-    exportable: chain.exportable,
-    status: chain.status,
-    resourceKey: chain.resourceKey,
-    resourceCondition: chain.resourceCondition,
-    resourceInputKey: chain.resourceInputKey,
-    resourceInputCondition: chain.resourceInputCondition,
-    resourceInputAvailable: chain.resourceInputAvailable,
-    resourceDepleted: chain.resourceDepleted,
-    substituteActive: chain.substituteActive,
-  });
-  const chainStateChanged = stamped.some((chain) => {
-    const recomputed = afterById.get(cidOf(chain));
-    return (
-      recomputed
-      && resourceProjection(chain) !== resourceProjection(recomputed)
-    );
-  });
-  // `localProduction` is a canonical native-economy surface too. Membership
-  // can change its terrain commodities even when no institution is present and
-  // therefore no chain id changes. Leaving it generation-stale hides a native
-  // production loss from the regional delta engine, especially when a custom
-  // namesake keeps the compatibility display label alive.
-  const nextLocalProduction = /** @type {unknown[]} */ (
-    deriveLocalProductionFromChains(after, newResources, newDepleted)
-  );
-  const currentLocalProduction = Array.isArray(economicState.localProduction)
-    ? economicState.localProduction
-    : [];
-  const localProductionChanged = (
-    currentLocalProduction.length !== nextLocalProduction.length
-    || currentLocalProduction.some(
-      (value, index) => value !== nextLocalProduction[index],
-    )
-  );
-  if (
-    !addedChains.length
-    && !removedIds.size
-    && !chainStateChanged
-    && !localProductionChanged
-  ) {
-    return economicState;
-  }
+  if (!addedChains.length && !removedIds.size) return economicState;
 
   // Merge the DELTA into the STAMPED chains (surgical, never a wholesale replace).
-  // For a same-id condition transition, refresh the generator-owned resource
-  // fields while preserving every stamped runtime/provenance extension.
-  const survivingChains = stamped
-    .filter((c) => !removedIds.has(`${c.needKey}.${c.chainId}`))
-    .map((chain) => {
-      const recomputed = afterById.get(cidOf(chain));
-      return recomputed ? { ...chain, ...recomputed } : chain;
-    });
+  const stamped = Array.isArray(economicState.activeChains) ? economicState.activeChains : [];
+  const survivingChains = stamped.filter((c) => !removedIds.has(`${c.needKey}.${c.chainId}`));
   const survivingIds = new Set(survivingChains.map((c) => `${c.needKey}.${c.chainId}`));
   let mergedChains = [...survivingChains, ...addedChains.filter((c) => !survivingIds.has(cidOf(c)))];
 
@@ -621,121 +482,37 @@ export function reconcileProductionAfterResourceChange(economicState, ctx) {
     });
   }
 
-  // Exports: diff the canonical native derivation across the resource change.
-  // This covers same-id depletion/recovery as well as membership changes, and
-  // includes raw RESOURCE_DATA trade goods rather than looking only at chain
-  // outputs. Unrelated/custom stamped exports remain untouched.
-  const stresses = Array.isArray(config.stressTypes)
-    ? config.stressTypes
-    : [];
-  const oldNativeExports = deriveExportsFromChains(
-    before,
-    oldResources,
-    tier,
-    route,
-    stresses,
-    {},
-    oldDepleted,
-    institutions,
-  );
-  const newNativeExports = deriveExportsFromChains(
-    after,
-    newResources,
-    tier,
-    route,
-    stresses,
-    {},
-    newDepleted,
-    institutions,
-  );
-  /** @param {unknown} value */
-  const normalized = value => String(value).toLowerCase();
-  /** @param {unknown} left @param {unknown} right */
-  const overlaps = (left, right) => (
-    normalized(left).includes(normalized(right))
-    || normalized(right).includes(normalized(left))
-  );
-  const brokenOutputs = oldNativeExports.filter(oldLabel => (
-    !newNativeExports.some(newLabel => overlaps(oldLabel, newLabel))
-  ));
-  const restoredOutputs = newNativeExports.filter(newLabel => (
-    !oldNativeExports.some(oldLabel => overlaps(oldLabel, newLabel))
-  ));
+  // Exports: prune the outputs a removed chain no longer produces (the calamity
+  // precedent), then add the exportable outputs of newly-active chains.
+  /** @type {Set<string>} */
+  const brokenOutputs = new Set();
+  for (const c of before) if (removedIds.has(cidOf(c))) for (const o of (Array.isArray(c.outputs) ? c.outputs : [])) brokenOutputs.add(String(o).toLowerCase());
+  /** @type {Set<string>} */
+  const stillProduced = new Set();
+  for (const c of mergedChains) for (const o of (Array.isArray(c.outputs) ? c.outputs : [])) stillProduced.add(String(o).toLowerCase());
   const exports = Array.isArray(economicState.primaryExports) ? economicState.primaryExports : [];
   const nextExports = exports.filter((exp) => {
-    const lost = brokenOutputs.some(output => overlaps(exp, output));
-    const kept = newNativeExports.some(output => overlaps(exp, output));
+    const e = String(exp).toLowerCase();
+    const lost = [...brokenOutputs].some((o) => e.includes(o) || o.includes(e));
+    const kept = [...stillProduced].some((o) => e.includes(o) || o.includes(e));
     return !(lost && !kept);
   });
-  for (const label of restoredOutputs) {
-    if (!nextExports.some(existing => overlaps(existing, label))) {
-      nextExports.push(label);
+  for (const c of addedChains) {
+    if (!c.exportable) continue;
+    for (const o of (Array.isArray(c.outputs) ? c.outputs : [])) {
+      const label = String(o);
+      const lower = label.toLowerCase();
+      if (!nextExports.some((e) => String(e).toLowerCase().includes(lower) || lower.includes(String(e).toLowerCase()))) {
+        nextExports.push(label);
+      }
     }
   }
-  return {
-    ...economicState,
-    activeChains: mergedChains,
-    primaryExports: nextExports,
-    localProduction: nextLocalProduction,
-  };
-}
-
-/** @param {Record<string, unknown>} definition */
-function customResourceDefinitionId(definition) {
-  return String(
-    definition?.customDefinitionId
-    || definition?.localUid
-    || definition?.refId
-    || '',
-  );
-}
-
-/**
- * Exact custom depletion is a separate fact from native depletion, even when
- * both owners share one flat display label. Seed the durable edit lane from
- * the live exact sidecar so a native discovery/removal cannot make that custom
- * definition recover on the next full regeneration.
- *
- * @param {RDConfig} config
- * @param {ReturnType<typeof editsOf>} edits
- */
-function durableCustomDepletionIds(config, edits) {
-  const ids = new Set(edits.depletedCustomDefinitionIds);
-  for (const definition of config.nearbyResourceDefinitionsDepleted || []) {
-    const id = customResourceDefinitionId(definition);
-    if (id) ids.add(id);
-  }
-  return [...ids];
-}
-
-/** @param {RDConfig} config */
-function exactCustomDepletedNames(config) {
-  return (config.nearbyResourceDefinitionsDepleted || [])
-    .map(definition => String(definition?.name || ''))
-    .filter(Boolean);
-}
-
-/**
- * Rebuild the legacy flat depletion projection from its two exact owners.
- * The native sidecar governs catalog physics; exact custom definitions govern
- * authored mechanics. The flat list remains a compatibility/display union.
- *
- * @param {string[]} nativeDepleted
- * @param {string[]} customDepletedNames
- */
-function flatDepletionProjection(nativeDepleted, customDepletedNames) {
-  const byKey = new Map();
-  for (const value of [...nativeDepleted, ...customDepletedNames]) {
-    const key = normKey(value);
-    if (key && !byKey.has(key)) byKey.set(key, value);
-  }
-  return [...byKey.values()];
+  return { ...economicState, activeChains: mergedChains, primaryExports: nextExports };
 }
 
 /**
  * THE ONE WRITER (design §2) — applies a resource_discovery / resource_removal
- * outcome atomically: (a) membership on the flat resource roster and both
- * provenance sidecars; (b) durability
+ * outcome atomically: (a) membership on config.nearbyResources* ; (b) durability
  * via the config.resourceEdits delta, DUAL-WRITTEN config + _config (the mutateWorld
  * withResourceEdits precedent — so an organic change survives full regeneration
  * exactly as a DM ADD/REMOVE does); (c) the surgical production reconcile; (d)
@@ -756,98 +533,46 @@ export function applyResourceMembershipOutcomeToSettlement(settlement, outcome) 
 
   // ── (a) MEMBERSHIP ──
   const oldResources = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
+  const oldDepleted = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
   const oldCustom = Array.isArray(config.nearbyResourcesCustom) ? config.nearbyResourcesCustom : [];
-  const oldNative = nativeSemanticResourceKeys(
-    /** @type {Record<string, unknown>} */ (config),
-  );
-  const oldNativeDepleted = nativeSemanticDepletedResourceKeys(
-    /** @type {Record<string, unknown>} */ (config),
-  );
-  const customDepletedNames = exactCustomDepletedNames(config);
-  const customDepletedKeys = new Set(customDepletedNames.map(normKey));
   const stateMap = { ...(config.nearbyResourcesState || {}) };
   /** @type {string[]} */ let newResources;
   /** @type {string[]} */ let newDepleted;
   /** @type {string[]} */ let newCustom;
-  /** @type {string[]} */ let newNative;
-  /** @type {string[]} */ let newNativeDepleted;
   if (op === 'add') {
     newResources = oldResources.some((k) => normKey(k) === nk) ? oldResources : [...oldResources, resource];
-    newNative = oldNative.some((k) => normKey(k) === nk)
-      ? oldNative
-      : [...oldNative, resource];
-    newNativeDepleted = oldNativeDepleted.filter((k) => normKey(k) !== nk);
-    // A fresh native strike is abundant. If an exact custom namesake remains
-    // depleted, the compatibility state reports the mixed row as depleted;
-    // native consumers read the source-specific sidecar above.
-    stateMap[resource] = customDepletedKeys.has(nk) ? 'depleted' : 'abundant';
-    newDepleted = flatDepletionProjection(
-      newNativeDepleted,
-      customDepletedNames,
-    );
+    stateMap[resource] = 'abundant';                                   // a fresh strike is abundant
+    newDepleted = oldDepleted.filter((k) => normKey(k) !== nk);
     newCustom = oldCustom;                                             // organic draws are catalog keys, never custom
   } else {
-    const customKeepsDisplayKey = oldCustom.some(k => normKey(k) === nk);
-    newResources = customKeepsDisplayKey
-      ? oldResources
-      : oldResources.filter((k) => normKey(k) !== nk);
-    newNative = oldNative.filter((k) => normKey(k) !== nk);
+    newResources = oldResources.filter((k) => normKey(k) !== nk);
     for (const k of Object.keys(stateMap)) if (normKey(k) === nk) delete stateMap[k];
-    newNativeDepleted = oldNativeDepleted.filter((k) => normKey(k) !== nk);
-    const remainingCustomName = customDepletedNames.find(
-      name => normKey(name) === nk,
-    );
-    if (remainingCustomName) stateMap[remainingCustomName] = 'depleted';
-    newDepleted = flatDepletionProjection(
-      newNativeDepleted,
-      customDepletedNames,
-    );
-    // Organic resource dynamics operate on catalog resources only. A custom
-    // namesake is a distinct definition and survives native exhaustion.
-    newCustom = oldCustom;
+    newDepleted = oldDepleted.filter((k) => normKey(k) !== nk);
+    newCustom = oldCustom.filter((k) => normKey(k) !== nk);
   }
 
   // ── (b) DURABILITY — the resourceEdits delta (regen-surviving), dual-written ──
   const edits = editsOf(config);
-  const depletedCustomDefinitionIds = durableCustomDepletionIds(
-    config,
-    edits,
-  );
   const nextEdits = op === 'add'
     ? {
         ...edits,
         // { key, custom:false } — the mutateWorld addResource shape (organic ≡ forced;
         // an organic draw is always a catalog key, never a custom mint).
-        added: edits.added.some(
-          e => normKey(e?.key) === nk && e?.custom !== true,
-        )
-          ? edits.added
-          : [...edits.added, { key: resource, custom: false }],
+        added: edits.added.some((e) => normKey(e?.key) === nk) ? edits.added : [...edits.added, { key: resource, custom: false }],
         removed: edits.removed.filter((k) => normKey(k) !== nk),
-        removedNative: edits.removedNative.filter((k) => normKey(k) !== nk),
         depleted: edits.depleted.filter((k) => normKey(k) !== nk),
-        depletedCustomDefinitionIds,
       }
     : {
         ...edits,
-        removedNative: edits.removedNative.some((k) => normKey(k) === nk)
-          ? edits.removedNative
-          : [...edits.removedNative, resource],
-        // Retire only the native receipt. A custom namesake's authored add is
-        // a separate owner and must survive native exhaustion/regeneration.
-        added: edits.added.filter(
-          e => normKey(e?.key) !== nk || e?.custom === true,
-        ),
+        removed: edits.removed.some((k) => normKey(k) === nk) ? edits.removed : [...edits.removed, resource],
+        added: edits.added.filter((e) => normKey(e?.key) !== nk),
         depleted: edits.depleted.filter((k) => normKey(k) !== nk),
-        depletedCustomDefinitionIds,
         recovered: edits.recovered.filter((k) => normKey(k) !== nk),
       };
 
   const nextConfig = {
     ...config,
     nearbyResources: newResources,
-    nearbyResourcesNative: newNative,
-    nearbyResourcesNativeDepleted: newNativeDepleted,
     nearbyResourcesState: stateMap,
     nearbyResourcesDepleted: newDepleted,
     nearbyResourcesCustom: newCustom,
@@ -857,10 +582,7 @@ export function applyResourceMembershipOutcomeToSettlement(settlement, outcome) 
   // ── (c) SURGICAL RECONCILE (both directions) ──
   const nextEconomicState = reconcileProductionAfterResourceChange(settlement.economicState, {
     settlement: { ...settlement, config: nextConfig },
-    oldResources: oldNative,
-    newResources: newNative,
-    oldDepleted: oldNativeDepleted,
-    newDepleted: newNativeDepleted,
+    oldResources, newResources, oldDepleted, newDepleted,
   });
 
   /** @type {RDSettlement} */
@@ -884,7 +606,7 @@ export function applyResourceMembershipOutcomeToSettlement(settlement, outcome) 
   // polarity. resource_strike is a bounded positive MARKER (affectedSystems [] — its
   // upside flows through the boom seam + reconcile, not a free condition bonus);
   // vein_exhausted DRAINS economic_capacity (a worked-out vein hurts the economy).
-  const condTick = Number.isFinite(outcome?.generatedAtTick) ? Number(outcome?.generatedAtTick) : undefined;
+  const condTick = Number.isFinite(outcome?.metadata?.tick) ? Number(outcome?.metadata?.tick) : undefined;
   next = op === 'add'
     ? withActiveCondition(next, {
         id: `condition.resource_strike.${nk}`,

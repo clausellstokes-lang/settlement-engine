@@ -45,18 +45,12 @@ import { believedDestinationDanger } from './dispatchEV.js';
 
 // ── Tuning (documented; retuned in the E1a soak) ──────────────────────────────
 export const GENEROSITY_TUNING = Object.freeze({
-  // GIVE-side term weights (the base five sum 1.0 ⇒ their giveScore ∈ [0,1]). §2.1.
+  // GIVE-side term weights (sum 1.0 ⇒ giveScore ∈ [0,1]). §2.1.
   W_BOND: 0.30,
   W_HISTORY: 0.22,
   W_CONSCIENCE: 0.20,
   W_STRATEGY: 0.18,
   W_FAITH: 0.10,
-  // D-7e clause (i) THE PERSON-BOND: an ADDITIVE dark-gated bias beyond the normalized base — the
-  // gratitude/friendship a giver's ruling seat already holds toward the receiver's seat visibly
-  // tilts GIVE (the tieContribution idiom), the clamp01 keeping it from overturning the reserve
-  // floor. 0 when memoryWeave is dark ⇒ byte-identical. Half W_BOND — a personal tie is a secondary
-  // signal beside the faction one, and never double-counts it (distinct source). Vetoable.
-  W_SEAT_BOND: 0.15,
 
   // WITHHOLD-side term weights (sum 1.0 ⇒ withholdScore ∈ [0,1]). §2.2.
   W_MARGIN: 0.32,
@@ -370,8 +364,6 @@ export function dependencyTerm(reliefCountRecent = 0) {
  * @typedef {Object} GenerosityInputs
  * @property {string} giverId
  * @property {string} receiverId
- * @property {string} [giverName]    display name for the receipt's prose (C2 — ids never reach the reader)
- * @property {string} [receiverName] display name for the receipt's prose
  * @property {string} [kind]        the instrument kind (default 'grain_relief')
  * @property {number} now           tick-time
  * @property {BondRead|null} [bond]
@@ -382,7 +374,6 @@ export function dependencyTerm(reliefCountRecent = 0) {
  * @property {MarginRead|null} [margin]
  * @property {CommitmentRead|null} [commitment]
  * @property {number} [routeRisk]    a pre-computed belief-gated route risk [0,1] (else 0)
- * @property {number} [seatBond01]   D-7e (i): the giver seat's gratitude-bond severity toward the receiver seat [0,1] (0 when memoryWeave dark / no bond)
  * @property {DomesticRead|null} [domestic]
  * @property {number} [reliefCountRecent]
  * @property {number} [askFraction01]  the share of the giver's spareable reserve the ask represents (1 = asks all headroom)
@@ -435,9 +426,6 @@ export function generosityEV(inputs) {
   const strategyVal = clamp01(strat.value01 * lStrategy);
   const leverageIntent = clamp01(strat.leverage01 * lLeverage);
   const faith = faithTerm(inputs?.faith);
-  // D-7e (i): the PERSON-bond severity (giver seat → receiver seat), pre-resolved by the caller
-  // (0 when memoryWeave is dark / no seat bond). A DISTINCT source from the faction `bond` above.
-  const seatBond = clamp01(finiteNumber(inputs?.seatBond01, 0));
 
   // The betrayal killswitch zeros the give-side (§2.1).
   const giveRaw = hist.betrayalKill ? 0 : clamp01(
@@ -445,8 +433,7 @@ export function generosityEV(inputs) {
     + T.W_HISTORY * hist.value01
     + T.W_CONSCIENCE * conscienceRaw
     + T.W_STRATEGY * strategyVal
-    + T.W_FAITH * faith
-    + T.W_SEAT_BOND * seatBond,
+    + T.W_FAITH * faith,
   );
   const giveScore = giveRaw;
 
@@ -553,7 +540,6 @@ export function generosityEV(inputs) {
     terms,
     receipt: generosityReceipt({
       verdict, giverId: String(inputs?.giverId ?? ''), receiverId: String(inputs?.receiverId ?? ''),
-      giverName: String(inputs?.giverName ?? ''), receiverName: String(inputs?.receiverName ?? ''),
       terms, strategicOverride: strategicOverrideActive && wouldRefuse, leverageIntent,
     }),
   };
@@ -748,16 +734,13 @@ export function triageAllocation({ claimants, budget01, lawfulness01 = 0.5, cons
  * The dominant deciding term drives the receipt's voice — the loaded dice narrated
  * (design §2.3: "Thornwall's granaries stayed shut: the army at the front eats first" /
  * "Grain went to Marchmont — the old debt from the flood-year, and their pass shields the
- * valley"). Pure, deterministic. C2 (misc, "raw save ids in narrative prose"): the
- * receipt speaks settlement NAMES when the caller supplies them (giverName/
- * receiverName ride GenerosityInputs from the kernel, which holds the items); the
- * id is only the last-resort stand-in for a nameless caller (fixtures/tests).
- * @param {{ verdict: string, giverId: string, receiverId: string, giverName?: string, receiverName?: string, terms: { bond: number, history: number, conscience: number, strategy: number, faith: number, margin: number, commitment: number, route: number, domestic: number, dependency: number }, strategicOverride: boolean, leverageIntent: number }} a
+ * valley"). Pure, deterministic.
+ * @param {{ verdict: string, giverId: string, receiverId: string, terms: { bond: number, history: number, conscience: number, strategy: number, faith: number, margin: number, commitment: number, route: number, domestic: number, dependency: number }, strategicOverride: boolean, leverageIntent: number }} a
  * @returns {string}
  */
-export function generosityReceipt({ verdict, giverId, receiverId, giverName, receiverName, terms, strategicOverride, leverageIntent }) {
-  const g = giverName || giverId || 'the giver';
-  const r = receiverName || receiverId || 'the receiver';
+export function generosityReceipt({ verdict, giverId, receiverId, terms, strategicOverride, leverageIntent }) {
+  const g = giverId || 'the giver';
+  const r = receiverId || 'the receiver';
   if (verdict === VERDICTS.REFUSE) {
     // Name the dominant withhold term.
     if (terms.commitment >= terms.margin && terms.commitment >= terms.route && terms.commitment > 0.2) {

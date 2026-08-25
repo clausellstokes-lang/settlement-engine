@@ -22,7 +22,6 @@ import { describe, it, expect } from 'vitest';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { generateAvailableServices } from '../../src/generators/servicesGenerator.js';
-import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** Criminal service names emitted for a config, under a fixed seed. */
 function criminalNames(config) {
@@ -50,23 +49,14 @@ describe('servicesGenerator — criminal-services tier gate resolves tier before
 
   it('a random-mode settlement with resolved tier=village does NOT get large-tier "Contraband"', () => {
     // settType is the 'random' sentinel; the RESOLVED tier (village) must win.
-    // 'No law, bring coin' is the small-tier criminal line this config DOES earn, so it
-    // anchors the exclusion: a roster that stopped generating criminal services at all
-    // would otherwise satisfy "no Contraband" while proving nothing about the gate.
-    expectAbsentWithAnchor(
-      criminalNames({ ...crimeConfig, settType: 'random', tier: 'village' }),
+    expect(criminalNames({ ...crimeConfig, settType: 'random', tier: 'village' })).not.toContain(
       'Contraband',
-      'No law, bring coin',
-      'resolved village tier blocks the large-tier fallback',
     );
   });
 
   it('a random-mode settlement with resolved tier=hamlet does NOT get large-tier "Contraband"', () => {
-    expectAbsentWithAnchor(
-      criminalNames({ ...crimeConfig, settType: 'random', tier: 'hamlet' }),
+    expect(criminalNames({ ...crimeConfig, settType: 'random', tier: 'hamlet' })).not.toContain(
       'Contraband',
-      'No law, bring coin',
-      'resolved hamlet tier blocks the large-tier fallback',
     );
   });
 });

@@ -1,5 +1,5 @@
 /**
- * CompendiumGlobalSearch.jsx — global type-ahead search.
+ * CompendiumGlobalSearch.jsx — P139 / CP-4 global type-ahead search.
  *
  * Sits above the Compendium tab bar. Type once, search every built-in
  * section; pick a result and the parent (CompendiumPanel) switches to
@@ -14,28 +14,21 @@
  */
 
 import { useState, useRef, useEffect, useMemo } from 'react';
+import { Search, X } from 'lucide-react';
 import IconButton from '../primitives/IconButton.jsx';
-import useIsMobile from '../../hooks/useIsMobile.js';
-import { GOLD, INK, BODY, BORDER as BOR, CARD, PARCH, sans, FS, swatch } from '../theme.js';
+import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS } from '../theme.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { searchCompendium } from '../../domain/compendium/searchIndex.js';
 
 // Category → swatch. Kept as a variable map (not inline literals) so the
 // pills can be colour-coded without tripping the raw-color lint rule.
-// The pill renders the category as label TEXT, so each value must clear AA as
-// text: Tier/Economy use the darker gold-as-text token, not #a0762a (AA fail).
-// Keys mirror the live tab labels — 'Religion & the Pantheon' (the tab was
-// renamed from the stale 'Magic & Religion'), plus 'Living World' for the
-// newly-indexed simulation tab — so a result chip always names a findable tab.
 const CAT_COLOR = Object.freeze({
-  'Tier': swatch['#7A5A1A'],
+  'Tier': '#a0762a',
   'Trade Route': '#6b5340',
   'Monster Threat': '#8b1a1a',
-  'Economy': swatch['#7A5A1A'],
+  'Economy': '#a0762a',
   'Archetype': '#4a1a6a',
-  'Religion & the Pantheon': '#3a1a7a',
-  'Living World': '#1a3a7a',
-  'Institution': '#6b5340',
+  'Magic & Religion': '#3a1a7a',
   'Stress': '#8b1a1a',
   'Neighbour System': '#1a3a7a',
   'Neighbour Relationship': '#1a5a28',
@@ -46,13 +39,6 @@ export default function CompendiumGlobalSearch({ onSelect }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
   const ref = useRef(null);
-  const isMobile = useIsMobile();
-  // On mobile the on-screen keyboard claims roughly the lower half of the
-  // viewport, so a fixed 320px result panel can open behind it with its lower
-  // rows unreachable. Clamp the panel to a keyboard-safe slice of the viewport
-  // (never taller than the original 320px) so the list scrolls within what's
-  // visible above the keyboard. Desktop keeps the exact 320px cap.
-  const dropdownMaxHeight = isMobile ? 'min(320px, 45vh)' : 320;
 
   const q = query.trim();
   const results = useMemo(() => (q ? searchCompendium(q, { limit: 8 }) : []), [q]);
@@ -108,16 +94,15 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         position: 'relative',
         padding: '8px 14px',
         background: PARCH,
-        // No full-width rule: the bordered input box below marks the affordance,
-        // so the chrome keeps a single divider only at the tab-strip/content
-        // boundary instead of stacking three (P5).
+        borderBottom: `1px solid ${BOR}`,
       }}
     >
       <div style={{
         display: 'flex', alignItems: 'center', gap: 8,
-        border: `1px solid ${BOR}`,
+        border: `1px solid ${BOR}`, borderRadius: 6,
         background: CARD, padding: '6px 10px',
       }}>
+        <Search size={13} style={{ color: GOLD, flexShrink: 0 }} />
         <input
           value={query}
           onChange={(e) => { setQuery(e.target.value); setActive(0); setOpen(true); }}
@@ -128,7 +113,6 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           role="combobox"
           aria-expanded={showDropdown}
           aria-controls="compendium-search-results"
-          aria-activedescendant={showDropdown ? `compendium-opt-${active}` : undefined}
           autoComplete="off"
           style={{
             flex: 1, border: 'none', background: 'transparent',
@@ -137,7 +121,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         />
         {query && (
           <IconButton
-            glyph="×"
+            Icon={X}
             label="Clear search"
             tone="ghost"
             size="sm"
@@ -153,16 +137,15 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           style={{
             position: 'absolute', left: 14, right: 14, top: '100%', marginTop: -2,
             zIndex: 50, listStyle: 'none', margin: 0, padding: 4,
-            background: CARD, border: `1px solid ${BOR}`,
-            maxHeight: dropdownMaxHeight, overflowY: 'auto',
+            background: CARD, border: `1px solid ${BOR}`, borderRadius: 6,
+            boxShadow: '0 12px 28px rgba(0,0,0,0.18)',
+            maxHeight: 320, overflowY: 'auto',
           }}
         >
           {results.map((r, i) => {
-            // Fallback is the gold-as-text token, not GOLD (GOLD fails AA as
-            // text); every known category is mapped above, so this is defensive.
-            const color = CAT_COLOR[r.category] || swatch['#7A5A1A'];
+            const color = CAT_COLOR[r.category] || GOLD;
             return (
-              <div key={r.id} id={`compendium-opt-${i}`} role="option" aria-selected={i === active} aria-label={`${r.term} (${r.category})`}>
+              <div key={r.id} role="option" aria-selected={i === active} aria-label={`${r.term} (${r.category})`}>
                 <button
                   type="button"
                   onMouseEnter={() => setActive(i)}
@@ -170,7 +153,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
                   style={{
                     width: '100%', textAlign: 'left',
                     display: 'flex', alignItems: 'center', gap: 8,
-                    padding: '7px 9px', border: 'none',
+                    padding: '7px 9px', border: 'none', borderRadius: 4,
                     cursor: 'pointer', fontFamily: sans,
                     background: i === active ? `${GOLD}14` : 'transparent',
                   }}
@@ -179,8 +162,8 @@ export default function CompendiumGlobalSearch({ onSelect }) {
                     {r.term}
                   </span>
                   <span style={{
-                    fontSize: FS.xs, fontWeight: 700, color,
-                    background: `${color}18`, padding: '1px 7px',
+                    fontSize: FS.micro, fontWeight: 700, color,
+                    background: `${color}18`, borderRadius: 8, padding: '1px 7px',
                     textTransform: 'uppercase', letterSpacing: '0.04em',
                     whiteSpace: 'nowrap',
                   }}>
@@ -197,15 +180,10 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         <div style={{
           position: 'absolute', left: 14, right: 14, top: '100%', marginTop: -2,
           zIndex: 50, padding: '10px 12px', background: CARD,
-          border: `1px solid ${BOR}`,
-          fontSize: FS.sm, color: BODY, fontFamily: sans,
-          display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
+          border: `1px solid ${BOR}`, borderRadius: 6,
+          fontSize: FS.sm, color: MUT, fontFamily: sans,
         }}>
-          <span style={{ flex: 1, minWidth: 180 }}>
-            No matches for &ldquo;{q}&rdquo;. Try a tier, archetype, institution, neighbour, route, or stress name.
-          </span>
-          {/* Recovery CTA at the point of failure, not just the X up in the input. */}
-          <IconButton glyph="×" label="Clear search" tone="ghost" size="sm" onClick={() => { setQuery(''); setActive(0); setOpen(false); }} />
+          No matches for &ldquo;{q}&rdquo;. Try a tier, archetype, route, or stress name.
         </div>
       )}
     </div>

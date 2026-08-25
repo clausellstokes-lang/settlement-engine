@@ -17,11 +17,6 @@
  */
 
 import { factionArchetype, FACTION_ARCHETYPES as FA } from '../domain/factionArchetypes.js';
-import {
-  nativeSemanticName,
-} from '../domain/content/customContentSemanticAuthority.js';
-import { factionDisplayNameOf, factionRefOf } from '../domain/factionRefs.js';
-import { resolveGenerationWorldLaw } from './generationContext.js';
 
 // inferImportance is not used directly here yet — kept on the import
 // graph for future expansion where archetype rules read existing NPC
@@ -129,28 +124,17 @@ export function matchFactionArchetype(faction) {
  *
  * @param {Object} faction
  * @param {Object[]} institutions   for resolving linkToInst
- * @param {unknown} generationContext
  * @returns {Object[]} structural NPCs
  */
-export function generateFactionStructuralNpcs(
-  faction,
-  institutions = [],
-  generationContext = null,
-) {
+export function generateFactionStructuralNpcs(faction, institutions = []) {
   const arch = matchFactionArchetype(faction);
   if (!arch) return [];
-  const worldLaw = resolveGenerationWorldLaw(generationContext);
-  const defs = (FACTION_ROLES[arch] || []).filter(worldLaw.allowsRole);
-  // `linkedFactionIds` is the propagation identity: prefer a durable authored
-  // id, falling back to the canonical display key only for legacy/generated
-  // seats that genuinely carry no id. `factionAffiliation` remains display prose.
-  const factionKey = factionRefOf(faction);
-  const factionName = factionDisplayNameOf(faction) || 'Unknown faction';
+  const defs = FACTION_ROLES[arch] || [];
+  const factionId = faction.id || faction.faction || faction.name || '';
+  const factionName = faction.name || faction.faction || 'Unknown faction';
   return defs.map((def, i) => {
     const linkedInstId = def.linkToInst
-      ? institutions.find(inst => def.linkToInst.test(
-        nativeSemanticName(inst).toLowerCase(),
-      ))?.id
+      ? institutions.find(inst => def.linkToInst.test(String(inst.name || '').toLowerCase()))?.id
       : null;
     return {
       id: `npc.${slug(factionName)}_${slug(def.role)}_${i}`,
@@ -165,10 +149,7 @@ export function generateFactionStructuralNpcs(
       // covers its own office, so it is not re-synthesized).
       factionAffiliation: factionName,
       linkedInstitutionIds: linkedInstId ? [linkedInstId] : [],
-      // Canonical faction identity. Name-only legacy seats intentionally fall
-      // back to their display key; id-bearing seats must never be downgraded to
-      // a rename-sensitive label because propagation and clergy joins are id-first.
-      linkedFactionIds: factionKey ? [factionKey] : [],
+      linkedFactionIds: factionId ? [factionId] : [],
       // Defaults for the structural fields the impairment engine reads.
       // Influence is a BAND STRING everywhere it is consumed (npcComponents,
       // campaign PDF filter `influence === 'high'`) — the prior numeric 75/50/25
@@ -199,18 +180,10 @@ export function generateFactionStructuralNpcs(
  * (which carry a classifying `category`) and dedups by office-equivalence.
  *
  * @param {Object} settlement
- * @param {unknown} generationContext
  * @returns {Object} new settlement with structural NPCs appended
  */
-export function ensureFactionStructuralNpcs(
-  settlement,
-  generationContext = null,
-) {
+export function ensureFactionStructuralNpcs(settlement) {
   if (!settlement) return settlement;
-  const worldLaw = resolveGenerationWorldLaw(
-    generationContext,
-    settlement.config || settlement._config || {},
-  );
   // Office source: the powerStructure power-seats are the authoritative faction
   // list — each carries a `category` that classifies reliably. Fall back to the
   // grouping list only when no powerStructure exists (bare-faction test inputs).
@@ -225,7 +198,7 @@ export function ensureFactionStructuralNpcs(
   // its seat's canonical archetype (→ role-key).
   const seatByName = new Map();
   for (const seat of seats) {
-    const nm = factionDisplayNameOf(seat).toLowerCase();
+    const nm = String(seat.faction || seat.name || '').toLowerCase();
     if (nm) seatByName.set(nm, seat);
   }
 
@@ -250,11 +223,7 @@ export function ensureFactionStructuralNpcs(
     const roleKey = matchFactionArchetype(seat);
     if (!roleKey) continue;                     // archetype with no structural roles (government/civic/labor/…)
     if (coveredRoleKeys.has(roleKey)) continue; // office already held (realized or already-synthesized)
-    const structural = generateFactionStructuralNpcs(
-      seat,
-      settlement.institutions || [],
-      worldLaw,
-    );
+    const structural = generateFactionStructuralNpcs(seat, settlement.institutions || []);
     if (!structural.length) continue;
     additions.push(...structural);
     coveredRoleKeys.add(roleKey);               // one office per role-key: a 2nd economy seat won't re-synthesize

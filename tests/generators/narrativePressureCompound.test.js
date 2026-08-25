@@ -40,7 +40,6 @@ describe('generatePressureSentence plumbs economicState.compound (wartime)', () 
     );
     expect(sentence).toMatch(/on the right side of it/);
     // Must NOT be the losing-side fallback.
-    // anchored: the winning-side assertion above proves `sentence` is live wartime prose
     expect(sentence).not.toMatch(/losing people and resources/);
   });
 
@@ -49,7 +48,6 @@ describe('generatePressureSentence plumbs economicState.compound (wartime)', () 
       baseSettlement({ militaryEffective: 30, economyOutput: 40, criminalEffective: 50 }),
     );
     expect(sentence).toMatch(/losing people and resources/);
-    // anchored: the losing-side assertion above proves `sentence` is live wartime prose
     expect(sentence).not.toMatch(/on the right side of it/);
   });
 

@@ -17,7 +17,6 @@ vi.mock('../../src/lib/saves.js', () => ({
   },
 }));
 
-import { saves } from '../../src/lib/saves.js';
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 
@@ -29,7 +28,6 @@ describe('version history mutations', () => {
   let useStore;
 
   beforeEach(() => {
-    vi.clearAllMocks();
     useStore = makeStore();
     useStore.setState({
       settlement: {
@@ -218,46 +216,6 @@ describe('version history mutations', () => {
     expect(totalLen).toBeLessThan(N * perEntryBound);
   });
 
-  it('recordSnapshot REFUSES a target save the cache does not hold — no phantom snapshot id', () => {
-    // Reachable, not a hydration blip: the save chokepoints stamp activeSaveId on
-    // a row savedSettlements only learns about at its NEXT hydration, and
-    // activeSaveId is outside the persist partialize, so a post-save Create
-    // session sits in this window indefinitely.
-    useStore.setState(s => { s.activeSaveId = 'save-not-hydrated'; });
-
-    const result = useStore.getState().recordSnapshot({ kind: 'manual', label: 'ghost' });
-
-    expect(result.ok).toBe(false);
-    expect(result.before.reason).toBe('save_not_loaded');
-    expect(result.before.targetSaveId).toBe('save-not-hydrated');
-    // The load-bearing half of the honesty fix: an id is withheld for a snapshot
-    // that exists nowhere. commitPendingEditScope mints its undo token off this
-    // exact field, so a truthy `after.snapshotId` here is a dead undo lever.
-    expect(result.after).toBeNull();
-    expect(result.persistenceOps).toEqual([]);
-    expect(typeof result.userMessage).toBe('string');
-    // Nothing landed in EITHER timeline — the draft sibling must not silently
-    // absorb a write that named a save.
-    expect(useStore.getState().draftVersionHistory).toEqual([]);
-    expect(saves.update).not.toHaveBeenCalled();
-  });
-
-  it('commitPendingEdits mints NO undo token when the pre-commit checkpoint refused', async () => {
-    useStore.setState(s => { s.activeSaveId = 'save-not-hydrated'; });
-
-    await useStore.getState().queueEdit('rename-settlement', { newName: 'Ghost Name' });
-    await useStore.getState().commitPendingEdits();
-
-    // The edit itself still applied — the checkpoint is a safety net, not a gate.
-    expect(useStore.getState().settlement.name).toBe('Ghost Name');
-    // But nothing was checkpointed, so the receipt makes no undo claim. Before the
-    // honesty fix the refused snapshot still handed back an id and this receipt
-    // advertised an undo that resolved against a timeline that does not exist.
-    const receipt = useStore.getState().pendingEditReceipts.at(-1);
-    expect(receipt.undoToken).toBeNull();
-    expect(useStore.getState().draftVersionHistory).toEqual([]);
-  });
-
   it('revertToSnapshot returns false on an unknown snapshotId', () => {
     expect(useStore.getState().revertToSnapshot({ snapshotId: 'nope' })).toBe(false);
   });
@@ -266,37 +224,21 @@ describe('version history mutations', () => {
     expect(useStore.getState().revertToSnapshot({ snapshotId: 'any' })).toBe(false);
   });
 
-  it('commitPendingEdits checkpoints before apply and exposes a working undo token', async () => {
+  it('commitPendingEdits auto-snapshots after applying the queue', () => {
     // Queue a rename-settlement edit
-    await useStore.getState().queueEdit('rename-settlement', { newName: 'New Name' });
+    useStore.getState().queueEdit('rename-settlement', { newName: 'New Name' });
     expect(useStore.getState().pendingEditsQueue).toHaveLength(1);
-    await useStore.getState().commitPendingEdits();
+    useStore.getState().commitPendingEdits();
     // Queue is empty
     expect(useStore.getState().pendingEditsQueue).toHaveLength(0);
     // Settlement renamed
     expect(useStore.getState().settlement.name).toBe('New Name');
-    // Auto-snapshot exists in the sibling draft timeline (no active save) and
-    // contains the PRE-COMMIT value, not the already-renamed value.
+    // Auto-snapshot exists in the sibling draft timeline (no active save).
     const history = useStore.getState().draftVersionHistory || [];
     const autoSnap = history.find(s => s.kind === 'auto-commit');
     expect(autoSnap).toBeTruthy();
-    expect(autoSnap.settlement.name).toBe('Hightower\'s Reach');
-    // Version labels are user-facing; internal operation tokens must not leak
-    // into the dossier timeline.
-    expect(autoSnap.label).toBe('Dossier change');
+    expect(autoSnap.label).toContain('rename-settlement');
     // The commit's auto-snapshot never nests a timeline into its payload.
     expect(autoSnap.settlement.versionHistory).toBeUndefined();
-
-    const receipt = useStore.getState().pendingEditReceipts.at(-1);
-    expect(receipt.undoToken).toEqual({
-      kind: 'snapshot',
-      snapshotId: autoSnap.id,
-      saveId: null,
-    });
-    const reverted = useStore.getState().revertToSnapshot({
-      snapshotId: receipt.undoToken.snapshotId,
-    });
-    expect(reverted.ok).toBe(true);
-    expect(useStore.getState().settlement.name).toBe('Hightower\'s Reach');
   });
 });

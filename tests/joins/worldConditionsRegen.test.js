@@ -116,16 +116,7 @@ function hydratedSettlement() {
     now: NOW,
   });
   expect(condOf(cut, 'trade_route_cut')).toHaveLength(1);
-  const hydrated = withActiveCondition(withActiveCondition(cut, PULSE_COND), REGIONAL_COND);
-  hydrated.parentRef = {
-    version: 1,
-    parentId: 'founding-parent-save',
-    sourceSatelliteId: 'satellite-hydrated',
-    foundedTick: 4,
-    graduatedTick: 9,
-    birthId: 'birth-hydrated',
-  };
-  return hydrated;
+  return withActiveCondition(withActiveCondition(cut, PULSE_COND), REGIONAL_COND);
 }
 
 // NOTE (F34): the applyChange (what-if regeneration) describe block was removed
@@ -150,14 +141,6 @@ describe('join: generateSettlement (reroll) preserves world conditions', () => {
     expect(famine).toHaveLength(1);
     expect(famine[0].id).toBe(PULSE_COND.id);
     expect(condOf(after, 'regional_route_disruption')).toHaveLength(1);
-    expect(after.parentRef).toEqual({
-      version: 1,
-      parentId: 'founding-parent-save',
-      sourceSatelliteId: 'satellite-hydrated',
-      foundedTick: 4,
-      graduatedTick: 9,
-      birthId: 'birth-hydrated',
-    });
 
     // The reroll generated from the wizard config (no eventConditions
     // record), so nothing event-authored resurrects — and the carried world
@@ -200,7 +183,6 @@ describe('join: generateSettlement (reroll) preserves world conditions', () => {
     expect(condOf(after, 'famine')).toEqual([]);
     expect(condOf(after, 'regional_route_disruption')).toEqual([]);
     expect(condOf(after, 'trade_route_cut')).toEqual([]);
-    expect(after.parentRef).toBeUndefined();
     // A fresh identity starts with no reconciliation trail at all.
     expect('reconciliationLog' in after).toBe(false);
   });

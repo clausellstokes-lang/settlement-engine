@@ -60,18 +60,12 @@ import { npcId } from './npcAgency.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp01 } from '../../kernel/math.js';
-import { hasClandestineFacet, UNDERWAYS_TUNING } from './clandestineFacet.js';
-// D7 THE REFRAME LAYER (DESIGN_SIM_DEPTH_R2 §D7, consumer 3): a darkly-reframed obligation the
-// target bears toward the patron (extortion_endured — a resented debt) is leash-eligible material,
-// one bounded on-ramp to recruitmentWeight. reframeKernel is a pure leaf (never imports back). 0
-// when the reframe layer is dark ⇒ ×1 ⇒ byte-identical.
-import { darkReframe01 } from './reframeKernel.js';
 // §4 FOREIGN CONSEQUENCE LANE — the blowback triple's downstream seams. All three
 // are engine-lazy leaves (relationship memory, the credibility stock, the war-reason
 // pair key), imported ONLY by this already-lazy module ⇒ ZERO first-paint bytes. None
 // of them imports corruptionWeb/npcAgency/causeLifecycle, so the graph stays acyclic.
 import { applyRelationshipPatch } from './relationshipEvolution.js';
-import { relationshipKeyFromEdge, edgeBetween } from './relationshipState.js';
+import { relationshipKeyFromEdge } from './relationshipState.js';
 import { advanceCredibility } from './informationStatecraft.js';
 // W-DOCTRINE-4 CROSS-SEAM (§3): the overt-politics consolidation read the recruitment
 // weight degrades on ("a consolidated coalition raises the patron's price"). A lazy
@@ -129,19 +123,11 @@ export const CORRUPTION_WEB_TUNING = Object.freeze({
   CHANNEL_RIVAL: 0.4,
   CHANNEL_CRIMINAL: 0.7,
   CHANNEL_SMUGGLE: 0.5,
-  /** THE ROADS §10: a RETURNED CAPTIVE is a quality-boosted channel — a captor's former
-   *  hostage, home again carrying the leash. A strong conduit (the captor already broke them). */
-  CHANNEL_RETURNED_CAPTIVE: 0.6,
   /** The E1 obligation channel-quality BOOST ceiling: a fully-indebted target (a
    *  decade of the patron's "generous" gifts) multiplies the recruiting weight by up
    *  to (1 + this) — "the patron who has been generous recruits cheap" (§2). 0 when the
    *  obligation ledger is absent ⇒ byte-neutral. */
   OBLIGATION_BOOST_MAX: 0.6,
-  /** D7: a darkly-reframed obligation the target bears (it reads the patron's aid as
-   *  extortion_endured — a resented debt) multiplies the recruiting weight by up to (1 +
-   *  this) on top of the raw obligation on-ramp — a court that already feels wronged is
-   *  cheaper to turn. 0 when the reframe layer is dark ⇒ byte-neutral. Soak-retunable. */
-  REFRAME_BOOST_MAX: 0.5,
   /** A target's HIDE secrecy level DEGRADES the channel quality toward this floor
    *  fraction (§2 "HIDE posture" weight; couples to secrecyPostures). */
   HIDE_DEGRADE: 0.6,
@@ -268,45 +254,15 @@ function smugglePairs(worldState) {
 }
 
 /**
- * THE ROADS §10 — the returned-captive channels the roads mover deposits (spatialLedgers
- * .roadsReturnedCaptives): a former hostage home again as the captor's covert conduit. Returns
- * the unordered pair set (folded into rawChannelQuality like smuggle) + a DIRECTIONAL pin map
- * (`${captorId}|${homeId}` → npcKey) so the web's target-NPC pick is pinned to the returned
- * captive. Absent ledger ⇒ empty ⇒ byte-neutral (the corruption-web dormancy golden holds). Pure.
- * @param {Record<string, unknown> | null | undefined} worldState
- * @returns {{ pairs: Set<string>, pinned: Map<string, string> }}
- */
-function returnedCaptiveChannels(worldState) {
-  /** @type {Set<string>} */
-  const pairs = new Set();
-  /** @type {Map<string, string>} */
-  const pinned = new Map();
-  const ledger = asObject(getSpatialLedger(worldState, 'roadsReturnedCaptives'));
-  for (const key of Object.keys(ledger).sort(compareCodepoint)) {
-    const r = asObject(ledger[key]);
-    // D-5 §9: a THIRD-PARTY RANSOM channel names the PAYER as the beneficiary/patron (the web recruits
-    // the returned captive FOR the payer, not the captor); a plain captor channel omits it ⇒ captorId.
-    const captor = String(r.beneficiaryId ?? r.captorId ?? '');
-    const home = String(r.homeId ?? '');
-    const npcKey = String(r.npcKey ?? '');
-    if (!captor || !home || captor === home) continue;
-    pairs.add(captor < home ? `${captor}|${home}` : `${home}|${captor}`);
-    if (npcKey) pinned.set(`${captor}|${home}`, npcKey);
-  }
-  return { pairs, pinned };
-}
-
-/**
  * The raw channel quality (0..1) a patron holds toward a target — the MAX over its live
  * channels: a hostile/rival EDGE, a criminal_corridor CHANNEL, or an active SMUGGLE path.
  * 0 ⇒ NO channel ⇒ the patron cannot recruit here (the hard §2 gate). Pure.
  * @param {WebSnapshot} snapshot
  * @param {Set<string>} smuggle  the unordered smuggle-pair set (smugglePairs)
  * @param {string} patronId @param {string} targetId
- * @param {Set<string>} [returned]  the unordered returned-captive pair set (THE ROADS §10)
  * @returns {number}
  */
-export function rawChannelQuality(snapshot, smuggle, patronId, targetId, returned = new Set()) {
+export function rawChannelQuality(snapshot, smuggle, patronId, targetId) {
   const p = String(patronId);
   const t = String(targetId);
   if (p === t) return 0;
@@ -333,7 +289,6 @@ export function rawChannelQuality(snapshot, smuggle, patronId, targetId, returne
   }
   const pairKey = p < t ? `${p}|${t}` : `${t}|${p}`;
   if (smuggle.has(pairKey)) quality = Math.max(quality, CORRUPTION_WEB_TUNING.CHANNEL_SMUGGLE);
-  if (returned.has(pairKey)) quality = Math.max(quality, CORRUPTION_WEB_TUNING.CHANNEL_RETURNED_CAPTIVE); // THE ROADS §10
   return clamp01(quality);
 }
 
@@ -409,27 +364,17 @@ export function officialPay01(worldState, snapshot, targetId) {
  * @param {string} patronId @param {string} targetId
  * @returns {{ weight: number, channel01: number, obligation01: number, secrecy01: number, pay01: number }}
  */
-export function recruitmentWeight(snapshot, worldState, smuggle, patronId, targetId, returned = new Set()) {
-  const channel01 = rawChannelQuality(snapshot, smuggle, patronId, targetId, returned);
+export function recruitmentWeight(snapshot, worldState, smuggle, patronId, targetId) {
+  const channel01 = rawChannelQuality(snapshot, smuggle, patronId, targetId);
   if (channel01 <= 0) return { weight: 0, channel01: 0, obligation01: 0, secrecy01: 0, pay01: 0 };
   const obligation01 = obligationDebt01(worldState, targetId, patronId);
   const secrecy01 = targetSecrecy01(worldState, targetId);
   const pay01 = officialPay01(worldState, snapshot, targetId);
   // W-DOCTRINE-4 §3: a consolidated ruling coalition in the target raises the price (a
   // divided court is cheap). 0 when politics is dormant ⇒ byte-neutral.
-  const targetItem = snapshot?.byId?.get?.(String(targetId));
-  const coalition01 = coalitionConsolidation01(worldState, String(targetId), targetItem);
-  // D6 THE UNDERWAYS (coupling 3 — covert-operations affinity): clandestine infrastructure
-  // in the target eases conspiracy formation. ×(1+0) without the facet ⇒ byte-identical.
-  const clandestine01 = hasClandestineFacet(targetItem && targetItem.settlement && targetItem.settlement.institutions) ? 1 : 0;
-  // D7: the target's dark reframe of the patron's aid (extortion_endured — a resented debt) is
-  // leash-eligible material. 0 when the reframe layer is dark / no such reading ⇒ ×1 ⇒ byte-neutral.
-  const reframed01 = darkReframe01(worldState, targetId, patronId);
+  const coalition01 = coalitionConsolidation01(worldState, String(targetId), snapshot?.byId?.get?.(String(targetId)));
   const T = CORRUPTION_WEB_TUNING;
-  const boosted = channel01
-    * (1 + T.OBLIGATION_BOOST_MAX * obligation01)
-    * (1 + T.REFRAME_BOOST_MAX * reframed01)
-    * (1 + UNDERWAYS_TUNING.CONSPIRACY_EASE * clandestine01);
+  const boosted = channel01 * (1 + T.OBLIGATION_BOOST_MAX * obligation01);
   const degraded = boosted
     * (1 - (1 - T.HIDE_DEGRADE) * secrecy01)
     * (1 - T.PAY_RESIST_MAX * pay01)
@@ -588,7 +533,6 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
 
   const existingByPatron = foreignAssetsByPatron(snapshot);
   const smuggle = smugglePairs(worldState);
-  const { pairs: returned, pinned: returnedPins } = returnedCaptiveChannels(worldState); // THE ROADS §10
   /** @type {CorruptionWebResult['deferrals']} */
   const deferrals = [];
 
@@ -611,7 +555,7 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
     let best = null;
     for (const targetId of targetIds) {
       if (targetId === patronId || heldTargets.has(targetId)) continue;
-      const { weight } = recruitmentWeight(snapshot, worldState, smuggle, patronId, targetId, returned);
+      const { weight } = recruitmentWeight(snapshot, worldState, smuggle, patronId, targetId);
       if (weight <= 0) continue;
       if (!best || weight > best.weight) best = { targetId, weight };
     }
@@ -639,10 +583,8 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
       continue;
     }
 
-    // MINT: the deterministic target-NPC pick (the seedBetrayalTraitor template) — PINNED to
-    // the returned captive when a roads §10 channel keys this (patron→target) pair.
-    const pin = returnedPins.get(`${patronId}|${best.targetId}`) || null;
-    const minted = mintAssetInto(nextNpcStates, snapshot, best.targetId, patronId, now, pin);
+    // MINT: the deterministic target-NPC pick (the seedBetrayalTraitor template).
+    const minted = mintAssetInto(nextNpcStates, snapshot, best.targetId, patronId, now);
     if (!minted) {
       deferrals.push({ patronId, targetId: best.targetId, reason: 'no_eligible_npc' });
       continue;
@@ -673,10 +615,9 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
  * @param {Record<string, unknown>} npcStates
  * @param {WebSnapshot} snapshot
  * @param {string} targetSid @param {string} patronId @param {number} tick
- * @param {string|null} [pinnedNpcKey]  THE ROADS §10 — pin the pick to the returned captive
  * @returns {{ npcStates: Record<string, unknown>, npcKey: string } | null}
  */
-function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick, pinnedNpcKey = null) {
+function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick) {
   const item = snapshot?.byId?.get?.(targetSid);
   const npcs = Array.isArray(item?.settlement?.npcs) ? item.settlement.npcs : [];
   if (!npcs.length) return null;
@@ -688,9 +629,6 @@ function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick, pinnedNpc
     .filter((c) => c.flaw && c.npc.corrupt !== true && c.npc.ousted !== true
       && asObject(npcStates[npcId(targetSid, c.npc, c.index)]).corruption !== true);
   if (!eligible.length) return null;
-  // THE ROADS §10: pin the pick to the returned captive when it is eligible; else the default.
-  const pinnedC = pinnedNpcKey ? eligible.find((c) => npcId(targetSid, c.npc, c.index) === pinnedNpcKey) : null;
-  if (pinnedC) return mintLeashOnto(npcStates, targetSid, pinnedC, patronId, tick);
   eligible.sort((a, b) => {
     const rank = (/** @type {Record<string, number>} */ (IMPORTANCE_RANK)[String(b.npc.importance)] || 0)
       - (/** @type {Record<string, number>} */ (IMPORTANCE_RANK)[String(a.npc.importance)] || 0);
@@ -699,17 +637,7 @@ function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick, pinnedNpc
     const bn = String(b.npc.name || '');
     return an < bn ? -1 : an > bn ? 1 : 0;
   });
-  return mintLeashOnto(npcStates, targetSid, eligible[0], patronId, tick);
-}
-
-/**
- * Write the foreign_settlement leash onto the chosen NPC's npcStates (the covert conversion).
- * Shared by the default importance-pick and THE ROADS §10 pinned-captive pick. Pure.
- * @param {Record<string, unknown>} npcStates @param {string} targetSid
- * @param {{ npc: SimNpc, index: number }} chosen @param {string} patronId @param {number} tick
- * @returns {{ npcStates: Record<string, unknown>, npcKey: string } | null}
- */
-function mintLeashOnto(npcStates, targetSid, chosen, patronId, tick) {
+  const chosen = eligible[0];
   const id = npcId(targetSid, chosen.npc, chosen.index);
   const st = asObject(npcStates[id]);
   if (!npcStates[id]) return null; // no ensured state to attach to (ensureNpcStates ran first)
@@ -820,19 +748,12 @@ export function exposedCorruptionForPair(worldState, fromId, toId, tick) {
  * spuriously re-point on an unresolvable name). Pure.
  * @param {{ foreign?: boolean, settlementId?: string|null }} leash
  * @param {{ byId?: { get?: (id: string) => unknown }, settlements?: Array<Record<string, unknown>> } | null | undefined} snapshot
- * @param {Record<string, unknown> | null | undefined} [occupations]  worldState.occupations, keyed by settlement id
  * @returns {boolean}
  */
-export function foreignEndpointLive(leash, snapshot, occupations) {
+export function foreignEndpointLive(leash, snapshot) {
   if (!leash || leash.foreign !== true) return true; // not a foreign leash — not our concern
   const sid = leash.settlementId != null ? String(leash.settlementId) : '';
   if (!sid) return true; // pure faction endpoint — unverifiable, never spuriously re-point
-  // An occupied endpoint no longer commands its arm. The real occupation state lives in
-  // worldState.occupations[sid] (mercenaryMarket/martialReadiness read it the same way) —
-  // the old `s.occupiedBy/s.occupation/s.conqueredBy` fields are NEVER written, so that
-  // check was dead and an occupied patron's leash never collapsed. Absent map ⇒ no
-  // occupations this tick ⇒ not occupied (byte-identical dormancy).
-  if (occupations != null && occupations[sid] != null) return false;
   // Resolve from byId (the kernel snapshot) or the settlements array (the causeLifecycle snapshot).
   const fromById = snapshot?.byId?.get?.(sid);
   const item = fromById != null
@@ -842,12 +763,26 @@ export function foreignEndpointLive(leash, snapshot, occupations) {
   const s = asObject(asObject(item).settlement);
   const status = String(s.status || '').toLowerCase();
   if (DEAD_ENDPOINT_STATUS.has(status)) return false;
+  if (s.occupiedBy != null || s.occupation != null || s.conqueredBy != null) return false; // occupied ⇒ no longer commands its arm
   return true;
 }
 
 /** Settlement statuses that read as a dead foreign endpoint (mirrors causeLifecycle's
  *  NONSTANDING_STATUS + the destroyed fate). */
 const DEAD_ENDPOINT_STATUS = Object.freeze(new Set(['destroyed', 'ruined', 'removed', 'abandoned', 'defunct']));
+
+/** The real relationship-edge key between two settlements (relationshipStates is keyed by
+ *  the edge's own id — a synthesized key would orphan the overlay). Mirrors
+ *  informationStatecraft.edgeKeyBetween / peaceTerms.edgeKeyBetween. Pure.
+ *  @param {Array<Record<string, unknown>>} edges @param {string} a @param {string} b @returns {string | null} */
+function edgeKeyBetween(edges, a, b) {
+  for (const edge of (Array.isArray(edges) ? edges : [])) {
+    const f = edge?.from != null ? String(edge.from) : '';
+    const t = edge?.to != null ? String(edge.to) : '';
+    if ((f === a && t === b) || (f === b && t === a)) return relationshipKeyFromEdge(edge);
+  }
+  return null;
+}
 
 /** Codepoint-sort a ledger's keys for a byte-stable serialization (drop-when-empty). */
 /** @param {Record<string, unknown>} ledger @returns {Record<string, unknown>} */
@@ -927,8 +862,7 @@ export function applyForeignExposureBlowback({ worldState, snapshot, exposures, 
     nextLedger[key] = { magnitude01: round4(Math.max(prior, fx.magnitude01)), tick: nowTick };
 
     // (2) The people-held grievance on the shared (corrupted↔patron) edge.
-    const grievanceEdge = edgeBetween(edges, fx.corruptedId, fx.patronId);
-    const edgeKey = grievanceEdge ? relationshipKeyFromEdge(grievanceEdge) : null;
+    const edgeKey = edgeKeyBetween(edges, fx.corruptedId, fx.patronId);
     if (edgeKey) {
       const cur = asObject(asObject(/** @type {{ relationshipStates?: unknown }} */ (ws).relationshipStates)[edgeKey]);
       const resentment = clamp01(finiteNumber(cur.resentment, 0) + T.EXPOSURE_GRIEVANCE_W * fx.magnitude01);
@@ -938,7 +872,7 @@ export function applyForeignExposureBlowback({ worldState, snapshot, exposures, 
         metadata: { incidentType: 'foreign_corruption_exposed' },
         severity: clamp01(fx.magnitude01),
         proposalPayload: null,
-      }, now, grievanceEdge));
+      }, now));
       changed = true;
     }
 

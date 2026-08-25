@@ -7,23 +7,23 @@
  * state, no store, no side effects.
  */
 import {
-  GOLD, BLUE, GREEN, AMBER, SLATE, RED,
+  GOLD, BLUE, GREEN, AMBER, VIOLET, RED,
 } from '../theme.js';
 
 // Series/category palette (cycled). 'other' bucket uses MUTED.
-export const PALETTE = [GOLD, BLUE, GREEN, AMBER, SLATE, RED, '#0E7C7B', '#9B5DE5'];
+export const PALETTE = [GOLD, BLUE, GREEN, AMBER, VIOLET, RED, '#0E7C7B', '#9B5DE5'];
 
 // ── formatting helpers ───────────────────────────────────────────────────────
 export const NF = new Intl.NumberFormat('en-US');
 export const fmtInt = (n) => NF.format(Math.round(Number(n) || 0));
 export const fmtVal = (n, avg) => {
   const x = Number(n);
-  if (!Number.isFinite(x)) return '–';
+  if (!Number.isFinite(x)) return '—';
   return avg ? x.toFixed(x % 1 === 0 ? 0 : 1) : fmtInt(x);
 };
 export function deltaInfo(cur, prior) {
   const c = Number(cur) || 0, p = Number(prior) || 0;
-  if (p === 0) return { dir: c > 0 ? 'up' : 'flat', label: c > 0 ? 'new' : '–' };
+  if (p === 0) return { dir: c > 0 ? 'up' : 'flat', label: c > 0 ? 'new' : '—' };
   const pct = ((c - p) / p) * 100;
   const dir = pct > 0.5 ? 'up' : pct < -0.5 ? 'down' : 'flat';
   return { pct, dir, label: `${pct > 0 ? '+' : ''}${pct.toFixed(0)}%` };

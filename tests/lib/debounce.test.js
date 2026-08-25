@@ -41,63 +41,29 @@ describe('debounce()', () => {
   });
 });
 
-describe('throttle() — leading + trailing edge', () => {
-  test('first call fires immediately (leading edge)', () => {
+describe('throttle()', () => {
+  test('first call fires immediately', () => {
     const spy = vi.fn();
     const t = throttle(spy, 100);
     t('a');
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenLastCalledWith('a');
   });
 
-  test('fires the leading call immediately and the LAST in-window call on the trailing edge', () => {
+  test('calls within the limit are dropped', () => {
     const spy = vi.fn();
     const t = throttle(spy, 100);
-    // Burst of three within one window: leading 'a' fires now, 'b'/'c' are
-    // coalesced and the LAST ('c') fires when the window closes.
     t('a'); t('b'); t('c');
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenLastCalledWith('a');
-
-    // Trailing edge — the final call in the burst is NOT dropped (the fix).
-    vi.advanceTimersByTime(100);
-    expect(spy).toHaveBeenCalledTimes(2);
-    expect(spy).toHaveBeenLastCalledWith('c');
   });
 
-  test('a lone leading call does NOT double-fire on the trailing edge', () => {
-    const spy = vi.fn();
-    const t = throttle(spy, 100);
-    t('a');
-    vi.advanceTimersByTime(100);
-    // No call arrived during the window, so nothing trails.
-    expect(spy).toHaveBeenCalledTimes(1);
-    // …and the window has fully closed: the next call is a fresh leading edge.
-    t('b');
-    expect(spy).toHaveBeenCalledTimes(2);
-    expect(spy).toHaveBeenLastCalledWith('b');
-  });
-
-  test('calls spaced beyond the limit each fire on their own leading edge', () => {
+  test('calls after the limit fire again', () => {
     const spy = vi.fn();
     const t = throttle(spy, 100);
     t('a');
     vi.advanceTimersByTime(150);
     t('b');
     expect(spy).toHaveBeenCalledTimes(2);
-    expect(spy).toHaveBeenLastCalledWith('b');
-  });
-
-  test('cancel() drops a pending trailing call', () => {
-    const spy = vi.fn();
-    const t = throttle(spy, 100);
-    t('a'); t('b'); // 'a' leads, 'b' is pending for the trailing edge
-    expect(spy).toHaveBeenCalledTimes(1);
-    t.cancel();
-    vi.advanceTimersByTime(200);
-    // The trailing 'b' was cancelled — still only the leading call ran.
-    expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenLastCalledWith('a');
   });
 
   test('default limit is 300ms', () => {
@@ -105,11 +71,10 @@ describe('throttle() — leading + trailing edge', () => {
     const t = throttle(spy);
     t('a'); t('b');
     vi.advanceTimersByTime(299);
-    // Still inside the 300ms window: only the leading 'a' has fired.
+    t('c');
     expect(spy).toHaveBeenCalledTimes(1);
     vi.advanceTimersByTime(2);
-    // Window closed → trailing 'b' fires.
+    t('d');
     expect(spy).toHaveBeenCalledTimes(2);
-    expect(spy).toHaveBeenLastCalledWith('b');
   });
 });

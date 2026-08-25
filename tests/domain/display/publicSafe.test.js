@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { toPublicSafe, PRIVATE_KEY_RE, galleryMemberKey } from '../../../src/domain/display/publicSafe.js';
+import { toPublicSafe, PRIVATE_KEY_RE } from '../../../src/domain/display/publicSafe.js';
 
 describe('toPublicSafe (§1k)', () => {
   it('strips DM-private top-level blocks and denied keys', () => {
@@ -127,35 +127,6 @@ describe('toPublicSafe (§1k)', () => {
     expect(out.config.cultDeitySnapshots).toEqual([{ name: 'Ash', alignmentAxis: 'evil' }]);
     expect(out.config.faithProfile).toEqual({ patron: { name: 'Sun', share: 62 } });
   });
-
-  it('(142) drops a COVERT corruption impairment (NPC-naming description) but keeps the public one', () => {
-    // W-DOCTRINE-3 §6 / GALLERY-2 precondition: imposeCorruption stamps a covert
-    // impairment onto institutions[].impairments whose description NAMES the corrupted
-    // NPC. `institutions` is allowlisted, and none of the impairment's keys trip the
-    // deeper denylist, so without the value-level covert drop the WHOLE object — naming
-    // description included — rode through to the anon dossier. A key-strip is insufficient
-    // (it leaves the description); the whole covert object must go. FAIL-CLOSED.
-    const out = toPublicSafe({
-      name: 'Brackwater', tier: 'town',
-      institutions: [{
-        name: 'The Tanners Guild', category: 'Crafts',
-        impairments: [
-          { type: 'corruption', severity: 'moderate', covert: true, causeEventId: 'evt_capture_9', appliedAt: 42,
-            description: "Aldric's capture quietly compromised The Tanners Guild." },
-          { type: 'flood_damage', severity: 'minor', description: 'Spring floods damaged the drying racks.' },
-        ],
-      }],
-    });
-    expect(out.institutions).toHaveLength(1);
-    expect(out.institutions[0].name).toBe('The Tanners Guild');
-    const imps = out.institutions[0].impairments;
-    expect(imps).toHaveLength(1);
-    expect(imps[0].type).toBe('flood_damage');
-    expect(imps.some(i => i && i.covert)).toBe(false);
-    // The NPC-naming description must appear NOWHERE in the projection.
-    expect(JSON.stringify(out)).not.toContain('quietly compromised');
-    expect(JSON.stringify(out)).not.toContain("Aldric's capture");
-  });
 });
 
 describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
@@ -183,52 +154,12 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     expect(out.npcs[0].relationships).toEqual([{ with: 'x' }]);
   });
 
-  it('(142) KEEPS covert corruption impairments in full mode (the DM-content share)', () => {
-    // JUDGMENT (vetoable — mirrors migration 142's scope note): the covert drop guards the
-    // ANON surface only (W-DOCTRINE-3 §6). gallery_share_dm is the owner's explicit
-    // DM-content publish (secrets, hooks, NPC goals) — a covert corruption fact is DM
-    // narrative consistent with that opt-in, so full mode preserves it. Full mode never
-    // calls sanitizePublicValue (it deep-clones + drops named blocks), so the covert
-    // impairment rides through by construction; this pins that intent. To flip: add the
-    // covert drop to the full-mode clone path + _gallery_dm_full_json and invert this pin.
-    const out = toPublicSafe({
-      name: 'Foo', tier: 'town', plotHooks: ['the heir is hidden'],
-      institutions: [{
-        name: 'The Tanners Guild', category: 'Crafts',
-        impairments: [
-          { type: 'corruption', severity: 'moderate', covert: true,
-            description: "Aldric's capture quietly compromised The Tanners Guild." },
-        ],
-      }],
-    }, { full: true });
-    expect(out.institutions[0].impairments).toHaveLength(1);
-    expect(out.institutions[0].impairments[0].covert).toBe(true);
-    expect(JSON.stringify(out)).toContain('quietly compromised');
-  });
-
   it('strips DM notes even in full mode — truly confidential, never shared', () => {
     const out = toPublicSafe(dm(), { full: true });
     expect(out.dossierNotes).toBeUndefined();
     expect(out.dmNotes).toBeUndefined();
     expect(out.notes).toBeUndefined();
     expect(out.narrativeNotes).toBeUndefined();
-  });
-
-  // Defense-in-depth for the gallery DM-notes invariant: in production DM notes
-  // live NESTED at aiData.dossierNotes.dmNotes, not at the top level. aiData is
-  // dropped wholesale in full mode, so the nested secret must never survive.
-  // This pins it against any future change (e.g. a per-member gallery reveal)
-  // that tries to preserve part of aiData for the DM view: the dmNotes content
-  // must appear NOWHERE in the projected output, share-DM on or off.
-  it('never leaks the nested aiData.dossierNotes.dmNotes, even in full DM mode', () => {
-    const dmSecret = 'the BBEG is the mayor, kill on sight';
-    const withNested = {
-      name: 'Foo', tier: 'town',
-      aiData: { dossierNotes: { dmNotes: dmSecret, aiGuidance: 'campaign lore the model weaves in' } },
-    };
-    expect(JSON.stringify(toPublicSafe(withNested, { full: true }))).not.toContain(dmSecret);
-    expect(JSON.stringify(toPublicSafe(withNested))).not.toContain(dmSecret); // default mode too
-    expect(toPublicSafe(withNested, { full: true }).aiData).toBeUndefined();
   });
 
   it('drops AI prose blobs but keeps ONLY the four DM-Compass fields of aiSettlement', () => {
@@ -356,52 +287,5 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     expect(out.connectionsMap).toBeUndefined();
     expect(out.dmCompass).toBeUndefined();
     expect(out.narrativeNotes).toBeUndefined();
-  });
-});
-
-describe('toPublicSafe — per-member overrides (migration 093 mirror)', () => {
-  const dm = () => ({
-    // Settlement-level DM content that a per-member reveal must NEVER leak (the 092 bug).
-    plotHooks: ['the mayor is a doppelganger'],
-    dmCompass: { frictionPoints: 'the guild versus the crown' },
-    npcs: [
-      { id: 'n1', name: 'Aldric', role: 'mayor', influence: 'high', secret: 'is a spy', goal: 'seize the crown' },
-      { id: 'n2', name: 'Mara', role: 'priest', influence: 'mid', secret: 'embezzles tithes', goal: 'flee' },
-    ],
-  });
-
-  it('galleryMemberKey prefers npc.id, else a name slug (matches the SQL key)', () => {
-    expect(galleryMemberKey({ id: 'n1', name: 'Aldric' })).toBe('n1');
-    expect(galleryMemberKey({ name: 'Old Tom the Smith!' })).toBe('npc.old_tom_the_smith');
-  });
-
-  it('REGRESSION (092 leak): hidden settlement + one member revealed leaks NO settlement-level DM content', () => {
-    const out = toPublicSafe(dm(), { full: false, memberOverrides: { n1: { revealDm: true } } });
-    // Settlement-level DM content stays stripped (the fix).
-    expect(out.plotHooks).toBeUndefined();
-    expect(out.dmCompass).toBeUndefined();
-    // Only the revealed member gets its DM fields.
-    const a = out.npcs.find(n => n.name === 'Aldric');
-    const b = out.npcs.find(n => n.name === 'Mara');
-    expect(a.secret).toBe('is a spy');
-    expect(a.goal).toBe('seize the crown');
-    expect(b.secret).toBeUndefined();
-    expect(b.goal).toBeUndefined();
-  });
-
-  it('settlement revealed + one member hidden: that member is re-stripped', () => {
-    const out = toPublicSafe(dm(), { full: true, memberOverrides: { n2: { revealDm: false } } });
-    const a = out.npcs.find(n => n.name === 'Aldric');
-    const b = out.npcs.find(n => n.name === 'Mara');
-    expect(a.secret).toBe('is a spy');
-    expect(b.secret).toBeUndefined();
-    expect(b.name).toBe('Mara');
-  });
-
-  it('no overrides leaves the settlement-level behavior unchanged', () => {
-    const hidden = toPublicSafe(dm(), { full: false });
-    expect(hidden.npcs.every(n => n.secret === undefined)).toBe(true);
-    const shown = toPublicSafe(dm(), { full: true });
-    expect(shown.npcs.every(n => n.secret !== undefined)).toBe(true);
   });
 });

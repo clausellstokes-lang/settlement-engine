@@ -28,13 +28,6 @@ export const STEP_METADATA = Object.freeze({
     // input whose .tier is the unresolved sentinel in random/custom mode.
     summary: (ctx) => ctx.tier ? `Target size: ${ctx.tier}` : null,
   },
-  buildGenerationContext: {
-    label: 'Establish world law',
-    description: 'Freeze the resolved world rules every institution, service, person, and history producer must obey.',
-    summary: (ctx) => ctx.generationContext?.worldLaw?.magicFunctions()
-      ? 'Magic functions in this world'
-      : 'Magic does not function in this world',
-  },
   resolveResources: {
     label: 'Pick local resources',
     description: 'Decide which natural resources the land yields, based on terrain and trade.',
@@ -130,27 +123,10 @@ export const STEP_METADATA = Object.freeze({
       ? 'Faction pressure reshaped the roster'
       : null,
   },
-  coherenceRepairPass: {
-    label: 'Repair generated structure',
-    description: 'Correct generator-owned access, dependency, and survival contradictions before downstream systems read the roster.',
-    summary: (ctx) => {
-      const count = ctx.generationRepairs?.length || 0;
-      return count
-        ? `${count} deterministic repair${count === 1 ? '' : 's'} applied`
-        : 'No structural repairs needed';
-    },
-  },
   economyReconcilePass: {
     label: 'Reconcile economy with final roster',
     description: 'Re-derive chains, services, and spatial placement so faction-pulled institutions join the economy.',
     summary: (ctx) => ctx._rosterChangedAfterEconomy ? 'Economy re-derived for the final roster' : 'Roster unchanged — economy confirmed',
-  },
-  powerEconomyReconcilePass: {
-    label: 'Finalize power against the economy',
-    description: 'Replay the original political intent against the final economic facts without reopening institution pulls.',
-    summary: (ctx) => ctx.powerStructure?.economyInputFingerprint
-      ? 'Power reconciled and freshness-stamped'
-      : null,
   },
   structuralValidationPass: {
     label: 'Validate structure',
@@ -174,6 +150,18 @@ export const STEP_METADATA = Object.freeze({
     summary: (ctx) => {
       const n = (ctx.npcs || []).filter(npc => npc?.corrupt === true).length;
       return n ? `${n} corrupted figure${n === 1 ? '' : 's'}` : 'No corruption climate';
+    },
+  },
+  seedStartingPantheon: {
+    label: 'Seed the latent pantheon',
+    description: 'Bake a latent patron and minor cults into the seed, weighted by terrain, culture, and who governs. Dormant until faith is activated.',
+    // LATENCY DISCIPLINE (premium gate): the rail summary reports COUNTS ONLY —
+    // it must never name a latent deity (no generation-time surface may).
+    summary: (ctx) => {
+      const latent = ctx.effectiveConfig?.latentPantheon;
+      if (!latent?.patron) return 'No faith seeded';
+      const cults = latent.cults?.length || 0;
+      return cults ? `A patron and ${cults} cult${cults === 1 ? '' : 's'} lie latent in the seed` : 'A patron lies latent in the seed';
     },
   },
   generateNarratives: {

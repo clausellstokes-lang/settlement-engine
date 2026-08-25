@@ -14,9 +14,7 @@ import { useMemo } from 'react';
 import { X, ExternalLink, Trash2 } from 'lucide-react';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
-import { settlementSizeLabel, humanizeToken } from '../../domain/display/humanizeEngineTokens.js';
-import { resolveSettlementTerrain } from '../../domain/resolveTerrain.js';
-import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, EMPTY_VALUE } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, R, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
@@ -32,12 +30,12 @@ export default function PlacementDetailCard({ onOpenDetail }) {
 
   // Resolve the placement + save entry for the current selection
   const { settlement, placementBurgId } = useMemo(() => {
-    if (selectedSettlementId == null) return { settlement: null, placementBurgId: null };
-    const save = (saves || []).find(s => String(s.id) === String(selectedSettlementId)) || null;
+    if (!selectedSettlementId) return { settlement: null, placementBurgId: null };
+    const save = (saves || []).find(s => s.id === selectedSettlementId) || null;
     // Also locate which burgId corresponds to this settlement for removal
     let burgId = null;
     for (const [bid, p] of Object.entries(placements || {})) {
-      if (p?.settlementId != null && String(p.settlementId) === String(selectedSettlementId)) {
+      if (p?.settlementId && String(p.settlementId) === String(selectedSettlementId)) {
         burgId = bid;
         break;
       }
@@ -45,22 +43,14 @@ export default function PlacementDetailCard({ onOpenDetail }) {
     return { settlement: save, placementBurgId: burgId };
   }, [selectedSettlementId, saves, placements]);
 
-  if (selectedSettlementId == null || !settlement) return null;
+  if (!selectedSettlementId || !settlement) return null;
 
   const s = settlement.settlement || settlement;
   const name  = s.name || settlement.name || 'Untitled';
-  const size  = settlementSizeLabel(s.tier || settlement.tier, EMPTY_VALUE);
+  const tier  = s.tier || settlement.tier || EMPTY_VALUE;
   const pop   = s.population || 0;
-  // Culture and terrain are persisted on the RESOLVED config, never at the top
-  // level of a settlement: resolveConfig.js rolls the `random_culture` / 'auto'
-  // sentinels away and writes `culture` + `terrainType` into effectiveConfig.
-  // `s.culture` / `s.cultureName` / `s.terrain` have no writer at all, so this
-  // whole block was gated on two permanently empty strings and never MOUNTED.
-  // resolveSettlementTerrain is the ONE terrain read (domain/resolveTerrain.js)
-  // — re-deriving the config chain here is exactly the drift that enforcer
-  // exists to prevent.
-  const culture = humanizeToken(s.config?.culture || '');
-  const terrain = humanizeToken(resolveSettlementTerrain(settlement) || '');
+  const culture = s.culture || s.cultureName || '';
+  const terrain = s.terrain || '';
 
   function handleClose() {
     clearSettlement();
@@ -84,6 +74,7 @@ export default function PlacementDetailCard({ onOpenDetail }) {
       width: 260,
       background: CARD,
       border: `1px solid ${BORDER}`,
+      borderRadius: R.lg,
       boxShadow: '0 6px 24px rgba(28, 20, 9, 0.18)',
       overflow: 'hidden',
       zIndex: 10,
@@ -115,7 +106,7 @@ export default function PlacementDetailCard({ onOpenDetail }) {
           {name}
         </div>
         <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: SP.sm }}>
-          {size}{pop ? ` · ${formatCount(pop)} pop` : ''}
+          {tier}{pop ? ` · ${formatCount(pop)} pop` : ''}
         </div>
 
         {(culture || terrain) && (

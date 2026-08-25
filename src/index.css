@@ -182,48 +182,8 @@ button {
 #root {
   background: transparent !important;
 }
-
-/* The last-resort render fallback belongs to the global shell, so its visual
-   contract lives here rather than as an inline object in main.jsx. It remains
-   readable even if token emission fails during boot. */
-.root-error-boundary {
-  margin: 16px;
-  padding: 24px;
-  border: 2px solid var(--sem-destructive, #8b1a1a);
-  border-radius: 8px;
-  background: var(--sem-destructive-bg, #fdf4f4);
-  font-family: monospace;
-}
-.root-error-boundary pre {
-  white-space: pre-wrap;
-  font-size: 12px;
-}
-
 .parchment-bg {
   min-height: 100vh;
-}
-
-/*
- * Keep the footer below the first viewport while a lazy route chunk resolves.
- *
- * The shell renders its real header, footer, and mobile navigation around the
- * Suspense fallback. Without a route-height floor, the short Loading card lets
- * the footer enter the viewport; the resolved page then pushes that entire
- * footer away and produces a large mobile layout shift. The per-layout reserve
- * is supplied by App so this remains one shell contract rather than a
- * generator-specific skeleton height.
- */
-.app-route-main {
-  --app-shell-header-reserve: 72px;
-  min-height: calc(100vh - var(--app-shell-header-reserve, 72px));
-}
-.app-route-main--mobile {
-  --app-shell-header-reserve: 56px;
-}
-@supports (height: 100svh) {
-  .app-route-main {
-    min-height: calc(100svh - var(--app-shell-header-reserve, 72px));
-  }
 }
 
 /* Per-view page background. App.jsx sets the image via the --page-bg custom
@@ -329,16 +289,16 @@ button {
   min-height: 86vh;
 }
 
-/* Walk W1 (owner order 2026-07-21, item 10): every below-fold section card drops its
-   painted-scene / opaque-parchment background and adopts ONE translucent cream, so the
-   scrubbed growth film (WelcomeJourneyBackdrop, item 1) reads THROUGH behind every card.
-   Alpha 0.9 keeps INK/BODY text AA over the film's brightest frame while still letting
-   the settlement art show. The set-out (07) card is EXEMPT — it keeps its dark scene.
-   (Was `.sf-landing-scene-cream`: a cream scrim over per-section painted scenes; the
-   scenes were dropped for the film read-through, so this is now a flat translucent tone
-   applied to 01/02/03/04/06 alike.) */
+/* Sections 01 · Forge and 04 · The Realm — cream scrim over their painted
+   scenes (thorpe / city), attachment scroll (never more than one fixed layer). */
 .sf-landing-scene-cream {
-  background-color: rgba(247, 240, 228, 0.9);
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.66), rgba(247, 240, 228, 0.72)),
+    var(--sf-scene, none);
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
 }
 
 /* Closer 06 · Set out — dark scrim over the create scene, attachment scroll. */
@@ -364,26 +324,12 @@ button {
   .sf-landing-cue { animation: none; }
 }
 
-/* 03 · The voice previously used `.sf-landing-voice` (#F7F0E4 opaque parchment).
-   Walk W1 item 10 retired that in favour of the shared translucent
-   `.sf-landing-scene-cream` so the growth film reads through it like every other
-   section; its hairline top/bottom borders stay set inline (BORDER token). */
-
-/* ── C2 THE WELCOME — the travel-and-stop film journey ────────────────────────
-   The `.leg` travel spacers sit between the stops. Scrolling through one scrubs
-   the growth film between two tiers (the microsite mechanic, marketing/website/
-   src/main.js); they are transparent so the fixed film backdrop (home/
-   WelcomeJourneyBackdrop) shows through, while the opaque stop sections present
-   over the frozen still. Desktop fine-pointer gets a full viewport of travel per
-   leg; touch / mobile / reduced-motion get the COMPRESSED stills journey (law
-   #4): 70vh, no scrub — the stills floor serves both from one code path. */
-.sf-welcome-leg {
-  height: 100vh;
-  pointer-events: none;
-}
-@media (hover: none), (max-width: 768px), (prefers-reduced-motion: reduce) {
-  .sf-welcome-leg { height: 70vh; }
-}
+/* 03 · The voice — plain parchment at the page-body cream (#F7F0E4). This exact
+   tone has no semantic token (the brief/commons plains use parchment-50, a
+   token), so its one background lives here in CSS rather than as a raw hex in
+   JS (visual-budget lint). Hairline top/bottom borders are set inline (BORDER
+   token). */
+.sf-landing-voice { background-color: #f7f0e4; }
 
 /* 02 · The brief — deliberate incompleteness (owner amendment W-L2/1): the
    mini-dossier's final prose line fades out mid-thought, signalling the rest
@@ -398,7 +344,7 @@ button {
    Visually hidden until focused, then slides into the top-left so keyboard / SR
    users can jump past the header/nav straight to <main id="main-content">. */
 .skip-link {
-  /* `position` is owned by the authoritative a11y.css rule loaded after this sheet. */
+  position: absolute;
   left: 8px;
   top: -56px;
   z-index: 300;
@@ -506,103 +452,3 @@ button {
  * override needed here. */
 .sf-spin { animation: sf-spin 1.2s linear infinite; }
 @keyframes sf-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-/* ── THE ONE DOOR (C13) — the left-edge Surveyor marginalia tab ─────────────
- * The single AI entry marker (owner ruling 2026-07-18). Shape/elevation live
- * here (not inline) because the deep-craft kill-list freezes the inline
- * borderRadius/boxShadow/rgba( counts across src/components — a new floating
- * surface carries its chrome as CSS. Colors ride the theme's AI register
- * (src/design/tokens.js — the slate pair); the two hexes below mirror
- * slate tokens and are commented at the definition site.
- * The label is a hover/focus reveal flag ("no text until hover") — AT always
- * hears the aria-label; :focus-visible reveals it for keyboard users too. */
-.sf-door-tab {
-  position: fixed;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 60;
-  /* a slim marginalia tab, but never under the 44px hit floor */
-  min-width: 44px;
-  min-height: 96px;
-  padding: 0;
-  border-left: none;
-  border-radius: 0 10px 10px 0;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.18);
-}
-.sf-door-tab .sf-door-label {
-  position: absolute;
-  left: calc(100% + 6px);
-  top: 50%;
-  transform: translate(-6px, -50%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 140ms ease-out, transform 140ms ease-out;
-  font-variant-caps: small-caps;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-}
-.sf-door-tab:hover .sf-door-label,
-.sf-door-tab:focus-visible .sf-door-label {
-  opacity: 1;
-  transform: translate(0, -50%);
-}
-/* While the slip is open the trigger stays mounted (so the focus trap can
-   restore focus to it on close) but is tucked under the panel and made inert —
-   visually identical to the previous unmount, with focus never orphaned. */
-.sf-door-tab--open {
-  left: 12px;
-  z-index: 59;
-  pointer-events: none;
-}
-
-/* The door's prompt slip — docked at the tab's margin position. */
-.sf-door-panel {
-  position: fixed;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 60;
-  width: 340px;
-  max-width: calc(100vw - 32px);
-  border-radius: 10px;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
-}
-
-/* The small-cap register line (draft slips, the door heading). */
-.sf-smallcap {
-  font-variant-caps: small-caps;
-  letter-spacing: 0.06em;
-}
-
-/* ─────────────────────────────────────────────────────────────────────
-   THE WHIPPING'S BLEND FALL-BACK (ribbon V4D, R-2).
-
-   The nav ribbon's two silk wraps (src/components/nav/ShaftWrap.jsx) are painted
-   as WRAP_BARREL — a NEUTRAL luminance ramp — MULTIPLIED over the opaque oxblood
-   turn gradient. That single `background-blend-mode` declaration is the whole
-   reason the bands read as thread: without it the topmost layer is the neutral
-   modulator itself, and both wraps render as a flat #D7D7D7 light-grey stripe at
-   ~9:1 against the cedar — the loudest object on the bar, and a mark that says
-   nothing.
-
-   So an engine without the property gets the PRE-V4C oxblood ramp instead, which
-   is the same claim one step flatter: the thread's own shading, lit by the shaft's
-   own light. The tones live in theme.js and reach here through a custom property
-   the component sets, because a second spelling of an authored colour in a
-   stylesheet is how two sources of one tone start drifting.
-
-   ⚠️ THIS IS THE ONE THING AN INLINE STYLE CANNOT SAY. Everything else about these
-   elements is inline; the sheet holds only the conditional. An engine that never
-   loads this file gets the blended paint, which is the correct one — the fallback
-   is the degraded arm, never the default.
-
-   Pinned by tests/components/navFletching.test.jsx, which asserts the rendered
-   element declares the blend, that its blend list and image list are the same
-   length, and that this rule exists and consumes the component's custom property.
-   ───────────────────────────────────────────────────────────────────── */
-@supports not (background-blend-mode: multiply) {
-  .sf-shaft-wrap {
-    background-image: var(--sf-wrap-flat);
-  }
-}

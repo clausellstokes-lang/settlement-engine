@@ -1,0 +1,84 @@
+export const meta = {
+  name: 'reconciliation-map',
+  description: 'Map review-fixes-2026-07-08 vs fix/holistic-remediation across 7 areas, then synthesize a merge-direction verdict',
+  phases: [
+    { title: 'Map', detail: '7 Fable area mappers, read-only across both checkouts', model: 'fable' },
+    { title: 'Synthesize', detail: 'merge-direction options + recommendation', model: 'fable' },
+  ],
+}
+
+const OURS = '/Users/cstokes/Desktop/settlement-engine'
+const THEIRS = '/Users/cstokes/Desktop/settlement-generator/settlement-engine'
+
+const MAP_SCHEMA = {
+  type: 'object',
+  required: ['area', 'theirWork', 'overlaps', 'conflicts', 'keep', 'skip', 'notes'],
+  properties: {
+    area: { type: 'string' },
+    theirWork: { type: 'array', items: { type: 'object', required: ['topic', 'summary'], properties: {
+      topic: { type: 'string' }, summary: { type: 'string' },
+      files: { type: 'array', items: { type: 'string' } },
+      commits: { type: 'array', items: { type: 'string' } } } } },
+    overlaps: { type: 'array', items: { type: 'object', required: ['topic', 'ourState', 'theirState', 'betterSide', 'evidence'], properties: {
+      topic: { type: 'string' }, ourState: { type: 'string' }, theirState: { type: 'string' },
+      betterSide: { type: 'string', enum: ['ours', 'theirs', 'equal', 'complementary'] },
+      evidence: { type: 'string' } } } },
+    conflicts: { type: 'array', items: { type: 'object', required: ['files', 'nature', 'severity'], properties: {
+      files: { type: 'array', items: { type: 'string' } }, nature: { type: 'string' },
+      severity: { type: 'string', enum: ['low', 'medium', 'high'] } } } },
+    keep: { type: 'array', items: { type: 'string' } },
+    skip: { type: 'array', items: { type: 'string' } },
+    notes: { type: 'string' },
+  },
+}
+
+const SYNTH_SCHEMA = {
+  type: 'object',
+  required: ['verdictSummary', 'mergeOptions', 'recommended', 'conflictInventory', 'phase4Implications', 'ownerDecisions'],
+  properties: {
+    verdictSummary: { type: 'string' },
+    mergeOptions: { type: 'array', items: { type: 'object', required: ['name', 'description', 'effort', 'risk', 'pros', 'cons'], properties: {
+      name: { type: 'string' }, description: { type: 'string' }, effort: { type: 'string' }, risk: { type: 'string' },
+      pros: { type: 'array', items: { type: 'string' } }, cons: { type: 'array', items: { type: 'string' } } } } },
+    recommended: { type: 'string' },
+    conflictInventory: { type: 'array', items: { type: 'object', required: ['topic', 'severity', 'resolution'], properties: {
+      topic: { type: 'string' }, severity: { type: 'string' }, resolution: { type: 'string' } } } },
+    phase4Implications: { type: 'string' },
+    ownerDecisions: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+const COMMON = `You are a READ-ONLY reconciliation mapper for SettlementForge, a deterministic D&D settlement simulator. Two divergent checkouts of the same project exist:
+- OURS: ${OURS} (branch review-fixes-2026-07-08, HEAD c4a5c384) — just completed an exhaustive 47-finding remediation + A+ closure program (heavy enforcement ratchets, Track K outbox/receipts, instrumentation spine, kernel extraction, strict-typecheck zero).
+- THEIRS: ${THEIRS} (branch fix/holistic-remediation, HEAD bcb3c371, ~357 commits) — an independent parallel remediation line (its own 25-wave review) that also carries product surfaces ours lacks (a /home landing route, a "Realm hub" IA).
+Suspected shared ancestor: commit acf59a0. Verify it exists in each repo (git -C <path> cat-file -e acf59a0^{commit}); if it does, scope their work with git -C ${THEIRS} log --oneline --reverse acf59a0..HEAD -- <your area paths> and diffs against it. If it does not exist somewhere, fall back to comparing the two working trees directly (diff -rq on relevant dirs, excluding node_modules/dist/.git) plus each repo's own log.
+HARD CONSTRAINTS — read-only in BOTH checkouts: allowed = git -C <path> log/show/diff/branch/cat-file, and reading/grepping files. FORBIDDEN = checkout/switch/stash/merge/reset/commit, adding remotes, editing ANY file, npm install, running builds or test suites in THEIRS. In OURS, other agents are concurrently editing — read but never write.
+Produce the structured map for YOUR AREA ONLY. "keep" = their unique work worth adopting into ours; "skip" = their work obsoleted by ours (say why). Cite file paths and short commit hashes as evidence. Be concrete and exhaustive; vague summaries are useless for a merge decision.`
+
+const AREAS = [
+  { key: 'product-ia', brief: 'Routing/IA and product surfaces: lib/routes.js, App.jsx, the /home landing route, the Realm hub, navigation structure, gallery pages, account/pricing/billing surfaces, copy/. What product experience did THEIRS build that OURS lacks, and vice versa?' },
+  { key: 'engine-determinism', brief: 'The engine: src/kernel (OURS extracted prng.js/rngContext.js there; THEIRS may still have them under generators/), src/generators (19-step pipeline, content generators, barrels over economy//power//services/), determinism discipline (seeded forks, golden-master manifests in tests, lint bans on Math.random/Date/localeCompare). Did THEIRS change generator content/logic such that golden outputs diverge?' },
+  { key: 'domain-store', brief: 'src/domain and src/store: settlement.schema.js + migrations, causal state/events/trace/provenance, the 14 store slices, persistence. OURS built Track K (ActionResult envelope in store/actionResult.js, unified Receipt in domain/trace.js, durable outbox in store/outbox.js). Does THEIRS have any equivalent (action envelopes, receipts, outbox/sync, offline durability)?' },
+  { key: 'backend-security', brief: 'supabase/: migrations (OURS has 51, incl. 047-051 refund idempotency/consent), edge functions (generate-narrative, generate-chronicle, stripe-webhook, admin-actions, create-checkout, send-email, _shared bundles), RLS policies, credit ledger/refunds, abuse/bot guards, consent handling. Which security/trust repairs did each side make; where do migrations conflict numerically or semantically?' },
+  { key: 'tests-gates', brief: 'The enforcement spine: eslint.config.js + scripts/eslint-plugin-* custom rules, ratchets and shrink-only baselines (raw-button/raw-color budgets, max-lines, strict typecheck configs, cycle baselines, first-paint byte budget), CI workflows, husky hooks, test suite layout and counts, golden regen discipline. Compare gate strength and identify baseline-file conflicts.' },
+  { key: 'findings-overlap', brief: 'First read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/memory/exhaustive-review-findings-deduped.md — the F1-F47 finding list OURS fixed. For each finding, determine whether THEIRS independently fixed the same underlying issue (same way? differently? better?), left it unfixed, or made it moot. Report per-finding in overlaps (topic = finding id + title), with betterSide judged on the merits.' },
+  { key: 'faith-scan', brief: 'Inventory ANY faith/deity/religion work in THEIRS: grep both src/ and supabase/ for deity, deities, faith, religion, religious, cult, shrine, temple, pantheon, piety, worship, god. Phase 4 will architect a full faith/deity system on OURS (campaign-level spread toggle, standalone settlement faith, piety amplifiers, double-axis alignment behavior, Law-Chaos axis replacing peace-war non-1:1). Report what exists in THEIRS, its maturity, whether it is a toggle stub or a real system, and what should inform or be salvaged for the Phase 4 spec.' },
+]
+
+phase('Map')
+const maps = await parallel(AREAS.map(a => () =>
+  agent(COMMON + '\n\nYOUR AREA: ' + a.brief, { label: 'map:' + a.key, phase: 'Map', model: 'fable', schema: MAP_SCHEMA })
+    .then(r => ({ key: a.key, ...r }))))
+
+const good = maps.filter(Boolean)
+log(good.length + '/7 area maps complete')
+
+phase('Synthesize')
+const synthesis = await agent(
+  `You are the reconciliation architect for SettlementForge. Below are ${good.length} area maps comparing OURS (${OURS}, branch review-fixes-2026-07-08 — the exhaustive-review + A+ closure line, heavily gate-enforced) against THEIRS (${THEIRS}, branch fix/holistic-remediation, ~357 commits — an independent remediation line with product surfaces ours lacks). The owner is a solo builder who prefers bold, objectively-better outcomes over safe minimal merges, but the merged result must keep OURS' enforcement spine (ratchets, golden discipline, strict-zero) intact and land gate-green.
+Produce: (1) verdictSummary — the honest picture of how much genuinely overlaps vs complements; (2) mergeOptions — at least three: OURS-as-base with targeted adoption of their unique work, THEIRS-as-base replaying our program, and a hybrid; each with effort (person-days-equivalent of agent work), risk, pros, cons; (3) recommended — which option and exactly why; (4) conflictInventory — the concrete collision points with severity and a proposed resolution each; (5) phase4Implications — what the faith-scan means for the Phase 4 spec; (6) ownerDecisions — the short list of choices only the owner can make (product-direction calls, not engineering calls).
+You may read files in either checkout (READ-ONLY) to settle any contradiction between maps.
+AREA MAPS:\n` + JSON.stringify(good),
+  { label: 'synthesize', phase: 'Synthesize', model: 'fable', schema: SYNTH_SCHEMA })
+
+return { maps: good, synthesis }

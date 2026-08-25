@@ -26,8 +26,6 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
-
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
 /** Latest-wins extraction of a `create or replace function` body across all
@@ -35,7 +33,7 @@ const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
  *  behaviour, not a superseded one. */
 function netCurrentFn(name) {
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'igm');
+  const re = new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'ig');
   let last = null;
   let lastFile = null;
   for (const f of files) {
@@ -66,7 +64,7 @@ describe('gallery world-snapshot scanner — net-current execution (pglite)', ()
     // The function pins `set search_path = public`; create the schema + load it.
     await db.exec('create schema if not exists public;');
     await db.exec(SCANNER.sql);
-  }, PGLITE_BOOT_TIMEOUT_MS);
+  });
 
   const isSafe = async (obj) =>
     (await db.query(`select public._gallery_world_snapshot_is_safe($1::jsonb) as out`, [JSON.stringify(obj)])).rows[0].out;

@@ -105,16 +105,8 @@ function authPayload(user, session, profile, extra = {}) {
 
 // ── Supabase auth methods ───────────────────────────────────────────────────
 
-async function supabaseSignUp(email, password, captchaToken) {
-  // captchaToken is ADDITIVE (Wave-D perimeter): passed to Supabase Auth's native
-  // captcha support ONLY when present, so with the perimeterCaptcha flag off (no
-  // widget, no token) this call is byte-identical to before. Server-side
-  // enforcement is the owner's Supabase dashboard "Enable Captcha protection"
-  // toggle — see docs/PERIMETER_RUNBOOK.md.
-  const { data, error } = await supabase.auth.signUp({
-    email, password,
-    ...(captchaToken ? { options: { captchaToken } } : {}),
-  });
+async function supabaseSignUp(email, password) {
+  const { data, error } = await supabase.auth.signUp({ email, password });
   if (error) throw error;
   // Supabase returns an OBFUSCATED user with an EMPTY identities array when the
   // email already belongs to an account (it declines to leak existence via an
@@ -129,19 +121,14 @@ async function supabaseSignUp(email, password, captchaToken) {
   });
 }
 
-async function supabaseSignIn(email, password, rememberMe = true, captchaToken) {
+async function supabaseSignIn(email, password, rememberMe = true) {
   // Route persistence BEFORE sign-in so the token (and every auto-refresh after)
   // is written to the correct store: sessionStorage when "remember me" is off
   // (cleared on browser close), localStorage otherwise. This replaces the old
   // one-time localStorage delete, which auto-refresh silently undid.
   setSessionPersistence(rememberMe);
 
-  // captchaToken is ADDITIVE (see supabaseSignUp): included only when present, so
-  // the flag-off path is byte-identical.
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email, password,
-    ...(captchaToken ? { options: { captchaToken } } : {}),
-  });
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) throw error;
 
   const profile = await fetchProfileAuth(data.user);
@@ -161,11 +148,9 @@ async function supabaseGetSession() {
   return authPayload(session.user, session, profile);
 }
 
-async function supabaseResetPassword(email, captchaToken) {
-  // captchaToken is ADDITIVE (see supabaseSignUp): included only when present.
+async function supabaseResetPassword(email) {
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${window.location.origin}/reset-password`,
-    ...(captchaToken ? { captchaToken } : {}),
   });
   if (error) throw error;
 }
@@ -633,11 +618,6 @@ export const auth = {
   unlinkIdentity:     (identity) => loadAuthSecurity().then(m => m.unlinkIdentity(identity)),
   signOutEverywhere:  () => loadAuthSecurity().then(m => m.signOutEverywhere()),
   getAccountNumber:   () => loadAuthSecurity().then(m => m.getAccountNumber()),
-  // Single concurrent session (§7.3, M-9d). Only signOutLocalSession is exposed here —
-  // it is the ONE session call reached from eager store code (evictSession). claim +
-  // is-current + fetchActive are called from LAZY modules (sessionClient, the account
-  // panel) that import authSecurity directly, so they need no eager wrapper.
-  signOutLocalSession: () => loadAuthSecurity().then(m => m.signOutLocalSession()),
   updateDisplayName:  isConfigured ? supabaseUpdateDisplayName   : mockUpdateDisplayName,
   updateProfilePreferences: isConfigured ? supabaseUpdateProfilePreferences : mockUpdateProfilePreferences,
   // Security questions + gated recovery (migrations 066-068).

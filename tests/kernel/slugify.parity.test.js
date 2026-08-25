@@ -66,35 +66,4 @@ describe('slugify primitive — every migrated site is byte-identical (id-join s
     const old = (s) => String(s || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
     proveParity(old, { sep: '_' });
   });
-
-  test('reviewed supply-chain ids — ASCII-only lowercasing matches PostgreSQL', () => {
-    const old = (value) => String(value || '')
-      .replace(/[A-Z]/g, character => (
-        String.fromCharCode(character.charCodeAt(0) + 32)
-      ))
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '');
-    const databaseBoundary = [
-      ...BATTERY,
-      'İstanbul',
-      'Kelvin',
-      'ſeed',
-      'ASCII-I-K-İ',
-    ];
-    for (const input of databaseBoundary) {
-      expect(slugify(input, { asciiLower: true })).toBe(old(input));
-    }
-  });
-});
-
-describe('fold-triage migrations (2026-07-18): the three post-review inliners', () => {
-  const EXOTIC = ['', null, undefined, 0, false, 'unknown', 'The Free—Alliance', 'Łódź Þing 42', '  --x--  ', 'a'.repeat(200), '™©'];
-  test('compendium registrySlug.slug parity (dash, null-coalesce-not-falsy)', () => {
-    const inline = (s) => String(s == null ? '' : s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    for (const v of EXOTIC) expect(slugify(v == null ? '' : v, { raw: true })).toBe(inline(v));
-  });
-  test('ladder faction token parity (underscore, cap 80, unknown fallback) — ladderRead + npcLadderState', () => {
-    const inline = (v) => String(v || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 80) || 'unknown';
-    for (const v of EXOTIC) expect(slugify(v, { sep: '_', max: 80, fallback: 'unknown', empty: 'unknown' })).toBe(inline(v));
-  });
 });

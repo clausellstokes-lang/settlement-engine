@@ -48,11 +48,8 @@ import {
 import { botGuard } from '../_shared/requestMeta.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
-import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 // Structured error logging for the money/AI path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
-import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
-import { scheduleAutoReload } from '../_shared/autoReload.ts';
 
 import { safeJsonParse, deepClone, getByPath, applyMutated, isEmptyPayload } from './jsonUtils.ts';
 import { CACHE_BREAKPOINT, buildAnthropicUserContent, stripCacheBreakpoint } from './promptCache.ts';
@@ -183,9 +180,9 @@ const MODEL_PROFILES: Record<string, ModelProfile> = {
 // Opus thesis still sees prior thesis + new state + diff — the input
 // context is the actual cost driver, not the output length.
 const CREDIT_COSTS: Record<string, number> = {
-  narrative:   5,
+  narrative:   3,
   dailyLife:   4,
-  progression: 6,
+  progression: 5,
   narrative_fast:   2,
   dailyLife_fast:   3,
   progression_fast: 4,
@@ -1016,13 +1013,6 @@ export async function handleGenerateNarrative(
     const supabaseUser = makeUserClient(authHeader);
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) throw new Error('Not authenticated');
-    // SINGLE-SESSION GATE (§7.2, M-9 census upgrade): reject a superseded device BEFORE any
-    // spend or free-narrative claim. supabaseAdmin is created later in this fn, so the gate
-    // reads through a throwaway admin client; a superseded session gets a clean 401 Response
-    // (not the outer throw).
-    if (await isSessionSuperseded(makeAdminClient(), user.id, authHeader, deviceLabelFromRequest(req))) {
-      return new Response(JSON.stringify({ error: 'session_superseded' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
-    }
 
     // Parse request — cap the body BEFORE parsing (mirrors generate-chronicle):
     // the credit charged is fixed regardless of input size, so an unbounded
@@ -1106,14 +1096,6 @@ export async function handleGenerateNarrative(
       : null;
 
     const supabaseAdmin = makeAdminClient();
-
-    // Wave-D per-IP AI burst gate (item 2): FAIL-CLOSED on the cross-instance token
-    // bucket (migration 156) — 429 over-limit, 503 on a limiter-infra error, never a
-    // silent open. Placed after admin resolution but BEFORE any reserve/spend/claim, so
-    // an over-limit or infra error leaks no reservation. Inert in tests / local (no
-    // cf-connecting-ip → sentinel IP → no RPC). corsHeaders is this fn's CORS var.
-    const ipGate = await aiIpRateGuard(supabaseAdmin, guard.meta.ip, corsHeaders);
-    if (ipGate) return ipGate;
 
     // Idempotent rollback of a claimed free narrative (migration 118). Runs ONLY where
     // the paid path would refund, and only when a free claim is actually held. The
@@ -1621,7 +1603,6 @@ export async function handleGenerateNarrative(
             } else {
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
-              scheduleAutoReload(supabaseAdmin, user.id);
               send({
                 done: true,
                 result: results,
@@ -1757,7 +1738,6 @@ export async function handleGenerateNarrative(
 
             const aiUsage = aggregateAiUsage(usageTelemetry);
             console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
-            scheduleAutoReload(supabaseAdmin, user.id);
             send({
               done: true,
               result: aiClone,
@@ -1929,7 +1909,6 @@ export async function handleGenerateNarrative(
 
           const aiUsage = aggregateAiUsage(usageTelemetry);
           console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
-          scheduleAutoReload(supabaseAdmin, user.id);
           send({
             done: true,
             result: aiClone,

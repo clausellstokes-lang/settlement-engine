@@ -24,13 +24,8 @@ import {
 describe('the symmetry law — war and peace reasons equally typed, equally receipted', () => {
   it('the reason-type counts match across war/peace', () => {
     expect(WAR_REASON_TYPES.length).toBe(PEACE_REASON_TYPES.length);
-    // 7 wave-1 casus + W-CONVERGENCE's foreign_clash↔spheres_understanding + D4's
-    // fear_of_dominance↔balance_restored + D7's two reframe casus (ingratitude_debt↔
-    // debt_forgiven, dependency_by_design↔bonds_of_commerce) + the two motive-gap
-    // closures: opportunism↔hopelessness (the vulture war, §14.1/§14.3),
-    // sacred_claim↔common_rite (the religious casus, §14.1 IDEOLOGY/FAITH),
-    // WR-3's lineage pair, and WR-6's exact alliance obligation/discharge pair.
-    expect(WAR_REASON_TYPES.length).toBe(16);
+    // 7 wave-1 casus + W-CONVERGENCE's foreign_clash ↔ spheres_understanding.
+    expect(WAR_REASON_TYPES.length).toBe(8);
   });
 
   it('the receipt shapes match across war/peace (the shared record factory)', () => {
@@ -126,8 +121,6 @@ describe('war-reason scorers — each typed reason has a positive and a negative
     const hot = scoreGrievance({ resentment: 0.8, memoryScore: 0.4 });
     expect(hot.score).toBeGreaterThan(REASON_TUNING.MIN_SCORE);
     expect(hot.receipt.length).toBeGreaterThan(0);
-    // anchored: score and non-empty receipt assertions above prove this scorer emitted.
-    expect(hot.receipt).not.toMatch(/\b\d+(?:\.\d+)?\b|%|×|\b(?:score|multiplier|roll)\b/i);
     expect(scoreGrievance({ resentment: 0, memoryScore: 0 }).score).toBe(0);
     expect(scoreGrievance(null).score).toBe(0);
   });

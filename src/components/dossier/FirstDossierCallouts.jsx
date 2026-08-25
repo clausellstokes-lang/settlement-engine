@@ -35,13 +35,13 @@ import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.j
 
 const WHISPER_ID = 'dossier_first_callouts';
 const GREEN = swatch['#4A7A3A'];
-const SLATE = swatch['#5A6E82'];
+const VIOLET = swatch['#7B4FCF'];
 const AMBER = swatch['#D08020'];
 const sans = '"Nunito", system-ui, sans-serif';
 
 const CALLOUTS = [
   { key: 'tension', accent: GREEN,  bg: '#E2EEDB' },
-  { key: 'supply',  accent: SLATE, bg: '#E4E9EE' },
+  { key: 'supply',  accent: VIOLET, bg: '#EBE2FA' },
   { key: 'hook',    accent: AMBER,  bg: '#FBEAD0' },
 ];
 
@@ -97,6 +97,7 @@ export default function FirstDossierCallouts() {
               background: bg,
               border: `1px solid ${accent}40`,
               borderLeft: `3px solid ${accent}`,
+              borderRadius: 5,
               display: 'flex', alignItems: 'flex-start', gap: 12,
             }}
           >

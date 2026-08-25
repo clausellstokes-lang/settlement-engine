@@ -3,8 +3,8 @@
  * ("bracket") settings layout: a rail of sections on the left (AccountNav), the
  * active section's panel on the right. Loads to Profile first.
  *
- * Sections (rail order): Profile · Security · Subscription · Messages · Support
- * · Data · Preferences. AccountPage stays the state owner — profile/name/billing/
+ * Sections (rail order): Profile · Security · Subscription · Support · Data ·
+ * Preferences. AccountPage stays the state owner — every profile/name/billing/
  * purchase useState + handler lives here and is passed to the same section
  * components; the rail only switches which panel is mounted. Security groups the
  * sign-in/security panel with the account-recovery questions. Preferences hosts
@@ -13,14 +13,8 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../store/index.js';
-import {
-  captureSavedSettlementsHydration,
-  isCurrentSavedSettlementsHydration,
-} from '../store/savedSettlementsHydration.js';
 import { navigate } from '../hooks/useRoute.js';
 import { auth as authService } from '../lib/auth.js';
-import { checkCivility } from '../lib/civility.js';
-import { t } from '../copy/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { getPendingRedeemCode, clearPendingRedeemCode } from '../lib/referralRedeem.js';
@@ -32,63 +26,39 @@ import useIsMobile from '../hooks/useIsMobile.js';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import Button from './primitives/Button.jsx';
-import AccountNav, { ACCOUNT_SECTIONS } from './account/AccountNav.jsx';
-import { useAccountSurveyorGate } from './account/useAccountSurveyorGate.js';
+import AccountNav from './account/AccountNav.jsx';
 import AccountProfileSection from './account/AccountProfileSection.jsx';
 import AccountSecuritySection from './account/AccountSecuritySection.jsx';
 import AccountRecoveryQuestionsSection from './account/AccountRecoveryQuestionsSection.jsx';
 import AccountSubscriptionSection from './account/AccountSubscriptionSection.jsx';
-import AccountPurchaseHistoryPanel from './account/AccountPurchaseHistoryPanel.jsx';
-import AccountAutoReloadPanel from './account/AccountAutoReloadPanel.jsx';
-import AccountSeatTransferPanel from './account/AccountSeatTransferPanel.jsx';
 import { ReferralCard, RedeemBlock } from './account/ReferralRedeemBlocks.jsx';
 import AccountSupportSection from './account/AccountSupportSection.jsx';
 import AccountDataPrivacySection from './account/AccountDataPrivacySection.jsx';
 import AccountEmailPreferencesSection from './account/AccountEmailPreferencesSection.jsx';
-import AccountPreferencesSection from './account/AccountPreferencesSection.jsx';
-import AccountAiKeysSection from './account/AccountAiKeysSection.jsx';
-import AccountMessagesSection from './account/AccountMessagesSection.jsx';
-import { useOperatorMessages } from './account/OperatorMessagesProvider.jsx';
 
-export default function AccountPage({ onNavigateAdmin, routeSection, routeMessageId }) {
+export default function AccountPage({ onNavigateAdmin }) {
   const auth = useStore(s => s.auth);
   const creditBalance = useStore(s => s.creditBalance);
   const isElevated = useStore(s => s.isElevated());
-  // The AI & keys (BYOK) surface is Surveyor-gated (owner ruling 2026-07-19):
-  // the nav tab and section render only for the Surveyor-entitled/Founders/
-  // elevated — Cartographer 'premium' gets no AI keys, clean and without a tease.
-  const surveyorEntitled = useAccountSurveyorGate();
   const savedSettlements = useStore(s => s.savedSettlements);
   const campaigns = useStore(s => s.campaigns);
   const maxSaves = useStore(s => s.maxSaves());
   const authSignOut = useStore(s => s.authSignOut);
   const removeSavedSettlement = useStore(s => s.removeSavedSettlement);
   const clearSavedSettlements = useStore(s => s.clearSavedSettlements);
-  const withSettlementDeletionLock = useStore(s => s.withSettlementDeletionLock);
   const deleteCampaign = useStore(s => s.deleteCampaign);
   const importAccountData = useStore(s => s.importAccountData);
   const canSave = useStore(s => s.canSave());
   const activeSaves = activeSaveCount(savedSettlements);
   const inactiveSaves = inactiveRetentionCount(savedSettlements);
   const isMobile = useIsMobile();
-  const {
-    messages: operatorMessages,
-    unreadCount: operatorUnreadCount,
-    loading: operatorMessagesLoading,
-  } = useOperatorMessages();
 
-  // Left-nav section selection is URL-owned so direct links and Back/Forward
-  // remain truthful. Profile is the fail-closed default. Panels mount on
+  // Left-nav section selection. Profile loads first. Panels are mounted on
   // demand — switching away resets a section's in-progress form (a self-
   // contained settings task), which is the expected settings-nav behavior; the
   // section loaders (Security/Recovery/Tickets) are idempotent reads, so a
   // re-entry re-runs them harmlessly.
-  const requestedSectionAllowed = ACCOUNT_SECTIONS.some(row => row.id === routeSection)
-    && (routeSection !== 'ai' || surveyorEntitled);
-  const section = requestedSectionAllowed ? routeSection : 'profile';
-  const setSection = (nextSection) => {
-    navigate('account', { search: `?section=${encodeURIComponent(nextSection)}`, scroll: false });
-  };
+  const [section, setSection] = useState('profile');
   const panelRef = useRef(null);
   // Move focus into the panel on section change so keyboard/SR users land in
   // the freshly-revealed content rather than being stranded on the rail.
@@ -102,18 +72,14 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState(auth.displayName || '');
   const [nameSaving, setNameSaving] = useState(false);
-  const [nameError, setNameError] = useState(null);
-  // The resync key covers exactly the fields THIS draft owns. auth.avatarUrl is
-  // deliberately no longer among them: the profile image is written by
-  // AccountIdentitySection, so leaving it in the key meant that uploading an
-  // image would resync this draft and silently discard an unsaved AI-model-
-  // preference edit sitting beside it.
   const profileSourceKey = [
+    auth.avatarUrl || '',
     auth.emailNotifications !== false ? 'email:on' : 'email:off',
     auth.modelPreference || DEFAULT_MODEL_PREFERENCE,
   ].join('|');
   const [profileDraft, setProfileDraft] = useState(() => ({
     sourceKey: profileSourceKey,
+    avatarInput: auth.avatarUrl || '',
     emailNotifications: auth.emailNotifications !== false,
     modelPreference: auth.modelPreference || DEFAULT_MODEL_PREFERENCE,
   }));
@@ -129,32 +95,21 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
   if (!profileSaving && profileDraft.sourceKey !== profileSourceKey) {
     setProfileDraft({
       sourceKey: profileSourceKey,
+      avatarInput: auth.avatarUrl || '',
       emailNotifications: auth.emailNotifications !== false,
       modelPreference: auth.modelPreference || DEFAULT_MODEL_PREFERENCE,
     });
   }
 
+  const avatarInput = profileDraft.avatarInput;
   const emailNotifications = profileDraft.emailNotifications;
   const modelPreference = profileDraft.modelPreference;
+  const setAvatarInput = (avatarInput) => setProfileDraft(draft => ({ ...draft, avatarInput }));
+  const setEmailNotifications = (emailNotifications) => setProfileDraft(draft => ({ ...draft, emailNotifications }));
   const setModelPreference = (modelPreference) => setProfileDraft(draft => ({ ...draft, modelPreference }));
 
   const handleSaveName = async () => {
     if (!nameInput.trim()) return;
-
-    // THE CIVILITY GUARD, BLOCK MODE (DESIGN_PROFILE_IMAGE.md §9). A display
-    // name is an AUTHORED-PUBLIC field, so the gate is the entry: the name is
-    // not saved and NOTHING ELSE happens to the account — no lockout, no strike,
-    // no shadow penalty. The owner's proportionality ruling, and the right one:
-    // the guard rejects a string, never a person.
-    //
-    // Client mirror = courtesy; the server mirror in update_display_name
-    // (migration 195) is the law. Both read one shared vector file.
-    setNameError(null);
-    if (checkCivility(nameInput.trim()).blocked) {
-      setNameError(t('errors.civilityName'));
-      return;
-    }
-
     setNameSaving(true);
     try {
       await authService.updateDisplayName(nameInput.trim());
@@ -175,11 +130,7 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
         );
       }
     } catch (e) {
-      // Previously console-only: the spinner stopped and the user was told
-      // nothing at all. With a refusal line already on this row, there is no
-      // reason left for a save failure to be invisible.
       console.error('Failed to update name:', e);
-      setNameError(e?.message || t('errors.namingFail'));
     } finally {
       setNameSaving(false);
     }
@@ -190,12 +141,8 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
     setProfileSaved(false);
     setProfileError(null);
     try {
-      // NOTE: avatarUrl is deliberately ABSENT from this payload.
-      // AccountIdentitySection is the SINGLE WRITER of profiles.avatar_url
-      // (DESIGN_PROFILE_IMAGE.md §3/§4). Sending a draft string from here too
-      // would let a stale value clobber a freshly uploaded image on the next
-      // Save — the classic second-writer bug, and it would have been silent.
       const profile = await authService.updateProfilePreferences({
+        avatarUrl: avatarInput,
         emailNotifications,
         modelPreference,
       });
@@ -208,7 +155,7 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
         next.role || auth.role,
         next.displayName || auth.displayName,
         next.isFounder ?? auth.isFounder,
-        profile?.avatarUrl ?? next.avatarUrl ?? auth.avatarUrl,
+        profile?.avatarUrl ?? next.avatarUrl ?? avatarInput,
         profile?.emailNotifications ?? next.emailNotifications ?? emailNotifications,
         profile?.modelPreference ?? next.modelPreference ?? modelPreference,
       );
@@ -258,66 +205,30 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
   // happen — this is a privacy surface; false success is the worst outcome.
   const handleDeleteAllSettlements = async () => {
     const ids = (savedSettlements || []).map(s => s.id);
-    const hydration = captureSavedSettlementsHydration(useStore.getState(), auth.user?.id);
-    if (!hydration) {
-      throw new Error('Your account changed before deletion could start. Review the current library and try again.');
+    const results = await Promise.allSettled(ids.map(id => savesService.delete?.(id)));
+    const failedIds = ids.filter((_, i) => results[i].status === 'rejected');
+    if (failedIds.length === 0) {
+      if (typeof clearSavedSettlements === 'function') clearSavedSettlements();
+      else ids.forEach(id => removeSavedSettlement?.(id));
+      return;
     }
-    if (typeof withSettlementDeletionLock !== 'function') {
-      throw new Error('Settlement deletion is temporarily unavailable. Reload and try again.');
-    }
-    const result = await withSettlementDeletionLock(ids, async ({ mutationToken }) => {
-      const isSessionCurrent = () =>
-        isCurrentSavedSettlementsHydration(useStore.getState(), hydration);
-      const results = await Promise.allSettled(ids.map(id =>
-        savesService.delete?.(id, hydration.ownerId, isSessionCurrent)));
-      // A delete request may finish after sign-out/sign-in. The remote requests
-      // already belonged to A; never apply their success or failure to B's cache
-      // (removeSavedSettlement also prunes campaign membership).
-      if (!isCurrentSavedSettlementsHydration(useStore.getState(), hydration)) {
-        return { ok: false, reason: 'auth_session_changed' };
-      }
-      const failedIds = ids.filter((_, i) => results[i].status === 'rejected');
-      const failed = new Set(failedIds);
-      ids.filter(id => !failed.has(id)).forEach(id => removeSavedSettlement?.(id, { mutationToken }));
-      if (failedIds.length === 0) {
-        clearSavedSettlements?.();
-        return;
-      }
-      throw new Error(
-        `${failedIds.length} of ${ids.length} settlements could not be deleted from the server. `
-        + 'They remain in your library. Try again.'
-      );
-    });
-    if (result?.ok === false) {
-      if (result.reason === 'auth_session_changed') {
-        throw new Error('Your account changed while deletion was running. Review the current library before trying again.');
-      }
-      const paused = result.reason === 'advance_paused';
-      throw new Error(paused
-        ? 'Resume or undo the paused campaign advance before deleting its settlements.'
-        : 'Wait for the campaign update to finish before deleting its settlements.');
-    }
+    const failed = new Set(failedIds);
+    ids.filter(id => !failed.has(id)).forEach(id => removeSavedSettlement?.(id));
+    throw new Error(
+      `${failedIds.length} of ${ids.length} settlements could not be deleted from the server. `
+      + 'They remain in your library. Try again.'
+    );
   };
 
-  // Campaign wipe uses the canonical action's confirmed-persistence mode. Each
-  // campaign stays visible until its actual cloud/local service delete resolves;
-  // a failed subset therefore remains retryable, and the confirm UI receives an
-  // aggregated rejection instead of claiming that fire-and-forget work succeeded.
+  // Campaign wipe reuses OUR canonical deleteCampaign action (the same seam the
+  // per-campaign delete uses): it removes the campaign locally and fires the
+  // cloud delete + tombstone via deletePersistedCampaignState. deleteCampaign is
+  // synchronous/fire-and-forget for the cloud leg, so — unlike settlements — a
+  // failed cloud delete is not surfaced here (it matches OUR single-campaign
+  // delete behavior).
   const handleDeleteAllCampaigns = async () => {
     const ids = (campaigns || []).map(c => c.id);
-    if (typeof deleteCampaign !== 'function') {
-      throw new Error('Campaign deletion is temporarily unavailable. Reload and try again.');
-    }
-    const results = await Promise.allSettled(
-      ids.map(id => deleteCampaign(id, { awaitPersistence: true })),
-    );
-    const failedIds = ids.filter((_, index) => results[index].status === 'rejected');
-    if (failedIds.length > 0) {
-      throw new Error(
-        `${failedIds.length} of ${ids.length} campaigns could not be deleted from the server. `
-        + 'They remain in your account. Try again.'
-      );
-    }
+    ids.forEach(id => deleteCampaign?.(id));
   };
 
   if (!auth.user) {
@@ -334,11 +245,9 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
     profile: 'Profile',
     security: 'Security',
     subscription: 'Subscription',
-    messages: 'Messages',
     support: 'Customer Support',
     data: 'Data and privacy',
     preferences: 'Preferences',
-    ai: 'AI provider and keys',
   };
 
   // The active section's panel. Each OUR section renders with its exact prior
@@ -348,11 +257,12 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
       {section === 'profile' && (
         <AccountProfileSection
           auth={auth}
+          avatarInput={avatarInput} setAvatarInput={setAvatarInput}
+          emailNotifications={emailNotifications} setEmailNotifications={setEmailNotifications}
           modelPreference={modelPreference} setModelPreference={setModelPreference}
           editingName={editingName} setEditingName={setEditingName}
           nameInput={nameInput} setNameInput={setNameInput}
           nameSaving={nameSaving} handleSaveName={handleSaveName}
-          nameError={nameError}
           profileError={profileError} profileSaving={profileSaving} profileSaved={profileSaved}
           handleSaveProfilePreferences={handleSaveProfilePreferences}
         />
@@ -382,11 +292,7 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
             purchaseError={purchaseError}
             purchasing={purchasing}
             handlePurchase={handlePurchase}
-            onNavigatePricing={() => navigate('pricing')}
           />
-          <AccountPurchaseHistoryPanel auth={auth} />
-          <AccountAutoReloadPanel auth={auth} />
-          <AccountSeatTransferPanel auth={auth} />
           <div>
             <ReferralCard auth={auth} />
             <RedeemBlock onNavigatePricing={() => navigate('pricing')} />
@@ -394,24 +300,8 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
         </div>
       )}
 
-      {section === 'messages' && (
-        <AccountMessagesSection
-          onReply={(message) => navigate('account', {
-            search: `?section=support&message=${encodeURIComponent(message.id)}`,
-            scroll: false,
-          })}
-        />
-      )}
-
       {/* Customer Support (FAQ-first, then tickets). */}
-      {section === 'support' && (
-        <AccountSupportSection
-          auth={auth}
-          operatorMessage={operatorMessagesLoading ? null : operatorMessages.find(message => (
-            message.id === routeMessageId && message.kind === 'direct'
-          ))}
-        />
-      )}
+      {section === 'support' && <AccountSupportSection auth={auth} />}
 
       {/* Data & Privacy (import, export, bulk delete, deletion request, consent). */}
       {section === 'data' && (
@@ -428,17 +318,8 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
         />
       )}
 
-      {/* Product defaults + OUR durable per-category email opt-out. */}
-      {section === 'preferences' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: space['space-7'] }}>
-          <AccountPreferencesSection />
-          <AccountEmailPreferencesSection />
-        </div>
-      )}
-
-      {/* AI provider & keys — the BYOK MANAGEMENT SURFACE (#29): provider/key/verify,
-          per-task model choice, key-health, usage caps + pause, and the lazy meter. */}
-      {section === 'ai' && surveyorEntitled && <AccountAiKeysSection />}
+      {/* Preferences — OUR per-category email opt-out (migration 126). */}
+      {section === 'preferences' && <AccountEmailPreferencesSection />}
     </>
   );
 
@@ -459,8 +340,6 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
           section={section}
           setSection={setSection}
           isElevated={isElevated}
-          showAiKeys={surveyorEntitled}
-          unreadCount={operatorUnreadCount}
           onNavigateAdmin={onNavigateAdmin}
         />
         {/* Content panel. tabIndex={-1} + aria-label make it a focusable, named

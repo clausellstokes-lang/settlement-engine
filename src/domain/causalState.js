@@ -46,7 +46,6 @@
  */
 
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
-import { liveInstitutions } from './institutions/institutionRoster.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deityLawDirection, DEITY_LAW_TUNING } from './corruption.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
@@ -819,8 +818,7 @@ function deriveLawOrder(s) {
   // Law/order institutions — courts, the watch, magistrates, gaols give the law
   // teeth. Id-first (rename-proof) via institutionClassify; a DM-renamed-but-stamped
   // court still counts. id-match === the old name rule for the current corpus.
-  // LIVE roster only — a calamity-razed court/gaol/watch upholds no law (ruin-filter class).
-  const institutions = liveInstitutions(s);
+  const institutions = Array.isArray(s?.institutions) ? s.institutions : [];
   const lawCount = institutions.filter(i => institutionIsLawOrder(/** @type {{ catalogId?: string, name?: string }} */ (i))).length;
   if (lawCount >= 2) {
     score += 10; push(contributors, 'institutions', 'broad', +10, `${lawCount} law-and-order institutions uphold the courts and the watch.`);
@@ -855,10 +853,8 @@ function deriveLawOrder(s) {
   // Active conditions move law_order live (the war/religion-layer seam, mirroring
   // deriveEconomicCapacity). corruption_exposed / unrest / occupation-style
   // archetypes that declare law_order press here; signed by the condition's
-  // status. [domain-top-state-2] succession_void residual conditions now DECLARE
-  // law_order (its stale →criminal_opportunity alias was dropped), so this scan is
-  // live for lawless-interregnum settlements; a condition that does NOT declare
-  // law_order is still ignored (byte-identical for every other settlement).
+  // status. A condition that does NOT declare law_order is ignored, so no-op for
+  // every settlement today (none declare it yet) ⇒ byte-identical.
   score += applyConditions(s, contributors, 'law_order', {
     scale: 15, effect: ['restored', 'eroded'], tail: ['restores the rule of law.', 'erodes the rule of law.'],
   });
@@ -1105,9 +1101,8 @@ function deriveInfrastructureCondition(s) {
     push(contributors, 'defenseProfile.scores', 'measured', c,
       `Fortification + logistics scores imply infrastructure ~${Math.round(infra)}.`);
   } else {
-    // No defense profile (un-generated / legacy) — infer from LIVE institution count
-    // (ruined rows must not inflate inferred infrastructure; ruin-filter class).
-    const instCount = liveInstitutions(s).length;
+    // No defense profile (un-generated / legacy) — infer from institution count.
+    const instCount = Array.isArray(s.institutions) ? s.institutions.length : 0;
     if (instCount >= 15) { score += 10; push(contributors, 'institutions', 'dense', +10, `${instCount} institutions imply robust infrastructure.`); }
     else if (instCount <= 5) { score -= 6; push(contributors, 'institutions', 'thin', -6, `${instCount} institutions imply thin infrastructure.`); }
   }
@@ -1210,19 +1205,6 @@ const DERIVERS = Object.freeze({
 });
 
 /**
- * Orient a raw 0-100 variable score onto the BAND axis. The band ladder is
- * higher-is-better; a lower_is_better variable therefore walks it from the other
- * end. The single source for that flip, so finalizeVariable and every fallback
- * band computed elsewhere in this file cannot drift apart.
- * @param {string} name
- * @param {number} score
- * @returns {number}
- */
-function orientCausalScore(name, score) {
-  return variablePolarity(name) === 'lower_is_better' ? 100 - score : score;
-}
-
-/**
  * @param {string} name
  * @param {number} raw
  * @param {CausalContributor[]} contributors
@@ -1238,7 +1220,7 @@ function finalizeVariable(name, raw, contributors) {
   // as a problem band (strained/critical), not "surplus"/Abundant. The raw score
   // is kept as-is — pressureModel and the delta renderers handle polarity via
   // variablePolarity() themselves; only the qualitative band flips here.
-  const banded = orientCausalScore(name, score);
+  const banded = variablePolarity(name) === 'lower_is_better' ? 100 - score : score;
   return {
     variable: name,
     score,
@@ -1324,41 +1306,32 @@ export function pressuresOn(settlement) {
   return [...state.summary.strained, ...state.summary.critical, ...state.summary.collapsed];
 }
 
-// THE LOWER-IS-BETTER LADDER — the display word for every band a lower_is_better
-// variable can carry, worst to best. Their band is computed off the INVERTED
-// score, so the raw band word says the opposite of the truth at BOTH ends:
-//   • a 'collapsed'/'critical' band means the underlying value (e.g.
-//     criminal_opportunity) is HIGH, and "Collapsed: criminal_opportunity" reads
-//     as a positive (crime collapsed = good) when it means rampant crime;
-//   • a benign 'adequate'/'surplus' band means the value is LOW, and the pill
-//     "Criminal opportunity · ADEQUATE" reads as the crime being adequate.
-// The first three words closed the problem end. The benign two close the other,
-// so no band can reach a reader carrying the raw word. The ladder is total over
-// CAUSAL_BANDS by construction, and the walker
-// (tests/lint/bandPolaritySingleSourceScan.test.js) holds it that way.
-const LOWER_IS_BETTER_BAND_TERM = Object.freeze({
+// Problem-term phrasing for lower_is_better variables. Their band is computed
+// off the INVERTED score, so a 'collapsed'/'critical' band means the underlying
+// value (e.g. criminal_opportunity) is HIGH — a problem. Reusing the raw band
+// word in the summary ("Collapsed: criminal_opportunity") reads as a positive
+// (crime collapsed = good) when it actually means rampant crime. These lines
+// phrase the worst bands in problem terms instead.
+const LOWER_IS_BETTER_PROBLEM_TERM = Object.freeze({
   collapsed: 'Rampant',
   critical:  'Acute',
   strained:  'Elevated',
-  adequate:  'Contained',
-  surplus:   'Negligible',
 });
 
 /**
- * Polarity-correct display word for a variable's band — the SINGLE source every
- * renderer, summarizeCausalState and the simulation causal view route through, so
- * the lower_is_better inversion lives in exactly one place. Higher-is-better bands
- * read the raw word; a lower_is_better band is computed off the INVERTED score
- * (finalizeVariable) and is re-worded at both ends of the ladder: 'collapsed' is
- * crime RAMPANT rather than gone, and 'adequate' is crime CONTAINED rather than
- * crime being an adequate amount.
+ * Polarity-correct display word for a variable's band — the SINGLE source both
+ * summarizeCausalState and the simulation causal view route through, so the
+ * lower_is_better inversion lives in exactly one place. Higher-is-better bands
+ * read the raw word; a lower_is_better 'collapsed' (crime RAMPANT, not gone) is
+ * computed off the INVERTED score (finalizeVariable) so it is re-phrased as a
+ * problem term. Benign bands never carry a lower_is_better var, so they fall through.
  * @param {string} name  substrate variable name
  * @param {string} band  surplus/adequate/strained/critical/collapsed
  * @returns {string}
  */
 export function causalBandWord(name, band) {
   if (variablePolarity(name) === 'lower_is_better') {
-    return /** @type {Record<string, string>} */ (LOWER_IS_BETTER_BAND_TERM)[band] || band;
+    return /** @type {Record<string, string>} */ (LOWER_IS_BETTER_PROBLEM_TERM)[band] || band;
   }
   return band;
 }
@@ -1433,14 +1406,8 @@ export function variablePolarity(variable) {
 // reported alongside the legacy 4-dimension delta. Mirrors the shape of
 // compareSystemState so consumers can render the two side-by-side.
 
-/**
- * Authored, human-readable label for each substrate variable. The single source
- * of the spaced display name (the public Compendium's Living-World tab reads this
- * through gen:compendium-data rather than splitting the snake_case id at render
- * time). Every SYSTEM_VARIABLES entry must have a label here.
- * @type {Readonly<Record<string, string>>}
- */
-export const VARIABLE_LABEL = Object.freeze({
+/** @type {Readonly<Record<string, string>>} */
+const VARIABLE_LABEL = Object.freeze({
   food_security:           'Food security',
   labor_capacity:          'Labor capacity',
   public_legitimacy:       'Public legitimacy',
@@ -1475,18 +1442,8 @@ function explainCausalDelta(variable, before, after, change, bandBefore, bandAft
   const mag = Math.abs(change) >= 15 ? 'sharply' : Math.abs(change) >= 7 ? 'noticeably' : 'slightly';
   const better = (polar === 'higher_is_better' && change > 0) ||
                  (polar === 'lower_is_better'  && change < 0);
-  // Band WORDS, not raw bands: a lower_is_better variable's band is computed off
-  // the inverted score, so the raw pair reads backwards in a sentence ("Criminal
-  // opportunity rose sharply (adequate → collapsed)" says crime collapsed while
-  // it in fact became rampant). causalBandWord is the one place that re-phrasing
-  // lives; the other 15 variables are byte-unchanged.
-  // Lower-cased for sentence context: the raw band vocabulary is already
-  // lower-case, so this only touches the three problem terms and leaves the
-  // fifteen higher-is-better variables byte-identical.
   if (bandBefore !== bandAfter) {
-    const wordBefore = causalBandWord(variable, bandBefore).toLowerCase();
-    const wordAfter  = causalBandWord(variable, bandAfter).toLowerCase();
-    return `${label} ${dir} ${mag} (${wordBefore} → ${wordAfter})${better ? '' : '. Pressure increased'}`;
+    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : '. Pressure increased'}`;
   }
   return `${label} ${dir} ${mag}${better ? '' : '. Pressure increased'}`;
 }
@@ -1513,11 +1470,8 @@ export function compareCausalState(before, after) {
     if (typeof b !== 'number' || typeof a !== 'number') continue;
     const change = a - b;
     if (change === 0) continue;
-    // The fallbacks orient the score exactly as finalizeVariable does; banding a
-    // lower_is_better score raw here would have produced the inverse of the band
-    // the model itself carries whenever a snapshot arrived without `bands`.
-    const bandBefore = before.bands?.[name] || causalBand(orientCausalScore(name, b));
-    const bandAfter  = after.bands?.[name]  || causalBand(orientCausalScore(name, a));
+    const bandBefore = before.bands?.[name] || causalBand(b);
+    const bandAfter  = after.bands?.[name]  || causalBand(a);
     out.push({
       variable: name,
       before: b,

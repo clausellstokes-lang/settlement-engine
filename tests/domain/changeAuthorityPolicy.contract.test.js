@@ -70,25 +70,6 @@ describe('change-authority contract — behavioral (proposal-gated families cons
 // For each documented change-type, the exact applyMode expression the live
 // generator must still carry. If a generator's gate is rewritten, update BOTH the
 // policy and this anchor deliberately — that is the point of the guard.
-//
-// AN ANCHOR IS EITHER:
-//   • a STRING — the gate expression itself, when that expression is already
-//     unique inside its module; or
-//   • `{ site, gate }` — DERIVE, DON'T RESTATE. When a bare gate string would
-//     match several mints in one module, the entry NAMES THE SITE and lets the
-//     gate be found inside the site's own object literal, instead of padding the
-//     anchor with whatever source lines happen to sit next to it.
-//
-// The padding is what rots, and it rotted here. `faction_government_challenge`'s
-// anchor used to carry a hand-copied `probability:` formula purely as filler to
-// make the surrounding block unique. WR-5 (e1654184) added a third term to that
-// formula (`+ warPressure * 0.08`) and re-wrapped it across three lines — a change
-// that touched no authority at all — and `src.includes(ANCHOR)` went false. The
-// pin failed for a reason the pin does not care about, which is the hand-keyed
-// address-rot class. The `{ site, gate }` form has nothing to rot: the site token
-// is the candidateType literal (load-bearing — renaming it IS an authority-visible
-// change), and the block boundary is DERIVED by brace balance (the object literal
-// the site is a key of), never transcribed.
 const SOURCE_ANCHORS = Object.freeze({
   // proposal-gated: gate reads majorChangesRequireProposal.
   flow_migration: "applyMode: requireProposal && fraction >= MIGRATION_PROPOSAL_FRACTION ? 'proposal' : 'auto'",
@@ -110,29 +91,14 @@ const SOURCE_ANCHORS = Object.freeze({
   stressor_escalation: "applyMode: severity >= 0.78 ? 'proposal' : 'auto'",
   relationship_evolution: 'applyMode: severity >= 0.72 ? "proposal" : "auto"',
   // severity-gated, newly-mapped sites (each distinct from the families above).
-  faction_institution_capture: "applyMode: asksForApproval ? 'proposal' : 'auto'",
+  faction_institution_capture: "applyMode: severity >= 0.68 || criminalSuppression ? 'proposal' : 'auto'",
   faction_rival_power_contest: "applyMode: severity >= 0.7 ? 'proposal' : 'auto'",
   // A SECOND stressor gate (pressure-born birth), distinct from stressor_escalation.
   stressor_birth: "const major = pressure.score >= 0.78 || ['occupation', 'magic_deadzone', 'siege', 'coup_detat'].includes(type);",
   // always-proposal: unconditional 'proposal', no flag / severity / lock.
   npc_adversarial_action: "const proposal = severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily);",
-  // POINTED, not transcribed (see the note above the table): the mint is named by
-  // its candidateType literal and the gate is asserted inside that mint's own
-  // object literal, so an edit to the neighbouring probability/severity/reasons
-  // lines cannot falsify it and a flip of THIS applyMode cannot hide behind
-  // another mint in the same module.
-  faction_government_challenge: Object.freeze({
-    site: "candidateType: 'faction_government_challenge',",
-    gate: "applyMode: 'proposal',",
-  }),
+  faction_government_challenge: "ruleId: `faction_${band}_government_challenge`,\n    severity,\n    probability: (band === 'crisis' ? 0.12 : 0.04) + severity * (band === 'crisis' ? 0.34 : 0.22),\n    applyMode: 'proposal'",
   relationship_label_change: 'candidateType,\n    applyMode: "proposal",',
-  treaty_breached: "applyMode: 'proposal',\n      forced: true",
-  // WR-10's conveyance shares that anchor DELIBERATELY, and the sharing is the honest
-  // statement rather than a shortcut. The realm-verb lane has exactly ONE mint
-  // (buildRealmVerbOutcome), and its applyMode is an unconditional literal — so every
-  // realm verb's always-proposal authority IS this line, and a flip here would flip
-  // both entries at once, which is precisely what this contract exists to catch.
-  sovereignty_conveyed: "applyMode: 'proposal',\n      forced: true",
   tier_change: "ruleFamily: 'tier',\n    targetSaveId: item.id,\n    severity: drift.severity,\n    probability: chance,\n    // Honor majorChangesRequireProposal, consistent with resource_depletion in\n    // this module: a tier change stays a DM proposal under the conservative\n    // default (flag on), and auto-applies only when a campaign opts out of\n    // proposal gating (flag off, e.g. dramatic_campaign). CL-0: the flag gate\n    // is the LEGACY mode fed through authorityFor (verbatim under routine/full;\n    // forced to proposal under dm_only/recommendations).\n    applyMode: authorityFor(rules, 'tier_change', rules.majorChangesRequireProposal ? 'proposal' : 'auto'),",
   // structural-proposal: auto by default; one branch routes via a proposal-only lever.
   strategy_move: "applyMode: proposal ? 'proposal' : 'auto'",
@@ -156,31 +122,6 @@ const SOURCE_ANCHORS = Object.freeze({
   blockade_declared: "authorityFor(rules, 'blockade_declared', 'auto')",
 });
 
-/** The gate expression an anchor asserts, in either anchor form. */
-const gateTextOf = (anchor) => (typeof anchor === 'string' ? anchor : anchor.gate);
-
-/**
- * The slice of `src` that is the object literal `site` is a key of: everything
- * from the end of the site token to the `}`/`]` that closes the enclosing
- * literal, tracking nested brackets. The boundary is COMPUTED from the source's
- * own structure — nothing about it is copied into this file, so it cannot go
- * stale when the mint's other keys are edited.
- */
-function mintLiteralAfter(src, site) {
-  const at = src.indexOf(site);
-  if (at < 0) return null;
-  let depth = 0;
-  for (let i = at + site.length; i < src.length; i++) {
-    const ch = src[i];
-    if (ch === '{' || ch === '[') depth++;
-    else if (ch === '}' || ch === ']') {
-      if (depth === 0) return src.slice(at + site.length, i);
-      depth--;
-    }
-  }
-  return src.slice(at + site.length);
-}
-
 describe('change-authority contract — source anchors match the policy', () => {
   test('every policy change-type has a source anchor and vice versa', () => {
     expect(Object.keys(SOURCE_ANCHORS).sort()).toEqual(Object.keys(CHANGE_AUTHORITY_POLICY).sort());
@@ -189,47 +130,36 @@ describe('change-authority contract — source anchors match the policy', () => 
   for (const [changeType, entry] of Object.entries(CHANGE_AUTHORITY_POLICY)) {
     test(`${changeType} (${entry.authority}) still carries its live applyMode gate in ${entry.module}`, () => {
       const src = sourceFor(entry.module);
-      const anchor = SOURCE_ANCHORS[changeType];
-      if (typeof anchor === 'string') {
-        expect(src.includes(anchor)).toBe(true);
-      } else {
-        // EXACTLY-ONCE, or the first-match retarget class applies: indexOf takes
-        // the first hit, and a second copy of the site token would let the pin
-        // silently start guarding a different mint.
-        expect(src.split(anchor.site).length - 1, `site token is not unique in ${entry.module}`).toBe(1);
-        const mint = mintLiteralAfter(src, anchor.site);
-        expect(mint, `site token missing from ${entry.module}`).not.toBe(null);
-        expect(mint.includes(anchor.gate)).toBe(true);
-      }
+      expect(src.includes(SOURCE_ANCHORS[changeType])).toBe(true);
 
-      // The flag-consulting claim must match the anchor's gate text.
-      const anchorReadsFlag = gateTextOf(anchor).includes('RequireProposal')
-        || gateTextOf(anchor).includes('requireProposal');
+      // The flag-consulting claim must match the anchor's text.
+      const anchorReadsFlag = SOURCE_ANCHORS[changeType].includes('RequireProposal')
+        || SOURCE_ANCHORS[changeType].includes('requireProposal');
       expect(anchorReadsFlag).toBe(entry.consultsProposalFlag);
 
       // Authority-class invariants on the gate's shape.
       if (entry.authority === 'auto') {
-        expect(gateTextOf(anchor)).toContain("applyMode: 'auto'");
-        expect(gateTextOf(anchor)).not.toContain('proposal');
+        expect(SOURCE_ANCHORS[changeType]).toContain("applyMode: 'auto'");
+        expect(SOURCE_ANCHORS[changeType]).not.toContain('proposal');
       }
       if (entry.authority === 'proposal-gated') {
         expect(anchorReadsFlag).toBe(true);
       }
       if (entry.authority === 'severity-gated') {
         expect(anchorReadsFlag).toBe(false);
-        expect(gateTextOf(anchor)).toMatch(/'proposal'|"proposal"|major/);
+        expect(SOURCE_ANCHORS[changeType]).toMatch(/'proposal'|"proposal"|major/);
       }
       if (entry.authority === 'always-proposal') {
         // No flag, no severity-driven downgrade path in the gate text.
         expect(anchorReadsFlag).toBe(false);
-        expect(gateTextOf(anchor)).toMatch(/'proposal'|"proposal"|\.includes\(actionFamily\)/);
+        expect(SOURCE_ANCHORS[changeType]).toMatch(/'proposal'|"proposal"|\.includes\(actionFamily\)/);
         // An always-proposal anchor must NOT be a bare auto outcome.
-        expect(gateTextOf(anchor)).not.toContain("applyMode: 'auto'");
+        expect(SOURCE_ANCHORS[changeType]).not.toContain("applyMode: 'auto'");
       }
       if (entry.authority === 'structural-proposal') {
         // Auto by default with a single branch routing to proposal.
         expect(anchorReadsFlag).toBe(false);
-        expect(gateTextOf(anchor)).toContain("'proposal' : 'auto'");
+        expect(SOURCE_ANCHORS[changeType]).toContain("'proposal' : 'auto'");
       }
     });
   }
@@ -279,7 +209,7 @@ describe('change-authority contract — newly-mapped sites carry their live auth
   test('evaluateWorldPulseRules routes all candidates through authorityFor', () => {
     const src = sourceFor('candidateEvents.js');
     expect(src).toContain("authorityFor(rules, candidate.ruleFamily || candidate.candidateType, candidate.applyMode)");
-    expect(src).toContain("resolveCandidateConflicts(suppressEquivalentPendingProposalCandidates(routed, snapshot?.worldState), context.budgets || {})");
+    expect(src).toContain("resolveCandidateConflicts(routed, context.budgets || {})");
   });
 
   // The relationship rules have TWO distinct gates too: labelProposal (always
@@ -309,9 +239,6 @@ describe('change-authority contract — campaignAltering markers (Advance-scalin
     'faction_government_challenge',
     'intervention_ordered',
     'blockade_declared',
-    'treaty_breached',
-    // WR-10: a conveyance moves sovereignty over a real settlement by deed.
-    'sovereignty_conveyed',
     // W-LIFECYCLE: a settlement's terminal death removes a living roster member
     // (the digest cell stays, as a remnant).
     'settlement_terminal_death',
@@ -344,8 +271,6 @@ describe('change-authority contract — campaignAltering markers (Advance-scalin
     faction_government_challenge: { candidateType: 'faction_government_challenge', proposalPayload: { kind: 'government_change' }, severity: 0.55 },
     intervention_ordered: { candidateType: 'intervention_ordered', type: 'condition', severity: 0.6 },
     blockade_declared: { candidateType: 'blockade_declared', type: 'condition', severity: 0.6 },
-    treaty_breached: { candidateType: 'treaty_breached', type: 'realm_verb', severity: 1 },
-    sovereignty_conveyed: { candidateType: 'sovereignty_conveyed', type: 'realm_verb', severity: 0.7 },
     settlement_terminal_death: { candidateType: 'settlement_terminal_death', type: 'lifecycle', lifecyclePatch: { kind: 'terminal_death', saveId: 'a' }, severity: 0.8 },
   });
 

@@ -34,7 +34,7 @@ import { settlementOccupation, occupierHoldings } from '../../../domain/display/
 import { renderTreatiesForSettlement } from '../../../domain/display/treatyDocument.js';
 import FaithSection from '../../settlement/FaithSection.jsx';
 import {
-  FS, MUTED, BODY, BORDER, RED, GOLD, GREEN, SECOND, CARD, sans,
+  FS, MUTED, BODY, BORDER, RED, RED_BG, GOLD, GREEN, SECOND, CARD, sans, R,
 } from '../../theme.js';
 
 function Line({ strong, tone = BODY, children }) {
@@ -54,8 +54,8 @@ function WarBlock({ war, nameFor }) {
   const statusColor = besieged || occupied ? RED : deploying ? GOLD : MUTED;
   return (
     <div data-testid="war-block" style={{
-      background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${RED}`,
-      padding: '12px 14px', marginBottom: 14,
+      background: RED_BG, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${RED}`,
+      borderRadius: R.md, padding: '12px 14px', marginBottom: 14,
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
         <span style={{ fontSize: FS.xxs, fontWeight: 800, color: RED, textTransform: 'uppercase', letterSpacing: '0.07em' }}>War</span>
@@ -116,16 +116,9 @@ function TreatyBlock({ treaties, sid }) {
         {treaties.length === 1 ? 'Treaty' : 'Treaties'}
       </div>
       {treaties.map((doc) => {
-        // THE ROLE WORD COMES FROM THE LEDGER'S OWN ORIENTATION (chair ruling
-        // CR-WR10-G). This read used to spell 'as victor' / 'as the bound party', which
-        // are the right words for a war settlement and the wrong ones for a WR-10 sale —
-        // the read-model now carries the closed word for each side of whichever
-        // instrument this is, and falls back to the old spelling for any document
-        // minted before it did.
-        const role = doc.victorId === sid ? `as ${doc.receiverRole || 'victor'}`
-          : doc.loserId === sid ? `as ${doc.giverRole || 'the bound party'}` : 'as a party';
+        const role = doc.victorId === sid ? 'as victor' : doc.loserId === sid ? 'as the bound party' : 'as a party';
         return (
-          <div key={doc.pairKey} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '10px 12px', marginBottom: 8 }}>
+          <div key={doc.pairKey} style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD, padding: '10px 12px', marginBottom: 8 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: 6 }}>
               <strong style={{ color: BODY, fontSize: FS.xs, fontWeight: 800 }}>{doc.title}</strong>
               <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 700 }}>{role}</span>
@@ -135,12 +128,10 @@ function TreatyBlock({ treaties, sid }) {
               <div key={term.type} style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.5, marginBottom: 3 }}>
                 <strong style={{ color: term.fraying ? RED : BODY, textTransform: 'capitalize' }}>{term.label}</strong>
                 <span style={{ color: MUTED }}>{term.yearsRemaining > 0 ? ` · ${term.yearsRemaining}y left` : ' · lapsing'}</span>
-                <span style={{ color: SECOND, fontStyle: 'italic' }}>{` · ${term.strainLine}`}</span>
+                <span style={{ color: SECOND, fontStyle: 'italic' }}>{` — ${term.strainLine}`}</span>
               </div>
             ))}
             {doc.frayingLine && <div style={{ color: RED, fontSize: FS.pico, fontWeight: 700, marginTop: 4 }}>{doc.frayingLine}</div>}
-            {/* GR-0 the longevity voice — null while the lifecycle-voice flag is dark. */}
-            {doc.ageLine && <div style={{ color: SECOND, fontSize: FS.pico, fontStyle: 'italic', marginTop: 4 }}>{doc.ageLine}</div>}
           </div>
         );
       })}

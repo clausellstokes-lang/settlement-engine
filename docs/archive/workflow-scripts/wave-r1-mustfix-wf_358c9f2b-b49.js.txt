@@ -1,0 +1,58 @@
+export const meta = {
+  name: 'wave-r1-mustfix',
+  description: 'R-1 must-fix pass: walker-census signature cure, EXPOSE_CORRUPTION consent gate, ring saturation + auth-boundary clears, conditional archive claim, registry sync',
+  phases: [
+    { title: 'Fix', detail: '3 Fable lanes closing verifier findings' },
+    { title: 'Reverify', detail: 'Opus re-verification per lane', model: 'opus' },
+    { title: 'Gate', detail: 'joint re-gate incl. tests/store' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge (Wave R-1 MUST-FIX pass of docs/CAPABILITY_REMEDIATION_PLAN.md — the wave cannot close until these are fixed AND pinned). Verify claims against code; code is authoritative.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. LIVE shared tree: NO git mutations of ANY kind; re-read every file immediately before editing; touch ONLY your lane's files.
+LAWS: no same-seed drift; no persistence-shape changes (session-only structures fine — verify against the persist allowlist); closure budget — no new eager code (measured margin is ~8.9KB after R-1, not the stale ~54B figure); sizeBaseline ceilings EXACT; copy = one string each, vetoable; registry changes → gen:compendium-data regen. Tests single-threaded, exit codes unmasked. Gate baseline: verify:dist 285/285 green + ONE known THIS-WAVE red (operationRegistry.walker stale-entries — lane A cures it). Verbatim output; CONFIRMED/PLAUSIBLE labels.`
+
+const LANES = [
+  {
+    key: 'destruction-mf',
+    files: 'src/store/settlementSlice.js (destroySavedSettlement signature only) · src/domain/intent/opVocabulary.js · the edge-mirror flag site if repo-local (interpretCore.ts — repo copy only) · tests/components/surveyorConsentWiring.test.jsx · your R-1 pin files · new tests',
+    brief: `Close 2 verifier findings (their cures were proven by executed probes — re-verify then apply):
+1. WALKER CENSUS RED (the gate's one red): destroySavedSettlement's new signature '(id, reason = 'destroyed', { confirmName } = /** @type ... */ ({}))' defeats the walker's isFn arrow regex (nested parens in the default). Cure exactly as the verifier proved: plain third param 'opts = {}' with 'const { confirmName } = opts;' in the body and the type on an @param JSDoc line above. No behavior change. Run tests/store/operationRegistry.walker.test.js — the stale-entries assert must go green WITHOUT touching the walker.
+2. EXPOSE_CORRUPTION DRAFT-PHASE DELETION UNFLAGGED (executed probe: draft-phase applyEvent EXPOSE_CORRUPTION deleted a named NPC, ok:true, veto:null, protectedFlags:[]): the CANON_IDENTITY flag is phase-gated but this canon verb DELETES its target, so the gate is wrong for it — exactly the argument your lane already applied to the party arm. Add EXPOSE_CORRUPTION to the phase-INDEPENDENT branch in applyIdentityConsentFlags AND flagProtected (both sides — client and the repo copy of the edge mirror; the edge deploy itself stays T5 owner-gated, note it). Narrow the existing pin that asserts draft-phase canon kills stay unflagged to KILL_NPC only (which leaves a tombstone — genuinely different). New pin: draft-phase EXPOSE_CORRUPTION via the Surveyor door demands the consent tick; consented proceeds; KILL_NPC draft behavior unchanged.`,
+  },
+  {
+    key: 'ring-mf',
+    files: 'src/store/campaignWorldPulseDeferred.js · src/store/campaignSlice.js (clearTransientCampaignWork + deleteCampaign filter sites ONLY — explicitly granted this pass) · src/store/campaignDeletionSession.js (the one filter site) · src/store/operationRegistry.js (registry-sync: the 3 stale description strings other lanes filed) · your R-1 pin files · new tests',
+    brief: `Close 2 verifier findings + assigned hygiene + registry sync:
+1. RING GUARD FAILS OPEN AT SATURATION: advanceDepthOf() counts RETAINED pulseUndoStack entries; the advance body caps at PULSE_UNDO_CAP=10 with oldest-eviction, so the count saturates and the coherence guard 'advanceDepthOf !== snapshot.advanceDepth' passes STALE proposal snapshots after the 10th advance. Cure: stamp snapshots against a MONOTONIC per-campaign advance sequence (a session-only counter incremented by every advance, never decremented by eviction/undo-pop — verify undoLastPulse semantics: popping an advance should still invalidate proposal snapshots stamped after it, so decide counter-vs-pop semantics carefully and pin both directions: post-saturation staleness invalidated AND legitimate undo ordering preserved). Session-only counter — verify it is NOT in the persist allowlist.
+2. STALE RING SURVIVES SAME-OWNER RE-AUTH: clearTransientCampaignWork (campaignSlice.js:141-145) resets pulseUndoStack but not proposalUndoStack (executed probe: ring survives invalidateCampaignSession while the advance stack clears, and the History chip advertises a dead undo). Add proposalUndoStack (and its new counter) to the same clear. ALSO the assigned hygiene from your own deferral: deleteCampaign (~:725) and campaignDeletionSession.js (~:60) filter pulseUndoStack on campaign delete but not proposalUndoStack — add the same filters. Pins: re-auth clears the ring and un-lights the chip; campaign delete leaves no orphan ring entries.
+3. REGISTRY SYNC (filed by the destruction lane): canonize description → restored in-session for the same world, gone across reload; uncanonize likewise; destroySavedSettlement description → add the confirmName requirement. Three one-string edits, undoState fields UNCHANGED; then gen:compendium-data regen and confirm the artifact diff is exactly those rows.`,
+  },
+  {
+    key: 'paid-copy-mf',
+    files: 'src/copy/en.js (staleNarrative.body region) · the narrated-gate seam you need to read (EventComposer.jsx — READ ONLY) · your R-1 pin files · new tests',
+    brief: `Close 1 verifier finding:
+STALENARRATIVE ARCHIVE CLAIM UNCONDITIONALLY FALSE IN TWO REACHABLE PAID STATES: the modal shows for narrated = aiSettlement || aiDailyLife saves, but BOTH stamp sites archive ONLY the settlement narrative (settlementSlice.js:1793-1798 requires aiData.aiSettlement && eventId; canonEventCommandTransaction returns null without eventId || narrative). So an aiDailyLife-only save (and the no-eventId path) reads a promise of archiving that never happens. Cure: make the claim conditional and true — either split the copy by state (settlement-narrative present → the last-10 archive sentence; otherwise → an honest no-archive phrasing) or reword to a conditional single string that is true in all three states. Keep it one vetoable string per variant; keep the live cap constant pinned (your R-1 pin ties the number to MAX_EVENT_NARRATIVE_SNAPSHOTS — preserve that). Pins: each reachable state renders a true sentence (settlement-narrated, dailyLife-only, no-eventId).`,
+  },
+]
+
+const FIX_SCHEMA = { type: 'object', required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'], properties: { filesTouched: { type: 'array', items: { type: 'string' } }, pins: { type: 'number' }, testsRun: { type: 'string' }, testOutputTail: { type: 'string' }, behaviorShift: { type: 'string' }, deferrals: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' }, error: { type: 'string' } } }
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+
+phase('Fix')
+const results = await pipeline(
+  LANES,
+  (l) => agent(COMMON + '\n\nYOUR LANE OWNS ONLY: ' + l.files + '\n\n' + l.brief, { label: 'fix:' + l.key, phase: 'Fix', schema: FIX_SCHEMA }),
+  (r, l) => r && !r.error
+    ? agent(COMMON + `\n\nYOU ARE THE OPUS RE-VERIFIER for ${l.key}. Fixer reports files=${JSON.stringify(r.filesTouched)}, pins=${r.pins}, shift="${r.behaviorShift}". Original brief:\n${l.brief}\nRepo READ-ONLY except tests. Per finding: verify landed, re-derive independently (fresh greps + re-run the original probes where given), RUN the pins, attempt refutation — saturation edge cases (10th/11th advance, undo-pop ordering), persist allowlist leaks, the walker regex against the NEW signature, KILL_NPC vs EXPOSE_CORRUPTION flag divergence, all three copy states. MUST_FIX only for real unresolved items.`, { label: 'verify:' + l.key, phase: 'Reverify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA }).then((v) => ({ lane: l.key, fix: r, verify: v }))
+    : { lane: l.key, fix: r, verify: null, failed: true }
+)
+
+phase('Gate')
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+const done = results.filter(Boolean)
+const gate = await agent(COMMON + `\n\nWAVE-END RE-GATE (R-1 final). Touched: ${JSON.stringify(done.map((r) => r.fix && r.fix.filesTouched))}. Run single-threaded, exit codes unmasked: (1) tests/store/ FULL dir (the R-1 gate lesson — verify:dist does not cover it); (2) all R-0+R-1 pin files; (3) tests/components/surveyorConsentWiring.test.jsx + the consent/destroy/tombstone/ring/copy pin files; (4) tests/joins/fieldManifest.test.js; (5) tests/architecture/; (6) pdf parity suites; (7) tests/lint/sizeBaseline.test.js; (8) npm run build && npm run verify:dist single-threaded. Expect: the walker stale-entries red CURED; baseline 285/285 held; report every red verbatim, attributed.`, { label: 'gate:r1-final', phase: 'Gate', schema: GATE_SCHEMA })
+
+return { lanes: done.map((r) => ({ lane: r.lane, failed: !!r.failed, pins: r.fix && r.fix.pins, behaviorShift: r.fix && r.fix.behaviorShift, verdict: r.verify && r.verify.verdict, mustFix: r.verify && r.verify.mustFix, deferrals: r.fix && r.fix.deferrals })), gate }

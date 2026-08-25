@@ -16,7 +16,7 @@ VOIDS      street-space components, and within the main component the WIDE
            and the share of street area sitting in voids rather than channels.
            A CENTER is a void; polycentricity is >1 large well-separated void.
 """
-import os, json, math
+import os, json, math, sys
 import numpy as np
 from PIL import Image
 from scipy import ndimage as ndi
@@ -93,9 +93,10 @@ def analyse(path, window, longside=1600):
     return out
 
 if __name__=="__main__":
-    CORP="/Users/cstokes/Desktop/settlement-engine/map-corpus"
-    fr=json.load(open("MFS3a-frame.json"))["plates"]
-    wins=json.load(open("MFS3a-windows.json"))
+    HERE=os.path.dirname(os.path.abspath(__file__))
+    CORP=os.path.dirname(HERE)
+    fr=json.load(open(os.path.join(HERE,"MFS3a-frame.json")))["plates"]
+    wins=json.load(open(os.path.join(HERE,"MFS3a-windows.json")))
     rows=[]
     for key,w in wins.items():
         if key.startswith("_"): continue
@@ -110,5 +111,16 @@ if __name__=="__main__":
               f"w50 {r.get('width_plotwidths_p50','-'):>6} w97 {r.get('width_plotwidths_p97','-'):>6} "
               f"hier {r.get('hierarchy_p97_over_p50','-'):>6} voids {r.get('void_n_ge4pw2','-'):>4} "
               f"v1 {r.get('void_largest_pw2','-'):>8} v2/v1 {r.get('void_2nd_over_1st','-')}")
-    json.dump(rows, open("MFS3a-voidmetrics.json","w"), indent=1)
-    print("\nwrote MFS3a-voidmetrics.json n=",len(rows))
+    output_path=os.path.join(HERE,"MFS3a-voidmetrics.json")
+    if "--write" in sys.argv:
+        temp=output_path+".tmp"
+        with open(temp,"w") as handle:
+            json.dump(rows,handle,indent=1)
+            handle.write("\n")
+        os.replace(temp,output_path)
+        print("\nwrote MFS3a-voidmetrics.json n=",len(rows))
+    else:
+        expected=json.load(open(output_path))
+        if expected != rows:
+            raise SystemExit("MFS3a-voidmetrics.json DRIFT — inspect before --write")
+        print("\nMFS3a-voidmetrics.json MATCHES — dry run, no write n=",len(rows))

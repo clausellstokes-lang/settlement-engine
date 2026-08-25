@@ -18,12 +18,10 @@ import {
   mintRealmVerbProposal, applyWorldPulseProposal, applyWorldPulseOutcomes,
 } from '../../src/domain/worldPulse/applyWorldPulse.js';
 import { updateProposalStatus } from '../../src/domain/worldPulse/worldState.js';
-import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
 import { declareCasus, warReasonsFor } from '../../src/domain/worldPulse/warReasons.js';
 import { sueForPeaceOrder } from '../../src/domain/worldPulse/peaceReasons.js';
 import { advanceIntervention } from '../../src/domain/worldPulse/convergence.js';
 import { MOMENTUM_TUNING } from '../../src/domain/worldPulse/momentum.js';
-import { LEGACY_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
 
 const WAR_RULES = { warLayerEnabled: true, peaceEngineEnabled: true };
 
@@ -40,25 +38,6 @@ const SAVES = [
   { id: 'a', settlement: { id: 'a', name: 'Aldford', population: 900, tier: 'village' } },
   { id: 'b', settlement: { id: 'b', name: 'Brackwater', population: 800, tier: 'village' } },
 ];
-
-function liveNapWorld(tick = 4) {
-  return {
-    spatialLedgers: {
-      treaties: {
-        'a>b': {
-          victorId: 'a', loserId: 'b', parties: ['a', 'b'], complianceState: 'honored',
-          treatyTicksPerYear: LEGACY_TREATY_TICKS_PER_YEAR,
-          receipts: ['The pact was sworn.'],
-          terms: [
-            { type: 'non_aggression', family: 'security', mintedTick: 1, expiresTick: 20, complianceState: 'honored', trueState: 'honored' },
-            { type: 'tribute', family: 'economic', mintedTick: 1, expiresTick: 16, complianceState: 'honored', trueState: 'honored', deliveredToVictor: 2, extractedFromLoser: 3 },
-          ],
-        },
-      },
-    },
-    tick,
-  };
-}
 
 describe('the mint lane (one lane — DM mints ride the sim proposal path)', () => {
   it('a DECLARE_CASUS mint creates a record-identical pending proposal + a proposal news entry', () => {
@@ -82,57 +61,6 @@ describe('the mint lane (one lane — DM mints ride the sim proposal path)', () 
     expect(r.result.newsEntries.some((/** @type {any} */ n) => n.kind === 'queued')).toBe(true);
     // The world's OWN ledgers are untouched at mint (queue-not-commit).
     expect(warReasonsFor(r.result.worldState, 'a', 'b')).toBeNull();
-  });
-
-  it('REPUDIATE_TREATY queues an addressed major without touching the live pact; decline leaves it intact', () => {
-    const world = liveNapWorld();
-    const campaign = campaignFixture(WAR_RULES, world);
-    const before = getSpatialLedger(campaign.worldState, 'treaties');
-    const r = mintRealmVerbProposal({
-      campaign, saves: SAVES, verb: 'REPUDIATE_TREATY', args: { fromId: 'a', toId: 'b' },
-      now: '2026-01-01T00:00:00.000Z',
-    });
-    expect(r.ok).toBe(true);
-    const proposal = r.result.worldState.proposals[0];
-    expect(proposal.outcome).toMatchObject({
-      candidateType: 'treaty_breached', targetSaveId: 'a', severity: 1,
-      affectedSettlementIds: ['a', 'b'],
-    });
-    expect(getSpatialLedger(r.result.worldState, 'treaties')).toEqual(before);
-
-    const declined = updateProposalStatus(r.result.worldState, r.proposalId, 'dismissed', {
-      updatedAt: '2026-01-02T00:00:00.000Z',
-    });
-    expect(getSpatialLedger(declined, 'treaties')).toEqual(before);
-  });
-
-  it('REPUDIATE_TREATY preflights the exact pair, not merely the existence of some pact', () => {
-    const campaign = campaignFixture(WAR_RULES, liveNapWorld());
-    const saves = [...SAVES, { id: 'c', settlement: { id: 'c', name: 'Coldharbour', population: 700, tier: 'village' } }];
-    const crossed = mintRealmVerbProposal({
-      campaign, saves, verb: 'REPUDIATE_TREATY', args: { fromId: 'a', toId: 'c' },
-    });
-    expect(crossed.ok).toBe(false);
-    expect(crossed.code).toBe('treaty_breach_no_live_nap');
-    expect(getSpatialLedger(campaign.worldState, 'treaties')['a>b'].complianceState).toBe('honored');
-
-    const sameParty = mintRealmVerbProposal({
-      campaign, saves, verb: 'REPUDIATE_TREATY', args: { fromId: 'a', toId: 'a' },
-    });
-    expect(sameParty.ok).toBe(false);
-    expect(sameParty.code).toBe('treaty_breach_invalid');
-  });
-
-  it('REPUDIATE_TREATY canonicalizes signatory ids before hashing, addressing, and apply', () => {
-    const campaign = campaignFixture(WAR_RULES, liveNapWorld());
-    const minted = mintRealmVerbProposal({
-      campaign, saves: SAVES, verb: 'REPUDIATE_TREATY', args: { fromId: ' a ', toId: ' b ' },
-    });
-    expect(minted.ok).toBe(true);
-    const outcome = minted.result.worldState.proposals[0].outcome;
-    expect(outcome.targetSaveId).toBe('a');
-    expect(outcome.affectedSettlementIds).toEqual(['a', 'b']);
-    expect(outcome.proposalPayload.args).toMatchObject({ fromId: 'a', toId: 'b' });
   });
 
   it('dedup: an identical pending order refuses (the M10a hold guard)', () => {
@@ -189,87 +117,6 @@ describe('force ≡ organic at the arm (byte-compared against the kernel functio
     expect(p.status).toBe('applied');
   });
 
-  it('an approved REPUDIATE_TREATY defaults and ends the pact, with one beat addressed to both parties', () => {
-    const campaign = campaignFixture(WAR_RULES, liveNapWorld());
-    const minted = mintRealmVerbProposal({
-      campaign, saves: SAVES, verb: 'REPUDIATE_TREATY', args: { fromId: 'a', toId: 'b' },
-      now: '2026-01-01T00:00:00.000Z',
-    });
-    expect(minted.ok).toBe(true);
-    const applied = applyWorldPulseProposal({
-      campaign: { ...campaign, worldState: minted.result.worldState }, saves: SAVES,
-      proposalId: minted.proposalId, now: '2026-01-02T00:00:00.000Z',
-    });
-    const treaty = getSpatialLedger(applied.worldState, 'treaties')['a>b'];
-    expect(treaty).toMatchObject({
-      complianceState: 'defaulted', defaultedBy: 'a', defaultSeverity01: 1,
-      breachType: 'repudiation', repudiatedTick: 4, breachExpiresTick: 20,
-    });
-    expect(treaty.terms).toEqual(expect.arrayContaining([
-      expect.objectContaining({ type: 'non_aggression', complianceState: 'defaulted', trueState: 'defaulted', expiresTick: 4, repudiatedExpiresTick: 20 }),
-      expect.objectContaining({ type: 'tribute', complianceState: 'defaulted', trueState: 'defaulted', expiresTick: 4, repudiatedExpiresTick: 16 }),
-    ]));
-    const beats = applied.newsEntries.filter((/** @type {any} */ n) => n.impactKind === 'treaty_breached');
-    expect(beats).toHaveLength(1);
-    expect(beats[0].settlementIds).toEqual(['a', 'b']);
-    expect(beats[0].sourceEventId).toBeTruthy();
-    expect(beats[0].summary).toContain('Aldford openly broke its pact with Brackwater');
-    expect(beats[0].summary).toContain('Every promise under it ended');
-    expect(beats[0].summary).not.toContain('It applies on approval'); // anchored: the two positive assertions above prove this is the live completed-breach sentence, not an empty or unrelated summary
-    expect(beats[0].reasons).toEqual([
-      'The oath was repudiated in public; its restraints no longer bind either court.',
-    ]);
-    expect(applied.worldState.proposals.find((/** @type {any} */ p) => p.id === minted.proposalId)?.status).toBe('applied');
-  });
-
-  it('a lit repudiation crossing reaches the disposition receipt lane in the same verdict', () => {
-    const channels = {
-      martial: { stock01: 0.5, band: 'settled' },
-      mercantile: { stock01: 0.5, band: 'settled' },
-      diplomatic: { stock01: 0.61, band: 'marked' },
-      insular: { stock01: 0.5, band: 'settled' },
-    };
-    const campaign = campaignFixture(
-      { ...WAR_RULES, dispositionChannelsEnabled: true },
-      { ...liveNapWorld(), dispositionStats: { a: { wins: 0, losses: 0, score: 0, channels, updatedTick: 4 } } },
-    );
-    const minted = mintRealmVerbProposal({
-      campaign, saves: SAVES, verb: 'REPUDIATE_TREATY', args: { fromId: 'a', toId: 'b' },
-      now: '2026-01-01T00:00:00.000Z',
-    });
-    const applied = applyWorldPulseProposal({
-      campaign: { ...campaign, worldState: minted.result.worldState }, saves: SAVES,
-      proposalId: minted.proposalId, now: '2026-01-02T00:00:00.000Z',
-    });
-    const beat = applied.newsEntries.find((entry) => entry.impactKind === 'disposition_diplomatic_crossed');
-    expect(beat).toMatchObject({ settlementIds: ['a'], settlementNames: ['Aldford'] });
-    expect(beat.headline).toContain('Aldford');
-  });
-
-  it('LAPSE HONESTY: a pact that expires before approval refuses with no treaty residue', () => {
-    const campaign = campaignFixture(WAR_RULES, liveNapWorld());
-    const minted = mintRealmVerbProposal({
-      campaign, saves: SAVES, verb: 'REPUDIATE_TREATY', args: { fromId: 'a', toId: 'b' },
-      now: '2026-01-01T00:00:00.000Z',
-    });
-    const pendingTreaty = getSpatialLedger(minted.result.worldState, 'treaties')['a>b'];
-    const lapsedTreaty = {
-      ...pendingTreaty,
-      terms: pendingTreaty.terms.map((/** @type {any} */ term) => ({ ...term, expiresTick: 4 })),
-    };
-    const lapsedWorld = {
-      ...minted.result.worldState,
-      spatialLedgers: { ...minted.result.worldState.spatialLedgers, treaties: { 'a>b': lapsedTreaty } },
-    };
-    const applied = applyWorldPulseProposal({
-      campaign: { ...campaign, worldState: lapsedWorld }, saves: SAVES,
-      proposalId: minted.proposalId, now: '2026-01-02T00:00:00.000Z',
-    });
-    expect(applied.newsEntries.some((/** @type {any} */ n) => n.impactKind === 'realm_verb_refused')).toBe(true);
-    expect(getSpatialLedger(applied.worldState, 'treaties')['a>b']).toEqual(lapsedTreaty);
-    expect(applied.worldState.proposals.find((/** @type {any} */ p) => p.id === minted.proposalId)?.status).toBe('refused');
-  });
-
   it('an approved SUE_FOR_PEACE stamps the SAME recall contract as the direct order', () => {
     const world = { tick: 6, simulationRules: { ...WAR_RULES }, proposals: [], deployments: { a: { targetId: 'b', currentEffectiveStrength: 40 } } };
     const campaign = campaignFixture(WAR_RULES, world);
@@ -307,32 +154,6 @@ describe('force ≡ organic at the arm (byte-compared against the kernel functio
     expect(p.status).toBe('refused');
     // The refused order never enters the applied ledger.
     expect(applied.autoApplied).toHaveLength(0);
-  });
-});
-
-describe('correctness-4 — a DM-approved decree records provenance (flag-gated, byte-neutral dark)', () => {
-  const DECREE_SAVES = [{ id: 'a', settlement: { id: 'a', name: 'Aldford', population: 900, tier: 'village', activeConditions: [] } }];
-  const decreeCampaign = (lit) => ({
-    id: 'c1', regionalGraph: { edges: [] }, wizardNews: { entries: [], currentTick: 5 },
-    worldState: {
-      tick: 5, simulationRules: lit ? { provenanceLedgerEnabled: true } : {},
-      proposals: [{
-        id: 'p1', status: 'pending', tick: 5,
-        outcome: { id: 'decree.cond.a.5', type: 'condition', candidateType: 'add_condition', targetSaveId: 'a', causedBy: 'dm_decree.root', applyMode: 'auto', condition: { archetype: 'unrest', severity: 0.5 }, severity: 0.5, headline: 'A decree', summary: 'x', reasons: [] },
-      }],
-    },
-  });
-
-  it('DARK: provenanceLedgerEnabled absent ⇒ the manual apply writes NO provenance ledger (byte-identical)', () => {
-    const r = applyWorldPulseProposal({ campaign: decreeCampaign(false), saves: DECREE_SAVES, proposalId: 'p1', now: '2026-01-02T00:00:00.000Z' });
-    expect(getSpatialLedger(r.worldState, 'provenance')).toBeFalsy();
-  });
-
-  it('LIT: the manual apply records the decree cause-edges through the SAME writer the organic tick uses', () => {
-    const r = applyWorldPulseProposal({ campaign: decreeCampaign(true), saves: DECREE_SAVES, proposalId: 'p1', now: '2026-01-02T00:00:00.000Z' });
-    const ledger = getSpatialLedger(r.worldState, 'provenance') || {};
-    // the applied outcome's cause is recorded (decree → its parent), matching the organic pulse.
-    expect(ledger['decree.cond.a.5']?.parents).toEqual(['dm_decree.root']);
   });
 });
 
@@ -509,34 +330,6 @@ describe('THE RE-MINT CLOSED: intervention_ordered mints a pending proposal unde
     const again = advanceIntervention({ snapshot, worldState: r.worldState, graph: snapshot.regionalGraph, rng: null, tick: 13, now: '2026-01-02T00:00:00.000Z' });
     const mintedAgain = (again.worldState.proposals || []).filter((/** @type {any} */ p) => p.outcome?.candidateType === 'intervention_ordered');
     expect(mintedAgain).toHaveLength(1);
-
-    // Organic re-mints share the pulse-wide major lane. A saturated docket
-    // defers visibly and leaves every existing pending row untouched.
-    const saturatedState = {
-      ...worldState,
-      proposals: Array.from({ length: 4 }, (_, index) => ({
-        id: `held-intervention-${index}`,
-        status: 'pending',
-        outcome: {
-          id: `held-intervention-outcome-${index}`,
-          candidateType: 'intervention_ordered',
-          targetSaveId: `other-patron-${index}`,
-          applyMode: 'proposal',
-        },
-      })),
-    };
-    const blocked = advanceIntervention({
-      snapshot,
-      worldState: saturatedState,
-      graph: snapshot.regionalGraph,
-      rng: null,
-      tick: 12,
-      now: '2026-01-01T00:00:00.000Z',
-    });
-    expect(blocked.changed).toBe(false);
-    expect(blocked.worldState).toBe(saturatedState);
-    expect(blocked.worldState.proposals).toEqual(saturatedState.proposals);
-    expect(blocked.deferrals.some((/** @type {any} */ d) => d.reason === 'proposal_capacity')).toBe(true);
 
     // APPROVAL: the same arm the DM's own ORDER_INTERVENTION uses commits the
     // record in the mover's own shape.

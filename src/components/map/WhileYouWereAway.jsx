@@ -21,7 +21,7 @@ import { History, Sparkles, AlertTriangle, X } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { IconButton } from './IconButton.jsx';
-import { BODY, BORDER2, FS, GOLD, GOLD_BG, INK, MUTED, RED, SECOND, sans } from '../theme.js';
+import { BODY, BORDER2, FS, GOLD, GOLD_BG, INK, MUTED, RED, R, SECOND, sans } from '../theme.js';
 
 /**
  * @param {Object} props
@@ -66,7 +66,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
         role="status"
         style={{
           display: 'flex', alignItems: 'center', gap: 8,
-          border: `1px solid ${BORDER2}`,
+          border: `1px solid ${BORDER2}`, borderRadius: R.md,
           background: GOLD_BG, padding: '9px 12px',
           color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
         }}
@@ -82,7 +82,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
     <div
       data-testid="while-you-were-away"
       style={{
-        border: `1px solid ${GOLD}`, borderLeft: `3px solid ${GOLD}`,
+        border: `1px solid ${GOLD}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.md,
         background: GOLD_BG, padding: '10px 12px', display: 'grid', gap: 8,
       }}
     >
@@ -108,17 +108,12 @@ export default function WhileYouWereAway({ campaignId = null }) {
       {error ? (
         <div style={{
           display: 'flex', alignItems: 'flex-start', gap: 6,
-          border: '1px solid rgba(197,74,74,0.45)',
+          border: '1px solid rgba(197,74,74,0.45)', borderRadius: R.sm,
           background: 'rgba(197,74,74,0.08)', padding: '7px 9px',
           color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.45,
         }}>
           <AlertTriangle size={13} style={{ marginTop: 1, flexShrink: 0 }} />
-          {/* C2 (misc): the sentence stays in the register; the raw diagnostic is
-              set apart beneath it, never spliced mid-sentence. */}
-          <span style={{ display: 'grid', gap: 3 }}>
-            <span>The catch-up stopped early, before the record was complete. Advance the realm to resume.</span>
-            <span style={{ color: MUTED, fontWeight: 700 }}>({String(error)})</span>
-          </span>
+          <span>The catch-up hit a snag and stopped early: {error}. Advance the realm to resume.</span>
         </div>
       ) : majors.length > 0 ? (
         <div style={{ display: 'grid', gap: 5 }}>
@@ -133,7 +128,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
         </div>
       ) : (
         <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.45 }}>
-          The realm advanced quietly. No major turns while you were gone.
+          The realm advanced quietly — no major turns while you were gone.
         </div>
       )}
 
@@ -143,15 +138,9 @@ export default function WhileYouWereAway({ campaignId = null }) {
         </div>
       )}
 
-      {/* Honest capped note (C3 finding 11): past the cap the realm lives the FIRST
-          capped weeks of the absence, then the calendar leaps to now and the
-          remainder is skipped for good (owner ruling 2026-07-13,
-          calendar-advances-past-cap — no perpetual re-catch-up). The old copy
-          claimed the "most recent" weeks were shown and the rest could still be
-          run — both halves were false. */}
       {capped && !error && (
         <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
-          More time had passed than a single catch-up covers. The realm lived the first {weeks} {weekWord} of it, then time leapt to today. The span between passes into history unrecorded.
+          More time had passed than a single catch-up covers — the most recent {weeks} {weekWord} are shown. Advance the realm to run the rest.
         </div>
       )}
     </div>

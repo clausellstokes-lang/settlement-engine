@@ -1,0 +1,93 @@
+export const meta = {
+  name: 'review-party-impact-leaf',
+  description: 'Review the PARTY_IMPACT_KINDS leaf-module extraction diff, verify findings adversarially',
+  phases: [
+    { title: 'Review', detail: '3 lenses over the working diff' },
+    { title: 'Verify', detail: 'adversarial refutation of each finding' },
+  ],
+}
+
+const CWD = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/amazing-thompson-6dd363'
+
+const CONTEXT = `
+The repo is a Vite/React app ("settlement-engine"). Working tree: ${CWD} (branch claude/amazing-thompson-6dd363, based on review-fixes-2026-07-08 @ ecfcc80f). Inspect the uncommitted diff with: git -C ${CWD} diff
+
+The change (a first-paint bundle fix):
+1. NEW src/domain/worldPulse/partyImpactKinds.js — dependency-free leaf holding the frozen PARTY_IMPACT_KINDS catalog (moved verbatim from partyImpact.js).
+2. src/domain/worldPulse/partyImpact.js — const removed; now imports it from the leaf and re-exports it (export { PARTY_IMPACT_KINDS }) so the worldPulse barrel (index.js does export * from './partyImpact.js') and tests keep working.
+3. src/domain/events/partyEventLinkage.js — now imports PARTY_IMPACT_KINDS from the leaf instead of partyImpact.js. This module is EAGER (settlementSlice imports mapEventToPartyImpact statically), and its old import was the last static anchor dragging applyWorldPulse + relationshipEvolution/npcAgency/factionCompetition/relationshipMemory/institutionLifecycle/tier+population dynamics (~152 kB) into the entry chunk.
+4. tests/build/vendorPdfLazy.test.js — first-paint closure budget ratcheted 2_075_000 → 1_915_000 (new measured closure 1,825,278 + ~5%), comment block updated.
+
+Already empirically verified (do NOT re-litigate these as findings unless you find a REASON they are wrong): a fresh vite build shows the heavy modules now land in lazy chunks and the entry closure = 1,825,278 bytes; VERIFY_DIST=1 vitest tests/build/vendorPdfLazy.test.js passes (8/8); tests/domain/partyImpact.test.js + tests/domain/events/partyEventLinkage.test.js pass (18/18).
+`
+
+const FINDINGS_SCHEMA = {
+  type: 'object',
+  properties: {
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          file: { type: 'string' },
+          line: { type: 'number' },
+          title: { type: 'string' },
+          detail: { type: 'string' },
+          severity: { type: 'string', enum: ['high', 'medium', 'low'] },
+        },
+        required: ['file', 'title', 'detail', 'severity'],
+      },
+    },
+  },
+  required: ['findings'],
+}
+
+const VERDICT_SCHEMA = {
+  type: 'object',
+  properties: {
+    isReal: { type: 'boolean' },
+    reasoning: { type: 'string' },
+  },
+  required: ['isReal', 'reasoning'],
+}
+
+const LENSES = [
+  {
+    key: 'correctness',
+    prompt: `${CONTEXT}
+Lens: CORRECTNESS. Read the actual diff and the touched files in full. Hunt for real defects: does the moved const differ in ANY byte from the original (diff the object literal carefully — keys, values, strings)? Does the import/re-export in partyImpact.js preserve semantics for every consumer (worldPulse barrel export *, direct imports in tests, the two internal uses at ~lines 115/348)? Any circular-import hazard (partyImpactKinds must import nothing)? Any consumer of partyImpact.js or the barrel that could now see an undefined binding? Check src/ AND tests/ with grep. Return only defects you can substantiate with file:line evidence.`,
+  },
+  {
+    key: 'bundle-regression',
+    prompt: `${CONTEXT}
+Lens: BUNDLE-REGRESSION RISK. The point of the change is keeping the worldPulse apply graph OUT of the entry chunk. Look for anything that could silently re-anchor it or make the ratchet flaky: (a) any OTHER eager module (reachable from src/store/index.js or src/main.jsx without a dynamic import boundary) that statically imports a heavy worldPulse module (applyWorldPulse, relationshipEvolution, npcAgency, factionCompetition, relationshipMemory, relationshipHierarchy, institutionLifecycle, tierResourceDynamics, populationDynamics, partyImpact) — trace edges with grep, and confirm eagerness before reporting; (b) the new budget 1_915_000: is ~5% headroom consistent with the file's stated convention and prior value? Is the updated comment block's arithmetic right (417,151+655,647+512,248+30,041+193,160+17,031 = 1,825,278)?; (c) is there any test that pins the OLD import path (partyEventLinkage importing from partyImpact.js) that would now fail or become vacuous? Report only substantiated issues.`,
+  },
+  {
+    key: 'conventions',
+    prompt: `${CONTEXT}
+Lens: CONVENTIONS & MAINTAINABILITY. Compare the new leaf module against the repo's existing leaf-module precedent (src/domain/worldPulse/warStressorTypes.js, simulationRules.js): header style, why-comment quality, naming. Check the comment edits in partyEventLinkage.js / partyImpact.js / vendorPdfLazy.test.js for statements that are wrong or will rot (e.g. sizes/claims that contradict the code). Check ESLint would pass on the three touched src files (run npx eslint on them in ${CWD}). Report only substantiated issues.`,
+  },
+]
+
+phase('Review')
+const results = await pipeline(
+  LENSES,
+  l => agent(l.prompt, { label: `review:${l.key}`, phase: 'Review', schema: FINDINGS_SCHEMA }),
+  (review, lens) => parallel((review?.findings || []).map(f => () =>
+    agent(
+      `${CONTEXT}
+You are an adversarial verifier. A reviewer (lens: ${lens.key}) claims this defect in the working diff:
+
+  file: ${f.file}${f.line ? `:${f.line}` : ''}
+  title: ${f.title}
+  detail: ${f.detail}
+  severity: ${f.severity}
+
+Read the actual files in ${CWD} and try to REFUTE it. It is only real if the code as written actually exhibits the problem AND it matters for this change's goal (correct behavior + heavy worldPulse graph stays out of the entry chunk + honest docs). Style nitpicks that the repo's own precedent contradicts are not real. Default to isReal=false when uncertain.`,
+      { label: `verify:${f.title.slice(0, 40)}`, phase: 'Verify', schema: VERDICT_SCHEMA },
+    ).then(v => ({ ...f, lens: lens.key, verdict: v }))
+  ))
+)
+
+const confirmed = results.filter(Boolean).flat().filter(Boolean).filter(f => f.verdict?.isReal)
+return { confirmed, totalRaw: results.filter(Boolean).flat().filter(Boolean).length }

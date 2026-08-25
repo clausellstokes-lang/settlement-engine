@@ -1,7 +1,7 @@
 /**
  * FounderBadge.jsx — Small pill marking a Founder Lifetime account.
  *
- * The Founder tier is a 30-seat one-time-purchase Cartographer grant.
+ * The Founder tier is a 500-seat one-time-purchase Cartographer grant.
  * It's the sort of thing supporters appreciate visible acknowledgement
  * of, both on their own dossiers and (when Gallery ships) on public
  * pages.
@@ -18,7 +18,6 @@
 import { Crown } from 'lucide-react';
 import { FS, INK } from '../theme.js';
 import { useStore } from '../../store/index.js';
-import { useIconsOn } from './IconsContext.js';
 
 const SIZES = {
   sm: { fontSize: FS.micro,  iconSize: 9,  pad: '1px 5px',  gap: 3, radius: 3 },
@@ -28,7 +27,6 @@ const SIZES = {
 
 export default function FounderBadge({ size = 'md', force = false, style }) {
   const isFounder = useStore(s => s.isFounder?.() ?? false);
-  const iconsOn = useIconsOn();
   if (!force && !isFounder) return null;
 
   const s = SIZES[size] || SIZES.md;
@@ -58,7 +56,7 @@ export default function FounderBadge({ size = 'md', force = false, style }) {
         ...style,
       }}
     >
-      {iconsOn && <Crown size={s.iconSize} aria-hidden="true" />}
+      <Crown size={s.iconSize} aria-hidden="true" />
       Founder
     </span>
   );

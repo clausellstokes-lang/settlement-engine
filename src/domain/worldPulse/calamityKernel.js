@@ -42,24 +42,12 @@ import { collectRealizedEmigrationEvents, dispatchMigrations } from './migration
 import { migrationActive } from '../spatial/migration.js';
 import { distributeMigrants, applyPopulationOutcomeToSettlement } from './populationDynamics.js';
 import {
-  calamityEnabled, annualHazard, rollStrike, withinCooldown, disasterTypeFor,
+  calamityEnabled, annualHazard, rollStrike, withinCooldown, disasterTypeFor, stampTitle,
   selectStrikeTargets, planInstitutionFate, resolvePopulationLoss, CALAMITY_TUNING,
   exposureMultiplier, normalizeExposure, severityScaleFor, severityKFactorFor,
   DEFAULT_CALAMITY_SEVERITY, CALAMITY_SEVERITY_BANDS,
 } from '../spatial/calamity.js';
-// The provenance law (domain→domain). A cascade seat carries the SOURCE tier's
-// borrowed `required`, so the collapse pool asks the law, never the raw flag.
-import { hasOwnRequiredContract } from '../generationOwnership.js';
 import { lifecycleStatusOf } from './settlementLifecycleFirstClass.js';
-import { pickLine, CALAMITY_TITLES, CALAMITY_SUMMARIES, CALAMITY_REASONS } from './eventProse.js';
-// W-K K3 THE DISASTER BUFFER (docs/DESIGN_MAGIC_ECONOMY.md §5). An EXTENSION of this
-// kernel, never a rewrite of it: every buffer read is behind a `buffer` argument that
-// is null unless magicEconomyEnabled is lit, and a null buffer leaves every expression
-// below term-for-term what it was.
-import {
-  bufferInputFor, resolveDisasterRelief, drawBufferStores, bufferReceipt,
-  writeMagicBufferLedger, readMagicBufferLedger,
-} from './magicBufferApply.js';
 
 // ── Kernel-local read shapes (0-hole discipline — no `any` holes) ─────────────
 /** @typedef {import('../spatial/distanceRead.js').SpatialDigest} SpatialDigest */
@@ -228,17 +216,13 @@ function applyStrikeToRoster(institutions, targets) {
   // not just active, means a same-name lesser blocks the demote and the greater
   // falls through to collapse/destroy instead. [spatial-engine-6]
   const alreadyStanding = (/** @type {string} */ n) => list.some((i) => String(i.name).toLowerCase() === n.toLowerCase());
-  // A sibling listed here can be COLLAPSED AWAY by the strike (planInstitutionFate
-  // keeps only the codepoint-first survivor), so this pool carries the same hard
-  // "no required institution is destroyed" bound as isStrikeTarget — and asks the
-  // same scoped question, so a borrowed cascade flag cannot fake immunity.
   /** @param {string} name @returns {string[]} the OTHER active non-required names sharing this name's category */
   const categoryMembers = (name) => {
     const self = list.find((i) => String(i.name) === name);
     const cat = self ? String(self.category || '') : '';
     if (!cat) return [];
     return list
-      .filter((i) => String(i.name) !== name && !hasOwnRequiredContract(i)
+      .filter((i) => String(i.name) !== name && i.required !== true
         && String(i.status || 'active') === 'active' && String(i.category || '') === cat)
       .map((i) => String(i.name))
       .sort();
@@ -370,23 +354,14 @@ function withDisasterResponseCondition(settlement, tick) {
  * cosmetic flavor hint under `type` + optional DM freetext), the bounded loss, and the
  * roster/production reconcile. The exodus dispatch + persistence stay with the caller
  * (they touch the update array + migration ledger). No prose asserts a disaster kind.
- *
- * THE DISASTER BUFFER (W-K K3, design §5) enters here and ONLY here, so the organic
- * draw and the DM's forced strike are mitigated by the identical path. `buffer` is
- * null unless magicEconomyEnabled is lit, and a null buffer makes the three buffer
- * expressions below the identity: `struckTargets` IS `targets`, `loss` IS `rawLoss`,
- * and the settlement is not re-spread. That is why a dark world is byte-identical.
- *
  * @param {{ settlement: CalSettlement, item: CalSnapItem|undefined, id: string,
  *   year: number, tick: number, forkFn: (k: string) => { random: () => number },
- *   severity?: string|null, flavorText?: string|null,
- *   buffer?: import('./magicBufferApply.js').BufferInput|null }} args
+ *   severity?: string|null, flavorText?: string|null }} args
  * @returns {{ settlement: CalSettlement, stamp: CalStamp, loss: { deaths: number, exodus: number },
  *   roster: { removedNames: string[] }, prod: { severedExports: string[] },
- *   flavorHint: string, settlementName: string,
- *   relief: import('./magicBufferApply.js').DisasterRelief|null }}
+ *   flavorHint: string, settlementName: string }}
  */
-function resolveStrikeOnSettlement({ settlement, item, id, year, tick, forkFn, severity, flavorText, buffer }) {
+function resolveStrikeOnSettlement({ settlement, item, id, year, tick, forkFn, severity, flavorText }) {
   const terrain = resolveSettlementTerrain(item);
   const flavorHint = disasterTypeFor(terrain); // COSMETIC — no mechanic branches on it.
   const density01 = density01Of(settlement);
@@ -402,32 +377,16 @@ function resolveStrikeOnSettlement({ settlement, item, id, year, tick, forkFn, s
   });
   // HARD BOUND: selectStrikeTargets filters `required` out BEFORE any draw.
 
-  // Aggregate population loss (bounded, severity-scaled within the walls). HOISTED
-  // above the roster apply so the buffer can weigh the WHOLE strike (buildings and
-  // people together) before anything is applied. Stream-safe by construction: this
-  // is a fork off its own key (`disaster:pop:*`), independent of every other fork, and
-  // the population it reads is untouched by the roster pass that used to precede it.
-  const popBefore = Math.max(0, Math.floor(num(settlement.population, 0)));
-  const rawLoss = resolvePopulationLoss({
-    population: popBefore, density01, rng: forkFn(`disaster:pop:${id}:${year}`), severityScale: severityScaleFor(severity),
-  });
-
-  // ── THE DISASTER BUFFER (§5): mitigation CONVERTS damage, it never deletes it ──
-  // What the wards hold is billed to named stocks in this same outcome. Null buffer
-  // (the lane dark) ⇒ the two constants below are the untouched originals.
-  const relief = buffer
-    ? resolveDisasterRelief({ settlement, targets, deaths: rawLoss.deaths, exodus: rawLoss.exodus, buffer })
-    : null;
-  const struckTargets = relief ? relief.struckTargets : targets;
-  const loss = relief ? { ...rawLoss, deaths: relief.deaths, exodus: relief.exodus } : rawLoss;
-
   // Institution fates + production reconcile (the M2 sever seam).
-  const roster = applyStrikeToRoster(/** @type {CalInstitution[]} */ (settlement.institutions || []), struckTargets);
+  const roster = applyStrikeToRoster(/** @type {CalInstitution[]} */ (settlement.institutions || []), targets);
   const prod = reconcileProductionAfterStrike(settlement.economicState, roster.removedNames);
   let s = /** @type {CalSettlement} */ ({ ...settlement, institutions: roster.institutions, economicState: prod.economicState });
-  // THE GRANARIES PAY, in the same outcome as the wards holding (§5's receipt line).
-  if (relief) s = drawBufferStores(s, relief.storesMonthsDrawn);
 
+  // Aggregate population loss (bounded, severity-scaled within the walls).
+  const popBefore = Math.max(0, Math.floor(num(s.population, 0)));
+  const loss = resolvePopulationLoss({
+    population: popBefore, density01, rng: forkFn(`disaster:pop:${id}:${year}`), severityScale: severityScaleFor(severity),
+  });
   const afterDeaths = popBefore - loss.deaths;
   s = {
     ...s,
@@ -447,11 +406,8 @@ function resolveStrikeOnSettlement({ settlement, item, id, year, tick, forkFn, s
   // cosmetic flavor hint (save-shape unchanged); optional DM `flavorText` is freetext.
   const settlementName = String(item?.name || s.name || id);
   const stamp = /** @type {CalStamp} */ ({
-    type: flavorHint, name: pickLine(CALAMITY_TITLES, `${settlementName}::${year}`, { name: settlementName, year }), year, tick,
-    // The stamp is the PERMANENT record of what actually happened, so it counts the
-    // institutions that FELL, not the ones the strike aimed at. Dark buffer ⇒
-    // struckTargets IS targets ⇒ the stamp is byte-identical.
-    deaths: loss.deaths, exodus: loss.exodus, k: struckTargets.length, targets: struckTargets,
+    type: flavorHint, name: stampTitle(settlementName, year), year, tick,
+    deaths: loss.deaths, exodus: loss.exodus, k: targets.length, targets,
     ...(flavorText ? { flavorText: String(flavorText) } : {}),
   });
   s = {
@@ -463,7 +419,7 @@ function resolveStrikeOnSettlement({ settlement, item, id, year, tick, forkFn, s
   };
   // The legitimacy hit → coup-readable pressure (existing mechanism).
   s = withDisasterResponseCondition(s, tick);
-  return { settlement: /** @type {CalSettlement} */ (s), stamp, loss, roster, prod, flavorHint, settlementName, relief };
+  return { settlement: /** @type {CalSettlement} */ (s), stamp, loss, roster, prod, flavorHint, settlementName };
 }
 
 // ── FORCE_CALAMITY — the registrable-shape DM verb (NOT registered; W-COMPOSER-2 lift) ─
@@ -475,39 +431,27 @@ function resolveStrikeOnSettlement({ settlement, item, id, year, tick, forkFn, s
  * handler) threads the exodus dispatch + persistence through the same buildExodusOutcome
  * path the organic loop uses. Deferred: the actual manifest registration + live handler
  * wiring ride the W-COMPOSER-2 realm-verb lift (this is the registrable SHAPE only).
- * THE BUFFER IS OPTIONAL AND UNWIRED ON THIS PATH, deliberately, and recorded so a
- * later reader finds a deferral rather than an oversight. The parameter exists and is
- * honoured, so a forced strike is mitigated by the identical §5 path the annual draw
- * uses; what is missing is the CALLER. realmVerbExecution's FORCE_CALAMITY case owns
- * that call site, it belongs to another slice's ownership, and lighting it means
- * threading the ward-charge ledger write back out through the verb's patch set. Adding
- * the argument here without touching that file keeps the DM verb byte-identical today
- * and makes wiring it a one-line change when its owner is ready.
- *
  * @param {{ settlement: CalSettlement, item: CalSnapItem|undefined, id: string,
  *   year: number, tick: number, forkFn: (k: string) => { random: () => number },
- *   severity?: string|null, flavorText?: string|null,
- *   buffer?: import('./magicBufferApply.js').BufferInput|null }} args
+ *   severity?: string|null, flavorText?: string|null }} args
  */
-export function forceCalamityStrike({ settlement, item, id, year, tick, forkFn, severity, flavorText, buffer }) {
+export function forceCalamityStrike({ settlement, item, id, year, tick, forkFn, severity, flavorText }) {
   const band = String(severity || DEFAULT_CALAMITY_SEVERITY);
   const result = resolveStrikeOnSettlement({
     settlement, item, id, year, tick, forkFn,
     severity: Object.prototype.hasOwnProperty.call(CALAMITY_SEVERITY_BANDS, band) ? band : DEFAULT_CALAMITY_SEVERITY,
-    flavorText, buffer: buffer || null,
+    flavorText,
   });
   return {
     settlement: result.settlement,
     stamp: result.stamp,
     loss: result.loss,
-    relief: result.relief,
     receipt: {
       id, kind: 'strike', forced: true, type: result.stamp.type, severity: band,
       deaths: result.loss.deaths, exodus: result.loss.exodus,
       k: result.stamp.targets.length, targets: result.stamp.targets,
       removed: result.roster.removedNames, severedExports: result.prod.severedExports,
       demotedTier: result.settlement.tier,
-      ...(result.relief ? { relief: bufferReceipt(result.relief) } : {}),
     },
   };
 }
@@ -597,13 +541,6 @@ export function advanceCalamity({ settlementUpdates, worldState, snapshot, diges
   /** @type {Array<Record<string, unknown>>} */
   const receipts = [];
   let changed = false;
-  // THE WARD RESERVES (§5). Read once, folded back once. A dark lane never builds the
-  // draft (bufferInputFor answers null for every settlement), so `bufferDraft` stays
-  // the empty object, `bufferTouched` stays false, and the ledger write below is never
-  // reached: no key materializes behind a dark switch.
-  /** @type {import('./magicBufferApply.js').MagicBufferLedger} */
-  const bufferDraft = { ...(readMagicBufferLedger(worldState) || {}) };
-  let bufferTouched = false;
 
   // Codepoint-sorted settlement order (deterministic strike sequencing).
   const ordered = items
@@ -648,29 +585,14 @@ export function advanceCalamity({ settlementUpdates, worldState, snapshot, diges
     const settlement0 = /** @type {CalSettlement} */ (nextUpdates[ui].settlement);
     if (!settlement0) continue;
 
-    // ── THE DISASTER BUFFER (§5) — K2's regime reading supplies BOTH the exploitation
-    // gate and the economy axis (law 3: this kernel derives neither), and the ward
-    // reserve arrives with its banded dwell already applied. Null while the lane is
-    // dark, which makes every buffer expression downstream the identity. ──
-    const buffer = bufferInputFor({ rules, worldState: nextWorldState, item, id, year });
-
     // ── Resolve the strike through the SHARED path (organic ≡ force at natural
     // severity). All draws forked off the settlement-year seed; PROSE is bucket-
     // neutral (the mechanism is type-blind, so is its voice). ──
     const struck = resolveStrikeOnSettlement({
-      settlement: settlement0, item, id, year, tick, forkFn, severity: null, buffer,
+      settlement: settlement0, item, id, year, tick, forkFn, severity: null,
     });
-    const { stamp, loss, roster, prod, settlementName, relief } = struck;
+    const { stamp, loss, roster, prod, settlementName } = struck;
     let settlement = struck.settlement;
-
-    // THE RESERVE IS SPENT (§5's second-shock window made durable). Written even when
-    // the draw was zero and the recovery moved the number, so the stored year stays
-    // the year the reserve was last true; a record that recovered to full is dropped
-    // by writeMagicBufferLedger rather than persisted.
-    if (buffer) {
-      bufferDraft[id] = { charge01: relief ? relief.chargeAfter01 : buffer.charge01, year };
-      bufferTouched = true;
-    }
 
     // Write the mutated settlement back into the update set.
     nextUpdates[ui] = { ...nextUpdates[ui], settlement };
@@ -712,17 +634,9 @@ export function advanceCalamity({ settlementUpdates, worldState, snapshot, diges
       k: stamp.targets.length, targets: stamp.targets, removed: roster.removedNames,
       severedExports: prod.severedExports, demotedTier: settlement.tier,
       exposureNote: 'Struck where the geography is most exposed.',
-      // §5's receipt: what the wards held, and what paid for it. Absent when the lane
-      // is dark or when nothing was absorbed, so a receipt never boasts about a buffer
-      // that did nothing.
-      ...(relief ? { relief: bufferReceipt(relief) } : {}),
     });
     newsEntries.push(strikeNews(id, settlementName, stamp.name, loss, stamp.targets.length, tick, now));
   }
-
-  // Fold the ward reserves back, DROP-WHEN-EMPTY. Skipped entirely when the lane was
-  // dark, so a dormant world is not even offered the chance to grow a key.
-  if (bufferTouched) nextWorldState = writeMagicBufferLedger(nextWorldState, bufferDraft);
 
   return { settlementUpdates: nextUpdates, worldState: nextWorldState, changed, newsEntries, receipts };
 }
@@ -811,11 +725,7 @@ function strikeNews(id, settlementName, stampName, loss, k, tick, now) {
     severity: 0.8,
     score: 88,
     headline: stampName,
-    summary: pickLine(CALAMITY_SUMMARIES, `${id}::${tick}`, {
-      name: settlementName,
-      ruin: `${k === 1 ? 'an institution lies' : `${k} institutions lie`} in ruin`,
-      deaths: loss.deaths,
-    }),
+    summary: `A calamity has struck ${settlementName}: ${k === 1 ? 'an institution lies' : `${k} institutions lie`} in ruin, about ${loss.deaths} dead, and many more take to the roads.`,
     kind: 'applied',
     impactKind: 'calamity',
     channelType: 'disaster',
@@ -824,7 +734,7 @@ function strikeNews(id, settlementName, stampName, loss, k, tick, now) {
     channelIds: [],
     sourceEventId: `calamity.${id}.${tick}`,
     tags: ['world_pulse', 'calamity', 'disaster'],
-    reasons: [pickLine(CALAMITY_REASONS, `${id}::${tick}::reason`)],
+    reasons: ['The calamity struck where the land lies most exposed — a reckoning of geography.'],
   };
 }
 

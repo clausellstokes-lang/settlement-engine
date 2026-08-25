@@ -1,0 +1,80 @@
+export const meta = {
+  name: 'fp-cycle6-lane-b-es5-es6',
+  description: 'Cycle 6 Lane B: ES-5 then ES-6, continuing the espionage family. Both ride espionageEnabled; no new flag keys.',
+  phases: [
+    { title: 'ES-5', detail: 'the next espionage wave' },
+    { title: 'Verify 5', detail: 'adversarial verification' },
+    { title: 'ES-6', detail: 'the wave after' },
+    { title: 'Verify 6', detail: 'adversarial verification' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE; a doc overstatement is a STOP-and-report, never a silent correction. Work in ${TREE}. Hard-gate with the \`cd\` FIRST: \`cd ${TREE} && [ "$(git branch --show-current)" = "claude/composite-r4" ] || exit 1\`.
+
+⚠⚠ **A SECOND BUILD LANE IS RUNNING CONCURRENTLY** (Lane A: the disposition gate blocker, touching \`treatyBreach.js\` / \`realmVerbExecution.js\` / \`dispositionNews.js\` / \`lineageClaim.js\` / \`lineageMemberBirth.js\`). Your file sets are disjoint by design. NEVER touch, stage, revert or clean a file you did not author. Commit with EXPLICIT PATHSPECS and verify \`git diff --cached --name-only\` against your EXPECTED set BY NAME AND COUNT. ⚠ \`scripts/mutation-coverage-manifest.json\` is the one hard serializer both lanes may touch: edit it LAST, re-read at HEAD immediately before splicing, SPLICE RAW TEXT (\`json.dumps\` reformats ~1,972 lines).
+
+⭐ USE THE SCRIPTS. \`sh scripts/gate-mutex.sh --wait\` before EVERY vitest run (⛔ never hand-spell \`ps aux | grep -c "[v]itest"\`). \`sh scripts/ratchet-inventory.sh <walker> <base> [head]\` for the ratchet half — ⛔ never hand-read an inventory. ⚠ KNOWN: that script CANNOT read \`tests/lint/seedLoopTotality.walker.test.js\`; it exits 2 at the base ref, so fall back to archive-vs-archive output comparison there. Read gates ONLY via \`sh scripts/gate-tail.sh\`; never read an exit code through a pipe.
+⚠ zsh does NOT word-split unquoted parameters.
+⛔ DO NOT edit, stage or commit \`docs/FABLE_VALIDATION_QUEUE.md\`. Compose your row and RETURN IT AS TEXT.
+
+PROTOCOL: NEVER stash/reset/clean/checkout-family. python3 byte-scan for NUL bytes. Strict ceiling 1313; NEW modules carry a per-file ZERO strict baseline — satisfy by NARROWING, never a cast. ⛔ Do NOT tighten the shared domain-strict ratchet even when it reports slack. \`tests/fixtures/\`, \`pulseKernel.js\`, \`applyWorldPulse.js\` UNTOUCHABLE. Navigate by SYMBOL. ⚠ The anchored-negatives walker's \`// anchored:\` lookback is EXACTLY ONE LINE.
+
+⚠⚠ THE FIVE PIN-VACUITY SHAPES — audit every pin you write against all five: (1) compares a function against itself; (2) operators that pass on equality; (3) a claim in a header no pin implements — A COMMENT IS NOT A PIN; (4) two guards over one job, each invisible behind the other; (5) CEILING SATURATION — both operands clamped at a bound, so equality holds no matter what the code does. ⚠ A term that can only ever be ZERO is UNREACHABLE, not unpinned.
+
+⚠ RECENT MEASURED FACTS FROM THIS FAMILY, so you do not re-derive them: \`espionageEnabled\` was minted at ES-0 (\`55674790\`) — ES-1..ES-7 all RIDE it and mint nothing. ES-1's veil law lives at \`declaredPurposeClassOf\`, the single public reader, NOT at the mint. \`insideAssetAt\` has NO PRODUCER under \`src/\`, so the \`delta\` tap is unreachable in a running world and is DECLARED dead with a producer census guarding it. The ES-4 lighting condition reads SATISFIED and \`evaluateSovereigntyLighting\` has no runtime consumer.
+
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE. Never present the second as the first.`
+
+const VERIFIER_LAWS = `
+
+⚠⚠ VERIFIER DISCIPLINE. Every execution inside a \`git archive\` of the exact commit you verify; symlink node_modules; \`rm -f\` THE SYMLINK before removing the tree. Never edit the live tree. ⚠ RE-RUN EVERY GATE THE REPORT QUOTES at the committed sha — five false receipts have landed in this program and the code was fine nearly every time. ⚠ COMPARE LIKE WITH LIKE: archive against archive, never archive against live. ⚠ A MUTANT THAT PLANTS NOTHING GREENS. ⚠ YOUR OWN PROBE IN THE TREE IS A CONTAMINATION CLASS — remove it and RE-RUN rather than subtracting on paper.`
+
+const WAVES = [
+  { id: 'ES-5', phase: 'ES-5', vphase: 'Verify 5' },
+  { id: 'ES-6', phase: 'ES-6', vphase: 'Verify 6' },
+]
+
+let prev = null
+const results = []
+for (const w of WAVES) {
+  phase(w.phase)
+  const build = await agent(LAWS + `
+
+YOU ARE THE ${w.id} IMPLEMENTER. Rides \`espionageEnabled\`; mints NO flag.
+
+⛔ **READ THE NORMATIVE SPEC FIRST AND REPORT WHAT IT ACTUALLY SAYS.** It is the ${w.id} block of \`docs/DESIGN_FP_ARCH_ES.md\` — navigate by SYMBOL; that volume's §1 forbids line-number navigation. Read it WHOLE, plus the sections it cites, plus the ES leaves you will consume, AT THE TREE rather than from any report.
+
+⚠ **VERIFY YOUR PREDECESSORS' LANDED SHAPES BEFORE CONSUMING THEM.** ES-1 through ES-4 all landed, three of them after a rejection and repair, so their shipped shape differs from their original charters in places. Read \`errandMint.js\`, \`espionageMissions.js\`, \`espionageGauntlet.js\`, \`espionageTap.js\`, \`espionageProducts.js\` and \`espionageProductStage.js\` at HEAD.
+
+⛔ **IF THE SPEC'S PREMISE IS FALSE AT THE TREE, STOP AND REPORT.** That has happened repeatedly in this family: a charter claimed a projection "already owns the audience split" when the file had zero occurrences of it; another claimed a wave would flip a condition "with no edit to the instrument", which could not have been true of any wave. A doc overstatement is a STOP-and-report, never a silent correction.
+
+⛔ **DO NOT LIGHT ANY FLAG** and do not edit \`DEFAULT_SIMULATION_RULES\`. Lighting is owner-held at the terminal soak.
+
+PINS: four-fence + every guard door pinned INDIVIDUALLY; lifecycle totality (create/read/persist/regenerate/undo/import, each by executed round-trip — the write that survives one path and ghosts another is this estate's most-bitten class and it bit twice this cycle); every negative assertion through \`tests/helpers/anchoredNegatives.js\` or an on-line one-line \`// anchored:\` reason.
+
+${prev ? '⚠ YOUR PREDECESSOR IN THIS CHAIN REPORTED: ' + JSON.stringify(prev).slice(0, 5000) + '\nVerify its landed shape against the TREE, never against its report.' : ''}
+
+Wave-end attribution per the LAWS, ratchet half BY THE SCRIPT. COMPOSE your ledger row and RETURN IT AS TEXT.
+
+RETURN JSON: {commits, specPremisesChecked, files, gates, goldenShifts, stopReports, judgments, vacuitySelfAudit, ledgerRowText, notes}.`, { label: `build:${w.id}`, phase: w.phase, model: 'opus' })
+
+  phase(w.vphase)
+  const verdict = await agent(LAWS + VERIFIER_LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER FOR ${w.id}. Default posture: the implementer is WRONG until executed evidence says otherwise. REFUTE. The implementer reported: ` + JSON.stringify(build).slice(0, 12000) + `
+
+VERIFY BY EXECUTION: (1) EVERY pin NON-VACUOUS — plant the mutant that should red each, confirm it reds, and audit each against the five vacuity shapes. (2) RE-RUN EVERY QUOTED GATE at the committed sha. (3) Dormancy byte-identity, run by you. (4) Guard doors deleted INDIVIDUALLY. (5) Lifecycle totality by executed round-trip. (6) No flag minted or lit; \`simulationRules.js\` diff is zero-line. (7) Wave-end attribution both granularities, archive-vs-archive, ratchet half via the script. (8) New tests use the anchored-negatives helper. (9) strict 1313 and per-file zero; byte-scans; staged-set completeness by name and count.
+
+A finding is only a finding if you EXECUTED the thing that proves it. RETURN structured JSON only.`, { label: `verify:${w.id}`, phase: w.vphase, model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+  results.push({ wave: w.id, build, verdict })
+  if (verdict && verdict.verdict === 'REJECT') {
+    log(`${w.id} REJECTED — chain STOPS for the chair.`)
+    break
+  }
+  prev = build
+}
+
+return { results }

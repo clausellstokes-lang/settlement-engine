@@ -4,7 +4,7 @@
  * Reads the LIVE worldState ledgers (deployments / tradeWarState / dispositionStats)
  * + the live regional graph (war_front coalitions) through the pure
  * domain/display/warStatus helpers and renders the current war / siege /
- * trade-war / realm contest records. This is the LIVE read-path the plan flags as
+ * trade-war / disposition standings. This is the LIVE read-path the plan flags as
  * missing — the cards reflect the post-pulse world, not stale generation fields.
  *
  * INERT WHEN ABSENT: hasLiveWarState gates the whole block; a no-war campaign
@@ -21,14 +21,10 @@ import {
   hasLiveWarState,
   liveSieges,
   liveTradeWars,
-  REALM_CONTEST_RECORD_HELP,
-  REALM_CONTEST_RECORD_LABEL,
 } from '../../domain/display/warStatus.js';
 import { liveBlockades, hasLiveBlockades } from '../../domain/display/navalDisplay.js';
 import { BLUE, BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, RED, sans, swatch } from '../theme.js';
 import WarCausalBrief from './WarCausalBrief.jsx';
-import { AffectedSettlements } from './AddressChain.jsx';
-import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 
 function nameFor(nameById, id) {
   return nameById.get(String(id)) || String(id);
@@ -41,10 +37,7 @@ const TONE_ICON = { danger: Swords, trade: ArrowLeftRight, neutral: Flag };
 
 // `heading` (not `title`) — a rendered heading div, never a native OS tooltip
 // (keeps these rows off the title= census the guidance walker ratchets).
-// `addressIds` — the settlement save ids this row concerns (THE NEWS ADDRESS LAW):
-// rendered as LINKS below the detail so a DM can jump to each settlement's dossier.
-// The prose heading is left untouched (it stays authored copy off the voice census).
-function StatusRow({ tone = 'neutral', heading, detail, addressIds = [] }) {
+function StatusRow({ tone = 'neutral', heading, detail }) {
   const accent = tone === 'danger' ? RED : tone === 'trade' ? BLUE : GOLD;
   const KindIcon = TONE_ICON[tone] || Flag;
   return (
@@ -54,16 +47,12 @@ function StatusRow({ tone = 'neutral', heading, detail, addressIds = [] }) {
       padding: '8px 10px',
       border: `1px solid ${BORDER2}`,
       borderLeft: `3px solid ${accent}`,
+      borderRadius: 6,
       background: CARD,
     }}>
       <KindIcon size={14} color={accent} aria-hidden style={{ gridRow: '1 / span 2', marginTop: 2, flexShrink: 0 }} />
       <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.3 }}>{heading}</div>
       {detail && <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>{detail}</div>}
-      {addressIds.length > 0 && (
-        <div style={{ gridColumn: 2, marginTop: 2 }}>
-          <AffectedSettlements ids={addressIds} label="Settlements" />
-        </div>
-      )}
     </div>
   );
 }
@@ -84,7 +73,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
   const count = sieges.length + blockades.length + deployments.length + tradeWars.length + standings.length;
 
   return (
-    <Section heading="War, Trade and Faith" count={count}>
+    <Section title="War, Trade and Faith" count={count}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         {sieges.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
@@ -97,7 +86,6 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                 <StatusRow
                   key={`siege-${siege.targetId}`}
                   tone="danger"
-                  addressIds={[siege.targetId, ...siege.coalition]}
                   heading={isCoalition
                     ? `The War of ${targetName}, a coalition besieging the walls`
                     : `${attackers[0] || 'An army'} lays siege to ${targetName}`}
@@ -127,13 +115,12 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                 <StatusRow
                   key={`blockade-${b.portId}`}
                   tone="danger"
-                  addressIds={[b.portId, ...b.blockaders]}
                   heading={isCoalition
                     ? `${portName} is blockaded by a coalition fleet`
                     : `${fleets[0] || 'A hostile fleet'} blockades ${portName}`}
                   detail={isCoalition
-                    ? `${phrase}. ${fleets.join(', ')} command the sea approaches.`
-                    : `${phrase}. The sea approaches are held.`}
+                    ? `${phrase} — ${fleets.join(', ')} command the sea approaches.`
+                    : `${phrase} — the sea approaches are held.`}
                 />
               );
             })}
@@ -146,7 +133,6 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
             {deployments.map(dep => (
               <StatusRow
                 key={`deploy-${dep.homeId}`}
-                addressIds={[dep.homeId, dep.targetId]}
                 heading={`${nameFor(nameById, dep.homeId)}'s army is committed against ${nameFor(nameById, dep.targetId)}`}
                 detail={`Deployed since tick ${dep.sinceTick}; home garrison thinned, war chest bleeding.`}
               />
@@ -161,7 +147,6 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
               <StatusRow
                 key={`trade-${war.prizeId}`}
                 tone="trade"
-                addressIds={[war.winnerId, war.buyerId, war.incumbentId].filter(Boolean)}
                 heading={`The ${war.commodityLabel} Trade War`}
                 detail={`${nameFor(nameById, war.winnerId)} now supplies ${nameFor(nameById, war.buyerId)}${war.incumbentId ? `, displacing ${nameFor(nameById, war.incumbentId)}` : ''}.`}
               />
@@ -171,24 +156,20 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
 
         {standings.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-            <Subhead label={REALM_CONTEST_RECORD_LABEL} />
-            <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>
-              {REALM_CONTEST_RECORD_HELP}
-            </div>
+            <Subhead label="War standings" />
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {standings.map(s => {
                 const aggressor = s.score > 0;
                 return (
                   <span key={`disp-${s.id}`} style={{
                     display: 'inline-flex', alignItems: 'center', gap: 5,
-                    padding: '3px 8px',
+                    padding: '3px 8px', borderRadius: 6,
                     border: `1px solid ${BORDER2}`,
                     background: aggressor ? swatch.dangerBg : CARD_ALT,
                     color: aggressor ? RED : BODY,
                     fontFamily: sans, fontSize: FS.xxs, fontWeight: 800,
                   }}>
-                    <RealmEntityLink settlementSaveId={s.id} label={nameFor(nameById, s.id)} style={{ color: 'inherit' }} />
-                    <span>: {s.wins}W / {s.losses}L</span>
+                    {nameFor(nameById, s.id)}: {s.wins}W / {s.losses}L
                   </span>
                 );
               })}

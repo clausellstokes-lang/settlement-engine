@@ -16,7 +16,6 @@
  */
 
 import { localPropagationType } from '../domain/relationships/canonicalRelationship.js';
-import { effectiveNeighboursOf } from '../domain/relationships/effectiveNeighbours.js';
 
 // ── Effect categories ───────────────────────────────────────────────────────
 
@@ -74,11 +73,6 @@ function getStrength(save, modifiers = null) {
     economy:       (cfg.priorityEconomy  ?? 50) / 100,
     safety:        (cfg.priorityMilitary ?? 50) / 100,
     supply:        ((cfg.priorityEconomy ?? 50) + (cfg.priorityMilitary ?? 50)) / 200,
-    // priorityReligion is an INTENTIONAL proxy for political strength —
-    // config carries no dedicated political slider, and faction power /
-    // legitimacy live in the derived settlement state, not on the save config
-    // this helper reads. Documented as a proxy rather than rewired to avoid a
-    // display-fidelity behavior change here.
     political:     (cfg.priorityReligion ?? 50) / 100,
     defensibility: (cfg.priorityMilitary ?? 50) / 100,
   };
@@ -94,121 +88,57 @@ function getStrength(save, modifiers = null) {
 // ── Graph construction ──────────────────────────────────────────────────────
 
 /**
- * Normalize the optional campaignOf resolver into a `(save) => campaignId|null`
- * function. Accepts a Map<settlementIdString, campaignId> (from
- * campaignMembershipIndex) or a bare function. Absent ⇒ null (implicit-neutral
- * expansion disabled: buildGraph reads raw neighbourNetwork exactly as before).
- */
-function resolveCampaignOf(campaignOf) {
-  if (!campaignOf) return null;
-  if (typeof campaignOf === 'function') return (ss) => campaignOf(ss) ?? null;
-  if (campaignOf instanceof Map) {
-    return (ss) => campaignOf.get(String(ss?.id ?? ss?.settlement?.id ?? '')) ?? null;
-  }
-  return null;
-}
-
-/**
  * Build an adjacency list from all saved settlements.
  * Returns Map<settlementId, Array<{ targetId, relType, targetName }>>
  *
  * Uses savedSettlement.id as the canonical node identifier and resolves
  * neighbours by matching linkId across all settlements' networks.
- *
- * @param {Array<object>} savedSettlements
- * @param {{ campaignOf?: Map<string, any> | ((save: object) => any) }} [options]
- *   When `campaignOf` is supplied, each settlement's neighbour list is read
- *   through the effectiveNeighboursOf chokepoint: every co-campaign settlement
- *   with no explicit link becomes an implicit Neutral neighbour (owner order
- *   2026-07-22). Absent ⇒ STRICT NO-OP: raw neighbourNetwork only, byte-for-byte
- *   identical to the pre-neutral-neighbour behaviour (all existing callers +
- *   pins that pass no options are unchanged).
  */
-export function buildGraph(savedSettlements, options = {}) {
+export function buildGraph(savedSettlements) {
   const graph = new Map();
-  const campaignOf = resolveCampaignOf(options.campaignOf);
+  const idByLinkTarget = new Map(); // linkId+side → settlementId
 
-  // Group co-campaign saves once, so effectiveNeighboursOf can expand each
-  // settlement against its own campaign's members. Only populated when
-  // campaignOf is supplied.
-  const groups = new Map();
-  if (campaignOf) {
-    for (const ss of savedSettlements) {
-      const cid = campaignOf(ss);
-      if (cid == null) continue;
-      const key = String(cid);
-      const g = groups.get(key);
-      if (g) g.push(ss);
-      else groups.set(key, [ss]);
-    }
-  }
-
-  // Per-settlement EFFECTIVE neighbour list (explicit + implicit neutrals),
-  // computed ONCE through the chokepoint and reused by both passes below. With
-  // no campaignOf this is just the raw neighbourNetwork (strict no-op).
-  const effective = new Map();
-  for (const ss of savedSettlements) {
-    let network = ss.settlement?.neighbourNetwork || [];
-    if (campaignOf) {
-      const cid = campaignOf(ss);
-      if (cid != null) network = effectiveNeighboursOf(ss, groups.get(String(cid)) || []);
-    }
-    effective.set(ss.id, network);
-  }
-
-  // Build the resolution indexes ONCE instead of an O(settlements)
-  // inner scan per link (the old loop was O(N^2 * links) and also kept a dead
-  // idByLinkTarget map it never read).
-  //   - linkOwners:  linkId → settlement ids carrying that linkId (insertion
-  //     order preserved, so the first OTHER owner matches the old first-hit).
-  //   - idsByName:   settlement name → settlement ids with that name (a list, so
-  //     the first NON-self match still wins when a name is shared with self).
-  const linkOwners = new Map();
-  const idsByName = new Map();
-  const pushByName = (name, id) => {
-    if (name == null) return;
-    const ids = idsByName.get(name);
-    if (ids) { if (!ids.includes(id)) ids.push(id); }
-    else idsByName.set(name, [id]);
-  };
+  // Index: for each saved settlement, register all its link endpoints
   for (const ss of savedSettlements) {
     graph.set(ss.id, []);
-    pushByName(ss.name, ss.id);
-    pushByName(ss.settlement?.name, ss.id);
-    for (const link of effective.get(ss.id)) {
-      if (!link.linkId) continue;
-      const owners = linkOwners.get(link.linkId);
-      if (owners) owners.push(ss.id);
-      else linkOwners.set(link.linkId, [ss.id]);
+    const network = ss.settlement?.neighbourNetwork || [];
+    for (const link of network) {
+      // Each link has a linkId. The OTHER settlement sharing that linkId is the target.
+      // We store this settlement's id so we can resolve targets.
+      if (link.linkId) {
+        const key = `${link.linkId}::${ss.id}`;
+        idByLinkTarget.set(key, ss.id);
+      }
     }
   }
 
-  // Build edges: for each settlement's network entries, resolve the target by lookup.
+  // Build edges: for each settlement's network entries, find the target settlement
   for (const ss of savedSettlements) {
-    const network = effective.get(ss.id);
+    const network = ss.settlement?.neighbourNetwork || [];
     for (const link of network) {
       const relType = localPropagationType(link);
       const neighbourName = link.neighbourName || link.name;
 
-      // Implicit-neutral links carry a direct target hint (their synthetic
-      // linkId is one-sided, so the shared-owner lookup below would miss). This
-      // resolves them in one step; explicit links carry no targetId and fall
-      // through to the unchanged linkId → name resolution. The hint is the RAW
-      // target id (NOT stringified) so it matches the raw `ss.id` graph/saveIndex
-      // keys exactly — a numeric id kept numeric here, matching the explicit
-      // path's `owners.find(...)` raw result.
-      let targetId = link.targetId != null ? link.targetId : null;
-
-      // The OTHER settlement sharing this linkId is the target (first in order).
-      if (!targetId && link.linkId) {
-        const owners = linkOwners.get(link.linkId) || [];
-        targetId = owners.find(id => id !== ss.id) ?? null;
+      // Find the target settlement by matching linkId in other settlements
+      let targetId = null;
+      if (link.linkId) {
+        for (const other of savedSettlements) {
+          if (other.id === ss.id) continue;
+          const otherNetwork = other.settlement?.neighbourNetwork || [];
+          const hasLink = otherNetwork.some(l => l.linkId === link.linkId);
+          if (hasLink) {
+            targetId = other.id;
+            break;
+          }
+        }
       }
 
-      // Fallback: match by name (first NON-self match, matching the old find()).
-      if (!targetId && neighbourName != null) {
-        const match = (idsByName.get(neighbourName) || []).find(id => id !== ss.id);
-        if (match) targetId = match;
+      // Fallback: match by name
+      if (!targetId) {
+        const match = savedSettlements.find(
+          s => s.id !== ss.id && (s.name === neighbourName || s.settlement?.name === neighbourName)
+        );
+        if (match) targetId = match.id;
       }
 
       if (targetId) {
@@ -256,101 +186,65 @@ export function computeModifiers(settlementId, graph, saveIndex = null, currentM
     : null;
   const targetPop = targetSave ? getPopulation(targetSave) : 500;
 
-  // BFS wave: [targetId, relType, cumulativeDecay, depth, targetName]
-  // Processed level-by-level so the result is ORDER-INDEPENDENT. When a
-  // node is reachable via several equal-depth paths, the earlier shift()-wins
-  // BFS picked whichever link happened to be enqueued first — so re-ordering a
-  // settlement's links silently changed the displayed/exported numbers. We now
-  // pick the strongest path by an explicit deterministic comparator (greatest
-  // absolute decay-weighted magnitude, ties broken by relType then decay).
-  let frontier = edges.map(e => [e.targetId, e.relType, 1.0, 1, e.targetName]);
+  // BFS queue: [targetId, relType, cumulativeDecay, depth, targetName]
+  const queue = edges.map(e => [e.targetId, e.relType, 1.0, 1, e.targetName]);
 
-  /** Magnitude a candidate arrival would contribute, before asymmetry scaling. */
-  function pathMagnitude(relType, cumDecay) {
+  while (queue.length > 0) {
+    const [nodeId, relType, cumDecay, depth, nodeName] = queue.shift();
+    if (visited.has(nodeId) || depth > MAX_DEPTH) continue;
+    visited.add(nodeId);
+
     const prop = PROPAGATION_MATRIX[relType] || PROPAGATION_MATRIX.neutral;
-    let sum = 0;
-    for (const cat of CATEGORY_KEYS) sum += Math.abs(prop[cat]);
-    return sum * cumDecay;
-  }
 
-  /** Order-independent winner between two arrivals at the same node. */
-  function strongerArrival(a, b) {
-    const ma = pathMagnitude(a[1], a[2]);
-    const mb = pathMagnitude(b[1], b[2]);
-    if (ma !== mb) return ma > mb ? a : b;
-    if (a[1] !== b[1]) return a[1] < b[1] ? a : b; // tie: lexicographically smaller relType
-    return a[2] >= b[2] ? a : b;                   // final tie: larger cumulative decay
-  }
-
-  while (frontier.length > 0) {
-    // Collapse this level to one strongest arrival per not-yet-visited node, so
-    // the chosen path no longer depends on enqueue order.
-    const bestByNode = new Map();
-    for (const arrival of frontier) {
-      const [nodeId, , , depth] = arrival;
-      if (visited.has(nodeId) || depth > MAX_DEPTH) continue;
-      const prev = bestByNode.get(nodeId);
-      bestByNode.set(nodeId, prev ? strongerArrival(prev, arrival) : arrival);
+    // ── Tier-ratio: population asymmetry ────────────────────────────────
+    let tierRatio = 1.0;
+    const sourceSave = saveIndex?.get(nodeId);
+    if (sourceSave && targetSave) {
+      tierRatio = clamp(getPopulation(sourceSave) / targetPop, 0.3, 3.0);
     }
 
-    const nextFrontier = [];
-    for (const [nodeId, relType, cumDecay, depth, nodeName] of bestByNode.values()) {
-      visited.add(nodeId);
+    // ── Factor-delta: relative strength per category ────────────────────
+    const factorDeltas = {};
+    const sourceStrength = sourceSave
+      ? getStrength(sourceSave, currentModifiers?.get(nodeId))
+      : null;
 
-      const prop = PROPAGATION_MATRIX[relType] || PROPAGATION_MATRIX.neutral;
+    const sourceModifiers = {};
+    for (const cat of CATEGORY_KEYS) {
+      let value = prop[cat] * cumDecay;
 
-      // ── Tier-ratio: population asymmetry ────────────────────────────────
-      let tierRatio = 1.0;
-      const sourceSave = saveIndex?.get(nodeId);
-      if (sourceSave && targetSave) {
-        tierRatio = clamp(getPopulation(sourceSave) / targetPop, 0.3, 3.0);
+      if (sourceStrength && targetStrength) {
+        const srcS = sourceStrength[cat] || 0.05;
+        const tgtS = targetStrength[cat] || 0.05;
+        const fd = clamp(1 + (1 - tgtS / srcS) * 0.3, 0.5, 1.5);
+        factorDeltas[cat] = fd;
+        value *= tierRatio * fd;
       }
 
-      // ── Factor-delta: relative strength per category ────────────────────
-      const factorDeltas = {};
-      const sourceStrength = sourceSave
-        ? getStrength(sourceSave, currentModifiers?.get(nodeId))
-        : null;
-
-      const sourceModifiers = {};
-      for (const cat of CATEGORY_KEYS) {
-        let value = prop[cat] * cumDecay;
-
-        if (sourceStrength && targetStrength) {
-          const srcS = sourceStrength[cat] || 0.05;
-          const tgtS = targetStrength[cat] || 0.05;
-          const fd = clamp(1 + (1 - tgtS / srcS) * 0.3, 0.5, 1.5);
-          factorDeltas[cat] = fd;
-          value *= tierRatio * fd;
-        }
-
-        sourceModifiers[cat] = value;
-        totals[cat] += value;
-      }
-
-      sources.push({
-        settlementId: nodeId,
-        settlementName: nodeName,
-        relType,
-        depth,
-        decay: cumDecay,
-        tierRatio,
-        factorDeltas,
-        modifiers: sourceModifiers,
-      });
-
-      // Propagate further: enqueue this node's neighbours with compounded decay
-      const nextEdges = graph.get(nodeId) || [];
-      const nextDecay = cumDecay * prop.decay;
-
-      for (const edge of nextEdges) {
-        if (!visited.has(edge.targetId)) {
-          nextFrontier.push([edge.targetId, edge.relType, nextDecay, depth + 1, edge.targetName]);
-        }
-      }
+      sourceModifiers[cat] = value;
+      totals[cat] += value;
     }
 
-    frontier = nextFrontier;
+    sources.push({
+      settlementId: nodeId,
+      settlementName: nodeName,
+      relType,
+      depth,
+      decay: cumDecay,
+      tierRatio,
+      factorDeltas,
+      modifiers: sourceModifiers,
+    });
+
+    // Propagate further: enqueue this node's neighbours with compounded decay
+    const nextEdges = graph.get(nodeId) || [];
+    const nextDecay = cumDecay * prop.decay;
+
+    for (const edge of nextEdges) {
+      if (!visited.has(edge.targetId)) {
+        queue.push([edge.targetId, edge.relType, nextDecay, depth + 1, edge.targetName]);
+      }
+    }
   }
 
   return { totals, sources };
@@ -369,8 +263,8 @@ function buildSaveIndex(savedSettlements) {
  * One-call compute: build graph + compute modifiers for a settlement.
  * Uses tier-ratio and factor-delta for asymmetric effects.
  */
-export function getSettlementModifiers(settlementId, savedSettlements, options = {}) {
-  const graph = buildGraph(savedSettlements, options);
+export function getSettlementModifiers(settlementId, savedSettlements) {
+  const graph = buildGraph(savedSettlements);
   const saveIndex = buildSaveIndex(savedSettlements);
   return computeModifiers(settlementId, graph, saveIndex);
 }
@@ -385,13 +279,12 @@ export function getSettlementModifiers(settlementId, savedSettlements, options =
  *
  * Returns Map<settlementId, { totals, sources }>
  */
-export function getAllModifiers(savedSettlements, maxIterations = 4, options = {}) {
+export function getAllModifiers(savedSettlements, maxIterations = 4) {
   if (!savedSettlements?.length) return new Map();
 
-  const graph = buildGraph(savedSettlements, options);
+  const graph = buildGraph(savedSettlements);
   const saveIndex = buildSaveIndex(savedSettlements);
   let currentModifiers = null;
-  let lastResult = new Map();
 
   for (let iter = 0; iter < maxIterations; iter++) {
     const nextResult = new Map();
@@ -432,16 +325,17 @@ export function getAllModifiers(savedSettlements, maxIterations = 4, options = {
     for (const [id, mods] of nextResult) {
       currentModifiers.set(id, mods.totals);
     }
-    lastResult = nextResult;
   }
 
-  // On exhaustion return the LAST DAMPED result rather than a fresh
-  // undamped recompute. The old final pass recomputed totals from
-  // currentModifiers without re-applying the 0.8x damping, so a non-converging
-  // network returned numbers that disagreed with the damping it advertised (and
-  // with the early-converged return path). lastResult already carries the
-  // damped totals AND the full per-source breakdown for the same iteration.
-  return lastResult;
+  // Return last iteration's full result
+  const finalResult = new Map();
+  for (const ss of savedSettlements) {
+    finalResult.set(
+      ss.id,
+      computeModifiers(ss.id, graph, saveIndex, currentModifiers),
+    );
+  }
+  return finalResult;
 }
 
 // ── Formatting helpers ──────────────────────────────────────────────────────

@@ -21,8 +21,10 @@
  * three routes plus Cancel.
  */
 
+import { LogIn, Map, Download } from 'lucide-react';
 import {
-  BODY, BORDER, CARD, CARD_ALT, ELEV, FS, INK, SP, sans } from '../theme.js';
+  BODY, BORDER, CARD, CARD_ALT, ELEV, FS, INK, R, SP, sans,
+} from '../theme.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import Button from '../primitives/Button.jsx';
 import { t } from '../../copy/index.js';
@@ -44,6 +46,7 @@ export default function DossierLadderModal({ onClose, onCreateAccount, onCartogr
   const rungs = [
     {
       id: 'account',
+      Icon: LogIn,
       label: t('dossierExport.ladder.account.label'),
       description: t('dossierExport.ladder.account.description'),
       onClick: onCreateAccount,
@@ -51,6 +54,7 @@ export default function DossierLadderModal({ onClose, onCreateAccount, onCartogr
     },
     {
       id: 'cartographer',
+      Icon: Map,
       label: t('dossierExport.ladder.cartographer.label'),
       description: t('dossierExport.ladder.cartographer.description', { price: CARTOGRAPHER_PRICE }),
       onClick: onCartographer,
@@ -58,6 +62,7 @@ export default function DossierLadderModal({ onClose, onCreateAccount, onCartogr
     },
     {
       id: 'oneTime',
+      Icon: Download,
       label: t('dossierExport.ladder.oneTime.label'),
       description: t('dossierExport.ladder.oneTime.description', { price: SINGLE_DOSSIER.priceLabel }),
       onClick: onOneTime,
@@ -84,7 +89,7 @@ export default function DossierLadderModal({ onClose, onCreateAccount, onCartogr
         tabIndex={-1}
         style={{
           width: 'min(100%, 460px)', maxHeight: 'min(90vh, 680px)', overflow: 'auto',
-          border: `1px solid ${BORDER}`,
+          border: `1px solid ${BORDER}`, borderRadius: R.lg,
           background: CARD, boxShadow: ELEV[3], fontFamily: sans,
         }}
       >
@@ -104,6 +109,7 @@ export default function DossierLadderModal({ onClose, onCreateAccount, onCartogr
               type="button"
               variant={rung.variant}
               size="md"
+              icon={<rung.Icon size={16} />}
               busy={rung.busy}
               onClick={rung.onClick}
               fullWidth

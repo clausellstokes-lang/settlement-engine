@@ -14,11 +14,9 @@ import {
   distanceBand,
   freshnessBand,
   hasRumorLedgers,
-  HEADLINE_FRAMES,
   settlementRumors,
   whatPhrase,
 } from '../../src/domain/display/settlementRumors.js';
-import { WHAT_PHRASE_POOLS } from '../../src/domain/display/rumorPhrasePools.js';
 import { advanceRumorLedgers, rumorEventKey } from '../../src/domain/spatial/rumorNetwork.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
@@ -268,7 +266,7 @@ describe('read-model mechanics', () => {
       'army_homecoming', 'siege_lifted', 'conquest', 'field_battle', 'conflict_pressure',
       'protection_gap', 'coup_succeeded', 'coup_suppressed', 'faction_exhaustion',
       'faction_government_challenge', 'faction_rival_power_contest', 'faction_capture',
-      'hierarchy_cascade', 'authority_instability', 'occupation_lifted', 'occupation_vassalized', 'treaty_breached',
+      'hierarchy_cascade', 'authority_instability', 'occupation_lifted', 'occupation_vassalized',
       'faith_foothold_recruited', 'faith_pact_formed', 'religious_pressure', 'pantheon_ascendancy',
       'pantheon_twilight', 'moral_reckoning', 'belief_misjudgment',
       'stressor_birth_religious_conversion_fracture', 'stressor_birth_religious_pact_betrayal',
@@ -300,130 +298,9 @@ describe('read-model mechanics', () => {
     }
     expect(whatPhrase('')).toBe('unrest');
     expect(whatPhrase(null)).toBe('unrest');
-    expect(whatPhrase('treaty_breached')).toBe('an oath between realms broken');
     // An unknown future token degrades to readable words, never a raw slug.
     expect(whatPhrase('npc_some_future_arc')).toBe('some future arc');
     expect(whatPhrase('utterly_new_beat')).toBe('utterly new beat');
-  });
-
-  // ── HEADLINE FRAME variety (content-vt-2) ──────────────────────────────────
-  const NAMES = new Map([['s2', 'Thornwall']]);
-  const nameFor = (id) => NAMES.get(id) || id;
-  function renderHeadline(what, { eventRef, hopCount = 2, completeness01 = 0.9, settlementId = 's1' } = {}) {
-    const worldState = {
-      tick: 10,
-      spatialLedgers: { rumorLedgers: { [settlementId]: { k1: {
-        arrivalTick: 8, hopCount, completeness01, eventTick: 5, score: 40, eventRef,
-        content: { what, whereId: 's2', magnitude: 2, partyIds: ['s2'] },
-      } } } },
-    };
-    return settlementRumors({ worldState, settlementId, nameFor })[0].headline;
-  }
-  // hopCount/completeness that land each completeness band (thresholds 0.5 / 0.3).
-  const BANDS = {
-    firsthand: { hopCount: 0, completeness01: 1 },
-    outline: { hopCount: 2, completeness01: 0.9 },
-    vague: { hopCount: 2, completeness01: 0.4 },
-    thin: { hopCount: 2, completeness01: 0.2 },
-  };
-
-  it('every frame template carries its slots and no engine token (register)', () => {
-    const DENY = ['_', 'deploy', 'stressor', 'npc', 'impactkind', 'candidatetype', 'queued', 'applied'];
-    for (const [band, pool] of Object.entries(HEADLINE_FRAMES)) {
-      expect(pool.length, `${band} has variety`).toBeGreaterThanOrEqual(2);
-      for (const frame of pool) {
-        expect(frame.includes('{where}'), `${band}: "${frame}" carries {where}`).toBe(true);
-        if (band !== 'thin') {
-          expect(/\{[Ww]hat\}/.test(frame), `${band}: "${frame}" carries the subject`).toBe(true);
-        }
-        const lc = frame.toLowerCase();
-        for (const bad of DENY) {
-          expect(lc.includes(bad), `${band}: "${frame}" leaks "${bad}"`).toBe(false);
-        }
-      }
-    }
-  });
-
-  it('DETERMINISM: same event ref ⇒ same frame; frame is stable across viewers', () => {
-    for (const band of Object.keys(BANDS)) {
-      const a = renderHeadline('conflict_pressure', { eventRef: 'evt.stable.9', ...BANDS[band] });
-      const b = renderHeadline('conflict_pressure', { eventRef: 'evt.stable.9', ...BANDS[band] });
-      expect(a, band).toBe(b);
-      // Seed is the event ref, NOT the viewer — a different listening settlement
-      // hearing the SAME event frames it identically (the where is the same too).
-      const other = renderHeadline('conflict_pressure', { eventRef: 'evt.stable.9', settlementId: 's7', ...BANDS[band] });
-      expect(other, `${band} cross-viewer`).toBe(a);
-    }
-  });
-
-  it('the subject phrase + place ride EVERY selected frame (facts never move)', () => {
-    // Across many event refs (⇒ different frames), the fiction still names the
-    // subject phrase and the place — only the connective framing changes.
-    for (let i = 0; i < 40; i++) {
-      const h = renderHeadline('strategy_deploy', { eventRef: `e${i}`, ...BANDS.outline });
-      expect(h.includes('Thornwall'), h).toBe(true);
-      expect(h.includes('soldiers marching to war'), h).toBe(true);
-      expect(h.toLowerCase().includes('strategy deploy'), h).toBe(false);
-    }
-  });
-
-  it('ANTI-REPETITION: distinct event refs reach the whole pool of each band', () => {
-    // THE CARRIER MUST BE SINGLE-VOICED, and that is now a real constraint rather than an
-    // accident. This test counts DISTINCT RENDERED HEADLINES and reads that count as the
-    // number of reachable FRAMES — which is only sound while the subject phrase is
-    // constant across event refs. The legacy retrofit (RECEIPT_POOLS_LEGACY.md §3/§4)
-    // widened the subject phrase of 170 kinds, so a widened carrier makes this count
-    // frames × phrases instead: 'conflict_pressure' was the original carrier and now
-    // yields 32 (4 frames × 8 phrases), not 4.
-    //
-    // 'war_mobilization' is registered in WHAT_PHRASES and appears in NEITHER §3 nor §4,
-    // so it is single-voiced and stays that way — the retrofit is closed at 170 of 170
-    // and cannot consume it. tests/domain/rumorPhrasePools.test.js pins the same kind as
-    // its unwired control, so if that ever stops being true, this test's premise reds
-    // there by name rather than silently inflating a count here.
-    const SINGLE_VOICED = 'war_mobilization';
-    expect(WHAT_PHRASE_POOLS[SINGLE_VOICED], `${SINGLE_VOICED} must stay single-voiced for this count to mean frames`)
-      .toBeUndefined();
-    for (const [band, cfg] of Object.entries(BANDS)) {
-      const seen = new Set();
-      for (let i = 0; i < 300; i++) seen.add(renderHeadline(SINGLE_VOICED, { eventRef: `ev_${i}`, ...cfg }));
-      expect(seen.size, `${band} fully reachable`).toBe(HEADLINE_FRAMES[band].length);
-    }
-  });
-
-  it('a WIDENED carrier reaches frames × phrases — except in the subject-less thin band', () => {
-    // The positive counterpart of the pin above, and the reason it had to change: the
-    // same census over a widened kind now walks BOTH axes, so the disclosed prose shift is
-    // measured at the headline surface rather than asserted.
-    //
-    // THE THIN BAND IS THE EXCEPTION, AND IT IS A REAL PROPERTY, NOT A TOLERANCE. Its
-    // frames carry no {what} slot at all — the register test above encodes that as
-    // `if (band !== 'thin')` — because a rumor this degraded has stopped being about a
-    // specific subject and is only "trouble near {where}". So the widened pool CANNOT
-    // reach thin headlines, and thin stays at exactly its frame count. Anything else
-    // would mean a subject leaked into the vaguest band.
-    const pool = 1 + (WHAT_PHRASE_POOLS.conflict_pressure?.length ?? 0);
-    expect(pool, 'conflict_pressure must be wired for this pin to mean anything').toBeGreaterThan(1);
-    for (const [band, cfg] of Object.entries(BANDS)) {
-      const seen = new Set();
-      for (let i = 0; i < 300; i++) seen.add(renderHeadline('conflict_pressure', { eventRef: `ev_${i}`, ...cfg }));
-      const axes = band === 'thin' ? 1 : pool;
-      expect(seen.size, `${band}: frames × phrases`).toBe(HEADLINE_FRAMES[band].length * axes);
-    }
-  });
-
-  it('CANONICAL-AT-ZERO: a telling with no stable seed renders the original frame', () => {
-    // No eventRef and no ledger key seed ⇒ index-0 frame (the pre-content-vt-2
-    // wording), so any seedless path is byte-identical.
-    const worldState = {
-      tick: 10,
-      spatialLedgers: { rumorLedgers: { s1: { '': {
-        arrivalTick: 8, hopCount: 2, completeness01: 0.9, eventTick: 5, score: 40,
-        content: { what: 'conflict_pressure', whereId: 's2', magnitude: 2, partyIds: ['s2'] },
-      } } } },
-    };
-    const h = settlementRumors({ worldState, settlementId: 's1', nameFor })[0].headline;
-    expect(h).toBe('Merchants bring word of the drums of war in Thornwall');
   });
 
   it('activatedDeityNamesFrom reads ONLY the public embedded snapshots', () => {

@@ -1,23 +1,17 @@
-import { AlertTriangle, CheckCircle2, Clock3, Megaphone, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { AlertTriangle, BookOpen, CheckCircle2, Clock3, Megaphone, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
+import { useMemo, useState } from 'react';
 
-import { newsBodyText, newsReaderSummary, newsReasonPhrases } from '../../domain/display/newsBody.js';
-import { tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
+import { newsBodyText, newsReasonPhrases } from '../../domain/display/newsBody.js';
 import { newsVoiceLine } from '../../domain/display/newsVoice.js';
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
 import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
-import { EVENTS, track } from '../../lib/analytics.js';
 import { useStore } from '../../store/index.js';
-import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
-import EmptyState from '../primitives/EmptyState.jsx';
-import { AddressChain, AffectedSettlements } from './AddressChain.jsx';
-// Wave R-2 (atlas queue #19 / gap 13): the FULL chronicle reader. This panel is
-// only ever loaded through lazy() (HeraldBody + WorldMapStage), so the static
-// import rides the same already-lazy chunk — zero first-paint bytes.
-import ChronicleScrollback from './ChronicleScrollback.jsx';
-import { severityBand } from './heraldFilter.js';
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
+
+function percent(value) {
+  return `${Math.round((Number.isFinite(value) ? value : 0) * 100)}%`;
+}
 
 function human(value) {
   return String(value || '').replace(/_/g, ' ');
@@ -56,7 +50,7 @@ function partitionThreads(threads = [], mineIds = new Set()) {
   return { mine, elsewhere };
 }
 
-function MetaPill({ children, tone = 'neutral', wrap = false }) {
+function MetaPill({ children, tone = 'neutral' }) {
   const bg = tone === 'major' ? GOLD_BG : tone === 'good' ? swatch.successBg : CARD_ALT;
   const color = tone === 'major' ? GOLD : tone === 'good' ? GREEN : SECOND;
   return (
@@ -66,56 +60,38 @@ function MetaPill({ children, tone = 'neutral', wrap = false }) {
       minHeight: 22,
       padding: '2px 7px',
       border: `1px solid ${BORDER2}`,
+      borderRadius: 6,
       background: bg,
       color,
       fontFamily: sans,
       fontSize: FS.xxs,
       fontWeight: 800,
-      // `wrap` exists for the REASONS pills: the late-lane authors (momentum, webwar,
-      // infowar) write full multi-clause sentences into `reasons` — the recorded-reason
-      // half of the NEWS ADDRESS LAW — and a nowrap pill turns a sentence into an
-      // overflow scar. Short authored pills (calendar, kind, severity) keep the
-      // nowrap default.
-      whiteSpace: wrap ? 'normal' : 'nowrap',
-      ...(wrap ? { textAlign: 'left', overflowWrap: 'anywhere' } : {}),
+      whiteSpace: 'nowrap',
     }}>
       {children}
     </span>
   );
 }
 
-function NewsEntry({ entry, compact = false }) {
+function NewsEntry({ entry, compact = false, nameById }) {
   const major = entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR;
   const color = statusColor(entry.kind, major);
-  // The settlements this update touches — LINKED (THE NEWS ADDRESS LAW's
-  // affected-settlements part): each name opens its dossier.
-  const hasSettlements = (entry.settlementIds || []).length > 0;
-  // THE SUBJECT — the law's actor part, and the record-gap this used to
-  // document. The entry now carries TYPED `npcIds` / `factionIds` (T4 ONE-REGEN
-  // batch), minted only where a composer held real identity, so the chain
-  // resolves `settlement › power › faction › npc` through the realm web. Still
-  // NEVER a prose scan: an entry without ids yields an undefined descriptor,
-  // AddressChain renders null, and the card looks exactly as it does today — so
-  // the older half of the feed grows no dead chrome.
-  const subject = (entry.npcIds || [])[0] || (entry.factionIds || [])[0]
-    ? {
-      npcId: (entry.npcIds || [])[0] || null,
-      factionId: (entry.factionIds || [])[0] || null,
-      settlementId: (entry.settlementIds || [])[0] ?? null,
-    }
-    : null;
+  // Name the settlements this update touches so a reader knows exactly which
+  // places to look into. The ids the feed stores are save ids.
+  const settlementNames = (entry.settlementIds || [])
+    .map(id => nameById?.get(String(id)))
+    .filter(Boolean);
   // The crier's voice: a short, in-world line a herald would proclaim about a
   // war/faith/trade beat. Pure display sidecar (domain/display/newsVoice.js);
   // null for out-of-scope news, so the quote only shows when it has something
   // to say.
   const voiceLine = newsVoiceLine(entry);
   // The card body, re-composed in the house voice from the entry's structured
-  // fields (transition/scope/severity). Regional composers now also store an
-  // authored summary; the tooltip keeps that durable chronicle sentence available
-  // while the card body carries its shorter transition telling. (content-immersion-5)
+  // fields (transition/scope/severity) rather than its engine-composed summary
+  // ("Applied via trade dependency…"). The raw summary rides a hover tooltip so
+  // a curious DM can still read the mechanical detail. (content-immersion-5)
   const bodyText = newsBodyText(entry);
   const reasonPhrases = newsReasonPhrases(entry);
-  const summaryTooltip = newsReaderSummary(entry);
 
   return (
     <article style={{
@@ -124,12 +100,14 @@ function NewsEntry({ entry, compact = false }) {
       gap: 9,
       padding: compact ? '9px 10px' : '12px 13px',
       border: `1px solid ${major ? GOLD : BORDER}`,
+      borderRadius: 8,
       background: major ? GOLD_BG : CARD,
       boxShadow: major ? '0 8px 22px rgba(108, 75, 24, 0.08)' : 'none',
     }}>
       <div style={{
         width: 28,
         height: 28,
+        borderRadius: 7,
         background: CARD,
         border: `1px solid ${BORDER2}`,
         display: 'flex',
@@ -161,13 +139,8 @@ function NewsEntry({ entry, compact = false }) {
           <MetaPill tone={major ? 'major' : 'neutral'}>{scopeLabel(entry.scope)}</MetaPill>
         </div>
 
-        {/* The subject's address, as deep as the record identifies it. The
-            settlement level is omitted because the meta row below already links
-            the affected settlements — presence over repetition. */}
-        {subject && <AddressChain descriptor={subject} omitSettlement style={{ marginTop: 5 }} />}
-
         {bodyText && (
-          <p title={summaryTooltip || undefined} style={{
+          <p title={entry.summary || undefined} style={{
             margin: '5px 0 0',
             color: BODY,
             fontFamily: sans,
@@ -204,23 +177,17 @@ function NewsEntry({ entry, compact = false }) {
           marginTop: 8,
           alignItems: 'center',
         }}>
-          {hasSettlements && (
-            <span style={{
-              display: 'inline-flex', alignItems: 'center', minHeight: 22, maxWidth: '100%',
-              padding: '2px 7px', border: `1px solid ${BORDER2}`,
-            }}>
-              <AffectedSettlements
-                ids={entry.settlementIds}
-                label={(entry.settlementIds || []).length > 1 ? 'Settlements' : 'Settlement'}
-                max={3}
-              />
-            </span>
+          {settlementNames.length > 0 && (
+            <MetaPill tone="major">
+              {settlementNames.length > 1 ? 'Settlements' : 'Settlement'}: {settlementNames.slice(0, 3).join(', ')}
+              {settlementNames.length > 3 ? ` +${settlementNames.length - 3}` : ''}
+            </MetaPill>
           )}
-          <MetaPill>{tickCalendarDetailLabel(entry.tick)}</MetaPill>
+          <MetaPill>Tick {entry.tick}</MetaPill>
           <MetaPill>{human(entry.kind)}</MetaPill>
-          <MetaPill>Severity {severityBand(entry)}</MetaPill>
+          <MetaPill>Severity {percent(entry.severity)}</MetaPill>
           {reasonPhrases.slice(0, 3).map(reason => (
-            <MetaPill key={reason} tone={major ? 'major' : 'neutral'} wrap>{reason}</MetaPill>
+            <MetaPill key={reason} tone={major ? 'major' : 'neutral'}>{reason}</MetaPill>
           ))}
         </div>
       </div>
@@ -244,6 +211,7 @@ function ThreadCard({ thread, compact = false, nameById }) {
       <NewsEntry entry={head} compact={compact} nameById={nameById} />
       <details style={{
         border: `1px solid ${BORDER2}`,
+        borderRadius: 8,
         background: CARD_ALT,
         overflow: 'hidden',
       }}>
@@ -315,7 +283,17 @@ function ThreadColumn({ icon, title, threads, majorCount, emptyText, nameById })
         </div>
       )}
       {threads.length === 0 ? (
-        <EmptyState heading={emptyText} />
+        <div style={{
+          border: `1px dashed ${BORDER}`,
+          borderRadius: 8,
+          padding: 16,
+          color: MUTED,
+          fontFamily: sans,
+          fontSize: FS.sm,
+          background: CARD_ALT,
+        }}>
+          {emptyText}
+        </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {threads.map(thread => (
@@ -346,20 +324,12 @@ export default function WizardNewsPanel({ campaign }) {
     [elsewhereThreads],
   );
   const total = summary.feed.entries.length;
-
-  useEffect(() => {
-    if (!campaign?.id) return;
-    track(EVENTS.WIZARD_NEWS_PANEL_OPENED, {
-      unread_count: summary.feed.unreadCount ?? 0,
-      current_tick: summary.feed.currentTick ?? 0,
-    }, { subjectId: campaign.id });
-  }, [campaign?.id, summary.feed.currentTick, summary.feed.unreadCount]);
-
   const saves = useStore(state => state.savedSettlements);
   const appendCampaignChronicle = useStore(state => state.appendCampaignChronicle);
   const setCreditBalance = useStore(state => state.setCreditBalance);
   const [chronicleBusy, setChronicleBusy] = useState(false);
   const [chronicleError, setChronicleError] = useState('');
+  const chronicles = Array.isArray(campaign?.chronicles) ? campaign.chronicles : [];
   // Ground the chronicle on the latest tick that HAS entries: the feed clock
   // (currentTick) can sit ahead of the newest entry after manual impact
   // advances, and a paid generation must never run on an empty window.
@@ -378,43 +348,32 @@ export default function WizardNewsPanel({ campaign }) {
     }
     return map;
   }, [saves]);
-  // Stable resolver for the Chronicle region (memoized so the scrollback's
-  // interval-summary memo doesn't recompute every render).
-  const nameFor = useMemo(() => ((id) => nameById.get(String(id)) || String(id)), [nameById]);
 
   async function generateChronicle() {
     if (chronicleBusy || total === 0) return;
     setChronicleBusy(true);
-    setChronicleError(null);
-    // try/catch/finally so the busy flag ALWAYS clears — a throw (from the
-    // request helper, appendCampaignChronicle, or setCreditBalance) must never
-    // leave the paid Chronicle button stuck spinning forever (correctness-2).
-    try {
-      const ids = new Set((campaign?.settlementIds || []).map(String));
-      const snapshot = {
-        settlements: saves
-          .filter(save => ids.has(String(save.id)))
-          .map(save => ({ id: save.id, name: save.name, settlement: save.settlement })),
-      };
-      const result = await requestCampaignChronicle({
-        campaign,
-        snapshot,
+    setChronicleError('');
+    const ids = new Set(campaign?.settlementIds || []);
+    const snapshot = {
+      settlements: saves
+        .filter(save => ids.has(save.id))
+        .map(save => ({ id: save.id, name: save.name, settlement: save.settlement })),
+    };
+    const result = await requestCampaignChronicle({
+      campaign,
+      snapshot,
+      tick: latestEntryTick,
+    });
+    if (result.error || !result.chronicle) {
+      setChronicleError(result.error || 'Chronicle generation failed.');
+    } else {
+      appendCampaignChronicle(campaign.id, {
         tick: latestEntryTick,
+        prose: result.chronicle,
       });
-      if (result.error || !result.chronicle) {
-        setChronicleError(result.error || t('errors.chronicleFail'));
-      } else {
-        appendCampaignChronicle(campaign.id, {
-          tick: latestEntryTick,
-          prose: result.chronicle,
-        });
-        if (Number.isFinite(result.creditsRemaining)) setCreditBalance(result.creditsRemaining);
-      }
-    } catch (e) {
-      setChronicleError(t('errors.chronicleFail'));
-    } finally {
-      setChronicleBusy(false);
+      if (Number.isFinite(result.creditsRemaining)) setCreditBalance(result.creditsRemaining);
     }
+    setChronicleBusy(false);
   }
 
   if (!campaign) return null;
@@ -427,6 +386,7 @@ export default function WizardNewsPanel({ campaign }) {
       flexDirection: 'column',
       background: CARD,
       border: `1px solid ${BORDER}`,
+      borderRadius: 8,
       overflow: 'hidden',
     }}>
       <header style={{
@@ -440,6 +400,7 @@ export default function WizardNewsPanel({ campaign }) {
         <div style={{
           width: 34,
           height: 34,
+          borderRadius: 8,
           border: `1px solid ${BORDER2}`,
           background: CARD,
           display: 'flex',
@@ -472,7 +433,7 @@ export default function WizardNewsPanel({ campaign }) {
             fontWeight: 700,
           }}>
             <span>{campaign.name}</span>
-            <span>{tickCalendarDetailLabel(summary.feed.currentTick)}</span>
+            <span>Tick {summary.feed.currentTick}</span>
             <span>{total} update{total === 1 ? '' : 's'}</span>
           </div>
         </div>
@@ -490,22 +451,28 @@ export default function WizardNewsPanel({ campaign }) {
         </Button>
       </header>
 
-      {/* ── The Chronicle region (Wave R-2, atlas queue #19 / gap 13) ────────
-          ChronicleScrollback REPLACES the chronicles[0]-only article that stood
-          here: every retained chronicle entry (the record caps at 24) and the
-          pulse history are now scrubbable, not just the newest. Gating parity:
-          the read is gated exactly as the records are — writes require sign-in
-          + server-side credits, and the records exist only on this campaign —
-          so the reader adds NO tier wall of its own and self-gates to an honest
-          empty state on a fresh campaign. */}
-      <div style={{ padding: '12px 16px 0' }}>
-        {chronicleError && (
-          <div role="alert" style={{ color:RED, fontFamily:sans, fontSize:FS.xs, marginBottom:8 }}>
-            {chronicleError}
-          </div>
-        )}
-        <ChronicleScrollback campaign={campaign} nameFor={nameFor} />
-      </div>
+      {(chronicles.length > 0 || chronicleError) && (
+        <div style={{ padding:'12px 16px 0' }}>
+          {chronicleError && (
+            <div role="alert" style={{ color:RED, fontFamily:sans, fontSize:FS.xs, marginBottom:8 }}>
+              {chronicleError}
+            </div>
+          )}
+          {chronicles[0] && (
+            <article style={{
+              border:`1px solid ${BORDER2}`, borderLeft:`3px solid ${GOLD}`,
+              borderRadius:6, background:CARD_ALT, padding:'10px 12px',
+            }}>
+              <div style={{ display:'flex', alignItems:'center', gap:6, color:GOLD, fontFamily:sans, fontSize:FS.xs, fontWeight:900 }}>
+                <BookOpen size={13}/> Chronicle, tick {chronicles[0].tick}
+              </div>
+              <p style={{ margin:'6px 0 0', color:BODY, fontFamily:sans, fontSize:FS.sm, lineHeight:1.55 }}>
+                {chronicles[0].prose}
+              </p>
+            </article>
+          )}
+        </div>
+      )}
 
       <div style={{
         flex: 1,

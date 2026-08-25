@@ -20,7 +20,7 @@
  *   maxSuggestions  - how many suggestions to show (default 12)
  */
 
-import { useId, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { X, Search, AlertTriangle } from 'lucide-react';
 import { useStore } from '../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from './theme.js';
@@ -28,20 +28,6 @@ import { buildRegistry } from '../lib/customRegistry.js';
 import IconButton from './primitives/IconButton.jsx';
 
 const PURPLE = swatch['#7C3AED'];
-
-/**
- * Reader-facing identity for an unresolved registry reference.
- *
- * The prefix is enough to explain what disappeared; the durable ref id remains
- * stored and continues to power repair/removal, but never reaches visible copy
- * or hover text.
- */
-export function missingReferenceLabel(refId) {
-  const value = String(refId || '');
-  if (value.startsWith('custom:')) return 'Deleted custom item';
-  if (value.startsWith('prebuilt:')) return 'Missing catalog item';
-  return 'Missing linked item';
-}
 
 export default function EntityPicker({
   category,
@@ -61,9 +47,6 @@ export default function EntityPicker({
   const registry = useMemo(() => buildRegistry(customContent), [customContent]);
   const [query, setQuery] = useState('');
   const [focused, setFocused] = useState(false);
-  // Roving active index for the aria-combobox: arrows move it, Enter adds it.
-  const [active, setActive] = useState(0);
-  const listId = useId();
 
   // Normalize value -> array for internal handling
   const refIds = useMemo(() => {
@@ -125,26 +108,9 @@ export default function EntityPicker({
     emit(refIds.filter(r => r !== refId));
   };
 
-  // The active row CLAMPED into the live suggestion range every render — the
-  // list shrinks as the query narrows, so raw `active` can point past the end
-  // (the CommandPalette activeIdx idiom).
-  const activeIdx = suggestions.length === 0 ? -1 : Math.min(Math.max(active, 0), suggestions.length - 1);
-  const activeOptionId = activeIdx >= 0 ? `${listId}-opt-${activeIdx}` : undefined;
-
-  // Keyboard operation of the suggestion listbox (H12): arrows move the active
-  // option, Enter adds it through the SAME addRef gate the pointer path uses —
-  // no second commit path. Escape is left to bubble so a hosting modal can
-  // still close.
-  const onInputKeyDown = (e) => {
-    if (!suggestions.length) return;
-    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(Math.min(activeIdx + 1, suggestions.length - 1)); }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(Math.max(activeIdx - 1, 0)); }
-    else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); addRef(suggestions[activeIdx].refId); }
-  };
-
   return (
     <div style={{
-      border: `1px solid ${BORDER}`,
+      border: `1px solid ${BORDER}`, borderRadius: 6,
       background: CARD, padding: 6,
     }}>
       {/* Selected chips */}
@@ -154,18 +120,23 @@ export default function EntityPicker({
             const missing = !entry;
             const isCustom = entry?.source === 'custom';
             const accent = missing ? '#8b1a1a' : (isCustom ? PURPLE : GOLD);
-            const label = entry?.name || missingReferenceLabel(refId);
+            const label = entry?.name || (refId.startsWith('custom:')
+              ? '(deleted custom)'
+              : refId.startsWith('prebuilt:')
+                ? `(missing: ${refId.split(':').slice(2).join(':')})`
+                : refId);
             return (
               <span
                 key={refId}
                 title={missing
-                  ? 'This linked item no longer exists.'
+                  ? `Reference no longer exists: ${refId}`
                   : `${entry.source === 'custom' ? 'Custom · ' : ''}${entry.subcategory || ''}`}
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 4,
                   padding: '2px 6px 2px 8px',
                   background: missing ? '#fdebec' : `${accent}14`,
                   border: `1px solid ${accent}55`,
+                  borderRadius: 12,
                   fontSize: FS.xs, fontWeight: 600,
                   color: accent, fontFamily: sans,
                 }}
@@ -176,7 +147,7 @@ export default function EntityPicker({
                   <span style={{
                     fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.05em',
                     background: `${PURPLE}28`, color: PURPLE,
-                    padding: '0 3px',
+                    borderRadius: 4, padding: '0 3px',
                   }}>CUSTOM</span>
                 )}
                 <IconButton
@@ -198,23 +169,18 @@ export default function EntityPicker({
           display: 'flex', alignItems: 'center', gap: 6,
           padding: '4px 6px',
           border: `1px solid ${focused ? GOLD : BORDER}`,
+          borderRadius: 4,
           background: swatch.white,
         }}>
           <Search size={11} color={MUTED} />
           <input
             type="text"
             value={query}
-            onChange={e => { setQuery(e.target.value); setActive(0); }}
+            onChange={e => setQuery(e.target.value)}
             onFocus={() => setFocused(true)}
             onBlur={() => setTimeout(() => setFocused(false), 150)}
-            onKeyDown={onInputKeyDown}
             placeholder={placeholder}
             aria-label={placeholder}
-            role="combobox"
-            aria-expanded={focused && suggestions.length > 0}
-            aria-controls={listId}
-            aria-activedescendant={focused ? activeOptionId : undefined}
-            autoComplete="off"
             style={{
               flex: 1, border: 'none', outline: 'none', background: 'transparent',
               fontFamily: sans, fontSize: FS.sm, color: INK,
@@ -223,40 +189,28 @@ export default function EntityPicker({
         </div>
       )}
 
-      {/* Suggestion dropdown — an aria-combobox listbox. The input keeps focus
-          and owns the keyboard (arrows + Enter via aria-activedescendant); each
-          option is role="option" with tabIndex -1 (not a tab stop), operated by
-          the input, so it is keyboard-reachable without becoming its own focus
-          target. */}
+      {/* Suggestion dropdown */}
       {focused && suggestions.length > 0 && (
-        <div
-          id={listId}
-          role="listbox"
-          aria-label={`${cats.join(' / ') || 'catalog'} suggestions`}
-          style={{
-            marginTop: 4,
-            border: `1px solid ${BORDER}`,
-            background: swatch.white,
-            maxHeight: 220, overflowY: 'auto',
-          }}
-        >
-          {suggestions.map((s, i) => (
+        <div style={{
+          marginTop: 4,
+          border: `1px solid ${BORDER}`, borderRadius: 4,
+          background: swatch.white,
+          maxHeight: 220, overflowY: 'auto',
+          boxShadow: '0 4px 10px rgba(0,0,0,0.06)',
+        }}>
+          {suggestions.map(s => (
             <button
               key={s.refId}
-              id={`${listId}-opt-${i}`}
               type="button"
-              role="option"
-              aria-selected={i === activeIdx}
-              tabIndex={-1}
               onMouseDown={e => { e.preventDefault(); addRef(s.refId); }}
               style={{
                 display: 'flex', alignItems: 'center', gap: 6, width: '100%',
-                padding: '5px 8px', border: 'none',
-                background: i === activeIdx ? '#faf6ef' : 'transparent',
+                padding: '5px 8px', border: 'none', background: 'transparent',
                 cursor: 'pointer', textAlign: 'left',
                 borderBottom: `1px solid ${BORDER}33`,
               }}
-              onMouseEnter={() => setActive(i)}
+              onMouseEnter={e => (e.currentTarget.style.background = '#faf6ef')}
+              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
             >
               <span style={{ fontSize: FS.sm, fontWeight: 600, color: INK, flex: 1 }}>
                 {s.name}
@@ -270,7 +224,7 @@ export default function EntityPicker({
                 <span style={{
                   fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.05em',
                   background: `${PURPLE}20`, color: PURPLE,
-                  padding: '1px 4px',
+                  borderRadius: 4, padding: '1px 4px',
                 }}>CUSTOM</span>
               )}
             </button>
@@ -283,7 +237,7 @@ export default function EntityPicker({
         <div style={{
           marginTop: 4, padding: '6px 8px',
           fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
-          border: `1px dashed ${BORDER}`,
+          border: `1px dashed ${BORDER}`, borderRadius: 4,
         }}>
           No matches in {cats.join(' / ') || 'catalog'}. Add a custom entry first if needed.
         </div>
@@ -294,6 +248,7 @@ export default function EntityPicker({
         <div style={{
           marginTop: 6, padding: '4px 8px',
           background: swatch['#FDEBEC'], border: '1px solid #f0c8cc',
+          borderRadius: 4,
           fontSize: FS.xxs, color: swatch.danger,
           display: 'flex', alignItems: 'center', gap: 4,
         }}>

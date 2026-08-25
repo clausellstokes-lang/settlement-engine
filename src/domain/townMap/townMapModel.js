@@ -38,8 +38,6 @@ import { deriveAllActiveConditions } from '../activeConditions.js';
 import { popToTier, TIER_ORDER } from '../../data/constants.js';
 import { anchorForInstitution, anchorForDistrict } from './anchors.js';
 import { assignInstitutionsToDistricts } from './institutionAssignment.js';
-import { buildTownLayoutV2 } from './townLayoutV2.js';
-import { projectCustomInstitutionSceneFields } from '../townScene/customBuildingPresentation.js';
 
 /** @typedef {ReturnType<typeof createPRNG>} Rng */
 
@@ -111,16 +109,6 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * @property {string} [category]
  * @property {string[]} [tags]
  * @property {string} [id]
- * @property {boolean} [isCustom]
- * @property {string} [customDefinitionId]
- * @property {string} [customDefinitionRevisionId]
- * @property {string} [customDefinitionContentHash]
- * @property {number|string} [customDefinitionVersion]
- * @property {string} [customDefinitionFingerprint]
- * @property {string} [sceneProfileId]
- * @property {'standard'|'landmark'} [landmarkLevel]
- * @property {'brick'|'marble'|'ruined-stone'|'steel'|'stone'|'timber'} [materialFamily]
- * @property {string} [glyph]
  */
 
 /**
@@ -135,8 +123,6 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * @property {number} [layoutVariant]  integer salt for a deterministic reroll (0/absent ⇒ base)
  * @property {TownMapPin[]} [pins]     anchor-keyed position nudges
  * @property {Record<string, unknown>} [legendPrefs]  reserved for SM-3 legend prefs
- * @property {string} [styleLens]      the chosen map lens (MAP STYLES)
- * @property {number} [layoutLawVersion]  1 (v1, dormant default) | 2 (v2 semantic engine)
  */
 
 /**
@@ -171,16 +157,6 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * @property {string} name
  * @property {string|null} catalogId
  * @property {string|null} localUid
- * @property {string} [category]
- * @property {string} [customDefinitionId]
- * @property {string} [customDefinitionRevisionId]
- * @property {string} [customDefinitionContentHash]
- * @property {number|string} [customDefinitionVersion]
- * @property {string} [customDefinitionFingerprint]
- * @property {string} [sceneProfileId]
- * @property {'standard'|'landmark'} [landmarkLevel]
- * @property {'brick'|'marble'|'ruined-stone'|'steel'|'stone'|'timber'} [materialFamily]
- * @property {string} [glyph]
  * @property {string} districtId
  * @property {'landmark'|'fill'} kind
  * @property {Point} position
@@ -236,19 +212,14 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * @property {number} overlayVersion
  * @property {{ tier: string, terrain: string|null, tradeAccess: string|null,
  *   hasWalls: boolean, layoutVariant: number, buildingCount: number,
- *   districtCount: number, hamletCluster: boolean, morphology?: string,
- *   hasFabric?: boolean, lynchScore?: number, lynchParts?: Record<string, number>,
- *   retries?: number, deformedElementCount?: number, siteKind?: string,
- *   responseMode?: string, coreNucleated?: boolean }} meta
- * @property {{ water: TownMapWater|null, roads: TownMapRoad[], landform?: import('./siteGenesis.js').TownLandform }} frame
+ *   districtCount: number, hamletCluster: boolean }} meta
+ * @property {{ water: TownMapWater|null, roads: TownMapRoad[] }} frame
  * @property {{ anchor: { x: number, y: number, kind: string }, pattern: string,
  *   streets: Array<{ from: Point, to: Point }> }} skeleton
  * @property {TownMapDistrict[]} districts
  * @property {TownMapBuilding[]} buildings
  * @property {TownMapFortifications|null} fortifications
  * @property {{ hazards: TownMapHazard[], conditions: TownMapConditionBadge[] }} overlays
- * @property {Record<string, Array<{ sourceFamily: string, sourceRef: string, effect: string }>>} [provenance]
- * @property {Array<{ attractorRef: string, declinedBy: string, latentValue01: number, point: { x: number, y: number } }>} [latentAdvantages]
  * @property {{ scarHistory: null, thumbnail: null, pdfPlate: null }} reserved
  */
 
@@ -272,61 +243,6 @@ function reservedSlots() {
 }
 
 /**
- * Retain only bounded custom-definition presentation fields. This projection is
- * attached after placement, so it can never influence district assignment or
- * any 2D plan coordinate.
- *
- * @param {TownInstitution | null | undefined} institution
- * @returns {Record<string, unknown>}
- */
-function customInstitutionSceneFields(institution) {
-  if (!institution || (institution.isCustom !== true && !institution.localUid)) {
-    return {};
-  }
-  const projected = projectCustomInstitutionSceneFields(institution);
-  const category = typeof institution.category === 'string'
-    ? institution.category.trim().slice(0, 80)
-    : '';
-  return category ? { category, ...projected } : projected;
-}
-
-/**
- * Layout v2 owns placement and returns the canonical TownMapModel shape. Enrich
- * its building records only after that work is complete. Anchor-key queues keep
- * the existing duplicate-fallback-anchor behavior total and positional.
- *
- * @param {TownMapModel} model
- * @param {TownInstitution[]} institutions
- * @returns {TownMapModel}
- */
-function attachCustomInstitutionSceneFields(model, institutions) {
-  const anchored = institutions
-    .map((institution) => ({
-      anchorKey: anchorForInstitution(institution),
-      institution,
-    }))
-    .sort((a, b) => compareCodepoint(a.anchorKey, b.anchorKey));
-  /** @type {Map<string, TownInstitution[]>} */
-  const byAnchor = new Map();
-  for (const row of anchored) {
-    const queue = byAnchor.get(row.anchorKey) || [];
-    queue.push(row.institution);
-    byAnchor.set(row.anchorKey, queue);
-  }
-
-  let changed = false;
-  const buildings = model.buildings.map((building) => {
-    const queue = byAnchor.get(building.anchorKey) || [];
-    const institution = queue.shift();
-    const fields = customInstitutionSceneFields(institution);
-    if (Object.keys(fields).length === 0) return building;
-    changed = true;
-    return { ...building, ...fields };
-  });
-  return changed ? { ...model, buildings } : model;
-}
-
-/**
  * Build the deterministic town-map render model. Pure function of its inputs;
  * never mutates them.
  * @param {TownMapSettlement | null | undefined} settlement
@@ -335,23 +251,6 @@ function attachCustomInstitutionSceneFields(model, institutions) {
  */
 export function buildTownMapModel(settlement, mapEdits = null) {
   const s = settlement || /** @type {TownMapSettlement} */ ({});
-  /** @type {TownInstitution[]} */
-  const institutions = Array.isArray(s.institutions) ? s.institutions : [];
-
-  // ── VERSIONING LAW (task #38) ───────────────────────────────────────────────
-  // An explicit `mapEdits.layoutLawVersion === 2` selects the v2 semantic urban-
-  // planning engine (a SIBLING generation in townLayoutV2.js that emits this exact
-  // TownMapModel shape, so every lens / export / hover / pin inherits it). Absent /
-  // 1 / anything-else renders the v1 path BELOW, byte-for-byte unchanged — so every
-  // pre-v2 settlement and every v1 golden stays identical (the lane lands free). New
-  // settlements mint v2 by carrying the marker; existing ones never do.
-  if (mapEdits && Number(mapEdits.layoutLawVersion) === 2) {
-    const model = buildTownLayoutV2(
-      /** @type {import('./townLayoutV2.js').TownV2Settlement} */ (s),
-      mapEdits,
-    );
-    return attachCustomInstitutionSceneFields(model, institutions);
-  }
 
   // ── rng, derived internally (never ambient). layoutVariant salts the fork; a
   //    variant of 0 / absent yields the base key ⇒ byte-identical to no edits. ──
@@ -376,6 +275,9 @@ export function buildTownMapModel(settlement, mapEdits = null) {
     ? s.tier
     : popToTier(typeof s.population === 'number' ? s.population : 0);
   const tierIndex = Math.max(0, TIER_ORDER.indexOf(tier));
+
+  /** @type {TownInstitution[]} */
+  const institutions = Array.isArray(s.institutions) ? s.institutions : [];
 
   // ── total institution→district assignment ──────────────────────────────────
   const assignment = assignInstitutionsToDistricts(institutions, derivedDistricts, assignRng);
@@ -525,7 +427,6 @@ export function buildTownMapModel(settlement, mapEdits = null) {
       districtId,
       kind,
       position: { x: bx, y: by },
-      ...customInstitutionSceneFields(inst),
     };
   });
 

@@ -1,11 +1,11 @@
 /**
  * RealmDocket — THE DOCKET (W-COMPOSER-2 §10): the realm's staged future as a
  * first-class surface. Every queued event across every campaign member, in
- * recorded drain order, with per-settlement chips, per-entry cancel, and the
- * §10 LAPSED marking (the entry's verb predicate no longer holds against the
- * CURRENT member state). An earlier order may still change a later order's
- * preconditions, so the Docket names current risk without promising the future
- * drain result. Editing reopens the entry in its settlement's composer.
+ * REAL DRAIN ORDER (the order the next tick consumes them), with per-settlement
+ * chips, per-entry cancel, and the §10 LAPSED marking (the entry's verb
+ * predicate no longer holds against the CURRENT member state — it will be
+ * refused visibly at the drain). Editing reopens the entry in its settlement's
+ * composer (the docket law's edit affordance lives where composition lives).
  *
  * The FORECAST (the pending future's clone-run) attaches to THIS surface —
  * "the forecast button attached to IT" (§10 THE DOCKET).
@@ -13,7 +13,7 @@
 import { useMemo, useState } from 'react';
 import { CalendarClock, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { MUTED, INK, BORDER, CARD, sans, FS, SP } from '../theme.js';
+import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { lapseOf, campaignPeerCountFor } from '../../domain/display/docketLapse.js';
 import { t } from '../../copy/index.js';
@@ -25,13 +25,9 @@ import RealmForecast from './RealmForecast.jsx';
 // dismissible through the unified sf:guidance store.
 const DOCKET_WHISPER_ID = 'realm_docket_teaching';
 
-// C2 (misc, "raw save ids in narrative prose"): the target renders by NAME when the
-// docket can resolve it; an unresolvable id never reaches the reader — the verb
-// stands alone rather than dressed with a raw save id.
-function entryLabel(event, resolveTargetName) {
+function entryLabel(event) {
   const base = event?.type ? String(event.type).replace(/_/g, ' ').toLowerCase() : 'change';
-  const target = event?.payload?.label
-    || (event?.targetId != null ? resolveTargetName?.(event.targetId) : null);
+  const target = event?.payload?.label || event?.targetId;
   return target ? `${base}: ${target}` : base;
 }
 
@@ -51,7 +47,7 @@ export default function RealmDocket({ campaign }) {
 
   return (
     <div style={{
-      background: CARD, border: `1px solid ${BORDER}`,
+      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
       padding: SP.sm, marginTop: SP.sm,
     }}>
       <div style={{
@@ -61,7 +57,7 @@ export default function RealmDocket({ campaign }) {
         marginBottom: SP.sm,
       }}>
         <CalendarClock size={12} />
-        The Docket: staged for the next advance
+        The Docket — staged for the next tick
         <span style={{ color: MUTED, opacity: 0.7, marginLeft: 6, textTransform: 'none', fontWeight: 400 }}>
           {queue.length} queued
         </span>
@@ -70,7 +66,7 @@ export default function RealmDocket({ campaign }) {
       {taught && (
         <div style={{
           display: 'flex', alignItems: 'flex-start', gap: 6, marginBottom: SP.sm,
-          padding: SP.sm, border: `1px dashed ${BORDER}`,
+          padding: SP.sm, border: `1px dashed ${BORDER}`, borderRadius: R.sm,
           fontSize: FS.xxs, fontFamily: sans, color: MUTED, lineHeight: 1.5,
         }}>
           <span style={{ flex: 1 }}>{t('guidance.realmDocket')}</span>
@@ -84,14 +80,14 @@ export default function RealmDocket({ campaign }) {
 
       {queue.length === 0 ? (
         <p style={{ fontSize: FS.xxs, color: MUTED, margin: 0, fontStyle: 'italic' }}>
-          Nothing is staged. Orders queued on member settlements appear here in their recorded queue order.
+          Nothing is staged. Orders queued on member settlements appear here in the order the tick will consume them.
         </p>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
           {queue.map(item => {
             const sid = String(item.saveId);
             const settlement = settlementById.get(sid);
-            const name = settlement?.name || 'A campaign settlement';
+            const name = settlement?.name || sid;
             // experience-product-fit-3: the composer's real ctx (peer count
             // EXCLUDES this entry's own save), never the empty {} that cried wolf.
             const lapsed = lapseOf(item.event, settlement, {
@@ -102,28 +98,27 @@ export default function RealmDocket({ campaign }) {
               <div key={item.queueId} style={{
                 display: 'flex', alignItems: 'center', gap: 8,
                 padding: SP.sm, background: CARD,
-                border: `1px solid ${BORDER}`,
+                border: `1px solid ${BORDER}`, borderRadius: R.sm,
               }}>
                 <span style={{
-                  padding: '1px 6px', border: `1px solid ${BORDER}`,
+                  padding: '1px 6px', borderRadius: R.sm, border: `1px solid ${BORDER}`,
                   fontSize: FS.xxs, fontFamily: sans, color: MUTED, whiteSpace: 'nowrap',
                 }}>
                   {name}
                 </span>
                 <span style={{ flex: 1, fontSize: FS.xs, color: INK, fontFamily: sans }}>
-                  {entryLabel(item.event, (id) => settlementById.get(String(id))?.name || null)}
+                  {entryLabel(item.event)}
                   {lapsed && (
                     <>
                       <span style={{
-                        marginLeft: 8, padding: '1px 6px',
+                        marginLeft: 8, padding: '1px 6px', borderRadius: R.sm,
                         border: `1px solid ${BORDER}`, color: MUTED,
                         fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.04em',
                       }}>
-                        LAPSED: needs your attention
+                        LAPSED — needs your attention
                       </span>
                       <span style={{ display: 'block', fontSize: FS.xxs, color: MUTED, marginTop: 2 }}>
-                        {lapsed} This order is currently expected to be refused. An earlier order can still change its
-                        preconditions. Edit it from {name}&apos;s dossier, or cancel it here.
+                        {lapsed} Left as-is, the tick will refuse it visibly — edit it from {name}&apos;s dossier, or cancel it here.
                       </span>
                     </>
                   )}

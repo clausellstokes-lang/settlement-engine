@@ -22,9 +22,6 @@
  */
 
 import { institutionMoralLean, institutionMartialLean, isStandingInstitution } from './moralMartialLean.js';
-import {
-  isMaterializedCustomContent,
-} from '../content/customContentSemanticAuthority.js';
 import { evil01, chaos01 } from './deityAxes.js';
 import { pietyMoralBleedOf, pietyLawBleedOf } from './piety.js';
 import { readinessOf } from './martialReadiness.js';
@@ -84,17 +81,6 @@ const clamp = (x, lo, hi) => (x < lo ? lo : x > hi ? hi : x);
 const clamp01 = (x) => clamp(x, 0, 1);
 /** @param {number} x @returns {number} */
 const pos = (x) => (x > 0 ? x : 0);
-
-/**
- * Boolean-only custom-provenance boundary for the deliberately loose InstLike
- * compatibility shape.
- *
- * @param {unknown} institution
- * @returns {boolean}
- */
-function hasCustomContentProvenance(institution) {
-  return isMaterializedCustomContent(institution);
-}
 
 /** @typedef {import('../settlement.schema.js').SimSettlement} SimSettlement */
 /** @typedef {{ alignmentAxis?: string, lawAxis?: string, name?: string }} DeitySnapshot */
@@ -466,13 +452,10 @@ export function evaluateMoralInstitutionFounding(worldState, snapshot, context =
     // EFFECTIVE tolerance = patron conviction + trade-normalized drift. What a settlement
     // TOLERATES drives what it founds (item 2a). Equals the patron conviction with no drift.
     const tolerance = effectiveToleranceOf(settlement, toleranceLedger, cid);
-    // A settlement never founds a native institution it already has standing.
-    // A current custom namesake is a distinct authored identity and cannot
-    // satisfy this native founding obligation through its display label.
+    // A settlement never founds what it already has standing (no duplicate almshouse).
     const present = new Set(
       (Array.isArray(settlement.institutions) ? settlement.institutions : [])
         .filter((/** @type {InstLike} */ inst) => isStandingInstitution(inst))
-        .filter((/** @type {InstLike} */ inst) => !hasCustomContentProvenance(inst))
         .map((/** @type {InstLike} */ inst) => String(inst.name || '').toLowerCase()),
     );
     const prevMeta = settlementTickStates[cid]?.moralFounding || null;

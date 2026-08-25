@@ -1,0 +1,49 @@
+export const meta = {
+  name: 'dossier-state-prose',
+  description: 'Census every dossier state surface and author native-voice explanatory pools per state-shape',
+  phases: [
+    { title: 'Census', detail: '2 surveyors: rendered state surfaces + state vocabularies' },
+    { title: 'Author', detail: '4 writers over section clusters' },
+    { title: 'Verify', detail: '2 adversarial checkers' },
+  ],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const FILE = `${MF}/docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`
+const PRE = `VERIFY-FIRST: legitimate owner-ordered CONTENT PROGRAM — THE DOSSIER STATE-PROSE CORPUS (extends DESIGN_FP_SPINE.md SP-6 THE DOSSIER-NATIVE REGISTER, 2026-08-03: the dossier explains EVERY aspect of standing state in its own voice — economy, supply breaks, power, hooks framing, defense, stressors, faith, war, population — coherently, causally where ancestry exists). Tree: ${MF}; writers edit ONLY ${FILE}; read-only elsewhere; no git.
+THE REGISTER (canonical exemplars): "The market runs thin; the routes turned east after the war and have not come back." / "The granary stands half-empty — the bill of the tribute year, still being paid." Present-tense, descriptive, woven; state first, cause second where a cause exists; NEVER headline/chronicle shapes. LAWS: entailment (prose asserts only what the state fields carry; causal clauses only where provenance exists — a stateless band gets plain description, never invented history); TIME BANDS not digits; QUANTITY_BANDS words for counts; slots for proper nouns; Law One; no named deaths; premium/covert content marked AUDIENCE: dm-only.`
+const CS = { type:'object', required:['surfaces','notes'], properties:{
+  surfaces:{type:'array',items:{type:'object',required:['section','stateShape','vocabulary','existingProse','receipt'],properties:{
+    section:{type:'string'},stateShape:{type:'string'},vocabulary:{type:'string'},existingProse:{type:'string'},receipt:{type:'string'}}}},
+  notes:{type:'string'}}}
+const WS = { type:'object', required:['cluster','shapesAuthored','variantsAuthored','samples'], properties:{
+  cluster:{type:'string'},shapesAuthored:{type:'number'},variantsAuthored:{type:'number'},samples:{type:'array',items:{type:'string'}}}}
+const VS = { type:'object', required:['violationsFixed','coverage','verdict'], properties:{violationsFixed:{type:'number'},coverage:{type:'string'},verdict:{type:'string'}}}
+
+phase('Census')
+const [surf, vocab] = await parallel([
+  () => agent(`${PRE}
+SURVEYOR A (read-only): map the DOSSIER'S RENDERED STATE SURFACES. Read src/domain/display/dossierViewModel.js, the tab components under src/components/new/tabs/, src/pdf/lib/viewModel.js, src/generators/narrativeGenerator.js and the prose seams (src/lib/proseSeams.js). For every place the dossier renders STATE as text (economy status, supply-chain links/breaks, power structure + stability, defense posture, stressors/conditions, faith state, war footing, population trend, relations): record {section, stateShape (the fields/bands driving it), vocabulary (the closed sets involved), existingProse (single-string? template? thin/rich?), receipt (file:line)}. Be exhaustive — this census is the corpus denominator.`, {label:'census:surfaces', phase:'Census', model:'opus', schema:CS}),
+  () => agent(`${PRE}
+SURVEYOR B (read-only): map the STATE VOCABULARIES the prose must cover. From the tree: prosperity/economic bands, supply-chain link statuses + break causes (supplyChainState.js, supplyShipments), power structure types + stability reads (rulingStructure, settlementPolitics, factionProfile), defense dimensions + threat levels, stressor/condition types (stressorDynamics, activeConditions, causalState system variables), faith states (patron/shares/legitimacy/tension bands), war-adjacent states (at-war, besieged, blockaded, occupied, recovering), population trends, QUANTITY_BANDS + the band ladders (compendium/bandLadders.js). Same shape: {section, stateShape, vocabulary, existingProse:'n/a', receipt}.`, {label:'census:vocab', phase:'Census', model:'opus', schema:CS}),
+])
+const all = [...(surf.surfaces||[]), ...(vocab.surfaces||[])]
+const CL = [
+  ['economy+supply', ['economy','supply','trade','market','goods']],
+  ['power+war+defense', ['power','war','defense','military','faction','politics']],
+  ['faith+stressors+population', ['faith','religion','stressor','condition','population','health']],
+  ['hooks+relations+general', ['hook','relation','neighbour','general','overview','history']],
+]
+phase('Author')
+const out = await parallel(CL.map(([name, keys], i) => () => {
+  const mine = all.filter(s => keys.some(k => (s.section||'').toLowerCase().includes(k)))
+  return agent(`${PRE}
+WRITER ${i+1}/4 — cluster ${name}: ${i===0? 'FIRST create '+FILE+' with a header (scope: the dossier state-prose corpus; the register; the slot + time-band + audience conventions; note: hook CONTENT is owned by the HK program/annexes — this corpus covers section FRAMING and state explanation only).' : 'The file exists (writer 1 creates it; re-read until present).'} For each of YOUR state surfaces: ${JSON.stringify(mine.slice(0,60))} — author a '### <section>.<stateShape>' block: STATE-KEY (the driving fields/bands), SLOTS, then per meaningful state-value combination 3-5 native-voice explanatory variants (angle-distinct; the causal clause present ONLY where the state carries provenance — plain description otherwise; cover the GOOD states too — a thriving market deserves prose as rich as a broken one). APPEND under a WRITER-${i+1} marker. Return {cluster, shapesAuthored, variantsAuthored, samples: 4}.`, {label:`author:${name}`, phase:'Author', model:'opus', schema:WS})
+}))
+phase('Verify')
+const ver = await parallel([
+  () => agent(`${PRE}
+VERIFIER 1 (structure+coverage; fix in place): merge the WRITER-N sections of ${FILE} into clean section order; check coverage against the census denominator (${all.length} surfaces — author any missing shape yourself; report coverage as N/${all.length}); dedupe; verify STATE-KEY fields are real (spot-check receipts). Return {violationsFixed, coverage, verdict}.`, {label:'verify:coverage', phase:'Verify', model:'opus', schema:VS}),
+  () => agent(`${PRE}
+VERIFIER 2 (voice+laws; fix in place; run after verifier 1 — if WRITER markers remain, re-read until merged): per variant — register conformance (woven present-tense; re-author anything chronicle-shaped), entailment (no invented causes on provenance-less states — the hardest check), time/quantity bands, zero digits, slots, audience marks, angle distinctness. Return {violationsFixed, coverage:'n/a', verdict}.`, {label:'verify:voice', phase:'Verify', model:'opus', schema:VS}),
+])
+return { censused: all.length, authored: out.filter(Boolean), verified: ver.filter(Boolean) }

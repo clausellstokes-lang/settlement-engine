@@ -1,0 +1,35 @@
+export const meta = {
+  name: 'wave-d-create-route-resumed',
+  description: 'Wave D resumed: CREATE_ROUTE with migration 193 authorized (delegated ruling 2026-07-31)',
+  phases: [{ title: 'Build', detail: 'one Opus implementer, the full vertical', model: 'opus' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'fixes'],
+  properties: {
+    agent: { type: 'string' },
+    fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } },
+    behavior_shifts: { type: 'array', items: { type: 'string' } },
+    discovered: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+phase('Build')
+const result = await agent(`You are an Opus IMPLEMENTER for SettlementForge. WAVE D RESUMED: the CREATE_ROUTE command vertical, now WITH MIGRATION 193 AUTHORIZED (the owner delegated the ruling 2026-07-31; recorded in docs/DESIGN_REALM_DIRECTIVES.md Progress — read it). A prior agent proved the block with an executed PGlite probe and wrote the exact unblock spec; your job is to execute that spec. Worktree: ${ROOT} branch claude/composite-r4 @ 1aa98909 — verify; stop on mismatch.
+
+⚠️ SHARED TREE: a concurrent owner session is editing wizard-news files (src/domain/region/wizardNews.js, settlementRumors.js, heraldRouting.js, informationStatecraft.js, momentum.js, supplyWebWarfare.js + their tests) — FOREIGN WIP, never touch, never stage; its voiceMechanics + any-cast reds are attributed, not yours. A soak may be live: never touch artifacts/soak/**; focused vitest only, one at a time; timeout-shaped reds get ONE isolation re-run.
+
+BINDING LAW: docs/DESIGN_REALM_DIRECTIVES.md directive 3 + J-D3 + the delegated-ruling entry; docs/DESIGN_ROUTE_LIFECYCLE.md §3 (user routes: provenance user, lifecycle-immune, deterministic edge identity). THE PRIOR AGENT'S UNBLOCK SPEC (execute exactly):
+
+1. **MIGRATION 193 \`apply_create_route_command\`** — mirror 183's structure: SECURITY DEFINER, authenticated-only (primitives stay service-role), search_path hardened per the 094/111/131 program, an inline @rollback note per the rollback-discipline contract. In ONE transaction: (i) recheck auth.uid / expected owner / account_is_active / save ownership for BOTH endpoints; (ii) claim journal identity via claim_application_command kind 'settlement.canon-event.apply'; (iii) CAS BOTH settlement rows on their exact JSONB base projections; (iv) append exactly one neighbourNetwork entry per row (SIBLING-SHAPED — the public projection shape is UNTOUCHED) while proving the prior prefix intact and all other fields unchanged, EXCEPT config._userRoutes (the provenance home, mirroring _cutRoutes: deterministic edge id per DESIGN_ROUTE_LIFECYCLE §3's route.<a>.<b>.<mode> codepoint-ordered convention, provenance 'user', createdTick) — the config-key envelope permits exactly _userRoutes + eventConditions for this command; (v) refresh BOTH neighbour_links mirrors; (vi) finalize_application_command. Migration numbering: 193 after 192 (validate:migration-head must stay green — the applied-head ledger records prod at 121 and is NOT touched).
+2. **CREATE_ROUTE joins AUTHORITATIVE_CANON_EVENT_TYPES** (src/domain/events/authoritativeCanonEventTypes.js) so canonEventCommandRecovery gives same-session recovery FREE — verify by exercising the recovery path in tests.
+3. **Application layer**: the command spec mirroring CUT_TRADE_ROUTE (envelope, owner/expected-revision, preview, validation, receipt, fingerprinted replay identity); pure client preparation (endpoint validation: both exist, campaign members, no duplicate live route pair+mode; spatial path derivation + cost via travelersGeometry-class machinery — pure, seeded, headless).
+4. **UI entry**: the natural home per the existing link-creation idiom (study SettlementsPanel's link path); two-endpoint pick + in-world preview (path cost in prose, legibility law); lazy; a11y; sever lazy side-effect chains in App-mounting tests (analytics/stripe/PricingMomentCard mocks — the house precedent).
+5. **PINS with executed negative controls** (revert/red/restore/green, quoted): the PGlite battery mirroring tests/security/applicationCommandJournal.pglite.test.js — happy path, duplicate-claim refusal, CAS conflict refusal, guard refusals (wrong event type, out-of-envelope writes), BILATERAL atomicity (a failure on row B leaves row A untouched — the probe the prior agent proved impossible without this RPC), recovery replay; provenance pins: config._userRoutes entry with deterministic edge id, JSON-round-trip + regen + snapshot-undo survival, PUBLIC PROJECTION UNCHANGED (anchored negative: the anonymous dossier projection of neighbourNetwork carries NO new keys — the toPublicSafe twins + pglite sanitizer if applicable); Herald address-chain news on creation.
+6. New store action → operationRegistry + gen:compendium-data + generate-sitemap + build:edge-shared IN ORDER. The rollback-discipline forward contract may need the 193 entry — check tests/docs/migrationRollbackDiscipline.test.js and comply.
+
+HARD RULES: no OTHER migrations; never touch supabase/applied-head.json; no git mutations; no full suites/builds; no golden re-records; no ratchet raises; JSX 600 / js 800; anchored negatives; no em dashes in src/domain|src/data|supabase SQL string literals (comments free); determinism laws; do NOT mint a simulation rule key. Return dense structured data: statuses, files, verbatim test tails, negative-control quotes, behavior shifts plainly, judgment calls vetoable, discovered adjacencies.`, { label: 'wD:create-route-resumed', phase: 'Build', schema: SCHEMA, model: 'opus' })
+
+return { results: [result].filter(Boolean) }

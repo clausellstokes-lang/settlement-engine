@@ -1774,7 +1774,7 @@ export const NAMING_DATA = {
       "Þorbjörg",
       "Unnr",
       "Víðr",
-      "Röðla",
+      "STRESS_TYPE_MAPðla",
       "Álfdís",
       "Böðvildr",
       "Drifa",

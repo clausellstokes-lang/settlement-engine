@@ -1,34 +1,43 @@
 /**
- * domain/pendingEdits.js — Queue-based edit primitive.
+ * domain/pendingEdits.js — Queue-based edit primitive with cascade preview.
  *
  * The Editing & Map critique's E-1 / E-2 reframes the dossier as the
  * surface the DM edits, not a read-only view. To make that safe, the
- * engine needs a queue of pending changes. The richer cascade-preview read
- * model lives in pendingEditsPreview.js so it can stay off first paint.
+ * engine needs a queue of pending changes plus a cascade-preview that
+ * shows what downstream effects each edit triggers before commit.
  *
- * Pure-functional, store-agnostic, idempotent.
+ * Pure-functional, store-agnostic, idempotent. The UI layer (a future
+ * pending-changes drawer + a CascadePreviewPanel) reads + writes
+ * through this module.
  *
  * Edit shape:
  *   {
  *     id:        string         — uuid-ish, stable for revert
  *     kind:      EditKind       — see EDIT_KINDS below
- *     payload:   any            — kind-specific primitive payload
+ *     payload:   any            — kind-specific (renameNPC: { npcId, newName })
  *     ts:        number         — monotonic timestamp from edit clock
  *     reverted?: boolean        — soft-revert (kept in history)
  *   }
  *
+ * Cascade-preview shape:
+ *   {
+ *     summaryLines:        string[]  — "+1 institution", "viability shifted +0.04"
+ *     downstreamCounts:    { npcs?, hooks?, factions?, linkedSaves? }
+ *     narrativeImpact:     'none' | 'regenerate-needed' | 'progression-suggested'
+ *     warnings:            string[]
+ *   }
+ *
+ * The cascade preview is the most important piece. Today's
+ * narrative-drift modal asks "do you want to regenerate?" without
+ * showing what changes. This module returns the structured delta the
+ * UI can render side-by-side with the live dossier.
  */
 
 /** @typedef {'rename-npc' | 'rename-faction' | 'rename-settlement'
  *           | 'add-institution' | 'remove-institution'
  *           | 'add-resource' | 'remove-resource'
  *           | 'add-stressor' | 'remove-stressor'
- *           | 'edit-prose'
- *           | 'edit-npc' | 'reassign-npc' | 'stasis-npc' | 'return-npc'
- *           | 'ransom-npc' | 'rescue-npc'
- *           | 'champion-npc'
- *           | 'table-event'
- *           | 'recall-npc'} EditKind */
+ *           | 'edit-prose'} EditKind */
 
 export const EDIT_KINDS = Object.freeze([
   'rename-npc', 'rename-faction', 'rename-settlement',
@@ -36,69 +45,22 @@ export const EDIT_KINDS = Object.freeze([
   'add-resource', 'remove-resource',
   'add-stressor', 'remove-stressor',
   'edit-prose',
-  // DESIGN_NPC_LIFECYCLE §2 — the three typed NPC ops (edit / reassign / stasis+return).
-  'edit-npc', 'reassign-npc', 'stasis-npc', 'return-npc',
-  // DESIGN_THE_ROADS §11 — THE PARTY'S HAND: the two roads-hostage intervention ops.
-  'ransom-npc', 'rescue-npc',
-  // DESIGN_DEEP_COUPLINGS §8 D-4e — THE PLAYER SIDING: back a live contestant's side of a
-  // contested goal (stamps a marker the ladder-contest pass folds into ContestRec.backedBy).
-  'champion-npc',
-  // R-1 THE SESSION LEDGER — a table-authored event (the DM records what happened at the
-  // game table). The payload carries a schema-walled directive (domain/tableLedger.js) that
-  // commits a typed, bounded, EXISTING engine effect with source:'table' provenance.
-  'table-event',
-  // DESIGN_VISION_WAVE V-24a — THE RECALL RIDER (finite-semantics law): request a TRAVELED
-  // NPC's early return. Stamps a marker (whereabouts.recall) the roads mover consumes on its
-  // next tick, engaging the return leg early — never teleports, never adds a mover.
-  'recall-npc',
 ]);
 
 const _editKindSet = new Set(EDIT_KINDS);
 
-// The kinds settlementPendingEdits can admit through a complete payload contract
-// and route to a writer with a typed outcome. A kind NOT in this list is refused
-// at queueEdit rather than staged without an executor. Failed/stale items remain
-// queued for review instead of being silently cleared. The other EDIT_KINDS remain
-// declared as UI/preview scaffolding awaiting contracts and writers. Keep this in
-// lockstep with pendingEditIntents + settlementPendingEdits; totality is pinned in
+// The kinds commitPendingEdits (store/settlementSlice) actually has a live
+// dispatcher for. A kind NOT in this list has no committer, so the queueEdit seam
+// REFUSES it (returns null) rather than letting it enter the queue and be
+// SILENTLY DROPPED at commit — the queue clears all-or-nothing, so an
+// un-dispatched edit would evaporate while the commit reports success. The other
+// EDIT_KINDS remain declared as UI/preview scaffolding awaiting dispatchers; they
+// are not committable today. Keep this in lockstep with the commitPendingEdits
+// switch — the no-silent-drop contract is pinned in
 // tests/store/editActionPersist.test.js and tests/domain/pendingEdits.test.js.
-// (A plain frozen list remains inspectable by UI/tests and avoids a second public
-// collection type in this first-paint primitive.)
-// DESIGN_NPC_LIFECYCLE §2: the NPC ops join the committable set — each has a live
-// dispatcher (settlementPendingEdits → settlementRenameHelpers) and a registered
-// operation (operationRegistry).
-export const COMMITTABLE_EDIT_KINDS = Object.freeze([
-  // Owner queue #14 — 'rename-faction' joins its two siblings. It was declared
-  // scaffolding for a year (PendingChangesBar even rendered a label for it)
-  // because no writer could carry a faction name through its references. There
-  // is one now: settlementRenameHelpers.renameFactionImpl over the enumerated
-  // cascade in domain/factionRename.js.
-  'rename-npc', 'rename-faction', 'rename-settlement',
-  'edit-npc', 'reassign-npc', 'stasis-npc', 'return-npc',
-  // DESIGN_THE_ROADS §11 — the party's roads-hostage ops; dispatched via applyNpcOp,
-  // stamping whereabouts.partyRelease for the mover.
-  'ransom-npc', 'rescue-npc',
-  // DESIGN_DEEP_COUPLINGS §8 D-4e — player siding; dispatched via applyNpcOp, stamping
-  // the contestBacking marker the ladder-contest pass folds into backedBy.
-  // Rides commitPendingEdits (no dedicated operationRegistry op — the roads-op precedent).
-  'champion-npc',
-  // R-1 THE SESSION LEDGER — dispatched via applyEditOp→applyTableEvent,
-  // committing the payload's schema-walled directive through applyEvent / a canon flavor
-  // line. Rides commitPendingEdits (no dedicated operationRegistry op — the roads-op
-  // precedent; the underlying effects — applyEvent — are already registered).
-  'table-event',
-  // DESIGN_VISION_WAVE V-24a — THE RECALL RIDER; dispatched via applyNpcOp,
-  // stamping whereabouts.recall on a traveling NPC (the roads whereabouts.partyRelease
-  // precedent). The roads mover engages the return leg early. No dedicated operationRegistry op.
-  'recall-npc',
-  // R-2 (capability remediation) — AUTHORED PROSE reaches its contract. Dispatched
-  // via the EXISTING registered Tier-5.4 writer applyUserEditAction (strict
-  // EDITABLE_FIELDS gate re-checked inside the writer). Rides commitPendingEdits
-  // (the roads-op precedent). Which registered paths the QUEUE admits is narrower
-  // than EDITABLE_FIELDS — see QUEUE_WIRED_PROSE_PATHS in settlementPendingEdits.js
-  // for the wired subset and the per-path lifecycle hazards that keep the rest out.
-  'edit-prose',
-]);
+// (A plain frozen list + Array.includes, not a Set/helper: two entries, and this
+// module is first-paint eager, so the smaller shape is the byte-minimal one.)
+export const COMMITTABLE_EDIT_KINDS = Object.freeze(['rename-npc', 'rename-settlement']);
 
 // Deterministic short discriminator (FNV-1a). The edit id must be stable for the
 // same (kind, payload, clock) so revert-by-id and idempotent re-appends stay
@@ -184,4 +146,122 @@ export function activeEdits(queue) {
  */
 export function hasPending(queue) {
   return activeEdits(queue).length > 0;
+}
+
+// ── Cascade preview ───────────────────────────────────────────────────
+
+/**
+ * Compute the cascade preview for the current pending queue against
+ * the live settlement. This is pure; the UI calls it whenever the
+ * queue changes and renders the result in a side panel.
+ *
+ * The preview is *coarse* — it summarizes counts and impact bands,
+ * not a full re-simulation. A full re-sim is what `commit()` does.
+ *
+ * @param {any} settlement — live settlement (pre-edit state)
+ * @param {any[]}  queue      — pending edits to preview
+ * @returns {Object} preview as documented above
+ */
+export function previewCascade(settlement, queue) {
+  const edits = activeEdits(queue);
+  /** @type {{ summaryLines: string[], downstreamCounts: Record<string, number>, narrativeImpact: string, warnings: string[] }} */
+  const out = {
+    summaryLines: [],
+    downstreamCounts: {},
+    narrativeImpact: 'none',
+    warnings: [],
+  };
+  if (!edits.length) return out;
+  if (!settlement || typeof settlement !== 'object') {
+    out.warnings.push('No settlement to preview against.');
+    return out;
+  }
+
+  let netInstitutions = 0;
+  let netResources = 0;
+  let netStressors = 0;
+  let renames = 0;
+  let proseEdits = 0;
+  let structuralCount = 0;
+
+  for (const e of edits) {
+    switch (e.kind) {
+      case 'add-institution':    netInstitutions += 1; structuralCount += 1; break;
+      case 'remove-institution': netInstitutions -= 1; structuralCount += 1; break;
+      case 'add-resource':       netResources += 1; structuralCount += 1; break;
+      case 'remove-resource':    netResources -= 1; structuralCount += 1; break;
+      case 'add-stressor':       netStressors += 1; structuralCount += 1; break;
+      case 'remove-stressor':    netStressors -= 1; structuralCount += 1; break;
+      case 'rename-npc':
+      case 'rename-faction':
+      case 'rename-settlement':
+        renames += 1;
+        break;
+      case 'edit-prose':
+        proseEdits += 1;
+        break;
+      default:
+        // unknown kinds were rejected at buildEdit() — defensive only
+        break;
+    }
+  }
+
+  if (netInstitutions !== 0) {
+    out.summaryLines.push(
+      `${netInstitutions > 0 ? '+' : ''}${netInstitutions} institution${Math.abs(netInstitutions) === 1 ? '' : 's'}`
+    );
+  }
+  if (netResources !== 0) {
+    out.summaryLines.push(
+      `${netResources > 0 ? '+' : ''}${netResources} resource${Math.abs(netResources) === 1 ? '' : 's'}`
+    );
+  }
+  if (netStressors !== 0) {
+    out.summaryLines.push(
+      `${netStressors > 0 ? '+' : ''}${netStressors} stressor${Math.abs(netStressors) === 1 ? '' : 's'}`
+    );
+  }
+  if (renames > 0) {
+    out.summaryLines.push(`${renames} rename${renames === 1 ? '' : 's'}`);
+  }
+  if (proseEdits > 0) {
+    out.summaryLines.push(`${proseEdits} prose edit${proseEdits === 1 ? '' : 's'}`);
+  }
+
+  // Downstream counts — approximate, drawn from the live settlement.
+  out.downstreamCounts.npcs = Array.isArray(settlement.npcs) ? settlement.npcs.length : 0;
+  out.downstreamCounts.factions = Array.isArray(settlement.factions) ? settlement.factions.length : 0;
+  out.downstreamCounts.hooks = Array.isArray(settlement.plotHooks)
+    ? settlement.plotHooks.length
+    : Array.isArray(settlement.hooks) ? settlement.hooks.length : 0;
+  // linkedSaves count is unknown to this module (it doesn't see the saved
+  // list); the UI layer fills this in by walking savedSettlements.
+
+  // Narrative impact:
+  //   - any structural edit on a narrated save => regenerate-needed
+  //   - >2 prose edits on a narrated save => progression-suggested
+  //   - rename only => progression-suggested (drift detector handles)
+  //   - prose edits in raw mode => none
+  const isNarrated = !!settlement._narrative || !!settlement.aiSettlement || !!settlement.narrativeNotes;
+  if (isNarrated) {
+    if (structuralCount > 0) {
+      out.narrativeImpact = 'regenerate-needed';
+    } else if (proseEdits > 2 || renames > 0) {
+      out.narrativeImpact = 'progression-suggested';
+    }
+  }
+
+  // Warnings — surface the things the DM should think about.
+  if (structuralCount > 0 && isNarrated) {
+    out.warnings.push(
+      'Structural change on a narrated save — the narrative layer will need regeneration to stay coherent.'
+    );
+  }
+  if (netInstitutions < 0 && Math.abs(netInstitutions) >= 2) {
+    out.warnings.push(
+      'Removing multiple institutions may leave hooks and NPCs without anchors.'
+    );
+  }
+
+  return out;
 }

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SettlementForge — A world that holds together.</title>
+  <meta name="description" content="The deterministic world-engine for tabletop play. Scroll the survey of one settlement — from three crofts to a metropolis — then forge your own." />
+  <link rel="icon" type="image/svg+xml" href="/img/seal.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="/src/plates.css" />
+</head>
+<body>
+
+  <!-- THE SURVEY OF ONE SETTLEMENT.
+       Fixed layers: the chaptered journey film (runs only during travel legs)
+       + one still per stop (crisp plates while reading). -->
+  <video id="bgv" class="bg-video" muted playsinline preload="auto" src="/bg.mp4"></video>
+  <div class="bg-still" data-still="0" style="background-image:url('/img/still-0-desk.jpg')" aria-hidden="true"></div>
+  <div class="bg-still" data-still="1" style="background-image:url('/img/still-1-thorp.jpg')" aria-hidden="true"></div>
+  <div class="bg-still" data-still="2" style="background-image:url('/img/still-2-hamlet.jpg')" aria-hidden="true"></div>
+  <div class="bg-still" data-still="3" style="background-image:url('/img/still-3-village.jpg')" aria-hidden="true"></div>
+  <div class="bg-still" data-still="4" style="background-image:url('/img/still-4-town.jpg')" aria-hidden="true"></div>
+  <div class="bg-still" data-still="5" style="background-image:url('/img/still-5-city.jpg')" aria-hidden="true"></div>
+  <div class="bg-still" data-still="6" style="background-image:url('/img/still-6-metropolis.jpg')" aria-hidden="true"></div>
+  <div class="bg-tint" aria-hidden="true"></div>
+
+  <div id="page">
+
+    <nav class="nav">
+      <a class="nav__lockup" href="#home" aria-label="SettlementForge">
+        <img class="nav__seal" src="/img/seal.svg" alt="" width="30" height="30" />
+        <span class="nav__logo">SettlementForge</span>
+      </a>
+      <a class="btn btn--quiet nav__enter" href="https://settlementforge.com/create">Enter the Forge</a>
+    </nav>
+
+    <!-- CHAPTER 0 · THE DESK -->
+    <header class="section stop hero" id="home" data-stop="0">
+      <div class="hero__wash" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <p class="eyebrow reveal">The deterministic world-engine</p>
+        <h1 class="hero__title reveal">A world that<br />holds together.</h1>
+        <p class="hero__dek reveal">SettlementForge generates living towns — economies, people, tensions, history — then simulates how they change.</p>
+        <div class="hero__cta reveal">
+          <a class="btn btn--gold" href="https://settlementforge.com/create">Forge your first settlement&nbsp;→</a>
+          <a class="btn btn--quiet" href="#stop-1">Begin the survey&nbsp;↓</a>
+        </div>
+        <p class="hero__honest reveal">Scroll, and watch one settlement grow from three crofts to a capital.</p>
+      </div>
+    </header>
+
+    <div class="leg" data-leg="0" aria-hidden="true"><span class="leg__note">The survey begins — the map wakes.</span></div>
+
+    <!-- STOP 1 · THE THORP — THE FORGE -->
+    <section class="section stop" id="stop-1" data-stop="1">
+      <article class="plate plate--ruled reveal">
+        <p class="plate__age">Year one · a thorp of three hearths</p>
+        <p class="eyebrow">01 · The forge</p>
+        <h2>Every world<br />starts small.</h2>
+        <p>Pick a size and forge. The engine derives everything from constraints — trade, factions, grudges, history — never from random tables.</p>
+        <p class="plate__foot">Your players have a thousand choices. Now you have every answer.</p>
+        <a class="btn btn--gold" href="https://settlementforge.com/create">Forge a settlement&nbsp;→</a>
+      </article>
+    </section>
+
+    <div class="leg" data-leg="1" aria-hidden="true"><span class="leg__note">Generations pass…</span></div>
+
+    <!-- STOP 2 · THE HAMLET — THE BRIEF -->
+    <section class="section stop stop--right" id="stop-2" data-stop="2">
+      <article class="plate plate--ruled reveal">
+        <p class="plate__age">A well is dug · the hamlet gets its first record</p>
+        <p class="eyebrow">02 · The brief</p>
+        <h2>Every number<br />explains itself.</h2>
+        <p>Each settlement arrives as a dossier: the town in four sentences, who matters tonight, what's about to break — and <em>whence</em> every fact came, on hover.</p>
+        <p class="plate__motto">State, never fate — the engine records what happened; the fate of any named soul is yours to decide.</p>
+      </article>
+    </section>
+
+    <div class="leg" data-leg="2" aria-hidden="true"><span class="leg__note">The palisade rises…</span></div>
+
+    <!-- STOP 3 · THE VILLAGE — THE VOICE -->
+    <section class="section stop" id="stop-3" data-stop="3">
+      <article class="plate plate--ruled reveal">
+        <p class="plate__age">A green, a mill, a shrine · the village finds its voice</p>
+        <p class="eyebrow">03 · The voice</p>
+        <h2>The same facts,<br />in a voice for the table.</h2>
+        <p>The Narrative Layer turns raw simulation into table-ready prose. It never invents facts — everything it needs is already in the brief.</p>
+        <p class="plate__foot">Every AI feature reads and proposes. Only the deterministic engine writes canon.</p>
+      </article>
+    </section>
+
+    <div class="leg" data-leg="3" aria-hidden="true"><span class="leg__note">Stone replaces timber…</span></div>
+
+    <!-- STOP 4 · THE TOWN — THE LIVING WORLD -->
+    <section class="section stop stop--right" id="stop-4" data-stop="4">
+      <article class="plate plate--ruled reveal">
+        <p class="plate__age">Walls, a market, a quay · the town begins to move</p>
+        <p class="eyebrow">04 · The living world</p>
+        <h2>Advance a month.<br />Or a decade.</h2>
+        <p>Wars resolve. Prices move. Faiths spread and falter. Chronicles write themselves — and ambitious NPCs climb their factions the only way anyone ever has.</p>
+        <p class="plate__foot">You have just watched this town grow. That is the engine, working.</p>
+      </article>
+    </section>
+
+    <div class="leg" data-leg="4" aria-hidden="true"><span class="leg__note">A second wall, a harbor…</span></div>
+
+    <!-- STOP 5 · THE CITY — THE ARTIFACTS -->
+    <section class="section stop" id="stop-5" data-stop="5">
+      <div class="stop5">
+        <article class="plate plate--ruled reveal">
+          <p class="plate__age">Twin walls and a sanctuary · the city keeps records</p>
+          <p class="eyebrow">05 · The artifacts</p>
+          <h2>Documents,<br />not dashboards.</h2>
+          <p>Dossiers set like bound reports. Town maps with lenses, panorama, and building interiors. Exports that print, play, and survive cancellation — sealed under the house device beside your settlement's own mark.</p>
+        </article>
+        <div class="audience reveal">
+          <article class="plate audience__card">
+            <p class="workflow-card__k">The weekly-table DM</p>
+            <p>Session prep in one click — the Summary tab <em>is</em> tonight's notes.</p>
+          </article>
+          <article class="plate audience__card">
+            <p class="workflow-card__k">The worldbuilder</p>
+            <p>Depth that rewards digging — one tab deeper, whenever you want it.</p>
+          </article>
+          <article class="plate audience__card">
+            <p class="workflow-card__k">The module writer</p>
+            <p>PDF and VTT exports, yours forever — no account required.</p>
+          </article>
+          <article class="plate audience__card">
+            <p class="workflow-card__k">The play-by-post table</p>
+            <p>A seed is a world — hand it to anyone; it regenerates identically.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="leg" data-leg="5" aria-hidden="true"><span class="leg__note">An age passes — three rings, a citadel…</span></div>
+
+    <!-- STOP 6 · THE METROPOLIS — THE LEDGER AND THE DOOR -->
+    <section class="section stop stop--center" id="stop-6" data-stop="6">
+      <div class="stop6">
+        <div class="plate plate--ruled reveal specs__plate">
+          <p class="plate__age">The capital · the ancient stone still stands in the citadel court</p>
+          <p class="eyebrow">06 · Sworn particulars</p>
+          <table class="specs__table">
+            <tbody>
+              <tr><th scope="row">Determinism</th><td>Same seed, same world — every machine, every time.</td></tr>
+              <tr><th scope="row">Institutions</th><td>300+ curated, coverage-verified — no filler entries.</td></tr>
+              <tr><th scope="row">Simulation</th><td>Trade, war, faith, corruption, rank — one causal engine.</td></tr>
+              <tr><th scope="row">Maps</th><td>Town plans, lenses, panorama, building interiors.</td></tr>
+              <tr><th scope="row">Exports</th><td>PDF &amp; VTT. Yours to keep, account or none.</td></tr>
+              <tr><th scope="row">AI</th><td>Proposes only. The deterministic engine writes canon.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="plate plate--ruled reveal buy__plate">
+          <h2 class="buy__title">Your world is waiting<br />to be surveyed.</h2>
+          <a class="btn btn--gold btn--big" href="https://settlementforge.com/create">Forge your first settlement&nbsp;→</a>
+          <p class="buy__honest">No card. No account. Your first dossier is yours to keep.</p>
+          <a class="buy__rate" href="https://settlementforge.com/pricing">View the rate card&nbsp;→</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <img class="footer__seal" src="/img/seal.svg" alt="" width="36" height="36" />
+    <p class="footer__big">SettlementForge</p>
+    <p class="footer__motto">State, never fate.</p>
+    <nav class="footer__links">
+      <a href="https://settlementforge.com/create">Forge</a>
+      <a href="https://settlementforge.com/pricing">Pricing</a>
+      <a href="https://settlementforge.com/how-to">About</a>
+    </nav>
+    <p class="footer__oath">© 2026 SettlementForge · <em>Simulated, not AI-generated.</em></p>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

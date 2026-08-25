@@ -2,7 +2,6 @@
  * spatialGenerator.js
  * Settlement spatial layout and district generation.
  */
-import { createGenerationWorldLaw } from './generationContext.js';
 
 // ─── generateSpatialLayout ────────────────────────────────────────────────────
 
@@ -16,7 +15,6 @@ import { createGenerationWorldLaw } from './generationContext.js';
  * @returns {{ layout: string, quarters: Array, tradeAccess: string }}
  */
 export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainType = 'plains') => {
-  const worldLaw = createGenerationWorldLaw({}, { tradeRoute, terrainType });
   const instNames = institutions.map(i => i.name);
   const has = (keyword) => instNames.some(n => n.includes(keyword));
 
@@ -73,16 +71,11 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
   // requiring both a dock-specific name and a water trade route.
   const isDockInstitution = (n) => /docks\/port|major port|harbou?r|shipyard|wharf/i.test(n);
   if (instNames.some(isDockInstitution) && ['port', 'river'].includes(tradeRoute)) {
-    const maritime = worldLaw.supportsMaritime();
     quarters.push({
       name:      'Waterfront District',
-      location:  maritime ? 'Along the coast' : 'Along the river',
-      desc:      maritime
-        ? 'Warehouses, docks, sailors, longshoremen, salt, and fish'
-        : 'Warehouses, wharves, barges, dockworkers, and river traffic',
-      landmarks: maritime
-        ? ['Main Wharf', 'Warehouse Row', "Sailors' Quarter"]
-        : ['Barge Wharf', 'Warehouse Row', 'River Landing'],
+      location:  'Along river/coast',
+      desc:      'Warehouses, docks, sailors, longshoremen, fish smell',
+      landmarks: ['Main Wharf', 'Warehouse Row', "Sailors' Quarter"],
     });
   }
 
@@ -255,13 +248,10 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
   };
 
   // ── Trade access descriptions ────────────────────────────────────────────
-  const portAccess = worldLaw.supportsMaritime()
-    ? 'Coastal port (harbour and shipyards)'
-    : 'Inland river port (wharves and barge docks)';
   const TRADE_ACCESS_BY_ROUTE = {
     crossroads: 'Major crossroads (multiple gates)',
     river:      'River access (water gate and docks)',
-    port:       portAccess,
+    port:       'Coastal port (harbor and shipyards)',
     road:       'Single main road (two gates)',
     isolated:   'Isolated (one gate, poor road)',
   };

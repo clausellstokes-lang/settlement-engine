@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Visual validation sheet for MFS3a_plangraph. Panels: raw | hull+street+skeleton | blocks.
 THE INSTRUMENT IS NOT TRUSTED UNTIL THIS SHEET IS LOOKED AT."""
-import sys, os, json, numpy as np
+import importlib.util, sys, os, json, numpy as np
 from PIL import Image
 from scipy import ndimage as ndi
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import MFS3a_plangraph as PG
+HERE = os.path.dirname(os.path.abspath(__file__))
+spec = importlib.util.spec_from_file_location("mfs3a_plangraph", os.path.join(HERE, "MFS3a-plangraph.py"))
+PG = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(PG)
 
 def sheet(path, out, longside=1400):
     res, m = PG.analyse(path, longside, want=True)

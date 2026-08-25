@@ -55,22 +55,6 @@ import { deriveDailyLife, compareDailyLife } from './dailyLife.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 
-/** @typedef {import('./settlement.schema.js').SimSettlement} SimSettlement */
-
-/**
- * The ref a caller names a counterfactual target with. `action` defaults to
- * 'remove' when absent; `type`/`id` are required for a non-empty projection.
- *
- * @typedef {{ type?: string, id?: string, action?: string }} CounterfactualRef
- */
-
-/**
- * A diagnostic emitted by the projection (mirrors the event pipeline's
- * PipelineWarning shape, which is what gets spread into this list).
- *
- * @typedef {{ severity: string, message: string }} CounterfactualWarning
- */
-
 // ── Action vocabulary ────────────────────────────────────────────────────
 
 export const COUNTERFACTUAL_ACTIONS = Object.freeze([
@@ -80,10 +64,9 @@ export const COUNTERFACTUAL_ACTIONS = Object.freeze([
 // ── Action → event mapping for the event-pipeline path ───────────────────
 
 /**
- * @param {string} type    entity kind ('institution' | 'faction' | 'npc' | 'chain')
- * @param {string} id      stable entity id
- * @param {string} action  one of COUNTERFACTUAL_ACTIONS
- * @returns {{ type: string, targetId: string, payload?: { severity: number }, cause: string }|null}
+ * @param {any} type
+ * @param {any} id
+ * @param {any} action
  */
 function buildEventFor(type, id, action) {
   // Bare-id institution targets (e.g. 'institution.granary'): the
@@ -108,19 +91,10 @@ function buildEventFor(type, id, action) {
 // ── Manual clone-and-modify (factions / chains / replace) ────────────────
 
 /**
- * NOTE ON `settlement`: this stays `any` rather than becoming SimSettlement.
- * The composer below hands this function's RESULT to explainEntity /
- * compareCausalState, and those declare their own settlement shapes
- * (ExplainSettlement, which embeds CanonicalSettlement's REQUIRED _seed /
- * generatorVersion / identity; CausalState). A SimSettlement in, SimSettlement
- * out would surface five strict errors on a file whose strict allowance is
- * zero. Threading SimSettlement is only free where the callee takes `any` —
- * see the lane note in the commit message.
- *
  * @param {any} settlement
- * @param {string} type
- * @param {string} id
- * @param {string} action
+ * @param {any} type
+ * @param {any} id
+ * @param {any} action
  */
 function manualMutate(settlement, type, id, action) {
   // Pure clone strategy: spread the relevant paths so consumers
@@ -179,11 +153,10 @@ function manualMutate(settlement, type, id, action) {
  * entity. Pure: never mutates the input settlement.
  *
  * @param {any} settlement
- *   Stays `any`: the derivations this composes (explainEntity, deriveSystemState,
- *   deriveDailyLife) each declare a different settlement typedef, and none of
- *   them accepts SimSettlement.
- * @param {CounterfactualRef|null|undefined} ref
- *   `{ type, id, action }` — action defaults to 'remove'.
+ * @param {Object} ref
+ * @param {string} ref.type    'institution' | 'faction' | 'npc' | 'chain'
+ * @param {string} ref.id      Stable id of the entity.
+ * @param {string} ref.action  'remove' | 'weaken' | 'strengthen' | 'replace'
  * @returns {Object} CounterfactualResult
  */
 export function counterfactual(settlement, ref) {
@@ -231,9 +204,6 @@ export function counterfactual(settlement, ref) {
 
   // 3. Re-derive AFTER state.
   const afterSystemState = pipelineResult?.afterSystemState || deriveSystemState(nextSettlement);
-  // Load-bearing: the pipeline's afterCausalState is typed `Object`, and
-  // compareCausalState wants a CausalState. Without this the file gains a
-  // strict error, and its strict allowance is zero.
   /** @type {any} */
   const afterCausalState = pipelineResult?.afterCausalState || deriveCausalState(nextSettlement);
   const afterCapacities  = deriveAllCapacities(nextSettlement);
@@ -295,7 +265,7 @@ export function counterfactual(settlement, ref) {
  * Enumerate every entity on the settlement that the counterfactual
  * tool can act on. Useful for the UI's "pick a target" surface.
  */
-/** @param {SimSettlement|null|undefined} settlement */
+/** @param {any} settlement */
 export function counterfactualCandidates(settlement) {
   if (!settlement) return [];
   const out = [];
@@ -337,7 +307,7 @@ export function supportedCounterfactualActions() {
  * Summarize a counterfactual result as a flat array of lines. Same
  * pattern as summarizeEventResult / summarizeForecast.
  */
-/** @param {{ summary?: string[] }|null|undefined} result */
+/** @param {any} result */
 export function summarizeCounterfactual(result) {
   if (!result || !Array.isArray(result.summary)) return [];
   return [...result.summary];
@@ -346,8 +316,8 @@ export function summarizeCounterfactual(result) {
 // ── Helpers ──────────────────────────────────────────────────────────────
 
 /**
- * @param {CounterfactualRef|null|undefined} ref
- * @param {Array<string|CounterfactualWarning>} messages
+ * @param {any} ref
+ * @param {any[]} messages
  */
 function makeEmptyResult(ref, messages) {
   return {
@@ -368,13 +338,13 @@ function makeEmptyResult(ref, messages) {
   };
 }
 
-/** @param {unknown} s */
+/** @param {any} s */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
 /**
- * @param {unknown} s
+ * @param {any} s
  * @param {number} n
  */
 function truncateText(s, n) {

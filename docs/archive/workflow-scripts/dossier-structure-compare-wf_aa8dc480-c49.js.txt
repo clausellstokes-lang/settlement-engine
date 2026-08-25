@@ -1,0 +1,66 @@
+export const meta = {
+  name: 'dossier-structure-compare',
+  description: 'Comprehensive layout/design comparison of the alternative universe dossiers vs ours — create-flow and library-view embeddings',
+  phases: [{ title: 'Read', detail: 'six parallel structural readers' }],
+}
+
+const OURS = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/amazing-euclid-6b4519'
+const THEIRS = '/Users/cstokes/Desktop/settlement-generator/settlement-engine'
+const HANDOFF = '/Users/cstokes/Desktop/Settlement Forge template review'
+
+const SCHEMA = {
+  type: 'object',
+  required: ['topic', 'structure', 'deltas', 'notable'],
+  properties: {
+    topic: { type: 'string' },
+    structure: { type: 'string', description: 'the surface structure as a top-to-bottom outline with file:line anchors — what renders, in what order, under what gates' },
+    deltas: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['what', 'ours', 'alt', 'assessment'],
+        properties: {
+          what: { type: 'string', description: 'short name of the structural difference' },
+          ours: { type: 'string', description: 'our tree state, file:line' },
+          alt: { type: 'string', description: 'alternative-universe state, file:line' },
+          assessment: { type: 'string', description: 'which is better and why; note if already covered by the in-flight W5.5 spec (DossierActionBand, LifecycleSpine, MobileTabStrip, dead-simulation-case)' },
+        },
+      },
+    },
+    notable: { type: 'string', description: 'design intent worth surfacing to the owner: visual hierarchy, band logic, information scent, mobile strategy' },
+  },
+}
+
+const COMMON = `You are a READ-ONLY design/structure analyst. Do NOT modify any file. Cite file:line for every claim from the live files you read.
+
+Trees:
+- OURS (live product floor): ${OURS} — NOTE: uncommitted W5.2 GENERATE changes are present in generate/ + GenerateWizard/ConfigurationPanel (that IS the current floor, treat as-is); dossier/ + OutputContainer.jsx are still pre-W5.5.
+- ALT (the alternative universe / reference): ${THEIRS} (branch fix/holistic-remediation). The local git ref \`master\` in OURS' repo is a sibling alt-lineage with a near-identical dossier set — where the two alts differ on a file you read, check \`git show master:<path>\` from ${OURS} and say which alt you cite.
+
+Focus on LAYOUT and DESIGN STRUCTURE: what chrome renders, in what order, what bands/strips exist, gating conditions, visual hierarchy, mobile behavior, information architecture. Not business logic. Dense structured output.`
+
+phase('Read')
+
+const prompts = [
+  { label: 'ours:create-flow', prompt: `${COMMON}
+
+TOPIC: OUR dossier as experienced in the CREATE flow right after generation. Trace GenerateWizard.jsx's post-generation render path (settlement != null): the output toolbar (generate/WizardOutputToolbar.jsx — includes fresh W5.2 changes: Regenerate + SimulationDrawer trigger), any commit/save band (generate/WizardCommitBand.jsx if present, SaveToLibraryButton), WizardCloseout, WizardNextSteps, PipelineReveal, and then the OutputContainer mount (which props — hideHeader? readOnly? welcome card?). Then inside OutputContainer.jsx: the full top-to-bottom chrome for THIS embedding (what hideHeader suppresses, narrative strips at ~:695-754, welcome credit card, session notices, group tab strip, tab strip, content region). Outline the complete visual stack a user sees after generating.` },
+  { label: 'alt:create-flow', prompt: `${COMMON}
+
+TOPIC: ALT dossier as experienced in the CREATE flow right after generation. Trace ${THEIRS}/src/components/GenerateWizard.jsx post-generation: WizardOutputToolbar (Back demoted, utility cluster), any save/commit banding, WizardCloseout (delta recap), then the OutputContainer mount with its props. Inside ALT OutputContainer.jsx: the full chrome stack — DossierHeaderRow, LifecycleSpine band (~:774-788), DossierActionBand (~:786-796) incl. its pitch/utility-cluster logic and embedded mode, WelcomeCreditCard visibility handshake, DossierSessionNotices, group strip + tab strip / MobileTabStrip conditional (~:829-834), tabpanel wrapper. Note where master differs from ${THEIRS} on these files if at all. Outline the complete visual stack after generating.` },
+  { label: 'ours:library-flow', prompt: `${COMMON}
+
+TOPIC: OUR dossier as experienced from the LIBRARY view. Trace SettlementsPanel.jsx open-settlement path → SettlementDetail.jsx (read-only context is fine — this file is fenced for edits but you only read): its own header/chrome (PhaseBadge, action rows, PendingChangesBar, composer/coherence/timeline mounts, the unmounted NextActionRail situation — settlement/NextActionRail.jsx importers), then its OutputContainer mount (props: readOnly? saveId? playerView?) and what chrome differs vs the create embedding. Note what a library user sees top-to-bottom that a create user does not, and vice versa.` },
+  { label: 'alt:library-flow', prompt: `${COMMON}
+
+TOPIC: ALT dossier as experienced from the LIBRARY view. Trace ${THEIRS}/src/components/SettlementDetail.jsx (or its equivalent): the Workshop editor surface (settlement/Workshop.jsx — unified EventComposer/Coherence/Timeline/WhatChanged/ChangeQueue), NextActionRail mount (SettlementDetail.jsx ~:495 + settlementDetail/useNextActionRailHandlers.js), WhatChangedPanel placement, and the OutputContainer mount props. Outline the complete library-view visual stack and how the Workshop restructures the edit surface vs a flat stack.` },
+  { label: 'tab-model:3way', prompt: `${COMMON}
+
+TOPIC: the dossier TAB MODEL, three-way. Compare OURS vs ${THEIRS} vs master OutputContainer.jsx on: TAB_GROUPS (group names + membership), TABS list, allTabs conditionals, renderTab switch cases, per-tab depth — especially EngineSections.jsx usage (which tabs embed causal sections in ALT; absent in OURS), SummaryTabV2/OverviewTab + WhatChangedPanel, the entity hyperlink layer (DossierEntityContext/EntityLink/useNavigateToEntity in ALT vs nothing in OURS), DossierSessionNotices vs OUR inline notices, Versions tab (OURS mounts it — ALT orphans it). Produce a tab-by-tab structural table: group, tab, OURS content depth, ALT content depth, and which is structurally richer.` },
+  { label: 'design-handoff', prompt: `${COMMON}
+
+TOPIC: the owner's dossier redesign prototype vs both universes. Read ${OURS}/docs/DOSSIER_REDESIGN_HANDOFF.md in full, and extract the structural prescription from '${HANDOFF}/Dossier Redesign.dc.html' (read in chunks; it is a design-comp HTML — extract the band/section structure, headings, class names, layout grid, not the full markup; also check '${HANDOFF}/_ds' for shared design laws relevant to the dossier). Map each prescribed band to: (a) what OURS renders today, (b) what ALT renders, (c) what the in-flight W5.5 spec already covers (DossierActionBand + LifecycleSpine + MobileTabStrip + dead-case removal). Flag anything in the prototype that NEITHER universe implements. Note the handoff doc's own open questions / sign-off status.` },
+]
+
+const results = await parallel(prompts.map(p => () => agent(p.prompt, { label: p.label, phase: 'Read', schema: SCHEMA })))
+return { results: results.filter(Boolean) }

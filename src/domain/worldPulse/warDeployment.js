@@ -24,47 +24,25 @@
  * pure no-op returning the world's existing deployments untouched.
  */
 
+import {
+  settlementStrength,
+  buildPressureSummary,
+  getRelationshipSettlements,
+  relationshipKeyFromEdge,
+  normalizeRelationshipEdge,
+  ensureRelationshipState,
+  relationshipRoles,
+} from './relationshipEvolution.js';
+import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { mintDirectedChannel } from '../region/graph.js';
 // The provenance-gated war-front reads live in ONE shared module so warDeployment
 // and its sibling readers (deploymentReturn / settlementStrategy / occupation) can
 // never diverge on what counts as a live siege (the phantom-siege class).
-import { isLiveWarFront, warFrontsInto } from './warFrontReads.js';
-// THE DECOMPOSITION WAVE (R-BLD-4): every PURE READ of the pre-tick snapshot — the
-// codepoint order, the strength / capacity / origin-envelope lookups, the war-front
-// channel ids, the besieged test, the route burden, the ally relief, and the
-// coalition-join feasibility read — lives in this leaf, where nothing can reach a
-// ledger. This head stays the WRITER: it is the only file that mints outcomes and
-// mutates the deployment / exhaustion ledgers.
-import {
-  codepoint,
-  computeAllyRelief,
-  warFrontChannelIds,
-  buildStrengthLookup,
-  buildCapacityLookup,
-  logisticsBurdenFor,
-  isBesieged,
-} from './warCapacityReads.js';
-// THE SIEGE CONTEST itself — the feasibility gate, the hard duration ceiling, the
-// will track, the two resolution cores and the pick of who holds the walls — is the
-// second leaf. It DECIDES; this head ACTS on what it decides.
-import { resolveSiegeVerdict, pickOccupier } from './warSiegeVerdict.js';
-// The third leaf: what the war costs the HOME (steps 5 + 5b) and the two functions
-// that invert those costs for a DM-dismissed siege — accrual and inverse kept in one
-// file because they are two halves of one conserved quantity.
-import { applyHomeWarCosts } from './warHomeCosts.js';
-// The fourth leaf: WR-6's refusal aftermath. It BUILDS the coalition_refused outcome
-// and cannot push one — the head owns every push.
-import { buildCoalitionRefusalOutcome } from './warCoalitionRefusal.js';
-// WR-8 amendment R — THE THIRD INTENT. The razing's ONE mouth is the conquest
-// power-transfer site below; this is the only import of it anywhere in `src`,
-// which is what makes "the razing has one mouth" a fact rather than a rule.
-import { EMPTY_PATCH, razingSiegeEmission } from './razingExecution.js';
-// The fifth leaf: the stateful army RECORD at its two creation points, and the
-// conserved sack arithmetic. Builds records and returns numbers; mints nothing.
-import { seedDeploymentState, ensureStatefulRecord, computeSackTransfer } from './warArmyRecord.js';
-import { clamp01 } from '../region/contestMath.js';
+import { isLiveWarFront, warFrontsFrom, warFrontsInto } from './warFrontReads.js';
+import { logistic, clamp01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
-import { classifyFeasibility, verdictPermitsSiege } from './feasibilityGate.js';
+import { deriveMilitaryCapacity } from './militaryStrength.js';
+import { classifyFeasibility, verdictPermitsSiege, verdictAllowsHarassment } from './feasibilityGate.js';
 // M9d — THE WAR INITIATE/RESOLVE SPLIT: siege INITIATION routes its applyMode through
 // the SAME per-domain authority policy every candidate family consults. Under legacy
 // autonomy (routine / full — the pre-CL0 world) authorityFor returns the legacy 'auto'
@@ -80,13 +58,14 @@ import { pendingActorMajorFor } from './actorMajorApproval.js';
 // besieger classifies the matchup on a NOISY ESTIMATE of the true capacities (fights
 // refused wars / quits winnable ones), then the roll below reads the TRUE values.
 // chaosPull 0 (lawful/neutral/no-piety) ⇒ factor 1, no rng forked ⇒ byte-identical.
-import { chaosPullOf } from './fidelityNoise.js';
+import { fidelityFactor, chaosPullOf } from './fidelityNoise.js';
+import { formatCount } from '../formatNumber.js';
 import { isWarReady } from './mobilization.js';
 import { applyAttritionToRecord, fortificationStrength } from './attrition.js';
 // W-F8: a militarized home fields BETTER forces — higher effective strength (efficiency,
 // never invincibility) + a `readiness` stamp the attrition kernel reads for slower decay.
 // readinessOf 0 (no martial record) ⇒ no lift, no stamp ⇒ byte-identical.
-import { readinessOf, rustOf } from './martialReadiness.js';
+import { readinessOf, effectiveStatMult, rustOf } from './martialReadiness.js';
 // W-C2 rented force: a settlement meeting war exposure through the mercenary market gets a
 // bounded readiness SUPPLEMENT (force it didn't train) at the deploy seam and a hired-steel
 // FIDELITY PENALTY at the war-decision reads (folded into the rust arg — it composes with
@@ -98,41 +77,18 @@ import { mercSupplementOf, mercFidelityPenaltyOf } from './mercenaryMarket.js';
 // on the conquest-margin read — ×1 exactly when the peace-engine gate is dark
 // or no case stands ⇒ byte-identical), and the minted war record CARRIES its
 // casus list (the §14 artifact law: "the war record carries its casus list").
-import { peaceCausalActive, aggregateReasons01, topReasons, REASON_TUNING } from './warReasons.js';
+import { peaceCausalActive, warReasonsFor, aggregateReasons01, topReasons, REASON_TUNING } from './warReasons.js';
 import { deployedQualityMult } from './supplyQuality.js';
+import { computeReinforcement, applyReinforcementToRecord } from './reinforcement.js';
 import { computeSackFoodTransfer, storageCapacityMonths } from './foodStockpile.js';
-import { warConditionOutcome } from './warRecordMode.js';
-import { makeCurrentWarCasusRead, pinDeploymentCasusReasons } from './warTermination.js';
+import { deriveDecisionTier } from './decisionTier.js';
 // M2b: the supply-interdiction read (0 when the shipment ledger is absent / dormant
 // ⇒ resolveSiegeVerdict's term is 0 ⇒ the aspatial siege path is byte-identical).
 import { supplyInterdictionLevel } from '../spatial/supplyShipments.js';
 // M5: the spatial marker gate for SIEGE-AS-STARVATION. false off the marker (every
 // aspatial world) ⇒ resolveSiegeVerdict runs the capacity-roll VERBATIM ⇒ byte-identical.
-// JOIN 2 — siegeArrivalGate is the ONE READ of the transit layer's published position:
-// an army still on the road is NOT besieging. Permissive wherever the transit ledger is
-// absent/silent ⇒ the aspatial siege loop is byte-identical (see armyTransit.js).
-import { armyTransitActive, siegeArrivalGate } from '../spatial/armyTransit.js';
+import { armyTransitActive } from '../spatial/armyTransit.js';
 import { getSpatialLedger } from '../spatial/distanceRead.js';
-// JOIN 1 — THE RESOLVED MARCH. `hostileTargetsOf` (the set of wars a settlement may
-// open) moved to that leaf because it is the other half of the same question the order
-// answers, and because this file is at its frozen size ceiling. The three intent reads
-// are TOTAL and rng-free: no order ⇒ null ⇒ step 4 runs its pre-existing expression.
-import {
-  warIntentFor,
-  intentNamesTarget,
-  intentTargetOrder,
-  hostileTargetsOf,
-  treatyEligibleWarTargets,
-} from './warIntent.js';
-import {
-  coalitionCallArchiveRow,
-  coalitionDecisionEvidence,
-  readCoalitionJoinDecisions,
-} from './warCoalitionDecision.js';
-import {
-  joinAnchorOf,
-  warCoalitionActive,
-} from './warCoalitionLedger.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js) — named,
@@ -149,18 +105,6 @@ import {
  * @typedef {import('./pulseShapes.js').Rng} Rng
  */
 
-// THE FAMILY'S PUBLISHED SURFACE. The decomposition moved implementations to leaves
-// but this head remains the war layer's ONE import address, so no consumer — engine,
-// display, or pin — has to know which leaf a symbol now lives in, and no consumer
-// diff rides a split that is supposed to be behaviour-neutral. Adding a name here is
-// how a leaf publishes; it is not a licence to make this file a barrel for anything
-// the war layer does not already own.
-export { computeAllyRelief, coalitionJoinFeasibility, ARMY_DEPLOYED_CAPACITY_PENALTY } from './warCapacityReads.js';
-export { resolveSiegeVerdict, composeDefenderWillScore, WILL_CAPITULATE_FLOOR, SIEGE_MAX_AGE } from './warSiegeVerdict.js';
-export { computeLevySources, revertSuppressedDeployExhaustion, stripSuppressedDeployResidue } from './warHomeCosts.js';
-export { COALITION_REFUSAL_TUNING } from './warCoalitionRefusal.js';
-export { computeSackTransfer } from './warArmyRecord.js';
-
 // ── Tunables (calibration is load-bearing — see GEOPOLITICAL_WAR_LAYER §2.4/§6) ──
 // HOSTILE_CONFIDENCE gates whether a settlement is strong enough to open a war at
 // all (the relationship-confidence input). CONQUEST_MARGIN keeps a deploy from
@@ -171,29 +115,315 @@ export { computeSackTransfer } from './warArmyRecord.js';
 // 0..1 settlementStrength).
 const HOSTILE_CONFIDENCE = 0.42;
 const CONQUEST_MARGIN = 0.12;
+const WAR_DRAIN_PER_FRONT = 0.34; // severity per active war_front from the home (capped 1)
+const ARMY_DEPLOYED_SEVERITY = 0.5;
 
-// WR-6 refusal aftermath (tunables, closed cause vocabulary, the calling court's
-// character read) moved to ./warCoalitionRefusal.js.
+// ── War-exhaustion SCAR tunables (the homeostasis closer) ────────────────────────
+// The scar is a worldState ledger (warExhaustion[homeId] → 0..1) ratcheted up while a
+// deployment is sustained and decayed only SLOWLY when the war ends — so a long war
+// leaves a lasting economic wound that keeps pushing the realm toward suing for peace,
+// UNLIKE a relationship (which mean-reverts ~12%/tick). The scar is surfaced as a
+// war_exhaustion condition (economic_capacity sink + a direct settlementStrength
+// penalty), which is what flips a stubborn aggressor's confidence below the gate.
+const EXHAUSTION_ACCRUE_PER_TICK = 0.16; // ratchet up per tick of sustained deployment
+const EXHAUSTION_DECAY_PER_TICK = 0.03;  // decay when the army is HOME — ~5× slower (non-reverting)
+// Above one tick of accrual (0.16) on purpose: the scar is about SUSTAINED war, so a
+// single deploy tick stamps only war_drain/army_deployed; the war_exhaustion condition
+// first registers on the SECOND tick of an unbroken campaign and deepens from there.
+const EXHAUSTION_CONDITION_FLOOR = 0.20;
 
+// ── War-specific MILITARY CAPACITY tunables. The deploy/siege math reads the
+// structured `deriveMilitaryCapacity` model as the WAR strength source, NOT the
+// coarse settlementStrength (which stays the relationship-dynamics confidence input).
+// `theoreticalCapacity` is latent; `currentCapacity` is the live fighting strength —
+// theoretical MINUS war_exhaustion/war_drain (the model already subtracts those)
+// MINUS the army-deployed-away penalty (subtracted HERE: a settlement with its army
+// committed abroad fights home battles at reduced strength). The siege contest uses
+// CURRENT capacity. Capacities are 0..100; the logistic slope is calibrated for that
+// scale.
+export const ARMY_DEPLOYED_CAPACITY_PENALTY = 14; // home-defense points lost while the army is abroad
+// Siege verdict on the 0..100 capacity scale. K is the log-odds slope per capacity
+// point; HOLD_BIAS is the home-ground defender advantage. Calibrated so a MUTUAL /
+// near-even siege HOLDS most ticks (pFall ≈ 0.3 — wars take a few ticks, the scar
+// accrues, the homeostasis arc runs) while a clear-favourite (a ~18-point offensive
+// edge) resolves quickly (pFall ≈ 0.5+). The feasibility gate has ALREADY filtered
+// out the implausible matchups, so this slope only ever governs a genuine contest.
+const SIEGE_CAPACITY_K = 0.16;
+const SIEGE_CAPACITY_HOLD_BIAS = 3;
+// Defender-resolve (P4, flag-gated) — the WILL track. A resolute defender shifts the
+// siege log-odds toward holding; a broken one toward falling. WILL_BIAS_STRENGTH is the
+// max shift (comparable to the hold bias). At/below the capitulate floor the will has
+// collapsed and the town yields deterministically (surrender rather than storm).
+const WILL_BIAS_STRENGTH = 2.2;
+export const WILL_CAPITULATE_FLOOR = -0.72;
+// Phase 5.5 mover M2b — SUPPLY INTERDICTION. A supply-starved besieged town's hold
+// WEAKENS: its input roads are cut, so its garrison fights hungry (the design's
+// siege-as-starvation, whose FULL replacement lands in M5 — here it is an AUGMENTING
+// term). Max upward shift on the fall log-odds (comparable to the hold bias), scaled
+// by how starved the town is (supplyInterdiction 0..1). DORMANT: supplyInterdiction 0
+// ⇒ the term is exactly 0 ⇒ the aspatial siege path resolves BYTE-IDENTICALLY.
+const SUPPLY_INTERDICTION_STRENGTH = 2;
 
-// The war-exhaustion SCAR tunables moved to ./warHomeCosts.js, beside both the
-// ratchet that accrues them and the strip that reverts them.
+// Phase 5.5 mover M5 — SIEGE-AS-STARVATION (the FULL replacement). On the SPATIAL
+// path (marker present ⇒ spatialSiege) the capacity-roll CORE of the siege verdict
+// (SIEGE_CAPACITY_K·(coalition − defender)) is CLEANLY REPLACED by the supply
+// mechanic: fall is driven by supply INTERDICTION × siege TIME, minus RELIEF — "a
+// siege is a supply mechanic (starvation + time), not a hitpoint bar" (design §7).
+// The feasibility gate, outcome bands, will/capitulation, hard ceiling, and the roll
+// fork are UNCHANGED. OFF the marker (spatialSiege false — every aspatial world + all
+// 6 siege pins) the capacity-roll runs VERBATIM ⇒ byte-identical. The two cores are
+// mutually exclusive (an if/else) — NO dual siege math on either path.
+// STARVE_K: the log-odds slope at full starvation×time; STARVE_FULL_TICKS: ticks of
+// TOTAL interdiction to fully starve a town; STARVE_RELIEF_BIAS: how much ally/supply
+// relief pushes back toward holding. Reuses SIEGE_CAPACITY_HOLD_BIAS (home-ground
+// defender advantage) + the will bias — the anti-snowball envelope is preserved.
+const STARVE_K = 6;
+const STARVE_FULL_TICKS = 12; // a season of total interdiction fully starves the town
+const STARVE_RELIEF_BIAS = 3;
 
-// The capacity model's own tunable (ARMY_DEPLOYED_CAPACITY_PENALTY) moved to
-// ./warCapacityReads.js with buildCapacityLookup, the only code that applies it;
-// this head re-exports it below for the display layer.
-// The siege contest — the feasibility gate, the duration ceiling, the will track,
-// the two resolution cores and their tunables — moved to ./warSiegeVerdict.js.
+/**
+ * The defender's WILL-to-resist score ∈ [-1, 1], composed from leadership/faith
+ * temperament (facets.will, 0..100), regime legitimacy (0..100), food/supply
+ * (facets.logistics, 0..100), and hope (the capacity odds it faces). SHARED by the P4
+ * siege verdict (which biases the roll by it) and the read-only War & Resolve display —
+ * so the resolve the DM sees is the resolve the siege uses. Pure; 0 is a real `will`
+ * value (not a missing-default). A score ≤ WILL_CAPITULATE_FLOOR means the will has
+ * collapsed (the town surrenders rather than be stormed).
+ *
+ * @param {{ willFacet?: any, legitimacyScore?: any, logisticsFacet?: any, defenderCurrent?: number, coalitionCurrent?: number }} args
+ * @returns {number}
+ */
+export function composeDefenderWillScore({ willFacet, legitimacyScore, logisticsFacet, defenderCurrent = 0, coalitionCurrent = 0 }) {
+  const willRaw = Number(willFacet);
+  const willFacetN = (((Number.isFinite(willRaw) ? willRaw : 50)) - 50) / 50;  // martial/pacifist gov + deity temper (0 is a real value)
+  const legit = Number(legitimacyScore);
+  const legitN = Number.isFinite(legit) ? (legit - 50) / 50 : 0;
+  const logisticsN = Number.isFinite(Number(logisticsFacet)) ? (Number(logisticsFacet) - 50) / 50 : 0; // food + supply
+  const denom = coalitionCurrent + defenderCurrent;
+  const hopeN = (((denom > 0 ? defenderCurrent / denom : 0.5)) - 0.5) * 2;     // the odds it faces
+  return Math.max(-1, Math.min(1, 0.40 * willFacetN + 0.25 * legitN + 0.20 * logisticsN + 0.15 * hopeN));
+}
+// Ally defense (P3, flag-gated). Support relationships whose neighbour may send relief,
+// and the fraction of that neighbour's home defense it contributes to the besieged town.
+const ALLY_SUPPORT_TYPES = new Set(['allied', 'ally', 'vassal', 'patron', 'defensive_pact']);
+const ALLY_RELIEF_FRACTION = 0.4;
 
-// Ally defense (P3, flag-gated) — its tunables and computeAllyRelief moved to
-// ./warCapacityReads.js: the relief is a pure read of the pre-tick snapshot that
-// feeds the verdict, never a write.
+// War levy (F2, flag-gated). A warring settlement raises men + grain from its non-besieged
+// vassal / allied neighbours. LEVY_SUPPORT_TYPES excludes 'patron' — you levy subordinates
+// and peers, not your own overlord. The strain is the loyalty cost: a levied vassal accrues
+// war-weariness, so an over-drawn client eventually rebels (and, under warDisposition, coups).
+const LEVY_SUPPORT_TYPES = new Set(['vassal', 'allied', 'ally', 'defensive_pact']);
+const LEVY_POP_RATE_PER_TICK = 0.004; // ~0.4% of a vassal's population per tick (gentler than home conscription)
+const LEVY_POP_FLOOR = 300;           // never levy a vassal below this skeleton population
+const LEVY_STRAIN_PER_TICK = 0.05;    // war-weariness a vassal accrues per tick of being levied (the loyalty cost)
+const LEVY_FOOD_FRACTION = 0.1;       // a tenth of the vassal's granary flows to the war each tick
+const LEVY_FOOD_CAPTURE = 0.6;        // of that, 60% reaches the overlord; the rest is en-route loss
+// Same-tick decay compensation: a levied vassal is never a deployer (computeLevySources
+// excludes deployers), so step 5b's decay runs on it the SAME tick its strain accrues.
+// Accrue the GROSS (strain + one decay step) so the NET per-tick loyalty cost is exactly
+// LEVY_STRAIN_PER_TICK — the raw constant alone netted 0.02/tick, stretching the 0.20
+// condition floor from 4 ticks of levying to 10 and weakening the rebellion/coup
+// coupling. revertSuppressedDeployExhaustion subtracts the same gross, which reproduces
+// the no-levy counterfactual exactly in every case (the step-5b decay runs once per tick
+// regardless of how many overlords levied the vassal).
+const LEVY_STRAIN_GROSS_PER_TICK = LEVY_STRAIN_PER_TICK + EXHAUSTION_DECAY_PER_TICK;
 
-// The war-levy tunables and computeLevySources moved to ./warHomeCosts.js.
+/**
+ * Relief a besieged target can draw from its support-relationship neighbours (P3). Sums a
+ * fraction of each allied/vassal/patron neighbour's home defense — but an ally that is
+ * ITSELF under siege this tick can't spare relief. Pure + order-independent (codepoint-
+ * sorted). Mirrors the hostile-edge reader; returns 0 for a friendless target.
+ * @param {PulseSnapshot} snapshot @param {string} targetId @param {(id:any)=>any} capacityFor @param {Set<string>} besiegedSet
+ * @returns {number}
+ */
+export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet) {
+  const states = snapshot?.worldState?.relationshipStates || {};
+  const allies = new Set();
+  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
+    if (!ALLY_SUPPORT_TYPES.has(relState.relationshipType)) continue;
+    const { from, to } = getRelationshipSettlements(edge);
+    const a = String(from);
+    const b = String(to);
+    if (a === String(targetId) && snapshot?.byId?.has?.(b)) allies.add(b);
+    else if (b === String(targetId) && snapshot?.byId?.has?.(a)) allies.add(a);
+  }
+  let relief = 0;
+  for (const ally of [...allies].sort(codepoint)) {
+    if (besiegedSet.has(ally)) continue; // an ally under its own siege sends nothing
+    relief += (Number(capacityFor(ally)?.homeDefense) || 0) * ALLY_RELIEF_FRACTION;
+  }
+  return relief;
+}
 
+/**
+ * The non-besieged, non-deploying vassal / allied neighbours a warring settlement can levy
+ * from (F2). Mirrors computeAllyRelief's symmetric support-edge reading, but over
+ * LEVY_SUPPORT_TYPES (no 'patron'), and drops any source in `excludeSet` (itself besieged or
+ * fielding its own army — it can spare nothing). A 'vassal' edge is HIERARCHICAL, not
+ * symmetric: relationshipRoles resolves the direction (state-first via overlordSaveId, edge
+ * orientation as the fallback) and only the SENIOR side may levy its junior — a junior
+ * levying its own OVERLORD is excluded exactly like the 'patron' direction is. Pure,
+ * codepoint-sorted, order-independent.
+ * @param {PulseSnapshot} snapshot @param {string} homeId @param {Set<string>} excludeSet
+ * @returns {string[]}
+ */
+export function computeLevySources(snapshot, homeId, excludeSet) {
+  const states = snapshot?.worldState?.relationshipStates || {};
+  const sources = new Set();
+  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
+    if (!LEVY_SUPPORT_TYPES.has(relState.relationshipType)) continue;
+    const { from, to } = getRelationshipSettlements(edge);
+    const a = String(from);
+    const b = String(to);
+    if (relState.relationshipType === 'vassal') {
+      // Hierarchy-aware: the OVERLORD levies its vassal, never the reverse.
+      const { seniorId, juniorId } = relationshipRoles(edge, relState);
+      if (String(seniorId) === String(homeId) && snapshot?.byId?.has?.(String(juniorId))) sources.add(String(juniorId));
+      continue;
+    }
+    if (a === String(homeId) && snapshot?.byId?.has?.(b)) sources.add(b);
+    else if (b === String(homeId) && snapshot?.byId?.has?.(a)) sources.add(a);
+  }
+  return [...sources].filter(id => !excludeSet.has(String(id))).sort(codepoint);
+}
 
+/**
+ * Revert the OUT-OF-BAND war-exhaustion residue a SUPPRESSED (DM-dismissed / paused)
+ * strategy_deploy banked this tick (the pulseKernel residue strip calls this — kept here
+ * so the arithmetic shares the accrual/decay/strain tunables it inverts).
+ *
+ * The HOME: had the deploy never fired it would NOT have been a deployer, so its scar
+ * would have taken the step-5b DECAY path instead of the accrual ratchet — replay that
+ * counterfactual from the PRE-TICK ledger (byte-equal to the tick never deploying).
+ * Each LEVIED VASSAL: subtract the GROSS strain (LEVY_STRAIN_GROSS_PER_TICK — the net
+ * strain plus its same-tick decay compensation) the dismissed war charged it. Its own
+ * step-5b decay ran once regardless of the levy, so the gross subtraction reproduces
+ * the no-levy counterfactual exactly — including the multi-overlord case, where each
+ * surviving levy's gross accrual stays. Entries at 0 are dropped, matching the ledger
+ * hygiene.
+ * Pure — returns a new ledger, never mutates.
+ *
+ * @param {Object} args
+ * @param {Record<string, number>} args.warExhaustion         the post-evaluate (next-tick) ledger.
+ * @param {Record<string, number>} args.preTickWarExhaustion  the pre-tick ledger (worldState's).
+ * @param {string} args.homeId                                the dismissed deploy's besieger.
+ * @param {string[]} [args.leviedSourceIds]                   vassals its war_levy strained this tick.
+ * @returns {Record<string, number>}
+ */
+export function revertSuppressedDeployExhaustion({ warExhaustion, preTickWarExhaustion, homeId, leviedSourceIds = [] }) {
+  const next = { ...warExhaustion };
+  const pre = clamp01(Number(preTickWarExhaustion?.[String(homeId)]) || 0);
+  const decayed = clamp01(pre - EXHAUSTION_DECAY_PER_TICK);
+  if (decayed <= 0) delete next[String(homeId)];
+  else next[String(homeId)] = decayed;
+  for (const srcId of leviedSourceIds) {
+    const reverted = clamp01((Number(next[String(srcId)]) || 0) - LEVY_STRAIN_GROSS_PER_TICK);
+    if (reverted <= 0) delete next[String(srcId)];
+    else next[String(srcId)] = reverted;
+  }
+  return next;
+}
 
+// The same-tick MINOR emissions a fresh deploy triggers (step 5 keyed to the besieger):
+// the conserved conscription/levy population+granary DEBITS plus the home war conditions.
+// A suppressed (DM-dismissed / paused) deploy must withhold ALL of these — left in, the
+// minor partition would still auto-apply them, sinking the conscripted/levied population
+// (its deployedPopulation credit-bank is stripped with the deployment) and ratcheting a
+// scar for a war that never opened.
+const DEPLOY_RESIDUE_TYPES = new Set([
+  'war_conscription', 'war_levy', 'war_drain', 'army_deployed', 'war_exhaustion', 'reinforcement_cost',
+]);
 
+/**
+ * Strip the OUT-OF-BAND residue a DEFERRED or DISMISSED strategy_deploy banked this tick,
+ * so a paused/dismissed siege leaves the books BYTE-IDENTICAL to the tick never opening a
+ * war. The pulseKernel dismiss path calls this; the logic lives here co-located with
+ * revertSuppressedDeployExhaustion (which it drives) and the accrual/levy tunables they
+ * share.
+ *
+ * A suppressed strategy_deploy is the campaign-altering decision to OPEN a new siege. Its
+ * apply outcome is a settlement no-op (withheld by the major partition), but the deploy
+ * banked residue THIS tick that must be reverted for every suppressed besieger:
+ *   • the freshly-seeded deployment SEED in war.deployments (a brand-new siege holds no
+ *     prior record under its key — the one-army gate — so this never drops a pre-existing
+ *     campaign's army), keyed off the outcome's targetSaveId (besieger);
+ *   • the war_front channel mint in war.graphChannels (besieger → sourceEventTargetId);
+ *   • the war-exhaustion RATCHET — the home's accrual reverted to the no-deploy decay
+ *     counterfactual, and each levied vassal's loyalty strain (read off the matching
+ *     war_levy outcome's population/food deltas before it is dropped) — via
+ *     revertSuppressedDeployExhaustion; and
+ *   • the same-tick MINOR emissions its deployment triggered (DEPLOY_RESIDUE_TYPES).
+ * Byte-neutral when nothing is suppressed (the autoresolve-ON path keeps everything).
+ * Pure — reads `war` + the pre-tick ledger, returns a new war-shape slice, never mutates.
+ *
+ * @param {Object} args
+ * @param {{ outcomes: PulseOutcome[], deployments: Record<string, DeploymentRecord>, warExhaustion: Record<string, number>, graphChannels: any[] }} args.war
+ * @param {ReadonlySet<string>|null} args.suppressedIds  the dismissed/deferred major outcome ids (null ⇒ no-op).
+ * @param {Record<string, number>} [args.preTickWarExhaustion]  the pre-tick (worldState) scar ledger.
+ * @returns {{ deployments: Record<string, DeploymentRecord>, warExhaustion: Record<string, number>, outcomes: PulseOutcome[], graphChannels: any[] }}
+ */
+export function stripSuppressedDeployResidue({ war, suppressedIds, preTickWarExhaustion = {} }) {
+  const base = {
+    deployments: war.deployments,
+    warExhaustion: war.warExhaustion,
+    outcomes: war.outcomes,
+    graphChannels: war.graphChannels,
+  };
+  if (!suppressedIds) return base;
+  const suppressedDeploys = war.outcomes.filter(
+    o => o?.candidateType === 'strategy_deploy'
+      && deriveDecisionTier(o) === 'major'
+      && suppressedIds.has(String(o.id)),
+  );
+  if (!suppressedDeploys.length) return base;
+
+  const strippedDeployments = { ...war.deployments };
+  const strippedFronts = new Set(); // `${from}->${to}` of fronts to drop from the mints
+  const suppressedHomeIds = new Set(); // besiegers whose deploy-tick residue is stripped
+  let strippedExhaustion = war.warExhaustion;
+  for (const o of suppressedDeploys) {
+    const fromId = String(o.targetSaveId);
+    const toId = String(o.sourceEventTargetId);
+    // Clear the freshly-seeded deployment (a brand-new siege has no prior record
+    // under this key, so this never drops a pre-existing campaign's army).
+    delete strippedDeployments[fromId];
+    strippedFronts.add(`${fromId}->${toId}`);
+    suppressedHomeIds.add(fromId);
+    // Revert the exhaustion ratchet: the home's accrual back to the no-deploy
+    // decay counterfactual, and each levied vassal's loyalty strain (the levy's
+    // debit sources are read off its outcome before that outcome is dropped).
+    const levy = war.outcomes.find(
+      w => w?.candidateType === 'war_levy' && String(w?.targetSaveId) === fromId,
+    );
+    const leviedSourceIds = [...new Set([
+      ...(levy?.populationDeltas || []),
+      ...(levy?.foodStockpileDeltas || []),
+    ]
+      .filter(d => String(d?.saveId) !== fromId)
+      .map(d => String(d.saveId)))];
+    strippedExhaustion = revertSuppressedDeployExhaustion({
+      warExhaustion: strippedExhaustion,
+      preTickWarExhaustion,
+      homeId: fromId,
+      leviedSourceIds,
+    });
+  }
+  return {
+    deployments: strippedDeployments,
+    warExhaustion: strippedExhaustion,
+    outcomes: war.outcomes.filter(
+      o => !(suppressedHomeIds.has(String(o?.targetSaveId))
+        && DEPLOY_RESIDUE_TYPES.has(String(o?.candidateType || ''))),
+    ),
+    graphChannels: war.graphChannels.filter(
+      c => !(c?.type === 'war_front' && strippedFronts.has(`${String(c.from)}->${String(c.to)}`)),
+    ),
+  };
+}
 
 // Harassment (a feasibility verdict below the siege band): a weak attacker that
 // cannot storm the town still RAIDS — a low-severity war_pressure on the target, NOT
@@ -201,19 +431,648 @@ const CONQUEST_MARGIN = 0.12;
 // verdicts resolve to instead of going to RNG.
 const HARASSMENT_SEVERITY = 0.22;
 
-// (The hostile-axis set moved to warIntent.js with hostileTargetsOf, its only reader —
-// the chooser and the opener must agree on what "hostile" means, so the set that
-// defines an openable war now lives beside the order that may name one.)
+const HOSTILE_TYPES = new Set(['hostile', 'cold_war', 'rival']);
 
-// The stateful ARMY RECORD (seedDeploymentState / ensureStatefulRecord) and the
-// conserved sack arithmetic moved to ./warArmyRecord.js — what an army is, and what
-// it takes. The reinforcement / age-drain / conscription tunables moved to
-// ./warHomeCosts.js with the pass that charges them.
+// ── STATEFUL ARMY tunables. A deployment now carries an effective strength
+// that the siege verdict reads (so a DEPLETED army can FAIL against a weaker
+// target). The siege contest uses the army's `currentEffectiveStrength` in PLACE of
+// the freshly-recomputed coalition capacity once the army is stateful, scaled back
+// onto the 0..100 capacity axis. A fresh deploy seeds the record at the model's
+// current capacity (full token); thereafter attrition/reinforcement move it.
+//
+// reinforcement_cost SEVERITY rides the computed origin-drain (reinforcement.js).
+const REINFORCEMENT_COST_FLOOR = 0.0; // the module already floors; this is a documentation anchor.
+// The deploymentAge-scaled war_drain bump: a long deployment deepens the home bleed
+// even on top of the front-count drain (the proposal's "even a winning war keeps
+// draining the origin", and "the longer deployed, the more it strains the origin").
+const AGE_DRAIN_PER_TICK = 0.02;
+const AGE_DRAIN_CAP = 0.35;
 
+// War-economy population drain (P1, flag-gated). Each tick a deployed army is in the
+// field, it conscripts this fraction of the home population to the front (accumulated
+// on the record's deployedPopulation, restored on return minus the war dead). Kept
+// small so a campaign bleeds the home over many ticks rather than gutting it at once,
+// and floored so a war never conscripts a settlement below a skeleton population.
+const WAR_CONSCRIPT_RATE_PER_TICK = 0.006; // ~0.6% of home pop per deployed tick
+const WAR_CONSCRIPT_POP_FLOOR = 250;       // never conscript the home below this
 
+// ── SACK & FORAGE (P3, flag warForageEnabled). A stormed town is pillaged: a fraction of
+// its population is carried off — some pressed into service and marched to the victor's
+// home (spoils), the rest killed or scattered. CONSERVED as a two-delta transfer with a
+// SINK: the conquered loses SACK_POP_FRACTION of its people; FORAGE_CAPTURE_FRACTION of
+// THAT reaches the victor's home, and the remainder is the war dead (never minted). The
+// floor spares a skeleton population so a sack never annihilates a settlement outright.
+const SACK_POP_FRACTION = 0.08;      // ~8% of the conquered population is carried off
+const FORAGE_CAPTURE_FRACTION = 0.5; // half of the sacked reach the victor; half are the dead
+const SACK_POP_FLOOR = 150;          // never sack a town below this skeleton population
 
+/**
+ * The pure conserved-arithmetic core of a sack: how many of a conquered town's people are
+ * carried off, and how many of those reach the victor's home. Returns null when the town is
+ * at/under the skeleton floor (nothing to take). `captured ≤ sacked` always ⇒ the transfer
+ * never mints (the shortfall is the war dead).
+ * @param {any} targetPop
+ * @returns {{ sacked: number, captured: number } | null}
+ */
+export function computeSackTransfer(targetPop) {
+  const pop = Math.max(0, Math.round(Number(targetPop) || 0));
+  const room = Math.max(0, pop - SACK_POP_FLOOR);
+  const sacked = Math.min(Math.round(pop * SACK_POP_FRACTION), room);
+  if (sacked <= 0) return null;
+  const captured = Math.round(sacked * FORAGE_CAPTURE_FRACTION);
+  return { sacked, captured };
+}
 
+// ── HARD SIEGE-DURATION CEILING (the absolute homeostasis backstop). ──────────────
+// The exhaustion/withdrawal arc normally ends a war: a stalled siege drops out of the
+// plausible band (capacity collapses under the scar) and the besieger withdraws. But a
+// `plausible` siege whose roll never lands a fall and whose attacker exhaustion has
+// already SATURATED at 1.0 (so the scar can ratchet no further) has no remaining force
+// pushing it out of the plausible band — it can grind INDEFINITELY. This ceiling is the
+// deterministic floor under that: once a single siege has run SIEGE_MAX_AGE ticks
+// (deploymentAge, incremented once per tick), it auto-resolves. The direction is a PURE
+// function of the contested capacities (NO rng, seed/identity-stable): if the besieging
+// coalition still holds a current-capacity edge the town finally FALLS; otherwise the
+// exhausted besiegers LIFT the siege and withdraw. Either way the siege cannot outlive
+// the ceiling, so a saturated stalemate terminates instead of running forever.
+export const SIEGE_MAX_AGE = 60;
 
+/** @param {any} a @param {any} b @returns {number} */
+const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
+// isLiveWarFront / isRelationshipMintedFront / warFrontsFrom / warFrontsInto — the
+// provenance-gated siege reads — now live in ./warFrontReads.js (imported above) so
+// this orchestrator and its sibling readers share ONE definition of a live siege.
+
+/**
+ * The channel IDs of CONFIRMED war_front channels FROM `fromId` TO `toId`, read straight
+ * off the pre-tick graph (so the id matches whatever the graph actually carries — robust
+ * against any id-format drift). Used to RETIRE a front when its siege resolves (conquest
+ * or withdrawal): a resolved siege must drop its war_front channel(s) to 'dormant' so the
+ * next tick does not re-discover the same besieger→target front and re-fire the conquest.
+ * Codepoint-sorted for determinism.
+ * @param {RegionGraph} graph
+ * @param {any} fromId
+ * @param {any} toId
+ * @returns {string[]}
+ */
+function warFrontChannelIds(graph, fromId, toId) {
+  const out = [];
+  for (const channel of graph?.channels || []) {
+    if (channel.type !== 'war_front') continue;
+    if (channel.status !== 'confirmed') continue;
+    if (String(channel.from) !== String(fromId)) continue;
+    if (String(channel.to) !== String(toId)) continue;
+    if (channel.id != null) out.push(String(channel.id));
+  }
+  return out.sort(codepoint);
+}
+
+/**
+ * Build a per-settlement strength lookup from the SINGLE pre-tick snapshot. The
+ * pressure vector is the SAME one the relationship contests read (buildPressureSummary
+ * over the derived pressure index), so a deploy-confidence gate and the subjugation
+ * gate can never diverge. Returns `(id) => number` 0..1, defaulting to 0 for unknown.
+ * @param {PulseSnapshot} snapshot
+ * @returns {(id: any) => number}
+ */
+function buildStrengthLookup(snapshot) {
+  const pIndex = pressureIndex(deriveSettlementPressures(snapshot));
+  const cache = new Map();
+  return (/** @type {any} */ id) => {
+    const key = String(id);
+    if (cache.has(key)) return cache.get(key);
+    const item = snapshot?.byId?.get?.(key);
+    if (!item) {
+      cache.set(key, 0);
+      return 0;
+    }
+    const strength = settlementStrength(item, buildPressureSummary(pIndex, key));
+    cache.set(key, strength);
+    return strength;
+  };
+}
+
+/**
+ * Build a per-settlement MILITARY-CAPACITY lookup from the single pre-tick snapshot.
+ * Returns `(id) => { theoretical, offensive, homeDefense, facets }`:
+ *   - `theoretical`  — latent strength (the model's full capacity).
+ *   - `offensive`    — the fighting strength a settlement PROJECTS (theoretical minus
+ *                      war_exhaustion/war_drain — the model subtracts those). The army
+ *                      committed to a siege IS the offensive force, so the army-away
+ *                      penalty is NOT applied here.
+ *   - `homeDefense`  — the strength defending HOME: `offensive` MINUS the army-away
+ *                      penalty (an army abroad cannot man the home walls). This is the
+ *                      DEFENDER side of a siege contest.
+ * The siege contest reads the besieger's `offensive` (force at the walls) vs the
+ * defender's `homeDefense` (force on the walls). Cached per id; zero envelope for an
+ * unknown id.
+ * @param {PulseSnapshot} snapshot
+ * @param {Record<string, DeploymentRecord>} deployments  the live one-army ledger (army-away read).
+ * @returns {(id: any) => { theoretical: number, offensive: number, homeDefense: number, facets: any }}
+ */
+function buildCapacityLookup(snapshot, deployments) {
+  /** @type {Map<string, { theoretical: number, offensive: number, homeDefense: number, facets: any }>} */
+  const cache = new Map();
+  return (/** @type {any} */ id) => {
+    const key = String(id);
+    const hit = cache.get(key);
+    if (hit) return hit;
+    const item = snapshot?.byId?.get?.(key);
+    if (!item) {
+      const zero = { theoretical: 0, offensive: 0, homeDefense: 0, facets: {} };
+      cache.set(key, zero);
+      return zero;
+    }
+    const economicCapacityScore = item?.causal?.scores?.economic_capacity;
+    const model = deriveMilitaryCapacity(item, {
+      economicCapacityScore: Number.isFinite(economicCapacityScore) ? economicCapacityScore : undefined,
+    });
+    const offensive = Math.max(0, model.currentCapacity);
+    // The home-defense reading subtracts the army-away penalty: a settlement whose
+    // army is committed abroad defends its OWN walls at reduced strength.
+    const armyAway = deployments && deployments[key]?.targetId ? ARMY_DEPLOYED_CAPACITY_PENALTY : 0;
+    const homeDefense = Math.max(0, offensive - armyAway);
+    const out = { theoretical: model.theoreticalCapacity, offensive, homeDefense, facets: model.facets };
+    cache.set(key, out);
+    return out;
+  };
+}
+
+/**
+ * SEED a STATEFUL deployment record from the origin's military-capacity model at
+ * deploy time. The army marches out at the origin's current OFFENSIVE capacity (its
+ * `maxStartStrength` and `currentEffectiveStrength`), with supporting facets derived
+ * from the model facets (supply/morale/equipment/magic) normalized to 0..1. The
+ * record is what attrition degrades and reinforcement replenishes; the siege verdict
+ * reads `currentEffectiveStrength` (so a depleted army can fail). `logisticsBurden`
+ * (distance/route-security to the target) damps reinforcement.
+ *
+ * @param {Object} args
+ * @param {string} args.targetId
+ * @param {CapacityEnvelope} args.cap   the origin capacity envelope.
+ * @param {number} args.tick
+ * @param {number} args.logisticsBurden  0..1 distance/route burden to the target.
+ * @param {string} [args.role]
+ * @param {number} [args.readiness]  0..1 martial readiness (W-F8) — lifts effective strength + stamps the record; 0 ⇒ byte-identical.
+ * @param {{ rng: { fork?: (key: string) => { random: () => number } }|null, cid: string, rust: number }|null} [args.sizing]  W-C1 item 1a: the per-decision SIZING rust fork (over/under-commit). null / rust 0 ⇒ factor 1 (no rng) ⇒ byte-identical.
+ * @param {number} [args.qualityMult]  W-C1 item 3: FLOORED deployed-quality (supply-gap) multiplier; 1 ⇒ byte-identical.
+ * @returns {DeploymentRecord} the enriched deployment record.
+ */
+function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'siege', readiness = 0, sizing = null, qualityMult = 1 }) {
+  const facets = cap.facets || {};
+  const norm = (/** @type {any} */ v, /** @type {number} */ fallback) =>
+    Number.isFinite(v) ? clamp01(v / 100) : fallback;
+  // W-F8: readiness lifts effective strength (drilled levies, maintained arms, supply that
+  // reaches the front) — efficiency via the existing capacity math; 1× at readiness 0.
+  const rdy = clamp01(readiness);
+  // W-C1 item 1a — DEPLOYMENT SIZING RUST: a rusty realm mis-sizes the force it commits
+  // (over/under-commit). The error is a SEEDED per-decision fork scaled by rustMagnitude
+  // (chaosPull 0 here — sizing is the rust axis) so it caps at RUST_MAX_ERROR geometry.
+  // rust 0 (seasoned / no martial record) ⇒ factor 1, NO rng forked ⇒ byte-identical.
+  const sizingFactor = sizing && sizing.rng && sizing.rust > 0
+    ? fidelityFactor({ rng: sizing.rng, site: 'deployment_sizing', tick, cid: String(sizing.cid), decisionKey: `commit:${stablePart(targetId)}`, chaosPull: 0, rust: sizing.rust })
+    : 1;
+  // W-C1 item 3 — SUPPLY-GAP QUALITY: a supply-starved war economy fields a degraded force.
+  // Scales the committed strength AND (below) the equipment/supply facets that mitigate
+  // attrition. 1 (flag off / full self-supply) ⇒ byte-identical.
+  const qMult = Number.isFinite(qualityMult) && qualityMult > 0 ? qualityMult : 1;
+  const start = Math.max(0, Number(cap.offensive) || 0) * (rdy > 0 ? effectiveStatMult(rdy) : 1) * sizingFactor * qMult;
+  return {
+    targetId,
+    sinceTick: tick,
+    role,
+    // ── stateful strength ─────────────────────────────────────────────────────
+    maxStartStrength: start,
+    currentEffectiveStrength: start,
+    accumulatedAttrition: 0,
+    // W-F8 readiness stamp (the attrition kernel reads it for slower decay). Conditional
+    // — a home with no martial record stamps nothing ⇒ byte-identical deployment ledger.
+    ...(rdy > 0 ? { readiness: rdy } : {}),
+    // W-C1 receipts: stamp the sizing bias / deployed quality ONLY when non-trivial so a
+    // no-rust / flag-off / full-supply deployment carries neither (byte-identical ledger).
+    ...(sizingFactor !== 1 ? { sizingBias: sizingFactor } : {}),
+    ...(qMult !== 1 ? { deployedQuality: qMult } : {}),
+    reinforcementFlow: 0,
+    deploymentAge: 0,
+    // ── supporting facets (0..1) — seeded from the model, eroded by attrition,
+    // lifted by reinforcement. manpower/institutions feed morale; logistics feeds
+    // supply + food; materiel feeds equipment; will/materiel feed magic support. ─
+    manpower: norm(facets.manpower, 0.5),
+    // W-C1 item 3: poor war-supply degrades the kit that mitigates attrition — a badly
+    // equipped/provisioned force bleeds faster. qMult 1 ⇒ the pre-W-C1 facets, byte-identical.
+    supplyIntegrity: clamp01(norm(facets.logistics, 0.5) * qMult),
+    morale: clamp01((norm(facets.will, 0.5) + norm(facets.manpower, 0.5)) / 2),
+    equipmentCondition: clamp01(norm(facets.materiel, 0.5) * qMult),
+    magicSupport: norm(facets.materiel, 0.5),
+    commandQuality: norm(facets.institutions, 0.5),
+    foodReserve: norm(facets.logistics, 0.5),
+    // ── logistics / objective / return ────────────────────────────────────────
+    logisticsBurden: clamp01(logisticsBurden),
+    objective: role === 'siege' ? 'conquest' : role,
+    returnCondition: 'pending',
+  };
+}
+
+/**
+ * MIGRATE a LIGHT deployment record forward to a STATEFUL one. A legacy campaign
+ * (or a hand-seeded fixture) carries only `{ targetId, sinceTick, role }`
+ * with no strength fields. On first contact this enriches it in place from the live
+ * capacity model so attrition has something to deplete. Deterministic; never mutates
+ * input.
+ *
+ * @param {DeploymentRecord} record
+ * @param {CapacityEnvelope} cap   the origin capacity envelope.
+ * @param {number} tick
+ * @param {number} logisticsBurden
+ * @returns {DeploymentRecord}
+ */
+function ensureStatefulRecord(record, cap, tick, logisticsBurden, readiness = 0, qualityMult = 1) {
+  const r = record || {};
+  const rdy = clamp01(readiness);
+  if (Number.isFinite(r.maxStartStrength) && Number.isFinite(r.currentEffectiveStrength)) {
+    // Already stateful — keep the live strength, only backfill an absent burden/age.
+    // W-F8: refresh the readiness stamp so an ongoing siege tracks the home's evolving
+    // militarization. Conditional — 0 keeps whatever the record already carried (or
+    // nothing), so a pre-W-F8 / deity-free record stays byte-identical.
+    return {
+      ...r,
+      logisticsBurden: Number.isFinite(r.logisticsBurden) ? r.logisticsBurden : clamp01(logisticsBurden),
+      deploymentAge: Number.isFinite(r.deploymentAge) ? r.deploymentAge : Math.max(0, tick - (Number(r.sinceTick) || tick)),
+      ...(rdy > 0 ? { readiness: rdy } : (Number.isFinite(r.readiness) ? { readiness: r.readiness } : {})),
+    };
+  }
+  const seeded = seedDeploymentState({
+    targetId: String(r.targetId),
+    cap,
+    tick,
+    logisticsBurden,
+    role: r.role || 'siege',
+    readiness: rdy,
+    // W-C1 item 3: quality applies to a light-record MIGRATION too (the army's kit is read
+    // on first materialization). NO sizing rust here — the sizing DECISION is at the
+    // new-deploy site, not a migration. qualityMult 1 (flag off) ⇒ byte-identical.
+    qualityMult,
+  });
+  // Preserve the original sinceTick so deploymentAge reflects the true campaign length.
+  const sinceTick = Number.isFinite(r.sinceTick) ? r.sinceTick : tick;
+  return { ...seeded, sinceTick, deploymentAge: Math.max(0, tick - sinceTick) };
+}
+
+/**
+ * The 0..1 ORIGIN ENVELOPE the reinforcement model reads: the home's economy /
+ * manpower / materiel / food / trade / legitimacy, plus its war-exhaustion scar and
+ * whether it is itself threatened (besieged/occupied ⇒ it cannot reinforce abroad).
+ * Pure read of the pre-tick snapshot + the capacity facets.
+ *
+ * @param {PulseSnapshot} snapshot
+ * @param {RegionGraph} graph
+ * @param {(id:any)=>{ facets:any }} capacityFor
+ * @param {Record<string, number>} warExhaustion
+ * @param {string} id
+ * @returns {{ economy:number, manpower:number, materiel:number, food:number, trade:number, legitimacy:number, warExhaustion:number, threatened:boolean }}
+ */
+function buildOriginEnvelope(snapshot, graph, capacityFor, warExhaustion, id) {
+  const key = String(id);
+  const item = snapshot?.byId?.get?.(key);
+  const facets = capacityFor(key).facets || {};
+  const n = (/** @type {any} */ v) => clamp01((Number(v) || 0) / 100);
+  const legitScore = item?.settlement?.powerStructure?.publicLegitimacy?.score;
+  const tradeScore = item?.causal?.scores?.trade_connectivity;
+  return {
+    economy: n(facets.economy),
+    manpower: n(facets.manpower),
+    materiel: n(facets.materiel),
+    food: n(facets.logistics),
+    trade: Number.isFinite(tradeScore) ? clamp01(tradeScore / 100) : 0.5,
+    legitimacy: Number.isFinite(legitScore) ? clamp01(legitScore / 100) : 0.5,
+    warExhaustion: clamp01(warExhaustion[key] || 0),
+    threatened: isBesieged(graph, key),
+  };
+}
+
+/**
+ * Distance/route LOGISTICS BURDEN (0..1) between an origin and a target,
+ * derived from the regional-graph edge (if any). A missing edge reads as a neutral
+ * mid burden. Pure; deterministic. Today distance/route data is coarse, so this is a
+ * conservative read of edge `distance`/`weight` with a neutral default — the
+ * reinforcement model damps the flow ∝ this.
+ *
+ * @param {RegionGraph} graph
+ * @param {string} fromId
+ * @param {string} targetId
+ * @returns {number} 0 (short/secure) .. 1 (long/unsafe)
+ */
+function logisticsBurdenFor(graph, fromId, targetId) {
+  for (const edge of graph?.edges || []) {
+    const a = String(edge.from);
+    const b = String(edge.to);
+    if ((a === String(fromId) && b === String(targetId)) || (a === String(targetId) && b === String(fromId))) {
+      const dist = Number(edge.distance);
+      if (Number.isFinite(dist)) return clamp01(dist / 100);
+      const weight = Number(edge.weight);
+      // A high-weight (close/strong) edge → low burden; invert.
+      if (Number.isFinite(weight)) return clamp01(1 - weight);
+    }
+  }
+  return 0.4; // neutral default — a moderate supply line.
+}
+
+/**
+ * A settlement is "besieged/occupied" if any CONFIRMED war_front points AT it. A
+ * besieged settlement cannot itself open a new siege (its army defends home).
+ * @param {RegionGraph} graph
+ * @param {any} id
+ * @returns {boolean}
+ */
+function isBesieged(graph, id) {
+  return warFrontsInto(graph, id).length > 0;
+}
+
+/**
+ * Hostile targets of a settlement, read from the pre-tick relationshipStates +
+ * edges. Returns codepoint-sorted target ids the settlement could besiege.
+ * @param {PulseSnapshot} snapshot
+ * @param {any} fromId
+ * @returns {string[]}
+ */
+function hostileTargetsOf(snapshot, fromId) {
+  const states = snapshot?.worldState?.relationshipStates || {};
+  const out = new Set();
+  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
+    // The hostile axis is symmetric/adversarial only (hostile/cold_war/rival); a
+    // vassal/patron hierarchy edge is never a besiege candidate.
+    if (!HOSTILE_TYPES.has(relState.relationshipType)) continue;
+    const { from, to } = getRelationshipSettlements(edge);
+    const a = String(from);
+    const b = String(to);
+    if (a === String(fromId) && snapshot?.byId?.has?.(b)) out.add(b);
+    else if (b === String(fromId) && snapshot?.byId?.has?.(a)) out.add(a);
+  }
+  return [...out].sort(codepoint);
+}
+
+/**
+ * A condition outcome (the coup-verdict shape). Flows through
+ * applyWorldPulseOutcomes UNCHANGED — it already applies `condition` via
+ * withActiveCondition.
+ * @param {{ id: any, archetype: any, targetSaveId: any, severity: any, headline: any, summary: any, reasons: any, tick: any, sourceEventTargetId: any, causes: any }} args
+ */
+function conditionOutcome({ id, archetype, targetSaveId, severity, headline, summary, reasons, tick, sourceEventTargetId, causes }) {
+  return {
+    id,
+    type: 'condition',
+    candidateType: archetype,
+    ruleId: `war_layer_${archetype}`,
+    ruleFamily: 'stressor',
+    applyMode: 'auto',
+    probability: 1,
+    targetSaveId,
+    severity,
+    headline,
+    summary,
+    reasons,
+    condition: {
+      archetype,
+      severity,
+      triggeredAt: { tick, sourceEventType: 'WAR_LAYER', sourceEventTargetId },
+      causes,
+    },
+  };
+}
+
+/**
+ * The siege verdict for a single target. FIRST a DETERMINISTIC FEASIBILITY GATE
+ * classifies the coalition-vs-defender CURRENT-capacity matchup; only a `plausible`
+ * (or a satisfied internal-collapse / war-magic override) matchup goes to RNG.
+ * Everything else resolves DETERMINISTICALLY (auto_fail / harassment / require_coalition)
+ * with NO roll — so a thorpe can never storm a fortified city on a lucky number, and
+ * "RNG only resolves plausible conflicts" is itself reproducible.
+ *
+ * The stochastic roll (when reached) is log-odds over the CURRENT-capacity delta
+ * (NEVER a raw product), forked on `siege:<T>:<tick>`.
+ *
+ * The coalition strength is the army's STATEFUL `currentEffectiveStrength` once
+ * the deployment is stateful (the freshly-recomputed `cap.offensive` is the fallback
+ * for a light record). THIS is the keystone: a worn-down army contests at
+ * its DEPLETED strength, so it can FAIL against a target it once out-classed. The
+ * stochastic roll also produces an OUTCOME BAND (narrow/decisive/costly) the caller
+ * feeds into attrition.
+ *
+ * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number, attackerFidelity?: number, attackerRust?: number, supplyInterdiction?: number, spatialSiege?: boolean }} args
+ * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[], capitulation?: boolean }}
+ */
+export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0, attackerFidelity = 0, attackerRust = 0, supplyInterdiction = 0, spatialSiege = false }) {
+  // Coalition strength sums member EFFECTIVE strengths (codepoint-sorted membership)
+  // → order-independent: the army at the walls IS the offensive force, depleted by
+  // attrition. Each besieger contributes its STATEFUL currentEffectiveStrength when it
+  // has a record (the keystone — a worn army contests weaker), else its freshly-
+  // recomputed offensive capacity (a light record). The attacker facets feed
+  // the war-magic override; the STRONGEST besieger's facets (codepoint tie-break baked
+  // into the besiegers order) are the coalition's materiel signal.
+  let coalitionCurrent = 0;
+  let bestFacets = {};
+  let bestStrength = -Infinity;
+  for (const id of besiegers) {
+    const cap = capacityFor(id);
+    const stateful = effectiveStrengthFor(id);
+    const eff = Number.isFinite(stateful) ? /** @type {number} */ (stateful) : cap.offensive;
+    coalitionCurrent += eff;
+    if (eff > bestStrength) { bestStrength = eff; bestFacets = cap.facets; }
+  }
+  const defenderCap = capacityFor(targetId);
+  // The defender contests with its HOME-DEFENSE capacity. A mutual-
+  // siege defender's OWN expeditionary army is committed ABROAD — its attrition
+  // degrades that field army (read on the OTHER target's verdict), NOT its home walls.
+  // So a worn-down besieger does not also defend its own home weaker: the home garrison
+  // and the field army are separate forces. The defender's field-army attrition is
+  // applied below (it is the attacker on its own front).
+  //
+  // defenderStrengthOverride (SPIKE, default null): when the defenderAttrition flag is
+  // on, the caller passes an ERODED home-defense value from the per-target siege ledger
+  // instead of the fresh capacity — so a long siege wears the walls down. Null (the
+  // default / flag-off path) uses fresh homeDefense → byte-identical to before.
+  // P3 ally defense: allied/vassal/patron relief (0 when the flag is off) bolsters the
+  // town's effective defense in the verdict — alliances hold at the walls.
+  const defenderCurrent = (Number.isFinite(defenderStrengthOverride)
+    ? /** @type {number} */ (defenderStrengthOverride)
+    : defenderCap.homeDefense) + (Number(defenderReliefBonus) || 0);
+
+  // ── HARD FEASIBILITY GATE (deterministic, NO rng). ───────────────────────────────
+  // W-F4b item 2a: a chaotic-devout besieger CLASSIFIES on a noisy ESTIMATE of the two
+  // capacities (own force + defender), so it fights calculator-refused wars and quits
+  // winnable ones. The estimate perturbs the CLASSIFY inputs ONLY — the siege roll
+  // (logOdds below) and every later branch read the TRUE coalitionCurrent/defenderCurrent,
+  // so a mis-classified attacker is delivered INTO a fight and then faces real odds
+  // (the owner's variance-with-occasional-payoff). attackerFidelity 0 ⇒ factor 1, NO
+  // rng forked ⇒ byte-identical for every deity-free / lawful / no-piety besieger.
+  const decisionCid = besiegers.length ? String(besiegers[0]) : String(targetId);
+  // W-F8: STRATEGIC RUST adds to the estimate error even for a lawful/neutral (chaosPull 0)
+  // besieger — a long-peace realm misjudges its FIRST war (the 1914 problem). rust 0 ⇒
+  // no added noise; attackerFidelity 0 AND rust 0 ⇒ NO rng forked ⇒ byte-identical.
+  const estimateNoisy = attackerFidelity > 0 || attackerRust > 0;
+  const estAttacker = estimateNoisy
+    ? Math.max(0, coalitionCurrent * fidelityFactor({ rng, site: 'war_initiation', tick, cid: decisionCid, decisionKey: `own:${stablePart(targetId)}`, chaosPull: attackerFidelity, rust: attackerRust }))
+    : coalitionCurrent;
+  const estDefender = estimateNoisy
+    ? Math.max(0, defenderCurrent * fidelityFactor({ rng, site: 'war_initiation', tick, cid: decisionCid, decisionKey: `foe:${stablePart(targetId)}`, chaosPull: attackerFidelity, rust: attackerRust }))
+    : defenderCurrent;
+  const { verdict, ratio, reasons } = classifyFeasibility({
+    attackerCurrent: estAttacker,
+    defenderCurrent: estDefender,
+    coalitionSize: besiegers.length,
+    defenderItem,
+    attackerFacets: bestFacets,
+    defenderFacets: defenderCap.facets,
+  });
+
+  if (!verdictPermitsSiege(verdict)) {
+    // No roll. The siege either auto-fails outright or downgrades to harassment. The
+    // attrition band: a harassment tick is a `hold` grind; an auto_fail is a
+    // decisive repulse off the walls (the attacker bled trying the impossible).
+    const band = verdictAllowsHarassment(verdict) ? 'hold' : 'decisive_fail';
+    return {
+      falls: false,
+      harass: verdictAllowsHarassment(verdict),
+      forcedLift: false,
+      verdict,
+      ratio,
+      pFall: 0,
+      roll: 0,
+      coalitionCurrent,
+      defenderCurrent,
+      band,
+      reasons,
+    };
+  }
+
+  // ── HARD SIEGE-DURATION CEILING (deterministic, NO rng). A siege-permitting matchup
+  // that has ground on for SIEGE_MAX_AGE ticks auto-resolves rather than grinding
+  // forever — the backstop for a `plausible` siege whose roll never falls and whose
+  // attacker exhaustion has saturated (so nothing else pushes it out of the band). The
+  // direction is a pure function of the contested capacities: a coalition still holding
+  // a current-capacity edge finally STORMS the walls; an exhausted one that no longer
+  // out-classes the defender LIFTS the siege (forcedLift → the caller withdraws it). ──
+  if (siegeAge >= SIEGE_MAX_AGE) {
+    const falls = coalitionCurrent > defenderCurrent;
+    return {
+      falls,
+      harass: false,
+      forcedLift: !falls,
+      verdict,
+      ratio,
+      pFall: falls ? 1 : 0,
+      roll: 0,
+      coalitionCurrent,
+      defenderCurrent,
+      band: falls ? 'costly_success' : 'withdrawal',
+      reasons: [
+        ...reasons,
+        `Siege ran the hard ${SIEGE_MAX_AGE}-tick ceiling; auto-resolved ${falls ? 'as a storm' : 'as a withdrawal'} (capacity ${coalitionCurrent.toFixed(1)} vs ${defenderCurrent.toFixed(1)}).`,
+      ],
+    };
+  }
+
+  // ── DEFENDER RESOLVE (P4, flag-gated). Compose the WILL to keep resisting from
+  // leadership+faith temperament (facets.will), legitimacy, food/supply (facets.logistics),
+  // and hope (the capacity odds). A resolute will biases the roll toward holding; a broken
+  // one toward falling; a fully-collapsed will CAPITULATES outright (surrender, not storm).
+  // Off ⇒ willBias 0, no capitulation ⇒ logOdds unchanged ⇒ byte-identical.
+  let willBias = 0;
+  if (defenderResolveEnabled) {
+    const facets = defenderCap.facets || {};
+    const willScore = composeDefenderWillScore({
+      willFacet: facets.will,
+      legitimacyScore: defenderItem?.settlement?.powerStructure?.publicLegitimacy?.score,
+      logisticsFacet: facets.logistics,
+      defenderCurrent,
+      coalitionCurrent,
+    });
+    willBias = WILL_BIAS_STRENGTH * willScore;
+    if (willScore <= WILL_CAPITULATE_FLOOR) {
+      // WILL COLLAPSE → the defenders yield rather than be stormed (a bloodless fall).
+      return {
+        falls: true, harass: false, forcedLift: false, verdict, ratio,
+        pFall: 1, roll: 0, coalitionCurrent, defenderCurrent, band: 'narrow_success',
+        capitulation: true,
+        reasons: [...reasons, `${defenderItem?.name || targetId}'s will broke — starving, discredited, and out of hope, the defenders capitulated rather than be stormed.`],
+      };
+    }
+  }
+
+  // ── PLAUSIBLE band (or a satisfied override) → the stochastic siege roll. A resolute
+  // defender's willBias lowers pFall (holds); a crumbling one raises it. TWO MUTUALLY-
+  // EXCLUSIVE cores (never both — no dual siege math):
+  //   • SPATIAL (M5, spatialSiege) — SIEGE-AS-STARVATION. The capacity-roll core is
+  //     GONE; fall is driven by supply INTERDICTION × siege TIME minus RELIEF (design
+  //     §7). No interdiction ⇒ the town holds (you must cut the roads); a long TOTAL
+  //     interdiction starves it out. Feasibility/bands/will/ceiling all still apply.
+  //   • ASPATIAL (every legacy world + the 6 siege pins) — the capacity-roll VERBATIM,
+  //     with the M2b supply-interdiction AUGMENT term. supplyInterdiction 0 ⇒ +0 ⇒
+  //     byte-identical. This branch is BYTE-FOR-BYTE the pre-M5 formula. ──────────────
+  let logOdds;
+  if (spatialSiege) {
+    const interdiction = clamp01(supplyInterdiction);
+    const timeFactor = clamp01(siegeAge / STARVE_FULL_TICKS);
+    const relief01 = clamp01((Number(defenderReliefBonus) || 0) / Math.max(1, defenderCurrent));
+    logOdds = STARVE_K * interdiction * timeFactor - STARVE_RELIEF_BIAS * relief01 - SIEGE_CAPACITY_HOLD_BIAS - willBias;
+  } else {
+    const supplyPush = SUPPLY_INTERDICTION_STRENGTH * clamp01(supplyInterdiction);
+    logOdds = SIEGE_CAPACITY_K * (coalitionCurrent - defenderCurrent) - SIEGE_CAPACITY_HOLD_BIAS - willBias + supplyPush;
+  }
+  const pFall = clamp01(logistic(logOdds));
+  const roll = rng.fork(`siege:${stablePart(targetId)}:${tick}`).random();
+  const falls = roll < pFall;
+  // ── OUTCOME BAND: how the engagement went, scaled by how DECISIVE the roll was
+  // relative to its threshold. A fall that cleared the bar by a wide margin is a
+  // narrow_success (clean storm); a squeaker is costly_success (pyrrhic). A hold that
+  // came close to falling is a narrow_fail for the attacker (it nearly broke through);
+  // a comfortable hold is a decisive_fail (thrown back). Deterministic — derived from
+  // the same (pFall, roll) pair, so byte-stable + order-independent.
+  let band;
+  if (falls) {
+    band = (pFall - roll) > 0.18 ? 'narrow_success' : 'costly_success';
+  } else {
+    band = (roll - pFall) < 0.18 ? 'narrow_fail' : 'decisive_fail';
+  }
+  return {
+    falls,
+    harass: false,
+    forcedLift: false,
+    verdict,
+    ratio,
+    pFall,
+    roll,
+    coalitionCurrent,
+    defenderCurrent,
+    band,
+    reasons,
+  };
+}
+
+/**
+ * Pick the conquering settlement: the strongest besieger by EFFECTIVE strength
+ * (the stateful currentEffectiveStrength when present, else offensive capacity),
+ * codepoint tie-break. The strongest SURVIVING army holds the walls.
+ * @param {any[]} besiegers
+ * @param {(id: any) => { offensive: number }} capacityFor
+ * @param {(id: any) => (number|null)} effectiveStrengthFor
+ */
+function pickOccupier(besiegers, capacityFor, effectiveStrengthFor) {
+  let best = null;
+  let bestStrength = -Infinity;
+  for (const id of besiegers) {
+    const stateful = effectiveStrengthFor(id);
+    const s = Number.isFinite(stateful) ? /** @type {number} */ (stateful) : capacityFor(id).offensive;
+    if (s > bestStrength || (s === bestStrength && (best == null || id < best))) {
+      best = id;
+      bestStrength = s;
+    }
+  }
+  return best;
+}
 
 /**
  * Evaluate the war layer for one tick.
@@ -225,8 +1084,8 @@ const HARASSMENT_SEVERITY = 0.22;
  * @param {Rng} args.rng
  * @param {number} args.tick
  * @param {string|null} [args.now]
- * @param {{ warLayerEnabled?: boolean, warTerminationEnabled?: boolean, defenderAttritionEnabled?: boolean, warSupplyQualityEnabled?: boolean }} args.rules
- * @returns {{ outcomes: PulseOutcome[], deployments: Record<string, DeploymentRecord>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number>, defenderSiegeLedger?: (Record<string, any>|null), worldStatePatch: Readonly<Record<string, any>> }}
+ * @param {{ warLayerEnabled?: boolean, defenderAttritionEnabled?: boolean, warSupplyQualityEnabled?: boolean }} args.rules
+ * @returns {{ outcomes: PulseOutcome[], deployments: Record<string, DeploymentRecord>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number>, defenderSiegeLedger?: (Record<string, any>|null) }}
  *   - outcomes: probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  *   - deployments: the UPDATED one-army ledger to persist onto worldState
  *   - graphChannels: war_front directed channels to upsert into the regional graph
@@ -243,7 +1102,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   if (!rules?.warLayerEnabled) {
     const deployedIds = Object.keys(existing);
     if (!deployedIds.length) {
-      return { outcomes: [], deployments: existing, graphChannels: [], retiredChannels: [], resolvedDeployments: [], dispositionDeltas: [], warExhaustion: worldState?.warExhaustion || {}, defenderSiegeLedger: null, worldStatePatch: EMPTY_PATCH };
+      return { outcomes: [], deployments: existing, graphChannels: [], retiredChannels: [], resolvedDeployments: [], dispositionDeltas: [], warExhaustion: worldState?.warExhaustion || {}, defenderSiegeLedger: null };
     }
     // WIND-DOWN: the layer was turned OFF while armies were afield (a mid-campaign
     // toggle — directly, or cascaded by relationship drift turning off). Freezing
@@ -268,44 +1127,16 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       retiredChannels: [...new Set(windDownChannels)].sort(codepoint),
       resolvedDeployments, dispositionDeltas: [],
       warExhaustion: worldState?.warExhaustion || {}, defenderSiegeLedger: null,
-      worldStatePatch: EMPTY_PATCH,
     };
   }
 
-  // WR-8 R2 — THE LICENSE LEDGER'S ONE ROAD OUT OF THIS LAYER. `evaluateWarLayer`
-  // returns a bag and cannot mutate worldState, so a razing's mint/consume rides
-  // home as a PATCH the kernel spreads into the single line it already writes.
-  // Frozen-empty in every world that did not burn a town, by reference.
-  let worldStatePatch = EMPTY_PATCH;
-  // The MINT's running picture (see razingSiegeEmission's licenseState contract):
-  // starts as this tick's worldState and folds each razing's patch forward, so a
-  // tick that burns two towns keeps both sets of licenses. Never read by any
-  // decision — only by the ledger write.
-  let razingLicenseState = worldState;
-  const graph = snapshot?.regionalGraph || {}; const openerCasusFor = makeCurrentWarCasusRead({ snapshot, worldState, graph, rules });
+  const graph = snapshot?.regionalGraph || {};
   // M5: SIEGE-AS-STARVATION gate. On the spatial path (marker present) the siege
   // verdict resolves by supply interdiction × time (not the capacity roll). false off
   // the marker ⇒ every verdict runs the capacity-roll VERBATIM ⇒ byte-identical.
   const spatialSiege = armyTransitActive(/** @type {{ spatialCanonVersion?: unknown }} */ (worldState));
-  // JOIN 2 — THE ARRIVAL GATE. Built ONCE from the transit layer's published ledger:
-  // `atWalls(armyId, targetId)` is false only while that army's OWN march to THAT target
-  // is still under way. No ledger (dark spatial / unmapped pair) ⇒ always true ⇒ the
-  // besieger set below is byte-identical. The march time is bounded by MAX_MARCH_WEEKS,
-  // strictly below SIEGE_MAX_AGE, so the hard ceiling still terminates every campaign.
-  const atWalls = siegeArrivalGate(/** @type {{ spatialLedgers?: unknown }} */ (worldState), tick);
   // settlementStrength stays the RELATIONSHIP-dynamics confidence input (unchanged).
   const strengthFor = buildStrengthLookup(snapshot);
-  // WR-6 coalition law is stricter than the host war gate: all four constituent
-  // flags must be exact true.  Decisions read the PRE-TICK deployment ledger,
-  // so a war opened this tick can summon allies only on the following tick.
-  const coalitionWorldState = { ...worldState, simulationRules: rules };
-  const coalitionLit = warCoalitionActive(coalitionWorldState);
-  const coalitionJoinDecisions = coalitionLit
-    ? readCoalitionJoinDecisions({ snapshot, worldState: coalitionWorldState, tick, strengthFor })
-    : [];
-  const coalitionDecisionByParty = new Map(
-    coalitionJoinDecisions.map((decision) => [String(decision.partyId), decision]),
-  );
   // The war-specific MILITARY CAPACITY model (theoretical/current). The
   // deploy/siege math reads CURRENT capacity (theoretical minus exhaustion/drain
   // minus army-away); the feasibility gate classifies the capacity ratio.
@@ -487,19 +1318,12 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     for (const attackerId of Object.keys(deployments)) {
       if (String(deployments[attackerId]?.targetId) === targetId) besiegerSet.add(String(attackerId));
     }
-    // Three exclusions on one pass (combined so the JOIN-2 gate is net-zero on this
-    // file's frozen size ceiling; `.filter(A).filter(B)` and `.filter(A && B)` are the
-    // same set in the same order):
-    //   • not in canon — the settlement left the campaign;
-    //   • strategically withdrawn (recalled / sued-for peace) THIS tick — its army has
-    //     gone home and its front is being retired, so a stale confirmed front must not
-    //     resolve a phantom siege here;
-    //   • JOIN 2 — still ON THE ROAD. An army whose transit record says its march to
-    //     THIS target has not landed is not at the walls: it neither rolls the siege,
-    //     nor ages it, nor takes siege attrition, nor withdraws. Always true when the
-    //     transit layer is dark ⇒ this set is byte-identical off the spatial canon.
     const besiegers = [...besiegerSet]
-      .filter(id => snapshot?.byId?.has?.(id) && !recalledPairs.has(`${id}:${targetId}`) && atWalls(id, targetId))
+      .filter(id => snapshot?.byId?.has?.(id))
+      // Exclude besiegers whose deployment was strategically withdrawn (recalled /
+      // sued-for peace) THIS tick: their army has gone home and their front is being
+      // retired, so a stale confirmed front must not resolve a phantom siege here.
+      .filter(id => !recalledPairs.has(`${id}:${targetId}`))
       .sort(codepoint);
     if (!besiegers.length) continue;
 
@@ -531,7 +1355,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // P3 ally defense: allied/vassal/patron neighbours (not themselves besieged) send
     // relief. 0 when the flag is off ⇒ the verdict is unchanged.
     const defenderReliefBonus = allyDefenseEnabled
-      ? computeAllyRelief(snapshot, targetId, capacityFor, new Set(targets), coalitionLit)
+      ? computeAllyRelief(snapshot, targetId, capacityFor, new Set(targets))
       : 0;
     // W-F4b item 2a: the PRIMARY besieger's (besiegers[0]) alignment-conditioned
     // fidelity pull — 0 (⇒ the classify inputs stay TRUE, byte-identical) unless it
@@ -617,7 +1441,6 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         const withdrawn = besiegers.filter(id => String(deployments[id]?.targetId) === targetId);
         if (withdrawn.length) {
           let guttednessSum = 0; // Σ(1 − returned/start) across the withdrawing coalition.
-          const withdrawalOutcomeIds = [];
           for (const attackerId of withdrawn) {
             const withdrawnRec = deployments[attackerId];
             resolvedDeployments.push({ attackerId, deployment: withdrawnRec, targetId, outcome: 'withdrawal' });
@@ -640,16 +1463,11 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
               return Number.isFinite(m) && m > 0 && Number.isFinite(c) ? Math.max(0, Math.min(1, c / m)) : 1;
             })();
             guttednessSum += 1 - ratio;
+            dispositionDeltas.push({ id: String(attackerId), outcome: 'loss', magnitude: clamp01(0.5 + (1 - ratio) * 0.5) });
             const name = settlementNameFor(attackerId);
             const targetName = settlementNameFor(targetId);
-            const withdrawalOutcomeId = `world_outcome.siege_abandoned.${stablePart(attackerId)}.${stablePart(targetId)}.${tick}`;
-            withdrawalOutcomeIds.push(withdrawalOutcomeId);
-            dispositionDeltas.push({
-              id: String(attackerId), outcome: 'loss', magnitude: clamp01(0.5 + (1 - ratio) * 0.5),
-              sourceEventId: withdrawalOutcomeId,
-            });
-            outcomes.push(warConditionOutcome({
-              id: withdrawalOutcomeId,
+            outcomes.push(conditionOutcome({
+              id: `world_outcome.siege_abandoned.${stablePart(attackerId)}.${stablePart(targetId)}.${tick}`,
               archetype: 'war_exhaustion',
               targetSaveId: attackerId,
               severity: clamp01(0.3 + (warExhaustion[attackerId] || 0) * 0.4),
@@ -667,10 +1485,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           // loop), magnitude scaled by how gutted the withdrawing force came home. Feeds
           // computeAggressiveness so an emboldened survivor reads differently from an
           // unattacked town. Behind warLayerEnabled; the ±SCORE_MAX clamp bounds it.
-          dispositionDeltas.push({
-            id: String(targetId), outcome: 'win', magnitude: clamp01(0.4 + (guttednessSum / withdrawn.length) * 0.4),
-            sourceEventIds: withdrawalOutcomeIds,
-          });
+          dispositionDeltas.push({ id: String(targetId), outcome: 'win', magnitude: clamp01(0.4 + (guttednessSum / withdrawn.length) * 0.4) });
           continue; // the siege is broken off — no harassment on top.
         }
         // No live deployment to withdraw, but a STALE confirmed war_front channel may
@@ -692,7 +1507,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       if (verdict.harass) {
         const targetName = settlementNameFor(targetId);
         const raiderName = settlementNameFor(besiegers[0]);
-        outcomes.push(warConditionOutcome({
+        outcomes.push(conditionOutcome({
           id: `world_outcome.harassment.${stablePart(targetId)}.${tick}`,
           archetype: 'war_pressure',
           targetSaveId: targetId,
@@ -715,79 +1530,20 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const losers = besiegers.filter(id => id !== occupierId).map(id => settlementNameFor(id));
     const coalitionStrength01 = clamp01(verdict.coalitionCurrent / 100);
 
-    const conqueredSettlement = snapshot?.byId?.get?.(targetId)?.settlement;
-    const victorSettlement = snapshot?.byId?.get?.(occupierId)?.settlement;
-
-    // ── WR-8 AMENDMENT R — THE THIRD INTENT, AND THE ONE PLACE IT CAN BE ASKED.
-    // N3 named two goals a victor can hold: TAKE IT or PRICE IT. R adds PUNISH
-    // IT, and the only moment the question is answerable is the one below: the
-    // siege has just fallen and nothing has been minted yet.
-    //
-    // ⚠️ THE RAZING REPLACES THE CONQUEST; IT DOES NOT RIDE IT. LAW 6 is the
-    // amendment's signature — "no occupation record, no garrison, no vassal
-    // ledger, no terms" — so a razed town must not ALSO mint the power transfer
-    // that hands it to an occupation authority. One or the other, per siege.
-    //
-    // ⚠️ DORMANCY IS STRUCTURAL, NOT A FLAG READ HERE. `razingSiegeEmission`
-    // returns null unless all eight conquest-doctrine flags are lit (none of
-    // which has a DEFAULT_SIMULATION_RULES entry), and null again in any lit
-    // world whose law refused. Every campaign that has ever run takes the
-    // `else` arm below, byte-identically.
-    const razed = razingSiegeEmission({
-      worldState,
-      // THE ACCUMULATOR, not a second copy of worldState. Two sieges can fall on
-      // one tick, and each mint derives from the state it is handed — so without
-      // this the second razing's patch would REPLACE the first's and one town's
-      // mourners would silently lose their right of retribution. Every DECISION
-      // read still uses `worldState` above (the tick's opening picture), so a
-      // license minted by the first burning can never arm the second.
-      licenseState: razingLicenseState,
-      // The relationship estate's writer stamps `updatedAt` from the pulse's
-      // threaded clock; absent it falls back to the world's own stamp. No
-      // wall-clock is ever read (the determinism contract at the head).
-      now,
-      // WR-8 amendment R — THE DETERRENT PRICED BEFORE THE ACT. This is the same
-      // lookup the siege verdict and the coalition census read, handed on so the
-      // razing's believed-retaliation web is priced from the tick's ONE answer to
-      // "how strong is that court" rather than from a second reading of it.
-      strengthFor,
-      snapshot,
-      razerId: occupierId,
-      victimId: targetId,
-      razerName: occupierName,
-      victimName: targetName,
-      tick,
-      population: conqueredSettlement?.population,
-      namedCastCount: (conqueredSettlement?.npcs || []).length,
-      institutions: conqueredSettlement?.institutions || [],
-      movableWealth: Number(conqueredSettlement?.economicState?.wealthIndex) || 0,
-    });
-    // R2's CLOSED LOOP, carried out of the layer. An `initiation` razing MINTS
-    // the victim's friends their one right of retribution; a `vengeance` razing
-    // SPENDS the license it was permitted by and mints nothing at all — the
-    // refusal lives in `mintVengeanceLicenses`, at the only door that can create
-    // one, so the eye-for-an-eye cascade cannot start rather than being damped.
-    if (razed && razed.worldStatePatch !== EMPTY_PATCH) {
-      worldStatePatch = razed.worldStatePatch;
-      // Fold it forward so a SECOND razing this tick mints on top of this one
-      // instead of over it. The bag still carries exactly one patch — the last,
-      // which by this fold contains every earlier one.
-      razingLicenseState = { ...razingLicenseState, ...razed.worldStatePatch };
-    }
-
     // P3 sack & forage: a stormed town is pillaged. The deltas RIDE the conquest outcome
     // (not a separate emission) so a dismissed / deferred conquest — "the takeover didn't
     // stick; the armies disperse" — withholds the sack atomically, leaving no phantom
     // population loss. Flag-off ⇒ sack is null ⇒ NO populationDeltas key is added (the
     // conquest outcome is byte-identical). The transfer is conserved with a war-dead sink.
-    // A RAZED town is not sacked twice: the razing carries its own conserved sack.
-    const sack = warForageEnabled && !razed
+    const sack = warForageEnabled
       ? computeSackTransfer(snapshot?.byId?.get?.(targetId)?.settlement?.population)
       : null;
     // Granary loot: the same sack empties the conquered stores into the victor's, a
     // conserved storageMonths transfer (see computeSackFoodTransfer). Rides the conquest
     // outcome like the population sack ⇒ atomic with defer/dismiss; null ⇒ no key added.
-    const foodSack = warForageEnabled && !razed && conqueredSettlement && victorSettlement
+    const conqueredSettlement = snapshot?.byId?.get?.(targetId)?.settlement;
+    const victorSettlement = snapshot?.byId?.get?.(occupierId)?.settlement;
+    const foodSack = warForageEnabled && conqueredSettlement && victorSettlement
       ? computeSackFoodTransfer({
         conqueredStorageMonths: conqueredSettlement?.economicState?.foodSecurity?.storageMonths,
         conqueredPopulation: conqueredSettlement?.population,
@@ -797,8 +1553,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       })
       : null;
 
-    // THE FORK. A razed town mints no power transfer — the victor rode home.
-    outcomes.push(razed ? razed.outcome : {
+    outcomes.push({
       id: `world_outcome.conquest.${stablePart(targetId)}.${tick}`,
       type: 'power_transfer',
       candidateType: 'conquest',
@@ -856,14 +1611,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // conquests at once or already carried an unrelated win this tick. sourceConquestId is
     // additive metadata: applyDispositionDeltas reads only {id, outcome, magnitude}, so a
     // committed (un-dismissed) delta carries it harmlessly.
-    // A RAZING IS ALSO A WIN AND A LOSS, and the deltas are tagged with the
-    // outcome that actually landed. The tag's consumer (pulseKernel's dismissed-
-    // conquest residue strip) filters on `candidateType === 'conquest'`, so a
-    // razing's deltas are never stripped — which is correct and not a gap: the
-    // razing is a MINOR (J-WZ2-1) and there is no dismissal to strip for.
-    const conquestId = razed
-      ? String(razed.outcome.id)
-      : `world_outcome.conquest.${stablePart(targetId)}.${tick}`;
+    const conquestId = `world_outcome.conquest.${stablePart(targetId)}.${tick}`;
     dispositionDeltas.push({ id: String(occupierId), outcome: 'win', magnitude: 1, sourceConquestId: conquestId });
     dispositionDeltas.push({ id: String(targetId), outcome: 'loss', magnitude: 1, sourceConquestId: conquestId });
 
@@ -871,7 +1619,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // deployments; deploymentReturn turns each return into a contextual outcome.
     for (const attackerId of besiegers) {
       if (deployments[attackerId]) {
-        resolvedDeployments.push({ attackerId, deployment: deployments[attackerId], targetId, outcome: razed ? 'razing' : 'conquest' });
+        resolvedDeployments.push({ attackerId, deployment: deployments[attackerId], targetId, outcome: 'conquest' });
         delete deployments[attackerId];
         clearedAttackers.add(attackerId);
       }
@@ -917,136 +1665,40 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     }
   }
 
-  const coalitionNameFor = (id, fallback) => {
-    const item = snapshot?.byId?.get?.(String(id));
-    const name = item?.name || item?.settlement?.name;
-    return typeof name === 'string' && name.trim() ? name.trim() : fallback;
-  };
-  // WR-6's refusal aftermath — the tunables, the closed cause vocabulary, the calling
-  // court's bounded character read and the outcome that carries them — moved to
-  // ./warCoalitionRefusal.js. It BUILDS the outcome and cannot push one; this closure
-  // is the only thing that pushes, so all six refusal sites below are unchanged.
-  const pushCoalitionRefusal = (decision, refusalCause = 'strategic') => {
-    outcomes.push(buildCoalitionRefusalOutcome({
-      worldState, rules, snapshot, decision, refusalCause, tick, coalitionNameFor,
-    }));
-  };
-
   for (const fromId of candidateIds) {
-    const coalitionDecision = coalitionDecisionByParty.get(fromId) || null;
     if (deployments[fromId]) continue;                 // one-army constraint
+    if (activeIntervenerIds.has(fromId)) continue;     // r2 war-military-2: already committed as an intervention column
     // M10a — HOLD (dedup): a HELD war-init (warInitMode 'proposal') withholds the
     // deployment, so the mobilized besieger would otherwise re-propose the SAME
     // siege every tick, spamming the approval queue. While a pending strategy_deploy
     // proposal for this besieger sits unresolved, the actor HOLDS — no duplicate.
     // The legacy/auto path mints inline (caught by the one-army gate above) and
     // never holds ⇒ this guard is byte-invisible when initiation is not proposal-gated.
-    if ((warInitMode === 'proposal' || coalitionDecision)
-      && pendingActorMajorFor(worldState, 'strategy_deploy', fromId)) continue;
-    if (coalitionDecision) {
-      // The call was priced from the pre-tick root, but the root siege resolved
-      // before this opener.  Revalidate against the UPDATED ledger so a conquest,
-      // withdrawal, recall, or vanished target cannot resurrect an ended episode.
-      // A lapsed call emits neither join nor refusal: there is no longer a call
-      // to answer by the time this army would march.
-      const anchor = coalitionDecision.anchor;
-      const root = deployments[anchor.originAttackerId];
-      const rootTargetId = anchor.originAttackerId === anchor.callerId
-        ? anchor.enemyId
-        : anchor.callerId;
-      const rootSurvives = root
-        && root.recalled == null
-        && Number(root.sinceTick) === anchor.originSinceTick
-        && String(root.targetId || '') === rootTargetId
-        && !joinAnchorOf(root, anchor.originAttackerId)
-        && snapshot?.byId?.has?.(anchor.partyId)
-        && snapshot?.byId?.has?.(anchor.callerId)
-        && snapshot?.byId?.has?.(anchor.enemyId)
-        && treatyEligibleWarTargets(
-          coalitionWorldState,
-          anchor.partyId,
-          [anchor.enemyId],
-          tick,
-        ).length === 1;
-      if (!rootSurvives) continue;
-    }
-    if (coalitionDecision && !coalitionDecision.accepted) {
-      pushCoalitionRefusal(coalitionDecision);
-      continue;
-    }
-    if (activeIntervenerIds.has(fromId)) {             // already committed as an intervention column
-      if (coalitionDecision) pushCoalitionRefusal(coalitionDecision, 'army_committed');
-      continue;
-    }
-    if (clearedAttackers.has(fromId)) {                // army just returned this tick
-      if (coalitionDecision) pushCoalitionRefusal(coalitionDecision, 'army_returned');
-      continue;
-    }
-    if (isBesieged(graph, fromId)) {                   // can't march while besieged/occupied
-      if (coalitionDecision) pushCoalitionRefusal(coalitionDecision, 'home_threatened');
-      continue;
-    }
+    if (warInitMode === 'proposal' && pendingActorMajorFor(worldState, 'strategy_deploy', fromId)) continue;
+    if (clearedAttackers.has(fromId)) continue;        // army just returned this tick
+    if (isBesieged(graph, fromId)) continue;           // can't march while besieged/occupied
     // MOBILIZATION POSTURE GATE (the keystone): a settlement cannot launch a
     // serious siege from peace. It must have RAMPED to a war-ready posture
     // (mobilized / deployed) over prior ticks. A `peace`/`alert`/`war_preparation`
     // settlement is BLOCKED here — no fresh front, no matter how strong. (Pre-seeded
     // sieges already in the graph are resolved above regardless of posture; this gate
     // only governs OPENING a NEW one.)
-    // A ratified alliance call is itself the mobilizing authority for the
-    // joining court.  Ordinary opportunistic wars still require the pre-built
-    // posture; otherwise a defender's ally could never replace the free relief
-    // this lit mode deliberately removes.
-    if (!coalitionDecision && !isWarReady(warPosture[fromId]?.state)) continue;
+    if (!isWarReady(warPosture[fromId]?.state)) continue;
 
     const fromStrength = strengthFor(fromId);
-    if (!coalitionDecision && fromStrength < HOSTILE_CONFIDENCE) continue; // ordinary hostile confidence gate
+    if (fromStrength < HOSTILE_CONFIDENCE) continue;   // not confident enough to wage war (relationship gate)
     const fromCap = capacityFor(fromId);
     // worldpulse-war-9: is this settlement under an active occupation, and by whom? An
     // occupied town may march ONLY against its occupier (a rising), never a third party.
     const occupierOfFrom = occupations[fromId]?.occupierId != null ? String(occupations[fromId].occupierId) : null;
-    if (coalitionDecision && occupierOfFrom && coalitionDecision.enemyId !== occupierOfFrom) {
-      pushCoalitionRefusal(coalitionDecision, 'occupied');
-      continue;
-    }
-    if (coalitionDecision) {
-      const defenderCap = capacityFor(coalitionDecision.enemyId);
-      const { verdict } = classifyFeasibility({
-        attackerCurrent: fromCap.offensive,
-        defenderCurrent: defenderCap.homeDefense,
-        coalitionSize: 1,
-        defenderItem: snapshot?.byId?.get?.(coalitionDecision.enemyId),
-        attackerFacets: fromCap.facets,
-        defenderFacets: defenderCap.facets,
-      });
-      if (!verdictPermitsSiege(verdict)) {
-        pushCoalitionRefusal(
-          coalitionDecision,
-          'front_infeasible',
-        );
-        continue;
-      }
-    }
 
     // Pick the first hostile target (codepoint-sorted) this settlement can PLAUSIBLY
     // besiege ALONE — the hard feasibility gate runs on the CURRENT-capacity matchup
     // BEFORE any front is minted, so a thorpe cannot open a solo siege on a strong
     // town even at a war-ready posture. Only a `plausible` (or satisfied override)
     // solo verdict mints a front; require_coalition / harassment / auto_fail do not.
-    // JOIN 1 — THE RESOLVED MARCH. The live ORDER (if any) this settlement's seat left
-    // for the opener when the strategy chooser resolved on `deploy` last tick. Null —
-    // and every consumer below therefore a no-op, running today's expression verbatim —
-    // when the chooser is dark, resolved otherwise, or the order has expired.
-    const marchOrder = coalitionDecision ? null : warIntentFor(worldState, fromId, tick);
-    let chosenTarget = coalitionDecision ? coalitionDecision.enemyId : null;
-    // WR-0c: the shared target census removes any pair protected by an honored
-    // non-aggression term at this tick. Repudiation is a separate, receipted realm
-    // decision; the opener never treats a march order as permission to ignore a pact.
-    for (const targetId of coalitionDecision ? [] : intentTargetOrder(hostileTargetsOf(snapshot, fromId, tick), marchOrder)) {
-      // The ordered target is tried FIRST (intentTargetOrder above) and is the one
-      // target for which the CONQUEST_MARGIN pre-filter is waived below: that filter
-      // stands in for a deliberation the seat has now actually performed. Every HARD
-      // gate — occupation, already-besieging, and classifyFeasibility — still applies.
-      const ordered = intentNamesTarget(marchOrder, targetId);
+    let chosenTarget = null;
+    for (const targetId of hostileTargetsOf(snapshot, fromId)) {
       // worldpulse-war-9: under occupation, the ONLY permissible target is the occupier
       // (the uprising). Any third-party siege is blocked while garrisoned.
       if (occupierOfFrom && String(targetId) !== occupierOfFrom) continue;
@@ -1059,10 +1711,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // margin gate reads fromStrength lifted by the bounded case factor
       // (≤ ×(1+WAR_FACTOR_W); exactly ×1 when the peace-engine gate is dark or
       // no case stands, so the dormant comparison is byte-identical).
-      const casusRead = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState))) ? openerCasusFor(String(fromId), String(targetId)) : null;
-      const casusEntry = casusRead?.entry || null;
+      const casusEntry = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState)))
+        ? warReasonsFor(worldState, String(fromId), String(targetId)) : null;
       const casusMult = casusEntry ? 1 + REASON_TUNING.WAR_FACTOR_W * aggregateReasons01(casusEntry) : 1;
-      if ((!ordered || casusRead?.opportunismCounterforced) && fromStrength * casusMult <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // a counterforced stale case restores the prefilter even for an old order
+      if (fromStrength * casusMult <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // relationship-confidence gate
       const defenderCap = capacityFor(targetId);
       const { verdict } = classifyFeasibility({
         attackerCurrent: fromCap.offensive,
@@ -1100,24 +1752,17 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // W-C1 item 3: supply-gap quality on the committed force (flag off ⇒ 1 ⇒ byte-identical).
       qualityMult: qualityMultFor(fromId),
     });
-    if (coalitionDecision) seededRecord.joinLedger = [coalitionDecision.anchor];
     // W-PEACE-1 §14 (the artifact law): the war record CARRIES its casus list —
     // the top typed reasons standing against the chosen target at the moment the
     // army marched. Stamped ONLY when the peace-engine gate is lit and a case
     // stands (the dormant record shape is byte-identical). Rides the record
     // through attrition (applyAttritionToRecord spreads ...record) and through
     // the DM-Driven proposalPayload (the seeded record is embedded verbatim).
-    const openingReasons = coalitionDecision
-      ? [{
-        type: 'alliance_obligation',
-        score: coalitionDecision.score01,
-        receipt: 'A sworn ally remains in the field under the same living cause.',
-      }]
-      : peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState)))
-        ? topReasons(openerCasusFor(String(fromId), String(chosenTarget)).entry, 3)
-        : [];
-    const { casusReasons: casusList, sacredAnchors } = pinDeploymentCasusReasons({ reasons: openingReasons, tick, attackerItem: snapshot?.byId?.get?.(String(fromId)), defenderItem: snapshot?.byId?.get?.(String(chosenTarget)), simulationRules: rules });
-    if (casusList.length) seededRecord.casusReasons = casusList; Object.assign(seededRecord, sacredAnchors);
+    const casusList = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState)))
+      ? topReasons(warReasonsFor(worldState, String(fromId), String(chosenTarget)), 3)
+        .map((r) => ({ type: r.type, score: r.score, receipt: r.receipt }))
+      : [];
+    if (casusList.length) seededRecord.casusReasons = casusList;
     // The war_front channel PARAMS (the `now` stamp is applied at mint time). On the
     // legacy path they are minted immediately (below); under DM-Driven they ride the
     // proposalPayload verbatim and the apply re-mints an identical front on approval.
@@ -1127,16 +1772,9 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       to: chosenTarget,
       strength: clamp01(0.5 + fromStrength * 0.3),
       confidence: 0.8,
-      explanation: coalitionDecision
-        ? `${coalitionNameFor(fromId, 'The allied court')} marches on ${coalitionNameFor(chosenTarget, 'the opposing court')}.`
-        : `${settlementNameFor(fromId)} marches on ${settlementNameFor(chosenTarget)}.`,
+      explanation: `${settlementNameFor(fromId)} marches on ${settlementNameFor(chosenTarget)}.`,
       relationshipKey: `war_front.${stablePart(fromId)}.${stablePart(chosenTarget)}`,
-      source: coalitionDecision ? 'war_layer_coalition_join' : 'war_layer_deploy',
-      ...(coalitionDecision ? {
-        coalitionCallId: coalitionDecision.callId,
-        coalitionCallerId: coalitionDecision.callerId,
-        coalitionRelationshipKey: coalitionDecision.relationshipKey,
-      } : {}),
+      source: 'war_layer_deploy',
     };
     if (warInitMode !== 'proposal') {
       // LEGACY / AUTO — install the siege inline, byte-identically to the pre-M9d engine.
@@ -1159,83 +1797,42 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // war_front channel). targetSaveId is the BESIEGER (the actor mobilizing the army) and
     // sourceEventTargetId the BESIEGED — the pulseKernel residue strip reads both off this
     // outcome to drop the new deployment + its front when the siege is deferred/dismissed.
-    const fromName = coalitionDecision
-      ? coalitionNameFor(fromId, 'The allied court')
-      : settlementNameFor(fromId);
-    const chosenName = coalitionDecision
-      ? coalitionNameFor(chosenTarget, 'the opposing court')
-      : settlementNameFor(chosenTarget);
-    const callerName = coalitionDecision
-      ? coalitionNameFor(coalitionDecision.callerId, 'the calling ally')
-      : '';
-    const coalitionProposal = !!coalitionDecision && warInitMode === 'proposal';
+    const fromName = settlementNameFor(fromId);
+    const chosenName = settlementNameFor(chosenTarget);
     // W-C1 legibility: name the two new martial causes when they moved the committed force.
     // Read the just-seeded record directly (under DM-Driven it is NOT in `deployments`).
     const seededRec = seededRecord;
-    const deployReasons = coalitionDecision
-      ? (coalitionProposal
-        ? [
-          `${fromName} is prepared to answer ${callerName}'s living cause if the proposed march is approved.`,
-          `The court weighed the wider retaliation the proposed march could awaken.`,
-          `Proposed casus belli: a sworn alliance obligation under the same living cause.`,
-        ]
-        : [
-          `${fromName} judged ${callerName}'s living cause strong enough to answer the alliance call.`,
-          `The court weighed the wider retaliation the march could awaken before committing its own army.`,
-          `Casus belli: a sworn alliance obligation under the same living cause.`,
-        ])
-      : [`${fromName} is war-ready and ${chosenName} is a feasible target.`];
-    if (!coalitionDecision && Number.isFinite(seededRec?.sizingBias) && seededRec.sizingBias !== 1) {
+    const deployReasons = [`${fromName} is war-ready and ${chosenName} is a feasible target.`];
+    if (Number.isFinite(seededRec?.sizingBias) && seededRec.sizingBias !== 1) {
       deployReasons.push(
         `A rusty command ${seededRec.sizingBias > 1 ? 'over' : 'under'}-committed the force (sizing ×${seededRec.sizingBias.toFixed(2)}).`,
       );
     }
-    if (!coalitionDecision && Number.isFinite(seededRec?.deployedQuality) && seededRec.deployedQuality !== 1) {
+    if (Number.isFinite(seededRec?.deployedQuality) && seededRec.deployedQuality !== 1) {
       deployReasons.push(
         `Thin war-supply degraded the army's kit (deployed quality ×${seededRec.deployedQuality.toFixed(2)}).`,
       );
     }
     // W-PEACE-1 §14.4: the march's receipt NAMES its typed casus (empty when the
     // peace-engine gate is dark ⇒ the dormant outcome is byte-identical).
-    for (const c of coalitionDecision ? [] : casusList) {
+    for (const c of casusList) {
       deployReasons.push(`Casus belli: ${c.type} (${c.score.toFixed(2)}) — ${c.receipt}`);
     }
     outcomes.push({
       id: `world_outcome.strategy_deploy.${stablePart(fromId)}.${stablePart(chosenTarget)}.${tick}`,
       type: 'strategy_deploy',
       candidateType: 'strategy_deploy',
-      ruleId: coalitionDecision ? 'war_coalition_join' : 'war_layer_strategy_deploy',
+      ruleId: 'war_layer_strategy_deploy',
       ruleFamily: 'stressor',
       // LEGACY ⇒ 'auto' (byte-identical); DM-DRIVEN ⇒ 'proposal' (routes to the queue).
       applyMode: warInitMode,
       probability: 1,
       targetSaveId: fromId,
       severity: clamp01(0.5 + fromStrength * 0.2),
-      headline: coalitionDecision
-        ? (coalitionProposal
-          ? `${fromName} proposes to answer ${callerName}'s call`
-          : `${fromName} answers ${callerName}'s call`)
-        : `${fromName} marches on ${chosenName}`,
-      summary: coalitionDecision
-        ? (coalitionProposal
-          ? `${fromName} would commit its own army against ${chosenName} if the answer is approved; each ally would keep a separate command.`
-          : `${fromName} commits its own army against ${chosenName}; the alliance is now a set of separate wars, not a shared command.`)
-        : `${fromName} commits its army to a siege of ${chosenName}. The campaign is opened.`,
+      headline: `${fromName} marches on ${chosenName}`,
+      summary: `${fromName} commits its army to a siege of ${chosenName}. The campaign is opened.`,
       reasons: deployReasons,
       sourceEventTargetId: chosenTarget,
-      ...(coalitionDecision ? {
-        relationshipKey: coalitionDecision.relationshipKey,
-        relationshipPatch: {},
-        metadata: {
-          incidentType: 'coalition_joined',
-          allianceCall: coalitionCallArchiveRow(coalitionDecision, 'joined', tick),
-          coalitionEvidence: coalitionDecisionEvidence(coalitionDecision, true, tick),
-          coalitionEnemyRelationship: {
-            partyId: String(fromId),
-            enemyId: String(chosenTarget),
-          },
-        },
-      } : {}),
       // M9d — the siege-initiation payload. Present ONLY under DM-Driven (the legacy
       // outcome is byte-identical — no field added). On approval, applyWorldPulseOutcomes
       // re-mints the WITHHELD deployment + war_front from this payload. `deployment` is the
@@ -1248,33 +1845,293 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
             besieged: String(chosenTarget),
             deployment: seededRecord,
             warFront: frontParams,
-            ...(coalitionDecision ? { coalition: coalitionDecision.anchor } : {}),
           },
         }
         : {}),
     });
   }
 
-  // ── Steps 5 + 5b — WHAT THE WAR COSTS THE HOME. The per-tick home-side charge
-  // (conscription, vassal levy, reinforcement + its cost, war_drain, army_deployed,
-  // the war-exhaustion ratchet) and the scar's slow decay for homes whose army came
-  // back, moved to ./warHomeCosts.js together with the two functions that INVERT them
-  // for a DM-dismissed siege. It mutates these two ledger copies and returns them.
-  const homeCosts = applyHomeWarCosts({
-    snapshot,
-    graph,
-    deployments,
-    warExhaustion,
-    capacityFor,
-    settlementNameFor,
-    targets,
-    preTickDeployments: existing,
-    tick,
-    warEconomyEnabled,
-    warLevyEnabled,
-    coalitionLit,
-  });
-  outcomes.push(...homeCosts.outcomes);
+  // ── Step 5: re-upsert the home conditions each tick for every active deployer.
+  // war_drain severity ∝ the count of active war_fronts FROM S in the PRE-TICK graph
+  // (NOT this-tick's fresh mints) — avoids intra-tick read-after-write, so a fresh
+  // deploy raises the drain only NEXT tick. army_deployed is a flat garrison debuff. ─
+  const activeDeployers = new Set(Object.keys(deployments).map(String));
+  // F2: vassals levied THIS tick (populated only under warLevyEnabled ⇒ empty on the
+  // default path = byte-identical). Step 5b reads it to narrate a levied vassal's scar
+  // as ACTIVE levy strain rather than post-war recovery — the number is the same.
+  const leviedThisTick = new Set();
+  for (const fromId of Object.keys(deployments).sort(codepoint)) {
+    const preTickFrontCount = warFrontsFrom(graph, fromId).length;
+    // A just-deployed settlement has 0 pre-tick fronts → minimum-severity drain this
+    // tick (the army IS away), scaling up next tick once the mint lands in the graph.
+    const frontCount = Math.max(preTickFrontCount, 1);
+    const rec = deployments[fromId];
+    const name = settlementNameFor(fromId);
+    const targetName = settlementNameFor(rec.targetId);
+    const deploymentAge = Number(rec.deploymentAge) || 0;
+
+    // ── REINFORCEMENT: the home sends a PARTIAL, EXPENSIVE replenishment to its
+    // army in the field. The flow ∝ the origin's economy/manpower/materiel/food/trade/
+    // legitimacy, damped by route burden + its own war-exhaustion, ZEROED if the home
+    // is itself besieged. It NEVER fully restores (capped well below the deficit) and
+    // it DRAINS the origin — the reinforcement_cost condition below carries the bleed.
+    // Only an army that is actually DEPLETED draws a flow (a full-strength army receives
+    // nothing → no extra drain → byte-light). ───────────────────────────────────────
+    const origin = buildOriginEnvelope(snapshot, graph, capacityFor, warExhaustion, fromId);
+    const flow = computeReinforcement({ record: rec, origin });
+    deployments[fromId] = applyReinforcementToRecord(rec, flow);
+
+    // ── WAR-ECONOMY CONSCRIPTION (P1, flag-gated; inert + byte-identical when off). A
+    // deployed army draws real population from its home each tick — men march to the
+    // front. The debit is a conserved populationDelta, and the headcount is banked on
+    // the record (deployedPopulation) so the return-replenish gives back exactly the
+    // SURVIVORS (deploymentReturn.js). Floored so a war can't conscript a home to zero.
+    if (warEconomyEnabled) {
+      const homePop = Math.max(0, Math.round(Number(snapshot?.byId?.get?.(fromId)?.settlement?.population) || 0));
+      const room = Math.max(0, homePop - WAR_CONSCRIPT_POP_FLOOR);
+      const sent = Math.min(Math.round(homePop * WAR_CONSCRIPT_RATE_PER_TICK), room);
+      if (sent > 0) {
+        const prevDeployed = Number(deployments[fromId].deployedPopulation) || 0;
+        deployments[fromId] = { ...deployments[fromId], deployedPopulation: prevDeployed + sent };
+        outcomes.push({
+          id: `world_outcome.war_conscription.${stablePart(fromId)}.${tick}`,
+          candidateType: 'war_conscription',
+          targetSaveId: fromId,
+          generatedAtTick: tick,
+          tick,
+          headline: `${name} conscripts for the front`,
+          // formatCount (as deploymentReturn/populationDynamics do): this summary
+          // persists into wizardNews/chronicle, so a bare toLocaleString() would emit
+          // locale-divergent bytes for the same seed and break golden byte-identity.
+          summary: `${name} sends ${formatCount(sent)} more to the army besieging ${targetName}.`,
+          populationDeltas: [{ saveId: fromId, delta: -sent, reason: `${name} conscripts men for the campaign against ${targetName}.` }],
+          metadata: { warEconomy: 'conscription', armyId: fromId, sent },
+        });
+      }
+    }
+
+    // ── WAR LEVY (F2, flag-gated; inert + byte-identical when off). The deploying home also
+    // draws men + grain from its NON-besieged, NON-deploying vassal / allied neighbours. The
+    // men join the overlord's army (a conserved populationDelta debit on the vassal + a
+    // deployedPopulation credit, so homecoming returns the survivors); the grain is a gentle
+    // conserved granary transfer. The cost is LOYALTY: each levied vassal accrues war-weariness
+    // (→ rebellion, and couplable under warDisposition), so an over-drawn client turns on its
+    // overlord. Rides a MINOR war_levy outcome (auto-applied like conscription). ─────────────
+    if (warLevyEnabled) {
+      // …and NOT a settlement another overlord already levied THIS tick. leviedThisTick
+      // accumulates across overlords (outer loop), so a vassal/ally shared by two
+      // overlords is levied at most once — otherwise each overlord's independent
+      // pop/food floors draw against the same pre-tick stores and can breach the
+      // skeleton floor / mint food when the debits compound past what's on hand.
+      const excludeSet = new Set([...targets, ...Object.keys(deployments).map(String), ...leviedThisTick]);
+      const home = snapshot?.byId?.get?.(fromId)?.settlement;
+      /** @type {any[]} */
+      const levyPopDeltas = [];
+      /** @type {any[]} */
+      const levyFoodDeltas = [];
+      let totalLevied = 0;
+      /** @type {Record<string, number>} */
+      const leviedBySource = {};
+      for (const srcId of computeLevySources(snapshot, fromId, excludeSet)) {
+        const src = snapshot?.byId?.get?.(srcId)?.settlement;
+        if (!src) continue;
+        const srcName = settlementNameFor(srcId);
+        // Men: a floored fraction of the vassal's population marches into the overlord's army.
+        const srcPop = Math.max(0, Math.round(Number(src.population) || 0));
+        const levied = Math.min(Math.round(srcPop * LEVY_POP_RATE_PER_TICK), Math.max(0, srcPop - LEVY_POP_FLOOR));
+        if (levied > 0) {
+          totalLevied += levied;
+          leviedBySource[srcId] = levied;
+          levyPopDeltas.push({ saveId: srcId, delta: -levied, reason: `${srcName} levies men for ${name}'s war against ${targetName}.` });
+        }
+        // Grain: a gentle conserved granary transfer from the vassal to the overlord's home.
+        const food = home ? computeSackFoodTransfer({
+          conqueredStorageMonths: src?.economicState?.foodSecurity?.storageMonths,
+          conqueredPopulation: src.population,
+          victorStorageMonths: home?.economicState?.foodSecurity?.storageMonths,
+          victorPopulation: home.population,
+          victorCapMonths: storageCapacityMonths(home),
+          takeFraction: LEVY_FOOD_FRACTION,
+          captureFraction: LEVY_FOOD_CAPTURE,
+        }) : null;
+        if (food && food.lostMonths > 0) {
+          levyFoodDeltas.push({ saveId: srcId, deltaMonths: -food.lostMonths, reason: `${srcName}'s granary feeds ${name}'s war.` });
+          if (food.gainedMonths > 0) levyFoodDeltas.push({ saveId: fromId, deltaMonths: food.gainedMonths, reason: `Grain levied from ${srcName} resupplies ${name}.` });
+        }
+        // Loyalty cost: the levied vassal grows war-weary (feeds P2's coup flywheel).
+        // Gross-accrued so the same-tick step-5b decay nets it to exactly
+        // LEVY_STRAIN_PER_TICK (see LEVY_STRAIN_GROSS_PER_TICK).
+        if (levied > 0 || (food && food.lostMonths > 0)) {
+          warExhaustion[srcId] = clamp01((warExhaustion[srcId] || 0) + LEVY_STRAIN_GROSS_PER_TICK);
+          leviedThisTick.add(String(srcId));
+        }
+      }
+      if (totalLevied > 0) {
+        const prevDeployed = Number(deployments[fromId].deployedPopulation) || 0;
+        // Bank the per-vassal headcount alongside the aggregate deployedPopulation.
+        // deploymentReturnOutcomes READS this ledger to apportion the returning survivors
+        // back to each contributor — the overlord's conscript share to the overlord, each
+        // vassal's levied share to that vassal — so per-settlement population conserves
+        // instead of pumping one-way from vassals to overlord. It rides the same flag-gated
+        // record (flag-off worlds never bank ⇒ byte-identical).
+        /** @type {Record<string, number>} */
+        const bankedBySource = { ...(/** @type {any} */ (deployments[fromId]).leviedPopulationBySource || {}) };
+        for (const [srcId, count] of Object.entries(leviedBySource)) {
+          bankedBySource[srcId] = (Number(bankedBySource[srcId]) || 0) + count;
+        }
+        deployments[fromId] = {
+          ...deployments[fromId],
+          deployedPopulation: prevDeployed + totalLevied,
+          leviedPopulationBySource: bankedBySource,
+        };
+      }
+      if (levyPopDeltas.length || levyFoodDeltas.length) {
+        outcomes.push({
+          id: `world_outcome.war_levy.${stablePart(fromId)}.${tick}`,
+          candidateType: 'war_levy',
+          targetSaveId: fromId,
+          generatedAtTick: tick,
+          tick,
+          headline: `${name} calls up its vassals`,
+          // formatCount: persists into wizardNews/chronicle (see the conscription
+          // summary above for the byte-identity rationale).
+          summary: `${name} levies ${formatCount(totalLevied)} men and grain from its vassals and allies for the war against ${targetName}.`,
+          ...(levyPopDeltas.length ? { populationDeltas: levyPopDeltas } : {}),
+          ...(levyFoodDeltas.length ? { foodStockpileDeltas: levyFoodDeltas } : {}),
+          metadata: { warEconomy: 'levy', armyId: fromId, levied: totalLevied },
+        });
+      }
+    }
+
+    // The age-scaled war_drain bump: the LONGER deployed, the deeper the home bleed —
+    // even a winning war keeps draining the origin. Stacks on the front-count drain.
+    const ageDrain = Math.min(AGE_DRAIN_CAP, deploymentAge * AGE_DRAIN_PER_TICK);
+    const drainSeverity = clamp01(frontCount * WAR_DRAIN_PER_FRONT + ageDrain);
+
+    // RATCHET the non-reverting exhaustion scar UP for every sustained
+    // deployment (read-last/write-next: read the pre-tick ledger value, accrue, write
+    // the next-tick value). Capped at 1. The condition emitted below carries the
+    // ratcheted value, so it lands on the home and bites settlementStrength NEXT tick.
+    const prevScar = clamp01(warExhaustion[fromId] || 0);
+    const nextScar = clamp01(prevScar + EXHAUSTION_ACCRUE_PER_TICK);
+    warExhaustion[fromId] = nextScar;
+
+    outcomes.push(conditionOutcome({
+      id: `world_outcome.war_drain.${stablePart(fromId)}.${tick}`,
+      archetype: 'war_drain',
+      targetSaveId: fromId,
+      severity: drainSeverity,
+      headline: `${name}'s war chest bleeds`,
+      summary: `Sustaining the campaign against ${targetName} drains the home economy.`,
+      reasons: [`${frontCount} active war front${frontCount === 1 ? '' : 's'} from ${name}${ageDrain > 0 ? `, ${deploymentAge} ticks deployed` : ''}.`],
+      tick,
+      sourceEventTargetId: rec.targetId,
+      causes: [{ source: fromId, effect: 'war_drain', reason: `${name} is besieging ${targetName}.` }],
+    }));
+
+    outcomes.push(conditionOutcome({
+      id: `world_outcome.army_deployed.${stablePart(fromId)}.${tick}`,
+      archetype: 'army_deployed',
+      targetSaveId: fromId,
+      severity: ARMY_DEPLOYED_SEVERITY,
+      headline: `${name}'s garrison marches abroad`,
+      summary: `${name}'s standing army is committed against ${targetName}, thinning the home garrison.`,
+      reasons: [`Army deployed to besiege ${targetName}.`],
+      tick,
+      sourceEventTargetId: rec.targetId,
+      causes: [{ source: fromId, effect: 'army_deployed', reason: `${name}'s army is away besieging ${targetName}.` }],
+    }));
+
+    // ── REINFORCEMENT COST: the home pays for keeping the army in the field. Only
+    // emitted when a flow actually went out (a depleted army being topped up); a full-
+    // strength army imposes no cost (byte-light). Severity ∝ the flow + deploymentAge,
+    // bites economic_capacity / public_legitimacy / defense_readiness. ───────────────
+    if (flow.drainSeverity > REINFORCEMENT_COST_FLOOR && flow.flowPoints > 0) {
+      outcomes.push(conditionOutcome({
+        id: `world_outcome.reinforcement_cost.${stablePart(fromId)}.${tick}`,
+        archetype: 'reinforcement_cost',
+        targetSaveId: fromId,
+        severity: flow.drainSeverity,
+        headline: `${name} bleeds to keep its army fed`,
+        summary: `${name} keeps sending men, coin, and grain to the front against ${targetName}, and the home pays for every levy.`,
+        reasons: flow.reasons,
+        tick,
+        sourceEventTargetId: rec.targetId,
+        causes: [{ source: fromId, effect: 'reinforcement_cost', reason: `${name} is reinforcing its army besieging ${targetName} (${deploymentAge} ticks deployed).` }],
+      }));
+    }
+
+    // Surface the scar as a war_exhaustion condition once it clears the floor.
+    // This is THE homeostasis closer: it feeds economic_capacity (the sink) AND a
+    // direct settlementStrength penalty, so a protracted siege eventually drops the
+    // aggressor's confidence below HOSTILE_CONFIDENCE/CONQUEST_MARGIN — the realm can
+    // no longer sustain or escalate the war and the loop converges toward peace.
+    if (nextScar >= EXHAUSTION_CONDITION_FLOOR) {
+      outcomes.push(conditionOutcome({
+        id: `world_outcome.war_exhaustion.${stablePart(fromId)}.${tick}`,
+        archetype: 'war_exhaustion',
+        targetSaveId: fromId,
+        severity: nextScar,
+        headline: `${name} grows war-weary`,
+        summary: `The long campaign against ${targetName} has left ${name} a lasting wound. The treasury thins and the public tires of war.`,
+        reasons: [`Sustained war-exhaustion scar at ${nextScar.toFixed(2)} (non-reverting).`],
+        tick,
+        // Keyed by the HOME (like the decay path below), NOT the war target:
+        // deriveActiveCondition hashes the condition id from sourceEventTargetId, so a
+        // target-keyed accrual and a home-keyed decay would mint TWO distinct
+        // war_exhaustion conditions on the same settlement — the accrual one lingering
+        // (double-stamping the penalty) for ticks after the war while the decay one
+        // re-stamps. One key ⇒ one condition that accrues and then decays.
+        sourceEventTargetId: fromId,
+        causes: [{ source: fromId, effect: 'war_exhaustion', reason: `${name} has campaigned too long against ${targetName}.` }],
+      }));
+    }
+  }
+
+  // ── Step 5b: DECAY the scar for homes whose army is no longer deployed. The decay
+  // is ~5× slower than the accrual (EXHAUSTION_DECAY_PER_TICK ≪ ACCRUE), so a long
+  // war leaves a wound that lingers for many ticks after the peace — non-reverting by
+  // construction, the opposite of a mean-reverting relationship. Codepoint-sorted;
+  // entries that reach 0 are dropped so the ledger never accumulates dead keys. A
+  // still-significant scar keeps stamping its war_exhaustion condition (the realm is
+  // recovering but not yet whole — peace holds because the wound persists).
+  for (const homeId of Object.keys(warExhaustion).sort(codepoint)) {
+    if (activeDeployers.has(homeId)) continue;
+    const decayed = clamp01((warExhaustion[homeId] || 0) - EXHAUSTION_DECAY_PER_TICK);
+    if (decayed <= 0) {
+      delete warExhaustion[homeId];
+      continue;
+    }
+    warExhaustion[homeId] = decayed;
+    if (decayed >= EXHAUSTION_CONDITION_FLOOR && snapshot?.byId?.has?.(homeId)) {
+      const name = settlementNameFor(homeId);
+      // A vassal levied THIS tick is not recovering — its scar is the ACTIVE loyalty
+      // cost of an overlord's war (accrued in step 5's levy block; empty set when the
+      // flag is off). Same condition id/arithmetic; only the narrative differs, so the
+      // vassal is no longer described as nursing wounds from a war it never waged.
+      const leviedNow = leviedThisTick.has(homeId);
+      outcomes.push(conditionOutcome({
+        id: `world_outcome.war_exhaustion.${stablePart(homeId)}.${tick}`,
+        archetype: 'war_exhaustion',
+        targetSaveId: homeId,
+        severity: decayed,
+        headline: leviedNow ? `${name} strains under the levy` : `${name} nurses its war wounds`,
+        summary: leviedNow
+          ? `${name}'s men and grain feed an overlord's war, and the repeated levies wear on the settlement.`
+          : `${name}'s army is home, but the cost of the war it waged still weighs on the economy and the public.`,
+        reasons: [leviedNow
+          ? `War-levy strain accruing at ${decayed.toFixed(2)} (levied again this tick).`
+          : `War-exhaustion scar slowly fading at ${decayed.toFixed(2)}.`],
+        tick,
+        sourceEventTargetId: homeId,
+        causes: [{
+          source: homeId,
+          effect: 'war_exhaustion',
+          reason: leviedNow ? `${name} is drained by an overlord's war levies.` : `${name} is recovering from a costly war.`,
+        }],
+      }));
+    }
+  }
 
   // Dedup + codepoint-sort the retired channel ids (a coalition can list the same
   // target front once per besieger; the caller's setRegionalChannelStatus is idempotent,
@@ -1290,5 +2147,5 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       if (!ongoingSieges.has(id)) delete defenderSiegeLedger[id];
     }
   }
-  return { outcomes, deployments, graphChannels, retiredChannels: retiredChannelsOut, resolvedDeployments, dispositionDeltas, warExhaustion, defenderSiegeLedger, worldStatePatch };
+  return { outcomes, deployments, graphChannels, retiredChannels: retiredChannelsOut, resolvedDeployments, dispositionDeltas, warExhaustion, defenderSiegeLedger };
 }

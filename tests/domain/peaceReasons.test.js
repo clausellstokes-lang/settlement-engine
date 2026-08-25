@@ -71,8 +71,6 @@ describe('peace-reason scorers — each typed reason has a positive and a negati
     const worn = scoreExhaustion({ scar01: 0.6 });
     expect(worn.score).toBeCloseTo(0.6, 5);
     expect(worn.receipt).toMatch(/exhaustion/i);
-    // anchored: the required exhaustion keyword above proves the receipt was minted.
-    expect(worn.receipt).not.toMatch(/\b\d+(?:\.\d+)?\b|%|×|\b(?:score|multiplier|roll)\b/i);
     expect(scoreExhaustion({ scar01: 0 }).score).toBe(0);
   });
 
@@ -87,9 +85,6 @@ describe('peace-reason scorers — each typed reason has a positive and a negati
     const drifting = scoreBeliefConvergence({ marginA: 0.15, marginB: 0.05 });
     expect(drifting.score).toBeGreaterThan(0);
     expect(drifting.score).toBeLessThan(1);
-    expect(drifting.receipt.length).toBeGreaterThan(0);
-    // anchored: the non-empty partial-convergence receipt above proves this lane emitted.
-    expect(drifting.receipt).not.toMatch(/\b\d+(?:\.\d+)?\b|%|×|\b(?:score|divergence|multiplier|roll)\b/i);
   });
 
   it('economic strangulation: severed trade + drained treasury mint; a healthy economy stays silent', () => {
@@ -308,11 +303,9 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     const brief = warCausalBrief(r.worldState, 'a', 'b');
     expect(brief.peacePresent).toBeGreaterThanOrEqual(REASON_TUNING.IRONY_DYING_AT);
     expect(brief.line).toBe(`${brief.peacePresent} of ${PEACE_REASON_TYPES.length} peace reasons now present; this war is dying`);
-    // Sixteen: WR-6 added alliance_obligation↔obligation_discharged; WR-8's
-    // CR-WR8-C added atrocity_answer↔atrocity_atoned. The brief renders EVERY
-    // taxonomy member, present or absent, so this length is the catalog's.
-    expect(brief.peace.length).toBe(16);
-    expect(brief.war.length).toBe(16);
+    // 8 = the wave-1 seven + W-CONVERGENCE's foreign_clash ↔ spheres_understanding.
+    expect(brief.peace.length).toBe(8);
+    expect(brief.war.length).toBe(8);
     // Present rows carry their receipts + birth ticks; absent rows read empty.
     const present = brief.peace.find((row) => row.type === 'exhaustion');
     expect(present.present).toBe(true);
@@ -320,7 +313,7 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     expect(present.sinceTick).toBe(10);
   });
 
-  it('renders the calm form below the dying threshold and the full dark count', () => {
+  it('renders the calm form below the dying threshold and "0 of 8" on a dark world', () => {
     const one = advancePeaceReasons({
       snapshot: snapshotFor([item('a'), item('b')]),
       worldState: warWorld({ simulationRules: { ...LIT_RULES, infoMode: 'full' }, calendar: { elapsedWeeks: 40 }, spatialCanonVersion: 1, spatialLedgers: { beliefMaps: {
@@ -333,7 +326,7 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     expect(brief.peacePresent).toBeLessThan(REASON_TUNING.IRONY_DYING_AT);
     expect(brief.line).not.toMatch(/dying/);
     const dark = warCausalBrief({ simulationRules: {} }, 'a', 'b');
-    expect(dark.line).toBe('0 of 16 peace reasons now present');
+    expect(dark.line).toBe('0 of 8 peace reasons now present');
     expect(dark.peacePresent).toBe(0);
     expect(dark.warPresent).toBe(0);
   });

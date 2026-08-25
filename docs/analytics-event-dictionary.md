@@ -15,12 +15,12 @@ in `src/lib/analyticsEvents.js`, and carries a class in the parallel `EVENT_CLAS
 Props are coarse by construction — enums, bands, counts, booleans, hashes; never names,
 prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamps).
 
-- **EVENTS_REV:** 12
-- **Events:** 130 total — 126 essential, 4 research
+- **EVENTS_REV:** 7
+- **Events:** 117 total — 113 essential, 4 research
 - **Research class** requires explicit opt-in (built + mirrored only under `research` consent, re-clamped server-side).
 - **Enriched props** below are the actual top-level keys the bound extractor emits (code-derived); events built inline at the call site show `—` and are documented in the taxonomy.
 
-## Minimum 4-event funnel
+## Tier 8.8 — minimum 4-event funnel
 
 | Constant | Event | Class | Enriched props (code-derived) |
 |---|---|---|---|
@@ -29,7 +29,7 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 | `SIGNUP_AFTER_ANON` | `signup_after_anon` | essential | — |
 | `PAID_AFTER_ANON` | `paid_after_anon` | essential | — |
 
-## Full schema
+## Tier 8.9 — full schema
 
 | Constant | Event | Class | Enriched props (code-derived) |
 |---|---|---|---|
@@ -52,7 +52,7 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 | `NEIGHBOR_PREVIEW_CLICKED` | `neighbor_preview_clicked` | essential | — |
 | `UPGRADE_AFTER_NEIGHBOR_CLICKED` | `upgrade_after_neighbor_clicked` | essential | — |
 
-## Critique-implementation expansion
+## P100 / Pillar C — critique-implementation expansion
 
 | Constant | Event | Class | Enriched props (code-derived) |
 |---|---|---|---|
@@ -67,7 +67,6 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 | `WELCOME_CREDIT_GRANTED` | `welcome_credit_granted` | essential | — |
 | `WELCOME_CREDIT_SPENT` | `welcome_credit_spent` | essential | — |
 | `ANON_CAP_UNLOCK_SHOWN` | `anon_cap_unlock_shown` | essential | — |
-| `ANON_CAP_UNLOCK_CLICKED` | `anon_cap_unlock_clicked` | essential | — |
 | `LOCKED_DESTINATION_SHOWN` | `locked_destination_shown` | essential | — |
 | `DOSSIER_GROUP_TAB_CLICKED` | `dossier_group_tab_clicked` | essential | — |
 | `SIMULATION_DRAWER_OPENED` | `simulation_drawer_opened` | essential | — |
@@ -174,8 +173,6 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 | `MAP_PLACEMENT_REMOVED` | `map_placement_removed` | essential | — |
 | `MAP_ROUTE_DRAWN` | `map_route_drawn` | essential | — |
 | `MAP_SAVED` | `map_saved` | essential | — |
-| `TOWN_MAP_LAYER_USED` | `town_map_layer_used` | essential | — |
-| `LANDING_FUNNEL_USED` | `landing_funnel_used` | essential | — |
 
 ## v2: sharing / export
 
@@ -198,37 +195,12 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 | `LIBRARY_VIEWED` | `library_viewed` | essential | — |
 | `SESSION_STARTED` | `session_started` | essential | — |
 
-## v2: research
+## v2: research / consent
 
 | Constant | Event | Class | Enriched props (code-derived) |
 |---|---|---|---|
 | `SETTLEMENT_FINGERPRINT_CAPTURED` | `settlement_fingerprint_captured` | research | — |
-
-## Surveyor S1: the analyst (§5 eval metrics — coarse, id-free, essential)
-
-| Constant | Event | Class | Enriched props (code-derived) |
-|---|---|---|---|
-| `AI_ANALYST_ANSWER` | `ai_analyst_answer` | essential | — |
-| `AI_ANALYST_FEEDBACK` | `ai_analyst_feedback` | essential | — |
-| `AI_ANALYST_RIDER` | `ai_analyst_rider` | essential | — |
-
-## Surveyor S3: the intent compiler (interpret) §5 evals — coarse, id-free
-
-| Constant | Event | Class | Enriched props (code-derived) |
-|---|---|---|---|
-| `AI_INTERPRET_ANSWER` | `ai_interpret_answer` | essential | — |
-| `AI_INTERPRET_CORRECTION` | `ai_interpret_correction` | essential | — |
-| `AI_INTERPRET_RIDER` | `ai_interpret_rider` | essential | — |
-
-## Surveyor S3: THE PARLEY (parley) §5 evals — coarse, id-free
-
-| Constant | Event | Class | Enriched props (code-derived) |
-|---|---|---|---|
-| `AI_PARLEY_ANSWER` | `ai_parley_answer` | essential | — |
-| `AI_PARLEY_RIDER` | `ai_parley_rider` | essential | — |
-| `AI_STAGE_ANSWER` | `ai_stage_answer` | essential | — |
-| `AI_STAGE_RIDER` | `ai_stage_rider` | essential | — |
-| `SURVEYOR_ADOPTION` | `surveyor_adoption` | essential | — |
+| `CONSENT_UPDATED` | `consent_updated` | essential | — |
 
 ---
 

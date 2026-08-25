@@ -1,18 +1,7 @@
 // dailyLifeLogic.js — Pure settlement-context extraction for DailyLifeTab.
 import { TIER_LABELS } from './design';
 import { computeEffectiveMagicPresence } from '../../generators/priorityHelpers.js';
-import {
-  CULTURE_PROFILES,
-  resolveCultureProfileKey,
-} from '../../domain/cultureProfiles.js';
 
-function legacyCultureContext(culture) {
-  const key = resolveCultureProfileKey(culture);
-  if (key === 'mixed') {
-    return 'Several local traditions remain visible in ordinary institutions, household obligations, and the built environment.';
-  }
-  return CULTURE_PROFILES[key]?.socialTexture?.[0] || null;
-}
 
 export function extractSettlementContext(s) {
   const tier     = s.tier || 'village';
@@ -71,7 +60,7 @@ export function extractSettlementContext(s) {
     safetyRatioRaw >= 0.7 ? 32 :
     safetyRatioRaw >= 0.5 ? 18 : 8
   ));
-  const safetyLabelFromProfile = (sp.safetyLabel || '').split(':')[0].trim() || null;
+  const safetyLabelFromProfile = (sp.safetyLabel || '').split('—')[0].trim() || null;
   // safetyProfile.crimeTypes entries are {type, desc} objects — joining them
   // raw printed '[object Object]' into the prompt (same trap aiLayer fixed).
   const crimeTypes  = (sp.crimeTypes || []).map(ct => ct?.type || ct).filter(Boolean);
@@ -106,12 +95,7 @@ export function extractSettlementContext(s) {
 
   // All context descriptions computed here — on ctx object avoids TDZ in minified output
   const rawTerrainCtx  = TERRAIN_CONTEXT[terrain] || null;
-  // New generations carry the exact seed-materialized cultural expression.
-  // Legacy saves resolve through the same bounded profile corpus instead of a
-  // second, stereotype-prone paragraph table.
-  const rawCultureCtx  = s.culturalIdentity?.socialTexture
-    || legacyCultureContext(culture)
-    || null;
+  const rawCultureCtx  = CULTURE_CONTEXT[culture] || null;
   const rawRouteCtx    = ROUTE_CONTEXT[tradeRoute] || null;
 
   // Magic band — uses computeEffectiveMagicPresence (single source of truth)
@@ -137,13 +121,7 @@ export function extractSettlementContext(s) {
     // Conflict entries are { parties, issue, stakes, desc, … } (powerGenerator's
     // generateConflicts) — description/type exist only on legacy/edge shapes.
     conflicts: conflicts.slice(0, 3).map(c => c.desc || c.description || c.issue || c.type).filter(Boolean),
-    // Unlike the conflicts line above, `t.title` was NOT a legacy-shape tolerance: a
-    // currentTensions entry carries exactly {type, description, factions,
-    // lastingEffects, plotHooks, severity} (historyData.HISTORICAL_EVENTS_DATA), the
-    // user-edit allowlist admits only `description`, and the AI merge writes only
-    // `description`. `title` is not even among the import-tolerance spellings
-    // historyBeats declares (label/name/text), so the arm was deleted as writerless.
-    tensions: tensions.slice(0, 3).map(t => t.type).filter(Boolean),
+    tensions: tensions.slice(0, 3).map(t => t.title || t.type).filter(Boolean),
     foodDeficit,
     foodSurplus,
     safetyScore,
@@ -184,6 +162,21 @@ const TERRAIN_CONTEXT = {
   coastal:  'Salt air, tidal rhythms, the permanent smell of fish. The sea is both livelihood and existential risk. Weather is watched obsessively. The dock or quay is the social and economic center; what happens there happens first. Inland people are called "mudwalkers" and looked down on.',
   mountain: 'Altitude shortens the growing season and increases isolation. Water is managed carefully — springs, cisterns, snowmelt. The passes close in winter and the settlement turns inward. Self-sufficiency is a point of pride and a practical necessity. Outsiders arrive less often and are noticed more.',
   desert:   'Water is the central organising fact of daily life — where it is, who controls it, how far to reach it. The heat governs the schedule: activity before midday and after dusk, stillness in between. Shade, shelter from sandstorms, and the oasis or well are social gathering points. Caravans are lifelines.',
+};
+
+// ── Culture daily-life texture ────────────────────────────────────────────
+const CULTURE_CONTEXT = {
+  germanic:    'Structured social hierarchy with strong guild and craft identity. Communal drinking halls or alehouses are the male social center. Authority is respected but expected to be earned through visible competence. Loyalty to kin and lord runs deep.',
+  latin:       'Civic life matters — the forum, the market, and the public space are where status is performed and negotiated. Religious calendar structures the year. Extended family networks dominate social and economic life. Hospitality to guests is a social obligation with real weight.',
+  celtic:      'Oral tradition and storytelling are high-status skills. The bard or storyteller holds social power. Clan and kinship ties create strong in-group loyalty and sometimes explosive inter-family conflict. Druids or their equivalents mediate between the community and the natural world.',
+  norse:       'Practical competence and physical courage are admired openly. The hall is the social center — feasting, storytelling, and the display of generosity by the powerful. Winter is a communal survival exercise. Trade and raid are both honourable depending on context.',
+  arabic:      'Hospitality is a near-sacred obligation — refusing to feed a traveller is a serious social failure. The market (souk) is a social and political space as much as economic. Religious observance structures the day. Coffee or tea rituals are important social currency.',
+  slavic:      'Strong communal village identity — decisions are made collectively, outsiders are treated warily, and community obligations (labour, defence, sharing in bad times) are enforced socially. The bathhouse is a communal institution. Seasonal festivals mark the agricultural year.',
+  east_asian:  'Hierarchical social order with strong emphasis on face, obligation, and the maintenance of social harmony. Public conflict is avoided; grievances are managed through intermediaries. Ancestor veneration shapes daily ritual. Craft and merchant guilds are highly organised.',
+  mesoamerican:'Ritual and civic life are intertwined — the calendar of religious observance shapes when markets are held, when work is done, when tribute is paid. Social status is visible in dress, material, and access to certain foods. The marketplace is the daily social center.',
+  south_asian: 'Caste and occupational identity structure who does what, who sits where, and who eats with whom. Festivals are elaborate and communally financed. The temple or religious space is the neighbourhood center. Debt and obligation networks are complex and long-memoried.',
+  steppe:      'Mobile or semi-mobile pastoralist culture values horses, livestock, and the ability to move. Hospitality to travellers is obligatory and elaborate. Status is displayed through generosity and physical prowess. Settled life is slightly looked down on by older traditions.',
+  greek:       'The agora or public square is where politics, commerce, and philosophy intersect. Public rhetoric and persuasion are valued skills. Athletic and competitive festivals structure the year. Guest-friendship (xenia) is a binding social institution. Civic identity is strong.',
 };
 
 // ── Trade route daily-life feel ───────────────────────────────────────────

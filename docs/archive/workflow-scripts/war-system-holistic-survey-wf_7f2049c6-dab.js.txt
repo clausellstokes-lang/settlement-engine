@@ -1,0 +1,54 @@
+export const meta = {
+  name: 'war-system-holistic-survey',
+  description: 'Read-only survey of the ENTIRE war system — combat, logistics, strategy, politics, economics, peace, consequences',
+  phases: [{ title: 'Survey', detail: '6 read-only Opus readers across every war dimension', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'findings'],
+  properties: {
+    agent: { type: 'string' },
+    findings: { type: 'array', items: { type: 'object', required: ['area', 'what_exists', 'how_it_works', 'strengths', 'gaps'], properties: {
+      area: { type: 'string' }, what_exists: { type: 'string' }, how_it_works: { type: 'string' },
+      strengths: { type: 'string' }, gaps: { type: 'string' }, files: { type: 'array', items: { type: 'string' } } } } },
+    verdict: { type: 'string' },
+  },
+}
+const COMMON = 'Worktree: ' + ROOT + ' branch claude/composite-r4. STRICTLY READ-ONLY: you may NOT edit, create or delete any file, and you may NOT run git mutations or tests that write. Read source, cite file:line. Report what IS THERE, not what should be — including where something is thinner than its name suggests, dark by default, or unwired. Distinguish BUILT+WIRED from BUILT+DARK from DESIGNED-ONLY. Be specific about determinism (seeded? rolled? derived?) and about which flag gates each thing.'
+
+phase('Survey')
+const results = await parallel([
+  () => agent(['You are an Opus READER surveying SettlementForge\'s war system. YOUR DIMENSION: COMBAT AND BATTLE RESOLUTION.',
+    'Find and explain: how is a battle actually resolved? What inputs decide who wins (forces, terrain, defense scores, morale, leadership, supply)? Is it deterministic/seeded or rolled? Is there a battle EVENT or is combat abstracted into attrition? What does a battle produce (deaths, territory, morale, news)? Are there sieges as distinct from field battles? How does defense/fortification enter? What is the granularity — army units, abstract strength, per-settlement?',
+    'Name the files and the key functions. Say plainly whether combat is a rich model or a thin one.', COMMON].join('\n'),
+    { label: 'survey:combat', phase: 'Survey', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(['You are an Opus READER surveying SettlementForge\'s war system. YOUR DIMENSION: MOVEMENT, LOGISTICS AND REINFORCEMENT.',
+    'Find and explain: how do armies MOVE (armyTransit, deployments, mobilization)? What is the travel model and how does it use the route network? How are REINFORCEMENTS raised, routed and delivered — where does manpower come from and what limits it? Is there supply/attrition over distance? Garrisons: what are they, what do they cost, what do they protect? How does occupation work mechanically? What happens to an army that loses its supply line?',
+    'Name files and functions. Be explicit about what is wired into the pulse versus what exists as pure functions nobody calls.', COMMON].join('\n'),
+    { label: 'survey:logistics', phase: 'Survey', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(['You are an Opus READER surveying SettlementForge\'s war system. YOUR DIMENSION: THE STRATEGIC DECISION LAYER.',
+    'Find and explain: settlementStrategy and its softmax — what are the strategy options, what weights them, how is the draw made and is it seeded? How do war REASONS feed into it (warReasons says "the weights ARE the reasons")? Who decides to go to war, at what cadence, and what gates it? What is REASON_TUNING, WAR_FACTOR, and the x1.30 cap actually doing? How does a war START mechanically — what state marks two settlements as at war? Is there a war OBJECT or is war a relationship state?',
+    'Name files and functions. Say plainly how much agency the model actually has versus how much is threshold-driven.', COMMON].join('\n'),
+    { label: 'survey:strategy', phase: 'Survey', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(['You are an Opus READER surveying SettlementForge\'s war system. YOUR DIMENSION: THE POLITICAL LAYER AROUND WAR.',
+    'Find and explain: the INTERVENTION layer (sponsors, proxy wars, foreign_clash), the HEGEMONY/fear-of-dominance machinery (hegemonyFear.js), the REFRAME layer (D7 — gift becoming debt, commerce becoming dependency), coups and ruling-power changes during war, faction competition, and legitimacy. How do alliances and coalitions actually exist in state — is there a coalition OBJECT, or is it derived from relationships? What does an alliance DO mechanically today?',
+    'Name files and functions. Be explicit about which of these are lit in full_simulation and which are dark.', COMMON].join('\n'),
+    { label: 'survey:politics', phase: 'Survey', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(['You are an Opus READER surveying SettlementForge\'s war system. YOUR DIMENSION: ECONOMIC WARFARE AND WAR\'S MATERIAL EFFECTS.',
+    'Find and explain: supplyWebWarfare (READ ONLY — another session owns this file, do not edit), blockade and interdiction, the sack/seizure path (war sack in applyWorldPulse, FORAGE_FOOD_CAPTURE_FRACTION in foodStockpile), what war does to trade, roads, institutions and stores. How do war deaths flow (calamityKernel? populationDynamics?) and are they conservation-visible? What does war cost a settlement materially, tick by tick? Does anything model war finance?',
+    'Name files and functions. Quantify where you can — actual constants and rates.', COMMON].join('\n'),
+    { label: 'survey:economics', phase: 'Survey', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(['You are an Opus READER surveying SettlementForge\'s war system. YOUR DIMENSION: PEACE, TERMS AND ENDINGS.',
+    'Find and explain: peaceTerms.js — what does a treaty actually contain and what does signing one DO? The peace engine (peaceCausalActive, PEACE_REASON_TYPES, the mirrors) — how do peace reasons accumulate and what ends a war today, mechanically? Is there an exhaustion model? What happens on victory/defeat — territory, population, tier, reparations? Is there any existing notion of negotiation, envoys, or offers? What ENDS a war in the current code, concretely, and how often can it happen?',
+    'Name files and functions. This is the dimension today\'s design work most extends, so be precise about what is ALREADY there versus absent.', COMMON].join('\n'),
+    { label: 'survey:peace', phase: 'Survey', schema: SCHEMA, model: 'opus' }),
+])
+const all = results.filter(Boolean)
+log(all.length + '/6 war-system readers returned')
+return { results: all }

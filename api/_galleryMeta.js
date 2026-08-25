@@ -12,8 +12,7 @@
  * per-settlement card, and the browser still boots the app normally.
  *
  * This module is the PURE, deploy-independent half: no fetch, no fs, no env —
- * string transforms plus one pure domain import (resolveTerrain, itself
- * import-free) — so it is unit-testable in isolation
+ * just string transforms — so it is unit-testable in isolation
  * (tests/build/injectGalleryMeta.test.js). The `_` filename prefix keeps Vercel
  * from treating it as its own function route.
  *
@@ -24,27 +23,9 @@
  * (still per-slug URL + image) card rather than leaking anything.
  */
 
-import { resolveSettlementTerrain, terrainOrNull } from '../src/domain/resolveTerrain.js';
-
 export const ORIGIN = 'https://settlementforge.com';
 export const SITE_NAME = 'SettlementForge';
-// House-sealed share card, matching index.html + src/lib/seo.js (was the
-// pre-seal og-default.png). Used as the fallback when a gallery slug has no
-// dynamic per-settlement card.
-const OG_IMAGE_DEFAULT = `${ORIGIN}/og-craft.png`;
-
-// Slugs are opaque URL-safe ids (migration 008 `_make_public_slug`). This is the
-// SAME bound the og-image edge function applies before it will touch an RPC
-// (supabase/functions/og-image/index.ts SLUG_RE) — the two crawler-facing surfaces
-// that key on a slug must agree on what a slug IS. A junk / oversized value
-// degrades to the collection card rather than minting a self-canonical page for a
-// nonexistent dossier and an unbounded image argument.
-const SLUG_RE = /^[A-Za-z0-9_-]{1,64}$/;
-
-/** @param {unknown} slug @returns {boolean} */
-export function isValidGallerySlug(slug) {
-  return typeof slug === 'string' && SLUG_RE.test(slug);
-}
+const OG_IMAGE_DEFAULT = `${ORIGIN}/og-default.png`;
 
 /** river_valley → River Valley (matches seoDossier.humanize). */
 function humanize(v) {
@@ -61,9 +42,7 @@ function humanize(v) {
  * @returns {string}
  */
 export function galleryCardImage(slug, supabaseUrl) {
-  if (supabaseUrl && isValidGallerySlug(slug)) {
-    // encodeURIComponent is a no-op over the bounded charset — kept as
-    // defense in depth so the bound is the only thing that has to hold.
+  if (supabaseUrl && slug) {
     return `${supabaseUrl}/functions/v1/og-image?slug=${encodeURIComponent(slug)}`;
   }
   return OG_IMAGE_DEFAULT;
@@ -71,10 +50,8 @@ export function galleryCardImage(slug, supabaseUrl) {
 
 /**
  * Build the per-slug OG meta from a (possibly null) sanitized gallery dossier row.
- * Image + URL are per-slug (slug-derived, no DB needed) for any slug inside the
- * og-image bound; an out-of-bound slug falls back to the collection URL + default
- * card. Title/description upgrade to the real settlement name + coarse facts only
- * when the row is present.
+ * Image + URL are ALWAYS per-slug (slug-derived, no DB needed); title/description
+ * upgrade to the real settlement name + coarse facts only when the row is present.
  *
  * @param {string} slug
  * @param {{ name?: string, tier?: string, terrain?: string, publishedAt?: string,
@@ -86,7 +63,7 @@ export function galleryCardImage(slug, supabaseUrl) {
 export function buildGalleryMeta(slug, dossier, opts = {}) {
   const origin = opts.origin || ORIGIN;
   const supabaseUrl = opts.supabaseUrl || '';
-  const url = isValidGallerySlug(slug) ? `${origin}/gallery/${encodeURIComponent(slug)}` : `${origin}/gallery`;
+  const url = slug ? `${origin}/gallery/${encodeURIComponent(slug)}` : `${origin}/gallery`;
   const image = galleryCardImage(slug, supabaseUrl);
 
   const name = dossier?.name || dossier?.settlement?.name || '';
@@ -101,14 +78,8 @@ export function buildGalleryMeta(slug, dossier, opts = {}) {
   }
 
   const tier = humanize(dossier.tier);
-  // THE ONE terrain read (domain/resolveTerrain.js) — the crawler-head TWIN of
-  // src/lib/seoDossier.js, same expression shape (twin parity pinned in
-  // tests/build/injectGalleryMeta.test.js). R-4 lane P-6 follow-up: the old
-  // chain led with the never-written config.terrain and had no 'auto' guard,
-  // so this crawler head could disagree with the routed client head (or print
-  // "on auto terrain") for the very same shared dossier.
   const terrain = humanize(
-    terrainOrNull(dossier.terrain) || resolveSettlementTerrain(dossier.settlement),
+    dossier.terrain || dossier.settlement?.config?.terrain || dossier.settlement?.terrain,
   );
   const population = Number(dossier.settlement?.population) || null;
   const facts = [
@@ -169,33 +140,13 @@ function upsertMeta(html, attr, key, value) {
 }
 
 /**
- * Upsert `<link rel="canonical" href="…">` (Fix wave 4, idx36 / SEO bar 14).
- * The fetched shell is the prerendered index.html, which carries the HOMEPAGE
- * canonical — leaving it in place tells crawlers to fold every dynamically
- * served gallery/world card into `/`. A served page must claim ITSELF as
- * canonical, so this is kept in lockstep with og:url by injectGalleryMeta.
- */
-function upsertCanonical(html, href) {
-  const tag = `<link rel="canonical" href="${escapeAttr(href)}" />`;
-  const re = /<link\s+[^>]*rel=["']canonical["'][^>]*>/i;
-  if (re.test(html)) return html.replace(re, tag);
-  return html.replace(/<\/head>/i, `    ${tag}\n  </head>`);
-}
-
-/**
  * Inject per-slug OG/Twitter meta into a full index.html string. Rewrites the
  * document <title>, description, and the og:/twitter: title/description/image plus
- * og:url/og:type — and the rel=canonical link, which always equals og:url so a
- * crawler can never fold a served card into the homepage. Pure: same input →
- * same output. Unknown/empty meta returns the html unchanged.
- *
- * `meta.noindex` (V-20 unlisted class): stamp `robots: noindex, nofollow` over the
- * static `noai, noimageai` tag so a party-shared unlisted link UNFURLS (the card
- * is still built) yet never enters a search index. Backward compatible — omitted
- * for the public gallery path, which stays indexable.
+ * og:url/og:type. Pure: same input → same output. Unknown/empty meta returns the
+ * html unchanged.
  *
  * @param {string} html — the built index.html
- * @param {{ title?: string, description?: string, image?: string, url?: string, type?: string, noindex?: boolean }} meta
+ * @param {{ title?: string, description?: string, image?: string, url?: string, type?: string }} meta
  * @returns {string}
  */
 export function injectGalleryMeta(html, meta) {
@@ -216,15 +167,8 @@ export function injectGalleryMeta(html, meta) {
     out = upsertMeta(out, 'property', 'og:image', meta.image);
     out = upsertMeta(out, 'name', 'twitter:image', meta.image);
   }
-  // canonical rides og:url in lockstep — a served page is its OWN canonical.
-  if (meta.url) {
-    out = upsertMeta(out, 'property', 'og:url', meta.url);
-    out = upsertCanonical(out, meta.url);
-  }
+  if (meta.url) out = upsertMeta(out, 'property', 'og:url', meta.url);
   if (meta.type) out = upsertMeta(out, 'property', 'og:type', meta.type);
-  // Unlisted (V-20): keep it out of the index while still unfurling. Supersedes
-  // the static `noai, noimageai` robots value on this served copy only.
-  if (meta.noindex) out = upsertMeta(out, 'name', 'robots', 'noindex, nofollow');
 
   return out;
 }

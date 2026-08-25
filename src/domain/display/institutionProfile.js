@@ -171,16 +171,10 @@ function chainsProcessedBy(inst) {
 }
 
 /** The backing faction (highest-power faction whose category matches the
- *  institution's), or null. Exported as the SINGLE source of truth for the
- *  institution↔power backing relation: the InstitutionCard's "Backed by" row and
- *  the Power tab's support web (domain/dossier/powerSupport.js) both read it, so
- *  the two never diverge. The relation is deliberately COARSE — a category match,
- *  disambiguated to the leading faction of that category — because the generator
- *  emits no per-institution controlling-faction field (only a sparse
- *  `factionSource`); this is the strongest broad signal the data carries.
+ *  institution's), or null.
  *  @param {InstitutionLike} inst @param {any} settlement @returns {(string|null)} */
-export function institutionBackingFactionName(inst, settlement) {
-  const wanted = INST_CATEGORY_TO_FACTION[inst?.priorityCategory || ''];
+function backingFaction(inst, settlement) {
+  const wanted = INST_CATEGORY_TO_FACTION[inst.priorityCategory || ''];
   if (!wanted) return null;
   const factions = settlement?.powerStructure?.factions;
   if (!Array.isArray(factions)) return null;
@@ -275,7 +269,7 @@ export function deriveInstitutionProfile(institution, settlement = {}) {
   }
 
   // ── power: backing faction ─────────────────────────────────────────────────
-  const backer = institutionBackingFactionName(inst, settlement);
+  const backer = backingFaction(inst, settlement);
   if (backer) {
     contributions.push({ domain: 'power', label: 'Backed by', detail: backer });
   }

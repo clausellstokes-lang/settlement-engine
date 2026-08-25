@@ -11,10 +11,6 @@ import {tierAtLeast, getTradeRouteFeatures} from './helpers.js';
 import { rollStressSummary, renderStressSummary } from './stressNarrative.js';
 
 import {STRESS_TYPE_MAP} from '../data/stressTypes.js';
-import {
-  nativeSemanticNames,
-  nativeSemanticResourceKeys,
-} from '../domain/content/customContentSemanticAuthority.js';
 
 // ─── Tier helpers ─────────────────────────────────────────────────────────────
 
@@ -95,15 +91,14 @@ export const buildStressContext = (stressType, tier, config, institutions) => {
   const magic     = config.priorityMagic    ?? 50;
 
   // Resource presence flags
-  const resources = nativeSemanticResourceKeys(config);
+  const resources = config.nearbyResources || [];
   const hasGrain   = resources.some(r => r.includes('grain') || r.includes('fertile') ||
                                          r.includes('farm')  || r.includes('grazing'));
   const hasFish    = resources.some(r => r.includes('fish'));
   const hasTimber  = resources.some(r => r.includes('timber') || r.includes('forest'));
 
   // Institution presence flags (by keyword)
-  const instNames = nativeSemanticNames(institutions)
-    .map(name => name.toLowerCase());
+  const instNames   = (institutions || []).map(i => (i.name || '').toLowerCase());
   const hasWalls    = instNames.some(n => n.includes('wall')    || n.includes('citadel') || n.includes('palisade'));
   const hasMilitary = instNames.some(n => n.includes('garrison')|| n.includes('militia') || n.includes('watch'));
   const hasGranary  = instNames.some(n => n.includes('granary') || n.includes('granar'));

@@ -5,7 +5,8 @@ import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptibility, corruptionVectorForFlaw, spawnCorruptionChance,
   onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING, guildEffectiveSecurity,
   patronageSecurityDrag, npcHomeInstitution, PATRONAGE_TUNING,
-  hasCorruptingDeity, npcDeityDisfavor } from '../corruption.js';
+  hasCorruptingDeity, npcDeityDisfavor,
+} from '../corruption.js';
 // THE RESOLVER CHOKEPOINT (§1) rides a LAZY leaf, NOT eager corruption.js — see
 // corruptionLeash.js's first-paint note. npcAgency is the lazy engine chunk, so
 // this import adds nothing to first paint.
@@ -13,10 +14,7 @@ import { resolveLeash } from '../corruptionLeash.js';
 // Phase 4 W-F3 site #7 — the corruption-plane amplifier over the onset (flaw-expression)
 // pressure channel. Reads the settlement's TICK-START faithProfile.piety + patron plane
 // position; 1.0 (byte-identical) for a deity-free / legacy 3-axis / non-devout settlement.
-import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
-// H17: per-advance indices replacing evaluateNpcRules' O(states × (settlements + edges)) rescan.
-import { settlementByIdIndex, edgeAdjacencyIndex } from './tickIndices.js';
-import { NPC_GOAL_NEWS, pickLine } from './eventProse.js';
+import { corruptionPlaneMultOf } from './piety.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
   ruler: {
@@ -304,9 +302,7 @@ function pressureScore(pressureIdx, settlementId, kinds = []) {
  * @param {any} state
  */
 function settlementForState(snapshot, state) {
-  // H17: O(1) id lookup (FIRST-wins, matching the prior linear .find) instead of an O(settlements)
-  // rescan per NPC state.
-  return settlementByIdIndex(snapshot).get(String(state.settlementId)) || null;
+  return (snapshot?.settlements || []).find((/** @type {any} */ item) => String(item.id) === String(state.settlementId)) || null;
 }
 
 /**
@@ -316,12 +312,10 @@ function settlementForState(snapshot, state) {
 function dominantRelationshipContext(snapshot, settlementId) {
   const states = snapshot?.worldState?.relationshipStates || {};
   const sid = String(settlementId);
-  // H17: iterate only the edges TOUCHING sid (edge-order preserved) instead of the whole graph per
-  // NPC state. The index keys on the normalized from/to the snapshot always carries, so every edge
-  // here satisfies the old `from === sid || to === sid` guard — it is dropped as a proven no-op.
-  for (const edge of edgeAdjacencyIndex(snapshot?.regionalGraph).get(sid) || []) {
+  for (const edge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
     const from = String(edge.from || edge.source || '');
     const to = String(edge.to || edge.target || '');
+    if (from !== sid && to !== sid) continue;
     const key = edge.id || `rel.${from}.${to}`;
     const rel = states[key]?.relationshipType || edge.relationshipType || edge.type || 'neutral';
     if (rel === 'vassal') {
@@ -727,7 +721,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
     // W-F3 site #7: the corruption-plane amplifier over the onset rate — a devout
     // chaotic-evil patron makes the rot spread faster, a lawful-good one starves it.
     // 1.0 for a deity-free / legacy 3-axis / non-devout settlement ⇒ byte-identical.
-    const planePressureMult = (deity ? corruptionPlaneMultOf(item.settlement, deity) : 1) * skimPressureMultFor(item, worldState);
+    const planePressureMult = deity ? corruptionPlaneMultOf(item.settlement, deity) : 1;
     // Real thieves-guild strength (if threaded) drags effective security down
     // (the feedback loop); falls back to the crime proxy.
     const gs = guildStrengthBy ? guildStrengthBy.get(String(item.id)) : undefined;
@@ -794,13 +788,6 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       const visibility = Math.min(1, (s.dotRank || 1) / 3 + proximity);
       // A good deity's repression rides the EXPOSURE side (which runs regardless
       // of a criminal institution): a misaligned/corrupt NPC is outed faster.
-      // D6 THE UNDERWAYS (coupling 3 — exposure discount) SEAM (deferred, documented): a
-      // clandestine settlement should discount this exposure roll (multiply the result by
-      // UNDERWAYS_TUNING.EXPOSURE_DISCOUNT when settlementHasUnderways(item.settlement)). NOT
-      // wired for two compounding reasons: npcAgency.js sits at its max-lines baseline ceiling
-      // (the clandestineFacet import would exceed it), AND exposureChance lives in the EAGER
-      // corruption.js first-paint chunk, so a covertShelter param there costs eager bytes for a
-      // dark path (the ratchet forbids that). Lands with a size-baseline refresh (owner-gated).
       const exposeP = exposureChance({ security: exposureSecurity, prosperity: climate.prosperity, guildStrength: guildStr, visibility, priorExposures, deityDisfavor: disfavor.exposure });
       if (local.random() >= exposeP) return;
 
@@ -886,8 +873,6 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     + action.severityBias,
   );
   const proposal = severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily);
-  // A repeated automatic, non-targeted action advances gauges but expresses no new
-  // choice. Proposals and moves against named rivals remain public events.
   const nextRank = actionFamily === 'seek_promotion' ? Math.min(3, (state.dotRank || 1) + 1) : state.dotRank;
 
   return {
@@ -901,7 +886,7 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     factionId: state.factionId,
     severity,
     probability: Math.min(0.48, 0.06 + severity * 0.36 + state.ambition * 0.08),
-    applyMode: proposal ? 'proposal' : 'auto', ...(!proposal && !subject && state.lastAction === actionFamily ? { recordMode: 'state_only' } : {}),
+    applyMode: proposal ? 'proposal' : 'auto',
     headline: `${state.name} may ${actionPhrase}`,
     summary: `${state.name}'s ${state.shortGoal.replace(/_/g, ' ')} goal can advance through ${actionPhrase}.`,
     reasons: [
@@ -1020,11 +1005,11 @@ function npcGoalCulmination(state, tick) {
     severity: 0.85,
     probability: 0.9,
     applyMode: 'auto',
-    headline: pickLine(NPC_GOAL_NEWS.culmination.headline, `${state.npcId}:${tick}:culmination:headline`, { name: state.name, goal }),
-    summary: pickLine(NPC_GOAL_NEWS.culmination.summary, `${state.npcId}:${tick}:culmination:summary`, { name: state.name, goal }),
+    headline: `${state.name} achieves a long ambition`,
+    summary: `${state.name} has worked toward "${goal}" for a long while, and now seizes it.`,
     reasons: [
-      pickLine(NPC_GOAL_NEWS.culmination.progressReason, `${state.npcId}:${tick}:culmination:progress`, { name: state.name, goal }),
-      pickLine(NPC_GOAL_NEWS.culmination.roleReason, `${state.npcId}:${tick}:culmination:role`, { name: state.name, goal, role: state.roleArchetype.replace(/_/g, ' ') }),
+      `${state.name}'s long-term goal progress reached its culmination.`,
+      `Role: ${state.roleArchetype.replace(/_/g, ' ')}; goal: ${goal}.`,
     ],
     npcPatch: {
       goalProgress: { short: 0, long: 0 },
@@ -1037,12 +1022,12 @@ function npcGoalCulmination(state, tick) {
     condition: {
       archetype: 'faction_challenge',
       label: `${state.name}'s ascendance`,
-      description: pickLine(NPC_GOAL_NEWS.culmination.conditionDescription, `${state.npcId}:${tick}:culmination:condition`, { name: state.name }),
+      description: `${state.name} has consolidated power, shifting the local balance.`,
       severity: 0.55,
       status: 'stable',
       triggeredAt: { tick, sourceEventType: 'WORLD_PULSE_GOAL_CULMINATION', sourceEventTargetId: state.npcId },
       affectedSystems: ['public_legitimacy', 'faction_power', 'social_trust'],
-      causes: [{ source: state.npcId, effect: 'goal_culmination', reason: pickLine(NPC_GOAL_NEWS.culmination.causeReason, `${state.npcId}:${tick}:culmination:cause`) }],
+      causes: [{ source: state.npcId, effect: 'goal_culmination', reason: 'A long ambition reached fruition.' }],
     },
     metadata: { roleArchetype: state.roleArchetype, longGoal: state.longGoal, dotRankBefore: state.dotRank, dotRankAfter: nextRank },
     conflictTags: [`npc:${state.npcId}`, `settlement:${state.settlementId}:goal_culmination`],
@@ -1068,14 +1053,12 @@ function npcGoalRebranch(state, context, tick) {
     factionId: state.factionId,
     severity: 0.44,
     probability: 1,
-    applyMode: 'auto', ...(goals.shortGoal === state.shortGoal && goals.longGoal === state.longGoal ? { recordMode: 'state_only' } : {}),
-    // A context signature/reset is still applied and audited, but only an actual
-    // change of short/long intent earns a Chronicle beat.
-    headline: pickLine(NPC_GOAL_NEWS.rebranch.headline, `${state.npcId}:${tick}:rebranch:headline`, { name: state.name }),
-    summary: pickLine(NPC_GOAL_NEWS.rebranch.summary, `${state.npcId}:${tick}:rebranch:summary`, { name: state.name }),
+    applyMode: 'auto',
+    headline: `${state.name} changes ambitions`,
+    summary: `${state.name}'s goals shift because the settlement context changed.`,
     reasons: [
-      pickLine(NPC_GOAL_NEWS.rebranch.contextReason, `${state.npcId}:${tick}:rebranch:context`, { name: state.name, previous: state.contextSignature || 'unknown', next: context.signature }),
-      pickLine(NPC_GOAL_NEWS.rebranch.personalityReason, `${state.npcId}:${tick}:rebranch:personality`, { name: state.name, ideal: String(state.ideal || 'unknown').replace(/_/g, ' '), flaw: String(state.flaw || 'unknown').replace(/_/g, ' ') }),
+      `Context changed from ${state.contextSignature || 'unknown'} to ${context.signature}.`,
+      `Personality remains anchored by ideal ${String(state.ideal || 'unknown').replace(/_/g, ' ')} and flaw ${String(state.flaw || 'unknown').replace(/_/g, ' ')}.`,
     ],
     npcPatch: {
       ...goals,

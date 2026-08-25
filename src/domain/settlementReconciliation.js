@@ -1,5 +1,4 @@
 import { preserveWorldConditions, worldAuthoredConditions } from './worldPulse/reconcile.js';
-import { preserveSettlementParentRef } from './settlementParentRef.js';
 
 /** @typedef {import('./settlement.schema.js').CanonicalSettlement} CanonicalSettlement */
 /** @typedef {import('./activeConditions.js').ActiveCondition} ActiveCondition */
@@ -32,10 +31,7 @@ export function reconcileSettlementChange(nextSettlement, priorSettlement, optio
   if (!nextSettlement || !priorSettlement) return nextSettlement;
   const carried = worldAuthoredConditions(/** @type {any} */ (priorSettlement)).map(conditionId).filter(Boolean);
   const reconciled = /** @type {ReconcilableSettlement} */ (
-    preserveSettlementParentRef(
-      preserveWorldConditions(nextSettlement, priorSettlement),
-      priorSettlement,
-    )
+    preserveWorldConditions(nextSettlement, priorSettlement)
   );
   const entry = {
     // `at` is a deterministic, caller-supplied timestamp. When options.now is

@@ -37,7 +37,7 @@ export default function DeityEffectPreview({ draft }) {
       style={{
         marginTop: 8, padding: '10px 12px',
         border: `1px solid ${BORDER}`, borderLeft: `3px solid ${DEITY_ACCENT}`,
-        background: `${DEITY_ACCENT}0A`,
+        borderRadius: 7, background: `${DEITY_ACCENT}0A`,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>

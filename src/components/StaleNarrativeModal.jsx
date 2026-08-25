@@ -18,20 +18,15 @@
  * and the human-readable label of what just changed.
  */
 
-import { X } from 'lucide-react';
+import { Sparkles, X, Zap, ArrowRight } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { t } from '../copy/index.js';
-import { INK, MUTED, SECOND, BORDER, CARD, CARD_HDR, GOLD, GOLD_DEEP, sans, FS } from './theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, ELEV, swatch } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
-import useDialogFocusTrap from './primitives/useDialogFocusTrap.js';
 
-// THE INSTRUMENT PLATE (Deep Craft — the dossier's modal-as-plate voice): the
-// stale-narrative notice reads as a rule-framed plate over the warm-dim modal
-// ground, not a shadowed rounded card in the SaaS AI-violet. Print has no z-axis —
-// the plate edge is a rule, never elevation. The primary "Regenerate" action wears
-// the house gold primary (ink-on-gold, contrast-PINNED); the violet AI-brand wash
-// is retired for the parchment header band.
+const PURPLE = swatch['#6A2A9A'];
+const PURPLE_BG = 'rgba(90,42,138,0.08)';
 
 export default function StaleNarrativeModal({
   open,
@@ -40,11 +35,6 @@ export default function StaleNarrativeModal({
 }) {
   const activeSaveId     = useStore(s => s.activeSaveId);
   const requestNarrative = useStore(s => s.requestNarrative);
-  // Shared modal focus management: focus in on open, trap Tab, Escape dismisses
-  // via onClose, focus restored to the trigger on close. Matches the primitives
-  // contract behind aria-modal so this destructive-adjacent choice modal behaves
-  // like every other dialog. Called before the early return to honour rules-of-hooks.
-  const dialogRef = useDialogFocusTrap(open, onClose);
   if (!open) return null;
 
   const cost = CREDIT_COSTS.narrative;
@@ -55,23 +45,27 @@ export default function StaleNarrativeModal({
 
   return (
     <div
-      role="presentation"
+      role="button"
+      tabIndex={0}
+      aria-label={t('staleNarrative.ariaClose')}
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(12,8,4,0.58)', backdropFilter: 'blur(3px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: 18,
       }}
-      onMouseDown={e => { if (e.target === e.currentTarget) onClose(); }}
+      onClick={onClose}
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
     >
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- handlers only stop propagation to the backdrop, not real interactivity */}
       <div
-        ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label={t('staleNarrative.heading')}
-        tabIndex={-1}
+        onClick={e => e.stopPropagation()}
+        onKeyDown={e => e.stopPropagation()}
         style={{
-          background: CARD, border: `1px solid ${BORDER}`,
+          background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10,
+          boxShadow: ELEV[3],
           maxWidth: 480, width: '100%',
           overflow: 'hidden',
         }}
@@ -79,10 +73,11 @@ export default function StaleNarrativeModal({
         {/* Header */}
         <div style={{
           padding: '14px 18px',
-          background: CARD_HDR,
+          background: `linear-gradient(135deg, ${PURPLE_BG}, rgba(90,42,138,0.02))`,
           borderBottom: `1px solid ${BORDER}`,
           display: 'flex', alignItems: 'center', gap: 10,
         }}>
+          <Sparkles size={16} color={PURPLE} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: FS.md, fontWeight: 800, color: INK, fontFamily: sans, letterSpacing: '0.02em' }}>
               {t('staleNarrative.heading')}
@@ -115,16 +110,16 @@ export default function StaleNarrativeModal({
           <button
             type="button"
             onClick={onRegenerate}
-            aria-label={t('staleNarrative.regenerateTitle')}
             style={{
               display: 'flex', alignItems: 'center', gap: 10,
-              padding: '10px 12px',
-              background: GOLD,
-              border: `1px solid ${GOLD_DEEP}`,
-              color: INK, fontFamily: sans,
+              padding: '10px 12px', borderRadius: 6,
+              background: `linear-gradient(135deg, ${PURPLE}, #4a1a7a)`,
+              border: `1px solid rgba(160,100,220,0.55)`,
+              color: swatch['#F0D8FF'], fontFamily: sans,
               cursor: 'pointer', textAlign: 'left',
             }}
           >
+            <Zap size={14} />
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: FS.sm, fontWeight: 800, letterSpacing: '0.02em' }}>{t('staleNarrative.regenerateTitle')}</div>
               <div style={{ fontSize: FS.xxs, marginTop: 2, opacity: 0.82 }}>
@@ -138,16 +133,16 @@ export default function StaleNarrativeModal({
           <button
             type="button"
             onClick={onClose}
-            aria-label={t('staleNarrative.continueTitle')}
             style={{
               display: 'flex', alignItems: 'center', gap: 10,
-              padding: '10px 12px',
+              padding: '10px 12px', borderRadius: 6,
               background: CARD,
               border: `1px solid ${BORDER}`,
               color: SECOND, fontFamily: sans,
               cursor: 'pointer', textAlign: 'left',
             }}
           >
+            <ArrowRight size={14} color={PURPLE} />
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, letterSpacing: '0.02em' }}>{t('staleNarrative.continueTitle')}</div>
               <div style={{ fontSize: FS.xxs, marginTop: 2, color: MUTED }}>

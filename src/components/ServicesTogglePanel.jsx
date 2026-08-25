@@ -1,9 +1,7 @@
 import { useState, useMemo } from 'react';
 import {INSTITUTION_SERVICES} from '../data/tradeGoodsData';
 import ControlsStrip from './ControlsStrip.jsx';
-import { GOLD, GOLD_SOFT, INK, MUTED, SECOND, sans, FS, CARD_HDR, swatch } from './theme.js';
-import Button from './primitives/Button.jsx';
-import EmptyState from './primitives/EmptyState.jsx';
+import { GOLD, INK, MUTED, SECOND, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog } from '../store/selectors.js';
 
@@ -33,20 +31,17 @@ function ServiceCard({ svcName, def, toggled, onCycle }) {
   const isExcluded = forceExclude;
   const _isAllowed  = !isForced && !isExcluded;
 
-  const bg         = isForced ? GOLD_SOFT : swatch['#FAF6EF'];
+  const bg         = isForced ? '#efe8d0' : '#faf6ef';
   const borderLeft = `3px solid ${isForced ? GOLD : 'transparent'}`;
-  const labelText  = isForced ? '● Forced' : isExcluded ? '✕ Excluded' : '○ Allow';
-  // Forced reads in three channels (gold ● glyph + GOLD color + 700 weight),
-  // matching the ○/✕ glyph pattern of the other two states; the prior label
-  // carried a stray leading space and no glyph.
+  const labelText  = isForced ? ' Forced' : isExcluded ? '✕ Excluded' : '○ Allow';
   const labelColor = isForced ? GOLD : MUTED;
 
   return (
-    <div onClick={onCycle} role="button" tabIndex={0} className="svc-card-row"
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onCycle(); } }} style={{
+    <div onClick={onCycle} role="button" tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onCycle(); }} style={{
       display:'flex', alignItems:'flex-start', gap:8,
       padding:'6px 12px 6px 10px',
-      background:bg, borderLeft, borderBottom:`1px solid ${swatch['#F0E8D8']}`,
+      background:bg, borderLeft, borderBottom:'1px solid #f0e8d8',
       cursor:'pointer', userSelect:'none', WebkitTapHighlightColor:'transparent',
        transition:'background 0.1s',
     }}>
@@ -67,7 +62,7 @@ export default function ServicesTogglePanel() {
   const currentCatalog = useStore(selectCurrentCatalog);
   const servicesToggles = useStore(s => s.servicesToggles);
   const onServiceToggle = useStore(s => s.toggleService);
-  const bulkSetServices = useStore(s => s.bulkSetServices);
+  const setServiceToggles = useStore(s => s.setServiceToggles);
   const [expanded, setExpanded] = useState({});
   const [search, setSearch] = useState('');
   const [filterMode, setFilterMode] = useState('all');
@@ -97,32 +92,32 @@ export default function ServicesTogglePanel() {
   };
 
   // Cycle: allow → force → exclude → allow
-  // Toggles are keyed by the catalog key (svcKey), NOT the display institution
-  // name. Multiple generated institutions can fuzzy-match the same svcKey and be
-  // grouped under one row; the generator resolves each institution's override
-  // against `${resolvedKey}_service_${name}` (its keyToggleKey), so keying by
-  // svcKey applies the toggle to every grouped institution — not just
-  // catalogNames[0]. (getToggle still reads the svcKey-keyed value via k2.)
   const cycleService = (catalogName, svcKey, svcName, def) => {
     const cur = getToggle(catalogName, svcKey, svcName, def);
     let next;
     if (cur.forceExclude)       next = { allow:true,  force:false, forceExclude:false }; // exclude → allow
     else if (cur.force)         next = { allow:false, force:false, forceExclude:true  }; // force   → exclude
     else                        next = { allow:true,  force:true,  forceExclude:false }; // allow   → force
-    onServiceToggle(toggleKey(svcKey, svcName), next);
+    onServiceToggle(toggleKey(catalogName, svcName), next);
   };
 
-  // Bulk operations — one store action owns the write for the whole grid, the way
-  // InstitutionalGrid routes its strip through bulkSetInstitutions. The key list is
-  // the SAME `${svcKey}_service_${svcName}` spelling cycleService writes, so a bulk
-  // press and a card click land on the same entries.
-  const bulkKeys = useMemo(
-    () => Object.entries(instServiceMap).flatMap(([svcKey, {services}]) =>
-      Object.keys(services).map(svcName => `${svcKey}_service_${svcName}`)),
-    [instServiceMap],
-  );
-  const bulkForce = () => bulkSetServices('force', bulkKeys);
-  const bulkExclude = () => bulkSetServices('exclude', bulkKeys);
+  // Bulk operations
+  const bulkForce = () => {
+    Object.entries(instServiceMap).forEach(([svcKey, {catalogNames, services}]) => {
+      const catName = catalogNames[0] || svcKey;
+      Object.keys(services).forEach(svcName => {
+        onServiceToggle(toggleKey(catName, svcName), { allow:true, force:true, forceExclude:false });
+      });
+    });
+  };
+  const bulkExclude = () => {
+    Object.entries(instServiceMap).forEach(([svcKey, {catalogNames, services}]) => {
+      const catName = catalogNames[0] || svcKey;
+      Object.keys(services).forEach(svcName => {
+        onServiceToggle(toggleKey(catName, svcName), { allow:false, force:false, forceExclude:true });
+      });
+    });
+  };
 
   const totals = useMemo(() => {
     let total=0, on=0, forced=0, excluded=0;
@@ -161,25 +156,19 @@ export default function ServicesTogglePanel() {
   }));
 
   if (Object.keys(instServiceMap).length === 0) {
-    return (
-      <EmptyState
-        heading="No services at this tier."
-        body="Larger settlements sustain more trades. Raise the tier, or widen the filters above, and the services return to the roster."
-      />
-    );
+    return <div style={{padding:'14px 16px', background:swatch['#FAF8F4'], fontSize:FS.md, color:MUTED}}>
+      No services available at this tier.
+    </div>;
   }
 
   return (
     <div>
-      {/* role=button rows have no default ring; give keyboard focus a perceivable
-          outline without forcing a 44px target (dense-scan rationale). */}
-      <style>{`.svc-card-row:focus-visible{outline:2px solid ${GOLD};outline-offset:-2px;}`}</style>
       <ControlsStrip
         search={search}
         setSearch={setSearch}
         placeholder="Search services…"
         onForceAll={bulkForce}
-        onReset={() => bulkSetServices('reset')}
+        onReset={() => setServiceToggles({})}
         onExcludeAll={bulkExclude}
         onExpandAll={() => setExpanded(Object.fromEntries(Object.keys(filtered).map(k=>[k,true])))}
         onCollapseAll={() => setExpanded({})}
@@ -202,28 +191,26 @@ export default function ServicesTogglePanel() {
               const allowedCount = svcEntries.filter(([n,d]) => { const t=getToggle(catName,svcKey,n,d); return t.allow&&!t.force; }).length;
 
               return (
-                <div key={svcKey} style={{borderBottom:`1px solid ${swatch['#E8DCC8']}`}}>
-                  <Button variant="ghost" size="sm" fullWidth
-                    aria-expanded={isOpen} aria-label={`${catName} services, ${isOpen ? 'collapse' : 'expand'}`}
+                <div key={svcKey} style={{borderBottom:'1px solid #e8dcc8'}}>
+                  <button type="button" aria-expanded={isOpen} aria-label={`${catName} services, ${isOpen ? 'collapse' : 'expand'}`}
                     onClick={()=>setExpanded(e=>({...e,[svcKey]:!e[svcKey]}))}
-                    style={{display:'flex', alignItems:'center', gap:8, padding:'7px 12px',
-                      background: isOpen ? swatch['#F0EAD8'] : CARD_HDR,
-                      borderRadius:0, borderTop:`1px solid ${swatch['#E0D0B0']}`,
-                      justifyContent:'flex-start', whiteSpace:'normal', textAlign:'left', fontWeight:700,
-                      fontFamily:sans, WebkitTapHighlightColor:'transparent',
+                    style={{width:'100%', display:'flex', alignItems:'center', gap:8, padding:'7px 12px',
+                      background: isOpen ? '#f0ead8' : '#faf4e8',
+                      border:'none', borderTop:'1px solid #e0d0b0', cursor:'pointer', textAlign:'left', fontFamily:sans,
+                      WebkitTapHighlightColor:'transparent',
                     }}>
                     <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
                         <span style={{fontSize:FS.sm, fontWeight:700, color:swatch.inkMag, fontFamily:'Crimson Text, Georgia, serif'}}>{catName}</span>
-                        {forcedCount>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}18`, padding:'1px 5px'}}>{forcedCount} forced</span>}
+                        {forcedCount>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}18`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>}
                       </span>
-                    {forcedCount===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowedCount} allowed</span>}
+                    {forcedCount===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>}
                     {forcedCount>0 && <>
-                      <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowedCount} allowed</span>
-                      <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forcedCount} forced</span>
+                      <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>
+                      <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>
                     </>}
                     <span style={{fontSize:FS.micro, color:MUTED, marginLeft:4}}>{svcEntries.length}</span>
                     <span style={{fontSize:FS.xxs, color:MUTED}}>{isOpen ? '▲' : '▼'}</span>
-                  </Button>
+                  </button>
                   {isOpen && (
                     <div>
                       {svcEntries.map(([svcName, def]) => {

@@ -11,11 +11,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import {
-  EXEMPT_LEDGER_KEYS,
-  TRACKED_LEDGER_KEYS,
-  extractSpatialUsage,
-} from '../../src/lib/spatialUsage.js';
+import { extractSpatialUsage } from '../../src/lib/spatialUsage.js';
 import { extractCanonizeUsage } from '../../src/lib/spatialCanonizeUsage.js';
 
 // Distinctive strings that must NEVER survive into any emitted shape.
@@ -72,24 +68,6 @@ function loadedWorldState() {
       moralDrift: { 'Blackreach': { malice: 0.4, lawlessness: 0.2, instigations: 1 } },
       dispatchWillingness: { 'Duskport': { phase: 'refusing', sinceTick: 7, lastTick: 9 } },
       spatialArrivals: { 'imp-1': { arrivalTick: 12, note: 'granary-riot-secret' } },
-      // GR-2, and it is the ONE ARRAY-valued sub-ledger in the manifest. Its rows name
-      // settlements outright and carry prose term sheets, so feeding it through the
-      // canary above proves the extractor reads array INDICES as a count and never the
-      // ids or the terms — the hygiene question the record-keyed ledgers cannot ask.
-      pactProposals: [
-        {
-          id: 'pact.4.Blackreach.Duskport.shared_threat',
-          from: 'Blackreach', to: 'Duskport', trigger: 'shared_threat',
-          sheet: { terms: ['the smugglers of Duskport'] },
-          openedTick: 4, answerDueTick: 12, state: 'open', transport: 'envoy',
-        },
-        {
-          id: 'pact.6.Ironhold.Blackreach.trade_demand',
-          from: 'Ironhold', to: 'Blackreach', trigger: 'trade_demand',
-          sheet: { terms: ['granary-riot-secret'] },
-          openedTick: 6, answerDueTick: 14, state: 'open', transport: 'abstract',
-        },
-      ],
     },
     proposals: [
       { id: 'p1', status: 'pending', outcome: { candidateType: 'strategy_deploy' }, headline: 'the smugglers of Duskport' },
@@ -120,20 +98,6 @@ describe('spatialUsage — privacy canary', () => {
 });
 
 describe('spatialUsage — coarse signal', () => {
-  it('pins pact proposals as TRACKED and commercial reasons as EXEMPT', () => {
-    expect({
-      pactTracked: TRACKED_LEDGER_KEYS.includes('pactProposals'),
-      pactExempt: Object.hasOwn(EXEMPT_LEDGER_KEYS, 'pactProposals'),
-      commercialTracked: TRACKED_LEDGER_KEYS.includes('commercialReasons'),
-      commercialExempt: Object.hasOwn(EXEMPT_LEDGER_KEYS, 'commercialReasons'),
-    }).toEqual({
-      pactTracked: true,
-      pactExempt: false,
-      commercialTracked: false,
-      commercialExempt: true,
-    });
-  });
-
   it('counts mover activity id-free + bands the migration population', () => {
     const out = extractSpatialUsage(loadedWorldState());
     expect(out.spatial_active).toBe(true);
@@ -148,15 +112,6 @@ describe('spatialUsage — coarse signal', () => {
     expect(out.mover_counts.armies_cut_off).toBe(1);      // beliefStaleness > 0
     expect(out.mover_counts.dispatch_refusing).toBe(1);
     expect(out.mover_counts.approvals_pending).toBe(2);   // p1 + p3 (p2 resolved)
-    // GR-2. THE TRACKED HALF OF THE MANIFEST IS NOT SELF-PROVING, which is why this
-    // line exists. The coverage walker (tests/lib/spatialLedgerCoverage.walker.test.js)
-    // asserts only that the written-key set equals TRACKED ∪ EXEMPT; `counts` and
-    // MOVER_PRESENCE are function-LOCAL and unexported, so listing a key in
-    // TRACKED_LEDGER_KEYS alone GREENS that gate while emitting nothing at all — the
-    // credit-side enumeration that fails open. An EXEMPT row is self-proving (the reason
-    // string is the artifact); a TRACKED row is a promise until something drives the
-    // extractor. This drives it: two open proposals, counted off an ARRAY sub-ledger.
-    expect(out.mover_counts.pacts_awaiting_answer).toBe(2);
     // migration pop 340 + 210 = 550 -> village_100_500? no, 550 -> small_town_500_2k
     expect(out.migration_pop_band).toBe('small_town_500_2k');
     // movers_active lists only the layers that fired
@@ -164,7 +119,6 @@ describe('spatialUsage — coarse signal', () => {
       'embattlement', 'caravans', 'smuggle', 'migration', 'field_combat',
       'entrepots', 'trade_flow', 'rumor', 'belief', 'moral_drift',
       'dispatch_refusal', 'propagation', 'approval_queue',
-      'pact_formation',
     ]));
   });
 
@@ -215,20 +169,6 @@ describe('spatialUsage — coarse signal', () => {
 });
 
 describe('spatialUsage — dormant / aspatial', () => {
-  it('reports a stranded pact row after its virtual flag goes dark (state presence, not stage execution)', () => {
-    const out = extractSpatialUsage({
-      simulationRules: { pactFormationEnabled: false },
-      spatialLedgers: {
-        pactProposals: [{
-          id: 'pact.4.a.b.shared_threat', from: 'a', to: 'b', state: 'open',
-          openedTick: 4, answerDueTick: 12,
-        }],
-      },
-    });
-    expect(out.mover_counts.pacts_awaiting_answer).toBe(1);
-    expect(out.movers_active).toContain('pact_formation');
-  });
-
   it('emits only the light config block when the spatial engine is off', () => {
     const out = extractSpatialUsage({ simulationRules: { presetId: 'realistic_regional' } });
     expect(out.spatial_active).toBe(false);

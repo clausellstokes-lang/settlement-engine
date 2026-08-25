@@ -55,7 +55,6 @@
   "src/domain/worldPulse/relationshipMemory.js",
   "src/domain/worldPulse/relationshipState.js",
   "src/domain/worldPulse/religionLegitimacy.js",
-  "src/domain/worldPulse/sovereigntyAppraisal.js",
   "src/domain/worldPulse/supplyCompleteness.js",
   "src/domain/worldPulse/supplyQuality.js",
   "src/domain/worldPulse/tradeSalience.js",

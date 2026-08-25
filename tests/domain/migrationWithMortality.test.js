@@ -16,7 +16,6 @@
  *   - DORMANT (no marker) ⇒ byte-identical (no ledger, no deaths);
  *   - mortality is AGGREGATE-ONLY — a named NPC survives a mortality tick untouched.
  */
-import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
@@ -26,13 +25,11 @@ import {
   roadDeathRate, destinationScore, splitTravellers, enqueueColumns, releaseArrivals,
   migrationActive, MIGRATION_TUNING, SPATIAL_DISTRIBUTION_MODE, FORBIDDEN_DISTRIBUTION_MODE,
 } from '../../src/domain/spatial/migration.js';
-import { cultureDistance, cultureAffinity, regimeAxes, CULTURE_TUNING, traditionKinship01 } from '../../src/domain/spatial/cultureDistance.js';
+import { cultureDistance, cultureAffinity, regimeAxes, CULTURE_TUNING } from '../../src/domain/spatial/cultureDistance.js';
 import {
   buildCultureVector, dispatchMigrations, releaseMigrationArrivals, originTolerance,
-  collectRealizedEmigrationEvents, sizeSaturationOf, MIGRATION_KERNEL_TUNING,
+  collectRealizedEmigrationEvents,
 } from '../../src/domain/worldPulse/migrationKernel.js';
-import { demographicReadings } from '../../src/domain/worldPulse/demographicsPushPull.js';
-import { pressureOf } from '../../src/domain/worldPulse/demographicsRates.js';
 
 // ── Fixtures ──────────────────────────────────────────────────────────────────
 function digest8() {
@@ -159,70 +156,6 @@ describe('M4 — DORMANCY: no marker ⇒ no-op, byte-identical', () => {
   });
 });
 
-// ── P5b: one destination-capacity truth ─────────────────────────────────────
-describe('M4 / P5b — destination size saturation delegates to demography when lit', () => {
-  const legacy = (population) => Math.max(0, Math.min(1,
-    (typeof population === 'number' && Number.isFinite(population) ? Math.max(0, population) : 0)
-      / MIGRATION_KERNEL_TUNING.SATURATION_POP));
-
-  it('DARK: the seam is the legacy pop/9000 arm exactly for every defensive flag shape', () => {
-    const darkWorlds = [
-      undefined,
-      {},
-      { simulationRules: {} },
-      { simulationRules: { demographicsEnabled: false } },
-      { simulationRules: { demographicsEnabled: 1 } },
-      { simulationRules: { demographicsEnabled: 'true' } },
-    ];
-    for (const population of [-10, 0, 1, 4500, 8999, 9000, 20_000, NaN, Infinity]) {
-      for (const worldState of darkWorlds) {
-        expect(sizeSaturationOf({ population }, worldState, 'Cityhold'))
-          .toBe(legacy(population));
-      }
-    }
-  });
-
-  it('DIVERGENCE: a 20k city is full to the legacy lane and about half-full to the demographic bound', () => {
-    const city = { population: 20_000, tier: 'city', config: { tier: 'city' } };
-    const dark = sizeSaturationOf(city, { simulationRules: {} }, 'Cityhold');
-    const worldState = { simulationRules: { demographicsEnabled: true } };
-    const lit = sizeSaturationOf(city, worldState, 'Cityhold');
-    const readings = demographicReadings(city, worldState, 'Cityhold');
-
-    expect(dark).toBe(1);
-    expect(readings.bound).toBe(38_000);
-    expect(lit).toBeCloseTo(20_000 / 38_000, 12);
-    expect(lit).toBeGreaterThan(0.52);
-    expect(lit).toBeLessThan(0.54);
-  });
-
-  it('WRITER/READER SPELLING: settlementId carries completed works into the canonical reader', () => {
-    const city = { population: 20_000, tier: 'city', config: { tier: 'city' } };
-    const worldState = {
-      simulationRules: { demographicsEnabled: true },
-      spatialLedgers: {
-        demographicPlans: { Cityhold: { works: { infrastructure: 3 } } },
-      },
-    };
-    const readings = demographicReadings(city, worldState, 'Cityhold');
-    const throughSeam = sizeSaturationOf(city, worldState, 'Cityhold');
-    const contextBlind = sizeSaturationOf(city, worldState);
-
-    expect(readings.bound).toBe(47_120);
-    expect(throughSeam).toBe(Math.min(1, pressureOf(readings.population, readings.bound)));
-    expect(throughSeam).toBeLessThan(contextBlind);
-
-    // Behaviour proves the context matters; the source pin proves the seam obtains it
-    // from the REAL demographic reader instead of maintaining an isomorphic twin.
-    const source = readFileSync(new URL('../../src/domain/worldPulse/migrationKernel.js', import.meta.url), 'utf8');
-    expect(source).toContain("import { demographicReadings } from './demographicsPushPull.js';");
-    expect(source).toContain("import { pressureOf } from './demographicsRates.js';");
-    expect(source).toContain('const readings = demographicReadings(');
-    expect(source).toContain('return clamp01(pressureOf(readings.population, readings.bound));');
-    expect(source).toContain('const sizeSat = sizeSaturationOf(destItem?.settlement, worldState, destId);');
-  });
-});
-
 // ── cultureDistance: composite determinism + LIVE read ───────────────────────
 describe('M4 — cultureDistance composite', () => {
   const good = { faithEvil01: 0, faithChaos01: 0, lawfulness01: 0.9, malice01: 0.1, economy01: 0.8, archetype: 'government', governingName: 'Council of A' };
@@ -250,47 +183,6 @@ describe('M4 — cultureDistance composite', () => {
     // A trade tie NEVER adds distance: identical settlements stay 0 regardless of ties.
     expect(cultureDistance(good, good, { tradeTie01: 0 })).toBe(0);
     expect(cultureDistance(good, good, { tradeTie01: 1 })).toBe(0);
-  });
-
-  it('tradition kinship (Wave C §16): shared motifs CLOSE distance multiplicatively, absent ⇒ no change', () => {
-    // Two settlements keeping the SAME festival motifs read culturally closer.
-    const withMotifs = (v, els) => ({ ...v, traditionElements: els });
-    const shared = ['harvest', 'river'];
-    const a = withMotifs(good, shared);
-    const b = withMotifs(evil, shared);
-    const bare = cultureDistance(good, evil);            // no traditionElements ⇒ kinship 0 ⇒ unchanged
-    const kin = cultureDistance(a, b);                   // identical motif sets ⇒ kinship 1 ⇒ closer
-    expect(kin).toBeLessThan(bare);
-    expect(kin).toBeCloseTo(bare * (1 - CULTURE_TUNING.TRAD_CLOSE), 9);
-    // BYTE-IDENTITY: an absent motif set on either side closes nothing (traditions dark).
-    expect(cultureDistance(a, evil)).toBeCloseTo(bare, 12);
-    expect(cultureDistance(good, b)).toBeCloseTo(bare, 12);
-    // and it NEVER adds distance — identical settlements stay exactly 0.
-    expect(cultureDistance(a, a)).toBe(0);
-  });
-
-  it('traditionKinship01 is the Jaccard overlap of the motif-element sets (symmetric, total)', () => {
-    expect(traditionKinship01({ traditionElements: ['a', 'b'] }, { traditionElements: ['a', 'b'] })).toBe(1);
-    expect(traditionKinship01({ traditionElements: ['a', 'b'] }, { traditionElements: ['c', 'd'] })).toBe(0);
-    expect(traditionKinship01({ traditionElements: ['a', 'b', 'c'] }, { traditionElements: ['b', 'c', 'd'] })).toBeCloseTo(2 / 4, 9); // |∩|=2 / |∪|=4
-    expect(traditionKinship01({ traditionElements: ['a'] }, { traditionElements: [] })).toBe(0); // absent ⇒ 0
-    expect(traditionKinship01(null, { traditionElements: ['a'] })).toBe(0);
-    expect(traditionKinship01({ traditionElements: ['a', 'b'] }, { traditionElements: ['b', 'a'] })).toBe(1); // order-free
-  });
-
-  it('buildCultureVector reflects the traditions mirror (present ⇒ motif elements; absent ⇒ [])', () => {
-    const worldState = baseWorld(digest8());
-    const item = makeItem('s000', {});
-    // no mirror ⇒ no signal
-    expect(buildCultureVector(item, worldState).traditionElements).toEqual([]);
-    // a lit mirror ⇒ the active (non-suppressed) motif elements, deduped + sorted
-    item.settlement.traditions = [
-      { coreMotif: { element: 'river', act: 'feast' }, suppressedBy: null },
-      { coreMotif: { element: 'harvest', act: 'fair' }, suppressedBy: null },
-      { coreMotif: { element: 'harvest', act: 'procession' }, suppressedBy: null }, // dup element
-      { coreMotif: { element: 'stone', act: 'vigil' }, suppressedBy: { overlordId: 'o' } }, // suppressed ⇒ skipped
-    ];
-    expect(buildCultureVector(item, worldState).traditionElements).toEqual(['harvest', 'river']);
   });
 
   it('same overlord (governingName) reads closer than rival overlords (governance identity)', () => {

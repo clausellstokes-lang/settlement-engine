@@ -9,27 +9,17 @@ import LifecycleSpine from './primitives/LifecycleSpine.jsx';
 import Button from './primitives/Button.jsx';
 import MobileTabStrip from './primitives/MobileTabStrip.jsx';
 import useIsMobile from '../hooks/useIsMobile.js';
-import { useLiveAiCostResolver } from '../hooks/useLivePricing.js';
 import { navigate } from '../hooks/useRoute.js';
 import { triggerPricingMoment } from '../lib/pricingMoments.js';
 import DossierSessionNotices from './dossier/DossierSessionNotices.jsx';
 import DossierActionBand from './dossier/DossierActionBand.jsx';
 import { flag } from '../lib/flags.js';
-import { t } from '../copy/index.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useSectionDwell } from '../hooks/useSectionDwell.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
-import { settlementWorldPulseEntries } from '../domain/dossier/settlementWorldChronicle.js';
 import { campaignHasRumorLedger } from '../domain/display/settlementRumors.js';
 import DossierAiConfirms, { toFriendlyAiError } from './dossier/DossierAiConfirms.jsx';
-import { DossierEntityContext } from './dossier/DossierEntityContext.jsx';
-import { useDossierEntityNav } from './dossier/useNavigateToEntity.js';
-import { useCrossSettlementFocus } from './dossier/useCrossSettlementFocus.js';
-import { RealmEntityContext } from './map/RealmEntityContext.jsx';
-import { useRealmEntityNav } from './map/useRealmEntityNav.js';
-import SettlementWorkbenchMount from './dossier/SettlementWorkbenchMount.jsx';
-import { viewerCanAuthor } from '../lib/viewerAuthority.js';
 // P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
@@ -43,12 +33,6 @@ const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.j
 // flag('tableView') && userPrefs.tableViewOpen, so the chunk loads the
 // moment the user opens it and never before.
 const TableView = lazy(() => import('./TableView.jsx'));
-// W2-c — MAP AS THE FIFTH TAB, now a SUB-TAB CONTAINER (TC-0, DESIGN_TOWN_CARTOGRAPHY
-// §12 / J-TC-8): Plan / Panorama / 3D Portrait / Player View as siblings. The shell's
-// prop surface is identical to the pane's, and it holds no static edge to any map body,
-// so this stays one lazy specifier and no first-paint leak (tests/build/mapTabShellLazy,
-// tests/build/townMapLazy). Fed the mechanical settlement + the owner-only map props.
-const MapTabShell = lazy(() => import('./townMap/MapTabShell.jsx'));
 // P131 / E-1 — Click-to-edit settlement name in the header.
 // The pencil reveals on hover; commit queues a rename-settlement
 // edit through the pending-edits drawer (E-2). The editable name now
@@ -63,13 +47,12 @@ import DossierGroupTabStrip from './dossier/DossierGroupTabStrip.jsx';
 // Extracted VERBATIM to the sibling registry (the DossierGroupTabStrip idiom)
 // so this file stays under the max-lines ratchet as tabs accrue; chunking is
 // unchanged (same per-tab dynamic imports, now declared one hop away).
-// Re-flowed (R-5b, same 24 specifiers in the same order) to fund the two
-// effective lines the viewerCanAuthor alignment below costs — this file sits
-// EXACTLY at the 600-line components ceiling, so additions must be net-zero.
 import {
-  ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel, EconomicsTab, HistoryTab, MagicTab,
-  NPCsTab, NotesTab, OverviewTab, PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab, ServicesTab,
-  SubstrateTab, SummaryTab, SummaryTabV2, TraditionsTab, VersionsTab, ViabilityTab, WarFaithTab,
+  ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel,
+  EconomicsTab, HistoryTab, MagicTab, NPCsTab, NotesTab, OverviewTab,
+  PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab,
+  ServicesTab, SubstrateTab, SummaryTab, SummaryTabV2, VersionsTab,
+  ViabilityTab, WarFaithTab,
 } from './dossier/dossierLazyTabs.js';
 
 
@@ -96,20 +79,7 @@ import {
 export const TAB_GROUPS = Object.freeze({
   summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
   systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic', 'war_faith'] },
-  // World — NPC-FIRST (master's P8 "first-click-lands" ordering law, restored from
-  // the composite's relationships-first regression per THE BASE RECONCILIATION MAP
-  // SURFACE 1). Keeps the composite's `rumors` addition. `traditions` (owner: "the
-  // tab should exist in the world tab of the dossier", slotted beside daily_life —
-  // culture next to daily life) was placed here by the deep-craft wave as a
-  // data-only seam and WIRED at the composite fold: TraditionsTab, its TABS
-  // registration and renderTab case arrived with claude/traditions and plugged
-  // into this already-placed slot with no reorder.
-  world:   { label: 'World',   tabs: ['npcs', 'relationships', 'rumors', 'daily_life', 'traditions', 'history', 'neighbours'] },
-  // Map (W2-c) — the SM-2 town map as a first-class tab, ordered Summary / Systems
-  // / World / Map / Notes. Present on the owner surfaces (wizard draft + saved view)
-  // but dropped from a public gallery dossier, which keeps its own owner-opt-in map
-  // toggle (the map tab self-drops there via the !publicDossier registration gate).
-  map:     { label: 'Map',     tabs: ['map'] },
+  world:   { label: 'World',   tabs: ['relationships', 'rumors', 'daily_life', 'npcs', 'history', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });
 
@@ -121,23 +91,20 @@ const TABS = [
   { id: 'services',   label: 'Services',   Icon: Building2 },
   { id: 'defense',    label: 'Defense',    Icon: Swords },
   { id: 'resources',  label: 'Resources',  Icon: Package },
-  { id: 'viability',  label: 'Outlook',    Icon: CircleCheckBig },
+  { id: 'viability',  label: 'Viability',  Icon: CircleCheckBig },
   // Phase 5 W4e — the causal-engine + magic reads. Always available (every
   // settlement derives a substrate / magic posture); each self-handles dormancy
   // inside. Reuse already-bundled icons (Cog / Sparkles) — no new first-paint icon.
-  { id: 'substrate',  label: 'Causes',     Icon: Cog },
+  { id: 'substrate',  label: 'Substrate',  Icon: Cog },
   { id: 'magic',      label: 'Magic',      Icon: Sparkles },
   { id: 'history',    label: 'History',    Icon: History },
   { id: 'daily_life', label: 'Daily Life', Icon: Users },
-  // THE TRADITIONS wave (T-1) — the founding-traditions register (World group,
-  // beside Daily Life). Reuses the already-bundled Drama glyph (festivals /
-  // ceremony) so registering the tab adds no new first-paint icon.
-  { id: 'traditions', label: 'Traditions', Icon: Drama },
   { id: 'npcs',       label: 'NPCs',       Icon: Users },
   { id: 'dm_notes',   label: 'DM Notes',   Icon: StickyNote },
   { id: 'ai_notes',   label: 'AI Notes',   Icon: Sparkles },
   { id: 'chronicle',  label: 'Chronicle',  Icon: ScrollText },
 ];
+const REROLLABLE = { npcs: 'Reroll NPCs', history: 'Reroll History' };
 
 // Coarse dwell-time banding (taxonomy §"Banding vocabularies": dwell_ms_band).
 // Derived inline so no raw durations ever leave the client.
@@ -156,19 +123,11 @@ function chronicleReferenceFor(saveEntry) {
   return cs?.worldState?.canonizedAt || cs?.canonizedAt || cs?.startedAt || null;
 }
 
-export function collectChronicle(saveEntry, settlement, publicChronicle = null, campaignWorldState = null, savedSettlements = []) {
+export function collectChronicle(saveEntry, settlement, publicChronicle = null) {
   // The unified Chronicle feed (spec §8 M3c): manual events + party-caused +
   // world-pulse, merged + normalized + sorted newest-first and timed relative to
   // canonization by the shared domain helper, so screen + any future surface
   // read one source of truth.
-  //
-  // WORLD-PULSE SEAM (owner bug 2026-07-22): the world source used to read the
-  // per-save campaignState.worldPulse.events / worldState.eventLog paths, which the
-  // advance NEVER writes — so advancing time showed nothing here. The events live on
-  // the owning campaign's worldState.pulseHistory; settlementWorldPulseEntries
-  // projects that already-persisted history into per-settlement rows (a pure read).
-  // The legacy per-save paths are kept as a fallback for any save that happens to
-  // carry them.
   //
   // A PUBLIC gallery dossier has no saved campaignState — the gallery RPC
   // projects an allowlisted copy of the eventLog into its own `chronicle`
@@ -177,27 +136,15 @@ export function collectChronicle(saveEntry, settlement, publicChronicle = null, 
   // normalization. It is consulted ONLY when there is no save entry at all;
   // owner surfaces (live editor, saved view) never pass it, so the owner feed
   // is byte-for-byte what it was before.
-  const worldEntries = campaignWorldState
-    ? settlementWorldPulseEntries(campaignWorldState, saveEntry?.id ?? settlement?.id, { savedSettlements })
-    : [];
-  const feed = buildChronicleFeed({
+  return buildChronicleFeed({
     manual:     saveEntry ? saveEntry.campaignState?.eventLog : publicChronicle,
-    worldPulse: worldEntries.length ? worldEntries : saveEntry?.campaignState?.worldPulse?.events,
+    worldPulse: saveEntry?.campaignState?.worldPulse?.events,
     worldLog:   saveEntry?.campaignState?.worldState?.eventLog,
     recent:     settlement?.recentEvents,
   }, { limit: 60, reference: chronicleReferenceFor(saveEntry) });
-  // Re-attach THE NEWS ADDRESS LAW block to the world rows. buildChronicleFeed's
-  // normalizer keeps the byte-minimal common shape (no address passthrough — that
-  // module is first-paint-eager via the store, so it stays untouched); the address
-  // rides back on here, in the lazy dossier path, keyed by the row id.
-  if (worldEntries.length) {
-    const addressById = new Map(worldEntries.map(e => [e.id, e.address]));
-    return feed.map(e => (e.source === 'world' && addressById.has(e.id)) ? { ...e, address: addressById.get(e.id) } : e);
-  }
-  return feed;
 }
 
-export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, suppressNarrativeCta = false, onRenameSettlement = null, mapWorldState = null, mapRegionalGraph = null, mapCanEdit = false, canAuthorNpc = false }) {
+export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null }) {
   const storeSettlement = useStore(s => s.settlement);
   const storeAi = useStore(s => s.aiSettlement);
   const storeSetAi = useStore(s => s.setAiSettlement);
@@ -205,7 +152,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const storeRegenerate = useStore(s => s.regenSection);
   const requestNarrative = useStore(s => s.requestNarrative);
   const requestDailyLife = useStore(s => s.requestDailyLife);
-  const getCost = useLiveAiCostResolver();
+  const getCost = useStore(s => s.getCost);
   const _creditBalance = useStore(s => s.creditBalance);
   const storeAiLoading = useStore(s => s.aiLoading);
   const storeAiRegenerating = useStore(s => s.aiRegenerating);
@@ -227,22 +174,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // Pinned NPCs — AI-4a. The live save entry is the source of truth so the
   // pin icons stay in sync across tabs without an extra hydration hop.
   const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
-  // WORLD-PULSE CHRONICLE SEAM (owner bug 2026-07-22). The settlement Chronicle's
-  // world events live on the OWNING campaign's worldState.pulseHistory — reached
-  // from the save via getCampaignForSettlement. Select the RAW campaign.worldState
-  // (a stable store ref): getCampaignWorldState() normalizes through ensureWorldState
-  // and would mint a new object every render (a select-loop). Null for a draft or a
-  // non-campaign save ⇒ the feed is byte-identical to before.
-  const owningWorldState = useStore(s => {
-    if (saveId == null || typeof s.getCampaignForSettlement !== 'function') return null;
-    const c = s.getCampaignForSettlement(saveId);
-    return c?.worldState || null;
-  });
-  const allSavedSettlements = useStore(s => s.savedSettlements);
-  // The cross-settlement inspector-link focus target (uiSlice; remount-surviving,
-  // ts-stamped). Consumed by the CROSS-SETTLEMENT FOCUS effect below to land a
-  // realm-link navigation on the right tab + card once this dossier mounts.
-  const focusedEntity = useStore(s => s.focusedEntity);
   const pinNpc = useStore(s => s.pinNpc);
   const unpinNpc = useStore(s => s.unpinNpc);
   // P131 / E-1 — inline-edit pipe. queueEdit goes into the
@@ -256,11 +187,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // anything to show. These gate PRESENCE, not content — they never read the live
   // pantheon; faith content stays behind FaithSection's premium seam.
   const viewerIsPremium = useStore(s => s.auth?.tier === 'premium' || (typeof s.isElevated === 'function' ? s.isElevated() : false));
-  // The AUTHORING authority (premium / founder / elevated), read from the ONE
-  // spelling in src/lib/viewerAuthority.js — see npcAuthoringAllowed below. A
-  // DIFFERENT question from viewerIsPremium above, which gates War & Faith tab
-  // PRESENCE and deliberately omits the founder tier.
-  const viewerMayAuthor = useStore(viewerCanAuthor);
   const inCampaign = useStore(s => (saveId && typeof s.isSettlementClockBound === 'function') ? s.isSettlementClockBound(saveId) : false);
   // Phase 5.5 STEP 3.5 — Rumors & News tab presence: the owning campaign's
   // world carries a rumor ledger (the conditionally-materialized rumorLedgers
@@ -287,6 +213,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     : (readOnly && !saveId ? (propSettlement?.aiSettlement ?? null) : storeAi);
   const setAiSettlement = readOnly ? null : storeSetAi;
   const onRegenerate = readOnly ? null : storeRegenerate;
+  const trackTabExplored = useStore(s => s.trackTabExplored);
   // P142 / D-6 — Table View overlay state. The trigger lives in
   // SummaryTabV2 (routed through renderTab's onOpenTableView); this reads
   // the pref reactively so the overlay mounts/unmounts on toggle.
@@ -301,6 +228,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const setActiveTab = (id, via = 'tab_click') => {
     pendingTabViaRef.current = via;
     _setActiveTab(id);
+    if (!readOnly && trackTabExplored) trackTabExplored();
   };
   const [pendingAiAction, setPendingAiAction] = useState(null);
   // Whether the first-save WelcomeCreditCard is currently showing. When it is, it
@@ -352,10 +280,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const activeSettlement = showNarrative ? aiSettlement : rawSettlement;
   const dossierNotes = liveSaveEntry?.aiData?.dossierNotes || null;
   const aiGuidance = typeof dossierNotes?.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
-  const chronicle = React.useMemo(
-    () => collectChronicle(liveSaveEntry, rawSettlement, publicChronicle, owningWorldState, allSavedSettlements),
-    [liveSaveEntry, rawSettlement, publicChronicle, owningWorldState, allSavedSettlements],
-  );
+  const chronicle = collectChronicle(liveSaveEntry, rawSettlement, publicChronicle);
   // History tab keeps a short "Recent Events" glance; the full Chronicle lives
   // under Notes (spec §8 M3c relocation).
   const recentEvents = chronicle.slice(0, 8);
@@ -415,7 +340,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     const arr = liveSaveEntry?.aiData?.pinnedNpcs;
     return Array.isArray(arr) ? new Set(arr.map(String)) : new Set();
   }, [liveSaveEntry?.aiData?.pinnedNpcs]);
-  const onTogglePin = (!readOnly && !playerView && saveId) ? ((npcId) => {
+  const onTogglePin = (!readOnly && saveId) ? ((npcId) => {
     const key = String(npcId);
     if (pinnedIds.has(key)) unpinNpc(saveId, key);
     else pinNpc(saveId, key);
@@ -442,31 +367,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // is stripped from the payload unless the owner opted into shareDm, so this can
   // never reveal more than is already shared.
   const publicDossier = readOnly && !saveId;
-  // NPC authoring is an explicit owner capability supplied by SettlementDetail,
-  // not an inference from the process-wide editMode flag. Intersect it again
-  // with this surface's identity so a stale flag or an accidentally permissive
-  // caller cannot expose writers in a public/player projection.
-  //
-  // R-5b ALIGNMENT (owner-authorized 2026-07-27; the R-4 divergence is CLOSED).
-  // This now consults src/lib/viewerAuthority.js `viewerCanAuthor` — the ONE
-  // premium/founder/elevated authoring spelling the Library dossier
-  // (SettlementDetail `canEdit`) and the Create-flow Workbench mount already
-  // share. Before the alignment the `!readOnly` arm admitted EVERY tier, so a
-  // free or anon viewer kept the NPC authoring levers on the Create flow while
-  // the Workbench withheld the Change Dock from the same viewer — levers with
-  // nothing to commit through. DECLARED BEHAVIOUR SHIFT: free/anon lose
-  // NpcLifecycleControls in the Create flow.
-  //
-  // The Library arm is UNCHANGED by construction: `canAuthorNpc` is already a
-  // strict narrowing of the same predicate (SettlementDetail.jsx:272 — canEdit
-  // = useStore(viewerCanAuthor), plus save/owner-scope conjuncts), so the new
-  // conjunct cannot subtract from it. The public/player arms are untouched.
-  //
-  // This also NARROWS the parked flag-on review-blackout class: the users the
-  // Workbench gate leaves without a review surface no longer hold live
-  // queueEdit levers here (docs/CAPABILITY_REMEDIATION_PLAN.md, Deferred #26 —
-  // the full cure still rides G-2b promotion). Veto = drop `viewerMayAuthor &&`.
-  const npcAuthoringAllowed = !publicDossier && !playerView && viewerMayAuthor && (!readOnly || (canAuthorNpc && saveId != null));
   const compassSource = hasCompass(aiSettlement)
     ? aiSettlement
     : (publicDossier && hasCompass(rawSettlement) ? rawSettlement : null);
@@ -490,15 +390,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // through the gallery RPC's allowlisted `chronicle` column (migration 032,
     // disclosed in the share flow) — so it stays visible in the player view.
     if (playerView && ['summary', 'dm_notes', 'ai_notes'].includes(t.id)) return false;
-    // DM Notes and AI Notes are private prep spaces — never surface them on a
-    // public / shared gallery dossier (readOnly with no owning saveId), even in
-    // the full "Reveal DM-private content" view. They're truly confidential to
-    // the DM and are kept only on the owner's own saved-settlement view (readOnly
-    // + saveId) and the live editor (not readOnly). ONE gate for both, because
-    // NotesTab has no saveId early return of its own — only its Save button is
-    // keyed on saveId, so tab PRESENCE is the whole boundary: an ai_notes tab
-    // here rendered an editable, unsavable Campaign Context box to a visitor.
-    if (['dm_notes', 'ai_notes'].includes(t.id) && readOnly && !saveId) return false;
+    // DM Notes are a private DM scratch space — never surface them on a public /
+    // shared gallery dossier (readOnly with no owning saveId), even in the full
+    // "Reveal DM-private content" view. They're truly confidential to the DM and
+    // are kept only on the owner's own saved-settlement view (readOnly + saveId)
+    // and the live editor (not readOnly).
+    if (t.id === 'dm_notes' && readOnly && !saveId) return false;
     return true;
   });
   // Phase 5 W4e — War & Faith presence. The faith half renders SOMETHING unless
@@ -541,13 +438,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // save): needs an owning saved entry and never renders on the public player
     // view. Self-gates further inside (versionHistory flag, tier lock).
     ...(liveSaveEntry && !playerView
-      ? [{ id:'versions', label:'Versions', Icon: Clock }] : []),
-    // Map (W2-c) — the town-map tab. Present on the owner surfaces (wizard draft +
-    // saved view); DROPPED from a public gallery dossier (readOnly + no saveId),
-    // which surfaces the map through its own owner-opt-in [Dossier | Map] toggle
-    // (fail-closed gallery share) — this gate keeps the two from double-rendering.
-    // Reuses the already-bundled MapPin glyph (no new first-paint icon).
-    ...(!publicDossier ? [{ id:'map', label:'Map', Icon: MapPin }] : [])
+      ? [{ id:'versions', label:'Versions', Icon: Clock }] : [])
   ];
   const selectedTab = allTabs.some(t => t.id === activeTab)
     ? activeTab
@@ -697,11 +588,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
       case 'versions':   return <VersionsTab save={liveSaveEntry} />;
       case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
-      // Traditions — the founding-traditions register (THE TRADITIONS wave, T-1).
-      // Preview mode (view-time deriveFoundingTraditions) until the T-2 mover writes
-      // the settlement.traditions mirror; then this same tab renders the live state.
-      case 'traditions': return <TraditionsTab settlement={s} saveId={saveId} />;
-      case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} />;
+      case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} />;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;
       case 'power':      return (
@@ -717,12 +604,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         </>
       );
       case 'substrate':  return <SubstrateTab settlement={s} />;
-      // Map (W2-c) — the town map, mounted (never edited). Reads the MECHANICAL
-      // settlement (rawSettlement), not the AI-narrated clone. mapCanEdit / saveId /
-      // worldState / regionalGraph arrive as props: the wizard draft passes none
-      // (view-only base map — the dormancy law), the saved view threads the owner's
-      // edit gate + season/siege seam. Covered by the outer Suspense in the render.
-      case 'map':        return <MapTabShell settlement={rawSettlement} canEdit={mapCanEdit} saveId={saveId} worldState={mapWorldState} regionalGraph={mapRegionalGraph} audience={playerView ? 'player' : 'dm'} />;
       case 'magic':      return <MagicTab settlement={s} />;
       // War & Faith — OUR gated FaithSection + a war half from OUR light
       // warStatus read-models. FaithSection self-gates by tier (full panel on an embed,
@@ -734,10 +615,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // public dossier — the includeGroundTruth convention).
       case 'rumors':     return <RumorsTab settlement={s} saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
       case 'defense':    return <DefenseTab settlement={s} narrativeNote={null} />;
-      case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} narrativeNote={null}
-        onRerollNPCs={npcAuthoringAllowed && onRegenerate ? () => onRegenerate('npcs') : null} pinnedIds={pinnedIds}
-        onTogglePin={onTogglePin} canAuthorNpc={npcAuthoringAllowed}
-        saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
+      case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} onRerollNPCs={onRegenerate ? () => onRegenerate('npcs') : null} narrativeNote={null} pinnedIds={pinnedIds} onTogglePin={onTogglePin} />;
       case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;
       case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} />;
       case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} />;
@@ -793,42 +671,20 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       storeShowNarrative={storeShowNarrative}
       setShowNarrative={setShowNarrative}
       runNarrativeLayer={runNarrativeLayer}
-      suppressNarrativeCta={suppressNarrativeCta}
     />
   );
-
-  // Entity-link context for the whole dossier: the id->entity index + the
-  // navigator a link click drives (tab switch + focus + scroll). Hoisted here
-  // because this component owns the active settlement and the tab state. All
-  // renderable tabs are passed (not the group-filtered `tabs`) so a link can
-  // reach any tab across group boundaries; setActiveTab re-derives the group.
-  const entityNav = useDossierEntityNav(activeSettlement, setActiveTab, allTabs);
-  // THE NEWS ADDRESS LAW, realm-wide (owner 2026-07-22). The dossier's own
-  // Chronicle names entities that may live in OTHER settlements (cross-settlement
-  // world-pulse refs). This provides the realm entity web + cross-settlement
-  // navigator to the Chronicle tab so a subject renders as its full linked
-  // address chain — same resolver the Realm Inspector uses (one resolver, both
-  // surfaces). A same-settlement subject lands via the CROSS-SETTLEMENT FOCUS
-  // effect below without leaving the dossier.
-  const realmNav = useRealmEntityNav();
-
-  // CROSS-SETTLEMENT FOCUS (INSPECTOR-ADDRESS-WEB, owner 2026-07-22): land a Realm
-  // Inspector link on the right tab + card once this dossier mounts. Extracted to
-  // a hook (keeps this file under its line ceiling); see useCrossSettlementFocus.
-  useCrossSettlementFocus({ focusedEntity, index: entityNav.index, allTabs, saveId, activeTab, setActiveTab });
 
   // Deferred null check (see comment near the top of this component).
   // All hooks are now committed; safe to early-exit.
   if (earlyExitOnNoSettlement) return null;
 
   return (
-    <DossierEntityContext.Provider value={entityNav}>
-     <RealmEntityContext.Provider value={realmNav}>
+    <>
       {/* The "How this was simulated" metadata lives behind the SimulationDrawer
           trigger in the action band below, not as a top-of-page rail — so the
           dossier card itself is the default landing surface and the simulation
           detail is one tap away rather than always-on chrome above the fold. */}
-      <div style={{ background: swatch['#FFFBF5'], border: '1px solid #c8b89a', overflow: 'hidden' }}>
+      <div style={{ background: 'rgba(255,251,245,0.96)', border: '1px solid #c8b89a', borderRadius: 10, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.35)' }}>
         {/* Header — suppressed via hideHeader in the embedded generate-flow view,
             where the wizard's own sticky toolbar already shows name/tier/pop, so
             the two dark identity bars collapse into one. */}
@@ -839,13 +695,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             settlement={settlement}
             saveId={saveId}
             stressObj={stressObj}
+            selectedTab={selectedTab}
+            onRegenerate={onRegenerate}
+            REROLLABLE={REROLLABLE}
             narrativeButtons={(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
-            // The owner's saved dossier (readOnly + saveId) opts into inline
-            // settlement rename; the public gallery view (readOnly, no saveId)
-            // never does. The callback threads from SettlementDetail, which owns
-            // the persist (renameSettlement) + the detail-view sync.
-            allowRename={readOnly && !!saveId && typeof onRenameSettlement === 'function'}
-            onRenameSettlement={onRenameSettlement}
           />
         )}
         {/* Lifecycle secondary bar — a thin parchment band under the identity
@@ -858,7 +711,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             extra !publicDossier keeps it off an anonymous gallery visitor's view —
             they have no Library to return to and no saveId (a false 'Draft'). */}
         {!playerView && !hideHeader && !publicDossier && (
-          <div style={{ padding: `${SP.sm}px ${SP.lg}px 0`, background: swatch['#FAF8F4'], display: 'flex', alignItems: 'center', gap: SP.md, overflowX: 'auto' }}>
+          <div style={{ padding: `${SP.sm}px ${SP.lg}px 0`, background: 'rgba(250,248,244,0.97)', display: 'flex', alignItems: 'center', gap: SP.md, overflowX: 'auto' }}>
             <Button variant="ghost" size="sm" onClick={() => navigate('settlements')} style={{ flexShrink: 0, padding: 0, color: swatch.inkMag3, whiteSpace: 'nowrap' }}>{'‹ Library'}</Button>
             <LifecycleSpine stage={lifecycleStage} />
           </div>
@@ -873,14 +726,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         {!readOnly && (
           <DossierActionBand
             narrativeEnabled={narrativeEnabled}
-            // Owner order (2026-07-21): the Narrative Layer pitch band lives ONLY in
-            // the library now — never on the wizard DRAFT dossier. The embedded
-            // generate-flow (hideHeader) is exactly that draft surface, and it is the
-            // only place this band's pitch renders (the readOnly library + public
-            // views never mount the band). Suppressing the pitch here makes the
-            // embedded band collapse to null (DossierActionBand returns null when
-            // embedded && !showNarrativePitch), removing the band from the draft.
-            suppressNarrativePitch={welcomeCardVisible || !flag('narrativeLayerStrip') || hideHeader}
+            suppressNarrativePitch={welcomeCardVisible || !flag('narrativeLayerStrip')}
             narrativeButtons={renderNarrativeButtons()}
             settlement={settlement}
             saveId={saveId}
@@ -898,8 +744,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         )}
         {/* P106 / E-2 — Pending changes bar + cascade preview. Self-gates
             inside; renders nothing when no edits are queued. */}
-        {!flag('settlementWorkbench') && !publicDossier && !playerView && (
-          <Suspense fallback={null}><PendingChangesBar /></Suspense>
+        {!readOnly && (
+          <Suspense fallback={null}>
+            <PendingChangesBar />
+          </Suspense>
         )}
         {/* P130 / O-2 — First-dossier teaching callouts now render INSIDE the
             Summary tab (the DM summary), not as a banner above every tab — see
@@ -927,7 +775,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           />
         )}
         {/* Content — dimmed overlay during regenerate so the user sees "something is changing" */}
-        <div style={{ position: 'relative', minHeight: 300, background: swatch['#FAF8F4'] }}>
+        <div style={{ position: 'relative', minHeight: 300, background: 'rgba(250,248,244,0.97)' }}>
           {/* ── Banners above tab content ────────────────────────────────────────
               Banner targeting:
                 • Thesis (identity-level prose) lives only on Summary & Overview —
@@ -970,9 +818,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               style={{
                 position: 'absolute', top: 10, left: '50%', transform: 'translateX(-50%)',
                 zIndex: 20, background: 'rgba(74,26,122,0.95)', color: swatch['#F0D8FF'],
-                padding: '8px 16px', border: '1px solid rgba(160,100,220,0.6)',
+                padding: '8px 16px', borderRadius: 20, border: '1px solid rgba(160,100,220,0.6)',
                 fontSize: FS.sm, fontWeight: 700, fontFamily: 'Nunito, sans-serif',
                 display: 'flex', alignItems: 'center', gap: 8,
+                boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
               }}
             >
               <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>{'\u2726'}</span>
@@ -985,10 +834,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               // + a few content bars) so a slow first-paint of a heavy lazy tab
               // reads as structured content arriving, not a stall. (B2.)
               <div aria-busy="true" aria-label="Loading section" style={{ padding: SP.lg, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-                <div style={{ height: 18, width: '40%', background: swatch['#E8DCC8'] }} />
-                <div style={{ height: 10, width: '90%', background: swatch['#EDE3CC'] }} />
-                <div style={{ height: 10, width: '75%', background: swatch['#EDE3CC'] }} />
-                <div style={{ height: 10, width: '82%', background: swatch['#EDE3CC'] }} />
+                <div style={{ height: 18, width: '40%', borderRadius: 4, background: swatch['#E8DCC8'] }} />
+                <div style={{ height: 10, width: '90%', borderRadius: 4, background: swatch['#EDE3CC'] }} />
+                <div style={{ height: 10, width: '75%', borderRadius: 4, background: swatch['#EDE3CC'] }} />
+                <div style={{ height: 10, width: '82%', borderRadius: 4, background: swatch['#EDE3CC'] }} />
               </div>
             }
           >
@@ -998,7 +847,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
                 not propagate to the root boundary and blank the whole app. The
                 resetKeys are the selected tab + settlement so switching either
                 auto-recovers. (B2.) */}
-            <FeatureErrorBoundary label="OutputContainer.tab" kind="react.render.dossier" fallbackTitle={t('errors.dossierSection')} resetKeys={[selectedTab, readSessionSubject]}>
+            <FeatureErrorBoundary label="OutputContainer.tab" kind="react.render.dossier" fallbackTitle="This section of the dossier could not be displayed." resetKeys={[selectedTab, readSessionSubject]}>
               {/* Completes the WAI-ARIA tabs relationship the strip begins: each
                   tab carries aria-controls={'sf-panel-' + id}; this panel answers
                   with the matching id + aria-labelledby, and tabIndex={0} lets a
@@ -1016,17 +865,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               </div>
             </FeatureErrorBoundary>
           </Suspense>
-          {/* The dossier foot's house seal + counterseal (HouseColophon) was
-              removed from the dossier surface per owner order (2026-07-21): the
-              identity mark and its motto caption no longer close the on-screen
-              dossier. The seal still renders on the brand surfaces (About) and the
-              PDF export cover — those are untouched (HouseColophon remains used by
-              components/organic/samples/DossierSample + howto/AboutManifesto). */}
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
         </div>
       </div>
-      <SettlementWorkbenchMount enabled={flag('settlementWorkbench') && !publicDossier && !playerView}
-        readOnly={readOnly && (!mapCanEdit || !npcAuthoringAllowed)} />
       {/* P142 / D-6 — Table View overlay. Rendered as a sibling of the dossier
           card so it takes over the full viewport. Gated on flag + the
           tableViewOpen pref so the lazy chunk only loads when actually opened. */}
@@ -1043,7 +884,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         pendingRegenerate={pendingRegenerate} onConfirmRegenerate={confirmRegenerate} onCancelRegenerate={() => setPendingRegenerate(false)}
         regenerateBody={`This discards the current narrative prose and generates a new one${isConfigured ? `, spending ${getCost('narrative')} credits` : ''}. The raw simulation is unchanged.`}
       />
-     </RealmEntityContext.Provider>
-    </DossierEntityContext.Provider>
+    </>
   );
 }

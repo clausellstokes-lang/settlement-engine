@@ -11,9 +11,6 @@
 import { Page, View, Text } from '@react-pdf/renderer';
 import { sheet, palette, type, page as pageGeo, toneBg, pt, swatch } from '../theme.js';
 import { EditableText } from '../primitives/Editable.jsx';
-import { HouseDeviceSeal } from '../primitives/HouseDeviceSeal.jsx';
-import { HouseCountersealSeal } from '../primitives/HouseCountersealSeal.jsx';
-import { HOUSE_MOTTO } from '../../design/organic/logo.js';
 import { humanize, num, stripZwnj, cap, label as toLabel } from '../lib/format.js';
 
 const TONE_COLOR = (key, fallback = palette.muted) => palette[key] || fallback;
@@ -51,7 +48,7 @@ function StatCell({ label, value, sub, tone = 'gold' }) {
           lineHeight: 1.05,
         }}
       >
-        {value === 0 || value ? value : '–'}
+        {value === 0 || value ? value : '—'}
       </Text>
       {sub && (
         <Text
@@ -119,19 +116,15 @@ function CrisisRow({ chips }) {
       ))}
       {chips.length > top.length && (
         <Text style={{ fontFamily: 'Nunito', fontSize: pt['8'], color: palette.muted, marginTop: 2 }}>
-          + {chips.length - top.length} more, detailed inside.
+          + {chips.length - top.length} more. See Summary, page 2.
         </Text>
       )}
     </View>
   );
 }
 
-export function Cover({ settlement, narrativeMode = false, vm, isFounder = false, isAnonymous = false, now = null }) {
-  // The export date is the ONE non-reproducible byte on a cover, so it rides the
-  // same injectable seam the World Book cover uses (generateWorldBook opts.now):
-  // a caller/fixture may pass the already-formatted label, and omitting it keeps
-  // the previous wall-clock behavior exactly.
-  const date = now || new Date().toLocaleDateString('en-US', {
+export function Cover({ settlement, narrativeMode = false, vm, isFounder = false, isAnonymous = false }) {
+  const date = new Date().toLocaleDateString('en-US', {
     year: 'numeric', month: 'long', day: 'numeric',
   });
 
@@ -306,17 +299,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             paddingTop: 12, borderTop: `0.5pt solid ${palette.border}`,
           }}
         >
-          {/* The maker's device beside the subject's own seeded counterseal — the
-              charter close, now in the export too (V-27c structured-path refactor).
-              The counterseal seeds on the settlement name, the SAME seed the web
-              colophon uses, so a settlement's mark is identical across surfaces. */}
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <View style={{ marginRight: 5 }}><HouseDeviceSeal size={14} /></View>
-            {settlement?.name && (
-              <View style={{ marginRight: 5 }}><HouseCountersealSeal seed={settlement.name} size={14} /></View>
-            )}
-            <Text style={{ ...type.cover_meta, color: palette.faint }}>SETTLEMENTFORGE</Text>
-          </View>
+          <Text style={{ ...type.cover_meta, color: palette.faint }}>SETTLEMENTFORGE</Text>
           <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
             <Text style={{ ...type.cover_meta, color: palette.faint, marginRight: 6 }}>CAMPAIGN</Text>
             <View style={{ width: 130 }}>
@@ -325,7 +308,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
                 defaultValue=""
                 showField
                 hideIfEmpty={false}
-                fallback="–"
+                fallback="—"
                 style={{ ...type.cover_meta, color: palette.muted }}
               />
             </View>
@@ -333,10 +316,6 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             <Text style={{ ...type.cover_meta, color: palette.faint }}>{date}</Text>
           </View>
         </View>
-        {/* The ceremonial motto caption — adjacent type, never inside the mark. */}
-        <Text style={{ ...type.cover_meta, color: palette.faint, textAlign: 'center', marginTop: 6, fontSize: pt['7'] || 7 }}>
-          {HOUSE_MOTTO}
-        </Text>
       </View>
     </Page>
   );

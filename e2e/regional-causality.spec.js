@@ -215,12 +215,10 @@ test.describe('regional causality campaign UI', () => {
     await page.goto('/settlements');
 
     await expect(page.getByText('Trade Belt')).toBeVisible();
-    // Legibility wave (2026-07-22): "Regional graph" -> "Between Your Towns";
-    // the settlement badge "N queued" -> "N changes queued".
-    await expect(page.getByText('Between Your Towns')).toBeVisible();
+    await expect(page.getByText('Regional graph')).toBeVisible();
     await expect(page.getByText('Causal chains')).toBeVisible();
     await expect(page.getByText('Millcross', { exact: true })).toBeVisible();
-    await expect(page.getByText('2 changes queued')).toBeVisible();
+    await expect(page.getByText('2 queued')).toBeVisible();
     await expect(page.getByText(/1\/2 ready/)).toBeVisible();
 
     await page.getByTitle('Show causal details').first().click();
@@ -259,24 +257,15 @@ test.describe('regional causality campaign UI', () => {
     const campaignValue = await campaignSelect.locator('option', { hasText: 'Trade Belt' }).getAttribute('value');
     await campaignSelect.selectOption(campaignValue);
 
-    // P4/P5 IA move: the standalone "Show Wizard News" view is gone — the news
-    // feed now lives in the Chronicle tab of the Realm Inspector. A later
-    // consolidation folded the dedicated "News"/Chronicle toolbar opener into
-    // the single "Inspector" toggle (WorldMapToolbar.jsx: "the toolbar Pulse /
-    // News / Pantheon openers were removed"), with Pulse / War / Pantheon /
-    // Chronicle now living as its tabs (RealmInspector.jsx). So we open the
-    // inspector, then switch to its Chronicle tab.
-    await page.getByTitle('Toggle the Realm Inspector').click();
-    await page.getByRole('button', { name: 'Chronicle' }).click();
+    await page.getByTitle('Show Wizard News').click();
 
-    // The Chronicle section renders the WizardNewsPanel with the seeded entries.
+    await expect(page.getByRole('heading', { name: 'Wizard News' })).toBeVisible();
     await expect(page.getByText('Most Significant News')).toBeVisible();
     await expect(page.getByText('Millcross faces import shortage')).toBeVisible();
     await expect(page.getByText('Realm Notables')).toBeVisible();
     await expect(page.getByText('Route disruption reaches Millcross')).toBeVisible();
 
-    // Close the inspector to return to the map workspace.
-    await page.getByTitle('Close inspector').click();
+    await page.getByTitle('Show campaign map').click();
     await expect(page.getByTitle('Toggle layer visibility')).toBeVisible();
   });
 

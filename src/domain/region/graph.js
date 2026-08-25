@@ -246,7 +246,7 @@ export function normalizeChannel(channel, now = null) {
 
 /** @param {unknown} value */
 
-/** @param {Array<{ id?: string }|null|undefined>} [items] */
+/** @param {any[]} [items] */
 function dedupeById(items) {
   const map = new Map();
   for (const item of items || []) {
@@ -347,7 +347,7 @@ export function ensureRegionalGraphOnce(graph = {}, options = {}) {
 }
 
 /**
- * @param {import('./deriveRegionalState.js').RegionInput|null|undefined} save
+ * @param {any} save
  * @param {string | null} [now]
  */
 function nodeFromSave(save, now = null) {
@@ -362,7 +362,7 @@ function nodeFromSave(save, now = null) {
   });
 }
 
-/** @param {import('./deriveRegionalState.js').RegionInput|null|undefined} save */
+/** @param {any} save */
 function neighbourLinksFor(save) {
   const settlement = /** @type {any} */ (settlementFromSave(save));
   return settlement?.neighbourNetwork
@@ -372,7 +372,7 @@ function neighbourLinksFor(save) {
 }
 
 /**
- * @param {{ id?: string, targetId?: string, settlementId?: string, neighbourName?: string, name?: string }|null|undefined} link
+ * @param {any} link
  * @param {any[]} saves
  */
 function findTargetSave(link, saves) {
@@ -404,7 +404,7 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
   const edges = [...existing.edges];
   const nodeIds = new Set(nodes.map(n => n.id));
   const edgesById = new Map(edges.map(e => [e.id, e]));
-  const pairKeyFor = (/** @type {unknown} */ a, /** @type {unknown} */ b) => [String(a), String(b)].sort().join('::');
+  const pairKeyFor = (/** @type {any} */ a, /** @type {any} */ b) => [String(a), String(b)].sort().join('::');
   const edgesByPair = new Map();
   for (const e of edges) {
     const key = pairKeyFor(e.from, e.to);
@@ -779,14 +779,22 @@ export function setRegionalChannelStatus(graph, channelId, status, options = {})
   return ensureRegionalGraph({ ...current, channels, updatedAt: now }, { now });
 }
 
-// RETIRED (R-5b, owner queue #21): `setRegionalChannelVisibility`. The after-the-
-// fact visibility setter had exactly one caller — the identically-named store
-// action, which itself had none — so both halves were retired together. The
-// visibility FIELD is untouched and still governed here: REGIONAL_CHANNEL_VISIBILITIES
-// is the vocabulary, normalizeChannel (above) defaults and migrates it per channel
-// type, relationshipChannelBundle mints it, activeChannelsFrom filters on it, and
-// the confirmed-channel preservation branch carries a curated value across a
-// rediscovery pass. Only the never-called mutator is gone.
+/**
+ * @param {RegionGraph} graph
+ * @param {string} channelId
+ * @param {string} visibility
+ * @param {RegionOptions} [options]
+ */
+export function setRegionalChannelVisibility(graph, channelId, visibility, options = {}) {
+  if (!REGIONAL_CHANNEL_VISIBILITIES.includes(visibility)) return ensureRegionalGraph(graph || {}, { now: options.now });
+  const now = options.now || nowIso();
+  const current = ensureRegionalGraph(graph || {}, { now });
+  const channels = current.channels.map(channel => {
+    if (channel.id !== channelId) return channel;
+    return { ...channel, visibility, updatedAt: now };
+  });
+  return ensureRegionalGraph({ ...current, channels, updatedAt: now }, { now });
+}
 
 /**
  * @param {RegionGraph} graph

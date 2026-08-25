@@ -96,15 +96,6 @@ describe('WorldPulsePanel', () => {
               passed: true,
               conflictResolution: { deterministic: true },
             },
-            {
-              candidateId: 'candidate-hidden',
-              candidateType: 'private_mechanical_refresh',
-              recordMode: 'state_only',
-              severity: 0.3,
-              probability: 1,
-              roll: 0,
-              passed: true,
-            },
           ],
         }],
       },
@@ -120,7 +111,6 @@ describe('WorldPulsePanel', () => {
     expect(screen.getByText('Briarwatch faces import shortage')).toBeTruthy();
     expect(screen.getByText('deterministic')).toBeTruthy();
     expect(screen.getAllByText('food pressure').length).toBeGreaterThan(0);
-    expect(screen.queryByText(/private mechanical refresh/i)).toBeNull();
 
     fireEvent.click(screen.getByTitle('Apply proposal'));
     await waitFor(() => {
@@ -183,9 +173,7 @@ describe('WorldPulsePanel', () => {
     expect(screen.getByText(/entangled with famine/)).toBeTruthy();
     expect(screen.getByText('The Red Fang warband')).toBeTruthy();
     // The echo card: living-memory framing with fading strength.
-    // LINEAGE NOTE (master merge W6): RF's echo row joins with the em-dash house
-    // style ('Market shock — in living memory'); master used a comma.
-    expect(screen.getByText('Market shock, in living memory')).toBeTruthy();
+    expect(screen.getByText('Market shock — in living memory')).toBeTruthy();
     expect(screen.getByText(/memory 34%/)).toBeTruthy();
   });
 

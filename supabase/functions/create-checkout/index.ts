@@ -46,17 +46,11 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
-import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 // Structured error logging for the money path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
-// Wave-D human verification (INERT until TURNSTILE_SECRET_KEY is set): gates the
-// session-creation door against scripted checkout abuse. Key-inert — a no-op that
-// returns { ok:true, enforced:false } until the owner activates it, so the money
-// path is byte-identical while unconfigured. See docs/PERIMETER_RUNBOOK.md.
-import { verifyTurnstile } from '../_shared/verifyTurnstile.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
@@ -68,9 +62,6 @@ const PRICE_MAP: Record<string, string> = {
   premium:          Deno.env.get('STRIPE_PRICE_PREMIUM') || '',
   founder_lifetime: Deno.env.get('STRIPE_PRICE_FOUNDER_LIFETIME') || '',
   single_dossier:   Deno.env.get('STRIPE_PRICE_SINGLE_DOSSIER') || '',
-  // Surveyor subscription (#16). Unset env ⇒ '' ⇒ unpurchasable (LAW 1). Signed-in
-  // only (non-anonymous), subscription mode (below). Grants an ENTITLEMENT, not a tier.
-  surveyor:         Deno.env.get('STRIPE_PRICE_SURVEYOR') || '',
   // ── Legacy SKUs (kept resolvable so refund + replay flows work) ──────────
   credits_5:        Deno.env.get('STRIPE_PRICE_CREDITS_5') || '',
   credits_15:       Deno.env.get('STRIPE_PRICE_CREDITS_15') || '',
@@ -95,7 +86,7 @@ const CREDIT_AMOUNTS: Record<string, number> = {
 // Products that bill as a subscription (vs one-time payment). Everything
 // else uses Stripe's payment mode. Keep this in sync with TIERS.billing
 // in src/config/pricing.js.
-const SUBSCRIPTION_PRODUCTS = new Set(['premium', 'surveyor']);
+const SUBSCRIPTION_PRODUCTS = new Set(['premium']);
 
 // Founder Lifetime is advertised as "X of 30 seats remaining". Keep in sync
 // with `seatLimit` in src/config/pricing.js and FOUNDER_SEAT_CAP in
@@ -318,28 +309,9 @@ export async function handleCreateCheckout(
     // saved settlement at checkout, the durable-rights entitlement (108) binds
     // to it. It is verified for ownership below and stashed in the session
     // metadata; the webhook grants the right on the paid session.
-    const { product, checkoutToken, redeemCode, saveId, settlement, savePaymentMethod, captchaToken } = await req.json();
+    const { product, checkoutToken, redeemCode, saveId, settlement } = await req.json();
     if (!product || !PRICE_MAP[product]) {
       throw new Error(`Invalid product: ${product}. Valid: ${Object.keys(PRICE_MAP).join(', ')}`);
-    }
-
-    // Wave-D human verification, BEFORE any Stripe call. INERT until the owner sets
-    // TURNSTILE_SECRET_KEY (verifyTurnstile returns { ok:true } → this passes and the
-    // path is byte-identical). When active it FAILS CLOSED: a missing/failed/expired
-    // token returns the house-register error (never a stuck button — the client shows
-    // the message and can retry), consistent with the money path's fail-closed
-    // posture. The token is minted by the purchase surface's managed/invisible
-    // CaptchaGate. Placed here so it gates every product uniformly, pre-amplification.
-    const { ip: captchaIp } = readRequestMeta(req);
-    const turnstile = await verifyTurnstile(
-      typeof captchaToken === 'string' ? captchaToken : null,
-      captchaIp,
-    );
-    if (!turnstile.ok) {
-      return new Response(
-        JSON.stringify({ error: 'We could not verify your request. Please try again.' }),
-        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
-      );
     }
 
     // Tier 7.4 — single-dossier is anonymous-allowed (per pricing.js
@@ -414,11 +386,6 @@ export async function handleCreateCheckout(
       const { data: { user: authedUser }, error: authError } = await supabase.auth.getUser();
       if (!authError && authedUser) {
         user = { id: authedUser.id, email: authedUser.email ?? null };
-        // SINGLE-SESSION GATE (161, §7.2): authed products only — the anonymous
-        // single_dossier path carries no session and is intentionally ungated.
-        if (await isSessionSuperseded(adminClient(), authedUser.id, authHeader, deviceLabelFromRequest(req))) {
-          return new Response(JSON.stringify({ error: 'session_superseded' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
-        }
       } else if (!isAnonymousProduct) {
         throw new Error('Not authenticated');
       }
@@ -486,27 +453,11 @@ export async function handleCreateCheckout(
 
     if (user) {
       const admin = adminClient();
-      const { data: profile, error: profileError } = await admin
+      const { data: profile } = await admin
         .from('profiles')
-        .select('stripe_customer_id, banned_at, disabled_at, deleted_at')
+        .select('stripe_customer_id')
         .eq('id', user.id)
         .single();
-      if (profileError || !profile) {
-        throw new Error(`Checkout profile lookup failed: ${profileError?.message ?? 'profile missing'}`);
-      }
-      // A still-valid JWT must not reopen billing after moderation or account
-      // deletion. This service-role read happens before any Stripe customer or
-      // Checkout side effect; migration 178's profile trigger is the independent
-      // race backstop if deletion commits while this handler is in flight.
-      if (
-        !isAnonymousProduct
-        && (profile.banned_at != null || profile.disabled_at != null || profile.deleted_at != null)
-      ) {
-        return new Response(
-          JSON.stringify({ error: 'account_inactive' }),
-          { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
-        );
-      }
 
       stripeCustomerId = typeof profile?.stripe_customer_id === 'string'
         ? profile.stripe_customer_id
@@ -518,23 +469,10 @@ export async function handleCreateCheckout(
           metadata: { supabase_user_id: user.id },
         });
         stripeCustomerId = customer.id;
-        const { error: bindError } = await admin
+        await admin
           .from('profiles')
           .update({ stripe_customer_id: stripeCustomerId })
           .eq('id', user.id);
-        if (bindError) {
-          // Do not strand an external customer that the deletion worker cannot
-          // discover because the profile binding lost the race.
-          try {
-            await stripeApi.customers.del(stripeCustomerId);
-          } catch (cleanupError) {
-            logError('create-checkout', user.id, cleanupError, {
-              stage: 'cleanup_unbound_stripe_customer',
-              stripe_customer_id: stripeCustomerId,
-            });
-          }
-          throw new Error(`Stripe customer binding failed: ${bindError.message}`);
-        }
       }
     }
 
@@ -619,36 +557,12 @@ export async function handleCreateCheckout(
     } else if (user?.email) {
       sessionParams.customer_email = user.email;
     }
-    if (mode === 'subscription' && user) {
-      // The subscription survives independently of its Checkout Session. Carry
-      // the verified owner onto the subscription itself so a late invoice or
-      // lifecycle event remains attributable after account deletion clears the
-      // profile's live Stripe ids.
-      sessionParams.subscription_data = {
-        metadata: {
-          supabase_user_id: user.id,
-          product,
-        },
-      };
-    }
     if (redeemCoupon) {
       // Server-attached discount ONLY. NEVER allow_promotion_codes: the
       // hosted checkout page must not become a coupon-guessing surface, and
       // the webhook's zero-dollar gates (referral grant, redeem apply) assume
       // every discount on a session was placed by this line.
       sessionParams.discounts = [{ coupon: redeemCoupon }];
-    }
-
-    // AUTO-RELOAD CONSENT (§4.2 / #13): a SIGNED-IN buyer of a CREDIT PACK may opt
-    // to save the card off-session so future auto-reloads can charge it. Gated
-    // server-side on ALL three conditions re-derived here (never trust the body
-    // flag alone to bypass them): payment mode (payment_intent_data is invalid in
-    // subscription mode), a signed-in user (never anonymous), and a credit-pack
-    // product (present in CREDIT_AMOUNTS). Stripe stores the payment method for
-    // off_session reuse; no raw card data ever touches our code.
-    const isCreditPack = Object.prototype.hasOwnProperty.call(CREDIT_AMOUNTS, product);
-    if (savePaymentMethod === true && mode === 'payment' && user && isCreditPack) {
-      sessionParams.payment_intent_data = { setup_future_usage: 'off_session' };
     }
 
     let session: { id: string; url: string | null };

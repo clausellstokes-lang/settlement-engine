@@ -108,7 +108,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
         THREAT ASSESSMENT
       </Text>
       <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
-        Bars show the settlement&apos;s defense readiness against each threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. Higher is better.
+        Bars show defense readiness against each threat — higher is better.
       </Text>
       {d.threatReadiness.map((row, i) => (
         <View
@@ -191,7 +191,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
         })}
         {!FORCE_GROUPS.some(g => (d.armedForces?.[g.key] || []).length) && (
           <Text style={{ ...type.body, fontSize: pt['9'], color: palette.muted, fontStyle: 'italic' }}>
-            No organized defensive force. Defense relies on armed citizens.
+            No organized defensive force — defense relies on armed citizens.
           </Text>
         )}
       </View>
@@ -376,7 +376,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
         <View style={{ marginTop: space.sm }}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
-            VULNERABILITIES · FIRST SURVEY
+            VULNERABILITIES
           </Text>
           <BulletList
             items={d.vulnerabilities}

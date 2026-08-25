@@ -1,0 +1,22 @@
+export const meta = {
+  name: 'population-vs-war-parity-survey',
+  description: 'Survey population/demographic code depth against war\'s robustness and drama dimensions',
+  phases: [{ title: 'Survey', detail: '3 read-only surveyors over minifold' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PRE = `VERIFY-FIRST: read-only surveyor for the SettlementForge Fable chair (owner-authorized). Tree: ${MF} (claude/composite-r4; two-writer tree — Sol is live; read freely, edit NOTHING, no git, no gates; focused vitest allowed). Label CONFIRMED (read/executed) vs PLAUSIBLE. Structured output; file:line evidence. Wave P (P1..P5, demographicsKernel/populationDynamics/demographicsPlans etc.) landed recently — survey AS BUILT, not from the design doc.`
+const SCHEMA = { type:'object', required:['findings','summary'], properties:{
+  findings:{type:'array',items:{type:'object',required:['dimension','verdict','evidence'],properties:{
+    dimension:{type:'string'},verdict:{type:'string'},evidence:{type:'string'},detail:{type:'string'}}}},
+  summary:{type:'string'}}}
+
+phase('Survey')
+const r = await parallel([
+  () => agent(`${PRE}
+TASK: POPULATION MECHANICS AS-BUILT. Survey the landed demographic engine: the §3 rate step (births/deaths/migration, integer, seeded, receipted), K_food + D_tier derivations, the P2 push-pull homeostat (drivers, applicability guards, reachability/pull evaluation, refugee vs voluntary classes, transit columns), P3 plans/valves (response kinds, the one-plan slot, satellite founding), the viability ladder, the P5 reconciliations, conservation (do emigrants provably ARRIVE; realm totals move only through births/deaths/edges?), stressor couplings (disease/raids incidence), and the named-cast floor composition. Verdict: is the population PHYSICAL layer as real as war's? (I expect YES — it is the newest engine; find the exceptions.)`, {label:'pop-mechanics', phase:'Survey', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: POPULATION AGENCY + EPISTEMICS PARITY. (1) EPISTEMICS — THE SHARP QUESTION: do migrants move on BELIEVED conditions or TRUE ones? Read the P2 pull evaluation: does it read the destination's actual K_food/prosperity, or any belief/rumor-mediated view? (If true-state: the gold-rush tragedy — a thousand souls chasing a RUMOR to a town that cannot hold them — is currently IMPOSSIBLE; confirm.) Do any population movements consume the rumor/news layer? (2) THE PEOPLE'S OWN VOICE — do populations ever act APART from their settlement's decisions: unrest/riots/strikes/refusals-to-leave/draft resistance (grep unrest, riot, refusal machinery; the coup lane is faction-level — is there ever a POPULAR act?); can a population REFUSE a plan (the §5c plans are seat decisions — any popular veto)? (3) IDENTITY — do population cohorts carry any texture (origins, the refugee class persisting as memory, cultural mixing at destinations) or does arrival erase history? (4) LIFECYCLE — the ghost town, the boomtown, resettlement of ruins (remnant rebirth): which transitions exist with receipts? Verdict per dimension: BUILT / PARTIAL / ABSENT.`, {label:'pop-agency', phase:'Survey', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: POPULATION MEASUREMENT + DRAMA PRESENCE. (1) Observability: the demographic certification rows, v5 observations (realmPressure emission), envelopes (trait stationarity, pool equilibrium), soak claims (the fourteen) — what is measured vs pending; (2) Herald presence: the demographic news lines P4 added (grep demographicsHerald + WHAT_PHRASES demographic kinds) — the audit graded the exodus/famine lines A; count the STORY KINDS population can emit vs war's; (3) DRAMA INVENTORY — which stories are TELLABLE-NOW / PARTIAL / IMPOSSIBLE with receipts: the great exodus (A-graded, exists?); the gold rush (rumor-driven boom); the plague year as an ARC (outbreak→peak→aftermath, or just an event?); the ghost town (terminal decline narrated start to finish); the boomtown strain (growth outpacing food/housing with visible social cost); the road itself (do migration columns emit en-route news — a column lost, a column arriving); the generation that left (any long-memory of departures). Verdict: population's narrative density vs war's.`, {label:'pop-drama', phase:'Survey', schema:SCHEMA}),
+])
+return { results: r.filter(Boolean) }

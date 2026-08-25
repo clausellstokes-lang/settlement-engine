@@ -1,132 +1,332 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { INK, BODY, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, serif_, FS, SP, swatch } from '../theme.js';
+import { useState } from 'react';
+import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, sans, serif_, FS, swatch } from '../theme.js';
+import { Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, HeartHandshake, Flag, Coins } from 'lucide-react';
+import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, TRADE_CATEGORIES, satisfiesOptions,
+  DEITY_ALIGNMENT, DEITY_LAW, DEITY_TIER, DEITY_PORTFOLIO_MAX_LENGTH } from '../../domain/customContentSchema.js';
 import { deityTemper } from '../../domain/worldPulse/deityAxes.js';
+import { td } from '../../copy/deityAuthoring.js';
+import DeityEffectPreview from './DeityEffectPreview.jsx';
 import PantheonActivationStrip from './PantheonActivationStrip.jsx';
-import FactionEventBanner from './FactionEventBanner.jsx';
 import ContentPackBar from './ContentPackBar.jsx';
-import CustomContentEditor from './CustomContentEditor.jsx';
-import CustomContentUsageEcho from './CustomContentUsageEcho.jsx';
 import SupplyChainsManager from './SupplyChainsManager.jsx';
-import { AUTHORING_LANES } from './customCategories.js';
+import CategorySelect from '../primitives/CategorySelect.jsx';
 import { useStore } from '../../store/index.js';
-import { createRetryableCampaignLazy } from '../../store/campaignRuntimeView.js';
-import { t } from '../../copy/index.js';
-import { navigate } from '../../hooks/useRoute.js';
-import { buildRegistry } from '../../lib/customRegistry.js';
 import DeleteConfirmation from '../DeleteConfirmation';
 import { Tag } from './primitives.jsx';
-import { DependencySummary } from './Dependencies.jsx';
+import { DependencySummary, DependenciesSection } from './Dependencies.jsx';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { projectContentEffects } from '../../domain/content/contentEffectProjection.js';
-import {
-  admitCustomContentDefinition,
-  getCustomContentCategory,
-} from '../../domain/content/customContentManifest.js';
-import { fingerprintContent } from '../../domain/content/contentFingerprint.js';
-import {
-  ArchivedContentLibrary,
-  ContentDefinitionHistory,
-} from '../contentStudio/CustomContentLifecycle.jsx';
-import ContentEnvironmentLifecycle from '../contentStudio/ContentEnvironmentLifecycle.jsx';
-export { default as ReadOnlyCustomContentList } from './ReadOnlyCustomContentList.jsx';
-import ReadOnlyCustomContentList from './ReadOnlyCustomContentList.jsx';
-// CustomItemAttributes + CustomContentUpsell live in leaf modules so this
-// manager stays under the component-size ratchet; re-exported for existing
-// import sites.
-export { CustomItemAttributes } from './CustomItemAttributes.jsx';
-import { CustomItemAttributes } from './CustomItemAttributes.jsx';
-export { CustomContentUpsell } from './CustomContentGate.jsx';
-import { CustomContentUpsell } from './CustomContentGate.jsx';
 
 // ── Custom Content Manager ──────────────────────────────────────────────────
 
-// The category defs (icons/colours/fields) live in a leaf so this manager
-// stays under the component-size ratchet; re-exported for existing import sites.
-export { CUSTOM_CATEGORIES } from './customCategoryDefs.js';
-import { CUSTOM_CATEGORIES, CATEGORY_BY_KEY } from './customCategoryDefs.js';
+// Per-category schema:
+//   fields:        flat scalar fields rendered in the main form
+//   dependencies:  refId-array fields rendered in the always-visible Dependencies
+//                  section (it's what wires custom content into generation + chain
+//                  discovery, so it never collapses). Each dep field is
+//                  { key, label, category | categories[], single?, hint? } where
+//                  `category` (or `categories` for a multi-bucket picker, e.g.
+//                  tradeGoods + services) is the registry category to pick from.
+export const CUSTOM_CATEGORIES = [
+  { key:'institutions', label:'Institutions', Icon:Building2, color:'#1a3a7a',
+    fields:['name','category','authority','tags','essential','magical','criminal','defenseRole','foodImpact','satisfies','description','tierMin','tierMax'],
+    dependencies: [
+      { key:'produces',    label:'Produces (goods/services)', categories:['tradeGoods','services'],
+        hint:'Trade goods or services this institution generates when present.' },
+      { key:'requires',    label:'Requires (inputs)',          categories:['resources','tradeGoods','services'],
+        hint:'Resources, goods, or services this institution consumes — its absence makes the institution viability-marginal.' },
+      { key:'subsumes',    label:'Subsumes (absorbs)',         category:'institutions',
+        hint:'Institutions this one represents — when present, the smaller ones aren’t listed separately.' },
+    ],
+  },
+  { key:'services',     label:'Services',     Icon:HeartHandshake, color:'#0e7c86',
+    fields:['name','category','authority','criticality','economicWeight','magical','criminal','foodImpact','description','tierMin','tierMax'],
+    dependencies: [
+      { key:'providedBy', label:'Provided by (institution)', category:'institutions', single:true,
+        hint:'The institution that offers this service (a service is something an institution provides).' },
+      { key:'requires',   label:'Requires (inputs)',          categories:['resources','tradeGoods','services'],
+        hint:'Resources, goods, or services this service consumes to operate.' },
+    ],
+  },
+  { key:'resources',    label:'Resources',    Icon:Package,   color:'#1a5a28',
+    fields:['name','category','criticality','foodImpact','commodities','description'],
+    dependencies: [
+      { key:'yields',  label:'Output (goods/services)', categories:['tradeGoods','services'],
+        hint:'Goods or services this base resource yields once worked (built-in + custom) — feeds supply-chain discovery as the resource → processor → output flow.' },
+      { key:'enables', label:'Enables institutions', category:'institutions',
+        hint:'Institutions whose viability is boosted by access to this resource.' },
+    ],
+  },
+  { key:'stressors',    label:'Stressors',    Icon:AlertTriangle, color:'#8b1a1a',
+    fields:['name','description','severity','affects'],
+    dependencies: [
+      { key:'disablesInstitutions', label:'Disables institutions', category:'institutions',
+        hint:'Institutions suspended or degraded while this stressor is active.' },
+      { key:'disablesGoods',        label:'Disables trade goods',  category:'tradeGoods',
+        hint:'Goods whose production halts under this stressor.' },
+    ],
+  },
+  { key:'tradeGoods',   label:'Trade Goods',  Icon:Coins,     color:'#a0762a',
+    fields:['name','category','criticality','economicWeight','foodImpact','satisfies','description'],
+    dependencies: [
+      { key:'requiredInstitution', label:'Required institution',  category:'institutions', single:true,
+        hint:'Single institution that must be present for this good to be produced.' },
+      { key:'requiredResources',   label:'Required resources',     categories:['resources','tradeGoods','services'],
+        hint:'Resources, intermediate goods, or services needed to produce this good (built-in + custom).' },
+    ],
+  },
+  // Deities — homebrew gods (premium custom content). PURE authoring: the axes
+  // ride an embed only once a DM ASSIGNS the deity as a settlement's patron
+  // (DeityAssignmentPanel → the SET_PRIMARY_DEITY canon event); tier NEVER touches
+  // generation. `portfolio` is a free-text flavor field with ZERO mechanics.
+  { key:'deities',      label:'Deities',      Icon:Sparkles,  color:'#7c3aed', singular:'Deity',
+    fields:['name','alignmentAxis','lawAxis','rankAxis','portfolio','domain'] },
+  { key:'factions',     label:'Factions',     Icon:Flag,      color:'#6a1a4a',
+    fields:['name','authority','archetype','agenda','scale','methods','magical','criminal','defenseRole','description','tierMin'],
+    dependencies: [
+      { key:'controls',  label:'Controls institutions', category:'institutions',
+        hint:'Institutions this faction holds sway over.' },
+      { key:'rivals',    label:'Rivals (conflicts with)', category:'factions',
+        hint:'Factions this one is in conflict with — flagged if both are present.' },
+    ],
+  },
+  // Supply Chains are DISCOVERED (inferred from the inputs/outputs of the types
+  // above), not hand-authored — this tab renders its own discover/verify
+  // manager (SupplyChainsManager) instead of the generic add form.
+  { key:'supplyChains', label:'Supply Chains', Icon:Link2,   color:'#a0762a', discovered:true },
+  // Trade Routes / Power Presets / Defense Presets removed (§14): redundant with
+  // the trade-route, government, and defense controls already in the generation
+  // config. Supply chains are not hand-authored here either — they're discovered
+  // (see the Supply Chains tab) from entity inputs/outputs.
+];
 
-const campaignLazy = importer => createRetryableCampaignLazy(useStore, importer);
-const CampaignContentBindingLifecycle = campaignLazy(() => import(
-  '../contentStudio/CampaignContentBindingLifecycle.jsx'
-));
+const STRESSOR_AFFECT_CATEGORIES = [
+  'economy', 'safety', 'supply chains', 'military', 'religion', 'magic',
+  'criminal', 'governance', 'population', 'morale',
+];
 
-// Clone a prebuilt registry seed into an editable draft — the registry entry's
-// stable display fields mapped onto the form's draft shape (a "start from a
-// built-in" starting point the author then edits + saves as their own item).
-function seedDraftFromPrebuilt(entry) {
-  if (!entry) return {};
-  const draft = {
-    name: entry.name ? `${entry.name} (copy)` : '',
-    description: entry.desc || '',
-  };
-  if (entry.subcategory && entry.subcategory !== 'custom') draft.category = entry.subcategory;
-  if (Array.isArray(entry.tags) && entry.tags.length) draft.tags = entry.tags.join(', ');
-  if (entry.tierMin) draft.tierMin = entry.tierMin;
-  return draft;
-}
+const TIERS = ['thorp','hamlet','village','town','city','metropolis'];
+const SEVERITY_LEVELS = ['minor','moderate','severe','catastrophic'];
+const GOV_TYPES = ['monarchy','republic','theocracy','oligarchy','tribal','military junta','council','anarchy'];
+const POSTURES = ['peaceful','defensive','aggressive','fortified','guerrilla'];
 
+// Plain-language helper text under each field, so the form explains itself
+// (spec §14: as intuitive as possible). Keyed by field name; missing = no hint.
+const FIELD_HINTS = {
+  category:       'Which part of settlement life this belongs to — also where it appears in the dossier. Pick “+ New category…” to add your own.',
+  authority:      'Which power it feeds in the settlement’s leadership — e.g. a temple → religious authority, a garrison → martial.',
+  defenseRole:    'Whether and how this strengthens the settlement’s defense.',
+  essential:      'Always included when this settlement is generated — like a mill or watch — never rolled probabilistically.',
+  foodImpact:     'Whether this raises or drains food security (a farm produces; a large garrison consumes). Moves the deficit.',
+  satisfies:      'Trade category this good belongs to — e.g. Dragonbone Greatswords → Weapons & armour. In the Economics tab the good folds into this category line (incl. its name) instead of a separate pill. Demand categories (weapons/religious/maritime/luxury/alchemical) also cover local need + export surplus. Pick “Other” to type your own — it stays available while any item uses it.',
+  criticality:    'How essential this is. Critical things (food, water, timber) cause crises when supply breaks; luxuries don’t.',
+  economicWeight: 'How much this reinforces the local economy.',
+  magical:        'Turn on if this is arcane or enchanted in nature.',
+  criminal:       'Turn on if this operates outside the law.',
+  tierMin:        'Smallest settlement size where this can appear (blank = any).',
+  tierMax:        'Largest settlement size where this still appears (blank = no limit).',
+  archetype:      'e.g. merchant guild, thieves’ cabal, knightly order.',
+  agenda:         'What this faction is trying to achieve.',
+  scale:          'How much reach and influence this faction has.',
+  methods:        'How it pursues its agenda — e.g. bribery, force, diplomacy.',
+  // Deities — the axis hints explain what each axis DOES in the engine (copy in
+  // the lazy deityAuthoring namespace, so it never rides first paint).
+  alignmentAxis:  td('form.alignmentHint'),
+  lawAxis:        td('form.lawHint'),
+  rankAxis:       td('form.rankHint'),
+  portfolio:      td('form.portfolioHint'),
+  domain:         td('form.domainHint'),
+};
 
-// Buckets with a prebuilt catalog to clone from ("start from a built-in").
-const SEEDABLE = new Set(['institutions', 'services', 'resources', 'stressors', 'tradeGoods']);
+// Field-label overrides — nicer than the auto camelCase split for deity axes.
+const FIELD_LABELS = {
+  alignmentAxis: td('form.alignmentLabel'),
+  lawAxis:       td('form.lawLabel'),
+  rankAxis:      td('form.rankLabel'),
+  portfolio:     td('form.portfolioLabel'),
+  domain:        td('form.domainLabel'),
+};
 
-function commandWasConfirmed(receipt) {
-  return receipt?.ok === true
-    && receipt.status === 'applied'
-    && receipt.persistence?.state === 'confirmed';
-}
+// §14 — resolve a stored enum key to its human label for the detail view.
+const keyLabel = (list, key) => (list.find((o) => o.key === key)?.label) || key;
+// Compact capitalize for a stored enum key (deity axis chips).
+const cap = (s) => (s ? String(s).charAt(0).toUpperCase() + String(s).slice(1) : s);
 
-function commandFailureMessage(receipt, fallback) {
-  const reason = typeof receipt?.reason === 'string'
-    ? receipt.reason.replaceAll('_', ' ')
-    : '';
-  return reason ? `${fallback}: ${reason}.` : `${fallback}.`;
-}
-
-export function CustomContentManager({ search, initialCat }) {
-  const customContent = useStore(s => s.customContent);
-  const previewBaseContent = useStore(s => (
-    s.activeContentEnvironmentContent ?? s.customContent ?? {}
-  ));
-  const previewBaselineFingerprint = useMemo(
-    () => fingerprintContent(previewBaseContent),
-    [previewBaseContent],
+/**
+ * CustomItemAttributes — the post-creation "detail sheet" for a saved custom
+ * item, mirroring how the prebuilt catalog surfaces an object's properties.
+ * Renders only the attributes the author actually set, as labelled chips, so a
+ * saved item reads like a real compendium entry rather than just a name + blurb.
+ */
+export function CustomItemAttributes({ item }) {
+  const chips = [];
+  if (item.essential === true) chips.push({ label: 'Essential', color: '#1a4a20' });
+  if (item.magical === true) chips.push({ label: 'Magical', color: swatch.magic });
+  if (item.criminal === true) chips.push({ label: 'Criminal', color: '#8b1a1a' });
+  if (item.authority) chips.push({ label: `Authority · ${keyLabel(POWER_AUTHORITIES, item.authority)}`, color: '#1a3a7a' });
+  if (item.defenseRole) chips.push({ label: `Defense · ${keyLabel(DEFENSE_ROLES, item.defenseRole)}`, color: '#8b1a1a' });
+  if (item.criticality) chips.push({ label: keyLabel(CRITICALITY, item.criticality), color: '#a0762a' });
+  if (item.economicWeight) chips.push({ label: keyLabel(ECONOMIC_WEIGHT, item.economicWeight), color: '#1a5a28' });
+  if (item.foodImpact) chips.push({ label: `Food · ${item.foodImpact}`, color: '#7a5010' });
+  if (item.satisfies) chips.push({ label: `Trade category · ${keyLabel(TRADE_CATEGORIES, item.satisfies) || item.satisfies}`, color: '#7c3aed' });
+  if (item.archetype) chips.push({ label: `Archetype · ${item.archetype}`, color: '#6a1a4a' });
+  if (item.scale) chips.push({ label: `Scale · ${item.scale}`, color: '#6a1a4a' });
+  if (item.severity) chips.push({ label: `Severity · ${item.severity}`, color: '#8b1a1a' });
+  // Deity axes — moral / order / rank / domain (never the derived temper). Use
+  // the compact capitalized key, not the verbose enum label.
+  if (item.alignmentAxis) chips.push({ label: `Moral · ${cap(item.alignmentAxis)}`, color: '#7c3aed' });
+  if (item.lawAxis && item.lawAxis !== 'neutral') chips.push({ label: `Order · ${cap(item.lawAxis)}`, color: '#7c3aed' });
+  if (item.rankAxis) chips.push({ label: `Rank · ${cap(item.rankAxis)}`, color: '#6a3fbf' });
+  if (item.domain) chips.push({ label: `Domain · ${item.domain}`, color: '#7a5010' });
+  if (item.tierMin || item.tierMax) chips.push({ label: `Tiers · ${item.tierMin || 'any'}–${item.tierMax || '∞'}`, color: '#6b5340' });
+  if (!chips.length) return null;
+  return (
+    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 6 }}>
+      {chips.map((c, i) => <Tag key={i} label={c.label} color={c.color} />)}
+    </div>
   );
-  const applyCustomContentCommand = useStore(s => s.applyCustomContentCommand);
+}
+
+// ── Premium upsell card (shown to free / anon users in the Custom tab) ─────
+export function CustomContentUpsell({ existingCount, isAnon }) {
+  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  return (
+    <div style={{
+      padding: '24px 20px', textAlign: 'center',
+      background: 'linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(160,118,42,0.06) 100%)',
+      border: '1px solid rgba(124,58,237,0.25)', borderRadius: 10,
+    }}>
+      <div style={{
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        width: 56, height: 56, borderRadius: '50%',
+        background: 'rgba(124,58,237,0.12)', marginBottom: 12,
+      }}>
+        <Sparkles size={26} color="#7c3aed" />
+      </div>
+      <div style={{
+        fontSize: FS['18'], fontWeight: 700, fontFamily: serif_, color: INK, marginBottom: 4,
+      }}>
+        Custom Compendium &mdash; Premium
+      </div>
+      <div style={{
+        fontSize: FS.md, color: SEC, lineHeight: 1.55, marginBottom: 16,
+        maxWidth: 460, margin: '0 auto 16px',
+      }}>
+        Build your own institutions, resources, stressors, trade goods, power presets, and defense
+        scenarios. Custom content is synced to your account and available across devices.
+      </div>
+
+      {existingCount > 0 && (
+        <div style={{
+          padding: '10px 14px', background: 'rgba(160,118,42,0.10)',
+          border: `1px solid ${GOLD}55`, borderRadius: 7,
+          fontSize: FS.sm, color: GOLD, fontWeight: 600, marginBottom: 16,
+          maxWidth: 460, margin: '0 auto 16px',
+        }}>
+          You have <strong>{existingCount}</strong> grandfathered custom item{existingCount === 1 ? '' : 's'}.
+          They&rsquo;re still browseable below in read-only mode.
+        </div>
+      )}
+
+      {isAnon ? (
+        <div style={{ fontSize: FS.sm, color: MUT }}>Sign in and upgrade to Premium to unlock.</div>
+      ) : (
+        <Button variant="ai" size="lg" onClick={() => setPurchaseModalOpen(true)}>
+          Upgrade to Premium
+        </Button>
+      )}
+    </div>
+  );
+}
+
+// ── Read-only viewer for grandfathered local items (free tier) ─────────────
+export function ReadOnlyCustomContentList({ search }) {
+  const customContent = useStore(s => s.customContent);
+  const [activeCat, setActiveCat] = useState('institutions');
+  const catDef = CUSTOM_CATEGORIES.find(c => c.key === activeCat);
+  const items = customContent[activeCat] || [];
+  const filtered = search
+    ? items.filter(i => (i.name || '').toLowerCase().includes(search) || (i.description || '').toLowerCase().includes(search))
+    : items;
+  const totalLocal = Object.values(customContent).reduce((sum, arr) => sum + (arr?.length || 0), 0);
+  if (totalLocal === 0) return null;
+
+  return (
+    <div style={{ marginTop: 16 }}>
+      <div style={{
+        fontSize: FS.xs, fontWeight: 700, color: MUT, textTransform: 'uppercase',
+        letterSpacing: '0.05em', marginBottom: 8,
+      }}>
+        Grandfathered items &middot; read only
+      </div>
+      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 10 }}>
+        {CUSTOM_CATEGORIES.map(c => {
+          const count = (customContent[c.key] || []).length;
+          if (count === 0) return null;
+          return (
+            <button key={c.key} type="button" onClick={() => setActiveCat(c.key)} style={{
+              display: 'flex', alignItems: 'center', gap: 4, padding: '4px 10px',
+              borderRadius: 12, fontSize: FS.xs,
+              fontWeight: activeCat === c.key ? 700 : 500, cursor: 'pointer',
+              border: `1px solid ${activeCat === c.key ? c.color : BOR}`,
+              background: activeCat === c.key ? `${c.color}14` : 'transparent',
+              color: activeCat === c.key ? c.color : SEC,
+            }}>
+              <c.Icon size={11} /> {c.label}
+              <span style={{
+                fontSize: FS.micro, fontWeight: 700, background: `${c.color}20`, color: c.color,
+                borderRadius: 6, padding: '0 4px', marginLeft: 2,
+              }}>{count}</span>
+            </button>
+          );
+        })}
+      </div>
+      {filtered.length === 0 ? (
+        <div style={{ padding: '14px', textAlign: 'center', fontSize: FS.sm, color: MUT }}>
+          No items in {catDef.label.toLowerCase()}.
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          {filtered.map(item => (
+            <div key={item.id} style={{
+              border: `1px solid ${BOR}`, borderLeft: `3px solid #7c3aed`, borderRadius: 7,
+              padding: '8px 12px', background: 'rgba(255,251,245,0.95)', opacity: 0.85,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK, flex: 1 }}>
+                  {item.name}
+                </span>
+                <Tag label="Local" color="#7c3aed" />
+                {item.category && <Tag label={item.category} color={catDef.color} />}
+              </div>
+              {item.description && (
+                <div style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.4, marginTop: 4 }}>
+                  {item.description}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function CustomContentManager({ search }) {
+  const customContent = useStore(s => s.customContent);
+  const addCustomItem = useStore(s => s.addCustomItem);
+  const updateCustomItem = useStore(s => s.updateCustomItem);
+  const deleteCustomItem = useStore(s => s.deleteCustomItem);
   const canUseCustomContent = useStore(s => s.canUseCustomContent());
   const authTier = useStore(s => s.auth.tier);
-  const customContentLoading = useStore(s => s.customContentLoading);
-  const customContentError = useStore(s => s.customContentError);
-  const loadCustomContentFromCloud = useStore(s => s.loadCustomContentFromCloud);
+  const _customContentLoading = useStore(s => s.customContentLoading);
+  const _customContentError = useStore(s => s.customContentError);
 
-  // Seed the active bucket from a validated ?cat= deep-link so an "Author a X"
-  // link opens straight on that bucket (CompendiumPanel parses the URL once and
-  // passes initialCat — covers WB-j's ?cat=traditions); institutions otherwise.
-  const [activeCat, setActiveCat] = useState(() => (initialCat && CATEGORY_BY_KEY[initialCat] ? initialCat : 'institutions'));
+  const [activeCat, setActiveCat] = useState('institutions');
   const [addingNew, setAddingNew] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
   const [draft, setDraft] = useState({});
-  // "Start from a built-in" seed picker: surface prebuilt seeds to clone.
-  const [showSeeds, setShowSeeds] = useState(false);
-  // Progressive disclosure: essentials lead; the long schema tail collapses
-  // behind an "Advanced attributes" toggle (deities show all axes flat — they
-  // ARE the essentials; see renderForm).
-  const [showAdvanced, setShowAdvanced] = useState(false);
-  // Name of the item just saved (new, not edited) — drives the P9 peak/end
-  // affordance so the authoring loop closes on a runnable next step ("test it").
-  const [justSaved, setJustSaved] = useState(null);
-  const [saveBusy, setSaveBusy] = useState(false);
-  // Manual authoring uses the same deterministic interpretation/sample rails as
-  // the Surveyor lane. The worker exists only while a sample is requested.
-  const [manualSample, setManualSample] = useState(null);
-  const [manualSampleReviewKey, setManualSampleReviewKey] = useState(null);
-  const [manualSampleBusy, setManualSampleBusy] = useState(false);
-  const [manualSampleError, setManualSampleError] = useState(null);
-  const [manualSampleErrorReviewKey, setManualSampleErrorReviewKey] =
-    useState(null);
-  const [commandError, setCommandError] = useState(null);
-  const manualPreviewAbort = useRef(null);
 
   const catDef = CUSTOM_CATEGORIES.find(c => c.key === activeCat);
   const items = customContent[activeCat] || [];
@@ -136,77 +336,6 @@ export function CustomContentManager({ search, initialCat }) {
         || (i.description||'').toLowerCase().includes(search)
         || tagStr.toLowerCase().includes(search);
   }) : items;
-  const authoredDraft = useMemo(() => {
-    const category = getCustomContentCategory(activeCat);
-    const allowed = new Set(
-      category?.fields.map(field => field.key) || [],
-    );
-    return Object.fromEntries(
-      Object.entries(draft).filter(([field]) => allowed.has(field)),
-    );
-  }, [activeCat, draft]);
-  const reviewedManualEntry = useMemo(() => {
-    const entry = {
-      ...authoredDraft,
-      ...(draft.localUid ? { localUid: draft.localUid } : {}),
-    };
-    if (activeCat !== 'deities') return entry;
-    const lawAxis = draft.lawAxis || 'neutral';
-    return {
-      ...entry,
-      lawAxis,
-      // Temperament is retained for save compatibility but is derived from
-      // the two authored axes. The preview and write must review the same
-      // value; neither surface may treat it as a third authored mechanic.
-      temperamentAxis: deityTemper({
-        alignmentAxis: draft.alignmentAxis,
-        lawAxis,
-      }),
-    };
-  }, [activeCat, authoredDraft, draft.alignmentAxis, draft.lawAxis, draft.localUid]);
-  const manualAdmission = useMemo(
-    () => admitCustomContentDefinition(activeCat, reviewedManualEntry, {
-      allowSystemFields: true,
-    }),
-    [activeCat, reviewedManualEntry],
-  );
-  const manualReviewKey = useMemo(
-    () => JSON.stringify({
-      bucket: activeCat,
-      entry: reviewedManualEntry,
-      previewBaselineFingerprint,
-    }),
-    [activeCat, previewBaselineFingerprint, reviewedManualEntry],
-  );
-  const manualDraft = useMemo(() => ({
-    entries: reviewedManualEntry?.name
-      ? [{
-          bucket: activeCat,
-          entry: reviewedManualEntry,
-          label: 'required',
-          sourced: true,
-        }]
-      : [],
-    unsupported: [],
-  }), [activeCat, reviewedManualEntry]);
-  const manualInterpretation = useMemo(
-    () => projectContentEffects(manualDraft, { 0: { action: 'approve' } }),
-    [manualDraft],
-  );
-  const manualSampleCurrent = manualSample != null
-    && manualSampleReviewKey === manualReviewKey;
-  const manualSampleErrorCurrent = manualSampleErrorReviewKey === manualReviewKey
-    ? manualSampleError
-    : null;
-
-  useEffect(() => {
-    // A changed draft invalidates the in-flight taste gate immediately. The
-    // previous result may stay in memory, but its captured review key can no
-    // longer satisfy `manualSampleCurrent`, so it is neither shown nor saved.
-    manualPreviewAbort.current?.abort();
-  }, [manualReviewKey]);
-
-  useEffect(() => () => manualPreviewAbort.current?.abort(), []);
 
   // ── Premium gate ─────────────────────────────────────────────────────────
   // Free / anon users see an upsell card. If they have grandfathered local
@@ -221,376 +350,230 @@ export function CustomContentManager({ search, initialCat }) {
     );
   }
 
-  const resetDraft = () => {
-    manualPreviewAbort.current?.abort();
-    setDraft({});
-    setAddingNew(false);
-    setEditingId(null);
-    setShowSeeds(false);
-    setJustSaved(null);
-    setManualSample(null);
-    setManualSampleReviewKey(null);
-    setManualSampleError(null);
-    setManualSampleErrorReviewKey(null);
-    setManualSampleBusy(false);
-    setCommandError(null);
-  };
+  const resetDraft = () => { setDraft({}); setAddingNew(false); setEditingId(null); };
 
-  const forgeManualSample = async () => {
-    if (!manualAdmission.ok || manualSampleBusy) return;
-    const reviewKey = manualReviewKey;
-    const controller = new AbortController();
-    manualPreviewAbort.current?.abort();
-    manualPreviewAbort.current = controller;
-    setManualSampleBusy(true);
-    setManualSample(null);
-    setManualSampleError(null);
-    setManualSampleErrorReviewKey(null);
-    try {
-      const { runCustomContentPreview } = await import('../../lib/customContentPreviewClient.js');
-      const sample = await runCustomContentPreview({
-        seed: 'custom-content-taste-gate-v1',
-        baseContent: previewBaseContent,
-        accepted: [{
-          bucket: activeCat,
-          entry: reviewedManualEntry,
-        }],
-      }, { signal: controller.signal });
-      setManualSample(sample);
-      setManualSampleReviewKey(reviewKey);
-    } catch (error) {
-      if (error?.name !== 'AbortError') {
-        setManualSampleError(
-          error instanceof Error
-            ? error.message
-            : t('errors.customContentSampleFail'),
-        );
-        setManualSampleErrorReviewKey(reviewKey);
-      }
-    } finally {
-      if (manualPreviewAbort.current === controller) {
-        manualPreviewAbort.current = null;
-        setManualSampleBusy(false);
-      }
-    }
-  };
-
-  const handleSave = async () => {
-    if (!manualAdmission.ok || saveBusy || !manualSampleCurrent) return;
-    if (typeof applyCustomContentCommand !== 'function') {
-      setCommandError(
-        t('errors.customContentWriterSaveUnavailable'),
-      );
-      return;
-    }
-    // This is the exact admitted entry used by the current taste gate. Metadata
-    // such as row ids stays outside authored meaning and is carried separately
-    // as command compare-and-swap identity below.
-    const toSave = reviewedManualEntry;
-    setSaveBusy(true);
-    setCommandError(null);
-    try {
-      const existing = editingId
-        ? items.find(item => item.id === editingId)
-        : null;
-      const receipt = await applyCustomContentCommand({
-        kind: 'content.definition.create-revision',
-        entries: [{
-          category: activeCat,
-          item: toSave,
-          definitionId: existing?.definitionId || existing?.id || null,
-          expectedHeadRevisionId: existing?.revisionId || null,
-        }],
-        source: { type: 'manual', ref: null, pack: null },
-        expected: existing?.revisionId
-          ? { headRevisionId: existing.revisionId }
-          : {},
-      });
-      if (!commandWasConfirmed(receipt)) {
-        setCommandError(commandFailureMessage(
-          receipt,
-          t('errors.customContentRevisionUnconfirmed'),
-        ));
-        return;
-      }
+  const handleSave = () => {
+    if (!draft.name?.trim()) return;
+    // Deities: the schema requires a stored temperamentAxis, but temper is RETIRED
+    // as a load-bearing field (derived from the moral + order axes). Derive it at
+    // save so stored === derived — the decoupled-temper fixture class can never
+    // enter through authored content (mirrors the deityPool discipline). The
+    // author never sets it (see form.temperNote); it is engine-inert.
+    const toSave = activeCat === 'deities'
+      ? { ...draft, lawAxis: draft.lawAxis || 'neutral', temperamentAxis: deityTemper({ alignmentAxis: draft.alignmentAxis, lawAxis: draft.lawAxis }) }
+      : draft;
+    if (editingId) {
+      updateCustomItem(activeCat, editingId, toSave);
       setEditingId(null);
+    } else {
+      addCustomItem(activeCat, toSave);
       setAddingNew(false);
-      setDraft({});
-      setShowSeeds(false);
-      setManualSample(null);
-      setManualSampleReviewKey(null);
-      setManualSampleErrorReviewKey(null);
-      setJustSaved(draft.name.trim());
-    } catch (error) {
-      setCommandError(
-        error instanceof Error
-          ? t('errors.customContentRevisionSaveDetail', {
-              detail: error.message,
-            })
-          : t('errors.customContentRevisionSaveFail'),
-      );
-    } finally {
-      setSaveBusy(false);
     }
-  };
-
-  const archiveItem = async (item) => {
-    const definitionId = item?.definitionId || item?.id;
-    if (typeof applyCustomContentCommand !== 'function' || !definitionId) {
-      setCommandError(
-        t('errors.customContentWriterArchiveUnavailable'),
-      );
-      return;
-    }
-    setCommandError(null);
-    try {
-      const receipt = await applyCustomContentCommand({
-        kind: 'content.definition.archive',
-        definitionId,
-        source: { type: 'manual', ref: null, pack: null },
-        expected: item?.revisionId ? { headRevisionId: item.revisionId } : {},
-      });
-      if (!commandWasConfirmed(receipt)) {
-        setCommandError(commandFailureMessage(
-          receipt,
-          t('errors.customContentArchiveUnconfirmed'),
-        ));
-        return;
-      }
-      setDeleteId(null);
-    } catch (error) {
-      setCommandError(
-        error instanceof Error
-          ? t('errors.customContentArchiveDetail', {
-              detail: error.message,
-            })
-          : t('errors.customContentArchiveFail'),
-      );
-    }
+    setDraft({});
   };
 
   const handleEdit = (item) => {
     setEditingId(item.id);
     setDraft({ ...item });
     setAddingNew(false);
-    setShowSeeds(false);
   };
 
-  // "Start from a built-in" — clone a prebuilt registry seed into an editable
-  // draft (the author then tweaks + saves it as their own custom item).
-  const cloneFromSeed = (entry) => {
-    setDraft(seedDraftFromPrebuilt(entry));
-    setAddingNew(true);
-    setEditingId(null);
-    setShowSeeds(false);
+  // Multi-select "pill" picker for controlled-vocabulary list fields (tags,
+  // commodities, stressor channels) — selectable, not free text. Stores the
+  // selection as an array; parses a legacy comma-string on read so older
+  // free-text entries still load.
+  const renderPills = (field, options, accent) => {
+    const cur = draft[field];
+    const arr = Array.isArray(cur)
+      ? cur
+      : (typeof cur === 'string' && cur ? cur.split(',').map(s => s.trim()).filter(Boolean) : []);
+    const set = new Set(arr);
+    return (
+      <div style={{ display:'flex', flexWrap:'wrap', gap:4, padding:'4px 0' }}>
+        {options.map(opt => {
+          const on = set.has(opt);
+          return (
+            <Button
+              key={opt}
+              variant={on ? 'gold' : 'secondary'}
+              size="sm"
+              aria-pressed={on}
+              onClick={() => { const next = new Set(set); if (on) next.delete(opt); else next.add(opt); setDraft(d => ({ ...d, [field]: Array.from(next) })); }}
+              style={{
+                padding:'2px 8px', borderRadius:10, fontSize:FS.xxs, minHeight:0,
+                letterSpacing:'0.03em',
+                border:`1px solid ${on?accent:BOR}`,
+                background:on?`${accent}14`:'transparent',
+                color:on?accent:SEC,
+              }}
+            >{opt}</Button>
+          );
+        })}
+      </div>
+    );
   };
-  const seedEntries = (showSeeds && SEEDABLE.has(activeCat))
-    ? buildRegistry(customContent).listPrebuilt(activeCat === 'services' ? 'services' : activeCat).slice(0, 60)
-    : [];
+
+  const renderField = (field) => {
+    const val = draft[field] || '';
+    const shared = { id:`ccm-field-${field}`, value:val, onChange:e => setDraft(d=>({...d,[field]:e.target.value})), style:{ width:'100%', padding:'5px 8px', border:`1px solid ${BOR}`, borderRadius:4, fontSize:FS.sm, fontFamily:sans, color:INK, outline:'none', background:CARD } };
+
+    switch(field) {
+      case 'category': return <CategorySelect type={activeCat} value={val} customContent={customContent} onChange={v => setDraft(d => ({ ...d, category: v }))} style={shared.style} />;
+      case 'tierMin': return <select {...shared} value={val||''}><option value="">Any tier</option>{TIERS.map(t=><option key={t} value={t}>{t}</option>)}</select>;
+      case 'tierMax': return <select {...shared} value={val||''}><option value="">No upper limit</option>{TIERS.map(t=><option key={t} value={t}>{t}</option>)}</select>;
+      case 'foodImpact': return <select {...shared} value={val||''}><option value="">No food impact</option>{FOOD_IMPACT.filter(f=>f.key!=='none').map(f=><option key={f.key} value={f.key}>{f.label}</option>)}</select>;
+      case 'satisfies': return <CategorySelect options={satisfiesOptions(customContent)} value={val} onChange={v => setDraft(d => ({ ...d, satisfies: v }))} placeholder="Doesn’t fold into a trade category" newLabel="+ Other category…" style={shared.style} />;
+      case 'authority': return <select {...shared} value={val||''}><option value="">No authority contribution</option>{POWER_AUTHORITIES.map(a=><option key={a.key} value={a.key}>{a.label}</option>)}</select>;
+      case 'defenseRole': return <select {...shared} value={val||''}><option value="">No defense role</option>{DEFENSE_ROLES.map(d=><option key={d.key} value={d.key}>{d.label}</option>)}</select>;
+      case 'criticality': return <select {...shared} value={val||''}><option value="">Select…</option>{CRITICALITY.map(c=><option key={c.key} value={c.key}>{c.label}</option>)}</select>;
+      case 'economicWeight': return <select {...shared} value={val||''}><option value="">Select…</option>{ECONOMIC_WEIGHT.map(w=><option key={w.key} value={w.key}>{w.label}</option>)}</select>;
+      case 'scale': return <select {...shared} value={val||''}><option value="">Select…</option>{['cell','minor','significant','dominant'].map(s=><option key={s} value={s}>{s}</option>)}</select>;
+      case 'essential':
+      case 'magical':
+      case 'criminal': {
+        const on = draft[field] === true;
+        const accent = field === 'essential' ? '#1a4a20' : field === 'magical' ? swatch.magic : '#8b1a1a';
+        const lbl = field === 'essential' ? 'Essential' : field === 'magical' ? 'Magical' : 'Criminal';
+        return (
+          <Button
+            variant={on ? 'gold' : 'secondary'}
+            size="sm"
+            aria-pressed={on}
+            onClick={() => setDraft(d => ({ ...d, [field]: !on }))}
+            style={on ? { border:`1px solid ${accent}`, background:`${accent}14`, color:accent } : undefined}
+          >
+            {on ? '✓ ' : ''}{lbl}
+          </Button>
+        );
+      }
+      case 'severity': return <select {...shared} value={val||'moderate'}>{SEVERITY_LEVELS.map(s=><option key={s} value={s}>{s}</option>)}</select>;
+      case 'governmentType': return <select {...shared} value={val||''}><option value="">Select...</option>{GOV_TYPES.map(g=><option key={g} value={g}>{g}</option>)}</select>;
+      case 'posture': return <select {...shared} value={val||''}><option value="">Select...</option>{POSTURES.map(p=><option key={p} value={p}>{p}</option>)}</select>;
+      case 'stability': return <select {...shared} value={val||'stable'}>{['stable','unstable','crisis','collapsing'].map(s=><option key={s} value={s}>{s}</option>)}</select>;
+      case 'fortification': return <select {...shared} value={val||'none'}>{['none','basic','moderate','heavy','legendary'].map(f=><option key={f} value={f}>{f}</option>)}</select>;
+      case 'militiaLevel': return <select {...shared} value={val||'none'}>{['none','volunteer','trained','professional','elite'].map(m=><option key={m} value={m}>{m}</option>)}</select>;
+      case 'factionCount': return <input {...shared} type="number" min="1" max="10" placeholder="Number of factions"/>;
+      case 'tags': return <input {...shared} placeholder="Comma-separated keywords (e.g. ancient, foreign, ceremonial) — used for search" onChange={e=>setDraft(d=>({...d,tags:e.target.value}))}/>;
+      case 'commodities': return <input {...shared} placeholder="Comma-separated (e.g. iron ore, coal, gemstones)" onChange={e=>setDraft(d=>({...d,commodities:e.target.value}))}/>;
+      case 'affects': return renderPills('affects', STRESSOR_AFFECT_CATEGORIES, '#8b1a1a');
+      case 'description': return <textarea {...shared} rows={2} placeholder="Description..." style={{...shared.style, resize:'vertical'}}/>;
+      // ── Deity axes (moral / order / rank) + portfolio flavor + domain ────────
+      case 'alignmentAxis': return <select {...shared} value={val||''}><option value="">Select…</option>{DEITY_ALIGNMENT.map(a=><option key={a.key} value={a.key}>{a.label}</option>)}</select>;
+      case 'lawAxis': return <select {...shared} value={val||'neutral'}>{DEITY_LAW.map(l=><option key={l.key} value={l.key}>{l.label}</option>)}</select>;
+      case 'rankAxis': return <select {...shared} value={val||''}><option value="">Select…</option>{DEITY_TIER.map(r=><option key={r.key} value={r.key}>{r.label}</option>)}</select>;
+      case 'portfolio': {
+        const pv = draft.portfolio || '';
+        return (
+          <>
+            <textarea {...shared} value={pv} rows={2} maxLength={DEITY_PORTFOLIO_MAX_LENGTH} placeholder={td('form.portfolioPlaceholder')} style={{...shared.style, resize:'vertical'}}/>
+            <div style={{ textAlign:'right', fontSize:FS.micro, color:MUT, marginTop:2 }}>{pv.length} / {DEITY_PORTFOLIO_MAX_LENGTH}</div>
+          </>
+        );
+      }
+      case 'domain': return <input {...shared} placeholder={td('form.domainPlaceholder')}/>;
+      default: return <input {...shared} placeholder={field.charAt(0).toUpperCase()+field.slice(1)}/>;
+    }
+  };
 
   const singular = catDef.singular || catDef.label.slice(0,-1);
+  const renderForm = () => (
+    <div style={{ padding:'10px 12px', background:swatch['#F8F4FF'], border:'1px solid #d0c0e0', borderRadius:7, marginBottom:10 }}>
+      <div style={{ fontSize:FS.xs, fontWeight:700, color:swatch.magic, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:8 }}>
+        {editingId ? 'Edit Item' : 'New Custom ' + singular}
+      </div>
+      {activeCat === 'deities' && (
+        <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.5, marginBottom:8 }}>{td('form.intro')}</div>
+      )}
+      <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
+        {catDef.fields.map(f => (
+          <div key={f}>
+            {/* eslint-disable-next-line jsx-a11y/label-has-for -- deprecated rule; label nests the renderField control + has matching htmlFor, but the static nesting check can't see through renderField(). label-has-associated-control passes. */}
+            <label htmlFor={`ccm-field-${f}`} style={{ fontSize:FS.xxs, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em' }}>
+              {FIELD_LABELS[f] || f.replace(/([A-Z])/g,' $1')}
+              {renderField(f)}
+            </label>
+            {FIELD_HINTS[f] && <div style={{ fontSize:FS.micro, color:MUT, fontStyle:'italic', marginTop:2, lineHeight:1.4 }}>{FIELD_HINTS[f]}</div>}
+          </div>
+        ))}
+      </div>
+
+      {/* Deities — the derived-temper note + the live single-source effect preview. */}
+      {activeCat === 'deities' && (
+        <>
+          <div style={{ fontSize:FS.micro, color:MUT, fontStyle:'italic', marginTop:6, lineHeight:1.4 }}>{td('form.temperNote')}</div>
+          <DeityEffectPreview draft={draft} />
+        </>
+      )}
+
+      {/* Dependencies — collapsible. Categories without `dependencies` skip this. */}
+      {Array.isArray(catDef.dependencies) && catDef.dependencies.length > 0 && (
+        <DependenciesSection
+          deps={catDef.dependencies}
+          draft={draft}
+          setDraft={setDraft}
+        />
+      )}
+
+      <div style={{ display:'flex', gap:6, marginTop:8 }}>
+        <Button variant="ai" size="sm" onClick={handleSave} disabled={!draft.name?.trim() || (activeCat==='deities' && (!draft.alignmentAxis || !draft.rankAxis))}>{editingId?'Update':'Add'}</Button>
+        <Button variant="secondary" size="sm" onClick={resetDraft}>Cancel</Button>
+      </div>
+    </div>
+  );
 
   return (
     <div>
       {/* Content packs — export/import authored content as a portable JSON pack
           (premium; file-based, no backend). */}
       <ContentPackBar />
-      <ContentEnvironmentLifecycle />
-      {/* No outer Suspense: createRetryableCampaignLazy already renders the view
-          inside its OWN per-instance boundary (campaignRuntimeView.js), which is
-          what lets the wrapper commit while the chunk resolves. A second boundary
-          here added nothing and cost a silent-wait debt row. */}
-      <CampaignContentBindingLifecycle />
-      <ArchivedContentLibrary />
-      {/* Sync status — visible whenever a cloud sync is in flight, regardless of
-          which bucket is active. Without it, switching to a cached bucket during
-          a background sync showed no status, so a later sync error popped with no
-          preceding process to end (P10). */}
-      {customContentLoading && !customContentError && (
-        <div role="status" style={{ display:'flex', alignItems:'center', gap:8, padding:'6px 12px', marginBottom:10, fontSize:FS.xs, color:BODY, fontStyle:'italic' }}>
-          Syncing your custom content…
-        </div>
-      )}
+      {/* Category tabs */}
+      <div style={{ display:'flex', gap:4, flexWrap:'wrap', marginBottom:12 }}>
+        {CUSTOM_CATEGORIES.map(c => {
+          const count = (customContent[c.key]||[]).length;
+          return (
+            <button key={c.key} type="button" onClick={() => { setActiveCat(c.key); resetDraft(); }}
+              style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', borderRadius:12, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
+              <c.Icon size={11}/> {c.label}
+              {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, borderRadius:6, padding:'0 4px', marginLeft:2 }}>{count}</span>}
+            </button>
+          );
+        })}
+      </div>
 
-      {/* Sync failure — a paid synced-write surface must not fail silently.
-          Surface the error in plain language with a one-click retry. */}
-      {customContentError && (
-        <div role="alert" style={{ display:'flex', alignItems:'center', gap:8, flexWrap:'wrap', padding:'8px 12px', marginBottom:10, background:`${swatch.danger}10`, borderLeft:`3px solid ${swatch.danger}` }}>
-          <span style={{ flex:1, minWidth:180, fontSize:FS.sm, color:BODY, lineHeight:1.45 }}>
-            Your custom content could not sync: {customContentError}
-          </span>
-          <Button variant="secondary" size="sm" onClick={() => loadCustomContentFromCloud()}>Retry sync</Button>
-        </div>
-      )}
-      {commandError && (
-        <div
-          role="alert"
-          style={{
-            padding: '8px 12px',
-            marginBottom: 10,
-            background: `${swatch.danger}10`,
-            borderLeft: `3px solid ${swatch.danger}`,
-            fontSize: FS.sm,
-            color: BODY,
-            lineHeight: 1.45,
-          }}
-        >
-          {commandError}
-        </div>
-      )}
-
-      {/* Two authoring lanes: settlement ingredients vs world-facing actors.
-          The manifest copy names each category's real activation boundary;
-          lane placement alone never implies tick-time mechanical authority. */}
-      {AUTHORING_LANES.map((lane, li) => (
-        <div key={lane.key} data-testid={`authoring-lane-${lane.key}`} style={{ marginBottom: li < AUTHORING_LANES.length - 1 ? SP.xl : SP.md }}>
-          <div style={{ fontSize:FS.xs, fontWeight:800, color: lane.key === 'living' ? swatch['#7A5A1A'] : INK, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:2 }}>
-            {lane.label}
-          </div>
-          <div style={{ fontSize:FS.xs, color:BODY, lineHeight:1.4, marginBottom:6 }}>{lane.blurb}</div>
-          <div style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
-            {lane.buckets.map(key => {
-              const c = CATEGORY_BY_KEY[key];
-              if (!c) return null;
-              const count = (customContent[c.key]||[]).length;
-              return (
-                <button key={c.key} type="button" aria-pressed={activeCat===c.key} onClick={() => { setActiveCat(c.key); resetDraft(); }}
-                  style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', minHeight:44, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
-                  {c.label}
-                  {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, padding:'0 4px', marginLeft:2 }}>{count}</span>}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      ))}
-
-      {/* Deities — the activation/dormancy strip (name-free). */}
+      {/* Deities — the OUR-milestones activation/dormancy strip (name-free). */}
       {activeCat === 'deities' && <PantheonActivationStrip />}
-
-      {/* Factions arrive via an in-world event, not generation. */}
-      {activeCat === 'factions' && <FactionEventBanner />}
 
       {/* Supply Chains: discovered + verified, not hand-authored — its own manager. */}
       {activeCat === 'supplyChains' && <SupplyChainsManager />}
 
-      {/* Add / Start-from-a-built-in / Test-in-a-generation affordances. */}
+      {/* Add button */}
       {activeCat !== 'supplyChains' && !addingNew && !editingId && (
-        <div style={{ display:'flex', alignItems:'center', gap:6, flexWrap:'wrap', marginBottom:10 }}>
-          <Button variant="ai" size="sm" onClick={() => { setAddingNew(true); setDraft({}); setShowSeeds(false); setJustSaved(null); }}>
-            Add Custom {singular}
-          </Button>
-          {SEEDABLE.has(activeCat) && (
-            <Button variant="secondary" size="sm" onClick={() => setShowSeeds(s => !s)} aria-pressed={showSeeds}>
-              Start from a built-in
-            </Button>
-          )}
-          {/* The forward exit from authoring, set apart as a distinct next step. */}
-          <Button variant="secondary" size="sm" onClick={() => navigate('generate')} title="Run a generation that draws on your custom content." style={{ marginLeft:'auto' }}>
-            Test in a generation
-          </Button>
-        </div>
-      )}
-
-      {/* Built-in seed picker (clone a catalog entry into an editable draft). */}
-      {!addingNew && !editingId && showSeeds && seedEntries.length > 0 && (
-        <div data-testid="builtin-seed-picker" style={{ borderLeft:`3px solid ${swatch.magic}`, padding:'8px 10px', marginBottom:10, background:CARD, maxHeight:200, overflowY:'auto' }}>
-          <div style={{ fontSize:FS.xxs, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em', marginBottom:6 }}>
-            Clone a built-in {catDef.label.toLowerCase().replace(/s$/,'')} as a starting point
-          </div>
-          <div style={{ display:'flex', flexDirection:'column', gap:3 }}>
-            {seedEntries.map(entry => (
-              <Button key={entry.refId} variant="ghost" size="sm" onClick={() => cloneFromSeed(entry)}
-                style={{ display:'flex', alignItems:'center', gap:6, justifyContent:'flex-start', textAlign:'left', border:`1px solid ${BOR}`, padding:'5px 8px', background:'transparent', color:INK }}>
-                <span style={{ fontSize:FS.xs, fontWeight:600, flex:1 }}>{entry.name}</span>
-                {entry.subcategory && <Tag label={entry.subcategory} color={catDef.color}/>}
-              </Button>
-            ))}
-          </div>
-        </div>
+        <Button variant="ai" size="sm" icon={<Plus size={12}/>} onClick={() => { setAddingNew(true); setDraft({}); }} style={{ marginBottom:10 }}>
+          Add Custom {singular}
+        </Button>
       )}
 
       {/* Add/edit form */}
-      {activeCat !== 'supplyChains' && (addingNew || editingId) && (
-        <CustomContentEditor
-          activeCat={activeCat}
-          catDef={catDef}
-          customContent={customContent}
-          definitionReady={manualAdmission.ok}
-          draft={draft}
-          editingId={editingId}
-          forgeManualSample={forgeManualSample}
-          handleSave={handleSave}
-          manualInterpretation={manualInterpretation}
-          manualSample={manualSampleCurrent ? manualSample : null}
-          manualSampleBusy={manualSampleBusy}
-          manualSampleCurrent={manualSampleCurrent}
-          manualSampleError={manualSampleErrorCurrent}
-          resetDraft={resetDraft}
-          saveBusy={saveBusy}
-          setDraft={setDraft}
-          setShowAdvanced={setShowAdvanced}
-          showAdvanced={showAdvanced}
-        />
-      )}
-
-      {/* Peak/end (P9): the authoring loop just closed on a save — offer the one
-          forward action (run a generation that uses it) instead of snapping
-          silently back to the list. Dismissible; hidden while authoring. */}
-      {justSaved && !addingNew && !editingId && (
-        <div role="status" style={{ display:'flex', alignItems:'center', gap:8, flexWrap:'wrap', padding:'8px 12px', marginBottom:10, background:`${swatch.magic}0d`, borderLeft:`3px solid ${swatch.magic}` }}>
-          <span style={{ flex:1, minWidth:160, fontSize:FS.sm, color:BODY, lineHeight:1.45 }}>
-            <strong>{justSaved}</strong> saved as an immutable revision. See it shape a world.
-          </span>
-          <Button variant="ai" size="sm" onClick={() => navigate('generate')}>
-            Test in a generation
-          </Button>
-          <IconButton glyph="×" label="Dismiss" tone="ghost" size="sm" onClick={() => setJustSaved(null)} />
-        </div>
-      )}
+      {activeCat !== 'supplyChains' && (addingNew || editingId) && renderForm()}
 
       {/* Items list */}
-      {activeCat !== 'supplyChains' && (
-        customContentLoading && items.length === 0 ? (
-        <div data-testid="custom-content-loading" style={{ display:'flex', flexDirection:'column', gap:6 }}>
-          {[0,1,2].map(i => (
-            <div key={i} style={{ height:44, background:`${swatch.magic}0d`, border:`1px solid ${BOR}` }}/>
-          ))}
+      {activeCat !== 'supplyChains' && (filtered.length === 0 ? (
+        <div style={{ padding:'20px 16px', textAlign:'center', fontSize:FS.sm, color:MUT }}>
+          No custom {catDef.label.toLowerCase()} yet. Click "Add" to create one.
         </div>
-      ) : filtered.length === 0 ? (
-        // Honest empty states: distinguish "filtered to nothing" from "truly none
-        // yet", and offer a one-click out of each.
-        search && items.length > 0 ? (
-          <div style={{ padding:'20px 16px', textAlign:'center' }}>
-            <div style={{ fontSize:FS.sm, color:MUT, marginBottom:10 }}>
-              No custom {catDef.label.toLowerCase()} match &ldquo;{search}&rdquo;.
-            </div>
-          </div>
-        ) : (
-          <div style={{ padding:'20px 16px', textAlign:'center' }}>
-            <div style={{ fontSize:FS.sm, color:MUT, marginBottom: SEEDABLE.has(activeCat) ? 10 : 0 }}>
-              No custom {catDef.label.toLowerCase()} yet. Use the Add button above to create one.
-            </div>
-            {SEEDABLE.has(activeCat) && (
-              <Button variant="secondary" size="sm" onClick={() => setShowSeeds(true)}>
-                Start from a built-in {singular.toLowerCase()}
-              </Button>
-            )}
-          </div>
-        )
       ) : (
         <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
           {filtered.map(item => (
-            <div key={item.id} style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid #7c3aed`, padding:'8px 12px', background:'rgba(255,251,245,0.95)' }}>
+            <div key={item.id} style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid #7c3aed`, borderRadius:7, padding:'8px 12px', background:'rgba(255,251,245,0.95)' }}>
               <div style={{ display:'flex', alignItems:'center', gap:6 }}>
                 <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, flex:1 }}>{item.name}</span>
                 <Tag label="Custom" color='#7c3aed'/>
                 {item.category && <Tag label={item.category} color={catDef.color}/>}
-                <IconButton glyph="✎" label="Edit item" tone="ghost" size="sm" onClick={() => handleEdit(item)} />
-                <IconButton glyph="−" label="Archive item" tone="danger" size="sm" onClick={() => setDeleteId(deleteId===item.id?null:item.id)} />
+                <IconButton Icon={Edit3} label="Edit item" tone="ghost" size="sm" onClick={() => handleEdit(item)} />
+                <IconButton Icon={Trash2} label="Delete item" tone="danger" size="sm" onClick={() => setDeleteId(deleteId===item.id?null:item.id)} />
               </div>
               {(item.description || item.portfolio) && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description || item.portfolio}</div>}
-              <CustomItemAttributes item={item} bucket={activeCat} />
+              <CustomItemAttributes item={item} />
               {item.tags && <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:4 }}>{(typeof item.tags==='string'?item.tags.split(','):item.tags).map((t,i)=><Tag key={i} label={t.trim()} color={MUT}/>)}</div>}
               {/* Affects pills (stressors only) */}
               {Array.isArray(item.affects) && item.affects.length > 0 && (
@@ -601,7 +584,7 @@ export function CustomContentManager({ search, initialCat }) {
                       // Translucent danger fill — was solid swatch.danger on
                       // swatch.danger text, rendering the label invisible.
                       background:`${swatch.danger}14`, border:'1px solid #8b1a1a44',
-                      padding:'1px 6px',
+                      borderRadius:8, padding:'1px 6px',
                       textTransform:'uppercase', letterSpacing:'0.04em',
                     }}>{a}</span>
                   ))}
@@ -611,13 +594,11 @@ export function CustomContentManager({ search, initialCat }) {
               {Array.isArray(catDef.dependencies) && catDef.dependencies.length > 0 && (
                 <DependencySummary deps={catDef.dependencies} item={item} />
               )}
-              <CustomContentUsageEcho bucket={activeCat} item={item} customContent={customContent} />
-              <ContentDefinitionHistory category={activeCat} item={item} />
               {deleteId === item.id && (
                 <DeleteConfirmation
                   entityName={item.name}
-                  details="Archive this definition so it cannot enter future generations. Existing settlement snapshots and pinned campaign versions remain intact."
-                  onConfirm={() => archiveItem(item)}
+                  details="Removing from catalog only. Existing settlements that use this item keep their copy."
+                  onConfirm={() => { deleteCustomItem(activeCat, item.id); setDeleteId(null); }}
                   onCancel={() => setDeleteId(null)}
                 />
               )}

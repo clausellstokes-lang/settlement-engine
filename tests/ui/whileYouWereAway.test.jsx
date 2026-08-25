@@ -66,25 +66,13 @@ describe('WhileYouWereAway digest banner', () => {
   test('surfaces a failure — never swallows it', () => {
     setStore({ livingCatchUp: { campaignId: 'camp-1', weeksCaughtUp: 2, capped: false, majors: [], error: 'kernel exploded' } });
     const { getByTestId } = render(<WhileYouWereAway campaignId="camp-1" />);
-    const text = getByTestId('while-you-were-away').textContent;
-    // C2 (misc): the register sentence and the raw diagnostic are now SEPARATE —
-    // the sentence stays in the world's voice, the detail is still never swallowed.
-    expect(text).toMatch(/stopped early/i);
-    expect(text).toMatch(/kernel exploded/);
-    expect(text).not.toMatch(/stopped early[^.]*kernel exploded/i); // never spliced mid-sentence
+    expect(getByTestId('while-you-were-away').textContent).toMatch(/snag.*kernel exploded/i);
   });
 
-  test('notes when the catch-up was capped — and tells the TRUTH about the cap', () => {
+  test('notes when the catch-up was capped', () => {
     setStore({ livingCatchUp: { campaignId: 'camp-1', weeksCaughtUp: 26, capped: true, majors: [], error: null } });
-    const text = render(<WhileYouWereAway campaignId="camp-1" />).getByTestId('while-you-were-away').textContent;
-    expect(text).toMatch(/more time had passed/i);
-    // C3 finding 11: past the cap the realm lives the FIRST capped weeks and the
-    // remainder is skipped for good (owner ruling: calendar-advances-past-cap).
-    expect(text).toMatch(/lived the first 26 weeks/i);
-    // The old misleading halves must stay out: the weeks shown are not the most
-    // recent, and the skipped span cannot be run later.
-    expect(text).not.toMatch(/most recent/i);
-    expect(text).not.toMatch(/run the rest/i);
+    expect(render(<WhileYouWereAway campaignId="camp-1" />).getByTestId('while-you-were-away').textContent)
+      .toMatch(/more time had passed/i);
   });
 
   test('the dismiss button clears the digest', () => {

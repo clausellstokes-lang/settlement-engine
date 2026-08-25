@@ -1,7 +1,7 @@
 /**
  * HomeLanding.jsx — the marketing front door: a scrollable landing page that is
  * both advertisement and onboarding. It walks a cold visitor down "the salt
- * road" — Hero → 01 Forge → 02 Visual → 03 Voice → 04 Realm → 05 Commons →
+ * road" — Hero → 01 Forge → 02 Brief → 03 Voice → 04 Realm → 05 Commons →
  * 06 Set out — teaching one lifecycle stage per painted-scene section while
  * selling it (landing spec).
  *
@@ -23,19 +23,14 @@ import { lazy, Suspense, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import Button from './primitives/Button.jsx';
 import { PARCH, PARCH_100, GOLD, FS, SP, sans, serif_ } from './theme.js';
-import { trackLandingView } from '../lib/landingFunnelAnalytics.js';
+import { Funnel } from '../lib/analytics.js';
 import { tl } from '../copy/landing.js';
 
 // Everything below the hero fold, code-split into ONE lazy chunk so the hero is
 // the only first-paint work on the landing surface (spec §8).
 const LandingBelowFold = lazy(() => import('./home/LandingBelowFold.jsx'));
 
-// C2 THE FILM RULING: the hero sits over STILL-0, the desk (the growth film's
-// origin frame), not the old village scene — the journey begins at the desk and
-// the film scrubs desk → thorp on the first travel leg below. This eager still is
-// also the hero's LCP paint (law #3: the hero paints over the optimized still-0
-// image); the lazy film backdrop mounts behind and aligns on it at scroll top.
-const HERO_SCENE = "url('/media/journey-legs/bg/still-0-desk.jpg')";
+const HERO_SCENE = "url('/backgrounds/landing/village-1400.jpg')";
 
 // Respect reduced motion for the "follow the road" smooth scroll.
 function prefersReducedMotion() {
@@ -50,12 +45,11 @@ function scrollToForge(e) {
 }
 
 export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }) {
-  // Instrument the Welcome page (W-DOC): the landing funnel joins the SM-5
-  // pattern — landing_funnel_used feature:'view', once per session, via the
-  // lazy helper (lib/landingFunnelAnalytics.js). This LANDS the previously
-  // dormant Funnel.welcomeView seam.
+  // Instrument the Welcome page: fire a once-per-session welcome_view. Optional-
+  // chained exactly as before so it degrades to a no-op until the analytics
+  // wave lands the event (preserved behavior).
   useEffect(() => {
-    trackLandingView();
+    Funnel.welcomeView?.();
   }, []);
 
   // Full-bleed: cancel <main>'s padding so every section spans edge to edge.
@@ -71,10 +65,6 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
         className="sf-landing-hero"
         style={{
           '--sf-scene': HERO_SCENE,
-          // Lift the hero above the fixed film backdrop (zIndex 0, mounted in the
-          // lazy below-fold): the hero owns its own eager still-0 paint (LCP), the
-          // backdrop only shows through the transparent travel legs below.
-          position: 'relative', zIndex: 1,
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           textAlign: 'center', padding: isMobile ? `${SP.xxl * 2}px ${SP.lg}px ${SP.xxl}px` : '72px 24px 48px',
         }}

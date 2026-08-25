@@ -13,7 +13,7 @@
  */
 
 import { supabase, isConfigured } from './supabase.js';
-import { getActivePacks, findPackByKey, SINGLE_DOSSIER, TIERS } from '../config/pricing.js';
+import { getActivePacks, findPackByKey, SINGLE_DOSSIER } from '../config/pricing.js';
 import { fetchCreditBalanceFromLedger } from './creditLedger.js';
 import { track, EVENTS, Funnel } from './analytics.js';
 
@@ -28,7 +28,7 @@ function buildProductsMap() {
     premium: {
       key:       'premium',
       name:      'Premium Upgrade',
-      price:     `$${(TIERS.cartographer.priceCents / 100).toFixed(2)}/mo`,
+      price:     '$6/mo',
       credits:   30,
       perCredit: null,
       discount:  null,
@@ -74,7 +74,7 @@ const PRODUCTS = new Proxy({}, {
  * Stripe follows regardless).
  *
  * @param {string} product — A key from the active PRODUCTS catalog or a legacy pack key.
- * @param {{ checkoutToken?: string, settlement?: object, redeemCode?: string, saveId?: string, captchaToken?: string, savePaymentMethod?: boolean }} options
+ * @param {{ checkoutToken?: string, settlement?: object, redeemCode?: string, saveId?: string }} options
  *   For single_dossier, `settlement` is persisted server-side before payment so
  *   the paid dossier survives a lost/overwritten local stash (F21/F23).
  *   `saveId` (single_dossier + signed-in only): binds the durable export right
@@ -121,26 +121,13 @@ export async function startCheckout(product, options = {}) {
     ? options.saveId.trim()
     : undefined;
 
-  // Wave-D human verification (INERT until activated): a Turnstile token minted by
-  // the purchase surface's CaptchaGate. ADDITIVE — omitted entirely when absent, so
-  // the flag-off body is byte-identical. The edge function's verifyTurnstile is a
-  // no-op until the owner sets TURNSTILE_SECRET_KEY. See docs/PERIMETER_RUNBOOK.md.
-  const captchaToken = typeof options.captchaToken === 'string' && options.captchaToken
-    ? options.captchaToken
-    : undefined;
-
   // Only single_dossier carries a settlement to persist; other products bind to
   // the account server-side and never ship the artifact through checkout.
   const body = {
     product, checkoutToken,
     ...(redeemCode ? { redeemCode } : {}),
     ...(saveId ? { saveId } : {}),
-    ...(captchaToken ? { captchaToken } : {}),
     ...(isAnonymousProduct && options.settlement ? { settlement: options.settlement } : {}),
-    // Auto-reload consent (§4.2): the server re-gates this to signed-in credit-pack
-    // payment sessions before it attaches setup_future_usage. Sending the flag is
-    // harmless anywhere else.
-    ...(options.savePaymentMethod === true ? { savePaymentMethod: true } : {}),
   };
 
   const { data, error } = await supabase.functions.invoke('create-checkout', { body });
@@ -267,14 +254,8 @@ export async function classifyInvokeError(error, fallbackMessage = 'Request fail
  * Returns { verified, sessionId, settlement } — `settlement` is the
  * server-persisted dossier (or null → caller falls back to the local stash).
  * Throws an Error with `.transient` set for retryable failures (429/5xx/network).
- *
- * `captchaToken` (Wave-D, optional): a managed-Turnstile token from the return
- * page's CaptchaGate. ADDITIVE — omitted when absent. This is a POST-PAYMENT
- * verification, so the edge function verifies the token ONLY IF one is present and
- * NEVER blocks a paid buyer on a missing/blocked token (a paying customer must
- * always be able to collect their PDF). See docs/PERIMETER_RUNBOOK.md.
  */
-export async function verifySingleDossierPurchase(sessionId, checkoutToken, captchaToken) {
+export async function verifySingleDossierPurchase(sessionId, checkoutToken) {
   if (!isConfigured) throw new Error('Payments are not configured');
   if (typeof sessionId !== 'string' || !sessionId.startsWith('cs_')) {
     throw new Error('Missing checkout session');
@@ -283,9 +264,8 @@ export async function verifySingleDossierPurchase(sessionId, checkoutToken, capt
     throw new Error('Missing dossier checkout token');
   }
 
-  const captcha = typeof captchaToken === 'string' && captchaToken ? captchaToken : undefined;
   const { data, error } = await supabase.functions.invoke('verify-single-dossier', {
-    body: { sessionId, checkoutToken, ...(captcha ? { captchaToken: captcha } : {}) },
+    body: { sessionId, checkoutToken },
   });
   if (error) throw await classifyInvokeError(error, 'Purchase verification failed');
   if (!data?.verified) {

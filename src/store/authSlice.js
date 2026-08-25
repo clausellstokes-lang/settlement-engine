@@ -22,8 +22,6 @@
 
 import { auth as authService } from '../lib/auth.js';
 import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
-import { activateOutboxOwner } from './outbox.js';
-import { normalizeSavedSettlementsOwnerId } from './savedSettlementsHydration.js';
 
 // Source of truth for tier ceilings is src/config/pricing.js — TIERS.{key}.maxSize.
 // This map mirrors those ceilings so the auth-gating layer never drifts:
@@ -57,12 +55,6 @@ export const TIER_GATE = {
 // output internally for elevated roles.
 const TIER_RANK = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 5, metropolis: 5 };
 
-// Sentinel settType values that are not concrete tiers: they resolve to a real
-// tier during generation, and the post-resolution re-gate (settlementSlice)
-// checks the RESOLVED tier. Allowing them here keeps Random/Custom selectable
-// for every account tier (ported master fix).
-const ALLOWED_UNRANKED_TIERS = new Set(['random', 'custom']);
-
 /** Roles that bypass all tier restrictions */
 const ELEVATED_ROLES = ['developer', 'admin'];
 
@@ -74,29 +66,6 @@ function resolveTier(tier, role) {
   return ELEVATED_ROLES.includes(role) ? 'premium' : (tier || 'free');
 }
 let authUnsubscribe = null;
-// M-9d — teardown for the single-session validation loop (focus/visibility + interval).
-let sessionValidationCleanup = null;
-
-function alignSavedSettlementsOwner(get, nextOwnerId, { invalidate = false } = {}) {
-  const state = get();
-  const next = normalizeSavedSettlementsOwnerId(nextOwnerId);
-  const authOwner = normalizeSavedSettlementsOwnerId(state.auth?.user?.id);
-  const cacheOwner = normalizeSavedSettlementsOwnerId(state.savedSettlementsOwnerId);
-  if (invalidate || authOwner !== next || cacheOwner !== next) {
-    state.clearSavedSettlements?.(next);
-  }
-}
-
-function alignCampaignAuthBoundary(get, user, session, { forceSession = false } = {}) {
-  const state = get();
-  const previousOwnerId = state.auth?.user?.id ?? null;
-  const nextOwnerId = user?.id ?? null;
-  if (String(previousOwnerId || '') !== String(nextOwnerId || '')) {
-    state.clearCampaigns?.({ ownerBoundary: true, nextOwnerId });
-  } else if (forceSession || state.auth?.session !== session) {
-    state.invalidateCampaignSession?.();
-  }
-}
 
 export const createAuthSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
@@ -121,31 +90,11 @@ export const createAuthSlice = (set, get) => ({
   // after a retro auto-upgrade) and cleared on sign-out.
   dossierEntitlements: {},
 
-  // Single-session eviction banner flag (§7.3, M-9d). TOP-LEVEL (not inside `auth`),
-  // so clearAuth's auth-reset leaves it standing — the banner survives the sign-out
-  // it announces. NOT persisted (absent from the partialize), so a fresh load is never
-  // pre-evicted. Cleared on the next SIGNED_IN.
-  sessionEvicted: false,
-
   // ── Core setters ──────────────────────────────────────────────────────────
-  setAuth: (
-    user,
-    session,
-    tier,
-    role,
-    displayName,
-    isFounder = false,
-    avatarUrl = null,
-    emailNotifications = true,
-    modelPreference = DEFAULT_MODEL_PREFERENCE,
-  ) => {
-    alignCampaignAuthBoundary(get, user, session);
-    alignSavedSettlementsOwner(get, user?.id);
-    activateOutboxOwner(user?.id);
+  setAuth: (user, session, tier, role, displayName, isFounder = false, avatarUrl = null, emailNotifications = true, modelPreference = DEFAULT_MODEL_PREFERENCE) =>
     set(state => {
       state.auth = {
-        user,
-        session,
+        user, session,
         tier: resolveTier(tier, role),
         role: role || 'user',
         displayName: displayName || null,
@@ -153,91 +102,24 @@ export const createAuthSlice = (set, get) => ({
         avatarUrl: avatarUrl || null,
         emailNotifications: emailNotifications !== false,
         modelPreference: modelPreference || DEFAULT_MODEL_PREFERENCE,
-        loading: false,
-        error: null,
+        loading: false, error: null,
       };
-    });
-    // Re-publish after auth commits: the pre-commit activation is the security
-    // detach, while this same-owner refresh is the reporter/UI handoff.
-    activateOutboxOwner(user?.id);
-  },
-
-  /**
-   * Patch ONLY the profile image pointer (DESIGN_PROFILE_IMAGE.md §4).
-   *
-   * The avatar pipeline writes profiles.avatar_url directly and then calls this
-   * so the surfaces already reading auth.avatarUrl (the account circle, the nav
-   * menu) update without a reload. Deliberately NOT folded into setAuth: that
-   * action rebuilds the whole auth object from a session read, and threading one
-   * field through its nine positional parameters at every call site — for a
-   * value the very next session refresh re-reads from the profile anyway — would
-   * buy nothing and drop the field wherever a caller forgot it.
-   *
-   * The store is a CACHE of the profile here; the row is authoritative.
-   *
-   * ⚠️ The public-identity OPT-IN is deliberately absent from this store. It is
-   * owned locally by AccountIdentitySection (the FounderCreditToggle pattern),
-   * because setAuth's full-object rebuild would silently reset any consent flag
-   * held in `auth` on every session refresh — a consent switch that quietly
-   * flips itself back is worse than one that lives in one place.
-   *
-   * @param {string|null} avatarUrl
-   */
-  setAvatarUrl: (avatarUrl) => {
-    set(state => {
-      state.auth.avatarUrl = avatarUrl || null;
-    });
-  },
+    }),
 
   clearAuth: () => {
-    // Detach synchronously so no scheduled retry can cross an account boundary.
-    // The old owner's pending writes remain in that owner's durable mirror.
-    activateOutboxOwner(null);
-    // Always invalidate on sign-out, even if the same account signs straight
-    // back in: a response from the prior session must not certify the new cache.
-    alignSavedSettlementsOwner(get, null, { invalidate: true });
-    try {
-      // Clear owner-scoped campaign errors/status before publishing anon auth so
-      // no subscriber can observe A's warning under the anonymous session.
-      get().clearCampaigns?.({ ownerBoundary: true, nextOwnerId: null });
-    } catch {
-      // Other slices may not be present in isolated unit tests.
-    }
     set(state => {
       state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
       // Durable-rights cache is per-user — drop it on sign-out so a later user on
       // the same device never reads the previous account's entitlements.
       state.dossierEntitlements = {};
     });
-    activateOutboxOwner(null);
     try {
+      get().clearCampaigns?.();
+      get().clearSavedSettlements?.();
       get().clearCloudCustomContent?.();
     } catch {
       // Other slices may not be present in isolated unit tests.
     }
-  },
-
-  /**
-   * THE EVICTION (§7.3, M-9d) — this session was superseded by a sign-in on another
-   * device. THE NON-NEGOTIABLE LIFECYCLE REQUIREMENT: eviction must NEVER destroy
-   * unsaved local work. So this does the MINIMUM:
-   *   (1) raise the banner flag (sessionEvicted — top-level, survives clearAuth),
-   *   (2) sign out ONLY this device's session (LOCAL scope; the other device is the
-   *       legitimate winner). The SIGNED_OUT event then transitions auth to anon
-   *       exactly as a normal sign-out does. That later SIGNED_OUT handler
-   *       intentionally clears owner-scoped caches, while the persist partialize
-   *       (config + toggles) remains untouched so unsaved edits survive re-auth.
-   * evictSession itself never calls reset/clear actions synchronously — that is the
-   * narrower wall THE LIFECYCLE PIN guards. Supersession DEDUPES: the first eviction
-   * wins; later ones no-op (no error-toast storm from N in-flight paid calls all
-   * 401-ing).
-   */
-  evictSession: () => {
-    if (get().sessionEvicted) return;                 // dedupe — first supersession wins
-    set(state => { state.sessionEvicted = true; });
-    // Local-scope sign-out (lazy authSecurity). Fire-and-forget: the banner is already
-    // up, and the SIGNED_OUT transition follows on its own. NEVER a global sign-out.
-    Promise.resolve(authService.signOutLocalSession?.()).catch(() => { /* banner already shown */ });
   },
 
   setAuthLoading: (loading) =>
@@ -255,14 +137,13 @@ export const createAuthSlice = (set, get) => ({
     return get().dossierEntitlements[saveId] === true;
   },
 
-  // RETIRED (R-5b, owner queue #21): `setDossierEntitlement`. Its docstring named
-  // a caller — "right after a successful retro auto-upgrade" — that never
-  // materialized. The live shape is the opposite and is the right one for a PAID
-  // right: purchases INVALIDATE the cache (clearDossierEntitlements below) and the
-  // authority re-reads it from the server (refreshDossierEntitlement), so the
-  // client never optimistically grants itself a durable entitlement it has not
-  // been told it holds. Removing the optimistic writer removes the only way that
-  // invariant could have been broken.
+  /** Optimistically mark a save's durable right as held (e.g. right after a
+   *  successful retro auto-upgrade) without waiting for a refetch. */
+  setDossierEntitlement: (saveId, held) =>
+    set(state => {
+      if (!saveId) return;
+      state.dossierEntitlements[saveId] = held === true;
+    }),
 
   /** Drop the whole durable-rights read cache so every saved dossier refetches
    *  its right on next view. Called after a durable purchase completes (the
@@ -302,9 +183,6 @@ export const createAuthSlice = (set, get) => ({
     try {
       const result = await authService.getSession();
       if (result) {
-        alignCampaignAuthBoundary(get, result.user, result.session);
-        alignSavedSettlementsOwner(get, result.user?.id);
-        activateOutboxOwner(result.user?.id);
         set(state => {
           state.auth = {
             user: result.user, session: result.session,
@@ -317,12 +195,8 @@ export const createAuthSlice = (set, get) => ({
             loading: false, error: null,
           };
         });
-        activateOutboxOwner(result.user?.id);
       } else {
-        // initAuth is HMR/remount-safe and may rerun on a live signed-in store.
-        // A null authoritative session is a full sign-out boundary, not merely
-        // the end of loading; reuse the same atomic cache/outbox transition.
-        get().clearAuth();
+        set(state => { state.auth.loading = false; });
       }
     } catch (e) {
       console.error('Auth init error:', e);
@@ -340,13 +214,10 @@ export const createAuthSlice = (set, get) => ({
       if (event === 'SIGNED_OUT') {
         get().clearAuth();
       } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        activateOutboxOwner(user?.id);
         const previousUserId = get().auth?.user?.id;
-        alignSavedSettlementsOwner(get, user?.id);
-        if (event === 'SIGNED_IN') {
-          alignCampaignAuthBoundary(get, user, session, { forceSession: true });
-        }
         if (previousUserId && user?.id && previousUserId !== user.id) {
+          get().clearCampaigns?.();
+          get().clearSavedSettlements?.();
           get().clearCloudCustomContent?.();
         }
         set(state => {
@@ -360,27 +231,7 @@ export const createAuthSlice = (set, get) => ({
             modelPreference: modelPreference || DEFAULT_MODEL_PREFERENCE,
             loading: false, error: null,
           };
-          // A fresh sign-in clears any prior eviction banner (§7.3): re-auth returns
-          // the user to their (persisted) work with a clean slate.
-          state.sessionEvicted = false;
         });
-        activateOutboxOwner(user?.id);
-
-        // M-9d — claim this account to THE CURRENT session (last-login-wins, §7.1).
-        // Fire-and-forget via the LAZY sessionClient (off the first-paint closure). Only
-        // on a real SIGNED_IN — a TOKEN_REFRESHED keeps the same session_id.
-        if (event === 'SIGNED_IN' && user?.id) {
-          import('../lib/sessionClient.js').then((m) => m.claimSession()).catch(() => { /* never block auth */ });
-        }
-
-        // CONSENT RECONCILE — a telemetry opt-out recorded on the account beats this
-        // device's local record (opt-out wins; it never re-grants). Lazy + fire-and-forget
-        // like the claim above: consent is already enforced locally, so this only narrows.
-        if (event === 'SIGNED_IN' && user?.id) {
-          import('../lib/consentSync.js')
-            .then((m) => m.reconcileTelemetryConsent())
-            .catch(() => { /* never block auth; the local record stands */ });
-        }
 
         // Tier 8.5 — fire the welcome email once per account. We mark a
         // localStorage flag keyed by user id so we don't double-send on
@@ -424,34 +275,16 @@ export const createAuthSlice = (set, get) => ({
         }
       }
     });
-
-    // M-9d — session validation (focus/visibility + 5-min interval). LAZILY loaded so
-    // the listener/interval machinery stays OFF the first-paint closure (LAW 4); its
-    // teardown is captured for cleanup once the module resolves.
-    if (sessionValidationCleanup) { sessionValidationCleanup(); sessionValidationCleanup = null; }
-    import('../lib/sessionClient.js')
-      .then(({ startValidation }) => { sessionValidationCleanup = startValidation(get); })
-      .catch(() => { /* validation is a convenience; the request gate is the enforcement */ });
-
-    // Combined teardown: unsubscribe onAuthChange AND tear down the validation loop.
-    return () => {
-      if (authUnsubscribe) { authUnsubscribe(); authUnsubscribe = null; }
-      if (sessionValidationCleanup) { sessionValidationCleanup(); sessionValidationCleanup = null; }
-    };
+    return authUnsubscribe;
   },
 
   /** Sign up with email + password. Returns { needsVerification } or throws. */
-  authSignUp: async (email, password, captchaToken) => {
+  authSignUp: async (email, password) => {
     set(state => { state.auth.loading = true; state.auth.error = null; });
     try {
-      // captchaToken is ADDITIVE (Wave-D perimeter): undefined unless the
-      // perimeterCaptcha flag is on and the widget produced a token.
-      const result = /** @type {any} */ (await authService.signUp(email, password, captchaToken));
+      const result = /** @type {any} */ (await authService.signUp(email, password));
       if (result.session) {
         // Auto-confirmed (dev mode or mock)
-        alignCampaignAuthBoundary(get, result.user, result.session);
-        alignSavedSettlementsOwner(get, result.user?.id);
-        activateOutboxOwner(result.user?.id);
         set(state => {
           state.auth = {
             user: result.user, session: result.session,
@@ -464,7 +297,6 @@ export const createAuthSlice = (set, get) => ({
             loading: false, error: null,
           };
         });
-        activateOutboxOwner(result.user?.id);
       } else {
         set(state => { state.auth.loading = false; });
       }
@@ -476,13 +308,10 @@ export const createAuthSlice = (set, get) => ({
   },
 
   /** Sign in with email + password. rememberMe controls session persistence. */
-  authSignIn: async (email, password, rememberMe = true, captchaToken) => {
+  authSignIn: async (email, password, rememberMe = true) => {
     set(state => { state.auth.loading = true; state.auth.error = null; });
     try {
-      const result = await authService.signIn(email, password, rememberMe, captchaToken);
-      alignCampaignAuthBoundary(get, result.user, result.session);
-      alignSavedSettlementsOwner(get, result.user?.id);
-      activateOutboxOwner(result.user?.id);
+      const result = await authService.signIn(email, password, rememberMe);
       set(state => {
         state.auth = {
           user: result.user, session: result.session,
@@ -495,7 +324,6 @@ export const createAuthSlice = (set, get) => ({
           loading: false, error: null,
         };
       });
-      activateOutboxOwner(result.user?.id);
     } catch (e) {
       set(state => { state.auth.loading = false; state.auth.error = e.message; });
       throw e;
@@ -513,9 +341,9 @@ export const createAuthSlice = (set, get) => ({
   },
 
   /** Send password reset email. */
-  authResetPassword: async (email, captchaToken) => {
+  authResetPassword: async (email) => {
     try {
-      await authService.resetPassword(email, captchaToken);
+      await authService.resetPassword(email);
     } catch (e) {
       set(state => { state.auth.error = e.message; });
       throw e;
@@ -660,14 +488,6 @@ export const createAuthSlice = (set, get) => ({
     return TIER_GATE[tier]?.export === true;
   },
 
-  // ENFORCED (Owner Ruling #5, 2026-07-17 — "enforce mapChains", flipping the
-  // reconciliation-#4 as-shipped-free judgment at its recorded veto handle).
-  // Consumers: the <ChainEdges/> render in components/MapOverlay.jsx + the
-  // LayersPanel 'Supply chains' toggle + the RoutesToolbar 'Chains' toggle —
-  // the gate wraps the AFFORDANCES; the derivation (lib/computeMapChains.js /
-  // lib/supplyChains.js) stays tier-blind. Locked toggles stay visible and
-  // fire the map_realm_teaser pricing moment. The stored layers.chains default
-  // is untouched, so an upgrade restores the layer without re-toggling.
   canUseMapChains: () => {
     if (ELEVATED_ROLES.includes(get().auth.role)) return true;
     const { tier } = get().auth;
@@ -695,14 +515,8 @@ export const createAuthSlice = (set, get) => ({
 
   isTierAllowed: (settlementTier) => {
     if (ELEVATED_ROLES.includes(get().auth.role)) return true;
-    // Sentinels resolve to a concrete tier at generation; the post-resolution
-    // re-gate checks that. Unknown non-sentinel tiers FAIL CLOSED.
-    if (ALLOWED_UNRANKED_TIERS.has(settlementTier)) return true;
-    const rank = TIER_RANK[settlementTier];
-    if (rank === undefined) return false;
-    const maxRank = TIER_RANK[get().maxAllowedTier()];
-    if (maxRank === undefined) return false;
-    return rank <= maxRank;
+    const maxTier = get().maxAllowedTier();
+    return TIER_RANK[settlementTier] <= TIER_RANK[maxTier];
   },
 
   /** Whether the user can afford AI features (developers get unlimited) */

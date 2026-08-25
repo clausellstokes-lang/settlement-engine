@@ -50,34 +50,6 @@ const AUTH_TOKEN_LS_KEY = (() => {
  * so a "remember me off" session (token in sessionStorage) or a chunked token
  * fell through to a spurious "Not signed in".
  */
-/**
- * C2 (bar 8): THE CLERK'S REGISTER SCRUB. The AI is a bucketing clerk, never a
- * writer with its own voice — yet its two most legible tells (the em dash and the
- * exclamation point, both banned by docs/VOICE_AND_TONE.md §3) had no gate on the
- * returned prose. Every STRING the narrative stream delivers passes through this
- * before it reaches the store (and so before ai_data persists): U+2014 becomes a
- * comma join, `!` becomes a full stop. Mechanical by design — names and numbers
- * are untouched (the generator never mints either tell), so the overlay verifier's
- * fact checks see the same facts. Exported for the unit test only.
- * @param {unknown} v @returns {unknown}
- */
-export function scrubClerkRegister(v) {
-  if (typeof v === 'string') return v.replace(/\s*—\s*/g, ', ').replace(/!/g, '.');
-  if (Array.isArray(v)) return v.map(scrubClerkRegister);
-  if (v && typeof v === 'object') {
-    /** @type {Record<string, unknown>} */
-    const out = {};
-    for (const [k, x] of Object.entries(v)) {
-      // The setPath guard's sibling: a crafted streamed key must not graft a
-      // prototype onto the rebuilt object.
-      if (k === '__proto__' || k === 'constructor' || k === 'prototype') continue;
-      out[k] = scrubClerkRegister(x);
-    }
-    return out;
-  }
-  return v;
-}
-
 async function getAccessTokenSafe() {
   // Read + validate a persisted supabase session from one Web Storage area,
   // reassembling the chunked form supabase-js writes for large tokens.
@@ -135,7 +107,6 @@ async function getAccessTokenSafe() {
  * @param {(notice: {status: string, spendId: string|null, reason: string|null, supportNote: string|null}) => void} [opts.onRefundFailure] - called when the server reports that an automatic refund for a failed generation also failed
  * @param {AbortSignal} [opts.signal] - abort signal; when it fires the fetch + stream are torn down and the call rejects with an AbortError
  * @param {number} [opts.idleTimeoutMs] - watchdog: abort if no bytes arrive within this window (default 60000; resets on every chunk to cover slow first-token)
- * @param {number} [opts.overallTimeoutMs] - hard ceiling on the whole run: abort if the stream hasn't finished within this window (default 180000; unlike the idle watchdog, does not reset on chunks)
  * @param {Array<string|number>} [opts.pinnedNpcIds] - NPC ids the DM pinned; the server drops them from the `npcs` pass so they round-trip unchanged.
  * @param {string} [opts.aiGuidance] - DM-approved guidance sent to the model. Private DM Notes are never sent.
  * @param {string} [opts.modelPreference] - User model preference key.
@@ -202,23 +173,14 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
     else externalSignal.addEventListener('abort', onExternalAbort, { once: true });
   }
 
-  // Two independent deadlines (ported master fix): IDLE resets on every chunk
-  // and catches a half-open stall; OVERALL is a hard ceiling on the whole run —
-  // without it a stream that sends bytes steadily but never finishes hangs the
-  // AI action forever (the idle timer keeps resetting).
-  const IDLE_TIMEOUT_MS = Number.isFinite(opts.idleTimeoutMs) ? opts.idleTimeoutMs : 45000;
-  const OVERALL_TIMEOUT_MS = Number.isFinite(opts.overallTimeoutMs) ? opts.overallTimeoutMs : 180000;
+  const IDLE_TIMEOUT_MS = Number.isFinite(opts.idleTimeoutMs) ? opts.idleTimeoutMs : 60000;
   let idleTimedOut = false;
   let watchdog = null;
-  const overallTimer = setTimeout(() => { idleTimedOut = true; controller.abort(); }, OVERALL_TIMEOUT_MS);
   const armWatchdog = () => {
     if (watchdog) clearTimeout(watchdog);
     watchdog = setTimeout(() => { idleTimedOut = true; controller.abort(); }, IDLE_TIMEOUT_MS);
   };
-  const disarmWatchdog = () => {
-    if (watchdog) { clearTimeout(watchdog); watchdog = null; }
-    clearTimeout(overallTimer);
-  };
+  const disarmWatchdog = () => { if (watchdog) { clearTimeout(watchdog); watchdog = null; } };
 
   // A meaningful, user-facing error for the two abort flavors. Both carry
   // name === 'AbortError' so the slice's errorKindFromError classifies them as
@@ -242,12 +204,9 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   let succeededFields = [];
   let sawDone = false;
 
-  // Support nested field paths like "powerStructure.factions". Refuse any
-  // prototype-chain segment (ported master fix): a crafted streamed field name
-  // like "__proto__.polluted" must never pollute Object.prototype.
+  // Support nested field paths like "powerStructure.factions"
   const setPath = (target, path, value) => {
     const keys = path.split('.');
-    if (keys.some(k => k === '__proto__' || k === 'constructor' || k === 'prototype')) return;
     let ref = target;
     for (let i = 0; i < keys.length - 1; i++) {
       if (typeof ref[keys[i]] !== 'object' || ref[keys[i]] === null) ref[keys[i]] = {};
@@ -294,26 +253,18 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       return;
     }
 
-    // Per-field success — progressive UI update (supports dotted paths). The
-    // value passes the clerk's register scrub before store or UI meet it.
+    // Per-field success — progressive UI update (supports dotted paths)
     if (msg.field) {
-      const clean = scrubClerkRegister(msg.value);
-      setPath(result, msg.field, clean);
-      try { opts.onField?.(msg.field, clean); } catch (_) { /* UI error should not break stream */ }
+      setPath(result, msg.field, msg.value);
+      try { opts.onField?.(msg.field, msg.value); } catch (_) { /* UI error should not break stream */ }
       return;
     }
 
     // Final success line — the server's `result` is authoritative
     if (msg.done) {
       sawDone = true;
-      // A `done` with a missing or non-object `result` is a malformed completion
-      // (ported master fix): treating it as success would silently persist an
-      // empty {} over what should have been a real narrative (and charge a
-      // credit for nothing). Flag it fatal so the caller retries.
       if (msg.result && typeof msg.result === 'object') {
-        result = /** @type {Record<string, unknown>} */ (scrubClerkRegister(msg.result));
-      } else {
-        fatalError = new Error('AI generation completed without a result (malformed response). Please retry.');
+        result = msg.result;
       }
       if (typeof msg.creditsRemaining === 'number') creditsRemaining = msg.creditsRemaining;
       if (msg.type) finalType = msg.type;
@@ -351,14 +302,6 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       throw new Error(msg);
     }
 
-    // A 2xx with no body (e.g. a proxy stripped it) would otherwise throw an
-    // unmapped TypeError off `res.body.getReader()` and leak the watchdog
-    // timers (ported master fix): clear them and surface the same retryable
-    // error a truncated stream gets.
-    if (!res.body) {
-      disarmWatchdog();
-      throw new Error('AI generation returned an empty response (no stream). Please retry.');
-    }
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
 

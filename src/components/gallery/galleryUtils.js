@@ -55,14 +55,6 @@ export const GALLERY_RESPONSIVE_CSS = `
       position: static;
     }
   }
-
-  /* The specimen plate hovers by INKING its frame darker in place (motion
-     grammar: oc-m-inkdarken, on the card), never by lifting or shadowing.
-     Curated plates ink toward the deep gold entry tone, keeping their gold
-     identity; the rest ink toward strong ink. Reduced-motion collapses the
-     transition to its instant end state (the global rule in organic.css). */
-  .sf-gallery-card:hover { border-color: var(--oc-ink-strong); }
-  .sf-gallery-card--curated:hover { border-color: var(--oc-entry); }
 `;
 
 export function human(value) {
@@ -102,23 +94,10 @@ export function galleryUrlFor(slug) {
 }
 
 /**
- * V-13 FEATURED — HIDDEN-UNTIL-OCCUPIED (the no-fake-names honesty): a Featured
- * section renders ONLY when it holds at least one item. An empty featured set
- * (nothing admin-featured yet) renders nothing — never an empty band. Pinned by
- * tests/components/galleryFeaturedVisible.test.js.
- * @param {unknown} items the featured tiles for a section
- * @returns {boolean}
- */
-export function featuredSectionVisible(items) {
-  return Array.isArray(items) && items.length > 0;
-}
-
-/**
  * Share a gallery dossier (§7): Web Share API when available, else copy the
  * public URL to clipboard. Never throws — returns { ok, method } so callers can
  * show success/failure feedback. A cancelled native share sheet is { ok:false,
  * cancelled:true } (not an error to surface).
- * @param {{ slug?: string, name?: string }} [item] the tile/dossier being shared
  */
 export async function shareGalleryDossier({ slug, name } = {}) {
   if (!slug) return { ok: false, method: null };

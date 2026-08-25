@@ -24,9 +24,6 @@
 import { describe, expect, it } from 'vitest';
 
 import { createPRNG } from '../../src/kernel/prng.js';
-import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
-import { appendWizardNewsEntries } from '../../src/domain/region/index.js';
-import { SECTION_OF } from '../../src/domain/realm/heraldRouting.js';
 import {
   SETTLEMENT_LIFECYCLE_TUNING,
   advanceSettlementLifecycle,
@@ -36,13 +33,7 @@ import {
   stepSeeding,
   settlementLifecycleActive,
   drawSteadingName,
-  mintSteading,
 } from '../../src/domain/worldPulse/settlementLifecycleKernel.js';
-import {
-  applyLineageBirthsToGraph,
-  buildLineageMemberBirth,
-  lineageMemberSaveId,
-} from '../../src/domain/worldPulse/lineageMemberBirth.js';
 
 const T = SETTLEMENT_LIFECYCLE_TUNING;
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -433,113 +424,6 @@ describe('charter-pending (visible, never a silent cap)', () => {
     const again = drive({ settlements, ticks: 3, ledger: worldState.spatialLedgers.satellites });
     expect(satellitesOf(again.worldState.spatialLedgers.satellites, 'a')[0].population).toBe(popAtPending);
   });
-
-  it('WR-3: a pending village graduates once into a canon member with a live lineage edge', () => {
-    const parent = town('a', { tier: 'city', population: 12000 });
-    parent.populationHistory = [
-      { tick: 200, delta: -20, population: 12020, outcomeId: 'lifecycle.grow.s1.200' },
-      { tick: 220, delta: -30, population: 11990, outcomeId: 'lifecycle.grow.s1.220' },
-    ];
-    const satellite = {
-      id: 's1', name: 'Weirbrook', parentId: 'a', tier: 'hamlet', population: 430,
-      foundedTick: 100, provenance: 'growth', orbit: 0, inflow: 430, backing01: 0.6,
-      charterPending: true, charterPendingSince: 299, history: ['A charter awaits.'],
-    };
-    const snapshot = {
-      campaign: { id: 'camp-1' },
-      settlements: [{ id: 'a', name: parent.name, settlement: parent }],
-    };
-    const updates = [{ saveId: 'a', settlement: parent }];
-    const worldState = {
-      tick: 300,
-      simulationRules: {
-        settlementLifecycleEnabled: true,
-        lineageClaimEnabled: true,
-      },
-      spatialLedgers: {
-        satellites: { a: { steadings: { s1: satellite } } },
-      },
-    };
-    const beforePopulation = parent.population + satellite.population;
-    const out = advanceSettlementLifecycle({
-      snapshot,
-      worldState,
-      settlementUpdates: updates,
-      pIndex: pIndexOf(),
-      rng: createPRNG('lineage-graduation'),
-      tick: 300,
-      now: NOW,
-    });
-
-    expect(out.memberBirths).toHaveLength(1);
-    const birth = out.memberBirths[0];
-    expect(birth.saveId).toBe(lineageMemberSaveId(['lineage-member', 'camp-1', 'a', 's1']));
-    expect(birth.save.campaignState.phase).toBe('canon');
-    expect(birth.save.settlement.parentRef).toMatchObject({
-      parentId: 'a', sourceSatelliteId: 's1', graduatedTick: 300,
-      foundingTier: 'thorp', graduationTier: 'village',
-      graduationPopulation: 430, liveEdgeId: birth.graphEdge.id,
-    });
-    expect(birth.save.settlement.npcs).toEqual([]);
-    expect(birth.save.settlement.factions).toEqual([]);
-    expect(satellitesOf(out.worldState.spatialLedgers?.satellites || null, 'a')).toEqual([]);
-    expect(out.settlementUpdates[0].settlement.population + birth.save.settlement.population)
-      .toBe(beforePopulation);
-    const lineageNews = out.newsEntries.find(entry => entry.impactKind === 'lineage_edge_recorded');
-    expect(lineageNews).toMatchObject({
-      settlementIds: ['a', birth.saveId],
-      settlementNames: [parent.name, satellite.name],
-      audience: 'public',
-      section: 'events',
-    });
-    const normalizedLineageNews = appendWizardNewsEntries({}, [lineageNews], { now: NOW }).entries[0];
-    expect(normalizedLineageNews).toMatchObject({
-      settlementIds: ['a', birth.saveId],
-      settlementNames: [parent.name, satellite.name],
-      audience: 'public',
-      section: 'events',
-    });
-    expect(SECTION_OF(normalizedLineageNews.impactKind)).toBe(normalizedLineageNews.section);
-
-    const graph = applyLineageBirthsToGraph({ nodes: [], edges: [] }, out.memberBirths, NOW);
-    expect(graph.nodes.some(node => String(node.id) === String(birth.saveId))).toBe(true);
-    expect(graph.edges.find(edge => edge.id === birth.graphEdge.id)).toMatchObject({
-      from: 'a', to: birth.saveId, relationshipType: 'neutral', status: 'active',
-    });
-    // Replay is an idempotent replacement, not a duplicate topology.
-    const replayed = applyLineageBirthsToGraph(graph, out.memberBirths, NOW);
-    expect(replayed.nodes.filter(node => String(node.id) === String(birth.saveId))).toHaveLength(1);
-    expect(replayed.edges.filter(edge => edge.id === birth.graphEdge.id)).toHaveLength(1);
-  });
-
-  it('WR-3 stays completely dark when lineageClaimEnabled is absent', () => {
-    const parent = town('a', { tier: 'city', population: 12000 });
-    const satellite = {
-      id: 's1', name: 'Weirbrook', parentId: 'a', tier: 'hamlet', population: 430,
-      foundedTick: 100, provenance: 'growth', orbit: 0, inflow: 430, backing01: 0.6,
-      charterPending: true, charterPendingSince: 299, history: [],
-    };
-    const snapshot = {
-      campaign: { id: 'camp-1' },
-      settlements: [{ id: 'a', name: parent.name, settlement: parent }],
-    };
-    const worldState = {
-      simulationRules: { settlementLifecycleEnabled: true },
-      spatialLedgers: { satellites: { a: { steadings: { s1: satellite } } } },
-    };
-    const out = advanceSettlementLifecycle({
-      snapshot,
-      worldState,
-      settlementUpdates: [{ saveId: 'a', settlement: parent }],
-      pIndex: pIndexOf(),
-      rng: createPRNG('lineage-dark'),
-      tick: 300,
-      now: NOW,
-    });
-    expect(out.memberBirths).toBeUndefined();
-    expect(satellitesOf(out.worldState.spatialLedgers.satellites, 'a')[0].charterPending).toBe(true);
-    expect(out.newsEntries.some(entry => entry.impactKind === 'lineage_edge_recorded')).toBe(false);
-  });
 });
 
 // ── THE TRIBUTARY (bounded, receipted) ─────────────────────────────────────────
@@ -598,69 +482,6 @@ describe('peakTier (write-once-upward, dual-written, absent-tolerated, frozen on
       settlements: { a: town('a', { tier: 'thorp', population: 0, peakTier: 'city', lifecycleStatus: 'relic_ruin' }) }, ticks: 1,
     });
     expect(updates[0].settlement.config.peakTier).toBe('city');
-  });
-});
-
-// ── THE FOUNDING RUNG (TCD-3) ──────────────────────────────────────────────────
-// `parentRef.foundingTier` was spelled `satellite.foundingTier || 'thorp'` and
-// documented as a compatibility path for older records. No satellite record has ever
-// carried that field, so the "fallback" was the only path. The constant that replaced
-// it is only honest while the two facts below hold, so both are pinned HERE, against
-// the real mint rather than a hand-written fixture.
-describe('the founding rung is the mint\'s constant, never a record field (TCD-3)', () => {
-  const PARENT_POPULATION = { town: 4800, city: 12000, metropolis: 40000 };
-  /** The whole minting surface: every parent tier that may seed × every provenance
-   *  the mint accepts × five seeds (a single seed would pin one draw, not the mint). */
-  const MINTS = ['town', 'city', 'metropolis'].flatMap((tier) => (
-    ['growth', 'resource_strike', 'resettlement', 'forced'].flatMap((provenance) => (
-      ['rung-a', 'rung-b', 'rung-c', 'rung-d', 'rung-e'].map((seed) => ({ tier, provenance, seed }))
-    ))
-  ));
-
-  function mintOne({ tier, provenance, seed }) {
-    const fork = createPRNG(seed).fork(`satellite:a:100:${tier}:${provenance}`);
-    return mintSteading({
-      parent: town('a', { tier, population: PARENT_POPULATION[tier] }),
-      parentId: 'a', sats: [], tick: 100,
-      draw: () => fork.random(),
-      provenance,
-      resourceKey: provenance === 'resource_strike' ? 'iron_vein' : null,
-    });
-  }
-
-  it('every steading the mint can produce is founded at thorp and carries NO foundingTier', () => {
-    expect(MINTS).toHaveLength(60);
-    for (const spec of MINTS) {
-      const minted = mintOne(spec);
-      expect(minted.refusal).toBeUndefined();
-      expect(minted.record.tier).toBe('thorp');
-      // THE WRITER THAT NEVER EXISTED. Minting an explicit founding rung would widen
-      // a PERSISTED record shape and is owner-gated; this line is the tripwire that
-      // forces the ruling rather than letting a second authority appear quietly.
-      // `tier` is the anchor because it is authored on the SAME object literal in
-      // `mintSteading`: a drift that stopped emitting the record's tier keys would
-      // red here instead of turning the absence assertion vacuous.
-      expectAbsentWithAnchor(
-        Object.keys(minted.record), 'foundingTier', 'tier',
-        `mintSteading ${spec.tier}/${spec.provenance}/${spec.seed}`,
-      );
-    }
-  });
-
-  it('a REAL minted record graduates at thorp, and a field planted on it cannot move the rung', () => {
-    const parent = town('a', { tier: 'city', population: PARENT_POPULATION.city });
-    const record = mintOne({ tier: 'city', provenance: 'growth', seed: 'rung-a' }).record;
-    // The record as it actually reaches the charter: promoted up the in-orbit ladder,
-    // grown to village scale, charter-pending. Its LIVE tier is not its founding rung.
-    const chartered = { ...record, tier: 'hamlet', population: 430, charterPending: true, charterPendingSince: 299 };
-    const args = { campaignId: 'camp-1', parentId: 'a', parent, tick: 300, now: NOW };
-    const birth = buildLineageMemberBirth({ ...args, satellite: chartered });
-    expect(birth.save.settlement.parentRef).toMatchObject({ foundingTier: 'thorp', graduationTier: 'village' });
-    // THE MUTANT ARM: the old spelling read the record FIRST, so any record carrying
-    // the field would have decided the rung. Nothing on a satellite may.
-    const planted = buildLineageMemberBirth({ ...args, satellite: { ...chartered, foundingTier: 'village' } });
-    expect(planted.save.settlement.parentRef.foundingTier).toBe('thorp');
-    expect(planted.save.settlement.parentRef).toEqual(birth.save.settlement.parentRef);
   });
 });
 

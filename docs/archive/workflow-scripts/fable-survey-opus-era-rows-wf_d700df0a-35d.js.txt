@@ -1,0 +1,88 @@
+export const meta = {
+  name: 'fable-survey-opus-era-rows',
+  description: 'Fable survey of 21 Opus-era FABLE-SURVEY-OWED queue rows: verify receipts, re-examine judgments, return structured verdicts for chair ruling',
+  phases: [
+    { title: 'Survey', detail: 'eleven Fable surveyors over grouped related rows' },
+  ],
+}
+
+const WT = args.worktree
+const QF = args.queueFile
+
+const SURVEY_SCHEMA = {
+  type: 'object',
+  required: ['rows'],
+  properties: {
+    rows: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['startLine', 'heading', 'claims', 'judgments', 'anomalies', 'openItems', 'confidence'],
+        properties: {
+          startLine: { type: 'integer' },
+          heading: { type: 'string' },
+          claims: { type: 'array', items: { type: 'object', required: ['claim', 'verdict', 'method'], properties: {
+            claim: { type: 'string' }, verdict: { type: 'string', enum: ['CONFIRMED', 'FAILED', 'UNVERIFIABLE'] }, method: { type: 'string' } } } },
+          judgments: { type: 'array', items: { type: 'object', required: ['id', 'summary', 'recommendation', 'reason'], properties: {
+            id: { type: 'string' }, summary: { type: 'string' }, recommendation: { type: 'string', enum: ['RATIFY', 'AMEND', 'OVERRULE', 'ESCALATE'] }, reason: { type: 'string' } } } },
+          anomalies: { type: 'array', items: { type: 'string' } },
+          openItems: { type: 'array', items: { type: 'string' } },
+          confidence: { type: 'string', enum: ['HIGH', 'MEDIUM', 'LOW'] },
+        },
+      },
+    },
+  },
+}
+
+// Row groups: [startLine, endLineExclusive] pairs inside docs/FABLE_VALIDATION_QUEUE.md (6978 lines total)
+const GROUPS = [
+  { label: 'SP-D + SP-D repair', ranges: [[2663, 2765], [3589, 3777]] },
+  { label: 'GR-2 + GR-2 repair', ranges: [[2765, 2914], [3043, 3267]] },
+  { label: 'IN-0a + IN-0a repair', ranges: [[2914, 3043], [3267, 3589]] },
+  { label: 'Cycle-4 close + debt discharge', ranges: [[3777, 4133], [4133, 4258]] },
+  { label: 'GR-3a + chair batch', ranges: [[4258, 4458], [5058, 5205]] },
+  { label: 'rows @4458 + @4638', ranges: [[4458, 4638], [4638, 4834]] },
+  { label: 'Cycle-5 Lane-B close', ranges: [[4834, 5058]] },
+  { label: 'ES-2 repair + ES-3 repair', ranges: [[5205, 5338], [5338, 5462]] },
+  { label: 'ES-4 + safe-house + lane contained', ranges: [[5462, 5566], [5566, 5676], [5676, 5774]] },
+  { label: 'ES-5a repair', ranges: [[5774, 5850]] },
+  { label: 'HB+WC+EP fold + walker/census split', ranges: [[5850, 5950], [5950, 6074]] },
+]
+
+phase('Survey')
+
+function surveyPrompt(group) {
+  const rangeDesc = group.ranges.map(r => `lines ${r[0]}-${r[1] - 1}`).join('; ')
+  return `You are a Fable surveyor clearing Opus-era survey debt in the SettlementForge program, per the owner's marking directive: every Opus-era queue row's chair-grade judgments must be re-examined by Fable. You survey and verify only — you change NOTHING.
+
+REPO: ${WT} (branch claude/composite-r4). Your shell cwd resets between commands — begin EVERY shell command with \`cd ${WT} && \`.
+
+YOUR ROWS: in ${QF}, read ${rangeDesc} (use the Read tool with offset/limit; the file is ~6978 lines). Each range starts at a heading containing "OPUS-ERA — FABLE SURVEY OWED". If a range's tail bleeds into the NEXT row's heading, stop there — survey only your own rows. Read your rows COMPLETELY.
+
+FOR EACH ROW, do all of:
+1. LANDING CLAIMS: every commit SHA the row cites — verify it resolves (\`git cat-file -e <sha>\`) and its subject (\`git log -1 --format=%s <sha>\`) matches the row's account. Verdict CONFIRMED/FAILED per claim.
+2. CODE CLAIMS: for the row's load-bearing claims about files, symbols, counts, or behavior (pick the 3-8 most load-bearing, not every sentence): verify against the CURRENT tree by grep/read. Distinguish "true at landing" from "still true now" — if a later commit legitimately changed it, that is not a FAILED claim, but record it as an anomaly with the superseding commit if you can name it.
+3. JUDGMENTS: every J-* entry and every unlabeled chair-grade call in the row (scope rulings, deferrals, rejections, quarantines): summarize it and recommend RATIFY (sound, evidence checks out), AMEND (sound direction, correction needed — say what), OVERRULE (wrong, say why with evidence), or ESCALATE (owner-gated or needs the chair's cross-row context). Be genuinely skeptical — a survey that ratifies everything without checking is worthless. But do not manufacture disagreement: most well-evidenced calls deserve RATIFY.
+4. RE-EXAMINE ITEMS: if the row explicitly lists items "for a Fable session to re-examine" or "owed to Fable", address each one specifically in openItems with your finding.
+5. ANOMALIES: anything contradicting the current tree, other rows, or program law (a failing walker banked as test debt, a restated count that could go stale, a vacuous pin, a receipt read through a pipe).
+
+HARD CONSTRAINTS: read-only — no file writes, no git state changes, NEVER run vitest or any test/gate command (the gate slot is owned by another lane). Verification is by git object inspection, grep, and reading source. Budget your depth: receipts and judgments first, code spot-checks second.
+
+Return ONLY the structured output (one entry per row you surveyed, startLine = the heading line your range starts at).`
+}
+
+const results = await parallel(GROUPS.map((g, i) => () =>
+  agent(surveyPrompt(g), {
+    label: `survey:${g.label}`,
+    phase: 'Survey',
+    schema: SURVEY_SCHEMA,
+  }).then(r => ({ group: g.label, ...r }))
+))
+
+const ok = results.filter(Boolean)
+log(`Survey complete: ${ok.length}/${GROUPS.length} groups returned`)
+if (ok.length < GROUPS.length) {
+  const missing = GROUPS.filter((g, i) => !results[i]).map(g => g.label)
+  log(`MISSING groups (must be re-run or surveyed by the chair): ${missing.join(', ')}`)
+}
+return { groups: ok, missingGroups: GROUPS.filter((g, i) => !results[i]).map(g => g.label) }

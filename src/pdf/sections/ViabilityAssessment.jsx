@@ -73,12 +73,8 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
           }}
           wrap={false}
         >
-          {/* G5 first-survey framing (Wave R-2, atlas queue #28 remainder):
-              magicDependency is generation-frozen; the header carries the
-              vintage exactly like its web twin (ViabilityTab's Magic
-              Dependency banner). One string, vetoable. */}
           <Text style={{ ...type.label, color: palette.ai, fontSize: pt['8'], marginBottom: 2 }}>
-            MAGIC DEPENDENCY · FIRST SURVEY
+            MAGIC DEPENDENCY
           </Text>
           <Text style={{ ...type.body, fontSize: pt['9.5'], color: palette.ink }}>
             This settlement leans on arcane infrastructure. If magic-supporting institutions
@@ -94,32 +90,6 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
         </View>
       )}
 
-      {/* ── Magic legality (premium live exports only) ─────────────────── */}
-      {/* Additive + self-gating: only a campaign export (vm.liveWorld present)
-          with a functioning magic system surfaces the legality facets, so a
-          non-campaign / dead-magic export is byte-identical. */}
-      {vm?.liveWorld && v.magicProfile?.exists && v.magicProfile.lines.length > 0 && (
-        <View
-          style={{
-            marginBottom: space.sm,
-            padding: 6,
-            borderLeft: `2pt solid ${palette.cool}`,
-            backgroundColor: palette.coolBg,
-            borderRadius: 2,
-          }}
-          wrap={false}
-        >
-          <Text style={{ ...type.label, color: palette.cool, fontSize: pt['8'], marginBottom: 2 }}>
-            MAGIC LEGALITY
-          </Text>
-          {v.magicProfile.lines.map((line, i) => (
-            <Text key={`mag-${i}`} style={{ ...type.body, fontSize: pt['9'], color: palette.ink, lineHeight: 1.4 }}>
-              {line}
-            </Text>
-          ))}
-        </View>
-      )}
-
       {/* ── By-design contradictions ───────────────────────── */}
       {contradictions.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
@@ -128,7 +98,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
             BY-DESIGN CONTRADICTIONS
           </Text>
           <Text style={{ ...type.body, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
-            Intentional tensions: plot seeds, not defects.
+            Intentional tensions — plot seeds, not defects.
           </Text>
           {contradictions.map((c, i) => (
             <View
@@ -173,18 +143,15 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
               <BulletList
                 items={warnings}
                 tone="warn"
-                bullet="•"
+                bullet="!"
                 itemRender={(w) => noteText(w)}
               />
             </View>
           )}
           {violations.length > 0 && (
             <View style={{ flex: 1 }}>
-              {/* G5 first-survey framing (Wave R-2): structuralViolations is
-                  generation-frozen; the vintage mirrors the web twin
-                  (ViabilityTab's "Structural Crises · First Survey"). */}
               <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 2 }}>
-                STRUCTURAL VIOLATIONS · FIRST SURVEY
+                STRUCTURAL VIOLATIONS
               </Text>
               <BulletList
                 items={violations}
@@ -349,7 +316,7 @@ function verdictOf(v) {
 }
 
 function formatVal(val) {
-  if (val == null || val === '') return '–';
+  if (val == null || val === '') return '—';
   if (typeof val === 'number') return smart(val);
   if (typeof val === 'string') return val;
   if (typeof val === 'boolean') return val ? 'yes' : 'no';
@@ -358,7 +325,7 @@ function formatVal(val) {
     if (val.surplus != null) return `+${smart(val.surplus)}`;
     if (val.label) return val.label;
     if (val.value != null) return formatVal(val.value);
-    return '–';
+    return '—';
   }
   return String(val);
 }

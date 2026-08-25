@@ -1,8 +1,8 @@
 /**
  * primitives/EditableText — click-to-edit prose primitive.
  *
- * Premium users can hand-write any registered prose field
- * (NPC secret, plot hook, history beat, etc.)
+ * Tier 5.4 of the roadmap. Premium users can hand-write any
+ * registered prose field (NPC secret, plot hook, history beat, etc.)
  * in place. The primitive is purely presentational — it owns the
  * draft state and the keyboard/blur handling, but the parent owns
  * persistence (onSave) and revert (onRevert) and decides which
@@ -34,7 +34,7 @@ const COLORS = Object.freeze({
   muted:      '#9c8068',
   border:     '#d2bd96',
   edited:     '#5a2a8a',
-  editedBg:   'transparent',
+  editedBg:   'rgba(90,42,138,0.08)',
   editedBdr:  'rgba(90,42,138,0.35)',
   focusBdr:   '#a0762a',
   focusBg:    '#fffbf5',
@@ -122,6 +122,7 @@ export function EditableText({
     const baseStyle = {
       whiteSpace: multiline ? 'pre-wrap' : 'nowrap',
       cursor: editMode ? 'text' : 'default',
+      borderRadius: 3,
       padding: editMode ? '2px 4px' : 0,
       margin: editMode ? '-2px -4px' : 0,
       background: isEdited && editMode ? COLORS.editedBg : 'transparent',
@@ -162,6 +163,7 @@ export function EditableText({
     minHeight: multiline ? 60 : undefined,
     boxSizing: 'border-box',
     border: `1px solid ${COLORS.focusBdr}`,
+    borderRadius: 4,
     padding: '6px 8px',
     background: COLORS.focusBg,
     color: COLORS.inkDeep,
@@ -217,12 +219,12 @@ export function EditableText({
 export function EditedBadge({ count = null, style = {} }) {
   return (
     <span
-      title="This dossier contains user-edited prose. An edited NPC survives an NPC reroll; the AI overlay passes edits through verbatim."
+      title="This dossier contains user-edited prose. The engine will preserve these edits across rerolls; the AI overlay will pass them through verbatim."
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
         fontSize: FS.xxs, fontWeight: 700, color: COLORS.edited,
         background: COLORS.editedBg, border: `1px solid ${COLORS.editedBdr}`,
-        padding: '2px 6px',
+        borderRadius: 3, padding: '2px 6px',
         textTransform: 'uppercase', letterSpacing: '0.05em',
         ...style,
       }}
@@ -242,6 +244,7 @@ function RevertChip({ originalValue, onClick }) {
         marginLeft: 6,
         background: 'none',
         border: `1px solid ${COLORS.editedBdr}`,
+        borderRadius: 3,
         padding: '0 5px',
         color: COLORS.edited,
         fontSize: FS.micro,

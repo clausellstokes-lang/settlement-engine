@@ -12,10 +12,7 @@ import { FS, ELEV } from '../theme.js';
  */
 
 const VARIANTS = {
-  // default reads in the oc ink ramp (organic craft §3): the hairline rule-frame
-  // and the deepest ink title. bg + the ELEV[1] shadow (pinned by
-  // cardElevation.test.jsx) are unchanged — a would-be no-z-axis burn-down.
-  default:    { bg: '#fffbf5', border: 'var(--oc-ink-hairline)', titleColor: 'var(--oc-ink-deepest)' },
+  default:    { bg: '#fffbf5', border: '#d2bd96', titleColor: '#1c1409' },
   suggestion: { bg: '#fff7ec', border: '#e0b070', titleColor: '#7a4f0f' },  // soft amber — for AI/onboarding hooks
   danger:     { bg: '#fff5f5', border: '#c89a9a', titleColor: '#8b1a1a' },
   info:       { bg: '#f0f4ff', border: '#c0c8e8', titleColor: '#2a3a7a' },
@@ -44,7 +41,7 @@ export default function Card({
         border: `1px solid ${v.border}`,
         borderRadius: 6,
         padding: pad,
-        // Subtle ink-tinted lift so the shared card reads as a surface,
+        // V-4: subtle ink-tinted lift so the shared card reads as a surface,
         // not a flat outline. ELEV[1] is the default-card tier.
         boxShadow: ELEV[1],
       }}

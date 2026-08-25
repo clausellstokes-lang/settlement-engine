@@ -8,13 +8,13 @@
  * and arrive via props.
  */
 import { lazy as _lazy, Suspense as _Suspense } from 'react';
+import { Crown, TrendingDown, CreditCard } from 'lucide-react';
 import { getTierDisplayName, getActivePacks } from '../../config/pricing.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { t } from '../../copy/index.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, FS, swatch, AMBER } from '../theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, R, FS, swatch, AMBER } from '../theme.js';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
-import { useFounderTileEligible } from '../../hooks/useFounderTileEligible.js';
 // P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
 // behavior. Self-gates inside; renders null for non-worldbuilder users.
 const FounderTile = _lazy(() => import('../pricing/FounderTile.jsx'));
@@ -31,21 +31,14 @@ export default function AccountSubscriptionSection({
   purchaseError,
   purchasing,
   handlePurchase,
-  onNavigatePricing,
 }) {
-  const isFree = !isElevated && auth.tier !== 'premium';
-  // P8 — one primary per region. When the audience-earned Founder tile is
-  // eligible it renders its OWN solid-gold "Claim seat" primary lower in this
-  // section; the generic upgrade CTA below then drops to secondary so exactly
-  // one focal click survives (Founder is the higher-intent action).
-  const founderTileShowing = useFounderTileEligible();
   return (
-    <Section title={t('account.subscriptionHeading')} tone="feature">
+    <Section title={t('account.subscriptionHeading')} icon={Crown}>
       <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
         {/* Tier card — P125 / AC-1 grows an "unlock" footer for free users. */}
         <div style={{
           flex: '1 1 180px',
-          background: GOLD_BG,
+          background: GOLD_BG, borderRadius: R.lg,
           border: `1px solid rgba(160,118,42,0.2)`,
           overflow: 'hidden',
         }}>
@@ -77,7 +70,7 @@ export default function AccountSubscriptionSection({
         {/* Credits card — grows "try Narrate" footer when balance is 0. */}
         <div style={{
           flex: '1 1 180px',
-          background: 'rgba(124,58,237,0.06)',
+          background: 'rgba(124,58,237,0.06)', borderRadius: R.lg,
           border: '1px solid rgba(124,58,237,0.15)',
           overflow: 'hidden',
         }}>
@@ -106,7 +99,7 @@ export default function AccountSubscriptionSection({
         {/* Saves card — grows "one save left" / "saves full" footer. */}
         <div style={{
           flex: '1 1 180px',
-          background: 'rgba(42,122,42,0.06)',
+          background: 'rgba(42,122,42,0.06)', borderRadius: R.lg,
           border: '1px solid rgba(42,122,42,0.15)',
           overflow: 'hidden',
         }}>
@@ -139,26 +132,12 @@ export default function AccountSubscriptionSection({
         </div>
       </div>
 
-      {/* Conversion CTA — the one high-emphasis primary action of this region.
-          Free users get an obvious first click to Pricing; the per-tile upsell
-          footers above all point here. Navigation-only — never a purchase. */}
-      {isFree && (
-        <div style={{ marginTop: SP.lg }}>
-          <Button
-            variant={founderTileShowing ? 'secondary' : 'primary'}
-            size="lg"
-            onClick={onNavigatePricing}
-          >
-            See Cartographer
-          </Button>
-        </div>
-      )}
-
       {auth.tier === 'premium' && !isElevated && (
         <div style={{ marginTop: SP.lg }}>
           <Button
             variant="secondary"
             size="md"
+            icon={<CreditCard size={15} />}
             onClick={handleManageBilling}
             disabled={portalBusy || !isConfigured}
           >
@@ -175,13 +154,13 @@ export default function AccountSubscriptionSection({
             fontSize: FS.xs, fontWeight: 700, color: SECOND,
             textTransform: 'uppercase', letterSpacing: '0.06em',
           }}>
-            {t('account.purchaseCreditsLabel')}
+            <TrendingDown size={14} /> {t('account.purchaseCreditsLabel')}
           </div>
 
           {purchaseError && (
             <div style={{
               padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
-              background: swatch.dangerBg, border: '1px solid #e8b0b0',
+              background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md,
               fontSize: FS.sm, color: swatch.danger,
             }}>
               {purchaseError}
@@ -207,14 +186,14 @@ export default function AccountSubscriptionSection({
                   style={{
                     flex: 1, padding: `${SP.md}px ${SP.sm}px`,
                     background: CARD, border: `2px solid ${accent}20`,
-                    cursor: 'pointer', fontFamily: sans,
+                    borderRadius: R.lg, cursor: 'pointer', fontFamily: sans,
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs,
                     opacity: purchasing ? 0.6 : 1, position: 'relative',
                   }}>
                   {p.discount && (
                     <span style={{
                       position: 'absolute', top: -8, right: -4,
-                      padding: '2px 6px', background: accent,
+                      padding: '2px 6px', borderRadius: R.sm, background: accent,
                       color: swatch.white, fontSize: FS.micro, fontWeight: 800,
                     }}>{p.discount}</span>
                   )}

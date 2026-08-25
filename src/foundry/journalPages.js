@@ -19,15 +19,8 @@
  * Pure module: no DOM, no store, no Date — node-testable.
  */
 
-// THE ONE markdown/HTML escaper, shared with the standalone world importer. It
-// lives under foundry-module/ because that folder IS the shipped Foundry module
-// and must stay self-contained, so the dependency runs app → module.
-import { escapeMarkdown } from '../../foundry-module/scripts/markdownEscape.js';
 import { PDF_VARIANTS, shouldInclude, faithChapterVisible } from '../pdf/variants.js';
-import {
-  cap, humanize, hookText, label, stripZwnj,
-  prominentPair, prominentType, prominentProse,
-} from '../pdf/lib/format.js';
+import { cap, humanize, hookText, label, stripZwnj } from '../pdf/lib/format.js';
 import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
@@ -38,16 +31,19 @@ import {
 // ── markdown assembly helpers ────────────────────────────────────────────────
 
 /**
- * Escape a value for interpolation into markdown page content. The escaping
- * itself is THE shared escaper both Foundry lanes use — this lane owns only the
- * ZWNJ (U+200C) strip that format.js's noLig() inserts as a PDF-renderer-only
- * fontkit workaround. Every helper-derived string funnels through here, so the
- * journal markdown never carries the F24 corruption class (invisible characters
- * that break Foundry text search and contaminate copy-paste).
+ * Escape a value for interpolation into markdown page content. Also strips
+ * the ZWNJ (U+200C) that format.js's noLig() inserts as a PDF-renderer-only
+ * fontkit workaround — every helper-derived string funnels through here, so
+ * the journal markdown never carries the F24 corruption class (invisible
+ * characters that break Foundry text search and contaminate copy-paste).
  */
 export function esc(v) {
   if (v == null) return '';
-  return escapeMarkdown(stripZwnj(String(v)));
+  return stripZwnj(String(v))
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/([\\`*_[\]#|])/g, '\\$1');
 }
 
 const has = (v) => v != null && v !== '' && !(Array.isArray(v) && v.length === 0);
@@ -331,19 +327,12 @@ function viabilityPage(vm) {
 function relationshipsPage(vm) {
   const r = vm.relationships;
   const pr = r.prominentRelationship;
-  // The record is an NPC-to-NPC edge, so it is read through THE shared reader
-  // contract the PDF chapters use (pdf/lib/format.js) rather than the
-  // never-written otherSettlement/description/summary keys this page used to
-  // reach for. Emit the section only when a key actually carries something.
-  const prHeading = [prominentPair(pr), prominentType(pr)].filter(Boolean).join(' — ');
-  const prProse = prominentProse(pr);
   return md(
     lede(relationshipsHeadline(r)),
     (r.neighbours || []).length ? md('', '## Neighbours', r.neighbours.map(n =>
       `- **${esc(n.name)}**${n.type ? ` *(${esc(humanize(n.type))})*` : ''}${n.description ? ` — ${esc(n.description)}` : ''}`)) : null,
-    pr && (prHeading || prProse)
-      ? md('', '## Prominent relationship', bullet(prHeading), prProse ? esc(prProse) : null)
-      : null,
+    pr ? md('', '## Prominent relationship',
+      esc(pr.description || pr.summary || `${pr.otherSettlement || ''} — ${pr.type || ''}`)) : null,
   ) || null;
 }
 

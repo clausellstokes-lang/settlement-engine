@@ -53,7 +53,7 @@ const CATEGORY_TO_ARCHETYPE = Object.freeze({
 });
 
 /**
- * @param {unknown} category
+ * @param {any} category
  * @returns {import('./settlement.schema.js').FactionArchetype}
  */
 function archetypeFromCategory(category) {
@@ -110,7 +110,7 @@ const NPC_TEMPLATES = Object.freeze({
   },
 });
 
-/** @param {import('./settlement.schema.js').FactionArchetype} archetype */
+/** @param {any} archetype */
 function templateForArchetype(archetype) {
   const t = NPC_TEMPLATES[archetype] || NPC_TEMPLATES.other;
   return {
@@ -122,12 +122,8 @@ function templateForArchetype(archetype) {
 // ── Consequence-if-removed templates ─────────────────────────────────────
 // The headline Tier 4.5 feature: each NPC carries a structured forecast
 // for what happens if they're killed, exiled, retired, or co-opted.
-// Severity scales with `structuralRank`; the consequence palette comes from
-// the archetype. The generator's getRank (npcStructure.js) emits
-// 'dominant' | 'subordinate'; normalizeNpcRank maps that onto the palette
-// vocabulary ('secondary'), so the mid tier is keyed 'secondary' to match
-// (ported master fix — keying it 'secondary' left every non-dominant NPC
-// falling through to 'minor'). 'minor' is retained for legacy/explicit-minor.
+// Severity scales with `structuralRank` ('dominant' / 'secondary' /
+// 'minor'); the consequence palette comes from the archetype.
 
 /** @type {Record<string, Record<string, string[]>>} */
 const REMOVAL_CONSEQUENCES = Object.freeze({
@@ -258,40 +254,20 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   },
 });
 
-// [domain-top-state-4] The generator (npcStructure.getRank) speaks its own rank
-// vocabulary — 'dominant' / 'subordinate' — while the profile surface and the
-// REMOVAL_CONSEQUENCES palette speak the NpcRank vocabulary 'dominant' / 'secondary'
-// / 'minor'. Nothing translated between them, so every non-dominant NPC fell through
-// to the 'minor' palette and the 'secondary' tier was dead; a legacy NUMERIC
-// structuralRank would also crash `.toLowerCase()`. Translate in ONE place: map
-// 'subordinate' → 'secondary', String()-coerce the input, and collapse anything
-// unrecognized (including numbers and absent ranks) to 'minor'.
-const NPC_RANK_ALIASES = Object.freeze({ subordinate: 'secondary' });
 /**
- * @param {unknown} rank
- * @returns {import('./settlement.schema.js').NpcRank}
- */
-export function normalizeNpcRank(rank) {
-  const low = String(rank ?? '').toLowerCase();
-  const mapped = /** @type {Record<string,string>} */ (NPC_RANK_ALIASES)[low] || low;
-  return mapped === 'dominant' || mapped === 'secondary' ? mapped : 'minor';
-}
-
-/**
- * @param {import('./settlement.schema.js').FactionArchetype} archetype
- * @param {unknown} rank
+ * @param {any} archetype
+ * @param {any} rank
  */
 function consequencesForRemoval(archetype, rank) {
   const archetypeMap = REMOVAL_CONSEQUENCES[archetype] || REMOVAL_CONSEQUENCES.other;
-  // normalizeNpcRank subsumes the ported master fix (String-coerce first — a legacy
-  // numeric structuralRank must not crash .toLowerCase()) and collapses aliases.
-  const consequences = archetypeMap[normalizeNpcRank(rank)] || archetypeMap.minor || [];
+  const normalizedRank = (rank || 'minor').toLowerCase();
+  const consequences = archetypeMap[normalizedRank] || archetypeMap.minor || [];
   return [...consequences];
 }
 
 // ── Helpers ─────────────────────────────────────────────────────────────
 
-/** @param {...unknown} candidates */
+/** @param {...any} candidates */
 function firstNonEmpty(...candidates) {
   for (const c of candidates) {
     if (typeof c === 'string' && c.trim()) return c.trim();
@@ -299,7 +275,7 @@ function firstNonEmpty(...candidates) {
   return null;
 }
 
-/** @param {unknown} s */
+/** @param {any} s */
 function snakeCase(s) {
   return String(s)
     .replace(/[^a-zA-Z0-9]+/g, '_')
@@ -307,7 +283,7 @@ function snakeCase(s) {
     .toLowerCase();
 }
 
-/** @param {unknown} name */
+/** @param {any} name */
 function factionIdFromName(name) {
   if (!name) return null;
   return `faction.${snakeCase(name)}`;
@@ -334,8 +310,8 @@ const CATEGORY_INSTITUTION_HINTS = Object.freeze({
 });
 
 /**
- * @param {import('./settlement.schema.js').SimNpc} npc
- * @param {import('./settlement.schema.js').SimSettlement|undefined} settlement
+ * @param {any} npc
+ * @param {any} settlement
  */
 function inferInstitutionLink(npc, settlement) {
   if (!npc || !settlement) return null;
@@ -345,7 +321,7 @@ function inferInstitutionLink(npc, settlement) {
   const hint = CATEGORY_INSTITUTION_HINTS[archetypeFromCategory(npc.category)];
   if (!hint) return null;
 
-  const match = institutions.find((inst) =>
+  const match = institutions.find((/** @type {any} */ inst) =>
     inst && typeof inst.name === 'string' && hint.test(inst.name)
   );
   return match ? `institution.${snakeCase(match.name)}` : null;
@@ -487,20 +463,20 @@ export function institutionsForPower(faction, settlement) {
 // follow-up — the data is there, but the surface needs careful UX.
 
 /**
- * @param {import('./settlement.schema.js').SimNpc} npc
- * @param {import('./settlement.schema.js').SimSettlement|undefined} settlement
+ * @param {any} npc
+ * @param {any} settlement
  */
 function inferPrimaryRelationship(npc, settlement) {
   const rels = Array.isArray(settlement?.relationships) ? settlement.relationships : [];
   if (!npc?.id || rels.length === 0) return null;
 
   // Find any relationship involving this NPC.
-  const candidates = rels.filter((r) => r.npc1Id === npc.id || r.npc2Id === npc.id);
+  const candidates = rels.filter((/** @type {any} */ r) => r.npc1Id === npc.id || r.npc2Id === npc.id);
   if (candidates.length === 0) return null;
 
   // Prefer relationships with explicit tension over plain alliances —
   // these are the more campaign-actionable connections.
-  const withTension = candidates.find((r) => typeof r.tension === 'string' && r.tension);
+  const withTension = candidates.find((/** @type {any} */ r) => typeof r.tension === 'string' && r.tension);
   const chosen = withTension || candidates[0];
 
   const otherId = chosen.npc1Id === npc.id ? chosen.npc2Id : chosen.npc1Id;
@@ -526,15 +502,8 @@ function inferPrimaryRelationship(npc, settlement) {
  * Pure; idempotent; lossless on legacy fields (id, name, role,
  * personality, etc. are preserved on the returned object).
  *
- * @param {any} npc       The legacy NPC entry. Stays `any`: SimNpc types
- *   `influence` as (string|number) while this function's own return type,
- *   NpcProfile, types it `string|null`. The two schema typedefs contradict
- *   each other and reconciling them is a schema decision, not a typing chore.
- * @param {any} [settlement] Optional context — also stays `any`: explanation.js
- *   calls this with its OWN ExplainSettlement typedef, which is not assignable
- *   to SimSettlement, so tightening here reds a CONSUMER at allowance zero.
- *   (The private helpers below DO take SimSettlement; they are only ever called
- *   from inside this file.) Optional context for institution-link +
+ * @param {any} npc       The legacy NPC entry.
+ * @param {any} [settlement] Optional context for institution-link +
  *                              relationship-triangle derivation.
  * @returns {import('./settlement.schema.js').NpcProfile|null}
  */
@@ -543,10 +512,7 @@ export function deriveNpcProfile(npc, settlement) {
 
   const archetype = archetypeFromCategory(npc.category);
   const template = templateForArchetype(archetype);
-  // [domain-top-state-4] Surface + score the NpcRank-vocabulary rank (maps the
-  // generator's 'subordinate' → 'secondary'), so profile.rank stays inside the
-  // NpcRank union and the removal forecast reads the real per-tier palette.
-  const rank = normalizeNpcRank(npc.structuralRank);
+  const rank = npc.structuralRank || 'minor';
 
   return {
     id:   npc.id || `npc.${snakeCase(npc.name || 'unnamed')}`,
@@ -635,7 +601,7 @@ export function deriveAllNpcProfiles(/** @type {any} */ settlement) {
  * Count NPCs by archetype. Useful for distribution tests + future
  * faction-roster surfaces.
  */
-export function npcArchetypeBreakdown(/** @type {import('./settlement.schema.js').SimSettlement} */ settlement) {
+export function npcArchetypeBreakdown(/** @type {any} */ settlement) {
   /** @type {Record<string, number>} */
   const out = {
     government: 0, military: 0, religious: 0, merchant: 0,
@@ -652,7 +618,7 @@ export function npcArchetypeBreakdown(/** @type {import('./settlement.schema.js'
  * Returns a flat list of consequences — useful for the future
  * "If the players burn through the leadership" forecasting UI.
  */
-export function dominantNpcRemovalImpact(/** @type {import('./settlement.schema.js').SimSettlement} */ settlement) {
+export function dominantNpcRemovalImpact(/** @type {any} */ settlement) {
   const dominant = deriveAllNpcProfiles(settlement)
     .filter((/** @type {any} */ p) => p.rank === 'dominant');
   const out = [];

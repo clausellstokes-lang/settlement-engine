@@ -22,6 +22,7 @@
  * only). Pure presentational over store state.
  */
 
+import { ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { navigate } from '../../hooks/useRoute.js';
 import { td } from '../../copy/deityAuthoring.js';
@@ -99,6 +100,7 @@ export default function PantheonActivationStrip() {
     <Button
       variant="secondary"
       size="sm"
+      icon={<ArrowRight size={11} />}
       onClick={onClick}
       style={{ flexShrink: 0, padding: '2px 8px', minHeight: 0, fontSize: FS.xxs, fontWeight: 800, color: DEITY_ACCENT }}
     >
@@ -111,7 +113,7 @@ export default function PantheonActivationStrip() {
       data-testid="pantheon-activation-strip"
       style={{
         marginBottom: 12, padding: '10px 12px', background: CARD,
-        border: `1px solid ${BORDER}`, borderLeft: `3px solid ${DEITY_ACCENT}`,
+        border: `1px solid ${BORDER}`, borderLeft: `3px solid ${DEITY_ACCENT}`, borderRadius: 7,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
@@ -122,7 +124,7 @@ export default function PantheonActivationStrip() {
           data-testid="pantheon-activation-badge"
           style={{
             fontSize: FS.micro, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em',
-            color: live ? GREEN : MUTED, background: `${live ? GREEN : MUTED}14`, padding: '1px 8px',
+            color: live ? GREEN : MUTED, background: `${live ? GREEN : MUTED}14`, borderRadius: 8, padding: '1px 8px',
           }}
         >
           {live ? td('activation.live') : td('activation.dormant')}

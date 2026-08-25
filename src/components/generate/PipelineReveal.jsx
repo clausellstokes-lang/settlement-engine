@@ -1,8 +1,8 @@
 /**
- * PipelineReveal.jsx — "the wow is the simulation."
+ * PipelineReveal.jsx — P100 / X-1 "the wow is the simulation."
  *
- * Renders a tier-scaled overlay (≈3-10s by settlement tier) narrating the
- * pipeline steps the engine just ran. Each user-facing step name is sourced from
+ * Renders a 2-3 second overlay narrating the pipeline steps the engine
+ * just ran. Each user-facing step name is sourced from
  * copy.en.pipelineSteps (theatrical translations of the actual function
  * names — "casting NPCs…" instead of "generatePopulation").
  *
@@ -16,21 +16,16 @@
  * Lifecycle:
  *   1. Wizard sets `pipelineRevealActive: true` right after the engine
  *      returns. Reveal mounts.
- *      2. Reveal animates the steps at ~280ms each, then dwells on the finished
- *      list until a tier-scaled randomized window elapses (thorp 3-5s, hamlet
- *      4-7, village 5-8, town 6-9, city/metropolis 7-10), so larger settlements
- *      read as taking longer to forge.
+ *   2. Reveal animates through pipelineHistory at ~280ms per step.
+ *      Minimum total display = 2000ms even on tiny histories so the
+ *      reveal lands.
  *   3. On final step, calls `onComplete` (typically clears the flag
  *      and renders the dossier).
  *
  * A11y:
  *   - role="status" + aria-live="polite" so screen readers hear each
  *     active step.
- *   - There is NO skip / Esc fast-path — the reveal deliberately plays to
- *     completion (owner-signed, a52a88b1 "loading reveal plays through";
- *     the earlier Esc handler + Skip button were removed there). Reduced-
- *     motion drops the film backdrop (JourneyFilm), not the dwell window —
- *     shortening the dwell is an owner pacing decision, not a repair.
+ *   - Esc dismisses immediately (power-user fast-path).
  *
  * Flag: `pipelineReveal` (default on in prod).
  */
@@ -39,12 +34,7 @@ import { useEffect, useState, useMemo, useRef } from 'react';
 import { useStore } from '../../store/index.js';
 import { tx } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { GOLD, INK_DEEP, sans, serif_, FS, SP, swatch } from '../theme.js';
-import { flag } from '../../lib/flags.js';
-import { legsForTier } from '../loadingJourney/journeyManifest.js';
-import JourneyFilm from '../loadingJourney/JourneyFilm.jsx';
-import ProgressJourneyOverlay from '../loadingJourney/ProgressJourneyOverlay.jsx';
-import { pipelineStepFraction } from '../loadingJourney/journeyProgress.js';
+import { GOLD, INK_DEEP, sans, serif_, FS, SP, R, swatch } from '../theme.js';
 
 // Mono font for the step list. theme.js doesn't export one, so we
 // declare it locally — kept tight (single value, used once).
@@ -53,30 +43,9 @@ const mono = '"JetBrains Mono", Consolas, monospace';
 const STEP_INTERVAL_MS = 280;
 const MIN_TOTAL_MS = 2000;
 
-// Tier → [minSeconds, maxSeconds] display window. Larger settlements read as
-// "taking longer to forge": the overlay holds for a RANDOM time within the tier's
-// band (rolled once per reveal). The engine has already finished by the time this
-// mounts, so this purely controls how long the loading screen shows. city +
-// metropolis share the top band per spec; unknown/capital falls to a middle band.
-const TIER_DURATION_S = {
-  thorp:      [3, 5],
-  hamlet:     [4, 7],
-  village:    [5, 8],
-  town:       [6, 9],
-  city:       [7, 10],
-  metropolis: [7, 10],
-};
-const DEFAULT_DURATION_S = [5, 8];
-
 export default function PipelineReveal({ onComplete }) {
   const history = useStore(s => s.pipelineHistory || []);
   const settlementName = useStore(s => s.settlement?.name || 'this settlement');
-  const tier = useStore(s => s.settlement?.tier);
-  // C2L — the loading journey film as this theater's BACKDROP. Off by default
-  // (taste-gate); the stills floor + reveal card are unchanged when off.
-  const hasSettlement = useStore(s => !!s.settlement);
-  const showFilm = flag('loadingJourneyFilm');
-  const [filmClock, setFilmClock] = useState(null);
 
   // Stable label lookup. tx() returns the whole map; we read once.
   const labelMap = useMemo(() => tx('pipelineSteps') || {}, []);
@@ -92,16 +61,12 @@ export default function PipelineReveal({ onComplete }) {
   }, [history, labelMap]);
 
   const [activeIndex, setActiveIndex] = useState(0);
-  // Lazy-init the refs with null and stamp in the mount effect so we don't
-  // call Date.now()/Math.random() during render (purity rule).
+  // Lazy-init the ref with null and stamp in the mount effect so we don't
+  // call Date.now() during render (purity rule).
   const startedAtRef = useRef(null);
-  // The randomized tier display target, rolled ONCE per reveal (guarded so a
-  // re-run of the effect can't re-roll it mid-play).
-  const targetMsRef = useRef(null);
 
-  // Drive the animation. Fire WOW_REVEAL_SHOWN once on mount; animate the steps
-  // at the snappy fixed interval, then DWELL on the completed list until the
-  // tier's randomized minimum window elapses, then reveal the dossier.
+  // Drive the animation. Fire WOW_REVEAL_SHOWN once on mount; advance
+  // through steps on a fixed interval; cap minimum total at 2s.
   useEffect(() => {
     if (!steps.length) {
       // Empty pipeline history (shouldn't happen, but safe): dismiss
@@ -112,44 +77,28 @@ export default function PipelineReveal({ onComplete }) {
     Funnel.track(EVENTS.WOW_REVEAL_SHOWN, { steps: steps.length });
     // Stamp inside the effect (not in render — purity rule).
     startedAtRef.current = Date.now();
-    // Roll the tier-scaled display window once. Animating the steps across the
-    // whole window would make each step crawl at the 10s end; instead we play
-    // steps at STEP_INTERVAL_MS and dwell on the finished list to fill the window.
-    if (targetMsRef.current == null) {
-      const [minS, maxS] = TIER_DURATION_S[tier] || DEFAULT_DURATION_S;
-      const rolled = (minS + Math.random() * (maxS - minS)) * 1000;
-      targetMsRef.current = Math.max(MIN_TOTAL_MS, rolled);
-    }
-    // Share this reveal's timeline with the loading film so it scrubs the growth
-    // and lands on the ordered tier exactly as the dossier arrives (both keyed to
-    // startedAt + targetMs). Setting state here does not re-arm this effect (its
-    // deps exclude filmClock), so the reveal's own timing is untouched.
-    setFilmClock({ startedAt: startedAtRef.current, targetMs: targetMsRef.current });
+
+    const total = Math.max(MIN_TOTAL_MS, steps.length * STEP_INTERVAL_MS);
+    const perStepMs = total / steps.length;
 
     let i = 0;
-    let dwellTimer = null;
     const id = setInterval(() => {
       i += 1;
       if (i >= steps.length) {
         clearInterval(id);
-        // Mark every step complete (✓) and hold the finished list until the
-        // rolled tier window elapses, so the dossier reveals on schedule.
-        setActiveIndex(steps.length);
-        const elapsed = Date.now() - (startedAtRef.current || Date.now());
-        Funnel.track(EVENTS.WOW_REVEAL_COMPLETED, { steps: steps.length, elapsedMs: elapsed });
-        const remaining = Math.max(200, (targetMsRef.current || MIN_TOTAL_MS) - elapsed);
-        dwellTimer = setTimeout(() => onComplete?.(), remaining);
+        Funnel.track(EVENTS.WOW_REVEAL_COMPLETED, {
+          steps: steps.length,
+          elapsedMs: Date.now() - (startedAtRef.current || Date.now()),
+        });
+        // Small grace period (200ms) on the final step so the user sees the ✓
+        setTimeout(() => onComplete?.(), 200);
         return;
       }
       setActiveIndex(i);
-    }, STEP_INTERVAL_MS);
+    }, perStepMs);
 
-    return () => { clearInterval(id); if (dwellTimer) clearTimeout(dwellTimer); };
-  }, [steps.length, onComplete, tier]);
-
-  // No skip / Esc fast-path: the reveal plays to completion so the first dossier
-  // view is the finished settlement, not a half-played pipeline. It auto-dismisses
-  // when playback finishes (the interval effect above calls onComplete).
+    return () => clearInterval(id);
+  }, [steps.length, onComplete]);
 
   if (!steps.length) return null;
 
@@ -158,43 +107,19 @@ export default function PipelineReveal({ onComplete }) {
       role="status"
       aria-live="polite"
       style={{
-        // Sits below the sticky top nav (z-index 50) so the header stays visible
-        // through the reveal — the loading screen is the content area, not a full
-        // viewport takeover.
-        position: 'fixed', inset: 0, zIndex: 45,
+        position: 'fixed', inset: 0, zIndex: 99999,
         background: INK_DEEP,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontFamily: sans, color: swatch['#C8B098'],
         animation: 'sf-fadeIn 0.2s ease-out',
       }}
     >
-      {/* Backdrop (zIndex 0, behind the card) — the progress-scrubbed realm journey
-          video (owner order 2026-07-22), scrubbed by REAL pipeline-step progress
-          (played/total), holding its last frame through the dwell (this reveal owns
-          its own dismissal). When the asset is absent it falls back to the CURRENT
-          presentation: the desk→tier growth film when the taste-gate is on, else the
-          plain ink backdrop. Both keep the stills floor. */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-        <ProgressJourneyOverlay
-          progress={pipelineStepFraction(activeIndex, steps.length)}
-          zIndex={0}
-          holdAtEnd
-          fallback={showFilm && filmClock ? (
-            <JourneyFilm
-              legsToPlay={legsForTier(tier)}
-              arrived={hasSettlement}
-              scriptWindowMs={filmClock.targetMs}
-              startedAtMs={filmClock.startedAt}
-            />
-          ) : null}
-        />
-      </div>
       <div style={{
-        position: 'relative', zIndex: 1,
         maxWidth: 460, width: '90%',
         padding: `${SP.xxl}px ${SP.xl}px`,
         background: 'linear-gradient(180deg, rgba(43,33,16,0.85), rgba(27,20,8,0.95))',
         border: `1px solid ${GOLD}55`,
+        borderRadius: R.lg,
         textAlign: 'center',
       }}>
         <div style={{
@@ -224,7 +149,7 @@ export default function PipelineReveal({ onComplete }) {
         <div style={{
           marginTop: SP.lg, height: 3,
           background: 'rgba(201,162,76,0.15)',
-          overflow: 'hidden',
+          borderRadius: 2, overflow: 'hidden',
         }}>
           <div style={{
             height: '100%',

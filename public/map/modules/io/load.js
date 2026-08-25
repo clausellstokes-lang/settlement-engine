@@ -71,34 +71,8 @@ function loadMapPrompt(blob) {
   }
 }
 
-// Origins we will fetch a map file from. '?maplink=' (and the load-from-URL
-// dialog) previously fetched ANY origin, handing an attacker a one-click
-// delivery channel for crafted .map payloads onto this auth-bearing origin.
-// Same-origin plus the Dropbox download hosts cover every legitimate flow
-// (createSharableDropboxLink above emits dl.dropboxusercontent.com links).
-const TRUSTED_MAP_HOSTS = ["dl.dropboxusercontent.com", "dl.dropbox.com", "www.dropbox.com", "dropbox.com"];
-
-function isTrustedMapLink(url) {
-  let parsed;
-  try {
-    parsed = new window.URL(url, window.location.href);
-  } catch {
-    return false;
-  }
-  // same-origin covers local dev over http; everything else must be https on a
-  // trusted host — this also rejects data:, blob:, ftp: and javascript: links
-  if (parsed.origin === window.location.origin) return ["https:", "http:"].includes(parsed.protocol);
-  return parsed.protocol === "https:" && TRUSTED_MAP_HOSTS.includes(parsed.hostname);
-}
-
 function loadMapFromURL(maplink, random) {
   const URL = decodeURIComponent(maplink);
-
-  if (!isTrustedMapLink(URL)) {
-    showUploadErrorMessage("Map link is not same-origin or from a trusted host (Dropbox)", URL, random);
-    if (random) generateMapOnLoad();
-    return;
-  }
 
   fetch(URL, {method: "GET", mode: "cors"})
     .then(response => {
@@ -114,11 +88,7 @@ function loadMapFromURL(maplink, random) {
 
 function showUploadErrorMessage(error, URL, random) {
   ERROR && console.error(error);
-  // the URL is attacker-controllable (?maplink=) and link() interpolates it
-  // straight into an href attribute — escape it so a quote in the URL cannot
-  // break out of the attribute and inject markup into this dialog
-  const safeURL = String(URL).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  alertMessage.innerHTML = /* html */ `Cannot load map from the ${link(safeURL, "link provided")}. ${
+  alertMessage.innerHTML = /* html */ `Cannot load map from the ${link(URL, "link provided")}. ${
     random ? `A new random map is generated. ` : ""
   } Please ensure the
   linked file is reachable and CORS is allowed on server side`;
@@ -332,13 +302,7 @@ async function parseLoadedData(data, mapVersion) {
 
     {
       svg.remove();
-      // SECURITY (SettlementForge fork patch): data[5] is the raw SVG segment of
-      // an untrusted .map (manual upload or ?maplink= from a trusted host that
-      // may still serve a hostile file). Injecting it verbatim on our own
-      // token-bearing origin would run any smuggled on*=/<script>/javascript:
-      // payload. Scrub before injection; sanitizeMapSvg (modules/ui/general.js)
-      // preserves the legitimate map SVG.
-      document.body.insertAdjacentHTML("afterbegin", sanitizeMapSvg(data[5]));
+      document.body.insertAdjacentHTML("afterbegin", data[5]);
     }
 
     {

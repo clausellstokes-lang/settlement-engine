@@ -76,11 +76,7 @@ export const PAGE_BACKGROUNDS = Object.freeze({
   realm:              'world-map',
   map:                'world-map',
   compendium:         'compendium',
-  // THE ABOUT FAMILY (docs/DESIGN_ABOUT_PAGES.md): the split's two pages share
-  // the About painting; `howto` keeps its key for the one pre-redirect frame.
-  'about-what-this-is': 'about',
-  'about-guide':      'about',
-  howto:              'about',      // retired pre-split About page (redirects)
+  howto:              'about',      // the About page renders the 'howto' view
   gallery:            'gallery',
   pricing:            'pricing',
   account:            'account',
@@ -117,9 +113,7 @@ export const CLEAN_VIEWS = Object.freeze(new Set([
   'pricing',
   'account',
   'admin',
-  'about-what-this-is',  // About — What this Is
-  'about-guide',         // About — Practical Guide
-  'howto',        // retired pre-split About page (one pre-redirect frame)
+  'howto',        // About
   'terms',        // legal — flat reading surfaces
   'privacy',
   'refunds',
@@ -141,8 +135,6 @@ export const SCRIM_PROFILES = Object.freeze({
   pricing:     'calm',   // pricing.jpg     — light calm region
   account:     'calm',   // account.jpg
   admin:       'calm',   // shares account.jpg
-  'about-what-this-is': 'calm',   // about.jpg — light calm region
-  'about-guide':        'calm',
   howto:       'calm',   // about.jpg       — light calm region
   terms:       'calm',   // legal pages share the About painting family
   privacy:     'calm',

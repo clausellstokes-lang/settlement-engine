@@ -22,8 +22,6 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 
-const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
-
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
 /** Latest-wins extraction of the net-current `_gallery_dm_full_json` body across
@@ -32,9 +30,7 @@ const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 function netCurrentDmFullSql() {
   if (!existsSync(MIGRATIONS_DIR)) return null;
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  // ⚠ ANCHORED AT LINE START (`^` + m) — the unanchored form also matches header
-  // prose quoting the statement (see tests/security/moneyRpcNetCurrentGuards.test.js).
-  const re = /^create\s+or\s+replace\s+function\s+public\._gallery_dm_full_json\b[\s\S]*?\$\$;/igm;
+  const re = /create\s+or\s+replace\s+function\s+public\._gallery_dm_full_json\b[\s\S]*?\$\$;/ig;
   let last = null;
   for (const f of files) {
     const src = readFileSync(join(MIGRATIONS_DIR, f), 'utf-8');
@@ -103,7 +99,7 @@ describe.runIf(!!DM_FULL_SQL)('_gallery_dm_full_json — DM-full latent-pantheon
       [JSON.stringify(SETTLEMENT)],
     )).rows[0];
     serverOut = row.j;
-  }, PGLITE_BOOT_TIMEOUT_MS);
+  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
 
   it('static: the net-current dm_full body strips latentPantheon (129 drift guard)', () => {
     // The config re-add must remove BOTH _seed AND latentPantheon.

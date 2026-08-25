@@ -24,7 +24,6 @@ import { PDF_VARIANTS } from '../../pdf/variants.js';
 import { t } from '../../copy/index.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
-import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 
 const VARIANT_ICON = {
   draft_brief:     Edit3,
@@ -67,10 +66,6 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
   const hasFoundry = typeof onExportFoundry === 'function';
   const [format, setFormat] = useState('pdf');
   const effectiveFormat = hasFoundry ? format : 'pdf';
-  // Back the aria-modal="true" promise with real focus management (trap Tab,
-  // move focus in on open, Escape dismisses, restore focus on close). Called
-  // before the `!open` early return so hook order stays stable.
-  const dialogRef = useDialogFocusTrap(open, onClose);
 
   // pdf-export-2: the sheet is ALWAYS-MOUNTED (SettlementDetail keeps it in the
   // tree). A canon-only variant picked in canon then uncanonized to draft would
@@ -105,7 +100,6 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
     // (vs button) is the correct a11y semantics, so this rule can't be satisfied.
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
-      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby="export-sheet-title"
@@ -139,7 +133,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
               {[{ id: 'pdf', label: 'PDF Dossier' }, { id: 'foundry', label: 'Foundry VTT Module' }].map(opt => (
                 <Button
                   key={opt.id}
-                  variant={format === opt.id ? 'secondary' : 'ghost'}
+                  variant={format === opt.id ? 'gold' : 'secondary'}
                   size="sm"
                   onClick={() => setFormat(opt.id)}
                   aria-pressed={format === opt.id}
@@ -151,7 +145,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
             </div>
             {format === 'foundry' && (
               <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
-                A module zip: the dossier as journal pages. Extract into Foundry&apos;s Data/modules and enable. The journals import on first load.
+                A module zip: the dossier as journal pages. Extract into Foundry&apos;s Data/modules and enable — the journals import on first load.
               </div>
             )}
           </div>
@@ -164,7 +158,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
               {[{ ai: false, label: 'Raw Simulation' }, { ai: true, label: 'AI-Enhanced' }].map(opt => (
                 <Button
                   key={opt.label}
-                  variant={useAi === opt.ai ? 'secondary' : 'ghost'}
+                  variant={useAi === opt.ai ? 'gold' : 'secondary'}
                   size="sm"
                   onClick={() => setUseAi(opt.ai)}
                   aria-pressed={useAi === opt.ai}
@@ -176,7 +170,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
             </div>
             <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
               {useAi
-                ? 'Exports the narrated dossier. Canonical facts are preserved.'
+                ? 'Exports the AI-narrated dossier — canonical facts are preserved.'
                 : 'Exports the raw simulation. Your AI narrative stays out of this file.'}
             </div>
           </div>
@@ -215,18 +209,16 @@ function VariantCard({ v, picked, onPick }) {
       style={{
         display: 'flex', alignItems: 'flex-start', gap: 10,
         padding: 10,
-        // A dispatch parcel: quiet by default, selection carried by an ink border
-        // + a faint ink wash + the trailing tally mark — never gold. Gold is spent
-        // once, on the dispatch seal (the footer Export button).
-        background: picked ? 'rgba(28,20,9,0.05)' : '#fff',
-        border: `1px solid ${picked ? swatch.inkMag2 : '#d2bd96'}`,
+        background: picked ? 'rgba(160,118,42,0.10)' : '#fff',
+        border: `1px solid ${picked ? '#a0762a' : '#d2bd96'}`,
+        borderRadius: 6,
         cursor: v.disabled ? 'not-allowed' : 'pointer',
         opacity: v.disabled ? 0.5 : 1,
         textAlign: 'left',
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}
     >
-      <Icon size={18} aria-hidden="true" style={{ marginTop: 2, flexShrink: 0, color: swatch.inkMag2 }} />
+      <Icon size={18} aria-hidden="true" style={{ marginTop: 2, flexShrink: 0, color: swatch['#A0762A'] }} />
       <div style={{ flex: 1 }}>
         <div style={{ fontSize: FS.md, fontWeight: 700, color: swatch.inkMag }}>
           {v.label}
@@ -240,11 +232,6 @@ function VariantCard({ v, picked, onPick }) {
           </div>
         )}
       </div>
-      {picked && (
-        <span aria-hidden="true" style={{ flexShrink: 0, alignSelf: 'center', fontSize: FS.md, fontWeight: 800, color: swatch.inkMag2 }}>
-          ✓
-        </span>
-      )}
     </button>
   );
 }
@@ -265,7 +252,7 @@ const sheetStyle = {
   width: 'min(480px, calc(100vw - 32px))',
   maxHeight: 'calc(100vh - 32px)', overflow: 'auto',
   background: '#fffbf5',
-  border: '1px solid #d2bd96',
+  border: '1px solid #d2bd96', borderRadius: 8,
   boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
 };
 const headerStyle = {

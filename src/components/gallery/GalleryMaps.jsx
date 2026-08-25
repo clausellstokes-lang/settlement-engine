@@ -6,23 +6,15 @@
  * (backdrop thumbnail for image maps), and imports a blank-canvas map into a NEW
  * premium campaign via the importGalleryMap store action. Viewing is free;
  * importing is premium (it creates a campaign).
- *
- * Filtering runs server-side (list_gallery_maps p_filters, migration 090):
- * the GalleryMapsSidebar facets (backdrop / importable / tags) feed straight
- * into the fetch, mirroring the settlements tab's sidebar-plus-grid layout.
  */
 import { useState, useEffect, useCallback } from 'react';
 import { useStore } from '../../store';
-import { t } from '../../copy/index.js';
 import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
 import Button from '../primitives/Button.jsx';
-import EmptyState from '../primitives/EmptyState.jsx';
 import {
-  GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, sans, serif_, SP, FS, swatch } from '../theme.js';
-import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
-import { activeMapFilterCount, deriveTagVocabulary, emptyMapFilters, MAP_SORT_OPTIONS } from './galleryMapsFilters.js';
-import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
-import GalleryTopbar from './GalleryTopbar.jsx';
+  GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH,
+  sans, serif_, SP, R, FS, swatch,
+} from '../theme.js';
 
 export default function GalleryMaps({ onNavigate }) {
   const auth = useStore(s => s.auth);
@@ -40,29 +32,6 @@ export default function GalleryMaps({ onNavigate }) {
   const [viewingSlug, setViewingSlug] = useState(null);
   const [detail, setDetail] = useState(null);
   const [detailLoading, setDetailLoading] = useState(false);
-  // Sidebar facet state (server-side narrowing). kind stays out of the UI:
-  // this tab is pinned to blank maps at the fetch (campaign shares live on
-  // the Campaigns tab), so the sidebar never offers a kind chip.
-  const [filters, setFilters] = useState(emptyMapFilters);
-  // Sort + search run server-side (list_gallery_maps p_sort_key / p_search_query,
-  // migration 090), mirroring the settlements tab. `search` mirrors the input for
-  // immediate display; `debouncedSearch` is what the fetch keys on so typing a
-  // word fires one request, not one per keystroke (an empty search resets
-  // instantly — the useGalleryPageState idiom).
-  const [sort, setSort] = useState('newest');
-  const [search, setSearch] = useState('');
-  const [debouncedSearch, setDebouncedSearch] = useState('');
-  // The tag vocabulary comes from the UNFILTERED batch and holds sticky:
-  // deriving it from a filtered batch would collapse the chips to the very
-  // tags already selected.
-  const [tagVocabulary, setTagVocabulary] = useState([]);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- debounce: empty search resets instantly
-    if (search === '') { setDebouncedSearch(''); return undefined; }
-    const id = setTimeout(() => setDebouncedSearch(search), 250);
-    return () => clearTimeout(id);
-  }, [search]);
 
   useEffect(() => {
     if (!viewingSlug) { setDetail(null); return; }
@@ -78,38 +47,12 @@ export default function GalleryMaps({ onNavigate }) {
   useEffect(() => {
     let ignore = false;
     setLoading(true); setError(null);
-    // GALLERY-2 phase 2: campaign shares now live on their own Campaigns tab
-    // (GalleryCampaigns), so this tab narrows to blank maps. The server RPC
-    // honors every facet + sort + search (normalizeMapFilters → p_filters,
-    // p_sort_key, p_search_query); kind is pinned here over whatever the sidebar
-    // narrows. The tag vocabulary refreshes ONLY from a truly unfiltered,
-    // unsearched batch so a narrowed result never collapses the chip set.
-    const unfiltered = activeMapFilterCount(filters) === 0 && debouncedSearch === '';
-    fetchGalleryMaps({ page: 0, pageSize: 36, sort, search: debouncedSearch, filters: { ...filters, kind: ['map'] } })
-      .then((r) => {
-        if (ignore) return;
-        const list = Array.isArray(r?.items) ? r.items : [];
-        setItems(list);
-        if (unfiltered) setTagVocabulary(deriveTagVocabulary(list));
-      })
+    fetchGalleryMaps({ page: 0, pageSize: 36 })
+      .then((r) => { if (!ignore) setItems(Array.isArray(r?.items) ? r.items : []); })
       .catch((e) => { if (!ignore) setError(e?.message || 'Could not load shared maps'); })
       .finally(() => { if (!ignore) setLoading(false); });
     return () => { ignore = true; };
-  }, [filters, sort, debouncedSearch]);
-
-  const toggleArrayFilter = useCallback((key, value) => {
-    setFilters((prev) => {
-      const arr = Array.isArray(prev[key]) ? prev[key] : [];
-      const next = arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value];
-      return { ...prev, [key]: next };
-    });
   }, []);
-
-  const toggleBoolFilter = useCallback((key, value) => {
-    setFilters((prev) => ({ ...prev, [key]: !!value }));
-  }, []);
-
-  const clearFilters = useCallback(() => { setFilters(emptyMapFilters()); }, []);
 
   const handleImport = useCallback(async (slug, kind) => {
     if (!isPremium) { setNotice({ kind: 'err', text: 'Importing maps is a premium feature.' }); return; }
@@ -128,14 +71,11 @@ export default function GalleryMaps({ onNavigate }) {
     }
   }, [isPremium, importGalleryMap, importGalleryMapWithCampaign, setActiveCampaign, onNavigate]);
 
-  const isFiltered = activeMapFilterCount(filters) > 0 || !!debouncedSearch.trim();
-
   return (
     <div style={{ fontFamily: sans }}>
-      <style>{GALLERY_RESPONSIVE_CSS}</style>
       {notice && (
         <div style={{
-          margin: `0 0 ${SP.md}px`, padding: `${SP.sm}px ${SP.md}px`, fontSize: FS.sm,
+          margin: `0 0 ${SP.md}px`, padding: `${SP.sm}px ${SP.md}px`, borderRadius: R.md, fontSize: FS.sm,
           background: notice.kind === 'ok' ? (swatch.successBg || GOLD_BG) : (swatch.dangerBg || '#fbeaea'),
           color: notice.kind === 'ok' ? INK : (swatch.danger || '#9b1c1c'),
           border: `1px solid ${BORDER}`,
@@ -153,7 +93,7 @@ export default function GalleryMaps({ onNavigate }) {
             {detailLoading && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading preview…</p>}
             {!detailLoading && !d.slug && <p style={{ color: MUTED, fontSize: FS.sm }}>This map is no longer available.</p>}
             {!detailLoading && d.slug && (
-              <div style={{ border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden' }}>
+              <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden' }}>
                 <div style={{ background: CARD_ALT, maxHeight: 420, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   {img ? (
                     <img src={img} alt={d.name || 'Map'} style={{ maxWidth: '100%', maxHeight: 420, display: 'block' }} />
@@ -169,7 +109,7 @@ export default function GalleryMaps({ onNavigate }) {
                       <div style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 700, color: INK, margin: `${SP.xs}px 0` }}>Settlements ({memberList.length})</div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
                         {memberList.map((mm, i) => (
-                          <span key={mm.old_id || i} style={{ fontSize: FS.xs, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px` }}>
+                          <span key={mm.old_id || i} style={{ fontSize: FS.xs, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: `2px ${SP.sm}px` }}>
                             {mm.name || 'Settlement'}{mm.tier ? ` · ${mm.tier}` : ''}
                           </span>
                         ))}
@@ -188,63 +128,26 @@ export default function GalleryMaps({ onNavigate }) {
         );
       })()}
 
-      {!viewingSlug && (
-      <div className="gallery-main-layout" style={{ display: 'grid', gap: SP.lg, alignItems: 'start' }}>
-      <GalleryMapsSidebar
-        filters={filters}
-        tagVocabulary={tagVocabulary}
-        onToggleArray={toggleArrayFilter}
-        onToggleBool={toggleBoolFilter}
-        onClear={clearFilters}
-      />
-      <main style={{ minWidth: 0 }}>
-      <GalleryTopbar
-        search={search}
-        setSearch={setSearch}
-        sort={sort}
-        setSort={setSort}
-        sortOptions={MAP_SORT_OPTIONS}
-        noun="map"
-        countQualifier="shared"
-        total={items.length}
-        loading={loading}
-      />
-      {loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Unfurling the shared maps…</p>}
-      {error && <p style={{ color: swatch.danger || '#9b1c1c', fontSize: FS.sm }}>Couldn’t load maps: {error}. (Needs migration 045 deployed.)</p>}
-      {!loading && !error && items.length === 0 && (
-        isFiltered ? (
-          <EmptyState
-            align="center"
-            heading="No maps match those filters."
-            body="Loosen a facet, or clear them all to see every shared map."
-            action={{ label: t('gallery.clearFilters'), onClick: () => { clearFilters(); setSearch(''); }, variant: 'secondary' }}
-          />
-        ) : (
-          <EmptyState
-            align="center"
-            heading="No shared maps yet."
-            body="Premium DMs can publish a world map from the toolbar, and it lands here for anyone to browse and import."
-          />
-        )
+      {!viewingSlug && loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading shared maps…</p>}
+      {!viewingSlug && error && <p style={{ color: swatch.danger || '#9b1c1c', fontSize: FS.sm }}>Couldn’t load maps: {error}. (Needs migration 045 deployed.)</p>}
+      {!viewingSlug && !loading && !error && items.length === 0 && (
+        <p style={{ color: MUTED, fontSize: FS.sm }}>No shared maps yet. Premium DMs can share a map from the world-map toolbar.</p>
       )}
 
+      {!viewingSlug && (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: SP.md }}>
         {items.map((m) => (
-          <div key={m.slug} style={{ border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          <div key={m.slug} style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <div style={{ height: 130, background: CARD_ALT, position: 'relative' }}>
-              {/* Show a picture whenever one exists — an auto-generated thumb
-                  (thumb_url) OR the owner cover (image_url, the terrain snapshot
-                  the share editor auto-seeds). The prior gate required
-                  backdrop_kind==='image', so every FMG map fell to the placeholder. */}
-              {(m.thumb_url || m.image_url) ? (
-                <img src={m.thumb_url || m.image_url} alt={m.name || 'Shared map'} loading="lazy"
+              {m.backdrop_kind === 'image' && m.thumb_url ? (
+                <img src={m.thumb_url} alt={m.name || 'Shared map'} loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               ) : (
                 <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: MUTED, fontSize: FS.xs, background: PARCH }}>
                   Generated terrain
                 </div>
               )}
-              <span style={{ position: 'absolute', top: 6, right: 6, fontSize: FS.pico, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: SECOND, background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 5px' }}>
+              <span style={{ position: 'absolute', top: 6, right: 6, fontSize: FS.pico, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: SECOND, background: CARD_HDR, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: '1px 5px' }}>
                 {m.kind === 'map_with_campaign' ? 'Map + Campaign' : 'Blank map'}
               </span>
             </div>
@@ -254,7 +157,7 @@ export default function GalleryMaps({ onNavigate }) {
               {Array.isArray(m.tags) && m.tags.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 2 }}>
                   {m.tags.slice(0, 4).map((t) => (
-                    <span key={t} style={{ fontSize: FS.pico, color: MUTED, background: PARCH, padding: '1px 5px' }}>{t}</span>
+                    <span key={t} style={{ fontSize: FS.pico, color: MUTED, background: PARCH, borderRadius: R.sm, padding: '1px 5px' }}>{t}</span>
                   ))}
                 </div>
               )}
@@ -280,8 +183,6 @@ export default function GalleryMaps({ onNavigate }) {
             </div>
           </div>
         ))}
-      </div>
-      </main>
       </div>
       )}
     </div>

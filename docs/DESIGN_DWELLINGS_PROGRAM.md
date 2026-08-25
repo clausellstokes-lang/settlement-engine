@@ -1,16 +1,3 @@
-> ## ⛔ SUPERSEDED FOR PLANNING — READ `docs/DW0-CHARTER-COMPILED.md` FIRST
->
-> **As of 2026-08-24 the operative DW planning document is `docs/DW0-CHARTER-COMPILED.md`**
-> (1,102 lines / 129,030 B, ledger branch), the DW-0 compile: the owner's signed bands become
-> rulings and every wave carries an observable exit criterion. It survived a six-lens adversarial
-> skeptic panel (14 blockers closed) and four compile passes.
->
-> **This file remains the frozen design narrative and is still citable**, but where the two
-> disagree, the compiled charter wins. Do not plan a car from this file alone. ⚠ Three of this
-> document's inherited claims were measured FALSE at the slot (ODQ §543–§545): UC-5's asserted
-> absence, CH-1's promised `interiorKind` override, and the 60-fixture "union". **A frozen
-> dossier is ground truth for RESEARCH and never for ENGINE STATE.**
-
 # DESIGN — THE DWELLINGS PROGRAM (DW): interior floor plans as a projection of the world
 
 **STATUS: ARCHITECTED, NOT BUILT.** Owner-ordered at ODQ §435 (2026-08-23); origin

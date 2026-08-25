@@ -24,7 +24,7 @@ export default function PlotHooksTab({ settlement }) {
 
   if (!hooks.length) {
     return (
-      <Empty message="No structural plot hooks surfaced yet. They are drawn from NPCs, factions, tensions, economy, safety, history, and relationships." />
+      <Empty message="No structural plot hooks surfaced yet — they're drawn from NPCs, factions, tensions, economy, safety, history, and relationships." />
     );
   }
 
@@ -42,6 +42,7 @@ export default function PlotHooksTab({ settlement }) {
                   background: swatch.white,
                   border: `1px solid ${BORDER}`,
                   borderLeft: `3px solid ${cat.color}`,
+                  borderRadius: 4,
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>

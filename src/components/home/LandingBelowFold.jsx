@@ -1,8 +1,8 @@
 /**
  * home/LandingBelowFold.jsx — everything below the hero fold of the scrollable
- * Welcome page: the salt-road journey 01·Forge → 02·Visual → 03·Voice →
- * 04·Realm → 05·Commons → 06·Set out + footer. Lazy-loaded as ONE
- * chunk by HomeLanding.jsx so the hero paints first (LCP).
+ * Welcome page: the salt-road journey 01·Forge → 02·Brief → 03·Voice →
+ * 04·Realm → 05·Commons → 06·Set out + footer. Lazy-loaded as ONE chunk by
+ * HomeLanding.jsx so the hero paints first (LCP).
  *
  * The §02/§03/§04 artifacts render FROZEN REAL ENGINE OUTPUT (owner amendment
  * W-L2/1) and live in ./LandingArtifacts.jsx with their fixture; §05 renders up
@@ -14,30 +14,19 @@
  * and decorative chips are plain spans (§3.8); <section aria-labelledby> + h2.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Lock, ChevronDown, ArrowRight, Sparkles, Map as MapIcon } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
-import WelcomeJourneyBackdrop from './WelcomeJourneyBackdrop.jsx';
 import { fontFamily, radius } from '../../design/tokens.js';
 import {
-  INK, SECOND, BODY, MUTED, GOLD, GOLD_TXT, GOLD_BG,
+  INK, SECOND, BODY, MUTED, GOLD, GOLD_DEEP, GOLD_TXT, GOLD_BG,
   PARCH, PARCH_100, BORDER, CARD,
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
 import { tl } from '../../copy/landing.js';
-// THE MIGRATED LEGAL/COMMERCIAL ROW (LD-3). App.jsx suppresses the global
-// footer on this route, so the band carries the one shared row instead — an
-// EAGER module imported DOWNWARD from the lazy landing chunk (importing it the
-// other way would re-parent this closure into the entry chunk).
-import LegalRibbonRow from '../footer/LegalRibbonRow.jsx';
-// Config-sourced tier facts (brief §4 / ruling #6): the closer tier strip
-// interpolates these instead of hand-typing the numbers, so a catalog change
-// (anon size ceiling, free save cap) can never drift from what the strip shows.
-// tierFacts imports only config/pricing.js and rides this lazy below-fold chunk,
-// so it adds nothing to the first-paint closure.
-import { ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
 import { fetchPublicGallery } from '../../lib/gallery.js';
 import {
-  MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, MapPlateCard, SCENE, cardStyle,
+  MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, SCENE, cardStyle,
 } from './LandingArtifacts.jsx';
 
 const MONO = fontFamily.mono;
@@ -47,10 +36,25 @@ const CONTENT_MAX = 1080; // spec §4 content column
 // text on the painted (01/04) sections so prose never sits on the painting (§5).
 const PANEL_BG = 'rgba(255,251,245,0.9)';
 
+// Respect the user's motion preference for the in-page smooth scroll (the
+// waypoint / "read on" anchors). a11y.css forces scroll-behavior:auto under
+// reduced-motion for CSS scrolls; scrollIntoView needs the explicit check.
+function prefersReducedMotion() {
+  return typeof window !== 'undefined'
+    && typeof window.matchMedia === 'function'
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+const scrollToId = (id) => (e) => {
+  e.preventDefault();
+  const el = typeof document !== 'undefined' && document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+};
+
 // ── Shared style fragments ───────────────────────────────────────────────────
 const h2Style = (isMobile) => ({ margin: `0 0 ${SP.md}px`, fontFamily: serif_, fontSize: isMobile ? FS['26'] : FS['34'], fontWeight: 600, lineHeight: 1.15, color: INK });
 const proseStyle = { margin: `0 0 ${SP.md}px`, fontFamily: serif_, fontSize: FS.xl, lineHeight: 1.65, color: BODY };
 const panelStyle = { background: PANEL_BG, border: `1px solid ${BORDER}`, borderRadius: R.lg, boxShadow: ELEV[1], padding: '28px 30px' };
+const eyebrowGold = { fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: GOLD_DEEP };
 const capsLink = {
   fontFamily: sans, fontSize: FS.sm, fontWeight: 800, letterSpacing: '0.04em',
   textTransform: 'uppercase', color: GOLD_TXT,
@@ -101,36 +105,71 @@ function Waypoint({ pill, goldPill, dark = false }) {
 // Section wrappers ------------------------------------------------------------
 const sectionPad = (isMobile) => ({ padding: isMobile ? `0 ${SP.md}px ${SP.xxl * 2}px` : `0 ${SP.xxl}px 84px` });
 
-// ── 01 · Forge — the Instant Draft artifact (InstantDraftCard) was removed per
-// owner order (2026-07-22): the Cnocby sample-draft card (MiniDossierCard) now
-// fills that slot in §01. The widget was landing-only (never used by the Create
-// page's own size picker), so its code is deleted as dead landing chrome. Its
-// forge.draft* / forge.sizes / forge.mode* / forge.ceiling copy keys are now
-// unreferenced on the landing (left in place as inert strings, not retyped).
+// ── 01 · Forge — instant-draft artifact ──────────────────────────────────────
+function InstantDraftCard() {
+  const sizes = tl('forge.sizes') || [];
+  return (
+    <div style={{ ...cardStyle, padding: '22px 24px' }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: SP.sm, marginBottom: SP.md }}>
+        <span style={{ ...eyebrowGold, color: GOLD_DEEP }}>{tl('forge.draftTitle')}</span>
+        <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED }}>{tl('forge.draftHint')}</span>
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm, marginBottom: SP.lg }}>
+        {sizes.map((s) => (
+          <span key={s.name} style={{
+            display: 'inline-flex', alignItems: 'center', gap: 7,
+            border: `1px solid ${s.selected ? GOLD : BORDER}`,
+            background: s.selected ? GOLD_BG : CARD,
+            borderRadius: radius.button, padding: '8px 15px',
+            opacity: s.locked ? 0.55 : 1,
+          }}>
+            <span style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 800, color: INK }}>{s.name}</span>
+            <span style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 700, color: MUTED }}>{s.range}</span>
+            {s.locked && <Lock size={11} color={MUTED} aria-hidden="true" />}
+          </span>
+        ))}
+      </div>
+      <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: SP.sm, flexWrap: 'wrap' }}>
+        <span style={{
+          fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase',
+          color: INK, background: GOLD_BG, border: `1px solid ${GOLD}`, borderRadius: R.md, padding: '6px 14px',
+        }}>{tl('forge.modeBasic')}</span>
+        <span style={{
+          fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase',
+          color: MUTED, border: `1px solid ${BORDER}`, borderRadius: R.md, padding: '6px 14px',
+        }}>{tl('forge.modeAdvanced')}</span>
+        <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED, marginLeft: 6 }}>{tl('forge.modeDials')}</span>
+      </div>
+      <div style={{
+        borderTop: `1px solid ${BORDER}`, marginTop: SP.md, paddingTop: SP.md,
+        fontFamily: sans, fontSize: FS.sm, fontWeight: 700, lineHeight: 1.5, color: BODY,
+      }}>
+        {tl('forge.ceiling')}
+      </div>
+    </div>
+  );
+}
 
-// ── 06 · Commons — SIX slots, fed dynamically from the community gallery (W1) ─
+// ── 05 · Commons — up to four REAL published gallery towns (W-L2/3) ─────────
 // Fetched once on below-fold mount (anon-permitted public read), ranked by
 // top_voted — the strongest ranking signal src/lib/gallery.js actually tracks
-// (it has net_votes + view counts; there is NO fork counter). Real published
-// towns fill the slots first; any slot without a real town falls back to a
-// decorative card LABELED ' (placeholder)'. When six real towns exist, all six
-// slots are real and no placeholder shows. A failed or empty fetch renders six
-// placeholders (the empty-gallery dev state). Slot dimensions are identical in
-// every state (150px thumb + one footer row), so the swap-in causes zero layout shift.
-const COMMONS_SLOTS = 6; // owner order 2026-07-21, ledger 4f71743a
+// (it has net_votes + view counts; there is NO fork counter). Decorative cards
+// fill the remaining slots; a failed or empty fetch renders all four decorative.
+// Slot dimensions are identical in every state (150px thumb + one footer row),
+// so the swap-in causes zero layout shift.
 function GalleryCards({ onNavigate }) {
   const decoratives = tl('commons.cards') || [];
   const [tiles, setTiles] = useState(null); // null = not landed yet → decorative
   useEffect(() => {
     let live = true;
-    fetchPublicGallery({ pageSize: COMMONS_SLOTS, sort: 'top_voted' })
-      .then((r) => { if (live) setTiles((r?.items || []).slice(0, COMMONS_SLOTS)); })
+    fetchPublicGallery({ pageSize: 4, sort: 'top_voted' })
+      .then((r) => { if (live) setTiles((r?.items || []).slice(0, 4)); })
       .catch(() => { if (live) setTiles([]); });
     return () => { live = false; };
   }, []);
 
   const real = tiles || [];
-  const slots = decoratives.slice(0, COMMONS_SLOTS).map((deco, i) => (real[i] ? { real: real[i], deco } : { deco }));
+  const slots = decoratives.slice(0, 4).map((deco, i) => (real[i] ? { real: real[i], deco } : { deco }));
 
   return (
     <div style={{
@@ -155,7 +194,7 @@ function GalleryCards({ onNavigate }) {
               position: 'absolute', left: 0, right: 0, bottom: 0, padding: '26px 14px 10px',
               backgroundImage: 'linear-gradient(rgba(20,14,5,0), rgba(20,14,5,0.72))',
               fontFamily: serif_, fontSize: FS['18'], fontWeight: 600, color: PARCH,
-            }}>{tile ? tile.name : `${deco.name} (placeholder)`}</span>
+            }}>{tile ? tile.name : deco.name}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, padding: tile ? '7px 14px' : '11px 14px', minHeight: 52 }}>
             {tile ? (
@@ -218,60 +257,37 @@ function FounderSeatLine() {
   );
 }
 
-// Interpolate the config-sourced tier facts into a closer-strip body. The copy
-// carries {anonSize}/{freeSaves} tokens (copy/landing.js); the numbers come from
-// config/tierFacts.js so the strip can never restate a ceiling the catalog didn't
-// (brief §4 / ruling #6 — config-sourced facts, zero hand-typed numbers).
-const TIER_FACT_VARS = { anonSize: ANON_MAX_SIZE_LABEL, freeSaves: FREE_SAVE_LIMIT };
-function fillTierBody(body) {
-  return String(body).replace(/\{(\w+)\}/g, (m, name) =>
-    Object.prototype.hasOwnProperty.call(TIER_FACT_VARS, name) ? String(TIER_FACT_VARS[name]) : m);
-}
-
 function TierStrip() {
   const tiers = tl('closer.tiers') || [];
   return (
     <div style={{
-      // Owner order (2026-07-22): a TWO-BY-TWO grid (Wanderer + Cartographer on
-      // row 1, Surveyor + Founder on row 2, reading order preserved) — not the
-      // 3+1 that orphaned Founder on its own row. maxWidth 680 + a 300px column
-      // min holds exactly two columns on desktop (2*300+gap fits the cap, three
-      // never do) while auto-fit still collapses to a single column on mobile —
-      // the existing responsive behaviour, preserved.
-      maxWidth: 680, margin: `${SP.xxl * 2}px auto 0`, display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: SP.md,
+      maxWidth: 1000, margin: `${SP.xxl * 2}px auto 0`, display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: SP.md,
     }}>
       {tiers.map((tier) => (
         <div key={tier.name} style={{
-          background: tier.aiWall ? 'rgba(123,79,207,0.10)' : 'rgba(251,245,230,0.08)',
-          // Surveyor is walled in the violet AI channel (ruling #3); Cartographer
-          // keeps the gold accent; the rest read as quiet parchment.
-          border: tier.aiWall ? '1px solid rgba(123,79,207,0.5)'
-            : tier.accent ? '1px solid rgba(224,192,128,0.55)'
-            : '1px solid rgba(244,234,208,0.25)',
+          background: 'rgba(251,245,230,0.08)',
+          border: tier.accent ? '1px solid rgba(224,192,128,0.55)' : '1px solid rgba(244,234,208,0.25)',
           borderRadius: R.lg, padding: '18px 20px',
         }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, marginBottom: 6, flexWrap: 'wrap' }}>
             <span style={{ fontFamily: serif_, fontSize: FS.xxl, fontWeight: 600, color: PARCH }}>{tier.name}</span>
-            {/* Per-segment badge colour: the AI-channel band renders violet; a
-                'Premium' segment always renders gold (so Founder's "Premium ·
-                Lifetime" matches Cartographer's gold PREMIUM); everything else
-                follows the tier's accent. */}
+            {/* Per-segment badge colour: a 'Premium' segment always renders gold
+                (so Founder's "Premium · Lifetime" matches Cartographer's gold
+                PREMIUM); everything else follows the tier's accent. */}
             <span style={{
               fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
             }}>
               {String(tier.badge).split(' · ').map((seg, i) => (
                 <span key={seg}>
                   {i > 0 && <span style={{ color: 'rgba(244,234,208,0.7)' }}>{' · '}</span>}
-                  <span style={{ color: tier.aiWall ? 'rgba(180,150,235,1)'
-                    : (tier.accent || /^premium$/i.test(seg)) ? 'rgba(224,192,128,1)'
-                    : 'rgba(244,234,208,0.7)' }}>{seg}</span>
+                  <span style={{ color: (tier.accent || /^premium$/i.test(seg)) ? 'rgba(224,192,128,1)' : 'rgba(244,234,208,0.7)' }}>{seg}</span>
                 </span>
               ))}
             </span>
           </div>
           <div style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 600, lineHeight: 1.55, color: 'rgba(251,245,230,0.85)' }}>
-            {fillTierBody(tier.body)}
+            {tier.body}
           </div>
           {tier.seatLive && <FounderSeatLine />}
         </div>
@@ -280,7 +296,7 @@ function TierStrip() {
   );
 }
 
-function LandingFooter({ onNavigate, isMobile }) {
+function LandingFooter({ onNavigate }) {
   const links = tl('footer.links') || [];
   const route = { Compendium: 'compendium', Pricing: 'pricing', Account: 'account' };
   return (
@@ -288,6 +304,7 @@ function LandingFooter({ onNavigate, isMobile }) {
       maxWidth: CONTENT_MAX, margin: `${SP.xxl * 2}px auto 0`, borderTop: '1px solid rgba(244,234,208,0.2)',
       paddingTop: SP.xl, display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
     }}>
+      <MapIcon size={15} color={GOLD} aria-hidden="true" />
       <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: GOLD }}>{tl('footer.brand')}</span>
       <span style={{ marginLeft: 'auto', display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
         {links.map((label) => (
@@ -302,16 +319,6 @@ function LandingFooter({ onNavigate, isMobile }) {
           </Button>
         ))}
       </span>
-      {/* The page ends on the painting (LD-3): Pricing · Feedback & support ·
-          Terms · Privacy · © · "Simulated, not AI-generated." MIGRATE, never
-          delete — the global strip is suppressed on this route, and /pricing has
-          no `nav:` block, so this row is the landing's only path to it. */}
-      <LegalRibbonRow
-        isMobile={isMobile}
-        onNavigate={onNavigate}
-        clearMobileNav
-        style={{ width: '100%', marginTop: SP.xl, color: 'rgba(244,234,208,0.72)' }}
-      />
     </div>
   );
 }
@@ -322,26 +329,15 @@ function LandingFooter({ onNavigate, isMobile }) {
 // no onSignIn is needed here — the auth CTA lives only in the hero.
 export default function LandingBelowFold({ isMobile, onNavigate }) {
   const pad = sectionPad(isMobile);
-  // The scroll-journey root: the film backdrop measures the `.leg` travel spacers
-  // inside this container to drive its playhead (home/useScrollJourney).
-  const rootRef = useRef(null);
 
   return (
     <>
-      {/* THE FILM (Slice C2): the fixed travel-and-stop growth film, behind the
-          stops (zIndex 0). The stops + legs below sit at zIndex 1 over it. */}
-      <WelcomeJourneyBackdrop rootRef={rootRef} />
-      <div ref={rootRef} style={{ position: 'relative', zIndex: 1 }}>
-        {/* leg 1 · desk → thorp */}
-        <div className="sf-welcome-leg" data-welcome-leg="0" aria-hidden="true" />
-        {/* ══ 01 · Forge + the sample draft. Translucent cream
-            (sf-landing-scene-cream) with no painted scene, so the growth film
-            reads through (stop 1 · thorp). ══ */}
+      {/* ══ 01 · Forge — painted thorpe scene ══ */}
       <section
         id="forge"
         aria-labelledby="sf-forge-title"
         className="sf-landing-scene-cream"
-        style={{ ...pad }}
+        style={{ ...pad, '--sf-scene': SCENE('thorpe') }}
       >
         <Waypoint pill={tl('forge.waypoint')} />
         <div style={twoColGrid(28)}>
@@ -356,40 +352,34 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
               <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>{tl('forge.micro')}</span>
             </div>
           </div>
-          {/* Owner order (2026-07-22): the Instant Draft widget slot now hosts the
-              Cnocby sample-draft card (MiniDossierCard), relocated from §02. The
-              drawn-town map sub-block that used to sit below moved into §02, which
-              is now "The visual". */}
+          <InstantDraftCard />
+        </div>
+      </section>
+
+      {/* ══ 02 · The brief — plain parchment ══ */}
+      <section id="brief" aria-labelledby="sf-brief-title" style={{ ...pad, background: PARCH }}>
+        <Waypoint pill={tl('brief.waypoint')} />
+        <div style={twoColGrid(36)}>
+          <div>
+            <h2 id="sf-brief-title" style={h2Style(isMobile)}>{tl('brief.h2')}</h2>
+            <p style={proseStyle}>{tl('brief.body')}</p>
+            <p style={{ ...proseStyle, marginBottom: SP.xl }}>{tl('brief.library')}</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
+              <Button variant="primary" onClick={() => onNavigate('generate')}>{tl('brief.cta')}</Button>
+              <a href="#voice" onClick={scrollToId('voice')} style={{ ...capsLink, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                {tl('brief.link')}<ChevronDown size={14} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
           <MiniDossierCard onNavigate={onNavigate} />
         </div>
       </section>
 
-        {/* leg 2 · thorp → hamlet */}
-        <div className="sf-welcome-leg" data-welcome-leg="1" aria-hidden="true" />
-        {/* ══ 02 · The visual — the drawn town. The old standalone map waypoint
-            is retired; its v2 map artifact lives here. Section id stays "brief"
-            for anchor stability. Plain parchment (stop 2 · hamlet). ══ */}
-      <section id="brief" aria-labelledby="sf-visual-title" className="sf-landing-scene-cream" style={{ ...pad }}>
-        <Waypoint pill={tl('brief.waypoint')} />
-        <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
-          <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
-            <h2 id="sf-visual-title" style={{ ...h2Style(isMobile), marginBottom: SP.md }}>{tl('map.h2')}</h2>
-            <p style={{ ...proseStyle, margin: 0 }}>{tl('map.body')}</p>
-          </div>
-          <MapPlateCard />
-          <p style={{ ...proseStyle, maxWidth: 640, margin: `${SP.xl}px auto 0`, textAlign: 'center', fontStyle: 'italic', color: SECOND }}>
-            {tl('map.tease')}
-          </p>
-        </div>
-      </section>
-
-        {/* leg 3 · hamlet → village */}
-        <div className="sf-welcome-leg" data-welcome-leg="2" aria-hidden="true" />
-        {/* ══ 03 · The voice — plain parchment (#F7F0E4), hairline borders (stop 3 · village) ══ */}
+      {/* ══ 03 · The voice — plain parchment (#F7F0E4), hairline borders ══ */}
       <section
         id="voice"
         aria-labelledby="sf-voice-title"
-        className="sf-landing-scene-cream"
+        className="sf-landing-voice"
         style={{ ...pad, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}
       >
         <Waypoint pill={tl('voice.waypoint')} />
@@ -404,12 +394,13 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
           </div>
           <VoiceCards />
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.md, marginTop: SP.xl, flexWrap: 'wrap' }}>
-            <Button variant="ai" onClick={() => onNavigate('generate')}>{tl('voice.cta')}</Button>
+            <Button variant="ai" onClick={() => onNavigate('generate')} icon={<Sparkles size={14} />}>{tl('voice.cta')}</Button>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => onNavigate('pricing')}
               style={{ ...capsLink }}
+              trailingIcon={<ChevronDown size={14} />}
             >
               {tl('voice.pricingLink')}
             </Button>
@@ -417,14 +408,12 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         </div>
       </section>
 
-        {/* leg 4 · village → town */}
-        <div className="sf-welcome-leg" data-welcome-leg="3" aria-hidden="true" />
-        {/* ══ 04 · The Realm — painted city scene + CARTOGRAPHER pill (stop 4 · town) ══ */}
+      {/* ══ 04 · The Realm — painted city scene + CARTOGRAPHER pill ══ */}
       <section
         id="realm"
         aria-labelledby="sf-realm-title"
         className="sf-landing-scene-cream"
-        style={{ ...pad }}
+        style={{ ...pad, '--sf-scene': SCENE('city') }}
       >
         <Waypoint pill={tl('realm.waypoint')} goldPill={tl('realm.waypointPill')} />
         <div style={twoColGrid(28)}>
@@ -442,13 +431,8 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         <RealmMapCard />
       </section>
 
-        {/* leg 5 · town → city. With the map artifact folded into §02, this
-            travel leg (the film still has six: data-welcome-leg 0..5) leads
-            straight into §05 The commons at the city stop. */}
-        <div className="sf-welcome-leg" data-welcome-leg="4" aria-hidden="true" />
-
-      {/* ══ 05 · The commons — translucent cream (item 10) ══ */}
-      <section id="commons" aria-labelledby="sf-commons-title" className="sf-landing-scene-cream" style={{ ...pad }}>
+      {/* ══ 05 · The commons — plain parchment ══ */}
+      <section id="commons" aria-labelledby="sf-commons-title" style={{ ...pad, background: PARCH }}>
         <Waypoint pill={tl('commons.waypoint')} />
         <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
           <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
@@ -462,17 +446,12 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         </div>
       </section>
 
-        {/* leg 6 · city → metropolis */}
-        <div className="sf-welcome-leg" data-welcome-leg="5" aria-hidden="true" />
-        {/* ══ 06 · Set out — dark painted create scene + footer (stop 6 · metropolis) ══ */}
+      {/* ══ 06 · Set out — dark painted create scene + footer ══ */}
       <section
         id="closer"
         aria-labelledby="sf-closer-title"
         className="sf-landing-scene-dark"
-        // Item 11 (owner 2026-07-21): FLUSH BOTTOM. Zero bottom padding so the set-out
-        // card's footer sits flush against the page end / the global app footer, with no
-        // dead trailing scroll region. Set-out keeps its dark scene (item-10 exempt).
-        style={{ padding: isMobile ? `0 ${SP.md}px 0` : `0 ${SP.xxl}px 0`, '--sf-scene': SCENE('create') }}
+        style={{ padding: isMobile ? `0 ${SP.md}px ${SP.xxl}px` : `0 ${SP.xxl}px 56px`, '--sf-scene': SCENE('create') }}
       >
         <Waypoint pill={tl('closer.waypoint')} dark />
         <div style={{ maxWidth: 880, margin: `${SP.xxl * 2}px auto 0`, textAlign: 'center' }}>
@@ -494,13 +473,13 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             size="sm"
             onClick={() => onNavigate('pricing')}
             style={{ ...capsLink, color: 'rgba(224,192,128,1)' }}
+            trailingIcon={<ArrowRight size={14} />}
           >
             {tl('closer.fullPricing')}
           </Button>
         </div>
-        <LandingFooter onNavigate={onNavigate} isMobile={isMobile} />
+        <LandingFooter onNavigate={onNavigate} />
       </section>
-      </div>
     </>
   );
 }

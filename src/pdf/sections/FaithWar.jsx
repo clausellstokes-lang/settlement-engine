@@ -21,7 +21,6 @@ import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline, HairRule, Tag } from '../primitives/Dense.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, humanize } from '../lib/format.js';
-import { REALM_CONTEST_RECORD_HELP, REALM_CONTEST_RECORD_LABEL } from '../../domain/display/warStatus.js';
 
 const POSTURE_TONE = {
   Belligerent: 'bad',
@@ -126,9 +125,9 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
         )}
         {standing && (
           <Stat
-            label={REALM_CONTEST_RECORD_LABEL.toUpperCase()}
+            label="STANDING"
             value={`${standing.wins}W / ${standing.losses}L`}
-            sub={`net ${standing.score > 0 ? '+' : ''}${standing.score} · ${REALM_CONTEST_RECORD_HELP}`}
+            sub={`net ${standing.score > 0 ? '+' : ''}${standing.score}`}
             tone={standing.score > 0 ? 'good' : standing.score < 0 ? 'bad' : 'muted'}
           />
         )}
@@ -203,7 +202,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
           {tradeWars.map(prize => (
             <Line key={prize.prizeId} label="Trade war." tone="warn">
               {prize.role === 'market'
-                ? `Its ${prize.commodityLabel} market is a contested prize. ${prize.winner} now supplies it.`
+                ? `Its ${prize.commodityLabel} market is a contested prize — ${prize.winner} now supplies it.`
                 : prize.role === 'supplier'
                   ? `Now the primary supplier of ${prize.commodityLabel} to ${prize.buyer}.`
                   : prize.role === 'displaced'
@@ -238,7 +237,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
               </Text>
               {doc.terms.map((term, i) => (
                 <Text key={i} style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>
-                  {term.label}{Number.isFinite(term.yearsRemaining) ? ` (${term.yearsRemaining}y)` : ''} · {term.strainLine}
+                  {term.label}{Number.isFinite(term.yearsRemaining) ? ` (${term.yearsRemaining}y)` : ''} — {term.strainLine}
                 </Text>
               ))}
               {doc.frayingLine && (
@@ -388,7 +387,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
             <Text key={i} style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4, marginBottom: 2 }}>
               <Text style={{ ...type.body_em, color: palette.ink }}>{b.subject}: </Text>
               believed {b.strength}, {b.readiness} ({b.confidence}, {b.staleness})
-              {b.divergence.length > 0 ? `: ${b.divergence.join('; ')}` : ''}
+              {b.divergence.length > 0 ? ` — ${b.divergence.join('; ')}` : ''}
             </Text>
           ))}
         </View>

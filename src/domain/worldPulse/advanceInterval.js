@@ -6,17 +6,9 @@
 // history-ring collapse. Imports the kernel + the shared helpers (saveId,
 // usableTickInterval); never imported BY the kernel (keeps the chain acyclic).
 import { ensureWorldState, INTERVAL_WEEKS } from './worldState.js';
-import { reconcileProvenanceAfterHistoryCollapse } from './provenanceKernel.js';
 import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
 import { simulateCampaignWorldPulse } from './pulseKernel.js';
 import { saveId, usableTickInterval } from './pulseHelpers.js';
-import { boundedMechanicalRumorSeeds } from './pulseOutcomePartition.js';
-import { stateOnlyRumorSeedsFromHistory } from './worldPulseFeedCuration.js';
-import { withCustomContent } from '../../lib/dependencyEngine.js';
-
-/** @typedef {import('../region/wizardNews.js').RawWizardNewsEntry} RawWizardNewsEntry */
-/** @typedef {import('../region/wizardNews.js').WizardNewsEntry} WizardNewsEntry */
-/** @typedef {{ entries?: WizardNewsEntry[] }} NormalizedWizardNewsFeed */
 
 // Yield the main thread every YIELD_EVERY_TICKS kernel passes so a long advance
 // (a one_year advance is 52 synchronous one-week ticks — 4-week months, 13-week seasons, a 52-week year) does not freeze the UI:
@@ -85,15 +77,6 @@ function reportAdvanceProgress(onProgress, detail) {
   } catch { /* no listener contract — never let the notification break the tick loop */ }
 }
 
-/**
- * @param {((detail: {tick:number, ticksDone:number, ticksTotal:number, interval:string, rawWizardNewsEntries:RawWizardNewsEntry[]}) => void)|null|undefined} onTickObservation
- * @param {{tick:number, ticksDone:number, ticksTotal:number, interval:string, rawWizardNewsEntries:RawWizardNewsEntry[]}} detail
- */
-function reportTickObservation(onTickObservation, detail) {
-  if (typeof onTickObservation !== 'function') return;
-  onTickObservation(detail);
-}
-
 // Advance-scaling Stage 1: an Advance runs N REAL one-week ticks. The interval
 // the DM picks is a DURATION, not a single coarse step — `simulateCampaignWorldPulse`
 // is already a correct, pure one-week kernel (bumps tick +1, re-seeds its PRNG
@@ -140,10 +123,9 @@ export function ticksForInterval(interval) {
  *
  * @param {any} worldState  the final tick's composed worldState
  * @param {number} appendedRecords  records this interval appended (= ticks run)
- * @param {NormalizedWizardNewsFeed|null} [wizardNews]
  * @returns {any}
  */
-export function collapseIntervalHistory(worldState, appendedRecords, wizardNews = null) {
+function collapseIntervalHistory(worldState, appendedRecords) {
   const history = Array.isArray(worldState?.pulseHistory) ? worldState.pulseHistory : [];
   const appended = Math.max(0, Math.floor(appendedRecords));
   // Fewer than two interval records means there is nothing interior to collapse
@@ -155,55 +137,8 @@ export function collapseIntervalHistory(worldState, appendedRecords, wizardNews 
   // the kernel's MAX_HISTORY eviction; `base`-anchored front slicing does not.
   const intervalSpan = Math.min(appended, history.length);
   const survivors = history.slice(0, history.length - intervalSpan);
-  const intervalRecords = history.slice(history.length - intervalSpan);
-  const removed = intervalRecords.slice(0, -1);
-  const finalRecord = intervalRecords[intervalRecords.length - 1];
-  const finalTick = Number(finalRecord?.tick || 0);
-  // Reconstruct against the FULL retained history so the metronome predicate
-  // sees surviving pre-interval beats. Replaying only `intervalRecords` can
-  // invent a louder interior repeat that was correctly suppressed when the
-  // tick originally ran. Survivor seeds are already durable in the records we
-  // keep, so subtract their source IDs before applying the carry cap; otherwise
-  // a saturated survivor can consume all 48 slots and evict the interval beats
-  // that would actually be lost by this collapse.
-  const publicEntries = wizardNews?.entries;
-  const survivorSeedIds = new Set(stateOnlyRumorSeedsFromHistory(
-    survivors,
-    publicEntries,
-  ).map(entry => String(entry?.sourceEventId ?? entry?.id)));
-  const mechanicalRumorSeeds = boundedMechanicalRumorSeeds(stateOnlyRumorSeedsFromHistory(
-    history,
-    publicEntries,
-  )
-    .filter(entry => !survivorSeedIds.has(String(entry?.sourceEventId ?? entry?.id)))
-    .filter(entry => finalTick - Number(entry?.tick || 0) <= 6));
-  const carriesAuthoritativeMechanicalSeeds = intervalRecords
-    .some((/** @type {NonNullable<Parameters<typeof stateOnlyRumorSeedsFromHistory>[0]>[number]} */ record) => (
-      Array.isArray(record?.mechanicalRumorSeeds)
-    ));
-  // WR-7a's seven typed evidence families are durable interval facts, not merely
-  // interior narration. Preserve first occurrence in tick order and dedupe by the
-  // producer-owned evidence id so a retry cannot multiply a departure or delivery.
-  const envoyEvidenceById = new Map();
-  for (const record of intervalRecords) {
-    for (const evidence of Array.isArray(record?.envoyEvidence) ? record.envoyEvidence : []) {
-      const id = String(evidence?.id || '');
-      if (id && !envoyEvidenceById.has(id)) envoyEvidenceById.set(id, evidence);
-    }
-  }
-  const envoyEvidence = [...envoyEvidenceById.values()];
-  let composedFinalRecord = (mechanicalRumorSeeds.length || carriesAuthoritativeMechanicalSeeds)
-    ? { ...finalRecord, mechanicalRumorSeeds }
-    : finalRecord;
-  if (envoyEvidence.length) composedFinalRecord = { ...composedFinalRecord, envoyEvidence };
-  const composed = [
-    ...survivors,
-    composedFinalRecord,
-  ];
-  return reconcileProvenanceAfterHistoryCollapse(
-    { ...worldState, pulseHistory: composed },
-    removed,
-  );
+  const composed = [...survivors, history[history.length - 1]];
+  return { ...worldState, pulseHistory: composed };
 }
 
 /**
@@ -211,15 +146,11 @@ export function collapseIntervalHistory(worldState, appendedRecords, wizardNews 
  * id-matched replace (last-write-wins), pure (returns a new array). Lets the
  * orchestrator thread tick outputs into tick inputs without importing the store
  * layer.
- *
- * EXPORTED for worldPulse/autoAdjudication.js, which threads the SAME fold between
- * consecutive proposal rulings (full auto-resolve, realm directive 7). One fold,
- * one spelling — a second id-matched merge would drift from this one silently.
  * @param {any[]} saves
  * @param {any[]} [updates]
  * @returns {any[]}
  */
-export function foldUpdatesOntoSaves(saves, updates) {
+function foldUpdatesOntoSaves(saves, updates) {
   if (!Array.isArray(updates) || updates.length === 0) return saves;
   /** @type {Map<string, any>} */
   const bySaveId = new Map();
@@ -232,49 +163,6 @@ export function foldUpdatesOntoSaves(saves, updates) {
     if (!bySaveId.has(id)) return save;
     return { ...save, settlement: bySaveId.get(id) };
   });
-}
-
-/**
- * Fold first-class member births into the saves that feed the next tick.
- * Deterministic birth ids make this an idempotent append: a resume/retry that
- * re-derives the same charter never duplicates or rewinds an already-updated
- * child save.
- * @param {any[]} saves
- * @param {any[]} [births]
- * @returns {any[]}
- */
-export function foldMemberBirthsOntoSaves(saves, births) {
-  if (!Array.isArray(births) || births.length === 0) return saves;
-  const existing = new Set((saves || []).map(save => saveId(save)));
-  const next = [...(saves || [])];
-  for (const birth of births) {
-    const id = String(birth?.saveId || birth?.save?.id || '');
-    if (!id || existing.has(id) || !birth?.save) continue;
-    existing.add(id);
-    next.push(birth.save);
-  }
-  return next;
-}
-
-/**
- * Fold the same births into campaign membership for the next snapshot.
- * @param {any} campaign
- * @param {any[]} [births]
- * @returns {any}
- */
-export function foldMemberBirthsOntoCampaign(campaign, births) {
-  if (!Array.isArray(births) || births.length === 0) return campaign;
-  const settlementIds = Array.isArray(campaign?.settlementIds)
-    ? [...campaign.settlementIds]
-    : [];
-  const seen = new Set(settlementIds.map(String));
-  for (const birth of births) {
-    const id = String(birth?.saveId || birth?.save?.id || '');
-    if (!id || seen.has(id)) continue;
-    seen.add(id);
-    settlementIds.push(id);
-  }
-  return { ...campaign, settlementIds };
 }
 
 /**
@@ -345,11 +233,6 @@ export function foldMemberBirthsOntoCampaign(campaign, births) {
  *   resumed segment continues from its cursor, so ticksDone picks up where the
  *   pause left off). Observational only — see reportAdvanceProgress; the same
  *   detail is also dispatched as ADVANCE_PROGRESS_EVENT on globalThis.
- * @param {((detail: {tick:number, ticksDone:number, ticksTotal:number, interval:string, rawWizardNewsEntries:RawWizardNewsEntry[]}) => void)|null} [args.onTickObservation]
- *   Audit-only callback invoked once after each completed kernel tick. Its raw
- *   Wizard News receipts are captured before feed dedupe/retention.
- * @param {Record<string, unknown>|null} [args.customContent] Immutable projection
- *   resolved from the campaign's pinned content binding.
  *
  * ASYNC: the orchestrator is async + yields to the event loop every
  * YIELD_EVERY_TICKS ticks (see yieldToEventLoop) so a long advance (up to 52
@@ -363,8 +246,7 @@ export function foldMemberBirthsOntoCampaign(campaign, births) {
  */
 export async function simulateCampaignWorldInterval({
   campaign, saves = [], interval = 'one_month', commit = false, now,
-  autoResolve = true, resume = null, onProgress = null, onTickObservation = null, weeks = null,
-  customContent = null,
+  autoResolve = true, resume = null, onProgress = null, weeks = null,
 } = {}) {
   // Structural pin-`now` guard (same contract as the kernel): the multi-tick path
   // threads ONE pinned `now` across every synchronous tick, so an unpinned interval
@@ -392,8 +274,6 @@ export async function simulateCampaignWorldInterval({
   // id-keyed accumulator (last-write-wins) for the composed settlementUpdates.
   /** @type {Map<string, any>} */
   const updatesById = new Map();
-  /** @type {Map<string, any>} deterministic member births in this segment */
-  const birthsById = new Map();
   const candidates = [];
   const selected = [];
   const rollExplanations = [];
@@ -459,9 +339,7 @@ export async function simulateCampaignWorldInterval({
     // DM's dismissals filtered out); every other tick under autoresolve OFF defers
     // its majors so the loop can pause on the first that surfaces them.
     const isResumeTick = resuming && i === startTick;
-    /** @type {RawWizardNewsEntry[] | null} */
-    const rawWizardNewsEntries = typeof onTickObservation === 'function' ? [] : null;
-    const tickArgs = {
+    const tickResult = simulateCampaignWorldPulse({
       campaign: runningCampaign,
       saves: runningSaves,
       interval: 'one_week',
@@ -470,40 +348,10 @@ export async function simulateCampaignWorldInterval({
       deferMajors: !autoResolve && !isResumeTick,
       dismissMajorIds: isResumeTick ? dismissMajorIds : null,
       intervalStartTick,
-      newsReceiptSink: rawWizardNewsEntries,
-    };
-    // Scope only the synchronous kernel call. The orchestrator may yield between
-    // batches, so retaining a module-global override across awaits would allow
-    // concurrent campaign advances to observe one another's content.
-    const tickResult = customContent == null
-      ? simulateCampaignWorldPulse(tickArgs)
-      : withCustomContent(
-          customContent,
-          () => simulateCampaignWorldPulse(tickArgs),
-        );
-    reportTickObservation(onTickObservation, {
-      tick: tickResult.tick,
-      ticksDone: i + 1,
-      ticksTotal: tickCount,
-      interval: chosenInterval,
-      rawWizardNewsEntries: rawWizardNewsEntries || [],
     });
 
     for (const update of tickResult.settlementUpdates || []) {
       updatesById.set(String(update.saveId), update);
-    }
-    for (const birth of tickResult.memberBirths || []) {
-      birthsById.set(String(birth.saveId), birth);
-    }
-    // A child born earlier in this interval may receive ordinary updates on a
-    // later tick.  Persist the final envelope, not its birth-tick projection.
-    for (const update of tickResult.settlementUpdates || []) {
-      const born = birthsById.get(String(update.saveId));
-      if (!born?.save) continue;
-      birthsById.set(String(update.saveId), {
-        ...born,
-        save: { ...born.save, settlement: update.settlement },
-      });
     }
     if (tickResult.candidates) candidates.push(...tickResult.candidates);
     if (tickResult.selected) selected.push(...tickResult.selected);
@@ -551,22 +399,18 @@ export async function simulateCampaignWorldInterval({
         preWizardNews: runningCampaign.wizardNews,
         preSaves: runningSaves,
         settlementUpdates: [...updatesById.values()],
-        ...(birthsById.size ? { memberBirths: [...birthsById.values()] } : {}),
         candidates, selected, rollExplanations, autoApplied, proposals, resolvedStressors, majors,
       };
     }
 
     // Thread this tick's output into the next tick's input.
-    runningCampaign = foldMemberBirthsOntoCampaign({
+    runningCampaign = {
       ...runningCampaign,
       worldState: tickResult.worldState,
       regionalGraph: tickResult.regionalGraph,
       wizardNews: tickResult.wizardNews,
-    }, tickResult.memberBirths);
-    runningSaves = foldMemberBirthsOntoSaves(
-      foldUpdatesOntoSaves(runningSaves, tickResult.settlementUpdates),
-      tickResult.memberBirths,
-    );
+    };
+    runningSaves = foldUpdatesOntoSaves(runningSaves, tickResult.settlementUpdates);
     last = tickResult;
 
     // Yield between tick batches (not after the final tick) so the toolbar
@@ -592,18 +436,13 @@ export async function simulateCampaignWorldInterval({
   // one_week case (tickCount=1) appended exactly one record already, so the collapse
   // is a no-op. The collapse is on the FINAL composed worldState only — every interior
   // computation still threaded its full history forward, so determinism is untouched.
-  const composedWorldState = collapseIntervalHistory(
-    last.worldState,
-    tickCount,
-    last.wizardNews,
-  );
+  const composedWorldState = collapseIntervalHistory(last.worldState, tickCount);
   return {
     ...last,
     worldState: composedWorldState,
     status: 'complete',
     interval: chosenInterval,
     settlementUpdates: [...updatesById.values()],
-    ...(birthsById.size ? { memberBirths: [...birthsById.values()] } : {}),
     candidates,
     selected,
     rollExplanations,

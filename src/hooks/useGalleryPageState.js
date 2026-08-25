@@ -4,16 +4,12 @@ import {
   fetchPublicDossier,
   fetchPublicGallery,
   fetchMyGallery,
-  fetchMyUnlistedDossiers,
-  fetchFeaturedGallery,
-  fetchUnlistedCampaign,
   reportGalleryDossier,
   toggleGalleryVote,
-  toggleGalleryReaction,
 } from '../lib/gallery.js';
 import { navigate } from './useRoute.js';
 import { useStore } from '../store/index.js';
-import { useEnsureSavedSettlementsLoaded } from './useOwnerScopedSaves.js';
+import { saves as savesService } from '../lib/saves.js';
 
 export const EMPTY_GALLERY_FILTERS = Object.freeze({
   tier: [],
@@ -27,10 +23,6 @@ export const EMPTY_GALLERY_FILTERS = Object.freeze({
   hasImage: false,
   hasComments: false,
   curatedOnly: false,
-  // V-13 — "Featured only": the admin-featured hero set (hidden-until-occupied:
-  // when nothing is featured, the feed is simply empty). Swaps to
-  // list_featured_dossiers.
-  featuredOnly: false,
   // Owner import opt-in + patron-deity presence facets (migrations 047/063).
   importable: false,
   hasDeity: false,
@@ -38,17 +30,14 @@ export const EMPTY_GALLERY_FILTERS = Object.freeze({
   // owner-scoped list_my_gallery_dossiers RPC (ignored by the public feed's
   // server-side filter normalizer, which allowlists keys).
   mine: false,
-  // V-20 — "My Unlisted": the PRIVATE/UNLISTED filter (owner amendment). Swaps
-  // the feed for list_my_unlisted_dossiers — the ONLY listing path that ever
-  // surfaces the owner's unlisted rows (every other listing excludes them).
-  unlistedMine: false,
 });
 
 const PAGE_SIZE = 24;
 
 export function useGalleryPageState(routeSlug = null) {
   const auth = useStore(s => s.auth);
-  useEnsureSavedSettlementsLoaded(auth?.user?.id);
+  const savedSettlementsLoaded = useStore(s => s.savedSettlementsLoaded);
+  const setSavedSettlements = useStore(s => s.setSavedSettlements);
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [hasMore, setHasMore] = useState(false);
@@ -57,43 +46,19 @@ export function useGalleryPageState(routeSlug = null) {
   const [listError, setListError] = useState(null);
   const [sort, setSort] = useState('relevant');
   const [search, setSearch] = useState('');
-  // `search` mirrors the input for immediate display; `debouncedSearch` is what
-  // the fetch query keys on, so typing a word fires one request rather than one
-  // per character. Clearing to empty propagates immediately (see effect below).
-  const [debouncedSearch, setDebouncedSearch] = useState('');
   const [filters, setFilters] = useState(() => ({ ...EMPTY_GALLERY_FILTERS }));
   const [activeSlug, setActiveSlug] = useState(routeSlug || null);
   const [dossier, setDossier] = useState(null);
-  const [dossierLoading, setDossierLoading] = useState(() => !!routeSlug);
+  const [dossierLoading, setDossierLoading] = useState(false);
   const [dossierError, setDossierError] = useState(null);
-  // V-25b — an unlisted party link may resolve to a CAMPAIGN (map_with_campaign)
-  // rather than a settlement dossier; when it does, the detail area renders the
-  // read-only player face instead of the settlement not-found note.
-  const [unlistedCampaign, setUnlistedCampaign] = useState(null);
   const [voteBusyId, setVoteBusyId] = useState(null);
-  // Reactions (GALLERY-2 phase 2) — busy key is `${id}:${reactionKey}` so one
-  // in-flight chip never locks the other five.
-  const [reactionBusyKey, setReactionBusyKey] = useState(null);
   const [reportBusyId, setReportBusyId] = useState(null);
   const [importBusyId, setImportBusyId] = useState(null);
   const [importedSlugs, setImportedSlugs] = useState(() => new Set());
   const [actionError, setActionError] = useState(null);
   const [actionNotice, setActionNotice] = useState(null);
 
-  // Debounce search → query propagation so a fetch fires once typing settles,
-  // not on every keystroke. An empty search (clear / backspace-to-empty) skips
-  // the delay so resetting the feed feels instant.
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- debounce: empty search resets instantly
-    if (search === '') { setDebouncedSearch(''); return undefined; }
-    const id = setTimeout(() => setDebouncedSearch(search), 250);
-    return () => clearTimeout(id);
-  }, [search]);
-
-  const galleryQuery = useMemo(
-    () => ({ sort, search: debouncedSearch, filters }),
-    [sort, debouncedSearch, filters],
-  );
+  const galleryQuery = useMemo(() => ({ sort, search, filters }), [sort, search, filters]);
 
   // Generation token: bumped on every query change so an in-flight loadMore
   // (which isn't bound to this effect's lifecycle) can detect a stale query and
@@ -103,24 +68,17 @@ export function useGalleryPageState(routeSlug = null) {
   useEffect(() => {
     let cancelled = false;
     const gen = ++queryGenRef.current;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- spinner on query change
     setListLoading(true); // show the spinner immediately on a query change
     const mine = !!galleryQuery.filters?.mine;
-    const unlistedMine = !!galleryQuery.filters?.unlistedMine;
-    const featuredOnly = !!galleryQuery.filters?.featuredOnly;
-    // Owner/curated lists each return their whole set at once (no pagination).
-    const oneShot = mine || unlistedMine || featuredOnly;
-    let run;
-    if (unlistedMine) run = fetchMyUnlistedDossiers().then(list => ({ items: list, hasMore: false, total: list.length }));
-    else if (featuredOnly) run = fetchFeaturedGallery().then(list => ({ items: list, hasMore: false, total: list.length }));
-    else if (mine) run = fetchMyGallery();
-    else run = fetchPublicGallery({ page: 0, pageSize: PAGE_SIZE, excludeCurated: false, ...galleryQuery });
+    const run = mine
+      ? fetchMyGallery()
+      : fetchPublicGallery({ page: 0, pageSize: PAGE_SIZE, excludeCurated: false, ...galleryQuery });
     run
       .then(res => {
         if (cancelled || queryGenRef.current !== gen) return;
         setItems(res.items);
         setTotal(res.total ?? res.items.length);
-        setHasMore(oneShot ? false : res.hasMore);
+        setHasMore(mine ? false : res.hasMore);
         setPage(0);
         setListError(null);
       })
@@ -133,90 +91,63 @@ export function useGalleryPageState(routeSlug = null) {
     return () => { cancelled = true; };
   }, [galleryQuery]);
 
-  // The slug whose dossier is currently open or in-flight. The route-sync
-  // effect reads this to avoid re-fetching a dossier openDossier just opened:
-  // a card click calls openDossier (one fetch) AND navigate(), and that navigate
-  // bumps routeSlug → re-runs the effect, which would otherwise fire a second
-  // identical fetch. Kept in a ref so it's current synchronously, without
-  // re-triggering the effect.
-  const openSlugRef = useRef(null);
-  // Every open owns a generation. A superseded request may settle, reject, or
-  // run its finally block, but none may write over the newer detail view.
-  const dossierRequestGenRef = useRef(0);
+  // Hydrate the viewer's own saved settlements so the gallery owner card can
+  // resolve ownership (GalleryDetail matches a save's public_slug to the open
+  // dossier). Otherwise only WorldMap / SettlementsPanel hydrate them, so a
+  // deep-link, refresh, or post-save reload that lands straight on a gallery URL
+  // would leave savedSettlements empty and hide the "Your gallery listing" card
+  // until the user bounced through another page. Idempotent — gated on the
+  // savedSettlementsLoaded flag (same source savesService the other pages use).
+  useEffect(() => {
+    if (savedSettlementsLoaded) return;
+    let cancelled = false;
+    savesService.list()
+      .then(loaded => { if (!cancelled) setSavedSettlements(loaded); })
+      .catch(err => console.error('[gallery] Failed to hydrate saves:', err));
+    return () => { cancelled = true; };
+  }, [savedSettlementsLoaded, setSavedSettlements]);
 
   const openDossier = useCallback(async (slug, options = {}) => {
     if (!slug) return;
-    const requestGen = ++dossierRequestGenRef.current;
-    openSlugRef.current = slug;
     setActiveSlug(slug);
     setDossierLoading(true);
     setDossierError(null);
-    setUnlistedCampaign(null);
     setActionError(null);
     setActionNotice(null);
     if (!options.replace) navigate('gallery', { params: { slug } });
     try {
       const next = await fetchPublicDossier(slug);
-      if (dossierRequestGenRef.current !== requestGen) return;
-      // V-25b — a settlement miss may be an unlisted CAMPAIGN party link. Resolve it
-      // to its read-only player face before declaring the slug unavailable.
-      if (!next) {
-        const campaign = await fetchUnlistedCampaign(slug);
-        if (dossierRequestGenRef.current !== requestGen) return;
-        if (campaign) { setUnlistedCampaign(campaign); setDossier(null); }
-        else { setDossier(null); setDossierError('This settlement is not available.'); }
-      } else {
-        setDossier(next);
-      }
+      setDossier(next);
+      if (!next) setDossierError('This settlement is not available.');
     } catch (err) {
-      if (dossierRequestGenRef.current !== requestGen) return;
       setDossierError(err?.message || 'This settlement could not be opened.');
       setDossier(null);
     } finally {
-      if (dossierRequestGenRef.current === requestGen) setDossierLoading(false);
+      setDossierLoading(false);
     }
   }, []);
 
   useEffect(() => {
     if (routeSlug) {
-      // Already open (or loading) for this slug — e.g. openDossier just
-      // navigate()'d here. Don't fire a duplicate fetch for what's on screen.
-      if (openSlugRef.current === routeSlug) return;
-      void Promise.resolve().then(() => {
-        if (openSlugRef.current !== routeSlug) {
-          return openDossier(routeSlug, { replace: true });
-        }
-        return undefined;
-      });
+      void Promise.resolve().then(() => openDossier(routeSlug, { replace: true }));
       return;
     }
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug');
     if (slug) {
-      if (openSlugRef.current === slug) return;
-      void Promise.resolve().then(() => {
-        if (openSlugRef.current !== slug) {
-          return openDossier(slug, { replace: true });
-        }
-        return undefined;
-      });
+      void Promise.resolve().then(() => openDossier(slug, { replace: true }));
       return;
     }
     // No slug in the route (e.g. browser Back from /gallery/:slug → /gallery):
     // close the open dossier so the view matches the URL.
-    dossierRequestGenRef.current += 1;
-    openSlugRef.current = null;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- route-sync: close dossier to match URL
     setActiveSlug(null);
     setDossier(null);
-    setDossierLoading(false);
     setDossierError(null);
-    setUnlistedCampaign(null);
   }, [routeSlug, openDossier]);
 
   const loadMore = useCallback(async () => {
-    if (galleryQuery.filters?.mine || galleryQuery.filters?.unlistedMine || galleryQuery.filters?.featuredOnly) return; // owner/featured lists return all at once
+    if (galleryQuery.filters?.mine) return; // My Settlements returns all at once
     const nextPage = page + 1;
     const gen = queryGenRef.current; // snapshot the query generation
     setListLoading(true);
@@ -237,13 +168,9 @@ export function useGalleryPageState(routeSlug = null) {
   }, [galleryQuery, page, total]);
 
   const backToList = useCallback(() => {
-    dossierRequestGenRef.current += 1;
-    openSlugRef.current = null;
     setActiveSlug(null);
     setDossier(null);
-    setDossierLoading(false);
     setDossierError(null);
-    setUnlistedCampaign(null);
     setActionError(null);
     setActionNotice(null);
     navigate('gallery');
@@ -288,31 +215,6 @@ export function useGalleryPageState(routeSlug = null) {
       setVoteBusyId(null);
     }
   }, [auth?.user, voteBusyId]);
-
-  // Toggle one of the six structured reactions (mirrors voteOn: guard → RPC →
-  // patch the list tile AND the open dossier from the returned full state).
-  const reactOn = useCallback(async (item, reactionKey) => {
-    if (!auth?.user) {
-      setActionError('Sign in to react to public settlements.');
-      setActionNotice(null);
-      return;
-    }
-    if (!item?.id || !reactionKey || reactionBusyKey) return;
-    setReactionBusyKey(`${item.id}:${reactionKey}`);
-    setActionError(null);
-    setActionNotice(null);
-    try {
-      const result = await toggleGalleryReaction(item.id, reactionKey);
-      setItems(current => current.map(row => row.id === item.id ? { ...row, reactions: result.counts } : row));
-      setDossier(current => current?.id === item.id
-        ? { ...current, reactionState: result }
-        : current);
-    } catch (err) {
-      setActionError(err?.message || 'Reaction could not be saved.');
-    } finally {
-      setReactionBusyKey(null);
-    }
-  }, [auth?.user, reactionBusyKey]);
 
   const reportOn = useCallback(async (item, reason = 'other', body = '') => {
     if (!auth?.user) {
@@ -380,9 +282,7 @@ export function useGalleryPageState(routeSlug = null) {
     dossier,
     dossierLoading,
     dossierError,
-    unlistedCampaign,
     voteBusyId,
-    reactionBusyKey,
     reportBusyId,
     importBusyId,
     importedSlugs,
@@ -395,7 +295,6 @@ export function useGalleryPageState(routeSlug = null) {
     toggleBoolFilter,
     clearFilters,
     voteOn,
-    reactOn,
     reportOn,
     importDossier,
     setDossierCommentCount,

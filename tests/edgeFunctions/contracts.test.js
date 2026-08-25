@@ -266,27 +266,6 @@ describe('Tier 3.3 — stripe-webhook event coverage', () => {
     expect(src).toMatch(/founder_clawback:/);
   });
 
-  it('every charge-reversal class is NAMED and routes to the full clawback (Wave 8 H20/M22 policy)', () => {
-    // classifyChargeReversal makes the amount-blind arm EXPLICIT: full_refund,
-    // partial_refund, and dispute are named, recorded, and ALL route to the same
-    // full clawback lattice BY POLICY (CRIT-1: goodwill = credit grants, never
-    // partial refunds). A future "partial refunds keep credits" regression must
-    // rip this pin out in daylight.
-    expect(src).toMatch(/classifyChargeReversal\s*\(/);
-    expect(src).toMatch(/'partial_refund'/);
-    expect(src).toMatch(/'dispute'/);
-    expect(src).toMatch(/full clawback lattice/i);
-  });
-
-  it('a refunded/disputed credit-pack charge reverses the granted credits (Wave 8 M2)', () => {
-    // The pack grant (source 'purchase', session-keyed) must have a reversal
-    // wired into the same charge.refunded / charge.dispute.created arm; the
-    // atomic RPC (migration 190) owns the claim-once and the may-go-negative
-    // ledger math.
-    expect(src).toMatch(/clawbackCreditPackForSession\s*\(/);
-    expect(src).toMatch(/system_clawback_credits/);
-  });
-
   it('downgrades through the retention RPC, not a bare profile tier write', () => {
     expect(src).toMatch(/handle_premium_downgrade/);
     expect(src).toMatch(/Premium downgrade failed/);
@@ -547,21 +526,23 @@ describe('Tier 3.3 — generate-narrative cost catalog must match pricing.js', (
   });
 });
 
-describe('historical AI-pricing migrations stay immutable; forward reprice owns current parity', () => {
-  // Migration 114 added the config-backed charge path while the applied schedule
-  // was standard 3/4/5 and fast 2/3/4. Migrations 024/057/114 are historical
-  // evidence and must not be rewritten when prices change. Migration 174 is the
-  // forward 5/4/6 reprice; migration 192 is the net-current spend_credits body.
+describe('migration 114 AI-pricing config is lockstep with the client + 057', () => {
+  // The pricing-resync system (migration 114) adds a config-backed CHARGE path:
+  // spend_credits(feature, p_profile) reads ai_credit_costs from system_config,
+  // and get_ai_pricing serves the same schedule to the client. Three couplings
+  // MUST stay pinned or the CHARGE silently drifts from the display / the seed:
+  //   (a) 114's spend_credits fallback CASE == 057's CASE (config-absent = 057),
+  //   (b) 114's ai_credit_costs SEED == the client NEW_AI_COSTS / FAST_AI_COSTS,
+  //   (c) 114's seeded profile keys == the 8 AI_MODEL_OPTIONS keys.
   let mig114;
   let mig057;
-  let mig174;
-  let mig192;
   let pricing;
   beforeAll(() => {
     mig114 = readMigration('114_ai_pricing_config.sql');
+    // 057 = the net-current spend_credits body 114 forked from (per the house
+    // migration-recreate rule). Its CASE is the config-absent fallback 114 keeps
+    // verbatim. The filename carries the account-status recreate of spend_credits.
     mig057 = readMigration('057_enforce_account_status_writes.sql');
-    mig174 = readMigration('174_pricing_optimal_margins.sql');
-    mig192 = readMigration('192_tier_credit_multiplier.sql');
     pricing = readFileSync(join(ROOT, 'src', 'config', 'pricing.js'), 'utf8');
   });
 
@@ -598,13 +579,15 @@ describe('historical AI-pricing migrations stay immutable; forward reprice owns 
     expect(case114.progression_fast).toBe(4);
   });
 
-  it('(b) 114 preserves the applied 3/4/5 standard seed and 2/3/4 fast seed', () => {
+  it('(b) 114 ai_credit_costs SEED equals client NEW_AI_COSTS (standard) / FAST_AI_COSTS (fast)', () => {
     // Extract the seeded per-profile costs from the ai_credit_costs insert. Each
     // profile row is `'<key>', jsonb_build_object('narrative', N, 'dailyLife', N,
-    // 'progression', N)`. The historical values are intentionally NOT sourced
-    // from today's client config; doing that is what caused the in-place edit.
-    const std = { narrative: 3, dailyLife: 4, progression: 5 };
-    const fast = { narrative: 2, dailyLife: 3, progression: 4 };
+    // 'progression', N)`. Reuse the client-block extractor for the source-of-truth.
+    const num = (block, field) => Number(block.match(new RegExp(`${field}:\\s*(\\d+)`))[1]);
+    const stdBlock = pricing.match(/NEW_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
+    const fastBlock = pricing.match(/FAST_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
+    const std = { narrative: num(stdBlock, 'narrative'), dailyLife: num(stdBlock, 'dailyLife'), progression: num(stdBlock, 'progression') };
+    const fast = { narrative: num(fastBlock, 'narrative'), dailyLife: num(fastBlock, 'dailyLife'), progression: num(fastBlock, 'progression') };
 
     // Isolate the ai_credit_costs seed insert (the 'profiles' jsonb) so we don't
     // accidentally read get_ai_pricing's in-function `defaults` table below it.
@@ -625,9 +608,9 @@ describe('historical AI-pricing migrations stay immutable; forward reprice owns 
 
     for (const [, profile, nar, daily, prog] of rows) {
       const expected = tierOf(profile) === 'fast' ? fast : std;
-      expect(Number(nar), `${profile}.narrative historical seed drifted`).toBe(expected.narrative);
-      expect(Number(daily), `${profile}.dailyLife historical seed drifted`).toBe(expected.dailyLife);
-      expect(Number(prog), `${profile}.progression historical seed drifted`).toBe(expected.progression);
+      expect(Number(nar), `${profile}.narrative seed drifted from client`).toBe(expected.narrative);
+      expect(Number(daily), `${profile}.dailyLife seed drifted from client`).toBe(expected.dailyLife);
+      expect(Number(prog), `${profile}.progression seed drifted from client`).toBe(expected.progression);
     }
   });
 
@@ -640,36 +623,6 @@ describe('historical AI-pricing migrations stay immutable; forward reprice owns 
     const seedKeys = [...seedM[0].matchAll(/'(anthropic_[a-z0-9_]+|openai_[a-z0-9_]+)',\s*jsonb_build_object\('narrative'/gi)]
       .map((m) => m[1]).sort();
     expect(seedKeys, '114 seed profile keys drifted from AI_MODEL_OPTIONS').toEqual(clientKeys);
-  });
-
-  it('(d) 174 and net-current 192 carry the client 5/4/6 + fast 2/3/4 schedule', () => {
-    const case174 = extractSpendCase(mig174);
-    const case192 = extractSpendCase(mig192);
-    expect(case174, '174 forward-reprice CASE not found').toBeTruthy();
-    expect(case192, '192 net-current CASE not found').toBeTruthy();
-    expect(case192).toEqual(case174);
-
-    const num = (block, field) => Number(block.match(new RegExp(`${field}:\\s*(\\d+)`))[1]);
-    const stdBlock = pricing.match(/NEW_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
-    const fastBlock = pricing.match(/FAST_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
-    expect({
-      narrative: case192.narrative,
-      dailyLife: case192.dailyLife,
-      progression: case192.progression,
-    }).toEqual({
-      narrative: num(stdBlock, 'narrative'),
-      dailyLife: num(stdBlock, 'dailyLife'),
-      progression: num(stdBlock, 'progression'),
-    });
-    expect({
-      narrative: case192.narrative_fast,
-      dailyLife: case192.dailyLife_fast,
-      progression: case192.progression_fast,
-    }).toEqual({
-      narrative: num(fastBlock, 'narrative'),
-      dailyLife: num(fastBlock, 'dailyLife'),
-      progression: num(fastBlock, 'progression'),
-    });
   });
 });
 
@@ -768,14 +721,7 @@ describe('Tier 3.3 — generate-narrative grounding fidelity', () => {
   });
 
   it('governing faction read tolerates the .faction key shape powerGenerator emits', () => {
-    // ORDER CORRECTED 2026-07-19 (faction-key precedence sweep). This assertion used to
-    // pin `governing?.name || governing?.faction`, which froze the REVERSED precedence:
-    // `.faction` is the canonical key (rulingPower.nameOf reads `.faction || .name`,
-    // pinned by dc0b6e2b) and `.name` is a legacy alias. The test's stated intent — that
-    // the read tolerates the `.faction` shape powerGenerator emits — is unchanged and
-    // still enforced; only the order the regex freezes is corrected, so this contract can
-    // no longer certify the defect it was meant to prevent.
-    expect(src).toMatch(/governing\?\.faction \|\| governing\?\.name \|\| null/);
+    expect(src).toMatch(/governing\?\.name \|\| governing\?\.faction \|\| null/);
   });
 });
 
@@ -934,7 +880,7 @@ describe('Campaign Context surface copy (NotesTab)', () => {
 
   it('the disclosure states flavor weaving, fact priority, prose exposure, and DM privacy', () => {
     expect(src).toMatch(/Woven into AI narration as established campaign flavor/);
-    expect(src).toMatch(/Settlement facts still win/);
+    expect(src).toMatch(/settlement facts still win/);
     expect(src).toMatch(/may therefore appear in generated prose, including shared narration if you publish it/);
     expect(src).toMatch(/otherwise it stays DM-private/);
     expect(src).toMatch(/DM Notes are never included/);
@@ -1350,11 +1296,11 @@ describe('Tier 3.3 — Phase 5 migration 009 invariants', () => {
   });
 
   it('provisions spend_credits RPC (atomic decrement)', () => {
-    expect(migrations).toMatch(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?spend_credits/im);
+    expect(migrations).toMatch(/(create|create or replace)\s+function\s+(public\.)?spend_credits/i);
   });
 
   it('provisions refund_credits RPC (ledger-consistent refund)', () => {
-    expect(migrations).toMatch(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits/im);
+    expect(migrations).toMatch(/(create|create or replace)\s+function\s+(public\.)?refund_credits/i);
   });
 
   it('provisions admin_actions audit table', () => {
@@ -1368,20 +1314,20 @@ describe('Tier 3.3 — Phase 5 migration 009 invariants', () => {
   it('refund_credits writes a "grant" row (never modifies a spend row)', () => {
     // Look at the refund_credits function body. The function is ~50
     // lines so we need a generous window.
-    const refundBlock = migrations.match(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits[\s\S]{0,4000}/im);
+    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
     expect(refundBlock, 'refund_credits function body not found').toBeTruthy();
     expect(refundBlock[0]).toMatch(/insert\s+into[\s\S]{0,500}credit_ledger/i);
     expect(refundBlock[0]).toMatch(/['"]grant['"]/);
   });
 
   it('refund_credits is idempotent (rejects double-refunds of the same spend row)', () => {
-    const refundBlock = migrations.match(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits[\s\S]{0,4000}/im);
+    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
     expect(refundBlock).toBeTruthy();
     expect(refundBlock[0]).toMatch(/already refunded/i);
   });
 
   it('refund_credits checks that the target row is actually a spend (not another grant)', () => {
-    const refundBlock = migrations.match(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits[\s\S]{0,4000}/im);
+    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
     expect(refundBlock).toBeTruthy();
     expect(refundBlock[0]).toMatch(/kind\s*<>\s*['"]spend['"]/);
   });
@@ -1392,11 +1338,7 @@ describe('Tier 9.10 — credit/auth integrity migration 017 invariants', () => {
   beforeAll(() => { sql = readMigration('017_fix_credit_auth_integrity.sql'); });
 
   it('replaces the broken welcome-credit trigger with the current ledger schema', () => {
-    // ⚠ Both ends ANCHORED AT LINE START (`^` + m): the unanchored form also
-    // matches prose quoting the statement and extracts comment text, which this
-    // test would assert over without failing. Canonical writeup:
-    // tests/security/moneyRpcNetCurrentGuards.test.js.
-    const handleBlock = sql.match(/^create\s+or\s+replace\s+function\s+public\.handle_new_user[\s\S]*?^comment\s+on\s+function\s+public\.handle_new_user/im);
+    const handleBlock = sql.match(/create\s+or\s+replace\s+function\s+public\.handle_new_user[\s\S]*?comment\s+on\s+function\s+public\.handle_new_user/i);
     expect(handleBlock, 'handle_new_user block not found').toBeTruthy();
     expect(handleBlock[0]).toMatch(/insert\s+into\s+public\.credit_ledger\s*\(\s*user_id,\s*kind,\s*amount,\s*source,\s*metadata\s*\)/i);
     expect(handleBlock[0]).toMatch(/'grant'[\s\S]{0,80}'welcome'/i);
@@ -1409,13 +1351,13 @@ describe('Tier 9.10 — credit/auth integrity migration 017 invariants', () => {
   });
 
   it('exposes welcome_credit_available for the client gift-card gate', () => {
-    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.welcome_credit_available/im);
+    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.welcome_credit_available/i);
     expect(sql).toMatch(/grant\s+execute\s+on\s+function\s+public\.welcome_credit_available\(uuid\)\s+to\s+authenticated/i);
   });
 
   it('adds service-role RPCs for audited admin writes', () => {
-    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.service_update_profile_metadata/im);
-    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.service_set_credits/im);
+    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.service_update_profile_metadata/i);
+    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.service_set_credits/i);
     expect(sql).toMatch(/_assert_service_admin_actor/i);
     expect(sql).toMatch(/insert\s+into\s+public\.admin_actions/i);
   });

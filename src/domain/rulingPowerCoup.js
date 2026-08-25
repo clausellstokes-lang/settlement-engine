@@ -20,7 +20,6 @@
 import { clamp01 } from '../kernel/math.js';
 import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 import { governingFactionOf, num, round2, nameOf } from './rulingPower.js';
-import { ladderEffectivePowerFactor } from './townMap/ladderRead.js';
 
 /** @typedef {import('./rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
 
@@ -88,10 +87,7 @@ export function coupContenders(settlement) {
     .filter(f => f && f !== governing)
     .map(f => {
       const archetype = factionArchetype(f);
-      // §8 read-side: effective power = base × the ladder's leadership/churn factor. The
-      // factor is EXACTLY 1 when the ladder is dark (no npcLadder mirror) ⇒ byte-identical.
-      const factor = ladderEffectivePowerFactor(/** @type {{ npcLadder?: unknown }} */ (/** @type {unknown} */ (settlement)), f);
-      const power = factor === 1 ? num(f.power) : round2(num(f.power) * factor);
+      const power = num(f.power);
       return {
         name: nameOf(f),
         archetype,
@@ -105,8 +101,7 @@ export function coupContenders(settlement) {
     .sort(byWeightDescThenName)
     .slice(0, 3);
 
-  const incFactor = ladderEffectivePowerFactor(/** @type {{ npcLadder?: unknown }} */ (/** @type {unknown} */ (settlement)), governing);
-  const incumbentPower = incFactor === 1 ? num(governing?.power) : round2(num(governing?.power) * incFactor);
+  const incumbentPower = num(governing?.power);
   const amplifiedWeight = round2(incumbentPower * govMultiplier);
   const gated = challengers.length < 3
     || amplifiedWeight >= challengers[challengers.length - 1].weight;
@@ -138,13 +133,12 @@ export function coupContenders(settlement) {
  * @param {number|null} [args.rulingAuthorityScore]  causal ruling_authority 0..100 when available
  * @param {number} [args.warSentimentAdj]  P2 flag: signed shift to the incumbent hold-chance from war sentiment (0 = off)
  * @param {number} [args.interventionAdj]  W-CONVERGENCE flag: signed shift to the incumbent hold-chance from surviving foreign interveners — +raises for an incumbent-backer, −lowers for a challenger-backer (0 = off ⇒ byte-identical)
- * @param {number} [args.economicAdj]  coherence-13 flag (economicCoupReadEnabled): signed shift to the incumbent hold-chance from the settlement's economic capacity — a prosperous seat holds, a hollowed treasury falls; the caller supplies 0 when the flag is dark ⇒ byte-identical (the warSentimentAdj precedent)
  * @returns {{ holds:boolean, pHold:number, roll:number,
  *            winner:{name:string,archetype:string}|null,
  *            challengers:Array<{name:string, archetype:string, power:number, weight:number}>,
  *            incumbent:Object, reason:string }}
  */
-export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0, interventionAdj = 0, economicAdj = 0 }) {
+export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0, interventionAdj = 0 }) {
   const { challengers, incumbent } = coupContenders(settlement);
   if (!challengers.length) {
     return {
@@ -170,10 +164,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     // interventionAdj (W-CONVERGENCE): 0 when the intervention layer is dark ⇒ byte-
     // identical. A surviving foreign force backing the incumbent raises the seat's
     // hold-chance; one backing the challengers lowers it. The clamp below bounds it.
-    // economicAdj (coherence-13): 0 when economicCoupReadEnabled is dark ⇒ byte-identical.
-    // A prosperous seat (high economic_capacity) holds; a hollowed treasury falls. Same ±0.125
-    // magnitude as authorityAdj; the caller supplies the signed value, the clamp bounds the sum.
-    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0) + (Number(interventionAdj) || 0) + (Number(economicAdj) || 0)));
+    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0) + (Number(interventionAdj) || 0)));
   }
 
   const roll = rng.random();
@@ -181,7 +172,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     return {
       holds: true, pHold: round2(pHold), roll: round2(roll), winner: null, challengers, incumbent,
       reason: incumbent.gated
-        ? `${incumbent.name || 'The ruling power'} rallied enough of the court to hold the seat.`
+        ? `${incumbent.name || 'The ruling power'} presented the stronger case (amplified weight ${incumbent.amplifiedWeight} at ×${incumbent.govMultiplier} legitimacy) and held the seat.`
         : 'Against the odds, the conspirators lost their nerve at the door.',
     };
   }
@@ -198,7 +189,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     holds: false, pHold: round2(pHold), roll: round2(roll),
     winner: { name: winner.name, archetype: winner.archetype }, challengers, incumbent,
     reason: incumbent.gated
-      ? `${winner.name} united the strongest opposition and out-maneuvered both the seat and its rivals.`
+      ? `${winner.name} out-maneuvered both the seat and its rivals (weight ${winner.weight} of ${round2(total)}).`
       : `${incumbent.name || 'The ruling power'}'s case never re-entered the field — ${winner.name} took the seat near-unopposed.`,
   };
 }

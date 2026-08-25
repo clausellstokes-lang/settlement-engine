@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
+import { Check, Eye, MessageCircle, Share2, Sparkles, ThumbsUp } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -16,23 +17,16 @@ import {
   SP,
   sans,
   serif_,
+  swatch,
 } from '../theme.js';
 import { formatDate, formatNumber, human, shareGalleryDossier } from './galleryUtils.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
-import AlivenessBadge from './AlivenessBadge.jsx';
 import Button from '../primitives/Button.jsx';
 import GalleryImage from './GalleryImage.jsx';
-import { GalleryReactionSummary } from './GalleryReactionChips.jsx';
 import VoteButton from './VoteButton.jsx';
 
 export default function GalleryCard({ item, onOpen, onVote, voting }) {
   const [shared, setShared] = useState(false);
-  // DOMPurify isn't cheap and a gallery is a long list where each card
-  // re-renders on vote/scroll; sanitize only when the description string changes.
-  const descriptionHtml = useMemo(
-    () => (item.description ? sanitizeGalleryHtml(item.description) : ''),
-    [item.description],
-  );
   const onShare = async () => {
     const r = await shareGalleryDossier({ slug: item.slug, name: item.name });
     if (r.ok) { setShared(true); setTimeout(() => setShared(false), 1600); }
@@ -51,20 +45,16 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
   ].filter(Boolean).slice(0, 5);
 
   return (
-    <article
-      className={`oc-m-inkdarken sf-gallery-card${item.curated ? ' sf-gallery-card--curated' : ''}`}
-      style={{
-        minWidth: 0,
-        overflow: 'hidden',
-        // The specimen plate: a hairline frame (law §3, "plates in hairline
-        // frames"), curated in gold — no rounded corner, no drop-shadow lift.
-        // Depth is ink, never elevation; the frame inks darker on hover.
-        border: `1px solid ${item.curated ? GOLD : BORDER}`,
-        background: CARD,
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <article style={{
+      minWidth: 0,
+      overflow: 'hidden',
+      border: `1px solid ${item.curated ? GOLD : BORDER}`,
+      borderRadius: 8,
+      background: CARD,
+      boxShadow: item.curated ? '0 8px 22px rgba(201,162,76,0.18)' : '0 4px 14px rgba(27,20,8,0.08)',
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
       <button
         type="button"
         onClick={() => onOpen(item.slug)}
@@ -87,15 +77,14 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
               gap: 4,
               minHeight: 24,
               padding: '3px 7px',
+              borderRadius: 999,
               background: GOLD,
-              // Ink-on-gold, the house AA badge pairing (7.6:1) — the
-              // white-on-gold this carried was the retired 2.4:1 failure.
-              color: INK,
+              color: swatch.white,
               fontFamily: sans,
               fontSize: FS.xxs,
               fontWeight: 950,
             }}>
-              {Math.max(0, item.netVotes || 0)} votes
+              <ThumbsUp size={11} /> {Math.max(0, item.netVotes || 0)}
             </span>
             {item.curated && (
               <span style={{
@@ -104,6 +93,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
                 gap: 3,
                 minHeight: 24,
                 padding: '3px 7px',
+                borderRadius: 999,
                 background: CARD,
                 color: GOLD,
                 border: `1px solid ${GOLD}`,
@@ -111,24 +101,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
                 fontSize: FS.xxs,
                 fontWeight: 950,
               }}>
-                Curated
-              </span>
-            )}
-            {item.unlisted && (
-              <span style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 3,
-                minHeight: 24,
-                padding: '3px 7px',
-                background: CARD,
-                color: SECOND,
-                border: `1px solid ${BORDER2}`,
-                fontFamily: sans,
-                fontSize: FS.xxs,
-                fontWeight: 950,
-              }}>
-                Unlisted
+                <Sparkles size={10} /> Curated
               </span>
             )}
           </div>
@@ -161,10 +134,8 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
             {item.name || t('gallery.untitled')}
           </h3>
         </Button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
-          <span>{meta.join(' / ')}</span>
-          {/* Aliveness (GALLERY-2 phase 2) — renders nothing when un-stamped. */}
-          <AlivenessBadge score={item.aliveness} />
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
+          {meta.join(' / ')}
         </div>
         {item.description && (
           <div
@@ -180,7 +151,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
               WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
             }}
-            dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+            dangerouslySetInnerHTML={{ __html: sanitizeGalleryHtml(item.description) }}
           />
         )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
@@ -188,6 +159,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
             <span key={`${tag}-${index}`} style={{
               display: 'inline-flex',
               padding: '2px 6px',
+              borderRadius: 5,
               border: `1px solid ${BORDER2}`,
               background: CARD_ALT,
               color: SECOND,
@@ -200,22 +172,20 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
             </span>
           ))}
         </div>
-        {/* Reader reactions (GALLERY-2 phase 2) — read-only digest of the top
-            structured reactions; the interactive row lives on the dossier. */}
-        <GalleryReactionSummary counts={item.reactions} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'wrap', marginTop: 2 }}>
           <VoteButton count={item.netVotes} voted={item.voted} disabled={voting} onClick={() => onVote(item)} />
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
-            {formatNumber(item.viewCount)} views
+            <Eye size={12} /> {formatNumber(item.viewCount)}
           </span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
-            {formatNumber(item.commentCount)} comments
+            <MessageCircle size={12} /> {formatNumber(item.commentCount)}
           </span>
           <Button
             variant="ghost"
             size="sm"
             onClick={onShare}
             title="Share this dossier"
+            icon={shared ? <Check size={12} /> : <Share2 size={12} />}
           >
             {shared ? 'Copied' : 'Share'}
           </Button>

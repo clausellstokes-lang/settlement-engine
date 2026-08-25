@@ -1,14 +1,14 @@
 /**
- * AccountFAQ.jsx — inline FAQ in the AccountPage.
+ * AccountFAQ.jsx — P138 / AC-4 inline FAQ in the AccountPage.
  *
- * Account-page surfaces were credit-counters
+ * The critique flagged that account-page surfaces were credit-counters
  * and Stripe portal links with no "what do I do if I run out of
  * credits" / "can I cancel my subscription" guidance inline. Users
  * ended up in support emails for things the answer to which was one
  * paragraph away.
  *
  * Six short Q-and-A's, accordion-style. The questions are common-Q's
- * (credit grant, cancel anytime, refund handling, founder lifetime,
+ * (credit grant, cancel anytime, refund window, founder lifetime,
  * gallery privacy, AI vs simulator framing). All copy lives in
  * `t('accountFaq.qs')` so the copy team can edit without a code change.
  *
@@ -16,12 +16,18 @@
  * per-question opens.
  */
 
-// Use shared theme tokens (no private palette that can silently diverge):
-// BODY/MUTED/sans are the canonical parchment-theme values; SP spaces the stack.
-import { BODY, MUTED, sans, FS, SP } from '../theme.js';
+import { useState } from 'react';
+import { FS, swatch } from '../theme.js';
+import { Plus, Minus } from 'lucide-react';
 import { t } from '../../copy/index.js';
-import Disclosure from '../primitives/Disclosure.jsx';
 import Button from '../primitives/Button.jsx';
+
+const GOLD = swatch['#8C6F32'];
+const INK = swatch['#1B1408'];
+const BODY = swatch['#3A2F18'];
+const MUTED = swatch['#9C8068'];
+const BORDER = swatch['#E8D9B0'];
+const sans = '"Nunito", system-ui, sans-serif';
 
 // Question keys — t() will resolve `${key}.q` and `${key}.a` from the
 // copy module. Keeping the keys here so the iteration order is
@@ -35,48 +41,68 @@ const Q_KEYS = [
   'aiOrSim',
 ];
 
-// `linkAccount` gates the closing self-help line's destination. On the public
-// About > FAQ tab the reader is off the Account page, so "your Account page"
-// renders as a ghost Button that routes there via onNavigate('account'). On the
-// Account page itself (the default), that link would point at the page the
-// reader is already on — a decoy — so the phrase stays plain text.
-export default function AccountFAQ({ linkAccount = false, onNavigate } = {}) {
+export default function AccountFAQ() {
+  const [open, setOpen] = useState(null);
+
   return (
     <div style={{
-      display: 'flex', flexDirection: 'column', gap: SP.sm,
+      display: 'flex', flexDirection: 'column', gap: 6,
     }}>
-      {Q_KEYS.map((key) => {
+      {Q_KEYS.map(key => {
+        const isOpen = open === key;
         const question = t(`accountFaq.${key}.q`);
         const answer   = t(`accountFaq.${key}.a`);
         if (!question || !answer) return null;
-        // Route each Q through the canonical Disclosure primitive: it owns its
-        // own per-item open state (independent toggles), a real native button
-        // with aria-expanded/aria-controls, and the shared caret/header styling.
         return (
-          <Disclosure key={key} title={question} compact>
-            <div style={{
-              fontSize: FS.sm, color: BODY,
-              lineHeight: 1.55, fontFamily: sans,
-            }}>
-              {answer}
-            </div>
-          </Disclosure>
+          <div
+            key={key}
+            style={{
+              border: `1px solid ${BORDER}`,
+              borderRadius: 5,
+              overflow: 'hidden',
+              background: swatch.white,
+            }}
+          >
+            <Button
+              variant="ghost"
+              size="md"
+              fullWidth
+              onClick={() => setOpen(isOpen ? null : key)}
+              aria-expanded={isOpen}
+              icon={isOpen
+                ? <Minus size={13} color={GOLD} />
+                : <Plus size={13} color={GOLD} />}
+              style={{
+                gap: 8,
+                padding: '10px 12px',
+                background: isOpen ? '#FBF5E6' : 'transparent',
+                justifyContent: 'flex-start',
+                textAlign: 'left',
+                whiteSpace: 'normal',
+                fontFamily: sans, fontSize: FS.md, fontWeight: 600,
+                color: INK,
+              }}
+            >
+              <span style={{ flex: 1 }}>{question}</span>
+            </Button>
+            {isOpen && (
+              <div style={{
+                padding: '8px 14px 12px',
+                fontSize: FS.sm, color: BODY,
+                lineHeight: 1.55, fontFamily: sans,
+                borderTop: `1px solid ${BORDER}`,
+              }}>
+                {answer}
+              </div>
+            )}
+          </div>
         );
       })}
       <div style={{
         marginTop: 4, fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
         fontFamily: sans,
       }}>
-        {linkAccount
-          // Off the Account page (public About > FAQ): make the destination a
-          // real control so the first click lands instead of dead-ending in
-          // text. Ghost keeps it a low-stakes inline link, not a second CTA.
-          ? <>Still stuck? Reach Customer Support from{' '}
-              <Button variant="ghost" size="sm" onClick={() => onNavigate?.('account')}>
-                your Account page
-              </Button>.
-            </>
-          : 'Still stuck? Reach Customer Support from your Account page.'}
+        Still stuck? Reach Customer Support from your Account page.
       </div>
     </div>
   );

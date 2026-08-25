@@ -1,0 +1,90 @@
+export const meta = {
+  name: 'chair-layering-regression-repair',
+  description: "Repair the 13 test regressions the chair's own layering commit introduced: stale edge-bundle inputs, unlicensed cross-layer imports, a moved walker inventory, and four import-set pins the split changed.",
+  phases: [
+    { title: 'Bundles', detail: 'the moved input and the five edge bundles' },
+    { title: 'Registry', detail: 'cross-layer licences, the walker inventory, the import-set pins' },
+    { title: 'Verify', detail: 'the whole gate, execution serialized' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE. Build tree ${TREE} (branch claude/composite-r4), HEAD \`f16de756\`. Hard-gate every state-mutating compound with the \`cd\` FIRST.
+
+⭐ \`sh scripts/gate-mutex.sh --wait && sh scripts/gate-tail.sh <cmd>\` — ONE \`&&\` chain.
+⛔⛔ **NEVER READ AN EXIT CODE THROUGH A PIPE, AND NEVER LET A PIPELINE'S LAST COMMAND BE THE ONE YOU READ.** The chair hit this AGAIN one turn before this brief: a backgrounded \`npm run check; ...; tail\` reported exit 0 because \`tail\` succeeded, while the gate's own status was 1. Capture the status into a variable IMMEDIATELY after the command, or use \`gate-tail.sh\`.
+⚠ **EVERY FIGURE IN AN INTEGRITY-COUNTED \`git archive\` OF A COMMITTED SHA.** One at a time; \`rm -f\` the node_modules symlink before deleting; disk ~11 GiB, keep it that way.
+⚠ The tree is CLEAN and no other lane is running. Verify that yourself before starting, and never stage a file you did not author.
+
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE.`
+
+const CONTEXT = `
+**WHAT HAPPENED.** The chair committed a layering repair at \`67f8a58e\` (three real regressions: a 39-module cycle cut to two edges, \`hookThemes.js\` \`git mv\`'d \`src/generators/\` → \`src/domain/\`, and a first-paint leak cured by extracting two zero-import leaves and splitting \`negotiationPictures.js\` into it + a new \`negotiationEvaluation.js\`). The typecheck ratchets are green at \`f16de756\`. **But \`npm run check\` now stops at step 12 \`test:ratchet\` with 13 failing tests NOT in the frozen census of 49 (frozen at \`c658fb44\`).** All 13 are consequences of that commit. The instrument is correct; the commit is incomplete.
+
+**THE THIRTEEN, BY FAMILY:**
+1. \`tests/edgeFunctions/aiGroundingBundle.freshness\` (1) + \`tests/edgeFunctions/edgeSharedBundleReproducibility\` (2) — including *"every input path in the meta still exists on disk"* and *"every input outside node_modules/ is git-TRACKED"*.
+2. \`tests/lint/couplingInclusion.walker.test.js\` (5) — the cross-layer inclusion ratchet AND the unlayered-module census (CR-FP-11).
+3. \`tests/lint/observedShapeReaders.walker.test.js\` (2) — the swap mutant and the shrink-only live scan.
+4. \`tests/domain/envoyK3BeliefSeam.test.js\` (3) — *"every negotiation module reaches only its reviewed closed import set"*, *"the two-picture wrapper reaches peaceTerms only through input-shaped leaves"*, and the WR-7c vote path.`
+
+phase('Bundles')
+const bundles = await agent(LAWS + CONTEXT + `
+
+YOU ARE THE EDGE-BUNDLE LANE. Family 1 — three tests, one cause, and it is a RECORDED LAW the chair's commit broke.
+
+**THE LAW:** *edge bundles are BUILT ARTIFACTS — a lane touching bundled inputs must rebuild edge-shared IN THE SAME COMMIT, and a rebuild always hits FIVE bundles.* \`67f8a58e\` \`git mv\`'d \`src/generators/hookThemes.js\` → \`src/domain/hookThemes.js\` and never rebuilt. The bundle meta now names an input path that does not exist on disk, which is exactly what \`aiGroundingBundle.freshness\` asserts.
+
+**DO:** find the edge-shared build script (it is the one the reproducibility test drives), run it, and confirm **all five bundles** are regenerated. ⚠ The reproducibility test asserts the bundles reproduce **AT THE COMMITTED TREE** — so the rebuild must be committed together with any input change, never after. ⚠ There is a NEGATIVE CONTROL test (*"a doctored sourceHash does not satisfy the same check"*) — make sure your rebuild does not accidentally satisfy it trivially; run it and confirm it still discriminates.
+⚠ Confirm every bundle input outside \`node_modules/\` is git-TRACKED — the second failing assertion. A rebuild that pulls in an untracked file passes locally and reds at HEAD.
+
+⛔ **DEPLOY IS THE OWNER'S TRAIN.** Rebuilding the bundles is repair; deploying them is not. Do not push, do not deploy.
+
+RETURN JSON.`, { label: 'repair:bundles', phase: 'Bundles', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, bundlesRebuilt: { type: 'number' }, buildScript: { type: 'string' }, negativeControlStillDiscriminates: { type: 'string' }, allInputsTracked: { type: 'boolean' }, testsGreenNow: { type: 'array', items: { type: 'string' } }, commits: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Registry')
+const registry = await agent(LAWS + CONTEXT + `
+
+YOU ARE THE REGISTRY AND PINS LANE. Families 2, 3 and 4. The bundle lane landed: ` + JSON.stringify(bundles || {}).slice(0, 2500) + `
+
+**FAMILY 2 — THE CROSS-LAYER INCLUSION RATCHET (5 tests).** The split minted two new modules (\`src/domain/spatial/spatialLedgerAccess.js\`, \`src/domain/worldPulse/negotiationEvaluation.js\`) and moved a third (\`src/domain/hookThemes.js\`). The ratchet asserts a NEW cross-layer import is **either licensed by a registry row or REDS**, and CR-FP-11's census asserts a NEW unlayered module gets **a family, an argument, or the baseline**.
+**Decide each case on its merits and say which of the three you chose and why.** ⚠ These are shrink-only inventories with exactness assertions (*"the committed baseline is exact, unique, and never grew"*, *"a baseline pair whose import is GONE reds so the win is banked"*) — so the split may also have BANKED WINS by removing pairs. **Re-derive every figure; do not transcribe.** ⛔ A licence row is a claim that the import is architecturally intended — if one of these imports is NOT intended, the honest cure is to change the import, not to license it.
+
+**FAMILY 3 — THE OBSERVED-SHAPE WALKER (2 tests).** Its baseline was frozen at \`90deb182\`; two new source files legitimately add findings, and rows moved. **Re-freeze at YOUR OWN committed sha with every figure re-derived inside an integrity-counted archive.** ⚠⚠ This baseline is now CONTENT-ADDRESSED, not count-based — that was a deliberate cure this cycle, so a re-freeze must preserve identities, and **the SWAP MUTANT test must still red after your re-freeze.** Run it. A re-freeze that blinds the swap mutant undoes the cure.
+
+**FAMILY 4 — THE IMPORT-SET PINS (3 tests), AND THIS ONE NEEDS REAL JUDGMENT.** \`envoyK3BeliefSeam\` asserts *"every negotiation module reaches only its reviewed closed import set"* and *"the two-picture wrapper reaches peaceTerms only through input-shaped leaves"*.
+**Read those pins and decide, with evidence, which is true:**
+ (a) the split **violated a real architectural constraint** — then FIX THE SPLIT, do not edit the pin; or
+ (b) the split **satisfied the constraint by a different, better route** (it removed a barrel hop and cut a cycle, which is the same direction the pin points) — then the pin's REVIEWED SET is stale and updating it is legitimate, with the new set re-derived and the reason recorded.
+⛔ Do not assume (b) because it is easier. The pin exists because someone reviewed that import set deliberately; \`negotiationEvaluation.js\` is a NEW module that no reviewer has ever seen, and admitting it silently is exactly what the pin is there to prevent.
+
+Gate through the mutex chain. Commit body carries \`⏳ OPUS-ERA — FABLE SURVEY OWED\`.
+
+RETURN JSON.`, { label: 'repair:registry-pins', phase: 'Registry', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, couplingChoices: { type: 'array', items: { type: 'string' } }, winsBanked: { type: 'string' }, walkerRefrozenAt: { type: 'string' }, swapMutantStillReds: { type: 'string' }, family4Verdict: { type: 'string', enum: ['split-violated-fix-the-split', 'pin-stale-update-reviewed-set'] }, family4Evidence: { type: 'string' }, commits: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Verify')
+const exec = await agent(LAWS + CONTEXT + `
+
+YOU ARE THE EXECUTION VERIFIER. **You hold the gate slot alone this round.**
+Bundles: ` + JSON.stringify(bundles || {}).slice(0, 4000) + `
+Registry/pins: ` + JSON.stringify(registry || {}).slice(0, 5000) + `
+
+**RUN \`npm run check\` END TO END** in an integrity-counted archive at the final sha, capturing the status into a variable IMMEDIATELY (never a trailing \`tail\`). Report every step by name with its own exit code. **If it reaches steps 13 and 14, quote EXACTLY what \`build\` and \`verify:dist\` say — that output has not been seen in this chain since 2026-08-02 and is the entire point.** Then run \`npm run smoke:boot\` if it exists, given the recorded hazard that build exits 0 while dist is un-bootable from a chunk-cycle TDZ.
+
+Then refute: (a) confirm the test ratchet's census did NOT grow — a repair that widens the census instead of fixing is a REJECT; (b) plant a fresh failure in a non-baselined test and confirm the ratchet reds; (c) **confirm the observed-shape SWAP MUTANT still reds after the re-freeze**; (d) confirm the edge-bundle negative control still discriminates; (e) confirm no coupling licence row was added for an import that is not architecturally intended.
+
+RETURN structured JSON only.`, { label: 'verify:execution', phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, checkCompletes: { type: 'boolean' }, firstFailingStep: { type: 'string' }, buildOutput: { type: 'string' }, verifyDistOutput: { type: 'string' }, smokeBootOutput: { type: 'string' }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+const statik = await agent(LAWS + CONTEXT + `
+
+YOU ARE THE STATIC VERIFIER. ⛔ **DO NOT RUN THE FULL SUITE** — a sibling holds that slot. Diffs, archives, source reading and targeted single-file runs only.
+Bundles: ` + JSON.stringify(bundles || {}).slice(0, 4000) + `
+Registry/pins: ` + JSON.stringify(registry || {}).slice(0, 5000) + `
+
+Refute by reading: (1) **Family 4's verdict is the load-bearing judgment of this round** — read \`envoyK3BeliefSeam\`'s pins and the actual import graph yourself and say independently whether the split violated the constraint or satisfied it by a better route. If the lane chose "pin stale" and you disagree, that is a REJECT. (2) Every coupling licence row added: is the import architecturally INTENDED, or was a violation licensed for convenience? (3) Did any baseline, census or inventory grow without a stated legitimate cause? Diff them all against \`f16de756\`. (4) Are the rebuilt edge bundles byte-reproducible from the committed tree, and is every input git-tracked? (5) Check the round's new/edited pins for the recorded vacuity shapes: self-supplied anchor, empty-collection loop negative, \`// anchored:\` not on the immediately-preceding line, a pin authored past its own trigger.
+
+RETURN structured JSON only.`, { label: 'verify:static', phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, family4Independent: { type: 'string' }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+const rejects = [exec, statik].filter(v => v && v.verdict === 'REJECT')
+log(`verify: ${rejects.length} REJECT; check completes = ${exec && exec.checkCompletes}`)
+return { bundles, registry, exec, statik, verdict: rejects.length ? 'REJECT' : 'PASS' }

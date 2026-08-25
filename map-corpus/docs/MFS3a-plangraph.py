@@ -8,13 +8,12 @@ METHOD, and the calibration behind each step (all on hf72 unless stated):
               Measured x1e3: built fabric 17-26 | hatched field 6.6-7.5 |
               tree belt 10.5 | cartouche 11.0 | river 0.6.  Built fabric is
               many small closed shapes; hatching is long parallel strokes.
- 3 STREET     Otsu computed ON NON-INK PIXELS ONLY (threshold lands ~190 on a
-              plate whose block fill sits at L167-172 and whose street/void
-              sits at L212-220 -- a 45 L gap).  Plain Otsu on the full
-              histogram returns ~118 and separates ink from not-ink, which is
-              the wrong split; this is why the threshold is taken on the
-              non-ink subset.  Street is then clipped to the hull, because
-              open countryside shares the street luminance exactly.
+ 3 STREET     LOCAL-adaptive pale mask: L > neighbourhood mean + 12, followed
+              by close/fill/open and hull clipping. A global or non-ink Otsu
+              split fails on ward-washed plates whose block washes span the
+              street luminance; the street is the palest thing in its own
+              neighbourhood. Open countryside shares that luminance, so the
+              hull clip remains mandatory.
  4 GRAPH      skeleton -> spur-pruned -> nodes typed by branch count.
               UNPRUNED SKELETONS REPORT ~55-72% DEAD ENDS, WHICH IS AN
               ARTIFACT.  Pruning removes stubs below min_branch.

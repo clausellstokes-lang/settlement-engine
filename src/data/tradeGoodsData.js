@@ -540,8 +540,6 @@ export const COMMODITY_CATEGORY_MAP = {
   livestock: "grain",
   dairy: "grain",
   "game meat": "grain",
-  "animal hides": "craft",
-  furs: "luxury",
   "forest herbs": "herbs",
   wool: "textile",
   flax: "textile",

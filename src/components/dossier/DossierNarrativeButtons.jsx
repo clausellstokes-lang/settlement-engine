@@ -1,4 +1,5 @@
 import { FS } from '../theme.js';
+import { Eye, EyeOff, RefreshCw } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 
 // ── Button group state ─────────────────────────────────────────────────────
@@ -18,11 +19,6 @@ export default function DossierNarrativeButtons({
   storeShowNarrative,
   setShowNarrative,
   runNarrativeLayer,
-  // When the NextActionRail owns the paid narrate/regenerate CTAs (the read-mode
-  // dossier hero), the dossier header keeps ONLY the free raw/narrated view
-  // toggle — the credit-spending Generate/Regenerate buttons are suppressed here
-  // so a single narrate entry point competes for the focal (restored @ S2r-a).
-  suppressNarrativeCta = false,
 }) {
     // Unsaved settlements: render nothing here. The AI-enrichment affordance
     // moved to a slim hint line below the tab strip so the header stays
@@ -33,7 +29,7 @@ export default function DossierNarrativeButtons({
     const costLabel = isConfigured ? ` (${getCost('narrative')} credits)` : '';
     const btnBase = {
       display: 'flex', alignItems: 'center', gap: 6,
-      padding: '6px 14px',
+      padding: '6px 14px', borderRadius: 20,
       fontSize: FS.xs, fontWeight: 800,
       fontFamily: 'Nunito, sans-serif', letterSpacing: '0.04em',
       transition: 'all 0.2s', whiteSpace: 'nowrap',
@@ -42,8 +38,6 @@ export default function DossierNarrativeButtons({
 
     // State 1: no narrative yet → single generate button
     if (!aiSettlement && !aiLoading) {
-      // Suppressed in read mode (the rail owns the paid first-narrate CTA).
-      if (suppressNarrativeCta) return null;
       return (
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
           <Button
@@ -96,12 +90,11 @@ export default function DossierNarrativeButtons({
           title={inNarrativeView
             ? 'Switch to the raw generated data (no AI polish). No credits used.'
             : 'Switch to the AI-refined view. No credits used.'}
+          icon={inNarrativeView ? <EyeOff size={12} /> : <Eye size={12} />}
         >
           {inNarrativeView ? 'View Raw Simulation' : 'View Narrative'}
         </Button>
-        {/* Regenerate button — spends credits. Suppressed in read mode (the
-            rail owns the paid Regenerate rung); the free view toggle stays. */}
-        {!suppressNarrativeCta && (
+        {/* Regenerate button — spends credits */}
         <Button
           variant="ai"
           size="sm"
@@ -109,10 +102,10 @@ export default function DossierNarrativeButtons({
           disabled={regenerating}
           busy={regenerating}
           title={`Regenerate the Narrative Layer from the simulator output. Spends ${getCost('narrative')} credits.`}
+          icon={<RefreshCw size={12} />}
         >
           {regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`}
         </Button>
-        )}
       </div>
     );
 }

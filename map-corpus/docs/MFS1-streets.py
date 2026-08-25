@@ -9,8 +9,14 @@ catches squares, greens and yards, so the top decile mixes 'widest street' with
 import json, os, sys
 from PIL import Image
 
-grain = {r["file"]: r for r in json.load(open("MFS1-grain2.json")) if "error" not in r}
-jobs = json.load(open("MFS1-streetjobs.json"))
+HERE = os.path.dirname(os.path.abspath(__file__))
+grain_path = os.path.join(HERE, "MFS1-grain2.json")
+jobs_path = os.path.join(HERE, "MFS1-streetjobs.json")
+missing = [p for p in (grain_path, jobs_path) if not os.path.exists(p)]
+if missing:
+    raise SystemExit("UNAVAILABLE — archived street-width inputs are absent: " + ", ".join(missing))
+grain = {r["file"]: r for r in json.load(open(grain_path)) if "error" not in r}
+jobs = json.load(open(jobs_path))
 out = []
 for path, x0, y0, x1, y1, lab in jobs:
     key = os.path.basename(path).replace(".svg.png", "").replace(".png", "")

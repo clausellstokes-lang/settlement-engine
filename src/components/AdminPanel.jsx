@@ -10,35 +10,28 @@
  * user's email + columns to the browser, unaudited, and has been removed.
  */
 import { useState, useEffect, useCallback } from 'react';
+import {
+  Users, Shield, Zap, ChevronLeft, RefreshCw, Crown, Flag,
+  BarChart3, TrendingUp, AlertCircle,
+} from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
 import AdminAnalyticsPanel from './admin/AdminAnalyticsPanel.jsx';
-import AdminClientErrorsPanel from './admin/AdminClientErrorsPanel.jsx';
 import AdminTrendsPanel from './admin/AdminTrendsPanel.jsx';
 import AdminUsersPanel from './admin/AdminUsersPanel.jsx';
-import AdminBroadcastPanel from './admin/AdminBroadcastPanel.jsx';
 import SupportQueuePanel from './admin/SupportQueuePanel.jsx';
 import AiPricingResyncPanel from './admin/AiPricingResyncPanel.jsx';
 import AdminSimTuningPanel from './admin/AdminSimTuningPanel.jsx';
-import AdminOperationalHealthPanel from './admin/AdminOperationalHealthPanel.jsx';
 import Button from './primitives/Button.jsx';
 import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
-import Page from './primitives/Page.jsx';
-import PageHeader from './primitives/PageHeader.jsx';
-import Stat from './primitives/Stat.jsx';
-import { GOLD_TXT, INK, BODY, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, FS } from './theme.js';
+import { GOLD, INK, MUTED, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, PAGE_MAX } from './theme.js';
 
-// Icons-off surface: the section header is text-only. The action-vs-reference
-// boundary the old header glyph carried is now held by the differential
-// spacing that sets the read-only Insights cluster farther out from the action
-// tools (P5), so the page still reads as a hierarchy rather than co-equal cards
-// (P4).
-function Section({ heading, children, actions }) {
+function Section({ title, icon: Icon, children, actions }) {
   return (
     <div style={{
-      border: `1px solid ${BORDER}`, overflow: 'hidden',
+      border: `1px solid ${BORDER}`, borderRadius: R.xl, overflow: 'hidden',
       background: CARD,
     }}>
       <div style={{
@@ -46,9 +39,10 @@ function Section({ heading, children, actions }) {
         padding: `${SP.md}px ${SP.lg}px`,
         background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       }}>
-        <h2 style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, flex: 1 }}>
-          {heading}
-        </h2>
+        {Icon && <Icon size={16} color="#7c3aed" />}
+        <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, flex: 1 }}>
+          {title}
+        </span>
         {actions}
       </div>
       <div style={{ padding: `${SP.lg}px` }}>
@@ -104,134 +98,116 @@ export default function AdminPanel({ onBack }) {
 
   if (!isElevated) {
     return (
-      <div style={{ textAlign: 'center', padding: '60px 20px', color: BODY, fontFamily: sans }}>
+      <div style={{ textAlign: 'center', padding: '60px 20px', color: MUTED, fontFamily: sans }}>
+        <Shield size={48} color={BORDER} style={{ marginBottom: SP.lg }} />
         <p style={{ fontSize: FS.lg }}>Access denied. Developer or Admin role required.</p>
       </div>
     );
   }
 
   return (
-    // Differential spacing (P5): the page-identity header + KPI stats form one
-    // tight orientation cluster (SP.md); the management Section stack sits
-    // farther out (SP.xl, applied on the wrapper below) so a squint separates
-    // "what is this page" from "the tools". Width/rhythm come from the shared
-    // Page primitive (default cap === PAGE_MAX), not a bespoke literal.
-    <Page pad={`${SP.lg}px 0`} style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
-      {/* Page identity — the canonical PageHeader idiom: small-caps gold
-          eyebrow over a serif title with the Back / Refresh actions in the
-          corner slot. Refresh re-reads the audited get_stats KPI snapshot. */}
-      <PageHeader
-        eyebrow="Operator console"
-        title="Admin"
-        subtitle="Manage users, credits, and system settings."
-        actions={(
-          <>
-            {onBack && (
-              <Button variant="gold" size="md" onClick={onBack}>
-                Back
-              </Button>
-            )}
-            <Button variant="ghost" size="sm" onClick={fetchStats}>
-              Refresh
-            </Button>
-          </>
+    <div style={{
+      display: 'flex', flexDirection: 'column', gap: SP.lg,
+      maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px 0`,
+    }}>
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
+        {onBack && (
+          <Button variant="gold" size="md" onClick={onBack} icon={<ChevronLeft size={14} />}>
+            Back
+          </Button>
         )}
-      />
+        <div style={{ flex: 1 }}>
+          <h1 style={{ margin: 0, fontSize: FS.xxl, fontFamily: serif_, color: INK }}>Admin Panel</h1>
+          <div style={{ fontSize: FS.sm, color: MUTED }}>Manage users, credits, and system settings</div>
+        </div>
+        <Button variant="ghost" size="sm" onClick={fetchStats} icon={<RefreshCw size={12} />}>
+          Refresh
+        </Button>
+      </div>
 
-      {/* Stats — the three KPI figures as text-only ledger Stats (muted
-          uppercase label over a serif value). Category is carried by the label
-          text; Total Users keeps the saturated GOLD_TXT value as the operator's
-          first-scan figure (P4 one focal value). */}
+      {/* Stats cards — the read-only KPI orientation strip. Kept visible on
+          mobile; the grid (auto-fit, 140px min) lets the three cards stack at
+          phone width instead of cramming into a 3-across flex row. */}
       {stats && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: SP.md }}>
-          <Stat label="Total Users" value={stats.total} tone={GOLD_TXT} />
-          <Stat label="Premium" value={stats.premiumCount} />
-          <Stat label="Credits Pool" value={stats.totalCredits} />
+          {[
+            { label: 'Total Users', value: stats.total, icon: Users, color: GOLD },
+            { label: 'Premium', value: stats.premiumCount, icon: Crown, color: '#2a7a2a' },
+            { label: 'Credits Pool', value: stats.totalCredits, icon: Zap, color: '#7c3aed' },
+          ].map(({ label, value, icon: Icon, color }) => (
+            <div key={label} style={{
+              flex: 1, padding: SP.lg, background: CARD,
+              border: `1px solid ${BORDER}`, borderRadius: R.lg,
+              textAlign: 'center',
+            }}>
+              <Icon size={18} color={color} style={{ marginBottom: SP.xs }} />
+              <div style={{ fontSize: FS.xxl, fontWeight: 700, color, fontFamily: sans }}>{value}</div>
+              <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</div>
+            </div>
+          ))}
         </div>
       )}
 
-      {/* Mobile: the read-only KPI strip above is the whole admin read surface;
-          the management toolset is gated to desktop. The plain "gate" variant
-          (no teaser) is correct here — the deferred content is raw operator
-          editors and dashboards, not readable prose. Copy is literal props
-          (house voice, no em dashes) per the RealmMobileGate precedent. */}
+      {/* Mobile: the KPI strip above is the whole admin read surface; the
+          management toolset is gated to desktop. The plain "gate" variant (no
+          teaser) is correct here: the deferred content is raw operator editors
+          and dashboards, not readable prose. Copy is literal props (house
+          voice, no em dashes) per the RealmMobileGate precedent. */}
       {isMobile ? (
-        <div style={{ marginTop: SP.sm }}>
-          <DesktopOnlyGate
-            title="Admin works best on desktop"
-            message="The operator console covers user management, gallery reports, the support queue, AI pricing, and the usage and simulation dashboards. It is dense and needs the room a larger screen gives it. The figures above are a read-only snapshot. Open Admin on desktop to manage users or work the queue."
-          />
-        </div>
+        <DesktopOnlyGate
+          title="Admin works best on desktop"
+          message="The operator console covers user management, gallery reports, the support queue, AI pricing, and the usage and simulation dashboards. It is dense and needs the room a larger screen gives it. The figures above are a read-only snapshot. Open Admin on desktop to manage users or work the queue."
+        />
       ) : (
-      /* Management Sections — held off from the header/KPI cluster (P5
-          differential spacing) and spaced wider from one another than the
-          page-identity group above. */
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, marginTop: SP.sm }}>
-      {/* Action tools — the high-frequency operator surfaces (user console,
-          moderation, support, pricing). No raw profiles read: the only user
-          source is the audited list_users / get_user_* edge actions. */}
-      <Section heading="User Management">
+        <>
+      {/* User management — audited, redacted search / inspect / act console.
+          No raw profiles read: the only user source is the audited list_users /
+          get_user_* edge actions. Reveal-full requires a reason and is audited. */}
+      <Section title="User Management" icon={Users}>
         <AdminUsersPanel />
       </Section>
 
-      <Section heading="Broadcast Messages">
-        <AdminBroadcastPanel />
-      </Section>
-
-      <Section heading="Gallery Reports">
+      <Section title="Gallery Reports" icon={Flag}>
         <GalleryModerationPanel />
       </Section>
 
       {/* Support queue — claim / transition / reply / internal-note / link-FAQ,
-          all through the audited admin-actions ticket handlers. */}
-      <Section heading="Support Queue">
+          all through the audited admin-actions ticket handlers (list_ticket_pool
+          / list_ticket_thread / claim_ticket / set_ticket_status /
+          post_ticket_reply / link_ticket_faq). Replaces the former read-only
+          support_messages client list. */}
+      <Section title="Support Queue" icon={AlertCircle}>
         <SupportQueuePanel />
-      </Section>
-
-      {/* Durable privacy/money/webhook obligations — unlike a generic status
-          dashboard, this is a work surface: exceptional rows remain visible
-          after acknowledgement until their authoritative worker completes. */}
-      <Section heading="Operational Obligations">
-        <AdminOperationalHealthPanel />
       </Section>
 
       {/* AI pricing — operator resync cockpit for the shared pricingResync module
           (admin-actions ai_pricing_resync), plus the nightly cron status/toggle.
           Dry-run is the checkbox default, so mounting never risks a stray write. */}
-      <Section heading="AI Pricing">
+      <Section title="AI Pricing" icon={RefreshCw}>
         <AiPricingResyncPanel />
       </Section>
 
-      {/* Insights — the read-only dashboards demoted into one cluster set
-          farther out (SP.lg + marginTop) from the action tools above (P4/P5): a
-          squint now separates "tools I act in" from "dashboards I read", so the
-          page reads as a hierarchy instead of co-equal cards. */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, marginTop: SP.lg }}>
-        <Section heading="Usage Trends">
-          <AdminTrendsPanel />
-        </Section>
+      <Section title="Usage Trends" icon={TrendingUp}>
+        <AdminTrendsPanel />
+      </Section>
 
-        {/* Observability cluster — the read-only analytics dashboards + the
-            production crash sink (client_error_events, 081; grouped by signature
-            with the always-visible last-hour alert banner from
-            report_client_error_alert, 156). Both live in ONE Section (rather than
-            a second "Client Errors" Section) so the admin view adds no native
-            title= to the shrink-only guidance-walker census; the errors panel
-            carries its own <h3> delimiter. Read-only, service-role-gated. */}
-        <Section heading="Analytics & errors">
-          <AdminAnalyticsPanel />
-          <AdminClientErrorsPanel />
-        </Section>
+      <Section title="Analytics" icon={BarChart3}>
+        <AdminAnalyticsPanel />
+      </Section>
 
-        {/* Simulation tuning — read-only diagnostics over the live campaigns'
-            worldState ledgers through the SAME pure display read-models the DM
-            surfaces + PDF consume. No engine mutation, no rng, no wall clock. */}
-        <Section heading="Sim Tuning">
-          <AdminSimTuningPanel />
-        </Section>
-      </div>
-      </div>
+      {/* Simulation tuning — read-only diagnostics over the live campaigns'
+          worldState ledgers through the SAME pure display read-models the DM
+          surfaces + PDF consume: war activity, deployed-army attrition, latent
+          host strength, occupations, pantheon standings, coarse balance
+          warnings, dormant-subsystem verification, and the player-safe
+          visibility audit (proves no covert/GM state leaks to a player view).
+          No engine mutation, no rng, no wall clock. */}
+      <Section title="Simulation Tuning" icon={Zap}>
+        <AdminSimTuningPanel />
+      </Section>
+        </>
       )}
-    </Page>
+    </div>
   );
 }

@@ -80,10 +80,18 @@ describe('en map shape (drift guards)', () => {
     }
   });
 
-  // The 'has every tab name' drift-guard was removed with the tab intro-lede
-  // family (owner order 2026-07-22): the poetic tabs.* ledes no longer exist, so
-  // there is no required-tab list to guard. tabs stays an (empty) namespace,
-  // pinned by the namespace guard above.
+  it('has every tab name referenced by the redesign §18.9 spec', () => {
+    const requiredTabs = [
+      'overview', 'summary', 'economics', 'power', 'defense', 'history',
+      'relationships', 'plotHooks', 'dailyLife', 'services', 'resources',
+      'viability', 'npcs', 'dmCompass',
+    ];
+    for (const tab of requiredTabs) {
+      expect(en.tabs).toHaveProperty(tab);
+      expect(typeof en.tabs[tab]).toBe('string');
+      expect(en.tabs[tab].length).toBeGreaterThan(0);
+    }
+  });
 
   it('has all three pricing tiers with name + cta + features', () => {
     for (const tier of ['wanderer', 'cartographer', 'founder']) {
