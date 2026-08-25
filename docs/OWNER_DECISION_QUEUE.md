@@ -27814,3 +27814,31 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   (SQUARE_CAPACITY_EXCLUSION 0.06→0.02; EXTRAMURAL_SHARE 0.65→0.40, per-tier spread
   reported not averaged, no tier table minted). A third memory topic file
   (stamped-vintage) awaits the index fold with the other two.
+
+## §656 · OWNER DIRECTIVE — THE REFERENCE BASE LAW: WATABOU'S MODEL AS THE FOUNDATION WE ADD ONTO (2026-08-25 ~19:40 CDT)
+
+- **§656.1 THE DIRECTIVE, verbatim intent:** the quintessential base of the mapmaker
+  code should be inspired by / an emulation of watabou/TownGeneratorOS (we have the
+  source), informed by the Watabou and FTG development posts (itch devlogs + the named
+  Patreon collections — qualitative insight, no FTG code). "These should be the base
+  of the code by which we add on. And maybe this solves a lot of our problems."
+- **§656.2 THE CHAIR'S READING (recorded for the veto):** TownGeneratorOS's generative
+  order — PARTITION FIRST (patches → wards), the wall WRAPPING the built patches,
+  gates where roads meet the wrap, **streets as the edges between patches** — is the
+  §652 topology–paint contract already realized: the §645–§651 defect family
+  (walls over districts, roads over rivers, streets as strokes) is structurally
+  unrepresentable in that model. The directive therefore RE-GROUNDS the §654 review's
+  fix plan: fixes should move the builder TOWARD the partition-first base rather than
+  patch the stroke-stack, wherever the study confirms the fit.
+- **§656.3 R-WATABOU CHARTERS (research lane, dispatched now — review-class work under
+  the stop):** (i) FIRST ACT: the license, verbatim, from the repo — emulation
+  discipline depends on it; conventions-never-expression stands regardless (we study
+  architecture and algorithms; we copy no code, no names, no art); (ii) the
+  architecture dossier: their model's stages mapped to ours, each divergence marked
+  JUSTIFIED-BY-TRUTH (history, tiers, institutions, world-fact determinism — the
+  things their model does not carry) or CONVICTED (the source of one of our defect
+  classes); (iii) the devlog/Patreon sweep for the qualitative laws (what they say
+  makes it look right); (iv) the fit plan: what "partition-first as our base" means
+  concretely for the fabric — what survives, what re-founds. Labeling discipline per
+  R-INST. The dossier lands beside the §654 review's consolidation and BOTH feed the
+  fix plan; the owner taste-gates the dossier.
