@@ -619,3 +619,41 @@ density-abstraction question is ANSWERED by A1.2's two-stage aggregation.
 inventory carries the reading "true as written; its measurement basis re-verifies on
 the partition at the wave that consumes it" — the twelve SIGNED_CONSTANTS rows carry
 the same note in that file.
+
+## Amendment A14 — VERIFIER CORRECTIONS TO A13 (§677; the red verdicts ruled)
+
+### A14.1 · THE WALKER HOME (corrects A13.1/A13.2 by name): the A6.1 totality walker
+is **SPINE-1's** (SPINE A1.7 M3 governs; SPINE §7's SPINE-2 listing is the walker's
+RE-RUN at SPINE-2's exit, stated here so both listings are true). **REG-F0 = the
+legacy-layer sweep ONLY.**
+### A14.2 · THE WALL TAXONOMY (corrects A13.3): **WALL is a THIN FACE** (SPINE A1.3)
+— the face list reads WARD/BLOCK/PLOT + VOID/FIELD/WATER/LOSSREGION/**WALL-BAND**;
+the typed-edge list reads WAY/BANK/CROSSING/BOUND/CLIFF plus the band's own boundary
+edges. Any earlier edge-list spelling of the wall is superseded.
+### A14.3 · A5.2 STANDING CONTENT (superseded BY NAME now): the REG-F sibling clause
+("growth plates + share clip ride with REG-11") reads: REG-11 is its own leg per
+A13.1; the SHARE CLIP and GROWTH PLATES ride **REG-F** as deliverables. The A5.2
+REG-D dependency row reads per A13.2. **REG-T: COMPLETED** (its census executed;
+receipt laneREGT-receipt.md) — REG-D's old dependency on it is SATISFIED-HISTORICAL;
+its post-spine re-run rides REG-D's opening measure.
+### A14.4 · THE FIVE DRESS CARS (fills A13's systematic gap; each split
+construction-vs-content per §670.1(v)'s ROUTE pattern): **REG-DEF** — gate placement
++ wall/water termini = SPINE construction (§3c/A1.3); tower rhythm, keep siting, the
+siege band = DRESS RE-BASE rows. **REG-WATER** — banks/drainage = SPINE-2; the
+upstream/downstream + mill-presence weights = re-base content; `townLayoutV2.js:209`
+DIES AT CUTOVER with its module (annotate, never edit — adjudicated). **REG-SITE** —
+the pulls/draws land as the POST-SPINE SEATING CAR shaped by SPINE A2.4 (quota deck
+from the ledger + §640 scorers). **REG-H** — the mosaic + L-REG-33's DRESS half =
+re-base content on FIELD faces; the SIZING half = the constructor per epoch (this is
+also A11's split, named). **REG-TERR** — both halves = re-base rows on partition
+views. All five ride THE DRESS RE-BASE's slot in A13.1's arc; none is a standalone
+wave anymore.
+### A14.5 · FILM + DECLINE ANNOTATIONS: **L-REG-19's reveal mechanism = the
+truncated-fold frames** (SPINE A1.4; the "ONE final render revealed along appearance
+years" sentence describes the EFFECT, the fold is the mechanism). **The L-REG-27
+family** (A5.1 row · A5.3 G-60 row · A6.3's RECLAMATION_START/HALT mint): LossRegion
+is a PARTITION FACE CLASS; the minted recovery events land on the face's state
+machine (SPINE §3f).
+### A14.6 · A13.4's blanket is CARVED: it covers only rows the inventory marked
+KEEP-BUT-ANNOTATE; the A12.2 scope columns of the five dress cars are governed by
+A14.4, not the blanket.

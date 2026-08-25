@@ -434,3 +434,13 @@ as: DW emits the claim; the SPINE's zoom registers / dress re-base consume it.
 (6) The charter's car count and order (41 cars; ESTATE-before-the-regen; CG-gate)
 RE-DERIVE at DW dispatch time against A13.1's arc — the §675 dispatch brief is
 authored fresh from this amendment, never from the r2 charter's stale rows alone.
+
+### RECONCILIATION CORRECTIONS (§677, the verifier's reds ruled)
+(4′) REPLACES clause (4): **CG-1/CG-1b/CG-2 LANDED** (ODQ §543.3/§546/§549.4 — their
+work stands as history; retiring landed work was the landed-billed-as-pending class,
+caught). The correct statement: the r2 charter's CG-GATE clauses (written when CG was
+pending) are HISTORICAL; **no further CG-class cars dispatch against the retiring
+cartography stage**; the laws carry as acceptance requirements exactly as clause (4)
+said. (1′) Clause (2)'s own wording corrects to "the PLANAR-partition substrate"
+(the terms clause binds this amendment too). (6′) The car count reads **42**
+(§562.6, J-DW0-2 amended); every count re-derives at dispatch regardless.

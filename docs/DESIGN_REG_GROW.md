@@ -267,3 +267,11 @@ envelope is superseded by the spine's pinned protocol (A1.6). §1's REG-F0 resco
 aligns to A13.2's statement. The word "partition" in DW-program contexts means the
 STOREY partition — in this program and the spine it means the PLANAR partition;
 documents must disambiguate on contact.
+
+## A2b — VERIFIER CORRECTIONS (§677): exit re-homes read **1 and 5 to SPINE-1; exit 2
+(snapshot divergence) is SPINE-2's** (its charter carries it). KBA reading clause
+(this document's equivalent of A13.4): every KEEP-BUT-ANNOTATE row reads "true as
+written; figures inherited from the pre-partition base RE-MEASURE AT THE SLOT that
+consumes them" — sharpest instances: §6.6's 29/29 exemplar base and §6.9's
+zero-growth diagnosis, which is **DONE and never re-runs** (SPINE §5: "its diagnosis
+is this design's premise"; laneGROWA-receipt.md is the record).

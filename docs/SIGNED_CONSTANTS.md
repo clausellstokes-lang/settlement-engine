@@ -71,12 +71,16 @@ The dwellings bands B0–B21 and the POWERS schema (law/SIGNED-BANDS-2026-08-23.
 THE PROMISE and every constitutional law above this sheet. The TUNING SIGNATURE
 itself is the owner's and is LAST — this sheet exists so that pass walks one page.
 
-## RE-VERIFY-ON-PARTITION (added §675)
-The following rows keep their SIGNED VALUES; their measurement basis re-verifies on
-the partition at the first wave that consumes each (declared shifts if they move,
-never silent): the op-ceiling table (priced on the pre-spine renderer) · the byte
-table and its tier-setters · B13 (per VOID face now) · V-QUAY (per quay face) · the
-L-REG-30 floor (INK.detail basis) · L-REG-31 ±15° · the corridor half-length · the
-bridge conformance predicate · the countryside coverage band · the ring-census
-tolerance row (now a spine §6 exit) · taper/pinch (bank derivation unchanged —
-verify only) · the kink budget.
+## RE-VERIFY-ON-PARTITION (added §675, corrected §677 to the inventory's NINE)
+These rows keep their SIGNED VALUES; their measurement basis re-verifies on the
+partition at the first wave that consumes each (declared if moved, never silent):
+the op-ceiling table (priced on the pre-spine renderer) · B13 (per VOID face; ⚠ the
+DW charter's yard band of the same name is DISTINCT — cite it as B13-DW) · V-QUAY
+(per quay face) · the L-REG-30 floor (INK.detail basis) · L-REG-31 ±15° · the
+corridor half-length · the bridge conformance predicate · the countryside coverage
+band · the ring-census tolerance (now a spine §6 exit). CLEAN, no re-verification
+owed (verifier-confirmed): the byte table (binds by design), taper/pinch, the kink
+budget. ⚠ THE DWELLINGS BANDS B0–B21: values OWNER-SIGNED and untouched — but B0/B3's
+measurement basis was cartography-wedge geometry, which the spine replaces with
+WAY-edge frontage; the basis re-verifies at DW dispatch and the OWNER IS INFORMED
+before any band is consumed against the new frontage (§677).

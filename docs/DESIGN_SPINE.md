@@ -276,3 +276,9 @@ emergence — aligned with our wealth truth, which supplies the deck from the le
 separated from per-type location scorers (the §640 weights). The four-dial ward
 dress tuple (lot floor · two chaos dials · emptiness) is the wealth-legibility
 mechanism the rich/poor laws asked for.
+
+## A2 addendum (§677) · THE INTERIORS POINTER: A1.1's struck "then interiors" clause
+resolves per §672.1 — interiors are THE DWELLINGS PROGRAM'S MINT: the identity ladder
+ends at the representative plot + its household roster until DW lands, whereupon the
+ladder's final rung reads "then DW's interiors" (the plot face carries the DW
+binding). §4's zoom sentence reads accordingly.

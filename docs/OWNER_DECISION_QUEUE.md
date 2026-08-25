@@ -28314,3 +28314,45 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   observed behavior — §656's premise validated; the reference's one deep lack (no
   time, no water) is the spine's reason to exist. **SPINE-1 receives the A2.1
   addendum mid-flight** (better before it cuts plots the pre-study way).
+
+## §677 · THE VERIFIERS RED, THE CORRECTIONS LAND — AND THE GAPS BECOME RULINGS (2026-08-26 ~07:50 CDT)
+
+- **§677.1 BOTH VERIFIERS RED — the pass earned its keep.** The sharpest: the DW
+  amendment RETIRED CG-1/CG-2, cars the ledger records as LANDED (§543.3/§546/§549.4)
+  — the landed-billed-as-pending class re-minted inside the chair's own amendment;
+  corrected (landed work stands; no further CG-class cars; the laws carry). The
+  corrections: **A14** (the walker home = SPINE-1, F0 = legacy sweep only · WALL is a
+  THIN FACE in every list · A5.2's standing REG-F/REG-D/REG-T content superseded by
+  name with REG-T marked COMPLETED · **the five dress cars' split ruled per-car** —
+  the systematic gap: construction halves into the spine, content halves into the
+  dress re-base, REG-SITE as the A2.4-shaped seating car, townLayoutV2:209
+  adjudicated dies-at-cutover · L-REG-19's mechanism = the truncated fold ·
+  L-REG-27's family = the LossRegion face class · A13.4 carved) · **GROW A2b** (exit
+  2 is SPINE-2's; the KBA reading clause; the diagnosis never re-runs) · **the SPINE
+  interiors pointer** (§672.1's second order executed: interiors are DW's mint) ·
+  **SIGNED_CONSTANTS corrected to the NINE** with the B13/B13-DW name collision
+  resolved and ⚠ the B0–B21 dwellings bands flagged: values owner-signed, but B0/B3's
+  wedge-geometry basis re-verifies on WAY-edge frontage at DW dispatch — THE OWNER IS
+  INFORMED before consumption · the handoff's second bare arc line annotated and both
+  DW counts read 42.
+- **§677.2 THE GAP RULINGS (the ODQ is these rows' amendment):** (i) **§341's tuning
+  MAP LEG retargets** — the certified surface is partition frames via ledger
+  truncation; the instrument set is spine §6 + the A1.6 perf protocol; §341.2's
+  "every instrument already exists" is FALSE until the spine's land. (ii) **§524.5's
+  hasDrawableMap pin JOINS the cutover-readiness gates** (beside classifier-equality,
+  the three-clause check, the partition censuses, the totality walker). (iii)
+  **§523.5's WEB-12 commitEdits gate** must pin its invariant in a form re-proven
+  against the partition view (its module dies at cutover). (iv) **COVER-REFRESH is
+  SEQUENCED: re-bake AFTER the cutover** (or land invalidation machinery first) —
+  binding every WEB row that prerenders maps into durable public artifacts; a
+  pre-cutover wholesale re-bake would bake superseded renders into never-invalidated
+  public JPEGs. (v) **CT-1b retargets** to partition faces + A6.1 emission, gated on
+  SPINE-2/cutover. (vi) **CH residue's two map-reader rows**: CATEGORY_AFFINITY's
+  declared-shift consequence retires at cutover (the durable consumer is the seating
+  surface); the tannery-regex "survives untouched" claim is FALSE post-cutover — the
+  weight re-homes in the seating/water weights. (vii) **THE ONE OSR MINT re-anchors:
+  after the LAST SCHEMA-BEARING CAR of the released arc, determined at the walk's
+  opening** — never by naming a train (§384.2's one-mint rationale preserved). (viii)
+  the ESTATE wave's dark posture re-derives against `REG_FABRIC_OPTS.partition`.
+  **A focused re-verify runs on the correction set; on ITS green, §675.3's standing
+  order takes effect.**
