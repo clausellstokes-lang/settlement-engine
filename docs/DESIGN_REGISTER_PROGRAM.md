@@ -516,3 +516,11 @@ REG-5 carries the MEASURE only (span-vs-narrows ratio per corpus bridge + the pl
 code site). **REG-BRIDGE** is the cure car: after REG-5, before REG-6; it moves the
 street web, so the wall:all watch row (§635.3) and a bridgehead-faubourg re-measure
 (§636/§632.4 liveness) are part of its exit.
+
+## Amendment A10 — REG-D re-founded on the growth ledger (§643)
+
+REG-D's dependency row updates: its input is the GROWTH LEDGER's emitted decline/debris
+states (DESIGN_REG_GROW.md A1.4 — LossRegion lifecycle, hf379 time-clock, pressure-clock
+recovery), superseding the "LANDED mechanisms only" binding of A6.2 for decline substrate.
+REG-D remains dress-only: it draws reached states, it never invents them. Sequenced after
+REG-GROW-B lands its ledger.

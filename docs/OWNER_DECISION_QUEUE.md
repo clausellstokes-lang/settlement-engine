@@ -27464,3 +27464,39 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   inconsistent on Steep Hill); §6's siege band rides REG-DEF as a weight with its
   one-measured-site caveat named. The dossier awaits the owner's taste gate as all
   R-INST dossiers do; consumption stays weights-grade until then.
+
+## §643 · THE REG-GROW PANEL RULES — ZERO REFUTED, SEVEN BLOCKERS, AND THE LEDGER/FRAME SPLIT (2026-08-25 ~13:30 CDT)
+
+- **§643.1 THE PANEL** (five lenses, xhigh, all evidence at the seal): **0/5 refuted** —
+  the machinery skeptic's own verdict: "§240's 'each circuit traced from ITS OWN EPOCH'S
+  fabric' is the replay's contract stated four waves early." Seven blockers and thirty
+  majors, ALL RULED in `docs/DESIGN_REG_GROW.md` **Amendment A1** (the build brief reads
+  body + A1; A1 wins conflicts).
+- **§643.2 THE THREE STRUCTURAL RULINGS:** (i) **THE LEDGER/FRAME SPLIT** — the kernel
+  is a PRE-STAGE producing an append-only GROWTH LEDGER; `buildFabric` stays single-shot
+  and renders the ledger's final state; an intermediate frame is the same single-shot
+  pipeline on the ledger truncated at epoch K (prefix-closure by construction). The
+  banked single-construction laws stand untouched; frames render ON DEMAND, which
+  re-bases the envelope on the panel's MEASURED numbers (today's builds are 1.1–1.5 s —
+  the 20–30 s budget has 18–28 s of headroom; ~20 film beat frames at ~1.3 s sit inside
+  L-REG-20's 30 s floor). (ii) **NO INVENTED HISTORY** — the sealed code's §11.10/§8.2
+  laws bind the mint: a T2 curve is a CONSTRAINED INTERPOLANT (present C ·
+  deriveHighWater's P as sole peak deriver · every down-step anchored to a recorded,
+  dated, severity-graded loss event); no loss events ⇒ monotone. Decline FREQUENCY
+  becomes an ENGINE-generation tuning question for the owner's pass — never fabric-side
+  invention. REG-T's PLAUSIBLE seam (a) is hereby promoted to stated law.
+  (iii) **T2 RIDES CAR A** — formally amending §624.3's separate-car charter (reasons:
+  car A's trajectory input is otherwise undefined on every seed, C9; the classifier
+  exists; the mint is small) — recorded vetoably.
+- **§643.3 THE REST OF A1, headlines:** A6.1's annotation schema adopted VERBATIM
+  (the two-field emission was schema starvation — decline was inexpressible);
+  reclamation is FIRST-CLASS (a LossRegion state machine born at recorded disasters —
+  192/200 monotone seeds carry dated disasters and get debris; decay is TIME-driven,
+  recovery PRESSURE-driven, never conflated); every seam gets ONE owner (epochAxis
+  reads the ledger; §18.4 consumes it; faubourg origins stamped at emission with the
+  reader as VERIFIER; compile reads the real peaks; the frame cartouche prints the
+  frame's population); provenance carries THREE values (recorded · interpolated ·
+  derived-frozen); the totality walker + accessible-lens arm join car A; car B's forms
+  consume R-MORPH at weights grade. Program doc gains **A10** (REG-D re-founded on
+  ledger emissions). **REG-GROW-A dispatches when REG-BRIDGE seals** (arc §639.3);
+  REG-BRIDGE is in flight now.
