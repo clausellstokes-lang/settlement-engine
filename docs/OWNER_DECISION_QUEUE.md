@@ -28804,3 +28804,23 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§687.7 WHAT THIS DOES NOT DO.** It does not slow the arc, hold a wave, or move a single
   owner gate. **DRESS-1 is in flight** (dispatched §686.7) and everything above is register
   work that runs beside it. The pass itself remains **the owner's to call, and to scope**.
+- **§687.8 THE HOOK LANDED INERT — MODE `100644` — AND VERIFYING AT THE TIP CAUGHT IT.**
+  `chair-commit.sh` hardcoded `100644` for every mapped file, so `.husky/commit-msg`
+  landed **non-executable**: git would never have run it. **A gate that cannot fire is
+  worse than no gate, because it reports as installed.** The tool now reads the source
+  file's own executable bit; the hook is re-landed at **`100755`** and its controls re-run
+  green **against the committed blob**, not the scratchpad copy.
+- **§687.9 ⛔ AND THE §678 CLASS BIT A THIRD TIME — IN THE VERY ACT OF FIXING §687.8.** The
+  ledger patch's anchor assertion FAILED, and **the commit ran anyway**, because the patch
+  and the committer were separate shell lines rather than one `&&` chain. Commit
+  `80f7c0219` therefore announced "§687.8" in its subject while the ledger contained no
+  such bullet — *precisely* the defect §678 named and cured, repeated by the chair minutes
+  after citing it, and the third instance of this family after §493.6's empty ledger
+  commit. **Discipline is not the cure; the cure is the tool.** `chair-commit.sh` now
+  carries a **SUBJECT-ANCHOR GATE**: if the subject opens with a § reference, that exact
+  reference must already be present in docs/OWNER_DECISION_QUEUE.md or the commit is
+  REFUSED. Three planted controls — an absent section ABORTS with exit 1 (it reproduces
+  this very failure and stops it), a present section passes through to the tip check, and
+  a non-§ subject is not blocked. **A ledger message can no longer outrun its own entry.**
+  Toolkit r6 preserved; the §687.8/§687.9 bullets you are reading landed under the gate.
+
