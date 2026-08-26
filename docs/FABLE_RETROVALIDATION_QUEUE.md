@@ -226,6 +226,23 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§699 · SPINE-3 ratified with corrections, after adversarial verification · SEAT: Opus 5.**
+*What was judged:* RATIFY-WITH-CORRECTIONS on 1 CONFIRMED / 3 WEAKER-THAN-STATED verdicts;
+that the band boundary held (constructor width unmoved) while the blanket "no band moved"
+sentence is struck; that the water cure's **7–9x over-drop** is a new defect rather than a
+cure; four corrections including two to rows I had already put on the owner's docket; and
+that the four deferrals are genuine owner signatures.
+*What Fable re-derives:* **(a)** the ratification itself — three of four verdicts were
+"weaker than stated" and a chair still ratified; is that the right threshold, or did
+convenience set it? **(b)** §699.3's over-drop reading: is unpublishing 248 u of dry wall to
+remove 32 u of wet genuinely a defect, or is it the lawful consequence of publishing only
+whole dry fragments? The skeptic asserted the former and I adopted it without independent
+measurement. **(c)** §699.8's claim that PA.4's wear was dark corpus-wide — it retroactively
+voids an exit I ratified at §688, so it should be re-checked rather than inherited.
+*Receipts:* ODQ §699 · `refs/preserve/map-sandbox-spine3-substrate` = `96bcbbbf5` ·
+`laneSPINE3-receipt.md` · the four skeptics' journal at `wf_98b37638-77d`.
+*Priority:* **P1** on (a) and (c); P2 on (b).
+
 **§698 · §697's diagnosis half-refuted by measurement · SEAT: Opus 5.**
 *What was judged:* that our per-building shape complexity (mean 9.25 verts vs the
 reference's 4.6) and size variation (1.81x vs 1.72x) are **at or past parity**, so the

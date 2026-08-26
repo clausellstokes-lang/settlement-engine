@@ -29521,3 +29521,100 @@ SVG per-building and comparing to the dissection captures — not by argument.
   right where the chair was wrong), and now §697.3(ii) — **every one was a claim made from
   reading or looking rather than measuring, and every one was corrected by a number.**
   Standing: **before a diagnosis re-aims a wave, parse the artifact.** It cost one command.
+
+## §699 · SPINE-3 RATIFIED WITH CORRECTIONS — THE BOUNDARY HELD UNDER ATTACK, AND THE CURE OVER-DROPS EIGHT TIMES WHAT IT REMOVES (2026-08-27 ~05:20 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+Four skeptics attacked the wave's central claims by execution before ratification, each
+told to default to REFUTED. Verdicts: **1 CONFIRMED · 3 WEAKER-THAN-STATED · 0 REFUTED.**
+**RULING: RATIFY WITH CORRECTIONS.** Sealed at
+`refs/preserve/map-sandbox-spine3-substrate` = **`96bcbbbf5`**. Tree independently checked:
+**zero deletions base→tip**, 2,398 → 2,404 files, all 78 tracked `out/` files present —
+the lane's disclosed `rm -rf` was genuinely restored.
+
+- **§699.1 ⭐ THE BOUNDARY HELD, AND THE PROOF IS THE BEST CONTROL THIS PROGRAMME HAS
+  PRODUCED.** I forbade this lane the wall band's width. Independently re-derived **from
+  geometry alone, without the lane's digest**: constructor band identical base and tip
+  (`CTOR_BAND digest 16d5a0293ffc…` both sides), and the receipt's own table reproduced **to
+  six decimal places** (metropolis E1 0.211683 · E0 0.539096 · E2 0.650641; "under-width on
+  5 of 17" confirmed). Four independent plants each move the digest, including two isolating
+  width alone. **THE WIDTH DID NOT MOVE.**
+  ⛔ **BUT THE CLAIM AS WRITTEN IS TOO BROAD AND IS RESTATED HERE:** the digest reads only
+  `buildSettledPartition` — the **constructor** band. **The band that is DRAWN is computed a
+  layer downstream, in code this lane DID edit**, and the receipt contradicts itself across
+  its own sections (§B: *"No repair of mine moved a band"*; §7: *"the curtain no longer runs
+  over water at all, which removes drawn band"*). **CORRECTED WORDING: the constructor band
+  width is provably unmoved; the drawn band's EXTENT changed as a consequence of the water
+  cure.** The boundary I set was not crossed. The sentence claiming more than that is struck.
+- **§699.2 THE WALL-OVER-WATER ZERO IS CONFIRMED — BY AN IDENTITY, NOT AN ASSERTION.** The
+  skeptic disabled the cure and arm A did not merely redden: **it became BYTE-IDENTICAL to
+  arm B on all 11 wraps** (town E0 32.5 u/3.6 % · city E1 305.0 u/17.1 % · year-100 33.5
+  u/3.0 %). **A narrower predicate cannot reproduce another predicate to the digit** — so
+  the zero comes from the geometry being clipped, not from the question being softened. The
+  vacuity hunt came back empty on every axis: no wrap publishes zero length, no degenerate
+  fragments, and every arm-A `wetLen` is an exact 0 rather than sheltering under the 0.5 u
+  slack. **This is the shape every future zero in this programme should be proven with.**
+- **§699.3 ⛔⛔ THE NEW FINDING, AND IT IS THE MOST IMPORTANT THING THE VERIFICATION
+  PRODUCED: THE CURE OVER-DROPS 7–9× WHAT IT REMOVES.** To stop **32.5 u** of wet wall on
+  `town` it leaves **281.2 u** of ring unpublished — **248.7 u of perfectly dry wall simply
+  not drawn**, a 7.6× over-drop. `highwater`: **401.3 u dropped to remove 41.6 u** (8.6×).
+  `city`/`migration` E1: 482.0 u to remove 305.0 u. **We did not cure the wall crossing
+  water; we stopped drawing the stretch that contained it.** The census reports green
+  because it only asks "is any published wall wet", and **it never prints published LENGTH —
+  so a cure and an erasure render as the same row.** Compounding it: measured termini stop
+  **33–96 u short of the bank** against facet means of 35–57 u, refuting the receipt's
+  *"the curtain runs to the bank and stops."* **CHARTERED — `WALL-CURTAIN`**: publish to the
+  bank, drop only the wet span, and the census gains a **published-length column with a
+  drop-ratio bar** so over-drop can never again read as a cure.
+- **§699.4 THE RUN-SIGNAL WORK SURVIVED EVERY NUMERIC ATTACK — A FIRST FOR THIS PROGRAMME.**
+  An instrument written from scratch, sharing none of the lane's measuring code, reproduced
+  **83, 7, notch-alone, 74-blind and the byte-identical legacy path to the unit**, with three
+  independent legacy reads agreeing on all 18 leaves and its own golden proven live by a
+  plant. The deleted second classifier is **gone as code** — `nearAnyRing`, `nearQuay`,
+  `adjacentToPlot`, `nearAnyPolyline` all absent across **all 2,404 sealed blobs**, with
+  `wallRuns.js` the only assigning module. The full gate reproduced independently at
+  **19 files / 433 tests, exit 0.**
+- **§699.5 FOUR CORRECTIONS THAT MUST NOT RIDE — TWO OF THEM TO THINGS I PUT IN FRONT OF THE
+  OWNER.** **(i) "ROWS 1+2 ARE ONE SHIFT WITH ONE CURE" DID NOT SURVIVE** — the docket row I
+  wrote hours ago is corrected in place: two signatures that *may* share a cure, not one that
+  provably does. **(ii) THE THREE-RAISE-YEARS CURE IS INERT AT ITS NAMED LOCUS**:
+  `settlement.record` is **ABSENT on 18/18 leaves**, the stated one-line fix moves **zero**
+  rows, and a positive control (`FORCE_WBA=49`) proves the instrument live — nine frozen
+  radii move and the wrap count drops 17 → 14. The real seam is `wallVintage.ageAtBuild`.
+  **The owner must not act on the cure as written**; the docket now says so. Also struck:
+  "five of six call sites stamp it" is not reproducible (four call sites, three stamp).
+  **(iii) THE SEALED COMMIT MESSAGE — THE DURABLE RECORD — CARRIES SUPERSEDED FIGURES**:
+  `crest` 35 and `terrain-surrender` 2, where the tip measures **41 and 3**. A receipt can
+  supersede itself; a commit message cannot be edited. Recorded here as the correction of
+  record. **(iv)** five of nine SITE-BLIND cells in §3.4 do not reproduce, under a header
+  promising every number was re-measured at the tip.
+- **§699.6 ⛔ THE SIXTH SIGHTING OF THE PREDICATE-WEAKER-THAN-ITS-NAME FAMILY — AND IT IS IN
+  THE ARM BUILT TO CLOSE THE FIFTH.** `tests/lint/wallRuns.walker.test.js` is the
+  single-writer walker that exists to guarantee one run classifier. **It hardcodes six
+  filenames; the fabric directory holds seventy-one.** A seventh classifier in any of the
+  other 65 files passes it silently — and a skeptic's plant proved exactly that. **Reading
+  the directory and excluding `wallRuns.js` costs nothing and makes the predicate match the
+  name.** ⭐ **THE LAW, now earned six times: a guard's scope is its SHIPPED PREDICATE, never
+  its name and never its comment — and a guard written to close a class is the most likely
+  place for the class's next instance.** Also: **83→7 has NO gate guard at all** —
+  `runSignal.mjs` is a harness script and no test asserts a corpus-level run-type count, so
+  the wave's headline number is unprotected against regression. Both charter into `WALL-CURTAIN`.
+- **§699.7 THE FOUR DEFERRALS ARE ALL GENUINE OWNER SIGNATURES — TESTED BY MUTATION, NOT
+  ACCEPTED.** The skeptic went hunting for one to be ordinary work wearing a gate's clothes
+  and found none: `growthLedger`'s dead ternary flips **15 of 17 wraps** and moves **16 of 17
+  rows** (metropolis faces 3,962 → 4,064; edges 11,911 → 12,221), and the raise-years seam
+  moves nine frozen radii under a live control. **Four deferrals, four real signatures.**
+- **§699.8 AND A CORRECTION TO A WAVE I ALREADY RATIFIED (§688): PA.4's WEAR HAS BEEN DARK
+  CORPUS-WIDE.** Verified by me at the DRESS-1 seal: all four drivers passed
+  `year: fabric.meta.presentYear`, and `buildFabric` publishes **`settlementAge` and
+  `snapshotYear`** — never `presentYear`. So `year` was `null` on every leaf, the wall's age
+  was unknown, and **wear could not be graded at all.** DRESS-1's wear exit passed **because
+  the code path existed, not because it fired** — the same family as §699.6, one layer up.
+  SPINE-3 cured the drivers. **The wear provisionals I licensed at PA.4 are therefore not
+  merely provisional but UNEXERCISED**, and their first real measurement is owed before the
+  tuning pass reads them.
+- **§699.9 ⚠ THE PROOF OF THE BOUNDARY IS NOT IN THE SEAL.** `spine3-wrapdigest.mjs` — the
+  sole instrument discharging §699.1 — lives loose in the lane's scratchpad, **not under
+  `harness/` and not among the six new files in the sealed tree**. A successor standing at
+  the preserve ref cannot reproduce the boundary proof from the seal. It reproduces when
+  copied (both skeptics did so), so nothing is lost today; the lesson is banked: **an
+  instrument that discharges a boundary belongs inside the seal it discharges.**
