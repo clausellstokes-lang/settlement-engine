@@ -1576,3 +1576,330 @@ describe('REG-D · the decline is drawn at the stage the ledger reached, and at 
     expect(a.svg).not.toBe(dressPage(p, { lens: 'parchment', roadWidth: 5 }).svg);
   });
 });
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════════════
+ * ⭐⭐⭐ ⟦CAR-WORDS-2 · ODQ §717⟧ **THE DRESS PAGE SPEAKS — F0-31 / F0-32 / F0-33.**
+ *
+ * REG-F0 measured the judged surface at **ZERO `<text>` on 18 of 18 leaves** against the legacy
+ * folio's 950: no name, no legend ink, no scale, no quarter labels, no cartouche. These arms are
+ * the exit, and they are written as PLACEMENT assertions rather than counts because §710.6's class
+ * is the one this layer is most exposed to: *a census that asks whether a mark EXISTS has not asked
+ * whether it is ON THE THING IT MEANS.* A `<text>` count passes on eighteen names in one corner.
+ *
+ * ⚠⚠ **WHICH ARMS DISCOVER AND WHICH REGRESS** — declared here and again in `wordsPlacementCensus`,
+ * because §711.4 makes an unlabelled green worth less than it looks:
+ *   • the SURFACE arm (every leaf carries text)          — DISCOVERY, and it is the wave's subject
+ *   • `outsideFrame` / `overlaps`                        — DISCOVERY (glyph BOXES, not path points)
+ *   • `offInk` / `outsideQuarter`                        — REGRESSION (they share the producer's
+ *     clip; `offInk` was DISCOVERY until it convicted 14 of 18 leaves and the cure adopted it)
+ *   • the DORMANCY arm (the folio does not move)         — DISCOVERY, and it is the one that would
+ *     catch this wave editing `lettering.js` by mistake
+ * The PLANTED controls below are what make the green mean anything at all: **a guard's scope is its
+ * shipped predicate, never its name.**
+ * ═══════════════════════════════════════════════════════════════════════════════════════════════ */
+describe('⟦CAR-WORDS-2⟧ §717 · the dress page says its own name', () => {
+  /** @type {any} */ let PLATES = null;
+  /** @type {any} */ let PC = null;
+  /** @type {any} */ let L = null;
+
+  beforeAll(async () => {
+    PC = await import('../../src/domain/townMap/fabric/pageChrome.js');
+    L = await import('../../src/domain/townMap/fabric/lettering.js');
+    const { CORPUS } = await import('../../harness/exemplars.mjs');
+    const { dressLeaf } = await import('../../harness/laneDRESS1/renderPage.mjs');
+    PLATES = [];
+    for (const spec of CORPUS) {
+      const r = dressLeaf(spec.key, 'parchment');
+      PLATES.push({
+        key: spec.key, tier: r.tier, svg: r.svg, words: r.words, bytes: r.bytes,
+        /** the families this leaf ACTUALLY drew — the legend's only lawful source (§692.9) */
+        groups: r.dress.groups,
+        text: (r.svg.match(/<text\b/g) || []).length,
+        census: PC.wordsPlacementCensus(r.svg, r.words),
+      });
+    }
+  }, 1800000);
+
+  it('⛔ NON-VACUITY FIRST — the arm visited every leaf, and every leaf drew a page', () => {
+    expect(Array.isArray(PLATES)).toBe(true);
+    expect(PLATES.length).toBeGreaterThanOrEqual(18);
+    for (const p of PLATES) {
+      expect(p.svg.startsWith('<svg'), `${p.key}: no <svg`).toBe(true);
+      expect(p.bytes, `${p.key}: empty plate`).toBeGreaterThan(10000);
+    }
+  });
+
+  // ── F0-31 / F0-32 / F0-33 · THE SURFACE ────────────────────────────────────────────────────
+  it('⭐⭐⭐ F0-33 · EVERY LEAF CARRIES TEXT — the 18/18 zero is closed (DISCOVERY)', () => {
+    // ⛔ THE SUBJECT OF THE WHOLE WAVE, and it is stated as a floor per leaf rather than as a
+    //    corpus total: a total passes with seventeen silent leaves and one shouting one.
+    for (const p of PLATES) {
+      expect(p.text, `${p.key} carries no words at all — the F0-33 defect`).toBeGreaterThan(0);
+    }
+    expect(PLATES.filter((p) => p.text > 0).length).toBe(PLATES.length);
+  });
+
+  it('⭐⭐ F0-31 · every leaf says its own NAME, tier, souls and prosperity, and carries a compass', () => {
+    for (const p of PLATES) {
+      expect(p.svg, `${p.key}: no cartouche`).toContain('id="page-cartouche"');
+      expect(p.svg, `${p.key}: no compass`).toContain('id="page-compass"');
+      expect(p.words.census.cartoucheLines, `${p.key}: no metadata lines`).toBeGreaterThanOrEqual(3);
+      expect(p.words.census.compass, `${p.key}`).toBe(1);
+      // …and the three facts are the folio's own three, in the folio's own words
+      expect(p.svg, `${p.key}: no tier/souls/prosperity line`).toMatch(/[A-Z]+ · \d+ SOULS · [A-Z]+/);
+    }
+  });
+
+  it('⭐⭐ F0-31 · the cartouche never leaks ENGINE VOCABULARY (`scanWords`, both classes)', () => {
+    // The census reads RENDERED `<text>` content only — never source, never `data-cite`, which is
+    // D1's separate debug channel by design (`lettering.js`'s own rule for this denylist).
+    const leaks = [];
+    for (const p of PLATES) {
+      const head = p.svg.slice(p.svg.indexOf('id="page-cartouche"'));
+      for (const m of head.slice(0, head.indexOf('</g>') + 4).matchAll(/<text[^>]*>([^<]*)</g)) {
+        for (const f of L.scanWords(m[1])) leaks.push(`${p.key}: "${m[1]}" — ${f.kind} ${f.hit} (${f.why})`);
+      }
+    }
+    expect(leaks, leaks.join('\n')).toEqual([]);
+  });
+
+  it('⭐⭐ F0-06 · the scale bar is drawn on every leaf, and its label is a true MEASURE', () => {
+    for (const p of PLATES) {
+      expect(p.words.census.scaleBar, `${p.key}: no scale bar`).toBe(1);
+      // §11.12a: a true count of units, never a decorative relative unit. `PACES` is PENDING-OB-4.
+      expect(p.svg, `${p.key}: the bar's label is not a measure`).toMatch(/>\d+ [A-Z]+</);
+    }
+  });
+
+  it('⭐⭐⭐ F0-32 · the legend has INK, and a row appears IFF THIS LEAF DREW THE MARK (§692.9)', async () => {
+    /**
+     * ⛔⛔ **THE BRIEF'S §692.9 ROSTER IS ARM-DEPENDENT, AND THIS ARM MEASURED IT.** The standing
+     * caution names four rows — `dress-stepping`, `dress-barricade`, `dress-ruin-standing`,
+     * `dress-ruin-clearing` — as teaching marks *"the parchment plate never draws on any of 18
+     * leaves"*, and the first spelling of this test asserted exactly that. It RED on the DORMANT
+     * corpus, which is the arm the gate actually runs:
+     * ```
+     *   DORMANT   dress-ruin-clearing → drawn on `highwater`      (the other three: never)
+     *   ARMED     none of the four drawn on any leaf
+     * ```
+     * ⭐ THE LAW, and it is §714.1's *state your surface before your arms* seen from a new angle:
+     * **"taught but never drawn" IS A PROPERTY OF AN ARM, NOT OF A ROSTER.** A pinned list of
+     * undrawable rows silently goes stale the moment an arm flips.
+     *
+     * ⭐⭐ SO THE ASSERTION IS THE BIJECTION PER LEAF, WHICH IS TRUE ON EVERY ARM: a key row is
+     * printed if and only if this leaf drew that family. That is strictly stronger than the
+     * four-name pin AND it needs no maintenance — which is what the cure had to be, because
+     * `legendCensus` passes on a corpus-wide bijection and cannot see a per-leaf one.
+     */
+    const { DRESS_LEGEND } = await import('../../src/domain/townMap/fabric/partitionDress.js');
+    const taught = new Set(DRESS_LEGEND.map((r) => r.group));
+    const bad = [];
+    for (const p of PLATES) {
+      expect(p.words.census.legendRows, `${p.key}: no legend ink at all`).toBeGreaterThan(0);
+      const drew = new Set(p.groups);
+      const printed = [...p.svg.matchAll(/data-cite="(dress-[a-z-]+)"/g)].map((m) => m[1]);
+      expect(printed.length, `${p.key}: key row count disagrees with the census`).toBe(p.words.census.legendRows);
+      for (const gp of printed) {
+        if (!taught.has(gp)) bad.push(`${p.key}: key row ${gp} is not a DRESS_LEGEND group`);
+        // ⛔ THE DIRECTION THAT MATTERS — hf61's chrome plate is a key teaching a mark that is
+        //    not on the sheet, and this is the assertion that makes it unreachable.
+        if (!drew.has(gp)) bad.push(`${p.key}: key row ${gp} teaches a mark this leaf never drew`);
+      }
+      expect(new Set(printed).size, `${p.key}: a family is taught twice`).toBe(printed.length);
+    }
+    expect(bad, bad.join('\n')).toEqual([]);
+    // …and the other direction, capped: what is NOT taught is exactly what the cap and the type
+    // floor dropped, so nothing goes missing for an unstated reason.
+    for (const p of PLATES) {
+      const printed = new Set([...p.svg.matchAll(/data-cite="(dress-[a-z-]+)"/g)].map((m) => m[1]));
+      const drawnTaught = p.groups.filter((g) => taught.has(g));
+      expect(drawnTaught.length - printed.size, `${p.key}: unexplained legend gap`)
+        .toBe(p.words.census.legendDropped);
+    }
+  });
+
+  it('⭐⭐ F0-32 · every legend swatch is drawn in ITS OWN FAMILY\'S ink, off the page itself', () => {
+    // "a legend whose sample does not match the page teaches the wrong thing" — asserted, not hoped.
+    for (const p of PLATES) {
+      expect(p.words.census.legendInkMatched, `${p.key}: swatches without the page's own ink`)
+        .toBe(p.words.census.legendRows);
+      for (const m of p.svg.matchAll(/data-cite="(dress-[a-z-]+)"/g)) {
+        const ink = PC.groupInk(p.svg, m[1]);
+        expect(ink, `${p.key}: legend teaches ${m[1]} but the group has no readable ink`).not.toBeNull();
+        expect(ink.fill || ink.stroke, `${p.key}: ${m[1]} has neither fill nor stroke`).toBeTruthy();
+      }
+    }
+  });
+
+  // ── THE PLACEMENT CENSUS ───────────────────────────────────────────────────────────────────
+  it('⭐⭐⭐ §710.6 · THE PLACEMENT CENSUS IS GREEN ON EVERY LEAF — not a count, a placement', () => {
+    const bad = PLATES.filter((p) => p.census.verdict === false)
+      .map((p) => `${p.key}: ${p.census.reason}`);
+    expect(bad, bad.join('\n')).toEqual([]);
+    // …and it was not vacuous: quarter names really were written, on more than one leaf
+    expect(PLATES.filter((p) => p.census.wardGlyphs > 0).length,
+      'no leaf wrote a quarter name — the placement arms have no subject').toBeGreaterThanOrEqual(12);
+  });
+
+  it('⛔⛔ THE PLANTED COLLISION — the census must CONVICT, or its green means nothing', () => {
+    // A guard's scope is its SHIPPED PREDICATE, never its name (eleven sightings). Each plant moves
+    // ONE glyph and each must be caught by the arm it targets.
+    const p = PLATES.find((x) => x.key === 'town');
+
+    // 1 · A CROSS-FAMILY OVERLAP: a legend row dropped onto the cartouche's title.
+    const collided = p.svg.replace(/(<g id="page-legend">[\s\S]*?)<text x="[\d.]+" y="[\d.]+"/,
+      (m, head) => `${head}<text x="42" y="891"`);
+    expect(collided, 'the collision plant did not apply').not.toBe(p.svg);
+    const c1 = PC.wordsPlacementCensus(collided, p.words);
+    expect(c1.verdict, 'a label printed over the cartouche passed the census').toBe(false);
+    expect(c1.overlaps.length).toBeGreaterThan(0);
+
+    // 2 · OFF THE SHEET: a quarter glyph pushed past the page edge.
+    const offpage = p.svg.replace(/(<g id="page-wardlabels"[\s\S]*?)<text x="[\d.]+" y="[\d.]+"/,
+      (m, head) => `${head}<text x="1240" y="1240"`);
+    expect(offpage, 'the off-page plant did not apply').not.toBe(p.svg);
+    const c2 = PC.wordsPlacementCensus(offpage, p.words);
+    expect(c2.verdict, 'a glyph off the sheet passed the census').toBe(false);
+    expect(c2.outsideFrame.length).toBeGreaterThan(0);
+  });
+
+  it('⛔⛔ THE PLANTED HOLE — a name in the EMPTY MIDDLE of its own quarter must convict', () => {
+    // ⭐ THIS IS THE ONE THAT MATTERS, and it is the defect this lane actually shipped and cured:
+    //   a convex hull is not ink, so a name can sit inside the quarter it names and still be
+    //   floating over the market void in the middle of it. The plant finds a real hole.
+    let planted = 0;
+    for (const p of PLATES) {
+      for (const row of p.words.wards.rows) {
+        const q = p.words.anchored.quarters.find((x) => x.name === row.name);
+        let spot = null;
+        for (let gx = 0; gx <= PC.PAGE_SPAN && !spot; gx += 4) {
+          for (let gy = 0; gy <= PC.PAGE_SPAN; gy += 4) {
+            const pt = [gx, gy];
+            if (L.pointInPolygon(pt, q.polygon) && PC.inkDistance(pt, q.inkRings) > PC.INK_REACH * 1.5) { spot = pt; break; }
+          }
+        }
+        if (!spot) continue;
+        const re = new RegExp(`(<g id="page-wardlabels"[\\s\\S]*?data-cite="${row.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[\\s\\S]*?)<text x="[\\d.]+" y="[\\d.]+"`);
+        const bad = p.svg.replace(re, (m, head) => `${head}<text x="${spot[0]}" y="${spot[1]}"`);
+        if (bad === p.svg) continue;
+        const c = PC.wordsPlacementCensus(bad, p.words);
+        expect(c.verdict, `${p.key}/${row.name}: a glyph ${PC.inkDistance(spot, q.inkRings).toFixed(1)} px from any building PASSED`).toBe(false);
+        expect(c.offInk.length, `${p.key}/${row.name}: convicted, but not by the offInk arm`).toBeGreaterThan(0);
+        planted++;
+        break;
+      }
+    }
+    // ⛔ AND THE PLANTS THEMSELVES ARE NOT VACUOUS: the loop must have found real holes to use.
+    expect(planted, 'no hole could be planted anywhere in the corpus — the control never ran').toBeGreaterThanOrEqual(4);
+  });
+
+  it('⛔ THE NEGATIVE CONTROL — with no words layer the census REFUSES rather than passing', () => {
+    // A census that returns `true` when it has nothing to measure is the vacuity this programme
+    // keeps convicting. `null` is the only honest answer to "no subject".
+    const p = PLATES.find((x) => x.key === 'town');
+    const c = PC.wordsPlacementCensus(p.svg.replace('<g id="page-words"', '<g id="none"'), p.words);
+    expect(c.verdict).toBeNull();
+    expect(c.texts).toBe(0);
+    expect(c.reason).toMatch(/NO SUBJECT/);
+  });
+
+  // ── THE ANCHORING, AND THE MEASUREMENT THAT FORCED IT ──────────────────────────────────────
+  it('⭐⭐⭐ §710.6 · a quarter is named from the PARTITION\'S ink, never from the legacy hull', async () => {
+    // ⛔ THE FINDING, RE-ASSERTED SO IT CANNOT SILENTLY STOP BEING TRUE: the legacy districts and
+    //    the drawn partition disagree about where a quarter is on 4 leaves in 10. Anchoring the
+    //    label on the hull would put those names on empty countryside.
+    let districts = 0, empty = 0;
+    for (const p of PLATES) {
+      districts += p.words.anchored.quarters.length + p.words.anchored.dropped.length;
+      empty += p.words.anchored.dropped.filter((d) => d.masses === 0).length;
+    }
+    expect(districts, 'no districts were considered — the arm is vacuous').toBeGreaterThanOrEqual(90);
+    expect(empty, 'no legacy district is empty of drawn masses — the 41.6 % finding has vanished')
+      .toBeGreaterThanOrEqual(20);
+    // …and every quarter that IS named rests on real drawn buildings
+    for (const p of PLATES) {
+      for (const q of p.words.anchored.quarters) {
+        expect(q.masses, `${p.key}/${q.name} anchored on ${q.masses} masses`).toBeGreaterThanOrEqual(PC.QUARTER_MIN_MASSES);
+        expect(q.polygon.length, `${p.key}/${q.name} has no hull`).toBeGreaterThanOrEqual(3);
+      }
+    }
+  });
+
+  it('⭐ D2 · no quarter name is printed twice on one sheet, and no name leaves the page', () => {
+    for (const p of PLATES) {
+      const names = p.words.wards.rows.map((r) => r.name);
+      expect(new Set(names).size, `${p.key} prints a quarter name twice`).toBe(names.length);
+      expect(names.length, `${p.key} exceeds the clutter cap`).toBeLessThanOrEqual(PC.MAX_QUARTER_LABELS);
+    }
+  });
+
+  // ── THE PROJECTOR, AND THE UNIT THAT HAS TO BE DECLARED ────────────────────────────────────
+  it('⭐⭐ §711.6 · the page projector is an EXACT inverse — one seam, one unit, both directions', () => {
+    for (const p of PLATES) {
+      const F = p.words.proj;
+      expect(F.scale * F.worldPer, `${p.key}: the projector is not an inverse`).toBeCloseTo(1, 12);
+      // the transform the fragment is actually wrapped in agrees with the projector it was derived from
+      const m = /translate\((-?[\d.]+) (-?[\d.]+)\) scale\(([\d.]+)\)/.exec(p.svg);
+      expect(m, `${p.key}: no page-words transform`).not.toBeNull();
+      expect(Number(m[3]), `${p.key}: transform scale disagrees with the projector`).toBeCloseTo(F.worldPer, 5);
+    }
+  });
+
+  it('⭐⭐ TIER-INVARIANCE · the chrome is the SAME SIZE on a thorp and on a metropolis', () => {
+    // The whole reason the words are set in page space. A cartouche drawn in world units would be
+    // 4.18× larger on the smallest frame than on the largest — the very defect DRESS-FRAME's fit
+    // exists to forbid, arriving through the chrome.
+    const w = new Set();
+    for (const p of PLATES) {
+      const m = /<g id="page-cartouche"><rect x="(\d+)" y="(\d+)" width="(\d+)" height="(\d+)"/.exec(p.svg);
+      expect(m, `${p.key}: no cartouche rect`).not.toBeNull();
+      w.add(`${m[1]},${m[2]},${m[3]},${m[4]}`);
+    }
+    expect([...w], 'the cartouche is not the same size on every leaf').toEqual([`26,858,348,116`]);
+    // …and the frames really do differ, or the invariance is vacuous
+    const frames = new Set(PLATES.map((p) => /viewBox="[-\d.]+ [-\d.]+ ([\d.]+)/.exec(p.svg)[1]));
+    expect(frames.size, 'every leaf has the same frame — tier-invariance is untested').toBeGreaterThanOrEqual(8);
+  });
+
+  // ── DORMANCY + DETERMINISM ─────────────────────────────────────────────────────────────────
+  it('⛔⛔ DORMANCY · the FOLIO does not move — `lettering.js` is shared and must not change', async () => {
+    // The words layer is spliced in the HARNESS, over the finished page, and `pageChrome.js` sits
+    // at S23 beside `lettering.js`. Nothing this wave touched is on the folio's path — and that is
+    // proved by executing the folio, not by reasoning about the import graph.
+    const { CORPUS, buildOne } = await import('../../harness/exemplars.mjs');
+    const { renderFolio } = await import('../../harness/renderFolio.mjs');
+    const { LENS_IDS } = await import('../../src/domain/townMap/fabric/folioLenses.js');
+    for (const spec of CORPUS.slice(0, 6)) {
+      const built = buildOne(spec);
+      for (const lens of LENS_IDS) {
+        const r = renderFolio(built.fabric, { lens, words: true });
+        expect(r.svg.includes('id="page-words"'), `${spec.key}/${lens}: the words layer reached the FOLIO`).toBe(false);
+        expect(r.svg.includes('id="page-cartouche"'), `${spec.key}/${lens}: page chrome reached the FOLIO`).toBe(false);
+      }
+    }
+  }, 900000);
+
+  it('⭐ DETERMINISM · two renders of one leaf are BYTE-IDENTICAL, words and all', async () => {
+    const { dressLeaf } = await import('../../harness/laneDRESS1/renderPage.mjs');
+    for (const k of ['thorp', 'town', 'city']) {
+      expect(dressLeaf(k, 'parchment').svg, `${k} is not deterministic`).toBe(dressLeaf(k, 'parchment').svg);
+    }
+  }, 900000);
+
+  it('⭐ AN EMPTY WORDS FRAGMENT RETURNS THE BASE BYTE-IDENTICAL (`injectFog`\'s contract)', () => {
+    // The clause that makes the splice safe: a leaf with nothing to say is bit-for-bit the leaf
+    // without this module, so the channel can never be blamed for a byte it did not write.
+    const p = PLATES.find((x) => x.key === 'town');
+    expect(L.spliceLettering(p.svg, ''), 'an empty fragment moved the plate').toBe(p.svg);
+    expect(L.spliceLettering(p.svg, null), 'a null fragment moved the plate').toBe(p.svg);
+  });
+
+  it('⛔ NO NON-FINITE NUMBER REACHES THE WORDS LAYER — the NaN class, at the letters', () => {
+    for (const p of PLATES) {
+      const layer = p.svg.slice(p.svg.indexOf('<g id="page-words"'));
+      for (const bad of ['NaN', 'Infinity', 'undefined', 'null']) {
+        expect(layer.includes(bad), `${p.key}: the words layer contains ${bad}`).toBe(false);
+      }
+    }
+  });
+});

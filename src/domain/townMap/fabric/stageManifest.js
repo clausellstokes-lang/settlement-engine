@@ -318,7 +318,21 @@ export const GENERATION_NODES = Object.freeze([
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'measure.js', 'rampartWorks.js', 'waterWorks.js'],
     randomNamespaces: ['*|*|road', '*|*|side', '*|field', '*|h', '*|keep', '*|w'],
     statefulForkSites: 0 },
-  { nodeId: 'S23', modules: ['lettering.js'],
+  /**
+   * ⭐⭐ ⟦CAR-WORDS-2 · ODQ §717⟧ **`pageChrome.js` JOINS S23, AND THE ASSIGNMENT IS THE WHOLE
+   *   REASON THE PORT COSTS NO NEW EDGE.** The dress page carried ZERO `<text>` on 18 of 18 leaves
+   *   (F0-31/32/33); the cure needs the §173 typesetter, and the OBVIOUS home for it —
+   *   `partitionDress.js`, S22 — would have derived `S23>S22`, a **new public-order inversion**
+   *   arm 6 convicts by name and arm 7 would then have to re-roster the SCC for.
+   *   ⭐ At S23 the read of `lettering.js` is a SAME-NODE read and derives no cross-node edge at
+   *   all, so `allowedImports` is unchanged and `NODE_EDGES`, `PUBLIC_ORDER_INVERSIONS` and
+   *   `STAGE_GRAPH_SCC` are all untouched by this wave. Everything else the chrome needs — the
+   *   palette, the scale bar, the leaf's own drawn-group roster — arrives as PLAIN DATA, which is
+   *   the discipline the S22 block above already documents for `losses`.
+   *   ⚠ S23 remains a SINK: nothing in `src/` imports either module, so an inbound edge cannot
+   *   create a cycle here however the graph grows.
+   */
+  { nodeId: 'S23', modules: ['lettering.js', 'pageChrome.js'],
     allowedImports: ['fabricGeometry.js'],
     randomNamespaces: [],
     statefulForkSites: 0 },

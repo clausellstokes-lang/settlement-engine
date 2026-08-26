@@ -18,13 +18,16 @@ import { buildSettledPartition } from '../../src/domain/townMap/fabric/partition
 import { projectPage } from '../../src/domain/townMap/fabric/partitionView.js';
 import { partitionInputs } from '../laneSPINE1/partitionPerf.mjs';
 import { publishWallWorks } from '../../src/domain/townMap/fabric/wallPublication.js';
-import { dressPage, accessibleHatch } from '../../src/domain/townMap/fabric/partitionDress.js';
+import { dressPage, accessibleHatch, DRESS_LEGEND } from '../../src/domain/townMap/fabric/partitionDress.js';
 import { seatPartition } from '../../src/domain/townMap/fabric/partitionSeating.js';
 import { anchorStateMarks } from '../../src/domain/townMap/fabric/partitionState.js';
 import { wallForm } from '../../src/domain/townMap/fabric/walls.js';
 import { pubOpts } from '../laneSPINE3/pubOpts.mjs';
 import { faceRing } from '../../src/domain/townMap/fabric/partitionArrangement.js';
-import { LENS_IDS } from '../../src/domain/townMap/fabric/folioLenses.js';
+import { LENS_IDS, resolveLens } from '../../src/domain/townMap/fabric/folioLenses.js';
+import { scaleBarFor } from '../../src/domain/townMap/fabric/measure.js';
+import { pageWords, groupInk, PAGE_SPAN, CARTOUCHE, WORDS_OP_BUDGET } from '../../src/domain/townMap/fabric/pageChrome.js';
+import { spliceLettering } from '../../src/domain/townMap/fabric/lettering.js';
 
 const arg = (n, d) => { const h = process.argv.find((a) => a.startsWith(`--${n}=`)); return h ? h.slice(n.length + 3) : d; };
 const outDir = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : 'out/dress1';
@@ -102,12 +105,65 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
   //    plate depend on the road width, which is a tier-varying quantity, so the very
   //    tier-invariance the fit exists to buy was being spent by the padding.
   const F = dress.frame;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${F.x.toFixed(2)}`
+  const base = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${F.x.toFixed(2)}`
     + ` ${F.y.toFixed(2)} ${F.w.toFixed(2)} ${F.h.toFixed(2)}"`
     + ` width="1000" height="${Math.max(1, Math.round(1000 * F.h / F.w))}">`
     + dress.svg + acc.svg + '</svg>';
+  /**
+   * ⭐⭐⭐ ⟦CAR-WORDS-2 · ODQ §717⟧ **THE WORDS LAYER, SPLICED OVER THE FINISHED PAGE.**
+   *
+   * REG-F0 measured this surface at **ZERO `<text>` on 18 of 18 leaves** against the folio's 950
+   * (F0-31 chrome, F0-32 legend, F0-33 the lettering). The cure is `pageChrome.js` + the shipped
+   * `lettering.js` typesetter, and it runs HERE rather than inside `dressPage` for two reasons that
+   * both matter:
+   *   1 · §173's own law — *text placement is the one decision that cannot be made until everything
+   *       else on the page exists* — which is why `renderFolio.mjs:3206` splices at exactly this
+   *       point, over the finished draw list, on `injectFog`'s precedent.
+   *   2 · ⛔ `partitionDress.js` is stage **S22** and `lettering.js` is **S23**. An import inside the
+   *       dress would derive the cross-node edge `S23>S22` — a NEW public-order inversion the stage
+   *       walker's arm 6 convicts. Spliced from the harness, and with `pageChrome.js` sitting on
+   *       S23 beside `lettering.js`, no cross-node edge is created at all.
+   *
+   * ⚠ THE ARGUMENTS ARE ALL PLAIN DATA, and the two that carry a UNIT say which (§711.6):
+   *   • `bar` is a `scaleBarFor` result in **WORLD** units — `measure.metresPerUnit` is metres per
+   *     world unit, so the room it is asked for is a world-unit room and `pageChrome` converts the
+   *     answer to page px through the ONE projector.
+   *   • `legendRows` is the leaf's OWN drawn families. Scoping to `dress.groups` is what makes the
+   *     §692.9 caution mechanical rather than remembered: the four rows that teach marks the
+   *     parchment plate never draws (`dress-stepping`, `dress-barricade`, `dress-ruin-standing`,
+   *     `dress-ruin-clearing`) are absent from `dress.groups` and so cannot be printed.
+   */
+  const words = pageWords({
+    page,
+    meta: fabric.meta,
+    palette: resolveLens(lens).roles,
+    districts: fabric.umbrella.partition,
+    nameOf: (k) => {
+      const o = fabric.organisms.find((x) => x.key === k);
+      return o && o.name ? o.name : null;
+    },
+    // ⚠ THE ROOM IS ASKED FOR IN WORLD UNITS. `CARTOUCHE.w * 0.42` is the folio's own bar room in
+    //   page px; `PAGE_SPAN / F.w` is page px per world unit, so the division is the room on the
+    //   ground. Asking in page px would return a bar whose LABEL disagreed with its LENGTH.
+    bar: fabric.measure ? scaleBarFor(fabric.measure, (CARTOUCHE.w * 0.42) / (PAGE_SPAN / F.w)) : null,
+    legendRows: DRESS_LEGEND.filter((r) => dress.groups.includes(r.group)),
+    inkOf: (g) => groupInk(dress.svg, g),
+    notes: (fabric.immersion && fabric.immersion.notes) ? fabric.immersion.notes.notes : [],
+    // ⚠ A REFUSAL BOUND, NOT A RATION — the dress page carries no signed op ceiling in this tree.
+    //   See `WORDS_OP_BUDGET`. ⛔ The first spelling here derived it as
+    //   `page.budget.shapes - dress.primitives`, which is two DIFFERENT quantities subtracted:
+    //   `budget.shapes` counts PAGE shapes (2,520 on `town`) and `dress.primitives` counts DRAWN
+    //   primitives (8,852), so the difference was negative on every leaf and the clamp was the only
+    //   thing setting the budget. §711.6's class one more time — two units, one subtraction, and a
+    //   number that looked like a derivation.
+    budget: WORDS_OP_BUDGET,
+  });
+  const svg = spliceLettering(base, words.fragment);
   return {
     key, tier: fabric.meta.tier, lens, svg, dress, page, walls, acc, seating,
+    /** ⭐ ⟦CAR-WORDS-2⟧ the words layer, published beside the ink so a census measures the SAME
+     *  build the letters came from — projector, per-family counts, drops and refusals included. */
+    words,
     /** ⭐ ⟦CAR-STATE-BRIDGE⟧ THE RE-ANCHORED §10 REGISTER — the geometry that was actually DRAWN.
      *  `fabric.stateMarks` is still published untouched beside it, so a census can measure the
      *  before and the after off ONE build and attribute the move. ⛔ A placement census that
@@ -139,12 +195,16 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       rows.push({
         key: r.key, tier: r.tier, lens, bytes: r.bytes, ops: r.ops, primitives: r.primitives,
         pageShapes: r.pageShapes, census: r.dress.census,
+        /** ⟦CAR-WORDS-2⟧ the words layer's own row, so a run's JSON carries the F0-31/32/33 exit */
+        text: (r.svg.match(/<text\b/g) || []).length, words: r.words.census, wordsOps: r.words.ops,
       });
       console.log(`${key.padEnd(12)} ${r.tier.padEnd(11)} ${lens.padEnd(12)}`
         + ` bytes ${String(r.bytes).padStart(7)} ops ${String(r.ops).padStart(3)}`
         + ` prims ${String(r.primitives).padStart(6)} pageShapes ${String(r.pageShapes).padStart(5)}`
         + `  ridges ${r.dress.census.ridges}/${r.dress.census.ridgeClipped}clip/${r.dress.census.ridgeOutside}out`
-        + ` grainOut ${r.dress.census.grainOutside}`);
+        + ` grainOut ${r.dress.census.grainOutside}`
+        + `  text ${String((r.svg.match(/<text\b/g) || []).length).padStart(3)}`
+        + ` (${r.words.census.wards} quarter, ${r.words.census.legendRows} key, ${r.words.census.notes} note)`);
     }
   }
   const j = arg('json', '');
