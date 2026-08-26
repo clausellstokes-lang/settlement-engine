@@ -226,6 +226,18 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§706 · DRESS-FRAME dispatched; the legacy cure parked on a timing question · SEAT: Opus 5.**
+*What was judged:* that DRESS-FRAME proceeds now while the two legacy-wall cure cars stay
+chartered-but-unstarted, because their value depends on a fact only the owner holds — whether
+the deploy precedes the cutover. If the cutover lands first, the legacy wall retires and the
+fix is wasted work on a path scheduled for deletion.
+*What Fable re-derives:* whether parking a known, measured, customer-facing defect behind a
+visual wave is right, or whether the chair chose the more interesting work and dressed the
+choice as a dependency. The honest test: was the timing question genuinely unanswerable
+without the owner, or merely unasked?
+*Receipts:* ODQ §706 · §705.7's charter · the docket row.
+*Priority:* P2.
+
 **§705 · The determination lands PARTLY; my §703.3 trace refuted · SEAT: Opus 5.**
 *What was judged:* the split verdict (nothing live, a total defect on the train); routing it
 to the owner as informational-critical rather than blocking; chartering the cure as TWO cars;

@@ -29972,3 +29972,28 @@ wrap digest `e65c7685…` identical at base and tip.**
   probe on its own authority and named it precisely instead; it forced a negative control
   rather than reporting a bare positive rate; and it corrected the chair's premise while
   showing that its conclusion did not depend on the correction. That is the standard.
+
+## §706 · DRESS-FRAME DISPATCHED — AND THE LEGACY CURE IS PARKED ON A TIMING FACT ONLY THE OWNER HOLDS (2026-08-27 ~16:10 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§706.1 DRESS-FRAME RUNS** on `map-sandbox-wallcurtain` = `9c7261829`, carrying §702.8's
+  four changes **plus the corpus-render gate arm (§703.4)** — and the brief says plainly that
+  **the arm is worth more than the four visual changes combined.** Nothing in the gate renders
+  the page, so three waves' "gate green" covered the parts and not the picture; the chair read
+  the first as the second and wrote that against itself.
+- **§706.2 THE TWO LEGACY CURE CARS STAY CHARTERED BUT UNSTARTED — ON A DEPENDENCY, NOT A
+  PREFERENCE.** They live on the **build branch**, a different tree from every wave this arc
+  has run, and their value turns entirely on **whether the deploy precedes the cutover**. If
+  the cutover lands first the legacy wall **retires**, and the cure is work spent on a path
+  scheduled for deletion. **That is a fact the owner holds and the chair does not**, and it
+  sits on the docket as informational-critical rather than as a question demanding an answer —
+  the defect does not block the deploy either way.
+  ⚠ **Recorded honestly and queued for retrovalidation: this is also the reading under which
+  the chair gets to keep doing the more interesting work.** The test a later seat should apply
+  is whether the timing question was genuinely unanswerable without the owner, or merely
+  unasked.
+- **§706.3 THE HANDOFF WAS MISDIRECTING FOR THE SECOND TICK RUNNING** — it still named the
+  determination lane as in flight after it had reported. Refreshed to §705, with the live-site
+  reassurance and the train's defect both at the top, and §705.2's manifest trap beside them.
+  ⚠ **Twice in three ticks is a pattern, not an accident**: the handoff goes stale precisely
+  when collections come fast, which is exactly when a successor is most likely to arrive.
+
