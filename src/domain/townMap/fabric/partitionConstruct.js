@@ -282,7 +282,10 @@ function discRing(cx, cy, r, n) {
  * @param {Object} input
  * @param {string} input.seed
  * @param {any}    input.ledger        a `growthLedger` artifact — the pure data pre-stage
- * @param {{cx:number,cy:number,radius:number}} input.extent
+ * @param {{cx:number,cy:number,radius:number,settlementRadius?:number}} input.extent
+ *   `radius` is the HINTERLAND extent the countryside is seeded on; `settlementRadius` is the
+ *   settlement's OWN built extent, carried through so the view can fit the page to the
+ *   settlement without re-deriving the ratio between them (DRESS-FRAME).
  * @param {string} input.originForm    one of ORIGIN_FORMS
  * @param {string} [input.planMode]    one of PLAN_MODES
  * @param {number} input.roadWidth     the settlement's own road width (the rw of A1.2's rw² band)
@@ -1637,7 +1640,7 @@ function stamp(state, key, beat, ep, sourceEvent) {
 
 /** Publish the partition. Frozen, counted, and every figure a reader can re-derive. */
 function publish(state, foldedEpochs) {
-  const { arr } = state;
+  const { arr, input } = state;
   const byClass = {};
   for (const f of liveFaces(arr)) byClass[f.cls] = (byClass[f.cls] || 0) + 1;
   const byEdge = {};
@@ -1646,6 +1649,10 @@ function publish(state, foldedEpochs) {
     artifactKind: 'SETTLED_GROUND_PARTITION',
     schemaVersion: PARTITION_SCHEMA_VERSION,
     arrangement: arr,
+    /** ⭐ THE EXTENT THIS PARTITION WAS SEEDED ON, echoed so a VIEW can fit a page to the
+     *  settlement rather than to the hinterland. It is the input verbatim; nothing derives from
+     *  it here. */
+    extent: Object.freeze({ ...input.extent }),
     faceCounts: Object.freeze(byClass),
     edgeCounts: Object.freeze(byEdge),
     wraps: Object.freeze(state.wraps.slice()),

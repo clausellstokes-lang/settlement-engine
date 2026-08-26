@@ -51,7 +51,9 @@ export function partitionInputs(settlement, model, fabric) {
   return {
     seed: String(m.seed),
     ledger: buildGrowthLedger(settlement, model, {}),
-    extent: { cx: m.centre.x, cy: m.centre.y, radius: m.builtRadius * 1.45 },
+    // ⭐ BOTH RADII — see buildFabric.js's note. These two producers must agree, and this is
+    //   the pair they must agree on.
+    extent: { cx: m.centre.x, cy: m.centre.y, radius: m.builtRadius * 1.45, settlementRadius: m.builtRadius },
     originForm: m.polycentric === true ? 'POLYFOCAL'
       : (m.tier === 'thorp' || m.tier === 'hamlet' || m.tier === 'village' ? 'STREET_VILLAGE' : 'NUCLEATED_CROSSROADS'),
     planMode: m.morphology === 'planned' ? 'PLANTED_GRID'

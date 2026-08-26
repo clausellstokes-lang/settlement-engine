@@ -24,7 +24,7 @@ import {
   liveFaces, faceArea, properCrossings, splitFaceChain, addVertex,
 } from '../../src/domain/townMap/fabric/partitionArrangement.js';
 import { buildSettledPartition } from '../../src/domain/townMap/fabric/partitionConstruct.js';
-import { projectPage, PAGE_BAND_RW2 } from '../../src/domain/townMap/fabric/partitionView.js';
+import { projectPage, fitFrame, PAGE_BAND_RW2 } from '../../src/domain/townMap/fabric/partitionView.js';
 import {
   censusInvariants, censusCrossings, censusReserved, censusTotality, censusTangential,
 } from '../../src/domain/townMap/fabric/partitionCensus.js';
@@ -333,16 +333,97 @@ describe('§4 · the page register, under A1.2', () => {
     for (const m of withMembers) expect(m.ridges.length).toBeGreaterThan(1);
   });
 
-  it('the frame is derived from the partition’s own extent — nothing is drawn off the page', () => {
+  it('the CONTENT BOX still contains every vertex — the old guarantee, kept on the object that owns it', () => {
+    // ⛔ THIS ARM USED TO ASSERT THE SAME THING OF `page.frame`, AND DRESS-FRAME REPEALS THAT LAW
+    //    DELIBERATELY: the page is now fitted to the SETTLEMENT, and the hinterland — seeded to
+    //    1.45× the settlement radius on purpose — is meant to fall outside it. The containment
+    //    guarantee is not lost, it moved to `contentFrame`, which is what it was always about.
     const arr = P.arrangement;
     for (const v of arr.verts) {
       const x = v.x / arr.quantumPerUnit;
       const y = v.y / arr.quantumPerUnit;
-      expect(x).toBeGreaterThanOrEqual(page.frame.x - 1e-6);
-      expect(x).toBeLessThanOrEqual(page.frame.x + page.frame.w + 1e-6);
-      expect(y).toBeGreaterThanOrEqual(page.frame.y - 1e-6);
-      expect(y).toBeLessThanOrEqual(page.frame.y + page.frame.h + 1e-6);
+      expect(x).toBeGreaterThanOrEqual(page.contentFrame.x - 1e-6);
+      expect(x).toBeLessThanOrEqual(page.contentFrame.x + page.contentFrame.w + 1e-6);
+      expect(y).toBeGreaterThanOrEqual(page.contentFrame.y - 1e-6);
+      expect(y).toBeLessThanOrEqual(page.contentFrame.y + page.contentFrame.h + 1e-6);
     }
+  });
+
+  it('DRESS-FRAME · the page is FITTED to the settlement: 2R on the short side, no margin', () => {
+    const b = page.bound;
+    expect(b.radius).toBeGreaterThan(0);
+    // a square page inscribes the settlement's disc — π/4 of the plate, and NO padding
+    expect(page.frame.w).toBeCloseTo(2 * b.radius, 6);
+    expect(page.frame.h).toBeCloseTo(2 * b.radius, 6);
+    expect(page.frame.x + page.frame.w / 2).toBeCloseTo(b.cx, 6);
+    expect(page.frame.y + page.frame.h / 2).toBeCloseTo(b.cy, 6);
+    // the fixture is walled, so the ENCLOSURE rule must be the one that fired — and it must SAY so
+    expect(b.enclosed).toBe(true);
+    expect(b.rule).toMatch(/enclosure/);
+    expect(b.rule).not.toMatch(/FALLBACK/);
+    // and the fit is strictly tighter than the content box it replaced
+    expect(page.frame.w).toBeLessThan(page.contentFrame.w);
+  });
+
+  it('⛔ THE PLANT: the hinterland cannot move the camera — a far vertex moves the CONTENT BOX and NOT the frame', () => {
+    // ⚠ THE CONTROL THIS ARM EXISTS TO BE. Asserting "the frame is fitted" proves nothing about
+    // WHAT it is fitted to: a frame that still read the vertex list would pass every arm above.
+    // So plant a vertex 10,000 units out — referenced by no face, therefore part of no drawn body
+    // — and require the two frames to DISAGREE about it.
+    const arr = P.arrangement;
+    const q = arr.quantumPerUnit;
+    const planted = {
+      ...P,
+      arrangement: { ...arr, verts: arr.verts.concat([{ x: 10000 * q, y: 10000 * q }]) },
+    };
+    const after = projectPage(planted, { roadWidth: 5 });
+    // the content box MUST have swallowed it — otherwise the plant never landed and this arm is vacuous
+    expect(after.contentFrame.w).toBeGreaterThan(page.contentFrame.w + 1000);
+    // …and the page frame must not have moved at all
+    expect(after.frame.w).toBeCloseTo(page.frame.w, 6);
+    expect(after.frame.x).toBeCloseTo(page.frame.x, 6);
+    expect(after.bound.radius).toBeCloseTo(page.bound.radius, 6);
+  });
+
+  it('DRESS-FRAME · the OPEN rule reads the settlement’s own built extent, not its outliers', () => {
+    // An unwalled settlement has no enclosure to be bounded by, so it is bounded by the extent it
+    // needed — never by where its farthest farmstead landed, which is countryside.
+    // ⚠ `wallForm: null` ALONE DOES NOT MAKE AN OPEN SETTLEMENT — the LEDGER's own circuit event
+    //    still raises a wrap, which is the inertia law working correctly. The circuit has to come
+    //    out of the history for the settlement to have no enclosure.
+    const openLedger = fixtureLedger();
+    for (const ep of openLedger.epochs) ep.circuitEvents = [];
+    const open = buildSettledPartition(fixtureInput({
+      wallForm: null,
+      ledger: openLedger,
+      extent: { cx: 0, cy: 0, radius: 200, settlementRadius: 138 },
+    }));
+    const p2 = projectPage(open, { roadWidth: 5 });
+    expect(p2.bound.enclosed).toBe(false);
+    expect(p2.bound.rule).not.toMatch(/FALLBACK/);
+    expect(p2.bound.radius).toBeCloseTo(138, 6);
+    expect(p2.frame.w).toBeCloseTo(276, 6);
+    // and the hinterland it was seeded on is strictly wider than the page — generate wide, frame tight
+    expect(p2.contentFrame.w).toBeGreaterThan(p2.frame.w);
+  });
+
+  it('DRESS-FRAME · `fitFrame` puts 2R on the SHORT side and crops past 2:1 — the reference’s own branch', () => {
+    const share = (f, R) => (Math.PI * R * R) / (f.w * f.h);
+    // square: the disc is inscribed at π/4
+    expect(share(fitFrame(0, 0, 100, 1), 100)).toBeCloseTo(Math.PI / 4, 6);
+    // 16:9 and 4:3, from the reference's own table
+    expect(share(fitFrame(0, 0, 100, 16 / 9), 100)).toBeCloseTo(0.442, 3);
+    expect(share(fitFrame(0, 0, 100, 4 / 3), 100)).toBeCloseTo(0.589, 3);
+    // the two branches meet exactly at 2:1 — a discontinuity here would be a seam in the law
+    expect(share(fitFrame(0, 0, 100, 2), 100)).toBeCloseTo(Math.PI / 8, 6);
+    // past 2:1 the settlement is set to HALF the long side and OVERFLOWS the short one
+    const wide = fitFrame(0, 0, 100, 3);
+    expect(wide.w).toBeCloseTo(400, 6);
+    expect(wide.h).toBeLessThan(200);
+    // portrait is the same law with the axes swapped
+    const tall = fitFrame(0, 0, 100, 9 / 16);
+    expect(tall.w).toBeCloseTo(200, 6);
+    expect(share(tall, 100)).toBeCloseTo(0.442, 3);
   });
 
   it('STREETS ARE GROUND — the page carries no street stroke object at all', () => {

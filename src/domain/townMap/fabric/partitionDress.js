@@ -190,8 +190,11 @@ function dressPageInner(page, opts) {
         census.grainSegments++;
       }
     }
+    // ⭐ DRESS-FRAME · the countryside's fill goes back toward the paper at its SOLVED alpha. The
+    //   declared tone is untouched, so every `valueCensus` row reads exactly what it read before;
+    //   what changes is what lands. See `tones`' field block for the relation being solved.
     g('dress-fields', fills.length
-      ? `<path d="${fills.join('')}" fill="${T.field}" stroke="none"/>` : '');
+      ? `<path d="${fills.join('')}" fill="${T.field}" fill-opacity="${T.fieldOpacity}" stroke="none"/>` : '');
     // ⚠ THE GRAIN IS DRAWN IN THE FIELD'S OWN DARKER TONE, NOT IN INK. On the first render the
     //   countryside's corduroy OUT-SHOUTED the town at page scale — which is I3's inversion
     //   arriving from the other side (fabric not falling to paper, but the field rising past it).
@@ -713,9 +716,57 @@ export function tones(LENS, opts = {}) {
    * ⚠ **AND IT MOVES NO DECLARED TONE, SO NO EXISTING VALUE ROW CAN MOVE** — which is exactly why
    * it is the shippable half of this lever.
    */
+  /**
+   * ⭐⭐⭐ **DRESS-FRAME · THE COUNTRYSIDE GOES BACK TOWARD BARE PAPER — SOLVED, NOT CHOSEN, AND AT
+   * THE PIXEL BECAUSE EVERY TONE-SIDE DOOR IS STILL SHUT.**
+   *
+   * The reference paints plain countryside with **ZERO INK**: it is the page ground, the brightest
+   * value on the plate, and the settlement is the only dark mass on it (R-WATABOU-PAINT §2). Ours
+   * runs the other way — MEASURED on parchment at this tip, `field` sits at luminance **0.3171
+   * against `plotGround`'s 0.5121**, so the countryside is a DARKER thing than the ground the town
+   * itself stands on. That is the reference's value hierarchy inverted, over the largest region on
+   * the sheet.
+   *
+   * ⛔ THE TWO DOORS THAT ARE STILL SHUT, and neither is mine to open:
+   *   · moving the FIELD's declared tone reds `valueCensus`'s `field:paper ≥ VALUE_STEP` floor —
+   *     and relaxing a census to reach a count is the one move §9 law 7 forbids outright;
+   *   · §701.5 measured a tone-side demotion redding `i5`'s `water:ground` on `city` and `town`,
+   *     and that instrument's cure is PA.5's act.
+   *
+   * ⭐⭐ **AND THE SECOND DOOR IS NOW OPEN BY MEASUREMENT — WHICH IS THE FRAMING PAYING FOR THE
+   * PAINT.** i5's `ground` role is the urban envelope minus street/wall/water, so it was two-thirds
+   * ROOF and a quarter FIELD (§701.6). Fitting the page to the settlement multiplies the envelope:
+   * `town`'s ground population goes **32,782 px → 112,067 px**, and `water:ground` with it —
+   * **town 1.3745 → 1.7987, city 1.4897 → 1.6856**, against the 1.35 floor. The headroom that
+   * blocked §701.5 was **1.9 %**; it is **33 %** here. Both figures are executed at this tip on the
+   * estate's own i5 through its own shooter, base and tip, and both plates read `I5_PASS`.
+   *
+   * ⭐ SO THE DEMOTION SHIPS THE WAY THE FURROW DID — by a SOLVED ALPHA, which moves no declared
+   * tone and therefore no value row. The relation it solves mints no number: **the countryside, as
+   * the reader meets it, stands one value step on the PAPER'S OWN SIDE of the settled ground.**
+   * The town's ground is the darker thing and the countryside the lighter, which is the reference's
+   * law stated in our own ladder's units. On `darkFantasy` the field is already on the right side
+   * and α solves to 1 — the night lens is untouched, as it should be.
+   */
+  const fieldOpacity = solveFieldAlpha(paper, field, plotGround);
+  /** What the reader actually meets where the countryside is drawn. */
+  const fieldOnPage = mix(paper, field, fieldOpacity);
   const grain = mix(field, poles.dark, 0.34);
-  const grainOpacity = solveFurrowAlpha(field, grain);
+  /**
+   * ⚠ **THE FURROW IS NOW SOLVED AGAINST WHAT LANDS, NOT AGAINST WHAT IS DECLARED — and that is a
+   * correction to §701.5's own arm rather than an addition to it.** Its law is *"one value step
+   * under the field it textures"*; with the field itself stepping back toward the paper, solving
+   * against the declared tone would leave the hatch a full three steps louder than the ground it
+   * lies on, and the countryside would end up reading as corduroy on bare paper — the same defect
+   * §701.5 cured, arriving from the other side. The law is unchanged; the surface it is asked at is
+   * the one the reader sees, which is what that arm said it was doing all along.
+   */
+  const grainOpacity = solveFurrowAlpha(fieldOnPage, grain);
   return {
+    /** ⭐ THE ALPHA THE COUNTRYSIDE'S FILL IS DRAWN AT, solved per lens. See the block above. */
+    fieldOpacity,
+    /** The field as the reader meets it — published so a census can read the SEEN tone. */
+    fieldOnPage,
     paper,
     ink: R.ink,
     wall: R.walls,
@@ -788,6 +839,33 @@ export function atMost(anchor, hex, want, toward) {
  * finest α the search offers, because a countryside with no texture at all is a different defect
  * from a countryside with a loud one.
  */
+/**
+ * ⭐⭐ **SOLVE THE COUNTRYSIDE'S ALPHA (DRESS-FRAME).** Return the largest α ∈ (0,1] at which the
+ * field, seen over the paper, still stands a full value step clear of the settled `ground` **on the
+ * paper's own side of it** — so the town's ground is the darker thing and the countryside the
+ * lighter, whichever way round the lens's own palette runs.
+ *
+ * ⚠ THE SIDE TEST IS NOT DECORATION. Contrast is a magnitude and has no sign, so a search that
+ * asked only for `contrast ≥ VALUE_STEP` would happily return α = 1 on a lens whose field is a step
+ * clear of the ground on the WRONG side — which is the state this function exists to leave. This is
+ * the same lesson `tones` records three times over: *away from the paper is a DIRECTION, not a sign.*
+ *
+ * ⚠ It never returns 0, for `solveFurrowAlpha`'s reason: a countryside painted at nothing at all is
+ * a different defect from one painted too loud, and the caller is entitled to see which it has.
+ */
+export function solveFieldAlpha(paper, field, ground) {
+  const paperIsLighter = luminance(paper) >= luminance(ground);
+  let best = 0.01;
+  for (let i = 1; i <= 100; i++) {
+    const a = i / 100;
+    const seen = mix(paper, field, a);
+    const onPaperSide = paperIsLighter
+      ? luminance(seen) > luminance(ground) : luminance(seen) < luminance(ground);
+    if (onPaperSide && contrast(seen, ground) >= VALUE_STEP) best = a; else break;
+  }
+  return Math.round(best * 100) / 100;
+}
+
 export function solveFurrowAlpha(field, grain) {
   let best = 0.01;
   for (let i = 1; i <= 100; i++) {

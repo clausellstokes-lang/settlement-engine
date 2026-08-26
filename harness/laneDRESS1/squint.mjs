@@ -134,7 +134,12 @@ async function truthCentre(key) {
   const { dressLeaf } = await import('./renderPage.mjs');
   const r = dressLeaf(key, 'parchment');
   const F = r.dress.frame;
-  const pad = 20;
+  // ⛔ WAS A HARD-CODED 20 AND IT IS NOW 0 (DRESS-FRAME). This number had to equal the pad
+  //    `renderPage.mjs` puts round the frame, and it never did — the harness's pad is
+  //    `roadWidth × 4` (20.3 on the town, 32.8 on the thorp), so this constant was right on no
+  //    leaf and merely close on one. DRESS-FRAME removes the pad from the page altogether, so the
+  //    correct value is zero and the world→pixel map is now exact rather than nearly exact.
+  const pad = 0;
   let sx = 0; let sy = 0; let n = 0;
   for (const m of r.page.masses) {
     for (const p of m.ring) { sx += p[0]; sy += p[1]; n++; }

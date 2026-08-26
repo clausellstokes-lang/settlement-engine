@@ -1305,7 +1305,13 @@ export function buildFabric(settlement, model, options = {}) {
     const input = {
       seed: String(seed),
       ledger: growLedger,
-      extent: { cx: centre.x, cy: centre.y, radius: scale.builtRadius * 1.45 },
+      // ⭐ THE EXTENT CARRIES BOTH RADII (DRESS-FRAME). `radius` is the HINTERLAND extent —
+      //   the disc the countryside is seeded on, 1.45× the settlement's own — and
+      //   `settlementRadius` is the settlement's own built extent. The view needs the second
+      //   to fit the page to the settlement, and RE-DERIVING it by dividing the first by 1.45
+      //   would have put that literal in a THIRD place with nothing holding the three in
+      //   lock-step. The derived quantity travels with the data instead.
+      extent: { cx: centre.x, cy: centre.y, radius: scale.builtRadius * 1.45, settlementRadius: scale.builtRadius },
       originForm: (umbrella.polycentric || nuclei.length > 1) ? 'POLYFOCAL'
         : (scale.tier === 'thorp' || scale.tier === 'hamlet' || scale.tier === 'village'
           ? 'STREET_VILLAGE' : 'NUCLEATED_CROSSROADS'),

@@ -83,8 +83,11 @@ export function projectPage(partition, opts = {}) {
   const rw2 = rw * rw;
   const ceiling = (opts.bandCeiling || PAGE_BAND_RW2.ceiling) * rw2;
 
-  // ── 0 · FRAME TO EXTENT — the view's FIRST duty (A1.5, CAR-FRAME absorbed) ──────────────────
-  const frame = frameOfPartition(arr);
+  // ── 0 · THE CONTENT FRAME — the bounding box of everything the partition holds, hinterland
+  //    included. ⚠ IT IS NO LONGER THE PAGE (DRESS-FRAME, ODQ §702.1): it is retained and
+  //    published so a census can state the before-figure, and so the paper can be laid under a
+  //    frame that may sit outside it. The PAGE frame is fitted to the settlement, below.
+  const contentFrame = frameOfPartition(arr);
 
   // ── the seam law's one decision: which vertices survive, decided once for the whole page ────
   const keep = simplifyDecision(arr);
@@ -194,10 +197,23 @@ export function projectPage(partition, opts = {}) {
   // ── the page budget census, in the band's own unit ──────────────────────────────────────────
   const budget = pageBudget(masses, ways, voids, band, fields, rw2);
 
+  // ── ⭐⭐⭐ THE PAGE IS FITTED TO THE SETTLEMENT (DRESS-FRAME) ─────────────────────────────────
+  //    Computed HERE rather than at stage 0 because it needs the drawn bodies, which is the
+  //    whole point: the frame follows what the settlement DRAWS, not what the partition SPANS.
+  const bound = settlementBound(partition, masses, band, voids);
+  const frame = fitFrame(bound.cx, bound.cy, bound.radius, opts.aspect || 1);
+
   return Object.freeze({
     artifactKind: 'PARTITION_PAGE_FRAME',
     schemaVersion: PAGE_VIEW_SCHEMA_VERSION,
     frame,
+    /** ⭐ THE BEFORE-FIGURE, PUBLISHED RATHER THAN RECOVERABLE ONLY BY REVERTING. `contentFrame`
+     *  is what `frame` was until DRESS-FRAME: the bbox of every vertex the partition holds,
+     *  hinterland included. A census can state the shift without a second checkout. */
+    contentFrame,
+    /** ⭐ THE BOUND THE FRAME WAS FITTED TO, and WHICH RULE FITTED IT — so a reader never has to
+     *  infer whether a leaf was framed by its enclosure or by its whole body. */
+    bound: Object.freeze(bound),
     /** ⚠ THE GROUND IS THE PAGE'S OWN SURFACE AND THE STREETS ARE WHAT SHOWS THROUGH IT. There is
      *  no street object here to stroke; §650 is enforced by the absence. */
     ground: Object.freeze({ kind: 'SETTLED_SURFACE', frame }),
@@ -231,7 +247,154 @@ export function projectPage(partition, opts = {}) {
   });
 }
 
-/** ⭐ THE FRAME — the partition's own extent, so nothing can be drawn off the page. */
+/**
+ * ⭐⭐⭐ **FIT A PAGE TO A SETTLEMENT — the reference's own rule, restated (ODQ §702.1).**
+ *
+ * The drawn diameter `2R` is set to the page's **SHORT** side. On a square page that inscribes the
+ * settlement's disc and gives it **π/4 = 78.5 %** of the plate; on 16:9 it gives 44.2 %; at 2:1,
+ * 39.3 %. Past 2:1 the rule flips: the diameter is set to **half the LONG side**, which is larger
+ * than the short one, so the settlement deliberately **overflows and is cropped** rather than
+ * shrinking to a dot in a letterbox. The two branches agree exactly at 2:1.
+ *
+ * ⭐ THERE IS NO MARGIN CONSTANT, NO PADDING AND NO CONTENT BOX. That absence is the mechanism, not
+ * an omission: a margin makes the share depend on the margin, and a content box lets the
+ * countryside — which is generated far wider than the frame on purpose — decide the camera.
+ *
+ * ⚠ THE ORIGIN IS THE SETTLEMENT'S OWN CENTRE, never the centroid of drawn content. A lopsided
+ * town sits lopsided in the frame; nothing re-centres it.
+ *
+ * @param {number} cx @param {number} cy
+ * @param {number} radius the settlement radius, world units
+ * @param {number} [aspect] page width ÷ page height (1 = square)
+ */
+export function fitFrame(cx, cy, radius, aspect = 1) {
+  const a = Number.isFinite(aspect) && aspect > 0 ? aspect : 1;
+  const R = Number.isFinite(radius) && radius > 0 ? radius : 1;
+  const longOverShort = a >= 1 ? a : 1 / a;
+  const longWorld = longOverShort > 2 ? 4 * R : 2 * R * longOverShort;
+  const shortWorld = longWorld / longOverShort;
+  const w = a >= 1 ? longWorld : shortWorld;
+  const h = a >= 1 ? shortWorld : longWorld;
+  return Object.freeze({ x: cx - w / 2, y: cy - h / 2, w, h });
+}
+
+/**
+ * ⭐⭐⭐ **THE SETTLEMENT'S OWN BOUND — and the countryside is never consulted.**
+ *
+ * The reference computes its page extent from *"the greatest distance from the origin to any vertex
+ * of any patch flagged as within the city"*; countryside patches are not read at all. Ours states
+ * the same law in the vocabulary we have:
+ *
+ * > **A settlement's bound is its ENCLOSURE where it has one, and its whole drawn body where it
+ * > has none.** A body that reaches into the enclosure carries the bound out with it — the
+ * > faubourg at the gate is part of the town — but a hamlet standing off in the fields does not,
+ * > because it is countryside, and the countryside does not set the camera.
+ *
+ * ⚠ THE CASE SPLIT IS A FACT ABOUT THE WORLD, NOT A DIAL. A walled town's edge is its wall; an
+ * open one has no edge and simply stops (which is the reference's own account of its fringe).
+ * There is no threshold, no quantile and no tuning number anywhere in this function.
+ *
+ * ⛔ WHAT IT DELIBERATELY EXCLUDES, each for the same reason — none of them is the settlement:
+ * `FIELD` faces (the hinterland, seeded to 1.45× the settlement radius on purpose), `WATER`
+ * (a river crosses the whole leaf), `LOSSREGION`, and `WAY` faces (approach roads run to the
+ * frontier; in the reference a way is not a patch at all).
+ *
+ * @param {any} partition a `SETTLED_GROUND_PARTITION`
+ * @param {Array<{ring:Array<[number,number]>}>} masses
+ * @param {Array<{ring:Array<[number,number]>}>} band
+ * @param {Array<{ring:Array<[number,number]>}>} voids
+ * @returns {{cx:number, cy:number, radius:number, rule:string, enclosed:boolean}}
+ */
+export function settlementBound(partition, masses = [], band = [], voids = []) {
+  const bodies = [];
+  for (const grp of [masses, band, voids]) {
+    for (const o of (grp || [])) if (o && o.ring && o.ring.length >= 3) bodies.push(o.ring);
+  }
+  const wraps = (partition && partition.wraps) || [];
+  const rings = [];
+  for (const w of wraps) if (w && w.outer && w.outer.length >= 3) rings.push(w.outer);
+
+  if (rings.length) {
+    // ── THE ENCLOSURE CASE. Centre and radius over every circuit's outer ring, so a town with an
+    //    old core inside a later curtain is bounded by the curtain without anybody deciding which
+    //    circuit is "the" one.
+    let sx = 0; let sy = 0; let n = 0;
+    for (const r of rings) for (const p of r) { sx += p[0]; sy += p[1]; n++; }
+    const cx = sx / n; const cy = sy / n;
+    let R = 0;
+    for (const r of rings) for (const p of r) { const d = Math.hypot(p[0] - cx, p[1] - cy); if (d > R) R = d; }
+    // ── the faubourg clause: a body that reaches inside the circuit is part of the town.
+    let out = R;
+    for (const ring of bodies) {
+      let touches = false; let far = 0;
+      for (const p of ring) {
+        const d = Math.hypot(p[0] - cx, p[1] - cy);
+        if (d <= R) touches = true;
+        if (d > far) far = d;
+      }
+      if (touches && far > out) out = far;
+    }
+    return {
+      cx, cy, radius: out, enclosed: true,
+      rule: `enclosure: ${rings.length} circuit(s), radius ${R.toFixed(1)}`
+        + `${out > R ? `, carried to ${out.toFixed(1)} by a body reaching inside it` : ''}`,
+    };
+  }
+
+  // ── THE OPEN CASE. No enclosure, so the settlement's bound is its OWN BUILT EXTENT, about its
+  //    OWN STRUCTURAL CENTRE — the founding origin the countryside was seeded around. An open
+  //    settlement has no edge line; it just stops, so it is bounded by what it needed rather than
+  //    by where its outliers landed.
+  //
+  // ⭐⭐ THIS IS THE REFERENCE'S "GENERATE WIDE, FRAME TIGHT" AT OUR OWN RATIO. Its countryside is
+  //    generated to 3× the frame and ~89 % of it is left off-page; ours is seeded to 1.45× the
+  //    settlement radius, so framing at 1× puts every open leaf at the same 1.45× zoom and leaves
+  //    the same share of hinterland outside. Nothing here knows the number 1.45: it reads the
+  //    settlement radius the extent carries and the ratio falls out.
+  //
+  // ⛔⛔ TWO SPELLINGS BEFORE THIS ONE WERE WRONG, AND BOTH FAILURES ARE WORTH THE ROOM.
+  //    (i) The bound as the drawn bodies about their own AREA-WEIGHTED CENTROID put the thorp's
+  //    frame 378 units wide about a point 47 off the origin, when the whole generated countryside
+  //    is a disc 287 wide about the origin — so the page ran OUT of countryside and the plate
+  //    showed bare paper in one corner against a hard-edged green disc. ⭐ THE CLASS: **a frame
+  //    centred on content can leave the ground that content stands on.**
+  //    (ii) The bound as the drawn bodies about the ORIGIN fixed that, and bought nothing: the
+  //    thorp's three farmsteads reach the frontier, so the frame stayed the content box and the
+  //    zoom read 1.00×. **A settlement whose only bodies are scattered farms has no bound of its
+  //    own to find by looking at them** — which is exactly why the reference reads a settlement
+  //    radius rather than a content box, and why it would rather crop than surrender the page.
+  const box = frameOfPartition(partition.arrangement);
+  const ex = (partition && partition.extent) || null;
+  const cx = ex && Number.isFinite(ex.cx) ? ex.cx : box.x + box.w / 2;
+  const cy = ex && Number.isFinite(ex.cy) ? ex.cy : box.y + box.h / 2;
+  if (ex && Number.isFinite(ex.settlementRadius) && ex.settlementRadius > 0) {
+    return {
+      cx, cy, radius: ex.settlementRadius, enclosed: false,
+      rule: `open: the settlement's own built extent ${ex.settlementRadius.toFixed(1)}`
+        + `, hinterland seeded to ${Number.isFinite(ex.radius) ? ex.radius.toFixed(1) : '?'}`,
+    };
+  }
+  // ⚠ THE FALLBACK, AND IT SAYS SO IN `rule` RATHER THAN PASSING FOR THE LAW. A partition built
+  //   without a settlement radius on its extent — a hand-made test fixture — is bounded by what
+  //   it draws. Every corpus leaf carries the radius; if a leaf ever reports this rule, its
+  //   producer dropped the field.
+  if (!bodies.length) {
+    return { cx, cy, radius: Math.max(box.w, box.h) / 2, enclosed: false, rule: 'FALLBACK: no settlement radius on the extent and no drawn body — the content box stands in' };
+  }
+  let R = 0;
+  for (const ring of bodies) for (const p of ring) { const d = Math.hypot(p[0] - cx, p[1] - cy); if (d > R) R = d; }
+  return { cx, cy, radius: R, enclosed: false, rule: `FALLBACK: no settlement radius on the extent — bounded by ${bodies.length} drawn body(ies)` };
+}
+
+/** Absolute polygon area (shoelace). */
+function ringArea(ring) {
+  let a = 0;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) a += (ring[j][0] + ring[i][0]) * (ring[j][1] - ring[i][1]);
+  return Math.abs(a) / 2;
+}
+
+/** ⭐ THE CONTENT BOX — every vertex the partition holds, hinterland included. It was the page
+ *  frame until DRESS-FRAME; it is now published beside the fitted frame as the before-figure. */
 function frameOfPartition(arr) {
   let lox = Infinity; let loy = Infinity; let hix = -Infinity; let hiy = -Infinity;
   for (const v of arr.verts) {

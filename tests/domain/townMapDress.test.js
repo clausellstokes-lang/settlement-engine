@@ -167,11 +167,20 @@ describe('I7 + §650.2 · THE CLIP — no mark leaves the face that owns it', ()
    * step from each needs 1.638). So the hatch is demoted AT THE PIXEL, and what is pinned is the
    * rendered furrow rather than the declared pair.
    */
-  it('⭐ the RENDERED furrow is within one value step of its field — and 0.72 is not', () => {
+  /**
+   * ⚠ **AND DRESS-FRAME MOVES THE SURFACE THIS ROW IS ASKED AT, WHICH IS A CORRECTION TO THE ARM
+   * RATHER THAN AN ADDITION.** The law is *"the furrow is within one value step of the field it
+   * textures"*; with the countryside's own fill now stepping back toward the paper, the field the
+   * furrow textures is `fieldOnPage`, not `field`. Asked against the declared tone the row stays
+   * green while the rendered hatch drifts three steps clear of its own ground — the same
+   * name-outlives-its-predicate family this test's own header names, arriving inside the cure for
+   * it. Both the solve and the assertion now read the seen tone.
+   */
+  it('⭐ the RENDERED furrow is within one value step of the field AS SEEN — and 0.72 is not', () => {
     let convicted = 0; let violating = 0;
     for (const id of LENS_IDS) {
       const T = tones(resolveLens(id));
-      const rendered = (a) => contrast(T.field, mix(T.field, T.grain, a));
+      const rendered = (a) => contrast(T.fieldOnPage, mix(T.fieldOnPage, T.grain, a));
       expect(rendered(T.grainOpacity), `${id}: the solved alpha misses its own step`)
         .toBeLessThanOrEqual(VALUE_STEP + 1e-9);
       /** ⛔ the control: the pre-cure alpha, on every lens whose base actually violates the row */
@@ -194,7 +203,54 @@ describe('I7 + §650.2 · THE CLIP — no mark leaves the face that owns it', ()
       expect(worst >= rendered0(T) || T.grainOpacity === 1,
         `${id}: an alpha of 1 must be no better than the solved one`).toBe(true);
     }
-    function rendered0(T) { return contrast(T.field, mix(T.field, T.grain, T.grainOpacity)); }
+    function rendered0(T) { return contrast(T.fieldOnPage, mix(T.fieldOnPage, T.grain, T.grainOpacity)); }
+  });
+
+  /**
+   * ⭐⭐⭐ **DRESS-FRAME · THE COUNTRYSIDE IS NOT A DARKER THING THAN THE TOWN'S OWN GROUND.**
+   *
+   * The reference paints plain countryside with ZERO ink and makes it the brightest large value on
+   * the plate; ours had it at luminance **0.3171 against `plotGround`'s 0.5121** on parchment — the
+   * hierarchy inverted, over the largest region on the sheet. Every tone-side cure is still shut
+   * (`valueCensus`'s `field:paper` floor, and §701.5's measured i5 red), so the demotion is solved
+   * at the PIXEL exactly as the furrow's was, and this row is asked at the pixel too.
+   *
+   * ⚠ THE DECLARED TONE MUST NOT HAVE MOVED. That is the whole reason this cure is shippable, so
+   * it is asserted rather than assumed — if a later hand "simplifies" the alpha into the tone, five
+   * value rows move with it and this arm says so first.
+   */
+  it('⭐ the SEEN countryside stands a value step on the PAPER\u2019s side of the settled ground', () => {
+    let stepped = 0;
+    for (const id of LENS_IDS) {
+      const T = tones(resolveLens(id));
+      expect(T.fieldOpacity, `${id}: alpha out of range`).toBeGreaterThan(0);
+      expect(T.fieldOpacity, `${id}: alpha out of range`).toBeLessThanOrEqual(1);
+      // the relation the alpha solves, asked of what lands on the page
+      expect(contrast(T.fieldOnPage, T.plotGround), `${id}: the seen field misses its own step`)
+        .toBeGreaterThanOrEqual(VALUE_STEP - 1e-9);
+      // ⭐ AND ON THE RIGHT SIDE — contrast has no sign, so a magnitude alone would pass the very
+      //   state this cure exists to leave.
+      const towardPaper = contrast(T.paper, T.plotGround) > contrast(T.paper, T.fieldOnPage);
+      expect(towardPaper, `${id}: the seen field is on the WRONG side of the settled ground`).toBe(true);
+      // the declared tone is untouched, so no value row can have moved
+      expect(valueCensus(T).rows.find((r) => r.pair === 'field:paper').pass, `${id}: field:paper`).toBe(true);
+      if (T.fieldOpacity < 1) stepped++;
+    }
+    /**
+     * ⛔ THE CONTROL, AND IT IS THE ONE THAT MATTERS: at α = 1 — the state before this cure — the
+     * countryside must FAIL the row on the lenses that actually had the defect. Five of six do;
+     * `darkFantasy` already stood on the right side and its alpha solves to 1, which is why the
+     * count is five and not six. An arm that demanded six would make a true reading look dead.
+     */
+    let convicted = 0;
+    for (const id of LENS_IDS) {
+      const T = tones(resolveLens(id));
+      const onPaperSide = contrast(T.paper, T.plotGround) > contrast(T.paper, T.field);
+      const clears = contrast(T.field, T.plotGround) >= VALUE_STEP - 1e-9;
+      if (!(onPaperSide && clears)) convicted++;
+    }
+    expect(stepped, 'no lens stepped back — the cure is doing nothing').toBe(5);
+    expect(convicted, 'the pre-cure state passes the row — the control is dead').toBe(5);
   });
 
   it('⭐ PA.6 · a ridge is CLIPPED to its footprint, and one wholly outside is REFUSED', () => {
@@ -334,5 +390,144 @@ describe('PA.3 · THE FORD, and the crossing family', () => {
       { lens: 'parchment', roadWidth: 5, walls });
     expect(d.census.decks).toBe(1);
     expect(d.svg).toContain('id="dress-decks"');
+  });
+});
+
+/* ══════════════════════════════════════════════════════════════════════════════════════════════
+ * ⭐⭐⭐ THE CORPUS-RENDER ARM (DRESS-FRAME, chartered ODQ §703.4)
+ *
+ * ⛔⛔ THE DEFECT IT EXISTS FOR, AND IT IS THE SHARPEST ONE THIS PROGRAMME HAS FOUND:
+ * **NOTHING IN THE GATE RENDERED THE PAGE.** At `9c7261829` the gate ran **19 files / 439 tests,
+ * EXIT 0** at a tip whose page renderer **threw on leaf 14 of 18** — a `Math.max(1, …)` floor over
+ * a hatch list that had become empty, so `linePath(undefined)`. Two test files *referenced* the
+ * dress modules; none built a corpus leaf and drew it. So a leaf-specific crash passed a green
+ * gate, and three waves of "gate green" were read by the chair as "the picture renders" when they
+ * only ever said "the parts pass".
+ *
+ * ⭐ WHAT THIS ARM IS, STATED SO IT CANNOT DRIFT: it renders **every leaf of the corpus, through
+ * BOTH renderers, end to end** — the partition dress page (the surface that ships at the port) and
+ * the legacy folio plate (the surface the corpus is measured on today) — and requires each to
+ * produce a well-formed plate with no non-finite number anywhere in its markup. It asserts almost
+ * nothing about how the plate LOOKS. That is deliberate: every look-assertion the estate owns
+ * already lives above this line, and what was missing was not a judgement, it was an EXECUTION.
+ *
+ * ⚠ IT COSTS ~40 s AND THAT IS THE POINT. The fixture-based arms above are fast because they are
+ * synthetic; a crash that only the metropolis reaches cannot be caught by a synthetic fixture. The
+ * corpus is built ONCE per leaf and both renderers are driven off that one build.
+ *
+ * ⛔ AND IT WAS PROVED BY A PLANTED CRASH BEFORE IT WAS BELIEVED — see the receipt: the §703.4
+ * defect was re-planted at its original site and this arm convicted `metropolis`, while the rest
+ * of the gate stayed green exactly as it did the first time.
+ * ═══════════════════════════════════════════════════════════════════════════════════════════ */
+describe('⭐⭐⭐ THE CORPUS RENDERS — every leaf, both renderers, end to end (§703.4)', () => {
+  /** @type {any} */ let plates = null;
+  /** @type {any} */ let CORPUS_KEYS = null;
+
+  beforeAll(async () => {
+    const { CORPUS } = await import('../../harness/exemplars.mjs');
+    const { dressLeaf } = await import('../../harness/laneDRESS1/renderPage.mjs');
+    const { renderFolio } = await import('../../harness/renderFolio.mjs');
+    CORPUS_KEYS = CORPUS.map((s) => s.key);
+    plates = [];
+    for (const key of CORPUS_KEYS) {
+      // ⚠ NO try/catch. A throw here IS the verdict — wrapping it would turn the one thing this
+      //    arm exists to catch into a soft row in a report nobody reads.
+      const r = dressLeaf(key, 'parchment');
+      const folio = renderFolio(r.fabric, { lens: 'parchment' });
+      plates.push({ key, tier: r.tier, dress: r.svg, page: r.page, folio: folio.svg, folioEls: folio.elementCount, folioPrims: folio.primitiveCount, ops: r.ops, prims: r.primitives });
+    }
+  }, 900000);
+
+  it('⛔ NON-VACUITY FIRST: the arm visited every leaf of the corpus, and the corpus is not empty', () => {
+    // A corpus-render arm that renders nothing is the vacuous-census family's newest member, and
+    // it would read exactly like this one passing. So the roster is asserted before the plates.
+    expect(Array.isArray(CORPUS_KEYS)).toBe(true);
+    expect(CORPUS_KEYS.length).toBeGreaterThanOrEqual(18);
+    expect(plates.length).toBe(CORPUS_KEYS.length);
+    expect(plates.map((p) => p.key)).toEqual(CORPUS_KEYS);
+  });
+
+  it('every leaf renders a WELL-FORMED dress page, and the frame it declares is finite', () => {
+    for (const p of plates) {
+      expect(p.dress.startsWith('<svg'), `${p.key}: no <svg`).toBe(true);
+      expect(p.dress.endsWith('</svg>'), `${p.key}: unterminated`).toBe(true);
+      const vb = /viewBox="([^"]+)"/.exec(p.dress);
+      expect(vb, `${p.key}: no viewBox`).not.toBeNull();
+      const nums = vb[1].trim().split(/\s+/).map(Number);
+      expect(nums.length, `${p.key}: viewBox arity`).toBe(4);
+      for (const n of nums) expect(Number.isFinite(n), `${p.key}: viewBox ${vb[1]}`).toBe(true);
+      expect(nums[2], `${p.key}: zero-width page`).toBeGreaterThan(0);
+      expect(nums[3], `${p.key}: zero-height page`).toBeGreaterThan(0);
+      // the leaf actually drew something — a blank page is not a rendered page
+      expect(p.dress).toContain('id="dress-paper"');
+      expect(p.dress).toContain('id="dress-masses"');
+      expect(p.prims, `${p.key}: no primitives`).toBeGreaterThan(0);
+      expect(p.ops, `${p.key}: no elements`).toBeGreaterThan(0);
+    }
+  });
+
+  it('every leaf renders a WELL-FORMED folio plate — the legacy surface is in the gate too', () => {
+    for (const p of plates) {
+      expect(p.folio.startsWith('<svg'), `${p.key}: folio no <svg`).toBe(true);
+      expect(p.folio.trimEnd().endsWith('</svg>'), `${p.key}: folio unterminated`).toBe(true);
+      expect(p.folioEls, `${p.key}: folio no elements`).toBeGreaterThan(0);
+      expect(p.folioPrims, `${p.key}: folio no primitives`).toBeGreaterThan(0);
+    }
+  });
+
+  it('⛔ NO NON-FINITE NUMBER REACHES EITHER PLATE — the NaN class, caught at the page', () => {
+    // §701.7's own lesson from the other side: a NaN can render a confident-looking plate that is
+    // silently broken, and an exit code will not say so. `NaN`, `Infinity` and a stringified
+    // `undefined` are all things a coordinate arithmetic slip puts straight into path data.
+    for (const p of plates) {
+      for (const [what, svg] of [['dress', p.dress], ['folio', p.folio]]) {
+        for (const bad of ['NaN', 'Infinity', 'undefined', 'null']) {
+          expect(svg.includes(bad), `${p.key}/${what}: markup contains ${bad}`).toBe(false);
+        }
+      }
+    }
+  });
+
+  it('⛔ AND THE PATH DATA ITSELF PARSES — every coordinate in every d= is a finite number', () => {
+    // The check above is a string scan and would miss a coordinate that came out as `1e+31` or
+    // an empty command. This one reads the numbers.
+    let coords = 0;
+    for (const p of plates) {
+      for (const [what, svg] of [['dress', p.dress], ['folio', p.folio]]) {
+        for (const m of svg.matchAll(/ d="([^"]*)"/g)) {
+          const d = m[1];
+          expect(d.length, `${p.key}/${what}: empty path data`).toBeGreaterThan(0);
+          for (const num of d.matchAll(/-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?/g)) {
+            const v = Number(num[0]);
+            expect(Number.isFinite(v), `${p.key}/${what}: ${num[0]} in path data`).toBe(true);
+            coords++;
+          }
+        }
+      }
+    }
+    // …and the scan actually read something, on every leaf, rather than matching nothing
+    expect(coords).toBeGreaterThan(100000);
+  });
+
+  it('DRESS-FRAME · every leaf is FITTED to its settlement, and no leaf falls back', () => {
+    // The framing law's corpus-wide exit: the page is the settlement's own disc on the short side,
+    // the fit is strictly tighter than the content box it replaced, and the rule that fired is
+    // named on every leaf so a silent fallback cannot pass for the law.
+    for (const p of plates) {
+      const b = p.page.bound;
+      expect(b.radius, `${p.key}: no bound`).toBeGreaterThan(0);
+      expect(b.rule, `${p.key}: ${b.rule}`).not.toMatch(/FALLBACK/);
+      expect(p.page.frame.w).toBeCloseTo(2 * b.radius, 6);
+      expect(p.page.frame.h).toBeCloseTo(2 * b.radius, 6);
+      expect(p.page.frame.w, `${p.key}: the fit is not tighter than the content box`)
+        .toBeLessThanOrEqual(p.page.contentFrame.w + 1e-6);
+    }
+    // ⭐ TIER-INVARIANCE, ASSERTED RATHER THAN ADMIRED: the settlement's own disc takes the SAME
+    //   share of every plate, whatever the tier — which is the whole reason the fit exists. A
+    //   fixed plate against a tier-varying radius cannot do this, and ours could not before.
+    for (const p of plates) {
+      const share = (Math.PI * p.page.bound.radius ** 2) / (p.page.frame.w * p.page.frame.h);
+      expect(share, `${p.key}: share ${share}`).toBeCloseTo(Math.PI / 4, 9);
+    }
   });
 });

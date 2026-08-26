@@ -54,14 +54,22 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
   });
   const acc = lens === 'accessible'
     ? accessibleHatch(page, { roadWidth: input.roadWidth }) : { svg: '', segments: 0 };
+  // ⛔ THE 4×ROAD-WIDTH PAD IS GONE (DRESS-FRAME, ODQ §702.1). It was one of the three framing
+  //    paths that disagreed, and the reference has **no margin constant at all** — it fits the
+  //    settlement hard against the page edge. A pad also makes the settlement's share of the
+  //    plate depend on the road width, which is a tier-varying quantity, so the very
+  //    tier-invariance the fit exists to buy was being spent by the padding.
   const F = dress.frame;
-  const pad = input.roadWidth * 4;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${(F.x - pad).toFixed(2)}`
-    + ` ${(F.y - pad).toFixed(2)} ${(F.w + pad * 2).toFixed(2)} ${(F.h + pad * 2).toFixed(2)}"`
-    + ` width="1000" height="${Math.max(1, Math.round(1000 * (F.h + pad * 2) / (F.w + pad * 2)))}">`
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${F.x.toFixed(2)}`
+    + ` ${F.y.toFixed(2)} ${F.w.toFixed(2)} ${F.h.toFixed(2)}"`
+    + ` width="1000" height="${Math.max(1, Math.round(1000 * F.h / F.w))}">`
     + dress.svg + acc.svg + '</svg>';
   return {
     key, tier: fabric.meta.tier, lens, svg, dress, page, walls, acc,
+    /** ⭐ THE FABRIC THE LEAF WAS BUILT FROM, published so a caller that also needs the FOLIO
+     *  plate of the same leaf can render both from ONE build. The corpus-render gate arm
+     *  (DRESS-FRAME, ODQ §703.4) is that caller, and without this it paid for the fabric twice. */
+    fabric, settlement, model, input,
     // ⛔ `Buffer.byteLength`, NEVER `.length` — SIGNED_CONSTANTS' own instruction.
     bytes: Buffer.byteLength(svg, 'utf8'),
     ops: dress.elements,
