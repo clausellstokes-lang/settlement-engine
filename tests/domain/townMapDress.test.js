@@ -17,7 +17,7 @@ import { LENS_IDS, resolveLens, HATCH } from '../../src/domain/townMap/fabric/fo
 import {
   dressPage, tones, valueCensus, legendCensus, accessibleHatch, hatchPolygon, clipSegment,
   inRing, contrast, mix, polesOf, VALUE_STEP, GRAIN, DRESS_GROUPS, DRESS_LEGEND,
-  DRESS_SCHEMA_VERSION, PAGE_QUANTUM_DECIMALS, STATE_GROUPS,
+  DRESS_SCHEMA_VERSION, PAGE_QUANTUM_DECIMALS, STATE_GROUPS, RELIEF_GROUPS, clipPolyline,
 } from '../../src/domain/townMap/fabric/partitionDress.js';
 
 /**
@@ -440,6 +440,111 @@ describe('⟦DRESS-2 W1⟧ I2 · THE §10 STATE EXPRESSIONS, one family per grou
   });
 });
 
+/* ══════════════════════════════════════════════════════════════════════════════════════════════
+ * ⭐⭐⭐ ⟦DRESS-2 W2⟧ RELIEF — I6's cure and §646.2's conviction.
+ * §646.2 convicted "ZERO relief marks on the whole sheet against a steep-hills cartouche", and on
+ * this page that was literal: `partitionDress.js` and `partitionView.js` both held zero
+ * occurrences of the word. These arms pin the STRUCTURE (a hachure is a member of a run or it is
+ * not drawn), the CLIP (an off-page contour was 47 % of the mountain plate), and the REFUSAL (the
+ * profile hill is an alternative register the projection doctrine does not admit here).
+ * ═══════════════════════════════════════════════════════════════════════════════════════════ */
+describe('⟦DRESS-2 W2⟧ I6 · RELIEF, structured rather than scattered', () => {
+  /** three hachures on one fall line, close enough to chain — a run. Plus one loner far away. */
+  function reliefFixture() {
+    const h = (x, y) => ({ x, y, dx: 0.6, dy: 0.8, len: 6 });
+    return {
+      relief: 0.7,
+      hachures: [h(0, 0), h(7, 0), h(14, 0), h(120, 120)],
+      formLines: [[[-60, -60], [60, 60]]],
+      terraces: [[[-20, -20], [20, 20]]],
+      crags: [{ x: 30, y: -30, r: 4, ang: 20 }],
+      marsh: [{ x: -40, y: 40 }],
+      hills: [{ x: 0, y: 50, r: 8, dx: 0, dy: 1 }, { x: 10, y: 50, r: 8, dx: 0, dy: 1 }],
+    };
+  }
+
+  it('every relief family draws into its OWN group, and the profile hill is READ and REFUSED', () => {
+    const d = dressPage(page, { lens: 'parchment', roadWidth: 5, walls, relief: reliefFixture() });
+    const c = d.census;
+    expect(c.hachureRuns).toBe(1);
+    expect(c.hachuresDrawn).toBe(3);
+    expect(c.formLines).toBeGreaterThan(0);
+    expect(c.terraces).toBeGreaterThan(0);
+    expect(c.crags).toBe(1);
+    expect(c.marshTicks, 'hf115 states clusters of THREE-to-five; the legacy drew two').toBe(3);
+    // ⛔ the refusal is COUNTED, not silent — §8 rules the profile hill an alternative register
+    expect(c.profileHillsRefused).toBe(2);
+    expect(d.groups).not.toContain('dress-hill');
+    for (const gp of ['dress-hachure', 'dress-formline', 'dress-terrace', 'dress-crag', 'dress-marsh']) {
+      expect(d.groups, `${gp}`).toContain(gp);
+    }
+    expect(legendCensus(d).ok, legendCensus(d).reason).toBe(true);
+  });
+
+  it('⭐ A HACHURE IS A MEMBER OF A RUN OR IT IS NOT DRAWN — I6\'s cure, as a rule', () => {
+    const F = reliefFixture();
+    // the lone hachure at (120,120) agrees in bearing but is nowhere near the chain
+    const d = dressPage(page, { lens: 'parchment', roadWidth: 5, walls, relief: F });
+    expect(d.census.hachuresDrawn).toBe(3);
+    expect(d.census.hachuresDropped, 'the loner').toBeGreaterThanOrEqual(1);
+    // …and TWO is still not a run: shorten the chain and the whole thing goes
+    const two = { ...F, hachures: F.hachures.slice(0, 2) };
+    const d2 = dressPage(page, { lens: 'parchment', roadWidth: 5, walls, relief: two });
+    expect(d2.census.hachureRuns).toBe(0);
+    expect(d2.census.hachuresDrawn).toBe(0);
+    expect(d2.census.hachuresDropped).toBe(2);
+    expect(d2.groups).not.toContain('dress-hachure');
+    // …and a chain whose members DISAGREE in bearing is not a run either
+    const bent = { ...F, hachures: [{ x: 0, y: 0, dx: 1, dy: 0, len: 6 }, { x: 7, y: 0, dx: 0, dy: 1, len: 6 }, { x: 14, y: 0, dx: -1, dy: 0, len: 6 }] };
+    expect(dressPage(page, { lens: 'parchment', roadWidth: 5, walls, relief: bent }).census.hachureRuns).toBe(0);
+  });
+
+  it('⛔ THE CONTOUR IS TRIMMED TO THE PAGE — it was 47 % of the mountain plate untrimmed', () => {
+    const F = { x: 0, y: 0, w: 100, h: 100 };
+    // wholly outside
+    expect(clipPolyline([[-50, -50], [-10, -50]], F)).toEqual([]);
+    // wholly inside — one run, unchanged
+    const inRun = clipPolyline([[10, 10], [90, 90]], F);
+    expect(inRun.length).toBe(1);
+    expect(inRun[0].length).toBe(2);
+    // ⭐ IN, OUT, IN — the straddling case, and it must yield TWO runs rather than one long one
+    const three = clipPolyline([[10, 50], [40, 50], [40, -40], [70, -40], [70, 50], [90, 50]], F);
+    expect(three.length, JSON.stringify(three)).toBe(2);
+    for (const seg of three) for (const p of seg) {
+      expect(p[0]).toBeGreaterThanOrEqual(-1e-9);
+      expect(p[1]).toBeGreaterThanOrEqual(-1e-9);
+    }
+    // a degenerate input is refused rather than half-drawn
+    expect(clipPolyline([[0, 0]], F)).toEqual([]);
+    expect(clipPolyline(null, F)).toEqual([]);
+  });
+
+  it('⛔ THE CONTROL — no relief channel means no relief ink at all', () => {
+    const d = dressPage(page, { lens: 'parchment', roadWidth: 5, walls });
+    for (const gp of ['dress-hachure', 'dress-formline', 'dress-terrace', 'dress-crag', 'dress-marsh']) {
+      expect(d.groups).not.toContain(gp);
+    }
+    expect(d.census.reliefMarks).toBe(0);
+    expect(d.census.profileHillsRefused).toBe(0);
+  });
+
+  it('the two relief alphas are SOLVED per lens, and they are two for a reason', () => {
+    for (const id of LENS_IDS) {
+      const T = tones(resolveLens(id));
+      expect(T.reliefOpacity, `${id}`).toBeGreaterThan(0);
+      expect(T.reliefOpacity).toBeLessThanOrEqual(1);
+      expect(T.terraceOpacity).toBeGreaterThan(0);
+      expect(T.terraceOpacity).toBeLessThanOrEqual(1);
+      // the rendered mark stands at most ONE value step under the surface it lies on — the
+      // furrow's own law, asked at the pixel, on each of the two surfaces relief lands on
+      expect(contrast(T.fieldOnPage, mix(T.fieldOnPage, T.relief, T.reliefOpacity)),
+        `${id}: open relief over the countryside`).toBeLessThanOrEqual(VALUE_STEP + 1e-6);
+      expect(contrast(T.plotGround, mix(T.plotGround, T.relief, T.terraceOpacity)),
+        `${id}: terraces over the settled ground`).toBeLessThanOrEqual(VALUE_STEP + 1e-6);
+    }
+  });
+});
+
 describe('E11 · THE ACCESSIBLE LENS ARM — patterns replace hue, as real geometry', () => {
   it('the hatch consumes the CLOSED vocabulary and clips like everything else', () => {
     const a = accessibleHatch(page, { roadWidth: 5, characterOf: () => 'merchant' });
@@ -536,7 +641,9 @@ describe('⭐⭐⭐ THE CORPUS RENDERS — every leaf, both renderers, end to en
       const folio = renderFolio(r.fabric, { lens: 'parchment' });
       plates.push({ key, tier: r.tier, dress: r.svg, page: r.page, folio: folio.svg, folioEls: folio.elementCount, folioPrims: folio.primitiveCount, ops: r.ops, prims: r.primitives,
         // ⟦DRESS-2 W1⟧ the §10 roster rides along so the scenario arms cost NO extra build
-        expressed: ((r.fabric.stateMarks || {}).expressed || []), census: r.dress.census });
+        expressed: ((r.fabric.stateMarks || {}).expressed || []), census: r.dress.census,
+        // ⟦DRESS-2 W2⟧ the leaf's own MEASURED relief spread, for the sheet-wide exit below
+        relief: (r.fabric.relief || {}).relief || 0 });
     }
   }, 900000);
 
@@ -696,6 +803,25 @@ describe('⭐⭐⭐ THE CORPUS RENDERS — every leaf, both renderers, end to en
     }
     // and the corpus really does contain expressed leaves, so the loop above is not vacuous
     expect(plates.filter((p) => p.expressed.length).length).toBeGreaterThanOrEqual(6);
+  });
+
+  it('⭐⭐ §646.2 · A STEEP-HILLS LEAF NEVER PRINTS AS A FLAT SHEET — the sheet-wide exit', () => {
+    // §646.2 convicted "ZERO relief marks on the whole sheet against a steep-hills cartouche".
+    // The cure is not "some marks somewhere": the EXPRESSION must track the land. `relief.relief`
+    // is the leaf's own measured height spread, so the exit is a separation between the corpus's
+    // steep leaves and its flat ones — a relation, not a per-leaf constant nobody can defend.
+    const steep = plates.filter((p) => p.relief >= 0.9);
+    const flat = plates.filter((p) => p.relief <= 0.2);
+    expect(steep.length, 'no steep leaf in the corpus — the exit would be vacuous').toBeGreaterThanOrEqual(3);
+    expect(flat.length, 'no flat leaf in the corpus — the exit would be vacuous').toBeGreaterThanOrEqual(2);
+    const marks = (p) => p.census.reliefMarks;
+    expect(Math.min(...steep.map(marks)), `steepest-leaf floor vs flattest-leaf ceiling`)
+      .toBeGreaterThan(Math.max(...flat.map(marks)));
+    // …and no leaf at all is a flat sheet: every one of the eighteen carries relief ink
+    for (const p of plates) {
+      expect(marks(p), `${p.key} (relief ${p.relief}) draws no relief at all`).toBeGreaterThan(0);
+      for (const gp of RELIEF_GROUPS) expect(DRESS_GROUPS).toContain(gp);
+    }
   });
 
   it('⛔ §18.4 market-infill fossils are NOT drawn as state bodies — the exclusion is asserted', () => {

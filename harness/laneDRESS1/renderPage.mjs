@@ -61,6 +61,10 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
     //   off one build), and `partitionInputs` carries no state — so the page cannot know the leaf
     //   is besieged and the dress has to be told, exactly as it is told about `walls`.
     state: fabric.stateMarks,
+    // ⭐⭐ ⟦DRESS-2 W2⟧ THE LAND'S OWN MARKS, crossing the same bridge. `fabric.relief` reached
+    //   `renderFolio` and nothing else; §646.2 convicted the dress page for having ZERO relief
+    //   marks against a steep-hills cartouche, and that was literally true.
+    relief: fabric.relief,
     tier: fabric.meta.tier,
     ringOfFace: (fid) => (P.arrangement.faces[fid] && P.arrangement.faces[fid].alive
       ? faceRing(P.arrangement, fid) : null),

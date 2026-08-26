@@ -63,8 +63,8 @@ export const VALUE_STEP = 1.28;
 export const GRAIN = Object.freeze({ stroke: 0.25, opacity: 0.72 });
 
 /** Draw order. Ground first, pieces over it, marks last — `PAGE_LAYERS` with the ink's own rows. */
-export const DRESS_LAYERS = Object.freeze(['paper', 'fields', 'water', 'ground', 'voids',
-  'masses', 'roofs', 'band', 'gates', 'crossings', 'quays', 'state', 'marks']);
+export const DRESS_LAYERS = Object.freeze(['paper', 'fields', 'relief', 'water', 'ground', 'voids',
+  'masses', 'roofs', 'band', 'gates', 'crossings', 'quays', 'terraces', 'state', 'marks']);
 
 /** Every `<g id>` the dress can emit, so the legend census has a closed roster to check against. */
 export const DRESS_GROUPS = Object.freeze([
@@ -114,7 +114,45 @@ export const DRESS_GROUPS = Object.freeze([
    */
   'dress-camp', 'dress-barred', 'dress-emptystall', 'dress-watchfire', 'dress-trampled',
   'dress-barricade',
+  /**
+   * ⭐⭐⭐ ⟦DRESS-2 W2⟧ **RELIEF — I6's CURE AND §646.2's CONVICTION, AND IT IS A BRIDGE TOO.**
+   * §646.2 convicted *"ZERO relief marks on the whole sheet against a steep-hills cartouche"*, and
+   * on this page that is not an exaggeration but a literal fact: `partitionView.js` and this file
+   * both contained **zero occurrences of the word "relief"** before this wave. Meanwhile
+   * `fabric.relief` has been publishing 42–191 hachures, 7–16 form-lines, 1–26 terraces, crags and
+   * marsh per leaf, derived, budgeted, and read by `renderFolio` alone. The second bridge.
+   *
+   * ⛔ **THE PROFILE HILL IS REFUSED, AND THE DETAIL REGISTER IS WHY.** The legacy draws
+   * `relief.hills` as splayed profile molehills. §8 of the register rules that the profile system
+   * *"is offered by hf376 as an ALTERNATIVE register, not the default"* and that **our top-down
+   * geometry uses hachure/contour, reserving profile for the licensed tokens.** A plan page that
+   * carried profile hills would be mixing registers on the one axis the projection doctrine is
+   * strictest about, so `relief.hills` is read, counted, and deliberately not drawn.
+   */
+  'dress-hachure', 'dress-formline', 'dress-terrace', 'dress-crag', 'dress-marsh',
 ]);
+
+/** ⟦DRESS-2 W2⟧ the relief families, named once so a census cannot drift from the ink */
+export const RELIEF_GROUPS = Object.freeze([
+  'dress-hachure', 'dress-formline', 'dress-terrace', 'dress-crag', 'dress-marsh',
+]);
+
+/**
+ * ⭐⭐⭐ **I6's CURE, STATED AS A RULE RATHER THAN AS AN INTENTION: A HACHURE IS A MEMBER OF A RUN
+ * OR IT IS NOT DRAWN.** The review convicted the relief marks as *tick noise* — independent
+ * one-segment strokes scattered over open ground, which is exactly what `renderFolio` emits
+ * (`for (const h of relief.hachures) hach += M…L…`, one segment per mark, no structure at all).
+ * hf112's grammar is the opposite: *strokes radial to slope, darker and denser as it steepens*,
+ * organised into **spur-and-coombe forms** — that is, into RUNS that share a fall line.
+ *
+ * So the marks are grouped by their own downslope bearing and their own neighbourhood, and a group
+ * that cannot reach `RUN_MIN` members is **dropped rather than drawn**. A lone tick on an open
+ * hillside is the defect; three of them agreeing is a landform. The census counts both, so the
+ * drop is visible rather than silent.
+ */
+export const RUN_MIN = 3;
+/** bearing agreement for run membership, in degrees — hf112's spur-and-coombe grain */
+export const RUN_ARC = 30;
 
 /**
  * ⭐⭐ ⟦DRESS-2 W1⟧ **THE §10 SUBSET OF `DRESS_GROUPS`, NAMED ONCE SO THE CENSUS CANNOT DRIFT.**
@@ -187,7 +225,8 @@ export function linePath(pts) {
  *
  * @param {any} page a `PARTITION_PAGE_FRAME` from `projectPage`
  * @param {{lens?:string, roadWidth?:number, walls?:any, water?:any, crossings?:any,
- *          quays?:any, accessible?:boolean, tier?:string, seating?:any, state?:any}} [opts]
+ *          quays?:any, accessible?:boolean, tier?:string, seating?:any, state?:any,
+ *          relief?:any}} [opts]
  *
  * ⚠ `opts.state` is `fabric.stateMarks`, handed in the same way `walls` and `seating` already are
  *   — the §10 register is a fact ABOUT the settlement rather than a face of the partition, and
@@ -219,6 +258,9 @@ function dressPageInner(page, opts) {
     /** ⟦DRESS-2 W1⟧ the §10 register, counted per FAMILY so a scenario diff is attributable */
     stateBodies: 0, barredGates: 0, emptyStalls: 0, watchFires: 0, trampled: 0, barricades: 0,
     stateExpressed: 0,
+    /** ⟦DRESS-2 W2⟧ relief — the DROPPED count is as load-bearing as the drawn one (I6) */
+    hachureRuns: 0, hachuresDrawn: 0, hachuresDropped: 0, formLines: 0, terraces: 0,
+    crags: 0, marshTicks: 0, profileHillsRefused: 0, reliefMarks: 0,
   };
   const g = (id, body) => {
     if (!body) return;
@@ -259,6 +301,138 @@ function dressPageInner(page, opts) {
       ? `<path d="${grain.join('')}" fill="none" stroke="${T.grain}" stroke-width="${GRAIN.stroke}"`
         + ` stroke-opacity="${T.grainOpacity}"/>` : '');
     prims.n += fills.length + grain.length;
+  }
+
+  // ── ⭐⭐⭐ ⟦DRESS-2 W2⟧ RELIEF — STRUCTURED GRAMMAR, NOT TICK NOISE (I6 · §646.2) ────────────
+  //
+  // Drawn HERE, over the countryside's own fill and under everything the settlement builds,
+  // because relief is a property of the GROUND. The terrace steps are the exception and are drawn
+  // much later, over the fabric — a terrace wall retains the houses standing on it.
+  //
+  // ⚠ THE TONE IS SOLVED, NOT PICKED, AND IT IS THE SAME LAW THE FURROW ALREADY OBEYS: what lands
+  //   on the page is at most ONE VALUE STEP under the surface it lies on. DRESS-FRAME took the
+  //   countryside to within 1.085 of bare paper (§707.4) and this wave adds ink to exactly that
+  //   surface, so the ink is placed by the ladder rather than beside it.
+  {
+    const R = opts.relief;
+    const runs = [];
+    const forms = [];
+    const crags = [];
+    const marsh = [];
+    if (R) {
+      census.profileHillsRefused = (R.hills || []).length;
+      // ── hf112's SPUR-AND-COOMBE GRAIN: CHAIN along the contour, do not bucket into cells ────
+      //
+      // ⛔⛔ **THE FIRST SPELLING OF THIS BLOCK REPRODUCED §646.2 INSIDE THE CURE FOR IT.** It
+      // bucketed hachures into a grid of three median lengths and required RUN_MIN co-occupants.
+      // MEASURED: `mountain` — the steepest leaf in the corpus, relief 0.66, 191 derived hachures
+      // — kept **3 and dropped 188**, `fjord` kept 15 of 187, and `metropolis` formed **zero
+      // runs**. A cure for *tick noise* that prints a mountain as a flat sheet is the very defect
+      // §646.2 convicted, arriving from the other side. The bucket was the wrong shape: hachures
+      // sit on a jittered lattice at STRIDE 2, so co-occupancy of any fixed cell is a lottery.
+      //
+      // ⭐ A HACHURE RUN IS A CHAIN, NOT A CLUSTER. Cartographically the run walks ALONG THE
+      // CONTOUR, each stroke beside the last, all of them pointing down the same fall line. So the
+      // marks are chained greedily to their nearest unused neighbour whose bearing agrees, and the
+      // reach is the marks' own median length — a quantity that scales with the leaf, never a view
+      // unit (§179). The RULE is unchanged and is still the point: a chain shorter than `RUN_MIN`
+      // is dropped, because a lone tick on an open hillside is exactly what I6 convicted.
+      const inView = (x, y, pad) => x >= F.x - pad && x <= F.x + F.w + pad
+        && y >= F.y - pad && y <= F.y + F.h + pad;
+      const all = (R.hachures || []).filter((h) => Number.isFinite(h.x) && Number.isFinite(h.y)
+        && Number.isFinite(h.len) && h.len > 0);
+      const lens = all.map((h) => h.len).sort((a, b) => a - b);
+      const med = lens.length ? lens[Math.floor(lens.length / 2)] : rw;
+      // ⚠ CULLED TO THE PAGE, AND THE MARGIN IS THE MARK'S OWN LENGTH so a stroke that straddles
+      //   the frame is kept — DRESS-FRAME's own named hazard for the culling it deferred.
+      const hs = all.filter((h) => inView(h.x, h.y, h.len));
+      census.hachuresDropped += all.length - hs.length;
+      const used = new Uint8Array(hs.length);
+      const reach2 = (med * 2.6) ** 2;
+      const agrees = (a, b) => {
+        const d = a.dx * b.dx + a.dy * b.dy;
+        return d >= Math.cos(RUN_ARC * DEG);
+      };
+      for (let i = 0; i < hs.length; i++) {
+        if (used[i]) continue;
+        const chain = [hs[i]];
+        used[i] = 1;
+        // grow from BOTH ends of the chain, so a run found from its middle is not cut in half
+        for (const end of [0, 1]) {
+          let head = end ? chain[chain.length - 1] : chain[0];
+          for (;;) {
+            let best = -1; let bd = reach2;
+            for (let j = 0; j < hs.length; j++) {
+              if (used[j] || !agrees(head, hs[j])) continue;
+              const d = (hs[j].x - head.x) ** 2 + (hs[j].y - head.y) ** 2;
+              if (d < bd) { bd = d; best = j; }
+            }
+            if (best < 0) break;
+            used[best] = 1;
+            if (end) chain.push(hs[best]); else chain.unshift(hs[best]);
+            head = hs[best];
+          }
+        }
+        if (chain.length < RUN_MIN) { census.hachuresDropped += chain.length; continue; }
+        for (const h of chain) {
+          runs.push(linePath([[h.x, h.y], [h.x + h.dx * h.len, h.y + h.dy * h.len]]));
+          census.hachuresDrawn++;
+        }
+        census.hachureRuns++;
+      }
+      /**
+       * ⛔⛔ **THE FORM LINES HAD TO BE CLIPPED, AND THE MEASUREMENT IS WHY.** `buildRelief` traces
+       * contours over the WHOLE LEAF, so a form line is a polyline of hundreds of vertices
+       * spanning an extent the fitted page shows a fraction of. Emitted whole, MEASURED:
+       * `dress-formline` was **47,776 B on `mountain` — 47 % of the entire plate — for sixteen
+       * lines**, and 38,337 B on `town-2`. Almost every vertex was off-page ink nobody could see.
+       * ⭐ So the contour is trimmed to the frame rather than culled by a bounding test: a line
+       * that crosses the page keeps the part that shows and loses the part that does not, which is
+       * exactly the straddling case DRESS-FRAME named as the hazard in the culling it deferred.
+       */
+      for (const l of (R.formLines || [])) {
+        for (const seg of clipPolyline(l, F)) {
+          forms.push(linePath(seg));
+          census.formLines++;
+        }
+      }
+      // ── hf113's CRAG LAW: the HEAVY line is the cliff TOP and the facet texture HANGS from it.
+      //    The legacy drew an outline with two symmetric ticks and no top at all; the plate says
+      //    the two halves are not equal, so they are emitted as two families at two weights.
+      for (const c of (R.crags || [])) {
+        const ca = Math.cos(c.ang * DEG); const sa = Math.sin(c.ang * DEG);
+        crags.push({ top: linePath([[c.x - ca * c.r, c.y - sa * c.r], [c.x + ca * c.r, c.y + sa * c.r]]),
+          facets: [-1, 1].map((i) => linePath([
+            [c.x + ca * c.r * i * 0.5, c.y + sa * c.r * i * 0.5],
+            [c.x + ca * c.r * i * 0.5 - sa * c.r * 1.1, c.y + sa * c.r * i * 0.5 + ca * c.r * 1.1]])) });
+        census.crags++;
+      }
+      // ── hf115 STATES THE MARSH LAW ON THE PLATE: *reed-tick clusters of THREE-TO-FIVE strokes*.
+      //    The legacy draws TWO. Three is the plate's own floor, so the port is a correction.
+      for (const m of (R.marsh || [])) {
+        for (let i = 0; i < 3; i++) {
+          const ox = (i - 1) * rw * 0.22;
+          marsh.push(linePath([[m.x + ox, m.y], [m.x + ox + rw * 0.26, m.y]]));
+          census.marshTicks++;
+        }
+      }
+    }
+    g('dress-hachure', runs.length
+      ? `<path d="${runs.join('')}" fill="none" stroke="${T.relief}"`
+        + ` stroke-opacity="${T.reliefOpacity}" stroke-width="${INK.hair}" stroke-linecap="round"/>` : '');
+    g('dress-formline', forms.length
+      ? `<path d="${forms.join('')}" fill="none" stroke="${T.relief}"`
+        + ` stroke-opacity="${r2(T.reliefOpacity * 0.72)}" stroke-width="${INK.hair}"/>` : '');
+    g('dress-crag', crags.length
+      ? `<path d="${crags.map((c) => c.top).join('')}" fill="none" stroke="${T.relief}"`
+        + ` stroke-opacity="${T.reliefOpacity}" stroke-width="${INK.detail}" stroke-linecap="butt"/>`
+        + `<path d="${crags.map((c) => c.facets.join('')).join('')}" fill="none" stroke="${T.relief}"`
+        + ` stroke-opacity="${r2(T.reliefOpacity * 0.6)}" stroke-width="${INK.hair}"/>` : '');
+    g('dress-marsh', marsh.length
+      ? `<path d="${marsh.join('')}" fill="none" stroke="${T.waterInk}"`
+        + ` stroke-opacity="${T.reliefOpacity}" stroke-width="${INK.hair}" stroke-linecap="round"/>` : '');
+    census.reliefMarks = census.hachuresDrawn + census.formLines + census.crags + census.marshTicks;
+    prims.n += runs.length + forms.length + crags.length * 3 + marsh.length;
   }
 
   // ── WATER: the bank-bounded body with SHORE-PARALLEL strokes ──────────────────────────────
@@ -599,6 +773,29 @@ function dressPageInner(page, opts) {
     prims.n += quays.length + vq.length;
   }
 
+  // ── ⭐⭐ ⟦DRESS-2 W2⟧ THE TERRACE STEPS, DRAWN **OVER** THE FABRIC (hf116) ──────────────────
+  // The one relief family that is not ground texture: `buildRelief` splits its contours by
+  // `inTown`, so a TERRACE is by definition a contour crossing ground the settlement had to cut,
+  // at or above `RELIEF_BANDS.terrace`. It is drawn last of the relief because a terrace wall
+  // RETAINS the houses standing on it — the legacy's own stated reason, and the only reason its
+  // draw order differs from its siblings'. Its alpha is solved against the SETTLED ground it lies
+  // on rather than against the countryside, for the same reason.
+  {
+    const terr = [];
+    for (const t of ((opts.relief && opts.relief.terraces) || [])) {
+      for (const seg of clipPolyline(t, F)) {
+        terr.push(linePath(seg));
+        census.terraces++;
+      }
+    }
+    g('dress-terrace', terr.length
+      ? `<path d="${terr.join('')}" fill="none" stroke="${T.relief}"`
+        + ` stroke-opacity="${T.terraceOpacity}" stroke-width="${INK.detail}"`
+        + ` stroke-linecap="round"/>` : '');
+    census.reliefMarks += census.terraces;
+    prims.n += terr.length;
+  }
+
   // ── ⭐⭐⭐ ⟦DRESS-2 W1⟧ THE §10 STATE EXPRESSIONS, IN CALM INK ──────────────────────────────
   //
   // ⭐⭐ **THE REGISTER LAW IS THE LEGACY'S OWN, CARRIED OVER VERBATIM** (`renderFolio` §15b):
@@ -757,7 +954,12 @@ function dressPageInner(page, opts) {
       + ` ${census.grainSegments} grain segment(s), ${census.grainOutside} of them outside their face;`
       + ` §10 state: ${census.stateExpressed} expression(s) drawing ${census.stateBodies} camp`
       + ` body(ies), ${census.barredGates} barred gate(s), ${census.emptyStalls} empty stall(s),`
-      + ` ${census.watchFires} watch-fire(s), ${census.trampled} trampled patch(es)`,
+      + ` ${census.watchFires} watch-fire(s), ${census.trampled} trampled patch(es);`
+      + ` relief: ${census.reliefMarks} mark(s) — ${census.hachuresDrawn} hachure(s) in`
+      + ` ${census.hachureRuns} run(s) with ${census.hachuresDropped} dropped for want of a run,`
+      + ` ${census.formLines} form line(s), ${census.terraces} terrace step(s), ${census.crags}`
+      + ` crag(s), ${census.marshTicks} reed tick(s); ${census.profileHillsRefused} profile hill(s)`
+      + ` read and refused as an alternative register`,
   });
 }
 
@@ -955,7 +1157,13 @@ export function tones(LENS, opts = {}) {
    * the one the reader sees, which is what that arm said it was doing all along.
    */
   const grainOpacity = solveFurrowAlpha(fieldOnPage, grain);
+  /** ⟦DRESS-2 W2⟧ the two relief alphas — see the `relief` row below for why there are two */
+  const reliefInk = mix(fieldOnPage, poles.dark, 0.55);
+  const reliefOpacity = solveFurrowAlpha(fieldOnPage, reliefInk);
+  const terraceOpacity = solveFurrowAlpha(plotGround, reliefInk);
   return {
+    reliefOpacity,
+    terraceOpacity,
     /** ⭐ THE ALPHA THE COUNTRYSIDE'S FILL IS DRAWN AT, solved per lens. See the block above. */
     fieldOpacity,
     /** The field as the reader meets it — published so a census can read the SEEN tone. */
@@ -1004,6 +1212,21 @@ export function tones(LENS, opts = {}) {
      * thing that now makes the relation hold.
      */
     camp: mix(plotGround, built, 0.42),
+    /**
+     * ⭐⭐ ⟦DRESS-2 W2⟧ **RELIEF INK, AND IT MINTS NO NUMBER EITHER.** The land's own marks are a
+     * GROUND TEXTURE in the reference (§8: hachure and contour are plan systems drawn on the
+     * ground, not map ink laid over it), so they take the FURROW'S OWN LAW — *at most one value
+     * step under the surface they lie on* — asked at the pixel through the same solver §701.5
+     * already ships. The construction is the grain's, one step further down because a relief
+     * stroke is a line and a furrow is a texture.
+     *
+     * ⛔ TWO ALPHAS, NOT ONE, AND THE SECOND IS NOT AN AFTERTHOUGHT. The open families lie on the
+     * COUNTRYSIDE and the terraces lie on the SETTLED GROUND, which DRESS-FRAME deliberately left
+     * two value steps apart. One alpha would make the terraces invisible on the toft or the
+     * hachures shout on the field; solving each against the surface it actually lands on is the
+     * same discipline that made the furrow's own cure work.
+     */
+    relief: mix(fieldOnPage, poles.dark, 0.55),
     roofNW: built,
     roofSE: mix(built, poles.dark, 0.26),
     eaves: mix(R.roofs, poles.dark, 0.55),
@@ -1301,6 +1524,48 @@ export function clipSegment(ring, a, b) {
   }
   if (!best || bestLen < 1e-9) return null;
   return [[a[0] + dx * best[0], a[1] + dy * best[0]], [a[0] + dx * best[1], a[1] + dy * best[1]]];
+}
+
+/**
+ * ⭐⭐ ⟦DRESS-2 W2⟧ **TRIM AN OPEN POLYLINE TO THE PAGE FRAME, KEEPING EVERY VISIBLE RUN.**
+ * Returns zero or more sub-polylines. A segment that crosses an edge is cut AT the edge, so a
+ * contour entering and leaving the page three times yields three drawn runs — the straddling case
+ * that made off-page culling a hazard rather than a free win. Liang–Barsky per segment, which is
+ * exact for an axis-aligned rectangle and needs no tolerance.
+ *
+ * ⚠ It is deliberately NOT used on rings. A closed shape trimmed this way stops being closed, and
+ * every ring on this page is a fill whose winding the renderer needs intact.
+ */
+export function clipPolyline(pts, F) {
+  if (!pts || pts.length < 2) return [];
+  const x0 = F.x; const y0 = F.y; const x1 = F.x + F.w; const y1 = F.y + F.h;
+  const inside = (p) => p[0] >= x0 && p[0] <= x1 && p[1] >= y0 && p[1] <= y1;
+  const out = [];
+  let run = [];
+  const flush = () => { if (run.length >= 2) out.push(run); run = []; };
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const a = pts[i]; const b = pts[i + 1];
+    if (!Number.isFinite(a[0]) || !Number.isFinite(b[0])) { flush(); continue; }
+    let t0 = 0; let t1 = 1;
+    const dx = b[0] - a[0]; const dy = b[1] - a[1];
+    let drop = false;
+    for (const [p, q] of [[-dx, a[0] - x0], [dx, x1 - a[0]], [-dy, a[1] - y0], [dy, y1 - a[1]]]) {
+      if (p === 0) { if (q < 0) { drop = true; break; } continue; }
+      const r = q / p;
+      if (p < 0) { if (r > t1) { drop = true; break; } if (r > t0) t0 = r; } else if (r < t0) { drop = true; break; } else if (r < t1) t1 = r;
+    }
+    if (drop) { flush(); continue; }
+    const pa = [a[0] + dx * t0, a[1] + dy * t0];
+    const pb = [a[0] + dx * t1, a[1] + dy * t1];
+    if (!run.length) run.push(pa);
+    else if (Math.abs(run[run.length - 1][0] - pa[0]) > 1e-9
+      || Math.abs(run[run.length - 1][1] - pa[1]) > 1e-9) { flush(); run.push(pa); }
+    run.push(pb);
+    // the segment left the page part-way along it, so the run ends here
+    if (t1 < 1 - 1e-9 || !inside(b)) flush();
+  }
+  flush();
+  return out;
 }
 
 export function inRing(ring, px, py) {
@@ -1619,6 +1884,12 @@ export const DRESS_LEGEND = Object.freeze([
   { group: 'dress-watchfire', mark: 'a ring with a cross in it', teaches: 'a watch-fire KEPT on an approach road — pressure from outside', plate: 'hf311 (wayside furniture drawn singly)' },
   { group: 'dress-trampled', mark: 'a short calm hatch on open ground', teaches: 'ground worn by men and beasts standing on it — a muster, a war', plate: 'hf311 trampled blob / hf345 muster-ground wear paths' },
   { group: 'dress-barricade', mark: 'a single heavy chord across a way', teaches: 'a street stopped up from inside', plate: 'hf320 street hierarchy (the way as an edged band)' },
+  /** ⟦DRESS-2 W2⟧ RELIEF. §8's exemplars, each cited for the specific law it states on the plate. */
+  { group: 'dress-hachure', mark: 'ticks radial to the slope, laid in RUNS', teaches: 'the fall line — length carries steepness, and a tick with no run is not a landform', plate: 'hf112 hill-hachure study (spur-and-coombe forms) / hf376' },
+  { group: 'dress-formline', mark: 'a chained level line over open ground', teaches: 'the shape of the land where it is not cut', plate: 'hf376 relief conventions (contour rings)' },
+  { group: 'dress-terrace', mark: 'a level line crossing the built ground, over the fabric', teaches: 'ground the settlement had to CUT to stand on — a terrace retains the houses above it', plate: 'hf116 terrace study' },
+  { group: 'dress-crag', mark: 'a heavy line with lighter facets hanging from it', teaches: 'a cliff — and the HEAVY line is its TOP', plate: 'hf113 crag / cliff study' },
+  { group: 'dress-marsh', mark: 'reed ticks in clusters of three', teaches: 'standing water in the ground', plate: 'hf115 marsh reed study (the law is stated on the plate)' },
 ]);
 
 /**
