@@ -30549,3 +30549,84 @@ quarter **84.8 % → 100 %**; folio legend **88 rows / 18 leaves, 0 fails**; L-R
   census · tier-scoping of quarter labels (**no law covers it — a charter act**) · the
   `TRIG_N` comment defect (a comment-only edit in a dormancy-critical file, no measured gain)
   · `representationRatio` running below 1 · **`year-018` rendering with no lettering at all.**
+
+## §714 · JUDGING PASSES ON THE RIGHT SURFACE — AFTER GRADING THE WRONG ONE AND CATCHING ITSELF (2026-08-26 ~26:00 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+**RATIFIED, all seventeen judgments. The car built nothing and moved no ref** — tip stays
+`24e60c890`. Base gate **re-executed in-turn: 20 files / 512 tests EXIT 0, 567.78 s.**
+
+- **§714.1 ⛔⛔ THERE ARE TWO CORPORA, AND THE FULL-ARM LAW POINTS AT THE RETIRED ONE.**
+  `exemplars.mjs`→`renderFolio` is the **legacy folio**: 850 marks on `town`, fixed viewBox,
+  **and all of WORDS' text.** `renderPage.mjs`→`dressLeaf` is the **partition dress page**:
+  **8,868 marks**, fitted viewBox, all 38 `dress-*` groups, and **ZERO `<text>` on 18 of 18** —
+  its own header says *"until then the ink is judged here."* §711's `703,131 B` reproduces
+  exactly there. ⇒ **J-J-15 RATIFIED: the FULL-ARM law is insufficient as written — it names
+  the ARMS and never the SURFACE**, so a lane obeying it literally renders the wrong drawing.
+  **Amended in the completion document.**
+- **§714.2 ROUND 5 IS VOID: THE LANE GRADED THE FOLIO — AND A CONTROL CAUGHT IT, NOT A GREEN.**
+  `scenarioCensus` read **0/4 RED at 850 marks** against **4/4 GREEN at 8,868** on its own
+  render. ⭐ **Both "key defects" it had already filed from round 5 are refuted in its own
+  receipt, with the mechanism.** A lane publishing the refutation of its own two findings is
+  the standard this arc has been asking for.
+- **§714.3 ROUND 6 PASSES ON THE JUDGED PAGE — AND THE TIER SIGNAL CORRECTS §696.5.**
+  Fresh context, graded questions only (§710.5's divergence deliberately **not** repeated),
+  salted-hash shuffle, map held: **walled 18/18 · port/river/dry 17/18 + 1 ABSTENTION · ZERO
+  wrong-class · 94.4 % ⇒ PASS** under §695's amended key. ⭐⭐ **The ungraded `tier` reads
+  55.6 % on the dress page against §696.5's 72.2 % on the folio — and the systematic
+  under-read bias is GONE. The reader had been reading the CARTOUCHE, not the drawing.**
+  §696.5's "one-directional bias" was partly a **text artefact**, and the amended key's
+  premise (that a fitted page cannot encode tier) is *strengthened*, not weakened, by that.
+  ⚠ **And the honest limit, in the lane's own words: the abstention is `fjord`, a THIRD
+  stranger describing §710.4(ii) again — "a sliver of blue jammed into the extreme top-right
+  corner." The pass is ONE ABSTENTION WIDE on that leaf — reader discipline, not a cure.**
+- **§714.4 PA.7 DOES NOT FIRE — AND THE LANE HANDED THE OWNER THE TRIGGER ANYWAY.** The
+  sequence is **3 PASS → 4 FAIL → 5 VOID → 6 PASS**, so there are no two consecutive
+  disagreeing rounds. ⭐ But it filed an **INFORMATIONAL docket row so the owner may fire the
+  escalation regardless**, noting explicitly that **§695.2's hazard is mine** — the chair
+  whose framing repair caused the failure also ruled on whether the failure escalates. That
+  is the right way to hold a conflict of interest: name it and hand over the switch.
+- **§714.5 THE SIX RULINGS, EACH WITH ITS EVIDENCE.** **§646.1iv quarter-name — RATIFIED and
+  RE-HOMED** with a MEMBER clause: a blind audit finds **8 of 17 earned**, and `Shadows
+  District` earns **0 of 4**. **§641.1 pier-length — UPHELD and UNDERSTATED**: within-leaf
+  spread is only **1.00–1.07×**, and the real finding is that **port quays run 7–9× SMALLER
+  than river wharves.** ⭐ **J-J-9: the lane DECLINED to mint a pier bar and named the one
+  input that would settle it** — a refusal to invent a constant is worth more than a plausible
+  one. **Cigar retention — CLOSED, not a defect, and the figure was stale**: re-measured
+  **52–72 %**, not 52–76, with inscription **0 of 1,104**. **`town-2` vacuity — STALE**:
+  faubourgs went **0/0 → 6 buildings / 2 gates**. **Region-typing centroid — UPHELD**, cure
+  named and priced, **deferred to REG-P**. **Walk-scale rings — SUBTRACT**: they are **drawn,
+  counted, and unseeable** — ⭐ **the third instance of that class this arc** (after the
+  cartouche-buried siege mark and the ink-on-ink register), discharged-by-absence with the
+  lapse **declared, not claimed**.
+- **§714.6 ⭐ THE SHARPEST CONVICTION, AND IT QUALIFIES DRESS-2's OWN GREEN.** On the judged
+  page DRESS-2's scenario census reads **4/4 green** — while **seven of 153 plate pairs differ
+  on under 0.2 % of pixels** and only the eighth reaches 13.4 %. `siege` carries **12 cited
+  marks among 8,868 primitives = 0.135 %**, and the raster independently says **0.138 %**.
+  ⇒ **THE §10 REGISTER SUPPLIES 0.05–0.14 % OF A PAGE. NO FLOOR OVER IT CAN BUY LEGIBILITY.**
+  The scenario cure is **green and imperceptible** — chartered onward to REG-D and **explicitly
+  NOT as a raised floor**, because raising a floor over 0.1 % of a page is how a census gets
+  satisfied without a reader ever seeing anything.
+- **§714.7 THE SILHOUETTE ROUND CANNOT RUN, AND THE BLOCKER IS MEASURED.** `V-STORE` has
+  **zero occurrences** across src/harness/tests; `groundRefusal.js:117` still carries **no
+  archetype exemption**, so quay bodies extract at **area 0** (the ground law is owner-gated);
+  and the paint rebuild landed on a drawing with **no institution-silhouette family**.
+  Running it could only reproduce §661.1's 50 %. **Blocked, not run — and named as such.**
+- **§714.8 FORBIDDEN ITEMS, STOPPED AND REPORTED — INCLUDING THE NEEDLE, CONVICTED FROM THE
+  PAGE BY A THIRD STRANGER.** The metropolis needle is **UNMOVED: min-area rect 710.9 × 31.2,
+  aspect 22.79** — §696.3's figure **digit for digit** — plus a **second sliver at 4.05**.
+  Untouched and reported: the framing trade · **`year-018`'s raise-year fold (the fabric says
+  UNWALLED and the partition mints a wrap)** · **the outward-growth defect — PLOT 11.3 %
+  standing inside `city`'s circuit** · `bodyRefusal`.
+- **§714.9 TWO DEFERRALS WORTH THE CHAIR'S ATTENTION.** ⚠ **The reconciliation attractor: 4 of
+  4 forced solves land on `fjord` at relief EXACTLY 1.00** — §713.4's landform mismatch now has
+  a suspected mechanism rather than three coincidences. ⚠ **And the corpus is thin in a SECOND
+  way: 18 leaves, but only 9 SEEDS, and 10 of the 18 come from TWO WORLDS.** DRESS-2 cured the
+  drawing-level thinness (14 presented as 18); **this is the generative thinness underneath
+  it**, and it bounds what any blind read can prove.
+- **§714.10 ⛔ AND §713 IS QUALIFIED — CHAIR-VERIFIED.** WORDS modified **`renderFolio.mjs`
+  and `lettering.js`**; `renderPage.mjs` contains **zero text-emission sites** and the dress
+  page carries **zero `<text>` on every leaf**. ⇒ **WORDS improved the surface that is being
+  RETIRED.** Its ratification stands — the work is real and `lettering.js` is portable — but
+  **the judged page still has no words, and the wiring that would give it any is the PORT's**,
+  exactly as §712.5 found for the zoom rung. Two waves have now landed value on the folio
+  while the arc's target surface waited on the same missing connection.

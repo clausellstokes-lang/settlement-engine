@@ -178,6 +178,13 @@ REG-11 → REG-F0 → REG-F (owner judges) → REG-P (owner throws) → post-cut
 4. Counts are verdicts; exit codes are not; a zero without a live control is
    UNVERIFIED; a control that cannot fail proves nothing.
 5. The FULL-ARM law on every armed run; re-read the slot at every proof boundary.
+   ⛔ **AMENDED §714.1 — STATE YOUR SURFACE BEFORE YOUR ARMS. THERE ARE TWO CORPORA and this
+   law names only the arms.** `exemplars.mjs`→`renderFolio` is the **LEGACY FOLIO** (850 marks
+   on `town`, fixed viewBox, **all lettering**); `renderPage.mjs`→`dressLeaf` is the **PARTITION
+   DRESS PAGE** (8,868 marks, fitted viewBox, all 38 `dress-*` groups, **zero `<text>` on 18/18**)
+   — and the dress page is **the surface under judgement until the port**. A lane obeying this law
+   literally rendered the RETIRED drawing: judging round 5 was VOIDED for it, both its findings
+   were refuted, and **only a control caught it — no green did**.
 6. Lanes never move refs, never write the ODQ/MEMORY, always leave resume blocks;
    resume MID-LANE from receipts, never restart (§448).
 7. Honest reds outrank green claims — never relax a census to reach a count; record

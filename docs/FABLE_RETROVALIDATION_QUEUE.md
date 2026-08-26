@@ -226,6 +226,25 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§714 · JUDGING ratified; six rulings closed; §713 qualified · SEAT: Opus 5.**
+⛔ **THE HIGHEST-VALUE TASTE ROW IN THIS QUEUE — the whole judging wave is the §236.2 class.**
+*What was judged:* all seventeen J-J calls RATIFIED; **six standing rulings closed** (quarter-name
+re-homed · pier-length upheld-and-understated · cigar retention closed as stale · town-2 vacuity
+stale · centroid deferred to REG-P · walk rings SUBTRACT); the ruling that PA.7 still does not
+fire on PASS→FAIL→VOID→PASS; and accepting a pass that the lane itself calls **one abstention
+wide**.
+*What Fable re-derives:* ⛔ **(a) EVERY ONE OF THE SIX RULINGS — this is exactly the class §236.2
+names as Fable-seat work, decided by an Opus chair on an Opus lane's evidence.** Re-derive each
+from its receipt, not from my summary. **(b)** the round-6 PASS itself: it is one abstention wide
+on `fjord`, and a **third** independent reader described the same clipped water. Is a pass that
+narrow a pass? **(c)** §714.4 — I ruled twice now that the escalation does not fire, on a failure
+my own framing repair caused; the trigger is on the owner's docket precisely because I should not
+be the only one holding it. **(d)** §714.10 — two waves have now landed value on the RETIRED
+folio; check whether anything else I ratified was measured on the wrong surface.
+*Receipts:* ODQ §714 · `$SP/receipts/laneREG9-receipt.md` + RESUME · `$SP/reg9/held/r6-answers.md`
+· the chair's own verification that `renderPage.mjs` has zero text sites.
+*Priority:* **P1** on all four.
+
 **§713 · WORDS ratified; two self-caught false passes · SEAT: Opus 5.**
 *What was judged:* all eleven J-W calls RATIFIED; accepting a frozen per-glyph table over a
 constant bump; accepting that the folio legend was the unowned one; and the reading that the
