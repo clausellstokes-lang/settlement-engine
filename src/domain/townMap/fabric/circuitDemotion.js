@@ -78,6 +78,7 @@
  * PURITY: pure arithmetic and geometry. No Date, no Math.random, no runtime trig, no locale.
  */
 
+import { FALLBACK_RUN_TYPE } from './wallRuns.js';
 import { fabricRng } from './fabricRng.js';
 import { offsetPolygonOutward, ringSelfCrossings } from './fabricGeometry.js';
 import { cosI, sinI, TRIG_N } from './trigTable.js';
@@ -183,7 +184,10 @@ export function demoteCircuits(a) {
       fromCircuit: true,
     });
     // ── ⭐⭐ 2 · EACH RUN TAKES A RUNG OF THE FATE LADDER, weighted by local land pressure.
-    const runs = ring.runs && ring.runs.length ? ring.runs : [{ type: 'new-cutting', idx: ring.polygon.map((_, i) => i), line: ring.polygon, length: 0 }];
+    // ⭐ SPINE-3 · the fallback type is IMPORTED, not spelled. A ring with no chain still needs a
+    //   run for the fate ladder, but the WORD belongs to `wallRuns` — see `FALLBACK_RUN_TYPE`.
+    const runs = ring.runs && ring.runs.length ? ring.runs
+      : [{ type: FALLBACK_RUN_TYPE, idx: ring.polygon.map((_, i) => i), line: ring.polygon, length: 0 }];
     for (const run of runs) {
       const rung = fateFor(pressure, run, rng);
       out.fates.push({ epoch: ring.epoch, run: run.type, rung, pressure: Math.round(pressure * 1000) / 1000 });

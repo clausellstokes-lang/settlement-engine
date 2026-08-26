@@ -20,6 +20,7 @@ import { partitionInputs } from '../laneSPINE1/partitionPerf.mjs';
 import { publishWallWorks } from '../../src/domain/townMap/fabric/wallPublication.js';
 import { dressPage, accessibleHatch } from '../../src/domain/townMap/fabric/partitionDress.js';
 import { wallForm } from '../../src/domain/townMap/fabric/walls.js';
+import { pubOpts } from '../laneSPINE3/pubOpts.mjs';
 import { faceRing } from '../../src/domain/townMap/fabric/partitionArrangement.js';
 import { LENS_IDS } from '../../src/domain/townMap/fabric/folioLenses.js';
 
@@ -36,11 +37,11 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
   const input = partitionInputs(settlement, model, fabric);
   const P = buildSettledPartition(input);
   const page = projectPage(P, { roadWidth: input.roadWidth });
+  // ⭐ SPINE-3 · ONE SPELLING (`harness/laneSPINE3/pubOpts.mjs`) — it carries the SITE and the
+  //   present year from the key the fabric actually publishes. See that file for the two facts
+  //   every caller here was silently dropping.
   const walls = publishWallWorks(P, {
-    form: wallForm(settlement, fabric.meta.tier).form,
-    frontage: input.roadWidth,
-    seed: input.seed,
-    year: fabric.meta.presentYear != null ? fabric.meta.presentYear : null,
+    ...pubOpts(settlement, fabric, input),
   });
   const dress = dressPage(page, {
     lens,

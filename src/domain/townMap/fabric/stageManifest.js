@@ -243,8 +243,15 @@ export const GENERATION_NODES = Object.freeze([
     allowedImports: ['builtUmbrella.js', 'cliffs.js', 'epochAxis.js', 'fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'partitionArrangement.js', 'reservedGround.js', 'snapshot.js', 'substrate.js', 'trigTable.js', 'waterMode.js'],
     randomNamespaces: ['kind', 'rampart.E*', 'thin', 'wall.epoch.*', 'wall.epoch.*.*'],
     statefulForkSites: 3 },
+  // ⭐ ⟦SPINE-3 · ODQ §692.6(ii)⟧ **S14 GAINS `wallRuns.js`, DECLARED RATHER THAN HIDDEN.**
+  //   `circuitDemotion` needs a run for the fate ladder when a legacy ring carries no chain, and
+  //   it used to spell the word `'new-cutting'` itself. `wallRuns` owns that vocabulary, so the
+  //   fallback is now `wallRuns.FALLBACK_RUN_TYPE` and the edge is on the manifest. Same reading
+  //   as J-DRESS1-8: **a visible dependency the chair can veto beats an invisible one that
+  //   works** — and the alternative was a second home for a run type's name, which is the exact
+  //   defect this wave was chartered to close.
   { nodeId: 'S14', modules: ['circuitDemotion.js'],
-    allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'trigTable.js', 'wallCircuit.js'],
+    allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'trigTable.js', 'wallCircuit.js', 'wallRuns.js'],
     randomNamespaces: ['wall.demote.*'],
     statefulForkSites: 1 },
   { nodeId: 'S15', modules: ['faubourgOrigin.js', 'habitation.js'],

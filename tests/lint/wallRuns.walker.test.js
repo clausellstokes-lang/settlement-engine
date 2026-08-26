@@ -39,12 +39,26 @@ export const RULED_DARK = Object.freeze({});
 describe('§5 W2 · the closed sets are CLOSED, and the walker says so', () => {
   it('every run type minted by the classifier is in RUN_TYPES and has a policy row', () => {
     const src = read('wallRuns.js');
-    // The producing vocabulary: every string literal the classifier assigns to `type[k]` or
-    // to a coalesced run. A tenth type added to the body without a table row reds here.
+    /**
+     * The producing vocabulary: every string literal the classifier assigns as a run type. A
+     * tenth type added to the body without a table row reds here.
+     *
+     * ⭐⭐ **THE REGEXES MOVED AT SPINE-3 BECAUSE THE PRODUCING CODE DID, AND THE WALKER CAUGHT
+     * IT RATHER THAN GOING QUIET.** The ladder was extracted from `deriveRuns`' inline loop into
+     * `runTypeAt` so the successor publication could call it instead of carrying a second
+     * spelling (ODQ §692.6(ii)). The old `type[k] = '…'` shape vanished, the walker found ONE
+     * minted type instead of eight, and **its own `minted.size >= 8` guard — the "its own regexes
+     * have rotted" line — fired exactly as written.** That guard is why this red was a red and
+     * not a silent pass over an empty set; it is the single most valuable line in the file.
+     */
     const minted = new Set();
     for (const m of src.matchAll(/type\[k\]\s*=\s*'([a-z-]+)'/g)) minted.add(m[1]);
     for (const m of src.matchAll(/type:\s*'([a-z-]+)'\s*,\s*idx/g)) minted.add(m[1]);
     for (const m of src.matchAll(/merged\[0\]\.type\s*=\s*'([a-z-]+)'/g)) minted.add(m[1]);
+    // ⭐ the ladder's own returns — `runTypeAt` is the one place a vertex is given its type
+    const ladder = src.slice(src.indexOf('export function runTypeAt'));
+    const ladderBody = ladder.slice(0, ladder.indexOf('\n}\n'));
+    for (const m of ladderBody.matchAll(/return\s+'([a-z-]+)'/g)) minted.add(m[1]);
     expect(minted.size, 'the walker found no minted run types — its own regexes have rotted')
       .toBeGreaterThanOrEqual(8);
     for (const t of minted) {
@@ -56,6 +70,54 @@ describe('§5 W2 · the closed sets are CLOSED, and the walker says so', () => {
       expect(minted.has(t) || RULED_DARK[t],
         `RUN_TYPES carries '${t}' and the classifier never mints it — mint it or rule it`).toBeTruthy();
     }
+  });
+
+  /**
+   * ⭐⭐⭐ **SPINE-3 · THE SINGLE-WRITER ARM — `wallRuns.js` IS THE ONLY MODULE THAT MAY DECIDE A
+   * RUN'S TYPE.** This is the structural answer to the defect the wave was chartered for, and it
+   * closes the habitat rather than the instance.
+   *
+   * ⛔⛔ WHAT IT PREVENTS, MEASURED: `wallPublication.js` carried a SECOND classifier — six ad-hoc
+   * proximity tests in a private priority order, every radius in band widths where the legacy
+   * states its radii in the circuit's working margin. The two producers then disagreed about
+   * **83 runs of the same corpus** (`crest` 62, `notch` 7, `detour-to-work` 9,
+   * `terrain-surrender` 5), and nothing anywhere reddened, because every arm the estate had
+   * asked *"is this type in the closed set?"* and none asked *"how many modules decide it?"*
+   *
+   * ⚠ THE PREDICATE IS ABOUT ASSIGNMENT, NOT MENTION. A module may name a type in a doc comment,
+   * in a roster of ungrounded types, or in a test — what it may not do is ASSIGN one as a
+   * classification. So the scan is for the assigning shapes, and it runs against a control that
+   * proves the scan can see one.
+   */
+  it('⛔ SPINE-3 · NO MODULE BUT `wallRuns.js` DECIDES A RUN TYPE — the single-writer arm', () => {
+    const OTHERS = ['wallPublication.js', 'walls.js', 'rampartWorks.js', 'wallCircuit.js',
+      'partitionDress.js', 'circuitDemotion.js'];
+    const assigning = (body) => {
+      const found = new Set();
+      const shapes = [
+        /type\[[a-z]+\]\s*=\s*'([a-z-]+)'/g,
+        /\.type\s*=\s*'([a-z-]+)'/g,
+        /\btype:\s*'([a-z-]+)'\s*,/g,
+      ];
+      for (const re of shapes) for (const m of body.matchAll(re)) if (RUN_TYPES.includes(m[1])) found.add(m[1]);
+      return found;
+    };
+    // ⛔ THE CONTROL FIRST: the scan must SEE an assignment, or every zero below is vacuous.
+    const probe = assigning("  type[i] = 'new-cutting';\n  r.type = 'crest';\n  x = { type: 'notch', idx: [] };");
+    expect([...probe].sort(), 'the single-writer scan cannot see an assignment — it proves nothing')
+      .toEqual(['crest', 'new-cutting', 'notch']);
+    // and it must NOT fire on a mere mention, or it would forbid documentation
+    expect(assigning("// `crest` needs the heightfield; UNGROUNDED.crest = '…'").size,
+      'the scan fires on a MENTION — it would forbid a module from documenting a type').toBe(0);
+    for (const f of OTHERS) {
+      const got = [...assigning(read(f))];
+      expect(got, `${f} ASSIGNS run type(s) ${got.join(', ')} — the ladder lives in wallRuns.js`
+        + ' and a second spelling is how the estate lost 83 runs of signal (ODQ §692.6(ii))').toEqual([]);
+    }
+    // …and `wallRuns.js` itself must still be doing the deciding, so this arm cannot pass by
+    // everybody having stopped.
+    expect(assigning(read('wallRuns.js')).size,
+      'NOBODY assigns a run type any more — the ladder has been emptied').toBeGreaterThan(0);
   });
 
   it('every tower kind the chooser returns is in TOWER_TYPES', () => {

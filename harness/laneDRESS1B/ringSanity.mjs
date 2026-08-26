@@ -291,7 +291,7 @@ const HEAD = `${'leaf'.padEnd(12)} ${'wrap'.padEnd(7)} ${'n'.padStart(3)}  ${'bb
 
 /* ══════════════════════════════════════════════════════════════════ CONTROLS ══ */
 /**
- * ⛔ THE LIVE-INSTRUMENT PROOF. Five plants, each with a DECLARED expectation, on the REAL corpus
+ * ⛔ THE LIVE-INSTRUMENT PROOF. TEN plants, each with a DECLARED expectation, on the REAL corpus
  * ring wherever a real ring will do. The census's clean readings mean nothing until these run.
  */
 function controls() {
@@ -300,10 +300,26 @@ function controls() {
   const { P } = buildLeaf('metropolis');
   const base = P.wraps[P.wraps.length - 1].outer.map((p) => [p[0], p[1]]);
 
+  /**
+   * ⛔⛔ **SPINE-3 · THE OK-PREDICATE WAS WEAKER THAN THE BENCH'S OWN NAME, AND THE RULE IT
+   * OMITTED IS THE ONE THAT CONVICTED THE TOWN.** The first spelling read `want.simple` and
+   * `want.fillOk` only. `SLIVER` and `NOT-CONVEX(obb)` were MEASURED, PRINTED, and never
+   * ASSERTED — so `SLIVER_ASPECT_MAX` could have been deleted outright and this bench would
+   * still have reported `8/8 … the census is LIVE`. Control (d) exists to convict a convex
+   * needle on its min-area rect and its own comment says so; the conviction was printed and
+   * thrown away. ⭐ THE CLASS, and it is this programme's fourth sighting: **a gate written in
+   * the same breath as the rule it enforces tends to check the shape of compliance rather than
+   * its substance** (§688.7). Every `want` below now declares all four rules, and a `null`
+   * means "this plant is silent on that rule" rather than "nobody looked".
+   */
   const check = (name, ring, want, why) => {
     const m = measureRing(ring);
     const ok = (want.simple === null || (m.crossPairs === 0) === want.simple)
-      && (want.fillOk === null || (m.fill >= FILL_FLOOR) === want.fillOk);
+      && (want.fillOk === null || (m.fill >= FILL_FLOOR) === want.fillOk)
+      && (want.sliverOk === undefined || want.sliverOk === null
+        || (m.obb.aspect <= SLIVER_ASPECT_MAX) === want.sliverOk)
+      && (want.obbOk === undefined || want.obbOk === null
+        || (m.obbFill >= OBB_FILL_FLOOR) === want.obbOk);
     results.push({ name, ok, m });
     console.log(`   ${name}`);
     console.log(`      ${why}`);
@@ -317,7 +333,7 @@ function controls() {
 
   // (b) first, the NEGATIVE control: the untouched corpus ring must read clean.
   check('(b) NEGATIVE · metropolis last wrap, outer, UNMODIFIED',
-    base, { simple: true, fillOk: true },
+    base, { simple: true, fillOk: true, sliverOk: true, obbOk: true },
     'a real corpus ring, straight from the build, with nothing done to it');
 
   // (a) the POSITIVE control: swap two vertices of that same ring.
@@ -325,7 +341,7 @@ function controls() {
   const iA = 0; const iB = Math.floor(base.length / 2);
   const t = swapped[iA]; swapped[iA] = swapped[iB]; swapped[iB] = t;
   check(`(a) POSITIVE · the SAME ring with vertices ${iA} and ${iB} SWAPPED`,
-    swapped, { simple: false, fillOk: null },
+    swapped, { simple: false, fillOk: null, sliverOk: null, obbOk: null },
     'an ordering failure — exactly the shape the folded-ring hypothesis alleges');
 
   // (a2) a one-vertex fold: a single vertex flung across the ring.
@@ -333,18 +349,18 @@ function controls() {
   const bb = bboxOf(base);
   flung[3] = [bb.x0 + bb.w * 0.5, bb.y0 + bb.h * 1.4];
   check('(a2) POSITIVE · the SAME ring with ONE vertex flung outside it',
-    flung, { simple: false, fillOk: null },
+    flung, { simple: false, fillOk: null, sliverOk: null, obbOk: null },
     'a single stray vertex — the cheapest possible fold, and the easiest for a census to miss');
 
   // (c) a textbook bowtie: signed area must cancel to ~0 while even-odd stays large.
   check('(c) POSITIVE · a textbook BOWTIE (100x100, two equal lobes)',
-    [[0, 0], [100, 100], [100, 0], [0, 100]], { simple: false, fillOk: false },
+    [[0, 0], [100, 100], [100, 0], [0, 100]], { simple: false, fillOk: false, sliverOk: true, obbOk: false },
     'the cancellation fingerprint: |signed| ≈ 0 while the even-odd region is half the bbox');
 
   // (d) ⭐ THE DISCRIMINATOR: a SIMPLE convex diagonal needle with a tiny fill. If the census
   //     called this a fold it would be conflating the symptom with the defect.
   check('(d) NEGATIVE-BUT-LOW-FILL · a SIMPLE convex diagonal needle',
-    [[0, 0], [2, 0], [402, 400], [400, 400]], { simple: true, fillOk: false },
+    [[0, 0], [2, 0], [402, 400], [400, 400]], { simple: true, fillOk: false, sliverOk: false, obbOk: true },
     'convex and simple, yet fill ≈ 0.005 — proves LOW FILL DOES NOT IMPLY A FOLD,'
     + ' and its min-area rect is what the SLIVER rule must convict it on instead');
 
@@ -354,21 +370,41 @@ function controls() {
   //     WERE folded, would this instrument say so?" is answered on E1.outer and not by analogy.
   const e1 = P.wraps.find((w) => w.index === 1).outer.map((p) => [p[0], p[1]]);
   check('(g) NEGATIVE · metropolis E1 OUTER — THE SUSPECT RING — unmodified',
-    e1, { simple: true, fillOk: false },
+    e1, { simple: true, fillOk: false, sliverOk: false, obbOk: true },
     'the ring DRESS-1 measured at fill 0.077; it must read SIMPLE and still fail on fill/sliver');
   const e1swap = e1.map((p) => [p[0], p[1]]);
   const s1 = 4; const s2 = 17;
   const tt = e1swap[s1]; e1swap[s1] = e1swap[s2]; e1swap[s2] = tt;
   check(`(f) POSITIVE · THE SUSPECT RING with vertices ${s1} and ${s2} SWAPPED`,
-    e1swap, { simple: false, fillOk: null },
+    e1swap, { simple: false, fillOk: null, sliverOk: null, obbOk: null },
     'the same ring, folded on purpose, with its 17 collinear vertices left in place');
 
   // (e) ⭐ THE SLIVER RULE'S OWN NEGATIVE CONTROL — a fat convex ring must NOT trip it, or the
   //     rule would be convicting the corpus rather than measuring it.
   check('(e) NEGATIVE · a regular 26-gon (radius 300)',
     Array.from({ length: 26 }, (_, i) => [300 * Math.cos((i * 2 * Math.PI) / 26), 300 * Math.sin((i * 2 * Math.PI) / 26)]),
-    { simple: true, fillOk: true },
+    { simple: true, fillOk: true, sliverOk: true, obbOk: true },
     'the fattest ring a 26-facet economy can trace — every rule must clear it');
+
+  // ⭐⭐ (h)/(i) SPINE-3 · **THE NEEDLE PREDICATE'S OWN STRADDLING PAIR.** Until this pair the
+  //     SLIVER bar had no plant that could fail the bench, so its VALUE was unproven — a rule
+  //     nobody's control exercises is a rule that can silently drift or vanish. These two are the
+  //     same rectangle at two aspects, one either side of 8.0, so the bench proves the bar is
+  //     where it says it is AND that the arm discriminates rather than always firing.
+  //     ⚠ Rotated 30° on purpose: an AXIS-ALIGNED pair would pass through the bbox `aspect`
+  //     column and prove nothing about the MIN-AREA rect, which is the whole point of the rule.
+  const rect = (long, short, deg) => {
+    const a = (deg * Math.PI) / 180; const c = Math.cos(a); const s = Math.sin(a);
+    return [[0, 0], [long, 0], [long, short], [0, short]]
+      .map(([x, y]) => [x * c - y * s, x * s + y * c]);
+  };
+  check('(h) NEGATIVE · a rotated convex rectangle at min-rect aspect 7.0 (UNDER the 8.0 bar)',
+    rect(700, 100, 30), { simple: true, fillOk: null, sliverOk: true, obbOk: true },
+    'elongated but lawful — the bar must NOT convict it, or SLIVER is convicting the corpus');
+  check('(i) POSITIVE · THE SAME rectangle at min-rect aspect 9.0 (OVER the 8.0 bar)',
+    rect(900, 100, 30), { simple: true, fillOk: null, sliverOk: false, obbOk: true },
+    '⭐ the needle predicate, exercised: simple, convex, obbFill ≈ 1 — and it MUST still fail'
+    + ' on SLIVER alone. This is the pair the bench had no member of before SPINE-3.');
 
   const live = results.filter((x) => x.ok).length;
   console.log(`CONTROL_BENCH ${live}/${results.length} plants returned their declared reading`

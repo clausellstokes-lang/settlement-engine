@@ -100,6 +100,15 @@ export function wallForm(settlement, tier) {
 export const WALL_MARGIN = Object.freeze({ village: 0.115, town: 0.090, city: 0.070, metropolis: 0.058 });
 
 /**
+ * ⭐ THE WORKING MARGIN WHERE THE TIER IS NOT ONE OF THE FOUR. It was already the estate's own
+ * value — the `|| 0.10` fallback at `traceWalls`' own margin line — and it is NAMED here rather
+ * than left as a literal because SPINE-3's successor publication needs the same fallback and a
+ * second literal 0.10 in a second module is exactly the one-law-two-spellings shape this wave
+ * exists to close. No new number is minted: the constant IS the fallback that was there.
+ */
+export const WALL_MARGIN_DEFAULT = 0.10;
+
+/**
  * ⭐⭐⭐ §200 THE WALL BAND — THE RESERVED GROUND OF THE CIRCUIT (owner catch, chair directive
  * ODQ §200: "you are overlapping buildings" said again, of the wall).
  *
@@ -260,7 +269,7 @@ export function traceWalls(args) {
 
   const { form, source } = wallForm(settlement, scale.extentTier);
   const spec = WALL_FORMS[form] || WALL_FORMS.palisade;
-  const margin = (WALL_MARGIN[scale.extentTier] || 0.10) * scale.builtRadius;
+  const margin = (WALL_MARGIN[scale.extentTier] || WALL_MARGIN_DEFAULT) * scale.builtRadius;
   const frontage = args.frontage || 8;
   const glacisClear = args.glacisClear !== false;
   const threat = threatRead(settlement, glacisClear, spec);

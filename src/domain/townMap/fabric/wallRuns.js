@@ -58,6 +58,21 @@ export const RUN_TYPES = Object.freeze([
 ]);
 
 /**
+ * ⭐ **THE FALLBACK TYPE, NAMED HERE BECAUSE THE NAME IS THIS MODULE'S** (SPINE-3).
+ *
+ * `circuitDemotion` must give the fate ladder SOME run when a ring carries no run chain at all
+ * (a legacy ring built before the chain existed). That is a synthesised default, not a reading of
+ * ground — but it is still this module's vocabulary, and a string literal for it in another file
+ * is a second place the word lives. `new-cutting` is the right default for the same reason the
+ * ladder ends there: it is the RESIDUAL, the type you get when no positive fact was found.
+ *
+ * ⚠ A CONSUMER MAY USE THIS; A CONSUMER MAY NOT CLASSIFY. `tests/lint/wallRuns.walker` reds on any
+ * module outside this file ASSIGNING a run-type literal, and importing the name is how a lawful
+ * default stays lawful.
+ */
+export const FALLBACK_RUN_TYPE = 'new-cutting';
+
+/**
  * ⭐⭐ THE PER-TYPE POLICY TABLE — the parameters CX-13 names, one row per type, and every
  * column is a decision the run makes rather than a dial the circuit carries.
  *
@@ -176,6 +191,166 @@ export function runFacts(a) {
 }
 
 /**
+ * ⭐⭐⭐ **THE PER-RING CUTS — THE ONE PLACE THEY ARE SPELLED** (SPINE-3, ODQ §692.6(ii)).
+ *
+ * ⛔⛔ **WHY THIS IS A FUNCTION AND NOT A BLOCK INSIDE `deriveRuns`.** `wallPublication.js`'s
+ * header states the law it was built to obey — *"the derivation happens ONCE … a dress that
+ * re-derived runs … would be the third"* instance of one law spelled twice — and then carried a
+ * SECOND CLASSIFIER anyway (`classifyRuns`), which is how the estate ended up with two producers
+ * that disagree about 83 runs of the same corpus (§692.6(ii)). The cure is not a third spelling
+ * with better facts: it is ONE spelling both producers call. The FACTS come from each producer's
+ * own world (the fabric's substrate here, the partition's faces there); the LADDER and its CUTS
+ * are this module's, once.
+ *
+ * Every cut is a QUANTILE OF THIS RING'S OWN READING, never an absolute — `laneMFW1B-receipt.md`
+ * §0's standing lesson — and every one carries a LIVENESS test beside it, because a quantile on a
+ * degenerate distribution selects everything (see the two ⛔⛔ notes below, each a pin's own catch).
+ *
+ * @param {Array<Object>} facts a `runFacts` vector
+ * @param {{water?:{width?:number}|null}} [o]
+ */
+export function runCuts(facts, o = {}) {
+  const water = o.water || null;
+  const grades = facts.map((f) => f.grade);
+  // ⛔⛔ A QUANTILE CUT ON A DEGENERATE DISTRIBUTION SELECTS **EVERYTHING**, AND A PIN CAUGHT IT.
+  // On a ring over flat ground every vertex reads grade 0, so p80 is 0 and `grade >= crestCut`
+  // is true at every vertex — the whole circuit came back as CREST. ⭐ THE CLASS, and it is
+  // `laneMFW1B-receipt.md` §0's lesson from the other side: **a threshold expressed as a
+  // quantile is only a threshold where the distribution has a spread; where it does not, the
+  // quantile is the minimum and the test is vacuously true.** A crest is ground that is HIGHER
+  // THAN THE REST OF THIS RING'S — so the arm is live only where the ring's own p80 stands
+  // clear of its own p50.
+  const gradeMid = quantile(grades, 0.5);
+  const crestCut = quantile(grades, 0.80);
+  const crestLive = crestCut > 0 && crestCut > gradeMid * 1.2;
+  const segs = facts.map((f) => f.segLen);
+  const segMedian = quantile(segs, 0.5);
+  const turns = facts.map((f) => f.turn);
+  const turnMedian = quantile(turns, 0.5);
+  // ⛔⛔ AND THE SAME TRAP ONE COLUMN OVER, CAUGHT BY THE SAME PIN. `turn > turnMedian` is a
+  // KNIFE EDGE on a regular polygon: every vertex of a 40-gon turns by the same angle to within
+  // float noise, so a strict comparison against the median splits the ring in half AT RANDOM
+  // and the flat control came back with **26 runs** instead of one. ⭐ THE CLASS, worth banking
+  // beside the crest's: **A QUANTILE COMPARISON WITHOUT A SPREAD TEST LETS FLOATING-POINT NOISE
+  // DO THE CLASSIFYING.** A run is only "wobbly" where the ring actually wobbles, and the
+  // margin is what makes the test about the shape rather than about the arithmetic.
+  const turnHigh = quantile(turns, 0.9);
+  const wobbleLive = turnHigh > turnMedian * 1.15;
+  // A "long chord" is a segment several times the ring's own median — the signature the
+  // half-ring closure leaves. 2.5× is the value; MEASURED, dry rings top out at 1.6× and
+  // half-ring leaves run 2.8–5.5×, so the cut separates the populations rather than splitting
+  // one of them. ⚠ §42/§43 VALUE, argued from the corpus table in this module's header.
+  const chordCut = segMedian * 2.5;
+  const waterReach = water && water.width ? water.width * 1.6 : 0;
+  return Object.freeze({
+    gradeMid, crestCut, crestLive, segMedian, turnMedian, turnHigh, wobbleLive, chordCut,
+    waterReach,
+  });
+}
+
+/**
+ * ⭐⭐⭐ **THE LADDER — ONE VERTEX, ONE TYPE, IN THE FIXED PRIORITY ORDER.** Extracted from
+ * `deriveRuns` unchanged (SPINE-3) so the successor publication classifies through the SAME
+ * eight steps instead of a second spelling of them. See `runCuts` for why.
+ *
+ * ⚠ THE MARGIN IS READ OFF THE FACT, NOT PASSED BESIDE IT. `runFacts` stamps `margin` on every
+ * vertex; a second channel for the same number is exactly the drift this extraction exists to
+ * close.
+ *
+ * @param {Object} f one vertex's fact record
+ * @param {ReturnType<typeof runCuts>} cuts
+ * @param {{halfRing?:boolean}} [o]
+ * @returns {string} a member of `RUN_TYPES`, never `bad-closure` (that is a fact about the JOIN)
+ */
+export function runTypeAt(f, cuts, o = {}) {
+  const halfRing = !!o.halfRing;
+  const wobbly = f.turn > cuts.turnMedian * 1.20;
+  // 1 · WATER TERMINATION. Two readings, and BOTH are the water's own act: a vertex standing
+  //     within reach of the channel, and the LONG CHORD a half-ring's filter leaves behind
+  //     when it drops the flank. ⛔ The chord is the one the corpus was silently stroking.
+  if (halfRing && (f.waterD <= cuts.waterReach || f.segLen > cuts.chordCut)) return 'water-termination';
+  if (f.waterD <= cuts.waterReach * 0.75) return 'water-termination';
+  // 2 · TERRAIN SURRENDER. The ground the FABRIC refuses is the ground that defends itself —
+  //     one predicate, shared with §5 W1 exit 2's mask, so the wall and the houses cannot
+  //     disagree about where the crag is.
+  //     ⭐⭐ AND §577's TERMINUS JOINS THE SAME CLAUSE RATHER THAN MINTING A TENTH TYPE. The
+  //     closed set of nine is a ruling (`RUN_TYPES`, walked by `tests/lint/wallRuns.walker`),
+  //     and `terrain-surrender` already SAYS what a terminus is: *"the ground defends itself —
+  //     a scarp … the wall thins to a parapet and carries NO towers (§205.3)"*. A wall that
+  //     stops at a brink is the maximal case of exactly that, not a new kind of wall.
+  //     ⚠ THE END-WORK IS NOT A CONTRADICTION OF `towers: 'none'`. This policy governs the
+  //     towers a RUN spaces along itself; §577's end-work is a fact about the JUNCTION and is
+  //     raised by `traceWalls` at the terminus point, which is why the two do not collide.
+  if (f.refused || f.terminus) return 'terrain-surrender';
+  // 3 · NOTCH — a monumental precinct within one working margin of the line, WITH the trace
+  //     bending for it. A seat that is merely near is not a notch; a seat the wall turns
+  //     around is.
+  if (f.seatD < f.margin * 1.25 && wobbly) return 'notch';
+  // 4 · DETOUR TO A WORK — a mill, quay or pond inside the line.
+  if (f.workD < f.margin * 1.25) return 'detour-to-work';
+  // 5 · RE-USE — an older work was on the line. TWO sources, both facts we hold: a previous
+  //     epoch's circuit within half a margin, and a regional road the wall was laid along
+  //     (a road embankment is the commonest re-used work there is).
+  if (f.priorD < f.margin * 0.5) return 're-use';
+  if (f.roadD < f.margin * 0.25 && f.turn < cuts.turnMedian) return 're-use';
+  // 6 · CREST — the top fifth of this ring's own ground, AND only where there is a top fifth
+  //     to speak of (see `crestLive`).
+  if (cuts.crestLive && f.grade >= cuts.crestCut) return 'crest';
+  // 7 · TOFT-BACKS — the wall hugging its own fabric. Two conditions together, because
+  //     either alone is ordinary: it stands CLOSE to the epoch's own outline (inside one
+  //     working margin of it) AND it WOBBLES (turning above this ring's own median). That is
+  //     what "built along the backs of the tofts" looks like as a measurement.
+  if (cuts.wobbleLive && f.hullD < f.margin * 1.15 && wobbly) return 'toft-backs';
+  // 8 · NEW CUTTING — the residual, and every positive fact above has been asked first.
+  return 'new-cutting';
+}
+
+/**
+ * ⭐⭐⭐ **THE SEAM — THE ONE PLACE `bad-closure` IS DECIDED** (SPINE-3).
+ *
+ * §1.1.13a: closure between the first and last run is DELIBERATELY IMPERFECT and marks a seam.
+ * The join is a BAD CLOSURE only where the two campaigns genuinely did not agree — measured as
+ * the two runs meeting at a turn above this ring's own p90 — so a circuit built in one push does
+ * not grow a fictitious seam.
+ *
+ * ⛔ AND MY FIRST SPELLING OF THE SPINE-3 EXTRACTION LEFT THIS RULE BEHIND IN THE SUCCESSOR.
+ * `wallPublication` kept its own three-line seam block after the ladder moved — a smaller second
+ * spelling of the same law, in the same file, in the same act that was meant to close exactly
+ * that. **The single-writer walker arm added in this wave caught it**, which is what a walker over
+ * assignment (rather than over vocabulary) is for. Recorded rather than quietly fixed, because a
+ * repair that reintroduces a shrunken copy of the defect it repairs is the shape worth naming.
+ *
+ * ⚠ IT MUTATES `merged` IN PLACE, because both callers hold that array and neither wants a copy.
+ *
+ * @param {Array<{type:string, idx:number[]}>} merged coalesced runs, first-to-last around the cycle
+ * @param {Array<Object>} facts the ring's own fact vector
+ * @param {ReturnType<typeof runCuts>} cuts
+ */
+export function markSeam(merged, facts, cuts) {
+  if (merged.length < 3) return merged;
+  const join = facts[merged[0].idx[0]];
+  if (!join) return merged;
+  const closeable = merged[0].type !== 'water-termination' && merged[0].type !== 'terrain-surrender'
+    && merged[merged.length - 1].type !== 'water-termination'
+    && merged[merged.length - 1].type !== 'terrain-surrender';
+  if (!closeable || !(join.turn >= cuts.turnHigh)) return merged;
+  // ⛔ AND THE FIRST SPELLING REQUIRED THE JOIN RUN TO BE LONGER THAN ONE VERTEX, WHICH IS
+  // BACKWARDS. MEASURED on the metropolis's E1 old core: the seam's own turn EQUALS the
+  // ring's p90 (0.968) and the run at the join is exactly ONE vertex — so the arm that
+  // exists to catch "a mismatched join, one odd tower" was refusing the only shape in the
+  // corpus that is literally one odd vertex. ⭐ THE CLASS: **A GUARD WRITTEN FOR THE COMMON
+  // CASE CAN EXCLUDE THE VERY CASE THE RULE WAS WRITTEN FOR.** A short join run is RE-TYPED
+  // whole; a long one is split.
+  if (merged[0].idx.length > 1) {
+    const cut = merged[0].idx.splice(0, Math.max(1, Math.round(merged[0].idx.length * 0.34)));
+    merged.unshift({ type: 'bad-closure', idx: cut });
+  } else {
+    merged[0].type = 'bad-closure';
+  }
+  return merged;
+}
+
+/**
  * ⭐⭐⭐ SEGMENT THE BOUNDARY INTO RUNS **BY CAUSE**, in a FIXED PRIORITY ORDER.
  *
  * ⭐ THE ORDER IS AN ARGUMENT, NOT A CONVENIENCE, AND IT READS FROM THE MOST BINDING PHYSICAL
@@ -209,85 +384,15 @@ export function deriveRuns(a) {
   });
   const n = facts.length;
 
-  // ── THE PER-LEAF CUTS. Every one is a QUANTILE OF THIS RING'S OWN READING, never an
-  //    absolute: `laneMFW1B-receipt.md` §0's standing lesson is that a threshold stated in a
-  //    per-place-normalized unit is a quantile wearing a grade's name, and the honest cure is
-  //    to say QUANTILE where a quantile is meant.
-  const grades = facts.map((f) => f.grade);
-  // ⛔⛔ A QUANTILE CUT ON A DEGENERATE DISTRIBUTION SELECTS **EVERYTHING**, AND A PIN CAUGHT IT.
-  // On a ring over flat ground every vertex reads grade 0, so p80 is 0 and `grade >= crestCut`
-  // is true at every vertex — the whole circuit came back as CREST. ⭐ THE CLASS, and it is
-  // `laneMFW1B-receipt.md` §0's lesson from the other side: **a threshold expressed as a
-  // quantile is only a threshold where the distribution has a spread; where it does not, the
-  // quantile is the minimum and the test is vacuously true.** A crest is ground that is HIGHER
-  // THAN THE REST OF THIS RING'S — so the arm is live only where the ring's own p80 stands
-  // clear of its own p50.
-  const gradeMid = quantile(grades, 0.5);
-  const crestCut = quantile(grades, 0.80);
-  const crestLive = crestCut > 0 && crestCut > gradeMid * 1.2;
-  const segs = facts.map((f) => f.segLen);
-  const segMedian = quantile(segs, 0.5);
-  const turns = facts.map((f) => f.turn);
-  const turnMedian = quantile(turns, 0.5);
-  // ⛔⛔ AND THE SAME TRAP ONE COLUMN OVER, CAUGHT BY THE SAME PIN. `turn > turnMedian` is a
-  // KNIFE EDGE on a regular polygon: every vertex of a 40-gon turns by the same angle to within
-  // float noise, so a strict comparison against the median splits the ring in half AT RANDOM
-  // and the flat control came back with **26 runs** instead of one. ⭐ THE CLASS, worth banking
-  // beside the crest's: **A QUANTILE COMPARISON WITHOUT A SPREAD TEST LETS FLOATING-POINT NOISE
-  // DO THE CLASSIFYING.** A run is only "wobbly" where the ring actually wobbles, and the
-  // margin is what makes the test about the shape rather than about the arithmetic.
-  const turnHigh = quantile(turns, 0.9);
-  const wobbleLive = turnHigh > turnMedian * 1.15;
-  const wobbly = (f) => f.turn > turnMedian * 1.20;
-  // A "long chord" is a segment several times the ring's own median — the signature the
-  // half-ring closure leaves. 2.5× is the value; MEASURED, dry rings top out at 1.6× and
-  // half-ring leaves run 2.8–5.5×, so the cut separates the populations rather than splitting
-  // one of them. ⚠ §42/§43 VALUE, argued from the corpus table in this module's header.
-  const chordCut = segMedian * 2.5;
-  const waterReach = water && water.width ? water.width * 1.6 : 0;
+  // ── THE PER-LEAF CUTS AND THE LADDER, BOTH FROM THE ONE PLACE THEY ARE SPELLED. See
+  //    `runCuts` for why they are functions rather than a block inline here: the successor
+  //    publication classifies through these SAME eight steps, and two spellings of one law is
+  //    the shape that produced the 83-run divergence (§692.6(ii)).
+  const cuts = runCuts(facts, { water });
+  const { segMedian, turnHigh } = cuts;
 
   /** @type {string[]} */ const type = new Array(n);
-  for (let k = 0; k < n; k++) {
-    const f = facts[k];
-    // 1 · WATER TERMINATION. Two readings, and BOTH are the water's own act: a vertex standing
-    //     within reach of the channel, and the LONG CHORD a half-ring's filter leaves behind
-    //     when it drops the flank. ⛔ The chord is the one the corpus was silently stroking.
-    if (halfRing && (f.waterD <= waterReach || f.segLen > chordCut)) { type[k] = 'water-termination'; continue; }
-    if (f.waterD <= waterReach * 0.75) { type[k] = 'water-termination'; continue; }
-    // 2 · TERRAIN SURRENDER. The ground the FABRIC refuses is the ground that defends itself —
-    //     one predicate, shared with §5 W1 exit 2's mask, so the wall and the houses cannot
-    //     disagree about where the crag is.
-    //     ⭐⭐ AND §577's TERMINUS JOINS THE SAME CLAUSE RATHER THAN MINTING A TENTH TYPE. The
-    //     closed set of nine is a ruling (`RUN_TYPES`, walked by `tests/lint/wallRuns.walker`),
-    //     and `terrain-surrender` already SAYS what a terminus is: *"the ground defends itself —
-    //     a scarp … the wall thins to a parapet and carries NO towers (§205.3)"*. A wall that
-    //     stops at a brink is the maximal case of exactly that, not a new kind of wall.
-    //     ⚠ THE END-WORK IS NOT A CONTRADICTION OF `towers: 'none'`. This policy governs the
-    //     towers a RUN spaces along itself; §577's end-work is a fact about the JUNCTION and is
-    //     raised by `traceWalls` at the terminus point, which is why the two do not collide.
-    if (f.refused || f.terminus) { type[k] = 'terrain-surrender'; continue; }
-    // 3 · NOTCH — a monumental precinct within one working margin of the line, WITH the trace
-    //     bending for it. A seat that is merely near is not a notch; a seat the wall turns
-    //     around is.
-    if (f.seatD < margin * 1.25 && wobbly(f)) { type[k] = 'notch'; continue; }
-    // 4 · DETOUR TO A WORK — a mill, quay or pond inside the line.
-    if (f.workD < margin * 1.25) { type[k] = 'detour-to-work'; continue; }
-    // 5 · RE-USE — an older work was on the line. TWO sources, both facts we hold: a previous
-    //     epoch's circuit within half a margin, and a regional road the wall was laid along
-    //     (a road embankment is the commonest re-used work there is).
-    if (f.priorD < margin * 0.5) { type[k] = 're-use'; continue; }
-    if (f.roadD < margin * 0.25 && f.turn < turnMedian) { type[k] = 're-use'; continue; }
-    // 6 · CREST — the top fifth of this ring's own ground, AND only where there is a top fifth
-    //     to speak of (see `crestLive`).
-    if (crestLive && f.grade >= crestCut) { type[k] = 'crest'; continue; }
-    // 7 · TOFT-BACKS — the wall hugging its own fabric. Two conditions together, because
-    //     either alone is ordinary: it stands CLOSE to the epoch's own outline (inside one
-    //     working margin of it) AND it WOBBLES (turning above this ring's own median). That is
-    //     what "built along the backs of the tofts" looks like as a measurement.
-    if (wobbleLive && f.hullD < margin * 1.15 && wobbly(f)) { type[k] = 'toft-backs'; continue; }
-    // 8 · NEW CUTTING — the residual, and every positive fact above has been asked first.
-    type[k] = 'new-cutting';
-  }
+  for (let k = 0; k < n; k++) type[k] = runTypeAt(facts[k], cuts, { halfRing });
 
   // ── COALESCE. Contiguous vertices of one type are ONE run. The ring is closed, so the walk
   //    starts at the first type CHANGE — otherwise the run containing index 0 is split in two
@@ -339,33 +444,9 @@ export function deriveRuns(a) {
     merged[0].idx = merged.pop().idx.concat(merged[0].idx);
   }
 
-  // ── ⭐⭐ THE SEAM. §1.1.13a: closure between the first and last run is DELIBERATELY IMPERFECT
-  //    and marks a seam. The join is a BAD CLOSURE only where the two campaigns genuinely did
-  //    not agree — measured as the two runs meeting at a turn above this ring's p90 — so a
-  //    circuit built in one push does not grow a fictitious seam.
+  // ── ⭐⭐ THE SEAM, from the one place it is spelled. See `markSeam`.
   const turnP90 = turnHigh;
-  if (merged.length >= 3) {
-    const joinIdx = merged[0].idx[0];
-    const join = facts[joinIdx];
-    const closeable = merged[0].type !== 'water-termination' && merged[0].type !== 'terrain-surrender'
-      && merged[merged.length - 1].type !== 'water-termination'
-      && merged[merged.length - 1].type !== 'terrain-surrender';
-    if (closeable && join.turn >= turnP90) {
-      // ⛔ AND THE FIRST SPELLING REQUIRED THE JOIN RUN TO BE LONGER THAN ONE VERTEX, WHICH IS
-      // BACKWARDS. MEASURED on the metropolis's E1 old core: the seam's own turn EQUALS the
-      // ring's p90 (0.968) and the run at the join is exactly ONE vertex — so the arm that
-      // exists to catch "a mismatched join, one odd tower" was refusing the only shape in the
-      // corpus that is literally one odd vertex. ⭐ THE CLASS: **A GUARD WRITTEN FOR THE COMMON
-      // CASE CAN EXCLUDE THE VERY CASE THE RULE WAS WRITTEN FOR.** A short join run is RE-TYPED
-      // whole; a long one is split.
-      if (merged[0].idx.length > 1) {
-        const cut = merged[0].idx.splice(0, Math.max(1, Math.round(merged[0].idx.length * 0.34)));
-        merged.unshift({ type: 'bad-closure', idx: cut });
-      } else {
-        merged[0].type = 'bad-closure';
-      }
-    }
-  }
+  markSeam(merged, facts, cuts);
 
   // ── BUILD THE RUNS.
   /** @type {Array<Object>} */ const runs = [];

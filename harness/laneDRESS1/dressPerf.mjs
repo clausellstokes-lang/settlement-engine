@@ -20,6 +20,7 @@ import { partitionInputs, PERF_BUDGET, PERF_PROTOCOL } from '../laneSPINE1/parti
 import { publishWallWorks } from '../../src/domain/townMap/fabric/wallPublication.js';
 import { dressPage } from '../../src/domain/townMap/fabric/partitionDress.js';
 import { wallForm } from '../../src/domain/townMap/fabric/walls.js';
+import { pubOpts } from '../laneSPINE3/pubOpts.mjs';
 import { faceRing } from '../../src/domain/townMap/fabric/partitionArrangement.js';
 
 const arg = (n, d) => { const h = process.argv.find((a) => a.startsWith(`--${n}=`)); return h ? h.slice(n.length + 3) : d; };
@@ -36,7 +37,8 @@ for (const key of leaves) {
   const input = partitionInputs(settlement, model, fabric);
   const form = wallForm(settlement, fabric.meta.tier).form;
   const mk = (P) => ({
-    walls: publishWallWorks(P, { form, frontage: input.roadWidth, seed: input.seed }),
+    // ⭐ SPINE-3 · ONE SPELLING — and note the perf figure now includes the SITE reads.
+    walls: publishWallWorks(P, pubOpts(settlement, fabric, input)),
     ring: (fid) => (P.arrangement.faces[fid] && P.arrangement.faces[fid].alive
       ? faceRing(P.arrangement, fid) : null),
   });

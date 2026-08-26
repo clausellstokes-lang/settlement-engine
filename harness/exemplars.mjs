@@ -62,7 +62,22 @@ export const CORPUS = [
   { key: 'migration', settType: 'city', seed: 'mf-city-01', terrain: 'coastal', stressors: ['mass_migration', 'monster_pressure'], note: '§10.A11 a camp at the busiest gate; watch-fires where the roads come in' },
   // ⭐⭐ §11 THE SNAPSHOTS. The same town at two years, either side of its own circuit's
   //   vintage — the inertia law's own claim made visible on a page rather than in a hash.
-  { key: 'year-018', settType: 'town', seed: 'mf-town-01', terrain: 'riverside', year: 18, note: '§11.11 the town in year 18: NO CIRCUIT — it was raised in year 49' },
+  // ⛔⛔ **THE NOTE BELOW USED TO READ "NO CIRCUIT — it was raised in year 49", AND MEASUREMENT
+  //   AT SPINE-3 REFUTES IT.** This leaf comes back WITH a circuit, dated **year 5**, on both the
+  //   armed and the dormant arm. And it is one site with THREE raise years: `town → 49`,
+  //   `year-100 → 26`, `year-018 → 5`, with three different frozen radii (237.9 / 263.0 / 270.4).
+  //   ⭐ THE MECHANISM, ARITHMETIC AND EXACT: `compile.deriveWallVintage` computes
+  //   `ageAtBuild = history.founding.age × min(1, TOWN_FLOOR / peakPopulation)`. Population is
+  //   held constant across snapshots BY DECLARATION (`snapshot.js:23-30`), so the ratio is fixed
+  //   at 901/3502 = 0.25728 and the AGE is the only moving term: 191×0.25728→49, 100→26, 18→5.
+  //   **A fraction of NOW is not a date**, which is the standing rule `snapshot.js:37-48` already
+  //   wrote down — naming `deriveWallVintage` and this very leaf as its worked example.
+  //   ⛔ THE CURE EXISTS AND ONE CALLER DROPS IT: `buildGrowthLedger(s, m, { wallBuiltAtAge })`
+  //   pins the date, and 5 of 6 call sites stamp it — `harness/laneSPINE1/partitionPerf.mjs`
+  //   passes `{}`. Applying it moves `frozenRadius` and therefore every affected wrap's GEOMETRY
+  //   and BAND, so it is a DECLARED SHIFT for the owner, not a lane's repair. **The note is
+  //   corrected to what the leaf does; the leaf is not corrected to what the note said.**
+  { key: 'year-018', settType: 'town', seed: 'mf-town-01', terrain: 'riverside', year: 18, note: '§11.11 the town in year 18 — ⛔ it DOES carry a circuit, dated year 5: the raise date is re-derived per horizon (see the block above), which is a fold defect on the owner\'s docket, not a history' },
   // ⚠ YEAR 100, NOT 155, AND THE FIRST CHOICE WAS A LESSON. The year-155 leaf came back
   //   BYTE-IDENTICAL to the present-day town — sha for sha — because every event had already
   //   happened by 155 and every note was still inside its lifespan, so the two years have the

@@ -568,8 +568,30 @@ export function buildGrowthLedger(settlement, model, options = {}) {
            *  here, and this single field is the whole of it. */
           frozenRadius: radius,
           frozenPopulation: population,
-          provenance: firstDue && raiseYear != null && eventYears.has(raiseYear)
-            ? 'derived-frozen' : 'derived-frozen',
+          /**
+           * ⛔⛔ **THIS WAS A DEAD TERNARY, AND THE CONDITION IT DISCARDED IS THE ONE THAT
+           * MATTERS** (found SPINE-3, ODQ §692.9's *"one site, three wall-raise years"*).
+           * It read `firstDue && raiseYear != null && eventYears.has(raiseYear) ? 'derived-frozen'
+           * : 'derived-frozen'` — **both arms the same literal**, so the test *"does the record
+           * actually name this year as an event?"* was computed on every circuit and thrown away.
+           * The enum machinery works everywhere else in this file (epochs at `:545` use a live
+           * `eventYears.has(year) ? 'recorded' : 'interpolated'`); the circuit alone was frozen at
+           * one value by a condition that looked like a decision.
+           *
+           * ⛔ **TWO LIVE BRANCHES DOWNSTREAM ARE THEREFORE UNREACHABLE**, and both are real:
+           *   `partitionConstruct.mintDerivedGates` runs on EVERY wrap — its *"recorded history
+           *   always wins where it speaks"* branch has never executed;
+           *   `wallPublication.wearOfCircuit`'s `kept = provenance === 'recorded' ? 1 : 0.72`
+           *   discounts EVERY circuit's maintenance forever; the `1` branch has never executed.
+           *
+           * ⛔ **IT IS LEFT AS THE LITERAL, DELIBERATELY, AND THE DECISION GOES TO THE OWNER.**
+           * Making the condition live would flip some circuits to `'recorded'`, which moves gate
+           * minting (partition GEOMETRY) and every wear grade in the corpus — a DECLARED SHIFT
+           * with the owner's signature on it, not a repair a lane takes. What is fixed here is the
+           * lie: the code no longer pretends to test something it discards. **Recorded, not
+           * silently corrected.**
+           */
+          provenance: 'derived-frozen',
           reason: firstDue
             ? `the recorded/derived vintage: the circuit was raised in year ${raiseYear} and its`
               + ` extent is frozen at the built radius of that year (${radius.toFixed(3)})`

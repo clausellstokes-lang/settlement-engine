@@ -6,7 +6,9 @@
  *   V   the VALUE HIERARCHY (exit 2) — I3 + I4, per lens
  *   C   the §650.2 CLIP CENSUS (PA.1) — no mark outside the face that owns it
  *   L   L-REG-34 LEGEND AGREEMENT (exit 7) — both directions
- *   R   the ROUTE RESIDUE (PA.1) — crag avoidance · zero-mouth fragments · grade response
+ *   R   the ROUTE RESIDUE (PA.1) — crag avoidance (⛔ VACUOUS: 0 CLIFF edges are ever minted)
+ *       · zero-mouth fragments (the only measurable row) · grade response (⛔ DECLARED NULL:
+ *       the heightfield reaches neither the constructor nor the published partition — SPINE-3)
  *   W   the WALL PUBLICATION's own totality — every fragment vertex in exactly one run
  *
  * Usage: node harness/laneDRESS1/dressCensus.mjs [--leaves=a,b] [--controls] [--json=<path>]
@@ -21,6 +23,7 @@ import {
   dressPage, valueCensus, legendCensus, tones, inRing, hatchPolygon, clipSegment,
 } from '../../src/domain/townMap/fabric/partitionDress.js';
 import { wallForm } from '../../src/domain/townMap/fabric/walls.js';
+import { pubOpts } from '../laneSPINE3/pubOpts.mjs';
 import { faceRing, liveFaces } from '../../src/domain/townMap/fabric/partitionArrangement.js';
 import { LENS_IDS, resolveLens } from '../../src/domain/townMap/fabric/folioLenses.js';
 
@@ -82,10 +85,22 @@ function clipCensus(page, rw) {
  * *grade response · crag avoidance · zero-mouth fragments* — and this measures what the partition
  * can actually answer.
  *
- * ⛔ **GRADE RESPONSE IS NOT MEASURABLE AT THIS SLOT, AND THE ZERO IS DECLARED RATHER THAN
- * PRINTED.** The heightfield reaches the CONSTRUCTOR (SPINE §2) and is not carried on the
- * published partition, so a grade figure taken here would be measured against nothing. §9 law 8
- * is the reason this sentence exists instead of a `0`.
+ * ⛔⛔ **GRADE RESPONSE IS NOT MEASURABLE AT THIS SLOT, AND THE REASON I FIRST GAVE WAS FALSE.**
+ * ⛔ **CORRECTED AT SPINE-3 (ODQ §692.6(ii)).** This comment used to read *"the heightfield reaches
+ * the CONSTRUCTOR (SPINE §2) and is not carried on the published partition"*. **It does not reach
+ * the constructor either.** `partitionInputs` returns exactly nine keys — `seed, ledger, extent,
+ * originForm, planMode, roadWidth, bodyTarget, water, wallForm` — and height/elevation/slope/relief
+ * occur **0 times** in `partitionConstruct.js` and `partitionView.js` (control: `WAY` occurs 28×
+ * and 1× in the same reads). §2 CHARTERS the heightfield as a spine input and §5 lists it under
+ * CONSUMES UNCHANGED; **nothing ever delivered it.** ⭐ Why the correction matters more than the
+ * row: the false reason implies a cheap fix — carry it through publication — when nothing in the
+ * partition inputs has it to carry. The conclusion (not measurable HERE) stands; its mechanism did
+ * not. §9 law 8 is the reason this sentence exists instead of a `0`.
+ *
+ * ⭐ **AND IT IS NOW MEASURABLE ONE SEAM OVER.** SPINE-3 routes the SITE to `publishWallWorks`,
+ * where the run classifier reads `absoluteGrade`/`refusalAt` exactly as the legacy classifier does;
+ * `crest` and `terrain-surrender` are live there. This slot still cannot answer for WAYS, which is
+ * what this row is about, and that remains REG-ROUTE's.
  */
 function routeResidue(P) {
   const arr = P.arrangement;
@@ -149,11 +164,13 @@ function routeResidue(P) {
      */
     cragVacuous: cliffEdges === 0,
     /**
-     * ⛔ GRADE RESPONSE IS NOT MEASURABLE AT THIS SLOT. The heightfield reaches the CONSTRUCTOR
-     * (SPINE §2) and is not carried on the published partition, so a grade figure taken here would
-     * be measured against nothing. Declared rather than printed as a 0.
+     * ⛔ GRADE RESPONSE IS NOT MEASURABLE AT THIS SLOT — and see this function's header for the
+     * SPINE-3 correction to the reason. The heightfield reaches NEITHER the constructor nor the
+     * published partition; it is a §2 input nothing delivered. Declared rather than printed as a 0.
      */
     gradeResponse: null,
+    /** ⭐ SPINE-3 · where grade response IS now live: the wall run classifier, via `opts.site`. */
+    gradeResponseHome: 'wallPublication.partitionRunFacts (SPINE-3) — WAYS remain REG-ROUTE\'s',
     ok: landlocked === 0,
   };
 }
@@ -166,11 +183,10 @@ for (const key of leaves) {
   const input = partitionInputs(settlement, model, fabric);
   const P = buildSettledPartition(input);
   const page = projectPage(P, { roadWidth: input.roadWidth });
-  const walls = publishWallWorks(P, {
-    form: wallForm(settlement, fabric.meta.tier).form,
-    frontage: input.roadWidth, seed: input.seed,
-    year: fabric.meta.presentYear != null ? fabric.meta.presentYear : null,
-  });
+  // ⭐ SPINE-3 · ONE SPELLING (`harness/laneSPINE3/pubOpts.mjs`); it carries the SITE, and the
+  //   present year from the key the fabric actually publishes rather than from `presentYear`,
+  //   which is `undefined` on all 18 leaves.
+  const walls = publishWallWorks(P, pubOpts(settlement, fabric, input));
   const dress = dressPage(page, {
     lens: 'parchment', roadWidth: input.roadWidth, walls,
     ringOfFace: (fid) => (P.arrangement.faces[fid] && P.arrangement.faces[fid].alive

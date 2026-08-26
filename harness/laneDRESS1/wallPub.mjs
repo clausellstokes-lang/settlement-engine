@@ -9,7 +9,7 @@ import { buildSettledPartition } from '../../src/domain/townMap/fabric/partition
 import { partitionInputs } from '../laneSPINE1/partitionPerf.mjs';
 import { publishWallWorks, rampartArgsFor } from '../../src/domain/townMap/fabric/wallPublication.js';
 import { deriveRampartWorks } from '../../src/domain/townMap/fabric/rampartWorks.js';
-import { wallForm } from '../../src/domain/townMap/fabric/walls.js';
+import { pubOpts } from '../laneSPINE3/pubOpts.mjs';
 
 const arg = (n, d) => { const h = process.argv.find((a) => a.startsWith(`--${n}=`)); return h ? h.slice(n.length + 3) : d; };
 const has = (n) => process.argv.includes(`--${n}`);
@@ -90,10 +90,13 @@ for (const key of leaves) {
   const { settlement, model, fabric } = buildOne(spec);
   const input = partitionInputs(settlement, model, fabric);
   const P = buildSettledPartition(input);
-  const form = wallForm(settlement, fabric.meta.tier).form;
-  const pub = publishWallWorks(P, {
-    form, frontage: input.roadWidth, seed: input.seed, year: fabric.meta.presentYear || null,
-  });
+  const o = pubOpts(settlement, fabric, input);
+  const form = o.form;
+  // ⭐ SPINE-3 · ONE SPELLING of the publication's call (`harness/laneSPINE3/pubOpts.mjs`).
+  //   ⛔ This site used to pass `year: fabric.meta.presentYear`, a key `buildFabric` does not
+  //   publish, so every wear grade in this table was PA.4's NULL CASE. And it passed no SITE,
+  //   so four run types read zero. Both are fixed by using the one helper.
+  const pub = publishWallWorks(P, o);
   let joints = 0; let gatehouses = 0; let frags = 0; let towers = 0; let runs = 0;
   for (const c of pub.circuits) for (const f of c.fragments) {
     frags++; runs += f.runs.length; towers += f.towers.length;
