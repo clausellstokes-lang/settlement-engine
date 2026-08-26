@@ -29674,3 +29674,88 @@ the lane's disclosed `rm -rf` was genuinely restored.
   owner in chat and then left unwritten for six entries** while SPINE-3's collection took the
   seat. The promise was kept late, and a chair's own dangling thread is the failure this
   programme names first.
+
+## §701 · DRESS-FABRIC SEALS AND REFUTES ITS OWN CHARTER — WE WERE ALREADY AT REFERENCE PARITY, AND THE REAL GAP IS THE PAGE BUDGET (2026-08-27 ~08:40 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+**RATIFIED.** Sealed at `refs/preserve/map-sandbox-dressfab-grammar` = **`f8f6456a0`**
+(base `96bcbbbf5` verified ancestor; **zero deletions**, 4 added, all 78 tracked `out/`
+files intact; no ref moved). Gate **19 files / 434 tests, EXIT 0** (+1 test, **no new
+file**). Dormancy **29/29** byte-identical with a convicting one-byte plant · determinism
+18/18 · all 18 plates byte-identical to base · metropolis 690,324/830,000 (83.2 %).
+**THE HARD BOUNDARY PROVEN AGAIN:** wrap digest `e65c7685…` identical at base and tip,
+live under four arms that each move it. Instruments sealed **r6 = `02e63b9f4`** (i14).
+
+- **§701.1 ⛔⛔ THE CHARTER'S PREMISE IS REFUTED — AND IT WAS MINE, FOR THE THIRD TIME.**
+  §697.2 claimed our fabric was atomised, *"each separated on ALL FOUR SIDES by a white gap
+  as wide as the building itself."* The census built to measure it says the opposite:
+  **toft density measures 0.786–0.840 on all eighteen leaves**, where the claim implies
+  ~0.25. And on the reference target itself — **0.431** (band 0.38–0.52, reconstructed from
+  published figures and declared as a band, never a point, J-FABRIC-2) — **ours reads city
+  0.4485 · metropolis 0.4386 · town 0.4479, with 11 of 18 leaves IN BAND and every leaf
+  outside it SPARSER, not denser.** **We were already at reference parity on fabric density
+  before this car ran.** The white my eye read as atomisation is **the street**, which is
+  exactly where the reference puts its white too.
+  ⭐ **Independently confirmed by the chair before ratifying:** metropolis draws **617**
+  masses against Everrise's **616**; city **448**, matching both the lane and my own earlier
+  parse to the unit.
+- **§701.2 ⛔ THE REAL GAP, MEASURED AT LAST: IT IS THE PAGE BUDGET, NOT THE PAINT.** **The
+  field takes 49–68 % of every plate; the settlement takes 1.7–6.9 %** — the countryside
+  carries **17–25× the fabric's visual mass.** That is the whole of "why it does not look
+  like the reference," and it is a **framing decision upstream of paint**, not a dress
+  defect. The reference's own numbers say the same: Grimfall (their big city) has **zero
+  fields**, Everrise 41. **→ OWNER: this is a composition question with a product consequence**,
+  because L-REG-33's cultivated-land law is the owner's own ruling and the hinterland is part
+  of our truth story. The options are a tighter page crop with the hinterland at its own zoom
+  rung, a tier-scaled crop, or keeping the disc and accepting the reference gap deliberately.
+  **Not the chair's to take: it trades a signed product law against a look.**
+- **§701.3 ROTATION — MY FIGURE REPRODUCES, MY INFERENCE DOES NOT.** The 82 % holds **only
+  under the mod-90 grid fold** (0.8147); the [0,180) fold reads **0.4375**, and the lane
+  caught that it would have halved its own cure sizing — **an instrument correction made
+  before any cure, which is the right order.** More decisive: **the masses track their own
+  way network on every leaf** (metropolis .904/.927, city .815/.839), so the alignment is
+  **truthful, not a defect**; and `dress-planes`' wide spread — which I cited as proof the
+  machinery existed — **is an artefact of splitting a footprint by its ridge.** My §698.2(i)
+  inference is struck. ⭐ **The real find underneath it: `chaosGrid` is TWO DIALS WEARING ONE
+  NAME** — cut position (size spread) and cut angle (rotation spread) set by one number, so
+  spreading rotation blows the size band 1.73 → 3.52. Separating them buys city 0.815 →
+  0.530 at areaSpread 2.06. **Every arm moves the wrap digest → the owner's signature.**
+- **§701.4 AGGREGATION — §698.4 IS REFUTED AND THE LANE RECOMMENDS AGAINST ITS OWN LEVER.**
+  `subdivide:844`'s lane-width guard (`4 rw²`) **binds before `gapBar`**, and the arithmetic
+  predicts the observed identity exactly (1.741 × 1.8 = 3.13 < 4): arms at 1.8, 1.2 and 0.6
+  are **byte-identical to 2.4 on every leaf.** My "~900 at 1:2, ~1,750 at 1:1, reachable from
+  either side" is false through the named dial — **the ceiling is 460, not 900.** Forcing it
+  via the guard costs **metropolis 122.5 % of its byte ceiling** and **density FALLS at every
+  step** (0.4386 → 0.3433). **RECOMMENDATION ADOPTED: DO NOT RAISE.** A lane that prices its
+  own chartered lever and then argues against pulling it is the behaviour this programme
+  wants.
+- **§701.5 WHAT SHIPS, AND ITS HONEST SIZE.** The furrow hatch is demoted **at the pixel** by
+  a **solved** alpha (not a chosen one — parchment 0.72 → 0.44), curing `grain:built` at
+  **1.097**, a hatch and a roof at the same value. `atMost` lands as **the missing mirror of
+  `atLeast`** — every rung in that ladder was a floor, *which is how the countryside walked
+  past the fabric while `valueCensus` read green at 5/5.* ⭐ **The win's honest size is stated
+  by the lane itself: the countryside's visual mass falls 0.5 %**, because the hatch is thin
+  lines at a wide pitch and **the field FILL is the whole defect** — which is §701.2 again,
+  from the other side. The field demotion was **built, measured and WITHDRAWN rather than
+  shipped red** (J-FABRIC-6): it reds i5's `water:ground` on city and town.
+- **§701.6 ⛔ THE EIGHTH SIGHTING, AND IT BLOCKS THE CURE ABOVE.** **i5's `ground` role
+  decomposes to 30.3 % roofSE + 23.7 % built + 12.8 % eaves = 66.8 % ROOF, 25.6 % FIELD, and
+  0.7 % actual `plotGround`.** The `building` role **builds its urban envelope and is then
+  not among its own measured roles.** So the instrument that must adjudicate the countryside
+  demotion is two-thirds measuring roofs. Its one-line cure **re-records every legacy
+  i1/i5/i7 baseline** → PA.5's act, not a dress lane's. **Eight sightings now; the law stands
+  unchanged and is simply being paid out.**
+- **§701.7 SIX SELF-REDS, AND THE SHARPEST IS THE NaN CLASS FROM THE OTHER SIDE.**
+  **`node harness/renderFolio.mjs <outdir>` writes nothing and exits 0** — it is a library,
+  and the driver is `harness/exemplars.mjs`. The lane's `cmp` loop against the missing output
+  printed a clean, confident **"29 of 29 DIFFER"**: SPINE-3's NaN arm inverted — **failing
+  ALARM-looking rather than safe-looking.** Both shapes print a verdict the reader trusts.
+  Four of the six were caught by machinery built in this same lane.
+- **§701.8 §699.9 IS DISCHARGED IN THE SAME BREATH IT WAS RAISED (J-FABRIC-11):** SPINE-3's
+  wrap digest — the sole instrument proving the band boundary, and which lived loose in a
+  scratchpad — is now **inside the seal** at `harness/laneDRESSFAB/wrapDigest.mjs`. A
+  successor at the preserve ref can reproduce the boundary proof from the seal alone.
+- **§701.9 THE ARC, CORRECTED BY WHAT WAS LEARNED.** DRESS-FABRIC found the fabric already
+  correct, so **the visuals-first wave's remaining substance is the PAGE BUDGET (§701.2,
+  owner's) and the two wrap-moving dials (§701.3/§701.4, owner's)** — three owner questions
+  and no dress work. **WALL-CURTAIN proceeds next** as the only visual-base item still the
+  chair's. **Nothing here re-opens SEATING or DRESS-2's order**; they follow, as §700 set them.

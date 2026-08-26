@@ -226,6 +226,21 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§701 · DRESS-FABRIC ratified; its own charter refuted · SEAT: Opus 5.**
+*What was judged:* ratifying a wave that refuted the premise it was chartered on; adopting
+its recommendation AGAINST its own density lever; withdrawing my §698.2(i) rotation
+inference; and routing the page budget, the rotation dial and the aggregation guard to the
+owner rather than taking them.
+*What Fable re-derives:* **(a)** the reference target **0.431** is a RECONSTRUCTION from
+published figures, not a measurement of a reference map — the whole parity finding rests on
+it, and the lane rightly declared it a band; test whether the reconstruction is sound.
+**(b)** whether "the masses track their own way network, so the alignment is truthful"
+is right, or whether truthful-but-monotonous is still a defect worth curing. **(c)** whether
+ratifying on a 0.5 % measured win plus three owner questions is the right bar for a wave.
+*Receipts:* ODQ §701 · `refs/preserve/map-sandbox-dressfab-grammar` = `f8f6456a0` ·
+instruments r6 `02e63b9f4` · `laneDRESSFAB-receipt.md`.
+*Priority:* **P1** on (a) — every parity claim in the programme now leans on that number.
+
 **§700 · The arc re-ordered to visuals-first; DRESS-FABRIC dispatched · SEAT: Opus 5.**
 *What was judged:* adopting the owner's sequencing and withdrawing the chair's "we would tune
 twice" objection as overstated; keeping one guard (tune against the real partition); the
