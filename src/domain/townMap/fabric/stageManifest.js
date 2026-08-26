@@ -258,8 +258,21 @@ export const GENERATION_NODES = Object.freeze([
     allowedImports: ['commons.js', 'fabricGeometry.js', 'fabricRng.js', 'lineage.js', 'trigTable.js', 'waterMode.js'],
     randomNamespaces: ['*|d', '*|faub|*', '*|hab|*', '*|i', '*|keeper|*', '*|landing|*', '*|landing|*|*|a', '*|landing|*|*|r', '*|o', '*|s', '*|stead|*|a', '*|t', '*|tenure', '*|tone', '*|w'],
     statefulForkSites: 0 },
-  { nodeId: 'S16', modules: ['institutions.js', 'seating.js'],
-    allowedImports: ['fabricRng.js', 'lineage.js', 'organismFields.js', 'substrate.js', 'trigTable.js', 'waterMode.js', '../../../data/institutionAtlas.js', '../../../data/institutionLadders.js'],
+  // ⭐⭐ ⟦CAR-SEATING⟧ `partitionSeating.js` JOINS S16, THE SEATING NODE, AND NOT S8.
+  //   It is a SEATING law — a deck, an order and a scorer — that happens to read partition faces,
+  //   exactly as `seating.js` is a seating law that reads the organism fields. Its neighbours here
+  //   are the two modules that already decide where a body goes.
+  // ⭐ IT DECLARES `S8>S16` RATHER THAN HIDING IT. The module reads `partitionArrangement.js`
+  //   directly, so the edge is REAL; ⟦DRESS-1 §686.7⟧ already refused the injected-reader dodge
+  //   for `wallPublication.js` on the ground that it makes a real dependency invisible to the very
+  //   graph this manifest exists to expose, and the same answer is taken here. S8 PRECEDES S16 in
+  //   the stage order, so the edge runs FORWARD: no inversion, and the SCC roster does not grow.
+  // ⭐ `fabricGeometry.js` is a PRIMITIVES edge S16 ALREADY CARRIES (via `trigTable.js`), so no
+  //   new node pair is created by it. And the module mints no namespace and opens no stream — it
+  //   holds none of the seven scanned callees — so `randomNamespaces` is unchanged, S16's
+  //   `statefulForkSites` stays 1, and the fabric's pinned total of 18 does not move.
+  { nodeId: 'S16', modules: ['institutions.js', 'partitionSeating.js', 'seating.js'],
+    allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'lineage.js', 'organismFields.js', 'partitionArrangement.js', 'substrate.js', 'trigTable.js', 'waterMode.js', '../../../data/institutionAtlas.js', '../../../data/institutionLadders.js', '../../institutions/institutionRoster.js'],
     randomNamespaces: ['*|candr|*', '*|cand|*', '*|repairr|*', '*|repair|*', '*|rot', '*|success', '*|variant', 'seat.*'],
     statefulForkSites: 1 },
   { nodeId: 'S17', modules: ['waterWorks.js'],
@@ -302,7 +315,7 @@ export const GENERATION_NODES = Object.freeze([
     randomNamespaces: [],
     statefulForkSites: 0 },
   { nodeId: 'ASSEMBLY', modules: ['buildFabric.js', 'publication.js'],
-    allowedImports: ['builtUmbrella.js', 'circuitDemotion.js', 'cliffs.js', 'commons.js', 'compile.js', 'compoundGround.js', 'districtPartition.js', 'fabricGeometry.js', 'fabricRng.js', 'faubourgOrigin.js', 'fields.js', 'frontageFusion.js', 'groundLaw.js', 'groundRefusal.js', 'growthLedger.js', 'habitation.js', 'immersion.js', 'institutionShapes.js', 'institutions.js', 'lateGround.js', 'leafCensus.js', 'lineage.js', 'marketRegister.js', 'measure.js', 'minFootprint.js', 'morphology.js', 'organismFields.js', 'organisms.js', 'parcels.js', 'partitionConstruct.js', 'partitionView.js', 'rampartWorks.js', 'relief.js', 'reservedGround.js', 'routes.js', 'seating.js', 'shapeCode.js', 'snapshot.js', 'stateMarks.js', 'streetEdges.js', 'streets.js', 'substrate.js', 'suitability.js', 'terraform.js', 'tierGrammar.js', 'umbrella.js', 'wallCircuit.js', 'wallRuns.js', 'walls.js', 'waterMode.js', 'waterWorks.js'],
+    allowedImports: ['builtUmbrella.js', 'circuitDemotion.js', 'cliffs.js', 'commons.js', 'compile.js', 'compoundGround.js', 'districtPartition.js', 'fabricGeometry.js', 'fabricRng.js', 'faubourgOrigin.js', 'fields.js', 'frontageFusion.js', 'groundLaw.js', 'groundRefusal.js', 'growthLedger.js', 'habitation.js', 'immersion.js', 'institutionShapes.js', 'institutions.js', 'lateGround.js', 'leafCensus.js', 'lineage.js', 'marketRegister.js', 'measure.js', 'minFootprint.js', 'morphology.js', 'organismFields.js', 'organisms.js', 'parcels.js', 'partitionConstruct.js', 'partitionSeating.js', 'partitionView.js', 'rampartWorks.js', 'relief.js', 'reservedGround.js', 'routes.js', 'seating.js', 'shapeCode.js', 'snapshot.js', 'stateMarks.js', 'streetEdges.js', 'streets.js', 'substrate.js', 'suitability.js', 'terraform.js', 'tierGrammar.js', 'umbrella.js', 'wallCircuit.js', 'wallRuns.js', 'walls.js', 'waterMode.js', 'waterWorks.js'],
     randomNamespaces: [],
     statefulForkSites: 0 },
 ].map(Object.freeze));
@@ -330,7 +343,11 @@ export const NODE_EDGES = Object.freeze([
   //   the partition node derived `S13>S8`, `S17>S8`, `S22>S8`: three NEW public-order inversions
   //   in a dress car. `PUBLIC_ORDER_INVERSIONS` and `STAGE_GRAPH_SCC` are untouched by the
   //   assignment that actually landed.
-  'S8>S13', 'S13>S22', 'S17>S22'
+  'S8>S13', 'S13>S22', 'S17>S22',
+  // ⟦CAR-SEATING⟧ the seating pass reads the arrangement's faces. FORWARD (S8 precedes S16), so
+  // it creates no inversion and does not enlarge the SCC — see the S16 block for why it is
+  // declared here rather than routed around an injected reader.
+  'S8>S16'
 ]);
 
 /** The ABSENT §10.14 fields, named rather than stubbed. A consumer that needs one must build

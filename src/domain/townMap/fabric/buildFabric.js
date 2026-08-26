@@ -101,6 +101,7 @@ import { governFabricSurfaces } from './publication.js';
 // fusion, shape-code, market and quay registers already ride.
 import { buildGrowthLedger, colonizationFromLedger, peaksFromLedger } from './growthLedger.js';
 import { buildSettledPartition } from './partitionConstruct.js';
+import { seatPartition } from './partitionSeating.js';
 import { projectPage } from './partitionView.js';
 
 /** The engine's own prosperity vocabulary — never FTG's squalid→aristocratic (§8.2). */
@@ -1335,13 +1336,35 @@ export function buildFabric(settlement, model, options = {}) {
       wallForm: hasWalls ? { facets: 26, width: rw * 0.42 } : null,
     };
     const built = buildSettledPartition(input);
+    const page = projectPage(built, { roadWidth: rw });
     return Object.freeze({
       ...built,
       /** ⭐ THE LEDGER IS PUBLISHED WITH THE PARTITION IT FOLDED. A consumer that reads a drawn
        *  epoch must be able to read the row it came from; an unpublished pre-stage is a derivation
        *  nobody downstream can check. Flag-gated with its own artifact, so dormancy is unchanged. */
       ledger: growLedger,
-      page: projectPage(built, { roadWidth: rw }),
+      page,
+      /**
+       * ⭐⭐⭐ ⟦CAR-SEATING⟧ THE INSTITUTIONS, SEATED ON THE PARTITION'S OWN FACES — published as a
+       * SIBLING of `page` and never as a key inside it. Three reasons, and the first is decisive:
+       *   · the seating pass READS the page (`bound`, `gates`, `voids`, `water`), so a `seating`
+       *     key *inside* the page would be a cycle;
+       *   · the page is `Object.freeze`d at `partitionView.js:206` — there is no post-hoc attach;
+       *   · `projectPage`'s own stated law is *"SPINE-1 mints no institutions — A1.5 keeps seating
+       *     its own car"*, and this respects it rather than editing it.
+       * The shape matches the `ledger` precedent immediately above: an artifact published beside
+       * the partition it belongs to, inside the same flag gate.
+       * ⛔ DORMANCY IS STRUCTURAL, NOT PROMISED. `partitionDress` reads eight HARDCODED page keys
+       * and zero face `attrs`, and `renderFolio` never receives a page at all — so this artifact
+       * cannot reach either plate path until a dress car deliberately draws it.
+       * ⚠ IT DOES NOT TOUCH `meta.physicalViolations`, WHICH BELONGS TO THE LEGACY SEATER
+       * (`seating.js:326` → `:1488` → `manifest.json`). Overwriting that would blind the B6 pin
+       * and destroy the very comparison that shows this pass is the better one.
+       */
+      seating: seatPartition(built, page, s, {
+        prosperity: (s.economicState && s.economicState.prosperity) || null,
+        tier: scale.tier,
+      }),
       inputEcho: Object.freeze({
         originForm: input.originForm, planMode: input.planMode, roadWidth: rw,
         bodyTarget: input.bodyTarget, extent: input.extent, walled: !!input.wallForm,
