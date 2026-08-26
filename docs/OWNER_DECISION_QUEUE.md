@@ -29832,3 +29832,59 @@ figure in it was executed.
   Sequential, not parallel — the gate is a mutex and WALL-CURTAIN holds it.
   ⭐ **This is the single largest visual change available to us, and every part of it is now
   a repair toward a known mechanism rather than a judgment call.**
+
+## §703 · WALL-CURTAIN RATIFIED — AND IT FOUND THAT THE SHIPPED WALL HAS THE DEFECT WE CURED IN THE DORMANT ONE (2026-08-27 ~13:10 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+**RATIFIED.** Sealed `refs/preserve/map-sandbox-wallcurtain` = **`9c7261829`** (base
+`f8f6456a0`; zero deletions, 1 added, all 78 tracked `out/` files intact). Gate **19 files /
+439 tests EXIT 0** (base 434; **+5 tests in an EXISTING file — no new file, no ratchet
+cost**). Dormancy folio 29/29 + page 18/18 with a one-byte plant convicting · **boundary held:
+wrap digest `e65c7685…` identical at base and tip.**
+
+- **§703.1 THE CURE, AND THE ORDER IT WAS DONE IN.** The brief required the measuring column
+  **before** the fix; it **convicted 11 of 17 wraps before a line of cure existed.** Over-drop
+  **8.65× → 1.00×** across the 11 wet wraps (excess 7.14 facet-means → **0.00**); termini
+  **25–96 u short of the bank → 0.0 u**. The 6 dry wraps read 1.00× at both ends — the
+  column's own negative control. Control bench **11/11 → 19/19** with the open-fragment plant
+  and a negative twin; arm-A slack now per-fragment; **the walker reads the directory,
+  proven by differential 6 → 71** (§699.6 discharged); and the 83→7 run signal finally has a
+  **gate guard**.
+- **§703.2 THE CHARTER WAS TESTED BEFORE IT WAS EXECUTED.** The brief demanded the lane prove
+  the over-drop unlawful rather than assume it. **It is unlawful** — but the decisive evidence
+  was not where expected: the legacy vertex filter that might have licensed it **satisfies its
+  own stated 1.1-width standoff on ONE circuit of thirteen**, ending 10.6–504.5 u from the
+  bank.
+- **§703.3 ⛔⛔ THE FINDING THAT OUTRANKS THE WAVE: THE LEGACY WALL IS DRAWN ACROSS OPEN WATER
+  ON 11 OF 13 WATERED CIRCUITS** (33.5–115.2 u; `crossing` E1 puts **8 vertices in the sea**).
+  It filters vertices **without splitting the ring**, so the gap is chorded straight through
+  the water. ⚠ **CHAIR-VERIFIED SO FAR:** the legacy wall modules (`rampartWorks.js`,
+  `wallCircuit.js`, `publication.js`) live in **`src/domain/townMap/fabric/` — the shipped
+  tree** — while `partitionDress` (the cured path) is referenced **only by the stage manifest
+  and imported by no renderer: still dormant, exactly as designed.** So the cure we have been
+  building lands on the path users do **not** see yet, and the path they **do** see carries
+  the defect. **NOT asserted as certain: the exact user-facing render chain is traced only
+  partway.** → **CHARTERED `WALL-LEGACY-CHECK` as the next act** — settle whether a live map
+  shows it, and if so this becomes an owner-facing product defect, not a sandbox one.
+  **This is not a correction to SPINE-3, which cured the right surface.**
+- **§703.4 ⛔⛔ AND THE GATE HAS NEVER RENDERED THE PAGE.** 439 tests passed green at a tip
+  whose **page renderer crashed on leaf 14 of 18** (a latent `Math.max(1, …)` over an empty
+  hatch list, which the lane's shorter fragments made reachable; fixed as a clamp). Two test
+  files *reference* the dress modules, but **nothing in the gate renders the corpus**, so a
+  leaf-specific crash passes. ⚠ **CONSEQUENCE FOR MY OWN RATIFICATIONS: every "gate green" I
+  accepted for DRESS-1, DRESS-1b and DRESS-FABRIC was over a pipeline the gate never actually
+  ran end to end.** The unit greens were real; the coverage claim I read into them was not.
+  → **a corpus-render arm is chartered into `DRESS-FRAME`.**
+- **§703.5 AN INHERITED RED, NOW PINNED:** the carriage census **fails on 5 of 6 fixtures it
+  had never seen — 15 lost runs**, measured **identical at base and tip**, so it is inherited
+  rather than caused. Pinned as a declared roster with a ratchet instead of being silently
+  carried.
+- **§703.6 FIVE SELF-REDS, AND THE SHARPEST IS THE FAMILY AGAIN — INSIDE THE TEST WRITTEN TO
+  CLOSE IT.** The lane's first bank-clip gate arm was **VACUOUS: 27/27 green on a fixture with
+  zero wet circuits.** Tenth sighting. Also: clipping *exactly* onto the bank made
+  `pointInPolygon` coin-toss the endpoints, so the census reported 11 wraps "drawn over water"
+  at an exact-zero wet length — **and the lane fixed the wall rather than the census**, which
+  is the right choice and the harder one.
+- **§703.7 THE ARC.** `WALL-LEGACY-CHECK` (§703.3) runs next — it is cheap and it decides
+  whether we are holding a live product defect. Then **DRESS-FRAME** (§702.8) with the
+  corpus-render arm folded in. Two worktrees are deliberately left in place at the tip and at
+  `f8f6456a0`, since every before/after figure is one instrument executed at both.

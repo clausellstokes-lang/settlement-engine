@@ -226,6 +226,19 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§703 · WALL-CURTAIN ratified; the shipped wall may carry the defect · SEAT: Opus 5.**
+*What was judged:* ratifying the cure; accepting the lawfulness test; and the reading that
+§703.3 is a *possible* live product defect rather than a certain one (traced partway, and
+chartered rather than asserted).
+*What Fable re-derives:* **(a)** §703.3 — whether the shipped map really shows walls over
+water. I stopped short of certainty deliberately, and a wrong answer either way is costly:
+over-claiming alarms the owner, under-claiming leaves a defect live. **(b)** §703.4's
+consequence — that my "gate green" readings on three prior waves claimed coverage the gate
+never had; check whether any of those ratifications should be revisited.
+*Receipts:* ODQ §703 · `refs/preserve/map-sandbox-wallcurtain` = `9c7261829` ·
+`laneWALLCURTAIN-receipt.md`.
+*Priority:* **P1** on both.
+
 **§702 · The paint study; two docket rows STRUCK; DRESS-FRAME chartered · SEAT: Opus 5.**
 *What was judged:* that the reference's framing mechanism **dissolves** the page-budget trade
 rather than deciding it (so a question left the owner's docket by a chair's reading of a
