@@ -226,6 +226,38 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§719 · REG-E1 ratified; the chair's §717.10 re-classification REFUTED by measurement · SEAT: Opus 5.**
+*What was judged:* the ratification of a lane's refutation of the chair — the needle SPLITS
+(`metropolis` E1 artifact, `city` E0 **honest**, and `city` E0 is the mark on the judged
+plate), so a cure taken on the artifact branch as the chair briefed it would have smoothed a
+true circuit. Also judged: that the enclosure operator stays OWNER-PARKED rather than being
+un-parked the way the needle was (§719.6); that both innocent explanations for the wall's
+empty interior are refuted (§719.5); and the chair's acceptance that its own addendum's
+premise was wrong (§719.4).
+*What Fable re-derives:* ⛔ **(a) THE DISCRIMINATOR ITSELF, because everything rests on it.**
+The split turns entirely on stretch / trim-15 collapse / max axis gap over the raise-epoch
+piece set — a measure this lane invented for this question. `city` E0 is called honest on a
+trim loss of 9 % against `metropolis` E1's 85 %. **Is that measure sound, and is the honest/
+artifact line drawn in the right place?** If it is wrong in the permissive direction we keep
+a defect; if wrong in the strict direction we erase a real circuit. **(b)** the ρ = 0.82
+convexity correlation over only **9 distinct leaves**, with three negative gaps the lane
+attributes to its own collar bias — is the correlation real or is the measure leaking?
+**(c)** the LOSSREGION-zero-on-12-of-13 result, which is what refutes honest decline: is
+zero LOSSREGION genuinely evidence of no decline, or evidence that decline is not being
+CLASSED (REG-D found decline invisible on 16 of 18 pages)? **That alternative reading would
+overturn §719.5 and the chair did not weigh it.** **(d)** whether §719.6 is the right call or
+whether the chair, having just been burned for un-parking one fence, is now over-correcting
+into deference on a cure its own evidence says is safe.
+*Receipts:* `refs/preserve/map-sandbox-e1-needle` = `1c3633c16` ·
+`refs/preserve/map-sandbox-regf0` = `dea9239d0` · `laneE1-receipt.md` · ODQ §719 · the two
+chair addenda sent mid-flight.
+*Priority:* **P0** on (c) — it is a possible false refutation that the chair has already
+acted on. **P1** on (a) and (d). **P2** on (b).
+*Chair's own note:* this row exists because a lane refuted the chair by measurement and was
+right. §718's row asks whether the chair was too conservative in refusing the owner; this one
+asks whether the chair was too bold in un-fencing the needle. **Both were the same chair on
+the same day, and Fable should read them together.**
+
 **§718 · Emergent population REFUSED under returned judgment; the convex-hull enclosure; four corrections to the record · SEAT: Opus 5.**
 *What was judged:* the owner returned the emergent-population decision to the chair
 ("I leave it to your judgement") and the chair **refused it** (§718.2), ruling that the

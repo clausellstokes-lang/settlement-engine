@@ -31004,3 +31004,102 @@ fourth sighting, taken at collection).
   now only the wiring**, and it has grown: it must carry `fabric/` to the build branch and give the
   fold an application consumer, because **until the epoch build is what the product runs, none of
   this reaches a reader.** That remains the owner's flag.
+
+## §719 · REG-E1 REFUTES THE CHAIR'S RE-CLASSIFICATION — THE NEEDLE SPLITS, AND THE MARK ON THE JUDGED PLATE IS HONEST HISTORY THAT A BRIEFED CURE WOULD HAVE ERASED (2026-08-26 ~19:30 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§719.1 THE SEAL.** `refs/preserve/map-sandbox-e1-needle` = **`1c3633c16`**, base `dea9239d0`.
+  Five instruments under `harness/laneE1/` plus 89 lines extending an existing test file —
+  **753 lines added and `git diff --name-only -- src/` returns ZERO files**, so dormancy,
+  determinism and every byte/op pin are unmoved by construction rather than by measurement.
+  Wrap digest unmoved on both arms. The car cures nothing; it is a diagnosis and a ceiling.
+- **§719.2 ⛔⛔ MY §717.10 RE-CLASSIFICATION IS REFUTED ON ITS OWN STATED GROUND, AND ACTING ON IT
+  WOULD HAVE FALSIFIED LIVED HISTORY ON THE VERY PLATE THAT PROMPTED IT.** I un-fenced the needle
+  arguing *"it is now visible on `city` too; a defect that generalises across tiers is evidence of a
+  drawing rule."* **It does not generalise — the two marks are different phenomena**, and the
+  discriminator is not aspect ratio but **where the length comes from**:
+
+  | leaf · circuit | aspect | raise-epoch pieces | span | **stretch** | **trim-15 loss** | verdict |
+  |---|---|---|---|---|---|---|
+  | `metropolis` E1 | 22.79 | 135 | 708.6 | **2.73** | **85 %** | ⛔ ARTIFACT |
+  | `metropolis` E0 | 4.05 | 17 | 122.3 | 1.03 | 4 % | ⛔ ARTIFACT (two clumps) |
+  | **`city`/`migration` E0** | 3.73 | 73 | 252.9 | **1.04** | **9 %** | ✅ **HONEST** |
+
+  `metropolis` E1 is a ~110-unit core stretched ~6.6× by ~30 outlying pieces in three detached
+  clumps — drop the outer 15 % and 85 % of its length disappears. **`city` E0's length is carried by
+  the whole piece set: the town of year 5 really was that long.** ⛔⛔ **And `city` E0 is the mark on
+  the round-6 judged plate — the one four readers flagged and the one I pointed the owner at.** It is
+  inked as a filled `dress-band` with 9 towers, 5 gatehouses and 104 coursing patches. **A cure taken
+  on the artifact branch as I briefed it would have smoothed a true circuit.** The fence was right
+  about `city`; only `metropolis` was ever a defect. ⭐ **The fork in the brief is what saved it** —
+  the lane was told to stop and report if the circuit was real, and it did.
+- **§719.3 ⭐ THE RESAMPLE IS INNOCENT AND THE HULL IS THE PRODUCER.** `facetRing` moves
+  `metropolis` E1's aspect by **+3.29 %** against a hull already at 22.07, so the facet economy is
+  exonerated — the producing call is `partitionConstruct.js` `raiseWrap`, `const hull =
+  convexHull(pts)`. ⭐⭐ **And a snug enclosure is measured to be safe**: it would collapse
+  `metropolis` E1 from 709 units to ~110 **while leaving `city` E0 elongated.** It removes fabricated
+  length and preserves real length. **The safety objection to curing is therefore gone.**
+- **§719.4 ⛔⛔ MY OWN ADDENDUM'S PREMISE WAS ALSO REFUTED (J-E1-7), AND THIS ONE CHANGES THE SHAPE
+  OF THE CURE.** I told the lane the reference's mechanism *"is NOT portable wholesale and you must
+  not propose deriving our wall from our built set."* **We already derive the wall from our built
+  set.** Only the *year* and the *radius* come from the record; the trace is a hull of live faces.
+  ⇒ **The difference between us and the reference is one operator — convex hull versus snug
+  enclosure — not an architectural gulf.** I described a gap that was not there and warned a lane off
+  the very move that fixes it.
+- **§719.5 ⛔⛔ THE ENCLOSURE EMPTINESS IS NOT HONEST — BOTH INNOCENT EXPLANATIONS ARE REFUTED BY OUR
+  OWN RECORD.** The decomposition I demanded came back decisive. **(a) Convexity is the dominant
+  cause, CONFIRMED at Spearman ρ = 0.82** between the convexity gap and the open share across the 9
+  distinct leaves. **(b) "Honest optimistic walling" is REFUTED on 11 of 13**: the ledger's own
+  saturation reads **1.81–3.97 — two to four times *over* capacity — on plates that are half ploughed
+  field.** Only `year-018` (0.66) and partly `highwater` (0.71) are honest. **(b′) "Honest decline" is
+  REFUTED by the discriminator I supplied**: **zero LOSSREGION faces inside the wall on 12 of 13
+  leaves**, 1.3 % on `highwater` alone. **(c) There is no pomerium** — the open-share ratio is below 1
+  on 12 of 13 and **0.00 on `city`**. ⇒ **The emptiness is in the MIDDLE, which is the hull's
+  signature and the exact opposite of the reference's ring of open ground at the wall.** ⚠ One honest
+  narrowing from the lane: the interior is **not bare parchment** — `projectPage` pushes every FIELD
+  face into `page.fields` and the dress draws tone *and* furlong grain, in faces 5×–65× a piece. **We
+  have farmland inside the wall at block scale.** That is a different defect from blankness and may
+  be a different cure.
+- **§719.6 ⛔ THE ENCLOSURE OPERATOR IS THE OWNER'S — IT IS PARKED, AND PARKED IS A CARVE-OUT.**
+  The lane did **not** cure, and its reason is not the one I gave it: **DESIGN_SPINE §8 P2 parks the
+  enclosure operator**, and *anything the owner has explicitly parked* is owner-gated by nature under
+  the delegation grant. So this is not mine to un-park the way §717.10 was mine to re-classify — and
+  §719.2 is a fresh demonstration of what happens when I decide a fence is stale from the outside.
+  **Four options are priced in the receipt. The owner un-parks or does not.** ⭐ What has changed is
+  the evidence behind the decision: the safety objection is measured gone (§719.3), both innocent
+  explanations for the emptiness are refuted (§719.5), and the change is one operator rather than an
+  architecture (§719.4).
+- **§719.7 `frozenRadius` HAS TWO INCOMPATIBLE MEANINGS AND NOTHING REDS — §711.6, THIRD INSTANCE,
+  AND MY §718.4(a) CORRECTION WAS ITSELF HALF-RIGHT.** I recorded that it is a centroid filter and
+  not a radius. **It is a centroid filter at the constructor AND it is read as the circuit's radius by
+  `growthLedger`'s capacity accounting — which is what `saturation` is — and by its monotonicity
+  invariant, its extent share, and `wallPublication`'s working margin.** One field, four consumers,
+  two meanings. ⚠ **This bears directly on CAR-FOUND's saturation cure, which is in flight**: the
+  quantity it is fixing is denominated on a field whose meaning is contested. Sent to that lane.
+- **§719.8 FOUR NON-CURE FINDINGS THE LANE TRIPPED OVER.** `f.cls === 'BLOCK'` at the hull filter is
+  **dead** (only PLOT/VOID on 17/17). The `hold` clamp is **dead by construction**, so
+  `clampedFacets: 0` proves nothing — a zero that reads as a pass. `plague`, `famine` and `siege`
+  **reproduce `town`'s partition byte for byte**, which re-confirms §696.4's four-plates-one-map
+  finding at the partition rather than the page. And the vacuous ternary at `growthLedger:594` is
+  **always true**, so making it live would flip **every first circuit** to `'recorded'` — a
+  one-character change with a corpus-wide consequence.
+- **§719.9 THE LANE WITHDREW TWO OF ITS OWN ARGUMENTS IN WRITING BEFORE PUBLISHING**, because an
+  honestly narrow town reads identically under both: the *"zero circuits are `recorded`"* count (the
+  enum is a hard-coded literal) and the `inR/R` under-realisation figures. **Only the
+  stretch/trim/gap measure discriminates.** ⭐ That is the transferable result of this whole car:
+  **a long thin RING and a long thin TOWN are indistinguishable on every shape census we own** —
+  aspect, span, area, vertex count all agree. The question that separates them is *where did the
+  length come from*, and nobody had asked it. It cost four readers, two censuses and a fence.
+- **§719.10 THE GATE, STATED HONESTLY BECAUSE IT IS NOT CLEAN-GREEN.** Base `dea9239d0`: 20 files /
+  **523 tests, 6 failed in 4 files**. Tip `1c3633c16`: 20 files / **524 tests, 4 failed in 3 files** —
+  a strict **subset** of base's, all at 20.6–22.7 s against a 20 s default, and **all four pass at
+  `--testTimeout=180000` (3 files / 132 tests / exit 0)**. CONFIRMED contention timeouts, pre-existing
+  and not the lane's. ⚠ **The contention is mine**: I dispatched four concurrent lanes onto one
+  machine, and the cost has now shown up as a gate that cannot be read at its default timeout. **Not
+  a reason to stop, but the four-lane rule needs a timeout floor attached to it**, and I am recording
+  that rather than treating a subset-of-base red as free.
+- **§719.11 A PROCESS DISCLOSURE FROM THE LANE, VOLUNTEERED.** A skeptic subagent it dispatched had a
+  helper read `OWNER_DECISION_QUEUE.md` and `FABLE_RETROVALIDATION_QUEUE.md` **in the main checkout** —
+  read-only, tree unmodified, but outside the brief's boundary. The lane did not rely on those quotes
+  and re-sourced every citation. ⭐ Recorded because it was disclosed unprompted, and because it
+  identifies a real gap: **my briefs bound the lane and say nothing about the lane's own subagents.**
+  Adding that clause.
