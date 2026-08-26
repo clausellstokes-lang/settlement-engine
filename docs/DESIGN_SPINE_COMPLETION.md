@@ -77,6 +77,20 @@ separately; the L4 MF-A1 paint pass integrates at DRESS-2's end (the recovered
 module paints over honest ink; wrap-count preconditions per A2.2's old pin).
 
 ## §2 · REGISTERS/ZOOM (the REG-10-class wave)
+⛔⛔ **STRUCK AND RE-SCOPED §712.6 — MEASURED, NOT SUSPECTED. THE LADDER IS `page → plot`.**
+**Zero WARD and zero BLOCK faces exist on all 18 leaves, and the absence is STRUCTURAL**: a scan
+of 161 face/piece write sites finds no path anywhere that writes either class, so a re-measure
+returns zero forever. **Ward's one earned quarter is EMPTY** (children 0, subtreeFaces 0, area 0)
+and every plot resolves to the root ward on 18/18. **Block needs no face** — its pieces are
+contiguous on 95.7–100 % with p50 compactness 1.00 — and ⭐ **the page ALREADY draws at block
+grain**: page→block fan-out is 1.00–1.33× (median 1.04×) against page→plot's 3.7–4.5×. **The
+substrate has TWO grains, not four.** The three exits below (zoom-continuity census · per-rung
+byte budgets · A1.6 reveal performance) are **deferred for want of a SUBJECT, not of effort**,
+and the one real rung is **not wired to the drawing** (`renderFolio` imports no `partitionView`)
+— **that wiring is the PORT's**, so this wave's content collapses into REG-P. A true four-rung
+ladder needs the legacy district cells joined to the spine: §708.2's C2, a substrate act,
+already on the docket.
+
 The reveal ladder on partition frames: page → ward → block → plot, driven by the
 identity law (every mass resolves; zoom dissolves masses into plots into buildings;
 "then DW's interiors" when DW lands). A4's tiered budgets bind per rung. Monument

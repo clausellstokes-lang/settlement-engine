@@ -87,6 +87,14 @@ never on the page the argument depends on. **A safety net with a hole in it is w
 none, because it is trusted.** Both are listed here as UNMINTED-PENDING-ON-SHEET and must
 carry their measured values and basis before the tuning pass reads this page.
 
+## ⛔⛔ THE BYTE CEILING IS NOT ENFORCED BY ANYTHING (found §712.8)
+**There is NO enforcing constant behind the 830,000 B metropolis ceiling — or any tier's.**
+The table above is prose that instruments quote and nothing checks. The chair quoted headroom
+against it in five consecutive collections as though something did. ⚠ **Two consequences:** a
+wave can exceed a ceiling and still report green, and every "N of 830,000" figure in the
+ledger is a *hand comparison*, not a gate result. **An enforcing pin is owed before the port**
+— and until it exists, cite these ceilings as targets, never as gates.
+
 ## OWNER-SIGNED (standing, untouched by this program)
 The dwellings bands B0–B21 and the POWERS schema (law/SIGNED-BANDS-2026-08-23.md) ·
 THE PROMISE and every constitutional law above this sheet. The TUNING SIGNATURE

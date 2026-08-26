@@ -30408,3 +30408,69 @@ casing device **all untouched**. ⚠ And my `classify.mjs` worry is **measured a
   **Declared shifts:** metropolis dress **−2 B**; `plague`'s CITED element-diff **7 → 10**,
   because the roster is now the **drawn circuit's three gates** rather than the legacy two.
   Four mutation controls convicted; source restored byte-identical, sha verified.
+
+## §712 · REGISTERS/ZOOM IS REFUTED AND STRUCK — THE SUBSTRATE HAS TWO GRAINS, NOT FOUR, AND NOTHING WAS BUILT (2026-08-26 ~17:30 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+**The car built nothing, moved no ref, changed no repo byte, and that is the finding.** It
+executed the base gate **in-turn (20 files / 493 tests, 538 s)** rather than inheriting the
+handed figure — the discipline this arc has been asking for, applied to its own baseline.
+
+- **§712.1 §708.3 IS CONFIRMED, AND THE ABSENCE IS STRUCTURAL.** **Zero WARD and zero BLOCK
+  faces on all 18 leaves** (town `WARD 0 · BLOCK 0 · PLOT 1198 · VOID 68 · WAY 287 · FIELD
+  200`; metropolis `0 · 0 · 2756 · 215 · 600 · 359`). ⭐ **A scan of 161 face/piece write
+  sites across `src/`, `harness/` and `tests/` finds NO PATH ANYWHERE that writes a face
+  class of `WARD` or `BLOCK`** — they are reserved spellings minted only as pieces. **Any
+  future re-measure returns zero for the same reason**, so this is settled rather than
+  observed.
+- **§712.2 WARD IS WORSE THAN §708.3 KNEW: THE EARNED QUARTER IS EMPTY.**
+  `distinctWardsOverPlots = 1` on **18 of 18** — every plot resolves to the root ward — and
+  the one quarter piece carries `children 0, subtreeFaces 0, area 0`. **Not mislabelled
+  territory. No territory.**
+- **§712.3 ⭐ BLOCK IS REFUTED IN THE OTHER DIRECTION — BY ASKING §710.6's QUESTION INSTEAD OF
+  THE EXISTENCE ONE.** Block *pieces* are contiguous on **95.7–100 %**, compactness p50
+  **1.00**, hulls disjoint (≤1.1 % of pairs). **A block is a FRAME; it needs no face.**
+  §708.3's implication — that the missing BLOCK faces were a defect — is struck.
+- **§712.4 ⭐⭐ THE KILL: THE PAGE ALREADY DRAWS AT BLOCK GRAIN.** Every plot-holding block is
+  covered by a mass on **18 of 18**; a block splits across two masses **once, on one leaf**.
+  **Page→block fan-out is 1.00–1.33×, median 1.04×**, against page→plot's **3.7–4.5×**.
+  ⇒ **THE SUBSTRATE HAS TWO SEPARATED GRAINS, NOT FOUR.** At town: page (1) → {island 216 ·
+  mass 297 · block 317} → plot 1198 — **everything between page and plot sits inside a 1.5×
+  band.** Ward is absent; block is redundant. **`page → plot` is the whole ladder**, and now
+  with a mechanism rather than a suspicion.
+- **§712.5 AND THE ONE REAL RUNG IS NOT WIRED TO THE DRAWING.** Two further blocks to any
+  build: **no scale→content coupling exists anywhere** (`useMapCamera` is a CSS transform;
+  `LOD_RUNG` is a *tier* dial, not a zoom dial), and **`renderFolio` never imports
+  `partitionView` nor mentions `projectPage`.** The charter's exit *"the reveal pipeline's
+  performance"* **has no pipeline.** ⭐ That wiring is **the PORT's** — §707's deferred row
+  already records that the folio switches at the port — so the ladder's real content
+  **collapses into REG-P** rather than standing as its own wave.
+- **§712.6 RULED — §2 IS STRUCK AS A WAVE AND RE-SCOPED.** `DESIGN_SPINE_COMPLETION` §2's
+  "page → ward → block → plot" is amended to **page → plot**, with its three exits
+  (zoom-continuity census · per-rung byte budgets · A1.6 reveal performance) **deferred for
+  want of a subject, not for want of effort.** A genuine four-rung ladder needs the legacy
+  `umbrella.partition` district cells joined to the spine — **that is §708.2's C2, a
+  substrate act, and already on the docket.** **The arc advances to WORDS.**
+- **§712.7 ⛔⛔ THE §711.6 CLASS, SECOND SIGHTING — AND THIS TIME THE ERROR INVERTS BY TIER.**
+  **`OP_CEILING = 2200` is declared in two files with two meanings**: in `renderFolio` as
+  "the floor of the ladder" (**never read**) and in `fields.js` as *"the op ceiling the whole
+  leaf is drawn inside"* — **which is LIVE, and is the sole basis of the countryside budget.**
+  The real ceilings are **9,300 / 10,100 / 14,200**. Executed: **thorp 2.20× over-generous ·
+  town under by 4.2× · metropolis under by 6.5×.** **The countryside receives 0.70 % of the
+  metropolis ceiling where `COUNTRYSIDE_SHARE` claims 15 %.** ⭐ **Correctly NOT touched:
+  `FIELD_OP_SHARE` rides the tuning signature, which is the owner's.** → OWNER DOCKET.
+- **§712.8 ⛔ AND A FINDING THAT LANDS ON MY OWN REPORTING: THE 830,000 B CEILING EXISTS ONLY
+  AS PROSE.** There is **no enforcing constant** behind it. I have quoted byte headroom
+  against that ceiling in five consecutive collections as though something checked it.
+  Nothing does. → SIGNED_CONSTANTS row and docket.
+  Reported and not fixed: **one plot count with THREE readings**, diverging on 14 of 18 (town
+  1210/1198/1195; highwater 1656/1134/1129) and `partitionConstruct:1124` **predicting the
+  wrong direction** · **three live predicates testing `f.cls === 'BLOCK'`, all unreachable**
+  · the roster calling two undrawn wards "drawn" · `exemplars.mjs`'s 4,600 **three raises
+  stale** with a vacuous seed rationale · `projectPage`'s JSDoc wrong in both directions ·
+  one boolean driving two systems that never meet.
+- **§712.9 IT CORRECTED ITSELF TWICE, IN-TURN.** Its island rung "looked head-degenerate"
+  until a **five-set barrier sweep** showed that was a leaky-barrier artefact (head-share
+  ≤11 % on 14/18 with FIELD as a barrier); and its stated **mechanism** for masses ≤ blocks
+  was wrong, and measurement replaced it. ⭐ **And of twelve arms it labelled TWO as
+  REGRESSION rather than discovery** — §711.4's law applied one wave after it was written,
+  by a lane that was not the one that wrote it.

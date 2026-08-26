@@ -226,6 +226,21 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§712 · REGISTERS/ZOOM struck and re-scoped; nothing built · SEAT: Opus 5.**
+*What was judged:* striking a chartered wave on a lane's measurement; amending the completion
+document's §2 from a four-rung ladder to `page → plot`; collapsing the remaining rung into
+REG-P; and routing the countryside-budget defect to the tuning pass rather than curing it.
+*What Fable re-derives:* **(a)** the strike itself — a chair deleted one of its own chartered
+waves on one lane's census. The census is strong (161 write sites scanned, absence shown
+structural) but it is **one lane, one base, unreplicated**. **(b)** whether "a block needs no
+face" is sound or convenient: it justifies not building the thing the wave existed to build.
+**(c)** §712.8 lands on my own reporting — **the byte ceilings are prose that nothing
+enforces**, and I quoted headroom against them in five consecutive collections. Sweep what
+else I have reported as a gate result that is actually a hand comparison.
+*Receipts:* ODQ §712 · `$SP/laneRZ/RECEIPT.md` with its instruments and five `*-base.json` ·
+the in-turn base gate (20 files / 493 tests, 538 s).
+*Priority:* **P1** on (a) and (c).
+
 **§711 · STATE-BRIDGE ratified; §710.6 closed · SEAT: Opus 5.**
 *What was judged:* all fifteen J-SB calls RATIFIED; accepting the third-layer architecture
 (a domain pass reading the projected page) as the right cure where I had ruled out two others;
