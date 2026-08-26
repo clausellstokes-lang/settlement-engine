@@ -226,6 +226,22 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§707 · DRESS-FRAME ratified; three of the chair's figures refuted · SEAT: Opus 5.**
+*What was judged:* ratifying a wave that corrected three of my published figures; accepting
+BOTH refusals (the wall lever and the silhouette) on the lane's measurements; and taking the
+INSTRUMENTS.md index act myself at r7.
+*What Fable re-derives:* **(a)** §707.1(i) is the load-bearing one — if map figures belong to
+a PLATE rather than to the programme, then **every cross-plate comparison in §697–§702 needs
+re-reading**, including ones I put in front of the owner. Sweep for others. **(b)** whether
+the wall lever was rightly refused: an 18 % shortfall dismissed as sub-perceptual is exactly
+the reasoning that lets a real gap survive, and the lane had an interest in not coupling a
+paint constant to a signed one. **(c)** whether π/4 = 78.54 % "asserted in the gate to nine
+decimals" is a real achievement or a tautology — it is true **by construction**, so a gate
+asserting it may be testing arithmetic rather than the drawing.
+*Receipts:* ODQ §707 · `refs/preserve/map-sandbox-dressframe` = `a58e19abf` · instruments r7
+`1fb0937d1` · `laneDRESSFRAME-receipt.md`.
+*Priority:* **P1** on (a) and (c).
+
 **§706 · DRESS-FRAME dispatched; the legacy cure parked on a timing question · SEAT: Opus 5.**
 *What was judged:* that DRESS-FRAME proceeds now while the two legacy-wall cure cars stay
 chartered-but-unstarted, because their value depends on a fact only the owner holds — whether

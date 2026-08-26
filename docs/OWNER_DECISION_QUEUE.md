@@ -29997,3 +29997,92 @@ wrap digest `e65c7685…` identical at base and tip.**
   ⚠ **Twice in three ticks is a pattern, not an accident**: the handoff goes stale precisely
   when collections come fast, which is exactly when a successor is most likely to arrive.
 
+## §707 · DRESS-FRAME SEALS — THE PAGE IS FITTED, THE COUNTRYSIDE GOES QUIET, THE GATE RENDERS AT LAST — AND THREE OF MY FIGURES WERE WRONG (2026-08-26 ~20:40 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+**RATIFIED.** Sealed `refs/preserve/map-sandbox-dressframe` = **`a58e19abf`** (base
+`9c7261829` verified ancestor; 9 modified, **0 added, 0 deleted**; all 78 tracked `out/`
+files intact). **Gate 19 files / 450 tests EXIT 0** (base 439; **+11 tests, no new test
+file**). Folio dormancy **29/29** byte-identical with a convicting one-byte plant · dress
+determinism **18/18** · **boundary held: wrap digest `e65c7685…`, wraps 17, ringVerts 884 —
+identical at base and tip** · all 9 committed blobs verified equal to the files the gate ran.
+
+- **§707.1 ⛔⛔ THREE CORRECTIONS TO MY OWN RECORD, ALL MADE BEFORE ANY CURE.**
+  **(i) §701.2's "field 49–68 % / settlement 1.7–6.9 %" IS A DRESS-PAGE FIGURE, NOT A FOLIO
+  ONE.** i14 masks exclusively on `dress-*` group ids — **point it at a folio render and every
+  mask reads zero** — and the `metropolis 690,324` byte pin executes on `renderPage.mjs`.
+  ⭐ **That is exactly why §702.6 could not reconcile our framing constants with the measured
+  share: the constants and the number belong to two different plates.** ⚠ **And it means the
+  comparison I put in front of the owner — the old Kitaqiao folio beside the new plate — was
+  across two different surfaces.** The observation (a town adrift in a green disc) was true of
+  the dress page I looked at; the figure was never a folio figure.
+  **(ii) "WE DO NO FRAMING AT ALL" (§702.1) IS WRONG.** The dress page **did** frame — **to
+  the hinterland**: `frameOfPartition` bboxed every arrangement vertex, and the outermost is
+  the FIELD disc seeded at **1.45 × builtRadius**, so the frame was exactly `2 × 1.45 ×
+  builtRadius` on all 18 leaves (thorp 286.80 = 2 × 143.40; metropolis 1281.22 = 2 × 640.61).
+  **Not absent framing — framing computed from the countryside.**
+  **(iii) "OUR WALL IS ~⅓ THE REFERENCE'S WEIGHT" (§702.4ii) IS WRONG.** `0.300` is a
+  **stroke multiplier**; the reference's wall is a **bare stroke**, so its 0.90 **is** its
+  total, while ours is a stroked **band**. Measured on all 13 walled leaves: **total drawn
+  width ÷ road width = 0.72–0.78 against 0.90–0.95 — an 18 % shortfall, not 68 %.** And
+  `INK.wall` is **clamped at its 1.80 floor on every walled leaf**, so the 0.300 multiplier
+  is not even the number producing today's value. **I compared a multiplier to a total.**
+- **§707.2 THE FRAMING SHIPPED — AND THE HEADLINE NUMBER SPLITS IN TWO.** **The settlement's
+  own disc is π/4 = 78.54 % of every plate on all 18 leaves, asserted in the gate to nine
+  decimals** — the reference's square-page row reproduced, **tier-invariant by construction**.
+  ⛔ **Its INK share is not, and framing cannot make it so:** `settled/page` moves
+  **1.72–6.98 % → 3.01–27.14 %** and the spread **WIDENS ×4.06 → ×9.02**, because the residual
+  is *how much of its own enclosure a settlement fills* — **a fabric property, not a framing
+  one.** The reference-comparable measure is the enclosure polygon's share of the plate:
+  **ours 15.4–49.0 % against the reference's implied 47–59 %**, with **`city`/`migration` at
+  49.0 % — in band**, town 37.8, highwater 45.7, and **the low end is the metropolis needle,
+  an owner signature the lane correctly did not touch.** Zooms **1.53–2.73×** on enclosure
+  leaves and **1.45× uniformly** on open ones — our own seed ratio, framed at 1×.
+- **§707.3 THE LAW IT SHIPPED, AND THE TWO SPELLINGS THAT FAILED FIRST.** *A settlement's
+  bound is its **enclosure** where it has one and its **own built extent** where it has none;
+  2R is set to the page's short side; the countryside is never consulted; no margin constant.*
+  ⭐ Both failures are recorded **in the source**, which is where they belong: bounding by
+  drawn bodies about their **centroid** put the thorp's page 378 units wide about a point 47
+  off origin **when the countryside is a disc only 287 wide — the fitted page ran out of
+  ground.** *A frame centred on content can leave the ground that content stands on.* Bounding
+  about the **origin** fixed that and bought nothing (thorp zoom 1.00×): *a settlement whose
+  only bodies are scattered farms has no bound to find by looking at them.*
+- **§707.4 THE COUNTRYSIDE WAS DARKER THAN THE TOWN'S OWN GROUND — AND AN UPSTREAM FIX MOVED
+  THE INSTRUMENT THAT HAD BLOCKED IT.** `field` sat at luminance **0.3171 against
+  `plotGround`'s 0.5121**. §701.5 **withdrew** this cure because i5's `water:ground` had only
+  1.9 % headroom. ⭐ **Fitting the page multiplies i5's urban envelope** (town `groundPx`
+  32,782 → 112,067), so `water:ground` goes town **1.3745 → 1.7987** and city **1.4897 →
+  1.6856** — **headroom 1.9 % → 33 %**, and the withdrawn cure ships. **A generalisable
+  lesson: a blocked cure may be waiting on an upstream change rather than on a better idea.**
+  It ships as a **solved alpha**, moving no declared tone and relaxing no census — parchment
+  `field:paper` **2.138 → 1.085** against the reference's 1.00; darkFantasy solves to α = 1
+  and is untouched. **⛔ L-REG-33 WAS NEVER APPROACHED: `fabric.fields` is byte-identical on
+  all 18 leaves.** Free consequence: **`wall:all` rose 5.68 → 7.54 (town) and 4.84 → 6.33
+  (city) with the wall untouched** — the ratio the lane then declined to chase.
+- **§707.5 TWO REFUSALS, BOTH PRICED RATHER THAN DECLINED.** The **wall lever** per §707.1(iii)
+  — an 18 % line-weight change sits **below the perception threshold the study's own R-DEVLOG
+  A9 calls waste**, closing it would couple a paint constant to a **signed fabric constant**,
+  and §707.4 already delivered what the lever was for. The **paint-order silhouette has no
+  subject on this page**: our masses are **already single silhouettes** (`projectPage`
+  dissolves at geometry time), the seams that exist are `dress-unitlines` — **a
+  legend-taught mark the reference also keeps for ordinary fabric** — and the count is
+  **unchanged: 22,876 unit lines over 4,880 masses.**
+- **§707.6 ⭐⭐ THE GATE ARM LANDED, AND IT PROVED ITSELF BY REPRODUCING §703.4 VERBATIM.** Six
+  arms in an **existing** file build all 18 leaves once and drive **both** renderers off that
+  build (~42 s), asserting a complete roster first, well-formed plates, no
+  `NaN`/`Infinity`/`undefined` in either markup, every `d=` coordinate finite (>100,000
+  read), and no leaf falling back. **THE PROOF: §703.4's crash was re-planted; the whole gate
+  EXCEPT this file ran 18 files / 416 tests EXIT 0 — GREEN — while the arm went RED** on
+  `linePath(undefined)` at `partitionDress.js:132`. **The arm is the only thing in the gate
+  that sees it.** Cure restored, diff clean before the final gate.
+- **§707.7 BYTES, HONESTLY: +329 corpus-wide (+0.0059 %)** — cause named as the
+  `fill-opacity` attribute plus a few reframed viewBox digits. ⚠ **Nothing was culled, so the
+  off-page saving I anticipated did not arrive**; metropolis 690,324 → 690,335 (83.17 %).
+  Ops and primitives unmoved on every leaf. Off-page culling is **deferred with its hazard
+  named** (a straddling body must not be dropped).
+- **§707.8 CHAIR ACT OWED: `INSTRUMENTS.md` LAGS ITS OWN CODE BY ONE INSTRUMENT.** i14 sits in
+  the r6 seal **with no index row and no baseline inside the ref** — its only recorded
+  readings live in another session's scratchpad. **The same class as §690.4(ii)**, one
+  instrument later. Taken by the chair at r7, not left to a lane.
+  Also reported and untouched: the **metropolis needle**, `leafInputs.mjs:10`'s `extent=NaN`.
+  Deferred: **the folio's own framing** — `fitFrame` is exported and applies unchanged; **the
+  folio switches at the port**, so the two plates converge there rather than now.
