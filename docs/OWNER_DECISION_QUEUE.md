@@ -29416,3 +29416,58 @@ PA.10 permits). Nothing was edited, staged, or moved by any of them.
   by a drawing that would still lose a beauty contest to the pre-spine folio**, and §591's
   totality law means the weakest element still grades the map. Recorded so no one reads
   94.4 % as "the map is finished."
+
+## §697 · WHY IT DOES NOT LOOK LIKE THE REFERENCE — THE FABRIC IS ATOMISED WHERE THE DESIGN SAID TERRACED, AND THAT IS THE WHOLE GAP (2026-08-27 ~03:30 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+Owner asked, seeing the new city beside a pre-spine folio: *"How come ours doesn't look at
+the very least watabou?"* Answered from a close crop of our own city plate against the
+measured dissection captures, not from impression.
+
+- **§697.1 THE REFERENCE'S MEASURED NUMBERS** (dissect/*.json, §663–§665): Everrise Gate
+  (size-25 city) = **616 buildings, ~700 polygons on the whole page, 41 fields**; Grimfall
+  (size-40) = **6,481 buildings** with the size band **INVARIANT** (p25 161 · p50 212 · p75
+  275 — *ten times the buildings, same band*) and **zero fields**. Style constants:
+  **`roadWidth 8` · `wallThickness 7.6` · `towerRadius 7.6` — three numbers.** Building
+  vertices 4–10, mean **4.3–4.6**: irregular quadrilaterals, varied angle and size.
+- **§697.2 ⛔ THE FINDING, FROM OUR OWN CROP: WE DESIGNED TERRACES AND DREW DETACHED
+  HOUSES.** At close range our fabric is **small brown rectangles of near-identical size and
+  orientation, set in a regular orthogonal lattice, each separated on ALL FOUR SIDES by a
+  white gap as wide as the building itself.** The reference's fabric is **continuous**:
+  buildings share walls, and white appears only where a street actually runs. **Ours is
+  atomised.** The page therefore reads as graph paper with brown cells rather than as a
+  built-up place — and *no amount of later dress fixes that*, because furniture, labels and
+  relief all land on top of a fabric that is already reading as lattice.
+  ⚠ **This CONTRADICTS THE SPINE'S OWN DESIGN INTENT**: PA.6 ruled *"the run = the eaves
+  line"*, A1.2 requires member unit-lines **inside** a mass, and the page unit is the
+  **party-run** (2.7–4.6 rw²). A party-run is by definition a *terrace* — one continuous
+  mass with its members ruled inside it. What is drawn is one rectangle per member with
+  street-width air between them. **Either the dress is drawing per-member instead of
+  per-run, or the runs are of length 1** — and which of those it is decides whether this is
+  a dress defect or a substrate one.
+- **§697.3 THE THREE MEASURABLE GAPS BESIDE IT.** **(i) WHITE-TO-INK RATIO** — the reference
+  spends its page on buildings; ours spends roughly as much area on inter-building white as
+  on fabric. **(ii) UNIFORMITY** — theirs varies 4–10 vertices with a p25→p75 area spread of
+  nearly 2×; ours is one rectangle repeated at one angle. The reference's *variation* is
+  what reads as organic; our *regularity* reads as generated. **(iii) THE PAGE'S BUDGET** —
+  Grimfall gives its entire sheet to the town (zero fields); our page is a **saturated green
+  countryside disc with a settlement in the middle**, and the loud chevron ground-hatch
+  competes with the fabric it should sit behind.
+- **§697.4 WHAT IS *NOT* THE CAUSE, SO NOBODY CHASES IT.** Not polygon budget: the reference
+  draws a legible city in **~700 polygons**, and our city carries **1,753 plots** — *we draw
+  MORE shapes and get LESS town.* Not the wall (it reads correctly — the round-3 reader
+  scored walled 18/18). Not the water body. Not our representative 1:3.8 fabric ratio per se
+  — 616 buildings sufficed for a whole city at the reference. **The deficit is packing and
+  variation, not count.**
+- **§697.5 CHARTERED — `DRESS-FABRIC`, and it is now the highest-value dress car in the
+  arc.** Its exits: **runs draw as continuous masses with hairline party divisions**, white
+  appearing only at real WAY edges · **a size/angle variation band derived from the
+  reference's measured spread** (a *band*, never a stamp — §600's grammar law) · **the
+  ground hatch demoted below the fabric in the value hierarchy** · and an **ink-to-white
+  area ratio census** with the reference's measured figure as its target, so this is settled
+  by measurement rather than by eye next time. ⚠ It runs **after SPINE-3 seals** and after
+  §697.2's per-member-vs-per-run question is answered, because if the runs are length-1 the
+  cure is in the partition, not the paint.
+- **§697.6 THE HONEST BOTTOM LINE FOR THE OWNER'S QUESTION.** The gap is **not** "we have
+  not finished dressing." It is a **specific, measurable, fixable craft defect in the one
+  layer that carries the page**, and it was invisible until the ink existed to expose it —
+  which is, again, exactly what dress is for.

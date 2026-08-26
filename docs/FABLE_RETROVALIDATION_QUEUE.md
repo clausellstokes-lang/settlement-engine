@@ -226,6 +226,19 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§697 · The reference-gap diagnosis; DRESS-FABRIC chartered · SEAT: Opus 5.**
+*What was judged:* that the aesthetic gap to the reference is **packing and variation, not
+count**, and that our fabric contradicts the spine's own party-run intent; the charter and
+its exits; and the deferral of the cure until the per-member-vs-per-run question is settled.
+*What Fable re-derives:* **(a)** the diagnosis itself — it was made from ONE crop of ONE
+plate against two reference captures, which is thin evidence for a claim that re-aims the
+dress programme. **(b)** whether "the deficit is packing, not count" survives measurement at
+other tiers, or holds only at city. **(c)** whether taking the reference's variation band as
+a target is emulation or imitation — the clean-room line (§668/§673) permits ideas and
+mathematics, and a measured *band* is close to that boundary.
+*Receipts:* ODQ §697 · `$SP/round3/crop-fabric.png` · dissect/mfcg-*-census.json.
+*Priority:* **P1** — it is a taste-and-direction call that re-aims a whole wave.
+
 **§696 · Round 3 scored; DRESS-1 complete · SEAT: Opus 5.**
 *What was judged:* the PASS at 94.4 %, the ruling that an abstention is a miss but not a
 wrong-class read, and the reading of the tier bias as systematic rather than noise.
