@@ -30244,3 +30244,96 @@ wave tips **verified as ancestors in order**). W1 `3f4e10769` · W2 `62d926d25` 
   Reported and not cured, all pre-existing: the graveyard gap · the deity-doctrine violation
   · the `forcePort` ordering defect — **which is why `polycentric` carries a Fishmonger and
   no water** · the ward-layer degeneracy · the POLITY column question.
+
+## §710 · DRESS-2 SEALS AS A BRIDGE CAR — THE CORPUS WAS FOURTEEN DRAWINGS, THE FRAMING LAW IS IMPLICATED THREE TIMES, AND A READER CONVICTED THE WAVE'S OWN INK (2026-08-26 ~10:20 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+**RATIFIED, all fifteen judgments.** Sealed `refs/preserve/map-sandbox-dress2` = **`c4d772590`**
+(base `6bc1a5051`; **zero deletions**; W1 `e2e928ff8` → W2 `903c1dcd0` → W3 `c4d772590`, all
+three **verified as ancestors in order**). Gate **20 files / 485 tests EXIT 0** (base 469) ·
+folio dormancy **29/29 clean** · determinism **18/18** · **wrap digest UNMOVED** · byte
+**703,133 / 830,000 = 84.71 %** (15.29 % headroom) · **the five owner signatures untouched.**
+
+- **§710.1 THE WAVE'S OWN VERDICT ON ITSELF: A BRIDGE CAR, NOT A DRAWING CAR.** Three of its
+  five items **were already derived on the fabric and had simply never reached the page**;
+  two were **not buildable on this surface at all**, each for a measured reason. The page
+  carried **ZERO relief marks** before this wave and now carries 3–232 per leaf, structured.
+- **§710.2 ⭐ §696.4's NAIVE READER IS VINDICATED BY MEASUREMENT: THE CORPUS WAS FOURTEEN
+  DISTINCT DRAWINGS PRESENTED AS EIGHTEEN.** It is now eighteen. Every gestalt score this
+  programme took before this wave was over a corpus **four leaves thinner than its own count**
+  — a reader who knew nothing about us saw it, and no census of ours was asking.
+- **§710.3 ⛔ THE ≈237 CALIBRATION IS REFUTED, AND IT WAS MY DOCUMENT'S NUMBER.** The control
+  measures **16,779**, not ≈237 — and ≈237 **appears in DESIGN_SPINE_COMPLETION.md and
+  nowhere else**, i.e. I wrote a calibration figure with no source behind it and a wave was
+  chartered against it. ⭐ **The replacement is derived rather than chosen:** a raw-count
+  floor measures **redraw, not legibility** (year-100 vs year-018 = 16,779 because 96.3 % of
+  marks are new), so the floor becomes **CITED diff ≥ 4 over `STATE_GROUPS`** — under which
+  year-100's 16,779 contribute **zero**, so re-seeding cannot buy a pass — and **4 is
+  `migration`'s own delta, the thinnest TRUE expression the corpus contains.** Results: siege
+  12 · plague 7 · famine 6 · migration 8, census 4/4 green, and the pre-bridge corpus reds at
+  0/4 EXIT 1.
+- **§710.4 ⛔⛔ THE FRAMING LAW IS NOW IMPLICATED THREE TIMES — THIS IS THE WAVE'S REAL
+  FINDING.** **(i) THE FIELD MOSAIC IS REFUTED, AND NOT FOR THE REASON I ANTICIPATED.** Not
+  "a mosaic would be loud" — **the hinterland is no longer on the plate.** Open-field system
+  area inside `page.frame`: **0.00 % on eight leaves**, under 2 % on five more, best case
+  `fjord` **15.66 %**; `bound.radius` is 99–417 while the field system reaches **686–1,107**.
+  **A14.4 and §707.3 are in structural conflict, and the fit won.** **(ii) ROUND 4's SINGLE
+  WRONG-CLASS READ IS THE SAME CAUSE**: `fjord` read **dry** against a key of **port**,
+  because *"a scrap of water is clipped at the extreme top-right corner but touches none of
+  the settlement."* **(iii)** §707.1(ii) already recorded that framing replaced hinterland
+  framing with the settlement's bound. ⇒ **The framing cure bought composition and cost the
+  hinterland and one legibility read.** → **OWNER DOCKET as a trade with measured costs on
+  both sides** — it was a chair repair under §585, and it has now been priced.
+- **§710.5 THE ROUND-4 RULING, AND WHY IT IS NOT AN ESCALATION.** Graded: **walled/open
+  18/18 · port/river/dry 17/18 · whole-leaf 94.4 % · abstentions 0 · HARD CLAUSE 1 ⇒ FAIL.**
+  The lane **declared a protocol divergence** — it asked the three open questions in the same
+  prompt as the graded ones, where round 3 did not — and left the ruling to me.
+  **RULED: PA.7's escalation does NOT fire, on two independent grounds, and neither is
+  convenience.** **(a)** PA.7 escalates on **two consecutive DISAGREEING rounds**; **round 3
+  PASSED**, so this is *one* disagreeing round, which the clause itself makes a
+  cure-and-re-round. **(b)** The declared divergence makes round 4 **not directly comparable**
+  to round 3. ⚠ **The wrong-class read is NOT dismissed**: it is real, its cause is framing,
+  and it reaches the owner **on framing's own merits** (§710.4) rather than through PA.7.
+  ⭐ The lane reporting its own protocol deviation, unprompted, on a round its own work failed,
+  is the behaviour this programme is built to reward.
+- **§710.6 ⭐⭐ THE CLASS, AND IT IS THE SHARPEST THIS PROGRAMME HAS PRODUCED: EVERY CENSUS W1
+  WROTE ASKED WHETHER THE MARK EXISTS. NOT ONE ASKED WHETHER IT IS ON THE THING IT MEANS.**
+  The reader saw it first — siege and plague's barred gates as *"three strokes floating in
+  open country… at no gate, no road, no building."* Then measured: `siege` **9 tents, 0 of
+  them on the page**; the barred gate **16.1 road widths** from the drawn wall band;
+  `migration` **2 of 4 watch-fires off-page**; `city`'s **12 camp huts in the bay**. ⭐ **And
+  `famine`'s 6 stalls are the ONLY family that lands correctly — which is what proves the
+  diagnosis rather than weakening it**, because stalls anchor to the market, the one thing
+  both geometries agree about. **CAUSE: `deriveStateMarks` anchors on the LEGACY fabric while
+  the dress draws the PARTITION.** W3 made it mechanical (`statePlacementCensus` RED 4/9,
+  EXIT 1) and ⭐ **deliberately kept it OUT of the vitest gate, because a gate arm that reds
+  at its own tip is a broken gate.** → **CHARTERED: `STATE-BRIDGE`, a car of its own** — it
+  is outside a dress car's boundary.
+- **§710.7 THE COUNTRYSIDE HELD — AND §707.4 UNDERSTATED ITS OWN WIN BY MORE THAN AN ORDER OF
+  MAGNITUDE.** Worst movement anywhere: **+0.83 %** of the field's own ink load; `field:paper`
+  moves ≤ 0.0011 against a win of 1.05. **A legible mosaic CAN coexist with a quiet
+  countryside — but only because the mosaic turned out to be RELIEF rather than farmland.**
+  ⭐ And the recorded figure is stale: `tones()` still records **"18× the visual mass"** on
+  city, while a **real-raster** measurement at this tip reads **massRatio 0.6886 — two
+  thirds, not eighteen times.** The demotion plus the fit did far more than the 0.5 % DRESS-
+  FABRIC could claim for the hatch alone. New instrument **`i15-field-quietness.mjs`,
+  CONTROL_BENCH 6/6, reading a real raster** — because *a vector-area census is blind to
+  strokes, and strokes are what all this ink is.*
+- **§710.8 CHAIR ACT TAKEN AT COLLECTION, NOT DEFERRED — THE THIRD SIGHTING OF §707.8's
+  CLASS.** `i15` existed **only in a session scratchpad, one `rm -rf` from gone**, together
+  with the base readings that make the tip's readings mean anything. **Rescued into
+  `refs/preserve/reg-instruments-2026-08-27-r8` = `e25979624`.** ⚠ Still owed at the next
+  seal: `lib/classify.mjs` knows 30 `dress-*` groups and **not `dress-register`**, and this
+  wave's **11 new families widen that gap** — the lane is immune (it measures by group id
+  directly) but the estate is not.
+- **§710.9 BLOCKED UPSTREAM, NOT REFUSED: V-B13 FURNITURE AND MONUMENT PLAN-POCHÉ.**
+  `marketRegister` is **ARMED-ONLY** and the dress corpus does not arm it — **a build-options
+  decision, not a drawing one.** Also reported and pre-existing, each verified against a
+  pristine base: `exemplars.mjs`'s *"stressors is null on all ten exemplars"* is **false**
+  (`city` carries a live generator stressor and draws 12 camp huts) · `wallPublication`
+  hard-codes `bricked: false` on **every** published gate · `dressCensus` reds on **10 of
+  18** at base with identical counts. **§646's water-gate weight and greens rows, and the
+  corpus-distance re-read, are not done.**
+  ⭐ **And a priced alternative to §709.7's casing exists using ONLY shipped devices**: the
+  barred gate solves the same ink-on-ink problem by **role tone plus weight** (`T.wall` at
+  `INK.body`, not a `T.ink` hairline) — so the owner's casing question may not need a new
+  device after all.

@@ -62,7 +62,13 @@ bands (SIGNED_CONSTANTS.md) · the A14.4 survivor rows.
   OUTSIDE bowshot (the Corfe band), siege/circumvallation lines, barred-gate
   emphasis at every gate, emptied-market treatment; the element-diff census (a
   scenario leaf differs from its base by ≥ a chair-set floor, with the year-100
-  control ≈237 as the calibration).
+  control ≈237 as the calibration). ⛔ **REFUTED BY MEASUREMENT (§710.3): the control
+  measures 16,779, and ≈237 appeared in THIS DOCUMENT AND NOWHERE ELSE** — a calibration
+  figure written with no source behind it, against which a whole wave was then chartered.
+  A raw-count floor measures **redraw, not legibility** (year-100 is 96.3 % new marks).
+  **REPLACED, DERIVED RATHER THAN CHOSEN: CITED diff ≥ 4 over `STATE_GROUPS`** — year-100's
+  16,779 contribute ZERO under it, so re-seeding cannot buy a pass, and **4 is `migration`'s
+  own delta, the thinnest TRUE expression the corpus contains.**
 - EXITS: blind silhouette ROUND 4 (the sharpened §661 class definition; the sheet
   gains the pier/quay-group bin) · the scenario element-diff census · the corpus-
   distance re-read per detail-register section · the gestalt gates again.

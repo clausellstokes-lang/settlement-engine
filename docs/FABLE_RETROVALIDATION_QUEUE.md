@@ -226,6 +226,23 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§710 · DRESS-2 ratified as a bridge car; round 4 ruled NOT an escalation · SEAT: Opus 5.**
+*What was judged:* all fifteen J-D2 calls RATIFIED; **the ruling that round 4's FAIL does not
+fire PA.7's escalation**; accepting the refutation of my own ≈237 calibration and its
+derived replacement; accepting that the field mosaic is unbuildable and routing framing to
+the owner; and chartering STATE-BRIDGE.
+*What Fable re-derives:* ⛔ **(a) THE ROUND-4 RULING IS THE ONE TO ATTACK.** A chair whose
+framing repair caused a hard-clause failure then ruled that the failure does not escalate.
+My two grounds (round 3 passed, so this is one disagreeing round; and the lane's declared
+protocol divergence makes it non-comparable) are each defensible alone — **test whether they
+are reasons or rationalisations.** **(b)** whether "CITED diff ≥ 4" is genuinely derived —
+it is `migration`'s own delta, which is either principled or conveniently the lowest passing
+value. **(c)** §710.6's class is the sharpest finding here; sweep the estate for other
+censuses that count existence and never assert placement.
+*Receipts:* ODQ §710 · `refs/preserve/map-sandbox-dress2` = `c4d772590` · instruments **r8**
+`e25979624` (i15 rescued) · `laneDRESS2-receipt.md` + `DRESS2-RESUME.md`.
+*Priority:* **P1** on (a) and (c).
+
 **§709 · SEATING ratified in three gated waves · SEAT: Opus 5.**
 *What was judged:* all ten J-SEAT calls RATIFIED; accepting the byte-identity dormancy proof
 **on diff scope rather than on a re-render**; accepting "0 wherever the ground exists" as the
