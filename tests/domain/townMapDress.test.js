@@ -17,8 +17,35 @@ import { LENS_IDS, resolveLens, HATCH } from '../../src/domain/townMap/fabric/fo
 import {
   dressPage, tones, valueCensus, legendCensus, accessibleHatch, hatchPolygon, clipSegment,
   inRing, contrast, mix, polesOf, VALUE_STEP, GRAIN, DRESS_GROUPS, DRESS_LEGEND,
-  DRESS_SCHEMA_VERSION, PAGE_QUANTUM_DECIMALS,
+  DRESS_SCHEMA_VERSION, PAGE_QUANTUM_DECIMALS, STATE_GROUPS,
 } from '../../src/domain/townMap/fabric/partitionDress.js';
+
+/**
+ * ⟦DRESS-2 W1⟧ A SYNTHETIC §10 REGISTER — one of every family the dress can draw, so the arms
+ * below are properties of the INK and not of any one leaf's weather. Shapes copied from
+ * `stateMarks.js`'s own published records, not invented for the test.
+ */
+function fixtureState() {
+  const quad = (x, y, w, h) => [[x - w, y - h], [x + w, y - h], [x + w, y + h], [x - w, y + h]];
+  return {
+    expressed: ['under_siege', 'plague_onset', 'famine', 'monster_pressure', 'wartime'],
+    bodies: [
+      { key: 'state.siege.tent.0', kind: 'tent', cite: 'settlement.stressors[under_siege]', polygon: quad(300, 40, 4, 3) },
+      { key: 'state.siege.tent.1', kind: 'tent', cite: 'settlement.stressors[under_siege]', polygon: quad(312, 40, 4, 3) },
+      { key: 'state.plague.lazar', kind: 'lazar', cite: 'settlement.stressors[plague_onset]', polygon: quad(-260, 90, 6, 5) },
+      // ⛔ the §18.4 fossil — present on the fabric, and this family must NOT be drawn here
+      { key: 'colonize.1', kind: 'middleRow', cite: '§18.4 age 191 ≥ 128', polygon: quad(0, 0, 5, 2) },
+    ],
+    marks: [
+      { kind: 'barredGate', x: 120, y: 0, dx: 1, dy: 0, cite: 'settlement.stressors[under_siege]', label: 'INVESTED' },
+      { kind: 'quarantineBar', x: 0, y: 120, dx: 0, dy: 1, cite: 'settlement.stressors[plague_onset]' },
+      { kind: 'emptyStall', cite: 'settlement.stressors[famine]', polygon: quad(10, 10, 6, 2) },
+      { kind: 'watchFire', x: -140, y: -140, r: 3, cite: 'settlement.stressors[monster_pressure]' },
+      { kind: 'trampled', x: 150, y: 150, r: 20, ang: 292, cite: 'settlement.stressors[wartime]' },
+      { kind: 'barricade', x: -40, y: 40, dx: 1, dy: 1, w: 10, cite: 'settlement.stressors[unrest]' },
+    ],
+  };
+}
 
 function fixtureLedger() {
   const epochs = [];
@@ -340,6 +367,79 @@ describe('L-REG-34 · THE LEGEND, in both directions', () => {
   });
 });
 
+/* ══════════════════════════════════════════════════════════════════════════════════════════════
+ * ⭐⭐⭐ ⟦DRESS-2 W1⟧ THE §10 STATE REGISTER — review I2's cure, at fixture scale.
+ *
+ * The corpus-level proof lives in the corpus describe below (and in
+ * `harness/laneDRESS2/scenarioCensus.mjs`); these arms are properties of the INK: that each family
+ * draws its own glyph in its own group, that the §18.4 fossils are excluded on purpose, and that
+ * the canvas tone clears the paper on every lens — the row whose FIRST spelling redded the gate.
+ * ═══════════════════════════════════════════════════════════════════════════════════════════ */
+describe('⟦DRESS-2 W1⟧ I2 · THE §10 STATE EXPRESSIONS, one family per group', () => {
+  it('every state family draws into its OWN group, and each is counted', () => {
+    const d = dressPage(page, { lens: 'parchment', roadWidth: 5, walls, state: fixtureState() });
+    const c = d.census;
+    expect(c.stateExpressed).toBe(5);
+    expect(c.stateBodies, 'the two tents and the lazar, and NOT the colonize fossil').toBe(3);
+    expect(c.barredGates, 'one barred gate and one quarantine bar').toBe(2);
+    expect(c.emptyStalls).toBe(1);
+    expect(c.watchFires).toBe(1);
+    expect(c.trampled).toBe(1);
+    expect(c.barricades).toBe(1);
+    for (const gp of STATE_GROUPS) {
+      expect(d.groups, `${gp} is not on the plate`).toContain(gp);
+    }
+    // …and every one of them is a group the roster knows and the legend teaches
+    for (const gp of STATE_GROUPS) expect(DRESS_GROUPS).toContain(gp);
+    expect(legendCensus(d).ok, legendCensus(d).reason).toBe(true);
+  });
+
+  it('⛔ §18.4 INFILL FOSSILS ARE EXCLUDED BY KEY, NOT BY KIND — the discriminator the fabric owns', () => {
+    // `state.*` is a §10 expression; `colonize.*` is market infill present on every town+ leaf.
+    // Excluding by KIND would go stale the moment a new body kind is minted; the key prefix is
+    // what `stateMarks` itself publishes.
+    const S = fixtureState();
+    const only = { ...S, bodies: S.bodies.filter((b) => b.key.startsWith('colonize.')) };
+    const d = dressPage(page, { lens: 'parchment', roadWidth: 5, walls, state: only });
+    expect(d.census.stateBodies).toBe(0);
+    expect(d.groups).not.toContain('dress-camp');
+  });
+
+  it('⛔ THE CONTROL — no state channel means no state ink, and that is the shipped defect', () => {
+    const d = dressPage(page, { lens: 'parchment', roadWidth: 5, walls });
+    for (const gp of STATE_GROUPS) expect(d.groups).not.toContain(gp);
+    expect(d.census.stateBodies + d.census.barredGates + d.census.emptyStalls
+      + d.census.watchFires + d.census.trampled + d.census.barricades).toBe(0);
+  });
+
+  it('the bar spans the ROAD, so it survives the tier ladder (§179) rather than the view', () => {
+    // Two dresses of the same page at different road widths: the barred-gate mark must scale with
+    // the road, because a gate passage is about a road wide at every tier. A view-unit constant
+    // (the legacy's `builtRadius × 0.035`) would be right at one tier and wrong at the rest.
+    const S = { expressed: ['under_siege'], bodies: [], marks: [{ kind: 'barredGate', x: 0, y: 0, dx: 1, dy: 0, cite: 'c' }] };
+    const span = (rw) => {
+      const d = dressPage(page, { lens: 'parchment', roadWidth: rw, walls, state: S });
+      const m = d.svg.match(/<g id="dress-barred">.*?d="([^"]*)"/s);
+      const ys = [...m[1].matchAll(/-?\d+(?:\.\d+)?/g)].map(Number).filter((_, i) => i % 2 === 1);
+      return Math.max(...ys) - Math.min(...ys);
+    };
+    expect(span(10) / span(5)).toBeCloseTo(2, 3);
+  });
+
+  it('⭐ the CANVAS tone clears the paper on EVERY lens — the row that redded its own first spelling', () => {
+    // `camp: atLeast(paper, mix(paper, built, 0.42), VALUE_STEP, poles.dark)` measured
+    // `camp:paper` 1.242 < 1.280 on darkFantasy: "away from the paper is a DIRECTION, not a sign",
+    // this module's own lesson, a third time. The cure is a RELATION between two ladder rungs.
+    for (const id of LENS_IDS) {
+      const T = tones(resolveLens(id));
+      expect(contrast(T.paper, T.camp), `${id}: camp:paper`).toBeGreaterThanOrEqual(VALUE_STEP - 1e-9);
+      // and it really is BETWEEN the ground it is pitched on and the roof it is not
+      expect(contrast(T.plotGround, T.camp), `${id}: camp vs toft`).toBeGreaterThan(1);
+      expect(contrast(T.built, T.camp), `${id}: camp vs roof`).toBeGreaterThan(1);
+    }
+  });
+});
+
 describe('E11 · THE ACCESSIBLE LENS ARM — patterns replace hue, as real geometry', () => {
   it('the hatch consumes the CLOSED vocabulary and clips like everything else', () => {
     const a = accessibleHatch(page, { roadWidth: 5, characterOf: () => 'merchant' });
@@ -434,7 +534,9 @@ describe('⭐⭐⭐ THE CORPUS RENDERS — every leaf, both renderers, end to en
       //    arm exists to catch into a soft row in a report nobody reads.
       const r = dressLeaf(key, 'parchment');
       const folio = renderFolio(r.fabric, { lens: 'parchment' });
-      plates.push({ key, tier: r.tier, dress: r.svg, page: r.page, folio: folio.svg, folioEls: folio.elementCount, folioPrims: folio.primitiveCount, ops: r.ops, prims: r.primitives });
+      plates.push({ key, tier: r.tier, dress: r.svg, page: r.page, folio: folio.svg, folioEls: folio.elementCount, folioPrims: folio.primitiveCount, ops: r.ops, prims: r.primitives,
+        // ⟦DRESS-2 W1⟧ the §10 roster rides along so the scenario arms cost NO extra build
+        expressed: ((r.fabric.stateMarks || {}).expressed || []), census: r.dress.census });
     }
   }, 900000);
 
@@ -529,5 +631,82 @@ describe('⭐⭐⭐ THE CORPUS RENDERS — every leaf, both renderers, end to en
       const share = (Math.PI * p.page.bound.radius ** 2) / (p.page.frame.w * p.page.frame.h);
       expect(share, `${p.key}: share ${share}`).toBeCloseTo(Math.PI / 4, 9);
     }
+  });
+
+  /* ────────────────────────────────────────────────────────────────────────────────────────
+   * ⭐⭐⭐ ⟦DRESS-2 W1⟧ REVIEW I2 · THE SCENARIO LEAVES, AND THE OUTSIDE EVIDENCE BEHIND THEM
+   *
+   * ODQ §696.4: a reader with no knowledge of this programme flagged four plates, unprompted, as
+   * *"the same underlying map… rendered four separate times"*. MEASURED at `6bc1a5051`, those
+   * four shared ONE sha256 and `city`/`migration` shared another — **the eighteen-leaf corpus was
+   * FOURTEEN distinct drawings**, so every gestalt score taken over it was over a thinner sample
+   * than its leaf count claimed. These arms make that state unreachable.
+   * ⚠ They are free: they read the `plates` this describe already built once per leaf.
+   * ──────────────────────────────────────────────────────────────────────────────────────── */
+
+  it('⭐ every leaf of the corpus is a DISTINCT drawing — no plate is another plate', () => {
+    const seen = new Map();
+    for (const p of plates) {
+      const prior = seen.get(p.dress);
+      expect(prior, `${p.key} renders byte-identically to ${prior}`).toBeUndefined();
+      seen.set(p.dress, p.key);
+    }
+    expect(seen.size).toBe(plates.length);
+  });
+
+  it('⭐⭐ the scenario element-diff census is GREEN, and it counts CITED marks only', async () => {
+    const { scenarioCensus, SCENARIO_PAIRS, CITED_FLOOR } = await import('../../harness/laneDRESS2/scenarioCensus.mjs');
+    const by = Object.fromEntries(plates.map((p) => [p.key, { svg: p.dress, expressed: p.expressed }]));
+    const c = scenarioCensus(by);
+    expect(c.rows.length).toBe(SCENARIO_PAIRS.length);
+    expect(c.ok, c.reason).toBe(true);
+    for (const r of c.rows) expect(r.citedDiff, `${r.leaf}: ${r.citedDiff}`).toBeGreaterThanOrEqual(CITED_FLOOR);
+  });
+
+  it('⛔ THE NEGATIVE CONTROL: withhold the state channel and the census RED-flags every pair', async () => {
+    // The pre-bridge corpus reproduced exactly — `dressPage` without `opts.state` is what shipped
+    // at `6bc1a5051`, and it is what the naive reader was looking at. If this passes, the census
+    // above is measuring nothing.
+    const { dressLeaf } = await import('../../harness/laneDRESS1/renderPage.mjs');
+    const { scenarioCensus, SCENARIO_PAIRS } = await import('../../harness/laneDRESS2/scenarioCensus.mjs');
+    const need = [...new Set(SCENARIO_PAIRS.flatMap((p) => [p.leaf, p.base]))];
+    const by = {};
+    for (const k of need) {
+      const r = dressLeaf(k, 'parchment', { state: null });
+      by[k] = { svg: r.svg, expressed: [] };
+    }
+    const c = scenarioCensus(by);
+    expect(c.ok, `the census passed with the state channel WITHHELD: ${c.reason}`).toBe(false);
+    for (const r of c.rows) expect(r.citedDiff, `${r.leaf} still differs`).toBe(0);
+    // …and the four plates really are one drawing without it, which is the defect itself
+    expect(new Set(Object.values(by).map((v) => v.svg)).size).toBe(2);
+  }, 900000);
+
+  it('⭐ every stressor the world EXPRESSES reaches the page as ink, on every leaf', () => {
+    // The silent half of the defect: a condition derived, published on the fabric, and then
+    // dropped by the renderer. `expressed[]` is the world's claim; the census counts are the ink.
+    for (const p of plates) {
+      if (!p.expressed.length) continue;
+      const c = p.census;
+      const ink = c.stateBodies + c.barredGates + c.emptyStalls + c.watchFires + c.trampled
+        + c.barricades;
+      expect(ink, `${p.key} expresses ${JSON.stringify(p.expressed)} and draws nothing`)
+        .toBeGreaterThan(0);
+      expect(c.stateExpressed, `${p.key}`).toBe(p.expressed.length);
+    }
+    // and the corpus really does contain expressed leaves, so the loop above is not vacuous
+    expect(plates.filter((p) => p.expressed.length).length).toBeGreaterThanOrEqual(6);
+  });
+
+  it('⛔ §18.4 market-infill fossils are NOT drawn as state bodies — the exclusion is asserted', () => {
+    // `colonize.*` bodies ride on `stateMarks.bodies` and carry NO scenario signal; drawing them
+    // in the scenario wave would put an unattributable shift inside the measurement that wave
+    // exists to take. `town` has three of them and expresses nothing, so it must draw no camp.
+    const town = plates.find((p) => p.key === 'town');
+    expect(town.expressed).toEqual([]);
+    expect(town.census.stateBodies, 'town drew a state body it has no state for').toBe(0);
+    const siege = plates.find((p) => p.key === 'siege');
+    // siege carries the SAME three fossils plus nine tents — so nine is the exact expected count
+    expect(siege.census.stateBodies).toBe(9);
   });
 });

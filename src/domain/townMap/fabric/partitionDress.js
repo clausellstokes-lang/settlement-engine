@@ -64,7 +64,7 @@ export const GRAIN = Object.freeze({ stroke: 0.25, opacity: 0.72 });
 
 /** Draw order. Ground first, pieces over it, marks last — `PAGE_LAYERS` with the ink's own rows. */
 export const DRESS_LAYERS = Object.freeze(['paper', 'fields', 'water', 'ground', 'voids',
-  'masses', 'roofs', 'band', 'gates', 'crossings', 'quays', 'marks']);
+  'masses', 'roofs', 'band', 'gates', 'crossings', 'quays', 'state', 'marks']);
 
 /** Every `<g id>` the dress can emit, so the legend census has a closed roster to check against. */
 export const DRESS_GROUPS = Object.freeze([
@@ -89,6 +89,43 @@ export const DRESS_GROUPS = Object.freeze([
    * this file names), so the legend row below cites that plate and no other.
    */
   'dress-register',
+  /**
+   * ⭐⭐⭐ ⟦DRESS-2 W1⟧ **THE §10 STATE EXPRESSIONS — REVIEW I2's CURE, AND IT IS A BRIDGE RATHER
+   * THAN A DRAWING.** §696.4: a reader with no knowledge of this project looked at eighteen plates
+   * and said four of them *"all appear to be the same underlying map… rendered four separate
+   * times"*. Decoded, those four are `town`, `siege`, `plague`, `famine` — and the reader was not
+   * describing an impression. MEASURED at this tip: those four plates share ONE sha256
+   * (`1a4dc52d…`), as do `city` and `migration` (`9078699e…`). **The eighteen-leaf corpus was
+   * FOURTEEN distinct drawings.**
+   *
+   * ⛔⛔ AND THE CAUSE IS NOT THAT THE TRUTH IS MISSING. `fabric.stateMarks` has carried the whole
+   * §10 register all along — nine besieger's tents at a measured bowshot, a lazar house held far
+   * out, a barred gate per law, six empty stall outlines — ground-law-swept and explicitly
+   * protected from small-body suppression (`minFootprint.js`: *"A SIEGE TENT AND A QUARANTINE BAR
+   * ARE NOT BUILDINGS… suppressing a besieger's tent for being small would delete a state
+   * expression the §10 law requires to be visible"*). It reached `renderFolio` §15b and **nothing
+   * on the page path**: `partitionInputs` carries nine keys and no state, so the partition never
+   * learns the leaf is besieged. The cure is the SEATING shape one wave later — carry the truth
+   * across the bridge, do not mint it.
+   *
+   * ⛔ ONE FAMILY PER GROUP, DELIBERATELY. §692.9's caution is that L-REG-34's census passes on a
+   * BIJECTION and not on legibility, so a glyph that shares an id with another glyph is taught by
+   * a row that teaches two things. Each family below is its own group and its own legend row.
+   */
+  'dress-camp', 'dress-barred', 'dress-emptystall', 'dress-watchfire', 'dress-trampled',
+  'dress-barricade',
+]);
+
+/**
+ * ⭐⭐ ⟦DRESS-2 W1⟧ **THE §10 SUBSET OF `DRESS_GROUPS`, NAMED ONCE SO THE CENSUS CANNOT DRIFT.**
+ * The scenario element-diff counts a mark only if it exists BECAUSE the settlement is in a stated
+ * condition, and this is that roster. Keeping it here rather than in the census is what makes the
+ * two impossible to disagree: a family added to the dress without being added here would be
+ * invisible to the census, so the roster lives beside the ink it names.
+ */
+export const STATE_GROUPS = Object.freeze([
+  'dress-camp', 'dress-barred', 'dress-emptystall', 'dress-watchfire', 'dress-trampled',
+  'dress-barricade',
 ]);
 
 const DEG = Math.PI / 180;
@@ -150,7 +187,11 @@ export function linePath(pts) {
  *
  * @param {any} page a `PARTITION_PAGE_FRAME` from `projectPage`
  * @param {{lens?:string, roadWidth?:number, walls?:any, water?:any, crossings?:any,
- *          quays?:any, accessible?:boolean, tier?:string}} [opts]
+ *          quays?:any, accessible?:boolean, tier?:string, seating?:any, state?:any}} [opts]
+ *
+ * ⚠ `opts.state` is `fabric.stateMarks`, handed in the same way `walls` and `seating` already are
+ *   — the §10 register is a fact ABOUT the settlement rather than a face of the partition, and
+ *   `partitionInputs`' nine keys carry no state, so it cannot arrive off the page.
  */
 export function dressPage(page, opts = {}) {
   const keptQuantum = QUANTUM;
@@ -175,6 +216,9 @@ function dressPageInner(page, opts) {
     bandFaces: 0, coursing: 0, towers: 0, gatehouses: 0, ditchHachure: 0,
     waterFaces: 0, shoreStrokes: 0, decks: 0, fords: 0, steppingStones: 0, quays: 0, vquay: 0,
     relictDressed: 0, relictSuppressed: 0, registerMarks: 0,
+    /** ⟦DRESS-2 W1⟧ the §10 register, counted per FAMILY so a scenario diff is attributable */
+    stateBodies: 0, barredGates: 0, emptyStalls: 0, watchFires: 0, trampled: 0, barricades: 0,
+    stateExpressed: 0,
   };
   const g = (id, body) => {
     if (!body) return;
@@ -555,6 +599,116 @@ function dressPageInner(page, opts) {
     prims.n += quays.length + vq.length;
   }
 
+  // ── ⭐⭐⭐ ⟦DRESS-2 W1⟧ THE §10 STATE EXPRESSIONS, IN CALM INK ──────────────────────────────
+  //
+  // ⭐⭐ **THE REGISTER LAW IS THE LEGACY'S OWN, CARRIED OVER VERBATIM** (`renderFolio` §15b):
+  // *a siege is a row of small tents on a road, a plague is short bars across the gates, a famine
+  // is a market place with its stall rows marked out and nothing on them.* Nothing here is
+  // coloured differently from the rest of the leaf, and nothing here is DERIVED here — every
+  // coordinate arrives from `fabric.stateMarks`, in the page's own world space.
+  //
+  // ⛔ **THREE ROWS OF THE CHARTER ARE NOT BUILT, AND EACH REFUSAL IS A MEASUREMENT:**
+  //  (i)  *"siege/circumvallation lines"* — `circumvallation` and `contravallation` have ZERO
+  //       occurrences in this tree. There is no such truth to draw, and a dress that minted a
+  //       siege line would be a renderer deriving world facts, which `partitionView`'s own law
+  //       forbids outright. Reported, not invented.
+  //  (ii) *"barred-gate emphasis at EVERY gate"* conflates two different laws. §10.12 bars the
+  //       ONE gate a besieger invests (`stateMarks` marks exactly one, `label:'INVESTED'`);
+  //       §10.13 bars EVERY gate against the pestilence. Drawing every gate barred on a siege
+  //       leaf would contradict the shipped truth in order to satisfy a brief.
+  //  (iii)*"tents OUTSIDE bowshot (the Corfe band)"* is ALREADY the shipped law —
+  //       `stateMarks.js`'s `stand = max(frontage × 5, builtRadius × 0.16)`, with its own reason
+  //       written above it. The bridge carries it; there was nothing to build.
+  //
+  // ⚠ `colonize.*` BODIES ARE DELIBERATELY NOT DRAWN HERE. They are §18.4 market-infill fossils
+  //   present on every town-and-above leaf, so they carry NO scenario signal, and drawing them in
+  //   the scenario wave would put an unattributable shift inside the very measurement that wave
+  //   exists to take. They belong with the market furniture. Deferred, with its reason.
+  {
+    const S = opts.state;
+    const camps = [];
+    const barred = [];
+    const stalls = [];
+    const fires = [];
+    const tramp = [];
+    const barricades = [];
+    if (S) {
+      census.stateExpressed = (S.expressed || []).length;
+      for (const b of (S.bodies || [])) {
+        // `state.*` is a §10 expression; `colonize.*` is §18.4 infill. The key is the discriminator
+        // the fabric already publishes — no kind list to fall out of date.
+        if (!String(b.key || '').startsWith('state.')) continue;
+        if (!b.polygon || b.polygon.length < 3) continue;
+        camps.push(polyPath(b.polygon));
+        census.stateBodies++;
+      }
+      for (const mk of (S.marks || [])) {
+        if (mk.kind === 'barredGate' || mk.kind === 'quarantineBar') {
+          // ⭐ THE BAR SPANS THE ROAD, AND THAT IS WHY IT IS STATED IN ROAD WIDTHS. The legacy
+          //   used `builtRadius × 0.035`, a VIEW-UNIT quantity — §179's own lesson is that ink
+          //   stated in view units is right at one tier and wrong at the rest. A gate passage is
+          //   about a road wide at every tier, so the road IS the module.
+          const nx = -mk.dy; const ny = mk.dx;
+          const o = rw * 0.9;
+          for (let i = -1; i <= 1; i++) {
+            const t = i * rw * 0.34;
+            barred.push(linePath([[mk.x + nx * o + mk.dx * t, mk.y + ny * o + mk.dy * t],
+              [mk.x - nx * o + mk.dx * t, mk.y - ny * o + mk.dy * t]]));
+          }
+          census.barredGates++;
+        } else if (mk.kind === 'emptyStall') {
+          if (!mk.polygon || mk.polygon.length < 3) continue;
+          stalls.push(polyPath(mk.polygon));
+          census.emptyStalls++;
+        } else if (mk.kind === 'watchFire') {
+          // a fire KEPT, not a fire burning: a ring with a cross in it. hf311's approach-road
+          // furniture is drawn singly, and this is one of those.
+          const r = mk.r;
+          fires.push(`M${q(mk.x - r)} ${q(mk.y)}a${q(r)} ${q(r)} 0 1 0 ${q(r * 2)} 0`
+            + `a${q(r)} ${q(r)} 0 1 0 ${q(-r * 2)} 0`);
+          fires.push(linePath([[mk.x - r * 0.6, mk.y - r * 0.6], [mk.x + r * 0.6, mk.y + r * 0.6]]));
+          census.watchFires++;
+        } else if (mk.kind === 'trampled') {
+          const c2 = Math.cos(mk.ang * DEG); const s2 = Math.sin(mk.ang * DEG);
+          for (let i = -2; i <= 2; i++) {
+            const px = mk.x - s2 * i * mk.r * 0.32; const py = mk.y + c2 * i * mk.r * 0.32;
+            tramp.push(linePath([[px - c2 * mk.r * 0.5, py - s2 * mk.r * 0.5],
+              [px + c2 * mk.r * 0.5, py + s2 * mk.r * 0.5]]));
+          }
+          census.trampled++;
+        } else if (mk.kind === 'barricade') {
+          const L = Math.hypot(mk.dx, mk.dy) || 1;
+          const nx = -mk.dy / L; const ny = mk.dx / L; const h = mk.w * 0.6;
+          barricades.push(linePath([[mk.x - nx * h, mk.y - ny * h], [mk.x + nx * h, mk.y + ny * h]]));
+          census.barricades++;
+        }
+      }
+    }
+    // ⭐ A TENT IS CANVAS, NOT TILE — it stands one value step off the paper like every other
+    //   fabric tone, but NEARER the paper than a roof. The 0.42 is the legacy renderer's own
+    //   shipped relation (`mix(P.paper, P.roofs, 0.42)`); the floor is this module's `VALUE_STEP`.
+    g('dress-camp', camps.length
+      ? `<path d="${camps.join('')}" fill="${T.camp}" stroke="${T.ink}"`
+        + ` stroke-width="${INK.detail}" stroke-linejoin="round"/>` : '');
+    g('dress-barred', barred.length
+      ? `<path d="${barred.join('')}" fill="none" stroke="${T.wall}"`
+        + ` stroke-width="${INK.body}" stroke-linecap="round"/>` : '');
+    g('dress-emptystall', stalls.length
+      ? `<path d="${stalls.join('')}" fill="none" stroke="${T.ink}" stroke-width="${INK.body}"`
+        + ` stroke-opacity="0.75" stroke-linejoin="round"/>` : '');
+    g('dress-watchfire', fires.length
+      ? `<path d="${fires.join('')}" fill="none" stroke="${T.ink}" stroke-width="${INK.body}"`
+        + ` stroke-linecap="round"/>` : '');
+    g('dress-trampled', tramp.length
+      ? `<path d="${tramp.join('')}" fill="none" stroke="${T.ink}" stroke-width="${INK.hair}"`
+        + ` stroke-opacity="0.7"/>` : '');
+    g('dress-barricade', barricades.length
+      ? `<path d="${barricades.join('')}" fill="none" stroke="${T.wall}"`
+        + ` stroke-width="${INK.strong}" stroke-linecap="butt"/>` : '');
+    prims.n += camps.length + barred.length + stalls.length + fires.length + tramp.length
+      + barricades.length;
+  }
+
   // ── ⭐⭐⭐ ⟦CAR-SEATING W3⟧ THE INSTITUTION REGISTER, MARKED ─────────────────────────────────
   // The seating arrives by `opts.seating` rather than off the page, and that is the same shape
   // `walls` already uses here: the seating pass READS the page, so the page cannot carry it
@@ -600,7 +754,10 @@ function dressPageInner(page, opts) {
       + ` ${census.gatehouses} gate(s), ${census.ditchHachure} ditch hachure(s);`
       + ` ${census.waterFaces} water face(s), ${census.decks} deck(s), ${census.fords} ford(s),`
       + ` ${census.quays} quay(s) carrying ${census.vquay} V-QUAY mark(s);`
-      + ` ${census.grainSegments} grain segment(s), ${census.grainOutside} of them outside their face`,
+      + ` ${census.grainSegments} grain segment(s), ${census.grainOutside} of them outside their face;`
+      + ` §10 state: ${census.stateExpressed} expression(s) drawing ${census.stateBodies} camp`
+      + ` body(ies), ${census.barredGates} barred gate(s), ${census.emptyStalls} empty stall(s),`
+      + ` ${census.watchFires} watch-fire(s), ${census.trampled} trampled patch(es)`,
   });
 }
 
@@ -823,6 +980,30 @@ export function tones(LENS, opts = {}) {
     grainOpacity,
     /** ⭐ RUNG 3 · the built footprint, a full step under the toft it stands in */
     built,
+    /**
+     * ⭐⭐ ⟦DRESS-2 W1⟧ **THE CANVAS TONE — a tent is not a roof, and it mints no number.**
+     * The legacy renderer draws every §10 body at `mix(P.paper, P.roofs, 0.42)`. The 0.42 is its
+     * shipped relation and the only figure here that is not this module's.
+     *
+     * ⛔⛔ **AND THE FIRST SPELLING OF THIS LINE FAILED ON `darkFantasy` FOR THE FOURTH TIME IN
+     * THIS FILE'S HISTORY, FOR THE THIRD TIME FOR THE SAME REASON.** Written literally — walk
+     * `mix(paper, built, 0.42)` away from the paper toward `poles.dark` — it measured
+     * **`camp:paper` 1.242 against 1.280** and redded the gate. On the night lens the paper IS the
+     * dark pole's neighbour, so "walk toward dark" walks TOWARD the paper and the 48-iteration
+     * bound expires with the tone still inside the step. *Away from the paper is a DIRECTION, not
+     * a sign* — this module's own words, recorded twice above this line, and I walked into it
+     * anyway. ⭐ **It was the `valueCensus` row that caught it, on its own first day, which is
+     * what that row is for and is why it is not a vacuous assertion.**
+     *
+     * ⭐⭐ **THE CURE IS A RELATION, NOT A WALK, AND IT CANNOT HAVE A DIRECTION BUG.** The canvas
+     * is placed between two tones THE LADDER ALREADY COMPUTES — *a tent stands between the ground
+     * it is pitched on and the roof it is not.* `plotGround` is rung 2 and `built` is rung 3, so
+     * both already clear the paper by construction on every lens, in whichever direction that
+     * lens's own palette runs; a blend of the two is bracketed by them and inherits the clearance.
+     * There is no pole to pick, and on `darkFantasy` the ordering that broke the walk is the very
+     * thing that now makes the relation hold.
+     */
+    camp: mix(plotGround, built, 0.42),
     roofNW: built,
     roofSE: mix(built, poles.dark, 0.26),
     eaves: mix(R.roofs, poles.dark, 0.55),
@@ -957,6 +1138,13 @@ export function valueCensus(T) {
      * predicate rather than a comment about one.
      */
     ['furrow≤onestep', VALUE_STEP / contrast(T.field, mix(T.field, T.grain, T.grainOpacity)), 1.0],
+    /**
+     * ⭐ ⟦DRESS-2 W1⟧ **THE CANVAS OWES THE PAPER A STEP TOO.** The §10 bodies are the first ink
+     * on this page whose tone relation came from OUTSIDE this ladder (the legacy renderer's
+     * `mix(paper, roofs, 0.42)`), so it is the family most likely to land near-paper on a lens
+     * nobody checked. The floor is I3's own, and it is asserted rather than assumed.
+     */
+    ['camp:paper', contrast(T.paper, T.camp), VALUE_STEP],
   ];
   /**
    * ⚠⚠ **THREE PAIRS ARE REPORTED AND NOT FLOORED, AND EACH REFUSAL IS A RULING WITH A SOURCE —
@@ -1412,6 +1600,25 @@ export const DRESS_LEGEND = Object.freeze([
   { group: 'dress-vquay', mark: 'bollards on the quay', teaches: 'the V-QUAY furniture band', plate: 'hf122 / hf133' },
   { group: 'dress-accessible', mark: 'ruled hatch by direction and pitch', teaches: 'category carried by PATTERN, not hue', plate: '§9.7 accessible' },
   { group: 'dress-register', mark: 'a single small open figure at the seat', teaches: 'an institution IS seated here, keyed to the register', plate: 'hf303-legend-masterplate' },
+  /**
+   * ⟦DRESS-2 W1⟧ THE §10 REGISTER. ⛔ EVERY PLATE HERE IS A REAL DETAIL-REGISTER ANCHOR, and the
+   * two that carry the most weight are exact rather than approximate: **hf311's *"lepers' station
+   * held far out"*** is the lazar house by name, and **hf342's *"market stalls are small
+   * rectangles in rows with a dashed stall-line"*** is the famine mark drawn EMPTY — the same
+   * glyph the market already owns, with nothing on it, which is §10.A2's own sentence.
+   * ⚠ AND ONE HONEST LIMIT, RECORDED RATHER THAN DRESSED OVER: `barredGate` and `quarantineBar`
+   * share one glyph, because they are one physical thing — a gate shut. What separates them for a
+   * reader is COUNT AND NEIGHBOUR (one gate barred with a camp outside it is an investment; every
+   * gate barred with a lazar house beyond is a pestilence), which is the register law itself and
+   * not a gap in it. Minting a second glyph to tell them apart would be inventing a distinction
+   * the world does not draw.
+   */
+  { group: 'dress-camp', mark: 'small filled bodies in a row beyond the wall', teaches: 'a camp the settlement\'s condition put there — besiegers at a bowshot, migrants at the busiest gate, a lazar house held far out', plate: 'hf311 gate-suburb (queue carts, beast pound, lepers\' station)' },
+  { group: 'dress-barred', mark: 'three short bars across a gate passage', teaches: 'a gate SHUT — against a besieger where a camp stands outside it, against the pestilence where every gate carries one', plate: 'hf313 gate anatomy (the chain boom across the passage)' },
+  { group: 'dress-emptystall', mark: 'the stall row outlined and nothing on it', teaches: 'a market place still marked out for trade with no trade in it — famine', plate: 'hf342 civic knot / hf259 market voids' },
+  { group: 'dress-watchfire', mark: 'a ring with a cross in it', teaches: 'a watch-fire KEPT on an approach road — pressure from outside', plate: 'hf311 (wayside furniture drawn singly)' },
+  { group: 'dress-trampled', mark: 'a short calm hatch on open ground', teaches: 'ground worn by men and beasts standing on it — a muster, a war', plate: 'hf311 trampled blob / hf345 muster-ground wear paths' },
+  { group: 'dress-barricade', mark: 'a single heavy chord across a way', teaches: 'a street stopped up from inside', plate: 'hf320 street hierarchy (the way as an edged band)' },
 ]);
 
 /**

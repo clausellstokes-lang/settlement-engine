@@ -56,6 +56,11 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
     roadWidth: input.roadWidth,
     walls,
     seating,
+    // ⭐⭐ ⟦DRESS-2 W1⟧ THE §10 REGISTER, CROSSING THE BRIDGE. `fabric.stateMarks` is already in
+    //   scope here (this function returns the fabric so the corpus arm can drive both renderers
+    //   off one build), and `partitionInputs` carries no state — so the page cannot know the leaf
+    //   is besieged and the dress has to be told, exactly as it is told about `walls`.
+    state: fabric.stateMarks,
     tier: fabric.meta.tier,
     ringOfFace: (fid) => (P.arrangement.faces[fid] && P.arrangement.faces[fid].alive
       ? faceRing(P.arrangement, fid) : null),
