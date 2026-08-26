@@ -58,7 +58,7 @@ import { hashUnit } from '../src/domain/townMap/fabric/fabricRng.js';
 import { roofPlan, roofDetailFor, breadthOf } from '../src/domain/townMap/fabric/shapeCode.js';
 import { resolveLens, lensAllows, HATCH } from '../src/domain/townMap/fabric/folioLenses.js';
 import { scaleBarFor } from '../src/domain/townMap/fabric/measure.js';
-import { letteringFragment, spliceLettering } from '../src/domain/townMap/fabric/lettering.js';
+import { letteringFragment, spliceLettering, cartoucheLines, emWidth, metricFor } from '../src/domain/townMap/fabric/lettering.js';
 import { circuitDrawnRuns } from '../src/domain/townMap/fabric/wallCircuit.js';
 import { COMB_PITCH_FRONTAGES, TEXTURE_PITCH_FRONTAGES, TEXTURE_PATCH_SHARE, STAIR_PITCH_FRONTAGES }
   from '../src/domain/townMap/fabric/rampartWorks.js';
@@ -658,6 +658,14 @@ export function renderFolio(fabric, opts = {}) {
   // and its accent ration. ONE GEOMETRY, SIX TREATMENTS: nothing below this line changes a
   // coordinate, which is the five-lens reskin-family pin's own claim made true.
   const LENS = resolveLens(opts.lens);
+  // ⭐⭐⭐ ⟦CAR-WORDS⟧ THE WORDS ARM, AND IT IS A **RENDER** OPTION RATHER THAN A FABRIC ONE ON
+  // PURPOSE. Every earlier register armed through `fabricOptions`, because every earlier
+  // register changed a DERIVATION. This one changes only what the page SAYS and how its
+  // letters are set — a page-register decision that the fabric has no opinion about. Keeping
+  // it out of `buildFabric` means no new stage-graph edge, no minted namespace, no digest
+  // movement and **no way for the dormant folio to differ by a byte**: §711.1's "dormancy holds
+  // BY CONSTRUCTION rather than by proof", applied to typography.
+  const WORDS = opts.words === true;
   const P = LENS.roles;
   const m = fabric.meta;
   const out = [];
@@ -3026,14 +3034,41 @@ export function renderFolio(fabric, opts = {}) {
   push(`<text x="${cx0 + 16}" y="${cy0 + 33}" font-family="${serif}" font-size="23" fill="${P.labels}" letter-spacing="1.1">${esc(m.name)}</text>`);
   push(`<text x="${cx0 + 16}" y="${cy0 + 51}" font-family="${serif}" font-size="10.5" fill="${inkTone}" letter-spacing="1.5">${esc(String(m.tier).toUpperCase())} · ${esc(String(m.population))} SOULS · ${esc(String(m.prosperity).toUpperCase())}</text>`);
   {
+    // ⭐⭐⭐ ⟦CAR-WORDS⟧ REG-8's CARTOUCHE LANGUAGE. Dormant, these are the three engine-vocabulary
+    // lines §570.5(vi) convicted and nobody had yet translated; armed, `cartoucheLines` returns
+    // the same three facts in words a reader owns. See lettering.js for the typed-bucket tables,
+    // for why an unknown member OMITS its clause rather than falling through to the raw token,
+    // and for why the representativeness line is deliberately NOT a ratio.
     const ratio = m.representative ? `FABRIC 1 : ${m.representationRatio.toFixed(1)} HOUSEHOLDS (REPRESENTATIVE)` : 'FABRIC 1 : 1 WITH THE HOUSING CENSUS';
-    const lines = [
+    const lines = WORDS ? cartoucheLines(m) : [
       ratio,
       `${m.morphology.toUpperCase()} PLAN · FOUNDED ${m.foundingKind.toUpperCase()} · WATER ${m.waterMode.toUpperCase()}`,
       `${String(m.landform).toUpperCase()}${m.forcedReconciliation ? ' (RECONCILED)' : ''} · RELIEF ${m.relief.toFixed(2)}`,
     ];
+    // ⭐ ⟦CAR-WORDS⟧ THE LINES ARE FITTED TO THE BOX WITH THE SAME METRIC THAT SETS THE MAP'S
+    // OWN LETTERS. Words a reader can use are LONGER than the enum members they replace —
+    // "SET ON THE BANK" against "WATER BANKSIDE" — so the translation has to be measured, not
+    // hoped at. The size is solved per line down to a floor; the census asserts every line's
+    // measured width is inside the cartouche's own rule, which is a PLACEMENT assertion about
+    // the one piece of chrome every leaf carries.
+    // ⛔⛔ **THE COMMENT AT THE HEAD OF §17 CLAIMS THIS BLOCK IS SAFE AND IT IS NOT.** It says the
+    // metadata lines "have a declared leading instead of hand-placed offsets — which is also
+    // what stops the next line that gets added from silently landing on top of something." The
+    // leading IS declared; it is also a CONSTANT, so it stops nothing: three lines at 14.5 clear
+    // the scale bar because three happen to fit, and the FOURTH line — which ⟦CAR-WORDS⟧ adds
+    // whenever a landform was reconciled — lands at `cy0 + 109.5` against a bar rule at
+    // `cy0 + 103`. That is target 7's overprint returning by the exact route the cure's own
+    // comment promised was closed. ⭐ A DECLARED CONSTANT IS NOT A DERIVATION; the leading is now
+    // SOLVED from the band the lines actually have, and the census asserts the result.
+    const CART_INNER = cw - 32;
+    const BAND_TOP = 64, BAND_FOOT = 90;      // baselines, relative to cy0; the bar's label sits below
+    const LEAD_W = lines.length > 1 ? Math.min(LEAD, (BAND_FOOT - BAND_TOP) / (lines.length - 1)) : LEAD;
     lines.forEach((t, i) => {
-      push(`<text x="${cx0 + 16}" y="${r2(cy0 + 66 + i * LEAD)}" font-family="${serif}" font-size="8.4" fill="${inkTone}" letter-spacing="0.9" opacity="0.84">${esc(t)}</text>`);
+      const fs = WORDS
+        ? Math.max(5.8, Math.min(Math.min(8.4, LEAD_W - 0.8), (CART_INNER - t.length * 0.9) / emWidth(t, metricFor(true))))
+        : 8.4;
+      const y = WORDS ? cy0 + BAND_TOP + i * LEAD_W : cy0 + 66 + i * LEAD;
+      push(`<text x="${cx0 + 16}" y="${r2(y)}" font-family="${serif}" font-size="${WORDS ? r2(fs) : '8.4'}" fill="${inkTone}" letter-spacing="0.9" opacity="0.84">${esc(t)}</text>`);
     });
   }
   // ⭐⭐⭐ THE SCALE BAR IS TRUE (§11.12a, MF-B6). It used to read "10 PLOT FRONTAGES" — honest,
@@ -3205,6 +3240,7 @@ export function renderFolio(fabric, opts = {}) {
     // what a ratchet is for, instead of paying for itself with the map's place-names.
     budget: Math.max(estimateLetteringOps(fabric, m, LENS), CEIL - prims.n),
     allowNotes: lensAllows(LENS.id, 'marginalia'),
+    words: WORDS,
   });
   prims.n += lettering.ops;
   els += lettering.fragment ? 1 : 0;

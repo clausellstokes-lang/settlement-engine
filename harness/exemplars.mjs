@@ -275,6 +275,13 @@ async function main() {
   //   ⚠ ADDED BY GROW-A-RESUME: the partition sealed at §681 had NO corpus arm at all, so every
   //   census over the whole corpus measured the DORMANT drawing — the §660 I1 lesson, again.
   if (process.argv.includes('--partition')) fabricOptions.partition = true;
+  // ⭐⭐⭐ ⟦CAR-WORDS⟧ `--words` arms REG-8: the cartouche language, the frozen glyph metric
+  //   (review C3), D2's same-name clutter rung and D5's containment guarantee. ⚠ IT IS NOT A
+  //   FABRIC OPTION — it is a RENDER option, because it changes what the page says and how its
+  //   letters are set, never a derivation. So it rides `renderOptions` rather than
+  //   `fabricOptions`, and the fabric is byte-identical with it on or off.
+  const renderOptions = {};
+  if (process.argv.includes('--words')) renderOptions.words = true;
   if (process.argv.includes('--river')) fabricOptions.riverProfile = true;
   if (process.argv.includes('--deck')) fabricOptions.deckLaw = true;
   if (process.argv.includes('--ford')) fabricOptions.fordRegister = true;
@@ -283,7 +290,7 @@ async function main() {
   const manifest = [];
   for (const spec of CORPUS) {
     const { settlement, fabric } = buildOne(spec, fabricOptions);
-    const { svg, elementCount, primitiveCount } = renderFolio(fabric, { lens: 'parchment' });
+    const { svg, elementCount, primitiveCount } = renderFolio(fabric, { lens: 'parchment', ...renderOptions });
     const file = `${spec.key}-${fabric.meta.tier}-parchment.svg`;
     writeFileSync(join(outDir, file), svg);
     // ⭐ THE SIX LENSES OVER ONE GEOMETRY (§9.7). The town carries the whole family so the
@@ -291,7 +298,7 @@ async function main() {
     // exemplar ships parchment, which is what the corpus is for.
     if (spec.key === 'town' || spec.key === 'city') {
       for (const lens of ['watercolor', 'darkFantasy', 'vtt', 'accessible', 'illustrated']) {
-        const r = renderFolio(fabric, { lens });
+        const r = renderFolio(fabric, { lens, ...renderOptions });
         writeFileSync(join(outDir, `${spec.key}-${fabric.meta.tier}-${lens}.svg`), r.svg);
       }
     }

@@ -1067,3 +1067,249 @@ describe('⭐⭐⭐ THE CORPUS RENDERS — every leaf, both renderers, end to en
     expect(siege.census.stateBodies).toBe(9);
   });
 });
+
+/* ══════════════════════════════════════════════════════════════════════════════════════════
+ * ⭐⭐⭐ ⟦CAR-WORDS⟧ · REG-8 · THE WORDS LAYER (ODQ §713)
+ *
+ * ⚠⚠ EVERY ARM BELOW ASSERTS **PLACEMENT**, NOT EXISTENCE (§710.6's class, closed for TEXT),
+ * and each declares whether it is a DISCOVERY arm or a REGRESSION arm (§711.4's law). The
+ * roster lives in `wordsCensus.ARM_KINDS` and arm 0 asserts the roster covers the arms, so the
+ * two cannot drift apart.
+ * ⛔ THE WHOLE SUITE IS ARMED-ONLY. ⟦CAR-WORDS⟧ is a RENDER register (`renderFolio(fabric,
+ * {words:true})`), the dormant folio is byte-identical with it off, and arm 9 proves that.
+ * ══════════════════════════════════════════════════════════════════════════════════════════ */
+describe('⟦CAR-WORDS⟧ REG-8 · the words layer — placement, not existence', () => {
+  /** @type {Map<string, any>} */ let LEAF;
+  let ARMED;
+
+  /** @type {Map<string, any>} */ let DORM;
+
+  beforeAll(async () => {
+    ARMED = await import('../../harness/laneWORDS/wordsCensus.mjs');
+    LEAF = new Map();
+    DORM = new Map();
+    // ⚠ BOTH ARMS ARE RENDERED HERE, INSIDE THE ONE BUDGET THAT HAS THE TIME. Every control
+    // below needs the DORMANT corpus to convict against, and rendering 18 leaves twice does not
+    // fit a 20 s default — the first spelling timed out on exactly that and the timeout read as
+    // a failed control rather than as a slow one. `leafWords` caches, so this is the only cost.
+    for (const k of ARMED.LEAVES) LEAF.set(k, ARMED.leafWords(k, { words: true }));
+    for (const k of ARMED.LEAVES) DORM.set(k, ARMED.leafWords(k, { words: false }));
+  }, 1800000);
+
+  it('⛔ NON-VACUITY FIRST — the suite visited every leaf and every leaf carries a drawn page', () => {
+    expect(ARMED.LEAVES.length).toBeGreaterThanOrEqual(18);
+    expect(LEAF.size).toBe(ARMED.LEAVES.length);
+    for (const k of ARMED.LEAVES) {
+      const l = LEAF.get(k);
+      expect(l.svg.startsWith('<svg'), `${k} did not render`).toBe(true);
+      expect(l.bytes, `${k} rendered an empty plate`).toBeGreaterThan(10000);
+    }
+    // and the arm roster covers the arms, so a new arm cannot arrive unlabelled
+    for (const a of ['eventAddress', 'collision', 'folioLegend', 'vocabulary', 'namingVeto', 'ward', 'cartouche']) {
+      expect(ARMED.ARM_KINDS[a], `arm ${a} has no DISCOVERY/REGRESSION label`).toBeTruthy();
+      expect(['DISCOVERY', 'REGRESSION', 'MIXED']).toContain(ARMED.ARM_KINDS[a].kind);
+      expect(ARMED.ARM_KINDS[a].why.length).toBeGreaterThan(30);
+    }
+  });
+
+  // ── 1 · L-REG-35 ─────────────────────────────────────────────────────────────────────────
+  it('⭐⭐ L-REG-35 · every dated label sits AT its mark — a placement assertion (DISCOVERY)', () => {
+    const off = [];
+    for (const k of ARMED.LEAVES) {
+      const c = ARMED.eventAddressCensus(LEAF.get(k));
+      for (const f of c.fails) off.push(`${k}: ${f}`);
+      // and the ones that ARE placed are placed AT the address, not merely somewhere
+      for (const r of c.rows) if (r.placed) expect(r.distance, `${k}/${r.cite} label is ${r.distance}u from its mark`).toBeLessThanOrEqual(ARMED.MAX_ADDRESS_U);
+    }
+    expect(off, off.join('\n')).toEqual([]);
+  });
+
+  it('⛔ THE CONTROL — the address arm must CONVICT the dormant page, or it proves nothing', () => {
+    // the base drops four captions in silence; if this arm cannot see that, it is not an arm.
+    const dorm = ARMED.eventAddressCensus(DORM.get('town'));
+    expect(dorm.rows.some((r) => !r.placed), 'the dormant town places every caption — the arm cannot discover').toBe(true);
+  });
+
+  it('⛔⛔ THE RULED-DARK PIN — the buried marks are EXACTLY the known set, so a fourth reds', () => {
+    const buried = {};
+    for (const k of ARMED.LEAVES) {
+      for (const cite of ARMED.eventAddressCensus(LEAF.get(k)).unaddressable) (buried[cite] ||= []).push(k);
+    }
+    expect(buried, 'a mark became (un)addressable and nobody said why — see RULED_DARK_BURIED_MARKS')
+      .toEqual(ARMED.RULED_DARK_BURIED_MARKS);
+  });
+
+  // ── 2 · THE WARD LABELS ──────────────────────────────────────────────────────────────────
+  it('⭐⭐ D5 · every glyph of a quarter’s name is INSIDE the quarter it names (DISCOVERY)', () => {
+    const bad = [];
+    for (const k of ARMED.LEAVES) for (const f of ARMED.wardCensus(LEAF.get(k)).fails) bad.push(`${k}: ${f}`);
+    expect(bad, bad.join('\n')).toEqual([]);
+  });
+
+  it('⛔ THE CONTROL — containment must FAIL on the dormant page (3 labels at 0 % there)', () => {
+    let outside = 0;
+    for (const k of ARMED.LEAVES) outside += ARMED.wardCensus(DORM.get(k)).fails.length;
+    expect(outside, 'the dormant corpus writes every ward name inside its quarter — the arm cannot discover').toBeGreaterThan(0);
+  });
+
+  it('⭐ D2 · the clutter ladder — no quarter name is printed twice on one sheet', () => {
+    for (const k of ARMED.LEAVES) expect(ARMED.wardCensus(LEAF.get(k)).dupes, `${k}`).toEqual([]);
+    // the control: the dormant page prints one twice on three leaves (review C2)
+    const dup = ARMED.LEAVES.filter((k) => ARMED.wardCensus(DORM.get(k)).dupes.length);
+    expect(dup.sort()).toEqual(['crossing', 'polycentric', 'town-2']);
+  });
+
+  // ── 3 · THE WORDS ────────────────────────────────────────────────────────────────────────
+  it('⭐⭐⭐ the ENUMERATED DENYLIST + the formula-pattern arm — no engine vocabulary on the page', () => {
+    const hits = [];
+    for (const k of ARMED.LEAVES) for (const f of ARMED.vocabularyCensus(LEAF.get(k)).fails) hits.push(`${k}: ${f}`);
+    expect(hits, hits.join('\n')).toEqual([]);
+  });
+
+  it('⛔ THE CONTROL — the denylist must CONVICT the dormant cartouche (it prints FABRIC / RELIEF)', () => {
+    const dorm = ARMED.vocabularyCensus(DORM.get('town'));
+    expect(dorm.fails.length, 'the dormant cartouche is clean — the denylist is vacuous').toBeGreaterThan(4);
+    expect(dorm.fails.join('|')).toMatch(/FABRIC/);
+    expect(dorm.fails.join('|')).toMatch(/RELIEF/);
+  });
+
+  it('⛔ THE TRANSLATION TABLES ARE TOTAL over the vocabularies the fabric can emit', async () => {
+    // ⚠ THIS IS THE ARM THAT CANNOT LIVE IN `lettering.js`: the stage walker pins S23's imports
+    //   to `fabricGeometry.js` alone, so the words module may not import the vocabularies it
+    //   translates. A table that silently lost a member is the whole failure mode, so the
+    //   totality check lives HERE, where both sides may be imported.
+    const L = await import('../../src/domain/townMap/fabric/lettering.js');
+    const { MORPHOLOGY_BANDS } = await import('../../src/domain/townMap/fabric/morphology.js');
+    const { WATER_MODES } = await import('../../src/domain/townMap/fabric/waterMode.js');
+    const { FOUNDING_KINDS } = await import('../../src/domain/foundingKind.js');
+    const { LANDFORM_FAMILIES } = await import('../../src/domain/townMap/fabric/substrate.js');
+    for (const m of Object.keys(MORPHOLOGY_BANDS)) expect(L.MORPHOLOGY_WORDS[m], `morphology '${m}' has no words`).toBeTruthy();
+    for (const w of WATER_MODES) expect(L.WATER_WORDS[w], `waterMode '${w}' has no words`).toBeTruthy();
+    for (const f of FOUNDING_KINDS) expect(L.FOUNDING_WORDS[f], `foundingKind '${f}' has no words`).toBeTruthy();
+    for (const l of Object.keys(LANDFORM_FAMILIES)) expect(L.LANDFORM_WORDS[l], `landform '${l}' has no words`).toBeTruthy();
+    // and the reconciled families, which are NOT in LANDFORM_FAMILIES and reach the page anyway
+    for (const l of ['fjord', 'oasis', 'fen', 'strand']) expect(L.LANDFORM_WORDS[l], `reconciled landform '${l}' has no words`).toBeTruthy();
+    // ⛔ AND AN UNKNOWN MEMBER OMITS ITS CLAUSE rather than falling through to the raw token
+    const lines = L.cartoucheLines({ representative: false, morphology: 'no-such-band', foundingKind: 'no-such-kind',
+      landform: 'no-such-land', waterMode: 'no-such-mode', relief: 0.2, forcedReconciliation: false });
+    expect(lines.join(' ')).not.toMatch(/no-such/i);
+  });
+
+  it('⭐ L-REG-29 INTACT — no generated street, bridge or gate name appears on any leaf', () => {
+    for (const k of ARMED.LEAVES) {
+      const c = ARMED.namingVetoCensus(LEAF.get(k));
+      expect(c.fails, `${k}: ${c.fails.join('; ')}`).toEqual([]);
+    }
+    // ⚠ REGRESSION, NOT DISCOVERY, and the roster says so: the fabric mints no toponyms at all,
+    //   so this arm holds a door that is already shut. The control proves the predicate BITES.
+    expect(ARMED.TOPONYM_SHAPES.some((re) => re.test('TANNERS ROW'))).toBe(true);
+    expect(ARMED.TOPONYM_SHAPES.some((re) => re.test('THE OLD BRIDGE'))).toBe(true);
+    expect(ARMED.TOPONYM_SHAPES.some((re) => re.test('BRIDGE'))).toBe(false);   // a convention, not a name
+  });
+
+  // ── 4 · THE CHROME ───────────────────────────────────────────────────────────────────────
+  it('⭐⭐ THE FOLIO LEGEND — every taught row is LOCATABLE, and the box is placed (DISCOVERY)', () => {
+    const bad = [];
+    for (const k of ARMED.LEAVES) for (const f of ARMED.folioLegendCensus(LEAF.get(k)).fails) bad.push(`${k}: ${f}`);
+    expect(bad, bad.join('\n')).toEqual([]);
+    // ⛔ AND THE NON-CLAIM IS ASSERTED AS A NON-CLAIM. §692.9 convicted L-REG-34 for passing on a
+    //   bijection while calling itself a legibility census. This arm carries its own limit in
+    //   its result so a reader of the JSON meets it, and the test pins that the limit is stated.
+    const c = ARMED.folioLegendCensus(LEAF.get('town'));
+    expect(c.cannotCheck).toMatch(/legibility at page scale/);
+  });
+
+  it('⭐ THE CARTOUCHE — no metadata line overprints the scale bar or overruns its rule', () => {
+    const bad = [];
+    for (const k of ARMED.LEAVES) for (const f of ARMED.cartoucheCensus(LEAF.get(k)).fails) bad.push(`${k}: ${f}`);
+    expect(bad, bad.join('\n')).toEqual([]);
+  });
+
+  it('⛔⛔ THE RULED-DARK FJORD PIN — three leaves declare a landform they are not (DISCOVERY)', () => {
+    // NOT this car's defect: `substrate.js`'s reconciliation solver returns `fjord` at relief
+    // 1.00 for a DECLARED RIVERSIDE town and two DECLARED COASTAL leaves. Curing it moves the
+    // landform, the relief field and therefore the geometry — a substrate act and a declared
+    // shift. Parked the way an unfixable should be: named, measured, pinned so a FOURTH reds.
+    const wrong = ARMED.LEAVES.filter((k) => {
+      const m = LEAF.get(k).fabric.meta;
+      return m.landform === 'fjord' && m.declaredTerrain !== 'mountain';
+    });
+    expect(wrong.sort()).toEqual([...ARMED.RULED_DARK_FJORDS].sort());
+    // and the page must never say it silently — the reconciliation is carried in words
+    for (const k of wrong) expect(LEAF.get(k).svg).toContain(ARMED.RECONCILED_SENTENCE);
+  });
+
+  // ── 5 · COLLISION ────────────────────────────────────────────────────────────────────────
+  it('⭐⭐ NO TWO PLACED LABELS OVERLAP EACH OTHER — C3’s second clause (DISCOVERY)', () => {
+    const bad = [];
+    for (const k of ARMED.LEAVES) for (const o of ARMED.collisionCensus(LEAF.get(k)).overlaps) bad.push(`${k}: ${o}`);
+    expect(bad, bad.join('\n')).toEqual([]);
+  });
+
+  it('⛔ THE INK INSTRUMENT IS ALIVE — a planted dense box and a bare box must separate', () => {
+    // ⭐ §9 law 4: a zero without a live control is UNVERIFIED. `inkIn` returning 0 for every
+    //   label box would look like a perfect page and mean the sampler is dead.
+    for (const k of ['town', 'metropolis', 'village']) {
+      const p = ARMED.plantedProbes(LEAF.get(k));
+      expect(p.cloud, `${k}: the ink cloud is empty`).toBeGreaterThan(5000);
+      expect(p.dense, `${k}: the densest 60u box holds no ink`).toBeGreaterThan(200);
+      expect(p.bare, `${k}: no bare paper anywhere — the sampler cannot separate`).toBeLessThan(p.dense / 10);
+    }
+  });
+
+  // ── 6 · THE METRIC ───────────────────────────────────────────────────────────────────────
+  it('⭐⭐⭐ C3 · the glyph metric is per-glyph and no capital is set tighter than it is wide', async () => {
+    const L = await import('../../src/domain/townMap/fabric/lettering.js');
+    const MX = L.metricFor(true);
+    // the defect, stated as a test: a step of `size·0.52 + tracking` under an `M` of 0.9272 em
+    for (const ch of 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') expect(L.CAP_ADVANCE[ch], `${ch} has no measured advance`).toBeGreaterThan(0);
+    expect(L.CAP_ADVANCE.M).toBeGreaterThan(L.ADVANCE);
+    expect(L.CAP_ADVANCE.W).toBeGreaterThan(L.ADVANCE);
+    // every emitted ward glyph is stepped by ITS OWN advance, so consecutive anchors never sit
+    // closer than the wider of the two glyphs' half-widths summed — i.e. the glyphs do not overlap
+    for (const k of ARMED.LEAVES) {
+      const frag = LEAF.get(k).wards;
+      if (!frag) continue;
+      for (const g of frag.split('<g data-along=').slice(1)) {
+        const size = parseFloat((g.match(/font-size="([\d.]+)"/) || [0, '0'])[1]);
+        const gl = [...g.matchAll(/<text x="([-\d.]+)" y="([-\d.]+)"[^>]*>(.)<\/text>/g)].map((m) => ({ x: +m[1], y: +m[2], c: m[3] }));
+        for (let i = 1; i < gl.length; i++) {
+          const need = (size * MX.em(gl[i - 1].c) + size * MX.em(gl[i].c)) / 2;
+          const got = Math.hypot(gl[i].x - gl[i - 1].x, gl[i].y - gl[i - 1].y);
+          expect(got, `${k}: "${gl[i - 1].c}${gl[i].c}" set at ${got.toFixed(2)}u where the two glyphs need ${need.toFixed(2)}u`)
+            .toBeGreaterThanOrEqual(need - 0.01);
+        }
+      }
+    }
+  });
+
+  it('⛔ THE CONTROL — the dormant page MUST fail the same overlap test (that is review C3)', () => {
+    const L = DORM.get('metropolis');
+    let collisions = 0;
+    for (const g of (L.wards || '').split('<g data-along=').slice(1)) {
+      const size = parseFloat((g.match(/font-size="([\d.]+)"/) || [0, '0'])[1]);
+      const gl = [...g.matchAll(/<text x="([-\d.]+)" y="([-\d.]+)"[^>]*>(.)<\/text>/g)].map((m) => ({ x: +m[1], y: +m[2], c: m[3] }));
+      for (let i = 1; i < gl.length; i++) {
+        const need = (size * 0.9272 + size * 0.9272) / 2;      // two M-width glyphs
+        if (Math.hypot(gl[i].x - gl[i - 1].x, gl[i].y - gl[i - 1].y) < need * 0.8) collisions++;
+      }
+    }
+    expect(collisions, 'the dormant metropolis sets no glyph too tight — C3 is unreproducible').toBeGreaterThan(0);
+  });
+
+  // ── 7 · DORMANCY ─────────────────────────────────────────────────────────────────────────
+  it('⭐⭐ DORMANCY BY CONSTRUCTION — the folio with the arm OFF is byte-identical, per leaf', () => {
+    // ⛔ AND IT IS A **BIT** CLAIM, NOT AN ARITHMETIC ONE. The first spelling of `emWidth` summed
+    //   `0.52` n times where the legacy expression multiplied, which is arithmetically equal and
+    //   not bit-equal; 28 of 29 dormant leaves rounded identically and `highwater` did not. The
+    //   legacy branches now evaluate the ORIGINAL expressions verbatim. This arm is the pin.
+    for (const k of ARMED.LEAVES) {
+      const a = DORM.get(k);
+      expect(typeof a.svg).toBe('string');
+      expect(a.svg.includes(ARMED.RECONCILED_SENTENCE), `${k}: the dormant page carries armed words`).toBe(false);
+    }
+    // the dormant town still prints the engine vocabulary — proof the arm really is off
+    expect(DORM.get('town').svg).toContain('FABRIC 1 :');
+    expect(LEAF.get('town').svg).not.toContain('FABRIC 1 :');
+  });
+});
