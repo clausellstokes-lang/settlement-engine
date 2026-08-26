@@ -15,7 +15,7 @@
  * checked against a real corpus build so it cannot rot into decoration.
  */
 import { describe, it, expect, beforeAll } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { RUN_TYPES, RUN_POLICY, TOWER_TYPES } from '../../src/domain/townMap/fabric/wallRuns.js';
@@ -27,6 +27,33 @@ import { makeWalledFixture } from '../fixtures/townMapFixtures.js';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SRC = join(HERE, '../../src/domain/townMap/fabric');
 const read = (f) => readFileSync(join(SRC, f), 'utf8');
+
+/**
+ * ⛔⛔⛔ **THE FABRIC DIRECTORY, READ — NOT A HAND-KEPT LIST OF IT.** WALL-CURTAIN, ODQ §699.6.
+ *
+ * Both source scans below used to name their files by hand: the single-writer arm listed **six**
+ * and the §278 proper-crossing arm listed **twelve**. **The directory holds seventy-one.** A
+ * seventh classifier — or a second crossing predicate — in any of the other modules passed both
+ * arms in silence, and a skeptic's plant proved exactly that. The two arms exist to guarantee
+ * SINGLE WRITERS; a scope that is a hand-kept subset of the population guarantees single writers
+ * among the files somebody remembered.
+ *
+ * ⭐ **THE LAW, earned six times and paid out here** (§699.6): *a guard's scope is its SHIPPED
+ * PREDICATE, never its name and never its comment — and a guard written to close a class is the
+ * most likely place for the class's next instance.* Both scans now enumerate the directory, and
+ * MEASURED before the change: widening them convicts **nobody new** (0 further modules assign a
+ * run type; the crossing predicate still has exactly one home across all 71). The guards were
+ * already true of the whole population — they simply could not say so.
+ */
+const FABRIC_MODULES = readdirSync(SRC).filter((f) => f.endsWith('.js')).sort();
+
+/**
+ * ⛔ NON-VACUITY FOR THE READ ITSELF. A directory scan that came back short — a moved folder, a
+ * changed extension, a build that emits elsewhere — would report "exactly one home" from an empty
+ * set, which is the precise failure shape both arms exist to prevent. The floor is well under the
+ * 71 measured today so a deletion does not red it, and far above the 6 and 12 it replaces.
+ */
+const MODULE_FLOOR = 40;
 
 /**
  * ⭐⭐⭐ THE RULED-DARK ROSTER. A run type that the corpus cannot produce today is recorded HERE
@@ -90,8 +117,15 @@ describe('§5 W2 · the closed sets are CLOSED, and the walker says so', () => {
    * proves the scan can see one.
    */
   it('⛔ SPINE-3 · NO MODULE BUT `wallRuns.js` DECIDES A RUN TYPE — the single-writer arm', () => {
-    const OTHERS = ['wallPublication.js', 'walls.js', 'rampartWorks.js', 'wallCircuit.js',
-      'partitionDress.js', 'circuitDemotion.js'];
+    // ⛔ WALL-CURTAIN (§699.6): the whole directory, minus the one module that is ALLOWED to
+    // decide. The predicate now matches the name it has carried since SPINE-3.
+    expect(FABRIC_MODULES.length, 'the fabric directory read came back short — this scan\'s scope'
+      + ' has collapsed and every zero below would be vacuous').toBeGreaterThanOrEqual(MODULE_FLOOR);
+    const OTHERS = FABRIC_MODULES.filter((f) => f !== 'wallRuns.js');
+    // …and the module that IS allowed to decide must be in the directory, or the exclusion is
+    // excluding nothing and the arm is scanning a population that cannot contain the writer.
+    expect(FABRIC_MODULES, 'the one permitted writer is not in the scanned directory')
+      .toContain('wallRuns.js');
     const assigning = (body) => {
       const found = new Set();
       const shapes = [
@@ -192,9 +226,16 @@ describe('§5 W2 · the closed sets are CLOSED, and the walker says so', () => {
    * literal forms, together with the `1e-9` open-interval test that makes a crossing PROPER.
    */
   it('⭐⭐ §278 · ONE proper-crossing predicate in the fabric — a source scan, not a hope', () => {
-    const FILES = ['fabricGeometry.js', 'groundLaw.js', 'walls.js', 'wallCircuit.js', 'wallRuns.js',
-      'epochAxis.js', 'circuitDemotion.js', 'reservedGround.js', 'parcels.js', 'buildFabric.js',
-      'groundRefusal.js', 'districtPartition.js'];
+    /**
+     * ⛔ WALL-CURTAIN: this arm named TWELVE files of seventy-one — the same defect as the
+     * single-writer arm above, one arm over, and it was not in §699.6's charter because nobody
+     * had looked. Widening it convicts nobody new (measured), so the guard was already true of
+     * the whole directory and merely unable to say so.
+     */
+    expect(FABRIC_MODULES.length, 'the fabric directory read came back short — this scan\'s scope'
+      + ' has collapsed and "exactly one home" would be a claim about an empty set')
+      .toBeGreaterThanOrEqual(MODULE_FLOOR);
+    const FILES = FABRIC_MODULES;
     // The open-interval test that distinguishes a PROPER crossing from an abutment. Comments are
     // stripped first: this file and `fabricGeometry.js` both DISCUSS the bound in prose, and a
     // scan that convicts prose is a scan that gets its comment reworded rather than obeyed.

@@ -374,7 +374,22 @@ function dressPageInner(page, opts) {
         // ⭐ COURSING IN PATCHES, NOT A CONTINUOUS LADDER (hf261 rung 4 — and it is what makes
         //   it affordable). The pitch and the patch share are the estate's own signed figures.
         const patch = hatchPolygon(bandPoly, 90, rw * TEXTURE_PITCH_FRONTAGES);
-        const keep = Math.max(1, Math.round(patch.length * TEXTURE_PATCH_SHARE));
+        /**
+         * ⛔⛔ **`Math.max(1, …)` GUARANTEED AT LEAST ONE ELEMENT OF A LIST THAT CAN BE EMPTY.**
+         * WALL-CURTAIN. `hatchPolygon` returns `[]` for a band too narrow to catch a single rule
+         * line at this pitch, and the floor of 1 then indexed `patch[0]` — `undefined` — straight
+         * into `linePath`, which reads `.length` off it and throws. **A band that small was
+         * unreachable until the curtain was clipped at the bank instead of at the facet**: the
+         * shortest published fragment on the corpus is now **3.554 u** on `year-100` (and 0.674 u
+         * on `town-2`), where before the shortest was a whole facet. Latent, not introduced — any
+         * future narrow band would have found it — and the floor is now a CLAMP, which is what it
+         * was always meant to be: *keep a share of the patches, but never more than there are.*
+         *
+         * ⚠ AND IT IS ONLY A CRASH BECAUSE NOTHING IN THE GATE RENDERS THIS PAGE. The full gate
+         * ran **19 files / 439 tests EXIT 0** at the very tip whose page renderer threw on leaf 14
+         * of 18. That gap is recorded in the receipt; it is not this line's to close.
+         */
+        const keep = Math.min(patch.length, Math.max(1, Math.round(patch.length * TEXTURE_PATCH_SHARE)));
         for (let i = 0; i < keep; i++) { coursing.push(linePath(patch[i])); census.coursing++; }
         // ⭐ THE COMB on the OUTER edge only — hf103's MURUS SECUNDUS, and the reason I10's
         //   "symmetric tick-ladder reads as railway" dies: a comb on one edge is not a ladder.

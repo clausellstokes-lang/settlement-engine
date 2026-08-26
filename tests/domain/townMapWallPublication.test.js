@@ -25,6 +25,7 @@ import { buildFabric } from '../../src/domain/townMap/fabric/buildFabric.js';
 import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { makeWalledFixture } from '../fixtures/townMapFixtures.js';
 import { buildSettledPartition } from '../../src/domain/townMap/fabric/partitionConstruct.js';
+import { faceRing, liveFaces } from '../../src/domain/townMap/fabric/partitionArrangement.js';
 import { deriveRampartWorks, WEAR_GRADES } from '../../src/domain/townMap/fabric/rampartWorks.js';
 import { RUN_TYPES, RUN_POLICY, TOWER_TYPES } from '../../src/domain/townMap/fabric/wallRuns.js';
 import { wallBand, WALL_MARGIN, WALL_MARGIN_DEFAULT } from '../../src/domain/townMap/fabric/walls.js';
@@ -112,6 +113,20 @@ beforeAll(() => {
   // ⛔ THE CONTROL ARM: the same call with the SITE WITHHELD and the declaration suppressed.
   bothPubBlind = publishWallWorks(both.spinePartition, { ...o, site: null });
 }, 900000);
+
+/** Distance from a point to a closed ring's BOUNDARY — the bank, for the clip assertion. */
+function distToRingBoundary(p, ring) {
+  let best = Infinity;
+  for (let i = 0; i < ring.length; i++) {
+    const a = ring[i]; const b = ring[(i + 1) % ring.length];
+    const dx = b[0] - a[0]; const dy = b[1] - a[1];
+    const L2 = dx * dx + dy * dy;
+    const t = L2 > 0 ? Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / L2)) : 0;
+    const d = Math.hypot(p[0] - (a[0] + dx * t), p[1] - (a[1] + dy * t));
+    if (d < best) best = d;
+  }
+  return best;
+}
 
 describe('PA.2 · THE CONTRACT TEST — the REG-2 dress derives UNCHANGED through the publication', () => {
   it('the legacy node has a rampart to be a fixture for', () => {
@@ -431,5 +446,214 @@ describe('SPINE-3 · CARRIAGE — the publication carries what the legacy produc
         if (c.wetVertices > 0) expect(f.closed, 'a wrap that met water published a CLOSED cycle').toBe(false);
       }
     }
+  });
+});
+
+/* ══════════════════════════════════════════════════════════════════════════════════════════
+ * ⛔⛔⛔ WALL-CURTAIN · ODQ §699.6 — **THE 83→7 RECOVERY GETS A GATE GUARD.**
+ *
+ * §699.6, verbatim: *"83→7 has NO gate guard at all — `runSignal.mjs` is a harness script and no
+ * test asserts a corpus-level run-type count, so the wave's headline number is unprotected
+ * against regression."* It was the second of the two guards that entry chartered.
+ *
+ * ⭐ **WHY A CORPUS AND NOT THE ONE FIXTURE ABOVE.** Everything SPINE-3 proved about carriage was
+ * proved on a SINGLE settlement (`spine3-carriage`). Measured here for the first time: run the
+ * SAME carriage predicate over six further independent fixtures and it fails on **five of them** —
+ * so a claim that held on one leaf was being read as a claim about the producer. That is the
+ * `§688.7` family again (a predicate weaker than its name), and the answer is not to weaken the
+ * predicate but to give it a POPULATION and pin what it finds.
+ *
+ * ⚠⚠ **THE LOSSES BELOW ARE INHERITED, NOT THIS LANE'S — AND THAT IS PROVEN, NOT ASSERTED.** The
+ * same seven fixtures were measured at the WALL-CURTAIN base (`f8f6456a0`) in a second worktree:
+ * **identical lost set, identical 15 lost runs.** The bank clip moved `water-termination` 11 → 16
+ * in the right direction and cleared nothing, which is honest and is why the roster is a pinned
+ * ruling rather than a cure.
+ *
+ * ⭐ **AND IT IS A RATCHET, NOT A GOLDEN.** The lost TYPES are pinned exactly (a NEW type lost
+ * reds) and the lost RUN COUNT is a ceiling (a widening reds, a cure passes). No per-type count is
+ * frozen, because the counts move legitimately whenever the published extent does — as this lane's
+ * own cure moved them.
+ * ════════════════════════════════════════════════════════════════════════════════════════ */
+describe('WALL-CURTAIN · §699.6 · THE RUN-TYPE RECOVERY, OVER A CORPUS AND NOT ONE LEAF', () => {
+  /**
+   * Seven settlements spanning village → metropolis and both water modes. ⚠ THE SCOPE IS
+   * DECLARED: this is a FIXTURE corpus, not the harness's eighteen leaves, and the 18-leaf figure
+   * (`crest` 62→38 · LOST 7, notch alone) is `harness/laneSPINE3/runSignal.mjs`'s. What this arm
+   * guards is the LAW the headline rests on — that the site reaches the classifier and the four
+   * types SPINE-3 recovered are still being minted — across a population rather than a sample.
+   */
+  const SPECS = Object.freeze([
+    ['rc-town', 'town', 4200], ['rc-city', 'city', 20000], ['rc-metro', 'metropolis', 71000],
+    ['rc-town2', 'town', 6500], ['rc-city2', 'city', 34000], ['rc-village', 'village', 900],
+    ['spine3-carriage', 'city', 20000],
+  ]);
+
+  /**
+   * ⛔ THE DECLARED LOSS ROSTER — measured at the base and unmoved at this tip. Each entry is a
+   * type the LEGACY producer mints on this fixture corpus and the successor neither mints nor
+   * declares. Entries leave by MEASUREMENT (the type fires) and never by convenience.
+   */
+  const DECLARED_LOST = Object.freeze({
+    're-use': 'the successor keys `roadD` on ARTERY-ranked WAY face centroids, and these fixture'
+      + ' partitions raise none within a working margin of the circuit; the legacy reads its own'
+      + ' road embankments off the trace. Fires 5→5 on the harness corpus, so it is a fixture'
+      + ' grounding gap and not a dead classifier',
+    'water-termination': 'lost on the two `mode:\'near\'` fixtures only. SPINE-3 cured this class'
+      + ' once by asking the §648 channel line as well as the clipped WATER faces; these two are'
+      + ' the residue of that cure and are the next lane\'s, not this one\'s',
+  });
+  /** ⛔ A CEILING, so a widening reds and a cure passes. Measured 15 at base AND at this tip. */
+  const LOST_RUN_CEILING = 15;
+
+  /** @type {any} */ let R = null;
+  beforeAll(() => {
+    const legacyTotals = {}; const sited = {}; const blind = {};
+    const lostTypes = new Set(); let lostRuns = 0; let wraps = 0; let circuits = 0;
+    let clippedEnds = 0; let worstClipGap = 0; let wetCircuits = 0; let closedOverWater = 0;
+    for (const [seed, tier, population] of SPECS) {
+      const s = makeWalledFixture({ _seed: seed, tier, population });
+      const f = buildFabric(s, buildTownMapModel(s, null), { rampart: true, partition: true });
+      const leafLegacy = {};
+      for (const w of f.walls || []) {
+        circuits++;
+        for (const [t, v] of Object.entries(w.runCounts || {})) {
+          leafLegacy[t] = (leafLegacy[t] || 0) + v;
+          legacyTotals[t] = (legacyTotals[t] || 0) + v;
+        }
+      }
+      if (!f.spinePartition) continue;
+      wraps += f.spinePartition.wraps.length;
+      const o = pubOptsFor(f);
+      const p = publishWallWorks(f.spinePartition, o);
+      const b = publishWallWorks(f.spinePartition, { ...o, site: null });
+      for (const [t, v] of Object.entries(p.counts)) sited[t] = (sited[t] || 0) + v;
+      for (const [t, v] of Object.entries(b.counts)) blind[t] = (blind[t] || 0) + v;
+      const c = carriageCensus(leafLegacy, p);
+      lostRuns += c.lostRuns;
+      for (const t of c.lost) lostTypes.add(t);
+      // ── WALL-CURTAIN · where the curtain STOPS, measured on every leaf that met water ───────
+      const rings = [];
+      for (const face of liveFaces(f.spinePartition.arrangement)) {
+        if (face.cls !== 'WATER') continue;
+        const r = faceRing(f.spinePartition.arrangement, face.id);
+        if (r.length >= 3) rings.push(r);
+      }
+      for (const cir of p.circuits) {
+        if (cir.wetVertices <= 0) continue;
+        wetCircuits++;
+        for (const fr of cir.fragments) {
+          if (fr.closed) closedOverWater++;
+          /**
+           * ⛔ **ONLY AN ENDPOINT IS A BANK CLIP.** `vertexOfRing === −1` means "not a facet
+           * vertex", and TWO things carry it: the clip at the bank, and the midpoint `sliceAtBank`
+           * inserts to lift a two-point arc to three. MEASURED when the first spelling of this
+           * arm counted both: a 0.48-unit piece's midpoint reads **0.242 u** from the bank and
+           * reddened an arm whose cure was working perfectly. A predicate that convicts the right
+           * code for the wrong reason is as useless as one that acquits.
+           */
+          const ends = [0, fr.ring.length - 1];
+          for (const k of ends) {
+            if (fr.vertexOfRing[k] !== -1) continue;
+            clippedEnds++;
+            const d = rings.length ? Math.min(...rings.map((w) => distToRingBoundary(fr.ring[k], w))) : Infinity;
+            if (d > worstClipGap) worstClipGap = d;
+          }
+        }
+      }
+    }
+    const sum = (o) => Object.values(o).reduce((a, b) => a + b, 0);
+    R = {
+      legacyTotals, sited, blind, lostTypes: [...lostTypes].sort(), lostRuns, wraps, circuits,
+      legacySum: sum(legacyTotals), sitedSum: sum(sited), blindSum: sum(blind),
+      clippedEnds, worstClipGap, wetCircuits, closedOverWater,
+    };
+  }, 900000);
+
+  it('⭐⭐⭐ THE CURTAIN RUNS TO THE BANK AND STOPS — measured at every clipped end', () => {
+    /**
+     * ⛔⛔ SPINE-3 stopped the wall being drawn over water by NOT PUBLISHING the whole fragment
+     * that contained the wet span. On the harness corpus it dropped **281.2 u to remove 32.5 u**
+     * on `town` and **401.3 u to remove 41.6 u** on `highwater`, and its termini stood **25–96 u
+     * short of the bank** against facet means of 31–69 — refuting its own stated exit. The cut is
+     * now at the crossing itself.
+     *
+     * ⭐ The predicate is about the END, not about the length, because a length on a fixture is a
+     * golden and this is a LAW. An end that exists BECAUSE of water carries `−1` in
+     * `vertexOfRing` — an interpolated point on the bank, not a facet vertex — and must stand
+     * within `BANK_CLEARANCE`'s own hair of a water face's boundary.
+     *
+     * ⛔⛔ **AND THE FIRST SPELLING OF THIS ARM WAS VACUOUS, WHICH IS RECORDED RATHER THAN TIDIED.**
+     * It was written against the single carriage fixture and opened with an early return for a
+     * publication with no wet circuit. MEASURED: `spine3-carriage` has **zero** wet circuits, so
+     * the arm returned immediately and passed **27/27 green while proving nothing**. It is the
+     * §688.7 family inside a test written to close the §688.7 family, and the cure is the floor
+     * below — the arm now names how many clipped ends it must find.
+     */
+    expect(R.wetCircuits, 'no fixture in the corpus raised a wrap that met water — this arm cannot'
+      + ' say anything about where the curtain stops').toBeGreaterThanOrEqual(3);
+    expect(R.clippedEnds, 'no clipped end anywhere in the corpus — the cut at the bank never fired,'
+      + ' so a green here would be a statement about an empty set').toBeGreaterThanOrEqual(10);
+    expect(R.worstClipGap, `the furthest clipped end stands ${R.worstClipGap.toFixed(3)} u from the`
+      + ' bank — the curtain must run to the water and stop, not vanish a facet early').toBeLessThan(0.05);
+    expect(R.closedOverWater, 'a wrap that met water published a CLOSED cycle — the ring was never'
+      + ' opened at all').toBe(0);
+  });
+
+  it('⛔ NON-VACUITY FIRST — the corpus actually built walls for both producers', () => {
+    // A recovery verdict computed over an empty corpus is the exact failure this arm exists to
+    // prevent, so the denominator is asserted before anything is concluded from it.
+    expect(R.circuits, 'the legacy producer raised no circuit anywhere in the corpus').toBeGreaterThanOrEqual(7);
+    expect(R.wraps, 'the constructor raised no wrap anywhere in the corpus').toBeGreaterThanOrEqual(7);
+    expect(R.legacySum, 'the legacy producer minted almost no runs — the corpus is not exercising it')
+      .toBeGreaterThanOrEqual(100);
+    expect(R.sitedSum, 'the successor minted almost no runs — the publication is not producing')
+      .toBeGreaterThanOrEqual(50);
+  });
+
+  it('⭐⭐⭐ THE RECOVERY HOLDS — `crest` is minted across the corpus, and the SITE is why', () => {
+    /**
+     * `crest` carried **62 of the 83 lost runs**, and it is the type that cannot be minted without
+     * the heightfield — the §2 spine input nothing ever carried until SPINE-3 routed it. A floor,
+     * not a golden: the count moves whenever the published extent does (this lane's own cure moved
+     * the 18-leaf figure 41 → 38), and what must never happen again is the collapse to zero.
+     */
+    expect(R.sited.crest, `the corpus mints ${R.sited.crest || 0} crest run(s) — the site has`
+      + ' stopped reaching the classifier, which is exactly the 83-run loss returning')
+      .toBeGreaterThanOrEqual(7);
+  });
+
+  it('⛔ THE LIVE CONTROL — withholding the SITE must DEGRADE the signal, not merely change it', () => {
+    /**
+     * ⭐ The sharpest available control, and it says more than "the number moved": with no
+     * substrate the crest runs do not VANISH from the circuit, they are re-typed downward — so
+     * `crest` must go to an exact **zero** while `new-cutting`, the ladder's fall-through, must
+     * RISE. A stub that returned a fixed publication would move neither.
+     */
+    expect(R.blind.crest, 'the site-blind arm still mints crest — it is being minted from something'
+      + ' other than the substrate, and a crest from ring curvature is a manufactured hill').toBe(0);
+    expect(R.blindSum, 'the site-blind arm produced no runs at all — it is a broken call, not a'
+      + ' control, and its zero above proves nothing').toBeGreaterThanOrEqual(50);
+    expect(R.blind['new-cutting'], 'the crest runs did not fall through to `new-cutting` when the'
+      + ' site was withheld — the ladder is not re-typing them, so this control is not live')
+      .toBeGreaterThan(R.sited['new-cutting']);
+  });
+
+  it('⛔⛔ THE CARRIAGE LOSS ROSTER IS PINNED — a NEW lost type reds, a widening reds', () => {
+    expect(R.lostTypes, 'the corpus-level carriage census lost a type that is not on the declared'
+      + ` roster — mint it or rule it. Declared: ${Object.keys(DECLARED_LOST).sort().join(', ')}`)
+      .toEqual(Object.keys(DECLARED_LOST).sort());
+    expect(R.lostRuns, `${R.lostRuns} run(s) of signal lost against a ceiling of`
+      + ` ${LOST_RUN_CEILING} measured at the WALL-CURTAIN base`).toBeLessThanOrEqual(LOST_RUN_CEILING);
+    // ⛔ AND THE ROSTER IS NOT DECORATION: every declared entry must carry a written reason, and
+    // a roster naming a type the census does not actually lose is a stale ruling.
+    for (const t of Object.keys(DECLARED_LOST)) {
+      expect(typeof DECLARED_LOST[t], `${t} is on the roster with no reason`).toBe('string');
+      expect(RUN_TYPES, `${t} is ruled lost and is not even a run type`).toContain(t);
+    }
+    // ⛔ NON-VACUITY: the census must be finding SOMETHING, or "the roster matches" is a statement
+    // about two empty sets. This is the one place a green here could be a dead instrument.
+    expect(R.lostRuns, 'the corpus-level carriage census found no loss at all — if that is real it'
+      + ' is a WIN and the roster must be emptied in the same act; if it is not, the census is dead')
+      .toBeGreaterThan(0);
   });
 });

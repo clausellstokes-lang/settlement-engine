@@ -127,6 +127,15 @@ export const CONDITIONAL_RUN_TYPES = Object.freeze(['bad-closure']);
 const NEAR_BANDS = 2.4;
 
 /**
+ * ⭐ HOW FAR CLEAR OF THE WATER'S EDGE A CLIPPED CURTAIN STOPS, in world units. See `dryArcs` for
+ * why it is not zero: a point solved exactly ONTO the bank is a point whose containment test is
+ * undefined, and a published wall must be provably dry to an instrument that does not share this
+ * file's arithmetic. It is a numerical clearance, not a standoff — nothing about the wall's
+ * economics is stated in it, and it is 3e-5 of a facet mean.
+ */
+const BANK_CLEARANCE = 1e-3;
+
+/**
  * ⭐⭐⭐ PUBLISH ONE PARTITION'S WALL WORKS.
  *
  * @param {any} partition a `SETTLED_GROUND_PARTITION`
@@ -258,28 +267,42 @@ export function publishWallWorks(partition, opts = {}) {
     const wetVertexAt = ring.map((p) => waterFaces.some((f) => f.ring.length >= 3 && pointInPolygon(p[0], p[1], f.ring)));
     const wetVertices = wetVertexAt.reduce((s, v) => s + (v ? 1 : 0), 0);
     /**
-     * ⛔⛔ **AND THE DROP IS BY SEGMENT, NOT BY VERTEX — MY OWN FIRST SPELLING WAS CONVICTED BY
-     * THE CENSUS I BUILT TO CONVICT IT.** Dropping only the vertices the water holds still
-     * published **four wraps drawing over water** (`town-2`, `highwater`, `year-018`, `year-100`),
-     * and `year-100` had **ZERO wet vertices and 33.5 units of wall over the river**: on a
-     * 26-facet ring the segments are tens of units long, so a narrow reach passes clean between
-     * two dry vertices. ⭐ THE CLASS: **a vertex test measures the vertices, not the line.**
+     * ⛔⛔⛔ **AND THE CUT IS AT THE BANK, NOT AT THE FACET — WALL-CURTAIN, ODQ §699.3.**
      *
-     * The exact rule: a SEGMENT is wet if any point along it stands in water; a VERTEX is dropped
-     * if it is wet OR incident to a wet segment. Every surviving consecutive pair therefore spans
-     * a segment that was measured dry, so a published fragment cannot cross water — which is the
-     * property, proven rather than hoped for.
+     * SPINE-3 dropped a VERTEX that was wet *or incident to a wet segment*, which meant the whole
+     * facet on the far side of that vertex went with it however dry it was. It bought a real zero
+     * — no published wall stood in water, proven by an identity — **at a price nothing was
+     * measuring**. MEASURED, corpus-wide, by `harness/laneSPINE3/wallWater.mjs`'s published-length
+     * column and attributed rule-by-rule by `dropAnatomy.mjs`:
+     *
+     *   `town` E0    dropped **281.2 u** to remove **32.5 u** of wet wall — 141.8 u of it in
+     *                facets that merely TOUCHED water, 139.4 u in facets that touched none.
+     *   `highwater`  **401.3 u** to remove **41.6 u**.  `year-100`  **261.4 u** to remove 33.5 u.
+     *   **11 of 17 wraps over-dropped; the excess ran 2.6 to 7.1 FACET MEANS per wrap.**
+     *
+     * And the termini it left stood **25–96 units short of the bank** against facet means of
+     * 31–69 — which refutes SPINE-3's own stated exit, *"the curtain runs to the bank and stops."*
+     * **We were drawing a shorter wall than the settlement has.**
+     *
+     * ⭐⭐ **THE RULE NOW: THE RING IS CUT WHERE IT CROSSES THE BANK.** The wet sub-intervals of
+     * every segment are solved exactly — the crossing parameters against each water ring's edges,
+     * with each resulting interval classified by its own midpoint — and the maximal DRY arcs are
+     * published. An arc's ends are the BANK ITSELF, interpolated, so `vertexOfRing` carries −1
+     * there: a clip point is not a facet vertex and the publication says so rather than pretending.
+     * Every published unit is a unit the ring had and the water does not hold, and the drop is
+     * therefore EQUAL to the wet length rather than seven times it.
+     *
+     * ⚠ **AND IT IS NOT SOLVED BY WIDENING THE WET TOLERANCE**, which would trade a visible defect
+     * for an invisible one. The wet predicate is unchanged; only the CUT moved, from the nearest
+     * facet vertex to the crossing itself.
+     *
+     * ⚠⚠ **THIS STILL MOVES NO GEOMETRY.** `wrap.outer` and `wrap.inner` are untouched, so the
+     * band width, the ring-sanity table and every wrap figure read exactly what they read before.
+     * What moves is what is PUBLISHED AS WALL. The wrap ring still crosses the water, and that is
+     * a CONSTRUCTOR defect reported, not cured, here.
      */
-    const wetAt = wetVertexAt.slice();
-    if (waterFaces.length) {
-      for (let i = 0; i < ring.length; i++) {
-        const j = (i + 1) % ring.length;
-        if (!segmentTouchesWater(ring[i], ring[j], waterFaces)) continue;
-        wetAt[i] = true; wetAt[j] = true;
-      }
-    }
-    const anyWet = wetAt.some((v) => v);
-    const fragments = anyWet ? sliceAtWater(ring, wetAt, cut) : sliceCycle(ring, cut);
+    const arcs = waterFaces.length ? dryArcs(ring, waterFaces) : null;
+    const fragments = arcs ? sliceAtBank(ring, arcs, cut) : sliceCycle(ring, cut);
 
     const priorRings = circuits.map((c) => c.ring);
     const published = [];
@@ -793,38 +816,29 @@ function ringNormalAt(ring, i) {
 }
 
 /**
- * ⭐ DOES THIS SEGMENT TOUCH WATER ANYWHERE ALONG ITS LENGTH? Two readings, and both are needed:
- * a proper crossing of a water face's boundary (the segment passes through a narrow reach), and a
- * sampled interior point (the segment lies wholly inside a body). The sample step is ONE WORLD
- * UNIT, which is finer than any water face this estate mints — the channel's own width is 10–19
- * units on the corpus — so a reach cannot slip between two samples.
+ * ⭐⭐ **THE SECOND OPINION ON ONE INTERVAL — SAMPLED, WHERE `dryArcs` SOLVES.**
+ *
+ * `dryArcs` classifies an interval by its MIDPOINT, which is exact wherever the boundary crossings
+ * are exact. The one shape that defeats an exact crossing solve is DEGENERACY: a ring segment
+ * lying collinear along a bank edge yields a zero determinant and no crossing parameter at all, so
+ * the interval never gets split and one midpoint speaks for the whole of it. This walks the
+ * candidate interval at ONE WORLD UNIT — finer than any water face this estate mints, whose
+ * channel is 10–19 units across — and vetoes a DRY verdict that the sampling contradicts.
+ *
+ * ⭐ It is a VETO, never a promotion: it can only turn dry into wet. An instrument that could
+ * argue an interval dry would be a second classifier, which is the defect this file's own header
+ * exists to prevent.
  */
 const WATER_SAMPLE_STEP = 1.0;
-function segmentTouchesWater(a, b, waterFaces) {
-  for (const f of waterFaces) {
-    const w = f.ring;
-    if (!w || w.length < 3) continue;
-    for (let j = 0; j < w.length; j++) {
-      if (properSegmentCross(a, b, w[j], w[(j + 1) % w.length])) return true;
-    }
-  }
+function intervalReadsWet(a, b, rings) {
   const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
   const n = Math.max(1, Math.ceil(L / WATER_SAMPLE_STEP));
-  for (let k = 0; k <= n; k++) {
-    const t = k / n;
+  for (let k = 0; k < n; k++) {
+    const t = (k + 0.5) / n;
     const x = a[0] + (b[0] - a[0]) * t; const y = a[1] + (b[1] - a[1]) * t;
-    for (const f of waterFaces) if (f.ring.length >= 3 && pointInPolygon(x, y, f.ring)) return true;
+    for (const w of rings) if (pointInPolygon(x, y, w)) return true;
   }
   return false;
-}
-
-function sideOf(a, b, p) {
-  return Math.sign((b[0] - a[0]) * (p[1] - a[1]) - (b[1] - a[1]) * (p[0] - a[0]));
-}
-function properSegmentCross(a, b, c, d) {
-  const s1 = sideOf(a, b, c); const s2 = sideOf(a, b, d);
-  const s3 = sideOf(c, d, a); const s4 = sideOf(c, d, b);
-  return s1 !== 0 && s2 !== 0 && s3 !== 0 && s4 !== 0 && s1 !== s2 && s3 !== s4;
 }
 
 /** The ring's own mean radius about its centroid — the fallback when a wrap records no radius. */
@@ -838,42 +852,183 @@ function meanRadius(ring) {
 }
 
 /**
- * ⭐⭐ **PUBLISH ONLY THE DRY SPANS — the curtain runs to the bank and stops** (§161m.3, A1.3
- * S2-M1). Given a per-vertex wet reading, the maximal runs of DRY vertices become OPEN fragments;
- * the wet span between two of them is the water, and the water is the fourth wall.
- *
- * ⚠ A span of fewer than three dry vertices is not a stretch of wall, it is a corner poking out
- * of the sea — it is dropped, and the drop is counted by the caller so a leaf whose whole circuit
- * drowns reports zero fragments rather than a spray of two-point stubs.
- *
- * ⚠ THE GATE CUTS STILL APPLY WITHIN A DRY SPAN — a water gate inside a reach is still a gate,
- * so the span is sub-divided at it exactly as `sliceCycle` would.
+ * ⭐ THE PARAMETER ALONG `ab` AT WHICH IT MEETS `cd`, or `null` when they do not meet.
+ * Endpoints count: a segment that ends exactly on the bank has met it.
+ * ⚠ Parallel and collinear pairs return `null` — a segment lying ALONG the bank has no crossing,
+ * and its wet/dry state is decided by the midpoint test like every other interval.
  */
-function sliceAtWater(ring, wetAt, cut) {
+function segMeetParam(a, b, c, d) {
+  const rx = b[0] - a[0]; const ry = b[1] - a[1];
+  const sx = d[0] - c[0]; const sy = d[1] - c[1];
+  const den = rx * sy - ry * sx;
+  if (Math.abs(den) < 1e-12) return null;
+  const qx = c[0] - a[0]; const qy = c[1] - a[1];
+  const t = (qx * sy - qy * sx) / den;
+  const u = (qx * ry - qy * rx) / den;
+  if (t < 0 || t > 1 || u < 0 || u > 1) return null;
+  return t;
+}
+
+/**
+ * ⭐⭐⭐ **THE MAXIMAL DRY ARCS OF A RING — THE CURE'S WHOLE GEOMETRY.** WALL-CURTAIN, §699.3.
+ *
+ * Each segment is split at every parameter where it meets a water ring's boundary; each resulting
+ * interval is classified WET or DRY by its own MIDPOINT, which is the one point in the interval
+ * guaranteed not to sit on a boundary the classification is about. The dry intervals are then
+ * chained around the cycle into maximal arcs.
+ *
+ * ⭐ **WHY THE MIDPOINT AND NOT THE ENDS.** `pointInPolygon` at a crossing point is a coin toss —
+ * the point is ON the edge, and even-odd is undefined there. Splitting first and asking in the
+ * middle turns an ambiguous predicate into an unambiguous one, and it is why this can be solved
+ * exactly instead of sampled. (The census still SAMPLES, at one world unit, and that independence
+ * is the point: the cure and its proof do not share their arithmetic.)
+ *
+ * Returns `null` when the ring never meets water at all — the caller then publishes the closed
+ * cycle unchanged, so a dry wrap's bytes cannot move through this path.
+ *
+ * @returns {Array<{pts:Array<number[]>, at:number[]}>|null} each arc's points, and per point the
+ *   ring vertex index it IS, or **−1** where it is an interpolated point on the bank.
+ */
+export function dryArcs(ring, waterFaces) {
   const n = ring.length;
-  if (wetAt.every((w) => w)) return [];
-  // rotate so index 0 begins a dry span that follows a wet one
-  let start = 0;
-  while (start < n && !(wetAt[start] === false && wetAt[(start - 1 + n) % n] === true)) start++;
-  if (start >= n) return sliceCycle(ring, cut);       // no wet vertex at all
-  /** @type {Array<number[]>} */ const spans = [];
-  /** @type {number[]|null} */ let cur = null;
-  for (let s = 0; s < n; s++) {
-    const i = (start + s) % n;
-    if (wetAt[i]) { if (cur) { spans.push(cur); cur = null; } continue; }
-    if (!cur) cur = [];
-    cur.push(i);
+  const rings = waterFaces.map((f) => f.ring).filter((r) => r && r.length >= 3);
+  if (!rings.length) return null;
+  const lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+  const inWater = (p) => rings.some((w) => pointInPolygon(p[0], p[1], w));
+
+  /** Per segment, its DRY parameter ranges, ascending. */
+  const dry = [];
+  let anyWet = false;
+  for (let i = 0; i < n; i++) {
+    const a = ring[i]; const b = ring[(i + 1) % n];
+    const ts = [0, 1];
+    for (const w of rings) {
+      for (let j = 0; j < w.length; j++) {
+        const t = segMeetParam(a, b, w[j], w[(j + 1) % w.length]);
+        if (t != null) ts.push(t);
+      }
+    }
+    ts.sort((x, y) => x - y);
+    const cuts = [];
+    for (const t of ts) if (!cuts.length || t - cuts[cuts.length - 1] > 1e-9) cuts.push(t);
+    if (cuts[cuts.length - 1] < 1 - 1e-9) cuts.push(1);
+    const ranges = [];
+    for (let k = 0; k + 1 < cuts.length; k++) {
+      const t0 = cuts[k]; const t1 = cuts[k + 1];
+      const p0 = lerp(a, b, t0); const p1 = lerp(a, b, t1);
+      if (inWater(lerp(a, b, (t0 + t1) / 2)) || intervalReadsWet(p0, p1, rings)) { anyWet = true; continue; }
+      const prev = ranges[ranges.length - 1];
+      if (prev && Math.abs(prev[1] - t0) < 1e-9) prev[1] = t1; else ranges.push([t0, t1]);
+    }
+    if (ranges.length !== 1 || ranges[0][0] > 1e-9 || ranges[0][1] < 1 - 1e-9) anyWet = true;
+    /**
+     * ⛔⛔ **AND THE CLIP STANDS A HAIR CLEAR OF THE BANK, NOT ON IT — AND THE FIRST SPELLING OF
+     * THIS CURE WAS CONVICTED BY THE CENSUS FOR EXACTLY THAT.**
+     *
+     * A clip solved to the crossing sits ON the water ring's edge, and `pointInPolygon` at a point
+     * on the boundary is undefined — even-odd can answer either way and does. Measured: the cure
+     * reached ratio 1.00 and terminus gap 0.0 u on every wrap and the census promptly reported
+     * **11 wraps DRAWN OVER WATER** with `wetLen` an exact **0.0** on all of them. Nothing was
+     * standing in water; the ENDPOINTS were standing on the line and the containment test was
+     * coin-tossing them. ⭐ THE CLASS: **a boundary-coincident point makes a predicate that is
+     * true of no length read as true.**
+     *
+     * ⚠ The cure is NOT to soften the census — that is the relax-a-census-to-reach-a-count move
+     * §9 law 7 forbids, and it would make the zero unprovable. It is to put the wall a stated
+     * hair on the DRY side so *"no published wall stands in water"* is a strict fact that any
+     * independent instrument reads the same way. `1e-3` of a world unit is ten orders of magnitude
+     * above the double-precision noise at these coordinates (~1e-13 at |x| ~ 1e3) and 3e-5 of a
+     * facet mean below it; the whole corpus's clip points together cost under a tenth of a unit.
+     */
+    for (const r of ranges) {
+      const L = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1;
+      const e = BANK_CLEARANCE / L;
+      if (r[0] > 1e-9) r[0] = Math.min(r[0] + e, r[1]);
+      if (r[1] < 1 - 1e-9) r[1] = Math.max(r[1] - e, r[0]);
+    }
+    dry.push(ranges.filter((r) => r[1] - r[0] > 1e-12));
   }
-  if (cur) spans.push(cur);
+  if (!anyWet) return null;                      // the ring never met the water — nothing to cut
+
+  /** One atom per dry range, in ring order. */
+  const atoms = [];
+  for (let i = 0; i < n; i++) for (const r of dry[i]) atoms.push({ i, t0: r[0], t1: r[1] });
+  if (!atoms.length) return [];                  // the whole circuit is drowned
+  const joins = (p, c) => p.i === (c.i - 1 + n) % n && p.t1 > 1 - 1e-9 && c.t0 < 1e-9;
+
+  // rotate the atom list so it BEGINS a chain — otherwise a chain spanning index 0 is split in two
+  let s = 0;
+  while (s < atoms.length && joins(atoms[(s - 1 + atoms.length) % atoms.length], atoms[s])) s++;
+  if (s >= atoms.length) return null;            // every atom joins its predecessor ⇒ fully dry
+  const order = [];
+  for (let k = 0; k < atoms.length; k++) order.push(atoms[(s + k) % atoms.length]);
+
   const out = [];
-  for (const at of spans) {
-    if (at.length < 3) continue;
-    // sub-divide the dry span at any water gate that falls inside it
-    const marks = at.map((_, k) => k).filter((k) => k > 0 && k < at.length - 1 && cut.has(at[k]));
+  let cur = null;
+  const openArc = (a) => {
+    cur = { pts: [lerp(ring[a.i], ring[(a.i + 1) % n], a.t0)], at: [a.t0 < 1e-9 ? a.i : -1] };
+  };
+  const extend = (a) => {
+    cur.pts.push(lerp(ring[a.i], ring[(a.i + 1) % n], a.t1));
+    cur.at.push(a.t1 > 1 - 1e-9 ? (a.i + 1) % n : -1);
+  };
+  for (const [k, a] of order.entries()) {
+    if (k > 0 && joins(order[k - 1], a)) { extend(a); continue; }
+    if (cur) out.push(cur);
+    openArc(a); extend(a);
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+/**
+ * ⭐⭐ **PUBLISH THE DRY ARCS — the curtain runs to the bank and stops** (§161m.3, A1.3 S2-M1).
+ * Each maximal dry arc becomes an OPEN fragment whose ends are the water's own edge; the wet span
+ * between two of them is the water, and the water is the fourth wall.
+ *
+ * ⚠ **THE THREE-POINT FLOOR IS KEPT FROM SPINE-3 AND COSTS NOTHING, BECAUSE A STRAIGHT RUN'S OWN
+ * MIDPOINT IS NOT A NEW FACT ABOUT IT.** A two-point arc lies inside a single facet, so splitting
+ * it at its midpoint yields a three-point arc of **identical geometry** — no length is dropped and
+ * no corner is invented (the added vertex turns by 0°, so `seedTowers`' corner test cannot fire on
+ * it). ⛔ The alternative — discarding two-point arcs, as SPINE-3's vertex spans were discarded —
+ * would re-introduce the very over-drop this change exists to remove, in the one place nobody
+ * would look. MEASURED at the base seal: the old floor fired on **0 spans corpus-wide**, so it was
+ * never the over-drop and must not be blamed for it; it is kept as a SHAPE floor for the run
+ * classifier, which reads a turn at every vertex and has nothing to read on a bare pair.
+ *
+ * ⚠ THE GATE CUTS STILL APPLY WITHIN A DRY ARC — a water gate inside a reach is still a gate, so
+ * the arc is sub-divided at it exactly as `sliceCycle` would.
+ */
+function sliceAtBank(ring, arcs, cut) {
+  const out = [];
+  /**
+   * ⛔ **THE PADDING IS APPLIED AFTER THE GATE SUBDIVISION, AND MY FIRST SPELLING APPLIED IT
+   * BEFORE.** Padding the whole arc and then subdividing it produces PAIRS, and a pair failed the
+   * three-point floor and was silently dropped — measured, that leaked **15.6 u on `highwater`
+   * and 12.7 u on `year-100`**, an over-drop of exactly the kind this change exists to remove,
+   * hidden inside the change itself. Caught by the published-length column reading 1.38× where
+   * every other wrap read 1.00×. ⭐ **A cure's own residue is what the new instrument is for.**
+   */
+  const emit = (pts, at) => {
+    if (pts.length < 2) return;
+    let len = 0;
+    for (let k = 0; k + 1 < pts.length; k++) len += Math.hypot(pts[k + 1][0] - pts[k][0], pts[k + 1][1] - pts[k][1]);
+    if (len <= 1e-9) return;                       // a degenerate pair, not a stretch of wall
+    if (pts.length === 2) {
+      const mid = [(pts[0][0] + pts[1][0]) / 2, (pts[0][1] + pts[1][1]) / 2];
+      out.push({ pts: [pts[0], mid, pts[1]], at: [at[0], -1, at[1]], closed: false });
+      return;
+    }
+    out.push({ pts, at, closed: false });
+  };
+  for (const arc of arcs) {
+    const { pts, at } = arc;
+    if (pts.length < 2) continue;
+    // sub-divide at any water gate falling strictly inside the arc
+    const marks = at.map((v, k) => k).filter((k) => k > 0 && k < at.length - 1 && at[k] >= 0 && cut.has(at[k]));
     const bounds = [0, ...marks, at.length - 1];
     for (let b = 0; b + 1 < bounds.length; b++) {
-      const seg = at.slice(bounds[b], bounds[b + 1] + 1);
-      if (seg.length >= 3) out.push({ pts: seg.map((j) => ring[j]), at: seg, closed: false });
+      emit(pts.slice(bounds[b], bounds[b + 1] + 1), at.slice(bounds[b], bounds[b + 1] + 1));
     }
   }
   return out;
