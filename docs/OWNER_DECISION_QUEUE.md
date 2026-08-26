@@ -29907,3 +29907,68 @@ wrap digest `e65c7685…` identical at base and tip.**
   finished wave. Refreshed to §703 with both outranking findings at the top. ⚠ A stale
   handoff is not cosmetic: it is the one document a cold successor obeys.
 
+## §705 · THE ANSWER IS "PARTLY", AND THE SPLIT IS THE POINT — NOTHING IS WRONG ON THE LIVE SITE, AND THE TRAIN CARRIES A 100 % DETERMINISTIC DEFECT (2026-08-27 ~15:20 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§705.1 THE VERDICT, SPLIT.** **LIVE FOR CUSTOMERS: NO — the live product contains no town
+  map at all.** `master` @ `d024286ee` (2026-07-05, unmoved 51 days) is the only branch CI
+  deploys (`ci.yml` gates `deploy` and `redeploy` on `refs/heads/master`), and
+  `git ls-tree -r master` returns **zero** files matching `townMap` or `cartograph` — its
+  `src/components/map/` is the *realm* map, settlements as markers. **ON THE BUILD BRANCH
+  (`claude/composite-r4` @ `73f5dfc02`, the undeployed train): YES, grossly visible.**
+- **§705.2 ⛔⛔ MY §703.3 TRACE WAS WRONG, AND THE TRAP IS WORTH MORE THAN THE ERROR.** I named
+  `rampartWorks.js`, `wallCircuit.js`, `publication.js`, `wallPublication.js` as living in
+  "the shipped tree." **All eight of that family are ABSENT from the build branch and exist
+  only on the sandbox line** — the build branch's `src/domain/townMap/fabric/` is a different
+  31-file set with none of those names. ⭐ **What produced the false home:
+  `stageManifest.js` IS on the build branch, and its `allowedImports` lists `wallCircuit.js`,
+  `waterMode.js`, `waterWorks.js` — modules that branch does not contain. THE MANIFEST
+  LANDED; THE MODULES NEVER DID.** A declaration file that outlived its subject reads exactly
+  like the subject being present. **Banked: a manifest is a claim about a tree, not evidence
+  of one — resolve module names against `ls-tree`, never against the manifest that names them.**
+  **The conclusion survived anyway, by entirely different code** — which is luck, not method.
+- **§705.3 D1 — THE v1 COASTAL DEFECT IS DETERMINISTIC AND TOTAL.** v1 hard-codes the shore at
+  `y=840` and the wall ring at `[500,970]`, so **1,440 of 1,440 walled coastal settlements
+  draw 689 units of continuous wall arc — 69 % of the page width — out into the sea, 130
+  units (13 % of page height) past the shoreline.** Zero variance; the same geometry every
+  time. The arithmetic is hand-checkable: `970 − 840 = 130` exactly, and 689 ÷ 2,878 = 23.9 %
+  of the perimeter exactly.
+- **§705.4 D2 — AND A SECOND, SEPARATE DEFECT THAT IS THE WORSE READ AND THE CHEAPER FIX.**
+  Every renderer closes the coast band down to the page bottom (`townMapDraw.js:242`,
+  `SettlementMapPane.jsx:497`, and the panorama) — **it assumes a SOUTHERN shore.**
+  `siteGenesis.js` seeds north or south roughly 48/52, so **a northern shore floods 85 % of
+  the map and the entire town, walls included, is drawn underwater.** With that closure
+  corrected the residual is still real: **744 of 744 north-shore v2 circuits put a median 181
+  units of wall (34 % of perimeter) a median 89 units deep into open sea.** South-shore v2
+  reads essentially clean (6 of 696) — **a negative control proving the instrument is not
+  simply returning "wet."**
+- **§705.5 WHICH DEFECT A CUSTOMER GETS, ON THE DAY THE TRAIN DEPLOYS.** `mapEdits.js:224` —
+  an absent layout marker means **v1**. So **every settlement a customer has already saved
+  renders v1 and hits D1 at 100 %**, while newly generated ones take v2 and hit D2 on roughly
+  half of coastal seeds. **The defect's first audience is the existing library, not new maps.**
+- **§705.6 NOT MARGINAL AT PAGE SCALE.** On the sold PDF plate (452 pt square) v1 puts **311
+  pt of wall over sea, 59 pt — four fifths of an inch — deep on a 6.3-inch page**; in-app at
+  an 800 px panel, ~104 px deep. Rendered through the real export path and rasterised, not
+  inferred.
+- **§705.7 ⛔ THIS IS A DEFECT ON THE TRAIN, NOT ON THE LIVE SITE — WHICH MAKES IT CHEAP NOW
+  AND EXPENSIVE THE MOMENT THE OWNER PRESSES DEPLOY.** It therefore attaches to the owner's
+  own #1 item, the undeployed train (W8's "zero-conflict fast-forward PR of 1,573 commits —
+  owner button only"). → **OWNER DOCKET, as INFORMATIONAL-CRITICAL: it does not block the
+  deploy, but it should be known before the button, not after.** Its cure moves live wall
+  geometry for every walled coastal settlement, so **every recorded golden containing one
+  re-records** — a declared shift, chartered as **TWO** cars, since it is two causes: the
+  **water-blind wall** (`townLayoutV2.buildWall` takes no water argument at all; neither does
+  v1's ring) and the **south-assuming coast closure** across three renderers.
+- **§705.8 WHAT REMAINS UNSETTLED, NAMED.** **(i)** The exact live commit is high-confidence,
+  not certain — no in-repo release receipt, and `supabase/applied-head.json` disagrees across
+  branches (112 on master, 121 on the ledger branch). ⚠ **The chair probed
+  `settlementforge.com/api/release` and got the application shell rather than a release
+  payload — consistent with the endpoint being absent on the live lineage, but a SPA shell is
+  not a definitive 404, so it CORROBORATES rather than proves.** The load-bearing evidence is
+  independent of it: master carries no town-map files at all. **(ii)** Incidence among *real*
+  generated settlements is unmeasured — the corpus forced `walls:true, water:true`, so the
+  rates are conditional. **(iii)** Why v2 clears a southern shore but not a northern one:
+  empirically robust across 1,440 circuits, cause unchased.
+- **§705.9 THE LANE'S OWN DISCIPLINE, NOTED.** It declined to fire the outbound production
+  probe on its own authority and named it precisely instead; it forced a negative control
+  rather than reporting a bare positive rate; and it corrected the chair's premise while
+  showing that its conclusion did not depend on the correction. That is the standard.

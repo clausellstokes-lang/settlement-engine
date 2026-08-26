@@ -226,6 +226,21 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§705 · The determination lands PARTLY; my §703.3 trace refuted · SEAT: Opus 5.**
+*What was judged:* the split verdict (nothing live, a total defect on the train); routing it
+to the owner as informational-critical rather than blocking; chartering the cure as TWO cars;
+and the reading that the live-commit identification is high-confidence rather than certain.
+*What Fable re-derives:* **(a)** the live-site claim — it rests on master carrying no
+town-map files and CI deploying master only; my own probe of the release endpoint returned
+the app shell, which corroborates but does not prove. Getting this wrong in the reassuring
+direction would be the worst error available here. **(b)** whether "informational, not
+blocking" is right for a 100 %-deterministic visible defect sitting on a train the owner is
+poised to push. **(c)** §705.2 — I read a manifest as evidence of shipped code; check whether
+that same mistake is load-bearing anywhere else in my rulings.
+*Receipts:* ODQ §705 · the lane's corpus of 1,680 settlements, its rendered PNGs and its
+negative control · `git ls-tree -r master`.
+*Priority:* **P1** on (a) and (c).
+
 **§704 · Sequencing: the determination lane pre-empts the largest visual wave · SEAT: Opus 5.**
 *What was judged:* that a cheap check which might reveal a **customer-visible** defect takes
 precedence over DRESS-FRAME, the largest visual improvement available; and that the check is
