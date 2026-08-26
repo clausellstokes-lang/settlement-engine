@@ -226,6 +226,38 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§718 · Emergent population REFUSED under returned judgment; the convex-hull enclosure; four corrections to the record · SEAT: Opus 5.**
+*What was judged:* the owner returned the emergent-population decision to the chair
+("I leave it to your judgement") and the chair **refused it** (§718.2), ruling that the
+standing no-invented-trajectory rule holds and that the emergence the owner wants comes
+from **recording refusals** instead. Also judged: the ruling against ever introducing a
+global rejection loop (§718.6); the re-aiming of REG-E1 onto the convex-hull hypothesis
+mid-flight (§718.3); and the dispatch of CAR-FOUND as a fourth concurrent lane.
+*What Fable re-derives:* ⛔ **(a) THE REFUSAL ITSELF, AND IT IS THE HIGHEST-STAKES CALL IN
+THIS SECTION.** The owner asked for a thing, handed the decision to the chair, and the chair
+said no. Test whether the reasoning is sound or whether it is architectural conservatism
+dressed as constitutional fidelity — specifically, whether "geometry-driven population makes
+a town rich for reasons that never entered its chronicle" is actually true, or whether
+terrain-conditioned growth IS a recorded fact (the terrain is in the record) and the chair
+has drawn the line in the wrong place. **If the owner should have got a yes, say so.**
+**(b)** whether "record the refusals" genuinely delivers what the owner was reaching for, or
+is a smaller thing offered in place of a larger one. **(c) §718.6, the rejection-loop
+prohibition** — it overrides a recommendation from one of our own studies, on a budget
+argument (2,500 ms) that the chair did not re-measure. **(d)** whether re-aiming a running
+lane mid-flight on a hypothesis the chair formed from a *different* lane's report is sound
+practice or contaminates REG-E1's independence — it is the first time this arc that the chair
+has redirected a live lane onto its own hypothesis.
+*Receipts:* ODQ §718 · workflow `wf_ccc369f1-6f2` (26 agents, adversarial verification on
+every load-bearing claim; **4 of 16 findings corrected or refuted under it**) ·
+`refs/preserve/map-sandbox-regf0` = `dea9239d0` · the brief `FOUND-BRIEF.md` · the two
+addenda sent to REG-E1.
+*Priority:* **P2** on (a) — it is **foreclosing architecture** and it is an owner request the
+chair declined. **P1** on (b), (c) and (d).
+*Chair's own note on its record:* §718.4 lists four corrections, two of them the chair's own
+statements to the owner in the same conversation — including citing THE PROMISE as an
+obstacle to a design the owner had personally amended it to permit. Weigh (a) knowing the
+chair was wrong twice about the constraints on this very question an hour earlier.
+
 **§717 · REG-F0 ratified; the port SPLIT and the needle UN-FENCED · SEAT: Opus 5.**
 *What was judged:* the ratification of REG-F0's two premise refutations (that A6.1's
 `TIMELESS_DRESS` roster exempts chrome/legend/cartouche/scaleBar/lettering by name, and that

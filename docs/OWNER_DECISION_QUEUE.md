@@ -30889,3 +30889,118 @@ fourth sighting, taken at collection).
   anyway because the outcome was clean by luck and not by design.** That is exactly the standard
   this programme runs on, it is now in both live briefs as a prohibition, and it is worth more in
   the ledger than a silently clean run would have been.
+
+## §718 · THE OWNER'S ARCHITECTURE IS ALREADY LAW, ALREADY BUILT, AND ALREADY DORMANT — AND THE WALL'S EMPTINESS IS A CONVEX HULL (2026-08-26 ~16:10 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§718.1 THE QUESTION AND THE ANSWER.** The owner proposed building settlements incrementally —
+  terrain, a thorpe's essentials, growth per historical pattern until deadlock, epochs of growth and
+  decline, a wall raised around the settlement as it then stands, later replaced at the expense of
+  the old — and asked why we generate everything at once. A five-lens investigation with adversarial
+  verification on every load-bearing claim answered it: **they are describing their own standing law.**
+  `epochAxis.js:5-8` attributes the ordering to **ODQ §240** and paraphrases it nearly verbatim;
+  `docs/DESIGN_REG_GROW.md:25-30` and `DESIGN_SPINE.md:224-227` (A1.6) rule the construction
+  INCREMENTAL, *"one maintained arrangement, epochs APPEND into it"*, and convict the alternative in
+  harder words than I would use — *"Reconstruction cannot grow, cannot ring, cannot decline, cannot
+  hold a wall still — it can only shade the present backward."* **And it is built**:
+  `buildSettledPartition` (`partitionConstruct.js:297`) carries one mutable arrangement and one
+  `state` through `for (let k = 0; k < cap; k++)` at `:351`, with founding, accretion, wall-raise,
+  infill, typed emission and decline as per-epoch acts. ⛔ **It is also DORMANT** (`buildFabric.js:1338`
+  behind `options.partition === true`, a flag `:99` itself labels dormant and nothing in `src/` sets),
+  and **the whole `fabric/` directory does not exist on the shipping branch.** The measurement that
+  vindicates the owner's impression: **`settlementAtYear` returns byte-identical geometry at years
+  0, 18, 100, 154 and 191.** Scrub the year, nothing moves. They read the surface correctly.
+- **§718.2 ⭐⭐ EMERGENT POPULATION IS REFUSED, AND THE REFUSAL COMES WITH THE THING IT REPLACES —
+  CHAIR RULING UNDER RETURNED JUDGMENT, VETOABLE.** The owner handed this back with *"I leave it to
+  your judgement."* The standing rule (`growthLedger.js:25-30`, §11.10) forbids inventing a
+  trajectory the record never had; the fold follows a constrained interpolant, `traj.at(t)`.
+  **I rule the standing rule holds.** Reason, and it is stronger than the rule's own: geometry-driven
+  population makes a town rich **for reasons that never entered its chronicle**, and it puts the
+  dossier's population and the map's population under two authorities that will drift — the
+  two-producers-one-quantity family that has bitten this programme four times. ⭐⭐ **But the
+  emergence the owner is reaching for does not require it. What makes such systems feel alive is
+  that REFUSALS ARE RECORDED, and ours are computed and destroyed** — `void budget;`
+  (`partitionConstruct.js:443`) discards the epoch's unspent quota, and `publish()` (`:1683-1701`)
+  emits six refusal counters with **no target and no remainder**, so a deadlocked epoch is
+  indistinguishable in the artifact from an epoch that had nothing to build. **Record the shortfall
+  and the consequences follow from facts already true** — tighter subdivision, a squeezed lane, an
+  extramural faubourg, a garden built over. Chartered to CAR-FOUND. *Veto to re-open emergence.*
+- **§718.3 ⛔⛔ THE SPINE'S ENCLOSURE IS A CONVEX HULL, AND THAT IS THE LEADING CAUSE OF "THE WALL
+  ENCLOSES NOTHING."** `raiseWrap` hulls the live built faces (`partitionConstruct.js:1055-1068`)
+  and resamples to the form's facet economy (`:1072-1082`). ⇒ **every concavity in a settlement's
+  shape becomes wall interior by construction**, so any elongated, lobed or river-bent plan wraps
+  large tracts of nothing with **no reference to history at all**. Corroboration from an independent
+  site: `wallPublication.js:244-246` measures **17.0 % of one wrap's ring standing in open sea** and
+  its own comment declines to cure it — *"a CONSTRUCTOR defect reported, not cured, here."* A hull
+  that never consults the water is exactly how a wall ends up in a bay. ⭐ **Three causes must now be
+  separated rather than averaged**: hull convexity (geometric, ahistorical), honest decline (a ring
+  frozen at its raise year around a town that shrank — **discriminable, because `partitionDecline.js:111`
+  re-classes lost ground to LOSSREGION in place**), and the legacy re-fit (not the dress page's).
+  Sent to REG-E1 mid-flight as a re-aiming addendum, including the hypothesis that a hull resampled
+  to a small facet count is a plausible way to **mint the needle itself** — which would put it on the
+  cure branch of its fork, since no history is falsified by fixing a hull.
+- **§718.4 FOUR CORRECTIONS TO THE RECORD, TWO OF THEM MINE.** **(a)** ⚠ `growthLedger.js:569
+  frozenRadius` **is not the wall's radius** — its shipped use at `partitionConstruct.js:1063` is a
+  **centroid filter** on which faces enter the hull, and hull vertices routinely exceed it. **It has
+  been read as a radius for four waves.** The freeze guarantee comes from the ordering (raiseWrap runs
+  *before* its epoch's growth) and the `Object.freeze`, not from that field. **(b)** I told the owner
+  that an incremental historical generator cannot reroll year 40 without invalidating years 41-300.
+  **That does not apply to us**: the fold is a **pure replay**, a deterministic function of (seed,
+  ledger prefix), recomputed from scratch every build. A global reroll costs one fold. Only a
+  *per-epoch* reroll carries the cost I described, and nothing asks for one. **(c)** I implied THE
+  PROMISE obstructs this class of design. **The owner already amended it on 2026-08-05** — from *"a
+  seed is a world's whole timeline"* to *"a seed is a STARTING world forever; a lived history, once
+  lived, forever"* — **specifically to make it legal.** I cited a constraint the owner had personally
+  removed. **(d)** Four of sixteen findings feeding this section were themselves corrected or refuted
+  under adversarial verification, including the frozenRadius reading. **The file:line is the
+  load-bearing part of any claim about this system, including this one.**
+- **§718.5 FIVE LIVE DEFECTS, EACH NAMED WITH ITS SITE.** **(i) SATURATION** — `growthLedger.js:157`
+  sets 1.00 and the header at `:145-151` justifies it by asserting raise-epoch saturation is exactly
+  1.000; **the shipped `capacity` applies a 0.98 exclusion the header's own definition omits, so it
+  measures 1.0204.** An extramural emission therefore **fires in the wall's own raise year** (491
+  souls at year 90, pop-6000 probe) — the outcome the header calls an error — and at the tier radius
+  ceiling a **pop-30000 ring reads 0.2551 saturated, so the largest settlements stop emitting suburbs
+  entirely.** Unpinned: neither `SATURATION` nor `saturationShare` appears outside that file in src or
+  tests. **(ii)** The 17 % wall-in-sea above. **(iii) `truncateLedger` is DEAD CODE with zero
+  consumers tree-wide** — the function named in the ledger's own headline law (*"a frame is the same
+  pipeline run on the ledger truncated at epoch K"*) — and **as written it would reintroduce the
+  defect its header claims to cure**, because `epochTarget` denominates on the ledger's last epoch.
+  ⇒ **the single most compelling thing this architecture offers — scrub the year and watch the town
+  grow — cannot be rendered today.** **(iv)** The demotion ladder `circuitDemotion.js` is complete and
+  **wired only to the legacy line**, so on the dress page a superseded circuit is drawn as a live
+  working curtain. **(v)** Its only differentiator, `wearOfCircuit`'s wear discount, is **cold**:
+  circuit provenance is always the literal `'derived-frozen'`, leaving two downstream branches that
+  have never executed.
+- **§718.6 ⛔ NO REJECTION LOOPS — CHAIR RULING, VETOABLE.** We have **none anywhere**: every refusal
+  is a local drop with a published counter, never a whole-build restart. That is the architectural
+  inverse of the reference generator, and it is **correct for a product that must produce a map
+  deterministically inside a signed 2,500 ms budget.** ⚠ One of our own studies recommends adopting
+  the reference's *"unreachable gate ⇒ malformed, re-derive."* **Do not.** It would introduce the
+  first global rejection path into an architecture that has none and put the budget at the mercy of
+  retry counts. Written into CAR-FOUND's brief as a prohibition. *Veto to reconsider.*
+- **§718.7 CAR-FOUND DISPATCHED — THE FOURTH CONCURRENT LANE.** It carries three things, all
+  sandbox-line and pre-flag: institutions moved **into** the fold (⛔ `partitionSeating.js` contains
+  **zero occurrences of "epoch"**; the whole present-day roster is seated in one post-fold pass at
+  `buildFabric.js:1364`, so a church founded in epoch 2 stands on ground that did not exist until
+  epoch 5 — **the fastest-noticed tell that the history is decoration**), the refusal record of
+  §718.2, and the saturation cure. It is told explicitly not to undo SEATING's quota deck, scorers or
+  `physicalViolations` gate, and warned that **the performance budget is what will bite** — the fold
+  already took the metropolis constructor from **470 ms to 853 ms of 2,500 ms**, and per-epoch seating
+  adds work inside the loop. ⚠ It is also told that **if the truth layer does not carry a founding
+  year for every institution, its first half cannot be built as written** — and to say so with the
+  measurement rather than minting dates.
+- **§718.8 ⛔ THE VERIFICATION DEBT UNDER ALL OF THIS, WHICH IS THE THING I WOULD WORRY ABOUT MOST.**
+  `epochCap`, `truncateLedger`, `frameAtEpoch` and `buildGrowthLedger` appear in **zero test files**.
+  The append-only and prefix-closure properties **the entire design rests on** are asserted in
+  docstrings and proven only by hand-run harness scripts. This compounds with §709.5: the sandbox line
+  has no `scripts/`, no eslint config and no husky, so **the vitest run is the whole gate there.**
+  ⭐ **Every ordering defect the fold has produced so far was found by an instrument someone chose to
+  run, never by the gate.** A frame ladder must not be built on this until it is pinned; that car is
+  chartered and queued behind the running four.
+- **§718.9 THE ARC.** Running: **WORDS-2** (lettering onto the page), **REG-E1** (the needle, now
+  re-aimed at the hull), **CAR-FOUND** (institutions, refusals, saturation). Queued: **CAR-FOSSIL**
+  (the demotion ladder onto the spine + the cold provenance) — held because it touches wall geometry
+  and would contend with REG-E1 — then **the fold's gate** and `truncateLedger`'s denominator, which
+  together unlock the year-scrub. **REG-F (the film) stays held** on the framing decision. **REG-P is
+  now only the wiring**, and it has grown: it must carry `fabric/` to the build branch and give the
+  fold an application consumer, because **until the epoch build is what the product runs, none of
+  this reaches a reader.** That remains the owner's flag.
