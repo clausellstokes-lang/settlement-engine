@@ -9,6 +9,7 @@
  * ⚠ THE FIXTURE IS SYNTHETIC AND SMALL, for the reason `townMapPartition.test.js` gives: the laws
  * are properties of the STRUCTURE. Corpus-scale figures live in `harness/laneDRESS1/`.
  */
+import { readFileSync } from 'node:fs';
 import { describe, it, expect, beforeAll } from 'vitest';
 import { buildSettledPartition } from '../../src/domain/townMap/fabric/partitionConstruct.js';
 import { projectPage } from '../../src/domain/townMap/fabric/partitionView.js';
@@ -598,6 +599,118 @@ describe('PA.3 · THE FORD, and the crossing family', () => {
   });
 });
 
+describe('⟦CAR-STATE-BRIDGE⟧ the two families the CORPUS never exercises, on a real page', () => {
+  /**
+   * ⛔ `insurgency` and `occupied` are expressed by NO leaf of the corpus, so their anchor arms
+   * would ship UNEXECUTED — and unexecuted placement code is exactly how a family ends up
+   * legacy-anchored while every census stays green. They are driven here against the synthetic
+   * page this file already builds, which is a real `PARTITION_PAGE_FRAME` with real lane faces.
+   */
+  it('a BARRICADE moves onto a drawn LANE face, and it keeps the fabric\'s own quarter', async () => {
+    const { anchorStateMarks } = await import('../../src/domain/townMap/fabric/partitionState.js');
+    const lanes = page.ways.filter((w) => w.rank === 'lane' || w.rank === 'blockLane');
+    expect(lanes.length, 'the fixture page draws no lane — the arm would be vacuous')
+      .toBeGreaterThan(0);
+    const before = { expressed: ['insurgency'], bodies: [], marks: [fixtureState().marks[5]] };
+    const after = anchorStateMarks(page, before, { frontage: 5, roadWidth: 5, centre: { x: 0, y: 0 } });
+    const m = after.marks[0];
+    expect(m.kind).toBe('barricade');
+    // it moved…
+    expect([m.x, m.y]).not.toEqual([before.marks[0].x, before.marks[0].y]);
+    // …onto the centroid of a drawn lane face, and its bearing is that lane's own long axis
+    const home = lanes.find((w) => {
+      let cx = 0; let cy = 0;
+      for (const p of w.ring) { cx += p[0] / w.ring.length; cy += p[1] / w.ring.length; }
+      return Math.abs(cx - m.x) < 1e-9 && Math.abs(cy - m.y) < 1e-9;
+    });
+    expect(home, 'the barricade did not land on any drawn lane face').toBeTruthy();
+    expect(Math.hypot(m.dx, m.dy), 'the barricade has no bearing').toBeGreaterThan(0);
+    // …and the fabric's own choice of quarter rode across: no lane is nearer the original point
+    const d = (w) => {
+      let cx = 0; let cy = 0;
+      for (const p of w.ring) { cx += p[0] / w.ring.length; cy += p[1] / w.ring.length; }
+      return Math.hypot(cx - before.marks[0].x, cy - before.marks[0].y);
+    };
+    expect(d(home)).toBeLessThanOrEqual(Math.min(...lanes.map(d)) + 1e-9);
+    // the width the dress strokes with is the fabric's, untouched
+    expect(m.w).toBe(before.marks[0].w);
+  });
+
+  it('a GARRISON BILLET moves beside a SEATED institution, and stays a rigid group', async () => {
+    const { anchorStateMarks } = await import('../../src/domain/townMap/fabric/partitionState.js');
+    const quad = (x, y, w, h) => [[x - w, y - h], [x + w, y - h], [x + w, y + h], [x - w, y + h]];
+    const before = {
+      expressed: ['occupied'],
+      bodies: [0, 1, 2, 3].map((i) => ({
+        key: `state.billet.${i}`, kind: 'tent', cite: 'settlement.stressors[occupied]',
+        polygon: quad(400 + i * 9, 400, 4, 3),
+      })),
+      marks: [],
+    };
+    const seats = [{ face: 7, x: 12, y: -34, area: 90 }, { face: 3, x: -60, y: 20, area: 30 }];
+    const after = anchorStateMarks(page, before, { frontage: 5, roadWidth: 5, centre: { x: 0, y: 0 }, seats });
+    expect(after.bodies.length).toBe(4);
+    const row = after.anchoring.find((a) => a.family === 'seat');
+    expect(row, 'the billet family took no anchor').toBeTruthy();
+    expect(row.at, 'the billets did not take the LARGEST seat').toEqual([12, -34]);
+    // rigid: every edge length preserved, and the group's own spacing with it
+    const edges = (poly) => poly.map((p, i) => {
+      const q = poly[(i + 1) % poly.length];
+      return Math.hypot(p[0] - q[0], p[1] - q[1]);
+    });
+    for (let i = 0; i < 4; i++) {
+      const a = edges(before.bodies[i].polygon); const b = edges(after.bodies[i].polygon);
+      for (let e = 0; e < a.length; e++) expect(b[e]).toBeCloseTo(a[e], 9);
+    }
+    // ⛔ THE CONTROL: with no seating to read, the family is passed through rather than guessed at
+    const none = anchorStateMarks(page, before, { frontage: 5, roadWidth: 5, centre: { x: 0, y: 0 } });
+    expect(none.bodies.map((b) => b.polygon)).toEqual(before.bodies.map((b) => b.polygon));
+    expect(none.anchoring.find((a) => a.family === 'seat')).toBeUndefined();
+  });
+
+  it('⛔⛔ THE TRAMPLED HATCH READS A TRIG INDEX, NOT DEGREES — two consumers, one field', () => {
+    // `stateMarks` publishes `trampled.ang` through its own `bearingOf`, which returns an index in
+    // 0…TRIG_N-1 (1023). `renderFolio.mjs:2953` reads it as `cosI(mk.ang)`; `partitionDress` read
+    // it as `Math.cos(mk.ang * Math.PI/180)` — as DEGREES — so every trampled patch on the dress
+    // page was rotated by an arbitrary amount. The arm is BEHAVIOURAL rather than a source scan:
+    // a QUARTER TURN of the index must draw a quarter turn of hatch.
+    const dir = (ang) => {
+      const d = dressPage(page, {
+        lens: 'parchment',
+        roadWidth: 5,
+        walls,
+        state: { expressed: ['wartime'], bodies: [], marks: [{ kind: 'trampled', x: 0, y: 0, r: 20, ang }] },
+      });
+      const g = /<g id="dress-trampled"[^>]*>(.*?)<\/g>/s.exec(d.svg);
+      expect(g, `ang ${ang}: no trampled group`).not.toBeNull();
+      const seg = /M(-?[\d.]+) (-?[\d.]+)L(-?[\d.]+) (-?[\d.]+)/.exec(g[1]);
+      expect(seg, `ang ${ang}: no hatch segment`).not.toBeNull();
+      const vx = Number(seg[3]) - Number(seg[1]); const vy = Number(seg[4]) - Number(seg[2]);
+      const L = Math.hypot(vx, vy);
+      expect(L, `ang ${ang}: zero-length hatch`).toBeGreaterThan(0);
+      return [vx / L, vy / L];
+    };
+    const QUARTER = 1024 / 4;
+    const a = dir(0); const b = dir(QUARTER);
+    expect(Math.abs(a[0] * b[0] + a[1] * b[1]), 'a quarter turn of index is not a quarter turn of hatch')
+      .toBeLessThan(1e-6);
+    // ⛔ THE CONTROL, and it is what makes this arm non-vacuous: under the DEGREES reading the same
+    //    two indices are 256° apart, whose dot product is cos(256°) ≈ −0.242 — nowhere near zero.
+    const deg = (x) => [Math.cos((x * Math.PI) / 180), Math.sin((x * Math.PI) / 180)];
+    const da = deg(0); const db = deg(QUARTER);
+    expect(Math.abs(da[0] * db[0] + da[1] * db[1])).toBeGreaterThan(0.2);
+  });
+
+  it('⛔ THE NULL CONTROL — no state channel means the pass returns what it was handed', async () => {
+    const { anchorStateMarks } = await import('../../src/domain/townMap/fabric/partitionState.js');
+    expect(anchorStateMarks(page, null, {})).toBe(null);
+    const empty = anchorStateMarks(page, { expressed: [], bodies: [], marks: [] }, { frontage: 5, roadWidth: 5 });
+    expect(empty.bodies).toEqual([]);
+    expect(empty.marks).toEqual([]);
+    expect(empty.anchoring).toEqual([]);
+  });
+});
+
 /* ══════════════════════════════════════════════════════════════════════════════════════════════
  * ⭐⭐⭐ THE CORPUS-RENDER ARM (DRESS-FRAME, chartered ODQ §703.4)
  *
@@ -823,6 +936,124 @@ describe('⭐⭐⭐ THE CORPUS RENDERS — every leaf, both renderers, end to en
       for (const gp of RELIEF_GROUPS) expect(DRESS_GROUPS).toContain(gp);
     }
   });
+
+  /* ────────────────────────────────────────────────────────────────────────────────────────
+   * ⭐⭐⭐ ⟦CAR-STATE-BRIDGE · ODQ §710.6⟧ **THE PLACEMENT ARMS — IS THE MARK ON THE THING IT
+   * MEANS?**
+   *
+   * §710.6 named the class this closes: *"every census W1 wrote asked whether the mark EXISTS.
+   * Not one asked whether it is ON THE THING IT MEANS."* `statePlacementCensus` was written to
+   * ask it, read **RED 4/9 EXIT 1** at `c4d772590`, and was deliberately kept OUT of the gate —
+   * *"a gate arm that reds at its own tip is a broken gate."* It is in the gate now, in the
+   * commit that cures the anchoring, exactly as §710.6 ordered.
+   *
+   * ⚠ THEY ARE FREE: `placementOf` re-uses the same `dressLeaf` call these plates already made,
+   * and the rows were computed once in `beforeAll` above.
+   * ──────────────────────────────────────────────────────────────────────────────────────── */
+
+  it('⭐⭐ every §10 mark is ON the thing it means — the placement census is GREEN', async () => {
+    const { placementOf } = await import('../../harness/laneDRESS2/statePlacementCensus.mjs');
+    const rows = [];
+    for (const p of plates) {
+      const row = placementOf(p.key, 'page');
+      if (!row.expressed.length && !row.bodies && !row.marks) continue;
+      rows.push(row);
+    }
+    // ⛔ NON-VACUITY FIRST: a placement census over zero expressing leaves is the vacuous family's
+    //    newest member, and it would read exactly like this arm passing.
+    expect(rows.length, 'no leaf of the corpus carries a §10 mark — the arm is vacuous')
+      .toBeGreaterThanOrEqual(9);
+    expect(rows.reduce((s, r) => s + r.bodies + r.marks, 0)).toBeGreaterThanOrEqual(40);
+    for (const r of rows) {
+      expect(r.fail, `${r.leaf}: ${r.fail.join('; ')}`).toEqual([]);
+    }
+  }, 900000);
+
+  it('⛔⛔ THE NEGATIVE CONTROL — the SAME arms against the LEGACY geometry must RED', async () => {
+    // `fabric.stateMarks` is the surface `deriveStateMarks` publishes, anchored on the legacy
+    // `walls[].gates` / `meta.builtRadius`. It is what the dress drew before this car and what a
+    // fresh reader convicted. If this passes, every green above is measuring nothing.
+    const { placementOf } = await import('../../harness/laneDRESS2/statePlacementCensus.mjs');
+    const rows = [];
+    for (const p of plates) {
+      const row = placementOf(p.key, 'fabric');
+      if (!row.expressed.length && !row.bodies && !row.marks) continue;
+      rows.push(row);
+    }
+    const bad = rows.filter((r) => r.fail.length);
+    expect(bad.length, 'the placement census passed on the LEGACY geometry it exists to convict')
+      .toBeGreaterThanOrEqual(6);
+    // …and it convicts the named leaves for the named reasons, not just "something failed"
+    const why = Object.fromEntries(rows.map((r) => [r.leaf, r.fail.join('; ')]));
+    expect(why.siege).toMatch(/tent OFF-PAGE/);
+    expect(why.siege).toMatch(/barredGate .* from the band/);
+    expect(why.city, 'the twelve camp huts in the bay').toMatch(/camphut IN WATER/);
+    expect(why.migration).toMatch(/watchFire OFF-PAGE/);
+    expect(why.plague).toMatch(/lazar OFF-PAGE/);
+    expect(why.thorp).toMatch(/trampled OFF-PAGE/);
+    // ⭐⭐ AND THE CONTROL THAT PROVES THE DIAGNOSIS, HOLDING IN BOTH DIRECTIONS: `famine`'s stalls
+    //    anchor to the market — the one thing both geometries put in the same place — so the leaf
+    //    is unmoved by the bridge and unconvicted by the census, before AND after.
+    expect(why.famine, 'famine is the control and it must pass on BOTH geometries').toBe('');
+  }, 900000);
+
+  it('⭐ the bridge MOVED the register and left `fabric.stateMarks` untouched', async () => {
+    // The dormancy claim, asserted rather than argued: the folio reads `fabric.stateMarks`, so if
+    // this car had written to it the shipped corpus render would have moved. Every re-anchored
+    // family must differ from its fabric original, and the fabric original must be intact.
+    const { dressLeaf } = await import('../../harness/laneDRESS1/renderPage.mjs');
+    const r = dressLeaf('siege', 'parchment');
+    const tents = (r.fabric.stateMarks.bodies || []).filter((b) => String(b.key).startsWith('state.siege.'));
+    const moved = (r.state.bodies || []).filter((b) => String(b.key).startsWith('state.siege.'));
+    expect(tents.length, 'siege carries nine tents on the fabric').toBe(9);
+    expect(moved.length, 'and nine on the page').toBe(9);
+    // the polygons moved…
+    expect(JSON.stringify(moved.map((b) => b.polygon)))
+      .not.toBe(JSON.stringify(tents.map((b) => b.polygon)));
+    // …and every non-geometric fact the fabric decided rode across unchanged
+    for (let i = 0; i < 9; i++) {
+      expect(moved[i].key).toBe(tents[i].key);
+      expect(moved[i].kind).toBe(tents[i].kind);
+      expect(moved[i].cite).toBe(tents[i].cite);
+      expect(moved[i].polygon.length).toBe(tents[i].polygon.length);
+    }
+    // ⭐ THE TRANSFORM IS RIGID: every edge length of every tent is preserved to the quantum.
+    const edges = (poly) => poly.map((p, i) => {
+      const q = poly[(i + 1) % poly.length];
+      return Math.hypot(p[0] - q[0], p[1] - q[1]);
+    });
+    for (let i = 0; i < 9; i++) {
+      const a = edges(tents[i].polygon); const b = edges(moved[i].polygon);
+      for (let e = 0; e < a.length; e++) expect(b[e]).toBeCloseTo(a[e], 9);
+    }
+  }, 900000);
+
+  it('⛔ THE ANCHOR ROSTER IS TOTAL — every §10 kind the fabric can emit is RULED', async () => {
+    // `stateMarks` can publish a kind this bridge has never heard of, and the silent behaviour
+    // would be to pass it through legacy-anchored — i.e. to re-create the defect for that one
+    // family while every census stayed green. So the roster is walked against the kinds the
+    // corpus actually produces AND against the derivation's own declared expressions.
+    const { STATE_ANCHOR_DISPOSITION } = await import('../../src/domain/townMap/fabric/partitionState.js');
+    const { dressLeaf } = await import('../../harness/laneDRESS1/renderPage.mjs');
+    const seen = new Set();
+    for (const p of plates) {
+      const r = dressLeaf(p.key, 'parchment');
+      const S = r.fabric.stateMarks || {};
+      for (const b of (S.bodies || [])) if (String(b.key || '').startsWith('state.')) seen.add(b.kind);
+      for (const m of (S.marks || [])) seen.add(m.kind);
+    }
+    expect(seen.size, 'the walker found no state kinds — its own read has rotted').toBeGreaterThanOrEqual(6);
+    for (const k of seen) {
+      expect(STATE_ANCHOR_DISPOSITION[k], `${k} is emitted and has no anchor ruling`).toBeTruthy();
+    }
+    // …and the other direction: a ruling for a kind nothing emits is a rule about nothing, so it
+    // must be a kind the DERIVATION declares even where the corpus never reaches it.
+    const src = readFileSync(new URL('../../src/domain/townMap/fabric/stateMarks.js', import.meta.url), 'utf8');
+    for (const k of Object.keys(STATE_ANCHOR_DISPOSITION)) {
+      const emitted = seen.has(k) || new RegExp(`kind: '${k}'`).test(src) || src.includes(`state.${k}`);
+      expect(emitted, `${k} is ruled and nothing emits it — emit it or drop the row`).toBe(true);
+    }
+  }, 900000);
 
   it('⛔ §18.4 market-infill fossils are NOT drawn as state bodies — the exclusion is asserted', () => {
     // `colonize.*` bodies ride on `stateMarks.bodies` and carry NO scenario signal; drawing them

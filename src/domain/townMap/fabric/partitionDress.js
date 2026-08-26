@@ -38,7 +38,7 @@
  * seeded decisions. A view that draws is a view that cannot be re-derived (partitionView's law).
  */
 
-import { r2, splitPolygon, centroid, absArea } from './fabricGeometry.js';
+import { r2, splitPolygon, centroid, absArea, cosI, sinI } from './fabricGeometry.js';
 import { resolveLens, luminance, HATCH } from './folioLenses.js';
 import { V_QUAY_BAND } from './waterWorks.js';
 import {
@@ -866,7 +866,16 @@ function dressPageInner(page, opts) {
           fires.push(linePath([[mk.x - r * 0.6, mk.y - r * 0.6], [mk.x + r * 0.6, mk.y + r * 0.6]]));
           census.watchFires++;
         } else if (mk.kind === 'trampled') {
-          const c2 = Math.cos(mk.ang * DEG); const s2 = Math.sin(mk.ang * DEG);
+          // ⛔⛔ ⟦CAR-STATE-BRIDGE⟧ **A TRIG INDEX, READ AS A TRIG INDEX AT LAST.** `stateMarks`
+          //   publishes `ang` through its own `bearingOf`, which scans the frozen table and
+          //   returns an index in **0…TRIG_N-1 (1023)**. This line read it as DEGREES, so the
+          //   hatch of every trampled patch was rotated by an arbitrary amount — `ang = 300`
+          //   drew 300° where the world said 105.5°. ⭐ THE DEFECT WAS FOUND BY CROSS-READING
+          //   THE TWO CONSUMERS OF ONE PUBLISHED FIELD: `renderFolio.mjs:2953` reads the very
+          //   same `mk.ang` as `cosI(mk.ang)`, and the folio is the one that is right.
+          //   ⚠ Re-anchoring a mark while leaving the unit its ORIENTATION arrives in wrong
+          //   would only re-place the same defect one field over, which is why it is cured here.
+          const c2 = cosI(mk.ang); const s2 = sinI(mk.ang);
           for (let i = -2; i <= 2; i++) {
             const px = mk.x - s2 * i * mk.r * 0.32; const py = mk.y + c2 * i * mk.r * 0.32;
             tramp.push(linePath([[px - c2 * mk.r * 0.5, py - s2 * mk.r * 0.5],

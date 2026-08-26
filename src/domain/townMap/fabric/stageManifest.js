@@ -286,7 +286,15 @@ export const GENERATION_NODES = Object.freeze([
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'substrate.js'],
     randomNamespaces: ['*|*|*|*', '*|*|t', '*|*|t2', '*|aj', '*|br|*', '*|cut|*', '*|gf|*|b', '*|gf|*|r', '*|gf|*|t', '*|n', '*|te*', '*|tone', '*|tr', '*|tr*', '*|trn', '*|tu*', '*|vx|*|*', '*|vy|*|*'],
     statefulForkSites: 0 },
-  { nodeId: 'S19', modules: ['stateMarks.js'],
+  // ⭐⭐ ⟦CAR-STATE-BRIDGE · ODQ §710.6⟧ `partitionState.js` JOINS S19, THE STATE NODE.
+  //   It is a §10 law — WHERE a state mark stands — and its neighbour here is the module that
+  //   decides WHICH state marks exist. It takes NO partition module: a projected page is plain
+  //   data, so unlike `partitionSeating.js`'s honest `S8>S16` this module derives no new node
+  //   edge at all, and S19's `allowedImports` is unchanged (`fabricGeometry.js` was already
+  //   there). ⭐ It opens no stream and mints no key — it TRANSFORMS families rigidly rather
+  //   than re-deriving them — so `randomNamespaces` is unchanged, `statefulForkSites` stays 0,
+  //   and the fabric's pinned total of 18 stateful streams does not move.
+  { nodeId: 'S19', modules: ['partitionState.js', 'stateMarks.js'],
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', '../../../data/stressTypes.js', '../../canonicalAccessors.js'],
     randomNamespaces: ['*|barricade', '*|camp|*|x', '*|camp|*|y', '*|siege|*'],
     statefulForkSites: 0 },

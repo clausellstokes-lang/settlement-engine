@@ -20,6 +20,7 @@ import { partitionInputs } from '../laneSPINE1/partitionPerf.mjs';
 import { publishWallWorks } from '../../src/domain/townMap/fabric/wallPublication.js';
 import { dressPage, accessibleHatch } from '../../src/domain/townMap/fabric/partitionDress.js';
 import { seatPartition } from '../../src/domain/townMap/fabric/partitionSeating.js';
+import { anchorStateMarks } from '../../src/domain/townMap/fabric/partitionState.js';
 import { wallForm } from '../../src/domain/townMap/fabric/walls.js';
 import { pubOpts } from '../laneSPINE3/pubOpts.mjs';
 import { faceRing } from '../../src/domain/townMap/fabric/partitionArrangement.js';
@@ -51,6 +52,19 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
     prosperity: (settlement.economicState || {}).prosperity || null,
     tier: fabric.meta.tier,
   });
+  // ⭐⭐⭐ ⟦CAR-STATE-BRIDGE · ODQ §710.6⟧ THE §10 REGISTER, RE-ANCHORED ONTO THE DRAWN PAGE.
+  //   `fabric.stateMarks` is derived against the LEGACY geometry — `walls[].gates`, `web.roads`,
+  //   `meta.builtRadius` — and the dress draws the PARTITION, so the marks existed, passed every
+  //   count, and landed nowhere: `siege` 9 tents 0 of them on the page, `city` 12 camp huts inside
+  //   the coast polygon. The pass sits exactly where `seatPartition` sits — a DOMAIN pass that
+  //   reads the projected page — so `fabric.stateMarks` itself is never written and the folio's
+  //   dormancy holds by construction rather than by argument.
+  const state = anchorStateMarks(page, fabric.stateMarks, {
+    frontage: fabric.meta.plotFrontage,
+    roadWidth: input.roadWidth,
+    centre: fabric.meta.centre,
+    seats: (seating && Array.isArray(seating.seats)) ? seating.seats : [],
+  });
   const dress = dressPage(page, {
     lens,
     roadWidth: input.roadWidth,
@@ -60,7 +74,8 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
     //   scope here (this function returns the fabric so the corpus arm can drive both renderers
     //   off one build), and `partitionInputs` carries no state — so the page cannot know the leaf
     //   is besieged and the dress has to be told, exactly as it is told about `walls`.
-    state: fabric.stateMarks,
+    //   ⟦CAR-STATE-BRIDGE⟧ it is now told the RE-ANCHORED register, computed above.
+    state,
     // ⭐⭐ ⟦DRESS-2 W2⟧ THE LAND'S OWN MARKS, crossing the same bridge. `fabric.relief` reached
     //   `renderFolio` and nothing else; §646.2 convicted the dress page for having ZERO relief
     //   marks against a steep-hills cartouche, and that was literally true.
@@ -84,6 +99,11 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
     + dress.svg + acc.svg + '</svg>';
   return {
     key, tier: fabric.meta.tier, lens, svg, dress, page, walls, acc, seating,
+    /** ⭐ ⟦CAR-STATE-BRIDGE⟧ THE RE-ANCHORED §10 REGISTER — the geometry that was actually DRAWN.
+     *  `fabric.stateMarks` is still published untouched beside it, so a census can measure the
+     *  before and the after off ONE build and attribute the move. ⛔ A placement census that
+     *  read `fabric.stateMarks` here would be measuring the surface the page does not draw. */
+    state,
     /** ⭐ THE FABRIC THE LEAF WAS BUILT FROM, published so a caller that also needs the FOLIO
      *  plate of the same leaf can render both from ONE build. The corpus-render gate arm
      *  (DRESS-FRAME, ODQ §703.4) is that caller, and without this it paid for the fabric twice. */
