@@ -30086,3 +30086,82 @@ identical at base and tip** · all 9 committed blobs verified equal to the files
   Also reported and untouched: the **metropolis needle**, `leafInputs.mjs:10`'s `extent=NaN`.
   Deferred: **the folio's own framing** — `fitFrame` is exported and applies unchanged; **the
   folio switches at the port**, so the two plates converge there rather than now.
+
+## §708 · SEATING STALLED AT CHECKPOINT 3 AND RESUMED MID-LANE — AND ITS RECON REFUTES ITS OWN CHARTER ON FIVE COUNTS (2026-08-26 ~03:10 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+The lane died to a stream watchdog after ~90 minutes. ⭐ **§448 IS VINDICATED IN THE PLAINEST
+POSSIBLE WAY: its own 30-minute checkpoint block is the ONLY reason that work survived** —
+zero commits, one untracked module, and a 9.8 KB resume file that made a mid-lane pickup
+trivial. Resumed, not restarted. Base gate was already proven (19 files / 450 tests, EXIT 0).
+
+- **§708.1 C1 — THE QUOTA DECK ALREADY EXISTS; A2.4's CHARTER IS REFUTED.**
+  `settlement.institutions` is already a full tier-scaled roster — **thorp 10 · village 33 ·
+  town 58 · city 41 · metropolis 56 · fjord 44** — selected from a **311-entry catalog**
+  (6 tiers × 11 categories) and modulated by chance × resource boosts × terrain. **Nothing
+  needs minting.** §8's "build the quota deck from the ledger" was work already done.
+- **§708.2 C2 — THE BRIDGE DROPS IT, AND THE TWO SUBSTRATES HAVE NEVER MET.**
+  `partitionInputs` carries **nine keys, none institutional**; `grep landmark` across the
+  partition modules returns **zero**; `FACE_CLASSES` is a closed roster with **no
+  institutional class**; and `spinePartition` is built **after** seating and **read by
+  nobody.** Meanwhile the legacy fabric seats them fully (91 landmarks on `town`, 89 on
+  polycentric) through a complete 518-line greedy pass. ⇒ **The car is not "build a deck." It
+  is "carry the deck across the bridge and seat it on faces."**
+- **§708.3 ⛔⛔ C3 — THE WARD LAYER IS DEGENERATE, AND BOTH OPPOSITE FAILURE MODES ARE IN ONE
+  CORPUS.** Measured with a planted probe, then reverted (diff clean): **village, town and
+  city are subdivided with ONE chaos/size/emptiness triple for the entire settlement**
+  (uniform grain, 1 distinct key across 19–34 calls), while **metropolis re-opens plots to
+  FIELD so the key becomes the plot's own piece — 170 distinct keys, atomised grain.**
+  **Neither is the reference's ward-coherent grain.** And the face census: **ZERO WARD faces
+  and ZERO BLOCK faces on every leaf**, with exactly one quarter piece per leaf labelled
+  `village` on **every tier**.
+  ⚠⚠ **THIS QUALIFIES §697–§701's "our fabric is already at reference parity."** That
+  conclusion was measured on **density, shape complexity and size spread** — and it holds on
+  those axes. **It was silent on ward coherence, and this is that axis.** The parity finding
+  was not wrong; it was narrower than the sentence I wrote around it.
+- **§708.4 C4 — THE PORT ROW IS A GATE, NOT A CONTENT GAP; §660.1 IS REFUTED.** The catalog
+  already holds Docks, Shipyard, Customs house, Harbour master's office, and a 9-row
+  WATERFRONT family. **Three independent gates stop them:** every dock row requires a
+  `port`/`river` trade route while **`city` measures `road`** despite coastal terrain; the
+  ×2.0 docks resource is **forbidden on `road` AND requires `coastal`** — doubly excluded,
+  and it appears in **0 of 18 leaves**; and ⛔ **`forcePort` is applied AFTER the pipeline has
+  already assembled the institutions, so a fjord's port-ness reaches the MAP and never the
+  ROSTER.** ⇒ **No leaf in this corpus can earn a dock, by construction.**
+- **§708.5 ⛔ C5(i) — GRAVEYARDS: EXACTLY ONE ENTRY IN 311, AND IT IS VILLAGE-ONLY.** There is
+  **no burial ground at thorp, hamlet, town, city or metropolis**. **A 71,325-soul metropolis
+  has nowhere to bury anyone.** §8's exit "graveyards PRESENT" is therefore **blocked upstream
+  of the map, in catalog content** — a seating car cannot place what the catalog does not
+  contain. → **OWNER DOCKET (content).**
+- **§708.6 ⛔⛔ C5(ii) — THE DEITY-DOCTRINE VIOLATION, WITH EXECUTED RECEIPTS — AND THE §705
+  DISCIPLINE APPLIED BEFORE ANY ALARM.** On the build branch: `Healer (divine, 1st level)` is
+  filed under category **Magic** with tags `['divine','healing']`, and the canonical detector
+  returns **MUNDANE** for it, because it short-circuits on the catalog tag and **`'divine'` is
+  not in `ARCANE_INST_TAGS`** (`['arcane','planar','alchemy','enchanting']`). The magic-free
+  gate is therefore **inert for it** — measured baseChance **0.16**, against **0** for its
+  arcane siblings. Worse, `MAGIC_ASSERTION_PATTERN` is **arcane-only** (no *divine, heal,
+  cleric, bless, miracle, cure*), so a magic-free world admits "senior clerics performing
+  divine healing."
+  ⚠⚠ **BUT THE LANE WROTE "ships today," AND THE TREE CHECK SAYS SOMETHING DIFFERENT — THE
+  §705 PATTERN REPEATING.** Chair-measured: the divine-healer **catalog row IS on `master`**,
+  and **`magicExists` IS on `master` in 37 files including the config panel and the wizard —
+  so a magic-free world IS selectable live.** But **all three enforcement modules
+  (`magicAssertionText.js`, `arcaneInstitutionVocabulary.js`, `institutionProbability.js`)
+  are ABSENT from `master`.** ⇒ **The specific leak diagnosed is a BUILD-BRANCH shape.** What
+  `master` actually does about a magic-free world is **UNMEASURED**, and it could be sound by
+  another mechanism **or worse than the build branch, since none of the gates we analysed
+  exist there.** ⛔ **I am not calling this a live defect and not calling it safe.** →
+  **CHARTERED `DEITY-LIVE-CHECK`**, the §705 shape: determine only, name the tree, no cure.
+- **§708.7 ⭐ THE FINDING THAT RE-AIMS THE BUILD: THE TANNERY AT THE CIVIC CORE, FOREVER.**
+  `institutionAtlas.js` is the placement authority and **its own header says it outranks
+  `priorityCategory`** — but `institutionAssignment.js` reads `priorityCategory` **first and
+  only**, and **43 entries are mis-keyed `government`, including Tannery, Fuller, Dyer,
+  Smelter, Brewery and Fish market.** So the noxious trades are seated beside the town hall,
+  permanently. The resumed lane's scorers read the **atlas**. Also banked: roster reads must
+  route through `liveInstitutions()`, since ruined institutions are stamped inactive rather
+  than spliced out.
+- **§708.8 THE BUILD, SEQUENCED BY THE LANE ITSELF** so each step is independently gated:
+  **W1** seating module + publication, **no dress**, so plates must be **byte-identical** —
+  its own dormancy control; **W2** the distribution censuses + `physicalViolations === 0`
+  with a **planted violation that convicts**; **W3** the register mark as a declared shift.
+  The stage-graph cost was settled **by differential** (a planted fabric module reds the
+  walker's one-node assertion): the new module belongs in **S16**, importing S8 is a legal
+  forward edge, and the views read face `attrs` generically so **no new edge is created**.

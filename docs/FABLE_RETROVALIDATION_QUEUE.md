@@ -226,6 +226,22 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§708 · SEATING's recon refutes its charter on five counts · SEAT: Opus 5.**
+*What was judged:* resuming mid-lane rather than restarting; accepting all five premise
+corrections; the ruling that §697–§701's "fabric at reference parity" is **narrower than the
+sentence I wrote around it** (true on density/shape/size, silent on ward coherence); and
+declining to call the deity finding a live defect on the lane's say-so.
+*What Fable re-derives:* **(a)** §708.3 — zero WARD and zero BLOCK faces on every leaf is a
+substrate finding of the first order, and it sat undetected through four waves that all
+reported green. What else did those waves' censuses not ask? **(b)** whether my parity
+qualification is honest or a face-saving narrowing — read §697–§702 and judge whether the
+sentences I wrote were really about density alone. **(c)** the §708.6 restraint: is
+"chartered, not alarmed" right for a constitutional law, or is it under-reacting twice in a
+row now (§705 was the first)?
+*Receipts:* ODQ §708 · `$SP44/SEATING-RESUME.md` (the dead lane's own 9.8 KB checkpoint) ·
+the chair's `git cat-file`/`git grep` reads against `master`.
+*Priority:* **P1** on (a) and (c).
+
 **§707 · DRESS-FRAME ratified; three of the chair's figures refuted · SEAT: Opus 5.**
 *What was judged:* ratifying a wave that corrected three of my published figures; accepting
 BOTH refusals (the wall lever and the silhouette) on the lane's measurements; and taking the
