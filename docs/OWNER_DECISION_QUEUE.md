@@ -30630,3 +30630,71 @@ quarter **84.8 % → 100 %**; folio legend **88 rows / 18 leaves, 0 fails**; L-R
   **the judged page still has no words, and the wiring that would give it any is the PORT's**,
   exactly as §712.5 found for the zoom rung. Two waves have now landed value on the folio
   while the arc's target surface waited on the same missing connection.
+
+## §715 · REG-D SEALS — THE DECLINE IS DRAWN, AND ON SIXTEEN LEAVES OF EIGHTEEN NOT ONE PIXEL OF IT IS ON THE PAGE (2026-08-27 ~06:10 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+**RATIFIED, all ten judgments.** Sealed `refs/preserve/map-sandbox-regd` = **`4935c3c35`**
+(base `24e60c890` verified ancestor; **zero deletions**). Gate **20 files / 523 tests EXIT 0**
+(base 20/512 **executed in-turn**; +11 = exactly the arms, **no new test file**) · folio
+dormancy **29/29 with its control convicting 28/29** · determinism **18/18 byte-identical,
+18/18 distinct sha256** · **wrap digest unmoved** · byte **+43,714 B (+0.764 %)**, reported as
+a measurement. Instruments sealed **r9 = `4bde6217a`** (i16 pair rescued — §710.8's class,
+fourth sighting, taken at collection).
+
+- **§715.1 ⛔⛔ THE FINDING, AND IT IS THE FRAMING TRADE'S FOURTH AND LARGEST COST.** Every
+  census passes, and **on 16 of 18 leaves not one pixel of the decline dress reaches the
+  page.** Visible share: `highwater` **1.0091 % of plate / 0.8898 % perceptible / 32.08 %
+  in-region** · `mountain` **0.0061 %** · **the other sixteen EXACTLY 0.0000 %.** ⭐ **Four
+  independent methods agree** — polygon clip to frame, centroid-in-rect, a 1,400 px raster
+  diff and a 2,200 px re-shoot — and the rasters read `changed = 0`, `maxDelta = 0`
+  **exactly, not rounded.** Those sixteen leaves each spend **305–815 bytes for zero pixels.**
+- **§715.2 ⭐ AND THE MECHANISM IS NOT A BUG IN EITHER HALF — TWO CORRECT DECISIONS PRODUCE A
+  WRONG OUTCOME.** §3f abandons the **outermost** pieces, because a population fall *is* a
+  contraction of the built radius. DRESS-FRAME fits the page to `bound.radius`. ⇒ **THE RIM IS
+  WHAT EMPTIES AND THE RIM IS WHAT THE FIT CROPS.** On `town` the outermost live plot stands
+  at radius **467.4** while the frame is fitted at **185.9**. Neither law is wrong; their
+  composition is. **The framing trade now has FOUR measured costs: the hinterland and one
+  legibility read (§710.4) · the siege camp (§711.7) · and now THE ENTIRE DECLINE REGISTER.**
+  → **OWNER DOCKET, and this is the one that should decide it.**
+- **§715.3 THE DRESS ITSELF IS GOOD — WHICH IS WHY THE CROP MATTERS.** Where the ledger
+  actually collapsed, the ink is legible: `highwater` reads **0.8898 % perceptible against the
+  register §714.6 convicted at 0.05–0.14 % — 7.2× to 20× larger**, and **dense where it is
+  allowed to be rather than scattered.** So this is not a fourth "drawn, counted, unseeable":
+  the lane measured its own visibility, found the mark real where the page permits it, and
+  named the crop as the cause. **That is exactly what §714.6's guard was written to produce.**
+- **§715.4 PA.8 WAS NOT A FORMALITY.** 560 LossRegions: **DEBRIS 197 · BREAKING_DOWN 273 ·
+  FROZEN_MID_BITE 1 · RECLAIMED 89 · INTACT 0 · CONTACTED 0.** ⭐ **All 89 RECLAIMED regions
+  have no `LOSSREGION` face**, so a face-walk would have found 471 of 560 and **missed the
+  most interesting 89 by construction.** The census is defined over `publishLosses` exactly
+  because of that, and the ruling is now vindicated by measurement rather than by argument.
+- **§715.5 THE DECLINED-SPECIMEN READ, AND WHY IT IS STRONGER THAN A PASS.** Eight plates,
+  salted shuffle, fresh context, machine-derived key, **with the same leaf at base and tip in
+  the set**: walled **8/8** · arc **5/5 committed, 3 abstentions, 0 false positives**. The tip
+  read SHRINKING **at high confidence** and the base at **moderate**, and the reader named the
+  alternative the base could not exclude — *"a fully platted grid ahead of the built edge is
+  also how a surveyed-but-unbuilt extension gets drawn."* ⭐⭐ **The ink did not rescue a
+  failed read; it KILLED A LIVE ALTERNATIVE — and the reader independently derived the
+  discriminator the dress is built on.** ⚠ **n = 1 declined leaf; the bound is stated, not
+  hidden.**
+- **§715.6 ⛔ AND THE `fjord` READ HAS DEGRADED FROM ABSTENTION TO WRONG CLASS.** A **fourth**
+  independent stranger described the same clipped corner, and where §714.3's reader abstained,
+  this one answered **DRY against a key of PORT**. The framing cause is not static; it is
+  getting worse as readers grow more willing to commit. **§714.4's escalation trigger, already
+  on the owner's docket, now has a fourth data point behind it.**
+- **§715.7 TWO CHARTER ITEMS REFUTED RATHER THAN DEFERRED.** **Subdivided grandeur has NO
+  SUBJECT**: the union of every attribute any PLOT face carries is
+  `block/moored/quay/run/water/waterKind` — **the wealth axis lives in the legacy district
+  cells**, and joining them is §708.2's C2. **The oversized high-water circuit as memory is
+  REFUTED**: plots are **97.0 % intramural**, masses 97.1 %, ruins 1.5 % — **the circuit is
+  the line the town HELD, not the memory of a larger city** — and the one device that could
+  say otherwise (`bricked`) is **hard-coded false** in `wallPublication.js`.
+- **§715.8 TWO SELF-CORRECTIONS KEPT RATHER THAN DELETED.** One judgment was **made backwards
+  first and corrected by a failing arm** — and **the arm and the reasoning are both kept in
+  the record**, because which half needed the correction is the useful part. And a note of the
+  lane's own was refuted by its own crop: ⭐ **the ruins do NOT "render as bare paper" — a dead
+  quarter reads as a STREET GRID WITH EMPTY BLOCKS, an unfinished drawing rather than a ruined
+  one, and the blind reader saw the same thing independently.** That is a genuine dress finding
+  for whoever cures it: *emptiness needs a mark of its own, or it reads as work not yet begun.*
+  **L-REG-36's red is reported and NOT cured** — the cure moves same-seed geometry on the one
+  leaf carrying the whole visible register and **would void this car's own measurement in the
+  same act.** Chartered onward as **DECLINE-ADDRESS**.

@@ -226,6 +226,23 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§715 · REG-D ratified; the decline is drawn and cropped · SEAT: Opus 5.**
+*What was judged:* all ten J-D calls RATIFIED; accepting two charter items as REFUTED rather
+than deferred (subdivided grandeur has no subject; the high-water circuit is not a memory);
+accepting a declined-specimen read at **n = 1**; and leaving L-REG-36's red uncured because
+the cure would void the car's own measurement.
+*What Fable re-derives:* **(a)** the **n = 1** specimen read — the ink "killed a live
+alternative" on ONE declined leaf, which is a strong result on a very thin base; is one leaf
+enough to close a gestalt field? **(b)** whether "subdivided grandeur has no subject" is
+sound or is a convenient refutation of the hardest item in the charter. **(c)** the
+visible-share method itself: four agreeing measurements is persuasive, but all four were
+written by the same lane in one turn — re-run one independently. **(d)** whether I should
+have stopped the arc at §715.2 rather than continuing, given the framing composition now
+costs four registers.
+*Receipts:* ODQ §715 · `refs/preserve/map-sandbox-regd` = `4935c3c35` · instruments **r9**
+`4bde6217a` · `laneREGD-receipt.md` + `regd/blind/key/scoring.md`.
+*Priority:* **P1** on (a) and (d).
+
 **§714 · JUDGING ratified; six rulings closed; §713 qualified · SEAT: Opus 5.**
 ⛔ **THE HIGHEST-VALUE TASTE ROW IN THIS QUEUE — the whole judging wave is the §236.2 class.**
 *What was judged:* all seventeen J-J calls RATIFIED; **six standing rulings closed** (quarter-name
