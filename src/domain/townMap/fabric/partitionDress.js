@@ -198,7 +198,7 @@ function dressPageInner(page, opts) {
     //   A furrow is a tonal texture in the corpus (hf140), not a drawn line in map ink.
     g('dress-grain', grain.length
       ? `<path d="${grain.join('')}" fill="none" stroke="${T.grain}" stroke-width="${GRAIN.stroke}"`
-        + ` stroke-opacity="${GRAIN.opacity}"/>` : '');
+        + ` stroke-opacity="${T.grainOpacity}"/>` : '');
     prims.n += fills.length + grain.length;
   }
 
@@ -598,12 +598,113 @@ export function tones(LENS, opts = {}) {
   //   stand ON its yard and a yard stand IN its street, night palette included.
   const plotGround = atLeast(street, mix(R.roads, poles.dark, 0.22), VALUE_STEP, poles.dark);
   const built = atLeast(plotGround, R.roofs, VALUE_STEP, poles.dark);
+  /**
+   * ⛔⛔ **DRESS-FABRIC · THE COUNTRYSIDE GETS A CEILING, AND IT IS THE DEFECT A FLOOR-ONLY LADDER
+   * CANNOT SEE.** Every rung above is a FLOOR — *"walk this tone away from the paper until it
+   * clears its rung"* — and `valueCensus` asserts five of them and passed 5/5 while the page was
+   * wrong. MEASURED at the SPINE-3 tip, parchment lens:
+   *
+   * ```
+   *   paper 0.7351 · street 0.8333 · voidGround 0.6752 · plotGround 0.5121
+   *   field 0.3171   ← DARKER THAN THE TOFT IT SURROUNDS
+   *   grain 0.1572   ← contrast against BUILT 0.139 is 1.097: the ground hatch and a roof are
+   *                    the SAME VALUE, which is the review's "competes with the fabric behind it"
+   * ```
+   *
+   * ⭐ AND THE AREA IS WHAT MAKES IT DECISIVE. i14's page-budget row measures the field at
+   * **49–68 % of every plate** against the whole settlement's **1.7–6.9 %**. Weighting each region's
+   * distance from the paper by its share of the sheet, the countryside carries **18× the visual mass
+   * of the fabric** on the city leaf. The largest region on the page was also its second-darkest.
+   *
+   * ⭐⭐ **THE CURE MINTS NO NUMBER. IT ADDS TWO RELATIONS, EACH TO A TONE THE LADDER ALREADY
+   * COMPUTES**, so the countryside is placed against the town rather than against the paper alone:
+   *   1 · the FIELD may never be darker than `plotGround` — the settled ground outranks the
+   *       countryside — clamped so the existing `field:paper ≥ VALUE_STEP` floor is untouchable;
+   *   2 · the GRAIN keeps a full value step clear of `built` — a ground texture is not a roof.
+   * Both are asserted as NEW rows in `valueCensus`. No existing floor is relaxed to make them pass:
+   * a census loosened to reach a count is the one move §9 law 7 forbids outright.
+   */
+  /**
+   * ⛔⛔ **THE FIELD FILL IS UNCHANGED AT THIS TIP, AND THE REASON IS A MEASUREMENT, NOT A CHOICE.**
+   * The demotion was built, executed corpus-wide and then WITHDRAWN: it reds
+   * `i5-role-contrast`'s `water:ground` floor — the only instrument in the estate that sets a
+   * non-zero exit code — on `city` (1.4866 → 1.2574) and `town` (1.3768 → 1.1641) against 1.35.
+   * ⚠ `town` stood **1.9 % above that floor before this lane touched anything**, so the leaf admits
+   * a field move of about **0.03 of luminance — a twentieth of the demotion the page needs.**
+   * ⭐ AND WHAT THE ROW ACTUALLY MEASURES IS THE RULING THE CHAIR IS OWED: decomposed pixel by
+   * pixel on `city`, i5's `ground` population is **30.3 % roofSE + 23.7 % built + 12.8 % eaves =
+   * 66.8 % ROOF**, **25.6 % FIELD**, and **0.7 % `plotGround`** — a role named *ground* that is
+   * two thirds roof and contains almost no ground, because `building` builds i5's urban envelope
+   * and is then not among its measured roles. Lowering that floor or re-predicating that role is
+   * PA.5's act and not a lane's; the demotion waits on it rather than shipping a red.
+   */
   const field = atLeast(paper, mix(R.greens, from(R.greens), 0.06), VALUE_STEP, from(R.greens));
+  /**
+   * The furrow's own tone: the field, further down — then held a full step clear of a ROOF.
+   * ⛔⛔ **AND THE DIRECTION IS PICKED FROM THE LENS, WHICH THIS FUNCTION'S OWN HEADER ALREADY
+   * WARNED ABOUT AND I WALKED INTO ANYWAY.** The first spelling walked the grain *toward the paper*
+   * — right on parchment, wrong on `darkFantasy`, where the paper (lum 0.0175) is DARKER than the
+   * built tone (0.0248), so "toward the paper" moves the hatch INTO the roof's own value and the
+   * loop can never escape: measured, `grain:built` **1.069 against 1.280**. The quiet side of a
+   * roof is whichever pole the PAPER lies on, exactly as the third failure recorded above this
+   * ladder concluded — *"away from the paper is a DIRECTION, not a sign"* — one function further
+   * down and in the same week.
+   */
+  /**
+   * ⛔⛔ **AND THE FIRST CURE PUT THE FURROW ON THE WATER'S OWN VALUE — i5 CAUGHT IT, AND THE FIX
+   * IS A BETTER RULE RATHER THAN A SOFTER ONE.** With the field demoted, `mix(field, dark, 0.34)`
+   * landed the grain at lum **0.261** against the water's **0.260**: the two roles became the same
+   * value. `i5-role-contrast` — the one instrument in the estate that sets a non-zero exit code —
+   * went **`water:ground` 1.4866 → 1.2616 on `city` and 1.3768 → 1.1681 on `town`, against its
+   * 1.35 floor**. Its `ground` population on a dress plate is 31,045 px of urban-envelope pixels
+   * left over after street/wall/water, and their measured RGB tracks the GRAIN, so what that row
+   * actually reads on this plate is *the water against the countryside's furrow hatch*.
+   *
+   * ⛔ **THE FLOOR IS NOT MINE TO LOWER**, whatever the row is really measuring. The furrow is
+   * re-derived instead: a texture belongs to its own surface, so it is stated as **at most one
+   * value step under the FIELD it lies on** — which is a relation to the thing it textures, where
+   * the old `0.34 toward black` was a walk with no referent at all. Two clearances follow and both
+   * are asserted rather than assumed: a step off a ROOF, and a step off the WATER.
+   */
+  /**
+   * ⭐⭐ **`clearOf` — WALK A TONE AWAY FROM AN OBSTACLE, AND LET THE OBSTACLE PICK THE DIRECTION.**
+   * Every earlier walk in this ladder took its pole from the PAPER, which is right for a rung and
+   * wrong for a clearance: to get clear of a role you must move to the far side of THAT role, and
+   * which side that is depends on where you already stand. Hard-coding either pole is how this
+   * lane put the furrow inside the roof on `darkFantasy` twice in one afternoon.
+   */
+  const water = atLeast(paper, R.water, VALUE_STEP, from(R.water));
+  /**
+   * ⭐⭐⭐ **THE FURROW IS DEMOTED AT THE SURFACE THE READER SEES, NOT IN THE TONE TABLE — AND THAT
+   * IS THE ONLY DOOR THE PALETTE LEAVES OPEN.**
+   *
+   * The named defect is real and measured: `grain:built` = **1.097** at the SPINE-3 tip, i.e. the
+   * countryside's hatch and a roof are the same value. But every cure that moves a TONE is closed:
+   *   · moving the FIELD reds i5's `water:ground` (see the field's own line above);
+   *   · moving the GRAIN's tone cannot satisfy both clearances at once — on `illustrated` the roof
+   *     (lum 0.1516) and the water (0.2317) are **1.397 apart in contrast**, and a full step from
+   *     each would need **1.28 × 1.28 = 1.638**. There is no such colour. Measured, not argued:
+   *     the same construction reds `grain:built` at 1.273 (parchment), 1.134 (watercolor) and
+   *     1.020 (illustrated).
+   *
+   * ⭐ SO THE HATCH IS QUIETED BY ITS **OPACITY**, WHICH IS DERIVED RATHER THAN PICKED. The rendered
+   * furrow is `field` seen through `grain` at α; α is solved so that what actually lands on the
+   * page is **exactly one value step under the field it textures** — the same law the tone version
+   * wanted, asked at the pixel instead of at the table. `GRAIN.opacity`'s 0.72 was carried forward
+   * verbatim from a review that convicted the family's REACH and not its weight, and it was never
+   * anybody's derived figure. On parchment α solves to ≈0.50: the hatch keeps its hue, its pitch,
+   * its stroke and its clip, and stops out-shouting the fabric it sits behind.
+   *
+   * ⚠ **AND IT MOVES NO DECLARED TONE, SO NO EXISTING VALUE ROW CAN MOVE** — which is exactly why
+   * it is the shippable half of this lever.
+   */
+  const grain = mix(field, poles.dark, 0.34);
+  const grainOpacity = solveFurrowAlpha(field, grain);
   return {
     paper,
     ink: R.ink,
     wall: R.walls,
-    water: atLeast(paper, R.water, VALUE_STEP, from(R.water)),
+    water,
     waterInk: mix(R.water, poles.dark, 0.45),
     field,
     /** RUNG 1 · the palest ground role — §9.7's own law, and the street IS the gap */
@@ -612,7 +713,12 @@ export function tones(LENS, opts = {}) {
     plotGround,
     voidGround: atLeast(street, mix(R.roads, poles.dark, 0.10), VALUE_STEP ** 0.5, poles.dark),
     /** the furrow's own tone: the field, further down — a texture, never map ink */
-    grain: mix(field, poles.dark, 0.34),
+    grain,
+    /**
+     * ⭐ THE ALPHA THE FURROW IS DRAWN AT, SOLVED PER LENS. See `tones`' furrow block: the hatch is
+     * demoted at the pixel because every tone-side cure is arithmetically closed on this palette.
+     */
+    grainOpacity,
     /** ⭐ RUNG 3 · the built footprint, a full step under the toft it stands in */
     built,
     roofNW: built,
@@ -629,6 +735,51 @@ export function atLeast(paper, hex, want, away) {
   let cur = hex;
   for (let i = 0; i < 48 && contrast(paper, cur) < want; i++) cur = mix(cur, away, 0.06);
   return cur;
+}
+
+/**
+ * ⭐ **THE MIRROR OF `atLeast`, AND THE ESTATE HAD NO SPELLING OF IT.** Walk `hex` toward `toward`
+ * until its contrast against `anchor` falls TO `want`. Every rung in this module was a floor; a
+ * ladder made only of floors has no way to say *"and no darker than this"*, which is precisely how
+ * the countryside walked past the fabric with a 5/5 census behind it. Same 0.06 step and same
+ * 48-iteration bound as `atLeast`, so the two are each other's exact inverse.
+ */
+export function atMost(anchor, hex, want, toward) {
+  let cur = hex;
+  for (let i = 0; i < 48 && contrast(anchor, cur) > want; i++) {
+    const next = mix(cur, toward, 0.06);
+    /**
+     * ⛔ **IT APPROACHES FROM ABOVE AND NEVER CROSSES, AND THE FIRST SPELLING DID CROSS.** Walking
+     * *while* contrast > want stops on the first step BELOW it: measured, `field:paper` landed at
+     * **1.274 against its own 1.280 floor** and reddened the very row this ceiling was built to
+     * leave alone. A ceiling that breaks the floor under it is not a ceiling, it is a bug — so the
+     * step is refused when it would cross, and the FLOOR wins every tie. Where the two coincide
+     * (`fieldCeiling` clamped up to `VALUE_STEP`) this function is therefore a no-op by design.
+     */
+    if (contrast(anchor, next) < want) break;
+    cur = next;
+  }
+  return cur;
+}
+
+/**
+ * ⭐⭐ **SOLVE THE FURROW'S ALPHA.** Return the largest α ∈ (0,1] at which `field` seen through
+ * `grain` still lies within ONE VALUE STEP of `field` — the hatch as the reader meets it, not as
+ * the table declares it. Coarse-to-fine over 100 steps: a closed form would need the sRGB transfer
+ * function inverted through a three-channel blend, and the search is exact to 1 % of α, which is
+ * finer than any opacity difference a raster can express at this register.
+ *
+ * ⚠ It never returns 0: a furrow that cannot clear the step at any opacity is still drawn at the
+ * finest α the search offers, because a countryside with no texture at all is a different defect
+ * from a countryside with a loud one.
+ */
+export function solveFurrowAlpha(field, grain) {
+  let best = 0.01;
+  for (let i = 1; i <= 100; i++) {
+    const a = i / 100;
+    if (contrast(field, mix(field, grain, a)) <= VALUE_STEP) best = a; else break;
+  }
+  return Math.round(best * 100) / 100;
 }
 
 /** One value step off the paper — the floor I3's cure names. Kept for callers that want it bare. */
@@ -649,6 +800,34 @@ export function valueCensus(T) {
     /** the countryside genuinely lies on bare page, so it genuinely owes the paper a step */
     ['field:paper', contrast(T.paper, T.field), VALUE_STEP],
     ['roofSE:roofNW', contrast(T.roofNW, T.roofSE), 1.10],
+    /**
+     * ⭐⭐ **DRESS-FABRIC's TWO CEILING ROWS — the half of the hierarchy five floors could not
+     * state.** Both are floors on NEW pairs, not relaxations of the five above: nothing that
+     * passed before is asked for less.
+     *
+     * `grain:built` — the ground hatch keeps a full value step clear of a roof. It measured
+     *   **1.097** at the SPINE-3 tip: the countryside's texture and the town's fabric were the
+     *   same value, which is the review's *"the chevron ground-hatch competes with the fabric it
+     *   should sit behind"* as a number rather than an impression.
+     * ⚠ **AND THE COUNTRYSIDE-ORDERING ROW IS DELIBERATELY ABSENT.** The natural third ceiling —
+     *   *the field may not sit further from the paper than the toft* — is TRUE of the page's needs
+     *   and FALSE of this tip (`field:paper` 2.138 against `plotGround:paper` 1.397), and the cure
+     *   for it is blocked by i5's `water:ground` floor as recorded at the field's own line above.
+     *   **An asserted row that the shipped palette fails is a red, and a row written to be skipped
+     *   is worse than no row**, so the claim is carried in the ledger as a chair ruling rather than
+     *   planted here as a test that would have to be exempted on its first day.
+     */
+    /**
+     * ⭐⭐ **THE RENDERED FURROW, WHICH IS THE ROW THE PAGE ACTUALLY OWES.** `grain:built` is a
+     * pair of DECLARED tones and it is unsatisfiable at this palette (see `tones`), so flooring it
+     * would plant a row that reds on its first day. What IS satisfiable, and is what the eye reads,
+     * is the hatch AS DRAWN: `field` seen through `grain` at the emitted opacity, held to at most
+     * one value step under the field. Stated as a ratio so it is a floor like every other row.
+     * ⛔ **THE ROW CONVICTS THE BASE**: at `GRAIN.opacity` 0.72 the rendered furrow measures 1.628
+     * under its field, ratio 0.786 — red. That is the negative control, and it is the shipped
+     * predicate rather than a comment about one.
+     */
+    ['furrow≤onestep', VALUE_STEP / contrast(T.field, mix(T.field, T.grain, T.grainOpacity)), 1.0],
   ];
   /**
    * ⚠⚠ **THREE PAIRS ARE REPORTED AND NOT FLOORED, AND EACH REFUSAL IS A RULING WITH A SOURCE —

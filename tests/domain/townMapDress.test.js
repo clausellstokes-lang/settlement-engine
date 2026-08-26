@@ -16,7 +16,7 @@ import { publishWallWorks } from '../../src/domain/townMap/fabric/wallPublicatio
 import { LENS_IDS, resolveLens, HATCH } from '../../src/domain/townMap/fabric/folioLenses.js';
 import {
   dressPage, tones, valueCensus, legendCensus, accessibleHatch, hatchPolygon, clipSegment,
-  inRing, contrast, polesOf, VALUE_STEP, GRAIN, DRESS_GROUPS, DRESS_LEGEND,
+  inRing, contrast, mix, polesOf, VALUE_STEP, GRAIN, DRESS_GROUPS, DRESS_LEGEND,
   DRESS_SCHEMA_VERSION, PAGE_QUANTUM_DECIMALS,
 } from '../../src/domain/townMap/fabric/partitionDress.js';
 
@@ -143,9 +143,58 @@ describe('I7 + §650.2 · THE CLIP — no mark leaves the face that owns it', ()
     expect(segs.filter(([a]) => !inRing(other, a[0], a[1])).length).toBe(segs.length);
   });
 
-  it('the grain family keeps its reviewed stroke and opacity — the CURE was the reach', () => {
+  /**
+   * ⚠ **THIS TEST'S TITLE WAS TRUE WHEN IT WAS WRITTEN AND DRESS-FABRIC MADE HALF OF IT FALSE**,
+   * so the title moves with the code rather than being left to overstate. The reviewed STROKE is
+   * still carried verbatim and the reviewed OPACITY is still the constant it always was; what the
+   * dress now EMITS is a per-lens solved alpha, because the furrow's weight is a property of the
+   * field it textures and 0.72 was nobody's derived figure. A test whose name outlives its
+   * predicate is the family this estate has now caught eight times.
+   */
+  it('the grain keeps its reviewed stroke; the EMITTED alpha is solved, not the constant', () => {
     expect(GRAIN.stroke).toBe(0.25);
-    expect(GRAIN.opacity).toBe(0.72);
+    expect(GRAIN.opacity, 'the reviewed constant is unmoved — the cure was never its value').toBe(0.72);
+    const T = tones(resolveLens('parchment'));
+    expect(T.grainOpacity, 'the emitted alpha is solved per lens').toBeLessThan(GRAIN.opacity);
+    expect(T.grainOpacity).toBeGreaterThan(0);
+  });
+
+  /**
+   * ⭐⭐ **THE FURROW ROW, WITH ITS OWN NEGATIVE CONTROL IN THE SAME TEST.** DRESS-FABRIC measured
+   * `grain:built` at **1.097** on the shipped tip — a ground hatch and a roof at the same value —
+   * and found every TONE-side cure closed (moving the field reds i5's `water:ground`; moving the
+   * grain cannot clear both a roof and the water, which sit 1.397 apart on `illustrated` where a
+   * step from each needs 1.638). So the hatch is demoted AT THE PIXEL, and what is pinned is the
+   * rendered furrow rather than the declared pair.
+   */
+  it('⭐ the RENDERED furrow is within one value step of its field — and 0.72 is not', () => {
+    let convicted = 0; let violating = 0;
+    for (const id of LENS_IDS) {
+      const T = tones(resolveLens(id));
+      const rendered = (a) => contrast(T.field, mix(T.field, T.grain, a));
+      expect(rendered(T.grainOpacity), `${id}: the solved alpha misses its own step`)
+        .toBeLessThanOrEqual(VALUE_STEP + 1e-9);
+      /** ⛔ the control: the pre-cure alpha, on every lens whose base actually violates the row */
+      if (rendered(GRAIN.opacity) > VALUE_STEP + 1e-9) {
+        violating++;
+        if (rendered(GRAIN.opacity) > rendered(T.grainOpacity)) convicted++;
+      }
+    }
+    /**
+     * ⚠ FIVE OF SIX, NOT SIX OF SIX, AND THAT IS THE MEASUREMENT: on `darkFantasy` the shipped
+     * 0.72 already renders the furrow INSIDE the step (1.184), so the lens has no defect to
+     * convict and demanding one would make a true reading look like a dead arm. The liveness of
+     * the row on that lens is carried by the α=1.0 plant below.
+     */
+    expect(violating, 'no lens violates the row at 0.72 — the cure would be curing nothing').toBe(5);
+    expect(convicted, 'a violating lens was not convicted').toBe(violating);
+    for (const id of LENS_IDS) {
+      const T = tones(resolveLens(id));
+      const worst = contrast(T.field, mix(T.field, T.grain, 1));
+      expect(worst >= rendered0(T) || T.grainOpacity === 1,
+        `${id}: an alpha of 1 must be no better than the solved one`).toBe(true);
+    }
+    function rendered0(T) { return contrast(T.field, mix(T.field, T.grain, T.grainOpacity)); }
   });
 
   it('⭐ PA.6 · a ridge is CLIPPED to its footprint, and one wholly outside is REFUSED', () => {
