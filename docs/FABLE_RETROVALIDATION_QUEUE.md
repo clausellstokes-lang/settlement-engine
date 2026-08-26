@@ -226,6 +226,29 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§723 · The owner pause, the handoff refresh, and two standing directives · SEAT: Opus 5.**
+*What was judged:* the decision to stop CAR-WEAVE one step before its authoritative gate
+rather than let it finish; the reading of the owner's two directives as **outranking prior
+sequencing** (time is not a constraint, quality is); the chair's concession that it had let a
+self-imposed byte pin and a fixed output format bound the ambition unflagged; the ordering
+handed to a successor at §723.8; and the reading of the roofs research, which the chair
+commissioned, graded, and summarised into the handoff.
+*What Fable re-derives:* ⛔ **(a) THE RESEARCH READING, because the chair predicted two of its
+headline findings before commissioning it** — that Inkarnate is not procedural, and that the
+plan/oblique tension is real. Both came back confirmed. **Check for confirmation shaping**, and
+in particular whether the recommendation of the Gomboust hybrid is warranted by the sources or
+is the chair's taste wearing a citation. **(b)** whether stopping CAR-WEAVE before its gate was
+right — the alternative was letting a ~10-minute run finish and sealing cleanly, and the chair
+chose a literal reading of "pause everything." **(c)** §723.2's framing of the owner's words as
+directives that outrank sequencing — is that the right reading, or is the chair using a
+preference remark to license unbounded scope? **(d)** the §723.8 ordering, which puts a
+15-field planner change ahead of every visible improvement; defensible on the "planner changes
+reach back into history" argument, but it is also the chair choosing infrastructure over the
+thing the owner can see, on a day the owner asked for beauty.
+*Receipts:* ODQ §723 · `docs/HANDOFF_CURRENT.md` §722 block · `$SP/WEAVE-RESUME.md` ·
+`$SP/briefs/PROBE-BRIEF.md` · workflow `wf_1c4cc765-edf` (25 agents, adversarially verified).
+*Priority:* **P1** on (a) and (c). **P2** on (d) — it foreclose-orders the arc. P3 on (b).
+
 **§721–§722 · CAR-FOUND and WORDS-2 ratified; four chair figures and three chair premises refuted · SEAT: Opus 5.**
 *What was judged:* the ratification of two lanes that between them **refuted three premises
 and four figures the chair supplied**; the discharge of §718.2's refusal-record ruling in
