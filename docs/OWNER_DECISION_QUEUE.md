@@ -31237,3 +31237,185 @@ fourth sighting, taken at collection).
   to DF** (§720.4). ⚠ **And §720.6 hands the owner a question I am not answering for them: which
   degenerate outcomes are shippable product.** It has to be decided upstream of year one or it cannot
   be decided at all.
+
+## §721 · CAR-FOUND — THE REFUSAL RECORD LANDS AND THE SUBURB STOPS PRECEDING ITS OWN GATE; INSTITUTIONS CANNOT BE DATED BECAUSE NO DATE EXISTS; AND TWO LANES CONVERGE ON ONE NUMBER (2026-08-26 ~23:40 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§721.1 THE SEAL.** `refs/preserve/map-sandbox-found` = **`b83c6992e`**, base `dea9239d0`. One commit:
+  seven instruments under `harness/laneFOUND/`, real cures in `growthLedger.js` and
+  `partitionConstruct.js`, and 163 lines **extending** `tests/domain/townMapPartition.test.js` —
+  **no new test file, so no ratchet spent.** All three preserve refs verified unmoved before sealing.
+- **§721.2 ⛔ PART 1 IS REFUTED ON TWO INDEPENDENT LEGS, AND EITHER ALONE WOULD BE ENOUGH.**
+  **(i) THERE IS NO FOUNDING YEAR TO BUILD FROM.** Of 840 live institutions, **0 carry any temporal
+  field**; `nativeTier` reaches **1 of 840**; **705 of 840 carry no temporal or tier signal at all.**
+  The brief told the lane to seat an institution in the epoch history says founded it — **history
+  does not say.** ⭐ **The lane minted no dates**, which is exactly the instruction and exactly the
+  temptation. **(ii) IT WOULD NOT FIT ANYWAY.** Seating once costs **639 ms**; per-epoch costs
+  **8,101 ms** — **12.7×** — plus 89.5 ms of `projectPage`, for **~8,600 ms against the signed
+  2,500 ms budget, 3.4× over.** ⭐⭐ **AND THE LANE FOUND THE CHEAP VERSION OF WHAT I ACTUALLY
+  WANTED:** if a founding year is ever minted, the answer is **not** per-epoch seating but **one pass
+  weighted by per-face `appearanceEpoch` — already knowable for 710 of 710 seats at ZERO fold cost.**
+  The ground already remembers when it appeared even though the institutions do not. **Any future car
+  proposing to date an institution must mint the field upstream first.**
+- **§721.3 ⭐⭐ THE REFUSAL RECORD IS LANDED — §718.2 IS DISCHARGED.** `demand[]` and `demandTotals`
+  now publish per epoch, **non-zero on 12 of 18 leaves.** Metropolis: **2,919 asked · 2,693 built ·
+  172 unbuilt · 13 deadlocked epochs**, the worst being **E35, year 640: asked 259, got 166.** The
+  generator no longer destroys the fact that a century wanted more town than the ground would take.
+  ⭐ **And the property that makes it safe: the record is a LEDGER, not a MECHANISM** — the corpus
+  digest is **byte-identical with and without the channel.** Recording the refusals changed nothing
+  that was drawn. The consequences remain to be drawn, deliberately, from facts now on the record.
+- **§721.4 ⭐⭐ SATURATION CURED, AND THE DEFECT WAS SHARPER THAN THE ARITHMETIC PREDICTED.**
+  The 1.0204 ratio is **exactly 1/0.98**, confirmed at the lane's own base. **An extramural emission
+  fired in the wall's own raise year on 16 of 17 circuits at base; at the tip it is 0 of 17.**
+  ⭐ And `emissionOrigin` types that first act `'gate'` — so what the corpus was actually drawing was
+  **a gate-side faubourg minted in the same year as the wall: a suburb clinging to a gate that did
+  not yet exist.** At the tip it forms the epoch after, which is what a suburb does. ⚠ The
+  companion figure I supplied — *"491 souls at year 90, pop-6000 probe"* — **was not reproduced as
+  stated**; the nearest real subject is metropolis E13/y50 at **490 souls**. Near-right and
+  mis-attributed; the lane reported rather than claimed it, correctly.
+- **§721.5 ⛔⛔ MY ADDENDUM'S SECOND LEG IS REFUTED, AND IT POINTS AT SOMETHING MUCH LARGER — TWO
+  LANES ON DIFFERENT SURFACES HAVE NOW CONVERGED ON ONE NUMBER.** I told the lane to pull the thread
+  that *"hull vertices routinely exceed `frozenRadius`."* **Refuted: only 2 of 17 do.** The real
+  defect is **AREA, not radius**. The drawn ring encloses a **median 0.2939 of the disc that capacity
+  prices** — metropolis wrap 0 encloses **0.0149 of it.** ⇒ **`frozenRadius` is a SIZING TARGET, not
+  an achieved extent, and capacity is therefore over-stated by ~3.4×.** ⭐⭐ **And 1/0.2939 ≈ 3.4 sits
+  squarely inside REG-E1's independently measured saturation range of 1.81–3.97** (§719.5), which is
+  what made me call the wall's empty interior dishonest. **One lane measured the wall's geometry and
+  one measured the ledger's arithmetic, and they arrived at the same factor from opposite ends.**
+  That is the strongest corroboration this programme has produced. ⛔ **Owner-gated and NOT touched
+  (J-FND-6)** — it moves what `saturation` means estate-wide, which is a shape change to a published
+  quantity, not a repair. **It is the largest thing left on this surface.**
+- **§721.6 ⭐ THE METHOD THAT SETTLED IT, AND IT IS CHEAP AND GENERAL.** The lane discriminated a
+  legitimate exclusion factor from a unit error **without any geometry at all**: the residual was
+  **exactly 1.020408 = 1/0.98 on every leaf**, and *a constant residual is a constant's fingerprint —
+  a unit error would be leaf-varying and geometry-driven.* It then proved capacity's use of the field
+  is the **round-trip of the producer's own map** (`populationForRadius` inverts `radiusAt`, which
+  minted the field), identity on 8 of 10 probes. ⭐ **Round-trip identity of a producer's own map is
+  the cheapest way to clear a denominator of suspicion**, and it is now the standing method for the
+  §711.6 family.
+- **§721.7 ⛔⛔ THE ARM HAZARD HAS A SECOND HALF, AND IT RE-LABELS EVERY FOLIO "DORMANCY" PROOF IN
+  THIS ARC.** `exemplars.mjs`'s `main()` **ignores `REG_FABRIC_OPTS`** — it builds `fabricOptions`
+  from `process.argv` and passes them **explicitly**, so the environment variable reaches only callers
+  that pass *no* options, which is `dressLeaf` and not the folio driver. ⇒ **A base-vs-tip folio
+  comparison is a CONTAINMENT proof — "my change did not leak onto the folio" — and NEVER a dormancy
+  or liveness proof.** ⭐ **The lane caught this on its own work**: it had "proved" dormancy 29/29 and
+  then noticed armed == dormant at 0 of 29 **while `armGuard.mjs` simultaneously and correctly
+  reported armed** (1,145 parcels vs 1,197). It re-labelled its own result rather than banking it.
+  ⚠ **This re-labels REG-F0's 29/29 (§717.1) and WORDS-2's 216/216 as containment.** Both claims
+  remain TRUE and worth having; the word was wrong. Sent to WORDS-2 mid-flight.
+- **§721.8 THE DECLARED SHIFT, STATED IN FULL.** **12 of 18 leaves lose exactly one emission act per
+  circuit — the raise-year one.** Soul deltas equal those emissions exactly (`town` −58; `city` −618
+  = 77 + 541; `metropolis` −1961 = 89 + 490 + 1382). The dress page: the same 12 move, the other 6
+  byte-identical, **bytes −0.40 %**, ops unchanged 17 of 18. `physicalViolations`, seat placements and
+  the colonisation year are unchanged everywhere; `saturation`'s only live consumer
+  (`colonizationFromLedger`) is held **byte-identical**. **This is a legitimate behaviour change and
+  it is recorded as one.**
+- **§721.9 ⚠ THE PERFORMANCE FIGURE I HAVE BEEN QUOTING IS STALE, AND THE MEASUREMENT IS NOISIER THAN
+  THE QUESTION.** The inherited **853 ms** is out of date. Measured quiet and paired in both orders:
+  base **1059.3 / 1082.6 ms**, tip **1101.7 / 912.4 ms** — **the sign flips**, so there is **no
+  measurable regression**; both sit at **~42 % of budget.** ⛔ **And contention alone moves this
+  number ~2×** — 1,070 ms quiet against **1,836.9 ms** with a gate running — **a wider spread than
+  the headroom question itself.** `partitionPerf.mjs`'s pinned protocol does not pin contention, so
+  **cross-session performance figures are not comparable** and I should stop treating them as such.
+- **§721.10 THE GATE, AND THE FLAKE THAT COST TWO LANES A CONTROL EACH.** Tip: **20 files / 529
+  tests, 528 passed, 1 failed, zero AssertionErrors**; the count reconciles as base 523 + 6 new. The
+  single red is **`townMapWallCircuit > publishes a content hash` at 20,802 ms against a 20,000 ms
+  `testTimeout`** — **4 % over the limit**, which is why it fails intermittently rather than always.
+  It **reds at base in both runs** and **passes 36 of 36 isolated at base and at tip.** ⭐ The lane
+  recorded: *"I did not raise the timeout to make it green."* ⚠ **This is the same test WORDS-2 has
+  been chasing**, so I relayed this control to it rather than have the machine run it a third time.
+  **The four-lane rule now owes a timeout floor**, per §719.10.
+- **§721.11 WHERE THIS LEAVES THE ARC.** §718.2's ruling is **discharged in code**: refusals are
+  recorded, and the mechanism is provably inert. §718.5(i)'s saturation defect is **cured**, with a
+  declared shift. Part 1 is **refuted, not deferred** — and its replacement (the `appearanceEpoch`
+  weighting) is chartered rather than assumed. ⛔ **One finding goes up to the owner and it is the
+  largest open item on this surface: capacity is over-stated ~3.4×, corroborated from two
+  independent directions, and fixing it changes what `saturation` means everywhere.**
+
+## §722 · WORDS-2 SEALS — THE PAGE SAYS ITS OWN NAME AT LAST, AND THREE OF MY PREMISES WERE WRONG ABOUT WHERE A QUARTER IS (2026-08-27 ~00:20 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§722.1 THE SEAL.** `refs/preserve/map-sandbox-words2` = **`730a10f76`**, base `dea9239d0`. One new
+  module `src/domain/townMap/fabric/pageChrome.js` (988 lines), the splice in the harness renderer,
+  16 lines of stage-manifest, and **327 lines EXTENDING `tests/domain/townMapDress.test.js`** — no new
+  test file, no ratchet spent. **Gate at the committed tip: 20 files / 542 collected (523 base + 19
+  mine) / 541 passed.**
+- **§722.2 ⭐⭐ F0-33 IS CLOSED: 0 → 775 `<text>` ON 18 OF 18 LEAVES** (781 armed), with the floor
+  asserted **per leaf and never as a corpus total** — which is the whole difference between a real
+  census and one that passes because `metropolis` carries the corpus. F0-31 (cartouche + compass) and
+  F0-32 (legend ink) land on 18/18 and 18/18. F0-06's scale bar is true on 18/18, **and the walk-scale
+  rings were left alone because they are REG-9's ruling** — a boundary respected without being
+  reminded.
+- **§722.3 ⭐ THE CARTOUCHE SPEAKS ENGLISH, WHICH IS THE GAME-GRADE UX DOCTRINE ACTUALLY APPLIED.**
+  Verbatim off `town`: *"Mahabagh · TOWN · 3502 SOULS · COMFORTABLE · **THE HOUSES STAND FOR THE
+  HOUSING, NOT ONE FOR ONE** · **FOUNDED AS A GARRISON · STRAIGHTENED OVER TIME** · **RIVER COUNTRY ·
+  GENTLY ROLLING · SET ON THE BANK** · 50 PACES."* ⭐ Not *"fabric 1:0.8 households
+  (representative) · regularized plan · founded military · relief 0.35"* — **the lane translated
+  every engine quantity into a sentence a reader owns**, and then proved no engine vocabulary leaked
+  by scanning both name classes across every rendered `<text>` for **0 findings.** ⚠ The plate I sent
+  the owner mid-run shows the EARLIER, untranslated spelling; the sealed one reads better than what
+  they were shown.
+- **§722.4 ⛔⛔ R1 — MY BRIEF NAMED A THING THAT DOES NOT EXIST. THE PARTITION HAS NO WARD FACES AND
+  NO WARD NAMES.** `partitionConstruct.js:466` and `:1620` both mint a ward with
+  `mintPiece(arr,'WARD',-1,…)` — **face id −1** — so `arr.faces[faceId].piece = id` **never
+  executes.** Measured: 1–2 WARD pieces per leaf, the root carrying `name: null` ("name-rights are
+  EARNED at a tier threshold") and `mintQuarter` setting no name at all. ⇒ **A `WARD` is a hierarchy
+  node, not a shape.** My §2 told the lane to fit ward labels to WARD faces. **What it did instead:**
+  took the **NAME from the legacy fabric** (L-REG-29 forbids inventing a toponym) and the **GEOMETRY
+  from the partition's own drawn masses**, reusing `anchorStateMarks`' shape — the layer STATE-BRIDGE
+  built one wave earlier, now applied to text.
+- **§722.5 ⛔⛔ R2 — AND THE OBVIOUS FALLBACK WAS §710.6's TRAP, WHICH WOULD HAVE PASSED EVERY
+  CENSUS.** **42 of 101 legacy districts (41.6 %) armed — 51 of 101 dormant — contain ZERO of the
+  partition's drawn masses.** `town` Government Quarter: area 14,266 → **0 masses**. `city` Shadows
+  District: 25,909 → **0**. `polycentric` Religious Quarter: 39,937 → **0**. ⇒ **Four to five quarter
+  names in every ten would have been set over empty countryside, and every `<text>` census in the
+  world would have gone green.** This is the third distinct instance of *assert placement, not
+  existence*, and the first where the trap was avoided **before** landing rather than found after.
+- **§722.6 ⛔ R3 — "TAUGHT BUT NEVER DRAWN" IS A PROPERTY OF AN ARM, NOT A ROSTER, AND THIS AMENDS
+  §717.6.** REG-F0 reported four legend rows dark on 18/18. **That is true at FULL ARM only. Dormant,
+  `dress-ruin-clearing` IS drawn — on `highwater`.** ⛔ **And the gate runs dormant** (`dressLeaf`
+  calls `buildOne(spec)` with no options). The lane's first test pinned the four-name list and went
+  **red on the dormant corpus**; it replaced the pin with a **per-leaf bijection — a key row appears
+  iff that leaf drew that family — which holds on every arm and needs no maintenance.** ⭐ **Any lane
+  pinning a list of undrawable rows must read it as arm-scoped.**
+- **§722.7 ANOTHER INHERITED FIGURE OF MINE THAT DOES NOT REPRODUCE.** I briefed the byte pin as
+  metropolis **692,901 / 830,000**. At this base it is **703,946 dormant / 687,956 armed** — the
+  figure exists on neither arm. At the tip: **714,363 / 830,000, 13.9 % headroom**, +2.86 % corpus for
+  the whole lettering surface. **Type was not thinned and the pin was not touched.** ⚠ That is the
+  **third** stale inherited figure I have handed a lane in two days (with §718.5's souls probe and
+  §721.9's 853 ms). **I am going to stop quoting figures into briefs that I have not re-taken at the
+  lane's own base**, and say "re-measure at your base" without a number attached.
+- **§722.8 THE ATTRIBUTION CONTROL, AND WHY IT IS THE MODEL.** The lane's tip gate showed one failure
+  — `townMapWallCircuit > publishes a content hash`, timed out at 20,000 ms — **at a one-minute load
+  average of 193.** It refused the import-graph argument as *"reasoning, not evidence"*, waited for an
+  idle machine, and ran the four-cell control sequentially on that one file:
+  **base/default 36/36 · base/180 s 36/36 · tip/default 36/36 · tip/180 s 36/36, all EXIT=0.**
+  ⇒ **Its failure set is EMPTY, not merely a subset of base's.** ⭐ Two lanes independently ran down
+  the same flake today (§721.10), which is two lanes' worth of compute spent on **my** contention.
+  The four-lane rule now owes a timeout floor and an authoritative-gate-runs-alone clause.
+- **§722.9 THE HONEST NARROWING THE LANE PUT ON ITS OWN GREEN.** *"`offInk` was DISCOVERY until it
+  convicted 14 of 18 leaves — the cure then adopted its own `inkDistance`, so its green is no longer
+  evidence. The weight is carried by the planted controls, not by any green."* ⭐ **A guard that the
+  cure was written against cannot also be the proof the cure worked**, and the lane said so about its
+  own instrument unprompted. Four plants — cross-family overlap, off-sheet, off-ink-in-its-own-hole,
+  no-subject — each convicted by the arm that targets it, and the no-subject case returns `null`
+  rather than `true`, so an absent subject can never read as a pass.
+- **§722.10 ⛔ ONE LIVE DEFECT REPORTED AND DELIBERATELY NOT FIXED (D1).** `letteringFragment`'s ward
+  block **never consults `claimed`**, so a quarter name can print **through the cartouche** — and the
+  defect is latent **on the folio** by the same path, i.e. it is live on the surface that still
+  publishes. Curing it edits `lettering.js`, which `renderFolio.mjs:61` imports, and therefore needs a
+  wave that owns a declared shift. ⭐ **The lane cured both of its own defects OUTSIDE that file**
+  (J-W2-4) rather than touching a shared module mid-wave. **Deliberately deferred, documented, not a
+  bug to re-find.** Also deferred: event captions (legacy coordinates; the dress page draws no event
+  marks), a signed dress-page ration, and **the five non-parchment lenses — unmeasured and not
+  claimed.**
+- **§722.11 THE DECLARED SHIFT.** **The dress page moves in words for the first time**: 0 → 775
+  `<text>`, +2.86 % bytes, on all 18 leaves. **The folio does not move — 216/216 byte-identical**
+  (18 leaves × 6 lenses × 2 arms, a superset of the 29/29 asked for). ⚠ Per §721.7 that is properly
+  labelled a **CONTAINMENT** proof rather than a dormancy one, and it is the strongest containment
+  evidence in the arc. Determinism 18/18. **Wrap digest unmoved at base and tip** (`wraps=17
+  ringVerts=884 sha256=5523c235…`). Walker 12/12, no new stage edge and no new inversion.
+- **§722.12 WHERE THIS LEAVES THE VISIBLE DEFECTS THE OWNER NAMED.** **V3, the wordless page: CLOSED.**
+  **V1, the needle: RULED — one artifact, one honest, and the honest one is the plate they saw**
+  (§719.2). **V2, the empty enclosure: DIAGNOSED and now doubly corroborated** — convexity at ρ 0.82
+  from one lane, capacity over-stated ~3.4× from another (§721.5) — **and its cure is owner-parked.**
+  Three defects named at a glance this morning; three answered by measurement inside a day, with two
+  of my three chair rulings about them overturned in the process.

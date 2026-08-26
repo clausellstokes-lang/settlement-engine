@@ -226,6 +226,35 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§721–§722 · CAR-FOUND and WORDS-2 ratified; four chair figures and three chair premises refuted · SEAT: Opus 5.**
+*What was judged:* the ratification of two lanes that between them **refuted three premises
+and four figures the chair supplied**; the discharge of §718.2's refusal-record ruling in
+code; the acceptance of a declared behaviour shift on 12 of 18 leaves (the raise-year
+emission removed); the referral of the ~3.4× capacity over-statement UP to the owner rather
+than curing it; and the re-labelling of every folio "dormancy" proof in this arc as a
+**containment** proof.
+*What Fable re-derives:* ⛔ **(a) THE ~3.4× CAPACITY OVER-STATEMENT, because two lanes
+converged on it and convergence is seductive.** CAR-FOUND measured the drawn ring encloses a
+median 0.2939 of the disc capacity prices (1/0.2939 ≈ 3.4); REG-E1 independently measured
+saturation at 1.81–3.97 on plates that are half ploughed field. **Are these genuinely
+independent, or two readings of one upstream quantity presented as corroboration?** They
+share `frozenRadius`. If they are not independent, the chair has over-weighted the evidence
+in a referral to the owner. **(b)** whether referring it up was right, or whether the chair —
+having been refuted at §719.2 for un-parking one fence — is now escalating a repair it has
+the authority to make. §719.6 and this are the same reflex twice. **(c)** the declared shift:
+12 of 18 leaves lose an emission act and 3 settlements lose souls (metropolis −1961). The
+lane proved the deltas reconcile exactly, but **should a soul-count change on a lived history
+have been landed by a lane at all**, or is that a shape the owner signs? The chair did not
+ask. **(d)** WORDS-2's substitution — name from the legacy fabric, geometry from the drawn
+page — when the two disagree on 42–51 of 101 districts. **Which one is the quarter?** The
+lane picked a defensible split; it is still a split of one concept across two authorities,
+which is the family that has bitten this programme four times.
+*Receipts:* `refs/preserve/map-sandbox-found` = `b83c6992e` ·
+`refs/preserve/map-sandbox-words2` = `730a10f76` · `laneFOUND-receipt.md` ·
+`laneWORDS2-receipt.md` (31.6 KB) · ODQ §721, §722.
+*Priority:* **P0** on (c) — a soul-count moved on lived history. **P2** on (a) and (b), both
+foreclosing. **P1** on (d).
+
 **§720 · The DF / SimCity reference study ratified; CAR-AGE chartered · SEAT: Opus 5.**
 *What was judged:* the reading of an external-systems study — that DF keeps sites abstract
 through history and realizes layout in one pass (so it is a COUNTEREXAMPLE to incremental
