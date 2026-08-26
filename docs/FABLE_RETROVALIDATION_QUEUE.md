@@ -226,6 +226,22 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§698 · §697's diagnosis half-refuted by measurement · SEAT: Opus 5.**
+*What was judged:* that our per-building shape complexity (mean 9.25 verts vs the
+reference's 4.6) and size variation (1.81x vs 1.72x) are **at or past parity**, so the
+remaining divergence is a rotation spread, an aggregation ratio and a palette — parameters,
+not architecture; and that this vindicates the owner's visuals-first sequencing.
+*What Fable re-derives:* **(a)** the parse itself — subpath splitting on an SVG compound
+path is easy to get wrong, and the whole conclusion rests on it; re-run it independently.
+**(b)** whether matching the reference's *spread* while being twice as complex per shape is
+actually parity or a different look that merely scores the same. **(c)** §698.4's
+aggregation lever, which is the one row here with a real cost (byte ceiling at 85 %, and the
+identity bijection the zoom ladder and DW depend on).
+*Receipts:* ODQ §698 · the parse over `dress1b/render-parchment/city-city-parchment.svg` ·
+dissect/mfcg-*-census.json.
+*Priority:* **P2** — measurement-backed, but it re-aims a wave and one of its levers is
+budget-bound.
+
 **§697 · The reference-gap diagnosis; DRESS-FABRIC chartered · SEAT: Opus 5.**
 *What was judged:* that the aesthetic gap to the reference is **packing and variation, not
 count**, and that our fabric contradicts the spine's own party-run intent; the charter and

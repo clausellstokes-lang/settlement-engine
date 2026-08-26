@@ -29471,3 +29471,53 @@ measured dissection captures, not from impression.
   not finished dressing." It is a **specific, measurable, fixable craft defect in the one
   layer that carries the page**, and it was invisible until the ink existed to expose it —
   which is, again, exactly what dress is for.
+
+## §698 · THE SKEPTICISM IS ANSWERED BY MEASUREMENT — AND §697's OWN DIAGNOSIS IS HALF WRONG: OUR SHAPES ALREADY MATCH THE REFERENCE (2026-08-27 ~04:00 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+Owner, on the visuals-first strategy: *"But then we have so much divergence from their
+visuals, even as our base. That I'm just skeptical."* Settled by parsing our own emitted
+SVG per-building and comparing to the dissection captures — not by argument.
+
+- **§698.1 ⛔ §697.3(ii) IS REFUTED BY MEASUREMENT, AND IT WAS MY CLAIM.** I wrote that
+  *"theirs varies 4–10 vertices with a p25→p75 area spread of nearly 2×; ours is one
+  rectangle repeated at one angle."* **Both halves of that are false.** Measured on
+  `city-city-parchment.svg`, `dress-masses`, n=448:
+  **vertices min 3 · max 38 · MEAN 9.25** (hist 6:58, 7:52, 8:79, 9:65, 10:66) against the
+  reference's **mean 4.3–4.6** (Everrise 419 of 616 are plain quads). **Our building shapes
+  are TWICE as complex as theirs, not simpler.**
+  **Area spread p75/p25 = 1.81×** against the reference's **1.72×** (Everrise) and **1.71×**
+  (Grimfall). **Our size variation is not merely adequate — it matches the reference to
+  within six points, and it lands on the same 1.71 invariant the growth band settled on.**
+  The claim was made from a crop by eye; the eye was wrong, and the correction runs in the
+  owner's favour rather than the chair's.
+- **§698.2 WHAT ACTUALLY DIVERGES, NOW THAT THE SHAPES ARE EXONERATED.** **(i) ANGLE
+  CLUSTERING — the one real uniformity finding: 82 % of our masses put their dominant edge
+  within a single 20° window** (40°: 55 % · 50°: 27 %). The fabric is nearly all aligned to
+  one grid direction, which is what read as "stamped" even though the outlines vary. By
+  contrast our own `dress-planes` (n=894) spread across every bin — so the machinery for
+  varied orientation exists and the masses simply are not using it. **(ii) COUNT: 448 drawn
+  masses against the reference's 616** at a comparable city — **we draw 27 % FEWER page
+  shapes, not more**, which also corrects §697.4's "we draw MORE shapes and get LESS town"
+  (that compared their buildings to our *plots*, 1,753, not to our drawn *masses*).
+  **(iii) The white ratio and the palette**, still unmeasured and still the chartered census.
+- **§698.3 THE STRATEGIC CONSEQUENCE — AND IT VINDICATES THE OWNER'S SEQUENCING.** The two
+  axes that would have been **hard** to move — per-building shape complexity and the size
+  variation band — are **already at or past parity**. The three that remain are **a rotation
+  spread, an aggregation ratio, and a palette**: all parameters, none architecture. **The
+  divergence the owner was skeptical about is therefore mostly a small number of knobs**,
+  which is the strongest possible argument FOR taking the visual base first, exactly as
+  proposed. Had the shapes been wrong, visuals-first would have meant a substrate rebuild;
+  they are not, so it means tuning.
+- **§698.4 THE AGGREGATION RATIO IS NAMED AS THE DENSITY LEVER.** 1,753 plots render as 448
+  masses. Loosening that aggregation toward 1:2 would put us at **~900** page shapes and
+  toward 1:1 at ~1,750 — **either side of the reference's 616**, so density is reachable in
+  both directions from where we stand. ⚠ It is **NOT free**: the byte ceiling at metropolis
+  already runs 707,719 of 830,000 (85 %), the identity bijection binds masses to member
+  plots for the zoom ladder and the dwellings programme, and §663's own lesson is that the
+  reference keeps its size band invariant while the COUNT scales. **The lever is real, the
+  cost is measured, and it goes to DRESS-FABRIC as a banded experiment, never a free raise.**
+- **§698.5 THE LESSON, BANKED FOR THE FOURTH TIME THIS SITTING.** §688.3(i) (headroom
+  mislabelled), §692.6(i) (a strike made against the wrong quantity), §696.3 (a naive reader
+  right where the chair was wrong), and now §697.3(ii) — **every one was a claim made from
+  reading or looking rather than measuring, and every one was corrected by a number.**
+  Standing: **before a diagnosis re-aims a wave, parse the artifact.** It cost one command.
