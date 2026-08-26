@@ -226,6 +226,23 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§713 · WORDS ratified; two self-caught false passes · SEAT: Opus 5.**
+*What was judged:* all eleven J-W calls RATIFIED; accepting a frozen per-glyph table over a
+constant bump; accepting that the folio legend was the unowned one; and the reading that the
+lane's dead dormancy comparator was **its own** rather than an estate-wide defect.
+*What Fable re-derives:* ⛔ **(a) THE DORMANCY SWEEP.** A dormancy instrument passed by
+comparing an empty directory against itself. I verified `out/` holds stale crops and that
+prior waves reported a structurally different 29-file comparison — **but I could not verify
+every prior wave's comparator, and "a dormancy claim is a bit claim" cuts both ways.** Sweep
+every dormancy proof in this arc for the same shape. **(b)** §713.3's floating-point drift
+moved 1 leaf of 29 — check whether other "byte-identical" claims in this arc were measured on
+corpora small enough to have hidden the same thing. **(c)** whether `(RECONCILED)` in words
+was the right call versus fixing the landform, i.e. whether the chair accepted a label where
+a repair was owed.
+*Receipts:* ODQ §713 · `refs/preserve/map-sandbox-words` = `24e60c890` ·
+`laneWORDS-receipt.md` + its RESUME · the chair's `out/` inspection across three seals.
+*Priority:* **P1** on (a) and (b).
+
 **§712 · REGISTERS/ZOOM struck and re-scoped; nothing built · SEAT: Opus 5.**
 *What was judged:* striking a chartered wave on a lane's measurement; amending the completion
 document's §2 from a four-rung ladder to `page → plot`; collapsing the remaining rung into

@@ -105,7 +105,7 @@ placement, names decoupled from the geometry seed · L-REG-35 event addresses (t
 census: every dated label at its addressable place) · L-REG-29 intact (no generated
 street/bridge/gate names — the DM's machinery is the naming path). EXITS: the
 legend/label censuses; the arc-label kerning fix (C3); label-over-fabric collision
-census (the §657 marginalia lesson).
+census (⛔ **CORRECTED §713.5(i): "the §657 marginalia lesson" IS UNSOURCED — §657 carries no marginalia content. The real referent is review C3's SECOND CLAUSE, so one finding was being cited under two names, and this document was the source of the duplication**).
 
 ## §4 · JUDGING (REG-9)
 THE RUBRIC, pre-ruled: (1) the §679 constitution — composition beats accuracy; (2)

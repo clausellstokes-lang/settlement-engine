@@ -30474,3 +30474,78 @@ handed figure — the discipline this arc has been asking for, applied to its ow
   was wrong, and measurement replaced it. ⭐ **And of twelve arms it labelled TWO as
   REGRESSION rather than discovery** — §711.4's law applied one wave after it was written,
   by a lane that was not the one that wrote it.
+
+## §713 · WORDS SEALS — ONE CONSTANT EXPLAINED A TWO-PART FINDING, AND THE LANE CAUGHT TWO OF ITS OWN FALSE PASSES (2026-08-26 ~21:40 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+**RATIFIED, all eleven judgments.** Sealed `refs/preserve/map-sandbox-words` = **`24e60c890`**
+(base `b1f0dfc71`; zero deletions). Gate **20 files / 512 tests EXIT 0** (base 20/493
+**executed in-turn**, not inherited; **+19 = exactly the arms added, no new test file**) ·
+folio dormancy **29/29 with three planted controls convicting 29/27/27** · determinism
+**18/18 with 18/18 distinct sha256** · **wrap digest unmoved** · **byte −15,965 B (−0.11 %)**,
+reported as a *measurement* and not a gate result, per §712.8. Ward glyphs inside their own
+quarter **84.8 % → 100 %**; folio legend **88 rows / 18 leaves, 0 fails**; L-REG-35
+**UNADDRESSED 0, UNADDRESSABLE 4** (pinned).
+
+- **§713.1 ⭐ ONE CONSTANT EXPLAINED BOTH HALVES OF A FINDING FILED AS TWO — THE THIRD SIGHTING
+  OF THE §711.6 CLASS.** `ADVANCE = 0.52` is **documented as "conservative" and is the
+  opposite**: measured against the shipped font stack, the A–Z maximum advance averages
+  **0.7093 em** (M 0.9272, W 1.0371). It sets glyph steps — **a 6.61 u step under a 9.74 u
+  `M`, 47 % overlap, which IS C3's `COMMON`→`CCMYON`** — *and* sizes the boxes `placeBox`
+  reserves (~1.3× too narrow, which is **C3's second clause**) *and* decides whether a name
+  fits. **One number, three consumers, wrong at all three.** ⭐ Cured with a frozen per-glyph
+  table taking the **maximum across the stack**, because **measurement refuted the lane's own
+  first hypothesis** — Georgia is not the widest face in its own stack (33 violations).
+- **§713.2 ⛔⛔ THE LANE'S DORMANCY INSTRUMENT WAS DEAD AND IT HAD PUBLISHED ITS ZERO TWICE.**
+  `out/` contains **zero corpus leaves**, so `diff -rq` compared nothing against nothing — **a
+  clean, total, FALSE PASS.** ⭐ **Chair-verified independently:** `out/` at every recent seal
+  holds **78 files of which 75 are stale `.full-CROP4-*` crops**, not corpus leaves. The
+  correct comparator is base-dormant against tip-dormant, and prior waves reported a
+  **29-file / 11,411,375 B** comparison — structurally a different and real comparator, so
+  this false pass was **this lane's own and self-caught**. ⚠ **Queued P1 anyway**: I cannot
+  verify every prior wave's comparator from here, and the general question — did any other
+  wave diff an empty or stale directory — deserves a sweep.
+- **§713.3 ⛔ AND ON THE CORRECT COMPARATOR, THE FIRST BUILD WAS NOT DORMANT.** One leaf of 29
+  moved, on **floating-point associativity**: `n × 0.52` is not `0.52` summed n times, while
+  the lane's own comment claimed "character for character." ⭐⭐ **28 of 29 leaves rounded
+  identically — a smaller corpus would have shipped the drift.** **THE LAW, banked: A
+  DORMANCY CLAIM IS A BIT CLAIM.** Not "looks the same", not "rounds the same" — bit-identical
+  or it is not dormant.
+  And a third self-catch: it **nearly shipped the very defect it was curing inside its own
+  instrument** — the census used a second, cruder ruler and reported 19 overruns that were not
+  overruns. **All three were caught by controls; none by a green.**
+- **§713.4 ⭐⭐ THE PRINCIPLE THIS WAVE PRODUCED, AND IT GENERALISES BEYOND WORDS.** Three
+  leaves **declare a landform they are not**: `town-2` (declared riverside), `city` and
+  `migration` (declared coastal) all solve to **`fjord` at relief 1.00**. The convention audit
+  recorded the *string*; **nobody asked whether it was true.** The obvious words-layer move
+  was to delete the `(RECONCILED)` marker, since it trips the formula arm — ⛔ **and that is
+  the worst outcome available, because it is the only thing telling a reader the landform was
+  SOLVED FOR rather than OBSERVED.** ⭐⭐ **"A LEGIBILITY PASS OVER A SURFACE THAT IS WRONG
+  MAKES THE WRONGNESS MORE CREDIBLE, NOT LESS."** The cartouche now carries the status in
+  words. → **The landform mismatch itself is substrate and a declared shift: OWNER DOCKET.**
+- **§713.5 FOUR CORRECTIONS TO MY OWN CHARTER, AND ONE IS AN UNSOURCED CITATION.**
+  **(i) ⛔ "the §657 marginalia lesson" IS UNSOURCED — §657 contains no marginalia content**,
+  and the real referent is C3's second clause. **One finding was being cited under two names,
+  and I propagated it from the completion document into a brief.** The §710.3 shape again:
+  a citation that exists only in our own prose. **(ii)** the charter **omitted review C2**
+  (duplicate "MARKET QUARTER" on three leaves) which is REG-8's own, and the lane measured it
+  before learning it existed. **(iii)** *"you own the legend"* **needed a boundary I did not
+  give it**: L-REG-34 homes in DRESS-1 and was parked for the dress arc — the **folio** legend
+  was the unowned one, and the lane built that and left `legendCensus` alone. **(iv) the
+  ENUMERATED DENYLIST NEVER EXISTED** — A2.2 chartered a file, and five waves later it held
+  **three tokens and an ellipsis.**
+- **§713.6 J-W-4 IS A LAW WORTH KEEPING: ASSERT THE GUARANTEE, NOT THE ALGORITHM.** The
+  charter asked for **straight-skeleton** label placement; the lane built D5's **containment
+  guarantee** by pole-of-inaccessibility instead and **said so plainly** — *"the guarantee is
+  assertable at 100 %; the algorithm name is not."* A charter naming an algorithm where it
+  means a property invites the wrong proof. Also ratified: **J-W-5**, same-name dedupe keeps
+  the larger quarter **because L-REG-29 forbids inventing a disambiguator** — the naming law
+  correctly binding a layout decision; and **J-W-8**, the collision census reports density and
+  **sets no bar**, because that bar is the gestalt round's taste call and not a lane's.
+- **§713.7 ONE MARK DRAWN, COUNTED, AND UNSEEABLE.** The `mf-town-01` Siege mark stands
+  **inside the cartouche**, with the opaque chrome painted over it. It exists, it is counted,
+  and no reader can see it — **§710.6's class in a third costume** (existence satisfied,
+  visibility never asked). **Reported, not framed around**, exactly as the charter required.
+  Deferred with rationale: the straight skeleton itself · a density bar on the collision
+  census · tier-scoping of quarter labels (**no law covers it — a charter act**) · the
+  `TRIG_N` comment defect (a comment-only edit in a dormancy-critical file, no measured gain)
+  · `representationRatio` running below 1 · **`year-018` rendering with no lettering at all.**
