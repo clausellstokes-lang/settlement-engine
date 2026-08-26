@@ -226,6 +226,22 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§716 · The film HELD on the framing decision; REG-F0 dispatched · SEAT: Opus 5.**
+*What was judged:* that REG-F must not run while decline is cropped off 16 of 18 pages,
+because its specimen is an **owner gate** and would be spent on a film whose dying half shows
+nothing; that REG-F0 is independent of that question and runs instead; and that "retires"
+means marked-for-retirement-at-the-port, never deleted now.
+*What Fable re-derives:* ⛔ **(a) THE HOLD ITSELF.** A chair whose own framing repair caused
+the crop has now **deferred the owner's most interesting gate** on the strength of that same
+crop. That is defensible — spending an owner's judgement on a hollowed specimen is worse —
+but it is also a chair postponing the moment its work gets judged. **Test whether the hold
+protects the owner or the chair.** **(b)** whether the film would in fact show nothing: the
+decline register is invisible on 16 of 18 leaves, but the specimen is ONE city chosen by the
+chair, and `highwater` — where decline IS visible at 0.89 % — could have been that city.
+**That possibility weakens my own ruling and I did not weigh it before writing it.**
+*Receipts:* ODQ §716 · §715.1's four-method visible-share measurement · the docket row.
+*Priority:* **P1** on both.
+
 **§715 · REG-D ratified; the decline is drawn and cropped · SEAT: Opus 5.**
 *What was judged:* all ten J-D calls RATIFIED; accepting two charter items as REFUTED rather
 than deferred (subdivided grandeur has no subject; the high-water circuit is not a memory);

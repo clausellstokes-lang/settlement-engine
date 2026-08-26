@@ -30698,3 +30698,42 @@ fourth sighting, taken at collection).
   **L-REG-36's red is reported and NOT cured** — the cure moves same-seed geometry on the one
   leaf carrying the whole visible register and **would void this car's own measurement in the
   same act.** Chartered onward as **DECLINE-ADDRESS**.
+
+## §716 · THE FILM IS HELD ON THE FRAMING DECISION — AND THE LEGACY SWEEP RUNS INSTEAD (2026-08-27 ~09:40 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§716.1 ⛔ A SEQUENCING RULING: REG-F MUST NOT RUN YET, AND THE REASON IS §715.1.** §6's film
+  wave ends in **THE FILM TASTE SPECIMEN — one city's whole life, judged by the OWNER**, and
+  that specimen is an owner gate by design. But **§715.1 measured that the entire decline
+  register is cropped off the page on 16 of 18 leaves — exactly zero pixels.** A film assembled
+  now would put in front of the owner a city's whole life **in which the dying half shows
+  nothing**, and it would consume an owner gate to say so. ⇒ **REG-F is HELD until the framing
+  question is settled.** ⭐ This is not a new question for the owner — it is the fourth cost of
+  a trade already on their docket — but it changes that question's character: **the framing
+  decision has stopped costing registers and started blocking the arc's climax.** Recorded
+  vetoably: if the owner wants the film regardless, it runs.
+- **§716.2 REG-F0 RUNS INSTEAD, AND §714.1 MADE IT WORTH MORE THAN ITS CHARTER KNEW.** The
+  legacy sweep enumerates every pre-partition emitter and gives each a disposition. **It is
+  independent of the framing decision**, it is the inventory the port consumes, and **§714.1's
+  two-corpora finding is precisely the gap it exists to measure**: the folio carries 850 marks
+  and all the lettering, the dress page carries 8,868 marks and **no text at all**, and nothing
+  wires them. Its known inputs are already measured — §712.5's unwired zoom rung, §714.10's
+  lettering landing on the retired surface, §715.7's hard-coded `bricked`, and PA.9's named
+  candidates.
+- **§716.3 ⛔ THE BOUNDARY THE SWEEP CARRIES, STATED IN ITS BRIEF IN CAPITALS: "RETIRES" MEANS
+  "MARKED FOR RETIREMENT AT THE PORT", NEVER "DELETED NOW."** The legacy folio is **the surface
+  that still ships**; the partition stays dormant until the owner throws the cutover.
+  **Deleting a live emitter now would break the shipping product**, so the deliverable is an
+  **evidenced retirement manifest** plus any emitter that can honestly gain its data today.
+  ⚠ And a distinction the brief demands rather than assumes: **an emitter nothing consumes is
+  a different finding from one with a live consumer** — the manifest must name the consumer.
+- **§716.4 ONE HAZARD RAISED TO FIRST PLACE FOR THIS WAVE SPECIFICALLY.** `grep` here is
+  **ugrep**, and a complex pattern prints a complexity error to stderr with **no stdout** —
+  which reads exactly like a clean zero. **For an enumeration wave that is the single most
+  dangerous failure available**: a sweep that silently finds nothing looks identical to a sweep
+  that finds nothing. The brief orders enumeration **in node, not in grep.**
+- **§716.5 THE ARC, RESTATED.** REG-F0 (running) → **REG-F held on §716.1** → **REG-P (the
+  port), which the owner throws.** ⭐ Note what the port now inherits from three separate
+  waves: the **folio↔partition wiring** (§712.5, §714.10), the **declared-shifts compilation**,
+  the **retirement manifest this sweep produces**, and — if the owner rules that way — **a
+  reframing.** The port is where every deferred wire converges, and it was always going to be;
+  what has changed is that we now know exactly which wires, and why each one waited.
