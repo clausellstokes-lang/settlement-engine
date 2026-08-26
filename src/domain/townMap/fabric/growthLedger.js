@@ -146,9 +146,30 @@ export const BAND_CEILING = 40;
  * economy raises the wall ON the fabric — *"the wall hugs the fabric tight"* — so a ring has
  * **zero geometric headroom at its own raise epoch by construction**: `capacity(ring)` is the
  * population whose `tierScale` built radius equals the ring's FROZEN radius, and at the raise
- * epoch that population IS the epoch's population. Measured over the corpus's walled leaves, the
- * saturation share at the raise epoch is 1.000 on every one of them. Proposing 0.90 would
- * therefore date the emission BEFORE the wall, which is not a threshold — it is an error.
+ * epoch that population IS the epoch's population. So the saturation share at a raise epoch is
+ * 1.000, the strict `>` below refuses, and the first typed emission falls in the first epoch
+ * AFTER the raise in which the town actually grows. Proposing 0.90 would date the emission BEFORE
+ * the wall, which is not a threshold — it is an error.
+ *
+ * ⛔⛔ **AND THE RATIONALE ABOVE WAS FALSE AS SHIPPED FOR THE WHOLE OF THIS FILE'S LIFE, WHICH IS
+ * RECORDED HERE RATHER THAN QUIETLY CORRECTED** ⟦CAR-FOUND, J-FND-5⟧. The sentence *"measured …
+ * 1.000 on every one of them"* stood beside a `capacity` that multiplied by
+ * `(1 - SQUARE_CAPACITY_EXCLUSION)`, a term this header's own definition of `capacity(ring)` does
+ * not contain. Raise-epoch saturation therefore measured **1.0204 = 1/0.98**, the strict `>`
+ * passed, and MEASURED at CAR-FOUND's base **16 of 17 corpus circuits emitted extramural souls in
+ * the wall's OWN raise year** — the exact outcome this header calls an error. The cure is at the
+ * mint site: the double count is removed and the exclusion binds on `buildableSaturation`, which
+ * is the quantity A1.5 chartered it for. ⚠ **THE VALUE 1.00 DID NOT MOVE AND WAS NEVER THE FAULT.**
+ *
+ * ⚠⚠ **AND ONE THING THIS CONSTANT STILL CANNOT SEE, MEASURED AND REFERRED UP, NOT CURED**
+ * ⟦CAR-FOUND, J-FND-6, OWNER-GATED⟧. `capacity` prices the DISC of radius `frozenRadius`, and
+ * `frozenRadius` is `tierScale`'s built radius — a SIZING TARGET, not an achieved extent. The
+ * constructor draws the circuit as the hull of the ground actually built, which is smaller:
+ * measured over the 17 corpus wraps, the DRAWN ring encloses a **median 0.2939** of that disc
+ * (metropolis wrap 0: **0.0149**; city wrap 0: 0.0564). So capacity is over-stated by roughly
+ * **3.4× at the median** and every saturation in the estate is correspondingly under-stated.
+ * Curing that moves every emission, every extent share and the market-hardening year at once —
+ * a declared shift with the owner's signature on it, not a lane's repair.
  *
  * ⚠ SO THE DIAL BELOW ONLY BECOMES FREE IF THE CIRCUIT-ECONOMY LAW CHANGES (a wall raised with
  * room to grow inside it). It is declared as tuning-class because the owner may want exactly
@@ -166,6 +187,15 @@ export const SATURATION = 1.00;
  * the 12 walled corpus leaves at this lane's base: min 0.0123 (year-100) · median 0.0172 ·
  * max 0.0309 (city). ⚠ The first spelling of this constant was 0.06 — a guess, and it was three
  * times the measurement. Recorded rather than quietly corrected.
+ *
+ * ⛔⛔ **WHERE IT BINDS, AND WHERE IT MUST NOT** ⟦CAR-FOUND, J-FND-5⟧. It binds on
+ * `epoch.buildableCapacity` / `epoch.buildableSaturation` — the room a town has left to BUILD IN —
+ * and `colonizationFromLedger` is its ONE consumer, which is the consumer A1.5 names by name.
+ * ⛔ It must NOT bind on `epoch.capacity`, and it did until CAR-FOUND: `capacity` inverts
+ * `tierScale`, whose radius↔population relation is calibrated on settlements that HAVE squares,
+ * so applying this factor there subtracts the market place a **second** time. The double count
+ * made a ring 1.0204 saturated in its own raise year and dated 16 of 17 corpus emissions before
+ * the wall that caused them. **The value did not move; only the quantity it multiplies did.**
  */
 export const SQUARE_CAPACITY_EXCLUSION = 0.02;
 
@@ -429,7 +459,35 @@ function radiusAt(settlement, population, peak) {
  */
 export function populationForRadius(settlement, r, hi) {
   let lo = 1, top = Math.max(2, Math.trunc(hi));
-  if (radiusAt(settlement, top, top) <= r) return top;
+  // ⛔⛔ **THE SEARCH BOUND IS NOT AN ANSWER, AND RETURNING IT MADE THE LARGEST SETTLEMENTS
+  // IMMORTAL** ⟦CAR-FOUND, J-FND-4⟧. This line read `if (radiusAt(top, top) <= r) return top;` —
+  // it handed back `hi`, which is the CALLER'S SEARCH HINT (`Math.max(peakSoFar * 4, 1000)` at
+  // the one call site), as though it were a population. So the answer depended on how wide the
+  // search was told to look, which is the one thing an inverse may never depend on.
+  //
+  // ⭐ WHY THE BRANCH IS REACHED AT ALL, and it is not a pathological input: `tierScale`'s extent
+  // is CLAMPED — `builtRadius = Math.min(FRAME_R * 0.94, …)` (tierGrammar.js:783 and :794), so
+  // the sizer PLATEAUS at 441.80 view units and every population past the plateau shares one
+  // radius. Above it `radiusAt` stops encoding population and the inverse has no unique answer.
+  // MEASURED at this lane's base: a pop-30000 ring came back `inverse = 120000` — exactly
+  // `peakSoFar * 4` — so `capacity` read 117,600 and the ring reported **0.2551 saturated**. A
+  // settlement four times too large to have any room left was recorded as three-quarters empty,
+  // and typed extramural emission therefore stopped firing entirely at the top of the ladder.
+  //
+  // ⭐ THE CURE TAKES THE PLATEAU'S **LEFT EDGE**, which is the only defensible reading: a ring
+  // drawn at radius `r` is exactly big enough for the SMALLEST population that reaches `r`, and
+  // every soul past that one does not enlarge it. Off the plateau the two readings coincide, so
+  // this changes nothing anywhere the clamp is not binding — MEASURED: **0 of 17 corpus circuits
+  // take this branch at base**, so the corpus drawing does not move. It removes a trap, it does
+  // not move a leaf.
+  if (radiusAt(settlement, top, top) <= r) {
+    let plo = 1, phi = top;
+    for (let i = 0; i < 48 && phi - plo > 1; i++) {
+      const m = Math.floor((plo + phi) / 2);
+      if (radiusAt(settlement, m, m) >= r) phi = m; else plo = m;
+    }
+    return radiusAt(settlement, plo, plo) >= r ? plo : phi;
+  }
   for (let i = 0; i < 48 && top - lo > 1; i++) {
     const m = Math.floor((lo + top) / 2);
     if (radiusAt(settlement, m, m) <= r) lo = m; else top = m;
@@ -615,12 +673,48 @@ export function buildGrowthLedger(settlement, model, options = {}) {
     //    by a TYPED act stamped AT EMISSION (A1.5) — never as untyped sprawl.
     const standing = circuitEvents.length ? circuitEvents[circuitEvents.length - 1] : null;
     let capacity = null, saturationShare = null;
+    let buildableCapacity = null, buildableSaturation = null;
     /** @type {Array<any>} */ const epochEmissions = [];
     let intramural = Math.max(0, population - prevPop);
     if (standing) {
-      capacity = Math.round(populationForRadius(s, standing.frozenRadius, Math.max(peakSoFar * 4, 1000))
-        * (1 - SQUARE_CAPACITY_EXCLUSION));
+      /**
+       * ⛔⛔ **THE SQUARE WAS SUBTRACTED TWICE, AND THE SECOND SUBTRACTION DATED THE EMISSION
+       * BEFORE THE WALL** ⟦CAR-FOUND, J-FND-5⟧. This line read
+       * `Math.round(populationForRadius(…) * (1 - SQUARE_CAPACITY_EXCLUSION))`, and the factor is
+       * a DOUBLE COUNT: `populationForRadius` inverts `radiusAt`, which is `tierScale.builtRadius`
+       * — and `tierScale`'s radius↔population relation is calibrated on settlements THAT HAVE
+       * SQUARES. So the inverse already answers *"how many souls live inside radius r, square and
+       * all"*; multiplying by 0.98 removes the market place a second time.
+       *
+       * ⭐⭐ THE MEASUREMENT THAT SETTLES IT, AND IT NEEDED NO GEOMETRY. The round-trip
+       * `P → radiusAt(P,P) → populationForRadius(r) → P'` is the **IDENTITY** on 8 of 10 probes
+       * across 200..24000 souls, and on every one of those the ratio `P / (0.98 · P')` is
+       * **exactly 1.020408 = 1 / 0.98**. A denominator carrying a UNIT error would produce a
+       * leaf-varying ratio driven by geometry; a CONSTANT equal to the reciprocal of the exclusion
+       * factor is the exclusion factor. ⚠ This was the discriminating arm against the competing
+       * diagnosis that `frozenRadius` means something different here than at its other consumers.
+       *
+       * ⛔ THE CONSEQUENCE THE HEADER AT `SATURATION` CALLS AN ERROR IN ITS OWN WORDS. §3b's
+       * circuit economy raises the wall ON the fabric, so a ring has **zero geometric headroom at
+       * its own raise epoch by construction** and the strict `>` below is what refuses an emission
+       * in the raise year. With the double count, raise-epoch saturation measured **1.0204**, the
+       * strict `>` passed, and MEASURED at this lane's base **16 of 17 corpus circuits emitted
+       * extramural souls in the wall's OWN raise year** — *"which is not a threshold — it is an
+       * error"*, in the constant's own header.
+       *
+       * ⚠⚠ **`SQUARE_CAPACITY_EXCLUSION` IS NOT RETIRED AND ITS VALUE IS NOT TOUCHED.** It is
+       * tuning-class with the owner's re-sign pending, and A1.5 chartered it FOR ONE NAMED
+       * CONSUMER — *"`marketColonization` would then double-count it as infill room"*. So it moves
+       * to the quantity that consumer actually asks about (room left to BUILD IN, which the square
+       * genuinely is not) and binds there, below, on `buildableSaturation`. `colonizationFromLedger`
+       * reads that field and is therefore **byte-identical across this cure**.
+       */
+      capacity = Math.round(populationForRadius(s, standing.frozenRadius, Math.max(peakSoFar * 4, 1000)));
       saturationShare = capacity > 0 ? population / capacity : 0;
+      /** ⭐ A1.5's OWN QUANTITY, PUBLISHED AS ITS OWN FIELD: the ring's capacity NET of the square
+       *  — the room a town still has to build in. This is what §18.4's infill clock reads. */
+      buildableCapacity = Math.round(capacity * (1 - SQUARE_CAPACITY_EXCLUSION));
+      buildableSaturation = buildableCapacity > 0 ? population / buildableCapacity : 0;
       if (saturationShare > SATURATION && intramural > 0) {
         const out = Math.round(intramural * EXTRAMURAL_SHARE);
         intramural -= out;
@@ -737,8 +831,15 @@ export function buildGrowthLedger(settlement, model, options = {}) {
       /** ⭐ A1.4 · the RECORDED disasters this epoch carries, each one dated and severity-graded. */
       lossRegions: Object.freeze(epochLosses),
       provenance,
+      /** ⭐ THE RING'S OWN SATURATION — `population ÷ capacity(ring)`, the quantity §3b's typed
+       *  emission tests. Exactly 1.0000 at a circuit's own raise epoch, by construction. */
       saturation: saturationShare,
       capacity,
+      /** ⭐ A1.5's SQUARE-EXCLUDED PAIR — the room left to BUILD IN, which §18.4's infill clock
+       *  reads. The market place is not room to build in; these two say so, and `saturation`
+       *  above no longer double-counts them. */
+      buildableCapacity,
+      buildableSaturation,
     }));
     prevPop = population;
     prevRadius = radius;
@@ -856,6 +957,8 @@ export function ledgerFinalState(ledger) {
     emissions: ledger.emissions,
     saturation: e.saturation,
     capacity: e.capacity,
+    buildableCapacity: e.buildableCapacity,
+    buildableSaturation: e.buildableSaturation,
   });
 }
 
@@ -936,12 +1039,23 @@ export function colonizationFromLedger(ledger, lawfulness) {
   //   before it lets the stalls harden.
   const threshold = SATURATION + (1 - SATURATION) * order;
   for (const e of ledger.epochs) {
-    if (e.saturation != null && e.saturation >= threshold) {
+    /**
+     * ⭐⭐ **THIS READS THE SQUARE-EXCLUDED FIGURE, WHICH IS A1.5's OWN SENTENCE AND NOT A NEW
+     * CHOICE** ⟦CAR-FOUND, J-FND-5⟧. A1.5 charters the exclusion for exactly one consumer —
+     * *"`marketColonization` becomes a ledger CONSUMER (one infill clock; the kernel's capacity
+     * accounting excludes the square)"* — because the question this clock asks is *"has the fabric
+     * run out of room to BUILD IN?"*, and the market place is not room to build in.
+     * ⛔ `e.saturation` is now the RING's saturation (un-double-counted; see the mint site), which
+     * is the right denominator for §3b's typed emission and the WRONG one for this clock. The
+     * fallback keeps a pre-cure ledger readable rather than silently reading `undefined >= 1`.
+     */
+    const infillShare = e.buildableSaturation != null ? e.buildableSaturation : e.saturation;
+    if (infillShare != null && infillShare >= threshold) {
       return {
         colonised: true,
         atYear: e.year,
         reason: `§18.4 via the ledger: the fabric inside the circuit reached`
-          + ` ${(e.saturation * 100).toFixed(1)}% of its capacity in year ${e.year}, past the`
+          + ` ${(infillShare * 100).toFixed(1)}% of its BUILDABLE capacity in year ${e.year}, past the`
           + ` ${(threshold * 100).toFixed(1)}% an order of ${order.toFixed(2)} holds out for —`
           + ' the middle rows harden. ONE infill clock, and it is the kernel\'s.',
       };
@@ -951,8 +1065,8 @@ export function colonizationFromLedger(ledger, lawfulness) {
     colonised: false,
     atYear: null,
     reason: `§18.4 via the ledger: the market place is still open — the fabric never passed`
-      + ` ${(threshold * 100).toFixed(1)}% of the circuit's capacity`
-      + ` (peak ${(Math.max(0, ...ledger.epochs.map((e) => e.saturation || 0)) * 100).toFixed(1)}%)`,
+      + ` ${(threshold * 100).toFixed(1)}% of the circuit's BUILDABLE capacity`
+      + ` (peak ${(Math.max(0, ...ledger.epochs.map((e) => (e.buildableSaturation != null ? e.buildableSaturation : e.saturation) || 0)) * 100).toFixed(1)}%)`,
   };
 }
 

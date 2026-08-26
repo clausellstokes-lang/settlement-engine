@@ -28,6 +28,12 @@ import { projectPage, fitFrame, PAGE_BAND_RW2 } from '../../src/domain/townMap/f
 import {
   censusInvariants, censusCrossings, censusReserved, censusTotality, censusTangential,
 } from '../../src/domain/townMap/fabric/partitionCensus.js';
+import {
+  buildGrowthLedger, colonizationFromLedger, populationForRadius,
+  SATURATION, SQUARE_CAPACITY_EXCLUSION,
+} from '../../src/domain/townMap/fabric/growthLedger.js';
+import { tierScale, tierForPopulation, FRAME_R } from '../../src/domain/townMap/fabric/tierGrammar.js';
+import { makeWalledFixture } from '../fixtures/townMapFixtures.js';
 
 /** A small, dated ledger: five epochs, one circuit raise, one typed emission. */
 function fixtureLedger() {
@@ -583,5 +589,162 @@ describe('§7 · the growth ledger drives the fold, and every law it asserts con
     expect(arr.refusals.length).toBe(1);
     expect(arr.refusals[0].where).toBe('cutFaceByLine');
     expect(arr.refusals[0].detail.key).toBe('probe.b');
+  });
+});
+
+/**
+ * ⭐⭐⭐ ⟦CAR-FOUND, ODQ §718⟧ **THE SATURATION LAW MEANS WHAT ITS HEADER SAYS, AND THE FOLD
+ * RECORDS WHAT IT COULD NOT BUILD.**
+ *
+ * ⛔ NOTHING PINNED EITHER OF THESE BEFORE. `SATURATION`, `saturationShare` and the fold's own
+ * discarded budget appeared in **zero test files** — the saturation rationale was asserted in a
+ * docstring, contradicted by the shipped arithmetic, and proven only by hand-run harness scripts.
+ * Every zero below therefore carries its PLANT, per §6's law.
+ */
+describe('§8 · ⟦CAR-FOUND⟧ the circuit does not out-grow itself in its own raise year', () => {
+  /** A walled record with a life long enough to raise TWO circuits and emit between them. */
+  const walled = () => makeWalledFixture({ history: { age: 240, founding: { kind: 'charter', age: 240 } } });
+  /** `buildGrowthLedger` reads the model for `meta.hasWalls` and nothing else (its own JSDoc). */
+  const ledgerOf = (s) => buildGrowthLedger(s, { meta: { hasWalls: true } }, {});
+
+  it('⭐ NO circuit emits a faubourg in its OWN raise year — zero geometric headroom, by construction', () => {
+    const led = ledgerOf(walled());
+    const raises = led.epochs.filter((e) => (e.circuitEvents || []).length);
+    // ⚠ NON-VACUITY FIRST. A ledger with no circuit would pass every clause below by having no
+    //   subject, which is the shape §6 exists to refuse.
+    expect(raises.length).toBeGreaterThanOrEqual(2);
+    for (const e of raises) {
+      expect(e.saturation).toBeLessThanOrEqual(SATURATION);
+      expect(e.emissions.length).toBe(0);
+    }
+    // ⛔⛔ THE PLANT, AND IT IS THE PRE-CURE ARITHMETIC RE-APPLIED BY HAND. `capacity` used to
+    //    carry `× (1 - SQUARE_CAPACITY_EXCLUSION)`, which made a ring 1/0.98 saturated in the year
+    //    its own wall went up. The SAME predicate must convict that figure — which is what proves
+    //    this pin watches the term that actually moved, and not something adjacent to it.
+    for (const e of raises) {
+      const preCure = e.population / Math.round(e.capacity * (1 - SQUARE_CAPACITY_EXCLUSION));
+      expect(preCure).toBeGreaterThan(SATURATION);
+    }
+    // ⭐ AND THE CURE DID NOT SIMPLY SILENCE THE EMISSION. Every epoch AFTER a raise, where the
+    //   town has genuinely out-grown its ring, still emits — the law is about the raise YEAR.
+    expect(led.emissions.length).toBeGreaterThan(0);
+    const emitting = led.epochs.filter((e) => e.emissions.length);
+    expect(emitting.length).toBeGreaterThan(0);
+    for (const e of emitting) expect(e.saturation).toBeGreaterThan(SATURATION);
+  });
+
+  it('⭐ the square is subtracted ONCE — on the BUILDABLE pair, never on the ring capacity', () => {
+    const led = ledgerOf(walled());
+    const walledEpochs = led.epochs.filter((e) => e.capacity != null);
+    expect(walledEpochs.length).toBeGreaterThan(0);
+    for (const e of walledEpochs) {
+      expect(e.buildableCapacity).toBe(Math.round(e.capacity * (1 - SQUARE_CAPACITY_EXCLUSION)));
+      // ⛔ THE EXCLUSION IS STILL LIVE, not silently zeroed by moving it. A1.5's quantity survives.
+      expect(e.buildableCapacity).toBeLessThan(e.capacity);
+      expect(e.buildableSaturation).toBeGreaterThan(e.saturation);
+    }
+    // ⭐⭐ THE IDENTITY THAT PROVES `capacity` CARRIES NO EXCLUSION: the ring a population itself
+    //    raised has room for exactly that population, because `capacity` inverts the very sizer
+    //    that minted the ring's radius.
+    const raise = led.epochs.find((e) => (e.circuitEvents || []).length);
+    expect(raise.capacity).toBe(raise.population);
+    expect(raise.saturation).toBe(1);
+  });
+
+  it('⛔ CONTROL · the inverse is INDEPENDENT of the search hint — a search bound is not an answer', () => {
+    const s = walled();
+    const probe = (P) => {
+      const p = { ...s, population: P, tier: tierForPopulation(P) };
+      delete p.populationHistory; delete p.calamityHistory;
+      return tierScale(p).builtRadius;
+    };
+    // ⚠ NON-VACUITY: the sizer really does PLATEAU, so the inverse really is non-unique here.
+    //   `builtRadius = Math.min(FRAME_R * 0.94, …)` — above the clamp, radius stops encoding
+    //   population and the old early-return handed back the caller's `hi` instead.
+    const clampR = FRAME_R * 0.94;
+    expect(probe(300000)).toBeCloseTo(clampR, 9);
+    expect(probe(3000000)).toBeCloseTo(clampR, 9);
+    // ⛔ THE PLANT IS THE HINT ITSELF: two hints an order of magnitude apart. Before the cure these
+    //    returned 120000 and 1200000 — the answer WAS the hint — and a pop-30000 ring therefore
+    //    read 0.2551 saturated, so the largest settlements stopped emitting extramural growth.
+    const a = populationForRadius(s, clampR, 120000);
+    const b = populationForRadius(s, clampR, 1200000);
+    expect(a).toBe(b);
+    expect(a).toBeLessThan(120000);
+    // ⭐ AND THE ANSWER IS THE PLATEAU'S LEFT EDGE: it reaches the radius and one soul fewer does
+    //   not, which is the only defensible reading of "the population whose built radius is r".
+    expect(probe(a)).toBeCloseTo(clampR, 9);
+    expect(probe(a - 1)).toBeLessThan(clampR);
+  });
+
+  it('⭐ §18.4 asks about room to BUILD IN — the infill clock reads the SQUARE-EXCLUDED figure', () => {
+    const mk = (sat, bsat) => ({
+      epochs: [
+        { index: 0, year: 10, saturation: sat, buildableSaturation: bsat },
+        { index: 1, year: 99, saturation: 2, buildableSaturation: 2 },
+      ],
+    });
+    // the RING still has room but the BUILDABLE ground does not — the stalls harden, and it is
+    // A1.5's own quantity that decided it
+    expect(colonizationFromLedger(mk(0.99, 1.01), 0.5).atYear).toBe(10);
+    // ⛔ THE PLANT / MIRROR: buildable room left, ring reading full. A reader that regressed to
+    //    `e.saturation` would answer 10 here; the shipped clock must answer 99.
+    expect(colonizationFromLedger(mk(1.5, 0.5), 0.5).atYear).toBe(99);
+    // ⭐ AND A PRE-CURE LEDGER (no buildable field at all) still reads, on the old field —
+    //   `undefined >= 1` is `false`, which would have silently said "never colonised".
+    expect(colonizationFromLedger({ epochs: [{ index: 0, year: 7, saturation: 1.2 }] }, 0.5).atYear).toBe(7);
+  });
+});
+
+describe('§9 · ⟦CAR-FOUND⟧ the fold records the demand it could not meet', () => {
+  it('⭐ every folded epoch records what it ASKED FOR and what the ground refused it', () => {
+    const P = buildSettledPartition(fixtureInput());
+    // one row per folded epoch — a channel that skips an epoch is a channel that hides a deadlock
+    expect(P.demand.length).toBe(P.foldedEpochs);
+    for (const d of P.demand) {
+      expect(d.demand).toBe(Math.max(0, d.target - d.held));
+      expect(d.deficit).toBeGreaterThanOrEqual(0);
+      expect(d.deficit).toBeLessThanOrEqual(d.demand);
+      expect(d.deadlocked).toBe(d.demand > 0 && d.deficit > 0);
+      // ⛔ AN EPOCH THAT ASKED FOR NOTHING IS NOT A 100 % EPOCH. Recording it as one is exactly
+      //    the lie this record exists to prevent — it would make a silent fold look complete.
+      if (d.demand === 0) expect(d.metShare).toBeNull();
+      // ⚠ THE FIELD IS QUANTISED TO 1e-6 AT THE MINT SITE, and the pin asserts THAT rather than
+      //   the unrounded quotient — a float published to full precision is a byte-stability hazard
+      //   in an artifact that is digested, and the quantum is part of the contract.
+      else expect(d.metShare).toBe(Math.round((1 - d.deficit / d.demand) * 1e6) / 1e6);
+      // the typed refusal delta is the same roster `publish` emits cumulatively, per epoch
+      expect(Object.keys(d.refused).sort())
+        .toEqual(['crossing', 'emission', 'gateEconomy', 'geometric', 'quay', 'sprawl', 'water']);
+      for (const k of Object.keys(d.refused)) expect(d.refused[k]).toBeGreaterThanOrEqual(0);
+    }
+    // the roll-up RE-DERIVES from the rows — never a third figure a reader must reconcile
+    expect(P.demandTotals.epochs).toBe(P.demand.length);
+    expect(P.demandTotals.asked).toBe(P.demand.reduce((n, d) => n + d.demand, 0));
+    expect(P.demandTotals.deficit).toBe(P.demand.reduce((n, d) => n + d.deficit, 0));
+    expect(P.demandTotals.deadlockedEpochs).toBe(P.demand.filter((d) => d.deadlocked).length);
+  });
+
+  it('⛔ CONTROL · starve the ground and the DEFICIT MOVES — a field that is always zero says nothing', () => {
+    // ⚠ A GUARD'S SCOPE IS ITS SHIPPED PREDICATE, NEVER ITS NAME. A `deficit` hard-wired to 0
+    //   would satisfy every clause of the accounting pin above, so it must be shown MOVING.
+    const roomy = buildSettledPartition(fixtureInput());
+    expect(roomy.demandTotals.deficit).toBeGreaterThan(0);
+    expect(roomy.demandTotals.deadlockedEpochs).toBeGreaterThan(0);
+    // ⛔ THE PLANT: the same ledger and the same demand, on a fraction of the ground.
+    const starved = buildSettledPartition(fixtureInput({ extent: { cx: 0, cy: 0, radius: 26 } }));
+    expect(starved.demandTotals.deficit).toBeGreaterThan(roomy.demandTotals.deficit);
+    expect(starved.plots).toBeLessThan(roomy.plots);
+    // ⭐⭐ AND THE RECORD IS A LEDGER, NOT A MECHANISM (§718.2's ruling: emergence comes from
+    //    RECORDING refusals, never from inventing population out of geometry). Nothing in the fold
+    //    reads a single figure of it, so the SAME input folds to the SAME drawing.
+    const again = buildSettledPartition(fixtureInput());
+    expect(again.plots).toBe(roomy.plots);
+    expect(again.demandTotals.deficit).toBe(roomy.demandTotals.deficit);
+    // ⭐ AND THE REASON NAMES THE EPOCH, THE ASK AND THE SHORTFALL — a count cannot tell a
+    //   deadlocked epoch from an epoch that had nothing to build, which was the whole defect.
+    const worst = roomy.demand.reduce((w, d) => (w && w.deficit >= d.deficit ? w : d), null);
+    expect(worst.reason).toContain('unbuilt');
+    expect(worst.reason).toContain(String(worst.deficit));
   });
 });

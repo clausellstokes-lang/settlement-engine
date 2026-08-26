@@ -309,6 +309,12 @@ export function buildSettledPartition(input) {
     /** @type {Array<any>} */ units: [],
     /** @type {Array<any>} */ emissions: [],
     /** @type {Array<any>} */ quarters: [],
+    /**
+     * ⭐⭐⭐ ⟦CAR-FOUND, ODQ §718.2⟧ **WHAT EACH EPOCH ASKED FOR AND COULD NOT BUILD.** One row per
+     * folded epoch, appended at the epoch's close. See `recordDemand` for why this channel exists
+     * and why it is a RECORD rather than a mechanism.
+     */
+    /** @type {Array<any>} */ demands: [],
     waterRefusals: 0,
     gateEconomyRefusals: 0,
     sprawlRefusals: 0,
@@ -382,6 +388,13 @@ export function buildSettledPartition(input) {
       reclaimEpoch(state, ep, ep.year - prevYear, rising ? Math.max(0, target - state.plots) : 0);
     }
     let budget = Math.max(0, target - state.plots);
+    // ⭐⭐⭐ ⟦CAR-FOUND⟧ THE EPOCH'S OPENING POSITION, TAKEN BEFORE ONE ACT OF ITS GROWTH RUNS.
+    //   `demand` is what this epoch asked the ground for; whatever is left in `budget` at the
+    //   close is what the ground refused to give it. Both were computed here already — only the
+    //   second was thrown away. See `recordDemand`.
+    const openPlots = state.plots;
+    const demand = budget;
+    const openRefusals = refusalTally(state);
     // ⭐⭐⭐ **§684.3 · THE RAISE PRECEDES ITS EPOCH'S GROWTH.** A wall is built around what EXISTS,
     // and that epoch's growth then ANSWERS it — infill inside the new band, typed emission outside.
     // The wrap is therefore computed and frozen HERE, before one accretion or infill act of this
@@ -440,7 +453,8 @@ export function buildSettledPartition(input) {
     if (state.waterStations) state.quays.push(...mintQuays(state, ep));
     reconcileTenure(state, ep);
     prevYear = ep.year;
-    void budget;
+    // ⛔⛔ **THIS LINE WAS `void budget;`** — the epoch's unspent demand, computed and DISCARDED.
+    recordDemand(state, ep, { target, demand, openPlots, remainder: budget, openRefusals, rising });
   }
 
   sweepGateEconomy(state);
@@ -690,6 +704,102 @@ function accrete(state, ep, want) {
 
 /** How many open faces one epoch may take before it stops looking. A refusal, not a dial. */
 export const ACCRETION_HOST_CAP = 64;
+
+/**
+ * ⭐ THE SEVEN TYPED REFUSAL COUNTERS THE FOLD ALREADY KEEPS, READ AS ONE TALLY so an epoch's
+ * share of each can be taken as a DELTA rather than re-counted. Six are the counters `publish`
+ * has always emitted; `geometric` is `arr.refusals`' length, which `publish` emits as an array.
+ * ⚠ ONE HOME. A second spelling of this list is how a new counter gets published corpus-wide and
+ * silently omitted from the per-epoch record.
+ */
+function refusalTally(state) {
+  return {
+    water: state.waterRefusals,
+    gateEconomy: state.gateEconomyRefusals,
+    sprawl: state.sprawlRefusals,
+    emission: state.emissionRefusals,
+    crossing: state.crossingRefusals,
+    quay: state.quayRefusals,
+    geometric: state.arr.refusals.length,
+  };
+}
+
+const REFUSAL_KINDS = Object.freeze(['water', 'gateEconomy', 'sprawl', 'emission', 'crossing', 'quay', 'geometric']);
+
+/**
+ * ⭐⭐⭐ ⟦CAR-FOUND, ODQ §718.2⟧ **THE EPOCH RECORDS WHAT IT COULD NOT BUILD.**
+ *
+ * ⛔⛔ THE DEFECT, AND IT WAS ONE CHARACTER OF CODE. The fold computed a real
+ * grow-until-you-cannot loop — `accrete` exits on quota-met, on `pickHost` returning −1, or on
+ * `ACCRETION_HOST_CAP`, flagging barren hosts `exhausted` — and then threw the answer away with
+ * `void budget;`. `publish` emitted six refusal counters **with no target and no remainder term
+ * anywhere**, so *"epoch one hit deadlock with forty houses unbuilt"* was a fact the generator
+ * knew and destroyed, and **a deadlocked epoch was indistinguishable in the artifact from an epoch
+ * that had nothing to build.** The rolling-forward behaviour is GOOD and is untouched: the next
+ * epoch's `budget = max(0, target − plots)` still re-asks for the shortfall. It was the SILENCE
+ * that was the defect.
+ *
+ * ⭐⭐ **THIS IS A RECORD, NOT A MECHANISM, AND THE DISTINCTION IS THE CHAIR'S RULING (§718.2).**
+ * The owner asked whether population should EMERGE from geometry. The chair ruled NO — a standing
+ * rule forbids inventing a trajectory the record never had, and a geometry-driven population would
+ * make a town rich for reasons that never entered its chronicle, with the dossier and the map
+ * printing two different numbers from two authorities. **What makes such systems feel emergent is
+ * not invented population; it is that REFUSALS ARE RECORDED.** So nothing here feeds back: not one
+ * figure below is read by any act of the fold, no population is derived from any of it, and the
+ * drawing at this lane's tip is byte-identical with and without this channel. It is a LEDGER.
+ *
+ * ⛔ AND IT INTRODUCES NO REJECTION LOOP. Every refusal in this constructor stays a LOCAL drop
+ * with a published counter — never a whole-build restart — which is the right shape for something
+ * that must produce a map deterministically inside a 2,500 ms budget.
+ *
+ * ⚠ `built` MAY BE NEGATIVE, deliberately: a FALLING epoch abandons pieces, and a record that
+ * clamped that to zero would hide the one thing a decline epoch has to say.
+ */
+function recordDemand(state, ep, o) {
+  const closeRefusals = refusalTally(state);
+  /** @type {Record<string, number>} */ const refused = {};
+  let refusedTotal = 0;
+  for (const k of REFUSAL_KINDS) {
+    const d = closeRefusals[k] - o.openRefusals[k];
+    refused[k] = d;
+    refusedTotal += d;
+  }
+  const built = state.plots - o.openPlots;
+  const deficit = Math.max(0, o.remainder);
+  state.demands.push(Object.freeze({
+    epoch: state.epoch,
+    year: ep.year,
+    /** The REPRESENTATIVE body count this epoch's population implies (`epochTarget`). */
+    target: o.target,
+    /** What the partition already held when the epoch opened. */
+    held: o.openPlots,
+    /** ⭐ THE ASK: `max(0, target − held)`. Zero on an epoch that had nothing to build. */
+    demand: o.demand,
+    /** What the epoch actually put on the ground. Negative in a falling epoch. */
+    built,
+    /** ⭐⭐ THE DEFICIT: what it asked for and the ground refused. The number that was discarded. */
+    deficit,
+    /** ⭐ The share of its own ask the epoch met. `null` where it asked for nothing — an epoch
+     *  with no demand is NOT a 100 % epoch, and recording it as one is the lie this record
+     *  exists to prevent. */
+    metShare: o.demand > 0 ? Math.round((1 - deficit / o.demand) * 1e6) / 1e6 : null,
+    /** ⛔ THE ONE PREDICATE A READER SHOULD ASK: did this epoch ask for ground and not get it? */
+    deadlocked: o.demand > 0 && deficit > 0,
+    rising: !!o.rising,
+    /** ⭐ THIS EPOCH'S OWN SHARE of each typed refusal, as a delta — the same six `publish` emits
+     *  cumulatively, plus the geometric refusals, so a deficit can be READ against what refused. */
+    refused: Object.freeze(refused),
+    refusedTotal,
+    reason: o.demand <= 0
+      ? `epoch ${state.epoch} (year ${ep.year}) asked for no new ground — it holds ${o.openPlots}`
+        + ` against a target of ${o.target}`
+      : deficit > 0
+        ? `epoch ${state.epoch} (year ${ep.year}) asked for ${o.demand} and the ground gave`
+          + ` ${built}: ${deficit} unbuilt. ${refusedTotal} typed refusal(s) this epoch`
+          + ` (${REFUSAL_KINDS.filter((k) => refused[k]).map((k) => `${k} ${refused[k]}`).join(', ') || 'none — the frontier simply ran out'})`
+        : `epoch ${state.epoch} (year ${ep.year}) built all ${o.demand} it asked for`,
+  }));
+}
 
 /** The REPRESENTATIVE body count this epoch's population implies. `tierScale` remains the sole
  *  sizer; `bodyTarget` is the count the caller read from it, and this only shares it out by year. */
@@ -1680,6 +1790,26 @@ function publish(state, foldedEpochs) {
     annotations: Object.freeze({ ...state.annotations }),
     plots: state.plots,
     foldedEpochs,
+    /**
+     * ⭐⭐⭐ ⟦CAR-FOUND, ODQ §718.2⟧ **WHAT EVERY EPOCH ASKED FOR AND WHAT IT COULD NOT BUILD** —
+     * one row per folded epoch, in fold order, alongside the six refusal counters below and in the
+     * same shape. See `recordDemand` for the ruling this implements and for why nothing reads it.
+     * ⛔ Before this channel, `plots` and `foldedEpochs` were published with **no target and no
+     * remainder term anywhere**, so a deadlocked epoch was indistinguishable from an epoch that
+     * had nothing to build.
+     */
+    demand: Object.freeze(state.demands.slice()),
+    /** ⭐ THE ROLL-UP, so a reader is not obliged to fold 36 rows to learn whether the ground ever
+     *  refused this settlement anything. Every figure re-derivable from `demand` above. */
+    demandTotals: Object.freeze({
+      epochs: state.demands.length,
+      asked: state.demands.reduce((n, d) => n + d.demand, 0),
+      built: state.demands.reduce((n, d) => n + Math.max(0, d.built), 0),
+      deficit: state.demands.reduce((n, d) => n + d.deficit, 0),
+      deadlockedEpochs: state.demands.filter((d) => d.deadlocked).length,
+      worstEpoch: state.demands.reduce((w, d) => (w && w.deficit >= d.deficit ? w : d), null)
+        ? state.demands.reduce((w, d) => (w && w.deficit >= d.deficit ? w : d), null).epoch : null,
+    }),
     waterRefusals: state.waterRefusals,
     gateEconomyRefusals: state.gateEconomyRefusals,
     sprawlRefusals: state.sprawlRefusals,
@@ -1699,7 +1829,10 @@ function publish(state, foldedEpochs) {
       + ` ${state.gateEconomyRefusals} by the gate economy,`
       + ` ${state.sprawlRefusals} by §3d's no-untyped-sprawl law,`
       + ` ${state.emissionRefusals} typed emission act(s) that found no open ground;`
-      + ` ${arr.refusals.length} geometric refusal(s)`,
+      + ` ${arr.refusals.length} geometric refusal(s).`
+      + ` ⟦demand⟧ ${state.demands.reduce((n, d) => n + d.demand, 0)} plot(s) asked for across`
+      + ` ${state.demands.length} epoch(s), ${state.demands.reduce((n, d) => n + d.deficit, 0)}`
+      + ` unbuilt in ${state.demands.filter((d) => d.deadlocked).length} deadlocked epoch(s)`,
   });
 }
 
