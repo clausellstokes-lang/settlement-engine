@@ -19,6 +19,7 @@ import {
   dressPage, tones, valueCensus, legendCensus, accessibleHatch, hatchPolygon, clipSegment,
   inRing, contrast, mix, polesOf, VALUE_STEP, GRAIN, DRESS_GROUPS, DRESS_LEGEND,
   DRESS_SCHEMA_VERSION, PAGE_QUANTUM_DECIMALS, STATE_GROUPS, RELIEF_GROUPS, clipPolyline,
+  DRESS_LAYERS, DECLINE_GROUPS, RUIN_DRESS, declineCensus, ruinAddressCensus,
 } from '../../src/domain/townMap/fabric/partitionDress.js';
 
 /**
@@ -1311,5 +1312,267 @@ describe('⟦CAR-WORDS⟧ REG-8 · the words layer — placement, not existence'
     // the dormant town still prints the engine vocabulary — proof the arm really is off
     expect(DORM.get('town').svg).toContain('FABRIC 1 :');
     expect(LEAF.get('town').svg).not.toContain('FABRIC 1 :');
+  });
+});
+
+/* ══════════════════════════════════════════════════════════════════════════════════════════
+ * ⭐⭐⭐ REG-D · THE DECLINE DRESS — §5's EXITS, EACH WITH ITS PLANTED CONTROL
+ *
+ * ⚠⚠ **WHICH ARMS DISCOVER AND WHICH REGRESS (§711.4's law, applied by its own rule).** An arm
+ * that shares its producer's predicate cannot discover anything, and nine greens that look
+ * independent are worth less than they read. Labelled inline, per arm:
+ *   DISCOVERY — the arm computes its subject a DIFFERENT way from the ink, or plants a state the
+ *               corpus never reaches, so it can convict code that is internally consistent.
+ *   REGRESSION — the arm asserts the shape the producer already guarantees. It pins a decision
+ *               against future edits and proves nothing today.
+ *
+ * ⛔ THE FIXTURES ARE SYNTHETIC PAGES AND SYNTHETIC LOSS RECORDS, and that is the point rather
+ * than a shortcut: `dressPage` consumes a PAGE FRAME and PLAIN DATA (`stageManifest` S22's own
+ * stated property), so a page literal IS the interface. It also lets the arms plant INTACT and
+ * CONTACTED — two states no corpus leaf reaches — which is the only way to prove those branches
+ * are live rather than decorative.
+ * ════════════════════════════════════════════════════════════════════════════════════════ */
+describe('REG-D · the decline is drawn at the stage the ledger reached, and at no other', () => {
+  const quad = (x, y, w, h) => [[x, y], [x + w, y], [x + w, y + h], [x, y + h]];
+
+  /**
+   * A page carrying ruins, ways, masses and fields — the four rosters the decline dress reads.
+   *
+   * ⛔⛔ **THE FIXTURE IS A TRUE PLANAR SUBDIVISION ALONG THE STREET FRONT, AND THE FIRST SPELLING
+   * WAS NOT — WHICH IS ITSELF THE FINDING.** `ruinAddressCensus` detects adjacency EXACTLY: two
+   * faces are neighbours iff they carry the same two vertices as an edge. That holds on a real
+   * page because `projectPage` filters every ring through ONE keep-set, so a dropped vertex is
+   * dropped on both sides — verified against the arrangement's own half-edge answer on four
+   * leaves (`highwater` 446 = 446, `village`/`mountain`/`town` 0 = 0). It does NOT hold for a
+   * hand-drawn page where one long street edge faces four short frontages, and the first fixture
+   * here was exactly that: the census returned 0 addressed and the arm read it as a defect in the
+   * ink. **The precondition is now stated on the census and honoured here**: the way is cut at
+   * every frontage boundary, as a subdivision cuts it.
+   */
+  const WAY_RINGS = [[0, 20], [20, 40], [40, 60]].map(([a, b]) => [[a, 40], [b, 40], [b, 50], [a, 50]]);
+  function declinePage(losses) {
+    return {
+      frame: { x: -20, y: -20, w: 260, h: 260 },
+      bound: { cx: 100, cy: 100, radius: 120, enclosed: false, rule: 'fixture' },
+      ground: { kind: 'SETTLED_SURFACE' },
+      // ⚠ THE MASS SHAPE IS `finishMass`'s OWN ROSTER, not a subset — a fixture that omits a key
+      //   the dress reads throws inside the ink and would be read as a decline defect.
+      //   Both masses front the street exactly, so the L-REG-36 CONTROL reads 100 %.
+      masses: [[20, 40], [40, 60]].map(([a, b], i) => ({
+        block: `b${i}`, members: [i], runs: [i], area: 400, areaRw2: 16,
+        ring: [[a, 50], [b, 50], [b, 70], [a, 70]],
+        unitLines: [], ridges: [], runRings: [[[a, 50], [b, 50], [b, 70], [a, 70]]], ridgeOfRun: [],
+      })),
+      ways: WAY_RINGS.map((ring, i) => ({ face: 900 + i, rank: 'street', gate: false, ring })),
+      voids: [], band: [], water: [], crossings: [], quays: [],
+      fields: [{ face: 700, ring: quad(150, 150, 30, 30) },
+        { face: 701, ring: quad(150, 190, 30, 30) }],
+      loss: losses,
+      budget: { shapes: 0 },
+    };
+  }
+  /** a ruin seated on the street front — its top edge IS the way's bottom edge */
+  const frontRuin = (face, state) => ({ face, key: `loss.${face}`, state, ring: [[0, 50], [20, 50], [20, 70], [0, 70]] });
+  const ruin = (face, state, x, y) => ({ face, key: `loss.${face}`, state, ring: quad(x, y, 18, 18) });
+  const record = (regions, byState) => ({
+    schema: { states: ['INTACT', 'DEBRIS', 'CONTACTED', 'BREAKING_DOWN', 'FROZEN_MID_BITE', 'RECLAIMED'] },
+    law: { debrisYears: 25, breakdownYears: 75, reclaimCost: 2, contactReach: null },
+    regions, byState,
+  });
+
+  it('⭐ DISCOVERY · the dress table and the LEDGER SCHEMA are the same six states — a drift is a red', async () => {
+    const { LOSS_REGION_SCHEMA } = await import('../../src/domain/townMap/fabric/growthLedger.js');
+    // ⚠ the dress may NOT import that module (stageManifest S22 takes no partition module), so the
+    //   agreement is asserted HERE, across the boundary the ink cannot cross for itself.
+    expect([...LOSS_REGION_SCHEMA.states].sort()).toEqual(Object.keys(RUIN_DRESS).sort());
+    for (const s of LOSS_REGION_SCHEMA.states) {
+      expect(DECLINE_GROUPS, `${s} maps outside the roster`).toContain(RUIN_DRESS[s].group);
+      expect(RUIN_DRESS[s].rung.length, `${s} has no corpus rung`).toBeGreaterThan(8);
+    }
+  });
+
+  it('⭐⭐ DISCOVERY · every state gets its OWN rung — including the two the corpus never reaches', () => {
+    // ⛔ INTACT and CONTACTED are reached ZERO times across all 18 leaves (measured). Without this
+    //    plant their branches are unexercised code that a census would still call green.
+    const regions = [
+      { key: 'loss.10', state: 'INTACT', footprint: 10, pressureClock: 0, stageClock: 3 },
+      { key: 'loss.11', state: 'DEBRIS', footprint: 11, pressureClock: 0, stageClock: 30 },
+      { key: 'loss.12', state: 'CONTACTED', footprint: 12, pressureClock: 1, stageClock: 30 },
+      { key: 'loss.13', state: 'BREAKING_DOWN', footprint: 13, pressureClock: 0, stageClock: 90 },
+      { key: 'loss.14', state: 'FROZEN_MID_BITE', footprint: 14, pressureClock: 1, stageClock: 90 },
+      { key: 'loss.700', state: 'RECLAIMED', footprint: 700, pressureClock: 2, stageClock: 40 },
+    ];
+    const L = record(regions, {
+      INTACT: 1, DEBRIS: 1, CONTACTED: 1, BREAKING_DOWN: 1, FROZEN_MID_BITE: 1, RECLAIMED: 1,
+    });
+    const p = declinePage([
+      ruin(10, 'INTACT', 0, 60), ruin(11, 'DEBRIS', 30, 60), ruin(12, 'CONTACTED', 60, 60),
+      ruin(13, 'BREAKING_DOWN', 90, 60), ruin(14, 'FROZEN_MID_BITE', 120, 60),
+    ]);
+    const d = dressPage(p, { lens: 'parchment', roadWidth: 5, losses: L });
+    for (const gp of DECLINE_GROUPS) expect(d.groups, `${gp} not drawn`).toContain(gp);
+    expect(d.census.ruinFaces).toBe(5);
+    expect(d.census.ruinStanding).toBe(1);
+    expect(d.census.ruinUnroofed).toBe(1);
+    expect(d.census.ruinFootings).toBe(1);
+    expect(d.census.ruinClearing).toBe(2);      // CONTACTED + FROZEN share one family, by ruling
+    expect(d.census.soilMarks).toBe(1);
+    expect(d.census.ruinUndressed).toBe(0);
+    const C = declineCensus(d, L);
+    expect(C.ok, C.reason).toBe(true);
+    expect(C.reached.length).toBe(6);
+    expect(legendCensus(d).ok, legendCensus(d).reason).toBe(true);
+  });
+
+  it('⭐⭐ DISCOVERY · NO DRESS WITHOUT A STATE — a leaf that reached only DEBRIS draws only DEBRIS', () => {
+    const L = record([{ key: 'loss.11', state: 'DEBRIS', footprint: 11, pressureClock: 0, stageClock: 30 }],
+      { DEBRIS: 1 });
+    const d = dressPage(declinePage([ruin(11, 'DEBRIS', 30, 60)]),
+      { lens: 'parchment', roadWidth: 5, losses: L });
+    expect(d.groups).toContain('dress-ruin-unroofed');
+    for (const gp of ['dress-ruin-standing', 'dress-ruin-footings', 'dress-ruin-clearing', 'dress-soilmark']) {
+      expect(d.groups, `${gp} drawn for a state the ledger never reached`).not.toContain(gp);
+    }
+    expect(declineCensus(d, L).ok).toBe(true);
+  });
+
+  it('⛔ CONTROL · the totality census CONVICTS a reached state whose family went missing', () => {
+    // the ink is fine; the RECORD claims a state the page has no face for and no field for — the
+    // exact shape a producer change would take, and the census must not shrug at it.
+    const L = record([{ key: 'loss.11', state: 'DEBRIS', footprint: 11, pressureClock: 0, stageClock: 30 }],
+      { DEBRIS: 1, BREAKING_DOWN: 2 });
+    const d = dressPage(declinePage([ruin(11, 'DEBRIS', 30, 60)]),
+      { lens: 'parchment', roadWidth: 5, losses: L });
+    const C = declineCensus(d, L);
+    expect(C.ok).toBe(false);
+    expect(C.undressed).toContain('BREAKING_DOWN');
+    // and the mirror: a SCHEMA that grows a seventh state reds on R1 rather than drawing nothing
+    const drifted = { ...L, schema: { states: [...L.schema.states, 'BURNED'] } };
+    expect(declineCensus(d, drifted).schemaAgreed).toBe(false);
+    expect(declineCensus(d, drifted).ok).toBe(false);
+  });
+
+  it('⭐⭐ DISCOVERY · the clearing draws the share the LEDGER reached, and the ledger alone', () => {
+    // pressureClock 0 → nothing taken → the full hatch; 1 of 2 → half; 2 of 2 would be RECLAIMED.
+    const at = (pc) => {
+      const L = record([{ key: 'loss.12', state: 'CONTACTED', footprint: 12, pressureClock: pc, stageClock: 30 }],
+        { CONTACTED: 1 });
+      return dressPage(declinePage([ruin(12, 'CONTACTED', 60, 60)]),
+        { lens: 'parchment', roadWidth: 5, losses: L }).census;
+    };
+    const none = at(0); const half = at(1);
+    expect(none.ruinCleared).toBe(0);
+    expect(half.ruinCleared).toBeGreaterThan(0);
+    expect(half.ruinHatch).toBeLessThan(none.ruinHatch);
+    // ⛔ AND THE DENOMINATOR IS THE PUBLISHED LAW, NOT A RE-SPELLED 2. With no `law` on the record
+    //    the honest reading is "nothing is PROVEN cleared", so the whole face keeps its hatch —
+    //    never a guessed cost. This is the §711.6 class asserted rather than trusted.
+    const noLaw = {
+      schema: { states: ['INTACT', 'DEBRIS', 'CONTACTED', 'BREAKING_DOWN', 'FROZEN_MID_BITE', 'RECLAIMED'] },
+      regions: [{ key: 'loss.12', state: 'CONTACTED', footprint: 12, pressureClock: 1, stageClock: 30 }],
+      byState: { CONTACTED: 1 },
+    };
+    const blind = dressPage(declinePage([ruin(12, 'CONTACTED', 60, 60)]),
+      { lens: 'parchment', roadWidth: 5, losses: noLaw }).census;
+    expect(blind.ruinCleared).toBe(0);
+    expect(blind.ruinHatch).toBe(none.ruinHatch);
+  });
+
+  it('⭐⭐ DISCOVERY · PA.8 — RECLAIMED has NO FACE, so it is joined from the record to the FIELD', () => {
+    // `recoverByPressure` sets `f.cls = 'FIELD'`, so a face-walk finds nothing and a census built
+    // on one would be green over a population that had lost its most interesting member.
+    const L = record([
+      { key: 'loss.700', state: 'RECLAIMED', footprint: 700, pressureClock: 2, stageClock: 40 },
+      { key: 'loss.701', state: 'RECLAIMED', footprint: 701, pressureClock: 2, stageClock: 40 },
+    ], { RECLAIMED: 2 });
+    const p = declinePage([]);                       // ZERO LossRegion faces on the page
+    const d = dressPage(p, { lens: 'parchment', roadWidth: 5, losses: L });
+    expect(d.census.ruinFaces).toBe(0);
+    expect(d.census.soilMarks).toBe(2);
+    expect(d.groups).toContain('dress-soilmark');
+    expect(declineCensus(d, L).ok).toBe(true);
+    // ⛔ CONTROL · a footprint the page has no field for is COUNTED, never swallowed
+    const orphan = record([{ key: 'loss.999', state: 'RECLAIMED', footprint: 999, pressureClock: 2, stageClock: 40 }],
+      { RECLAIMED: 1 });
+    const d2 = dressPage(p, { lens: 'parchment', roadWidth: 5, losses: orphan });
+    expect(d2.census.soilMarksHomeless).toBe(1);
+    expect(d2.census.soilMarks).toBe(0);
+    expect(declineCensus(d2, orphan).homeless).toBe(1);
+  });
+
+  it('⭐⭐ DISCOVERY · L-REG-36 · a ruin needs an ADDRESS, and the census carries its own control', () => {
+    // ruin 10 fronts the street exactly; ruin 20 stands in open country with no way at all —
+    // which is the corpus shape this arm exists for (`village` and `mountain` put their ruins
+    // 48–90 units BEYOND the outermost live plot, with FIELD for their only neighbour).
+    const p = declinePage([frontRuin(10, 'DEBRIS'), ruin(20, 'DEBRIS', 200, 200)]);
+    const A = ruinAddressCensus(p);
+    expect(A.ruins).toBe(2);
+    expect(A.ruinAddressed).toBe(1);
+    expect(A.unaddressed).toEqual([20]);
+    // the CONTROL population is the built fabric asked the same question by the same code
+    expect(A.masses).toBe(2);
+    expect(A.massAddressed).toBe(2);
+    expect(A.verdict).toBe(false);                    // 50 % against a 100 % control
+    // ⛔ AND NO SUBJECT RETURNS `null`, NEVER `true` — a census that passes with nothing to
+    //    measure is the vacuity this programme keeps convicting.
+    expect(ruinAddressCensus(declinePage([])).verdict).toBe(null);
+    expect(ruinAddressCensus(declinePage([])).reason).toContain('NO SUBJECT');
+    // and a fully-addressed ruin set passes against the same control
+    expect(ruinAddressCensus(declinePage([frontRuin(10, 'DEBRIS')])).verdict).toBe(true);
+  });
+
+  it('⭐ DISCOVERY · the decline is INK ONLY — not one declared tone moves', () => {
+    // the whole family was built without a new ground role precisely so this arm can be exact.
+    const L = record([{ key: 'loss.11', state: 'DEBRIS', footprint: 11, pressureClock: 0, stageClock: 30 }],
+      { DEBRIS: 1 });
+    const p = declinePage([ruin(11, 'DEBRIS', 30, 60)]);
+    const without = dressPage(p, { lens: 'parchment', roadWidth: 5 });
+    const with_ = dressPage(p, { lens: 'parchment', roadWidth: 5, losses: L });
+    expect(JSON.stringify(with_.tones)).toBe(JSON.stringify(without.tones));
+    expect(JSON.stringify(valueCensus(with_.tones))).toBe(JSON.stringify(valueCensus(without.tones)));
+  });
+
+  it('⭐⭐ DISCOVERY · WHICH HALF NEEDS THE RECORD — the standing ladder does not, RECLAIMED does', () => {
+    // ⛔⛔ THIS ARM WAS WRITTEN BACKWARDS AND THE FAILURE CORRECTED IT, WHICH IS WHY IT IS KEPT.
+    //   Its first spelling asserted that WITHOUT `opts.losses` the dress draws no decline at all.
+    //   It does — and it should. A standing ruin is a FACE, and `page.loss` carries its ring and
+    //   its state exactly as `page.band` carries the wall's; gating that ink on a second parameter
+    //   would invent a failure mode where a caller hands over the page, forgets the record, and
+    //   silently loses 467 marks. What genuinely CANNOT be drawn from the page is RECLAIMED —
+    //   `recoverByPressure` returned that ground to FIELD, so the page holds an ordinary field
+    //   face and nothing that says it was ever a plot. **The record is required exactly where the
+    //   truth lives only in the record, and nowhere else.** That is PA.8's rule as a code path.
+    const p = declinePage([frontRuin(11, 'DEBRIS')]);
+    const bare = dressPage(p, { lens: 'parchment', roadWidth: 5 });
+    expect(bare.groups).toContain('dress-ruin-unroofed');
+    expect(bare.census.ruinUnroofed).toBe(1);
+    expect(bare.groups).not.toContain('dress-soilmark');
+    const L = record([{ key: 'loss.700', state: 'RECLAIMED', footprint: 700, pressureClock: 2, stageClock: 40 }],
+      { DEBRIS: 1, RECLAIMED: 1 });
+    const withRec = dressPage(p, { lens: 'parchment', roadWidth: 5, losses: L });
+    expect(withRec.groups).toContain('dress-soilmark');
+    expect(withRec.census.soilMarks).toBe(1);
+  });
+
+  it('⭐ REGRESSION · the decline families are declared, taught, and each teaches ONE rung', () => {
+    for (const gp of DECLINE_GROUPS) {
+      expect(DRESS_GROUPS, `${gp} undeclared`).toContain(gp);
+      const rows = DRESS_LEGEND.filter((r) => r.group === gp);
+      expect(rows.length, `${gp} has ${rows.length} legend rows`).toBe(1);
+      expect(rows[0].plate, `${gp} has no corpus plate`).toMatch(/hf3(79|23)/);
+    }
+    expect(DRESS_LAYERS).toContain('decline');
+  });
+
+  it('⭐ REGRESSION · the dress stays PURE with a loss record — two calls are byte-identical', () => {
+    const L = record([{ key: 'loss.700', state: 'RECLAIMED', footprint: 700, pressureClock: 2, stageClock: 40 }],
+      { DEBRIS: 1, RECLAIMED: 1 });
+    const p = declinePage([frontRuin(11, 'DEBRIS')]);
+    const a = dressPage(p, { lens: 'parchment', roadWidth: 5, losses: L });
+    const b = dressPage(p, { lens: 'parchment', roadWidth: 5, losses: L });
+    expect(a.svg).toBe(b.svg);
+    // ⚠ the control moves the RECLAIMED half only — the standing ladder draws off the page either
+    //   way, which the arm above establishes and this one must not contradict.
+    expect(a.svg).not.toBe(dressPage(p, { lens: 'parchment', roadWidth: 5 }).svg);
   });
 });

@@ -80,6 +80,15 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
     //   `renderFolio` and nothing else; §646.2 convicted the dress page for having ZERO relief
     //   marks against a steep-hills cartouche, and that was literally true.
     relief: fabric.relief,
+    // ⭐⭐⭐ ⟦REG-D⟧ THE DECLINE RECORD, CROSSING THE SAME BRIDGE. `partitionDecline` has been
+    //   minting LOSSREGION faces since SPINE-2 and `partitionDress` contained ZERO occurrences of
+    //   the class: 467 faces on `highwater` — 2.598 % of that plate — drawing nothing at all, so
+    //   the dead quarter read as a STREET GRID WITH EMPTY BLOCKS (an unfinished drawing) rather
+    //   than as a ruined one. Measured off the crop, not inferred from the absence.
+    //   ⛔ IT IS THE PUBLISHED RECORD AND NOT THE FACES, because a RECLAIMED region has no face
+    //   left (`recoverByPressure` returns the ground to FIELD) and survives ONLY here — PA.8's own
+    //   rule for the census, applied to the ink that census measures.
+    losses: P.losses,
     tier: fabric.meta.tier,
     ringOfFace: (fid) => (P.arrangement.faces[fid] && P.arrangement.faces[fid].alive
       ? faceRing(P.arrangement, fid) : null),
@@ -104,6 +113,10 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
      *  before and the after off ONE build and attribute the move. ⛔ A placement census that
      *  read `fabric.stateMarks` here would be measuring the surface the page does not draw. */
     state,
+    /** ⭐ ⟦REG-D⟧ THE DECLINE RECORD, published beside the dress so `declineCensus` measures the
+     *  SAME build the ink came from rather than a second one. PA.8: the totality census is defined
+     *  over this record and never over a face-walk. */
+    losses: P.losses,
     /** ⭐ THE FABRIC THE LEAF WAS BUILT FROM, published so a caller that also needs the FOLIO
      *  plate of the same leaf can render both from ONE build. The corpus-render gate arm
      *  (DRESS-FRAME, ODQ §703.4) is that caller, and without this it paid for the fabric twice. */

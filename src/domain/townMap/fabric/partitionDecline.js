@@ -259,6 +259,19 @@ export function publishLosses(state) {
   for (const L of state.losses) byState[L.state] = (byState[L.state] || 0) + 1;
   return Object.freeze({
     schema: LOSS_REGION_SCHEMA,
+    /**
+     * ⭐⭐ ⟦REG-D⟧ **THE LAW TRAVELS WITH THE RECORD, AND THIS IS THE §711.6 CLASS KILLED BEFORE
+     * IT CAN FORM.** A `pressureClock` of 1.00 means nothing to a reader without the price it is
+     * counting toward, so any consumer that wants the share a clearance reached — the decline
+     * dress does — must have `reclaimCost`. There were exactly two ways to give it one: publish
+     * it here, or let the consumer re-spell `2`. This programme has now caught that second shape
+     * four times in four waves (`OP_CEILING` in two files with two meanings, §712.7; `ADVANCE`
+     * with three consumers, §713.1; `trampled.ang` read three ways, §711.6) and every time the
+     * error was invisible because each consumer was internally consistent. The law has ONE home,
+     * `LOSS_LAW` above, and it rides the publication so a second spelling cannot exist.
+     * ⚠ ADDITIVE ONLY: no existing field moves, and the record is still frozen.
+     */
+    law: LOSS_LAW,
     regions: Object.freeze(state.losses.map((L) => Object.freeze({ ...L, contactEpochs: Object.freeze(L.contactEpochs.slice()) }))),
     byState: Object.freeze(byState),
     reason: `${state.losses.length} LossRegion(s): `

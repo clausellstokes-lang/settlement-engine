@@ -64,7 +64,7 @@ export const GRAIN = Object.freeze({ stroke: 0.25, opacity: 0.72 });
 
 /** Draw order. Ground first, pieces over it, marks last — `PAGE_LAYERS` with the ink's own rows. */
 export const DRESS_LAYERS = Object.freeze(['paper', 'fields', 'relief', 'water', 'ground', 'voids',
-  'masses', 'roofs', 'band', 'gates', 'crossings', 'quays', 'terraces', 'state', 'marks']);
+  'masses', 'roofs', 'band', 'gates', 'crossings', 'quays', 'terraces', 'decline', 'state', 'marks']);
 
 /** Every `<g id>` the dress can emit, so the legend census has a closed roster to check against. */
 export const DRESS_GROUPS = Object.freeze([
@@ -130,6 +130,34 @@ export const DRESS_GROUPS = Object.freeze([
    * strictest about, so `relief.hills` is read, counted, and deliberately not drawn.
    */
   'dress-hachure', 'dress-formline', 'dress-terrace', 'dress-crag', 'dress-marsh',
+  /**
+   * ⭐⭐⭐ ⟦REG-D⟧ **THE DECLINE LADDER — THE PIECES THAT EMPTIED, DRAWN AT THE STAGE THE LEDGER
+   * REACHED.** `partitionDecline.js` has been minting `LOSSREGION` faces since SPINE-2 and this
+   * file contained **zero occurrences of the word** before this wave: 467 faces on `highwater`,
+   * 2.598 % of that plate's area, drawing nothing at all.
+   *
+   * ⛔ **AND THE DEFECT IS NOT THE ONE THE ABSENCE SUGGESTS — CORRECTED AGAINST THE PLATE ITSELF.**
+   * The first spelling of this note said the ruins "render as bare paper". They do not, and the
+   * crop says so: the WAYS of a dead quarter are still drawn, so what a reader saw was **a street
+   * grid with completely empty blocks**, with the seated institutions' register marks floating in
+   * ground that carried no ink. That reads as an UNFINISHED DRAWING rather than a ruined one —
+   * a worse failure than a hole, because a hole says *nothing stood here* and an empty grid says
+   * *the artist stopped*.
+   *
+   * ⛔ **NO INVENTED DECAY, AND THE SHAPE OF THE FILE ENFORCES IT.** Every mark below is keyed by
+   * `RUIN_DRESS`, whose keys are checked against the schema the publication carries — so a state
+   * the ledger never reached draws nothing, and a state the schema gains without a dress reds.
+   * The dress derives no age, no severity and no stage: it reads `state`, `stageClock` and
+   * `pressureClock` off the published record and draws the rung they name.
+   *
+   * ⚠ **INK ONLY — NOT ONE DECLARED TONE MOVES.** A ruin's ground is not a new fabric role, and
+   * minting one would walk straight into the three failures the tone ladder below records (the
+   * rung that became a ceiling, the night-lens direction, i5's `water:ground` floor). hf323 draws
+   * the distinction the corpus actually uses: *"roofed = white interior, unroofed ruin = hatched"*
+   * — the hatch IS the tone, and the value census is untouched by construction.
+   */
+  'dress-ruin-standing', 'dress-ruin-unroofed', 'dress-ruin-footings', 'dress-ruin-clearing',
+  'dress-soilmark',
 ]);
 
 /** ⟦DRESS-2 W2⟧ the relief families, named once so a census cannot drift from the ink */
@@ -165,6 +193,90 @@ export const STATE_GROUPS = Object.freeze([
   'dress-camp', 'dress-barred', 'dress-emptystall', 'dress-watchfire', 'dress-trampled',
   'dress-barricade',
 ]);
+
+/** ⟦REG-D⟧ the decline families, named once so `declineCensus` cannot drift from the ink. */
+export const DECLINE_GROUPS = Object.freeze([
+  'dress-ruin-standing', 'dress-ruin-unroofed', 'dress-ruin-footings', 'dress-ruin-clearing',
+  'dress-soilmark',
+]);
+
+/**
+ * ⭐⭐⭐ ⟦REG-D⟧ **THE STATE → RUNG TABLE. THE LADDER IS hf379's, NOT OURS.**
+ *
+ * DETAIL-REGISTER §11: *"**hf379-spec-ruin-stages** (REQUIRED): eight decay states of one house —
+ * lived-in, empty-but-sound, unroofed (hatched), walls-failing (tree in the footprint), footings,
+ * platform, under-the-plough (furrows wrap the resistant patch), lost-but-for-the-ground (soil-mark
+ * + a dog-leg in the path as the only witness)"*, and *"hf379's later stages are the plan-view
+ * vocabulary for absence (dashed ghosts, stipple debris, soil-mark hatch)"*. The schema's six
+ * states are mapped ONTO that ladder rather than beside it; every row names the rung it took.
+ *
+ * ⛔⛔ **`CONTACTED` AND `FROZEN_MID_BITE` SHARE ONE FAMILY, AND THE REASON IS A MEASUREMENT OF THE
+ * MEDIUM, NOT A CONVENIENCE.** The two states differ by exactly one thing: whether demand is STILL
+ * being spent on the ruin. That is a fact about the NEXT epoch, not about the ground — at the
+ * instant the map draws, a half-cleared ruin under a live front and a half-cleared ruin whose
+ * front stopped are the same object in the same condition. §695.7's law is the one that applies:
+ * *"a gate can fail by asking too little OR by asking the impossible, and only measuring the
+ * question against the medium tells you which."* Minting a second glyph to separate them would be
+ * inventing a distinction the world does not draw — the same refusal `dress-barred` already
+ * records for `barredGate` vs `quarantineBar`. What the family DOES carry is the honest half: the
+ * SHARE the clearing reached, straight off `pressureClock / law.reclaimCost`.
+ *
+ * ⚠ THE `walls-failing` RUNG (a tree in the footprint) IS DELIBERATELY UNUSED. Our schema has no
+ * state between DEBRIS and BREAKING_DOWN, and drawing a rung no state reaches is the whole of what
+ * "no dress without a state" forbids.
+ */
+export const RUIN_DRESS = Object.freeze({
+  INTACT: Object.freeze({
+    group: 'dress-ruin-standing',
+    rung: 'hf379 rung 2 — empty-but-sound',
+    mark: 'the footprint outlined and nothing inside it',
+    why: 'the house still stands; what is gone is the household. In plan the only difference'
+      + ' between a lived-in house and an empty one is the roof furniture, so the mark is the'
+      + ' eaves line WITHOUT the ridge, hips, planes or chimney a mass would carry',
+  }),
+  DEBRIS: Object.freeze({
+    group: 'dress-ruin-unroofed',
+    rung: 'hf379 rung 3 — unroofed (hatched)',
+    mark: 'the footprint outlined and hatched',
+    why: 'hf323 draws the same distinction on the church ladder in one clause — "roofed = white'
+      + ' interior, unroofed ruin = hatched" — so the hatch is the corpus\'s own sign for a'
+      + ' standing shell open to the sky, and it needs no new tone to say it',
+  }),
+  CONTACTED: Object.freeze({
+    group: 'dress-ruin-clearing',
+    rung: 'hf379 read backwards — the ladder running the other way',
+    mark: 'the hatch stops where the clearing reached; the cleared share is left as ground',
+    why: 'a ruin under the growth front is being taken back, and the ledger records exactly how'
+      + ' far it got in `pressureClock` against `law.reclaimCost`. The drawn share is that'
+      + ' quotient and nothing else',
+  }),
+  BREAKING_DOWN: Object.freeze({
+    group: 'dress-ruin-footings',
+    rung: 'hf379 rungs 5–6 — footings / platform ("dashed ghosts")',
+    mark: 'a dashed ghost of the footprint, nothing inside',
+    why: 'the walls are down to their footings and the plot is legible only as a rectangle in the'
+      + ' grass. ⚠ THE DASH IS LICENSED HERE AND CONVICTED ELSEWHERE: review I10 struck dashes'
+      + ' for the DITCH because the corpus draws a ditch as radiating hachure — hf379 names the'
+      + ' dashed ghost as the plan-view vocabulary for absence, which is the opposite case',
+  }),
+  FROZEN_MID_BITE: Object.freeze({
+    group: 'dress-ruin-clearing',
+    rung: 'hf379 read backwards — the ladder stopped',
+    mark: 'the hatch stops where the clearing reached; the cleared share is left as ground',
+    why: 'identical to CONTACTED at the instant the map draws — see this table\'s own note. The'
+      + ' one FROZEN region in the corpus stands at `pressureClock` 1.00 of a cost of 2, so it'
+      + ' draws exactly half taken',
+  }),
+  RECLAIMED: Object.freeze({
+    group: 'dress-soilmark',
+    rung: 'hf379 rungs 7–8 — under-the-plough / lost-but-for-the-ground',
+    mark: 'a dotted trace of the lost plot on ground now worked',
+    why: '⛔ THE FACE IS NO LONGER A LossRegion — `recoverByPressure` returns it to FIELD, so the'
+      + ' reclamation survives ONLY in `state.losses` (PA.8 says exactly this) and the mark has to'
+      + ' be joined back to the field face by footprint id. What the reader sees is the corpus\'s'
+      + ' own telltale for a lost feature: the ground is worked, and the old plot still shows',
+  }),
+});
 
 const DEG = Math.PI / 180;
 
@@ -226,11 +338,22 @@ export function linePath(pts) {
  * @param {any} page a `PARTITION_PAGE_FRAME` from `projectPage`
  * @param {{lens?:string, roadWidth?:number, walls?:any, water?:any, crossings?:any,
  *          quays?:any, accessible?:boolean, tier?:string, seating?:any, state?:any,
- *          relief?:any}} [opts]
+ *          relief?:any, losses?:any}} [opts]
  *
  * ⚠ `opts.state` is `fabric.stateMarks`, handed in the same way `walls` and `seating` already are
  *   — the §10 register is a fact ABOUT the settlement rather than a face of the partition, and
  *   `partitionInputs`' nine keys carry no state, so it cannot arrive off the page.
+ *
+ * ⭐⭐ ⟦REG-D⟧ `opts.losses` IS `partition.losses` — `publishLosses`' own record — AND IT ARRIVES
+ *   AS PLAIN DATA FOR A STRUCTURAL REASON. `stageManifest`'s S22 row states it outright: *"It
+ *   takes NO partition module: the dress consumes a PAGE FRAME and a WALL PUBLICATION as plain
+ *   data, which is why the ink can be judged without the constructor being in scope."* Importing
+ *   `partitionDecline.js` for `LOSS_STATES`/`LOSS_LAW` would have added a backward stage edge and
+ *   broken that property to save one parameter. Instead the schema and the law RIDE the record,
+ *   and `declineCensus` asserts `RUIN_DRESS`'s keys against `losses.schema.states` — so a schema
+ *   drift is a red rather than a silently undrawn state.
+ *   ⚠ It is also why folio dormancy holds by construction: `renderFolio` never receives a page,
+ *   never receives a loss record, and is not touched by this wave.
  */
 export function dressPage(page, opts = {}) {
   const keptQuantum = QUANTUM;
@@ -261,6 +384,15 @@ function dressPageInner(page, opts) {
     /** ⟦DRESS-2 W2⟧ relief — the DROPPED count is as load-bearing as the drawn one (I6) */
     hachureRuns: 0, hachuresDrawn: 0, hachuresDropped: 0, formLines: 0, terraces: 0,
     crags: 0, marshTicks: 0, profileHillsRefused: 0, reliefMarks: 0,
+    /**
+     * ⟦REG-D⟧ the decline, counted PER RUNG so the totality census is attributable — and
+     * `ruinUndressed` is the load-bearing one: a LOSSREGION face whose state has no dress is the
+     * failure this whole family exists to make impossible, so it is counted rather than assumed 0.
+     */
+    ruinFaces: 0, ruinStanding: 0, ruinUnroofed: 0, ruinFootings: 0, ruinClearing: 0,
+    ruinHatch: 0, ruinCleared: 0, soilMarks: 0, ruinUndressed: 0, declineMarks: 0,
+    /** the RECLAIMED regions the page could not seat, i.e. whose field face is gone (PA.8) */
+    soilMarksHomeless: 0,
   };
   const g = (id, body) => {
     if (!body) return;
@@ -796,6 +928,125 @@ function dressPageInner(page, opts) {
     prims.n += terr.length;
   }
 
+  // ── ⭐⭐⭐ ⟦REG-D⟧ THE DECLINE LADDER — WHAT THE LEDGER REACHED, AND ONLY THAT ────────────────
+  //
+  // ⭐⭐ **THE TWO ROSTERS, AND WHY THERE HAVE TO BE TWO.** A ruin that still stands is a
+  // `LOSSREGION` face and arrives on `page.loss` with its own ring. A ruin that was CLEARED is not
+  // a face any more — `recoverByPressure` sets `f.cls = 'FIELD'` — so a face-walk finds nothing and
+  // the reclamation survives only in the published record. PA.8 rules the census over
+  // `state.losses`/`publishLosses` for exactly this reason, and the ink obeys the same rule: the
+  // standing rungs come off `page.loss`, and RECLAIMED is joined from `opts.losses.regions` back to
+  // the FIELD face that used to be the plot.
+  //
+  // ⛔⛔ **THE MEASUREMENT THAT BOUNDS THIS WHOLE FAMILY, RECORDED WHERE THE INK IS.** On 16 of the
+  // 18 corpus leaves EVERY decline mark falls outside the fitted frame — measured two ways
+  // (polygon clip to the frame, and centroid-in-frame), both returning zero area and zero faces.
+  // The mechanism is not a bug in either half: §3f abandons the OUTERMOST pieces because a
+  // population fall IS a contraction of the built radius, and DRESS-FRAME fits the page to
+  // `bound.radius`, which is far inside the built radius. **The rim is what empties and the rim is
+  // what the fit crops.** Only `highwater` (349 of 467 ruin faces in frame) and `mountain` (2
+  // reclaimed) carry any of it. That is the framing trade's FOURTH measured cost and it is the
+  // owner's row, not this file's — recorded here so nobody reads the ink's silence as its absence.
+  {
+    const LOSS = opts.losses;
+    const standing = [];
+    const unroofed = [];
+    const hatchD = [];
+    const footings = [];
+    const clearing = [];
+    const clearHatch = [];
+    const soil = [];
+    // the growth front comes from the settlement's own centre — `recoverByPressure` takes the
+    // ruins nearest the core first, so "the side the clearing came from" is not a choice here
+    const bx = (page.bound && Number.isFinite(page.bound.cx)) ? page.bound.cx : F.x + F.w / 2;
+    const by = (page.bound && Number.isFinite(page.bound.cy)) ? page.bound.cy : F.y + F.h / 2;
+    const byKey = new Map();
+    for (const R of ((LOSS && LOSS.regions) || [])) byKey.set(R.key, R);
+    const cost = (LOSS && LOSS.law && LOSS.law.reclaimCost > 0) ? LOSS.law.reclaimCost : 0;
+    for (const L of (page.loss || [])) {
+      if (!L.ring || L.ring.length < 3) continue;
+      census.ruinFaces++;
+      const row = RUIN_DRESS[L.state];
+      if (!row) { census.ruinUndressed++; continue; }
+      if (row.group === 'dress-ruin-standing') {
+        standing.push(polyPath(L.ring));
+        census.ruinStanding++;
+      } else if (row.group === 'dress-ruin-unroofed') {
+        unroofed.push(polyPath(L.ring));
+        // ⚠ THE HATCH FOLLOWS THE FACE'S OWN AXIS, not a sheet angle. `grainAngle` is the estate's
+        //   own device for "this piece's long direction", already used by the furlong, so a field
+        //   of ruins comes out broken rather than mechanically parallel — B4's own tell.
+        for (const seg of hatchPolygon(L.ring, grainAngle(L.ring), rw * 0.5)) {
+          hatchD.push(linePath(seg));
+          census.ruinHatch++;
+        }
+        census.ruinUnroofed++;
+      } else if (row.group === 'dress-ruin-footings') {
+        footings.push(polyPath(L.ring));
+        census.ruinFootings++;
+      } else if (row.group === 'dress-ruin-clearing') {
+        clearing.push(polyPath(L.ring));
+        const R = byKey.get(L.key);
+        // the share NOT yet taken back. With no published cost the honest reading is "none of it
+        // is proven cleared", so the whole face keeps its hatch — never a guessed denominator.
+        const taken = (R && cost) ? Math.max(0, Math.min(1, R.pressureClock / cost)) : 0;
+        const segs = hatchPolygon(L.ring, grainAngle(L.ring), rw * 0.5);
+        // order the rules by distance from the settlement's centre; the clearing ate the near end
+        const keyed = segs.map((s) => ({ s, d: Math.hypot((s[0][0] + s[1][0]) / 2 - bx, (s[0][1] + s[1][1]) / 2 - by) }))
+          .sort((a, b) => a.d - b.d || a.s[0][0] - b.s[0][0]);
+        const drop = Math.round(keyed.length * taken);
+        for (let i = 0; i < keyed.length; i++) {
+          if (i < drop) { census.ruinCleared++; continue; }
+          clearHatch.push(linePath(keyed[i].s));
+          census.ruinHatch++;
+        }
+        census.ruinClearing++;
+      }
+      census.declineMarks++;
+    }
+    // ── RECLAIMED · joined back to the FIELD face the plot became (PA.8's own reason) ──────────
+    if (LOSS && LOSS.regions) {
+      const fieldRing = new Map();
+      for (const f of (page.fields || [])) fieldRing.set(f.face, f.ring);
+      for (const R of LOSS.regions) {
+        if (R.state !== 'RECLAIMED') continue;
+        const ring = fieldRing.get(R.footprint);
+        if (!ring || ring.length < 3) { census.soilMarksHomeless++; continue; }
+        soil.push(polyPath(ring));
+        census.soilMarks++;
+        census.declineMarks++;
+      }
+    }
+    // ⚠ EVERY WEIGHT AND EVERY DASH BELOW IS AN EXISTING ROLE AT AN EXISTING RUNG. Nothing here
+    //   mints a tone, an opacity ladder or a stroke scale: `T.ink`, `T.wall` and `INK.*` are the
+    //   ones the fabric already draws with, so `valueCensus` reads exactly what it read before.
+    g('dress-ruin-standing', standing.length
+      ? `<path d="${standing.join('')}" fill="none" stroke="${T.ink}" stroke-width="${INK.body}"`
+        + ` stroke-linejoin="round"/>` : '');
+    g('dress-ruin-unroofed', unroofed.length
+      ? `<path d="${unroofed.join('')}" fill="none" stroke="${T.ink}" stroke-width="${INK.detail}"`
+        + ` stroke-linejoin="round"/>`
+        + (hatchD.length ? `<path d="${hatchD.join('')}" fill="none" stroke="${T.ink}"`
+          + ` stroke-width="${INK.hair}" stroke-opacity="0.8"/>` : '') : '');
+    g('dress-ruin-footings', footings.length
+      ? `<path d="${footings.join('')}" fill="none" stroke="${T.ink}" stroke-width="${INK.hair}"`
+        + ` stroke-dasharray="${r2(rw * 0.35)} ${r2(rw * 0.35)}" stroke-opacity="0.7"/>` : '');
+    g('dress-ruin-clearing', clearing.length
+      ? `<path d="${clearing.join('')}" fill="none" stroke="${T.ink}" stroke-width="${INK.detail}"`
+        + ` stroke-linejoin="round"/>`
+        + (clearHatch.length ? `<path d="${clearHatch.join('')}" fill="none" stroke="${T.ink}"`
+          + ` stroke-width="${INK.hair}" stroke-opacity="0.8"/>` : '') : '');
+    // ⚠ THE SOIL-MARK IS DOTTED, NOT DASHED, AND IT IS PALER THAN THE FOOTINGS GHOST. It is one
+    //   rung FURTHER down hf379's ladder than the footings — the ground is worked and the plot is
+    //   a trace under the plough — so it may not read as heavy as the stage above it.
+    g('dress-soilmark', soil.length
+      ? `<path d="${soil.join('')}" fill="none" stroke="${T.ink}" stroke-width="${INK.hair}"`
+        + ` stroke-dasharray="${r2(rw * 0.12)} ${r2(rw * 0.30)}" stroke-opacity="0.55"`
+        + ` stroke-linecap="round"/>` : '');
+    prims.n += standing.length + unroofed.length + hatchD.length + footings.length
+      + clearing.length + clearHatch.length + soil.length;
+  }
+
   // ── ⭐⭐⭐ ⟦DRESS-2 W1⟧ THE §10 STATE EXPRESSIONS, IN CALM INK ──────────────────────────────
   //
   // ⭐⭐ **THE REGISTER LAW IS THE LEGACY'S OWN, CARRIED OVER VERBATIM** (`renderFolio` §15b):
@@ -968,7 +1219,12 @@ function dressPageInner(page, opts) {
       + ` ${census.hachureRuns} run(s) with ${census.hachuresDropped} dropped for want of a run,`
       + ` ${census.formLines} form line(s), ${census.terraces} terrace step(s), ${census.crags}`
       + ` crag(s), ${census.marshTicks} reed tick(s); ${census.profileHillsRefused} profile hill(s)`
-      + ` read and refused as an alternative register`,
+      + ` read and refused as an alternative register;`
+      + ` decline: ${census.declineMarks} mark(s) over ${census.ruinFaces} LossRegion face(s) —`
+      + ` ${census.ruinStanding} standing, ${census.ruinUnroofed} unroofed, ${census.ruinFootings}`
+      + ` at their footings, ${census.ruinClearing} being cleared (${census.ruinCleared} rule(s)`
+      + ` dropped for the share already taken), ${census.soilMarks} soil-mark(s) on ground that`
+      + ` came back, ${census.ruinUndressed} face(s) in a state with no dress`,
   });
 }
 
@@ -1899,7 +2155,159 @@ export const DRESS_LEGEND = Object.freeze([
   { group: 'dress-terrace', mark: 'a level line crossing the built ground, over the fabric', teaches: 'ground the settlement had to CUT to stand on — a terrace retains the houses above it', plate: 'hf116 terrace study' },
   { group: 'dress-crag', mark: 'a heavy line with lighter facets hanging from it', teaches: 'a cliff — and the HEAVY line is its TOP', plate: 'hf113 crag / cliff study' },
   { group: 'dress-marsh', mark: 'reed ticks in clusters of three', teaches: 'standing water in the ground', plate: 'hf115 marsh reed study (the law is stated on the plate)' },
+  /**
+   * ⟦REG-D⟧ THE DECLINE LADDER. ⛔ Every plate here is hf379 or hf323 — the two REQUIRED-DETAIL
+   * anchors that carry ruin content — and each row teaches ONE rung, because a ladder taught as a
+   * single row would be §692.9's defect wearing a legend's face.
+   */
+  { group: 'dress-ruin-standing', mark: 'a footprint outlined and empty', teaches: 'a house still standing with nobody in it — the eaves line WITHOUT the roof furniture a lived-in house carries', plate: 'hf379-spec-ruin-stages rung 2 (empty-but-sound)' },
+  { group: 'dress-ruin-unroofed', mark: 'a footprint outlined and hatched', teaches: 'a shell open to the sky — the corpus hatches an unroofed ruin and leaves a roofed one white', plate: 'hf379-spec-ruin-stages rung 3 / hf323 church ladder ("unroofed ruin = hatched")' },
+  { group: 'dress-ruin-footings', mark: 'a dashed ghost of a footprint', teaches: 'walls down to their footings — the plot legible only as a rectangle in the grass', plate: 'hf379-spec-ruin-stages rungs 5–6 (footings / platform, the "dashed ghost")' },
+  { group: 'dress-ruin-clearing', mark: 'a hatched shell whose hatch stops part way', teaches: 'a ruin being taken back — the cleared share is the ledger\'s own pressure against the price of clearing', plate: 'hf379-spec-ruin-stages (the ladder read backwards)' },
+  { group: 'dress-soilmark', mark: 'a dotted trace on worked ground', teaches: 'a plot that was cleared and returned to the fields — the soil-mark is all that is left of it', plate: 'hf379-spec-ruin-stages rungs 7–8 (under-the-plough / lost-but-for-the-ground)' },
 ]);
+
+/**
+ * ⭐⭐⭐ ⟦REG-D⟧ **THE REACHED-STATE TOTALITY CENSUS — *every LossRegion state has its dress; no
+ * dress without a state*.**
+ *
+ * ⛔⛔ **IT IS DEFINED OVER `publishLosses`, NEVER OVER A FACE-WALK, AND PA.8 SAYS SO BY NAME.** A
+ * RECLAIMED region has no `LOSSREGION` face left — `recoverByPressure` returns the ground to
+ * `FIELD` — so a walk of the arrangement finds 89 of the corpus's regions and misses none of them
+ * by accident: it misses them BY CONSTRUCTION, and the census would come back green over a
+ * population that had silently lost its most interesting member.
+ *
+ * THE FOUR ROWS, and each one can fail on its own:
+ *   R1 `schemaAgreed`  `RUIN_DRESS`'s keys are exactly the states the record's own schema carries.
+ *                      This is the drift arm: a seventh state minted upstream reds here rather
+ *                      than drawing nothing and passing.
+ *   R2 `undressed`     states this leaf REACHED whose family emitted no group. The totality half.
+ *   R3 `unearned`      groups this leaf DREW whose states it never reached. The honesty half —
+ *                      "no dress without a state", i.e. zero invented decay, mechanically.
+ *   R4 `homeless`      RECLAIMED regions whose field face is not on the page, so the mark could
+ *                      not be seated. Counted rather than swallowed: it is the join failing.
+ *
+ * ⚠ **A LEAF WITH NO LOSSES PASSES ALL FOUR AND MEANS NOTHING BY IT** — which is why `reached` and
+ * `regions` are published beside the verdict. A green over an empty population is the vacuity
+ * §714.6 spent a whole wave on; the caller is handed the denominator so it cannot be quoted
+ * without one.
+ *
+ * @param {any} dress a `PARTITION_PAGE_DRESS`
+ * @param {any} losses a `publishLosses` record
+ */
+export function declineCensus(dress, losses) {
+  const states = (losses && losses.schema && losses.schema.states) ? [...losses.schema.states] : [];
+  const keys = Object.keys(RUIN_DRESS);
+  const schemaAgreed = states.length === keys.length && states.every((s) => keys.includes(s));
+  const byState = (losses && losses.byState) || {};
+  const reached = states.filter((s) => (byState[s] || 0) > 0);
+  const drawn = new Set((dress && dress.groups) || []);
+  const wanted = new Set(reached.map((s) => RUIN_DRESS[s] && RUIN_DRESS[s].group).filter(Boolean));
+  const undressed = reached.filter((s) => {
+    const row = RUIN_DRESS[s];
+    return !row || !drawn.has(row.group);
+  });
+  // ⚠ RECLAIMED is exempt from R2 only when its face is off the page — the join failing is R4's
+  //   finding, not R2's, and conflating them would let a missing family hide behind a missing face.
+  const c = (dress && dress.census) || {};
+  const homeless = c.soilMarksHomeless || 0;
+  const undressedReal = undressed.filter((s) => !(s === 'RECLAIMED' && homeless >= (byState.RECLAIMED || 0)));
+  const unearned = [...drawn].filter((gp) => DECLINE_GROUPS.includes(gp) && !wanted.has(gp));
+  const ok = schemaAgreed && undressedReal.length === 0 && unearned.length === 0
+    && (c.ruinUndressed || 0) === 0;
+  return {
+    ok,
+    schemaAgreed,
+    states,
+    reached,
+    regions: (losses && losses.regions) ? losses.regions.length : 0,
+    byState,
+    undressed: undressedReal,
+    unearned,
+    homeless,
+    facesInAStateWithNoDress: c.ruinUndressed || 0,
+    reason: `${(losses && losses.regions) ? losses.regions.length : 0} region(s) in`
+      + ` ${reached.length} of ${states.length} schema state(s);`
+      + ` ${undressedReal.length} reached state(s) with no dress,`
+      + ` ${unearned.length} dress family(ies) with no state,`
+      + ` ${homeless} RECLAIMED region(s) with no field face on the page,`
+      + ` schema agreement ${schemaAgreed ? 'OK' : 'DRIFTED'}`,
+  };
+}
+
+/**
+ * ⭐⭐⭐ ⟦REG-D · L-REG-36⟧ **RUINS NEED ADDRESSES — A PLACEMENT ASSERTION, NOT AN EXISTENCE ONE.**
+ *
+ * §710.6's class, applied before it can bite again: *every census W1 wrote asked whether the mark
+ * exists; not one asked whether it is on the thing it means.* A ruin is a former tenement, and a
+ * tenement fronts a way — so the question is not "is a ruin drawn" but "does it stand where a
+ * house could have stood".
+ *
+ * ⭐ **ADJACENCY IS EXACT OFF THE PAGE, AND THAT WAS MEASURED BEFORE IT WAS TRUSTED.** The rings
+ * come from one planar subdivision, so two faces are neighbours iff they share an EDGE — the same
+ * two vertices, in reverse order — with no tolerance and no snapping. Checked against the
+ * arrangement's own half-edge answer on four leaves: `highwater` 446 = 446, `village` 0 = 0,
+ * `mountain` 0 = 0, `town` 0 = 0. The page can answer this by itself.
+ *
+ * ⛔⛔ **AND THE PRECONDITION IS STATED RATHER THAN ASSUMED, BECAUSE IT BIT THIS FUNCTION'S OWN
+ * TEST FIXTURE.** Exactness needs a page whose rings really are one subdivision: `projectPage`
+ * filters every ring through ONE keep-set, so a dropped vertex is dropped on BOTH sides of the
+ * edge and the pair still matches. A hand-built page where one long street edge faces four short
+ * frontages is NOT that, and this census correctly returns "unaddressed" for all of them — which
+ * reads as a defect in the ink when it is a defect in the page. Any caller handing this function
+ * a synthetic page owes it a subdivision.
+ *
+ * ⛔⛔ **AND IT SHIPS WITH ITS OWN DENOMINATOR, BECAUSE WITHOUT ONE THE ROW IS UNREADABLE.** "0 of
+ * 3 ruins front a way" is a defect on a leaf whose houses front ways and a fact of the road
+ * topology on a leaf where nothing does. The MASSES are the control: they are the built fabric of
+ * the same subdivision asked the same question by the same code. Measured at base: `highwater`
+ * ruins 95.5 % against masses 98.9 %; `village` 0 % of 1 against 87.9 %; `mountain` 0 % of 3
+ * against 89.3 %. A verdict is only offered where the control itself is healthy.
+ *
+ * @param {any} page a `PARTITION_PAGE_FRAME`
+ * @param {number} [floor] the share of ruins that must be addressed, as a fraction of the CONTROL
+ */
+export function ruinAddressCensus(page, floor = 0.9) {
+  const key = (p) => `${p[0].toFixed(6)},${p[1].toFixed(6)}`;
+  const edgesOf = (ring) => {
+    const out = [];
+    for (let i = 0; i < ring.length; i++) {
+      const a = key(ring[i]); const b = key(ring[(i + 1) % ring.length]);
+      out.push(a < b ? `${a}|${b}` : `${b}|${a}`);
+    }
+    return out;
+  };
+  const wayEdges = new Set();
+  for (const w of (page.ways || [])) if (w.ring && w.ring.length >= 3) for (const e of edgesOf(w.ring)) wayEdges.add(e);
+  const addressed = (ring) => !!ring && ring.length >= 3 && edgesOf(ring).some((e) => wayEdges.has(e));
+  const ruins = (page.loss || []).filter((L) => L.ring && L.ring.length >= 3);
+  const ruinAddr = ruins.filter((L) => addressed(L.ring)).length;
+  const masses = (page.masses || []).filter((m) => m.ring && m.ring.length >= 3);
+  const massAddr = masses.filter((m) => addressed(m.ring)).length;
+  const ruinRate = ruins.length ? ruinAddr / ruins.length : null;
+  const controlRate = masses.length ? massAddr / masses.length : null;
+  // ⚠ NO SUBJECT AND NO CONTROL BOTH RETURN `null`, NEVER `true`. A census that passes when it has
+  //   nothing to measure is the vacuity this programme keeps convicting; the caller must see it.
+  const verdict = (ruins.length === 0 || controlRate === null) ? null
+    : (ruinRate >= controlRate * floor);
+  return {
+    verdict,
+    ruins: ruins.length,
+    ruinAddressed: ruinAddr,
+    ruinRate,
+    masses: masses.length,
+    massAddressed: massAddr,
+    controlRate,
+    floor,
+    unaddressed: ruins.filter((L) => !addressed(L.ring)).map((L) => L.face),
+    reason: ruins.length === 0
+      ? 'no LossRegion face on this page — NO SUBJECT, not a pass'
+      : `${ruinAddr}/${ruins.length} ruin(s) front a way`
+        + ` (${(ruinRate * 100).toFixed(1)} %) against the built fabric's own`
+        + ` ${massAddr}/${masses.length} (${controlRate === null ? 'n/a' : (controlRate * 100).toFixed(1)} %)`
+        + ` at a floor of ${(floor * 100).toFixed(0)} % of the control`,
+  };
+}
 
 /**
  * ⭐⭐ **L-REG-34's CENSUS, BOTH DIRECTIONS.** *Every legend row locatable* (the group it teaches
