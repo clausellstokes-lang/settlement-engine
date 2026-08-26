@@ -226,6 +226,17 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§704 · Sequencing: the determination lane pre-empts the largest visual wave · SEAT: Opus 5.**
+*What was judged:* that a cheap check which might reveal a **customer-visible** defect takes
+precedence over DRESS-FRAME, the largest visual improvement available; and that the check is
+scoped to DETERMINE ONLY, with no repair, so that a cure (which would move live output) is
+chosen deliberately rather than slid in by a lane that found the problem.
+*What Fable re-derives:* whether pre-empting is right, or whether an unproven product defect
+should yield to certain visual progress the owner has been asking for; and whether splitting
+determination from repair is discipline or delay.
+*Receipts:* ODQ §703.3/§703.7 · the lane's brief in its dispatch.
+*Priority:* P2.
+
 **§703 · WALL-CURTAIN ratified; the shipped wall may carry the defect · SEAT: Opus 5.**
 *What was judged:* ratifying the cure; accepting the lawfulness test; and the reading that
 §703.3 is a *possible* live product defect rather than a certain one (traced partway, and

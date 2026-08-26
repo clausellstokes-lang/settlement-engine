@@ -29888,3 +29888,22 @@ wrap digest `e65c7685…` identical at base and tip.**
   whether we are holding a live product defect. Then **DRESS-FRAME** (§702.8) with the
   corpus-render arm folded in. Two worktrees are deliberately left in place at the tip and at
   `f8f6456a0`, since every before/after figure is one instrument executed at both.
+
+## §704 · WALL-LEGACY-CHECK DISPATCHED AHEAD OF DRESS-FRAME — DETERMINE FIRST, CURE DELIBERATELY (2026-08-27 ~13:40 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§704.1 THE SEQUENCING JUDGMENT.** §703.3 may be a **customer-visible** defect and it is
+  cheap to settle, so it pre-empts **DRESS-FRAME** — the largest visual improvement now
+  available and the thing the owner has been pressing for. A possible live defect outranks
+  certain progress, and the check costs a fraction of the wave it delays.
+- **§704.2 SCOPED TO DETERMINE ONLY — NO REPAIR.** The lane answers YES / NO / PARTLY with
+  the tree named, the render chain traced hop by hop, the magnitude, and **whether it is
+  visible at page scale** (a 33-unit chord on a 1000-unit page is not the same problem as an
+  8-vertex excursion into the sea). ⭐ **The split is deliberate: a cure here MOVES LIVE
+  OUTPUT, so it must be chosen, not slid in by the lane that found the problem.** It is also
+  told that an honest UNSETTLED beats a confident guess, because over-claiming alarms the
+  owner about a defect that may not exist and under-claiming leaves a real one live.
+- **§704.3 THE HANDOFF WAS MISDIRECTING AND IS CORRECTED.** Its NEXT line still named
+  WALL-CURTAIN, already sealed and ratified at §703 — a successor would have re-dispatched a
+  finished wave. Refreshed to §703 with both outranking findings at the top. ⚠ A stale
+  handoff is not cosmetic: it is the one document a cold successor obeys.
+
