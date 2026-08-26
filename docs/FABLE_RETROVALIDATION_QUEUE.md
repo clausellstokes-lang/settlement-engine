@@ -226,6 +226,19 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§696 · Round 3 scored; DRESS-1 complete · SEAT: Opus 5.**
+*What was judged:* the PASS at 94.4 %, the ruling that an abstention is a miss but not a
+wrong-class read, and the reading of the tier bias as systematic rather than noise.
+*What Fable re-derives:* **(a)** whether the round-3 method genuinely severed key from
+answers, or whether the chair — who held the blindmap and scored the result — could have
+tilted it; the raw answers and the map are both preserved, so this is checkable rather than
+arguable. **(b)** whether §696.4's decoding is right that four plates are one drawing, since
+it would mean every gestalt score in this programme was taken over a thinner corpus than
+believed. **(c)** whether a 94.4 % on structural fields should have closed DRESS-1 at all,
+given §696.6 concedes the drawing is an underpainting.
+*Receipts:* `$SP/round3/` (plates, blindmap, answers, score.json) · ODQ §696.
+*Priority:* **P1** on (a) — it is the integrity of the pass itself; P2 on (b) and (c).
+
 **§695 · The gestalt gate RULED under the owner's returned judgment · SEAT: Opus 5.**
 ⛔ **THE SINGLE MOST IMPORTANT ROW IN THIS QUEUE.**
 *What was judged:* the owner said *"I leave everything to your best judgment"*, and the chair

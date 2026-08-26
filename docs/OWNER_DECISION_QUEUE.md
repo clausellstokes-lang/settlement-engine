@@ -29366,3 +29366,53 @@ PA.10 permits). Nothing was edited, staged, or moved by any of them.
   it. ⚠ **The three grant readings (§22, §336, §362) stay the owner's** notwithstanding this
   grant: a chair re-reading its own prior reading of the owner's sentences is **circular by
   construction**, and no amount of delegated judgment fixes that.
+
+## §696 · ROUND 3 PASSES AT 94.4 % — AND A NAIVE READER INDEPENDENTLY FOUND THE NEEDLE AND THE SCENARIO DEFECT (2026-08-27 ~03:00 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§696.1 THE RESULT: 17 of 18 = 94.4 % whole-leaf agreement on the graded fields, with
+  ZERO wrong-class reads. VERDICT: PASS.** The bar was ≥ 80 % and the hard clause was zero,
+  both unchanged by §695. **DRESS-1 IS COMPLETE.**
+- **§696.2 THE METHOD UPGRADE, AND IT IS THE POINT.** Rounds 1 and 2 had one lane authoring
+  the ink **and** grading the reading. Round 3 was built so **no single agent saw both the
+  key and the answers**: the 18 plates were copied to opaque names (`plate-01…18`) under a
+  deterministic salted-hash shuffle, the mapping was held outside the reader's reach, the
+  reader was a **fresh context with no project knowledge** and was instructed to abstain
+  rather than guess, and **the chair scored it mechanically** against the unchanged
+  machine-derived key. **Round 2's answers were NOT re-scored** — §695.5's safeguard held in
+  execution, not just on paper.
+- **§696.3 ⭐ THE SINGLE MISS IS AN ABSTENTION, AND IT IS THE NEEDLE.** `metropolis` was the
+  only leaf missed, and the reader **abstained rather than guessed** — so it is a MISS, not a
+  wrong-class read, and the hard clause survives at zero. Their words, written with no
+  knowledge of this programme: *"the dark lines form a strange narrow double-sliver/dagger
+  shape rather than a single clean loop, so it doesn't read confidently as an enclosing wall
+  at a glance… it reads as a rendering oddity."* **That is E1 — the convex needle at min-area
+  rect 711 × 31, aspect 22.79 — described from the page by someone who had never heard of
+  it, and it is under repair in SPINE-3 right now.** The strongest possible evidence that
+  §688.3(iii)'s find is a real defect and its repair is not cosmetic. It also **vindicates
+  the reader's original "30:1" claim a second time** and my strike of it a second time.
+- **§696.4 ⭐⭐ THE READER'S UNPROMPTED SECOND FINDING — I2 REDISCOVERED FROM THE PAGE.** They
+  flagged, without being asked, that **plates 07/09/11/18 "all appear to be the same
+  underlying map… rendered four separate times"** and that 01/02 "look pixel-identical".
+  Decoded: **07/09/11/18 = `town`, `siege`, `plague`, `famine`** and **01/02 = `migration`,
+  `city`** — *scenario variants of one base settlement.* **A naive reader independently
+  rediscovered the scenario-weight defect (review I2) and priced its consequence better than
+  we had: it "meaningfully shrinks the effective diversity of this 18-plate sample."**
+  Two consequences banked: **(i)** DRESS-2's scenario-weight cure now has outside evidence
+  that it is a *legibility* failure, not merely a census one; **(ii) every gestalt score this
+  programme has taken is over a corpus less diverse than its 18 leaves suggest** — a siege
+  that looks identical to its peacetime base is four plates testing one drawing.
+- **§696.5 THE UNGRADED `tier` DATA CONFIRMS §695.3 — AND THE ERROR IS SYSTEMATIC, NOT
+  NOISE.** Collected: **13/18 = 72.2 %.** Every single miss reads **SMALLER than truth**:
+  mountain (village → hamlet) · fjord (town → village) · village (→ hamlet) · hamlet (→
+  thorp) · metropolis (→ town). **A one-directional error is a bias, not confusion**, and it
+  is exactly the bias a *fitted* page produces: an open settlement's sparse fabric fills the
+  sheet at the same size as a dense one, so the eye reads density and calls it size. That is
+  the §695.3 argument arriving as measurement rather than reasoning — and it holds even
+  though the ruling that predicted it was made by a chair with an interest in it being true.
+- **§696.6 WHAT THE PASS DOES NOT BUY.** DRESS-1's ink is *structurally* legible; it is not
+  yet *rich*. The plates carry no cartouche, no legend, no labels, no institutions, no
+  monuments, no field mosaic and no relief — SEATING, DRESS-2 and WORDS own all of those and
+  none has run. **A gate that asks "can a reader tell what kind of place this is" was passed
+  by a drawing that would still lose a beauty contest to the pre-spine folio**, and §591's
+  totality law means the weakest element still grades the map. Recorded so no one reads
+  94.4 % as "the map is finished."
