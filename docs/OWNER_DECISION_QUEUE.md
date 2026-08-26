@@ -29759,3 +29759,76 @@ live under four arms that each move it. Instruments sealed **r6 = `02e63b9f4`** 
   owner's) and the two wrap-moving dials (§701.3/§701.4, owner's)** — three owner questions
   and no dress work. **WALL-CURTAIN proceeds next** as the only visual-base item still the
   chair's. **Nothing here re-opens SEATING or DRESS-2's order**; they follow, as §700 set them.
+
+## §702 · THE PAINT STUDY ANSWERS ALL THREE DOCKET QUESTIONS — AND DISSOLVES TWO OF THEM (2026-08-27 ~10:30 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+R-WATABOU-PAINT delivered `draft-R-WATABOU-PAINT.md` (53 KB), scoped to the **view side** the
+first study never covered. Clean-room discipline held: ideas and mathematics in our own
+words, read log in its §9, firewall attested, **no source text written to any file**. Every
+figure in it was executed.
+
+- **§702.1 ⛔⛔ §701.2 IS ANSWERED, AND THE TRADE I PUT ON THE DOCKET WAS NOT A REAL TRADE.**
+  The reference **fits the drawn settlement's diameter to the page's short side, computed
+  from the settlement radius ALONE — the countryside is excluded from the calculation.** That
+  puts the settlement at **44 % of a 16:9 plate and 78.5 % of a square one**, against our
+  **1.7–6.9 %**. It still *generates* countryside to 3× the frame radius, leaves **~89 % of
+  it off-page**, and paints what survives with **ZERO INK — bare paper, the brightest value
+  on the plate.**
+  ⭐ **Because scale is a function of the settlement radius, the settlement's share is
+  TIER-INVARIANT.** Ours is a **fixed 1000 × 1000 viewBox with no crop and no fit at all**,
+  against a settlement radius ranging 98.9 → 441.8 — a **20× area swing**, which is exactly
+  why §701.2 measured a *range* rather than a number. **This also rules out the "tier-scaled
+  crop" option outright**, since the reference's answer is scale-by-radius, not crop-by-tier.
+  ⭐⭐ **AND THE AUTHOR'S STATED INTENT SETTLES THE PRODUCT WORRY: fields were added a YEAR
+  AFTER the tight framing, "to reduce empty space" — a device for absorbing leftover page.**
+  **The docket framed this as L-REG-33's cultivated-land law against the look. It is not:
+  the land stays generated and true; it simply stops being painted at full strength and
+  mostly falls outside the frame.** → **DOCKET ROW STRUCK.** This is now a chair-executable
+  repair under §585 and the owner's own visuals-first directive, with its shift declared.
+- **§702.2 §701.3 IS ANSWERED AND THE LEVER IS THE WRONG ONE — ANOTHER SIGNATURE REMOVED.**
+  ⛔ **My hypothesis that we lack the reference's angle-zeroing rule is REFUTED: we already
+  implement it EXACTLY** — same coupling, same ±15°, same 0.8 window, same suppression below
+  4× the stop area. So the rotation deficit **cannot originate in the subdivision**, and the
+  dial §701.3 sent to the owner would not have fixed it. The reference's rotation diversity
+  comes from **BLOCK ORIENTATIONS** — cuts follow each block's own longest edge — and it
+  turns intra-block angle chaos **DOWN, never up**. Strong candidate cause instead: **our
+  grid-chaos base is plan-mode-set at 0.12 / 0.34 / 0.58 against the reference's uniform
+  0.5–0.7**, and §698.2(i) measured **metropolis and city — our two most orderly modes.**
+  → **DOCKET ROW STRUCK; a scoped plan-mode test replaces it** (chair act, no signature).
+- **§702.3 §701.4 STANDS, AND GAINS A FREE ALTERNATIVE.** The guard arithmetic is confirmed
+  **at source** (4 rw² vs 3.6 rw²; the guard binds first), so "do not raise" holds. But the
+  reference reaches its apparent mass count by **PAINT ORDER**: stroke a group at double
+  weight, then fill over it — **interior seams vanish, one silhouette survives.** It buys the
+  read of fewer, larger masses **with no byte cost and without touching the plot bijection**
+  §700.4 forbade breaking. → the docket row is **downgraded to informational**.
+- **§702.4 TWO FINDINGS BEYOND THE DOCKET.** **(i) THE 2017 → 2026 CALIBRATION PASSES:**
+  tower ÷ wall = **1.000 in both eras**, wall ÷ road drifts **5.6 %** — the style constants
+  are stable across four rewrites, which **largely discharges the E12 staleness worry** about
+  studying an old source against a modern app. **(ii) ⛔ OUR WALL IS ~⅓ THE REFERENCE'S
+  WEIGHT RELATIVE TO THE ROAD — 0.30 against 0.95** — on what the reference's author calls
+  the **highest-leverage genre cue** in the corpus. A single ratio, and it is one of the
+  loudest things separating our page from theirs.
+- **§702.5 A CORRECTION TO MY OWN BRIEF.** I wrote *"we measured three constants"* where the
+  three are the **reference's**, not ours — there is no code hit for two of those names in
+  our tree at all. The lane caught the ambiguity and turned it into an advantage: we hold the
+  **modern** reference's constants *and* the **2017** source, so it calibrated one against
+  the other, which is how §702.4(i) exists.
+- **§702.6 WHAT THE LANE COULD NOT SETTLE, STATED AS SUCH.** It could not reconcile our
+  framing constants with §701.2's measured 1.7–6.9 %, so it **asserted only the structural
+  claim and no predicted number** — an area census is a lane act and will show the before and
+  after directly. Also open: whether the rotation deficit is plan-mode-scoped (an exact test
+  exists), and whether any plot group *should* fuse.
+- **§702.7 ⚠ TWO OPERATIONAL HAZARDS, PASSED UP AND BANKED.** **(i) The map paint code exists
+  ONLY on the sealed sandbox line** — mainline reports **5,565 changed paths** and lacks the
+  harness drivers, so **any lane acting on this must be pointed at the right tree first** or
+  it will measure a world that is not the one we build. **(ii) The lane-inputs printer emits
+  `extent=NaN` on all eighteen leaves** (it formats an object as a number). It sits inside a
+  preserve seal, so the lane **flagged rather than touched it** — correct.
+- **§702.8 THE ARC: `DRESS-FRAME` IS CHARTERED AND QUEUED BEHIND WALL-CURTAIN.** Four items,
+  all chair-executable, all now backed by a measured reference mechanism rather than taste:
+  **fit the page to the settlement radius on the short side** · **stop painting the
+  countryside at full strength** (its ink goes toward bare paper; the fields become what they
+  were designed to be) · **the wall-to-road weight ratio** · **the paint-order silhouette**.
+  Sequential, not parallel — the gate is a mutex and WALL-CURTAIN holds it.
+  ⭐ **This is the single largest visual change available to us, and every part of it is now
+  a repair toward a known mechanism rather than a judgment call.**

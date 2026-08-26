@@ -226,6 +226,22 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§702 · The paint study; two docket rows STRUCK; DRESS-FRAME chartered · SEAT: Opus 5.**
+*What was judged:* that the reference's framing mechanism **dissolves** the page-budget trade
+rather than deciding it (so a question left the owner's docket by a chair's reading of a
+research dossier); that the rotation signature was the wrong lever and can be struck; and
+that framing is a chair repair under §585 rather than an owner signature.
+*What Fable re-derives:* ⛔ **(a) THE STRIKES.** A chair removed two items from the owner's
+docket on a study's say-so. That is the convenient direction, and §702.1's reasoning — "the
+land stays generated and true, it just stops being painted" — deserves testing against
+L-REG-33's actual text before it is treated as settled. **(b)** whether re-framing every
+plate is genuinely a repair toward a mechanism the owner chose (§656) or a composition change
+large enough to need his eye regardless. **(c)** §702.6's unsettled reconciliation — the lane
+could not derive our 1.7–6.9 % from our framing constants, so the *structural* claim is sound
+while the *magnitude* is not yet closed.
+*Receipts:* ODQ §702 · `draft-R-WATABOU-PAINT.md` (53 KB, read log §9) · the docket diff.
+*Priority:* **P1** on (a) and (b) — striking an owner's row is the act most worth a second seat.
+
 **§701 · DRESS-FABRIC ratified; its own charter refuted · SEAT: Opus 5.**
 *What was judged:* ratifying a wave that refuted the premise it was chartered on; adopting
 its recommendation AGAINST its own density lever; withdrawing my §698.2(i) rotation
