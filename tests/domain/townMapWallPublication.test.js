@@ -26,6 +26,7 @@ import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { makeWalledFixture } from '../fixtures/townMapFixtures.js';
 import { buildSettledPartition } from '../../src/domain/townMap/fabric/partitionConstruct.js';
 import { faceRing, liveFaces } from '../../src/domain/townMap/fabric/partitionArrangement.js';
+import { pointInPolygon } from '../../src/domain/townMap/fabric/fabricGeometry.js';
 import { deriveRampartWorks, WEAR_GRADES } from '../../src/domain/townMap/fabric/rampartWorks.js';
 import { RUN_TYPES, RUN_POLICY, TOWER_TYPES } from '../../src/domain/townMap/fabric/wallRuns.js';
 import { wallBand, WALL_MARGIN, WALL_MARGIN_DEFAULT } from '../../src/domain/townMap/fabric/walls.js';
@@ -505,11 +506,52 @@ describe('WALL-CURTAIN · §699.6 · THE RUN-TYPE RECOVERY, OVER A CORPUS AND NO
   /** ⛔ A CEILING, so a widening reds and a cure passes. Measured 15 at base AND at this tip. */
   const LOST_RUN_CEILING = 15;
 
+  /**
+   * ⭐⭐⭐ ⟦REG-E1 · ODQ §717⟧ **THE ENCLOSURE FIDELITY BAR, AND WHAT IT IS AND IS NOT.**
+   *
+   * ⛔⛔ **THIS IS A CEILING ON A KNOWN, OWNER-PARKED DEFECT — NOT AN APPROVAL OF IT.** REG-E1
+   * measured the four-reader "needle" defect to its producing call: `raiseWrap` derives a
+   * circuit's outline as `convexHull` of the vertices of the pieces standing at the raise
+   * (`partitionConstruct.js`, *"THE PIECE ENCLOSURE — the hull of the built pieces' own
+   * vertices"*), while DESIGN_SPINE §3c charters *"the wrap is computed **along existing piece
+   * boundaries** enclosing the built faces"*. A convex hull spans the GAPS between clumps of
+   * pieces, so where the built set is clustered the hull is the clumps' convex span: a sliver
+   * where they are near-collinear (metropolis E1 reads 711×31 on the harness corpus) and a
+   * mostly-empty enclosure where they are scattered. **Which operator draws our wraps is
+   * DESIGN_SPINE §8's OPEN PANEL QUESTION P2** (*"the wrap algorithm — along-piece-edges hull vs
+   * the §575 tangential band"*), so it is the owner's call and not a lane's. This arm exists so
+   * the class cannot GROW while the panel decides.
+   *
+   * ⚠ **THE PREDICATE IS RECORD-VERSUS-DRAWING, NOT TASTE.** `frozenRadius` is the only extent the
+   * ledger states; `inShare` is the drawn ring's own inscribed radius about the settlement centre
+   * over it. Nothing here asserts a SHAPE, so no owner signature is touched.
+   *
+   * ⛔⛔ **AND HERE IS WHAT THIS ARM CANNOT DO, SAID OUT LOUD SO NOBODY READS MORE INTO A RED.**
+   * A low `inShare` is a consequence of narrowness and says NOTHING about its cause: **an honestly
+   * elongated settlement, faithfully enclosed, reads exactly the same as an outlier-stretched
+   * hull.** REG-E1's skeptic arm refuted the lane's first reading on precisely this point, and the
+   * measurement then split the corpus — `metropolis` E1 is an artifact (a ~110-unit core stretched
+   * ~6.6× by ~30 outlying pieces) while `city` E0 is HONEST (its central 85 % occupies 96 % of the
+   * hull's length). The measure that separates them is `harness/laneE1/needleDiscriminator.mjs`'s
+   * `discriminate`, and it needs the raise-epoch piece set, which the partition does not publish.
+   * **So this is a REGRESSION CEILING on under-realisation, not a defect detector.**
+   *
+   * ⚠ DRESS-1b deliberately shipped NO test here — *"Pinning the current geometry as correct would
+   * be worse than not pinning it."* That stands: nothing below pins a geometry or calls it correct.
+   * These are ceilings that only ever shrink, and a cure lowers them in its own act.
+   */
+  const ENCLOSURE_FLOOR = 0.25;
+  /** ⛔ CEILINGS, measured at THIS base. A cure lowers them; a regression reds. 7 wraps total. */
+  const UNENCLOSING_CEILING = 6;
+  const CENTRE_OUTSIDE_CEILING = 5;
+
   /** @type {any} */ let R = null;
   beforeAll(() => {
     const legacyTotals = {}; const sited = {}; const blind = {};
     const lostTypes = new Set(); let lostRuns = 0; let wraps = 0; let circuits = 0;
     let clippedEnds = 0; let worstClipGap = 0; let wetCircuits = 0; let closedOverWater = 0;
+    /** ⟦REG-E1⟧ per wrap: does the drawn ring realise the extent its own record froze? */
+    const enclosure = [];
     for (const [seed, tier, population] of SPECS) {
       const s = makeWalledFixture({ _seed: seed, tier, population });
       const f = buildFabric(s, buildTownMapModel(s, null), { rampart: true, partition: true });
@@ -523,6 +565,28 @@ describe('WALL-CURTAIN · §699.6 · THE RUN-TYPE RECOVERY, OVER A CORPUS AND NO
       }
       if (!f.spinePartition) continue;
       wraps += f.spinePartition.wraps.length;
+      /**
+       * ⭐⭐⭐ ⟦REG-E1 · ODQ §717⟧ **DOES THE CIRCUIT ENCLOSE WHAT ITS OWN RECORD SAYS IT
+       * ENCLOSES?** Measured here because the loop already holds the fabric, so the arm costs no
+       * build. `frozenRadius` is the ONLY statement the ledger makes about a circuit's extent —
+       * `growthLedger.js`'s own sentence is *"its extent is frozen at the built radius of that
+       * year"* — and `inR` is the largest circle about the settlement's own centre that the DRAWN
+       * ring contains. A faithful circuit reads `inR/R ≈ 1`.
+       */
+      for (const w of f.spinePartition.wraps) {
+        const ring = w.outer.map((p) => [p[0], p[1]]);
+        const c = [f.meta.centre.x, f.meta.centre.y];
+        const centreInside = pointInPolygon(c[0], c[1], ring);
+        enclosure.push({
+          seed,
+          wrap: w.index,
+          centreInside,
+          // ⛔ ZERO, not `distToRingBoundary`, where the centre is OUTSIDE: the distance to a ring
+          //    that does not contain you is not an inscribed radius, and reporting it as one would
+          //    make the worst case read as the best.
+          inShare: centreInside ? distToRingBoundary(c, ring) / w.frozenRadius : 0,
+        });
+      }
       const o = pubOptsFor(f);
       const p = publishWallWorks(f.spinePartition, o);
       const b = publishWallWorks(f.spinePartition, { ...o, site: null });
@@ -566,6 +630,9 @@ describe('WALL-CURTAIN · §699.6 · THE RUN-TYPE RECOVERY, OVER A CORPUS AND NO
       legacyTotals, sited, blind, lostTypes: [...lostTypes].sort(), lostRuns, wraps, circuits,
       legacySum: sum(legacyTotals), sitedSum: sum(sited), blindSum: sum(blind),
       clippedEnds, worstClipGap, wetCircuits, closedOverWater,
+      enclosure,
+      centreOutside: enclosure.filter((e) => !e.centreInside).length,
+      unenclosing: enclosure.filter((e) => e.inShare < ENCLOSURE_FLOOR).length,
     };
   }, 900000);
 
@@ -655,5 +722,27 @@ describe('WALL-CURTAIN · §699.6 · THE RUN-TYPE RECOVERY, OVER A CORPUS AND NO
     expect(R.lostRuns, 'the corpus-level carriage census found no loss at all — if that is real it'
       + ' is a WIN and the roster must be emptied in the same act; if it is not, the census is dead')
       .toBeGreaterThan(0);
+  });
+
+  it('⛔⛔ ⟦REG-E1⟧ THE ENCLOSURE-FIDELITY CEILING — the circuit against the extent its record froze', () => {
+    // ⛔ NON-VACUITY FIRST. A ceiling computed over an empty set is the failure this whole file
+    //    was written to stop being, so the denominator is asserted before anything is read off it.
+    expect(R.enclosure.length, 'no fixture raised a wrap at all — this arm is measuring nothing')
+      .toBeGreaterThanOrEqual(7);
+    expect(R.unenclosing, 'the enclosure defect has vanished from the fixture corpus. If a cure'
+      + ' landed that is a WIN and these ceilings must be lowered in the SAME act; if no cure'
+      + ' landed, this arm has gone blind and must not be believed').toBeGreaterThan(0);
+
+    const worst = R.enclosure.reduce((a, b) => (b.inShare < a.inShare ? b : a));
+    expect(R.unenclosing, `${R.unenclosing} of ${R.enclosure.length} wrap(s) enclose under`
+      + ` ${ENCLOSURE_FLOOR} of the radius their own circuit event froze (ceiling`
+      + ` ${UNENCLOSING_CEILING} measured at the REG-E1 base). Worst: ${worst.seed} E${worst.wrap}`
+      + ` at ${worst.inShare.toFixed(4)}. ⛔ A RISE HERE IS A REGRESSION IN HOW FAITHFULLY A DRAWN`
+      + ' CIRCUIT REALISES ITS OWN RECORD — see DESIGN_SPINE §3c and §8 P2.')
+      .toBeLessThanOrEqual(UNENCLOSING_CEILING);
+    expect(R.centreOutside, `${R.centreOutside} wrap(s) do not contain the settlement's own centre`
+      + ` at all (ceiling ${CENTRE_OUTSIDE_CEILING}). A circuit that excludes the town centre is`
+      + ' not a circuit of that town, whatever its record says.')
+      .toBeLessThanOrEqual(CENTRE_OUTSIDE_CEILING);
   });
 });
