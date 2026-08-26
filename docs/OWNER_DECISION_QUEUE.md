@@ -31103,3 +31103,137 @@ fourth sighting, taken at collection).
   and re-sourced every citation. ⭐ Recorded because it was disclosed unprompted, and because it
   identifies a real gap: **my briefs bound the lane and say nothing about the lane's own subagents.**
   Adding that clause.
+
+## §720 · THE REFERENCE STUDY — DWARF FORTRESS IS THE CLEAREST COUNTEREXAMPLE TO INCREMENTAL LAYOUT, AND THE REAL AXIS IS MUTATED ACCUMULATOR VERSUS REPLAYABLE DERIVATION (2026-08-26 ~22:10 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§720.1 THE COMMISSION.** The owner asked, in two messages, that we study **how Dwarf Fortress
+  generates a world in sequence** and **how the SimCity lineage grows cities that look organic**.
+  A six-lens study with adversarial verification on the load-bearing claims, sourced to Tarn Adams'
+  own 2019 step-by-step narration, DF Talk, the DFHack structure files, the GPL'd Micropolis source,
+  Maxis' 2013 "State of SimCity" post, Parish & Müller (SIGGRAPH 2001), Conzen's Alnwick study, and
+  watabou's own source comments. **Every claim is labelled DEVELOPER / SOURCE_CODE /
+  REVERSE_ENGINEERED / COMMUNITY_FOLKLORE, and the study says where the record is silent.**
+- **§720.2 ⛔⛔ DF DOES NOT DO WHAT THE PROPOSAL ASSUMED, AND IT IS THE CLEAREST COUNTEREXAMPLE IN
+  THE FIELD.** **During the entire history simulation a DF site has no streets, no plots, no houses
+  and no walls.** A site is an abstract record — owning civ, bounding rectangle, population as
+  (race, count) buckets, a list of *named* abstract buildings, land-use counts, and a dated change
+  journal — with a **null `realization` pointer.** Physical layout is built later, in **one pass**,
+  by a step Adams himself calls *"realization"*, and it does **not replay history year by year**: it
+  generates a layout at the site's *current* level and then **replays a compact dated change log
+  over the fresh result.** DEVELOPER-grade, 12/23/2013, shipped in 0.40.01. **A DF hamlet never
+  becomes a town** — Adams named removing "static overall types" as *future* work in 2014. What
+  changes over a thousand years is a population number, an abstract building list and a damage
+  journal.
+- **§720.3 ⭐⭐ THE SENTENCE THAT REFRAMES THE WHOLE QUESTION.** *"The real axis is not 'all at once'
+  versus 'one piece at a time'. It is **mutated accumulator versus replayable derivation**."* DF
+  defers realization for **scale** — hundreds of sites, one visited — a problem we do not have. But
+  the *shape* it arrived at is exactly what an immutable-history product wants: **layout is a pure
+  function of (site seed, accumulated state, dated change journal)**, not an accumulator mutated
+  across a thousand years. ⭐ **A layout carried forward as mutable state is a second source of truth
+  sitting beside the record**, and the moment the renderer changes, every past world either drifts
+  from its record or becomes unregenerable. **A derived layout cannot drift, because there is nothing
+  to drift.** ⇒ **§718.1's finding that our fold is a pure replay is not a limitation to be overcome.
+  It is the property.**
+- **§720.4 ⭐ WHERE THE OWNER'S INSTINCT IS EXACTLY RIGHT, AND DF AGREES.** DF's **world-construction
+  layer** — roads, tunnels, bridges **and walls** — *is* incremental and *is* recorded: each carries
+  an **explicit stored per-embark-tile route** and a dated `CREATED_WORLD_CONSTRUCTION` event.
+  **That is the class the owner's wall proposal belongs to**, and it is not site layout. ⇒ **The
+  proposal was right about the wall and wrong about the interior**, and the two halves have different
+  homes. ⛔⛔ **AND THIS VALIDATES REG-E1's DEFERRED ITEM.** §719.9 recorded that the needle survived
+  because **`raiseWrap` publishes its ring but nothing about the point set it hulled**, so no
+  consumer can ask the discriminating question. **DF stores the route. Publishing `hullSources` on
+  the wrap is the same fix**, E1 priced it as digest-neutral, and it is owner-gated only because it
+  is a schema shape. ⚠ **DF gives no support either way on the SECOND, LARGER ring** — its wall rule
+  is undocumented at every grade. **Cite history for successive circuits, never DF.**
+- **§720.5 DF's TERRAIN PIPELINE, AND THE TWO PROPERTIES WORTH STEALING.** Six coarse fields
+  (elevation, rainfall, temperature, drainage, volcanism, savagery) seeded at mesh intersections and
+  filled fractally, elevation by midpoint displacement; altitude fix-up; vegetation and biome
+  counts; smoothing; volcanoes; **erosion and rivers, where test rivers carve channels into the
+  elevation field**; smoothing again; **then rainfall recomputed with rain-shadow and orographic
+  effects, then temperature, then vegetation, all from the now-final elevation**; salinity; region
+  naming; geology and caverns; final verification; wildlife; **then civilisations placed; then the
+  years begin.** ⭐ **(i) IT IS NOT ONE-WAY** — rivers rewrite the field that produced them and the
+  dependent fields are re-derived afterwards. **The early fractal rainfall is a draft, not an
+  answer.** ⭐ **(ii) IT NEVER MATERIALISES FINE RESOLUTION** — one world tile is 16×16 embark tiles
+  of 48×48 local tiles, and neither mid-level detail nor any building geometry is computed during
+  worldgen. **That is *why* history never has to rewrite terrain: a town's effect on the ground is
+  composited at read time, not written back.**
+- **§720.6 THE REJECTION BOUNDARY IS HARD AND EARLY, AND OURS MUST BE HARDER.** All ~26 of DF's
+  rejection strings are checks on the **map or on initial civilisation placement**; none derives from
+  simulated history. Rejection is a **full discard-and-reroll with unbounded retries** and no partial
+  retry or parameter relaxation. **Once the first simulated year ticks the world is kept no matter
+  what** — civilisations wiped out, the playable race extinct, every megabeast dead: DF **truncates**
+  and hands you the world. **DF routinely ships bad-but-valid worlds.** ⇒ For us the consequence is
+  structural rather than stylistic: **a rejection after year one would be a re-roll of a past epoch,
+  which THE PROMISE forbids outright.** So **every condition that could make a settlement unshippable
+  must be evaluated before the first recorded year, and everything after must be survivable and
+  narratable.** ⭐ **That forces a decision we should make deliberately rather than discover: which
+  degenerate outcomes are shippable product** — a settlement that dies, a wall never finished, a
+  market that never appears — **and which are guarded upstream at terrain and founding.** This
+  ratifies §718.6 (no rejection loops) from an independent direction.
+- **§720.7 SIMCITY — THE ORGANIC LOOK IS THREE THINGS, AND ALMOST NONE OF IT IS GEOMETRY.**
+  Across the whole lineage the loop is identical in shape: **the player builds the network and paints
+  intent, and a per-parcel rule repeatedly asks "should something develop here, and of what kind?"
+  It never asks "lay out this block."** The look comes from **(a) the irregular network**,
+  **(b) incremental stochastic per-parcel decisions that leave blocks unevenly and NON-SIMULTANEOUSLY
+  filled**, and **(c) a mixed population of buildings at different ages, stages and wealth levels.**
+  ⛔ **It comes almost not at all from procedural building geometry — every game in the family stamps
+  pre-authored axis-aligned rectangles, and every one of them visibly breaks where the network stops
+  being rectilinear.** Micropolis (the only SOURCE_CODE-grade member) grows per tile on
+  `zscore = globalDemandValve + localEvaluation`, gated by a 1-in-8 sampler and a ~10 % threshold, so
+  development is slow, stochastic and scattered; **land value is itself an emergent blurred distance
+  field from the population centre of mass, so no gradient is authored anywhere.**
+- **§720.8 ⭐⭐ THE CHEAPEST HIGH-PAYOFF ITEM IN THE STUDY.** SimCity 4 draws a lot's **growth stage
+  from a population-dependent probability DISTRIBUTION rather than crossing a THRESHOLD, so several
+  stages coexist at any population** — *"the single biggest reason an SC4 city reads as aged rather
+  than stamped."* **A table and a draw.** ⭐ And it is **precisely the mechanism DF lacks**, which is
+  why DF sites read as static. ⚠ Our entropy must be **sourced from recorded facts, never a fresh RNG
+  at render time** — *"a building that exists because a coin came up heads at draw time cannot be
+  explained by the chronicle."*
+- **§720.9 THE CONVERGENCE — FOUR INDEPENDENT LINES, ONE PUBLISHED DISSENT.** Parish & Müller
+  (SIGGRAPH 2001) establish the canonical pipeline: L-system grows highways and streets, areas
+  between roads become blocks, blocks recursively divide into lots, one building per surviving
+  allotment, **allotments too small or lacking street access DISCARDED before the building stage** —
+  with irregularity deliberately loaded into the **network** layer and **the finest layer deliberately
+  kept clean** (concave allotments forbidden; lots assumed convex and roughly rectangular). ⭐⭐ **The
+  sharpest single piece of evidence in the whole study is watabou's own source comment: *"Trying to
+  keep buildings rectangular even in chaotic wards"*, attached to the code that ZEROES the angular
+  jitter on the last splits.** The chaos dial bends the alley cuts; **it never bends the final
+  building rectangle.** Cities: Skylines makes the road literally generate the parcel grid.
+  ⭐ **And real morphology agrees independently**: burgage plots are long narrow strips running back
+  from a street or market frontage, **progressively subdivided as population pressure grew**, in
+  markedly linear plans (Conzen, Alnwick, 1960). ⚠ **The dissent, stated rather than buried:**
+  Lechner et al. (2003/2006) invert the order entirely — land-developer agents parcel first and
+  connect by road afterwards. And **nobody has published a measured ranking of variation mechanisms
+  by visual payoff.**
+- **§720.10 ⛔ WHAT IS NOT TRANSFERABLE, AND THE LINE IS THE WHOLE DIFFERENCE.** **DF's site layout is
+  a plausibility surface nobody can check against the record — and DF does not even check it against
+  itself**: off-screen conflict resolves against abstract quantities (`abstract_building` exposes a
+  defence percentage) while **the drawn wall is never consulted.** *"DF's 'generate a plausible
+  current-state layout and paint damage over it' is the right ARCHITECTURE and the wrong CONTRACT."*
+  **Take *derived*; do not take *lazy*** — DF's deferral is justified by scale we do not have.
+  **DF's determinism is not a model**: same terrain / different history is a live undiagnosed
+  condition across eleven years and three major version lines, and DF survives it only because the
+  save is authoritative. **SimCity's randomness is unattributable by construction.** **C:S's zoning
+  cells are a warning, not a model** — a rigid cell grid on road segments fails at exactly the
+  geometry a medieval settlement has most of: curves, acute junctions, sloped ground.
+  ⚠ **SimCity 2013 is the cautionary case on simulation granularity**: Maxis made agents the
+  substrate, could not scale them, and in October 2013 publicly **reversed a seven-month-old
+  commitment** on city sizes, naming *the simulation* rather than rendering as the bottleneck.
+  **If our history loop is agent-shaped, that ceiling is real and someone has already paid for it.**
+- **§720.11 ⛔ THE ONE PLACE WE MUST DESIGN RATHER THAN BORROW, NAMED BY THE STUDY ITSELF.**
+  *"The sub-question closest to our actual problem — how SimCity 4 partitions an irregular painted
+  region into rectangular lots, how it breaks ties, what it does with leftover land — is documented
+  nowhere.  Only player-facing behaviour is described anywhere reachable."* ⇒ **Fitting rectangles
+  into irregular medieval blocks is ours to invent**, and the nearest published help is Parish &
+  Müller's *discard* rule (allotments too small or without street access are thrown away before the
+  building stage) plus watabou's stop-rule band.
+- **§720.12 WHAT I AM CHARTERING FROM THIS, AND WHAT I AM NOT.** ⭐ **CAR-AGE** — §720.8's stage
+  distribution, sourced from recorded facts: **the smallest item in the study and the best payoff per
+  unit effort**, and it pairs with CAR-FOUND's refusal record (§718.2), because *pressure* and *age*
+  are the two axes that make a fabric read as lived-in. Queued behind the running lanes. **NOT
+  chartered:** anything that would make our history agent-shaped (§720.10's cautionary case), any
+  render-time RNG (§720.8), and the second-circuit rule, **which must be sourced to history and never
+  to DF** (§720.4). ⚠ **And §720.6 hands the owner a question I am not answering for them: which
+  degenerate outcomes are shippable product.** It has to be decided upstream of year one or it cannot
+  be decided at all.

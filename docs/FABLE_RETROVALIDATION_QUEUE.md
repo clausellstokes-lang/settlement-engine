@@ -226,6 +226,33 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§720 · The DF / SimCity reference study ratified; CAR-AGE chartered · SEAT: Opus 5.**
+*What was judged:* the reading of an external-systems study — that DF keeps sites abstract
+through history and realizes layout in one pass (so it is a COUNTEREXAMPLE to incremental
+layout, not a model for it); that the real axis is "mutated accumulator vs replayable
+derivation" and our fold's pure-replay property is therefore a FEATURE; that the owner's
+wall proposal belongs to DF's world-construction class and their interior proposal does not;
+and the charter of CAR-AGE from SimCity 4's stage distribution.
+*What Fable re-derives:* ⛔ **(a) THE COUNTEREXAMPLE READING, because the chair PREDICTED it
+before the research ran and then graded the research.** The chair told the owner in advance
+"my working hypothesis is that DF does not do what your proposal describes," and the study
+came back agreeing. **Check for confirmation shaping** — read the DEVELOPER-grade citations
+(Adams 12/23/2013 on realization tiering; the 2019 Harris Q&A ordering) and decide
+independently whether they support the strong claim. **(b)** the study's own honesty limits,
+which the chair passed on but did not test: the per-year order inside DF's history loop is
+documented NOWHERE, the rejection-boundary conclusion is explicitly labelled *synthesis* from
+an argument-from-absence, and the SC4/SC3000 mechanism claims are wiki-and-strategy-guide
+grade with no Maxis source. **How much of §720 rests on COMMUNITY_FOLKLORE wearing a
+citation?** **(c)** §720.8's claim that a stage DISTRIBUTION is "the best payoff per unit
+effort" — that is a taste-and-priority call the chair made from one uncited sentence.
+**(d)** whether §720.4's use of DF's world-construction layer to validate REG-E1's deferred
+`hullSources` item is a real convergence or a chair finding two of its own threads and
+tying them.
+*Receipts:* ODQ §720 · workflow `wf_8baf829d-671` (25 agents, adversarial verification on the
+load-bearing claims) · ODQ §718 and §719, which it bears on.
+*Priority:* **P1** on (a) and (b) — no architecture was foreclosed, but a research reading is
+exactly the class §236.2 names. **P2** on (c) and (d).
+
 **§719 · REG-E1 ratified; the chair's §717.10 re-classification REFUTED by measurement · SEAT: Opus 5.**
 *What was judged:* the ratification of a lane's refutation of the chair — the needle SPLITS
 (`metropolis` E1 artifact, `city` E0 **honest**, and `city` E0 is the mark on the judged
