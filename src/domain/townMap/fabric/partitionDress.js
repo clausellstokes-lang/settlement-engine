@@ -77,6 +77,18 @@ export const DRESS_GROUPS = Object.freeze([
    *  all 18 leaves, which is precisely the one-directional failure the census exists to catch —
    *  and it caught it in its own author's roster. */
   'dress-accessible',
+  /**
+   * ⭐⭐⭐ ⟦CAR-SEATING W3⟧ THE INSTITUTION REGISTER MARK — the FIRST ink this page carries for the
+   * seated institutions, and deliberately a MARK rather than a silhouette. A silhouette is massing
+   * work: it owes shape variants, a monumental budget and the massing bijection pin, and none of
+   * those belong to a seating car. A mark owes one thing — that something IS here and the register
+   * says what — which is exactly what the seating pass now knows and the page previously did not.
+   * ⛔ ITS GLYPH IS LICENSED, NOT INVENTED. `shapeCode.js`'s `mark` archetype already defines it:
+   * *"A SINGLE SMALL FIGURE — the corpus's licensed plan glyph"*, sourced `hf303-legend-masterplate`.
+   * The `plate` column is not decoration (a row with no plate is the `hf61-chrome-plate` failure
+   * this file names), so the legend row below cites that plate and no other.
+   */
+  'dress-register',
 ]);
 
 const DEG = Math.PI / 180;
@@ -162,7 +174,7 @@ function dressPageInner(page, opts) {
     masses: 0, planes: 0, hips: 0, chimneys: 0, unitLines: 0,
     bandFaces: 0, coursing: 0, towers: 0, gatehouses: 0, ditchHachure: 0,
     waterFaces: 0, shoreStrokes: 0, decks: 0, fords: 0, steppingStones: 0, quays: 0, vquay: 0,
-    relictDressed: 0, relictSuppressed: 0,
+    relictDressed: 0, relictSuppressed: 0, registerMarks: 0,
   };
   const g = (id, body) => {
     if (!body) return;
@@ -541,6 +553,30 @@ function dressPageInner(page, opts) {
     g('dress-vquay', vq.length
       ? `<path d="${vq.join('')}" fill="${T.ink}" stroke="none"/>` : '');
     prims.n += quays.length + vq.length;
+  }
+
+  // ── ⭐⭐⭐ ⟦CAR-SEATING W3⟧ THE INSTITUTION REGISTER, MARKED ─────────────────────────────────
+  // The seating arrives by `opts.seating` rather than off the page, and that is the same shape
+  // `walls` already uses here: the seating pass READS the page, so the page cannot carry it
+  // without a cycle. This is the LAST mark drawn, on the `marks` row of `DRESS_LAYERS`.
+  //
+  // ⚠ AN OPEN DIAMOND, NOT A FILLED SQUARE, AND THE REASON IS LEGIBILITY RATHER THAN TASTE: the
+  // V-QUAY bollards immediately above are small FILLED axis-aligned squares, so a filled square
+  // here would be a second mark wearing the first one's face. A rotated open figure reads as a
+  // different thing at a glance, which is the whole job of a register mark.
+  {
+    const marks = [];
+    const seats = (opts.seating && Array.isArray(opts.seating.seats)) ? opts.seating.seats : [];
+    for (const st of seats) {
+      if (!Number.isFinite(st.x) || !Number.isFinite(st.y)) continue;
+      const s = rw * 0.30;
+      marks.push(polyPath([[st.x, st.y - s], [st.x + s, st.y], [st.x, st.y + s], [st.x - s, st.y]]));
+      census.registerMarks++;
+    }
+    g('dress-register', marks.length
+      ? `<path d="${marks.join('')}" fill="none" stroke="${T.ink}"`
+        + ` stroke-width="${INK.hair}"/>` : '');
+    prims.n += marks.length;
   }
 
   const svg = out.join('');
@@ -1375,6 +1411,7 @@ export const DRESS_LEGEND = Object.freeze([
   { group: 'dress-quays', mark: 'a worked edge on the water', teaches: 'a quay face', plate: 'hf122 quay basin' },
   { group: 'dress-vquay', mark: 'bollards on the quay', teaches: 'the V-QUAY furniture band', plate: 'hf122 / hf133' },
   { group: 'dress-accessible', mark: 'ruled hatch by direction and pitch', teaches: 'category carried by PATTERN, not hue', plate: '§9.7 accessible' },
+  { group: 'dress-register', mark: 'a single small open figure at the seat', teaches: 'an institution IS seated here, keyed to the register', plate: 'hf303-legend-masterplate' },
 ]);
 
 /**

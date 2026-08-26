@@ -19,6 +19,7 @@ import { projectPage } from '../../src/domain/townMap/fabric/partitionView.js';
 import { partitionInputs } from '../laneSPINE1/partitionPerf.mjs';
 import { publishWallWorks } from '../../src/domain/townMap/fabric/wallPublication.js';
 import { dressPage, accessibleHatch } from '../../src/domain/townMap/fabric/partitionDress.js';
+import { seatPartition } from '../../src/domain/townMap/fabric/partitionSeating.js';
 import { wallForm } from '../../src/domain/townMap/fabric/walls.js';
 import { pubOpts } from '../laneSPINE3/pubOpts.mjs';
 import { faceRing } from '../../src/domain/townMap/fabric/partitionArrangement.js';
@@ -43,10 +44,18 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
   const walls = publishWallWorks(P, {
     ...pubOpts(settlement, fabric, input),
   });
+  // ⭐⭐ ⟦CAR-SEATING W3⟧ the seated institutions, computed here and handed to the dress the same
+  //   way `walls` is. It cannot ride the page: the seating pass READS the page (`bound`, `gates`,
+  //   `voids`, `water`), so a page key would be a cycle — see `buildFabric.js`'s sibling publication.
+  const seating = seatPartition(P, page, settlement, {
+    prosperity: (settlement.economicState || {}).prosperity || null,
+    tier: fabric.meta.tier,
+  });
   const dress = dressPage(page, {
     lens,
     roadWidth: input.roadWidth,
     walls,
+    seating,
     tier: fabric.meta.tier,
     ringOfFace: (fid) => (P.arrangement.faces[fid] && P.arrangement.faces[fid].alive
       ? faceRing(P.arrangement, fid) : null),
@@ -65,7 +74,7 @@ export function dressLeaf(key, lens = 'parchment', over = {}) {
     + ` width="1000" height="${Math.max(1, Math.round(1000 * F.h / F.w))}">`
     + dress.svg + acc.svg + '</svg>';
   return {
-    key, tier: fabric.meta.tier, lens, svg, dress, page, walls, acc,
+    key, tier: fabric.meta.tier, lens, svg, dress, page, walls, acc, seating,
     /** ⭐ THE FABRIC THE LEAF WAS BUILT FROM, published so a caller that also needs the FOLIO
      *  plate of the same leaf can render both from ONE build. The corpus-render gate arm
      *  (DRESS-FRAME, ODQ §703.4) is that caller, and without this it paid for the fabric twice. */

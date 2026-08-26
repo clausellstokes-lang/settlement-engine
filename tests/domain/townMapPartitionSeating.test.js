@@ -31,7 +31,18 @@ import {
   PROSPERITY_REACH_DEFAULT, PARTITION_SEATING_SCHEMA_VERSION,
 } from '../../src/domain/townMap/fabric/partitionSeating.js';
 import { GENERATION_NODES, NODE_EDGES } from '../../src/domain/townMap/fabric/stageManifest.js';
+import {
+  DRESS_GROUPS, DRESS_LEGEND, dressPage, legendCensus,
+} from '../../src/domain/townMap/fabric/partitionDress.js';
 import { atlasRow } from '../../src/data/institutionAtlas.js';
+
+/** The smallest page `dressPage` will accept — every roster empty, so the ONLY ink that can
+ *  appear is the paper and whatever the arm under test adds. That emptiness is the control. */
+const flatPage = () => ({
+  frame: { x: 0, y: 0, w: 100, h: 100 }, contentFrame: { x: 0, y: 0, w: 100, h: 100 },
+  fields: [], water: [], ways: [], voids: [], masses: [], crossings: [], quays: [],
+  gates: [], band: [], loss: [], budget: { shapes: 0 }, bound: { cx: 50, cy: 50, radius: 50 },
+});
 
 /**
  * A hand-built candidate set: `n` faces on a line running out from the centre, so `toCentre`
@@ -234,5 +245,47 @@ describe('CAR-SEATING · the institutions take their places on the partition', (
     expect(Object.keys(PHYSICAL_FAMILIES).sort()).toEqual(['CIRCUIT', 'WATERFRONT']);
     // a VOID-seeking family is a preference, and must never have leaked into the physical roster
     for (const f of VOID_SEEKING_FAMILIES) expect(PHYSICAL_FAMILIES[f]).toBeUndefined();
+  });
+
+  // ── W3 · THE REGISTER MARK ──────────────────────────────────────────────────
+  it('16 · ⭐ THE REGISTER MARK IS DECLARED IN BOTH ROSTERS AND ITS PLATE IS A REAL CITATION', () => {
+    expect(DRESS_GROUPS).toContain('dress-register');
+    const row = DRESS_LEGEND.find((x) => x.group === 'dress-register');
+    expect(row).toBeTruthy();
+    // ⛔ the `plate` column is not decoration — a row with no plate is a mark this estate invented,
+    //   which is the `hf61-chrome-plate` failure `partitionDress` names. This glyph is licensed by
+    //   `shapeCode.js`'s own `mark` archetype: "A SINGLE SMALL FIGURE", sourced hf303.
+    expect(row.plate).toMatch(/hf303/);
+    expect(row.teaches.length).toBeGreaterThan(10);
+  });
+
+  it('17 · ⭐⭐ EVERY SEAT IS MARKED AND NOTHING ELSE IS — with the dormancy control beside it', () => {
+    const page = flatPage();
+    const seating = { seats: [{ name: 'A', x: 20, y: 20 }, { name: 'B', x: 60, y: 40 }, { name: 'C', x: 80, y: 70 }] };
+    const withSeats = dressPage(page, { roadWidth: 5, seating });
+    expect(withSeats.census.registerMarks).toBe(3);          // one mark per seat, no more
+    expect(withSeats.groups).toContain('dress-register');
+    // ⛔ THE CONTROL: no seating ⇒ the group is not emitted AT ALL, so the mark cannot be the
+    //   thing that was always there. A group that appears unconditionally proves nothing.
+    const without = dressPage(page, { roadWidth: 5 });
+    expect(without.census.registerMarks).toBe(0);
+    expect(without.groups).not.toContain('dress-register');
+    expect(without.svg).not.toMatch(/dress-register/);
+  });
+
+  it('18 · ⭐ THE LEGEND CENSUS IS A BIJECTION, BOTH DIRECTIONS, WITH THE NEW MARK IN IT', () => {
+    const seating = { seats: [{ name: 'A', x: 20, y: 20 }] };
+    const lc = legendCensus(dressPage(flatPage(), { roadWidth: 5, seating }));
+    expect(lc.untaught).toEqual([]);        // nothing drawn that the legend does not teach
+    expect(lc.unlocatable).toEqual([]);     // nothing taught that the dress cannot draw
+    expect(lc.plateless).toEqual([]);       // and no row without a plate
+    expect(lc.ok).toBe(true);
+  });
+
+  it('19 · a seat with no finite position is SKIPPED rather than emitting a NaN path', () => {
+    const seating = { seats: [{ name: 'ok', x: 10, y: 10 }, { name: 'bad', x: NaN, y: 3 }, { name: 'gone' }] };
+    const d = dressPage(flatPage(), { roadWidth: 5, seating });
+    expect(d.census.registerMarks).toBe(1);
+    expect(d.svg).not.toMatch(/NaN/);
   });
 });
