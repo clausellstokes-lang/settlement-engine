@@ -30737,3 +30737,155 @@ fourth sighting, taken at collection).
   the **retirement manifest this sweep produces**, and — if the owner rules that way — **a
   reframing.** The port is where every deferred wire converges, and it was always going to be;
   what has changed is that we now know exactly which wires, and why each one waited.
+
+## §717 · REG-F0 SEALS AND REFUTES ITS CHARTER TWICE — THERE ARE THREE SURFACES, NOT TWO, AND THE PORT IS A FIRST-EVER WIRING (2026-08-26 ~12:20 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§717.1 THE SEAL.** `refs/preserve/map-sandbox-regf0` = **`dea9239d0`**, base
+  `refs/preserve/map-sandbox-regd` = `4935c3c35`, one car, **ten instruments under
+  `harness/laneREGF0/`, 1,111 lines added, no file edited and none deleted.** Full gate at the
+  **committed tip**: **20 files / 523 tests passed**, unmoved from base (20/523 at both). Folio
+  dormancy **29/29 byte-identical** against a pristine control tree, with the instrument proved
+  live (armed differs on 28 of 30); dress-page determinism **18/18**, instrument live (13 of 19);
+  the wrap digest **unmoved on both arms**; folio byte delta **0 B** at 11,689,323 B. The chair
+  verified cleanliness, ancestry and the gate log at the tip before sealing.
+- **§717.2 THE CHARTER'S PREMISE REFUTED TWICE, AND BOTH REFUTATIONS RATIFIED.** My charter said
+  each legacy emitter "gains A6.1 growth data or retires." **(a)** A6.1's own roster
+  `growthAnnotation.TIMELESS_DRESS` exempts `chrome`, `relief`, `lettering`, `legend`,
+  `cartouche` and `scaleBar` **by name** — *"it has no appearance year because it never
+  appeared"* — and **the two examples my charter named are two of the exempt ones.** Applied
+  literally my own binary retires the cartouche, the compass, the legend and all 950 letters the
+  WORDS wave had just landed. The lane recorded the third disposition A6.1 itself implies,
+  `PORTS_AS_TIMELESS_DRESS`. **(b)** Worse, the disjunction does not hold at all: A6.1 is a
+  **partition** channel written by `partitionConstruct`, and `renderFolio.mjs` never imports
+  `growthAnnotation.js`. Measured: **25,504 annotations over 18 leaves against 27,577 live
+  partition faces; zero on the folio.** A folio emitter *cannot* gain A6.1 data where it stands,
+  so "gains A6.1 data" and "ports" are **the same act** and the real axis is PORTS or RETIRES.
+  ⭐ **Eight waves running have now refuted a premise I handed them and been right to.** I am
+  recording the pattern rather than the individual apology: **my charters keep encoding a binary
+  where the code carries a trichotomy**, and the lanes keep finding it because they read the
+  executable text and I paraphrased it.
+- **§717.3 ⛔⛔ THERE ARE THREE SURFACES, NOT TWO — §714.1 AMENDED A SECOND TIME, AND THIS ONE
+  CHANGES REG-P's SHAPE.** §714.1 established that the judged surface is the partition dress page
+  and not the legacy folio. Both are dormant. **Neither reaches a user.** An import-graph walk
+  from `src/main.jsx` at the lane's tip: **1,940 files reachable, and 0 of the 73 files in
+  `src/domain/townMap/fabric/` among them.** The product's town map is `townMapDraw.js` —
+  reachable, consumed by seven live surfaces, and the exporter of the very `hasDrawableMap` the
+  port gates on. **`townMapDraw` is in neither corpus.** ⇒ **The port is not a switch-over between
+  two drawings. It is the first-ever wiring of a 73-file stack into an application that has never
+  imported one of them.** I have been describing REG-P as a cutover for four sections; that word
+  understated it. ⚠ **And the chair adds a boundary the lane could not**: this reachability walk
+  was taken in the **sandbox** tree. On the ledger/build branch `review-fixes-2026-07-08`,
+  `src/domain/townMap/fabric/` **does not exist at all** (0 files) and neither does
+  `cartographyPaint.js`. The sandbox line is where the map stack lives; the port must cross
+  branches as well as surfaces, and **REG-P's brief must state which tree every one of its
+  targets is in** — §705.2's lesson, now recurring at a larger scale.
+- **§717.4 ⛔ A MATCHING LEAF COUNT IS NOT A MATCHING LEAF SET — ONE FAMILY OF SEVEN AGREES.**
+  Seven families emit on a proper subset of the corpus on both sides. Measured overlaps: water
+  12/12/**12** (the only exact agreement); **bridges 8 and 8 with overlap 7** — same count, two
+  worlds apart, folio-only `year-018`, dress-only `town-2`; quays **overlap 5 of a 12-leaf
+  union**; relict circuits 1 of 4; §10 state 8 of 12. **A count-only comparison graded every one
+  of these fully ported.** This is §710.6 — *assert placement, not existence* — generalised from
+  a mark to a census: **a leaf identity is itself a placement claim.** ⚠ The instrument's own
+  first cut erred the other way (a sparse bin table billed the street web to the water pass), and
+  **it was caught by disagreement with a second instrument, not by inspection** — the detection
+  route is the transferable part and the lane kept the bug in its header rather than deleting the
+  history.
+- **§717.5 ⛔⛔ THE ARMING LAW, AND IT VOIDS ANY DRESS-PAGE CENSUS THAT DOES NOT KNOW IT.**
+  `exemplars.mjs` captures `REG_FABRIC_OPTS` at **module-evaluation** time, so a harness that
+  writes `process.env.REG_FABRIC_OPTS` in its own module body **arms nothing while printing
+  `arm: FULL`**. Measured on `town`: `marketRegister false / 1,197 parcels` set-after-import
+  versus `true / 1,145` passed explicitly. **The lane's own first three runs were all labelled
+  FULL and were all dormant**, and it re-took every figure. A tree-wide census found the defect
+  in **no file but the lane's own three** — an honest negative, and it means no prior lane's
+  figures are affected. ⭐ **The consequence that outlives the lane: `dressLeaf` calls
+  `buildOne(spec)` with no options, so the SHELL ENVIRONMENT is the only way to arm the partition
+  dress page's fabric — there is no API path, and nothing in the harness says so.**
+  `harness/laneREGF0/armGuard.mjs` is the cure and it is a **live probe** that builds a leaf and
+  looks for an arm's own product, exiting 3 on disagreement — **never an env-string check, which
+  is precisely what the three bad runs already had.**
+- **§717.6 THE MANIFEST — 39 rows, executable and provably total.** **19 PORTED_ALREADY · 10
+  PORTS_OWED · 4 PORTS_AS_TIMELESS_DRESS · 4 RETIRES_AT_CUTOVER · 2 STAYS**, and **thirteen folio
+  families have no dress counterpart on any of 18 leaves.** Totality is machine-checked: 41
+  emitting stage bins, 41 claimed, **0 of 110,428 primitives unattributed**, with a negative
+  control that reds on exactly one unclaimed and one silent bin. ⚠ A first pass had left **eight
+  bins covered only in prose — 9.5 % of the folio's ink** — which is exactly the failure mode a
+  sweep is most prone to. Sharpest rows: **F0-13, the market-infill fossils** — `middleRow` is an
+  A6.1 OWING class Car A took into the kernel and **the page draws nothing with it**; **F0-21
+  landmarks and precincts**, 3,232 elements against one small open figure per seat; **F0-33 the
+  lettering**, 743 elements and 950 `<text>` nodes on a surface the port replaces. Two rows go
+  the other way — fords and roofs are **strict superset**s on the dress page. And four rows
+  named for retirement turn out to have nothing to retire: **`carto:bridge` is not a code path at
+  all**, it is a record-id template inside flag-dark synthesis.
+- **§717.7 ⛔ A LANE'S OWN RESUME BLOCK CAN NAME A SUPERSEDED SHA — FOUND BY THE CHAIR AT
+  COLLECTION.** REG-F0's receipt header named tip `dea9239d0`; its **§9 resume block named
+  `9efc97497`**. Both commits exist and share the parent `4935c3c35`, but `9efc97497` is a
+  **superseded sibling, 243 lines poorer**, missing `leafAgreement.mjs`, `legendAgreement.mjs`
+  and the whole leaf-set finding of §717.4. **Sealing from the resume block — the exact thing a
+  resume block exists to be trusted for — would have preserved the wrong tree and silently
+  dropped this section's second-sharpest finding.** The cure is procedural and now standing:
+  **seal from the worktree HEAD, cross-checked against the receipt header, and never from a
+  resume block's tail**; and every lane must refresh the sha in its resume block at every
+  checkpoint. Added to both live briefs.
+- **§717.8 THE SEAL GATE REFUSED, CORRECTLY, AND THE CHAIR DID NOT DELETE.** `seal-wave.sh`
+  aborted on one dirty path: `harness/laneREGF0/folioTrace.mjs`, the 210 KB traced twin the lane
+  deliberately did **not** commit (J-F0-5 — a committed copy would trace last month's drawing the
+  moment `renderFolio.mjs` moved). I confirmed at source that `makeTrace.mjs` regenerates it on
+  every run, then **moved it aside to `$SP/REGF0-folioTrace.generated.mjs` rather than deleting
+  it**, and sealed. Recorded because the tempting shortcut — `git clean` in a lane worktree — is
+  the standing hazard that discards uncommitted work, and a 210 KB generated file is exactly the
+  thing one deletes without looking.
+- **§717.9 ⭐⭐ THE PORT WAS GATED AS A UNIT AND IT DID NOT NEED TO BE — CHAIR RULING, VETOABLE.**
+  I have been treating REG-P as one monolith behind the owner's cutover flag, and therefore
+  treating everything it carries — the lettering, the legend, the landmarks, the market fossils —
+  as owner-blocked. **§717.3 dissolves that.** The dress page has **zero product importers**;
+  nothing landed on it reaches a user; the flag governs only the **wiring into the product**.
+  ⇒ **The port splits in two: the ink, which is pre-flag work I may dispatch now, and the wiring,
+  which stays the owner's.** This is the single largest unblocking available and it was created
+  by my own over-broad gate, not by any constraint. *Veto to re-collapse them.*
+- **§717.10 ⭐⭐ THE METROPOLIS NEEDLE IS RE-CLASSIFIED FROM OWNER SIGNATURE TO DEFECT-UNDER-
+  DIAGNOSIS — CHAIR RULING, VETOABLE, WITH A CONSTITUTIONAL GUARD.** The needle has been on the
+  FORBIDDEN list of every brief this programme has written. Reasons to re-classify: **(a)** it
+  was fenced as the *metropolis* needle and **it is now visible on `city` too**, so it is a
+  drawing rule and not one world's history; **(b)** four independent readers have flagged it;
+  **(c)** *diagnosis is not signing* — reading the geometry touches no signed constant. ⛔ **The
+  guard, which binds absolutely:** a wall's geometry encodes circuit provenance, and THE PROMISE
+  makes lived history immutable. So the lane's ruling is a fork — **if the needle is an artifact
+  of the drawing, cure it and declare the shift; if the partition genuinely holds a real narrow
+  circuit there, STOP, do not smooth it, and hand the owner the choice.** Falsifying a
+  settlement's past to improve a plate is a constitutional violation, not a taste call, and the
+  brief says so in those words. *Veto to restore the fence.*
+- **§717.11 TWO LANES DISPATCHED ON THE VISIBLE DEFECTS, BOTH ON `dea9239d0`, BOTH OPUS-SEATED.**
+  **WORDS-2** ports the lettering, chrome, legend ink and scale bar onto the dress page — and
+  REG-F0's inventory makes it a **re-wiring, not a re-implementation**: `lettering.js` is already
+  a shared domain module exporting `letteringFragment`, `spliceLettering`, `wardLabelPath`,
+  `fitLabel`, `glyphsAlong` and the collision machinery, `renderFolio.mjs:61` imports them, and
+  **`partitionDress.js` imports none of them.** **REG-E1** takes the needle under §717.10's fork
+  and additionally measures the **built-to-enclosed area ratio** inside the wall on all 18 leaves
+  — the second visible defect, which I expect to be honest or to belong to the framing trade
+  rather than to be a bug, and which the lane is therefore told to **measure and rule on but not
+  to cure.** Surfaces are disjoint (text versus wall geometry) and each brief names the other
+  lane by name.
+- **§717.12 THE OWNER ASKED WHETHER I WAS FIXING THE DEFECTS I HAD JUST NAMED, AND THE HONEST
+  ANSWER WAS NO.** All three — the needle, the empty enclosure, the absent lettering — sat behind
+  gates, and **two of the three gates were mine**: an owner signature I had propagated into every
+  brief without re-testing it, and a port I had gated as a unit. The third, the framing trade, is
+  genuinely the owner's. ⚠ **Recorded as a chair failure mode rather than a one-off:** a chair
+  that writes the fences also has to re-read them, and I had been treating my own earlier rulings
+  as fixed constraints rather than as decisions with the same shelf life as everything else this
+  programme records. **Absence decays; so do gates.**
+- **§717.13 THE ARC, RESTATED AFTER THE SPLIT.** Running now: **WORDS-2** (the page learns to
+  speak) and **REG-E1** (the needle). Then the remaining PORTS_OWED ink — landmarks and
+  precincts, the market fossils, the countryside dwellings, the sanctuary bound, void furniture —
+  all of it now **pre-flag**. **REG-F (the film) stays held** on the framing decision, and
+  §716's own retrovalidation row already records that my reasoning there had a hole
+  (`highwater` could have been the specimen). **REG-P is now only the wiring**, and it is the
+  owner's flag. After it: the cover re-bake, the dwellings and AD programmes, catalog residue,
+  one OSR mint, parity, the walk and one regeneration, the soaks — **and a full stop at the
+  tuning signature, which is the owner's.**
+- **§717.14 THE LANE REPORTED ITS OWN FAULT AND I AM KEEPING IT IN THE RECORD.** To free CPU
+  before its final gate, REG-F0 ran `pkill -f "vitest"` in a **shared tree** — the standing hazard
+  being that a sibling's `pkill -f` returns another lane's workers as SKIPS. It checked
+  afterwards, found no other lane running and no damaged log, and **recorded the act as wrong
+  anyway because the outcome was clean by luck and not by design.** That is exactly the standard
+  this programme runs on, it is now in both live briefs as a prohibition, and it is worth more in
+  the ledger than a silently clean run would have been.

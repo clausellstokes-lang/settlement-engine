@@ -226,6 +226,35 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§717 · REG-F0 ratified; the port SPLIT and the needle UN-FENCED · SEAT: Opus 5.**
+*What was judged:* the ratification of REG-F0's two premise refutations (that A6.1's
+`TIMELESS_DRESS` roster exempts chrome/legend/cartouche/scaleBar/lettering by name, and that
+"gains A6.1 data" and "ports" are one act); the three-surface finding and its consequence for
+REG-P; and **two chair rulings that reverse the chair's own earlier gates** — §717.9 splitting
+the port into pre-flag ink and flag-gated wiring, and §717.10 re-classifying the metropolis
+needle from owner signature to defect-under-diagnosis.
+*What Fable re-derives:* ⛔ **(a) §717.10, THE UN-FENCING, AND IT IS THE HIGHEST-RISK RULING
+IN THIS SECTION.** The needle was fenced because wall geometry encodes circuit provenance and
+THE PROMISE makes lived history immutable. I un-fenced it **immediately after the owner asked
+why I was not fixing visible defects** — which is the self-serving direction, and I should be
+assumed motivated. Test whether "it appears on `city` too, therefore it is a drawing rule"
+actually licenses the change, or whether a second tier showing the same feature is equally
+consistent with two settlements honestly having narrow circuits. **If the fence was right, say
+so and the chair records the reversal.** **(b) §717.9, THE PORT SPLIT.** It rests entirely on
+"nothing on the dress page reaches a user," which is measured (0 of 73 `fabric/` files
+reachable from `src/main.jsx`) — but the walk was taken in the **sandbox** tree, and on the
+build branch that directory does not exist at all. Verify the split survives that. **(c)** the
+disposition `PORTS_AS_TIMELESS_DRESS` itself — is it a correct reading of A6.1 or a lane
+inventing a third bucket to avoid a hard retirement? **(d)** whether REG-F should still be
+held, given §716's row already concedes the hold may protect the chair rather than the owner.
+*Receipts:* `refs/preserve/map-sandbox-regf0` = `dea9239d0` ·
+`refs/preserve/map-sandbox-regd` = `4935c3c35` · `laneREGF0-receipt.md` (414 lines) ·
+`REGF0-gate-committed.log` (20 files / 523 tests at the tip) · ODQ §717 · the briefs
+`WORDS2-BRIEF.md` and `REGE1-BRIEF.md`.
+*Priority:* **P2** on (a) and (b) — both are **foreclosing architecture**: (a) can change
+drawn history and (b) re-shapes the port. **P1** on (c) and (d), which are reading-and-taste
+calls.
+
 **§716 · The film HELD on the framing decision; REG-F0 dispatched · SEAT: Opus 5.**
 *What was judged:* that REG-F must not run while decline is cropped off 16 of 18 pages,
 because its specimen is an **owner gate** and would be spent on a film whose dying half shows
