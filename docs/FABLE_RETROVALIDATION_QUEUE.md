@@ -226,6 +226,21 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§700 · The arc re-ordered to visuals-first; DRESS-FABRIC dispatched · SEAT: Opus 5.**
+*What was judged:* adopting the owner's sequencing and withdrawing the chair's "we would tune
+twice" objection as overstated; keeping one guard (tune against the real partition); the
+declined/besieged leaf in the tuning set; and re-aiming the charter onto rotation, aggregation
+and palette while FORBIDDING the obvious shape fix.
+*What Fable re-derives:* **(a)** whether the objection was rightly withdrawn — the chair
+conceded a point to the owner and then re-ordered a whole arc on it, which is the agreeable
+direction, not necessarily the correct one. **(b)** whether forbidding a car its likeliest
+theory is good discipline or a chair over-steering a lane away from a finding it might have
+made independently. **(c)** the aggregation band's cost accounting when it lands, since the
+identity bijection it must not break is what the zoom ladder and the whole dwellings programme
+rest on.
+*Receipts:* ODQ §700 · `$SP/briefs/DRESS-FABRIC-BRIEF.md` · §698's parse.
+*Priority:* **P1** on (a) — it re-ordered the arc; P2 on (b) and (c).
+
 **§699 · SPINE-3 ratified with corrections, after adversarial verification · SEAT: Opus 5.**
 *What was judged:* RATIFY-WITH-CORRECTIONS on 1 CONFIRMED / 3 WEAKER-THAN-STATED verdicts;
 that the band boundary held (constructor width unmoved) while the blanket "no band moved"

@@ -29618,3 +29618,59 @@ the lane's disclosed `rm -rf` was genuinely restored.
   the preserve ref cannot reproduce the boundary proof from the seal. It reproduces when
   copied (both skeptics did so), so nothing is lost today; the lesson is banked: **an
   instrument that discharges a boundary belongs inside the seal it discharges.**
+
+## §700 · THE OWNER RE-ORDERS THE ARC — THE VISUAL BASE COMES FIRST, AND DRESS-FABRIC IS DISPATCHED AHEAD OF SEATING AND DRESS-2 (2026-08-27 ~05:50 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§700.1 THE OWNER'S SEQUENCING, ADOPTED.** Offered explicitly as *"something different
+  for you to consider"*: **copy the visuals first as the base of the map layer, and only
+  after that integrate truth and our other goals on top.** Adopted, and the chair's own
+  objection is withdrawn as **overstated**: "we would tune twice" holds against matching a
+  specific *output image* — truth moves the wall, the plots, the ruins — but **not against
+  matching drawing RULES**, which are invariant to which plots exist. A terrace drawn well is
+  drawn well at year 60 and at year 894. The grammar can be settled first, exactly as
+  proposed. **§697.5's own finding argues the same way and the chair had not followed it to
+  its conclusion**: furniture, relief and labels all land *on top of* the fabric, so a fabric
+  reading wrong makes every later wave a better-decorated wrong thing — yet the fabric car
+  was still queued *behind* institutions and furniture. **THE ARC IS RE-ORDERED: DRESS-FABRIC
+  RUNS AHEAD OF SEATING AND DRESS-2.**
+- **§700.2 THE ONE GUARD KEPT, AND IT IS FREE.** Tune the grammar with the painter consuming
+  **our real partition**, never a synthetic reference-shaped base. Not for purity: a painter
+  built against a data shape our pipeline does not emit means integration is a painter
+  rewrite, which is the actual failure mode of visuals-first programmes. **The §652
+  topology–paint contract already binds the painter to the partition, so the owner's
+  sequencing costs us nothing here.**
+- **§700.3 THE TUNING SET CARRIES A DECLINED AND A BESIEGED LEAF FROM THE START.** The
+  surviving half of the chair's caution: a few truth facts — ruin, decay, wear — change the
+  *grammar* rather than merely its inputs. Tuning only on healthy present-day towns would
+  invent the decline vocabulary later against a look that never anticipated it. One line in
+  the brief, not a blocker. ⚠ Sharpened by §699.8: **PA.4's wear has been dark corpus-wide**
+  and SPINE-3 cured its drivers, so wear may fire for the first time under this car —
+  **its first appearance is new output to be judged, not a regression.**
+- **§700.4 THE CHARTER IS RE-AIMED BY §698's PARSE, AND THE OBVIOUS FIX IS FORBIDDEN.** The
+  brief opens by refuting its own likeliest theory: our masses carry **mean 9.25 vertices
+  against the reference's 4.6** and an area spread of **1.81× against 1.72×** — **more complex
+  shapes and an already-matching size band.** The three measured levers instead: **(i)
+  ROTATION** — 82 % of masses in one 20° window while our own roof planes spread across every
+  bin, so the machinery exists and the masses do not use it; the spread must derive from the
+  settlement's own structure, since §676 established the reference has **zero coordinate
+  jitter** and A2.2 makes post-hoc jitter an i8 conviction. **(ii) AGGREGATION** — 448 drawn
+  masses against 616, from 1,753 plots; the reference's density is reachable from either
+  side, but it is a **banded experiment with per-step costs, never a free raise** (byte at
+  metropolis 83.2 %, and ⛔ the identity bijection binding masses to member plots for the zoom
+  ladder and DW **may not be broken to gain density**). **(iii) PALETTE + THE INK-TO-WHITE
+  CENSUS**, so this is never again argued by eye.
+- **§700.5 THE CLEAN-ROOM LINE, RESTATED IN THE BRIEF BECAUSE THIS CAR IS WHERE IT WOULD BE
+  CROSSED.** **Parity by MEASUREMENT on the grammar; never reproduction of their OUTPUT.**
+  Their published ratios are facts and nobody owns them; their code, structure and specific
+  maps are GPL-3.0 and this is a paid product (§668/§673). The owner's *"perfect clone"*
+  framing was the one phrasing that would convert a lawful ideas-level emulation into a
+  derivative work, and it is not what was adopted.
+- **§700.6 WALL-CURTAIN IS SEQUENCED NEXT, NOT MERGED.** §699.3's over-drop (249 u of dry
+  wall unpublished to remove 32.5 u of wet) is a visible defect and belongs to the visual
+  base — but it lives in a different module, the gate is a mutex, and a fat car is how briefs
+  rot. It follows DRESS-FABRIC's seal.
+- **§700.7 THE HANDOFF STATE BLOCK IS REFRESHED** to §700; it had stood at §694 through six
+  ledger entries. ⚠ Recorded against myself: **the re-ordering in §700.1 was promised to the
+  owner in chat and then left unwritten for six entries** while SPINE-3's collection took the
+  seat. The promise was kept late, and a chair's own dangling thread is the failure this
+  programme names first.
