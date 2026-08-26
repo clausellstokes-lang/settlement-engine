@@ -30337,3 +30337,74 @@ folio dormancy **29/29 clean** · determinism **18/18** · **wrap digest UNMOVED
   barred gate solves the same ink-on-ink problem by **role tone plus weight** (`T.wall` at
   `INK.body`, not a `T.ink` hairline) — so the owner's casing question may not need a new
   device after all.
+
+## §711 · STATE-BRIDGE CLOSES §710.6 — THE MARKS LAND WHERE THEY MEAN, AND THE CURE WAS A LAYER BUILT ONE WAVE EARLIER (2026-08-26 ~14:50 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+**RATIFIED, all fifteen judgments.** Sealed `refs/preserve/map-sandbox-statebridge` =
+**`b1f0dfc71`** (base `c4d772590` verified ancestor; **zero deletions**, one file added).
+**The census goes RED 4/9 → GREEN 9/9 — on a bar the lane WIDENED first (J-SB-11) — and it
+has ENTERED THE GATE**: 8 arms in an existing test file, **no new test file**. Gate **20
+files / 493 tests EXIT 0** (base 485; +8 = exactly the arms added). **Folio dormancy 29/29
+`diff -rq` CLEAN at 11,411,375 B both sides, executed pristine-base against tip** ·
+determinism **18/18 byte-identical with 18/18 distinct sha256** · **wrap digest identical** ·
+byte **703,131/830,000 (84.71 %)** · the five owner signatures, the framing law and the
+casing device **all untouched**. ⚠ And my `classify.mjs` worry is **measured and dismissed**:
+**38 emitted groups at both ends, none added, none moved — nothing owed.**
+
+- **§711.1 ⭐ THE CURE WAS A THIRD LAYER, AND §710.6 HAD NOT CONSIDERED IT.** Both cures I
+  ruled out were correctly ruled out — but **CAR-SEATING had already built the pattern one
+  wave earlier**: `partitionSeating.js` is a **domain pass that reads the projected page and
+  decides placement.** `partitionState.js`'s `anchorStateMarks(page, state, facts)` is its
+  sibling. ⭐⭐ **`fabric.stateMarks` is READ and never WRITTEN, so folio dormancy holds BY
+  CONSTRUCTION rather than by proof** — the renderer decides nothing. It imports no partition
+  module, so **no stage-graph edge, no stream, no minted key.** And families move by a
+  **RIGID TRANSFORM: the bridge decides where the anchor is; the fabric still decides the
+  mark.** Placement is fixed without taking authorship away from the layer that owns it.
+- **§711.2 THE NUMBERS, PER FAMILY.** `siege` tents **9/9 off-page → 0 off-page, extramural,
+  on land** · the barred gate **16.1 road widths from the band → 1.63 rw, inside the drawn
+  gate face** · `polycentric`'s bar **39.4 rw → 6 bars all ≤ 0.43 rw** · `city`/`migration`
+  camp huts **12/12 inside the coast polygon → 0 in water** · `migration` watch-fires **2
+  off-page, 1 in water, 1 intramural → 4/4 on ground** · `thorp` and `metropolis` trampled
+  ground **off-page / 280 u from any wall → inside their drawn field faces** · and ⭐
+  **`famine`'s 6 stalls BYTE-IDENTICAL — not moved**, exactly as the brief required.
+- **§711.3 ⭐ THE CONTROL HOLDS IN BOTH DIRECTIONS, WHICH IS THE STRONGEST FORM.** The
+  negative control `--source=fabric` **reds 2/9, EXIT 1** — so the green is not vacuous — and
+  **`famine` passes on BOTH geometries**, so the one family that was always right is acquitted
+  by the same instrument that convicts the rest. A control that only convicts proves half of
+  what this one proves.
+- **§711.4 ⭐⭐ J-SB-15: THE LANE LABELLED ITS OWN NON-DISCOVERING ARMS, IN THE FILE.** Two of
+  its nine green arms **share the producer's predicate**, so they are **regression arms, not
+  discovery arms** — and it wrote that down rather than letting nine greens read as nine
+  independent proofs. ⭐ **THE LAW, and it is §710.6's family caught at the moment of its own
+  creation: an arm that cannot discover anything is a green that means less than it looks —
+  so say which of your greens are regression and which are discovery.**
+- **§711.5 THREE DEFECTS NOBODY CHARTERED.** **(i) ⛔ `page.gates` IS NOT THE DRAWN CIRCUIT'S
+  GATES** — 40 of 49 measure face-to-band at exactly `0.000000` while the other nine read
+  2.7–63.5 u, worst `metropolis` f1379 at **12.0 road widths from any wall.** **(ii) ITS OWN
+  FIRST SPELLING PUT `city`'s MIGRANT CAMP INSIDE THE CITY WALLS** (48/48 vertices intramural,
+  via an inner-circuit gate) — **and the arm written to catch exactly that class caught it.**
+  An instrument convicting its own author is the only way to know the instrument works.
+  **(iii)** a unit defect found by **cross-reading two consumers of one field**: `trampled.ang`
+  is a trig index (0–1023), read correctly by one renderer and **as degrees** by the dress.
+- **§711.6 ⛔⛔ AND A THIRD UNIT DEFECT — ONE FIELD READ THREE DIFFERENT WAYS BY THREE
+  CONSUMERS.** `relief.js` mints crag `ang` on a **64-step circle**; one renderer reads it
+  against a **1024-entry table** and the dress reads it as **degrees** — **both wrong, and
+  wrong differently.** ⭐ **THE CLASS, banked: a numeric field with no declared unit acquires
+  a different unit at every consumer, and nothing ever reds, because each consumer is
+  internally consistent.** Out of this car's boundary (relief + folio) and reported, not
+  cured.
+- **§711.7 THE FRAMING TRADE HAS A THIRD MEASURED COST — AND THE LANE HONOURED THE BOUNDARY
+  EXACTLY.** `siege`'s camp **cannot stand at either gate of its own drawn circuit** — 21/36
+  vertices off-frame at one, **36/36 at the other** — because the page is fitted to
+  `bound.radius` while the band sits at **0.98–0.99 R**. It stands at a third gate and reads
+  correctly there. ⭐ **Reported, not widened**, precisely as instructed: §710.4 is the
+  owner's. → docket updated.
+- **§711.8 THE PARTITION OWES A MARKET FACE, AND THE UNFIXABLE IS PARKED PROPERLY.**
+  `page.voids` is **100 % `court` on every leaf**, so `famine`'s stalls land on five drawn
+  masses and one way; `town-2`'s `publicWork` is extramural and **uncurable here** — recorded
+  as **`RULED_DARK` with its measured reason and pinned exactly, so that a SECOND one reds.**
+  That is how an unfixable should be parked: named, measured, and instrumented against
+  recurrence.
+  **Declared shifts:** metropolis dress **−2 B**; `plague`'s CITED element-diff **7 → 10**,
+  because the roster is now the **drawn circuit's three gates** rather than the legacy two.
+  Four mutation controls convicted; source restored byte-identical, sha verified.

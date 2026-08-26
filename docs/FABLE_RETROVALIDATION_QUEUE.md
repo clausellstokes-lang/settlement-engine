@@ -226,6 +226,20 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§711 · STATE-BRIDGE ratified; §710.6 closed · SEAT: Opus 5.**
+*What was judged:* all fifteen J-SB calls RATIFIED; accepting the third-layer architecture
+(a domain pass reading the projected page) as the right cure where I had ruled out two others;
+and accepting `RULED_DARK` as a legitimate disposition for `town-2`'s uncurable case.
+*What Fable re-derives:* **(a)** the third layer is elegant and therefore worth attacking — does
+`fabric.stateMarks` being read-never-written really give dormancy **by construction**, or only
+under this corpus? **(b)** the 9/9 green came after the lane WIDENED its own bar (J-SB-11);
+widening-then-passing is the right order only if the widening was principled — check it.
+**(c)** J-SB-15 labelled two of its own arms non-discovering; sweep the estate's other censuses
+for arms that share their producer's predicate and were never so labelled.
+*Receipts:* ODQ §711 · `refs/preserve/map-sandbox-statebridge` = `b1f0dfc71` ·
+`laneSTATEBRIDGE-receipt.md` §9 · the two-directional `--source=fabric` control.
+*Priority:* **P1** on (c) — it generalises to every census we hold; P2 on (a) and (b).
+
 **§710 · DRESS-2 ratified as a bridge car; round 4 ruled NOT an escalation · SEAT: Opus 5.**
 *What was judged:* all fifteen J-D2 calls RATIFIED; **the ruling that round 4's FAIL does not
 fire PA.7's escalation**; accepting the refutation of my own ≈237 calibration and its
