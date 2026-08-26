@@ -226,6 +226,23 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§709 · SEATING ratified in three gated waves · SEAT: Opus 5.**
+*What was judged:* all ten J-SEAT calls RATIFIED; accepting the byte-identity dormancy proof
+**on diff scope rather than on a re-render**; accepting "0 wherever the ground exists" as the
+right bar; and routing the casing question to the owner rather than letting a lane mint a
+visual device without a plate.
+*What Fable re-derives:* **(a) THE BYTE-IDENTITY — I verified it structurally, not by
+rendering.** W1's diff touches no renderer, which makes the claim consistent; it does not make
+it measured. Re-run the render. **(b)** §709.3's honest limit: standing shares track the
+prosperity label almost alone, so the variety signal rests mainly on family mix (10 of 12) —
+is that enough variety, or is the standing ladder decorative? **(c)** §709.5's consequence:
+if a green sandbox gate means materially less than a green build gate, then **every wave I
+ratified on this line was ratified against a weaker bar than I believed** — re-read those
+ratifications with that in hand.
+*Receipts:* ODQ §709 · `refs/preserve/map-sandbox-seating` = `6bc1a5051` · the resume file's
+checkpoints 4–8 · the chair's `ls-tree` comparison of the two branches' gate surfaces.
+*Priority:* **P1** on (a) and (c).
+
 **§708 · SEATING's recon refutes its charter on five counts · SEAT: Opus 5.**
 *What was judged:* resuming mid-lane rather than restarting; accepting all five premise
 corrections; the ruling that §697–§701's "fabric at reference parity" is **narrower than the

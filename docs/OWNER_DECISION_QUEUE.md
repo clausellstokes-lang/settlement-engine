@@ -30165,3 +30165,82 @@ trivial. Resumed, not restarted. Base gate was already proven (19 files / 450 te
   The stage-graph cost was settled **by differential** (a planted fabric module reds the
   walker's one-node assertion): the new module belongs in **S16**, importing S8 is a legal
   forward edge, and the views read face `attrs` generically so **no new edge is created**.
+
+## §709 · SEATING SEALS IN THREE GATED WAVES — THE INSTITUTIONS CROSS THE BRIDGE, AND "GATE GREEN" NARROWS A SECOND TIME (2026-08-26 ~06:40 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+**RATIFIED, all ten judgments.** Sealed `refs/preserve/map-sandbox-seating` = **`6bc1a5051`**
+(base `a58e19abf`; **zero deletions**, 3 added, all 78 tracked `out/` files intact; the three
+wave tips **verified as ancestors in order**). W1 `3f4e10769` · W2 `62d926d25` · W3
+`6bc1a5051`. Gate **20 files / 469 tests EXIT 0** (base 19/450).
+
+- **§709.1 THE DORMANCY CONTROL IS THE HEADLINE, AND THE CHAIR VERIFIED ITS SCOPE.** W1 landed
+  a **741-line** seating module, registered it in S16, and published `seating` beside `page` —
+  and **the legacy folio came out byte-identical (29 files / 11,369,570 B) with `--partition`
+  ARMED**, the dress page likewise (18 files / 5,550,001 B). ⭐ Chair check: **W1's diff
+  touches exactly three files — `buildFabric.js`, `partitionSeating.js`, `stageManifest.js` —
+  and not one renderer**, so the byte-identity is structurally consistent rather than merely
+  asserted. (Verified by diff scope, not by re-render; a Fable pass can re-run the render.)
+- **§709.2 TWO DEFECTS FOUND INSIDE THE PASS, AND BOTH ARE GENERALISABLE SHAPES.**
+  **(i) A PHYSICAL CONSTRAINT WAS VALIDATED AFTER ARGMAX BUT NEVER SOUGHT** — `WATERFRONT`'s
+  scorer pulls toward the centre, dragging a quay away from the only ground it may legally
+  stand on; on `fjord` **the four lawful water faces ranked 678th of 1,348.** *A constraint
+  checked only after the choice is made is not a constraint; it is a complaint.*
+  **(ii) THEN A PRECONDITION LOST TO A PREFERENCE** — with that cured, `fjord` still failed
+  because **all four water faces had been taken by founders** (a monastery, two mills, a
+  potter) before the fish market's turn. Cure: physical families sort first (J-SEAT-4).
+  **`physicalViolations` is now 0 on 17 of 18 leaves**, and ⭐ **the eighteenth is honest** —
+  `polycentric` has zero water-fronting faces at all.
+- **§709.3 THE CENSUSES MEASURE VARIETY, AND THE DENOMINATOR IS RIGHT.** Measured over **12
+  DISTINCT SITES, never the bare 18-leaf sum** (one site alone accounts for six leaves — the
+  §0.3b discipline applied without being asked): **11 distinct standing signatures, 10
+  distinct family mixes**, poor-share **26.1 %–100 %**, families seated **3–17**. Totals: 710
+  seats / 423 distinct · 130 dropped / 86 · **0 unatlased — every institution this corpus
+  produces is in the atlas.** ⭐ **And the honest limit is stated by the lane itself:**
+  standing *shares* track the prosperity label almost alone, so town and metropolis land
+  nearly identical; **the strong variety signal is the family mix (10 of 12)**, because
+  geography decides which face gets which grade rather than the proportions. A struggling
+  thorp grading 100 % poor is defensible — but at four built faces the ladder cannot express
+  itself.
+- **§709.4 THREE JUDGMENTS WORTH NAMING.** **J-SEAT-2 — A RESUMED LANE OVERRULED ITS OWN
+  PREDECESSOR, BY CITING A LAW**: it reversed the injected reader because
+  `partitionArrangement` is imported directly and **`S8 > S16` is declared**, and ⟦DRESS-1
+  §686.7⟧ **refused that exact trade by name**; the test seam was preserved on the pass
+  instead. **J-SEAT-7 — IT REFUSED TO FORCE ITS OWN GREEN**: the W2 bar is *"0 wherever the
+  ground exists"* rather than a bare corpus zero, because **forcing a zero would hide a real
+  signal** — which is how §709.2(ii) stayed visible. **J-SEAT-3 — `PHYSICAL_PULL` is
+  dominant but FINITE (1000), a weight and not a filter**, so absent ground never silently
+  becomes a missing institution. Weights, not walls, executed.
+  ⚠ **J-SEAT-5 CARRIES A LEGACY FINDING**: routing roster reads through `liveInstitutions()`
+  is a **deliberate divergence**, because **the legacy pass reads `rawInstitutions` unfiltered
+  and therefore seats RUINED bodies.**
+- **§709.5 ⛔ "GATE GREEN" ON THIS LINE NARROWS A SECOND TIME — CHAIR-VERIFIED.** The sandbox
+  branch tracks **eight top-level entries** and carries **zero `scripts/`, zero
+  `eslint.config`, zero `.husky/`** — against the build branch's **176 `scripts/` files**, an
+  eslint config and a husky shim. ⇒ **the vitest run IS the whole gate here**, the "a new
+  test file reds three censuses" law **does not apply on this line at all** (its cost is the
+  port's, as chartered), and — the part that matters — **a green gate on the sandbox means
+  materially less than a green gate on the build branch.** ⭐ **This is the second narrowing
+  in three waves**, after §703.4's "nothing in the gate renders the page." Both were found by
+  lanes, not by the chair. Corroborating instance: **`buildFabric.js` already exceeds the
+  lint ceiling at base (1003 > 800, now 1009) — and nothing on this line enforces it, which
+  is exactly how it got there.**
+- **§709.6 A VACUITY TRAP, CAUGHT BY THE LANE BEFORE IT BIT.** **`fabric.partition` is the
+  LEGACY raster grid and is present even when the spine is dormant; the spine's artifact is
+  `fabric.spinePartition`.** Reading the wrong one would have produced a **vacuous dormancy
+  proof** — a green that means nothing. Banked.
+- **§709.7 THE ONE THING PRICED AND NOT DONE, BLOCKED ON PROVENANCE RATHER THAN EFFORT.**
+  **580 of 710 seats (81.7 %) land on built faces, where the hairline register mark is
+  low-contrast ink-on-ink** — confirmed by rasterising the town plate, not inferred. The cure
+  is a paper casing stroke beneath the ink (~+2.5 KB on metropolis, still ~16 % under
+  ceiling). ⛔ **It is blocked because the dress has NO CASING PRECEDENT ANYWHERE, and a new
+  visual device without a plate behind it is precisely the failure `partitionDress` names by
+  name.** → **OWNER DOCKET / dress-lane call** — the question is whether to mint a casing
+  device, not whether to spend the bytes.
+- **§709.8 W3's DECLARED SHIFT, IN FULL.** Dress plates **+35,148 B (+0.63 %)** over 18
+  plates; **metropolis 690,335 → 692,901 against the signed 830,000 ceiling — 137,099 B
+  (16.5 %) of headroom.** **The legacy folio stayed byte-identical through W3 as well**,
+  because `renderFolio.mjs` never receives a page. Mutations convict on both W2 and W3
+  (a deleted legend row reds 16 of 18; a gutted emission reds 17 of 19).
+  Reported and not cured, all pre-existing: the graveyard gap · the deity-doctrine violation
+  · the `forcePort` ordering defect — **which is why `polycentric` carries a Fishmonger and
+  no water** · the ward-layer degeneracy · the POLITY column question.
