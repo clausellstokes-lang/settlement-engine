@@ -42,7 +42,8 @@ const SPATIAL_DIGEST_MAX_BYTES = 400_000;
  * @param {{ set: Function, get: Function, campaignId: string,
  *   sessionFence?: any, isSessionCurrent?: (sessionFence:any)=>boolean,
  *   options?: { captureSpatialPack?: (ctx:{campaignId:string, get:Function}) =>
- *     Promise<{pack:any, placements:Array<{id:any,cellId:any}>}|null> } }} args
+ *     Promise<{pack:any, placements:Array<{id:any,cellId:any}>,
+ *       cellResolution?:Array<{id:string, from:number|null, to:number|null, reason:string}>}|null> } }} args
  * @returns {Promise<{ok:boolean, reason?:string, spatialCanonVersion?:number, digestBytes?:number}>}
  */
 export async function runSpatialCanonize({

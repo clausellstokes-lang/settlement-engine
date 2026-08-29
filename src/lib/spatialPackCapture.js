@@ -237,7 +237,12 @@ export function resolvePlacementCells(staged, rawPack) {
  * no ready bridge, empty pack, or no placements) — the store then reports
  * `spatial_capture_unavailable` cleanly.
  * @param {{ campaignId: string, get: Function }} ctx
- * @returns {Promise<{ pack: any, placements: Array<{id:string, cellId:number}> } | null>}
+ * SEAM-2 widened the reply: `cellResolution` carries what the cell re-resolution
+ * noticed, and `placements` may legitimately come back EMPTY when no row could be tied
+ * to a cell — the caller refuses on that (`spatial_placements_unresolved`) rather than
+ * freezing a digest seeded from nothing.
+ * @returns {Promise<{ pack: any, placements: Array<{id:string, cellId:number}>,
+ *   cellResolution: Array<{id:string, from:number|null, to:number|null, reason:string}> } | null>}
  */
 export async function captureSpatialPack({ campaignId, get }) {
   const bridge = getSpatialCaptureBridge();
