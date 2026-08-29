@@ -83,6 +83,64 @@ describe('spatialPackCapture — freeze-first double-read', () => {
     expect(warnSpy).not.toHaveBeenCalled();
   });
 
+  it('SEAM-0: a composer-minted cellId:null is COERCED to cell 0, not dropped', async () => {
+    // W-SEAM SEAM-0 — EXECUTION VERIFICATION, and the review's premise REFUTED.
+    //
+    // The §727 review and the V-BRIDGE/V-VAR appendices both read the guard below
+    //   const cellId = Number(pl?.cellId);
+    //   if (!id || !Number.isInteger(cellId)) continue;
+    // as dropping every composer-minted `cellId: null` row, predicting that an
+    // untouched Instant World cannot spatially canonize at all (capture returns
+    // null ⇒ `spatial_capture_unavailable`). It does NOT drop them:
+    // `Number(null) === 0` and `Number.isInteger(0) === true`, so every null cellId
+    // is silently coerced to MAP CELL 0.
+    //
+    // ⚠ THIS TEST PINS A DEFECT, DELIBERATELY. It is the reproduce half of a
+    // reproduce-then-clear pair: SEAM-2 re-resolves the cell from the stored x/y at
+    // capture and RE-RECORDS this expectation in the same act. Do not "fix" the
+    // expectation without the repair.
+    registerSpatialCaptureBridge({
+      isReady: true,
+      getSpatialPack: async () => ({ pack: { cells: cells([40, 40, 40]) } }),
+    });
+    const result = await captureSpatialPack({
+      campaignId: 'c1',
+      get: () => ({
+        // Exactly the composer's minted placement shape — pinned at its mint site in
+        // tests/lib/instantWorld/composeInstantWorld.test.js.
+        mapState: { placements: { iw_b0: { settlementId: 's1', x: 500, y: 300, cellId: null } } },
+        campaigns: [],
+        savedSettlements: [],
+      }),
+    });
+
+    expect(result).not.toBeNull();
+    expect(result.placements).toEqual([{ id: 's1', cellId: 0, institutions: [] }]);
+  });
+
+  it('SEAM-0 control: an ABSENT cellId key IS dropped, and that is the only shape the guard catches', async () => {
+    // The negative control that isolates the mechanism (LANE-LAW §3: a control that
+    // cannot fail proves nothing). `Number(undefined) === NaN`, so a placement whose
+    // cellId KEY is missing is genuinely dropped — and with no rows left the capture
+    // returns null, which is the lockout the review predicted. The composer never
+    // writes that shape: it writes an explicit `cellId: null`. So the predicted
+    // lockout is real only for a shape nothing in the tree mints.
+    registerSpatialCaptureBridge({
+      isReady: true,
+      getSpatialPack: async () => ({ pack: { cells: cells([40, 40, 40]) } }),
+    });
+    const result = await captureSpatialPack({
+      campaignId: 'c1',
+      get: () => ({
+        mapState: { placements: { iw_b0: { settlementId: 's1', x: 500, y: 300 } } },
+        campaigns: [],
+        savedSettlements: [],
+      }),
+    });
+
+    expect(result).toBeNull();
+  });
+
   it('a failing second read never blocks canonize — the first capture still returns', async () => {
     const firstPack = { cells: cells([7, 8]) };
     let reads = 0;

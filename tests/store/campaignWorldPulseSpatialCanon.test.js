@@ -42,6 +42,10 @@ vi.mock('../../src/lib/campaigns.js', () => {
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import {
+  registerSpatialCaptureBridge,
+  unregisterSpatialCaptureBridge,
+} from '../../src/lib/spatialCaptureRegistry.js';
 import { makeGridPack, placeSettlements, placePortSettlements, placeTeleportSettlements } from '../fixtures/spatialPackFixtures.js';
 
 function installLocalStorage() {
@@ -281,6 +285,67 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     expect(ws.spatialDigest.reserved.seaLanes).toBeNull();
     expect(ws.spatialDigest.spatialGeometryVersion).toBe(1);
     expect(ws.spatialDigest.costLawVersion).toBe(1);
+  });
+
+  test('SEAM-0: composer-shaped placements canonize a FALSE canon, not a lockout', async () => {
+    // W-SEAM SEAM-0 — the end-to-end consequence of the coercion pinned at the
+    // capture seam (tests/lib/spatialPackCapture.test.js). An Instant World's
+    // placements carry `cellId: null` + a nominal-canvas x/y (pinned at the mint
+    // site in tests/lib/instantWorld/composeInstantWorld.test.js). Because
+    // `Number(null) === 0`, EVERY member is seeded at map cell 0 — so the canonize
+    // does not refuse. It SUCCEEDS, stamps spatialCanonVersion 1 (the gate CTA flips
+    // to "Geography mapped ✓"), and freezes a digest that describes a realm that
+    // does not exist: with cell 0 in the ocean, ZERO settlements survive; with cell 0
+    // on land, exactly ONE does and the rest are `shared_cell`.
+    //
+    // ⚠ PINS A DEFECT DELIBERATELY — the reproduce half of a reproduce-then-clear
+    // pair. SEAM-2 re-resolves the cell from the stored x/y and re-records these
+    // expectations in the same act.
+    const store = makeStore();
+    seedStore(store);
+    store.setState(state => {
+      state.savedSettlements = ['ashford', 'brackwell', 'corran'].map(id => ({
+        id, name: id, phase: 'canon',
+        settlement: settlement(id), campaignState: { phase: 'canon', eventLog: [], locks: {} },
+      }));
+      state.campaigns[0].settlementIds = ['ashford', 'brackwell', 'corran'];
+      state.mapState = {
+        customBackdrop: null,
+        placements: {
+          iw_b0: { settlementId: 'ashford', x: 500, y: 300, cellId: null },
+          iw_b1: { settlementId: 'brackwell', x: 326, y: 163, cellId: null },
+          iw_b2: { settlementId: 'corran', x: 368, y: 329, cellId: null },
+        },
+      };
+    });
+
+    // (a) cell 0 is OCEAN (makeGridPack's default top-left bay) ⇒ a canon of NOTHING.
+    const oceanPack = makeGridPack({ cols: 18, rows: 14 });
+    expect(oceanPack.cells.h[0]).toBeLessThan(20);
+    registerSpatialCaptureBridge({ isReady: true, getSpatialPack: async () => ({ pack: oceanPack }) });
+    const drowned = await store.getState().canonizeCampaignWorldSpatial('camp-1');
+    unregisterSpatialCaptureBridge();
+
+    expect(drowned.ok).toBe(true);
+    expect(drowned.spatialCanonVersion).toBe(1);
+    const dws = store.getState().campaigns[0].worldState;
+    expect(dws.spatialDigest.settlementIds).toEqual([]);
+    expect(dws.spatialDigest.skippedSettlements.map(r => r.reason)).toEqual(['not_land', 'not_land', 'not_land']);
+
+    // (b) cell 0 is LAND ⇒ the whole realm collapses onto that ONE cell.
+    const landPack = makeGridPack({ cols: 18, rows: 14, bay: false });
+    expect(landPack.cells.h[0]).toBeGreaterThanOrEqual(20);
+    registerSpatialCaptureBridge({ isReady: true, getSpatialPack: async () => ({ pack: landPack }) });
+    const collapsed = await store.getState().canonizeCampaignWorldSpatial('camp-1');
+    unregisterSpatialCaptureBridge();
+
+    expect(collapsed.ok).toBe(true);
+    const cws = store.getState().campaigns[0].worldState;
+    expect(cws.spatialDigest.settlementIds).toEqual(['ashford']);
+    expect(cws.spatialDigest.skippedSettlements).toEqual([
+      { id: 'brackwell', reason: 'shared_cell' },
+      { id: 'corran', reason: 'shared_cell' },
+    ]);
   });
 
   test('the PLAIN canonizeCampaignWorld never stamps a spatial marker', async () => {

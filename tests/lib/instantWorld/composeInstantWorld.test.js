@@ -158,6 +158,21 @@ describe('composeInstantWorld — composition-equivalence (manual pre-canonize s
     }
   });
 
+  test('every composer-minted placement carries cellId null and a nominal-canvas x/y (the SEAM-0 input)', () => {
+    // W-SEAM SEAM-0. The composer plans sites BEFORE any geography exists, so it
+    // mints `cellId: null` on every placement and leaves the resolve to canonize
+    // (composeInstantWorld.js, the placements block). This pin is the MINT half of
+    // the SEAM-0 finding; the CONSUME half is pinned at the capture seam
+    // (tests/lib/spatialPackCapture.test.js) and at the store
+    // (tests/store/campaignWorldPulseSpatialCanon.test.js), where `Number(null)`
+    // coerces that null to cell 0. Keep the three in lockstep.
+    for (const [, p] of Object.entries(campaign.mapState.placements)) {
+      expect(p.cellId).toBeNull();
+      expect(Number.isFinite(p.x)).toBe(true);
+      expect(Number.isFinite(p.y)).toBe(true);
+    }
+  });
+
   test('the realm carries a discovered regionalGraph', () => {
     expect(campaign.regionalGraph).toBeTruthy();
     expect(Array.isArray(campaign.regionalGraph.channels)).toBe(true);
