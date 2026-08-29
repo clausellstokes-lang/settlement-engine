@@ -8,6 +8,8 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
+## ⭐⭐ UPDATE AT §739 (2026-08-29) — DW/AD/C-19/CT-1b/COVER-REFRESH DEFER TO THE MODULE (owner ruling; the launch tail is §739.2). The §732 pickup below stands for lane mechanics.
+
 ## ⭐⭐⭐⭐ PICKUP AT §732 (2026-08-29 ~15:20 CDT, WINDOW-CLOSE CHECKPOINT) — START HERE.
 
 **Three lanes were live at the owner's window close; every resume path is §732.2.** First acts, in order: (1) re-arm the 30-min lane-stall wakeup (cron `11,41 * * * *`; check running workflows/agents' journal mtimes vs completion rows; >15 min silent = stalled). (2) Survey `git worktree list` + the three receipts in the 5a850cca scratchpad `receipts/` (laneSTRIP1 · laneSTRIP3 · laneWSEAM) + `draft-W-COIN-ARCH.md` — the 529-law binds: partial edits exist, re-verify claimed proofs. (3) Resume MID-LANE from receipts: TE-STRIP-3 finishes the retirement set + retirement-path validator on `08fd4f921`, then STRIP-1+STRIP-3 land JOINTLY on one green combined gate → chair-verify → CAS `claude/composite-r4` `73f5dfc02` → the pair's final tip. TE-WEAVE-SEAM finishes SEAM-0/1/2 on `73f5dfc02`. (4) Panel `docs/DESIGN_W_COIN.md` (DELIVERED COMPLETE, landed §733) before any coin implementation (f3cf639e reversed by owner order §731 — architecture-first binds). Governing docs: `DESIGN_MAP_MODULE_SPLIT.md` (strip; §11.4/§11.5 corrections), `DESIGN_FMG_WEAVE.md` + A1–A3 (integration), `REVIEW_FMG_PUBLISHED_MATERIALS.md` (tie-back record). Seats: Fable architects/manages · Opus implements/verifies · §685 marking binds every ledger act. Open owner batch: Q-W1..Q-W7 + Q-W9.
