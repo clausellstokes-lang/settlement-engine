@@ -484,6 +484,7 @@ export const EXEMPT_OPERATIONS = Object.freeze({
   setMapReady: { slice: 'mapSlice', reason: 'runtime iframe-bridge ready flag; non-persisted' },
   setMapLoading: { slice: 'mapSlice', reason: 'runtime bridge loading flag; non-persisted' },
   setMapError: { slice: 'mapSlice', reason: 'runtime bridge error flag; non-persisted' },
+  flagGeographyDiverged: { slice: 'mapSlice', reason: 'session-only "terrain tools were used since this realm was mapped" signal; lives outside mapState, never persisted, only surfaces the existing re-canonize CTA' },
   setMapMode: { slice: 'mapSlice', reason: 'map UI mode switch; not domain data' },
   setTerrainTool: { slice: 'mapSlice', reason: 'active terrain-tool selection; pure UI' },
   setAnnotateTool: { slice: 'mapSlice', reason: 'active annotate-tool selection; pure UI' },
@@ -566,7 +567,19 @@ export const EXEMPT_OPERATIONS = Object.freeze({
 // into the operation surface. Persisting the toggle (store/index.js partialize) and
 // giving it authority over proposal-docket adjudication retired its "pure-UI /
 // transient" exemption, so the ceiling falls by exactly one. Shrink direction.
-export const EXEMPT_CEILING = 68;
+// 68 -> 69 (W-SEAM SEAM-1, 2026-08-29): flagGeographyDiverged — the session-only
+// "terrain tools were used since this realm's geography was frozen" signal, raised by
+// the fmg:terrainChanged bridge push and read by the SpatialCanonGate CTA. It lives
+// OUTSIDE mapState, so it reaches no save, no snapshot and no golden, and it commits
+// nothing: it only offers the re-canonize the DM could already run by hand. That is the
+// SAME K-D EXEMPT class as its mapSlice peers setMapReady / setMapLoading / setMapError
+// (all exempt above), not an operation-surface omission. A documented ratchet raise for
+// a genuinely-new UI setter.
+// Net for this lane is +1, not +2: a sibling `clearGeographyDiverged` action was written
+// and then DELETED before landing — it had no product caller (the two paths that lower
+// the flag are already inside an immer draft and clear the field directly), so it would
+// have bought a second exempt row for dead API.
+export const EXEMPT_CEILING = 69;
 
 /** Action names carrying an opType (the registered operation surface). */
 export function registeredActionNames() { return Object.keys(OPERATIONS); }

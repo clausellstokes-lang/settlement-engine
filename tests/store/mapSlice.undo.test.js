@@ -132,12 +132,11 @@ describe('mapSlice — the SEAM-1 geography divergence signal', () => {
     expect(store.getState().geographyMayHaveDiverged).toBe(false);
   });
 
-  test('clearGeographyDiverged lowers it directly', () => {
+  test('raising it twice is idempotent, so a burst of tool activations cannot latch anything else', () => {
     const store = makeStore();
     withCanon(store, 2);
     store.getState().flagGeographyDiverged();
+    store.getState().flagGeographyDiverged();
     expect(store.getState().geographyMayHaveDiverged).toBe(true);
-    store.getState().clearGeographyDiverged();
-    expect(store.getState().geographyMayHaveDiverged).toBe(false);
   });
 });

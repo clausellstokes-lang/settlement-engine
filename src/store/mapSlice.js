@@ -291,8 +291,11 @@ export const createMapSlice = (set, get) => ({
     if (version > 0) state.geographyMayHaveDiverged = true;
   }),
 
-  /** Lower it — a successful re-canonize refroze the geography, or the realm changed. */
-  clearGeographyDiverged: () => set(state => { state.geographyMayHaveDiverged = false; }),
+  // Lowering it needs NO action of its own: the two paths that answer the warning are
+  // already inside an immer draft when they do (`resetMapState` below, and the spatial
+  // canonize body), so they clear the field directly. A `clearGeographyDiverged` action
+  // existed here briefly and had no product caller — only its own test, which is how a
+  // dead store action gets born. Deleted rather than exempted.
 
   setMapMode: (mode) => set(state => {
     if (!Object.values(MAP_MODES).includes(mode)) return;

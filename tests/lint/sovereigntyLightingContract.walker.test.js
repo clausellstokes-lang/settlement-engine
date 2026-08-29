@@ -6641,6 +6641,20 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //     the §731.3 retirement-path arm).
     //   suiteTitles −3 = fogEditPersist's three describes. No other file's suite layer moved.
     //   And 364 + 2129 = 2493, so the arithmetic arm below closes on the new constants.
+    // ── TE-WEAVE-SEAM (W-SEAM SEAM-0/1/2), 2026-08-29, REBASED onto 1a2471990 ────
+    // 2493/364/2129/20825/5781 → PENDING MEASUREMENT at the merged tip.
+    // THE CAUSE IS W-SEAM, and it is a PURE TITLE DELTA: this lane added ZERO test files,
+    // so `files`, `parked` and `credited` must not move and 364 + 2129 = 2493 must still
+    // close. New titles land in FIVE existing files — spatialDigest.invariants (the
+    // terrainAgreement table, the nearestCellTo resolution law, the capture-receipt
+    // dormancy, the nine raw-byte digest pins), spatialPackCapture, mapSlice.undo,
+    // campaignWorldPulseSpatialCanon and composeInstantWorld. Every title is a literal
+    // string: no template literals (which inflate the census by their PARTS) and no
+    // test.each over a non-literal table (which would PARK a whole file).
+    // ⚠ THE FIGURES BELOW ARE RE-DERIVED WHOLE AT THE MERGED TIP, NOT COMPOSED BY
+    // ARITHMETIC FROM TWO BASELINES. Both lanes moved this tuple from DIFFERENT bases, so
+    // adding one lane's delta to the other's total would be a figure nobody measured —
+    // exactly what this block exists to forbid.
     files: 2493, parked: 364, credited: 2129, titles: 20825, suiteTitles: 5781,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);

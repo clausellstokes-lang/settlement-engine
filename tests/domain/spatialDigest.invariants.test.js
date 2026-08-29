@@ -424,8 +424,14 @@ describe('SEAM-2 — nearestCellTo, the ONE cell-resolution law', () => {
     const src = readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '../../src/domain/spatial/spatialDigest.js'), 'utf-8');
     const body = src.slice(src.indexOf('export function nearestCellTo'));
     const fn = body.slice(0, body.indexOf('\n}\n') + 3);
+    // The PRESENT half runs first and is the anchor for the two absent halves below:
+    // if the slice ever stops being the real function body (renamed, moved, or the
+    // slice arithmetic drifting), this line reds rather than letting the negatives
+    // pass vacuously against an empty string.
     expect(fn).toContain('dx * dx + dy * dy');
+    // anchored: the toContain above proves `fn` is the live nearestCellTo body
     expect(fn).not.toContain('Math.sqrt');
+    // anchored: the toContain above proves `fn` is the live nearestCellTo body
     expect(fn).not.toContain('Math.hypot');
   });
 });
