@@ -27,9 +27,6 @@ vi.mock('../../src/components/OutputContainer.jsx', () => ({
 vi.mock('../../src/components/settlement/NextActionRail.jsx', () => ({
   default: () => null,
 }));
-vi.mock('../../src/components/settlementDetail/SettlementDossierBackdrop.jsx', () => ({
-  default: () => null,
-}));
 vi.mock('../../src/components/settlementDetail/useNextActionRailHandlers.js', () => ({
   useNextActionRailHandlers: () => ({
     railHandlers: {},

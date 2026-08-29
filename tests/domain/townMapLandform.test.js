@@ -27,7 +27,6 @@ import {
 import { buildTownMapPanoramaDrawList } from '../../src/domain/townMap/townPanorama.js';
 import { renderTownMapOp } from '../../src/pdf/sections/TownMapPlate.jsx';
 import { TOWN_MAP_STYLE_IDS } from '../../src/design/townMapStyles.js';
-import { mapProvenanceStory } from '../../src/components/townMap/provenanceModel.js';
 import { makeTownFixture, LANDFORM_FIXTURES } from '../fixtures/townMapFixtures.js';
 
 const V2 = { layoutLawVersion: 2 };
@@ -154,23 +153,11 @@ describe('landform — dormancy (the pre-landform output is untouched)', () => {
   });
 });
 
-describe('landform — provenance (the surveyor’s read explains the site for free)', () => {
-  it('the map story surfaces the already-annotated site cause for each landform kind', () => {
-    const wants = {
-      'mountain-flank': 'site-slope',
-      dunes: 'site-flats',
-      marsh: 'site-water', // a marsh rides the water branch (reed/peat)
-    };
-    for (const { kind } of LANDFORM_FIXTURES) {
-      const story = mapProvenanceStory(modelFor(kind));
-      expect(story).not.toBeNull();
-      const effects = story.site.map((r) => r.effect);
-      expect(effects, `${kind} missing its site provenance`).toContain(wants[kind]);
-      // the cause is the engine's own human-readable string, shown verbatim (never invented)
-      expect(story.site.every((r) => typeof r.ref === 'string' && r.ref.length > 0)).toBe(true);
-    }
-  });
-});
+// LANDFORM PROVENANCE — RETIRED BY TE-STRIP-1 (owner ruling, ODQ §725). The arm read
+// the surveyor's story through mapProvenanceStory(), which lived in
+// src/components/townMap/provenanceModel.js and left with the legacy settlement map.
+// The site causes it asserted are still minted and still pinned by the frozen geometry
+// golden below; only the removed UI read-model's view of them is gone.
 
 describe('landform — determinism + the frozen geometry golden', () => {
   it('same model ⇒ byte-identical landform ops twice', () => {

@@ -12,8 +12,8 @@
  * genuinely wanted, it lives INSIDE one `it`, never around one.
  */
 import { describe, expect, it } from 'vitest';
-import { existsSync, readFileSync, statSync } from 'node:fs';
-import { dirname, join, relative, resolve } from 'node:path';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
@@ -33,68 +33,17 @@ const LIT_ROW = GOLDEN_CONFIGS.find(
 
 const litWorld = () => ({ simulationRules: { townCartographyEnabled: true } });
 
-// ── §6.4's static-closure machinery ──────────────────────────────────────────
-// stripComments/resolveRelative/sourceClosure are COPIED from
-// tests/build/mapTabShellLazy.test.js, not imported from it: that file is
-// TC-5b-ii's reserved target and a cross-lane edit would be a landing collision.
-// The ~30-line duplication is ACCEPTED FOR THIS WAVE at CR-TC5BI-4; extraction to
-// a shared helper is its own slice once BOTH TC-5b halves have landed.
+// ── §6.4's source-scan machinery ─────────────────────────────────────────────
+// The hook-closure half (HOOK_SRC + FORBIDDEN_IN_HOOK_CLOSURE + the sourceClosure /
+// sourceStaticSpecifiers / resolveRelative walkers copied from mapTabShellLazy) was
+// removed by TE-STRIP-1 with the hook it measured; see the C7 note below. Only the
+// transport's own comment-stripping scan remains.
 const ROOT = process.cwd();
 const TRANSPORT_SRC = resolve(ROOT, 'src/lib/townScene/townCartographyBlock.js');
-const HOOK_SRC = resolve(ROOT, 'src/components/townMap/useTownCartographyBlock.js');
-
-/** Everything the hook must NOT be able to reach by ANY static path. */
-const FORBIDDEN_IN_HOOK_CLOSURE = Object.freeze([
-  'src/domain/townScene/compileTownSceneManifest.js',
-  'src/domain/townScene/sceneCompileInput.js',
-  'src/domain/townScene/sceneProjection.js',
-  'src/data/namingData.js',
-  'src/lib/townScene/townCartographyBlock.js',
-  'src/domain/townCartography/cartographyPaint.js',
-]);
 
 const stripComments = (code) => code
   .replace(/\/\*[\s\S]*?\*\//g, '')
   .replace(/^\s*\/\/.*$/gm, '');
-
-/** Every `from './x'` STATIC relative specifier in a source file. */
-function sourceStaticSpecifiers(code) {
-  const specs = new Set();
-  for (const m of stripComments(code).matchAll(/\bfrom\s*['"](\.[^'"]+)['"]/g)) specs.add(m[1]);
-  return [...specs];
-}
-
-function resolveRelative(fromFile, spec) {
-  if (!spec.startsWith('.')) return null;
-  const base = resolve(dirname(fromFile), spec);
-  for (const candidate of [base, `${base}.js`, `${base}.jsx`, join(base, 'index.js'), join(base, 'index.jsx')]) {
-    if (existsSync(candidate) && statSync(candidate).isFile()) return candidate;
-  }
-  return null;
-}
-
-/**
- * The transitive STATIC import closure of a source file, repo-relative.
- * ⭐ The specifier regex requires `import` + whitespace + a quote, so it CANNOT
- * match `import(` — which is exactly why the dynamic edge is excluded and this
- * guard measures what it claims to.
- */
-function sourceClosure(entryFile) {
-  const seen = new Set([entryFile]);
-  const queue = [entryFile];
-  while (queue.length) {
-    const file = queue.shift();
-    const code = stripComments(readFileSync(file, 'utf-8'));
-    const specs = new Set();
-    for (const m of code.matchAll(/(?:^|[^.\w])import\s+(?:[^'"]*?\sfrom\s+)?['"]([^'"]+)['"]/g)) specs.add(m[1]);
-    for (const m of code.matchAll(/(?:^|[^.\w])export\s+[^'"]*?\sfrom\s+['"]([^'"]+)['"]/g)) specs.add(m[1]);
-    for (const spec of specs) {
-      const resolved = resolveRelative(file, spec);
-      if (resolved && !seen.has(resolved)) { seen.add(resolved); queue.push(resolved); }
-    }
-  }
-  return [...seen].map((p) => relative(ROOT, p).replace(/\\/g, '/'));
-}
 
 describe('TC-5b-i C1 — the transport produces a block when lit, and nothing when dark', () => {
   it('compiles a ready block with the exact contract key set and the plan extent', async () => {
@@ -299,43 +248,10 @@ describe('TC-5b-i C8 — the privacy boundary: the seam widens nothing', () => {
   });
 });
 
-describe('TC-5b-i C7 — THE PREVENTION GUARD: the compiler graph stays behind the dynamic edge', () => {
-  it('the hook\'s transitive static closure excludes the compiler graph entirely', () => {
-    const closure = sourceClosure(HOOK_SRC);
-
-    // NON-VACUITY, the mapTabShellLazy idiom: a resolver that silently resolved
-    // nothing would make every exclusion below trivially true.
-    expect(closure.length).toBeGreaterThanOrEqual(2);
-    // THE LIVENESS ANCHOR: the hook genuinely reaches the zero-import flag leaf.
-    expect(closure).toContain('src/domain/townScene/cartographyContract.js');
-
-    // The loop lives INSIDE this `it` on purpose. Registering one `it` per member
-    // from a `for` loop is TEST_UNREGISTERED and parks the whole file.
-    for (const forbidden of FORBIDDEN_IN_HOOK_CLOSURE) {
-      expectAbsentWithAnchor(
-        closure,
-        forbidden,
-        'src/domain/townScene/cartographyContract.js',
-        'useTownCartographyBlock transitive static closure',
-      );
-    }
-  });
-
-  it('the hook reaches the transport ONLY through a dynamic import', () => {
-    const stripped = stripComments(readFileSync(HOOK_SRC, 'utf-8'));
-
-    // The dynamic edge is present…
-    expect(stripped).toMatch(
-      /import\(\s*['"]\.\.\/\.\.\/lib\/townScene\/townCartographyBlock\.js['"]\s*\)/,
-    );
-    // …and no STATIC edge to it exists. Anchored on the hook's one real static
-    // relative import, which travels the same scan.
-    const staticSpecs = sourceStaticSpecifiers(stripped);
-    expectAbsentWithAnchor(
-      staticSpecs,
-      '../../lib/townScene/townCartographyBlock.js',
-      '../../domain/townScene/cartographyContract.js',
-      'useTownCartographyBlock static specifiers',
-    );
-  });
-});
+// TC-5b-i C7 — THE PREVENTION GUARD: RETIRED BY TE-STRIP-1 (owner ruling, ODQ §725).
+// The guard proved that src/components/townMap/useTownCartographyBlock.js reached the
+// cartography compiler graph ONLY through a dynamic import — a first-paint contract
+// about a HOOK that left with the legacy settlement map. With no consumer, the property
+// has no subject; re-pointing it at the transport would assert something different.
+// The transport's own contracts (everything above, over src/lib/townScene/ and
+// src/domain/townScene|townCartography/) are untouched and still run.

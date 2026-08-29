@@ -277,19 +277,11 @@ describe("rules E and F — the owner's AUTHORING axis (ODQ §514.1b)", () => {
   });
 });
 
-describe('rule D — the change-view free cell is the honest qualifier, tied to the code', () => {
-  const NOTES = 'src/components/townMap/SettlementMapNotes.jsx';
-
-  it("change-view's free cell says 'latest change only' and the source declares depth 1", () => {
-    const row = ROWS.find((r) => r.id === 'change-view');
-    expect(row.free).toBe('latest change only');
-    expect(row.cartographer).toBe(true);
-    expect(read(NOTES)).toMatch(/const FREE_CHANGE_DEPTH = 1;/);
-  });
-
-  it('NEGATIVE CONTROL: the source scan fires on a planted depth of 2', () => {
-    const scan = /const FREE_CHANGE_DEPTH = 1;/;
-    expect(scan.test('const FREE_CHANGE_DEPTH = 2;')).toBe(false);
-    expect(scan.test(read(NOTES))).toBe(true);
-  });
-});
+// RULE D — RETIRED BY TE-STRIP-1 (owner ruling, ODQ §725). Rule D tied the
+// change-view row's free cell ('latest change only') to the literal
+// `const FREE_CHANGE_DEPTH = 1;` in src/components/townMap/SettlementMapNotes.jsx.
+// That file left with the legacy settlement map, so the qualifier has no code to be
+// honest ABOUT and both arms — the claim and its planted-depth negative control —
+// are removed rather than re-pointed at a surviving file that does not carry the
+// constant. The change-view ladder ROW itself is untouched: what the CARTOGRAPHER
+// tier sells after the map rows leave is STRIP-5 / owner question Q8.

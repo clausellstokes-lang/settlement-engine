@@ -27,9 +27,6 @@ vi.mock('../../src/lib/analytics.js', () => ({
   Funnel: { track: vi.fn() },
   EVENTS: new Proxy({}, { get: (_t, k) => String(k) }),
 }));
-vi.mock('../../src/components/townMap/SettlementCardMapThumb.jsx', () => ({
-  default: () => null,
-}));
 vi.mock('../../src/components/SettlementDetail.jsx', () => ({
   default: () => <div data-testid="settlement-detail" />,
 }));

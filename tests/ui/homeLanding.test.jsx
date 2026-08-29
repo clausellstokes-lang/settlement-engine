@@ -6,7 +6,7 @@
  *
  * Contract locked here (landing spec §9 + owner amendments W-L2/1..5):
  *   - exactly ONE <h1> on the page (the hero), carrying the registry copy;
- *   - all six section headings render (from the copy registry, not literals);
+ *   - all five section headings render (from the copy registry, not literals);
  *   - the anon ceiling string appears EXACTLY once across the page;
  *   - decorative chips (Save to Library / Fork / Advance time) stay plain
  *     spans, never buttons (§3.8) — while the ONE interactive artifact control
@@ -27,15 +27,9 @@
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, cleanup, screen, within } from '@testing-library/react';
-import fs from 'node:fs';
-import path from 'node:path';
-import url from 'node:url';
 import HomeLanding from '../../src/components/HomeLanding.jsx';
 import { landing } from '../../src/copy/landing.js';
 import { fixture } from '../../src/components/home/landingFixture.js';
-import { slugify } from '../../src/kernel/slugify.js';
-
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 // Analytics is fire-and-forget (landing_funnel_used via the SM-5-pattern lazy
 // helper — lib/landingFunnelAnalytics.js imports track + EVENTS from this
@@ -72,29 +66,36 @@ describe('HomeLanding — scrollable landing', () => {
     expect(h1s[0].textContent).toBe(landing.hero.h1a + landing.hero.h1b);
   });
 
-  // Owner walk orders 10/11 (2026-07-22): the Brief section was replaced by
-  // the map card in the 02 slot (retitled "The visual"), so brief.h2 renders
-  // nowhere — six sections remain.
-  test('all six section headings render from the copy registry', async () => {
+  // Owner walk orders 10/11 (2026-07-22) put the map card in the 02 slot (retitled
+  // "The visual"), so brief.h2 renders nowhere. TE-STRIP-1 (owner ruling, ODQ §725)
+  // then removed that slot entirely — it WAS the drawn settlement map — leaving FIVE
+  // sections. The `map` copy block is gone with it.
+  test('all five section headings render from the copy registry', async () => {
     renderLanding();
     const headings = [
       landing.forge.h2, landing.voice.h2,
-      landing.realm.h2, landing.map.h2, landing.commons.h2, landing.closer.h2,
+      landing.realm.h2, landing.commons.h2, landing.closer.h2,
     ];
     for (const h2 of headings) {
       expect(await screen.findByText(h2)).toBeTruthy();
     }
+    // The removed section leaves no copy behind to render by accident.
+    expect(landing).not.toHaveProperty('map');
+    expect(landing.brief).not.toHaveProperty('waypoint');
   });
 
-  test('visible waypoints stay contiguous after the map artifact moved into 02', async () => {
+  test('visible waypoints stay contiguous after the map section was removed', async () => {
     renderLanding();
     await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
 
-    expect(landing.map).not.toHaveProperty('waypoint');
-    expect(screen.queryByText('05 · The map')).toBeNull();
-    expect(screen.getByText('05 · The commons')).toBeTruthy();
-    expect(screen.getByText('06 · Set out')).toBeTruthy();
-    expect(screen.queryByText('07 · Set out')).toBeNull();
+    // 01..05 with no gap and no stale 06 — the five survivors renumbered in the
+    // same act that removed "02 · The visual".
+    for (const pill of ['01 · Forge', '02 · The voice', '03 · The Realm',
+      '04 · The commons', '05 · Set out']) {
+      expect(screen.getByText(pill), `waypoint pill missing: ${pill}`).toBeTruthy();
+    }
+    expect(screen.queryByText('02 · The visual')).toBeNull();
+    expect(screen.queryByText('06 · Set out')).toBeNull();
   });
 
   // ⚠ THIS PIN WAS INVERTED, AND THE HISTORY IS THE POINT.
@@ -205,47 +206,12 @@ describe('HomeLanding — scrollable landing', () => {
     expect(screen.getByText(`seed · ${fixture.seed} · ${fixture.weeks} weeks in`)).toBeTruthy();
   });
 
-  // ── W-DOC — THE MAP ARTIFACT (folded into §02) ─────────────────────────────
-  test('the map artifact renders the fixture-town plate with an honest lens flip', async () => {
-    renderLanding();
-    await screen.findByText(landing.map.h2);
-    // The lens flip is a REAL control (a second sanctioned interactive control
-    // beside W-L2/5's forge-exact — it swaps frozen plates of the SAME town,
-    // never forging anything, so the one-forge-control rule is intact).
-    for (const l of landing.map.lenses) {
-      expect(screen.getByRole('button', { name: l.label })).toBeTruthy();
-    }
-    // The plate <img> resolves the DEFAULT lens (first in the registry) and its
-    // alt names the fixture town (a11y floor + the same-town honesty claim).
-    const defaultLens = landing.map.lenses[0];
-    const alt = landing.map.alt
-      .replace('{name}', fixture.town.name).replace('{lens}', defaultLens.label);
-    const img = screen.getByAltText(alt);
-    expect(img.getAttribute('src')).toContain(`.${defaultLens.id}.svg`);
-    // Flip: the second lens re-points the SAME img at that lens's plate.
-    const second = landing.map.lenses[1];
-    screen.getByRole('button', { name: second.label }).click();
-    const flipped = await screen.findByAltText(
-      landing.map.alt.replace('{name}', fixture.town.name).replace('{lens}', second.label),
-    );
-    expect(flipped.getAttribute('src')).toContain(`.${second.id}.svg`);
-  });
-
-  test('the frozen lens plates exist and carry the fixture provenance (the plate drift contract)', () => {
-    // The generator (scripts/generate-landing-map-plates.mjs) drift-gates the
-    // town at emit time; this pin makes a MISSING or foreign plate fail CI: one
-    // committed plate per registry lens, each stamped with the fixture's seed +
-    // town, each a v2 render (layoutLawVersion is asserted by the generator).
-    const dir = path.resolve(__dirname, '../../public/landing-maps');
-    for (const l of landing.map.lenses) {
-      const file = path.join(dir, `${slugify(fixture.town.name)}.${l.id}.svg`);
-      const svg = fs.readFileSync(file, 'utf8');
-      expect(svg).toContain(`seed ${fixture.seed}`);
-      expect(svg).toContain(`style ${l.id}`);
-      expect(svg).toContain(fixture.town.name);
-      expect(svg).toContain('<svg');
-    }
-  });
+  // ── W-DOC — THE MAP ARTIFACT: RETIRED BY TE-STRIP-1 (owner ruling, ODQ §725) ──
+  // Two arms lived here: the lens-flip control over the frozen cnocby plates, and the
+  // plate DRIFT CONTRACT that read public/landing-maps/<town>.<lens>.svg off disk and
+  // pinned each plate's seed + style + town stamp. Both the plates and the section that
+  // showed them are removed, so neither arm has a subject. The realm-map preview plates
+  // in the same directory are a DIFFERENT surface and still ship.
 
   test('commons fallback renders six labeled placeholder slots when the gallery is unreachable', async () => {
     renderLanding();

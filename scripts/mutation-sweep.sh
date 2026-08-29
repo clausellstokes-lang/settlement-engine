@@ -67,9 +67,6 @@ MUTATED_FILES=(
   src/domain/realm/heraldRouting.js
   src/domain/townMap/audienceProjection.js
   src/domain/townScene/sceneProjection.js
-  src/components/townMap/fog/FogPlayerView.jsx
-  src/components/townMap/scene3d/SettlementScene3D.jsx
-  src/components/townMap/scene3d/TownSceneCanvas.jsx
   supabase/migrations/182_operational_obligation_health.sql
   supabase/migrations/183_application_command_journal.sql
   supabase/migrations/184_import_reconciliation_commands.sql
@@ -603,23 +600,11 @@ check_caught "town-map/player projection admits hidden hazard" src/domain/townMa
 perl -0pi -e "s/  return 'public';/  return 'dm';/" src/domain/townScene/sceneProjection.js
 check_caught "town-scene/unknown audience fails open to dm" src/domain/townScene/sceneProjection.js "npx vitest run tests/security/townScenePlayerSafe.test.js"
 
-# 44. Fog authorization — compile a shared fog surface with the DM audience
-#     instead of the player audience. The fail-closed boundary test must red
-#     before any unrevealed fact could reach a live player window or handout.
-perl -0pi -e "s/audience: 'player',/audience: 'dm',/" src/components/townMap/fog/FogPlayerView.jsx
-check_caught "town-scene/fog player surface uses dm audience" src/components/townMap/fog/FogPlayerView.jsx "npx vitest run tests/security/townSceneFogFailClosed.test.js"
-
-# 45. Accessible companion layout — remove the responsive layout hook from the
-#     scene root. The local accessibility contract must catch the loss before
-#     high-zoom and narrow-screen CSS silently stop stacking the companion.
-perl -0pi -e "s/data-town-scene-layout/data-scene-layout/" src/components/townMap/scene3d/SettlementScene3D.jsx
-check_caught "town-scene/accessibility layout hook removed" src/components/townMap/scene3d/SettlementScene3D.jsx "npx vitest run tests/ui/townSceneAccessibility.contract.test.jsx"
-
-# 46. WebGL recovery — detach the listener from the real context-loss event.
-#     The canvas browser contract must prove context loss is prevented, paused,
-#     announced, and delegated to recovery.
-perl -0pi -e "s/webglcontextlost/webglcontextlost-disabled/g" src/components/townMap/scene3d/TownSceneCanvas.jsx
-check_caught "town-scene/canvas context-loss listener detached" src/components/townMap/scene3d/TownSceneCanvas.jsx "npx vitest run tests/ui/townSceneCanvas.contract.test.jsx"
+# 44-46. RETIRED by TE-STRIP-1 (owner ruling, ODQ §725): the fog player surface
+#     and the 3D scene root/canvas lived in src/components/townMap/, which left
+#     with the legacy settlement map. Their three plants and the tests that
+#     caught them are removed together; the numbering below is left undisturbed
+#     so every surviving label keeps its stable join key.
 
 # 47. R-2 edit-prose queue spine — a NEW registered prose path lands in
 #     EDITABLE_FIELDS (settlement) with no explicit queue-wiring decision. The

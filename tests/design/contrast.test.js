@@ -25,7 +25,6 @@ import {
 } from '../../src/components/theme.js';
 // THE LIVING BACKDROP wash strength — imported (not hard-coded) so raising the
 // backdrop opacity re-runs this contrast proof against the new value.
-import { WASH_INK_OPACITY } from '../../src/components/settlementDetail/SettlementDossierBackdrop.jsx';
 // THE ORGANIC CRAFT ink ramp + rubric (design/organic/*). Imported DIRECTLY, never
 // via the theme.js shim — the whole organic layer is lazy and must stay out of the
 // first-paint static closure (the shim is eager). Every text step owes AA at the
@@ -399,45 +398,13 @@ describe('Organic instrument fills — legible at every state (WCAG AA / 1.4.11)
   });
 });
 
-// ── THE LIVING BACKDROP wash (LB-c) — dossier text stays AA over the map ink wash ──
-// The library dossier's background is the last-viewed town map: a parchment layer
-// with the map SVG painted at WASH_INK_OPACITY on top. The darkest a wash pixel can
-// ever get is the map's darkest ink over parchment at that opacity. Model the worst
-// case conservatively as PURE BLACK (darker than any lens tone) composited over
-// PARCH, and prove the dossier's heading (INK) and body (BODY) copy still clear AA
-// over it. MUTED is pinned as the negative control: it is chrome-only and fails as
-// body over the wash exactly as it does on plain parchment — the backdrop never
-// carries MUTED body text, so this documents the split, it does not gate it.
-/** Alpha-composite `top` over `bottom` at `alpha` → the effective background hex. */
-function composite(top, bottom, alpha) {
-  const t = parseInt(top.slice(1), 16);
-  const b = parseInt(bottom.slice(1), 16);
-  const mix = (sh) => Math.round(alpha * ((t >> sh) & 255) + (1 - alpha) * ((b >> sh) & 255));
-  return `#${[mix(16), mix(8), mix(0)].map((x) => x.toString(16).padStart(2, '0')).join('')}`;
-}
-
-describe('THE LIVING BACKDROP wash — dossier text legibility over the map ink wash', () => {
-  // Worst case: a fully-black map pixel washed over parchment at the wash opacity.
-  const washFloor = composite('#000000', PARCH, WASH_INK_OPACITY);
-
-  test(`heading ink (INK) clears AA over the wash @ opacity ${WASH_INK_OPACITY}`, () => {
-    expect(ratio(INK, washFloor)).toBeGreaterThanOrEqual(AA_TEXT);
-  });
-  test('body copy (BODY) clears AA over the wash', () => {
-    // BODY already owes AA on plain parchment; the wash only nudges the ground
-    // darker, so proving it here proves the whole read surface holds.
-    expect(ratio(BODY, PARCH)).toBeGreaterThanOrEqual(AA_TEXT);
-    expect(ratio(BODY, washFloor)).toBeGreaterThanOrEqual(AA_TEXT);
-  });
-  test('the wash opacity is faint (a ghost, not a background image)', () => {
-    // A guard on the taste value itself: a wash strong enough to threaten body
-    // contrast would be a design regression, caught here before it ships.
-    expect(WASH_INK_OPACITY).toBeLessThanOrEqual(0.15);
-  });
-  test('MUTED is chrome-only — it fails as body over the wash (documents the split)', () => {
-    expect(ratio(MUTED, washFloor)).toBeLessThan(AA_TEXT);
-  });
-});
+// ── THE LIVING BACKDROP wash (LB-c) — RETIRED by TE-STRIP-1 (owner ruling, ODQ §725) ──
+// The library dossier's background WAS the last-viewed town map painted as an ink wash
+// at WASH_INK_OPACITY; the whole surface (SettlementDossierBackdrop.jsx) left with the
+// legacy settlement map, so the four AA arms that proved dossier copy legible over that
+// wash — and the `composite()` helper written for them — have no subject and are removed.
+// Every other ground in this file is unaffected: dossier copy still owes AA on plain
+// PARCH, which the organic ink-ramp arms above already pin.
 
 // ── THE ILLUSTRATED TOWN — GROUND DRESS legibility + colour-vision safety (IT-2) ─────
 // The dress marks (farm furrows / woods stipple / water ripples / meadow / hedges / wall
