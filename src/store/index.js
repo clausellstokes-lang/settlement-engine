@@ -58,7 +58,6 @@ import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
 import { createDisplayPrefsSlice }  from './displayPrefsSlice.js';
 import { createAccountImportSlice } from './accountImportSlice.js';
-import { createFogEditSlice }       from './fogEditSlice.js';
 // W-H4 — the DM's three verbs over the world NPC ledger, plus their inverse. Thin and
 // eager by construction: the bodies dynamic-import on first use.
 import { createNpcVerbsSlice }      from './npcVerbsSlice.js';
@@ -92,7 +91,6 @@ export const useStore = create(
           ...createUiSlice(set, get),
           ...createDisplayPrefsSlice(set, get),
           ...createAccountImportSlice(set, get),
-          ...createFogEditSlice(set, get),
           ...createNpcVerbsSlice(set, get),
         })),
         {

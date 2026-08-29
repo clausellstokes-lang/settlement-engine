@@ -39,11 +39,15 @@
  * So `cartography` takes the seat `player` already proved: a member of
  * MAP_SUB_TAB_IDS and of nothing else. It is not a projection of the plan, the
  * pane never receives it, presentationViewFor() answers null for it, and the
- * living-backdrop sidecar records nothing when it is chosen. The only persisted
- * trace is displayPrefs.mapSubTab, whose setter is SHAPE-guarded rather than
- * vocabulary-guarded and whose reader re-normalizes against PRESENCE every
- * render — so an unknown, retired or gated-off value opens Plan. Ruled at
+ * living-backdrop sidecar records nothing when it is chosen. Ruled at
  * `8738f5ea`; measured whole at TC-5B-II.md §2b.
+ *
+ * ⚰ THE PERSISTED TRACE IS GONE (TE-STRIP-3, owner grant ODQ §731 / Q-S1). This
+ * header used to end "the only persisted trace is displayPrefs.mapSubTab, whose
+ * setter is SHAPE-guarded…". That key and its setter were retired with the legacy
+ * settlement map's UI (ODQ §725), so the vocabulary below now persists NOTHING: it
+ * is a pure resolver over inputs its callers supply. The file itself is retained —
+ * it is a headless lib, and STRIP-2/STRIP-6 own its disposition, not this wave.
  */
 
 import { TOWN_MAP_VIEW_IDS, normalizeTownMapView } from './lastMapView.js';

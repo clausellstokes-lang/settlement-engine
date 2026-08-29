@@ -96,6 +96,8 @@ import { partializeStoreState } from '../../src/store/persistProjection.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { normalizeServicesToggles } from '../../src/store/toggleSlice.js';
 import { createDisplayPrefsSlice, DEFAULT_DISPLAY_PREFS } from '../../src/store/displayPrefsSlice.js';
+import { PUBLIC_TOPLEVEL_KEYS } from '../../src/domain/display/publicSafe.js';
+import { OPERATIONS } from '../../src/store/operationRegistry.js';
 import { deepClone } from '../../src/domain/clone.js';
 import { envoyErrandIdForOffer } from '../../src/domain/worldPulse/envoyErrand.js';
 
@@ -1021,11 +1023,13 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       goodsToggles: { grain: true }, servicesToggles: { svc_smith: true },
       // A CURRENT-shape blob carries every display preference, in DEFAULT_DISPLAY_PREFS
       // key order (the merge spreads the defaults first, and this assertion is
-      // byte-exact). `mapSubTab` joined the bag with TC-0 (DESIGN_TOWN_CARTOGRAPHY §12)
-      // and `realmMagicChoice` with MG-1 (DESIGN_REALM_MAGIC_TOGGLE §4); the ABSENCE
-      // direction is covered by the legacy-blob tests below, which is why extending
-      // the bag is safe rather than a cohort fork.
-      displayPrefs: { sceneQualityMode: 'low', mapSubTab: 'plan', realmMagicChoice: 'yes' },
+      // byte-exact). ⚰ `sceneQualityMode` (R-5b) and `mapSubTab` (TC-0) were RETIRED
+      // with the legacy settlement map (TE-STRIP-3, ODQ §731 / Q-S1), leaving
+      // `realmMagicChoice` (MG-1, DESIGN_REALM_MAGIC_TOGGLE §4). The ABSENCE direction
+      // is covered by the legacy-blob tests below and the RETIRED-KEY direction by the
+      // stale-key arm at the end of this family, which is why moving the bag in either
+      // direction is safe rather than a cohort fork.
+      displayPrefs: { realmMagicChoice: 'yes' },
       advanceAutoResolve: true,
     };
     const merged = mergePersistedState(JSON.parse(JSON.stringify(blob)), currentStub());
@@ -1062,40 +1066,109 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
   });
 
   // ── R-5b: the display-preference family, both directions ───────────────────
-  // The whole point of owner queue #17 is that a clamped ceiling SURVIVES; the
-  // whole point of it being safe is that its ABSENCE is indistinguishable from a
-  // fresh install. Both are pinned through the REAL partialize + merge pair.
+  // The whole point of the family is that a chosen preference SURVIVES; the whole
+  // point of it being safe is that its ABSENCE is indistinguishable from a fresh
+  // install. Both are pinned through the REAL partialize + merge pair.
+  // ⚰ RE-ANCHORED ONTO `realmMagicChoice` (TE-STRIP-3, ODQ §731 / Q-S1). This family
+  // rode `sceneQualityMode`, which was retired with the legacy settlement map along
+  // with `mapSubTab`. The bag still has a live member, so the family keeps a real
+  // subject rather than being deleted — what it pins is a property of the SLICE
+  // (shape-guarded setter, defaults-first merge, absent-tolerant rehydrate), not of
+  // whichever key happens to occupy it. That is why re-anchoring is the right move
+  // here and deleting would have been the lossy one.
 
-  test('a set quality ceiling survives the persist → rehydrate round trip', () => {
+  test('a set display preference survives the persist → rehydrate round trip', () => {
     const store = makeSettingsStore();
-    store.getState().setSceneQualityMode('low');
+    store.getState().setRealmMagicChoice('no');
     // The persist hop, exactly as the store performs it: partialize → JSON → merge.
     const blob = JSON.parse(JSON.stringify(partializeOf(store.getState())));
-    // The whole bag rides the partialize, so the sibling preferences travel with the
-    // ceiling (TC-0 added `mapSubTab`, MG-1 added `realmMagicChoice`); the ceiling
-    // itself is the subject below.
-    expect(blob.displayPrefs).toEqual({ sceneQualityMode: 'low', mapSubTab: 'plan', realmMagicChoice: 'yes' });
+    expect(blob.displayPrefs).toEqual({ realmMagicChoice: 'no' });
     const merged = mergePersistedState(blob, currentStub());
-    expect(merged.displayPrefs.sceneQualityMode).toBe('low');
+    expect(merged.displayPrefs.realmMagicChoice).toBe('no');
   });
 
   test('a blob with NO displayPrefs (every save written before R-5b) rehydrates to the default', () => {
     const legacy = { config: { ...DEFAULT_CONFIG } };
     const merged = mergePersistedState(legacy, currentStub());
     expect(merged.displayPrefs).toEqual({ ...DEFAULT_DISPLAY_PREFS });
-    expect(merged.displayPrefs.sceneQualityMode).toBe('auto');
+    expect(merged.displayPrefs.realmMagicChoice).toBe('yes');
     // And a bag present but missing a future key still backfills that key, which
     // is the cohort-fork cure this family inherited from `config`.
     const partial = mergePersistedState({ displayPrefs: {} }, currentStub());
-    expect(partial.displayPrefs.sceneQualityMode).toBe('auto');
+    expect(partial.displayPrefs.realmMagicChoice).toBe('yes');
   });
 
   test('the setter refuses a non-string rather than persisting junk', () => {
     const store = makeSettingsStore();
-    store.getState().setSceneQualityMode(null);
-    expect(store.getState().displayPrefs.sceneQualityMode).toBe('auto');
-    store.getState().setSceneQualityMode(7);
-    expect(store.getState().displayPrefs.sceneQualityMode).toBe('auto');
+    store.getState().setRealmMagicChoice(null);
+    expect(store.getState().displayPrefs.realmMagicChoice).toBe('yes');
+    store.getState().setRealmMagicChoice(7);
+    expect(store.getState().displayPrefs.realmMagicChoice).toBe('yes');
+  });
+
+  // ── ⚰ THE RETIRED-KEY DIRECTION (TE-STRIP-3, owner grant ODQ §731 / Q-S1) ──────
+  // The three arms above cover a key ARRIVING and a key being ABSENT. Retiring
+  // `sceneQualityMode`, `mapSubTab` and the fog blob's `fogSessions` opened a third
+  // direction the family had never been asked about: a save written BEFORE the
+  // retirement still carries keys nothing reads any more. Loading one must not
+  // crash — that is the tolerance the owner's prelaunch order relies on, since no
+  // destructive migration was written.
+  //
+  // ⚠ AND THE TOLERANCE IS ASSERTED AS IT ACTUALLY BEHAVES, NOT AS IT READS BETTER.
+  // The merge spreads the DEFAULTS first and the persisted bag OVER them, so a
+  // retired key SURVIVES the rehydrate and is written back on the next partialize.
+  // It is ignored, not erased. Saying "the next partialize drops it" would have been
+  // the comfortable version and it is false; this arm pins the true one so nobody
+  // later "fixes" a drop that never happened.
+
+  test('a save written BEFORE the retirement loads without crashing, keys and all', () => {
+    const stale = {
+      config: { ...DEFAULT_CONFIG },
+      // Exactly what a pre-retirement blob carried, verbatim.
+      displayPrefs: { sceneQualityMode: 'low', mapSubTab: 'panorama', realmMagicChoice: 'no' },
+    };
+    // Anchored: the retired keys really are gone from the live defaults, so the arm
+    // below is measuring tolerance rather than a bag that still declares them.
+    expect(Object.hasOwn(DEFAULT_DISPLAY_PREFS, 'sceneQualityMode')).toBe(false);
+    expect(Object.hasOwn(DEFAULT_DISPLAY_PREFS, 'mapSubTab')).toBe(false);
+
+    const merged = mergePersistedState(JSON.parse(JSON.stringify(stale)), currentStub());
+    // The LIVE key still rehydrates correctly — the retired ones did not disturb it.
+    expect(merged.displayPrefs.realmMagicChoice).toBe('no');
+    // …and the retired keys ride along inert rather than throwing or being erased.
+    expect(merged.displayPrefs.sceneQualityMode).toBe('low');
+    expect(merged.displayPrefs.mapSubTab).toBe('panorama');
+    // The full round trip through the REAL partialize survives too, which is the hop
+    // a returning user actually performs.
+    expect(() => JSON.parse(JSON.stringify(partializeOf(merged)))).not.toThrow();
+  });
+
+  test('a settlement blob still carrying the retired fogSessions key loads and is ignored', () => {
+    // `applyFogEdit` wrote `settlement.fogSessions` into the SAVE BLOB and was retired
+    // with the fog write path (fogEditSlice.js / fogEditBody.js deleted). Nothing writes
+    // the key now, but a blob saved before this commit still has it, and the hydrate hop
+    // must carry it through without a reader.
+    const stale = {
+      name: 'Cnocbuidhe', id: 7,
+      fogSessions: { 'friday-game': { name: 'Friday Game', districts: ['dA'], buildings: ['cat:vault'] } },
+    };
+    const revived = JSON.parse(JSON.stringify(stale));
+    expect(revived.fogSessions).toEqual(stale.fogSessions);
+    // Anchored on the real allowlist rather than on a hand-copy of it: the key is not
+    // public, so no projection was ever obliged to understand it — which is precisely
+    // why leaving it inert is safe.
+    expect(PUBLIC_TOPLEVEL_KEYS).not.toContain('fogSessions');
+    // And no registered operation can write it any more. Asserted against the OPERATION
+    // REGISTRY, which is the authority on which verbs exist — NOT against a store built
+    // from one slice, which would never have carried `applyFogEdit` and would therefore
+    // have passed identically before the retirement. (It was written that way first; the
+    // vacuity is the whole reason the anchor below is here.)
+    expect(OPERATIONS.applyFogEdit).toBeUndefined();
+    expect(OPERATIONS.setMapSubTab).toBeUndefined();
+    expect(OPERATIONS.setSceneQualityMode).toBeUndefined();
+    // The anchor that makes those three absences mean something: a sibling MECHANICAL
+    // save-scoped verb from the same registry is still registered, so the lookup works.
+    expect(OPERATIONS.applyMapEdit?.opType).toBe('applyMapEdit');
   });
 
   test('a legacy blob missing a config key backfills the default instead of forking shapes', () => {

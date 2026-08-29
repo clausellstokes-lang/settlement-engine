@@ -246,31 +246,28 @@ export const OPERATIONS = Object.freeze({
   // ── K-B MECHANICAL — simple setters/updaters of durable/domain state ──
   // (No count in this header: the old "(118)" rotted to 124 unnoticed. Census
   //  the live number with `grep -c "klass:'mechanical'"` — never transcribe it.)
-  // R-5b (owner queue #17): REGISTERED, not EXEMPT. Every K-D exempt row earns its
-  // exemption with "excluded from the persist partialize" — this setter's whole
-  // point is that it IS persisted (displayPrefs rides the allowlist), so it is a
-  // real setter of durable state and belongs in the census proper. targetScope
-  // 'global' because the preference is a property of the device, not of any save or
-  // campaign; undoState 'not-applicable' because re-picking a ceiling IS the
-  // inverse, and the value is outside canon entirely.
-  setSceneQualityMode: { opType:'setSceneQualityMode', label:"Set the portrait quality ceiling", description:"Sets how much detail the 3D settlement portrait is allowed to render on this device. The portrait can still lower detail below the ceiling to stay responsive, and the choice is remembered for this browser.", klass:'mechanical', slice:'displayPrefsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
-  // TC-0 (DESIGN_TOWN_CARTOGRAPHY §12): REGISTERED, not EXEMPT, for the SAME
-  // reason as setSceneQualityMode above — it is persisted (displayPrefs rides the
-  // partialize allowlist), so it is a real setter of durable state. targetScope
-  // 'global' because the preference belongs to the device, not to any settlement;
-  // undoState 'not-applicable' because re-picking a map view IS the inverse and
-  // the value is outside canon entirely.
-  setMapSubTab: { opType:'setMapSubTab', label:"Set the default map view", description:"Chooses which view of a settlement's map opens first: the plan, the panorama, the 3D portrait, or the player view. Views the settlement or this machine cannot show are never offered, and the choice is remembered for this browser.", klass:'mechanical', slice:'displayPrefsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
-  // MG-1 (DESIGN_REALM_MAGIC_TOGGLE §4): REGISTERED, not EXEMPT, for the SAME
-  // reason as the two setters above — it is persisted (displayPrefs rides the
-  // partialize allowlist). It changes NO world: the realm's magic stance is the
-  // answer the DM confirms in the modal for that realm, and this only decides
-  // which answer starts selected. targetScope 'global' because the preference
-  // belongs to the device; undoState 'not-applicable' because re-answering the
-  // question IS the inverse and the value is outside canon entirely.
+  // ⚰ RETIRED HERE (TE-STRIP-3, owner grant ODQ §731 / Q-S1): `setSceneQualityMode`
+  // (R-5b, owner queue #17) and `setMapSubTab` (TC-0). Both set a persisted display
+  // preference for a surface the owner ordered removed — the 3D portrait's quality
+  // ceiling and the Map tab's default sub-tab — and both lost their last caller in src
+  // when the legacy settlement map's UI left with STRIP-1 (ODQ §725). Retirement is the
+  // dead-op ratchet's OWN prescribed move, and it is the move taken here: the frozen
+  // DEAD_OPERATIONS list in tests/store/deadOperationRatchet.test.js answers to OWNER
+  // QUEUE #21 and never grows, so a callerless op leaves the registry rather than
+  // joining that list. Their two persisted fields left DEFAULT_DISPLAY_PREFS in the same
+  // act, which is why no orphaned key survives in the partialize allowlist to rehydrate.
+  // MG-1 (DESIGN_REALM_MAGIC_TOGGLE §4): REGISTERED, not EXEMPT. Every K-D exempt row
+  // earns its exemption with "excluded from the persist partialize" — this setter's
+  // whole point is that it IS persisted (displayPrefs rides the allowlist), so it is a
+  // real setter of durable state and belongs in the census proper. It changes NO world:
+  // the realm's magic stance is the answer the DM confirms in the modal for that realm,
+  // and this only decides which answer starts selected. targetScope 'global' because the
+  // preference belongs to the device, not to any save or campaign; undoState
+  // 'not-applicable' because re-answering the question IS the inverse and the value is
+  // outside canon entirely.
   setRealmMagicChoice: { opType:'setRealmMagicChoice', label:"Remember the realm magic answer", description:"Remembers which answer the Instant World's magic question starts on for this browser: a world of magic, or a mundane one. The question is still asked before every realm, and the realm follows the answer given then.", klass:'mechanical', slice:'displayPrefsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   // Realm directive 7 (J-D7): REGISTERED, not EXEMPT, for the SAME reason as
-  // setSceneQualityMode above. It was exempt while it was session-only chrome; the
+  // setRealmMagicChoice above. It was exempt while it was session-only chrome; the
   // full auto-resolve wave made it a PERSISTED play mode (it rides the store/index.js
   // partialize allowlist) that also changes what an advance does to the proposal
   // docket, so it is a real setter of durable state and belongs in the census proper.
@@ -313,10 +310,21 @@ export const OPERATIONS = Object.freeze({
   // Cosmetic-always (no canon lock); undo rides the blob's own time-travel (no
   // dedicated map undo action ⇒ undoToken:null).
   applyMapEdit: { opType:'applyMapEdit', label:"Apply a map edit", description:"Writes a cosmetic town-map edit, such as a nudge, a reroll, or a legend preference, into the settlement's saved map edits.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'external:blob-time-travel' },
-  // DOOR 2 — fog-of-war reveal edit (fogSessions sidecar: per-session district/street/
-  // building reveal). Mechanical: a durable blob write via the applyMapEdit persist idiom.
-  // Cosmetic-always (no canon lock); undo rides the blob's own time-travel (undoToken:null).
-  applyFogEdit: { opType:'applyFogEdit', label:"Apply a fog-of-war edit", description:"Records a fog-of-war reveal of a district, street, or building into the settlement's per-session fog state.", klass:'mechanical', slice:'fogEditSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'external:blob-time-travel' },
+  // ⚰ RETIRED HERE (TE-STRIP-3, owner grant ODQ §731 / Q-S1): `applyFogEdit` (DOOR 2).
+  // It wrote the per-session fog reveal (`settlement.fogSessions`) into the SAVE BLOB via
+  // the applyMapEdit persist triple, and its only caller was the fog controller inside the
+  // legacy settlement map's pane, which left with STRIP-1 (ODQ §725). Retiring it removed
+  // both store modules (fogEditSlice.js, fogEditBody.js) and, with them, the only writer of
+  // that blob key — so no new save can carry `fogSessions` and the strip's persisted-data
+  // half is complete rather than merely unreachable.
+  // ⚠ THE KEY ITSELF IS NOT MIGRATED AWAY, DELIBERATELY: a save written before this commit
+  // may still carry `fogSessions`, and loading one must not crash. The blob is spread
+  // wholesale on rehydrate and the key is on no allowlist (`fogSessions` ∉
+  // PUBLIC_TOPLEVEL_KEYS), so it is tolerantly ignored — the arm that pins that is in
+  // tests/store/lifecycleRoundTrip.test.js. A destructive migration would have been the
+  // wrong instrument prelaunch: leaving an inert key costs nothing and cannot lose data.
+  // The domain readers (src/domain/townMap/fogSessions.js, fogGeometry.js) are RETAINED —
+  // they are pure derivation the charter's §11.2 substrate boundary keeps.
   retryOutbox: { opType:'retryOutbox', label:"Retry the sync outbox", description:"Retries any campaign changes that failed to sync to the cloud.", klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   loadCampaigns: { opType:'loadCampaigns', label:"Load campaigns", description:"Loads the account's campaigns into the store.", klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   clearCampaigns: { opType:'clearCampaigns', label:"Clear campaigns", description:"Removes all campaigns from the store.", klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'external:loadCampaigns' },

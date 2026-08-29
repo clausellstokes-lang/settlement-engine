@@ -13,47 +13,40 @@
  * module reads this slice, and it is deliberately absent from `config` (which
  * IS generator input and would move seeds).
  *
+ * ⚰ TWO KEYS RETIRED (TE-STRIP-3, owner grant ODQ §731 / Q-S1). `sceneQualityMode`
+ * (the 3D portrait's quality ceiling, R-5b / owner queue #17) and `mapSubTab` (the
+ * Map tab's default sub-tab, TC-0) both described surfaces the owner ordered removed,
+ * and both lost their last reader when the legacy settlement map's UI left with
+ * STRIP-1 (ODQ §725). Their setters went with them and out of the operation registry.
+ * ⚠ A blob written before that commit may still carry either key. That is TOLERATED,
+ * not migrated: `mergePersistedState` spreads the DEFAULTS first and the persisted bag
+ * over them, so an unknown key rides along inert — nothing reads it and nothing
+ * crashes on it. It is NOT erased, and saying so would be the comfortable lie: it
+ * survives in state and is written back on the next partialize. Prelaunch, with no
+ * users, an inert extra key costs nothing and a destructive migration could only lose
+ * data, so none was written.
+ *
  * Keys in use:
- *   sceneQualityMode — the 3D settlement portrait's rendering-quality CEILING.
- *     The vocabulary ('auto' | 'high' | 'medium' | 'low') is owned by
- *     lib/townScene/adaptiveQuality.js OVERRIDE_MODES and deliberately NOT
- *     re-spelled here: that module is lazy portrait-lane code and this slice is
- *     eager, so importing it would drag renderer bytes into the first-paint
- *     closure. The store therefore holds an opaque string and the one consumer
- *     (SettlementScene3D) clamps to its own frozen vocabulary on read — an
- *     unknown or corrupt persisted value renders as 'auto' rather than throwing.
- *     Before this slice the ceiling was component useState, so a user on a weak
- *     machine re-clamped it on every single portrait open (atlas
- *     presentation-scene gap 11 / owner queue #17).
- *   mapSubTab — which sub-tab of the dossier's Map tab opens by default
- *     (TC-0 / DESIGN_TOWN_CARTOGRAPHY §12: "one selected-sub-tab display
- *     preference, persisted per the display-preference partialize rules"). The
- *     vocabulary is owned by lib/mapSubTabs.js and deliberately NOT re-spelled
- *     here, for the SAME reason sceneQualityMode's is not: that module is lazy
- *     map-lane code and this slice is eager, so importing it would drag map bytes
- *     into the first-paint closure. The store holds an opaque string; the one
- *     consumer (MapTabShell) normalizes it against the sub-tabs that are actually
- *     PRESENT on read, so an unknown, retired, or gated-off value opens the plan
- *     rather than an empty panel.
  *   realmMagicChoice — which answer the Instant World's "Does magic exist in
  *     these lands?" modal PRE-SELECTS on this machine (MG-1,
  *     docs/DESIGN_REALM_MAGIC_TOGGLE §4). The vocabulary ('yes' | 'no') is owned
  *     by domain/instantWorld/worldPlan.js MAGIC_CHOICES and deliberately NOT
- *     re-spelled here, for the SAME reason the two keys above are not: that
- *     module is reached only behind the composer's dynamic import and this slice
- *     is eager. The store holds an opaque string; the modal clamps on read.
+ *     re-spelled here: that module is reached only behind the composer's dynamic
+ *     import and this slice is eager, so importing it would drag composer bytes
+ *     into the first-paint closure. The store holds an opaque string; the modal
+ *     clamps on read.
  *
  *     WHY THIS IS STILL NOT GENERATOR INPUT, despite naming a generation knob.
  *     The persisted value never reaches a generator on its own: the modal is
  *     MANDATORY before every instant realm (Esc cancels the generation rather
  *     than defaulting), so what reaches the composer is always an answer the DM
  *     confirmed for THAT realm. This key only decides which button starts
- *     focused — a preference about the machine, exactly like the two above. It
- *     is absent from `config` and no domain module reads it.
+ *     focused — a preference about the machine. It is absent from `config` and
+ *     no domain module reads it.
  *
  * LIFECYCLE (all six hops, because this is persisted state):
  *   create     — DEFAULT_DISPLAY_PREFS below.
- *   read       — useTownScenePaneBridge seeds the viewer from it.
+ *   read       — InstantWorldEntry seeds the magic modal's pre-selection from it.
  *   persist    — the `displayPrefs` key in store/index.js `partialize`
  *                (localStorage `settlementforge`). Registered in
  *                tests/store/lifecycleRoundTrip.test.js ZUSTAND_PERSIST_KEYS.
@@ -61,18 +54,21 @@
  *                defaults, so a key added here later backfills for a returning
  *                user instead of reading undefined (the store-6 cohort-fork
  *                class, closed the same way `config` closes it).
- *   migrate    — none, and none owed: the bag is additive and absent-tolerant,
- *                so a blob written before it existed rehydrates to the defaults.
+ *   migrate    — none, and none owed in EITHER direction: the bag is additive and
+ *                absent-tolerant, so a blob written before a key existed rehydrates
+ *                to the defaults; and a blob written before a key was RETIRED keeps
+ *                an inert extra. ⚠ Stated precisely, because the loose version is
+ *                wrong: the merge spreads the persisted bag OVER the defaults, so a
+ *                retired key SURVIVES in state and is re-persisted on the next
+ *                partialize. It is not dropped — it is simply read by nothing. That
+ *                is the tolerated end state, and it is pinned by an arm in
+ *                tests/store/lifecycleRoundTrip.test.js rather than assumed.
  *   undo/clone — not applicable: a display preference is outside canon, has no
  *                inverse verb, and is never snapshotted with a world.
  */
 
 /** The shipped defaults. Frozen: callers spread it, never mutate it. */
 export const DEFAULT_DISPLAY_PREFS = Object.freeze({
-  sceneQualityMode: 'auto',
-  // The canonical 2D plan is first and default (§1, §12) — the permanent
-  // precision/accessibility/export surface every other presentation falls back to.
-  mapSubTab: 'plan',
   // A world of magic is the shipped default (§4) — it is what every realm built
   // before this knob existed was, so a returning user's first modal pre-selects
   // the world they already know.
@@ -91,43 +87,10 @@ export const createDisplayPrefsSlice = (set, get) => ({
   // ── Actions ──────────────────────────────────────────────────────────────
 
   /**
-   * Set the 3D portrait's rendering-quality ceiling for this device.
-   *
-   * Shape-guarded rather than vocabulary-guarded (see the header): a non-string
-   * falls back to the default instead of persisting junk, and the renderer does
-   * the vocabulary clamp where the vocabulary actually lives.
-   *
-   * @param {unknown} mode one of the adaptiveQuality OVERRIDE_MODES
-   */
-  setSceneQualityMode: (mode) =>
-    set(state => {
-      state.displayPrefs.sceneQualityMode = typeof mode === 'string' && mode
-        ? mode
-        : DEFAULT_DISPLAY_PREFS.sceneQualityMode;
-    }),
-
-  /**
-   * Remember which sub-tab of the dossier's Map tab this device opens by default.
-   *
-   * Shape-guarded, not vocabulary-guarded — the same split sceneQualityMode uses
-   * and for the same reason (see the header): the vocabulary lives in the lazy
-   * map lane, and the reader clamps against the sub-tabs actually present, which
-   * is a stricter question than membership in the vocabulary anyway.
-   *
-   * @param {unknown} id one of the lib/mapSubTabs.js MAP_SUB_TAB_IDS
-   */
-  setMapSubTab: (id) =>
-    set(state => {
-      state.displayPrefs.mapSubTab = typeof id === 'string' && id
-        ? id
-        : DEFAULT_DISPLAY_PREFS.mapSubTab;
-    }),
-
-  /**
    * Remember which answer the Instant World's magic question pre-selects on this
-   * machine. Shape-guarded, not vocabulary-guarded — the same split the two
-   * setters above use and for the same reason (see the header): the vocabulary
-   * lives behind the composer's lazy import, and the modal clamps on read.
+   * machine. Shape-guarded, not vocabulary-guarded (see the header): a non-string
+   * falls back to the default instead of persisting junk, and the modal does the
+   * vocabulary clamp where the vocabulary actually lives.
    *
    * @param {unknown} choice one of worldPlan.js MAGIC_CHOICES ('yes' | 'no')
    */
