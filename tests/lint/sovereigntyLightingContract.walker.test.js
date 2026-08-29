@@ -6642,7 +6642,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   suiteTitles −3 = fogEditPersist's three describes. No other file's suite layer moved.
     //   And 364 + 2129 = 2493, so the arithmetic arm below closes on the new constants.
     // ── TE-WEAVE-SEAM (W-SEAM SEAM-0/1/2), 2026-08-29, REBASED onto 1a2471990 ────
-    // 2493/364/2129/20825/5781 → PENDING MEASUREMENT at the merged tip.
+    // 2493/364/2129/20825/5781 → 2493/364/2129/20862/5788.
     // THE CAUSE IS W-SEAM, and it is a PURE TITLE DELTA: this lane added ZERO test files,
     // so `files`, `parked` and `credited` must not move and 364 + 2129 = 2493 must still
     // close. New titles land in FIVE existing files — spatialDigest.invariants (the
@@ -6651,11 +6651,20 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // campaignWorldPulseSpatialCanon and composeInstantWorld. Every title is a literal
     // string: no template literals (which inflate the census by their PARTS) and no
     // test.each over a non-literal table (which would PARK a whole file).
-    // ⚠ THE FIGURES BELOW ARE RE-DERIVED WHOLE AT THE MERGED TIP, NOT COMPOSED BY
-    // ARITHMETIC FROM TWO BASELINES. Both lanes moved this tuple from DIFFERENT bases, so
-    // adding one lane's delta to the other's total would be a figure nobody measured —
-    // exactly what this block exists to forbid.
-    files: 2493, parked: 364, credited: 2129, titles: 20825, suiteTitles: 5781,
+    // ⚠ ALL FIVE RE-DERIVED WHOLE AT THE MERGED TIP, NOT COMPOSED BY ARITHMETIC FROM TWO
+    // BASELINES. Both lanes moved this tuple from DIFFERENT bases (STRIP from 2494/364/
+    // 2130/20829/5784, W-SEAM from 2525/366/2159/21059/5854), so adding one lane's delta
+    // to the other's total would be a figure nobody measured — exactly what this block
+    // exists to forbid. Measured by the technique STRIP recorded above: the five sequential
+    // assertions switched to `expect.soft`, ONE run to read every actual in a single pass,
+    // then restored FROM A SAVED COPY (never `git checkout --`, which discards uncommitted
+    // work); `git status` clean afterwards proves the restore was byte-identical.
+    //   files 2493 · parked 364 · credited 2129 — UNMOVED, and that is the assertion, not a
+    //     convenience: this lane added ZERO test files, so any movement here would have
+    //     meant a surviving file changed SHAPE (the SP-D parking trap this block records
+    //     twice). 364 + 2129 = 2493 still closes.
+    //   titles +37 · suiteTitles +7 — the whole delta, in the five files named above.
+    files: 2493, parked: 364, credited: 2129, titles: 20862, suiteTitles: 5788,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

@@ -575,6 +575,12 @@ export const EXEMPT_OPERATIONS = Object.freeze({
 // SAME K-D EXEMPT class as its mapSlice peers setMapReady / setMapLoading / setMapError
 // (all exempt above), not an operation-surface omission. A documented ratchet raise for
 // a genuinely-new UI setter.
+// ⚠ RE-DERIVED AGAINST THE MERGED REGISTRY AT REBASE, NOT CARRIED OVER. TE-STRIP-3
+// retired three operations in the same landing window (applyFogEdit, setMapSubTab,
+// setSceneQualityMode), so the raise had to be recomputed rather than assumed: all three
+// were REGISTERED ops, not exempt ones, so the exempt list on the merged base is still
+// exactly 68 and this raise is still 68 -> 69. Measured on the merged tree — 69 exempt
+// entries, 162 registered opTypes — not inferred from the pre-rebase numbers.
 // Net for this lane is +1, not +2: a sibling `clearGeographyDiverged` action was written
 // and then DELETED before landing — it had no product caller (the two paths that lower
 // the flag are already inside an immer draft and clear the field directly), so it would
