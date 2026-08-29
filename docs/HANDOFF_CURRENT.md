@@ -1,12 +1,21 @@
 # HANDOFF — CURRENT PROGRAM STATE (model-agnostic successor bootstrap)
 
-**Updated 2026-08-27 at the §722 collection / OWNER PAUSE (ledger through §722; refreshed at every collection per ODQ §233). This file is refreshed at
+**Updated 2026-08-29 at the §724 DESCOPE SITTING (ledger through §724; refreshed at every collection per ODQ §233). This file is refreshed at
 every collection (ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; ODQ §§150–§276 plus collecting/amending §§287–§289 contain the map
 program's decisions; SPEC fold labels §§277–§286 are design sections, not missing ODQ entries).
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
+
+## ⭐⭐⭐⭐ STATE AT §724 (2026-08-29) — THE DESCOPE SITTING. READ THIS FIRST; IT RE-SCOPES EVERYTHING BELOW.
+
+**The owner ruled (§724.1): ALL settlement-layer mapmaking leaves the launch path and becomes a SEPARATE MODULE** (later possibly published standalone under GPL-3.0 while the core stays private), and the launch tail is everything minus that module. **Seats re-split: Fable architects/surveys/manages · Opus 5 implements/verifies** — this supersedes §685's all-Opus assignment for this program; §685's seat-trailer/retrovalidation MARKING machinery is unchanged and binds every ledger act.
+
+**The whole split is surveyed and ruled vetoably at ODQ §724, with the full program in `docs/DESIGN_MAP_MODULE_SPLIT.md`** (extraction manifest · gates/censuses split · docs split · docket classification · the de-staled launch arc · GPL ground facts · judgments J-SPLIT-1..5 · owner questions Q1–Q7). Sharpest facts a successor must not re-derive: the map program is an **orphan git line with zero launch imports** (carve needs no launch-code changes); the **launch product ships the LEGACY townMapDraw map** (161 src files, CARTOGRAPHER tier stands on it — its fate is owner question Q1, its §705 coastal-wall defect Q2); the **soul-deltas P0 sits inside unsealed CAR-WEAVE `dad7ab736`** and is the module's boundary act, not launch's; **§720.6 and the tuning signature stay on the launch path**; CH-4/5/6/7 + the DEPLOY.md 188 amendment are **already LANDED** (the §562 pickup card's queue head is stale).
+
+**A SUCCESSOR'S FIRST ACTS, IN ORDER:** (1) re-arm the 30-minute lane-stall wakeup (session-scoped cron `11,41 * * * *`: enumerate running workflows; journal completion rows vs artifact mtimes; >15 min silent = stalled → resume by scriptPath+resumeFromRunId). (2) Read ODQ §724 + `docs/DESIGN_MAP_MODULE_SPLIT.md` §9 — if the owner has answered Q1–Q7, execute per the answers; if not, the launch tail's owner-independent members (doc §7: MF-CH3 flip, MF-CH2B mint, C-19 TSV survey, DW dispatch prep) may proceed under standing delegation. (3) The map/module side stays PARKED except its boundary hygiene (J-SPLIT-4: WEAVE seal + §721.8 amendment) — CAR-PROBE and the stopped research workflows re-dispatch inside the module program only. (4) Continuity: every deliverable lands in the repo at each checkpoint; account switches keep the memory dir and kill scratchpads/workflows; an Opus-only window EXECUTES the architected plan and marks per §685, it does not re-architect.
+
 
 ## ⛔⛔⛔⛔ THE SEAT — OWNER ORDER §685 (2026-08-26). READ THIS BEFORE THE PICKUP CARD.
 
