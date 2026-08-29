@@ -6626,7 +6626,22 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // whole file. The SECOND parked file was NOT individually resolved: `classify` is not
     // exported, so naming it would have been a guess. The arithmetic closes without it, and
     // it is written down here as unresolved rather than left to look measured.
-    files: 2494, parked: 364, credited: 2130, titles: 20829, suiteTitles: 5784,
+    // ── TE-STRIP-3 (owner grant ODQ §731 / Q-S1), 2026-08-29 ────────────────────────────
+    // 2494/364/2130/20829/5784 → 2493/364/2129/20825/5781. All five re-derived in ONE pass
+    // by switching the five sequential assertions to expect.soft, reading every actual, and
+    // switching back from a SAVED COPY (not `git checkout --`, which discards uncommitted
+    // work — it cost this lane two files earlier in the same session). The block's own
+    // warning is why: a red on `files` never evaluates `suiteTitles`.
+    // ⭐ THE DELTA CLOSES AS AN EXACT FINGERPRINT, not as a re-measure. Counted per file:
+    //   files −1 · credited −1 · parked UNMOVED — tests/store/fogEditPersist.test.js was
+    //     deleted with the fog write path it covered, and it was a credited file.
+    //   titles −4 = −5 (fogEditPersist's five tests) −2 (fogTierGate 5→3: the two spelled
+    //     src/store/fogEdit*.js tier-blind scans lost their subject) +2 (lifecycleRoundTrip
+    //     29→31: the two retired-key load-tolerance arms) +1 (implementationPackets 16→17:
+    //     the §731.3 retirement-path arm).
+    //   suiteTitles −3 = fogEditPersist's three describes. No other file's suite layer moved.
+    //   And 364 + 2129 = 2493, so the arithmetic arm below closes on the new constants.
+    files: 2493, parked: 364, credited: 2129, titles: 20825, suiteTitles: 5781,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
