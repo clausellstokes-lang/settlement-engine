@@ -207,6 +207,12 @@ export const TERRAIN_AGREEMENT_VERDICTS = Object.freeze(['agrees', 'disagrees', 
 // `riverside` and `coastal` are not classes at all — they are hydrographic facts,
 // so they are decided by isRiverCell / isCoastalCell above (the same single writers
 // the sea-lane port derivation reads), not by this table.
+// Annotated rather than inferred: `hills`, `riverside` and `coastal` carry an EMPTY
+// `agrees` set, which infers as `readonly never[]` and poisons `.includes()` across the
+// union (domain-strict TS2345). The annotation states the intent — two closed lists of
+// terrain-class words per config word — instead of letting three deliberate holes in the
+// mapping dictate the type.
+/** @type {Readonly<Record<string, { agrees: readonly string[], disagrees: readonly string[] }>>} */
 const AGREEMENT_TABLE = Object.freeze({
   plains: Object.freeze({
     agrees: Object.freeze(['grassland']),
@@ -269,7 +275,7 @@ export function terrainAgreement(configTerrain, pack, cellId) {
     return isCoastalCell(pack, cellId) ? 'agrees' : 'disagrees';
   }
 
-  const row = AGREEMENT_TABLE[/** @type {keyof typeof AGREEMENT_TABLE} */ (declared)];
+  const row = AGREEMENT_TABLE[declared];
   if (row.agrees.includes(mapClass)) return 'agrees';
   if (row.disagrees.includes(mapClass)) return 'disagrees';
   return 'unknown';
