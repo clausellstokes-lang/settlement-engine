@@ -134,6 +134,10 @@ Consequences: **Q1 = STRIP** (the recommendation to keep was declined — the ow
 
 **Open questions this ruling creates (batched):** **Q8** — what does the CARTOGRAPHER tier sell after the map rows leave (rec: strip the rows now, decide tier composition/pricing at the pre-launch pricing pass already on your docket)? **Q6′ (narrowed)** — the 3D town-scene portrait and interiors are NOT the legacy settlement map and read the retained substrate: they STAY unless you say otherwise (rec: stay). **Q9** — `map-corpus/` and the landing page's map imagery: the 80 landing SVGs are settlement maps and go; if the marketing/landing page needs replacement imagery before launch, that is a content decision for the marketing pass (flag only).
 
+### §11.3 · Q8/Q9 RESOLVED (2026-08-29, ODQ §726 — supersedes the questions above)
+
+**Q8 CLOSED:** the CARTOGRAPHER tier's spine (unlimited saves · custom content · living realm · map-chains [realm surface] · export bundle) predates the map and survives untouched; STRIP-5 removes only the four settlement-map authoring rows (map-editing, dm-pins, change-view, fog-table), the lens/parity display rows, and the `LENS_COUNT`→townMapStyles import. `DEFERRED_LADDER_ROWS`: interiors survives; the v1→v2 redraw row dies. **Q9 CLOSED:** `public/backgrounds/` + `public/videos/` are page-atmosphere imagery — never in scope. `public/landing-maps/` splits: settlement town plates GO, `realm-preview.*` STAYS; `LandingArtifacts.jsx`/`copy/landing.js` lose the settlement showcase sections only. TE-STRIP-1's brief carries this amendment.
+
 ---
 
 # APPENDICES — the seven lane reports, verbatim (survey wf_01cf2434-167, 2026-08-29)
