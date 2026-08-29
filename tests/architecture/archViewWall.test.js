@@ -100,27 +100,46 @@ describe('the view wall: arch/ imports only arch/ + kernel (no view, no three.js
       }
     }
   });
-  it('Three.js imports are confined to the lazy settlement-scene view layer', () => {
+  // ⚠ INVERTED BY TE-STRIP-1 (owner ruling, ODQ §725), and the inversion is the honest
+  // direction. This arm used to say "three.js IS imported, and only from
+  // src/components/townMap/scene3d/" — an existence claim plus a confinement claim. The
+  // 3D settlement portrait's view layer left with the legacy settlement map, so NO shipped
+  // source imports three at all any more. Keeping the old arm would have meant deleting
+  // the existence half and leaving a confinement half that passes over an empty set: a
+  // control that cannot fail. The absence is the STRONGER wall, so it is what is asserted,
+  // with the scan's own liveness anchored below so an empty walk cannot fake it. `three`
+  // stays in package.json (a byte change there is a mint trigger); the unused-dependency
+  // sweep is STRIP-6's.
+  it('no shipped source imports three.js at all (the portrait view layer is gone)', () => {
+    const scanned = [];
     const users = [];
     for (const path of shippedSourceFiles()) {
       const source = code(readFileSync(path, 'utf8'));
+      scanned.push(path);
       const importsThree = (
         /\bfrom\s+['"]three(?:\/[^'"]*)?['"]/.test(source)
         || /\bimport\s*\(\s*['"]three(?:\/[^'"]*)?['"]\s*\)/.test(source)
+        // ⭐ THE SIDE-EFFECT FORM, added with the inversion because a NEGATIVE claim is
+        // only as strong as its detector. The two patterns above match `from 'three'` and
+        // `import('three')` but NOT a bare `import 'three';` — measured: a planted bare
+        // import passed the arm silently. Under the old confinement claim that gap was
+        // survivable (the existence half still had teeth); under an absence claim it would
+        // be the whole hole, so it is closed here.
+        || /(?:^|[;}\s])import\s+['"]three(?:\/[^'"]*)?['"]/.test(source)
       );
       if (importsThree) users.push(path.replace(`${ROOT}/`, ''));
     }
 
+    // NON-VACUITY: a walk that found no files would make the absence below trivially true.
     expect(
-      users.length,
-      'Three is installed for the production portrait but no shipped lazy view imports it.',
+      scanned.length,
+      'the shipped-source walk found nothing — the absence assertion would be vacuous',
     ).toBeGreaterThan(0);
-    for (const path of users) {
-      expect(
-        path,
-        `${path} imports Three outside the lazy settlement-scene view boundary`,
-      ).toMatch(/^src\/components\/townMap\/scene3d\//);
-    }
+    expect(
+      users,
+      `three.js is imported by shipped source again: ${users.join(', ')}. It has no view layer `
+      + 'to live in since STRIP-1; a new importer needs its own boundary decision first.',
+    ).toEqual([]);
   });
 });
 

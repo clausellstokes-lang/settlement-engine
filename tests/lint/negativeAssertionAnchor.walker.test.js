@@ -167,6 +167,21 @@ function renderLiteral(found) {
  * UPDATE_EPISTEMIC_ALLOWLIST=1 (it prints, never writes), then split the generation-facing
  * rows out by hand into READMITTED_GENERATION_FACING — the arms below refuse them here.
  */
+// ── ROWS PRUNED 2026-08-29 BY TE-STRIP-1 (owner ruling, ODQ §725) ─────────────────
+// Four rows worth SEVEN un-anchored sites left with their files, which the legacy
+// settlement map took when it left the product:
+//   tests/build/townScene3dLazy.test.js            3
+//   tests/security/townSceneFogFailClosed.test.js  2
+//   tests/ui/settlementMapLegibility.test.jsx      1
+//   tests/ui/settlementScene3D.test.jsx            1
+// This is the burn-down list shrinking because its HABITAT was demolished, not because
+// anything was anchored — recorded so a future reader does not read −7 as anchoring work.
+// ⭐ AN EIGHTH SITE WAS GENUINELY ANCHORED, AND ITS ROW IS DELETED AT ZERO:
+//   tests/ui/homeLanding.test.jsx  1 → 0
+// That file's map-artifact arms were removed with the section they tested, and the two
+// absences replacing them (`landing` has no `map` block, `landing.brief` no `waypoint`)
+// are written through expectAbsentWithAnchor against a live sibling key rather than as
+// bare negatives. So this one is burn-down of the kind the list exists to reward.
 const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/application/commands/commandEnvelope.test.js': 1,
   'tests/architecture/archViewWall.test.js': 14,
@@ -188,7 +203,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/build/sitemap.test.js': 2,
   'tests/build/statusPageSelfContained.test.js': 5,
   'tests/build/surveyorPanelsLazy.test.js': 2,
-  'tests/build/townScene3dLazy.test.js': 3,
   'tests/build/townSceneLocalMatrixAudit.test.js': 1,
   'tests/build/vendorPdfLazy.test.js': 4,
   'tests/build/worldPageLazy.test.js': 3,
@@ -648,7 +662,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/security/townMapFogPublicDrop.test.js': 1,
   'tests/security/townMapGalleryOptIn.test.js': 4,
   'tests/security/townMapPlayerProjection.test.js': 1,
-  'tests/security/townSceneFogFailClosed.test.js': 2,
   'tests/security/townScenePlayerSafe.test.js': 17,
   'tests/store/accountImportSlice.test.js': 9,
   'tests/store/campaignSlice.worldPulse.test.js': 1,
@@ -681,7 +694,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/ui/heraldForecast.test.jsx': 2,
   'tests/ui/heraldHeadline.test.jsx': 5,
   'tests/ui/homeHeroAnonGauge.test.jsx': 3,
-  'tests/ui/homeLanding.test.jsx': 1,
   'tests/ui/howToUseLivingWorld.test.jsx': 2,
   'tests/ui/libraryLivingSurface.test.jsx': 1,
   'tests/ui/mapDirtyFingerprint.test.js': 1,
@@ -691,9 +703,7 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/ui/pricingPageBands.test.jsx': 1,
   'tests/ui/realmHub.test.jsx': 3,
   'tests/ui/realmMagicWizardDefault.test.jsx': 1,
-  'tests/ui/settlementMapLegibility.test.jsx': 1,
   'tests/ui/settlementPalette.a11y.test.jsx': 3,
-  'tests/ui/settlementScene3D.test.jsx': 1,
   'tests/ui/spinnerKeyframeGlobal.test.js': 1,
   'tests/ui/uiA11yWave5.test.jsx': 1,
   'tests/ui/whileYouWereAway.test.jsx': 3,

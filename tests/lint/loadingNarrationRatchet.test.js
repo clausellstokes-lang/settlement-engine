@@ -39,11 +39,17 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // LOWERED 34 → 33 on 2026-08-10 by the step-15 ratchet reconciliation: the debt
 // had fallen to 33 and the pin's own BELOW arm demands the win be locked, or a
 // stale higher ceiling would silently let the confession regrow.
-const BARE_LOADING_PIN = 33;
+// LOWERED 33 → 32 on 2026-08-29 by TE-STRIP-1: the legacy settlement map's UI left the
+// product, and PublicDossierView's `Loading map...` Suspense fallback went with it. A
+// removal is a win the BELOW arm exists to make you bank, so it is banked here.
+const BARE_LOADING_PIN = 32;
 // Silent Suspense boundaries across src/ — each renders NOTHING while a lazy
 // chunk loads. Existing ones are deliberate imperceptible overlay seams;
 // new perceptible boundaries must narrate instead.
-const NULL_FALLBACK_PIN = 40;
+// LOWERED 40 → 38 on 2026-08-29 by TE-STRIP-1: two silent boundaries left with the legacy
+// settlement map — SettlementDossierHero's LIVING BACKDROP boundary and the fog chrome's
+// player-view boundary inside the removed src/components/townMap/ subtree.
+const NULL_FALLBACK_PIN = 38;
 
 const bareLoadingRe = () => /['"`>]Loading\b/g;
 const nullFallbackRe = () => /fallback=\{null\}/g;

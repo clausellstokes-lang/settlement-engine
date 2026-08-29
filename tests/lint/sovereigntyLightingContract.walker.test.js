@@ -6603,7 +6603,30 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // with literal titles and the file is credited again. Same failure, same cure, as the
     // pactKernelMount draft recorded above.
     // The arithmetic closes: 366 + 2,159 = 2,525 still.
-    files: 2525, parked: 366, credited: 2159, titles: 21059, suiteTitles: 5854,
+    // ── RE-RECORDED 2026-08-29 BY TE-STRIP-1 (the legacy settlement map leaves the site) ──
+    // 2,525/366/2,159/21,059/5,854 → 2,494/364/2,130/20,829/5,784. THE CAUSE IS THIRTY-ONE
+    // DELETED TEST FILES and nothing else: every one had a src/components/townMap/** module
+    // or SettlementDossierBackdrop.jsx as its SUBJECT, and those left the product under the
+    // owner's ODQ §725 ruling. This is a REMOVAL, so every figure falls; no rule here widened
+    // or narrowed and no surviving file changed shape.
+    // ⚠ THE DELTAS ARE A REMOVAL FINGERPRINT AND THEY CLOSE: −31 files = −2 parked −29
+    // credited, and 364 + 2,130 = 2,494. A file count that fell by anything other than the
+    // deleted-file count would have meant a surviving file changed shape too.
+    // ⚠ ALL FIVE RE-DERIVED BY EXECUTION, per this block's standing warning that the figures
+    // are asserted IN SEQUENCE so a red on `files` never evaluates `suiteTitles`. The five
+    // assertions were temporarily switched to `expect.soft`, run once to read every actual in
+    // one pass, and switched back (file restored, `git status` clean):
+    //   {"files":2494,"parked":364,"credited":2130,"titles":20829,"suiteTitles":5784}
+    // ⚠ THE BASE WAS PROVED UNDRIFTED RATHER THAN ASSUMED: this same walker runs 33/33 GREEN
+    // in a second worktree checked out at the pristine slot 73f5dfc02, so the whole −31 is
+    // this lane's and none of it is inherited from a concurrent lane.
+    // ⚠ HONEST LIMIT ON THE PARKED PAIR. tests/build/mapTabShellLazy.test.js is a CONFIRMED
+    // parked member — it registered three titles as `it(`${...}`)` inside loops (visible at
+    // 43c3ac380:183/239/252), which is exactly the SP-D shape recorded above as parking a
+    // whole file. The SECOND parked file was NOT individually resolved: `classify` is not
+    // exported, so naming it would have been a guess. The arithmetic closes without it, and
+    // it is written down here as unresolved rather than left to look measured.
+    files: 2494, parked: 364, credited: 2130, titles: 20829, suiteTitles: 5784,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

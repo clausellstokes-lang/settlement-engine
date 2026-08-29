@@ -22,6 +22,7 @@
  * needs a populated settlement and resolves a pile of lazy tab chunks.
  */
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { describe, test, expect, vi } from 'vitest';
 
 // Supabase singleton — isConfigured is read at module-eval; stub it false so
@@ -103,11 +104,22 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
     expect(mod.TAB_GROUPS.notes.tabs).toContain('versions');
   });
 
-  // W2-c — the Map group is a first-class tab, ordered Summary / Systems / World /
-  // Map / Notes. Pin the group ORDER (Object insertion order) + the single map tab.
-  test('the Map group sits fifth, between World and Notes', async () => {
+  // W2-c made the Map group a first-class fifth tab; TE-STRIP-1 (owner ruling, ODQ §725)
+  // REMOVED it with the rest of the legacy settlement map. The dossier reads Summary /
+  // Systems / World / Notes, and the pin is INVERTED rather than deleted: the group order
+  // is still asserted (Object insertion order), and the absence of a `map` group is now
+  // asserted BY NAME so a re-introduction reds here instead of arriving silently.
+  test('the tab groups run Summary / Systems / World / Notes, with no Map group', async () => {
     const mod = await import('../../src/components/OutputContainer.jsx');
-    expect(Object.keys(mod.TAB_GROUPS)).toEqual(['summary', 'systems', 'world', 'map', 'notes']);
-    expect(mod.TAB_GROUPS.map.tabs).toEqual(['map']);
+    expect(Object.keys(mod.TAB_GROUPS)).toEqual(['summary', 'systems', 'world', 'notes']);
+    // The exact-equality assertion on the line above pins the WHOLE key set, so a TAB_GROUPS
+    // that drifted away or emptied reds there before this absence is ever reached.
+    // anchored: the preceding toEqual pins the complete key set, so an empty or drifted TAB_GROUPS reds first.
+    expect(mod.TAB_GROUPS).not.toHaveProperty('map');
+    // …and no surviving group smuggles the map tab back in under another heading. Anchored on
+    // a sibling tab that travels the same registry path, so an empty flatMap cannot pass it.
+    expectAbsentWithAnchor(
+      Object.values(mod.TAB_GROUPS).flatMap((g) => g.tabs), 'map', 'versions', 'dossier tab registry',
+    );
   });
 });

@@ -27,6 +27,7 @@
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, cleanup, screen, within } from '@testing-library/react';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import HomeLanding from '../../src/components/HomeLanding.jsx';
 import { landing } from '../../src/copy/landing.js';
 import { fixture } from '../../src/components/home/landingFixture.js';
@@ -79,9 +80,11 @@ describe('HomeLanding — scrollable landing', () => {
     for (const h2 of headings) {
       expect(await screen.findByText(h2)).toBeTruthy();
     }
-    // The removed section leaves no copy behind to render by accident.
-    expect(landing).not.toHaveProperty('map');
-    expect(landing.brief).not.toHaveProperty('waypoint');
+    // The removed section leaves no copy behind to render by accident — and BOTH
+    // absences are anchored on a live sibling that travels the same registry path,
+    // so neither can pass because the registry drifted away entirely.
+    expectAbsentWithAnchor(Object.keys(landing), 'map', 'commons', 'landing copy registry');
+    expectAbsentWithAnchor(Object.keys(landing.brief), 'waypoint', 'h2', 'landing.brief copy block');
   });
 
   test('visible waypoints stay contiguous after the map section was removed', async () => {
@@ -94,6 +97,9 @@ describe('HomeLanding — scrollable landing', () => {
       '04 · The commons', '05 · Set out']) {
       expect(screen.getByText(pill), `waypoint pill missing: ${pill}`).toBeTruthy();
     }
+    // anchored: the loop immediately above asserts all FIVE surviving pills are present,
+    // so a landing page that failed to render its waypoints at all reds there first — these
+    // two queries can only be measuring the removed section and the retired sixth number.
     expect(screen.queryByText('02 · The visual')).toBeNull();
     expect(screen.queryByText('06 · Set out')).toBeNull();
   });

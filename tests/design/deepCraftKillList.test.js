@@ -267,16 +267,24 @@ const CEILINGS = Object.freeze({
   // the DM-only signal, which is C5-a·iii's ResumeChip cure applied to a prose plate. AMBER_BG
   // stays imported and stays counted once, on TONE_COLOR.warn, which StateChip still uses.
   // So the ceiling DOES NOT MOVE — nothing was raised, and the surface came back to it.
-  borderRadius: 85,     // the rounded-card tell — plates are rule-framed, not rounded
+  // LOWERED BY TE-STRIP-1 (owner ruling, ODQ §725) — a REMOVAL win, banked in the same
+  // act that earned it: borderRadius 85->84, boxShadow 69->59, rgbaLiterals 167->166,
+  // tintedCallouts 163->160. Nothing was restyled; the legacy settlement map's UI left
+  // the product (src/components/townMap/** + SettlementDossierBackdrop + the landing
+  // page's map-plate card), taking its rounded panes, elevated chrome and tinted washes
+  // with it. The shrink-only rule reads a shrink as a win to LOCK, so these are lowered
+  // rather than left slack — leaving them would let a future surface re-spend the budget
+  // the map vacated.
+  borderRadius: 84,     // the rounded-card tell — plates are rule-framed, not rounded
                         // (100->86 on the 2026-07-22 zero-exemption refinement: 15
                         // flat-enforcing zero lines left the count; 86->85 at the
                         // walk-completions fold: order-14 collapsed two gallery
                         // section badges into one, striking one radius; win locked)
-  boxShadow: 69,        // print has no z-axis — depth is ink, never elevation
+  boxShadow: 59,        // print has no z-axis — depth is ink, never elevation
                         // (72->69 at LANE PW's burn-down: five z-axis lifts struck,
                         // four of them carrying an rgba that fell with them)
-  rgbaLiterals: 167,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 163,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  rgbaLiterals: 166,    // off-palette translucent washes — ink tones come from the ramp
+  tintedCallouts: 160,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({

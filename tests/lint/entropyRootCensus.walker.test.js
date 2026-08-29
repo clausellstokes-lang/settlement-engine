@@ -764,7 +764,11 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // on the SAME line, which is also why the read-site census above is unmoved at twenty-two.
     const hits = ALL_FILES.filter((f) => /rngSeed/.test(read(f)));
     const lines = ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => l.includes('rngSeed')).length, 0);
-    expect({ lines, files: hits.length }).toEqual({ lines: 73, files: 31 });
+    // RE-MEASURED 2026-08-29 BY TE-STRIP-1: 73/31 → 72/30. THE CAUSE IS ONE DELETED FILE and
+    // nothing else — src/components/townMap/SettlementMapPane.jsx carried exactly ONE `rngSeed`
+    // line and left with the legacy settlement map (verified per file against 73f5dfc02: it is
+    // the only deleted src file that mentions the identifier at all). No re-rooted site moved.
+    expect({ lines, files: hits.length }).toEqual({ lines: 72, files: 30 });
   });
 
   test('`createPRNG(` sites: 38 in src/domain, 48 whole-src; `generateSeed()` 9 hits / 6 call sites', () => {

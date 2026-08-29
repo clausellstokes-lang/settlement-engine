@@ -55,7 +55,10 @@ ruleTester.run('no-raw-color-literal', visualBudget.rules['no-raw-color-literal'
 
 // ── 2. Occurrence-budget ratchet ─────────────────────────────────────────────
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const BUDGET = 1335; // committed raw-color-literal occurrences — EXACT. Lower on a shrink; never raise.
+// LOWERED 1335 → 1330 on 2026-08-29 by TE-STRIP-1: five raw-color occurrences left with the
+// legacy settlement map's UI (src/components/townMap/** + SettlementDossierBackdrop.jsx + the
+// landing map-plate card). Nothing was re-tokenised; the surfaces that carried them are gone.
+const BUDGET = 1330; // committed raw-color-literal occurrences — EXACT. Lower on a shrink; never raise.
 // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
 // folded into BUDGET: one number per population, so a future movement stays attributable to
 // the population that moved. Today's single occurrence is real debt, not a placeholder —

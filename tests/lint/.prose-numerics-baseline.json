@@ -13,7 +13,7 @@
   },
   {
     "path": "src/components/OutputContainer.jsx",
-    "line": 983,
+    "line": 966,
     "category": "floatInterpolation",
     "snippet": "{displayProgress || 'Regenerating\\u2026'}"
   },
@@ -139,7 +139,7 @@
   },
   {
     "path": "src/components/home/LandingArtifacts.jsx",
-    "line": 187,
+    "line": 185,
     "category": "floatInterpolation",
     "snippet": "{town.pressure}"
   },
@@ -850,36 +850,6 @@
     "line": 335,
     "category": "floatInterpolation",
     "snippet": "{running ? `Advancing… week ${progress?.week ?? 0}/${progress?.budget ?? maxWeeks}` : 'Advance until it fires'}"
-  },
-  {
-    "path": "src/components/townMap/scene3d/TownSceneInspector.jsx",
-    "line": 227,
-    "category": "floatInterpolation",
-    "snippet": "{Number.isFinite(livingRecord.severityPermille) ? ` (${Math.round(livingRecord.severityPermille / 10)}%)` : ''}"
-  },
-  {
-    "path": "src/components/townMap/scene3d/TownSceneInspector.jsx",
-    "line": 228,
-    "category": "floatInterpolation",
-    "snippet": "` (${Math.round(livingRecord.severityPermille / 10)}%)`"
-  },
-  {
-    "path": "src/components/townMap/scene3d/TownSceneInspector.jsx",
-    "line": 228,
-    "category": "percentToken",
-    "snippet": "` (${Math.round(livingRecord.severityPermille / 10)}%)`"
-  },
-  {
-    "path": "src/components/townMap/scene3d/TownSceneViewerControls.jsx",
-    "line": 89,
-    "category": "floatInterpolation",
-    "snippet": "{effectivePercent}"
-  },
-  {
-    "path": "src/components/townMap/scene3d/TownSceneViewerControls.jsx",
-    "line": 89,
-    "category": "percentToken",
-    "snippet": "{effectivePercent}"
   },
   {
     "path": "src/domain/activeConditions.js",

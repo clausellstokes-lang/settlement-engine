@@ -77,10 +77,24 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // a 504-settlement corpus). None of them is debt and none is in this baseline: the detector
 // reads numerics that FLOW INTO A PROSE KEY, not numbers written in comments. Humanizing
 // them would have removed reviewable evidence to satisfy an instrument that never saw it.
-const REVIEWED_TOTAL_CEILING = 413;
+// ── LOWERED 2026-08-29 BY TE-STRIP-1 (owner ruling, ODQ §725) ─────────────────────
+// 413 → 408, floatInterpolation 236 → 233, percentToken 79 → 77. THE CAUSE IS TWO DELETED
+// FILES and nothing else: src/components/townMap/scene3d/TownSceneInspector.jsx (3 rows —
+// the severity-permille readouts) and TownSceneViewerControls.jsx (2 rows — the effective-
+// percent readout) left with the legacy settlement map's UI. EVERY REMOVED ROW WAS REVIEWED
+// against the diff, as this ratchet's own message demands; the only other baseline movement
+// is two pure LINE re-addresses (OutputContainer.jsx 983→966, LandingArtifacts.jsx 187→185)
+// where path, category and snippet are byte-identical and the shrink came from lines this
+// lane deleted above them. multiplier/twoDecimalScore/pushIndirection are untouched.
+// ⛔ THE CEILINGS HAD TO COME DOWN WITH THE BASELINE, AND THE GATE PROVED IT. Leaving them
+// at 413/236 was tried first: the '+1 leak' control below reds, because with live at 408 a
+// planted leak lands at 409 — comfortably UNDER a stale 413 — so the control that exists to
+// prove a regenerated baseline cannot launder a leak would itself have gone vacuous. A
+// shrink here is not optional bookkeeping; the ceiling IS the control's teeth.
+const REVIEWED_TOTAL_CEILING = 408;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 236,
-  percentToken: 79,
+  floatInterpolation: 233,
+  percentToken: 77,
   multiplier: 24,
   twoDecimalScore: 71,
   pushIndirection: 3,
@@ -389,11 +403,11 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     expect(categoryCeilingTotal).toBe(REVIEWED_TOTAL_CEILING);
     expect(
       ceilingViolations(baseline),
-      'The committed baseline exceeds the reviewed 413-row census. Remove the leak; never raise a ceiling.',
+      'The committed baseline exceeds the reviewed 408-row census. Remove the leak; never raise a ceiling.',
     ).toEqual([]);
     expect(
       ceilingViolations(LIVE.hits),
-      'The live tree exceeds the reviewed 413-row census. Humanize the new leak; never raise a ceiling.',
+      'The live tree exceeds the reviewed 408-row census. Humanize the new leak; never raise a ceiling.',
     ).toEqual([]);
   });
 
@@ -408,8 +422,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 414 exceeds reviewed ceiling 413',
-      'floatInterpolation 237 exceeds reviewed ceiling 236',
+      'total 409 exceeds reviewed ceiling 408',
+      'floatInterpolation 234 exceeds reviewed ceiling 233',
     ]);
   });
 
