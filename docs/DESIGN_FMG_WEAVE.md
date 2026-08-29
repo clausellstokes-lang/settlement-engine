@@ -122,3 +122,36 @@ This volume goes to a five-lens refute-oriented skeptic panel (determinism/dorma
 
 ## A1.3 · Attacks that failed (recorded so the seal is honest)
 The panel could not refute: fork-label safety and the dark-path byte-exactness mechanisms; CAP's absent-key dormancy on old canons; NET-2's dark-lane claim; POLIS-1's inability to touch lived worlds; D2's flood-fill promotion; D7's detPow soundness (IEEE-754 + − × ÷ and sqrt are correctly-rounded — the kernel is cross-machine stable by construction); D8's coupling; the guard list row-by-row; SEAM-0's priority; W-ARMS's ratification; the pre-soak placement of the whole program.
+
+
+---
+
+# AMENDMENT A2 — the published-materials addendum, tie-back-verified and folded (2026-08-29; review `wf_6ce0f553-76f`, tie-back pass `wf_8a4f0e33-8c8` per the owner's TIE-BACK LAW — every claim below is code-verified both directions; full record in `docs/REVIEW_FMG_PUBLISHED_MATERIALS.md`). A2 extends A1; A1 still outranks the body.
+
+## A2.1 · New cars accepted (all SURVIVED tie-back; amendments folded)
+
+- **NAME-3 (S-M) — engagement-narrative deriver + battle-kind taxonomy.** Display-leaf, A1.1.1 family, as **enrichment of the existing `armyStrength.js`/`warStatus.js` display family** (already PDF-wired at `liveWorld.js`) — not a new surface. Kind derived at render from record data (naval/convoy/terrain flavors); phase sequences from closed per-kind vocabularies; every narrated fact must stand in the engagement record; our receipted roll may be narrated verbatim (`warDeployment.js:813-816`). Terrain caveat NARROWED: sieges read `resolveSettlementTerrain` live and field battles carry `battle.region`; the additive terrain field is needed only if region→terrain-class is underivable from the frozen digest — determine before requesting the Q-W4-family grant. Respect WarFaithTab's recorded light-import constraint (stay off the `militaryStrength` heavy chain on first-paint-adjacent surfaces).
+- **NAME-4 (M) — typed force-composition clerk.** `deriveForceComposition(settlement, deploymentRecord) → {type: count}`, closed ~6-type medieval vocabulary (+`war_mages` under magic), authored weight tables; derived-on-read, zero bytes, composition NEVER an input to strength. Absence row corrected: the only unit-word hits in the war stack are the two materiel regexes (`militaryStrength.js:85`, `tradeSalience.js:60`).
+- **W-DESK (new wave; all display-plane; post-STRIP-6 per §4.2):** **DESK-1** realm census table (register⇄table toggle; DM-tier numeric, player-tier banded — the heraldRegister legibility law is load-bearing; militarization index debuts here) · **DESK-2** map↔word linkage (`hoveredSettlementId` exists at `mapSlice.js:237`; zero pan-to affordances exist; the camera is MODE-SPECIFIC — pan-to must resolve per-mode coordinates) · **DESK-3** authored comparison charts (their group-by device `charts-overview.ts:55-57`; bubble-pack provenance corrected — it lives in burgs-overview/states-editor, not the chart builder) · **DESK-4** perspective-anchored standings ("the world as X believes it", belief-scoped from `display/warStatus.js`; their omniscient N×N matrix stays refused) · **DESK-5** legibility texture batch (sentence footers · door→overlay affinity · palette commands · named display units · `?focus=` deep-link following the existing `?mapview=` precedent).
+- **POLIS-3 extension — travel-time rings**, AMENDED to honesty: `hopWeeks` is settlement-pair only (no per-cell cost field), so rings are **hopWeeks-banded settlement groupings** ("within a week's ride"), never continuous contours; feed sits behind the existing entitlement + `spatialCanonVersion` call-site gates; `TravelersLayer.jsx` is the render precedent.
+- **POLIS-1 extension option — culture sub-roster** (their per-entry-odds culture-set pool, `cultures-generator.ts:1091`): plans-only, dormant; MUST ride D5's single declared plan shift or defer to a follow-on plan car — never a second worldPlan perturbation.
+
+## A2.2 · New owner rows (extending §5's batch)
+
+- **Q-W7** — typed data export of visible tables after viewerSecrets redaction (free vs entitled is paid-surface). REC: grant as DM-tier first.
+- **Q-W8** — state treasury / typed taxation: ⚠ this would **REVERSE the recorded no-conserved-coin ruling** (`treatyTransfer.js:13-17`, ruling f3cf639e — grain is deliberately the only conserved stock). REC: decline for launch; revisit post-launch with the ruling on the table.
+- **Q-W9** — DM battle theater: their apply-or-cancel interactive loop is REFUSED as mechanics (engine physics is not a minigame); the only admissible form is an interactive REPLAY of NAME-3's derived narrative. New capability class. REC: defer.
+- **ADD-13** (engagement-kind as engine modifiers) is recorded as a vetoable escalation option only; default is narrative-only.
+- **W1-4** (culture/faith mobilization cohesion): CONFIRMED absent in `mobilization.js`; the honest hook is a graded extension of the occupation-suppression rungs (`OCCUPIER_CONTROL_STATES`), per-settlement not per-cell. Not chartered — recorded for the tuning-era docket.
+
+## A2.3 · Guard-list additions (extend §727.3; all tie-back-verified at source)
+
+(a) **Fabricated backstory mints** (`military-generator.ts:555-560` — the painted-history idiom) · (b) annihilation-to-zero + ambient-RNG battle rolls + attacker teleport (`regiment-editor.ts:~417`) · (c) AI-as-prose-writer for notes/flavor · (d) canon mutation from editable overview cells (`military-overview.ts:281-295` rescales regiments from a table cell) · (e) mid-battle interactive steering (`battle-screen.ts:1213-1236`). Battle-verdict wording corrected for the record: their results touch notes, a marker, AND the regiments' own troop counts — never a burg, diplomacy, or a population.
+
+## A2.4 · Product signals (recorded for the owner; no cars)
+
+Their own wiki, nine years in: "The map is static. Over-time simulation is planned, but not yet implemented" — with Simulate-History/Economics as unstarted roadmap cards; their loudest user demands (shape authorship, edits-surviving-regeneration, narrative war history, diplomacy depth) map onto #12/#11/NAME-3/ours-better almost one-to-one; a third-party "Fantasy Map Simulator" holds >85% positive on Steam with users requesting Azgaar imports (a paying audience for this category); their ~8% free+Patreon conversion funds the person, not the product. Failure modes banked: data-in-the-render re-homing, rolled-back blanket format changes, forced auto-behaviors, half-measure visualizations. Their late-stage polish wave (search/pagination/column pickers/dialog persistence) is W-DESK's checklist at our equivalent stage.
+
+## A2.5 · Coverage honesty carried forward
+
+55/57 Patreon post bodies login-walled; Reddit unreachable; two secondhand items marked and load-bearing for nothing. All mechanics claims are source reads; the tie-back pass re-verified every load-bearing citation (three mild MISQUOTES corrected above — none fatal; several counts were understated in our favor).

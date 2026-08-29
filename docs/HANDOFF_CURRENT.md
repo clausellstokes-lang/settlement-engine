@@ -8,6 +8,10 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
+## ⭐⭐ UPDATE AT §730 (2026-08-29, same sitting) — A2 FOLDED: THE PUBLISHED-MATERIALS ADDENDUM IS CHARTERED.
+
+**`docs/DESIGN_FMG_WEAVE.md` now carries AMENDMENT A2** (new cars NAME-3/NAME-4, the new W-DESK wave, POLIS-3 travel rings, POLIS-1 culture sub-roster option, five guard additions) — all tie-back-verified per the owner's law, zero kills; full record `docs/REVIEW_FMG_PUBLISHED_MATERIALS.md`. Owner batch grows to Q-W1..Q-W9 + Q-S1 (§729.4 + §730.4; Q-W8 would reverse ruling f3cf639e — flagged). In flight: TE-WEAVE-SEAM (Opus; SEAM-0 lockout verdict pending) · TE-STRIP-1 gate collection.
+
 ## ⭐⭐⭐ UPDATE AT §729 (2026-08-29, same sitting) — THE WEAVE ARCHITECTURE IS SEALED; IMPLEMENTATION MAY DISPATCH.
 
 **The FMG integration program is architected, panel-ruled (5/5 NOT-REFUTED), and amended: `docs/DESIGN_FMG_WEAVE.md` (+ AMENDMENT A1, which OUTRANKS the body) with all receipts in `docs/DESIGN_FMG_WEAVE_VERIFICATION.md`.** A successor implementing: read the volume BODY then A1 then the car's verification receipts; Opus seats implement/verify; Fable chairs. Dispatch order and collision laws are volume §4 as amended (SEAM first; UI cars after STRIP-6; POLIS-2 before ST-3; NET-1 export half after STRIP-2). The owner batch Q-W1..Q-W6 + Q-S1 is open (§729.4) — none blocks the ungated cars. ⚠ STRIP-3's scope was corrected TWICE — read `docs/DESIGN_MAP_MODULE_SPLIT.md` §11.4 before touching it (mapSlice.js and the three tests/security map contracts are WORLD-map surfaces that STAY). In flight: the published-materials review under the TIE-BACK LAW (§729.5); TE-STRIP-1's gate collection + held arm (Q-S1).
