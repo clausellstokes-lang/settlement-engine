@@ -17,6 +17,7 @@ import {
   OVERLAY_VERSION,
   CAPTURE_RECEIPT_VERSION,
   CONFIG_TERRAIN_CLASSES,
+  nearestCellTo,
   TERRAIN_AGREEMENT_VERDICTS,
   terrainAgreement,
   terrainClassOf,
@@ -370,5 +371,90 @@ describe('SEAM-1 — RAW-BYTE dormancy: no existing canon moves a byte', () => {
       expect(sha(built[name]), `${name} digest bytes moved`).toBe(expected);
       expect('captureReceipt' in /** @type {any} */ (built[name]), `${name} grew a receipt key`).toBe(false);
     }
+  });
+});
+
+describe('SEAM-2 — nearestCellTo, the ONE cell-resolution law', () => {
+  // Amendment A1.2 §9 makes this the single resolution law for TWO consumers: the
+  // capture's cell re-resolution and the territory view's flood seeds. Two
+  // implementations would drift, so the spec is pinned here, not just the behaviour.
+  const P = [[0, 0], [10, 0], [0, 10], [10, 10]];
+
+  it('answers the nearest centroid', () => {
+    expect(nearestCellTo(1, 1, P, P.length)).toBe(0);
+    expect(nearestCellTo(9, 1, P, P.length)).toBe(1);
+    expect(nearestCellTo(1, 9, P, P.length)).toBe(2);
+    expect(nearestCellTo(9, 9, P, P.length)).toBe(3);
+  });
+
+  it('resolves an EXACT tie to the LOWEST index, matching the digest tie-break law', () => {
+    // Dead centre: all four centroids are equidistant. A strict `<` keeps the first.
+    expect(nearestCellTo(5, 5, P, P.length)).toBe(0);
+    // A two-way tie on the top edge resolves to the earlier of the two.
+    expect(nearestCellTo(5, 0, P, P.length)).toBe(0);
+    // Order is the ONLY discriminator, so reversing the points reverses the answer —
+    // which is what proves the rule is "first minimum", not "smallest index overall".
+    expect(nearestCellTo(5, 5, [...P].reverse(), P.length)).toBe(0);
+    expect(nearestCellTo(5, 0, [[10, 0], [0, 0]], 2)).toBe(0);
+  });
+
+  it('respects the cellCount bound so a ragged capture cannot resolve past it', () => {
+    // Cell 3 is the true nearest, but the bound excludes it.
+    expect(nearestCellTo(9, 9, P, 2)).toBe(1);
+    expect(nearestCellTo(9, 9, P, 0)).toBeNull();
+  });
+
+  it('returns null rather than a fallback cell when there is nothing honest to answer', () => {
+    expect(nearestCellTo(NaN, 1, P, P.length)).toBeNull();
+    expect(nearestCellTo(1, undefined, P, P.length)).toBeNull();
+    expect(nearestCellTo(1, 1, [], 0)).toBeNull();
+    expect(nearestCellTo(1, 1, null, 4)).toBeNull();
+    // A pack whose centroids are all unusable yields null, never index 0.
+    expect(nearestCellTo(1, 1, [null, [NaN, 0]], 2)).toBeNull();
+  });
+
+  it('skips unusable centroids without letting them shift the answer', () => {
+    expect(nearestCellTo(9, 9, [null, [10, 10], [0, 0]], 3)).toBe(1);
+  });
+
+  it('compares SQUARED distance — no sqrt, no hypot in the law itself', () => {
+    // A structural guard, not a behavioural one: both are correctly rounded, so a
+    // sqrt would not change today's answers — it would just add an operation two
+    // consumers could round differently later. The spec says squared; pin the spec.
+    const src = readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '../../src/domain/spatial/spatialDigest.js'), 'utf-8');
+    const body = src.slice(src.indexOf('export function nearestCellTo'));
+    const fn = body.slice(0, body.indexOf('\n}\n') + 3);
+    expect(fn).toContain('dx * dx + dy * dy');
+    expect(fn).not.toContain('Math.sqrt');
+    expect(fn).not.toContain('Math.hypot');
+  });
+});
+
+describe('SEAM-2 — the cellResolution receipt rides the same additive envelope', () => {
+  it('stays absent when the capture reports nothing', () => {
+    const pack = makeGridPack({ cols: 12, rows: 10 });
+    const d = buildSpatialDigest({ pack, placements: placeSettlements(pack, 4), cellResolution: [] });
+    expect('captureReceipt' in d).toBe(false);
+    const d2 = buildSpatialDigest({ pack, placements: placeSettlements(pack, 4), cellResolution: null });
+    expect(JSON.stringify(d2)).toBe(JSON.stringify(d));
+  });
+
+  it('carries the rows verbatim, under the shared receipt version', () => {
+    const pack = makeGridPack({ cols: 12, rows: 10 });
+    const rows = [{ id: 's000', from: 3, to: 7, reason: 'cell_remapped' }];
+    const d = buildSpatialDigest({ pack, placements: placeSettlements(pack, 4), cellResolution: rows });
+    expect(d.captureReceipt.version).toBe(CAPTURE_RECEIPT_VERSION);
+    expect(d.captureReceipt.cellResolution).toEqual(rows);
+    expect('terrainDisagreements' in d.captureReceipt).toBe(false);
+  });
+
+  it('shares one envelope with the terrain receipt, in a fixed key order', () => {
+    const pack = makeGridPack({ cols: 12, rows: 10 });
+    const placements = placeSettlements(pack, 3).map(p => ({ ...p, terrainType: 'mountain' }));
+    const rows = [{ id: 's000', from: 3, to: 7, reason: 'cell_remapped' }];
+    const d = buildSpatialDigest({ pack, placements, cellResolution: rows });
+    expect(Object.keys(d.captureReceipt)).toEqual(['version', 'cellResolution', 'terrainDisagreements']);
+    // The digest's own key order is fixed too: the receipt is appended LAST.
+    expect(Object.keys(d).at(-1)).toBe('captureReceipt');
   });
 });

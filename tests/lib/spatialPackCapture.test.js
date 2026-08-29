@@ -18,11 +18,12 @@
  * mock, so it also exercises the registry handoff the store relies on.
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { captureSpatialPack } from '../../src/lib/spatialPackCapture.js';
+import { captureSpatialPack, resolvePlacementCells } from '../../src/lib/spatialPackCapture.js';
 import {
   registerSpatialCaptureBridge,
   unregisterSpatialCaptureBridge,
 } from '../../src/lib/spatialCaptureRegistry.js';
+import { makeGridPack } from '../fixtures/spatialPackFixtures.js';
 
 // A minimal but shape-valid cells object: h (heights) and c (adjacency) must be
 // non-empty for captureSpatialPack to accept the pack (spatialPackCapture.js:87).
@@ -83,22 +84,22 @@ describe('spatialPackCapture — freeze-first double-read', () => {
     expect(warnSpy).not.toHaveBeenCalled();
   });
 
-  it('SEAM-0: a composer-minted cellId:null is COERCED to cell 0, not dropped', async () => {
-    // W-SEAM SEAM-0 — EXECUTION VERIFICATION, and the review's premise REFUTED.
+  it('SEAM-0/SEAM-2: a composer-minted cellId:null no longer becomes cell 0 — it resolves or it refuses', async () => {
+    // W-SEAM SEAM-0 found this and SEAM-2 repaired it; this is the CLEAR half of a
+    // reproduce-then-clear pair, re-recorded in SEAM-2's own act.
     //
-    // The §727 review and the V-BRIDGE/V-VAR appendices both read the guard below
+    // The review and both verification appendices read the old guard
     //   const cellId = Number(pl?.cellId);
     //   if (!id || !Number.isInteger(cellId)) continue;
-    // as dropping every composer-minted `cellId: null` row, predicting that an
-    // untouched Instant World cannot spatially canonize at all (capture returns
-    // null ⇒ `spatial_capture_unavailable`). It does NOT drop them:
-    // `Number(null) === 0` and `Number.isInteger(0) === true`, so every null cellId
-    // is silently coerced to MAP CELL 0.
+    // as dropping every composer-minted `cellId: null` row, and predicted that an
+    // untouched Instant World simply could not canonize. It did not drop them:
+    // `Number(null) === 0` and `Number.isInteger(0) === true`, so EVERY null cellId was
+    // admitted as MAP CELL 0 and the realm froze a canon in which every member stood on
+    // index 0 — a false canon, worse than the predicted lockout because it is silent.
     //
-    // ⚠ THIS TEST PINS A DEFECT, DELIBERATELY. It is the reproduce half of a
-    // reproduce-then-clear pair: SEAM-2 re-resolves the cell from the stored x/y at
-    // capture and RE-RECORDS this expectation in the same act. Do not "fix" the
-    // expectation without the repair.
+    // Now the null stays null. With no witness that these coordinates belong to the
+    // captured pack's frame, the row is not remapped and not admitted: it is receipted
+    // `frame_unverified`, the placement list comes back EMPTY, and the store refuses.
     registerSpatialCaptureBridge({
       isReady: true,
       getSpatialPack: async () => ({ pack: { cells: cells([40, 40, 40]) } }),
@@ -115,16 +116,16 @@ describe('spatialPackCapture — freeze-first double-read', () => {
     });
 
     expect(result).not.toBeNull();
-    expect(result.placements).toEqual([{ id: 's1', cellId: 0, institutions: [] }]);
+    expect(result.placements).toEqual([]);
+    expect(result.cellResolution).toEqual([{ id: 's1', from: null, to: null, reason: 'frame_unverified' }]);
   });
 
-  it('SEAM-0 control: an ABSENT cellId key IS dropped, and that is the only shape the guard catches', async () => {
-    // The negative control that isolates the mechanism (LANE-LAW §3: a control that
-    // cannot fail proves nothing). `Number(undefined) === NaN`, so a placement whose
-    // cellId KEY is missing is genuinely dropped — and with no rows left the capture
-    // returns null, which is the lockout the review predicted. The composer never
-    // writes that shape: it writes an explicit `cellId: null`. So the predicted
-    // lockout is real only for a shape nothing in the tree mints.
+  it('SEAM-0/SEAM-2: an ABSENT cellId key reaches the same honest answer as an explicit null', async () => {
+    // The negative control that isolated the mechanism at SEAM-0 (LANE-LAW §3): before
+    // the repair, a MISSING cellId key took a different path from an explicit null,
+    // because `Number(undefined)` is NaN while `Number(null)` is 0 — so the guard fired
+    // for a shape nothing in the tree mints and stayed silent for the one it does.
+    // Kept as a control: the two shapes must now agree, which is the point of the fix.
     registerSpatialCaptureBridge({
       isReady: true,
       getSpatialPack: async () => ({ pack: { cells: cells([40, 40, 40]) } }),
@@ -138,7 +139,8 @@ describe('spatialPackCapture — freeze-first double-read', () => {
       }),
     });
 
-    expect(result).toBeNull();
+    expect(result.placements).toEqual([]);
+    expect(result.cellResolution).toEqual([{ id: 's1', from: null, to: null, reason: 'frame_unverified' }]);
   });
 
   it('SEAM-1: the declared terrain rides the placement row, and ONLY when one is declared', async () => {
@@ -209,5 +211,99 @@ describe('spatialPackCapture — freeze-first double-read', () => {
     expect(result).not.toBeNull();
     expect(result.pack).toBe(firstPack);
     expect(warnSpy).not.toHaveBeenCalled(); // a thrown second read is swallowed, not warned
+  });
+});
+
+describe('SEAM-2 — capture-time cell re-resolution, and the frame it refuses to assume', () => {
+  // A 4x3 grid at spacing 40, so cell (col,row) sits at [col*40, row*40] and cell
+  // index is row*4+col. Every cell is land.
+  const grid = () => makeGridPack({ cols: 4, rows: 3, spacing: 40, bay: false, ridge: false, river: false });
+  const at = (col, row) => row * 4 + col;
+
+  it('re-derives a missing cell once one placement WITNESSES the coordinate frame', () => {
+    const pack = grid();
+    // The witness: its stored cell is exactly what nearestCellTo reproduces from its own
+    // coordinates, which is only true if those coordinates are in this pack's map space
+    // (the iframe minted that id with findCell over this same cells.p).
+    const staged = [
+      { id: 'witness', cellId: at(1, 1), x: 40, y: 40, institutions: [] },
+      { id: 'orphan', cellId: null, x: 80, y: 0, institutions: [] },
+    ];
+    const { placements, cellResolution } = resolvePlacementCells(staged, pack);
+
+    expect(placements).toEqual([
+      { id: 'witness', cellId: at(1, 1), institutions: [] },
+      { id: 'orphan', cellId: at(2, 0), institutions: [] },
+    ]);
+    expect(cellResolution).toEqual([
+      { id: 'orphan', from: null, to: at(2, 0), reason: 'cell_derived' },
+    ]);
+  });
+
+  it('REPORTS a stored cell its coordinates disagree with, and does NOT switch the seed', () => {
+    // A stale index that lands on another valid land cell passes every existing check
+    // and seeds territory at the wrong place, frozen forever. This car makes it VISIBLE.
+    // Switching the seed of an existing canon is a louder act that owes its own
+    // declaration, so the emitted placement keeps the stored cell.
+    const pack = grid();
+    const staged = [
+      { id: 'witness', cellId: at(1, 1), x: 40, y: 40, institutions: [] },
+      { id: 'stale', cellId: at(0, 0), x: 120, y: 80, institutions: [] },
+    ];
+    const { placements, cellResolution } = resolvePlacementCells(staged, pack);
+
+    expect(placements[1]).toEqual({ id: 'stale', cellId: at(0, 0), institutions: [] });
+    expect(cellResolution).toEqual([
+      { id: 'stale', from: at(0, 0), to: at(3, 2), reason: 'cell_remapped' },
+    ]);
+  });
+
+  it('remaps NOTHING when no placement can witness the frame', () => {
+    // Every stored cell is stale, so none reproduces itself from its own coordinates.
+    // The honest answer is not to guess a transform: leave the stored cells alone and
+    // admit nothing new.
+    const pack = grid();
+    const staged = [
+      { id: 'a', cellId: at(0, 0), x: 120, y: 80, institutions: [] },
+      { id: 'b', cellId: null, x: 40, y: 40, institutions: [] },
+    ];
+    const { placements, cellResolution } = resolvePlacementCells(staged, pack);
+
+    expect(placements).toEqual([{ id: 'a', cellId: at(0, 0), institutions: [] }]);
+    expect(cellResolution).toEqual([
+      { id: 'b', from: null, to: null, reason: 'frame_unverified' },
+    ]);
+  });
+
+  it('carries the institution roster, the magic truth and the declared terrain through untouched', () => {
+    const pack = grid();
+    const staged = [{
+      id: 'witness', cellId: at(1, 1), x: 40, y: 40,
+      institutions: [{ name: 'Docks/port facilities' }], magicExists: false, terrainType: 'coastal',
+    }];
+    const { placements } = resolvePlacementCells(staged, pack);
+    expect(placements[0]).toEqual({
+      id: 'witness', cellId: at(1, 1),
+      institutions: [{ name: 'Docks/port facilities' }], magicExists: false, terrainType: 'coastal',
+    });
+    // The stored coordinates are TRANSPORT ONLY — they never reach the digest.
+    expect('x' in placements[0]).toBe(false);
+    expect('y' in placements[0]).toBe(false);
+  });
+
+  it('never writes mapState.placements — the whole pass is a read-only projection', async () => {
+    const pack = grid();
+    const placementsState = {
+      b1: { settlementId: 'witness', x: 40, y: 40, cellId: at(1, 1) },
+      b2: { settlementId: 'orphan', x: 80, y: 0, cellId: null },
+    };
+    const before = JSON.stringify(placementsState);
+    registerSpatialCaptureBridge({ isReady: true, getSpatialPack: async () => ({ pack }) });
+    const result = await captureSpatialPack({
+      campaignId: 'c1',
+      get: () => ({ mapState: { placements: placementsState }, campaigns: [], savedSettlements: [] }),
+    });
+    expect(result.placements.length).toBe(2);
+    expect(JSON.stringify(placementsState), 'the store rows must be untouched').toBe(before);
   });
 });

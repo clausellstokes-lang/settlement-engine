@@ -287,22 +287,10 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     expect(ws.spatialDigest.costLawVersion).toBe(1);
   });
 
-  test('SEAM-0: composer-shaped placements canonize a FALSE canon, not a lockout', async () => {
-    // W-SEAM SEAM-0 — the end-to-end consequence of the coercion pinned at the
-    // capture seam (tests/lib/spatialPackCapture.test.js). An Instant World's
-    // placements carry `cellId: null` + a nominal-canvas x/y (pinned at the mint
-    // site in tests/lib/instantWorld/composeInstantWorld.test.js). Because
-    // `Number(null) === 0`, EVERY member is seeded at map cell 0 — so the canonize
-    // does not refuse. It SUCCEEDS, stamps spatialCanonVersion 1 (the gate CTA flips
-    // to "Geography mapped ✓"), and freezes a digest that describes a realm that
-    // does not exist: with cell 0 in the ocean, ZERO settlements survive; with cell 0
-    // on land, exactly ONE does and the rest are `shared_cell`.
-    //
-    // ⚠ PINS A DEFECT DELIBERATELY — the reproduce half of a reproduce-then-clear
-    // pair. SEAM-2 re-resolves the cell from the stored x/y and re-records these
-    // expectations in the same act.
-    const store = makeStore();
-    seedStore(store);
+  // Three realm members, placed the way the Instant World composer places them:
+  // `cellId: null` and a nominal-canvas x/y (pinned at the mint site in
+  // tests/lib/instantWorld/composeInstantWorld.test.js).
+  const seedComposerShapedRealm = (store) => {
     store.setState(state => {
       state.savedSettlements = ['ashford', 'brackwell', 'corran'].map(id => ({
         id, name: id, phase: 'canon',
@@ -318,34 +306,74 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
         },
       };
     });
+  };
 
-    // (a) cell 0 is OCEAN (makeGridPack's default top-left bay) ⇒ a canon of NOTHING.
-    const oceanPack = makeGridPack({ cols: 18, rows: 14 });
-    expect(oceanPack.cells.h[0]).toBeLessThan(20);
-    registerSpatialCaptureBridge({ isReady: true, getSpatialPack: async () => ({ pack: oceanPack }) });
-    const drowned = await store.getState().canonizeCampaignWorldSpatial('camp-1');
+  test('SEAM-0/SEAM-2: composer-shaped placements now REFUSE instead of freezing a false canon', async () => {
+    // W-SEAM SEAM-0 measured the end-to-end consequence of the `Number(null) === 0`
+    // coercion at the capture seam: the canonize did NOT refuse. It SUCCEEDED, stamped
+    // spatialCanonVersion 1 (the CTA flips to "Geography mapped ✓"), and froze a digest
+    // describing a realm that does not exist — with cell 0 in the ocean, settlementIds
+    // was EMPTY and all three members were recorded `not_land`; with cell 0 on land,
+    // exactly one seeded it and the rest were `shared_cell`. Under freeze-first that is
+    // permanent.
+    //
+    // SEAM-2 is the CLEAR half. The null stays null; no placement can witness that these
+    // nominal coordinates belong to the captured pack's frame; so nothing is remapped,
+    // nothing is admitted, and the store refuses with a typed reason the CTA can explain.
+    // Nothing is written either way.
+    const store = makeStore();
+    seedStore(store);
+    seedComposerShapedRealm(store);
+    const before = JSON.stringify(store.getState().campaigns[0].worldState);
+
+    for (const pack of [makeGridPack({ cols: 18, rows: 14 }), makeGridPack({ cols: 18, rows: 14, bay: false })]) {
+      registerSpatialCaptureBridge({ isReady: true, getSpatialPack: async () => ({ pack }) });
+      const result = await store.getState().canonizeCampaignWorldSpatial('camp-1');
+      unregisterSpatialCaptureBridge();
+      expect(result).toEqual({ ok: false, reason: 'spatial_placements_unresolved' });
+      expect(JSON.stringify(store.getState().campaigns[0].worldState)).toBe(before);
+      expect(store.getState().campaigns[0].worldState.spatialCanonVersion).toBeUndefined();
+      expect(store.getState().campaigns[0].worldState.spatialDigest).toBeUndefined();
+    }
+  });
+
+  test('SEAM-2: one anchored placement witnesses the frame and re-derives the rest, on the receipt', async () => {
+    // The cure the refusal above points at: the DM drags ONE member into place, which
+    // records a real cell for real map coordinates. That row now witnesses the frame, so
+    // the other two resolve from their own stored coordinates — and the canon says so.
+    const store = makeStore();
+    seedStore(store);
+    seedComposerShapedRealm(store);
+    const pack = makeGridPack({ cols: 18, rows: 14, bay: false, spacing: 40 });
+    const anchorCell = 5 * 18 + 5; // p = [200, 200]
+    store.setState(state => {
+      state.mapState.placements.iw_b0 = {
+        settlementId: 'ashford', x: 200, y: 200, cellId: anchorCell,
+      };
+      // The other two now carry coordinates in the SAME map space.
+      state.mapState.placements.iw_b1 = { settlementId: 'brackwell', x: 280, y: 200, cellId: null };
+      state.mapState.placements.iw_b2 = { settlementId: 'corran', x: 200, y: 320, cellId: null };
+    });
+
+    registerSpatialCaptureBridge({ isReady: true, getSpatialPack: async () => ({ pack }) });
+    const result = await store.getState().canonizeCampaignWorldSpatial('camp-1');
     unregisterSpatialCaptureBridge();
 
-    expect(drowned.ok).toBe(true);
-    expect(drowned.spatialCanonVersion).toBe(1);
-    const dws = store.getState().campaigns[0].worldState;
-    expect(dws.spatialDigest.settlementIds).toEqual([]);
-    expect(dws.spatialDigest.skippedSettlements.map(r => r.reason)).toEqual(['not_land', 'not_land', 'not_land']);
-
-    // (b) cell 0 is LAND ⇒ the whole realm collapses onto that ONE cell.
-    const landPack = makeGridPack({ cols: 18, rows: 14, bay: false });
-    expect(landPack.cells.h[0]).toBeGreaterThanOrEqual(20);
-    registerSpatialCaptureBridge({ isReady: true, getSpatialPack: async () => ({ pack: landPack }) });
-    const collapsed = await store.getState().canonizeCampaignWorldSpatial('camp-1');
-    unregisterSpatialCaptureBridge();
-
-    expect(collapsed.ok).toBe(true);
-    const cws = store.getState().campaigns[0].worldState;
-    expect(cws.spatialDigest.settlementIds).toEqual(['ashford']);
-    expect(cws.spatialDigest.skippedSettlements).toEqual([
-      { id: 'brackwell', reason: 'shared_cell' },
-      { id: 'corran', reason: 'shared_cell' },
+    expect(result.ok).toBe(true);
+    const digest = store.getState().campaigns[0].worldState.spatialDigest;
+    // All three reached the canon, each on its OWN cell — not collapsed onto one.
+    expect(digest.settlementIds).toEqual(['ashford', 'brackwell', 'corran']);
+    expect(digest.skippedSettlements).toEqual([]);
+    // And the canon records that two of those cells were RE-DERIVED, never claiming
+    // they were "cured" — no provenance stamp exists to prove the pack in hand is the
+    // geometry those coordinates came from. That is SEAM-3.
+    expect(digest.captureReceipt.cellResolution).toEqual([
+      { id: 'brackwell', from: null, to: 5 * 18 + 7, reason: 'cell_derived' },
+      { id: 'corran', from: null, to: 8 * 18 + 5, reason: 'cell_derived' },
     ]);
+    // The store's own placement rows are untouched — SEAM-2 never writes mapState.
+    expect(store.getState().mapState.placements.iw_b1.cellId).toBeNull();
+    expect(store.getState().mapState.placements.iw_b2.cellId).toBeNull();
   });
 
   test('SEAM-1: a successful canonize lowers the session divergence signal', async () => {

@@ -191,6 +191,57 @@ export function normalizeSpatialPack(pack) {
 }
 
 /**
+ * W-SEAM SEAM-2 — THE ONE CELL-RESOLUTION LAW.
+ *
+ * Which cell does a point fall in? Exactly one answer, in exactly one place, because
+ * two consumers need it and two implementations would drift: the capture's cell
+ * re-resolution (SEAM-2) and the territory view's flood seeds (POLIS-4, which cannot
+ * use stored ids at all — instant worlds carry `cellId: null`). Amendment A1.2 §9
+ * fixes the spec, and it is fixed for determinism, not for speed:
+ *
+ *   - SQUARED distance, compared directly. No `sqrt`, no `hypot`. Both are correctly
+ *     rounded in IEEE-754, but the comparison does not need them, and every operation
+ *     removed is one fewer place for two consumers to round differently.
+ *   - FIRST minimum wins — a strict `<` keeps the earliest index on an exact tie, so
+ *     the answer is the LOWEST-INDEX nearest cell. This mirrors the digest's own
+ *     tie-break law (equal tentative ⇒ lower index) rather than inventing a second one.
+ *
+ * Pure, total, allocation-free. Returns null when the point is not finite or the pack
+ * carries no usable centroid — never a guess, never a fallback cell.
+ *
+ * NB it answers NEAREST CENTROID, which is what the iframe's own `findCell` computes
+ * over the same `cells.p` (a quadtree nearest-point query). That equivalence is what
+ * lets the capture use a placement's stored cellId as a WITNESS that its stored x/y
+ * are in the captured pack's coordinate frame at all.
+ *
+ * @param {number} x @param {number} y
+ * @param {Array<[number, number]>|number[][]} points `pack.cells.p`
+ * @param {number} [cellCount] optional bound (normalizeSpatialPack's cellCount)
+ * @returns {number|null} the cell index, or null
+ */
+export function nearestCellTo(x, y, points, cellCount) {
+  const px = Number(x);
+  const py = Number(y);
+  if (!Number.isFinite(px) || !Number.isFinite(py)) return null;
+  const P = Array.isArray(points) ? points : [];
+  const bound = Number(cellCount);
+  const n = Number.isFinite(bound) ? Math.min(Math.max(0, Math.trunc(bound)), P.length) : P.length;
+  let best = -1;
+  let bestD2 = Infinity;
+  for (let i = 0; i < n; i++) {
+    const p = P[i];
+    if (!p) continue;
+    const dx = Number(p[0]) - px;
+    const dy = Number(p[1]) - py;
+    if (!Number.isFinite(dx) || !Number.isFinite(dy)) continue;
+    const d2 = dx * dx + dy * dy;
+    // Strict `<`: an exact tie leaves `best` on the EARLIER index.
+    if (d2 < bestD2) { bestD2 = d2; best = i; }
+  }
+  return best >= 0 ? best : null;
+}
+
+/**
  * Resolve the placed settlements into deterministic seeds: [{ id, cellId }]
  * sorted by codepoint id, each land + on a distinct cell (the lower-id settlement
  * keeps a shared cell). Impassable (non-land) or off-map seeds are dropped and
@@ -354,7 +405,8 @@ function buildTerrainDisagreements(seeds, idOf, placements, pack) {
  * @param {{ pack: CapturedSpatialPack, placements?: SpatialPlacementRow[] | null,
  *           spatialGeometryVersion?:number, costLawVersion?:number,
  *           overlayVersion?:number, seasonalRoads?:boolean, seaLanes?:boolean, teleport?:boolean,
- *           biomeTexture?:boolean }} input
+ *           biomeTexture?:boolean,
+ *           cellResolution?:Array<{id:string, from:number|null, to:number|null, reason:string}>|null }} input
  */
 export function buildSpatialDigest(input) {
   const pack = normalizeSpatialPack(input?.pack);
@@ -625,8 +677,18 @@ export function buildSpatialDigest(input) {
   // any realm whose declared terrains match the ground) ⇒ NO key ⇒ the returned shape
   // is byte-identical to the pre-SEAM digest.
   const terrainDisagreements = buildTerrainDisagreements(seeds, idOf, input?.placements, pack);
-  const captureReceipt = terrainDisagreements.length
-    ? { version: CAPTURE_RECEIPT_VERSION, terrainDisagreements }
+  // SEAM-2's rows arrive already built (the re-resolution happens AT the capture, which
+  // is the only place that still holds the placements' stored x/y). The digest carries
+  // them verbatim so the two seams share ONE receipt envelope with ONE version.
+  const cellResolution = Array.isArray(input?.cellResolution) && input.cellResolution.length
+    ? input.cellResolution
+    : null;
+  const captureReceipt = (terrainDisagreements.length || cellResolution)
+    ? {
+      version: CAPTURE_RECEIPT_VERSION,
+      ...(cellResolution ? { cellResolution } : {}),
+      ...(terrainDisagreements.length ? { terrainDisagreements } : {}),
+    }
     : null;
 
   // ── assemble the digest (fixed key order; object-shaped for the conditional

@@ -44,6 +44,7 @@ export {
   BIOME_TEXTURE_VERSION,
   CAPTURE_RECEIPT_VERSION,
   normalizeSpatialPack,
+  nearestCellTo,
   resolveSeeds,
   buildSpatialDigest,
 } from './spatialDigest.js';

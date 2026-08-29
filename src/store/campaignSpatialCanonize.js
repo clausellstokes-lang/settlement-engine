@@ -66,6 +66,14 @@ export async function runSpatialCanonize({
   const captured = await capture({ campaignId, get });
   if (!sessionStillCurrent()) return { ok: false, reason: 'auth_session_changed' };
   if (!captured || !captured.pack) return { ok: false, reason: 'spatial_capture_unavailable' };
+  // W-SEAM SEAM-2: the capture had placements but could not establish a cell for a
+  // single one of them — every row's stored coordinates are in an unverified frame and
+  // no row carries a usable stored cell. Refuse, typed and visibly, rather than freeze
+  // a digest seeded from nothing (before SEAM-2 this path silently canonized cell 0 for
+  // every member: see the FALSE CANON finding in SEAM-0's landing act).
+  if (Array.isArray(captured.placements) && captured.placements.length === 0) {
+    return { ok: false, reason: 'spatial_placements_unresolved' };
+  }
   // V-6 BIOME TRUTH (DARK): the additive biome sub-digest lights ONLY under the VIRTUAL
   // biomeTruthEnabled flag (ABSENT from DEFAULT_SIMULATION_RULES — the npcLadder/heirs idiom).
   // Absent ⇒ biomeTexture false ⇒ NO biomes key ⇒ byte-identical (every existing canon/golden).
@@ -99,6 +107,10 @@ export async function runSpatialCanonize({
     // a settlement's destiny). A realm with <2 circle-holders leaves the slot null —
     // dormant, byte-identical. Existing saved canons keep their frozen (null) slot.
     teleport: true,
+    // W-SEAM SEAM-2: what the capture's cell re-resolution noticed, carried into the
+    // additive capture receipt. Empty (the fixture path, and every realm whose stored
+    // cells already agree with their coordinates) ⇒ no key ⇒ byte-identical.
+    cellResolution: captured.cellResolution || null,
   });
   const digestBytes = JSON.stringify(digest).length;
   if (digestBytes > SPATIAL_DIGEST_MAX_BYTES) {

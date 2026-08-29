@@ -129,9 +129,17 @@ function SpatialCanonGate({ campaign, canWrite }) {
       if (result && result.ok === false) {
         setNote(
           result.reason === 'spatial_capture_unavailable' ? 'Open the world map to map geography.'
-            : result.reason === 'not_entitled' ? '' // handled by the locked reach
-              : result.reason === 'not_generated_map' ? 'Only generated maps can be mapped.'
-                : 'Could not map geography.',
+            // W-SEAM SEAM-2. The realm HAS placements, but not one of them can be tied
+            // to a cell on the map that is open: an Instant World's members are staged
+            // at planned coordinates that were never resolved against real geography.
+            // Dragging any one of them into place records a real cell, which anchors
+            // the rest. Before SEAM-2 this case did not refuse at all — it froze a canon
+            // in which every settlement sat on map cell 0.
+            : result.reason === 'spatial_placements_unresolved'
+              ? 'These settlements aren’t anchored to this map yet. Drag one into place, then map geography.'
+              : result.reason === 'not_entitled' ? '' // handled by the locked reach
+                : result.reason === 'not_generated_map' ? 'Only generated maps can be mapped.'
+                  : 'Could not map geography.',
         );
         if (result.reason === 'not_entitled') handleLockedReach();
       }

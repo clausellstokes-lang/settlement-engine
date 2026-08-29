@@ -29,6 +29,39 @@ import { getSpatialCaptureBridge } from './spatialCaptureRegistry.js';
 import { findActiveCampaign } from '../store/campaignSliceShared.js';
 import { magicLedger } from '../domain/magicLedger.js';
 import { resolveSettlementTerrain } from '../domain/resolveTerrain.js';
+import { normalizeSpatialPack, nearestCellTo } from '../domain/spatial/spatialDigest.js';
+
+/**
+ * A placement row on its way to the digest, plus the stored coordinates SEAM-2 needs
+ * to re-derive its cell. `x`/`y` are transport only — they are stripped before the
+ * row reaches buildSpatialDigest, and `mapState.placements` is never written.
+ * @typedef {{ id:string, cellId:number|null, x:number, y:number, institutions:any[],
+ *   magicExists?:boolean, terrainType?:string }} StagedPlacement
+ */
+
+/**
+ * The stored cellId as an INTEGER CELL INDEX, or null when the row does not carry one.
+ *
+ * ⚠ W-SEAM SEAM-2, and this line is the whole of SEAM-0's finding. The previous guard
+ * was `const cellId = Number(pl?.cellId); if (!Number.isInteger(cellId)) continue;` —
+ * which reads as "drop rows without a cell", and is how the review and the verification
+ * appendix both read it. It is not what it does: `Number(null) === 0` and
+ * `Number.isInteger(0) === true`, so every `cellId: null` row — which is EVERY placement
+ * an Instant World composes — was silently admitted as MAP CELL 0. The canonize then
+ * succeeded, stamped spatialCanonVersion 1, and froze a digest holding either zero
+ * settlements (cell 0 in the ocean) or exactly one with the rest recorded `shared_cell`:
+ * the whole realm collapsed onto index 0, permanently, under freeze-first.
+ *
+ * A missing cell is now null and stays null, and the resolution pass below decides what
+ * to do about it in the open.
+ * @param {unknown} raw @returns {number|null}
+ */
+function storedCellIdOf(raw) {
+  if (raw === null || raw === undefined || raw === '') return null;
+  if (typeof raw === 'boolean') return null;
+  const n = Number(raw);
+  return Number.isInteger(n) ? n : null;
+}
 
 /**
  * The campaign's settlement placements as the digest builder consumes them:
@@ -45,7 +78,7 @@ import { resolveSettlementTerrain } from '../domain/resolveTerrain.js';
  * carries no flag, so every existing canon re-derives byte-identically.
  * Read-only projection; no mutation of state.
  * @param {any} state @param {string} campaignId
- * @returns {Array<{id:string, cellId:number, institutions:any[], magicExists?:boolean, terrainType?:string}>}
+ * @returns {StagedPlacement[]}
  */
 function placementsFor(state, campaignId) {
   const placements = state?.mapState?.placements || {};
@@ -80,16 +113,16 @@ function placementsFor(state, campaignId) {
     const ledger = magicLedger(s?.settlement);
     if (ledger.present && ledger.magicExists === false) mundaneIds.add(id);
   }
-  /** @type {Array<{id:string, cellId:number, institutions:any[], magicExists?:boolean, terrainType?:string}>} */
+  /** @type {StagedPlacement[]} */
   const out = [];
   for (const burgId of Object.keys(placements).sort()) {
     const pl = placements[burgId];
     const id = pl?.settlementId != null ? String(pl.settlementId) : '';
-    const cellId = Number(pl?.cellId);
-    if (!id || !Number.isInteger(cellId)) continue;
+    if (!id) continue;
+    const cellId = storedCellIdOf(pl?.cellId);
     if (inRealm && !inRealm.has(id)) continue; // scope the digest to THIS realm's settlements
-    const row = /** @type {{id:string, cellId:number, institutions:any[], magicExists?:boolean, terrainType?:string}} */ (
-      { id, cellId, institutions: institutionsById.get(id) || [] });
+    const row = /** @type {StagedPlacement} */ (
+      { id, cellId, x: Number(pl?.x), y: Number(pl?.y), institutions: institutionsById.get(id) || [] });
     // Additive ONLY when magic is asserted absent — an unstamped row keeps the exact
     // pre-MG shape, so no existing capture, canon or golden moves a byte.
     if (mundaneIds.has(id)) row.magicExists = false;
@@ -101,6 +134,102 @@ function placementsFor(state, campaignId) {
     out.push(row);
   }
   return out;
+}
+
+/**
+ * W-SEAM SEAM-2 — CAPTURE-TIME CELL RE-RESOLUTION.
+ *
+ * A placement's cellId is minted ONCE, at drop, by the iframe's `findCell(mapPt)`,
+ * and then stored forever. Nothing ever re-derives it, so it goes stale silently the
+ * moment the pack is re-graphed (a terrain edit, a snapshot of a different vintage, a
+ * future fork upgrade) — and a stale index that happens to land on another valid land
+ * cell passes every check and seeds territory, distances, gates and port eligibility
+ * at the WRONG PLACE, frozen forever. And a placement with no cellId at all (every
+ * Instant World member) had no path to a cell whatsoever.
+ *
+ * So: re-derive every cell from the stored x/y against the pack being captured in the
+ * same breath, through the ONE resolution law (`nearestCellTo` — the same helper the
+ * territory view will seed its flood from, per A1.2 §9).
+ *
+ * ⚠ THE COORDINATE-FRAME PROBLEM, and it is not hypothetical (A1 binding (b)).
+ * Stored x/y are only meaningful if they are in the CAPTURED PACK's map space. For a
+ * dropped placement they are: sf-bridge converts screen→map with `screenToMap` and then
+ * calls `findCell` on the result. For a COMPOSER-MINTED placement they are NOT known to
+ * be: `worldPlan.js` scatters sites in a NOMINAL 1000×600 canvas, FMG's own map space is
+ * `graphWidth`×`graphHeight` (window-derived), and `useInstantWorldMaterialize` explicitly
+ * does not re-place ("the staged settlement placements are React overlays … untouched").
+ * Nothing in the row records which frame it is in.
+ *
+ * THE WITNESS RULE. Rather than guess — or invent an affine transform between the two,
+ * which would be a silent geometric fabrication — the capture looks for evidence. A
+ * placement that carries BOTH finite x/y AND a stored in-range cellId is a candidate
+ * witness; if `nearestCellTo` reproduces that stored cellId from those coordinates, the
+ * frame is CONFIRMED for this capture, because the stored id was minted by findCell over
+ * this same `cells.p`. One witness is enough. With no witness, NOTHING is remapped and
+ * the unresolved rows are receipted `frame_unverified`.
+ *
+ * WHAT THIS CAR DOES AND DOES NOT DO:
+ *   - a row with NO stored cell + a verified frame ⇒ USE the derived cell (`cell_derived`).
+ *     This is what lets a placement whose findCell failed at drop reach the canon at all.
+ *   - a row WITH a stored cell that the coordinates disagree with ⇒ REPORT ONLY
+ *     (`cell_remapped`). The seed cell is NOT switched. Switching a canon's seed is a
+ *     louder act that owes its own declaration, and it is not this car's.
+ *   - a row with no stored cell and no verified frame ⇒ DROPPED, receipted
+ *     `frame_unverified`. The realm then refuses to canonize instead of freezing a lie.
+ *
+ * The receipts say "re-derived", never "cured" (A1.2 §5): no provenance stamp exists to
+ * prove the pack in hand is the geometry these coordinates came from. That is SEAM-3.
+ * `mapState.placements` is never written — this is a read-only projection.
+ *
+ * @param {StagedPlacement[]} staged
+ * @param {any} rawPack the captured pack (pre-normalize)
+ * @returns {{ placements: Array<{id:string, cellId:number, institutions:any[]}>,
+ *   cellResolution: Array<{id:string, from:number|null, to:number|null, reason:string}> }}
+ */
+export function resolvePlacementCells(staged, rawPack) {
+  const pack = normalizeSpatialPack(rawPack);
+  const inRange = (/** @type {number|null} */ c) => (
+    c !== null && c >= 0 && c < pack.cellCount
+  );
+  const derivedFor = (/** @type {StagedPlacement} */ row) => (
+    Number.isFinite(row.x) && Number.isFinite(row.y)
+      ? nearestCellTo(row.x, row.y, pack.p, pack.cellCount)
+      : null
+  );
+
+  // Pass 1 — look for a witness that the stored coordinates share the captured pack's
+  // frame. A stale stored id fails to witness; another row may still succeed, so every
+  // candidate is tried before the frame is called unverified.
+  let frameVerified = false;
+  for (const row of staged) {
+    if (!inRange(row.cellId)) continue;
+    if (derivedFor(row) === row.cellId) { frameVerified = true; break; }
+  }
+
+  /** @type {Array<{id:string, cellId:number, institutions:any[]}>} */
+  const placements = [];
+  /** @type {Array<{id:string, from:number|null, to:number|null, reason:string}>} */
+  const cellResolution = [];
+  for (const row of staged) {
+    const { x: _x, y: _y, ...carried } = row;
+    const derived = frameVerified ? derivedFor(row) : null;
+    if (row.cellId !== null) {
+      // An out-of-range stored id is left exactly as it is: resolveSeeds already
+      // reports it as `off_map`, and duplicating that here would double-count it.
+      placements.push(/** @type {any} */ ({ ...carried, cellId: row.cellId }));
+      if (derived !== null && derived !== row.cellId && inRange(row.cellId)) {
+        cellResolution.push({ id: row.id, from: row.cellId, to: derived, reason: 'cell_remapped' });
+      }
+      continue;
+    }
+    if (derived !== null) {
+      placements.push(/** @type {any} */ ({ ...carried, cellId: derived }));
+      cellResolution.push({ id: row.id, from: null, to: derived, reason: 'cell_derived' });
+      continue;
+    }
+    cellResolution.push({ id: row.id, from: null, to: null, reason: 'frame_unverified' });
+  }
+  return { placements, cellResolution };
 }
 
 /**
@@ -133,7 +262,12 @@ export async function captureSpatialPack({ campaignId, get }) {
     }
   } catch (_) { /* the second read is evidence-only; a failure never blocks canonize */ }
 
-  const placements = placementsFor(get?.(), campaignId);
-  if (!placements.length) return null; // nothing placed ⇒ nothing to map
-  return { pack, placements };
+  const staged = placementsFor(get?.(), campaignId);
+  if (!staged.length) return null; // nothing placed ⇒ nothing to map
+  // SEAM-2: re-derive each cell from the stored coordinates against THIS pack. A realm
+  // whose rows all fail to resolve returns an EMPTY placement list with its receipt
+  // attached — the store refuses on that and can say WHY, instead of freezing a canon
+  // built from cell 0.
+  const { placements, cellResolution } = resolvePlacementCells(staged, pack);
+  return { pack, placements, cellResolution };
 }
