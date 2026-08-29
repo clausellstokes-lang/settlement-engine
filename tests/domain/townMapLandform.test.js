@@ -25,7 +25,6 @@ import {
   buildTownMapDrawList, landformDrawOps, buildTownMapSvg,
 } from '../../src/domain/townMap/townMapDraw.js';
 import { buildTownMapPanoramaDrawList } from '../../src/domain/townMap/townPanorama.js';
-import { renderTownMapOp } from '../../src/pdf/sections/TownMapPlate.jsx';
 import { TOWN_MAP_STYLE_IDS } from '../../src/design/townMapStyles.js';
 import { makeTownFixture, LANDFORM_FIXTURES } from '../fixtures/townMapFixtures.js';
 
@@ -116,15 +115,10 @@ describe('landform — panorama composition + export inheritance', () => {
     const full = buildTownMapDrawList(m, 'parchment');
     const landform = landformDrawOps(m.frame.landform, 'parchment');
     expect(full.length).toBeGreaterThan(landform.length); // the full map contains the landform
-    // the marks serialize into the self-contained SVG (thumbnail + plate substrate)
+    // the marks serialize into the self-contained SVG
     const svg = buildTownMapSvg(m, { style: 'parchment', width: 300, height: 300 });
     expect(svg).toContain('<circle');   // marsh stipple reached the SVG
     expect(/NaN|undefined/.test(svg)).toBe(false);
-  });
-
-  it('EXPORT INHERITANCE — every landform op renders through the PDF plate op mapper (no unhandled kind)', () => {
-    const ops = landformDrawOps(modelFor('dunes').frame.landform, 'vtt');
-    for (let i = 0; i < ops.length; i++) expect(renderTownMapOp(ops[i], i)).not.toBeNull();
   });
 });
 

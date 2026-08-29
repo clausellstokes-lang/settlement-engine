@@ -1,9 +1,9 @@
 /**
  * pdf/primitives/HouseDeviceSeal — THE HOUSE DEVICE for the PDF pipeline.
  *
- * Renders the canonical hand-inked device via @react-pdf's Svg/Path (the
- * TownMapPlate precedent) from the ONE path source (design/organic/logo.js) —
- * no forked geometry. Used on the dossier cover (the export colophon's seal).
+ * Renders the canonical hand-inked device via @react-pdf's Svg/Path from the ONE
+ * path source (design/organic/logo.js) — no forked geometry. Used on the dossier
+ * cover (the export colophon's seal).
  *
  * The settlement's seeded COUNTERSEAL is deliberately NOT rendered here: the
  * ornament pool draws SVG strings (for the DOM), which react-pdf cannot mount —
