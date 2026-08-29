@@ -26,11 +26,10 @@ import { useStore } from '../store/index.js';
 // W-Session — the distraction-free run-of-play takeover. Lazy like TableView:
 // the chunk loads only when the DM actually opens it (zero first-paint bytes).
 const SessionMode = lazy(() => import('./session/SessionMode.jsx'));
-// The [Dossier | Map] body + phase-aware NextActionRail two-column dossier hero
+// The dossier body + phase-aware NextActionRail two-column dossier hero
 // (RESTORED @ S2r-a) is extracted to its own component to keep this surface
-// under the component-size ratchet. It owns the lazy OutputContainer +
-// SettlementMapPane chunks (still absent from the entry static closure —
-// tests/build/townMapLazy.test.js, vendorPdfLazy.test.js).
+// under the component-size ratchet. It owns the lazy OutputContainer chunk
+// (still absent from the entry static closure — tests/build/vendorPdfLazy.test.js).
 import SettlementDossierHero from './settlementDetail/SettlementDossierHero.jsx';
 import { renameDetailSettlement } from './settlements/helpers.js';
 import ChroniclePanel from './ChroniclePanel.jsx';
@@ -184,7 +183,6 @@ export default function SettlementDetail({
   const [exporting,   setExporting]   = useState(false); // PDF export spinner
   const [exportSheetOpen, setExportSheetOpen] = useState(false); // variant picker modal
   const [sessionOpen, setSessionOpen] = useState(false); // W-Session run-of-play takeover
-  const [detailView, setDetailView] = useState('dossier'); // SM-2 body lens: 'dossier' | 'map'
   const [shareOpen, setShareOpen] = useState(false); // Share to Gallery panel, toggled from the header button
   const [confirmRevertRaw, setConfirmRevertRaw] = useState(false);
   const [pdfError, setPdfError] = useState(null);
@@ -195,9 +193,6 @@ export default function SettlementDetail({
   // this, the OutputContainer's narrative chrome would show "Generate"
   // for a save that already has a narrative on disk.
   const saveId = detail?.saveData?.id || null;
-  // IT-3 THE SEASON PORTRAIT selectors (mapWorldState / mapRegionalGraph) live in
-  // SettlementDossierHero — the composite fold moved them beside the relocated map
-  // pane render (deep-craft's size-ratchet extraction), same resolveExportSeam seam.
   const hydrateAiFromSave = useStore(s => s.hydrateAiFromSave);
   const revertCurrentToRaw = useStore(s => s.revertCurrentToRaw);
   const clearAiSettlement = useStore(s => s.clearAiSettlement);
@@ -772,16 +767,13 @@ export default function SettlementDetail({
         </>
       )}
 
-      {/* The [Dossier | Map] body + the phase-aware NextActionRail two-column
-          dossier hero (RESTORED @ S2r-a). Read mode = master's two-column hero
-          (toggle-fed body + sticky rail aside); edit mode = single full-width
-          column below the edit chrome. The rail wiring + shared canonize confirm
-          live inside — as do the IT-3 season-portrait selectors the map pane reads. */}
+      {/* The dossier body + the phase-aware NextActionRail two-column dossier hero
+          (RESTORED @ S2r-a). Read mode = master's two-column hero (body + sticky rail
+          aside); edit mode = single full-width column below the edit chrome. The rail
+          wiring + the shared canonize confirm live inside. */}
       <SettlementDossierHero
         detail={detail}
         settlement={currentSettlement}
-        detailView={detailView}
-        setDetailView={setDetailView}
         editMode={editMode}
         canEdit={canEdit}
         canAuthorNpc={canAuthorNpc}

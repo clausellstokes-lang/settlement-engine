@@ -37,7 +37,7 @@ import LegalRibbonRow from '../footer/LegalRibbonRow.jsx';
 import { ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT, FOUNDER_SEATS } from '../../config/tierFacts.js';
 import { fetchPublicGallery } from '../../lib/gallery.js';
 import {
-  MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, MapPlateCard, SCENE, cardStyle,
+  MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, SCENE, cardStyle,
 } from './LandingArtifacts.jsx';
 
 const MONO = fontFamily.mono;
@@ -392,22 +392,18 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
 
         {/* leg 2 · thorp → hamlet */}
         <div className="sf-welcome-leg" data-welcome-leg="1" aria-hidden="true" />
-        {/* ══ 02 · The visual — the drawn town. The old standalone map waypoint
-            is retired; its v2 map artifact lives here. Section id stays "brief"
-            for anchor stability. Plain parchment (stop 2 · hamlet). ══ */}
-      <section id="brief" aria-labelledby="sf-visual-title" className="sf-landing-scene-cream" style={{ ...pad }}>
-        <Waypoint pill={tl('brief.waypoint')} />
-        <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
-          <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
-            <h2 id="sf-visual-title" style={{ ...h2Style(isMobile), marginBottom: SP.md }}>{tl('map.h2')}</h2>
-            <p style={{ ...proseStyle, margin: 0 }}>{tl('map.body')}</p>
-          </div>
-          <MapPlateCard />
-          <p style={{ ...proseStyle, maxWidth: 640, margin: `${SP.xl}px auto 0`, textAlign: 'center', fontStyle: 'italic', color: SECOND }}>
-            {tl('map.tease')}
-          </p>
-        </div>
-      </section>
+        {/* STRIP-1 (owner ruling, ODQ §725): the "02 · The visual" section was the
+            drawn settlement map and NOTHING else — waypoint, headline, body, the
+            frozen lens plates and their flip. It is REMOVED whole; leaving the copy
+            shell would promise a drawing the product no longer has.
+            THE FILM IS UNTOUCHED: six travel legs (data-welcome-leg 0..5) still map
+            1:1 onto the six shipped leg videos + seven stop stills under
+            public/media/journey-legs/, machinery shared with the loading journey, so
+            no leg is dropped. The surviving five stops renumber 01..05 in the copy
+            registry (waypoint pills stay contiguous — tests/ui/homeLanding.test.jsx).
+            Legs 1 and 2 now run back-to-back: one longer cinematic stretch between
+            "01 · Forge" and "02 · The voice". Replacement §02 content is a MARKETING
+            decision, deliberately not invented here (charter §11.2 Q9). ══ */}
 
         {/* leg 3 · hamlet → village */}
         <div className="sf-welcome-leg" data-welcome-leg="2" aria-hidden="true" />

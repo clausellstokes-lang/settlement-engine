@@ -101,11 +101,9 @@ export const ARTWORK_SURFACE_MANIFEST = Object.freeze([
   artwork('landing.create-scene', 'src/components/home/LandingBelowFold.jsx', 'LandingBelowFold', 'feather'),
   artwork('landing.evolution-backdrop', 'src/components/HomeHero.jsx', 'HomeHero', 'feather', 'settle', 'settled'),
   artwork('loading.realm-unfurl', 'src/components/loadingJourney/RealmUnfurlLoading.jsx', 'RealmUnfurlLoading', 'feather', 'reveal', 'resolved'),
-  artwork('dossier.backdrop', 'src/components/settlementDetail/SettlementDossierBackdrop.jsx', 'SettlementDossierBackdrop', 'feather'),
   artwork('generate.mode-cards', 'src/components/generate/ModeSelector.jsx', 'ModeSelector', 'plate'),
   artwork('landing.realm-map-preview', 'src/components/home/LandingArtifacts.jsx', 'RealmMapCard', 'plate'),
   artwork('landing.gallery-covers', 'src/components/home/LandingBelowFold.jsx', 'GalleryCards', 'plate'),
-  artwork('landing.map-plate', 'src/components/home/LandingArtifacts.jsx', 'MapPlateCard', 'plate'),
   artwork('about.living-world-progression', 'src/components/howto/LivingWorldTab.jsx', 'LivingWorldTab', 'plate'),
   artwork('locked-destination.preview', 'src/components/primitives/LockedDestination.jsx', 'LockedDestination', 'plate'),
   artwork('gallery.campaign-player', 'src/components/gallery/CampaignPlayerView.jsx', 'CampaignPlayerView', 'plate'),
@@ -115,10 +113,6 @@ export const ARTWORK_SURFACE_MANIFEST = Object.freeze([
   artwork('gallery.maps', 'src/components/gallery/GalleryMaps.jsx', 'GalleryMaps', 'plate'),
   artwork('gallery.image-cropper', 'src/components/gallery/ImageCropper.jsx', 'ImageCropper', 'plate'),
   artwork('interior.plan', 'src/components/interior/InteriorView.jsx', 'InteriorView', 'plate'),
-  artwork('town-map.card-thumb', 'src/components/townMap/SettlementCardMapThumb.jsx', 'SettlementCardMapThumb', 'plate'),
-  artwork('town-map.fog-player', 'src/components/townMap/fog/FogPlayerView.jsx', 'FogPlayerView', 'plate'),
-  artwork('town-map.player-subtab', 'src/components/townMap/subtabs/MapPlayerSubTab.jsx', 'MapPlayerSubTab', 'plate'),
-  artwork('town-map.cartography-subtab', 'src/components/townMap/subtabs/MapCartographySubTab.jsx', 'MapCartographySubTab', 'plate'),
 ]);
 
 const reader = (id, ownerPath, ownerSelector, surfaceRegister, motion = 'none', staticComposition = 'present') => Object.freeze({

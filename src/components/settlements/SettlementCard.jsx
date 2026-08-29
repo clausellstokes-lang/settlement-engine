@@ -20,7 +20,6 @@ import HealthPip from './HealthPip.jsx';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
-import SettlementCardMapThumb from '../townMap/SettlementCardMapThumb.jsx';
 import { emblem } from '../../design/organic/ornament/compose.js';
 import { useStore } from '../../store/index.js';
 import { relColor } from './relationshipColors.js';
@@ -241,10 +240,8 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
           {/* Living-world detail — retained verbatim; the row is self-gating so a
               peaceful, non-campaign, deity-free card shows only the identity line. */}
           <div style={{ marginTop:SP.sm, display:'flex', flexDirection:'column', gap:SP.xs }}>
-            {/* SM-4 — the lazy, cached town-map thumbnail. Self-collapses to nothing
-                for a map-less settlement / a canvas-less env. IT-3: worldState threads
-                the owning campaign's season/state dress (null ⇒ seasonless base bytes). */}
-            {s.settlement && <SettlementCardMapThumb settlement={s.settlement} worldState={worldState} />}
+            {/* STRIP-1 (owner ruling, ODQ §725): the SM-4 town-map card thumbnail is
+                REMOVED — a library card carries no settlement-map imagery. */}
             {/* Living-world signal row (self-gating — nothing for a peaceful card). */}
             <LivingWorldSignalRow model={signals} />
             {!active && (
