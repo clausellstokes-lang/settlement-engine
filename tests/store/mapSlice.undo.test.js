@@ -94,3 +94,50 @@ describe('mapSlice annotation undo/redo (F6)', () => {
     expect(store.getState().mapState.viewport.scale).toBe(3);
   });
 });
+
+describe('mapSlice — the SEAM-1 geography divergence signal', () => {
+  // W-SEAM SEAM-1 (S1). Lives in this file because it is the only mapSlice store
+  // suite; the signal itself has nothing to do with undo. It is raised by the
+  // fmg:terrainChanged bridge push (wired in useMapBridge) and read by the
+  // SpatialCanonGate CTA.
+  beforeEach(() => { installLocalStorage(); });
+
+  const withCanon = (store, version) => store.setState(s => {
+    s.activeCampaignId = 'camp-1';
+    s.campaigns = [{ id: 'camp-1', accessState: 'active', worldState: version == null ? {} : { spatialCanonVersion: version } }];
+  });
+
+  test('starts down, and is SESSION state — never inside the persisted mapState', () => {
+    const store = makeStore();
+    expect(store.getState().geographyMayHaveDiverged).toBe(false);
+    expect('geographyMayHaveDiverged' in store.getState().mapState).toBe(false);
+  });
+
+  test('a terrain edit on an UNMAPPED realm raises nothing — there is no canon to diverge from', () => {
+    const store = makeStore();
+    withCanon(store, null);
+    store.getState().flagGeographyDiverged();
+    expect(store.getState().geographyMayHaveDiverged).toBe(false);
+    withCanon(store, 0);
+    store.getState().flagGeographyDiverged();
+    expect(store.getState().geographyMayHaveDiverged).toBe(false);
+  });
+
+  test('a terrain edit on a MAPPED realm raises it, and a campaign reset lowers it', () => {
+    const store = makeStore();
+    withCanon(store, 1);
+    store.getState().flagGeographyDiverged();
+    expect(store.getState().geographyMayHaveDiverged).toBe(true);
+    store.getState().resetMapState();
+    expect(store.getState().geographyMayHaveDiverged).toBe(false);
+  });
+
+  test('clearGeographyDiverged lowers it directly', () => {
+    const store = makeStore();
+    withCanon(store, 2);
+    store.getState().flagGeographyDiverged();
+    expect(store.getState().geographyMayHaveDiverged).toBe(true);
+    store.getState().clearGeographyDiverged();
+    expect(store.getState().geographyMayHaveDiverged).toBe(false);
+  });
+});

@@ -141,6 +141,58 @@ describe('spatialPackCapture — freeze-first double-read', () => {
     expect(result).toBeNull();
   });
 
+  it('SEAM-1: the declared terrain rides the placement row, and ONLY when one is declared', async () => {
+    // W-SEAM SEAM-1 (S3). The digest cannot compare the settlement's own terrain with
+    // the ground under it unless that terrain travels with the placement — the same
+    // additive discipline the institution roster and the magic truth already use.
+    // PRESENT-GUARDED: a settlement that declares nothing carries NO key, so an
+    // existing capture's row shape (and every digest built from it) is unchanged.
+    registerSpatialCaptureBridge({
+      isReady: true,
+      getSpatialPack: async () => ({ pack: { cells: cells([40, 40, 40]) } }),
+    });
+    const result = await captureSpatialPack({
+      campaignId: 'c1',
+      get: () => ({
+        mapState: {
+          placements: {
+            b1: { settlementId: 'declares', cellId: 1 },
+            b2: { settlementId: 'silent', cellId: 2 },
+          },
+        },
+        campaigns: [],
+        savedSettlements: [
+          { id: 'declares', settlement: { config: { terrainType: 'coastal' } } },
+          { id: 'silent', settlement: { config: { priorityEconomy: 20 } } },
+        ],
+      }),
+    });
+
+    const byId = Object.fromEntries(result.placements.map(p => [p.id, p]));
+    expect(byId.declares.terrainType).toBe('coastal');
+    expect('terrainType' in byId.silent).toBe(false);
+  });
+
+  it('SEAM-1: the auto sentinel is not a terrain, so it never reaches the receipt', async () => {
+    // resolveTerrain's postcondition — 'auto' is a UI sentinel the wizard writes to
+    // terrainOverride, never a terrain. Stamping it would put an un-typed word into a
+    // frozen digest (finite semantics: typed buckets only).
+    registerSpatialCaptureBridge({
+      isReady: true,
+      getSpatialPack: async () => ({ pack: { cells: cells([40, 40, 40]) } }),
+    });
+    const result = await captureSpatialPack({
+      campaignId: 'c1',
+      get: () => ({
+        mapState: { placements: { b1: { settlementId: 'sentinel', cellId: 1 } } },
+        campaigns: [],
+        savedSettlements: [{ id: 'sentinel', settlement: { config: { terrainOverride: 'auto' } } }],
+      }),
+    });
+
+    expect('terrainType' in result.placements[0]).toBe(false);
+  });
+
   it('a failing second read never blocks canonize — the first capture still returns', async () => {
     const firstPack = { cells: cells([7, 8]) };
     let reads = 0;

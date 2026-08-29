@@ -348,6 +348,62 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     ]);
   });
 
+  test('SEAM-1: a successful canonize lowers the session divergence signal', async () => {
+    // W-SEAM SEAM-1 (S1). The signal says "terrain tools were used since this realm's
+    // geography was frozen". A canonize refreezes it, so the warning must not survive
+    // the act that answers it. The field lives OUTSIDE mapState (mapSlice, session
+    // only), so nothing persisted moves — asserted here as well.
+    const store = makeStore();
+    seedStore(store);
+    store.setState(state => { state.geographyMayHaveDiverged = true; });
+    const result = await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: fixtureCapture(6) });
+    expect(result.ok).toBe(true);
+    expect(store.getState().geographyMayHaveDiverged).toBe(false);
+    const ws = store.getState().campaigns[0].worldState;
+    expect('geographyMayHaveDiverged' in ws).toBe(false);
+    expect('geographyMayHaveDiverged' in store.getState().campaigns[0]).toBe(false);
+  });
+
+  test('SEAM-1: a contradicted terrain lands a capture-receipt row in the frozen digest', async () => {
+    // The S3 seam end to end: the settlement declares itself coastal, the fixture grid
+    // seats it inland, and the frozen canon now SAYS SO instead of carrying the
+    // disagreement silently forever. The receipt reports; terrainType is never rewritten.
+    const store = makeStore();
+    seedStore(store);
+    store.setState(state => {
+      state.savedSettlements = [{
+        id: 'ashford', name: 'Ashford', phase: 'canon',
+        settlement: {
+          ...settlement('Ashford'),
+          config: { tradeRouteAccess: 'road', priorityEconomy: 20, terrainType: 'coastal' },
+        },
+        campaignState: { phase: 'canon', eventLog: [], locks: {} },
+      }];
+    });
+    const pack = makeGridPack({ cols: 18, rows: 14 });
+    // An interior land cell: not the shore, so `coastal` is refuted by the ground.
+    const interior = 9 * 18 + 9;
+    expect(pack.cells.h[interior]).toBeGreaterThanOrEqual(20);
+    registerSpatialCaptureBridge({ isReady: true, getSpatialPack: async () => ({ pack }) });
+    store.setState(state => {
+      state.mapState = {
+        customBackdrop: null,
+        placements: { b1: { settlementId: 'ashford', x: 0, y: 0, cellId: interior } },
+      };
+    });
+    const result = await store.getState().canonizeCampaignWorldSpatial('camp-1');
+    unregisterSpatialCaptureBridge();
+
+    expect(result.ok).toBe(true);
+    const digest = store.getState().campaigns[0].worldState.spatialDigest;
+    expect(digest.captureReceipt.terrainDisagreements).toEqual([
+      { id: 'ashford', configTerrain: 'coastal', mapTerrain: digest.captureReceipt.terrainDisagreements[0].mapTerrain },
+    ]);
+    expect(digest.captureReceipt.terrainDisagreements[0].mapTerrain).not.toBe('coastal');
+    // The dossier is untouched — the receipt reports, it never repairs.
+    expect(store.getState().savedSettlements[0].settlement.config.terrainType).toBe('coastal');
+  });
+
   test('the PLAIN canonizeCampaignWorld never stamps a spatial marker', async () => {
     const store = makeStore();
     seedStore(store);
