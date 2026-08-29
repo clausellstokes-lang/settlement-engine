@@ -8,6 +8,10 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
+## ⭐⭐ UPDATE AT §731 (2026-08-29) — Q-W8 + Q-S1 GRANTED; THE RETIREMENT-PATH LAW; STRIP-1+STRIP-3 JOINT LANDING PENDING.
+
+**f3cf639e is REVERSED by owner order** — W-COIN (treasury/taxation) chartered architecture-first (WEAVE A3; W-COIN-0 designing). **Q-S1 granted** — TE-STRIP-3 stacks on STRIP-1's green tip `08fd4f921` (retirement set + the §731.3 retirement-path validator extension + six `retiredBy` packet annotations); the pair lands on ONE combined gate; chair CASes. Successor: collect TE-STRIP-3 and TE-WEAVE-SEAM from their receipts; the retirement-path law governs every later strip wave.
+
 ## ⭐⭐ UPDATE AT §730 (2026-08-29, same sitting) — A2 FOLDED: THE PUBLISHED-MATERIALS ADDENDUM IS CHARTERED.
 
 **`docs/DESIGN_FMG_WEAVE.md` now carries AMENDMENT A2** (new cars NAME-3/NAME-4, the new W-DESK wave, POLIS-3 travel rings, POLIS-1 culture sub-roster option, five guard additions) — all tie-back-verified per the owner's law, zero kills; full record `docs/REVIEW_FMG_PUBLISHED_MATERIALS.md`. Owner batch grows to Q-W1..Q-W9 + Q-S1 (§729.4 + §730.4; Q-W8 would reverse ruling f3cf639e — flagged). In flight: TE-WEAVE-SEAM (Opus; SEAM-0 lockout verdict pending) · TE-STRIP-1 gate collection.

@@ -155,3 +155,9 @@ Their own wiki, nine years in: "The map is static. Over-time simulation is plann
 ## A2.5 · Coverage honesty carried forward
 
 55/57 Patreon post bodies login-walled; Reddit unreachable; two secondhand items marked and load-bearing for nothing. All mechanics claims are source reads; the tie-back pass re-verified every load-bearing citation (three mild MISQUOTES corrected above — none fatal; several counts were understated in our favor).
+
+---
+
+# AMENDMENT A3 — owner grants of 2026-08-29(d) (ODQ §731)
+
+**Q-W8 GRANTED over the chair's recommendation — ruling f3cf639e (no-conserved-coin) is REVERSED by owner order.** **W-COIN** is chartered: a state treasury + taxation typed by government form, feeding `warCosts`/`coalitionExpenditure` first. Discipline: architecture-first (W-COIN-0 design doc + skeptic mini-panel before any implementation); finite semantics (typed stocks and flows, closed vocabularies — grain's `storageMonths` idiom is the in-estate precedent); virtual flag; raw-byte dormancy bar; lived worlds gain the ledger only at future ticks under the lit flag, declared; the reversal's scope is exactly what W-COIN-0 defines and the owner sees at its panel. Sequenced at the engine-wave slot, pre-soak. Q-W2/Q-W9 recommendations stand unchanged; the rest of the §5/A2.2 batch remains open.
