@@ -45,6 +45,7 @@ import {
   quantizeCellCost,
   quantizeDist,
   terrainClassOf,
+  terrainAgreement,
   buildSeasonalOverlay,
   SEASONAL_OVERLAY_VERSION,
 } from './spatialCost.js';
@@ -103,6 +104,15 @@ export const OVERLAY_VERSION = 1;
 // per-leg FMG biome). Self-describing so a materializing wave can evolve the shape
 // under its own version, never a silent drift on an old canon (§V.1 semantics).
 export const BIOME_TEXTURE_VERSION = 1;
+
+// W-SEAM: the version of the additive CAPTURE RECEIPT — what the capture noticed
+// about the placements it was handed, as opposed to the geography it derived.
+// Self-describing on the biomeTexture precedent, so a later seam can widen the shape
+// under its own version and an old canon keeps its own forever (§V.1 semantics).
+// The receipt records PROBLEMS ONLY, exactly as `skippedSettlements` does: a capture
+// with nothing to report carries NO key at all, so every existing canon, golden and
+// fixture digest is byte-identical.
+export const CAPTURE_RECEIPT_VERSION = 1;
 
 // The four reserved edge/overlay slots, schema-present + null by default. Frozen
 // so every digest carries the same shape and a materializing wave (§4j sea lanes,
@@ -262,6 +272,57 @@ function buildBiomeTexture(seeds, idOf, crossings, gateKeys, pack) {
     bySettlement: sortedObject(bySettlementEntries),
     byLeg: sortedObject(byLegEntries),
   };
+}
+
+/**
+ * W-SEAM SEAM-1 (S3): the CAPTURE RECEIPT — what the capture noticed about the rows
+ * it was handed, as opposed to the geography it derived from them.
+ *
+ * `terrainDisagreements` records every seeded settlement whose OWN declared terrain
+ * (`config.terrainType`, arriving on the placement row) contradicts the geography of
+ * the cell it sits on. It never rewrites terrainType — genesis derivations hang off
+ * that value and for a canon settlement the write would be lived-history-adjacent.
+ * The receipt is the honest middle: the DM can see the two truths disagree and decide.
+ *
+ * PROBLEMS ONLY (the `skippedSettlements` idiom): `agrees` and `unknown` produce no
+ * row, so a healthy realm — and every fixture whose placements carry no terrainType at
+ * all — yields an EMPTY receipt, which the caller drops entirely. Absent key ⇒
+ * byte-identical to the pre-SEAM digest.
+ *
+ * @param {Array<{id:string, cellId:number}>} seeds  resolved seeds, seed order
+ * @param {string[]} idOf                            settlement id per seed index
+ * @param {SpatialPlacementRow[] | null | undefined} placements the input rows
+ * @param {{ h:number[], biome:number[], r:number[], c:number[][], cellCount:number }} pack
+ * @returns {Array<{ id:string, configTerrain:string, mapTerrain:string }>}
+ */
+function buildTerrainDisagreements(seeds, idOf, placements, pack) {
+  /** @type {Map<string, string>} */
+  const declaredById = new Map();
+  for (const pl of Array.isArray(placements) ? placements : []) {
+    const id = pl == null ? '' : String(pl.id ?? '');
+    const declared = pl && /** @type {{ terrainType?: unknown }} */ (pl).terrainType;
+    if (id !== '' && typeof declared === 'string' && declared !== '') declaredById.set(id, declared);
+  }
+  if (declaredById.size === 0) return [];
+  /** @type {Array<{ id:string, configTerrain:string, mapTerrain:string }>} */
+  const rows = [];
+  seeds.forEach((s, k) => {
+    const id = idOf[k];
+    const declared = declaredById.get(id);
+    if (declared === undefined) return;
+    // `terrainAgreement` is total over the two CLOSED vocabularies and answers
+    // 'unknown' for anything it cannot honestly compare — an unknown config word
+    // included, so an imported dossier's private terrain word never reaches the
+    // frozen receipt (finite semantics: typed buckets only).
+    if (terrainAgreement(declared, pack, s.cellId) !== 'disagrees') return;
+    rows.push({
+      id,
+      configTerrain: declared,
+      mapTerrain: terrainClassOf(pack.h[s.cellId], pack.biome[s.cellId]),
+    });
+  });
+  // Seeds already arrive codepoint-sorted by id, so this array is deterministic.
+  return rows;
 }
 
 /**
@@ -559,6 +620,15 @@ export function buildSpatialDigest(input) {
     ? buildBiomeTexture(seeds, idOf, crossings, gateKeys, pack)
     : null;
 
+  // W-SEAM: the additive CAPTURE RECEIPT, appended LAST and ONLY when the capture had
+  // something to report. Nothing to report (every existing golden/canon/fixture, and
+  // any realm whose declared terrains match the ground) ⇒ NO key ⇒ the returned shape
+  // is byte-identical to the pre-SEAM digest.
+  const terrainDisagreements = buildTerrainDisagreements(seeds, idOf, input?.placements, pack);
+  const captureReceipt = terrainDisagreements.length
+    ? { version: CAPTURE_RECEIPT_VERSION, terrainDisagreements }
+    : null;
+
   // ── assemble the digest (fixed key order; object-shaped for the conditional
   //    ledger clone; nested arrays live INSIDE) ───────────────────────────────
   return {
@@ -577,5 +647,6 @@ export function buildSpatialDigest(input) {
     routeReceipts: sortedObject(receiptEntries),
     reserved: reservedSlots(seasonalOverlay, seaLanes, teleportEdges),
     ...(biomes ? { biomes } : {}),
+    ...(captureReceipt ? { captureReceipt } : {}),
   };
 }

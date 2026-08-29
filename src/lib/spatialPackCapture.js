@@ -28,6 +28,7 @@
 import { getSpatialCaptureBridge } from './spatialCaptureRegistry.js';
 import { findActiveCampaign } from '../store/campaignSliceShared.js';
 import { magicLedger } from '../domain/magicLedger.js';
+import { resolveSettlementTerrain } from '../domain/resolveTerrain.js';
 
 /**
  * The campaign's settlement placements as the digest builder consumes them:
@@ -44,7 +45,7 @@ import { magicLedger } from '../domain/magicLedger.js';
  * carries no flag, so every existing canon re-derives byte-identically.
  * Read-only projection; no mutation of state.
  * @param {any} state @param {string} campaignId
- * @returns {Array<{id:string, cellId:number, institutions:any[], magicExists?:boolean}>}
+ * @returns {Array<{id:string, cellId:number, institutions:any[], magicExists?:boolean, terrainType?:string}>}
  */
 function placementsFor(state, campaignId) {
   const placements = state?.mapState?.placements || {};
@@ -59,11 +60,19 @@ function placementsFor(state, campaignId) {
   const institutionsById = new Map();
   /** @type {Set<string>} */
   const mundaneIds = new Set();
+  // W-SEAM SEAM-1 (S3): the settlement's OWN declared terrain, read through the one
+  // reader, travels with the placement exactly as the institution roster and the
+  // magic truth do — so the digest can compare it against the geography under the
+  // cell and receipt the disagreement. Read-only; terrainType is never written back.
+  /** @type {Map<string, string>} */
+  const terrainById = new Map();
   for (const s of savedSettlements) {
     const id = s?.id != null ? String(s.id) : '';
     if (!id) continue;
     const insts = s?.settlement?.institutions;
     if (Array.isArray(insts)) institutionsById.set(id, insts);
+    const declaredTerrain = resolveSettlementTerrain(s);
+    if (declaredTerrain) terrainById.set(id, declaredTerrain);
     // PRESENT-guarded: magicLedger's neutral default for an UN-GENERATED settlement is
     // itself magicExists:false, so an unguarded read would declare every config-less
     // legacy row mundane. Only a settlement that actually carries a magic axis AND
@@ -71,7 +80,7 @@ function placementsFor(state, campaignId) {
     const ledger = magicLedger(s?.settlement);
     if (ledger.present && ledger.magicExists === false) mundaneIds.add(id);
   }
-  /** @type {Array<{id:string, cellId:number, institutions:any[], magicExists?:boolean}>} */
+  /** @type {Array<{id:string, cellId:number, institutions:any[], magicExists?:boolean, terrainType?:string}>} */
   const out = [];
   for (const burgId of Object.keys(placements).sort()) {
     const pl = placements[burgId];
@@ -79,11 +88,16 @@ function placementsFor(state, campaignId) {
     const cellId = Number(pl?.cellId);
     if (!id || !Number.isInteger(cellId)) continue;
     if (inRealm && !inRealm.has(id)) continue; // scope the digest to THIS realm's settlements
-    const row = /** @type {{id:string, cellId:number, institutions:any[], magicExists?:boolean}} */ (
+    const row = /** @type {{id:string, cellId:number, institutions:any[], magicExists?:boolean, terrainType?:string}} */ (
       { id, cellId, institutions: institutionsById.get(id) || [] });
     // Additive ONLY when magic is asserted absent — an unstamped row keeps the exact
     // pre-MG shape, so no existing capture, canon or golden moves a byte.
     if (mundaneIds.has(id)) row.magicExists = false;
+    // Same additive discipline (SEAM-1/S3): stamped only when the settlement actually
+    // declares a terrain. A config-less legacy row carries no key, so the digest's
+    // agreement receipt stays empty and the digest bytes are unchanged.
+    const declaredTerrain = terrainById.get(id);
+    if (declaredTerrain) row.terrainType = declaredTerrain;
     out.push(row);
   }
   return out;

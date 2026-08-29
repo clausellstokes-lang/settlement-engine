@@ -71,6 +71,14 @@ const DRIFT_REASON = 'Needs Relationship drift: war is a relationship dynamic, s
 // panel below (was a native title= OS tooltip; the deep title tranche migrates
 // text-bearing controls off foreign chrome onto the study's own cloth).
 const GEOGRAPHY_HELP = 'Map geography freezes this realm’s territories, routes, and distances into canon the simulation reads. Re-map to refreeze after new placements.';
+// W-SEAM SEAM-1 (S1) — the divergence note. The wording is deliberately hedged:
+// "may have changed", never "has changed". The signal behind it is the iframe's
+// fmg:terrainChanged push, which fires when a terrain tool is ACTIVATED (before any
+// edit lands) and which the double-click river / coastline / lake editors and the
+// terrain undo–redo path never send at all. So it neither proves an edit happened
+// nor proves one did not, and the copy must not claim otherwise. Offering the
+// refreeze is always safe; asserting the canon is stale would not be.
+const DIVERGENCE_NOTE = 'Terrain tools were used — geography may have changed since this realm was mapped. Re-map to refreeze.';
 
 /**
  * Phase 5.5 KEYSTONE — the ENTITLED spatial opt-in, surfaced beside the living-
@@ -94,6 +102,9 @@ function SpatialCanonGate({ campaign, canWrite }) {
   const setActivePricingMoment = useStore(s => s.setActivePricingMoment);
   const tier = useStore(s => s.auth?.tier);
   const isImportedMap = useStore(s => !!s.mapState?.customBackdrop?.imageUrl);
+  // W-SEAM SEAM-1 (S1). Session-only signal, raised when the iframe reports a terrain
+  // tool was activated on a realm that already has a frozen spatial canon.
+  const mayHaveDiverged = useStore(s => s.geographyMayHaveDiverged === true);
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState('');
 
@@ -129,6 +140,10 @@ function SpatialCanonGate({ campaign, canWrite }) {
     }
   };
 
+  // SEAM-1: only meaningful once a canon exists to diverge FROM, and only while the
+  // control is not mid-refreeze.
+  const showDivergence = mapped && mayHaveDiverged && !busy;
+
   return (
     <div style={{ display: 'grid', gap: 2 }}>
       <Button
@@ -136,12 +151,24 @@ function SpatialCanonGate({ campaign, canWrite }) {
         variant={mapped ? 'gold' : 'secondary'}
         size="sm"
         busy={busy}
-        aria-label={mapped ? `Geography mapped, spatial canon v${version}` : 'Map geography'}
+        aria-label={
+          showDivergence
+            ? `Geography may have changed since spatial canon v${version} — re-map to refreeze`
+            : mapped ? `Geography mapped, spatial canon v${version}` : 'Map geography'
+        }
         onClick={onClick}
         style={{ fontSize: FS.xxs, fontWeight: 900, minHeight: 26, padding: '4px 8px' }}
       >
-        {mapped ? 'Geography mapped ✓' : busy ? 'Mapping…' : 'Map geography'}
+        {showDivergence ? 'Re-map geography' : mapped ? 'Geography mapped ✓' : busy ? 'Mapping…' : 'Map geography'}
       </Button>
+      {showDivergence && (
+        <span
+          data-testid="spatial-canon-divergence"
+          style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}
+        >
+          {DIVERGENCE_NOTE}
+        </span>
+      )}
       {note && (
         <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}>
           {note}

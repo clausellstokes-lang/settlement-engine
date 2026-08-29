@@ -133,6 +133,10 @@ export async function runSpatialCanonize({
     // plain enums/bands here so it survives the producer.
     realmShapeSummary = realmShape(c.regionalGraph);
     c.updatedAt = now;
+    // W-SEAM SEAM-1 (S1): this canonize just refroze the geography, so whatever the
+    // terrainChanged listener saw is now accounted for. Session-only field (mapSlice,
+    // outside mapState) ⇒ nothing persisted moves.
+    stateDraft.geographyMayHaveDiverged = false;
     campaignPersist = cacheCampaignState(stateDraft);
   });
   if (!campaignPersist) return { ok: false, reason: 'not_found' };

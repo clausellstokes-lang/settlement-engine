@@ -112,6 +112,9 @@ export default function WorldMap({ onNavigate } = {}) {
   const addPlacement    = useStore(s => s.addPlacement);
   const removePlacementLocal = useStore(s => s.removePlacementLocal);
   const clearAllPlacementsLocal = useStore(s => s.clearAllPlacementsLocal);
+  // W-SEAM SEAM-1 (S1): raised by the fmg:terrainChanged bridge push, surfaced on the
+  // SpatialCanonGate CTA. See the store action for why the copy says "may have".
+  const flagGeographyDiverged = useStore(s => s.flagGeographyDiverged);
   // (R-5b, owner queue #21) the inert `_replaceAllPlacements` subscription is gone
   // with the op it bound: it was never called, and a component-level useStore call
   // still costs a subscription + a re-render check on every store write.
@@ -256,6 +259,7 @@ export default function WorldMap({ onNavigate } = {}) {
     setMapReady, setMapLoading, setMapError, setBridgeReady,
     setMapSnapshot, setMapTemplates, setSelectedBurgId,
     addPlacement, removePlacementLocal, clearAllPlacementsLocal,
+    flagGeographyDiverged,
     showToast,
   });
 
@@ -373,6 +377,10 @@ export default function WorldMap({ onNavigate } = {}) {
     const bridge = bridgeRef.current;
     if (!bridge) return;
     try {
+      // The SEAM-1 (S3) terrain fit chip does NOT live here: it rides the
+      // `settlementPlaced` echo in useMapBridge, which is the ONE place every
+      // placement lands (this drop, the keyboard placement control, a direct FMG
+      // placement) — see the comment there.
       await bridge.placeSettlement({
         settlementId: data.id,
         x, y,

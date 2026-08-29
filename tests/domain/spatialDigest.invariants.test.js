@@ -5,6 +5,7 @@
  * up front and gate every downstream spatial wave.
  */
 import { readFileSync, readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
@@ -14,9 +15,24 @@ import {
   COST_LAW_VERSION,
   SPATIAL_GEOMETRY_VERSION,
   OVERLAY_VERSION,
+  CAPTURE_RECEIPT_VERSION,
+  CONFIG_TERRAIN_CLASSES,
+  TERRAIN_AGREEMENT_VERDICTS,
+  terrainAgreement,
+  terrainClassOf,
 } from '../../src/domain/spatial/index.js';
 import { ensureWorldState } from '../../src/domain/worldPulse/worldState.js';
-import { makeGridPack, placeSettlements, makeTiePack } from '../fixtures/spatialPackFixtures.js';
+import {
+  makeGridPack,
+  placeSettlements,
+  placePortSettlements,
+  placeTeleportSettlements,
+  makeTiePack,
+  makeIslandPack,
+  makeDisconnectedWaterPack,
+  makeIsthmusPack,
+  makePortCoastPack,
+} from '../fixtures/spatialPackFixtures.js';
 
 const RESERVED = { airField: null, seaLanes: null, seasonalOverlay: null, teleportEdges: null };
 const ownerId = (d, cell) => (d.territory[cell] >= 0 ? d.settlementIds[d.territory[cell]] : null);
@@ -182,6 +198,177 @@ describe('KEYSTONE — digest SIZE report (5 / 15 / 30 settlements, ~8k-cell map
       const bytes = JSON.stringify(d).length;
       console.log(`[KEYSTONE size] N=${String(N).padStart(2)}  ${(bytes / 1024).toFixed(1)}KB  (cells=${d.cellCount}, land=${d.landCellCount})`);
       expect(bytes).toBeLessThan(200_000);
+    }
+  });
+});
+
+// ─── W-SEAM SEAM-1 ────────────────────────────────────────────────────────────
+
+describe('SEAM-1 (S3) — terrainAgreement, the mapping the two vocabularies were missing', () => {
+  // The engine speaks plains|hills|forest|riverside|coastal|mountain|desert; the map
+  // speaks water|desert|grassland|forest|wetland|tundra|glacier|mountain. Nothing
+  // could compare them before, so a settlement's declared terrain and the ground
+  // under it could disagree forever, silently.
+  const packOf = (h, biome, r, c) => ({ h, biome, r, c, cellCount: h.length });
+  // Two cells, mutual neighbours. Cell 0 is the subject; cell 1 is the context that
+  // makes it coastal (ocean) or inland (land).
+  const inland = (h0, b0, r0) => packOf([h0, 40], [b0, 4], [r0, 0], [[1], [0]]);
+  const shore = (h0, b0, r0) => packOf([h0, 10], [b0, 4], [r0, 0], [[1], [0]]);
+
+  it('confirms a declared terrain the ground agrees with', () => {
+    expect(terrainAgreement('plains', inland(40, 4, 0), 0)).toBe('agrees');
+    expect(terrainAgreement('forest', inland(40, 6, 0), 0)).toBe('agrees');
+    expect(terrainAgreement('desert', inland(40, 1, 0), 0)).toBe('agrees');
+    expect(terrainAgreement('mountain', inland(78, 4, 0), 0)).toBe('agrees');
+  });
+
+  it('contradicts a declared terrain the ground refutes, counterpart by counterpart', () => {
+    expect(terrainAgreement('plains', inland(40, 6, 0), 0)).toBe('disagrees');   // a forest
+    expect(terrainAgreement('forest', inland(40, 4, 0), 0)).toBe('disagrees');   // grassland
+    expect(terrainAgreement('desert', inland(40, 6, 0), 0)).toBe('disagrees');   // a forest
+    expect(terrainAgreement('mountain', inland(40, 4, 0), 0)).toBe('disagrees'); // flat
+  });
+
+  it('says a settlement standing in the sea disagrees with every land terrain it could declare', () => {
+    for (const declared of CONFIG_TERRAIN_CLASSES) {
+      expect(terrainAgreement(declared, inland(10, 4, 0), 0), declared).toBe('disagrees');
+    }
+  });
+
+  it('decides coastal and riverside by the water reads, not by the class table', () => {
+    // THE repro from the seam report: a `coastal` settlement dropped mid-plain is fed
+    // as a port by the economy forever while the sea-lane derivation reads coastal:false.
+    expect(terrainAgreement('coastal', shore(40, 4, 0), 0)).toBe('agrees');
+    expect(terrainAgreement('coastal', inland(40, 4, 0), 0)).toBe('disagrees');
+    expect(terrainAgreement('riverside', inland(40, 4, 1), 0)).toBe('agrees');
+    expect(terrainAgreement('riverside', inland(40, 4, 0), 0)).toBe('disagrees');
+    // The two are independent: a river cell away from any shore is NOT coastal.
+    expect(terrainAgreement('coastal', inland(40, 4, 1), 0)).toBe('disagrees');
+  });
+
+  it('answers unknown where the two vocabularies genuinely cannot speak, and never guesses', () => {
+    // terrainClassOf has NO hills class — relief between LAND_HEIGHT and the mountain
+    // knee is invisible to it, so claiming either verdict would invent a comparison.
+    expect(terrainAgreement('hills', inland(45, 4, 0), 0)).toBe('unknown');
+    // Classes with no config counterpart stay silent rather than manufacturing a fault.
+    expect(terrainAgreement('plains', inland(40, 12, 0), 0)).toBe('unknown'); // wetland
+    expect(terrainAgreement('plains', inland(40, 10, 0), 0)).toBe('unknown'); // tundra
+    // A word the config vocabulary does not contain is never scored (finite semantics).
+    expect(terrainAgreement('swamp', inland(40, 4, 0), 0)).toBe('unknown');
+    expect(terrainAgreement(null, inland(40, 4, 0), 0)).toBe('unknown');
+    expect(terrainAgreement('auto', inland(40, 4, 0), 0)).toBe('unknown');
+    // Off the map is not a disagreement — resolveSeeds already reports that as off_map.
+    expect(terrainAgreement('plains', inland(40, 4, 0), 99)).toBe('unknown');
+    expect(terrainAgreement('plains', inland(40, 4, 0), 1.5)).toBe('unknown');
+  });
+
+  it('is TOTAL over the config vocabulary — every word has a verdict, none throws', () => {
+    for (const declared of CONFIG_TERRAIN_CLASSES) {
+      const verdict = terrainAgreement(declared, inland(40, 4, 0), 0);
+      expect(TERRAIN_AGREEMENT_VERDICTS, declared).toContain(verdict);
+    }
+  });
+});
+
+describe('SEAM-1 — the additive capture receipt is ABSENT unless there is something to report', () => {
+  it('omits the key entirely when no placement declares a terrain', () => {
+    const pack = makeGridPack({ cols: 16, rows: 14 });
+    const d = buildSpatialDigest({ pack, placements: placeSettlements(pack, 6) });
+    expect('captureReceipt' in d).toBe(false);
+  });
+
+  it('omits the key when every declared terrain agrees with the ground', () => {
+    const pack = makeGridPack({ cols: 16, rows: 14 });
+    const placements = placeSettlements(pack, 6).map(p => ({
+      ...p,
+      // The grid's land cells are grassland/desert/forest/wetland by quadrant; ask each
+      // seed for the class it is actually on, so every row agrees by construction.
+      terrainType: terrainClassOf(pack.cells.h[p.cellId], pack.cells.biome[p.cellId]) === 'grassland'
+        ? 'plains' : terrainClassOf(pack.cells.h[p.cellId], pack.cells.biome[p.cellId]),
+    })).filter(p => ['plains', 'forest', 'desert', 'mountain'].includes(p.terrainType));
+    const d = buildSpatialDigest({ pack, placements });
+    const disagreements = (d.captureReceipt?.terrainDisagreements) || [];
+    expect(disagreements).toEqual([]);
+  });
+
+  it('records the disagreement, in id order, with both truths named', () => {
+    const pack = makeGridPack({ cols: 16, rows: 14 });
+    const base = placeSettlements(pack, 4);
+    // Declare every one a mountain settlement; the grid seats them on non-mountain land.
+    const placements = base.map(p => ({ ...p, terrainType: 'mountain' }));
+    const d = buildSpatialDigest({ pack, placements });
+    expect(d.captureReceipt.version).toBe(CAPTURE_RECEIPT_VERSION);
+    expect(d.captureReceipt.terrainDisagreements.length).toBe(base.length);
+    const ids = d.captureReceipt.terrainDisagreements.map(r => r.id);
+    expect(ids).toEqual([...ids].sort());
+    for (const row of d.captureReceipt.terrainDisagreements) {
+      expect(row.configTerrain).toBe('mountain');
+      expect(row.mapTerrain).not.toBe('mountain');
+    }
+  });
+
+  it('never rewrites the settlement terrain — the receipt reports, it does not repair', () => {
+    const pack = makeGridPack({ cols: 12, rows: 10 });
+    const placements = placeSettlements(pack, 3).map(p => ({ ...p, terrainType: 'mountain' }));
+    const before = JSON.stringify(placements);
+    buildSpatialDigest({ pack, placements });
+    expect(JSON.stringify(placements)).toBe(before);
+  });
+});
+
+describe('SEAM-1 — RAW-BYTE dormancy: no existing canon moves a byte', () => {
+  // §713.2 — a dormancy claim is a BIT claim, and the honest comparator is
+  // base-dormant vs tip-dormant over the SAME fixtures. These nine sha256s were
+  // measured against pristine 73f5dfc02 (the build tip this seam branched from) by
+  // building each fixture digest with node and hashing JSON.stringify of the result.
+  // Every one is reproduced here at the tip. A hash that moves means an existing
+  // canon's bytes moved — which is a defect, not a re-record, unless the act that
+  // moved it declares the cause.
+  const EXPECTED = Object.freeze({
+    'grid22x18-12-plain': '437a47ef780ac6b156ec8cfed27448d0f0bff1e41b4b25ff0559b50a5f446ddb',
+    'grid22x18-12-allslots': '324d68b0161a3bd79ebd66b053844708310f72537e3f7cd0ae6022d034b10f39',
+    'grid24x18-ports': '1ba924842559f12e6d191e943a1982a10d5bf771d8bc1b4472cafa5266d6abe9',
+    'grid24x18-teleport': '65f7181ad1d435577586613dabc5c0ce4f9b0ce863a3e18a242724a9e1cd57dc',
+    island: 'b7affc5903ce5d62a59ca6b590746ca9ffc1838f7e963c6c8ce32c103ef3a3c8',
+    'disconnected-water': '99758d508d17a599bcba465a0d3052e9016e0150f3e9c4e0df5d94d379b924de',
+    isthmus: 'c86bf0edaa7ca2f11d33b98377b692fc052a86b504b737c33ea74f7c03d7fa05',
+    tie: 'c27487d0b8e1264eca7932af948710f6a7c421d785c58f59762ee39f3cd92c10',
+    'port-coast-20': '2f7b5736fe478cf7b24d6d97029a7055f8ae9faea5d12d9a34880a89b10443ff',
+  });
+  const sha = v => createHash('sha256').update(JSON.stringify(v)).digest('hex');
+
+  it('reproduces every pre-SEAM fixture digest byte for byte', () => {
+    /** @type {Record<string, unknown>} */
+    const built = {};
+    const g22 = makeGridPack({ cols: 22, rows: 18 });
+    built['grid22x18-12-plain'] = buildSpatialDigest({ pack: g22, placements: placeSettlements(g22, 12) });
+    built['grid22x18-12-allslots'] = buildSpatialDigest({
+      pack: g22, placements: placeSettlements(g22, 12),
+      seasonalRoads: true, seaLanes: true, teleport: true, biomeTexture: true,
+    });
+    const g24 = makeGridPack({ cols: 24, rows: 18 });
+    built['grid24x18-ports'] = buildSpatialDigest({
+      pack: g24, placements: placePortSettlements(g24, { nCoastal: 3, nRiver: 2, nInland: 3 }),
+      seasonalRoads: true, seaLanes: true, teleport: true,
+    });
+    built['grid24x18-teleport'] = buildSpatialDigest({
+      pack: g24, placements: placeTeleportSettlements(g24, { nCircle: 3, nPlain: 4 }),
+      seasonalRoads: true, seaLanes: true, teleport: true,
+    });
+    const isle = makeIslandPack();
+    built.island = buildSpatialDigest({ pack: isle.pack, placements: isle.placements, seaLanes: true, seasonalRoads: true });
+    const dw = makeDisconnectedWaterPack();
+    built['disconnected-water'] = buildSpatialDigest({ pack: dw.pack, placements: dw.placements, seaLanes: true });
+    const isth = makeIsthmusPack();
+    built.isthmus = buildSpatialDigest({ pack: isth.pack, placements: isth.placements, seaLanes: true });
+    const tie = makeTiePack();
+    built.tie = buildSpatialDigest({ pack: tie.pack, placements: tie.placements });
+    const pc = makePortCoastPack(20);
+    built['port-coast-20'] = buildSpatialDigest({ pack: pc.pack, placements: pc.placements, seaLanes: true });
+
+    for (const [name, expected] of Object.entries(EXPECTED)) {
+      expect(sha(built[name]), `${name} digest bytes moved`).toBe(expected);
+      expect('captureReceipt' in /** @type {any} */ (built[name]), `${name} grew a receipt key`).toBe(false);
     }
   });
 });

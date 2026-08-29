@@ -62,7 +62,7 @@ import { institutionalCatalog, catalogIdForName } from '../../data/institutional
 import {
   isMaterializedCustomContent,
 } from '../content/customContentSemanticAuthority.js';
-import { LAND_HEIGHT } from './spatialCost.js';
+import { LAND_HEIGHT, isCoastalCell, isRiverCell } from './spatialCost.js';
 
 // The self-describing slot version. Bumping it is a DISCRETE re-canonize event
 // (§V.1) — an existing frozen digest keeps its own seaLanes forever; only an
@@ -190,34 +190,15 @@ export function hasWaterAccessInstitution(institutions) {
 }
 
 // ── GEOGRAPHY: proximity to navigable water (pure reads of the frozen pack) ────
-/**
- * Is a land cell COASTAL — adjacent to an ocean / off-map cell? A neighbour below
- * LAND_HEIGHT (or a missing/out-of-range neighbour, treated as the map edge / open
- * water) makes the cell a shore. Pure function of the frozen pack.
- * @param {{ h: number[], c: number[][], cellCount: number }} pack @param {number} cell
- * @returns {boolean}
- */
-export function isCoastalCell(pack, cell) {
-  const H = pack.h || [];
-  if (!(Number(H[cell]) >= LAND_HEIGHT)) return false; // not land ⇒ not a port cell
-  const neighbours = (pack.c || [])[cell] || [];
-  for (const v of neighbours) {
-    if (v == null || v < 0 || v >= pack.cellCount) return true; // map edge ⇒ open water
-    if (!(Number(H[v]) >= LAND_HEIGHT)) return true;            // ocean neighbour ⇒ shore
-  }
-  return false;
-}
-
-/** Does a land cell sit on a river course (r[cell] != 0)? A missing/short r entry
- *  (normalizeSpatialPack reads absent/ragged r as [] and cellCount EXCLUDES r) reads
- *  as NO river — require a FINITE non-zero value (mirrors landCostRaw's truthy R test),
- *  never NaN!==0. @param {{ h:number[], r:number[] }} pack @param {number} cell */
-export function isRiverCell(pack, cell) {
-  const H = pack.h || [];
-  if (!(Number(H[cell]) >= LAND_HEIGHT)) return false;
-  const rv = Number((pack.r || [])[cell]);
-  return Number.isFinite(rv) && rv !== 0;
-}
+// W-SEAM SEAM-1 (S3) MOVED these two down to spatialCost.js — the zero-import leaf
+// that already owns LAND_HEIGHT and terrainClassOf — so `terrainAgreement` can decide
+// the config vocabulary's `coastal` / `riverside` against the SAME single writer
+// without dragging seaLanes' institutionalCatalog import into a display chunk.
+// Re-exported here VERBATIM so every existing import path (this module, the
+// domain/spatial barrel, tests/domain/seaLanes.test.js) is untouched, and so the
+// port derivation below still reads the one law. No behaviour change: the bodies
+// moved, nothing else.
+export { isCoastalCell, isRiverCell };
 
 // ── PORT ELIGIBILITY = geography ∧ institutions (the pure derivation) ──────────
 /**

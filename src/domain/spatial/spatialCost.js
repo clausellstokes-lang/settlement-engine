@@ -114,6 +114,42 @@ export function buildSeasonalOverlay() {
   return { version: SEASONAL_OVERLAY_VERSION, seasonTerrainCost: SEASON_TERRAIN_COST };
 }
 
+// ── GEOGRAPHY: proximity to navigable water (pure reads of the frozen pack) ────
+// Moved here from seaLanes.js by W-SEAM SEAM-1 (S3), VERBATIM. This module is the
+// zero-import leaf that already owns LAND_HEIGHT and terrainClassOf, so keeping the
+// two water reads here lets `terrainAgreement` (below) decide the config
+// vocabulary's `coastal` / `riverside` against the SAME single writer the sea-lane
+// port derivation uses — instead of forking a second coastality law into a display
+// path. seaLanes.js re-exports both, so every existing import site is untouched.
+/**
+ * Is a land cell COASTAL — adjacent to an ocean / off-map cell? A neighbour below
+ * LAND_HEIGHT (or a missing/out-of-range neighbour, treated as the map edge / open
+ * water) makes the cell a shore. Pure function of the frozen pack.
+ * @param {{ h: number[], c: number[][], cellCount: number }} pack @param {number} cell
+ * @returns {boolean}
+ */
+export function isCoastalCell(pack, cell) {
+  const H = pack.h || [];
+  if (!(Number(H[cell]) >= LAND_HEIGHT)) return false; // not land ⇒ not a port cell
+  const neighbours = (pack.c || [])[cell] || [];
+  for (const v of neighbours) {
+    if (v == null || v < 0 || v >= pack.cellCount) return true; // map edge ⇒ open water
+    if (!(Number(H[v]) >= LAND_HEIGHT)) return true;            // ocean neighbour ⇒ shore
+  }
+  return false;
+}
+
+/** Does a land cell sit on a river course (r[cell] != 0)? A missing/short r entry
+ *  (normalizeSpatialPack reads absent/ragged r as [] and cellCount EXCLUDES r) reads
+ *  as NO river — require a FINITE non-zero value (mirrors landCostRaw's truthy R test),
+ *  never NaN!==0. @param {{ h:number[], r:number[] }} pack @param {number} cell */
+export function isRiverCell(pack, cell) {
+  const H = pack.h || [];
+  if (!(Number(H[cell]) >= LAND_HEIGHT)) return false;
+  const rv = Number((pack.r || [])[cell]);
+  return Number.isFinite(rv) && rv !== 0;
+}
+
 /** @param {number|undefined} h @param {number|undefined} b */
 export function terrainClassOf(h, b) {
   const height = Number(h) || 0;
@@ -128,6 +164,115 @@ export function terrainClassOf(h, b) {
     case 12: return 'wetland';
     default: return 'grassland';
   }
+}
+
+// ── W-SEAM SEAM-1 (S3): the two terrain truths, and whether they agree ─────────
+// The engine persists a settlement's terrain as `config.terrainType`, read through
+// the ONE reader (domain/resolveTerrain.js) over a CLOSED vocabulary minted at
+// genesis from the trade route. The map carries a completely different truth — the
+// captured FMG pack, classified by terrainClassOf above over its OWN closed
+// vocabulary. The two never shared a type, so nothing could compare them and the
+// disagreement was permanent and silent: a `terrainType:'coastal'` settlement
+// dropped mid-plain is fed as a port by foodBalance forever while
+// derivePortEligibility reads coastal:false and never grants it a sea lane.
+//
+// This is the mapping the two vocabularies were missing. It is a total function
+// over CLOSED vocabularies with an honest third state: `unknown` means the two
+// vocabularies genuinely cannot speak about this pair, not that we did not check.
+// It NEVER rewrites terrainType — genesis derivations hang off that value, and for
+// a canon settlement the write would be lived-history-adjacent (the bug-or-truth
+// fork). It only reports.
+
+/** The engine-side closed vocabulary (domain/resolveTerrain.js's canonical list). */
+export const CONFIG_TERRAIN_CLASSES = Object.freeze([
+  'plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert',
+]);
+
+/** The tri-state verdict vocabulary. */
+export const TERRAIN_AGREEMENT_VERDICTS = Object.freeze(['agrees', 'disagrees', 'unknown']);
+
+// Four config words have a direct counterpart among terrainClassOf's classes
+// (plains↔grassland, forest↔forest, desert↔desert, mountain↔mountain), so a
+// mismatch BETWEEN counterparts is a real disagreement. Classes with no config
+// counterpart (wetland, tundra) stay `unknown` — a plain can carry a tundra band
+// and the config has no word for it, so silence is the honest answer. `water` is
+// the one universal: a settlement whose own cell is ocean contradicts every land
+// terrain the config can name.
+//
+// `hills` is deliberately almost-blind: terrainClassOf has NO hills class — it sees
+// biome bands and one mountain knee, so relief between LAND_HEIGHT and
+// MOUNTAIN_HEIGHT is invisible to it. Claiming agreement or disagreement there
+// would be inventing a comparison the map cannot make.
+//
+// `riverside` and `coastal` are not classes at all — they are hydrographic facts,
+// so they are decided by isRiverCell / isCoastalCell above (the same single writers
+// the sea-lane port derivation reads), not by this table.
+const AGREEMENT_TABLE = Object.freeze({
+  plains: Object.freeze({
+    agrees: Object.freeze(['grassland']),
+    disagrees: Object.freeze(['water', 'forest', 'desert', 'mountain', 'glacier']),
+  }),
+  hills: Object.freeze({
+    agrees: Object.freeze([]),
+    disagrees: Object.freeze(['water']),
+  }),
+  forest: Object.freeze({
+    agrees: Object.freeze(['forest']),
+    disagrees: Object.freeze(['water', 'grassland', 'desert', 'mountain', 'glacier']),
+  }),
+  mountain: Object.freeze({
+    agrees: Object.freeze(['mountain']),
+    disagrees: Object.freeze(['water', 'grassland', 'forest', 'desert', 'wetland']),
+  }),
+  desert: Object.freeze({
+    agrees: Object.freeze(['desert']),
+    disagrees: Object.freeze(['water', 'grassland', 'forest', 'mountain', 'wetland', 'glacier']),
+  }),
+  // Present so the table is TOTAL over CONFIG_TERRAIN_CLASSES (a walker can assert
+  // that), but the hydrographic branch answers first and these are never consulted
+  // for a cell that is on the map at all.
+  riverside: Object.freeze({ agrees: Object.freeze([]), disagrees: Object.freeze(['water']) }),
+  coastal: Object.freeze({ agrees: Object.freeze([]), disagrees: Object.freeze(['water']) }),
+});
+
+/**
+ * Do the settlement's own declared terrain and the geography under it agree?
+ *
+ * @param {string|null|undefined} configTerrain a member of CONFIG_TERRAIN_CLASSES
+ *   (resolveTerrain's output). Anything else — null, the 'auto' sentinel, an
+ *   imported word we do not know — is `unknown`, never a guess.
+ * @param {{ h:number[], biome:number[], r:number[], c:number[][], cellCount:number }} pack
+ *   the NORMALIZED pack (normalizeSpatialPack's shape).
+ * @param {number} cellId the cell the settlement sits on.
+ * @returns {'agrees'|'disagrees'|'unknown'}
+ */
+export function terrainAgreement(configTerrain, pack, cellId) {
+  const declared = typeof configTerrain === 'string' ? configTerrain : '';
+  if (!Object.prototype.hasOwnProperty.call(AGREEMENT_TABLE, declared)) return 'unknown';
+  if (!pack || !Number.isInteger(cellId)) return 'unknown';
+  const cellCount = Number(pack.cellCount);
+  // Off the map entirely ⇒ there is no geography to compare against. `resolveSeeds`
+  // already reports that case as `off_map`; this deriver does not double-count it.
+  if (!Number.isFinite(cellCount) || cellId < 0 || cellId >= cellCount) return 'unknown';
+
+  const mapClass = terrainClassOf((pack.h || [])[cellId], (pack.biome || [])[cellId]);
+
+  // The hydrographic pair is decided by the water reads, not by the class table —
+  // terrainClassOf says nothing about rivers or shorelines. A cell that is itself
+  // water disagrees with both (a settlement is not in the sea).
+  if (declared === 'riverside') {
+    if (mapClass === 'water') return 'disagrees';
+    return isRiverCell(pack, cellId) ? 'agrees' : 'disagrees';
+  }
+  if (declared === 'coastal') {
+    if (mapClass === 'water') return 'disagrees';
+    return isCoastalCell(pack, cellId) ? 'agrees' : 'disagrees';
+  }
+
+  const row = AGREEMENT_TABLE[/** @type {keyof typeof AGREEMENT_TABLE} */ (declared)];
+  if (row.agrees.includes(mapClass)) return 'agrees';
+  if (row.disagrees.includes(mapClass)) return 'disagrees';
+  return 'unknown';
 }
 
 /**

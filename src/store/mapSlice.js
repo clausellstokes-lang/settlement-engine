@@ -25,7 +25,7 @@ import { popToTier } from '../data/constants.js';
 // The campaign-write persistence chokepoint (campaignSlice's own idiom, and
 // already in the eager closure through it) — the autoplacement Herald record is a
 // campaign write, so it persists the way every other campaign write does.
-import { persistCampaignState } from './campaignSliceShared.js';
+import { persistCampaignState, findActiveCampaign } from './campaignSliceShared.js';
 
 // FP-G9 first-paint reclaim: computeRoadEdges (+ its supplyChains dep, ~19 KB
 // source) is reached from the eager store ONLY here, and ONLY for the
@@ -216,6 +216,23 @@ export const createMapSlice = (set, get) => ({
   // perturbs a placement.
   geometryVersion: 0,
 
+  // W-SEAM SEAM-1 (S1) — "the terrain was touched after this realm's geography was
+  // frozen". SESSION-ONLY (a sibling of geometryVersion: outside mapState, so it is
+  // never persisted and never reaches a save, a snapshot or a golden). It is raised
+  // by the fmg:terrainChanged bridge event and lowered by a re-canonize or a campaign
+  // reset, and the SpatialCanonGate reads it to offer the refreeze.
+  //
+  // ⚠ HONESTY, AND IT IS LOAD-BEARING FOR THE COPY: this signal UNDER-COVERS. The
+  // only emit site (public/map/sf-bridge.js, activateTool) fires when a terrain tool
+  // is ACTIVATED — before any edit — and the rivers / coastline / lakes editors open
+  // by DOUBLE-CLICKING the map, an FMG-internal path that never crosses the bridge;
+  // terrainUndo / terrainRedo emit nothing either. So an unraised flag is NOT proof
+  // the geography is unchanged, and a raised flag is not proof it changed. The copy
+  // therefore says "may have changed", never "has changed". The complete cure is a
+  // capture-time fingerprint diff against a provenance-stamped capture (SEAM-3,
+  // owner-gated) — this is the cheap, honest half.
+  geographyMayHaveDiverged: false,
+
   // UI state
   mapMode: MAP_MODES.VIEW,
   terrainTool: null,          // one of TERRAIN_TOOLS when mapMode === TERRAIN
@@ -259,6 +276,23 @@ export const createMapSlice = (set, get) => ({
   setMapLoading: (loading) => set(state => { state.mapLoading = loading; }),
 
   setMapError: (err) => set(state => { state.mapError = err; }),
+
+  /**
+   * W-SEAM SEAM-1 (S1). Raise the divergence signal — but ONLY for a realm that has
+   * actually frozen a spatial canon (`spatialCanonVersion > 0`). An unmapped realm has
+   * no canon to diverge FROM, so a terrain edit there is just map-making and must not
+   * grow a warning. The gate lives here rather than in the bridge hook so the hook
+   * stays the dumb wiring layer its header promises.
+   */
+  flagGeographyDiverged: () => set(state => {
+    if (state.geographyMayHaveDiverged) return;
+    const campaign = findActiveCampaign(state.campaigns, state.activeCampaignId);
+    const version = Number(campaign?.worldState?.spatialCanonVersion) || 0;
+    if (version > 0) state.geographyMayHaveDiverged = true;
+  }),
+
+  /** Lower it — a successful re-canonize refroze the geography, or the realm changed. */
+  clearGeographyDiverged: () => set(state => { state.geographyMayHaveDiverged = false; }),
 
   setMapMode: (mode) => set(state => {
     if (!Object.values(MAP_MODES).includes(mode)) return;
@@ -758,6 +792,9 @@ export const createMapSlice = (set, get) => ({
     // pointing at the now-gone settlement.
     state.selectedSettlementId = null;
     state.hoveredSettlementId = null;
+    // SEAM-1: the divergence signal is scoped to the realm whose canon it warns about.
+    // A deselect / campaign switch must not carry it onto the next realm.
+    state.geographyMayHaveDiverged = false;
     // Lifecycle-clear (fix wave 2 #3): drop the map-scoped undo/redo history so a
     // deselect / fresh-campaign switch can't let a later Undo restore the prior
     // campaign's placements or secret markers into a different (or empty) map.
