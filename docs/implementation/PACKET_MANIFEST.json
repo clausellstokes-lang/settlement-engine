@@ -2216,7 +2216,8 @@
         },
         {
           "action": "CREATE",
-          "path": "src/components/townMap/useTownCartographyBlock.js"
+          "path": "src/components/townMap/useTownCartographyBlock.js",
+          "retiredBy": "§725/§731"
         },
         {
           "action": "CREATE",
@@ -2224,7 +2225,8 @@
         },
         {
           "action": "CREATE",
-          "path": "tests/hooks/useTownCartographyBlock.test.jsx"
+          "path": "tests/hooks/useTownCartographyBlock.test.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "action": "TEST",
@@ -2323,15 +2325,18 @@
       "changeManifest": [
         {
           "action": "TEST",
-          "path": "tests/build/townScene3dLazy.test.js"
+          "path": "tests/build/townScene3dLazy.test.js",
+          "retiredBy": "§725/§731"
         },
         {
           "action": "CREATE",
-          "path": "src/components/townMap/subtabs/cartographyColours.js"
+          "path": "src/components/townMap/subtabs/cartographyColours.js",
+          "retiredBy": "§725/§731"
         },
         {
           "action": "CREATE",
-          "path": "src/components/townMap/subtabs/MapCartographySubTab.jsx"
+          "path": "src/components/townMap/subtabs/MapCartographySubTab.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "action": "MODIFY",
@@ -2339,7 +2344,8 @@
         },
         {
           "action": "MODIFY",
-          "path": "src/components/townMap/MapTabShell.jsx"
+          "path": "src/components/townMap/MapTabShell.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "action": "REGISTER",
@@ -2347,7 +2353,8 @@
         },
         {
           "action": "CREATE",
-          "path": "tests/ui/mapCartographySubTab.test.jsx"
+          "path": "tests/ui/mapCartographySubTab.test.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "action": "TEST",
@@ -2355,11 +2362,13 @@
         },
         {
           "action": "TEST",
-          "path": "tests/ui/mapTabShell.test.jsx"
+          "path": "tests/ui/mapTabShell.test.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "action": "TEST",
-          "path": "tests/build/mapTabShellLazy.test.js"
+          "path": "tests/build/mapTabShellLazy.test.js",
+          "retiredBy": "§725/§731"
         }
       ],
       "requiredSymbols": [
@@ -4214,7 +4223,7 @@
         },
         {
           "path": "scripts/mutation-coverage-manifest.json",
-          "symbol": "\"uncoveredBaseline\": 198"
+          "symbol": "\"uncoveredBaseline\""
         },
         {
           "path": "scripts/mutation-coverage-manifest.json",
@@ -7522,7 +7531,8 @@
         },
         {
           "path": "src/store/fogEditSlice.js",
-          "symbol": "fogEdit"
+          "symbol": "fogEdit",
+          "retiredBy": "§725/§731"
         }
       ],
       "acceptanceCases": [
@@ -10136,11 +10146,13 @@
         },
         {
           "action": "MODIFY",
-          "path": "src/components/townMap/scene3d/TownSceneInspector.jsx"
+          "path": "src/components/townMap/scene3d/TownSceneInspector.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "action": "MODIFY",
-          "path": "src/components/townMap/scene3d/TownSceneLivingSummary.jsx"
+          "path": "src/components/townMap/scene3d/TownSceneLivingSummary.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "action": "MODIFY",
@@ -11786,7 +11798,7 @@
         },
         {
           "path": "tests/lint/rawColorLiteral.test.js",
-          "symbol": "const BUDGET = 1335;"
+          "symbol": "const BUDGET"
         },
         {
           "path": "tests/lint/rawColorLiteral.test.js",
@@ -27589,27 +27601,32 @@
         {
           "_note": "THE PROPERTY LINE'S ONE INK, named once for the same reason STREET_TONE_PERMILLE is: a parcel op carries no role and no tone, so a call site that wanted one would invent it and two call sites would invent two.",
           "action": "MODIFY",
-          "path": "src/components/townMap/subtabs/cartographyColours.js"
+          "path": "src/components/townMap/subtabs/cartographyColours.js",
+          "retiredBy": "§725/§731"
         },
         {
           "_note": "THE SHEET RENDERS THE NEW OP as an unfilled hairline. The element count still equals the identity and the emitted order is still transcribed verbatim; a FILLED parcel layer would mottle the ward tone, because parcels tile only the selected candidates of a ward.",
           "action": "MODIFY",
-          "path": "src/components/townMap/subtabs/MapCartographySubTab.jsx"
+          "path": "src/components/townMap/subtabs/MapCartographySubTab.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "_note": "THE HALO. Border plus a low-opacity tint so it survives colour-blind and high-contrast modes; the yard is an evenodd path; pointerEvents none throughout so it cannot steal the hover that summoned it; and it reads NO entitlement, per the owner's section 514.1b ruling that viewing and interacting are FREE at every level.",
           "action": "CREATE",
-          "path": "src/components/townMap/SettlementMapPropertyLine.jsx"
+          "path": "src/components/townMap/SettlementMapPropertyLine.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "_note": "THE MOUNT, and it is THREE EFFECTIVE LINES. This file sat at 594 of its 600-line ceiling at the base and sits at 597 after; the halo is an out-of-file leaf for that measured reason, which is this file's own precedent for landform, grid, age overlay and fog. Keyed off the existing pinned-else-hovered machine, BUILDINGS only, outside every authoring gate.",
           "action": "MODIFY",
-          "path": "src/components/townMap/SettlementMapPane.jsx"
+          "path": "src/components/townMap/SettlementMapPane.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "_note": "The shell already holds the compiled block for the Cartography sheet; it threads the SAME block down to the plan. No second compile and no new hook. Dark implies null implies a byte-identical plan, which is every existing world's state.",
           "action": "MODIFY",
-          "path": "src/components/townMap/MapTabShell.jsx"
+          "path": "src/components/townMap/MapTabShell.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "_note": "EIGHT of the fourteen moved identity pins live here: the expectedLength helper, the C1 rank map and known-id set, the two C2 op-count arms whose prose said a parcel draws nothing, C6's OP_KEYS and exercised-kind set, C6's by-reference count, and C8's toneless set -- the one pin the pre-edit grep missed and the first battery caught by execution.",
@@ -27624,7 +27641,8 @@
         {
           "_note": "The rendered element count and the hand-stated tag order, plus the fixture's parcel row, which omitted the contract-required polygon the painter had been dropping. A real compiled block never could.",
           "action": "TEST",
-          "path": "tests/ui/mapCartographySubTab.test.jsx"
+          "path": "tests/ui/mapCartographySubTab.test.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "_note": "MP-1's domain matrix, P1-P5: the join proven against a real compiled manifest on BOTH halves, membership by shared parcelId with object identity as the statement of 'once', the absent-parcel and malformed-ring degradations each anchored by a lawful sibling, and the open ground proven to be the members' footprints VERBATIM, which is what forbids a boolean-difference implementation.",
@@ -27634,7 +27652,8 @@
         {
           "_note": "MP-1's UI matrix, H1-H4: border AND tint, the ring stroked exactly once, the yard punched evenodd with one subpath per member, both members of a compound drawing identical paths, a different property drawing a different one, four absence paths, no pointer, and no entitlement in either the leaf or its mount. The entitlement scan strips comments, because its first cut convicted the leaf's own header for NAMING the rule it refuses.",
           "action": "TEST",
-          "path": "tests/ui/settlementMapPropertyLine.test.jsx"
+          "path": "tests/ui/settlementMapPropertyLine.test.jsx",
+          "retiredBy": "§725/§731"
         },
         {
           "action": "DOC",
@@ -27660,12 +27679,14 @@
         {
           "_note": "THE ROLE-TO-VALUE BINDING the property line's ink resolves through. It is the only place a cartography role becomes a value, and the parcel line must not become a second one.",
           "path": "src/components/townMap/subtabs/cartographyColours.js",
-          "symbol": "resolveRoleFill"
+          "symbol": "resolveRoleFill",
+          "retiredBy": "§725/§731"
         },
         {
           "_note": "THE PANE'S HOVER STATE MACHINE. The halo reads hoverKey, which IS pinned-else-hovered resolved; the owner's acceptance is stated in terms of this machine and never a second one.",
           "path": "src/components/townMap/SettlementMapPane.jsx",
-          "symbol": "hoverKey"
+          "symbol": "hoverKey",
+          "retiredBy": "§725/§731"
         },
         {
           "_note": "THE BLOCK'S EXACT KEY SET. The join reads parcels and buildings off the block by name; a change to this frozen set is a change to what this member can see.",

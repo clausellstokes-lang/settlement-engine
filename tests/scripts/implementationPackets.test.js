@@ -832,4 +832,148 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     expect(docRows.length, 'no packet pins a docs path at all — the guard has no live subject')
       .toBeGreaterThan(0);
   });
+
+  // ── §731.3 (owner ruling ODQ §731, charter §11.5) — THE RETIREMENT PATH ───────────────
+  // Every existence and verbatim assertion in this validator was written on a premise
+  // nobody had stated: that the codebase only ever GROWS. The owner's order to strip the
+  // legacy settlement map (ODQ §725) was the first authorized REMOVAL large enough to break
+  // it — six LANDED packets went red across 22 rows naming files the deletion had removed,
+  // and not one was a defect the packet's author could repair. `retiredBy` discharges
+  // exactly those assertions, one declared row at a time, and is REFUSED unless it cites the
+  // ledger § that authorized the removal.
+  it('discharges a row whose subject an authorized ruling removed, and refuses an uncited retirement', () => {
+    const GONE = 'src/deletedByRuling.js';
+    const REF = '§725/§731';
+
+    /** @param {(candidate: ReturnType<typeof canonicalManifest>) => void} mutate */
+    const withManifest = (mutate) => {
+      const candidate = clone(manifest);
+      mutate(candidate);
+      return validatePacketManifest(candidate, { rootDir: root });
+    };
+
+    /**
+     * The same, with P-1 flipped to LANDED in all three places the status lives — and put
+     * BACK before returning. The restore is load-bearing rather than tidy: the status lives
+     * in two on-disk fixture files as well as in the manifest object, so a LANDED probe that
+     * left them behind would red every later READY probe in this test with a status
+     * disagreement that has nothing to do with retirement. (It did, on the first run.)
+     */
+    const withLandedManifest = (mutate) => {
+      const indexRow = (status) => [
+        '| Packet | Status |', '|---|---|',
+        `| [P-1](./packets/P-1.md) | ${status} |`, '| [P-2](./packets/P-2.md) | BLOCKED |',
+      ].join('\n');
+      write(root, INDEX_PATH, indexRow('LANDED'));
+      write(root, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', 'LANDED'));
+      try {
+        return withManifest((candidate) => { candidate.packets[0].status = 'LANDED'; mutate(candidate); });
+      } finally {
+        write(root, INDEX_PATH, indexRow('READY'));
+        write(root, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', 'READY'));
+      }
+    };
+
+    // THE CLEAN CONTROL FIRST — without it a refusal below proves only that the fixture broke.
+    expect(validatePacketManifest(manifest, { rootDir: root })).toEqual({ ok: true, errors: [] });
+
+    // ⭐ NEGATIVE CONTROL 1 — a deleted-path row WITHOUT `retiredBy` must STILL red. This is
+    // what stops the annotation becoming a blanket amnesty: rows are discharged one declared
+    // row at a time, never wholesale, and an undeclared deletion is still a defect.
+    const unannotated = withManifest((candidate) => {
+      candidate.packets[0].changeManifest.push({ action: 'MODIFY', path: GONE });
+      candidate.packets[0].requiredSymbols.push({ path: GONE, symbol: 'goneFeature' });
+    });
+    expect(unannotated.ok).toBe(false);
+    expect(errorText(unannotated)).toContain(`does not exist for MODIFY: ${GONE}`);
+    expect(errorText(unannotated)).toContain(`requiredSymbols[1].path does not exist: ${GONE}`);
+
+    // …and the SAME two rows, annotated, pass. Only the existence assertions moved.
+    expect(withManifest((candidate) => {
+      candidate.packets[0].changeManifest.push({ action: 'MODIFY', path: GONE, retiredBy: REF });
+      candidate.packets[0].requiredSymbols.push({ path: GONE, symbol: 'goneFeature', retiredBy: REF });
+    })).toEqual({ ok: true, errors: [] });
+
+    // BOTH other discharged assertions, each proved against its own un-annotated control:
+    //   a) the LANDED CREATE arm (a landed promise whose file the ruling later removed);
+    //   b) the VERBATIM arm (the file survives, the pinned symbol did not) — the AO-6/GVF-1
+    //      shape, where a shrink-only ratchet pinned by a landed packet could never shrink.
+    const landedCreate = { action: 'CREATE', path: GONE };
+    expect(errorText(withLandedManifest((candidate) => {
+      candidate.packets[0].changeManifest.push({ ...landedCreate });
+    }))).toContain(`does not exist for LANDED CREATE: ${GONE}`);
+    expect(withLandedManifest((candidate) => {
+      candidate.packets[0].changeManifest.push({ ...landedCreate, retiredBy: REF });
+    })).toEqual({ ok: true, errors: [] });
+
+    const movedFigure = { path: 'src/alpha.js', symbol: 'const before = 1;' };
+    expect(errorText(withManifest((candidate) => {
+      candidate.packets[0].requiredSymbols.push({ ...movedFigure, symbol: 'const before = 99;' });
+    }))).toContain('symbol is missing from src/alpha.js');
+    expect(withManifest((candidate) => {
+      candidate.packets[0].requiredSymbols.push({ ...movedFigure, symbol: 'const before = 99;', retiredBy: REF });
+    })).toEqual({ ok: true, errors: [] });
+    // Anchored: the row above really is a live pin when it is NOT retired — the same symbol,
+    // spelled as the file actually carries it, is green with no annotation at all.
+    expect(withManifest((candidate) => {
+      candidate.packets[0].requiredSymbols.push({ ...movedFigure });
+    })).toEqual({ ok: true, errors: [] });
+
+    // ⭐ NEGATIVE CONTROL 2 — a retirement that cites NO ledger § is REFUSED, and, because an
+    // uncited retirement must never buy the silence it was refused for, the existence check
+    // it tried to discharge STILL fires. Half-formed annotations discharge nothing.
+    for (const uncited of ['the map strip', 'section 731', '§', 'ODQ 731']) {
+      const refused = withManifest((candidate) => {
+        candidate.packets[0].changeManifest.push({ action: 'MODIFY', path: GONE, retiredBy: uncited });
+      });
+      expect(refused.ok, `retiredBy ${JSON.stringify(uncited)} must be refused`).toBe(false);
+      expect(errorText(refused)).toContain('cites no ledger section');
+      expect(errorText(refused), 'an uncited retirement must not discharge the check')
+        .toContain(`does not exist for MODIFY: ${GONE}`);
+    }
+    // The malformed-shape half of the same fence, on both row kinds.
+    for (const malformed of [{ retiredBy: '' }, { retiredBy: '   ' }, { retiredBy: 731 }, { retiredBy: null }]) {
+      const bad = withManifest((candidate) => {
+        candidate.packets[0].changeManifest.push({ action: 'MODIFY', path: GONE, ...malformed });
+        candidate.packets[0].requiredSymbols.push({ path: GONE, symbol: 'goneFeature', ...malformed });
+      });
+      expect(bad.ok, `retiredBy ${JSON.stringify(malformed.retiredBy)} must be refused`).toBe(false);
+      expect(errorText(bad)).toContain('.retiredBy must be a non-blank string');
+      expect(errorText(bad)).toContain(`does not exist for MODIFY: ${GONE}`);
+      expect(errorText(bad)).toContain(`requiredSymbols[1].path does not exist: ${GONE}`);
+    }
+
+    // ⛔ AND THE ROW'S OWN SHAPE IS NOT RETIRABLE. A retirement is a statement about the
+    // TREE; a malformed row is wrong on every tree, so glob paths, unknown actions,
+    // duplicate keys and the HK-3 moving-head refusal all survive the annotation.
+    const shapeStillRed = withManifest((candidate) => {
+      candidate.packets[0].changeManifest.push(
+        { action: 'MODIFY', path: 'src/*.js', retiredBy: REF },
+        { action: 'NONSENSE', path: GONE, retiredBy: REF },
+      );
+      candidate.packets[0].requiredSymbols.push(
+        { path: GONE, symbol: 'goneFeature', retiredBy: REF },
+        { path: GONE, symbol: 'goneFeature', retiredBy: REF },
+        { path: 'docs/DEPLOY.md', symbol: '197_consent_person_adjacent_default.sql', retiredBy: REF },
+      );
+    });
+    expect(shapeStillRed.ok).toBe(false);
+    expect(errorText(shapeStillRed)).toContain('must not contain glob');
+    expect(errorText(shapeStillRed)).toContain('action is unknown: NONSENSE');
+    expect(errorText(shapeStillRed)).toContain('contains duplicate required symbol');
+    expect(errorText(shapeStillRed)).toContain('pins a MIGRATION FILENAME in a doc');
+
+    // THE LIVE MANIFEST — the claim this lane actually makes. The estate is green, and the
+    // population the path governs is pinned as a FLOOR, because a discharge over an empty
+    // subject proves nothing (the empty-population class): real rows really are annotated.
+    const live = loadPacketManifest();
+    expect(validatePacketManifest(live, {})).toEqual({ ok: true, errors: [] });
+    const retiredRows = live.packets.flatMap((packet) => [
+      ...(packet.changeManifest ?? []), ...(packet.requiredSymbols ?? []),
+    ].filter((row) => row.retiredBy !== undefined));
+    expect(retiredRows.length, 'no estate row is annotated — the path has no live subject')
+      .toBeGreaterThan(0);
+    // Every live annotation cites a §; none is a bare truthy string that slipped past.
+    expect(retiredRows.filter((row) => !/§\d+/.test(String(row.retiredBy)))).toEqual([]);
+  });
 });

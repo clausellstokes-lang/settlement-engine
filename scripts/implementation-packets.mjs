@@ -113,9 +113,71 @@ const GLOB_OR_NUL = /[\0*?[\]{}!]/;
 const MIGRATION_FILENAME_SYMBOL = /^\d{3}_.*\.sql$/;
 const DOCS_PATH_PREFIX = 'docs/';
 
+// ── §731.3 THE RETIREMENT PATH (owner ruling ODQ §731, charter §11.5) ────────────────
+// A LANDED packet is a HISTORICAL RECORD, not a promise of immortality. Every existence
+// and verbatim assertion below was written on a premise nobody stated: that the codebase
+// only ever GROWS. A landed packet's changeManifest rows must still exist; its
+// requiredSymbols must still be present verbatim. The legacy-map strip (ODQ §725/§731)
+// was the first authorized REMOVAL big enough to break that premise — six landed packets
+// went red across 22 rows naming files an owner-ordered deletion had removed, and two of
+// those rows pinned the very ratchet FIGURES a shrink-only census had been forced to
+// lower, so a shrink-only ratchet pinned by a landed packet could never shrink. Neither
+// shape is a defect the packet's author can repair, and neither is specific to one wave:
+// STRIP-2..6 and every future removal ride this same path.
+//
+// A row may therefore carry `retiredBy`, naming the ledger § that authorized the removal.
+// The row KEEPS every check that describes its own SHAPE — well-formed, uniquely keyed,
+// correctly actioned — and loses only the assertions that describe a tree the ruling
+// deliberately changed.
+//
+// THE ONE FENCE: a retirement naming no ledger § is REFUSED. An uncited `retiredBy` is a
+// silent silencer, which is the precise failure this estate exists to prevent; requiring
+// the citation makes every retirement traceable to a decision somebody can veto. A
+// MALFORMED retirement is refused AND does not discharge — a half-formed annotation must
+// never buy the silence it was refused for.
+//
+// SIBLING TO §379.2, NOT A REPLACEMENT. `retiredSymbols` is the CROSS-PACKET discharge: a
+// NEW landed packet retires a pair and thereby answers OTHER packets' rows. It cannot
+// serve here — it needs a fresh packet to do the retiring, and it has no changeManifest
+// half at all. `retiredBy` is the per-row, self-annotating path a wave of pure deletion
+// needs. The two compose: a requiredSymbols row may be discharged by either, and neither
+// weakens the other's fences.
+const RETIRED_BY_REFERENCE = /§\d+/;
+
 /** @param {unknown} value @returns {value is Record<string, unknown>} */
 function isRecord(value) {
   return !!value && typeof value === 'object' && !Array.isArray(value);
+}
+
+/**
+ * Read a row's §731.3 `retiredBy` annotation.
+ *
+ * Returns BOTH halves deliberately: `error` is appended by the caller, and `retired` gates
+ * the existence/verbatim checks. They are never both truthy — a refused retirement leaves
+ * the row's live assertions running, so a malformed annotation cannot silence anything.
+ *
+ * @param {Record<string, unknown>} row
+ * @returns {{ retired: boolean, error: string|null }}
+ */
+function retirementOf(row) {
+  const value = row.retiredBy;
+  if (value === undefined) return { retired: false, error: null };
+  if (typeof value !== 'string' || value.trim().length === 0) {
+    return {
+      retired: false,
+      error: '.retiredBy must be a non-blank string naming the ledger section that authorized'
+        + ' the removal (for example "§731")',
+    };
+  }
+  if (!RETIRED_BY_REFERENCE.test(value)) {
+    return {
+      retired: false,
+      error: `.retiredBy cites no ledger section: ${value}. A retirement must name the § that`
+        + ' authorized it (for example "§725/§731"): an uncited retirement silences a live'
+        + ' guard with nothing left to veto.',
+    };
+  }
+  return { retired: true, error: null };
 }
 
 /** @param {string} left @param {string} right */
@@ -595,6 +657,12 @@ export function validatePacketManifest(manifest, options = {}) {
           );
         } else changePathOwners.set(row.path, changeOwnerKey);
       }
+      // §731.3: an authorized retirement answers the two EXISTENCE arms below. Everything
+      // above — action vocabulary, path shape, duplicate keying, cross-packet reservation —
+      // still runs: those describe the ROW, which a ruling about the tree cannot repair.
+      const changeRetirement = retirementOf(row);
+      if (changeRetirement.error) addError(errors, `${at}${changeRetirement.error}`);
+      if (changeRetirement.retired) continue;
       if (row.action !== 'CREATE' && !fileExists(rootDir, row.path)) {
         addError(errors, `${at}.path does not exist for ${String(row.action)}: ${row.path}`);
       }
@@ -662,6 +730,13 @@ export function validatePacketManifest(manifest, options = {}) {
       // The duplicate check above still runs — the row must stay well-formed and unique;
       // only the EXISTENCE assertions below are answered by the retirement.
       if (dischargedSymbolKeys.has(key)) continue;
+      // §731.3: the row's OWN retirement annotation does the same, for the removal a
+      // cross-packet retiredSymbols row cannot express. Asserted AFTER the moving-head
+      // refusal above deliberately: that refusal is about the row's SHAPE and stays wrong
+      // on every tree, so a retirement must not be able to launder it.
+      const symbolRetirement = retirementOf(row);
+      if (symbolRetirement.error) addError(errors, `${at}${symbolRetirement.error}`);
+      if (symbolRetirement.retired) continue;
       if (!fileExists(rootDir, row.path)) {
         addError(errors, `${at}.path does not exist: ${row.path}`);
         continue;
