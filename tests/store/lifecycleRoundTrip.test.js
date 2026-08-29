@@ -98,6 +98,7 @@ import { normalizeServicesToggles } from '../../src/store/toggleSlice.js';
 import { createDisplayPrefsSlice, DEFAULT_DISPLAY_PREFS } from '../../src/store/displayPrefsSlice.js';
 import { PUBLIC_TOPLEVEL_KEYS } from '../../src/domain/display/publicSafe.js';
 import { OPERATIONS } from '../../src/store/operationRegistry.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { deepClone } from '../../src/domain/clone.js';
 import { envoyErrandIdForOffer } from '../../src/domain/worldPulse/envoyErrand.js';
 
@@ -1157,7 +1158,15 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     // Anchored on the real allowlist rather than on a hand-copy of it: the key is not
     // public, so no projection was ever obliged to understand it — which is precisely
     // why leaving it inert is safe.
-    expect(PUBLIC_TOPLEVEL_KEYS).not.toContain('fogSessions');
+    // ⚠ AND ANCHORED IN THE WALKER'S SENSE TOO. A bare `not.toContain` here would pass
+    // just as happily if PUBLIC_TOPLEVEL_KEYS had drifted away to nothing — it would
+    // outlive the regression it was written to catch. `spatialLayout` is the anchor
+    // because it is the allowlisted SIBLING that travels the same projection path as
+    // the fog sidecar: both hang off the settlement's spatial half, one public, one not.
+    expectAbsentWithAnchor(
+      [...PUBLIC_TOPLEVEL_KEYS], 'fogSessions', 'spatialLayout',
+      'the public top-level key allowlist',
+    );
     // And no registered operation can write it any more. Asserted against the OPERATION
     // REGISTRY, which is the authority on which verbs exist — NOT against a store built
     // from one slice, which would never have carried `applyFogEdit` and would therefore

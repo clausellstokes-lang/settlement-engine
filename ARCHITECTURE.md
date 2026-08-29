@@ -192,7 +192,7 @@ Its machine-readable evidence and promotion rules live in
 
 ## State (`store/index.js`)
 
-One Zustand store composed from 20 slices, with `immer + persist +
+One Zustand store composed from 19 slices, with `immer + persist +
 subscribeWithSelector + devtools`. **`persist.partialize` deliberately persists
 only lightweight, user-owned data (config + toggles + device display
 preferences)** — never the large generated settlement object. `onRehydrate` resets the wizard to the mode picker.
