@@ -8,6 +8,8 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
+## ⭐⭐⭐ UPDATE AT §747 (2026-08-29 ~23:10) — THE STRIP PAIR LANDED: `claude/composite-r4` = `1a2471990` (the legacy map is OFF the website; the retirement path is law). WSEAM (`c22cf17dc`, green) is REBASING onto it per §747.2's overlap set and lands second — a successor collects that rebase gate first. The SEAM-0 false-canon record + chair ruling: §747.2. The EXEMPT_CEILING raise is owner-flagged (§747.3, vetoable). The mutex double-acquisition is chartered diagnose-first (§747.4). Next build acts after WSEAM lands: STRIP-2 (PDF/exports) dispatches on the new tip; W-COIN-1a waits on Q10/Q11.
+
 ## ⭐⭐ UPDATE AT §739 (2026-08-29) — DW/AD/C-19/CT-1b/COVER-REFRESH DEFER TO THE MODULE (owner ruling; the launch tail is §739.2). The §732 pickup below stands for lane mechanics.
 
 ## ⭐⭐⭐⭐ PICKUP AT §732 (2026-08-29 ~15:20 CDT, WINDOW-CLOSE CHECKPOINT) — START HERE.
