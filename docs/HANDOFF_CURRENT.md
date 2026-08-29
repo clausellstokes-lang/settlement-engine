@@ -8,6 +8,10 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
+## ⭐⭐⭐⭐ UPDATE AT §725 (2026-08-29, same sitting) — THE OWNER RULED: STRIP THE LEGACY MAP; GPL FORK 2, MODULE-ONLY.
+
+**Q1 = STRIP the entire legacy settlement map — no tab or trace on the website** (prelaunch, no users; §705 moot). **Q7 = the module derives directly from GPL-3.0 code and is GPL-3.0 in its OWN repo; the core stays private** — read `docs/DESIGN_MAP_MODULE_SPLIT.md` §11.1's seven mechanics rows before touching either side (output-only boundary; a context that has read GPL source NEVER writes the core repo). **The STRIP charter is doc §11.2** (six waves; J-STRIP-1 retains the headless substrate feeding `spatialSubstrateDerive`'s 11 simulation consumers — vetoable). **TE-STRIP-1 is DISPATCHED** (Opus seat, build tip `73f5dfc02`, own worktree, full detached gate, receipt in the 5a850cca scratchpad). Open owner questions: **Q8** CARTOGRAPHER tier contents after map rows leave · **Q6′** 3D scene + interiors stay (rec) · **Q9** landing imagery replacement. A successor: collect TE-STRIP-1 from its receipt FIRST (§448 — resume mid-lane, never restart), then continue the wave order.
+
 ## ⭐⭐⭐⭐ STATE AT §724 (2026-08-29) — THE DESCOPE SITTING. READ THIS FIRST; IT RE-SCOPES EVERYTHING BELOW.
 
 **The owner ruled (§724.1): ALL settlement-layer mapmaking leaves the launch path and becomes a SEPARATE MODULE** (later possibly published standalone under GPL-3.0 while the core stays private), and the launch tail is everything minus that module. **Seats re-split: Fable architects/surveys/manages · Opus 5 implements/verifies** — this supersedes §685's all-Opus assignment for this program; §685's seat-trailer/retrovalidation MARKING machinery is unchanged and binds every ledger act.
