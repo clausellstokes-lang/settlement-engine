@@ -18,7 +18,16 @@ set -u
 
 MAX_POLLS="${GATE_MUTEX_MAX_POLLS:-40}"
 POLL_SECONDS="${GATE_MUTEX_POLL_SECONDS:-30}"
-LOCK_DIR="${GATE_MUTEX_LOCK_DIR:-${TMPDIR:-/tmp}/settlementforge-vitest-gate.lock}"
+# ⛔ THE LOCK PATH IS PINNED MACHINE-WIDE, NEVER DERIVED FROM TMPDIR (ODQ §747.4(1)
+# diagnosis, 2026-08-29). The default used to read `${TMPDIR:-/tmp}/…`, and macOS gives
+# each launch context its own per-user TMPDIR — so a lane whose shell carried
+# `TMPDIR=/var/folders/…` and a lane whose shell resolved to `/tmp` locked two
+# PHYSICALLY DIFFERENT directories and were not mutually excluded at all. Both printed
+# "acquired atomic lock", and the mutex was blamed for an identity failure it never had:
+# `mkdir` is atomic, but only per path. `/tmp` is stable per-boot and per-machine; the
+# `$(id -u)` suffix keeps the pid probe (`kill -0`) from hitting cross-user EPERM, which
+# would otherwise let one user's live holder look dead to another's reclaim arm.
+LOCK_DIR="${GATE_MUTEX_LOCK_DIR:-/tmp/settlementforge-vitest-gate.$(id -u).lock}"
 OWNER_FILE="$LOCK_DIR/pid"
 REAPER_DIR="${LOCK_DIR}.reaper"
 REAPER_OWNER_FILE="$REAPER_DIR/pid"
@@ -333,7 +342,11 @@ run_held() {
         sleep "$POLL_SECONDS"
     done
 
-    echo "gate-mutex: acquired atomic lock as PID $$ after $_i poll(s)."
+    # NAME THE DIRECTORY AND BOTH COUNTERS. The old line printed only `$_i` and printed
+    # AFTER the legacy wait, so a run that sat ~7 minutes in the legacy loop still reported
+    # "after 0 poll(s)" — and it never said WHICH directory it locked, the one datum that
+    # makes a two-population split visible from any two logs.
+    echo "gate-mutex: acquired atomic lock at $LOCK_DIR as PID $$ after $_i atomic poll(s) + $_legacy_i legacy poll(s)."
     "$@"
     _child_status=$?
     release_owned_lock

@@ -250,3 +250,52 @@ describe('gate-mutex compatibility modes', () => {
     expect(free.stdout).toMatch(/FREE/i);
   });
 });
+
+// ── LOCK IDENTITY (ODQ §747.4(1)) ────────────────────────────────────────────────────
+// The double-acquisition of 2026-08-29 was NOT a failure of atomicity: `mkdir` is atomic,
+// but only per path. The default lock path read `${TMPDIR:-/tmp}/settlementforge-vitest-
+// gate.lock`, and macOS hands each launch context its own per-user TMPDIR — so a lane
+// whose shell carried `TMPDIR=/var/folders/…` and a lane whose shell resolved to `/tmp`
+// locked two physically different directories, each printed "acquired atomic lock", and
+// the two populations were never mutually excluded. The invariant this pins is therefore
+// about the lock's IDENTITY, not its acquisition, and it is asserted against the SOURCE:
+// running the script on its real default would contend with (and briefly block) a live
+// gate on this box, which is exactly the thing a test must not do.
+describe('gate-mutex lock identity — the default path is caller-environment INDEPENDENT', () => {
+  const source = readFileSync(SCRIPT, 'utf8');
+  const defaultLine = source
+    .split('\n')
+    .find((line) => line.startsWith('LOCK_DIR='));
+
+  it('the default LOCK_DIR expression exists and is a single assignment', () => {
+    expect(defaultLine, 'LOCK_DIR is no longer assigned at the top level of the script')
+      .toBeDefined();
+    expect(source.split('\n').filter((l) => l.startsWith('LOCK_DIR=')))
+      .toHaveLength(1);
+  });
+
+  it('the default LOCK_DIR never reads TMPDIR — two callers can never lock two directories', () => {
+    // The anti-vacuity half: the assertion must be reading a line that really names the
+    // env override and a concrete path, not an empty string that trivially lacks TMPDIR.
+    expect(defaultLine).toContain('GATE_MUTEX_LOCK_DIR');
+    expect(defaultLine).toContain('settlementforge-vitest-gate');
+    expect(
+      /TMPDIR/.test(defaultLine),
+      'the default lock path derives from TMPDIR again — two launch contexts will lock two'
+      + ' different directories and the gate mutex will silently stop excluding them',
+    ).toBe(false);
+  });
+
+  it('the acquisition line names the directory it locked and BOTH poll counters', () => {
+    // The legibility half of the same defect: the old line printed only the atomic
+    // counter and printed AFTER the legacy wait, so a seven-minute wait still reported
+    // "after 0 poll(s)" — and it never said which directory it had locked, the one datum
+    // that would have made the split diagnosable from any two logs.
+    const f = fixture();
+    const result = run(f.lock, ['--run', '--', 'sh', '-c', 'exit 0']);
+
+    expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(0);
+    expect(result.stdout).toContain(`acquired atomic lock at ${f.lock}`);
+    expect(result.stdout).toMatch(/atomic poll\(s\) \+ \d+ legacy poll\(s\)/);
+  });
+});
