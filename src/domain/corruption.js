@@ -19,6 +19,7 @@
  */
 
 import { institutionHasTag, TAG } from '../lib/entities.js';
+import { prosperityRank01PreT8Corruption } from './prosperityRank.js';
 // TRAIT_ALIGNMENT lives in the zero-import leaf data/npcTraitWeights.js (npcData.js
 // re-exports it). npcAlignmentScore below reads it. corruption.js is EAGER (first paint),
 // so it imports the LIGHT leaf directly — importing from npcData.js would drag that 64 kB
@@ -492,18 +493,17 @@ export function guildEffectiveSecurity(security, strength) {
 // security / prosperity (0..1), whether a criminal institution is present, and
 // the criminal-institution names (for second-relation matching). Defensive — any
 // missing field degrades to a neutral default rather than throwing. No rng/Date.
-const PROSPERITY_SCORE = Object.freeze({
-  subsistence: 0.0, destitute: 0.0, poor: 0.2, struggling: 0.2, meager: 0.2,
-  moderate: 0.4, modest: 0.4, stable: 0.45, comfortable: 0.6,
-  prosperous: 0.8, thriving: 0.8, wealthy: 1.0, affluent: 1.0, opulent: 1.0,
-});
-
-/** @param {unknown} value */
-function prosperityScore(value) {
-  const s = String(value || '').toLowerCase();
-  for (const [k, v] of Object.entries(PROSPERITY_SCORE)) { if (s.includes(k)) return v; }
-  return 0.4; // unknown → middling
-}
+//
+// ⚠ THE PROSPERITY LADDER USED TO LIVE HERE, as a private `PROSPERITY_SCORE` map — one of
+// FOUR private re-quantifications of the same six-label categorical, on three different
+// scales (§759.3, the §711.6 family). It now lives in `domain/prosperityRank.js`, the one
+// leaf, whose header carries the full divergence table and the argument for the ladder that
+// won. THIS consumer still reads the PRE-T8 ladder, and deliberately: it feeds
+// `corruptionPass`, a generation step, so flipping it moves 91 of 525 generator-golden rows
+// (measured by bisection in T7) — and §773.1 couples every golden-moving wave into T8's one
+// shift window. The values are unchanged from the map that stood here; the divergence is now
+// a REGISTERED export with a walker holding it to a single importer, instead of a private
+// literal no reader could see. T8 deletes it.
 
 /**
  * The ONE criminal-organization detector (tag/name backfill OR criminal
@@ -548,7 +548,7 @@ export function readCorruptionClimate(settlement) {
   return {
     crime,
     security,
-    prosperity: prosperityScore(eco.prosperity),
+    prosperity: prosperityRank01PreT8Corruption(eco.prosperity),
     hasCriminalInst,
     criminalInstitutions,
   };

@@ -39,6 +39,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { canonExports } from '../canonicalAccessors.js';
 import { deriveAllDistricts } from '../districtProfile.js';
 import { deriveMapProfile } from '../mapProfile.js';
+import { prosperityRank01 } from '../prosperityRank.js';
 import { resolveTerrain } from '../resolveTerrain.js';
 import { defenseProfileHasWalls } from '../causalState.js';
 import { deriveAllActiveConditions } from '../activeConditions.js';
@@ -428,16 +429,13 @@ export function buildTownLayoutV2(settlement, mapEdits = null) {
   };
 }
 
-/** A settlement's prosperity as 0..1 (drives resource-site pull strength).
+/** A settlement's prosperity as 0..1 (drives resource-site pull strength), through the ONE
+ * ladder — `domain/prosperityRank.js`. The arm this replaces matched
+ * `/comfortable|modest|stable/`, which the emitted label `Moderate` can never satisfy, so
+ * `Moderate` and `Comfortable` scored identically here (§759.3).
  * @param {TownV2Settlement|null|undefined} s @returns {number} */
 function prosperityScore(s) {
-  const p = s?.economicState?.prosperity;
-  const tier = typeof p === 'string' ? p : (p && typeof p === 'object' ? (p.label || p.tier) : '');
-  const t = String(tier || '').toLowerCase();
-  if (/opulent|wealthy|rich|prosperous/.test(t)) return 0.9;
-  if (/comfortable|modest|stable/.test(t)) return 0.5;
-  if (/poor|destitute|struggling|failing/.test(t)) return 0.2;
-  return 0.5;
+  return prosperityRank01(s?.economicState?.prosperity);
 }
 
 /** Fold the flat provenance entries into a deterministic, lookup-by-element map:

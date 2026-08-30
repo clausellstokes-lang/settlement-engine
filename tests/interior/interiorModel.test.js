@@ -6,6 +6,41 @@
  * shared with the map), the FACET grammar (declared == inferred, kind-default byte-
  * identity, custom-content on-ramp), SEMANTIC FURNISHING (revealed ⇒ evidence room;
  * covert ⇒ concealed chamber, NEVER visible), the EDITS-DELTA law, and PURITY.
+ *
+ * ── SHIFT RECORD (interiorGolden.json) ────────────────────────────────────────
+ * A frozen measurement cannot say why it moved. Re-recording without a row here is a deleted
+ * alarm.
+ *
+ * 2026-08-30 — FIRST RECORD (lane T7 · HYGIENE, car TE-UNITS-1). ⚠ A DELIBERATE, DECLARED
+ *   SAME-SEED SHIFT: ALL 48 of 48 rows move, and ONE value causes every one of them.
+ *
+ *   CAUSE, in one sentence: `interiorModel.prosperityScore` was one of FOUR private
+ *   re-quantifications of the six-label `economicState.prosperity` categorical on three
+ *   divergent scales (ODQ §759.3, the §711.6 family); it now reads the ONE ladder,
+ *   `src/domain/prosperityRank.js`.
+ *
+ *   WHY EVERY ROW: `makeInteriorSettlement` defaults to prosperity `'modest'`. The arm this
+ *   replaced matched `/comfortable|modest|stable/` and returned 0.5; the canonical ladder
+ *   ranks `Modest` at 0.4 — where it belongs, between `Poor` 0.25 and `Moderate` 0.5. Every
+ *   fixture carries the default, so every fixture moves by the same 0.5 → 0.4.
+ *
+ *   THE DEFECT THIS CURES, and it is why the shift is desirable rather than merely tolerated:
+ *   the old regex had NO ARM that could match `Moderate` — the label the generator actually
+ *   emits — so a `Moderate` settlement and a `Comfortable` one furnished IDENTICALLY here,
+ *   one by intent and one by falling off the end of the ladder.
+ *
+ *   PARENT-SIDE TOTALITY CONTROL, EXECUTED before the re-record: with `interiorModel.js`
+ *   reverted to the parent and everything else at the lane tip, the harness reproduces
+ *   48/48 committed hashes with 0 mismatches. So 48 is a COUNT, not a sample.
+ *
+ *   NOT MOVED, and measured: the generator golden-master corpus is 525/525 unchanged — this
+ *   builder is not on the generation path. `corruption.js`, which IS (it feeds
+ *   `corruptionPass`), is deliberately held on a REGISTERED pre-T8 ladder for that reason;
+ *   see `prosperityRank.js`'s own note and ODQ §773.1's one-golden-window law.
+ *
+ *   OBSERVATION FOR THE GOLDEN LANE (T9), recorded not fixed: every fixture row here uses
+ *   `'modest'`, a label `deriveProsperityLabel` NEVER emits. The corpus would be stronger for
+ *   at least one row on an emitted label — a shape the generator never produces looks clean.
  */
 import { readFileSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';

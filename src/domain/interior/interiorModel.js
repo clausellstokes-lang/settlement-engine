@@ -34,6 +34,7 @@
 
 import { createPRNG } from '../../kernel/prng.js';
 import { clamp } from '../../kernel/math.js';
+import { prosperityRank01 } from '../prosperityRank.js';
 import { anchorForInstitution } from '../townMap/anchors.js';
 import {
   interiorKindOf, interiorFunctionOf, resolveRoomSet, tierIndexOf,
@@ -75,15 +76,14 @@ export const PUBLIC_SEED_FORK = '';
  */
 
 /** A settlement's prosperity as 0..1 — the same bounded read as townLayoutV2 (the
- *  prosperous tavern IS bigger). @param {InteriorSettlement} s @returns {number} */
+ *  prosperous tavern IS bigger), and now literally the same one: both call the ONE ladder.
+ *
+ *  ⚠ THE ARM THIS REPLACES COULD NOT SEE HALF ITS OWN VOCABULARY. It matched
+ *  `/comfortable|modest|stable/`, and the generator emits `Moderate` — a word no arm of that
+ *  regex matches — so `Moderate` fell to the default and read IDENTICALLY to `Comfortable`
+ *  (§759.3). @param {InteriorSettlement} s @returns {number} */
 function prosperityScore(s) {
-  const p = s?.economicState?.prosperity;
-  const label = typeof p === 'string' ? p : (p ? (p.label || p.tier) : '');
-  const t = String(label || '').toLowerCase();
-  if (/opulent|wealthy|rich|prosperous/.test(t)) return 0.9;
-  if (/comfortable|modest|stable/.test(t)) return 0.5;
-  if (/poor|destitute|struggling|failing/.test(t)) return 0.2;
-  return 0.5;
+  return prosperityRank01(s?.economicState?.prosperity);
 }
 
 /**

@@ -457,4 +457,17 @@ export const REMOVED_DEAD_FIELDS = Object.freeze([
       + 'producer, admission-schema row or edit path has ever written this key on an '
       + 'institution record, at any commit since genesis, so the arm never selected.',
   },
+  {
+    field: 'magicLevel',
+    file: 'src/generators/neighbourGenerator.js',
+    removed: '§759.3/§763.2 (T7 · UNITS) — a UNIT HOMONYM and a dead write in one. The '
+      + 'neighbour profile emitted `magicLevel: (config.priorityMagic ?? 0) / 100`, a NUMBER '
+      + 'under a name that is canonically a BAND STRING (none|low|medium|high, '
+      + 'magicLedger.js). Zero readers consumed the profile\'s numeric field — measured '
+      + 'across src/ and tests/ — so it was a dead write waiting for a consumer to import '
+      + 'the wrong unit, on a name whose vocabulary had already been bitten once by exactly '
+      + 'that class (capacityModel.js:371, customContent.js:304). If a neighbour magic '
+      + 'signal is ever wanted, it arrives through ENGINE_FIELD_REGISTRY with a real '
+      + 'consumer AND the canonical band vocabulary, never as a bare 0..1 under this name.',
+  },
 ]);

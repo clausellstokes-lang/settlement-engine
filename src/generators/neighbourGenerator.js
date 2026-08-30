@@ -12,6 +12,8 @@
  * - Trade partners are complementary, not competing
  */
 
+import { prosperityLabelOf, prosperityRank01 } from '../domain/prosperityRank.js';
+
 // ── Government antithesis map ─────────────────────────────────────────────────
 // For each government archetype, what is its ideological opposite?
 const GOV_ANTITHESIS = {
@@ -128,19 +130,19 @@ export function extractNeighbourProfile(neighbour, relationshipType = 'neutral')
   // Active supply chain IDs
   const activeChains    = econ.activeChains    || [];
 
-  // Prosperity → economic strength 0–1. The engine emits the prosperity *label*
-  // on econ.prosperity (economicGenerator emits `prosperity`, not `prosperityLevel`);
-  // keep prosperityLevel as a legacy fallback. The canonical band order is
-  // Struggling(lowest)→Poor→Moderate→Comfortable→Prosperous→Wealthy; Subsistence and
-  // the legacy Modest/Affluent/Thriving/Impoverished labels are kept as aliases.
-  const PROSPERITY_RANK = {
-    'Subsistence':0.05,'Impoverished':0.1,'Struggling':0.1,'Poor':0.25,'Modest':0.4,
-    'Moderate':0.5,'Comfortable':0.65,'Prosperous':0.8,'Thriving':0.9,'Wealthy':0.95,'Affluent':1.0,
-  };
-  const prosperityLabel =
-    typeof econ.prosperity === 'string' ? econ.prosperity
-      : econ.prosperity?.level || econ.prosperityLevel;
-  const economicStrength = PROSPERITY_RANK[prosperityLabel] ?? 0.5;
+  // Prosperity → economic strength 0–1, through the ONE ladder (domain/prosperityRank.js).
+  //
+  // ⭐ THIS LADDER IS THE ONE THAT WON. It used to live here as a private `PROSPERITY_RANK`
+  // literal, one of FOUR private re-quantifications of the same categorical on three
+  // different scales (§759.3). The leaf carries these values UNCHANGED — this consumer is
+  // byte-identical across the unification — because it was the only ladder keyed on the exact
+  // vocabulary `deriveProsperityLabel` emits, the only one monotone across all six emitted
+  // labels, and the only one already carrying the legacy aliases (`Modest` reaches readers
+  // through historyGenerator's default). The leaf's header records the argument in full.
+  //
+  // `prosperityLevel` stays as the legacy fallback SHAPE; `prosperityRank01` reads the
+  // string / `{label|tier|level}` object shapes the estate's four readers between them saw.
+  const economicStrength = prosperityRank01(prosperityLabelOf(econ.prosperity) || econ.prosperityLevel);
 
   // Military strength from config priority
   const militaryStrength = ((config.priorityMilitary ?? 50) / 100);
@@ -151,8 +153,13 @@ export function extractNeighbourProfile(neighbour, relationshipType = 'neutral')
   // Dominant faction types (top 2 by influence)
   const dominantFactionTypes = extractDominantFactionTypes(factions);
 
-  // Magic level
-  const magicLevel = (config.priorityMagic ?? 0) / 100;
+  // ⚠ NO `magicLevel` HERE, DELIBERATELY, AND IT IS A TOMBSTONE. This profile used to carry
+  // `magicLevel: (config.priorityMagic ?? 0) / 100` — a NUMBER under a name that is
+  // canonically a BAND STRING ('none'|'low'|'medium'|'high', magicLedger.js). Nothing read
+  // it; it was a dead write waiting for a consumer to import the wrong unit, and the
+  // canonical field's own vocabulary had already been bitten once by exactly that class
+  // (capacityModel.js:371, customContent.js:304). Deleted at §759.3/§763.2; the row lives in
+  // fieldManifest.REMOVED_DEAD_FIELDS, whose walker asserts this file no longer mentions it.
 
   // Trade route connectivity
   const tradeRoute = config.tradeRouteAccess || 'road';
@@ -171,7 +178,6 @@ export function extractNeighbourProfile(neighbour, relationshipType = 'neutral')
     militaryStrength,
     governmentType,
     dominantFactionTypes,
-    magicLevel,
     tradeRoute,
     // Raw dynamics for the relationship type
     dynamics: REL_DYNAMICS[relationshipType] || REL_DYNAMICS.neutral,
