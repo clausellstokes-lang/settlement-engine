@@ -124,6 +124,49 @@ export const OVERLAY_VERSION = 1;
 // under its own version, never a silent drift on an old canon (§V.1 semantics).
 export const BIOME_TEXTURE_VERSION = 1;
 
+// W-CAP CAP-3 CLIMATE TRUTH: the version of the additive climate-band sub-digest
+// (per-settlement `harsh | standard | mild | unknown`, banded from the captured
+// GRID climate at the settlement's own grid cell). Self-describing on the
+// biomeTexture precedent, so a later law change is a discrete re-canonize under its
+// own version and an old canon keeps its own forever (§V.1 semantics).
+export const CLIMATE_BAND_VERSION = 1;
+
+// The closed band vocabulary. `unknown` is the honest fourth state — the capture
+// carried no climate for this settlement's grid cell, so the band is not merely
+// un-computed but un-KNOWABLE from this pack (the `terrainAgreement` tri-state idiom,
+// and the same word A1.2.14 mandates where climate is uncaptured).
+export const CLIMATE_BANDS = Object.freeze(['harsh', 'standard', 'mild', 'unknown']);
+
+// ── THE BAND CUTS, AND WHERE EACH NUMBER COMES FROM ───────────────────────────
+// The band answers "how hard is the food year here", which is the question
+// SEASONS_TUNING's amplitude table has always answered from the settlement's
+// DECLARED terrain word — a proxy for a climate the engine could not read. It can
+// read it now.
+//
+// Every cut below is FMG's own, read out of its `Biomes.getId` in the fork source,
+// so the bands sit on the same lines FMG's own biome matrix turns on:
+//   • `temperature < -5`                       ⇒ Glacier (its habitability table: 0)
+//   • `temperature >= 25 && moisture < 8`      ⇒ Hot desert (habitability 4)
+//   • moisture band 0 is `moisture < 5`        ⇒ the whole DESERT ROW of its matrix
+//     (`const i = Math.min(moisture / 5 | 0, 4)`), habitability 4–10 at every
+//     temperature — which is why low precipitation alone is harsh.
+//   • `MILD_MIN_TEMP_C = 4` is the knee in FMG's OWN WETTEST matrix row: that row
+//     reads biome 8 (temperate rainforest, habitability 90) while its temperature
+//     index `o = min(max(20 - temp, 0), 25)` is 1..16 — i.e. temp 4..19 — and drops
+//     to biome 9 (taiga, habitability 12) at o = 17, i.e. temp 3.
+//   • `MILD_MIN_PREC = 10` is FMG's moisture band 2, the first band whose matrix row
+//     leaves the desert/savanna range entirely.
+// ⚠ ORDER MATTERS AND IS PART OF THE LAW: harsh is decided FIRST, so a hot wet place
+// is mild while a hot DRY place is harsh. A cold-but-wet cell (taiga) lands in
+// `standard` rather than `harsh` — a deliberate, vetoable middle: FMG rates it
+// habitability 12, but a boreal forest still has a growing year, unlike ice.
+export const GLACIAL_TEMP_C = -5;
+export const HOT_DESERT_TEMP_C = 25;
+export const HOT_DESERT_PREC = 8;
+export const ARID_PREC = 5;
+export const MILD_MIN_TEMP_C = 4;
+export const MILD_MIN_PREC = 10;
+
 // W-SEAM: the version of the additive CAPTURE RECEIPT — what the capture noticed
 // about the placements it was handed, as opposed to the geography it derived.
 // Self-describing on the biomeTexture precedent, so a later seam can widen the shape
@@ -370,6 +413,74 @@ function buildBiomeTexture(seeds, idOf, crossings, gateKeys, pack) {
 }
 
 /**
+ * W-CAP CAP-3 — the climate band at ONE pack cell, or `unknown`.
+ *
+ * ⛔ THE `g` BRIDGE IS THE WHOLE FUNCTION. `temp`/`prec` are GRID-indexed and this
+ * cell id is PACK-indexed, so the climate row is reached through `g[packCell]` and
+ * NEVER by indexing the climate arrays with a pack id. FMG's own biome pass does
+ * exactly this (`prec[cells.g[cell]]`), which is the only reason a projection is not
+ * being invented here. A missing `g`, an out-of-range grid id, or a ragged climate
+ * array all answer `unknown` — never a guessed band.
+ *
+ * @param {{ g:number[], temp:number[], prec:number[], gridCellCount:number }} pack a NORMALIZED pack
+ * @param {number} cell a PACK cell id
+ * @returns {string} a CLIMATE_BANDS member
+ */
+export function climateBandOf(pack, cell) {
+  const gridCell = Number((pack.g || [])[cell]);
+  if (!Number.isInteger(gridCell) || gridCell < 0 || gridCell >= pack.gridCellCount) return 'unknown';
+  const temp = Number((pack.temp || [])[gridCell]);
+  const prec = Number((pack.prec || [])[gridCell]);
+  if (!Number.isFinite(temp) || !Number.isFinite(prec)) return 'unknown';
+  // Harsh is decided FIRST — see the ordering note at the constants.
+  if (temp < GLACIAL_TEMP_C) return 'harsh';
+  if (prec < ARID_PREC) return 'harsh';
+  if (temp >= HOT_DESERT_TEMP_C && prec < HOT_DESERT_PREC) return 'harsh';
+  if (temp >= MILD_MIN_TEMP_C && prec >= MILD_MIN_PREC) return 'mild';
+  return 'standard';
+}
+
+/**
+ * W-CAP CAP-3 CLIMATE TRUTH — the additive climate sub-digest: the banded climate at
+ * each settlement's own grid cell, plus the raw readings the band was derived from so
+ * a reader can audit the verdict instead of trusting it.
+ *
+ * A PURE function of the frozen pack + the resolved seeds — deterministic and
+ * byte-stable (sortedObject key order). Built ONLY on the climateTexture opt-in ⇒
+ * omitted when dark ⇒ byte-identical.
+ *
+ * ⚠ CAPTURED INPUTS ONLY (A1.2.14): this reads `pack.g/temp/prec` and NEVER a sibling
+ * sub-digest. `biomes` is not consulted even though it is adjacent and would look
+ * convenient — a sub-digest that reads another sub-digest makes the two impossible to
+ * version independently.
+ * @param {Array<{id:string, cellId:number}>} seeds
+ * @param {string[]} idOf
+ * @param {{ g:number[], temp:number[], prec:number[], gridCellCount:number }} pack
+ * @returns {{ version:number, bySettlement: Record<string,
+ *   {band:string, temp:number|null, prec:number|null}> }}
+ */
+function buildClimateTexture(seeds, idOf, pack) {
+  const readingAt = (/** @type {number} */ cell) => {
+    const gridCell = Number((pack.g || [])[cell]);
+    if (!Number.isInteger(gridCell) || gridCell < 0 || gridCell >= pack.gridCellCount) {
+      return { temp: null, prec: null };
+    }
+    const temp = Number((pack.temp || [])[gridCell]);
+    const prec = Number((pack.prec || [])[gridCell]);
+    return {
+      temp: Number.isFinite(temp) ? temp : null,
+      prec: Number.isFinite(prec) ? prec : null,
+    };
+  };
+  /** @type {Array<[string, {band:string, temp:number|null, prec:number|null}]>} */
+  const entries = seeds.map((s, k) => {
+    const { temp, prec } = readingAt(s.cellId);
+    return [idOf[k], { band: climateBandOf(pack, s.cellId), temp, prec }];
+  });
+  return { version: CLIMATE_BAND_VERSION, bySettlement: sortedObject(entries) };
+}
+
+/**
  * W-SEAM SEAM-1 (S3): the CAPTURE RECEIPT — what the capture noticed about the rows
  * it was handed, as opposed to the geography it derived from them.
  *
@@ -446,10 +557,15 @@ function buildTerrainDisagreements(seeds, idOf, placements, pack) {
  * per-cell biome array. DARK by default: OMITTED (the default, and every existing golden/
  * canon) ⇒ NO biomes key ⇒ BYTE-IDENTICAL. The road scene + travel news read it for
  * biome/season texture. A pure function of the frozen pack ⇒ deterministic extraction.
+ * CLIMATE TRUTH (W-CAP CAP-3): `climateTexture:true` appends the additive `climate` key —
+ * the banded climate (`harsh|standard|mild|unknown`) at each settlement's own GRID cell,
+ * reached through `cells.g`, plus the raw temp/prec the band came from. DARK by default:
+ * OMITTED (the default, and every existing golden/canon) ⇒ NO climate key ⇒ BYTE-IDENTICAL.
+ * The seasons food year reads it in place of its terrain-word proxy when it is present.
  * @param {{ pack: CapturedSpatialPack, placements?: SpatialPlacementRow[] | null,
  *           spatialGeometryVersion?:number, costLawVersion?:number,
  *           overlayVersion?:number, seasonalRoads?:boolean, seaLanes?:boolean, teleport?:boolean,
- *           biomeTexture?:boolean,
+ *           biomeTexture?:boolean, climateTexture?:boolean,
  *           cellResolution?:Array<{id:string, from:number|null, to:number|null, reason:string}>|null }} input
  */
 export function buildSpatialDigest(input) {
@@ -716,6 +832,16 @@ export function buildSpatialDigest(input) {
     ? buildBiomeTexture(seeds, idOf, crossings, gateKeys, pack)
     : null;
 
+  // W-CAP CAP-3 CLIMATE TRUTH: the additive climate sub-digest, appended after `biomes`
+  // and ONLY when opted in. Omitted (the default, every existing golden/canon, and every
+  // capture that carried no grid climate) ⇒ NO climate key ⇒ the returned shape is
+  // byte-identical to the pre-CAP-3 digest. The KEY ORDER is fixed here once —
+  // reserved, biomes, climate, captureReceipt — so a later wave lighting a slot changes
+  // a VALUE and never the serialized shape.
+  const climate = input?.climateTexture === true
+    ? buildClimateTexture(seeds, idOf, pack)
+    : null;
+
   // W-SEAM: the additive CAPTURE RECEIPT, appended LAST and ONLY when the capture had
   // something to report. Nothing to report (every existing golden/canon/fixture, and
   // any realm whose declared terrains match the ground) ⇒ NO key ⇒ the returned shape
@@ -753,6 +879,7 @@ export function buildSpatialDigest(input) {
     routeReceipts: sortedObject(receiptEntries),
     reserved: reservedSlots(seasonalOverlay, seaLanes, teleportEdges),
     ...(biomes ? { biomes } : {}),
+    ...(climate ? { climate } : {}),
     ...(captureReceipt ? { captureReceipt } : {}),
   };
 }

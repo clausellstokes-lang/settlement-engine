@@ -79,15 +79,24 @@ export async function runSpatialCanonize({
   // biomeTruthEnabled flag (ABSENT from DEFAULT_SIMULATION_RULES — the npcLadder/heirs idiom).
   // Absent ⇒ biomeTexture false ⇒ NO biomes key ⇒ byte-identical (every existing canon/golden).
   // Lit ⇒ a §V.1 receipted re-canonize freezes the per-settlement/per-leg biome into the canon.
-  const priorRules = /** @type {{ biomeTruthEnabled?: unknown }} */ (
+  const priorRules = /** @type {{ biomeTruthEnabled?: unknown, climateTruthEnabled?: unknown }} */ (
     (findActiveCampaign(get().campaigns, campaignId)?.worldState || {}).simulationRules || {});
   const biomeTexture = priorRules.biomeTruthEnabled === true;
+  // W-CAP CAP-3 CLIMATE TRUTH (DARK): the additive climate sub-digest lights ONLY under the
+  // VIRTUAL climateTruthEnabled flag, on the biomeTruthEnabled idiom above — ABSENT from
+  // DEFAULT_SIMULATION_RULES, so it costs zero first-paint bytes and off-by-absence IS the
+  // dormancy law. Absent ⇒ climateTexture false ⇒ NO climate key ⇒ byte-identical (every
+  // existing canon/golden). Lit ⇒ a §V.1 receipted re-canonize freezes the per-settlement
+  // climate band into the canon, and the seasons food year reads it in place of its
+  // terrain-word proxy.
+  const climateTexture = priorRules.climateTruthEnabled === true;
   const digest = buildSpatialDigest({
     pack: captured.pack,
     placements: captured.placements,
     spatialGeometryVersion: SPATIAL_GEOMETRY_VERSION,
     costLawVersion: COST_LAW_VERSION,
     biomeTexture,
+    climateTexture,
     // SEASONS-B (M3): a NEW canon lights the seasonal-road overlay (per-season ×
     // per-terrain cost law) under overlayVersion SEASONAL_OVERLAY_VERSION — the
     // §V.1 receipted re-canonize. Existing saved canons keep their frozen v1 (no

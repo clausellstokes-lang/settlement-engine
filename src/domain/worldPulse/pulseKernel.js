@@ -481,7 +481,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // advance is entering, and a re-aim at it fails SILENTLY — the accessor returns the bare
   // root and every "the composition still works" test stays green. `base` is RS-2's OWN
   // expression, uncoerced, so an absent seed still interpolates the literal "undefined".
-  const seasonClock = seasonsOn ? seasonForTick(worldState.calendar.elapsedWeeks) : null; const seasonSeed = seasonClock ? yearStreamSeedOf(worldState, seasonClock.year, { base: startingWorldState.rngSeed, yearBase: 1 }) : undefined;
+  // ⭐ W-CAP CAP-3 — the frozen canon's climate, `;`-joined at +0 LINES on SEAM EDIT 7's own
+  // precedent one line above, and for the same reason: this file sits at EXACTLY its frozen
+  // max-lines ceiling (scripts/.size-baseline.json), which is shrink-only and never raised,
+  // so a car that owes one hoisted read joins it rather than spending a ceiling nobody
+  // budgeted. Guarded by `activeSpatialDigest` (integer canon version > 0 + a real matrix),
+  // so a campaign with no spatial canon passes null and the food year reads exactly as it
+  // did. Hoisted OUT of the settlement loop: one guard per tick, not one per settlement.
+  const seasonClock = seasonsOn ? seasonForTick(worldState.calendar.elapsedWeeks) : null; const seasonSeed = seasonClock ? yearStreamSeedOf(worldState, seasonClock.year, { base: startingWorldState.rngSeed, yearBase: 1 }) : undefined; const seasonDigest = seasonClock ? activeSpatialDigest(worldState) : null;
   // ── SEASONS-B (M3): WINTER ROADS. The road season is derived FREE from the
   // ADVANCED calendar (seasonForTick), INDEPENDENT of the food-year flag: seasonal
   // roads gate on the digest's seasonalOverlay, not seasonsEnabled. Threaded into
@@ -515,7 +522,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
           rngSeed: seasonSeed, // SEAM EDIT 8 (EP-3 slice B) — row 1's in-pulse consumer
           clock: seasonClock,
           settlement: result.newSettlement,
-          settlementId: item.id,
+          settlementId: item.id, digest: seasonDigest, // CAP-3, `,`-joined at +0 lines (see the ceiling note above)
         })
       : null;
     const stocked = advanceFoodStockpile(result.newSettlement, {

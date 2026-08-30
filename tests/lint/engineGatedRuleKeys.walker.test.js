@@ -154,6 +154,23 @@ const EXEMPT_RULE_KEYS = Object.freeze({
     + ' lit, which is why the chair gated this exemption rather than the lane taking it;'
     + ' OWNER_DECISION_QUEUE §32 ruling 5 accepts it on that record. Exempt BY RECORDED'
     + ' RATIONALE, never by silence.',
+  // ── Joined 2026-08-29 by W-CAP CAP-3 (lane TE-CAP), on biomeTruthEnabled's structure. ──
+  climateTruthEnabled: 'NOT A SUBSYSTEM — the SECOND CANON-FREEZE OPTION on the store'
+    + ' canonize path, minted on biomeTruthEnabled\'s idiom by the design volume\'s own'
+    + ' instruction ("`climateTruthEnabled` on the `biomeTruthEnabled` idiom").'
+    + ' src/store/campaignSpatialCanonize.js reads it once, to set `climateTexture` into'
+    + ' buildSpatialDigest, and the gate states its dormancy verbatim: "Absent ⇒'
+    + ' climateTexture false ⇒ NO climate key ⇒ byte-identical (every existing'
+    + ' canon/golden)." Like its sibling it adds one additive sub-digest to a canon'
+    + ' authored ONCE and never recomputed, so it has no per-tick aliveness to certify and'
+    + ' no receipt channel can grade it — the whole-world soak never calls'
+    + ' runSpatialCanonize at all. ⚠ THE SAME RECORDED COUNTER-ARGUMENT APPLIES AND IS NOT'
+    + ' SUPPRESSED: it DOES change persisted bytes when lit, and it additionally changes'
+    + ' the food-year amplitude a lit canon derives — which is why biomeTruthEnabled\'s'
+    + ' exemption was CHAIR-gated rather than lane-taken. This row is therefore written as'
+    + ' a PROPOSAL leaning on OWNER_DECISION_QUEUE §32 ruling 5, and the lane\'s report'
+    + ' carries it to the chair as an open row rather than treating the precedent as'
+    + ' self-executing. Exempt BY RECORDED RATIONALE, never by silence.',
 });
 
 /**

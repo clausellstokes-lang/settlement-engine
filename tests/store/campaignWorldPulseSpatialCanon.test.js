@@ -102,6 +102,14 @@ function fixtureCapture(count = 6) {
   return async () => ({ pack, placements });
 }
 
+// W-CAP CAP-1/CAP-3: a capture carrying the WIDENED surface (flux + the pack→grid index
+// + the GRID-indexed climate), which is what a real live capture hands over since CAP-1.
+function climateCapture(count = 6) {
+  const pack = makeGridPack({ cols: 18, rows: 14, capture: true });
+  const placements = placeSettlements(pack, count);
+  return async () => ({ pack, placements });
+}
+
 // A capture whose placements carry water-access institutions on coastal/river cells
 // (the M8 port-eligibility CAPABILITY read) ⇒ the live canonize LIGHTS the sea lanes.
 function portCapture() {
@@ -238,6 +246,44 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     expect(ws.spatialDigest.biomes, 'the biome sub-digest materializes when the flag is lit').toBeTruthy();
     expect(ws.spatialDigest.biomes.version).toBe(1);
     expect(Object.keys(ws.spatialDigest.biomes.bySettlement).length).toBe(6);
+  });
+
+  test('CLIMATE TRUTH (CAP-3): the virtual climateTruthEnabled flag LIGHTS the climate sub-digest; absent ⇒ no key', async () => {
+    const store = makeStore();
+    seedStore(store);
+    // DARK (flag absent from simulationRules): even a capture that CARRIES the grid climate
+    // freezes NO climate key. The capture surface being wider is not the gate; the flag is.
+    await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: climateCapture(6) });
+    expect('climate' in store.getState().campaigns[0].worldState.spatialDigest).toBe(false);
+    // LIGHT it ⇒ a re-canonize freezes the per-settlement band + the readings behind it.
+    store.setState(state => { state.campaigns[0].worldState.simulationRules = { climateTruthEnabled: true }; });
+    const lit = await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: climateCapture(6) });
+    expect(lit.ok).toBe(true);
+    const ws = store.getState().campaigns[0].worldState;
+    expect(ws.spatialDigest.climate, 'the climate sub-digest materializes when the flag is lit').toBeTruthy();
+    expect(ws.spatialDigest.climate.version).toBe(1);
+    expect(Object.keys(ws.spatialDigest.climate.bySettlement).length).toBe(6);
+    for (const row of Object.values(ws.spatialDigest.climate.bySettlement)) {
+      expect(['harsh', 'standard', 'mild', 'unknown']).toContain(row.band);
+    }
+    // The two canon-freeze options are INDEPENDENT: lighting climate does not light biomes.
+    expect('biomes' in ws.spatialDigest).toBe(false);
+  });
+
+  test('CLIMATE TRUTH (CAP-3): a lit flag over a capture with NO grid climate freezes `unknown`, not a guess', async () => {
+    // The honest-absence arm. An older map (or a capture predating CAP-1's widening) has no
+    // grid climate at all; the canon must record that it does not know, and must still
+    // record it under its own version so a later re-canonize can tell the two apart.
+    const store = makeStore();
+    seedStore(store);
+    store.setState(state => { state.campaigns[0].worldState.simulationRules = { climateTruthEnabled: true }; });
+    const lit = await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: fixtureCapture(6) });
+    expect(lit.ok).toBe(true);
+    const climate = store.getState().campaigns[0].worldState.spatialDigest.climate;
+    expect(climate.version).toBe(1);
+    for (const row of Object.values(climate.bySettlement)) {
+      expect(row).toEqual({ band: 'unknown', temp: null, prec: null });
+    }
   });
 
   test('SEA LANES (M8): a port-carrying capture LIGHTS the seaLanes slot (the opt-in)', async () => {

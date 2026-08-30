@@ -95,6 +95,19 @@ export const SEASONS_TUNING = Object.freeze({
   leanWinterCrimePressure: 0.06,   // added to crime pressure in winter (0..1 scale)
   // W-C3 founding lane: a multiplier on the emission probability, never a gate.
   foundingSeasonWeight: Object.freeze({ spring: 1.25, summer: 1.15, autumn: 0.85, winter: 0.6 }),
+  // ── W-CAP CAP-3 CLIMATE TRUTH: amplitude by MEASURED climate, not by terrain word ──
+  // `amplitudeByTerrain` above has always been a PROXY. The header's own sentence —
+  // "mountain/desert harsh, temperate standard, coastal/riverside milder" — is a climate
+  // claim made from the only evidence the engine had, a genesis terrain word. The frozen
+  // canon can now carry the real thing: a band derived from the captured temperature and
+  // precipitation at the settlement's own map cell.
+  // These three numbers are DERIVED FROM THE TABLE ABOVE rather than invented, so the two
+  // paths agree by construction: harsh = the mean of its harsh pair (mountain 40, desert
+  // 36); standard = defaultAmplitude; mild = the mean of its mild pair (coastal 20,
+  // riverside 24). An `unknown` band takes NO opinion and falls through to the terrain
+  // proxy, which is what makes an uncaptured climate byte-identical rather than merely
+  // close.
+  amplitudeByClimate: Object.freeze({ harsh: 38, standard: 30, mild: 22 }),
   // The hungry-gap boundary: month 12 of the 4-4-5 grid (winter weeks 9-13).
   lateWinterWeekOfSeason: 9,
   // "Dire" for the hungry-gap marker's major escalation: stores below half a
@@ -142,10 +155,18 @@ export function seasonalSeverityFor(rngSeed, year, settlementId) {
  * @param {{season: string, weekOfSeason: number}} clock
  * @param {string|null} terrain  resolveTerrain vocabulary (null ⇒ temperate)
  * @param {'drought'|'hard_winter'|'bountiful'|null} variance
+ * @param {string|null} [climateBand] W-CAP CAP-3: the frozen canon's measured band
+ *   (`harsh|standard|mild`); absent / `unknown` ⇒ the terrain proxy, byte-identically
  */
-export function seasonalSwingPts(clock, terrain, variance) {
+export function seasonalSwingPts(clock, terrain, variance, climateBand) {
   const T = SEASONS_TUNING;
-  const amplitude = /** @type {Record<string, number>} */ (T.amplitudeByTerrain)[String(terrain || '')]
+  // W-CAP CAP-3: MEASURED climate outranks the terrain-word proxy, and only when it
+  // actually says something. An absent band, an `unknown` band, or a band outside the
+  // closed table all fall through to the exact pre-CAP lookup — which is what makes an
+  // un-lit canon byte-identical rather than merely similar.
+  const measured = /** @type {Record<string, number>} */ (T.amplitudeByClimate)[String(climateBand || '')];
+  const amplitude = measured
+    ?? /** @type {Record<string, number>} */ (T.amplitudeByTerrain)[String(terrain || '')]
     ?? T.defaultAmplitude;
   let swing = seasonalUnitSwing(clock.season, clock.weekOfSeason);
   if (variance === 'drought' && swing > 0 && (clock.season === 'summer' || clock.season === 'autumn')) {
@@ -159,21 +180,61 @@ export function seasonalSwingPts(clock, terrain, variance) {
 }
 
 /**
+ * The ONLY shape this module asks a frozen spatial digest for. Written structurally
+ * rather than as an `any` — the digest is a large frozen object owned elsewhere, and a
+ * hole here would type-erase every read below (and pay the domain any-cast ratchet for
+ * the privilege). Everything is optional: a pre-CAP-3 canon carries none of it.
+ * @typedef {{ band?: unknown }} ClimateRow
+ * @typedef {{ climate?: { bySettlement?: Record<string, ClimateRow|undefined> }|null }
+ *   |null|undefined} ClimateBearingDigest
+ */
+
+/**
+ * W-CAP CAP-3 — this settlement's frozen climate band, or null.
+ *
+ * A DEFENSIVE PRESENCE READ, and presence is the whole gate: the `climate` sub-digest
+ * exists only on a canon frozen under the `climateTruthEnabled` opt-in, so an absent key
+ * needs no flag read here at all (the V-6 `digest.biomes` reader precedent, roadScene.js).
+ * That matters twice over — it keeps the food year's dormancy a property of the DATA
+ * rather than of a second gate that could drift out of step with the first, and it keeps
+ * this module free of any import from the frozen-digest reader (importing one symbol from
+ * distanceRead.js drags its whole ~53 kB into this chunk).
+ * @param {ClimateBearingDigest} digest a frozen spatial digest, or nullish
+ * @param {string|number} settlementId
+ * @returns {string|null}
+ */
+export function climateBandFor(digest, settlementId) {
+  const climate = digest && typeof digest === 'object' ? digest.climate : null;
+  const bySettlement = climate && typeof climate === 'object' ? climate.bySettlement : null;
+  if (!bySettlement || typeof bySettlement !== 'object') return null;
+  const row = bySettlement[String(settlementId)];
+  const band = row && typeof row === 'object' ? row.band : null;
+  return typeof band === 'string' && band !== '' ? band : null;
+}
+
+/**
  * The per-settlement seasonal context the kernel threads into
  * advanceFoodStockpile — clock + variance + swing, resolved once per
  * settlement-tick. Null-safe on terrain (unknown ⇒ temperate amplitude).
- * @param {{ rngSeed: string, clock: ReturnType<typeof seasonForTick>, settlement: object|null, settlementId: string|number }} args
+ *
+ * W-CAP CAP-3 widened it with the optional frozen `digest`: when the canon carries a
+ * climate sub-digest, the food year's amplitude comes from the MEASURED band instead of
+ * the terrain-word proxy. Omit it, or pass a canon without the key, and every byte of the
+ * result is what it was before.
+ * @param {{ rngSeed: string, clock: ReturnType<typeof seasonForTick>, settlement: object|null,
+ *   settlementId: string|number, digest?: ClimateBearingDigest }} args
  */
-export function seasonalContextFor({ rngSeed, clock, settlement, settlementId }) {
+export function seasonalContextFor({ rngSeed, clock, settlement, settlementId, digest = null }) {
   const variance = seasonalSeverityFor(rngSeed, clock.year, settlementId);
   const terrain = resolveSettlementTerrain(settlement);
+  const climateBand = climateBandFor(digest, settlementId);
   return {
     season: clock.season,
     weekOfYear: clock.weekOfYear,
     weekOfSeason: clock.weekOfSeason,
     year: clock.year,
     variance,
-    swingPts: seasonalSwingPts(clock, terrain, variance),
+    swingPts: seasonalSwingPts(clock, terrain, variance, climateBand),
   };
 }
 

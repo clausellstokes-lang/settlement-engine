@@ -19,6 +19,9 @@ import {
   CONFIG_TERRAIN_CLASSES,
   nearestCellTo,
   normalizeSpatialPack,
+  CLIMATE_BAND_VERSION,
+  CLIMATE_BANDS,
+  climateBandOf,
   TERRAIN_AGREEMENT_VERDICTS,
   terrainAgreement,
   terrainClassOf,
@@ -37,6 +40,8 @@ import {
 } from '../fixtures/spatialPackFixtures.js';
 
 const RESERVED = { airField: null, seaLanes: null, seasonalOverlay: null, teleportEdges: null };
+/** The cell a fixture placement sits on, by settlement id (CAP-3 audits the band per seed). */
+const placementCellOf = (placements, id) => Number(placements.find((p) => String(p.id) === String(id)).cellId);
 const ownerId = (d, cell) => (d.territory[cell] >= 0 ? d.settlementIds[d.territory[cell]] : null);
 
 describe('KEYSTONE invariants — determinism', () => {
@@ -478,6 +483,120 @@ describe('W-CAP CAP-1 — the widened capture surface SURVIVES NORMALIZE', () =>
     const widened = makeGridPack({ cols: 8, rows: 6, capture: true });
     expect(JSON.stringify(buildSpatialDigest({ pack: widened, placements })))
       .toBe(JSON.stringify(buildSpatialDigest({ pack: plain, placements })));
+  });
+});
+
+describe('W-CAP CAP-3 — the CLIMATE BAND sub-digest (opt-in; dark ⇒ byte-identical)', () => {
+  const captured = () => makeGridPack({ cols: 24, rows: 18, capture: true });
+
+  it('OMITTED (default) ⇒ NO climate key ⇒ byte-identical to climateTexture:false', () => {
+    const pack = captured();
+    const placements = placeSettlements(pack, 8);
+    const d = buildSpatialDigest({ pack, placements });
+    expect('climate' in d).toBe(false);
+    expect(JSON.stringify(d))
+      .toBe(JSON.stringify(buildSpatialDigest({ pack, placements, climateTexture: false })));
+  });
+
+  it('lit ⇒ every seeded settlement carries a band from the CLOSED vocabulary + its readings', () => {
+    const pack = captured();
+    const placements = placeSettlements(pack, 8);
+    const d = buildSpatialDigest({ pack, placements, climateTexture: true });
+    expect(d.climate.version).toBe(CLIMATE_BAND_VERSION);
+    for (const id of d.settlementIds) {
+      const row = d.climate.bySettlement[id];
+      expect(row, `settlement ${id} carries a climate row`).toBeTruthy();
+      expect(CLIMATE_BANDS).toContain(row.band);
+      // The raw readings ride along so a reader can AUDIT the verdict rather than trust it.
+      expect(typeof row.temp).toBe('number');
+      expect(typeof row.prec).toBe('number');
+      expect(row.band).toBe(climateBandOf(normalizeSpatialPack(pack), placementCellOf(placements, id)));
+    }
+    // Deterministic extraction: a second build is byte-identical.
+    expect(JSON.stringify(d.climate))
+      .toBe(JSON.stringify(buildSpatialDigest({ pack, placements, climateTexture: true }).climate));
+  });
+
+  it('the band reads the GRID cell through `g`, never the pack cell directly', () => {
+    // §711.6, the bug this whole capture shape exists to forbid. The fixture's grid space
+    // is deliberately COARSER than its pack space (a 2:1 downsample), so indexing temp/prec
+    // with a PACK id reads a DIFFERENT cell — and under an identity mapping that mistake
+    // would be invisible. Here it is observable: the band must equal what the settlement's
+    // own GRID row says, and the two disagree for most cells.
+    const pack = captured();
+    const n = normalizeSpatialPack(pack);
+    let disagreements = 0;
+    for (let cell = 0; cell < n.cellCount; cell++) {
+      const viaG = n.temp[n.g[cell]];
+      const viaPackId = n.temp[cell];
+      if (viaG !== viaPackId) disagreements++;
+    }
+    expect(disagreements, 'the fixture must be able to catch a denominator confusion')
+      .toBeGreaterThan(0);
+    // …and the reading recorded for a settlement is the one via `g`.
+    const placements = placeSettlements(pack, 4);
+    const d = buildSpatialDigest({ pack, placements, climateTexture: true });
+    for (const pl of placements) {
+      const row = d.climate.bySettlement[String(pl.id)];
+      if (!row) continue; // resolveSeeds legitimately dropped it
+      expect(row.temp).toBe(n.temp[n.g[pl.cellId]]);
+      expect(row.prec).toBe(n.prec[n.g[pl.cellId]]);
+    }
+  });
+
+  it('an UNCAPTURED climate is typed `unknown`, never guessed', () => {
+    // A1.2.14 mandates the word, and the point is that it is a verdict rather than a hole:
+    // the pack simply carries no grid climate, and saying `standard` would be a fabrication.
+    const plain = makeGridPack({ cols: 12, rows: 9 });          // no capture surface at all
+    const placements = placeSettlements(plain, 4);
+    const d = buildSpatialDigest({ pack: plain, placements, climateTexture: true });
+    expect(d.climate.version).toBe(CLIMATE_BAND_VERSION);
+    for (const id of d.settlementIds) {
+      expect(d.climate.bySettlement[id]).toEqual({ band: 'unknown', temp: null, prec: null });
+    }
+    // A ragged grid array reaches the same honest answer rather than throwing.
+    const ragged = { cells: { ...captured().cells }, grid: { temp: [1], prec: [] } };
+    const r = buildSpatialDigest({ pack: ragged, placements: placeSettlements(captured(), 3), climateTexture: true });
+    for (const id of r.settlementIds) expect(r.climate.bySettlement[id].band).toBe('unknown');
+  });
+
+  it('the cuts are FMG\'s own lines, and every band is reachable', () => {
+    // Each constant is read out of FMG's `Biomes.getId`; the test states which line each
+    // one is, so a later reader can check the claim rather than take it.
+    const at = (temp, prec) => climateBandOf(
+      { g: [0], temp: [temp], prec: [prec], gridCellCount: 1 }, 0,
+    );
+    expect(at(-6, 200)).toBe('harsh');   // FMG: temperature < -5 ⇒ Glacier
+    expect(at(15, 4)).toBe('harsh');     // FMG: moisture band 0 (< 5) ⇒ the desert ROW
+    expect(at(26, 7)).toBe('harsh');     // FMG: temp >= 25 && moisture < 8 ⇒ Hot desert
+    expect(at(12, 40)).toBe('mild');     // temperate + wet: FMG's habitability-90 corner
+    expect(at(30, 60)).toBe('mild');     // hot but WET is a rainforest, not a desert
+    expect(at(10, 6)).toBe('standard');  // watered enough to live, not enough to be mild
+    expect(at(0, 50)).toBe('standard');  // cold + wet (taiga): a growing year, unlike ice
+    // The ordering is part of the law: harsh is decided first, so hot+dry beats temperate.
+    expect(at(25, 7)).toBe('harsh');
+    // ⚠ AND THE TWO MOISTURE CUTS ARE NOT THE SAME NUMBER — this arm exists because the
+    // first draft of this test assumed they were. FMG's hot-desert predicate stops at
+    // moisture 8; its "wet enough to leave the desert/savanna rows" band starts at 10. The
+    // gap 8..9 is neither desert nor mild, and `standard` is the honest answer there.
+    expect(at(25, 8)).toBe('standard');
+    expect(at(25, 9)).toBe('standard');
+    expect(at(25, 10)).toBe('mild');
+    // An absent grid row is a verdict, not a throw.
+    expect(climateBandOf({ g: [], temp: [], prec: [], gridCellCount: 0 }, 0)).toBe('unknown');
+    expect(climateBandOf({ g: [99], temp: [1], prec: [1], gridCellCount: 1 }, 0)).toBe('unknown');
+  });
+
+  it('the climate key sits between `biomes` and `captureReceipt` — a FIXED shape', () => {
+    const pack = captured();
+    const placements = placeSettlements(pack, 6);
+    const keys = Object.keys(buildSpatialDigest({
+      pack, placements, biomeTexture: true, climateTexture: true,
+    }));
+    expect(keys.slice(-3)).toEqual(['reserved', 'biomes', 'climate']);
+    // …and with biomes dark, climate still follows `reserved` directly.
+    const lean = Object.keys(buildSpatialDigest({ pack, placements, climateTexture: true }));
+    expect(lean.slice(-2)).toEqual(['reserved', 'climate']);
   });
 });
 
