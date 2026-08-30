@@ -289,6 +289,12 @@ describe('road names — the first named-road surface', () => {
     expect(named.map((r) => r.name).join(' | ')).toContain('Kelby');
     expect(named.map((r) => r.name).join(' | ')).toContain('Thanebridge');
     expect(chartedRouteNames({ settlement: { id: 'kelby' }, nameFor })).toEqual([]);
-    expect(chartedRouteNames({ settlement: { settlement: { id: 'kelby', config: {} } }, nameFor })).toEqual([]);
+    expect(chartedRouteNames({ settlement: { id: 'kelby', config: {} }, nameFor })).toEqual([]);
+    expect(chartedRouteNames({ settlement: null, nameFor })).toEqual([]);
+    // The ledger is read off the `_config` twin too — the shape mutateUserRoute mirrors into.
+    expect(chartedRouteNames({
+      settlement: { id: 'ashford', _config: { _userRoutes: [{ routeId: 'route.ashford.kelby.land', a: 'ashford', b: 'kelby', mode: 'land' }] } },
+      nameFor,
+    }).map((r) => r.routeId)).toEqual(['route.ashford.kelby.land']);
   });
 });

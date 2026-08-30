@@ -292,9 +292,18 @@ function apportion(weights, total) {
  * being optional. The RETURN shape the charter fixes — `{ type: count }` — is
  * unchanged.
  *
+ * ⛔ A SETTLEMENT, NOT A SNAPSHOT ITEM. `deriveMagicProfile` reads `config.magicLevel`
+ * and the institution roster off the settlement itself; a worldPulse `{ settlement }`
+ * item carries neither, so it would silently band every realm's magic 'absent' and
+ * field a mage-less army with no error. This clerk therefore takes the settlement and
+ * the unwrap belongs at the call site (`item.settlement`). An earlier draft accepted
+ * both and the reader-with-no-writer ratchet was right to red it: a `.settlement` read
+ * on a settlement is a dead arm on every generated world, and the test that was
+ * supposed to cover it passed for the wrong reason.
+ *
  * @param {Object} args
- * @param {unknown} [args.settlement]  the settlement (or worldPulse item) fielding the army;
- *   omitted ⇒ no magic gate can be read ⇒ no mage contingent, never a guessed one.
+ * @param {unknown} [args.settlement]  the SETTLEMENT fielding the army; omitted ⇒ no
+ *   magic gate can be read ⇒ no mage contingent, never a guessed one.
  * @param {unknown} [args.record]  `worldState.deployments[homeId]`, the stateful record.
  * @returns {Record<string, number> | null}  contingents by unit type; keys ⊆ UNIT_TYPES.
  */
@@ -305,9 +314,7 @@ export function deriveForceComposition({ settlement, record } = {}) {
   if (rec.targetId == null) return null;
   const strength = Number(rec.currentEffectiveStrength);
   if (!Number.isFinite(strength)) return null;
-  const item = /** @type {{ settlement?: unknown }} */ (settlement || {});
-  const magicBand = magicMilitaryBandOf(item.settlement || settlement || null);
-  return apportion(shareWeights(rec, magicBand), contingentTotal(strength));
+  return apportion(shareWeights(rec, magicMilitaryBandOf(settlement || null)), contingentTotal(strength));
 }
 
 // ── THE PROSE HALF ───────────────────────────────────────────────────────────

@@ -484,15 +484,19 @@ export function deriveRouteName({ row, fromId, nameFor = (id) => String(id) }) {
  * Codepoint-sorted by routeId. Rows the vocabulary refuses are DROPPED, so an
  * unnameable leg is absent rather than misnamed.
  *
+ * ⛔ A SETTLEMENT, NOT A SNAPSHOT ITEM. An earlier draft also unwrapped a worldPulse
+ * `{ settlement }` item, and the reader-with-no-writer ratchet was right to red it: a
+ * `.settlement` read on a settlement is a dead arm on every generated world. A caller
+ * holding an item passes `item.settlement`.
+ *
  * @param {Object} args
- * @param {unknown} args.settlement  a settlement (or worldPulse item wrapping one).
+ * @param {unknown} args.settlement  the SETTLEMENT carrying the provenance ledger.
  * @param {unknown} [args.fromId]  the standpoint; defaults to the settlement's own id.
  * @param {(id: unknown) => string} [args.nameFor]
  * @returns {Array<{ routeId: string, mode: string, name: string, line: string, aName: string, bName: string }>}
  */
 export function chartedRouteNames({ settlement, fromId, nameFor = (id) => String(id) }) {
-  const item = /** @type {{ settlement?: unknown }} */ (settlement || {});
-  const s = /** @type {{ id?: unknown, config?: unknown, _config?: unknown }} */ (item.settlement || settlement || {});
+  const s = /** @type {{ id?: unknown, config?: unknown, _config?: unknown }} */ (settlement || {});
   const config = /** @type {{ _userRoutes?: unknown }} */ (s.config || s._config || {});
   const rows = Array.isArray(config._userRoutes) ? config._userRoutes : [];
   const standpoint = fromId != null ? fromId : s.id;

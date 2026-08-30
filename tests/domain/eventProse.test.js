@@ -13,6 +13,10 @@ import {
   WAR_RECEIPTS, PEACE_RECEIPTS,
   EVENT_PROSE_REGISTRY, FORBIDDEN_CALAMITY_KINDS,
 } from '../../src/domain/worldPulse/eventProse.js';
+import {
+  fnv1a32 as leafFnv1a32,
+  pickLine as leafPickLine,
+} from '../../src/domain/worldPulse/proseSelection.js';
 import { stampTitle } from '../../src/domain/spatial/calamity.js';
 
 // A superset interpolation object: every semantic token any variant fn reads. Unused keys
@@ -197,5 +201,46 @@ describe('eventProse — selection determinism', () => {
       if (gi !== ri) differ += 1;
     }
     expect(differ, 'the two reasons diverge on most pairs').toBeGreaterThan(0);
+  });
+});
+
+describe('the selection kernel is a RE-HOME, not a copy (WEAVE NAME-1)', () => {
+  // `fnv1a32` and `pickLine` were lifted out of eventProse.js into the zero-import leaf
+  // `worldPulse/proseSelection.js` so a RENDER-time namer could select without dragging
+  // ~2,400 lines of frozen pool closure and its module-scope flatten. The pools here are
+  // GOLDEN-BOUND — their picked string persists into save data — so the claim that has to
+  // hold is not "the leaf works" but "the leaf IS what eventProse exports". Identity is
+  // the only assertion that proves that; an equal-behaviour check would pass just as
+  // happily against a seventh transcription of FNV-1a, which is the drift this estate
+  // already carries six copies of.
+  it('eventProse re-exports the LEAF\'s own functions, not a second transcription', () => {
+    expect(pickLine).toBe(leafPickLine);
+    expect(fnv1a32).toBe(leafFnv1a32);
+  });
+
+  it('the leaf holds the two laws the pools are frozen against', () => {
+    const pool = ['canonical', 'second', 'third'];
+    // CANONICAL-AT-ZERO: a falsy seed selects index 0, so every seedless caller is
+    // byte-identical to the pre-extraction world.
+    expect(leafPickLine(pool, '')).toBe('canonical');
+    expect(leafPickLine(pool, null)).toBe('canonical');
+    expect(leafPickLine(pool, undefined)).toBe('canonical');
+    // PURE SELECTION: the same seed always lands on the same member, and the index is
+    // exactly the hash modulo the pool length — no rng, no clock, zero draws.
+    expect(leafPickLine(pool, 'seed')).toBe(pool[leafFnv1a32('seed') % pool.length]);
+    expect(leafPickLine(pool, 'seed')).toBe(leafPickLine(pool, 'seed'));
+    // An empty or absent pool is a silence, never a throw.
+    expect(leafPickLine([], 'seed')).toBe('');
+    expect(leafPickLine(/** @type {never} */ (null), 'seed')).toBe('');
+    // A function entry is resolved with the interpolation object.
+    expect(leafPickLine([(x) => `a ${x.noun}`], '', { noun: 'hall' })).toBe('a hall');
+  });
+
+  it('the hash is the shipped FNV-1a-32, pinned by value so a re-implementation cannot drift', () => {
+    // Offset basis alone, and two fixed points. If someone re-derives this function the
+    // constants are what betray them — every persisted pick in every save rides them.
+    expect(leafFnv1a32('')).toBe(0x811c9dc5);
+    expect(leafFnv1a32('a')).toBe(0xe40c292c);
+    expect(leafFnv1a32('foobar')).toBe(0xbf9cf968);
   });
 });

@@ -6825,6 +6825,16 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   car 1 (NAME-1, tests/domain/display/warAndRoadNames.test.js): +1/+0/+1/+23/+4.
     //   car 2 (NAME-4, tests/domain/display/forceComposition.test.js): +1/+0/+1/+18/+4.
     //   car 3 (NAME-3, tests/domain/display/engagementNarrative.test.js): +1/+0/+1/+20/+4.
+    //   car 4 (the gate's three, cured): ZERO census motion on all five figures. The
+    //     lit-coverage cure for the extracted selection kernel is a direct-import block
+    //     appended to the ORIGIN's own suite (tests/domain/eventProse.test.js), which is
+    //     where the claim it proves — "eventProse's exports ARE the leaf's" — belongs.
+    //     ⭐ AND THE ZERO IS THE INSTRUMENT'S ANSWER, NOT AN ASSUMPTION: +1 describe and
+    //     +3 its were added and the census did not move a digit, because eventProse.test.js
+    //     is a PARKED file (its per-pool `it` titles are template literals over a non-literal
+    //     registry — exactly the two shapes `classify` parks). A predicted +3/+1 was banked
+    //     first and this arm red with the measured actual, which is the whole reason the
+    //     figures are asserted rather than described.
     files: 2486, parked: 364, credited: 2122, titles: 20899, suiteTitles: 5787,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
