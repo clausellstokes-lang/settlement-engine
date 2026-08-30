@@ -34,7 +34,7 @@ import { attritionDecayMult, firstTickAttritionMult } from './martialReadiness.j
 const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, Number(v) || 0));
 
 /**
- * @typedef {'narrow_fail'|'decisive_fail'|'narrow_success'|'costly_success'|'withdrawal'|'hold'} OutcomeBand
+ * @typedef {'narrow_fail'|'decisive_fail'|'decisive_success'|'costly_success'|'withdrawal'|'hold'} OutcomeBand
  */
 
 // ── Tunable attrition constants (calibration is load-bearing). ───────────────────
@@ -60,7 +60,7 @@ const BAND_ATTACKER = Object.freeze({
                          // winning attacker stays in the plausible band long enough)
   narrow_fail:    1.8,   // thrown back, but the army is intact enough to try again
   decisive_fail:  3.0,   // a bloody repulse — the assault broke on the walls
-  narrow_success: 1.6,   // the storm succeeded cleanly — modest cost
+  decisive_success: 1.6,   // the storm succeeded cleanly — modest cost
   costly_success: 2.6,   // a pyrrhic storm — the town fell but the army is gutted
   withdrawal:     0.8,   // an orderly retreat off a stalled siege
 });
@@ -68,7 +68,7 @@ const BAND_DEFENDER = Object.freeze({
   hold:           0.9,   // the defenders held but spent men doing it
   narrow_fail:    0.7,   // they threw the attacker back cheaply
   decisive_fail:  0.5,   // a decisive defense — light defender losses
-  narrow_success: 2.2,   // the walls fell — the garrison was overrun
+  decisive_success: 2.2,   // the walls fell — the garrison was overrun
   costly_success: 2.8,   // the town fell after a brutal fight — heavy defender losses
   withdrawal:     0.4,   // the besieger left — the defenders barely paid
 });

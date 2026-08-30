@@ -68,7 +68,7 @@ export const NPC_FACET_REGISTRY = Object.freeze({
   goal: {
     source: {
       file: 'src/generators/npcGenerator.js',
-      token: 'generateNPCRelType',
+      token: 'generateNPCGoal',
       reads: 'the goal is drawn from role + the active stress type(s)',
     },
     consumers: [

@@ -16,7 +16,7 @@
  *
  * ⚠ WHY THE READER'S WORDS ARE NOT THE `band` FIELD. `resolveSiegeVerdict` returns a
  * `band` whose tokens are load-bearing for attrition and do not mean what they say:
- * `narrow_success` is defined by its own derivation comment as a fall that cleared the
+ * `decisive_success` is defined by its own derivation comment as a fall that cleared the
  * bar BY A WIDE MARGIN, and `costly_success` is the squeaker. That inversion is pinned
  * below as a live property of the source, so nobody later "fixes" the reader prose by
  * rendering those tokens.

@@ -45,11 +45,18 @@ const PFALL_FOREGONE = 0.75;      // beyond the favourite band; the walls are a 
  * HOW THE STORM LOOKED BEFORE THE ROLL, worst-first for the besieger (TE-HERALD-1).
  *
  * ⚠ THIS IS DELIBERATELY NOT THE `band` FIELD. `band`'s tokens are load-bearing for
- * attrition and they do not mean what they say in English: the comment at the band
- * derivation defines `narrow_success` as a fall that cleared the bar BY A WIDE MARGIN
- * and `costly_success` as the squeaker. Rendering those tokens to a reader would tell
- * them the opposite of what happened, so the reader's words are derived from `pFall`
- * directly, where the meaning is unambiguous.
+ * attrition, and the reader's words are derived from `pFall` directly because that is where
+ * the meaning is unambiguous — a probability, not a category.
+ *
+ * ⭐ THE TOKEN THAT MADE THAT WARNING URGENT IS FIXED (E-HER-4, ODQ §774.1, cured in T7).
+ * This note used to continue: "they do not mean what they say in English: the comment at the
+ * band derivation defines `narrow_success` as a fall that cleared the bar BY A WIDE MARGIN".
+ * `narrow_success` IS NOW `decisive_success`, which is what it always meant, and the four
+ * tokens finally read as a set: decisive_success / costly_success / narrow_fail /
+ * decisive_fail. The rename moves nothing — `band` is consumed inside the same tick by
+ * `applyAttritionToRecord` and is never persisted, which is why it was free to fix. The
+ * reader prose still derives from `pFall`: that was the right call for its own reasons and
+ * does not depend on the token being wrong.
  * @type {ReadonlyArray<string>}
  */
 export const SIEGE_FALL_ODDS_WORDS = Object.freeze([
@@ -294,7 +301,7 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
       // WILL COLLAPSE → the defenders yield rather than be stormed (a bloodless fall).
       return {
         falls: true, harass: false, forcedLift: false, verdict, ratio,
-        pFall: 1, roll: 0, coalitionCurrent, defenderCurrent, band: 'narrow_success',
+        pFall: 1, roll: 0, coalitionCurrent, defenderCurrent, band: 'decisive_success',
         capitulation: true,
         reasons: [...reasons, `${defenderItem?.name || targetId}'s will broke — starving, discredited, and out of hope, the defenders capitulated rather than be stormed.`],
       };
@@ -334,13 +341,13 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
   const falls = roll < pFall;
   // ── OUTCOME BAND: how the engagement went, scaled by how DECISIVE the roll was
   // relative to its threshold. A fall that cleared the bar by a wide margin is a
-  // narrow_success (clean storm); a squeaker is costly_success (pyrrhic). A hold that
+  // decisive_success (clean storm); a squeaker is costly_success (pyrrhic). A hold that
   // came close to falling is a narrow_fail for the attacker (it nearly broke through);
   // a comfortable hold is a decisive_fail (thrown back). Deterministic — derived from
   // the same (pFall, roll) pair, so byte-stable + order-independent.
   let band;
   if (falls) {
-    band = (pFall - roll) > 0.18 ? 'narrow_success' : 'costly_success';
+    band = (pFall - roll) > 0.18 ? 'decisive_success' : 'costly_success';
   } else {
     band = (roll - pFall) < 0.18 ? 'narrow_fail' : 'decisive_fail';
   }

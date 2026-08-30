@@ -50,8 +50,14 @@ const pickFromArray = r => ctxPick(r);
 
 // ─── NPC_ROLES sub-generators ────────────────────────────────
 
-// generateNPCGoal
-const generateNPCGoal = role => {
+// generateNPCPowerLevel — the NPC's POWER, on the 1-10 scale the card and the PDF print.
+//
+// ⚠ THIS WAS CALLED `generateNPCGoal` AND RETURNED NO GOAL. It returns `{ level, power }`,
+// which `generateSingleNPC` assigns to `influence` and `power`. The name that now sits on it
+// is the one it always described; the name it USED to wear has moved to the function that
+// actually generates the goal, twenty lines down (§759, the misleading-vocabulary risk: "each
+// new consumer that trusts a function name in that file risks wiring the wrong field").
+const generateNPCPowerLevel = role => {
   const HIGH_POWER = [
     'mayor',
     'lord',
@@ -97,7 +103,7 @@ const generateSingleNPC = (
   const gender = _rng() > 0.5 ? 'male' : 'female';
   const fullName = pickFirst(culture, gender, true, tier);
   const worldLaw = resolveGenerationWorldLaw(generationContext, config);
-  const culturalTitle = pickLast(culture, namingTier || culture);
+  const culturalTitle = pickCulturalTitle(culture, namingTier || culture);
   const title = resolveGeneratedNpcTitle({
     role,
     culturalTitle,
@@ -106,7 +112,7 @@ const generateSingleNPC = (
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
-  const goal = generateNPCRelType(role, category, config);
+  const goal = generateNPCGoal(role, category, config);
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeaderSecret(
@@ -114,10 +120,10 @@ const generateSingleNPC = (
     institutions,
     worldLaw,
   );
-  const title1 = generateCharacterTitle(category, config, hookRegistry);
-  const title2 = _rng() > 0.5 ? generateCharacterTitle(category, config, hookRegistry) : null;
+  const title1 = generatePlotHook(category, config, hookRegistry);
+  const title2 = _rng() > 0.5 ? generatePlotHook(category, config, hookRegistry) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
-  const powerLevel = generateNPCGoal(role);
+  const powerLevel = generateNPCPowerLevel(role);
   return {
     id: null,
     name: fullName,
@@ -219,7 +225,7 @@ const _formatNPCForDisplay = (r, s, o, d) => {
 
 // mergeNPCLists
 
-// ─── NPC name helpers (pickFirst, pickLast, filterByGuild) ───
+// ─── NPC name helpers (pickFirst, pickCulturalTitle, filterByGuild) ───
 
 const CULTURE_KEYS = Object.keys(NAMING_DATA).filter(key =>
   Array.isArray(NAMING_DATA[key]?.maleNames) &&
@@ -248,7 +254,13 @@ const pickFirst = (culture = 'germanic', gender = 'male', withSurname = true, ti
   return `${firstName} ${surnames[Math.floor(_rng() * surnames.length)]}`;
 };
 
-const pickLast = (r = 'germanic', s = 'mayor') => {
+/** The CULTURAL TITLE for a role, off `NAMING_DATA[culture].titles`.
+ *
+ * ⚠ THIS WAS CALLED `pickLast`, the symmetric partner of `pickFirst` — and `pickFirst` really
+ * does pick a given name, so the pairing read as "given name / surname" to every new reader.
+ * It has never returned a surname: it returns a role's title, and falls back to humanizing the
+ * role key. Renamed rather than left as a trap for the next consumer (§759). */
+const pickCulturalTitle = (r = 'germanic', s = 'mayor') => {
   const culture = resolveNameCulture(r);
   const titles = (NAMING_DATA[culture] || NAMING_DATA.germanic).titles;
   const title = titles?.[s];
@@ -282,7 +294,7 @@ const filterByGuild = (
     hookRegistry,
     generationContext,
   );
-  npc.title = `${pickLast(culture, 'guild_master')} of ${guildName}`;
+  npc.title = `${pickCulturalTitle(culture, 'guild_master')} of ${guildName}`;
   npc.institution = guild.name;
   return npc;
 };
@@ -344,8 +356,14 @@ const generateNPCAppearance = (r = 'other') => ({
   clothes: pickFromArray(NPC_WANTS[r] || NPC_WANTS.other),
 });
 
-// generateNPCRelType
-const generateNPCRelType = (role, category = 'other', config = {}) => {
+// generateNPCGoal
+// generateNPCGoal — the NPC's SHORT and LONG goal, drawn from role + the active stress types.
+//
+// ⚠ THIS WAS CALLED `generateNPCRelType` AND RETURNED NO RELATIONSHIP TYPE. It returns
+// `{ short, long, driven_by }`, which `generateSingleNPC` assigns to `goal` — and
+// `domain/npc/npcFacets.js` already registered it as the SOURCE of the `goal` facet while
+// calling it by the wrong name. It now carries the name the facet registry always gave it.
+const generateNPCGoal = (role, category = 'other', config = {}) => {
   const stressType = config.stressType || null;
   const commodity = config.tradeCommodity || config._tradeCommodity || null;
   const topFaction = config._dominantFaction || null;
@@ -620,14 +638,20 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
 // roll lands on changes, and that is HK-3's disclosed same-seed shift.
 const drawLoyalty = (pool, reg) => drawUnique(pool, reg?.titles, undefined, reg?.themes, themeOfText);
 
-// generateCharacterTitle
+// generatePlotHook — ONE plot hook. `generateSingleNPC` calls it twice and the pair becomes
+// the NPC's `plotHooks` array.
+//
+// ⚠ THIS WAS CALLED `generateCharacterTitle` AND RETURNS NO TITLE. The NPC's title comes from
+// `pickTitle(category)` and `pickCulturalTitle`; this draws from NPC_FACTION_LOYALTY, which is
+// hook material. A consumer that trusted the old name would have wired a paragraph of faction
+// loyalty into a name field.
 // `hookRegistry` is the settlement-scoped anti-repetition draw registry threaded
 // from generateNPCs. Each authored loyalty string is its own family, so the
 // string itself is the family id, and the final pool draw goes through
 // drawLoyalty instead of a naive pick. Each branch still consumes the SAME
 // number of RNG rolls it always did (drawUnique spends one roll, exactly like
 // the pick it replaces), so title2 / power / downstream draws are unmoved.
-const generateCharacterTitle = (category = 'other', config = {}, hookRegistry) => {
+const generatePlotHook = (category = 'other', config = {}, hookRegistry) => {
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
   const tier = config.tier || config.settType;
 
