@@ -9,6 +9,13 @@
  *   1. GOLDEN SNAPSHOT — the canonical values of every SHARED_FIELDS fact for a
  *      fixed seed are snapshotted, so ANY change to a derived dossier value is
  *      surfaced for review (not auto-updated) instead of slipping through.
+ *      ⚠ REVIEWED AND RE-RECORDED 2026-08-30 (lane TE-RESIDUE-1, ODQ §708.5):
+ *      `headcounts.institutions` 54 → 55, and NOTHING ELSE in the snapshot moved.
+ *      The cause is the burial-ladder content car — the catalog could bury the dead
+ *      at exactly one tier, so a `required: true` burial row was authored for the
+ *      other five and this fixture's settlement gains exactly one institution. The
+ *      +1 IS the review: a required row adds one member and consumes no draw, so a
+ *      second moved field here would have meant something else had changed with it.
  *
  *   2. RENDER-LEAF — parity of the view-model is necessary but not sufficient: a
  *      section can read the right value yet fail to PRINT it. This renders the

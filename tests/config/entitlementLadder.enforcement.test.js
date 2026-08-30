@@ -85,6 +85,9 @@ vi.mock('../../src/store/index.js', () => {
 
 import PricingPage from '../../src/components/PricingPage.jsx';
 import { ENTITLEMENT_LADDER, DEFERRED_LADDER_ROWS, VIEWING_PAYWALLS_PENDING_514 } from '../../src/config/entitlementLadder.js';
+// §524.5 / D-EXPORT-1: what the PAID export row actually promises. `variants.js` is a
+// zero-import data leaf, so reading it here adds no weight to this walker's closure.
+import { PDF_VARIANTS } from '../../src/pdf/variants.js';
 import { TIER_GATE } from '../../src/store/authSlice.js';
 import { pricingPage } from '../../src/copy/pricingPage.js';
 
@@ -378,3 +381,74 @@ describe("rules E and F — the owner's AUTHORING axis (ODQ §514.1b)", () => {
 // deleted because it is the record of WHY arms left this file across two waves, and a
 // successor who finds nine ladder rows here needs to reconstruct that from the file
 // itself rather than from a ledger they may not have.
+
+// ─────────────────────────────────────────────────────────────────────────────
+// §524.5 / D-EXPORT-1 — WHAT THE PAID EXPORT ROW PROMISES.
+//
+// §524.5 asked WEB-8b for an enforcement arm proving two things: that the export
+// gate HOLDS, and that the map plate is inside the dossier variants that claim it —
+// each with a positive control. HALF OF THAT IS ALREADY BUILT: rule A above drives
+// `export-bundle` through `TIER_GATE.export` and its planted-row control convicts an
+// unresolvable claim, so the gate half needs no second spelling. What follows is the
+// OTHER half in its DE-ESCALATED form, and the de-escalation is a measurement.
+//
+// D-EXPORT-1 AS RECORDED: `hasDrawableMap` self-gated the plate, so any settlement
+// whose map could not be built shipped a paid PDF with no map plate — harmless while
+// the plate used the landed townMap model, and the exact seam the cartography stage
+// would land on. THE HAZARD'S HABITAT IS NOW GONE: the map left the PDF with the
+// legacy-map strip, and no variant declares a map chapter at all. So there is no
+// mapless paid dossier to ship, because there is no paid dossier that promises a map.
+//
+// ⛔ AND THAT IS EXACTLY WHY THIS ARM EXISTS RATHER THAN A NOTE. The map module is
+// coming back. The moment a variant starts claiming a plate, this arm reds — and the
+// person wiring it has to bring the buildability guarantee with them in the same act
+// instead of rediscovering D-EXPORT-1 from a paid PDF with a hole in it.
+// ─────────────────────────────────────────────────────────────────────────────
+describe('§524.5 / D-EXPORT-1 — the paid export promises no map, and cannot start promising one silently', () => {
+  /** A chapter key that would put a drawn map inside a variant. */
+  const MAP_CHAPTER = /map|plate|cartograph|atlas/i;
+  const mapChaptersOf = (spec) => Object.entries(spec.chapters ?? {})
+    .filter(([key, value]) => MAP_CHAPTER.test(key) && value !== false)
+    .map(([key]) => key);
+
+  it('the export row is STILL the gated one, named rather than left to set membership', () => {
+    // Rule A asserts the claiming SET; this names the member §524.5 is about, so a
+    // future re-record of that list cannot drop the export gate quietly.
+    const row = ROWS.find((r) => r.id === 'export-bundle');
+    expect(row, 'the export-bundle ladder row has left the table').toBeTruthy();
+    expect(claims(row), 'export-bundle stopped claiming a paywall').toBe(true);
+    expect(row.enforcement).toBe('TIER_GATE.export');
+    expect(RESOLVERS[row.enforcement](), 'TIER_GATE.export no longer refuses free and grants premium').toBe(true);
+  });
+
+  it('NO pdf variant declares a map chapter — the mapless-paid-dossier seam has no subject', () => {
+    const claimed = [];
+    for (const [variant, spec] of Object.entries(PDF_VARIANTS)) {
+      for (const chapter of mapChaptersOf(spec)) claimed.push(`${variant}.${chapter}`);
+    }
+    expect(claimed,
+      'a PDF variant now claims a map chapter. D-EXPORT-1 says a settlement whose map '
+      + 'cannot be built would ship a PAID dossier with a hole where the plate should be. '
+      + 'Land the buildability guarantee in the SAME act as the plate — do not delete this arm.',
+    ).toEqual([]);
+    // GUARD THE GUARD: the detector is not vacuous. It sees a planted plate, and it
+    // does not see a variant that merely turns one off.
+    expect(mapChaptersOf({ chapters: { cover: true, townMapPlate: true } })).toEqual(['townMapPlate']);
+    expect(mapChaptersOf({ chapters: { cover: true, townMapPlate: false } })).toEqual([]);
+    // …and it is reading REAL variants rather than an empty object: every shipped
+    // variant carries chapters, so the emptiness above is a measurement.
+    for (const [variant, spec] of Object.entries(PDF_VARIANTS)) {
+      expect(Object.keys(spec.chapters ?? {}).length, `${variant} has no chapters at all`).toBeGreaterThan(0);
+    }
+    expect(Object.keys(PDF_VARIANTS).length).toBeGreaterThan(1);
+  });
+
+  it('the four shipped variants are the ones the paid row sells, and canon_dossier is the fullest', () => {
+    // The anchor for the arm above: if the variant table were replaced wholesale the
+    // map census would pass over something else entirely, so the table is named.
+    expect(Object.keys(PDF_VARIANTS).sort())
+      .toEqual(['campaign_state', 'canon_dossier', 'draft_brief', 'timeline_packet']);
+    const on = (v) => Object.values(PDF_VARIANTS[v].chapters).filter((c) => c !== false).length;
+    expect(on('canon_dossier')).toBeGreaterThan(on('timeline_packet'));
+  });
+});

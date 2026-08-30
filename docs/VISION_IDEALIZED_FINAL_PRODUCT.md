@@ -145,7 +145,9 @@ world model is owned; bring your own key.
 
 ## THE BUSINESS
 A ladder that mirrors the depth: free forging with the anonymous funnel; $2.99 buys any single
-dossier as a permanent artifact; Premium buys the living world; Surveyor ($19.99) buys the
+dossier as a permanent artifact; Premium buys the living world; Surveyor ($14.99 — ODQ §464.2
+ruled the $14.99–19.99 band at its floor, and `SURVEYOR_PLAN.priceCents` has shipped 1499 ever
+since; this line said $19.99 until WEB-9b corrected it on 2026-08-30) buys the
 interpreter — priced against prep hours, not tool subscriptions — with managed outcome-priced
 credits and BYOK for the heavy and the sovereign; thirty lifetime Founders. The gallery spreads
 sanitized worlds; VTTs are complemented, never fought — finish the session in Foundry, tell

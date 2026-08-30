@@ -287,12 +287,22 @@ surface — total coverage of our own pipe; it cannot and does not claim to bind
 with exported data in outside tools.
 
 ## 4. Commercial mapping (per the owner's spec, recorded decisions)
-- **Surveyor tier $19.99/mo** = Premium + the AI control surface; tier axis gains 'surveyor'
+> ⚠ **THE PRICE IN THIS SECTION WAS SUPERSEDED, AND IS CORRECTED RATHER THAN LEFT STANDING**
+> (WEB-9b, lane TE-RESIDUE-1, 2026-08-30). This section was written when the Surveyor was
+> specced at **$19.99/mo**. ODQ **§464.2** later ruled the band **$14.99–19.99 AT ITS FLOOR**,
+> and the shipped code has carried that ruling ever since: `SURVEYOR_PLAN.priceCents = 1499`
+> (`src/config/pricing.js`). The two `$19.99` figures below are re-stated at `$14.99` so a
+> design doc cannot go on asserting a price the product does not charge. The superseded figure
+> is named here rather than erased, because the ruling is only legible beside what it replaced.
+> ⛔ The `$19.99` that survives elsewhere in the repo is the **credit packs** (40 and 150
+> credits) — a different SKU entirely — and the two bracketed `[[PROVISIONAL]]` figures in
+> `docs/legal/` are owner-queued and untouched by this correction.
+- **Surveyor tier $14.99/mo** = Premium + the AI control surface; tier axis gains 'surveyor'
   (the anon/free/premium × role orthogonality holds; entitlements gate the INTERFACE — the sim
   itself never reads tier, constitution law 3 untouched).
 - **Managed credits** for non-BYOK usage, task-priced (interpret-session, construct-settlement,
   realm, brief, analysis, custom content, polish); margin telemetry via the analytics seam.
-- **BYOK** included in Surveyor: $19.99 covers orchestration/validation/workflow; inference on
+- **BYOK** included in Surveyor: $14.99 covers orchestration/validation/workflow; inference on
   their key; managed credits remain available alongside.
 - **Founder (30 lifetime seats — the canonical cap)**: lifetime Premium + Surveyor core + BYOK;
   no unlimited funded inference; possible small allowance. (The 500-seat copy is a confirmed bug,
