@@ -61,6 +61,8 @@ import { validateDossier } from '../../domain/validation/consistency.js';
 import { extractReducedFingerprint, stableStringify } from '../structuralFingerprint.js';
 import { deriveWorldPlan, normalizeBasicConfig } from '../../domain/instantWorld/worldPlan.js';
 import { dedupeWorldFactionNames } from './factionDedup.js';
+import { materializeGenesisRelations, genesisRelationsSection } from '../../domain/instantWorld/genesisDiplomacy.js';
+import { runComposerSteps } from './composerPipeline.js';
 
 const SCHEMA_VERSION = 2;
 // Bounded, seed-derived coherence retries. A minted settlement that trips the
@@ -200,18 +202,108 @@ export function composeInstantWorld({
   clock,
 } = {}) {
   const knobs = normalizeBasicConfig(basicConfig);
-  const plan = deriveWorldPlan({ seed, basicConfig: knobs });
-  // Pure, seed-derived defaults keep the domain kernel deterministic; the store
-  // binding overrides both with real ids + wall-clock time.
-  let _idN = 0;
-  const mkId = idFactory || (() => `iw::${plan.seed}::${_idN++}`);
+  // ── THE SHARED CLOCK, READ EXACTLY ONCE (coupling `shared_now`) ────────────
+  // Every timestamp in the bundle is this one value. A step that read the clock
+  // again would produce a bundle whose parts disagree about when it was made and
+  // would break the injected-clock replay pin.
   const now = (clock || (() => EPOCH_ISO))();
+  // ── THE SHARED ID COUNTER (coupling `id_order`) ────────────────────────────
+  // Pure, seed-derived defaults keep the domain kernel deterministic; the store
+  // binding overrides both with real ids + wall-clock time. The ORDER of the calls
+  // below is load-bearing: the campaign takes the first id, each member the next.
+  let _idN = 0;
+  /** @type {{ plan?: any }} */
+  const seedRef = {};
+  const mkId = idFactory || (() => `iw::${seedRef.plan?.seed}::${_idN++}`);
 
-  const campaignId = mkId();
-  const campaignName = String(name || '').trim() || `Instant Realm ${plan.seed}`.trim();
+  // ── THE INSTANCE-SCOPED STEP LIST (ST-3 / D12) ────────────────────────────
+  // Built per call, never registered globally — the composer invokes the settlement
+  // pipeline NESTED, and a shared registry would splice these steps into that
+  // pipeline's own topological sort. `runComposerSteps` refuses any list whose
+  // order does not match the declared contract, so the four couplings the contract
+  // records cannot be broken by an edit that merely looks tidy.
+  const ctx = /** @type {Record<string, any>} */ ({
+    seed, knobs, name, engine, contentRuntime, now,
+  });
 
-  // ── Mint + wrap the tier-mixed members as CANON saves ──────────────────────
-  const settlements = plan.sites.map((site) => {
+  const steps = [
+    { name: 'derivePlan', fn: (/** @type {any} */ c) => {
+      const plan = deriveWorldPlan({ seed: c.seed, basicConfig: c.knobs });
+      seedRef.plan = plan;
+      return { plan };
+    } },
+
+    { name: 'openCampaignIdentity', fn: (/** @type {any} */ c) => ({
+      // FIRST call on the id counter — see coupling `id_order`.
+      campaignId: mkId(),
+      campaignName: String(c.name || '').trim() || `Instant Realm ${c.plan.seed}`.trim(),
+    }) },
+
+    { name: 'mintMembers', fn: (/** @type {any} */ c) => ({
+      settlements: mintMembers(c, mkId),
+    }) },
+
+    // ── World-scoped faction-name de-dup (CONTENT-GT-DOSSIER) ────────────────
+    // Settlement generation dedups faction names only settlement-locally, so a realm
+    // collides (many members each name a faction "The Trade Compact"). This PURE,
+    // rng-free post-pass renames cross-settlement collisions deterministically — the
+    // members are already minted, so per-settlement generation is untouched (zero
+    // rng/golden impact); only the composed bundle's faction names (and the derived
+    // fingerprint) change. IN-PLACE (coupling `in_place_mutation`). See ./factionDedup.js.
+    { name: 'dedupeFactionNames', fn: (/** @type {any} */ c) => { dedupeWorldFactionNames(c.settlements); } },
+
+    // ── The realm's FOUNDING TIES, materialized onto the members ─────────────
+    // POLIS-2 (DESIGN_FMG_WEAVE D6, ordered by A1.2.12). The plan decides which ties
+    // a realm is born holding, SLOT-addressed; this turns those slots into save-id
+    // links on the members themselves. IN-PLACE (coupling `in_place_mutation`).
+    //
+    // THE POSITION IS THE CONTRACT. It must run AFTER the faction de-dup, so a link
+    // stores each neighbour's FINAL name; and BEFORE channel discovery, because
+    // discovery INGESTS `neighbourNetwork` — a founding tie materialized after it
+    // would exist on the members and be invisible to the regional graph. The step
+    // list makes that order checkable instead of merely stated.
+    //
+    // DORMANT until the plan car lands: `plan.relations` is absent today, the call
+    // writes nothing, and the composed bundle is byte-identical.
+    { name: 'materializeGenesisTies', fn: (/** @type {any} */ c) => {
+      materializeGenesisRelations({ settlements: c.settlements, relations: c.plan.relations });
+    } },
+
+    { name: 'placeMembers', fn: (/** @type {any} */ c) => ({ placements: placeMembers(c) }) },
+
+    // ── Compute the staged connections (organic channel discovery from members) ─
+    { name: 'discoverChannels', fn: (/** @type {any} */ c) => ({
+      regionalGraph: deriveGraphWithDiscoveredCandidates(c.settlements, ensureRegionalGraph(), { now: c.now }),
+    }) },
+
+    { name: 'applyTonePreset', fn: (/** @type {any} */ c) => ({ worldState: applyTonePreset(c) }) },
+
+    { name: 'buildMapState', fn: (/** @type {any} */ c) => ({ mapState: buildMapState(c) }) },
+
+    { name: 'assembleCampaign', fn: (/** @type {any} */ c) => ({ campaign: assembleCampaign(c) }) },
+  ];
+
+  runComposerSteps(steps, ctx);
+
+  return {
+    campaign: ctx.campaign,
+    settlements: ctx.settlements,
+    plan: ctx.plan,
+    fingerprint: instantWorldFingerprint({
+      campaign: ctx.campaign, settlements: ctx.settlements, plan: ctx.plan,
+    }),
+  };
+}
+
+/**
+ * Mint + wrap the tier-mixed members as CANON saves. One member per planned site,
+ * in slot order — which is also id-mint order (coupling `id_order`).
+ * @param {any} c the composer context
+ * @param {() => string} mkId
+ */
+function mintMembers(c, mkId) {
+  const { plan, engine, contentRuntime, now } = c;
+  return plan.sites.map((/** @type {any} */ site) => {
     const memberConfig = memberConfigFor(site, plan);
     const { settlement, seed: usedSeed, retries } = mintSettlement(
       engine,
@@ -240,36 +332,50 @@ export function composeInstantWorld({
       _slot: site.slot,
     };
   });
+}
 
-  // ── World-scoped faction-name de-dup (CONTENT-GT-DOSSIER) ──────────────────
-  // Settlement generation dedups faction names only settlement-locally, so a realm
-  // collides (many members each name a faction "The Trade Compact"). This PURE,
-  // rng-free post-pass renames cross-settlement collisions deterministically — the
-  // members are already minted, so per-settlement generation is untouched (zero
-  // rng/golden impact); only the composed bundle's faction names (and the derived
-  // fingerprint) change. See ./factionDedup.js.
-  dedupeWorldFactionNames(settlements);
-
-  // ── Place them on the map at the planned sites ─────────────────────────────
+/**
+ * Place each member on the map at its planned site.
+ *
+ * ⛔ THE JOIN IS ON `slot`, NEVER ON ARRAY INDEX (coupling `placement_join`).
+ * This loop used to read `settlements[i]` while walking `plan.sites` — correct only
+ * for as long as the member array is built by mapping the site array and is never
+ * filtered, sorted, or appended to. Nothing said so and nothing would have failed
+ * loudly: a reorder would have placed every settlement on its neighbour's site, and
+ * the realm would still have looked well-formed. `slot` is the identity a plan and
+ * a member genuinely share, so the join now cannot drift. Today the two orders
+ * agree, which is exactly why this repair is byte-identical and safe to make now
+ * rather than after something has already reordered the array.
+ *
+ * EXPORTED so the coupling is EXECUTABLE. A declared coupling whose guard cannot be
+ * run is a promise, not a guard: the only way to prove the join survives a reordered
+ * member array is to hand it one, and that requires a seam. This is that seam.
+ * @param {any} c the composer context
+ */
+export function placeMembers(c) {
+  const { plan, settlements, now } = c;
+  const bySlot = new Map(settlements.map((/** @type {any} */ s) => [s._slot, s]));
   const placements = /** @type {Record<string, any>} */ ({});
-  plan.sites.forEach((site, i) => {
+  for (const site of plan.sites) {
+    const member = bySlot.get(site.slot);
+    if (!member) continue;
     placements[site.burgId] = {
-      settlementId: settlements[i].id,
+      settlementId: member.id,
       x: site.x,
       y: site.y,
       cellId: null, // composer-derived coordinate; the live FMG cell resolves at canonize
       placedAt: now,
     };
-  });
+  }
+  return placements;
+}
 
-  // ── Compute the staged connections (organic channel discovery from members) ─
-  const regionalGraph = deriveGraphWithDiscoveredCandidates(
-    settlements,
-    ensureRegionalGraph(),
-    { now },
-  );
-
-  // ── Apply the tone preset to a fresh, spatially-un-canonized worldState ─────
+/**
+ * Apply the tone preset to a fresh, spatially-un-canonized worldState.
+ * @param {any} c the composer context
+ */
+function applyTonePreset(c) {
+  const { plan, campaignId, campaignName } = c;
   const tonePreset = SIMULATION_RULE_PRESETS[/** @type {keyof typeof SIMULATION_RULE_PRESETS} */ (plan.tonePresetId)] || SIMULATION_RULE_PRESETS.realistic_regional;
   // THE REALM'S REMAINDER (MG-2). The members carry the whole truth; what the
   // realm keeps is a DEFAULT-FOR-LATER, written at the same site the tone preset
@@ -285,13 +391,19 @@ export function composeInstantWorld({
   // surface of DEFAULT_SIMULATION_RULES, which this key is absent from), so
   // preset identity and preset inference are untouched.
   const mundaneRealm = plan.magic === 'no';
-  const worldState = ensureWorldState(
+  return ensureWorldState(
     { simulationRules: mundaneRealm ? { ...tonePreset.rules, realmMagicDefault: 'mundane' } : tonePreset.rules },
     { id: campaignId, name: campaignName },
   );
+}
 
-  // ── The map state: geography PLAN (seed + template), placements, no snapshot ─
-  const mapState = {
+/**
+ * The map state: geography PLAN (seed + template), placements, no snapshot.
+ * @param {any} c the composer context
+ */
+function buildMapState(c) {
+  const { plan, placements, now } = c;
+  return {
     schemaVersion: SCHEMA_VERSION,
     fmgSnapshot: null,
     seed: plan.mapSeed,
@@ -311,9 +423,16 @@ export function composeInstantWorld({
     viewport: { cx: 0, cy: 0, scale: 1, width: 0, height: 0 },
     savedAt: now,
   };
+}
 
-  // ── Assemble the campaign (mirrors createCampaign's shape, tier-blind) ──────
-  const campaign = {
+/**
+ * Assemble the campaign (mirrors createCampaign's shape, tier-blind).
+ * @param {any} c the composer context
+ */
+function assembleCampaign(c) {
+  const { campaignId, campaignName, now, settlements, mapState, regionalGraph, worldState, plan } = c;
+  const mundaneRealm = plan.magic === 'no';
+  return {
     id: campaignId,
     name: campaignName,
     createdAt: now,
@@ -340,13 +459,6 @@ export function composeInstantWorld({
       mapKind: plan.mapKind,
       ...(mundaneRealm ? { magic: 'no' } : {}),
     },
-  };
-
-  return {
-    campaign,
-    settlements,
-    plan,
-    fingerprint: instantWorldFingerprint({ campaign, settlements, plan }),
   };
 }
 
@@ -381,6 +493,14 @@ export function instantWorldFingerprint({ campaign, settlements, plan }) {
     members,
     channels,
     sites,
+    // POLIS-2 (D6). The fingerprint covered every derived surface EXCEPT the
+    // relationship edges — a determinism blind spot sitting exactly where genesis
+    // diplomacy lands, so the feature would have been unpinnable by the pin that
+    // exists to catch it. Slot-addressed, so it is stable across id runs.
+    // ABSENT WHEN DARK: the section is `undefined` for a plan with no relations and
+    // the serializer skips undefined keys, so a realm composed without a relations
+    // plan fingerprints byte-identically to one composed before this section existed.
+    relations: genesisRelationsSection(plan?.relations),
     simulationPreset: campaign?.worldState?.simulationRules?.presetId ?? null,
   });
 }
