@@ -224,3 +224,121 @@ describe('behavior: repaired joins produce DM-visible output', () => {
     expect(state.tradeDependencies.find((d) => d.institution === 'Free company hall')).toBeUndefined();
   });
 });
+
+// ── WEAVE ST-2 — the goods namespace's two index surfaces ────────────────────
+// The goods vocabulary lives in nine physical modules and is unified as a
+// LOGICAL namespace (DESIGN_FMG_WEAVE A1.1.4): a types-only vocabulary module
+// plus two physical index surfaces — eager identity/terrain, lazy chain/demand.
+// The FIRST-PAINT half of that contract (who may import which surface) is
+// enforced in tests/build/vendorPdfLazy.test.js, which reads vite.config.js's
+// own eager-module derivation. What is enforced HERE is the join half: that the
+// surfaces are pure re-export doors — same objects, same names, nothing
+// invented, nothing dropped, no symbol on both doors — so "read it through the
+// namespace" and "read it from the table" can never mean two different things.
+//
+// A pure re-export is behaviour-neutral by construction, which is the whole
+// reason this unification is shaped as an index rather than a record merge:
+// catalog shapes leak into saves (settlement.resourceAnalysis.exploitation
+// holds RESOURCE_CHAINS-shaped entries), so a field rename would be a
+// save-format change, not a refactor.
+
+import * as goodsIdentitySurface from '../../src/data/goods/identity.js';
+import * as goodsChainsSurface from '../../src/data/goods/chains.js';
+import * as goodsVocabulary from '../../src/domain/goods.schema.js';
+
+import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../../src/data/resourceData.js';
+import { RESOURCE_CHAINS, INDUSTRY_WATER_NEEDS } from '../../src/data/resourceChains.js';
+import {
+  INSTITUTION_FINISHED_GOODS_DEMAND,
+  finishedGoodsCategoryOf,
+} from '../../src/data/finishedGoodsCategory.js';
+import { IMPORT_GOODS_BY_TIER, COMMODITY_CATEGORY_MAP } from '../../src/data/tradeGoodsData.js';
+import { SUPPLY_CHAIN_NEEDS } from '../../src/data/supplyChainData.js';
+import {
+  RESOURCE_TO_CHAINS,
+  RETIRED_CHAIN_ALIASES,
+  REAGENT_CHAIN_SPINE,
+  REAGENT_STAPLE_LABEL,
+} from '../../src/data/supplyChainResourceIndex.js';
+
+describe('joins: the goods namespace surfaces are pure re-export doors', () => {
+  test('the vocabulary module has ZERO value exports (types only)', () => {
+    // The whole first-paint safety of the vocabulary rests on this: with no
+    // value export it has no runtime importer, so it can never become an edge
+    // in the eager module graph. If a constant is ever added here the file
+    // acquires importers and the argument in its own header stops being true.
+    expect(Object.keys(goodsVocabulary)).toEqual([]);
+  });
+
+  test('the EAGER identity surface exports exactly the identity half, by reference', () => {
+    expect(Object.keys(goodsIdentitySurface).sort()).toEqual(['RESOURCE_DATA', 'SPECIAL_RESOURCES']);
+    expect(goodsIdentitySurface.RESOURCE_DATA).toBe(RESOURCE_DATA);
+    expect(goodsIdentitySurface.SPECIAL_RESOURCES).toBe(SPECIAL_RESOURCES);
+  });
+
+  test('the LAZY chains surface exports exactly the chain/demand/tier half, by reference', () => {
+    expect(Object.keys(goodsChainsSurface).sort()).toEqual([
+      'COMMODITY_CATEGORY_MAP',
+      'GOODS_CATEGORIES',
+      'GOODS_MODIFIERS_BY_TIER',
+      'IMPORT_GOODS_BY_TIER',
+      'INDUSTRY_WATER_NEEDS',
+      'INSTITUTION_FINISHED_GOODS_DEMAND',
+      'REAGENT_CHAIN_SPINE',
+      'REAGENT_STAPLE_LABEL',
+      'RESOURCE_CHAINS',
+      'RESOURCE_TO_CHAINS',
+      'RETIRED_CHAIN_ALIASES',
+      'SUPPLY_CHAIN_NEEDS',
+      'TRADE_DEPENDENCY_NEEDS',
+      'finishedGoodsCategoryOf',
+    ]);
+    expect(goodsChainsSurface.RESOURCE_CHAINS).toBe(RESOURCE_CHAINS);
+    expect(goodsChainsSurface.INDUSTRY_WATER_NEEDS).toBe(INDUSTRY_WATER_NEEDS);
+    expect(goodsChainsSurface.TRADE_DEPENDENCY_NEEDS).toBe(TRADE_DEPENDENCY_NEEDS);
+    expect(goodsChainsSurface.INSTITUTION_FINISHED_GOODS_DEMAND).toBe(INSTITUTION_FINISHED_GOODS_DEMAND);
+    expect(goodsChainsSurface.finishedGoodsCategoryOf).toBe(finishedGoodsCategoryOf);
+    expect(goodsChainsSurface.GOODS_CATEGORIES).toBe(GOODS_CATEGORIES);
+    expect(goodsChainsSurface.IMPORT_GOODS_BY_TIER).toBe(IMPORT_GOODS_BY_TIER);
+    expect(goodsChainsSurface.GOODS_MODIFIERS_BY_TIER).toBe(GOODS_MODIFIERS_BY_TIER);
+    expect(goodsChainsSurface.COMMODITY_CATEGORY_MAP).toBe(COMMODITY_CATEGORY_MAP);
+    expect(goodsChainsSurface.SUPPLY_CHAIN_NEEDS).toBe(SUPPLY_CHAIN_NEEDS);
+    expect(goodsChainsSurface.RESOURCE_TO_CHAINS).toBe(RESOURCE_TO_CHAINS);
+    expect(goodsChainsSurface.RETIRED_CHAIN_ALIASES).toBe(RETIRED_CHAIN_ALIASES);
+    expect(goodsChainsSurface.REAGENT_CHAIN_SPINE).toBe(REAGENT_CHAIN_SPINE);
+    expect(goodsChainsSurface.REAGENT_STAPLE_LABEL).toBe(REAGENT_STAPLE_LABEL);
+  });
+
+  test('the two surfaces partition the namespace — no symbol is on both doors', () => {
+    // One name, one door. A symbol reachable through both would let an eager
+    // consumer satisfy itself from the lazy surface (and vice versa), which is
+    // exactly the ambiguity the two-surface split exists to remove.
+    const identityNames = new Set(Object.keys(goodsIdentitySurface));
+    const overlap = Object.keys(goodsChainsSurface).filter((name) => identityNames.has(name)).sort();
+    expect(overlap, `symbols exported by BOTH goods surfaces: ${overlap.join(', ')}`).toEqual([]);
+  });
+
+  test('the surfaces invent nothing: every export is a live table or function', () => {
+    // Guards against a door that silently exports `undefined` because a table
+    // was renamed at its physical home — a re-export of a missing name is a
+    // build error in Vite but merely `undefined` under some tooling, and an
+    // undefined catalog fails SILENTLY at every consumer.
+    for (const [name, value] of Object.entries({ ...goodsIdentitySurface, ...goodsChainsSurface })) {
+      expect(value, `${name} re-exported as undefined`).toBeDefined();
+      expect(
+        typeof value === 'object' || typeof value === 'function' || typeof value === 'string',
+        `${name} has unexpected type ${typeof value}`,
+      ).toBe(true);
+    }
+  });
+
+  test('the chains surface reaches the FP-G4 eager leaf without re-exporting the eager identity half', () => {
+    // lazy → eager is the safe direction, and finishedGoodsCategory.js is the
+    // one physically-eager table on the lazy door (it is semantically demand).
+    // The reverse — an identity table on the lazy door, or a chains table on
+    // the eager door — is what the first-paint law forbids.
+    expect(goodsChainsSurface.finishedGoodsCategoryOf('siege engine')).toBe('military');
+    expect(Object.keys(goodsChainsSurface).includes('RESOURCE_DATA')).toBe(false);
+    expect(Object.keys(goodsIdentitySurface).includes('RESOURCE_CHAINS')).toBe(false);
+  });
+});

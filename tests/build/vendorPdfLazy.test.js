@@ -33,7 +33,10 @@
 
 import { describe, it, expect } from 'vitest';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { resolve, join, dirname, relative } from 'node:path';
+// The eager first-paint module graph, read from vite.config.js's OWN derivation
+// (never a replica — see the WEAVE ST-2 surface-law block at the foot).
+import { EAGER_FIRST_PAINT_MODULES } from '../../vite.config.js';
 import {
   brotliCompressSync,
   constants as zlibConstants,
@@ -901,5 +904,296 @@ describe.runIf(distExists)('F41 — PDF worker chunk contract', () => {
     const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
     const preloadRe = /<link\s+rel="modulepreload"[^>]*href="[^"]*pdfRender\.worker[^"]*"/g;
     expect(html.match(preloadRe) || []).toHaveLength(0);
+  });
+});
+
+// ── WEAVE ST-2 — the goods namespace surface law ─────────────────────────────
+// The goods vocabulary is split across nine physical modules and unified as a
+// LOGICAL namespace: a types-only vocabulary (src/domain/goods.schema.js) plus
+// two physical index surfaces. `data/resourceChains.js:1-17` states in the
+// tree's own words why a single merged catalog is forbidden — "DO NOT re-export
+// these from resourceData.js — an eager re-export would re-drag them into first
+// paint" — and an index module IS a re-export, so the same law binds the
+// surfaces. It reduces to two sentences:
+//
+//   • data/goods/identity.js (EAGER surface) may re-export only tables that are
+//     ALREADY in the first-paint module graph. Anything else it re-exports gets
+//     dragged into the closure the moment an eager consumer imports it.
+//   • data/goods/chains.js (LAZY surface) may have NO importer in the first-
+//     paint module graph. vite's isEagerData classifier is DERIVED from the
+//     import graph, so one such edge re-classifies every chains-half table
+//     (~390 kB of data-lazy) as first-paint data — against ~13 kB of headroom.
+//
+// This runs against source, needs no dist/, and reads the eager graph from
+// vite.config.js's OWN derivation (EAGER_FIRST_PAINT_MODULES) rather than a
+// replica: a replica drifts the first time that function changes, and a
+// first-paint guard measuring a stale graph is the vacuous green this whole
+// file exists to prevent. The mutant arm proves the reader can actually fail.
+// @enforces src/domain/goods.schema.js "THE SURFACE LAW"
+
+const GOODS_IDENTITY_SURFACE = 'src/data/goods/identity.js';
+const GOODS_CHAINS_SURFACE = 'src/data/goods/chains.js';
+const GOODS_IDENTITY_TABLES = ['src/data/resourceData.js'];
+const GOODS_CHAINS_TABLES = [
+  'src/data/resourceChains.js',
+  'src/data/economicData.js',
+  'src/data/tradeGoodsData.js',
+  'src/data/finishedGoodsCategory.js',
+  'src/data/supplyChainData.js',
+  'src/data/supplyChainResourceIndex.js',
+];
+
+/** Static (never dynamic) relative import/re-export specifiers, comments stripped —
+ *  the same reading vite.config.js's eager-graph walker performs. */
+function goodsStaticSpecs(code) {
+  const stripped = code.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+  const specs = [];
+  for (const m of stripped.matchAll(/(?:^|[^.\w])import\s+(?:[^'"()]*?\sfrom\s+)?['"]([^'"]+)['"]/g)) specs.push(m[1]);
+  for (const m of stripped.matchAll(/(?:^|[^.\w])export\s+[^'"]*?\sfrom\s+['"]([^'"]+)['"]/g)) specs.push(m[1]);
+  return specs.filter((s) => s.startsWith('.'));
+}
+
+/** Every .js/.jsx file under src/, as repo-relative POSIX paths. */
+function goodsSrcFiles(dir = resolve(process.cwd(), 'src'), out = []) {
+  for (const entry of readdirSync(dir)) {
+    const p = join(dir, entry);
+    if (statSync(p).isDirectory()) goodsSrcFiles(p, out);
+    else if (/\.jsx?$/.test(entry)) out.push(relative(process.cwd(), p));
+  }
+  return out;
+}
+
+/** Resolve a relative specifier from `fromRel` to a repo-relative path, or null. */
+function goodsResolve(fromRel, spec) {
+  const base = resolve(dirname(resolve(process.cwd(), fromRel)), spec);
+  for (const c of [base, `${base}.js`, `${base}.jsx`, join(base, 'index.js'), join(base, 'index.jsx')]) {
+    if (existsSync(c) && statSync(c).isFile()) return relative(process.cwd(), c);
+  }
+  return null;
+}
+
+/**
+ * THE PURE READER, so the mutant arm can drive it with a fabricated tree.
+ * `sources` is a Map<relPath, code>; `isEager` is the membership predicate.
+ * Returns the relative paths of eager modules that statically import `target`.
+ */
+function eagerImportersOf(target, sources, isEager) {
+  const hits = [];
+  for (const [rel, code] of sources) {
+    if (!isEager(rel)) continue;
+    for (const spec of goodsStaticSpecs(code)) {
+      if (goodsResolve(rel, spec) === target) { hits.push(rel); break; }
+    }
+  }
+  return hits.sort();
+}
+
+describe('WEAVE ST-2 — the goods namespace surface law', () => {
+  const srcFiles = goodsSrcFiles();
+  const sources = new Map(srcFiles.map((rel) => [rel, readFileSync(resolve(process.cwd(), rel), 'utf-8')]));
+  const eagerRel = new Set(
+    [...EAGER_FIRST_PAINT_MODULES].map((abs) => relative(process.cwd(), abs)),
+  );
+  const isEager = (rel) => eagerRel.has(rel);
+
+  it('the eager graph this arm reads is non-empty and contains the entry (anti-vacuity)', () => {
+    // Without this, every assertion below is green-on-nothing the day the
+    // export stops resolving — the failure mode that makes a guard worthless.
+    expect(eagerRel.size).toBeGreaterThan(50);
+    expect(eagerRel.has('src/main.jsx'), 'the entry must be in the eager graph').toBe(true);
+    expect(sources.size, 'the src/ walk found no files').toBeGreaterThan(100);
+  });
+
+  it('both goods index surfaces exist where the vocabulary says they do', () => {
+    for (const surface of [GOODS_IDENTITY_SURFACE, GOODS_CHAINS_SURFACE]) {
+      expect(existsSync(resolve(process.cwd(), surface)), `${surface} is missing`).toBe(true);
+    }
+  });
+
+  it('the EAGER identity surface re-exports only tables already in the first-paint graph', () => {
+    const reExported = goodsStaticSpecs(sources.get(GOODS_IDENTITY_SURFACE))
+      .map((spec) => goodsResolve(GOODS_IDENTITY_SURFACE, spec));
+    expect(reExported, 'identity.js must re-export at least one table').not.toHaveLength(0);
+    const lazy = reExported.filter((rel) => !isEager(rel));
+    expect(
+      lazy,
+      `identity.js re-exports lazy module(s) ${lazy.join(', ')} — an eager consumer would drag them`
+      + ' into the first-paint closure (the resourceChains.js:1-17 law).',
+    ).toEqual([]);
+    // And it must not reach the lazy half by ANY name, index or table.
+    const chainsReach = reExported.filter((rel) => GOODS_CHAINS_TABLES.includes(rel) || rel === GOODS_CHAINS_SURFACE);
+    expect(chainsReach, 'the eager surface reached the chains half').toEqual([]);
+  });
+
+  it('NO module in the first-paint graph imports the LAZY chains surface', () => {
+    const offenders = eagerImportersOf(GOODS_CHAINS_SURFACE, sources, isEager);
+    expect(
+      offenders,
+      `first-paint module(s) ${offenders.join(', ')} import ${GOODS_CHAINS_SURFACE}. vite's isEagerData`
+      + ' would re-classify every chains-half table as first-paint data (~390 kB against ~13 kB of'
+      + ' headroom). Import the physical table directly, or move the consumer off the eager graph.',
+    ).toEqual([]);
+  });
+
+  it('the LAZY chains surface is itself absent from the first-paint module graph', () => {
+    expect(
+      isEager(GOODS_CHAINS_SURFACE),
+      `${GOODS_CHAINS_SURFACE} entered the eager graph — some eager module reaches it transitively.`,
+    ).toBe(false);
+  });
+
+  it('MUTANT: a fabricated eager importer of the chains surface is caught', () => {
+    // A control that cannot fail proves nothing. Drive the same reader with a
+    // synthetic tree in which an eager module imports the lazy surface.
+    const fabricated = new Map([
+      ['src/data/goods/chains.js', 'export const X = 1;\n'],
+      ['src/fake/eagerOffender.js', "import { RESOURCE_CHAINS } from '../data/goods/chains.js';\n"],
+      ['src/fake/lazyConsumer.js', "import { RESOURCE_CHAINS } from '../data/goods/chains.js';\n"],
+    ]);
+    const fabricatedEager = (rel) => rel === 'src/fake/eagerOffender.js';
+    const caught = eagerImportersOf(GOODS_CHAINS_SURFACE, fabricated, fabricatedEager);
+    expect(caught, 'the reader failed to catch a planted eager importer').toEqual(['src/fake/eagerOffender.js']);
+  });
+
+  it('MUTANT: a DYNAMIC import of the chains surface is not counted (lazy boundary)', () => {
+    // The mirror control: the reader must not fire on the one edge that is
+    // legitimately lazy, or every dynamic-import consumer becomes a false red.
+    const fabricated = new Map([
+      ['src/fake/eagerOffender.js', "const m = await import('../data/goods/chains.js');\n"],
+    ]);
+    const caught = eagerImportersOf(GOODS_CHAINS_SURFACE, fabricated, () => true);
+    expect(caught, 'a dynamic import was counted as a static eager edge').toEqual([]);
+  });
+
+  it('tradeLinks.js — the one eager chains-half consumer — keeps its DIRECT import (FP-G4)', () => {
+    // FP-G4 split finishedGoodsCategory.js out of economicData.js precisely so
+    // this single first-paint edge would stop dragging the 21 kB
+    // TRADE_DEPENDENCY_NEEDS table into the closure. Routing it through the
+    // chains surface would undo that split and re-eager the whole half, so the
+    // exception is pinned rather than left to memory.
+    const rel = 'src/domain/region/tradeLinks.js';
+    expect(isEager(rel), 'tradeLinks.js is expected to be in the first-paint graph').toBe(true);
+    const reached = goodsStaticSpecs(sources.get(rel)).map((spec) => goodsResolve(rel, spec));
+    expect(reached).toContain('src/data/finishedGoodsCategory.js');
+    // anchored: the toContain directly above pins `reached` non-empty and pins the very entry this denies drifting to, so an emptied collection reds there first
+    expect(reached, 'tradeLinks.js must never route through the lazy surface').not.toContain(GOODS_CHAINS_SURFACE);
+  });
+
+  it('every chains-half table stays out of the first-paint graph except the FP-G4 leaf', () => {
+    const eagerTables = GOODS_CHAINS_TABLES.filter((rel) => isEager(rel));
+    expect(
+      eagerTables,
+      'a chains-half table entered first paint; expected only the FP-G4 finishedGoodsCategory leaf',
+    ).toEqual(['src/data/finishedGoodsCategory.js']);
+    // The identity half is eager by design — asserted so the two halves can
+    // never quietly swap places.
+    expect(GOODS_IDENTITY_TABLES.every((rel) => isEager(rel))).toBe(true);
+  });
+});
+
+// ── WEAVE ST-2 — the migration roster is a WALKED artifact, not a comment ────
+// A1.1.4 requires "an explicit migration roster naming which of the importers
+// move where". A roster written once in a header rots the first time a consumer
+// is added, and a rotted roster is worse than none — it reads as a census while
+// describing a tree that no longer exists. So the roster in
+// src/domain/goods.schema.js is MACHINE-READ here and every column is
+// RE-DERIVED from the import graph. The table cannot drift, and it cannot be
+// edited into agreement with a wrong tree: the tree is the denominator.
+//
+// This arm is green in BOTH states of the ST-2 build by construction — before
+// the consumers move (every door reads `direct`) and after (they read
+// `surface`) — because it compares the declaration to the tree rather than to a
+// constant. That is the sovereigntyLightingContract design, applied here.
+
+describe('WEAVE ST-2 — the goods migration roster matches the tree', () => {
+  const VOCABULARY = 'src/domain/goods.schema.js';
+  const HALF_TABLES = new Map([
+    ...GOODS_IDENTITY_TABLES.map((t) => [t, 'identity']),
+    ...GOODS_CHAINS_TABLES.map((t) => [t, 'chains']),
+  ]);
+  const SURFACES = new Map([[GOODS_IDENTITY_SURFACE, 'identity'], [GOODS_CHAINS_SURFACE, 'chains']]);
+  // Namespace members with no surface door — the eslint src/data purity rule
+  // bans a data module from importing the generators layer, and a data → domain
+  // import would invert the layering, so these two are typed by the vocabulary
+  // and imported where they live.
+  const MEMBERS = new Set(['src/domain/resourceSemantics.js', 'src/generators/tradeCommodity.js']);
+  const NAMESPACE = new Set([...HALF_TABLES.keys(), ...SURFACES.keys(), ...MEMBERS, VOCABULARY]);
+
+  const srcFiles = goodsSrcFiles();
+  const sources = new Map(srcFiles.map((rel) => [rel, readFileSync(resolve(process.cwd(), rel), 'utf-8')]));
+  const eagerRel = new Set([...EAGER_FIRST_PAINT_MODULES].map((abs) => relative(process.cwd(), abs)));
+
+  /** The roster the tree ACTUALLY implies: relPath → `${E|l}|${halves}|${door}`. */
+  function derivedRoster() {
+    const out = new Map();
+    for (const [rel, code] of sources) {
+      if (NAMESPACE.has(rel)) continue;
+      const reached = goodsStaticSpecs(code)
+        .map((spec) => goodsResolve(rel, spec))
+        .filter(Boolean);
+      const halves = new Set();
+      let viaSurface = false;
+      let viaTable = false;
+      let viaMember = false;
+      for (const dep of reached) {
+        if (SURFACES.has(dep)) { halves.add(SURFACES.get(dep)); viaSurface = true; }
+        else if (HALF_TABLES.has(dep)) { halves.add(HALF_TABLES.get(dep)); viaTable = true; }
+        else if (MEMBERS.has(dep)) viaMember = true;
+      }
+      if (!halves.size && !viaMember) continue;
+      const halfLabel = halves.size
+        ? ['identity', 'chains'].filter((h) => halves.has(h)).join('+')
+        : 'none';
+      const door = !halves.size ? 'member'
+        : viaSurface && viaTable ? 'mixed'
+          : viaSurface ? 'surface' : 'direct';
+      out.set(rel, `${eagerRel.has(rel) ? 'E' : 'l'}|${halfLabel}|${door}`);
+    }
+    return out;
+  }
+
+  /** The roster the vocabulary module DECLARES. */
+  function declaredRoster(text) {
+    const out = new Map();
+    for (const m of text.matchAll(/^\s*\*\s*R \| ([El]) \| (\S+) +\| (\S+) +\| (\S+)\s*$/gm)) {
+      out.set(m[4], `${m[1]}|${m[2]}|${m[3]}`);
+    }
+    return out;
+  }
+
+  const vocabularyText = readFileSync(resolve(process.cwd(), VOCABULARY), 'utf-8');
+
+  it('the roster reader finds rows at all (anti-vacuity)', () => {
+    // An empty parse would make the exact-set assertion below pass against an
+    // empty tree-derived map only if BOTH were empty — but a silently-empty
+    // declaration with a non-empty tree must fail loudly, and this says so.
+    expect(declaredRoster(vocabularyText).size).toBeGreaterThan(20);
+    expect(derivedRoster().size).toBeGreaterThan(20);
+  });
+
+  it('MUTANT: a row whose door column is wrong is caught', () => {
+    const good = 'R | l | chains          | direct  | src/x.js';
+    const parsed = declaredRoster(` * ${good}\n`);
+    expect(parsed.get('src/x.js')).toBe('l|chains|direct');
+    const mutated = declaredRoster(' * R | E | chains          | surface | src/x.js\n');
+    expect(mutated.get('src/x.js')).not.toBe(parsed.get('src/x.js'));
+  });
+
+  it('every consumer in the tree is declared, with the right eager flag, halves and door', () => {
+    const declared = declaredRoster(vocabularyText);
+    const derived = derivedRoster();
+    const missing = [...derived.keys()].filter((k) => !declared.has(k)).sort();
+    const stale = [...declared.keys()].filter((k) => !derived.has(k)).sort();
+    expect(
+      missing,
+      `goods consumers absent from the roster in ${VOCABULARY} — add a row for each:\n  `
+      + missing.map((k) => `R | ${derived.get(k).split('|')[0]} | ${derived.get(k).split('|')[1]} | ${derived.get(k).split('|')[2]} | ${k}`).join('\n  '),
+    ).toEqual([]);
+    expect(stale, `roster rows naming files that no longer consume the namespace: ${stale.join(', ')}`).toEqual([]);
+    const wrong = [...derived.entries()]
+      .filter(([k, v]) => declared.get(k) !== v)
+      .map(([k, v]) => `${k}: declared ${declared.get(k)}, tree says ${v}`)
+      .sort();
+    expect(wrong, `roster rows that disagree with the import graph:\n  ${wrong.join('\n  ')}`).toEqual([]);
   });
 });

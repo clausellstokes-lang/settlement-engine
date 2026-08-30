@@ -266,6 +266,15 @@ function computeEagerModuleGraph() {
   return seen;
 }
 const EAGER_MODULES = computeEagerModuleGraph();
+// Exported for tests so a first-paint contract can be asserted against THIS
+// derivation rather than a replica of it (the ENGINE_SHARED_DOMAIN_EXCISIONS
+// precedent above). A replica drifts silently the first time this function
+// changes, and a first-paint guard that measures a stale graph is the vacuous
+// green the whole tests/build/ family exists to prevent. Absolute paths, since
+// that is what the walk produces. Vite ignores extra named exports on a config
+// module, so this costs the build nothing.
+// @consumed-by tests/build/vendorPdfLazy.test.js (the goods surface-law arms).
+export const EAGER_FIRST_PAINT_MODULES = EAGER_MODULES;
 
 // ── Map-only lucide icons (split them out of the first-paint vendor-icons) ────
 // lucide-react ships one module per icon (dist/esm/icons/<kebab>.js), but a
