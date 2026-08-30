@@ -430,7 +430,12 @@ export function treasuryActive(rules) {
  *   coinFlows: { taxed: number, upkeep: number, transferredIn: number,
  *            transferredOut: number, shortfall: number } }} TreasuryRecord */
 /** @typedef {{ tier?: unknown, institutions?: unknown, powerStructure?: unknown,
- *   economicState?: { treasury?: unknown } }} TreasurySettlement */
+ *   economicState?: { treasury?: unknown, incomeSources?: unknown, prosperity?: unknown } }}
+ *   TreasurySettlement
+ * ⚠ `incomeSources` and `prosperity` are DECLARED here rather than reached through an
+ * `any` cast at the two sites that read them. They are the taxation mint's only inputs
+ * besides the tier, so a cast would have put this module's whole revenue model behind a
+ * hole the type checker cannot see — and the any-cast ratchet was right to refuse it. */
 
 /** @param {unknown} v @returns {Record<string, unknown>} */
 function asObject(v) {
@@ -691,9 +696,8 @@ function suspensionFor(blockade) {
  * @returns {Record<string, number>} form → share of the ledger, each ≥ 0
  */
 export function taxFormShares(settlement) {
-  const rows = /** @type {Array<Record<string, unknown>>} */ (
-    Array.isArray(/** @type {any} */ (settlement)?.economicState?.incomeSources)
-      ? /** @type {any} */ (settlement).economicState.incomeSources : []);
+  const declared = settlement?.economicState?.incomeSources;
+  const rows = /** @type {Array<Record<string, unknown>>} */ (Array.isArray(declared) ? declared : []);
   /** @type {Record<string, number>} */
   const byForm = {};
   let total = 0;
@@ -715,7 +719,7 @@ export function taxFormShares(settlement) {
  *  @param {TreasurySettlement | null | undefined} settlement @returns {number} */
 function prosperityScalarOf(settlement) {
   const rank = prosperityRank(/** @type {Parameters<typeof prosperityRank>[0]} */ (
-    /** @type {any} */ (settlement)?.economicState?.prosperity));
+    settlement?.economicState?.prosperity));
   const scalars = TREASURY_TUNING.PROSPERITY_SCALARS;
   return rank >= 0 && rank < scalars.length ? scalars[rank] : TREASURY_TUNING.PROSPERITY_SCALAR_DEFAULT;
 }

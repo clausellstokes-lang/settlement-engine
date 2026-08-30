@@ -165,14 +165,22 @@ describe('the covering array and its constraint manifest', () => {
     expect(census.governed.length).toBe(25);
     expect(census.ungoverned.length).toBe(32);
     // §489: MF-UC4's `undercityHighWaterEnabled` — the sixth flag-bill surface, paid at the landing act.
-    expect(census.virtual.length).toBe(25);
+    // ⭐ AND 25 → 26 AT W-COIN-1a (2026-08-30), which mints `treasuryEnabled` with its
+    // certification row in one commit. THE CLOSURE IS THE PROOF, exactly as it was at EP-1
+    // and WF-1a: `union` moves 82 → 83 in lockstep while the governed (25) and ungoverned
+    // (32) arms do NOT move at all — which is this arithmetic confirming the key really is
+    // VIRTUAL, absent from DEFAULT_SIMULATION_RULES and from every preset spread. A key
+    // mis-declared as virtual would have moved one of those two arms and this line would
+    // have said so. The `union − governed` figure rises with it by construction (57 → 58):
+    // a virtual key is never normalizer-governed.
+    expect(census.virtual.length).toBe(26);
     expect(census.overlap).toEqual([]);
-    expect(census.union.length).toBe(82);
+    expect(census.union.length).toBe(83);
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
     // rises with the virtual arm by construction: a virtual key is never governed.
-    expect(census.union.length - census.governed.length).toBe(57);
+    expect(census.union.length - census.governed.length).toBe(58);
     expect(census.nonBoolean.length).toBe(13);
   });
 
