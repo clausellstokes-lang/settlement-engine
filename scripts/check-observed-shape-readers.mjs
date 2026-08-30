@@ -1519,6 +1519,261 @@ export function sentinelFailures(sentinel, frozen) {
 }
 
 /** Compare a fresh scan against the frozen inventory. */
+/**
+ * ⭐⭐ THE FOURTH DOOR — `VIRTUAL_DORMANT_WRITERS` (TE-OSHAPE-1, chair ruling ODQ §768.3).
+ *
+ * ── THE CLASS THIS DOOR EXISTS FOR ──────────────────────────────────────────
+ * The three doors above admit reads whose writer the GENERATION corpus never RUNS: a
+ * user action, a save-time writer, a store-layer writer, a declared alias. This door
+ * admits a fourth, structurally different case that none of them fit and that the
+ * instrument previously had no honest answer for at all:
+ *
+ *   A key written ONLY by a pulse writer standing behind a VIRTUAL simulation-rules
+ *   flag — a flag that appears in neither DEFAULT_SIMULATION_RULES nor any preset
+ *   spread, and which the corpus therefore never lights.
+ *
+ * The writer is real, it is in the scanned tree, and it writes the key on every lit
+ * tick. But no corpus run can observe it, because lighting the flag is a PRODUCT
+ * decision the chair has ruled on separately, so the read reads as "a key no writer
+ * produces" forever. That verdict is FALSE, and this door is what proves it false —
+ * live, on every scan, rather than by argument.
+ *
+ * ── WHY THIS DOOR DROPS RATHER THAN BANKS ───────────────────────────────────
+ * M8/M9 BANKS its rows: they stay in the inventory as a ceiling. That cure is
+ * unavailable here and the reason is mechanical, not stylistic — `--write` "may only
+ * lower or delete ordinary debt; never raise a number, never add a file, never add an
+ * identity", so a NEW virtual-dormant row can never acquire the ceiling that banking
+ * requires. The explained-writer rows got theirs through governed schema migrations;
+ * a door that needed a schema migration per subsystem would not be a door.
+ * So a VERIFIED row's findings are CLEARED, exactly as M11 and M12 clear a read whose
+ * verdict is provably wrong. The registry is the proof, and it is re-executed every run.
+ *
+ * ── AN UNVERIFIABLE ROW IS A LIE, NOT AN EXEMPTION ──────────────────────────
+ * `assertVirtualDormantWriterEvidence` CONVICTS. It is not a warning and it does not
+ * degrade to "admit nothing": a row whose writer no longer writes the key, whose flag
+ * gate is gone or was never spelled by name, or whose flag has quietly stopped being
+ * virtual (it now sits in the defaults or a preset, so the corpus DOES light it and
+ * the read should be judged normally) makes the whole scan throw. The failure mode this
+ * refuses is the one every exemption list eventually grows: a row that stopped being
+ * true, still silently admitting a read nobody re-checked.
+ *
+ * @type {ReadonlyArray<{ identity: string, writer: string, key: string, flag: string,
+ *   lighting: string, charter: string }>}
+ */
+export const VIRTUAL_DORMANT_WRITERS = Object.freeze([
+  Object.freeze({
+    identity: 'treasury on economicState',
+    writer: 'src/domain/worldPulse/treasury.js',
+    key: 'treasury',
+    flag: 'treasuryEnabled',
+    lighting: 'A1.21 as answered by Q10 (ODQ 763.2): lighting belongs to the PRESET TABLE, and'
+      + ' the key ships lit in dramatic_campaign / living_realm / full_simulation ONLY AFTER'
+      + " W-COIN-2's band chip lands, so a lit world is never glance-blind about a stock it"
+      + ' cannot see. Until that tip the flag is dark on every owner-presented surface, which is'
+      + ' precisely why no corpus run can observe the record: the treasury opens at the first LIT'
+      + ' tick and a dark world carries no key at all (a key is a byte). The writer is'
+      + ' advanceTreasury, the ONE pulse writer, and it reads the flag through treasuryActive'
+      + ' before it reads anything else.',
+    charter: 'ODQ 768.3 (TE-OSHAPE-1) enrolling the row; ODQ 763.2-Q10 ruling the lighting',
+  }),
+]);
+
+/** Structural law for the fourth door's registry. Runs at module load. */
+export function assertVirtualDormantWriters(entries = VIRTUAL_DORMANT_WRITERS) {
+  if (!Array.isArray(entries)) {
+    throw new Error('observed-shape VIRTUAL_DORMANT_WRITERS must be an array of declared entries');
+  }
+  const guarded = new Set(CLASS_A_PROTECTED_IDENTITIES);
+  const explained = new Set(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => identity));
+  const seen = new Set();
+  for (const entry of entries) {
+    const fields = Object.keys(entry || {}).sort().join(',');
+    if (fields !== 'charter,flag,identity,key,lighting,writer') {
+      throw new Error(`observed-shape virtual-dormant writer has noncanonical fields: ${JSON.stringify(entry)}`);
+    }
+    if (!/^\S+ on \S+$/.test(entry.identity)) {
+      throw new Error(`observed-shape virtual-dormant writer identity must be "<key> on <shape>"; received ${JSON.stringify(entry.identity)}`);
+    }
+    if (seen.has(entry.identity)) {
+      throw new Error(`observed-shape virtual-dormant writer repeats ${JSON.stringify(entry.identity)}`);
+    }
+    seen.add(entry.identity);
+    // TWO DOORS ON ONE IDENTITY is how a deleted door hides behind a surviving one —
+    // the estate's own law, and it applies between doors as much as within one.
+    if (explained.has(entry.identity)) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} is ALSO an explained-writer`
+        + ' exemption. One identity, one door: a second door would let a deleted first pass unnoticed.');
+    }
+    if (entry.identity.slice(0, entry.identity.indexOf(' on ')) !== entry.key) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} does not name key ${JSON.stringify(entry.key)}`);
+    }
+    if (!/^src\//.test(entry.writer) || !/\.(js|jsx)$/.test(entry.writer)) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} must name a repository-relative src/ writer; received ${JSON.stringify(entry.writer)}`);
+    }
+    if (!/^[a-z][A-Za-z0-9]*Enabled$/.test(entry.flag)) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} must name a "<x>Enabled" simulation-rules flag; received ${JSON.stringify(entry.flag)}`);
+    }
+    if (typeof entry.lighting !== 'string' || entry.lighting.trim().length < 80) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} lacks a substantive LIGHTING CONDITION —`
+        + ' the row must say who lights the flag and when, because that is the whole reason the corpus cannot observe the write');
+    }
+    if (typeof entry.charter !== 'string' || !/\d/.test(entry.charter)) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} must cite the minting charter by number`);
+    }
+    if (guarded.has(entry.identity)) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} is a CR-OSR-FREEZE-3-R2 class-(a)`
+        + ' TRUE POSITIVE. A row banked as a real defect cannot be admitted as a dormant writer; re-triage it instead.');
+    }
+  }
+  return entries;
+}
+assertVirtualDormantWriters();
+
+/**
+ * The manifest text that decides whether a flag is VIRTUAL. Read as SOURCE rather than
+ * imported: this script must not pull a domain module's import graph in to answer a
+ * text question, and the estate's own flag census is itself a source scan.
+ */
+export const VIRTUAL_FLAG_MANIFEST = 'src/domain/worldPulse/simulationRules.js';
+
+/**
+ * Blank comment bodies and string/template CONTENTS while preserving every byte offset
+ * and every newline, so a regex asks "is this EXECUTED?" rather than "is this written
+ * down anywhere?".
+ *
+ * ⚠ IT IS USED FOR THE GATE CLAUSES ONLY, DELIBERATELY. The clause-1 write probe stays
+ * on RAW bytes because one of its four measured spellings is `token-in-string-literal` —
+ * routing that through a blanker would erase the very evidence it looks for. The
+ * asymmetry is the ruinFilterRoster walker's, for the same reason it gives: the two
+ * questions are different questions.
+ */
+function executedSourceOf(source) {
+  return String(source)
+    .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
+    .replace(/\/\/[^\n]*/g, (m) => ' '.repeat(m.length))
+    .replace(/(['"`])(?:\\.|(?!\1)[^\\])*\1/g, (m) => m[0] + m.slice(1, -1).replace(/[^\n]/g, ' ') + m[0]);
+}
+
+/**
+ * ⭐⭐ THE CONVICTION ARM, EXECUTED. The declaration above is an ARGUMENT; this is the
+ * part that cannot rot. Four things must hold for every row, and each is the negation
+ * of a way the row could quietly become a lie:
+ *   1. the named writer still WRITES the key (the M8 gate-0 probe, four spellings);
+ *   2. the named writer still GATES on the flag, BY NAME, with the strict `=== true`
+ *      idiom — a computed `.every()` conjunction attributes to no key and would leave
+ *      the row claiming a gate no reader can find;
+ *   3. the flag is still declared in ENGINE_GATED_VIRTUAL_RULE_KEYS — the estate's own
+ *      manifest of keys that are gated but appear in NO defaults and NO preset;
+ *   4. the flag is still absent from DEFAULT_SIMULATION_RULES. If a preset ever lights
+ *      it, the corpus WILL observe the write and the read must be judged normally — the
+ *      row has to die at that moment, not outlive its own premise.
+ * Any failure THROWS, naming the row and the clause. An unverifiable row is a lie.
+ */
+export function assertVirtualDormantWriterEvidence(
+  entries = VIRTUAL_DORMANT_WRITERS,
+  { root = ROOT, readSource = (path) => readFileSync(join(root, path), 'utf8') } = {},
+) {
+  const evidence = [];
+  for (const entry of entries) {
+    let writerSource;
+    try {
+      writerSource = readSource(entry.writer);
+    } catch {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} names a writer that cannot be read: ${entry.writer}`);
+    }
+    const spellings = writeShapesIn(writerSource, entry.key);
+    if (!spellings.length) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} is UNVERIFIABLE (clause 1):`
+        + ` ${entry.writer} no longer writes ${JSON.stringify(entry.key)} in any of the ${WRITE_SHAPE_SPELLINGS.length} measured`
+        + ` write shapes (${WRITE_SHAPE_SPELLINGS.join(', ')}). An unverifiable row is a lie, not an exemption.`);
+    }
+    const gated = new RegExp(
+      `\\b(?:rules|simulationRules)\\s*\\)?\\s*\\??\\.\\s*${escapeForRegExp(entry.flag)}\\s*===\\s*true`,
+    ).test(executedSourceOf(writerSource));
+    if (!gated) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} is UNVERIFIABLE (clause 2):`
+        + ` ${entry.writer} carries no by-name strict \`${entry.flag} === true\` gate. A row may not claim a`
+        + ' gate no reader can find; spell it by name or retire the row.');
+    }
+    let manifestSource;
+    try {
+      manifestSource = readSource(VIRTUAL_FLAG_MANIFEST);
+    } catch {
+      throw new Error(`observed-shape virtual-dormant writer verification cannot read ${VIRTUAL_FLAG_MANIFEST}`);
+    }
+    const manifestBody = manifestSource.slice(manifestSource.indexOf('ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze(['));
+    const declaredVirtual = manifestSource.includes('ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([')
+      && new RegExp(`'${escapeForRegExp(entry.flag)}'`).test(manifestBody.slice(0, manifestBody.indexOf('\n]);') + 4));
+    if (!declaredVirtual) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} is UNVERIFIABLE (clause 3):`
+        + ` ${entry.flag} is not declared in ENGINE_GATED_VIRTUAL_RULE_KEYS. Only a key the estate itself`
+        + ' calls engine-gated-and-virtual can claim that the corpus never lights it.');
+    }
+    const defaults = manifestSource.slice(
+      manifestSource.indexOf('DEFAULT_SIMULATION_RULES'),
+      manifestSource.indexOf('ENGINE_GATED_VIRTUAL_RULE_KEYS'),
+    );
+    if (new RegExp(`(?<![.\\w])${escapeForRegExp(entry.flag)}\\s*:`).test(executedSourceOf(defaults))) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} is UNVERIFIABLE (clause 4):`
+        + ` ${entry.flag} is now declared in DEFAULT_SIMULATION_RULES, so the corpus DOES light it and this`
+        + ' read must be judged normally. Retire the row rather than outliving its own premise.');
+    }
+    evidence.push({ identity: entry.identity, writer: entry.writer, flag: entry.flag, spellings });
+  }
+  return evidence;
+}
+
+/**
+ * M13 — clear the reads a VERIFIED virtual-dormant writer explains. Runs LAST, after
+ * the explained-writer bank, and only in the baseline scan mode. The evidence assert
+ * runs FIRST at every call site: a stale row must red the scan, never quietly clear
+ * nothing (which would read as a green while the door silently stopped working).
+ */
+export function applyVirtualDormantWriterFilter({
+  scanMode, scan, entries = VIRTUAL_DORMANT_WRITERS,
+}) {
+  if (scanMode !== BASELINE_SCAN_MODE) {
+    return { ...scan, virtualDormantWriters: { applied: false, cleared: 0, clearedIdentities: [] } };
+  }
+  assertVirtualDormantWriters(entries);
+  const admitted = new Map(entries.map((entry) => [entry.identity, entry]));
+  const admittedKeys = new Set(entries.map((entry) => entry.key));
+  const cleared = new Set();
+  let clearedCount = 0;
+  const findings = scan.findings.filter((finding) => {
+    if (!admittedKeys.has(finding.key)) return true;
+    const identity = identityOf(finding);
+    if (!admitted.has(identity)) return true;
+    cleared.add(identity);
+    clearedCount += 1;
+    return false;
+  });
+  const clearedIdentities = [...cleared].sort();
+  assertClassADebtPreserved(clearedIdentities, {
+    instrument: 'observed-shape virtual-dormant writer door (TE-OSHAPE-1 / M13)',
+    remedy: ' A row the chair banked as a REAL defect cannot be dismissed as a dormant writer.'
+      + ' The scan is refused until the chair re-triages the row or the registry is narrowed.',
+  });
+  return {
+    ...scan,
+    findings,
+    stats: scan.stats,
+    virtualDormantWriters: {
+      applied: true, cleared: clearedCount, clearedIdentities,
+    },
+  };
+}
+
+/** One line for the console, in the explained-writer notice's voice. */
+export function virtualDormantWriterNotice(virtualDormantWriters, entries = VIRTUAL_DORMANT_WRITERS) {
+  if (!virtualDormantWriters?.applied) {
+    return `observed-shape virtual-dormant writer door: NOT APPLIED (${entries.length} declared row(s)).`;
+  }
+  return `observed-shape virtual-dormant writer door: ${entries.length} declared row(s) whose pulse writer stands`
+    + ` behind a VIRTUAL flag the corpus never lights; cleared ${virtualDormantWriters.cleared} read(s)`
+    + ` across ${virtualDormantWriters.clearedIdentities.length} of them on this scan.`;
+}
+
 export function compare(findings, baseline) {
   const inv = inventoryOf(findings);
   const violations = [];
@@ -1935,6 +2190,93 @@ function unscannedInputDigestOf(snapshot) {
 }
 
 /**
+ * ⭐⭐ THE PROVENANCE DRIFT CLASSIFIER (TE-OSHAPE-1, chair ruling ODQ §768.3).
+ *
+ * ── THE DEFECT THIS CURES, AND WHY IT IS THE SECOND SIGHTING ────────────────
+ * The provenance gate below used to refuse a `--write` re-freeze whenever EITHER the
+ * detector digest or the unscanned-execution-input digest moved. Both digests cover
+ * files that change for reasons having NOTHING to do with how the detector decides:
+ *
+ *   • `unscannedInputDigest` is, BY CONSTRUCTION, the subject set minus the scan set —
+ *     and since `isObservedShapeScanPath` excludes `.generated.js` while
+ *     `isObservedShapeSubjectPath` admits `.js|.jsx|.json`, that difference is almost
+ *     exactly "every GENERATED artifact and every data JSON under src/". That is the one
+ *     class in the repository guaranteed to change routinely and lawfully.
+ *   • `detectorTree` carries one TEST FIXTURE (`tests/fixtures/spatialPackFixtures.js`)
+ *     among ten genuine tool sources. A fixture is an INPUT the corpus reads, not a rule
+ *     the detector decides by.
+ *
+ * So any lane that regenerated the compendium, re-minted the dossier prose, or touched
+ * the fixture PERMANENTLY BRICKED `--write` until somebody performed a governed schema
+ * migration. That is not hypothetical: the schema 8→9 migration's own header records it
+ * — "the unscanned input digest MOVED — recorded for review by named path instead of
+ * refused, because refusing it would leave the instrument permanently dark." It was
+ * handled once, by hand, and the HABITAT WAS LEFT STANDING, so the instrument went dark
+ * again at schema 10 (four generated files and the fixture, measured at a pristine base).
+ * This is the habitat removal.
+ *
+ * ── WHAT IS PRESERVED, EXACTLY ──────────────────────────────────────────────
+ * A change to a DETECTOR SOURCE still refuses `--write` and still demands a governed
+ * migration. That is the guarantee worth having: if the detector decides differently,
+ * frozen numbers mean something different, and an ordinary re-freeze would launder a
+ * detector change into a data change. `package.json` and `package-lock.json` stay on the
+ * detector side deliberately — a dependency bump can move the parser, and the estate
+ * already treats any package.json byte as a mint trigger.
+ *
+ * A change to an INPUT is absorbed by `--write`, which re-derives inventory, total and
+ * identities together from ONE scan and REFUSES anything that is not a shrink. Those
+ * laws are untouched, and they are what make absorption safe: a moved generated artifact
+ * can move the numbers, but it cannot add an identity, raise a ceiling, or add a file.
+ *
+ * @returns {{ detectorSources: string[], inputs: string[] }} moved paths, classified
+ */
+export function provenanceDriftOf(baseline, snapshot) {
+  const recorded = (name) => new Map(
+    (baseline?.manifests?.[name]?.entries || []).map((entry) => [entry.path, entry.sha256]),
+  );
+  const detectorRecorded = recorded('detectorTree');
+  const sourceRecorded = recorded('sourceTree');
+  const scannedNow = new Set(snapshot.scanTree.entries.map((entry) => entry.path));
+  const scannedThen = new Set((baseline?.manifests?.scanTree?.entries || []).map((entry) => entry.path));
+  const detectorSources = [];
+  const inputs = [];
+  const note = (path) => (isDetectorSourcePath(path) ? detectorSources : inputs).push(path);
+  for (const entry of snapshot.detectorTree.entries) {
+    if (detectorRecorded.get(entry.path) !== entry.sha256) note(entry.path);
+  }
+  for (const path of detectorRecorded.keys()) {
+    if (!snapshot.detectorTree.entries.some((entry) => entry.path === path)) note(path);
+  }
+  // The unscanned half of the subject tree: present in `sourceTree`, absent from `scanTree`.
+  for (const entry of snapshot.sourceTree.entries) {
+    if (scannedNow.has(entry.path)) continue;
+    if (sourceRecorded.get(entry.path) !== entry.sha256) inputs.push(entry.path);
+  }
+  for (const [path] of sourceRecorded) {
+    if (scannedThen.has(path)) continue;
+    if (!snapshot.sourceTree.entries.some((entry) => entry.path === path)) inputs.push(path);
+  }
+  return {
+    detectorSources: [...new Set(detectorSources)].sort(),
+    inputs: [...new Set(inputs)].sort(),
+  };
+}
+
+/**
+ * A detector SOURCE decides how the scan reads the tree; an INPUT is merely something it
+ * reads. Everything in `scannerToolFiles` is a source EXCEPT the corpus fixture, which is
+ * data. Stated as a TOTAL positive predicate over the declared tool list so a file that
+ * is neither cannot fail open into the absorbable half.
+ */
+export const DETECTOR_INPUT_PATHS = Object.freeze(['tests/fixtures/spatialPackFixtures.js']);
+
+export function isDetectorSourcePath(path) {
+  const rel = String(path).split('\\').join('/');
+  if (DETECTOR_INPUT_PATHS.includes(rel)) return false;
+  return scannerToolFiles().some((file) => relative(ROOT, file).split('\\').join('/') === rel);
+}
+
+/**
  * ⚠⚠ THE GENESIS CONDITION IS "THE PREDECESSOR IS NOT THIS SCHEMA", NOT A NAMED
  * PREDECESSOR NUMBER — and the difference is the difference between a mint that
  * can add a declaration and one that cannot.
@@ -2180,6 +2522,7 @@ export async function run(argv = [], overrides = {}) {
     dirtyInputsFor,
     assertHealthyScanProvenance,
     assertExplainedWriterEvidence: () => assertExplainedWriterEvidence(),
+    assertVirtualDormantWriterEvidence: () => assertVirtualDormantWriterEvidence(),
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
@@ -2258,10 +2601,40 @@ export async function run(argv = [], overrides = {}) {
   if (baseline?.schema === BASELINE_SCHEMA
     && (baseline.scannerProvenance.detectorDigest !== before.detectorTree.digest
       || baseline.scannerProvenance.unscannedInputDigest !== unscannedInputDigestOf(before))) {
-    const message = `observed-shape detector or unscanned execution input changed since the schema-${BASELINE_SCHEMA} instrument was governed; an ordinary gate/write cannot migrate the instrument`;
-    if (command.write) throw new Error(message);
-    console.error(message);
-    return 1;
+    // TE-OSHAPE-1 — CLASSIFY THE DRIFT BEFORE REFUSING IT. See `provenanceDriftOf`: a
+    // moved DETECTOR SOURCE still demands a governed migration, because frozen numbers
+    // taken under one detector do not mean the same thing under another. A moved INPUT —
+    // a regenerated artifact, a data JSON, the corpus fixture — is exactly what the
+    // shrink-only `--write` re-freeze exists to absorb, and refusing it is what darkened
+    // this instrument twice.
+    const drift = provenanceDriftOf(baseline, before);
+    // ⛔ FAIL CLOSED ON AN UNEXPLAINED DRIFT. The absorbable case is not "no detector
+    // source moved" — it is "the classifier ACCOUNTED for the movement, and everything it
+    // named was an input". A digest that moved while no path explains it is a drift this
+    // classifier does not understand, and "I cannot explain this" is not a licence to
+    // re-freeze; it takes the same governed migration a detector change does. The first
+    // cut of this branch fell open there, and the sentinel's growth case caught it.
+    const explainedPaths = drift.detectorSources.length + drift.inputs.length;
+    if (drift.detectorSources.length || explainedPaths === 0) {
+      const message = drift.detectorSources.length
+        ? `observed-shape DETECTOR SOURCE changed since the schema-${BASELINE_SCHEMA} instrument was governed`
+          + ` (${drift.detectorSources.join(', ')}); an ordinary gate/write cannot migrate the instrument.`
+          + ' Build and review the governed migration bundle instead.'
+        : `observed-shape provenance digests moved since the schema-${BASELINE_SCHEMA} instrument was governed`
+          + ' but NO detector or input path accounts for the movement; an ordinary gate/write cannot'
+          + ' migrate an instrument whose drift it cannot explain.';
+      if (command.write) throw new Error(message);
+      console.error(message);
+      return 1;
+    }
+    // Inputs only. The gate REPORTS by named path (never silently), and `--write` is
+    // permitted to re-derive and re-record. Every other law still binds: one scan,
+    // shrink-only, no added identity, no raised ceiling, no added file.
+    console.error(`observed-shape execution INPUT changed since the last re-freeze`
+      + ` (${drift.inputs.length} path(s): ${drift.inputs.slice(0, 8).join(', ')}${drift.inputs.length > 8 ? ', …' : ''}).`
+      + ' These are generated/data inputs, not detector sources, so the shrink-only'
+      + ' --write re-freeze may absorb them; the instrument is NOT darkened by them.');
+    if (!command.write) return 1;
   }
 
   let outputPlan = null;
@@ -2391,14 +2764,28 @@ export async function run(argv = [], overrides = {}) {
   // `assertExplainedWriterEvidence` runs FIRST: a stale entry must red the scan,
   // never quietly exempt nothing.
   const explainedWriterEvidence = runtime.assertExplainedWriterEvidence();
-  const scan = applyExplainedWriterFilter({
+  const explainedScan = applyExplainedWriterFilter({
     scanMode: command.scanMode, scan: languageScan, evidence: explainedWriterEvidence,
   });
   emitProgress?.({
     phase: 'explained-writer-filter-complete',
     scanMode: command.scanMode,
+    findings: explainedScan.findings.length,
+    banked: explainedScan.explainedWriters.banked,
+  });
+  // ⭐ M13 (TE-OSHAPE-1) — the VIRTUAL-DORMANT WRITER door, last of the chain because it
+  // is the narrowest: it clears only reads whose writer is proven, live, to stand behind
+  // a flag the corpus never lights. `assertVirtualDormantWriterEvidence` runs FIRST and
+  // CONVICTS — an unverifiable row throws the scan rather than quietly clearing nothing.
+  runtime.assertVirtualDormantWriterEvidence();
+  const scan = applyVirtualDormantWriterFilter({
+    scanMode: command.scanMode, scan: explainedScan,
+  });
+  emitProgress?.({
+    phase: 'virtual-dormant-writer-filter-complete',
+    scanMode: command.scanMode,
     findings: scan.findings.length,
-    banked: scan.explainedWriters.banked,
+    cleared: scan.virtualDormantWriters.cleared,
   });
   const after = inputSnapshot(runtime);
   assertStableSnapshot(before, after, { requireClean: command.mode === 'scan-only' || command.write });

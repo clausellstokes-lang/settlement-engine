@@ -505,6 +505,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'dom-global-filter-complete',
       'language-surface-filter-complete',
       'explained-writer-filter-complete',
+      // M13 (TE-OSHAPE-1) — the virtual-dormant writer door. It runs LAST in the declared
+      // post-scan chain, so it reports last here too; the phase roster is an exact ordered
+      // equality precisely so a stage cannot join the pipeline without saying so.
+      'virtual-dormant-writer-filter-complete',
     ]);
     expect(events).toEqual(expect.arrayContaining([
       expect.objectContaining({
@@ -1760,13 +1764,56 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     await expect(run(['--write'], swap.overrides)).rejects.toThrow(/identity swap/);
     expect(swap.baselineWrites).toEqual([]);
 
+    // ── PROVENANCE DRIFT, NOW CLASSIFIED (TE-OSHAPE-1) ──────────────────────────────
+    // This arm used to pin ONE message for every drift. The gate now distinguishes three
+    // verdicts, and the distinction is the whole repair: refusing an INPUT change is what
+    // darkened this instrument twice (schema 8→9 recorded it, schema 10 repeated it), while
+    // refusing a DETECTOR change is the guarantee worth keeping. All three are pinned, so
+    // neither half can be quietly widened into the other.
+    //
+    // (1) UNEXPLAINED — the digest moved and no path accounts for it. FAIL CLOSED. This
+    // is the case the synthetic runtime produces (a hand-set digest over unchanged
+    // manifests), and it is deliberately still a refusal: "I cannot explain this drift"
+    // is not a licence to re-freeze. ⚠ The first cut of the repair fell OPEN here and
+    // this very case is what caught it.
     const drift = maintenanceRuntime({ current: [held], frozen: [held] });
     drift.baseline.scannerProvenance.detectorDigest = 'f'.repeat(64);
     drift.overrides.validateBaseline = () => drift.baseline;
     drift.overrides.assertExplainedWriterRowTags = () => drift.baseline;
-    await expect(run(['--write'], drift.overrides)).rejects.toThrow(/detector or unscanned/);
+    await expect(run(['--write'], drift.overrides)).rejects.toThrow(/NO detector or input path accounts/);
     await expect(run([], drift.overrides)).resolves.toBe(1);
     expect(drift.baselineWrites).toEqual([]);
+
+    // (2) DETECTOR SOURCE moved — still a hard refusal, naming the file.
+    const detectorDrift = maintenanceRuntime({ current: [held], frozen: [held] });
+    detectorDrift.baseline.scannerProvenance.detectorDigest = 'f'.repeat(64);
+    // `package-lock.json` is a DECLARED tool-list file, so a moved sha on it is a
+    // detector-source change — the §349.2 mint-trigger reading, kept.
+    detectorDrift.baseline.manifests.detectorTree.entries = detectorDrift.baseline
+      .manifests.detectorTree.entries.map((entry) => (entry.path === 'package-lock.json'
+        ? { ...entry, sha256: 'e'.repeat(64) } : entry));
+    detectorDrift.overrides.validateBaseline = () => detectorDrift.baseline;
+    detectorDrift.overrides.assertExplainedWriterRowTags = () => detectorDrift.baseline;
+    await expect(run(['--write'], detectorDrift.overrides))
+      .rejects.toThrow(/DETECTOR SOURCE changed .*package-lock\.json/);
+    expect(detectorDrift.baselineWrites).toEqual([]);
+
+    // (3) INPUT ONLY — the corpus fixture moved and nothing else. THIS ONE IS ABSORBED,
+    // and that is the repair: a shrink-only re-freeze proceeds instead of the instrument
+    // going permanently dark until somebody runs a governed schema migration.
+    const inputDrift = maintenanceRuntime({ current: [held], frozen: [held] });
+    inputDrift.baseline.scannerProvenance.detectorDigest = 'f'.repeat(64);
+    // The corpus FIXTURE recorded in the baseline but absent from the live tool tree:
+    // a moved input and nothing else. This is the real-world shape exactly — measured at
+    // the pristine base, the fixture was 1 of 11 detector-tree entries stale.
+    inputDrift.baseline.manifests.detectorTree.entries = [
+      ...inputDrift.baseline.manifests.detectorTree.entries,
+      { path: 'tests/fixtures/spatialPackFixtures.js', sha256: 'e'.repeat(64) },
+    ];
+    inputDrift.overrides.validateBaseline = () => inputDrift.baseline;
+    inputDrift.overrides.assertExplainedWriterRowTags = () => inputDrift.baseline;
+    await expect(run(['--write'], inputDrift.overrides)).resolves.toBe(0);
+    expect(inputDrift.baselineWrites).toHaveLength(1);
   });
 
   test('artifact validation derives inventory from findings and binds detector SHA to contents', () => {

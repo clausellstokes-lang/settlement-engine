@@ -113,6 +113,7 @@
  * synthetically, and against the LIVE rulingPower.js findings at constant count.
  */
 import { readFileSync, existsSync, writeFileSync, mkdtempSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -127,7 +128,13 @@ import { scanReaders as scanLegacyReaders } from '../../scripts/lib/legacy-reade
 import {
   applyDomGlobalReceiverFilter, applyExplainedWriterFilter, applyLanguageSurfaceFilter,
   applyShapeFamilyFilter,
+  applyVirtualDormantWriterFilter,
   assertExplainedWriterRowTags,
+  assertVirtualDormantWriterEvidence, assertVirtualDormantWriters,
+  VIRTUAL_DORMANT_WRITERS, virtualDormantWriterNotice, VIRTUAL_FLAG_MANIFEST,
+  provenanceDriftOf, isDetectorSourcePath, DETECTOR_INPUT_PATHS,
+  scannerToolFiles as scannerToolFilesOf, subjectFiles as subjectFilesOf,
+  sourceFiles as sourceFilesOf,
   BASELINE_SCAN_MODE, BASELINE_SCHEMA, cohortOf, compare, EXACT_SCAN_EXCLUDED_SCOPE,
   EXPLAINED_WRITER_EXEMPTIONS,
   identityOf, inventoryOf, isExactScanExcludedReadPath, MIN_ROWS, ORIGIN_MIN_ROWS,
@@ -135,6 +142,14 @@ import {
 } from '../../scripts/check-observed-shape-readers.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+
+/** Repository-relative, forward-slash — the spelling every manifest entry uses. */
+const relativeToRoot = (file) => file.slice(ROOT.length + 1).split('\\').join('/');
+/** The live `{path, sha256}` manifest rows for a file list, as the snapshot builds them. */
+const liveManifestEntries = (files) => files.map((file) => ({
+  path: relativeToRoot(file),
+  sha256: createHash('sha256').update(readFileSync(file)).digest('hex'),
+}));
 const baseline = JSON.parse(readFileSync(join(ROOT, 'scripts/.observed-shape-readers-baseline.json'), 'utf8'));
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 
@@ -235,8 +250,12 @@ function scanEstateWith(extraFiles = []) {
   const language = applyLanguageSurfaceFilter({
     scanMode: BASELINE_SCAN_MODE, corpus, scan: domGlobals,
   });
+  // ⭐ M13 (TE-OSHAPE-1) — the fourth door. The walker's composition must match the
+  // gate's chain or it measures a different instrument, which is why this stage is added
+  // here rather than only in the script.
+  const explained = applyExplainedWriterFilter({ scanMode: BASELINE_SCAN_MODE, scan: language });
   return {
-    ...applyExplainedWriterFilter({ scanMode: BASELINE_SCAN_MODE, scan: language }),
+    ...applyVirtualDormantWriterFilter({ scanMode: BASELINE_SCAN_MODE, scan: explained }),
     raw,
   };
 }
@@ -584,15 +603,288 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    * triaged rather than silently re-suppressed. The eradication is a won
    * position, not a ceiling, and it may not be spent.
    */
+  // ── M13 · THE FOURTH DOOR: VIRTUAL-DORMANT WRITERS (TE-OSHAPE-1, ODQ §768.3) ──────
+  //
+  // The door admits a read whose writer is real, is in the scanned tree, and writes the
+  // key on every lit tick — but stands behind a VIRTUAL simulation-rules flag the corpus
+  // never lights, so no corpus run can ever observe the write. Left unadmitted, the
+  // instrument calls such a read a reader-with-no-writer forever, which is FALSE.
+  //
+  // ⛔ THE WHOLE VALUE OF THIS DOOR IS THAT IT CONVICTS. An exemption list that only
+  // ever admits becomes a list of claims nobody re-checks; this one re-executes every
+  // clause on every scan and THROWS when one stops holding. The arms below drive that
+  // conviction with PLANTED rows rather than describing it, because a conviction arm
+  // that has never been seen to fire is indistinguishable from one that cannot.
+  describe('M13 — the virtual-dormant writer door convicts what it cannot verify', () => {
+    const REAL = VIRTUAL_DORMANT_WRITERS[0];
+
+    test('the registry is structurally lawful and its rows are all live-verified', () => {
+      expect(assertVirtualDormantWriters()).toBe(VIRTUAL_DORMANT_WRITERS);
+      const evidence = assertVirtualDormantWriterEvidence();
+      expect(evidence).toHaveLength(VIRTUAL_DORMANT_WRITERS.length);
+      for (const row of evidence) {
+        expect(row.spellings.length, `${row.identity} verified against no write spelling`).toBeGreaterThan(0);
+      }
+      // The first row, by name, so a silent re-point is visible in the diff.
+      expect(REAL.identity).toBe('treasury on economicState');
+      expect(REAL.writer).toBe('src/domain/worldPulse/treasury.js');
+      expect(REAL.flag).toBe('treasuryEnabled');
+      expect(REAL.charter).toMatch(/768\.3/);
+      expect(REAL.charter).toMatch(/763\.2/);
+    });
+
+    test('CLAUSE 1 CONVICTS: a writer that no longer writes the key', () => {
+      // PLANTED CONTROL. The writer source is replaced with one that keeps the gate but
+      // drops every write of the key — the exact shape of a refactor that moves a record
+      // elsewhere and leaves the registry row behind, still claiming to explain a read.
+      const gateOnly = 'export function f(rules) { return rules.treasuryEnabled === true; }';
+      expect(() => assertVirtualDormantWriterEvidence([REAL], {
+        readSource: (path) => (path === REAL.writer ? gateOnly : readFileSync(join(ROOT, path), 'utf8')),
+      })).toThrow(/UNVERIFIABLE \(clause 1\)/);
+    });
+
+    test('CLAUSE 2 CONVICTS: a gate that is not spelled by name, including one in prose', () => {
+      const writes = `export function f(s) { return { ...s, economicState: { treasury: { coin: 0 } } }; }`;
+      // (a) no gate at all.
+      expect(() => assertVirtualDormantWriterEvidence([REAL], {
+        readSource: (path) => (path === REAL.writer ? writes : readFileSync(join(ROOT, path), 'utf8')),
+      })).toThrow(/UNVERIFIABLE \(clause 2\)/);
+      // (b) ⭐ A GATE THAT EXISTS ONLY IN PROSE. This is the arm that makes the clause
+      // mean something: a comment describing the gate, and a string literal quoting it,
+      // must BOTH fail to satisfy it — otherwise a row could be kept alive by its own
+      // documentation long after the code stopped gating.
+      const prose = `${writes}\n// rules.treasuryEnabled === true is what this used to do.\n`
+        + `const help = 'rules.treasuryEnabled === true';\n`;
+      expect(() => assertVirtualDormantWriterEvidence([REAL], {
+        readSource: (path) => (path === REAL.writer ? prose : readFileSync(join(ROOT, path), 'utf8')),
+      })).toThrow(/UNVERIFIABLE \(clause 2\)/);
+      // …and the SAME source with a real executed gate appended VERIFIES, so the arm is
+      // proven to be reading the code rather than refusing everything.
+      const real = `${prose}\nif (rules.treasuryEnabled === true) { run(); }\n`;
+      expect(assertVirtualDormantWriterEvidence([REAL], {
+        readSource: (path) => (path === REAL.writer ? real : readFileSync(join(ROOT, path), 'utf8')),
+      })).toHaveLength(1);
+    });
+
+    test('CLAUSE 3 CONVICTS: a flag the estate does not call engine-gated-virtual', () => {
+      const invented = { ...REAL, identity: 'treasury on economicState', flag: 'notARealEnabled' };
+      // The structural law refuses nothing here — the name is well-formed — so the
+      // conviction has to come from the live manifest read, which is the point.
+      expect(() => assertVirtualDormantWriterEvidence([invented])).toThrow(/UNVERIFIABLE \(clause [23]\)/);
+    });
+
+    test('CLAUSE 4 CONVICTS: a flag that has become preset-lit outlives its own premise', () => {
+      // The row's whole premise is "the corpus never lights this". The moment the flag
+      // is declared in DEFAULT_SIMULATION_RULES the corpus DOES light it, the write IS
+      // observed, and the read must be judged normally. The row must die at that moment.
+      const manifest = readFileSync(join(ROOT, VIRTUAL_FLAG_MANIFEST), 'utf8')
+        .replace('export const ENGINE_GATED_VIRTUAL_RULE_KEYS', 'const DEFAULT_SIMULATION_RULES_SENTINEL = { treasuryEnabled: false };\nexport const ENGINE_GATED_VIRTUAL_RULE_KEYS');
+      expect(() => assertVirtualDormantWriterEvidence([REAL], {
+        readSource: (path) => (path === VIRTUAL_FLAG_MANIFEST ? manifest : readFileSync(join(ROOT, path), 'utf8')),
+      })).toThrow(/UNVERIFIABLE \(clause 4\)/);
+    });
+
+    test('the structural law refuses a malformed, duplicated or double-doored row', () => {
+      const bad = (patch) => () => assertVirtualDormantWriters([{ ...REAL, ...patch }]);
+      expect(bad({ lighting: 'too short' })).toThrow(/LIGHTING CONDITION/);
+      expect(bad({ charter: 'no numbers here' })).toThrow(/minting charter/);
+      expect(bad({ writer: 'scripts/elsewhere.mjs' })).toThrow(/repository-relative src\//);
+      expect(bad({ flag: 'treasury' })).toThrow(/Enabled/);
+      expect(bad({ key: 'coin' })).toThrow(/does not name key/);
+      expect(() => assertVirtualDormantWriters([REAL, REAL])).toThrow(/repeats/);
+      // ONE IDENTITY, ONE DOOR — a row that is also an explained-writer exemption.
+      const doubled = { ...REAL, identity: 'stresses on settlement', key: 'stresses' };
+      expect(() => assertVirtualDormantWriters([doubled])).toThrow(/ALSO an explained-writer/);
+      // A class-(a) TRUE POSITIVE can never be admitted as a dormant writer.
+      const guarded = { ...REAL, identity: 'authored on institutions', key: 'authored' };
+      expect(() => assertVirtualDormantWriters([guarded])).toThrow(/class-\(a\)/);
+    });
+
+    test('the door CLEARS exactly its verified identities, and nothing else', () => {
+      expect(live.virtualDormantWriters.applied).toBe(true);
+      expect(live.virtualDormantWriters.clearedIdentities).toEqual([REAL.identity]);
+      expect(live.virtualDormantWriters.cleared).toBe(1);
+      // …and the cleared read is really GONE from the post-filter findings, while the
+      // raw scan still holds it — the door narrows the verdict, it does not blind the
+      // detector.
+      const identityIn = (findings) => findings.some((f) => f.key === REAL.key
+        && identityOf(f) === REAL.identity);
+      expect(identityIn(live.raw.findings), 'the detector stopped seeing the read entirely').toBe(true);
+      expect(identityIn(live.findings)).toBe(false);
+    });
+
+    test('an UNDECLARED identity on a declared key is NOT cleared', () => {
+      // The door is keyed on the full identity, never on the key alone. A second,
+      // unrelated `treasury` read on some other shape must still be judged.
+      const foreign = { file: 'src/domain/x.js', line: 1, pos: 1, key: 'treasury', shapes: ['somethingElse'], text: 'row.treasury' };
+      const out = applyVirtualDormantWriterFilter({
+        scanMode: BASELINE_SCAN_MODE,
+        scan: { findings: [foreign], stats: {} },
+      });
+      expect(out.findings).toHaveLength(1);
+      expect(out.virtualDormantWriters.cleared).toBe(0);
+    });
+
+    test('the notice names the door in both states', () => {
+      expect(virtualDormantWriterNotice(live.virtualDormantWriters)).toMatch(/cleared 1 read/);
+      expect(virtualDormantWriterNotice({ applied: false })).toMatch(/NOT APPLIED/);
+    });
+  });
+
+  // ── THE PROVENANCE DRIFT CLASSIFIER (TE-OSHAPE-1, ODQ §768.3) ────────────────────
+  //
+  // THE DEFECT: the provenance gate refused a `--write` re-freeze whenever EITHER the
+  // detector digest or the unscanned-input digest moved — and both cover files that
+  // change for reasons having nothing to do with how the detector decides. The unscanned
+  // set is, by construction, "every generated artifact and every data JSON under src/";
+  // the detector set carries one TEST FIXTURE among ten real tool sources. So any lane
+  // that regenerated the compendium or re-minted the dossier prose PERMANENTLY BRICKED
+  // the re-freeze until somebody ran a governed schema migration.
+  //
+  // ⭐ IT IS THE SECOND SIGHTING, AND THE FIRST IS RECORDED IN THE MIGRATION TOOL'S OWN
+  // HEADER: schema 8→9 says the unscanned digest "MOVED — recorded for review by named
+  // path instead of refused, because refusing it would leave the instrument permanently
+  // dark." It was cured once by hand and the habitat was left standing, so schema 10 went
+  // dark the same way. MEASURED at the pristine base `518c40880`: 1 of 11 detector-tree
+  // entries stale (the fixture) and 4 of 13 unscanned entries stale (two dossier-prose
+  // generated files, the generated compendium, and the intent-atlas distillate).
+  describe('the provenance drift classifier separates a detector change from an input change', () => {
+    test('the classifier is a TOTAL positive predicate over the declared tool list', () => {
+      for (const file of scannerToolFilesOf()) {
+        const rel = relativeToRoot(file);
+        const expected = !DETECTOR_INPUT_PATHS.includes(rel);
+        expect(isDetectorSourcePath(rel), `${rel} classified wrongly`).toBe(expected);
+      }
+      // The fixture is the ONE declared input inside the tool list, by name.
+      expect(DETECTOR_INPUT_PATHS).toEqual(['tests/fixtures/spatialPackFixtures.js']);
+      // ⛔ The lockfile and the manifest stay on the DETECTOR side deliberately: a
+      // dependency bump can move the parser, and the estate already treats any
+      // package.json byte as a mint trigger.
+      expect(isDetectorSourcePath('package.json')).toBe(true);
+      expect(isDetectorSourcePath('package-lock.json')).toBe(true);
+      // A file that is on NEITHER list must not fail open into the absorbable half.
+      expect(isDetectorSourcePath('src/domain/anything.js')).toBe(false);
+      expect(isDetectorSourcePath('scripts/not-a-scanner-tool.mjs')).toBe(false);
+    });
+
+    // A minimal snapshot/baseline pair the classifier can be driven against, so the arms
+    // below test the CLASSIFIER rather than the live tree's happenstance.
+    const manifestOf = (entries) => ({ entries, digest: 'ignored' });
+    const snapshotOf = ({ detector, source, scanned }) => ({
+      detectorTree: manifestOf(detector),
+      sourceTree: manifestOf(source),
+      scanTree: manifestOf(scanned),
+    });
+    const baselineOf = ({ detector, source, scanned }) => ({
+      manifests: {
+        detectorTree: manifestOf(detector),
+        sourceTree: manifestOf(source),
+        scanTree: manifestOf(scanned),
+      },
+    });
+    const TOOL = 'scripts/check-observed-shape-readers.mjs';
+    const FIXTURE = 'tests/fixtures/spatialPackFixtures.js';
+    const GENERATED = 'src/domain/compendium/generated/compendiumData.generated.js';
+
+    test('a moved DETECTOR SOURCE is classified as a detector change', () => {
+      const drift = provenanceDriftOf(
+        baselineOf({ detector: [{ path: TOOL, sha256: 'old' }], source: [], scanned: [] }),
+        snapshotOf({ detector: [{ path: TOOL, sha256: 'new' }], source: [], scanned: [] }),
+      );
+      expect(drift.detectorSources).toEqual([TOOL]);
+      expect(drift.inputs).toEqual([]);
+    });
+
+    test('a moved FIXTURE or GENERATED artifact is classified as an input change', () => {
+      const drift = provenanceDriftOf(
+        baselineOf({
+          detector: [{ path: FIXTURE, sha256: 'old' }],
+          source: [{ path: GENERATED, sha256: 'old' }],
+          scanned: [],
+        }),
+        snapshotOf({
+          detector: [{ path: FIXTURE, sha256: 'new' }],
+          source: [{ path: GENERATED, sha256: 'new' }],
+          scanned: [],
+        }),
+      );
+      expect(drift.detectorSources).toEqual([]);
+      expect(drift.inputs).toEqual([FIXTURE, GENERATED].sort());
+    });
+
+    test('a SCANNED source file is not an unscanned input — it is judged by the scan itself', () => {
+      const scanned = 'src/domain/worldPulse/treasury.js';
+      const drift = provenanceDriftOf(
+        baselineOf({ detector: [], source: [{ path: scanned, sha256: 'old' }], scanned: [{ path: scanned, sha256: 'old' }] }),
+        snapshotOf({ detector: [], source: [{ path: scanned, sha256: 'new' }], scanned: [{ path: scanned, sha256: 'new' }] }),
+      );
+      expect(drift.inputs).toEqual([]);
+      expect(drift.detectorSources).toEqual([]);
+    });
+
+    test('an ADDED or REMOVED path on either side is caught, not just a changed one', () => {
+      const added = provenanceDriftOf(
+        baselineOf({ detector: [], source: [], scanned: [] }),
+        snapshotOf({ detector: [{ path: TOOL, sha256: 'x' }], source: [], scanned: [] }),
+      );
+      expect(added.detectorSources).toEqual([TOOL]);
+      const removed = provenanceDriftOf(
+        baselineOf({ detector: [{ path: TOOL, sha256: 'x' }], source: [], scanned: [] }),
+        snapshotOf({ detector: [], source: [], scanned: [] }),
+      );
+      expect(removed.detectorSources).toEqual([TOOL]);
+    });
+
+    test('NOTHING moved ⇒ nothing classified (the arm is not reporting drift at rest)', () => {
+      const same = { detector: [{ path: TOOL, sha256: 'x' }], source: [{ path: GENERATED, sha256: 'y' }], scanned: [] };
+      const drift = provenanceDriftOf(baselineOf(same), snapshotOf(same));
+      expect(drift).toEqual({ detectorSources: [], inputs: [] });
+    });
+
+    test('THE LIVE ESTATE INSTANCE, measured: the drift that DARKENED the tool is INPUT-ONLY', () => {
+      // The diagnosis that motivated this repair, pinned against the real committed
+      // baseline and the real tree so it cannot decay into prose. MEASURED at the
+      // pristine base `518c40880`: the ONLY things that had drifted since the schema-10
+      // mint were one fixture and four generated artifacts — not one detector source —
+      // and yet the gate refused every `--write`. That is the whole defect in one line.
+      const drift = provenanceDriftOf(baseline, {
+        detectorTree: { entries: liveManifestEntries(scannerToolFilesOf()) },
+        sourceTree: { entries: liveManifestEntries(subjectFilesOf()) },
+        scanTree: { entries: liveManifestEntries(sourceFilesOf()) },
+      });
+      for (const path of [
+        'tests/fixtures/spatialPackFixtures.js',
+        'src/data/dossierStateProse/general.generated.js',
+        'src/data/dossierStateProse/warFaith.generated.js',
+        'src/domain/compendium/generated/compendiumData.generated.js',
+        'src/domain/data/intentAtlas.distillate.json',
+      ]) {
+        expect(drift.inputs, `${path} is no longer classified as an absorbable INPUT`).toContain(path);
+      }
+      // ⚠⚠ AND THE HONEST OTHER HALF, which this arm learned by reddening on itself.
+      // REPAIRING THE DETECTOR IS ITSELF A DETECTOR CHANGE. This lane edited
+      // `scripts/check-observed-shape-readers.mjs`, so from this commit until the governed
+      // re-freeze runs, the classifier correctly reports exactly that file as a drifted
+      // DETECTOR SOURCE and correctly keeps demanding a migration for it. That is the
+      // guarantee working on its own author, and it is asserted rather than excused.
+      expect(drift.detectorSources).toEqual(['scripts/check-observed-shape-readers.mjs']);
+    });
+  });
+
   test('A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live', () => {
     expect(live.familyFilter.applied).toBe(true);
     expect(live.domGlobals.applied).toBe(true);
     expect(live.languageSurface.applied).toBe(true);
     expect(live.explainedWriters.applied).toBe(true);
+    expect(live.virtualDormantWriters.applied).toBe(true);
     expect(live.findings.length).toBeLessThan(live.raw.findings.length);
     // The arithmetic closes with nothing left over: raw − each filter = live.
+    // ⭐ M13 (TE-OSHAPE-1) JOINS THIS SUM, and it had to: the fourth door CLEARS rather
+    // than banks, so a stage left out of the total would show up here as an unexplained
+    // read. This arm caught exactly that when the door was first wired, which is the
+    // argument for closing the arithmetic rather than describing it.
     const clearedTotal = live.familyFilter.cleared + live.domGlobals.cleared
-      + live.languageSurface.cleared;
+      + live.languageSurface.cleared + live.virtualDormantWriters.cleared;
     expect(live.raw.findings.length - clearedTotal).toBe(live.findings.length);
     // Each is independently NON-VACUOUS — a zero here is a filter that is not
     // reaching the estate, which the sum above cannot distinguish from absence.
