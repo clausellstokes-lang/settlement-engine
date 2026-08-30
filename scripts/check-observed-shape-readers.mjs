@@ -88,12 +88,11 @@ import {
   RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
   RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
-  RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema11Baseline,
+  validateSchema10Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -141,7 +140,6 @@ export {
   RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
   RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
-  RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -999,21 +997,6 @@ export function writeShapesIn(source, key) {
  */
 export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
   Object.freeze({
-    identity: 'isCriminal on incomeSources',
-    mechanism: 'conditional-generator-branch',
-    writer: 'src/generators/economy/economicState.js',
-    ruling: 'ODQ 771.2 — the fifth class, granted on W-COIN-1b measurement',
-    why: 'MEASURED: the corpus observed 3,068 incomeSources rows across its whole seed x config'
-      + ' matrix and NOT ONE carried isCriminal (observed keys: desc, percentage, priorityNote,'
-      + ' source, weight). The generator DOES write it — the black-market push at the foot of'
-      + ' buildIncomeSources — but only down a branch those configs never take, so the key is'
-      + ' rarer than the sample rather than absent. W-COIN taxation must read it: the design'
-      + ' rules the racket is never a tax base, and dropping the read would tax a custom row'
-      + ' that marks itself criminal. The live detector is the closed CRIMINAL_INCOME_LABELS'
-      + ' set (source has 3,068 observations); this flag read is the catch for authored rows'
-      + ' wearing no known name, and is dead on generated worlds by construction, not by defect.',
-  }),
-  Object.freeze({
     identity: 'factions on locks',
     mechanism: 'admission-list',
     writer: 'src/components/dossier/LockControls.jsx',
@@ -1125,17 +1108,6 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
  *  thought to forbid. `open-spread` is absent BY RULING (gate 4). */
 const EXPLAINED_WRITER_MECHANISMS = Object.freeze([
   'save-time-writer', 'closed-ingest', 'admission-list',
-  // ⭐ THE FIFTH CLASS (ODQ §771.2, granted to TE-OSHAPE-1's follow-on). Every mechanism
-  // above explains a writer the generation corpus never RUNS — a user action, a save-time
-  // writer, a declared alias. This one explains a writer the corpus DOES run and whose key
-  // it still never sees: a generator branch gated on conditions the corpus's seed × config
-  // matrix does not satisfy. The distinction matters because the remedy differs — there is
-  // nothing to move to a later lifecycle step and no admission list to point at; the key is
-  // simply rarer than the sample. An entry here must name the generator file that writes
-  // it, and gate 0 proves the write is still there on every scan.
-  // ⚠ WHETHER THIS CLASS DESERVES ITS OWN TYPED DOOR (as virtual-dormant writers got) or
-  // stays a one-off admission is TE-GUARDS-1's question, ruled explicitly NOT this lane's.
-  'conditional-generator-branch',
 ]);
 
 export function assertExplainedWriterReason(reason, label = 'reason') {
@@ -1233,7 +1205,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema11Baseline(baseline);
+  validateSchema10Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2554,7 +2526,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema11Baseline,
+    validateBaseline: validateSchema10Baseline,
     assertExplainedWriterRowTags,
     validateBaselineHistory,
     committedInputManifestsFor,

@@ -123,18 +123,6 @@ export const EPOCH_DARK_CORPUS_TARGET_SCHEMA = 9;
  *  RE-RECONCILIATION and nothing else — no declaration, no threshold, no
  *  filter, no bank growth. */
 export const PROSE_REGEN_TARGET_SCHEMA = 10;
-/** The LIVE target: schema 10's tagged topology inventory re-governed to a
- *  DETECTOR THAT GENUINELY CHANGED — which is what separates this rung from 9
- *  and 10, both of which were envelope re-reconciliations that declared nothing.
- *  TE-OSHAPE-1 repaired the provenance gate (per-path drift classification, so a
- *  regenerated artifact can no longer brick the shrink-only re-freeze) and gave
- *  the walker its fourth door. This mint binds that repair and grows the
- *  explained-writer bank by ONE: the ninth identity, `isCriminal on
- *  incomeSources`, under the new `conditional-generator-branch` mechanism
- *  (ODQ §771.2). Its unscanned movement is reviewable for the same reason 8→9's
- *  was, and the 8→9 header says it best: refusing it would leave the instrument
- *  permanently dark. */
-export const TREASURY_ADMISSION_TARGET_SCHEMA = 11;
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -195,27 +183,6 @@ export const PROSE_REGEN_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
-/**
- * The schema-10 → 11 detector delta, and every path is this lane's own work:
- *   • check-observed-shape-readers.mjs — TE-OSHAPE-1's drift classifier + fourth
- *     door, and the ninth explained-writer declaration;
- *   • observed-shape-baseline.mjs — the schema bump and the retired-10 validator;
- *   • migrate-observed-shape-readers.mjs — this rung;
- *   • tests/fixtures/spatialPackFixtures.js — the corpus FIXTURE, which had
- *     already drifted before this lane began (1 of 11 stale at the pristine base)
- *     and is exactly the input whose refusal darkened the instrument. It is
- *     carried here as a DELTA rather than waved through, because the ritual's
- *     law is that modified paths equal the declared set exactly.
- * ⛔ `package.json` and the lockfile are NOT in this set and must not be: this
- * lane changed no dependency and no script.
- */
-export const TREASURY_ADMISSION_SCANNER_DELTA_PATHS = Object.freeze([
-  'scripts/check-observed-shape-readers.mjs',
-  'scripts/lib/observed-shape-baseline.mjs',
-  'scripts/migrate-observed-shape-readers.mjs',
-  'tests/fixtures/spatialPackFixtures.js',
-]);
-
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -232,8 +199,6 @@ export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
 
 const BANKED_EXPLAINED_WRITER_SCANNER_TRANSITION_POLICY =
   'schema-6-to-7-exact-scanner-transition-v1';
-const TREASURY_ADMISSION_SCANNER_TRANSITION_POLICY =
-  'schema-10-to-11-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -262,7 +227,6 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [CORPUS_COVERAGE_TARGET_SCHEMA]: BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
   [EPOCH_DARK_CORPUS_TARGET_SCHEMA]: CORPUS_COVERAGE_TARGET_SCHEMA,
   [PROSE_REGEN_TARGET_SCHEMA]: EPOCH_DARK_CORPUS_TARGET_SCHEMA,
-  [TREASURY_ADMISSION_TARGET_SCHEMA]: PROSE_REGEN_TARGET_SCHEMA,
 });
 
 /**
@@ -663,12 +627,6 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     deltaPaths: PROSE_REGEN_SCANNER_DELTA_PATHS,
     inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
     policy: PROSE_REGEN_SCANNER_TRANSITION_POLICY,
-    reviewableUnscannedMovement: true,
-  })],
-  [TREASURY_ADMISSION_TARGET_SCHEMA, Object.freeze({
-    deltaPaths: TREASURY_ADMISSION_SCANNER_DELTA_PATHS,
-    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
-    policy: TREASURY_ADMISSION_SCANNER_TRANSITION_POLICY,
     reviewableUnscannedMovement: true,
   })],
 ]);
@@ -1652,13 +1610,12 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : TREASURY_ADMISSION_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PROSE_REGEN_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
-    PROSE_REGEN_TARGET_SCHEMA, TREASURY_ADMISSION_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${TREASURY_ADMISSION_TARGET_SCHEMA} (live treasury-admission leaf),`
-      + ` ${PROSE_REGEN_TARGET_SCHEMA} (retired prose-regen leaf),`
+    PROSE_REGEN_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${PROSE_REGEN_TARGET_SCHEMA} (live prose-regen leaf),`
       + ` ${EPOCH_DARK_CORPUS_TARGET_SCHEMA} (retired epoch-dark leaf),`
       + ` ${CORPUS_COVERAGE_TARGET_SCHEMA} (retired corpus-coverage leaf),`
       + ` ${BANKED_EXPLAINED_WRITER_TARGET_SCHEMA} (retired banked explained-writer leaf),`
