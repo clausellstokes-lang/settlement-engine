@@ -3,10 +3,10 @@
 // actual institutions present and nearby resources selected.
 // Used by the economic generator to enrich the Economics tab output.
 
-import {SUPPLY_CHAIN_NEEDS} from '../data/supplyChainData.js';
-import {RESOURCE_TO_CHAINS} from '../data/supplyChainResourceIndex.js';
+import {SUPPLY_CHAIN_NEEDS} from '../data/goods/chains.js';
+import {RESOURCE_TO_CHAINS} from '../data/goods/chains.js';
 import {applyMagicSubstitution} from './chainMagicSubstitution.js';
-import {RESOURCE_DATA} from '../data/resourceData.js';
+import {RESOURCE_DATA} from '../data/goods/identity.js';
 import {customDeps} from '../lib/dependencyEngine.js';
 // FP-G10: load (register) the prebuilt resource-chains catalog so
 // customDeps.chainsFedByResource below resolves legacy `feedsChains` refs via the

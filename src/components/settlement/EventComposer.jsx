@@ -27,8 +27,8 @@ import { rolesForInstitution, importanceForRole } from '../../domain/roles/roleC
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
-import { GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';
-import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { GOODS_MODIFIERS_BY_TIER } from '../../data/goods/chains.js';
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
 import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
 import { MUTED, BORDER, CARD, sans, FS, SP } from '../theme.js';

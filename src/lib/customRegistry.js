@@ -24,8 +24,8 @@
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { slugify as kernelSlugify } from '../kernel/slugify.js';
 import { INSTITUTION_SERVICES } from '../data/institutionServices.js';
-import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../data/resourceData.js';
-import { GOODS_MODIFIERS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
+import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../data/goods/identity.js';
+import { GOODS_MODIFIERS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/goods/chains.js';
 // Import the pure-data meta map, not the full stressTypes.js. The full
 // file has runtime closures that capture _rng from generators/rngContext -
 // loading it sync (which we do here, from app boot via dependencyEngine)

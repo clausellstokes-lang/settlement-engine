@@ -31,10 +31,10 @@
  */
 
 import { clamp01 } from '../../kernel/math.js';
-import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
-import { RESOURCE_TO_CHAINS } from '../../data/supplyChainResourceIndex.js';
+import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
+import { RESOURCE_TO_CHAINS } from '../../data/goods/chains.js';
 import { canonExports } from '../canonicalAccessors.js';
-import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { TIER_ORDER, tierAtLeast } from '../../data/constants.js';
 import { computeActiveChains, institutionMatchesProcessor } from '../../generators/computeActiveChains.js';
 import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';

@@ -3,7 +3,7 @@
  */
 
 import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
-import { INSTITUTION_FINISHED_GOODS_DEMAND } from '../../data/economicData.js';
+import { INSTITUTION_FINISHED_GOODS_DEMAND } from '../../data/goods/chains.js';
 import {
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';

@@ -57,7 +57,7 @@
  */
 
 import { clamp01 } from '../../kernel/math.js';
-import { REAGENT_CHAIN_SPINE, REAGENT_STAPLE_LABEL } from '../../data/supplyChainResourceIndex.js';
+import { REAGENT_CHAIN_SPINE, REAGENT_STAPLE_LABEL } from '../../data/goods/chains.js';
 import { normalizeGood } from '../region/goodsCatalog.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';

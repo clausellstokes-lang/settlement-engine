@@ -14,7 +14,7 @@ import { propagateImpairment } from '../entities/propagate.js';
 import { withActiveCondition, withoutActiveCondition, conditionIdFromArchetype } from '../activeConditions.js';
 import { crisisOnset, crisisResolve, withStressorResolved } from '../crisisLifecycle.js';
 import { transferRulingPower } from '../rulingPower.js';
-import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES, INFILTRATION_TARGET_RELATIONSHIPS } from '../worldPulse/warStressorTypes.js';
 import { canonicalRelationshipLabel, relationshipDefinition } from '../relationships/canonicalRelationship.js';
 import { HEALING_INSTITUTION_PATTERN } from '../healingLedger.js';

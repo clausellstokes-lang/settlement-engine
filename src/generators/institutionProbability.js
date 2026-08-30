@@ -3,7 +3,7 @@
 // Pure function: given a base chance, applies priority/resource/config multipliers.
 
 import {TIER_ORDER} from '../data/constants.js';
-import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData.js';
+import {GOODS_MODIFIERS_BY_TIER} from '../data/goods/chains.js';
 import {ECONOMY_MODE_MARKET_MULT} from './neighbourGenerator.js';
 import {
   nativeSemanticResourceKeys,

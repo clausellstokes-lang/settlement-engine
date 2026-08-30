@@ -38,7 +38,7 @@
  *                                         REAGENT_CHAIN_SPINE, REAGENT_STAPLE_LABEL
  *   NAMESPACE MEMBERS WITH NO SURFACE (typed here, imported directly)
  *     • src/domain/resourceSemantics.js   RESOURCE_SEMANTICS + its readers
- *     • src/generators/tradeCommodity.js  COMMODITY_SCAN (ordered!) + deriveCommodities
+ *     • src/generators/tradeCommodity.js  COMMODITY_SCAN (ordered!) + deriveTradeCommodity
  *
  * Those last two carry no surface door ON PURPOSE, and the reason is a lint
  * rule, not taste: the eslint src/data purity rule bans a data module from
@@ -91,47 +91,47 @@
  *   door   — surface (imports the index) | direct (imports the physical module)
  *            | member (reaches only a no-surface namespace member).
  *
- * R | E | identity        | direct  | src/domain/events/mutateWorld.js
+ * R | E | identity        | surface | src/domain/events/mutateWorld.js
  * R | E | chains          | direct  | src/domain/region/tradeLinks.js
- * R | E | identity        | direct  | src/domain/resourceTerrainCompatibility.js
+ * R | E | identity        | surface | src/domain/resourceTerrainCompatibility.js
+ * R | l | chains          | surface | src/components/new/SupplyChainsPanel.jsx
  * R | l | chains          | direct  | src/components/ServicesTogglePanel.jsx
- * R | l | chains          | direct  | src/components/TradeDynamicsPanel.jsx
- * R | l | chains          | direct  | src/components/new/SupplyChainsPanel.jsx
- * R | l | identity+chains | direct  | src/components/settlement/EventComposer.jsx
- * R | l | chains          | direct  | src/domain/display/institutionProfile.js
- * R | l | identity        | direct  | src/domain/resourceSites.js
+ * R | l | identity+chains | surface | src/components/settlement/EventComposer.jsx
+ * R | l | chains          | surface | src/components/TradeDynamicsPanel.jsx
+ * R | l | chains          | surface | src/domain/display/institutionProfile.js
+ * R | l | identity        | surface | src/domain/resourceSites.js
  * R | l | none            | member  | src/domain/undercity/monotoneComponents.js
- * R | l | identity+chains | direct  | src/domain/worldPulse/institutionLifecycle.js
- * R | l | chains          | direct  | src/domain/worldPulse/magicSubstitutionReagents.js
- * R | l | identity+chains | direct  | src/domain/worldPulse/resourceDynamicsKernel.js
- * R | l | identity        | direct  | src/domain/worldPulse/resourceTaxonomy.js
- * R | l | identity        | direct  | src/domain/worldPulse/steadingTopography.js
- * R | l | identity+chains | direct  | src/domain/worldPulse/tierResourceDynamics.js
- * R | l | chains          | direct  | src/generators/cascadeGenerator.js
- * R | l | identity+chains | direct  | src/generators/computeActiveChains.js
- * R | l | chains          | direct  | src/generators/economy/economicState.js
- * R | l | chains          | direct  | src/generators/economy/finishedGoodsDemand.js
+ * R | l | identity+chains | surface | src/domain/worldPulse/institutionLifecycle.js
+ * R | l | chains          | surface | src/domain/worldPulse/magicSubstitutionReagents.js
+ * R | l | identity+chains | surface | src/domain/worldPulse/resourceDynamicsKernel.js
+ * R | l | identity        | surface | src/domain/worldPulse/resourceTaxonomy.js
+ * R | l | identity        | surface | src/domain/worldPulse/steadingTopography.js
+ * R | l | identity+chains | surface | src/domain/worldPulse/tierResourceDynamics.js
+ * R | l | chains          | surface | src/generators/cascadeGenerator.js
+ * R | l | identity+chains | surface | src/generators/computeActiveChains.js
+ * R | l | chains          | surface | src/generators/economy/economicState.js
+ * R | l | chains          | surface | src/generators/economy/finishedGoodsDemand.js
  * R | l | none            | member  | src/generators/economy/foodBalance.js
  * R | l | none            | member  | src/generators/economy/nativeEconomicInputs.js
- * R | l | identity+chains | direct  | src/generators/economy/tradeGoods.js
- * R | l | chains          | direct  | src/generators/economy/viability.js
+ * R | l | identity+chains | surface | src/generators/economy/tradeGoods.js
+ * R | l | chains          | surface | src/generators/economy/viability.js
  * R | l | none            | member  | src/generators/foodGenerator.js
  * R | l | none            | member  | src/generators/generationCoherence.js
  * R | l | none            | member  | src/generators/historyGenerator.js
- * R | l | chains          | direct  | src/generators/institutionProbability.js
+ * R | l | chains          | surface | src/generators/institutionProbability.js
  * R | l | none            | member  | src/generators/narrativeGenerator.js
  * R | l | none            | member  | src/generators/npcGenerator.js
- * R | l | identity+chains | direct  | src/generators/resourceGenerator.js
+ * R | l | identity+chains | surface | src/generators/resourceGenerator.js
  * R | l | chains          | direct  | src/generators/services/institutionServices.js
- * R | l | identity        | direct  | src/generators/steps/assembleInstitutions.js
+ * R | l | identity        | surface | src/generators/steps/assembleInstitutions.js
  * R | l | none            | member  | src/generators/steps/generateNarratives.js
- * R | l | identity        | direct  | src/generators/steps/resolveResources.js
- * R | l | identity+chains | direct  | src/generators/structuralValidator.js
- * R | l | identity+chains | direct  | src/lib/customRegistry.js
- * R | l | chains          | direct  | src/lib/prebuiltResourceChains.js
+ * R | l | identity        | surface | src/generators/steps/resolveResources.js
+ * R | l | identity+chains | surface | src/generators/structuralValidator.js
+ * R | l | identity+chains | surface | src/lib/customRegistry.js
+ * R | l | chains          | surface | src/lib/prebuiltResourceChains.js
  * R | l | chains          | direct  | src/pdf/sections/SupplyChainFlow.jsx
  *
- * THE TWO `direct` ROWS, EACH WITH ITS REASON
+ * THE FOUR `direct` ROWS, EACH WITH ITS REASON
  * ─────────────────────────────────────────────────────────────────────────────
  *   • `domain/region/tradeLinks.js` — the ONLY eager consumer of a chains-half
  *     table, and it is eager on purpose: FP-G4 split `finishedGoodsCategory.js`
@@ -140,10 +140,35 @@
  *     it through the chains surface would undo FP-G4 and re-eager the whole
  *     chains half. It keeps the direct import FOREVER, and the surface law above
  *     is the executable form of that sentence.
- *   • `pdf/sections/SupplyChainFlow.jsx` — the PDF sections are bundled for the
- *     `vendor-pdf` / pdfRender worker path, not the main `data-lazy` chunk, so a
- *     surface import would pull six tables into a bundle that today carries one.
- *     Measured, not assumed: the migration was built both ways.
+ *   • `components/ServicesTogglePanel.jsx` and
+ *     `generators/services/institutionServices.js` — neither actually wants goods
+ *     vocabulary. Both reach `tradeGoodsData.js` only for `INSTITUTION_SERVICES`,
+ *     which that file merely RE-EXPORTS from `data/institutionServices.js`. It is
+ *     institution vocabulary wearing a goods file's address, so it is deliberately
+ *     NOT on the chains surface: putting it there would make the goods namespace
+ *     the door to a table that is not goods, and the roster would stop meaning
+ *     what it says. Their rows read `chains` because the tree says so, and
+ *     `direct` because the surface correctly refuses to carry that symbol.
+ *   • `pdf/sections/SupplyChainFlow.jsx` — the one row decided by a MEASUREMENT
+ *     rather than a rule. It was migrated, built, and reverted: routing it
+ *     through the door grew `pdfRender.worker` by 3,595 B (2,342,505 →
+ *     2,346,100) because that bundle carries its own copy of whatever it
+ *     reaches and does not otherwise hold the chains half. Nothing else moved.
+ *     It reads one table, so it keeps the one import. If a later PDF section
+ *     needs the half properly, re-measure and move this row.
+ *
+ * EVERY OTHER CONSUMER GOES THROUGH A DOOR, AND IT COST 395 BYTES.
+ * The worry that motivated the two-surface split — an index dragging a whole half
+ * into every bundle that touches one table — does NOT generally materialise,
+ * because Rollup tree-shakes a pure re-export index: an importer that names one
+ * binding pulls one module. MEASURED across the whole `dist/` before and after the
+ * migration: total JS 17,717,738 → 17,718,133 B (+395, of which +300 is
+ * advanceInterval.worker and +27 SupplyChainsPanel), with `data`, `data-lazy`,
+ * `engine`, `engine-core`, `custom-registry`, `pdfRender.worker` and
+ * `customContentPreview.worker` byte-IDENTICAL, and the first-paint closure
+ * unmoved at 8 files / 1,026,756 B. The doors are free almost everywhere; the two
+ * places they are not — an EAGER importer of the lazy door, and the PDF worker —
+ * are the two the roster spends its `direct` rows on, one walked and one measured.
  *
  * @see src/data/goods/identity.js
  * @see src/data/goods/chains.js

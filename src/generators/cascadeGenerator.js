@@ -4,7 +4,7 @@
 
 import { random as _rng } from '../kernel/rngContext.js';
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
-import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
+import { SUPPLY_CHAIN_NEEDS } from '../data/goods/chains.js';
 import {
   nativeSemanticName,
 } from '../domain/content/customContentSemanticAuthority.js';

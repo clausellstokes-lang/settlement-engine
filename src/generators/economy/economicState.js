@@ -6,7 +6,7 @@ import { random as _rng } from '../../kernel/rngContext.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { getInstFlags, getPriorities, getStressFlags, getTradeRouteFeatures, hasTeleportationInfra, priorityToMultiplier } from '../helpers.js';
 import { generateSafetyProfile } from '../safetyProfile.js';
-import { TRADE_DEPENDENCY_NEEDS } from '../../data/economicData.js';
+import { TRADE_DEPENDENCY_NEEDS } from '../../data/goods/chains.js';
 import { computeActiveChains, deriveExportsFromChains, deriveImportsFromChains, deriveLocalProductionFromChains, deriveInstitutionalServices, deriveServiceExports } from '../computeActiveChains.js';
 import { generateTradeIncomeStreams } from './tradeGoods.js';
 import { computeBaseProsperity, deriveEconomicComplexity, deriveProsperityLabel, deriveEconomicSituationDesc } from './prosperity.js';

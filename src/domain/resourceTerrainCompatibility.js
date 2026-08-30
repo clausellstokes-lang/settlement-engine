@@ -25,7 +25,7 @@
  *   tests/domain/steadingTopography.test.js, tests/generators/resolveResources.test.js
  */
 
-import { RESOURCE_DATA } from '../data/resourceData.js';
+import { RESOURCE_DATA } from '../data/goods/identity.js';
 
 // Water terrain overrides for route-based resource compatibility.
 // A coastal or riverside settlement can access water resources regardless of trade route.

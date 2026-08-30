@@ -7,9 +7,9 @@
 import {getTradeRouteFeatures, pickRandom, tierAtLeast} from './helpers.js';
 export { getBaseChance } from './institutionProbability.js';
 
-import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData.js';
+import {GOODS_MODIFIERS_BY_TIER} from '../data/goods/chains.js';
 import {GATE_FEATURES, INSTITUTION_SPATIAL, GOVERNMENT_INSTITUTIONS} from '../data/spatialData.js';
-import { RESOURCE_DATA } from '../data/resourceData.js';
+import { RESOURCE_DATA } from '../data/goods/identity.js';
 import {
   nativeSemanticNames,
   nativeSemanticResourceKeys,
@@ -23,7 +23,7 @@ import { institutionLadderEvicts } from '../data/institutionLadders.js';
 import { magicLedger } from '../domain/magicLedger.js';
 
 // RELATION_TYPES re-exported as alias so existing importers don't break.
-export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/resourceData.js';
+export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/goods/identity.js';
 
 // ─── SPATIAL_FEATURES ────────────────────────────────────────────────────────
 // Maps an institution name to the list of lesser institutions it implies

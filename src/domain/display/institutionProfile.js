@@ -20,10 +20,10 @@
  */
 
 import { institutionHasAnyTag } from '../../lib/entities.js';
-import { RESOURCE_CHAINS } from '../../data/resourceChains.js';
+import { RESOURCE_CHAINS } from '../../data/goods/chains.js';
 import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
 import { LOCALE_SERVICE_OVERRIDES } from '../../data/servicesData.js';
-import { GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';
+import { GOODS_MODIFIERS_BY_TIER } from '../../data/goods/chains.js';
 import { identityForInstitution } from './institutionVocabulary.js';
 
 /**

@@ -40,7 +40,7 @@
  * import-free leaf (stablePart, resourceSemantics, resourceData, geographyData).
  */
 
-import { RESOURCE_DATA } from '../data/resourceData.js';
+import { RESOURCE_DATA } from '../data/goods/identity.js';
 import { TERRAIN_DATA } from '../data/geographyData.js';
 import { resourceSemanticsFor } from './resourceSemantics.js';
 import { stablePart } from './worldPulse/stablePart.js';

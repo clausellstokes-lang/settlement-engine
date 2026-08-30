@@ -1,9 +1,9 @@
 import { clamp01 } from '../../kernel/math.js';
 import { POPULATION_RANGES, TIER_ORDER, popToTier } from '../../data/constants.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
-import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
-import { RESOURCE_TO_CHAINS } from '../../data/supplyChainResourceIndex.js';
-import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
+import { RESOURCE_TO_CHAINS } from '../../data/goods/chains.js';
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
 import {
   nativeSemanticDepletedResourceKeys,

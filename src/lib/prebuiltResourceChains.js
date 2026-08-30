@@ -23,7 +23,7 @@
  * the category. @enforced-by tests/lib/prebuiltResourceChains.test.js.
  */
 
-import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
+import { SUPPLY_CHAIN_NEEDS } from '../data/goods/chains.js';
 import { slugify, registerPrebuiltResourceChains } from './customRegistry.js';
 
 /**

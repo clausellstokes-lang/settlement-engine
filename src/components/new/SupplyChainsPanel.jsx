@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
+import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 
 // ── Build a lookup: chainId → full chain definition ──────────────────────────

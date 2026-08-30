@@ -57,7 +57,7 @@
  */
 
 import { getCompatibleResources } from '../resourceTerrainCompatibility.js';
-import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
 // The Weyl cell subsampler. It USED to live in this file; W-G needed the same
 // sampler for realm-scale candidate enumeration, so it moved to a zero-import
 // leaf and both lanes now read ONE writer (a second copy is how one lane silently

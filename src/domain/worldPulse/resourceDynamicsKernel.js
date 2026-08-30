@@ -45,8 +45,8 @@
 import { clamp01 } from '../../kernel/math.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { slugify } from '../../kernel/slugify.js';
-import { RESOURCE_DATA } from '../../data/resourceData.js';
-import { RETIRED_CHAIN_ALIASES } from '../../data/supplyChainResourceIndex.js';
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
+import { RETIRED_CHAIN_ALIASES } from '../../data/goods/chains.js';
 import { getCompatibleResources, getTerrainType } from '../../generators/terrainHelpers.js';
 import {
   computeActiveChains,

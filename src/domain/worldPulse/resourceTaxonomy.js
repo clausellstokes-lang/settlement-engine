@@ -1,4 +1,4 @@
-import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import {
   resourceKeyForLabel,
   resourceSemanticsFor,

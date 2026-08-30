@@ -8,7 +8,7 @@
  */
 
 import { registerStep } from '../pipeline.js';
-import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { getCompatibleResources, getDefaultResources } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';

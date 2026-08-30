@@ -4,8 +4,8 @@
 
 import { random as _rng } from '../../kernel/rngContext.js';
 import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
-import { COMMODITY_CATEGORY_MAP, GOODS_CATEGORIES, GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';
-import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { COMMODITY_CATEGORY_MAP, GOODS_CATEGORIES, GOODS_MODIFIERS_BY_TIER } from '../../data/goods/chains.js';
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { TIER_ORDER } from '../../data/constants.js';
 import { tradeRouteTier } from '../../domain/tradeRouteSemantics.js';
 import {

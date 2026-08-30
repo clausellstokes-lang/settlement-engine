@@ -14,7 +14,7 @@ import { institutionalCatalog, catalogIdForName } from '../../data/institutional
 import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
 import { pickVariant } from '../../kernel/proseHash.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
-import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { getBaseChance } from '../structuralValidator.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
