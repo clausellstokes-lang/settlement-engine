@@ -13,6 +13,37 @@
 #       Atomically acquire the machine lock, wait out an already-running legacy
 #       Vitest process, run the command while holding ownership, return the
 #       child's exact status, and release only this process's lock.
+#
+#   GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- <command...>
+#       Enter the SHARED tier instead: a small, worker-capped targeted run that
+#       proceeds CONCURRENTLY with other shared runs. See "THE TWO TIERS" below.
+#
+# ── THE TWO TIERS (ODQ §778.2, TE-EFF-1 car 1) ────────────────────────────────────
+# ⛔ THIS TIERS THE MUTEX, NOT THE GATE. DESIGN_BUILD_EFFICIENCY §7 refuses "gate
+# tiering or conditional steps" PERMANENTLY, and nothing here touches that: every
+# step of `npm run check` still runs, unconditionally, under the EXCLUSIVE tier
+# exactly as before. What is tiered is ADMISSION — which runs may be in flight at
+# the same moment — and the volume's own prime constraint is the reason the split
+# is drawn here: the gate is amortized, never thinned.
+#
+#   EXCLUSIVE (the default, and every undeclared caller):
+#     the full gate, `check:tail`, `npm run check`, `test:ratchet` — anything that
+#     runs the whole suite. Semantics are BYTE-FOR-BYTE what they were: acquire the
+#     atomic directory, wait out legacy runners, run alone.
+#
+#   SHARED (declared, never inferred):
+#     a targeted `npx vitest run <files>` that has DECLARED itself with
+#     `GATE_MUTEX_TIER=shared` and CARRIES A HARD WORKER CAP. Shared runs proceed
+#     concurrently with each other. They are refused without the cap, because the
+#     whole basis for admitting them concurrently is that they cannot saturate the
+#     box — an uncapped "targeted" run is a full-load run wearing a small name.
+#
+# THE ORDERING, and why no exclusive run can starve: an exclusive caller acquires
+# $LOCK_DIR FIRST and drains the shared pool SECOND. A shared entrant refuses to
+# enter while $LOCK_DIR exists, so from the instant the exclusive caller holds the
+# directory the shared population can only SHRINK. Exclusion therefore holds in
+# BOTH directions — a live exclusive holder blocks new shared entrants, and a
+# PENDING exclusive (holding the lock, still draining) blocks them too.
 
 set -u
 
@@ -33,8 +64,24 @@ REAPER_DIR="${LOCK_DIR}.reaper"
 REAPER_OWNER_FILE="$REAPER_DIR/pid"
 LEGACY_SCAN="${GATE_MUTEX_LEGACY_SCAN:-1}"
 ORPHAN_GRACE_MINUTES="${GATE_MUTEX_ORPHAN_GRACE_MINUTES:-10}"
+# ⛔ THE TIER IS DECLARED, NEVER INFERRED. An undeclared caller is EXCLUSIVE, which is
+# what keeps every standing incantation — including the bare `check:tail` and every
+# lane brief's exported GATE_MUTEX_LOCK_DIR idiom — working with its semantics
+# unchanged. There is deliberately no heuristic that reads the command line and
+# decides a run "looks small": the one thing worse than a serialized gate is a gate
+# that silently stopped serializing.
+TIER="${GATE_MUTEX_TIER:-exclusive}"
+# The shared pool is a DIRECTORY OF PID FILES beside the lock, not an integer counter.
+# A counter cannot be reaped: when the count says 3 and one holder was killed, nothing
+# on disk says WHICH, so the slot is lost until a human clears it — the exact defect
+# §351.2 cured for the primary lock. One file named by its holder's pid is reapable by
+# the same `kill -0` evidence the lock reaper already uses, and two entrants never
+# write the same path, so the registration needs no lock of its own.
+SHARED_DIR="${LOCK_DIR}.shared"
+SHARED_MAX_WORKERS="${GATE_MUTEX_SHARED_MAX_WORKERS:-2}"
 OWN_LOCK=0
 OWN_REAPER=0
+OWN_SHARED=0
 
 case "$MAX_POLLS" in
     ''|*[!0-9]*)
@@ -64,6 +111,19 @@ esac
 case "$ORPHAN_GRACE_MINUTES" in
     ''|*[!0-9]*)
         echo "gate-mutex: GATE_MUTEX_ORPHAN_GRACE_MINUTES must be a non-negative integer." >&2
+        exit 2
+        ;;
+esac
+case "$TIER" in
+    exclusive|shared) ;;
+    *)
+        echo "gate-mutex: GATE_MUTEX_TIER must be 'exclusive' or 'shared' (got '$TIER')." >&2
+        exit 2
+        ;;
+esac
+case "$SHARED_MAX_WORKERS" in
+    ''|*[!0-9]*|0)
+        echo "gate-mutex: GATE_MUTEX_SHARED_MAX_WORKERS must be a positive integer." >&2
         exit 2
         ;;
 esac
@@ -133,6 +193,98 @@ holders() {
     done
 }
 
+# ── THE SHARED POOL ──────────────────────────────────────────────────────────────
+# Reap by the SAME evidence the primary lock reaper demands: a pid that `kill -0`
+# says is gone. A non-numeric entry is also removed — nothing this script writes can
+# produce one (the filename is always `$$`), so leaving it would let a stray byte
+# deadlock the exclusive drain forever, which is the failure mode the ownerless-lock
+# cure exists to refuse.
+# ⚠ PID REUSE IS THE ONE HOLE, AND IT FAILS SAFE: a recycled pid makes a dead entry
+# look live, so the exclusive caller WAITS LONGER. It can never make a live holder
+# look dead, so it can never admit a concurrent run. This is the same exposure the
+# primary lock already carries and it is bounded by MAX_POLLS.
+reap_shared() {
+    [ -d "$SHARED_DIR" ] || return 0
+    for _shared_entry in "$SHARED_DIR"/*; do
+        [ -e "$_shared_entry" ] || continue
+        _shared_name=${_shared_entry##*/}
+        case "$_shared_name" in
+            ''|*[!0-9]*) rm -f "$_shared_entry"; continue ;;
+        esac
+        pid_is_live "$_shared_name" || rm -f "$_shared_entry"
+    done
+}
+
+live_shared_count() {
+    reap_shared
+    _shared_n=0
+    if [ -d "$SHARED_DIR" ]; then
+        for _shared_entry in "$SHARED_DIR"/*; do
+            [ -e "$_shared_entry" ] || continue
+            _shared_n=$((_shared_n + 1))
+        done
+    fi
+    printf '%s\n' "$_shared_n"
+}
+
+enter_shared() {
+    mkdir -p "$SHARED_DIR" 2>/dev/null || return 1
+    printf '%s\n' "$$" > "$SHARED_DIR/$$" || return 1
+    OWN_SHARED=1
+    return 0
+}
+
+release_shared_slot() {
+    [ "$OWN_SHARED" -eq 1 ] || return 0
+    rm -f "$SHARED_DIR/$$"
+    # Best-effort only: a concurrent shared sibling legitimately keeps it non-empty.
+    rmdir "$SHARED_DIR" 2>/dev/null || true
+    OWN_SHARED=0
+}
+
+# THE CAP IS A CONDITION OF ENTRY, NOT A SUGGESTION. The whole basis for admitting
+# shared runs concurrently is that a capped targeted run cannot saturate the box, so
+# a shared-tier caller that carries no cap is REFUSED rather than admitted-and-warned.
+# A cap ABOVE the ceiling is refused too: `--maxWorkers=64` satisfies "carries a cap"
+# while defeating every reason the cap exists, and a guard that a caller can satisfy
+# vacuously is not a guard.
+declared_worker_cap() {
+    _cap_next=0
+    for _cap_arg in "$@"; do
+        if [ "$_cap_next" -eq 1 ]; then
+            printf '%s\n' "$_cap_arg"
+            return 0
+        fi
+        case "$_cap_arg" in
+            --maxWorkers=*|--max-workers=*) printf '%s\n' "${_cap_arg#*=}"; return 0 ;;
+            --maxWorkers|--max-workers) _cap_next=1 ;;
+        esac
+    done
+    return 1
+}
+
+require_worker_cap() {
+    if ! _cap=$(declared_worker_cap "$@"); then
+        echo "gate-mutex: SHARED tier REFUSED — the command declares no worker cap." >&2
+        echo "  A shared run is admitted concurrently only because it cannot saturate the box." >&2
+        echo "  Add --maxWorkers=$SHARED_MAX_WORKERS (or run without GATE_MUTEX_TIER=shared to take" >&2
+        echo "  the exclusive slot)." >&2
+        return 2
+    fi
+    case "$_cap" in
+        ''|*[!0-9]*|0)
+            echo "gate-mutex: SHARED tier REFUSED — worker cap '$_cap' is not a positive integer." >&2
+            return 2
+            ;;
+    esac
+    if [ "$_cap" -gt "$SHARED_MAX_WORKERS" ]; then
+        echo "gate-mutex: SHARED tier REFUSED — worker cap $_cap exceeds the ceiling of" >&2
+        echo "  $SHARED_MAX_WORKERS. A cap above the ceiling is a full-load run wearing a small name." >&2
+        return 2
+    fi
+    return 0
+}
+
 release_reaper() {
     [ "$OWN_REAPER" -eq 1 ] || return 0
     _owner=$(read_pid "$REAPER_OWNER_FILE" 2>/dev/null || true)
@@ -160,6 +312,7 @@ release_owned_lock() {
 cleanup() {
     release_owned_lock
     release_reaper
+    release_shared_slot
 }
 trap cleanup 0
 
@@ -281,6 +434,13 @@ describe_lock() {
 }
 
 report() {
+    # The shared population is REPORTED but does not drive the exit code. Inspect's
+    # contract ("exit 0 when no held lock or legacy runner exists") is what existing
+    # callers were written against, and a live shared run's own Vitest is already
+    # caught by the legacy scan below — so naming the pool adds the datum without
+    # moving a single caller's verdict.
+    _shared_live=$(live_shared_count)
+    [ "$_shared_live" -gt 0 ] && echo "gate-mutex: $_shared_live SHARED holder(s) live in $SHARED_DIR."
     if describe_lock; then
         return 1
     fi
@@ -327,8 +487,34 @@ run_held() {
         sleep "$POLL_SECONDS"
     done
 
+    # ── DRAIN THE SHARED POOL ────────────────────────────────────────────────────
+    # THE ORDER IS THE ENTIRE NO-STARVATION ARGUMENT, so it is stated where it is
+    # relied on: this caller ALREADY HOLDS $LOCK_DIR, and `run_shared` refuses to
+    # enter while that directory exists. The shared population can therefore only
+    # SHRINK from this line onward, and a stream of small runs cannot hold the gate
+    # off indefinitely the way a plain "wait until the pool is empty" would.
+    # Bounded like every other wait here: a wedged shared holder must not make the
+    # real gate unreachable, so exhaustion is a GAVE UP (exit 3) and the trap
+    # releases the lock this caller was holding.
+    _shared_i=0
+    while [ "$_shared_i" -le "$MAX_POLLS" ]; do
+        _shared_live=$(live_shared_count)
+        [ "$_shared_live" -eq 0 ] && break
+        [ "$_shared_i" -eq "$MAX_POLLS" ] && {
+            echo "gate-mutex: GAVE UP after $_shared_i poll(s) — $_shared_live shared holder(s)"
+            echo "  remain in $SHARED_DIR:"
+            ls "$SHARED_DIR" 2>/dev/null | sed 's/^/    PID /'
+            return 3
+        }
+        _shared_i=$((_shared_i + 1))
+        sleep "$POLL_SECONDS"
+    done
+
     # A legacy caller may have started Vitest before this process acquired the
     # directory. Hold the new lock while waiting so no second --run caller races.
+    # ⚠ THIS RUNS AFTER THE DRAIN ON PURPOSE. A shared run's own Vitest is a legacy
+    # holder to this scan, so scanning first would report the pool the drain is about
+    # to empty and turn an orderly drain into a GAVE UP.
     _legacy_i=0
     while [ "$_legacy_i" -le "$MAX_POLLS" ]; do
         _h=$(holders)
@@ -346,10 +532,63 @@ run_held() {
     # AFTER the legacy wait, so a run that sat ~7 minutes in the legacy loop still reported
     # "after 0 poll(s)" — and it never said WHICH directory it locked, the one datum that
     # makes a two-population split visible from any two logs.
-    echo "gate-mutex: acquired atomic lock at $LOCK_DIR as PID $$ after $_i atomic poll(s) + $_legacy_i legacy poll(s)."
+    # ⚠ THE SHARED-DRAIN COUNTER IS APPENDED, NEVER INTERLEAVED. `atomic poll(s) +
+    # N legacy poll(s)` is asserted as a contiguous substring by the identity arm
+    # §747.4(1) landed; splicing the new counter between them would red a guard that
+    # is about a different defect entirely.
+    echo "gate-mutex: acquired atomic lock at $LOCK_DIR as PID $$ after $_i atomic poll(s) + $_legacy_i legacy poll(s) + $_shared_i shared-drain poll(s)."
     "$@"
     _child_status=$?
     release_owned_lock
+    return "$_child_status"
+}
+
+# ── THE SHARED TIER ──────────────────────────────────────────────────────────────
+# REGISTER, THEN VERIFY. The window this closes is real and one poll wide: an
+# exclusive caller can `mkdir "$LOCK_DIR"` between this caller's "is the lock free?"
+# test and its own registration, and an entrant that only tested first would then run
+# CONCURRENTLY WITH THE GATE while both logs claimed correctness — the §747.4(1)
+# failure shape exactly. So the entry registers first and re-tests after, and backs
+# out if it lost. The race resolves in the safe direction both ways: the loser
+# deregisters and polls, and an exclusive caller that observes the transient entry
+# merely waits one drain poll.
+run_shared() {
+    require_worker_cap "$@" || return 2
+
+    _i=0
+    _entered=0
+    while [ "$_i" -le "$MAX_POLLS" ]; do
+        recover_dead_owner >/dev/null 2>&1 || true
+        if [ ! -d "$LOCK_DIR" ]; then
+            if ! enter_shared; then
+                echo "gate-mutex: could not register a shared holder in '$SHARED_DIR'." >&2
+                return 2
+            fi
+            if [ ! -d "$LOCK_DIR" ]; then
+                _entered=1
+                break
+            fi
+            release_shared_slot
+        fi
+        [ "$_i" -eq "$MAX_POLLS" ] && break
+        _i=$((_i + 1))
+        sleep "$POLL_SECONDS"
+    done
+
+    if [ "$_entered" -ne 1 ]; then
+        echo "gate-mutex: GAVE UP after $_i poll(s) — an EXCLUSIVE holder owns the slot."
+        describe_lock || true
+        return 3
+    fi
+
+    # ⚠ THE LEGACY SCAN IS DELIBERATELY NOT RUN HERE. It exists to catch a Vitest
+    # started outside this machinery, and every OTHER shared run's Vitest matches it —
+    # so scanning would make shared runs exclude each other and the tier would be a
+    # slower spelling of the one it was built beside.
+    echo "gate-mutex: entered SHARED tier at $SHARED_DIR as PID $$ after $_i poll(s); $(live_shared_count) shared holder(s) live, worker cap <= $SHARED_MAX_WORKERS."
+    "$@"
+    _child_status=$?
+    release_shared_slot
     return "$_child_status"
 }
 
@@ -373,6 +612,14 @@ esac
 case "$MODE" in
     inspect) report ;;
     wait) wait_for_observed_free ;;
-    run) run_held "$@" ;;
+    run)
+        # The tier branches HERE and nowhere else, so an undeclared caller reaches
+        # `run_held` by exactly the path it always did.
+        if [ "$TIER" = shared ]; then
+            run_shared "$@"
+        else
+            run_held "$@"
+        fi
+        ;;
 esac
 exit $?

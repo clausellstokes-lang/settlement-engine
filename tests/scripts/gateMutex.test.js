@@ -3,6 +3,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  readdirSync,
   rmSync,
   utimesSync,
   writeFileSync,
@@ -72,6 +73,28 @@ function resultOf(child) {
     });
   });
 }
+
+/** The shared pool's live registrations, by pid, tolerating an absent directory. */
+function sharedPids(lock) {
+  try {
+    return readdirSync(`${lock}.shared`);
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * A shared-tier command line. The worker cap is an ordinary argv token exactly as it
+ * is in the real incantation (`npx vitest run --maxWorkers=2 <files>`); `sh -c` takes
+ * the first trailing word as `$0`, so a throwaway name sits between the script and
+ * the cap.
+ */
+function sharedArgs(script, cap = '--maxWorkers=2') {
+  const tail = cap === null ? [] : [cap];
+  return ['--run', '--', 'sh', '-c', script, 'shared-probe', ...tail];
+}
+
+const SHARED = { GATE_MUTEX_TIER: 'shared' };
 
 async function waitFor(predicate, label, timeoutMs = 2000) {
   const deadline = Date.now() + timeoutMs;
@@ -297,5 +320,228 @@ describe('gate-mutex lock identity — the default path is caller-environment IN
     expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(0);
     expect(result.stdout).toContain(`acquired atomic lock at ${f.lock}`);
     expect(result.stdout).toMatch(/atomic poll\(s\) \+ \d+ legacy poll\(s\)/);
+  });
+});
+
+// ── THE TWO TIERS (ODQ §778.2, TE-EFF-1 car 1) ───────────────────────────────────────
+// ⛔ WHAT IS TIERED IS ADMISSION, NOT THE GATE. DESIGN_BUILD_EFFICIENCY §7 refuses gate
+// tiering permanently and this does not touch it: every step of `npm run check` still
+// runs, unconditionally, under the exclusive tier. What changes is how many runs may be
+// in flight at once — and the arms below are what keep that from quietly becoming "the
+// mutex stopped excluding things", which is precisely the §747.4(1) failure that cost a
+// cross-log reconstruction to diagnose.
+//
+// EACH ARM IS WRITTEN TO BE ABLE TO FAIL, and the pair structure is deliberate: every
+// permissive claim (shared runs overlap; a dead entry is reaped) is answered by a
+// restrictive twin (an exclusive holder excludes them; a LIVE entry is never reaped).
+// A one-sided suite here would pass just as happily against a script that admitted
+// everything, which is the shape of green that this program keeps catching late.
+describe('gate-mutex TIERS — shared admission, exclusive exclusion', () => {
+  // ── CONTROL (a): CONCURRENCY, PROVED BY A NEGATIVE THE SERIAL CASE CANNOT SATISFY ──
+  // The second run does not report "I ran"; it reports "I ran WHILE THE FIRST HAD NOT
+  // FINISHED". Under any serializing implementation the marker file exists by the time
+  // the second command evaluates, nothing is written, and this reds. It is the exact
+  // mirror of the exclusive arm at the top of this file, with the verdict inverted.
+  it('admits two SHARED runs at once — the second enters while the first is still running', async () => {
+    const f = fixture();
+    const first = start(
+      f.lock,
+      sharedArgs('sleep 0.40; printf done > "$FIRST_DONE"'),
+      { ...SHARED, FIRST_DONE: f.firstDone },
+    );
+    const firstResult = resultOf(first);
+
+    await waitFor(() => sharedPids(f.lock).length === 1, 'the first shared registration');
+
+    const second = start(
+      f.lock,
+      sharedArgs('test -f "$FIRST_DONE" || printf overlapped > "$SECOND_ENTERED"'),
+      { ...SHARED, FIRST_DONE: f.firstDone, SECOND_ENTERED: f.secondEntered },
+    );
+    const secondResult = resultOf(second);
+
+    const [firstExit, secondExit] = await Promise.all([firstResult, secondResult]);
+    expect(secondExit.code, `${secondExit.stdout}\n${secondExit.stderr}`).toBe(0);
+    expect(firstExit.code, `${firstExit.stdout}\n${firstExit.stderr}`).toBe(0);
+    expect(
+      existsSync(f.secondEntered) && readFileSync(f.secondEntered, 'utf8'),
+      'the second shared run did not overlap the first — the tier serialized, so it is not a'
+      + ' shared tier at all',
+    ).toBe('overlapped');
+    expect(secondExit.stdout).toContain(`entered SHARED tier at ${f.lock}.shared`);
+    // …and both deregistered, so the pool cannot leak a slot per run.
+    expect(sharedPids(f.lock)).toEqual([]);
+  });
+
+  // ── CONTROL (b), FIRST DIRECTION: A LIVE EXCLUSIVE HOLDER EXCLUDES NEW SHARED ──────
+  it('an EXCLUSIVE holder blocks a NEW shared entrant until it releases', async () => {
+    const f = fixture();
+    const first = start(f.lock, [
+      '--run', '--', 'sh', '-c',
+      'sleep 0.35; printf done > "$FIRST_DONE"',
+    ], { FIRST_DONE: f.firstDone, GATE_MUTEX_MAX_POLLS: '400' });
+    const firstResult = resultOf(first);
+
+    await waitFor(() => existsSync(join(f.lock, 'pid')), 'the exclusive acquisition');
+
+    const second = start(
+      f.lock,
+      sharedArgs('test -f "$FIRST_DONE" && printf entered > "$SECOND_ENTERED"'),
+      { ...SHARED, FIRST_DONE: f.firstDone, SECOND_ENTERED: f.secondEntered, GATE_MUTEX_MAX_POLLS: '400' },
+    );
+    const secondResult = resultOf(second);
+
+    // Mid-flight: the exclusive holder is still running, so the shared entrant must be
+    // outside — not merely unfinished, but UNREGISTERED. Checking the pool rather than
+    // the marker is what makes this an exclusion assertion instead of a timing one.
+    await new Promise((resolveWait) => setTimeout(resolveWait, 120));
+    expect(sharedPids(f.lock), 'a shared run registered while an exclusive holder owned the slot')
+      .toEqual([]);
+    expect(existsSync(f.secondEntered)).toBe(false);
+
+    const [firstExit, secondExit] = await Promise.all([firstResult, secondResult]);
+    expect(firstExit.code, `${firstExit.stdout}\n${firstExit.stderr}`).toBe(0);
+    expect(secondExit.code, `${secondExit.stdout}\n${secondExit.stderr}`).toBe(0);
+    // …and it was ADMITTED afterwards. Without this half the arm would pass against a
+    // script that simply refused every shared run forever.
+    expect(readFileSync(f.secondEntered, 'utf8')).toBe('entered');
+  });
+
+  // ── CONTROL (b), SECOND DIRECTION: THE DRAIN, AND THE NO-STARVATION ORDERING ───────
+  // Two claims in one arm because they are one mechanism: the exclusive caller takes the
+  // lock FIRST and drains SECOND, so (1) it waits out the shared run already in flight,
+  // and (2) while it is draining, a NEW shared entrant is already excluded — which is
+  // what stops a stream of small runs from holding the real gate off forever.
+  it('an EXCLUSIVE request drains the shared pool, and a PENDING exclusive blocks new entrants', async () => {
+    const f = fixture();
+    const shared = start(
+      f.lock,
+      sharedArgs('sleep 0.45; printf done > "$FIRST_DONE"'),
+      { ...SHARED, FIRST_DONE: f.firstDone, GATE_MUTEX_MAX_POLLS: '400' },
+    );
+    const sharedResult = resultOf(shared);
+
+    await waitFor(() => sharedPids(f.lock).length === 1, 'the shared registration');
+
+    const exclusive = start(f.lock, [
+      '--run', '--', 'sh', '-c',
+      'test -f "$FIRST_DONE" && printf entered > "$SECOND_ENTERED"',
+    ], { FIRST_DONE: f.firstDone, SECOND_ENTERED: f.secondEntered, GATE_MUTEX_MAX_POLLS: '400' });
+    const exclusiveResult = resultOf(exclusive);
+
+    // The exclusive caller now HOLDS the lock and is draining. A third run declaring the
+    // shared tier must not slip in behind it.
+    await waitFor(() => existsSync(join(f.lock, 'pid')), 'the pending exclusive taking the lock');
+    const latecomer = start(
+      f.lock,
+      sharedArgs('printf late > "$LATE_ENTERED"'),
+      { ...SHARED, LATE_ENTERED: join(f.root, 'late-entered'), GATE_MUTEX_MAX_POLLS: '400' },
+    );
+    const latecomerResult = resultOf(latecomer);
+
+    await new Promise((resolveWait) => setTimeout(resolveWait, 120));
+    expect(sharedPids(f.lock), 'a NEW shared entrant registered behind a PENDING exclusive — the'
+      + ' exclusive tier can be starved by a stream of small runs')
+      .toEqual([String(shared.pid)]);
+
+    const [sharedExit, exclusiveExit, lateExit] = await Promise.all([
+      sharedResult, exclusiveResult, latecomerResult,
+    ]);
+    expect(sharedExit.code, `${sharedExit.stdout}\n${sharedExit.stderr}`).toBe(0);
+    expect(exclusiveExit.code, `${exclusiveExit.stdout}\n${exclusiveExit.stderr}`).toBe(0);
+    expect(lateExit.code, `${lateExit.stdout}\n${lateExit.stderr}`).toBe(0);
+    expect(readFileSync(f.secondEntered, 'utf8'), 'the exclusive run entered BEFORE the shared'
+      + ' holder finished — the pool was not drained').toBe('entered');
+    // ANTI-VACUITY: the exclusive caller must have actually WAITED. A zero here would mean
+    // it found an empty pool and the arm proved nothing about draining.
+    expect(exclusiveExit.stdout, 'the shared-drain counter is absent or zero, so this run never'
+      + ' waited for the pool and the drain is untested')
+      .toMatch(/\+ [1-9]\d* shared-drain poll\(s\)\./);
+  });
+
+  // ── CONTROL (c): THE CAP IS A CONDITION OF ENTRY ──────────────────────────────────
+  it('REFUSES a shared run that declares no worker cap, before any registration', () => {
+    const f = fixture();
+    const result = spawnSync('sh', [SCRIPT, ...sharedArgs('printf ran > "$RAN"', null)], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      env: lockEnv(f.lock, { ...SHARED, RAN: join(f.root, 'ran') }),
+    });
+
+    expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(2);
+    expect(result.stderr).toContain('SHARED tier REFUSED');
+    expect(result.stderr).toContain('declares no worker cap');
+    // The refusal is CLEAN: the child never ran and nothing was registered, so a refused
+    // run cannot leave a slot behind for the drain to wait on.
+    expect(existsSync(join(f.root, 'ran'))).toBe(false);
+    expect(sharedPids(f.lock)).toEqual([]);
+  });
+
+  it('REFUSES a shared cap above the ceiling — a large cap is not a cap', () => {
+    const f = fixture();
+    const result = run(f.lock, sharedArgs('exit 0', '--maxWorkers=64'), SHARED);
+
+    expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(2);
+    expect(result.stderr).toContain('exceeds the ceiling');
+  });
+
+  it('ADMITS the same command once the cap is declared, in either spelling', () => {
+    const f = fixture();
+    const equals = run(f.lock, sharedArgs('exit 0', '--maxWorkers=2'), SHARED);
+    expect(equals.status, `${equals.stdout}\n${equals.stderr}`).toBe(0);
+    expect(equals.stdout).toMatch(/entered SHARED tier/);
+
+    // The space-separated spelling is the one a hand-typed incantation reaches for, and a
+    // scan that only understood `=` would refuse a perfectly capped run.
+    const spaced = spawnSync('sh', [
+      SCRIPT, '--run', '--', 'sh', '-c', 'exit 0', 'shared-probe', '--maxWorkers', '2',
+    ], { cwd: ROOT, encoding: 'utf8', env: lockEnv(f.lock, SHARED) });
+    expect(spaced.status, `${spaced.stdout}\n${spaced.stderr}`).toBe(0);
+  });
+
+  it('REFUSES an unknown tier rather than falling back to a silent default', () => {
+    const f = fixture();
+    const result = run(f.lock, ['--run', '--', 'sh', '-c', 'exit 0'], { GATE_MUTEX_TIER: 'small' });
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("GATE_MUTEX_TIER must be 'exclusive' or 'shared'");
+  });
+
+  // ── CONTROL (d): THE REAP, AND THE TWIN THAT PROVES IT DISCRIMINATES ──────────────
+  it('reaps a DEAD-pid shared entry so a killed targeted run cannot wedge the gate', () => {
+    const f = fixture();
+    mkdirSync(`${f.lock}.shared`, { recursive: true });
+    writeFileSync(join(`${f.lock}.shared`, '99999999'), '99999999\n');
+
+    // Zero polls: if the reap did not happen inside this call the drain gives up at once.
+    const result = run(
+      f.lock,
+      ['--run', '--', 'sh', '-c', 'exit 23'],
+      { GATE_MUTEX_MAX_POLLS: '0', GATE_MUTEX_POLL_SECONDS: '0' },
+    );
+
+    expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(23);
+    expect(existsSync(join(`${f.lock}.shared`, '99999999')),
+      'the dead shared entry survived the drain — a killed targeted run wedges the gate forever')
+      .toBe(false);
+  });
+
+  it('NEVER reaps a LIVE shared entry — the drain waits for it instead', () => {
+    const f = fixture();
+    mkdirSync(`${f.lock}.shared`, { recursive: true });
+    writeFileSync(join(`${f.lock}.shared`, String(process.pid)), `${process.pid}\n`);
+
+    const result = run(
+      f.lock,
+      ['--run', '--', 'sh', '-c', 'exit 23'],
+      { GATE_MUTEX_MAX_POLLS: '0', GATE_MUTEX_POLL_SECONDS: '0' },
+    );
+
+    expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(3);
+    expect(result.stdout).toMatch(/GAVE UP/i);
+    expect(existsSync(join(`${f.lock}.shared`, String(process.pid))),
+      'a LIVE shared holder was reaped — the reap is a blanket rm, not pid evidence')
+      .toBe(true);
+    // …and the lock this caller took while draining is handed back, never left behind.
+    expect(existsSync(f.lock)).toBe(false);
   });
 });
