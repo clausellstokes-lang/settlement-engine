@@ -38,6 +38,14 @@ choose-on-known, resolve-on-true; per-method failure modes) → **receipts** (ev
 Herald-legible) → **praxis** (R3/R3c: the practice mark + the signed outcome lesson, feeding
 drift, feeding the next choice). A player/user act interrupts anywhere (the DM's mandate).
 
+**Acceptance reads the personal risk register (W-LIVES §13, ODQ §803.1):** every accept/refuse/
+continue decision compares the operation's priced risk against `riskRegister(npc, context)` —
+center from effective character × desperation, breadth from the CHAOS projection (lawful narrow,
+chaotic broad). The two-scale seam: the court's SP-C appetite governs what is OFFERED; the
+person's register governs what is ACCEPTED. Seek-more and seek-less (§803.1 R5) are both
+expressions of this one seam — the riskier, better-paying mission is ambition's honest door, and
+declining it is a character statement the principal receipts.
+
 ## 2. The mission dispatcher (the piece ES deliberately deferred)
 
 ES-1 built the door and no production module walks through it — the dispatcher is chartered

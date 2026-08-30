@@ -306,3 +306,56 @@ half-car beside car 4 (the derived read + mill wiring); R3 rides cars 3/5 (menu 
 dispatcher, the infiltration ladder (L0–L4, extending ES §3.4b upward), and the envoy task
 catalog — is **docs/DESIGN_W_OPS.md** (ODQ §803). It CONSUMES this substrate (planes, praxis,
 known character, the R4 bond grammar) and lands after cars 1–3 here.
+
+## 13. The third sitting (ODQ §803.1): seeking, the risk register, derived alignment
+
+**R5 — Bidirectional seeking.** Ambition is a spectrum of doors through the ONE acceptance seam:
+seek-MORE = high-risk/high-payout acceptance, promotion/rivalry bids, R1 willing compromise, the
+rooted dwell; seek-LESS = refusal, withdrawal toward modest goal branches, R4's confession and
+seek_protection. Every door reads the same soul; every refusal is in character.
+
+**R6 — The personal risk register, derived never stored.** `riskRegister(npc, context) =
+{center, breadth}` — center from effective character (courage/ambition families × the ES
+charter's home-desperation context: §3.4b's composition FORMALIZED); no stored stock — drift IS
+the memory. **The two-scale seam:** the court's SP-C appetite governs what it OFFERS; the
+person's register governs what they ACCEPT; a mission happens when both say yes.
+
+**R7 — Derived alignment.** Good↔evil × lawful↔chaotic = the summed plane projection of
+EFFECTIVE positions (the §1 derived columns), banded into words. Never stored; moves with drift
+— "he was a good man once" is mechanical. Legacy undrifted words project to today's
+TRAIT_ALIGNMENT values (byte-identical, pinned). Axes authored, characterizations derived — the
+same philosophy at both mortal and divine scale.
+
+**R8 — Chaos is breadth.** The disorder projection sets the register's WINDOW WIDTH: lawful ⇒
+narrow (only well-priced risks), chaotic ⇒ broad (the desperate gambit and the irrational fold
+both live inside; seeded draw). This is the estate's fidelityNoise law (chaos = variance)
+arriving at the personal scale — window width in v1; extending personal chaos into ESTIMATE
+noise is an owner-taste row (avoid double-noise).
+
+## 14. The coherence audit (ODQ §803.2): four gaps ruled, two exclusions recorded
+
+**A — The interpersonal coupling.** Relationship events are EXPERIENCE KINDS carrying the
+counterpart id (betrayal BY A FRIEND is PERSONAL-plane and hits harder than institutional loss —
+the persons you love are closer than the factions you serve); character conditions relationship
+formation through the same projection (the paranoid bond slowly). Existing machinery only
+(relationshipMemory, grievances, relationshipEvolution) — the coupling, never a new system.
+
+**B — Death and the fate of state.** Drift state is garbage-collected at death; KNOWN character
+freezes into legacy at the chronicle (a dead man's reputation still shames or shields his
+house); R4 bonds resolve BY HOLDER — org-shared evidence survives the patron and passes to the
+org, personally-held evidence dies with him (deliverance, receipted).
+
+**C — Group character = derived member projection.** The clergy plane generalizes: a
+faction/court's effective character is the org-power-weighted projection of its seated members
+(readClergyPlane's shape beyond clergy; variance preserved; zero new state), read BESIDE — never
+instead of — SP-C's learned appetite. Three reads, one seam: a court's NERVE is learned, its
+CHARACTER is who staffs it, its OFFERS read both. A faction's R2 known character is its public face.
+
+**D — Biography is a query, not a store.** An NPC's life story is a derived read over the
+receipts that name them; the dossier renders "hardened by the sack, the failed mission, a year
+in a cruel city" from receipts alone. No per-NPC memory store exists or may be minted.
+
+**Deliberate exclusions (recorded so nobody re-finds them as gaps):** no mood/emotion layer —
+character + context + conditions cover it, by design; no age-scaled drift rates in v1 (a taste
+row, not a hole). **Small rule:** the AFFILIATION plane's "your god": clergy → their faction's
+deity; laity → the settlement patron scaled by devotion.
