@@ -722,11 +722,26 @@ describe('8. THE DARK FENCE — measured against HEAD, not recorded from the new
   //     pressure 0.90   HEAD 4064300d9dc8d45b   WORKTREE 4064300d9dc8d45b
   // So each literal below is HEAD's output, not this branch's. A move here means the dark
   // path changed, which is the golden law breaking. Do NOT re-record it to clear a red.
+  // ── RE-RECORDED 2026-08-30 BY TE-HERALD-1 (the §754.3 humanization wave) ──────────
+  // THE FENCE'S SUBJECT IS UNCHANGED; ONLY ITS PROSE MOVED. This digest folds
+  // `tierOut.candidates[].reasons` into the hash, and the wave rebanded
+  // tierResourceDynamics' reason strings ("RNG chance now 45%." -> "The change is possible,
+  // not yet likely.", and the resource-pressure line). Nothing the fence exists to guard
+  // moved: populations, tiers, tierChange payloads and lifecyclePatch are all identical.
+  // ⭐ PROVEN BY EXECUTION, NOT ARGUED. The same trace was computed at base 82991e1e3 and at
+  // this tip with `reasons` replaced by a constant, and the four digests are BYTE-IDENTICAL
+  // across both trees:
+  //     0.15 c0c2ca3c3fff35bd · 0.45 1e2c4e65bdf6c2e8 · 0.70 879cc795d738dc13 · 0.90 9afd8a0760996b24
+  // The un-neutralised base run also reproduced the four frozen values below exactly, which
+  // is what proves the probe was faithful rather than merely agreeable.
+  // ⚠ The discriminator is the same one this wave used at the AO-5 denominator and at the
+  // rumor-ledger golden: BEHAVIOUR HELD, WORDING MOVED. Where behaviour moved instead — the
+  // npcAgency:914 metronome case — the site was STOPPED, not re-recorded.
   const FROZEN = Object.freeze({
-    0.15: '414bb049cfb5d5b4',
-    0.45: '415d764b6d9c8b1f',
-    0.70: '94f5d800f1bfa1d8',
-    0.90: '4064300d9dc8d45b',
+    0.15: '42b514c1e896342b',
+    0.45: '992cccb50f00081d',
+    0.70: '389b242ad966a03a',
+    0.90: '1f5a367f4dd622d3',
   });
   const REALM = Object.freeze([
     ['Ashford', 'town', 300, 900], ['Brack', 'hamlet', 380, 1200], ['Cairn', 'thorp', 40, 300],

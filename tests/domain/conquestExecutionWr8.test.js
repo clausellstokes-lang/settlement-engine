@@ -423,9 +423,11 @@ describe('WR-8 N — THE COUNTERFORCE AT THE MOUTH: annexing a famine', () => {
 
   test('THE RECEIPT SAYS IT IN WORDS, on both surfaces', () => {
     const famine = runOccupations({ rules: LIT_RULES, occupierPopulation: 30000, occupied: STARVING });
-    expect(burdenOf(famine).reasons.join(' ')).toContain('Inherited hunger');
+    // TE-HERALD-1: the receipt still SAYS the annexed famine, in world words instead of
+    // "Inherited hunger 0.62" — the scalar rode the record, the sentence rides the reader.
+    expect(burdenOf(famine).reasons.join(' ')).toContain('famine it annexed is part of the garrison bill');
     expect(JSON.stringify(burdenOf(famine).condition.causes)).toContain('annexed a famine');
-    expect(spoilsOf(famine).reasons.join(' ')).toContain('Netted down by inherited hunger');
+    expect(spoilsOf(famine).reasons.join(' ')).toContain('Netted down by the famine it annexed');
     // A well-fed empire is not told it has annexed a famine.
     const fed = runOccupations({ rules: LIT_RULES, occupierPopulation: 30000, occupied: FED });
     expect(burdenOf(fed).reasons.join(' ')).not.toContain('Inherited hunger');

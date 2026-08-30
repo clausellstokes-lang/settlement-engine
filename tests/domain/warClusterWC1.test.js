@@ -261,7 +261,9 @@ describe('W-C1 item 1b — suing-for-peace rust', () => {
     for (const seed of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
       const out = evaluateSettlementStrategyRules(snap, pIdx, { tick: 6, simulationRules: { settlementStrategyEnabled: true }, rng: createPRNG(seed) });
       const sue = sueCandidate(out);
-      if (sue && sue.reasons.some((r) => /misread of war-bankruptcy/i.test(r))) { sawMisread = true; break; }
+      // TE-HERALD-1: the sentence now reads "A misread of ITS OWN war-bankruptcy" — the
+      // possessive arrived when the perceived/true scalars left the prose.
+      if (sue && sue.reasons.some((r) => /misread of its own war-bankruptcy/i.test(r))) { sawMisread = true; break; }
     }
     expect(sawMisread).toBe(true);
   });

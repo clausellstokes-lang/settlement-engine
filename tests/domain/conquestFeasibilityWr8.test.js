@@ -203,7 +203,11 @@ describe('WR-8 N2 — the feasibility belief composite', () => {
     const weak = conquestTermsRange(readConquestFeasibility(DOOMED));
     expect(strong.known).toBe(true);
     expect(strong.takeByForce01).toBeGreaterThan(Number(strong.mustGiveToSurvive01));
-    expect(strong.receipt).toContain('could take');
+    // TE-HERALD-1: the bargaining receipt speaks this file's OWN reach/threat ladders
+    // instead of two raw 0..1 beliefs; the numbers still ride takeByForce01 /
+    // mustGiveToSurvive01, asserted two lines above.
+    expect(strong.receipt).toMatch(/believes a conquest is .* by force/);
+    expect(strong.receipt).not.toMatch(/\d/); // anchored: the positive toMatch on the line above proves the receipt is live
 
     // These two courts agree about the world, so their ranges overlap and a
     // settlement exists between them.

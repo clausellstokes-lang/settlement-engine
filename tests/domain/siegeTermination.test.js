@@ -169,7 +169,11 @@ describe('war layer — hard siege-duration ceiling (a saturated stalemate termi
     // The withdrawal explicitly attributes the resolution to the hard ceiling.
     const abandoned = war.outcomes.find(o => /siege_abandoned/.test(o.id));
     expect(abandoned).toBeTruthy();
-    expect(abandoned.reasons.some(r => /hard \d+-tick ceiling/.test(r))).toBe(true);
+    // TE-HERALD-1: a tick is an engine unit, not a world word, so the receipt names the
+    // LIMIT and the direction instead of the count. Both halves pinned.
+    const lifted = abandoned.reasons.find(r => /ran to the hard limit/.test(r));
+    expect(lifted, 'the withdrawal no longer attributes itself to the ceiling').toBeTruthy();
+    expect(lifted).toMatch(/the siege lifted/);
   });
 
   test('a NUMERIC-targetId record still withdraws at the ceiling (the String-coercion contract)', () => {
