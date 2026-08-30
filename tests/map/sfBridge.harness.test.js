@@ -244,7 +244,14 @@ describe('sf-bridge.js harness', () => {
      * way markupPack derives them — coast cells ±1, everything else ±2 — so the
      * fixture speaks the same vocabulary as a real pack rather than a guess at it.
      */
-    function gridPack({ cols, rows, water = () => false, burgs = [], omit = [], xs = SPACING, ys = SPACING }) {
+    function gridPack({
+      cols, rows, water = () => false, burgs = [], omit = [], xs = SPACING, ys = SPACING,
+      // E-NET-1 needs terrain that is NOT flat — the whole point of a true-cost
+      // verdict is that it can tell a glacier from a meadow — so the two terrain
+      // arrays gain an opt-in hook each. Both default to the flat pack every
+      // NET-1 fixture above was written against, so nothing there moves.
+      biomeAt = null, heightAt = null,
+    }) {
       const n = cols * rows;
       const idx = (c, r) => r * cols + c;
       const colOf = (i) => i % cols;
@@ -256,7 +263,8 @@ describe('sf-bridge.js harness', () => {
       for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) {
         const i = idx(col, row);
         p[i] = [col * xs, row * ys];
-        h[i] = water(col, row) ? 10 : 40;
+        h[i] = water(col, row) ? 10 : (heightAt ? heightAt(col, row) : 40);
+        if (biomeAt && !water(col, row)) biome[i] = biomeAt(col, row);
         const nb = [];
         if (col > 0) nb.push(idx(col - 1, row));
         if (col < cols - 1) nb.push(idx(col + 1, row));
@@ -468,6 +476,101 @@ describe('sf-bridge.js harness', () => {
       const paths = routeOn(g, edges);
       expect(Object.keys(paths).length).toBe(edges.length);
       for (const id of Object.keys(paths)) expect(paths[id].points.length).toBeGreaterThan(50);
+    });
+
+    // ── E-NET-1 · the land-vs-sea verdict ────────────────────────────────
+    // What NET-1 left behind: the router priced every cell of both candidates
+    // and then threw all of it away, choosing the mode by comparing the two
+    // POLYLINE LENGTHS against a bare `1.15`. These four pin the replacement.
+    const GLACIER = 11, GRASSLAND = 4;   // FMG biome ids; BIOME_COST 4.0 vs 0.9
+    const seaToTheNorth = (c, r) => r < 2;
+
+    it('a road across a glacier wall now puts out to sea — and the sea line is the LONGER one', () => {
+      // Two coastal towns eight cells apart along row 2, with a three-cell wall of
+      // glacier between them. Ashore is 8 hops at 4.0 through the wall; the water
+      // is 10 hops at the shoreline rate. The old rule compared 9 points against
+      // 11 and kept the road on the glacier. The assertion that makes this a real
+      // discrimination and not a coincidence is the last one: the route the router
+      // now picks is the LONGER line, so length alone could never have picked it.
+      const wall = gridPack({
+        cols: 13, rows: 9, water: seaToTheNorth,
+        biomeAt: (c) => (c >= 5 && c <= 7 ? GLACIER : GRASSLAND),
+      });
+      const chosen = routeOn(wall, [edge('W', [2, 2], [10, 2], true)]).W;
+      expect(chosen.mode).toBe('sea');
+
+      // The land candidate, recovered by asking for the same pair with no sea
+      // preference (no sea candidate is built when a land path exists).
+      const ashore = routeOn(wall, [edge('L', [2, 2], [10, 2], false)]).L;
+      expect(ashore.mode).toBe('land');
+      expect(ashore.points.length).toBeLessThan(chosen.points.length);
+    });
+
+    it('the same geometry with no wall stays ashore — which is also the proof the burg multiplier is OUT of the verdict', () => {
+      // ANTI-VACUITY for the test above: identical water, identical seats, flat
+      // grassland. The road stays on land, so the sea verdict there was the wall.
+      //
+      // AND THE SECOND PROOF, in the same fixture: this land route runs over open
+      // country end to end, so every cell of it pays OFF_BURG_MULT in the ROUTING
+      // cost. Were that ×3 also in the verdict, the land score would be ~21.6
+      // against the sea's ~10.4 and this road would sail. It does not, because the
+      // burg term is a preference about where roads go and not a claim about how
+      // hard the ground is.
+      const meadow = gridPack({ cols: 13, rows: 9, water: seaToTheNorth });
+      expect(routeOn(meadow, [edge('W', [2, 2], [10, 2], true)]).W.mode).toBe('land');
+
+      // …and the mirror: plastering burgs along the glacier line does not rescue
+      // it either. The verdict is indifferent to burgs in BOTH directions.
+      const wallWithBurgs = gridPack({
+        cols: 13, rows: 9, water: seaToTheNorth,
+        biomeAt: (c) => (c >= 5 && c <= 7 ? GLACIER : GRASSLAND),
+        burgs: Array.from({ length: 13 }, (_, c) => [c, 2]),
+      });
+      expect(routeOn(wallWithBurgs, [edge('W', [2, 2], [10, 2], true)]).W.mode).toBe('sea');
+    });
+
+    it('SEA_ROUTE_BIAS is the whole margin: a strait the sea wins by 20 % it takes, one it wins by 9 % it does not', () => {
+      // A strait of width W with the only land bridge two columns east. Both
+      // candidates run entirely at their own difficulty FLOOR — grassland ashore,
+      // shoreline afloat — and those two floors are the same number by
+      // construction, so the ONLY thing separating these two verdicts is the named
+      // bias. Land costs 2·2 + (W+1) hops; the water leg plus its two quays costs
+      // about W+2. The ratio climbs with W and crosses 1/1.15 = 0.870 near W = 18.
+      //
+      // This is also the pin that would red if either floor moved alone: shift
+      // MIN_BIOME_COST or SEA_BASE and the crossing point moves off this bracket.
+      const strait = (W) => gridPack({
+        cols: 7, rows: W + 6, water: (c, r) => r >= 3 && r <= 2 + W && c < 6,
+      });
+      // W = 10 ⇒ ratio ≈ 0.80: the sea is 20 % cheaper and wins even after the bias.
+      expect(routeOn(strait(10), [edge('B', [2, 2], [2, 13], true)]).B.mode).toBe('sea');
+      // W = 30 ⇒ ratio ≈ 0.91: the sea is only 9 % cheaper, and the bias keeps the
+      // road ashore all the way round.
+      expect(routeOn(strait(30), [edge('B', [2, 2], [2, 33], true)]).B.mode).toBe('land');
+    });
+
+    it('the verdict rides the corridor discount, so a road that joins a trunk keeps its road', () => {
+      // THE MEASUREMENT THAT DECIDED THE DESIGN. Scoring the two candidates with
+      // the corridor discount taken out looked tidier, and it was wrong: a land
+      // route that had just detoured onto an existing trunk — and was therefore
+      // CHEAPER to travel — scored as the longer line it now is and lost its edge
+      // to the sea. Here two neighbours bank a corridor one and two rows below W's
+      // straight line; W then detours onto it, growing from 9 points to 13, and
+      // must STILL be a road. (Nine points of open grassland beats the 11-point
+      // sea line; thirteen does not. It stays ashore only because the discount is
+      // in the score.)
+      const flat = () => gridPack({ cols: 13, rows: 9, water: seaToTheNorth });
+      const solo = routeOn(flat(), [edge('W', [2, 2], [10, 2], true)]).W;
+      const batch = routeOn(flat(), [
+        edge('P', [2, 4], [10, 4]), edge('Q', [2, 3], [10, 3]), edge('W', [2, 2], [10, 2], true),
+      ]);
+      expect(solo.mode).toBe('land');
+      expect(batch.W.mode).toBe('land');
+      expect(batch.W.points.length).toBeGreaterThan(solo.points.length);
+      // Anti-vacuity: the batch really does bank a corridor beside W — Q's own
+      // line moved when it was routed after P.
+      const qAlone = routeOn(flat(), [edge('Q', [2, 3], [10, 3])]).Q;
+      expect(batch.Q.points.length).not.toBe(qAlone.points.length);
     });
   });
 

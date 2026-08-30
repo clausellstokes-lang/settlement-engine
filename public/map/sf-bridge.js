@@ -659,6 +659,25 @@
     //      limit. Sea cost now grades on that depth, so lanes hug the coast the
     //      way real shipping does, instead of the old rule which made SHALLOW
     //      water dearer than deep and pushed lanes out to sea.
+    //
+    // ── E-NET-1..3 · what NET-1 deferred, collected ────────────────────────
+    // Three more, and only the last of them touches which pairs get a road (it
+    // does not — it changes which of them can be a SEA road):
+    //
+    //   5. TRUE-COST MODE SELECTION (E-NET-1). The land-vs-sea verdict compared
+    //      polyline LENGTHS and threw away every terrain term the cost function
+    //      had just computed. It now re-scores both candidates in one declared
+    //      difficulty unit, and the bare `1.15` land preference is the named
+    //      constant SEA_ROUTE_BIAS. DECLARED SHIFT: a pair whose land route is
+    //      short but hard, or long but easy, can change mode across this date.
+    //   6. LAKES ARE NOT THE SEA (E-NET-2). "Water" was `h < 20`, which is every
+    //      lake as well as the ocean, so a lakeside pair could be given a sea
+    //      lane and a boat could put out from a village on a pond. `cells.f` +
+    //      `pack.features` name each water body; only an `ocean` feature is the
+    //      sea now. DECLARED SHIFT on any pack that has lakes.
+    //   7. THE ITERATION GUARD REPORTS (E-NET-3). MAX_ITER exhaustion returned
+    //      null and the road silently vanished off the map with nothing said.
+    //      Exhaustions are now counted, named, and carried back in the reply.
     'settlementEngine:computeRoadNetwork'(data, rid) {
       try {
         const { edges } = data || {};
@@ -729,6 +748,17 @@
         const LAND_H_SCALE = MIN_BIOME_COST * CORRIDOR_REUSE;
         const SEA_H_SCALE  = SEA_BASE * CORRIDOR_REUSE;
 
+        // ── E-NET-1 · THE LAND PREFERENCE, NAMED ───────────────────────────
+        // How much cheaper a sea crossing must be before a road becomes a lane.
+        // It was a bare `1.15` sitting in the mode comparison at the bottom of
+        // this handler with no name and no stated meaning. It is a real modelling
+        // claim and it now says so: the water route is charged a 15 % surcharge
+        // because the cost model prices the CROSSING and not the voyage — no
+        // harbour dues, no hull, no crew, no waiting on a wind — so a sea route
+        // that merely ties on terrain is not actually the cheaper way to travel.
+        // Land is the default; the sea has to win by a margin.
+        const SEA_ROUTE_BIAS = 1.15;
+
         // Every (cell, cell) hop a road has already taken this request. Written
         // only from the path actually CHOSEN for an edge, never from a candidate
         // that lost the land-vs-sea comparison.
@@ -737,38 +767,77 @@
         const reuse = (from, cell) =>
           (from != null && usedCellPairs.has(hopKey(from, cell)) ? CORRIDOR_REUSE : 1);
 
-        const landCost = (cell, from) => {
-          if (!isLand(cell)) return Infinity;
+        // ── E-NET-1 · TRAVEL DIFFICULTY, IN ONE DECLARED UNIT ──────────────
+        // ⛔ THE UNIT IS THE WHOLE POINT. `landDifficulty` and `seaDifficulty`
+        // below both answer THE SAME QUESTION IN THE SAME UNIT: **what one map
+        // unit of travel through this cell costs, where the easiest going in
+        // either medium is 0.9** — grassland ashore, the shoreline band afloat.
+        // The two floors coincide at 0.9 by construction (MIN_BIOME_COST is
+        // grassland's 0.9 and SEA_BASE is 0.9), and that coincidence is the ONLY
+        // reason a land number and a sea number may be compared at all. A future
+        // edit that moves one floor without the other silently re-scales the
+        // land-vs-sea choice, so a pin brackets the ratio at which the verdict
+        // turns and would red if either floor moved alone.
+        //
+        // ONE TERM IS DELIBERATELY ABSENT, AND ONE DELIBERATELY PRESENT:
+        //   • OFF_BURG_MULT is OUT. It is a preference ("roads go where people
+        //     are"), not a difficulty — a mule does not walk three times as hard
+        //     through empty country. Left in, it would charge every land route
+        //     ~3× against an unmultiplied sea route and hand almost every coastal
+        //     pair to the sea. (The pin for this is the no-wall control below:
+        //     its land route is off-burg end to end and must still beat the sea.)
+        //   • CORRIDOR_REUSE is IN, and this was MEASURED, not assumed. Scoring
+        //     the two candidates WITHOUT it looked tidier — a verdict about pure
+        //     terrain — but it judges each route under an objective the search did
+        //     not use: a land route that had just detoured onto an existing trunk
+        //     road, and was therefore CHEAPER to travel, scored as the longer line
+        //     it now is and lost the edge to the sea. Observed on a 13×9 fixture:
+        //     the road routed alone stayed ashore and the same road routed after
+        //     two neighbours stole its corridor put out to sea. Scoring with the
+        //     discount keeps the verdict consistent with the path it is judging.
+        //   ⚠ SO THE VERDICT IS A BATCH PROPERTY, exactly as the LINE already is
+        //     (see `usedCellPairs` above): a road's mode may legitimately differ
+        //     between routing it alone and routing it with its neighbours, and
+        //     RoadsLayer always sends the whole set in one call, which is what
+        //     makes it well-defined. It is NOT order-free and nothing here claims
+        //     it is.
+        const landDifficulty = (cell) => {
           const h = H[cell] || 0;
           const b = B[cell] ?? 4;
           const base = BIOME_COST[b] ?? 2.0;
           // Mountain penalty kicks in steeply above h=60 (FMG uses 0..100).
           const elevMult = h > 60 ? 1 + (h - 60) / 15 : 1;
           const riverBias = R[cell] ? 0.3 : 0;
-          const terrain = base * elevMult + riverBias;
-          // A burg on the cell is the discount; everywhere else pays the multiplier.
-          const settled = BURG[cell] ? 1 : OFF_BURG_MULT;
-          return terrain * settled * reuse(from, cell);
+          return base * elevMult + riverBias;
         };
 
-        const seaCost = (cell, from) => {
-          if (!isOcean(cell)) return Infinity;
-          let base;
+        const seaDifficulty = (cell) => {
           const t = T[cell];
           if (typeof t === 'number' && t < 0) {
             // -1 is the shoreline; each band out costs a little more, so a lane
             // between two harbours follows the coast rather than the open sea.
-            base = SEA_BASE + SEA_DEPTH_STEP * (Math.min(-t, SEA_DEPTH_CAP) - 1);
-          } else if (T.length) {
-            // Water FMG's markup never reached — beyond its -10 limit. Open ocean.
-            base = SEA_BASE + SEA_DEPTH_STEP * (SEA_DEPTH_CAP - 1);
-          } else {
-            // No distance field at all (a synthetic or pre-markup pack): the
-            // pre-NET-1 elevation rule, unchanged, so such packs do not move.
-            const h = H[cell] || 0;
-            base = h >= 15 ? 1.2 : 0.9;
+            return SEA_BASE + SEA_DEPTH_STEP * (Math.min(-t, SEA_DEPTH_CAP) - 1);
           }
-          return base * reuse(from, cell);
+          if (T.length) {
+            // Water FMG's markup never reached — beyond its -10 limit. Open ocean.
+            return SEA_BASE + SEA_DEPTH_STEP * (SEA_DEPTH_CAP - 1);
+          }
+          // No distance field at all (a synthetic or pre-markup pack): the
+          // pre-NET-1 elevation rule, unchanged, so such packs do not move.
+          const h = H[cell] || 0;
+          return h >= 15 ? 1.2 : 0.9;
+        };
+
+        const landCost = (cell, from) => {
+          if (!isLand(cell)) return Infinity;
+          // A burg on the cell is the discount; everywhere else pays the multiplier.
+          const settled = BURG[cell] ? 1 : OFF_BURG_MULT;
+          return landDifficulty(cell) * settled * reuse(from, cell);
+        };
+
+        const seaCost = (cell, from) => {
+          if (!isOcean(cell)) return Infinity;
+          return seaDifficulty(cell) * reuse(from, cell);
         };
 
         // Pack has `findCell(x, y)` as a global. Fall back to a linear scan
@@ -916,6 +985,46 @@
         const toPoints = (cellPath) =>
           (cellPath || []).map((c) => ({ x: P[c][0], y: P[c][1] }));
 
+        /** Straight-line map distance between two cell centroids. */
+        const cellSpan = (a, b) => {
+          const pa = P[a], pb = P[b];
+          if (!pa || !pb) return 0;
+          return Math.hypot(pb[0] - pa[0], pb[1] - pa[1]);
+        };
+
+        /**
+         * E-NET-1 · THE TRUE COST OF A ROUTE, in the declared unit above: the sum
+         * over every hop of (the difficulty of the cell entered) × (the distance
+         * of that hop). This is the SAME accumulation A* itself performs, which is
+         * exactly why it is comparable — it re-scores the CHOSEN path with the one
+         * shaping term taken out, rather than inventing a second cost model.
+         * A path of one cell (start === goal) has travelled nothing and costs 0.
+         */
+        const routeDifficulty = (cellPath, difficultyOf) => {
+          if (!Array.isArray(cellPath) || cellPath.length < 2) return 0;
+          let total = 0;
+          for (let i = 1; i < cellPath.length; i++) {
+            const from = cellPath[i - 1], to = cellPath[i];
+            total += difficultyOf(to) * reuse(from, to) * cellSpan(from, to);
+          }
+          return total;
+        };
+
+        /**
+         * A sea route is the water leg PLUS the two quay hops, and the quays are
+         * charged too: the boat's run out of the harbour and into the far one is
+         * sailing, and leaving it unpriced would make every sea route look two
+         * free hops cheaper than it is. Each quay hop is charged at the difficulty
+         * of the WATER cell it touches, which is what a harbour approach costs.
+         */
+        const seaRouteDifficulty = (startCell, midCells, goalCell) => {
+          if (!Array.isArray(midCells) || midCells.length < 1) return Infinity;
+          const first = midCells[0], last = midCells[midCells.length - 1];
+          return routeDifficulty(midCells, seaDifficulty)
+            + seaDifficulty(first) * cellSpan(startCell, first)
+            + seaDifficulty(last) * cellSpan(last, goalCell);
+        };
+
         /** Bank every hop of a chosen path so the roads that follow ride it cheap. */
         const recordCorridor = (cellPath) => {
           if (!Array.isArray(cellPath)) return;
@@ -994,21 +1103,24 @@
                { x: P[goalC][0], y: P[goalC][1] }]
             : null;
 
-          // Pick the cheaper-ish option. We don't have true costs here, so use
-          // polyline length as a proxy. Sea only wins if clearly shorter, since
-          // land paths are usually preferred for adjacent settlements.
-          const plen = (pts) => {
-            if (!pts) return Infinity;
-            let t = 0;
-            for (let i = 1; i < pts.length; i++) {
-              t += Math.hypot(pts[i].x - pts[i-1].x, pts[i].y - pts[i-1].y);
-            }
-            return t;
-          };
+          // ── E-NET-1 · THE MODE IS CHOSEN ON COST, NOT ON LENGTH ───────────
+          // What stood here compared the two POLYLINE LENGTHS and said so in its
+          // own comment ("We don't have true costs here, so use polyline length
+          // as a proxy"). Length is not cost: it cannot tell a road over a glacier
+          // ridge from the same road across grassland, so a land route through
+          // terrain the cost function had just priced at four times grassland won
+          // the comparison outright as long as it was geometrically shorter — and
+          // every one of NET-1's terrain terms was thrown away at the last step.
+          //
+          // Now both candidates are re-scored in the ONE declared difficulty unit
+          // (see landDifficulty / seaDifficulty above) and the bias is a named
+          // constant.
+          const landScore = landPath ? routeDifficulty(landPath, landDifficulty) : Infinity;
+          const seaScore = seaMid ? seaRouteDifficulty(startC, seaMid, goalC) : Infinity;
 
           let chosen = null, chosenCells = null, mode = 'land';
           if (landPts && seaPts) {
-            const seaWins = plen(seaPts) * 1.15 < plen(landPts);
+            const seaWins = seaScore * SEA_ROUTE_BIAS < landScore;
             chosen      = seaWins ? seaPts  : landPts;
             chosenCells = seaWins ? seaMid  : landPath;
             mode        = seaWins ? 'sea'   : 'land';
