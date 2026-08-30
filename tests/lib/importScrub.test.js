@@ -11,9 +11,14 @@
  * strips.
  */
 import { describe, it, expect } from 'vitest';
-import { scrubImportedConfig } from '../../src/lib/importScrub.js';
+import { readFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { scrubImportedConfig, scrubImportedTreasury } from '../../src/lib/importScrub.js';
 import { isSubsystemActive } from '../../src/domain/worldPulse/subsystemActivation.js';
 import { prepareSettlementEntry, ensureNormalizeLoaded } from '../../src/lib/accountImport.js';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 describe('store-4 — scrubImportedConfig', () => {
   it('drops the seed + EVERY deity/faith embed, keeps benign keys', () => {
@@ -48,6 +53,90 @@ describe('store-4 — scrubImportedConfig', () => {
   it('passes a null / non-object config through unchanged', () => {
     expect(scrubImportedConfig(null)).toBe(null);
     expect(scrubImportedConfig(undefined)).toBe(undefined);
+  });
+});
+
+describe('W-COIN A1.8 — scrubImportedTreasury: imports arrive COINLESS', () => {
+  const withLedger = (coin) => ({
+    name: 'Imported', tier: 'town',
+    economicState: {
+      foodSecurity: { storageMonths: 2 },
+      treasury: { coin, openedTick: 3, lastTick: 40, coinFlows: { taxed: 5, upkeep: 0, transferredIn: 0, transferredOut: 0, shortfall: 0 } },
+    },
+  });
+
+  it('drops the coin ledger and keeps every other economicState key', () => {
+    const out = /** @type {any} */ (scrubImportedTreasury(withLedger(4200)));
+    expect(Object.hasOwn(out.economicState, 'treasury')).toBe(false);
+    // anchored: the round-trip arm below proves this same fixture really carries a ledger
+    // before the strip, so a scrub whose subject had drifted away reds there, not here.
+    expect(out.economicState.foodSecurity).toEqual({ storageMonths: 2 });
+    expect(out.name).toBe('Imported');
+  });
+
+  it('is REFERENCE-IDENTICAL when there is nothing to strip', () => {
+    // Every settlement in every dark campaign takes this path. A strip that rebuilt the
+    // object would charge a dormancy cost to worlds with no ledger at all.
+    const dark = { name: 'Dark', economicState: { foodSecurity: { storageMonths: 2 } } };
+    expect(scrubImportedTreasury(dark)).toBe(dark);
+    expect(scrubImportedTreasury({ name: 'NoEconomy' })).not.toBe(undefined); // anchored: the two identity assertions on the following lines pin the exact objects returned, so a function that had started returning undefined reds there.
+    const noEconomy = { name: 'NoEconomy' };
+    expect(scrubImportedTreasury(noEconomy)).toBe(noEconomy);
+    const oddEconomy = { name: 'Odd', economicState: 'not-an-object' };
+    expect(scrubImportedTreasury(oddEconomy)).toBe(oddEconomy);
+  });
+
+  it('passes a null / non-object settlement through unchanged', () => {
+    expect(scrubImportedTreasury(null)).toBe(null);
+    expect(scrubImportedTreasury(undefined)).toBe(undefined);
+    const arr = /** @type {any} */ ([]);
+    expect(scrubImportedTreasury(arr)).toBe(arr);
+  });
+
+  it('the sanity half: the UNSCRUBBED settlement really does carry a foreign balance', () => {
+    // The strip is load-bearing only if its subject exists — the store-4 shape of proof.
+    const live = /** @type {any} */ (withLedger(4200));
+    expect(live.economicState.treasury.coin).toBe(4200);
+  });
+
+  it('ALL THREE import paths call it — the one-path-only shape store-4 was', () => {
+    // A behavioural test can reach the account path (below); the two gallery paths are
+    // store modules behind a network fetch. Their wiring is therefore pinned by ADDRESS,
+    // which is the same instrument tests/lib/accountImport.test.js uses for its sibling
+    // import. Named individually because a second door silently covering a deleted first
+    // is this program's most-repeated verification failure.
+    const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
+    for (const rel of [
+      'src/lib/accountImport.js',
+      'src/store/galleryImportSettlement.js',
+      'src/store/galleryImportMap.js',
+    ]) {
+      const src = read(rel);
+      expect(src, `${rel} no longer imports the coin strip`)
+        .toMatch(/import\s*\{[^}]*\bscrubImportedTreasury\b[^}]*\}\s*from\s*['"][^'"]*importScrub\.js['"]/);
+      expect(src.includes('scrubImportedTreasury('), `${rel} imports the coin strip but never calls it`).toBe(true);
+    }
+  });
+});
+
+describe('W-COIN A1.8 — the account-file import path arrives coinless end to end', () => {
+  it('prepareSettlementEntry strips a foreign coin ledger', async () => {
+    await ensureNormalizeLoaded();
+    const res = prepareSettlementEntry({
+      settlement: {
+        name: 'Rich Import', tier: 'town',
+        economicState: {
+          foodSecurity: { storageMonths: 2 },
+          treasury: { coin: 99999, openedTick: 1, lastTick: 50, coinFlows: { taxed: 12, upkeep: 0, transferredIn: 0, transferredOut: 0, shortfall: 0 } },
+        },
+      },
+    });
+    expect(res.ok).toBe(true);
+    const eco = res.entry.settlement.economicState || {};
+    expect(Object.hasOwn(eco, 'treasury')).toBe(false);
+    // anchored: `res.ok` is asserted true above and the surviving food ledger below proves
+    // the entry really carries an economicState, so an emptied entry reds there, not here.
+    expect(eco.foodSecurity).toBeDefined();
   });
 });
 

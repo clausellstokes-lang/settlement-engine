@@ -423,6 +423,23 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
   const archetype = factionArchetype(winner);
   const fromGovernment = nameOf(governing);
   const toGovernment = resolveGovernmentLabel(archetype, settlement.tier, factions, governing);
+  // A1.12 PART 2 — THE SEAT IS RETYPED, NOT MERELY RENAMED. A DECLARED FUTURE-TICK
+  // SHIFT (owner-visible, vetoable), and it is a REPAIR of a reshape that was already
+  // three-quarters done: the two lines below already stamp the winner's archetype onto
+  // the seat as its LABEL (`faction: toGovernment`, derived from `archetype`) and as its
+  // DESCRIPTION (`desc: GOVERNMENT_DESCS[archetype]`). Only `category` lagged — and
+  // `category` is the one field a MACHINE reads: factionArchetype() takes it first
+  // ("Category (if recognized) wins"). So before this line a merchant house could seize
+  // a council's seat, be renamed and re-described as a merchant power, and stay typed
+  // `government` forever to every archetype consumer in the estate. That silent
+  // category-forever behaviour is the SUPERSEDED ALTERNATIVE, recorded here rather than
+  // deleted, and W-COIN is what made it matter: taxation is typed on the governing
+  // archetype, so a coup that did not retype the seat would leave a merchant league
+  // taxing like the council it overthrew, permanently.
+  // `other` carries no information to stamp (it is not a recognised category key), so
+  // that one archetype leaves the seat's category untouched and name inference keeps
+  // deciding, exactly as it does today — a stamp that says nothing is not written.
+  const seatCategory = archetype === A.OTHER ? null : archetype;
 
   const nextFactions = factions.map(f => {
     if (f === governing) {
@@ -430,6 +447,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
         ...f,
         faction: toGovernment,
         ...(f.name != null ? { name: toGovernment } : {}),
+        ...(seatCategory ? { category: seatCategory } : {}),
         desc: GOVERNMENT_DESCS[archetype] || GOVERNMENT_DESCS[A.OTHER],
         isGoverning: true,
         modifiers: [...(f.modifiers || []), cause === 'coup' ? 'seized_power' : cause],

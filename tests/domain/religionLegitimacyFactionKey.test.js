@@ -102,13 +102,33 @@ describe('rulerLens reads the canonical governing seat', () => {
     const seat = governingFactionOf(s);
     const wrongPick = highestPower(s.powerStructure);
 
-    // The premise: the two diverge, and they classify differently.
+    // The premise: the two diverge as RECORDS, and the wrong pick out-powers the seat.
     expect(seat).not.toBe(wrongPick);
     expect(nameOf(seat)).toBe('Grand Merchant Senate');
     expect(nameOf(wrongPick)).toBe('Merchant Guilds');
     expect(Number(wrongPick.power)).toBeGreaterThan(Number(seat.power));
-    expect(factionArchetype(seat)).toBe('government');
+    // ⚠ THE ARCHETYPE HALF OF THE PREMISE CHANGED ON 2026-08-30, and the change is a FIX
+    // rather than a drift, so it is recorded here rather than worked around. W-COIN-1a
+    // (design A1.12 part 2) made `transferRulingPower` STAMP the winner's archetype onto
+    // the seat as its `category`. Before that, the transfer already reshaped the seat to
+    // the winner's archetype in its NAME and its DESCRIPTION and left `category` — the one
+    // field a machine reads, and the field factionArchetype takes FIRST — saying
+    // `government` forever. So a merchant house could seize a council's seat, be renamed
+    // and re-described as a merchant power, and stay typed `government` to every archetype
+    // consumer in the estate for the rest of the world's life.
+    // CONSEQUENCE FOR THIS CASE, stated plainly: after a repeat coup the seat and the
+    // two-time winner now classify THE SAME, necessarily and forever — the seat wears the
+    // winner's archetype because the winner put it there. The archetype corroboration this
+    // case used to carry is therefore STRUCTURALLY DEAD HERE, not merely re-recorded, and
+    // the selection pin below is what does the discriminating: `lens.power` reads the
+    // chosen record's own `.power` and responds ONLY to which faction was picked. The
+    // archetype-based discrimination survives intact in the FRESH-WORLD case below, which
+    // this file's own note calls the case that matters most and which no coup touches.
     expect(factionArchetype(wrongPick)).toBe('merchant');
+    // …and the stamp itself is pinned HERE, so a revert of the A1.12 fix reds in the same
+    // place its absence used to hide: the seat now follows the power that took it.
+    expect(factionArchetype(seat)).toBe('merchant');
+    expect(seat.category).toBe('merchant');
 
     const lens = rulerLens(s);
 
@@ -119,11 +139,12 @@ describe('rulerLens reads the canonical governing seat', () => {
     expect(lens.power).toBeCloseTo(0.45 + 0.55 * (Number(seat.power) / 100), 10);
     expect(lens.power).not.toBeCloseTo(0.45 + 0.55 * (Number(wrongPick.power) / 100), 10);
 
-    // Corroboration through the lean: government align 0.6, merchant align 0.5.
-    // NOTE deliberately NOT asserted on temper — 'government' and 'other' BOTH sit at
-    // temper 0.5, so a temper assertion here would pass against the pre-fix code and pin
-    // nothing. That near-miss is why this case asserts power and align instead.
-    expect(lens.align).toBeCloseTo(0.6, 10);
+    // The lean now reads the seat's STAMPED archetype: merchant align 0.5 (it read 0.6,
+    // government, while the stale category survived a coup). NOTE deliberately NOT
+    // asserted on temper — 'government' and 'other' BOTH sit at temper 0.5, so a temper
+    // assertion here would pass against the pre-fix code and pin nothing. That near-miss
+    // is why this case asserts power and align instead.
+    expect(lens.align).toBeCloseTo(0.5, 10);
   });
 
   // REVERT-PROOF, and the case that matters most: this defect is LIVE ON FRESH WORLDS, not

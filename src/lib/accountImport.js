@@ -55,7 +55,7 @@
  * already in the importer's library.
  */
 
-import { scrubImportedConfig } from './importScrub.js';
+import { scrubImportedConfig, scrubImportedTreasury } from './importScrub.js';
 import { admitSavedSettlementEntries } from './saveAdmission.js';
 import {
   validateCustomContentArchive,
@@ -609,7 +609,12 @@ export function prepareSettlementEntry(rawEntry, meta = {}) {
   // activate the religion subsystem with a foreign pantheon.
   const config = scrubImportedConfig(normalized.config);
 
-  const settlement = {
+  // …and the W-COIN state coin ledger is stripped with them (A1.8): an imported
+  // settlement arrives COINLESS on every path, because a foreign balance is coin no
+  // tick of this campaign ever minted and the pulse writer that enforces the
+  // no-backfill law never sees an import. Reference-identical when there is nothing
+  // to strip, which is every settlement in every dark campaign.
+  const settlement = scrubImportedTreasury({
     ...normalized,
     neighbourNetwork: [],
     neighborRelationship: null,
@@ -623,7 +628,7 @@ export function prepareSettlementEntry(rawEntry, meta = {}) {
       ...(meta.sourceChecksum ? { sourceChecksum: meta.sourceChecksum } : {}),
       ...(meta.sourceId ? { sourceId: String(meta.sourceId) } : {}),
     },
-  };
+  });
 
   // On the ACCOUNT surface the file is the user's OWN exporter-produced estate,
   // so their lived history is restored through the per-field admission wall

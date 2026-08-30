@@ -20,7 +20,7 @@ import { fetchDossierForImport } from '../lib/gallery.js';
 import { normalizeSettlement } from '../domain/normalizeSettlement.js';
 import { saves as savesService } from '../lib/saves.js';
 import { track, EVENTS } from '../lib/analytics.js';
-import { scrubImportedConfig } from '../lib/importScrub.js';
+import { scrubImportedConfig, scrubImportedTreasury } from '../lib/importScrub.js';
 
 export async function importGallerySettlementImpl(get, set, slug) {
   const st = get();
@@ -55,7 +55,11 @@ export async function importGallerySettlementImpl(get, set, slug) {
     // import (accountImport.js normalizes the exact same shape); the gallery path
     // was the omission. This canonicalizes BOTH the persisted row and the
     // in-memory savedSettlements push below.
-    settlement: normalizeSettlement({
+    // …and the W-COIN state coin ledger goes with it (A1.8): an import arrives
+    // COINLESS, because a foreign balance is coin no tick of THIS campaign ever
+    // minted and the no-backfill law is enforced at the pulse writer, which never
+    // sees an import. Reference-identical when there is no ledger to strip.
+    settlement: scrubImportedTreasury(normalizeSettlement({
       ...src,
       neighbourNetwork: [],
       neighborRelationship: null,
@@ -68,7 +72,7 @@ export async function importGallerySettlementImpl(get, set, slug) {
       // here, so DM-imposed cults imported live and activated the religion subsystem).
       config: scrubImportedConfig(src.config),
       importedFrom: { slug, sourceName: dossier.name || src.name || null, importedAt },
-    }),
+    })),
     config: null,
     seed: null,
     aiData: {},

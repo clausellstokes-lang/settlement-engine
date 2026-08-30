@@ -175,6 +175,11 @@ const FAITH_UNSEATING = 'faithUnseatingEnabled';
 // one by-name gate read in a single commit — the §49-ruling-3 cost above, paid in the same three
 // module-scope edits and carrying ZERO new test titles here.
 const UNDERCITY_HIGH_WATER = 'undercityHighWaterEnabled';
+// W-COIN-1a. The state treasury — the estate's first conserved coin stock — joined with its
+// manifest entry and its ONE by-name gate read (treasury.treasuryActive, the pulse writer's
+// own door) in a single commit: the §49-ruling-3 cost above, paid in the same three
+// module-scope edits and carrying ZERO new test titles here.
+const TREASURY = 'treasuryEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
@@ -185,6 +190,7 @@ const VIRTUAL_RULES = Object.freeze([
   ADVANCE_EPOCH,
   FAITH_UNSEATING,
   UNDERCITY_HIGH_WATER,
+  TREASURY,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -229,6 +235,14 @@ const LANE_LEAVES = Object.freeze({
   // layer's own mouth and mints seven candidate literals of its own, so tracing this lane's
   // zero-candidate claim through it would measure the whole faction layer's vocabulary.
   [UNDERCITY_HIGH_WATER]: ['src/domain/undercity/colonization.js'],
+  // W-COIN-1a. ONE FILE, and here the whole lane genuinely is one file: the door where the
+  // flag is read (treasuryActive), the record, both accessors, the transfer primitive, the
+  // applicator, the governing resolver and the pulse writer all live in this leaf. The
+  // pulse KERNEL is deliberately NOT here even though it holds the writer's only call
+  // site — it is the shared mouth that mints candidates for a dozen other lanes, and
+  // tracing this member's zero-candidate claim through it would measure the whole pulse's
+  // vocabulary rather than this lane's.
+  [TREASURY]: ['src/domain/worldPulse/treasury.js'],
   [AXES]: ['src/domain/worldPulse/beliefAxes.js'],
   // All three subject families share ONE gate door (beliefAxes.subjectAxesActive) and ONE
   // derivation leaf, so all three name the same pair. That is the honest scope: the leaf

@@ -626,6 +626,13 @@ export const FIELD_ALIASES = Object.freeze({
  * @typedef {{
  *   prosperity?: any,
  *   foodSecurity?: Record<string, any>,
+ *   treasury?: {
+ *     coin: number,
+ *     openedTick: number,
+ *     lastTick: number,
+ *     coinFlows: { taxed: number, upkeep: number, transferredIn: number,
+ *              transferredOut: number, shortfall: number }
+ *   },
  *   economicComplexity?: (string | number),
  *   isEntrepot?: boolean,
  *   situationDesc?: string,
@@ -653,6 +660,17 @@ export const FIELD_ALIASES = Object.freeze({
  * per domain/fieldManifest.js), NOT a scalar — kept as Record<string, any>.
  * `prosperity` / `economicComplexity` are unioned (string|number): they appear as
  * both qualitative bands and numeric scores. `activeChains` reuses SimSupplyChain.
+ *
+ * `treasury` is the state coin ledger (W-COIN), and it is typed rather than loose
+ * BECAUSE OF ITS UNIT. `coin` is ABSOLUTE INTEGER STATE-COIN: never per-capita, never
+ * re-expressed in storage-months or in a band at rest — bands are display derivations
+ * only. The unit is declared here, in the fieldManifest row's displayRule, and in
+ * domain/worldPulse/treasury.js's header, and every consumer reads through that
+ * module's `coinOf()` / `treasuryCapacity()` accessors instead of touching the field,
+ * because a numeric field with no declared unit acquires a different unit at every
+ * consumer and nothing ever reds. The key is ABSENT on every world that has not ticked
+ * under a lit `treasuryEnabled`; a key is a byte. `coinFlows` is a LAST-TICK integer
+ * summary — there is no per-tick history array, in this or any later car.
  */
 
 /**

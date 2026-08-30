@@ -78,6 +78,21 @@ export const FROZEN_VS_LIVE = Object.freeze([
     guards: [],
   },
   {
+    path: 'economicState.treasury.coin',
+    field: 'coin',
+    mode: 'live',
+    pulseWriter: 'src/domain/worldPulse/treasury.js#advanceTreasury',
+    displayRule: 'UNIT: ABSOLUTE INTEGER STATE-COIN — never per-capita, never re-expressed '
+      + 'in storage-months or in a band at rest. Bands (empty|lean|adequate|full|overflowing '
+      + 'over coin/capacity) are DISPLAY derivations and arrive in a later car. Every read '
+      + 'goes through the exported accessors coinOf() / treasuryCapacity(); no surface may '
+      + 'hand-read the raw field, because a numeric field with no declared unit acquires a '
+      + 'different unit at every consumer and nothing ever reds. The record is ABSENT until '
+      + 'the first tick under a lit treasuryEnabled — a dark campaign carries no key, and a '
+      + 'key is a byte. Capacity is DERIVED on every read and never persisted.',
+    guards: [],
+  },
+  {
     path: 'economicState.foodSecurity.resilienceScore',
     field: 'resilienceScore',
     mode: 'live',

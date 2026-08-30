@@ -10,7 +10,7 @@
  */
 
 import { saves as savesService } from '../lib/saves.js';
-import { scrubImportedConfig } from '../lib/importScrub.js';
+import { scrubImportedConfig, scrubImportedTreasury } from '../lib/importScrub.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { remapSettlementParentRefForImport } from '../domain/settlementParentRef.js';
 import {
@@ -276,12 +276,16 @@ export async function importGalleryMapWithCampaignImpl(get, set, slug) {
       const entry = {
         name: member.name || sourceSettlement.name || 'Imported settlement',
         tier: member.tier || sourceSettlement.tier,
-        settlement: normalizeSettlement({
+        // The W-COIN coin ledger is stripped on THIS path too (A1.8). The map
+        // importer clones whole settlements, so leaving it out here would have made
+        // "imports arrive coinless" true on two paths of three — the exact
+        // one-path-only shape store-4 was.
+        settlement: scrubImportedTreasury(normalizeSettlement({
           ...sourceSettlement,
           neighbourNetwork: [],
           neighborRelationship: null,
           interSettlementRelationships: [],
-        }),
+        })),
         // Imported faith/deity embeds stay dormant; this is the same single
         // scrub seam used by standalone gallery and account imports.
         config: scrubImportedConfig(sourceSettlement.config) || null,

@@ -118,7 +118,12 @@ import { normalizeSimulationRules, isFaithSpreadEnabled } from './simulationRule
 import { deriveDecisionTier } from './decisionTier.js';
 import { wallClockNow, assertNowPinnedInTest, assertEpochPinnedInTest } from '../clock.js';
 import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval, capPersistedRollExplanations, isPublicOutcome } from './pulseHelpers.js';
-import { assertNoResidueLeak } from './residueStripGuard.js';
+// W-COIN-1a: the treasury leaf is `;`-joined onto the line above at +0 effective lines.
+// This file is BANKED PERMANENTLY at its frozen ceiling (R-BLD-10) and the one declared
+// ratchet-up in its history (J-EP-11, 1580 -> 1581) was chair-signed for exactly one
+// import line. W-COIN takes no such ratchet: the import shares a physical line and the
+// call below shares one with the statement it already stood beside.
+import { assertNoResidueLeak } from './residueStripGuard.js'; import { advanceTreasury } from './treasury.js';
 
 /**
  * RESIDUE-STRIP REGISTRY (machine-enforced; replaces the old prose checklist).
@@ -549,8 +554,19 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
     // Siege vs the airship dock: blockade-running impairs the dock itself —
     // a visible 'access' impairment while the siege grips, lifted when it ends.
-    const sieged = applyBlockadeTransportImpairment(stocked.settlement, blockade, { now });
-    localSettlements.set(String(item.id), sieged);
+    // W-COIN-1a — THE TREASURY'S ONE PULSE WRITER, and the ONLY call site of it in the
+    // tree. It stands HERE, inside @pulse-stage: settlement_clock beside the granary
+    // advance, because A1.4 makes stage order law: every coin-delta emitter runs at a
+    // stage AFTER settlement_clock, so the vault a mover draws on later in the same tick
+    // is the vault this pass left behind. It is handed the SAME `blockade` record the
+    // granary pass already derived, so the vault and the granary can never disagree
+    // about whether this town is besieged or occupied.
+    // DARK PATH: `advanceTreasury` reads `rules.treasuryEnabled === true` before it reads
+    // anything else and returns its input settlement BY REFERENCE, so `vaulted === sieged`
+    // and this line is byte-identical to the one it replaced. `;`-joined at +0 effective
+    // lines against the frozen ceiling.
+    const sieged = applyBlockadeTransportImpairment(stocked.settlement, blockade, { now }); const vaulted = advanceTreasury(sieged, { interval: tickInterval, tick: worldState.tick, deployment, blockade, rules: simulationRules }).settlement;
+    localSettlements.set(String(item.id), vaulted);
     // Merge rather than replace: advanceTime only returns { clockStages }, but
     // this entry also carries cross-tick drift streaks (tierDrift,
     // economyDrift) written by later evaluators — a wholesale assignment wiped

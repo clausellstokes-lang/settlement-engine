@@ -230,6 +230,26 @@ const LAYER_PATTERNS = Object.freeze({
   ],
   INTERIOR: [
     /^src\/domain\/worldPulse\/(?:faction|legitimacy|relationship|institution|commons|disposition|generosity|grievance|rulingPower|npcLadder|seatBooks)/,
+    // W-COIN-1a: the state treasury. THE SUBJECT IS WHO RULES AND WHAT RULING COSTS AT
+    // HOME, which is INTERIOR's outright — the stock is taxed by the governing archetype
+    // through the resolver this leaf exports (composed from rulingPower + factionArchetypes,
+    // both INTERIOR's own), its ONLY write to any opinion anywhere is the legitimacy price
+    // of extraction through INTERIOR's existing applicator, and the resolver is shared with
+    // W-SEAT rather than with any port.
+    // ⛔ NOT WAR, and the temptation is real: W-COIN-2's warCosts / coalitionExpenditure
+    // reads are the first consumers, and the coffers component is the charter's headline
+    // deliverable. But this walker's own settled reading is that the distinction is SUBJECT,
+    // not program, and never importer count — the same reading that put peopleLedger.js in
+    // WAR, secondOrderBelief.js in INFO and strategicPosture.js here. A crown's purse is not
+    // a war subject; a war merely spends it. Giving it INTERIOR is precisely what will force
+    // W-COIN-2's WAR reads and W-COIN-3's TRADE-adjacent transfer legs to REGISTER their
+    // couplings instead of reading across a port in silence, which is the whole point.
+    // ⛔ NOT TRADE either: the design forbids this layer any market, any price model and any
+    // exchange rate with grain, and §4.4 separates the STOCK from the prosperity/wealth
+    // OPINIONS outright. It is a state purse, not commerce.
+    // ⛔ AN EXACT-PATH REGEX, NOT A `treasur[A-Z]` PREFIX: a prefix would claim files nobody
+    // has designed and silently widen a frozen family (the IN-1 precedent, verbatim).
+    /^src\/domain\/worldPulse\/treasury\.js$/,
     // SP-C: the strategic posture read. It is an SP leaf, and it is NOT unlayered — the
     // distinction the two exclusions below draw is SUBJECT, not program. bandedStock and
     // bandFamilies are shared VOCABULARY every port spells against; this leaf composes a

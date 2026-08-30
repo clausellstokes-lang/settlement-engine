@@ -315,6 +315,33 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // is what keeps this key visible to the engine-gated-key census, which a frozen-list
   // `.every()` would hide.
   'strategicPostureEnabled',
+  // Joined 2026-08-30 by W-COIN wave 1a under CR-WR10-C item 4 (the compiled charter's
+  // §3 flag law), in the SAME commit as its first real gate read — `treasury.treasuryActive`,
+  // the ONE `=== true` by-name read of this key in the tree — and its AUTHORED
+  // certification row. Never a pending entry: manifesting is itself the act that makes a
+  // virtual key censusable and therefore the act that comes due. It sorts here because
+  // that is alphabetical order — `treasury` before `treaty` — not precedence.
+  // ⚠ IT IS A SINGLE CONJUNCT AT THIS WAVE, deliberately, and that is worth saying
+  // because several neighbours above are conjunctions: 1a lands the STOCK, and the stock
+  // has exactly one door — the pulse writer `advanceTreasury`, which reads this key
+  // through `treasuryActive` before it reads anything else at all. THE PER-DOOR
+  // NECESSITY RATIONALE (A1.6): the writer door is the door nothing can write past,
+  // because only `advanceTreasury` may open or move a ledger and only
+  // `applyCoinDeltasToUpdates` may fold a cross-settlement delta onto one that is
+  // already open. A second gate at the applicator would be a guard hiding behind a
+  // guard — it can reach no state the writer did not first create. W-COIN-2's
+  // warCosts / coalitionExpenditure READ doors join this entry when they land, and the
+  // certification row is AMENDED in the same act (A1.19).
+  // ⚠ THE INTERIM LAW, recorded because it governs when this key may be lit at all
+  // (A1.21 / Q10, ODQ §763.2): lighting is the PRESET TABLE's, and the key ships LIT in
+  // dramatic_campaign / living_realm / full_simulation ONLY AFTER W-COIN-2's band chip
+  // lands. Until then it is dark on every owner-presented surface. That is why it is
+  // VIRTUAL here rather than declared false in a preset spread — a dark layer costs a
+  // campaign zero persisted bytes, and this one costs zero on every path.
+  // ⛔ The read is spelled by name rather than through a frozen-list `.every()` for the
+  // reason this census exists: a computed member access attributes to NO key and would be
+  // fully wired, genuinely gated, and invisible here.
+  'treasuryEnabled',
   // Joined 2026-08-04 by FP wave GR-0 under CR-WR10-C item 4 (the compiled charter's §3
   // flag law), in the SAME commit as its first real gate read
   // (treatyLifecycleVoice.treatyLifecycleVoiceActive, read by name with the strict
