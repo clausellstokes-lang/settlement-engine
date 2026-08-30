@@ -121,6 +121,21 @@ case "$TIER" in
         exit 2
         ;;
 esac
+# ⛔⛔ THE TIER IS CONSUMED HERE, NEVER INHERITED — AND THIS WAS FOUND BY DOG-FOODING, NOT BY
+# REASONING. Every other GATE_MUTEX_* variable is a per-SESSION setting a lane exports once; the
+# tier is a property of ONE INVOCATION. Left exported it descends into the child, so a lane running
+# `GATE_MUTEX_TIER=shared gate-mutex.sh --run -- <anything that itself calls gate-mutex>` turns
+# every nested acquisition into a shared request it never declared. Measured: with the tier
+# inherited, twelve arms of tests/scripts/gateMutex.test.js reddened `expected 2 to be 23` — their
+# nested `--run` calls carry no worker cap, so the cap guard refused them.
+#
+# ⭐ AN INHERITED DECLARATION IS AN INFERRED ONE, which the header above already refuses in as many
+# words. Unsetting restores the pre-tier behaviour exactly for every nested call: it defaults to
+# EXCLUSIVE and contends for the lock the way it always did. (The mutex has never been re-entrant;
+# a nested exclusive call inside an outer holder contended before this change too, so nothing new
+# is broken — the fallback is simply the one that was always there.) A nested run that genuinely
+# wants the shared tier declares it for itself, which is the whole point.
+unset GATE_MUTEX_TIER
 case "$SHARED_MAX_WORKERS" in
     ''|*[!0-9]*|0)
         echo "gate-mutex: GATE_MUTEX_SHARED_MAX_WORKERS must be a positive integer." >&2

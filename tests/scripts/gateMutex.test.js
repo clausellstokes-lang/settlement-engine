@@ -499,6 +499,34 @@ describe('gate-mutex TIERS — shared admission, exclusive exclusion', () => {
     expect(spaced.status, `${spaced.stdout}\n${spaced.stderr}`).toBe(0);
   });
 
+  // ── THE TIER IS CONSUMED, NOT INHERITED ───────────────────────────────────────────
+  // ⛔ FOUND BY DOG-FOODING THIS TIER, NOT BY REASONING ABOUT IT, which is why the arm exists.
+  // Every other GATE_MUTEX_* variable is a per-session setting a lane exports once; the tier is a
+  // property of ONE INVOCATION. Left exported it descends into the child, so a lane running a
+  // shared-tier command whose child itself calls this script turns every nested acquisition into
+  // a shared request nobody declared — and since nested calls carry no worker cap, the cap guard
+  // refuses them. MEASURED, before the cure: twelve arms of this very file reddened
+  // "expected 2 to be 23", because the batch wrapper's exported tier reached the spawned
+  // gate-mutex processes. AN INHERITED DECLARATION IS AN INFERRED ONE, and this script's header
+  // refuses inference in as many words.
+  it('CONSUMES the tier rather than exporting it — a nested call inherits nothing', () => {
+    const f = fixture();
+    const result = run(
+      f.lock,
+      sharedArgs('printf "[%s]" "${GATE_MUTEX_TIER:-<unset>}" > "$SEEN"'),
+      { ...SHARED, SEEN: join(f.root, 'seen') },
+    );
+
+    expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(0);
+    // Anti-vacuity: the run really did take the shared path, so this is not passing because the
+    // tier was never read in the first place.
+    expect(result.stdout).toMatch(/entered SHARED tier/);
+    expect(readFileSync(join(f.root, 'seen'), 'utf8'),
+      'the child inherited GATE_MUTEX_TIER — every nested gate-mutex call in that subtree is now'
+      + ' a shared request it never declared, and an uncapped one, so the cap guard refuses it')
+      .toBe('[<unset>]');
+  });
+
   it('REFUSES an unknown tier rather than falling back to a silent default', () => {
     const f = fixture();
     const result = run(f.lock, ['--run', '--', 'sh', '-c', 'exit 0'], { GATE_MUTEX_TIER: 'small' });
