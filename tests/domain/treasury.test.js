@@ -117,20 +117,20 @@ describe('the closed vocabularies', () => {
     // is exactly what the SHIPPED cars emit — never a kind held in reserve.
     // ⭐ THE LAW WORKING AS INTENDED, recorded because it is the point: 1a declared four
     // kinds, and this assertion is what forced 1b's two to arrive IN THE SAME ACT as the
-    // mint and the price that draw them. W-COIN-2's `upkeep_paid` is still absent, and
-    // must stay absent until its emitter lands.
+    // mint and the price that draw them — and then forced W-COIN-2's two to arrive in the
+    // same act as the SINK that draws them.
     expect([...TREASURY_RECEIPT_KINDS].sort()).toEqual([
       'legitimacy_price', 'suspended_by_occupation', 'suspended_by_siege',
-      'tax_receipt', 'treasury_opened',
+      'tax_receipt', 'treasury_opened', 'treasury_shortfall', 'upkeep_paid',
     ]);
-    // ⛔ AND THE ONE THAT LEFT. `treasury_shortfall` was declared in 1a and is GONE: the
-    // transfer primitive reports its shortfall as a FIELD, not a summary receipt, and no
-    // caller ships to convert one into the other — so the kind named something nothing
-    // could draw. The reachability arm below is what found it. It returns with W-COIN-2's
-    // upkeep sink, the first thing in the design that can actually fail to pay.
-    expect(TREASURY_RECEIPT_KINDS).not.toContain('treasury_shortfall'); // anchored: the exact-set equality directly above pins all five surviving kinds, so an emptied roster reds there rather than passing here.
-    // …and every declared kind is REACHABLE: each is emitted somewhere in this module.
+    // ⭐ AND THE ONE THAT CAME BACK, which is this roster's own proof in both directions.
+    // `treasury_shortfall` was declared in 1a, convicted by the reachability arm below as
+    // a kind nothing could draw (the transfer primitive reports shortfall as a FIELD, and
+    // 1a shipped no caller to convert one into a summary receipt), and STRUCK. W-COIN-2's
+    // upkeep sink is the first thing in the design that can genuinely fail to pay, so the
+    // kind returns WITH a live emitter rather than ahead of one.
     const src = fs.readFileSync(path.join(ROOT, 'src/domain/worldPulse/treasury.js'), 'utf8');
+    // …and every declared kind is REACHABLE: each is emitted somewhere in this module.
     for (const kind of TREASURY_RECEIPT_KINDS) {
       expect(src, `${kind} is declared but nothing pushes it`).toMatch(new RegExp(`kind: '${kind}'`));
     }

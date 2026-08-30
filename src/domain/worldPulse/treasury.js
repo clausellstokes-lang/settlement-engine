@@ -20,9 +20,15 @@
  * ordered TAX_RATE_BANDS, a frozen 6×8 profile keyed on RULING_POWERS, and the
  * legitimacy price of extraction.
  *
+ * W-COIN-2 adds the first SINK — deployment upkeep — and with it the two receipt kinds a
+ * cost that can fail to be met needs (`upkeep_paid`, `treasury_shortfall`), the closed
+ * COIN_FLOW_TERMS ledger, and the conservation identity as a function this module owns
+ * rather than as a sentence a test restates.
+ *
  * STILL DELIBERATELY DORMANT: no caller of the transfer primitive ships — the first are
- * W-COIN-3's movers — so it stays fully unit-tested and unreached, which a later reader
- * must not mistake for "unfinished".
+ * the eight enumerated coin flows, which are behind their own observation-window fork —
+ * so it stays fully unit-tested and unreached, which a later reader must not mistake for
+ * "unfinished".
  *
  * NEVER, in any car (design §4.3 + A1.3, and these are design violations rather than
  * judgment calls): negative coin — an unpayable cost becomes a typed SHORTFALL receipt,
@@ -153,6 +159,33 @@ export const TREASURY_TUNING = Object.freeze({
    *  TUNING-SIGNATURE-ADJACENT. */
   LEGITIMACY_PRICE_BY_BAND: Object.freeze({ heavy: 1, extractive: 3 }),
   LEGITIMACY_PRICE_CAP: 6,
+  /**
+   * W-COIN-2 — THE UPKEEP SINK's band table: how big the host in the field is, and what
+   * keeping it costs the crown for one tick. Ordered lightest-first; the LAST row is the
+   * catch-all and carries no threshold, so the table is total over every finite strength
+   * without an `Infinity` that a serializer would have to have an opinion about.
+   *
+   * ⚠⚠ THE UNIT IS CAPACITY POINTS ON THE 0..100 MILITARY-CAPACITY SCALE (§711.6, declared
+   * at birth like every other number this module owns) — `deployment.currentEffectiveStrength`,
+   * which `warArmyRecord.seedDeploymentState` mints from `capacityFor(id).offensive` and the
+   * attrition kernel then erodes. A bled army is a cheaper army, which is the honest reading:
+   * the crown pays for the force it still has in the field, not the one it sent.
+   *
+   * ⛔ IT IS DELIBERATELY *NOT* `deployment.deployedPopulation`, WHICH THE CHARTER NAMED, AND
+   * THE REASON WAS MEASURED RATHER THAN PREFERRED — see `upkeepBandFor` for the receipt.
+   *
+   * SCALE, stated so the provisional numbers can be argued with: a town yields ~40 coin a
+   * tick at customary rates and fields a `host`, so a town at war spends most of its revenue
+   * on its army and feels it; a city yields ~150 and fields a `great_host`, so a city can
+   * campaign; a hamlet yields ~4 and cannot fund a company for a single tick, which is why
+   * the shortfall receipt exists and why it never blocks the deployment. TUNING-SIGNATURE-ADJACENT.
+   */
+  UPKEEP_BY_STRENGTH_BAND: Object.freeze([
+    Object.freeze({ band: 'token', upToStrength: 20, coin: 2 }),
+    Object.freeze({ band: 'company', upToStrength: 35, coin: 8 }),
+    Object.freeze({ band: 'host', upToStrength: 55, coin: 25 }),
+    Object.freeze({ band: 'great_host', upToStrength: null, coin: 55 }),
+  ]),
 });
 
 /**
@@ -173,14 +206,22 @@ export const TREASURY_RECEIPT_KINDS = Object.freeze([
   'suspended_by_occupation',
   /** Revenue is suspended because the settlement is under siege. */
   'suspended_by_siege',
-  // ⛔ `treasury_shortfall` IS DELIBERATELY ABSENT, and its absence was found by the
-  // reachability arm rather than argued for. It was declared in 1a on the reasoning that
-  // `computeCoinTransfer` "receipts a shortfall" — but the primitive is PURE and reports
-  // its shortfall as a FIELD on its return value, not as a summary receipt kind, and 1a
-  // ships no caller to convert one into the other. So the kind named something no emitter
-  // could draw: a dead arm of exactly the class this roster exists to refuse, sitting
-  // inside the roster meant to enforce it. It returns with W-COIN-2's upkeep sink, which
-  // is the first thing in the design that can actually fail to pay.
+  /** W-COIN-2 — the crown paid its army for this tick, in whole or in part. Carries the
+   *  strength BAND resolved at flow time, never re-derived from a later reading of an army
+   *  that has since bled or been reinforced. */
+  'upkeep_paid',
+  // ⭐ `treasury_shortfall` RETURNS HERE, AND ITS ROUND TRIP IS THE ROSTER'S OWN PROOF.
+  // 1a declared it on the reasoning that `computeCoinTransfer` "receipts a shortfall" — but
+  // the primitive is PURE and reports its shortfall as a FIELD on its return value, not as
+  // a summary receipt kind, and 1a shipped no caller to convert one into the other. The
+  // reachability arm convicted it and it was STRUCK. The upkeep sink below is the first
+  // thing in the design that can genuinely fail to pay, so the kind is drawn now by a real
+  // emitter, in the same act — which is the law this roster exists to enforce, observed
+  // working in both directions on one field.
+  /** W-COIN-2 — a cost the vault could not meet in full. NEVER a negative balance and
+   *  NEVER a blocked deployment: debt is a genuinely new capability class and is
+   *  owner-gated, so the honest signal is a receipt and a pressure read, not an overdraft. */
+  'treasury_shortfall',
   /** W-COIN-1b — a lit tick's taxation mint, carrying the per-form band and amount
    *  RESOLVED AT FLOW TIME. History is never re-derived from current rates: a receipt
    *  that said only "taxed 40" would silently re-price itself the day a coup retypes the
@@ -375,6 +416,69 @@ export function taxFormFor(source) {
  * @type {ReadonlyArray<string>}
  */
 export const TREASURY_SUSPENSIONS = Object.freeze(['siege', 'occupation']);
+
+/**
+ * COIN_FLOW_TERMS — the closed accounting vocabulary of `treasury.coinFlows`, and the
+ * ledger THE CONSERVATION WALKER balances (W-COIN-2, the new invariant class).
+ *
+ * ⭐ WHY FIVE TERMS ARE THE RIGHT CLOSED ENUM AND A ROSTER OF *FLOWS* WOULD NOT BE.
+ * The widened Q4 enumeration (A1.9 + A1.15 + the two coin flows §746.1's political
+ * amendment adds) names EIGHT owner-visible coin flows by name. Minting those eight as a
+ * code vocabulary today would be eight dead arms — a roster naming things no emitter can
+ * draw, which is the exact class that struck `treasury_shortfall` out of the receipt
+ * roster one car ago. So the eight are enumerated where the owner reads them (this car's
+ * landing act) and the CODE's closed enum is the one that is fully alive: every coin
+ * movement any of the eight will ever make lands in exactly ONE of these five terms, and
+ * the walker proves no sixth key can appear.
+ *
+ * ⛔ `shortfall` IS NOT A MOVEMENT and must never enter the balance. It is coin that was
+ * demanded and NOT paid — the receipt that exists instead of an overdraft. Summing it
+ * would leak in the opposite direction from the leak everyone looks for, so the walker
+ * asserts its exclusion rather than leaving it to a reader's care.
+ * @type {ReadonlyArray<string>}
+ */
+export const COIN_FLOW_TERMS = Object.freeze([
+  'taxed', 'upkeep', 'transferredIn', 'transferredOut', 'shortfall',
+]);
+
+/**
+ * The signed coin movement a last-tick summary accounts for: what came in, minus what
+ * went out. THE CONSERVATION LAW, as a function rather than as a sentence in a test —
+ * so the walker balances the module's own arithmetic instead of a restatement of it.
+ *
+ * Integer in, integer out, no epsilon anywhere: `Δ coin === coinFlowBalance(coinFlows)`
+ * must hold exactly at every settlement on every lit tick.
+ * @param {{ taxed?: unknown, upkeep?: unknown, transferredIn?: unknown,
+ *           transferredOut?: unknown } | null | undefined} coinFlows
+ * @returns {number}
+ */
+export function coinFlowBalance(coinFlows) {
+  const f = asObject(coinFlows);
+  const n = (/** @type {unknown} */ v) => Math.floor(Number(v) || 0);
+  return (n(f.taxed) + n(f.transferredIn)) - (n(f.upkeep) + n(f.transferredOut));
+}
+
+/**
+ * UPKEEP_LEDGERS — which standing commitments the crown pays for, closed.
+ *
+ * ONE UPKEEP LAW, PARAMETERIZED BY LEDGER, and this roster holds exactly the ledgers that
+ * ship with a real reader. W-SEAT's SEAT-8 widens it to `civilContests` (the incumbent's
+ * vault pays the loyal side; the rising pays nothing — the asymmetry is that charter's)
+ * and `interventions` (the D9 repression columns), each conjoined with its own flag; both
+ * are named in BOTH charters and NEITHER is declared here, because a ledger with no
+ * reader is the dead arm this roster refuses. A widening car adds the member and its call
+ * site in the same act — never the member alone.
+ * @type {ReadonlyArray<string>}
+ */
+export const UPKEEP_LEDGERS = Object.freeze(['deployments']);
+
+/**
+ * UPKEEP_BANDS — the closed, ordered vocabulary of how large a standing commitment is.
+ * `none` is the real answer for a crown with nothing in the field, and it is a member
+ * rather than a null so every consumer branches on one closed set.
+ * @type {ReadonlyArray<string>}
+ */
+export const UPKEEP_BANDS = Object.freeze(['none', 'token', 'company', 'host', 'great_host']);
 
 /**
  * RULING_POWER_BASES — how a ruling-power reading was arrived at, closed.
@@ -799,6 +903,111 @@ export function computeTaxYield(settlement, { rulingPower = NEUTRAL_RULING_POWER
 }
 
 /**
+ * THE UPKEEP BAND of a standing commitment — how big is the thing the crown is paying for?
+ *
+ * ⛔⛔ WHY THIS READS `currentEffectiveStrength` AND NOT THE CHARTER'S NAMED
+ * `deployedPopulation`. MEASURED AT THIS BASE, not preferred:
+ *
+ *   `deployment.deployedPopulation` is written in exactly two places, `warHomeCosts.js`'s
+ *   conscription branch and its levy branch, and BOTH sit behind sub-flags —
+ *   `warEconomyDrainEnabled` and `warLevyEnabled` — which are `false` in
+ *   DEFAULT_SIMULATION_RULES and are lit in `full_simulation` AND NOWHERE ELSE.
+ *   `seedDeploymentState` does not mint the field at all. So on `dramatic_campaign` — the
+ *   one preset besides full_simulation that lights `warLayerEnabled`, i.e. the flagship
+ *   preset on which wars actually happen — every deployment record carries NO
+ *   `deployedPopulation`, and an upkeep keyed on it would have been IDENTICALLY ZERO on
+ *   every world anyone plays. An army would march, the granary would drain, and the vault
+ *   would pay nothing, with every existence census green.
+ *
+ *   That is the same failure mode this lane already measured once, one car ago: the
+ *   criminal-income exclusion rested on an `isCriminal` flag that 3,068 corpus rows never
+ *   carried. Second sighting, different field, same shape — an input that is real in the
+ *   source and absent in the worlds.
+ *
+ *   `currentEffectiveStrength` is on EVERY stateful record by construction: the aging pass
+ *   makes every committed deployment stateful before any later stage reads it, and the
+ *   field is seeded from `capacityFor(id).offensive` with no sub-flag anywhere in its
+ *   path. Its unit is CAPACITY POINTS on the 0..100 military-capacity scale — declared
+ *   here, in the tuning table, and asserted against the real producer in the tests, so
+ *   this reading cannot quietly become a headcount at some later consumer.
+ *
+ * FAIL-INERT: a record with no readable strength bands to `none` and is charged nothing.
+ * A charge invented for an army nobody can measure would be worse than a missing one, and
+ * the tests drive a REAL `seedDeploymentState` record through here so a silent `none`
+ * cannot become the answer for every world without something reddening.
+ *
+ * @param {{ currentEffectiveStrength?: unknown, maxStartStrength?: unknown,
+ *           targetId?: unknown } | null | undefined} record
+ * @returns {string} an UPKEEP_BANDS member
+ */
+export function upkeepBandFor(record) {
+  if (!record || typeof record !== 'object' || !record.targetId) return 'none';
+  const live = Number(record.currentEffectiveStrength);
+  const start = Number(record.maxStartStrength);
+  const strength = Number.isFinite(live) ? live : (Number.isFinite(start) ? start : NaN);
+  if (!Number.isFinite(strength) || strength <= 0) return 'none';
+  for (const row of TREASURY_TUNING.UPKEEP_BY_STRENGTH_BAND) {
+    if (row.upToStrength === null || strength <= row.upToStrength) return row.band;
+  }
+  // Unreachable while the table's last row is the catch-all; the totality test pins that
+  // it is, so this is the fail-neutral answer rather than an exception nobody could act on.
+  return 'none';
+}
+
+/** The coin one tick of a band costs. `none` costs nothing, by construction.
+ *  @param {string} band @returns {number} integer ≥ 0 */
+export function upkeepCostOfBand(band) {
+  const row = TREASURY_TUNING.UPKEEP_BY_STRENGTH_BAND.find((r) => r.band === band);
+  return row ? Math.max(0, Math.floor(row.coin)) : 0;
+}
+
+/**
+ * THE UPKEEP SINK — the writer's first destroying flow, and ONE LAW PARAMETERIZED BY LEDGER.
+ *
+ * Charges are `{ ledger, record }` pairs; today the writer passes exactly one, the
+ * `deployments` one-army ledger the granary pass already reads for the same settlement on
+ * the same tick. The shape is the parameterization W-SEAT's SEAT-8 widens (`civilContests`,
+ * `interventions`) by adding a member to UPKEEP_LEDGERS and a caller in the same act — so
+ * the widening is new call sites, never a second upkeep law.
+ *
+ * ⛔ THE RESERVE FLOOR DOES NOT APPLY HERE, and the distinction is the whole reason
+ * `COIN_RESERVE` exists. The reserve protects the vault from being emptied by a TREATY, in
+ * its own words, *because* "a court at zero cannot pay a garrison". Upkeep is the garrison.
+ * It spends the vault to the last coin and floors at zero; what it cannot meet becomes a
+ * shortfall receipt. All-or-nothing is likewise a TRANSFER clause and is deliberately not
+ * inherited: upkeep pays what it can and receipts the remainder, which is why the design's
+ * receipt carries both `owed` and `paid` — under all-or-nothing, `paid` would be noise.
+ *
+ * NEVER blocks the commitment it prices. W-COIN does not gate war on money; money pressures
+ * the war reads (that is car 3's `coffers`), and an unaffordable army is a crown in trouble
+ * rather than an army that fails to exist.
+ *
+ * @param {number} available the coin on hand THIS tick, after the mint — integer ≥ 0
+ * @param {Array<{ ledger?: string, record?: unknown }>} charges
+ * @returns {{ owed: number, paid: number, shortfall: number,
+ *             entries: Array<{ ledger: string, band: string, owed: number }> }}
+ */
+export function computeUpkeep(available, charges) {
+  const purse = Math.max(0, Math.floor(Number(available) || 0));
+  /** @type {Array<{ ledger: string, band: string, owed: number }>} */
+  const entries = [];
+  let owed = 0;
+  for (const charge of Array.isArray(charges) ? charges : []) {
+    const ledger = String(charge?.ledger || '');
+    if (!UPKEEP_LEDGERS.includes(ledger)) continue;   // closed vocabulary, no free keys
+    const band = upkeepBandFor(/** @type {Parameters<typeof upkeepBandFor>[0]} */ (charge?.record));
+    const cost = upkeepCostOfBand(band);
+    if (cost <= 0) continue;
+    // RECORDED AT FLOW TIME, band and all — the one FMG steal, applied to the sink side:
+    // a receipt that said only "paid 25" would re-price itself the day the table moves.
+    entries.push({ ledger, band, owed: cost });
+    owed += cost;
+  }
+  const paid = Math.min(purse, owed);
+  return { owed, paid, shortfall: owed - paid, entries };
+}
+
+/**
  * Fold the accumulated per-settlement legitimacy prices onto settlementUpdates through
  * the EXISTING single applicator (`generosityUpdates.applyLegitimacyDeltasToUpdates` —
  * bounded, integer, clamped [0,100], legacy-shape-tolerant). Builds the saveId index the
@@ -844,11 +1053,17 @@ export function applyTreasuryLegitimacyDeltas(settlementUpdates, legitimacyDelta
  * deliberately MORE conservative than its own precedent: the granary regenerates to a
  * generated NONZERO stock, and the treasury does not.
  *
- * LIT, thereafter: `lastTick` advances (bookkeeping, by definition every tick) and the
- * suspension verdict is receipted. 1a has NO MINT and NO SINK at the writer — taxation
- * is 1b's only mint kind — so `coinFlows` stays at its zero row and the record's only
- * movement is its bookkeeping. That is what "the stock, without the flows" means, and
- * saying it here stops a later reader from reading the zero row as a bug.
+ * LIT, thereafter: `lastTick` advances (bookkeeping, by definition every tick), the
+ * suspension verdict is receipted, taxation MINTS (1b) and upkeep SINKS (W-COIN-2) — in
+ * that order, revenue then payroll. `transferredIn` / `transferredOut` stay at their zero
+ * row because no mover has a coin leg yet; that is the design's own sequencing and not an
+ * omission, and saying it here stops a later reader from reading the zero row as a bug.
+ *
+ * ⭐ THE CONSERVATION LAW HOLDS AT THIS WRITER, EXACTLY AND IN INTEGERS:
+ * `Δ coin === coinFlowBalance(coinFlows)` on every lit tick at every settlement, with
+ * `shortfall` deliberately outside the sum because it is coin that did NOT move. The
+ * conservation walker balances that identity against real drives rather than against a
+ * restatement of it, and carries a planted leak that proves it can convict.
  *
  * The receipts are on the RETURNED SUMMARY and are EPHEMERAL. Nothing about them is
  * persisted: `treasury.coinFlows` is a last-tick integer summary and there is no per-tick
@@ -866,6 +1081,8 @@ export function applyTreasuryLegitimacyDeltas(settlementUpdates, legitimacyDelta
  *               rulingPower: string, rulingBasis: string,
  *               taxed: number, taxStopped: number,
  *               taxEntries: Array<{ form: string, band: string, amount: number }>,
+ *               upkeepOwed: number, upkeepPaid: number, shortfall: number,
+ *               upkeepEntries: Array<{ ledger: string, band: string, owed: number }>,
  *               legitimacyDelta: number, legitimacyCause: string | null,
  *             } | null }}
  */
@@ -902,11 +1119,24 @@ export function advanceTreasury(settlement, options = {}) {
   const taxed = computeTaxYield(priced, { rulingPower, suspension });
   if (taxed.entries.length) receipts.push({ kind: 'tax_receipt', tick });
   if (taxed.legitimacyDelta < 0) receipts.push({ kind: 'legitimacy_price', tick });
+  // ── W-COIN-2 — THE UPKEEP SINK, charged AFTER the mint ─────────────────────────
+  // Revenue comes in, then the army is paid: the mint prices against the vault the LAST
+  // tick left behind (its capacity stop is its only stock read, and it damps), and the
+  // sink then spends what that tick actually holds. Charging the sink first would let a
+  // court be beggared on a tick its own taxes could have covered, which is neither the
+  // order the design states nor the order a treasurer would use.
+  // The `deployment` record is the SAME one the granary pass read for this settlement on
+  // this tick, and it is already `warLayerEnabled`-gated at the one call site — so upkeep
+  // is gated on the war layer AND the treasury flag with no second gate written here,
+  // which is the guard-behind-a-guard this layer refuses.
+  const upkeep = computeUpkeep(coin + taxed.minted, [{ ledger: 'deployments', record: options.deployment }]);
+  if (upkeep.paid > 0) receipts.push({ kind: 'upkeep_paid', tick });
+  if (upkeep.shortfall > 0) receipts.push({ kind: 'treasury_shortfall', tick });
   const nextRecord = {
     ...record,
-    coin: coin + taxed.minted,
+    coin: coin + taxed.minted - upkeep.paid,
     lastTick: tick,
-    coinFlows: { ...record.coinFlows, taxed: taxed.minted },
+    coinFlows: { ...record.coinFlows, taxed: taxed.minted, upkeep: upkeep.paid, shortfall: upkeep.shortfall },
   };
   const nextSettlement = /** @type {TreasurySettlement} */ ({
     .../** @type {Record<string, unknown>} */ (/** @type {unknown} */ (settlement)),
@@ -928,6 +1158,13 @@ export function advanceTreasury(settlement, options = {}) {
       taxed: taxed.minted,
       taxStopped: taxed.stopped,
       taxEntries: taxed.entries,
+      // W-COIN-2 — the sink's own account of itself, EPHEMERAL like every receipt except
+      // the two integers `coinFlows` persists. `upkeepEntries` carries the band each
+      // ledger was charged at, resolved at flow time.
+      upkeepOwed: upkeep.owed,
+      upkeepPaid: upkeep.paid,
+      shortfall: upkeep.shortfall,
+      upkeepEntries: upkeep.entries,
       // The price RIDES THE SUMMARY and is applied at a later pulse stage through the ONE
       // existing legitimacy applicator (A1.4 / §768.2). The writer never writes an opinion.
       legitimacyDelta: taxed.legitimacyDelta,
