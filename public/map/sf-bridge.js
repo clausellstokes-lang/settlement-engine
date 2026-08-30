@@ -696,9 +696,52 @@
         const T     = cells.t || [];       // distance field (see 4 above)
         const HAVEN = cells.haven || [];   // coastal land cell -> the water it fronts
         const BURG  = cells.burg || [];    // burg id at the cell, 0 = none
+        // E-NET-2 read: `cells.f` is the FEATURE (connected body) each cell belongs
+        // to, and `pack.features[f].type` names it — 'ocean', 'lake' or 'island'.
+        const F        = cells.f || [];
+        const FEATURES = Array.isArray(pack.features) ? pack.features : [];
+
+        // ── E-NET-2 · A LAKE IS NOT THE SEA ────────────────────────────────
+        // "Water" here was `h < 20`, and h < 20 is EVERY body of water FMG holds:
+        // the ocean, an inland sea, and the pond behind the mill. So a pair of
+        // settlements on opposite shores of a lake could be handed a sea lane, a
+        // village on a tarn counted as coastal and got a harbour, and the haven
+        // exit put a boat out onto standing water it could never leave. Nothing
+        // reddened, because every one of those answers is internally consistent.
+        //
+        // FMG already knows the difference and has since reGraph: every cell
+        // carries `f`, the id of the connected body it belongs to, and
+        // `pack.features[f].type` is 'ocean' for water that reaches the map frame
+        // and 'lake' for water that does not. The router reads it and the sea
+        // becomes the sea.
+        //
+        // ⚠ THE CHARTER SAID THIS FIELD WAS "ALREADY CAPTURED". IT IS NOT — and
+        // the distinction matters to the next reader. `getSpatialPack` below copies
+        // {h, biome, r, p, c, fl, g} and a grid climate pair, and no more; `f` has
+        // never crossed the bridge, so the FROZEN CANON still cannot tell a lake
+        // from the ocean and `seaLanes.js` still runs on the height rule. This car
+        // cures the RENDER tier, which reads the live pack and needs no capture.
+        // Curing the canon means widening the capture and bumping SEA_LANE_VERSION
+        // — a discrete re-canonize event, not a router change.
+        //
+        // DEGRADATION, on the NET-1 rule: a pack with no `f` or no `features` (a
+        // synthetic fixture, a hand-edited or pre-markup pack) keeps the height
+        // rule exactly, so nothing that cannot answer the question is made to.
+        // Inside the feature branch the read FAILS CLOSED — a water cell whose
+        // body is unnamed is not the sea, because an unnamed body is not evidence
+        // of an ocean.
+        const waterBodiesKnown = F.length > 0 && FEATURES.length > 1;
+        const seaBodies = new Set();
+        if (waterBodiesKnown) {
+          for (let k = 0; k < FEATURES.length; k++) {
+            const feat = FEATURES[k];
+            if (feat && feat.type === 'ocean') seaBodies.add(k);
+          }
+        }
 
         const isLand   = (i) => (H[i] || 0) >= 20;
-        const isOcean  = (i) => (H[i] || 0) <  20;
+        const isOcean  = (i) => (H[i] || 0) < 20
+          && (!waterBodiesKnown || seaBodies.has(F[i]));
 
         // Biome costs keyed by FMG biome id. Missing biomes fall back to 2.
         // (FMG biome ids: 0 marine, 1 hot desert, 2 cold desert, 3 savanna,
@@ -921,7 +964,23 @@
         //
         // `hScale` scales the straight-line heuristic to the cost scale in play;
         // see LAND_H_SCALE / SEA_H_SCALE above for why it is not simply 1.
+        //
+        // ── E-NET-3 · THE ITERATION GUARD REPORTS ──────────────────────────
+        // `MAX_ITER` is a real ceiling and hitting it is a real event: the search
+        // gives up, returns null, and the road it was drawing SILENTLY VANISHES
+        // from the map. Nothing said so — not a warning, not a count, not a
+        // difference in the reply — so a realm whose roads were quietly thinning
+        // out looked exactly like a realm with fewer roads. The guard now keeps
+        // books: how many searches ran, how deep the deepest one went, how many
+        // gave up, and which roads they were drawing. The reply carries it back
+        // and the layer says so in the parent's console.
+        //
+        // THE HEADROOM, MEASURED: on a 15,000-cell realm pack with 42 edges the
+        // deepest single search is well inside this ceiling, so the counters are
+        // expected to read zero. That is the point of reporting them — a zero you
+        // can see is worth more than a silence you cannot.
         const MAX_ITER = 25000;
+        const searchLedger = { searches: 0, exhausted: 0, peakIterations: 0 };
         const aStar = (startCell, goalCell, costFn, hScale) => {
           if (startCell == null || goalCell == null) return null;
           if (startCell < 0 || goalCell < 0) return null;
@@ -941,7 +1000,21 @@
           const open = new CellHeap();
           open.push({ c: startCell, f: heuristic(startCell), g: 0 });
 
+          searchLedger.searches++;
           let iter = 0;
+          /** Book the search and hand back its answer, whatever it is. */
+          const done = (path) => {
+            // `iter` is post-incremented by the loop test, so it reads one past the
+            // budget on the run that trips the guard. Report what was SPENT.
+            const used = iter > MAX_ITER ? MAX_ITER : iter;
+            if (used > searchLedger.peakIterations) searchLedger.peakIterations = used;
+            // EXHAUSTED means the budget ran out with work still queued — not the
+            // same thing as an honestly unreachable goal, which drains the open set
+            // and leaves `open.size` at zero. Both return null; only one is a bug
+            // in the making, and conflating them is what made this silent.
+            if (path === null && iter >= MAX_ITER && open.size > 0) searchLedger.exhausted++;
+            return path;
+          };
           while (open.size && iter++ < MAX_ITER) {
             const entry = open.pop();
             const current = entry.c;
@@ -956,7 +1029,7 @@
                 cur = came.get(cur);
                 path.unshift(cur);
               }
-              return path;
+              return done(path);
             }
 
             const neighbours = C[current] || [];
@@ -978,7 +1051,7 @@
               }
             }
           }
-          return null;
+          return done(null);
         };
 
         /** Cell-id path -> the polyline the parent renders. */
@@ -1074,10 +1147,16 @@
         };
 
         const paths = {};
+        // E-NET-3: the roads whose search gave up at the guard, named. Capped so a
+        // pathological map cannot turn the reply into a megabyte of ids; the COUNT
+        // beside it is never capped, so the cap can never hide the scale.
+        const EXHAUSTED_ID_CAP = 20;
+        const exhaustedEdgeIds = [];
         for (const e of edges) {
           const startC = findCellAt(e.fromX, e.fromY);
           const goalC  = findCellAt(e.toX,   e.toY);
           if (startC < 0 || goalC < 0) continue;
+          const exhaustedBefore = searchLedger.exhausted;
 
           let landPath = null;
           if (isLand(startC) && isLand(goalC)) {
@@ -1137,9 +1216,38 @@
             // along a line nobody travels.
             recordCorridor(chosenCells);
           }
+          // E-NET-3: attribute the give-up to the road it was drawing. A LAND
+          // candidate can exhaust and the edge still be drawn by sea, and that is
+          // worth saying too: the road on the map is not the road the model wanted.
+          if (searchLedger.exhausted > exhaustedBefore && exhaustedEdgeIds.length < EXHAUSTED_ID_CAP) {
+            exhaustedEdgeIds.push(e.id);
+          }
         }
 
-        reply(rid, { type: 'fmg:roadNetworkReply', paths });
+        // ── E-NET-3 · THE REPORT ───────────────────────────────────────────
+        // Additive: `paths` is untouched and every existing consumer reads only
+        // that. `diagnostics` is a fixed-shape summary — six integers, an id list
+        // capped at twenty, and the guard's own value so a reader never has to go
+        // looking for the constant to know what the peak is a fraction OF.
+        const diagnostics = {
+          edges: edges.length,
+          routed: Object.keys(paths).length,
+          searches: searchLedger.searches,
+          maxIterations: MAX_ITER,
+          peakIterations: searchLedger.peakIterations,
+          exhaustedSearches: searchLedger.exhausted,
+          exhaustedEdgeIds,
+        };
+        if (searchLedger.exhausted > 0) {
+          console.warn(
+            `[sfBridge] computeRoadNetwork: ${searchLedger.exhausted} of `
+            + `${searchLedger.searches} route searches hit the ${MAX_ITER}-iteration guard`
+            + ` and were abandoned — those roads are missing from the map.`,
+            exhaustedEdgeIds,
+          );
+        }
+
+        reply(rid, { type: 'fmg:roadNetworkReply', paths, diagnostics });
       } catch (err) {
         console.warn('[sfBridge] computeRoadNetwork failed', err);
         replyError(rid, 'fmg:roadNetworkReply', err);

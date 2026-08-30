@@ -251,6 +251,8 @@ describe('sf-bridge.js harness', () => {
       // arrays gain an opt-in hook each. Both default to the flat pack every
       // NET-1 fixture above was written against, so nothing there moves.
       biomeAt = null, heightAt = null,
+      // E-NET-2 opt-in: mint `cells.f` + `pack.features` (see below).
+      features = false,
     }) {
       const n = cols * rows;
       const idx = (c, r) => r * cols + c;
@@ -309,8 +311,39 @@ describe('sf-bridge.js harness', () => {
       }
       for (const [c, rr] of burgs) burg[idx(c, rr)] = 1;
       const cells = { i: [...Array(n).keys()], h, biome, r, p, c: C, t, haven, burg };
+
+      // E-NET-2 opt-in: `cells.f` + `pack.features`, minted by FMG's own rule — a
+      // flood fill over each connected body, water typed 'ocean' when it reaches
+      // the map frame and 'lake' when it does not. OFF BY DEFAULT, and that default
+      // is load-bearing: every NET-1 fixture above is a pack that cannot answer the
+      // question, and must therefore keep the height rule byte-for-byte.
+      let featureList;
+      if (features) {
+        const f = new Array(n).fill(0);
+        featureList = [null];
+        for (let start = 0; start < n; start++) {
+          if (f[start]) continue;
+          const land = h[start] >= 20;
+          const id = featureList.length;
+          const q = [start];
+          f[start] = id;
+          let border = false;
+          for (let qi = 0; qi < q.length; qi++) {
+            const cur = q[qi];
+            const cc = colOf(cur), rr = rowOf(cur);
+            if (cc === 0 || rr === 0 || cc === cols - 1 || rr === rows - 1) border = true;
+            for (const nb of C[cur]) {
+              if (f[nb] || (h[nb] >= 20) !== land) continue;
+              f[nb] = id; q.push(nb);
+            }
+          }
+          featureList.push({ i: id, land, border, type: land ? 'island' : (border ? 'ocean' : 'lake') });
+        }
+        cells.f = f;
+      }
+
       for (const key of omit) delete cells[key];
-      return { cells, idx, cols, rows, xs, ys };
+      return { cells, features: featureList, idx, cols, rows, xs, ys };
     }
 
     const edge = (id, from, to, preferSea = false, g = null) => ({
@@ -322,11 +355,22 @@ describe('sf-bridge.js harness', () => {
 
     /** Drive the real handler and return its `paths` map. */
     function routeOn(g, edges) {
-      globalThis.pack = { cells: g.cells };
+      // `features` is undefined unless the fixture opted in, which is exactly the
+      // pack shape E-NET-2 must degrade on.
+      globalThis.pack = { cells: g.cells, features: g.features };
       globalThis.findCell = undefined;   // force the handler's own centroid scan
       const reply = sendCommand('settlementEngine:computeRoadNetwork', { edges });
       expect(reply && reply.type).toBe('fmg:roadNetworkReply');
       return reply.paths;
+    }
+
+    /** The same drive, but handing back the WHOLE reply (E-NET-3's diagnostics). */
+    function replyOn(g, edges) {
+      globalThis.pack = { cells: g.cells, features: g.features };
+      globalThis.findCell = undefined;
+      const reply = sendCommand('settlementEngine:computeRoadNetwork', { edges });
+      expect(reply && reply.type).toBe('fmg:roadNetworkReply');
+      return reply;
     }
 
     /** A path's cells, recovered from its polyline (the grid is a bijection). */
@@ -571,6 +615,91 @@ describe('sf-bridge.js harness', () => {
       // line moved when it was routed after P.
       const qAlone = routeOn(flat(), [edge('Q', [2, 3], [10, 3])]).Q;
       expect(batch.Q.points.length).not.toBe(qAlone.points.length);
+    });
+
+    // ── E-NET-2 · a lake is not the sea ──────────────────────────────────
+    // ONE FIXTURE CARRIES BOTH BODIES, because the claim is a DISCRIMINATION and
+    // a fixture with only a lake in it could be passed by a router that had simply
+    // stopped routing sea lanes. A western ocean with a strait biting east into the
+    // land (it reaches the map frame, so FMG types it 'ocean'), and a landlocked
+    // lake off to the east (it does not, so FMG types it 'lake'). Two pairs, one
+    // straddling each — and the router must treat them differently.
+    const oceanAndLake = (feat) => gridPack({
+      cols: 25, rows: 21, features: feat,
+      water: (c, r) => c <= 3 || (r >= 9 && r <= 11 && c <= 9)   // the ocean + its strait
+        || (c >= 14 && c <= 22 && r >= 5 && r <= 15),            // the landlocked lake
+    });
+    const straitPair = edge('OCEAN', [6, 8], [6, 12], true);
+    const lakePair = edge('LAKE', [18, 4], [18, 16], true);
+
+    it('a boat no longer puts out onto a landlocked lake — while the ocean strait is still sailed', () => {
+      const g = oceanAndLake(true);
+      // The fixture really does hold one of each, named by FMG's own rule.
+      expect(g.features.filter((f) => f && f.type === 'ocean').length).toBe(1);
+      expect(g.features.filter((f) => f && f.type === 'lake').length).toBe(1);
+
+      const paths = routeOn(g, [straitPair, lakePair]);
+      // The ocean strait: four cells of water against a dozen round the head of it.
+      // Still sailed, so this car did not simply stop routing sea lanes.
+      expect(paths.OCEAN.mode).toBe('sea');
+      // The lake: twelve cells across against twenty-two round the shore. The
+      // crossing is genuinely the cheaper line and the router takes the longer one
+      // anyway, because a road cannot be a boat on standing water.
+      expect(paths.LAKE.mode).toBe('land');
+      expect(paths.LAKE.points.length).toBeGreaterThan(paths.OCEAN.points.length);
+    });
+
+    it('a pack that cannot name its water bodies keeps the height rule exactly — and that is the bug it kept', () => {
+      // DEGRADATION, and the anti-vacuity for the test above in one. The identical
+      // geometry with no `f` and no `features` — a synthetic fixture, a hand-edited
+      // or pre-markup pack — falls back to `h < 20`, under which a lake IS the sea.
+      // So the same lake pair is sailed here, which is exactly what the old rule did
+      // on every pack, and is the reason the assertion above is a discrimination
+      // rather than a coincidence of geometry.
+      const paths = routeOn(oceanAndLake(false), [straitPair, lakePair]);
+      expect(paths.OCEAN.mode).toBe('sea');
+      expect(paths.LAKE.mode).toBe('sea');
+    });
+
+    // ── E-NET-3 · the iteration guard keeps books ────────────────────────
+    it('every reply carries the guard\'s books, and on a realm-sized pack they read zero', () => {
+      // 150×100 = 15,000 cells, twenty long diagonal crossings — the same fixture
+      // the guard test above uses. THE HEADROOM IS THE POINT: the deepest single
+      // search spends 15,000 of its 25,000 iterations, so the ceiling is real but
+      // not close, and a reader can now SEE that instead of inferring it from the
+      // roads all happening to be drawn.
+      const g = gridPack({ cols: 150, rows: 100 });
+      const edges = [];
+      for (let k = 0; k < 20; k++) {
+        edges.push(edge('e' + k, [(k * 7) % 149, 0], [149 - ((k * 7) % 149), 99]));
+      }
+      const { paths, diagnostics } = replyOn(g, edges);
+      expect(Object.keys(paths).length).toBe(edges.length);
+      expect(diagnostics).toMatchObject({
+        edges: 20, routed: 20, searches: 20, maxIterations: 25000,
+        exhaustedSearches: 0, exhaustedEdgeIds: [],
+      });
+      expect(diagnostics.peakIterations).toBeGreaterThan(0);
+      expect(diagnostics.peakIterations).toBeLessThan(diagnostics.maxIterations);
+    });
+
+    it('a search that gives up at the guard is counted and NAMES the road it was drawing', () => {
+      // THE ARM THAT MUST BE ABLE TO FAIL. A zero-reading counter proves nothing
+      // unless the counter can move, so this fixture makes the guard trip on
+      // purpose: a 200×160 landmass — 32,000 cells, comfortably past the 25,000
+      // ceiling — with the goal on a strip across an uncrossable channel and the
+      // seat too far inland to sail from. The search churns the mainland until the
+      // budget runs out, the road is NOT DRAWN, and until this car that was the
+      // entire user-visible signal: a road that simply was not there.
+      const g = gridPack({ cols: 200, rows: 160, water: (c) => c === 190 });
+      const { paths, diagnostics } = replyOn(g, [edge('LOST', [100, 80], [194, 80])]);
+      expect(paths.LOST).toBeUndefined();            // the road really is missing
+      expect(diagnostics.routed).toBe(0);
+      expect(diagnostics.exhaustedSearches).toBe(1);
+      expect(diagnostics.exhaustedEdgeIds).toEqual(['LOST']);
+      // Spent, not overspent: the count reports the budget, never the loop's
+      // post-incremented one-past reading.
+      expect(diagnostics.peakIterations).toBe(diagnostics.maxIterations);
     });
   });
 

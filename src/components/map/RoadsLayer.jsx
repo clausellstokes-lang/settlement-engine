@@ -104,6 +104,22 @@ export default function RoadsLayer({ bridge }) {
     bridge.call('settlementEngine:computeRoadNetwork', { edges: payload }, { timeout: 20000 })
       .then(reply => {
         if (cancelled || myReqId !== reqIdRef.current) return;
+        // ── WEAVE E-NET-3 · a road that vanished says so ───────────────────
+        // The iframe's A* has an iteration guard, and a search that hits it gives
+        // up and returns nothing — so the road it was drawing simply is not on the
+        // map, and until this car nothing anywhere said a word about it. The
+        // bridge now counts its own give-ups and names the roads; this surfaces
+        // them in the PARENT console, where whoever is looking at the map is
+        // actually looking. Silent when the count is zero, which is the expected
+        // reading on every realm measured so far.
+        const d = reply?.diagnostics;
+        if (d && d.exhaustedSearches > 0) {
+          console.warn(
+            `[RoadsLayer] ${d.exhaustedSearches} of ${d.searches} route searches were abandoned at the `
+            + `${d.maxIterations}-iteration guard, so ${d.edges - d.routed} of ${d.edges} roads are not drawn.`,
+            d.exhaustedEdgeIds,
+          );
+        }
         setPaths(reply?.paths || {});
       })
       .catch(err => {
