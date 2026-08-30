@@ -732,8 +732,18 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
       'NOT FREED — the per-file JSX arm of the same ratchet; same re-freeze, same wave.',
     'tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target':
       'NOT FREED — the cure is to give the R-BLD-10 chair-ruling row in docs/FABLE_VALIDATION_QUEUE.md a resolvable @enforced-by target, which is a chair ruling about that row, not a ratchet edit.',
-    'tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)':
-      'NOT FREED — razingExecution.js stamps a metronome-EXEMPT outcome source naming no cooldown mechanism. Re-freezing would bank a flood-class bypass; the right cure is to give it a mechanism, which is a worldPulse change outside this lane.',
+    // ⭐⭐ 2026-08-30, TE-RESIDUE-1 — THE metronome ROW LEFT, AND IT LEFT THE RIGHT WAY.
+    // Its blocker read "the right cure is to give it a mechanism, which is a worldPulse
+    // change outside this lane". HK-4 is that change: `razingExecution.js` now carries
+    // `razingReemitCooldownActive`, a once-per-state-change latch at the metronome's OWN
+    // `DRIFT_REEMIT_COOLDOWN_TICKS` window, with no new tuning band and no persisted field.
+    // The walker is GREEN at its own tip, the file measures COMPLIANT rather than merely
+    // word-matching (six mutants convict all eight new behavioural arms), and a remove-only
+    // `--update` banked it: "10 failing test(s) remain, 1 removed". The entry is deleted
+    // because its census row is GONE, and the ceiling drops by exactly the one row burned —
+    // a ledger corpse silently lowers the effective ceiling and lets the next real walker row
+    // slip in under a cap a dead entry was holding up. It was NOT removed to make anything
+    // green: the guard it names is now enforcing, not forgiven.
     'tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01':
       'NOT FREED — 73 local clamp definitions against a baseline of 62. Re-freezing banks 11 forks of a shared primitive; the cure is to route them, which is its own sweep.',
     // ⭐⭐ 2026-08-15, da-c — THE proseNumerics ROW LEFT, AND IT LEFT THE RIGHT WAY.
@@ -766,7 +776,10 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // act: the census entry, this ledger entry and this ceiling all move together, and the
   // gate is what says so — this ceiling's own arm is `<=`, so the ledger deletion alone
   // would have stayed green while leaving a silently roomier cap.
-  const OWED_CEILING = 8;
+  // 8 → 7 on 2026-08-30: the metronome-cooldown row was FREED, not forgiven — see the note
+  // in WALKER_ROWS_OWED above. Same arithmetic as the 9 → 8 and 11 → 9 retirements: the
+  // census entry, this ledger entry and this ceiling move together, in one act.
+  const OWED_CEILING = 7;
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
