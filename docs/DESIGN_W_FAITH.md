@@ -5,6 +5,13 @@ OWNER-TASTE before freeze (§797.3). Charter: ODQ §797 · §797.2 · §797.4 (p
 first-class on every aspect) · §797.5 (drift = instantiations of the banded-stock / disposition-ledger
 family, never a new lifecycle). Substrate surveyed whole at build tip `14707a8a8`.
 
+> ⚠ **AMENDED BY docs/DESIGN_W_LIVES.md (ODQ §§800–800.5, §801).** The owner widened the character
+> substrate into its own volume: **D2 is SUPERSEDED** (deity flaws = vice-pole positions on the shared
+> paradigm chart) and **D5/D6 are RESHAPED** (NPC drift = per-axis spectra under the full-paradigm
+> model; the chokepoint is `effectiveCharacter`). D1 (authoredTemper stance dial), D3 (boon/bane +
+> magic gate), D4 (the influence field), and D7–D9 STAND; the field now registers as a WITNESS-plane
+> source in W-LIVES's funnel. W-LIVES cars 1–2 land before this volume's field car.
+
 ---
 
 ## 0. Constitutional constraints this volume is designed inside
@@ -72,7 +79,7 @@ read derives ⇒ identical. Axes keep driving the planes (evil01/chaos01 unchang
 overrides only the temper-word consumers — no double-count by construction, asserted by a test that
 no site reads both for the same term.
 
-### D2 — Deity Flaw: a closed mythic-flaw vocabulary with small, typed mechanical hooks
+### D2 — Deity Flaw ⚠ SUPERSEDED by DESIGN_W_LIVES §6 (ODQ §800.3 J2): a deity's flaws are its vice-pole positions on the shared paradigm chart; the modulation hooks below survive, attached to vice poles
 Optional `flaw` ∈ `DEITY_FLAWS` (closed, setting-agnostic, owner-taste; candidate register: jealous,
 wrathful, capricious, covetous, proud, fickle, brooding, meddling). Absent = unflawed (neutral
 first-class). Mechanics are a single closed `FLAW_EFFECTS` table over quantities that already exist —
@@ -110,7 +117,7 @@ beside them, dark by default (§ D7), so legacy behavior is byte-identical with 
 unchanged-at-1.0 where the field has no members. Read/write timing: tick-START reads, exactly as
 piety and the ledger pin it.
 
-### D5 — NPC temper drift: two bounded axis-stocks around the immutable authored core
+### D5 — NPC temper drift ⚠ RESHAPED by DESIGN_W_LIVES §§2–4 (ODQ §§800–800.4): drift is now per-axis along the full paradigm chart's spectra; the faith pull is one WITNESS-plane source among many. The core principles below (immutable core, anti-ratchet home, closed vocabularies, receipt grammar) all survive into the wider model
 The core (`personality.dominant` / `.flaw` / `.modifier`) **never mutates** — identity is authored,
 and provenance stays clean. Drift is a per-NPC state `{ dE, dC, updatedTick }`: a bounded offset on
 the SAME two plane axes `TRAIT_PLANE` already projects, decaying home by

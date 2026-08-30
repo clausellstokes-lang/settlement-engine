@@ -1,0 +1,229 @@
+# DESIGN_W_LIVES — The Lived-Experience & Paradigm-Character Volume
+
+**Status:** ARCHITECTURE RULED (chair, Fable seat, 2026-08-30) — the axis catalog, level words,
+experience table, and learn rates are OWNER-TASTE candidate registers before freeze. Charter:
+ODQ §§800–800.5 (the owner's five-message design sitting, each recorded verbatim) on the
+foundation of §797–§798 (W-FAITH) and §797.5 (drift = instantiations of the banded-stock /
+disposition-ledger family, never a new lifecycle). Substrate surveyed at build tip `b85044099`.
+**This volume SUPERSEDES DESIGN_W_FAITH.md §D2 and reshapes §D5/§D6** (banners in that file);
+W-FAITH's field (D4), boon/bane (D3), authored stance dial (D1), and gates stand unchanged and
+now CONSUME this substrate.
+
+---
+
+## 0. Constitutional constraints
+
+1. **THE PROMISE** — absent state ⇒ byte-identical, everywhere below, structurally.
+2. **Finite semantics** — every trait, level, lesson, and cause is a prewritten typed token;
+   users assign, they never write; AI is a clerk. Free text never acquires mechanics.
+3. **L5 / legibility** — floats cannot reach prose: positions band into words, receipts refuse
+   non-integers (`bandCrossingReceipt`), and every visible change carries its true cause.
+4. **Anti-ratchet** — the only non-outcome movement anywhere is decay toward the authored core
+   (`decayTowardNeutral(value, core, age, band)` — the home point is a parameter; §797.5).
+5. **The constitutional core is immutable** — nothing in the engine writes an authored position;
+   only the author's pen (edit view) moves a core. Gods have no drift state at all (§800.3 J4).
+6. **Setting-agnostic** — every word in every register below must survive any world.
+
+## 1. The object: the paradigm chart (§800.2, §800.4)
+
+**A paradigm axis** is a prewritten opposed pair — a virtue pole and its corresponding vice —
+with per-axis metadata:
+
+```
+axis := { id, virtuePole: {word, expressionWords[]}, vicePole: {word, expressionWords[]},
+          planeLean: {e, c}, aggressionLean, corruptionVector|null }
+```
+
+- **Signed leveled position.** An entity's stance on an axis is one signed position: sign picks
+  the pole (positive = temperament, negative = flaw), magnitude is a **level band** — candidate
+  words `a_touch / marked / defining` per side, neutral center ⇒ a 7-band nominal ladder per
+  axis. One position per axis makes the owner's no-same-axis rule **arithmetic, not validation**.
+- **Full paradigm, sparse bytes (§800.4).** Every NPC and god holds every axis *semantically*;
+  a neutral position costs **zero bytes** — absent-reads-neutral is the encoding (the
+  disposition-channel discipline). Legacy saves are byte-identical by construction.
+- **The chart replaces three hand-tables.** `TRAIT_PLANE` (clergyTraitPlane.js), `TRAIT_ALIGNMENT`
+  and `TRAIT_AGGRESSION` (npcTraitWeights.js) become **derived columns of the one axis catalog**
+  (each axis carries its leans; a word's weight = its axis lean × its pole sign × level scale).
+  Structural convergence: three parallel tables that could drift become one source. The derived
+  tables must reproduce today's values for legacy words at default level — pinned by test.
+- **Capabilities are not axes.** The pools mix moral axes with gifts (wise, clever, resourceful,
+  scholarly, charismatic, intuitive, perceptive, astute, discerning in part): war does not make a
+  person less clever — it makes them less merciful. Gifts stay **modifiers outside the chart**,
+  as do the stance/manner neutrals (pragmatic, stoic, cynical, secretive, theatrical, …).
+
+### 1.1 THE CANDIDATE AXIS REGISTER — DRAFT FOR THE OWNER'S PEN (nothing here is frozen)
+
+Paired from the live pools (`NPC_PERSONALITY_TRAITS`, npcData.js:74; ⚠ the LOCKSTEP mirror
+`npcBank NPC_TEMPERAMENTS` moves in the same edit — pinned by tests/domain/npc/npcBank.test.js):
+
+| # | Axis | Virtue pole (expressions) | Vice pole (expressions) |
+|---|---|---|---|
+| 1 | CANDOR | honest (forthright, candid, plain-dealing) | deceitful (mendacious, manipulative) |
+| 2 | MERCY | compassionate (merciful, warm-hearted) | cruel (callous, cold-blooded) |
+| 3 | COURAGE | brave (stalwart) | cowardly |
+| 4 | TEMPER | patient (level-headed, unflappable) | wrathful (volatile) |
+| 5 | GENEROSITY | generous (magnanimous, hospitable) | greedy (self-serving) |
+| 6 | HUMILITY | humble (gracious) | arrogant (vain, imperious) |
+| 7 | FIDELITY | loyal (dependable, steadfast) | **treacherous — ORPHAN, needs mint** (fickle?) |
+| 8 | INDUSTRY | diligent (conscientious, tenacious) | lazy |
+| 9 | JUSTICE | principled (fair-minded, equitable, incorruptible) | corrupt (hypocritical, petty) |
+| 10 | PRUDENCE | prudent (cautious†) | reckless |
+| 11 | TRUST | **trusting — ORPHAN, needs mint** | paranoid (suspicious) |
+| 12 | CHEER | optimistic (good-humoured) | bitter (melancholic†, brooding†) |
+| 13 | FORBEARANCE | **forgiving — ORPHAN, needs mint** | vengeful (vindictive) |
+| 14 | PROTECTION | protective (courteous) | domineering (overbearing, dismissive) |
+| 15 | TEMPERANCE | temperate | **indulgent — ORPHAN, needs mint** (hedonistic†) |
+| 16 | CONTENT | **contented — ORPHAN, needs mint** | envious |
+| 17? | DEVOTION | pious (zealous†?) | **worldly — ORPHAN; OR piety stays the faith system's relationship, not a character axis — OWNER RULING WANTED** |
+
+† = a reassignment candidate from the neutral pool. Unassigned negatives to place: stubborn,
+ruthless (MERCY or its own RESOLVE axis?). Level words per side (candidate): `a_touch / marked /
+defining`. Every row, word, lean, and the level ladder itself: **owner signs before freeze**.
+
+## 2. State model (§800.2, §800.4, §800.5)
+
+```
+authored core   entity.character = { axes: { [axisId]: {pole:'virtue'|'vice', level:band} } }   // sparse
+drift state     worldState.characterDrift[npcUid] = { [axisId]: {offset, updatedTick} }         // sparse
+effective       effectivePosition(axis) = corePosition(axis) + offset, clamped to the spectrum
+```
+
+- **Home of drift:** `worldState` (pulse-owned, beside `npcStates` which already keys NPCs by the
+  composite `npcId(settlementId, npc, index)`), NOT on the roster record — the roster is
+  regen-exposed. ⚠ **RECON ROW (landing precondition, the owner's most-bitten class):** prove the
+  npc uid is stable across settlement regeneration / undo / import, or design the uid remap; walk
+  create/read/persist/regen/undo/migrate before any implementation car lands.
+- **Legacy mapping:** each flat legacy word (dominant/flaw/modifier) reads as (axis, pole, default
+  level `marked`) through a tolerant reader; undrifted it projects back to the **identical word**
+  at every existing seam ⇒ byte-identity. The generator's current draw = the special case
+  (salient positions from the drawn words, all else neutral) — distribution unchanged until lit.
+- **Rounding at persistence** only (the bandedStock discipline); all folds codepoint-ordered;
+  read-last-tick / write-next-tick.
+
+## 3. The experience funnel (§800): three planes, one writer
+
+Every lesson enters through ONE closed vocabulary (`LIVED_EXPERIENCE_KINDS`, the
+DISPOSITION_SOURCE_KINDS pattern: silent fallback kind, both-ways partition test) into ONE writer.
+**Source qualification law:** a source registers only if it already emits a receipted outcome —
+drift never invents event streams.
+
+| Plane | Teaches | Sources (all receipted TODAY unless flagged) |
+|---|---|---|
+| **PERSONAL** (hardest) | what happened TO you | mission grade at close (ES-5d) · caught lying (npcCredibility charge) · compromised / exposed / leash events (corruption arc) · custody: intercepted, held, ransomed, pardoned (envoy arc LIVE; ⚠ spy capture waits on ES-2b's writer by charter) · promotion won / rung lost / rivalry bids (ladder) · goal culmination |
+| **AFFILIATION** (moderate) | what happened to what you belong to | faction capture-ladder transitions + power growth/decline (factionStates) · faction feuds (factionPairLedger) · own settlement's band crossings (disposition channels) · your god's fortunes (pantheon ledger) · coups, occupation of home |
+| **WITNESS** (gentle) | what you lived among and heard | **milieu**: dwell in any settlement (whereabouts mirror × host's conduct plane, alignment, active conditions, disposition bands — ⭐ envoys and spies ride the SAME one-travel-substrate term, §800.3 J1) · **news × belief**: believed-path fidelity (distancePricedNews) × teller credibility (court + npc stocks) × own TRUST-axis position |
+
+- **Closest-plane-wins:** one event teaches one NPC on its closest plane only — the structural
+  cure for double-counting (one mission failure never teaches personally AND via the faction).
+- **Lesson families** with per-family learn rates (the SP-C partition pattern; war teaches
+  hardest, gossip least); per-axis pull vectors per kind — the **experience table** is the
+  largest owner-taste register in the arc.
+- **Ambient vs commitment (§800.4 rev. of J5):** milieu/faith pull touches ALL axes at small
+  rates toward the field's poles; commitment events (taking orders, conversion, consecration)
+  are large targeted pushes. The acquisition concept is dissolved — everything is latent.
+- **Receipts:** minted ONLY on band crossings, **reversals** (crossing the midpoint — the
+  paradigm shift: a virtue curdling into ITS OWN vice), and **top-3 displacements** (§4). Never
+  raw movement (anti-wallpaper). Every receipt carries evidence-bound causes.
+
+## 4. Consumers (§800.1): character steers, outcomes teach, the loop closes
+
+- **One chokepoint:** `effectiveCharacter(npc)` (core + drift; absent drift ⇒ core exactly).
+  Every consumer routes here: `readClergyPlane` / `targetedFootholds`, espionage
+  `flawDistortion`, the persona/AI surface, prose composers.
+- **Goals:** `branchedGoals(state, context)` and initial goal assignment take effective
+  character as an input tilting the branch (seeded, deterministic) — goals AND their evolution.
+- **Missions:** effective temperament/flaw enters the ONE vetting reader (⟨F8⟩ one-home law:
+  "vetting is a real refusal, not a score") — the dutiful accept desperate errands, the
+  self-serving refuse without pay, and a court everyone refuses casts nobody and says so.
+- **Corruption:** eligibility reads **banded depth — a vice at `marked` or deeper** (LOAD-BEARING
+  under full paradigm, §800.4: latent greed in everyone must not make everyone corruptible);
+  temperament steadiness reads the effective leading virtue. A drifted paradigm shift into a
+  corruptible vice OPENS eligibility — becoming reachable is the endpoint of a long arc.
+- **Loop safety (structural):** anti-ratchet decay · clamped learn rates with saturation ·
+  read-last-tick/write-next-tick (no same-tick echo) · every draw seeded. The enumerated
+  feedback loops (drift→belief→drift via TRUST; drift→goals→outcomes→drift) each cross ticks
+  and pass through clamps — pinned by property tests.
+
+## 5. The read model: top-3 and the displacement receipt (§800.4)
+
+Read surfaces (dossier lead, news, hover) show the **top 3 strongest positions**: order =
+|effective position| desc, then band rank, then codepoint axis id (pinned total order). A
+background axis overtaking a foreground one mints a **displacement receipt** ("bitterness has
+overtaken his patience") — visible personality changing composition is a first-class, cause-bound
+event. Full character remains readable behind the fold and in the edit view.
+
+## 6. Gods on the chart (§800.3) — W-FAITH deltas
+
+- A deity's character = leveled positions on the SAME axes (J2). **D2's separate mythic-flaw
+  vocabulary is SUPERSEDED** — every candidate mapped into the pools (jealous→envious,
+  capricious→volatile, covetous→greedy, proud→arrogant, wrathful→wrathful). Flaw-style
+  mechanics (a jealous god's boon weakening as share is contested) attach to vice-pole positions.
+- **Immutable structurally (J4):** deities have no drift state; the drift writer accepts NPCs
+  only. Fortunes (pantheon ledger) move; character does not.
+- **Same level words; rank carries potency (J3)** — no divine intensity tier (rank already
+  scales via DEITY_RANK_AUTHORITY; double-encoding forbidden). Authoring defaults `defining`.
+- **The faith pull** = the W-FAITH influence field (D4: share × rank × standing × patronAmp ×
+  pietyField) applied as a WITNESS-plane ambient source along the deity's held axes toward its
+  poles. D1's `authoredTemper` stance dial STANDS (stance toward conflict ⊥ virtue — an
+  honorable war god is authorable). D3 boon/bane and the magic gate are untouched.
+
+## 7. Surfaces (§800.5)
+
+- **Edit view = the paradigm chart made visible:** every axis on its spectrum, most at neutral;
+  the user sets any position at any band on any axes (all-neutral legal). For NPCs the pen moves
+  the **CORE**; a read-only **ghost** shows the drifted effective position beside the anchor —
+  drift made visible exactly where the user authors. Editing a core mid-campaign re-anchors
+  decay; drift offsets persist (lived history immutable). Gods: same chart, no ghost.
+  ⚠ RECON ROW: confirm the NPC edit surface (settlement editor vs compendium) at dispatch.
+- **Custom content / DB:** deity axis positions join the admission manifest + CHECKs additively
+  (049/056 pattern). NPC authoring rides the settlement-editor path.
+- **Prose:** band words and pole words only; displacement/reversal/crossing templates follow the
+  Herald contextual-narrative law (§754.3) and the news address law.
+
+## 8. Gating, lifecycle, proofs
+
+Two virtual doors (dark in legacy configs, lit in full simulation): `livedExperienceEnabled`
+(funnel + drift) and `paradigmChartEnabled` (the catalog-backed read path; legacy words keep
+projecting identically when dark). Byte-identity proofs: legacy fixture goldens dark AND lit-with-
+no-lessons; the derived-tables-reproduce-hand-tables pin; the legacy word round-trip pin. Behavior
+that legitimately moves under lit presets gets SHIFT RECORDs. Consumer censuses with full-suite
+denominators owed at dispatch (§786.2): every reader of `personality.*`, TRAIT_* tables,
+`deityTemper`. The uid-stability recon row (§2) is a landing precondition.
+
+## 9. Risks and counters
+
+1. **Wallpaper** → receipts on crossings/reversals/displacements only; small learn rates; the
+   band ladder's width is the sensitivity dial (owner-signed).
+2. **Runaway** → anti-ratchet + saturation + clamps; enumerated cross-tick loops; property tests
+   assert no unbounded trajectory under constant pull (the 300-year-runaway lesson, structural).
+3. **Double-count** → closest-plane-wins + evidence binding; asserted by the partition test.
+4. **Save bloat** → sparse encoding; neutral costs zero; populace drifts stay aggregate
+   (settlement channels); measure serialized size in the soak fixture.
+5. **Identity erosion** (everyone converging to their city's character) → milieu rates are the
+   SMALLEST in the table; decay home outpaces ambient pull at equilibrium for all but `defining`
+   pressure — asserted as a property, not hoped.
+6. **Catalog drift** → one catalog, derived columns, lockstep pin, no parallel tables survive.
+
+## 10. Train decomposition (W-LIVES; seats per §787.2; W-FAITH consumes cars 1–4)
+
+| Car | Scope | Seat |
+|---|---|---|
+| 0 | This volume (done) | Fable (chair) |
+| 1 | The axis catalog leaf + derived columns + legacy word mapping + round-trip pins | Opus |
+| 2 | State model: core/drift/effective + uid recon row + doors + goldens | Opus (recon first) |
+| 3 | The funnel: planes, lesson families, closest-plane-wins, receipts incl. displacement | Opus (Fable review) |
+| 4 | Source adapters (corruption, ladder, credibility, custody, faction, milieu, news×belief) | Opus |
+| 5 | Consumers: chokepoint re-routes, goal branch input, vetting input, corruption depth gate | Opus |
+| 6 | **The candidate registers pack for the owner's pen** (chart, levels, experience table, rates) | **Fable** |
+| 7 | Read model + prose: top-3, displacement/reversal news, dossier | **Fable** (voice) |
+| 8 | Edit view: full chart + ghost + admission/DB | Opus (Fable design review) |
+
+Sequencing: W-LIVES cars 1–2 land before W-FAITH's field car (which registers the faith pull as
+a source); both after T7 per the queue; skeptic panel before car 1 (§441 J7).
+
+## 11. Open owner-taste items (everything else above is decided vetoably)
+
+1. **The chart itself** (§1.1) — pairings, the five orphan mints, reassignments, DEVOTION's fate.
+2. Level words (`a_touch/marked/defining`?) and the drift half-life band per axis class.
+3. The experience table — kinds × axis pulls × family rates.
+4. Whether `ruthless`/`stubborn` get homes or stay expression words.
