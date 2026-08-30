@@ -1,8 +1,21 @@
 # Catalog hygiene / MF-CH3 — THE DATA SLIPS: the UI stops offering ten institutions the generator will never roll, five rows leave the military quarter, eleven strings stop overstating, and a cathedral city may keep its monasteries
 
-- **Status:** DRAFT
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `86794b5d2480d6bf7821aa390a82f99f4babeeca`
+- **Verified base:** `claude/composite-r4` at `373bbaa8457b6030fdb159d7164313c498d7ebe8`
+  ⚠ **RE-STAMPED AT THE LANDING ACT (§556.10, executed by lane TE-RESIDUE-1).** This member's
+  CODE landed as car 57 of TE-STACK-5 (`86794b5d2` → `510c51b76`, ODQ §548.1) and the packet was
+  never flipped, so it wore DRAFT for six catalog-train landings while its own code sat in the
+  branch. The status above and `PACKET_MANIFEST.json`'s are moved together, because
+  `implementation-packets.mjs` reds when they disagree, and the base is re-stamped to the tip the
+  ARMS WERE RE-CERTIFIED AT rather than left at the slot the figures were measured against — the
+  two are different shas and the distinction is the point of §556.10.
+  ⚠ **EVERY FIGURE IN §0–§6 BELOW REMAINS A READING AT `86794b5d2`, THE SLOT THIS CAR WAS BUILT
+  AND MEASURED ON.** They are a historical record and are NOT re-derived here: eight catalog-train
+  landings have moved the corpus since, and re-deriving a landed car's declared figures at a later
+  tip would overwrite the evidence the landing was accepted on. What is certified at the new base
+  is the ACCEPTANCE — the walker, the reachability suite and the four TEST-action suites — not the
+  arithmetic.
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
 - **Provenance:** implemented by lane **TE-CH-3**. Third and final car of the catalog-hygiene

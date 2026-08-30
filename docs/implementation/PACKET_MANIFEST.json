@@ -28866,9 +28866,9 @@
     },
     {
       "id": "MF-CH3",
-      "status": "DRAFT",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/catalog-hygiene/MF-CH3.md",
-      "verifiedBase": "86794b5d2480d6bf7821aa390a82f99f4babeeca",
+      "verifiedBase": "373bbaa8457b6030fdb159d7164313c498d7ebe8",
       "changeManifest": [
         {
           "_note": "THE READER FIX (J-CH-3-1, chair-ruled). Ten catalog rows are AUTHORED in one tier's block and GATED to a higher tier by `minTier` - nine city rows gated to metropolis and one village row gated to city - and `assembleInstitutions` refuses them below their gate as its first in-loop act while these lookups returned the raw block. Re-derived at this base: 311 rows, 36 with minTier, 26 REDUNDANT, 10 ABOVE-BLOCK, 0 BELOW, and all three readers returned TRUE for all ten while generator-eligible was FALSE. The cure is `institutionAvailableAtTier`, reusing `tierAtLeast` from constants.js - the predicate institutionLifecycle already uses - on getInstitutionalCatalog and getInstitutionsForTier; getFullCatalogWithTierMeta keeps every row and reports `nativeTier` as the EFFECTIVE tier instead, because that view spans all tiers so nothing there was unreachable and what was wrong was the LABEL InstitutionalGrid renders. `'all'` is exempt by design and the walker pins the exemption. Empty categories are dropped, mirroring filterCatalogForMagic which runs immediately after this in selectCurrentCatalog. THE RULING CONTRADICTS 491's 'the tier block is the structural truth' framing, on the measurement - deleting minTier moves 97 of 420 rosters and moving the rows moves 108 while clobbering the city's own Smuggling network, and the reader fix costs ZERO - and the chair owns the correction. THE ZERO-SHIFT CLAIM IS STRUCTURAL: the corpus digest is unmoved but for a lookups.js change the digest CANNOT FAIL, because nothing on the generation path imports the module; arm A5's import census over src/generators, src/domain and src/lib is the load-bearing evidence and carries a positive control.",
@@ -29122,9 +29122,9 @@
     },
     {
       "id": "MF-CG2",
-      "status": "DRAFT",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-CG2.md",
-      "verifiedBase": "86794b5d2480d6bf7821aa390a82f99f4babeeca",
+      "verifiedBase": "373bbaa8457b6030fdb159d7164313c498d7ebe8",
       "changeManifest": [
         {
           "_note": "THE CELL ADDRESS AND THE ONE LEDGER. packFootprint took a mod-4 SLOT into one medial subdivision and the layer kept TWO counters over the same parcel (flagshipsAt for round-1 institutions, occupancy for everything else); because a footprint is a PURE FUNCTION of (parcel, slot, shrink), both leaks drew buildings at IDENTICAL COORDINATES rather than crowding a parcel — 26.42% of 53,420 drawn rows over the 504-row calibration corpus, with 5,932 of 5,932 duplicate groups inside a SINGLE parcel and 4,518 parcels holding more than the four cells the theorem afforded. The medial subdivision RECURSES, so cellAt reads the index as an unbounded base-4 ADDRESS (bounded for, never a while; an address past the tree returns null rather than wrapping) and containment stays a theorem by induction. One ledger replaces two and a flagship CONSUMES its cell while staying exempt from the per-parcel band and the total cap. The footprint also gains a DRESSED form — a size step and an optional corner truncation off one sceneDigest under its own aspect key, so no second carto: label is added and TC-2 determinism scan stays green unedited — because subcells 0,1,2 of any triangle are exact TRANSLATES of one another (20,000 of 20,000 integer triangles) and a unique cell alone would leave a one-shape vocabulary. The dwelling fill free term is clamped at zero, which is load-bearing once occupancy can exceed the band.",
@@ -29260,9 +29260,7 @@
           "--maxWorkers=2",
           "tests/domain/townCartographyProperty.test.js",
           "tests/domain/townCartographyPaint.test.js",
-          "tests/lib/townCartographyBlock.test.js",
-          "tests/ui/settlementMapPropertyLine.test.jsx",
-          "tests/ui/mapCartographySubTab.test.jsx"
+          "tests/lib/townCartographyBlock.test.js"
         ],
         [
           "npx",

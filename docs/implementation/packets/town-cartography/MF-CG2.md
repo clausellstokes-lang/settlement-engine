@@ -1,12 +1,33 @@
 # Town cartography / MF-CG2 — the cell address: a quarter of every drawn map was one building standing inside another
 
-- **Status:** DRAFT
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `86794b5d2480d6bf7821aa390a82f99f4babeeca`
+- **Verified base:** `claude/composite-r4` at `373bbaa8457b6030fdb159d7164313c498d7ebe8`
+  ⚠ **RE-STAMPED A SECOND TIME AT THE LANDING ACT (§556.10, executed by lane TE-RESIDUE-1).** This
+  member's CODE landed as car 58 of TE-STACK-5 (ODQ §548.1) beside `MF-CH3`, and like its sibling
+  the packet was never flipped out of DRAFT afterwards. The base above is now the tip the
+  ACCEPTANCE ARMS were re-certified at, not the slot the figures were measured against; the
+  paragraph below records the FIRST re-stamp and is kept because the chain of bases is what makes
+  a stacked landing auditable. Every figure in §1–§5 remains a reading at `86794b5d2` and is NOT
+  re-derived here — including the `DUPLICATES.city.permille` 51 → 50 move ODQ §548.6 ratified.
+  ⚠ **TWO `checks` ROWS WERE PRUNED IN THE SAME ACT, AND THE REASON IS A SILENT INSTRUMENT.**
+  This packet's third check named `tests/ui/settlementMapPropertyLine.test.jsx` and
+  `tests/ui/mapCartographySubTab.test.jsx`; TE-STRIP-1 deleted both with the map (`5d839e198`,
+  "the map's tests leave with the map"). Executed at the certification tip the row reports
+  **10 files passed** for twelve named paths — vitest neither errors nor warns on an argv path
+  that does not exist, and `implementation-packets.mjs` only asserts that a `checks` row is a
+  non-blank argv array, never that its paths resolve. A certification that quietly runs less
+  than it names is worse than one that reds, so the two dead paths are removed rather than left
+  to make a future re-run look complete. **This is a CLASS, not this packet's slip:** a census
+  over all 182 records at this tip found **23 dead path-shaped argv tokens across 10 LANDED
+  packets**, all strip residue; the other 21 are carried to the chair rather than swept here,
+  because the strip lanes are still landing and a sweep would be stale on arrival.
   ⚠ **RE-STAMPED BY THE TE-STACK-5 LANDING (§5c).** This member was BUILT on `79b78881ca86612ec312602c2e3dc6d06aa34df8`
-  and every figure in §1–§5 was measured there. It is landing STACKED ON `MF-CH3`, whose own
-  verified base is the sha above, so the member's own commits now sit on the MF-CH3 tip
-  `da2c7085ced2891c3967e5ae21a804fdb8efd537` and the whole stack lands against the slot named here.
+  and every figure in §1–§5 was measured there. It landed STACKED ON `MF-CH3`, whose own verified
+  base was then `86794b5d2480d6bf7821aa390a82f99f4babeeca` — the slot both cars were certified
+  against, and the value this line carried until the landing-act re-stamp above superseded it. The
+  member's own commits sit on the MF-CH3 tip
+  `da2c7085ced2891c3967e5ae21a804fdb8efd537` and the whole stack landed against that slot.
   Both stamped places — this line and `PACKET_MANIFEST.json`'s `verifiedBase` — were moved
   together, because `implementation-packets.mjs` reds when they disagree.
   ⚠ Read with `git rev-parse --verify -q` at this lane's opening, never extended from a quoted
