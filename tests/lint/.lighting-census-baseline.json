@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "8ea9c871d87c4bef7f695a6a9c4987d65983df32",
-  "measuredBy": "TE-QSTYLE (the last lane to re-record the tuple inline, carried across the extraction)",
+  "measuredAtSha": "073d5c5acb81d4273d0479813ab069dbd6631828",
+  "measuredBy": "TE-EFF-1 (Opus 5 seat), cars 1-3",
   "date": "2026-08-30",
-  "note": "SEED ROW, CARRIED NOT MEASURED: these are TE-QSTYLE's figures moved verbatim off the walker's inline constant at base 8ea9c871d, so the extraction commit changes the tuple's HOME and nothing else. TE-EFF-1's own cars move the census, and this row is superseded by the first real regeneration at that lane's tip.",
+  "note": "car 1 added nine test titles and one suite title to tests/scripts/gateMutex.test.js (the shared-tier controls); cars 2 and 3 add no test file and no test title. FIRST regeneration through the extracted register — the figures it replaces were TE-QSTYLE's, carried across the extraction unmeasured.",
   "files": 2484,
   "parked": 364,
   "credited": 2120,
-  "titles": 20899,
-  "suiteTitles": 5778
+  "titles": 20908,
+  "suiteTitles": 5779
 }
