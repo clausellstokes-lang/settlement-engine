@@ -127,7 +127,9 @@ Authority: §759.4 · §763.2 · §764.2 · §768.3 · §769.4 · §771.2 · §7
 
 ## T10 · PRODUCT-SURFACE (TE-UX-1 + the commerce car)
 Authority: §767.2/.3 (the owner's post-forge ruling + the walk findings a–i) · §765.1 (WEB rows).
-- UX-1: dossier lands HEAD-FIRST post-forge; receipts panel + the three Keep-locks into the editor; the
+- UX-1: dossier lands HEAD-FIRST post-forge; the above-dossier "How this was simulated" panel is DELETED
+  OUTRIGHT (§777 — redundant with the dossier's own in-card button, which stays); the three Keep-locks
+  relocate to the settlement editor (controls, not receipts); the
   copy defects ("incursions.. ConsiderPalisade", "1 quarters"); the 33/40/39 count reconciliation; the
   "mosque or chapel" template hedge (generator PICKS; the culture-register question ruled at the car);
   REALM restored to the narrow-width nav on the core flow; chrome collisions (real-device pass); the
