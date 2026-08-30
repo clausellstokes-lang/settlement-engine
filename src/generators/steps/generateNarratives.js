@@ -22,6 +22,7 @@ registerStep('generateNarratives', {
   // FINAL economicState, after the faction-pull reconciliation.
   deps: ['generatePopulation', 'economyReconcilePass'],
   reads: ['economicState', 'effectiveConfig', 'generationContext', 'institutions', 'population', 'powerStructure', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  readsVersion: { economicState: 'reconciled' },
   provides: ['settlementReason', 'resourceAnalysis', 'economicViability', 'history'],
   phase: 'narrative',
 }, (ctx) => {

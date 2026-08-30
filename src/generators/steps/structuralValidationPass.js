@@ -25,6 +25,7 @@ registerStep('structuralValidationPass', {
   // final-roster gate while power still reflects the provisional economy.
   deps: ['powerEconomyReconcilePass'],
   reads: ['effectiveConfig', 'institutions', 'isolationSupport', 'magicLevel', 'threat', 'tier', 'townPlus', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  readsVersion: { isolationSupport: 'reconciled' }, // after coherenceRepairPass re-measures support
   provides: ['structural'],
   phase: 'institutions',
 }, (ctx) => {

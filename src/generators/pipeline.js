@@ -78,6 +78,15 @@ const _steps = new Map();
  * @param {string[]} [meta.reads]   - Ctx keys this step CONSUMES that another step produces (A+ generators.3 data-flow contract; strict mode asserts each is present before the step runs)
  * @param {string[]} [meta.mutates] - Existing ctx keys this step mutates IN PLACE (A+ P1.7 data-flow contract)
  * @param {string[]} [meta.scratch] - Internal/flag ctx keys this step sets (declared so strict mode stays quiet)
+ * @param {Record<string, 'provisional'|'reconciled'>} [meta.readsVersion]
+ *   WHICH PRODUCTION of a RE-DERIVED ctx key this step means. A key is re-derived when some
+ *   step both reads and provides it — `economicState` (generateEconomy provisional,
+ *   economyReconcilePass final), `stress`, `isolationSupport`. For those keys the run order
+ *   alone decides which value a reader sees, so `reads` records THAT a step consumes the key
+ *   while this records WHICH ONE IT MEANT, and `tests/generators/dataFlowContract.test.js`
+ *   asserts the two agree. That test's SCOPE NOTE named this the missing piece: "Resolving
+ *   which production each reader consumes needs versioned keys." This is them. Zero runtime
+ *   cost — the pipeline never reads this; only the contract does.
  * @param {string}   [meta.phase]  - Logical phase grouping (for UI/debugging)
  * @param {Function} fn       — (ctx, rng) => Object  (patch to merge into ctx)
  */
@@ -213,6 +222,7 @@ export function getStepMeta() {
       reads: step.reads || [],
       mutates: step.mutates || [],
       scratch: step.scratch || [],
+      readsVersion: step.readsVersion || {},
       phase: step.phase || 'unknown',
     });
   }

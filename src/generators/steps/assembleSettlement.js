@@ -77,6 +77,9 @@ registerStep('assembleSettlement', {
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
   deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
   reads: ['availableServices', 'conflicts', 'culture', 'culturalIdentity', 'economicState', 'economicViability', 'effectiveConfig', 'factions', 'generationContext', 'generationRepairs', 'history', 'institutions', 'isolationSupport', 'neighbourProfile', 'npcs', 'population', 'powerIntent', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  // The terminal step bundles the FINAL value of every re-derived key. Declared rather than
+  // assumed: 'it runs last' is a fact about today's order, and the contract now checks it.
+  readsVersion: { economicState: 'reconciled', stress: 'reconciled', isolationSupport: 'reconciled' },
   provides: ['settlement'],
   // normalizes the power roster in place; F8 also re-renders each stress entry's
   // summary in place with the real name (resolveStress rolled them name-blind) and

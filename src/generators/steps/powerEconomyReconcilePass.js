@@ -22,6 +22,7 @@ import {
 registerStep('powerEconomyReconcilePass', {
   deps: ['economyReconcilePass'],
   reads: ['economicState', 'powerIntent', 'powerStructure', 'tier'],
+  readsVersion: { economicState: 'reconciled' }, // the whole point of this pass
   provides: [],
   mutates: ['powerStructure'],
   phase: 'power',

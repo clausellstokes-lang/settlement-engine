@@ -42,6 +42,9 @@ registerStep('corruptionPass', {
   // economicState, which the reconcile step may replace after the faction pull.
   deps: ['generatePopulation', 'economyReconcilePass'],
   reads: ['economicState', 'institutions', 'npcs'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  // The deps comment above already says 'economyReconcilePass (not generateEconomy)'. This is
+  // that sentence made machine-checkable.
+  readsVersion: { economicState: 'reconciled' },
   provides: [],
   mutates: ['factions', 'npcs'], // stamps corruption onto the rosters in place (A+ P1.7)
   phase: 'population',
