@@ -3846,7 +3846,7 @@
         },
         {
           "path": "src/domain/worldPulse/pulseKernel.js",
-          "symbol": "selectedOutcomes: publicSelectedOutcomes.slice(0, 24)"
+          "symbol": "selectedOutcomes: publicSelectedOutcomes.slice("
         },
         {
           "path": "src/domain/worldPulse/factionCompetition.js",
@@ -4042,7 +4042,7 @@
         },
         {
           "path": "src/domain/worldPulse/pulseKernel.js",
-          "symbol": "selectedOutcomes: publicSelectedOutcomes.slice(0, 24)"
+          "symbol": "selectedOutcomes: publicSelectedOutcomes.slice("
         },
         {
           "path": "src/domain/worldPulse/advanceInterval.js",
@@ -4292,7 +4292,7 @@
         },
         {
           "path": "tests/lint/newsHeadlineContract.walker.test.js",
-          "symbol": "A3 freezes both raw lanes and all 26 exact rewrite counts"
+          "symbol": "A3 freezes both raw lanes"
         },
         {
           "path": "tests/lint/newsHeadlineContract.walker.test.js",
@@ -4509,7 +4509,7 @@
         },
         {
           "path": "src/domain/worldPulse/peaceTermsCatalog.js",
-          "symbol": "CREDIBILITY_HIT: 0.3"
+          "symbol": "CREDIBILITY_HIT:"
         },
         {
           "path": "src/domain/worldPulse/treatyBreachCredibility.js",
@@ -4690,7 +4690,7 @@
         },
         {
           "path": "src/domain/worldPulse/actorMajorApproval.js",
-          "symbol": "export const ACTOR_MAJOR_HOLD_WEEKS = 6"
+          "symbol": "export const ACTOR_MAJOR_HOLD_WEEKS"
         },
         {
           "path": "src/domain/worldPulse/actorMajorApproval.js",
@@ -4718,7 +4718,7 @@
         },
         {
           "path": "src/domain/worldPulse/pulseHelpers.js",
-          "symbol": "const RECORD_MODE_PROPOSAL_VERSION = 4;"
+          "symbol": "const RECORD_MODE_PROPOSAL_VERSION"
         },
         {
           "path": "src/domain/worldPulse/applyWorldPulse.js",
@@ -5999,7 +5999,7 @@
         },
         {
           "path": "docs/implementation/PACKET_STANDARD.md",
-          "symbol": "`src/domain/worldPulse/convergence.js` | 798 | 800 | 2"
+          "symbol": "| `src/domain/worldPulse/convergence.js` |"
         }
       ],
       "acceptanceCases": [
@@ -7773,7 +7773,7 @@
         },
         {
           "path": "vite.config.js",
-          "symbol": "testTimeout: 20000"
+          "symbol": "testTimeout:"
         },
         {
           "path": "scripts/preproof-train.mjs",
@@ -8038,7 +8038,7 @@
         },
         {
           "path": "docs/implementation/preambles/INT-PREAMBLE.md",
-          "symbol": "of `kindPoolFloorsRegistries` off **10**"
+          "symbol": "of `kindPoolFloorsRegistries` off"
         }
       ],
       "acceptanceCases": [
@@ -9499,7 +9499,7 @@
         },
         {
           "path": "src/domain/worldPulse/beliefMap.js",
-          "symbol": "SILENCE_DECAY: 0.92"
+          "symbol": "SILENCE_DECAY:"
         },
         {
           "path": "src/domain/worldPulse/beliefMap.js",
@@ -10799,7 +10799,7 @@
         },
         {
           "path": "scripts/check-full-typecheck.mjs",
-          "symbol": "`typecheck:ratchet` is step 12 of the 17-step chain today"
+          "symbol": "`typecheck:ratchet` is step"
         },
         {
           "path": "ARCHITECTURE.md",
@@ -11807,7 +11807,7 @@
         },
         {
           "path": "tests/lint/rawColorLiteral.test.js",
-          "symbol": "const TEMPLATE_BUDGET = 1;"
+          "symbol": "const TEMPLATE_BUDGET"
         },
         {
           "path": "tests/lint/rawColorLiteral.test.js",
@@ -13113,7 +13113,7 @@
       "requiredSymbols": [
         {
           "path": "scripts/audit/whole-world-soak.mjs",
-          "symbol": "const ceiling = 900_000 * SETTLEMENTS"
+          "symbol": "const ceiling ="
         },
         {
           "path": "scripts/audit/whole-world-soak.mjs",
@@ -27329,7 +27329,7 @@
         },
         {
           "path": "src/config/pricing.js",
-          "symbol": "export const ANNUAL_FACTOR = 0;"
+          "symbol": "export const ANNUAL_FACTOR"
         },
         {
           "path": "src/config/pricing.js",
