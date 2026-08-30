@@ -330,7 +330,9 @@ describe('every chrome button speaks its name (§767.3(i) prevention)', () => {
     return accText(b).trim() || (b.getAttribute('title') || '').trim();
   };
 
-  test.each([['mobile', true], ['desktop', false]])('%s chrome renders no anonymous button', (_label, mobile) => {
+  // Two literal tests, not a test.each: a parameterized case is invisible to
+  // the lighting census by construction and would park this WHOLE file.
+  const assertNoAnonymousButton = (mobile) => {
     H.isMobile = mobile;
     const { container } = render(<App />);
     const buttons = [...container.querySelectorAll('button, [role="button"]')];
@@ -338,5 +340,13 @@ describe('every chrome button speaks its name (§767.3(i) prevention)', () => {
     expect(buttons.length).toBeGreaterThan(3);
     const anonymous = buttons.filter((b) => !accName(b)).map((b) => b.outerHTML.slice(0, 120));
     expect(anonymous).toEqual([]);
+  };
+
+  test('mobile chrome renders no anonymous button', () => {
+    assertNoAnonymousButton(true);
+  });
+
+  test('desktop chrome renders no anonymous button', () => {
+    assertNoAnonymousButton(false);
   });
 });
