@@ -865,11 +865,18 @@ export function buildSpatialDigest(input) {
   const cellResolution = Array.isArray(input?.cellResolution) && input.cellResolution.length
     ? input.cellResolution
     : null;
-  const captureReceipt = (terrainDisagreements.length || cellResolution)
+  // SEAM-3's provenance stamp rides the SAME envelope — one receipt, one version, three
+  // seams. It is carried VERBATIM as the capture built it: this builder never re-derives a
+  // stamp, because a stamp re-derived here would describe the pack the DIGEST saw rather
+  // than the pack the CAPTURE held, and those are the two things the stamp exists to tell
+  // apart. Absent (every fixture, every existing canon) ⇒ no key ⇒ byte-identical.
+  const captureSidecar = input?.sidecar && typeof input.sidecar === 'object' ? input.sidecar : null;
+  const captureReceipt = (terrainDisagreements.length || cellResolution || captureSidecar)
     ? {
       version: CAPTURE_RECEIPT_VERSION,
       ...(cellResolution ? { cellResolution } : {}),
       ...(terrainDisagreements.length ? { terrainDisagreements } : {}),
+      ...(captureSidecar ? { sidecar: captureSidecar } : {}),
     }
     : null;
 

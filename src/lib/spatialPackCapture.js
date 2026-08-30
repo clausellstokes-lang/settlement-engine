@@ -30,6 +30,7 @@ import { findActiveCampaign } from '../store/campaignSliceShared.js';
 import { magicLedger } from '../domain/magicLedger.js';
 import { resolveSettlementTerrain } from '../domain/resolveTerrain.js';
 import { normalizeSpatialPack, nearestCellTo } from '../domain/spatial/spatialDigest.js';
+import { buildCaptureSidecar } from '../domain/spatial/captureSidecar.js';
 
 /**
  * A placement row on its way to the digest, plus the stored coordinates SEAM-2 needs
@@ -274,5 +275,16 @@ export async function captureSpatialPack({ campaignId, get }) {
   // attached — the store refuses on that and can say WHY, instead of freezing a canon
   // built from cell 0.
   const { placements, cellResolution } = resolvePlacementCells(staged, pack);
-  return { pack, placements, cellResolution };
+  // W-SEAM SEAM-3: stamp WHICH GEOMETRY this capture actually held, so a later capture or
+  // a headless re-canonize can PROVE the pack in hand is the one these coordinates came
+  // from instead of inferring it from a witness row. The frame fields ride along when the
+  // bridge reports them and are tolerated-absent otherwise. Purely additive: the sidecar
+  // does not seed anything, and a canon frozen without one is untouched.
+  const sidecar = buildCaptureSidecar(pack, {
+    graphWidth: Number(reply?.graphWidth),
+    graphHeight: Number(reply?.graphHeight),
+    mapSeed: reply?.mapSeed,
+    mapKind: reply?.mapKind,
+  });
+  return { pack, placements, cellResolution, sidecar };
 }

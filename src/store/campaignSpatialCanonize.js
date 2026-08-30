@@ -128,6 +128,12 @@ export async function runSpatialCanonize({
     // additive capture receipt. Empty (the fixture path, and every realm whose stored
     // cells already agree with their coordinates) ⇒ no key ⇒ byte-identical.
     cellResolution: captured.cellResolution || null,
+    // W-SEAM SEAM-3: the provenance stamp of the geometry this canon was actually built
+    // against, frozen INTO the canon beside the other capture receipts. This is the
+    // persistence shape Q-W1 granted; its reader is the headless re-canonize, which can
+    // now ask "is this the same map?" of a record instead of of a witness row. A capture
+    // that produced no stamp (the fixture path) leaves the key absent.
+    sidecar: captured.sidecar || null,
   });
   const digestBytes = JSON.stringify(digest).length;
   if (digestBytes > SPATIAL_DIGEST_MAX_BYTES) {
