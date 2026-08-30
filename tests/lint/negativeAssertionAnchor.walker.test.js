@@ -314,7 +314,12 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/aiGrounding.test.js': 2,
   'tests/domain/aiGroundingLensSource.test.js': 1,
   'tests/domain/aiInterpret.test.js': 7,
-  'tests/domain/aiOutputSchema.test.js': 9,
+  // ⚰ 9 → 8 (ODQ §763.2, Q-STYLE arm 2): a WIN BANKED, not a ceiling nudged. The three
+  // styleOverhaul vocabulary-coupling tests and the wall-ceilings pin were deleted with
+  // their subject, and the roster negative that replaced them is driven through
+  // expectAbsentWithAnchor. Lowering is mandatory here — the honesty arm reds on a ceiling
+  // the file can no longer spend.
+  'tests/domain/aiOutputSchema.test.js': 8,
   'tests/domain/aiParley.test.js': 6,
   'tests/domain/aiSpendAlarm.test.js': 2,
   'tests/domain/applyDispatch.test.js': 3,
@@ -471,7 +476,11 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/simulationSpine.test.js': 4,
   'tests/domain/statefulArmies.test.js': 2,
   'tests/domain/stressorCounterforces.test.js': 2,
-  'tests/domain/styleOverhaulCompile.test.js': 3,
+  // ⚰ 'tests/domain/styleOverhaulCompile.test.js': 3 — ROW DELETED, not lowered (ODQ §763.2,
+  // Q-STYLE arm 2). The file is gone with the styleOverhaul capability, so its three
+  // un-anchored negatives went with it. A row naming a file that does not exist is a ceiling
+  // nothing can ever spend, and it would quietly inflate `totalFrozen` in the non-vacuity arm
+  // below — the one place a stale row could make a REAL shortfall look like a pass.
   'tests/domain/subsystemRowsWar.test.js': 1,
   'tests/domain/successors.test.js': 2,
   'tests/domain/tableEvents.test.js': 2,
@@ -521,7 +530,9 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/edgeFunctions/accountActionsSupportWrite.test.js': 3,
   'tests/edgeFunctions/accountDeletionDurableWorker.test.js': 4,
   'tests/edgeFunctions/aiGroundingContract.test.js': 7,
-  'tests/edgeFunctions/aiOutputToolWiring.test.js': 8,
+  // ⚰ 8 → 5 (ODQ §763.2, Q-STYLE arm 2): three un-anchored sites left with the
+  // styleOverhaul shell rows and the retired 'carries NO atlas section' pin. Banked.
+  'tests/edgeFunctions/aiOutputToolWiring.test.js': 5,
   'tests/edgeFunctions/aiProviderAbstraction.test.js': 6,
   'tests/edgeFunctions/analyticsEventsBundle.freshness.test.js': 1,
   'tests/edgeFunctions/autoReloadLifetime.test.js': 1,

@@ -45,6 +45,7 @@ import {
 } from '../../src/domain/content/customContentManifest.js';
 import { buildConstructVocabulary } from '../../src/domain/construct/configVocabulary.js';
 import { buildOpVocabulary } from '../../src/domain/intent/opVocabulary.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { PARTY_IMPACT_KINDS } from '../../src/domain/worldPulse/partyImpactKinds.js';
 import { signalRegistryEntries } from '../../src/domain/autonomy/signalRegistry.js';
 import { MAX_CONDITION_DEPTH } from '../../src/domain/autonomy/stopConditions.js';
@@ -255,10 +256,10 @@ describe('the schema surface roster', () => {
     expect([...SCHEMA_SURFACES].sort()).toEqual(
       ['autonomy', 'construct', 'customContent', 'interpret'],
     );
-    // ⚰ 'styleOverhaul' RETIRED (ODQ §763.2, Q-STYLE arm 2). Absence WITH a liveness
-    // anchor: an emptied roster would satisfy a bare `not.toContain` just as happily.
-    expect(SCHEMA_SURFACES).not.toContain('styleOverhaul');
-    expect(SCHEMA_SURFACES).toContain('customContent');
+    // ⚰ 'styleOverhaul' RETIRED (ODQ §763.2, Q-STYLE arm 2). Driven through the estate's
+    // anchored-negative helper: an emptied roster would satisfy a bare `not.toContain` just
+    // as happily, and this reds on the anchor instead.
+    expectAbsentWithAnchor(SCHEMA_SURFACES, 'styleOverhaul', 'customContent', 'ODQ §763.2');
   });
 
   test('the version is a literal semver-shaped string', () => {

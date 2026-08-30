@@ -9,17 +9,18 @@
  */
 import { describe, it, expect } from 'vitest';
 import { DOOR_DESTINATIONS, DOOR_SCOPES, routeDoorPrompt } from '../../src/domain/intent/doorRouter.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 describe('doorRouter — destinations vocabulary', () => {
   it('exposes the analyst + the four routable workshop stage ids (the reachability denominator)', () => {
     expect(DOOR_DESTINATIONS).toEqual(['analyst', 'content', 'construct', 'apply', 'autonomy']);
     expect(DOOR_SCOPES).toEqual(['settlement', 'realm', 'product']);
-    // ⚰ 'style' left with the styleOverhaul capability (ODQ §763.2). Asserted as an
-    // ABSENCE with a liveness anchor, so an emptied/renamed vocabulary reds here rather
-    // than passing as "the id is not in the set" — which is also true of every id that
-    // never existed.
-    expect(DOOR_DESTINATIONS).not.toContain('style');
-    expect(DOOR_DESTINATIONS).toContain('content');
+    // ⚰ 'style' left with the styleOverhaul capability (ODQ §763.2). Driven through the
+    // estate's anchored-negative helper, so an emptied or re-keyed vocabulary reds on the
+    // ANCHOR rather than passing as "the id is not in the set" — which is also true of
+    // every id that never existed. 'content' is the anchor: a sibling workshop stage id
+    // travelling the same table.
+    expectAbsentWithAnchor(DOOR_DESTINATIONS, 'style', 'content', 'ODQ §763.2 de-list');
   });
 
   it('every routed destination is a member of DOOR_DESTINATIONS', () => {

@@ -8,6 +8,7 @@ import {
   AI_ROUTING_CLASSES, ROUTING_CLASS_MODEL, AI_TASK_CONFIG,
   routingFor, modelForTask, maxTokensFor, sliceBudgetFor, tokenBudgetFor, overTokenBudget,
 } from '../../src/config/aiTaskConfig.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // Mirrors ANTHROPIC_SUPPORTED_MODELS in supabase/functions/ai-analyst/analystCore.ts — a
 // routing model that isn't supported would be rejected by routeWorldDataAdapter at runtime.
@@ -43,10 +44,11 @@ describe('aiTaskConfig — routing classes', () => {
   // map's ONLY `routing: 'fast'` task, so its removal is the one change here that alters
   // what the config can DEMONSTRATE, and saying so is the point of keeping an arm at all.
   it('RETIRED: styleOverhaul is no longer a task, and degrades to the unknown-task default', () => {
-    expect(Object.keys(AI_TASK_CONFIG)).not.toContain('styleOverhaul');
-    // Liveness anchor — the map is still populated, so the absence above is a de-list and
-    // not an emptied config that would satisfy the same assertion.
-    expect(Object.keys(AI_TASK_CONFIG)).toContain('customContent');
+    // Driven through the estate's anchored-negative helper: an emptied config would satisfy
+    // a bare not.toContain just as happily. 'customContent' is a sibling task on the same map.
+    expectAbsentWithAnchor(
+      Object.keys(AI_TASK_CONFIG), 'styleOverhaul', 'customContent', 'ODQ §763.2 de-list',
+    );
     expect(routingFor('styleOverhaul')).toBe('balanced');
   });
 
@@ -56,7 +58,12 @@ describe('aiTaskConfig — routing classes', () => {
     // ROUTING_CLASS_MODEL is the contract a re-homed style capability would route through.
     expect(AI_ROUTING_CLASSES).toContain('fast');
     expect(ROUTING_CLASS_MODEL.fast).toBe('claude-haiku-4-5');
-    expect(Object.values(AI_TASK_CONFIG).map((c) => c.routing)).not.toContain('fast');
+    // ...and no task routes to it. Anchored on 'balanced', which every surviving task uses:
+    // an emptied AI_TASK_CONFIG would satisfy the bare negative and hide a real de-wiring.
+    expectAbsentWithAnchor(
+      Object.values(AI_TASK_CONFIG).map((c) => c.routing), 'fast', 'balanced',
+      'no task routes FAST after ODQ §763.2',
+    );
   });
 });
 

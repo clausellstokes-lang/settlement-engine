@@ -36,6 +36,7 @@ import {
 } from '../../src/domain/content/customContentManifest.js';
 import { buildConstructVocabulary } from '../../src/domain/construct/configVocabulary.js';
 import { buildOpVocabulary } from '../../src/domain/intent/opVocabulary.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { signalRegistryEntries } from '../../src/domain/autonomy/signalRegistry.js';
 import { NUDGE_TYPES } from '../../src/domain/autonomy/accelerationOps.js';
 
@@ -74,10 +75,10 @@ describe('the charter surface roster', () => {
     expect([...CHARTER_SURFACES].sort()).toEqual(
       ['autonomy', 'construct', 'customContent', 'interpret'],
     );
-    // ⚰ 'styleOverhaul' RETIRED (ODQ §763.2, Q-STYLE arm 2). Absence WITH a liveness
-    // anchor, so an emptied roster cannot pass as a de-list.
-    expect(CHARTER_SURFACES).not.toContain('styleOverhaul');
-    expect(CHARTER_SURFACES).toContain('customContent');
+    // ⚰ 'styleOverhaul' RETIRED (ODQ §763.2, Q-STYLE arm 2). Driven through the estate's
+    // anchored-negative helper so an emptied roster reds on the anchor instead of passing
+    // as a de-list. 'customContent' is a sibling charter surface on the same frozen list.
+    expectAbsentWithAnchor(CHARTER_SURFACES, 'styleOverhaul', 'customContent', 'ODQ §763.2');
   });
 
   test('the version is a literal semver-shaped string', () => {
