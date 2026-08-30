@@ -301,3 +301,8 @@ the emergent situation is a derivation, so it can only arise in play.
 
 Car mapping: R1/R4 join car 5 (consumers) + a corruption-adapter slice in car 4; R2 is its own
 half-car beside car 4 (the derived read + mill wiring); R3 rides cars 3/5 (menu + practice kinds).
+
+**Sibling volume:** the operational layer — the unified goal/mission/errand grammar, the mission
+dispatcher, the infiltration ladder (L0–L4, extending ES §3.4b upward), and the envoy task
+catalog — is **docs/DESIGN_W_OPS.md** (ODQ §803). It CONSUMES this substrate (planes, praxis,
+known character, the R4 bond grammar) and lands after cars 1–3 here.
