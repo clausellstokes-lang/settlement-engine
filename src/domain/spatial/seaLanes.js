@@ -63,11 +63,14 @@ import {
   isMaterializedCustomContent,
 } from '../content/customContentSemanticAuthority.js';
 import {
-  LAND_HEIGHT, isCoastalCell, isRiverCell,
+  isCoastalCell, isRiverCell,
   // W-CAP CAP-2 — the navigability law lives in the SAME zero-import leaf as the two
   // geography reads it refines, so there is ONE writer for "what is the water here".
   hasFluxEvidence, riverBandOf, isNavigableBand,
 } from './spatialCost.js';
+// W-CAP CAP-4 / D2 — the ONE water flood-fill home (see the note where the local alias
+// is bound below).
+import { isNavigableWater, navigableWaterComponents } from './waterBodies.js';
 
 // The self-describing slot version. Bumping it is a DISCRETE re-canonize event
 // (§V.1) — an existing frozen digest keeps its own seaLanes forever; only an
@@ -301,45 +304,15 @@ function makeUnionFind() {
   return { find, union };
 }
 
-/**
- * Is a cell NAVIGABLE water — an ocean cell (below land height) OR a river-course
- * cell (land carrying r != 0)? A ship sails both. Pure read of the frozen pack.
- * @param {{ h:number[], r:number[], cellCount:number }} pack @param {number} cell
- */
-function isNavigableWater(pack, cell) {
-  if (cell == null || cell < 0 || cell >= pack.cellCount) return false;
-  const h = Number((pack.h || [])[cell]);
-  if (!(h >= LAND_HEIGHT)) return true; // ocean / below land height
-  const rv = Number((pack.r || [])[cell]);
-  return Number.isFinite(rv) && rv !== 0; // river course on land
-}
-
-/**
- * Label every navigable-water cell with its connected-component id (BFS over pack
- * adjacency); land cells stay -1. Two ports can only share a lane if the water they
- * touch is the SAME component — so no lane crosses land or joins two separate seas.
- * @param {{ h:number[], r:number[], c:number[][], cellCount:number }} pack
- * @returns {Int32Array} per-cell component id (-1 = non-navigable land)
- */
-function waterComponents(pack) {
-  const n = pack.cellCount;
-  const comp = new Int32Array(n).fill(-1);
-  let next = 0;
-  for (let start = 0; start < n; start++) {
-    if (comp[start] !== -1 || !isNavigableWater(pack, start)) continue;
-    const id = next++;
-    comp[start] = id;
-    const stack = [start];
-    while (stack.length) {
-      const u = /** @type {number} */ (stack.pop());
-      for (const v of (pack.c || [])[u] || []) {
-        if (v == null || v < 0 || v >= n || comp[v] !== -1 || !isNavigableWater(pack, v)) continue;
-        comp[v] = id; stack.push(v);
-      }
-    }
-  }
-  return comp;
-}
+// ── W-CAP CAP-4 / D2: THE FLOOD-FILL MOVED OUT, IT WAS NOT COPIED ────────────────────
+// `isNavigableWater` and `waterComponents` used to live here as private helpers. D2 rules
+// ONE water flood-fill home producing BOTH views — the sailing components below and the
+// interior-vs-ocean split the lake typology needs — "never a third ad-hoc BFS". They now
+// live in `./waterBodies.js` and are imported, so the sea lanes and the lakes cannot drift
+// apart by one of them being fixed and the other forgotten. Behaviour is unchanged and
+// that is MEASURED, not asserted: the sea-lane digest bytes do not move.
+// The local name is kept so every call site below reads exactly as it did.
+const waterComponents = navigableWaterComponents;
 
 /** The navigable-water cells a port EMBARKS from: its own cell if it is a river
  *  course, plus every adjacent navigable-water cell (a coastal port boards from the

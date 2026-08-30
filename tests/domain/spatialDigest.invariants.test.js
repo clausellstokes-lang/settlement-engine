@@ -22,6 +22,9 @@ import {
   CLIMATE_BAND_VERSION,
   CLIMATE_BANDS,
   climateBandOf,
+  LAKE_TYPOLOGY_VERSION,
+  LAKE_SUBTYPES,
+  deriveLakes,
   TERRAIN_AGREEMENT_VERDICTS,
   terrainAgreement,
   terrainClassOf,
@@ -37,6 +40,7 @@ import {
   makeDisconnectedWaterPack,
   makeIsthmusPack,
   makePortCoastPack,
+  makeLakePack,
 } from '../fixtures/spatialPackFixtures.js';
 
 const RESERVED = { airField: null, seaLanes: null, seasonalOverlay: null, teleportEdges: null };
@@ -597,6 +601,86 @@ describe('W-CAP CAP-3 — the CLIMATE BAND sub-digest (opt-in; dark ⇒ byte-ide
     // …and with biomes dark, climate still follows `reserved` directly.
     const lean = Object.keys(buildSpatialDigest({ pack, placements, climateTexture: true }));
     expect(lean.slice(-2)).toEqual(['reserved', 'climate']);
+  });
+});
+
+describe('W-CAP CAP-4 — LAKE TYPOLOGY (opt-in; dark ⇒ byte-identical)', () => {
+  it('OMITTED (default) ⇒ NO lakes key ⇒ byte-identical to lakes:false', () => {
+    const pack = makeLakePack({});
+    const placements = placeSettlements(pack, 6);
+    const d = buildSpatialDigest({ pack, placements });
+    expect('lakes' in d).toBe(false);
+    expect(JSON.stringify(d)).toBe(JSON.stringify(buildSpatialDigest({ pack, placements, lakes: false })));
+  });
+
+  it('an INTERIOR body is a lake; a body touching the map frame is OCEAN and never appears', () => {
+    // The whole distinction: both are connected `h < 20` components, and ONLY their
+    // relationship to the map frame separates them. The fixture carries one of each.
+    const pack = makeLakePack({});
+    const lakes = deriveLakes(normalizeSpatialPack(pack));
+    expect(lakes.version).toBe(LAKE_TYPOLOGY_VERSION);
+    expect(lakes.bodies.length, 'exactly the interior blob — the ocean column is excluded').toBe(1);
+    expect(lakes.bodies[0].cells).toBe(9);
+    // …and the standard grid pack's ocean BAY reaches the frame, so it yields NO lakes at
+    // all. Without this arm, "found a lake" could just mean "found water".
+    expect(deriveLakes(normalizeSpatialPack(makeGridPack({ cols: 24, rows: 18 })))).toBeNull();
+  });
+
+  it('the shoreline is the LAND ring, and it is what a site consumer can join on', () => {
+    const pack = makeLakePack({});
+    const n = normalizeSpatialPack(pack);
+    const body = deriveLakes(n).bodies[0];
+    expect(body.shoreline.length).toBeGreaterThan(0);
+    for (const cell of body.shoreline) {
+      expect(n.h[cell], `shoreline cell ${cell} is LAND`).toBeGreaterThanOrEqual(20);
+      // …and every shoreline cell actually touches the lake.
+      expect(n.c[cell].some((v) => n.h[v] < 20)).toBe(true);
+    }
+    // Sorted + unique, so the frozen bytes are stable.
+    expect(body.shoreline).toEqual([...new Set(body.shoreline)].sort((a, b) => a - b));
+  });
+
+  it('the subtype comes from FMG\'s water budget, and every band of the vocabulary is reachable', () => {
+    const subtypeOf = (climate) => deriveLakes(normalizeSpatialPack(makeLakePack({ climate }))).bodies[0];
+    expect(subtypeOf('temperate').subtype).toBe('freshwater');
+    expect(subtypeOf('frozen').subtype).toBe('frozen');   // FMG: lake.temp < -3
+    expect(subtypeOf('arid').subtype).toBe('dry');        // FMG: evaporation > flux * 4
+    // …and the budget readings ride along, so the verdict is auditable rather than stated.
+    const wet = subtypeOf('temperate');
+    expect(typeof wet.temp).toBe('number');
+    expect(typeof wet.flux).toBe('number');
+    expect(typeof wet.evaporation).toBe('number');
+    for (const body of [subtypeOf('temperate'), subtypeOf('frozen'), subtypeOf('arid')]) {
+      expect(LAKE_SUBTYPES).toContain(body.subtype);
+    }
+    // ⛔ `salt` IS REFUSED and must stay refused: it needs FMG's river-DIRECTION topology
+    // (`!outlet`), which the capture cannot carry, and emitting it would be a fabrication.
+    expect(LAKE_SUBTYPES).not.toContain('salt'); // anchored: LAKE_SUBTYPES is asserted non-empty and its four members are each asserted reachable above, so this cannot pass against an empty list
+  });
+
+  it('an UNCAPTURED climate types the lake `unknown` — the A1.2.14 word, not a guess', () => {
+    const bare = makeLakePack({ capture: false });
+    const body = deriveLakes(normalizeSpatialPack(bare)).bodies[0];
+    expect(body).toMatchObject({ subtype: 'unknown', temp: null, flux: null, evaporation: null });
+    // The lake itself is still FOUND — geometry is captured even when climate is not, and
+    // conflating "no climate" with "no lake" would lose real map truth.
+    expect(body.cells).toBe(9);
+    expect(body.shoreline.length).toBeGreaterThan(0);
+  });
+
+  it('the lakes key sits after `climate`, and the digest stays far under the size cap', () => {
+    const pack = makeLakePack({});
+    const placements = placeSettlements(pack, 6);
+    const keys = Object.keys(buildSpatialDigest({
+      pack, placements, biomeTexture: true, climateTexture: true, lakes: true,
+    }));
+    expect(keys.slice(-4)).toEqual(['reserved', 'biomes', 'climate', 'lakes']);
+    // The charter's size ruling: ids + shoreline ids + subtype, never per-cell rosters.
+    // A lake records its cell COUNT, not its cells.
+    const lit = buildSpatialDigest({ pack, placements, lakes: true });
+    expect('cells' in lit.lakes.bodies[0]).toBe(true);
+    expect(typeof lit.lakes.bodies[0].cells).toBe('number');
+    expect(JSON.stringify(lit).length).toBeLessThan(400_000); // the canonize hard cap
   });
 });
 

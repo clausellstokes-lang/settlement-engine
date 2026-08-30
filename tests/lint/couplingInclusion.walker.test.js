@@ -413,6 +413,36 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'infrastructure accessor — the ONE spatialLedgers namespace container, whose sub-ledgers are owned by WAR, INFORMATION, TRADE, POP and every future mover; a port here would make each layer\'s read of its own ledger a cross-layer coupling',
     reads: Object.freeze([]),
   }),
+  // ── 2026-08-29, W-CAP CAP-4 (lane TE-CAP): the water flood-fill, extracted ─────
+  //
+  // The SAME argument spatialLedgerAccess.js carries three lines up, and it arrives the
+  // same way: a leaf lifted VERBATIM out of a bigger module because two consumers needed
+  // it and two copies would drift. `waterComponents` was private inside seaLanes.js — a
+  // TRADE-family module — and design §2 D2 rules ONE water flood-fill home producing both
+  // the sailing view TRADE reads and the interior-vs-ocean split the lake typology reads,
+  // "never a third ad-hoc BFS".
+  //
+  // WHY NOT TRADE, WHICH IS WHERE IT CAME FROM. Because it is not TRADE's subject. What it
+  // owns is "what shape is the water here" — geometry the sea lanes ask of it, the lake
+  // typology asks of it, and any later shoreline or naval reader will ask of it. Filing it
+  // under TRADE would make the lake typology's read of pure map geometry a cross-layer
+  // coupling into the trade port, which is the exact inversion the substrate reading exists
+  // to prevent. The distinction is SUBJECT, not program — the same one that gave
+  // peopleLedger.js WAR and spatialLedgerAccess.js no port at all.
+  //
+  // AND NOT THE BASELINE, for the reason spatialLedgerAccess.js records: that file is for
+  // the volume's §4 PRE-PROGRAM debt, and a module minted this week is not that. A baseline
+  // row would launder a program-era edit into permanent invisibility.
+  //
+  // WHAT IT COSTS, MEASURED: its outbound reach is ONE import, `./spatialCost.js`, which is
+  // itself unlayered (it sits in the frozen baseline), so it is not a layered read and the
+  // declaration below is `[]` — the machine form of "this leaf reaches no port". The day it
+  // reaches one, this reds by name instead of hiding the edge.
+  'src/domain/spatial/waterBodies.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'map-geometry substrate — the ONE water flood-fill home (design §2 D2), producing the sailing components TRADE\'s sea lanes read and the interior-vs-ocean split the lake typology reads; a port here would make a pure geometry read a cross-layer coupling',
+    reads: Object.freeze([]),
+  }),
   // ── 2026-08-10: THREE LEAVES THAT LANDED WITHOUT THEIR CLASSIFICATION ──────────
   //
   // These three are not new arguments. They are the SAME two arguments already on this
@@ -614,8 +644,21 @@ const ARGUED_HOSTS = Object.freeze([
  * their outbound layered reach measures 1 and 0, and the single edge is DECLARED below
  * with its reason. The net effect is one cross-layer read that would otherwise have been
  * dark becoming enumerated. A sixteenth admission is the next deliberate act.
+ *
+ * 20 → 21 on 2026-08-29 (W-CAP CAP-4, lane TE-CAP), and the raise is recorded rather than
+ * merely made. It admits `src/domain/spatial/waterBodies.js` under the SUBSTRATE argument
+ * `spatialLedgerAccess.js` already carries — no new argument, applied to map geometry
+ * instead of a ledger container: design §2 D2 rules ONE water flood-fill home producing the
+ * sailing view TRADE's sea lanes read and the interior-vs-ocean split the lake typology
+ * reads, and filing that under TRADE (where the code came from) would make a pure geometry
+ * read a cross-layer coupling into the trade port. MEASURED AT THE RAISE, because "every
+ * admission deletes that module's edges from the pair scan" is only a real cost for a module
+ * that HAD edges: this leaf's outbound reach is ONE import, `./spatialCost.js`, which is
+ * itself unlayered, so its layered reach measures 0, it is declared `reads: []`, and NO edge
+ * leaves the pair scan. What the raise buys is that the FIRST port this leaf ever reaches
+ * reds by name. A twenty-second admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 20;
+const ARGUED_ROSTER_CEILING = 21;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;

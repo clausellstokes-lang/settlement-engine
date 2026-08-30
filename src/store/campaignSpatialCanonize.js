@@ -117,6 +117,13 @@ export async function runSpatialCanonize({
     // a settlement's destiny). A realm with <2 circle-holders leaves the slot null —
     // dormant, byte-identical. Existing saved canons keep their frozen (null) slot.
     teleport: true,
+    // LAKE TYPOLOGY (W-CAP CAP-4): a NEW canon freezes the interior water bodies — the
+    // non-frame-touching `h < 20` components — with their shorelines and a subtype derived
+    // from FMG's own water budget. Follows the seaLanes/teleport opt-in shape rather than a
+    // virtual flag: it reads only CAPTURED geometry, mints no vocabulary a DM can see, and
+    // its dormancy floor is a real answer (a pack with no interior water leaves the key
+    // absent). Existing saved canons keep their frozen (absent) shape.
+    lakes: true,
     // W-SEAM SEAM-2: what the capture's cell re-resolution noticed, carried into the
     // additive capture receipt. Empty (the fixture path, and every realm whose stored
     // cells already agree with their coordinates) ⇒ no key ⇒ byte-identical.

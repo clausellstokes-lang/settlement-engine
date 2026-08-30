@@ -435,6 +435,71 @@ export function placeTeleportSettlements(pack, { nCircle = 3, nPlain = 4, instit
 }
 
 /**
+ * A LAKE pack (W-CAP CAP-4): an interior water blob that touches NO map edge, beside an
+ * ocean strip that does. The whole point of the fixture is that the two are the SAME kind
+ * of thing — a connected `h < 20` component — and only their relationship to the map frame
+ * separates them, which is exactly the distinction the typology turns on. A pack whose only
+ * water was the ocean could not catch a lake/ocean confusion at all.
+ *
+ * Layout, 12 × 10 at spacing 30 (so the frame tolerance, one mean spacing, is well clear of
+ * the interior blob):
+ *   • column 0            — OCEAN (touches the left frame)
+ *   • cols 4..6 × rows 4..6 — a 3×3 LAKE, interior on every side
+ *   • everything else     — land at height 40
+ * `capture` opts into the CAP-1 surface exactly as makeGridPack does; the climate is set so
+ * the lake's shoreline reads temperate-and-wet ⇒ `freshwater`, and `climate:'frozen'` /
+ * `'arid'` re-band the whole grid so the other subtypes are reachable from one fixture.
+ * @param {{ capture?:boolean, climate?:'temperate'|'frozen'|'arid' }} [opts]
+ */
+export function makeLakePack({ capture = true, climate = 'temperate' } = {}) {
+  const cols = 12;
+  const rows = 10;
+  const spacing = 30;
+  const n = cols * rows;
+  const idx = (col, row) => row * cols + col;
+  const h = new Array(n);
+  const biome = new Array(n).fill(BIOME_GRASSLAND);
+  const r = new Array(n).fill(0);
+  const p = new Array(n);
+  const c = new Array(n);
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const i = idx(col, row);
+      p[i] = [col * spacing, row * spacing];
+      const inLake = col >= 4 && col <= 6 && row >= 4 && row <= 6;
+      h[i] = (col === 0 || inLake) ? 10 : 40;
+    }
+  }
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const i = idx(col, row);
+      const nb = [];
+      if (col > 0) nb.push(idx(col - 1, row));
+      if (col < cols - 1) nb.push(idx(col + 1, row));
+      if (row > 0) nb.push(idx(col, row - 1));
+      if (row < rows - 1) nb.push(idx(col, row + 1));
+      c[i] = nb;
+    }
+  }
+  if (!capture) return { cells: { h, biome, r, p, c }, meta: { cols, rows, spacing } };
+  // A 1:1 pack→grid map here: this fixture's subject is the WATER split, not the `g`
+  // bridge (spatialPackFixtures' makeGridPack owns the coarser mapping that tests that).
+  const g = Array.from({ length: n }, (_, i) => i);
+  const readings = {
+    temperate: { temp: 14, prec: 60 },   // wet + temperate ⇒ freshwater
+    frozen: { temp: -20, prec: 60 },     // below FMG's -3 lake cut ⇒ frozen
+    arid: { temp: 40, prec: 1 },         // hot + almost no inflow ⇒ dry
+  }[climate];
+  const temp = new Array(n).fill(readings.temp);
+  const prec = new Array(n).fill(readings.prec);
+  return {
+    cells: { h, biome, r, p, c, fl: new Array(n).fill(0), g },
+    grid: { temp, prec },
+    meta: { cols, rows, spacing, gridCols: cols, gridCellCount: n, lakeCells: 9 },
+  };
+}
+
+/**
  * A tiny hand-built pack with an EXACT equal-cost tie: a 1-row corridor of
  * uniform-cost cells with a settlement at each end. The exact-middle cell is
  * equidistant from both — the tie-break (equal tentative ⇒ lower predecessor

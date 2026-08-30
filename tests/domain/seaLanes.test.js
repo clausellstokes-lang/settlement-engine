@@ -29,6 +29,10 @@ import {
   hasFluxEvidence,
   riverBandOf,
   isNavigableBand,
+  isNavigableWater,
+  isOpenWater,
+  navigableWaterComponents,
+  frameTouchTest,
 } from '../../src/domain/spatial/index.js';
 import {
   activeSeaLanes, isPort, pathCost, hopWeeks, distanceWeight, candidateRoutes,
@@ -273,6 +277,67 @@ describe('W-CAP CAP-2 — RIVER NAVIGABILITY: a trickle is not a harbour', () =>
       { ...plain.cells, cellCount: plain.cells.h.length }, seeds, { head: DOCK, mouth: DOCK },
     );
     expect(plainRows.every((r) => r.port)).toBe(true);
+  });
+});
+
+describe('W-CAP CAP-4 / D2 — ONE water flood-fill home, two views', () => {
+  // D2 rules a single flood-fill home producing BOTH views, "never a third ad-hoc BFS".
+  // These arms pin that the SAILING view is the one the sea lanes still use, that the two
+  // views genuinely differ, and that the move changed no behaviour.
+  it('the sailing view still labels navigable water — ocean AND river course, one component', () => {
+    const pack = makeGridPack({ cols: 24, rows: 18 });
+    const cells = { ...pack.cells, cellCount: pack.cells.h.length };
+    const comp = navigableWaterComponents(cells);
+    expect(comp.length).toBe(cells.cellCount);
+    // The bay is water; a mid-river land cell is navigable too (that is the sailing view).
+    expect(comp[0]).toBeGreaterThanOrEqual(0);
+    expect(isNavigableWater(cells, 216)).toBe(true);       // on the river course
+    expect(comp[216]).toBeGreaterThanOrEqual(0);
+    // Land off the river belongs to no water component.
+    const dryLand = cells.h.findIndex((h, i) => h >= 20 && Number(cells.r[i]) === 0);
+    expect(comp[dryLand]).toBe(-1);
+  });
+
+  it('the OPEN-WATER view excludes rivers — otherwise a lake\'s outflow would weld it to the sea', () => {
+    // The two views are not interchangeable and this is the reason: a river running out of
+    // an interior lake reads as navigable water, so the sailing view would join lake and
+    // ocean into one component and every lake on a drained continent would read as sea.
+    const pack = makeGridPack({ cols: 24, rows: 18 });
+    const cells = { ...pack.cells, cellCount: pack.cells.h.length };
+    expect(isNavigableWater(cells, 216)).toBe(true);   // a river cell IS sailable…
+    expect(isOpenWater(cells, 216)).toBe(false);       // …and is NOT a body of water
+    // Ocean is both.
+    expect(isNavigableWater(cells, 0)).toBe(true);
+    expect(isOpenWater(cells, 0)).toBe(true);
+  });
+
+  it('the frame test errs toward OCEAN — a body it cannot prove interior is not a lake', () => {
+    const pack = makeGridPack({ cols: 24, rows: 18 });
+    const cells = { ...pack.cells, cellCount: pack.cells.h.length };
+    const touches = frameTouchTest(cells);
+    expect(touches(0), 'the corner cell touches the frame').toBe(true);
+    const mid = Math.floor(cells.cellCount / 2) + 5;
+    expect(touches(mid), 'a mid-map cell does not').toBe(false);
+    // A degenerate pack cannot prove ANYTHING interior, so everything is frame — which is
+    // the silent direction (no fabricated lakes), not the loud one.
+    const degenerate = frameTouchTest({ p: [], cellCount: 0 });
+    expect(degenerate(0)).toBe(true);
+  });
+
+  it('the extraction changed NO sea-lane behaviour — the golden port digest is intact', () => {
+    // The behavioural half of "extract, don't duplicate": seaLanes now imports the shared
+    // labeller, and its output must be what it was. (The byte-level half is the raw-byte
+    // pin block in spatialDigest.invariants.)
+    const { digest } = goldenPortDigest();
+    expect(digest.reserved.seaLanes).toBeTruthy();
+    expect(digest.reserved.seaLanes.ports.length).toBe(5);
+    expect(digest.reserved.seaLanes.edges.length).toBe(4);
+    // …and the reachability constraint the shared labeller enforces still holds: the
+    // disconnected-water pack gets NO lane between its sea and its separate river.
+    const dw = makeDisconnectedWaterPack();
+    const lanes = buildSpatialDigest({ pack: dw.pack, placements: dw.placements, seaLanes: true })
+      .reserved.seaLanes;
+    expect(lanes.ports).toEqual(['coastA', 'coastB']);
   });
 });
 

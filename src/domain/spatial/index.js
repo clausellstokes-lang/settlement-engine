@@ -74,6 +74,17 @@ export {
 } from './seaLanes.js';
 
 export {
+  LAKE_TYPOLOGY_VERSION,
+  LAKE_SUBTYPES,
+  isNavigableWater,
+  isOpenWater,
+  navigableWaterComponents,
+  frameTouchTest,
+  deriveLakes,
+  lakeShoreAt,
+} from './waterBodies.js';
+
+export {
   TELEPORT_EDGE_VERSION,
   TELEPORT_EDGE_COST,
   TELEPORT_EDGE_CAPACITY,

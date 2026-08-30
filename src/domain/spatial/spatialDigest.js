@@ -51,6 +51,7 @@ import {
 } from './spatialCost.js';
 import { buildSeaLanes } from './seaLanes.js';
 import { buildTeleportEdges } from './teleportEdges.js';
+import { deriveLakes } from './waterBodies.js';
 
 // ── Input shapes (the captured pack + placements the builder consumes) ───────
 /**
@@ -562,10 +563,14 @@ function buildTerrainDisagreements(seeds, idOf, placements, pack) {
  * reached through `cells.g`, plus the raw temp/prec the band came from. DARK by default:
  * OMITTED (the default, and every existing golden/canon) ⇒ NO climate key ⇒ BYTE-IDENTICAL.
  * The seasons food year reads it in place of its terrain-word proxy when it is present.
+ * LAKE TYPOLOGY (W-CAP CAP-4): `lakes:true` appends the additive `lakes` key — the interior
+ * (non-frame-touching) open-water bodies, each with its cell count, shoreline land-cell ids,
+ * typed subtype and the water-budget readings behind it. Omitted, or opted-in on a pack with
+ * no interior water (every existing golden/canon) ⇒ NO lakes key ⇒ byte-identical.
  * @param {{ pack: CapturedSpatialPack, placements?: SpatialPlacementRow[] | null,
  *           spatialGeometryVersion?:number, costLawVersion?:number,
  *           overlayVersion?:number, seasonalRoads?:boolean, seaLanes?:boolean, teleport?:boolean,
- *           biomeTexture?:boolean, climateTexture?:boolean,
+ *           biomeTexture?:boolean, climateTexture?:boolean, lakes?:boolean,
  *           cellResolution?:Array<{id:string, from:number|null, to:number|null, reason:string}>|null }} input
  */
 export function buildSpatialDigest(input) {
@@ -842,6 +847,13 @@ export function buildSpatialDigest(input) {
     ? buildClimateTexture(seeds, idOf, pack)
     : null;
 
+  // W-CAP CAP-4 LAKE TYPOLOGY: the additive lake sub-digest, appended after `climate` and
+  // ONLY when opted in. Omitted (the default, and every existing golden/canon) ⇒ NO lakes
+  // key ⇒ byte-identical. Null also when the pack holds no INTERIOR water at all (every
+  // body reaches the map frame), which is the same dormancy floor the seaLanes and
+  // teleport slots use: an empty answer is no key, never an empty container.
+  const lakes = input?.lakes === true ? deriveLakes(pack) : null;
+
   // W-SEAM: the additive CAPTURE RECEIPT, appended LAST and ONLY when the capture had
   // something to report. Nothing to report (every existing golden/canon/fixture, and
   // any realm whose declared terrains match the ground) ⇒ NO key ⇒ the returned shape
@@ -880,6 +892,7 @@ export function buildSpatialDigest(input) {
     reserved: reservedSlots(seasonalOverlay, seaLanes, teleportEdges),
     ...(biomes ? { biomes } : {}),
     ...(climate ? { climate } : {}),
+    ...(lakes ? { lakes } : {}),
     ...(captureReceipt ? { captureReceipt } : {}),
   };
 }

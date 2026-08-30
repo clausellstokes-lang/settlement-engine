@@ -30,6 +30,9 @@ import { describe, expect, it } from 'vitest';
 
 import { createPRNG } from '../../src/kernel/prng.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/spatialDigest.js';
+import { deriveLakes, lakeShoreAt } from '../../src/domain/spatial/waterBodies.js';
+import { normalizeSpatialPack } from '../../src/domain/spatial/spatialDigest.js';
+import { makeLakePack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
 import { buildCostField, TERRAIN_CLASSES } from '../../src/domain/spatial/spatialCost.js';
 import { RESOURCE_DATA } from '../../src/data/resourceData.js';
 import { envelopeBound } from '../helpers/distributionEnvelope.js';
@@ -50,6 +53,7 @@ import {
   deriveSteadingResources,
   landformOfCost,
   landformPlaceName,
+  lakeShoreOf,
   orbitAnnulus,
   seamLandforms,
   siteLegalResources,
@@ -638,5 +642,74 @@ describe('the lane end to end (determinism, conservation, aspatial identity)', (
     const prose = `${beat.headline} ${beat.summary} ${beat.reasons.join(' ')}`;
     expect(/[a-z]+_[a-z]+/.test(prose), `a raw key leaked into prose: ${prose}`).toBe(false);
     expect(record.history[0].includes(place), 'the record chronicle names it too').toBe(true);
+  });
+});
+
+describe('W-CAP CAP-4 — the lake fact reaches a steading site (the first consumer)', () => {
+  // `landformOfCost` inverts a TRAVERSAL cost, and water is simply impassable to it, so a
+  // lakeside seat and a dry inland one read identically without this car. The lake fact is
+  // the only thing that can tell them apart, and it comes off the frozen canon.
+  const lakeDigest = (opts = {}) => {
+    const pack = makeLakePack({});
+    const placements = placeSettlements(pack, 4);
+    return { pack, placements, digest: buildSpatialDigest({ pack, placements, ...opts }) };
+  };
+
+  it('the re-declared reader matches waterBodies.lakeShoreAt EXACTLY (the drift guard)', () => {
+    // steadingTopography may not import waterBodies (its header's first-paint law), so the
+    // eight-line reader is re-declared here. This is the pin that keeps the copy honest —
+    // the same re-declare-and-pin idiom placementRaster.readPackArrays uses.
+    const { pack, digest } = lakeDigest({ lakes: true });
+    const n = normalizeSpatialPack(pack);
+    expect(digest.lakes, 'the fixture canon carries a lake').toBeTruthy();
+    let onShore = 0;
+    for (let cell = 0; cell < n.cellCount; cell += 1) {
+      const mine = lakeShoreOf(digest, cell);
+      const theirs = lakeShoreAt(digest.lakes, cell);
+      expect(mine).toEqual(theirs);
+      if (mine) onShore += 1;
+    }
+    expect(onShore, 'the comparison is non-vacuous — some cells ARE on a shore')
+      .toBeGreaterThan(0);
+    // …and both agree on a nonsense input rather than throwing.
+    expect(lakeShoreOf(null, 3)).toBeNull();
+    expect(lakeShoreOf(digest, -1)).toBeNull();
+    expect(lakeShoreAt(null, 3)).toBeNull();
+  });
+
+  it('a candidate on a lake shore carries the lake; one inland carries NO key at all', () => {
+    const { digest } = lakeDigest({ lakes: true });
+    const parentId = digest.settlementIds[0];
+    const sites = orbitAnnulus(digest, parentId);
+    expect(sites.length, 'the annulus offers candidates').toBeGreaterThan(0);
+    const shoreCells = new Set(digest.lakes.bodies.flatMap((b) => b.shoreline));
+    for (const site of sites) {
+      if (shoreCells.has(site.cell)) {
+        expect(site.lake, `cell ${site.cell} is on a shore`).toBeTruthy();
+        expect(site.lake.subtype).toBe('freshwater');
+      } else {
+        expect('lake' in site, `cell ${site.cell} is inland and must carry no key`).toBe(false);
+      }
+    }
+  });
+
+  it('a pre-CAP-4 canon produces the EXACT pre-CAP-4 rows — no key, no reordering', () => {
+    // The dormancy bar at the consumer: the site row is PERSISTED onto the satellite
+    // record, so a stray key here would be additive bytes on every founding of every
+    // campaign, lit or not.
+    const { pack, placements } = lakeDigest();
+    const dark = buildSpatialDigest({ pack, placements });
+    const lit = buildSpatialDigest({ pack, placements, lakes: true });
+    const parentId = dark.settlementIds[0];
+    const darkSites = orbitAnnulus(dark, parentId);
+    for (const site of darkSites) {
+      expect('lake' in site).toBe(false);
+      expect(Object.keys(site)).toEqual(['cell', 'landform', 'cost', 'source']);
+    }
+    // The candidate SET itself is identical — the lake fact is a stamp, never a filter,
+    // an ordering term or a weight, so it cannot move the seeded pick.
+    const litSites = orbitAnnulus(lit, parentId);
+    expect(litSites.map((s) => s.cell)).toEqual(darkSites.map((s) => s.cell));
+    expect(litSites.map((s) => s.landform)).toEqual(darkSites.map((s) => s.landform));
   });
 });

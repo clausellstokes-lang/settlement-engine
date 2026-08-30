@@ -46,7 +46,7 @@ import {
   registerSpatialCaptureBridge,
   unregisterSpatialCaptureBridge,
 } from '../../src/lib/spatialCaptureRegistry.js';
-import { makeGridPack, placeSettlements, placePortSettlements, placeTeleportSettlements } from '../fixtures/spatialPackFixtures.js';
+import { makeGridPack, placeSettlements, placePortSettlements, placeTeleportSettlements, makeLakePack } from '../fixtures/spatialPackFixtures.js';
 
 function installLocalStorage() {
   const data = new Map();
@@ -106,6 +106,14 @@ function fixtureCapture(count = 6) {
 // + the GRID-indexed climate), which is what a real live capture hands over since CAP-1.
 function climateCapture(count = 6) {
   const pack = makeGridPack({ cols: 18, rows: 14, capture: true });
+  const placements = placeSettlements(pack, count);
+  return async () => ({ pack, placements });
+}
+
+// W-CAP CAP-4: a capture whose map holds an INTERIOR water body (one that touches no map
+// edge) beside a frame-touching ocean strip ⇒ the live canonize freezes a lake.
+function lakeCapture(count = 4) {
+  const pack = makeLakePack({});
   const placements = placeSettlements(pack, count);
   return async () => ({ pack, placements });
 }
@@ -284,6 +292,25 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     for (const row of Object.values(climate.bySettlement)) {
       expect(row).toEqual({ band: 'unknown', temp: null, prec: null });
     }
+  });
+
+  test('LAKE TYPOLOGY (CAP-4): a capture with INTERIOR water freezes the lake sub-digest; frame-touching water does not', async () => {
+    const store = makeStore();
+    seedStore(store);
+    // The ordinary fixture map's only water is an ocean BAY in the corner, which reaches
+    // the map frame — so a real canonize over it freezes NO lakes key at all. That is the
+    // dormancy floor, and it is what makes the positive arm below mean something.
+    await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: fixtureCapture(6) });
+    expect('lakes' in store.getState().campaigns[0].worldState.spatialDigest).toBe(false);
+    // A capture whose map holds an INTERIOR body freezes it, typed from the water budget.
+    const lit = await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: lakeCapture(4) });
+    expect(lit.ok).toBe(true);
+    const lakes = store.getState().campaigns[0].worldState.spatialDigest.lakes;
+    expect(lakes, 'the interior body reaches the canon').toBeTruthy();
+    expect(lakes.version).toBe(1);
+    expect(lakes.bodies.length).toBe(1);
+    expect(lakes.bodies[0].subtype).toBe('freshwater');
+    expect(lakes.bodies[0].shoreline.length).toBeGreaterThan(0);
   });
 
   test('SEA LANES (M8): a port-carrying capture LIGHTS the seaLanes slot (the opt-in)', async () => {

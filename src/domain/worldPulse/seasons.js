@@ -179,15 +179,14 @@ export function seasonalSwingPts(clock, terrain, variance, climateBand) {
   return swing * amplitude;
 }
 
-/**
- * The ONLY shape this module asks a frozen spatial digest for. Written structurally
- * rather than as an `any` — the digest is a large frozen object owned elsewhere, and a
- * hole here would type-erase every read below (and pay the domain any-cast ratchet for
- * the privilege). Everything is optional: a pre-CAP-3 canon carries none of it.
- * @typedef {{ band?: unknown }} ClimateRow
- * @typedef {{ climate?: { bySettlement?: Record<string, ClimateRow|undefined> }|null }
- *   |null|undefined} ClimateBearingDigest
- */
+/** Narrow an unknown to a plain object, or null. The estate's `asObject` shape, declared
+ *  locally rather than imported: the three existing copies live in modules this leaf must
+ *  not pull into its chunk.
+ *  @param {unknown} value @returns {Record<string, unknown>|null} */
+function asObject(value) {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? /** @type {Record<string, unknown>} */ (value) : null;
+}
 
 /**
  * W-CAP CAP-3 — this settlement's frozen climate band, or null.
@@ -199,16 +198,22 @@ export function seasonalSwingPts(clock, terrain, variance, climateBand) {
  * rather than of a second gate that could drift out of step with the first, and it keeps
  * this module free of any import from the frozen-digest reader (importing one symbol from
  * distanceRead.js drags its whole ~53 kB into this chunk).
- * @param {ClimateBearingDigest} digest a frozen spatial digest, or nullish
+ *
+ * ⚠ THE PARAMETER IS `unknown`, NOT A STRUCTURAL TYPEDEF, and that is a correction rather
+ * than a shortcut. The first draft declared `{ climate?: … }` with every field optional —
+ * a WEAK TYPE, which TypeScript then refuses to accept the real `SpatialDigest` for
+ * ("has no properties in common"), because a wholly-optional type is exactly the shape a
+ * typo produces. `unknown` + narrowing states the truth: this module knows nothing about
+ * the digest except the one key it looks for, and it proves that key at runtime.
+ * @param {unknown} digest a frozen spatial digest, or nullish
  * @param {string|number} settlementId
  * @returns {string|null}
  */
 export function climateBandFor(digest, settlementId) {
-  const climate = digest && typeof digest === 'object' ? digest.climate : null;
-  const bySettlement = climate && typeof climate === 'object' ? climate.bySettlement : null;
-  if (!bySettlement || typeof bySettlement !== 'object') return null;
-  const row = bySettlement[String(settlementId)];
-  const band = row && typeof row === 'object' ? row.band : null;
+  const climate = asObject(asObject(digest)?.climate);
+  const bySettlement = asObject(climate?.bySettlement);
+  const row = asObject(bySettlement?.[String(settlementId)]);
+  const band = row?.band;
   return typeof band === 'string' && band !== '' ? band : null;
 }
 
@@ -222,7 +227,7 @@ export function climateBandFor(digest, settlementId) {
  * the terrain-word proxy. Omit it, or pass a canon without the key, and every byte of the
  * result is what it was before.
  * @param {{ rngSeed: string, clock: ReturnType<typeof seasonForTick>, settlement: object|null,
- *   settlementId: string|number, digest?: ClimateBearingDigest }} args
+ *   settlementId: string|number, digest?: unknown }} args
  */
 export function seasonalContextFor({ rngSeed, clock, settlement, settlementId, digest = null }) {
   const variance = seasonalSeverityFor(rngSeed, clock.year, settlementId);

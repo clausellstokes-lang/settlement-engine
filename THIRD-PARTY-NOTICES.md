@@ -103,6 +103,30 @@ stripped the comment, so the provenance is recorded here rather than in the
 shipped bytes. We have adopted none of that code into the application: our own
 generators are written from scratch.
 
+**Code adopted from the fork into the application (W-CAP, 2026-08-29).** The
+sentence above — "we have adopted none of that code" — was true of the Urquhart
+utility and remains true of it, but it is no longer true of the fork as a whole,
+so the exception is recorded here rather than left to contradict the paragraph
+above it. The FMG grant quoted above is MIT and reaches these adoptions; they are
+noted because §1.8 of the integration program requires every substantive copy to
+be named in this file in the same landing act, not because their licence is in
+doubt.
+
+| Adopted into | What was taken | Upstream site (fork) |
+|---|---|---|
+| `src/domain/spatial/spatialCost.js` | the navigable-river flux threshold (100) and the river-width saturation constants (`FLUX_FACTOR` 500, `MAX_FLUX_WIDTH` 1) the great-river shoulder is derived from | the burg-type classifier (`cells.r[i] && cells.fl[i] >= 100`) and the river renderer's `getOffset` |
+| `src/domain/spatial/spatialDigest.js` | the climate band cuts: the glacier temperature (−5 °C), the hot-desert predicate (≥25 °C with moisture <8), the moisture-band-0 edge (5), and the temperate/taiga knee the mild band uses | `Biomes.getId` and its `biomesMatrix` |
+| `src/domain/spatial/waterBodies.js` | the lake water budget **in substance**: the surface-elevation delta (0.1), the shoreline-median temperature rule, the shoreline precipitation sum, the Penman-shaped evaporation line, the frozen cut (−3 °C) and the dry ratio (×4) | `Lakes.getHeight`, `defineClimateData`, and the lake branch of `defineGroups` |
+
+Two clarifications the table cannot carry. First, the evaporation line is the
+only one of these that is a formula rather than a threshold, and it is
+reimplemented rather than pasted — same arithmetic, our own naming, with FMG's
+`heightExponent` DOM input replaced by an explicit parameter. Second, we
+deliberately did **not** adopt FMG's `salt` lake group: its rule tests whether a
+river flows *out* of the lake, and our captured pack cannot distinguish an inlet
+from an outlet, so emitting that verdict would assert something the inputs do not
+support. `waterBodies.js` records that refusal at its head.
+
 ### 1.2 Libraries vendored inside the fork (`public/map/libs/`)
 
 Twenty files plus the TinyMCE subtree. Every one is pinned by name, size and

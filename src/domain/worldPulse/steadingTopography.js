@@ -222,7 +222,8 @@ export function landformOfCost(cost) {
  * field optional so a ragged/legacy digest is total, never a throw).
  * @typedef {{ settlementIds?: string[], costField?: number[], territory?: number[],
  *   routeReceipts?: Record<string, { between?: [string, string],
- *     segments?: Array<{ cellA?: number, cellB?: number, terrainA?: string, terrainB?: string }> }> }} TopoDigest
+ *     segments?: Array<{ cellA?: number, cellB?: number, terrainA?: string, terrainB?: string }> }>,
+ *   lakes?: { bodies?: Array<{ id?: number, shoreline?: number[], subtype?: string }> }|null }} TopoDigest
  */
 
 /**
@@ -232,7 +233,36 @@ export function landformOfCost(cost) {
  * @property {string} landform  a STEADING_LANDFORMS member
  * @property {number} cost      the frozen integer traversal cost at the cell
  * @property {'gate_terrain'|'cost_band'} source  which evidence named the ground
+ * @property {{ id:number, subtype:string }} [lake]  W-CAP CAP-4: present ONLY when the
+ *   frozen canon carries a lake sub-digest AND this cell stands on one of its shores
  */
+
+/**
+ * W-CAP CAP-4 — the lake a candidate cell stands on the shore of, or null.
+ *
+ * ⚠ A DELIBERATE RE-DECLARATION of waterBodies.lakeShoreAt, on this module's OWN
+ * established idiom (see the header's first-paint law and `readPackArrays` in
+ * placementRaster.js): importing waterBodies here would give it a second distinct-chunk
+ * importer and drag spatialCost — the exact leak the header forbids — for eight lines of
+ * array scan over data that is already plain JSON inside the frozen digest. The copy is
+ * CROSS-CHECKED against the real one in the pins, so it cannot silently drift.
+ *
+ * @param {TopoDigest|null|undefined} digest
+ * @param {number} cell
+ * @returns {{ id:number, subtype:string }|null}
+ */
+export function lakeShoreOf(digest, cell) {
+  const lakes = digest && typeof digest === 'object' ? digest.lakes : null;
+  const bodies = lakes && typeof lakes === 'object' && Array.isArray(lakes.bodies)
+    ? lakes.bodies : null;
+  if (!bodies || !Number.isInteger(cell)) return null;
+  for (const body of bodies) {
+    if (Array.isArray(body?.shoreline) && body.shoreline.includes(cell)) {
+      return { id: Number(body.id), subtype: String(body.subtype) };
+    }
+  }
+  return null;
+}
 
 /**
  * THE ORBIT ANNULUS — the bounded, deterministic candidate set inside the
@@ -272,7 +302,17 @@ export function orbitAnnulus(digest, parentId, opts = {}) {
     const cost = Number(costField[cell]);
     if (!landform || !STEADING_LANDFORMS.includes(landform)) return;
     seen.add(cell);
-    out.push({ cell, landform, cost: Number.isFinite(cost) ? cost : 0, source });
+    // W-CAP CAP-4: a lake shore is a fact about this ground the cost field cannot carry —
+    // `landformOfCost` inverts a traversal cost and water is simply IMPASSABLE to it, so a
+    // lakeside seat and a dry one read identically without this. Stamped ADDITIVELY and
+    // ONLY when the frozen canon actually carries a lake sub-digest, so a pre-CAP-4 canon
+    // produces the exact pre-CAP-4 row and the persisted satellite record is unchanged.
+    // It does NOT enter the candidate ORDER, the suitability weighting or the seeded
+    // resource draw: those would move a draw, which this car does not charter.
+    const lake = lakeShoreOf(digest, cell);
+    out.push({
+      cell, landform, cost: Number.isFinite(cost) ? cost : 0, source, ...(lake ? { lake } : {}),
+    });
   };
 
   // ── THE RIM: the parent's gate cells, with the terrain class the digest NAMED.
