@@ -273,6 +273,20 @@ grammar (~14 verbs × three term families, each verb declaring its axes and vari
 the owner-taste registers pack (car 6). New §9 loop: competence-through-practice, bounded by
 saturation, homeward decay, counterparty/context terms, and per-method failure modes.
 
+**R3c — The two-channel composition (ODQ §802.2, owner-refined).** Every executed method teaches
+twice: the **practice mark** (small, method-aligned, outcome-independent — you did the cruel
+thing; R3 stands) and the **outcome lesson** (larger, signed by result: success VALIDATES,
+deepening the aligned axis hard; failure CHASTENS, pulling back toward core on that axis). Under
+success both align ⇒ strong reinforcement; under failure they oppose and chastening dominates ⇒
+net drift away — but a residue remains: a failed atrocity does not leave you clean. **No parallel
+habit ledger:** selection weight reads effective character only — drift IS the habit memory (one
+source per fact); consequence ruled a feature: reinforcement GENERALIZES across same-axis methods
+(success at lying makes manipulation likelier — habits generalize by character, not by verb).
+**Core-strain asymmetry** (emergent, zero new machinery): core-aligned habits are self-sustaining;
+contrary-to-nature habits hold a strained position homeward decay constantly erodes — formidable
+only while fed. **Stability:** failure's chastening is the negative-feedback brake on the §802.1
+competence loop — the system self-regulates around a character-odds equilibrium, never a ratchet.
+
 **R4 — The bond transmutes; the state persists (change of heart while bound).** The corruption
 tie is ONE state with a DERIVED bond kind: vice at the door ⇒ `appetite` (eager compliance); the
 same tie held after the character has crossed home past the threshold ⇒ **`duress`** — blackmail
