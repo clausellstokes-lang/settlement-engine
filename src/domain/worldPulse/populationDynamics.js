@@ -48,11 +48,6 @@ function clamp(value, min, max) {
 }
 
 /**
- * @param {any} pressureIdx
- * @param {any} settlementId
- * @param {any} kind
- */
-/**
  * A DEMOGRAPHIC PRESSURE IN A WORD, lightest first (TE-HERALD-1). ⚠ The cuts are the
  * declared quarter convention (see relationshipState.js's note): this axis carries no
  * engine-named interior landmark, nothing branches on them, and they choose a word rather
@@ -72,6 +67,11 @@ export function pressureWordFor(value) {
   return POPULATION_PRESSURE_WORDS[3];
 }
 
+/**
+ * @param {any} pressureIdx
+ * @param {any} settlementId
+ * @param {any} kind
+ */
 function score(pressureIdx, settlementId, kind) {
   return pressureIdx?.get?.(settlementId, kind)?.score || 0;
 }
