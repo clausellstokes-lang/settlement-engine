@@ -54,7 +54,7 @@ import { deriveWorldPlan } from '../instantWorld/worldPlan.js';
 
 // The realm sheet — a wide landing-hero band inside the town map's 0..1000 x-space (so
 // drawListToSvg's fixed 1000-wide viewBox is reused; the height band is cropped in by a
-// viewBox/background rewrite, the same crop idiom generate-landing-map-plates.mjs uses).
+// viewBox/background rewrite — the cartographer's-crop idiom, which now lives only here).
 const SHEET_W = 1000;
 const SHEET_H = 560;
 // worldPlan scatters sites in a 1000 x 600 map-pixel box; its x shares the 1000 sheet
@@ -357,8 +357,8 @@ export function realmSceneDrawOps(scene, styleArg = DEFAULT_STYLE_ID) {
  * Render one realm PLATE (SVG string) from a seed + basic knobs under a house lens. The
  * single public entry the generator script drives. Same (seed, basicConfig, styleId) ⇒
  * byte-identical SVG. Reuses drawListToSvg then crops its fixed square viewBox down to the
- * wide realm band (the generate-landing-map-plates.mjs crop idiom — a viewBox + background
- * rewrite on our OWN deterministic output, never a second serializer).
+ * wide realm band (the cartographer's-crop idiom — a viewBox + background rewrite on our OWN
+ * deterministic output, never a second serializer).
  * @param {{ seed?: string, basicConfig?: { realmSize?: string, tone?: string, mapKind?: string }, styleId?: string, width?: number, height?: number }} [args]
  * @returns {{ svg: string, plan: ReturnType<typeof deriveWorldPlan>, scene: RealmScene }}
  */

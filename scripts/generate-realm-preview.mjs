@@ -2,9 +2,11 @@
  * scripts/generate-realm-preview.mjs — THE REALM PREVIEW PLATES (W7, the walk order:
  * "the home crossroad image becomes a generated realm map with settlements").
  *
- * Freezes deterministic REALM-scale map plates for the landing hero, the regional twin of
- * the town-map waypoint plates (generate-landing-map-plates.mjs). Where those depict ONE
- * settlement, these depict a whole seeded realm — a coastline, its settlements scaled by
+ * Freezes deterministic REALM-scale map plates for the landing hero. It was once the regional
+ * twin of a settlement-scale plate emitter, retired with the legacy town map under ODQ
+ * §725/§772; this is now the ONLY frozen-plate emitter the landing keeps, and it is a REALM
+ * surface, which is why it stayed. Where the retired one depicted ONE settlement, these depict
+ * a whole seeded realm — a coastline, its settlements scaled by
  * tier, and the road web that ties them together — rendered by the pure, headless
  * src/domain/realmMap/realmPlateRenderer.js (worldPlan → primitive draw ops → drawListToSvg,
  * the SAME vocabulary + serializer the town map uses; never a parallel emitter).
@@ -37,8 +39,8 @@ const OUT_DIR = join(__dirname, '..', 'public', 'landing-maps');
 // a full realm the manager can judge. Add/remove a seed freely — nothing here is canonical.
 const SEEDS = Object.freeze(['fallowmere', 'cindermere', 'holloway']);
 
-// The two house lenses (mirrors generate-landing-map-plates.mjs PLATE_STYLES). The realm
-// renderer reads each resolved style's palette/opacity/stroke exactly like the town draw.
+// The two house lenses — the pair the retired settlement-plate emitter also used. The realm
+// renderer reads each resolved style's palette/opacity/stroke straight off the styles registry.
 const STYLES = Object.freeze(['parchment', 'watercolor']);
 
 function realmFileName(seed, styleId) {

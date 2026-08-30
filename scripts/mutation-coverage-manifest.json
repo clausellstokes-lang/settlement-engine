@@ -17,7 +17,7 @@
   "new invariant with no entry REDS; stale entry REDS; label claims match the",
   "sweep script bidirectionally; uncovered count matches the baseline exactly."
  ],
- "uncoveredBaseline": 195,
+ "uncoveredBaseline": 194,
  "rationales": {
   "test-ratchet-controls-executed-2026-08-07": "Guard-the-guard meta-test for the step-12 per-test suite ratchet (scripts/check-test-ratchet.mjs). Its catching power is EXECUTED IN THE TEST BODY, not claimed: an injected FAKE RUNNER (the TEST_RATCHET_RUN_CMD seam) plus an injected temp census drive every failure path of the enforcer on every ordinary suite run - a runner that writes no report, an unparseable report, a well-formed report of ZERO tests, a report whose suite failed to COLLECT, a failing test absent from the census, a new failure against 40 banked ones, a baselined test turned SKIPPED, a grown skip count, a vanished baselined row, a collapsed total-test count, and an --update asked to bank a regression - each asserted to exit non-zero, each paired with a positive control that must stay green so the guards are not merely always-red. A standing sweep plant would re-execute those same injected-fixture comparisons while transiently mutating the enforcer the sweep itself depends on to read the suite, for no additional catching power.",
   "observed-shape-schema3-controls-2026-08-09": "Schema-3 observed-shape governance is exercised as eight complementary fixture and census contracts on every ordinary run. The corpus graph suite pins typed path segments, explicit array layers, required-key and dynamic-value facets, observation volume, and fail-closed depth/cycle handling. The resolver suite drives a real TypeScript Program/checker through aliases, wrappers, callbacks, recursion, defaults, ordered spreads and Object.assign, local mutations, semantic control ancestry, and bounded recursive-map widening. The sentinel suite rejects missing provenance, traversal loss, cached-corpus evidence, HEAD/content races, artifact tampering, and dormant inventory headroom. The baseline suite rejects hand-labelled schema 3, malformed identities and paths, non-singular counts, inconsistent totals, disabled sentinels, and abbreviated freeze provenance before corpus execution. The migration suite binds the exact predecessor bytes, conserves every predecessor identity and count, requires identical corpus/source/execution inputs, and refuses ambiguous or incomplete review. The governed-I/O suite rejects repository, normalized, symlink and hardlink output aliases and proves exclusive atomic publication. The legacy-detector suite mechanically reconstructs the pinned 6e7acc4d Git blob after removing the sole source-position enrichment. The estate walker supplies the live-source census. These suites directly inject the independent failure shapes they govern; one standing text mutation would cover only a strict subset while transiently rewriting the same shared scanner machinery. No fresh historical-scan receipt is claimed by this rationale.",
@@ -380,9 +380,6 @@
    "kind": "uncovered"
   },
   "tests/data/underwaysInstitutionParity.test.js": {
-   "kind": "uncovered"
-  },
-  "tests/design/atlasSamples.test.js": {
    "kind": "uncovered"
   },
   "tests/design/boundBookSubstrate.test.js": {

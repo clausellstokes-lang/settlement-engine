@@ -26,7 +26,6 @@
     "fix:data": "node scripts/fix-duplicate-keys.js",
     "build:edge-shared": "node scripts/build-edge-shared.mjs",
     "gen:analytics-dictionary": "node scripts/generate-analytics-dictionary.mjs",
-    "gen:atlas-samples": "node scripts/gen-atlas-samples.mjs",
     "gen:glossary": "node scripts/generate-glossary.mjs",
     "gen:compendium-data": "node scripts/generate-compendium-data.mjs",
     "gen:dossier-prose": "node scripts/generate-dossier-state-prose.mjs",

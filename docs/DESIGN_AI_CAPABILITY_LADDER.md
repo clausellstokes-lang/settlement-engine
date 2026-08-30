@@ -116,7 +116,8 @@ zero headroom for the next literal `!` anyone adds. The miss was the known wave-
   comment; the alternative — honoring it as resolution base — stays owner territory since it
   would change what every existing bespoke style resolves to). Reproduce-first: the charter
   exemplar payload reproduced the spurious row before the fix, zero violations after
-  (@enforced-by tests/design/townMapStyleWall.test.js). Traced both sides: `styleRiderTags`
+  (@enforced-by tests/domain/bespokeStyleWallContract.test.js — the suite followed the validator
+  into the domain layer under ODQ §725/§772). Traced both sides: `styleRiderTags`
   was edge-only (radar untouched); the style panel stopped showing a "rejected" badge on
   every well-formed response. TWO pins landed: the literal contract-payload regression + a
   class-level parity pin binding `STYLE_FIELDS` (edge) to `validateBespokeStyle` (client)
