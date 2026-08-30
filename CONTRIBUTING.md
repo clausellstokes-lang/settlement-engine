@@ -41,6 +41,30 @@ All canonical Vitest package scripts hold the machine slot for the whole child
 process through `sh scripts/gate-mutex.sh --run -- ...`. A separate "slot free"
 check followed by Vitest is a time-of-check/time-of-use race and is prohibited.
 
+**The mutex has two tiers, and the default is the one you already know.** An
+undeclared caller is EXCLUSIVE: it takes the lock, waits out legacy runners, and
+runs alone, exactly as before. A *targeted* run may instead declare itself
+shared and proceed concurrently with other shared runs:
+
+```sh
+GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- \
+    npx vitest run --maxWorkers=2 tests/<your files>
+```
+
+The worker cap is mandatory — a shared-tier run without `--maxWorkers=N`, or
+with N above the ceiling, is refused before it registers, because the only
+reason concurrent admission is safe is that a capped run cannot saturate the
+box. This tiers *admission*, never the gate itself: every step of `npm run
+check` still runs, unconditionally, under the exclusive tier. Exporting
+`GATE_MUTEX_LOCK_DIR` without invoking the script takes no lock at all. See
+`docs/LANE_LAW_ADDENDUM_EFF1.md` §2.
+
+**The lighting census tuple lives in `tests/lint/.lighting-census-baseline.json`,
+not in prose and not in the walker.** Read the figures out of that file, and
+change them only by regenerating (`docs/LANE_LAW_ADDENDUM_EFF1.md` §3), which
+refuses a dirty tree, refuses a partial write, and exits non-zero on purpose so
+a re-freeze can never be mistaken for a passing run.
+
 **The chain is `&&`, so a red step blacks out everything behind it.** That is not
 hypothetical: the typecheck step was a boolean gate at zero errors, went red on
 2026-08-02, and took `lint`, `test`, `build` and `verify:dist` dark with it for four
