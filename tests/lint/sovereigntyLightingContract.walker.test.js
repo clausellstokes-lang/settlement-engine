@@ -6939,7 +6939,49 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // tip. The omission is recorded rather than quietly absorbed. The probe was deleted before
     // the tuple was recorded and this file is byte-identical to its landed form apart from this
     // block — the landed row above it is kept VERBATIM.
-    files: 2428, parked: 367, credited: 2061, titles: 20533, suiteTitles: 5668,
+    // ── TE-RESIDUE-1 (the §765.2 launch-tail smalls), 2026-08-30, REBASED onto ecc6def3e ──
+    // 2428/367/2061/20533/5668 → the tuple below. Delta +0/+0/+0/+14/+2. SEVEN cars, and this
+    // lane adds NO TEST FILE AT ALL: every arm it writes is appended to a suite that already
+    // exists, so `files`, `parked` and `credited` MUST NOT MOVE and only the two title layers
+    // can. THAT WAS PUBLISHED AS A FALSIFIABLE PREDICTION BEFORE THE RUN and the instrument
+    // confirmed it: all three file figures assert BEFORE `titles` in the sequence and all three
+    // passed on run 1.
+    // ⛔ THE PRE-REBASE BLOCK WAS DROPPED WHOLE, NOT MERGED — the law this file already
+    // records twice above. This lane first froze 2486/364/2122/20913/5789 against base
+    // 518c40880; SIX waves then landed (NET-1, QSTYLE, the strip-finish train, HERALD and the
+    // rest) and moved the same instrument four more times. Two lanes measuring one instrument
+    // from different trees produce tuples that are each correct and jointly meaningless. So at
+    // conflict resolution HERALD's landed block was kept VERBATIM — the file was left
+    // byte-identical to ecc6def3e, `diff -q` clean — the lane's own car 7 EMPTIED and was
+    // `--skip`ped rather than carried as a no-op, and this block was written afterwards, ONCE,
+    // against measurements taken HERE.
+    // ⭐ MEASURED IN THE SEQUENCED TWO-RUN TECHNIQUE, nothing banked in advance: run 1 red with
+    // "expected 20547 to be 20533", which is the measured actual for `titles` AND the proof
+    // that files/parked/credited are unmoved since all three assert first and passed; `titles`
+    // was set to that actual and run 2 re-measured `suiteTitles` at "expected 5670 to be 5668".
+    //   car 1 (WF-8, the dossier-corpus shrink-back): +0/+0/+0/+0/+0 — doc and generated-leaf
+    //     edits plus one ratchet-floor comment; no title anywhere.
+    //   car 2 (the MF-CH3 + MF-CG2 flips): +0/+0/+0/+0/+0 — docs/implementation only.
+    //   car 3 (HK-4, the razing re-emit latch): +0/+0/+0/+8/+1, all in
+    //     tests/domain/razingExecutionWr8.test.js.
+    //   car 4 (DEITY-LIVE-CHECK): +0/+0/+0/+3/+0, all in
+    //     tests/lint/magicLicenceCensus.walker.test.js (arms A11/A12/A13).
+    //   car 5 (the burial ladder): +0/+0/+0/+0/+0. ⚠ It RE-WORDED three `it` titles in
+    //     tests/lint/facetInferenceHonesty.walker.test.js (933→948 cells, 311→316 rows) and a
+    //     rename is census-NEUTRAL — the same trap the CAP-2 note above records, met a third
+    //     time in this file's history and answered the same way.
+    //   car 6 (§524.5's export pin): +0/+0/+0/+3/+1, all in
+    //     tests/config/entitlementLadder.enforcement.test.js.
+    //   car 8 (the wide run's bill): +0/+0/+0/+0/+0 — derived-artifact re-records and two
+    //     baseline list edits; no title.
+    // ⭐⭐ AND THE DELTA IS INVARIANT UNDER THE REBASE, WHICH IS THE CROSS-CHECK THAT NOTHING
+    // WAS COMPOSED. Measured pre-rebase against base 518c40880 the contribution was
+    // +14 titles / +2 suite titles; measured here against a tip six waves later it is +14 and
+    // +2 again. It also matches the net `it`/`describe` additions counted straight out of
+    // `git diff` (8+3+3 = 14, 1+0+1 = 2). Closing exactly ALSO proves all three touched files
+    // are CREDITED rather than parked — a parked file would have left the total short.
+    // Every added title is a literal string: no template literals, no `test.each`.
+    files: 2428, parked: 367, credited: 2061, titles: 20547, suiteTitles: 5670,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

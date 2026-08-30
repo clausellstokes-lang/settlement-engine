@@ -1,8 +1,8 @@
 {
   "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "2eae465bab2ea8583a2eece8e47f943a646cbef5",
-  "totalTests": 28458,
-  "totalFiles": 2372,
+  "measuredAtSha": "689bf2cc609dcb45384c18c4853e890431611a26",
+  "totalTests": 28565,
+  "totalFiles": 2377,
   "skippedCeiling": 1,
   "uncollectedSuites": {},
   "entries": {
@@ -44,14 +44,6 @@
       "subsystem": "docs / enforcement-claim meta-pin",
       "cause": "A completeness claim in docs/FABLE_VALIDATION_QUEUE.md:179 (the R-BLD-10 chair ruling row) carries no resolvable @enforced-by target, so the meta-pin that refuses unbacked claims reds.",
       "introducedAt": "1caf2fbe3f294e7f7a9cee4266110fea8ef08979",
-      "class": "debt"
-    },
-    "tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)": {
-      "file": "tests/domain/metronomeCooldownLint.test.js",
-      "test": "metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)",
-      "subsystem": "worldPulse / metronome cooldown (E4-2a flood class)",
-      "cause": "src/domain/worldPulse/razingExecution.js stamps a condition/stressor as a metronome-EXEMPT outcome source but names no cooldown/metronome mechanism, so the non-cooldown emitter set grew instead of shrinking.",
-      "introducedAt": "86d83f6ed5cd4384683e12acab4ce3db0eee9b6b",
       "class": "debt"
     },
     "tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01": {
