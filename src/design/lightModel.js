@@ -2,18 +2,18 @@
  * design/lightModel.js — THE ONE FIXED LIGHT of the drawn plane.
  *
  * Every lit surface the product draws reads its light direction from here, so nothing is
- * ever lit from a second side (design §1, "the surveyor's way"): the glyph ink-hatch
- * shadow (design/townGlyphs/glyphCompiler.js), the ground-dress WALL SHADOWS and the
- * landform-flank RELIEF hachures (domain/townMap/groundDress.js), and the building-massing
- * face shading (domain/townMap/massing.js). The arch kernel's per-pixel Lambert model
- * (domain/townMap/arch/rationalTables.js LIGHT_MODEL) is this same direction lifted to
- * three dimensions.
+ * ever lit from a second side (design §1, "the surveyor's way"). Its live readers today are
+ * the building-massing face shading (domain/townMap/massing.js) and, lifted to three
+ * dimensions, the arch kernel's per-pixel Lambert model
+ * (domain/townMap/arch/rationalTables.js LIGHT_MODEL).
  *
- * WHY IT LIVES ALONE (§725/§748): the constant was declared inside the glyph compiler —
- * a member of the legacy settlement-map draw stack that is being stripped — while the
- * RETAINED massing layer reads it. A shared token is not a glyph-compiler concern, so it
- * gets its own leaf in the sanctioned design-token zone and the glyph registry's removal
- * cannot darken the surfaces that stay.
+ * WHY IT LIVES ALONE (§725/§748, and the reason held): the constant was declared inside the
+ * glyph compiler — a member of the legacy settlement-map draw stack — while the RETAINED
+ * massing layer read it. It was given its own leaf in the design-token zone precisely so the
+ * draw stack's removal could not darken the surfaces that stay. ⭐ THAT REMOVAL HAS NOW
+ * HAPPENED (§772): the glyph hatch, the ground-dress wall shadows and the landform relief
+ * hachures all left with it, and this leaf and its two remaining readers are untouched —
+ * which is the pre-sever doing exactly the job it was minted for.
  */
 
 /**

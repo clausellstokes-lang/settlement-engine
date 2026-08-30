@@ -25,9 +25,8 @@ import {
   readSceneOverrides, sceneOverrideFor, withSceneOverride, withoutSceneOverride,
   SCENE_OVERRIDE_SKIN_IDS, SCENE_OVERRIDE_VARIANT_IDS,
 } from '../../src/domain/townMap/mapEdits.js';
-import { addBespokeStyle, removeBespokeStyle, resolveActiveStyle } from '../../src/domain/townMap/bespokeStyles.js';
 import { validateBespokeStyle } from '../../src/domain/townMap/mapEdits.js';
-import { buildTownMapModel } from '../../src/domain/townMap/index.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { PRIVATE_KEY_RE } from '../../src/domain/display/publicSafe.js';
 import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
 import { cloneJson, snapshotSettlement } from '../../src/store/settlementSliceHelpers.js';
@@ -280,6 +279,14 @@ describe('mapEdits — DM annotations (SM-5; cosmetic, denylist-safe, dormancy-l
 });
 
 describe('mapEdits — bespokeStyles (S4-S6; per-settlement, blob-resident, dormancy-lawful)', () => {
+  // ⚰ THE COLLECTION-MUTATION HELPERS LEFT; THE PERSISTED SHAPE DID NOT (ODQ §725/§772).
+  // `addBespokeStyle` / `removeBespokeStyle` / `resolveActiveStyle` lived in a module whose
+  // job was serving the retired editor and the retired renderer, and they were thin pure
+  // spreads over a plain object. What SURVIVES is the thing a saved blob can still carry: the
+  // container, the `__resolved` admission rule, and the lens id that names an entry in it. The
+  // collection is therefore built HERE as the literal object it always was, from the wall's own
+  // validated styles — which is a stricter test than before, because it no longer trusts a
+  // helper to produce the shape the reader must accept.
   const styleA = validateBespokeStyle({ label: 'Ink', background: '#101418' }, { id: 'ink', label: 'Ink' }).style;
   const styleB = validateBespokeStyle({ label: 'Rose', background: '#f0d0d8' }, { id: 'rose', label: 'Rose' }).style;
 
@@ -289,15 +296,12 @@ describe('mapEdits — bespokeStyles (S4-S6; per-settlement, blob-resident, dorm
   });
 
   it('ROUND-TRIP: withBespokeStyles stores the collection; readBespokeStyles reads it back', () => {
-    const coll = addBespokeStyle(addBespokeStyle({}, 'ink', styleA), 'rose', styleB);
-    const e = withBespokeStyles(null, coll);
+    const e = withBespokeStyles(null, { ink: styleA, rose: styleB });
     expect(Object.keys(readBespokeStyles(e)).sort()).toEqual(['ink', 'rose']);
-    // survives a JSON round-trip (the applyMapEdit cloneJson persist) with __resolved intact.
+    // survives a JSON round-trip (the save-blob persist) with __resolved intact.
     const round = JSON.parse(JSON.stringify(e));
     expect(readBespokeStyles(round).ink.__resolved).toBe(true);
-    // resolveActiveStyle picks the saved definition for a bespoke id, base lens otherwise.
-    expect(resolveActiveStyle('ink', readBespokeStyles(round)).background).toBe('#101418');
-    expect(resolveActiveStyle('parchment', readBespokeStyles(round)).__resolved).toBe(true); // base lens still resolves
+    expect(readBespokeStyles(round).ink.background).toBe('#101418');
   });
 
   it('DORMANCY: an empty / all-invalid collection DROPS the key (byte-identical to no-edit)', () => {
@@ -310,14 +314,13 @@ describe('mapEdits — bespokeStyles (S4-S6; per-settlement, blob-resident, dorm
   });
 
   it('DELETED-BESPOKE-NEVER-STRANDS: removing the last style returns the blob byte-identical', () => {
-    const one = withBespokeStyles(null, addBespokeStyle({}, 'ink', styleA));
-    const emptied = withBespokeStyles(one, removeBespokeStyle(readBespokeStyles(one), 'ink'));
-    expect(emptied).toBeNull(); // dormancy: no styles ⇒ no container
+    const one = withBespokeStyles(null, { ink: styleA });
+    expect(withBespokeStyles(one, {})).toBeNull(); // dormancy: no styles ⇒ no container
   });
 
   it('CROSS-EDIT COEXISTENCE: bespokeStyles ride alongside pins/lens without disturbing them', () => {
     const base = withStyleLens(withPinNudge(null, 'cat:tavern', 10, -5), 'vtt');
-    const e = withBespokeStyles(base, addBespokeStyle({}, 'ink', styleA));
+    const e = withBespokeStyles(base, { ink: styleA });
     expect(e.pins).toEqual([{ anchor: 'cat:tavern', dx: 10, dy: -5 }]); // pin survives
     expect(e.styleLens).toBe('vtt');                                    // lens survives
     expect(Object.keys(readBespokeStyles(e))).toEqual(['ink']);        // style stored
@@ -326,6 +329,26 @@ describe('mapEdits — bespokeStyles (S4-S6; per-settlement, blob-resident, dorm
     expect(without.pins).toEqual([{ anchor: 'cat:tavern', dx: 10, dy: -5 }]);
     expect(without.styleLens).toBe('vtt');
     expect(without.bespokeStyles).toBeUndefined();
+  });
+
+  // ⭐ RE-HOMED FROM THE SKIN-REGISTRY SUITE (ODQ §725/§772). That suite pinned three surfaces:
+  // persist a saved skin, WEAR it on the pane art path, and flip back. The wearing half died
+  // with the draw stack and took the suite's subject with it — but its PERSISTENCE half is a
+  // claim about this module, and a saved blob written before the retirement can still make it.
+  // So it moves here rather than dying with its old file. (Its third claim — that a base lens
+  // id can never be shadowed by a saved entry — retired WITH the collection helper that
+  // enforced it; nothing resolves a saved skin any more, so there is nothing left to shadow.)
+  it('SEAM PERSISTENCE: a saved skin id present in the blob is ADMITTED as the active lens', () => {
+    const edits = withStyleLens(withBespokeStyles(null, { ink: styleA }), 'ink');
+    expect(edits.styleLens).toBe('ink');            // persisted, not collapsed to the default
+    expect(readStyleLens(edits)).toBe('ink');       // and read back
+    expect(Object.keys(readBespokeStyles(edits))).toContain('ink');
+  });
+
+  it('SEAM SAFETY: a STALE skin id (its definition absent) self-heals to the default', () => {
+    const edits = { styleLens: 'ink', bespokeStyles: {} };
+    expect(readStyleLens(edits)).toBe('parchment');
+    expect(normalizeMapEdits(edits)).toBeNull();    // no real edit survives ⇒ dormancy
   });
 });
 

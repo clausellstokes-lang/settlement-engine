@@ -18,9 +18,8 @@
 import { describe, expect, it } from 'vitest';
 
 import { toPublicSafe, PUBLIC_TOPLEVEL_KEYS, PRIVATE_KEY_RE } from '../../src/domain/display/publicSafe.js';
-import {
-  buildTownMapModel, readMapEdits, hasDrawableMap, MAP_EDITS_SCHEMA_KEYS,
-} from '../../src/domain/townMap/index.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
+import { readMapEdits, MAP_EDITS_SCHEMA_KEYS } from '../../src/domain/townMap/mapEdits.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
 
 describe('SM-4 gallery opt-in — the fail-closed default is unchanged', () => {
@@ -56,7 +55,10 @@ describe('SM-4 gallery opt-in — publicSafe round-trip (design §7)', () => {
     expect(readMapEdits(projected)).toBe(null);
     // Built exactly as PublicDossierView builds it (readMapEdits(projected) === null).
     const model = buildTownMapModel(projected, readMapEdits(projected));
-    expect(hasDrawableMap(model)).toBe(true);
+    // The drawability predicate lived on the retired draw surface (ODQ §725/§772); its whole
+    // body was "at least one district or building". Asserted here directly on the RETAINED
+    // model, so the security pin no longer borrows a presentation helper to say a model fact.
+    expect(model.districts.length + model.buildings.length).toBeGreaterThan(0);
     expect(model.meta.layoutVariant).toBe(0); // base layout, NOT the owner's variant 4
   });
 

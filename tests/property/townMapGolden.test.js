@@ -16,7 +16,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
-import { buildTownMapModel } from '../../src/domain/townMap/index.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { GOLDEN_CONFIGS } from '../fixtures/townMapFixtures.js';
 
 const MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'town-map-golden.json');

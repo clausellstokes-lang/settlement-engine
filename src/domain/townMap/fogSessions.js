@@ -11,7 +11,8 @@
  * where a session's REVEAL SET is three lists of the model's OWN stable semantic ids:
  *   • districts — district `id` (deriveAllDistricts / synthetic hamlet id)
  *   • buildings — building `anchorKey` (catalogId → localUid → name-slug)
- *   • streets   — a SYNTHESIZED stable street id (fogGeometry.streetId): the model
+ *   • streets   — a SYNTHESIZED stable street id (minted by the reveal-geometry sibling,
+ *     retired under ODQ §725/§772; the ids a saved blob already holds still read): the model
  *     gives streets no id, so we derive one from the districts a street links
  *     (`spoke:<districtId>` / `desire:<a>|<b>`), version-independent + reroll-stable.
  *

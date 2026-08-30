@@ -8,7 +8,7 @@
  * which maps each op to an `Svg` primitive.
  *
  * WHY IT LIVES ALONE (§725/§748): the vocabulary and its serializer were defined inside
- * src/domain/townMap/townMapDraw.js, the legacy settlement-map draw projection. They are
+ * the legacy settlement-map draw projection, retired under ODQ §725/§772. They are
  * not a town-map concern — the RETAINED realm surface (domain/realmMap/realmPlateRenderer.js)
  * emits the same ops and serializes through the same function, so it had to import the
  * doomed town-map module to draw a realm. The vocabulary is now the shared leaf both

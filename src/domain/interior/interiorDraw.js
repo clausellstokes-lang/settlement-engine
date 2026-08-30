@@ -3,7 +3,7 @@
  *
  * `buildInteriorDrawList(model, style)` turns a pure interior render model into an
  * ordered list of PRIMITIVE draw ops (numbers + hex color strings only — no React, no
- * DOM), exactly the townMapDraw.js posture, so the same two adapters consume it: the
+ * DOM), the posture the retired settlement-map projection also took, so the same two adapters consume it: the
  * SVG-string serializer below (for the standalone view + image export) and, later, a
  * react-pdf plate. GEOMETRY IS UNTOUCHED by the lens: every wall, room, and furnishing
  * comes from the model and is identical under every lens — a re-skin is a derived view,

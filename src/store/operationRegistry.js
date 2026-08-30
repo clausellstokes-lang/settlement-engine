@@ -347,8 +347,9 @@ export const OPERATIONS = Object.freeze({
   // PUBLIC_TOPLEVEL_KEYS), so it is tolerantly ignored — the arm that pins that is in
   // tests/store/lifecycleRoundTrip.test.js. A destructive migration would have been the
   // wrong instrument prelaunch: leaving an inert key costs nothing and cannot lose data.
-  // The domain readers (src/domain/townMap/fogSessions.js, fogGeometry.js) are RETAINED —
-  // they are pure derivation the charter's §11.2 substrate boundary keeps.
+  // The domain READER for the persisted container is RETAINED (pure derivation the charter's
+  // §11.2 substrate boundary keeps); its reveal-GEOMETRY sibling went with the draw stack
+  // under ODQ §725/§772, which changes nothing here — this key was already inert.
   retryOutbox: { opType:'retryOutbox', label:"Retry the sync outbox", description:"Retries any campaign changes that failed to sync to the cloud.", klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   loadCampaigns: { opType:'loadCampaigns', label:"Load campaigns", description:"Loads the account's campaigns into the store.", klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   clearCampaigns: { opType:'clearCampaigns', label:"Clear campaigns", description:"Removes all campaigns from the store.", klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'external:loadCampaigns' },

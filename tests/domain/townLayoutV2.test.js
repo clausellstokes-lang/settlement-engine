@@ -11,16 +11,13 @@
  */
 import { describe, expect, it } from 'vitest';
 
-import { buildTownMapModel } from '../../src/domain/townMap/index.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import {
   readLayoutLawVersion, withLayoutLawVersion, withPinNudge, withStyleLens,
   withLegendPref, newSettlementMapEdits, NEW_SETTLEMENT_LAYOUT_LAW_VERSION,
 } from '../../src/domain/townMap/mapEdits.js';
 import { anchorForInstitution } from '../../src/domain/townMap/anchors.js';
 import { HAMLET_CLUSTER_ID } from '../../src/domain/townMap/institutionAssignment.js';
-import {
-  buildTownMapDrawList, buildTownMapSvg, hasDrawableMap,
-} from '../../src/domain/townMap/townMapDraw.js';
 import { TOWN_MAP_STYLE_IDS } from '../../src/design/townMapStyles.js';
 import { makeTownFixture, makeFabricMirror } from '../fixtures/townMapFixtures.js';
 
@@ -190,32 +187,12 @@ describe('v2 engine — URBAN FABRIC consumption, both branches', () => {
   });
 });
 
-describe('v2 engine — lens + export inheritance (the substrate is unchanged)', () => {
-  const s = makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'v2lens-1' });
-  const v2 = buildTownMapModel(s, V2);
-
-  it('a v2 model is drawable and renders under ALL FOUR lenses', () => {
-    expect(hasDrawableMap(v2)).toBe(true);
-    const perLens = {};
-    for (const lens of TOWN_MAP_STYLE_IDS) {
-      const ops = buildTownMapDrawList(v2, lens);
-      expect(ops.length).toBeGreaterThan(0);
-      perLens[lens] = stable(ops);
-    }
-    // the lenses produce DISTINCT bytes (they actually re-skin — geometry identical)
-    expect(perLens.parchment).not.toBe(perLens.vtt);
-    expect(perLens.watercolor).not.toBe(perLens.darkFantasy);
-  });
-
-  it('a v2 model exports through the existing SVG matrix under every lens', () => {
-    for (const lens of TOWN_MAP_STYLE_IDS) {
-      const svg = buildTownMapSvg(v2, { style: lens });
-      expect(svg.startsWith('<svg')).toBe(true);
-      expect(svg.trim().endsWith('</svg>')).toBe(true);
-      expect(svg).not.toContain('href='); // self-contained, taint-free
-    }
-  });
-});
+// ⚰ THE LENS + EXPORT INHERITANCE BLOCK was expressed entirely through the legacy
+// settlement-map draw projection and its SVG matrix, retired under ODQ §725/§772. It said
+// two things: that a v2 model is drawable, and that the lenses re-skin it distinctly.
+// Both were claims about a RENDERER, not about the v2 layout engine this file pins, and
+// the substrate-unchanged claim in its own title is still carried by the invariants block
+// above (total assignment, determinism, no mutation) plus the committed v2 model golden.
 
 describe('v2 engine — the export list is read at its LIVE spelling (TCD-3)', () => {
   /**
@@ -242,7 +219,10 @@ describe('v2 engine — the export list is read at its LIVE spelling (TCD-3)', (
     // Without this, the contrast below could pass against an empty harness: an engine
     // that produced nothing at all would also "differ" from the export-bearing model.
     expect(none.districts.length).toBeGreaterThan(0);
-    expect(hasDrawableMap(none)).toBe(true);
+    // The drawability predicate lived on the retired draw surface (ODQ §725/§772) and its whole
+    // body was "at least one district or building". Kept as a MODEL assertion so this anchored
+    // negative loses nothing: it still refuses to pass against an empty harness.
+    expect(none.districts.length + none.buildings.length).toBeGreaterThan(0);
     // dry plains, no economy to substantiate water ⇒ a bare plain site
     expect(none.meta.siteKind).toBe('plain');
     expect(none.frame.landform ?? null).toBeNull();

@@ -14,7 +14,8 @@
  * Print-tuned to hold on parchment and stay legible in a tiny thumbnail. Category
  * tints mirror the on-screen viewer's DISTRICT_COLOR intent (civic→blue,
  * military→red, criminal→ink, …) with concrete values (no SLATE — AI-reserved).
- * Consumed only by the lazy export surfaces (domain/townMap/townMapDraw.js), so it
+ * Consumed by the styles registry it backs (the settlement-map draw surfaces that once read
+ * it directly were retired under ODQ §725/§772), so it
  * never reaches the first-paint closure.
  */
 

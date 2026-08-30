@@ -11,7 +11,7 @@
  */
 import { describe, expect, it } from 'vitest';
 
-import { buildTownMapModel } from '../../src/domain/townMap/index.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
 
 const V2 = { layoutLawVersion: 2 };

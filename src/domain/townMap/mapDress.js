@@ -2,8 +2,8 @@
  * domain/townMap/mapDress.js — THE SEASON + STATE PORTRAIT RESOLVER (THE ILLUSTRATED TOWN, IT-3).
  *
  * A PURE resolver that turns a settlement's live context (the campaign's worldState + the
- * settlement's own reads) into the bounded `MapDress` the ground-dress layer consumes
- * (groundDress.js). It is the SINGLE place the season/severity/state is derived — NEVER stored
+ * settlement's own reads) into the bounded `MapDress` portrait. It is the SINGLE place the
+ * season/severity/state is derived — NEVER stored
  * on the settlement (design §3: "never stored on the settlement", the RealmStrip read pattern):
  *   • SEASON   — `worldState.calendar.season` (the live in-world clock).
  *   • SEVERITY — re-derived via `seasonalSeverityFor(worldState.rngSeed, year, settlementId)`
@@ -40,6 +40,31 @@ import { fabricScarsOf, fabricRebirthsOf } from './fabricRead.js';
 import { readMapEdits, readSeasonOverride } from './mapEdits.js';
 
 /** The bounded season vocabulary (the 4-4-5 calendar's four quarters). */
+/**
+ * THE SEASON + STATE DRESS CONTEXT (THE ILLUSTRATED TOWN, IT-3). A bounded, display-only
+ * portrait of the town NOW — resolved HERE from the campaign's worldState + the settlement's
+ * own reads, NEVER stored on the settlement.
+ *
+ * ⚠ THE SHAPE MOVED HERE, THE MEANING DID NOT (ODQ §725/§772). It was declared by the
+ * ground-dress renderer that consumed it, which was retired with the legacy settlement-map
+ * draw stack; the RESOLVER outlived the renderer because the retained town-scene living
+ * layer reads it. A type declared by its consumer dies with that consumer — declared by its
+ * PRODUCER it survives every consumer, which is why it is spelled here now.
+ * @typedef {Object} MapDress
+ * @property {'spring'|'summer'|'autumn'|'winter'|null} [season]  the display season
+ * @property {'drought'|'hard_winter'|'bountiful'|null} [severity]  the year's seeded verdict
+ * @property {MapDressState|null} [state]  live state marks (IT3-b)
+ * @property {MapDressFestival|null} [festival]  festival-week marks (Wave C, traditions §10)
+ *
+ * @typedef {Object} MapDressState
+ * @property {boolean} [besieged]  siege works ring (war-state read)
+ * @property {number} [scarLevel]  0..1 max scar severity ⇒ scar grain (0/absent ⇒ none)
+ * @property {string[]} [rebuiltCategories]  district categories under rebirth ⇒ scaffold ticks
+ *
+ * @typedef {Object} MapDressFestival
+ * @property {number} [scale]  the grandest in-window observance's scale band (0..6)
+ */
+
 const SEASONS = Object.freeze(new Set(['spring', 'summer', 'autumn', 'winter']));
 
 /** Normalize a raw calendar season to the bounded vocabulary (lowercased), else null — the
@@ -56,7 +81,7 @@ function normSeason(raw) {
  * ⇒ contributes nothing to the dormancy decision. PURE.
  * @param {{ id?: string|number, urbanFabric?: unknown } | null | undefined} settlement
  * @param {unknown} worldState @param {unknown} regionalGraph
- * @returns {import('./groundDress.js').MapDressState | null}
+ * @returns {MapDressState | null}
  */
 function resolveMapState(settlement, worldState, regionalGraph) {
   // SCAR grain — the worst stressor severity (0 ⇒ none). Whole-fabric, per the read layer:
@@ -93,7 +118,7 @@ function resolveMapState(settlement, worldState, regionalGraph) {
  * worldState.seasonForTick / almanac.clockOfTick by construction. PURE.
  * @param {{ traditions?: unknown } | null | undefined} settlement
  * @param {{ calendar?: { elapsedWeeks?: number, season?: string, year?: number } | null } | null | undefined} worldState
- * @returns {import('./groundDress.js').MapDressFestival | null}
+ * @returns {MapDressFestival | null}
  */
 function resolveFestival(settlement, worldState) {
   const recs = settlement && Array.isArray(settlement.traditions) ? settlement.traditions : null;
@@ -127,7 +152,7 @@ function resolveFestival(settlement, worldState) {
  * @param {{ id?: string|number, urbanFabric?: unknown, mapEdits?: unknown, traditions?: unknown } | null | undefined} settlement
  * @param {{ calendar?: { season?: string, year?: number, elapsedWeeks?: number } | null, rngSeed?: string } | null | undefined} worldState
  * @param {unknown} [regionalGraph]
- * @returns {import('./groundDress.js').MapDress | null}
+ * @returns {MapDress | null}
  */
 export function resolveMapDress(settlement, worldState, regionalGraph = null) {
   const calendar = worldState && typeof worldState === 'object' ? worldState.calendar : null;

@@ -15,7 +15,7 @@ vi.mock('../../src/lib/analytics.js', async () => {
 });
 
 import { mapRenderProps, trackMapRender, trackMapFeature } from '../../src/lib/mapLayerAnalytics.js';
-import { buildTownMapModel } from '../../src/domain/townMap/index.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
 
 beforeEach(() => trackSpy.mockClear());

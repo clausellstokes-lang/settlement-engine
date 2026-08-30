@@ -488,13 +488,17 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/tempoGovernor.property.test.js': 4,
   'tests/domain/tierResourceDynamics.test.js': 8,
   'tests/domain/tonightAtTheTable.test.js': 1,
-  'tests/domain/townLayoutV2.test.js': 2,
-  'tests/domain/townMapFog.test.js': 1,
+  // ⚰ 2 → 1 (ODQ §725/§772): the lens+export inheritance block left with the draw stack it
+  // asserted through, taking one un-anchored negative with it. A WIN BANKED, not a nudge.
+  'tests/domain/townLayoutV2.test.js': 1,
+  // ⚰ townMapFog's row (1) DELETED AT 0 (ODQ §725/§772): the reveal-geometry half of that
+  // suite went with the draw stack; the persisted-shape half it kept carries no un-anchored
+  // negative. Banked at zero rather than left as headroom.
   'tests/domain/townMapIllustratedLens.test.js': 1,
   // townMapSkinRegistry's row (1) DELETED AT 0 by TE-STRIP-2 (§725/§748) — the win is banked,
   // not merely lowered, exactly as this arm's own message prescribes. Its single un-anchored
   // negative lived in the `image export SVG wears the skin` arm, which left with the export lane.
-  'tests/domain/townPanorama.test.js': 2,
+  // ⚰ townPanorama's row (2) DELETED AT 0 (ODQ §725/§772) — the suite went with its subject.
   'tests/domain/townSceneManifest.test.js': 1,
   'tests/domain/tradeCoercion.test.js': 2,
   'tests/domain/tradeSalience.test.js': 1,

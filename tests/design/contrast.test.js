@@ -44,15 +44,8 @@ import { LAMP_ACCENTS } from '../../src/design/organic/lampTones.js';
 // translucent rgba over varying surfaces, so the gold tone is checked against its
 // opaque soft-gold reference (GOLD_SOFT), the worst-case lightest backing.
 import { BAND_COLOR } from '../../src/domain/state/bands.js';
-// THE ILLUSTRATED TOWN (IT-2) — the GROUND DRESS marks (groundDress.js) drawn under the
-// illustrated lens. The marks are non-text GRAPHICS (WCAG 1.4.11 → 3:1) whose legibility
-// is carried by the ink colour at full strength (opacity is a texture-density choice, the
-// engraver's idiom — exactly like the organic hairline / landform stipple). The accessible
-// lens deliberately names NO dress field, so it never renders them — its byte-identity +
-// colourblind-safe contract is untouched. Imported directly (the lazy town-map surface).
 import { resolveTownMapStyle, ILLUSTRATED_STYLE_ID, TOWN_MAP_STYLE_IDS } from '../../src/design/townMapStyles.js';
-import { groundDressOps } from '../../src/domain/townMap/groundDress.js';
-import { buildTownMapModel } from '../../src/domain/townMap/index.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
 import { semantic } from '../../src/design/tokens.js';
 
@@ -415,83 +408,11 @@ describe('Organic instrument fills — legible at every state (WCAG AA / 1.4.11)
 // the ink — never a district or water hue — so colour is NEVER the sole channel (pattern is
 // the discriminator, colourblind-safe by construction). The accessible lens names no dress
 // field, so it renders NONE of this and its palette contract is untouched.
-describe('Illustrated ground-dress legibility (WCAG 1.4.11 — 3:1 graphics on the ground)', () => {
-  const il = resolveTownMapStyle(ILLUSTRATED_STYLE_ID);
-  test('dress ink clears the graphics floor on the illustrated ground (with AA headroom)', () => {
-    expect(ratio(il.palette.ink, il.background)).toBeGreaterThanOrEqual(AA_UI);
-    expect(ratio(il.palette.ink, il.background)).toBeGreaterThanOrEqual(AA_TEXT); // 14.4:1 — ample
-  });
-
-  test('every dress mark carries only the ink — colour is never the sole channel', () => {
-    const model = buildTownMapModel(makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'dress-contrast' }));
-    const ops = groundDressOps(model, ILLUSTRATED_STYLE_ID);
-    expect(ops.length).toBeGreaterThan(0);
-    for (const o of ops) {
-      if (o.stroke != null) expect(o.stroke).toBe(il.palette.ink);
-      if (o.fill != null) expect(o.fill).toBe(il.palette.ink);
-    }
-  });
-
-  test('the accessible lens names NO dress field ⇒ renders zero dress (byte-identical, a11y-safe)', () => {
-    const acc = resolveTownMapStyle('accessible');
-    expect(acc.opacity.dress).toBeUndefined();
-    expect(acc.stroke.dress).toBeUndefined();
-    const model = buildTownMapModel(makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'dress-acc' }));
-    expect(groundDressOps(model, 'accessible')).toEqual([]);
-    // and no re-skin lens names it either (only the illustrated lens dresses the ground)
-    for (const id of TOWN_MAP_STYLE_IDS) expect(resolveTownMapStyle(id).opacity.dress).toBeUndefined();
-  });
-
-  // IT-3 — the SEASON + STATE marks (snow fleck / bare tree / harvest stubble / parched crack /
-  // siege ring / scar grain / rebirth scaffold) are the SAME engraver's register: all-ink, so the
-  // discriminator is PATTERN, never colour (colourblind-safe by construction), and each clears the
-  // 3:1 graphics floor at the ink strength. The accessible lens stays dress-free EVEN WITH a full
-  // season+state context (byte-identical, a11y-safe) — the dormancy law holds at the dress fields.
-  test('every SEASON + STATE mark carries only the ink (pattern, not colour, is the channel)', () => {
-    const model = buildTownMapModel(makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'dress-season' }));
-    const cats = [...new Set((model.districts || []).map((d) => d.category))];
-    const full = { season: 'winter', severity: 'hard_winter', state: { besieged: true, scarLevel: 1, rebuiltCategories: cats } };
-    for (const dress of [{ season: 'winter' }, { season: 'autumn' }, { season: 'summer', severity: 'drought' }, full]) {
-      const ops = groundDressOps(model, ILLUSTRATED_STYLE_ID, dress);
-      expect(ops.length).toBeGreaterThan(0);
-      for (const o of ops) {
-        if (o.stroke != null) expect(o.stroke).toBe(il.palette.ink);
-        if (o.fill != null) expect(o.fill).toBe(il.palette.ink);
-      }
-    }
-  });
-
-  test('the accessible lens renders ZERO dress even WITH a full season+state context', () => {
-    const model = buildTownMapModel(makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'dress-acc2' }));
-    const cats = [...new Set((model.districts || []).map((d) => d.category))];
-    const full = { season: 'winter', severity: 'hard_winter', state: { besieged: true, scarLevel: 1, rebuiltCategories: cats } };
-    expect(groundDressOps(model, 'accessible', full)).toEqual([]);
-  });
-});
-
-// ── THE WAR ARROW, REPAINTED (ribbon V4, owner directive 2026-08-03 night) ────
-//
-// Two grounds, ONE register, and the whole point of this section is that a tone is
-// only ever correct WITH RESPECT TO THE GROUND IT LANDS ON. The ribbon has now moved
-// ground three times, and every move broke foregrounds that had been fine the day
-// before:
-//
-//   V1  a dark ink bar    → pale labels, gold wordmark.
-//   V2  a cream plank     → PARCH_100 and GOLD both collapsed on light wood; the
-//                           labels went ink and the wordmark went GOLD_TXT.
-//   V3  a honey-tan shaft → the barrel is much darker than the cream, and GOLD_TXT
-//                           (5.75 → 3.38), GREEN_DEEP (5.00 → 2.93) and SLATE_DEEP
-//                           (4.28 → 3.53) ALL fell below AA in turn.
-//   V4  a CEDAR war shaft → the ink register itself becomes impossible. INK_DEEP
-//                           measures 1.97:1, BODY 1.36:1, GOLD_TXT 1.06:1 — and the
-//                           feather went dark with the wood, so the vane lost its
-//                           4.46:1 boundary against the barrel as well.
-//
-// Every one of those is pinned below as a NEGATIVE CONTROL, so "just put the old
-// colour back" reds here with the reason attached rather than shipping a header that
-// screenshots fine and is unreadable in the app. That is the only defence against this
-// class: nothing else in the suite notices, because the cells still render, still
-// navigate and still carry aria-current.
+// ⚰ THE ILLUSTRATED GROUND-DRESS legibility block (WCAG 1.4.11, 3:1 for non-text graphics)
+// was retired with the mark layer it measured — the legacy settlement map's ground dress
+// left under ODQ §725/§772. Nothing on a shipped surface draws those marks now, so the
+// contrast law they owed has no subject; the accessible lens's own colour pins, which are
+// about the LENS and not the dress, are unaffected and stay below.
 
 describe('⚠️⚠️ THE MID-RUSSET DEAD BAND — the one law this palette cannot break', () => {
   // THE SINGLE MOST IMPORTANT DON'T IN THE FILE, as arithmetic rather than as advice.

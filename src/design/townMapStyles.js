@@ -4,7 +4,8 @@
  * A town-map STYLE is a BOUNDED, DATA-ONLY definition: every visual decision the
  * renderer makes (palette, line weights, fill opacities, decorative furniture,
  * marker glyphs, functional grid/scale) is read from one of these objects. The
- * deterministic draw projection (domain/townMap/townMapDraw.js) resolves a style
+ * deterministic draw projection (retired under ODQ §725/§772; the interior and realm
+ * renderers are the live consumers now) resolves a style
  * and emits the SAME primitive op vocabulary (poly / line / circle / rect / path)
  * for every lens; only the visual attributes differ. Geometry — every position,
  * polygon, and element SIZE — comes from the pure render model and is NEVER touched
@@ -20,9 +21,10 @@
  * WHY src/design: these are literal color/measurement DEFINITION tokens — homed in
  * the design-token layer (the sanctioned raw-color zone, exempt from the raw-color
  * occurrence budget) exactly like townMapExportPalette.js, never inline in a domain
- * or component file. Consumed ONLY by the lazy town-map surfaces (the draw
- * projection, the viewer, the thumbnail, the PDF plate), so it never reaches the
- * first-paint static closure (tests/build/townMapLazy.test.js).
+ * or component file. ⚠ Its consumer set CHANGED under ODQ §725/§772: the settlement-map
+ * draw, viewer, thumbnail and PDF-plate surfaces it was written for are all retired, and
+ * the live readers are now the INTERIOR renderer, the REALM plate renderer, the persisted
+ * map-edits container and the compendium generator. It stays lazy-side either way.
  *
  * EXTENSIBILITY: a style is DATA. Bespoke AI-authored styles (a LATER wave) land as
  * additional definitions of this exact shape, validated against THE WALL — no code
@@ -118,7 +120,7 @@ export const TOWN_MAP_LENS_IDS = Object.freeze([...TOWN_MAP_STYLE_IDS, ILLUSTRAT
  * PARCHMENT — the default lens. Its palette is the fixed EXPORT_PALETTE and its
  * weights/opacities reproduce the pre-style-layer draw output EXACTLY, so the
  * default derived view is byte-identical to the legacy plate/thumbnail (proven by
- * tests/domain/townMapDraw.test.js `parchment === legacy bytes`). The craft-pass
+ * the retired draw suite's `parchment === legacy bytes` pin). The craft-pass
  * furniture (a later, owner-vetoable commit) is the ONLY thing that shifts it.
  */
 const PARCHMENT = {
@@ -170,7 +172,7 @@ const PARCHMENT = {
 /**
  * WATERCOLOR — soft, luminous washes on warm paper. Higher fill opacity, gentler
  * strokes, desaturated tints. (Flat translucent overlays only — inline SVG
- * gradients are barred by the self-contained-SVG contract, see townMapDraw.js.)
+ * gradients are barred by the self-contained-SVG contract the retained serializer keeps.)
  */
 const WATERCOLOR = {
   id: 'watercolor',
@@ -332,7 +334,7 @@ const ACCESSIBLE = {
  * .roofFill` the faint roof tint wash; a finer building stroke suits the glyph linework.
  * `opacity.dress` / `stroke.dress` (IT-2) set the GROUND DRESS density + ink weight — the
  * farm furrows / woods stipple / water ripples / meadow / hedges / wall shadows that fill
- * the parchment (groundDress.js). BOTH the shadow-bearing dress marks and the glyph hatch
+ * the parchment (the retired ground-dress layer). BOTH the shadow-bearing dress marks and the glyph hatch
  * are lit from the ONE fixed NW light. The five re-skin lenses (AND the accessible lens)
  * never name `glyphSet` or `dress`, so their output is byte-identical (their building
  * branch stays the legacy rect and they emit ZERO dress — the parchment===legacy pin holds).

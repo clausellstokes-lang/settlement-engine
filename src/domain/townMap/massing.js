@@ -10,11 +10,11 @@
  * market is a row of open stalls. The generic commons (houses / fill mass) get a single simple
  * gable volume. Each component is a footprint extruded to a height class capped by a roof FORM
  * (spire / gable / hip / wheelhouse / flat), its wall face shaded by orientation under the ONE
- * fixed NW light (SHADOW_DIR, shared with groundDress so the whole plane is lit from one side), a
+ * fixed NW light (SHADOW_DIR, the one shared light of the drawn plane), a
  * cast ground shadow to the SE, and painter-ordered draw ops in the SAME primitive vocabulary as
- * townMapDraw.js. The projection is INJECTED (a trig-free cavalier / axonometric built from
+ * the retained draw-op serializer. The projection is INJECTED (a trig-free cavalier / axonometric built from
  * rational factors), so one model casts as the oblique panorama, a near-top-down planner sketch,
- * or a future bird's-eye without the substrate changing (the townPanorama law, one model to many
+ * or a future bird's-eye without the substrate changing (one model to many
  * projections). Massing REPLACES the glyph facade in a dimensional view; glyphs remain the flat
  * iconography.
  *
@@ -41,7 +41,10 @@
 
 import { SHADOW_DIR } from '../../design/lightModel.js';
 
-/** @typedef {import('./townMapDraw.js').DrawOp} DrawOp */
+// The draw-op vocabulary's retained home. The town-map draw surface that once declared these
+// shapes was retired with the legacy settlement map (ODQ §725/§772); the vocabulary itself is
+// shared with the realm plate renderer and lives with the serializer that consumes it.
+/** @typedef {import('../drawOpsSvg.js').DrawOp} DrawOp */
 
 const R = Math.round;
 /** Round to 2 decimals for clean, cross-machine-stable opacity/weight bytes. @param {number} v */
@@ -220,7 +223,7 @@ export function silhouetteForKind(kind) {
 }
 
 // ── THE CAVALIER PROJECTION (trig-free, rational factors — the panorama idiom) ────────
-/** The oblique panorama projection (matches townPanorama.js: x preserved, north-south
+/** The oblique panorama projection (x preserved, north-south
  *  foreshortened, elevation raises up-screen). */
 export const OBLIQUE_PROJ = Object.freeze({ depth: 0.6, groundTop: 150, elevScale: 1 });
 /** A near-top-down planner projection: the north-south axis reads almost 1:1 (a plan) with a
@@ -392,7 +395,7 @@ export function buildingMassingOps({ x, y, footprint, height, roofKind, color, s
   /** @type {(px:number, py:number, e:number) => [number,number]} */
   const P = (px, py, e) => { const q = proj(px, py, e); return [q.x, q.y]; };
 
-  // (1) CAST GROUND SHADOW — the footprint offset SE (the groundDress wall-shadow idiom), length
+  // (1) CAST GROUND SHADOW — the footprint offset SE (the wall-shadow idiom), length
   //     scaling with the tallest part so a tall keep/spire throws a longer shadow. On the ground.
   let maxHMul = 0;
   for (const p of spec.parts) maxHMul = Math.max(maxHMul, p.hMul);

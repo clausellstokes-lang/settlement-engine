@@ -2,36 +2,31 @@
  * tests/domain/townMapMassing.test.js — THE PROCEDURAL MASSING SUBSTRATE (Tranche M, M-0).
  *
  * Behavioural pins for the massing substrate (src/domain/townMap/massing.js): determinism
- * (same inputs ⇒ byte-equal ops), the SEAM dormancy (no shipped lens carries `massingSet`, so
- * the panorama is byte-identical everywhere it ships — the temp-worktree byte diff proves the
- * base-vs-branch half of this at the gate), the op-count budget (a generous per-building ceiling
- * catches a construction blow-up), and the recognition-shape sanity for the signature
- * institutions. The SILHOUETTE TOTALITY (every live glyph kind maps to a composite spec, every
- * component roof is a real form, footprints are inscribed) lives in the enumerated walker
- * tests/lint/townMapMassingSilhouette.walker.test.js.
+ * (same inputs ⇒ byte-equal ops), the SEAM dormancy (no shipped lens carries `massingSet`), the
+ * op-count budget (a generous per-building ceiling catches a construction blow-up), and the
+ * recognition-shape sanity for the signature institutions. The SILHOUETTE TOTALITY (every live
+ * glyph kind maps to a composite spec, every component roof is a real form, footprints are
+ * inscribed) lives in the enumerated walker tests/lint/townMapMassingSilhouette.walker.test.js.
+ *
+ * ⚰ TWO PINS WERE EXPRESSED THROUGH A CONSUMER THAT NO LONGER EXISTS (ODQ §725/§772). The
+ * panorama draw surface was the only caller of this substrate, and it was retired with the
+ * legacy settlement map; the "panorama scene is deterministic ×2" and "the seam only fires
+ * when massingSet is present" tests went with it. NEITHER GUARANTEE WAS LOST, and it is worth
+ * saying which is which: determinism is pinned DIRECTLY on `buildingMassingOps` by the first
+ * test below, over every silhouette kind, which is the stronger statement — it was always the
+ * substrate that had to be deterministic, and the panorama only carried the claim. The seam's
+ * "it actually fires" half is retired rather than re-pinned, because the seam has no consumer
+ * to fire INTO: what remains true, and is still asserted, is that no shipped lens names the
+ * capability field. The substrate stays live for the town-scene building profiles.
  */
 import { describe, expect, test } from 'vitest';
 import {
-  buildingMassingOps, buildTownMapPanoramaDrawList, makeCavalierProject, OBLIQUE_PROJ,
-  SILHOUETTE_BY_KIND, silhouetteForKind, resolveTownMapStyle, TOWN_MAP_LENS_IDS,
-} from '../../src/domain/townMap/index.js';
+  buildingMassingOps, makeCavalierProject, OBLIQUE_PROJ, SILHOUETTE_BY_KIND, silhouetteForKind,
+} from '../../src/domain/townMap/massing.js';
+import { resolveTownMapStyle, TOWN_MAP_LENS_IDS } from '../../src/design/townMapStyles.js';
 
 const STYLE = resolveTownMapStyle('parchment');
 const PROJECT = makeCavalierProject(OBLIQUE_PROJ);
-/** A resolved style carrying the massing capability field (the seam trigger). */
-const MASSING_STYLE = Object.freeze({ ...STYLE, massingSet: 'medieval', __resolved: true });
-
-/** A minimal hand-built render model exercising the seam (a religious quarter + a mill). */
-const MODEL = Object.freeze({
-  meta: { tier: 'town' },
-  frame: { water: null, roads: [] },
-  districts: [{ id: 'd1', category: 'religious', polygon: [[400, 400], [600, 400], [600, 600], [400, 600]], centroid: { x: 500, y: 500 } }],
-  buildings: [
-    { anchorKey: 'b1', name: 'Cathedral', kind: 'landmark', districtId: 'd1', position: { x: 500, y: 470 } },
-    { anchorKey: 'b2', name: 'Watermill', kind: 'landmark', districtId: 'd1', position: { x: 520, y: 530 } },
-  ],
-});
-
 /** A generous per-building op ceiling — a keep (5 parts) or cathedral (3 parts + cross) sits
  *  well under this; a construction blow-up (runaway parts / features) trips it. */
 const MASSING_OP_CEILING = 48;
@@ -49,12 +44,6 @@ describe('massing substrate — determinism', () => {
     }
   });
 
-  test('the panorama massing scene is deterministic ×2', () => {
-    const a = buildTownMapPanoramaDrawList(MODEL, MASSING_STYLE);
-    const b = buildTownMapPanoramaDrawList(MODEL, MASSING_STYLE);
-    expect(JSON.stringify(a)).toBe(JSON.stringify(b));
-    expect(a.length).toBeGreaterThan(0);
-  });
 });
 
 describe('massing substrate — SEAM dormancy', () => {
@@ -62,12 +51,6 @@ describe('massing substrate — SEAM dormancy', () => {
     for (const id of TOWN_MAP_LENS_IDS) {
       expect(resolveTownMapStyle(id).massingSet, `${id} must not name massingSet`).toBeUndefined();
     }
-  });
-
-  test('the seam only fires when massingSet is present (plain lens ≠ massing lens)', () => {
-    const plain = buildTownMapPanoramaDrawList(MODEL, STYLE);
-    const massed = buildTownMapPanoramaDrawList(MODEL, MASSING_STYLE);
-    expect(JSON.stringify(plain)).not.toBe(JSON.stringify(massed));
   });
 });
 

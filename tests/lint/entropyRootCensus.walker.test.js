@@ -771,18 +771,20 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     expect({ lines, files: hits.length }).toEqual({ lines: 72, files: 30 });
   });
 
-  test('`createPRNG(` sites: 36 in src/domain, 46 whole-src; `generateSeed()` 9 hits / 6 call sites', () => {
+  test('`createPRNG(` sites: 35 in src/domain, 45 whole-src; `generateSeed()` 9 hits / 6 call sites', () => {
     const count = (pred, re) => ALL_FILES.filter(pred)
       .reduce((n, f) => n + read(f).split('\n').filter((l) => re.test(l)).length, 0);
-    // ── RE-RECORDED 2026-08-30 BY TE-STRIP-4 (ODQ §725/§772): a SHRINK on both halves.
-    // src/domain 38 → 36 and whole-src 48 → 46, each READ OUT OF ITS OWN RED RUN in sequence
-    // (the assert-first-fails-first idiom): run 1 red "expected 36 to be 38" fixed the domain
-    // figure, run 2 then red on the whole-src figure, which also PROVES the domain arm green
-    // since it asserts first. The −2 is the two orphaned fabric leaves this lane's first car
-    // deleted that seeded their own streams; nothing surviving changed shape, and the whole-src
-    // delta equals the domain delta because both leaves live under src/domain.
-    expect(count((f) => f.startsWith('src/domain/'), /createPRNG\(/)).toBe(36);
-    expect(count(() => true, /createPRNG\(/)).toBe(46);
+    // ── RE-RECORDED 2026-08-30 BY TE-STRIP-4 (ODQ §725/§772): a SHRINK on both halves, TWICE,
+    // and the second time is the instructive one. Car 1 read 38 → 36 / 48 → 46 out of two
+    // sequenced red runs (the assert-first-fails-first idiom: run 1 reds on the domain figure,
+    // run 2 then reds on whole-src, which also PROVES the domain arm green since it asserts
+    // first) — the −2 being two orphaned fabric leaves that seeded their own streams.
+    // ⚠ THE PRESENTATION CAR THEN MOVED IT AGAIN, and a lane that had "already re-recorded this
+    // counter" is exactly the one that would have shipped a stale figure: the 27-file draw-stack
+    // delete took ONE more seeded stream with it, 36 → 35 / 46 → 45. Re-read from its own red
+    // run, never carried forward from the car-1 note above.
+    expect(count((f) => f.startsWith('src/domain/'), /createPRNG\(/)).toBe(35);
+    expect(count(() => true, /createPRNG\(/)).toBe(45);
     // ⚠ THE INSTRUCTIVE ONE: a bare hit count over a symbol that also appears in prose and in
     // its own definition over-reports by 60%. HITS and CALL SITES are recorded separately.
     const hits = ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => l.includes('generateSeed()')).length, 0);

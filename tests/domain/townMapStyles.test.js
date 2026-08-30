@@ -19,8 +19,7 @@
  */
 import { describe, expect, it } from 'vitest';
 
-import { buildTownMapModel } from '../../src/domain/townMap/index.js';
-import { buildTownMapDrawList, buildTownMapSvg } from '../../src/domain/townMap/townMapDraw.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { withPinNudge } from '../../src/domain/townMap/mapEdits.js';
 import {
   TOWN_MAP_STYLE_IDS, DEFAULT_STYLE_ID, FURNITURE_KINDS, HAZARD_GLYPHS, ANCHOR_GLYPHS,
@@ -48,11 +47,6 @@ const geomSigList = (ops) => ops.map(geomSig).join('|');
 
 const richModel = () => buildTownMapModel(GOLDEN_CONFIGS[10].settlement); // city / coastal / walls / water
 
-/** A resolved lens with its decorative furniture stripped — the bare MAP geometry
- *  under that lens's skin. Lets the geometry-untouched invariant compare the pure
- *  map across lenses that carry DIFFERENT furniture (fantasy ornament vs VTT grid). */
-const bareStyle = (id) => ({ ...resolveTownMapStyle(id), furniture: [] });
-const bareSig = (model, id) => geomSigList(buildTownMapDrawList(model, bareStyle(id)));
 
 describe('map styles — registry + resolver', () => {
   it('exposes exactly the five named base lenses (parchment…vtt + the SM-5 accessible lens)', () => {
@@ -120,90 +114,21 @@ describe('map styles — THE WALL (select from fixed capabilities, never arbitra
     }
   });
 
-  it('the emitted draw list only ever uses the five primitive op types (no escape hatch)', () => {
-    const KNOWN = new Set(['poly', 'line', 'circle', 'rect', 'path']);
-    const model = richModel();
-    for (const id of TOWN_MAP_STYLE_IDS) {
-      for (const op of buildTownMapDrawList(model, id)) expect(KNOWN.has(op.t)).toBe(true);
-    }
-  });
+  // ⚰ THE OP-KIND ESCAPE-HATCH pin measured the RENDERER, not the style data, and the renderer
+  // was retired under ODQ §725/§772. The wall's own claims — that a style carries only hex,
+  // numbers and vocabulary members — are asserted above from the style definitions themselves,
+  // which is where they always belonged.
 });
 
-describe('map styles — geometry untouched (a re-skin never moves a shape)', () => {
-  it('all four lenses share ONE identical map geometry (furniture stripped)', () => {
-    const model = richModel();
-    const ref = bareSig(model, 'parchment');
-    for (const id of TOWN_MAP_STYLE_IDS) {
-      expect(bareSig(model, id), `${id} moved the map geometry`).toBe(ref);
-    }
-  });
-
-  it('furniture is purely ADDITIVE — each lens is its bare map plus its own ornament', () => {
-    const model = richModel();
-    for (const id of TOWN_MAP_STYLE_IDS) {
-      const withFur = buildTownMapDrawList(model, id);
-      const bare = buildTownMapDrawList(model, bareStyle(id));
-      const declared = resolveTownMapStyle(id).furniture;
-      if (declared.length === 0) expect(withFur.length).toBe(bare.length);
-      else expect(withFur.length).toBeGreaterThan(bare.length); // ornament added, geometry kept
-    }
-  });
-});
-
-describe('map styles — determinism re-minted (seed, style) → identical bytes', () => {
-  it('each lens is byte-deterministic (same model+style → identical ops AND SVG)', () => {
-    const model = richModel();
-    for (const id of TOWN_MAP_STYLE_IDS) {
-      expect(stable(buildTownMapDrawList(model, id))).toBe(stable(buildTownMapDrawList(model, id)));
-      expect(buildTownMapSvg(model, { style: id })).toBe(buildTownMapSvg(model, { style: id }));
-    }
-  });
-
-  it('the five lenses are mutually DISTINCT (a lens actually changes the render)', () => {
-    const model = richModel();
-    const svgs = TOWN_MAP_STYLE_IDS.map((id) => buildTownMapSvg(model, { style: id }));
-    expect(new Set(svgs).size).toBe(5);
-  });
-
-  it('the DEFAULT (no style arg) is byte-identical to explicit parchment', () => {
-    const model = richModel();
-    expect(stable(buildTownMapDrawList(model))).toBe(stable(buildTownMapDrawList(model, 'parchment')));
-    expect(stable(buildTownMapDrawList(model))).toBe(stable(buildTownMapDrawList(model, DEFAULT_STYLE_ID)));
-    expect(buildTownMapSvg(model)).toBe(buildTownMapSvg(model, { style: 'parchment' }));
-  });
-});
-
-describe('map styles — the CROSS-LENS EDIT pin (a semantic edit renders under every lens)', () => {
-  it('a pin nudge shifts the SAME building geometry under every lens', () => {
-    const s = makeTownFixture({ tier: 'city', terrain: 'plains', walls: true, water: false, seed: 'xlens-edit' });
-    const base = buildTownMapModel(s, null);
-    // Nudge a real building by its anchorKey (a semantic mapEdit).
-    const anchor = base.buildings.find((b) => b.kind === 'landmark').anchorKey;
-    const edited = buildTownMapModel(s, withPinNudge(null, anchor, 37, -21));
-
-    // 1) The edit actually changed the map geometry (base ≠ edited, same lens).
-    expect(bareSig(edited, 'parchment')).not.toBe(bareSig(base, 'parchment'));
-    // 2) Every lens renders the edited map geometry IDENTICALLY (skin-independent).
-    const ref = bareSig(edited, 'parchment');
-    for (const id of TOWN_MAP_STYLE_IDS) {
-      expect(bareSig(edited, id), `${id} rendered the edit differently`).toBe(ref);
-    }
-  });
-});
-
-describe('map styles — self-contained SVG per lens (canvas-taint-free)', () => {
-  it('no lens emits an external reference, and every viewBox is fixed', () => {
-    const model = richModel();
-    for (const id of TOWN_MAP_STYLE_IDS) {
-      const svg = buildTownMapSvg(model, { style: id });
-      expect(svg.startsWith('<svg')).toBe(true);
-      expect(svg).toContain('viewBox="0 0 1000 1000"');
-      expect(/<image\b/i.test(svg)).toBe(false);
-      expect(/href\s*=/i.test(svg)).toBe(false);
-      expect(/url\(/i.test(svg)).toBe(false);
-    }
-  });
-});
+// ⚰ FOUR RENDERER-EXPRESSED BLOCKS LEFT WITH THE RENDERER (ODQ §725/§772): geometry-untouched,
+// determinism-re-minted, the cross-lens edit pin and the self-contained-SVG pin. Every one of
+// them was a claim of the form "the DRAW of a model under lens X has property P" — and there is
+// no draw. ⚠ Naming what actually went, because a re-skin family losing its geometry-identity
+// proof is worth a reader's attention rather than a silent deletion: the surviving guarantee is
+// that the five lenses remain bounded DATA of one shape (asserted above), and that a settlement's
+// MODEL is byte-stable (the committed model goldens, which this wave re-proved unmoved). The
+// geometry-identity property is not re-provable without a renderer, and inventing one to test
+// with would be a test proving a thing this product no longer does.
 
 describe('map styles — the ACCESSIBILITY LENS (SM-5, deliverable 6)', () => {
   it('is a colorblind-safe lens: every district category carries a DISTINCT tint', () => {
@@ -222,13 +147,6 @@ describe('map styles — the ACCESSIBILITY LENS (SM-5, deliverable 6)', () => {
     expect(s.opacity.wallStroke).toBeGreaterThanOrEqual(0.9);
   });
 
-  it('honors THE WALL (data-only) and stays geometry-identical to the base map', () => {
-    const model = richModel();
-    // no new op types, and the bare geometry matches parchment (a re-skin, never a re-shape)
-    const KNOWN = new Set(['poly', 'line', 'circle', 'rect', 'path']);
-    for (const op of buildTownMapDrawList(model, 'accessible')) expect(KNOWN.has(op.t)).toBe(true);
-    expect(bareSig(model, 'accessible')).toBe(bareSig(model, 'parchment'));
-  });
 });
 
 describe('map styles — accessors', () => {

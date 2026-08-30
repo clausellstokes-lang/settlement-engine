@@ -11,7 +11,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 
-import { buildTownMapModel } from '../../src/domain/townMap/index.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { anchorForInstitution } from '../../src/domain/townMap/anchors.js';
 import { HAMLET_CLUSTER_ID } from '../../src/domain/townMap/institutionAssignment.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';

@@ -11,14 +11,13 @@
  */
 import { describe, expect, it } from 'vitest';
 
-import { buildTownMapModel } from '../../src/domain/townMap/index.js';
-import { buildTownMapDrawList, buildTownMapSvg } from '../../src/domain/townMap/townMapDraw.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import {
   TOWN_MAP_STYLE_IDS, TOWN_MAP_LENS_IDS, ILLUSTRATED_STYLE_ID, DEFAULT_STYLE_ID,
   resolveTownMapStyle, coerceStyleId,
 } from '../../src/design/townMapStyles.js';
 import { readStyleLens, withStyleLens } from '../../src/domain/townMap/mapEdits.js';
-import { GLYPH_SET_IDS } from '../../src/design/townGlyphs/index.js';
+import { GLYPH_SET_IDS } from '../../src/design/townMapStyles.js';
 import { GOLDEN_CONFIGS } from '../fixtures/townMapFixtures.js';
 
 const HEX = /^#[0-9a-fA-F]{3,8}$/;
@@ -64,48 +63,10 @@ describe('illustrated lens — is wall-safe + self-contained + deterministic', (
     expect(GLYPH_SET_IDS).toContain(s.glyphSet);
   });
 
-  it('emits only the five primitive op kinds and is byte-deterministic', () => {
-    const model = richModel();
-    for (const op of buildTownMapDrawList(model, 'illustrated')) expect(KNOWN_OPS.has(op.t)).toBe(true);
-    expect(stable(buildTownMapDrawList(model, 'illustrated'))).toBe(stable(buildTownMapDrawList(model, 'illustrated')));
-    expect(buildTownMapSvg(model, { style: 'illustrated' })).toBe(buildTownMapSvg(model, { style: 'illustrated' }));
-  });
-
-  it('the illustrated SVG carries no external reference (canvas-taint-free)', () => {
-    const svg = buildTownMapSvg(richModel(), { style: 'illustrated' });
-    expect(svg).toContain('viewBox="0 0 1000 1000"');
-    expect(/<image\b/i.test(svg)).toBe(false);
-    expect(/href\s*=/i.test(svg)).toBe(false);
-    expect(/url\(/i.test(svg)).toBe(false);
-  });
-});
-
-describe('illustrated lens — glyphs replace rects, five re-skins byte-identical', () => {
-  it('the building z-slot becomes glyphs: NO 8px landmark rect, real glyph strokes present', () => {
-    const model = richModel();
-    const parch = buildTownMapDrawList(model, 'parchment');
-    const illus = buildTownMapDrawList(model, 'illustrated');
-    // parchment draws 16×16 (w=16,h=16) landmark rects; the illustrated list has none.
-    const rect16 = (ops) => ops.filter((o) => o.t === 'rect' && o.w === 16 && o.h === 16 && o.rx === 3).length;
-    expect(rect16(parch)).toBeGreaterThan(0);
-    expect(rect16(illus)).toBe(0);
-    // and it is materially different + richer (glyph strokes) than parchment
-    expect(stable(illus)).not.toBe(stable(parch));
-    expect(illus.length).toBeGreaterThan(parch.length);
-  });
-
-  it('every re-skin lens (TOWN_MAP_STYLE_IDS) still emits the legacy landmark rects', () => {
-    const model = richModel();
-    const landmarks = model.buildings.filter((b) => b.kind === 'landmark').length;
-    expect(landmarks).toBeGreaterThan(0);
-    for (const id of TOWN_MAP_STYLE_IDS) {
-      const rects16 = buildTownMapDrawList(model, id).filter((o) => o.t === 'rect' && o.w === 16 && o.h === 16).length;
-      expect(rects16, `${id} lost its legacy building rects`).toBe(landmarks);
-    }
-  });
-
-  it('the default (no-arg) lens is unaffected by the illustrated registration', () => {
-    const model = richModel();
-    expect(stable(buildTownMapDrawList(model))).toBe(stable(buildTownMapDrawList(model, DEFAULT_STYLE_ID)));
-  });
+  // ⚰ THE OP-KIND, DETERMINISM AND CANVAS-TAINT pins for this lens were assertions about the
+  // legacy settlement-map draw projection and its SVG serializer, retired under ODQ §725/§772.
+  // They said the RENDERER stayed inside the primitive vocabulary and emitted no external
+  // reference; with the renderer gone the claims have no subject. What remains here is the part
+  // that was always about the LENS itself — that it is a bounded, wall-safe data definition in
+  // the retained styles registry — and that is asserted above and below.
 });

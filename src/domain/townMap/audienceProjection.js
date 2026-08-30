@@ -118,9 +118,9 @@ export function projectTownMapModelForAudience(model, audience = 'dm') {
  * Scars, rebuilding provenance, siege sources, and festival records require
  * their own audience projection before they may be shown.
  *
- * @param {import('./groundDress.js').MapDress|null|undefined} dress
+ * @param {import('./mapDress.js').MapDress|null|undefined} dress
  * @param {TownMapAudience} audience
- * @returns {import('./groundDress.js').MapDress|null}
+ * @returns {import('./mapDress.js').MapDress|null}
  */
 export function projectTownMapDressForAudience(dress, audience = 'dm') {
   if (!dress) return null;

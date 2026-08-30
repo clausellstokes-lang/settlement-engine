@@ -332,7 +332,7 @@ export function readAnnotations(edits) {
 /**
  * The saved bespoke-style collection ({ [id]: TownMapStyle }) — per-settlement, blob-resident.
  * PURE — never writes. Absent / non-object ⇒ {}. Only entries that are wall-validated
- * (`__resolved:true`, the readBespokeStyle contract in bespokeStyles.js) survive, so a stray
+ * (`__resolved:true`, minted only by `validateBespokeStyle` at the foot of this module) survive, so a stray
  * value never resolves as a style and the dormancy collapse (below) can tell empty from present.
  * @param {MapEdits | null | undefined} edits
  * @returns {Record<string, unknown>}
@@ -592,8 +592,9 @@ export function withLayoutLawVersion(edits, version) {
  * every OTHER edit (pins, lens, legend, annotations) — or `null` when the whole container is
  * now empty. An empty / all-invalid collection DROPS the `bespokeStyles` key, so deleting the
  * last saved style returns the blob byte-identical to no-edit (the flip-back / dormancy law).
- * The collection is expected to be built with domain/townMap/bespokeStyles.js's addBespokeStyle
- * (each entry wall-validated, __resolved); normalize re-checks and drops any that are not. Pure.
+ * Entries are expected to be wall-validated (`__resolved`, from `validateBespokeStyle` below);
+ * normalize re-checks and drops any that are not — which is what makes a blob written by a
+ * retired producer safe to read. Pure.
  * @param {MapEdits | null | undefined} edits
  * @param {Record<string, unknown> | null | undefined} collection
  * @returns {MapEdits | null} */

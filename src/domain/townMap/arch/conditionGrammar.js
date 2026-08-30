@@ -82,7 +82,7 @@ export const PROSPERITY_CUTS = Object.freeze([0.30, 0.50, 0.75]);
  * PARITY: warStatus.warExhaustionBand bands war-exhaustion at 0.20 / 0.60 (warStatus.js:350, EXPORTED
  * function; the 0.20 floor is warDeployment.EXHAUSTION_CONDITION_FLOOR, unexported). Pinned to match
  * those anchors with a mid split at 0.45. The 2D scar-grain also densifies at scarLevel >= 0.66
- * (groundDress.js:448, inline). A war-scarred town reads scarred in BOTH projections at the same band.
+ * (the retired ground-dress layer, inline). A war-scarred town reads scarred at the same band.
  * @type {ReadonlyArray<number>}
  */
 export const WAR_SCAR_CUTS = Object.freeze([0.20, 0.45, 0.60]);

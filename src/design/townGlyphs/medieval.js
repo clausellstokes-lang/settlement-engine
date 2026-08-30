@@ -3,29 +3,41 @@
  *
  * The first ship of the glyph-set registry: a bird's-flight vocabulary of buildings
  * drawn as small OBLIQUE ELEVATIONS. Each glyph is a named list of primitive strokes in
- * a LOCAL 0..1 × 0..1 box (x right, y DOWN, ground line at y=1); the glyphCompiler places,
- * scales, and mirrors it and emits primitive draw ops. A church gets its spire, a mill its
- * wheel, a smithy its chimney — "actual detail", never a plain block (the owner's spine).
+ * a LOCAL 0..1 × 0..1 box (x right, y DOWN, ground line at y=1). A church gets its spire,
+ * a mill its wheel, a smithy its chimney — "actual detail", never a plain block (the
+ * owner's spine).
  *
- * Stroke roles (the compiler paints each): `face` = a building wall (buildingFill + the
- * district-category tint outline — the "what kind of place" colour signal preserved from
- * the legacy rect), `roof` = a roof (a faint tint wash + ink line), `ink` = an ink detail
- * (door / window / cross / crenellation; `c:true` closes it), `line` = a single ink line,
- * `circle` = an ink circle (the mill wheel, a clock).
+ * Stroke roles: `face` = a building wall, `roof` = a roof, `ink` = an ink detail (door /
+ * window / cross / crenellation; `c:true` closes it), `line` = a single ink line, `circle`
+ * = an ink circle (the mill wheel, a clock).
+ *
+ * ⚠⚠ WHAT THIS FILE IS NOW, AND IT IS NOT WHAT IT WAS (ODQ §725/§772). The compiler that
+ * turned these strokes into draw ops, and the registry that handed the library to it, were
+ * retired with the legacy settlement-map draw surfaces. NOTHING RENDERS THESE STROKES TODAY.
+ * The library survives because it is THE LIVE GLYPH-KIND VOCABULARY: the retained scene
+ * substrate is pinned against its key set from two directions — the institution→kind
+ * waterfall must resolve only to kinds that exist here, and every kind here must carry an
+ * explicit massing silhouette. Delete this and both guards go vacuous rather than red.
+ * So: the KEYS are load-bearing and the STROKE GEOMETRY is dormant reference data. A future
+ * renderer may read the strokes again; until then, treat a stroke edit as a taste change
+ * with no output, and a KEY change as a change to a pinned vocabulary.
  *
  * TASTE NOTE (JUDGMENT — vetoable): the mark vocabulary and per-building silhouettes are a
- * cartographer's-eye choice, kept compact (≤ ~8 strokes each) for legibility and the op
- * budget. A genre pack (sci-fi / desert / gothic) is a NEW data module of this exact shape
- * plus a palette — zero engine change (design §5.3).
+ * cartographer's-eye choice, kept compact (≤ ~8 strokes each) for legibility. A genre pack
+ * is a NEW data module of this exact shape plus a palette.
  */
 
-/** @typedef {import('./glyphCompiler.js').Glyph} Glyph */
+// The stroke/glyph shapes, re-homed here when the compiler that declared them was retired
+// (ODQ §725/§772). They describe THIS file's own data, which is why they belong to it.
+/** @typedef {{ r: 'face'|'roof'|'ink'|'line', p: Array<[number, number]>, c?: boolean }
+ *   | { r: 'circle', c: [number, number], rad: number }} GlyphStroke */
+/** @typedef {{ hr?: number, strokes: GlyphStroke[] }} Glyph */
 
 /** A base oblique cottage: front face + receding right side + gable roof + a door.
  *  @param {{ hr?: number, apexX?: number, apexY?: number, eave?: number, door?: boolean, window?: boolean }} [o]
  *  @returns {Glyph} */
 function cottage({ hr = 1, apexX = 0.39, apexY = 0.24, eave = 0.46, door = true, window: win = false } = {}) {
-  /** @type {import('./glyphCompiler.js').GlyphStroke[]} */
+  /** @type {GlyphStroke[]} */
   const s = [
     { r: 'face', p: [[0.14, eave], [0.64, eave], [0.64, 0.98], [0.14, 0.98]] },
     { r: 'face', p: [[0.64, eave], [0.84, eave - 0.1], [0.84, 0.88], [0.64, 0.98]] },
