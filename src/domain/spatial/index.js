@@ -71,6 +71,9 @@ export {
   derivePortEligibility,
   buildSeaLaneSet,
   buildSeaLanes,
+  PORT_ADVISORY_KINDS,
+  PORT_ADVISORY_PHRASE,
+  portPartnerAdvisory,
 } from './seaLanes.js';
 
 export {

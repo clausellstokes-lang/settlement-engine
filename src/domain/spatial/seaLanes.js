@@ -523,6 +523,96 @@ export function buildSeaLaneSet(pack, eligibility, landCost) {
   };
 }
 
+// ── WEAVE ST-4 · THE TWO-ENDPOINT ADVISORY (the volume's §3 W-STEALS row, D2) ──
+//
+// The steal from upstream was "a route needs two endpoints". OURS ALREADY DOES, and
+// structurally: `addEdge` above takes a pair, the edge record IS a pair, and there is
+// no shape in this estate that can express a lane going nowhere. So the steal reduces,
+// as D2 says, to an ADVISORY — the interesting consequence of the invariant rather
+// than the invariant itself. A harbour whose two-endpoint requirement cannot be met
+// gets no lane at all, and nothing anywhere says so.
+//
+// ⛔⛔ AND THE FROZEN DIGEST CANNOT ANSWER THE QUESTION. MEASURED, not assumed:
+// `buildSeaLaneSet` ends with
+//     const connected = [...new Set(edges.flatMap((e) => e.between))].sort();
+// and returns THAT as `ports`, under a comment that says a lone unconnected port is
+// not a functional hub. An eligible harbour with no counterpart is therefore ERASED
+// from the canon — it is absent from `ports`, `isPort` answers false for it, and no
+// reader downstream can distinguish it from a landlocked village. The evidence exists
+// for exactly the length of this function, between the eligibility derivation and the
+// edge set, which is why the advisory lives HERE and takes both as arguments rather
+// than living beside `isPort` in the digest reader where it would have nothing to read.
+//
+// ⚠ ONE CAUSE IS DELIBERATELY NOT SPLIT, and the boundary is stated rather than
+// silently drawn. An unpartnered harbour got no lane for one of two reasons: its water
+// body holds no other port at all, or it had candidates and the LAND ROAD BEAT EVERY
+// ONE of them (the domination prune above). Separating those would take a second walk
+// of the water, and D2 rules that there is ONE water flood-fill home in this estate and
+// no third ad-hoc BFS. A later car that wants the split should widen `buildSeaLaneSet`
+// to record which harbours had candidates, not re-derive the water.
+
+/**
+ * @typedef {Object} PortAdvisory
+ * @property {string} id
+ * @property {string} kind    a closed vocabulary — see PORT_ADVISORY_KINDS
+ * @property {string} phrase  world words, for a DM-facing surface
+ */
+
+/** The closed advisory vocabulary. One kind today; a typed roster, not a free string. */
+export const PORT_ADVISORY_KINDS = Object.freeze(['unpartnered_harbour']);
+
+/**
+ * The phrase each kind reads as. World words, no numbers, no engine vocabulary —
+ * the §754.3 register: a DM should be able to act on the sentence without knowing
+ * what a sea lane is.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const PORT_ADVISORY_PHRASE = Object.freeze({
+  unpartnered_harbour: 'a harbour with no counterpart across the water',
+});
+
+/**
+ * THE ADVISORY: which eligible harbours the sea graph left without a partner.
+ *
+ * Pure over the two artifacts the builder already holds, so it re-derives nothing and
+ * cannot drift from what was actually built. Codepoint-ordered throughout.
+ *
+ * `harbours` is every seat the eligibility pass called a port — geography ∧ institution
+ * ∧ navigability. `partnered` is the subset the lane set connects, which is exactly what
+ * the canon will keep. `unpartnered` is the difference, and it is the whole point: those
+ * are the harbours the frozen digest is about to forget.
+ *
+ * A null/dormant lane set is NOT an error and not an empty answer: it means no water
+ * lane beat land anywhere, so EVERY eligible harbour is unpartnered, and saying so is
+ * more useful than saying nothing.
+ *
+ * @param {ReadonlyArray<{ id: string, port?: boolean }>|null|undefined} eligibility
+ * @param {{ ports?: ReadonlyArray<string> }|null|undefined} seaLanes  the built lane set
+ * @returns {{ harbours: string[], partnered: string[], unpartnered: string[], rows: PortAdvisory[] }}
+ */
+export function portPartnerAdvisory(eligibility, seaLanes) {
+  const harbours = [...new Set(
+    (Array.isArray(eligibility) ? eligibility : [])
+      .filter(row => row && row.port === true && row.id != null)
+      .map(row => String(row.id)),
+  )].sort();
+  const connected = new Set(
+    (seaLanes && Array.isArray(seaLanes.ports) ? seaLanes.ports : []).map(String),
+  );
+  const partnered = harbours.filter(id => connected.has(id));
+  const unpartnered = harbours.filter(id => !connected.has(id));
+  return {
+    harbours,
+    partnered,
+    unpartnered,
+    rows: unpartnered.map(id => ({
+      id,
+      kind: 'unpartnered_harbour',
+      phrase: PORT_ADVISORY_PHRASE.unpartnered_harbour,
+    })),
+  };
+}
+
 /**
  * The ONE builder entry point spatialDigest calls when `seaLanes:true` is opted in.
  * Derives port eligibility (geography ∧ institution) then builds the water edge set,

@@ -15,6 +15,9 @@ import { describe, expect, it } from 'vitest';
 import {
   buildSpatialDigest,
   derivePortEligibility,
+  portPartnerAdvisory,
+  PORT_ADVISORY_KINDS,
+  PORT_ADVISORY_PHRASE,
   hasWaterAccessInstitution,
   waterAccessInstitutionNames,
   isCoastalCell,
@@ -616,5 +619,93 @@ describe('M8 — the seaLanes SLOT mints no battle (W-NAVY fleet combat lives el
     const cells = { ...pack.cells, cellCount: pack.cells.h.length };
     expect(buildSeaLanes(cells, [{ id: 'a', cellId: 6 }], { a: DOCK })).toBeNull();
     expect(buildSeaLanes(cells, [], {})).toBeNull();
+  });
+});
+
+// ── WEAVE ST-4 · the two-endpoint advisory ──────────────────────────────────
+describe('ST-4 — the harbours the sea graph leaves without a partner', () => {
+  it('⛔ the FROZEN CANON cannot answer this question, which is why the advisory is not a digest read', () => {
+    // THE FINDING THIS CAR EXISTS ON. `buildSeaLaneSet` closes with
+    //   const connected = [...new Set(edges.flatMap((e) => e.between))].sort();
+    // and returns THAT as `ports`. An eligible harbour with no counterpart is
+    // therefore erased from the canon: absent from `ports`, false to `isPort`,
+    // indistinguishable downstream from a landlocked village. This is that erasure,
+    // executed, on a realm built to contain one.
+    //
+    // The DISCONNECTED-WATER realm holds exactly the case: two dock settlements on the
+    // ocean strip, and a third on a river that never reaches it. All three are eligible
+    // harbours; only the two that share a water body can ever be given a partner.
+    const { pack, placements } = makeDisconnectedWaterPack();
+    const cells = { ...pack.cells, cellCount: pack.cells.h.length };
+    const roster = Object.fromEntries(placements.map(pl => [pl.id, pl.institutions]));
+    const eligibility = derivePortEligibility(cells, placements, roster);
+    const lanes = buildSeaLanes(cells, placements, roster, () => Infinity);
+    const advisory = portPartnerAdvisory(eligibility, lanes);
+
+    // The fixture really does hold the case — anti-vacuity before the claim.
+    expect(advisory.harbours).toEqual(['coastA', 'coastB', 'river']);
+    expect(advisory.unpartnered).toEqual(['river']);
+    // …and the erasure: the stranded harbour is eligible in the derivation and ABSENT
+    // from the lane set's port roster, which is the ONLY place the canon looks.
+    const canonPorts = new Set((lanes?.ports || []).map(String));
+    for (const id of advisory.unpartnered) {
+      expect(eligibility.find(row => row.id === id)?.port).toBe(true);
+      expect(canonPorts.has(id)).toBe(false);
+    }
+    // The whole point, said as the canon says it: a digest built from this realm calls
+    // the river seat NOT A PORT, which is indistinguishable from a landlocked village.
+    expect(canonPorts).toEqual(new Set(['coastA', 'coastB']));
+    // The two halves partition the harbours exactly — no seat is counted twice and
+    // none is dropped, which is what makes the advisory a totality rather than a list.
+    expect([...advisory.partnered, ...advisory.unpartnered].sort()).toEqual(advisory.harbours);
+  });
+
+  it('speaks in world words from a closed vocabulary, and says nothing where there is nothing to say', () => {
+    const { pack, placements } = goldenPortDigest();
+    const roster = Object.fromEntries(placements.map(p => [p.id, p.institutions || []]));
+    const cells = { ...pack.cells, cellCount: pack.cells.h.length };
+    const eligibility = derivePortEligibility(cells, placements, roster);
+    const lanes = buildSeaLanes(cells, placements, roster, () => Infinity);
+    const advisory = portPartnerAdvisory(eligibility, lanes);
+
+    for (const row of advisory.rows) {
+      expect(PORT_ADVISORY_KINDS).toContain(row.kind);
+      expect(row.phrase).toBe(PORT_ADVISORY_PHRASE[row.kind]);
+      // §754.3: world words. A DM reads a sentence, not an engine reading.
+      // anchored: the exact-phrase toBe two lines up pins the whole string, so this cannot pass by the phrase having gone missing or empty
+      expect(row.phrase).not.toMatch(/[0-9]/);
+      expect(advisory.unpartnered).toContain(row.id);
+    }
+    expect(advisory.rows).toHaveLength(advisory.unpartnered.length);
+  });
+
+  it('a DORMANT lane set makes EVERY harbour unpartnered, which is the useful answer', () => {
+    // No water lane beat land anywhere ⇒ `buildSeaLaneSet` returns null and the canon
+    // records no ports at all. That is not "no harbours"; it is "no harbour got a
+    // partner", and the advisory says the second because the second is true.
+    const { pack, placements } = goldenPortDigest();
+    const roster = Object.fromEntries(placements.map(p => [p.id, p.institutions || []]));
+    const cells = { ...pack.cells, cellCount: pack.cells.h.length };
+    const eligibility = derivePortEligibility(cells, placements, roster);
+    const eligible = eligibility.filter(row => row.port).map(row => row.id).sort();
+    expect(eligible.length).toBeGreaterThan(0);
+
+    // Land is free everywhere ⇒ every candidate lane is dominated and pruned.
+    const dormant = portPartnerAdvisory(eligibility, buildSeaLanes(cells, placements, roster, () => 0));
+    expect(dormant.harbours).toEqual(eligible);
+    expect(dormant.partnered).toEqual([]);
+    expect(dormant.unpartnered).toEqual(eligible);
+    // Anti-vacuity: with land EXPENSIVE the same realm partners them, so the result
+    // above is the domination prune and not a broken derivation.
+    const live = portPartnerAdvisory(eligibility, buildSeaLanes(cells, placements, roster, () => Infinity));
+    expect(live.partnered.length).toBeGreaterThan(0);
+  });
+
+  it('is total on nothing at all', () => {
+    for (const [e, l] of [[null, null], [undefined, undefined], [[], null], [[{ id: 'a', port: false }], null]]) {
+      const a = portPartnerAdvisory(e, l);
+      expect(a.harbours).toEqual([]);
+      expect(a.rows).toEqual([]);
+    }
   });
 });
