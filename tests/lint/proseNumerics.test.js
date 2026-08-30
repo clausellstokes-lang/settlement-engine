@@ -91,6 +91,18 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // planted leak lands at 409 — comfortably UNDER a stale 413 — so the control that exists to
 // prove a regenerated baseline cannot launder a leak would itself have gone vacuous. A
 // shrink here is not optional bookkeeping; the ceiling IS the control's teeth.
+// TE-CAP (WEAVE W-CAP CAP-3, ODQ §758) — TWO PURE LINE MOVES, NO DEBT MOTION, NO CEILING
+// CHANGE. The climate-band car adds the `amplitudeByClimate` table, the `climateBandFor`
+// reader and their rationale ABOVE seasons.js's prose block, so the two rows that file owns
+// — one `floatInterpolation`, one `percentToken`, both on the same hungry-gap reason line —
+// re-address 252 -> 318. Same shape as CR-FP-2's "88 pure line moves", HK-1's six and
+// TE-CH-4's one above: path, category and snippet are byte-identical on both, the census
+// stays at 408 against a 408 ceiling, and seasons.js owns no other row that could have moved
+// with them. The whole baseline diff is four lines, two -/+ pairs.
+// ⚠ The car's added comments carry measured figures of their own (band cuts −5/25/8/5/4/10,
+// amplitudes 38/30/22). None is debt and none is in this baseline: the detector reads
+// numerics that FLOW INTO A PROSE KEY, not numbers written in comments — the same
+// distinction TE-CH-4's note above had to draw.
 const REVIEWED_TOTAL_CEILING = 408;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 233,

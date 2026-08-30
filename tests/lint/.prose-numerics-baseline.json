@@ -1735,13 +1735,13 @@
   },
   {
     "path": "src/domain/worldPulse/seasons.js",
-    "line": 252,
+    "line": 318,
     "category": "floatInterpolation",
     "snippet": "`${s.name}: stores below half a month with a ${Math.round(s.deficitPct)}% deficit.`"
   },
   {
     "path": "src/domain/worldPulse/seasons.js",
-    "line": 252,
+    "line": 318,
     "category": "percentToken",
     "snippet": "`${s.name}: stores below half a month with a ${Math.round(s.deficitPct)}% deficit.`"
   },

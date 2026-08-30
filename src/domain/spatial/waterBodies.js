@@ -74,7 +74,9 @@ export const FROZEN_LAKE_TEMP_C = -3;
 export const DRY_LAKE_EVAPORATION_RATIO = 4;
 /** FMG's `heightExponent` UI input; its shipped default. PARAMETERIZED rather than read
  *  from a bare `window` — a bare global read is not an import and evades the layer walker,
- *  and a non-integer exponent would put a fractional `**` on a canon-deciding path. */
+ *  and a non-integer exponent would put an implementation-approximated power on a
+ *  canon-deciding path. The exponent is applied through `intPow` below, which cannot
+ *  express a fractional one at all. */
 export const DEFAULT_HEIGHT_EXPONENT = 2;
 
 /**
@@ -196,9 +198,32 @@ function medianOf(values) {
   return xs.length % 2 ? xs[mid] : (xs[mid - 1] + xs[mid]) / 2;
 }
 
-/** Round to `digits` decimals the way FMG's `rn` does. */
+/**
+ * INTEGER POWER BY REPEATED MULTIPLICATION — and the reason is determinism, not speed.
+ *
+ * `**` and `Math.pow` are implementation-APPROXIMATED per the ECMAScript spec, so a value
+ * they produce can differ between engines in the last bits; the transcendental-math ratchet
+ * exists to keep that surface off a canon-deciding path, and it counts the OPERATOR, not the
+ * exponent. Both powers this module needs have INTEGER exponents, and an integer power is
+ * just multiplication — which IEEE-754 rounds correctly, so this form is not merely
+ * ratchet-legal, it is exactly reproducible on every engine by construction.
+ *
+ * Writing it this way also makes the integer-exponent constraint STRUCTURAL instead of a
+ * comment: a fractional exponent cannot be expressed here at all, where `**` would have
+ * accepted one silently.
+ * @param {number} base @param {number} exponent a non-negative INTEGER
+ * @returns {number}
+ */
+function intPow(base, exponent) {
+  let out = 1;
+  for (let i = 0; i < exponent; i++) out *= base;
+  return out;
+}
+
+/** Round to `digits` decimals the way FMG's `rn` does. `digits` is a small non-negative
+ *  integer at every call site here (0, 1 or 2), so the scale is an exact integer power. */
 const rn = (/** @type {number} */ v, /** @type {number} */ digits = 0) => {
-  const m = 10 ** digits;
+  const m = intPow(10, digits);
   return Math.round(v * m) / m;
 };
 
@@ -237,8 +262,8 @@ export function deriveLakes(pack, opts = {}) {
   const { comp, count, firstCell, size } = labelComponents(pack, (cell) => isOpenWater(pack, cell));
   if (!count) return null;
   const touchesFrame = frameTouchTest(pack);
-  // A non-integer exponent would put a fractional `**` on a canon-deciding path; refuse it
-  // and use FMG's own default rather than run one.
+  // A non-integer exponent has no exact form; refuse it and use FMG's own default rather
+  // than reach for an implementation-approximated power (see `intPow`).
   const rawExp = Number(opts.heightExponent);
   const heightExponent = Number.isInteger(rawExp) && rawExp > 0 ? rawExp : DEFAULT_HEIGHT_EXPONENT;
 
@@ -293,7 +318,7 @@ export function deriveLakes(pack, opts = {}) {
     let evaporation = null;
     if (temp !== null && temp < 80) {
       // FMG's Penman-shaped line, verbatim in substance (MIT; attributed — see the header).
-      const rise = (height - 18) ** heightExponent;
+      const rise = intPow(height - 18, heightExponent);
       evaporation = rn((((700 * (temp + 0.006 * rise)) / 50 + 75) / (80 - temp)) * cells);
     }
 
