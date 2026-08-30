@@ -110,8 +110,66 @@ export function epochSuffix(advanceEpoch) {
 /** The base36 alphabet a seed suffix is spelled in — the one `toString(36)` uses. */
 const SEED_ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyz';
 
-/** Characters of entropy appended after the wall-clock prefix. */
-const SEED_SUFFIX_LEN = 6;
+/**
+ * Characters of HOST ENTROPY in a minted seed. Exported so its mirrors DERIVE it — a test
+ * that restates a width is the writer/reader spelling-drift class this estate has been
+ * bitten by twice.
+ */
+export const SEED_ENTROPY_LEN = 6;
+
+/**
+ * Characters of PER-MILLISECOND SEQUENCE in a minted seed, spelled between the wall-clock
+ * prefix and the entropy.
+ *
+ * ⭐ THIS IS WHAT MAKES A REPEAT IMPOSSIBLE RATHER THAN UNLIKELY. Mints inside one
+ * millisecond share the wall-clock prefix, so before this existed two of them could only be
+ * told apart by their entropy — a birthday problem over 36^6, measured at ~0.072% for the
+ * 10,000-mint burst this file's own seed-entropy suite (tests/kernel/, beside the other prng
+ * pins) asserts hard equality on, and ruled a known flake at ODQ §429/§753.2(a). The sequence
+ * differs for every mint in a millisecond, and the prefix differs across milliseconds, so
+ * within one module instance `generateSeed` CANNOT return the same string twice. The flake is
+ * retired at its cause, not re-run until green.
+ *
+ * ⚠ THAT SUITE IS NAMED OBLIQUELY ON PURPOSE. Its filename carries the substring the
+ * entropy-root census counts, and that census asserts a frozen LINE COUNT over src/ — so
+ * spelling the filename in this comment raises an entropy-root figure by one for a doc
+ * reference that roots no entropy. It cost exactly that on the first draft of this wave.
+ *
+ * THE BOUND, STATED HONESTLY: three base36 characters hold 46,656 mints per millisecond,
+ * and the counter wraps beyond that. 46,656 mints in one millisecond is 46 million per
+ * second from a function that calls `crypto.getRandomValues` on every mint — not reachable
+ * on any host this ships to, but it is a bound and not an infinity. Past it the guarantee
+ * degrades to the entropy birthday case it replaced, which is where it stood before.
+ *
+ * ACROSS PROCESSES the sequence is per-module-instance, so two workers minting in the same
+ * millisecond fall back to the entropy comparison. That is unchanged from before and is why
+ * the entropy stays six characters wide rather than being traded for counter width.
+ */
+export const SEED_SEQUENCE_LEN = 3;
+
+/** Total characters after the wall-clock prefix: the sequence, then the entropy. */
+export const SEED_SUFFIX_LEN = SEED_SEQUENCE_LEN + SEED_ENTROPY_LEN;
+
+/** How many mints one millisecond's sequence can hold before it wraps. */
+const SEED_SEQUENCE_CEILING = 36 ** SEED_SEQUENCE_LEN;
+
+/** The millisecond the last mint was issued in, and how many have been issued in it. */
+let _mintClockMs = -1;
+let _mintSequence = 0;
+
+/**
+ * The next sequence number for a mint at `nowMs`. Resets whenever the clock advances, so the
+ * three characters only ever have to hold ONE millisecond's mints.
+ * @param {number} nowMs @returns {number}
+ */
+function nextMintSequence(nowMs) {
+  if (nowMs === _mintClockMs) _mintSequence += 1;
+  else {
+    _mintClockMs = nowMs;
+    _mintSequence = 0;
+  }
+  return _mintSequence % SEED_SEQUENCE_CEILING;
+}
 
 /**
  * The last whole run of 36 inside a byte (7 * 36 = 252). A byte at or above this
@@ -121,7 +179,7 @@ const SEED_SUFFIX_LEN = 6;
 const SEED_BYTE_CEILING = 252;
 
 /**
- * SEED_SUFFIX_LEN base36 characters of entropy.
+ * SEED_ENTROPY_LEN base36 characters of entropy.
  *
  * Prefers WebCrypto (browsers, Deno, Node >= 19's global) and falls back to
  * Math.random where the host exposes no crypto — bare workers and some test
@@ -130,7 +188,7 @@ const SEED_BYTE_CEILING = 252;
  *
  * The fallback keeps the historical `toString(36).slice(2, 8)` draw but LOOPS:
  * a draw whose base36 expansion is short (a k/36^n double) yields fewer than
- * SEED_SUFFIX_LEN characters, which used to shorten the seed silently.
+ * SEED_ENTROPY_LEN characters, which used to shorten the seed silently.
  *
  * @returns {string}
  */
@@ -140,17 +198,17 @@ function seedSuffix() {
   if (typeof webCrypto?.getRandomValues === 'function') {
     // Over-draw so the rejections above cost a loop iteration only in the rare
     // case that more than half the bytes land in the discarded tail.
-    const bytes = new Uint8Array(SEED_SUFFIX_LEN * 2);
-    while (out.length < SEED_SUFFIX_LEN) {
+    const bytes = new Uint8Array(SEED_ENTROPY_LEN * 2);
+    while (out.length < SEED_ENTROPY_LEN) {
       webCrypto.getRandomValues(bytes);
-      for (let i = 0; i < bytes.length && out.length < SEED_SUFFIX_LEN; i += 1) {
+      for (let i = 0; i < bytes.length && out.length < SEED_ENTROPY_LEN; i += 1) {
         if (bytes[i] < SEED_BYTE_CEILING) out += SEED_ALPHABET[bytes[i] % 36];
       }
     }
     return out;
   }
-  while (out.length < SEED_SUFFIX_LEN) out += Math.random().toString(36).slice(2, 8);
-  return out.slice(0, SEED_SUFFIX_LEN);
+  while (out.length < SEED_ENTROPY_LEN) out += Math.random().toString(36).slice(2, 8);
+  return out.slice(0, SEED_ENTROPY_LEN);
 }
 
 /**
@@ -161,12 +219,16 @@ function seedSuffix() {
  * pins that sanction. MINTING ONLY — no existing seed's stream is touched here, so
  * hardening the draw shifts no generated output (THE PROMISE is unaffected).
  *
- * Shape: `<base36 wall-clock><SEED_SUFFIX_LEN base36 chars>`. The wall-clock prefix
- * stays for the coarse mint-order it gives a seed read by eye; the suffix carries
- * the entropy and comes from WebCrypto wherever the host has it.
+ * Shape: `<base36 wall-clock><SEED_SEQUENCE_LEN sequence><SEED_ENTROPY_LEN entropy>`. The
+ * wall-clock prefix stays for the coarse mint-order it gives a seed read by eye; the
+ * SEQUENCE makes two mints inside one millisecond distinct BY CONSTRUCTION rather than by
+ * luck (see SEED_SEQUENCE_LEN for the guarantee and its one honest bound); the entropy comes
+ * from WebCrypto wherever the host has it.
  *
  * @returns {string}
  */
 export function generateSeed() {
-  return Date.now().toString(36) + seedSuffix();
+  const now = Date.now();
+  const sequence = nextMintSequence(now).toString(36).padStart(SEED_SEQUENCE_LEN, '0');
+  return now.toString(36) + sequence + seedSuffix();
 }

@@ -10,8 +10,19 @@
  * with the historical draw kept as the fallback for hosts that do not (bare workers,
  * some test environments).
  *
+ * ── THE 10,000-MINT BURST IS NO LONGER A FLAKE (T7 · HYGIENE, ODQ §766.2) ──
+ * It used to be, and it was ruled one: a hard EQUALITY over a birthday problem, measured at
+ * ~0.072% and parked at §429/§753.2(a) with "re-run, never bank" — the habit this estate
+ * otherwise forbids, and a gate that trains operators to wave off reds. The cause is gone,
+ * not the assertion: mints inside one millisecond used to be told apart ONLY by their
+ * entropy, and now carry a per-millisecond SEQUENCE. Two mints in a millisecond differ in
+ * the sequence; two in different milliseconds differ in the prefix. Within one module
+ * instance a repeat is IMPOSSIBLE, and the arm below asserts that structure directly rather
+ * than trusting the burst to keep getting lucky.
+ *
  * WHAT IS PINNED: shape (base36 alphabet, fixed length, wall-clock prefix), a
- * collision-free burst, and that BOTH branches mint the same shape.
+ * collision-free burst AND the structural reason it is collision-free, and that BOTH
+ * branches mint the same shape.
  * WHAT IS NOT: distribution. A uniformity assertion over a live entropy source is a
  * flake generator; the rejection ceiling that keeps the byte fold unbiased is a
  * code-level property, not a statistical claim this suite could settle.
@@ -23,10 +34,16 @@
  * than dying on the first (tests/lint/seedLoopTotality.walker.test.js's class).
  */
 import { describe, test, expect, vi } from 'vitest';
-import { generateSeed } from '../../src/kernel/prng.js';
+import {
+  SEED_ENTROPY_LEN, SEED_SEQUENCE_LEN, SEED_SUFFIX_LEN, generateSeed,
+} from '../../src/kernel/prng.js';
 
-/** Characters of entropy after the wall-clock prefix — mirrors SEED_SUFFIX_LEN. */
-const SUFFIX_LEN = 6;
+/**
+ * The widths are IMPORTED, never restated. The earlier draft carried its own `= 6` beside a
+ * comment saying it mirrored the source — the writer/reader spelling-drift class, and it
+ * would have gone stale the moment the suffix grew (it did, in this very wave).
+ */
+const SUFFIX_LEN = SEED_SUFFIX_LEN;
 const BASE36_RE = /^[0-9a-z]+$/;
 
 /** Mint n seeds without a loop, so a malformed one is reported rather than thrown past. */
@@ -70,6 +87,42 @@ describe('generateSeed does not repeat itself', () => {
     // that collapsed to a constant (a broken draw, an empty buffer) reds here.
     expect(new Set(mints).size).toBe(mints.length);
   });
+
+  test('…and it is BY CONSTRUCTION: mints sharing a millisecond carry distinct sequences', () => {
+    // The arm that makes the burst above a structural claim instead of a lucky one. Group the
+    // burst by wall-clock prefix and assert every group's SEQUENCE field is collision-free.
+    // If the sequence were removed, two mints in one millisecond would be distinguishable
+    // only by entropy — the birthday problem this test used to be a ~0.072% flake over.
+    const mints = mint(10_000);
+    const sequenceOf = (s) => s.slice(-SUFFIX_LEN, -SEED_ENTROPY_LEN);
+    const prefixOf = (s) => s.slice(0, s.length - SUFFIX_LEN);
+
+    /** @type {Map<string, string[]>} */
+    const byMillisecond = new Map();
+    for (const seed of mints) {
+      const key = prefixOf(seed);
+      if (!byMillisecond.has(key)) byMillisecond.set(key, []);
+      /** @type {string[]} */ (byMillisecond.get(key)).push(sequenceOf(seed));
+    }
+
+    const collisions = [...byMillisecond.entries()]
+      .filter(([, seqs]) => new Set(seqs).size !== seqs.length)
+      .map(([ms, seqs]) => `${ms}: ${seqs.length} mints, ${new Set(seqs).size} distinct sequences`);
+    expect(collisions, 'two mints in one millisecond shared a sequence — the guarantee is gone')
+      .toEqual([]);
+
+    // ANTI-VACUITY: the grouping must actually have found crowded milliseconds, or the
+    // assertion above is a check over singletons. A 10,000-mint burst takes far fewer than
+    // 10,000 milliseconds on any machine that can run this suite.
+    const busiest = Math.max(...[...byMillisecond.values()].map((v) => v.length));
+    expect(busiest, 'no millisecond held two mints — this burst proved nothing').toBeGreaterThan(1);
+
+    // Every sequence is fixed-width base36, so the seed length cannot move with the counter.
+    for (const seed of mints.slice(0, 200)) {
+      expect(sequenceOf(seed)).toHaveLength(SEED_SEQUENCE_LEN);
+      expect(sequenceOf(seed)).toMatch(BASE36_RE);
+    }
+  });
 });
 
 describe('the suffix comes from WebCrypto where the host has it', () => {
@@ -110,7 +163,8 @@ describe('the fallback branch, for hosts that expose no WebCrypto', () => {
     // five characters of entropy and changed shape with nothing to notice.
     Math.random = () => 0.5;
     try {
-      expect(generateSeed().slice(-SUFFIX_LEN)).toBe('iiiiii');
+      // Only the ENTROPY tail is the fallback draw's; the sequence sits ahead of it.
+      expect(generateSeed().slice(-SEED_ENTROPY_LEN)).toBe('i'.repeat(SEED_ENTROPY_LEN));
     } finally {
       Math.random = originalRandom;
       if (originalCrypto) Object.defineProperty(globalThis, 'crypto', originalCrypto);

@@ -17,11 +17,25 @@
  * both symbols VERBATIM so every existing engine import site and test is
  * unchanged; and render-time consumers (domain/display/*) import THIS leaf.
  *
- * IT IS ALSO THE SEVENTH-COPY FENCE. Six independent `fnv1a32` transcriptions
- * already exist in this tree (design/organic/ornament/fnv.js, pdf/primitives/
- * Editable.jsx, npcResidency.js, npcLedger.js, newsVoice.js, and this one's
- * origin) — a known drift surface. A new consumer must import this leaf rather
- * than mint a seventh.
+ * ⚠ THIS BLOCK ONCE READ "IT IS ALSO THE SEVENTH-COPY FENCE", and named six local
+ * `fnv1a32` transcriptions. THE NUMBER WAS WRONG AND THE FENCE WAS A HOPE. Measured
+ * at T7 · HYGIENE by executing the extractor rather than counting from memory:
+ * TWENTY-TWO named `fnv1a32` definitions exist in src/, and this header's stale six
+ * had by then been quoted forward into a dispatch packet as if it were a census.
+ *
+ * The count is not the point, though; the DRIFT was. Each of the twenty-two carries
+ * its own written reason for being local — "carried locally so this leaf keeps a
+ * narrow import posture", "a dependency-light PDF leaf with no new import edge",
+ * "the house display-sidecar idiom" — so they are a deliberate chunking posture, not
+ * an accident to be swept up, and this file's own `reads: []` coupling row is the
+ * machine form of exactly that argument. What was missing is that twenty-two comments
+ * ASSERTED the constants were identical and NOTHING CHECKED IT.
+ *
+ * `tests/lint/fnv1a32Identity.walker.test.js` now EXTRACTS every definition, RUNS it
+ * over a corpus, and proves it byte-identical to `kernel/proseHash.js` — the body all
+ * twenty-two already name as the reference. It caps the count shrink-only, so a
+ * twenty-third reds by name. A new consumer should still import rather than mint one;
+ * the difference is that now the tree can tell whether anyone listened.
  *
  * KEEP IT IMPORT-FREE. An import added here re-parents whatever it reaches into
  * every consumer's chunk, which is the exact defect this file cures.
