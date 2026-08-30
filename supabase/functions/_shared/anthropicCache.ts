@@ -125,6 +125,11 @@ export interface SealOptions {
  * characters of "[CACHE-STABILIZER: ignore this block]" and only then the boundary -
  * measured at 7,409 / 7,897 / 8,629 / 9,605 / 1,797 characters of filler on construct,
  * construct-realm, interpret, style-overhaul and a small-vocabulary autonomy respectively.
+ * ⚰ THE FIGURES ARE LEFT EXACTLY AS MEASURED, INCLUDING THE RETIRED SURFACE. `style-overhaul`
+ * was retired by ODQ §763.2 and its directory is gone, but this is a RECORD of what was
+ * measured when the defect was found — re-wording it to drop the fourth figure would falsify
+ * a measurement to tidy a name. The note is here so a reader does not go looking for a
+ * directory that no longer exists.
  * The block was still present and still after the output contract, so an ordering assertion
  * saw nothing; the model, reading the most recently mentioned instructions last, saw
  * furniture. The tail parameter makes "last before the marker" a property of the seal
