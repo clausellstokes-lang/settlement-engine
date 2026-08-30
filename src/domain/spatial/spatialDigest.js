@@ -58,17 +58,36 @@ import { buildTeleportEdges } from './teleportEdges.js';
  * field is optional — a ragged or partial capture is normalized by
  * normalizeSpatialPack (absent arrays read as empty; cellCount clamps to the
  * shortest driving array).
+ *
+ * EVERY FIELD HERE IS PACK-INDEXED. The climate arrays are NOT — they live on
+ * SpatialPackGrid below, under their own denominator (W-CAP CAP-1 / D1).
  * @typedef {Object} SpatialPackCells
  * @property {number[]} [h]      per-cell height (FMG 0..100; land >= 20)
  * @property {number[]} [biome]  per-cell FMG biome id
  * @property {number[]} [r]      per-cell river id (0 = none)
  * @property {Array<[number, number]|number[]>} [p]  per-cell centroid [x, y]
  * @property {number[][]} [c]    per-cell adjacent cell ids
+ * @property {number[]} [fl]     per-cell FLUX (FMG Uint16 water flow; 0 = none)
+ * @property {number[]} [g]      per-cell GRID cell index — the ONLY bridge from
+ *   pack space into grid space (FMG `pack.cells.g`)
+ */
+
+/**
+ * The frozen FMG GRID cell arrays (W-CAP CAP-1 / D1). A SEPARATE denominator from
+ * SpatialPackCells: these are indexed by GRID cell, and a pack cell reaches its own
+ * row only through `cells.g[packCell]`. FMG generates climate on the grid and never
+ * re-projects it onto the pack, so capturing it any other way would either invent a
+ * projection or silently mis-index (§711.6 — an undeclared unit acquires a different
+ * one at every consumer).
+ * @typedef {Object} SpatialPackGrid
+ * @property {number[]} [temp]   per-GRID-cell temperature, DEGREES CELSIUS (Int8, -128..127)
+ * @property {number[]} [prec]   per-GRID-cell precipitation, FMG's own 0..255 units (Uint8)
  */
 
 /**
  * A captured FMG pack (the digest builder's raw input) — nullish-tolerant.
- * @typedef {{ cells?: SpatialPackCells | null } | null | undefined} CapturedSpatialPack
+ * @typedef {{ cells?: SpatialPackCells | null, grid?: SpatialPackGrid | null }
+ *   | null | undefined} CapturedSpatialPack
  */
 
 /**
@@ -176,18 +195,43 @@ function makeHeap() {
  * cellCount is the shortest of the driving arrays (h drives land/impassable, p
  * drives geometry, c drives adjacency) so a ragged capture can't index off the
  * end. Pure structural read; no mutation of the input.
+ *
+ * W-CAP CAP-1 (D1) widened this in ONE act with the bridge that feeds it — because
+ * this function SILENTLY DROPS every key it does not name, a capture field that
+ * lands here unhandled is invisible rather than broken, and no test that never
+ * normalizes would catch it. Two rules hold the widening honest:
+ *
+ *   1. THE DRIVING SET IS UNCHANGED. `cellCount` is still `min(h, p, c)` — the new
+ *      arrays are EXCLUDED from it, exactly as `r` and `biome` always were. A pack
+ *      whose flux array is short (or absent) must not shrink the map; the reader
+ *      bounds itself instead.
+ *   2. TWO DENOMINATORS, NEVER MIXED. `h/biome/r/p/c/fl/g` are PACK-indexed and
+ *      bounded by `cellCount`; `temp/prec` are GRID-indexed and bounded by
+ *      `gridCellCount`. A pack cell reaches its climate row ONLY through
+ *      `g[packCell]`. Both counts are returned so a consumer never has to infer a
+ *      bound from an array length that a ragged capture may have truncated.
+ *
  * @param {CapturedSpatialPack} pack
  */
 export function normalizeSpatialPack(pack) {
   /** @type {SpatialPackCells} */
   const cells = pack?.cells || {};
+  /** @type {SpatialPackGrid} */
+  const gridCells = pack?.grid || {};
   const h = Array.isArray(cells.h) ? cells.h : [];
   const biome = Array.isArray(cells.biome) ? cells.biome : [];
   const r = Array.isArray(cells.r) ? cells.r : [];
   const p = Array.isArray(cells.p) ? cells.p : [];
   const c = Array.isArray(cells.c) ? cells.c : [];
+  // CAP-1 — PACK-indexed, non-driving (the r/biome precedent).
+  const fl = Array.isArray(cells.fl) ? cells.fl : [];
+  const g = Array.isArray(cells.g) ? cells.g : [];
+  // CAP-1 — GRID-indexed, its own denominator.
+  const temp = Array.isArray(gridCells.temp) ? gridCells.temp : [];
+  const prec = Array.isArray(gridCells.prec) ? gridCells.prec : [];
   const cellCount = Math.min(h.length, p.length, c.length);
-  return { h, biome, r, p, c, cellCount };
+  const gridCellCount = Math.min(temp.length, prec.length);
+  return { h, biome, r, p, c, fl, g, temp, prec, cellCount, gridCellCount };
 }
 
 /**

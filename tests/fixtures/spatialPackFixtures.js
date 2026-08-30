@@ -32,9 +32,27 @@ const BIOME_TUNDRA = 10;
  *   - four BIOME BANDS by quadrant (grassland / desert / forest / wetland) with a
  *     tundra fringe on the last row,
  * so route receipts see every terrain class.
- * @param {{cols:number, rows:number, spacing?:number, bay?:boolean, ridge?:boolean, river?:boolean}} opts
+ *
+ * W-CAP CAP-1: `capture` OPTS IN to the widened capture surface (`cells.fl`,
+ * `cells.g`, and the GRID-indexed `grid.temp`/`grid.prec`). It is OFF BY DEFAULT and
+ * that default is load-bearing: every pre-CAP fixture digest in the estate is built
+ * from this pack, and a pack that silently grew a flux array would light CAP-2's
+ * navigability rule underneath suites that never asked for it. A test that wants the
+ * new fields asks for them.
+ *
+ *   • fl — flux rises along the river row from the west (a stream at the head, a
+ *     great river at the mouth), so ONE fixture spans every navigability band.
+ *   • g  — a 2:1 pack→grid downsample by column pairs, so grid space is genuinely
+ *     COARSER than pack space and an off-by-denominator read is observable rather
+ *     than accidentally correct (it would be invisible under an identity mapping).
+ *   • temp/prec — GRID-indexed, banded by grid row/column so the fixture spans
+ *     harsh/standard/mild without any randomness.
+ * @param {{cols:number, rows:number, spacing?:number, bay?:boolean, ridge?:boolean,
+ *   river?:boolean, capture?:boolean}} opts
  */
-export function makeGridPack({ cols, rows, spacing = 40, bay = true, ridge = true, river = true } = {}) {
+export function makeGridPack({
+  cols, rows, spacing = 40, bay = true, ridge = true, river = true, capture = false,
+} = {}) {
   const n = cols * rows;
   const h = new Array(n);
   const biome = new Array(n);
@@ -83,7 +101,42 @@ export function makeGridPack({ cols, rows, spacing = 40, bay = true, ridge = tru
       c[i] = nb;
     }
   }
-  return { cells: { h, biome, r, p, c }, meta: { cols, rows, spacing } };
+  if (!capture) return { cells: { h, biome, r, p, c }, meta: { cols, rows, spacing } };
+  // ── W-CAP CAP-1: the widened capture surface (opt-in) ───────────────────────
+  // FLUX along the river row, rising west→east: the head of the river is a trickle
+  // and the mouth is a great river, so a single fixture spans every band the
+  // navigability cut can produce. Off-river cells carry 0 (FMG's "no flux").
+  const fl = new Array(n).fill(0);
+  for (let col = 0; col < cols; col++) {
+    const i = idx(col, riverRow);
+    if (r[i] !== 0) fl[i] = col * 25; // 0, 25, 50, … — crosses 100 partway along
+  }
+  // GRID INDEX: a 2:1 downsample by column pairs. gridCols = ceil(cols/2), so grid
+  // space is strictly COARSER than pack space — an identity mapping would make a
+  // denominator confusion invisible, which is exactly the bug class this guards.
+  const gridCols = Math.ceil(cols / 2);
+  const g = new Array(n);
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) g[idx(col, row)] = row * gridCols + (col >> 1);
+  }
+  // CLIMATE, GRID-indexed (length gridCols*rows, NOT n): temperature falls with the
+  // row (north→south gradient), precipitation rises with the grid column. Both are
+  // pure functions of the grid coordinates — no randomness.
+  const gridN = gridCols * rows;
+  const temp = new Array(gridN);
+  const prec = new Array(gridN);
+  for (let row = 0; row < rows; row++) {
+    for (let gcol = 0; gcol < gridCols; gcol++) {
+      const gi = row * gridCols + gcol;
+      temp[gi] = 24 - row * 3;        // 24 °C at the top row, falling 3 °C per row
+      prec[gi] = 10 + gcol * 17;      // 10 units at the west edge, rising eastward
+    }
+  }
+  return {
+    cells: { h, biome, r, p, c, fl, g },
+    grid: { temp, prec },
+    meta: { cols, rows, spacing, gridCols, gridCellCount: gridN },
+  };
 }
 
 /**

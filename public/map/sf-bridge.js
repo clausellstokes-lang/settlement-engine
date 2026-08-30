@@ -872,6 +872,30 @@
     // Array.isArray) reads them; p/c are already plain arrays. Because the pack is
     // static in memory once generated, two captures of the same map are identical
     // (the parent asserts this and freezes the first regardless — freeze-first).
+    //
+    // ── W-CAP CAP-1 (design §2 D1: THE ONE CAPTURE-EXTENSION ACT) ───────────────
+    // Four fields join the copy, in ONE act, so the capture surface is widened once
+    // rather than a field per consuming wave:
+    //   • cells.fl — Uint16 FLUX, PACK-indexed (main.js's river model; the volume's
+    //     river-navigability banding reads it).
+    //   • cells.g  — the pack cell's GRID cell index, PACK-indexed. main.js:1245
+    //     mints it as `createTypedArray({maxValue: grid.points.length, …})`.
+    //   • grid.temp — Int8 temperature in DEGREES CELSIUS, GRID-indexed
+    //     (main.js:991 `const cells = grid.cells;` … `minmax(tempSeaLevel - drop, -128, 127)`).
+    //   • grid.prec — Uint8 precipitation in FMG's own 0..255 units, GRID-indexed
+    //     (main.js:1042 `const {cells, cellsX, cellsY} = grid;`).
+    //
+    // ⛔ THE DENOMINATOR IS THE WHOLE POINT. temp/prec are indexed by GRID cell and
+    // h/biome/r/fl by PACK cell — DIFFERENT LENGTHS, different meaning per index. They
+    // are therefore carried under a SEPARATE `grid` key, never mixed into `cells`,
+    // and `cells.g` is the ONLY declared bridge between the two spaces. A reader that
+    // indexes `grid.temp` with a pack cell id is reading a different cell and nothing
+    // will ever red — so the shape refuses to make that mistake spellable.
+    //
+    // The pack may legitimately carry NO flux/g (a hand-edited heightmap before the
+    // river pass) and there may be no `grid` at all; every new field degrades to an
+    // EMPTY array, exactly as `biome`/`r` already do, and the parent's normalize
+    // treats absent as empty. No new failure mode, no throw.
     'settlementEngine:getSpatialPack'(data, rid) {
       try {
         const cells = pack?.cells;
@@ -879,6 +903,11 @@
           return reply(rid, { type: 'fmg:spatialPackReply', pack: null });
         }
         const plain = (arr) => (Array.isArray(arr) ? arr : (arr ? Array.from(arr) : []));
+        // `grid` is a top-level `var` global (main.js:125) exactly as `pack` is, but a
+        // capture can be requested before the grid exists — read it defensively so a
+        // missing global degrades to empty arrays instead of a caught ReferenceError
+        // that would take the WHOLE capture down with it.
+        const gridCells = (typeof grid !== 'undefined' && grid) ? grid.cells : null;
         reply(rid, {
           type: 'fmg:spatialPackReply',
           pack: {
@@ -891,6 +920,14 @@
               // the reply can't alias live pack state.
               p: Array.isArray(cells.p) ? cells.p.map((pt) => (Array.isArray(pt) ? [pt[0], pt[1]] : pt)) : [],
               c: Array.isArray(cells.c) ? cells.c.map((nb) => (Array.isArray(nb) ? nb.slice() : plain(nb))) : [],
+              // CAP-1, PACK-indexed (same denominator as h/biome/r above).
+              fl: plain(cells.fl),
+              g: plain(cells.g),
+            },
+            // CAP-1, GRID-indexed — a DIFFERENT denominator, hence its own key.
+            grid: {
+              temp: plain(gridCells && gridCells.temp),
+              prec: plain(gridCells && gridCells.prec),
             },
           },
         });

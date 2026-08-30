@@ -18,6 +18,7 @@ import {
   CAPTURE_RECEIPT_VERSION,
   CONFIG_TERRAIN_CLASSES,
   nearestCellTo,
+  normalizeSpatialPack,
   TERRAIN_AGREEMENT_VERDICTS,
   terrainAgreement,
   terrainClassOf,
@@ -371,6 +372,91 @@ describe('SEAM-1 — RAW-BYTE dormancy: no existing canon moves a byte', () => {
       expect(sha(built[name]), `${name} digest bytes moved`).toBe(expected);
       expect('captureReceipt' in /** @type {any} */ (built[name]), `${name} grew a receipt key`).toBe(false);
     }
+  });
+});
+
+describe('W-CAP CAP-1 — the widened capture surface SURVIVES NORMALIZE', () => {
+  // D1's binding clause: normalizeSpatialPack SILENTLY DROPS every key it does not
+  // name, so a capture field that reaches it unhandled is invisible rather than
+  // broken. Every capture assertion in this program is therefore a SURVIVES-NORMALIZE
+  // assertion — asserting the bridge emitted a field proves nothing about whether the
+  // engine can read it.
+  const captured = () => makeGridPack({ cols: 8, rows: 6, capture: true });
+
+  it('fl / g / temp / prec all survive, and NEITHER count is driven by them', () => {
+    const pack = captured();
+    const n = normalizeSpatialPack(pack);
+    expect(n.fl).toBe(pack.cells.fl);
+    expect(n.g).toBe(pack.cells.g);
+    expect(n.temp).toBe(pack.grid.temp);
+    expect(n.prec).toBe(pack.grid.prec);
+    // cellCount is still min(h, p, c) — the r/biome precedent. The new PACK arrays
+    // do not shrink the map, and the GRID arrays are not even in that space.
+    expect(n.cellCount).toBe(Math.min(pack.cells.h.length, pack.cells.p.length, pack.cells.c.length));
+    expect(n.cellCount).toBe(8 * 6);
+    // …and the grid denominator is its own, strictly coarser here (2:1 downsample).
+    expect(n.gridCellCount).toBe(4 * 6);
+    expect(n.gridCellCount).toBeLessThan(n.cellCount);
+  });
+
+  it('a RAGGED or ABSENT new array reads EMPTY and never truncates the map', () => {
+    // The failure this forbids: a pack whose flux array is short (a partially-generated
+    // river pass) silently shrinking cellCount, which would drop real cells out of the
+    // territory partition — a canon-corrupting bug behind an optional field.
+    const pack = captured();
+    const ragged = { cells: { ...pack.cells, fl: [1, 2] }, grid: { temp: [1], prec: [] } };
+    const n = normalizeSpatialPack(ragged);
+    expect(n.cellCount).toBe(8 * 6);           // unchanged by the short flux array
+    expect(n.gridCellCount).toBe(0);           // min(1, 0) — prec is empty
+    const bare = normalizeSpatialPack({ cells: { h: [40], p: [[0, 0]], c: [[]] } });
+    expect(bare.fl).toEqual([]);
+    expect(bare.g).toEqual([]);
+    expect(bare.temp).toEqual([]);
+    expect(bare.prec).toEqual([]);
+    expect(bare.gridCellCount).toBe(0);
+    expect(bare.cellCount).toBe(1);
+    // Non-array garbage in the new slots is normalized away, never propagated.
+    const junk = normalizeSpatialPack({ cells: { h: [40], p: [[0, 0]], c: [[]], fl: 'nope', g: 7 }, grid: 5 });
+    expect(junk.fl).toEqual([]);
+    expect(junk.g).toEqual([]);
+    expect(junk.temp).toEqual([]);
+  });
+
+  it('`g` is the ONLY bridge from pack space to grid space, and it lands in range', () => {
+    // §711.6 — an undeclared unit acquires a different one at every consumer. The
+    // fixture's grid space is deliberately COARSER than its pack space, so a reader
+    // that indexed temp/prec with a PACK id would be reading another cell entirely;
+    // under an identity mapping that mistake is invisible. This pins the contract the
+    // climate consumers (CAP-3) must route through.
+    const pack = captured();
+    const n = normalizeSpatialPack(pack);
+    expect(n.g.length).toBe(n.cellCount);
+    for (let cell = 0; cell < n.cellCount; cell++) {
+      expect(n.g[cell], `pack cell ${cell} maps into grid space`).toBeGreaterThanOrEqual(0);
+      expect(n.g[cell]).toBeLessThan(n.gridCellCount);
+    }
+    // The mapping is genuinely many-to-one — otherwise this fixture could not catch
+    // the confusion it exists to catch.
+    expect(new Set(n.g).size).toBeLessThan(n.cellCount);
+  });
+
+  it('the capture opt-in is OFF by default — a default fixture pack is byte-identical', () => {
+    // The fixture default is load-bearing: every pre-CAP digest in the estate is built
+    // from this pack, and a pack that silently grew a flux array would light CAP-2's
+    // navigability rule underneath suites that never asked for it.
+    const plain = makeGridPack({ cols: 8, rows: 6 });
+    expect('fl' in plain.cells).toBe(false);
+    expect('g' in plain.cells).toBe(false);
+    expect('grid' in plain).toBe(false);
+    const n = normalizeSpatialPack(plain);
+    expect(n.fl).toEqual([]);
+    expect(n.gridCellCount).toBe(0);
+    // The digest built from a capture-widened pack is byte-identical to the plain one:
+    // CAP-1 carries the fields, it does not yet read them anywhere.
+    const placements = placeSettlements(plain, 6);
+    const widened = makeGridPack({ cols: 8, rows: 6, capture: true });
+    expect(JSON.stringify(buildSpatialDigest({ pack: widened, placements })))
+      .toBe(JSON.stringify(buildSpatialDigest({ pack: plain, placements })));
   });
 });
 

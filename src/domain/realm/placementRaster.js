@@ -100,6 +100,14 @@ export const HILL_HEIGHT = 40;
  * Re-declaration of spatialDigest.normalizeSpatialPack (see the header ruling on
  * why it is not imported). CROSS-CHECKED against the real one in the pins, so this
  * copy can never silently drift from the capture contract.
+ *
+ * ⚠ IT IS A PARTIAL COPY, DELIBERATELY, AND THE PIN ONLY CHECKS THE SIX FIELDS BELOW.
+ * W-CAP CAP-1 widened the real normalizer with the flux/grid-index/climate arrays
+ * (`fl`, `g`, `temp`, `prec`, `gridCellCount`). The placement raster asks one question
+ * — "does this ground match this settlement's generated terrain" — and none of those
+ * arrays answers it, so they are not carried here and the parity pin does not compare
+ * them. A later reader that needs flux or climate ON THIS PATH must widen BOTH this
+ * function and the pin in the same act; do not assume this copy is total.
  * @param {CapturedPack} pack
  * @returns {{ h: number[], biome: number[], r: number[], p: Array<number[]>,
  *   c: Array<number[]>, cellCount: number }}
