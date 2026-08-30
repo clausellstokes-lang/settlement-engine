@@ -287,9 +287,19 @@ export function createGenerationWorldLaw(config = {}, resolved = {}) {
       && !profileAllowsGeneratedContent(generationContentProfile, text)
     ) return false;
     if (magicEnabled) return true;
+    // ⚠ `divine visions?` USED TO LIVE IN THE LINE BELOW and now lives in
+    // `MAGIC_ASSERTION_PATTERN` (DEITY-LIVE-CHECK). It was a SECOND spelling of "does this
+    // text claim magic works?" reachable from exactly one call site — the L10-L12 class
+    // `magicAssertionText.js` exists to end — so a divine vision was a magic claim in a
+    // secret and not in a service, an institution or a role. The behaviour of THIS gate is
+    // unchanged (the same text still matches, through the one home instead of two).
+    // ⛔ `binding pact` and `placed compulsion` DELIBERATELY STAY LOCAL. They are also
+    // functional-magic claims, and promoting them would widen four other gates in the same
+    // stroke — a measurable roster change nobody has priced. Recorded as a deferral, not an
+    // oversight: it wants its own car with its own census.
     return (
       !textAssertsFunctionalMagic(text)
-      && !/\b(?:binding pact|divine visions?|placed compulsion)\b/i.test(text)
+      && !/\b(?:binding pact|placed compulsion)\b/i.test(text)
     );
   };
 

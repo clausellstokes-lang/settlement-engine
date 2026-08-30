@@ -18,6 +18,43 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-30 — DEITY-LIVE-CHECK, THE SUPERNATURAL CLAIM IS NOT ALWAYS ARCANE.
+ *   ⛔⛔ **NO RE-RECORD. THIS ROW EXISTS TO SAY WHY NOT, AND TO WARN THE NEXT LANE THAT
+ *   THIS MANIFEST IS BLIND TO THE THING THAT CHANGED.** Lane TE-RESIDUE-1, ODQ §708.6 /
+ *   §765.2. THE CHANGE: `MAGIC_ASSERTION_PATTERN` (`src/domain/magicAssertionText.js`) was
+ *   arcane-only, so a magic-free world shipped §708.6's own quoted sentence — *"More
+ *   advanced divine healing from senior clerics."* Eight PHRASE tokens were added, every
+ *   one receipted against a live shipped string.
+ *     THE MANIFEST DID NOT MOVE: 0 rows of 525, and the parent reproduces all 525 committed
+ *     hashes with 0 mismatches, so that is a count and not a sample.
+ *   ⚠⚠ **AND 0 OF 525 IS A VACUOUS GREEN HERE — MEASURED, NOT SUSPECTED.** A POSITIVE
+ *   CONTROL was planted: `blessings?|consecrated|holy|sacred|relics?` added to the same
+ *   pattern — a deliberately blunt widening that convicts a dozen faith-CULTURE strings.
+ *   THIS MANIFEST STILL REPORTED 0 OF 525. The reason is structural: every config in
+ *   `corpus()` leaves magic ON, so `allowsInstitution`/`allowsService`/`allowsGeneratedContent`
+ *   /`allowsSecret` all short-circuit at `if (magicEnabled) return true;` and the pattern is
+ *   never consulted. ⛔ A FUTURE CAR THAT PRICES A WORLD-LAW CHANGE OFF THIS MANIFEST ALONE
+ *   WILL SHIP A WRONG "ZERO SHIFT" CLAIM.
+ *   THE INSTRUMENT THAT CAN ACTUALLY DISCOVER IT is this corpus × five magic dials —
+ *   `magicExists:false` · `priorityMagic` 0 / 20 / 50 / 80 — the same 2,625-settlement grid
+ *   MF-CH2A and MF-CH6 used. Executed parent-vs-tip, whole-record sha256:
+ *       dead 0/525 · pm0 0/525 · pm20 0/525 · pm50 0/525 · pm80 0/525 — **0 of 2,625**,
+ *       with rosters, roster counts and settlement names unmoved in every case.
+ *     AND THAT GRID'S OWN POSITIVE CONTROL FIRES, which is what makes its zero mean
+ *     something: the same planted blunt widening moves **730 of 2,625** — 365 in `dead` and
+ *     365 in `pm0`, 0 in the three lit cases. ⭐ That number is also the measured cost of the
+ *     token set this car REFUSED: bare `bless`/`holy`/`sacred`/`relic` would have stripped
+ *     faith-culture content from 365 of 525 magic-free worlds, which is the deity-doctrine
+ *     violation in the opposite direction from the one §708.6 found.
+ *   WHY THE REAL WIDENING MOVES NOTHING: the eight tokens reach service and catalog texts
+ *   whose PROVIDERS are already struck in a magic-free world (`Healer (divine, 1st level)`
+ *   is licensed `low`; `Dream Parlor` and `Spellcasting Services` are arcane by name), so
+ *   the gate they newly answer had already been answered upstream for every row in this
+ *   corpus. What the widening buys is the row a future author writes on a Religious shelf,
+ *   and the free text a player types — neither of which any corpus can pre-measure.
+ *   ⛔ NO ROSTER, no institution instance count, no settlement name and no rng draw moves
+ *   anywhere in the 2,625. THE PROMISE is untouched: no stored settlement is re-derived.
+ *
  * 2026-08-24 — MF-CH6, FAITH IS NOT MAGIC (30 rows of 525 moved; 0 rows added, 0 removed,
  *   0 ROSTERS changed in ANY magic case). Lane TE-CH-6, the deity-doctrine car of the
  *   catalog-hygiene train. Ruled at ODQ §541.8/§541.9; a REPAIR, chair-ruled.

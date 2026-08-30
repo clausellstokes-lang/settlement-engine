@@ -93,6 +93,34 @@
  * nothing, and a successor who plans to free a row by editing this list should
  * read tests/lint/magicLicenceCensus.walker.test.js A7 and A10 first.
  *
+ * ── ⛔ `divine` IS NOT A MEMBER, AND THE REFUSAL IS THE RULING (DEITY-LIVE-CHECK, ODQ
+ * §708.6 / §765.2; lane TE-RESIDUE-1, 2026-08-30) ─────────────────────────────
+ * The residue charter asked for `divine` to be ADDED to `ARCANE_INST_TAGS`. It is refused,
+ * and the refusal is written here rather than left as an omission a later lane re-proposes.
+ *
+ * THE LIST'S OWN QUESTION DECIDES IT. `ARCANE_INST_TAGS` asks "does this institution NEED
+ * MAGIC TO EXIST?", and the header's rule is that a member must survive the sentence *"a
+ * world with no magic cannot contain this"* without qualification. A divine institution does
+ * not: a temple, a shrine, a priest and an observance are what a people believes and how it
+ * organises around that belief, and THE DEITY DOCTRINE — faith is CULTURE, never theology —
+ * is constitutional in this estate. Adding `divine` would say the opposite in the one place
+ * the engine actually asks, and it would reverse TE-CH-6's ruling one field over.
+ *
+ * AND THE BLAST RADIUS IS MEASURED, NOT ARGUED. `carriesExplicitMagicMetadata`
+ * (`generators/generationContext.js`) reads THIS list for CUSTOM entities, roles and
+ * services, so `divine` here would delete a player's own `divine`-tagged temple from their
+ * own magic-free world. Against that: the catalog carries EXACTLY ONE `divine`-tagged row
+ * (`Healer (divine, 1st level)`), it is licensed `low`, and `isArcaneInstitution` returns at
+ * the LICENCE branch before it ever reads a tag — so the addition would have moved ZERO
+ * catalog rows while installing that rule. It buys nothing and costs the doctrine.
+ *
+ * ⭐ WHAT THE CHARTER ACTUALLY WANTED — "a new unlicensed divine row leaks today" — IS CURED
+ * AT THE RIGHT AXIS INSTEAD. The licence is the field invented to answer this question, so
+ * the guard is a licence guard: `tests/lint/magicLicenceCensus.walker.test.js` now refuses a
+ * catalog row that carries a supernatural-PRACTICE tag without declaring one, and pins
+ * `divine`'s absence from this list with the reason. A future divine spellcaster row is
+ * caught by its missing declaration, and a future divine TEMPLE is not convicted at all.
+ *
  * ⚠ THIS FILE IS NOT THE ONLY HOME OF THE FOUR-MEMBER LIST'S CONTENT.
  * `domain/npcProfile.js`'s `POWER_DOMAIN_TAGS.arcane` needs the UNION of both
  * lists — power-domain affinity is a third question ("which power does this

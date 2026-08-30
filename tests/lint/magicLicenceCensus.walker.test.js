@@ -71,7 +71,10 @@ import {
 import { ARCANE_IDENTITY } from '../../src/domain/arcaneIdentity.js';
 import { createGenerationWorldLaw } from '../../src/generators/generationContext.js';
 import { arcaneInstitutionNameFallback } from '../../src/domain/arcaneInstitutionIdentity.js';
-import { ARCANE_INST_KW, filterServicesForMagic } from '../../src/domain/magicFilter.js';
+import { ARCANE_INST_KW, ARCANE_INST_TAGS, filterServicesForMagic } from '../../src/domain/magicFilter.js';
+// DEITY-LIVE-CHECK: A13 reads the estate's ONE "does this text claim magic works?" predicate
+// directly, so the arm cannot drift from the thing the world law actually asks.
+import { textAssertsFunctionalMagic } from '../../src/domain/magicAssertionText.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** Every catalog row as the generator shapes it: `{ category, name, ...entry }`. */
@@ -437,5 +440,116 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     expect(law.allowsInstitution({
       category: 'Religious', name: tower.name, ...tower.def,
     })).toBe(false);
+  });
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // DEITY-LIVE-CHECK (ODQ §708.6 / §765.2) — the hole the residue charter named was
+  // "a new UNLICENSED divine row leaks today", and these two arms close it at the
+  // LICENCE axis rather than by making faith a species of magic.
+  // ───────────────────────────────────────────────────────────────────────────
+
+  /**
+   * Catalog tags that name a SUPERNATURAL PRACTICE — a thing the row claims actually
+   * happens — as opposed to the faith-CULTURE tags beside them (`religious`,
+   * `monastery`, `healing`). A row carrying one is making a claim the world law has to
+   * be able to answer, and the field invented to answer it is `magicLicense`.
+   * ⛔ This is NOT `ARCANE_INST_TAGS` and must never be merged into it: that list means
+   * "cannot exist without magic", and a divine institution can. See
+   * `arcaneInstitutionVocabulary.js`'s DEITY-LIVE-CHECK block.
+   */
+  const SUPERNATURAL_PRACTICE_TAGS = ['divine'];
+
+  it('A11 — a row claiming a supernatural PRACTICE declares a licence, whatever its shelf', () => {
+    // A1 above holds the SHELF axis: every Magic/Exotic row declares. This arm holds the
+    // TAG axis, which A1 cannot see — a `Religious`-shelf row tagged `divine` and left
+    // unlicensed reaches the world law with nothing to read, and that is exactly the
+    // "new unlicensed divine row" the residue charter named.
+    const tagged = ROWS.filter(r => SUPERNATURAL_PRACTICE_TAGS
+      .some(tag => (Array.isArray(r.def.tags) ? r.def.tags : []).includes(tag)));
+    // NON-VACUITY FIRST: the catalog really does carry such a row today, so an empty
+    // undeclared list below means "all declared" rather than "the filter found nothing".
+    expect(tagged.map(r => `${r.tier}|${r.category}|${r.name}`))
+      .toEqual(['village|Magic|Healer (divine, 1st level)']);
+    const undeclared = tagged
+      .filter(r => normaliseMagicLicence(r.def.magicLicense) === null)
+      .map(r => `${r.tier}|${r.category}|${r.name}`);
+    expect(undeclared,
+      'a catalog row claims a supernatural practice in its tags and declares no magicLicense, '
+      + 'so the world law has nothing to read for it. Declare one of the four tokens — do NOT '
+      + 'add the tag to ARCANE_INST_TAGS, which would delete every divine institution from '
+      + 'every magic-free world.').toEqual([]);
+    // THE POSITIVE CONTROL, driven rather than described: a synthetic unlicensed divine row
+    // IS caught by the same predicate, so the empty list above is the guard holding.
+    const planted = [...tagged, {
+      tier: 'town', category: 'Religious', name: 'Oracle of the Deep',
+      def: { tags: ['divine', 'religious'], desc: 'Reads the future.' },
+    }];
+    expect(planted
+      .filter(r => normaliseMagicLicence(r.def.magicLicense) === null)
+      .map(r => r.name)).toEqual(['Oracle of the Deep']);
+  });
+
+  it('A12 — THE DOCTRINE PIN: `divine` is not a magic-dependence tag, and this is where that is said', () => {
+    // ⛔ THE RULING, PINNED SO A LATER LANE CANNOT QUIETLY REVERSE IT. ARCANE_INST_TAGS
+    // means "cannot exist without magic"; `carriesExplicitMagicMetadata` reads it for
+    // CUSTOM entities, roles and services, so a `divine` member would delete a player's own
+    // divine-tagged temple from their own magic-free world. Faith is CULTURE, never
+    // theology — the same ruling TE-CH-6 applied to ARCANE_INST_KW's six faith words.
+    expectAbsentWithAnchor([...ARCANE_INST_TAGS], 'divine', 'arcane',
+      'the deity doctrine: a divine institution is culture, not a magic dependence');
+    // AND THE MEASUREMENT THAT MAKES THE REFUSAL FREE RATHER THAN MERELY PRINCIPLED: the
+    // one divine row is licensed, so the licence branch answers first and the tag is never
+    // consulted for it. Adding the tag would have moved zero catalog rows.
+    const healer = ROWS.find(r => r.name === 'Healer (divine, 1st level)');
+    expect(normaliseMagicLicence(healer.def.magicLicense)).toBe('low');
+    expect(isArcaneInstitution(
+      { category: healer.category, name: healer.name, ...healer.def }, healer.category,
+    )).toBe(true);
+    // …and a divine TEMPLE with no licence is NOT arcane, which is the whole point.
+    expect(isArcaneInstitution(
+      { category: 'Religious', name: 'Temple of the Morning Bell', tags: ['divine', 'religious'] },
+      'Religious',
+    )).toBe(false);
+  });
+
+  it('A13 — the assertion vocabulary catches the divine CLAIM and spares the divine CUSTOM', () => {
+    // §708.6's leak, quoted from the shipped data rather than from the ruling: these
+    // sentences assert that a supernatural effect FUNCTIONS, and a magic-free world must
+    // not make them. Each was measured escaping the arcane-only pattern before this car.
+    for (const claim of [
+      'More advanced divine healing from senior clerics.',
+      'Basic divine healing. Closes cuts, reduces fever, eases pain.',
+      'Treat common illnesses through divine intervention.',
+      'Remove contamination from food and water through divine blessing.',
+      'Resurrection services Raise dead. Expensive, not guaranteed',
+      'Cure Wounds, Lesser Restoration. Slower than divine.',
+      'Induce prophetic dream states. Visions are real but not always interpretable.',
+    ]) expect(textAssertsFunctionalMagic(claim), claim).toBe(true);
+    // AND THE OTHER POLARITY, which is the doctrine and is the reason the tokens are
+    // phrases: every one of these is faith as CULTURE and survives untouched. Without this
+    // half the arm above would be satisfied by a blunt `divine` token that empties every
+    // mundane world of its churches.
+    for (const custom of [
+      'Legal protection on holy ground',
+      'Blessings for crops, livestock, safe journeys.',
+      'A brief blessing for travelers on the road. Costs nothing; donations welcomed.',
+      'Daily prayers, blessings, and religious counsel.',
+      'Accommodate and process pilgrims. Relics, blessings, and indulgences.',
+      'Church legal proceedings for matters within clerical jurisdiction.',
+      'Access to venerated relics and shrines for pilgrims.',
+      'Crucifixes, reliquaries, saints’ images.',
+      'Consecrated ground around church.',
+      'Dramatic but meaningless predictions. Occasionally accidentally accurate.',
+      'A claimed miracle or relic drew pilgrims in numbers the settlement was never built to hold',
+      'The faith lends the ruler a measure of divine mandate.',
+    ]) expect(textAssertsFunctionalMagic(custom), custom).toBe(false);
+    // THE CHARLATAN ROWS, which are the sharpest control in the estate: they are AUTHORED
+    // mundane and they survive `stripNegatedMagic` with the word `divination` intact, so a
+    // bare `divination` token would have convicted two rows written to prove magic is not
+    // needed. This is why `divination` and `miracle` are not members.
+    expect(textAssertsFunctionalMagic(
+      "'Divination' with no magic in it, worked by Deception. 1-5 GP.")).toBe(false);
+    expect(textAssertsFunctionalMagic(
+      "Non-magical 'divination' using Deception. 1-5 GP.")).toBe(false);
   });
 });

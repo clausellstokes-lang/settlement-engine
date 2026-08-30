@@ -18,9 +18,57 @@
 /**
  * The affirmative vocabulary. A line matching this claims magic FUNCTIONS — it is not a
  * list of fantasy-flavoured words, it is the set of claims a mundane world must not make.
+ *
+ * ── DEITY-LIVE-CHECK (ODQ §708.6): THE SUPERNATURAL EFFECT DOES NOT HAVE TO BE ARCANE ──
+ * The list above was arcane-only, so a magic-free world shipped the sentence §708.6 quoted:
+ * *"More advanced divine healing from senior clerics."* That is a claim that a supernatural
+ * effect FUNCTIONS, and a world whose magic does not function must not make it — whatever
+ * the claimed source.
+ *
+ * ⛔⛔ AND THE DOCTRINE DECIDES THE TOKENS, WHICH IS WHY THEY ARE PHRASES AND NOT WORDS.
+ * THE DEITY DOCTRINE is constitutional here: faith is CULTURE, never theology. A temple, a
+ * priest, a blessing for travellers, consecrated ground, a reliquary, an ecclesiastical
+ * court and a claimed miracle all belong to a magic-free world — they are what a people
+ * believes and how it organises around that belief. Adding `divine`, `bless`, `holy`,
+ * `sacred`, `relic`, `cleric`, `consecrat*`, `saint` or `miracle` as bare words would delete
+ * exactly those from every mundane world, which is the same violation TE-CH-6 cured one
+ * field over when it took the six faith words out of `ARCANE_INST_KW`.
+ *
+ * ⚠ TWO WORDS WERE TRIED AND REFUSED BY MEASUREMENT, not by taste. `miracle` reaches
+ * `historyData.js`'s *"A claimed miracle or relic drew pilgrims…"* and *"Someone is staging
+ * miracles"* — belief and fraud, the two most doctrine-correct shapes a miracle can have.
+ * `divination` reaches the charlatan rows that are AUTHORED mundane — *"'Divination' with no
+ * magic in it, worked by Deception"* and *"Non-magical 'divination' using Deception"* — and
+ * both survive `stripNegatedMagic` with the word intact, so a bare token would have convicted
+ * two rows written specifically to prove magic is not needed.
+ *
+ * EVERY TOKEN BELOW HAS A LIVE RECEIPT in the shipped corpora — this vocabulary was derived
+ * from the data, never invented:
+ *   `divine healing`     — `institutionServices.js` "More advanced divine healing from senior
+ *                          clerics." and "Basic divine healing. Closes cuts, reduces fever…"
+ *                          (both escaped the arcane-only list; this is §708.6's own leak)
+ *   `divine intervention`— "Treat common illnesses through divine intervention."
+ *   `divine blessing`    — "Remove contamination from food and water through divine blessing."
+ *                          and "Divine blessing for journeys, battles, or important
+ *                          undertakings." Both are services of `Healer (divine, 1st level)`,
+ *                          the row the estate has already ruled is a first-level SPELLCASTER
+ *                          filed under faith rather than a cultural healer. ⚠ It does NOT
+ *                          reach "Nature blessing", "Wayside blessing" or "Daily prayers,
+ *                          blessings, and religious counsel" — measured, all three survive.
+ *   `divine visions`     — moved here from `generationContext.js`'s secret-only local regex,
+ *                          which was a SECOND spelling of this question living at one call
+ *                          site (the L10-L12 class this module exists to end).
+ *   `raise dead`         — "Resurrection services … Raise dead. Expensive, not guaranteed"
+ *   `cure … wounds`      — "Cure Wounds, Lesser Restoration" and "Cure light wounds". The
+ *                          severity words are ENUMERATED rather than `\w+` so an apothecary
+ *                          that cures infected wounds is not convicted by a wildcard.
+ *   `lesser restoration` — same row; kept so a future row naming it alone is still caught.
+ *   `prophetic dreams`   — "Prophetic dreams … Divination through induced vision states" and
+ *                          "Induce prophetic dream states. Visions are real…". The second
+ *                          says the visions ARE REAL, which is the functional claim itself.
  */
 export const MAGIC_ASSERTION_PATTERN =
-  /\b(?:arcane|artificer|cantrips?|curses?|druid|enchant(?:ed|ing|ment)?|golems?|mage|magic|magical|necromanc(?:er|y|tic)|planar|runes?|scry(?:ing)?|sorcerer|spells?|teleport(?:ation)?|undead|warlock|witch|wizard)\b/i;
+  /\b(?:arcane|artificer|cantrips?|curses?|druid|enchant(?:ed|ing|ment)?|golems?|mage|magic|magical|necromanc(?:er|y|tic)|planar|runes?|scry(?:ing)?|sorcerer|spells?|teleport(?:ation)?|undead|warlock|witch|wizard|divine healing|divine intervention|divine blessing|divine visions?|raise(?:s|d)? dead|cure (?:light |moderate |serious |critical )?wounds|lesser restoration|prophetic dreams?)\b/i;
 
 /**
  * Explicit denials of functional magic. These are clause-shaped instead of
