@@ -198,9 +198,13 @@ export const ATLAS_RENDER_CAP = 12;
 
 /**
  * The surfaces an atlas section is built for: the walled Surveyor surfaces where intent
- * inference actually happens. Names match aiCharter.js CHARTER_SURFACES, minus
- * `styleOverhaul`, which compiles a cosmetic look rather than inferring intent and would
- * gain nothing from population data. Sorted, and frozen.
+ * inference actually happens. Names match aiCharter.js CHARTER_SURFACES.
+ * ⚰ This list used to be CHARTER_SURFACES MINUS `styleOverhaul` — that surface compiled a
+ * cosmetic look rather than inferring intent, so it was the one charter surface with no
+ * atlas. ODQ §763.2 retired the capability outright, so the two rosters now coincide.
+ * ⚠ THEY COINCIDE BY ACCIDENT, NOT BY RULE: a future charter surface that infers nothing
+ * belongs out of this list again, so it stays hand-declared rather than derived from
+ * CHARTER_SURFACES. Sorted, and frozen.
  */
 export const ATLAS_SURFACES = Object.freeze([
   'autonomy',

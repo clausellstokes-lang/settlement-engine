@@ -52,12 +52,10 @@ import {
   NUDGE_TYPES, MIN_NUDGE_SEVERITY, MAX_NUDGE_SEVERITY,
 } from '../../src/domain/autonomy/accelerationOps.js';
 import { CATCH_UP_CAP_WEEKS } from '../../src/domain/worldPulse/simulationRules.js';
-import { buildStyleVocabulary } from '../../src/design/townMapStyleWall.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const MODULE_PATH = join(ROOT, 'src/domain/aiOutputSchema.js');
 const SRC = readFileSync(MODULE_PATH, 'utf8');
-const WALL_SRC = readFileSync(join(ROOT, 'src/design/townMapStyleWall.js'), 'utf8');
 
 /** The one node in the whole substrate that is deliberately open, and where it must sit. */
 const OPEN_NODE_PATH = '$.ops[].oneOf[0].params.payload';
@@ -251,19 +249,16 @@ function charterVocabularyLine(surface, label) {
   return line.split('|').map((part) => part.trim()).filter(Boolean);
 }
 
-/** Pull a numeric `const NAME = <n>;` out of the wall's source. Throws when it is gone. */
-function wallConstant(name) {
-  const match = WALL_SRC.match(new RegExp(`const ${name} = (\\d+);`));
-  if (!match) throw new Error(`src/design/townMapStyleWall.js no longer declares ${name}`);
-  return Number(match[1]);
-}
-
 describe('the schema surface roster', () => {
-  test('the declared surfaces are exactly the five compile surfaces, frozen', () => {
+  test('the declared surfaces are exactly the four compile surfaces, frozen', () => {
     expect(Object.isFrozen(SCHEMA_SURFACES)).toBe(true);
     expect([...SCHEMA_SURFACES].sort()).toEqual(
-      ['autonomy', 'construct', 'customContent', 'interpret', 'styleOverhaul'],
+      ['autonomy', 'construct', 'customContent', 'interpret'],
     );
+    // ⚰ 'styleOverhaul' RETIRED (ODQ §763.2, Q-STYLE arm 2). Absence WITH a liveness
+    // anchor: an emptied roster would satisfy a bare `not.toContain` just as happily.
+    expect(SCHEMA_SURFACES).not.toContain('styleOverhaul');
+    expect(SCHEMA_SURFACES).toContain('customContent');
   });
 
   test('the version is a literal semver-shaped string', () => {
@@ -356,10 +351,6 @@ describe('constraint (the schemas actually reject)', () => {
       ...payload,
       unsupported: [{ requested: 'a mood', reason: 'vibes_mismatch' }],
     }),
-    styleOverhaul: (payload) => ({
-      ...payload,
-      style: { ...payload.style, contrast: 'luminous' },
-    }),
     construct: (payload) => ({
       ...payload,
       constraints: { ...payload.constraints, resilience: 'catastrophic' },
@@ -378,10 +369,6 @@ describe('constraint (the schemas actually reject)', () => {
     customContent: (payload) => ({
       ...payload,
       entries: [{ ...payload.entries[0], fields: { ...payload.entries[0].fields, moodTone: 'wistful' } }],
-    }),
-    styleOverhaul: (payload) => ({
-      ...payload,
-      style: { ...payload.style, rawSvg: '<circle r="9"/>' },
     }),
     construct: (payload) => ({
       ...payload,
@@ -423,10 +410,31 @@ describe('constraint (the schemas actually reject)', () => {
     expect(validate(reasonNode, 'invalid_value')).toEqual([]);
     expect(validate(reasonNode, 'vibes_mismatch')).toEqual(['$: enum rejects "vibes_mismatch"']);
 
-    const style = buildSurfaceOutputSchema('styleOverhaul');
-    expect(validate(style.properties.style.properties.background, '#dfe6ea')).toEqual([]);
-    expect(validate(style.properties.style.properties.background, 'rebeccapurple'))
-      .toEqual(['$: pattern rejects "rebeccapurple"']);
+    // ⚰⭐ THE PATTERN HALF LOST ITS SUBJECT, SO IT IS CONVERTED, NOT DELETED.
+    // This half used to drive styleOverhaul's hex-colour node — which was the ONLY
+    // `pattern` node this module has ever emitted. ODQ §763.2 retired that surface, so a
+    // re-pointed pattern control is impossible: there is nothing to point it at. Deleting
+    // the half outright would silently retire the CLAIM too, and the next surface to mint
+    // a `pattern` would arrive with no rejection control and nobody the wiser.
+    // So the absence is asserted over the WHOLE live surface set. A new pattern node reds
+    // here on arrival, and the cure is to restore the two-line positive/negative control
+    // above it — not to widen this.
+    const patternNodes = [];
+    const walk = (node, path) => {
+      if (!node || typeof node !== 'object') return;
+      if (typeof node.pattern === 'string') patternNodes.push(`${path} /${node.pattern}/`);
+      for (const [k, v] of Object.entries(node)) walk(v, `${path}.${k}`);
+    };
+    for (const surface of SCHEMA_SURFACES) walk(buildSurfaceOutputSchema(surface), surface);
+    expect(
+      patternNodes,
+      'a `pattern` node was minted after styleOverhaul was retired — the pattern-rejection'
+      + ' control above was converted to this absence because it had no remaining subject.'
+      + ' Restore a real positive/negative pair against the new node.',
+    ).toEqual([]);
+    // Liveness anchor: the walker really does reach into the schemas.
+    expect(Object.keys(buildSurfaceOutputSchema('customContent').properties).length)
+      .toBeGreaterThan(0);
   });
 
   test('a required content field cannot be omitted, and a borrowed field cannot be smuggled', () => {
@@ -515,14 +523,17 @@ describe('negative controls (the checker and the validator are not green on noth
     emptyEnum.properties.ops.items.oneOf[0].properties.type.enum = [];
     expect(structureReport(emptyEnum).problems.join(' ')).toMatch(/enum is empty/);
 
-    const phantom = clone('styleOverhaul');
-    phantom.properties.style.required = ['thereIsNoSuchField'];
+    // ⚠ Re-pointed off the retired styleOverhaul surface (ODQ §763.2) onto construct's
+    // nested `constraints` object; the mechanism under test is unchanged.
+    const phantom = clone('construct');
+    phantom.properties.constraints.required = ['thereIsNoSuchField'];
     expect(structureReport(phantom).problems.join(' ')).toMatch(/is not a property/);
   });
 
   test('the alien-key rejection is caused by the closure, and vanishes without it', () => {
-    const schema = clone('styleOverhaul');
-    const payload = { ...exemplarPayload('styleOverhaul'), smuggledDirective: 'apply this now' };
+    // ⚠ Re-pointed off the retired styleOverhaul surface (ODQ §763.2); unchanged claim.
+    const schema = clone('construct');
+    const payload = { ...exemplarPayload('construct'), smuggledDirective: 'apply this now' };
     expect(validate(schema, payload)).toContain('$: additionalProperties rejects "smuggledDirective"');
     schema.additionalProperties = true;
     expect(validate(schema, payload)).toEqual([]);
@@ -540,7 +551,6 @@ describe('negative controls (the checker and the validator are not green on noth
   test('every extracted exemplar is the real answer shape, not an empty object', () => {
     const expected = {
       customContent: ['entries', 'musings', 'unsupported'],
-      styleOverhaul: ['style'],
       construct: ['config', 'constraints', 'musings'],
       interpret: ['musings', 'ops', 'unsupported'],
       autonomy: ['maxWeeks', 'musings', 'nudges', 'stopCondition', 'unsupported'],
@@ -551,9 +561,13 @@ describe('negative controls (the checker and the validator are not green on noth
     }
   });
 
-  test('the charter and wall extractors fail closed rather than proving nothing', () => {
+  // ⚰ THE WALL HALF OF THIS CONTROL WENT WITH ITS POSITIVE USERS (ODQ §763.2). `wallConstant`
+  // read numeric ceilings out of src/design/townMapStyleWall.js for the styleOverhaul schema
+  // pins; with those gone its ONLY remaining caller would have been this negative control —
+  // a helper kept alive by the test that proves it can fail, which is vacuity wearing
+  // coverage's clothes. The charter half below has live positive users and stays.
+  test('the charter extractor fails closed rather than proving nothing', () => {
     expect(() => charterVocabularyLine('construct', 'THERE IS NO SUCH LINE')).toThrow(/no longer renders/);
-    expect(() => wallConstant('THERE_IS_NO_SUCH_CONSTANT')).toThrow(/no longer declares/);
   });
 });
 
@@ -578,54 +592,14 @@ describe('vocabulary coupling (the schemas render the live builders)', () => {
     }
   });
 
-  test('styleOverhaul: every vocabulary and every renderer role is rendered', () => {
-    const vocab = buildStyleVocabulary();
-    const style = buildSurfaceOutputSchema('styleOverhaul').properties.style;
-    expect(style.properties.anchorGlyph.enum).toEqual(sortedText(vocab.anchorGlyphs));
-    expect(style.properties.hazardGlyph.enum).toEqual(sortedText(vocab.hazardGlyphs));
-    expect(style.properties.contrast.enum).toEqual(sortedText(vocab.contrast));
-    expect(style.properties.baseLens.enum).toEqual(sortedText(vocab.baseLenses));
-    expect(style.properties.furniture.items.enum).toEqual(sortedText(vocab.furniture));
-    for (const [role, keys] of Object.entries(vocab.roles)) {
-      expect(Object.keys(style.properties[role].properties).sort(), `${role} roles`)
-        .toEqual(sortedText(keys));
-    }
-  });
-
-  test('styleOverhaul: the top-level field set is the wall KNOWN set minus the edge-dropped fields', () => {
-    const known = WALL_SRC.match(/const KNOWN = new Set\(\[([\s\S]*?)\]\);/);
-    if (!known) throw new Error('src/design/townMapStyleWall.js no longer declares a KNOWN set');
-    const wallFields = [...known[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
-    const schemaFields = Object.keys(buildSurfaceOutputSchema('styleOverhaul').properties.style.properties);
-    expect(schemaFields.filter((field) => !wallFields.includes(field)), 'schema field the wall would drop')
-      .toEqual([]);
-    // The recorded exclusion, now a set of one. `id` is caller-assigned through the wall's
-    // `meta` argument and is never composed by the model. glyphSet and seasonBias LEFT this
-    // list in wave L-WIRE, which closed finding F-C by adding both to the edge contract they
-    // were missing from; a regression that dropped either from STYLE_FIELDS would reappear
-    // here as a re-excluded field.
-    expect(wallFields.filter((field) => !schemaFields.includes(field)).sort())
-      .toEqual(['id']);
-  });
-
-  test('styleOverhaul: THE GENRE DOOR is open - glyphSet and seasonBias are offered, bounded (F-C)', () => {
-    // The positive half of the pin above. F-C was not that the fields were excluded but that
-    // the exclusion was DERIVED from a narrower edge list than the vocabulary and the wall
-    // both carried, so the charter taught a field the compile path then stripped. Both halves
-    // are asserted against the live vocabulary, so a genre pack adding a glyph set id appears
-    // here without anyone remembering to widen a literal.
-    const vocab = buildStyleVocabulary();
-    const style = buildSurfaceOutputSchema('styleOverhaul').properties.style;
-    expect(style.properties.glyphSet.enum).toEqual(sortedText(vocab.glyphSets));
-    expect(style.properties.glyphSet.enum.length).toBeGreaterThan(0);
-    // The four bounded quarters only. The vocabulary's leading null means "follow the live
-    // world clock", which absence already says, so it is not a member of the enum.
-    expect(style.properties.seasonBias.enum)
-      .toEqual(sortedText(vocab.seasonBias.filter((v) => typeof v === 'string')));
-    expect(style.properties.seasonBias.enum).toEqual(['autumn', 'spring', 'summer', 'winter']);
-    expect(style.properties.seasonBias.enum).not.toContain(null);
-  });
-
+  // ⚰ THREE styleOverhaul VOCABULARY-COUPLING TESTS WERE DELETED HERE (ODQ §763.2,
+  // Q-STYLE arm 2), and unlike the mechanism controls above they were NOT re-pointed:
+  // their subject was the styleOverhaul schema itself, which no longer exists. They pinned
+  // the rendered vocabularies + renderer roles, the wall's KNOWN-set minus the edge-dropped
+  // fields (recorded exclusion: `id`), and F-C's genre door (glyphSet + seasonBias offered
+  // and bounded). The WALL those pins guarded — src/design/townMapStyleWall.js — is
+  // RETAINED by the ruling and keeps its own suite (tests/design/townMapStyleWall.test.js);
+  // what died is the schema surface that consumed it.
   test('construct: one branch per config surface, plus the constraint vocabulary', () => {
     const vocab = buildConstructVocabulary();
     const schema = buildSurfaceOutputSchema('construct');
@@ -701,17 +675,6 @@ describe('the mirrored vocabularies do not drift', () => {
     expect(charterVocabularyLine('interpret', 'CONFIDENCE labels').sort()).toEqual(expected);
   });
 
-  test('the style numeric ceilings and hex shape equal the wall\'s own source', () => {
-    const style = buildSurfaceOutputSchema('styleOverhaul').properties.style;
-    expect(style.properties.rasterScale.maximum).toBe(wallConstant('RASTER_MAX'));
-    expect(style.properties.functional.properties.gridStep.maximum).toBe(wallConstant('GRID_STEP_MAX'));
-    expect(style.properties.functional.properties.tokenPx.maximum).toBe(wallConstant('TOKEN_PX_MAX'));
-    const strokeRole = Object.keys(style.properties.stroke.properties)[0];
-    expect(style.properties.stroke.properties[strokeRole].maximum).toBe(wallConstant('STROKE_MAX'));
-    const hex = WALL_SRC.match(/const HEX_RE = \/([^/]+)\/;/);
-    if (!hex) throw new Error('src/design/townMapStyleWall.js no longer declares HEX_RE');
-    expect(style.properties.background.pattern).toBe(hex[1]);
-  });
 });
 
 describe('byte-stability and purity (the cached-prefix contract)', () => {

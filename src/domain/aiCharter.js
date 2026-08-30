@@ -6,12 +6,12 @@
  * ROLE plus the finite-semantics LAWS, its FULL bucket VOCABULARY, one worked EXEMPLAR, and
  * the OUTPUT CONTRACT reminder. The vocabulary half is DERIVED, never authored twice — it
  * renders the same builders the schema walls already trust (buildContentVocabulary,
- * buildStyleVocabulary, buildConstructVocabulary, buildOpVocabulary, the signal registry +
+ * buildConstructVocabulary, buildOpVocabulary, the signal registry +
  * the stressor catalog), so a bucket added to a registry appears in the charter without
  * anyone remembering to copy it, and a bucket renamed can never leave the charter teaching
  * a word the wall rejects.
  *
- * BYTE-STABILITY IS THE CONTRACT. These strings are destined for the five static prompt
+ * BYTE-STABILITY IS THE CONTRACT. These strings are destined for the static prompt
  * prefixes, where provider caching prices a byte-identical prefix once (wave L-4) — and a
  * prefix that differs by one byte per request is a silent no-op that costs more, not less.
  * Every rendering here therefore SORTS before it prints and reads no clock, no rng, and no
@@ -39,7 +39,6 @@ import { buildConstructVocabulary } from './construct/configVocabulary.js';
 import { buildOpVocabulary } from './intent/opVocabulary.js';
 import { signalRegistryEntries } from './autonomy/signalRegistry.js';
 import { NUDGE_TYPES, MIN_NUDGE_SEVERITY, MAX_NUDGE_SEVERITY } from './autonomy/accelerationOps.js';
-import { buildStyleVocabulary } from '../design/townMapStyleWall.js';
 
 /** Bump when the charter's STRUCTURE or its laws change (the vocabulary-pin idiom). The
  *  rendered vocabularies move with their own registries and do not bump this. */
@@ -51,7 +50,8 @@ export const CHARTER_VERSION = '1.0.0';
  */
 export const CHARTER_SURFACES = Object.freeze([
   'customContent',
-  'styleOverhaul',
+  // ⚰ 'styleOverhaul' RETIRED — ODQ §763.2, Q-STYLE arm 2. This roster is exact-set pinned,
+  // so the row leaves here and in tests/domain/aiCharter.test.js in the same act.
   'construct',
   'interpret',
   'autonomy',
@@ -93,11 +93,6 @@ const SURFACE_ROLE = Object.freeze({
     + ' or pressures they want to exist in their world; you file each one into a REGISTERED'
     + ' content bucket with REGISTERED fields. You never invent a bucket, a field, or a'
     + ' mechanic. The manifest below is the whole of what the engine can read.',
-  styleOverhaul:
-    'You are the map-style clerk. The user describes how their settlement map should LOOK; you'
-    + ' select values for registered visual roles. A style skins the DISPLAY, never the'
-    + ' SUBSTANCE: you cannot add a district, a building, or a place the world does not already'
-    + ' hold: you can only recolour and re-weight what is drawn.',
   construct:
     'You are the construction clerk, for settlements and for realms. The user describes a place'
     + ' they want built; you compile it into generator CONFIG keys plus the coarse target'
@@ -211,31 +206,6 @@ function renderContentVocabulary() {
   return lines.join('\n');
 }
 
-/** The town-map design corpus: the fixed visual vocabularies plus the renderer's role keys. */
-function renderStyleVocabulary() {
-  const vocab = buildStyleVocabulary();
-  const seasons = vocab.seasonBias.map((s) => (s === null ? '(none: follow the world clock)' : s));
-  return [
-    `base lenses (start from one): ${sorted(vocab.baseLenses).join(', ')}`,
-    `furniture (any subset): ${sorted(vocab.furniture).join(', ')}`,
-    `hazard glyphs: ${sorted(vocab.hazardGlyphs).join(', ')}`,
-    `anchor glyphs: ${sorted(vocab.anchorGlyphs).join(', ')}`,
-    `contrast levels: ${sorted(vocab.contrast).join(', ')}`,
-    `glyph sets: ${sorted(vocab.glyphSets).join(', ')}`,
-    `season bias: ${sorted(seasons).join(', ')}`,
-    '',
-    `palette roles (hex colour values): ${sorted(vocab.roles.palette).join(', ')}`,
-    `district roles (hex colour values): ${sorted(vocab.roles.district).join(', ')}`,
-    `stroke roles (line weights, 0 and up): ${sorted(vocab.roles.stroke).join(', ')}`,
-    `opacity roles (0..1): ${sorted(vocab.roles.opacity).join(', ')}`,
-    '',
-    'functional block: grid (true|false), gridStep (number), scaleBar (true|false),'
-    + ' tokenPx (number); rasterScale is a small positive number.',
-    'A role you do not name inherits the base lens value. Naming an unknown role, or a value'
-    + ' outside its bounds, drops that one field and leaves the rest of the style standing.',
-  ].join('\n');
-}
-
 /** The two construction config surfaces plus the constraint vocabulary the comparator judges by. */
 function renderConstructVocabulary() {
   const vocab = buildConstructVocabulary();
@@ -329,7 +299,6 @@ function renderAutonomyVocabulary() {
 /** @type {Readonly<Record<string, () => string>>} */
 const VOCABULARY_RENDERER = Object.freeze({
   customContent: renderContentVocabulary,
-  styleOverhaul: renderStyleVocabulary,
   construct: renderConstructVocabulary,
   interpret: renderOpVocabulary,
   autonomy: renderAutonomyVocabulary,
@@ -338,7 +307,7 @@ const VOCABULARY_RENDERER = Object.freeze({
 // ── 3. EXEMPLARS (hand-authored, one per surface, shaped by the edge validators) ──
 // Each shows ONE request and the correct typed-bucket answer. The shapes mirror the edge
 // contracts the answers are validated against (customContentCore.validateDraftEntries,
-// styleOverhaulCore.STYLE_FIELDS, constructCore.validateConstructConfig,
+// constructCore.validateConstructConfig,
 // interpretCore.validateProposedOps, autonomyCore + the local stop-condition wall), and
 // every named key/value below is drawn from the vocabularies rendered above.
 
@@ -356,19 +325,6 @@ WHY THIS IS RIGHT: the mill went into a registered bucket with registered fields
 mechanical claim ("actually feeds people") landed on the field an engine consumer reads
 (foodImpact) instead of in prose. The mood had no bucket, so it was declared unsupported by
 name rather than smuggled into a text field where nothing would ever read it.`,
-
-  styleOverhaul: `WORKED EXEMPLAR
-
-REQUEST: "Make my map look like a rain-soaked harbour chart, and put the shipyard in the
-north quarter."
-
-CORRECT ANSWER:
-{"style":{"baseLens":"watercolor","label":"Rain-Soaked Chart","background":"#dfe6ea","contrast":"soft","hazardGlyph":"diamond","anchorGlyph":"ring","furniture":["compass","scaleBar","wash"],"functional":{"grid":false,"gridStep":50,"scaleBar":true,"tokenPx":40},"rasterScale":2,"palette":{"water":"#7fa8bd","road":"#8b8375"},"district":{"merchant":"#9fb4a7"},"stroke":{"river":2,"roadBase":3},"opacity":{"districtFill":0.35,"waterFill":0.55}}}
-
-WHY THIS IS RIGHT: every field named is a registered role, and the wet-chart look was reached
-by re-weighting what the map already draws. The shipyard request was refused in musings, not
-composed: a style cannot add a place, and inventing one would have produced a map that lies
-about the settlement.`,
 
   construct: `WORKED EXEMPLAR
 

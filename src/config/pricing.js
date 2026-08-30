@@ -107,7 +107,13 @@ const SURVEYOR_AI_COSTS = Object.freeze({
   interpret:           5,   // one session compile → proposed ops (S3)
   parley:              3,   // one in-character consultation response (S3)
   customContent:       6,   // one homebrew content compile → drafted entries (S4)
-  styleOverhaul:       3,   // one bespoke map-style definition (the S2→S3 rung)
+  // ⚰ styleOverhaul (3 credits) DE-LISTED HERE — ODQ §763.2, Q-STYLE arm 2. The product
+  // no longer sells a bespoke map style, so it no longer quotes a price for one.
+  // ⚠ THE SERVER ARM SURVIVES AND CANNOT BE UN-SAID: `when 'styleOverhaul' then 3` is
+  // written into SEVEN APPLIED migrations (151/152/153/154/161/174/192), and an applied
+  // migration is immutable. That arm is now UNREACHABLE — nothing client-side can name the
+  // feature to spend_credits — but it is not gone, and the pricing contract test pins that
+  // asymmetry deliberately rather than letting it become invisible residue.
   constructSettlement: 6,   // one intent → generated settlement (S5)
   constructRealm:      8,   // one intent → composed realm (S6)
   autonomy:            4,   // one autonomy compose: stop condition + nudges (S7)

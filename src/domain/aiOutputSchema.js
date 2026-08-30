@@ -13,7 +13,7 @@
  *
  * DERIVED, NEVER AUTHORED TWICE. Every enum below is rendered from the SAME live builders the
  * schema walls already trust (AUTHORABLE_CONTENT_BUCKETS and the per-category field contracts,
- * buildStyleVocabulary, buildConstructVocabulary, buildOpVocabulary, PARTY_IMPACT_KINDS, the
+ * buildConstructVocabulary, buildOpVocabulary, PARTY_IMPACT_KINDS, the
  * signal registry, NUDGE_TYPES). A bucket added to a registry appears in the schema without
  * anyone remembering to copy it; a value renamed can never leave a schema permitting a word
  * its own wall rejects. This module is the structural twin of aiCharter.js: same sources, same
@@ -43,15 +43,6 @@
  *    REMAINS  a well-typed entry that means the wrong thing (a mill filed as a service),
  *             mechanical intent smuggled into a presentation field, an entry the world
  *             cannot support. Semantic: the review screen and the repair loop own these.
- *
- *  styleOverhaul
- *    KILLED   unsupported_field (the top-level bag is the EDGE contract's field set exactly,
- *               additionalProperties false)
- *             unknown_role (each role map carries the renderer's own role keys and nothing
- *               else), not_in_vocab, not_hex, out_of_range, not_array, not_object
- *    REMAINS  ugly-but-legal composition, a style that reads nothing like the request, and
- *             THE TRUTH LAW itself (asking for a district the world does not hold is a
- *             musing, not a field, so no schema can express the refusal for the model).
  *
  *  construct
  *    KILLED   unregistered_key (one branch per config surface, additionalProperties false,
@@ -110,19 +101,19 @@ import { signalRegistryEntries } from './autonomy/signalRegistry.js';
 import { MAX_CONDITION_DEPTH } from './autonomy/stopConditions.js';
 import { NUDGE_TYPES, MIN_NUDGE_SEVERITY, MAX_NUDGE_SEVERITY } from './autonomy/accelerationOps.js';
 import { CATCH_UP_CAP_WEEKS } from './worldPulse/simulationRules.js';
-import { buildStyleVocabulary } from '../design/townMapStyleWall.js';
 
 /** Bump when the schema's STRUCTURE changes. The rendered vocabularies move with their own
  *  registries and do not bump this (the same idiom CHARTER_VERSION carries). */
 export const SCHEMA_VERSION = '1.0.0';
 
 /**
- * The surfaces an output schema exists for: the same five compile surfaces CHARTER_SURFACES
+ * The surfaces an output schema exists for: the same compile surfaces CHARTER_SURFACES
  * names. `construct` serves BOTH construct-settlement and construct-realm, one branch each.
  */
 export const SCHEMA_SURFACES = Object.freeze([
   'customContent',
-  'styleOverhaul',
+  // ⚰ 'styleOverhaul' RETIRED — ODQ §763.2, Q-STYLE arm 2. Exact-set pinned, so the row
+  // leaves here and in tests/domain/aiOutputSchema.test.js in the same act.
   'construct',
   'interpret',
   'autonomy',
@@ -150,8 +141,6 @@ const RATIONALE_MAX_LENGTH = 240;
 const SUBJECT_MAX_LENGTH = 80;
 /** An entity or settlement id, as the grounding slices spell it. */
 const TARGET_ID_MAX_LENGTH = 120;
-/** townMapStyleWall.js caps a bespoke style label at 60 characters. */
-const STYLE_LABEL_MAX_LENGTH = 60;
 /** autonomyCore.cleanNudges reads at most 6 nudges and slices a rationale at 160. */
 const NUDGE_MAX_ITEMS = 6;
 const NUDGE_RATIONALE_MAX_LENGTH = 160;
@@ -160,15 +149,6 @@ const CONDITION_LABEL_MAX_LENGTH = 80;
 /** sev01 (domain/events/mutateHelpers.js) clamps an event severity dial to 0..1. */
 const SEVERITY_MIN = 0;
 const SEVERITY_MAX = 1;
-
-// The numeric ceilings and the hex shape THE WALL enforces (src/design/townMapStyleWall.js).
-// They are module-private there, so these are mirrors; tests/domain/aiOutputSchema.test.js
-// re-reads the wall's source and fails closed if either side moves.
-const STYLE_STROKE_MAX = 40;
-const STYLE_RASTER_MAX = 8;
-const STYLE_GRID_STEP_MAX = 500;
-const STYLE_TOKEN_PX_MAX = 400;
-const STYLE_HEX_PATTERN = '^#[0-9a-fA-F]{3,8}$';
 
 // The controlled reason vocabularies. Their authority is the edge core that owns each wall,
 // which sits behind the Deno / src import barrier, so these are mirrors of the SAME lists
@@ -378,63 +358,7 @@ function customContentSchema() {
   }, ['entries']);
 }
 
-// ── 2. styleOverhaul ─────────────────────────────────────────────────────────
-
-/** A role map: the renderer's own role keys, closed, each carrying the role's value shape. */
-/** @param {readonly string[]} roles @param {JsonSchema} value @returns {JsonSchema} */
-function roleMapNode(roles, value) {
-  /** @type {Record<string, JsonSchema>} */
-  const properties = {};
-  for (const role of sorted(roles)) properties[role] = value;
-  return objectNode(properties);
-}
-
-/**
- * @returns {JsonSchema}
- *
- * DELIBERATE EXCLUSION, recorded (vetoable): `id` is assigned by the caller through the
- * wall's `meta` argument, never composed by the model.
- *
- * FINDING F-C CLOSED (wave L-WIRE). `glyphSet` and `seasonBias` were excluded here because
- * the EDGE contract (styleOverhaulCore.STYLE_FIELDS) omitted them, so offering them would
- * have manufactured the very unsupported_field verdict this schema exists to prevent. That
- * omission was the bug, and L-WIRE fixed it on the edge side: both fields now ride the edge
- * contract, the client wall has accepted both since IT-4, and the charter already taught
- * them. So they are offered here too, from the SAME buildStyleVocabulary the wall uses.
- * `seasonBias` renders the four bounded seasons only: the vocabulary carries a leading
- * `null` meaning "follow the live world clock", and absence already says that, so a null
- * member would add a second spelling of the default while making the enum unsortable.
- */
-function styleOverhaulSchema() {
-  const vocab = buildStyleVocabulary();
-  const hex = { type: 'string', pattern: STYLE_HEX_PATTERN };
-  const style = objectNode({
-    anchorGlyph: enumNode(vocab.anchorGlyphs),
-    background: hex,
-    baseLens: enumNode(vocab.baseLenses),
-    contrast: enumNode(vocab.contrast),
-    district: roleMapNode(vocab.roles.district, hex),
-    functional: objectNode({
-      grid: { type: 'boolean' },
-      gridStep: numberNode(0, STYLE_GRID_STEP_MAX),
-      scaleBar: { type: 'boolean' },
-      tokenPx: numberNode(0, STYLE_TOKEN_PX_MAX),
-    }),
-    furniture: arrayNode(enumNode(vocab.furniture)),
-    glyphSet: enumNode(vocab.glyphSets),
-    hazardGlyph: enumNode(vocab.hazardGlyphs),
-    label: stringNode(STYLE_LABEL_MAX_LENGTH),
-    opacity: roleMapNode(vocab.roles.opacity, numberNode(0, 1)),
-    palette: roleMapNode(vocab.roles.palette, hex),
-    // The wall admits a raster scale strictly above zero, so the floor is exclusive.
-    rasterScale: { type: 'number', exclusiveMinimum: 0, maximum: STYLE_RASTER_MAX },
-    seasonBias: enumNode(vocab.seasonBias.filter((v) => typeof v === 'string')),
-    stroke: roleMapNode(vocab.roles.stroke, numberNode(0, STYLE_STROKE_MAX)),
-  });
-  return objectNode({ musings: musingsNode(), rider: riderNode(), style }, ['style']);
-}
-
-// ── 3. construct ─────────────────────────────────────────────────────────────
+// ── 2. construct ─────────────────────────────────────────────────────────────
 
 /**
  * @param {{ type: string, values?: readonly string[], min?: number, max?: number,
@@ -481,7 +405,7 @@ function constructSchema() {
   }, ['config']);
 }
 
-// ── 4. interpret ─────────────────────────────────────────────────────────────
+// ── 3. interpret ─────────────────────────────────────────────────────────────
 
 /**
  * The canon-event params bag: THE F-B SHAPE, made structural. interpretCore teaches
@@ -564,7 +488,7 @@ function interpretSchema() {
   }, ['ops']);
 }
 
-// ── 5. autonomy ──────────────────────────────────────────────────────────────
+// ── 4. autonomy ──────────────────────────────────────────────────────────────
 
 /**
  * The registry, grouped by (type, scope). Every id in a group takes the SAME test shape and
@@ -669,7 +593,6 @@ function autonomySchema() {
 /** @type {Readonly<Record<string, () => JsonSchema>>} */
 const SURFACE_BUILDER = Object.freeze({
   customContent: customContentSchema,
-  styleOverhaul: styleOverhaulSchema,
   construct: constructSchema,
   interpret: interpretSchema,
   autonomy: autonomySchema,
@@ -680,8 +603,6 @@ const SURFACE_BUILDER = Object.freeze({
 const SURFACE_DESCRIPTION = Object.freeze({
   customContent: 'Proposed custom-content entries, each filed into a registered bucket with'
     + ' registered fields, plus anything the manifest cannot express.',
-  styleOverhaul: 'One bespoke map style, composed only from registered visual roles and'
-    + ' values. A style skins the display, never the substance.',
   construct: 'A generator config drawn from one construction vocabulary, plus the coarse'
     + ' target constraint bands the result is meant to satisfy.',
   interpret: 'Proposed operations compiled from a session account, drawn only from the'

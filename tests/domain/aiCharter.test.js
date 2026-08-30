@@ -38,7 +38,6 @@ import { buildConstructVocabulary } from '../../src/domain/construct/configVocab
 import { buildOpVocabulary } from '../../src/domain/intent/opVocabulary.js';
 import { signalRegistryEntries } from '../../src/domain/autonomy/signalRegistry.js';
 import { NUDGE_TYPES } from '../../src/domain/autonomy/accelerationOps.js';
-import { buildStyleVocabulary } from '../../src/design/townMapStyleWall.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const MODULE_PATH = join(ROOT, 'src/domain/aiCharter.js');
@@ -55,16 +54,6 @@ function liveVocabularyTokens(surface) {
     }
     return tokens;
   }
-  if (surface === 'styleOverhaul') {
-    const vocab = buildStyleVocabulary();
-    return [
-      ...vocab.furniture, ...vocab.hazardGlyphs, ...vocab.anchorGlyphs, ...vocab.contrast,
-      ...vocab.baseLenses, ...vocab.glyphSets,
-      ...vocab.seasonBias.filter((s) => typeof s === 'string'),
-      ...vocab.roles.palette, ...vocab.roles.district,
-      ...vocab.roles.stroke, ...vocab.roles.opacity,
-    ];
-  }
   if (surface === 'construct') {
     const vocab = buildConstructVocabulary();
     return [
@@ -80,11 +69,15 @@ function liveVocabularyTokens(surface) {
 }
 
 describe('the charter surface roster', () => {
-  test('the declared surfaces are exactly the five AI write surfaces, frozen', () => {
+  test('the declared surfaces are exactly the four AI write surfaces, frozen', () => {
     expect(Object.isFrozen(CHARTER_SURFACES)).toBe(true);
     expect([...CHARTER_SURFACES].sort()).toEqual(
-      ['autonomy', 'construct', 'customContent', 'interpret', 'styleOverhaul'],
+      ['autonomy', 'construct', 'customContent', 'interpret'],
     );
+    // ⚰ 'styleOverhaul' RETIRED (ODQ §763.2, Q-STYLE arm 2). Absence WITH a liveness
+    // anchor, so an emptied roster cannot pass as a de-list.
+    expect(CHARTER_SURFACES).not.toContain('styleOverhaul');
+    expect(CHARTER_SURFACES).toContain('customContent');
   });
 
   test('the version is a literal semver-shaped string', () => {

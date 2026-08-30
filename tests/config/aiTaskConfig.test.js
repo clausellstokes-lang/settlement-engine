@@ -33,12 +33,30 @@ describe('aiTaskConfig — routing classes', () => {
     }
   });
 
-  it('styleOverhaul is FAST (cosmetic, ugly-never-unsafe); content + construction are BALANCED', () => {
-    expect(routingFor('styleOverhaul')).toBe('fast');
-    expect(modelForTask('styleOverhaul')).toBe('claude-haiku-4-5');
+  it('content + construction are BALANCED', () => {
     expect(routingFor('customContent')).toBe('balanced');
     expect(routingFor('constructSettlement')).toBe('balanced');
     expect(routingFor('constructRealm')).toBe('balanced');
+  });
+
+  // ⚰ THE RETIRED FAST ROW, MIRRORED (ODQ §763.2, Q-STYLE arm 2). styleOverhaul was this
+  // map's ONLY `routing: 'fast'` task, so its removal is the one change here that alters
+  // what the config can DEMONSTRATE, and saying so is the point of keeping an arm at all.
+  it('RETIRED: styleOverhaul is no longer a task, and degrades to the unknown-task default', () => {
+    expect(Object.keys(AI_TASK_CONFIG)).not.toContain('styleOverhaul');
+    // Liveness anchor — the map is still populated, so the absence above is a de-list and
+    // not an emptied config that would satisfy the same assertion.
+    expect(Object.keys(AI_TASK_CONFIG)).toContain('customContent');
+    expect(routingFor('styleOverhaul')).toBe('balanced');
+  });
+
+  it('the FAST class stays wired even with no task routing to it', () => {
+    // The class survives its last task. Asserted because a routing class that nothing
+    // exercises is exactly the kind of thing a later cleanup deletes as "unused", and
+    // ROUTING_CLASS_MODEL is the contract a re-homed style capability would route through.
+    expect(AI_ROUTING_CLASSES).toContain('fast');
+    expect(ROUTING_CLASS_MODEL.fast).toBe('claude-haiku-4-5');
+    expect(Object.values(AI_TASK_CONFIG).map((c) => c.routing)).not.toContain('fast');
   });
 });
 

@@ -39,14 +39,16 @@ export const ROUTING_CLASS_MODEL = Object.freeze({
 /**
  * Per-task config. `routing` picks the model class; `maxTokens` bounds the structured output;
  * `sliceBudget` caps retrieval ({ maxSlices, maxChars } per slice); `tokenBudget` is the soft
- * ceiling for the anomaly flag. JUDGMENT (vetoable): styleOverhaul routes FAST — a cosmetic,
- * schema-walled, ugly-never-unsafe compile; the content + construction stages route BALANCED
- * (sonnet) — structured, schema-constrained emit where the deterministic comparator/validator
- * does the judging, so opus is reserved for a comparator-demanded deep revise, not the default.
+ * ceiling for the anomaly flag. The content + construction stages route BALANCED (sonnet) —
+ * structured, schema-constrained emit where the deterministic comparator/validator does the
+ * judging, so opus is reserved for a comparator-demanded deep revise, not the default.
+ * ⚰ styleOverhaul's row WAS RETIRED HERE (ODQ §763.2, Q-STYLE arm 2). It was this map's ONLY
+ * `routing: 'fast'` entry — so with it goes the only live demonstration that the fast class
+ * is reachable at all. `routingFor` still defaults an unknown task to 'balanced', which is
+ * what every retired call site now gets.
  */
 export const AI_TASK_CONFIG = Object.freeze({
   customContent:       Object.freeze({ routing: 'balanced', maxTokens: 3000, sliceBudget: Object.freeze({ maxSlices: 8, maxChars: 3000 }), tokenBudget: 14000 }),
-  styleOverhaul:       Object.freeze({ routing: 'fast',     maxTokens: 1500, sliceBudget: Object.freeze({ maxSlices: 4, maxChars: 2000 }), tokenBudget: 8000 }),
   constructSettlement: Object.freeze({ routing: 'balanced', maxTokens: 1800, sliceBudget: Object.freeze({ maxSlices: 6, maxChars: 2500 }), tokenBudget: 12000 }),
   constructRealm:      Object.freeze({ routing: 'balanced', maxTokens: 1800, sliceBudget: Object.freeze({ maxSlices: 6, maxChars: 2500 }), tokenBudget: 12000 }),
   autonomy:            Object.freeze({ routing: 'balanced', maxTokens: 1500, sliceBudget: Object.freeze({ maxSlices: 6, maxChars: 2500 }), tokenBudget: 10000 }),

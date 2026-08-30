@@ -118,9 +118,15 @@ describe('AI cost server contract', () => {
   // Provisional pricing (owner-queued); when the owner re-tunes, all three move together.
   const SURVEYOR_PRICES = {
     analysis: 3, brief: 4, interpret: 5, parley: 3,
-    customContent: 6, styleOverhaul: 3, constructSettlement: 6, constructRealm: 8,
+    customContent: 6, constructSettlement: 6, constructRealm: 8,
     autonomy: 4,
   };
+
+  // ⚰ styleOverhaul (3) DE-LISTED — ODQ §763.2, Q-STYLE arm 2. Trimming the row above is
+  // the whole cure for the two loops below, because both iterate the CLIENT's keys. That is
+  // also exactly why the trim alone would be dishonest: it silently stops checking a CASE
+  // arm that is still in the database and can never be removed. So the residue is named.
+  const DELISTED_SURVEYOR_PRICES = { styleOverhaul: 3 };
 
   it('surveyor task prices match the map and the accessor', () => {
     expect(_internal.SURVEYOR_AI_COSTS).toEqual(SURVEYOR_PRICES);
@@ -142,6 +148,37 @@ describe('AI cost server contract', () => {
       // 'brief' is priced client-side only (S2 has no spend_credits arm of its own).
       if (feature === 'brief') continue;
       expect(arms[feature], `${file}: spend_credits CASE charges ${arms[feature]} for ${feature}, client quotes ${price}`).toBe(price);
+    }
+  });
+
+  /**
+   * ⚰⚠ THE DE-LISTED ARM IS STILL IN THE DATABASE, AND THAT IS PINNED RATHER THAN FORGOTTEN.
+   *
+   * ODQ §763.2 retired styleOverhaul on the client. It could not retire it in SQL: the
+   * `when 'styleOverhaul' then 3` arm is written into SEVEN APPLIED migrations
+   * (151/152/153/154/161/174/192) and an applied migration is immutable.
+   *
+   * The loop above iterates the CLIENT's price keys, so the moment `styleOverhaul` left
+   * SURVEYOR_PRICES that arm stopped being compared by anything at all — a live, chargeable
+   * server behaviour with no test looking at it. That is the residue this wave would
+   * otherwise have created, and it is the exact shape of defect the wave exists to remove
+   * (a menu advertising a deleted chapter), only pointed at the ledger instead of the page.
+   *
+   * So the arm is asserted DIRECTLY, with its price, and its unreachability is asserted as
+   * a property of the CLIENT rather than assumed: nothing the client can name reaches it.
+   * ⛔ A RED HERE IS NOT CURED BY DELETING THIS TEST. If the arm's price moved, an applied
+   * migration was edited. If the client quotes styleOverhaul again, the capability came
+   * back and belongs in SURVEYOR_PRICES with a fresh owner signature.
+   */
+  it('DE-LISTED: the immutable spend_credits arm survives, priced, and unreachable from the client', () => {
+    const { file, body } = netCurrentSpendCredits();
+    const arms = caseArms(body);
+    for (const [feature, price] of Object.entries(DELISTED_SURVEYOR_PRICES)) {
+      expect(arms[feature], `${file}: the immutable ${feature} CASE arm went missing — an applied migration cannot lose an arm`).toBe(price);
+      // …and no client-side surface can name it: not the price map, not the accessor,
+      // not the public task menu. Each is a separate way the feature could come back.
+      expect(_internal.SURVEYOR_AI_COSTS[feature], `${feature} is quoted again`).toBeUndefined();
+      expect(getSurveyorAiCost(feature), `${feature} accessor still resolves`).toBe(0);
     }
   });
 
@@ -180,8 +217,18 @@ describe('AI cost server contract', () => {
     // multiplier is ever changed without the owner's signature, this reds and
     // names the cell. Includes the unknown-feature cell (0), which is where a
     // naive `Math.max(1, ...)` clamp would break identity by quoting 1.
+    // ⚰⭐ THE DE-LISTED FEATURE STAYS IN THIS LOOP (ODQ §763.2). Dropping it with its price
+    // row would have been the smaller edit and the wrong one: the cell that matters most
+    // after a de-list is whether the TIER MACHINERY can resurrect a price the client no
+    // longer quotes. It cannot — a de-listed feature quotes 0 at every tier, and that is
+    // now executed rather than assumed. The cell count is unchanged at 60 for the same
+    // reason, so this pin's non-vacuity floor did not have to move at all.
     const tiers = [null, undefined, 'scout', 'journeyman', 'master', 'archmage'];
-    const features = [...Object.keys(SURVEYOR_PRICES), 'nope'];
+    const features = [
+      ...Object.keys(SURVEYOR_PRICES),
+      ...Object.keys(DELISTED_SURVEYOR_PRICES),
+      'nope',
+    ];
     const mismatches = [];
     for (const feature of features) {
       const base = getSurveyorAiCost(feature);
@@ -568,7 +615,10 @@ describe('surveyor panels resolve their price per render, not at import', () => 
     }
     // Guard-the-guard: if the roster ever reads 0 the scan found nothing to
     // check and this suite would be green on an empty set.
-    expect(callers, 'no component imports getSurveyorAiCost — the scan broke').toBeGreaterThanOrEqual(8);
+    // ⚠ 8 → 7 (ODQ §763.2): StyleOverhaulPanel.jsx was one of the eight importers and is
+    // deleted. This floor moves DOWN ONLY, and only for a genuine retirement — raising it to
+    // clear a red would be raising the bar on a detector that had already collapsed.
+    expect(callers, 'no component imports getSurveyorAiCost — the scan broke').toBeGreaterThanOrEqual(7);
     expect(offenders, `\nmove these inside the component body:\n${offenders.join('\n')}\n`).toEqual([]);
   });
 });

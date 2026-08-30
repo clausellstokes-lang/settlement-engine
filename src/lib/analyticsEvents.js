@@ -209,8 +209,9 @@ export const EVENTS = Object.freeze({
   //    (feature ∈ provenance_hover|change_view|edge_labels|annotation_add|
   //    lens_switch|panorama; counts/enums/bands only). The post-launch fog +
   //    interior layers INHERIT this event with new `feature` values (no new names).
-  //    Lens/style RADAR for AI style-compiles is already captured server-side
-  //    (ai_stage_* feature:'styleOverhaul') — this is the distinct RENDER moment.
+  //    (⚰ this note used to point at a server-side lens/style radar for AI
+  //    style-compiles, feature:'styleOverhaul'; ODQ §763.2 retired that capability,
+  //    so this event is now the ONLY place a lens/style moment is captured.)
   TOWN_MAP_LAYER_USED:            'town_map_layer_used',
   // W-DOC (rev 11): the Welcome landing funnel — ONE feature-discriminated event
   // (the town_map_layer_used precedent): feature:'view' | 'fixture_forge'.
@@ -271,18 +272,22 @@ export const EVENTS = Object.freeze({
   // also tags entity-class + topic-class so the atlas learns what tables rehearse.
   AI_PARLEY_RIDER:                'ai_parley_rider',
 
-  // ── Surveyor S4–S6: the WRITE stages (custom content, style overhaul, construct
-  //    settlement, construct realm) §5 evals — coarse, id-free. ONE shared answer/rider
-  //    pair for all four stages, discriminated by props.feature (eager-frugal: the
-  //    AI-surface ~0-eager rule + the shared closure margin — two names, not eight).
+  // ── Surveyor S4–S6: the WRITE stages (custom content, construct settlement,
+  //    construct realm) §5 evals — coarse, id-free. ONE shared answer/rider pair for
+  //    all the stages, discriminated by props.feature (eager-frugal: the AI-surface
+  //    ~0-eager rule + the shared closure margin — two names, not one per stage).
   // Props (never content): { feature, stage, total, mechanicalCount, flavorCount,
   // unsupportedCount, deviationCount, coverageBand, refused, byok, earlyAccess }.
-  // feature ∈ {customContent, styleOverhaul, constructSettlement, constructRealm}.
+  // feature ∈ {customContent, constructSettlement, constructRealm}.
+  // ⚰ 'styleOverhaul' left this vocabulary with the capability (ODQ §763.2). The EVENT
+  // NAMES are unchanged and no historical row is rewritten — a feature-discriminated
+  // event keeps meaning what it meant when it was emitted.
   AI_STAGE_ANSWER:                'ai_stage_answer',
   // §3f THE ENRICHMENT RIDER for the S4–S6 write stages (ID-FREE, condition-of-service,
   // managed AND BYOK). Same controlled vocabulary + conflicted-witness rule as S1/S3;
-  // carries props.feature + the style-domain vocabulary (base lens, palette family,
-  // motif class, oov) when feature = styleOverhaul (the §3f/§4b lens roadmap radar).
+  // carries props.feature. ⚰ Its style-domain vocabulary arm (base lens, palette family,
+  // motif class, oov — the §3f/§4b lens roadmap radar) fired only when feature was
+  // 'styleOverhaul', and retires with it (ODQ §763.2); the rider itself is unchanged.
   AI_STAGE_RIDER:                 'ai_stage_rider',
 
   // ── VISION WAVE adoption signal — the ONE id-free verdict event shared by the

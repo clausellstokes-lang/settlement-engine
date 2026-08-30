@@ -85,7 +85,9 @@ export const pricingPage = {
         interpret:           'Interpret a session',
         parley:              'Parley in character',
         customContent:       'Compile homebrew content',
-        styleOverhaul:       'Design a bespoke map style',
+        // ⚰ 'Design a bespoke map style' REMOVED — ODQ §763.2, Q-STYLE arm 2. This is the
+        // PUBLIC task menu; leaving the row would have advertised, by name and price, a
+        // capability with no surface left to invoke it.
         constructSettlement: 'Construct a settlement from intent',
         constructRealm:      'Construct a realm from intent',
         narrative:           'Narrate a settlement',
