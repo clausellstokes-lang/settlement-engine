@@ -40,6 +40,11 @@ import { useStore } from '../../store/index.js';
 // code-quality-6: import the leaf, not the 22-module worldPulse barrel — a static
 // barrel import would drag the whole pulse engine into this component's chunk.
 import { normalizeSimulationRules } from '../../domain/worldPulse/simulationRules.js';
+// WEAVE SEAM-5 — both are zero-import leaves ON PURPOSE. This control is on the
+// first-paint side, and the module that already answers "did the canon map this
+// settlement" (`distanceRead.isMapped`) is the ~53 kB frozen-digest reader whose
+// docblock forbids exactly this import. See canonMembership.js's own header.
+import { foundingsSinceMappedNote } from '../../domain/spatial/canonMembership.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -79,6 +84,17 @@ const GEOGRAPHY_HELP = 'Map geography freezes this realm’s territories, routes
 // nor proves one did not, and the copy must not claim otherwise. Offering the
 // refreeze is always safe; asserting the canon is stale would not be.
 const DIVERGENCE_NOTE = 'Terrain tools were used — geography may have changed since this realm was mapped. Re-map to refreeze.';
+// W-SEAM SEAM-5 (S5) — the OWED-RE-CANONIZE signal.
+//
+// A canonize freezes the realm around the settlements that existed at that moment.
+// Found three more the next evening and the canon does not carry them: no territory,
+// no gates, no distance row. Every engine seam handles that honestly — an unmapped
+// endpoint is left unattenuated rather than measured wrongly — but nobody was ever
+// TOLD, and the button read "Geography mapped ✓" whether the canon covered the whole
+// realm or two thirds of it. The COUNT and its SENTENCE both come from the spatial
+// leaf (`distanceLegibility`'s precedent: a read that hands a surface a phrase), so
+// the wording is pinned without rendering anything and this file holds a conditional
+// and no copy of its own.
 
 /**
  * Phase 5.5 KEYSTONE — the ENTITLED spatial opt-in, surfaced beside the living-
@@ -113,6 +129,10 @@ function SpatialCanonGate({ campaign, canWrite }) {
 
   const version = Number(campaign?.worldState?.spatialCanonVersion) || 0;
   const mapped = version > 0;
+  // SEAM-5: how many of this campaign's seats the frozen canon never saw. The
+  // membership rides the campaign record, so no store read is added and the count
+  // is a pure function of the two things this component already holds.
+  const foundings = foundingsSinceMappedNote(campaign?.worldState, campaign?.settlementIds);
 
   const handleLockedReach = () => {
     triggerPricingMoment('map_realm_teaser', setActivePricingMoment, { tier });
@@ -151,6 +171,11 @@ function SpatialCanonGate({ campaign, canWrite }) {
   // SEAM-1: only meaningful once a canon exists to diverge FROM, and only while the
   // control is not mid-refreeze.
   const showDivergence = mapped && mayHaveDiverged && !busy;
+  // SEAM-5: the same shape, for the other reason a canon can be behind. The two are
+  // INDEPENDENT and both can be true — one says the ground may have moved, the other
+  // says the realm grew — so they get a line each rather than one blurred sentence.
+  const showFoundings = mapped && !!foundings && !busy;
+  const owedRemap = showDivergence || showFoundings;
 
   return (
     <div style={{ display: 'grid', gap: 2 }}>
@@ -162,12 +187,14 @@ function SpatialCanonGate({ campaign, canWrite }) {
         aria-label={
           showDivergence
             ? `Geography may have changed since spatial canon v${version} — re-map to refreeze`
-            : mapped ? `Geography mapped, spatial canon v${version}` : 'Map geography'
+            : showFoundings
+              ? `${foundings.phrase} Spatial canon v${version}`
+              : mapped ? `Geography mapped, spatial canon v${version}` : 'Map geography'
         }
         onClick={onClick}
         style={{ fontSize: FS.xxs, fontWeight: 900, minHeight: 26, padding: '4px 8px' }}
       >
-        {showDivergence ? 'Re-map geography' : mapped ? 'Geography mapped ✓' : busy ? 'Mapping…' : 'Map geography'}
+        {owedRemap ? 'Re-map geography' : mapped ? 'Geography mapped ✓' : busy ? 'Mapping…' : 'Map geography'}
       </Button>
       {showDivergence && (
         <span
@@ -175,6 +202,14 @@ function SpatialCanonGate({ campaign, canWrite }) {
           style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}
         >
           {DIVERGENCE_NOTE}
+        </span>
+      )}
+      {showFoundings && (
+        <span
+          data-testid="spatial-canon-foundings"
+          style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}
+        >
+          {foundings.phrase}
         </span>
       )}
       {note && (

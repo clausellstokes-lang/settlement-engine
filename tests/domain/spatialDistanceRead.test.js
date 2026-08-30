@@ -26,7 +26,13 @@ import {
   PRIMARY_HOP_WEEKS_ANCHOR,
   DISTANCE_WEIGHT_FLOOR,
   MAX_HOP_WEEKS,
+  isMapped,
 } from '../../src/domain/spatial/distanceRead.js';
+import {
+  mappedSettlementIds,
+  foundingsSinceMapped,
+  foundingsSinceMappedNote,
+} from '../../src/domain/spatial/canonMembership.js';
 
 function fixtureDigest(count = 8) {
   const pack = makeGridPack({ cols: 24, rows: 18 });
@@ -132,5 +138,85 @@ describe('MODULATION — distanceRead', () => {
     expect(activeSpatialDigest({ spatialCanonVersion: 1 })).toBeNull();
     expect(activeSpatialDigest({ spatialCanonVersion: 1, spatialDigest: {} })).toBeNull();
     expect(activeSpatialDigest(null)).toBeNull();
+  });
+});
+
+// ── WEAVE SEAM-5 · the owed-re-canonize signal ──────────────────────────────
+describe('SEAM-5 — how far behind its realm a frozen canon is', () => {
+  const canonized = (count = 8) => ({ spatialCanonVersion: 1, spatialDigest: fixtureDigest(count) });
+
+  it('⭐ agrees with isMapped on every id — the two-spellings hazard, pinned rather than promised', () => {
+    // THE ONE RISK THIS LEAF CREATES. `distanceRead.isMapped` already answers "did
+    // the canon map this settlement", and it could not be imported here: it lives in
+    // the ~53 kB frozen-digest reader whose own docblock says it never reaches first
+    // paint, and the consumer is a settings control on the first-paint side. So the
+    // read was extracted rather than imported — the house leaf move — and a second
+    // spelling of one membership is exactly the drift that would follow. This is the
+    // pin that reds if the canon's membership field ever moves under either of them.
+    const world = canonized(12);
+    const ids = world.spatialDigest.settlementIds;
+    const mapped = mappedSettlementIds(world);
+    expect(mapped).toBeInstanceOf(Set);
+    for (const id of ids) {
+      expect(mapped.has(String(id))).toBe(isMapped(world.spatialDigest, id));
+    }
+    // …and on ids the canon never saw, both say no.
+    for (const ghost of ['ghost', 's999', '']) {
+      expect(mapped.has(ghost)).toBe(isMapped(world.spatialDigest, ghost));
+    }
+  });
+
+  it('counts the seats the canon never saw, and only those', () => {
+    const world = canonized(8);
+    const mappedIds = world.spatialDigest.settlementIds.map(String);
+    expect(foundingsSinceMapped(world, mappedIds)).toBe(0);
+    expect(foundingsSinceMapped(world, [...mappedIds, 'new001', 'new002', 'new003'])).toBe(3);
+    // A repeated id is one PLACE, so it counts once.
+    expect(foundingsSinceMapped(world, [...mappedIds, 'new001', 'new001'])).toBe(1);
+    // A canon that mapped a seat the campaign has since dropped is not "behind".
+    expect(foundingsSinceMapped(world, mappedIds.slice(0, 3))).toBe(0);
+  });
+
+  it('an UNMAPPED realm is not a realm behind on its mapping', () => {
+    // No canon ⇒ 0, never "all of them". The control says "Map geography" there and
+    // counts nothing, so a count would be a sentence nobody sees and a number that
+    // means the opposite of what it says.
+    for (const world of [null, undefined, {}, { spatialCanonVersion: 0, spatialDigest: fixtureDigest() },
+      { spatialCanonVersion: 1 }, { spatialCanonVersion: 1, spatialDigest: {} }]) {
+      expect(mappedSettlementIds(world)).toBeNull();
+      expect(foundingsSinceMapped(world, ['a', 'b', 'c'])).toBe(0);
+      expect(foundingsSinceMappedNote(world, ['a', 'b', 'c'])).toBeNull();
+    }
+  });
+
+  it('speaks the count in world words and mints no digit', () => {
+    // §754.3 as the owner ruled it: abstract engine scalars die at mint, honest
+    // concrete counts in world words stay. The exact sentences are pinned here so the
+    // copy is proved without rendering a component — the control holds a conditional
+    // and no wording of its own.
+    const world = canonized(8);
+    const ids = world.spatialDigest.settlementIds.map(String);
+    const note = (extra) => foundingsSinceMappedNote(world, [...ids, ...extra]);
+
+    expect(note([])).toBeNull();                       // nothing to say, so nothing said
+    expect(note(['n1'])).toEqual({
+      count: 1,
+      phrase: 'One settlement has been founded since this realm was mapped. Re-map to bring it into the canon.',
+    });
+    expect(note(['n1', 'n2', 'n3'])).toEqual({
+      count: 3,
+      phrase: 'Three settlements have been founded since this realm was mapped. Re-map to bring them into the canon.',
+    });
+    // Past the closed table the word is 'several', which is honest rather than wrong.
+    const many = note(Array.from({ length: 30 }, (_, i) => `n${i}`));
+    expect(many.count).toBe(30);
+    expect(many.phrase).toMatch(/^Several settlements have been founded/);
+    // NO DIGIT ON THIS PATH, at any count.
+    for (const n of [1, 2, 7, 24, 30]) {
+      const phrase = note(Array.from({ length: n }, (_, i) => `x${i}`)).phrase;
+      expect(phrase).toMatch(/settlements? (has|have) been founded since this realm was mapped/);
+      // anchored: the positive toMatch above proves the sentence is really there, so a phrase that emptied or drifted cannot satisfy this by absence
+      expect(phrase).not.toMatch(/[0-9]/);
+    }
   });
 });

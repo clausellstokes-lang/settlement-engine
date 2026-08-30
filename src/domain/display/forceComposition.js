@@ -76,6 +76,7 @@
  */
 
 import { deriveMagicProfile, magicRoleBands } from '../magicProfile.js';
+import { numberWord } from './numberWords.js';
 
 /** @param {unknown} a @param {unknown} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
@@ -322,16 +323,12 @@ export function deriveForceComposition({ settlement, record } = {}) {
 // no digit anywhere. The table covers 1..24, which is every value the contingent
 // bands above can produce; anything outside it falls back to "several", which is
 // honest rather than wrong.
-const NUMBER_WORDS = Object.freeze([
-  '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
-  'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen',
-  'eighteen', 'nineteen', 'twenty', 'twenty-one', 'twenty-two', 'twenty-three', 'twenty-four',
-]);
-
-/** @param {number} n @returns {string} */
-function numberWord(n) {
-  return NUMBER_WORDS[n] || 'several';
-}
+//
+// WEAVE SEAM-5 RE-HOMED THE TABLE. It needed the same spelling for a campaign
+// settings surface, and a second copy of a twenty-four-word table is the shape the
+// estate has already paid for once (six `fnv1a32` copies, now a chartered
+// consolidation). The words and the function body are UNCHANGED — a re-home, not a
+// re-write — so no prose this file mints has moved.
 
 /**
  * The world word for each unit type, singular and plural. Catalog-anchored
