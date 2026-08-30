@@ -1,32 +1,34 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/components/createWorkflowRail.test.jsx — the Create-page workflow block.
+ * tests/components/createWorkflowRail.test.jsx — the post-forge seat order.
  *
- * The generation-steps rail (components/PipelineRail.jsx) lost its Create-page
- * seat when the dossier's dead Simulation tab was excised (3176e22d) and lived
- * on only behind the SimulationDrawer trigger. The owner directive (2026-07-31)
- * restores it to the create flow, seated IMMEDIATELY BEFORE the film block — the
- * pipeline reveal, which is the create flow's video surface.
+ * HISTORY OF THIS SEAT. The generation-steps rail held the Create-page seat
+ * ahead of the film under the 2026-07-31 directive, and this file pinned that
+ * seat. The owner's post-forge ruling (ODQ §767.2, amended by §777, 2026-08-30)
+ * SUPERSEDES it: the above-dossier receipts panel was burying the star exhibit
+ * (the dossier sat ~1,900px below the page head behind the receipts), so it is
+ * deleted outright and the dossier lands HEAD-FIRST after forging. The
+ * simulation record's one remaining door on this surface is the toolbar's
+ * drawer trigger. This file now pins the RULED order, and each pin can go
+ * wrong on its own:
  *
- * What this pins, and why each one can go wrong on its own:
- *   • THE SEAT — the block renders in the create flow and precedes the video
- *     node in document order (a later insertion point would put the workflow
- *     behind the film it is meant to introduce). Pinned on the ONE shared
- *     column GenerateWizard renders at both breakpoints, and asserted on mobile
- *     too so a future breakpoint fork cannot drop one side silently.
- *   • THE LABELS ARE NOT FORKED — the rows read through the real step registry
- *     (generators/steps/stepMetadata.js). The assertion derives its expected
- *     text from metaForStep itself, so a hand-written label list in the UI would
- *     have to match the registry to pass, and a registry relabel drags the
- *     expectation with it.
- *   • IT IS LIVE — the rail re-renders off the store's pipelineHistory, the same
- *     onStep receipts the reveal plays back, so steps appear as a run lands them.
- *   • IT SELF-HIDES — no history, no block (a rail asserting nothing is worse
- *     than no rail), proven against a render where the video node IS present.
- *
- * The dossier/toolbar cluster is suppressed by the reveal being active, so only
- * the two lazy children need stubbing; the rail itself is deliberately REAL.
+ *   • NO RECEIPTS ABOVE THE FOLD — the post-forge flow renders no
+ *     "How this was simulated" rail block, on either breakpoint, proven
+ *     against a render where the dossier body IS present (positive control —
+ *     an empty render would pass a bare absence check vacuously).
+ *   • THE DOSSIER LANDS HEAD-FIRST — the sticky toolbar is the first block
+ *     and the dossier body follows it immediately; the world lock controls
+ *     sit BELOW the dossier in document order (controls, not head furniture).
+ *   • THE FORGE TICKER STILL GATES HONESTLY — while the reveal overlay is
+ *     active the dossier cluster is withheld; dismissal is what lands the
+ *     reader on the dossier head (the ticker itself is owner-signed to play
+ *     through, a52a88b1).
+ *   • THE RECORD STAYS REACHABLE AND LAZY — the rail's import graph
+ *     (stepMetadata / trace / simulationSpine) is reached ONLY through the
+ *     drawer's dynamic import; a static import anywhere in src/ would fold
+ *     that graph into a first-paint chunk, and a second dynamic importer
+ *     would mean someone re-seated the deleted panel.
  */
 
 import React from 'react';
@@ -35,8 +37,6 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
-
-import { metaForStep } from '../../src/generators/steps/stepMetadata.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -48,15 +48,24 @@ vi.mock('../../src/lib/analytics.js', () => ({
   EVENTS: new Proxy({}, { get: (_t, k) => String(k) }),
 }));
 
-// The video surface. Stubbed to a bare marker: this test is about WHERE the
-// workflow block sits relative to it, not about the film's own playback (which
-// pulls the journey manifest + media assets and is pinned elsewhere).
+// The forge ticker overlay. Stubbed to a bare marker: this test is about the
+// order of the post-forge surface, not the ticker's own playback.
 vi.mock('../../src/components/generate/PipelineReveal.jsx', () => ({
-  default: () => <div data-testid="video-node">film</div>,
+  default: () => <div data-testid="reveal-node">film</div>,
+}));
+// The dossier body — the star exhibit. A marker stands in for the ~457kB chunk.
+vi.mock('../../src/components/OutputContainer', () => ({
+  default: () => <div data-testid="dossier-body">dossier</div>,
 }));
 vi.mock('../../src/components/dossier/LockControls.jsx', () => ({
-  default: () => <div>lock-controls</div>,
+  default: () => <div data-testid="lock-controls">lock-controls</div>,
 }));
+// Save-row leaves — presence is enough; their own behavior is pinned elsewhere.
+vi.mock('../../src/components/generate/SaveToLibraryButton.jsx', () => ({
+  SaveToLibraryButton: () => <div data-testid="save-row">save</div>,
+}));
+vi.mock('../../src/components/BuyThisDossier.jsx', () => ({ default: () => null }));
+vi.mock('../../src/components/generate/ExportDraftButton.jsx', () => ({ default: () => null }));
 
 vi.mock('../../src/store/index.js', () => {
   const useStore = (selector) => selector(H.state);
@@ -85,9 +94,8 @@ function makeState(overrides = {}) {
     clearNeighbour: vi.fn(),
     clearSettlement: vi.fn(),
     setSettlement: vi.fn(),
-    // The reveal is active, so the dossier/toolbar cluster below it is not
-    // rendered — the workflow block and the video node are the surface here.
-    pipelineRevealActive: true,
+    // Post-dismissal: the ticker has played through; the dossier cluster is live.
+    pipelineRevealActive: false,
     dismissPipelineReveal: vi.fn(),
     pipelineHistory: [
       { id: 'generatePower', ts: 1, summary: '3 factions formed' },
@@ -97,83 +105,52 @@ function makeState(overrides = {}) {
   };
 }
 
-/** The workflow block, found by the rail's own accessible name. */
-const findBlock = () => screen.findByRole('complementary', { name: 'How this was simulated' });
+const NO_RAIL = () =>
+  expect(screen.queryByRole('complementary', { name: 'How this was simulated' })).toBeNull();
 
 beforeEach(() => { H.state = makeState(); });
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
 
-describe('the workflow block holds its Create-page seat ahead of the video', () => {
-  test('it renders in the create flow and precedes the video node (desktop)', async () => {
+describe('the post-forge surface carries no above-dossier receipts (§767.2/§777)', () => {
+  test('desktop: the dossier renders and no receipts rail block exists', async () => {
     render(<GenerateWizard isMobile={false} />);
-
-    const block = await findBlock();
-    const video = screen.getByTestId('video-node');
-    expect(block).toBeTruthy();
-    expect(video).toBeTruthy();
-    // DOCUMENT_POSITION_FOLLOWING (4) — the video comes AFTER the block.
-    expect(block.compareDocumentPosition(video) & 4).toBe(4);
+    // Positive control first — the flow really rendered its dossier.
+    expect(await screen.findByTestId('dossier-body')).toBeTruthy();
+    NO_RAIL();
   });
 
-  test('the same seat holds on mobile (one column, no breakpoint fork)', async () => {
+  test('mobile: the same absence holds (one column, no breakpoint fork)', async () => {
     render(<GenerateWizard isMobile />);
-
-    const block = await findBlock();
-    const video = screen.getByTestId('video-node');
-    // DOCUMENT_POSITION_FOLLOWING (4) — the video comes AFTER the block here too.
-    expect(block.compareDocumentPosition(video) & 4).toBe(4);
+    expect(await screen.findByTestId('dossier-body')).toBeTruthy();
+    NO_RAIL();
   });
 });
 
-describe('the rows come from the real step registry, not a forked list', () => {
-  test('each history entry renders the registry’s own label for its step id', async () => {
+describe('the dossier lands head-first', () => {
+  test('toolbar → dossier → locks, in document order', async () => {
     render(<GenerateWizard isMobile={false} />);
-    const block = await findBlock();
-
-    for (const entry of H.state.pipelineHistory) {
-      const registryLabel = metaForStep(entry.id).label;
-      // A real label, not the raw machine name falling through metaForStep.
-      expect(registryLabel).not.toBe(entry.id);
-      expect(block.textContent).toContain(registryLabel);
-      // The per-run receipt rides alongside the label.
-      expect(block.textContent).toContain(entry.summary);
-    }
+    const dossier = await screen.findByTestId('dossier-body');
+    const back = screen.getByRole('button', { name: 'Back' });
+    const locks = await screen.findByTestId('lock-controls');
+    // DOCUMENT_POSITION_FOLLOWING (4): the dossier follows the toolbar…
+    expect(back.compareDocumentPosition(dossier) & 4).toBe(4);
+    // …and the world locks follow the dossier (controls live below, never head furniture).
+    expect(dossier.compareDocumentPosition(locks) & 4).toBe(4);
   });
 });
 
-describe('the block is live — it follows the run’s step receipts', () => {
-  test('a step landing in pipelineHistory appears without remounting the flow', async () => {
-    const { rerender } = render(<GenerateWizard isMobile={false} />);
-    const block = await findBlock();
-
-    const laterStep = 'generateNarratives';
-    const laterLabel = metaForStep(laterStep).label;
-    expect(laterLabel).not.toBe(laterStep);
-    // It is genuinely absent before the step lands (the update is observable).
-    expect(block.textContent.includes(laterLabel)).toBe(false);
-
-    H.state = makeState({
-      pipelineHistory: [
-        ...H.state.pipelineHistory,
-        { id: laterStep, ts: 3, summary: 'A founding and two turns of trouble' },
-      ],
-    });
-    rerender(<GenerateWizard isMobile={false} />);
-
-    const updated = await findBlock();
-    expect(updated.textContent).toContain(laterLabel);
-    expect(updated.textContent).toContain('A founding and two turns of trouble');
+describe('the forge ticker still gates the landing honestly', () => {
+  test('while the reveal is active the dossier cluster is withheld', async () => {
+    H.state = makeState({ pipelineRevealActive: true });
+    render(<GenerateWizard isMobile={false} />);
+    expect(await screen.findByTestId('reveal-node')).toBeTruthy();
+    expect(screen.queryByTestId('dossier-body')).toBeNull();
+    // Dismissal lands the reader directly on the dossier head — pinned above.
   });
 });
 
-describe('the seat costs zero eager bytes', () => {
-  // The dist byte-budget pin (tests/build/vendorPdfLazy.test.js) can only speak
-  // after a build; this is the source-side guard that keeps it honest, and it is
-  // the one that reds the moment someone "simplifies" the lazy() away. Every
-  // route to the rail must be a DYNAMIC import — a static `from '…PipelineRail'`
-  // anywhere would fold the rail's graph (stepMetadata / trace / simulationSpine)
-  // into whatever chunk did it.
-  test('nothing in src/ reaches PipelineRail through a static import', () => {
+describe('the simulation record stays reachable, lazy, and single-doored', () => {
+  test('the rail is dynamically imported by the drawer alone; nothing imports it statically', () => {
     const roots = [join(ROOT, 'src')];
     const files = [];
     while (roots.length) {
@@ -184,10 +161,9 @@ describe('the seat costs zero eager bytes', () => {
         else if (/\.(js|jsx)$/.test(entry)) files.push(p);
       }
     }
-    // Positive control: the scan really did see the consumers it is judging.
+    // Positive control: the scan really did see the one sanctioned consumer.
     const dynamic = files.filter((p) => /import\(\s*['"][^'"]*PipelineRail\.jsx['"]\s*\)/.test(readFileSync(p, 'utf8')));
     expect(dynamic.map((p) => relative(ROOT, p)).sort()).toEqual([
-      'src/components/GenerateWizard.jsx',
       'src/components/dossier/SimulationDrawer.jsx',
     ]);
 
@@ -195,17 +171,5 @@ describe('the seat costs zero eager bytes', () => {
       .filter((p) => /^\s*import[^\n]*from\s*['"][^'"]*PipelineRail\.jsx['"]/m.test(readFileSync(p, 'utf8')))
       .map((p) => relative(ROOT, p));
     expect(staticImporters).toEqual([]);
-  });
-});
-
-describe('the block self-hides until a run has produced receipts', () => {
-  test('no pipeline history, no block — while the video node still renders', async () => {
-    H.state = makeState({ pipelineHistory: [] });
-    render(<GenerateWizard isMobile={false} />);
-
-    // Positive control: the create flow really did render its video surface, so
-    // the absence below is about the rail's own gate and not an empty render.
-    expect(await screen.findByTestId('video-node')).toBeTruthy();
-    expect(screen.queryByRole('complementary', { name: 'How this was simulated' })).toBeNull();
   });
 });

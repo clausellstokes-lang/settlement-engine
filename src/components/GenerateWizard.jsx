@@ -44,11 +44,10 @@ const OutputContainer = lazy(() => import('./OutputContainer'));
 // P100 — pipeline reveal overlay (tiny, but stays lazy so non-generating
 // surfaces don't pay for the playback animator).
 const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
-// THE WORKFLOW BLOCK — the generation-steps rail that sits ahead of the film
-// block below. Lazy for the same reason the drawer's copy is: the Create page is
-// a first-paint surface, and the wizard chunk must not statically re-absorb the
-// rail's import graph (stepMetadata / trace / simulationSpine).
-const PipelineRail = lazy(() => import('./PipelineRail.jsx'));
+// (The above-dossier simulation-receipts panel was deleted outright by owner
+// ruling — ODQ §767.2 as amended by §777: post-forge lands on the dossier, head
+// at the top, and the simulation record stays one tap away behind the toolbar's
+// drawer trigger, which already carries the duty.)
 // LAZY on purpose: this wizard is a first-paint surface, and the lock controls are
 // only meaningful once a settlement exists. The dossier tabs import the same leaf
 // statically from inside their own lazy chunks, so this costs a shared chunk, not
@@ -477,13 +476,14 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
 
-      {/* LOCKS ENGINE Phase A — what a new roll keeps. This sits with the full
-          generate rather than in a tab because identity and ground are exactly
-          what a whole new roll would otherwise take away; the per-section locks
-          live beside their own Reroll buttons. */}
-      {settlement && <Suspense fallback={<div style={{ padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>Setting out what a new roll keeps…</div>}><LockControls scope="world" /></Suspense>}
+      {/* THE POST-FORGE ORDER (owner ruling, ODQ §767.2 as amended by §777): the
+          dossier lands HEAD-FIRST. The above-dossier receipts panel is deleted
+          outright (the toolbar's drawer trigger already carries that duty), and
+          the world locks moved out of the head — to the settlement editor for a
+          saved settlement, and to the quiet controls region below the dossier on
+          this draft surface. Nothing stands between the forge and the dossier. */}
 
-      {/* Regenerate moved into the sticky toolbar (beside New). The re-roll
+      {/* Regenerate lives in the sticky toolbar (beside New). The re-roll
           error alert stays here so a failed regenerate surfaces above the
           dossier. */}
       {settlement && generateError && (
@@ -494,30 +494,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         >
           {generateError}
         </ClerkNote>
-      )}
-
-      {/* THE WORKFLOW BLOCK (owner directive, 2026-07-31) — the generation-steps
-          rail, restored to the Create-page seat it lost when the dossier's dead
-          Simulation tab was excised (3176e22d), and seated IMMEDIATELY BEFORE the
-          film block below on BOTH breakpoints (this column is the shared
-          desktop/mobile order — nothing here is breakpoint-forked).
-
-          It reads the SAME store pipelineHistory the reveal plays back — the
-          engine's own onStep receipts — so every label comes from the step
-          registry through metaForStep and fills in as a run's steps land; no
-          label list is forked here. `compact` holds it to the legibility law's
-          glance register, and the rail self-hides until a run has produced
-          history, so the pre-generation and recall states are untouched.
-
-          The wait is NARRATED rather than silent (the witnessed-wait ratchet):
-          this block occupies real space above the film, so a null boundary would
-          be a perceptible hole. */}
-      {settlement && (
-        <Suspense fallback={<div style={{ padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>Retracing how this settlement was forged…</div>}>
-          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
-            <PipelineRail compact />
-          </div>
-        </Suspense>
       )}
 
       {/* P100 — pipeline reveal overlay. Renders only when the flag is on,
@@ -586,6 +562,20 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
                 Save/Export primaries when they apply. */}
             <BuyThisDossier settlement={settlement} saveId={activeSaveId} onSignIn={onSignIn} onNavigate={onNavigate} size="lg" />
             <ExportDraftButton />
+          </div>
+
+          {/* LOCKS ENGINE, world scope — what a new roll keeps (name / ground /
+              seat). Relocated out of the page head by the §767.2/§777 reorder:
+              on this draft surface the locks live in the controls region below
+              the dossier, beside the other what-do-I-do-with-this-draft verbs
+              (a saved settlement gets them in the settlement editor). The
+              per-section locks stay beside their own Reroll buttons. */}
+          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
+            <Suspense fallback={<div style={{ padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>Setting out what a new roll keeps…</div>}>
+              <ClerkNote rubric="What a new roll keeps">
+                <LockControls scope="world" />
+              </ClerkNote>
+            </Suspense>
           </div>
 
           {/* Post-generate "what's next" guidance now lives in the app-level
