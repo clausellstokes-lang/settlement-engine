@@ -42,7 +42,7 @@ const FACET_KINDS = Object.freeze(['institutionNature', 'institutionFunction', '
 
 /** Every catalog row in the production shape the generator spreads onto a settlement —
  *  `{ category, name, ...entry }`, the same shape tests/domain/undercityStrataExistence.js
- *  builds. One entry per (tier, category, name) triple, which is the 311-row denominator. */
+ *  builds. One entry per (tier, category, name) triple, which is the 316-row denominator. */
 const CATALOG_ROWS = Object.freeze(Object.entries(institutionalCatalog).flatMap(([tier, groups]) =>
   Object.entries(groups).flatMap(([category, rows]) =>
     Object.entries(rows).map(([name, entry]) => Object.freeze({
@@ -148,13 +148,13 @@ function liveTableFromSource() {
 const LIVE_TABLE = liveTableFromSource();
 
 describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.3)', () => {
-  it('A0 · the parse is faithful: the table read out of the shipped source reproduces facetOf on every one of the 933 catalog cells', () => {
+  it('A0 · the parse is faithful: the table read out of the shipped source reproduces facetOf on every one of the 948 catalog cells', () => {
     // NON-VACUITY FOR EVERYTHING BELOW. A3 compares a hand-frozen historical table against
     // a re-implementation of inferFacet; if either the parser or that re-implementation
     // were wrong, A3 would be measuring this file's own bug. This arm rules that out by
     // executing the parsed live table against the real chokepoint, cell by cell.
     // MUTANT: drop one alternative from the parser's regex → the reproduction breaks.
-    expect(CATALOG_ROWS.length, 'the catalog row count moved — re-measure, do not re-word').toBe(311);
+    expect(CATALOG_ROWS.length, 'the catalog row count moved — re-measure, do not re-word').toBe(316);
     const disagreements = [];
     for (const row of CATALOG_ROWS) {
       const bare = inferenceOnly(row.inst);
@@ -165,7 +165,7 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
       }
     }
     expect(disagreements).toEqual([]);
-    expect(CATALOG_ROWS.length * FACET_KINDS.length).toBe(933);
+    expect(CATALOG_ROWS.length * FACET_KINDS.length).toBe(948);
   });
 
   it('A1 · the four mis-inferring rows stop asserting a nature, and the DERIVED INTERIOR each one draws moves to `generic`', () => {
@@ -234,7 +234,7 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
     expect(observed).toEqual(roster);
   });
 
-  it('A3 · the whole-catalog differential against the pre-CH-1 table is EXACTLY the declared delta — four cells of 933, and nothing else moved', () => {
+  it('A3 · the whole-catalog differential against the pre-CH-1 table is EXACTLY the declared delta — four cells of 948, and nothing else moved', () => {
     // MUTANT: any extra anchor change anywhere in the table adds a key here and reds.
     const moved = {};
     for (const row of CATALOG_ROWS) {
@@ -256,7 +256,7 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
     expect(Object.keys(moved).length).toBe(4);
   });
 
-  it('A4 · the undercity SEED GATE is still: `institutionSubstructure` moves zero of the 311 rows', () => {
+  it('A4 · the undercity SEED GATE is still: `institutionSubstructure` moves zero of the 316 rows', () => {
     // The existence gate (ODQ §311.1) reads this kind through the same chokepoint, so the
     // anchoring had to be proved inert here rather than assumed.
     // MUTANT, EXECUTED AND CORRECTED AT THE BUILD: dropping the `^` from `^access to ` does

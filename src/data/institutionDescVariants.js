@@ -1246,6 +1246,26 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Hallowed ground about the church.",
     "Consecrated earth ringing the church.",
   ],
+  "thorp|Religious|Burial ground": [
+    "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.",
+    "Fieldstones on a low bank at the edge of the ploughland. The rites are said by neighbours because there is nobody else to say them, and the weathered markers are kept clear regardless.",
+  ],
+  "hamlet|Religious|Burial ground": [
+    "A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.",
+    "A gated ground at the settlement edge, tended household by household. Families lie in rows by house rather than by standing, which is custom here and not want.",
+  ],
+  "town|Religious|Parish burial grounds": [
+    "Ground beside each parish church, with burial beyond the gate where a parish has filled its own. The sexton's register of who lies where is the town's longest unbroken record.",
+    "Each parish buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.",
+  ],
+  "city|Religious|Burial grounds and charnel house": [
+    "The grounds inside the walls filled generations back, so the dead are lifted when their term is up and their bones stacked to make room. New ground lies outside the gates.",
+    "Carts go out at dusk to ground bought beyond the walls, and the charnel house holds what the old plots gave up. What a family endowed decides who is lifted and who is left.",
+  ],
+  "metropolis|Religious|Cemetery network": [
+    "Burial has left the walls: grounds beyond every gate, each with its road and its gatekeepers, and a trade in plots the revenue office keeps an eye on.",
+    "One central roll now holds what the parishes can no longer track. Wards are assigned to grounds, so a family that moves across the city may find itself divided by the assignment.",
+  ],
   "village|Religious|Parish church": [
     "The hub of village life. Built in stone. Tithes are compulsory.",
     "Stone-built and central to everything. Tithing is not optional.",

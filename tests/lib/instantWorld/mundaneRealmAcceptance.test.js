@@ -274,9 +274,18 @@ describe('MG-4.1 — the mundane realm, measured across every member', () => {
  * MEASURED (seed 'mg4-acceptance', small/realistic_regional/highIsland). ALL FIVE AXES the
  * envelope compares, mundane vs magical, machine-checked by the last pin in MG-4.2 against
  * this very line — see THE RECORD IS CHECKED below:
- *   RECORDED-CENSUS: members 5 vs 5 · institutions 134 vs 133 · factions 22 vs 24 · services 193 vs 189 · historyEvents 24 vs 25
- * Ratios: members 1.000 · institutions 1.008 · factions 0.917 · services 1.021 ·
+ *   RECORDED-CENSUS: members 5 vs 5 · institutions 137 vs 136 · factions 22 vs 24 · services 195 vs 192 · historyEvents 24 vs 25
+ * Ratios: members 1.000 · institutions 1.007 · factions 0.917 · services 1.016 ·
  * historyEvents 0.960 — the mundane realm is at or above parity on three of five axes.
+ * ⚠️ RE-RECORDED 2026-08-30 (lane TE-RESIDUE-1, the burial-ladder content car, ODQ §708.5):
+ * `institutions 134 vs 133 · services 193 vs 189` → `137 vs 136 · 195 vs 192`. THE CAUSE IS
+ * FIVE NEW REQUIRED CATALOG ROWS, not a thinning: the catalog could bury the dead at exactly
+ * one tier, so a burial row was authored for the other five and every one is `required: true`.
+ * This realm's five members span three of those tiers, so each gains one institution and the
+ * burial menus reach the service list. Every ratio holds or improves against its band and the
+ * mundane realm stays at or above parity on the same three axes; the arcane census over the
+ * mundane realm is still EMPTY. Both places moved in one act, as this file's own instruction
+ * requires.
  * ⚠️ CORRECTED 2026-08-03: this block previously recorded `institutions 156 vs 158 ·
  * factions 23 vs 23` and omitted services and historyEvents entirely. No harness run
  * reproduces those institution counts; they were a hand-carried record that had drifted

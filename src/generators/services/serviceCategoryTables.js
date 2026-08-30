@@ -164,6 +164,18 @@ export const INSTITUTION_DEFAULT_CATEGORY = {
   'Apothecary district': 'healing',
   'Healer (divine, 1st level)': 'healing',
   Graveyard: 'healing',
+  // The burial rows the tier ladder gained (ODQ §708.5). They file with `Graveyard`
+  // above rather than by their own lights: this table answers "what domain does this
+  // house belong to when a service name is not explicitly mapped", and the estate has
+  // already settled that the whole religious block — churches, monasteries, almshouses,
+  // the graveyard — answers `healing`. ⚠ WITHOUT THESE ROWS the fallback classified
+  // burial services into `equipment` and `information`, measured: 72 corpus rows gained
+  // an equipment service and 3 lost their information menu entirely. A new institution
+  // with a service menu owes this table an entry.
+  'Burial ground': 'healing',
+  'Parish burial grounds': 'healing',
+  'Burial grounds and charnel house': 'healing',
+  'Cemetery network': 'healing',
   'Public bathhouse': 'healing',
   'Parish church': 'healing',
   'Parish churches (2-5)': 'healing',
@@ -255,6 +267,23 @@ export const INSTITUTION_DEFAULT_CATEGORY = {
 };
 // ── Explicit service→category lookup (auto-generated from comprehensive audit) ──
 export const SERVICE_CATEGORY_MAP = {
+  // ── THE BURIAL LADDER (ODQ §708.5) ─────────────────────────────────────────
+  // Eight service names arriving with the burial rows the tier ladder was missing.
+  // They are REGISTERED rather than quarantined: `serviceCategoryRegistration.walker`
+  // rules HEURISTIC_UNREGISTERED shrink-only debt, so adding to it would be the wrong
+  // direction, and each of these has a host-independent answer its own `desc` gives.
+  // Five are the care-of-body-and-soul family the estate already files under `healing`
+  // (Alms, Pilgrim shelter, Religious services, Charitable giving sit there); two are
+  // RECORDS and belong with Record keeping and Historical research; one is a conveyance
+  // of ground and belongs with Estate sales and Notary services.
+  'Grave marking': 'healing',
+  'Guild plot': 'healing',
+  'Lifting and ossuary': 'healing',
+  'Perpetual plot': 'healing',
+  'Funeral procession': 'healing',
+  'Register of the dead': 'information',
+  'Central register': 'information',
+  'Plot brokerage': 'legal',
   'Arcane services (illicit)': 'criminal',
   'Contraband transport': 'criminal',
   'Discreet meeting venues': 'criminal',

@@ -1399,6 +1399,33 @@ export const INSTITUTION_SERVICES = {
     "Memorial inscription": { on: false, p: 0.5, desc: "Grave markers and carved memorial stones." },
     "Grave maintenance": { on: false, p: 0.3, desc: "Ongoing care of family plots. Purchased in advance." }
   },
+  // The burial rows the tier ladder was missing (ODQ §708.5: below and above the
+  // village, nothing in the catalog could bury anyone). Menus follow the Graveyard
+  // shape above and grow with the ground itself: a field plot offers a grave and a
+  // marker; a metropolis offers a register, a brokerage and a procession.
+  "Burial ground": {
+    "Burial": { on: true,  p: 1.0, desc: "Dig, inter and close the grave. Rites where there is someone at hand to say them." },
+    "Grave marking": { on: false, p: 0.4, desc: "A cut fieldstone or a lettered board, made by whoever here can cut or carve." },
+    "Grave maintenance": { on: false, p: 0.25, desc: "Keeping a family's row clear of bramble and stock. Settled in labour more often than in coin." }
+  },
+  "Parish burial grounds": {
+    "Burial": { on: true,  p: 1.0, desc: "Interment in the parish ground, with the rite that parish keeps." },
+    "Register of the dead": { on: true, p: 0.8, desc: "The sexton records who lies where. Consulted in inheritance disputes as often as in mourning." },
+    "Memorial inscription": { on: false, p: 0.5, desc: "Cut stones and lettered slabs, ordered from the masons who work the churchyard." },
+    "Guild plot": { on: false, p: 0.4, desc: "A block of ground held by a trade for its members and their households." }
+  },
+  "Burial grounds and charnel house": {
+    "Burial": { on: true,  p: 1.0, desc: "Interment outside the gates. The bearers and the cart are found by the ground." },
+    "Lifting and ossuary": { on: true, p: 0.7, desc: "Bones lifted from filled ground once the term is up and stacked in the charnel house." },
+    "Perpetual plot": { on: false, p: 0.4, desc: "Ground bought against lifting, held for as long as the endowment holds." },
+    "Memorial inscription": { on: false, p: 0.5, desc: "Cut stones and lettered slabs, ordered from the masons who work the grounds." }
+  },
+  "Cemetery network": {
+    "Burial": { on: true,  p: 1.0, desc: "Interment in the ground the ward is assigned to, reached by the burial roads." },
+    "Central register": { on: true, p: 0.9, desc: "Parish rolls copied into one office, because no parish can any longer say where its own dead are." },
+    "Plot brokerage": { on: false, p: 0.5, desc: "Ground bought, sold and resold. The revenue office watches the trade, and the trade knows it." },
+    "Funeral procession": { on: false, p: 0.4, desc: "Bearers, mutes and a hired route out through the gate, priced by how much of the city is meant to notice." }
+  },
   "Town granary": {
     "Grain storage": { on: true,  p: 1.0, desc: "Municipal grain reserves. Buffers the settlement against poor harvests." },
     "Milling service": { on: false, p: 0.5, desc: "Some granaries include milling capacity." }

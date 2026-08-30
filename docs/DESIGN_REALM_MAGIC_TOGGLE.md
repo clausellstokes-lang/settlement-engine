@@ -480,10 +480,19 @@ every axis for every member. The same-seed MAGICAL twin carries 4 arcane institu
 is a measurement of the world and not of an empty generator.
 
 **THE TWIN-WORLD ENVELOPE (MG-LAW-3) HOLDS, AND HOLDS WELL.** All five compared axes,
-mundane vs magical: members 5 vs 5 (1.000), institutions 134 vs 133 (1.008), factions
-22 vs 24 (0.917), services 193 vs 189 (1.021), history events 24 vs 25 (0.960). A mundane
+mundane vs magical: members 5 vs 5 (1.000), institutions 137 vs 136 (1.007), factions
+22 vs 24 (0.917), services 195 vs 192 (1.016), history events 24 vs 25 (0.960). A mundane
 realm is not a thinner realm — it is at or above parity on three of the five axes, and
 suppression rides the substitution arms exactly as the law requires.
+
+⚠️ **RE-RECORDED 2026-08-30** (lane TE-RESIDUE-1, the burial-ladder content car, ODQ
+§708.5): institutions `134 vs 133` → `137 vs 136` and services `193 vs 189` → `195 vs 192`.
+The cause is FIVE NEW REQUIRED CATALOG ROWS and not a thinning of either twin — the catalog
+could bury the dead at exactly one tier, so a burial row was authored for the other five,
+each `required: true`, and this realm's members span three of them. Both ratios move within
+their bands, the same three axes stay at or above parity, and the arcane census over the
+mundane realm is still EMPTY. This block and the test header were moved in ONE act, which is
+what the MG-4.2 pin below exists to force.
 
 ⚠️ **THESE FIGURES WERE CORRECTED 2026-08-03, AND THE RECORD IS NOW MACHINE-CHECKED.**
 This block, and the test file's own header, previously recorded `institutions 156 vs 158,

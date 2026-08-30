@@ -54,6 +54,13 @@ export const institutionalCatalog = {
         tags: ['essential', 'religious', 'church'],
         priorityCategory: 'religion',
       },
+      'Burial ground': {
+        required: true,
+        baseChance: 1,
+        desc: 'A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The oldest markers have lost their names to the weather and are kept clear anyway.',
+        tags: ['essential', 'religious'],
+        priorityCategory: 'religion',
+      },
     },
     Criminal: {
       'Local fence': {
@@ -296,6 +303,13 @@ export const institutionalCatalog = {
         exclusiveGroup: 'religiousCenter',
         desc: 'Travel to village church. 2-5km distance typical.',
         tags: ['essential', 'religious', 'church'],
+        priorityCategory: 'religion',
+      },
+      'Burial ground': {
+        required: true,
+        baseChance: 1,
+        desc: 'A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Families lie in rows by household rather than by standing, which is custom here rather than poverty.',
+        tags: ['essential', 'religious'],
         priorityCategory: 'religion',
       },
     },
@@ -1272,6 +1286,13 @@ export const institutionalCatalog = {
         tags: ['religious', 'healing'],
         priorityCategory: 'religion',
       },
+      'Parish burial grounds': {
+        required: true,
+        baseChance: 1,
+        desc: "Each parish keeps its own ground beside its church, and a parish that has filled its ground buries beyond the gate instead. The sexton holds the register of who lies where, which is the town's longest unbroken record and the one it reaches for in an inheritance dispute. Guilds buy plots together so their members lie among their trade.",
+        tags: ['essential', 'religious'],
+        priorityCategory: 'religion',
+      },
     },
     Government: {
       'Mayor and council': {
@@ -1809,6 +1830,13 @@ export const institutionalCatalog = {
         baseChance: 1,
         desc: 'One per neighborhood.',
         tags: ['essential', 'religious', 'church'],
+        priorityCategory: 'religion',
+      },
+      'Burial grounds and charnel house': {
+        required: true,
+        baseChance: 1,
+        desc: "The parish grounds inside the walls filled generations ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening. Who is lifted and who is left where they lie is settled by what a family endowed.",
+        tags: ['essential', 'religious'],
         priorityCategory: 'religion',
       },
     },
@@ -2359,6 +2387,13 @@ export const institutionalCatalog = {
         baseChance: 0.55,
         desc: 'Multiple hospitals and infirmaries across districts. Organized medical care at population scale.',
         tags: ['healing', 'religious'],
+        priorityCategory: 'infrastructure',
+      },
+      'Cemetery network': {
+        required: true,
+        baseChance: 1,
+        desc: 'Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches. The parish registers are copied into a central roll because no parish can any longer say where its own dead are. Wards are assigned to grounds, so a family that moves across the city can find itself divided by the assignment.',
+        tags: ['essential', 'religious'],
         priorityCategory: 'infrastructure',
       },
     },

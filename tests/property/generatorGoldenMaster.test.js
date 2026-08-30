@@ -18,6 +18,57 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-30 — THE BURIAL LADDER (441 rows of 525 moved; 0 rows added, 0 removed). Lane
+ *   TE-RESIDUE-1, the content car ODQ §763.1 granted, curing §708.5. THE DEFECT WAS AN
+ *   ABSENCE: the catalog held exactly ONE burial row in 311 — `Graveyard`, village-only —
+ *   so a thorp, a hamlet, a town, a city and a metropolis of any size had nowhere to bury
+ *   anyone. Five rows were authored, one per missing tier: `Burial ground` (thorp and
+ *   hamlet), `Parish burial grounds` (town), `Burial grounds and charnel house` (city),
+ *   `Cemetery network` (metropolis). Catalog entries 311 → 316, distinct names 276 → 280.
+ *   ⭐ THE VILLAGE IS THE CONTROL, AND IT IS PERFECT: village 0 of 84 rows moved, because
+ *   the village is the one tier that already had its graveyard. Every tier that gained a row
+ *   moved 100% of its rows — thorp 84/84 · hamlet 84/84 · town 105/105 · city 84/84 ·
+ *   metropolis 84/84 — which is what a required row is supposed to do and is a far stronger
+ *   attribution than the count alone.
+ *   ⛔ THE ROWS ARE `required: true`, AND THAT CHOICE IS THE WHOLE SHAPE OF THE SHIFT.
+ *   `assembleInstitutions.js` pushes a required row WITHOUT reaching `rng.chance`, so this
+ *   car consumes ZERO new draws: no settlement name, no seed sequence and no probabilistic
+ *   roster decision moves anywhere. Measured over the 525-row grid × five magic dials
+ *   (2,625 settlements): 2,205 hashes move — 441 in every case, identically — with
+ *   `rosterCount` +1 exactly and settlement NAMES unmoved on 2,625 of 2,625. A probabilistic
+ *   row would have re-rolled every later draw in each settlement, which is the collateral
+ *   MF-CH3 measured at 97 of 420 rosters for a change of comparable size.
+ *   THE COMPLETE PATH-TEMPLATE CENSUS — 68 CHANGED, 12 ADDED, 3 REMOVED templates, all
+ *   downstream of one added institution and its service menu:
+ *     $.institutions.length / [*].{name,category,desc,tags,tags.length,required,baseChance,
+ *       priorityCategory,source,catalogId}                                441 rows each
+ *     $.simulationTrace.length / [*].{targetType,targetId,step,result,ts,
+ *       causes.length,causes[*].{source,effect,reason},
+ *       downstreamEffects.length,downstreamEffects[*].{target,effect}}    441 rows each
+ *     $.economicState.compound.inst.names(.length)                        441 rows
+ *     $.economicState.safetyProfile.compound.inst.names(.length)          441 rows
+ *     $.availableServices.healing.length                                  434 rows
+ *     $.availableServices.healing[*].{name,desc,institution}              369 rows
+ *     …and the remaining service categories at lower counts, plus 12 ADDED templates (72
+ *     rows gained a healing menu where they had none, 20 information, 4 entertainment, 1
+ *     transport) and 3 REMOVED (1 row's information menu emptied).
+ *   ⚠ THE SERVICE RESHUFFLE IS DECLARED, NOT INCIDENTAL. `availableServices` selection
+ *   consumes its own draws while walking the institution list, so a settlement carrying one
+ *   more institution re-rolls its probabilistic services: the visible instance is
+ *   `Message relay` appearing on 20 town rows and leaving 1. That is a re-roll, not a loss.
+ *   ⚠ AND FOUR REGISTRATIONS RODE WITH THE ROWS, three of them caught by the estate's own
+ *   guards rather than by the author: `INSTITUTION_IDENTITY` + themes
+ *   (`institutionVocabulary.js`), desc variants for all five (`institutionDescVariants.js`,
+ *   the Charge-2 exhaustiveness ratchet), `INSTITUTION_DEFAULT_CATEGORY` and eight
+ *   `SERVICE_CATEGORY_MAP` rows (`serviceCategoryTables.js`), and the service-key + compendium
+ *   regenerations. ⛔ WITHOUT the default-category row the fallback filed burial services
+ *   under `equipment` on 72 rows and emptied 3 rows' information menus — measured, then cured.
+ *   THE PROMISE. A stored settlement is never re-derived: only newly generated worlds carry a
+ *   burial ground. THE DEITY DOCTRINE: every one of the five rows and their sixteen service
+ *   lines describes PRACTICE and custom — who digs, who keeps the register, who is lifted to
+ *   make room — and asserts nothing about a god. The leak trawl over the whole corpus reports
+ *   the identical 22 hits before and after, so this prose adds no supernatural claim.
+ *
  * 2026-08-30 — DEITY-LIVE-CHECK, THE SUPERNATURAL CLAIM IS NOT ALWAYS ARCANE.
  *   ⛔⛔ **NO RE-RECORD. THIS ROW EXISTS TO SAY WHY NOT, AND TO WARN THE NEXT LANE THAT
  *   THIS MANIFEST IS BLIND TO THE THING THAT CHANGED.** Lane TE-RESIDUE-1, ODQ §708.6 /
