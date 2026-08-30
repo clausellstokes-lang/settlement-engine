@@ -1,6 +1,6 @@
 /**
  * domain/worldPulse/treasury.js — THE STATE TREASURY: the estate's first conserved
- * COIN stock (W-COIN-1a — the stock, the flag, the lifecycle).
+ * COIN stock (W-COIN-1a — the stock, the flag, the lifecycle; W-COIN-1b — taxation).
  *
  * Until this leaf there was no money in the world. `incomeSources` narrates taxation
  * in prose, prosperity is an OPINION whose smallest transactable unit is one band, and
@@ -13,13 +13,16 @@
  * two ratifications this car ships under.
  *
  * ── WHAT THIS CAR CONTAINS, AND WHAT IT DELIBERATELY DOES NOT ─────────────────
- * 1a lands the STOCK and its lifecycle: the record, the accessors, the derived
+ * 1a landed the STOCK and its lifecycle: the record, the accessors, the derived
  * capacity, the ONE transfer primitive, the ONE cross-settlement applicator, the ONE
  * governing-power resolution law, and the ONE pulse writer behind the ONE flag door.
- * It mints NO coin — taxation is 1b's only mint kind — and it ships NO caller of the
- * transfer primitive: the first callers are W-COIN-3's movers. The primitive therefore
- * lands fully unit-tested and dormant, which is deliberate and is stated here so a
- * later reader does not mistake "no caller" for "unfinished".
+ * 1b adds TAXATION — the writer's ONE mint kind — with eight closed TAX_FORMS, five
+ * ordered TAX_RATE_BANDS, a frozen 6×8 profile keyed on RULING_POWERS, and the
+ * legitimacy price of extraction.
+ *
+ * STILL DELIBERATELY DORMANT: no caller of the transfer primitive ships — the first are
+ * W-COIN-3's movers — so it stays fully unit-tested and unreached, which a later reader
+ * must not mistake for "unfinished".
  *
  * NEVER, in any car (design §4.3 + A1.3, and these are design violations rather than
  * judgment calls): negative coin — an unpayable cost becomes a typed SHORTFALL receipt,
@@ -74,6 +77,8 @@ import { factionArchetype } from '../factionArchetypes.js';
 import { rulingPowerFromArchetype, RULING_POWERS } from '../spatial/cohesionWeave.js';
 import { nativeSemanticNames } from '../content/customContentSemanticAuthority.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { prosperityRank } from '../../data/constants.js';
+import { applyLegitimacyDeltasToUpdates } from './generosityUpdates.js';
 
 /**
  * TREASURY_TUNING — every constant this subsystem owns, in one frozen export.
@@ -122,6 +127,32 @@ export const TREASURY_TUNING = Object.freeze({
     /** A city hall / civic treasury / strongroom — the vault itself. Stacks. */
     civicVault: 1.15,
   }),
+  /** W-COIN-1b — the taxation mint's base yield per tick, by tier, in absolute coin
+   *  BEFORE form shares, band multipliers and the prosperity scalar. Scaled to the
+   *  capacity table above so a full year of customary taxation is a meaningful fraction
+   *  of a vault rather than a rounding error or an instant overflow.
+   *  TUNING-SIGNATURE-ADJACENT. */
+  BASE_YIELD_BY_TIER: Object.freeze({
+    thorp: 2, hamlet: 4, village: 10, town: 40, city: 150, metropolis: 400,
+  }),
+  /** Fail-neutral base for an unnamed tier, at the village rung (the capacity idiom). */
+  BASE_YIELD_DEFAULT: 10,
+  /** Band → multiplier on a form's share of the base yield. `none` is a real zero: a
+   *  crown that does not levy a form collects nothing from it. TUNING-SIGNATURE-ADJACENT. */
+  BAND_MULTIPLIERS: Object.freeze({
+    none: 0, light: 0.5, customary: 1, heavy: 1.6, extractive: 2.2,
+  }),
+  /** Prosperity rank (0 Subsistence … 6 Wealthy) → scalar on the base. The OPINION feeds
+   *  the base ONE-WAY; the stock never writes back to it. An unreadable band resolves to
+   *  the `customary` middle rather than to zero. TUNING-SIGNATURE-ADJACENT. */
+  PROSPERITY_SCALARS: Object.freeze([0.45, 0.6, 0.75, 1, 1.2, 1.45, 1.7]),
+  PROSPERITY_SCALAR_DEFAULT: 1,
+  /** The legitimacy price of extraction, per PRESENT coercive form at each band, and the
+   *  per-tick cap on their sum. Integer, negative, clamped — the deltas ride the ONE
+   *  existing legitimacy applicator, which re-clamps to [0,100] itself.
+   *  TUNING-SIGNATURE-ADJACENT. */
+  LEGITIMACY_PRICE_BY_BAND: Object.freeze({ heavy: 1, extractive: 3 }),
+  LEGITIMACY_PRICE_CAP: 6,
 });
 
 /**
@@ -142,10 +173,194 @@ export const TREASURY_RECEIPT_KINDS = Object.freeze([
   'suspended_by_occupation',
   /** Revenue is suspended because the settlement is under siege. */
   'suspended_by_siege',
-  /** A demanded amount could not be paid. NEVER a negative balance — this receipt is
-   *  what standing in for debt looks like. */
-  'treasury_shortfall',
+  // ⛔ `treasury_shortfall` IS DELIBERATELY ABSENT, and its absence was found by the
+  // reachability arm rather than argued for. It was declared in 1a on the reasoning that
+  // `computeCoinTransfer` "receipts a shortfall" — but the primitive is PURE and reports
+  // its shortfall as a FIELD on its return value, not as a summary receipt kind, and 1a
+  // ships no caller to convert one into the other. So the kind named something no emitter
+  // could draw: a dead arm of exactly the class this roster exists to refuse, sitting
+  // inside the roster meant to enforce it. It returns with W-COIN-2's upkeep sink, which
+  // is the first thing in the design that can actually fail to pay.
+  /** W-COIN-1b — a lit tick's taxation mint, carrying the per-form band and amount
+   *  RESOLVED AT FLOW TIME. History is never re-derived from current rates: a receipt
+   *  that said only "taxed 40" would silently re-price itself the day a coup retypes the
+   *  seat. (The one FMG steal — the deal records its own tax.) */
+  'tax_receipt',
+  /** W-COIN-1b — the legitimacy price of extraction, the stock's ONLY opinion write. */
+  'legitimacy_price',
 ]);
+
+/**
+ * TAX_FORMS — the closed vocabulary of what a state can tax (W-COIN-1b, design §5.2).
+ *
+ * FINITE-SEMANTICS: eight typed buckets, no free-text keys. Each is grounded in the
+ * `incomeSources` families the generator ALREADY narrates, so taxation taxes the economy
+ * the settlement actually has rather than an invented one. `misc_trade` is the catchall
+ * that keeps the vocabulary CLOSED against open-vocabulary custom-content labels: an
+ * unmatched row lands there rather than minting a ninth form.
+ * @type {ReadonlyArray<string>}
+ */
+export const TAX_FORMS = Object.freeze([
+  'land_rents', 'market_tolls', 'port_customs', 'licensing',
+  'justice_fees', 'tithe_share', 'levy_extraction', 'misc_trade',
+]);
+
+/**
+ * TAX_RATE_BANDS — closed and ORDERED, lightest first. Rates are BANDS, never free
+ * floats: a float is a number nobody can argue with, and the whole point of a typed rate
+ * is that a reader can see a crown is squeezing without reading a decimal.
+ * @type {ReadonlyArray<string>}
+ */
+export const TAX_RATE_BANDS = Object.freeze(['none', 'light', 'customary', 'heavy', 'extractive']);
+
+/**
+ * The COERCIVE form. `extractive` is reachable ONLY on a coercive row — either this form,
+ * or any row of a `criminal` seat, whose whole economy IS the racket the estate already
+ * narrates. Asserted structurally in the tests, not left as a convention, because a
+ * profile cell that could quietly become extractive is a tuning knob nobody voted on.
+ */
+export const COERCIVE_TAX_FORMS = Object.freeze(['levy_extraction']);
+
+/**
+ * THE PROFILE — RULING_POWERS × TAX_FORMS, frozen, every cell a TAX_RATE_BANDS member.
+ *
+ * ⚠ PROVISIONAL VALUES, TUNING-SIGNATURE-ADJACENT, like every constant this module owns.
+ * The SHAPE is the ruling; the numbers behind the bands are the owner's at the endgame
+ * tuning pass. What the table encodes is character, and it is meant to be readable as
+ * such: a merchant league taxes trade and spares land; a theocracy takes its tithe and
+ * little else; a council spreads the load flat and stays off the coercive rows; an
+ * autocrat leans on land and the levy; a criminal seat runs the town as a racket.
+ * @type {Readonly<Record<string, Readonly<Record<string, string>>>>}
+ */
+export const TAX_PROFILE = Object.freeze({
+  autocrat: Object.freeze({
+    land_rents: 'heavy', market_tolls: 'customary', port_customs: 'customary', licensing: 'light',
+    justice_fees: 'customary', tithe_share: 'light', levy_extraction: 'heavy', misc_trade: 'customary',
+  }),
+  council: Object.freeze({
+    land_rents: 'customary', market_tolls: 'customary', port_customs: 'customary', licensing: 'customary',
+    justice_fees: 'customary', tithe_share: 'light', levy_extraction: 'light', misc_trade: 'customary',
+  }),
+  theocracy: Object.freeze({
+    land_rents: 'customary', market_tolls: 'light', port_customs: 'light', licensing: 'light',
+    justice_fees: 'customary', tithe_share: 'heavy', levy_extraction: 'light', misc_trade: 'light',
+  }),
+  merchant_league: Object.freeze({
+    land_rents: 'light', market_tolls: 'heavy', port_customs: 'heavy', licensing: 'heavy',
+    justice_fees: 'customary', tithe_share: 'none', levy_extraction: 'light', misc_trade: 'heavy',
+  }),
+  criminal: Object.freeze({
+    land_rents: 'light', market_tolls: 'extractive', port_customs: 'customary', licensing: 'extractive',
+    justice_fees: 'none', tithe_share: 'none', levy_extraction: 'extractive', misc_trade: 'customary',
+  }),
+  mixed: Object.freeze({
+    land_rents: 'customary', market_tolls: 'customary', port_customs: 'customary', licensing: 'customary',
+    justice_fees: 'customary', tithe_share: 'light', levy_extraction: 'light', misc_trade: 'customary',
+  }),
+});
+
+/**
+ * THE LABEL → FORM TABLE, over the literals the generator can actually emit.
+ *
+ * ⚠⚠ THE DENOMINATOR SPANS TWO FILES, AND THE BRIEF'S DID NOT. The charter specified a
+ * source scan over `economicState.js`'s pushed `source:` strings. That file is indeed the
+ * ONE writer of `economicState.incomeSources` — but two of the literals it pushes are
+ * built in `generators/economy/tradeGoods.js` and handed over as `incomeBonuses`
+ * (`Entrepôt Trade`, `International Commerce`), so a one-file scan would have declared
+ * totality over a set missing two rows it could never see. The totality test scans BOTH.
+ *
+ * Unmatched ⇒ `misc_trade`, by `taxFormFor`. Criminal rows never reach this table at all.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const INCOME_SOURCE_FORMS = Object.freeze({
+  'Agricultural Rents': 'land_rents',
+  'Property Rents': 'land_rents',
+  'Toll Revenue': 'market_tolls',
+  'Gate Tolls': 'market_tolls',
+  'Port Duties': 'port_customs',
+  'River Tolls': 'port_customs',
+  'Guild Licensing': 'licensing',
+  'Guild Fees': 'licensing',
+  'Financial Services': 'licensing',
+  'Banking Fees': 'licensing',
+  'Spellcasting Services': 'licensing',
+  'Court Fees & Fines': 'justice_fees',
+  'Church Tithes': 'tithe_share',
+  'Church Tithes & Rents': 'tithe_share',
+  'Pilgrim Trade': 'tithe_share',
+  'Military Levy': 'levy_extraction',
+  'Military Extraction': 'levy_extraction',
+  'Enchanted Goods Premium': 'misc_trade',
+  'Grain Sales': 'misc_trade',
+  'Iron & Metalwork': 'misc_trade',
+  'Security Contracts': 'misc_trade',
+  'Stone Quarrying': 'misc_trade',
+  'Subsistence Production': 'misc_trade',
+  'Timber Trade': 'misc_trade',
+  'Wool & Textile Trade': 'misc_trade',
+  'Entrepôt Trade': 'misc_trade',
+  'International Commerce': 'misc_trade',
+});
+
+/**
+ * The typed cause the legitimacy price carries. The stock's ONLY write to any opinion,
+ * anywhere (§4.4 direction-of-read law): opinions feed the stock's flows as inputs, and
+ * the stock never writes an opinion EXCEPT this one declared price.
+ */
+export const TREASURY_LEGITIMACY_CAUSE = 'treasury_extraction_price';
+
+/**
+ * THE CLOSED CRIMINAL-INCOME VOCABULARY — the five labels the generator's black-market
+ * branch can author, verbatim (`economicState.js`, the `label` ternary above its push).
+ *
+ * ⚠⚠ WHY THIS EXISTS BESIDE THE `isCriminal` FLAG, AND IT IS NOT BELT-AND-BRACES FUSS.
+ * MEASURED: the observed-shape corpus saw **3,068** `incomeSources` rows across its whole
+ * seed × config matrix and NOT ONE carried `isCriminal` — the shape's observed keys are
+ * `desc, percentage, priorityNote, source, weight`. The generator really does write the
+ * flag, but only down a branch the corpus's worlds never take, so an exclusion resting on
+ * the flag ALONE would be dead on every world anyone has ever generated: the racket would
+ * be taxed as if it paid tax, and no test built on generated data could see it.
+ *
+ * So the LABEL set is the live detector — `source` is a key with 3,068 observations — and
+ * the flag stays as the honest catch for a custom-content row that marks itself criminal
+ * without wearing one of these names. Both are asserted; the label set carries a totality
+ * test against the generator's own ternary, so a sixth label cannot be added upstream
+ * without this list reddening.
+ * @type {ReadonlyArray<string>}
+ */
+export const CRIMINAL_INCOME_LABELS = Object.freeze([
+  'Criminal Syndicate Revenue',
+  "Thieves' Guild Revenue",
+  'Smuggling Network Revenue',
+  'Shadow Economy (untaxed)',
+  'Black Market Revenue',
+]);
+
+/**
+ * Is this income row the RACKET rather than the economy? The generator's own committed
+ * sentence — "This income stays in the settlement but flows to criminal actors, not the
+ * public treasury" — turned into a predicate, and read two ways so neither blind spot
+ * bites: by the closed label set (alive on generated worlds) and by the explicit flag
+ * (alive on authored/custom ones).
+ * @param {Record<string, unknown> | null | undefined} row
+ * @returns {boolean}
+ */
+export function isCriminalIncome(row) {
+  if (!row || typeof row !== 'object') return false;
+  if (row.isCriminal === true) return true;
+  return CRIMINAL_INCOME_LABELS.includes(String(row.source ?? ''));
+}
+
+/**
+ * The tax form a generator-authored income label belongs to. Matched at derive time
+ * against the authored literals; anything unrecognised — a custom `_good_` row, a
+ * renamed label, a future family — lands in `misc_trade` so the vocabulary stays CLOSED.
+ * @param {unknown} source @returns {string} a TAX_FORMS member
+ */
+export function taxFormFor(source) {
+  const label = String(source ?? '').trim();
+  return /** @type {Record<string, string>} */ (INCOME_SOURCE_FORMS)[label] || 'misc_trade';
+}
 
 /**
  * TREASURY_SUSPENSIONS — why revenue is suspended, closed and ordered by precedence.
@@ -460,6 +675,158 @@ function suspensionFor(blockade) {
 }
 
 /**
+ * THE FORM SHARES a settlement actually has — its mapped `incomeSources` percentages,
+ * normalised to fractions of the whole ledger.
+ *
+ * ⛔ `isCriminal: true` ROWS ARE NEVER A TAX BASE, and that is the generator's own
+ * committed sentence turned into an assertion: "This income stays in the settlement but
+ * flows to criminal actors, not the public treasury." A criminal SEAT taxes the lawful
+ * economy harder (its profile row does that); it does not get to tax the racket as if
+ * the racket paid tax.
+ *
+ * Route- and institution-gated forms need no special case: `port_customs` is zero where
+ * generation put no port, because no row maps there. Structure decides, by construction.
+ *
+ * @param {TreasurySettlement | null | undefined} settlement
+ * @returns {Record<string, number>} form → share of the ledger, each ≥ 0
+ */
+export function taxFormShares(settlement) {
+  const rows = /** @type {Array<Record<string, unknown>>} */ (
+    Array.isArray(/** @type {any} */ (settlement)?.economicState?.incomeSources)
+      ? /** @type {any} */ (settlement).economicState.incomeSources : []);
+  /** @type {Record<string, number>} */
+  const byForm = {};
+  let total = 0;
+  for (const row of rows) {
+    if (!row || typeof row !== 'object') continue;
+    if (isCriminalIncome(row)) continue;          // the racket is never a tax base
+    const pct = Number(row.percentage);
+    if (!Number.isFinite(pct) || pct <= 0) continue;
+    const form = taxFormFor(row.source);
+    byForm[form] = (byForm[form] || 0) + pct;
+    total += pct;
+  }
+  if (total <= 0) return {};
+  for (const form of Object.keys(byForm)) byForm[form] /= total;
+  return byForm;
+}
+
+/** The prosperity scalar for a settlement's band. Opinion feeds the base, ONE WAY.
+ *  @param {TreasurySettlement | null | undefined} settlement @returns {number} */
+function prosperityScalarOf(settlement) {
+  const rank = prosperityRank(/** @type {Parameters<typeof prosperityRank>[0]} */ (
+    /** @type {any} */ (settlement)?.economicState?.prosperity));
+  const scalars = TREASURY_TUNING.PROSPERITY_SCALARS;
+  return rank >= 0 && rank < scalars.length ? scalars[rank] : TREASURY_TUNING.PROSPERITY_SCALAR_DEFAULT;
+}
+
+/** Is this (power, form) cell allowed to be coercive — and so to carry a price?
+ *  @param {string} rulingPower @param {string} form @returns {boolean} */
+export function isCoerciveCell(rulingPower, form) {
+  return COERCIVE_TAX_FORMS.includes(form) || rulingPower === 'criminal';
+}
+
+/**
+ * THE TAXATION MINT — the writer's ONE mint kind, and the only place coin is created.
+ *
+ * ```
+ * yield = Σ over forms f PRESENT in the settlement:
+ *           baseYield(tier) × formShare(f) × bandMultiplier(profile[rulingPower][f])
+ *           × prosperityScalar(prosperityRank) × stressGate(suspension)
+ * ```
+ * floored to integer coin, then CAPACITY-STOPPED.
+ *
+ * ⛔⛔ THE CAPACITY STOP IS THE MINT'S ONLY STOCK READ, AND IT DAMPS (A1.16). This is the
+ * §11.1 anti-loop answer and it is the reason the formula is worth reading closely: every
+ * input is either generation-frozen STRUCTURE (tier, the incomeSources ledger) or an
+ * OPINION (prosperity), and not one of them is the vault. So no tax → transfer → tax
+ * feedback can exist, and a rich crown does not tax harder for being rich. The tests
+ * assert the mint's inputs, not merely its outputs.
+ *
+ * THE PRICE IS EMITTED EVEN WHEN THE MINT IS STOPPED (A1.16, both halves): the crown that
+ * squeezes and cannot even bank the coin still pays the resentment.
+ *
+ * @param {TreasurySettlement | null | undefined} settlement
+ * @param {{ rulingPower?: string, suspension?: string | null }} [options]
+ * @returns {{ minted: number, stopped: number, legitimacyDelta: number,
+ *   entries: Array<{ form: string, band: string, amount: number }> }}
+ */
+export function computeTaxYield(settlement, { rulingPower = NEUTRAL_RULING_POWER, suspension = null } = {}) {
+  const profile = /** @type {Record<string, Record<string, string>>} */ (TAX_PROFILE)[rulingPower]
+    || TAX_PROFILE[NEUTRAL_RULING_POWER];
+  const shares = taxFormShares(settlement);
+  const tier = String(settlement?.tier || '');
+  const bases = /** @type {Record<string, number>} */ (TREASURY_TUNING.BASE_YIELD_BY_TIER);
+  const base = Number.isFinite(bases[tier]) ? bases[tier] : TREASURY_TUNING.BASE_YIELD_DEFAULT;
+  const prosperity = prosperityScalarOf(settlement);
+  // A1.14 — siege suspends EVERY form; occupation yields ZERO into the OWN vault. Both
+  // gate the whole mint to nothing, and they differ only in the receipt they carry.
+  const gate = suspension ? 0 : 1;
+  /** @type {Array<{ form: string, band: string, amount: number }>} */
+  const entries = [];
+  let gross = 0;
+  let price = 0;
+  for (const form of TAX_FORMS) {
+    const share = shares[form];
+    if (!(share > 0)) continue;                        // the structure is not there
+    const band = profile[form];
+    const multipliers = /** @type {Record<string, number>} */ (TREASURY_TUNING.BAND_MULTIPLIERS);
+    const amount = Math.floor(base * share * multipliers[band] * prosperity * gate);
+    if (amount > 0) gross += amount;
+    // RECORDED AT FLOW TIME, band and all — never re-derived from a later rate.
+    entries.push({ form, band, amount });
+    // …and the price follows the BAND, not the coin: a present coercive form at heavy or
+    // extractive costs legitimacy even on a tick that banked nothing.
+    if (isCoerciveCell(rulingPower, form)) {
+      price += /** @type {Record<string, number>} */ (TREASURY_TUNING.LEGITIMACY_PRICE_BY_BAND)[band] || 0;
+    }
+  }
+  const headroom = Math.max(0, treasuryCapacity(settlement) - coinOf(settlement));
+  const minted = Math.max(0, Math.min(gross, headroom));
+  // Normalised so a priceless tick is 0 and never −0: negative zero compares equal to 0
+  // but serializes as `-0`, and a persisted or asserted `-0` is a trap nobody enjoys.
+  const owed = Math.min(TREASURY_TUNING.LEGITIMACY_PRICE_CAP, Math.round(price));
+  return {
+    minted,
+    stopped: gross - minted,
+    legitimacyDelta: owed > 0 ? -owed : 0,
+    entries,
+  };
+}
+
+/**
+ * Fold the accumulated per-settlement legitimacy prices onto settlementUpdates through
+ * the EXISTING single applicator (`generosityUpdates.applyLegitimacyDeltasToUpdates` —
+ * bounded, integer, clamped [0,100], legacy-shape-tolerant). Builds the saveId index the
+ * applicator wants, exactly as `treatyTransfer.applyTreatyFoodDeltas` does for grain.
+ *
+ * ⛔ THIS IS NOT A SECOND APPLICATOR AND MUST NEVER BECOME ONE. It is a call-shape
+ * adapter over the one that already exists; the clamping, the [0,100] domain and the
+ * skip-a-legacy-bare-number rule all stay where they were. A1.16: the stock's only
+ * opinion write is this price, through this one door.
+ *
+ * ⚠ A1.4 — IT MUST BE CALLED AT A PULSE STAGE AFTER `settlement_clock`, because
+ * `settlementUpdates` does not exist until `consequence_fold`. The mint runs at the
+ * writer; the PRICE rides the writer's summary and lands here. That split is §768.2's
+ * amendment, and it is the whole reason this function exists.
+ *
+ * Empty deltas ⇒ the input array, by reference (the unchanged-tick identity).
+ * @param {Array<{ saveId?: unknown }>} settlementUpdates @param {Map<string, number>} legitimacyDeltas
+ * @returns {Array<{ saveId?: unknown }>}
+ */
+export function applyTreasuryLegitimacyDeltas(settlementUpdates, legitimacyDeltas) {
+  const updates = Array.isArray(settlementUpdates) ? settlementUpdates : [];
+  if (!legitimacyDeltas || legitimacyDeltas.size === 0) return settlementUpdates;
+  /** @type {Map<string, number>} */
+  const updateIndex = new Map();
+  updates.forEach((u, i) => updateIndex.set(String(u?.saveId), i));
+  return /** @type {Array<{ saveId?: unknown }>} */ (
+    applyLegitimacyDeltasToUpdates(
+      /** @type {Parameters<typeof applyLegitimacyDeltasToUpdates>[0]} */ (updates),
+      updateIndex, legitimacyDeltas));
+}
+
+/**
  * THE ONE PULSE WRITER. Advance the settlement's treasury one tick.
  *
  * DARK (the flag absent or anything but exactly `true`): returns the INPUT SETTLEMENT
@@ -488,9 +855,15 @@ function suspensionFor(blockade) {
  * @param {{ interval?: unknown, tick?: unknown, deployment?: unknown,
  *           blockade?: { type?: unknown } | null, rules?: unknown }} [options]
  * @returns {{ settlement: TreasurySettlement | null | undefined,
- *             summary: { tick: number, opened: boolean, coin: number, capacity: number,
- *                        suspension: string | null,
- *                        receipts: Array<{ kind: string, tick: number }> } | null }}
+ *             summary: {
+ *               tick: number, opened: boolean, coin: number, capacity: number,
+ *               suspension: string | null,
+ *               receipts: Array<{ kind: string, tick: number }>,
+ *               rulingPower: string, rulingBasis: string,
+ *               taxed: number, taxStopped: number,
+ *               taxEntries: Array<{ form: string, band: string, amount: number }>,
+ *               legitimacyDelta: number, legitimacyCause: string | null,
+ *             } | null }}
  */
 export function advanceTreasury(settlement, options = {}) {
   // THE DOOR. Everything below this line is unreachable in a dark world.
@@ -512,8 +885,25 @@ export function advanceTreasury(settlement, options = {}) {
     coinFlows: { taxed: 0, upkeep: 0, transferredIn: 0, transferredOut: 0, shortfall: 0 },
   };
   const coin = Math.max(0, Math.floor(Number(record.coin)));
-  const nextRecord = { ...record, coin, lastTick: tick };
   const economicState = asObject(settlement.economicState);
+  // ── W-COIN-1b — THE TAXATION MINT, the writer's ONE mint kind ──────────────────
+  // Priced against the vault AS IT STANDS THIS TICK, so the capacity stop reads what the
+  // last tick left behind. The ruling power comes from the ONE resolver and nowhere else,
+  // so a coup retypes taxation the moment it lands (A1.12 stamps the seat).
+  const { power: rulingPower, basis: rulingBasis } = resolveRulingPower(settlement);
+  const priced = /** @type {TreasurySettlement} */ ({
+    .../** @type {Record<string, unknown>} */ (/** @type {unknown} */ (settlement)),
+    economicState: { ...economicState, treasury: { ...record, coin } },
+  });
+  const taxed = computeTaxYield(priced, { rulingPower, suspension });
+  if (taxed.entries.length) receipts.push({ kind: 'tax_receipt', tick });
+  if (taxed.legitimacyDelta < 0) receipts.push({ kind: 'legitimacy_price', tick });
+  const nextRecord = {
+    ...record,
+    coin: coin + taxed.minted,
+    lastTick: tick,
+    coinFlows: { ...record.coinFlows, taxed: taxed.minted },
+  };
   const nextSettlement = /** @type {TreasurySettlement} */ ({
     .../** @type {Record<string, unknown>} */ (/** @type {unknown} */ (settlement)),
     economicState: { ...economicState, treasury: nextRecord },
@@ -521,7 +911,23 @@ export function advanceTreasury(settlement, options = {}) {
   return {
     settlement: nextSettlement,
     summary: {
-      tick, opened, coin, capacity: treasuryCapacity(nextSettlement), suspension, receipts,
+      tick,
+      opened,
+      coin: nextRecord.coin,
+      capacity: treasuryCapacity(nextSettlement),
+      suspension,
+      receipts,
+      // W-COIN-1b — the mint's own account of itself. EPHEMERAL, like every receipt:
+      // `taxed` is the only part that persists, as a last-tick integer.
+      rulingPower,
+      rulingBasis,
+      taxed: taxed.minted,
+      taxStopped: taxed.stopped,
+      taxEntries: taxed.entries,
+      // The price RIDES THE SUMMARY and is applied at a later pulse stage through the ONE
+      // existing legitimacy applicator (A1.4 / §768.2). The writer never writes an opinion.
+      legitimacyDelta: taxed.legitimacyDelta,
+      legitimacyCause: taxed.legitimacyDelta < 0 ? TREASURY_LEGITIMACY_CAUSE : null,
     },
   };
 }

@@ -34,7 +34,19 @@ import {
   computeCoinTransfer,
   applyCoinDeltasToUpdates,
   advanceTreasury,
+  TAX_FORMS,
+  TAX_RATE_BANDS,
+  TAX_PROFILE,
+  INCOME_SOURCE_FORMS,
+  taxFormFor,
+  taxFormShares,
+  isCoerciveCell,
+  computeTaxYield,
+  applyTreasuryLegitimacyDeltas,
+  CRIMINAL_INCOME_LABELS,
+  isCriminalIncome,
 } from '../../src/domain/worldPulse/treasury.js';
+import { transferRulingPower } from '../../src/domain/rulingPower.js';
 import { RULING_POWERS } from '../../src/domain/spatial/cohesionWeave.js';
 import { FACTION_ARCHETYPES } from '../../src/domain/factionArchetypes.js';
 
@@ -102,12 +114,26 @@ describe('the closed vocabularies', () => {
   it('declares ONLY kinds this car can emit — no dead arms', () => {
     // A vocabulary that names a kind nothing can draw passes every existence census while
     // being invisible in the world, which this program has measured twice. So the roster
-    // is exactly what 1a emits: the open, the two suspensions, and the shortfall the
-    // transfer primitive receipts. 1b's `tax_receipt` and W-COIN-2's `upkeep_paid` join
-    // in the same act as their emitters, not before.
+    // is exactly what the SHIPPED cars emit — never a kind held in reserve.
+    // ⭐ THE LAW WORKING AS INTENDED, recorded because it is the point: 1a declared four
+    // kinds, and this assertion is what forced 1b's two to arrive IN THE SAME ACT as the
+    // mint and the price that draw them. W-COIN-2's `upkeep_paid` is still absent, and
+    // must stay absent until its emitter lands.
     expect([...TREASURY_RECEIPT_KINDS].sort()).toEqual([
-      'suspended_by_occupation', 'suspended_by_siege', 'treasury_opened', 'treasury_shortfall',
+      'legitimacy_price', 'suspended_by_occupation', 'suspended_by_siege',
+      'tax_receipt', 'treasury_opened',
     ]);
+    // ⛔ AND THE ONE THAT LEFT. `treasury_shortfall` was declared in 1a and is GONE: the
+    // transfer primitive reports its shortfall as a FIELD, not a summary receipt, and no
+    // caller ships to convert one into the other — so the kind named something nothing
+    // could draw. The reachability arm below is what found it. It returns with W-COIN-2's
+    // upkeep sink, the first thing in the design that can actually fail to pay.
+    expect(TREASURY_RECEIPT_KINDS).not.toContain('treasury_shortfall'); // anchored: the exact-set equality directly above pins all five surviving kinds, so an emptied roster reds there rather than passing here.
+    // …and every declared kind is REACHABLE: each is emitted somewhere in this module.
+    const src = fs.readFileSync(path.join(ROOT, 'src/domain/worldPulse/treasury.js'), 'utf8');
+    for (const kind of TREASURY_RECEIPT_KINDS) {
+      expect(src, `${kind} is declared but nothing pushes it`).toMatch(new RegExp(`kind: '${kind}'`));
+    }
   });
 
   it('the suspension vocabulary matches the blockade types the granary already reads', () => {
@@ -616,6 +642,403 @@ describe('advanceTreasury — the ONE pulse writer', () => {
     expect(advanceTreasury(/** @type {any} */ ('nope'), { tick: 1, rules: lit }).summary).toBeNull();
     const r = advanceTreasury(unopened(), { tick: NaN, rules: lit });
     expect(/** @type {any} */ (r.settlement).economicState.treasury.openedTick).toBe(0);
+  });
+});
+
+// ══ W-COIN-1b — TAXATION ═════════════════════════════════════════════════════
+
+/** A settlement with a real income ledger, so the mint has structure to tax. */
+const taxable = (extra = {}, rows = [
+  { source: 'Agricultural Rents', percentage: 40, desc: 'rents' },
+  { source: 'Toll Revenue', percentage: 30, desc: 'tolls' },
+  { source: 'Military Levy', percentage: 20, desc: 'levy' },
+  { source: 'Black Market Revenue', percentage: 10, desc: 'racket', isCriminal: true },
+]) => ({
+  tier: 'town',
+  institutions: [],
+  economicState: { prosperity: 'Moderate', incomeSources: rows },
+  powerStructure: {
+    governingName: 'The Seat',
+    factions: [{ faction: 'The Seat', category: 'government', power: 40, isGoverning: true }],
+  },
+  ...extra,
+});
+
+describe('TAX_FORMS / TAX_RATE_BANDS / the profile — closed, frozen, total', () => {
+  it('the vocabularies are closed, frozen, ordered and duplicate-free', () => {
+    expect(Object.isFrozen(TAX_FORMS)).toBe(true);
+    expect(Object.isFrozen(TAX_RATE_BANDS)).toBe(true);
+    expect(TAX_FORMS).toEqual([
+      'land_rents', 'market_tolls', 'port_customs', 'licensing',
+      'justice_fees', 'tithe_share', 'levy_extraction', 'misc_trade',
+    ]);
+    expect(TAX_RATE_BANDS).toEqual(['none', 'light', 'customary', 'heavy', 'extractive']);
+    expect(new Set(TAX_FORMS).size).toBe(TAX_FORMS.length);
+    expect(new Set(TAX_RATE_BANDS).size).toBe(TAX_RATE_BANDS.length);
+  });
+
+  it('THE PROFILE WALKER, BOTH WAYS: every power has a row, every row is total, no strays', () => {
+    expect([...Object.keys(TAX_PROFILE)].sort()).toEqual([...RULING_POWERS].sort());
+    for (const power of RULING_POWERS) {
+      const row = TAX_PROFILE[power];
+      expect(Object.isFrozen(row), `${power} row is not frozen`).toBe(true);
+      expect([...Object.keys(row)].sort(), `${power} row is not total over TAX_FORMS`)
+        .toEqual([...TAX_FORMS].sort());
+      for (const [form, band] of Object.entries(row)) {
+        expect(TAX_RATE_BANDS, `${power}.${form} = ${band} is not a band`).toContain(band);
+      }
+    }
+  });
+
+  it('EXTRACTIVE is reachable ONLY on a coercive row — structurally, not by convention', () => {
+    for (const power of RULING_POWERS) {
+      for (const [form, band] of Object.entries(TAX_PROFILE[power])) {
+        if (band !== 'extractive') continue;
+        expect(isCoerciveCell(power, form), `${power}.${form} is extractive but not coercive`).toBe(true);
+      }
+    }
+    // …and the arm is not vacuous: some cell really is extractive, and some really is not
+    // permitted to be.
+    const extractives = RULING_POWERS.flatMap((p) => Object.entries(TAX_PROFILE[p])
+      .filter(([, b]) => b === 'extractive').map(([f]) => `${p}.${f}`));
+    expect(extractives.length).toBeGreaterThan(0);
+    expect(isCoerciveCell('council', 'market_tolls')).toBe(false);
+    expect(isCoerciveCell('council', 'levy_extraction')).toBe(true);
+    expect(isCoerciveCell('criminal', 'market_tolls')).toBe(true);
+  });
+});
+
+describe('the label → form mapping is TOTAL over what the generator can emit', () => {
+  // ⚠⚠ THE DENOMINATOR SPANS TWO FILES, AND THE CHARTER'S DID NOT. `economicState.js` is
+  // the ONE writer of `economicState.incomeSources`, so the charter scanned it alone —
+  // but two of the literals it pushes are BUILT in `tradeGoods.js` and handed over as
+  // `incomeBonuses`. A one-file scan would have declared totality over a set missing two
+  // rows it could never see, which is precisely the shape of a denominator break.
+  const GENERATOR_FILES = [
+    'src/generators/economy/economicState.js',
+    'src/generators/economy/tradeGoods.js',
+  ];
+  const emittedLiterals = () => {
+    const found = new Set();
+    for (const rel of GENERATOR_FILES) {
+      const src = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+      for (const m of src.matchAll(/source:\s*'([^']+)'/g)) found.add(m[1]);
+    }
+    return [...found].sort();
+  };
+
+  it('every literal the generators can emit maps to a declared form', () => {
+    const literals = emittedLiterals();
+    // The scan REACHED something — a regex that stopped matching would otherwise
+    // "prove" totality over the empty set.
+    expect(literals.length).toBeGreaterThan(20);
+    for (const literal of literals) {
+      const form = taxFormFor(literal);
+      expect(TAX_FORMS, `${literal} mapped outside the closed vocabulary`).toContain(form);
+      expect(
+        Object.hasOwn(INCOME_SOURCE_FORMS, literal),
+        `${literal} is emitted by a generator but has no row in INCOME_SOURCE_FORMS —`
+        + ' it would silently fall to misc_trade. Add the row or argue the catchall.',
+      ).toBe(true);
+    }
+    // …and the two tradeGoods literals are really in the denominator, by name, so a
+    // future single-file scan cannot quietly shrink it back.
+    expect(literals).toContain('Entrepôt Trade');
+    expect(literals).toContain('International Commerce');
+  });
+
+  it('the table names no literal the generators cannot emit (no dead rows)', () => {
+    const literals = new Set(emittedLiterals());
+    for (const declared of Object.keys(INCOME_SOURCE_FORMS)) {
+      expect(literals.has(declared), `${declared} is mapped but no generator emits it`).toBe(true);
+    }
+  });
+
+  it('an UNMATCHED or custom label falls to misc_trade — the vocabulary stays closed', () => {
+    for (const odd of ['_good_ Saffron', 'Totally Invented Revenue', '', null, undefined, 42]) {
+      expect(taxFormFor(odd)).toBe('misc_trade');
+    }
+  });
+
+  it('every declared form is REACHABLE from some real literal (no unreachable bucket)', () => {
+    const reached = new Set(Object.values(INCOME_SOURCE_FORMS));
+    expect([...reached].sort()).toEqual([...TAX_FORMS].sort());
+  });
+});
+
+describe('the criminal-income vocabulary is closed and TOTAL over the generator', () => {
+  // ⚠⚠ WHY THE LABEL SET EXISTS AT ALL, MEASURED. The observed-shape corpus saw 3,068
+  // `incomeSources` rows across its whole seed × config matrix and NOT ONE carried
+  // `isCriminal` (observed keys: desc, percentage, priorityNote, source, weight). The
+  // generator writes the flag, but only down a branch those worlds never take — so an
+  // exclusion resting on the flag ALONE is dead on every world anyone has generated, and
+  // the racket would be taxed as if it paid tax with no test able to see it.
+  it('names exactly the labels the generator can author, and no others', () => {
+    const src = fs.readFileSync(path.join(ROOT, 'src/generators/economy/economicState.js'), 'utf8');
+    // The label ternary sits directly above the one `isCriminal: true` push.
+    const push = src.indexOf('isCriminal: true');
+    expect(push, 'the criminal income push moved — re-point this scan').toBeGreaterThan(-1);
+    const block = src.slice(Math.max(0, push - 1400), push);
+    const authored = [...block.matchAll(/(?:'([^']*Revenue|[^']*untaxed\))'|"([^"]*Revenue)")/g)]
+      .map((m) => m[1] ?? m[2]).filter(Boolean);
+    expect(authored.length, 'the label scan found nothing — it has drifted off its subject')
+      .toBeGreaterThan(3);
+    for (const label of authored) {
+      expect(CRIMINAL_INCOME_LABELS, `${label} is authored by the generator but unlisted`).toContain(label);
+    }
+    for (const label of CRIMINAL_INCOME_LABELS) {
+      expect(authored, `${label} is listed but the generator cannot author it`).toContain(label);
+    }
+  });
+
+  it('detects the racket BOTH ways — by label and by the explicit flag', () => {
+    for (const label of CRIMINAL_INCOME_LABELS) {
+      expect(isCriminalIncome({ source: label, percentage: 10 }), `${label} read as lawful`).toBe(true);
+    }
+    // The flag alone still works, for a custom row wearing no known name.
+    expect(isCriminalIncome({ source: '_good_ Contraband Saffron', isCriminal: true })).toBe(true);
+    // …and an ordinary row is not swept up.
+    expect(isCriminalIncome({ source: 'Agricultural Rents', percentage: 40 })).toBe(false);
+    for (const junk of [null, undefined, 'nope', 42, []]) {
+      expect(isCriminalIncome(/** @type {any} */ (junk))).toBe(false);
+    }
+  });
+
+  it('a labelled racket row is excluded even with NO isCriminal flag present', () => {
+    // The arm that would have been dead before the label set landed.
+    const shares = taxFormShares(taxable({}, [
+      { source: 'Agricultural Rents', percentage: 60 },
+      { source: 'Black Market Revenue', percentage: 40 },  // no flag, just the name
+    ]));
+    expect(shares.land_rents).toBe(1);
+    expect(Object.keys(shares)).toEqual(['land_rents']);
+  });
+});
+
+describe('taxFormShares — criminal rows are never a tax base', () => {
+  it("excludes isCriminal rows and renormalises over what is left", () => {
+    const shares = taxFormShares(taxable());
+    // 40/30/20 of the LAWFUL 90, not of the 100 that includes the racket.
+    expect(shares.land_rents).toBeCloseTo(40 / 90, 10);
+    expect(shares.market_tolls).toBeCloseTo(30 / 90, 10);
+    expect(shares.levy_extraction).toBeCloseTo(20 / 90, 10);
+    // anchored: the three shares above are asserted to exact values off this same fixture,
+    // so a shares map that had gone empty reds there rather than passing here.
+    expect(Object.hasOwn(shares, 'misc_trade')).toBe(false);
+    expect(Object.values(shares).reduce((a, b) => a + b, 0)).toBeCloseTo(1, 10);
+  });
+
+  it('a settlement whose ENTIRE ledger is criminal has no tax base at all', () => {
+    const allCrime = taxable({}, [{ source: 'Shadow Economy (untaxed)', percentage: 100, isCriminal: true }]);
+    expect(taxFormShares(allCrime)).toEqual({});
+    expect(computeTaxYield(allCrime, { rulingPower: 'criminal' }).minted).toBe(0);
+  });
+
+  it('a missing, empty or malformed ledger yields no shares and never throws', () => {
+    // ⚠ `undefined` is deliberately NOT in this list: it would trigger the helper's own
+    // DEFAULT ledger and quietly test the happy path while reading like a null case.
+    for (const rows of [[], null, 'nope', 42, {}, [null, 42, {}], [{ percentage: 'x' }]]) {
+      expect(taxFormShares(taxable({}, /** @type {any} */ (rows))), `${JSON.stringify(rows)} produced shares`).toEqual({});
+    }
+    expect(taxFormShares(null)).toEqual({});
+    expect(taxFormShares({ tier: 'town', economicState: {} })).toEqual({});
+  });
+});
+
+describe('computeTaxYield — the mint, and the loop it cannot close', () => {
+  it('mints integer coin from structure × band × prosperity', () => {
+    const out = computeTaxYield(taxable(), { rulingPower: 'council' });
+    expect(Number.isInteger(out.minted)).toBe(true);
+    expect(out.minted).toBeGreaterThan(0);
+    for (const entry of out.entries) {
+      expect(TAX_FORMS).toContain(entry.form);
+      expect(TAX_RATE_BANDS).toContain(entry.band);
+      expect(Number.isInteger(entry.amount)).toBe(true);
+    }
+  });
+
+  it('the ruling power CHANGES the yield — the profile is load-bearing', () => {
+    const league = computeTaxYield(taxable(), { rulingPower: 'merchant_league' });
+    const theocracy = computeTaxYield(taxable(), { rulingPower: 'theocracy' });
+    // A merchant league taxes tolls heavy where a theocracy taxes them light.
+    const bandOf = (out, form) => out.entries.find((e) => e.form === form)?.band;
+    expect(bandOf(league, 'market_tolls')).toBe('heavy');
+    expect(bandOf(theocracy, 'market_tolls')).toBe('light');
+    expect(league.minted).toBeGreaterThan(theocracy.minted);
+  });
+
+  it('⛔ THE MINT READS THE STOCK ONLY AT THE CAPACITY STOP — no feedback loop can exist', () => {
+    // §11.1's exact attack. A vault with more coin in it must not mint more (or less)
+    // except by running out of headroom, so a rich crown does not tax harder for being
+    // rich and tax → transfer → tax cannot close.
+    const poor = taxable();
+    const rich = { ...poor, economicState: { ...poor.economicState, treasury: { coin: 500, openedTick: 1, lastTick: 1, coinFlows: { taxed: 0, upkeep: 0, transferredIn: 0, transferredOut: 0, shortfall: 0 } } } };
+    const capacity = treasuryCapacity(poor);
+    expect(capacity).toBeGreaterThan(600); // headroom remains at 500 held
+    expect(computeTaxYield(rich, { rulingPower: 'council' }).minted)
+      .toBe(computeTaxYield(poor, { rulingPower: 'council' }).minted);
+  });
+
+  it('THE CAPACITY STOP: at capacity nothing is minted, and there is no phantom mint-and-burn', () => {
+    const s = taxable({ tier: 'thorp' });
+    const cap = treasuryCapacity(s);
+    const full = { ...s, economicState: { ...s.economicState, treasury: { coin: cap, openedTick: 1, lastTick: 1, coinFlows: { taxed: 0, upkeep: 0, transferredIn: 0, transferredOut: 0, shortfall: 0 } } } };
+    const out = computeTaxYield(full, { rulingPower: 'autocrat' });
+    expect(out.minted).toBe(0);
+    // …and what it WOULD have minted is reported rather than silently burned.
+    expect(out.stopped).toBeGreaterThan(0);
+  });
+
+  it('A1.16 BOTH HALVES: a capacity-stopped tick STILL pays the band price', () => {
+    // The crown that squeezes and cannot even bank the coin still pays the resentment.
+    const s = taxable({ tier: 'thorp' });
+    const cap = treasuryCapacity(s);
+    const full = { ...s, economicState: { ...s.economicState, treasury: { coin: cap, openedTick: 1, lastTick: 1, coinFlows: { taxed: 0, upkeep: 0, transferredIn: 0, transferredOut: 0, shortfall: 0 } } } };
+    const out = computeTaxYield(full, { rulingPower: 'criminal' });
+    expect(out.minted).toBe(0);
+    expect(out.legitimacyDelta).toBeLessThan(0);
+  });
+
+  it('the legitimacy price follows the BAND, is bounded, integer, and never positive', () => {
+    const council = computeTaxYield(taxable(), { rulingPower: 'council' });
+    const criminal = computeTaxYield(taxable(), { rulingPower: 'criminal' });
+    // A council on light levies pays nothing; a criminal seat pays.
+    expect(council.legitimacyDelta).toBe(0);
+    expect(criminal.legitimacyDelta).toBeLessThan(0);
+    for (const power of RULING_POWERS) {
+      const out = computeTaxYield(taxable(), { rulingPower: power });
+      expect(Number.isInteger(out.legitimacyDelta)).toBe(true);
+      expect(out.legitimacyDelta).toBeLessThanOrEqual(0);
+      expect(out.legitimacyDelta).toBeGreaterThanOrEqual(-TREASURY_TUNING.LEGITIMACY_PRICE_CAP);
+      expect(Object.is(out.legitimacyDelta, -0), 'a −0 price serializes as "-0"').toBe(false);
+    }
+  });
+
+  it('A1.14 — siege and occupation both zero the yield, and neither mints inward', () => {
+    for (const suspension of TREASURY_SUSPENSIONS) {
+      const out = computeTaxYield(taxable(), { rulingPower: 'autocrat', suspension });
+      expect(out.minted, `${suspension} still minted`).toBe(0);
+      for (const entry of out.entries) expect(entry.amount).toBe(0);
+    }
+  });
+
+  it('an unknown ruling power falls to the mixed row rather than throwing', () => {
+    const out = computeTaxYield(taxable(), { rulingPower: 'not_a_power' });
+    const mixed = computeTaxYield(taxable(), { rulingPower: 'mixed' });
+    expect(out.minted).toBe(mixed.minted);
+  });
+});
+
+describe('the writer mints, receipts and prices — end to end', () => {
+  const lit = { treasuryEnabled: true };
+
+  it('a lit tick mints into coinFlows.taxed and receipts the resolved bands', () => {
+    const first = advanceTreasury(taxable(), { tick: 1, rules: lit });
+    const second = advanceTreasury(first.settlement, { tick: 2, rules: lit });
+    const t = second.settlement.economicState.treasury;
+    expect(t.coin).toBeGreaterThan(0);
+    expect(t.coinFlows.taxed).toBe(second.summary.taxed);
+    expect(second.summary.receipts.map((r) => r.kind)).toContain('tax_receipt');
+    // THE BAND IS RECORDED AT FLOW TIME — history is never re-derived from current rates.
+    for (const entry of second.summary.taxEntries) {
+      expect(TAX_RATE_BANDS).toContain(entry.band);
+      expect(TAX_FORMS).toContain(entry.form);
+    }
+  });
+
+  it('the ruling power on the summary comes from the ONE resolver', () => {
+    const merchantSeat = taxable({
+      powerStructure: {
+        governingName: 'The Seat',
+        factions: [{ faction: 'The Seat', category: 'merchant', power: 40, isGoverning: true }],
+      },
+    });
+    const r = advanceTreasury(merchantSeat, { tick: 1, rules: lit });
+    expect(r.summary.rulingPower).toBe('merchant_league');
+    expect(r.summary.rulingBasis).toBe('governing_archetype');
+    // …and a seatless settlement is priced on the mixed row and SAYS so.
+    const seatless = advanceTreasury(taxable({ powerStructure: { factions: [] } }), { tick: 1, rules: lit });
+    expect(seatless.summary.rulingPower).toBe('mixed');
+    expect(seatless.summary.rulingBasis).toBe('no_governing_faction');
+  });
+
+  it('§11.11 COUP COMPOSITION: a coup retypes taxation, and both orders agree', () => {
+    // The A1.12 stamp is what makes this true: the seat wears the winner's archetype, so
+    // the resolver reads the new power on the very next tick without W-COIN code.
+    const before = taxable({
+      powerStructure: {
+        governingName: 'The Seat',
+        factions: [
+          { faction: 'The Seat', category: 'government', power: 40, isGoverning: true },
+          { faction: 'Coin Hall', category: 'merchant', power: 30 },
+        ],
+      },
+    });
+    const asCouncil = advanceTreasury(before, { tick: 1, rules: lit });
+    expect(asCouncil.summary.rulingPower).toBe('council');
+    const couped = transferRulingPower(before, 'Coin Hall', { cause: 'coup', tick: 1 });
+    expect(couped.error).toBeNull();
+    const asLeague = advanceTreasury(couped.settlement, { tick: 2, rules: lit });
+    expect(asLeague.summary.rulingPower).toBe('merchant_league');
+    // ORDER TWO: tax first, then coup, then tax — the second tick reads the NEW power.
+    const taxedThenCouped = transferRulingPower(asCouncil.settlement, 'Coin Hall', { cause: 'coup', tick: 1 });
+    const after = advanceTreasury(taxedThenCouped.settlement, { tick: 2, rules: lit });
+    expect(after.summary.rulingPower).toBe('merchant_league');
+    // Deterministic: the same power ⇒ the same per-form bands, whichever order got there.
+    expect(after.summary.taxEntries.map((e) => [e.form, e.band]))
+      .toEqual(asLeague.summary.taxEntries.map((e) => [e.form, e.band]));
+  });
+
+  it('NO PROSPERITY WRITE ANYWHERE, and the ONLY opinion write is the legitimacy price', () => {
+    const r = advanceTreasury(taxable(), { tick: 1, rules: lit });
+    // The direction-of-read law, executed: prosperity in, nothing out.
+    expect(r.settlement.economicState.prosperity).toBe('Moderate');
+    expect(r.settlement.powerStructure).toEqual(taxable().powerStructure);
+    // …and a source scan, because one fixture cannot prove an absence across a module.
+    const src = fs.readFileSync(path.join(ROOT, 'src/domain/worldPulse/treasury.js'), 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+    expect(src).not.toMatch(/applyProsperityDeltasToUpdates/); // anchored: the same stripped source is asserted to contain the legitimacy applicator two lines below, so a source read that returned nothing reds there rather than passing here.
+    expect(src).not.toMatch(/prosperity\s*:/); // anchored: as above — the module is proven non-empty and proven to carry its real imports by the assertions below.
+    expect(src).toMatch(/applyLegitimacyDeltasToUpdates/);
+    expect(src.length).toBeGreaterThan(1000);
+  });
+});
+
+describe('applyTreasuryLegitimacyDeltas — one applicator, not a second', () => {
+  const updatesFor = (score) => [{
+    saveId: 's0',
+    settlement: { powerStructure: { publicLegitimacy: { score, label: 'Accepted' } } },
+  }];
+
+  it('routes bounded integer deltas through the EXISTING applicator', () => {
+    const out = applyTreasuryLegitimacyDeltas(updatesFor(55), new Map([['s0', -3]]));
+    expect(out[0].settlement.powerStructure.publicLegitimacy.score).toBe(52);
+  });
+
+  it('clamps at the [0,100] domain the existing applicator owns', () => {
+    expect(applyTreasuryLegitimacyDeltas(updatesFor(2), new Map([['s0', -50]]))[0]
+      .settlement.powerStructure.publicLegitimacy.score).toBe(0);
+  });
+
+  it('returns the INPUT ARRAY BY REFERENCE when nothing moved', () => {
+    const updates = updatesFor(55);
+    expect(applyTreasuryLegitimacyDeltas(updates, new Map())).toBe(updates);
+    expect(applyTreasuryLegitimacyDeltas(updates, new Map([['s0', 0]]))).toBe(updates);
+    expect(applyTreasuryLegitimacyDeltas(updates, new Map([['missing', -3]]))).toBe(updates);
+  });
+
+  it('SKIPS a legacy bare-number or absent legitimacy, exactly as the applicator does', () => {
+    const legacy = [{ saveId: 's0', settlement: { powerStructure: { publicLegitimacy: 55 } } }];
+    expect(applyTreasuryLegitimacyDeltas(legacy, new Map([['s0', -3]]))[0]
+      .settlement.powerStructure.publicLegitimacy).toBe(55);
+  });
+
+  it('is a call-shape adapter, NOT a second applicator (source scan)', () => {
+    const src = fs.readFileSync(path.join(ROOT, 'src/domain/worldPulse/treasury.js'), 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+    // It must DELEGATE, never re-implement the clamp.
+    expect(src).toMatch(/applyLegitimacyDeltasToUpdates\(/);
+    expect(src).not.toMatch(/publicLegitimacy/); // anchored: the delegation match above proves this same stripped source is non-empty and carries the real call, so an emptied read reds there.
   });
 });
 

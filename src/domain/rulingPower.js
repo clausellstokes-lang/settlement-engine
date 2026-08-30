@@ -26,7 +26,6 @@
  * machines and would break replay).
  */
 
-import { clamp01 } from '../kernel/math.js';
 import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 
 const A = FACTION_ARCHETYPES;

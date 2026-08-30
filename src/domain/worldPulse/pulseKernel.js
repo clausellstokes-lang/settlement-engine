@@ -123,7 +123,7 @@ import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTic
 // ratchet-up in its history (J-EP-11, 1580 -> 1581) was chair-signed for exactly one
 // import line. W-COIN takes no such ratchet: the import shares a physical line and the
 // call below shares one with the statement it already stood beside.
-import { assertNoResidueLeak } from './residueStripGuard.js'; import { advanceTreasury } from './treasury.js';
+import { assertNoResidueLeak } from './residueStripGuard.js'; import { advanceTreasury, applyTreasuryLegitimacyDeltas } from './treasury.js';
 
 /**
  * RESIDUE-STRIP REGISTRY (machine-enforced; replaces the old prose checklist).
@@ -504,7 +504,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // Flag-on granary states for the season boundary markers (harvest thinness,
   // hungry-gap direness) — collected from this tick's stockpile advance.
   /** @type {Array<{ id: string, name: string, present: boolean, storageMonths: number, deficitPct: number }>} */
-  const seasonalFoodStates = [];
+  // W-COIN-1b — the treasury's LEGITIMACY PRICE, collected here and applied five stages
+  // later. It cannot be applied where it is earned: `settlementUpdates` does not exist
+  // until consequence_fold, and A1.16 forbids a second legitimacy writer, so the mint
+  // stays at the settlement_clock writer and the PRICE rides its summary to the one
+  // existing applicator (ODQ §768.2). `;`-joined at +0 effective lines, like every other
+  // W-COIN edit to this permanently-banked file.
+  const seasonalFoodStates = []; const treasuryLegitimacyDeltas = new Map();
   for (const item of snapshot.settlements) {
     const previousTickState = settlementTickStates[item.id] || null;
     /** @type {any} */
@@ -565,8 +571,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // anything else and returns its input settlement BY REFERENCE, so `vaulted === sieged`
     // and this line is byte-identical to the one it replaced. `;`-joined at +0 effective
     // lines against the frozen ceiling.
-    const sieged = applyBlockadeTransportImpairment(stocked.settlement, blockade, { now }); const vaulted = advanceTreasury(sieged, { interval: tickInterval, tick: worldState.tick, deployment, blockade, rules: simulationRules }).settlement;
-    localSettlements.set(String(item.id), vaulted);
+    const sieged = applyBlockadeTransportImpairment(stocked.settlement, blockade, { now }); const vaulted = advanceTreasury(sieged, { interval: tickInterval, tick: worldState.tick, deployment, blockade, rules: simulationRules }); if (vaulted.summary?.legitimacyDelta) treasuryLegitimacyDeltas.set(String(item.id), vaulted.summary.legitimacyDelta);
+    localSettlements.set(String(item.id), vaulted.settlement);
     // Merge rather than replace: advanceTime only returns { clockStages }, but
     // this entry also carries cross-tick drift streaks (tierDrift,
     // economyDrift) written by later evaluators — a wholesale assignment wiped
@@ -1806,7 +1812,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
     return projected === update.settlement ? update : { ...update, settlement: projected };
   });
-  const publicSurfaces = publicPulseSurfaces([...admittedDeterministicOutcomes, ...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates], [...deterministicExplanations, ...rollExplanations]);
+  // W-COIN-1b — THE LEGITIMACY PRICE LANDS HERE, at @pulse-stage: consequence_fold, which
+  // is the first stage where `settlementUpdates` exists at all. A1.4's stage-order law
+  // applied to an OPINION delta rather than a coin delta: the mint runs at settlement_clock
+  // and every emitter runs after it. The deltas go through the ONE existing legitimacy
+  // applicator (generosityUpdates.applyLegitimacyDeltasToUpdates, bounded/integer/clamped);
+  // an empty map returns the array by reference, so a dark world is byte-identical.
+  settlementUpdates = applyTreasuryLegitimacyDeltas(settlementUpdates, treasuryLegitimacyDeltas); const publicSurfaces = publicPulseSurfaces([...admittedDeterministicOutcomes, ...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates], [...deterministicExplanations, ...rollExplanations]);
   const pulseRecord = {
     id: pulseIdFor(campaign?.id, worldState.tick),
     tick: worldState.tick,

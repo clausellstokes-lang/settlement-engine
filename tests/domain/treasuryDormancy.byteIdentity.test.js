@@ -38,6 +38,7 @@ import { describe, expect, it } from 'vitest';
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { scrubImportedTreasury } from '../../src/lib/importScrub.js';
+import { treasuryCapacity } from '../../src/domain/worldPulse/treasury.js';
 
 const NOW = '2026-02-02T00:00:00.000Z';
 
@@ -219,13 +220,20 @@ describe('W-COIN dormancy — the virtual flag is byte-identical when dark', () 
     expect(treasuryKeyPaths(on).length).toBeGreaterThan(0);
     for (const s of on.settlements) {
       const t = /** @type {any} */ (s).economicState.treasury;
-      // Opened EMPTY, at the FIRST tick the world advanced (the pulse stamps tick 1), and
-      // still empty eight ticks later: 1a has no mint, and the zero row is the design
-      // rather than a bug — taxation is 1b's only mint kind.
-      expect(t.coin).toBe(0);
+      // Opened at the FIRST tick the world advanced (the pulse stamps tick 1) and taxed
+      // on every lit tick since — W-COIN-1b's mint is live, so the vault is no longer the
+      // zero row 1a shipped. ⚠ THIS ASSERTION MOVED WHEN 1b LANDED, and it moved in the
+      // one direction that means the mint is real.
+      expect(t.coin).toBeGreaterThan(0);
       expect(t.openedTick).toBe(1);
       expect(t.lastTick).toBe(8);
-      expect(t.coinFlows).toEqual({ taxed: 0, upkeep: 0, transferredIn: 0, transferredOut: 0, shortfall: 0 });
+      // The stock never exceeds its own derived ceiling, on any settlement, ever.
+      expect(t.coin).toBeLessThanOrEqual(treasuryCapacity(/** @type {any} */ (s)));
+      // `taxed` is the LAST-TICK integer, so it is the tick-8 mint, not the lifetime total.
+      expect(t.coinFlows.taxed).toBeGreaterThan(0);
+      expect(t.coinFlows).toEqual({
+        taxed: t.coinFlows.taxed, upkeep: 0, transferredIn: 0, transferredOut: 0, shortfall: 0,
+      });
     }
   });
 
@@ -265,7 +273,8 @@ describe('W-COIN dormancy — the virtual flag is byte-identical when dark', () 
     const on = run({ treasuryEnabled: true });
     const roundTripped = JSON.parse(JSON.stringify(on.settlements));
     expect(roundTripped).toEqual(on.settlements);
-    expect(roundTripped[0].economicState.treasury.coin).toBe(0);
+    expect(roundTripped[0].economicState.treasury.coin)
+      .toBe(/** @type {any} */ (on.settlements[0]).economicState.treasury.coin);
   });
 });
 
