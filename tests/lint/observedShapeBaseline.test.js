@@ -13,6 +13,7 @@ import {
   RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
   RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
+  RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -25,6 +26,7 @@ import {
   validateSchema8Baseline,
   validateSchema9Baseline,
   validateSchema10Baseline,
+  validateSchema11Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -253,7 +255,12 @@ describe('observed-shape schema-3 baseline envelope', () => {
 
   test('the RETIRED exact definition still names schema 3, and refuses the live schema', () => {
     expect(RETIRED_EXACT_BASELINE_SCHEMA).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(10);
+    // ⭐ SCHEMA 11 (TE-OSHAPE-2, ODQ §771.2/§771.3). Schema 10's tagged topology envelope
+    // re-governed to a DETECTOR THAT GENUINELY CHANGED — the first rung since 8→9 that is
+    // not a pure envelope re-reconciliation. It binds TE-OSHAPE-1's provenance-drift repair
+    // and fourth door, and grows the explained-writer bank by ONE.
+    expect(BASELINE_SCHEMA).toBe(11);
+    expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
     expect(RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA).toBe(9);
     expect(RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA).toBe(8);
     expect(RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA).toBe(7);
@@ -393,7 +400,18 @@ function validSchema9Baseline() {
   return baseline;
 }
 
+/** The RETIRED schema-10 envelope, pinned to its own LITERAL number. It used to read
+ *  `BASELINE_SCHEMA`, which was correct only while 10 was the live rung — the moment the
+ *  authority moved to 11 that spelling would have silently re-pointed this fixture at the
+ *  new number and stopped testing the retired one at all. */
 function validSchema10Baseline() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_PROSE_REGEN_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The LIVE envelope, whatever number is in force. */
+function validLiveBaseline() {
   const baseline = validSchema7Baseline();
   baseline.schema = BASELINE_SCHEMA;
   return baseline;
@@ -427,8 +445,12 @@ function mutateSchema9(mutator) {
   return baseline;
 }
 
+/** Mutate the LIVE envelope. It reads the live fixture rather than the retired schema-10
+ *  one because its callers feed the result to a real `run()`: a retired-schema baseline
+ *  would be refused for its NUMBER before any malformation could be judged, and the test
+ *  would pass for the wrong reason. */
 function mutateSchema10(mutator) {
-  const baseline = validSchema10Baseline();
+  const baseline = validLiveBaseline();
   mutator(baseline);
   baseline.digests.inventory = digestOf(baseline.inventory);
   baseline.digests.rowTags = digestOf(baseline.rowTags);
@@ -602,11 +624,13 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     const retired = validSchema7Baseline();
     const baseline = validSchema8Baseline();
     const epochDark = validSchema9Baseline();
-    const live = validSchema10Baseline();
+    const proseRegen = validSchema10Baseline();
+    const live = validLiveBaseline();
     expect(validateSchema7Baseline(retired)).toBe(retired);
     expect(validateSchema8Baseline(baseline)).toBe(baseline);
     expect(validateSchema9Baseline(epochDark)).toBe(epochDark);
-    expect(validateSchema10Baseline(live)).toBe(live);
+    expect(validateSchema10Baseline(proseRegen)).toBe(proseRegen);
+    expect(validateSchema11Baseline(live)).toBe(live);
     expect(() => validateSchema7Baseline(baseline)).toThrow(/is not schema 7/);
     expect(() => validateSchema8Baseline(retired)).toThrow(/is not schema 8/);
     // ⚠ EVERY ADJACENT PAIR IS PINNED IN BOTH DIRECTIONS FOR ONE REASON: FOUR
@@ -620,6 +644,8 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     expect(() => validateSchema8Baseline(epochDark)).toThrow(/is not schema 8/);
     expect(() => validateSchema7Baseline(epochDark)).toThrow(/is not schema 7/);
     expect(() => validateSchema10Baseline(epochDark)).toThrow(/is not schema 10/);
+    // …and the LIVE validator names 11, so the retired rung above keeps its own number.
+    expect(() => validateSchema11Baseline(epochDark)).toThrow(/is not schema 11/);
     expect(() => validateSchema9Baseline(live)).toThrow(/is not schema 9/);
     expect(() => validateSchema8Baseline(live)).toThrow(/is not schema 8/);
     expect(() => validateSchema7Baseline(live)).toThrow(/is not schema 7/);

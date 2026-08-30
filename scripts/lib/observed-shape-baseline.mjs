@@ -7,12 +7,17 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **10**: schema 9's tagged numeric heuristic-leaf envelope
- * re-governed to the landed inputs a second time, and NOTHING ELSE MOVES WITH
- * IT. The identity grammar, topology inventory, envelope law and explained-writer
- * bank are all schema 9's, unchanged; this mint binds exactly the two regenerated
- * dossier-prose leaves (subject-but-unscanned) and one added `package.json`
- * lint-staged binding, with the lockfile untouched.
+ * `BASELINE_SCHEMA` is **11**: schema 10's tagged numeric heuristic-leaf envelope
+ * re-governed to a DETECTOR that genuinely changed, which is what makes this rung
+ * different from 9 and 10. Those two were envelope re-reconciliations that
+ * declared nothing; this one binds a REPAIRED detector (TE-OSHAPE-1's provenance
+ * drift classifier and its fourth door) plus ONE bank growth — the ninth
+ * explained-writer identity, `isCriminal on incomeSources`, admitted under the
+ * new `conditional-generator-branch` mechanism (ODQ §771.2). The identity
+ * grammar, topology inventory and envelope law remain schema 9's, unchanged.
+ *
+ * `RETIRED_PROSE_REGEN_BASELINE_SCHEMA` is **10**: schema 11's predecessor,
+ * frozen. Never redefined, never deleted.
  *
  * `RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA` is **9**: schema 8's tagged numeric
  * envelope re-governed to the landed post-EP-1 truth — the dark
@@ -151,7 +156,14 @@ export const RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA = 8;
  *  to the regenerated prose leaves and the added lint-staged binding, declaring
  *  nothing new. Never redefined, never deleted. */
 export const RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA = 9;
-export const BASELINE_SCHEMA = 10;
+/** The RETIRED prose-regen definition — schema 11's predecessor. Same tagged
+ *  topology envelope and the same eight-identity bank; schema 11 re-governs it
+ *  to a REPAIRED detector and grows the bank by one. Never redefined, never
+ *  deleted — a live baseline is validated against BASELINE_SCHEMA, and this
+ *  constant exists so a schema-10 PREDECESSOR is still validated as schema 10
+ *  after the live number moves past it. */
+export const RETIRED_PROSE_REGEN_BASELINE_SCHEMA = 10;
+export const BASELINE_SCHEMA = 11;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -604,6 +616,17 @@ export function validateSchema9Baseline(baseline) {
  *  subject-but-unscanned prose leaves and the added package.json lint-staged
  *  binding. Nothing is declared, retuned or widened by this rung. */
 export function validateSchema10Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
+ *  so the retired rungs above keep validating their own numbers while this one
+ *  always names the authority. */
+export function validateSchema11Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
