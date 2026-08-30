@@ -478,6 +478,38 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'map-geometry substrate — the ONE water flood-fill home (design §2 D2), producing the sailing components TRADE\'s sea lanes read and the interior-vs-ocean split the lake typology reads; a port here would make a pure geometry read a cross-layer coupling',
     reads: Object.freeze([]),
   }),
+  // ── 2026-08-30, WEAVE SEAM-5 (lane T6 · REALM-NET): the canon membership read ──────
+  //
+  // THE THIRD ARRIVAL OF spatialLedgerAccess.js's ARGUMENT, and it arrives by the same
+  // road: a read lifted out of `distanceRead.js` because a FIRST-PAINT consumer needed
+  // it and importing the 53 kB frozen-digest reader would have dragged that module into
+  // the consumer's chunk — the recorded `warCoalitionLedger` incident, and the exact
+  // reason the four spatialLedgers accessors were lifted in the first place.
+  //
+  // WHAT IT OWNS is "which settlements did the canon actually map" — the membership
+  // roster the freeze recorded, and nothing else. Every mover already consults it
+  // through `mappedDistanceWeight`, which refuses to attenuate a tie whose endpoint the
+  // canon never saw; WAR's fronts, TRADE's flows, POP's migrations and every future
+  // layer ask the same question of the same roster. Filing it under any one of them
+  // would make the others' read of the canon's own membership a cross-layer coupling
+  // into that port — the inversion the substrate reading exists to prevent, and the
+  // same distinction (SUBJECT, not program) that gave peopleLedger.js WAR and
+  // spatialLedgerAccess.js no port at all.
+  //
+  // AND NOT THE BASELINE, for the reason spatialLedgerAccess.js records: that file is
+  // for the volume's §4 PRE-PROGRAM debt, and a module minted this week is not that. A
+  // baseline row would launder a program-era edit into permanent invisibility, and the
+  // arm above says so in as many words.
+  //
+  // WHAT IT COSTS, MEASURED: its outbound reach is ONE import, `../display/numberWords.js`
+  // — itself a zero-import table, OUTSIDE this census's scope (worldPulse + spatial), and
+  // not a port. So the declaration below is `[]`, the machine form of "this leaf reaches
+  // no port", and the day it reaches one this reds by name instead of hiding the edge.
+  'src/domain/spatial/canonMembership.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'canon-membership substrate — the ONE read of which settlements the frozen digest actually mapped, asked by every mover through mappedDistanceWeight and by the re-canonize CTA; a port here would make each layer\'s read of the canon\'s own roster a cross-layer coupling, and it is lifted out of distanceRead.js precisely so a first-paint consumer does not drag the 53 kB digest reader into its chunk',
+    reads: Object.freeze([]),
+  }),
   // ── 2026-08-30, WEAVE NAME-1 (lane TE-NAME): the prose-selection kernel, extracted ──
   //
   // The SAME argument waterBodies.js carries directly above, arriving the same way: a
@@ -784,8 +816,33 @@ const ARGUED_HOSTS = Object.freeze([
  * declared `reads: []`, and NO edge leaves the pair scan. What the raise buys is that the
  * FIRST port this leaf ever reaches reds by name.
  * A twenty-fourth admission is the next deliberate act.
+ *
+ * ── 23 → 24, 2026-08-31, WEAVE SEAM-5 (lane T6 · REALM-NET), AT THE LANDING ───────
+ * THE TWENTY-FOURTH, AND IT IS THE DELIBERATE ACT THE LINE ABOVE ASKED FOR.
+ * ⚠ THE LANE WROTE THIS RAISE AS 22 → 23 AGAINST ITS OWN BASE (ecc6def3e) AND IT IS
+ * RE-SEATED HERE, at the landing, because W-SEAM SEAM-3 took the twenty-third seat in
+ * the 76 commits that landed in between. Only the SEAT moved: the argument, the measured
+ * reach and the `reads: []` declaration below are the lane's own and are unchanged. A
+ * ceiling raise is a COUNT of the roster, so two lanes raising 22 → 23 from one base is
+ * the same arithmetic-versus-measurement trap the lighting census records — resolved the
+ * same way, by re-counting the roster here rather than by keeping the number written
+ * there. The roster length is asserted against this constant below, so a wrong seat reds.
+ * `src/domain/spatial/canonMembership.js` — the read of which settlements the frozen
+ * canon actually mapped, lifted out of `distanceRead.js` so a FIRST-PAINT settings
+ * control could ask the question without dragging the 53 kB frozen-digest reader into
+ * its chunk. Its full argument sits beside its ARGUED_UNLAYERED entry above; the short
+ * form is the one `spatialLedgerAccess.js` established and `waterBodies.js` re-used:
+ * what it owns is a roster every port already consults (through `mappedDistanceWeight`),
+ * so filing it under any single port would make the others' read of the canon's own
+ * membership a cross-layer coupling.
+ * MEASURED AT THE RAISE, on the same reading every admission here is measured on: this
+ * leaf's outbound reach is ONE import, `../display/numberWords.js` — a zero-import table,
+ * OUTSIDE this census's scope (worldPulse + spatial) and not a port. Its layered reach is
+ * therefore 0, it is declared `reads: []`, and NO edge leaves the pair scan. What the
+ * raise buys is that the FIRST port this leaf ever reaches reds by name.
+ * A twenty-fifth admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 23;
+const ARGUED_ROSTER_CEILING = 24;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;
