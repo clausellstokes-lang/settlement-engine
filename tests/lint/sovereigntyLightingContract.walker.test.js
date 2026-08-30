@@ -6981,7 +6981,25 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // `git diff` (8+3+3 = 14, 1+0+1 = 2). Closing exactly ALSO proves all three touched files
     // are CREDITED rather than parked — a parked file would have left the total short.
     // Every added title is a literal string: no template literals, no `test.each`.
-    files: 2428, parked: 367, credited: 2061, titles: 20547, suiteTitles: 5670,
+    // ── W-COIN / TE-OSHAPE LANDING RE-DERIVATION (2026-08-30) ────────────────────────
+    // Re-derived WHOLE — all five figures in ONE execution — at the landing tip, on a base
+    // that HERALD, the strip-finish train and RESIDUE had all moved. The landed row was
+    // taken VERBATIM through the rebase and this lane's own two census commits went EMPTY
+    // as a result, which is the correct outcome: their entire content was figures that
+    // described a tree that no longer exists.
+    //   files      2428 -> 2430 (+2)    parked 367 -> 367 (+0)   credited 2061 -> 2063 (+2)
+    //   titles    20547 -> 20656 (+109) suiteTitles 5670 -> 5694 (+24)
+    // THE DELTA CLOSES EXACTLY, per file:
+    //   +2 files / +2 credited — tests/domain/treasury.test.js and
+    //     tests/domain/treasuryDormancy.byteIdentity.test.js; neither parks.
+    //   +109 titles — 72 (treasury) + 12 (dormancy) + 6 (the A1.8 import arms)
+    //     + 16 (the fourth door's 9 conviction arms and the provenance classifier's 7)
+    //     + 3 (the §784.2 custody controls)
+    //   +24 suite titles — 17 + 2 + 2 + 2 + 1 across those same five files. ⚠ Two of those
+    //     suites are NESTED describes, which a top-level `^describe(` count misses; the
+    //     walker counts every live suite title, and that difference is exactly why the
+    //     arithmetic is asserted here rather than eyeballed.
+    files: 2430, parked: 367, credited: 2063, titles: 20656, suiteTitles: 5694,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
