@@ -3,8 +3,8 @@
   "cellCount": 432,
   "edges": 4,
   "gates": 12,
-  "hash": "1850cab70bed67bcbd319dc59b5f22d704a51514d1298693aebf3484bebbac91",
+  "hash": "1148e6318284bbb18fe064c02316eacb66b44c013adef4b329146e61f22e55e3",
   "ports": 5,
-  "seaLaneVersion": 1,
+  "seaLaneVersion": 2,
   "settlements": 8
 }

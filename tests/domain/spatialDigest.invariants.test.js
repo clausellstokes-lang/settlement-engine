@@ -326,16 +326,37 @@ describe('SEAM-1 — RAW-BYTE dormancy: no existing canon moves a byte', () => {
   // Every one is reproduced here at the tip. A hash that moves means an existing
   // canon's bytes moved — which is a defect, not a re-record, unless the act that
   // moved it declares the cause.
+  // ── RE-RECORDED BY W-CAP CAP-2 (river navigability), 2026-08-29 — A DECLARED SHIFT ──
+  // FIVE of the nine moved and FOUR did not, and the split is the proof rather than a
+  // coincidence: exactly the five whose fixtures actually LIGHT the seaLanes slot moved,
+  // because CAP-2 stamps SEA_LANE_VERSION 2 there. The four unmoved ones keep their
+  // ORIGINAL sha character for character — grid22x18-12-plain and tie carry no sea lanes
+  // at all, grid24x18-teleport's placements hold circles rather than docks, and
+  // grid22x18-12-allslots opts INTO seaLanes but has no dock-carrying settlement, so its
+  // slot is null. A version bump that had leaked anywhere else would have moved one of
+  // those four.
+  // ⭐ AND THE SHIFT IS PINNED AT LEAF GRANULARITY, not merely at the hash. An instrument
+  // built every fixture pack × every opt-in combination the production canonize uses (44
+  // digests) at base and at tip and diffed them leaf by leaf. Across ALL 18 moved cases the
+  // complete set of differing leaves is ONE:
+  //     .reserved.seaLanes.version   1 -> 2
+  // Not one port, edge, cost, gate or geometry byte moved. The port/edge COUNTS are
+  // likewise unchanged (grid24x18-ports still 5 ports / 4 edges) — which is expected, since
+  // these fixture packs carry no captured flux, every river band therefore reads `unknown`,
+  // and the amended rule collapses to the pre-CAP `r != 0` verdict exactly.
+  // ⚠ THE FROZEN CANONS DO NOT MOVE AT ALL. A canon's seaLanes slot is authored ONCE at
+  // canonize and never recomputed (freeze-first), so an existing campaign keeps its v1 slot
+  // and its v1 port verdicts forever. This re-record describes what a NEW canonize builds.
   const EXPECTED = Object.freeze({
     'grid22x18-12-plain': '437a47ef780ac6b156ec8cfed27448d0f0bff1e41b4b25ff0559b50a5f446ddb',
     'grid22x18-12-allslots': '324d68b0161a3bd79ebd66b053844708310f72537e3f7cd0ae6022d034b10f39',
-    'grid24x18-ports': '1ba924842559f12e6d191e943a1982a10d5bf771d8bc1b4472cafa5266d6abe9',
+    'grid24x18-ports': '099a24e51cb7201a1b38a96ff9df65259a7f6bc0b22d4b8496aedce949d8e703',
     'grid24x18-teleport': '65f7181ad1d435577586613dabc5c0ce4f9b0ce863a3e18a242724a9e1cd57dc',
-    island: 'b7affc5903ce5d62a59ca6b590746ca9ffc1838f7e963c6c8ce32c103ef3a3c8',
-    'disconnected-water': '99758d508d17a599bcba465a0d3052e9016e0150f3e9c4e0df5d94d379b924de',
-    isthmus: 'c86bf0edaa7ca2f11d33b98377b692fc052a86b504b737c33ea74f7c03d7fa05',
+    island: 'c6d084e03616c83c280a1369c57e04f6d66762b2f6adf312ca5db45f5302272f',
+    'disconnected-water': '2b5037c4ebf88c8d91a2c3a5cd4d936d84852e53b9ee490da5445e2236c4352e',
+    isthmus: '640e35bc67e427f4d4e70f32a4932e52cb4fef77b75b58391a833c9087f6dfce',
     tie: 'c27487d0b8e1264eca7932af948710f6a7c421d785c58f59762ee39f3cd92c10',
-    'port-coast-20': '2f7b5736fe478cf7b24d6d97029a7055f8ae9faea5d12d9a34880a89b10443ff',
+    'port-coast-20': '783221edbc4c809cf7cec8fd8f21263bc8b8355301ae97a0d7c178c3e6f42cf5',
   });
   const sha = v => createHash('sha256').update(JSON.stringify(v)).digest('hex');
 

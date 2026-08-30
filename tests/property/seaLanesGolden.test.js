@@ -6,7 +6,7 @@
  * carrying a water-access institution) canonized WITH the sea lanes lit
  * (`seaLanes:true`) ⇒ a sha256-pinned digest that carries the frozen port set +
  * cheap high-capacity water edge set + storm-season law under the reserved seaLanes
- * slot (version 1). A change to the port-derivation rule, the sea cost constants,
+ * slot (version 2 since W-CAP CAP-2). A change to the port-derivation rule, the sea cost constants,
  * the storm table, the slot shape, or the underlying geometry trips this. Because
  * the digest is a pure function of the frozen pack + placements (+ their roster),
  * the hash is stable across machines and runs.
@@ -68,7 +68,11 @@ describe('SEA LANES — sea-lane digest golden', () => {
     expect(record.settlements).toBe(pinned.settlements);
     expect(record.ports).toBe(pinned.ports);
     expect(record.edges).toBe(pinned.edges);
-    expect(record.seaLaneVersion).toBe(1);
+    // W-CAP CAP-2 stamped v2 — the river-navigability port rule. Re-recorded with the
+    // manifest in the same act; the fixture's ports (5) and edges (4) are UNCHANGED, so
+    // the hash moved on the version stamp alone (proved leaf-by-leaf in
+    // spatialDigest.invariants' raw-byte block).
+    expect(record.seaLaneVersion).toBe(2);
   });
 
   it('the sea-lane golden is reproducible — a second build hashes identically', () => {

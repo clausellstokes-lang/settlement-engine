@@ -150,6 +150,93 @@ export function isRiverCell(pack, cell) {
   return Number.isFinite(rv) && rv !== 0;
 }
 
+// ── W-CAP CAP-2: RIVER NAVIGABILITY, and the difference between a river and a ford ──
+// `isRiverCell` answers "is there a watercourse here", which is the question the cost
+// law needs (a river cheapens travel along it). It is NOT the question a PORT needs. A
+// headwater trickle and the tidal reach of a great river both read `r != 0`, and a
+// settlement on the trickle was granted sea lanes to the ocean — the isolation
+// inversion firing where a hull could never float.
+//
+// The captured flux (`pack.fl`, CAP-1) is what separates them, and the cut is FMG'S OWN,
+// read out of the fork source rather than authored: its burg classifier calls a cell a
+// River burg only at `cells.r[i] && cells.fl[i] >= 100`. So MIN_NAVIGABLE_FLUX is 100
+// because FMG says 100, not because 100 looked right.
+export const MIN_NAVIGABLE_FLUX = 100;
+
+// The great-river shoulder. FMG has no named constant for it, so it is derived from the
+// only flux-keyed "as big as rivers get" statement its source makes: the river renderer
+// widens a course by `min(fl ** 0.7 / FLUX_FACTOR, MAX_FLUX_WIDTH)` with FLUX_FACTOR 500
+// and MAX_FLUX_WIDTH 1, so the width SATURATES at `fl = 500 ** (1/0.7) = 7172.51…`.
+// Frozen as the integer literal rather than computed at load: a fractional `**` evaluated
+// at module-evaluation time is exactly the cross-engine-variance surface the house
+// determinism rules exist to keep out of a value a canon can depend on.
+// ⚠ JUDGMENT, VETOABLE, AND DELIBERATELY NOT LOAD-BEARING: no eligibility, cost or lane
+// depends on this cut. It separates the two NAVIGABLE bands from each other and nothing
+// more, so moving it re-labels rivers and changes no behaviour.
+export const GREAT_RIVER_FLUX = 7173;
+
+/** The closed navigability vocabulary. `unknown` is the honest fourth state — the
+ *  capture carried no flux evidence, so the band is not merely un-computed, it is
+ *  un-KNOWABLE from this pack (the `terrainAgreement` tri-state idiom, and the same
+ *  `unknown` A1.2.14 mandates for an uncaptured lake subtype). A cell that is not on a
+ *  river at all is `null`, not a band.
+ *  @type {ReadonlyArray<string>} */
+export const RIVER_BANDS = Object.freeze(['stream', 'river', 'great_river', 'unknown']);
+
+/**
+ * Does this pack carry USABLE flux evidence?
+ *
+ * ⚠ THE TEST IS PER-PACK, NOT PER-CELL, and that is load-bearing. A per-cell test would
+ * read `fl[cell] === 0` on a pack whose river pass has not run as "a stream", silently
+ * demoting every river port on the map to unnavigable — a behaviour cliff triggered by an
+ * ABSENT input. FMG's own heightmap editor resets `pack.cells.fl` to a zero Uint16Array
+ * while river ids survive (`heightmap-editor.js:371`), so the all-zero pack is real, not
+ * hypothetical. Absent, ragged AND all-zero all mean the same thing here — no evidence —
+ * and no-evidence degrades to the pre-CAP rule rather than inventing a verdict.
+ * @param {{ fl?: number[] }} pack a NORMALIZED pack (normalizeSpatialPack's shape)
+ * @returns {boolean}
+ */
+export function hasFluxEvidence(pack) {
+  const fl = pack?.fl;
+  if (!Array.isArray(fl) || fl.length === 0) return false;
+  for (let i = 0; i < fl.length; i++) if (Number(fl[i]) > 0) return true;
+  return false;
+}
+
+/**
+ * The navigability band of a river cell: 'stream' | 'river' | 'great_river' | 'unknown',
+ * or null when the cell carries no river course at all.
+ *
+ * Pure, total, and a function of the frozen pack alone. `fluxKnown` is passed in rather
+ * than recomputed per cell so the whole-array evidence scan runs ONCE per digest build
+ * instead of once per seed.
+ * @param {{ h:number[], r:number[], fl?:number[] }} pack a NORMALIZED pack
+ * @param {number} cell
+ * @param {boolean} fluxKnown  hasFluxEvidence(pack), hoisted by the caller
+ * @returns {string|null}
+ */
+export function riverBandOf(pack, cell, fluxKnown) {
+  if (!isRiverCell(pack, cell)) return null;
+  if (!fluxKnown) return 'unknown';
+  const fl = Number((pack.fl || [])[cell]);
+  if (!Number.isFinite(fl)) return 'unknown'; // a ragged tail, not a measured trickle
+  if (fl >= GREAT_RIVER_FLUX) return 'great_river';
+  return fl >= MIN_NAVIGABLE_FLUX ? 'river' : 'stream';
+}
+
+/**
+ * Is a river cell NAVIGABLE — can a hull reach it? Only a MEASURED shortfall denies:
+ * `stream` is the one band that says no, because it is the one band backed by positive
+ * evidence that the flux is too small. `unknown` is navigable, which is precisely how
+ * "absent `fl` degrades to today's `r != 0` rule" is spelled — a port never loses
+ * eligibility for want of a field the capture did not carry.
+ * @param {string|null} band a riverBandOf result
+ * @returns {boolean}
+ */
+export function isNavigableBand(band) {
+  return band !== null && band !== 'stream';
+}
+
 /** @param {number|undefined} h @param {number|undefined} b */
 export function terrainClassOf(h, b) {
   const height = Number(h) || 0;

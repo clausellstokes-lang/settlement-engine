@@ -22,6 +22,13 @@ import {
   buildSeaLanes,
   SEA_LANE_CAPACITY,
   SEA_COST_PER_DIST,
+  SEA_LANE_VERSION,
+  MIN_NAVIGABLE_FLUX,
+  GREAT_RIVER_FLUX,
+  RIVER_BANDS,
+  hasFluxEvidence,
+  riverBandOf,
+  isNavigableBand,
 } from '../../src/domain/spatial/index.js';
 import {
   activeSeaLanes, isPort, pathCost, hopWeeks, distanceWeight, candidateRoutes,
@@ -127,6 +134,145 @@ describe('M8 — PORT ELIGIBILITY = geography ∧ institutions (pure, derived)',
     expect(lit).toBeTruthy();
     expect(lit.ports).toEqual(['a', 'b']);
     expect(lit.edges.length).toBe(1);
+  });
+});
+
+describe('W-CAP CAP-2 — RIVER NAVIGABILITY: a trickle is not a harbour', () => {
+  // A 4-cell hand-built river reach at ascending flux, so every band is reachable from
+  // ONE fixture and the cuts are read rather than inferred. All land, all on the river.
+  const reach = (fluxes) => ({
+    h: fluxes.map(() => 40),
+    r: fluxes.map(() => 1),
+    fl: [...fluxes],
+    c: fluxes.map((_, i) => [i - 1, i + 1].filter((v) => v >= 0 && v < fluxes.length)),
+    cellCount: fluxes.length,
+  });
+
+  it('the bands cut where FMG cuts: navigable at MIN_NAVIGABLE_FLUX, great at the width shoulder', () => {
+    // 100 is FMG's own burg classifier (`cells.r[i] && cells.fl[i] >= 100` ⇒ a River burg),
+    // and the great-river shoulder is where FMG's river renderer saturates its width.
+    expect(MIN_NAVIGABLE_FLUX).toBe(100);
+    expect(GREAT_RIVER_FLUX).toBe(7173);
+    const pack = reach([0, 99, 100, GREAT_RIVER_FLUX]);
+    expect(hasFluxEvidence(pack)).toBe(true);
+    expect(riverBandOf(pack, 0, true)).toBe('stream');
+    expect(riverBandOf(pack, 1, true)).toBe('stream');       // 99 — one short, still a trickle
+    expect(riverBandOf(pack, 2, true)).toBe('river');        // exactly at the cut
+    expect(riverBandOf(pack, 3, true)).toBe('great_river');
+    // Only `stream` denies a hull; the vocabulary is closed and every member is used.
+    expect(isNavigableBand('stream')).toBe(false);
+    expect(isNavigableBand('river')).toBe(true);
+    expect(isNavigableBand('great_river')).toBe(true);
+    expect(isNavigableBand('unknown')).toBe(true);
+    expect(isNavigableBand(null)).toBe(false);               // not on a river at all
+    for (const band of ['stream', 'river', 'great_river', 'unknown']) {
+      expect(RIVER_BANDS).toContain(band);
+    }
+  });
+
+  it('a cell OFF the river has no band at all — null, not a bucket', () => {
+    const pack = { ...reach([500, 500]), r: [0, 0] };
+    expect(riverBandOf(pack, 0, true)).toBeNull();
+    // …and dry land below LAND_HEIGHT is not a river either, whatever r says.
+    const ocean = { ...reach([500]), h: [10] };
+    expect(riverBandOf(ocean, 0, true)).toBeNull();
+  });
+
+  it('a dock on a STREAM is not a port; the SAME dock on a navigable reach is', () => {
+    // The whole point of the car. Before CAP-2 both of these were ports, and the one on
+    // the trickle was granted cheap high-capacity lanes to the open sea.
+    const pack = reach([40, 4000]);
+    const seeds = [{ id: 'trickle', cellId: 0 }, { id: 'reach', cellId: 1 }];
+    const rows = derivePortEligibility(pack, seeds, { trickle: DOCK, reach: DOCK });
+    const by = Object.fromEntries(rows.map((r) => [r.id, r]));
+    expect(by.trickle.river).toBe(true);           // geography unchanged: it IS on a river
+    expect(by.trickle.waterAccess).toBe(true);     // capability unchanged: it HAS a dock
+    expect(by.trickle.riverBand).toBe('stream');
+    expect(by.trickle.navigable).toBe(false);
+    expect(by.trickle.port).toBe(false);           // …and yet no port, which is the change
+    expect(by.reach.riverBand).toBe('river');
+    expect(by.reach.port).toBe(true);
+  });
+
+  it('a COASTAL seat is untouched by flux — the sea is the sea', () => {
+    // Only a river-ONLY seat can lose eligibility. A shore settlement whose creek is a
+    // trickle still faces open water, and no flux reading bears on that.
+    const pack = {
+      h: [10, 40],                 // cell 0 ocean, cell 1 the shore
+      r: [0, 1],                   // the shore cell also carries a trickle
+      fl: [0, 3],
+      c: [[1], [0]],
+      cellCount: 2,
+    };
+    const rows = derivePortEligibility(pack, [{ id: 'shore', cellId: 1 }], { shore: DOCK });
+    expect(rows[0].coastal).toBe(true);
+    expect(rows[0].riverBand).toBe('stream');      // its creek IS a trickle…
+    expect(rows[0].navigable).toBe(true);          // …and it is still a port
+    expect(rows[0].port).toBe(true);
+  });
+
+  it('ABSENT flux degrades to the pre-CAP `r != 0` rule, band `unknown`', () => {
+    // "Absent `fl` in old fixtures degrades to today's rule" — spelled as: no evidence
+    // is not evidence of absence, so nothing loses eligibility for want of a field the
+    // capture did not carry.
+    const pack = { h: [40], r: [1], c: [[]], cellCount: 1 }; // no fl key at all
+    expect(hasFluxEvidence(pack)).toBe(false);
+    expect(riverBandOf(pack, 0, false)).toBe('unknown');
+    const rows = derivePortEligibility(pack, [{ id: 'old', cellId: 0 }], { old: DOCK });
+    expect(rows[0].riverBand).toBe('unknown');
+    expect(rows[0].port).toBe(true);
+  });
+
+  it('an ALL-ZERO flux array degrades too — the evidence test is PER-PACK, not per-cell', () => {
+    // FMG's own heightmap editor resets `pack.cells.fl` to a zero Uint16Array while the
+    // river ids survive (heightmap-editor.js:371), so this pack is real. A per-cell test
+    // would read every 0 as "a stream" and silently demote EVERY river port on the map —
+    // a behaviour cliff triggered by an absent input rather than a measured one.
+    const pack = reach([0, 0, 0]);
+    expect(hasFluxEvidence(pack)).toBe(false);
+    const rows = derivePortEligibility(pack, [{ id: 'a', cellId: 0 }, { id: 'b', cellId: 1 }],
+      { a: DOCK, b: DOCK });
+    expect(rows.map((r) => r.riverBand)).toEqual(['unknown', 'unknown']);
+    expect(rows.every((r) => r.port)).toBe(true);
+    // A ragged tail is the same story: past the end of fl is unknown, not a trickle.
+    const ragged = { ...reach([500, 500, 500]), fl: [500] };
+    expect(hasFluxEvidence(ragged)).toBe(true);
+    expect(riverBandOf(ragged, 0, true)).toBe('river');
+    expect(riverBandOf(ragged, 2, true)).toBe('unknown');
+  });
+
+  it('the slot stamps version 2 and its KEY SHAPE is unchanged (a law bump, not a schema break)', () => {
+    const { digest } = goldenPortDigest();
+    expect(SEA_LANE_VERSION).toBe(2);
+    expect(digest.reserved.seaLanes.version).toBe(2);
+    // The v1 shape pin, restated here: a version bump must not smuggle a key.
+    expect(Object.keys(digest.reserved.seaLanes).sort())
+      .toEqual(['edges', 'ports', 'stormSeasonCost', 'version']);
+  });
+
+  it('the CAPTURED fixture demotes its stream ports and keeps its navigable ones', () => {
+    // End to end through the real digest builder, on the fixture pack's own river row
+    // (flux rises west→east at 25/column, so the cut at 100 falls at column 4).
+    const pack = makeGridPack({ cols: 24, rows: 18, capture: true });
+    const riverRow = 9;
+    const seat = (col) => riverRow * 24 + col;
+    const seeds = [{ id: 'head', cellId: seat(1) }, { id: 'mouth', cellId: seat(20) }];
+    const rows = derivePortEligibility(
+      { ...pack.cells, cellCount: pack.cells.h.length },
+      seeds,
+      { head: DOCK, mouth: DOCK },
+    );
+    const by = Object.fromEntries(rows.map((r) => [r.id, r]));
+    expect(by.head.riverBand, 'column 1 carries flux 25 — a trickle').toBe('stream');
+    expect(by.head.port).toBe(false);
+    expect(by.mouth.riverBand, 'column 20 carries flux 500').toBe('river');
+    expect(by.mouth.port).toBe(true);
+    // …and with the SAME geometry but no captured flux, both are ports again.
+    const plain = makeGridPack({ cols: 24, rows: 18 });
+    const plainRows = derivePortEligibility(
+      { ...plain.cells, cellCount: plain.cells.h.length }, seeds, { head: DOCK, mouth: DOCK },
+    );
+    expect(plainRows.every((r) => r.port)).toBe(true);
   });
 });
 

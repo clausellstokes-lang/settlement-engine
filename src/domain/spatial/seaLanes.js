@@ -62,12 +62,24 @@ import { institutionalCatalog, catalogIdForName } from '../../data/institutional
 import {
   isMaterializedCustomContent,
 } from '../content/customContentSemanticAuthority.js';
-import { LAND_HEIGHT, isCoastalCell, isRiverCell } from './spatialCost.js';
+import {
+  LAND_HEIGHT, isCoastalCell, isRiverCell,
+  // W-CAP CAP-2 — the navigability law lives in the SAME zero-import leaf as the two
+  // geography reads it refines, so there is ONE writer for "what is the water here".
+  hasFluxEvidence, riverBandOf, isNavigableBand,
+} from './spatialCost.js';
 
 // The self-describing slot version. Bumping it is a DISCRETE re-canonize event
 // (§V.1) — an existing frozen digest keeps its own seaLanes forever; only an
 // explicit spatial re-canonize re-derives. Never a silent drift on load.
-export const SEA_LANE_VERSION = 1;
+//
+// v2 (W-CAP CAP-2) — RIVER NAVIGABILITY. The port rule was `(coastal || river) &&
+// waterAccess`; it is now `(coastal || (river && navigable)) && waterAccess`, where
+// navigability is measured from the captured flux under FMG's own cut. This changes
+// which settlements a NEW canon calls ports, so the LAW that derived a frozen slot must
+// be legible from the slot itself — which is what this number is for. Every existing
+// canon keeps its frozen v1 slot and its frozen v1 verdicts, forever.
+export const SEA_LANE_VERSION = 2;
 
 // ── The water ECONOMICS constants (documented; the §4j order-of-magnitude) ─────
 // Land per-cell entry cost is COST_SCALE-quantized to ~90..1560 (BIOME_COST 0.9..
@@ -207,8 +219,12 @@ export { isCoastalCell, isRiverCell };
  * @property {number} cellId
  * @property {boolean} coastal            geography: a shore cell
  * @property {boolean} river              geography: a river-course cell
+ * @property {string|null} riverBand      CAP-2: the RIVER_BANDS verdict, null off-river
+ * @property {boolean} navigable          CAP-2: a hull can reach it (coastal, or a
+ *                                        non-`stream` river band)
  * @property {boolean} waterAccess        capability: a maritime institution present
- * @property {boolean} port               coastal|river ∧ waterAccess (the §4j rule)
+ * @property {boolean} port               navigable ∧ waterAccess (the §4j rule as
+ *                                        amended by CAP-2)
  */
 
 /**
@@ -216,20 +232,40 @@ export { isCoastalCell, isRiverCell };
  * a seed is a port iff it is on/at navigable water AND holds a water-access
  * institution. Pure + deterministic (a function of the frozen pack + the roster);
  * codepoint-sorted by id.
- * @param {{ h:number[], r:number[], c:number[][], cellCount:number }} pack
+ *
+ * W-CAP CAP-2 sharpens the geography half. "On water" used to mean `coastal || river`,
+ * and `river` meant nothing more than `r != 0` — so a headwater trickle and a tidal
+ * reach were the same fact, and a settlement on the trickle was granted cheap
+ * high-capacity lanes to the open sea. Now:
+ *
+ *     port = waterAccess ∧ (coastal ∨ (river ∧ navigable))
+ *
+ * A COASTAL seat is untouched: the sea is the sea, and no flux reading bears on it.
+ * Only a river-ONLY seat can lose eligibility, and only on POSITIVE evidence that its
+ * course carries less than FMG's own navigable flux. With no flux in the capture every
+ * band reads `unknown`, `isNavigableBand` answers true, and the rule collapses back to
+ * the pre-CAP `r != 0` verdict exactly — which is why an old fixture's port set does
+ * not move under this car (only the slot's version does).
+ *
+ * @param {{ h:number[], r:number[], c:number[][], fl?:number[], cellCount:number }} pack
  * @param {Array<{ id:string, cellId:number }>} seeds  the resolved digest seeds (land, distinct cell)
  * @param {Record<string, Array<string | { name?: unknown, catalogId?: unknown }>>} institutionsById
  * @returns {PortEligibility[]}
  */
 export function derivePortEligibility(pack, seeds, institutionsById) {
   const roster = institutionsById && typeof institutionsById === 'object' ? institutionsById : {};
+  // ONE whole-array evidence scan per build, hoisted out of the per-seed loop.
+  const fluxKnown = hasFluxEvidence(pack);
   const rows = (Array.isArray(seeds) ? seeds : []).map((s) => {
     const id = String(s.id);
     const cellId = Number(s.cellId);
     const coastal = isCoastalCell(pack, cellId);
     const river = isRiverCell(pack, cellId);
+    const riverBand = riverBandOf(pack, cellId, fluxKnown);
+    // A shore seat is navigable on the sea's account; a river-only seat must earn it.
+    const navigable = coastal || isNavigableBand(riverBand);
     const waterAccess = hasWaterAccessInstitution(roster[id]);
-    return { id, cellId, coastal, river, waterAccess, port: (coastal || river) && waterAccess };
+    return { id, cellId, coastal, river, riverBand, navigable, waterAccess, port: navigable && waterAccess };
   });
   return rows.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
 }

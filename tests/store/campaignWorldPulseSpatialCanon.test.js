@@ -249,7 +249,9 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     const seaLanes = ws.spatialDigest.reserved.seaLanes;
     // ≥2 eligible ports (geography ∧ institution) ⇒ the frozen sea edge set materializes.
     expect(seaLanes).toBeTruthy();
-    expect(seaLanes.version).toBe(1);
+    // v2 since W-CAP CAP-2 (the river-navigability port rule). A NEW canon stamps the law
+    // that derived it; an existing canon keeps its own frozen version forever.
+    expect(seaLanes.version).toBe(2);
     expect(seaLanes.ports.length).toBeGreaterThanOrEqual(2);
     // A SPARSE, water-reachability-constrained edge set (not the O(P²) clique).
     expect(seaLanes.edges.length).toBeGreaterThan(0);
