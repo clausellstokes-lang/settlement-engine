@@ -31,8 +31,16 @@
  * (calamityKernel, warReasons, peaceReasons, hegemonyFear, upswingKernel,
  * resourceDynamicsKernel, settlementLifecycleKernel, realmVerbExecution, roadsKernel) ⇒ it
  * rides the lazy engine chunk, never the eager first-paint closure.
+ *
+ * ── THE SELECTION KERNEL MOVED OUT (WEAVE NAME-1) ───────────────────────────────────
+ * `fnv1a32` and `pickLine` now live in the zero-import leaf `./proseSelection.js` and are
+ * RE-EXPORTED here verbatim, so every engine import site and test below is unchanged. The
+ * move is the userRouteIdentity idiom: a RENDER-time namer needs the selector and must not
+ * pay for this module's ~2,400 lines of frozen pool closure or its module-scope flatten to
+ * get it. Law 1 above is unchanged and now lives in that leaf's docblock too.
  */
 import { ROADS_NEWS } from '../../data/roadsProse.js';
+import { fnv1a32, pickLine } from './proseSelection.js';
 import { humanizeContextSignature } from '../display/humanizeEngineTokens.js';
 import {
   DECREE_DEFAULT_RECEIPTS,
@@ -44,38 +52,12 @@ import {
 export { DECREE_DEFAULT_RECEIPTS, HEGEMONY_RECEIPTS, PEACE_RECEIPTS, WAR_RECEIPTS };
 
 /**
- * FNV-1a 32-bit — the pure variant-selection hash (no rng, no Date). Matches the
- * newsVoice.js idiom. @param {string} str @returns {number} */
-export function fnv1a32(str) {
-  let h = 0x811c9dc5;
-  const s = String(str);
-  for (let i = 0; i < s.length; i += 1) {
-    h ^= s.charCodeAt(i);
-    h = Math.imul(h, 0x01000193);
-  }
-  return h >>> 0;
-}
-
-/**
- * @typedef {string | ((interp: Record<string, unknown>) => string)} ProseVariant
- * A pool entry: a fixed string, or a function that interpolates the semantic tokens.
+ * The selection kernel, re-exported VERBATIM from the zero-import leaf so no engine
+ * import site moved. See `./proseSelection.js` for the extraction rationale and for
+ * law 1 (pure selection / canonical-at-zero) in its enforced form.
+ * @typedef {import('./proseSelection.js').ProseVariant} ProseVariant
  */
-
-/**
- * Pick a phrasing variant deterministically from a pool. A FALSY seed ⇒ index 0 (the
- * canonical string), so seedless callers are byte-identical. A function entry is resolved
- * with `interp`. Pure.
- * @param {readonly ProseVariant[]} pool
- * @param {string | null | undefined} seed
- * @param {Record<string, unknown>} [interp]
- * @returns {string}
- */
-export function pickLine(pool, seed, interp = {}) {
-  if (!Array.isArray(pool) || pool.length === 0) return '';
-  const idx = seed ? fnv1a32(seed) % pool.length : 0;
-  const v = pool[idx];
-  return typeof v === 'function' ? String(v(interp)) : String(v);
-}
+export { fnv1a32, pickLine };
 
 /**
  * Pick a phrasing while retaining the STRUCTURAL template family that produced it.

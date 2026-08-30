@@ -6812,7 +6812,17 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   committed shape.
     // Every added title is a literal string: no template literals (which inflate the census
     // by their PARTS) and no `test.each` over a non-literal table (which parks a whole file).
-    files: 2483, parked: 364, credited: 2119, titles: 20838, suiteTitles: 5775,
+    // ── TE-NAME (WEAVE NAME-1/4/3, the render-time namers), 2026-08-30, base c7bdad5eb ──
+    // 2483/364/2119/20838/5775 → see the tuple below. This lane lands THREE cars and adds
+    // ONE test file per car, each a plain `describe`/`test` corpus with no template-literal
+    // titles and no `test.each` over a non-literal table — so every added file is CREDITED,
+    // `parked` must not move, and `files` = `parked` + `credited` must still close.
+    // ⭐ MEASURED PER CAR AT ITS OWN TIP, NOT PREDICTED AND NOT BANKED ONCE FOR THREE. The
+    // five assertions are SEQUENCED, so each car's re-derivation is: run, read the actual out
+    // of the red, record it, re-run for the next figure. Predicting the tuple and banking it
+    // is the exact failure this block's neighbours above were written to warn against; the
+    // per-car deltas are recorded beside their car so a successor can redo any one of them.
+    files: 2484, parked: 364, credited: 2120, titles: 20861, suiteTitles: 5779,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
