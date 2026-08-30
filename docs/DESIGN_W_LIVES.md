@@ -257,6 +257,22 @@ Contrary-to-nature methods are choosable at penalty weight and hold a STRAINED p
 while practiced: the equilibrium is practice rate against homeward decay — stop, and you drift
 home. This makes drift endogenous, not only event-driven.
 
+**R3b — Method-conditioned resolution (ODQ §802.1, owner-ratified).** The chosen method shapes
+the success roll: success = base odds (typed goal/mission) × three bounded term families —
+**actor fit** (alignment of method with effective character + capability modifiers; the deceitful
+lie better — skill-through-vice is deliberate), **counterparty fit** (threaten the cowardly,
+never the brave; bargain with the greedy), and **context** (EXISTING causal variables only —
+security, legitimacy, prosperity, corruption climate, disposition bands; no context state is
+ever minted for odds). ⭐ **Choose on KNOWN, resolve on TRUE:** the actor weighs methods against
+the counterparty's R2 known character; the roll resolves against true character — decisions on
+estimates, resolutions on truth (the fidelityNoise doctrine). **Failure modes differ by method:**
+a failed bargain costs standing, a failed threat mints a feud, failed sabotage mints EVIDENCE
+(→ known character) — method choice is a risk-profile choice. Seeded per (actor, goal, tick);
+odds reach prose as band words, never percentages. The whole matrix is bounded by the closed
+grammar (~14 verbs × three term families, each verb declaring its axes and variables) and joins
+the owner-taste registers pack (car 6). New §9 loop: competence-through-practice, bounded by
+saturation, homeward decay, counterparty/context terms, and per-method failure modes.
+
 **R4 — The bond transmutes; the state persists (change of heart while bound).** The corruption
 tie is ONE state with a DERIVED bond kind: vice at the door ⇒ `appetite` (eager compliance); the
 same tie held after the character has crossed home past the threshold ⇒ **`duress`** — blackmail
