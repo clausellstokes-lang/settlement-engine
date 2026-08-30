@@ -97,7 +97,7 @@
  * R | l | chains          | surface | src/components/new/SupplyChainsPanel.jsx
  * R | l | chains          | direct  | src/components/ServicesTogglePanel.jsx
  * R | l | identity+chains | surface | src/components/settlement/EventComposer.jsx
- * R | l | chains          | surface | src/components/TradeDynamicsPanel.jsx
+ * R | l | chains          | direct  | src/components/TradeDynamicsPanel.jsx
  * R | l | chains          | surface | src/domain/display/institutionProfile.js
  * R | l | identity        | surface | src/domain/resourceSites.js
  * R | l | none            | member  | src/domain/undercity/monotoneComponents.js
@@ -131,7 +131,7 @@
  * R | l | chains          | surface | src/lib/prebuiltResourceChains.js
  * R | l | chains          | direct  | src/pdf/sections/SupplyChainFlow.jsx
  *
- * THE FOUR `direct` ROWS, EACH WITH ITS REASON
+ * THE FIVE `direct` ROWS, EACH WITH ITS REASON
  * ─────────────────────────────────────────────────────────────────────────────
  *   • `domain/region/tradeLinks.js` — the ONLY eager consumer of a chains-half
  *     table, and it is eager on purpose: FP-G4 split `finishedGoodsCategory.js`
@@ -156,6 +156,17 @@
  *     reaches and does not otherwise hold the chains half. Nothing else moved.
  *     It reads one table, so it keeps the one import. If a later PDF section
  *     needs the half properly, re-measure and move this row.
+ *   • `components/TradeDynamicsPanel.jsx` — a landed guard names the physical
+ *     module IN A SOURCE REGEX: F30's single-source-of-truth pin
+ *     (`tests/components/tradeDynamicsGoodsSource.test.js`) asserts the panel
+ *     imports GOODS_MODIFIERS_BY_TIER from `data/tradeGoodsData`, because the
+ *     goods concept once existed as THREE drifted tables and that pin is what
+ *     collapsed them onto the live one. Routing the panel through the door does
+ *     not create a second table — the door re-exports the same binding by
+ *     reference — but relaxing another wave's guard to fit a spelling change is
+ *     not this car's business. The panel keeps the direct import and the pin
+ *     keeps its exact meaning. FOUND BY THE FULL GATE, not by reasoning: it is
+ *     a `tests/components/` source pin that no goods-shaped targeted run reaches.
  *
  * EVERY OTHER CONSUMER GOES THROUGH A DOOR, AND IT COST 395 BYTES.
  * The worry that motivated the two-surface split — an index dragging a whole half

@@ -3,7 +3,7 @@ import ControlsStrip from './ControlsStrip.jsx';
 import { GOLD, INK, MUTED, SECOND, BORDER, sans, FS, swatch, CARD_ALT } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid } from '../store/selectors.js';
-import {GOODS_MODIFIERS_BY_TIER} from '../data/goods/chains.js';
+import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData';
 import {TIER_ORDER} from '../generators/helpers';
 
 const CAT_COLORS = {

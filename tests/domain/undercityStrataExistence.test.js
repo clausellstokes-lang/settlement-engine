@@ -282,6 +282,15 @@ describe('MF-UC0 — the underground existence gate, the substructure facet, and
         + ' row names its subsystem\'s modules in a `module:` string, which this mention scan cannot'
         + ' tell from an import; the file imports nothing at all. The underways row records the same'
         + ' hazard in the other direction for the ruin-filter walker.',
+      'src/domain/goods.schema.js':
+        'WEAVE ST-2: a PROSE MENTION, not an import edge, and the file has ZERO imports and ZERO value'
+        + ' exports — it is the goods namespace\'s JSDoc vocabulary. Its migration roster is a MACHINE-READ'
+        + ' table naming every consumer of the goods tables, and one of them is'
+        + ' src/domain/undercity/monotoneComponents.js, which reads RESOURCE_SEMANTICS. The path is spelled'
+        + ' in a comment so the roster walker in tests/build/vendorPdfLazy.test.js can re-derive the row'
+        + ' against the import graph; spelling it is the point, and this scan cannot tell that mention from'
+        + ' an edge. Nothing here is reachable at runtime at all, so the dormancy this arm asserts is'
+        + ' untouched.',
       'src/domain/worldPulse/factionCompetition.js':
         'MF-UC4 (ODQ §311.3 / §359.5 / §441.4): a REAL import edge, and the ONE registered pulse seam'
         + ' that folds the monotone vertical high-water mark and projects it onto the settlement'
