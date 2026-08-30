@@ -12,6 +12,7 @@
 
 import { factionArchetype } from '../factionArchetypes.js';
 import { governingFactionOf } from '../rulingPower.js';
+import { factionPowerShare01 } from '../factionPowerShare.js';
 import { mintFactionPairIncident, selectWarDecisionIncident } from './factionPairLedger.js';
 import { factionCompetitionId } from './factionCompetition.js';
 import { memoryWeaveActive } from './relationshipEvolution.js';
@@ -36,11 +37,11 @@ function factionName(value) {
   return String(row.faction || row.name || row.label || '').trim();
 }
 
-/** @param {Record<string, unknown>} faction @returns {number} */
+/** A faction's share of local power as 0..1; an unreadable power weighs NOTHING here.
+ * The magnitude sniff this replaces carried the §759.3 cliff at share=1.
+ * @param {Record<string, unknown>} faction @returns {number} */
 function power01(faction) {
-  const raw = Number(faction.power ?? faction.influence ?? faction.score ?? faction.weight);
-  if (!Number.isFinite(raw)) return 0;
-  return Math.max(0, Math.min(1, raw > 1 ? raw / 100 : raw));
+  return factionPowerShare01(Number(faction.power ?? faction.influence ?? faction.score ?? faction.weight)) ?? 0;
 }
 
 /** Resolve a settlement item from either snapshot index shape. */

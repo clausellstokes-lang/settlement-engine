@@ -30,6 +30,7 @@ import { npcId } from './npcAgency.js';
 import { foreignAssetsByPatron } from './corruptionWeb.js';
 import { rulingSeatNidOf } from './gratitudeBonds.js';
 import { lawWordFor } from './lawWord.js';
+import { factionPowerShare01 } from '../factionPowerShare.js';
 import { LADDER_TUNING, ladderFactionKey, npcInFaction } from './npcLadderState.js';
 import { coalitionConsolidation01, settlementPoliticsActive } from './settlementPolitics.js';
 import { stablePart } from './stablePart.js';
@@ -97,11 +98,12 @@ function rosterNpcById(/** @type {string} */ sid, /** @type {Record<string, unkn
   return null;
 }
 
-/** Power fields in this estate may be 0..1 or 0..100. */
+/** A faction power field as 0..1, or null when unreadable — through the ONE reader.
+ *  ⚠ THE COMMENT HERE USED TO READ "Power fields in this estate may be 0..1 or 0..100",
+ *  which was the honest statement of an UNDECLARED UNIT and the licence for the magnitude
+ *  sniff whose cliff at share=1 is §759.3. The unit is declared now: percent, 0-100. */
 function normalizedPower(value) {
-  const number = finite(value);
-  if (number == null) return null;
-  return clamp01(number > 1 ? number / 100 : number);
+  return factionPowerShare01(finite(value));
 }
 
 /** The governing faction's share of the recorded faction power, when readable. */

@@ -46,6 +46,7 @@ import { TRAIT_AGGRESSION, TRAIT_ALIGNMENT, acquiredTraitDescriptors } from '../
 import { governanceLedger } from '../governanceLedger.js';
 import { readDispositionMultiplier } from './dispositionLedger.js';
 import { thresholdFactorOf } from './dispositionProfile.js';
+import { factionPowerShare01 } from '../factionPowerShare.js';
 import { deityTemper, evil01, chaos01 } from './deityAxes.js';
 // Phase 5.5 M9b — MORAL DRIFT (component 3). The unjust-instigation accumulator
 // drifts the derived alignment: its malice term folds into computeMalice's recent-
@@ -136,14 +137,14 @@ function npcTraitScore(npc) {
   return score;
 }
 
-// Normalize a faction power field to 0..1 (mirrors factionCompetition.factionPower:
-// >1 is treated as a 0..100 scale). A missing power is a neutral 0.5 so the NPC
-// still contributes rather than vanishing.
+// A faction power field as 0..1, through the ONE reader. A missing power is a neutral 0.5 so
+// the NPC still contributes rather than vanishing — that default is this file's own and stays.
+// ⚠ THE HEADER HERE USED TO SAY "mirrors factionCompetition.factionPower", which is the
+// signature of a duplicated read waiting to drift; it mirrored the magnitude sniff and its
+// cliff at share=1 (§759.3) along with everything else. It no longer mirrors: it CALLS.
 /** @param {import('../settlement.schema.js').SimFaction} faction @returns {number} */
 function normFactionPower(faction) {
-  const raw = faction?.power ?? faction?.influence ?? faction?.score ?? faction?.weight;
-  if (!Number.isFinite(raw)) return 0.5;
-  return raw > 1 ? Math.max(0, Math.min(1, raw / 100)) : Math.max(0, Math.min(1, raw));
+  return factionPowerShare01(faction?.power ?? faction?.influence ?? faction?.score ?? faction?.weight) ?? 0.5;
 }
 
 // The governing faction's power is up-weighted so the seat of power colours the

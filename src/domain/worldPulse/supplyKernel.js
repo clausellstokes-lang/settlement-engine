@@ -49,6 +49,7 @@ import { settlementAlignment } from './settlementAlignment.js';
 import { buildCultureVector } from './migrationKernel.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { setSpatialLedger, dropSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
+import { factionPowerShare01 } from '../factionPowerShare.js';
 import { blockadeInterceptsSupply } from '../spatial/navalLayer.js';
 import { settlementHasUnderways, UNDERWAYS_TUNING } from './clandestineFacet.js';
 import { advanceTradeFlowTally, settlementModalityWeight } from '../spatial/tradeFlow.js';
@@ -772,8 +773,9 @@ export function criminalStrength01Of(settlement) {
   let best = 0;
   for (const f of Array.isArray(factions) ? factions : []) {
     if (factionArchetype(f) !== FACTION_ARCHETYPES.CRIMINAL) continue;
-    const raw = Number(f?.power ?? f?.strength ?? f?.influence ?? f?.legitimacy ?? 0);
-    const v = Number.isFinite(raw) ? clampUnit(raw > 1 ? raw / 100 : raw) : 0;
+    // The ONE faction-power reader (domain/factionPowerShare.js). The magnitude sniff this
+    // replaces carried the §759.3 cliff: a 1%-share syndicate read as total criminal capture.
+    const v = factionPowerShare01(Number(f?.power ?? f?.strength ?? f?.influence ?? f?.legitimacy ?? 0)) ?? 0;
     if (v > best) best = v;
   }
   return best;
@@ -804,8 +806,7 @@ export function merchantStrength01Of(settlement) {
   let best = 0;
   for (const f of Array.isArray(factions) ? factions : []) {
     if (factionArchetype(f) !== FACTION_ARCHETYPES.MERCHANT) continue;
-    const raw = Number(f?.power ?? f?.strength ?? f?.influence ?? f?.legitimacy ?? 0);
-    const v = Number.isFinite(raw) ? Math.max(0, Math.min(1, raw > 1 ? raw / 100 : raw)) : 0;
+    const v = factionPowerShare01(Number(f?.power ?? f?.strength ?? f?.influence ?? f?.legitimacy ?? 0)) ?? 0;
     if (v > best) best = v;
   }
   return best;

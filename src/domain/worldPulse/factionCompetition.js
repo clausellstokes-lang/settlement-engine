@@ -10,6 +10,7 @@ import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes
 import { governingCoalition } from './beliefMap.js';
 import { memoryWeaveActive } from './relationshipEvolution.js';
 import { compareCodepoint } from '../deterministicSort.js';
+import { factionPowerShare01 } from '../factionPowerShare.js';
 import { governingFactionOf } from '../rulingPower.js';
 // ES-5b — a REAL cross-layer pair (INFO→INTERIOR), TAKEN rather than avoided, and
 // licensed in this same commit by CPL-20 `ES5B_ABSENCE_BENCH_COUPLING`. Never baselined.
@@ -121,10 +122,18 @@ function inferFactionArchetype(faction = {}) {
   return (/** @type {any} */ (CANONICAL_TO_COMPETITION))[factionArchetype(faction)] || 'civic';
 }
 
-/** @param {import('../settlement.schema.js').SimFaction} faction @param {any} index */
+/** A faction's share of local power as 0..1, through the ONE reader.
+ *
+ * ⚠ THIS BODY USED TO MAGNITUDE-SNIFF (`raw > 1 ? raw/100 : raw`) because `factions[].power`
+ * carried no declared unit — a 100x CLIFF AT EXACTLY 1, where a 1%-share faction read as FULL
+ * power and outranked a 60-share one in `topFactionEntries`' rawPower sort below (§759.3
+ * POWER-SNIFF-CLIFF). The unit is declared in `domain/factionPowerShare.js` now, so the
+ * division is unconditional. The index-derived DEFAULT is unchanged and stays local: an
+ * absent power means something different here than it does to the five sibling readers.
+ * @param {import('../settlement.schema.js').SimFaction} faction @param {any} index */
 function factionPower(faction = {}, index = 0) {
-  const raw = faction.power ?? faction.influence ?? faction.score ?? faction.weight;
-  if (Number.isFinite(raw)) return raw > 1 ? clamp01(raw / 100) : clamp01(raw);
+  const share = factionPowerShare01(faction.power ?? faction.influence ?? faction.score ?? faction.weight);
+  if (share !== null) return share;
   return Math.max(0.18, 0.72 - index * 0.16);
 }
 
@@ -618,10 +627,22 @@ function pressure(pressureIdx, settlementId, kind) {
   return pressureIdx.get?.(settlementId, kind)?.score || 0;
 }
 
-/** @param {any} score */
-function legitimacyBand(score) {
-  if (score >= 0.66) return 'crisis';
-  if (score >= 0.44) return 'contested';
+/**
+ * The band of a legitimacy PRESSURE — 0..1, HIGH IS BAD (`pressureIdx.get(id,'legitimacy')`,
+ * fed by `pressureModel.js:301`).
+ *
+ * ⚠ THIS WAS CALLED `legitimacyBand`, AND THAT NAME EXISTS THREE TIMES IN THE ESTATE ON THREE
+ * DIFFERENT SCALES AND TWO DIFFERENT POLARITIES (§759.3 LEGITIMACYBAND-TRIPLE-HOMONYM):
+ * `faithPanelModel.js:34` is 0..1 with HIGH = GOOD, the `rulingPower`/`timeProgression`/
+ * `factionDynamics` ladder is 0-100 with HIGH = GOOD, and this one is a 0..1 PRESSURE where
+ * high is a crisis. A consumer that imported the wrong one would type-check, test green, and
+ * INVERT the meaning. The parameter is renamed with it: it was called `legitimacy`, which is
+ * the opposite of what it holds.
+ * @param {any} legitimacyPressure 0..1, high = bad @returns {'crisis'|'contested'|'stable'}
+ */
+function legitimacyPressureBand(legitimacyPressure) {
+  if (legitimacyPressure >= 0.66) return 'crisis';
+  if (legitimacyPressure >= 0.44) return 'contested';
   return 'stable';
 }
 
@@ -716,9 +737,10 @@ function warDecisionOpposition(item, worldState, challengerId) {
   };
 }
 
-/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} conflict @param {any} warOpposition */
-function governmentChallenge(item, entry, state, tick, legitimacy, conflict, warOpposition = null) {
-  const band = legitimacyBand(legitimacy);
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick
+ *  @param {any} legitimacyPressure 0..1, HIGH IS BAD @param {any} conflict @param {any} warOpposition */
+function governmentChallenge(item, entry, state, tick, legitimacyPressure, conflict, warOpposition = null) {
+  const band = legitimacyPressureBand(legitimacyPressure);
   const warPressure = clamp01(Number(warOpposition?.pressure01) || 0);
   // A secure seat can weather ordinary opposition; only an exceptional, live
   // coalition grievance opens its normal challenge lane while legitimacy is
@@ -726,7 +748,7 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict, war
   if (band === 'stable' && warPressure < 0.68) return null;
   // Preserve the legacy challenge exactly when WR-5 contributes no grievance;
   // its pressure is an independent bounded addition, not a rewrite of the base.
-  const baseSeverity = clamp01(legitimacy * 0.48 + entry.power * 0.28
+  const baseSeverity = clamp01(legitimacyPressure * 0.48 + entry.power * 0.28
     + state.riskTolerance * 0.14 + conflict * 0.1);
   const severity = clamp01(baseSeverity + (1 - baseSeverity) * warPressure * 0.22);
   if (severity < (band === 'crisis' ? 0.5 : 0.58)) return null;
@@ -760,6 +782,11 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict, war
       factionId: state.factionId,
       settlementId: item.id,
       governmentPreference: state.governmentPreference,
+      // ⚠ THE EMITTED KEY KEEPS ITS NAME DELIBERATELY. It lands in a PERSISTED proposal
+      // payload and `WorldPulseData.js:119` humanizes it, so renaming it is a persistence-
+      // shape change — owner-gated, and not what §759.3 asked for. The homonym trap was the
+      // numeric-input FUNCTION, which is renamed above; the emitted VALUES are self-describing
+      // words ('crisis'|'contested'|'stable') that read correctly under either polarity.
       legitimacyBand: band,
       preserveInstitutions: true,
       ...(warOpposition?.decisionId ? {
@@ -789,8 +816,9 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict, war
   });
 }
 
-/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} trade @param {any} crime */
-function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime, pendingIntent = false) {
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick
+ *  @param {any} legitimacyPressure 0..1, HIGH IS BAD @param {any} trade @param {any} crime */
+function institutionCandidate(item, entry, state, tick, legitimacyPressure, trade, crime, pendingIntent = false) {
   // Capture and suppression are two forms of one institution-control intent.
   // Until the DM resolves the faction's existing question, rotating the target
   // must not mint a fresh backlog entry every week.
@@ -798,7 +826,7 @@ function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime
   const institutions = institutionsFor(item);
   if (!institutions.length) return null;
   const target = institutions[Math.floor((entry.index + tick) % institutions.length)];
-  const pressureScore = Math.max(legitimacy, trade, crime);
+  const pressureScore = Math.max(legitimacyPressure, trade, crime);
   if (pressureScore < 0.38 && state.momentum < 0.2) return null;
   const criminalSuppression = state.archetype === 'criminal' || crime > 0.58;
   const candidateType = criminalSuppression ? 'faction_institution_suppression' : 'faction_institution_capture';
@@ -897,8 +925,9 @@ function serviceOrLawCandidate(item, entry, state, tick, food, disease, trade) {
   });
 }
 
-/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} conflict */
-function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conflict) {
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick
+ *  @param {any} legitimacyPressure 0..1, HIGH IS BAD @param {any} conflict */
+function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacyPressure, conflict) {
   if ((state.exhaustion || 0) > 0.62) {
     const severity = clamp01(0.28 + state.exhaustion * 0.44);
     return candidateBase({
@@ -922,9 +951,9 @@ function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conf
     });
   }
 
-  if (legitimacy < 0.36 && conflict < 0.36) return null;
+  if (legitimacyPressure < 0.36 && conflict < 0.36) return null;
   const rivalId = state.rivals?.[0] || null;
-  const severity = clamp01(legitimacy * 0.26 + conflict * 0.26 + entry.power * 0.18 + state.momentum * 0.12);
+  const severity = clamp01(legitimacyPressure * 0.26 + conflict * 0.26 + entry.power * 0.18 + state.momentum * 0.12);
   if (!rivalId || severity < 0.36) return null;
   return candidateBase({
     item,
@@ -972,7 +1001,10 @@ export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
   );
 
   for (const item of snapshot.settlements) {
-    const legitimacy = pressure(pressureIdx, item.id, 'legitimacy');
+    // ⚠ THIS IS A PRESSURE, HIGH IS BAD. It used to be called `legitimacy`, which reads as
+    // the opposite of what it holds and is the reason three same-named band functions on two
+    // polarities coexisted (§759.3).
+    const legitimacyPressure = pressure(pressureIdx, item.id, 'legitimacy');
     const conflict = pressure(pressureIdx, item.id, 'conflict');
     const trade = pressure(pressureIdx, item.id, 'trade');
     const crime = pressure(pressureIdx, item.id, 'crime');
@@ -991,7 +1023,7 @@ export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
           entry,
           state,
           tick,
-          legitimacy,
+          legitimacyPressure,
           conflict,
           warDecisionOpposition(item, snapshot.worldState, String(state.factionId)),
         ),
@@ -1000,13 +1032,13 @@ export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
           entry,
           state,
           tick,
-          legitimacy,
+          legitimacyPressure,
           trade,
           crime,
           pendingInstitutionIntentByFaction.has(String(state.factionId)),
         ),
         serviceOrLawCandidate(item, entry, state, tick, food, disease, trade),
-        rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conflict),
+        rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacyPressure, conflict),
       ].filter(Boolean);
       out.push(...candidates);
     }

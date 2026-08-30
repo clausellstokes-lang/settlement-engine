@@ -77,6 +77,7 @@ import { buildCalamityLedger } from '../display/calamityLedger.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { deriveHighWater } from '../highWater.js';
 import { resolveSettlementTerrain } from '../resolveTerrain.js';
+import { factionPowerShare01 } from '../factionPowerShare.js';
 import { stablePart } from '../worldPulse/stablePart.js';
 import { isJointKind } from './jointVocabulary.js';
 import { deriveStrataExistence, institutionAnchorKey } from './strataExistence.js';
@@ -320,8 +321,9 @@ export function syndicateStandingOf(settlement) {
   for (const raw of Array.isArray(rows) ? rows : []) {
     const row = recordOf(raw);
     if (factionArchetype(row) !== FACTION_ARCHETYPES.CRIMINAL) continue;
-    const power = Number(row.power);
-    const standing = Number.isFinite(power) ? clamp(power > 1 ? power / 100 : power, 0, 1) : 0;
+    // The ONE faction-power reader; the sniff this replaces read a 1%-share syndicate as a
+    // syndicate standing at full strength (§759.3).
+    const standing = factionPowerShare01(Number(row.power)) ?? 0;
     const name = String(row.faction ?? row.name ?? '');
     out.push({
       archetype: FACTION_ARCHETYPES.CRIMINAL,
