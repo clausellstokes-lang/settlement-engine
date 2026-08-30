@@ -925,7 +925,7 @@
   },
   {
     "path": "src/domain/region/discoverDependencyCandidates.js",
-    "line": 441,
+    "line": 443,
     "category": "floatInterpolation",
     "snippet": "`${larger.name} holds roughly ${Math.round(populationRatio)}x the population of ${smaller.name}.`"
   },
@@ -1045,37 +1045,37 @@
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 61,
+    "line": 62,
     "category": "floatInterpolation",
     "snippet": "`Base chance for this tier/category was ${Math.round(baseChance * 100)}%.`"
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 61,
+    "line": 62,
     "category": "percentToken",
     "snippet": "`Base chance for this tier/category was ${Math.round(baseChance * 100)}%.`"
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 68,
+    "line": 69,
     "category": "floatInterpolation",
     "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 68,
+    "line": 69,
     "category": "multiplier",
     "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 68,
+    "line": 69,
     "category": "percentToken",
     "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
   },
   {
     "path": "src/generators/steps/assembleInstitutions.js",
-    "line": 68,
+    "line": 69,
     "category": "twoDecimalScore",
     "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
   },

@@ -4,6 +4,7 @@
 
 import { random as _rng } from '../kernel/rngContext.js';
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
+import { institutionToggleFor } from './institutionToggleReader.js';
 import { SUPPLY_CHAIN_NEEDS } from '../data/goods/chains.js';
 import {
   nativeSemanticName,
@@ -81,12 +82,9 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
   // candidates are never required/forced, so only the exclude side applies).
   const toggleExcluded = (name, cat, catalogTier) => {
     if (!institutionToggles) return false;
-    const toggle = institutionToggles[`${tier}::${cat}::${name}`]
-                || institutionToggles[`${tier}_${cat}_${name}`]
-                || institutionToggles[`${catalogTier}::${cat}::${name}`]
-                || institutionToggles[`${catalogTier}_${cat}_${name}`]
-                || institutionToggles[`all::${cat}::${name}`]
-                || institutionToggles[`all_${cat}_${name}`];
+    // Two tier candidates here, not one: this pass reads the rolled tier AND the catalog
+    // tier it drew the entry from. The ladder is the reader's; the candidate list is ours.
+    const toggle = institutionToggleFor(institutionToggles, [tier, catalogTier], cat, name);
     if (!toggle) return false;
     return toggle.forceExclude === true || toggle.allow === false;
   };

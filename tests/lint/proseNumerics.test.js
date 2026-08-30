@@ -103,6 +103,16 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // amplitudes 38/30/22). None is debt and none is in this baseline: the detector reads
 // numerics that FLOW INTO A PROSE KEY, not numbers written in comments — the same
 // distinction TE-CH-4's note above had to draw.
+// T7 · HYGIENE (car TE-NPCGEN-1a, ODQ §759 weakness 4) — SEVEN PURE LINE MOVES, NO DEBT
+// MOTION, NO CEILING CHANGE. The 23-site institution-toggle ladder collapses onto one shared
+// reader, which costs each of three consumers an import line and two of them a rationale
+// comment ABOVE their existing prose. So six rows in assembleInstitutions.js re-address
+// 61 -> 62 and 68 -> 69, and one in discoverDependencyCandidates.js goes 441 -> 443 (its
+// file gained the `careServices` note in the same train's E-RES-11 car). Same shape as
+// TE-CAP's two, CR-FP-2's eighty-eight and HK-1's six: path, category and snippet are
+// byte-identical on every one, the census stays at 227 against a 227 ceiling, and no other
+// row in either file could have moved with them. The whole baseline diff is fourteen lines,
+// seven -/+ pairs.
 // ══ LOWERED BY TE-HERALD-1, THE HUMANIZATION WAVE (owner directive, ODQ §754.3;
 //    boundary ruled §763.2) ═══════════════════════════════════════════════════════
 // This is the wave the four sentences frozen above were "owed". The debt named in the

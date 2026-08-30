@@ -11,6 +11,7 @@ import {
   isMaterializedCustomContent,
 } from '../domain/content/customContentSemanticAuthority.js';
 import { isCategoryEnabled } from './categoryToggleReader.js';
+import { institutionToggleFor } from './institutionToggleReader.js';
 
 // Faction category → catalog category keys
 const FACTION_TO_CATALOG = {
@@ -128,10 +129,10 @@ export function applyFactionInstitutionBoosts(
   // the faction pull; a dominant faction must not resurrect it. The bare-name
   // string/boolean forms are kept for legacy callers.
   const toggleExcluded = (name, cat) => {
-    const toggle = institutionToggles[`${tier}::${cat}::${name}`]
-                || institutionToggles[`${tier}_${cat}_${name}`]
-                || institutionToggles[`all::${cat}::${name}`]
-                || institutionToggles[`all_${cat}_${name}`]
+    // The bare-name key is this file's OWN legacy tail, kept at the call site rather than
+    // folded into the shared ladder — the other two consumers do not read it and folding it
+    // in would quietly widen what they honour.
+    const toggle = institutionToggleFor(institutionToggles, [tier], cat, name)
                 || institutionToggles[name];
     if (!toggle) return false;
     if (toggle === 'exclude' || toggle === false) return true;

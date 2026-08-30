@@ -34,6 +34,7 @@ import {
   isProtectedGenerationEntity,
 } from '../../domain/generationOwnership.js';
 import { isCategoryEnabled as sharedIsCategoryEnabled } from '../categoryToggleReader.js';
+import { institutionToggleFor } from '../institutionToggleReader.js';
 import { threatDefensePlan } from '../threatDefensePolicy.js';
 import { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
 
@@ -254,10 +255,7 @@ registerStep('assembleInstitutions', {
   Object.entries(catalogForTier).forEach(([category, categoryInsts]) => {
     Object.entries(categoryInsts).forEach(([name, inst]) => {
       if (inst.minTier && tierIndex < TIER_ORDER.indexOf(inst.minTier)) return;
-      const toggle = institutionToggles[`${tier}::${category}::${name}`]
-                  || institutionToggles[`${tier}_${category}_${name}`]
-                  || institutionToggles[`all::${category}::${name}`]
-                  || institutionToggles[`all_${category}_${name}`]
+      const toggle = institutionToggleFor(institutionToggles, [tier], category, name)
                   || { allow: true, require: false };
       // World law precedes required/forced/probability handling. A stale
       // priority, second-chance roll, or toggle is never authority to create an
@@ -649,10 +647,7 @@ registerStep('assembleInstitutions', {
   // Apply toggle exclusions
   for (let i = institutions.length - 1; i >= 0; i--) {
     const inst = institutions[i];
-    const toggle = institutionToggles[`${tier}::${inst.category}::${inst.name}`]
-                || institutionToggles[`${tier}_${inst.category}_${inst.name}`]
-                || institutionToggles[`all::${inst.category}::${inst.name}`]
-                || institutionToggles[`all_${inst.category}_${inst.name}`];
+    const toggle = institutionToggleFor(institutionToggles, [tier], inst.category, inst.name);
     if (!toggle) continue;
     if (toggle.forceExclude === true || (toggle.allow === false && !inst.required && !toggle.require && inst.source !== 'forced')) {
       institutions.splice(i, 1);
@@ -677,10 +672,7 @@ registerStep('assembleInstitutions', {
       .map(name => catalogEntries.find(entry => entry.name === name))
       .find((entry) => {
         if (!entry || !isCategoryEnabled(entry.category)) return false;
-        const toggle = institutionToggles[`${tier}::${entry.category}::${entry.name}`]
-          || institutionToggles[`${tier}_${entry.category}_${entry.name}`]
-          || institutionToggles[`all::${entry.category}::${entry.name}`]
-          || institutionToggles[`all_${entry.category}_${entry.name}`];
+        const toggle = institutionToggleFor(institutionToggles, [tier], entry.category, entry.name);
         if (
           toggle
           && toggle.require !== true
