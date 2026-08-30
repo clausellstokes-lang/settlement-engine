@@ -6729,7 +6729,49 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   tuple (2493/364/2129/20868/5789) was DISCARDED at the rebase rather than added to
     //   STRIP-2's, and the conflict in this file was resolved by keeping STRIP-2's block and
     //   its constants verbatim — carry the DELTA across a rebase, never the tuple.
-    files: 2487, parked: 364, credited: 2123, titles: 20805, suiteTitles: 5772,
+    // ── TE-STRIP-5 (the entitlements strip, ODQ §725/§726), 2026-08-29, REBASED onto da4effc66 ──
+    // 2487/364/2123/20805/5772 → 2483/364/2119/20797/5768. A REMOVAL, so every figure falls or
+    // holds; nothing here grew and no rule widened or narrowed.
+    // ⚠ ALL FIVE RE-DERIVED WHOLE AT THE REBASED TIP, in ONE `expect.soft` pass — parked 364 the
+    // only GREEN, the other four the reds that report their own actuals — then restored FROM A
+    // SAVED COPY TAKEN AFTER THE REBASE, never `git checkout --`, which discards uncommitted work.
+    // Restore proven byte-identical TWO ways: sha256 feec2bef95… before and after, and an EMPTY
+    // `git status` afterwards, both BEFORE these constants were touched.
+    // ⛔ NOTHING WAS COMPOSED. This lane's PRE-rebase tuple (2483/364/2119/20791/5767, measured on
+    // 4bb9f80d9) was DISCARDED at the rebase rather than added to ST-2's, and the conflict in this
+    // file — which was structural, both lanes freezing the same five constants — was resolved by
+    // keeping ST-2's landed block and its constants VERBATIM and dropping this lane's pre-rebase
+    // block whole. The resolved file was then byte-identical to da4effc66, which emptied this
+    // lane's census car entirely; it was SKIPPED rather than carried as a no-op, and the
+    // re-derivation below is a fresh act on the new base. Carry the DELTA across a rebase, never
+    // the tuple — and never a block that merely looks re-measured.
+    // ⭐ WHAT CLOSES EXACTLY, AND IT CLOSES ON ALL FOUR MOVING FIGURES:
+    //   files −4 — exactly the FOUR deleted test files, named: tests/config/illustratedLensFree
+    //     (subject LENS_COUNT), tests/components/dmPinsTierGate, tests/components/fogTierGate and
+    //     tests/components/changeViewDepthGate. Every one had a stripped ladder row as its SUBJECT.
+    //   parked UNMOVED at 364 while credited fell by the SAME four ⇒ all four were CREDITED files,
+    //     and no surviving file changed shape. 364 + 2119 = 2483, so the arithmetic arm closes.
+    //   titles −8 · suiteTitles −4 — the whole delta, even though this lane also TRIMMED a fifth
+    //     file (tests/config/entitlementLadder.enforcement.test.js). That trim re-recorded five
+    //     frozen membership arrays and added four guard-the-guard arms, but opened and closed no
+    //     `it`/`describe`, so it moves neither layer. The exact closure is what PROVES that rather
+    //     than assuming it — a trim that had dropped an arm would land this figure off by one.
+    // ⭐ THE FINGERPRINT REPRODUCED ACROSS THE REBASE, AND THAT IS THE EVIDENCE THE TWO LANES ARE
+    // DISJOINT: −4/−4/−8/−4 was measured on 4bb9f80d9 and measured again, unchanged, on
+    // da4effc66 — a base that had meanwhile gained ST-2's +6 titles / +1 suite title. Two bases,
+    // one fingerprint, nothing carried between them. (ST-2's own block above records the mirror
+    // image of this check, which is why both are worth keeping.)
+    // ⭐ AND THE GREP AND THE MEASUREMENT AGREE EXACTLY, recorded because the §748 block above had
+    // to write down a 5-title gap it could not attribute, and an unexplained gap never followed by
+    // an explained one teaches a successor the wrong lesson about this instrument. Per-file
+    // `it`/`describe` counts taken before deletion: illustratedLensFree 3/1, dmPinsTierGate 1/1,
+    // fogTierGate 3/1, changeViewDepthGate 1/1 ⇒ predicted −8/−4; measured −8/−4, twice, on two
+    // bases. The reason is a property of THIS corpus and is stated as such: all four files hold
+    // their titles in plain literal `it`/`describe` calls, with no template literals (which
+    // inflate the census by their PARTS) and no `test.each` (which parks a whole file), so
+    // `classify` credits them one-for-one. Agreement here is not evidence that §748's gap was
+    // wrong; the MEASUREMENT remains the authority in both blocks.
+    files: 2483, parked: 364, credited: 2119, titles: 20797, suiteTitles: 5768,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
