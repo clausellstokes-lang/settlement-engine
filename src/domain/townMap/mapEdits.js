@@ -34,7 +34,10 @@
  * `<`/`>` comparisons (localeCompare is banned). Any-cast baseline 0 for new files.
  */
 
-import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
+import {
+  coerceStyleId, DEFAULT_STYLE_ID, resolveTownMapStyle,
+  FURNITURE_KINDS, HAZARD_GLYPHS, ANCHOR_GLYPHS, CONTRAST_LEVELS, GLYPH_SET_IDS,
+} from '../../design/townMapStyles.js';
 
 /** @typedef {{ anchor: string, dx: number, dy: number }} MapEditPin */
 /** @typedef {{ showLabels?: boolean, showLegend?: boolean }} MapEditLegendPrefs */
@@ -100,7 +103,7 @@ export const SCENE_OVERRIDE_VARIANT_IDS = Object.freeze(['mirror']);
 // Surveyor map style rides the blob like a lens choice. The key itself is re-checked ∉
 // PRIVATE_KEY_RE (the naming-trap test enforces it). Its VALUE is an OPAQUE, wall-validated
 // collection: the ids are user slugs and each style is a fixed known-role visual object
-// (design/townMapStyleWall.validateBespokeStyle keeps only known roles + carries __resolved),
+// (`validateBespokeStyle` at the foot of THIS module keeps only known roles + carries __resolved),
 // so no arbitrary substance persists — and the whole mapEdits container is (already) owner-gated
 // off the anonymous gallery (mapEdits ∉ PUBLIC_TOPLEVEL_KEYS), so the value's nested keys never
 // reach a public projection. This is why only the CONTAINER key joins the schema list below (the
@@ -609,4 +612,200 @@ export function withBespokeStyles(edits, collection) {
  * @returns {MapEdits} */
 export function newSettlementMapEdits() {
   return { layoutLawVersion: NEW_SETTLEMENT_LAYOUT_LAW_VERSION };
+}
+
+// ── THE PERSISTED-SHAPE WALL for a saved bespoke style ───────────────────────────────
+//
+// A bespoke style is DATA — one more definition of the TownMapStyle shape
+// (design/townMapStyles.js), validated against the FIXED renderer capabilities. THE WALL
+// (the safety invariant): a style may only SELECT a hex colour, a numeric weight/opacity, a
+// furniture kind, a glyph name, a contrast level — never arbitrary SVG, code, geometry, or
+// substance. `validateBespokeStyle` resolves a candidate onto the parchment base (so every
+// unspecified field inherits the default) keeping ONLY valid, known-role fields; every
+// rejected field is listed honestly. The result carries `__resolved:true`.
+// WORST CASE A STYLE IS UGLY; NEVER UNSAFE.
+//
+// THE TRUTH-PROJECTION LAW: a style edits DISPLAY, never SUBSTANCE — geometry (positions,
+// polygons, sizes, which districts exist) comes from the frozen render model, untouched by any
+// style. Enforced BY CONSTRUCTION: a style carries ONLY visual attributes; any field that looks
+// like geometry or substance is not a known style field and is DROPPED.
+//
+// ⚠⚠ WHY IT LIVES HERE, AND WHY IT IS NOT DEAD CODE (ODQ §769.2, §725/§772). The surface that
+// once PRODUCED bespoke styles was retired whole, and this validator came with the retirement as
+// the only orphan worth keeping — because `readBespokeStyles` above admits a saved entry solely
+// on its `__resolved:true` marker, and THIS FUNCTION IS THE ONLY THING THAT MINTS THAT MARKER.
+// A blob written before the retirement can still carry such a collection, so the marker's meaning
+// must stay written down and tested or the reader's admission rule becomes a rule about nothing.
+// Folding it into the module that owns the persisted container — rather than leaving it alone in
+// a file of its own — is what makes the pair legible: the gate and the thing the gate trusts are
+// one read apart. It stays PURE and reachable only through the saved-blob path.
+
+const _HEX_RE = /^#[0-9a-fA-F]{3,8}$/;
+const _furnitureSet = new Set(FURNITURE_KINDS);
+const _hazardSet = new Set(HAZARD_GLYPHS);
+const _anchorSet = new Set(ANCHOR_GLYPHS);
+const _contrastSet = new Set(CONTRAST_LEVELS);
+// THE GENRE DOOR: a bespoke skin may SELECT a shipped glyph set (never author geometry).
+const _glyphSetIds = new Set(GLYPH_SET_IDS);
+// A skin's default SEASON leaning ("dress character") — the four bounded quarters, or null.
+const _seasonBiasIds = new Set(['spring', 'summer', 'autumn', 'winter']);
+// The illustrated lens's dress/shadow roles — NOT on the parchment base, so a skin naming them
+// must be allowed EXPLICITLY (else mergeRoleMap drops them as unknown roles).
+const _strokeExtraRoles = new Set(['dress']);
+const _opacityExtraRoles = new Set(['dress', 'shadow', 'roofFill']);
+
+/** Bounds for numeric fields (defence against a runaway weight/scale). */
+const STROKE_MAX = 40;
+const RASTER_MAX = 8;
+const GRID_STEP_MAX = 500;
+const TOKEN_PX_MAX = 400;
+
+/** @param {unknown} v @returns {v is string} */
+function isHex(v) { return typeof v === 'string' && _HEX_RE.test(v); }
+/** @param {unknown} v @returns {v is number} */
+function isFiniteNum(v) { return typeof v === 'number' && Number.isFinite(v); }
+
+/** @typedef {{ field: string, reason: string }} StyleViolation */
+/** @typedef {Readonly<Record<string, unknown>>} RoleMap */
+
+/**
+ * Merge a candidate role map over a base map: only KNOWN roles (keys in base, OR in `extraRoles` —
+ * the illustrated dress/shadow roles that are not on the parchment base) with values passing `valid`
+ * override; unknown roles / bad values are dropped and listed. Pure.
+ * @param {RoleMap} base
+ * @param {unknown} cand
+ * @param {(value: unknown) => boolean} valid
+ * @param {string} field
+ * @param {StyleViolation[]} violations
+ * @param {Set<string>} [extraRoles]  additional accepted role keys beyond the base map's own
+ * @returns {RoleMap}
+ */
+function mergeRoleMap(base, cand, valid, field, violations, extraRoles) {
+  if (!cand || typeof cand !== 'object' || Array.isArray(cand)) {
+    if (cand !== undefined) violations.push({ field, reason: 'not_object' });
+    return base;
+  }
+  const out = { ...base };
+  for (const [role, value] of Object.entries(cand)) {
+    const known = Object.prototype.hasOwnProperty.call(base, role) || (extraRoles ? extraRoles.has(role) : false);
+    if (!known) { violations.push({ field: `${field}.${role}`, reason: 'unknown_role' }); continue; }
+    if (!valid(value)) { violations.push({ field: `${field}.${role}`, reason: 'invalid_value' }); continue; }
+    out[role] = value;
+  }
+  return Object.freeze(out);
+}
+
+/**
+ * Validate + resolve a candidate bespoke style against THE WALL. Pure.
+ * @param {Record<string, unknown>|null|undefined} candidate
+ * @param {{ id?: string, label?: string }} [meta]  a caller-assigned id/label for the artifact
+ * @returns {{ ok: boolean, style: import('../../design/townMapStyles.js').TownMapStyle,
+ *            violations: Array<{ field: string, reason: string }> }}
+ */
+export function validateBespokeStyle(candidate, meta = {}) {
+  const base = resolveTownMapStyle(DEFAULT_STYLE_ID);   // fully-resolved parchment defaults
+  /** @type {StyleViolation[]} */
+  const violations = [];
+  const c = (candidate && typeof candidate === 'object' && !Array.isArray(candidate)) ? candidate : {};
+
+  // The known top-level fields — anything else is dropped (arbitrary SVG/geometry/substance).
+  //
+  // `baseLens` is RECOGNIZED AND STRIPPED (manager ruling 2026-07-27, VETOABLE): the compiler
+  // that once produced these styles named the base lens it composed from, but that was a
+  // TRANSPORT signal, never a client style property. Listing it here keeps a conforming saved
+  // blob from showing a spurious "rejected" row, while omitting it from the resolved style below
+  // keeps it strictly non-renderable: the wall always resolves onto the parchment base, so no
+  // named lens can steer the client defaults. The alternative ruling (HONOR it as the resolution
+  // base) would change what every existing saved style resolves to, so it stays owner territory.
+  const KNOWN = new Set([
+    'id', 'label', 'background', 'contrast', 'hazardGlyph', 'anchorGlyph',
+    'furniture', 'functional', 'rasterScale', 'palette', 'district', 'stroke', 'opacity',
+    'glyphSet', 'seasonBias', 'baseLens',
+  ]);
+  for (const k of Object.keys(c)) {
+    if (!KNOWN.has(k)) violations.push({ field: k, reason: 'unsupported_field' });
+  }
+
+  // Scalars — a valid candidate value overrides; an invalid one is noted + falls back to
+  // the parchment default (worst case ugly, never unsafe / never undefined).
+  /**
+   * @template T
+   * @param {unknown} value @param {(v: unknown) => boolean} ok @param {T} fallback
+   * @param {string} field @param {string} reason
+   * @returns {T}
+   */
+  const pick = (value, ok, fallback, field, reason) => {
+    if (value === undefined) return fallback;
+    if (ok(value)) return /** @type {T} */ (value);
+    violations.push({ field, reason });
+    return fallback;
+  };
+  const background = pick(c.background, isHex, base.background, 'background', 'not_hex');
+  const contrast = pick(c.contrast, (/** @type {unknown} */ v) => typeof v === 'string' && _contrastSet.has(v), base.contrast, 'contrast', 'not_in_vocab');
+  const hazardGlyph = pick(c.hazardGlyph, (/** @type {unknown} */ v) => typeof v === 'string' && _hazardSet.has(v), base.hazardGlyph, 'hazardGlyph', 'not_in_vocab');
+  const anchorGlyph = pick(c.anchorGlyph, (/** @type {unknown} */ v) => typeof v === 'string' && _anchorSet.has(v), base.anchorGlyph, 'anchorGlyph', 'not_in_vocab');
+  const rasterScale = pick(c.rasterScale, (/** @type {unknown} */ v) => isFiniteNum(v) && v > 0 && v <= RASTER_MAX, base.rasterScale, 'rasterScale', 'out_of_range');
+
+  // Furniture — a subset of the fixed vocabulary (dropped items listed).
+  let furniture = base.furniture;
+  if (Array.isArray(c.furniture)) {
+    const kept = [];
+    for (const f of c.furniture) {
+      if (typeof f === 'string' && _furnitureSet.has(f)) kept.push(f);
+      else violations.push({ field: `furniture.${String(f)}`, reason: 'not_in_vocab' });
+    }
+    furniture = Object.freeze(kept);
+  } else if (c.furniture !== undefined) {
+    violations.push({ field: 'furniture', reason: 'not_array' });
+  }
+
+  // functional { grid, gridStep, scaleBar, tokenPx } — booleans + bounded numbers.
+  let functional = base.functional;
+  if (c.functional && typeof c.functional === 'object' && !Array.isArray(c.functional)) {
+    const f = /** @type {Record<string, unknown>} */ (c.functional);
+    functional = Object.freeze({
+      grid: typeof f.grid === 'boolean' ? f.grid : base.functional.grid,
+      gridStep: (isFiniteNum(f.gridStep) && /** @type {number} */ (f.gridStep) >= 0 && /** @type {number} */ (f.gridStep) <= GRID_STEP_MAX) ? /** @type {number} */ (f.gridStep) : base.functional.gridStep,
+      scaleBar: typeof f.scaleBar === 'boolean' ? f.scaleBar : base.functional.scaleBar,
+      tokenPx: (isFiniteNum(f.tokenPx) && /** @type {number} */ (f.tokenPx) >= 0 && /** @type {number} */ (f.tokenPx) <= TOKEN_PX_MAX) ? /** @type {number} */ (f.tokenPx) : base.functional.tokenPx,
+    });
+  }
+
+  // Role maps — only KNOWN roles (keys present in the parchment base, PLUS the illustrated
+  // dress/shadow roles for stroke/opacity) with valid values override; an unknown role or a bad
+  // value is dropped-and-listed.
+  const palette = mergeRoleMap(base.palette, c.palette, isHex, 'palette', violations);
+  const district = mergeRoleMap(base.district, c.district, isHex, 'district', violations);
+  const stroke = mergeRoleMap(base.stroke, c.stroke, (/** @type {unknown} */ v) => isFiniteNum(v) && v >= 0 && v <= STROKE_MAX, 'stroke', violations, _strokeExtraRoles);
+  const opacity = mergeRoleMap(base.opacity, c.opacity, (/** @type {unknown} */ v) => isFiniteNum(v) && v >= 0 && v <= 1, 'opacity', violations, _opacityExtraRoles);
+
+  // glyphSet + seasonBias — SELECT-only bounded top-level fields (THE GENRE DOOR + dress character).
+  // Absent ⇒ OMITTED (no key) so the resolved shape stays byte-stable + dormant (a re-skin without
+  // a glyphSet is still a valid style); an invalid value is dropped + listed (never a default set).
+  let glyphSet;
+  if (c.glyphSet !== undefined) {
+    if (typeof c.glyphSet === 'string' && _glyphSetIds.has(c.glyphSet)) glyphSet = c.glyphSet;
+    else violations.push({ field: 'glyphSet', reason: 'not_in_vocab' });
+  }
+  let seasonBias;
+  if (c.seasonBias !== undefined) {
+    if (typeof c.seasonBias === 'string' && _seasonBiasIds.has(c.seasonBias)) seasonBias = c.seasonBias;
+    else violations.push({ field: 'seasonBias', reason: 'not_in_vocab' });
+  }
+
+  const id = typeof meta.id === 'string' && meta.id ? meta.id
+    : (typeof c.id === 'string' && c.id ? c.id : 'bespoke');
+  const label = typeof meta.label === 'string' && meta.label ? meta.label.slice(0, 60)
+    : (typeof c.label === 'string' && c.label ? c.label.slice(0, 60) : 'Bespoke');
+
+  const style = /** @type {import('../../design/townMapStyles.js').TownMapStyle} */ (Object.freeze({
+    __resolved: true,
+    id, label, background, contrast, hazardGlyph, anchorGlyph,
+    furniture, functional, rasterScale, palette, district, stroke, opacity,
+    // Conditional — a key is present ONLY when the candidate named a valid value, so a plain
+    // re-skin stays byte-identical in shape to the pre-genre-door resolved style (the dormancy law).
+    ...(glyphSet !== undefined ? { glyphSet } : {}),
+    ...(seasonBias !== undefined ? { seasonBias } : {}),
+  }));
+  return { ok: true, style, violations };
 }

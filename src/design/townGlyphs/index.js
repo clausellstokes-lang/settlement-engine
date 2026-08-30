@@ -15,15 +15,11 @@
 
 import { MEDIEVAL_GLYPHS } from './medieval.js';
 
-/**
- * THE SHIPPED glyph-set ids — THE WALL vocabulary for a lens's `glyphSet` field (validateBespokeStyle
- * bounds a bespoke skin's glyphSet to THIS list). `'medieval'` ships and proves the registry; a
- * GENRE PACK (sci-fi / desert / gothic) is a two-line DATA DROP — register its library (below) and
- * add its id here. Kept an explicit frozen literal (not derived) so the shipped wall vocabulary is
- * a reviewed, byte-stable constant — a set can be render-registered for tests without silently
- * widening what the AI may select.
- */
-export const GLYPH_SET_IDS = Object.freeze(['medieval']);
+// THE SHIPPED glyph-set vocabulary now lives with the other bounded style vocabularies in
+// design/townMapStyles.js (ODQ §725/§772): it is a STYLE fact the persisted-shape wall reads,
+// and it must outlive this registry, whose only job is handing compiled glyph geometry to the
+// draw surfaces. Re-exported here so the registry's own callers keep one import.
+export { GLYPH_SET_IDS } from '../townMapStyles.js';
 
 /** The kind a compiler falls back to when a glyphKind is missing from a set. */
 export const FALLBACK_GLYPH_KIND = 'house-a';

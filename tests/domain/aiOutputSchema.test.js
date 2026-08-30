@@ -563,7 +563,7 @@ describe('negative controls (the checker and the validator are not green on noth
   });
 
   // ⚰ THE WALL HALF OF THIS CONTROL WENT WITH ITS POSITIVE USERS (ODQ §763.2). `wallConstant`
-  // read numeric ceilings out of src/design/townMapStyleWall.js for the styleOverhaul schema
+  // read numeric ceilings out of the client style wall for the styleOverhaul schema
   // pins; with those gone its ONLY remaining caller would have been this negative control —
   // a helper kept alive by the test that proves it can fail, which is vacuity wearing
   // coverage's clothes. The charter half below has live positive users and stays.
@@ -598,9 +598,10 @@ describe('vocabulary coupling (the schemas render the live builders)', () => {
   // their subject was the styleOverhaul schema itself, which no longer exists. They pinned
   // the rendered vocabularies + renderer roles, the wall's KNOWN-set minus the edge-dropped
   // fields (recorded exclusion: `id`), and F-C's genre door (glyphSet + seasonBias offered
-  // and bounded). The WALL those pins guarded — src/design/townMapStyleWall.js — is
-  // RETAINED by the ruling and keeps its own suite (tests/design/townMapStyleWall.test.js);
-  // what died is the schema surface that consumed it.
+  // and bounded). The WALL those pins guarded outlived the schema surface that consumed it,
+  // but not its own module: under ODQ §725/§772 its validator moved into the module that owns
+  // the persisted map-edits container — the only place its `__resolved` marker still means
+  // anything — and its suite followed it into tests/domain. What died here is the schema.
   test('construct: one branch per config surface, plus the constraint vocabulary', () => {
     const vocab = buildConstructVocabulary();
     const schema = buildSurfaceOutputSchema('construct');

@@ -29,7 +29,7 @@ import {
 import {
   addBespokeStyle, removeBespokeStyle, listBespokeStyles, resolveActiveStyle, isBaseLensId,
 } from '../../src/domain/townMap/bespokeStyles.js';
-import { validateBespokeStyle } from '../../src/design/townMapStyleWall.js';
+import { validateBespokeStyle } from '../../src/domain/townMap/mapEdits.js';
 import { resolveTownMapStyle } from '../../src/design/townMapStyles.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
 

@@ -1,7 +1,17 @@
 /**
- * tests/design/townMapStyleWall.test.js — THE WALL for bespoke AI styles
- * (Surveyor style-overhaul, DESIGN_CONTENT_PLANE §7). The safety invariant: a bespoke style
- * may only SELECT from fixed renderer capabilities — worst case ugly, never unsafe.
+ * tests/domain/bespokeStyleWallContract.test.js — THE PERSISTED-SHAPE WALL for a saved bespoke
+ * style.
+ * The safety invariant: a bespoke style may only SELECT from fixed renderer capabilities —
+ * worst case ugly, never unsafe.
+ *
+ * ⚠ WHY THIS SUITE OUTLIVED THE SURFACE IT WAS WRITTEN FOR (ODQ §769.2, §725/§772). The surface
+ * that PRODUCED bespoke styles was retired whole. The validator was not, because the retained
+ * saved-blob reader (`readBespokeStyles`) admits an entry solely on the `__resolved:true` marker
+ * this function mints — so the marker's meaning has to stay written down and TESTED, or the
+ * reader's admission rule becomes a rule about nothing. The validator moved into the module that
+ * owns the persisted container and this suite followed it out of the design layer.
+ * The design-corpus DESCRIPTOR went with the retired surface: it existed to ground a compiler
+ * that no longer runs, and a descriptor nothing reads is not a wall.
  *
  *   PIN 1 (SELECT-ONLY): valid hex/number/enum/furniture/glyph fields override; invalid values
  *     fall back to the parchment default and are listed as violations (never undefined).
@@ -14,12 +24,12 @@
  *     it through and the existing renderer draws it with no code change.
  */
 import { describe, it, expect } from 'vitest';
-import { validateBespokeStyle, buildStyleVocabulary } from '../../src/design/townMapStyleWall.js';
+import { validateBespokeStyle } from '../../src/domain/townMap/mapEdits.js';
 import { resolveTownMapStyle, DEFAULT_STYLE_ID } from '../../src/design/townMapStyles.js';
 
 const HEX = /^#[0-9a-fA-F]{3,8}$/;
 
-describe('townMapStyleWall — select-only (PIN 1)', () => {
+describe('bespoke-style wall — select-only (PIN 1)', () => {
   it('keeps valid fields, falls back invalid ones to parchment, lists violations', () => {
     const { ok, style, violations } = validateBespokeStyle({
       label: 'Neon Noir',
@@ -49,7 +59,7 @@ describe('townMapStyleWall — select-only (PIN 1)', () => {
   });
 });
 
-describe('townMapStyleWall — drop arbitrary + truth-projection (PIN 2/3)', () => {
+describe('bespoke-style wall — drop arbitrary + truth-projection (PIN 2/3)', () => {
   it('drops an arbitrary top-level field, an unknown role, and any SVG/code — always listed', () => {
     const { style, violations } = validateBespokeStyle({
       background: '#111111',
@@ -86,7 +96,7 @@ describe('townMapStyleWall — drop arbitrary + truth-projection (PIN 2/3)', () 
   });
 });
 
-describe('townMapStyleWall — resolved + renderable (PIN 4)', () => {
+describe('bespoke-style wall — resolved + renderable (PIN 4)', () => {
   it('the result is __resolved and passes through resolveTownMapStyle unchanged', () => {
     const { style } = validateBespokeStyle({ background: '#0a0a12', label: 'Test' });
     expect(style.__resolved).toBe(true);
@@ -103,28 +113,7 @@ describe('townMapStyleWall — resolved + renderable (PIN 4)', () => {
   });
 });
 
-describe('townMapStyleWall — the design corpus descriptor', () => {
-  it('buildStyleVocabulary enumerates the fixed vocabularies + the real role keys', () => {
-    const v = buildStyleVocabulary();
-    expect(v.furniture).toContain('compass');
-    expect(v.hazardGlyphs).toEqual(['triangle', 'diamond', 'pin']);
-    expect(v.contrast).toEqual(['soft', 'normal', 'high']);
-    expect(v.baseLenses).toEqual(['parchment', 'watercolor', 'darkFantasy', 'vtt']);
-    expect(v.roles.palette).toContain('water');
-    expect(v.roles.stroke).toContain('river');
-    expect(v.roles.opacity).toContain('waterFill');
-  });
-
-  it('IT-4: advertises the RESKIN vocabulary — glyphSets (genre door), seasonBias, dress/shadow roles', () => {
-    const v = buildStyleVocabulary();
-    expect(v.glyphSets).toContain('medieval');                 // the genre door
-    expect(v.seasonBias).toEqual([null, 'spring', 'summer', 'autumn', 'winter']);
-    expect(v.roles.stroke).toContain('dress');                 // the AI can tune the ground-dress ink
-    expect(v.roles.opacity).toEqual(expect.arrayContaining(['dress', 'shadow', 'roofFill']));
-  });
-});
-
-describe('townMapStyleWall — IT-4 reskin fields (glyphSet + seasonBias + dress/shadow roles)', () => {
+describe('bespoke-style wall — IT-4 reskin fields (glyphSet + seasonBias + dress/shadow roles)', () => {
   it('accepts a registered glyphSet + a valid seasonBias + bounded dress/shadow roles', () => {
     const { style, violations } = validateBespokeStyle({
       label: 'Full Reskin',
@@ -182,7 +171,7 @@ describe('townMapStyleWall — IT-4 reskin fields (glyphSet + seasonBias + dress
   });
 });
 
-describe('townMapStyleWall — a LEGACY bespoke style validates clean (finding F-A, re-homed)', () => {
+describe('bespoke-style wall — a LEGACY bespoke style validates clean (finding F-A, re-homed)', () => {
   // ⚰⭐ THIS SUITE'S SUBJECT CHANGED WITHOUT ITS PAYLOAD CHANGING (ODQ §763.2, Q-STYLE arm 2).
   // It used to pin the wall against the style-overhaul EDGE output contract: the edge named
   // `baseLens` in STYLE_FIELDS, styleRiderTags derived the lens roadmap radar from it, and

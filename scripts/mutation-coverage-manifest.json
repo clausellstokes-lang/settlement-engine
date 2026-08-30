@@ -60,6 +60,9 @@
   "sp-d-repair-controls-executed-2026-08-06": "SP-D REPAIR WAVE (adversarial-verify REJECT, repaired additively 2026-08-06). TWENTY controls EXECUTED, each planted, run, and restored from a cp backup verified by cmp in the same shell, and each asserted to have CHANGED the file before the run (a mutant that plants nothing greens). THE THREE DOORS OF THE PERSIST-SIDE SPLIT, deleted SEPARATELY rather than jointly: (A) PURPOSE_CLASS_SET.has(declared) replaced by true -- was 55/55 GREEN before the repair, now reds 1; (B) '&& declared !== resolved' deleted -- was 55/55 GREEN, now reds 2; (C) '&& claimedTrue === resolved' deleted -- reddened 2 before, reds 3 now; (D) the whole expression deleted (the wave's original joint control M5) reds 14. THE MINT-DETECTOR REPAIR, four planted minters that the literal matcher could not see: aliased import, namespace import, re-export hop through envoyErrand.js, and the literal spelling -- all four now red 3 of 8, and the walker returns 8/8 on deletion. THE ONE-READER REPAIR, four planted readers: destructuring and computed access inside src/domain, plus the .field spelling in src/store and a destructure in src/components/*.jsx -- all four now red, all four were GREEN before the widening. FIVE DETECTOR-DELETION MUTANTS pinning each door of the scanner itself: alias resolution deleted, scan narrowed back to src/domain, computed-access half deleted, pattern half deleted, re-export fixed point deleted -- all five red. NOTE the computed-access door initially did NOT red when deleted (8/8 green) because only the bare regex was asserted; the repair drives each half THROUGH the composed predicate, which is the defense-in-depth corollary applied to a scanner. PLUS the pre-existing controls re-run unchanged: the gate deleted at the mint reds 4, the persist spread dropped reds 15, the drop-when-derivable rule deleted reds 2. PROMOTION PATH unchanged from the landing entry: the sweep's revert is git checkout, which this tree's protocol forbids."
  },
  "invariants": {
+  "tests/domain/bespokeStyleWallContract.test.js": {
+   "kind": "uncovered"
+  },
   "tests/lint/serviceCategoryRegistration.walker.test.js": {
    "kind": "rationale",
    "rationale": "Service-classifier registration ratchet driven against the live catalog. It pins that the walker measures the SAME INSTITUTION_SERVICES object the generator imports (an anti-mirror identity control), holds three non-vacuity corpus floors, asserts classifyService is TOTAL over every (institution, service) pair through a positive predicate built from the producer's own bucket set rather than an enumeration on the credit side, and audits three ledgers — the heuristic quarantine, the host-dependent set and the dead registrations — by EXACT identity in BOTH directions, so a rename, a deletion and an un-banked registration each red. Those bidirectional exact ledgers already execute on every run; one standing source mutation would sample a single branch of a guard whose whole design is exactness. Landed without its manifest row at 0f7424f7; filed here by the step-15 reconciliation.",
@@ -450,9 +453,6 @@
    "rationale": "A COUNTS-not-ms self-scoring ceiling (per-tier triangle/vertex/draw) pinned at ~1.5x the measured K-1 grammar cathedral + byte-parity buttress; like its E-F/townMapOpBudget sibling it exists to catch an explosion CLASS, so mutation-testing the generous ceiling is disproportionate, and the geometry it bounds is separately byte-golden-pinned by archMeshDeterminism."
   },
   "tests/design/townMapOpBudget.test.js": {
-   "kind": "uncovered"
-  },
-  "tests/design/townMapStyleWall.test.js": {
    "kind": "uncovered"
   },
   "tests/docs/abuse-model-paths.test.js": {

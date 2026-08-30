@@ -17,7 +17,7 @@ import { buildTownMapModel } from '../../src/domain/townMap/index.js';
 import { buildTownMapDrawList } from '../../src/domain/townMap/townMapDraw.js';
 import { groundDressOps } from '../../src/domain/townMap/groundDress.js';
 import { resolveActiveStyle, addBespokeStyle } from '../../src/domain/townMap/bespokeStyles.js';
-import { validateBespokeStyle } from '../../src/design/townMapStyleWall.js';
+import { validateBespokeStyle } from '../../src/domain/townMap/mapEdits.js';
 import { resolveTownMapStyle } from '../../src/design/townMapStyles.js';
 import { GOLDEN_CONFIGS } from '../fixtures/townMapFixtures.js';
 

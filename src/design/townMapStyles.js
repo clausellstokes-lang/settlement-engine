@@ -48,6 +48,21 @@ export const ANCHOR_GLYPHS = Object.freeze(['disc', 'ring', 'star']);
 /** Contrast levels (an on-screen viewer hint; export always emits concrete color). */
 export const CONTRAST_LEVELS = Object.freeze(['soft', 'normal', 'high']);
 
+/**
+ * The SHIPPED glyph-set ids — the bounded vocabulary a lens's `glyphSet` field may name
+ * (`illustrated` names `'medieval'` below, and the persisted-shape wall bounds a saved
+ * skin's `glyphSet` to THIS list). Kept an explicit frozen literal, never derived, so the
+ * shipped vocabulary is a reviewed, byte-stable constant.
+ *
+ * ⚠ THIS IS THE VOCABULARY, NOT A REGISTRY. It moved here from the glyph-library registry
+ * under ODQ §725/§772: that registry existed to hand compiled glyph geometry to the legacy
+ * settlement-map renderers and was retired with them, but the vocabulary is a STYLE fact and
+ * belongs beside the other bounded style vocabularies above — the persisted-shape wall still
+ * has to say which values a saved skin may carry, and a wall bound must not die with a
+ * renderer. A future genre pack adds its id here.
+ */
+export const GLYPH_SET_IDS = Object.freeze(['medieval']);
+
 /** The named base lenses, in canonical order. Genre lenses land at S4+.
  *  `accessible` (SM-5, the ACCESSIBILITY LENS) is a colorblind-safe, high-contrast
  *  data-only lens — an Okabe-Ito-derived district palette whose tints stay

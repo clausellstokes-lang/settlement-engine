@@ -161,10 +161,13 @@ export async function compileCustomContent(ctx = {}) {
  * Measured: it did exactly that on this car's first draft. Its ONLY caller was
  * StyleOverhaulPanel.jsx, deleted in car 1; keeping a transport aimed at a function that no
  * longer exists would have left a client able to POST into a 404 and call it a refusal.
- * ⭐ THIS IS WHAT ORPHANED `buildStyleVocabulary`: line :165 of this module was one of the
- * FOUR retained consumers R-STRIP6 recorded for src/design/townMapStyleWall.js, and it lived
- * INSIDE this function. See the census recorded in this car's commit body — the wall itself
- * is RETAINED by the ruling and is NOT touched here.
+ * ⭐ THIS IS WHAT ORPHANED THE STYLE-CORPUS DESCRIPTOR: line :165 of this module was one of
+ * the four consumers a recon lane had recorded for the client style wall, and it lived INSIDE
+ * this function. See the census recorded in this car's commit body.
+ * ⚰ FOLLOW-UP (ODQ §725/§772): with this consumer gone the descriptor had none at all and was
+ * retired with the wall module; the wall's VALIDATOR outlived both and now sits in the module
+ * that owns the persisted map-edits container, because a saved blob's `__resolved` marker still
+ * needs a written, tested meaning.
  */
 
 /**

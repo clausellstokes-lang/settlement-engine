@@ -26,7 +26,7 @@ import {
   SCENE_OVERRIDE_SKIN_IDS, SCENE_OVERRIDE_VARIANT_IDS,
 } from '../../src/domain/townMap/mapEdits.js';
 import { addBespokeStyle, removeBespokeStyle, resolveActiveStyle } from '../../src/domain/townMap/bespokeStyles.js';
-import { validateBespokeStyle } from '../../src/design/townMapStyleWall.js';
+import { validateBespokeStyle } from '../../src/domain/townMap/mapEdits.js';
 import { buildTownMapModel } from '../../src/domain/townMap/index.js';
 import { PRIVATE_KEY_RE } from '../../src/domain/display/publicSafe.js';
 import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
