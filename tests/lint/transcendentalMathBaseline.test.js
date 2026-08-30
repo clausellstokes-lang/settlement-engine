@@ -45,7 +45,11 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // Committed transcendental-site ceiling — lower as sites are reformulated; NEVER
 // raise. (2026-07-21 landing measurement: 49 sites / 32 files, the grandfathered
 // stock — all covered by same-engine goldens + the worker byte-identity pin.)
-const CEILING = 49;
+// 49 → 48 on 2026-08-30: the legacy settlement-map age-overlay leaf was RETIRED whole
+// with its draw stack (ODQ §725/§772), taking its one site with it. Banked here rather
+// than left as headroom, so the freed slot cannot be silently re-occupied — a deletion
+// earns the same monotone-down treatment a reformulation does.
+const CEILING = 48;
 
 const baseline = JSON.parse(readFileSync(join(ROOT, 'tests/lint/.transcendental-math-baseline.json'), 'utf8'));
 const current = countTrees();

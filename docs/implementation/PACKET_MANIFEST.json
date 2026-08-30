@@ -2030,15 +2030,18 @@
       "changeManifest": [
         {
           "action": "CREATE",
-          "path": "src/domain/townCartography/cartographyPaint.js"
+          "path": "src/domain/townCartography/cartographyPaint.js",
+          "retiredBy": "§725/§772"
         },
         {
           "action": "CREATE",
-          "path": "src/domain/townCartography/cartographyPaintRoles.js"
+          "path": "src/domain/townCartography/cartographyPaintRoles.js",
+          "retiredBy": "§725/§772"
         },
         {
           "action": "CREATE",
-          "path": "tests/domain/townCartographyPaint.test.js"
+          "path": "tests/domain/townCartographyPaint.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "action": "TEST",
@@ -2212,7 +2215,8 @@
       "changeManifest": [
         {
           "action": "CREATE",
-          "path": "src/lib/townScene/townCartographyBlock.js"
+          "path": "src/lib/townScene/townCartographyBlock.js",
+          "retiredBy": "§725/§772"
         },
         {
           "action": "CREATE",
@@ -2221,7 +2225,8 @@
         },
         {
           "action": "CREATE",
-          "path": "tests/lib/townCartographyBlock.test.js"
+          "path": "tests/lib/townCartographyBlock.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "action": "CREATE",
@@ -2260,7 +2265,8 @@
         },
         {
           "path": "src/domain/townCartography/cartographyPaint.js",
-          "symbol": "buildCartographyDrawList"
+          "symbol": "buildCartographyDrawList",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "src/lib/townScene/townSceneExport.js",
@@ -2376,11 +2382,13 @@
       "requiredSymbols": [
         {
           "path": "src/domain/townCartography/cartographyPaint.js",
-          "symbol": "buildCartographyDrawList"
+          "symbol": "buildCartographyDrawList",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "src/domain/townCartography/cartographyPaintRoles.js",
-          "symbol": "CARTOGRAPHY_PAINT_ROLES"
+          "symbol": "CARTOGRAPHY_PAINT_ROLES",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "src/lib/mapSubTabs.js",
@@ -21186,17 +21194,20 @@
         {
           "_note": "THE ONE NEW LEAF, DORMANT. The noding passes, the uniform-grid bucketing, the pass cap and the quantum ladder arrive verbatim from the sealed sandbox tip; the CUT PREDICATE is the landed kernel's own admission predicate, exact, inverted into cuts (ODQ 334.2) because four executed witness classes show the sandbox letter's output being refused by the landed kernel.",
           "action": "CREATE",
-          "path": "src/domain/townMap/fabric/boundaryNoder.js"
+          "path": "src/domain/townMap/fabric/boundaryNoder.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "A NEW acceptance file. CREATE rather than TEST: the validator asserts a TEST path exists at EVERY status, and existence for a CREATE row is assertable only at LANDED.",
           "action": "CREATE",
-          "path": "tests/domain/townMapBoundaryNoder.test.js"
+          "path": "tests/domain/townMapBoundaryNoder.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "A NEW acceptance file, the determinism companion. CREATE for the same reason as its sibling.",
           "action": "CREATE",
-          "path": "tests/property/townMapBoundaryNoderDeterminism.test.js"
+          "path": "tests/property/townMapBoundaryNoderDeterminism.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ONE SHARED D3a CHANGE PATH this member reserves. All five figures re-recorded together by placeholder-and-convict, with the cause and the authorizing decision named. It reserves NO path on fabric/index.js and NO path on any existing production file.",
@@ -21236,20 +21247,24 @@
         {
           "_note": "THE ARRIVING NODER. Directory-internal and unexported by the barrel by ruling (ODQ 334.4); the acceptance battery is its only caller until the tranche that ports the fabric extraction wires the composition.",
           "path": "src/domain/townMap/fabric/boundaryNoder.js",
-          "symbol": "export function nodeBoundarySegments"
+          "symbol": "export function nodeBoundarySegments",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE PORTED LADDER, carried verbatim as owner tuning surface (ODQ 310.3 item 9 / 334.3). A8 pins the triple by equality and its frozenness, so a rung cannot be added, removed or retuned by this member or silently by a later one.",
           "path": "src/domain/townMap/fabric/boundaryNoder.js",
-          "symbol": "export const ARRANGEMENT_QUANTUM_LADDER"
+          "symbol": "export const ARRANGEMENT_QUANTUM_LADDER",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "tests/domain/townMapBoundaryNoder.test.js",
-          "symbol": "describe('MF-T2D boundary noder'"
+          "symbol": "describe('MF-T2D boundary noder'",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "tests/property/townMapBoundaryNoderDeterminism.test.js",
-          "symbol": "describe('MF-T2D boundary noder determinism'"
+          "symbol": "describe('MF-T2D boundary noder determinism'",
+          "retiredBy": "§725/§772"
         }
       ],
       "acceptanceCases": [
@@ -21458,17 +21473,20 @@
         {
           "_note": "THE ONE NEW LEAF, DORMANT. A design-implementation member, not a port-by-hash one: MassPartQ/SolidPartQ have no sandbox source module (the sealed fabric states they are design-only under SPEC 10.16's status override). The three vocabularies come verbatim from GENERATION-SPEC 7.1.2; the half-open vertical rule is INHERITED from MF-D1's solidLegality docblock rather than re-minted, and the record's discriminant was executed read-only against that predicate at this base. The footprint degeneracy check is BigInt, internal and unexported, because the tree's float area spelling reads zero on valid ground at ABI scale.",
           "action": "CREATE",
-          "path": "src/domain/townMap/fabric/massPart.js"
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "A NEW acceptance file. CREATE rather than TEST: the validator asserts a TEST path exists at EVERY status, and existence for a CREATE row is assertable only at LANDED.",
           "action": "CREATE",
-          "path": "tests/domain/townMapMassPart.test.js"
+          "path": "tests/domain/townMapMassPart.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "A NEW acceptance file, the determinism companion. CREATE for the same reason as its sibling.",
           "action": "CREATE",
-          "path": "tests/property/townMapMassPartDeterminism.test.js"
+          "path": "tests/property/townMapMassPartDeterminism.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ONE SHARED D3a CHANGE PATH this member reserves. All five figures re-recorded together by placeholder-and-convict at this base, with the cause and the authorizing decision named. It reserves NO path on fabric/index.js and NO path on any existing production file. MF-T2D reached LANDED before this packet was promoted, and the manifest was measured to hold no non-terminal packet at all at this base.",
@@ -21528,47 +21546,57 @@
         {
           "_note": "THE ARRIVING VOCABULARIES, closed and SPEC-verbatim. Joined at the flip to LANDED, never at READY. Pinned by deep equality in A5 behind a guard-the-guard opener, so a later widening reds on arrival.",
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export const FUNCTIONAL_VOLUME_KINDS"
+          "symbol": "export const FUNCTIONAL_VOLUME_KINDS",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export const MORPHOLOGY_ROLE_KINDS"
+          "symbol": "export const MORPHOLOGY_ROLE_KINDS",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export const MASSING_UNKNOWN_REASONS"
+          "symbol": "export const MASSING_UNKNOWN_REASONS",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE KNOWLEDGE AXIS. The UNKNOWN arm carries no value field at all, which is what makes the SPEC's no-inference law structural rather than advisory.",
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export function knownMassingFact"
+          "symbol": "export function knownMassingFact",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export function unknownMassingFact"
+          "symbol": "export function unknownMassingFact",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE HALF-OPEN VERTICAL INTERVAL, the rule MF-D1 declared in advance so D3a would inherit it rather than mint a second one.",
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export function verticalIntervalQ"
+          "symbol": "export function verticalIntervalQ",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE QUANTIZED SOLID. Its {kind:'INTERVAL', baseQ, topQ} discriminant is what the D1 legality predicate reads; executed read-only against the sealed predicate at this base, the stacked pair returns sharedHeightQ 0 and DISJOINT_OR_ABUTTING.",
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export function solidPartQ"
+          "symbol": "export function solidPartQ",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE MASS PART, carrying the SPEC 10.5 identity law part.solid.partId === part.partId.",
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export function massPartQ"
+          "symbol": "export function massPartQ",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "tests/domain/townMapMassPart.test.js",
-          "symbol": "describe('MF-T2E mass-part vocabulary'"
+          "symbol": "describe('MF-T2E mass-part vocabulary'",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "tests/property/townMapMassPartDeterminism.test.js",
-          "symbol": "describe('MF-T2E mass-part determinism'"
+          "symbol": "describe('MF-T2E mass-part determinism'",
+          "retiredBy": "§725/§772"
         }
       ],
       "acceptanceCases": [
@@ -21656,22 +21684,26 @@
         {
           "_note": "LEAF 1, THE EXACT CORE, DORMANT. Ordered by ODQ 348.2: the D1 VOLUME arm multiplied in Number over a float polygon-intersection area, and R-MF-2 fires at the port. Exact BigInt ear-clip triangulation whose closing guard is an EQUALITY (the sum of the emitted triangles' absolute twice-areas must equal the ring's own), homogeneous-coordinate clipping, and rational shared area. Imports `bounds` from exactGeometry.js and nothing else; the float area spellings are deliberately NOT imported because importing them would re-admit the convicted arithmetic.",
           "action": "CREATE",
-          "path": "src/domain/townMap/fabric/exactIntersectionArea.js"
+          "path": "src/domain/townMap/fabric/exactIntersectionArea.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "LEAF 2, THE PORTED CONTRACT, DORMANT. A port-by-hash member: the source is the sealed MF-D1 solidLegality.js, blob 0c46df07, SHA-256 b2f59501..., re-verified at this base. Six divergences, each ordered or forced and each executed against the real leaves before any pin was written. The two-leaf split is the cap-respecting shape the chair fixed at ODQ 371.1, not a renegotiation: the executed basis is 307 effective lines against a 250 single-leaf cap.",
           "action": "CREATE",
-          "path": "src/domain/townMap/fabric/solidLegality.js"
+          "path": "src/domain/townMap/fabric/solidLegality.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "A NEW acceptance file, A1-A7. CREATE rather than TEST: the validator asserts a TEST path exists at EVERY status, and existence for a CREATE row is assertable only at LANDED.",
           "action": "CREATE",
-          "path": "tests/domain/townMapSolidLegality.test.js"
+          "path": "tests/domain/townMapSolidLegality.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "A NEW acceptance file, A8, the determinism companion. CREATE for the same reason as its sibling.",
           "action": "CREATE",
-          "path": "tests/property/townMapSolidLegalityDeterminism.test.js"
+          "path": "tests/property/townMapSolidLegalityDeterminism.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ONE SHARED D3a CHANGE PATH this member reserves. All five figures re-recorded together at this base: the BASE tuple proven by a GREEN walker run (five exact equalities), the AFTER tuple convicted key by key with a -1 sentinel. The census is SEQUENCED, so the sentinel walk had to be made cumulative before four of the five arms could be reached at all. It reserves NO path on fabric/index.js and NO path on any existing production file. Every other D3a member was measured LANDED at this base, so the path is uncontended.",
@@ -21716,7 +21748,8 @@
         {
           "_note": "THE RECORD VOCABULARY THIS PREDICATE READS, landed by MF-T2E. Divergence D-1 keys on partId precisely so these records are admitted with zero adaptation, which was executed: solidPartQ records go straight into solidOverlap. The leaves do NOT import this module; records arrive as arguments.",
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export function solidPartQ"
+          "symbol": "export function solidPartQ",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE GEOMETRY HOME, IMPORTED NARROWLY AND NOT EXTENDED. Only `bounds` is taken (an axis-aligned box over integers below 2^53 is exact in Number). This float area spelling is the R-MF-2 witness itself: re-executed at this base it reads 0 on a legal wall-scale sliver whose exact twice-area is -1.",
@@ -21736,56 +21769,68 @@
         {
           "_note": "THE EXACT CORE'S THREE EXPORTS, joined at the flip to LANDED. exactRatioQ is the ONE mint of the published exact-quantity shape, so two equal magnitudes are always deep-equal records and exact zero is always {0n, 1n}.",
           "path": "src/domain/townMap/fabric/exactIntersectionArea.js",
-          "symbol": "export function exactRatioQ"
+          "symbol": "export function exactRatioQ",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ANSWERABILITY SEAM. Three named refusal arms, each with an executed fixture: degenerate (bowtie and collinear rings), no admissible ear, and the exactness identity. The identity arm catches the completed-but-unsound class a float tolerance cannot separate from rounding - cross-A, twice-area 48000000, whose ear-clipping COMPLETES and sums to 208000000.",
           "path": "src/domain/townMap/fabric/exactIntersectionArea.js",
-          "symbol": "export function assertAnswerableFootprintQ"
+          "symbol": "export function assertAnswerableFootprintQ",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "src/domain/townMap/fabric/exactIntersectionArea.js",
-          "symbol": "export function sharedFootprintAreaExactQ"
+          "symbol": "export function sharedFootprintAreaExactQ",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE PLAN-ERA VERTICAL, ported verbatim from the sealed source.",
           "path": "src/domain/townMap/fabric/solidLegality.js",
-          "symbol": "export const PLAN_ERA_VERTICAL"
+          "symbol": "export const PLAN_ERA_VERTICAL",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE NO-TUNING PIN. Exactly zero, typed BigInt so it is compared against exact numerators rather than coerced. An abutment produces zero shared area under an exact predicate, so no tolerance is needed and none is offered; a tolerance here would be a tuning dial on a law.",
           "path": "src/domain/townMap/fabric/solidLegality.js",
-          "symbol": "export const OVERLAP_FLOOR_Q"
+          "symbol": "export const OVERLAP_FLOOR_Q",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "src/domain/townMap/fabric/solidLegality.js",
-          "symbol": "export function planEraSolid"
+          "symbol": "export function planEraSolid",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE PREDICATE ODQ 287.5 FORBIDS, ported FAITHFULLY as the negative control so the gap is measured rather than asserted. Nothing may decide with it. A4 pins it in BOTH directions, which is what keeps it falsifiable.",
           "path": "src/domain/townMap/fabric/solidLegality.js",
-          "symbol": "export function intervalOverlapVerdict"
+          "symbol": "export function intervalOverlapVerdict",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "src/domain/townMap/fabric/solidLegality.js",
-          "symbol": "export function footprintIsAnswerable"
+          "symbol": "export function footprintIsAnswerable",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ONE LEGALITY PREDICATE HOME - the app-side home of ODQ 287.5 and the substance of the 299.3(a) discharge. It reads landed MF-T2E records directly and answers REFUSED / PLANAR_ONLY / VOLUME with every decision and every published magnitude exact in BigInt.",
           "path": "src/domain/townMap/fabric/solidLegality.js",
-          "symbol": "export function solidOverlap"
+          "symbol": "export function solidOverlap",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "src/domain/townMap/fabric/solidLegality.js",
-          "symbol": "export function dualRunLegality"
+          "symbol": "export function dualRunLegality",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "tests/domain/townMapSolidLegality.test.js",
-          "symbol": "describe('MF-T2F solid legality'"
+          "symbol": "describe('MF-T2F solid legality'",
+          "retiredBy": "§725/§772"
         },
         {
           "path": "tests/property/townMapSolidLegalityDeterminism.test.js",
-          "symbol": "describe('MF-T2F solid legality determinism'"
+          "symbol": "describe('MF-T2F solid legality determinism'",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE HEIGHT DOOR, HELD SHUT. This member decides about vertical intervals and still never opens heightQ: the intervals are explicit input quanta, and the row is the guard that says the door is untouched. Re-executed at this base: it throws. NOTE ON THIS LIST'S SHAPE AT DRAFT/READY — the twelve symbols this member CREATES (ten exports and two describe titles) join it at the FLIP TO LANDED and never at READY, because a requiredSymbols row is a claim that the symbol is in the tree while a CREATE row is only a promise until it is kept.",
@@ -22943,12 +22988,14 @@
         {
           "_note": "THE LEAF. SPEC 10.5's typed SupportSurfaceRef and SPEC 6.4.1's component-slot axis, as the D3a-core era slice. A design-implementation member, not a port-by-hash one: four greps over the 54 sealed fabric modules return ZERO support-registry, slot or role machinery, so there is no sandbox module to port and the sources are the volume's contract plus the landed substrate. Three central behaviours: surfaceId is DERIVED and a caller-supplied one is refused (SPEC 10.5's not-a-free-alias law); injectivity is bought by RESERVING ':' in the segment grammar rather than by a separator byte, because the derived key must pass the landed id wall which admits no C0 byte and controlBytes.test.js forbids the raw byte in source; and the slot axis is TOTAL with the no-inference law structural in BOTH directions. 182 effective lines against the ratified 200-per-leaf and 210-packet caps. Dormant: no consumer, no barrel row, nothing persisted, and the leaf is a SINK in the module graph. Imports EXACTLY foundation.js and massPart.js, which is a design constraint rather than an accident: FOUNDATION_READERS is frozen over the whole fabric directory and tracks coordinateAbi.js and solidLegality.js, so importing either would owe a roster edit inside another member's reserved file for zero behaviour.",
           "action": "CREATE",
-          "path": "src/domain/townMap/fabric/supportSurface.js"
+          "path": "src/domain/townMap/fabric/supportSurface.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ACCEPTANCE FILE. Six cases, ONE literal describe, straight-line test calls with string-literal titles, the one loop INSIDE a named test (the SP-D idiom). A1 is the guard-the-guard arm: three vocabularies nonempty and frozen, the IMPORTED MASSING_UNKNOWN_REASONS pinned here too so a drift in massPart.js reds this battery, and the kind-to-token table shown TOTAL before any key is trusted. A2 pins the derived key spellings, proves the landed id wall admits them through massPart.solidPartQ, and proves the engineered near-collision pair UNCONSTRUCTIBLE. A4 opens with the lawful identity arm and proves the order input-independent. A6 runs the LANDED solidOverlap over solids keyed by this member and pins the cross-support refusal verbatim: the test imports the predicate, the leaf does not.",
           "action": "CREATE",
-          "path": "tests/domain/townMapSupportSurface.test.js"
+          "path": "tests/domain/townMapSupportSurface.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE PACKET.",
@@ -22963,14 +23010,16 @@
         {
           "_note": "ONE ROSTER ROW: 'supportSurface.js' appended to CODEX_SLICE_MODULES in alphabetical position - exactly the act the walker's own failure message orders for a landed module the record does not assign ('add it to CODEX_SLICE_MODULES here and say why in the packet'). The why, from packet section 1.3: the leaf is a D3a design-implementation mint, not a sandbox module; nodeOfModule() rightly resolves it to no node and the record's 49-module lead is untouched. FOUNDATION_READERS is unmoved because the leaf imports exactly foundation.js and massPart.js, neither of which the roster tracks. The naming mismatch is ruled at ODQ 419: the row goes in per the failure message and the rename rides MF-T2L.",
           "action": "TEST",
-          "path": "tests/lint/townMapStageManifest.walker.test.js"
+          "path": "tests/lint/townMapStageManifest.walker.test.js",
+          "retiredBy": "§725/§772"
         }
       ],
       "requiredSymbols": [
         {
           "_note": "THE IMPORTED VOCABULARY. SPEC 6.4.1's UnknownMaterialFact.reason is byte-identical and same-ordered to this list, so the leaf IMPORTS it rather than re-declaring it and drift becomes structurally impossible. Remove or rename it and the member's one-vocabulary law has no subject; A1 pins the four literals on this side too, so the two ends cannot silently disagree.",
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export const MASSING_UNKNOWN_REASONS"
+          "symbol": "export const MASSING_UNKNOWN_REASONS",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ID WALL THE DERIVED KEY MUST PASS. The whole key design rests on this grammar admitting no C0 byte and capping at 96 characters, which is why injectivity is bought by reserving ':' in the segment grammar instead of by a separator byte. An over-long derivation is refused BY this wall, typed, rather than truncated here.",
@@ -22980,7 +23029,8 @@
         {
           "_note": "THE CONSUMER OF RECORD. MF-T2F's DIFFERENT_SUPPORT_SURFACE refusal is the seam this member's keys feed, and A6 executes it rather than narrating it. Remove it and the F-to-K seam has no proof.",
           "path": "src/domain/townMap/fabric/solidLegality.js",
-          "symbol": "export function solidOverlap"
+          "symbol": "export function solidOverlap",
+          "retiredBy": "§725/§772"
         }
       ],
       "acceptanceCases": [
@@ -23075,12 +23125,14 @@
         {
           "_note": "THE LEAF, carrying BOTH halves of ODQ 287.5's vegetation sentence in one file because the plan's law for this member is 'both or neither'. Half one is the durable mass: trunk and canopy are REAL landed solidPartQ volumes on ONE derived support key, and the SPEC 10.6 support-truth law is a structural impossibility rather than a check - the caller's supportSurfaceRef record is RE-DERIVED through MF-T2K's own constructor and refused naming both keys if it disagrees, the derived key is threaded into both solids, and neither the trunk nor the canopy input may carry a key of its own. Half two is the field plus its BEHAVIOUR: a KNOWN-COUNT record over the foundation's own canonical-rect region law, and instances regenerated from (fieldKey, instanceIndex) alone by hash32 of a VERSIONED basis folded by integer modulo, so containment holds by construction and the record carries NO id field of any kind - nonpersistence as a structural fact. R-MF-2 is answered head-on: the leaf multiplies no quanta, its only coordinate arithmetic is minX + (uint32 % widthQ), and it says so in its own docblock. Zero free parameters in the derivation, so nothing here touches the owner-signature surface. 149 effective lines against the ODQ 425-ratified 230-per-leaf and 240-packet caps. Dormant: no consumer, no barrel row, nothing persisted, and the leaf is a SINK in the module graph. Imports EXACTLY foundation.js, massPart.js, supportSurface.js and fabricRng.js - a design constraint, not an accident: FOUNDATION_READERS is frozen over the whole fabric directory and tracks coordinateAbi.js, solidLegality.js, spatialReceipt.js and stageManifest.js, so importing any of them would owe a roster edit inside another member's reserved file for zero behaviour.",
           "action": "CREATE",
-          "path": "src/domain/townMap/fabric/vegetation.js"
+          "path": "src/domain/townMap/fabric/vegetation.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ACCEPTANCE FILE. Six cases, ONE literal describe, straight-line test calls with string-literal titles, every loop INSIDE a named test (the SP-D idiom), so the file is credited rather than parked. A1 is the guard-the-guard arm: the closed vocabulary nonempty, frozen and pinned by ORDER-SENSITIVE deep equality, and the law version pinned to its exact literal, before any membership test or derived position is trusted - the stamp is part of the derivation basis, so a drift in it would silently move every instance. A2 pins the two support-key equalities that ARE the support-truth sentence and refuses all four doors to a second ground authority. A5 pins the GOLDEN positions as exact integers over a fixture rect that deliberately starts at 100/300, so a dropped region base cannot pass by luck, and proves nonpersistence structurally by membership reads rather than by scanned matchers, which is also why this file's anchor-walker ceiling of zero holds. A6 runs the LANDED solidOverlap and assertSupportAcyclicity over records built by this member with every magnitude pinned exact: the test imports them, the leaf does not.",
           "action": "CREATE",
-          "path": "tests/domain/townMapVegetation.test.js"
+          "path": "tests/domain/townMapVegetation.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE PACKET.",
@@ -23095,19 +23147,22 @@
         {
           "_note": "ONE ROSTER ROW AND THE RULED RENAME, one edit: 'vegetation.js' appended in alphabetical position (after 'supportSurface.js') to the roster formerly named CODEX_SLICE_MODULES, and that constant renamed to UNASSIGNED_LANDED_MODULES per ODQ 419.2 ('the roster rename rides MF-T2L's landing act - one honest word over a third roster'). The why for the row, from packet section 1.8: the leaf is a D3a design-implementation mint measured against the sealed tree (zero sandbox vegetation modules), so nodeOfModule() rightly resolves it to no node and the record's 49-module lead is untouched. FOUNDATION_READERS is unmoved: the leaf imports foundation.js, massPart.js, supportSurface.js and fabricRng.js, none of which that roster tracks.",
           "action": "TEST",
-          "path": "tests/lint/townMapStageManifest.walker.test.js"
+          "path": "tests/lint/townMapStageManifest.walker.test.js",
+          "retiredBy": "§725/§772"
         }
       ],
       "requiredSymbols": [
         {
           "_note": "THE KEY DERIVATION THIS MEMBER RE-EXECUTES. The mass's one-ground-authority law is bought by re-deriving the caller's support record through MF-T2K's own constructor rather than trusting its shape, so K's blocked-kind refusal and segment grammar arrive free and an alias record cannot enter by wearing the right shape. Remove or rename it and this member's central behaviour has no subject; A2 pins the derived spelling on this side too.",
           "path": "src/domain/townMap/fabric/supportSurface.js",
-          "symbol": "export function supportSurfaceRef"
+          "symbol": "export function supportSurfaceRef",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ONE CONSTRUCTION ROUTE for both of this member's quantized volumes. The trunk and the canopy volume are built INTERNALLY through it, which is what makes verticalIntervalQ's strictly-positive-measure law and the degenerate-ring refusal arrive intact rather than re-spelled here. A3 executes both inherited refusals through this member's own constructor.",
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export function solidPartQ"
+          "symbol": "export function solidPartQ",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ERA REGION LAW, published before this member existed. Its docblock - 'The first tranche deliberately admits a canonical axis-aligned rectangle only' - IS the reason the field's region is a rect and not a PolygonQ, and its zero-measure refusal is why a degenerate field cannot exist. The instance derivation reads its minX/minZ/widthQ/depthQ, so removing it takes both the region law and the fold's bounds.",
@@ -23117,7 +23172,8 @@
         {
           "_note": "THE ONLY DERIVATION PRIMITIVE. Instance positions are hash32 of a versioned basis folded by integer modulo; the unsigned h >>> 0 return is what makes the modulo non-negative and the whole fold integer-exact, which is how R-MF-2 is answered without BigInt. hashUnit and hashInt are deliberately NOT used because both route through a float divide.",
           "path": "src/domain/townMap/fabric/fabricRng.js",
-          "symbol": "export function hash32"
+          "symbol": "export function hash32",
+          "retiredBy": "§725/§772"
         }
       ],
       "checks": [
@@ -23211,12 +23267,14 @@
         {
           "_note": "THE LEAF. The GENERATION-SPEC's ArchitecturalHistoryOperation as a D3a era slice, sealed through the fabric's ONE artifact grammar with artifactKind ARCHITECTURAL_HISTORY_OPERATION - the spelling the SPEC's own CoreArtifactKind union already carries, so the member JOINS the grammar rather than minting beside it. PAYLOAD LEVEL ONLY (ODQ 423/423.1): no gate, no verb, no executor, no receipt, no store row; its artifacts are proposals until a registered store verb accepts them. Three central behaviours: artifactId is DERIVED from content and a caller-supplied artifactId or contentHash is refused BY NAME (the MF-T2K free-alias law); the one-way before-ref law is STRUCTURAL because no after-ref field exists to misuse; and the cause axis is total in two arms with the no-inference law spelled in BOTH directions with DISTINCT messages. CAUSE_UNKNOWN_REASONS is declared LOCALLY rather than imported from massPart.js, because the two SPEC four-lists are NOT byte-identical here - they differ by one member each way as sets and swap two positions - and A1 pins both facts so a deduplication cannot fuse two vocabularies the SPEC keeps distinct. 210 effective lines against the ODQ 426-carried 220-per-leaf cap. Dormant: no consumer, no barrel row, nothing persisted, a SINK in the module graph. Imports EXACTLY foundation.js and townScene/stableScene.js, neither tracked by FOUNDATION_READERS and both already inside the fabric's transitive closure, so no new module enters any import graph.",
           "action": "CREATE",
-          "path": "src/domain/townMap/fabric/architecturalHistory.js"
+          "path": "src/domain/townMap/fabric/architecturalHistory.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ACCEPTANCE FILE. Six cases, ONE literal describe, straight-line test calls with string-literal titles, every loop INSIDE a named test (the SP-D idiom). A1 opens with the guard-the-guard floors, then the ANTI-DRIFT pin that compares this member's live CAUSE_UNKNOWN_REASONS against the live MASSING_UNKNOWN_REASONS in both directions - symmetric difference, intersection and the order swap - then constructs all twelve kinds. A2 pins the derived identity, six single-field perturbations giving six distinct ids, and a TAMPER caught only by replay because the tampered record was RESEALED and its own contentHash is self-consistent. A3 runs thirteen typed refusals with the unmutated input constructing first. A4 proves the endpoint law symmetric over both split/merge kinds and proves the two arms' messages DIFFERENT so neither covers for the other. A5 pins the fixture's determinism, ascending dates, replay verification and one recorded contentHash golden. A6 is the STRIP CONTRACT: anchored absences through expectAbsentWithAnchor by name, then every survivor proved POSITIVELY - the full execute path, the v1-legacy schemaVersion refusal, and a resealed non-replaying operation still refused.",
           "action": "CREATE",
-          "path": "tests/domain/townMapArchitecturalHistory.test.js"
+          "path": "tests/domain/townMapArchitecturalHistory.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE SHAPE-B STRIP, production half one. ODQ 423(1): the module demotes from door-claimant to payload compiler. The FANTASY_CANON_GATE export and ALL SIX of its use sites are removed (the v1-legacy mechanism seal, the v2 mechanism seal, the operation seal, and the gate-equality legs of both the replay check and the executor's mechanism check); the operation's artifactKind reads PROPOSED_SPATIAL_OPERATION so proposal-grade and accepted-grade stop sharing a word (ODQ 426(1)); and the mechanism and operation law versions are re-stamped because those two SHAPES lost a field (ODQ 426(2)) while the state and receipt laws are untouched because those shapes never carried a gate. THE DEMOTION REMOVED A CLAIM, NOT A CHECK, and A6 proves each survivor positively. 278 effective lines before, 276 after.",
@@ -23251,7 +23309,8 @@
         {
           "_note": "ONE ROSTER ROW: 'architecturalHistory.js' appended in FIRST alphabetical position to the unassigned-landed roster (CODEX_SLICE_MODULES at this base; re-check the constant name against the post-MF-T2L walker at the landing slot — the walker's own failure message, not the constant name, is the contract). The why, from packet section 1.1: the leaf is a D3a design-implementation mint against the SPEC contract, so the sealed record measured a tree it was never in and nodeOfModule() rightly resolves it to no node; the record's 49-module lead pin and the assigned-set literal are untouched, and the accounting arithmetic pin is computed, so it self-adjusts. FOUNDATION_READERS is unmoved: the leaf imports foundation.js and townScene/stableScene.js, neither of which that roster tracks; operations.js is EDITED rather than created, is already on the roster, and reads no tracked module. RE-CHECKED AT THE LANDING SLOT as this note orders: the constant is UNASSIGNED_LANDED_MODULES (renamed by MF-T2L one position earlier in the stack); the row was re-applied against it in FIRST alphabetical position.",
           "action": "TEST",
-          "path": "tests/lint/townMapStageManifest.walker.test.js"
+          "path": "tests/lint/townMapStageManifest.walker.test.js",
+          "retiredBy": "§725/§772"
         }
       ],
       "requiredSymbols": [
@@ -23268,7 +23327,8 @@
         {
           "_note": "THE NEAR-COLLISION THIS MEMBER PINS RATHER THAN IMPORTS. A1 compares this LIVE list against this member's own CAUSE_UNKNOWN_REASONS in both directions, so a drift or a well-meaning deduplication in massPart.js reds this member's battery instead of silently fusing two vocabularies the SPEC keeps distinct. Remove or rename it and the anti-drift pin has no subject.",
           "path": "src/domain/townMap/fabric/massPart.js",
-          "symbol": "export const MASSING_UNKNOWN_REASONS"
+          "symbol": "export const MASSING_UNKNOWN_REASONS",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE STRIP'S SURVIVOR OF RECORD, and the reason A6 can prove the demotion removed a CLAIM rather than a check: the full execute path still runs end to end after the gate is gone. MF-VS1 pins this too; the row is repeated here because this member is the one that could have broken it.",
@@ -23358,17 +23418,20 @@
         {
           "_note": "THE LEAF. SPEC 10.14's executable S0-S23 stage manifest, ported from the sealed W3 tip as PUBLISHED DATA rather than as a self-deriving table, because 49 of the 54 modules it names do not exist in this tree. Sealed equivalence is TOTAL: 10 exported values, 5 nullary functions, topologicalNodeIds in both modes, all 25 stageOrderIndex rows and all 56 nodeOfModule rows compare with ZERO differences. Two declared divergences, neither behavioural: the header prose is rewritten because the sealed one says the table is source-derived and here it is not, and .map(Object.freeze) becomes .map((node) => Object.freeze(node)) because the bare reference erases the element type under tsconfig.domain-strict.json. 219 effective lines against the 400 cap and the 250-per-leaf cap. Dormant: no consumer, no barrel row, nothing persisted, and the leaf is a SINK in the module graph.",
           "action": "CREATE",
-          "path": "src/domain/townMap/fabric/stageManifest.js"
+          "path": "src/domain/townMap/fabric/stageManifest.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE SOURCE-DERIVED WALKER, the sealed 12-arm file re-aimed at this tree arm by arm with each disposition recorded in the packet. Three cases, ONE literal describe, straight-line test calls with string-literal titles, every loop INSIDE a named test (the SP-D idiom). L1 shows the acorn derivation working on a synthetic map BEFORE it is trusted. L2 is the accounting, exact in both directions, plus the NAMED DENOMINATOR: the sealed foundations-have-no-outbound-edge arm passes here for the wrong reason, so each landed foundation module's real reader roster is read from the WHOLE directory and frozen. L3 is the agreement plus the 293.3c stream audit plus four plants. Owes and carries a mutation-coverage row under P3b.",
           "action": "TEST",
-          "path": "tests/lint/townMapStageManifest.walker.test.js"
+          "path": "tests/lint/townMapStageManifest.walker.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ARTIFACT ACCEPTANCE FILE - the record checked against itself by an independently written Tarjan, so the component the manifest PUBLISHES is compared against one the test COMPUTES. D2 carries the headline: the module graph is acyclic and the STAGE graph is not, one component spanning S2/S3/S4/S6/S13 closed by two named imports, PRESERVED as published data rather than repaired (W4 owns the repair). It also carries a result the sealed record does not publish: the feedback set is MINIMAL, since cutting either inversion alone leaves a different still-cyclic residue. D1 and D3 pin the stamped strings, the absent-not-stubbed law, purity, the inversion-to-node-table join, the derived order against every acyclic edge, the foundation closure, the unbuilt roster and the eight namespace collisions.",
           "action": "TEST",
-          "path": "tests/domain/townMapStageManifest.test.js"
+          "path": "tests/domain/townMapStageManifest.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE P3b MUTATION-COVERAGE ROW every new tests/lint/** file owes, priced at compile rather than discovered at the terminal. ONE surgical insert beside its sibling row (5 insertions, 0 deletions, uncoveredBaseline untouched at 198), kind 'mutation', label 'town-map/stage-manifest foundation wired into a stage'. NEVER an uncovered row and NEVER a re-serialisation.",
@@ -23399,12 +23462,14 @@
         {
           "_note": "THE S0 MODULE THE LIVE ARMS DERIVE OVER. It is the only landed fabric module the record assigns to a public stage, so it is what makes the cross-node edge S0>FOUNDATIONS real and what the 293.3c stream audit reads for module-level mutable state. Remove it and the walker exact pins have no subject.",
           "path": "src/domain/townMap/fabric/fabricRng.js",
-          "symbol": "export function fabricRng"
+          "symbol": "export function fabricRng",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE SWEEP PLANT'S PERL ANCHOR. Entry 28c substitutes on this exact line; if it is renamed or moved the plant silently mutates NOTHING and the sweep reports a caught mutant it never planted - the stale-anchor class this estate has recorded. Named here so a rename reds the manifest rather than hollowing out the E-A row.",
           "path": "src/domain/townMap/fabric/fabricRng.js",
-          "symbol": "export const FABRIC_FORK_NAMESPACE"
+          "symbol": "export const FABRIC_FORK_NAMESPACE",
+          "retiredBy": "§725/§772"
         }
       ],
       "acceptanceCases": [
@@ -23496,22 +23561,26 @@
         {
           "_note": "THE SEAM. §287.4's state_t -> canonicalSpatial_t -> spatialReceipt_t as a typed artifact, ported from the sealed W3 tip onto MF-T2Bf's cured canonicalBytes. Three rules become UNREPRESENTABLE rather than forbidden: a receipt is dated for LATER, the dependency roster is closed by kind and temporal branch IN ORDER, and a no-effect result is a separately typed diagnostic. The digest is built from a NAMED FIELD ROSTER, never from the object, which is what makes §10.1's refusal structural. ONE DECLARED DIVERGENCE from the sealed source (ODQ §390.1): every composite preimage is LENGTH-PREFIXED, curing the non-injective dependency join and the three identical seams beside it, each with an executed collision witness both ways plus a negative control. 137 effective lines against the 250-per-leaf cap. Dormant: no consumer, no barrel row, nothing persisted.",
           "action": "CREATE",
-          "path": "src/domain/townMap/fabric/spatialReceipt.js"
+          "path": "src/domain/townMap/fabric/spatialReceipt.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE SEEDING LAW, key-anchored — the other half of the port and spatialReceipt.js's only sibling import (hash32). A true leaf: it imports nothing, so its measured closure is itself. ONE DECLARED OMISSION (J-TET2H-1): legacySubstrateForkKey is NOT ported, because it is a byte-compatibility shim for substrate.js, which this tranche does not port, and its docblock cites a sandbox pin absent from this tree. 77 effective lines against the 250-per-leaf cap; sealed is 80 and the -3 is the omitted shim. All 64 seed/key/variant/year rows reproduce the sealed stream byte-for-byte.",
           "action": "CREATE",
-          "path": "src/domain/townMap/fabric/fabricRng.js"
+          "path": "src/domain/townMap/fabric/fabricRng.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ACCEPTANCE MATRIX — four cases, ONE literal describe, straight-line test calls with string-literal titles, every loop INSIDE a named test (the SP-D idiom), so the census credits the file rather than parking it. A1 is the guard-the-guard arm the family opens with; A2-A4 each drive a refusal beside its positive control, and A3 carries the §390.1 collision witness with the pre-cure string named as a literal so the control cannot rot into comparing the deriver with itself. The digest is deliberately NOT re-derived here (§P2.10).",
           "action": "TEST",
-          "path": "tests/domain/townMapSpatialReceipt.test.js"
+          "path": "tests/domain/townMapSpatialReceipt.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE REPLAY COMPANION — two cases. B1 drives a 48-row seed/key/variant/year matrix twice and requires 48 DISTINCT readings, so a stuck generator cannot satisfy the equality; it pins the fork-key grammar as literals and freezes the hash ALGORITHM with two INTEGER pins, because a drop-in replacement that is equally deterministic would pass every relational assertion and still re-roll the corpus. B2 carries MF-T2B's six-token nondeterminism vocabulary verbatim over BOTH new leaves, with the planted positive control asserted BEFORE the absence.",
           "action": "TEST",
-          "path": "tests/property/townMapFabricRngDeterminism.test.js"
+          "path": "tests/property/townMapFabricRngDeterminism.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE CENSUS RE-RECORD, all five figures re-derived together with the cause stated: TWO NEW TEST FILES and nothing else. 2497/364/2133/20723/5785 -> 2499/364/2135/20729/5787 (RE-DERIVED AT THE LANDING SLOT b10ed1a1: TE-H8B's Cure 1b moved titles 20719 -> 20723 between this member's authoring base and the slot, so the after-figure moved with it. The DELTA +2/+0/+2/+6/+2 is what crossed the rebase; carrying the authored tuple would have silently reverted H8B's landed +4.). The walk was SEQUENCED (files reds first and blacks out the four arms below it) and each figure was read from its own arm's failure message; attribution is BY ISOLATION, with both files hidden convicting the base tuple exactly. parked holds at 364 because both files spell every title as a literal. censusAuthorization: ODQ §276, §304.4, §390.",
@@ -23562,47 +23631,56 @@
         {
           "_note": "JOINED AT THE FLIP TO LANDED (HK-2, ODQ §454.3) — THE ROW THAT DISCHARGES J-TET2H-7. That judgment kept this member's OWN new exports out of requiredSymbols because §P7.13 makes a row naming a symbol the deliverable CREATES a STOP at READY: it reds against every tree that does not already carry the member, which is every tree a READY packet is checked on. At LANDED the tree carries them and each row becomes a live guard instead of a false alarm. The shape is MF-T2B's, this family's own LANDED precedent — exports of each created leaf plus one describe anchor per created acceptance file — and only symbols the packet itself NAMES were added, each verified to resolve live before the flip. ⛔ legacySubstrateForkKey is deliberately absent: J-TET2H-1 declares it UNPORTED, and a required row for a symbol that does not exist reds the manifest at every status. THE SEAM'S MOUTH — §287.4's state_t -> spatialReceipt_t. Renaming or removing it retires the seam this packet exists to land.",
           "path": "src/domain/townMap/fabric/spatialReceipt.js",
-          "symbol": "export function spatialEffectReceipt"
+          "symbol": "export function spatialEffectReceipt",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE CANONICALISING STEP the digest is built from, and the reason the NAMED FIELD ROSTER refusal is structural rather than conventional.",
           "path": "src/domain/townMap/fabric/spatialReceipt.js",
-          "symbol": "export function canonicalSpatial"
+          "symbol": "export function canonicalSpatial",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE SEPARATELY TYPED NO-EFFECT RESULT — one of the three rules this port makes UNREPRESENTABLE rather than forbidden. Collapsing it back into a nullable receipt is the regression this row names.",
           "path": "src/domain/townMap/fabric/spatialReceipt.js",
-          "symbol": "export function noEffectDiagnostic"
+          "symbol": "export function noEffectDiagnostic",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE DIGEST PRIMITIVE the sealed-equivalence proof pins byte-identically across the declared length-prefix divergence.",
           "path": "src/domain/townMap/fabric/spatialReceipt.js",
-          "symbol": "export function fingerprint"
+          "symbol": "export function fingerprint",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE KEY-ANCHORED FORK NAMESPACE. The packet's chunk census uses it as one of three positive controls owned by LANDED fabric leaves; changing the string re-rolls every fabric stream.",
           "path": "src/domain/townMap/fabric/fabricRng.js",
-          "symbol": "export const FABRIC_FORK_NAMESPACE"
+          "symbol": "export const FABRIC_FORK_NAMESPACE",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. ONE OF THE TWO NEW DEFINITIONS the entropy-root census re-recorded 32 -> 34 for (ratified at ODQ §403). It is a DEFINITION and not a ROOT — it takes settlementSeed as an argument and never reaches for worldState.rngSeed — and that distinction is what the re-record was ratified on, so the name must stay findable from the manifest.",
           "path": "src/domain/townMap/fabric/fabricRng.js",
-          "symbol": "export function hash32"
+          "symbol": "export function hash32",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE OTHER of the two entropy-census definitions, named for the same reason as hash32.",
           "path": "src/domain/townMap/fabric/fabricRng.js",
-          "symbol": "export function hashUnit"
+          "symbol": "export function hashUnit",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE ACCEPTANCE MATRIX'S ONE LITERAL DESCRIBE — the SP-D idiom that keeps the census crediting this file rather than parking it. Renaming it parks the file and silently removes four acceptance cases from the evidence layer.",
           "path": "tests/domain/townMapSpatialReceipt.test.js",
-          "symbol": "describe('MF-T2H spatial-receipt seam'"
+          "symbol": "describe('MF-T2H spatial-receipt seam'",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE REPLAY COMPANION'S DESCRIBE, for the same reason.",
           "path": "tests/property/townMapFabricRngDeterminism.test.js",
-          "symbol": "describe('MF-T2H fabric seeding-law determinism'"
+          "symbol": "describe('MF-T2H fabric seeding-law determinism'",
+          "retiredBy": "§725/§772"
         }
       ],
       "acceptanceCases": [
@@ -27604,12 +27682,14 @@
         {
           "_note": "THE PUBLISH. One `parcel` op per parcel row, between the wards and the streets. The op carries {op, id, wardId, polygon} and NO paint scalar: a boundary, not a fill. This MOVES the leaf's length identity, which is a declared change with all fourteen of its pins named in the packet's section 6.",
           "action": "MODIFY",
-          "path": "src/domain/townCartography/cartographyPaint.js"
+          "path": "src/domain/townCartography/cartographyPaint.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE JOIN. Membership is 'shares a parcelId' (no new relation); the anchor-key lookup crosses the semanticId prefix ONCE, with a live agreement pin against a real compiled manifest; open ground is the ring plus its members as HOLES, so the even-odd fill rule performs the subtraction and no clipping exists anywhere. Total and never-throwing, deliberately unlike the painter, because a dark block is this reader's ordinary state rather than an error.",
           "action": "CREATE",
-          "path": "src/domain/townCartography/cartographyProperty.js"
+          "path": "src/domain/townCartography/cartographyProperty.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE PROPERTY LINE'S ONE INK, named once for the same reason STREET_TONE_PERMILLE is: a parcel op carries no role and no tone, so a call site that wanted one would invent it and two call sites would invent two.",
@@ -27644,12 +27724,14 @@
         {
           "_note": "EIGHT of the fourteen moved identity pins live here: the expectedLength helper, the C1 rank map and known-id set, the two C2 op-count arms whose prose said a parcel draws nothing, C6's OP_KEYS and exercised-kind set, C6's by-reference count, and C8's toneless set -- the one pin the pre-edit grep missed and the first battery caught by execution.",
           "action": "TEST",
-          "path": "tests/domain/townCartographyPaint.test.js"
+          "path": "tests/domain/townCartographyPaint.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "The producer-consumer identity proof, moved with an anti-vacuity pin that the real block genuinely carries parcels, plus the four-kind back-to-front order.",
           "action": "TEST",
-          "path": "tests/lib/townCartographyBlock.test.js"
+          "path": "tests/lib/townCartographyBlock.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "The rendered element count and the hand-stated tag order, plus the fixture's parcel row, which omitted the contract-required polygon the painter had been dropping. A real compiled block never could.",
@@ -27660,7 +27742,8 @@
         {
           "_note": "MP-1's domain matrix, P1-P5: the join proven against a real compiled manifest on BOTH halves, membership by shared parcelId with object identity as the statement of 'once', the absent-parcel and malformed-ring degradations each anchored by a lawful sibling, and the open ground proven to be the members' footprints VERBATIM, which is what forbids a boolean-difference implementation.",
           "action": "TEST",
-          "path": "tests/domain/townCartographyProperty.test.js"
+          "path": "tests/domain/townCartographyProperty.test.js",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "MP-1's UI matrix, H1-H4: border AND tint, the ring stroked exactly once, the yard punched evenodd with one subpath per member, both members of a compound drawing identical paths, a different property drawing a different one, four absence paths, no pointer, and no entitlement in either the leaf or its mount. The entitlement scan strips comments, because its first cut convicted the leaf's own header for NAMING the rule it refuses.",
@@ -27677,7 +27760,8 @@
         {
           "_note": "THE PAINTER'S ENTRY POINT. The whole publish is an insertion into this function's emitted list; renaming it un-grounds every acceptance case in the packet.",
           "path": "src/domain/townCartography/cartographyPaint.js",
-          "symbol": "buildCartographyDrawList"
+          "symbol": "buildCartographyDrawList",
+          "retiredBy": "§725/§772"
         },
         {
           "_note": "THE ROW THAT ALREADY CARRIED THE LINE. The section 495 correction rests on this typedef carrying polygon; if the row loses it, this member has nothing to publish.",

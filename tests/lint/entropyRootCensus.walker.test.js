@@ -771,11 +771,18 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     expect({ lines, files: hits.length }).toEqual({ lines: 72, files: 30 });
   });
 
-  test('`createPRNG(` sites: 38 in src/domain, 48 whole-src; `generateSeed()` 9 hits / 6 call sites', () => {
+  test('`createPRNG(` sites: 36 in src/domain, 46 whole-src; `generateSeed()` 9 hits / 6 call sites', () => {
     const count = (pred, re) => ALL_FILES.filter(pred)
       .reduce((n, f) => n + read(f).split('\n').filter((l) => re.test(l)).length, 0);
-    expect(count((f) => f.startsWith('src/domain/'), /createPRNG\(/)).toBe(38);
-    expect(count(() => true, /createPRNG\(/)).toBe(48);
+    // ── RE-RECORDED 2026-08-30 BY TE-STRIP-4 (ODQ §725/§772): a SHRINK on both halves.
+    // src/domain 38 → 36 and whole-src 48 → 46, each READ OUT OF ITS OWN RED RUN in sequence
+    // (the assert-first-fails-first idiom): run 1 red "expected 36 to be 38" fixed the domain
+    // figure, run 2 then red on the whole-src figure, which also PROVES the domain arm green
+    // since it asserts first. The −2 is the two orphaned fabric leaves this lane's first car
+    // deleted that seeded their own streams; nothing surviving changed shape, and the whole-src
+    // delta equals the domain delta because both leaves live under src/domain.
+    expect(count((f) => f.startsWith('src/domain/'), /createPRNG\(/)).toBe(36);
+    expect(count(() => true, /createPRNG\(/)).toBe(46);
     // ⚠ THE INSTRUCTIVE ONE: a bare hit count over a symbol that also appears in prose and in
     // its own definition over-reports by 60%. HITS and CALL SITES are recorded separately.
     const hits = ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => l.includes('generateSeed()')).length, 0);
@@ -811,7 +818,7 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     expect(mentions.length, 'MENTIONS is a different, larger population').toBeGreaterThan(callers.length);
   });
 
-  test('hash-helper DEFINITIONS in src = 34', () => {
+  test('hash-helper DEFINITIONS in src = 31', () => {
     // grep -rnE "function (fnv1a32|hash01|hashUnit|hash32|fnv1a)" src | wc -l
     // ⭐ RE-RECORDED 2026-08-22 BY MF-T2H: 32 → 34, a DECLARED arrival rather than a discovered
     // one. The +2 are `hash32` and `hashUnit` in `src/domain/townMap/fabric/fabricRng.js`, the
@@ -847,8 +854,17 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // surviving file's shape moved.
     // ⛔ NO NEW ROOT, NO NEW COMPOSITION, NO NEW READ — the §403 escalation clause is not engaged:
     // this is the shrink direction, which a removal is always allowed to take.
+    // ── RE-RECORDED 2026-08-30 BY TE-STRIP-4 (ODQ §725/§772): 33 → 31, a SHRINK ──────────
+    // The −2 is `hash32` and `hashUnit` in the fabric seeding leaf — the SAME two definitions
+    // the MF-T2H block above recorded arriving as +2, now leaving together with the whole
+    // orphaned fabric leaf in this lane's first car. The counter therefore returns to its
+    // pre-port value by the same door it left, which is the cleanest possible attribution.
+    // ⚠ ATTRIBUTED BY EXECUTION, NOT BY ARITHMETIC, and the ARITHMETIC WOULD HAVE BEEN WRONG:
+    // this car deleted SEVENTEEN src modules, and the census regex was re-run over all of them
+    // — only the seeding leaf contributes, the other sixteen contribute 0. Read out of a red
+    // run at this lane's own tip (`expected 31 to be 33`), never predicted from the +2 note.
     const re = /function (fnv1a32|hash01|hashUnit|hash32|fnv1a)/;
-    expect(ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => re.test(l)).length, 0)).toBe(33);
+    expect(ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => re.test(l)).length, 0)).toBe(31);
   });
 
   test('the corpus the whole census walks is real', () => {

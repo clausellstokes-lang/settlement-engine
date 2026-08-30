@@ -1,5 +1,5 @@
 {
-  "total": 49,
+  "total": 48,
   "files": {
     "src/domain/corruption.js": 1,
     "src/domain/region/contestMath.js": 4,
@@ -11,7 +11,6 @@
     "src/domain/spatial/moralDrift.js": 1,
     "src/domain/spatial/pestilence.js": 1,
     "src/domain/spatial/tradeFlow.js": 1,
-    "src/domain/townMap/ageOverlay.js": 1,
     "src/domain/townMap/siteGenesis.js": 2,
     "src/domain/worldPulse/attrition.js": 1,
     "src/domain/worldPulse/beliefMap.js": 3,
