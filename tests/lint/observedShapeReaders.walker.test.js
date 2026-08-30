@@ -284,7 +284,7 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     expect({
       reads: persistedTags.reduce((sum, row) => sum + row.count, 0),
       addresses: persistedTags.length,
-    }).toEqual({ reads: 60, addresses: 40 });
+    }).toEqual({ reads: 62, addresses: 42 }); // +2/+2: the ninth identity, banked at the schema-11 re-mint
     // ⚠ THE PER-IDENTITY MAP IS THE POINT, NOT THE TOTAL. 60/40 is the same
     // arithmetic as 44/31 plus 16/9, and a total alone cannot tell a bank that
     // grew by the four declared eventLog identities from one that grew by four
@@ -304,6 +304,11 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
       'deltas on eventLog': { reads: 2, addresses: 1 },
       'event on eventLog': { reads: 9, addresses: 4 },
       'narrativeSummary on eventLog': { reads: 4, addresses: 3 },
+      // ⭐ THE NINTH, banked by the schema-11 re-mint (ODQ §771.2/§784.2): two reads across
+      // two addresses — the flag read in treasury.js's `isCriminalIncome` and the guard it
+      // sits behind. Its writer is a GENERATOR branch the corpus never takes, which is the
+      // fifth admission class and the reason the row exists at all.
+      'isCriminal on incomeSources': { reads: 2, addresses: 2 },
     });
     // ⭐ THE SCHEMA-9 GENESIS STAMPED ONE REASON ONTO ALL FOUR NEW ROWS AND LEFT
     // THE FOUR OLDER ONES ALONE. `assertExplainedWriterTagTransition` then makes a
@@ -841,33 +846,36 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       expect(drift).toEqual({ detectorSources: [], inputs: [] });
     });
 
-    test('THE LIVE ESTATE INSTANCE, measured: the drift that DARKENED the tool is INPUT-ONLY', () => {
-      // The diagnosis that motivated this repair, pinned against the real committed
-      // baseline and the real tree so it cannot decay into prose. MEASURED at the
-      // pristine base `518c40880`: the ONLY things that had drifted since the schema-10
-      // mint were one fixture and four generated artifacts — not one detector source —
-      // and yet the gate refused every `--write`. That is the whole defect in one line.
+    test('THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all', () => {
+      // ⭐ THE HISTORY THIS ARM RECORDS, because the tree no longer shows it. MEASURED at
+      // the pristine base `518c40880`, BEFORE the schema-11 re-mint: 1 of 11 detector-tree
+      // entries stale (tests/fixtures/spatialPackFixtures.js) and 4 of 13 unscanned entries
+      // stale (two dossier-prose leaves, the generated compendium, the intent-atlas
+      // distillate) — NOT ONE a detector source, and yet the gate refused every `--write`.
+      // That was the whole defect, and it is why the classifier exists.
+      // ⚠ THE RE-MINT CURED IT AT SOURCE, so the honest assertion NOW is the opposite one:
+      // a freshly minted baseline records the tree it was minted from, so BOTH halves are
+      // empty. Leaving the old arm in place would have been a pin that could only pass by
+      // the instrument being broken again.
       const drift = provenanceDriftOf(baseline, {
         detectorTree: { entries: liveManifestEntries(scannerToolFilesOf()) },
         sourceTree: { entries: liveManifestEntries(subjectFilesOf()) },
         scanTree: { entries: liveManifestEntries(sourceFilesOf()) },
       });
-      for (const path of [
-        'tests/fixtures/spatialPackFixtures.js',
-        'src/data/dossierStateProse/general.generated.js',
-        'src/data/dossierStateProse/warFaith.generated.js',
-        'src/domain/compendium/generated/compendiumData.generated.js',
-        'src/domain/data/intentAtlas.distillate.json',
-      ]) {
-        expect(drift.inputs, `${path} is no longer classified as an absorbable INPUT`).toContain(path);
-      }
-      // ⚠⚠ AND THE HONEST OTHER HALF, which this arm learned by reddening on itself.
-      // REPAIRING THE DETECTOR IS ITSELF A DETECTOR CHANGE. This lane edited
-      // `scripts/check-observed-shape-readers.mjs`, so from this commit until the governed
-      // re-freeze runs, the classifier correctly reports exactly that file as a drifted
-      // DETECTOR SOURCE and correctly keeps demanding a migration for it. That is the
-      // guarantee working on its own author, and it is asserted rather than excused.
-      expect(drift.detectorSources).toEqual(['scripts/check-observed-shape-readers.mjs']);
+      expect(drift.detectorSources,
+        'a DETECTOR SOURCE drifted since the mint — that needs a governed migration, not a re-freeze')
+        .toEqual([]);
+      expect(drift.inputs,
+        'an execution INPUT drifted since the mint — lawful, and the shrink-only re-freeze absorbs it')
+        .toEqual([]);
+      // …and the arm is NOT vacuous: the classifier still SEES a planted change on this
+      // very tree, so an empty result means "nothing moved", never "nothing is watched".
+      const planted = provenanceDriftOf(baseline, {
+        detectorTree: { entries: liveManifestEntries(scannerToolFilesOf()).map((e, i) => (i === 0 ? { ...e, sha256: 'f'.repeat(64) } : e)) },
+        sourceTree: { entries: liveManifestEntries(subjectFilesOf()) },
+        scanTree: { entries: liveManifestEntries(sourceFilesOf()) },
+      });
+      expect(planted.detectorSources.length + planted.inputs.length).toBe(1);
     });
   });
 
@@ -901,7 +909,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       + '.toLocaleString read onto an OBSERVED shape — TRIAGE the row, do not widen or relax this\n'
       + 'pin. The 22 surviving reads across 21 files are all on non-observed receivers.',
     ).toBe(0);
-    expect(live.explainedWriters.banked).toBe(60);
+    expect(live.explainedWriters.banked).toBe(62);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -941,6 +949,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       'deltas on eventLog',
       'event on eventLog',
       'factions on locks',
+      'isCriminal on incomeSources',
       'narrativeSummary on eventLog',
       'neighbourNetwork on settlement',
       'stresses on settlement',
@@ -1026,7 +1035,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // Both figures falling by exactly one is what rules that out.
     // ⛔ These two literals were READ OFF the re-frozen baseline after the governed
     // `--write`, never predicted from the delta.
-    }).toEqual({ reads: 1995, identities: 1409, files: 387, bankedReads: 60, taggedRows: 40 });
+    }).toEqual({ reads: 1996, identities: 1410, files: 388, bankedReads: 62, taggedRows: 42 });
     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
       const rows = taggedAddresses.filter((row) => row.identity === identity);
       return [identity, {
@@ -1042,13 +1051,18 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       'deltas on eventLog': { reads: 2, addresses: 1 },
       'event on eventLog': { reads: 9, addresses: 4 },
       'narrativeSummary on eventLog': { reads: 4, addresses: 3 },
+      // ⭐ THE NINTH, banked by the schema-11 re-mint (ODQ §771.2/§784.2): two reads across
+      // two addresses — the flag read in treasury.js's `isCriminalIncome` and the guard it
+      // sits behind. Its writer is a GENERATOR branch the corpus never takes, which is the
+      // fifth admission class and the reason the row exists at all.
+      'isCriminal on incomeSources': { reads: 2, addresses: 2 },
     });
 
     // A7 guard mutant: the retired clear-outright behavior loses exactly the
     // bank and therefore cannot satisfy the live count asserted above.
     const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
-    expect(clearOutright).toHaveLength(live.findings.length - 60);
+    expect(clearOutright).toHaveLength(live.findings.length - 62);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 
