@@ -6697,7 +6697,39 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // per file from a regex would be a guess, and a guess is what this block exists to refuse.
     // The MEASUREMENT is the authority; the grep was only ever a cross-check, and its job here was
     // to make the difference visible instead of invisible. It did that.
-    files: 2487, parked: 364, credited: 2123, titles: 20799, suiteTitles: 5771,
+    // ── TE-ST-2 (WEAVE ST-2, the goods namespace), 2026-08-29, REBASED onto 4bb9f80d9 ──
+    // 2487/364/2123/20799/5771 → 2487/364/2123/20805/5772.
+    // A PURE TITLE DELTA on top of STRIP-2's removal-mirror above: this lane adds ZERO test
+    // files, so `files`, `parked` and `credited` must not move, and 364 + 2123 = 2487 must
+    // still close. Two EXISTING files were extended — tests/joins/goods.test.js (the goods
+    // join gate: +6 tests, +1 suite, proving the two index surfaces are pure re-export
+    // doors) and tests/build/vendorPdfLazy.test.js (+11 tests, +2 suites: the goods surface
+    // law and the migration-roster walker, both first-paint-graph facts, which is why they
+    // live beside the closure budget rather than in tests/joins/).
+    // ⭐ THE DELTA CLOSES AS AN EXACT FINGERPRINT, and it is the same +6/+1 this lane
+    //   measured at its PRE-rebase base — which is itself the evidence that STRIP-2's
+    //   removals and ST-2's additions are disjoint: two lanes, two bases, one unchanged
+    //   fingerprint. titles +6 and suiteTitles +1 are tests/joins/goods.test.js ALONE, and
+    //   its six new `test(` titles plus one new `describe(` title are exactly those numbers.
+    //   tests/build/vendorPdfLazy.test.js contributes ZERO to both, and that is not luck: it
+    //   opens its suites with `describe.runIf(distExists)`, which door 3 refuses, so the file
+    //   is PARKED and nothing beneath those suites is credited. It was parked BEFORE this
+    //   lane touched it — `parked` holding at 364 while the lane adds no files is the
+    //   executed proof, since a newly-parked file would have moved `parked` up and `credited`
+    //   down together. (The corollary is worth writing down: eleven assertions that DO run are
+    //   invisible to this census, so this is a ratchet on the CREDITED layer, never a count of
+    //   the estate's coverage.) Every added title is a literal string: no template literals
+    //   (which inflate the census by their PARTS) and no test.each over a non-literal table
+    //   (which parks a whole file).
+    // ⚠ ALL FIVE RE-DERIVED WHOLE AT THE REBASED TIP, in ONE `expect.soft` pass — files 2487,
+    //   parked 364 and credited 2123 GREEN, titles 20805 and suiteTitles 5772 the only reds —
+    //   then restored FROM A SAVED COPY TAKEN AFTER THE REBASE, never `git checkout --`. The
+    //   post-restore `git status` was EMPTY, which is what proves the restore byte-identical
+    //   before these constants were touched. NOTHING WAS COMPOSED: this lane's pre-rebase
+    //   tuple (2493/364/2129/20868/5789) was DISCARDED at the rebase rather than added to
+    //   STRIP-2's, and the conflict in this file was resolved by keeping STRIP-2's block and
+    //   its constants verbatim — carry the DELTA across a rebase, never the tuple.
+    files: 2487, parked: 364, credited: 2123, titles: 20805, suiteTitles: 5772,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
