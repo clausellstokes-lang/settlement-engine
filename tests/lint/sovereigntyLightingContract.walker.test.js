@@ -6887,7 +6887,29 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //     cross-check that the resolution above composed nothing: this lane's contribution to
     //     the census is invariant under the rebase, because its surface and NET-1's are
     //     disjoint (verified by `comm -12`: the intersection was this file alone).
-    files: 2484, parked: 364, credited: 2120, titles: 20899, suiteTitles: 5778,
+    // ── TE-STRIP-FINISH (the STRIP-4 + STRIP-6 train, ODQ §725/§772/§773.1), 2026-08-30 ──
+    // 2484/364/2120/20899/5778 → the tuple below. Delta −61/+0/−61/−385/−116. A REMOVAL train:
+    // every moving figure goes down, and the one that does NOT move is the one that matters most.
+    // ⭐ ALL FIVE RE-READ OUT OF EXECUTION AT THIS TIP, ONE PER RUN, by the sequenced arms:
+    // run 1 red "expected 2423 to be 2484" → record; run 2 red on `credited`, which also PROVES
+    // `parked` unmoved since it asserts first and passed; runs 3 and 4 the same for `titles` and
+    // `suiteTitles`; run 5 green over all 33 tests. Nothing was carried across a car and nothing
+    // was predicted — this counter had ALREADY moved once mid-train (the presentation car), and
+    // measuring it per-car would have composed two deltas over two different trees.
+    //   files 2484 → 2423: SIXTY-THREE test files deleted and TWO added, net −61, cross-checked
+    //     against `git diff --name-status -M` over the whole train rather than summed from the
+    //     car notes. The rename (the bespoke-style wall suite following its validator out of the
+    //     design layer) is net-zero and shows as R085, which is why the arithmetic closes at −61
+    //     and not −62. Each of the 63 died because its SUBJECT died: a renderer, a fabric leaf,
+    //     an emitter or a golden of an artifact nothing can regenerate.
+    //   parked UNMOVED at 364, asserted rather than assumed: all 63 deleted and both added files
+    //     were CREDITED, so credited falls by exactly 63 − 2 = 61 and 364 + 2059 = 2423 still
+    //     closes. A removal this large touching ZERO parked files is itself evidence that the
+    //     strip stayed inside the presentation surface.
+    //   titles −385 / suiteTitles −116 are NET: the train also ADDED titles to surviving files
+    //     (the re-homed skin-seam persistence pins, the re-expressed massing determinism arm, the
+    //     two model-drawability assertions, and the terminal census's five arms).
+    files: 2423, parked: 364, credited: 2059, titles: 20514, suiteTitles: 5662,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

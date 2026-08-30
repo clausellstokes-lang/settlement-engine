@@ -1,8 +1,8 @@
 {
   "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "4deb4f026644cba500b0efc1e051fdea2ff96041",
-  "totalTests": 28274,
-  "totalFiles": 2387,
+  "measuredAtSha": "2eae465bab2ea8583a2eece8e47f943a646cbef5",
+  "totalTests": 28458,
+  "totalFiles": 2372,
   "skippedCeiling": 1,
   "uncollectedSuites": {},
   "entries": {
