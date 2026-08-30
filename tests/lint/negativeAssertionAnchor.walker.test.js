@@ -213,7 +213,15 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/bandPolarityDisplay.test.jsx': 8,
   'tests/components/causeWalkPanel.test.jsx': 3,
   'tests/components/causeWalkPanelTranslation.test.jsx': 1,
-  'tests/components/changeViewDepthGate.test.jsx': 1,
+  // ⚰ 2026-08-29, TE-STRIP-5 / §725/§726: `tests/components/changeViewDepthGate.test.jsx`,
+  //   `tests/components/dmPinsTierGate.test.jsx` and `tests/config/illustratedLensFree.test.js`
+  //   left this roster by DELETION, not by anchoring. All three were entitlement-enforcement
+  //   suites whose SUBJECT was a settlement-map ladder row the owner's strip removed; the
+  //   inventory-honesty arm below demands the row go with the file ("deleted or moved — remove
+  //   its FROZEN_UNANCHORED_NEGATIVES row"), so the rows are removed here in the same act.
+  //   ⚠ These are NOT wins banked: an anchored site is a guard improved, a deleted file is a
+  //   guard retired, and conflating the two would let a removal read as hardening. The
+  //   un-anchored sites left with their files and nothing was anchored in their place.
   'tests/components/chronicleEditGate.test.js': 2,
   'tests/components/covenantClaimsParity.test.js': 1,
   'tests/components/culturalTraditionPresentation.test.js': 1,
@@ -225,7 +233,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/deityPanelManifestParity.test.jsx': 1,
   'tests/components/deityRestoreFromWorldPanel.test.jsx': 1,
   'tests/components/destroyConfirmSurfaces.test.jsx': 1,
-  'tests/components/dmPinsTierGate.test.jsx': 1,
   'tests/components/dossierDepthTabs.test.jsx': 5,
   'tests/components/dossierLadderModal.test.jsx': 1,
   'tests/components/economicsPlotHookSeam.test.jsx': 1,
@@ -283,7 +290,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/warFaithMapOverlay.test.jsx': 1,
   'tests/components/worldMapShellMemo.test.jsx': 1,
   'tests/components/worldPulseTranslation.test.jsx': 1,
-  'tests/config/illustratedLensFree.test.js': 1,
   'tests/config/pageBackgrounds.test.js': 1,
   'tests/copy/copy.test.js': 3,
   'tests/copy/localeParity.test.js': 1,

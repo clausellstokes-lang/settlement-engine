@@ -7505,8 +7505,10 @@
       "verifiedBase": "3be4736f0119bdbedb627e9bf862782e21c9dc0a",
       "changeManifest": [
         {
+          "_note": "RETIRED BY THE ENTITLEMENTS STRIP. EST-B narrowed this suite twice as the strip advanced (TE-STRIP-1 removed the affordance half, TE-STRIP-3 removed the src/store fog write path); TE-STRIP-5 deletes the file, because its whole remaining subject was the fog-table ladder row and the tier-blindness of derivations that are themselves scheduled deletions in STRIP-4. EST-B's other three changeManifest rows are untouched and still exist.",
           "action": "MODIFY",
-          "path": "tests/components/fogTierGate.test.jsx"
+          "path": "tests/components/fogTierGate.test.jsx",
+          "retiredBy": "§725/§726"
         },
         {
           "action": "MODIFY",
@@ -7523,8 +7525,10 @@
       ],
       "requiredSymbols": [
         {
+          "_note": "RETIRED WITH ITS FILE (see this packet's changeManifest[0]). The describe title it pinned was the tier-blind source scan over src/domain/townMap/fog*.js; those two modules are STRIP-4 deletions, so the scan was guarding code scheduled to leave and is not re-homed.",
           "path": "tests/components/fogTierGate.test.jsx",
-          "symbol": "the derivation stays tier-blind (source scan)"
+          "symbol": "the derivation stays tier-blind (source scan)",
+          "retiredBy": "§725/§726"
         },
         {
           "path": "tests/application/commands/executeCommand.test.js",
@@ -27316,12 +27320,16 @@
           "symbol": "export const VIEWING_PAYWALLS_PENDING_514 = Object.freeze(["
         },
         {
+          "_note": "RETIRED BY THE ENTITLEMENTS STRIP. This row pinned one of the four settlement-map AUTHORING rows the CARTOGRAPHER tier was defined by; the owner ruled the legacy settlement map out of the launch product and then ruled what the tier sells afterwards, so the row is gone from the ladder by decision rather than by drift. WEB-8's surviving requiredSymbols (DEFERRED_LADDER_ROWS, VIEWING_PAYWALLS_PENDING_514) and its entitlementLadder.js changeManifest row are UNTOUCHED — this retires the pin, not the packet.",
           "path": "src/config/entitlementLadder.js",
-          "symbol": "id: 'map-editing',     free: false, cartographer: true, axis: 'authoring', enforcement: 'viewerCanAuthor'"
+          "symbol": "id: 'map-editing',     free: false, cartographer: true, axis: 'authoring', enforcement: 'viewerCanAuthor'",
+          "retiredBy": "§725/§726"
         },
         {
+          "_note": "RETIRED BY THE ENTITLEMENTS STRIP, and this row's subject died twice: TE-STRIP-1 already retired rule D when SettlementMapNotes' FREE_CHANGE_DEPTH constant left, and TE-STRIP-5 removes the ladder ROW the qualifier described. change-view was also one of the three open §514.1b viewing-axis questions; it was MOOTED by the strip rather than answered, which is recorded at the pending ledger itself.",
           "path": "src/config/entitlementLadder.js",
-          "symbol": "id: 'change-view',     free: 'latest change only', cartographer: true, axis: 'viewing', enforcement: 'viewerCanAuthor'"
+          "symbol": "id: 'change-view',     free: 'latest change only', cartographer: true, axis: 'viewing', enforcement: 'viewerCanAuthor'",
+          "retiredBy": "§725/§726"
         },
         {
           "path": "src/config/pricing.js",
