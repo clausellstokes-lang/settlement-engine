@@ -62,8 +62,17 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // AGAIN: MF-UC4 paid the four surfaces its charter priced and met these two literals at the
     // widened sweep, in a war-circulation suite no undercity battery would have thought to name.
     // The path is in that member's changeManifest for the next reader's sake.
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(25);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(25);
+    // 25 → 26 at W-COIN-1a (2026-08-30), which mints treasuryEnabled with its certification
+    // row in the same commit. ⚠⚠ AND IT WAS FOUND LATE AGAIN, FOR THE THIRD RECORDED TIME,
+    // EXACTLY AS THE COMMENT ABOVE PREDICTS: this lane priced its flag bill across the
+    // manifest, the certification row, the roster test, the lit-coverage walker and the
+    // soak harness's covering array — and still met THIS pair for the first time at the
+    // terminal ratchet, in a war-circulation suite no treasury battery would have thought
+    // to name. The habitat is the obligation being spread across suites nobody can
+    // enumerate from the mint site; a flag-mint packet that named its surfaces from ONE
+    // registry would end it, and that is TE-GUARDS-1's subject rather than this lane's.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(26);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(26);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

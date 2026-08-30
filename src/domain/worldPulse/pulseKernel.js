@@ -561,7 +561,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // Siege vs the airship dock: blockade-running impairs the dock itself —
     // a visible 'access' impairment while the siege grips, lifted when it ends.
     // W-COIN-1a — THE TREASURY'S ONE PULSE WRITER, and the ONLY call site of it in the
-    // tree. It stands HERE, inside @pulse-stage: settlement_clock beside the granary
+    // tree. It stands HERE, inside the settlement_clock stage beside the granary
     // advance, because A1.4 makes stage order law: every coin-delta emitter runs at a
     // stage AFTER settlement_clock, so the vault a mover draws on later in the same tick
     // is the vault this pass left behind. It is handed the SAME `blockade` record the
@@ -1812,7 +1812,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
     return projected === update.settlement ? update : { ...update, settlement: projected };
   });
-  // W-COIN-1b — THE LEGITIMACY PRICE LANDS HERE, at @pulse-stage: consequence_fold, which
+  // W-COIN-1b — THE LEGITIMACY PRICE LANDS HERE, in the consequence_fold stage, which
   // is the first stage where `settlementUpdates` exists at all. A1.4's stage-order law
   // applied to an OPINION delta rather than a coin delta: the mint runs at settlement_clock
   // and every emitter runs after it. The deltas go through the ONE existing legitimacy
