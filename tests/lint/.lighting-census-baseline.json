@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "073d5c5acb81d4273d0479813ab069dbd6631828",
-  "measuredBy": "TE-EFF-1 (Opus 5 seat), cars 1-3",
+  "measuredAtSha": "d19a4f2d68f7687e12ac4072aa435f410b0eca44",
+  "measuredBy": "TE-EFF-1 (Opus 5 seat), cars 4-5",
   "date": "2026-08-30",
-  "note": "car 1 added nine test titles and one suite title to tests/scripts/gateMutex.test.js (the shared-tier controls); cars 2 and 3 add no test file and no test title. FIRST regeneration through the extracted register — the figures it replaces were TE-QSTYLE's, carried across the extraction unmeasured.",
+  "note": "car 5 adds ONE test title to tests/scripts/gateMutex.test.js (the tier-is-consumed arm) inside the existing tier describe, so no suite title is minted; car 4 edits two files without adding or removing a title. SECOND regeneration through the register.",
   "files": 2484,
   "parked": 364,
   "credited": 2120,
-  "titles": 20908,
+  "titles": 20909,
   "suiteTitles": 5779
 }
