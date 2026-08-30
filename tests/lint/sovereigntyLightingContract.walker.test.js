@@ -6857,7 +6857,37 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //     evals the real bridge in jsdom, so only the title layers move. Measured at car 3's
     //     OWN tip by the sequenced arms — `titles` red with 20921, then `suiteTitles` with
     //     5790 — after car 2 had been committed and its own figures proved at ITS tip.
-    files: 2487, parked: 364, credited: 2123, titles: 20921, suiteTitles: 5790,
+    // ── TE-QSTYLE (the styleOverhaul capability retirement, ODQ §763.2 Q-STYLE arm 2),
+    //    2026-08-30, REBASED onto 1ffd8670c (NET-1) ──
+    // 2487/364/2123/20921/5790 → the tuple below. Delta −3/+0/−3/−22/−12. This is the first
+    // entry here whose every moving figure goes DOWN: it is a REMOVAL lane.
+    // ⛔ THE PRE-REBASE BLOCK WAS DROPPED WHOLE, NOT MERGED, and that is the law rather than
+    // a convenience. This lane first froze 2483/364/2119/20877/5775 against base 518c40880;
+    // NET-1 then landed 2487/… against the SAME base. Two lanes measuring the same instrument
+    // from the same base produce tuples that are each correct and jointly meaningless — a
+    // composed delta would be arithmetic performed on two different trees. So at conflict
+    // resolution NET-1's landed block was kept VERBATIM (the file was left byte-identical to
+    // 1ffd8670c, `diff -q` clean) and this block was written afterwards, ONCE, against
+    // measurements taken HERE.
+    // ⭐ ALL FIVE RE-READ OUT OF EXECUTION AT THE REBASED TIP, ONE PER RUN, by the sequenced
+    // arms: run 1 red "expected 2484 to be 2487" → record; run 2 red on `credited`, which
+    // also PROVES `parked` unmoved since it asserts first and passed; runs 3 and 4 the same
+    // for `titles` and `suiteTitles`; run 5 green over all 33 tests. Nothing was carried
+    // across the rebase and nothing was predicted.
+    //   files 2487 → 2484: THREE test files deleted, one per car — car 1
+    //     tests/components/surveyorStyleOverhaulPanel.test.jsx, car 3
+    //     tests/domain/styleOverhaulCompile.test.js, car 4 tests/store/mapEditPersist.test.js.
+    //     Each died because its SUBJECT died, never because it was inconvenient.
+    //   parked UNMOVED at 364, asserted rather than assumed: all three were CREDITED files,
+    //     so credited falls by exactly 3 and 364 + 2120 = 2484 still closes.
+    //   titles −22 / suiteTitles −12 are NET: this lane also ADDED titles to surviving files
+    //     (the door-router retirement mirror, the de-listed-price and FAST-class arms, the
+    //     pattern-absence conversion, the analyst-routing arm). ⭐ THE THREE DELTAS ARE
+    //     IDENTICAL to the ones measured pre-rebase against 518c40880, which is the
+    //     cross-check that the resolution above composed nothing: this lane's contribution to
+    //     the census is invariant under the rebase, because its surface and NET-1's are
+    //     disjoint (verified by `comm -12`: the intersection was this file alone).
+    files: 2484, parked: 364, credited: 2120, titles: 20899, suiteTitles: 5778,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
