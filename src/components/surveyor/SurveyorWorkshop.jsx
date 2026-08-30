@@ -4,7 +4,15 @@
  * owns open state and routes prompts here with a pre-selected stage; the former floating
  * compass launcher is retired per the owner's ONE DOOR ruling. A docked panel (never a
  * modal — the world stays visible) hosts the write surfaces behind a stage switch: custom
- * content (S4) · style overhaul · construction (S5/S6) · accept→mint (S3) · autonomy (S7).
+ * content (S4) · construction (S5/S6) · accept→mint (S3) · autonomy (S7) · corpus (V-5).
+ * ⚰ THE 'style' STAGE (AI style overhaul) WAS RETIRED HERE — ODQ §763.2, Q-STYLE arm 2.
+ * The ONE DOOR's matching destination + cue row went in the SAME act (see the intent
+ * fore-stage under src/domain/intent/, and its pins), because this shell falls back to
+ * STAGES[0] for an unknown stage id: leaving the route behind would have mis-routed every
+ * map-style prompt to the Content panel silently, without ever reddening.
+ * ⚠ This shell may not NAME the router module — a prevention guard in
+ * tests/components/surveyorProposalCard.test.jsx keeps the router reachable from exactly
+ * one component, and it matches the bare module token in comments too.
  * Each stage body is React.lazy, so its code + its heavy domain graph load only when its
  * stage is opened; the whole workshop rides the existing FloatingAffordances lazy chunk
  * (App.jsx mounts that once) so first paint pays zero. Every stage carries the §2b
@@ -44,7 +52,6 @@ const lazy = importer => createRetryableLazy(importer, {
 });
 
 const CustomContentPanel = lazy(() => import('./CustomContentPanel.jsx'));
-const StyleOverhaulPanel = lazy(() => import('./StyleOverhaulPanel.jsx'));
 const ConstructionPanel = lazy(() => import('./ConstructionPanel.jsx'));
 const InterpretApplyPanel = campaignLazy(() => import('./InterpretApplyPanel.jsx'));
 const AutonomyPanel = campaignLazy(() => import('./AutonomyPanel.jsx'));
@@ -52,7 +59,6 @@ const CorpusFactoryPanel = lazy(() => import('./CorpusFactoryPanel.jsx'));
 
 const STAGES = [
   { id: 'content', label: 'Content', Body: CustomContentPanel },
-  { id: 'style', label: 'Style', Body: StyleOverhaulPanel },
   { id: 'construct', label: 'Build', Body: ConstructionPanel },
   { id: 'apply', label: 'Apply', Body: InterpretApplyPanel },
   { id: 'autonomy', label: 'Run', Body: AutonomyPanel }, // S7 (additive registration)

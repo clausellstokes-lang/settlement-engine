@@ -138,16 +138,38 @@ describe('SurveyorDoor — the prompt slip routes to destinations', () => {
     expect(screen.queryByLabelText(/ask the surveyor about this page/i)).toBeNull();
   });
 
+  // ⚠ THE PROMPT MOVED, THE CLAIM DID NOT (ODQ §763.2). This arm used to drive
+  // 'reskin the map in a woodcut style' → stage 'style'. That capability is retired, so the
+  // prompt now reaches the analyst and would prove nothing here. It is re-pointed at a
+  // CONSTRUCT prompt rather than a content one ON PURPOSE: 'content' is STAGES[0], the
+  // workshop's unknown-id fallback, so a content-routed arm cannot tell "pre-selected the
+  // right stage" from "fell back to the default" — which is exactly the silent failure this
+  // whole wave exists to avoid. The retired prompt's new destination is asserted below.
   it('routes a making-prompt to the WORKSHOP with the stage pre-selected and the prompt seeded', () => {
+    setEntitled(true);
+    openDoor();
+    fireEvent.change(screen.getByLabelText(/ask the surveyor about this page/i), {
+      target: { value: 'build me a new town on the river' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: /take it to the surveyor/i }));
+    const dest = screen.getByTestId('dest-workshop');
+    expect(dest.getAttribute('data-stage')).toBe('construct');
+    expect(dest.getAttribute('data-prompt')).toBe('build me a new town on the river');
+  });
+
+  it('RETIRED styleOverhaul: a map-style prompt reaches the ANALYST and opens no write stage', () => {
     setEntitled(true);
     openDoor();
     fireEvent.change(screen.getByLabelText(/ask the surveyor about this page/i), {
       target: { value: 'reskin the map in a woodcut style' },
     });
     fireEvent.click(screen.getByRole('button', { name: /take it to the surveyor/i }));
-    const dest = screen.getByTestId('dest-workshop');
-    expect(dest.getAttribute('data-stage')).toBe('style');
-    expect(dest.getAttribute('data-prompt')).toBe('reskin the map in a woodcut style');
+    // POSITIVE first — the door still routed it somewhere, so the absence below is a
+    // routing decision and not a door that simply stopped working.
+    const dest = screen.getByTestId('dest-analyst');
+    expect(dest.getAttribute('data-open')).toBe('true');
+    expect(dest.getAttribute('data-q')).toBe('reskin the map in a woodcut style');
+    expect(screen.queryByTestId('dest-workshop')).toBeNull();
   });
 
   it('RETENTION: the promptless register links open the analyst / the workshop directly', () => {
@@ -229,14 +251,17 @@ describe('SurveyorDoor — A1/A2/A3: the shell routes, records, and treats blank
     expect(composer().value).toBe('');
   });
 
+  // ⚠ Re-pointed off the retired styleOverhaul prompt (ODQ §763.2) onto a CONSTRUCT one,
+  // for the same non-vacuity reason as the arm above: 'content' is the workshop's fallback
+  // stage, so only a non-default stage id proves the composer carried the routing through.
   it('A2 — a making-prompt still reaches the workshop with the unchanged stage, prompt, and scope', () => {
     setEntitled(true);
     openDoor();
-    fireEvent.change(composer(), { target: { value: 'reskin the map in a woodcut style' } });
+    fireEvent.change(composer(), { target: { value: 'build me a new town on the river' } });
     fireEvent.click(sendButton());
     const dest = screen.getByTestId('dest-workshop');
-    expect(dest.getAttribute('data-stage')).toBe('style');
-    expect(dest.getAttribute('data-prompt')).toBe('reskin the map in a woodcut style');
+    expect(dest.getAttribute('data-stage')).toBe('construct');
+    expect(dest.getAttribute('data-prompt')).toBe('build me a new town on the river');
     expect(dest.getAttribute('data-scope')).toBe('settlement');
   });
 
@@ -333,11 +358,11 @@ describe('SurveyorDoor — A5: mobile, the keyboard inset, and the privacy floor
     mobileRef.current = true;
     stubVisualViewport();
     openDoor();
-    fireEvent.change(composer(), { target: { value: 'reskin the map in a woodcut style' } });
+    fireEvent.change(composer(), { target: { value: 'build me a new town on the river' } });
     fireEvent.keyDown(composer(), { key: 'Enter' });
     expect(screen.queryByTestId('dest-workshop')).toBeNull();
     fireEvent.click(sendButton());
-    expect(screen.getByTestId('dest-workshop').getAttribute('data-stage')).toBe('style');
+    expect(screen.getByTestId('dest-workshop').getAttribute('data-stage')).toBe('construct');
   });
 
   it('publishes the keyboard inset as a CSS custom property, updates it, and removes BOTH listeners on close', () => {

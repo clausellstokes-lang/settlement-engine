@@ -11,9 +11,15 @@ import { describe, it, expect } from 'vitest';
 import { DOOR_DESTINATIONS, DOOR_SCOPES, routeDoorPrompt } from '../../src/domain/intent/doorRouter.js';
 
 describe('doorRouter — destinations vocabulary', () => {
-  it('exposes the analyst + the five workshop stage ids (the reachability denominator)', () => {
-    expect(DOOR_DESTINATIONS).toEqual(['analyst', 'content', 'style', 'construct', 'apply', 'autonomy']);
+  it('exposes the analyst + the four routable workshop stage ids (the reachability denominator)', () => {
+    expect(DOOR_DESTINATIONS).toEqual(['analyst', 'content', 'construct', 'apply', 'autonomy']);
     expect(DOOR_SCOPES).toEqual(['settlement', 'realm', 'product']);
+    // ⚰ 'style' left with the styleOverhaul capability (ODQ §763.2). Asserted as an
+    // ABSENCE with a liveness anchor, so an emptied/renamed vocabulary reds here rather
+    // than passing as "the id is not in the set" — which is also true of every id that
+    // never existed.
+    expect(DOOR_DESTINATIONS).not.toContain('style');
+    expect(DOOR_DESTINATIONS).toContain('content');
   });
 
   it('every routed destination is a member of DOOR_DESTINATIONS', () => {
@@ -43,8 +49,27 @@ describe('doorRouter — the cue table (vetoable vocabulary, pinned)', () => {
     expect(routeDoorPrompt('set standing instructions for the campaign').destination).toBe('autonomy');
   });
 
-  it('look-and-feel asks route to STYLE', () => {
-    expect(routeDoorPrompt('reskin the map in a woodcut style').destination).toBe('style');
+  // ⚰ THE RETIRED 'style' ROW, MIRRORED (ODQ §763.2, Q-STYLE arm 2). The old pin asserted
+  // that look-and-feel asks route to STYLE. Deleting it would have left the de-list
+  // unwitnessed, and the failure it must catch is SILENT: SurveyorWorkshop falls back to
+  // STAGES[0] for an unknown stage id, so a destination removed WITHOUT its cue row
+  // mis-routes every one of these prompts to the Content panel and nothing reds. So the
+  // whole retired vocabulary is driven, and each of its eight cues must reach the ANALYST.
+  it('RETIRED: every look-and-feel cue now falls to the ANALYST, not to a write stage', () => {
+    const retiredCues = [
+      'reskin the map in a woodcut style',
+      're-style the map',
+      'redraw the map',
+      'change the look and feel',
+      'use a warmer palette',
+      'make it watercolor',
+      'give me a woodcut art style',
+      'pick a different map style',
+    ];
+    for (const q of retiredCues) {
+      expect(routeDoorPrompt(q), `"${q}" no longer has a write destination`)
+        .toEqual({ destination: 'analyst', scope: 'settlement' });
+    }
   });
 
   it('settlement-shaped making routes to CONSTRUCT (S5/S6), and realm words widen the ring', () => {

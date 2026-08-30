@@ -21,11 +21,18 @@
  * FloatingAffordances chunk) — zero eager bytes.
  */
 
-/** Every destination the door can open — the workshop's stage ids plus the analyst.
+/** Every destination the door can open — the routable workshop stage ids plus the analyst.
  *  Mirrors SurveyorWorkshop STAGES + AiAnalystPanel; the pin asserts the workshop ids
- *  stay a subset of this list so a new stage cannot silently become unroutable. */
+ *  stay a subset of this list so a new stage cannot silently become unroutable.
+ *
+ *  ⚰ 'style' RETIRED HERE (ODQ §763.2, Q-STYLE arm 2 — the styleOverhaul capability is
+ *  de-listed, so the workshop has no style stage to open). Map-style prompts now fall
+ *  through the cue table to the ANALYST at the innermost ring, which is the honest
+ *  destination for a question the product can no longer answer with a write. Removing the
+ *  destination WITHOUT removing the cue row would have mis-routed them to the Content
+ *  panel via SurveyorWorkshop's unknown-id fallback, silently and without a red. */
 export const DOOR_DESTINATIONS = Object.freeze([
-  'analyst', 'content', 'style', 'construct', 'apply', 'autonomy',
+  'analyst', 'content', 'construct', 'apply', 'autonomy',
 ]);
 
 /** The grounding rings, innermost first (the context-first law's ladder). */
@@ -34,14 +41,18 @@ export const DOOR_SCOPES = Object.freeze(['settlement', 'realm', 'product']);
 // ── The cue table ────────────────────────────────────────────────────────────
 // Strong, order-sensitive cues only: a prompt must EARN a write-stage routing;
 // ambiguity falls through to the analyst (a question about the current surface).
-// Order: session recap (apply) → autonomy → style → construct → content.
+// Order: session recap (apply) → autonomy → construct → content.
 // `construct` outranks `content` so "build me a new town with a mage guild"
 // lands on S5/S6; bare "invent an item/npc/deity" lands on S4.
+// ⚰ THE 'style' CUE ROW WAS RETIRED HERE with its destination (ODQ §763.2). It matched
+// `re-style|re-skin|redraw|style|look and feel|palette|watercolor|woodcut|art style|map
+// style`; every one of those prompts now reaches the analyst, because bare `style` and
+// `palette` are far too weak to earn any OTHER write stage and the remaining rows do not
+// match them. Verified by pin, not by inspection (tests/domain/doorRouter.test.js).
 /** @type {ReadonlyArray<[string, RegExp]>} */
 const CUES = [
   ['apply', /\b(session|recap|the party|last session|what happened|we (fought|killed|sacked|burned|met|found|took|rescued|freed))\b/i],
   ['autonomy', /\b(advance (the )?(world|campaign|weeks?)|keep (running|advancing)|until (a|the|it)|standing instructions?|autonomous|run the (world|campaign))\b/i],
-  ['style', /\b(re-?style|re-?skin|redraw|style|look and feel|palette|watercolor|woodcut|art style|map style)\b/i],
   ['construct', /\bnew (settlement|town|village|city|hamlet|thorp|capital|realm)\b|\b(build|construct|found|lay out|place)\b[^.?!]*\b(settlement|town|village|city|hamlet|thorp|capital|realm|district|quarter)\b|\bgenerate (a|an) (settlement|town|village|city|realm)\b/i],
   ['content', /\b(invent|draft|write|create|add|make)( me| up)? (a|an|some|a few|new|custom)\b|\bcustom content\b/i],
 ];
