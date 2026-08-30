@@ -6824,7 +6824,8 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // per-car deltas are recorded beside their car so a successor can redo any one of them.
     //   car 1 (NAME-1, tests/domain/display/warAndRoadNames.test.js): +1/+0/+1/+23/+4.
     //   car 2 (NAME-4, tests/domain/display/forceComposition.test.js): +1/+0/+1/+18/+4.
-    files: 2485, parked: 364, credited: 2121, titles: 20879, suiteTitles: 5783,
+    //   car 3 (NAME-3, tests/domain/display/engagementNarrative.test.js): +1/+0/+1/+20/+4.
+    files: 2486, parked: 364, credited: 2122, titles: 20899, suiteTitles: 5787,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

@@ -443,6 +443,38 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'map-geometry substrate — the ONE water flood-fill home (design §2 D2), producing the sailing components TRADE\'s sea lanes read and the interior-vs-ocean split the lake typology reads; a port here would make a pure geometry read a cross-layer coupling',
     reads: Object.freeze([]),
   }),
+  // ── 2026-08-30, WEAVE NAME-1 (lane TE-NAME): the prose-selection kernel, extracted ──
+  //
+  // The SAME argument waterBodies.js carries directly above, arriving the same way: a
+  // leaf lifted VERBATIM out of a bigger module because a new consumer needed it and a
+  // second copy would drift. `fnv1a32` + `pickLine` were minted inside eventProse.js —
+  // 1,100 lines of authored prose over ~2,400 lines of frozen pool closure, flattened at
+  // module scope and pinned to the lazy engine chunk — and a RENDER-time namer that
+  // wanted three lines of hashing would have dragged the whole generation-time corpus
+  // behind it. Six independent fnv1a32 transcriptions already exist in this tree, so a
+  // seventh was the other available answer and the worse one.
+  //
+  // WHY NO PORT. What it owns is "pick one of these strings, deterministically" — a
+  // protocol every port's prose already speaks. WAR's receipts, TRADE's roads pools,
+  // FAITH's, POP's and the calamity register all select through it. Filing it under any
+  // one of them would make every other port's prose selection a cross-layer coupling
+  // into that port, which is the exact inversion the substrate reading exists to
+  // prevent. The distinction is SUBJECT, not program — the same one that gave
+  // peopleLedger.js WAR and spatialLedgerAccess.js no port at all.
+  //
+  // AND NOT THE BASELINE, for the reason spatialLedgerAccess.js records: that file is for
+  // the volume's §4 PRE-PROGRAM debt, and a module minted this week is not that.
+  //
+  // WHAT IT COSTS, MEASURED: its outbound reach is ZERO imports — the leaf is
+  // contractually import-free, because an import added there re-parents whatever it
+  // reaches into every consumer's chunk, which is the whole defect the extraction cures.
+  // `reads: []` is the machine form of that contract, so the day it reaches a port this
+  // reds by name instead of hiding the edge.
+  'src/domain/worldPulse/proseSelection.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'prose substrate — the ONE deterministic variant-selection kernel (FNV-1a, canonical-at-zero), spoken by every port\'s prose pools; a port here would make every other layer\'s phrasing pick a cross-layer coupling',
+    reads: Object.freeze([]),
+  }),
   // ── 2026-08-10: THREE LEAVES THAT LANDED WITHOUT THEIR CLASSIFICATION ──────────
   //
   // These three are not new arguments. They are the SAME two arguments already on this
@@ -657,8 +689,25 @@ const ARGUED_HOSTS = Object.freeze([
  * itself unlayered, so its layered reach measures 0, it is declared `reads: []`, and NO edge
  * leaves the pair scan. What the raise buys is that the FIRST port this leaf ever reaches
  * reds by name. A twenty-second admission is the next deliberate act.
+ *
+ * 21 → 22 on 2026-08-30 (WEAVE NAME-1, lane TE-NAME), recorded rather than merely made,
+ * and it is the CAP-4 raise one line up applied to prose instead of geometry: a leaf
+ * lifted VERBATIM out of a bigger module because a new consumer needed it and a second
+ * copy would drift. `src/domain/worldPulse/proseSelection.js` admits `fnv1a32` +
+ * `pickLine`, which were private inside `eventProse.js` — 1,100 lines of authored prose
+ * over ~2,400 lines of frozen pool closure, flattened at module scope and pinned to the
+ * lazy engine chunk. Filing the kernel under any one port would make every OTHER port's
+ * phrasing pick a cross-layer coupling into that port, which is the inversion the
+ * substrate reading exists to prevent; "pick one of these strings deterministically" is
+ * a protocol WAR, TRADE, FAITH, POP and the calamity register all already speak.
+ * MEASURED AT THE RAISE, on the same reading: this leaf's outbound reach is ZERO imports
+ * — the zero-import contract is the whole point of the extraction, since an import added
+ * there re-parents whatever it reaches into every consumer's chunk — so its layered reach
+ * is 0, it is declared `reads: []`, and NO edge leaves the pair scan. What the raise buys
+ * is that the FIRST port this leaf ever reaches reds by name.
+ * A twenty-third admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 21;
+const ARGUED_ROSTER_CEILING = 22;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;
