@@ -53,6 +53,19 @@
  *     `assertCorpusCoverageInventoryInvariant`, which is schema 8's alone):
  *     the mint is cut at a later tip than the one it was measured at.
  *
+ *   schema 10 -> 11 (LIVE)   the same tagged numeric reconciliation, re-governing the
+ *     instrument to a DETECTOR THAT GENUINELY CHANGED (TE-OSHAPE-1's provenance-drift
+ *     classifier and its fourth door) and growing the explained-writer bank by ONE, the
+ *     ninth identity under the new `conditional-generator-branch` mechanism. It is also
+ *     THE RUNG THAT COULD NOT RUN, and the reason is recorded here rather than in a
+ *     lane note: every rung before it migrated from a predecessor that still sat at its
+ *     own mint, so `frozenAtSha === migrationReview.subjectSha` held by accident and was
+ *     mistaken for a law. A lawful shrink had since re-frozen the schema-10 baseline
+ *     (`12b3aa53` -> `4f42be70`), and the instrument became permanently unmigratable.
+ *     ⛔ CHAIR RULING ODQ §784.2 replaced that equality with the bind that always
+ *     carried custody — see `assertPredecessorCustody`. BIND BY DIGEST, NEVER BY
+ *     GENESIS; this is the third recorded instance of that family law.
+ *
  * In every family, the predecessor baseline and scan artifacts are
  * canonical, content-addressed inputs sharing one committed source, execution
  * tree, executed corpus and scan configuration. The legacy detector is the
@@ -637,6 +650,67 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
  * scanner edit from an arbitrary detector rewrite, so each target supplies an
  * exact predecessor, input universe and delta-path set.
  */
+/**
+ * ⭐⭐ CUSTODY IS THE DIGEST BIND, NEVER GENESIS (chair ruling ODQ §784.2, 2026-08-30).
+ *
+ * ── THE DEFECT THIS REPLACES, AND HOW IT WAS FOUND ──────────────────────────
+ * This function used to open with
+ *
+ *     predecessor.frozenAtSha !== predecessor.migrationReview.subjectSha
+ *       => "requires the immutable schema-N migration genesis as predecessor"
+ *
+ * — i.e. a migration could only ever run from a baseline that had NEVER been ordinarily
+ * re-frozen. That held by accident for every rung up to 9→10, because each predecessor
+ * happened to still sit at its own mint. It stopped holding the moment a lane took a
+ * lawful shrink: MEASURED at the 10→11 attempt, the live baseline was minted at
+ * `12b3aa53` and re-frozen at `4f42be70`, so the schema could never advance again.
+ *
+ * ⛔ THE SHAPE IS A RECORDED FAMILY LAW, AND THIS IS ITS THIRD INSTANCE. TE-OSHAPE-1
+ * cured a gate that darkened `--write` after ordinary INPUT churn. This one darkened
+ * `--migrate` after ordinary `--write` churn. Both said, in effect, "the instrument may
+ * not move once ordinary maintenance has happened" — which inverts the point of having
+ * ordinary maintenance at all. BIND BY DIGEST, NEVER BY GENESIS.
+ *
+ * ── WHAT ACTUALLY CARRIES CUSTODY, AND IT ALWAYS DID ────────────────────────
+ * The chain of custody was never the genesis equality; it is the DIGEST BIND, enforced
+ * in three places that the relaxation does not touch:
+ *   1. the predecessor's own envelope — `validateLeafBaseline` (run by this report's
+ *      predecessor validator BEFORE this function) binds every internal digest,
+ *      `migrationReview` included, so a validly-frozen predecessor is a self-consistent
+ *      one by definition;
+ *   2. this assertion, which re-states that bind at the transition so a tampered
+ *      predecessor is refused HERE and not merely upstream;
+ *   3. the write itself, where `--migrate-schema` refuses unless
+ *      `digestOf(baseline) === receipt.predecessorBaselineDigest`, the canonical JSON
+ *      matches the bundle's own copy, AND the baseline TEXT sha matches.
+ * A forged predecessor fails all three. A lawfully re-frozen one fails none — and that
+ * is exactly the case the old rule refused.
+ *
+ * @param {any} predecessor @param {string} transitionLabel
+ */
+export function assertPredecessorCustody(predecessor, transitionLabel) {
+  const review = predecessor?.migrationReview;
+  if (!review || typeof review !== 'object' || Array.isArray(review)) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition requires a predecessor carrying its own migration review`);
+  }
+  if (!SHA1_RE.test(String(review.subjectSha || ''))) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition requires a predecessor whose migration review names the sha it was minted at`);
+  }
+  if (!SHA1_RE.test(String(predecessor.frozenAtSha || ''))) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition requires a predecessor frozen at a named sha`);
+  }
+  // THE BIND. `frozenAtSha` may legitimately have advanced past `subjectSha` — that is an
+  // ordinary re-freeze and is precisely what this ruling admits — but the review it claims
+  // to have been minted under must still be the one its own digest addresses.
+  if (digestOf(review) !== predecessor?.digests?.migrationReview) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition predecessor migration review does not match its own digest;`
+      + ' custody is the digest bind, so a predecessor whose review has been edited under its digest is refused');
+  }
+  return predecessor;
+}
+
+const SHA1_RE = /^[0-9a-f]{40}$/;
+
 function governedScannerTransitionOf(predecessor, legacyArtifact, targetSchema) {
   const transition = SCANNER_TRANSITION_BY_TARGET.get(targetSchema);
   const predecessorSchema = LEAF_MIGRATION_PREDECESSOR[targetSchema];
@@ -644,9 +718,7 @@ function governedScannerTransitionOf(predecessor, legacyArtifact, targetSchema) 
     throw new Error(`observed-shape schema-${predecessorSchema}-to-${targetSchema} migration has no governed scanner-transition law`);
   }
   const transitionLabel = `schema-${predecessorSchema} to schema-${targetSchema}`;
-  if (predecessor.frozenAtSha !== predecessor.migrationReview.subjectSha) {
-    throw new Error(`observed-shape ${transitionLabel} scanner transition requires the immutable schema-${predecessorSchema} migration genesis as predecessor`);
-  }
+  assertPredecessorCustody(predecessor, transitionLabel);
   const beforeByPath = manifestEntriesByPath(predecessor.manifests.detectorTree);
   const afterByPath = manifestEntriesByPath(legacyArtifact.detectorTree);
   const beforePaths = [...beforeByPath.keys()].sort();

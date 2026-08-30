@@ -12,6 +12,7 @@ import {
   governedLegacyDetectorSha256,
 } from '../../scripts/lib/observed-shape-governance.mjs';
 import {
+  assertPredecessorCustody,
   BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
   BANKED_EXPLAINED_WRITER_SCANNER_DELTA_PATHS,
   BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
@@ -1402,9 +1403,14 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       scannerSha: predecessorScannerSha,
     }))).toThrow(/fresh committed scanner SHA/);
 
+    // ⭐ CONTROL 2 (ODQ §784.2) — A VALIDLY RE-FROZEN PREDECESSOR PROCEEDS. This used to
+    // assert a REFUSAL, and the refusal was the defect: `frozenAtSha` advancing past
+    // `migrationReview.subjectSha` is an ordinary lawful re-freeze, not tampering, and
+    // refusing it made a schema unmigratable the moment anyone took a shrink. Custody is
+    // the digest bind, so this predecessor is admitted and the report is built.
     const nonGenesis = structuredClone(predecessor6);
     nonGenesis.frozenAtSha = 'd'.repeat(40);
-    expect(() => reportFor(targetArtifact, nonGenesis)).toThrow(/requires the immutable schema-6 migration genesis/);
+    expect(reportFor(targetArtifact, nonGenesis).target.baselineSchema).toBe(7);
 
     // A6 live arm: schema 7 is readable but retired, and advances exactly one
     // rung to schema 8 through the corpus/check/baseline/migrate transition.
@@ -1585,8 +1591,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
 
     const nonGenesis7 = structuredClone(predecessor7);
     nonGenesis7.frozenAtSha = 'f'.repeat(40);
-    expect(() => reportFor8(schema8Artifact, nonGenesis7))
-      .toThrow(/requires the immutable schema-7 migration genesis/);
+    // §784.2 — a lawful re-freeze PROCEEDS (was: a genesis refusal)
+    expect(reportFor8(schema8Artifact, nonGenesis7).target.baselineSchema).toBe(8);
 
     /* ══ A6 LIVE ARM — THE 8→9 RUNG ════════════════════════════════════════
      * Two things make this target the first that is not a straight repeat of
@@ -1773,8 +1779,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
 
     const nonGenesis8 = structuredClone(predecessor8);
     nonGenesis8.frozenAtSha = 'c'.repeat(40);
-    expect(() => reportFor9(epochDarkTargetArtifact, nonGenesis8))
-      .toThrow(/requires the immutable schema-8 migration genesis/);
+    // §784.2 — a lawful re-freeze PROCEEDS (was: a genesis refusal)
+    expect(reportFor9(epochDarkTargetArtifact, nonGenesis8).target.baselineSchema).toBe(9);
 
     /* ══ A6 LIVE ARM — THE 9→10 RUNG ═══════════════════════════════════════
      * ⭐ THIS RUNG IS THE PROOF THAT THE 8→9 GENERALISATIONS WERE LAWS AND NOT
@@ -1913,7 +1919,75 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
 
     const nonGenesis9 = structuredClone(predecessor9);
     nonGenesis9.frozenAtSha = 'd'.repeat(40);
-    expect(() => reportFor10(proseRegenTargetArtifact, nonGenesis9))
-      .toThrow(/requires the immutable schema-9 migration genesis/);
+    expect(reportFor10(proseRegenTargetArtifact, nonGenesis9)
+      .target.baselineSchema).toBe(10); // §784.2 — a lawful re-freeze PROCEEDS
+  });
+});
+
+/**
+ * ⭐⭐ CUSTODY IS THE DIGEST BIND, NEVER GENESIS (chair ruling ODQ §784.2).
+ *
+ * The migration used to demand that its predecessor still sit at its own mint
+ * (`frozenAtSha === migrationReview.subjectSha`). That held by accident for every rung up
+ * to 9→10 and stopped holding the moment a lane took a lawful shrink — MEASURED at the
+ * 10→11 attempt, where the live baseline had been re-frozen from `12b3aa53` to
+ * `4f42be70` and the schema became permanently unmigratable. It is the third recorded
+ * instance of one family law: BIND BY DIGEST, NEVER BY GENESIS.
+ *
+ * The PROCEEDS half of the ruling is proven in the four rung suites above, each of which
+ * used to assert the refusal. These are the two remaining controls, driven against the
+ * assertion itself so neither can pass for an upstream reason.
+ */
+describe('§784.2 — the predecessor custody bind', () => {
+  const validPredecessor = () => {
+    const review = { subjectSha: 'a'.repeat(40), note: 'minted here' };
+    return {
+      frozenAtSha: 'b'.repeat(40), // ADVANCED past the mint: an ordinary lawful re-freeze
+      migrationReview: review,
+      digests: { migrationReview: digestOf(review) },
+    };
+  };
+
+  test('CONTROL 1 — a WRONG-DIGEST predecessor REFUSES', () => {
+    // The review is edited under its own digest: the bind is what catches it, and the
+    // message says so rather than blaming the sha it was frozen at.
+    const forged = validPredecessor();
+    forged.migrationReview = { ...forged.migrationReview, note: 'edited after signing' };
+    expect(() => assertPredecessorCustody(forged, 'schema-10 to schema-11'))
+      .toThrow(/does not match its own digest/);
+    // …and a predecessor with NO digest recorded at all is refused by the same clause.
+    const undigested = validPredecessor();
+    delete undigested.digests;
+    expect(() => assertPredecessorCustody(undigested, 'schema-10 to schema-11'))
+      .toThrow(/does not match its own digest/);
+  });
+
+  test('CONTROL 2 — a VALIDLY RE-FROZEN predecessor PROCEEDS', () => {
+    // THE CASE THE OLD RULE REFUSED, and the whole point of the ruling: frozenAtSha has
+    // advanced past subjectSha, every digest still binds, so custody holds.
+    const reFrozen = validPredecessor();
+    expect(reFrozen.frozenAtSha).not.toBe(reFrozen.migrationReview.subjectSha); // anchored: both shas are asserted well-formed by the arms below and the object is built with two distinct literals, so an emptied fixture reds there rather than passing here.
+    expect(assertPredecessorCustody(reFrozen, 'schema-10 to schema-11')).toBe(reFrozen);
+    // …and a predecessor that IS still at genesis is equally admitted: the ruling widens
+    // the door, it does not swap which side of it is lawful.
+    const atGenesis = validPredecessor();
+    atGenesis.frozenAtSha = atGenesis.migrationReview.subjectSha;
+    expect(assertPredecessorCustody(atGenesis, 'schema-10 to schema-11')).toBe(atGenesis);
+  });
+
+  test('CONTROL 3 — a predecessor with no review, or a malformed sha, is still refused', () => {
+    // The relaxation drops ONE equality; it does not stop requiring that a predecessor
+    // carry a well-formed provenance at all.
+    for (const review of [null, undefined, 'nope', 42, []]) {
+      expect(() => assertPredecessorCustody({ frozenAtSha: 'b'.repeat(40), migrationReview: review }, 'L'))
+        .toThrow(/carrying its own migration review/);
+    }
+    const badSubject = validPredecessor();
+    badSubject.migrationReview = { subjectSha: 'not-a-sha' };
+    badSubject.digests = { migrationReview: digestOf(badSubject.migrationReview) };
+    expect(() => assertPredecessorCustody(badSubject, 'L')).toThrow(/names the sha it was minted at/);
+    const badFrozen = validPredecessor();
+    badFrozen.frozenAtSha = 'zzz';
+    expect(() => assertPredecessorCustody(badFrozen, 'L')).toThrow(/frozen at a named sha/);
   });
 });
