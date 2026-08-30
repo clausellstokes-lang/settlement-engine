@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a14a22bade9a822a938c9afa6c9f4299a4d3aa98",
-  "measuredBy": "TE-EFF-1 (Opus 5 seat), the landing rebase",
+  "measuredAtSha": "23434a8637d89b13acba341bddbffc66dcaac4fb",
+  "measuredBy": "T5-landing",
   "date": "2026-08-30",
-  "note": "REBASED onto claude/composite-r4 14707a8a8 (WCOIN on RESIDUE on HERALD on the strip-finish). THREE census re-derivations landed between this lane base and the rebase, so neither the landed tuple 2430/367/2063/20656/5694 nor this lane pre-rebase 2484/364/2120/20909/5779 is true of the merged tree; both were DISCARDED and all five re-read out of execution here. This lane contributes +10 titles and +1 suite title (car 1 nine arms plus car 5 one arm, in one new describe).",
-  "files": 2430,
-  "parked": 367,
-  "credited": 2063,
-  "titles": 20666,
-  "suiteTitles": 5695
+  "note": "T5 Genesis rebased onto b85044099",
+  "files": 2435,
+  "parked": 368,
+  "credited": 2067,
+  "titles": 20733,
+  "suiteTitles": 5713
 }
