@@ -476,7 +476,9 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/townLayoutV2.test.js': 2,
   'tests/domain/townMapFog.test.js': 1,
   'tests/domain/townMapIllustratedLens.test.js': 1,
-  'tests/domain/townMapSkinRegistry.test.js': 1,
+  // townMapSkinRegistry's row (1) DELETED AT 0 by TE-STRIP-2 (§725/§748) — the win is banked,
+  // not merely lowered, exactly as this arm's own message prescribes. Its single un-anchored
+  // negative lived in the `image export SVG wears the skin` arm, which left with the export lane.
   'tests/domain/townPanorama.test.js': 2,
   'tests/domain/townSceneManifest.test.js': 1,
   'tests/domain/tradeCoercion.test.js': 2,
@@ -580,7 +582,9 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/lib/structuralFingerprint.test.js': 1,
   'tests/lib/surveyorByok.test.js': 2,
   'tests/lib/terrainReaderRouting.test.jsx': 3,
-  'tests/lib/townMapFogExport.test.js': 4,
+  // townMapFogExport's row (4) REMOVED by TE-STRIP-2 (§725/§748) — the file is deleted, not
+  // anchored: its subject was the fog handout rendered THROUGH townMapExportSvg, and the export
+  // lane left with the legacy settlement map. A row for a file that no longer exists is a ghost.
   'tests/lint/bandPolaritySingleSourceScan.test.js': 1,
   'tests/lint/commercialKindPools.walker.test.js': 3,
   'tests/lint/copyCorruption.test.js': 1,

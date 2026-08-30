@@ -832,8 +832,23 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // RATIFIED AT ODQ §403, which ruled the escalation clause above reserved for a new COMPOSITION
     // or a new READ — neither of which this creates — with WF-8A's 14 → 15 (§350) the governing
     // shape.
+    // ── RE-RECORDED 2026-08-29 BY TE-STRIP-2 (ODQ §725/§748): 34 → 33, a SHRINK ──────────
+    // A REMOVAL, and the only kind of motion this counter should ever see from a strip. The −1 is
+    // `function fnv1aHex(str)` at `src/lib/townMapThumb.js:43` — the library-card thumbnail's
+    // cache-key digest, deleted with the thumbnail lane itself when the legacy settlement map's
+    // export/thumbnail surfaces left. It matched here through the regex's `fnv1a` alternative,
+    // which is a PREFIX match: `fnv1aHex` is not one of the five spelled names, and that is worth
+    // saying out loud because the count this arm freezes is therefore larger than the roster of
+    // names above suggests.
+    // ⚠ ATTRIBUTED BY EXECUTION, NOT BY ARITHMETIC: the census regex was re-run over all four
+    // deleted src modules at their last living tip — townMapExport 0, townMapThumb 1, mapSubTabs 0,
+    // lastMapView 0 — and over this lane's three NEW src leaves (downloadBlob, drawOpsSvg,
+    // lightModel), which contribute 0. So the whole delta is one definition in one file, and no
+    // surviving file's shape moved.
+    // ⛔ NO NEW ROOT, NO NEW COMPOSITION, NO NEW READ — the §403 escalation clause is not engaged:
+    // this is the shrink direction, which a removal is always allowed to take.
     const re = /function (fnv1a32|hash01|hashUnit|hash32|fnv1a)/;
-    expect(ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => re.test(l)).length, 0)).toBe(34);
+    expect(ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => re.test(l)).length, 0)).toBe(33);
   });
 
   test('the corpus the whole census walks is real', () => {

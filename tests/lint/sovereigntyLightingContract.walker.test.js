@@ -6664,7 +6664,40 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //     meant a surviving file changed SHAPE (the SP-D parking trap this block records
     //     twice). 364 + 2129 = 2493 still closes.
     //   titles +37 · suiteTitles +7 — the whole delta, in the five files named above.
-    files: 2493, parked: 364, credited: 2129, titles: 20862, suiteTitles: 5788,
+    // ── TE-STRIP-2 (ODQ §725/§748), 2026-08-29, REBASED onto eba286607 ─────────────────
+    // 2493/364/2129/20862/5788 → 2487/364/2123/20799/5771. A REMOVAL, so every figure falls or
+    // holds; nothing here grew and no rule widened or narrowed.
+    // ⚠ ALL FIVE RE-DERIVED WHOLE AT THE REBASED TIP, in ONE pass, by the technique the two
+    // blocks above record: the five SEQUENCED assertions switched to `expect.soft` (a red on
+    // `files` otherwise never evaluates `suiteTitles`), one run, then restored FROM A SAVED COPY
+    // taken AFTER the rebase — never `git checkout --`. The post-restore diff on this file was
+    // EMPTY, which is what proves the restore byte-identical.
+    // ⛔ THE SAVED COPY HAD TO BE RE-TAKEN AFTER THE REBASE. The pre-rebase copy predates W-SEAM's
+    // own re-record above; restoring from it would have silently reverted another lane's census
+    // note while looking like a clean restore. Carry the DELTA across a rebase, never the tuple —
+    // and that applies to the SAVED COPY as much as to the numbers.
+    // ⭐ WHAT CLOSES EXACTLY, AND IT IS THE FILE LAYER:
+    //   files −6 — exactly the SIX deleted test files, named: tests/pdf/townMapDocument.smoke
+    //     (the standalone one-page PDF, car 2) + tests/lib/townMapExport, tests/lib/townMapThumb,
+    //     tests/lib/townMapFogExport, tests/lib/mapSubTabs, tests/domain/townMapAnnotationExport
+    //     (car 4). Every one had a deleted module as its SUBJECT.
+    //   parked UNMOVED at 364 while credited fell by the SAME six ⇒ all six were CREDITED files,
+    //     and no surviving file changed shape. A file count that fell by anything other than the
+    //     deleted-file count, or a parked count that moved at all, would have meant otherwise.
+    //   364 + 2123 = 2487, so the arithmetic arm below closes on the new constants.
+    // ⚠ WHAT IS **NOT** RESOLVED, AND IS WRITTEN DOWN AS UNRESOLVED RATHER THAN LEFT TO LOOK
+    // MEASURED (the same disposition this block already takes above for the second parked file):
+    // a raw `it`/`test`/`describe` GREP over the six deleted files plus the four narrowed ones
+    // (fullPdf.render, townMapLandform, townMapSkinRegistry, townMapSkinReskin) predicts
+    // −68 titles / −19 suiteTitles. The MEASURED figures are −63 / −17. The gap of 5 titles and
+    // 2 suite titles is NOT explained here. PLAUSIBLE cause, stated as plausible: `classify` is an
+    // AST classifier that credits a call only when all FIVE of its run-control channels hold
+    // (grammar, table, arg form, callback context, binding resolution), so it legitimately credits
+    // fewer titles than a regex counts — but `classify` is not exported, so attributing the gap
+    // per file from a regex would be a guess, and a guess is what this block exists to refuse.
+    // The MEASUREMENT is the authority; the grep was only ever a cross-check, and its job here was
+    // to make the difference visible instead of invisible. It did that.
+    files: 2487, parked: 364, credited: 2123, titles: 20799, suiteTitles: 5771,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

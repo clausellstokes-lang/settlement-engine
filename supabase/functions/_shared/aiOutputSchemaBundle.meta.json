@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-24T17:23:49.646Z",
+  "generatedAt": "2026-08-30T01:19:02.420Z",
   "entry": "src/domain/aiOutputSchema.js",
-  "sourceHash": "de5c18058f732c10",
+  "sourceHash": "cb95b3c3ec027f82",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -17,6 +17,7 @@
     "src/data/institutionalCatalog.js",
     "src/data/npcTraitWeights.js",
     "src/data/powerData.js",
+    "src/design/lightModel.js",
     "src/design/townGlyphs/glyphCompiler.js",
     "src/design/townGlyphs/index.js",
     "src/design/townGlyphs/medieval.js",
