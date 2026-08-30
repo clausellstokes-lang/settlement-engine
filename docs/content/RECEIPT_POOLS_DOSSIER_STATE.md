@@ -4432,8 +4432,21 @@ touches the original not at all.
 **STATE-KEY.** `standing` (`cult` · `established` · `ascendant`) × niche
 occupancy against `SLOTS_BY_TIER` × `legitimacy` band (`secure` · `established`
 · `tenuous` · `contested`) × `patronFalls[].cause` (`displaced` · `discredited`
-· `abandoned` · `imposed` · `suppressed`) × pantheon rank (`Cult` · `Minor` ·
+· `imposed` · `suppressed`) × pantheon rank (`Cult` · `Minor` ·
 `Major`) × `templeWealth.band` × `deities[ref].covert` × the pilgrim season band.
+
+**THE FALL VOCABULARY IS CLOSED AT FOUR, AND THE DOOR STAYS OPEN.** This block
+once enumerated a fifth cause — `abandoned`, the sink crossing, a patron's share
+lost to nobody — and wrote a pool for it. The engine's vocabulary
+(`PATRON_FALL_CAUSES`, `src/domain/worldPulse/patronFall.js`) has never carried
+it: the classifier is total over the four arms above and structurally cannot emit
+a fifth, and the sink the cause was named for vacates no seat, so the value had
+zero producers and no state could ever carry it. The enumeration and the pool are
+withdrawn here rather than left standing, because an undrawable pool is prose the
+dossier promises and can never say. Should a later member build seat vacancy by
+pure secularization, the cause and its pool land in the SAME commit as the
+producer — that is the estate's standing rule for a vocabulary member, and it is
+the whole reason the withdrawal is reversible (ODQ §400; WF-1A §10).
 
 **ENTAILMENT.** **E-4 governs the whole block.** Rank is a count of settlement
 seats, not a claim about a god. A fall is what the believers did and the reason
@@ -4512,11 +4525,6 @@ panel does not surface at all.
 1. `[ledger]` The patron lost the seat on its right rather than its numbers — the claim failed, and the following followed the claim.
 2. `[street]` {creed} was found wanting here. What unseated it was a judgment about rightfulness, and the congregation did not argue.
 3. `[counterforce]` The fall was a matter of standing, not share. A rival with a better claim took the seat from a creed that could no longer defend its own.
-
-**FALL — `abandoned`** (the sink crossing — share lost to none)
-1. `[ledger]` The seat emptied and nothing took it. The patron's adherents did not convert; they simply stopped, and the vacancy is what remains.
-2. `[visitor]` {settlement} left its patron without choosing a successor — the share went to no god at all, and the house has not been reassigned.
-3. `[street]` The faith was not defeated. It was let go of, which the clergy find harder to answer.
 
 **FALL — `imposed`** (occupation, warbound, or a DM flip)
 1. `[ledger]` The patron here arrived with an authority rather than a following — the creed followed the garrison, and the calendar changed by order.

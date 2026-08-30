@@ -134,7 +134,22 @@ describe('the dossier state-prose projection', () => {
     // 2238 → 2269 (2026-08-22, CT-3, ODQ §378/§387). Re-pinned to the MEASURED total on
     // the same standing rule. The car's own arithmetic is thirteen pools and thirty-one
     // variants across two desks: general 613 → 634 and warFaith 411 → 421.
-    expect(stateVariants).toBeGreaterThanOrEqual(2269);
+    //
+    // ⛔ 2269 → 2266 (2026-08-30, WF-8 shrink-back, ODQ §400). THIS IS THE ONE ROW THAT
+    // MOVES THE FLOOR DOWNWARD, and it is a CHAIR-RULED CORPUS CUT rather than the loss
+    // this ratchet exists to catch. DS-FTH-3 enumerated a FIFTH patron-fall cause
+    // (`abandoned`) and carried a three-variant pool for it; `PATRON_FALL_CAUSES`
+    // (src/domain/worldPulse/patronFall.js) has never held it, the classifier is total
+    // over four arms and cannot emit a fifth, and the sink crossing the cause was named
+    // for vacates no seat — zero producers, so no state could ever draw the pool. §400
+    // ruled the doc shrink-back rather than a fifth token. Measured key-by-key against
+    // the pre-edit projection: warFaith 421 → 418, the other five desks and the causal
+    // leaf BYTE-IDENTICAL, and the diff is 0 ADDED / 1 REMOVED / 0 CHANGED with the one
+    // removed key exactly `DS-FTH-3 :: FALL — abandoned` at 3 variants. Zero seeded
+    // draws move because an undrawable pool was never drawn. THE PRODUCER DOOR STAYS
+    // OPEN: if a later WF member builds pure-secularization seat vacancy, the cause, its
+    // pool and the floor going back up land in the SAME commit as the producer.
+    expect(stateVariants).toBeGreaterThanOrEqual(2266);
     expect(causalVariants).toBeGreaterThanOrEqual(468);
   });
 
