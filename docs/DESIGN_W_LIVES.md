@@ -227,3 +227,47 @@ a source); both after T7 per the queue; skeptic panel before car 1 (§441 J7).
 2. Level words (`a_touch/marked/defining`?) and the drift half-life band per axis class.
 3. The experience table — kinds × axis pulls × family rates.
 4. Whether `ruthless`/`stubborn` get homes or stay expression words.
+5. Whether a refused seek-compromise (§12 R1) teaches bitterness — the humiliation lesson row.
+
+## 12. Agency depth — the second sitting (ODQ §802, ruled under delegation)
+
+**R1 — Willing compromise (demand-side corruption).** Eligibility: a corruptible vice at
+`defining`, OR vice crowding (≥2 vices at `marked`+). Emits a `seek_compromise` candidate through
+npcAgency's existing grammar toward a typed patron menu (criminal faction · corrupt seat-holder ·
+corruption web/foreign patron · corrupting cult — all existing structures). Acceptance is a REAL
+REFUSAL (the vetting pattern) reading the seeker's KNOWN character (R2); the patron's own
+character/doctrine sets tolerance. A granted seek enters the SAME corruption state (leash/ties) —
+a second door into one system, never a parallel one. Refusal is receipted.
+
+**R2 — Known character (the reputation read model).** Perceived character is a PURE DERIVED read
+over the receipted subset only: on-record acts (revealed corruption, lie-stigma, custody, band
+crossings/displacements that made news) propagated through the existing rumor/news mill
+(distance-priced; same-settlement fastest); per-observer belief = the subject's track record
+(credibility stock × revealed states) × the observer's own TRUST-axis position. Unreceipted drift
+stays PRIVATE — the town knows the reeve hardened; the quiet clerk's treachery surprises. No
+second personality store. ⭐ **THE SIGHT RULING:** mortal consumers (patrons, courts, R1 refusals)
+read KNOWN character; **deities read TRUE character** (`targetedFootholds` keeps true-sight,
+byte-identical) — gods know souls, men know reputations.
+
+**R3 — Praxis (you become what you repeatedly do).** Each goal/mission carries a typed METHOD
+MENU from the existing action grammar; choice is seeded, weighted by effective character atop the
+archetype. Each method carries a PRACTICE lesson — small, method-aligned, OUTCOME-INDEPENDENT
+(the cruel act marks you whether it worked) — distinct from the §3 personal-plane OUTCOME lesson.
+Contrary-to-nature methods are choosable at penalty weight and hold a STRAINED position only
+while practiced: the equilibrium is practice rate against homeward decay — stop, and you drift
+home. This makes drift endogenous, not only event-driven.
+
+**R4 — The bond transmutes; the state persists (change of heart while bound).** The corruption
+tie is ONE state with a DERIVED bond kind: vice at the door ⇒ `appetite` (eager compliance); the
+same tie held after the character has crossed home past the threshold ⇒ **`duress`** — blackmail
+made mechanical, the leverage now the patron's MONOPOLY ON THE RECEIPTS of what was already done
+(R2's asymmetry is the blackmail's substance). Under duress: corrupt output falls to minimal
+compliance, patron-punitive exposure risk rises (spending the evidence is the counter), and new
+candidates open — **confess** (voluntary self-exposure: full stigma, hold broken; the past
+follows the reformed — the tragedy is honest), **seek_protection** (a rival power, the law,
+sanctuary — a faith door), **flip** (turn on the patron — the espionage/exposure arc).
+Re-corruption is free: drift back across ⇒ `appetite` again. No new ledger, no authored flag —
+the emergent situation is a derivation, so it can only arise in play.
+
+Car mapping: R1/R4 join car 5 (consumers) + a corruption-adapter slice in car 4; R2 is its own
+half-car beside car 4 (the derived read + mill wiring); R3 rides cars 3/5 (menu + practice kinds).
