@@ -744,11 +744,17 @@ export const K_CANDIDATES = 3;
 /** The frozen digest's LAND gate adjacency (id → Map(neighbourId → integer cost)),
  *  memoized per digest object. Pure derivation from digest.gates — land only, so a
  *  purely inland trip routes overland (the sea graph is a SEPARATE, port-gated
- *  augmentation; see augmentedAdjacency). Pre-M8 + inland routing is byte-identical. */
+ *  augmentation; see augmentedAdjacency). Pre-M8 + inland routing is byte-identical.
+ *
+ *  EXPORTED FOR WEAVE NET-2, which needs the realm's TERRITORY NEIGHBOUR GRAPH to
+ *  derive its Urquhart candidate pairs. It is exported rather than re-derived there
+ *  for the reason D2 gives about the water flood fill: a second reading of "who
+ *  borders whom" would be a fork that drifts from this one, and this one is already
+ *  memoized per digest so a second consumer costs nothing. */
 /** @type {WeakMap<object, Map<string, Map<string, number>>>} */
 const ADJ_MEMO = new WeakMap();
 /** @param {SpatialDigest} digest @returns {Map<string, Map<string, number>>} */
-function gateAdjacency(digest) {
+export function gateAdjacency(digest) {
   const memo = ADJ_MEMO.get(/** @type {object} */ (digest));
   if (memo) return memo;
   /** @type {Map<string, Map<string, number>>} */

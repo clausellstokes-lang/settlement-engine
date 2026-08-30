@@ -26,6 +26,37 @@
  * Capture/refresh: UPDATE_GOLDEN=1 npx vitest run tests/domain/routeNetworkDormancy.test.js
  * Re-recording requires a stated, field-level cause in the header, per the estate's
  * golden-movement law.
+ *
+ * ── RE-RECORDED 2026-08-30 BY WEAVE NET-2, WITH ITS FIELD-LEVEL CAUSE ──────────
+ * TWO of the six hashes moved and FOUR did not, and which four is the whole record:
+ *
+ *   aspatial.lit  287519e8… → 78516c30…      MOVED
+ *   spatial.lit   583601a7… → 23db63d1…      MOVED
+ *   aspatial.dark f0d9e24a…                  UNMOVED  (the dormancy law holds)
+ *   spatial.dark  8692cf9f…                  UNMOVED  (ditto)
+ *   aspatial.edges e5685f68…                 UNMOVED  ⭐
+ *   spatial.edges  07c35d5c…                 UNMOVED  ⭐
+ *
+ * ⭐ THE TWO EDGE HASHES ARE THE CAUSE, BY NOT MOVING. The `.lit` projection
+ * hashes `spatialLedgers`; the `.edges` projection hashes the derived edge list.
+ * The edge lists are byte-identical on both realms — 3 land edges on the aspatial
+ * four, and the same 13 on the port grid, in the same order — so THE ONE FIELD
+ * THAT MOVED IS THE NEW `genesisLawVersion` KEY on the persisted record, and no
+ * road on either golden realm changed. That is not an inference from the diff: it
+ * is what those two green assertions say, executed beside the two red ones.
+ *
+ * NET-2 also adds a FOURTH candidate key (the Urquhart pass over the territory
+ * graph), and on a large realm that key does contribute pairs the k-nearest budget
+ * misses — measured at +15 of 85 on a 40x30 pack with 40 seats. It contributes
+ * NOTHING on either realm here, because both are small enough that the k-nearest
+ * union already covers their whole neighbour graph (J-D2's own recorded plateau).
+ * So this file's realms cannot see that half of the car; routeNetworkGenesis.test
+ * carries the realm-scale arm that can.
+ *
+ * ⚠ NO LIVED WORLD MOVES, AND THAT IS A PROPERTY OF THE LANE, NOT OF THIS FILE:
+ * `ensureGenesisRouteNetwork` still has no caller in src/, so nothing derives a
+ * genesis network on any real campaign. The stamp and the fourth key land DARK,
+ * and the wiring wave is what will first expose either to a world.
  */
 import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';

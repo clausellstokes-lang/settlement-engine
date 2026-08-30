@@ -195,6 +195,9 @@ export const PROVENANCE_USER = 'user';
  * @typedef {Object} RouteNetwork
  * @property {Record<string, RouteEdge>} edges
  * @property {Record<string, CorridorDemand>} corridor
+ * @property {number} [genesisLawVersion]  WEAVE NET-2: the ROUTE_GENESIS_LAW_VERSION
+ *   the edges were derived under. OPTIONAL, and absent is forever legal — every
+ *   network persisted before the stamp existed carries no key at all.
  */
 
 /**
@@ -333,6 +336,91 @@ export function routeEdge(input) {
   return edge;
 }
 
+/**
+ * THE GENESIS LAW STAMP's key on the persisted record (WEAVE NET-2, volume §1.4,
+ * owner row Q-W6). It records WHICH LAW derived a realm's birth network, which
+ * nothing pinned before: a ledger read a year from now could say what roads a
+ * realm was born with but not which derivation minted them, so a later change to
+ * the genesis rule would be indistinguishable, on any lived world, from the world
+ * having always been that way.
+ *
+ * ABSENT IS THE DEFAULT AND IS FOREVER LEGAL. A network persisted before this key
+ * existed reads back with no key, writes back with no key, and is byte-identical
+ * to itself — the appended-LAST, drop-when-absent idiom the digest's own biome /
+ * climate / lake sub-records use.
+ * @type {string}
+ */
+const GENESIS_LAW_KEY = 'genesisLawVersion';
+
+/**
+ * THE ONE FOLD CONSTRUCTOR. Every `with*` helper in this module returns a network
+ * built HERE.
+ *
+ * ⛔ WHY IT EXISTS, in one sentence: the four folders each used to rebuild the
+ * record from `{ edges, corridor }` literals, so a key the record grew would have
+ * been SILENTLY ERASED by whichever fold ran next — the estate's most expensive
+ * recurring bug class, a value written on one lifecycle path and dropped on
+ * another. One constructor means a key survives every fold by construction rather
+ * than by four separate edits a fifth folder would forget, and a walker below
+ * holds any future folder to it.
+ *
+ * KEY ORDER IS FIXED HERE ONCE: edges, corridor, then the stamp — so a wave that
+ * lights the stamp changes a VALUE and never the serialized shape.
+ *
+ * @param {RouteNetwork|null|undefined} base   the record whose carried keys survive
+ * @param {Record<string, RouteEdge>} edges
+ * @param {Record<string, CorridorDemand>} corridor
+ * @returns {RouteNetwork}
+ */
+function foldNetwork(base, edges, corridor) {
+  /** @type {RouteNetwork} */
+  const next = { edges, corridor };
+  const carried = base && typeof base === 'object'
+    ? /** @type {Record<string, unknown>} */ (base)[GENESIS_LAW_KEY]
+    : undefined;
+  if (Number.isInteger(carried)) {
+    /** @type {Record<string, unknown>} */ (next)[GENESIS_LAW_KEY] = carried;
+  }
+  return next;
+}
+
+/**
+ * Stamp the genesis law a network's edges were derived under. Called exactly once,
+ * by the genesis pass at world-connect; a network that already carries a stamp is
+ * returned BY REFERENCE, because re-stamping a lived network would rewrite the one
+ * fact the stamp exists to preserve (Law 2 — genesis happens once).
+ *
+ * @param {RouteNetwork} network
+ * @param {number} version
+ * @returns {RouteNetwork}
+ */
+export function withGenesisLaw(network, version) {
+  const base = network && typeof network === 'object' ? network : emptyRouteNetwork();
+  if (!Number.isInteger(version)) return base;
+  if (Number.isInteger(/** @type {Record<string, unknown>} */ (base)[GENESIS_LAW_KEY])) return base;
+  const next = foldNetwork(base, base.edges || {}, base.corridor || {});
+  /** @type {Record<string, unknown>} */ (next)[GENESIS_LAW_KEY] = version;
+  return next;
+}
+
+/**
+ * The genesis law a world's network was derived under, or null when it carries no
+ * stamp — every world persisted before NET-2, and every dormant world. Null is a
+ * legitimate answer and never a default: "we do not know which law built this" is
+ * exactly the truth about a pre-stamp realm, and a fabricated 1 would be worse
+ * than a null.
+ *
+ * @param {{ spatialLedgers?: unknown }|null|undefined} worldState
+ * @returns {number|null}
+ */
+export function readGenesisLawVersion(worldState) {
+  const network = readRouteNetwork(worldState);
+  const raw = network
+    ? /** @type {Record<string, unknown>} */ (network)[GENESIS_LAW_KEY]
+    : undefined;
+  return Number.isInteger(raw) ? /** @type {number} */ (raw) : null;
+}
+
 /** An empty network. Never persisted (see writeRouteNetwork). @returns {RouteNetwork} */
 export function emptyRouteNetwork() {
   return { edges: {}, corridor: {} };
@@ -370,7 +458,9 @@ export function readRouteNetwork(worldState) {
     ? /** @type {Record<string, RouteEdge>} */ (record.edges) : {};
   const corridor = record.corridor && typeof record.corridor === 'object'
     ? /** @type {Record<string, CorridorDemand>} */ (record.corridor) : {};
-  return { edges, corridor };
+  // NET-2: the stamp rides back out only when it rode in. A pre-stamp ledger must
+  // read as a pre-stamp ledger, or the first fold after the read would mint one.
+  return foldNetwork(/** @type {RouteNetwork} */ (record), edges, corridor);
 }
 
 /**
@@ -418,10 +508,29 @@ export function writeRouteNetwork(worldState, network) {
     return dropSpatialLedger(worldState, ROUTE_NETWORK_LEDGER);
   }
   const live = /** @type {RouteNetwork} */ (network);
-  return setSpatialLedger(worldState, ROUTE_NETWORK_LEDGER, {
-    edges: sortedRecord(live.edges || {}),
-    corridor: sortedRecord(live.corridor || {}),
-  });
+  // ⛔ THE STAMP IS PRESERVED BY THE WRITER, NOT BY THE CALLER, AND THIS WAS
+  // MEASURED THE HARD WAY. Six modules outside this one build a network as a bare
+  // `{ edges, corridor }` literal and hand it straight here — the decay sweep, the
+  // strategic-need writer, the lifecycle stepper, the charter bypass, the flows
+  // objective. Every one of them would have erased a key this record grew, and the
+  // first one to do it was found by a consumer suite and not by any of the four
+  // in-module folds, which had already been routed through `foldNetwork`.
+  //
+  // So preservation lives at the ONE PERSISTENCE CHOKEPOINT every write passes
+  // through: a network that does not carry a stamp inherits the one already on the
+  // world it is being written onto. PRECEDENCE, stated: the network's own stamp
+  // wins when it has one (that is genesis installing it), the world's stands
+  // otherwise, and a stamp is NEVER invented — a world that never had one still
+  // does not. A drained network drops the whole ledger and the stamp goes with it,
+  // which is right: with no edges there is no derivation left to describe.
+  const carried = Number.isInteger(/** @type {Record<string, unknown>} */ (live)[GENESIS_LAW_KEY])
+    ? live
+    : withGenesisLaw(live, /** @type {number} */ (readGenesisLawVersion(worldState)));
+  return setSpatialLedger(
+    worldState,
+    ROUTE_NETWORK_LEDGER,
+    foldNetwork(carried, sortedRecord(live.edges || {}), sortedRecord(live.corridor || {})),
+  );
 }
 
 /**
@@ -447,7 +556,7 @@ export function withRouteEdges(network, edges) {
     added += 1;
   }
   if (added === 0) return base;
-  return { edges: sortedRecord(next), corridor: base.corridor || {} };
+  return foldNetwork(base, sortedRecord(next), base.corridor || {});
 }
 
 /**
@@ -487,10 +596,11 @@ export function withCorridors(network, corridors) {
   const base = network && typeof network === 'object' ? network : emptyRouteNetwork();
   const incoming = corridors && typeof corridors === 'object' ? corridors : {};
   if (Object.keys(incoming).length === 0) return base;
-  return {
-    edges: base.edges || {},
-    corridor: sortedRecord({ ...(base.corridor || {}), ...incoming }),
-  };
+  return foldNetwork(
+    base,
+    base.edges || {},
+    sortedRecord({ ...(base.corridor || {}), ...incoming }),
+  );
 }
 
 /**
@@ -526,7 +636,7 @@ export function withoutCorridors(network, corridorIds) {
     next[id] = corridor[id];
   }
   if (removed === 0) return base;
-  return { edges: base.edges || {}, corridor: next };
+  return foldNetwork(base, base.edges || {}, next);
 }
 
 /**
@@ -552,7 +662,7 @@ export function withEdgeUsage(network, usageById) {
     touched += 1;
   }
   if (touched === 0) return base;
-  return { edges: sortedRecord(next), corridor: base.corridor || {} };
+  return foldNetwork(base, sortedRecord(next), base.corridor || {});
 }
 
 /**

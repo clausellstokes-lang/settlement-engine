@@ -43,7 +43,7 @@
  * PURE, TOTAL, DETERMINISTIC: no clock, no RNG, no I/O, no store.
  */
 
-import { activeSpatialDigest, isPort, pathCost, seaLaneAdjacency } from '../spatial/distanceRead.js';
+import { activeSpatialDigest, gateAdjacency, isPort, pathCost, seaLaneAdjacency } from '../spatial/distanceRead.js';
 import { neutralNeighbourPairs } from '../region/neutralNeighbourEdges.js';
 import { tradeRouteTier } from '../tradeRouteSemantics.js';
 import {
@@ -54,9 +54,35 @@ import {
   routeEdge,
   routeEdgeId,
   routeLifecycleActive,
+  withGenesisLaw,
   withRouteEdges,
   writeRouteNetwork,
 } from './routeNetworkLedger.js';
+
+/**
+ * THE GENESIS LAW VERSION (WEAVE NET-2; volume §1.4 + A1.1.3, owner row Q-W6).
+ *
+ * Every OTHER axis of the spatial canon is versioned — geometry, cost law, the
+ * seasonal overlay, the sea lanes, the biome and climate sub-digests — and each
+ * bump is a discrete, visible re-canonize event. The route-network genesis lane
+ * had no version constant at all, so nothing on a lived world recorded WHICH LAW
+ * derived its birth network. That is the gap this closes, and it is the whole of
+ * the car's persistence: the stamp is written once, at connect, onto the ledger
+ * the genesis pass installs, and it is never rewritten afterwards.
+ *
+ * ⚠ BUMP THIS WHENEVER THE DERIVATION BELOW CHANGES WHICH EDGES A REALM IS BORN
+ * WITH — a new candidate key, a change to the grade ladder, a change to the mode
+ * rule. Do NOT bump it for a refactor that provably moves no edge. A stamp that
+ * moves without the law moving is worse than no stamp: it invites a future reader
+ * to conclude two identical realms were built differently.
+ *
+ * 1 is the law AS OF THIS CAR — three candidate keys plus the Urquhart pass below.
+ * The lane is unmounted, so no world carries a stamp yet and no world ever
+ * carried one; version 1 is the first law any stamped world will have been born
+ * under, not a retroactive claim about the worlds that came before.
+ * @type {number}
+ */
+export const ROUTE_GENESIS_LAW_VERSION = 1;
 
 /**
  * THE GENESIS GRADE LADDER. A route is only as good as its weaker end: a highway
@@ -267,11 +293,123 @@ function userRouteRowsOf(member, members) {
 }
 
 /**
+ * THE FOURTH CANDIDATE KEY — THE URQUHART PASS OVER THE REALM'S OWN NEIGHBOUR
+ * GRAPH (WEAVE NET-2).
+ *
+ * THE HOLE IT FILLS. The k-nearest key takes each member's THREE cheapest
+ * counterparts by frozen travel cost. Three is a budget, not a fact about the
+ * land: a settlement that genuinely borders five others gets roads to three of
+ * them and the realm is born with a network that is a scatter of stars rather
+ * than a web. The render tier hit exactly this and cured it the classical way —
+ * see `roadNetwork.js`, where an Urquhart supergraph over the Delaunay
+ * triangulation supplies the cycles a spanning tree cannot carry.
+ *
+ * ⛔ AND THE CANON TIER CANNOT DO IT THAT WAY, BECAUSE NO COORDINATES SURVIVE.
+ * The frozen digest keeps a distance matrix, tiers, gates and territory — and not
+ * one settlement x/y (D10 says so and `buildSpatialDigest` confirms it). There is
+ * nothing here to triangulate. What the digest DOES hold is better: `gates`, the
+ * cheapest crossing between every pair of ADJACENT territories, which is the dual
+ * of the realm's own geodesic partition — a neighbour graph that already knows
+ * about mountains and coastlines, where a Delaunay triangulation over pins would
+ * not. So this applies the URQUHART RULE (drop, from each triangle, its longest
+ * side) to that graph, using the frozen crossing cost as the length.
+ *
+ * ⚠ THE NAME IS BORROWED HONESTLY. This is the Urquhart RULE over the territory
+ * graph, not the Euclidean Urquhart GRAPH: the classical containment proofs are
+ * geometric and do not transfer. Nothing here relies on them, because this pass
+ * only ever ADDS to a candidate set that is already connected by construction
+ * (the k-nearest key keeps the default graph a chain, never islands), so a
+ * dropped side can cost the realm no connectivity it had.
+ *
+ * THE ANTI-QUADRATIC LAW, KEPT: the result is a SUBSET of the digest's own gate
+ * set, which is one entry per adjacent territory pair over a planar partition and
+ * is therefore already linear in the membership. It is a subset by construction —
+ * every returned pair was read out of `gateAdjacency` — so the bound needs no
+ * geometric argument to hold, only the frozen artifact's own size.
+ *
+ * DETERMINISM: the member scan, the neighbour scan, the triangle scan and the
+ * emitted list are all codepoint ordered, and a tie in crossing cost drops the
+ * codepoint-larger side — the same total-order idiom `urquhartEdges` uses on the
+ * render tier, so the two tiers break ties the same way.
+ *
+ * An ASPATIAL world (no canon) has no territory graph and returns nothing, which
+ * is the honest answer: with no geography there are no geographic neighbours.
+ *
+ * @param {ReturnType<typeof activeSpatialDigest>} digest
+ * @param {ReadonlyArray<string>} memberIds the campaign membership, codepoint sorted
+ * @returns {Array<[string, string]>} canonical pairs, codepoint ordered
+ */
+export function urquhartPairs(digest, memberIds) {
+  if (!digest) return [];
+  const members = new Set(memberIds);
+  const adj = gateAdjacency(digest);
+
+  // The neighbour graph, restricted to the membership. A gate to a settlement this
+  // campaign does not carry is not a candidate for a road this campaign can build.
+  /** @type {Map<string, { a: string, b: string, cost: number }>} */
+  const sides = new Map();
+  /** @type {Map<string, Set<string>>} */
+  const near = new Map();
+  for (const id of memberIds) {
+    const neighbours = adj.get(id);
+    if (!neighbours) continue;
+    for (const to of [...neighbours.keys()].sort()) {
+      if (to === id || !members.has(to)) continue;
+      const cost = Number(neighbours.get(to));
+      if (!Number.isFinite(cost) || cost < 0) continue;
+      const [low, high] = id <= to ? [id, to] : [to, id];
+      const key = pairKey(low, high);
+      const prev = sides.get(key);
+      if (!prev || cost < prev.cost) sides.set(key, { a: low, b: high, cost });
+      if (!near.has(low)) near.set(low, new Set());
+      if (!near.has(high)) near.set(high, new Set());
+      /** @type {Set<string>} */ (near.get(low)).add(high);
+      /** @type {Set<string>} */ (near.get(high)).add(low);
+    }
+  }
+  if (sides.size === 0) return [];
+
+  // Drop, from every triangle, its longest side. Each triangle is met three times
+  // — once from each of its sides — and the answer is the same every time, so the
+  // repetition costs a little work and buys a scan that needs no triangle index.
+  /** @type {Set<string>} */
+  const dropped = new Set();
+  for (const key of [...sides.keys()].sort()) {
+    const side = /** @type {{ a: string, b: string, cost: number }} */ (sides.get(key));
+    const na = near.get(side.a);
+    const nb = near.get(side.b);
+    if (!na || !nb) continue;
+    for (const c of [...na].filter(x => nb.has(x)).sort()) {
+      const triangle = [key, pairKey(side.b, c), pairKey(c, side.a)];
+      let longest = '';
+      let longestCost = -1;
+      for (const k of triangle) {
+        const e = sides.get(k);
+        if (!e) continue;
+        if (e.cost > longestCost || (e.cost === longestCost && k > longest)) {
+          longest = k;
+          longestCost = e.cost;
+        }
+      }
+      if (longest) dropped.add(longest);
+    }
+  }
+
+  return [...sides.keys()].sort()
+    .filter(key => !dropped.has(key))
+    .map((key) => {
+      const side = /** @type {{ a: string, b: string }} */ (sides.get(key));
+      return /** @type {[string, string]} */ ([side.a, side.b]);
+    });
+}
+
+/**
  * @typedef {Object} GenesisCandidates
- * @property {Array<[string, string]>} knn      the k-nearest neighbour pairs
- * @property {Array<[string, string]>} ports    the ports-totality pairs
- * @property {Array<[string, string]>} user     the DM's own chartered pairs
- * @property {Array<[string, string]>} all      the union, codepoint ordered
+ * @property {Array<[string, string]>} knn       the k-nearest neighbour pairs
+ * @property {Array<[string, string]>} ports     the ports-totality pairs
+ * @property {Array<[string, string]>} user      the DM's own chartered pairs
+ * @property {Array<[string, string]>} urquhart  NET-2's geographic-neighbour pairs
+ * @property {Array<[string, string]>} all       the union, codepoint ordered
  * @property {number} bound  the structural ceiling this selection may not exceed
  */
 
@@ -293,6 +431,7 @@ export function genesisCandidatePairs(input) {
 
   const knn = ids.length >= 2 ? neutralNeighbourPairs(ids, worldState) : [];
   const ports = portTotalityPairs(digest, ids);
+  const urquhart = ids.length >= 2 ? urquhartPairs(digest, ids) : [];
   /** @type {Map<string, [string, string]>} */
   const userPairs = new Map();
   for (const member of members) {
@@ -307,7 +446,7 @@ export function genesisCandidatePairs(input) {
 
   /** @type {Map<string, [string, string]>} */
   const union = new Map();
-  for (const pair of [...knn, ...ports, ...user]) union.set(pairKey(pair[0], pair[1]), pair);
+  for (const pair of [...knn, ...ports, ...user, ...urquhart]) union.set(pairKey(pair[0], pair[1]), pair);
   const all = [...union.entries()]
     .sort((x, y) => (x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : 0)).map(e => e[1]);
 
@@ -315,8 +454,14 @@ export function genesisCandidatePairs(input) {
     knn,
     ports,
     user,
+    urquhart,
     all,
-    bound: knn.length + ports.length + user.length,
+    // NET-2's FOURTH BOUND TERM. Every term is linear in the membership: S*k for
+    // the k-nearest key, one pair per port, the DM's own finite roster, and — for
+    // the new one — a subset of the frozen gate set, which is one entry per
+    // adjacent territory pair. The anti-quadratic law stays a number a pin
+    // asserts, with four addends instead of three.
+    bound: knn.length + ports.length + user.length + urquhart.length,
   };
 }
 
@@ -387,6 +532,22 @@ export function deriveGenesisRouteEdges(input) {
   }
 
   // PASS 2 — the candidate pass over the bounded set, split by mode.
+  //
+  // ⛔ NET-2's URQUHART PAIRS ENTER HERE AND NOWHERE ELSE, which is the whole of
+  // their discipline and is worth stating because a fourth key is exactly the
+  // place a bypass rung gets smuggled in:
+  //   · THEY READ THE ACCESS LADDER LIKE EVERYTHING ELSE (Law 2). A geographic
+  //     neighbour pair whose weaker end was founded `isolated` earns no land road,
+  //     the same as a k-nearest pair would not. Geography says two places border
+  //     each other; the frozen `tradeRouteAccess` says whether the world gave
+  //     either of them a way out. The second question is not answered by the first.
+  //   · THEY MINT NO WATER OF THEIR OWN. Mode comes from `genesisPairMode`, which
+  //     returns 'water' only where the FROZEN sea-lane set already links both ends
+  //     as ports — so an Urquhart port-pair is a water edge exactly when the lane
+  //     logic says it is, and never because the pair arrived through this key.
+  //     Where that does happen the pair is minted at the §8 rung unconditionally,
+  //     which is the ports/water rule doing its job over a wider candidate set:
+  //     §8's totality is a FLOOR, not a cap.
   for (const [a, b] of candidates.all) {
     const mode = genesisPairMode(digest, a, b);
     if (byId.has(routeEdgeId(a, b, mode))) continue;
@@ -471,5 +632,12 @@ export function ensureGenesisRouteNetwork(worldState, members, tick = 0) {
   if (readRouteNetwork(worldState)) return worldState;
   const edges = deriveGenesisRouteEdges({ members, worldState, tick });
   if (edges.length === 0) return worldState;
-  return writeRouteNetwork(worldState, withRouteEdges(emptyRouteNetwork(), edges));
+  // NET-2: the network is stamped with the law that derived it, in the same act
+  // that installs it. The stamp rides the RECORD, so it is written only where
+  // there are edges to describe — a realm that derived nothing writes nothing at
+  // all, stamp included, and stays byte-identical to a realm that never asked.
+  return writeRouteNetwork(
+    worldState,
+    withGenesisLaw(withRouteEdges(emptyRouteNetwork(), edges), ROUTE_GENESIS_LAW_VERSION),
+  );
 }

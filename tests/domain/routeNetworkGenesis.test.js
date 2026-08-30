@@ -26,11 +26,16 @@ import {
   PROVENANCE_GENERATED,
   PROVENANCE_USER,
   isLifecycleImmune,
+  readGenesisLawVersion,
   readRouteEdges,
+  readRouteNetwork,
   routeEdgeId,
 } from '../../src/domain/worldPulse/routeNetworkLedger.js';
+import * as ledgerModule from '../../src/domain/worldPulse/routeNetworkLedger.js';
+import { seaLaneAdjacency } from '../../src/domain/spatial/distanceRead.js';
 import {
   PORT_TOTALITY_GRADE,
+  ROUTE_GENESIS_LAW_VERSION,
   USER_ROUTE_GENESIS_GRADE,
   deriveGenesisRouteEdges,
   ensureGenesisRouteNetwork,
@@ -40,6 +45,7 @@ import {
   genesisPairMode,
   portTotalityPairs,
   portsMissingWater,
+  urquhartPairs,
 } from '../../src/domain/worldPulse/routeNetworkGenesis.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -66,6 +72,23 @@ function landlockedWorld(count, rules = LIT) {
     ids: placements.map(p => p.id),
   };
 }
+
+/** A REALM-SCALE landlocked world. NET-2's fourth key is a claim about realms
+ *  large enough for a three-neighbour budget to run out, which the 24x18/S<=16
+ *  fixtures above are deliberately not. */
+function realmWorld(count, rules = LIT) {
+  const pack = makeGridPack({ cols: 40, rows: 30 });
+  const placements = placeSettlements(pack, count);
+  const digest = buildSpatialDigest({ pack, placements });
+  return {
+    world: { simulationRules: { ...rules }, spatialCanonVersion: 1, spatialDigest: digest },
+    ids: placements.map(p => p.id),
+    digest,
+  };
+}
+
+/** The unordered pair key this module canonicalizes on. */
+const pk = (p) => (p[0] <= p[1] ? `${p[0]}::${p[1]}` : `${p[1]}::${p[0]}`);
 
 const PORT_IDS = ['p000', 'p001', 'p002', 'p003', 'p004', 'p005', 'p006', 'p007'];
 const portMembers = (access = 'road') => PORT_IDS.map(id => member(id, access));
@@ -115,9 +138,23 @@ describe('J1 the bounded candidate set (§3, the anti-quadratic law)', () => {
     const complete = (ids.length * (ids.length - 1)) / 2;   // 120
     expect(complete).toBe(120);
     expect(candidates.all.length).toBeLessThan(complete);
-    // The structural ceiling: S*k + P + U, every term linear.
+    // The structural ceiling: S*k + P + U + the NET-2 Urquhart term, every one
+    // linear. THE FOURTH TERM WAS ADDED DELIBERATELY AND THIS LINE MOVED WITH IT:
+    // the old ceiling was S*k + P + U, and a fourth key that did not raise it
+    // would have been a key that could never contribute anything.
     expect(candidates.all.length).toBeLessThanOrEqual(candidates.bound);
-    expect(candidates.bound).toBeLessThanOrEqual(ids.length * 3 + ids.length + 0);
+    expect(candidates.bound).toBe(
+      candidates.knn.length + candidates.ports.length
+      + candidates.user.length + candidates.urquhart.length,
+    );
+    // The new term's own ceiling is the FROZEN GATE SET — one entry per adjacent
+    // territory pair — so it needs no geometric argument, only the digest's own
+    // artifact. Measured here: 32 gates over 16 settlements.
+    expect(candidates.urquhart.length)
+      .toBeLessThanOrEqual(world.spatialDigest.gates.length);
+    expect(candidates.bound).toBeLessThanOrEqual(
+      ids.length * 3 + ids.length + 0 + world.spatialDigest.gates.length,
+    );
   });
 
   it('grows LINEARLY, not quadratically, as the realm doubles', () => {
@@ -504,5 +541,235 @@ describe('J1 the one shape adapter (the writer/reader spelling cure)', () => {
 
   it('a member with no settlement still adapts, with an empty config', () => {
     expect(genesisMembersFromSnapshot([{ id: 'a' }])).toEqual([{ id: 'a', config: {} }]);
+  });
+});
+
+// ── WEAVE NET-2 · the fourth candidate key ──────────────────────────────────
+describe('NET-2 the Urquhart pass over the realm\'s own territory graph', () => {
+  it('is a SUBSET of the frozen gate set, which is the whole of the bound argument', () => {
+    // The pass reads `gateAdjacency`, so every pair it returns was already an
+    // adjacent-territory crossing in the digest. That makes the anti-quadratic
+    // claim a statement about an artifact this test can count rather than a
+    // geometric theorem about a triangulation nobody has.
+    const { world, ids, digest } = realmWorld(40);
+    const pairs = urquhartPairs(digest, ids);
+    const gateKeys = new Set(digest.gates.map(g => pk(g.between)));
+    expect(pairs.length).toBeGreaterThan(0);
+    for (const pair of pairs) expect(gateKeys.has(pk(pair))).toBe(true);
+    expect(pairs.length).toBeLessThanOrEqual(digest.gates.length);
+    // …and it really is a proper subset: the Urquhart RULE drops the longest side
+    // of every triangle, so a pass that returned the whole gate set would not be
+    // applying the rule at all.
+    expect(pairs.length).toBeLessThan(digest.gates.length);
+    expect(world.spatialDigest).toBe(digest);
+  });
+
+  it('DISCOVERS neighbour pairs the three-nearest budget misses — the arm that could have been vacuous', () => {
+    // ⚠ THIS IS THE ANTI-VACUITY ARM AND IT IS THE POINT OF THE CAR. A fourth key
+    // whose pairs the k-nearest key already held would be a key that changes
+    // nothing, and the small fixtures elsewhere in this file would never have
+    // shown it: J-D2's own note records that at S <= 4 the k-nearest graph IS the
+    // complete graph, and the plateau reaches further than that on a small pack.
+    // MEASURED at S = 8/12/16/24/32 on the 30x22 grid: the pass contributes
+    // 0/1/0/5/3 new pairs — real, but small enough to mislead. At realm scale it
+    // is unambiguous, and that is where a realm's roads actually live.
+    const { world, ids, digest } = realmWorld(40);
+    const members = ids.map(id => member(id, 'road'));
+    const candidates = genesisCandidatePairs({ members, worldState: world });
+    const older = new Set([...candidates.knn, ...candidates.ports, ...candidates.user].map(pk));
+    const discovered = candidates.urquhart.filter(pair => !older.has(pk(pair)));
+    expect(discovered.length).toBeGreaterThan(0);
+    // 70 pairs from the three older keys; 85 with this one. Every discovered pair
+    // is a real territory border, not a long-range guess.
+    expect(candidates.all.length).toBe(older.size + discovered.length);
+    const gateKeys = new Set(digest.gates.map(g => pk(g.between)));
+    for (const pair of discovered) expect(gateKeys.has(pk(pair))).toBe(true);
+    // …and the selection is still nowhere near the complete graph.
+    expect(candidates.all.length).toBeLessThan((ids.length * (ids.length - 1)) / 2 / 4);
+  });
+
+  it('reads the access ladder like every other key: a geographic neighbour founded isolated earns no road', () => {
+    // LAW 2 HAS NO BYPASS RUNG. Geography says two places border each other; the
+    // frozen `tradeRouteAccess` says whether the world gave either of them a way
+    // out, and the second question is not answered by the first. The pair under
+    // test is chosen BY THE DERIVATION — the first pair only this key contributes
+    // — so the test cannot drift onto a pair some other key would have supplied.
+    const { world, ids } = realmWorld(40);
+    const roadMembers = ids.map(id => member(id, 'road'));
+    const candidates = genesisCandidatePairs({ members: roadMembers, worldState: world });
+    const older = new Set([...candidates.knn, ...candidates.ports, ...candidates.user].map(pk));
+    const [a, b] = candidates.urquhart.find(pair => !older.has(pk(pair)));
+    expect(a).toBeTruthy();
+
+    const idOf = (edge) => routeEdgeId(edge.a, edge.b, edge.mode);
+    const withAccess = (overrides) => new Set(
+      deriveGenesisRouteEdges({
+        members: ids.map(id => member(id, overrides[id] || 'road')),
+        worldState: world,
+      }).map(idOf),
+    );
+    // With both ends on a road, the pair this key found becomes a road.
+    expect(withAccess({}).has(routeEdgeId(a, b, 'land'))).toBe(true);
+    // Founding ONE end isolated is enough — the ladder reads the WEAKER end.
+    expect(withAccess({ [a]: 'isolated' }).has(routeEdgeId(a, b, 'land'))).toBe(false);
+    expect(withAccess({ [b]: 'isolated' }).has(routeEdgeId(a, b, 'land'))).toBe(false);
+  });
+
+  it('mints no water of its own: every water edge is a frozen sea lane between two ports', () => {
+    // The fourth key is a claim about LAND borders. It routes through the same
+    // `genesisPairMode` gate as everything else, so a pair of its becomes a water
+    // edge exactly when the frozen lane set already links both ends — never
+    // because it arrived through this key. Where that does happen the §8 rung is
+    // minted unconditionally, which is totality behaving as a FLOOR over a wider
+    // candidate set rather than a new rule.
+    const world = portWorld();
+    const digest = world.spatialDigest;
+    const lanes = seaLaneAdjacency(digest);
+    const edges = deriveGenesisRouteEdges({ members: portMembers('port'), worldState: world });
+    const water = edges.filter(e => e.mode === 'water');
+    expect(water.length).toBeGreaterThan(0);           // anti-vacuity: water exists
+    for (const e of water) {
+      expect(genesisPairMode(digest, e.a, e.b)).toBe('water');
+      expect(lanes.get(e.a)?.has(e.b)).toBe(true);
+      expect(e.grade).toBe(PORT_TOTALITY_GRADE);
+    }
+  });
+
+  it('an aspatial realm has no geographic neighbours, and says so', () => {
+    // No canon, no territory graph, no borders. Returning nothing is the honest
+    // answer rather than a degradation dodge — the same posture the k-nearest key
+    // takes when it falls back to its codepoint line.
+    expect(urquhartPairs(null, ['a', 'b', 'c'])).toEqual([]);
+    const aspatial = { simulationRules: { ...LIT } };
+    const candidates = genesisCandidatePairs({
+      members: ['a', 'b', 'c'].map(id => member(id, 'road')), worldState: aspatial,
+    });
+    expect(candidates.urquhart).toEqual([]);
+    expect(candidates.bound).toBe(candidates.knn.length);
+  });
+
+  it('is deterministic and order-free', () => {
+    const { ids, digest } = realmWorld(40);
+    const forward = urquhartPairs(digest, ids);
+    const reversed = urquhartPairs(digest, [...ids].reverse());
+    expect(JSON.stringify(reversed)).toBe(JSON.stringify(forward));
+    expect(JSON.stringify(urquhartPairs(digest, ids))).toBe(JSON.stringify(forward));
+    // Emitted in codepoint pair order, like every other key here.
+    expect(forward.map(pk)).toEqual([...forward.map(pk)].sort());
+  });
+});
+
+// ── WEAVE NET-2 · the genesis law stamp (volume §1.4, A1.1.3, owner row Q-W6) ──
+describe('NET-2 the genesis law stamp', () => {
+  it('stamps the law that derived the network, appended LAST, in the connect act', () => {
+    const world = portWorld();
+    const connected = ensureGenesisRouteNetwork(world, portMembers('port'), 0);
+    expect(readGenesisLawVersion(connected)).toBe(ROUTE_GENESIS_LAW_VERSION);
+    // KEY ORDER IS THE SHAPE CONTRACT: the stamp is LAST, so a wave that lights it
+    // changes a value and never where anything else sits in the serialization.
+    expect(Object.keys(readRouteNetwork(connected)))
+      .toEqual(['edges', 'corridor', 'genesisLawVersion']);
+    // It describes edges, so it is never written where there are none: genesis is
+    // once, and a re-derivation over a lived network must not restamp it either.
+    expect(ensureGenesisRouteNetwork(connected, portMembers('port'), 99)).toBe(connected);
+  });
+
+  it('a DARK world is untouched to the byte, stamp included', () => {
+    // The raw-byte dormancy bar (§1.2 as amended by A1.2.7): not an equal world,
+    // the SAME world, and the same bytes.
+    const dark = portWorld({});
+    const before = JSON.stringify(dark);
+    const after = ensureGenesisRouteNetwork(dark, portMembers('port'), 0);
+    expect(after).toBe(dark);
+    expect(JSON.stringify(after)).toBe(before);
+    expect(readGenesisLawVersion(after)).toBeNull();
+  });
+
+  it('a pre-stamp ledger round-trips with NO stamp — absent stays absent forever', () => {
+    // Every world persisted before this key existed. Null is the truth about it
+    // ("we do not know which law built this"), and a read that defaulted to 1
+    // would be a fabricated claim about a realm nobody stamped.
+    const world = portWorld();
+    const connected = ensureGenesisRouteNetwork(world, portMembers('port'), 0);
+    const legacy = JSON.parse(JSON.stringify(connected));
+    delete legacy.spatialLedgers.routeNetwork.genesisLawVersion;
+    const before = JSON.stringify(legacy);
+    expect(readGenesisLawVersion(legacy)).toBeNull();
+    const network = readRouteNetwork(legacy);
+    expect(Object.keys(network)).toEqual(['edges', 'corridor']);
+    expect(JSON.stringify(ledgerModule.writeRouteNetwork(legacy, network))).toBe(before);
+  });
+
+  it('a BARE network literal written onto a stamped world keeps the stamp — the writer preserves it, not the caller', () => {
+    // ⛔ THE ARM A CONSUMER SUITE HAD TO FIND FOR ME, recorded so nobody re-learns
+    // it. SIX modules outside the ledger build a network as a bare
+    // `{ edges, corridor }` literal and hand it straight to `writeRouteNetwork` —
+    // the decay sweep, the strategic-need writer, the lifecycle stepper, the
+    // charter bypass, the flows objective. Routing the ledger's own four folds
+    // through one constructor did nothing for any of them, and the first write
+    // after genesis erased the stamp. Preservation therefore lives at the ONE
+    // PERSISTENCE CHOKEPOINT, which is what this pins.
+    const world = portWorld();
+    const connected = ensureGenesisRouteNetwork(world, portMembers('port'), 0);
+    const stamped = readRouteNetwork(connected);
+    const bare = { edges: stamped.edges, corridor: stamped.corridor };
+    expect(bare.genesisLawVersion).toBeUndefined();          // it really is bare
+    const rewritten = ledgerModule.writeRouteNetwork(connected, bare);
+    expect(readGenesisLawVersion(rewritten)).toBe(ROUTE_GENESIS_LAW_VERSION);
+
+    // …AND A STAMP IS NEVER INVENTED. The same bare literal onto a world that
+    // never had one stays unstamped: "we do not know which law built this" is the
+    // truth about a pre-NET-2 realm and the writer must not improve on it.
+    const virgin = ledgerModule.writeRouteNetwork(portWorld(), bare);
+    expect(readGenesisLawVersion(virgin)).toBeNull();
+    expect(Object.keys(readRouteNetwork(virgin))).toEqual(['edges', 'corridor']);
+  });
+
+  it('EVERY fold in the ledger preserves the stamp, and a fold this table has never seen REDS', () => {
+    // ⛔ THE STRUCTURAL HALF, and the reason the four folders were routed through
+    // one constructor. Each of them used to rebuild the record from an
+    // `{ edges, corridor }` literal, so a key the record grew would have been
+    // silently erased by whichever fold ran next — a value written on one
+    // lifecycle path and dropped on another, which is this estate's most
+    // expensive recurring bug. The manifest below is the ratchet: a FIFTH folder
+    // added later fails the coverage assertion until it is listed here, and then
+    // fails the preservation assertion unless it goes through the constructor.
+    const world = portWorld();
+    const connected = ensureGenesisRouteNetwork(world, portMembers('port'), 0);
+    const stamped = readRouteNetwork(connected);
+    const anEdgeId = Object.keys(stamped.edges)[0];
+    const corridorRow = ledgerModule.corridorDemand({ a: 'p000', b: 'p007', sinceTick: 3 });
+
+    // Each call must actually CHANGE the network, or the folder's early return
+    // would hand back `base` and the assertion would pass without folding at all.
+    const FOLDS = {
+      withRouteEdges: (n) => ledgerModule.withRouteEdges(n, [ledgerModule.routeEdge({
+        a: 'zzz0', b: 'zzz1', grade: 'track', mode: 'land',
+        provenance: PROVENANCE_GENERATED, flavor: 'genesis', tick: 1, dominantFlowClass: null,
+      })]),
+      withCorridors: (n) => ledgerModule.withCorridors(n, { [ledgerModule.corridorId('p000', 'p007')]: corridorRow }),
+      withoutCorridors: (n) => ledgerModule.withoutCorridors(
+        ledgerModule.withCorridors(n, { [ledgerModule.corridorId('p000', 'p007')]: corridorRow }),
+        [ledgerModule.corridorId('p000', 'p007')],
+      ),
+      withEdgeUsage: (n) => ledgerModule.withEdgeUsage(n, {
+        [anEdgeId]: { goods: 1, population: 0, military: 0, lastTick: 4 },
+      }),
+      withGenesisLaw: (n) => ledgerModule.withGenesisLaw(n, ROUTE_GENESIS_LAW_VERSION),
+    };
+
+    // COVERAGE: the manifest names every fold this module exports.
+    const exported = Object.keys(ledgerModule)
+      .filter(name => name.startsWith('with') && typeof ledgerModule[name] === 'function')
+      .sort();
+    expect(exported).toEqual(Object.keys(FOLDS).sort());
+
+    // PRESERVATION: each one carries the stamp through, and really did fold.
+    for (const [name, fold] of Object.entries(FOLDS)) {
+      const folded = fold(stamped);
+      expect(`${name}: ${folded.genesisLawVersion}`)
+        .toBe(`${name}: ${ROUTE_GENESIS_LAW_VERSION}`);
+      if (name !== 'withGenesisLaw') expect(folded).not.toBe(stamped);
+    }
   });
 });
