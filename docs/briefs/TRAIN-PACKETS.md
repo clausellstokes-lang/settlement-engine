@@ -119,7 +119,9 @@ Authority: §759.4 · §763.2 · §764.2 · §768.3 · §769.4 · §771.2 · §7
   generator keys — typed registry vs one-off admissions, §771.2) · the prose-numerics RECEIPT-KEY detector
   class (the 8 not-prose rows, §774.3; governed re-mint ritual) · E-HER-9: a walker scanning reason-mints
   for tick-varying numerics (the suppressor-defeat class) · E3: the leaf-name collision walker · E5: the
-  three timeout-flaky lint arms hardened · the §769.4 tombstone-register lint · GOLDEN non-freezing half:
+  three timeout-flaky lint arms hardened · the §769.4 tombstone-register lint · **the §776 CURRENCY-AMOUNT
+  detector class** (prose-numerics learns to convict absolute in-world prices on dossier/news/services
+  surfaces, so the price-heuristics law can never regress silently) · GOLDEN non-freezing half:
   the 24+1 lit-uncovered mechanisms get flag-ON proofs; the dormancy oracle gains the BIT-LEVEL comparator
   arm (§713.2 standard) — the corpus WIDENING/freeze stays in T13's wake.
 
@@ -135,6 +137,13 @@ Authority: §767.2/.3 (the owner's post-forge ruling + the walk findings a–i) 
   WEB-10 (PRICE_MAP arm + the ANNUAL_FACTOR flip; two-way source scan is the acceptance) · WEB-11 annual
   client. STOP-class money-path discipline: smallest possible diffs, the webhook tests are the bar,
   nothing ships lit without the env key.
+- THE ECONOMICS-HEURISTICS CAR (§776, owner law): the dossier's market/economics surfaces stop rendering
+  ABSOLUTE in-world prices — relative-to-the-settlement's-own-baseline heuristics only ("the price of
+  bread has doubled", dear/cheap bands, ±% vs the norm). CENSUS-FIRST: what `MarketPricesSection.jsx`
+  renders and where its numbers originate (`EconomicsTab.jsx`, `economy.generated.js`, services price
+  mentions); the baseline must be the settlement's own derived norm so every relative is honest
+  derivation, never flavor. Goods QUANTITIES stay (facts); PRICES go relative (the DM's mandate).
+  Any generated-prose/golden regen batches to T8's window.
 
 ## T11 · UI (post-T1: DESK-1..5 → POLIS-3 → POLIS-4 → VAR-3; W-ARMS may ride the tail)
 Authority: A2 (DESK) · R-WEAVE-READY rows · §754.3 binds every rendered string.
