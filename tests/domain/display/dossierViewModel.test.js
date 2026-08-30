@@ -7,7 +7,9 @@ import {
   deriveBlockadeRelief,
   deriveDossierViewModel,
   deriveGranaryOutlook,
+  deriveTreasuryGlance,
 } from '../../../src/domain/display/dossierViewModel.js';
+import { TREASURY_BANDS, treasuryBandOf } from '../../../src/domain/worldPulse/treasury.js';
 import { sanitizePublicValue, PRIVATE_KEY_RE } from '../../../src/domain/display/publicSafe.js';
 
 const withFood = (fb) => ({ economicViability: { metrics: { foodBalance: fb } } });
@@ -367,5 +369,50 @@ describe('deriveGranaryOutlook (SEASONS-A — the seasonal food read)', () => {
     for (const key of Object.keys(o)) {
       expect(PRIVATE_KEY_RE.test(key), `field name "${key}" trips the publicSafe denylist`).toBe(false);
     }
+  });
+});
+
+describe('deriveTreasuryGlance (W-COIN-2 / A1.21 — the coin chip)', () => {
+  const vault = (coin, extra = {}) => ({
+    tier: 'town',
+    institutions: [],
+    economicState: { treasury: { coin, openedTick: 1, lastTick: 1 } },
+    ...extra,
+  });
+
+  it('is unavailable on every world whose ledger was never opened', () => {
+    // The dormancy guarantee AT THE VIEW PLANE: a dark campaign renders no tile at all,
+    // so the glance row is byte-identical with the flag absent.
+    for (const dark of [null, undefined, {}, { economicState: {} }, { economicState: { treasury: {} } }]) {
+      expect(deriveTreasuryGlance(dark).available).toBe(false);
+      expect(deriveTreasuryGlance(dark).band).toBe(null);
+    }
+    // …and a malformed record reads as ABSENT rather than as an empty vault, so a corrupt
+    // import can never be handed a fabricated band.
+    expect(deriveTreasuryGlance(vault('lots')).available).toBe(false);
+  });
+
+  it('bands an open ledger through the ONE derivation, and never prints a figure', () => {
+    const open = deriveTreasuryGlance(vault(0));
+    expect(open.available).toBe(true);
+    expect(open.band).toBe('empty');
+    // ⛔ §776: the chip carries a WORD. The value handed to the tile is a band member and
+    // never a number, in any branch.
+    for (const coin of [0, 1, 300, 900, 2000, 2400, 99999]) {
+      const glance = deriveTreasuryGlance(vault(coin));
+      expect(TREASURY_BANDS).toContain(glance.band);
+      expect(String(glance.band)).not.toMatch(/\d/); // anchored: the assertion directly above proves the band is a live member of the closed vocabulary, so a derivation that returned nothing reds there rather than passing here.
+      expect(glance.color).toMatch(/^#[0-9a-f]{6}$/i);
+    }
+  });
+
+  it('agrees with the engine\'s own band reading, by identity — never a second table', () => {
+    // §711.6: the chip and the coin news beats are two consumers of one fraction. They
+    // must not merely agree today; they must be the SAME reading.
+    for (const coin of [0, 120, 700, 1500, 2400]) {
+      expect(deriveTreasuryGlance(vault(coin)).band).toBe(treasuryBandOf(vault(coin)));
+    }
+    // The arm is not vacuous: the coins above really do span more than one band.
+    expect(new Set([0, 120, 700, 1500, 2400].map((c) => treasuryBandOf(vault(c)))).size).toBeGreaterThan(2);
   });
 });

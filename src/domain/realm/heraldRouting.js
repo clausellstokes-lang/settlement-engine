@@ -171,6 +171,15 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   settlement_resettled: 'trade', steading_founded: 'trade',
   population_growth: 'trade', population_emigration: 'trade', population_decline: 'trade',
   migration_flight: 'trade', mass_migration: 'trade', migration_pressure: 'trade',
+  // W-COIN-2, the state treasury's two beats. `trade` is this section's own declared
+  // scope — "goods, MONEY, roads, resources, institutions" — and the fiscal cohort it
+  // already holds settles it without a judgment call: `indebtedness` on the same line,
+  // `coalition_expenditure_read` and `coalition_debt_paid/unpaid` above, and
+  // `vassal_tribute_extraction` among them. A crown that cannot pay its army files here
+  // and not under `war` because of routing law 3 — the event's own nature is fiscal, and
+  // the war that caused it shows in the article's cause walk, exactly as a trade-caused
+  // siege files under war.
+  treasury_shortfall: 'trade', treasury_band: 'trade',
   market_shock: 'trade', indebtedness: 'trade', tier_change: 'trade', tier_promotion: 'trade',
   tier_demotion: 'trade', tier_up: 'trade', tier_down: 'trade',
   generosity_credit_default: 'trade', generosity_purchase: 'trade', generosity_trade_overture: 'trade',

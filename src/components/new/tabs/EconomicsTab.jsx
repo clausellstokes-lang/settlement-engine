@@ -11,7 +11,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
 import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
 import { displayLabel, humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
-import { deriveFoodBalance, deriveGranaryOutlook } from '../../../domain/display/dossierViewModel.js';
+import { deriveFoodBalance, deriveGranaryOutlook, deriveTreasuryGlance } from '../../../domain/display/dossierViewModel.js';
 import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';
 import { deriveMarketPrices } from '../../../domain/display/marketPrices.js';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in economyFreshness.js
@@ -300,7 +300,13 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // SEASONS-A: the seasonal granary read (available only on campaigns whose
   // pulse runs with seasons on — the stockpile record carries the season).
   const granary = deriveGranaryOutlook(s);
-  const granaryColor = granary.available ? (granary.band === 'nearly empty' ? '#8b1a1a' : granary.band === 'thin' ? '#a0762a' : '#1a5a28') : '#a0762a';
+  // W-COIN-2 (A1.21): THE COIN CHIP. A band word and nothing else — §776 keeps absolute
+  // coin in the LEDGER, where it is a record, and off every SURFACE. Absent on any world
+  // whose ledger was never opened, which is every dark campaign, so the glance row is
+  // byte-identical without the flag. `;`-joined at +0 effective lines: this file sits
+  // EXACTLY on its frozen 600-line ceiling (measured — 605 with the colour written here),
+  // which is why the band's accent is returned by the derivation instead.
+  const granaryColor = granary.available ? (granary.band === 'nearly empty' ? '#8b1a1a' : granary.band === 'thin' ? '#a0762a' : '#1a5a28') : '#a0762a'; const treasury = deriveTreasuryGlance(s);
 
   return (
     <div style={{...sans}}>
@@ -334,7 +340,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         {[
           {label:'Economy',value:eco.prosperity,sub:ecoScore?`Output score: ${ecoScore}/100`:undefined,color:prosColor},
           {label:'Food',value:foodLabel,sub:fb?`${formatCount(fb.dailyProduction)} / ${formatCount(fb.dailyNeed)} lbs/day`:undefined,color:foodColor},
-          ...(granary.available?[{label:'Season',value:granary.display.split(' — ')[0],sub:granary.display.split(' — ').slice(1).join(' — '),color:granaryColor}]:[]),
+          ...(granary.available?[{label:'Season',value:granary.display.split(' — ')[0],sub:granary.display.split(' — ').slice(1).join(' — '),color:granaryColor}]:[]), ...(treasury.available?[{label:'Treasury',value:treasury.band,color:treasury.color}]:[]),
         ].map(({label,value,sub,color})=>(
           <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,padding:'8px 10px',minWidth:0}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>

@@ -123,7 +123,7 @@ import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTic
 // ratchet-up in its history (J-EP-11, 1580 -> 1581) was chair-signed for exactly one
 // import line. W-COIN takes no such ratchet: the import shares a physical line and the
 // call below shares one with the statement it already stood beside.
-import { assertNoResidueLeak } from './residueStripGuard.js'; import { advanceTreasury, applyTreasuryLegitimacyDeltas } from './treasury.js';
+import { assertNoResidueLeak } from './residueStripGuard.js'; import { advanceTreasury, applyTreasuryLegitimacyDeltas } from './treasury.js'; import { treasuryNewsEntries } from './treasuryNews.js';
 
 /**
  * RESIDUE-STRIP REGISTRY (machine-enforced; replaces the old prose checklist).
@@ -510,7 +510,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // stays at the settlement_clock writer and the PRICE rides its summary to the one
   // existing applicator (ODQ §768.2). `;`-joined at +0 effective lines, like every other
   // W-COIN edit to this permanently-banked file.
-  const seasonalFoodStates = []; const treasuryLegitimacyDeltas = new Map();
+  // W-COIN-2 — the coin BEATS' state, collected in the same loop and narrated with the
+  // other kernel-side news below. `;`-joined at +0 effective lines, like every other
+  // W-COIN edit to this permanently-banked file.
+  const seasonalFoodStates = []; const treasuryLegitimacyDeltas = new Map(); const treasuryNewsStates = [];
   for (const item of snapshot.settlements) {
     const previousTickState = settlementTickStates[item.id] || null;
     /** @type {any} */
@@ -571,7 +574,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // anything else and returns its input settlement BY REFERENCE, so `vaulted === sieged`
     // and this line is byte-identical to the one it replaced. `;`-joined at +0 effective
     // lines against the frozen ceiling.
-    const sieged = applyBlockadeTransportImpairment(stocked.settlement, blockade, { now }); const vaulted = advanceTreasury(sieged, { interval: tickInterval, tick: worldState.tick, deployment, blockade, rules: simulationRules }); if (vaulted.summary?.legitimacyDelta) treasuryLegitimacyDeltas.set(String(item.id), vaulted.summary.legitimacyDelta);
+    const sieged = applyBlockadeTransportImpairment(stocked.settlement, blockade, { now }); const vaulted = advanceTreasury(sieged, { interval: tickInterval, tick: worldState.tick, deployment, blockade, rules: simulationRules }); if (vaulted.summary?.legitimacyDelta) treasuryLegitimacyDeltas.set(String(item.id), vaulted.summary.legitimacyDelta); if (vaulted.summary?.shortfall || vaulted.summary?.bandCrossed) treasuryNewsStates.push({ id: String(item.id), name: item.name || String(item.id), powerStructure: vaulted.settlement?.powerStructure, band: vaulted.summary.band, previousBand: vaulted.summary.previousBand, bandCrossed: vaulted.summary.bandCrossed, shortfall: vaulted.summary.shortfall > 0, suspension: vaulted.summary.suspension });
     localSettlements.set(String(item.id), vaulted.settlement);
     // Merge rather than replace: advanceTime only returns { clockStages }, but
     // this entry also carries cross-tick drift streaks (tierDrift,
@@ -1976,7 +1979,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const tempoReceiptNews = (tempoContext.active && tempoDeferred.length)
     ? tempoReceiptEntries(tempoDeferred, worldState.tick)
     : [];
-  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...npcVerdictNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...warCostNewsEntries, ...warRulingTransitionNewsEntries, ...coalitionStandingNewsEntries, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries, ...tempoReceiptNews];
+  // W-COIN-2 — the coin beats. EMPTY unless a court shortfalled or a vault crossed a band
+  // this tick (the collector above only pushes on those two), so a dark world and a quiet
+  // lit world both append nothing and `wizardNews` — a golden surface — stays byte-identical.
+  const treasuryEntries = treasuryNewsStates.length ? treasuryNewsEntries({ tick: worldState.tick, now, states: treasuryNewsStates }) : []; const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...npcVerdictNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...warCostNewsEntries, ...warRulingTransitionNewsEntries, ...coalitionStandingNewsEntries, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries, ...treasuryEntries, ...tempoReceiptNews];
   // Thread the pinned `now` (same as applyWorldPulse's regional-news append) so the
   // feed's `updatedAt` stamps the deterministic tick time, not the wall clock. Without
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,

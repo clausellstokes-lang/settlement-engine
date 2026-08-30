@@ -43,6 +43,7 @@ import {
   isCoerciveCell,
   computeTaxYield,
   applyTreasuryLegitimacyDeltas,
+  coffersRead,
   CRIMINAL_INCOME_LABELS,
   isCriminalIncome,
 } from '../../src/domain/worldPulse/treasury.js';
@@ -1103,5 +1104,57 @@ describe('A1.4 stage order — the writer runs inside settlement_clock', () => {
     }
     // The census figure itself, recorded so the transition from armed to deciding is visible.
     expect(emitters, 'a coin-delta emitter landed — this arm is now DECIDING, re-read A1.4').toEqual([]);
+  });
+});
+
+// ── W-COIN-3's PRIMITIVE, LANDING AHEAD OF ITS CALLERS ───────────────────────
+
+describe('coffersRead — ONE reading of "how long can this crown pay its army"', () => {
+  // It ships in this car with NO caller in the tree; both callers — readWarHomeFront and
+  // readCoalitionExpenditure — arrive in the next one. That is the same posture 1a took
+  // with computeCoinTransfer, and it is deliberate: the primitive lands fully unit-tested
+  // and unreached rather than arriving inside the car that also writes its proof.
+  const army = { targetId: 'peer', currentEffectiveStrength: 50 };   // bands to `host`, 25/tick
+  const vault = (coin, openedTick = 0) => ({
+    tier: 'town',
+    institutions: [],
+    economicState: { treasury: { coin, openedTick, lastTick: 0, coinFlows: { taxed: 0, upkeep: 0, transferredIn: 0, transferredOut: 0, shortfall: 0 } } },
+  });
+
+  it('refuses to speak until all THREE conditions hold', () => {
+    const window = TREASURY_TUNING.COVERAGE_OBSERVED_AFTER;
+    // (a) no army in the field.
+    expect(coffersRead(vault(500), { targetId: 'peer' }, 100).observed).toBe(false);
+    expect(coffersRead(vault(500), null, 100).observed).toBe(false);
+    // (b) no ledger — and a MALFORMED ledger reads as absent, never as an empty vault.
+    expect(coffersRead({ tier: 'town' }, army, 100).observed).toBe(false);
+    expect(coffersRead(vault('lots'), army, 100).observed).toBe(false);
+    // (c) the ledger is younger than the observation window. A treasury that opened last
+    // tick is empty because it is NEW, and a war read that could not tell that apart from
+    // a broke crown would manufacture decisive pressure out of lighting a flag.
+    expect(coffersRead(vault(0, 100), army, 100 + window - 1).observed).toBe(false);
+    expect(coffersRead(vault(0, 100), army, 100 + window).observed).toBe(true);
+    // …and an unreadable tick fails inert rather than throwing.
+    expect(coffersRead(vault(0, 100), army, undefined).observed).toBe(false);
+  });
+
+  it('an UNOBSERVED read reports a zero score that its callers must not use as one', () => {
+    // The distinction the dilution hazard turns on: `observed:false` is "there is no such
+    // question here", NOT "the answer is zero". The score field is zero only because a
+    // number must be something; the caller reads `observed` and omits the component.
+    const unobserved = coffersRead(vault(500), null, 100);
+    expect(unobserved).toEqual({ observed: false, score01: 0, coverageTicks: 0, upkeepPerTick: 0 });
+  });
+
+  it('pressure is the INVERSE of coverage, and the horizon is where it ends', () => {
+    const at = (coin) => coffersRead(vault(coin, 0), army, 100);
+    const perTick = at(0).upkeepPerTick;
+    expect(perTick).toBeGreaterThan(0);
+    const horizon = TREASURY_TUNING.COVERAGE_FULL_AT;
+    expect(at(0).score01).toBe(1);                                   // cannot pay a single tick
+    expect(at(perTick * horizon).score01).toBe(0);                   // exactly the horizon
+    expect(at(perTick * horizon * 10).score01).toBe(0);              // clamped, never negative
+    expect(at(perTick * (horizon / 2)).score01).toBeCloseTo(0.5, 10);
+    expect(at(perTick * 3).coverageTicks).toBeCloseTo(3, 10);
   });
 });

@@ -32,6 +32,11 @@ import { formatCount } from '../formatNumber.js';
 // (FP-1 read-model split; see exportPosture.js). Re-exported below so every
 // display surface keeps importing it from here.
 import { deriveExportPosture } from './exportPosture.js';
+// W-COIN-2 — the ONE band derivation and the ONE open-ledger predicate, read rather than
+// re-implemented. This is a LAZY dossier-tab module, so the import touches no first-paint
+// byte; the treasury leaf's own header records that its importers are the pulse kernel,
+// this display read, and tests.
+import { hasOpenTreasury, treasuryBandOf } from '../worldPulse/treasury.js';
 
 export { deriveExportPosture } from './exportPosture.js';
 
@@ -342,6 +347,54 @@ export function deriveGranaryOutlook(settlement) {
     yearEvent,
   ].filter(Boolean).join('. ');
   return { available: true, season: sp.season, band, level, capacity: cap, lastsUntil, yearEvent, display };
+}
+
+// ── W-COIN-2: the treasury's at-a-glance band (A1.21) ────────────────────────
+
+/** Band → the tile's accent, in the palette the neighbouring food and season tiles
+ *  already use, so the glance row reads as ONE row rather than as a bolted-on chip.
+ *  `overflowing` takes the trade-gold rather than a deeper green deliberately: a crown
+ *  sitting on a full vault is a fact about its hoard, not a report card. */
+/** @type {Readonly<Record<string, string>>} */
+const TREASURY_TILE_COLOR = Object.freeze({
+  empty: '#8b1a1a', lean: '#a0762a', adequate: '#1a5a28', full: '#1a5a28', overflowing: '#7A5010',
+});
+
+/**
+ * THE COIN CHIP's read — how full the crown's vault stands, in one closed word.
+ *
+ * A1.21's whole reason for existing, in one sentence: the flag is lit by the preset table
+ * from W-COIN-2 onward, and a lit world must never be GLANCE-BLIND about a stock it
+ * cannot see. So the band rides the dossier's at-a-glance tiles beside the granary — the
+ * literal glance — rather than waiting for W-COIN-4's fuller display row.
+ *
+ * ⛔ NO FIGURE, EVER (§776, the owner's price-heuristics law). The treasury's LEDGER keeps
+ * exact integer coin because a ledger is a record; every SURFACE speaks in bands. The
+ * granary tile beside this one may print months because goods QUANTITIES are facts — coin
+ * is the DM's mandate, and this tile carries a word and nothing else.
+ *
+ * ⛔ AND IT READS THE ONE BAND DERIVATION. The coin news beats band the same fraction from
+ * the same function; a second threshold table written here for the second consumer would
+ * be the §711.6 class exactly — a number with two readings, each internally consistent,
+ * neither ever reddening. `available:false` on any world whose ledger was never opened, so
+ * a dark campaign renders no tile at all and this surface stays dormancy-clean.
+ *
+ * ⚠ THE TILE COLOUR IS RETURNED FROM HERE, AND THAT IS A CONSTRAINT SPEAKING, NOT A TASTE.
+ * `EconomicsTab.jsx` sits EXACTLY on its frozen 600-effective-line ceiling — measured, not
+ * assumed: 600 at the base, 605 with a colour ternary written there — so the chip lands
+ * under the same +0 join idiom the pulse kernel's edits use, and the two lines it does
+ * cost are joined onto lines that already existed. This module is `domain/display` and
+ * already returns rendered prose (`deriveGranaryOutlook().display`), so a colour token is
+ * the same class of thing it was already handing to the same tab.
+ *
+ * @param {DossierSettlementView | null | undefined} settlement
+ * @returns {{ available: boolean, band: string|null, color: string }}
+ */
+export function deriveTreasuryGlance(settlement) {
+  const s = /** @type {Parameters<typeof hasOpenTreasury>[0]} */ (/** @type {unknown} */ (settlement));
+  if (!hasOpenTreasury(s)) return { available: false, band: null, color: TREASURY_TILE_COLOR.adequate };
+  const band = treasuryBandOf(s);
+  return { available: true, band, color: TREASURY_TILE_COLOR[band] || TREASURY_TILE_COLOR.adequate };
 }
 
 /** @type {Readonly<Record<string, string>>} */

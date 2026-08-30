@@ -186,6 +186,31 @@ export const TREASURY_TUNING = Object.freeze({
     Object.freeze({ band: 'host', upToStrength: 55, coin: 25 }),
     Object.freeze({ band: 'great_host', upToStrength: null, coin: 55 }),
   ]),
+  /**
+   * W-COIN-2 — THE DISPLAY BANDS, over `coin / treasuryCapacity(settlement)`. Ordered
+   * emptiest-first; the last row is the catch-all, the same total-by-construction shape
+   * the upkeep table uses.
+   *
+   * `empty` is EXACTLY zero coin rather than a low fraction, deliberately: a crown with
+   * nothing at all is a different sentence from a crown that is merely short, and the
+   * band words are the only thing a reader ever sees. TUNING-SIGNATURE-ADJACENT.
+   */
+  BAND_BY_FILL: Object.freeze([
+    Object.freeze({ band: 'lean', upToFill: 0.25 }),
+    Object.freeze({ band: 'adequate', upToFill: 0.6 }),
+    Object.freeze({ band: 'full', upToFill: 0.95 }),
+    Object.freeze({ band: 'overflowing', upToFill: null }),
+  ]),
+  /** W-COIN-3 — THE COFFERS READ's horizon: the number of ticks of army wages a crown
+   *  must be able to cover before the war reads stop counting money as a pressure at all.
+   *  A court that can pay for this long scores zero; one that cannot pay for a single tick
+   *  scores one. TUNING-SIGNATURE-ADJACENT. */
+  COVERAGE_FULL_AT: 12,
+  /** How many ticks a ledger must have been OPEN before the coffers read is admitted.
+   *  A treasury that opened last tick is empty because it is NEW, not because the crown
+   *  is broke, and a war read that could not tell those apart would manufacture decisive
+   *  pressure out of the act of lighting a flag. TUNING-SIGNATURE-ADJACENT. */
+  COVERAGE_OBSERVED_AFTER: 4,
 });
 
 /**
@@ -479,6 +504,48 @@ export const UPKEEP_LEDGERS = Object.freeze(['deployments']);
  * @type {ReadonlyArray<string>}
  */
 export const UPKEEP_BANDS = Object.freeze(['none', 'token', 'company', 'host', 'great_host']);
+
+/**
+ * TREASURY_BANDS — the closed display vocabulary of how full a vault is (design §4.5,
+ * verbatim), and the ONE band derivation in the estate.
+ *
+ * ⛔⛔ EVERY SURFACE READS THIS ONE FUNCTION, AND THE REASON IS THE PROGRAM'S MOST
+ * EXPENSIVE RECORDED CLASS. A numeric field with no single declared reading acquires a
+ * DIFFERENT reading at every consumer and NOTHING EVER REDS, because each consumer is
+ * internally consistent — measured four times in this program's memory, twice in a single
+ * wave. The coin chip and the coin news beats are two consumers of one number, shipping in
+ * two different cars, and a second threshold table written for the second of them would be
+ * exactly that bug. So the thresholds live in `TREASURY_TUNING.BAND_BY_FILL` and both
+ * surfaces come through here.
+ *
+ * ⚠ THE BAND IS A DISPLAY DERIVATION AND IS NEVER PERSISTED (§4.2): the record holds
+ * absolute integer coin, and per §776 the LEDGER keeps the exact number as record while
+ * every SURFACE speaks bands. Deriving on read is also what keeps a re-tiered settlement
+ * honest, exactly as the derived capacity does.
+ *
+ * @type {ReadonlyArray<string>}
+ */
+export const TREASURY_BANDS = Object.freeze(['empty', 'lean', 'adequate', 'full', 'overflowing']);
+
+/**
+ * How full is this crown's vault, in one closed word? `empty` for a settlement whose
+ * ledger was never opened, too — a court with no ledger and a court with no coin look the
+ * same from outside, and inventing a sixth word for the difference would put a mechanism
+ * on a surface that should only ever carry the world.
+ * @param {TreasurySettlement | null | undefined} settlement
+ * @returns {string} a TREASURY_BANDS member
+ */
+export function treasuryBandOf(settlement) {
+  const coin = coinOf(settlement);
+  if (coin <= 0) return 'empty';
+  const capacity = treasuryCapacity(settlement);
+  if (capacity <= 0) return 'empty';
+  const fill = coin / capacity;
+  for (const row of TREASURY_TUNING.BAND_BY_FILL) {
+    if (row.upToFill === null || fill <= row.upToFill) return row.band;
+  }
+  return 'overflowing';
+}
 
 /**
  * RULING_POWER_BASES — how a ruling-power reading was arrived at, closed.
@@ -1008,6 +1075,52 @@ export function computeUpkeep(available, charges) {
 }
 
 /**
+ * THE COFFERS READ — "how long can this crown pay the army it has in the field?" — and it
+ * is ONE reading serving TWO war surfaces (W-COIN-3: `readWarHomeFront`'s sixth component
+ * and `readCoalitionExpenditure`'s sixth weighted term).
+ *
+ * ⛔⛔ IT LIVES HERE, AND NOT IN EITHER CONSUMER, FOR THE REASON THIS PROGRAM HAS PAID FOR
+ * FOUR TIMES. A numeric field with no single declared reading acquires a different reading
+ * at every consumer and NOTHING EVER REDS, because each consumer is internally consistent.
+ * Two war surfaces scoring "can the crown pay?" from two independently-written expressions
+ * is that bug with the ink still wet. So the coverage, the observed gate, and the 0..1
+ * pressure are computed once, here, beside the unit they are computed from.
+ *
+ * ⛔ `observed: false` IS NOT A ZERO SCORE — the distinction is load-bearing and it is the
+ * §11.2 dilution hazard. `readWarHomeFront` averages `sum / length` over its components,
+ * so a sixth component present at score 0 would DILUTE the other five and change a war
+ * pressure read on a world where the treasury has nothing to say. An unobserved coffers
+ * read must therefore be ABSENT from the component set, never present-and-zero, and the
+ * caller is what enforces that; this function only ever reports which case it is.
+ *
+ * THREE THINGS MUST HOLD before a crown's purse may speak (A1.2 applies the third to BOTH
+ * reads): the ledger is OPEN, a real army is in the field, and the ledger has been open
+ * for at least `COVERAGE_OBSERVED_AFTER` ticks — because a treasury that opened last tick
+ * is empty for a reason that has nothing to do with the crown's finances.
+ *
+ * @param {TreasurySettlement | null | undefined} settlement
+ * @param {{ targetId?: unknown, currentEffectiveStrength?: unknown, maxStartStrength?: unknown } | null | undefined} record
+ * @param {unknown} tick the tick the read is taken at
+ * @returns {{ observed: boolean, score01: number, coverageTicks: number, upkeepPerTick: number }}
+ */
+export function coffersRead(settlement, record, tick) {
+  const unobserved = { observed: false, score01: 0, coverageTicks: 0, upkeepPerTick: 0 };
+  const upkeepPerTick = upkeepCostOfBand(upkeepBandFor(/** @type {Parameters<typeof upkeepBandFor>[0]} */ (record)));
+  if (upkeepPerTick <= 0) return unobserved;             // no army in the field — nothing to price
+  const ledger = treasuryRecordOf(settlement);
+  if (!ledger) return unobserved;                        // the ledger was never opened
+  const now = Number(tick);
+  const openedTick = Number(ledger.openedTick);
+  if (!Number.isFinite(now) || !Number.isFinite(openedTick)
+    || now - openedTick < TREASURY_TUNING.COVERAGE_OBSERVED_AFTER) return unobserved;
+  const coverageTicks = coinOf(settlement) / upkeepPerTick;
+  // Pressure is the INVERSE of coverage: a crown that can pay for the full horizon feels
+  // none, and one that cannot pay for a single tick feels all of it.
+  const score01 = Math.max(0, Math.min(1, 1 - (coverageTicks / TREASURY_TUNING.COVERAGE_FULL_AT)));
+  return { observed: true, score01, coverageTicks, upkeepPerTick };
+}
+
+/**
  * Fold the accumulated per-settlement legitimacy prices onto settlementUpdates through
  * the EXISTING single applicator (`generosityUpdates.applyLegitimacyDeltasToUpdates` —
  * bounded, integer, clamped [0,100], legacy-shape-tolerant). Builds the saveId index the
@@ -1076,6 +1189,7 @@ export function applyTreasuryLegitimacyDeltas(settlementUpdates, legitimacyDelta
  * @returns {{ settlement: TreasurySettlement | null | undefined,
  *             summary: {
  *               tick: number, opened: boolean, coin: number, capacity: number,
+ *               band: string, previousBand: string, bandCrossed: boolean,
  *               suspension: string | null,
  *               receipts: Array<{ kind: string, tick: number }>,
  *               rulingPower: string, rulingBasis: string,
@@ -1142,6 +1256,17 @@ export function advanceTreasury(settlement, options = {}) {
     .../** @type {Record<string, unknown>} */ (/** @type {unknown} */ (settlement)),
     economicState: { ...economicState, treasury: nextRecord },
   });
+  // W-COIN-2 — THE BAND CROSSING, derived on both sides of the tick through the ONE band
+  // reading. Capacity is a function of tier and institutions, neither of which moves
+  // inside a tick, so the two readings differ only by the coin the writer just moved.
+  //
+  // ⛔ AN OPENING IS NOT A CROSSING. On the tick a ledger opens, the "previous" band is
+  // `empty` by construction, so the first taxed tick of every settlement in the world
+  // would cross `empty → lean` on the SAME tick and the feed would carry one beat per
+  // settlement for a bookkeeping event nobody in the world experienced. Suppressed here,
+  // at the source, rather than filtered downstream where the reason would be invisible.
+  const previousBand = treasuryBandOf(priced);
+  const band = treasuryBandOf(nextSettlement);
   return {
     settlement: nextSettlement,
     summary: {
@@ -1149,6 +1274,9 @@ export function advanceTreasury(settlement, options = {}) {
       opened,
       coin: nextRecord.coin,
       capacity: treasuryCapacity(nextSettlement),
+      band,
+      previousBand,
+      bandCrossed: !opened && band !== previousBand,
       suspension,
       receipts,
       // W-COIN-1b — the mint's own account of itself. EPHEMERAL, like every receipt:
