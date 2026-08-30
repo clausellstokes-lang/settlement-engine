@@ -149,6 +149,97 @@ function genesisNeighbourEntry(input) {
   };
 }
 
+/** The settlement tier ladder, lowest first — the ONLY signal genesis diplomacy has. */
+const TIER_RANK = Object.freeze({
+  thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, metropolis: 5,
+});
+
+/**
+ * ASSIGN the ties a realm is born holding (POLIS-1's half of D6).
+ *
+ * ⛔ NO SPATIAL PRIOR, AND THAT IS A RULING RATHER THAN A SHORTCUT (D6). Geography does
+ * not exist when a plan is derived — the pack is iframe-bound and the sites are planned
+ * blind — so a tie cannot honestly cite distance, borders, or a shared coast. What DOES
+ * exist is the realm's own tier pyramid, and upstream's dominant signal is area ratio,
+ * whose closest honest analogue here is the TIER RATIO. So the ladder decides, and a
+ * reader can check every tie against the map key.
+ *
+ * THE LAW, and it is deliberately small:
+ *   · a gap of two or more rungs reads as DOMINANCE — the greater seat becomes overlord
+ *     or patron of the lesser, drawn from the weighted table;
+ *   · a gap of one or none reads as PARITY — alliance, trade, or rivalry;
+ *   · every seat takes AT MOST ONE overlord (the suzerain closure), so the vassalage
+ *     graph is a forest and can never contain a cycle. A world cannot be born owing
+ *     fealty in a circle, and enforcing it here is cheaper than detecting it later.
+ *
+ * BUDGETED, so a large realm is not born as a complete graph: each seat may hold at most
+ * MAX_TIES_PER_SEAT ties. An unbudgeted pass would mint N(N-1)/2 ties — 91 for a large
+ * realm — which is not a realm with a history, it is a realm with no strangers in it.
+ *
+ * Draws come from ONE forked stream. The fork derives from the seed STRING rather than
+ * stream position, so adding this pass cannot displace the map-kind or sites draws that
+ * already exist.
+ *
+ * @param {Array<{ slot: number, tier: string }>} sites the plan's sites, in slot order
+ * @param {{ chance: (p:number)=>boolean, pick: (a:any[])=>any }} rng a forked stream
+ * @returns {Array<{ a: number, b: number, type: string, cause: string }>}
+ */
+export function assignGenesisRelations(sites, rng) {
+  const list = Array.isArray(sites) ? sites : [];
+  if (list.length < 2) return [];
+  const MAX_TIES_PER_SEAT = 2;
+
+  const rankOf = (/** @type {any} */ s) => (TIER_RANK[String(s?.tier)] ?? 0);
+  const ties = /** @type {Array<{a:number,b:number,type:string,cause:string}>} */ ([]);
+  const tieCount = new Map();
+  const hasOverlord = new Set();
+  const countOf = (slot) => tieCount.get(slot) || 0;
+
+  // Deterministic pair order: ascending slot, so the draw sequence is a function of
+  // the plan alone and never of object iteration order.
+  for (let i = 0; i < list.length; i++) {
+    for (let j = i + 1; j < list.length; j++) {
+      const a = list[i];
+      const b = list[j];
+      if (countOf(a.slot) >= MAX_TIES_PER_SEAT || countOf(b.slot) >= MAX_TIES_PER_SEAT) continue;
+
+      const gap = rankOf(a) - rankOf(b);
+      const absGap = gap < 0 ? -gap : gap;
+      /** @type {string} */ let type;
+      /** @type {string} */ let cause;
+
+      if (absGap >= 2) {
+        // The greater seat leads. `relationshipDefinition` reads the FIRST id as the
+        // subject of `sourceRole`, and the materializer passes slot `a` first, so the
+        // selection is spelled from a's point of view.
+        const aIsGreater = gap > 0;
+        if (!rng.chance(0.65)) continue;
+        const dominant = rng.pick(['overlord_of', 'patron_of']);
+        const lesser = absGap >= 2 ? (aIsGreater ? b.slot : a.slot) : null;
+        // THE SUZERAIN CLOSURE: fealty is exclusive. A seat that already owes it to
+        // someone is not offered a second lord; the pair falls through to nothing
+        // rather than being downgraded, because a downgrade would invent a tie the
+        // ladder did not imply.
+        if (dominant === 'overlord_of' && lesser != null && hasOverlord.has(lesser)) continue;
+        type = aIsGreater ? dominant : (dominant === 'overlord_of' ? 'vassal_of' : 'client_of');
+        cause = 'tier_dominance';
+        if (dominant === 'overlord_of' && lesser != null) hasOverlord.add(lesser);
+      } else {
+        if (!rng.chance(0.35)) continue;
+        type = rng.pick(['allied', 'trade_partner', 'rival']);
+        cause = type === 'allied' ? 'mutual_defence'
+          : type === 'trade_partner' ? 'market_exchange'
+            : 'standing_rivalry';
+      }
+
+      ties.push({ a: a.slot, b: b.slot, type, cause });
+      tieCount.set(a.slot, countOf(a.slot) + 1);
+      tieCount.set(b.slot, countOf(b.slot) + 1);
+    }
+  }
+  return ties;
+}
+
 /**
  * Materialize `plan.relations` onto the minted member saves as RECIPROCAL
  * neighbour links.

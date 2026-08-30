@@ -21,7 +21,13 @@ describe('worldCode — round trip', () => {
     const code = encodeWorldCode(world);
     expect(code.startsWith(`${WORLD_CODE_SCHEME}.`)).toBe(true);
     const decoded = decodeWorldCode(code);
-    expect(decoded).toEqual({ version: 1, seed: 'realm-alpha', basicConfig: { realmSize: 'small', tone: 'dramatic_campaign', mapKind: 'highIsland' } });
+    // POLIS-1: new codes mint at payload v2, which selects plan law 2.
+    expect(decoded).toEqual({
+      version: 2,
+      planLaw: 2,
+      seed: 'realm-alpha',
+      basicConfig: { realmSize: 'small', tone: 'dramatic_campaign', mapKind: 'highIsland' },
+    });
   });
 
   it('canonicalizes the preset — drops unknown keys, keeps only the three knobs', () => {

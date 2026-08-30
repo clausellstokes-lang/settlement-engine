@@ -54,14 +54,31 @@ describe('POLIS-2 — the dormant path writes nothing', () => {
     }
   });
 
-  test('the composed bundle carries no neighbour network while the plan car is unlanded', () => {
+  // ⚠ THIS PIN CHANGED SHAPE WHEN POLIS-1 LANDED, AND THE CHANGE IS THE POINT.
+  // It used to read "while the plan car is unlanded" — a TEMPORARY truth, and one that
+  // stopped being true the moment the plan started minting relations. The durable claim
+  // underneath it was never "no realm has ties"; it was "a plan with no ties writes
+  // NOTHING". That is now conditioned on the plan LAW, which is a permanent axis: law 1
+  // is frozen for life, so this arm can never go stale again.
+  test('a LAW 1 realm carries no neighbour network at all', () => {
     const { settlements, plan } = composeInstantWorld({
-      seed: 'polis2-dormant', basicConfig: { realmSize: 'small' },
+      seed: 'polis2-dormant', basicConfig: { realmSize: 'small' }, planLaw: 1,
     });
     expect(plan.relations).toBeUndefined();
     for (const s of settlements) {
       expect(s.settlement?.neighbourNetwork).toBeUndefined();
     }
+  });
+
+  test('a LAW 2 realm DOES carry one — the dormancy above is conditional, not vacuous', () => {
+    // The control that stops the arm above from passing for the wrong reason: if the
+    // composer had simply stopped materializing, both arms would read "undefined" and
+    // the suite would be green over a dead feature.
+    const { settlements } = composeInstantWorld({
+      seed: 'polis2-dormant', basicConfig: { realmSize: 'large' }, planLaw: 2,
+    });
+    const linked = settlements.filter(s => Array.isArray(s.settlement?.neighbourNetwork));
+    expect(linked.length).toBeGreaterThan(0);
   });
 });
 

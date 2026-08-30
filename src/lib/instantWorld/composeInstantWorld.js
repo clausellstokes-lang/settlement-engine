@@ -200,6 +200,7 @@ export function composeInstantWorld({
   contentRuntime,
   idFactory,
   clock,
+  planLaw,
 } = {}) {
   const knobs = normalizeBasicConfig(basicConfig);
   // ── THE SHARED CLOCK, READ EXACTLY ONCE (coupling `shared_now`) ────────────
@@ -223,12 +224,20 @@ export function composeInstantWorld({
   // order does not match the declared contract, so the four couplings the contract
   // records cannot be broken by an edit that merely looks tidy.
   const ctx = /** @type {Record<string, any>} */ ({
-    seed, knobs, name, engine, contentRuntime, now,
+    seed, knobs, name, engine, contentRuntime, now, planLaw,
+    // The knobs AS GIVEN ride beside the normalized ones: the surprise-me sentinels
+    // are erased by normalization (that is what normalization is for), so the plan
+    // needs the raw form to see that a knob was left to the seed.
+    rawBasicConfig: basicConfig,
   });
 
   const steps = [
     { name: 'derivePlan', fn: (/** @type {any} */ c) => {
-      const plan = deriveWorldPlan({ seed: c.seed, basicConfig: c.knobs });
+      const plan = deriveWorldPlan({
+        seed: c.seed,
+        basicConfig: c.rawBasicConfig === undefined ? c.knobs : c.rawBasicConfig,
+        planLaw: c.planLaw,
+      });
       seedRef.plan = plan;
       return { plan };
     } },

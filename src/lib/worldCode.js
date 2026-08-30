@@ -34,8 +34,19 @@ import { fnv1a32 } from '../kernel/proseHash.js';
 
 /** The code-scheme (envelope) version prefix. */
 export const WORLD_CODE_SCHEME = 'w1';
-/** The payload schema version (inside the JSON). */
-export const WORLD_CODE_PAYLOAD_VERSION = 1;
+/**
+ * The payload schema version (inside the JSON) that NEW codes are minted at.
+ *
+ * ⭐⭐ v2, AND v1 CODES REPLAY AS v1 FOREVER (POLIS-1, Q-W3 pre-ruled). The envelope
+ * prefix stays `w1` deliberately: the ENVELOPE (base64url + FNV checksum + dot split)
+ * has not changed, only the payload inside it, and bumping the visible prefix would
+ * have made every existing code LOOK wrong to a user while decoding perfectly.
+ */
+export const WORLD_CODE_PAYLOAD_VERSION = 2;
+/** The original payload schema. Frozen for life — see `decodeWorldCode`. */
+export const WORLD_CODE_PAYLOAD_LEGACY = 1;
+/** Payload versions this build can replay. Unknown versions still fail closed. */
+export const SUPPORTED_PAYLOAD_VERSIONS = Object.freeze([WORLD_CODE_PAYLOAD_LEGACY, WORLD_CODE_PAYLOAD_VERSION]);
 
 // URL-safe base64 alphabet (RFC 4648 §5), padless.
 const B64URL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
@@ -91,11 +102,25 @@ function checksum(str) {
  * @param {any} basicConfig
  * @returns {{ realmSize?: string, tone?: string, mapKind?: string }}
  */
-function canonicalPreset(basicConfig) {
+function canonicalPreset(basicConfig, version) {
   const src = basicConfig && typeof basicConfig === 'object' && !Array.isArray(basicConfig) ? basicConfig : {};
-  /** @type {{ realmSize?: string, tone?: string, mapKind?: string }} */
+  /** @type {{ realmSize?: string, tone?: string, mapKind?: string, magic?: string }} */
   const out = {};
-  for (const key of /** @type {const} */ (['realmSize', 'tone', 'mapKind'])) {
+  // ⛔⛔ THE MAGIC KNOB WAS MISSING, AND THAT WAS A REAL DEFECT — not a v2 feature.
+  // The realm's arcane stance is the FOURTH knob and the one answer that cannot be
+  // changed afterwards without regenerating, because every member is minted under it.
+  // It was absent from this list, so sharing a MUNDANE realm handed the recipient a
+  // MAGICAL one: `normalizeBasicConfig` defaults an absent magic knob to 'yes'. The
+  // world silently gained mages on the way through the code.
+  //
+  // It is folded into the v2 payload rather than back-patched into v1, because adding
+  // a key to v1 would change what an existing code decodes to — and an existing code
+  // must keep naming the world it always named, defect included. A v1 code therefore
+  // still replays magical, forever, which is the honest reading of what it recorded.
+  const keys = version >= WORLD_CODE_PAYLOAD_VERSION
+    ? /** @type {const} */ (['realmSize', 'tone', 'mapKind', 'magic'])
+    : /** @type {const} */ (['realmSize', 'tone', 'mapKind']);
+  for (const key of keys) {
     if (typeof src[key] === 'string') out[key] = src[key];
   }
   return out;
@@ -111,7 +136,11 @@ export function encodeWorldCode(world) {
   const w = world && typeof world === 'object' ? world : {};
   const seed = w.seed == null ? '' : String(w.seed);
   if (!seed) throw new Error('encodeWorldCode: a non-empty seed is required');
-  const payload = { v: WORLD_CODE_PAYLOAD_VERSION, s: seed, c: canonicalPreset(w.basicConfig) };
+  const payload = {
+    v: WORLD_CODE_PAYLOAD_VERSION,
+    s: seed,
+    c: canonicalPreset(w.basicConfig, WORLD_CODE_PAYLOAD_VERSION),
+  };
   const json = JSON.stringify(payload);
   const b64 = bytesToBase64url(new TextEncoder().encode(json));
   return `${WORLD_CODE_SCHEME}.${b64}.${checksum(b64)}`;
@@ -138,8 +167,22 @@ export function decodeWorldCode(code) {
   } catch {
     return null;
   }
-  if (!payload || typeof payload !== 'object' || payload.v !== WORLD_CODE_PAYLOAD_VERSION) return null;
+  if (!payload || typeof payload !== 'object') return null;
+  // Still fails CLOSED on an unknown version — a future v3 code decodes to null here
+  // rather than being replayed under the wrong law.
+  if (!SUPPORTED_PAYLOAD_VERSIONS.includes(payload.v)) return null;
   const seed = payload.s == null ? '' : String(payload.s);
   if (!seed) return null;
-  return { version: payload.v, seed, basicConfig: canonicalPreset(payload.c) };
+  // ⭐ THE VERSION SELECTS THE PLAN LAW, AND THAT IS THE WHOLE PROMISE. A v1 code
+  // replays under the ORIGINAL derivation forever — not "this seed under today's
+  // laws" — so a world someone saved, posted, or played keeps being the world their
+  // code names. Every later improvement to the plan arrives as a new law, reachable
+  // only by codes minted after it.
+  const planLaw = payload.v === WORLD_CODE_PAYLOAD_LEGACY ? 1 : 2;
+  return {
+    version: payload.v,
+    planLaw,
+    seed,
+    basicConfig: canonicalPreset(payload.c, payload.v),
+  };
 }

@@ -21,6 +21,24 @@
  * binding lazy-loads composeInstantWorld), so it costs zero eager bytes.
  */
 import { createPRNG } from '../../kernel/prng.js';
+import { assignGenesisRelations } from './genesisDiplomacy.js';
+
+/**
+ * ⭐⭐ THE PLAN LAW VERSION — POLIS-1, and it is THE PROMISE made mechanical (Q-W3,
+ * pre-ruled: worldCode v2 ships and v1 codes REPLAY AS v1 FOREVER).
+ *
+ * A share code is a world. The commons promise is that anyone who holds an old code
+ * gets back the world it always named — not "the same seed re-run under whatever laws
+ * we have now", which would silently rewrite worlds other people had already saved,
+ * posted, and played. So the plan law is a VERSION, carried in the code, and it selects
+ * which derivation runs. Law 1 is frozen for life; every improvement lands as a new law.
+ *
+ * This is why POLIS-1's shift is safe to declare at all: it moves NEW worlds only, and
+ * a v1 code is byte-identical forever by construction rather than by care.
+ */
+export const PLAN_LAW_VERSION = 2;
+/** The frozen original law — what every pre-POLIS-1 share code replays under. */
+export const PLAN_LAW_LEGACY = 1;
 
 // ── Realm size → tier-mixed settlement count ─────────────────────────────────
 // JUDGMENT (vetoable — "veto realm-N-mapping"): there is NO forward
@@ -126,8 +144,16 @@ const RANDOMIZABLE_MAP_KINDS = Object.freeze(['highIsland', 'lowIsland', 'volcan
 // Nominal FMG map canvas (map-pixel <g>-space). Placement sites are scattered in
 // a central box of this space so the staged settlements sit on-screen over the
 // generated geography; every site is freely draggable at t=0, so exact
-// coordinates are cosmetic, not load-bearing (they are excluded from the
-// coherence contract and the structural fingerprint).
+// coordinates are COSMETIC IN PLAY — a user may drag any of them anywhere.
+//
+// ⚠ CORRECTED BY POLIS-1 (A1.2.5). This comment used to add "…and they are excluded
+// from the coherence contract and the structural fingerprint". The second half was
+// FALSE and had been since the fingerprint was written: `instantWorldFingerprint`
+// maps `{ slot, tier, x, y }` for every site, so the coordinates ARE fingerprinted
+// and a change to this scatter is a same-seed shift that the determinism pin will
+// catch. Cosmetic to the PLAYER is not the same as absent from the CONTRACT, and a
+// comment that conflated the two would have told the next plan-touching lane its
+// jitter was free.
 const MAP_W = 1000;
 const MAP_H = 600;
 const MARGIN_X = 150;
@@ -160,6 +186,27 @@ export function normalizeBasicConfig(basicConfig = {}) {
 }
 
 /**
+ * THE SURPRISE-ME SENTINEL, generalized (POLIS-1, review candidate #11a).
+ *
+ * The map-kind knob already had this device: `''` means "you choose", and the plan
+ * RESOLVES it from the seed so the world stays replayable. realmSize and tone had no
+ * such rung — `normalizeBasicConfig` coerced anything unknown, `''` included, straight
+ * to the fixed default, so a DM who wanted a surprise realm had to pick one anyway.
+ *
+ * This extends THE EXISTING IDIOM rather than importing upstream's per-slider gaussian
+ * jitter: same sentinel, same resolved/requested split, one fork per knob. Jittering
+ * the pyramid COUNTS was considered and refused — the authored counts are bound to two
+ * external consumers (the analytics settlement-count bands and the canonize-time
+ * simulation cap), and a jittered small-of-four falls outside every named band. Choosing
+ * among the three authored pyramids gets the surprise without breaking either.
+ *
+ * LAW 2 ONLY. Under law 1 the sentinel is not consulted at all, so a v1 code that
+ * happens to carry `''` resolves to the fixed default exactly as it always did.
+ * @param {unknown} v
+ */
+export function isRandomSentinel(v) { return v === ''; }
+
+/**
  * Derive the full, deterministic plan from the outer seed + basic knobs.
  *
  * @param {{ seed?: string, basicConfig?: { realmSize?: string, tone?: string, mapKind?: string, magic?: string } }} [args]
@@ -174,15 +221,40 @@ export function normalizeBasicConfig(basicConfig = {}) {
  *   sites: Array<{ slot:number, tier:string, seed:string, x:number, y:number, burgId:string }>,
  * }}
  */
-export function deriveWorldPlan({ seed, basicConfig } = {}) {
+export function deriveWorldPlan({ seed, basicConfig, planLaw } = {}) {
   const outerSeed = String(seed == null ? '' : seed);
   const knobs = normalizeBasicConfig(basicConfig);
+  // A law we do not recognise is treated as the LEGACY law rather than the newest one.
+  // Fail-closed matters here in a specific way: guessing "newest" for an unknown code
+  // would hand someone a DIFFERENT world than their code names, which is the one
+  // outcome the version exists to prevent.
+  const law = planLaw === PLAN_LAW_LEGACY ? PLAN_LAW_LEGACY
+    : planLaw === PLAN_LAW_VERSION ? PLAN_LAW_VERSION
+      : (planLaw == null ? PLAN_LAW_VERSION : PLAN_LAW_LEGACY);
   const rng = createPRNG(`instantWorld::${outerSeed}`);
 
   // Resolve a concrete map template deterministically when the knob is "Random".
+  // ⛔ THIS DRAW STAYS FIRST AND UNCONDITIONAL IN BOTH LAWS. Every law-2 addition below
+  // draws from its OWN labelled fork, and a fork derives from the seed STRING rather
+  // than from stream position — so none of them can displace this roll. That is what
+  // makes law 1 and law 2 agree on the map template for the same seed.
   const resolvedMapKind = String(knobs.mapKind || rng.pick([...RANDOMIZABLE_MAP_KINDS]) || RANDOMIZABLE_MAP_KINDS[0]);
 
-  const size = REALM_SIZES[/** @type {keyof typeof REALM_SIZES} */ (knobs.realmSize)] || REALM_SIZES[DEFAULT_REALM_SIZE];
+  // ── The surprise-me sentinels (law 2 only) ─────────────────────────────────
+  const requestedRealmSize = basicConfig && typeof basicConfig === 'object' ? basicConfig.realmSize : undefined;
+  const requestedTone = basicConfig && typeof basicConfig === 'object' ? basicConfig.tone : undefined;
+  let resolvedRealmSize = knobs.realmSize;
+  let resolvedTone = knobs.tone;
+  if (law >= PLAN_LAW_VERSION) {
+    if (isRandomSentinel(requestedRealmSize)) {
+      resolvedRealmSize = String(rng.fork('pyramid').pick(Object.keys(REALM_SIZES)));
+    }
+    if (isRandomSentinel(requestedTone)) {
+      resolvedTone = String(rng.fork('tone').pick(TONES.map(t => t.id)));
+    }
+  }
+
+  const size = REALM_SIZES[/** @type {keyof typeof REALM_SIZES} */ (resolvedRealmSize)] || REALM_SIZES[DEFAULT_REALM_SIZE];
   const tiers = size.tiers;
   // Placement scatter — a seeded jitter in the central box. Largest member (slot
   // 0) anchors near centre; the rest scatter around it. Independent RNG fork so
@@ -207,10 +279,29 @@ export function deriveWorldPlan({ seed, basicConfig } = {}) {
     };
   });
 
+  // ── The realm's founding ties (law 2 only) ────────────────────────────────
+  // ABSENT WHEN DARK: under law 1 the key is never written, so a v1 plan is
+  // byte-identical to a pre-POLIS-1 plan — no key, not an empty array.
+  const relations = law >= PLAN_LAW_VERSION
+    ? assignGenesisRelations(sites, rng.fork('diplomacy'))
+    : undefined;
+
   return {
     seed: outerSeed,
-    realmSize: knobs.realmSize,
-    tonePresetId: knobs.tone,
+    // The plan law that DERIVED this plan, recorded so a reader never has to infer it
+    // from the shape of what it produced — but ABSENT UNDER LAW 1, because law 1's
+    // whole promise is that its plan is byte-identical to the plan this module
+    // produced before the version existed. Absence means law 1; it cannot mean
+    // anything else, since every later law writes the key.
+    ...(law >= PLAN_LAW_VERSION ? { planLaw: law } : {}),
+    realmSize: resolvedRealmSize,
+    tonePresetId: resolvedTone,
+    // The knobs AS ASKED, preserved beside the resolved answers — the same
+    // resolved/requested split `mapKind`/`requestedMapKind` already keeps, so a
+    // surprise-me realm can still say that it was a surprise.
+    ...(law >= PLAN_LAW_VERSION && isRandomSentinel(requestedRealmSize) ? { requestedRealmSize: '' } : {}),
+    ...(law >= PLAN_LAW_VERSION && isRandomSentinel(requestedTone) ? { requestedTone: '' } : {}),
+    ...(relations && relations.length ? { relations } : {}),
     // The arcane stance rides BESIDE the tone preset, and for the same reason:
     // both are answers the composer STAMPS (tone → the campaign's rules, magic →
     // every member's config), never gates it consults later. It draws no rng, so
