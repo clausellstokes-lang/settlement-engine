@@ -44,7 +44,12 @@ import {
   strongestLiveGrievance01,
   EMPTY_PATCH,
 } from '../../src/domain/worldPulse/razingExecution.js';
-import { RAZING_TUNING, razingEdgeFlips, razingGate, readRelationshipExtremity } from '../../src/domain/worldPulse/razing.js';
+import {
+  RAZING_TUNING, razingEdgeFlips, razingGate, readRelationshipExtremity, razingOutcomeIdFor,
+} from '../../src/domain/worldPulse/razing.js';
+// HK-4: the latch's window is the metronome's own, so the pin reads it from the
+// metronome rather than re-typing the number a second time inside the test.
+import { DRIFT_REEMIT_COOLDOWN_TICKS } from '../../src/domain/worldPulse/worldPulseFeedCuration.js';
 import {
   INSTITUTION_STATUS_TUNING,
   deriveInstitutionStatus,
@@ -1026,5 +1031,117 @@ describe('R2 THE CLOSED LOOP, WIRED — the ledger travels as a patch, and the c
       worldState: {}, snapshot: {}, razerId: 'Karrow', victimId: 'Thornwall',
       tick: 40, population: 1200,
     })).toBeNull();
+  });
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // HK-4 — THE RE-EMIT LATCH. `metronomeCooldownLint` only asks whether this file
+  // NAMES a cooldown mechanism; that is a word scan, and a fix that satisfied it
+  // without latching anything would pass. These pins are what make the fix real,
+  // and each of them fails if the gate in `razingSiegeEmission` is deleted.
+  // ───────────────────────────────────────────────────────────────────────────
+  describe('HK-4 · the razing does not burn the same town twice inside the metronome window', () => {
+    /** A pulseHistory record carrying one prior razing of Karrow → Thornwall. */
+    const priorBurning = (tick, road = 'initiation', victim = 'Thornwall') => ({
+      tick,
+      selectedOutcomes: [{
+        id: razingOutcomeIdFor({ road, razerId: 'Karrow', victimId: victim, tick }),
+        ruleId: 'war_layer_razing',
+      }],
+    });
+
+    test('the latch fires: a second fall inside the window emits NOTHING, with the first as its control', () => {
+      const { worldState, snapshot } = withMourner({ warExhaustion: { Karrow: 1 } });
+      // THE POSITIVE CONTROL FIRST, in the same test and on the same fixture: with
+      // no history this exact drive DOES emit, so the absence below is the latch
+      // holding rather than the fixture failing to reach the emitter at all.
+      expect(EMISSION(worldState, snapshot)?.plan.road).toBe('initiation');
+      worldState.pulseHistory = [priorBurning(38)];
+      expect(EMISSION(worldState, snapshot)).toBeNull();
+      // AND THE WHOLE EMISSION IS SUPPRESSED, not merely the headline: no license
+      // is minted, so a second burning cannot arm a second set of avengers.
+      expect(worldState.spatialLedgers.vengeanceLicenses).toBeUndefined();
+    });
+
+    test('the window is the metronome\'s own, and it EXPIRES — the same pair burns again once it has passed', () => {
+      const { worldState, snapshot } = withMourner({ warExhaustion: { Karrow: 1 } });
+      // Exactly one tick outside DRIFT_REEMIT_COOLDOWN_TICKS (6): tick 40 - 34 = 6.
+      worldState.pulseHistory = [priorBurning(34)];
+      expect(EMISSION(worldState, snapshot)?.plan.road).toBe('initiation');
+      // …and one tick inside it (40 - 35 = 5) is still held down. The pair of
+      // readings is what pins the boundary rather than merely the behaviour.
+      worldState.pulseHistory = [priorBurning(35)];
+      expect(EMISSION(worldState, snapshot)).toBeNull();
+    });
+
+    test('the latch is PER PAIR — another town burned by the same army does not shield this one', () => {
+      const { worldState, snapshot } = withMourner({ warExhaustion: { Karrow: 1 } });
+      worldState.pulseHistory = [priorBurning(38, 'initiation', 'Marrowfen')];
+      expect(EMISSION(worldState, snapshot)?.plan.road).toBe('initiation');
+    });
+
+    test('BOTH ROADS ARE WALKED — a prior VENGEANCE burning latches an initiation one', () => {
+      // The road rides in the id, so a reader that checked only one spelling would
+      // let the other through. RAZING_ROADS is walked whole.
+      const { worldState, snapshot } = withMourner({ warExhaustion: { Karrow: 1 } });
+      worldState.pulseHistory = [priorBurning(38, 'vengeance')];
+      expect(EMISSION(worldState, snapshot)).toBeNull();
+    });
+
+    test('ATTRIBUTION IS BY RE-MINT — a razing id that does not reconstruct latches nothing', () => {
+      const { worldState, snapshot } = withMourner({ warExhaustion: { Karrow: 1 } });
+      // A real razing, at the right tick, with the right ruleId — but Everdeep did
+      // it, not Karrow. A parser splitting the id on '.' could take the wrong token;
+      // equality against the freshly minted id cannot.
+      worldState.pulseHistory = [{
+        tick: 38,
+        selectedOutcomes: [{
+          id: razingOutcomeIdFor({ road: 'initiation', razerId: 'Everdeep', victimId: 'Thornwall', tick: 38 }),
+          ruleId: 'war_layer_razing',
+        }],
+      }];
+      expect(EMISSION(worldState, snapshot)?.plan.road).toBe('initiation');
+    });
+
+    test('A FUTURE-DATED HISTORY CANNOT SILENCE THE RAZING FOREVER', () => {
+      // A forged or imported save whose record sits ahead of the world's clock. The
+      // age guard refuses it rather than treating "not yet happened" as "just
+      // happened", which would latch every razing for the rest of the campaign.
+      const { worldState, snapshot } = withMourner({ warExhaustion: { Karrow: 1 } });
+      worldState.pulseHistory = [priorBurning(4000)];
+      expect(EMISSION(worldState, snapshot)?.plan.road).toBe('initiation');
+    });
+
+    test('the reader is TOTAL over a junk history and reads the record tick when the outcome carries none', () => {
+      // Two claims in one drive because they share a fixture. FIRST: nothing in a
+      // malformed history throws or latches.
+      const { worldState, snapshot } = withMourner({ warExhaustion: { Karrow: 1 } });
+      worldState.pulseHistory = [null, {}, { selectedOutcomes: null }, { selectedOutcomes: [null, 7, {}] }];
+      expect(EMISSION(worldState, snapshot)?.plan.road).toBe('initiation');
+      // SECOND: the razing outcome stamps no `tick` of its own, so the record's tick
+      // is the only date there is — and the latch above already depends on that
+      // fallback. `consequenceOutcomes` is the mechanical read-model's preferred
+      // half, and it is honoured here exactly as every other domain reader honours it.
+      worldState.pulseHistory = [{
+        tick: 38,
+        consequenceOutcomes: [{
+          id: razingOutcomeIdFor({ road: 'initiation', razerId: 'Karrow', victimId: 'Thornwall', tick: 38 }),
+          ruleId: 'war_layer_razing',
+        }],
+        selectedOutcomes: [],
+      }];
+      expect(EMISSION(worldState, snapshot)).toBeNull();
+    });
+
+    test('the window is DERIVED from the metronome rather than re-typed here', () => {
+      // The claim the module header makes about itself, executed: one number, one
+      // home. If somebody authors a second constant this reds.
+      expect(DRIFT_REEMIT_COOLDOWN_TICKS).toBe(6);
+      expectAbsentWithAnchor(
+        CODE(EXECUTION_SOURCE),
+        'RAZING_REEMIT_COOLDOWN_TICKS',
+        'DRIFT_REEMIT_COOLDOWN_TICKS',
+        'HK-4 borrows the metronome window instead of authoring a second one',
+      );
+    });
   });
 });

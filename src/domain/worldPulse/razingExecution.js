@@ -86,6 +86,16 @@
  * composite has already read. A deeper wound burns harder, and the number is
  * reproducible from the world rather than from a die.
  *
+ * ── HK-4: THE EMISSION SELF-LIMITS, BECAUSE THE METRONOME CANNOT REACH IT ────
+ * The razing outcome carries a `condition`, which `isDriftOnlyOutcome` treats as
+ * a state change and therefore exempts from the feed's re-emit metronome; its id
+ * carries the tick, so no upstream dedup catches a repeat either. A razing also
+ * leaves no occupation, so the same besieger can fall on the same town again.
+ * `razingReemitCooldownActive` is the once-per-state-change latch that closes
+ * that door, at the metronome's OWN window and with no new persisted field —
+ * see its contract for why the window is borrowed and why attribution re-mints
+ * the id instead of parsing it.
+ *
  * PURE over its arguments: no rng, no wall-clock, no mutation, no writes. Every
  * fold is codepoint-sorted.
  */
@@ -93,6 +103,7 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import {
   RAZING_TUNING,
+  RAZING_ROADS,
   razingGate,
   readRelationshipExtremity,
   conservedSack,
@@ -102,6 +113,12 @@ import {
   razingSpoils,
   razingOutcomeIdFor,
 } from './razing.js';
+// HK-4 — THE RE-EMIT LATCH'S TWO BORROWED PARTS, both deliberately borrowed rather
+// than re-spelled: the metronome's OWN window (see `razingReemitCooldownActive`) and
+// the estate's ONE history read-model for simulation mechanics. A second reader of
+// pulseHistory here would be a second answer to "what happened last tick".
+import { DRIFT_REEMIT_COOLDOWN_TICKS } from './worldPulseFeedCuration.js';
+import { outcomesForMechanicalHistory } from './pulseHelpers.js';
 // THE BELIEF STAGE, READ-ONLY (CR-WR8-G). Readers only, and the arrow never
 // reverses — see the direction law above.
 import {
@@ -708,6 +725,76 @@ export function razingPlanFor({
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
+ * HK-4 — THE ONCE-PER-STATE-CHANGE LATCH, AND WHY THIS EMITTER NEEDS ONE.
+ *
+ * ⚠️⚠️ THE RAZING OUTCOME IS METRONOME-EXEMPT BY CONSTRUCTION, NOT BY ACCIDENT.
+ * `isDriftOnlyOutcome` (`worldPulseFeedCuration.js`) refuses to treat any outcome
+ * carrying a `condition` key as drift, because a state CHANGE must always be
+ * allowed to speak. The razing outcome carries one — a `war_pressure` condition on
+ * the victim — so it never reaches `isMetronomeRepeat` and the feed's 240-cap has
+ * no defence against it. Its id also carries the TICK, so no id-equality dedup
+ * upstream can catch a repeat either. The estate has fixed this exact class more
+ * than once (E4-2a, worldpulse-religion-trade-2, and the three sources
+ * `metronomeCooldownLint` names), and the cure each time is a per-arc cooldown.
+ *
+ * WHAT COULD ACTUALLY REPEAT. A razing leaves no occupation, no garrison and no
+ * terms — the victor rides home — so the victim is not taken off the board and the
+ * war does not end. The same besieger can fall on the same town again, and each
+ * fall would emit another "X burns Y", another sack, another set of institution
+ * stamps and another license mint. This is the flood, and it is also simply wrong:
+ * a town does not burn twice in a fortnight at the same hands.
+ *
+ * ⚠️ THE WINDOW IS BORROWED, NOT AUTHORED. It is the metronome's own
+ * `DRIFT_REEMIT_COOLDOWN_TICKS`, because the latch's entire claim is "restore the
+ * suppression this outcome structurally escapes" — a fresh constant here would be a
+ * second spelling of the same window, free to drift away from the thing it mirrors.
+ * No tuning band is minted and no persisted field is added.
+ *
+ * ⚠️⚠️ ATTRIBUTION IS BY RE-MINT, NEVER BY PARSING — razing.js's own law, obeyed
+ * here rather than restated. Settlement ids may contain dots, so a reader that split
+ * the outcome id on `.` could mis-attribute a burning, and through R2's license
+ * machinery a mis-attributed atrocity is a warrant. This walks the closed
+ * `RAZING_ROADS` vocabulary and compares whole ids for EQUALITY, using the same
+ * `razingOutcomeIdFor` the emission mints with.
+ *
+ * ⚠️ A FUTURE-DATED RECORD DOES NOT LATCH. `now - at >= 0` is required as well as
+ * `< the window`, so a forged or imported history whose tick sits ahead of the
+ * world's cannot silence every razing forever. Same discipline as `heldLicense`
+ * validating on the way out.
+ *
+ * PURE READ: no writes, no rng, no wall clock.
+ *
+ * @param {unknown} worldState the tick's OPENING picture, which is where pulseHistory lives
+ * @param {string} razerId @param {string} victimId @param {unknown} tick
+ * @returns {boolean} true when this exact pair burned inside the window
+ */
+export function razingReemitCooldownActive(worldState, razerId, victimId, tick) {
+  const razer = String(razerId || '');
+  const victim = String(victimId || '');
+  if (!razer || !victim) return false;
+  const now = Number.isFinite(Number(tick)) ? Number(tick) : 0;
+  for (const record of arrayOf(recordOf(worldState).pulseHistory)) {
+    for (const raw of outcomesForMechanicalHistory(
+      /** @type {Parameters<typeof outcomesForMechanicalHistory>[0]} */ (record),
+    )) {
+      const outcome = recordOf(raw);
+      if (outcome.ruleId !== 'war_layer_razing') continue;
+      const stamped = Number(outcome.tick);
+      const recorded = Number(recordOf(record).tick);
+      const at = Number.isFinite(stamped) ? stamped : (Number.isFinite(recorded) ? recorded : null);
+      if (at == null) continue;
+      const age = now - at;
+      if (age < 0 || age >= DRIFT_REEMIT_COOLDOWN_TICKS) continue;
+      for (const road of RAZING_ROADS) {
+        if (razingOutcomeIdFor({ road, razerId: razer, victimId: victim, tick: at })
+          === String(outcome.id)) return true;
+      }
+    }
+  }
+  return false;
+}
+
+/**
  * THE SEVERITY OF THIS PARTICULAR QUARREL, read off the world rather than passed
  * in. `razingSeverityFrom` takes the magnitudes because the extremity composite
  * reports only which conjuncts were met; this reads those magnitudes from the
@@ -1009,6 +1096,17 @@ export function razingSiegeEmission({
     strengthFor,
   });
   if (!decision.active || decision.verdict.permitted !== true) return null;
+  // HK-4 — THE LATCH, AND IT SUPPRESSES THE WHOLE EMISSION RATHER THAN THE HEADLINE.
+  // A razing is a sack, a set of institution stamps, a license mint and a witness
+  // judgment as well as a sentence; letting the mechanisms through while damping the
+  // prose would be the worst of both — the town burns twice and the feed hides it.
+  // ⚠️ THE SUPPRESSED SIEGE IS NOT DISCARDED: the mouth's `!razed` branch runs, so
+  // the second fall becomes an ORDINARY CONQUEST, which is the honest answer — the
+  // town has already been burned, and taking it is the other thing an army can do.
+  // Read from `worldState` (the tick's OPENING picture) like every other decision
+  // input, never from the accumulator: what the world remembers cannot be something
+  // this same tick just did.
+  if (razingReemitCooldownActive(worldState, razer, victim, tick)) return null;
   const heat = razingSeverityForPair(worldState, snapshot, razer, victim, decision.extremity);
   const causeRef = `razing.${razer}.${victim}.${Math.trunc(Number(tick) || 0)}`;
   // The caller may hand its own edge list (the tests do, to walk the three

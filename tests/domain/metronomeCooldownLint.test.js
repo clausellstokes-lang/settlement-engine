@@ -56,8 +56,19 @@ const NAMED_STANDING_STATE = ['religiousContest.js', 'deityStanceLane.js', 'trad
 
 // The current cooldown-NAMING emitter set (BASELINE — may only GROW). A source that
 // drops out of this set has silently lost its cooldown mechanism.
+// razingExecution.js JOINED THIS SET at HK-4 (2026-08-30) rather than being
+// grandfathered into the non-cooldown baseline below. Its `war_layer_razing` outcome
+// carries a `condition`, so isDriftOnlyOutcome exempts it and its id carries the tick,
+// so no upstream dedup catches a repeat either — and a razing leaves no occupation, so
+// the same besieger can fall on the same town again. `razingReemitCooldownActive` is
+// the once-per-state-change latch, at the metronome's OWN DRIFT_REEMIT_COOLDOWN_TICKS
+// window (imported, not re-typed) and with no new persisted field. It is listed HERE
+// because this arm's message names the regression precisely — "used to name a cooldown
+// and no longer does" — where the SHRINK-only arm below would report the same deletion
+// only as a new offender.
 const COMPLIANT_BASELINE = [
   'deityStanceLane.js', 'factionCompetition.js', 'npcAgency.js',
+  'razingExecution.js',
   'relationshipRulesAdversarial.js', 'relationshipRulesCore.js',
   'religiousContest.js', 'tradeWar.js',
 ];

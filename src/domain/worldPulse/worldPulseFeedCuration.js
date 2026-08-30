@@ -104,7 +104,19 @@ export function newsEntryForOutcome(outcome, tick, status = 'applied') {
   };
 }
 
-const DRIFT_REEMIT_COOLDOWN_TICKS = 6;
+/**
+ * THE METRONOME'S WINDOW — how long an identical applied entry is held down
+ * before the feed will say it again.
+ *
+ * ⚠️ EXPORTED FOR THE OUTCOMES THE METRONOME CANNOT REACH (HK-4). `isDriftOnlyOutcome`
+ * below EXEMPTS any outcome carrying a discrete-transition key, so a source that
+ * stamps a `condition`/`stressor` never reaches `isMetronomeRepeat` at all and must
+ * self-limit at its own door. Those doors read THIS number rather than authoring a
+ * second one: the whole claim such a latch makes is "restore the metronome's
+ * suppression to an outcome that structurally escapes it", and two spellings of the
+ * window would let the restoration drift away from the thing it restores.
+ */
+export const DRIFT_REEMIT_COOLDOWN_TICKS = 6;
 
 export function isDriftOnlyOutcome(/** @type {PulseOutcome} */ outcome) {
   if (outcome.curationClass === 'transition' || outcome.partySourced) return false;
