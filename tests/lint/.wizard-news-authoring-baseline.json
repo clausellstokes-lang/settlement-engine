@@ -191,7 +191,7 @@
       "path": "src/domain/worldPulse/magicRegimeLifecycle.js",
       "line": 229,
       "column": 17,
-      "signature": "109c48c04cb1f412",
+      "signature": "84e4ffeb190aadba",
       "issues": [
         "missing-field:id",
         "missing-field:settlementIds",

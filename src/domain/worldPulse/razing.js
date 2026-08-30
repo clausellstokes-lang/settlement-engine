@@ -373,16 +373,16 @@ export function readRelationshipExtremity(input) {
 
   const receipt = extreme
     ? `${partyId} stands at the extreme with ${counterpartId}: the border is openly hostile,`
-      + ` the resentment (${round4(resentment)}) is at what open hostility itself implies, and the`
-      + ` grievance between them is still live (${round4(grievance)}).`
+      + ` the resentment has reached what open hostility itself implies, and the`
+      + ` grievance between them is still live.`
     : `${partyId} is not at the extreme with ${counterpartId} — ${missing.length === 3
       ? 'the border is not hostile, the resentment has not reached what hostility implies, and no live grievance stands'
       : missing.map((m) => (
         m === 'edge_type'
           ? `the border is ${edgeType || 'unread'} rather than hostile`
           : m === 'resentment'
-            ? `the resentment (${round4(resentment)}) is under what open hostility itself implies (${T.HOSTILE_RESENTMENT_BASELINE})`
-            : `no live grievance stands between them (${round4(grievance)})`
+            ? 'the resentment is under what open hostility itself implies'
+            : 'no live grievance stands between them'
       )).join(', ')}.`;
 
   return { extreme, edgeTypeMet, resentmentMet, grievanceMet, missing, receipt };

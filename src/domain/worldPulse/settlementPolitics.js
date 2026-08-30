@@ -350,12 +350,15 @@ function leaderTiePosture(relationships, npcStates, aLeaderNpcId, bLeaderNpcId) 
     const n2 = String(rel?.npc2Id ?? '');
     if (!((n1 === aGen && n2 === bGen) || (n1 === bGen && n2 === aGen))) continue;
     const type = String(rel?.type ?? '').toLowerCase();
-    const strength = String(rel?.strength ?? '').toLowerCase();
+    // TE-HERALD-1: named `...Word` because it IS a word. The prose-numerics census reads
+    // a binding whose last camel token is `strength` as a scalar, and this one never was.
+    // The rename is the whole cure; the emitted sentence is byte-identical.
+    const strengthWord = String(rel?.strength ?? '').toLowerCase();
     if (HOSTILE_TIE_TYPES.has(type)) {
-      const hard = HARD_BLOCK_STRENGTHS.has(strength);
+      const hard = HARD_BLOCK_STRENGTHS.has(strengthWord);
       return {
         posture: hard ? -2 : -1,
-        reason: `a ${strength || ''} ${type === 'enemy' ? 'enmity' : 'rivalry'} between the leaders`.replace(/\s+/g, ' ').trim(),
+        reason: `a ${strengthWord || ''} ${type === 'enemy' ? 'enmity' : 'rivalry'} between the leaders`.replace(/\s+/g, ' ').trim(),
       };
     }
     if (WARM_TIE_TYPES.has(type)) {

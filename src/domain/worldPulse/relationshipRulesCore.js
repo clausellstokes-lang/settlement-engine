@@ -60,7 +60,7 @@ function neutralRules(ctx) {
         probability: 0.12 + relState.trust * 0.18 + combinedTrade * 0.08,
         reasons: [
           "Neutral neighbors have enough trust and low conflict pressure for trade ties to formalize.",
-          `Trust runs ${relationLevelWordFor(relState.trust)}; resentment ${relationLevelWordFor(relState.resentment)}.`,
+          `Trust is ${relationLevelWordFor(relState.trust)}; resentment ${relationLevelWordFor(relState.resentment)}.`,
         ],
         relationshipPatch: {
           trust: clamp01(relState.trust + 0.03),

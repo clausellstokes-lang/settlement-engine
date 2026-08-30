@@ -376,7 +376,7 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
         headline: pickLine(RESOURCE_NEWS.discovery.headline, `${cid}:${resource}:${tick}:h`, { label, labelLower: label.toLowerCase(), name }),
         summary: pickLine(RESOURCE_NEWS.discovery.summary, `${cid}:${resource}:${tick}:s`, { label, labelLower: label.toLowerCase(), name }),
         reasons: [
-          `Sustained prospecting pressure has built to ${Math.round(nextAcc * 100)}% (an arc, not a decree).`,
+          'Season after season of prospecting had been building toward this — an arc, not a decree.',
           `${label} is terrain-legal here — the ground could always have held it.`,
           `Resource class: ${taxonomy.kind}.`,
         ],

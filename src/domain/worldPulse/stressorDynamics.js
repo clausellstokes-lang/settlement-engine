@@ -897,7 +897,7 @@ function interpretOriginContext(/** @type {any} */ type, /** @type {any} */ sett
           ? `${leading.name} leads the conspiracy; the field: ${contest.challengers.map(c => c.name).join(', ')}.`
           : 'The conspiracy is still choosing its champion.',
         contest.incumbent.gated
-          ? `${contest.incumbent.name || 'The seat'} can still present a case (weight ${contest.incumbent.amplifiedWeight} at ×${contest.incumbent.govMultiplier} legitimacy).`
+          ? `${contest.incumbent.name || 'The seat'} can still present a case; what legitimacy it holds is what keeps it in the room.`
           : `${contest.incumbent.name || 'The seat'}'s amplified standing no longer ranks among the top three powers. Its case will not even be heard.`,
         ...(sponsor ? ['Foreign coin moves beneath it. A hostile neighbor is bankrolling the plot.'] : []),
       ].join(' '),

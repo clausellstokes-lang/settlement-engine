@@ -427,9 +427,15 @@ export function scoreCampaignEV({ believedSelf, believedTarget, web, atrocityBra
   const timeDiscount = clamp01(drain + adaptation + counterplay + clamp01(atrocityBrake01));
 
   const indirectEV = clamp01(projectedAssaultEV - timeDiscount);
+  // TE-HERALD-1. `directEV`, `indirectEV` and `timeDiscount` all leave this function
+  // typed on the returned object, so the receipt says which way the reckoning fell and
+  // WHY, rather than showing the two expected values it was decided between.
+  const webWord = web.fragility01 >= 0.5
+    ? 'the target leans on single roads for much of what it needs'
+    : "the target's supply is spread thin enough to be worth cutting";
   const receipt = margin < 0
-    ? `A direct assault is a losing bet (margin ${margin.toFixed(2)}); the target's web is ${(web.fragility01 * 100).toFixed(0)}% single-sourced — strangle first (indirect ${indirectEV.toFixed(2)} vs direct ${directEV.toFixed(2)}).`
-    : `The target can be taken directly (margin ${margin.toFixed(2)}); the slow strangulation is not worth the ${timeDiscount.toFixed(2)} time cost (indirect ${indirectEV.toFixed(2)} vs direct ${directEV.toFixed(2)}).`;
+    ? `A direct assault is a losing bet, and ${webWord} — strangle it first.`
+    : 'The target can be taken directly, and the slow strangulation would cost more time than it is worth.';
   return { directEV, indirectEV, weakenReduction, timeDiscount, nStages, receipt };
 }
 
@@ -904,7 +910,7 @@ function mintNews(aggressorId, targetId, name, ev, stages, tick) {
     summary: `${A} cannot (or will not) take ${Tn} head-on. It plans to strangle ${Tn}'s supply web first — ${modes.join(', ')} — before the reckoning.`,
     reasons: [
       ev.receipt,
-      `The plan sequences ${stages.length} stage${stages.length === 1 ? '' : 's'} against ${Tn}'s suppliers (indirect EV ${ev.indirectEV.toFixed(2)} vs direct ${ev.directEV.toFixed(2)}).`,
+      `The plan sequences ${stages.length} stage${stages.length === 1 ? '' : 's'} against ${Tn}'s suppliers, and by the planners' own reckoning that is the cheaper road to the same end.`,
     ],
     settlementIds: [String(aggressorId), String(targetId)],
     significance: 'notable',
@@ -928,7 +934,8 @@ function raidNews(aggressorId, targetId, stage, name, wrongVillage, confidence01
     `${A} struck ${V} to sever ${Tn}'s supply of ${stage.input}.`,
   ];
   if (wrongVillage) {
-    reasons.push(`But ${V} no longer fed ${Tn} — the ${stage.input} had come by another road. ${A} burned the wrong village (read confidence ${confidence01.toFixed(2)}) — a misjudgment.`);
+    const readWord = confidence01 < 0.5 ? 'thin and much-doubted' : 'confident but stale';
+    reasons.push(`But ${V} no longer fed ${Tn} — the ${stage.input} had come by another road. ${A} burned the wrong village on a ${readWord} read — a misjudgment.`);
   }
   return {
     id: `wizard_news.${tick}.${kind}.${stablePart(aggressorId)}.${stablePart(stage.satelliteId)}.${stablePart(targetId)}`,
@@ -974,13 +981,14 @@ function abandonNews(aggressorId, targetId, name, adapted, tick) {
 function completeNews(aggressorId, targetId, name, plan, tick) {
   const A = name(aggressorId);
   const Tn = name(targetId);
+  const gripWord = plan.strangle01 >= 0.5 ? 'closing hard' : 'tightening';
   return {
     id: `wizard_news.${tick}.webwar_campaign_complete.${stablePart(aggressorId)}.${stablePart(targetId)}`,
     kind: 'webwar_campaign_complete',
     headline: `${A} completes its strangulation of ${Tn}`,
     summary: `${A} has struck ${plan.stages.length} of ${Tn}'s suppliers. ${Tn}'s web is thinned and its buffers bled — the town is ripe for the reckoning.`,
     reasons: [
-      `The campaign ran its ${plan.stages.length} stage${plan.stages.length === 1 ? '' : 's'}; ${Tn} now feels the strangulation (${(plan.strangle01 * 100).toFixed(0)}%).`,
+      `The campaign ran its ${plan.stages.length} stage${plan.stages.length === 1 ? '' : 's'}, and ${Tn} feels the grip of it ${gripWord}.`,
     ],
     settlementIds: [String(aggressorId), String(targetId)],
     significance: 'notable',

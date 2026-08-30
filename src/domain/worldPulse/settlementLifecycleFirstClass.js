@@ -200,7 +200,9 @@ export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatia
         ? 'FORCE_ABANDON — the DM-authority terminal-death verb (dwell-bypassing; resolves through the organic path).'
         : emptied
           ? `Effectively empty (population ${formatCount(pop)}, at or below the ${T.ZERO_POP_FLOOR}-soul floor); an empty settlement is the strongest terminal signal.`
-          : `Demoted to the ladder's bottom rung and unsupported (support ${support.toFixed(2)}).`,
+          : support <= 0.25
+            ? "Demoted to the ladder's bottom rung, and what support it had is gone."
+            : "Demoted to the ladder's bottom rung, and what support it had is too thin to hold it.",
       forced ? null : emptied
         ? `Empty dwell ${dwell} at or past ${T.ZERO_POP_DWELL}; certain, never a lottery (an empty town cannot endure).`
         : `Terminal dwell ${dwell} ≥ ${T.TERMINAL_DWELL} — extended, never sudden.`,

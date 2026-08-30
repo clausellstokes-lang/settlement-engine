@@ -41,7 +41,7 @@ export const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
  * relationship state and each candidate's `severity`/`probability`.
  * @type {ReadonlyArray<string>}
  */
-export const RELATION_LEVEL_WORDS = Object.freeze(['faint', 'moderate', 'strong', 'consuming']);
+export const RELATION_LEVEL_WORDS = Object.freeze(['faint', 'moderate', 'strong', 'near-total']);
 
 /**
  * A relationship scalar as a word. Total: every input, including junk, lands inside the

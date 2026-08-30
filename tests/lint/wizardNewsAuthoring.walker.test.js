@@ -158,6 +158,16 @@ describe('Wizard News authoring presence — static census wall', () => {
   // The debt these rows name is REAL and still owed: it is authoring debt (no id, no
   // settlementIds, no severity, two unrouted kinds), which is a different wave's subject
   // from the prose-numerics debt this lane is paying.
+  // EXACT RE-SIGN 2026-08-30, TE-HERALD-1 cars HER-4..7 — ONE ROW, SAME ADDRESS, NEW
+  // SIGNATURE, NO DEBT MOTION. magicRegimeLifecycle.js:229:17 keeps its line, its column and
+  // its five issues byte-for-byte; only the signature moves (109c48c04cb1f412 ->
+  // 84e4ffeb190aadba), because the humanization wave rewrote a reason string INSIDE the entry
+  // literal that signature hashes. Ledger still 19, ceiling untouched.
+  // ⚠ THIS ONE NEARLY GOT PAST THE LANE, and the lesson is about the instrument rather than
+  // the row. The lane's own regeneration tool keyed rows on path:line:column, so a row whose
+  // ADDRESS held still while its SIGNATURE changed reported as "no drift" — it under-reported
+  // a real red until this walker was queried directly. The tool now keys on the signature too.
+  // A re-pin instrument that cannot see the thing it exists to see is worse than none.
   test('the frozen legacy ledger is exact, location-bound, and shrink-only', () => {
     expect(baseline).toMatchObject({ schemaVersion: 1, frozenAt: '2026-08-01' });
     expect(Array.isArray(baseline.entries)).toBe(true);

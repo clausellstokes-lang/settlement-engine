@@ -315,7 +315,12 @@ export function seasonalBoundaryEntries({ prevWeeks, weeks, tick, now, foodState
           ? `Stores run dry before spring: ${dire.map((s) => s.name).join(', ')} ${dire.length === 1 ? 'faces' : 'face'} the last weeks of winter with empty granaries.`
           : 'The last weeks of winter thin the granaries; the realm waits on the spring.',
         settlementIds: dire.length ? dire.map((s) => String(s.id)) : allIds,
-        reasons: dire.map((s) => `${s.name}: stores below half a month with a ${Math.round(s.deficitPct)}% deficit.`),
+        reasons: dire.map((s) => {
+          const gapWord = s.deficitPct >= 50
+            ? 'more than half of what the winter needs'
+            : 'a real part of what the winter needs';
+          return `${s.name}: stores below half a month, and what is missing is ${gapWord}.`;
+        }),
       });
     }
   }

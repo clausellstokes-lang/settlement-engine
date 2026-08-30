@@ -1083,9 +1083,12 @@ function ladderBeat(sid, townName, fkey, ev, tick, now) {
   const summary = win
     ? `In ${townName}, ${ev.challengerName} has displaced ${ev.defenderName} and risen a rung — a promotion is a displacement, and every rise has a named loser.`
     : `In ${townName}, ${ev.challengerName} moved against ${ev.defenderName} and was thrown back — ambition risked something real, and the challenger drops a rung for it.`;
+  // TE-HERALD-1: `cScore` and `dScore` ride the event record; what the sentence needed
+  // from them it already says — the challenge CLEARED or FELL SHORT of the sustained
+  // margin, which is the whole meaning of comparing the two.
   const reason = win
-    ? `A windowed challenge (${windows}) cleared the sustained margin: challenge ${ev.cScore} vs defense ${ev.dScore}. The ranks swapped — conservation holds, no title inflation.`
-    : `A windowed challenge (${windows}) fell short of the sustained margin: challenge ${ev.cScore} vs defense ${ev.dScore}. The defender held; the challenger dropped a rung and carries the grudge.`;
+    ? `A challenge pressed through ${windows} cleared the sustained margin. The ranks swapped — conservation holds, no title inflation.`
+    : `A challenge pressed through ${windows} fell short of the sustained margin. The defender held; the challenger dropped a rung and carries the grudge.`;
   const slug = `${ev.kind}.${fkey}.${ev.challengerNid}.${ev.defenderNid}`;
   return {
     id: `wizard_news.${tick}.npc_ladder.${sid}.${slug}`,

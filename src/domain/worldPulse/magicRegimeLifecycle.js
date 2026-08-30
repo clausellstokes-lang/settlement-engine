@@ -243,7 +243,7 @@ export function advanceMagicRegimeFor({ item = null, prior = null, tick = 0 }) {
       : `What magic costs here is now only ${MAGIC_REGIME_LABELS[resolved.regime] || resolved.regime}.`
         + (names.length ? ` ${names.join(', ')} closes its doors; the building stands, and nothing is wrong with it.` : ''),
     reasons: Object.freeze([
-      `The economy reads ${economy01.toFixed(2)}, which ${promoted ? 'carries' : 'drops'} this place from ${priorRegime} to ${resolved.regime}.`,
+      `The purse of this place has ${promoted ? 'grown enough to carry it' : 'thinned enough to drop it'} from ${priorRegime} to ${resolved.regime}.`,
       ...(rungPhrase ? [`The forms band ${promoted ? 'opens' : 'closes'} at ${rungPhrase}.`] : []),
       ...(names.length ? [`${names.length} standing institution${names.length === 1 ? '' : 's'} ${promoted ? 'reopened' : 'closed'} with the crossing.`] : []),
     ]),

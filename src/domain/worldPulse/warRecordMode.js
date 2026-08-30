@@ -136,7 +136,7 @@ export function warExhaustionClearanceOutcome({
     severity: floor,
     headline: `${name}'s war exhaustion begins to lift`,
     summary: `The war scar no longer renews its grip on ${name}, though its aftereffects continue fading.`,
-    reasons: [`War-exhaustion scar crossed below its renewal floor (${previousScar.toFixed(2)} → ${nextScar.toFixed(2)}).`],
+    reasons: ["The war's weariness has fallen below the level at which it renews itself; what is left only fades."],
     generatedAtTick: tick,
   };
 }

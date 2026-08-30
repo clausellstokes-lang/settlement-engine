@@ -772,7 +772,7 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
         reasons: [
           gap.reason,
           `Economy stably healthy for ${drift.streak} tick(s) (minimum ${t.requiredStreak}).`,
-          `Build chance now ${Math.round(probability * 100)}%.`,
+          probability >= 0.5 ? 'The building is now likelier than not.' : 'The building is possible, not yet likely.',
         ],
         institutionPatch: {
           saveId: item.id,
@@ -840,8 +840,8 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
         summary: 'Sustained economic decline is squeezing out the institutions the settlement leans on least.',
         reasons: [
           `Economy stably distressed for ${drift.streak} tick(s) (minimum ${t.requiredStreak}).`,
-          `Economic contribution ${Math.round(target.contribution * 100)}%, impairment ${Math.round(target.impairment * 100)}%.`,
-          `Closure chance now ${Math.round(probability * 100)}%.`,
+          target.impairment > target.contribution ? 'It costs the settlement more than it returns.' : 'It still returns something, but not enough to be missed.',
+          probability >= 0.5 ? 'The doors are likelier than not to close.' : 'Closure is possible, not yet likely.',
         ],
         institutionPatch: {
           saveId: item.id,

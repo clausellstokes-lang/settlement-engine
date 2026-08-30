@@ -105,7 +105,15 @@ describe('a crossing carries MATERIAL receipts (§3a, §8)', () => {
     // And the prose actually says so, in world.
     expect(result.event.summary).toContain('Golem workforce');
     expect(result.event.summary).toContain('closes its doors');
-    expect(result.event.reasons.join(' ')).toContain('0.50');
+    // TE-HERALD-1: this line used to assert the raw economy read ('0.50') appeared in
+    // the reasons. The ruled boundary (§763.2) retires the scalar, so the pin moves to
+    // what the scalar MEANT — the purse thinned far enough to drop the regime — and
+    // gains a scalar-shape check it did not have, which is strictly stronger than
+    // matching a substring of a number.
+    const demotionReasons = result.event.reasons.join(' ');
+    expect(demotionReasons).toMatch(/purse of this place has thinned enough to drop it/);
+    expect(demotionReasons).toContain('from industrial to patronized');
+    expect(demotionReasons).not.toMatch(/\d+\.\d{2}/);
   });
 
   it('a promotion names the rungs that opened, and the gate rises with it', () => {

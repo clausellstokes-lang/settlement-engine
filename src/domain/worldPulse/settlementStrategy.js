@@ -284,7 +284,7 @@ function misjudgmentReason(mis, name, targetName) {
   const parts = [];
   if (mis.kinds.includes('strength')) parts.push("a stale read of its rival’s strength");
   if (mis.kinds.includes('relationship')) parts.push('a hostility the world has already left behind');
-  return `${name} marches on ${targetName} through ${parts.join(' and ')} (confidence ${mis.confidence01.toFixed(2)}) — a misjudgment.`;
+  return `${name} marches on ${targetName} through ${parts.join(' and ')} — a misjudgment.`;
 }
 
 /**
@@ -872,7 +872,7 @@ function enumerateMoves({ sId, ctx, aggressiveness, peaceAggressiveness = aggres
  */
 function causalReasonLines(entry, label) {
   if (!entry) return [];
-  return topReasons(entry, 3).map((r) => `${label}: ${r.type} (${r.score.toFixed(2)}) — ${r.receipt}`);
+  return topReasons(entry, 3).map((r) => `${label}: ${r.type} — ${r.receipt}`);
 }
 
 /**
@@ -925,16 +925,16 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
         : []),
       ...terminationPeaceReasonLines(peaceEntry),
     ] : [
-      `Economic exhaustion ${exhaustion.toFixed(2)} drives ${name} to the table.`,
+      `${name} can no longer pay for the war it is fighting, and that is what brings it to the table.`,
       'Sue-for-peace pulls the existing de-escalation levers (hostile_truce / wind-down).',
       ...causalReasonLines(peaceEntry, 'Casus pacis'),
     ];
     if (!termination && perceived !== exhaustion) {
+      const timingWord = perceived > exhaustion ? 'early' : 'late';
       const driver = chaosPull > 0 && rust > 0 ? "its patron's chaos and a rusty army"
-        : chaosPull > 0 ? "its patron's chaos"
-        : 'a rusty army';
+        : chaosPull > 0 ? "its patron's chaos" : 'a rusty army';
       reasons.push(
-        `A misread of war-bankruptcy — ${driver} distorted the reading (perceived ${perceived.toFixed(2)} vs true ${exhaustion.toFixed(2)}), so the suit came ${perceived > exhaustion ? 'early' : 'late'}.`,
+        `A misread of its own war-bankruptcy — ${driver} distorted the reading, so the suit came ${timingWord}.`,
       );
     }
     const warRulingRead = warRulingsLit ? compactWarRulingRead(termination) : null;

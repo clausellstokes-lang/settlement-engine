@@ -976,7 +976,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         const reasons = [
           `${f.npcName}, a minister of ${nameFor(cid)}, leans toward ${f.rivalName} and away from ${patronForFoothold?.name || 'the patron'}, opening a foothold for the rival creed.`,
         ];
-        if (pietyMult > 1) reasons.push(`Deep local devotion (piety ×${pietyMult.toFixed(2)}) makes the schism louder.`);
+        if (pietyMult > 1) reasons.push('Deep local devotion makes the schism louder than the numbers alone would.');
         outcomes.push(footholdOutcome({
           cid,
           cityName: nameFor(cid),
@@ -1008,7 +1008,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       // amplifier tag (localMult/realmMult) rides the receipt for legibility.
       const amplifiers = amplifierTag(settlement);
       const reasons = [`${newPatron?.name || 'a rising faith'} overtook the former patron to become ${nameFor(cid)}'s patron creed.`];
-      if (amplifiers && pietyMult !== 1) reasons.push(`Deep local devotion (piety ×${pietyMult.toFixed(2)}) sharpened the upheaval.`);
+      if (amplifiers && pietyMult !== 1) reasons.push('Deep local devotion sharpened the upheaval beyond what the numbers alone would.');
       if (newPatron) outcomes.push(conversionOutcome({
         cause: occupations?.[cid]?.occupierId ? 'occupation' : 'contest',
         id: `world_stressor.religious_conversion_fracture.${stablePart(cid)}`,

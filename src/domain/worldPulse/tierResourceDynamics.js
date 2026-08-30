@@ -223,7 +223,7 @@ function tierCandidate(item, drift, tick, rules) {
     reasons: [
       drift.reason,
       `Minimum streak ${minimum}; current streak ${drift.streak}.`,
-      `RNG chance now ${Math.round(chance * 100)}%.`,
+      chance >= 0.5 ? 'The change is now likelier than not.' : 'The change is possible, not yet likely.',
     ],
     tierChange: {
       saveId: item.id,
@@ -487,7 +487,7 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
         headline: `${resource.replace(/_/g, ' ')} may be depleted`,
         summary: `${item.name || item.id} is consuming ${resource.replace(/_/g, ' ')} faster than it recovers.`,
         reasons: [
-          `Resource pressure ${effectivePressure.toFixed(2)} and tier ${settlement.tier || 'unknown'}.`,
+          effectivePressure >= 0.5 ? 'The draw on it is heavy, and a settlement of this standing draws hard.' : 'The draw on it is real but not yet heavy, though a settlement of this standing draws hard.',
           'Higher settlement tiers consume local resources more aggressively.',
           economicRole !== 'local_resource' ? `Economic role: ${economicRole.replace(/_/g, ' ')}.` : null,
         ].filter(Boolean),
@@ -538,7 +538,7 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
         headline: `${resource.replace(/_/g, ' ')} may recover`,
         summary: `${item.name || item.id} consumes less ${resource.replace(/_/g, ' ')}, allowing it to become available again.`,
         reasons: [
-          `Resource pressure ${perceivedPressureScore.toFixed(2)} is low enough for recovery.`,
+          'The draw on it has eased enough for the ground to recover.',
           recovery.reason,
           previousDrift?.direction === 'demotion' ? 'Demotion pressure implies reduced consumption.' : null,
           economicRole !== 'local_resource' ? `Economic role: ${economicRole.replace(/_/g, ' ')}.` : null,

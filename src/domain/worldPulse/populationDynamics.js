@@ -52,6 +52,26 @@ function clamp(value, min, max) {
  * @param {any} settlementId
  * @param {any} kind
  */
+/**
+ * A DEMOGRAPHIC PRESSURE IN A WORD, lightest first (TE-HERALD-1). ⚠ The cuts are the
+ * declared quarter convention (see relationshipState.js's note): this axis carries no
+ * engine-named interior landmark, nothing branches on them, and they choose a word rather
+ * than a behaviour. The scores themselves still ride the pressure index.
+ * @type {ReadonlyArray<string>}
+ */
+export const POPULATION_PRESSURE_WORDS = Object.freeze([
+  'no strain', 'a light hand', 'a firm hand', 'a hard grip',
+]);
+
+/** A demographic pressure as a word. @param {number} value 0..1 @returns {string} */
+export function pressureWordFor(value) {
+  const v = clamp(Number(value) || 0, 0, 1);
+  if (v < 0.25) return POPULATION_PRESSURE_WORDS[0];
+  if (v < 0.5) return POPULATION_PRESSURE_WORDS[1];
+  if (v < 0.75) return POPULATION_PRESSURE_WORDS[2];
+  return POPULATION_PRESSURE_WORDS[3];
+}
+
 function score(pressureIdx, settlementId, kind) {
   return pressureIdx?.get?.(settlementId, kind)?.score || 0;
 }
@@ -367,6 +387,10 @@ function deltaForSettlement(item, pressureIdx, interval, rules, tick) {
  * @param {any} options
  */
 function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tick, spatialActive }) {
+  // TE-HERALD-1: the three pressure words are decided HERE, never inside the sentence.
+  const granaryWord = pressureWordFor(score(pressureIdx, item.id, 'food'));
+  const wallsWord = pressureWordFor(score(pressureIdx, item.id, 'conflict'));
+  const roadsWord = pressureWordFor(score(pressureIdx, item.id, 'trade'));
   const result = deltaForSettlement(item, pressureIdx, interval, rules, tick);
   if (!result) return null;
   const { pop, delta, severe } = result;
@@ -482,7 +506,7 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
       ? `${item.name || sourceId} gains about ${formatCount(abs)} people from favorable conditions.`
       : `${item.name || sourceId} loses about ${formatCount(abs)} people from cumulative pressure${migrants ? `; about ${formatCount(migrants)} may migrate onward` : ''}.`,
     reasons: [
-      `Food ${score(pressureIdx, sourceId, 'food').toFixed(2)}, defense pressure ${score(pressureIdx, sourceId, 'conflict').toFixed(2)}, trade pressure ${score(pressureIdx, sourceId, 'trade').toFixed(2)}.`,
+      `Grain, safety and trade each pull on this: ${granaryWord} on the granary, ${wallsWord} on the walls, ${roadsWord} on the roads.`,
       `Interval ${interval.replace(/_/g, ' ')} with ${rules.intensity} intensity.`,
       transferMode ? `Migration mode resolved as ${transferMode.replace(/_/g, ' ')}.` : null,
     ].filter(Boolean),

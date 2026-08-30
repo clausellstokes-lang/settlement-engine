@@ -1557,6 +1557,8 @@ export function beliefMisjudgmentNewsEntries(selected, nameFor = (id) => String(
     const strengthMis = mis.kinds.includes('strength');
     const relMis = mis.kinds.includes('relationship');
     const headline = `${mover} marches on a misjudgment`;
+    const trustWord = mis.confidence01 >= 0.66 ? 'was sure of'
+      : mis.confidence01 >= 0.33 ? 'half-trusted' : 'barely trusted';
     const believedWord = strengthWord(mis.believedStrengthBand);
     const trueWord = strengthWord(mis.trueStrengthBand);
     const reasons = [];
@@ -1566,7 +1568,7 @@ export function beliefMisjudgmentNewsEntries(selected, nameFor = (id) => String(
     if (relMis) {
       reasons.push(`${mover} still counts ${target} an enemy, though that hostility has since cooled — word never reached it.`);
     }
-    reasons.push(`Confidence in the belief it acted on: ${mis.confidence01.toFixed(2)}.`);
+    reasons.push(`It acted on a read it ${trustWord} — and the read was wrong.`);
     const summary = strengthMis
       ? `${mover} commits to an offensive against ${target} on a belief its strength is ${believedWord} — the truth is ${trueWord}. The fog of war, made real.`
       : `${mover} marches on ${target} over a hostility the world has already left behind.`;

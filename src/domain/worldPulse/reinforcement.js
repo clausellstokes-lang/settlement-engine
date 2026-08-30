@@ -64,6 +64,38 @@ const DRAIN_AGE_CAP = 0.4;           // …capped so it plateaus on a very long 
 const DRAIN_FLOOR = 0.18;            // any active reinforcement effort costs at least this much
 
 /**
+ * WHAT REACHED THE FRONT, thinnest first (TE-HERALD-1). Cut on this file's own two flow
+ * landmarks: `BASE_FLOW_FRACTION` (what a healthy, secure origin sends) and
+ * `MAX_FLOW_FRACTION` (the hard per-tick cap — never a full restore).
+ * @type {ReadonlyArray<string>}
+ */
+export const REINFORCEMENT_FLOW_WORDS = Object.freeze([
+  'A thin trickle of men and materiel', 'A steady column', 'Everything the home could send',
+]);
+
+/** What reached the front, as a phrase. @param {number} flowFraction @returns {string} */
+export function reinforcementFlowWordFor(flowFraction) {
+  const f = Math.max(0, Number(flowFraction) || 0);
+  if (f < BASE_FLOW_FRACTION) return REINFORCEMENT_FLOW_WORDS[0];
+  if (f < MAX_FLOW_FRACTION) return REINFORCEMENT_FLOW_WORDS[1];
+  return REINFORCEMENT_FLOW_WORDS[2];
+}
+
+/**
+ * WHAT SENDING IT COST THE ORIGIN. Two rungs on one cut — `DRAIN_FLOOR` (the least any
+ * active effort costs) plus `DRAIN_AGE_CAP` (the plateau a very long war reaches), which
+ * is where a drain stops being the price of a season and becomes the price of a war.
+ * @type {ReadonlyArray<string>}
+ */
+export const REINFORCEMENT_DRAIN_WORDS = Object.freeze(['the poorer for it', 'badly drained by it']);
+
+/** What it cost the origin, as a phrase. @param {number} drainSeverity @returns {string} */
+export function reinforcementDrainWordFor(drainSeverity) {
+  const d = clamp01(drainSeverity);
+  return d < DRAIN_FLOOR + DRAIN_AGE_CAP ? REINFORCEMENT_DRAIN_WORDS[0] : REINFORCEMENT_DRAIN_WORDS[1];
+}
+
+/**
  * Compute the per-tick reinforcement flow for a deployed army, and the origin-drain
  * severity that paying for it imposes. Pure + deterministic + bounded.
  *
@@ -139,9 +171,15 @@ export function computeReinforcement({ record, origin }) {
     ? clamp01(DRAIN_FLOOR + DRAIN_FLOW_WEIGHT * flowFraction + ageStrain)
     : 0;
 
-  reasons.push(
-    `Reinforcement flow ${(flowFraction * 100).toFixed(1)}% of max (supply ×${centeredMult.toFixed(2)}, route ×${routeMult.toFixed(2)}, exhaustion ×${exhaustionMult.toFixed(2)}) restored ${flowPoints.toFixed(1)} pts; origin drain ${drainSeverity.toFixed(2)} (age strain ${ageStrain.toFixed(2)}).`,
-  );
+  // TE-HERALD-1. `flowFraction`, `flowPoints`, `restoredStrength` and `drainSeverity` all
+  // leave this function typed, so the sentence is free to say what they MEAN: how much
+  // reached the front, and what sending it cost the place it came from. The three input
+  // multipliers and the age strain do not leave typed — EMERGENT row E-HER-6.
+  const arrivedWord = reinforcementFlowWordFor(flowFraction);
+  const costWord = flowPoints > 0
+    ? `, and the home that sent it is ${reinforcementDrainWordFor(drainSeverity)}`
+    : '';
+  reasons.push(`${arrivedWord} reached the front${costWord}.`);
 
   return { flowFraction, flowPoints, restoredStrength, drainSeverity, reasons };
 }

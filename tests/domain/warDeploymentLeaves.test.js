@@ -303,7 +303,14 @@ describe('warSiegeVerdict — the verdict, the will, and the occupier', () => {
     expect(ceiling.roll).toBe(0);
     expect(ceiling.pFall).toBe(1);
     expect(ceiling.band).toBe('costly_success');
-    expect(ceiling.reasons.some((r) => r.includes('hard 60-tick ceiling'))).toBe(true);
+    // TE-HERALD-1: the reader's sentence no longer prints the engine's tick ceiling —
+    // a tick is an engine unit, not a world word — but it must still SAY that the siege
+    // ran to its limit and which way that resolved. Both halves are pinned, plus the
+    // absence of the retired number, so an over-cure that dropped the fact would red.
+    const ceilingLine = ceiling.reasons.find((r) => /ran to the hard limit/.test(r));
+    expect(ceilingLine, 'the auto-resolve receipt no longer says the siege hit its limit').toBeTruthy();
+    expect(ceilingLine).toMatch(/the walls were stormed/);
+    expect(ceilingLine).not.toMatch(/\d/);
     // …and the direction is a pure function of capacity, so a different stream
     // resolves identically.
     expect(atCeiling(60, 'a-different-seed').falls).toBe(true);

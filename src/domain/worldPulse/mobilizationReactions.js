@@ -320,6 +320,11 @@ export function evaluateMobilizationReactions(snapshot, pressureIdx, context = {
         }
       }
 
+      // TE-HERALD-1: the lean is decided HERE, not inside the template — the census reads
+      // a scalar's NAME in an interpolation as a leak whatever it evaluates to, and it is
+      // right to. `aggr` is centred on 1.0: above it the court answers in kind, below it
+      // it shies off, and exactly at it the disposition decides nothing.
+      const leanWord = aggr > 1 ? 'toward answering in kind' : aggr < 1 ? 'away from confrontation' : 'neither way';
       byReactor.set(otherId, reactionCandidate({
         move,
         reactorId: otherId,
@@ -330,7 +335,7 @@ export function evaluateMobilizationReactions(snapshot, pressureIdx, context = {
         summary,
         reasons: [
           `${reactorName} is a ${relType} of the mobilizing ${mobName}.`,
-          `Disposition ${aggr.toFixed(2)} (centered on 1.0) → ${move}.`,
+          `Its standing disposition leans ${leanWord}, and it chose to ${move.replace(/_/g, ' ')}.`,
           ...(relationshipNudge ? [`A bounded ${Object.keys(relationshipNudge.relationshipPatch).join('/')} nudge (${relationshipNudge.incidentType}).`] : []),
         ],
         relationshipNudge,

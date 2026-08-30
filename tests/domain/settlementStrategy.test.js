@@ -661,7 +661,14 @@ describe('WR-1 current casus — the strategy producer cannot renew stale predat
       candidateType: 'strategy_deploy',
       metadata: { deployTargetId: 'weak' },
     });
-    expect(dark.reasons).toContain('Casus belli: opportunism (1.00) — The court remembers an undefended prize.');
+    // TE-HERALD-1: the casus RANKING SCORE is retired from prose (it rides
+    // `seededRecord.casusReasons` on the deployment record); the typed casus and its
+    // authored receipt — which is what the score only ordered — still say it.
+    expect(dark.reasons).toContain('Casus belli: opportunism — The court remembers an undefended prize.');
+    // Scoped to the casus line itself, so the pin measures THIS cure rather than every
+    // other reason the chooser happens to emit.
+    const casusLine = dark.reasons.find((r) => r.startsWith('Casus belli:'));
+    expect(casusLine).not.toMatch(/\(\d+\.\d{2}\)/);
     expect(lit.candidateType).toBe('strategy_hold');
     expect(lit.metadata.deployTargetId).toBeUndefined();
     expect(lit.reasons).toEqual(["Ironhold's strategy chooser selected hold."]);

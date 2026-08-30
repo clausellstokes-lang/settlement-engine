@@ -118,6 +118,30 @@ const FOOD_MITIGATION = 0.15;     // full food reserves → -15% loss
 const MAX_MITIGATION = 0.65;      // never mitigate away more than 65% of a loss
 
 /**
+ * HOW HARD A SIDE BLED THIS TURN, lightest first (TE-HERALD-1). The cuts are this file's
+ * own two loss landmarks — `BASE_ATTACKER_LOSS`, what a plain grinding siege tick costs,
+ * so anything under it is a quiet turn; and `MAX_LOSS_FRACTION`, the hard cap, halved and
+ * whole. COMPUTED ONCE, for the float-boundary reason occupation.js's cuts record.
+ * @type {ReadonlyArray<string>}
+ */
+export const ATTRITION_BLEED_WORDS = Object.freeze(['lightly', 'steadily', 'badly', 'terribly']);
+
+/** The three cuts, computed once so a proof compares the SAME numbers the source uses.
+ * @type {ReadonlyArray<number>} */
+export const ATTRITION_BLEED_CUTS = Object.freeze([
+  BASE_ATTACKER_LOSS, MAX_LOSS_FRACTION / 2, MAX_LOSS_FRACTION,
+]);
+
+/** How hard a side bled, as a word. @param {number} loss 0..1 @returns {string} */
+export function attritionBleedWordFor(loss) {
+  const l = clamp01(loss);
+  if (l < ATTRITION_BLEED_CUTS[0]) return ATTRITION_BLEED_WORDS[0];
+  if (l < ATTRITION_BLEED_CUTS[1]) return ATTRITION_BLEED_WORDS[1];
+  if (l < ATTRITION_BLEED_CUTS[2]) return ATTRITION_BLEED_WORDS[2];
+  return ATTRITION_BLEED_WORDS[3];
+}
+
+/**
  * The fortification strength of a defender (0..1): its walls/garrison institutions
  * facet blended with any explicit fortification/terrain signal. Pure read.
  * @param {{ institutions?: number }} defenderFacets
@@ -218,9 +242,18 @@ export function computeEngagementAttrition({
   let loss = base * bandMult * tilt * ageRamp * fortMult * (1 - mitigation) * decayMult * firstTickMult;
   loss = Math.max(0, Math.min(MAX_LOSS_FRACTION, loss));
 
-  reasons.push(
-    `${isAttacker ? 'Attacker' : 'Defender'} band ${band} (×${bandMult.toFixed(2)}), strength-tilt ×${tilt.toFixed(2)}, age-ramp ×${ageRamp.toFixed(2)}, fortification ×${fortMult.toFixed(2)}, mitigation ${(mitigation * 100).toFixed(0)}%${rdy > 0 ? `, readiness ×${(decayMult * firstTickMult).toFixed(2)}` : ''} → ${(loss * 100).toFixed(1)}% lost.`,
-  );
+  // TE-HERALD-1. What this line used to be was the derivation, term by term: six
+  // multipliers and two percentages, none of which a reader can act on. What it says now
+  // is the world fact — which side bled, how hard, in what kind of engagement, and whether
+  // anything softened it. The loss itself still leaves here typed, on `lossFraction`; the
+  // six intermediate terms do not, which is EMERGENT row E-HER-6.
+  const sideWord = isAttacker ? 'The attacking host' : 'The defenders';
+  const bledWord = attritionBleedWordFor(loss);
+  const shieldWord = mitigation >= MAX_MITIGATION / 2
+    ? ', though supply, food and heart between them took much of the edge off it'
+    : ', with little to soften it';
+  const drillWord = rdy > 0 ? '; the drilling told, and they bled slower for it' : '';
+  reasons.push(`${sideWord} bled ${bledWord} this turn in a ${band} engagement${shieldWord}${drillWord}.`);
 
   return { lossFraction: clamp01(loss), reasons };
 }

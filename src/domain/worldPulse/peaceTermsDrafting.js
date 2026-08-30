@@ -81,13 +81,34 @@ export function draftTerms({ ranked, budget, margin01, press, tick }) {
   return { terms, budgetSpent };
 }
 
+/**
+ * A TERM'S SHARE IN WORDS, smallest first (TE-HERALD-1). A treaty term's magnitude is a
+ * share of a treasury or an export — a fraction of a quantity no reader can see, so the
+ * ruled boundary retires the percentage. The YEARS beside it STAY: a term of three years
+ * is an honest concrete count in world words and is census-legitimate.
+ * ⚠ The two cuts are the declared quarter/half convention, not a claim about the model:
+ * `PEACE_TERMS_TUNING` names no interior landmark on a term magnitude, and nothing
+ * branches on these — the drafting arithmetic is untouched.
+ * @type {ReadonlyArray<string>}
+ */
+export const TERM_SHARE_WORDS = Object.freeze(['a modest share', 'a heavy share', 'the better part']);
+
+/** A term magnitude as a share phrase. @param {number} magnitude 0..1 @returns {string} */
+export function treasuryShareWords(magnitude) {
+  const m = clamp01(magnitude);
+  if (m < 0.25) return TERM_SHARE_WORDS[0];
+  if (m < 0.5) return TERM_SHARE_WORDS[1];
+  return TERM_SHARE_WORDS[2];
+}
+
 /** @param {string} type @param {AppraisedAsset} asset @param {number} years @param {number} magnitude @returns {string} */
 export function draftReceipt(type, asset, years, magnitude) {
+  const shareWord = treasuryShareWords(magnitude);
   switch (type) {
-    case 'tribute': return `A tribute stream — ${(magnitude * 100).toFixed(0)}% of the treasury for ${years} year${years === 1 ? '' : 's'}; it was always the coin they wanted.`;
-    case 'resource_share': return `${asset.good || 'The staple export'} shall flow to the victor — a ${(magnitude * 100).toFixed(0)}% share for ${years} year${years === 1 ? '' : 's'}.`;
+    case 'tribute': return `A tribute stream — ${shareWord} of the treasury for ${years} year${years === 1 ? '' : 's'}; it was always the coin they wanted.`;
+    case 'resource_share': return `${asset.good || 'The staple export'} shall flow to the victor — ${shareWord} of it for ${years} year${years === 1 ? '' : 's'}.`;
     case 'reparations': return `Reparations in ${years} year${years === 1 ? '' : 's'} of installments — the price of the war laid on the loser.`;
-    case 'restitution': return `Restitution for a debt long unpaid — ${(magnitude * 100).toFixed(0)}% for ${years} year${years === 1 ? '' : 's'}; the old grain-years, called in at last.`;
+    case 'restitution': return `Restitution for a debt long unpaid — ${shareWord} for ${years} year${years === 1 ? '' : 's'}; the old grain-years, called in at last.`;
     case 'compelled_alliance': return `Forced allyship for ${years} year${years === 1 ? '' : 's'} — a banner compelled, and compelled loyalty rots.`;
     case 'demilitarization': return `A mobilization cap for ${years} year${years === 1 ? '' : 's'} — the beaten foe may not rearm.`;
     case 'non_aggression': return `A non-aggression pact ${years} year${years === 1 ? '' : 's'} — no war between these courts while it stands.`;

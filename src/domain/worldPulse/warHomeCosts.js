@@ -544,7 +544,7 @@ export function applyHomeWarCosts({
         severity: nextScar,
         headline: `${name} grows war-weary`,
         summary: `The long campaign against ${targetName} has left ${name} a lasting wound. The treasury thins and the public tires of war.`,
-        reasons: [`Sustained war-exhaustion scar at ${nextScar.toFixed(2)} (non-reverting).`],
+        reasons: ['The weariness of this war has set into the place and will not simply lift; it is a wound now, not a mood.'],
         tick,
         // Keyed by the HOME (like the decay path below), NOT the war target:
         // deriveActiveCondition hashes the condition id from sourceEventTargetId, so a
@@ -594,8 +594,8 @@ export function applyHomeWarCosts({
           ? `${name}'s men and grain feed an overlord's war, and the repeated levies wear on the settlement.`
           : `${name}'s army is home, but the cost of the war it waged still weighs on the economy and the public.`,
         reasons: [leviedNow
-          ? `War-levy strain accruing at ${decayed.toFixed(2)} (levied again this tick).`
-          : `War-exhaustion scar slowly fading at ${decayed.toFixed(2)}.`],
+          ? 'The levy came again before the last was paid for, and the strain is still gathering.'
+          : "No fresh levy this season; the war's mark on the place is fading, slowly."],
         tick,
         sourceEventTargetId: homeId,
         causes: [{

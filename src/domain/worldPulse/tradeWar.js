@@ -680,7 +680,7 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
               // the ledger's own authored words. Dark ⇒ the spread is empty ⇒ this array
               // is the pre-TR-1 array.
               reasons: [
-                `Defeated incumbent strength ${defeatedStrength.toFixed(2)} cleared the escalation gate.`,
+                'The beaten incumbent was still strong enough to answer with arms rather than accounts.',
                 ...(severance?.receipt ? [severance.receipt] : []),
               ],
               tick,
@@ -717,7 +717,7 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
             severity: 0.35,
             headline: `${nameFor(defeatedId)} absorbs the loss of ${nameFor(buyerId)}'s market`,
             summary: `${nameFor(defeatedId)} loses ${nameFor(buyerId)}'s ${commodityLabelFor(commodityId)} market and adjusts. This is a sober economic wind-down, not war.`,
-            reasons: [`Defeated incumbent strength ${defeatedStrength.toFixed(2)} below the escalation gate: peaceful adjustment.`],
+            reasons: ['The beaten incumbent lacked the strength to answer with arms, so it answered with accounts.'],
             tick,
             sourceEventTargetId: buyerId,
             causes: [{ source: buyerId, effect: 'market_shock', reason: `${nameFor(defeatedId)} lost a primary export market.` }],

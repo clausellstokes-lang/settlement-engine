@@ -160,12 +160,70 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //     next wrapped-return leak is red on arrival rather than absorbed into a stale budget
 //     of three. That is the same argument TE-STRIP-1's note makes about a ceiling being the
 //     control's teeth, at its limit.
-const REVIEWED_TOTAL_CEILING = 338;
+//   car HER-4 (the cost of war)  338 -> 296  (-42, ADDED 0). attrition.js :222 — SEVEN rows
+//     on ONE line, the whole derivation term by term · reinforcement.js :143 (the same shape)
+//     · warHomeCosts.js :547/:597/:598 · warRecordMode.js :139 · tradeWar.js :683/:720 ·
+//     supplyWebWarfare.js :431/:432/:907/:931/:983 · momentum.js :1166/:1167/:1169/:1171.
+//   car HER-5 (institutions and the arcs)  296 -> 272  (-24, ADDED 0).
+//     institutionLifecycle.js :775/:843/:844 · moralInstitutionPressure.js :372/:526 ·
+//     resourceDynamicsKernel.js :379 · tierResourceDynamics.js :226/:490/:541 ·
+//     settlementLifecycleKernel.js :1008 · settlementLifecycleFirstClass.js :203 ·
+//     magicRegimeLifecycle.js :246.
+//   car HER-6 (faith, belief, the ladder of persons)  272 -> 256  (-16, ADDED 0).
+//     deityStanceLane.js :373/:394 · religiousContest.js :979/:1011 · beliefMap.js :1569 ·
+//     npcAgency.js :914 · npcLadderKernel.js :1087/:1088.
+//   car HER-7 (strategy, mobilization, the remainder)  256 -> 227  (-29, ADDED 0).
+//     settlementStrategy.js :287/:875/:928/:937 · mobilization.js :413 ·
+//     mobilizationReactions.js :333 · stressorDynamics.js :900 · populationDynamics.js :485 ·
+//     flows.js :96 · seasons.js :318 · peaceTermsDrafting.js :87/:88/:90 · razing.js :378 ·
+//     settlementPolitics.js :358.  (npcAgency.js :914 is STOPPED — see the note below.)
+//     ⚠ ONE OF THOSE ROWS WAS NEVER DEBT. settlementPolitics.js:358 interpolated a binding
+//     named `strength` that HOLDS A WORD — `String(rel?.strength ?? '').toLowerCase()` — so
+//     the sentence was compliant all along and the detector fired on the IDENTIFIER, whose
+//     last camel token is a FLOAT_TOKEN. The cure is the RENAME and nothing else; the
+//     emitted sentence is byte-identical. It is called out here rather than counted quietly,
+//     because a census row cleared by renaming is a different kind of win from the other 112
+//     and a later reader should not have to rediscover which.
+//     ⚠ THE 113 REMOVALS WERE MEASURED BEFORE THEY WERE MADE. The whole cars-4..7 patch was
+//     first applied to a MIRROR of src and censused there; that dry run reported ADDED 14 —
+//     fourteen inline ternaries that named their scalar inside a template — and every one was
+//     hoisted before anything touched the tree. The rule they taught is E-HER-3's, and it is
+//     now written at the top of the patch that obeys it: decide in code, interpolate words.
+//     Two shapes are clean and both are used: a bare CONDITIONAL over string literals as the
+//     array element, and a decision hoisted into a `...Word` binding.
+//     ⚠ THE FOUR PER-CAR DELTAS ABOVE ARE RE-DERIVED FROM THE TWO COMMITTED BASELINES, not
+//     carried forward from the lane's running notes. The four figures written by hand were
+//     ALL wrong by a few rows, and re-deriving them is the only reason that did not ship in
+//     a comment — which is this file's own standing complaint about numbers in prose.
+//     ⛔⛔ ONE SITE IS DELIBERATELY LEFT UNCURED, AND IT IS THE MOST INTERESTING ROW IN
+//     THIS WHOLE WAVE. `npcAgency.js:914` ("Pressure gate 0.62, ambition 0.41.") is STOPPED
+//     — two rows that stay — because humanizing it MOVES A SAME-SEED GOLDEN, and the cause
+//     is worth every line of this note:
+//       `worldPulseFeedCuration.js:128` `isMetronomeRepeat` suppresses a beat that repeats
+//       the same impactKind, headline, settlements AND REASONS inside a six-tick window
+//       (`DRIFT_REEMIT_COOLDOWN_TICKS`), and `stateOnlyRumorSeedsFromHistory` runs the
+//       PRIVATE rumor seeds through the same predicate. A per-tick jittering float in a
+//       reason made every re-emission a different string, so the suppressor never fired on
+//       this family. Banded to one of four fixed sentences, it fires — and one rumor,
+//       `trade:candidate.npc.reform.d_n_d.7`, stops being seeded at all and vanishes from
+//       every downstream ledger. `tests/property/rumorLedgerGolden.test.js` reds on exactly
+//       one of its three configs.
+//     ⭐ THE PUBLIC NEWS ENTRIES ARE BYTE-IDENTICAL EITHER WAY — 61 entries, same ticks,
+//       same kinds, same headlines. The whole effect lives on the STATE-ONLY seed path,
+//       which is why it took a ledger-level diff rather than an entry diff to see it, and
+//       why a lane that only checked "did the feed change" would have shipped it blind.
+//     THE JUDGMENT (J-HER-I): the shift is almost certainly DESIRABLE — the estate built
+//     `isMetronomeRepeat` to stop exactly this repetition and a float was defeating it —
+//     but taking it means RE-RECORDING a same-seed golden manifest, which is not a call an
+//     implementing seat folds into a prose wave. The site is stopped, the two rows stay as
+//     named debt, and the ruling is owed. Curing it later is a two-line change plus a
+//     declared shift record.
+const REVIEWED_TOTAL_CEILING = 227;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 201,
-  percentToken: 73,
-  multiplier: 22,
-  twoDecimalScore: 42,
+  floatInterpolation: 149,
+  percentToken: 56,
+  multiplier: 10,
+  twoDecimalScore: 12,
   pushIndirection: 0,
 });
 
@@ -472,11 +530,11 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     expect(categoryCeilingTotal).toBe(REVIEWED_TOTAL_CEILING);
     expect(
       ceilingViolations(baseline),
-      'The committed baseline exceeds the reviewed 338-row census. Remove the leak; never raise a ceiling.',
+      'The committed baseline exceeds the reviewed 227-row census. Remove the leak; never raise a ceiling.',
     ).toEqual([]);
     expect(
       ceilingViolations(LIVE.hits),
-      'The live tree exceeds the reviewed 338-row census. Humanize the new leak; never raise a ceiling.',
+      'The live tree exceeds the reviewed 227-row census. Humanize the new leak; never raise a ceiling.',
     ).toEqual([]);
   });
 
@@ -491,8 +549,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 339 exceeds reviewed ceiling 338',
-      'floatInterpolation 202 exceeds reviewed ceiling 201',
+      'total 228 exceeds reviewed ceiling 227',
+      'floatInterpolation 150 exceeds reviewed ceiling 149',
     ]);
   });
 

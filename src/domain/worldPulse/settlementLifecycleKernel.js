@@ -1005,7 +1005,9 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
             headline: pickLine(LIFECYCLE_NEWS.abandoned.headline, `${parentId}:${next.id}:${tick}:h`, { name: next.name }),
             summary: pickLine(LIFECYCLE_NEWS.abandoned.summary, `${parentId}:${next.id}:${tick}:s`, { name: next.name, parent: String(parentLive?.name || parentId) }),
             severity: 0.3,
-            reasons: [`Backing fell to ${Math.round(backing01 * 100)}% and stayed there for ${dwell} ticks.`],
+            reasons: [backing01 <= 0.25
+              ? 'What backing the steading had all but vanished, and it stayed gone long enough that no one expected it back.'
+              : 'What backing the steading had fell away, and it stayed gone long enough that no one expected it back.'],
           }));
           continue; // record removed — no write-back below
         }

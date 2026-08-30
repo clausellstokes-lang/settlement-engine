@@ -370,7 +370,7 @@ export function evaluateDeityStanceLane({ pairs, deityOf, pietyMultOf, nameFor, 
       const reasons = [
         `${nameFor(source)} broke its pact with ${nameFor(target)}: its patron ${sourceDeity?.name || 'creed'} (${sourceDeity?.alignmentAxis || 'neutral'}/${sourceDeity?.lawAxis || 'neutral'}) carries a standing betrayal hazard toward ${targetDeity?.name || 'its partner'} (${targetDeity?.alignmentAxis || 'neutral'}/${targetDeity?.lawAxis || 'neutral'}).`,
       ];
-      if (pMult > 1) reasons.push(`Local devotion (piety ×${pMult.toFixed(2)}) sharpened the treachery.`);
+      if (pMult > 1) reasons.push('Local devotion sharpened the treachery; the faithful took it personally.');
       const amplifiers = pMult !== 1 ? { localMult: pMult, realmMult: 1 } : null;
       outcomes.push(betrayalOutcome({ pairKey, source, target, sourceName: nameFor(source), targetName: nameFor(target), sourceDeity, targetDeity, severity, tick, reasons, amplifiers }));
       betrayed.push({ pairKey, source, target });
@@ -391,7 +391,7 @@ export function evaluateDeityStanceLane({ pairs, deityOf, pietyMultOf, nameFor, 
       const reasons = [
         `${nameFor(a)} and ${nameFor(b)} were drawn together: the kindred creeds ${dA?.name || 'a faith'} (${dA?.alignmentAxis || 'neutral'}/${dA?.lawAxis || 'neutral'}) and ${dB?.name || 'a faith'} (${dB?.alignmentAxis || 'neutral'}/${dB?.lawAxis || 'neutral'}) share common ground.`,
       ];
-      if (pMult > 1) reasons.push(`Local devotion (piety ×${pMult.toFixed(2)}) deepened the bond.`);
+      if (pMult > 1) reasons.push('Local devotion deepened the bond; the faithful took it personally.');
       const amplifiers = pMult !== 1 ? { localMult: pMult, realmMult: 1 } : null;
       outcomes.push(pactOutcome({ pairKey, a, b, aName: nameFor(a), bName: nameFor(b), aDeity: dA, bDeity: dB, tick, reasons, amplifiers }));
       pacts.push({ pairKey, a, b });

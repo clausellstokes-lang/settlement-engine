@@ -410,7 +410,10 @@ export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, war
   }
   const nextState = RAMP[nextIdx];
   const transitioned = nextState !== prev.state;
-  reasons.push(`ramping toward war (readiness ${readiness.toFixed(2)}× base)`);
+  const levyWord = readiness >= 1
+    ? 'better drilled than the peacetime standard'
+    : 'still short of the peacetime standard';
+  reasons.push(`ramping toward war (the levy is ${levyWord})`);
   return {
     next: { state: /** @type {PostureState} */ (nextState), progress: clamp01(nextProgress), sinceTick: transitioned ? tick : prev.sinceTick, covert: prev.covert },
     transitioned, cooled: false, reasons,

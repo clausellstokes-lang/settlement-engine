@@ -369,7 +369,7 @@ export function evaluateMoralInstitutionPressure(worldState, snapshot, context =
           best.martial
             ? `A demilitarizing town no longer sustains the ${instName}.`
             : `${patronName} leads the abolition: ${cause}.`,
-          `Viability pressure has built to ${Math.round(best.accum * 100)}% over sustained ticks (an arc, not a decree).`,
+          'The case against it has been building for seasons rather than arriving in a single ruling — an arc, not a decree.',
         ],
         institutionPatch: {
           saveId: item.id,
@@ -523,7 +523,7 @@ export function evaluateMoralInstitutionFounding(worldState, snapshot, context =
         summary: `Under ${patronName}, ${nameLower} rises because ${cause}.`,
         reasons: [
           `${patronName} raises the ${nameLower}: ${cause}.`,
-          `Founding pressure has built to ${Math.round(best.accum * 100)}% over sustained years (an arc, not a decree).`,
+          'The case for it has been building for years rather than arriving in a single ruling — an arc, not a decree.',
         ],
         institutionPatch: {
           saveId: item.id,
