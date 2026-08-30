@@ -42,7 +42,6 @@ import { CACHE_MARKER } from './anthropicCache.ts';
 
 import { compileConstruct, constructRepairViolations, mergeConstructCompiled } from './constructCore.ts';
 import { compileCustomContent, contentRepairViolations, mergeContentCompiled } from '../custom-content/customContentCore.ts';
-import { compileStyleOverhaul, styleRepairViolations, mergeStyleCompiled } from '../style-overhaul/styleOverhaulCore.ts';
 import { compileAutonomy, coerceAutonomyVocabulary, autonomyRepairViolations, mergeAutonomyCompiled } from '../surveyor-autonomy/autonomyCore.ts';
 import { compileInterpretation, interpretRepairViolations, mergeInterpretCompiled } from '../interpret-session/interpretCore.ts';
 
@@ -142,11 +141,6 @@ Deno.test('INERTNESS, per surface: the loop at zero rounds equals the pre-L-6 ex
     constraints: { resourcePressure: 'high' },
     musings: [],
   });
-  const styleVocab = {
-    furniture: ['wash'], hazardGlyphs: ['skull'], anchorGlyphs: ['star'], contrast: ['soft'],
-    baseLenses: ['parchment'], roles: { palette: ['ground'], district: [], stroke: [], opacity: [] },
-  };
-  const styleAnswer = JSON.stringify({ style: { baseLens: 'parchment', svgOverlay: '<rect/>' }, musings: [] });
   const autonomyVocab = coerceAutonomyVocabulary({
     signals: [{ id: 'unrest', type: 'number', scope: 'world', min: 0, max: 1 }],
     nudgeTypes: ['famine'],
@@ -178,15 +172,6 @@ Deno.test('INERTNESS, per surface: the loop at zero rounds equals the pre-L-6 ex
       parse: (t: string) => compileConstruct(t, constructVocab),
       validate: (c: ReturnType<typeof compileConstruct>) => constructRepairViolations(c.result),
       merge: mergeConstructCompiled,
-    },
-    {
-      name: 'style-overhaul',
-      answer: styleAnswer,
-      pre: () => compileStyleOverhaul(styleAnswer, styleVocab),
-      parse: (t: string) => compileStyleOverhaul(t, styleVocab),
-      validate: (c: ReturnType<typeof compileStyleOverhaul>) => styleRepairViolations(c.unsupportedFields),
-      merge: ({ accepted, repaired }: { accepted: ReturnType<typeof compileStyleOverhaul>; repaired: ReturnType<typeof compileStyleOverhaul> }) =>
-        mergeStyleCompiled(accepted, repaired, styleVocab),
     },
     {
       name: 'surveyor-autonomy',
@@ -624,10 +609,6 @@ Deno.test('MONOTONE SHRINK: a hostile repair round cannot grow the rejected set,
     constraintDimensions: ['resourcePressure'],
     constraintBands: ['low', 'high'],
   };
-  const styleVocab = {
-    furniture: ['wash'], hazardGlyphs: ['skull'], anchorGlyphs: ['star'], contrast: ['soft'],
-    baseLenses: ['parchment'], roles: { palette: ['ground'], district: [], stroke: [], opacity: [] },
-  };
   const autonomyVocab = coerceAutonomyVocabulary({
     signals: [{ id: 'unrest', type: 'number', scope: 'world', min: 0, max: 1 }],
     nudgeTypes: ['famine'],
@@ -701,17 +682,6 @@ Deno.test('MONOTONE SHRINK: a hostile repair round cannot grow the rejected set,
       validate: (c: ReturnType<typeof compileAutonomy>) => autonomyRepairViolations(c.composition),
       merge: ({ accepted, repaired }: { accepted: ReturnType<typeof compileAutonomy>; repaired: ReturnType<typeof compileAutonomy> }) =>
         mergeAutonomyCompiled(accepted, repaired),
-    },
-    {
-      name: 'style-overhaul',
-      draft: JSON.stringify({ style: { baseLens: 'parchment', svgOverlay: '<rect/>' }, musings: [] }),
-      repair: JSON.stringify({
-        style: { baseLens: 'parchment', svgOverlay: '<rect/>', javascript: 'alert(1)' }, musings: [],
-      }),
-      parse: (t: string) => compileStyleOverhaul(t, styleVocab),
-      validate: (c: ReturnType<typeof compileStyleOverhaul>) => styleRepairViolations(c.unsupportedFields),
-      merge: ({ accepted, repaired }: { accepted: ReturnType<typeof compileStyleOverhaul>; repaired: ReturnType<typeof compileStyleOverhaul> }) =>
-        mergeStyleCompiled(accepted, repaired, styleVocab),
     },
   ];
 

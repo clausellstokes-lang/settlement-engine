@@ -182,13 +182,20 @@ describe('townMapStyleWall — IT-4 reskin fields (glyphSet + seasonBias + dress
   });
 });
 
-describe('townMapStyleWall — the edge OUTPUT CONTRACT validates clean (finding F-A)', () => {
-  // The style-overhaul edge names `baseLens` in STYLE_FIELDS and in its OUTPUT CONTRACT
-  // (supabase/functions/style-overhaul/styleOverhaulCore.ts), and styleRiderTags derives the
-  // lens roadmap radar from it. The payload below is the charter exemplar verbatim
-  // (src/domain/aiCharter.js), i.e. exactly what a contract-conforming model response carries.
-  // The wall must RECOGNIZE every contracted field, or StyleOverhaulPanel shows the user a
-  // "rejected" row on a response that did nothing wrong.
+describe('townMapStyleWall — a LEGACY bespoke style validates clean (finding F-A, re-homed)', () => {
+  // ⚰⭐ THIS SUITE'S SUBJECT CHANGED WITHOUT ITS PAYLOAD CHANGING (ODQ §763.2, Q-STYLE arm 2).
+  // It used to pin the wall against the style-overhaul EDGE output contract: the edge named
+  // `baseLens` in STYLE_FIELDS, styleRiderTags derived the lens roadmap radar from it, and
+  // the payload below was the charter exemplar verbatim — so a wall that failed to recognise
+  // a contracted field showed the user a "rejected" row on a response that did nothing wrong.
+  // Both the edge and the panel are now deleted.
+  //
+  // ⛔ THE PAYLOAD IS STILL LOAD-BEARING, AND MORE SO THAN BEFORE. §763.2 ruled EYES-OPEN
+  // that persisted `settlement.mapEdits.bespokeStyles` data keeps being HONOURED by retained
+  // readers while the key goes writer-inert. This payload is exactly the shape those saves
+  // carry, and `validateBespokeStyle` is now the ONLY thing that can produce it — so this is
+  // no longer an edge-parity pin, it is the legacy-honouring pin. A field the wall stops
+  // recognising is a field that silently vanishes from someone's already-saved map.
   it('a contract-conforming payload (baseLens included) yields ZERO violations', () => {
     const { ok, style, violations } = validateBespokeStyle({
       baseLens: 'watercolor',

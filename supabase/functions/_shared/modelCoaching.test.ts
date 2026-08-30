@@ -36,7 +36,7 @@ import type { CoachingProfile } from './modelCoaching.ts';
 const TASKS = Object.keys(COACHING_TABLE);
 
 /** Every surface the six shells ask for, including the two the exam does not cover. */
-const ALL_SURFACES = ['construct', 'customContent', 'interpret', 'styleOverhaul', 'autonomy'];
+const ALL_SURFACES = ['construct', 'customContent', 'interpret', 'autonomy'];
 
 /** A profile in migration 191's stored shape. */
 function profileOf(tasks: { key: string; passed: boolean; reasonClass: string | null }[]) {
@@ -121,13 +121,15 @@ Deno.test('SURFACE BINDING: a finding renders ONLY on the surface whose validato
   }
 });
 
-Deno.test('styleOverhaul and autonomy render NOTHING, even when every exam task failed', () => {
-  // They have no exam task today. Silence is the correct output: coaching a cosmetic
-  // compile with a config-vocabulary finding would be the unearned inference this whole
-  // layer refuses. When the exam grows a task for either, COACHING_TASK_SURFACE gains a
-  // row and this pin is what will red.
+Deno.test('autonomy renders NOTHING, even when every exam task failed', () => {
+  // It has no exam task today. Silence is the correct output: coaching one surface with
+  // another surface's finding would be the unearned inference this whole layer refuses.
+  // When the exam grows a task for it, COACHING_TASK_SURFACE gains a row and this pin reds.
+  // ⚰ styleOverhaul rode this pin as the second uncovered surface until ODQ §763.2 retired
+  // it. A retired surface renders nothing for a different reason than an un-examined one,
+  // and this pin is about the second kind, so the row is removed rather than kept as a
+  // permanently-true assertion about something the product no longer has.
   const everythingFailed = profileOf(TASKS.map((t) => fail(t, 'no_output')));
-  assertEquals(renderCoachingBlock(everythingFailed, 'styleOverhaul'), '');
   assertEquals(renderCoachingBlock(everythingFailed, 'autonomy'), '');
   // ...while the three covered surfaces each speak, so the assertion above is not vacuous
   for (const task of TASKS) {
@@ -173,9 +175,11 @@ Deno.test('MODEL BINDING: coaching renders only for the model that actually sat 
       `probeModel=${JSON.stringify(probeModel)} capturedModel=${JSON.stringify(capturedModel)}`,
     );
   }
-  // the surface binding still applies underneath the model binding
+  // the surface binding still applies underneath the model binding (⚠ re-pointed off the
+  // retired styleOverhaul surface, ODQ §763.2, onto the other uncovered surface — the claim
+  // is that an UNCOVERED surface stays silent even with a matching model, unchanged)
   assertEquals(
-    renderCoachingFor({ profile, probeModel: 'model-a', capturedModel: 'model-a', surface: 'styleOverhaul' }),
+    renderCoachingFor({ profile, probeModel: 'model-a', capturedModel: 'model-a', surface: 'autonomy' }),
     '',
   );
 });

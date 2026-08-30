@@ -37,7 +37,7 @@ import { askInterview } from '../../src/lib/interview.js';
 import { dressRoadScene } from '../../src/lib/roadSceneAi.js';
 import { requestCampaignChronicle } from '../../src/lib/campaignChronicle.js';
 import {
-  compileCustomContent, compileStyleOverhaul, compileConstruction,
+  compileCustomContent, compileConstruction,
   compileInterpretation, composeAutonomy,
 } from '../../src/lib/surveyorWrite.js';
 import { getByokStatus } from '../../src/lib/surveyorByok.js';
@@ -126,10 +126,9 @@ const SURFACE_FALLBACK = {
     drive: () => compileCustomContent({ intent: 'a smoky harbor tavern', settlement, savedSettlements: [settlement] }),
     check: (r) => expectWriteRefusal(r),
   },
-  'style-overhaul': {
-    drive: () => compileStyleOverhaul({ prompt: 'a moody ink-wash map', settlement, savedSettlements: [settlement] }),
-    check: (r) => expectWriteRefusal(r),
-  },
+  // ⚰ 'style-overhaul' RETIRED (ODQ §763.2, Q-STYLE arm 2). The E-D roster is the union of
+  // the edge and client sides, and this surface left BOTH in one act, so it is off the
+  // denominator entirely rather than owing a driver here.
   'construct-settlement': {
     drive: () => compileConstruction({ intent: 'a fortified river town', scope: 'settlement', settlement, savedSettlements: [settlement] }),
     check: (r) => expectWriteRefusal(r),

@@ -40,8 +40,10 @@ const SPENDING = functionDirs.filter((name) => spendsCredits(read(name)));
 describe('AI metering census — every credit-spending surface writes ai_usage_events', () => {
   it('the discovered spending set is non-empty (the scan actually found the surfaces)', () => {
     // Guard-the-guard: if this ever hits 0, the spend_credits detector broke and the
-    // census below would vacuously pass. Today the set is the 11 paid AI surfaces.
-    expect(SPENDING.length).toBeGreaterThanOrEqual(11);
+    // census below would vacuously pass. Today the set is the 10 paid AI surfaces.
+    // ⚰ style-overhaul RETIRED (ODQ §763.2, Q-STYLE arm 2) — the whole edge directory is deleted.
+    // MEASURED 11 -> 10; the floor moves DOWN with a real retirement, never up to clear a red.
+    expect(SPENDING.length).toBeGreaterThanOrEqual(10);
   });
 
   it.each(SPENDING)('%s meters its spend into ai_usage_events (COGS row per call)', (name) => {

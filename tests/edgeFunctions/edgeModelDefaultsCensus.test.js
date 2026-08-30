@@ -160,9 +160,10 @@ describe('captured-model chokepoint census - the copy-paste cannot regrow', () =
 
   it('every surface that resolves a captured model calls the shared resolver', () => {
     const surfaces = TS_FILES.filter((rel) => CAPTURES_MODEL.test(readFn(rel))).sort();
-    // Nine surfaces today: ai-analyst, custom-content, style-overhaul, interpret-session,
+    // Eight surfaces today: ai-analyst, custom-content, interpret-session,
     // surveyor-autonomy, construct-realm, construct-settlement, interview, parley.
-    expect(surfaces.length, 'model-resolving surfaces found').toBeGreaterThanOrEqual(9);
+    // ⚰ style-overhaul RETIRED (ODQ §763.2, Q-STYLE arm 2) — the whole edge directory is deleted. MEASURED 9 -> 8.
+    expect(surfaces.length, 'model-resolving surfaces found').toBeGreaterThanOrEqual(8);
     const notDelegating = surfaces.filter((rel) => !readFn(rel).includes('resolveCapturedModel'));
     expect(
       notDelegating,

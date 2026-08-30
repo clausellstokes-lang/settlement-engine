@@ -158,10 +158,11 @@ const SHELLS = readdirSync(FN_DIR)
   .sort();
 
 describe('every resolveProviderKey shell fails closed before it can spend', () => {
-  it('the census is the ten AI surfaces (a new importer joins it or this reds)', () => {
+  it('the census is the nine AI surfaces (a new importer joins it or this reds)', () => {
+    // ⚰ style-overhaul RETIRED (ODQ §763.2, Q-STYLE arm 2) — the whole edge directory is deleted.
     expect(SHELLS).toEqual([
       'ai-analyst', 'construct-realm', 'construct-settlement', 'custom-content',
-      'interpret-session', 'interview', 'parley', 'style-overhaul',
+      'interpret-session', 'interview', 'parley',
       'surveyor-autonomy', 'surveyor-byok',
     ]);
   });

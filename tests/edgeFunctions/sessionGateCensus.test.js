@@ -25,9 +25,10 @@ const read = (name) => {
 // The §7.2 paid-surface roster. Each must be gated by request-layer OR belt.
 // interview (V-1 THE INTERVIEW) joins as the 9th credit-spending AI surface — a
 // citation-grounded read answer metered under the 'analysis' feature.
+// ⚰ style-overhaul RETIRED (ODQ §763.2, Q-STYLE arm 2) — the whole edge directory is deleted. It left this roster with its directory.
 const REQUIRED = [
   'ai-analyst', 'interview', 'generate-narrative', 'generate-chronicle', 'custom-content',
-  'style-overhaul', 'interpret-session', 'parley', 'surveyor-autonomy',
+  'interpret-session', 'parley', 'surveyor-autonomy',
   // construct-realm + construct-settlement (S6/S5 AI construction) — credit-spending AI
   // surfaces that were LIVE without the request-layer gate (C4 hardening): they spend
   // through spend_credits + meter ai_usage_events, so they join the TOTAL roster.
@@ -146,13 +147,16 @@ function gateEnforcementProblems(src) {
 const importsGate = (src) => gateEnforcementProblems(src).length === 0;
 const usesSpendBelt = (src) => /rpc\(\s*['"]spend_credits['"]/.test(src);
 
-// The 11 credit-spending AI surfaces — they carry BOTH the request-layer gate AND the
+// The 10 credit-spending AI surfaces — they carry BOTH the request-layer gate AND the
 // spend_credits belt (defense-in-depth) after the M-9 census upgrade. interview (V-1)
 // joined as the 9th; construct-realm + construct-settlement are the 10th/11th (C4
 // hardening — they were live spending credits without the request-layer gate).
+// ⚰ style-overhaul RETIRED (ODQ §763.2, Q-STYLE arm 2) — the whole edge directory is deleted. It was one of the eleven, so the roster is 10. ⚠ ITS spend_credits CASE ARM
+// SURVIVES in seven applied migrations (immutable) but is unreachable — no surface can
+// name the feature. That residue is pinned in tests/config/pricing.test.js, not here.
 const AI_SPENDING = [
   'ai-analyst', 'interview', 'generate-narrative', 'generate-chronicle', 'custom-content',
-  'style-overhaul', 'interpret-session', 'parley', 'surveyor-autonomy',
+  'interpret-session', 'parley', 'surveyor-autonomy',
   'construct-realm', 'construct-settlement',
 ];
 

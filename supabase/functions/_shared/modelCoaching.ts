@@ -149,11 +149,13 @@ const TASK_ORDER: readonly string[] = Object.freeze(Object.keys(COACHING_TABLE))
  * product ships), and a future exam task that grades two surfaces, or a surface that gains
  * two tasks, must be a change to this table rather than a coincidence quietly ending.
  *
- * THE TWO SURFACES DELIBERATELY ABSENT: styleOverhaul and autonomy have no exam task, so
- * they render nothing. That is the correct output, not a gap to be filled with the nearest
- * available sentence: coaching a style compile with a config-vocabulary finding would be the
- * same unearned inference this whole layer exists to refuse. When the exam grows a task for
- * either, it lands here and they start speaking.
+ * THE SURFACE DELIBERATELY ABSENT: autonomy has no exam task, so it renders nothing. That
+ * is the correct output, not a gap to be filled with the nearest available sentence:
+ * coaching one surface with another's finding would be the unearned inference this whole
+ * layer exists to refuse. When the exam grows a task for it, it lands here and it speaks.
+ * ⚰ styleOverhaul was the second such surface until ODQ §763.2 retired it; it is now absent
+ * from this table because it is absent from the product, which is a different kind of
+ * absence and renders the same nothing.
  */
 export const COACHING_TASK_SURFACE: Readonly<Record<string, string>> = Object.freeze({
   construct: 'construct',

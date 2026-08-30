@@ -77,7 +77,10 @@ const AI_SURFACE_WALLS = Object.freeze({
   // The Surveyor WRITE stages: raw output returned by lib/surveyorWrite.js, re-projected
   // by a deterministic domain wall (a finite vocabulary / a validator) before any apply.
   'custom-content':      { disposition: 'walled', seam: 'src/lib/surveyorWrite.js', walls: ['buildContentVocabulary'] },
-  'style-overhaul':      { disposition: 'walled', seam: 'src/lib/surveyorWrite.js', walls: ['buildStyleVocabulary'] },
+  // ⚰ 'style-overhaul' RETIRED (ODQ §763.2, Q-STYLE arm 2) — the edge directory is deleted
+  // and its client transport went with it, so the surface is off BOTH sides of the census
+  // and an entry here would now red as a stale row. Its wall was `buildStyleVocabulary`;
+  // that registry is RETAINED by the ruling and simply has no AI surface left to wall.
   'construct-settlement':{ disposition: 'walled', seam: 'src/lib/surveyorWrite.js', walls: ['buildConstructVocabulary'] },
   'construct-realm':     { disposition: 'walled', seam: 'src/lib/surveyorWrite.js', walls: ['buildConstructVocabulary'] },
   'interpret-session':   { disposition: 'walled', seam: 'src/lib/surveyorWrite.js', walls: ['buildOpVocabulary'] },

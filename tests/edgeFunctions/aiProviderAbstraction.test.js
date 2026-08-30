@@ -343,8 +343,9 @@ describe('generate-chronicle — secondary seam shares the safety layer', () => 
 // input is simply billed on every call forever. Nothing else in the suite would notice,
 // so the wiring is pinned structurally here alongside the other cost regressions.
 describe('the Surveyor shells attach cache_control to their static prefix (wave L-4)', () => {
+  // ⚰ style-overhaul RETIRED (ODQ §763.2, Q-STYLE arm 2) — the whole edge directory is deleted.
   const SHELLS = [
-    'custom-content', 'style-overhaul', 'construct-settlement',
+    'custom-content', 'construct-settlement',
     'construct-realm', 'surveyor-autonomy', 'interpret-session',
   ];
 
@@ -384,11 +385,12 @@ describe('every walled Surveyor surface wires the formative repair loop (wave L-
   const sealsAPrefix = (src) => src.includes("from '../_shared/anthropicCache.ts'");
   const COMPILE_SURFACES = shellDirs.filter((name) => sealsAPrefix(shellSrc(name)));
 
-  it('discovery is non-vacuous and finds the five walled surfaces plus interpret', () => {
-    expect(COMPILE_SURFACES.length).toBeGreaterThanOrEqual(6);
+  it('discovery is non-vacuous and finds the four walled surfaces plus interpret', () => {
+    // ⚰ style-overhaul RETIRED (ODQ §763.2, Q-STYLE arm 2) — the whole edge directory is deleted. MEASURED 6 -> 5 compile surfaces; down-only, for a real retirement.
+    expect(COMPILE_SURFACES.length).toBeGreaterThanOrEqual(5);
     for (const expected of [
       'custom-content', 'construct-settlement', 'construct-realm',
-      'style-overhaul', 'surveyor-autonomy', 'interpret-session',
+      'surveyor-autonomy', 'interpret-session',
     ]) {
       expect(COMPILE_SURFACES, `discovery lost '${expected}'`).toContain(expected);
     }

@@ -37,7 +37,9 @@ afterEach(() => {
 
 describe('auto-reload edge lifetime', () => {
   it('discovers every production caller (guard against a vacuous census)', () => {
-    expect(AUTO_RELOAD_CALLERS.length).toBeGreaterThanOrEqual(11);
+    // ⚰ style-overhaul RETIRED (ODQ §763.2, Q-STYLE arm 2) — the whole edge directory is deleted.
+    // MEASURED 11 -> 10. Down-only, and only for a genuine retirement.
+    expect(AUTO_RELOAD_CALLERS.length).toBeGreaterThanOrEqual(10);
   });
 
   it.each(AUTO_RELOAD_CALLERS)('%s schedules auto-reload through the shared lifetime helper', (name) => {

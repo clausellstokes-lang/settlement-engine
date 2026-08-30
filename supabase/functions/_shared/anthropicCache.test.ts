@@ -40,7 +40,6 @@ import {
 import { buildSurfaceCharter } from './aiCharterBundle.js';
 import { buildConstructPrompt, constructStaticPrefix } from './constructCore.ts';
 import { buildContentPrompt, contentStaticPrefix } from '../custom-content/customContentCore.ts';
-import { buildStylePrompt, styleStaticPrefix } from '../style-overhaul/styleOverhaulCore.ts';
 import { buildAutonomyPrompt, autonomyStaticPrefix, coerceAutonomyVocabulary } from '../surveyor-autonomy/autonomyCore.ts';
 import { buildInterpretPrompt, interpretStaticPrefix } from '../interpret-session/interpretCore.ts';
 
@@ -102,14 +101,6 @@ const CONSTRUCT_VOCAB = {
   constraintDimensions: ['resourcePressure'],
   constraintBands: ['low', 'moderate', 'high'],
 };
-const STYLE_VOCAB = {
-  furniture: ['compass'],
-  hazardGlyphs: ['diamond'],
-  anchorGlyphs: ['ring'],
-  contrast: ['soft'],
-  baseLenses: ['parchment'],
-  roles: { palette: ['water'], district: ['merchant'], stroke: ['river'], opacity: ['waterFill'] },
-};
 const AUTONOMY_VOCAB = coerceAutonomyVocabulary({
   signals: [{ id: 'world.tick', type: 'number', scope: 'world', min: 0 }],
   nudgeTypes: ['famine'],
@@ -130,12 +121,6 @@ const SURFACES: Array<{
     charterKey: 'customContent',
     prefix: () => contentStaticPrefix({}),
     prompt: (t) => buildContentPrompt(t, {}, BUNDLE, 'Realm', 'canary-1'),
-  },
-  {
-    label: 'styleOverhaul',
-    charterKey: 'styleOverhaul',
-    prefix: () => styleStaticPrefix(STYLE_VOCAB),
-    prompt: (t) => buildStylePrompt(t, STYLE_VOCAB, BUNDLE, 'Town', 'canary-1'),
   },
   {
     label: 'construct',
@@ -230,6 +215,20 @@ Deno.test('padPrefixToFloor leaves a prefix that already clears the floor untouc
 Deno.test('the charter pays for the cache where it can: customContent needs no padding', () => {
   // The largest charter clears the floor unaided, so this surface carries teaching text
   // where the narrative lane had to carry filler. The smaller surfaces still pad.
+  // ⚰⭐ THE PADDING HALF WAS styleStaticPrefix UNTIL ODQ §763.2 RETIRED THAT SURFACE. Rather
+  // than re-point it at ONE arbitrary replacement, it is now driven over EVERY remaining
+  // surface in the table — which is the claim the comment above always made and only
+  // sampled. MEASURED at this tree: customContent 28,943 chars (no pad); construct 17,713,
+  // autonomy 17,777 and interpret 17,760 all pad. A surface that grows past the floor reds
+  // here and the row moves up to the unaided side deliberately, not silently.
   assert(!contentStaticPrefix({}).includes('[CACHE-STABILIZER'));
-  assert(styleStaticPrefix(STYLE_VOCAB).includes('[CACHE-STABILIZER'));
+  for (const surface of SURFACES) {
+    if (surface.charterKey === 'customContent') continue;
+    assert(
+      surface.prefix().includes('[CACHE-STABILIZER'),
+      `${surface.label} stopped padding — it now clears the floor unaided`,
+    );
+  }
+  // Liveness anchor: the loop above is not empty.
+  assert(SURFACES.length > 1);
 });

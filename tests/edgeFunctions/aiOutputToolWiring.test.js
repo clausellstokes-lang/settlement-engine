@@ -44,18 +44,16 @@ import { contentStaticPrefix } from '../../supabase/functions/custom-content/cus
 import { constructStaticPrefix } from '../../supabase/functions/_shared/constructCore.ts';
 import { interpretStaticPrefix } from '../../supabase/functions/interpret-session/interpretCore.ts';
 import { autonomyStaticPrefix } from '../../supabase/functions/surveyor-autonomy/autonomyCore.ts';
-import { styleStaticPrefix } from '../../supabase/functions/style-overhaul/styleOverhaulCore.ts';
-import { buildStyleVocabulary } from '../../src/design/townMapStyleWall.js';
 import { buildConstructVocabulary } from '../../src/domain/construct/configVocabulary.js';
 import { buildOpVocabulary } from '../../src/domain/intent/opVocabulary.js';
 
 const FN_DIR = resolve(process.cwd(), 'supabase', 'functions');
 const shellSrc = (name) => readFileSync(join(FN_DIR, name, 'index.ts'), 'utf8');
 
-/** The six compile shells and the schema surface each one forces. */
+/** The five compile shells and the schema surface each one forces.
+ *  ⚰ 'style-overhaul' RETIRED (ODQ §763.2, Q-STYLE arm 2) — six shells became five. */
 const SHELLS = Object.freeze({
   'custom-content': 'customContent',
-  'style-overhaul': 'styleOverhaul',
   'construct-settlement': 'construct',
   'construct-realm': 'construct',
   'surveyor-autonomy': 'autonomy',
@@ -322,7 +320,6 @@ describe('the coaching block obeys the quantization law (§4c.3)', () => {
       }, block),
       customContent: contentStaticPrefix({}, block),
       interpret: interpretStaticPrefix(buildOpVocabulary(), block),
-      styleOverhaul: styleStaticPrefix(buildStyleVocabulary(), block),
       autonomy: autonomyStaticPrefix({}, block),
     };
 
@@ -345,28 +342,30 @@ describe('the coaching block obeys the quantization law (§4c.3)', () => {
     expect(buried, `filler sits between the coaching and the marker on: ${buried.join(' | ')}`).toEqual([]);
   });
 
-  it('a styleOverhaul prefix carries NO construct coaching (the surface binding, end to end)', () => {
+  // ⚠ RE-POINTED, NOT DELETED (ODQ §763.2). This drove styleOverhaul, which was one of the
+  // TWO surfaces with no exam task. That surface is retired; `autonomy` is the other one and
+  // carries the identical property, so the claim survives its subject intact.
+  it('an autonomy prefix carries NO construct coaching (the surface binding, end to end)', () => {
     // THE CLAIM BEING PROTECTED is the block's own header: "verdicts from the same
     // validators that will grade this answer". PROFILE records a CONFIG-vocabulary failure.
-    // Nothing in a style compile is graded by the config wall, so a style prompt asserting
-    // that sentence over that finding was telling the model something untrue.
-    const styleVocab = buildStyleVocabulary();
-    const forStyle = renderCoachingBlock(PROFILE, 'styleOverhaul');
-    expect(forStyle, 'styleOverhaul has no exam task, so it has nothing to say').toBe('');
-    expect(styleStaticPrefix(styleVocab, forStyle)).toBe(styleStaticPrefix(styleVocab));
+    // Nothing in an autonomy compose is graded by the config wall, so an autonomy prompt
+    // asserting that sentence over that finding was telling the model something untrue.
+    const forAutonomy = renderCoachingBlock(PROFILE, 'autonomy');
+    expect(forAutonomy, 'autonomy has no exam task, so it has nothing to say').toBe('');
+    expect(autonomyStaticPrefix({}, forAutonomy)).toBe(autonomyStaticPrefix({}));
 
     // NEGATIVE CONTROL, executed rather than described: the pre-fix signature had no surface
-    // to filter by, so what a style prompt received was exactly the construct block. Build
-    // that prefix here and show it really does carry the foreign sentence - otherwise the
-    // assertion above would be passing because the fixture renders nothing anywhere.
+    // to filter by, so what an uncovered prompt received was exactly the construct block.
+    // Build that prefix here and show it really does carry the foreign sentence - otherwise
+    // the assertion above would pass because the fixture renders nothing anywhere.
     const constructBlock = renderCoachingBlock(PROFILE, 'construct');
     expect(constructBlock.length, 'guard the guard: the fixture must coach SOMEWHERE').toBeGreaterThan(0);
-    const asItUsedToBe = styleStaticPrefix(styleVocab, constructBlock);
+    const asItUsedToBe = autonomyStaticPrefix({}, constructBlock);
     expect(asItUsedToBe).toContain(constructBlock);
-    expect(asItUsedToBe).not.toBe(styleStaticPrefix(styleVocab));
+    expect(asItUsedToBe).not.toBe(autonomyStaticPrefix({}));
   });
 
-  it('every surface receives ONLY its own exam task, and the two uncovered ones receive nothing', () => {
+  it('every surface receives ONLY its own exam task, and the uncovered one receives nothing', () => {
     const cVocab = buildConstructVocabulary();
     const everySurface = {
       construct: (c) => constructStaticPrefix({
@@ -375,7 +374,6 @@ describe('the coaching block obeys the quantization law (§4c.3)', () => {
       }, c),
       customContent: (c) => contentStaticPrefix({}, c),
       interpret: (c) => interpretStaticPrefix(buildOpVocabulary(), c),
-      styleOverhaul: (c) => styleStaticPrefix(buildStyleVocabulary(), c),
       autonomy: (c) => autonomyStaticPrefix({}, c),
     };
     // A profile that failed ALL THREE exam tasks: the strongest fixture, because every
@@ -399,7 +397,7 @@ describe('the coaching block obeys the quantization law (§4c.3)', () => {
     for (const [surface, build] of Object.entries(everySurface)) {
       const block = renderCoachingBlock(allFailed, surface);
       const prefix = build(block);
-      if (surface === 'styleOverhaul' || surface === 'autonomy') {
+      if (surface === 'autonomy') {
         expect(block, `${surface} has no exam task`).toBe('');
         expect(prefix, `${surface} must be byte-identical to its uncoached prefix`).toBe(build(''));
         continue;
@@ -473,7 +471,6 @@ describe('the intent atlas rides the shared prefix, and the floor still holds', 
         constraintDimensions: cVocab.constraintDimensions, constraintBands: cVocab.constraintBands,
       }),
       interpret: interpretStaticPrefix(buildOpVocabulary()),
-      styleOverhaul: styleStaticPrefix(buildStyleVocabulary()),
     };
   };
 
@@ -517,14 +514,12 @@ describe('the intent atlas rides the shared prefix, and the floor still holds', 
     expect(PREFIXES().interpret).not.toContain('INTENT ATLAS');
   });
 
-  it('styleOverhaul carries NO atlas section, deliberately', () => {
-    // ATLAS_SURFACES omits it: a cosmetic compile infers no intent and would gain nothing
-    // from population data. Asserted so a future "add it everywhere" sweep reds here.
-    expect(PREFIXES().styleOverhaul).not.toContain('INTENT ATLAS');
-    expect(shellSrc('style-overhaul')).not.toContain('intentAtlasBundle');
-    const core = readFileSync(join(FN_DIR, 'style-overhaul', 'styleOverhaulCore.ts'), 'utf8');
-    expect(core).not.toContain('buildIntentAtlasSection');
-  });
+  // ⚰ 'styleOverhaul carries NO atlas section, deliberately' WAS DELETED HERE (ODQ §763.2).
+  // Its subject was the one CHARTER surface deliberately absent from ATLAS_SURFACES, and the
+  // pin existed so a future "add it everywhere" sweep would red. With the surface retired the
+  // two rosters coincide and there is nothing left to omit — a point src/domain/intentAtlas.js
+  // now records in its own header, along with the warning that they coincide BY ACCIDENT and
+  // ATLAS_SURFACES must stay hand-declared rather than derived from CHARTER_SURFACES.
 
   it('every prefix is byte-stable across two builds (the caching claim, re-proven)', () => {
     const a = PREFIXES();

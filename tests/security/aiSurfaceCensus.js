@@ -171,14 +171,24 @@ export const AI_SURFACE_ROSTER = [...new Set([...AI_SURFACES, ...AI_CLIENT_TRANS
 
 /**
  * NON-VACUITY FLOORS (guard-the-guard), shared so the two enforcers cannot drift on the
- * bar either. These are LOWER bounds on today's measured sizes — 12 model-calling edge
- * surfaces, 23 client transports, 13 rostered AI surfaces. Adding a surface never touches
+ * bar either. These are LOWER bounds on today's measured sizes — 11 model-calling edge
+ * surfaces, 22 client transports, 12 rostered AI surfaces. Adding a surface never touches
  * them. The ONLY legal move is DOWNWARD, and only as a deliberate act when a surface is
  * genuinely retired from the tree; raising one to make a red run green would be raising
  * the bar on a detector that has already collapsed.
+ *
+ * ⚰ MOVED DOWN 2026-08-30 BY A GENUINE RETIREMENT (ODQ §763.2, Q-STYLE arm 2), which is the
+ * one move this comment authorises: `style-overhaul` left BOTH sides at once — its edge
+ * directory was deleted and its client transport (surveyorWrite.compileStyleOverhaul) went
+ * with it. MEASURED at that tree, before and after: edge 12 → 11, client transports 23 → 22,
+ * roster 13 → 12. Only `roster` was actually AT its floor, so only it was forced; the other
+ * two literals are re-recorded here so the comment keeps naming the real sizes.
+ * ⚠ THE ONE-SURFACE-TWO-SIDES SHAPE IS WHY THIS IS SAFE TO LOWER: a retirement that removed
+ * only the edge half would have left the client transport in the roster and moved `roster`
+ * by nothing, which is exactly the asymmetry this two-sided census exists to expose.
  */
 export const CENSUS_FLOORS = Object.freeze({
   edgeSurfaces: 11,
   clientTransports: 20,
-  roster: 13,
+  roster: 12,
 });

@@ -9,9 +9,9 @@
  * provider directly — this only ever reaches OUR endpoint, which grounds the model,
  * enforces the schema wall, and charges the task-priced credit (S1 money path).
  *
- * The response is passed back RAW (draft / candidate style / config+constraints /
- * interpretation) — the PURE HALVES (contentReview / townMapStyleWall / configVocabulary /
- * interpretReview) do the client-side validation + review in the panels, so a hallucinated
+ * The response is passed back RAW (draft / config+constraints / interpretation) — the PURE
+ * HALVES (contentReview / configVocabulary / interpretReview) do the client-side validation
+ * + review in the panels, so a hallucinated
  * field can never survive even a compromised edge. The §2b `earlyAccess` flag, `byok`, and
  * `creditsRemaining` ride through untouched for the panel to surface.
  *
@@ -151,28 +151,21 @@ export async function compileCustomContent(ctx = {}) {
   };
 }
 
-/**
- * STYLE OVERHAUL — compile a prompt into a CANDIDATE bespoke map style (raw; the panel
- * re-validates it through validateBespokeStyle, so only known-role fields survive).
- * @param {{ prompt?: string } & Parameters<typeof buildWriteContext>[0]} [ctx]
- * @returns {Promise<{ ok: boolean, candidate?: object|null, musings?: Array<{text:string}>,
- *   error?: string, refusalKind?: string, refusalClass?: string|null, doors?: string[]|null,
- *   byok?: boolean, creditsRemaining?: number|null, earlyAccess?: boolean }>}
+/*
+ * ⚰ STYLE OVERHAUL — compileStyleOverhaul WAS RETIRED HERE (ODQ §763.2, Q-STYLE arm 2),
+ * together with the edge function it posted to (the styleOverhaul stage's own).
+ * ⚠ ITS SLUG IS DELIBERATELY NOT SPELLED IN THIS FILE, in a comment or anywhere else. This
+ * module is an INDIRECT ROUTER, so tests/security/aiSurfaceCensus.js Pass B harvests every
+ * quoted kebab-shaped literal here as a client transport — a tombstone naming the slug
+ * re-registers the surface it is announcing the death of, and the E-D roster stays at 13.
+ * Measured: it did exactly that on this car's first draft. Its ONLY caller was
+ * StyleOverhaulPanel.jsx, deleted in car 1; keeping a transport aimed at a function that no
+ * longer exists would have left a client able to POST into a 404 and call it a refusal.
+ * ⭐ THIS IS WHAT ORPHANED `buildStyleVocabulary`: line :165 of this module was one of the
+ * FOUR retained consumers R-STRIP6 recorded for src/design/townMapStyleWall.js, and it lived
+ * INSIDE this function. See the census recorded in this car's commit body — the wall itself
+ * is RETAINED by the ruling and is NOT touched here.
  */
-export async function compileStyleOverhaul(ctx = {}) {
-  const prompt = typeof ctx.prompt === 'string' ? ctx.prompt.trim() : '';
-  if (!prompt) return { ok: false, error: 'Describe the map look you want first.', refusalKind: 'input' };
-  const { buildStyleVocabulary } = await import('../design/townMapStyleWall.js');
-  const { anchorLabel, slices } = buildWriteContext({ ...ctx, prompt });
-  const res = await postWrite('style-overhaul', { prompt, anchorLabel, vocabulary: buildStyleVocabulary(), slices });
-  if (!res.ok) return res;
-  const d = res.data;
-  // The edge may name the proposal `style`, `candidate`, or `draft` — accept any (the wall
-  // re-validates regardless). Never trust it as final: validateBespokeStyle projects it.
-  const candidate = (d && typeof d === 'object')
-    ? (d.candidate ?? d.style ?? d.draft ?? null) : null;
-  return { ok: true, candidate, musings: passMusings(d), ...commonFields(d) };
-}
 
 /**
  * S5/S6 CONSTRUCTION — compile an intent into a raw generator CONFIG + declared CONSTRAINTS

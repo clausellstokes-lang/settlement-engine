@@ -7,16 +7,20 @@
  * pin + these source-anchored assertions (mirrors surveyorKillSwitch.test.js for S1/S3).
  *
  * Green-as-the-lane-builds: a stage whose edge fn is not yet present is SKIPPED; the
- * completeness test tightens to all four once the lane's last stage lands.
+ * completeness test is strict now that the lane's last stage has landed.
+ * ⚠ THE SKIP-IF-ABSENT SHAPE IS ALSO HOW A RETIREMENT COULD GO UNNOTICED, which is why the
+ * completeness arm carries a literal count as well as `STAGES.length`: deleting a row from
+ * the table AND its edge directory keeps `built.length === STAGES.length` true forever.
  */
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 // Each S4–S6 write stage: its edge fn dir + the stage key it must gate on.
+// ⚰ style-overhaul RETIRED (ODQ §763.2, Q-STYLE arm 2) — the whole edge directory is deleted. ⚠ The stage's kill-switch JSON key SURVIVES in applied migrations 152/154 and
+// cannot be un-said; it is simply never consulted, because nothing reaches the stage.
 const STAGES = [
   { fn: 'custom-content', stage: 'customContent' },
-  { fn: 'style-overhaul', stage: 'styleOverhaul' },
   { fn: 'construct-settlement', stage: 'constructSettlement' },
   { fn: 'construct-realm', stage: 'constructRealm' },
 ];
@@ -54,9 +58,13 @@ for (const { fn, stage } of built) {
 }
 
 describe('S4–S6 kill-switch coverage', () => {
-  it('ALL FOUR write stages are present and each wires the kill-switch fail-closed', () => {
+  it('ALL THREE surviving write stages are present and each wires the kill-switch fail-closed', () => {
     // The lane's last stage (construct-realm) has landed — completeness is now strict: every
     // S4–S6 write stage must exist and have been exercised by the per-stage suites above.
+    // ⚰ style-overhaul RETIRED (ODQ §763.2, Q-STYLE arm 2) — the whole edge directory is deleted. Four stages became three.
     expect(built.length).toBe(STAGES.length);
+    // Liveness anchor: `built` is filtered by existsSync, so an emptied STAGES table would
+    // satisfy the equality above just as happily. It must still be the real roster.
+    expect(built.length).toBe(3);
   });
 });

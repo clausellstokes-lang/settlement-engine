@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-30T04:11:03.850Z",
+  "generatedAt": "2026-08-30T13:27:36.189Z",
   "entry": "src/domain/aiOutputSchema.js",
-  "sourceHash": "34e478020da3d1e7",
+  "sourceHash": "0874f925a5e2526b",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -17,13 +17,6 @@
     "src/data/institutionalCatalog.js",
     "src/data/npcTraitWeights.js",
     "src/data/powerData.js",
-    "src/design/lightModel.js",
-    "src/design/townGlyphs/glyphCompiler.js",
-    "src/design/townGlyphs/index.js",
-    "src/design/townGlyphs/medieval.js",
-    "src/design/townMapExportPalette.js",
-    "src/design/townMapStyleWall.js",
-    "src/design/townMapStyles.js",
     "src/domain/activeConditions.js",
     "src/domain/aiOutputSchema.js",
     "src/domain/arcaneIdentity.js",

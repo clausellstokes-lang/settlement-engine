@@ -85,12 +85,31 @@ describe('aiOutputSchema bundle is fresh', () => {
     expect(meta.inputs).toContain('src/domain/aiOutputSchema.js');
   });
 
-  it('the CLIENT STYLE WALL is a recorded input (the schema mirrors its vocabulary)', () => {
-    // Named rather than merely counted: styleOverhaul's whole field set and every glyph-set
-    // and season id come from buildStyleVocabulary. A wall edit that skipped a rebuild would
-    // otherwise ship a tool schema forbidding a value the wall now accepts, and finding F-C
-    // is the record of how expensive that particular asymmetry is to notice.
-    expect(meta.inputs).toContain('src/design/townMapStyleWall.js');
+  /**
+   * ⚰⭐ THE CLIENT STYLE WALL IS NO LONGER AN INPUT, AND THAT IS THE ASSERTION NOW.
+   *
+   * This arm used to require `src/design/townMapStyleWall.js` in the recorded inputs,
+   * because styleOverhaul's whole field set and every glyph-set and season id came from
+   * buildStyleVocabulary, and a wall edit that skipped a rebuild would ship a tool schema
+   * forbidding a value the wall had started accepting (finding F-C is the record of how
+   * expensive that asymmetry was to notice).
+   *
+   * ODQ §763.2 retired the styleOverhaul surface, so that coupling is severed. Flipping the
+   * assertion rather than deleting it matters for a reason beyond tidiness: R-STRIP6 recorded
+   * this exact edge-bundle membership as the thing BLOCKING the design registries' deletion
+   * in STRIP-4. MEASURED at this tree, the rebuild dropped SEVEN design modules out of this
+   * closure — townMapStyleWall, townMapStyles, townMapExportPalette, townGlyphs/{index,
+   * medieval,glyphCompiler} and lightModel — taking the bundle from 113 inputs to 106. So
+   * this arm is now the standing proof that the block is GONE, and it reds if any of them
+   * creeps back into an edge closure.
+   */
+  it('the CLIENT DESIGN REGISTRIES are NOT recorded inputs (the styleOverhaul coupling is severed)', () => {
+    const designInputs = meta.inputs.filter((p) => p.startsWith('src/design/'));
+    expect(designInputs, 'a design registry re-entered the edge closure').toEqual([]);
+    // Liveness anchor: the closure is real and still carries the entry module, so the
+    // absence above is a severed coupling and not an emptied input list.
+    expect(meta.inputs).toContain('src/domain/aiOutputSchema.js');
+    expect(meta.inputs.length).toBeGreaterThan(50);
   });
 
   it('every input path in the meta still exists on disk', () => {

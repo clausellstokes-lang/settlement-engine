@@ -4,7 +4,7 @@
  *
  * _shared/promptEfficiency.ts's compactSlices is the house slice serializer:
  * canonical compact JSON, a per-task whole-bundle budget, VISIBLE truncation.
- * constructCore / customContentCore / styleOverhaulCore / autonomyCore all use it —
+ * constructCore / customContentCore / autonomyCore all use it —
  * but THREE read surfaces ship raw `JSON.stringify(s.data).slice(0, N)` per slice
  * (no compaction, no whole-bundle budget, hard mid-JSON cut): ai-analyst (N=6000,
  * the reviewed finding), plus the interview (6000) and interpret-session (4000)
@@ -25,10 +25,13 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const FUNCTIONS = join(ROOT, 'supabase/functions');
 
 // The cores that already serialize retrieval slices through compactSlices.
+// ⚰ styleOverhaulCore.ts RETIRED (ODQ §763.2, Q-STYLE arm 2) — it was a compactSlices
+// ADOPTER, so this roster shrinks by one. The three pinned RAW exceptions are untouched:
+// this retirement removes a compliant surface, never an exception, so the parity debt this
+// walker tracks is unchanged and no exception was quietly banked as a win.
 const ADOPTERS = [
   'supabase/functions/_shared/constructCore.ts',
   'supabase/functions/custom-content/customContentCore.ts',
-  'supabase/functions/style-overhaul/styleOverhaulCore.ts',
   'supabase/functions/surveyor-autonomy/autonomyCore.ts',
 ];
 
