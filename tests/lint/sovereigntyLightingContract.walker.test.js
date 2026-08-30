@@ -6835,7 +6835,23 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //     registry — exactly the two shapes `classify` parks). A predicted +3/+1 was banked
     //     first and this arm red with the measured actual, which is the whole reason the
     //     figures are asserted rather than described.
-    files: 2486, parked: 364, credited: 2122, titles: 20899, suiteTitles: 5787,
+    // ── TE-NET-1 (WEAVE NET-1, the render-tier road network), 2026-08-30, base 518c40880 ──
+    // 2486/364/2122/20899/5787 → the tuple below. Delta +1/+0/+1/+14/+2, and the ONE new
+    // file is tests/components/roadsLayer.test.jsx (car 2's canon-port wiring, homed beside
+    // its exact sibling tests/components/travelersLayer.test.jsx). Arithmetic closes:
+    // 364 + 2123 = 2487.
+    // ⭐ THE +14 IS SMALLER THAN THE TITLES THIS LANE WROTE, AND THE INSTRUMENT SAID SO. The
+    // lane added 20 test titles and 3 suite titles across three files; only 14 and 2 are
+    // census-visible. The gap was MEASURED, not reasoned: a temporary probe printed
+    // `parkReasonsFor` + `liveTitlesIn` + `liveSuiteTitlesIn` per file and reported
+    //   tests/components/roadsLayer.test.jsx   park=[]                            4 titles / 1 suite
+    //   tests/lib/roadNetworkMst.test.js       park=[]                           21 titles / 3 suites (was 11/2)
+    //   tests/lib/roadNetworkIndex.test.js     park=["TEST_CONTEXT_PARAM:test.each()"]  0 / 0
+    // — so the six titles and one suite title added to roadNetworkIndex.test.js are
+    // census-NEUTRAL: that file has been parked all along by its `test.each` shape. The
+    // probe was reverted and this file left byte-identical to its committed form before the
+    // tuple was recorded. Predict-and-bank would have written 20/3 here and red.
+    files: 2487, parked: 364, credited: 2123, titles: 20913, suiteTitles: 5789,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

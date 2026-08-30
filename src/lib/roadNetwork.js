@@ -290,10 +290,35 @@ function urquhartEdges(pts) {
 /**
  * @param {Array} saves       savedSettlements from the store
  * @param {Object} placements mapState.placements — keyed by burgId
+ * @param {{canonPortIds?: Set<string>|null}|null} [options]
+ *        WEAVE NET-1: `canonPortIds` unifies the render-tier port definition onto
+ *        the frozen canon's. When a campaign has an active spatial canon the
+ *        caller passes THAT canon's port-id set — the ids `domain/spatial/
+ *        distanceRead.isPort` answers true for, which is the sea graph's own node
+ *        list — and it becomes authoritative for `preferSea`. Absent or null ⇒ the
+ *        pre-canon institutional read below, byte-identically to before this
+ *        parameter existed.
+ *
+ *        WHY INJECTED RATHER THAN READ HERE: `distanceRead.js` is the ~53 kB
+ *        frozen-digest reader whose own docblock states it "never reaches first
+ *        paint", and importing ANY symbol from it pulls the whole module into the
+ *        importer's chunk — the exact incident recorded at
+ *        tests/build/vendorPdfLazy.test.js (a three-line import dragged it onto
+ *        the critical path). This module is the FP-G9 lazy-map-chunk resident and
+ *        stays a zero-domain-import leaf. The port LAW is still single-sourced:
+ *        the caller asks `isPort`, this module never re-derives it.
  * @returns {Array<{id, fromBurgId, toBurgId, fromX, fromY, toX, toY, tier, preferSea, reason}>}
  */
-export function computeRoadEdges(saves, placements) {
+export function computeRoadEdges(saves, placements, options = null) {
   if (!placements) return [];
+
+  // WEAVE NET-1 · ONE PORT DEFINITION. A frozen canon knows whether a settlement
+  // is REALLY a port — its sea-lane graph is built from geography ∧ institution
+  // ∧ (river ⇒ navigable) — while the config read below knows only what the
+  // settlement CLAIMS. Where the canon exists it wins outright, so a town that
+  // calls itself a port but sits inland in the frozen truth no longer asks the
+  // iframe for a sea lane. `null` (no canon) keeps the institutional read.
+  const canonPortIds = options?.canonPortIds instanceof Set ? options.canonPortIds : null;
 
   // Index saves by id so we can attach settlement data to each placement
   const saveById = new Map();
@@ -332,7 +357,15 @@ export function computeRoadEdges(saves, placements) {
       // emits `preferSea: true` on that edge where it emitted false before. The
       // edge SET and its order are unchanged — only this flag moves. A road network
       // rendered across this date boundary is expected to differ in exactly that way.
-      isPort: sett?.config?.tradeRouteAccess === 'port',
+      //
+      // ── WEAVE NET-1 ── When a canon exists the render tier stops keeping its own
+      // port definition and reads the canon's (see `canonPortIds` above). A
+      // placement with no `settlementId` cannot be looked up in a settlement-id
+      // keyed canon, so it is not a port under the canon — which is the honest
+      // answer: an unlinked pin is not a harbour the frozen sea graph connects.
+      isPort: canonPortIds
+        ? (!!p.settlementId && canonPortIds.has(String(p.settlementId)))
+        : sett?.config?.tradeRouteAccess === 'port',
       save,
       sett,
     });
