@@ -12,9 +12,9 @@
     "minN": 30,
     "weightFloor": 0.25,
     "soakWeightCap": 0.5,
-    "cellsTested": 213,
-    "cellsKept": 95,
-    "cellsUntestable": 33,
+    "cellsTested": 207,
+    "cellsKept": 94,
+    "cellsUntestable": 39,
     "cellsUnderSampled": 0
   },
   "cells": [
@@ -105,7 +105,7 @@
       "coBucket": "high",
       "n": 63,
       "effect": 0.11,
-      "weight": 0.26,
+      "weight": 0.27,
       "source": "soak"
     },
     {
@@ -145,7 +145,7 @@
       "coBucket": "moderate",
       "n": 61,
       "effect": -0.12,
-      "weight": 0.28,
+      "weight": 0.29,
       "source": "soak"
     },
     {
@@ -255,7 +255,7 @@
       "coBucket": "low",
       "n": 56,
       "effect": -0.12,
-      "weight": 0.43,
+      "weight": 0.44,
       "source": "soak"
     },
     {
@@ -265,7 +265,7 @@
       "coBucket": "moderate",
       "n": 56,
       "effect": 0.12,
-      "weight": 0.48,
+      "weight": 0.49,
       "source": "soak"
     },
     {
@@ -295,7 +295,7 @@
       "coBucket": "low",
       "n": 63,
       "effect": -0.12,
-      "weight": 0.37,
+      "weight": 0.38,
       "source": "soak"
     },
     {
@@ -305,7 +305,7 @@
       "coBucket": "moderate",
       "n": 63,
       "effect": 0.12,
-      "weight": 0.41,
+      "weight": 0.42,
       "source": "soak"
     },
     {
@@ -445,7 +445,7 @@
       "coBucket": "low",
       "n": 62,
       "effect": 0.12,
-      "weight": 0.4,
+      "weight": 0.41,
       "source": "soak"
     },
     {
@@ -455,7 +455,7 @@
       "coBucket": "high",
       "n": 65,
       "effect": -0.12,
-      "weight": 0.3,
+      "weight": 0.31,
       "source": "soak"
     },
     {
@@ -565,7 +565,7 @@
       "coBucket": "low",
       "n": 75,
       "effect": -0.12,
-      "weight": 0.4,
+      "weight": 0.41,
       "source": "soak"
     },
     {
@@ -575,7 +575,7 @@
       "coBucket": "moderate",
       "n": 75,
       "effect": 0.12,
-      "weight": 0.4,
+      "weight": 0.41,
       "source": "soak"
     },
     {
@@ -605,7 +605,7 @@
       "coBucket": "high",
       "n": 62,
       "effect": 0.12,
-      "weight": 0.33,
+      "weight": 0.34,
       "source": "soak"
     },
     {
@@ -865,16 +865,6 @@
       "coBucket": "Magic",
       "n": 61,
       "effect": -0.42,
-      "weight": 0.5,
-      "source": "soak"
-    },
-    {
-      "surface": "customContent",
-      "dimension": "settType.institutionShelf",
-      "bucket": "thorp",
-      "coBucket": "Religious",
-      "n": 61,
-      "effect": -0.2,
       "weight": 0.5,
       "source": "soak"
     },

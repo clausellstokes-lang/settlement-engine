@@ -109,7 +109,7 @@ export const CARTOGRAPHY_HEADROOM_PERMILLE = 1600;
 export const CARTOGRAPHY_CALIBRATION = Object.freeze({
   /** The largest canonical institution roster the pipeline produced, per tier. */
   MAX_INSTITUTIONS: Object.freeze({
-    thorp: 11, hamlet: 24, village: 41, town: 62, city: 55, metropolis: 63,
+    thorp: 12, hamlet: 25, village: 41, town: 63, city: 56, metropolis: 65,
   }),
   /**
    * The largest UTF-8 bytes-per-emitted-row the TC-4 layer produced, over every tier.
@@ -130,7 +130,7 @@ export const CARTOGRAPHY_CALIBRATION = Object.freeze({
    * roughly two rows in three should leave. The derived band rises with it
    * (ceil(450 x 1.6) = 720 from 709), which only ever loosens a ceiling.
    */
-  MAX_BUILDING_ROW_BYTES: 450,
+  MAX_BUILDING_ROW_BYTES: 448,
   /** The corpus this was read from. A row count that moves invalidates the reading. */
   CORPUS_ROWS: 504,
 });

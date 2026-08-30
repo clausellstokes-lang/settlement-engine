@@ -66,11 +66,19 @@ const NAMED_STANDING_STATE = ['religiousContest.js', 'deityStanceLane.js', 'trad
 // because this arm's message names the regression precisely — "used to name a cooldown
 // and no longer does" — where the SHRINK-only arm below would report the same deletion
 // only as a new offender.
+// ⭐ AND TWO MORE NAMES JOINED IN THE SAME ACT (2026-08-30, chair addendum from HERALD's
+// landing proof, executed independently here rather than taken on report). `partition()` run
+// standalone against `src/domain/worldPulse` reports TEN compliant emitters at this tip and
+// this list held seven. `occupation.js` is the load-bearing one — it was sitting in
+// NONCOMPLIANT_BASELINE below while measuring COMPLIANT, so the quarantine was over-broad and
+// the file was guarded by nothing in either direction; it is delisted there and listed here in
+// one act. `warRecordMode.js` was compliant and simply unlisted. Both now sit under the
+// only-GROWS arm, so neither can lose its mechanism silently.
 const COMPLIANT_BASELINE = [
   'deityStanceLane.js', 'factionCompetition.js', 'npcAgency.js',
-  'razingExecution.js',
+  'occupation.js', 'razingExecution.js',
   'relationshipRulesAdversarial.js', 'relationshipRulesCore.js',
-  'religiousContest.js', 'tradeWar.js',
+  'religiousContest.js', 'tradeWar.js', 'warRecordMode.js',
 ];
 
 // The current non-cooldown emitter set (BASELINE — may only SHRINK). These reference
@@ -92,9 +100,20 @@ const COMPLIANT_BASELINE = [
 // and the aftermath ATTRITED dwell (canReEngage / ATTRITED_DWELL_TICKS) is itself a
 // once-per-state-change latch. It floods nothing — same category as coup/occupation/
 // warDeployment (the war-layer one-shots). Grandfathered pending the composer audit.
+// ⛔ `occupation.js` DELISTED 2026-08-30 (chair addendum; ODQ §765.2's lane, car 8). It was
+// carried here as a grandfathered non-cooldown emitter and it has NOT been one for some time:
+// `partition()` executed standalone against `src/domain/worldPulse` puts it in the COMPLIANT
+// set at this tip AND at base `518c40880` unedited — measured both sides, byte-identical
+// verdict. A quarantine row for a file that is not in quarantine is worse than no row: the
+// SHRINK-only arm cannot see it (an absent name is a shrink, which is lawful) and the
+// only-GROWS arm never looked at it, so the file was guarded by nothing in either direction.
+// It moves to COMPLIANT_BASELINE above in the same act, which is what makes this a
+// re-classification rather than a deletion.
+//   ⚠ THE LIST IS NOW EXACTLY THE LIVE NON-COMPLIANT SET — 14 names, measured, with zero
+//   unlisted offenders and zero listed non-offenders. The new-name-reds rule is untouched.
 const NONCOMPLIANT_BASELINE = [
   'candidateEvents.js', 'convergence.js', 'coup.js', 'deploymentReturn.js', 'flows.js',
-  'mobilizationEffects.js', 'mobilizationReactions.js', 'occupation.js',
+  'mobilizationEffects.js', 'mobilizationReactions.js',
   'partyImpact.js', 'populationDynamics.js', 'pulseHelpers.js',
   'settlementStrategy.js', 'stressors.js', 'stressorsCore.js', 'warDeployment.js',
 ];

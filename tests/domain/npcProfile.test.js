@@ -521,7 +521,13 @@ const DEN_FALSE_POSITIVES = Object.freeze([
 
 describe('the criminal institution vocabulary (TE-CH-7)', () => {
   it('the catalog the pin is measured over is the live one, not a fixture', () => {
-    expect(wholeCatalogAsSettlement().count).toBe(276);
+    // 276 → 280 (2026-08-30, lane TE-RESIDUE-1, ODQ §708.5). RE-MEASURED, not re-worded: the
+    // burial-ladder content car added four distinct names (`Burial ground` serves two tiers,
+    // plus `Parish burial grounds`, `Burial grounds and charnel house`, `Cemetery network`).
+    // None is criminal, so the vocabulary arms below are unmoved — this figure is the
+    // non-vacuity anchor that proves they walk the LIVE catalog rather than a fixture, which
+    // is exactly why it had to move with it.
+    expect(wholeCatalogAsSettlement().count).toBe(280);
   });
 
   it('criminal name hints reach the criminal catalog institutions and nothing else', () => {

@@ -79,9 +79,22 @@ describe('MF-UC0 — the underground existence gate, the substructure facet, and
     // the two "access to" rows — every name a REAL catalog key, resolved through facetOf.
     expect(byValue.sewer).toEqual(['Sewage system']);
     expect(byValue.mine).toEqual(['Mine', 'Mine (open cast)', 'Stone quarry']);
+    // ⭐ `Cemetery network` JOINED THE CRYPT ROSTER AT THE BURIAL LADDER (2026-08-30, lane
+    // TE-RESIDUE-1, ODQ §708.5) and it joined by INFERENCE, not by an edit: the row is new and
+    // its name carries `cemeter`, so `facetOf` reaches crypt for it exactly as it does for a
+    // graveyard. `facetInferenceHonesty` A3 stays at its four declared delta cells because the
+    // pre-CH-1 table infers the same value — this list moves and that one does not, and both
+    // are true of the same row.
+    // ⚠ THE OTHER FOUR BURIAL ROWS DO NOT INFER A CRYPT, AND THAT IS LEFT ALONE DELIBERATELY.
+    // `Burial ground` (thorp, hamlet), `Parish burial grounds` and `Burial grounds and charnel
+    // house` carry no crypt keyword. A charnel house is arguably the most literal crypt in the
+    // catalog — but `institutionSubstructure` SEEDS THE UNDERCITY, so teaching the inference to
+    // reach it is a D6 coupling activation, which is the undercity train's call and not a
+    // content car's. Recorded here so it is a deferral rather than an oversight.
     expect(byValue.crypt).toEqual([
-      'Cathedral (10,000+ only)', 'Graveyard', 'Great cathedral', 'Major monasteries (5-10)', 'Monastery or friary',
-      'Multiple monasteries', 'Parish church', 'Parish churches (10-30)', 'Parish churches (2-5)', 'Parish churches (50-100+)',
+      'Cathedral (10,000+ only)', 'Cemetery network', 'Graveyard', 'Great cathedral', 'Major monasteries (5-10)',
+      'Monastery or friary', 'Multiple monasteries', 'Parish church', 'Parish churches (10-30)',
+      'Parish churches (2-5)', 'Parish churches (50-100+)',
     ]);
     expect(byValue.cellar).toEqual([
       'Brewer', 'Brewery', 'City granaries', 'Communal root cellar', 'Merchant warehouses', 'State granary complex',

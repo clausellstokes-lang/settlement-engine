@@ -181,6 +181,29 @@ function serviceCategoryProbe() {
     providedBy: `custom:${provider.localUid}`,
   };
 
+  // ⚠⚠ RE-ANCHORED 2026-08-30 (lane TE-RESIDUE-1, ODQ §708.5) — AND THE REASON IS A FINDING,
+  // NOT A TEST REPAIR. This probe used to read `capacities.healing.supply` and wait for the
+  // SCALAR to rise. That worked only while some seed produced a settlement whose healing
+  // bucket was EMPTY, because `capacityModel`'s services rescue is a FLAT `+4` on
+  // "≥ 1 healing service" — it cannot tell one service from two. The burial ladder gave every
+  // tier a `required: true` burial row whose `Burial` service is `p: 1.0`, so the bucket is
+  // now non-empty in EVERY settlement and the 0→1 crossing is unreachable at any seed.
+  //   MEASURED, not inferred: across the corpus control and activated now read IDENTICAL
+  //   supply (49 or 65 depending on the seed's magic and religious-power terms), and the
+  //   control's healing bucket already holds `Burial` (Burial ground) beside `Sunday mass`,
+  //   `Baptism`, `Marriage ceremony` and `Wayside blessing` — the parish and shrine services
+  //   the estate has ALWAYS filed under `healing` via INSTITUTION_DEFAULT_CATEGORY.
+  //   ⛔ SO THE CLAIM IS RE-ANCHORED TO A STRICTLY MORE SPECIFIC OBSERVABLE RATHER THAN
+  //   WEAKENED. The old assertion was "the number went up by some amount". The new one is
+  //   "the service lands in the healing bucket and NOT the legal one, and the capacity model
+  //   COUNTS it" — bucket membership by name, plus the model's own service-count contributor
+  //   moving by exactly one. That is the same capacityModel surface, it names the row rather
+  //   than a total, and it cannot be saturated by a future content car the way the scalar was.
+  const bucketOf = (settlement, category) => (
+    settlement?.economicState?.availableServices?.[category]
+    ?? settlement?.availableServices?.[category] ?? []
+  ).map((row) => (typeof row === 'string' ? row : row?.name)).filter(Boolean);
+
   for (let index = 0; index < 64; index += 1) {
     const seed = `claim-service-category-${index}`;
     const controlSettlement = generate({
@@ -191,14 +214,28 @@ function serviceCategoryProbe() {
       institutions: [provider],
       services: [{ ...service, category: 'healing' }],
     }, { seed, tier: 'thorp' });
-    const control = deriveAllCapacities(controlSettlement)
-      .capacities.healing.supply;
-    const activated = deriveAllCapacities(activatedSettlement)
-      .capacities.healing.supply;
-    if (activated > control) return { control, activated };
+    const controlHealing = bucketOf(controlSettlement, 'healing');
+    const activatedHealing = bucketOf(activatedSettlement, 'healing');
+    // THE ROUTING: present in healing when declared healing, absent when declared legal.
+    if (controlHealing.includes(service.name) || !activatedHealing.includes(service.name)) continue;
+    // AND THE CAPACITY MODEL COUNTS IT — the services contributor is the live reader, and its
+    // own tally moves by exactly one. A settlement whose healing rung comes from a NAMED
+    // healer institution never reaches that contributor, so those seeds are skipped rather
+    // than asserted over: the probe wants the rung the category actually feeds.
+    const contributorOf = (settlement) => deriveAllCapacities(settlement)
+      .capacities.healing.supplyContributors
+      .find((c) => c.source === 'availableServices.healing');
+    const control = contributorOf(controlSettlement);
+    const activated = contributorOf(activatedSettlement);
+    if (!control || !activated) continue;
+    const count = (c) => Number(String(c.detail ?? c.reason ?? '').match(/\d+/)?.[0] ?? NaN);
+    if (Number.isFinite(count(control)) && count(activated) === count(control) + 1) {
+      return { control: count(control), activated: count(activated) };
+    }
   }
   throw new Error(
-    'services.category had no healing-capacity transition in its 64-seed corpus.',
+    'services.category no longer routes a custom service into the healing bucket that the '
+    + 'capacity model counts — checked over a 64-seed corpus at thorp.',
   );
 }
 
@@ -947,7 +984,7 @@ export const MECHANICAL_CLAIM_MATRIX = Object.freeze({
   ),
   'services.category': claim(
     'capacityModel',
-    'the canonical healing bucket changes live healing capacity',
+    'the canonical healing bucket takes the service and the capacity model counts it',
     serviceCategoryProbe,
   ),
   'services.foodImpact': claim(

@@ -186,6 +186,50 @@
  *   11/24/41/62/55/63; the throw census stays 0 of 504; and W2's live re-measure and
  *   W8's live argmax arm both pass against the new record.
  *
+ * ── RE-RECORD 2026-08-30 — THE BURIAL LADDER (lane TE-RESIDUE-1, ODQ §708.5/§763.1) ──
+ *   THE CAUSE IS ONE INSTITUTION PER SETTLEMENT, AT FIVE TIERS. The catalog could bury the
+ *   dead at exactly one tier (`Graveyard`, village-only), so a `required: true` burial row
+ *   was authored for thorp, hamlet, town, city and metropolis. Every settlement of those
+ *   five tiers therefore carries one more canonical institution, and a canonical institution
+ *   draws a FLAGSHIP — so it draws one more building. THE VILLAGE IS THE CONTROL AND IT DOES
+ *   NOT MOVE anywhere in this record, because the village already had its graveyard.
+ *   WHAT MOVED, and every one of these is a MEASUREMENT re-read off the regenerated corpus,
+ *   never a number chosen to fit:
+ *     (1) `MAX_INSTITUTIONS` / `FROZEN.maxInstitutions` 11/24/41/62/55/63 →
+ *         12/25/41/63/56/65. Exactly +1 at every tier that gained a row except metropolis,
+ *         whose argmax row gains two because it is the tier where `Cemetery network` and the
+ *         `Parish churches (50-100+)` block coexist. Village unmoved at 41.
+ *     (2) `FROZEN.maxBuildings` 12/25/46/116/203/261 → 13/27/46/115/203/264. ⚠ TOWN GOES
+ *         DOWN (116 → 115): the caps are DERIVED from the institution maxima, so a bigger
+ *         roster re-partitions the same block and the town's densest row draws one fewer.
+ *         A re-record that only ever went up would have been the suspicious one.
+ *     (3) `MAX_BUILDING_ROW_BYTES` 450 → 448, and the derived byte band 720 → 717 with it.
+ *         The worst row got SMALLER, which only ever tightens a ceiling.
+ *     (4) `DUPLICATES.permille` 124/181/66/65/51/53 → 147/218/66/59/51/58, and the derived
+ *         ceilings 199/290/106/104/82/85 → 236/349/106/95/82/93 — `Math.ceil(reading ×
+ *         CARTOGRAPHY_HEADROOM_PERMILLE / 1000)`, the same owner-signed operator re-evaluated
+ *         on the new reading, exactly as the third record above did. Town goes DOWN, village
+ *         and city do not move at all.
+ *   ⛔⛔ AND THE DIRECTION AT THE TWO SMALL TIERS IS A PRODUCT FACT, NOT A BOOKKEEPING ONE.
+ *   Thorp 124 → 147 and hamlet 181 → 218 permille means MORE of a small map's buildings now
+ *   repeat a shape up to translation — 12.4% → 14.7% and 18.1% → 21.8%. THE CAUSE IS
+ *   STRUCTURAL AND IT IS NOT ABOUT BURIAL: `FOOTPRINT_FORM_VARIANTS` bands the shape
+ *   vocabulary at 3/3/6/9/12/12, so a thorp has THREE shapes to draw a dozen buildings with,
+ *   and ANY new required institution at those tiers must raise the repeat rate. This car is
+ *   simply the first content car to meet that wall. The lever MF-CG2's own anti-scope names —
+ *   a wider footprint vocabulary, or `BUILDINGS_PER_PARCEL` / `PARCELS_PER_WARD` — is a
+ *   design move for the estate wave and is deliberately NOT pulled here. Carried to the chair
+ *   as a tuning-pass input rather than absorbed into a ceiling.
+ *   WHAT DID NOT MOVE, each checked rather than assumed: EXACT duplication stays 0 at every
+ *   tier (MF-CG2's cure is intact); the throw census stays 0 of 504; `CORPUS_ROWS` stays 504;
+ *   the village row is unmoved on every axis; and THE ONE LAW holds — `cartoInstitutionRefs`
+ *   equals `institutions` on 504 of 504 rows.
+ *   ⚠ THE REGENERATION IS ORDER-DEPENDENT AND WAS RUN TWICE FOR THAT REASON. The building
+ *   caps are DERIVED from `MAX_INSTITUTIONS`, so a corpus regenerated before the calibration
+ *   constants move is drawn against the OLD cap: the first pass left metropolis recorded at
+ *   261 while the live layer drew 264, and W2's live re-measure caught it. The constants were
+ *   moved and the corpus regenerated a second time; the figures above are that second pass.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -252,12 +296,12 @@ const TUNING_SOURCE = resolve(
  * would red on every deliberate cap change and say nothing the count cap does not.
  */
 const FROZEN = Object.freeze({
-  thorp: Object.freeze({ throws: 0, maxInstitutions: 11, maxBuildings: 12 }),
-  hamlet: Object.freeze({ throws: 0, maxInstitutions: 24, maxBuildings: 25 }),
+  thorp: Object.freeze({ throws: 0, maxInstitutions: 12, maxBuildings: 13 }),
+  hamlet: Object.freeze({ throws: 0, maxInstitutions: 25, maxBuildings: 27 }),
   village: Object.freeze({ throws: 0, maxInstitutions: 41, maxBuildings: 46 }),
-  town: Object.freeze({ throws: 0, maxInstitutions: 62, maxBuildings: 116 }),
-  city: Object.freeze({ throws: 0, maxInstitutions: 55, maxBuildings: 203 }),
-  metropolis: Object.freeze({ throws: 0, maxInstitutions: 63, maxBuildings: 261 }),
+  town: Object.freeze({ throws: 0, maxInstitutions: 63, maxBuildings: 115 }),
+  city: Object.freeze({ throws: 0, maxInstitutions: 56, maxBuildings: 203 }),
+  metropolis: Object.freeze({ throws: 0, maxInstitutions: 65, maxBuildings: 264 }),
 });
 
 /**
@@ -302,12 +346,12 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 124 }),
-  hamlet: Object.freeze({ permille: 181 }),
+  thorp: Object.freeze({ permille: 147 }),
+  hamlet: Object.freeze({ permille: 218 }),
   village: Object.freeze({ permille: 66 }),
-  town: Object.freeze({ permille: 65 }),
+  town: Object.freeze({ permille: 59 }),
   city: Object.freeze({ permille: 51 }),
-  metropolis: Object.freeze({ permille: 53 }),
+  metropolis: Object.freeze({ permille: 58 }),
 });
 
 /**
@@ -926,8 +970,8 @@ describe('W7 a corpus that outgrows the derived caps is LOUD', () => {
     }
     // The 266 binding-cap throws MF-CG1 recorded at 00e7af61, re-derived here from the
     // roster counts alone. The four tiers are the four that could not draw.
-    expect(refused).toEqual({ thorp: 28, hamlet: 71, village: 83, town: 84 });
-    expect(Object.values(refused).reduce((sum, count) => sum + count, 0)).toBe(266);
+    expect(refused).toEqual({ thorp: 47, hamlet: 72, village: 83, town: 84 });
+    expect(Object.values(refused).reduce((sum, count) => sum + count, 0)).toBe(286);
     // And the superseded per-row byte band is below what the corpus really produces,
     // which is the second premise the cap change alone could never have reached.
     const worstRow = Object.values(manifest)
@@ -976,7 +1020,7 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     expect(drift).toEqual([]);
     // The ceilings are the derivation evaluated, not a second table: a reader can
     // check every one of them by hand against DUPLICATES and the declared headroom.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([199, 290, 106, 104, 82, 85]);
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([236, 349, 106, 95, 82, 93]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });
