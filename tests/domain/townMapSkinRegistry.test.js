@@ -4,16 +4,17 @@
  * surface, and flipped back — the seam that was severed (resolveActiveStyle had zero production
  * callers; coerceStyleId collapsed any bespoke id to parchment; the picker listed only base ids).
  *
- * DONE-WHEN #4 (design §8) is proven here across three of the four surfaces + the flip-back law:
+ * DONE-WHEN #4 (design §8) is proven here across the surfaces that remain + the flip-back law:
  *   • PERSISTENCE — readStyleLens/withStyleLens ADMIT a saved skin id (present in the blob's own
  *     collection); a stale id self-heals to the default; a base lens id is NEVER shadowed.
- *   • WORN — image export SVG + the pane's art op-list (the illustrated underlay's SINGLE source)
- *     + the thumbnail raster all resolve the ACTIVE style through resolveActiveStyle and carry the
- *     skin's palette, in LOCKSTEP (pane === export, the WYSIWYG law).
+ *   • WORN — the pane's art op-list (the illustrated underlay's SINGLE source) resolves the ACTIVE
+ *     style through resolveActiveStyle and carries the skin's palette.
  *   • FLIP-BACK — selecting a base lens clears the skin selection but KEEPS the saved collection;
  *     the skin is instantly re-selectable; a deleted skin never strands the map.
- * (The standalone PDF surface is proven in tests/pdf/townMapDocument.smoke.test.js — a real
- *  react-pdf render, node env; the picker SELECT affordance in tests/components/…SkinPicker.)
+ * (§725/§748: the image-export SVG arm, the thumbnail-raster arm and the standalone-PDF surface
+ *  this note used to cite are GONE WITH THE LANES THEMSELVES — the legacy settlement map's export,
+ *  thumbnail and PDF surfaces are stripped. The picker SELECT affordance is proven in
+ *  tests/components/…SkinPicker.)
  *
  * DORMANCY: a settlement with NO bespoke collection is byte-identical to before at every surface
  * (proven by the base-lens equivalence assertions) — the existing goldens never move this slice.
@@ -30,8 +31,6 @@ import {
 } from '../../src/domain/townMap/bespokeStyles.js';
 import { validateBespokeStyle } from '../../src/design/townMapStyleWall.js';
 import { resolveTownMapStyle } from '../../src/design/townMapStyles.js';
-import { townMapExportSvg } from '../../src/lib/townMapExport.js';
-import { townMapThumbCacheKey } from '../../src/lib/townMapThumb.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
 
 const SKIN_ID = 'neon-noir';
@@ -88,40 +87,20 @@ describe('skin registry — the seam persistence (readStyleLens / withStyleLens 
   });
 });
 
-describe('skin registry — WORN in lockstep (image export + pane art path + thumbnail)', () => {
-  it('the image export SVG wears the skin (its unique color present; differs from parchment)', () => {
-    const s = settlementWearingSkin();
-    const worn = townMapExportSvg(s);                          // no override ⇒ reads persisted styleLens
-    expect(worn).toContain(SKIN_WATER);                        // the skin is WORN
-    const parch = townMapExportSvg({ ...s, mapEdits: { styleLens: 'parchment' } });
-    expect(parch).not.toContain(SKIN_WATER);
-    expect(worn).not.toBe(parch);
-    // an explicit override of the same id resolves identically (the WYSIWYG law across entry points).
-    expect(worn).toBe(townMapExportSvg(s, { style: SKIN_ID }));
-  });
-
-  it('the pane art op-list (the illustrated underlay SINGLE source) === the export op-list', () => {
+describe('skin registry — WORN on the pane art path', () => {
+  it('the pane art op-list (the illustrated underlay SINGLE source) is the ONE resolved geometry', () => {
     const s = settlementWearingSkin();
     const edits = readMapEdits(s);
     const model = buildTownMapModel(s, edits);
     // The pane resolves activeStyle = resolveActiveStyle(activeLens, collection) and the underlay
-    // draws buildTownMapDrawList(model, activeStyle). The export draws the SAME. One geometry.
+    // draws buildTownMapDrawList(model, activeStyle) — the ONE geometry every surface reads.
+    // (§725/§748: the export op-list this arm used to compare against is gone with the export
+    // lane. A same-expression comparison would be a control that cannot fail, so it is not kept.)
     const activeStyle = resolveActiveStyle(readStyleLens(edits), readBespokeStyles(edits));
     const paneOps = buildTownMapDrawList(model, activeStyle);
-    const exportOps = buildTownMapDrawList(model, activeStyle);
-    expect(stable(paneOps)).toBe(stable(exportOps));
-    // and the worn ops are materially the skin, not parchment.
+    // the worn ops are materially the skin, not parchment.
     expect(stable(paneOps)).not.toBe(stable(buildTownMapDrawList(model, 'parchment')));
     expect(buildTownMapSvg(model, { style: activeStyle })).toContain(SKIN_WATER);
-  });
-
-  it('the thumbnail raster is keyed to + wears the skin (differs from parchment)', () => {
-    const s = settlementWearingSkin();
-    const worn = townMapThumbCacheKey(s, 128);
-    expect(worn).toContain(`|${SKIN_ID}|`);                    // keyed to the skin id (legible)
-    const parch = townMapThumbCacheKey({ ...s, mapEdits: { styleLens: 'parchment' } }, 128);
-    // the key hashes the rendered SVG, so a different key proves the raster bytes differ (worn).
-    expect(worn).not.toBe(parch);
   });
 });
 
@@ -148,7 +127,7 @@ describe('skin registry — flip-back (instant, non-destructive, re-selectable)'
     expect(listBespokeStyles(readBespokeStyles(emptied))).toEqual([]);
   });
 
-  it('DORMANCY: a settlement with no collection resolves + exports byte-identical to a base lens', () => {
+  it('DORMANCY: a settlement with no collection resolves byte-identical to a base lens', () => {
     const base = makeTownFixture({ tier: 'town', terrain: 'plains', walls: true, water: false, seed: 'skin-dormant' });
     const model = buildTownMapModel(base, readMapEdits(base));
     // resolveActiveStyle with an empty collection is byte-identical to resolveTownMapStyle.
@@ -156,6 +135,5 @@ describe('skin registry — flip-back (instant, non-destructive, re-selectable)'
     expect(stable(buildTownMapDrawList(model, resolveActiveStyle('parchment', {})))).toBe(
       stable(buildTownMapDrawList(model, 'parchment')),
     );
-    expect(townMapExportSvg(base)).toBe(townMapExportSvg({ ...base, mapEdits: { styleLens: 'parchment' } }));
   });
 });

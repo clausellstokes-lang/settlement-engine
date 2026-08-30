@@ -20,7 +20,8 @@ export default function Rule({ variant = 'single', ink, asSpace = false }) {
       className={`oc-rule oc-rule--${variant}`}
       aria-hidden="true"
       // Pre-baked, author-controlled SVG string (no user input) — the idiomatic
-      // way to mount a static inline SVG (townMapThumb precedent).
+      // way to mount a static inline SVG. (§725/§748: the townMapThumb lane this
+      // note used to cite as precedent is deleted with the legacy settlement map.)
       dangerouslySetInnerHTML={{ __html: ruleSvg(variant, ink ? { ink } : undefined) }}
     />
   );

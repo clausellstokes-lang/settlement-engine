@@ -1,9 +1,10 @@
 /**
  * domain/interior/interiorExport.js — the interior export lane (DOOR 3).
  *
- * PRE-WALLED BY CONSTRUCTION. The town map has no literal walls, so its UVTT export is
- * a documented seam (townMapExport.js MAP-EXPORTS-2) that must DERIVE blocking segments
- * from rect footprints. An interior HAS literal walls — model.walls IS the geometry — so
+ * PRE-WALLED BY CONSTRUCTION. A settlement plan has no literal walls, so a UVTT export of
+ * one would have to DERIVE blocking segments from rect footprints — a documented seam that
+ * never shipped, and whose lane is now deleted (§725/§748: src/lib/townMapExport.js,
+ * MAP-EXPORTS-2). An interior HAS literal walls — model.walls IS the geometry — so
  * the UVTT `line_of_sight` is a 1:1 image of the wall segments and the `portals` a 1:1
  * image of the doors. No derivation, no drift: the pin (interiorExport.test.js) asserts
  * exactly one line-of-sight segment per (visible) wall.

@@ -4,11 +4,12 @@
  * `buildTownMapDrawList(model, style)` turns a pure `buildTownMapModel` render model
  * (SM-1, 0..1000 × 0..1000 vector space) into an ordered list of PRIMITIVE draw
  * ops — plain, structured-cloneable data (numbers + hex color strings only, no
- * React, no DOM, no react-pdf). Two thin adapters consume it:
- *   • `drawListToSvg(ops)`   → a self-contained SVG STRING (the library-card
- *     thumbnail rasterizes this via canvas — src/lib/townMapThumb.js);
- *   • the PDF plate (src/pdf/sections/TownMapPlate.jsx) maps each op to a
- *     react-pdf `Svg` primitive.
+ * React, no DOM, no react-pdf). ONE thin adapter consumes it: `drawListToSvg(ops)` →
+ * a self-contained SVG STRING (domain/drawOpsSvg.js, which owns the op vocabulary).
+ * (§725/§748: this header used to name TWO — the library-card thumbnail lane
+ * `src/lib/townMapThumb.js` and the PDF plate `src/pdf/sections/TownMapPlate.jsx`. Both
+ * are DELETED with the legacy settlement map's thumbnail, export and PDF surfaces; a
+ * comment that still cited them would send a reader looking for files that are gone.)
  *
  * THE STYLE LAYER (MAP STYLES): every visual decision — palette, line weights, fill
  * opacities, decorative furniture (cartouche / compass / wash / grid / scale bar),

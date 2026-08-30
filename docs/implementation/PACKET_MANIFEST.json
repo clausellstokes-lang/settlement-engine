@@ -2340,7 +2340,8 @@
         },
         {
           "action": "MODIFY",
-          "path": "src/lib/mapSubTabs.js"
+          "path": "src/lib/mapSubTabs.js",
+          "retiredBy": "§725/§748"
         },
         {
           "action": "MODIFY",
@@ -2358,7 +2359,8 @@
         },
         {
           "action": "TEST",
-          "path": "tests/lib/mapSubTabs.test.js"
+          "path": "tests/lib/mapSubTabs.test.js",
+          "retiredBy": "§725/§748"
         },
         {
           "action": "TEST",
@@ -2382,15 +2384,18 @@
         },
         {
           "path": "src/lib/mapSubTabs.js",
-          "symbol": "MAP_SUB_TAB_IDS"
+          "symbol": "MAP_SUB_TAB_IDS",
+          "retiredBy": "§725/§748"
         },
         {
           "path": "src/lib/mapSubTabs.js",
-          "symbol": "resolveMapSubTabs"
+          "symbol": "resolveMapSubTabs",
+          "retiredBy": "§725/§748"
         },
         {
           "path": "src/lib/lastMapView.js",
-          "symbol": "TOWN_MAP_VIEW_IDS"
+          "symbol": "TOWN_MAP_VIEW_IDS",
+          "retiredBy": "§725/§748"
         },
         {
           "path": "src/domain/townScene/manifestContract.js",

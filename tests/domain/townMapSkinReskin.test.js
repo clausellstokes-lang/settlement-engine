@@ -19,8 +19,7 @@ import { groundDressOps } from '../../src/domain/townMap/groundDress.js';
 import { resolveActiveStyle, addBespokeStyle } from '../../src/domain/townMap/bespokeStyles.js';
 import { validateBespokeStyle } from '../../src/design/townMapStyleWall.js';
 import { resolveTownMapStyle } from '../../src/design/townMapStyles.js';
-import { townMapExportSvg } from '../../src/lib/townMapExport.js';
-import { makeTownFixture, GOLDEN_CONFIGS } from '../fixtures/townMapFixtures.js';
+import { GOLDEN_CONFIGS } from '../fixtures/townMapFixtures.js';
 
 const stable = (v) => JSON.stringify(v);
 const richModel = () => buildTownMapModel(GOLDEN_CONFIGS[10].settlement);
@@ -50,13 +49,6 @@ describe('skin reskin — a glyphSet skin is WORN (renders glyphs, not rects)', 
     // and it matches the base illustrated lens's building treatment (same glyph set) — a reskin,
     // not a new geometry: the illustrated lens also draws medieval glyphs.
     expect(rect16(buildTownMapDrawList(model, 'illustrated'))).toBe(0);
-  });
-
-  it('the image export surface wears the glyph reskin (no legacy rect markup; differs from parchment)', () => {
-    const s = makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'reskin-exp' });
-    const skin = reskin('glyph-skin');
-    const worn = { ...s, mapEdits: { styleLens: 'glyph-skin', bespokeStyles: addBespokeStyle({}, 'glyph-skin', skin) } };
-    expect(townMapExportSvg(worn)).not.toBe(townMapExportSvg({ ...s, mapEdits: { styleLens: 'parchment' } }));
   });
 });
 
