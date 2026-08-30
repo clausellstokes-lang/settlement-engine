@@ -6851,7 +6851,13 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // census-NEUTRAL: that file has been parked all along by its `test.each` shape. The
     // probe was reverted and this file left byte-identical to its committed form before the
     // tuple was recorded. Predict-and-bank would have written 20/3 here and red.
-    files: 2487, parked: 364, credited: 2123, titles: 20913, suiteTitles: 5789,
+    //   car 2 (NET-1b, the canon port read): +1/+0/+1/+14/+2 — the tuple described above.
+    //   car 3 (NET-1c, the iframe road router): +0/+0/+0/+8/+1. NO new file: the eight
+    //     router pins extend `tests/map/sfBridge.harness.test.js`, the suite that already
+    //     evals the real bridge in jsdom, so only the title layers move. Measured at car 3's
+    //     OWN tip by the sequenced arms — `titles` red with 20921, then `suiteTitles` with
+    //     5790 — after car 2 had been committed and its own figures proved at ITS tip.
+    files: 2487, parked: 364, credited: 2123, titles: 20921, suiteTitles: 5790,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

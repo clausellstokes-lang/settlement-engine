@@ -228,6 +228,249 @@ describe('sf-bridge.js harness', () => {
     });
   });
 
+  // ── WEAVE NET-1 · the road router ────────────────────────────────────────
+  // The bridge's A* is the second half of NET-1: `computeRoadEdges` (parent-side)
+  // decides WHICH pairs get a road, and this handler decides the LINE each road
+  // takes. All four NET-1 changes live inside the cost function and the sea exit,
+  // so they are only observable through the emitted polyline — which is exactly
+  // what this harness can see, by driving the real message protocol over a
+  // synthetic pack whose terrain is legible by construction.
+  describe('settlementEngine:computeRoadNetwork — the NET-1 road router', () => {
+    const SPACING = 10;
+
+    /**
+     * A cols×rows 4-neighbour grid pack. `water(c, r)` decides the sea; `burgs`
+     * plants burg cells. `t` (FMG's distance field) and `haven` are derived the
+     * way markupPack derives them — coast cells ±1, everything else ±2 — so the
+     * fixture speaks the same vocabulary as a real pack rather than a guess at it.
+     */
+    function gridPack({ cols, rows, water = () => false, burgs = [], omit = [], xs = SPACING, ys = SPACING }) {
+      const n = cols * rows;
+      const idx = (c, r) => r * cols + c;
+      const colOf = (i) => i % cols;
+      const rowOf = (i) => Math.floor(i / cols);
+      const h = new Array(n), p = new Array(n), C = new Array(n);
+      const biome = new Array(n).fill(4);   // grassland everywhere: terrain is flat,
+      const r = new Array(n).fill(0);       // so only the NET-1 terms can move a road
+      const t = new Array(n).fill(0), haven = new Array(n).fill(0), burg = new Array(n).fill(0);
+      for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) {
+        const i = idx(col, row);
+        p[i] = [col * xs, row * ys];
+        h[i] = water(col, row) ? 10 : 40;
+        const nb = [];
+        if (col > 0) nb.push(idx(col - 1, row));
+        if (col < cols - 1) nb.push(idx(col + 1, row));
+        if (row > 0) nb.push(idx(col, row - 1));
+        if (row < rows - 1) nb.push(idx(col, row + 1));
+        C[i] = nb;
+      }
+      // `t` the way markupPack builds it: the coast is ±1, then a breadth-first
+      // sweep outward incrementing (+1 inland, -1 seaward). A two-value stand-in
+      // would make the coast-grading assertion below unable to fail.
+      const queue = [];
+      for (let i = 0; i < n; i++) {
+        const wet = water(colOf(i), rowOf(i));
+        if (C[i].some((nb) => water(colOf(nb), rowOf(nb)) !== wet)) {
+          t[i] = wet ? -1 : 1;
+          queue.push(i);
+        }
+      }
+      for (let qi = 0; qi < queue.length; qi++) {
+        const cur = queue[qi];
+        for (const nb of C[cur]) {
+          if (t[nb] !== 0) continue;
+          const wet = water(colOf(nb), rowOf(nb));
+          if (wet !== (t[cur] < 0)) continue;
+          t[nb] = t[cur] + (wet ? -1 : 1);
+          queue.push(nb);
+        }
+      }
+      for (let i = 0; i < n; i++) {
+        if (t[i] === 1) {
+          // FMG's own rule (markupPack): the water neighbour NEAREST THE CENTROID,
+          // which on a non-square grid is deliberately NOT the first one in the
+          // adjacency array — that difference is what makes the haven pin bite.
+          let best = -1, bestD = Infinity;
+          for (const nb of C[i]) {
+            if (!water(colOf(nb), rowOf(nb))) continue;
+            const d = (p[nb][0] - p[i][0]) ** 2 + (p[nb][1] - p[i][1]) ** 2;
+            if (d < bestD) { bestD = d; best = nb; }
+          }
+          if (best >= 0) haven[i] = best;
+        }
+      }
+      for (const [c, rr] of burgs) burg[idx(c, rr)] = 1;
+      const cells = { i: [...Array(n).keys()], h, biome, r, p, c: C, t, haven, burg };
+      for (const key of omit) delete cells[key];
+      return { cells, idx, cols, rows, xs, ys };
+    }
+
+    const edge = (id, from, to, preferSea = false, g = null) => ({
+      id,
+      fromX: from[0] * (g ? g.xs : SPACING), fromY: from[1] * (g ? g.ys : SPACING),
+      toX: to[0] * (g ? g.xs : SPACING),     toY: to[1] * (g ? g.ys : SPACING),
+      preferSea,
+    });
+
+    /** Drive the real handler and return its `paths` map. */
+    function routeOn(g, edges) {
+      globalThis.pack = { cells: g.cells };
+      globalThis.findCell = undefined;   // force the handler's own centroid scan
+      const reply = sendCommand('settlementEngine:computeRoadNetwork', { edges });
+      expect(reply && reply.type).toBe('fmg:roadNetworkReply');
+      return reply.paths;
+    }
+
+    /** A path's cells, recovered from its polyline (the grid is a bijection). */
+    const cellsOf = (g, path) =>
+      (path && path.points ? path.points : []).map((pt) => g.idx(pt.x / g.xs, pt.y / g.ys));
+
+    it('corridor re-use bends a later road onto an earlier one (×0.5 per shared hop)', () => {
+      // Two parallel north-south roads two columns apart on flat ground. Alone,
+      // each runs dead straight. Routed together, the second pays two sideways
+      // hops to join the first's corridor and rides it at half price — which is
+      // cheaper than twenty-one full-price hops of its own.
+      const g = gridPack({ cols: 6, rows: 21 });
+      const first  = edge('A', [0, 0], [0, 20]);
+      const second = edge('B', [2, 0], [2, 20]);
+
+      const alone = cellsOf(g, routeOn(g, [second]).B).map((c) => c % 6);
+      expect(new Set(alone)).toEqual(new Set([2]));          // straight down its own column
+
+      const together = routeOn(g, [first, second]);
+      const joined = cellsOf(g, together.B).map((c) => c % 6);
+      expect(joined[0]).toBe(2);                              // starts where it started
+      expect(joined[joined.length - 1]).toBe(2);              // and ends where it ended
+      expect(joined).toContain(0);                            // but travels the first road's column
+      // Most of the journey is now shared, not merely a touch of it.
+      expect(joined.filter((c) => c === 0).length).toBeGreaterThan(alone.length / 2);
+      // The first road is unmoved — re-use is a discount for FOLLOWERS only.
+      expect(new Set(cellsOf(g, together.A).map((c) => c % 6))).toEqual(new Set([0]));
+    });
+
+    it('the corridor set is PER REQUEST — it never leaks from one call into the next', () => {
+      // `usedCellPairs` is the only state NET-1 carries across edges, and it lives
+      // inside the handler on purpose. Hoisted one scope out it would become a
+      // module-lifetime accumulator: every re-route after a regenerate or a
+      // snapshot load would inherit the corridors of a map that no longer exists,
+      // and the roads would drift a little further from the terrain each time.
+      // Routing the SAME lone edge before and after a batch that banks a corridor
+      // right beside it must give the same line both times.
+      const g = gridPack({ cols: 6, rows: 21 });
+      const solo = cellsOf(g, routeOn(g, [edge('B', [2, 0], [2, 20])]).B);
+      routeOn(g, [edge('A', [0, 0], [0, 20]), edge('B', [2, 0], [2, 20])]);
+      const soloAgain = cellsOf(g, routeOn(g, [edge('B', [2, 0], [2, 20])]).B);
+      expect(soloAgain).toEqual(solo);
+      // Anti-vacuity: the batch in the middle really does move B, so "unchanged"
+      // above is a statement about isolation and not about an inert fixture.
+      const batched = cellsOf(g, routeOn(g, [edge('A', [0, 0], [0, 20]), edge('B', [2, 0], [2, 20])]).B);
+      expect(batched).not.toEqual(solo);
+    });
+
+    it('the off-burg multiplier strings a road through the small places on the way', () => {
+      // A straight run along row 2 is eight flat hops. One row up sits a chain of
+      // seven burgs. At ×3 for open country the detour is cheaper despite being
+      // longer, which is the whole point: roads go where people are.
+      const g = gridPack({ cols: 9, rows: 5, burgs: [[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1]] });
+      const withBurgs = cellsOf(g, routeOn(g, [edge('E', [0, 2], [8, 2])]).E);
+      const rows = withBurgs.map((c) => Math.floor(c / 9));
+      expect(rows).toContain(1);
+      expect(rows.filter((r) => r === 1).length).toBeGreaterThanOrEqual(7);
+
+      // Anti-vacuity: the SAME geometry with no burgs runs dead straight, so the
+      // detour above is the burg term and not something about the grid.
+      const bare = gridPack({ cols: 9, rows: 5 });
+      const noBurgs = cellsOf(bare, routeOn(bare, [edge('E', [0, 2], [8, 2])]).E);
+      expect(new Set(noBurgs.map((c) => Math.floor(c / 9)))).toEqual(new Set([2]));
+    });
+
+    it('a sea route leaves through the burg\'s HAVEN, not through whatever ocean is nearest in the adjacency list', () => {
+      // THE DISCRIMINATION THIS FIXTURE EXISTS FOR. A one-cell SPIT at (6,5) juts
+      // into the bay with water on three sides. The old breadth-first exit walked
+      // the adjacency array and took the FIRST water it met — the western
+      // neighbour. FMG's `haven` is the water nearest the cell's centroid, and on
+      // this deliberately non-square grid (x pitch 40, y pitch 10) that is the
+      // NORTHERN neighbour instead. So the two answers differ, and which one the
+      // route leaves through is directly readable off the polyline.
+      // A strait across rows 2..6, bridged by land only at the far eastern column,
+      // with a one-cell SPIT at (6,1) that has water west, east and south of it.
+      const water = (c, r) => (r >= 2 && r <= 6 && c !== 12) || ((c === 5 || c === 7) && r === 1);
+      const g = gridPack({ cols: 13, rows: 9, water, xs: 40, ys: 10 });
+      const spit = g.idx(6, 1);
+      const firstInAdjacency = g.cells.c[spit].find((nb) => g.cells.h[nb] < 20);
+      const haven = g.cells.haven[spit];
+      expect(firstInAdjacency).toBe(g.idx(5, 1));   // what the old BFS exit returned
+      expect(haven).toBe(g.idx(6, 2));              // what FMG actually recorded
+      expect(haven).not.toBe(firstInAdjacency);     // anchored: both values asserted above
+
+      const path = routeOn(g, [edge('S', [6, 1], [6, 7], true, g)]).S;
+      expect(path.mode).toBe('sea');
+      const cells = cellsOf(g, path);
+      expect(cells[0]).toBe(spit);
+      expect(cells[1]).toBe(haven);          // the haven, not the first-in-adjacency water
+      expect(cells[cells.length - 1]).toBe(g.idx(6, 7));
+    });
+
+    it('sea cost grades on the coast, so a lane follows the shore instead of cutting across open water', () => {
+      // TWO SHORES with genuinely deep water between them: a 41x13 strait whose
+      // middle row is six bands from either coast. The two harbours sit at
+      // OPPOSITE ENDS of OPPOSITE shores, so every water route is 51 cells long
+      // whichever way it goes — the hop count cannot distinguish them and only
+      // the depth term can. MEASURED on this fixture: graded mean depth 1.49 with
+      // 42 cells right on the shoreline; the same route with the depth term
+      // switched off climbs into open water a third of the way along and
+      // measures 1.98. That gap is what these two assertions sit inside.
+      const g = gridPack({ cols: 41, rows: 13, water: (c, r) => r > 0 && r < 12 });
+      expect(g.cells.t[g.idx(20, 6)]).toBe(-6);      // the fixture really is deep
+      const path = routeOn(g, [edge('S', [0, 0], [40, 12], true)]).S;
+      expect(path.mode).toBe('sea');
+      const wet = cellsOf(g, path).filter((c) => g.cells.h[c] < 20);
+      const depths = wet.map((c) => -g.cells.t[c]);
+      expect(wet.length).toBeGreaterThan(40);
+      expect(depths.filter((d) => d === 1).length).toBeGreaterThanOrEqual(40);
+      const mean = depths.reduce((a, b) => a + b, 0) / depths.length;
+      expect(mean).toBeLessThan(1.6);
+    });
+
+    it('a pack with no t / haven / burg arrays still routes (the pre-NET-1 degradation)', () => {
+      // A hand-edited or pre-markup pack carries none of the three NET-1 reads.
+      // Each must degrade to the old rule on its own, not fail the request.
+      const g = gridPack({
+        cols: 13, rows: 9, water: (c, r) => c >= 3 && c <= 9 && r <= 5,
+        omit: ['t', 'haven', 'burg'],
+      });
+      const paths = routeOn(g, [edge('L', [0, 7], [12, 7]), edge('S', [2, 2], [10, 2], true)]);
+      expect(paths.L.points.length).toBeGreaterThan(2);
+      expect(paths.S.mode).toBe('sea');
+      // The BFS fallback found water even with no haven array.
+      expect(cellsOf(g, paths.S).some((c) => g.cells.h[c] < 20)).toBe(true);
+    });
+
+    it('is deterministic: the same request twice yields byte-identical paths', () => {
+      const g = gridPack({ cols: 9, rows: 9, burgs: [[4, 4], [5, 5]] });
+      const edges = [
+        edge('a', [0, 0], [8, 8]), edge('b', [0, 8], [8, 0]),
+        edge('c', [4, 0], [4, 8]), edge('d', [0, 4], [8, 4]),
+      ];
+      const first = JSON.stringify(routeOn(g, edges));
+      for (let i = 0; i < 5; i++) expect(JSON.stringify(routeOn(g, edges))).toBe(first);
+    });
+
+    it('routes a realm-sized pack without exhausting the iteration guard', () => {
+      // 150×100 = 15,000 cells, twenty long diagonal crossings — larger than an
+      // FMG default pack. Every edge must resolve; a MAX_ITER exhaustion returns
+      // null and the road silently vanishes from the map.
+      const g = gridPack({ cols: 150, rows: 100 });
+      const edges = [];
+      for (let k = 0; k < 20; k++) {
+        edges.push(edge('e' + k, [(k * 7) % 149, 0], [149 - ((k * 7) % 149), 99]));
+      }
+      const paths = routeOn(g, edges);
+      expect(Object.keys(paths).length).toBe(edges.length);
+      for (const id of Object.keys(paths)) expect(paths[id].points.length).toBeGreaterThan(50);
+    });
+  });
+
   describe('receive-side trust boundary — ORIGIN + SOURCE fail-closed', () => {
     it('runs the handler only for the configured parent origin AND the embedding parent', () => {
       globalThis.pack = { cells: { i: [0], h: new Float32Array([0.5]), biome: new Uint8Array([1]), r: new Uint8Array([0]), p: [[1, 2]], c: [[0]] } };
