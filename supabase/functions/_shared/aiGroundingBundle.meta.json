@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-30T20:03:30.303Z",
+  "generatedAt": "2026-08-30T21:12:51.738Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "df04e59191d8349b",
+  "sourceHash": "ebee15dae5458791",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -66,7 +66,6 @@
     "src/domain/worldPulse/warCoalitionGraph.js",
     "src/domain/worldPulse/warCoalitionLedger.js",
     "src/domain/worldPulse/warReasonTaxonomy.js",
-    "src/kernel/math.js",
     "src/kernel/slugify.js",
     "src/lib/entities.js",
     "src/lib/text.js"
