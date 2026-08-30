@@ -1175,9 +1175,16 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     expect(OPERATIONS.applyFogEdit).toBeUndefined();
     expect(OPERATIONS.setMapSubTab).toBeUndefined();
     expect(OPERATIONS.setSceneQualityMode).toBeUndefined();
-    // The anchor that makes those three absences mean something: a sibling MECHANICAL
+    // ⚰ applyMapEdit JOINS THE ABSENCES (ODQ §763.2, Q-STYLE arm 2) — it was the SM-3
+    // persist verb for `settlement.mapEdits` and its only caller died with the styleOverhaul
+    // panel. ⚠ It was ALSO this arm's liveness anchor, so the anchor is re-pointed rather
+    // than dropped: without one, an emptied registry would satisfy every absence above.
+    expect(OPERATIONS.applyMapEdit).toBeUndefined();
+    // The anchor that makes those four absences mean something: a sibling MECHANICAL
     // save-scoped verb from the same registry is still registered, so the lookup works.
-    expect(OPERATIONS.applyMapEdit?.opType).toBe('applyMapEdit');
+    expect(OPERATIONS.renameSettlement?.opType).toBe('renameSettlement');
+    expect(OPERATIONS.renameSettlement?.klass).toBe('mechanical');
+    expect(OPERATIONS.renameSettlement?.targetScope).toBe('save');
   });
 
   test('a legacy blob missing a config key backfills the default instead of forking shapes', () => {

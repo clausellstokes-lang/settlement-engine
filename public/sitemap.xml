@@ -1168,11 +1168,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-applymapedit</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-retryoutbox</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>

@@ -278,7 +278,7 @@ shows all visible items.
   Operator Messages/receipt substrate with lease-safe broadcast delivery and
   explicit product-update consent — up to the current head. RLS is the security
   spine.
-- **functions/** (33 Deno edge functions) (Deno edge):
+- **functions/** (32 Deno edge functions) (Deno edge):
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.

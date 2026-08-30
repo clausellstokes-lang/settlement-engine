@@ -187,7 +187,13 @@ const RING_VERBS = Object.freeze(new Set([
  */
 const MECHANISM_VOCABULARY = Object.freeze([
   'auto-pre-revert-snapshot',
-  'blob-time-travel',
+  // ⚰ 'blob-time-travel' DELETED HERE (ODQ §763.2, Q-STYLE arm 2). It was `applyMapEdit`'s
+  // undoState ref and applyMapEdit was its ONLY user, so retiring the verb made the spelling
+  // dead. This list is exact-set precisely so a dead token cannot linger looking supported —
+  // "the honesty half" above is what caught it, in the same act that removed the verb.
+  // ⚠ The MECHANISM is not gone: a saved blob still has its own time travel. What is gone is
+  // any registered verb that ADVERTISES recovery through it, which is what this list tracks.
+
   'inverse-call',
   'reconcile-replay',
   'rehydrate-from-authority',

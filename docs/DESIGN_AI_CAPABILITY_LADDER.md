@@ -116,12 +116,20 @@ zero headroom for the next literal `!` anyone adds. The miss was the known wave-
   comment; the alternative — honoring it as resolution base — stays owner territory since it
   would change what every existing bespoke style resolves to). Reproduce-first: the charter
   exemplar payload reproduced the spurious row before the fix, zero violations after
-  (@enforced-by tests/design/townMapStyleWall.test.js, tests/domain/styleOverhaulCompile.test.js). Traced
-  both sides: `styleRiderTags` is edge-only (radar untouched); StyleOverhaulPanel stops
-  showing a "rejected" badge on every well-formed response. TWO pins landed: the literal
-  contract-payload regression + a class-level parity pin binding `STYLE_FIELDS` (edge) to
-  `validateBespokeStyle` (client) with a negative control — the next field-list drift reds
-  structurally. 352+137 tests green (implementer) · 83/83 on the manager's combined
+  (@enforced-by tests/design/townMapStyleWall.test.js). Traced both sides: `styleRiderTags`
+  was edge-only (radar untouched); the style panel stopped showing a "rejected" badge on
+  every well-formed response. TWO pins landed: the literal contract-payload regression + a
+  class-level parity pin binding `STYLE_FIELDS` (edge) to `validateBespokeStyle` (client)
+  with a negative control — the next field-list drift reds structurally.
+  ⚰ **HALF OF THAT ENFORCEMENT IS GONE, AND THE SURVIVING HALF CHANGED JOBS (ODQ §763.2,
+  Q-STYLE arm 2).** The styleOverhaul capability is retired: the edge core, its compile suite
+  (`tests/domain/styleOverhaulCompile.test.js`) and the panel are deleted, so the class-level
+  parity pin has no edge side left to bind and the `@enforced-by` above is narrowed to the
+  one enforcer that still exists. That enforcer did NOT merely survive — it is RE-HOMED: with
+  the surface gone, `validateBespokeStyle` is the only producer of the persisted
+  `mapEdits.bespokeStyles` shape that retained readers must keep honouring (§763.2 ruled that
+  eyes-open), so the contract-payload suite is now the LEGACY-HONOURING pin rather than an
+  edge-parity one. A field it stops recognising is a field that vanishes from a saved map. 352+137 tests green (implementer) · 83/83 on the manager's combined
   acceptance run (both pin suites + all three bundle freshness suites, charter bundle
   regenerated after the wall edit, pre-existing bundles byte-restored to HEAD).
   Same sitting: the sibling aiGroundingBundle freshness import-check was hardened from a

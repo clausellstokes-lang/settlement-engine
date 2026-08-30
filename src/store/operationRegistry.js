@@ -67,8 +67,10 @@
  *                           wholesale boundary setters whose contract is replacement).
  *     'external:<ref>'    — real recovery exists through OTHER machinery; <ref> names
  *                           it (an action name, or a mechanism token such as
- *                           blob-time-travel / revision-history / inverse-call =
- *                           "re-call this or its pair with the prior value").
+ *                           revision-history / inverse-call = "re-call this or its
+ *                           pair with the prior value"). The live token set is
+ *                           exact-set frozen in tests/store/advertisedUndoArming —
+ *                           ⚰ 'blob-time-travel' left it with applyMapEdit below.
  *     'partial:<ref>'     — recovery exists elsewhere but is PARTIAL in scope (the
  *                           atlas's mapUndo lesson: never trade one false promise
  *                           for another).
@@ -305,11 +307,33 @@ export const OPERATIONS = Object.freeze({
   clearLocks: { opType:'clearLocks', label:"Clear section locks", description:"Removes every lock from the settlement, so nothing is held back from a reroll. To recover a lock, set it again.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'none' },
   hydrateFromSave: { opType:'hydrateFromSave', label:"Load state from a save", description:"Rebuilds the working settlement state from a saved settlement.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   renameSettlement: { opType:'renameSettlement', label:"Rename the settlement", description:"Changes the settlement's name.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'external:inverse-call' },
-  // SM-3 — cosmetic town-map edit (mapEdits container: nudges / reroll / legend
-  // prefs). Mechanical: a durable blob write via the applyEvent persist triple.
-  // Cosmetic-always (no canon lock); undo rides the blob's own time-travel (no
-  // dedicated map undo action ⇒ undoToken:null).
-  applyMapEdit: { opType:'applyMapEdit', label:"Apply a map edit", description:"Writes a cosmetic town-map edit, such as a nudge, a reroll, or a legend preference, into the settlement's saved map edits.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'external:blob-time-travel' },
+  // ⚰ RETIRED HERE (TE-QSTYLE, fresh owner grant ODQ §763.1, ruled §763.2 Q-STYLE arm 2):
+  // `applyMapEdit` (SM-3). It wrote the blob-resident cosmetic map-edit container
+  // (`settlement.mapEdits`: nudges / layout-variant reroll / legend prefs / bespoke styles)
+  // through the applyEvent persist triple. Its ONLY caller in src/ was
+  // StyleOverhaulPanel.jsx, which the styleOverhaul capability retirement deleted; the
+  // dead-operation ratchet therefore required this retirement in the SAME act.
+  //
+  // ⛔⛔ THE KEY DOES NOT GO WRITER-INERT, AND THE RULING'S SHORTHAND SAYS OTHERWISE.
+  // §763.2 disposed of the persisted data as "readers keep honouring legacy data, the key
+  // goes writer-inert (the fogSessions precedent)". The first half is exactly right. THE
+  // SECOND HALF IS NOT TRUE HERE, and inheriting it would be dangerous. MEASURED at this
+  // commit, FOUR live save-minting sites still write the key on every newly saved
+  // settlement — BuyThisDossier.jsx:159, SettlementsPanel.jsx:167 and
+  // SaveToLibraryButton.jsx:42/:98 — each minting `newSettlementMapEdits()`, i.e.
+  // `{ layoutLawVersion: 2 }`. That marker is LOAD-BEARING: domain/spatial/spatialSubstrate
+  // and domain/interior/interiorFootprint read it to choose the v1/v2 layout law.
+  //
+  // So the fogSessions precedent applies to the VERB, not to the key. What went inert is
+  // AFTER-THE-FACT MUTATION of an existing save's map edits; MINTING at save time is alive
+  // and must stay. Anyone reading "writer-inert" and deleting the minting, or the
+  // layoutLawVersion reader, would silently move every new settlement onto the v1 layout law.
+  //
+  // ⚠ NO MIGRATION, DELIBERATELY (the fogSessions instrument choice, which does carry over):
+  // saves written before this commit may hold nudges, legend prefs or bespokeStyles under
+  // this key. They are honoured on read — the blob is spread wholesale on rehydrate — and
+  // nothing new can mutate them. A destructive migration would be the wrong instrument
+  // prelaunch: an inert sub-key costs nothing and cannot lose data.
   // ⚰ RETIRED HERE (TE-STRIP-3, owner grant ODQ §731 / Q-S1): `applyFogEdit` (DOOR 2).
   // It wrote the per-session fog reveal (`settlement.fogSessions`) into the SAVE BLOB via
   // the applyMapEdit persist triple, and its only caller was the fog controller inside the

@@ -86,12 +86,12 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
-    "count": 162,
+    "count": 161,
     "exemptCount": 69,
     "byKlass": {
       "canon": 6,
       "macro": 48,
-      "mechanical": 108
+      "mechanical": 107
     },
     "scopes": ["campaign","global","save"],
     "entries": [
@@ -171,7 +171,6 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"clearLocks","label":"Clear section locks","description":"Removes every lock from the settlement, so nothing is held back from a reroll. To recover a lock, set it again.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"hydrateFromSave","label":"Load state from a save","description":"Rebuilds the working settlement state from a saved settlement.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"renameSettlement","label":"Rename the settlement","description":"Changes the settlement's name.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
-      {"opType":"applyMapEdit","label":"Apply a map edit","description":"Writes a cosmetic town-map edit, such as a nudge, a reroll, or a legend preference, into the settlement's saved map edits.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"retryOutbox","label":"Retry the sync outbox","description":"Retries any campaign changes that failed to sync to the cloud.","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"loadCampaigns","label":"Load campaigns","description":"Loads the account's campaigns into the store.","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"clearCampaigns","label":"Clear campaigns","description":"Removes all campaigns from the store.","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
