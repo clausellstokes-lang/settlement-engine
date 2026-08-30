@@ -39,7 +39,7 @@
  * re-shapes another (the never-restamp law, previewed here for M-0b).
  */
 
-import { SHADOW_DIR } from '../../design/townGlyphs/glyphCompiler.js';
+import { SHADOW_DIR } from '../../design/lightModel.js';
 
 /** @typedef {import('./townMapDraw.js').DrawOp} DrawOp */
 

@@ -14895,7 +14895,7 @@
           "symbol": "export function sceneDigest"
         },
         {
-          "path": "src/domain/townMap/townMapDraw.js",
+          "path": "src/domain/drawOpsSvg.js",
           "symbol": "export function drawListToSvg"
         },
         {
@@ -15081,7 +15081,7 @@
           "symbol": "export function projectFirstSliceFixedSurvey"
         },
         {
-          "path": "src/domain/townMap/townMapDraw.js",
+          "path": "src/domain/drawOpsSvg.js",
           "symbol": "export function drawListToSvg"
         },
         {
@@ -17890,7 +17890,7 @@
           "symbol": "export function firstSliceProjectionToSvg"
         },
         {
-          "path": "src/domain/townMap/townMapDraw.js",
+          "path": "src/domain/drawOpsSvg.js",
           "symbol": "export function drawListToSvg"
         },
         {
@@ -18440,7 +18440,7 @@
           "symbol": "export function firstSliceProjectionToSvg"
         },
         {
-          "path": "src/domain/townMap/townMapDraw.js",
+          "path": "src/domain/drawOpsSvg.js",
           "symbol": "export function drawListToSvg"
         },
         {
@@ -19111,7 +19111,7 @@
           "symbol": "export function firstSliceProjectionToSvg"
         },
         {
-          "path": "src/domain/townMap/townMapDraw.js",
+          "path": "src/domain/drawOpsSvg.js",
           "symbol": "export function drawListToSvg"
         },
         {

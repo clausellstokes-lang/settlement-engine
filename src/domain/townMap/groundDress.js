@@ -33,7 +33,7 @@
 
 import { createPRNG } from '../../kernel/prng.js';
 import { resolveTownMapStyle, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
-import { SHADOW_DIR } from '../../design/townGlyphs/glyphCompiler.js';
+import { SHADOW_DIR } from '../../design/lightModel.js';
 
 const VIEW = 1000;
 const R = Math.round;

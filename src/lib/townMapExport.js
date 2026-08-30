@@ -57,6 +57,7 @@ import {
   projectTownMapModelForAudience,
 } from '../domain/townMap/audienceProjection.js';
 import { renderTownMapTokenRaster } from './townMapThumb.js';
+import { downloadBlob } from './downloadBlob.js';
 import { slugify } from '../kernel/slugify.js';
 
 /** Selectable export resolutions (square, px). The town map lives in a 1000×1000
@@ -297,23 +298,6 @@ export async function downloadTownMapTokenRaster(settlement, opts = {}) {
   const filename = opts.filename || `${slug(settlement?.name, 'settlement')}-vtt-token-${ymd(opts.date)}.png`;
   downloadDataUrl(out.dataUrl, filename);
   return out;
-}
-
-/** Trigger a browser download of a Blob under a filename (the shareImage idiom).
- * @param {Blob} blob @param {string} filename */
-export function downloadBlob(blob, filename) {
-  const url = URL.createObjectURL(blob);
-  try {
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  } finally {
-    // Revoke on the next tick so the click's navigation has taken the URL.
-    setTimeout(() => URL.revokeObjectURL(url), 0);
-  }
 }
 
 /**

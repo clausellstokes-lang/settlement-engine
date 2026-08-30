@@ -31,7 +31,7 @@
  * so this gating wave stays stable.
  */
 import { serializeOverlaySvg } from './mapThumb.js';
-import { downloadBlob } from './townMapExport.js';
+import { downloadBlob } from './downloadBlob.js';
 import { slugify } from '../kernel/slugify.js';
 
 // The FMG bridge exportThumb caps output at 1024px (the iframe-side shim); request the max

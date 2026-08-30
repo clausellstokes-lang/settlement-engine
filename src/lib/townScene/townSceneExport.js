@@ -15,7 +15,7 @@ import {
 } from '../../domain/townScene/index.js';
 import { townCartographyActive } from '../../domain/townScene/cartographyContract.js';
 import { slugify } from '../../kernel/slugify.js';
-import { downloadBlob } from '../townMapExport.js';
+import { downloadBlob } from '../downloadBlob.js';
 
 export const TOWN_SCENE_EXPORT_LAZY_SENTINEL = 'settlementforge:town-scene-export:lazy-v1';
 

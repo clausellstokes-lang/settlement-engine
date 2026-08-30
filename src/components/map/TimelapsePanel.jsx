@@ -63,7 +63,7 @@ export default function TimelapsePanel({ campaign, nameFor }) {
   // V-25d — export-as-clip: a deterministic, encode-free JSON frame sequence.
   const onExportClip = async () => {
     const clip = serializeTimelapseClip(track);
-    const { downloadBlob } = await import('../../lib/townMapExport.js');
+    const { downloadBlob } = await import('../../lib/downloadBlob.js');
     const blob = new Blob([JSON.stringify(clip, null, 2)], { type: 'application/json' });
     downloadBlob(blob, `timelapse-${clipSlug(campaign?.name)}.json`);
   };

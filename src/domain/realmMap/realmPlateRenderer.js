@@ -10,7 +10,7 @@
  * plan (seeded sites · tiers · map kind) — but it carries no terrain, no drawing. This
  * module is the missing pure projection: worldPlan → an ordered list of the SAME
  * PRIMITIVE draw-op vocabulary the town map speaks (poly / line / circle / rect / path,
- * townMapDraw.js) → a self-contained SVG via `drawListToSvg`. It NEVER emits SVG itself
+ * domain/drawOpsSvg.js) → a self-contained SVG via `drawListToSvg`. It NEVER emits SVG itself
  * (no parallel serializer) and reads the SAME resolved style palette the town lenses use
  * (resolveTownMapStyle), so a realm plate is a house-consistent derived view.
  *
@@ -46,10 +46,10 @@
 
 import { createPRNG } from '../../kernel/prng.js';
 import { resolveTownMapStyle, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
-import { drawListToSvg } from '../townMap/townMapDraw.js';
+import { drawListToSvg } from '../drawOpsSvg.js';
 import { deriveWorldPlan } from '../instantWorld/worldPlan.js';
 
-/** @typedef {import('../townMap/townMapDraw.js').DrawOp} DrawOp */
+/** @typedef {import('../drawOpsSvg.js').DrawOp} DrawOp */
 /** @typedef {import('../instantWorld/worldPlan.js').deriveWorldPlan} DeriveWorldPlan */
 
 // The realm sheet — a wide landing-hero band inside the town map's 0..1000 x-space (so

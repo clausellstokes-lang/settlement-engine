@@ -18,18 +18,13 @@
  * exactly like the rest of the draw layer.
  */
 
+// THE ONE FIXED LIGHT — NW, shared by every lit surface (design/lightModel.js). The glyph
+// ink-hatch shadow below, the ground-dress WALL SHADOWS + landform RELIEF, and the building
+// massing all read the SAME direction, so nothing is ever lit from a second side.
+import { SHADOW_DIR } from '../lightModel.js';
+
 /** The default footprint width (view units) of a landmark glyph. */
 export const GLYPH_FOOTPRINT = 26;
-
-/**
- * THE ONE FIXED LIGHT — NW. Shadows fall to the SE by this offset direction (dx,dy,
- * both positive ⇒ down-right on screen). The SINGLE source of the illustrated plane's
- * light: the glyph ink-hatch shadow (below), the ground-dress WALL SHADOWS, and the
- * landform-flank RELIEF hachures ALL read it, so nothing is ever lit from a second
- * direction (design §1, "the surveyor's way"). The magnitudes are per-glyph-footprint-
- * width for the hatch; consumers scale as they need. Freezing keeps it a shared const.
- */
-export const SHADOW_DIR = Object.freeze({ dx: 0.16, dy: 0.14 });
 
 /** @typedef {{ r: 'face'|'roof'|'ink'|'line', p: Array<[number, number]>, c?: boolean }
  *   | { r: 'circle', c: [number, number], rad: number }} GlyphStroke */
