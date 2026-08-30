@@ -14,5 +14,6 @@
   "src/domain/worldPulse/settlementStrategy.js": 812,
   "src/domain/worldPulse/warTermination.js": 818,
   "src/generators/npcGenerator.js": 1350,
-  "src/store/settlementSlice.js": 994
+  "_te_qstyle_settlement_slice_2026_08_30": "ODQ \u00a7763.2 (Q-STYLE arm 2) RATCHETED src/store/settlementSlice.js 994 -> 976. This is a RETIREMENT, not a decomposition: the applyMapEdit action and its doc block were DELETED outright with the styleOverhaul capability whose panel was its only caller (the dead-operation ratchet required it in the same act). Nothing moved to a leaf, so there is no sibling file to look for. The remaining distance to the ceiling is still the two lanes lane D deferred (the generation lane's memoized loadEngine closure and the canon-event lane) \u2014 unchanged by this wave.",
+  "src/store/settlementSlice.js": 976
 }
