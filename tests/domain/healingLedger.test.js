@@ -9,7 +9,9 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { healingLedger, HEALING_INSTITUTION_PATTERN } from '../../src/domain/healingLedger.js';
+import {
+  healingLedger, BURIAL_INSTITUTION_PATTERN, HEALING_INSTITUTION_PATTERN,
+} from '../../src/domain/healingLedger.js';
 import { deriveCapacityProfile } from '../../src/domain/capacityModel.js';
 import { deriveSystemVariable } from '../../src/domain/causalState.js';
 
@@ -83,5 +85,96 @@ describe('healing services rescue the absent penalty (P3.3b Stage 4b)', () => {
     const withInst = town(['Infirmary']);
     expect(deriveCapacityProfile('healing', servicesOnly).supply)
       .toBeLessThan(deriveCapacityProfile('healing', withInst).supply);
+  });
+});
+
+
+// ── E-RES-11 (§782.4) — A GRAVEYARD IS NOT INFORMAL CARE ──────────────────────────────────
+//
+// ⚠ DECLARED SHIFT, T7 · HYGIENE (car TE-UNITS-1). The burial tier ladder (§708.5) gave every
+// tier a burial house; `serviceCategoryTables` files every burial menu under `healing`
+// (correctly — that table answers DOMAIN, and the whole religious block answers healing); and
+// both healing derivers rescued the harsh "absent" penalty on the bucket being NON-EMPTY. So
+// the rescue went near-universal and the -10 penalty became UNREACHABLE.
+//
+// MEASURED, 1,680 real settlements from `generateSettlementPipeline` (6 tiers x 8 cultures x
+// 7 terrains x 5 routes), before the cure:
+//     broad 372 · limited 797 · services_only 511 · ABSENT 0
+//   Of the 511 rescues, 24 — every one a THORP — were carried by BURIAL SERVICES ALONE.
+// After the cure those 24 fall to `absent`: the branch fires on 1.43% of the corpus instead of
+// 0.00%, and the alarm it exists to raise can raise again. The other 487 rescues are genuine
+// informal care (parish church 786 entries, midwife 40, bathhouse, foundling home) and do not
+// move. Nothing on the generation path reads these derivers, so the 525-row generator golden
+// master is unaffected — verified, not assumed.
+describe('careServices: burial is domain-healing but NOT healing capacity (E-RES-11)', () => {
+  const withHealingServices = (entries) => ({
+    name: 'T', tier: 'thorp', population: 40, config: { monsterThreat: 'safe' },
+    institutions: [], // healerCount 0 — the rescue branch is the one under test
+    economicState: { availableServices: { healing: entries } },
+    powerStructure: { factions: [] }, activeConditions: [],
+  });
+  const burialOnly = withHealingServices([
+    { name: 'Burial', institution: 'Burial ground' },
+    { name: 'Grave marking', institution: 'Burial ground' },
+  ]);
+  const parish = withHealingServices([
+    { name: 'Life ceremonies', institution: 'Access to parish church' },
+  ]);
+
+  it('the burial pattern covers the catalog ladder and no care house', () => {
+    for (const house of ['Graveyard', 'Burial ground', 'Parish burial grounds',
+      'Burial grounds and charnel house', 'Cemetery network']) {
+      expect(BURIAL_INSTITUTION_PATTERN.test(house), `${house} must read as burial`).toBe(true);
+    }
+    for (const house of ['Parish church', 'Access to parish church', 'Midwife', 'Apothecary',
+      'Almshouse', 'Small hospital', 'Foundling home', 'Public bathhouse', 'Monastery or friary']) {
+      expect(BURIAL_INSTITUTION_PATTERN.test(house), `${house} must NOT read as burial`).toBe(false);
+    }
+  });
+
+  it('a burial-only bucket has services but ZERO careServices', () => {
+    const ledger = healingLedger(burialOnly);
+    expect(ledger.services).toHaveLength(2);   // the raw bucket is untouched
+    expect(ledger.careServices).toHaveLength(0);
+  });
+
+  it('a parish bucket keeps its care entry', () => {
+    expect(healingLedger(parish).careServices).toHaveLength(1);
+  });
+
+  it('an entry whose house cannot be read STAYS IN — unreadable is not proof of a graveyard', () => {
+    expect(healingLedger(withHealingServices(['Basic wound care'])).careServices).toHaveLength(1);
+    expect(healingLedger(withHealingServices([{ name: 'Something' }])).careServices).toHaveLength(1);
+  });
+
+  it('THE SHIFT: a burial-only thorp now scores as ABSENT, and a parish thorp does not', () => {
+    // Both lenses, both directions. Under the old reading these two were EQUAL.
+    const burialSupply = deriveCapacityProfile('healing', burialOnly).supply;
+    const parishSupply = deriveCapacityProfile('healing', parish).supply;
+    expect(burialSupply).toBeLessThan(parishSupply);
+    expect(deriveSystemVariable('healing_capacity', burialOnly).score)
+      .toBeLessThan(deriveSystemVariable('healing_capacity', parish).score);
+
+    // …and it lands on the ABSENT contributor BY NAME with its exact delta, not merely lower.
+    const burialContribs = deriveCapacityProfile('healing', burialOnly).supplyContributors;
+    expect(
+      burialContribs.find((c) => c.source === 'institutions' && c.effect === 'absent'),
+      'the burial-only thorp must reach the absent branch, not a quieter one',
+    ).toMatchObject({ delta: -10 });
+    // The parish thorp takes the rescue instead — the two branches are distinguished, which is
+    // the whole claim. Under the old reading BOTH took the rescue.
+    expect(
+      deriveCapacityProfile('healing', parish).supplyContributors
+        .find((c) => c.effect === 'services_only'),
+    ).toMatchObject({ delta: 4 });
+  });
+
+  it('ANTI-VACUITY: a burial-only thorp still reads BELOW one with a real healer', () => {
+    const withHealer = {
+      ...burialOnly,
+      institutions: [{ id: 'h', name: 'Herbalist' }],
+    };
+    expect(deriveCapacityProfile('healing', burialOnly).supply)
+      .toBeLessThan(deriveCapacityProfile('healing', withHealer).supply);
   });
 });

@@ -261,7 +261,9 @@ function healingCapacityOf(save) {
     healerCount: ledger.healerCount,
     anchorName: anchor ? String(anchor.name) : null,
     provider: ledger.healerCount >= 2 && !!anchor,
-    lacking: ledger.present && ledger.healerCount === 0 && ledger.services.length === 0,
+    // `careServices`, not `services`: a settlement whose whole healing bucket is a burial
+    // ground IS lacking healing, and reading the raw bucket said otherwise (§782.4 E-RES-11).
+    lacking: ledger.present && ledger.healerCount === 0 && ledger.careServices.length === 0,
   };
 }
 

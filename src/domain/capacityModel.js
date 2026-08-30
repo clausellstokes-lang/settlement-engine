@@ -351,18 +351,26 @@ function deriveHealing(s, ctx) {
   let demand = 50;
 
   // SUPPLY: healing institutions (canonical classifier via healingLedger). When no healer-named
-  // institution exists, offered healing SERVICES (wound care, medical care, relief) still provide
+  // institution exists, offered CARE services (wound care, medical care, relief) still provide
   // informal care (P3.3b Stage 4b) — so they rescue the harsh "absent" penalty rather than reading
   // as no healing at all. ~17% of generated settlements offer healing services without a
   // healer-named institution; they were being mis-read as having zero healing.
+  //
+  // ⚠ THE RESCUE READS `careServices`, NOT `services`, AND THE DIFFERENCE IS A CURED DEFECT.
+  // The burial tier ladder (§708.5) gave every tier a burial house, every burial menu files
+  // under `availableServices.healing`, and this branch used to fire on the bucket being
+  // NON-EMPTY — so the rescue went near-universal and the `absent` penalty below became
+  // UNREACHABLE. Measured over 1,680 real settlements: `absent` fired 0 times and 24 thorps
+  // reached the rescue on burial services alone. A graveyard is where care failed
+  // (§782.4 E-RES-11, cured in T7/UNITS as a declared shift).
   const heal = healingLedger(s);
   const healers = heal.healerCount;
   if (healers >= 3) {
     supply += 25; push(supplyContributors, 'institutions', 'broad', +25, `${healers} healing-capable institutions.`);
   } else if (healers >= 1) {
     supply += 12; push(supplyContributors, 'institutions', 'limited', +12, `${healers} healing-capable institution(s).`);
-  } else if (heal.services.length > 0) {
-    supply += 4; push(supplyContributors, 'availableServices.healing', 'services_only', +4, `${heal.services.length} healing service(s) offered without a dedicated institution.`);
+  } else if (heal.careServices.length > 0) {
+    supply += 4; push(supplyContributors, 'availableServices.healing', 'services_only', +4, `${heal.careServices.length} healing service(s) offered without a dedicated institution.`);
   } else {
     supply -= 10; push(supplyContributors, 'institutions', 'absent', -10, 'No dedicated healing institutions or services.');
   }
