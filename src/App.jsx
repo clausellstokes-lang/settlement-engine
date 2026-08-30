@@ -77,10 +77,15 @@ const FloatingAffordances = lazy(() => import('./components/FloatingAffordances.
 
 // Mobile bottom nav: an EXPLICIT priority order rather than slicing the desktop
 // NAV order, otherwise inserting/reordering a NAV item silently evicts whatever
-// falls past the slice. The Realm is omitted (the map workspace is too
-// constrained for small screens; it stays in the desktop nav and its routes
-// still resolve). Welcome/home is reached via the mobile brand button.
-const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'gallery', 'compendium', 'about-what-this-is'];
+// falls past the slice. REALM is restored to the bar (owner walk ruling, ODQ
+// §767.3(f)): a phone user must reach the realm from the product's core flow,
+// and the Realm has carried an honest phone surface since RealmMobileGate (the
+// read-only dashboard + companion) — the old "too constrained for small
+// screens" omission described a workspace that no longer answers for the whole
+// route. About yields its bar seat by priority (lowest, evicted by the 5-seat
+// cap below) and keeps its mobile door in the footer's LegalRibbonRow.
+// Welcome/home is reached via the mobile brand button.
+const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'realm', 'gallery', 'compendium', 'about-what-this-is'];
 
 // Is there a persisted Supabase session token on this device? A member returning
 // to the bare root should wait for their session to restore (so they aren't

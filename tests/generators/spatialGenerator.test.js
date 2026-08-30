@@ -97,3 +97,45 @@ describe('waterfront district gate', () => {
     );
   });
 });
+
+describe('layout templates never print an authoring alternation (ODQ §767.3(e))', () => {
+  // The desert-village row shipped "…central well and mosque or chapel" — the
+  // template's own unresolved either/or, printed verbatim to the user, naming a
+  // building ('mosque') no catalog institution ever mints. The generator now
+  // DERIVES the sacred noun from the roster it was handed, so the layout line
+  // can never promise a building the dossier lacks — and never hedges.
+
+  it('a desert village with a church-family institution says "its church"', () => {
+    const layout = generateSpatialLayout('village', inst('Parish church', 'Market square'), 'road', 'desert');
+    expect(layout.layout).toBe('Compact walled settlement around a central well and its church');
+  });
+
+  it('a desert village with only a shrine says "a wayside shrine"', () => {
+    const layout = generateSpatialLayout('village', inst('Wayside shrine', 'Market square'), 'road', 'desert');
+    expect(layout.layout).toBe('Compact walled settlement around a central well and a wayside shrine');
+  });
+
+  it('a desert village with no sacred roster drops the clause instead of inventing one', () => {
+    const layout = generateSpatialLayout('village', inst('Market square'), 'road', 'desert');
+    expect(layout.layout).toBe('Compact walled settlement around a central well');
+  });
+
+  it('the hills town commits to the keep — the castle-or-keep hedge is gone', () => {
+    const layout = generateSpatialLayout('town', inst('Market square'), 'road', 'hills');
+    expect(layout.layout).toBe('Stone-walled hill town, the keep visible above the market quarter');
+  });
+
+  it('no tier×terrain layout row carries an either/or building hedge', () => {
+    // Sweep the whole template table through the public API: every tier at every
+    // terrain, with and without a sacred roster. An "X or Y" between building
+    // nouns is the class this pins dead; ordinary prose "or" does not appear in
+    // any authored row today, so the bare pattern is the honest detector.
+    const tiers = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+    const terrains = ['coastal', 'riverside', 'plains', 'forest', 'hills', 'desert', 'mountain'];
+    const rosters = [inst('Market square'), inst('Parish church', 'Wayside shrine', 'Market square')];
+    for (const tier of tiers) for (const terrain of terrains) for (const roster of rosters) {
+      const { layout } = generateSpatialLayout(tier, roster, 'road', terrain);
+      expect(layout, `${tier}/${terrain}`).not.toMatch(/\bor\b/);
+    }
+  });
+});

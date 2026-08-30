@@ -101,6 +101,12 @@ export default function LegalRibbonRow({
         <Button variant="ghost" size="sm" onClick={() => onNavigate('privacy')} style={link}>
           {t('footer.privacy')}
         </Button>
+        <Sep />
+        {/* About keeps its mobile door here: §767.3(f) restored Realm to the
+            bottom bar's five seats and About yielded its seat by priority. */}
+        <Button variant="ghost" size="sm" onClick={() => onNavigate('about-what-this-is')} style={link}>
+          {t('footer.about')}
+        </Button>
       </nav>
       {showHome && (
         <Button variant="ghost" size="sm" onClick={() => onNavigate('home')}

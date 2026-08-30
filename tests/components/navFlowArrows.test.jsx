@@ -30,11 +30,13 @@
  * `flowsInto` itself is unchanged and is now read by THREE surfaces: this arrow,
  * the seam kind, and the fletched band's very membership.
  *
- * The mobile bar omits Realm by design (App.jsx MOBILE_NAV_PRIORITY), so a
- * Library chevron there would point at Gallery and teach a false lesson about
- * where a saved settlement goes. Pinning both surfaces in one file is still the
- * point: a future NAV/priority reorder that breaks the pairing reds here, and a
- * desktop re-mount of the arrow reds as a double-drawn journey mark.
+ * The mobile bar CARRIES Realm again (owner walk ruling, ODQ §767.3(f) —
+ * a phone user must reach the realm from the core flow; About yielded its
+ * seat by priority and kept a footer door), so the full Create → Library →
+ * Realm flow now draws BOTH chevrons on the one live mount. Pinning both
+ * surfaces in one file is still the point: a future NAV/priority reorder that
+ * breaks the pairing reds here, and a desktop re-mount of the arrow reds as a
+ * double-drawn journey mark.
  *
  * App.jsx is a pure layout shell over the Zustand store + path router, so the
  * store, the route hook, the breakpoint hook and the routed view are stubbed —
@@ -230,7 +232,7 @@ describe('desktop ribbon — the journey mark MOVED to the seam (LD-2)', () => {
   });
 });
 
-describe('mobile bottom nav — a surface WITHOUT Realm draws no Library chevron', () => {
+describe('mobile bottom nav — the core flow reads whole (§767.3(f))', () => {
   beforeEach(() => { H.isMobile = true; });
 
   test('the surviving chevron hangs off the tab that FEEDS, not the one that receives', () => {
@@ -269,21 +271,72 @@ describe('mobile bottom nav — a surface WITHOUT Realm draws no Library chevron
     expect(onActive).not.toBe(onResting);
   });
 
-  test('Library’s successor is not its rendered neighbour there, so it draws nothing', () => {
+  test('the whole core flow draws: Create → Library → Realm, and no arrow past Realm (§767.3(f))', () => {
     const { container } = render(<App />);
 
-    // The absence below is only meaningful if this surface actually rendered the
-    // Library tab with a DIFFERENT neighbour — pin the composition first.
+    // Pin the composition first: Realm holds the third seat (About yielded its
+    // seat by priority and kept its footer door), so the assertions below are
+    // about the arrows and not about a bar that lost a tab. The footer ribbon
+    // now carries its own About button, so the census excludes the footer nav —
+    // this pin is about the BAR's seats.
     const labels = [...container.querySelectorAll('button')]
+      .filter((b) => !b.closest('nav[aria-label="Footer"]'))
       .map((b) => b.textContent.trim())
       .filter((txt) => ['Create', 'Library', 'Gallery', 'Compendium', 'About', 'Realm'].includes(txt));
-    expect(labels).toEqual(['Create', 'Library', 'Gallery', 'Compendium', 'About']);
+    expect(labels).toEqual(['Create', 'Library', 'Realm', 'Gallery', 'Compendium']);
+    // And the About door really does survive in the footer (the eviction's
+    // other half — losing it there would strand About on mobile entirely).
+    const footerAbout = [...container.querySelectorAll('nav[aria-label="Footer"] button')]
+      .map((b) => b.textContent.trim());
+    expect(footerAbout).toContain('About');
 
-    // Create → Library still holds here, so the surface is drawing arrows at all.
+    // Both flow chevrons draw — the saved settlement's journey reads whole.
     expect(screen.getByTestId('nav-flow-generate-settlements')).toBeTruthy();
-    // Library → Realm does NOT: Gallery follows Library on this bar.
-    expect(screen.queryByTestId('nav-flow-settlements-gallery')).toBeNull();
-    expect(screen.queryByTestId('nav-flow-settlements-realm')).toBeNull();
-    expect(arrows(container).map((a) => a.dataset.testid)).toEqual(['nav-flow-generate-settlements']);
+    expect(screen.getByTestId('nav-flow-settlements-realm')).toBeTruthy();
+    // And nothing teaches a false step past the flow's end (Realm → Gallery).
+    expect(screen.queryByTestId('nav-flow-realm-gallery')).toBeNull();
+    expect(arrows(container).map((a) => a.dataset.testid)).toEqual([
+      'nav-flow-generate-settlements',
+      'nav-flow-settlements-realm',
+    ]);
+  });
+});
+
+describe('every chrome button speaks its name (§767.3(i) prevention)', () => {
+  // The walk reported anonymous buttons to a screen reader on the nav chrome.
+  // A live census at both breakpoints found none surviving, so this arm is the
+  // PREVENTION, not the cure: any button the App chrome renders must expose a
+  // computed accessible name — aria-label, aria-labelledby, or visible
+  // (non-aria-hidden) text. A glyph-only button whose glyph is aria-hidden has
+  // NO name; textContent alone cannot prove one, which is exactly how the
+  // class ships silently.
+  const accText = (el) => {
+    if (el.nodeType === 3) return el.textContent;
+    if (el.nodeType !== 1) return '';
+    if (el.getAttribute('aria-hidden') === 'true') return '';
+    let s = '';
+    for (const c of el.childNodes) s += accText(c);
+    if (el.tagName === 'IMG') s += el.getAttribute('alt') || '';
+    return s;
+  };
+  const accName = (b) => {
+    const al = b.getAttribute('aria-label');
+    if (al && al.trim()) return al.trim();
+    const lb = b.getAttribute('aria-labelledby');
+    if (lb) {
+      const t = lb.split(/\s+/).map((id) => document.getElementById(id)?.textContent || '').join(' ').trim();
+      if (t) return t;
+    }
+    return accText(b).trim() || (b.getAttribute('title') || '').trim();
+  };
+
+  test.each([['mobile', true], ['desktop', false]])('%s chrome renders no anonymous button', (_label, mobile) => {
+    H.isMobile = mobile;
+    const { container } = render(<App />);
+    const buttons = [...container.querySelectorAll('button, [role="button"]')];
+    // Positive control: the chrome actually rendered a real button set.
+    expect(buttons.length).toBeGreaterThan(3);
+    const anonymous = buttons.filter((b) => !accName(b)).map((b) => b.outerHTML.slice(0, 120));
+    expect(anonymous).toEqual([]);
   });
 });

@@ -67,9 +67,14 @@ export const STEP_METADATA = Object.freeze({
   assembleInstitutions: {
     label: 'Assemble institutions',
     description: 'Choose which institutions exist (inn, mill, temple, market, etc.) for this size + culture.',
+    // "on the first pass" is load-bearing (§767.3(d)): this receipt is minted
+    // BEFORE the cascade/repair/reconcile passes grow the roster, so a bare
+    // "N placed" read as a terminal count and disagreed with the dossier's
+    // total on the same page. The terminal count is stated where it is true —
+    // the reconcile step below.
     summary: (ctx) => {
       const n = ctx.institutions?.length || 0;
-      return n ? `${n} institution${n === 1 ? '' : 's'} placed` : null;
+      return n ? `${n} institution${n === 1 ? '' : 's'} placed on the first pass` : null;
     },
   },
   subsumptionPass: {
@@ -143,7 +148,15 @@ export const STEP_METADATA = Object.freeze({
   economyReconcilePass: {
     label: 'Reconcile economy with final roster',
     description: 'Re-derive chains, services, and spatial placement so faction-pulled institutions join the economy.',
-    summary: (ctx) => ctx._rosterChangedAfterEconomy ? 'Economy re-derived for the final roster' : 'Roster unchanged — economy confirmed',
+    // This step sees the TERMINAL roster, so it is the one receipt allowed to
+    // state the count the dossier will show (§767.3(d) — every surface agrees).
+    summary: (ctx) => {
+      const n = ctx.institutions?.length || 0;
+      const count = n ? ` — ${n} institution${n === 1 ? '' : 's'} stand` : '';
+      return ctx._rosterChangedAfterEconomy
+        ? `Economy re-derived for the final roster${count}`
+        : `Roster confirmed${count || ' — economy stands'}`;
+    },
   },
   powerEconomyReconcilePass: {
     label: 'Finalize power against the economy',

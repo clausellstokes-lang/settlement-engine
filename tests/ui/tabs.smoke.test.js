@@ -65,6 +65,40 @@ describe('OverviewTab smoke', () => {
     expect(() => render(e(OverviewTab, { settlement: null }))).not.toThrow();
     expect(() => render(e(OverviewTab, { settlement: undefined }))).not.toThrow();
   });
+
+  // ODQ §767.3(b)+(c) — the walk's copy defects, pinned at the render site.
+  test('a structural suggestion reads as two clean sentences, never joined words', () => {
+    const s = {
+      name: 'X', tier: 'village', population: 300,
+      structuralSuggestions: [{
+        type: 'suggestion',
+        reason: 'Frontier region: even small settlements benefit from a palisade or earthwork against monster incursions.',
+        suggested: ['Palisade or earthworks', 'Citizen militia'],
+      }],
+    };
+    const { container } = render(e(OverviewTab, { settlement: s }));
+    const text = container.textContent;
+    // The exact sentence pair — one period, a space, the PDF's "Consider:" form.
+    expect(text).toContain('monster incursions. Consider: Palisade or earthworks, Citizen militia.');
+    // The two shipped defects stay dead: the double stop and the joined words.
+    expect(text).not.toContain('incursions..');
+    expect(text).not.toContain('ConsiderPalisade');
+  });
+
+  test('a single quarter is a "quarter", not "1 quarters"', () => {
+    const s = {
+      name: 'X', tier: 'village', population: 300,
+      spatialLayout: { layout: 'Village green beside the mill', quarters: [{ name: 'Market Quarter', desc: 'stalls' }] },
+    };
+    const { container } = render(e(OverviewTab, { settlement: s }));
+    expect(container.textContent).toContain('Spatial Layout (1 quarter)');
+    expect(container.textContent).not.toContain('1 quarters');
+    // Plural control: two quarters still read as quarters.
+    cleanup();
+    const two = { ...s, spatialLayout: { ...s.spatialLayout, quarters: [...s.spatialLayout.quarters, { name: 'Shrine', desc: 'quiet' }] } };
+    const second = render(e(OverviewTab, { settlement: two }));
+    expect(second.container.textContent).toContain('Spatial Layout (2 quarters)');
+  });
 });
 
 describe('ResourcesTab smoke', () => {

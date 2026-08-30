@@ -303,7 +303,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
           restored from the composite's bespoke green sub-collapsible per THE
           BASE RECONCILIATION MAP SURFACE 1 (own top-level Section, not folded
           in with Geography). Inner quarter cards keep the composite's craft. */}
-      {r.spatialLayout?.quarters?.length>0&&<Section title={`Spatial Layout (${r.spatialLayout.quarters.length} quarters)`} collapsible defaultOpen={false} accent="#1a5a28">
+      {r.spatialLayout?.quarters?.length>0&&<Section title={`Spatial Layout (${r.spatialLayout.quarters.length} ${r.spatialLayout.quarters.length===1?'quarter':'quarters'})`} collapsible defaultOpen={false} accent="#1a5a28">
         {r.spatialLayout.layout&&<p style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag2,margin:'0 0 10px'}}>{r.spatialLayout.layout}</p>}
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'repeat(auto-fill,minmax(180px,1fr))',gap:8}}>
           {r.spatialLayout.quarters.map((q,i)=>(
@@ -338,7 +338,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
         ))}
         {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px'}}>
           <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions · First Survey</div>
-          {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#1A2A5A'],marginBottom:3}}>{v.reason}{v.suggested&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}>. Consider{v.suggested.join(', ')}</span>}</div>)}
+          {/* The suggestion reads as two sentences: the reason (period-normalized —
+              producers are inconsistent about trailing stops), then the same
+              " Consider: …" form the PDF's format.js renders, so the two surfaces
+              can never disagree on this copy's shape. The joined-words defect
+              ("…incursions.. ConsiderPalisade") lived here — §767.3(b). */}
+          {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#1A2A5A'],marginBottom:3}}>{String(v.reason||'').trim().replace(/\.+$/,'')}.{v.suggested?.length>0&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{' '}Consider: {v.suggested.join(', ')}.</span>}</div>)}
         </div>}
       </div>}
 
@@ -350,9 +355,14 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
             <span style={{fontSize:FS.xs,color:MUTED}}>{(r.institutions||[]).length} total</span>
           </div>
           <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap',justifyContent:'flex-end'}}>
+            {/* Top-5 category chips + an honest remainder: the visible chip counts
+                must SUM to the "N total" beside them — a bare slice(0,5) shipped a
+                page whose own arithmetic disagreed (§767.3(d), the 39-vs-40 gap). */}
             {Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).slice(0,5).map(([cat,insts])=>(
               <span key={cat} style={{fontSize:FS.xxs,fontWeight:600,color:getCatColor(cat),background:`${getCatColor(cat)}15`,padding:'1px 5px'}}>{cat} {insts.length}</span>
             ))}
+            {(()=>{const rest=Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).slice(5).reduce((n,[,insts])=>n+insts.length,0);
+              return rest>0?<span style={{fontSize:FS.xxs,fontWeight:600,color:MUTED,background:`${MUTED}15`,padding:'1px 5px'}}>+{rest} more</span>:null;})()}
             <span style={{fontSize:FS.xs,color:MUTED,marginLeft:4}}>{instOpen?'▲':'▼'}</span>
           </div>
         </button>

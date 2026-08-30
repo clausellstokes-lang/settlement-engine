@@ -36,7 +36,8 @@ import { X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import {
-  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP } from './theme.js';
+  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, CHROME, bottomClearance } from './theme.js';
+import useIsMobile from '../hooks/useIsMobile.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import { buildNextSteps } from './generate/nextSteps.js';
@@ -60,6 +61,9 @@ export default function PostGenCoach() {
   const [alreadyDismissed] = useState(() => isGuidanceDismissed(WHISPER_ID));
   const [step, setStep] = useState(0);
   const [dismissedThisSession, setDismissedThisSession] = useState(false);
+  // Mobile: the card must clear the fixed bottom nav + safe area (§767.3(g) —
+  // measured 21px of the card sitting over the nav at 375px with bottom:24).
+  const isMobile = useIsMobile();
 
   if (alreadyDismissed) return null;
   if (dismissedThisSession) return null;
@@ -102,7 +106,10 @@ export default function PostGenCoach() {
         // step above at 910 so, when both bottom-right panels are shown
         // together, stacking is deterministic (M10). See the Z_LAYERS manifest
         // (scripts/.ui-a11y-contract.json).
-        bottom: 24, right: 24, zIndex: 900,
+        // Mobile bottom offset rides the house clearance helper so the card
+        // sits above the bottom nav + home indicator, like every other fixed
+        // bottom overlay (§767.3(g)).
+        bottom: isMobile ? bottomClearance(CHROME.fabLift) : 24, right: 24, zIndex: 900,
         width: 340, maxWidth: 'calc(100vw - 48px)',
         background: CARD,
         border: `1px solid ${BORDER}`,

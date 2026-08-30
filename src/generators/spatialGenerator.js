@@ -221,20 +221,34 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
         riverside: 'Walled town straddling the river, a fortified bridge at its commercial heart',
         plains:    'Compact within walls, outlying farms and a weekly market field beyond the gates',
         forest:    'Tightly walled market town, timber yards and sawpits outside the north gate',
-        hills:     'Stone-walled hill town, the castle or keep visible above the market quarter',
+        // "the keep" (was "the castle or keep" — the same unresolved-alternation
+        // class as the desert-village row, §767.3(e); no castle-family
+        // institution exists at town tier, so the sentence commits to the one
+        // word the tier can honestly carry).
+        hills:     'Stone-walled hill town, the keep visible above the market quarter',
         desert:    'Walled trading town around a great well, caravanserai outside the south gate',
         mountain:  'Fortified pass town, walls cutting across the valley floor, garrison above',
       };
       return townLayouts[terrainType] || 'Compact within walls, some outlying farms';
     })(),
     village:     (() => {
+      // The desert row's sacred building is DERIVED from the roster, never
+      // hedged: the template shipped "…well and mosque or chapel" verbatim —
+      // an unresolved authoring alternation printed to the user (§767.3(e)),
+      // naming buildings ('mosque') no institution in the catalog ever mints.
+      // The generator decides from what this settlement actually holds: its
+      // church family, its shrine, or nothing — so the layout line can never
+      // promise a building the dossier lacks.
+      const desertSacred = (has('church') || has('Church') || has('Cathedral') || has('monastery') || has('Temple'))
+        ? ' and its church'
+        : (has('shrine') || has('Shrine')) ? ' and a wayside shrine' : '';
       const villageLayouts = {
         coastal:   'Church and green above the tideline, a harbour lane leading down to the water',
         riverside: 'Village green beside the mill, the river road running through the centre',
         forest:    'A clearing settlement: church, green, and dwellings ringed by managed woodland',
         plains:    'Clustered around church and green, fields radiating out in open strips',
         hills:     'Stone-walled village on a south-facing slope, paths converging at the market cross',
-        desert:    'Compact walled settlement around a central well and mosque or chapel',
+        desert:    `Compact walled settlement around a central well${desertSacred}`,
         mountain:  'Close-built stone houses below the church, a single defended gate',
       };
       return villageLayouts[terrainType] || 'Clustered around church and green';
