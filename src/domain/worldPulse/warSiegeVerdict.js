@@ -32,6 +32,42 @@ import { fidelityFactor } from './fidelityNoise.js';
 // out the implausible matchups, so this slope only ever governs a genuine contest.
 const SIEGE_CAPACITY_K = 0.16;
 const SIEGE_CAPACITY_HOLD_BIAS = 3;
+// TE-HERALD-1 — THE CALIBRATION'S OWN LANDMARKS, PROMOTED FROM PROSE TO CONSTANTS. The
+// paragraph above states them ("pFall ≈ 0.3 … pFall ≈ 0.5+") and until now nothing read
+// them, so they could rot into fiction. They are the cuts of the fall-odds ladder below,
+// which means the words a reader is told move with the calibration rather than beside it.
+// They gate nothing: no branch reads them, only the vocabulary does.
+const PFALL_NEAR_EVEN = 0.3;      // a mutual / near-even siege holds most ticks
+const PFALL_FAVOURED = 0.5;       // a clear-favourite (~18-point offensive edge) resolves quickly
+const PFALL_FOREGONE = 0.75;      // beyond the favourite band; the walls are a formality
+
+/**
+ * HOW THE STORM LOOKED BEFORE THE ROLL, worst-first for the besieger (TE-HERALD-1).
+ *
+ * ⚠ THIS IS DELIBERATELY NOT THE `band` FIELD. `band`'s tokens are load-bearing for
+ * attrition and they do not mean what they say in English: the comment at the band
+ * derivation defines `narrow_success` as a fall that cleared the bar BY A WIDE MARGIN
+ * and `costly_success` as the squeaker. Rendering those tokens to a reader would tell
+ * them the opposite of what happened, so the reader's words are derived from `pFall`
+ * directly, where the meaning is unambiguous.
+ * @type {ReadonlyArray<string>}
+ */
+export const SIEGE_FALL_ODDS_WORDS = Object.freeze([
+  'unlikely', 'close-run', 'favoured', 'all but settled',
+]);
+
+/**
+ * The besieger's prospects before the roll, as a word.
+ * @param {number} pFall 0..1 chance the walls break this tick.
+ * @returns {string} a member of SIEGE_FALL_ODDS_WORDS.
+ */
+export function siegeFallOddsWordFor(pFall) {
+  const p = clamp01(pFall);
+  if (p < PFALL_NEAR_EVEN) return SIEGE_FALL_ODDS_WORDS[0];
+  if (p < PFALL_FAVOURED) return SIEGE_FALL_ODDS_WORDS[1];
+  if (p < PFALL_FOREGONE) return SIEGE_FALL_ODDS_WORDS[2];
+  return SIEGE_FALL_ODDS_WORDS[3];
+}
 // Defender-resolve (P4, flag-gated) — the WILL track. A resolute defender shifts the
 // siege log-odds toward holding; a broken one toward falling. WILL_BIAS_STRENGTH is the
 // max shift (comparable to the hold bias). At/below the capitulate floor the will has
@@ -227,7 +263,13 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
       band: falls ? 'costly_success' : 'withdrawal',
       reasons: [
         ...reasons,
-        `Siege ran the hard ${SIEGE_MAX_AGE}-tick ceiling; auto-resolved ${falls ? 'as a storm' : 'as a withdrawal'} (capacity ${coalitionCurrent.toFixed(1)} vs ${defenderCurrent.toFixed(1)}).`,
+        // TE-HERALD-1: the capacities decided the DIRECTION and nothing else — `falls`
+        // above is exactly `coalitionCurrent > defenderCurrent` — so the comparison is
+        // told rather than printed. Both figures stay on the returned record for any
+        // consumer that needs them.
+        falls
+          ? 'The siege ran to the hard limit of what a host can sustain before a town, and the besiegers still out-weighed the defence: the walls were stormed.'
+          : 'The siege ran to the hard limit of what a host can sustain before a town, and the besiegers no longer out-weighed the defence: the camp was struck and the siege lifted.',
       ],
     };
   }

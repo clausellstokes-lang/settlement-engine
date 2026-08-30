@@ -21,6 +21,44 @@ import { RELATIONSHIP_PLANE_ALIASES } from '../relationships/canonicalRelationsh
 /** @param {number} value @returns {number} */
 export const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
 
+/**
+ * ── THE RELATIONSHIP LEVEL VOCABULARY (TE-HERALD-1) ─────────────────────────────
+ *
+ * ONE ladder for the whole relationship family's 0..1 standing scalars — trust,
+ * resentment, burden, endurance, strain, dependency, salience, attrition, a confidence
+ * gap. It lives HERE, in the module all three rule surfaces already import
+ * (`relationshipRulesCore`, `relationshipRulesAdversarial`, `relationshipMemory`),
+ * precisely so there is not one copy per surface: three tables that can drift is the
+ * defect `tests/lint/pressureLadderMints.walker.test.js` exists to make visible, and
+ * this file is already their common import so the shared home costs no new coupling.
+ *
+ * ⚠ THE CUTS ARE A READING CONVENTION AND ARE DECLARED AS ONE. These axes carry no
+ * engine-named interior landmark — every rule gates them at its own ad-hoc threshold
+ * (`trust > 0.48`, `resentment > 0.42`, `burden > 0.24`, …), and adopting any one of
+ * those as a general band would be a claim the model does not make. So the cuts are
+ * plain quarters of the 0..1 range: a convention for CHOOSING A WORD, never a threshold
+ * anything branches on. The scalars themselves are untouched and still ride the
+ * relationship state and each candidate's `severity`/`probability`.
+ * @type {ReadonlyArray<string>}
+ */
+export const RELATION_LEVEL_WORDS = Object.freeze(['faint', 'moderate', 'strong', 'consuming']);
+
+/**
+ * A relationship scalar as a word. Total: every input, including junk, lands inside the
+ * vocabulary — a band reader that can return `undefined` puts that word in front of a
+ * player.
+ * @param {number} value 0..1
+ * @returns {string} a member of RELATION_LEVEL_WORDS.
+ */
+export function relationLevelWordFor(value) {
+  const v = clamp01(value);
+  if (v < 0.25) return RELATION_LEVEL_WORDS[0];
+  if (v < 0.5) return RELATION_LEVEL_WORDS[1];
+  if (v < 0.75) return RELATION_LEVEL_WORDS[2];
+  return RELATION_LEVEL_WORDS[3];
+}
+
+
 /** @type {Record<string, any>} */
 export const RELATIONSHIP_DEFAULTS = {
   neutral: {

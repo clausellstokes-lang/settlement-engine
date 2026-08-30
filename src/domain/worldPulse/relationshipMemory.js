@@ -297,9 +297,12 @@ function postureReasons(/** @type {any} */ type, /** @type {any} */ relState, /*
   /** @type {any[]} */
   const out = [];
   if (memories[0]) out.push(`Recent memory: ${memories[0].summary}`);
-  if (relState.resentment > 0.5) out.push(`High resentment (${relState.resentment.toFixed(2)}) shapes the posture.`);
-  if (relState.trust > 0.65) out.push(`High trust (${relState.trust.toFixed(2)}) keeps the relationship functional.`);
-  if (relState.dependency > 0.6) out.push(`Dependency (${relState.dependency.toFixed(2)}) makes the relationship materially unequal.`);
+  // TE-HERALD-1: each of these three lines is GATED above a threshold, so the gate is
+  // the band — the word 'high' was already the honest reading and the float only
+  // repeated it. The scalars stay on the relationship state, where every consumer reads them.
+  if (relState.resentment > 0.5) out.push('High resentment shapes the posture.');
+  if (relState.trust > 0.65) out.push('High trust keeps the relationship functional.');
+  if (relState.dependency > 0.6) out.push('Dependency makes the relationship materially unequal.');
   if (Math.abs(asymmetry) > 0.22) {
     out.push(asymmetry > 0
       ? 'The source settlement has the stronger structural position.'

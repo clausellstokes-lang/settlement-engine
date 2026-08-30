@@ -71,9 +71,9 @@
     },
     {
       "path": "src/domain/worldPulse/deploymentReturn.js",
-      "line": 378,
+      "line": 469,
       "column": 43,
-      "signature": "54d95a8e9f6837c0",
+      "signature": "71a3960daf0dafcd",
       "issues": [
         "missing-field:id",
         "missing-field:settlementIds",
@@ -82,9 +82,9 @@
     },
     {
       "path": "src/domain/worldPulse/deploymentReturn.js",
-      "line": 418,
+      "line": 509,
       "column": 43,
-      "signature": "8918d3000c9bf8f4",
+      "signature": "f6d0d2ee095609c1",
       "issues": [
         "missing-field:id",
         "missing-field:settlementIds",
@@ -93,9 +93,9 @@
     },
     {
       "path": "src/domain/worldPulse/deploymentReturn.js",
-      "line": 436,
+      "line": 527,
       "column": 45,
-      "signature": "d537a1d322a471d8",
+      "signature": "e89c70fad56f6e12",
       "issues": [
         "missing-field:id",
         "missing-field:settlementIds",
@@ -105,9 +105,9 @@
     },
     {
       "path": "src/domain/worldPulse/deploymentReturn.js",
-      "line": 498,
+      "line": 592,
       "column": 41,
-      "signature": "6112dee1f16660ef",
+      "signature": "345c4241083f3ebc",
       "issues": [
         "missing-field:id",
         "missing-field:settlementIds",

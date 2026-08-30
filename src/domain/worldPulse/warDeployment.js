@@ -47,7 +47,7 @@ import {
 // THE SIEGE CONTEST itself — the feasibility gate, the hard duration ceiling, the
 // will track, the two resolution cores and the pick of who holds the walls — is the
 // second leaf. It DECIDES; this head ACTS on what it decides.
-import { resolveSiegeVerdict, pickOccupier } from './warSiegeVerdict.js';
+import { resolveSiegeVerdict, pickOccupier, siegeFallOddsWordFor } from './warSiegeVerdict.js';
 // The third leaf: what the war costs the HOME (steps 5 + 5b) and the two functions
 // that invert those costs for a DM-dismissed siege — accrual and inverse kept in one
 // file because they are two halves of one conserved quantity.
@@ -64,7 +64,7 @@ import { EMPTY_PATCH, razingSiegeEmission } from './razingExecution.js';
 import { seedDeploymentState, ensureStatefulRecord, computeSackTransfer } from './warArmyRecord.js';
 import { clamp01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
-import { classifyFeasibility, verdictPermitsSiege } from './feasibilityGate.js';
+import { classifyFeasibility, verdictPermitsSiege, siegeMatchupWordFor, feasibilityVerdictClause } from './feasibilityGate.js';
 // M9d — THE WAR INITIATE/RESOLVE SPLIT: siege INITIATION routes its applyMode through
 // the SAME per-domain authority policy every candidate family consults. Under legacy
 // autonomy (routine / full — the pre-CL0 world) authorityFor returns the legacy 'auto'
@@ -80,7 +80,7 @@ import { pendingActorMajorFor } from './actorMajorApproval.js';
 // besieger classifies the matchup on a NOISY ESTIMATE of the true capacities (fights
 // refused wars / quits winnable ones), then the roll below reads the TRUE values.
 // chaosPull 0 (lawful/neutral/no-piety) ⇒ factor 1, no rng forked ⇒ byte-identical.
-import { chaosPullOf } from './fidelityNoise.js';
+import { chaosPullOf, FIDELITY_TUNING } from './fidelityNoise.js';
 import { isWarReady } from './mobilization.js';
 import { applyAttritionToRecord, fortificationStrength } from './attrition.js';
 // W-F8: a militarized home fields BETTER forces — higher effective strength (efficiency,
@@ -810,9 +810,13 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       severity: clamp01(0.6 + coalitionStrength01 * 0.2),
       headline: `${occupierName} storms ${targetName}`,
       summary: `The siege of ${targetName} broke. ${occupierName}'s army holds the walls; an occupation authority now rules in the conqueror's name.`,
+      // TE-HERALD-1: both capacities, the ratio, the fall chance and the roll all stay
+      // on `verdict` for any consumer that needs them; what the reader is told is what
+      // they MEANT — how the two hosts weighed against each other, why the gate let the
+      // storm happen at all, and whether the walls were expected to break.
       reasons: [
-        `Coalition current capacity ${verdict.coalitionCurrent.toFixed(1)} vs defender ${verdict.defenderCurrent.toFixed(1)} (feasibility: ${verdict.verdict}, ratio ${verdict.ratio.toFixed(2)}).`,
-        `Fall chance ${verdict.pFall.toFixed(2)}, roll ${verdict.roll.toFixed(2)}.`,
+        `Weighed against the walls, the besiegers were ${siegeMatchupWordFor(verdict.ratio)} — ${feasibilityVerdictClause(verdict.verdict)}.`,
+        `Before the walls broke, the storm looked ${siegeFallOddsWordFor(verdict.pFall)}.`,
       ],
       powerTransfer: {
         toPowerName: `${occupierName} occupation authority`,
@@ -1185,20 +1189,35 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           `Casus belli: a sworn alliance obligation under the same living cause.`,
         ])
       : [`${fromName} is war-ready and ${chosenName} is a feasible target.`];
+    // TE-HERALD-1. Both multipliers stay on the ARMY RECORD (warArmyRecord stamps
+    // `sizingBias` and `deployedQuality` only when non-trivial), so nothing diagnostic is
+    // lost by telling the reader what they meant instead of what they were.
+    //   SIZING carries a magnitude word, and it is grounded rather than invented:
+    //     FIDELITY_TUNING.BASE_ERROR is the signed margin of error a MAXIMALLY chaotic
+    //     command makes, so an error at or beyond it is extreme by the model's own
+    //     calibration — the one non-arbitrary cut on this axis.
+    //   QUALITY carries none, deliberately: its multiplier runs FLOOR..1 with no named
+    //     interior landmark, so any cut would be a precision the engine never claimed.
     if (!coalitionDecision && Number.isFinite(seededRec?.sizingBias) && seededRec.sizingBias !== 1) {
+      // The two decisions are taken OUT of the template on purpose: the census reads a
+      // scalar's NAME inside an interpolation as a leak whatever the expression evaluates
+      // to, and it is right to — the cure is to decide in code and interpolate words.
+      const overCommitted = seededRec.sizingBias > 1;
+      const wildly = Math.abs(seededRec.sizingBias - 1) >= FIDELITY_TUNING.BASE_ERROR;
       deployReasons.push(
-        `A rusty command ${seededRec.sizingBias > 1 ? 'over' : 'under'}-committed the force (sizing ×${seededRec.sizingBias.toFixed(2)}).`,
+        `A rusty command ${overCommitted ? 'over' : 'under'}-committed the force${wildly ? ', and not by a little' : ''}.`,
       );
     }
     if (!coalitionDecision && Number.isFinite(seededRec?.deployedQuality) && seededRec.deployedQuality !== 1) {
-      deployReasons.push(
-        `Thin war-supply degraded the army's kit (deployed quality ×${seededRec.deployedQuality.toFixed(2)}).`,
-      );
+      deployReasons.push("Thin war-supply degraded the army's kit before it ever marched.");
     }
     // W-PEACE-1 §14.4: the march's receipt NAMES its typed casus (empty when the
     // peace-engine gate is dark ⇒ the dormant outcome is byte-identical).
     for (const c of coalitionDecision ? [] : casusList) {
-      deployReasons.push(`Casus belli: ${c.type} (${c.score.toFixed(2)}) — ${c.receipt}`);
+      // TE-HERALD-1: the ranking score rides `seededRecord.casusReasons` on the
+      // deployment record; the receipt is the sentence, and it always said the thing
+      // the score only ordered.
+      deployReasons.push(`Casus belli: ${c.type} — ${c.receipt}`);
     }
     outcomes.push({
       id: `world_outcome.strategy_deploy.${stablePart(fromId)}.${stablePart(chosenTarget)}.${tick}`,

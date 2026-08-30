@@ -120,6 +120,67 @@ export function feasibilityRatio(attackerCurrent, defenderCurrent) {
 }
 
 /**
+ * THE MATCHUP IN A WORD, worst-first (TE-HERALD-1). Six rungs on this file's OWN five
+ * cuts — nothing invented: `HOPELESS_CEILING`, `AUTO_FAIL_CEILING`, `HARASSMENT_FLOOR`,
+ * `PLAUSIBLE_FLOOR` and `PLAUSIBLE_CEILING` are the same numbers the verdict branches
+ * on below, so the word a reader is given and the verdict the engine reaches can never
+ * disagree. `PLAUSIBLE_CEILING` had been documentation-only; naming the top rung is the
+ * first thing that reads it, and it still gates nothing — the band stays open-topped.
+ * @type {ReadonlyArray<string>}
+ */
+export const SIEGE_MATCHUP_WORDS = Object.freeze([
+  'no contest', 'hopeless', 'badly outmatched', 'short of a storm', 'a real contest', 'overwhelming',
+]);
+
+/**
+ * The attacker's weight against the walls, as a word.
+ * @param {number} ratio the home-ground-adjusted capacity ratio (>= 0, open-topped).
+ * @returns {string} a member of SIEGE_MATCHUP_WORDS.
+ */
+export function siegeMatchupWordFor(ratio) {
+  const r = Math.max(0, Number(ratio) || 0);
+  if (r < HOPELESS_CEILING) return SIEGE_MATCHUP_WORDS[0];
+  if (r < AUTO_FAIL_CEILING) return SIEGE_MATCHUP_WORDS[1];
+  if (r < HARASSMENT_FLOOR) return SIEGE_MATCHUP_WORDS[2];
+  if (r < PLAUSIBLE_FLOOR) return SIEGE_MATCHUP_WORDS[3];
+  if (r < PLAUSIBLE_CEILING) return SIEGE_MATCHUP_WORDS[4];
+  return SIEGE_MATCHUP_WORDS[5];
+}
+
+/**
+ * WHAT THE GATE CONCLUDED, in a clause a reader can use (TE-HERALD-1). The verdict
+ * tokens are machine vocabulary — `require_betrayal` names a PRECONDITION THAT HELD,
+ * not a requirement still outstanding, and a reader shown the bare token would read it
+ * backwards. Homed here because this file owns the vocabulary; `warDeployment` and any
+ * later consumer render through this rather than spelling a second table.
+ *
+ * TOTAL over `FeasibilityVerdict` by construction: the fallback is the honest
+ * `plausible` clause, and tests/domain/warVerdictHeraldWords.test.js pins the map
+ * against `FEASIBILITY_VERDICTS` so a seventh verdict cannot land unspoken.
+ * @type {Readonly<Record<string, string>>}
+ */
+const VERDICT_CLAUSES = Object.freeze({
+  plausible: 'the matchup alone made a storm worth trying',
+  auto_fail: 'the gate judged a storm impossible',
+  harassment: 'the gate allowed no more than a raid on the approaches',
+  require_coalition: 'the gate would not open a storm to one attacker alone',
+  require_betrayal: 'the storm was opened by the rot inside the defender, not by weight of arms',
+  require_magic: 'the storm was opened by a decisive war-magic edge, not by weight of arms',
+});
+
+/** The closed verdict vocabulary, so a consumer proves coverage against source.
+ *  @type {ReadonlyArray<string>} */
+export const FEASIBILITY_VERDICTS = Object.freeze(Object.keys(VERDICT_CLAUSES).sort());
+
+/**
+ * The gate's conclusion as reader prose.
+ * @param {string} verdict @returns {string}
+ */
+export function feasibilityVerdictClause(verdict) {
+  return VERDICT_CLAUSES[String(verdict)] || VERDICT_CLAUSES.plausible;
+}
+
+/**
  * Does the defender carry an INTERNAL-COLLAPSE signal — a coup / rebellion /
  * legitimacy crisis condition, or a fragile legitimacy score? This is what makes
  * a `require_betrayal` opening actually FIRE (a weak attacker only gets in if the
@@ -194,7 +255,7 @@ export function classifyFeasibility({
   defenderFacets = {},
 }) {
   const ratio = feasibilityRatio(attackerCurrent, defenderCurrent);
-  const reasons = [`Attacker/defender capacity ratio ${ratio.toFixed(2)} (home-ground adjusted).`];
+  const reasons = [`Weighed against the walls, the attacker is ${siegeMatchupWordFor(ratio)} — the defender's home ground counted.`];
 
   // The plausible band: a real contest. Hand it to RNG (open-topped above the floor).
   if (ratio >= PLAUSIBLE_FLOOR) {

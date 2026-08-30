@@ -210,6 +210,30 @@ function bandOf(value, ladder, cuts) {
 }
 
 /**
+ * THE REACH BAND of a 0..1 conquest-reach read. ONE derivation, shared by the
+ * appraisal and by the bargaining receipt below — TE-HERALD-1 made the second reader,
+ * and a second spelling of the same three cuts is the drift this file's own band
+ * tables exist to prevent.
+ * @param {number} reach01 @returns {string}
+ */
+function reachBandOf(reach01) {
+  const T = CONQUEST_FEASIBILITY_TUNING;
+  return bandOf(reach01, CONQUEST_REACH_BANDS, [T.REACH_CONTESTED, T.REACH_WITHIN, T.REACH_ASSURED]);
+}
+
+/**
+ * THE THREAT BAND of a 0..1 being-conquered read. Same argument as `reachBandOf`.
+ * @param {number} risk01 @returns {string}
+ */
+function threatBandOf(risk01) {
+  const T = CONQUEST_FEASIBILITY_TUNING;
+  return bandOf(risk01, CONQUEST_THREAT_BANDS, [T.THREAT_PRESSED, T.THREAT_IMPERILLED, T.THREAT_EXISTENTIAL]);
+}
+
+/** A ladder token as reader prose (`within_reach` → `within reach`). @param {string} band */
+const bandWords = (band) => String(band).split('_').join(' ');
+
+/**
  * THE UNKNOWN READ. Every field a caller might branch on is present and honest:
  * the numbers are null (not zero), the bands are `unknown`, and the receipt says
  * why. A consumer that treats this as "no conquest" is correct; a consumer that
@@ -312,12 +336,8 @@ export function readConquestFeasibility(input) {
     + T.RESERVES_W * (1 - reserves),
   ));
 
-  const conquestReachBand = bandOf(conquestReach01, CONQUEST_REACH_BANDS, [
-    T.REACH_CONTESTED, T.REACH_WITHIN, T.REACH_ASSURED,
-  ]);
-  const threatBand = bandOf(beingConqueredRisk01, CONQUEST_THREAT_BANDS, [
-    T.THREAT_PRESSED, T.THREAT_IMPERILLED, T.THREAT_EXISTENTIAL,
-  ]);
+  const conquestReachBand = reachBandOf(conquestReach01);
+  const threatBand = threatBandOf(beingConqueredRisk01);
   // THE ASYMMETRY, applied once, here, so every consumer inherits it rather than
   // each re-deciding how frightened a court should be.
   const behaviouralWeight01 = round4(clamp01(Math.max(
@@ -337,7 +357,7 @@ export function readConquestFeasibility(input) {
     beingConqueredRisk01,
     threatBand,
     behaviouralWeight01,
-    receipt: `${partyId} believes a conquest of ${counterpartId} is ${conquestReachBand.split('_').join(' ')}`
+    receipt: `${partyId} believes a conquest of ${counterpartId} is ${bandWords(conquestReachBand)}`
       + ` and its own position ${threatBand}`
       + ` (armies ${text(row.ownStrengthBand)} against ${text(row.rivalStrengthBand)},`
       + ` allies ${text(row.ownAllyStrengthBand)} against ${text(row.rivalAllyStrengthBand)},`
@@ -414,8 +434,12 @@ export function conquestTermsRange(read) {
     takeByForce01,
     mustGiveToSurvive01,
     known: true,
-    receipt: `${partyId} believes it could take ${takeByForce01} by force`
-      + ` and must give ${mustGiveToSurvive01} to survive.`,
+    // TE-HERALD-1: the two ends are BELIEFS about a war, and the file already says
+    // what a belief about a war sounds like 100 lines up. The floats stay on the
+    // typed fields above, where a consumer that needs to compare ranges reads them;
+    // the sentence a reader is shown speaks the same ladders the appraisal does.
+    receipt: `${partyId} believes a conquest is ${bandWords(reachBandOf(takeByForce01))} by force,`
+      + ` and its own position ${bandWords(threatBandOf(mustGiveToSurvive01))}.`,
   };
 }
 

@@ -192,7 +192,7 @@ export function warSpoilsEndedOutcome({
     severity: clamp01(num(previousSeverity)),
     headline: `${occupierName}'s war spoils dry up`,
     summary: `Fresh tribute, levies, and materiel from ${occupierName}'s occupations no longer sustain its war effort. The remaining benefit continues fading.`,
-    reasons: [`Occupier benefit fell from ${clamp01(num(previousBenefit)).toFixed(2)} to 0.00.`],
+    reasons: ['The occupations stopped returning anything at all to the power that holds them.'],
     metadata: {
       previousBenefit: clamp01(num(previousBenefit)),
       nextBenefit: clamp01(num(nextBenefit)),

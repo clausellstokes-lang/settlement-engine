@@ -5,7 +5,7 @@
  * the cooperative evaluators from relationshipRulesCore.js). Extracted verbatim from
  * relationshipEvolution.js; bodies byte-identical.
  */
-import { clamp01, getRelationshipSettlements } from './relationshipState.js';
+import { clamp01, getRelationshipSettlements, relationLevelWordFor } from './relationshipState.js';
 import { previewRelationshipHierarchyCascade } from './relationshipHierarchy.js';
 import { isBattlefieldPrimary } from './relationshipCompatibility.js';
 import { hash01, mean, candidateBase, labelProposal, internalDrift, pairStableId, hasRecentIncident, itemFor, settlementStrength, subjugationDirection, supplyExposure } from './relationshipRuleHelpers.js';
@@ -87,7 +87,7 @@ function rivalRules(/** @type {any} */ ctx) {
         probability: clamp01(0.05 + confidenceGap * 0.18 + relState.resentment * 0.12),
         reasons: [
           "A rival with a stronger economy, military, or tier position grows confident enough to press the contest.",
-          `Power confidence gap ${confidenceGap.toFixed(2)}.`,
+          `The gap in believed standing is ${relationLevelWordFor(confidenceGap)}.`,
         ],
         relationshipPatch: {
           resentment: clamp01(relState.resentment + 0.055),
@@ -197,7 +197,9 @@ function coldWarRules(/** @type {any} */ ctx) {
         reasons: [
           "Cold-war pressure follows exposed trade and supply channels through inspections, sanctions, and informal embargoes.",
           `${itemFor(ctx.snapshot, imposerId)?.name || imposerId} squeezes the strained economy of ${itemFor(ctx.snapshot, sanctionedId)?.name || sanctionedId}.`,
-          exposure > 0 ? `Confirmed supply exposure ${exposure.toFixed(2)}.` : `Trade stress ${tradeStress.toFixed(2)}.`,
+          exposure > 0
+            ? `The supply exposure is confirmed, and it is ${relationLevelWordFor(exposure)}.`
+            : `Nothing is confirmed; the trade strain alone is ${relationLevelWordFor(tradeStress)}.`,
         ],
         relationshipPatch: {
           tradeBalance: clamp01(relState.tradeBalance - 0.05),
@@ -398,7 +400,7 @@ function hostileRules(/** @type {any} */ ctx) {
         probability: clamp01(0.05 + attackerAttrition * 0.18 + relState.trust * 0.08),
         reasons: [
           `Open hostility is losing practical support as the economy, defenses, legitimacy, or manpower of ${itemFor(ctx.snapshot, aggressorId)?.name || aggressorId} (the aggressing side) slip.`,
-          `Attacker attrition ${attackerAttrition.toFixed(2)}.`,
+          `The wear on the aggressor is ${relationLevelWordFor(attackerAttrition)}.`,
         ],
         relationshipPatch: {
           trust: clamp01(relState.trust + 0.025),
@@ -605,7 +607,7 @@ function tradeLeverageCandidate(/** @type {any} */ ctx) {
       probability: clamp01(0.05 + tensionDrive * 0.18 + info.salience * 0.08),
       reasons: [
         "A valuable, hard-to-replace trade dependency has become a weapon: rising military or religious tension collapses it into an embargo.",
-        `Trade salience ${info.salience.toFixed(2)} with tension ${tensionDrive.toFixed(2)}.`,
+        `What the trade is worth to them is ${relationLevelWordFor(info.salience)}; the tension pulling against it, ${relationLevelWordFor(tensionDrive)}.`,
       ],
       relationshipPatch: {
         tradeBalance: clamp01(ctx.relState.tradeBalance - 0.08),
@@ -647,7 +649,7 @@ function tradeLeverageCandidate(/** @type {any} */ ctx) {
       probability: clamp01(0.06 + info.salience * 0.14),
       reasons: [
         "A critical-supplier dependency is leverage: the supplier extracts concessions or preferential terms rather than risk war over the relationship.",
-        `Trade salience ${info.salience.toFixed(2)} (critical supplier).`,
+        `What the trade is worth to them is ${relationLevelWordFor(info.salience)}, and there is no other supplier of consequence.`,
       ],
       relationshipPatch: {
         leverage: clamp01(ctx.relState.leverage + 0.05),

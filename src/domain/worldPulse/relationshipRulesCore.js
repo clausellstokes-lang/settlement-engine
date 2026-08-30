@@ -3,7 +3,7 @@
  * relationship rule evaluators (neutral, trade_partner, allied, patron, client,
  * vassal). Extracted verbatim from relationshipEvolution.js; bodies byte-identical.
  */
-import { clamp01, relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles } from './relationshipState.js';
+import { clamp01, relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles, relationLevelWordFor } from './relationshipState.js';
 import { stablePart, mean, candidateBase, labelProposal, internalDrift, pairStableId, hasRecentIncident, itemFor, settlementStrength, relationshipTypeBetween, patronageEligibility, relationshipThirdParties, activeRebellionAgainstVassal } from './relationshipRuleHelpers.js';
 import { deriveActiveCondition } from '../activeConditions.js';
 
@@ -60,7 +60,7 @@ function neutralRules(ctx) {
         probability: 0.12 + relState.trust * 0.18 + combinedTrade * 0.08,
         reasons: [
           "Neutral neighbors have enough trust and low conflict pressure for trade ties to formalize.",
-          `Trust ${relState.trust.toFixed(2)}, resentment ${relState.resentment.toFixed(2)}.`,
+          `Trust runs ${relationLevelWordFor(relState.trust)}; resentment ${relationLevelWordFor(relState.resentment)}.`,
         ],
         relationshipPatch: {
           trust: clamp01(relState.trust + 0.03),
@@ -79,7 +79,7 @@ function neutralRules(ctx) {
         probability: 0.1 + combinedConflict * 0.18 + relState.resentment * 0.14,
         reasons: [
           "Neutral relations are being pushed toward rivalry by conflict pressure or accumulated resentment.",
-          `Conflict pressure ${combinedConflict.toFixed(2)}, resentment ${relState.resentment.toFixed(2)}.`,
+          `Conflict pressure is ${relationLevelWordFor(combinedConflict)}; resentment ${relationLevelWordFor(relState.resentment)}.`,
         ],
         relationshipPatch: {
           resentment: clamp01(relState.resentment + 0.05),
@@ -257,7 +257,7 @@ function alliedRules(ctx) {
         probability: 0.18 + relState.trust * 0.18 + relState.pactStrength * 0.16,
         reasons: [
           "An ally buffers pressure, but the support becomes a real burden on the supporting settlement.",
-          `Burden ${burden.toFixed(2)}, endurance ${endurance.toFixed(2)}.`,
+          `The burden is ${relationLevelWordFor(burden)}; the endurance left to bear it, ${relationLevelWordFor(endurance)}.`,
         ],
         relationshipPatch: {
           aidBurden: clamp01(relState.aidBurden + burden * 0.12),
@@ -742,7 +742,7 @@ function vassalRules(ctx) {
         probability: clamp01(0.08 + stableVassalage * 0.18),
         reasons: [
           "The vassalage is burdensome, but trust, protection, and low strain make a stable compact plausible.",
-          `Stable compact gate ${stableVassalage.toFixed(2)} with strain ${vassalStrain.toFixed(2)}.`,
+          `The case for a settled compact is ${relationLevelWordFor(stableVassalage)}; the strain against it, ${relationLevelWordFor(vassalStrain)}.`,
         ],
         relationshipPatch: {
           trust: clamp01(relState.trust + 0.045),
@@ -777,8 +777,8 @@ function vassalRules(ctx) {
       headline: `Rebellion may rise in ${itemFor(ctx.snapshot, vassalId)?.name || vassalId}`,
       summary: "Vassal extraction, low legitimacy, and poor defenses create an independence crisis.",
       reasons: [
-        `Independence pressure ${independencePressure.toFixed(2)} with overlord weakness streak ${weaknessStreak}.`,
-        `Vassal strain ${vassalStrain.toFixed(2)} with resentment ${relState.resentment.toFixed(2)}.`,
+        `The pull toward independence is ${relationLevelWordFor(independencePressure)}, and the overlord has looked weak ${weaknessStreak} turn${weaknessStreak === 1 ? '' : 's'} running.`,
+        `The strain of vassalage is ${relationLevelWordFor(vassalStrain)}; the resentment under it, ${relationLevelWordFor(relState.resentment)}.`,
         "A rebellion can end vassalage if it succeeds, but it does not erase prior structural changes.",
       ],
       stressor: {

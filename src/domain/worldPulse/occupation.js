@@ -185,6 +185,91 @@ const RESISTANCE_DECAY_PER_TICK = 0.14; // suppression/compliance erodes it
 // occupation does not stamp a resistance condition — byte-light).
 const RESISTANCE_CONDITION_FLOOR = 0.20;
 
+/**
+ * RESISTANCE IN A WORD, quietest first (TE-HERALD-1). The reader is told what the
+ * occupied town is doing, never the scalar — the scalar itself stays where a consumer
+ * reads it (the record's `resistance`, and the resistance condition's own `severity`,
+ * which IS this number).
+ *
+ * ⚠ THE CUTS ARE DECLARED AS A READING CONVENTION, NOT AS A CLAIM ABOUT THE MODEL, and
+ * saying so is the point. This axis has exactly ONE engine-named landmark —
+ * RESISTANCE_CONDITION_FLOOR, below which nothing is surfaced at all — so the three cuts
+ * are whole multiples of that single floor rather than three new numbers invented to look
+ * calibrated. Nothing branches on them; they choose a word. If the floor moves, the words
+ * move with it.
+ * @type {ReadonlyArray<string>}
+ */
+const RESISTANCE_WORDS = Object.freeze(['sullen', 'simmering', 'organized', 'in open revolt']);
+
+/**
+ * The three cuts, COMPUTED ONCE. ⚠ They are a frozen array rather than three inline
+ * `FLOOR * n` expressions for a reason the band arm found: `0.2 * 3` is
+ * 0.6000000000000001 in IEEE-754, so a reader naming the round value 0.6 fell on the
+ * WRONG side of an inline third cut. Computing them once means the source and any proof
+ * of it compare against the SAME numbers, and a consumer can derive the cuts from here
+ * instead of transcribing them.
+ * @type {ReadonlyArray<number>}
+ */
+export const OCCUPATION_RESISTANCE_CUTS = Object.freeze([
+  RESISTANCE_CONDITION_FLOOR,
+  RESISTANCE_CONDITION_FLOOR * 2,
+  RESISTANCE_CONDITION_FLOOR * 3,
+]);
+
+/**
+ * How hard the occupied town is resisting, as a word.
+ * @param {number} resistance 0..1
+ * @returns {string} a member of RESISTANCE_WORDS.
+ */
+export function resistanceWordFor(resistance) {
+  const r = clamp01(resistance);
+  if (r < OCCUPATION_RESISTANCE_CUTS[0]) return RESISTANCE_WORDS[0];
+  if (r < OCCUPATION_RESISTANCE_CUTS[1]) return RESISTANCE_WORDS[1];
+  if (r < OCCUPATION_RESISTANCE_CUTS[2]) return RESISTANCE_WORDS[2];
+  return RESISTANCE_WORDS[3];
+}
+
+/** The resistance vocabulary, exported so a coverage proof reads it from source. */
+export const OCCUPATION_RESISTANCE_WORDS = RESISTANCE_WORDS;
+
+/**
+ * WHAT THE CONQUESTS COST, lightest first (TE-HERALD-1). Three rungs on TWO cuts, and
+ * both cuts are `PER_OCCUPATION_BURDEN_CAP` — half of it and all of it — because that
+ * constant is the one meaningful UNIT on this axis: it is what a single occupation can
+ * cost at its worst. So the word says how many occupations' worth of cost the occupier
+ * is carrying, which is the fact the number encoded.
+ * @type {ReadonlyArray<string>}
+ */
+export const OCCUPATION_BURDEN_WORDS = Object.freeze(['lightly', 'heavily', 'crushingly']);
+
+/** How hard the conquests weigh, as a word. @param {number} burden 0..1 @returns {string} */
+export function occupationBurdenWordFor(burden) {
+  const b = clamp01(burden);
+  if (b < PER_OCCUPATION_BURDEN_CAP / 2) return OCCUPATION_BURDEN_WORDS[0];
+  if (b < PER_OCCUPATION_BURDEN_CAP) return OCCUPATION_BURDEN_WORDS[1];
+  return OCCUPATION_BURDEN_WORDS[2];
+}
+
+/**
+ * WHAT THE CONQUESTS RETURN, thinnest first (TE-HERALD-1). The two cuts are the file's
+ * own two caps: `PER_OCCUPATION_BENEFIT_CAP` (all one occupation can ever yield) and
+ * `OCCUPIER_BENEFIT_CONTAINMENT` (all every occupation together can ever yield). The top
+ * rung therefore names the anti-snowball ceiling in words, which is exactly what the
+ * retired sentence was trying to say with "HARD-CAPPED at 0.9".
+ * @type {ReadonlyArray<string>}
+ */
+export const OCCUPATION_YIELD_WORDS = Object.freeze([
+  'a thin tribute', 'a real tribute', 'everything conquest can ever return',
+]);
+
+/** What the occupations yield, as a word. @param {number} yield01 0..1 @returns {string} */
+export function occupationYieldWordFor(yield01) {
+  const y = clamp01(yield01);
+  if (y < PER_OCCUPATION_BENEFIT_CAP) return OCCUPATION_YIELD_WORDS[0];
+  if (y < OCCUPIER_BENEFIT_CONTAINMENT) return OCCUPATION_YIELD_WORDS[1];
+  return OCCUPATION_YIELD_WORDS[2];
+}
+
 // ── Benefit caps (THE ANTI-SNOWBALL). ─────────────────────────────────────────────
 // PER_OCCUPATION_BENEFIT_CAP — the most one occupation can EVER yield (0..1 war-support
 // units), before the per-occupier containment. OCCUPIER_BENEFIT_CONTAINMENT — the HARD
@@ -764,7 +849,7 @@ export function vassalizationOutcomes(occupations, snapshot, nameFor, tick, arri
       severity: 0.5,
       headline: `${occupiedName} bends the knee to ${occupierName}`,
       summary: `${occupierName}'s occupation of ${occupiedName} has stabilized into formal vassalage. The occupied settlement now serves as a client state.`,
-      reasons: [`Occupation stabilized to vassalized (resistance ${num(rec.resistance).toFixed(2)}).`],
+      reasons: [`The occupation held long enough to become a compact; what resistance is left is ${resistanceWordFor(num(rec.resistance))}.`],
       relationshipPatch: { proposedRelationshipType: 'vassal', trajectory: 'transitioning' },
       proposalPayload: {
         kind: 'relationship_label_change',
@@ -947,7 +1032,7 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         severity: 0.3,
         headline: `${occupiedName} throws off ${occupierName}`,
         summary: `The occupation of ${occupiedName} collapsed under resistance. ${occupierName} could never hold it, and the settlement reclaims its own authority.`,
-        reasons: [`Occupation suitability collapsed (resistance ${nextResistance.toFixed(2)}).`],
+        reasons: [`The occupation became unholdable against a town ${resistanceWordFor(nextResistance)}.`],
         tick: t,
         sourceEventTargetId: String(rec.occupierId),
         causes: [{ source: occupiedId, effect: 'occupation_lifted', reason: `${occupiedName}'s resistance broke ${occupierName}'s occupation.` }],
@@ -1018,7 +1103,7 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         severity: nextResistance,
         headline: `${occupiedName} resists its occupiers`,
         summary: `Sabotage, noncompliance, and an organizing resistance harry ${occupierName}'s grip on ${occupiedName}.`,
-        reasons: [`Resistance at ${nextResistance.toFixed(2)} (occupation ${advanced.state}).`],
+        reasons: [`The town is ${resistanceWordFor(nextResistance)}, and the occupation stands at ${advanced.state}.`],
         tick: t,
         sourceEventTargetId: String(rec.occupierId),
         causes: [{ source: occupiedId, effect: 'occupation_resistance', reason: `${occupiedName} resists ${occupierName}'s occupation.` }],
@@ -1115,9 +1200,9 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         headline: `${occupierName} is stretched thin holding its conquests`,
         summary: `Garrisons, administrators, and suppression tie down ${occupierName}'s strength across ${occCount} occupation${occCount === 1 ? '' : 's'}.`,
         reasons: [
-          `Occupation burden ${burdenSeverity.toFixed(2)} across ${occCount} occupation${occCount === 1 ? '' : 's'} (overextension scales with count).`,
+          `${occCount} occupation${occCount === 1 ? '' : 's'} weigh ${occupationBurdenWordFor(burdenSeverity)} on the occupier, and each one held makes the next dearer.`,
           // The counterforce is NAMED, not buried in a float. Absent while dark.
-          ...(inheritedHere && inheritedHere.hunger > 0 ? [`Inherited hunger ${inheritedHere.hunger.toFixed(2)}: ${inheritedHere.receipt}`] : []),
+          ...(inheritedHere && inheritedHere.hunger > 0 ? [`The famine it annexed is part of the garrison bill: ${inheritedHere.receipt}`] : []),
         ],
         tick: t,
         sourceEventTargetId: occupierId,
@@ -1168,9 +1253,9 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         headline: `${occupierName} draws strength from its occupations`,
         summary: `Tribute, levies, and materiel from stabilized occupations sustain ${occupierName}'s war effort.`,
         reasons: [
-          `Occupier benefit ${benefitYield.toFixed(2)} (HARD-CAPPED at ${OCCUPIER_BENEFIT_CONTAINMENT}); relief ${relief.toFixed(2)} eases war exhaustion.`,
+          `The occupations return ${occupationYieldWordFor(benefitYield)}, and what comes in eases the weariness of the war at home.`,
           ...(inheritedHere && inheritedHere.hunger > 0
-            ? [`Netted down by inherited hunger ${inheritedHere.hunger.toFixed(2)} — ${inheritedHere.receipt}`]
+            ? [`Netted down by the famine it annexed — ${inheritedHere.receipt}`]
             : []),
         ],
         ...(recordMode ? { recordMode } : {}),

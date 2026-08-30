@@ -103,13 +103,70 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // amplitudes 38/30/22). None is debt and none is in this baseline: the detector reads
 // numerics that FLOW INTO A PROSE KEY, not numbers written in comments — the same
 // distinction TE-CH-4's note above had to draw.
-const REVIEWED_TOTAL_CEILING = 408;
+// ══ LOWERED BY TE-HERALD-1, THE HUMANIZATION WAVE (owner directive, ODQ §754.3;
+//    boundary ruled §763.2) ═══════════════════════════════════════════════════════
+// This is the wave the four sentences frozen above were "owed". The debt named in the
+// CR-FP-2 note — "FROZEN AS UN-HUMANIZED DEBT, not as clean rows… owed a humanization
+// wave" — is being PAID, not re-addressed: the reader prose at each cured site now
+// carries the fact the arithmetic used, in world words, and the row leaves this census
+// because the leak is gone rather than because it moved.
+//
+// THE RULED BOUNDARY, so a later reader can tell a cure from an over-cure: honest
+// concrete counts in world words STAY and are census-legitimate ("stores below half a
+// month", "for three years", a formatCount of survivors). What dies is the ABSTRACT
+// ENGINE SCALAR — ratios, probabilities, rolls, indices, percentages of an invisible
+// quantity, and `toFixed` anything. No row here was cleared by deleting information:
+// each was TRANSLATED, and where the scalar had no world meaning to translate (a roll
+// that was never drawn) that is recorded at the site.
+//
+// EVERY REMOVED ROW WAS REVIEWED AGAINST THE DIFF, as this ratchet's own message
+// demands, and each car below reports its own count. No row moved by ADDRESS ROT in
+// this wave: the removals are exact-sentence removals and the ADDED count is zero at
+// every car, which is asserted by the regeneration report rather than argued.
+//
+//   car HER-1 (the war verdicts)  408 -> 381  (-27, ADDED 0). Five files, ten sentences:
+//     deploymentReturn.js :211/:369/:405/:471 (the returning host's muster share, its
+//     success probability, its roll, the coup verdict's hold chance) · warDeployment.js
+//     :814/:815/:1190/:1195/:1201 (both siege capacities, the feasibility ratio, the fall
+//     chance and its roll, the sizing and deployed-quality multipliers, the casus score)
+//     · feasibilityGate.js :197 (the capacity ratio) · warSiegeVerdict.js :230 (the two
+//     auto-resolve capacities) · conquestFeasibility.js :417 (the bargaining range's two
+//     belief reads). float 233->221, percent 77->73, twoDecimal 71->62, multiplier
+//     24->22. pushIndirection untouched.
+//     ⚠ ONE ROW WAS AUTHORED AND THEN REMOVED WITHIN THIS CAR, and the lesson is worth
+//     more than the row: the first draft of warDeployment's sizing sentence interpolated
+//     `seededRec.sizingBias > 1 ? 'over' : 'under'` — a BOOLEAN — and the census counted
+//     it, correctly. The detector reads a scalar's NAME inside an interpolation, not the
+//     type the expression evaluates to, and that is the right rule: the cure is to decide
+//     in code and interpolate WORDS. The regeneration report showed ADDED 1 and the
+//     sentence was restructured before anything was banked.
+//   car HER-2 (the occupations)  381 -> 365  (-16, ADDED 0). occupation.js :767/:950/
+//     :1021/:1118/:1120/:1171/:1173 (the resistance scalar at four sites, the occupation
+//     burden, the occupier benefit against its own hard cap, the relief, and the inherited
+//     hunger twice) · occupationRecordMode.js :195 (a benefit falling "to 0.00").
+//     float 221->213, twoDecimal 62->54. percent and multiplier untouched.
+//   car HER-3 (the relationships)  365 -> 338  (-27, ADDED 0). relationshipRulesCore.js
+//     :63/:82/:260/:745/:780/:781 · relationshipRulesAdversarial.js :90/:200/:401/:608/:650
+//     · relationshipMemory.js :300/:301/:302. Every one of these was a bare readout appended
+//     to a reason line that ALREADY said the same thing in world words, which is why the
+//     translation reads as an improvement rather than a loss.
+//     float 213->201, twoDecimal 54->42.
+//     ⛔ pushIndirection FALLS TO ZERO, and the ceiling falls with it. All three rows of
+//     that class lived in relationshipMemory's `postureReasons`, and all three were GATED
+//     above a threshold (`resentment > 0.5`, `trust > 0.65`, `dependency > 0.6`) — so the
+//     word "High" in each sentence was already the honest band and the float only repeated
+//     it. The class is NOT deleted and its detector is NOT weakened: the four executed
+//     pushIndirection mutants above still prove the walk, and the ceiling of 0 means the
+//     next wrapped-return leak is red on arrival rather than absorbed into a stale budget
+//     of three. That is the same argument TE-STRIP-1's note makes about a ceiling being the
+//     control's teeth, at its limit.
+const REVIEWED_TOTAL_CEILING = 338;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 233,
-  percentToken: 77,
-  multiplier: 24,
-  twoDecimalScore: 71,
-  pushIndirection: 3,
+  floatInterpolation: 201,
+  percentToken: 73,
+  multiplier: 22,
+  twoDecimalScore: 42,
+  pushIndirection: 0,
 });
 
 function walkSourceFiles(dir, out = []) {
@@ -415,11 +472,11 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     expect(categoryCeilingTotal).toBe(REVIEWED_TOTAL_CEILING);
     expect(
       ceilingViolations(baseline),
-      'The committed baseline exceeds the reviewed 408-row census. Remove the leak; never raise a ceiling.',
+      'The committed baseline exceeds the reviewed 338-row census. Remove the leak; never raise a ceiling.',
     ).toEqual([]);
     expect(
       ceilingViolations(LIVE.hits),
-      'The live tree exceeds the reviewed 408-row census. Humanize the new leak; never raise a ceiling.',
+      'The live tree exceeds the reviewed 338-row census. Humanize the new leak; never raise a ceiling.',
     ).toEqual([]);
   });
 
@@ -434,8 +491,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 409 exceeds reviewed ceiling 408',
-      'floatInterpolation 234 exceeds reviewed ceiling 233',
+      'total 339 exceeds reviewed ceiling 338',
+      'floatInterpolation 202 exceeds reviewed ceiling 201',
     ]);
   });
 

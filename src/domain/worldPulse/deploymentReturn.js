@@ -66,6 +66,11 @@ const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, Number(v) || 0
 // a contested middle where the (deterministic, id-forked) roll decides.
 const STRONG_RETURN_RATIO = 0.62;   // at/above this the host is "strong" (high success odds)
 const SPLINTER_RATIO = 0.3;         // below this a returning host is at risk of splintering
+// The gutted cut, as a fraction of SPLINTER_RATIO: a host this far below the splinter
+// ratio is not merely spent, it has ceased to be an army. Named (rather than spelled
+// `SPLINTER_RATIO * 0.6` at each use) so the disband branch and the word that describes
+// it cannot drift apart — TE-HERALD-1.
+const DISBAND_RATIO_SCALE = 0.6;
 const RETURN_SUCCESS_FLOOR = 0.06;  // even a gutted army has a sliver of a chance (a desperate sally)
 const RETURN_SUCCESS_CEIL = 0.96;   // even a full army can be unlucky (fog of war)
 
@@ -107,6 +112,85 @@ function returnSuccessProbability(ratio, contextTilt = 0) {
   const centered = (clamp01(ratio) - SPLINTER_RATIO) / Math.max(1e-6, STRONG_RETURN_RATIO - SPLINTER_RATIO);
   const ramp = clamp01(0.5 * centered + 0.25); // ratio at SPLINTER → 0.25, at STRONG → 0.75
   return clamp(RETURN_SUCCESS_FLOOR, RETURN_SUCCESS_CEIL, ramp + contextTilt);
+}
+
+// ── THE RETURN'S OWN WORDS (TE-HERALD-1). ────────────────────────────────────────
+// The reader is told the fact the arithmetic used, in the words this file already
+// speaks it in — never the scalar. BOTH ladders read the tunables ABOVE rather than a
+// second set of cuts, so a calibration change moves the words with it and the prose
+// cannot drift away from the resolution it describes: a host is `broken` at exactly
+// the ratio that risks a splinter, `all but whole` at exactly the ratio the resolution
+// calls strong, and the odds words sit on the success ramp's own landmarks (the ramp
+// yields 0.25 at SPLINTER_RATIO and 0.75 at STRONG_RETURN_RATIO, so those two are the
+// interior cuts).
+//
+// EXPORTED because a coverage proof must read the ladder from source rather than
+// transcribe it — the totality-export discipline lawWord.js states, and the shape
+// tests/lint/contractTestAntiVacuity.walker.test.js Rule 2 exists to force.
+
+/**
+ * The returning host in a word, worst-first. Four rungs because the file's own
+ * resolution has exactly three interior cuts on this axis.
+ * @type {ReadonlyArray<string>}
+ */
+export const RETURN_MUSTER_WORDS = Object.freeze([
+  'gutted', 'broken', 'thinned', 'all but whole',
+]);
+
+/**
+ * How much of its muster came home, as a word.
+ * @param {number} ratio 0..1 remaining-strength ratio.
+ * @returns {string} a member of RETURN_MUSTER_WORDS.
+ */
+export function returnMusterWordFor(ratio) {
+  const r = clamp01(ratio);
+  if (r < SPLINTER_RATIO * DISBAND_RATIO_SCALE) return RETURN_MUSTER_WORDS[0];
+  if (r < SPLINTER_RATIO) return RETURN_MUSTER_WORDS[1];
+  if (r < STRONG_RETURN_RATIO) return RETURN_MUSTER_WORDS[2];
+  return RETURN_MUSTER_WORDS[3];
+}
+
+/**
+ * How the attempt STOOD before the roll was drawn, worst-first. This is the honest
+ * content of a success probability: not the number, but whether the thing was ever
+ * likely.
+ * @type {ReadonlyArray<string>}
+ */
+export const RETURN_ODDS_WORDS = Object.freeze([
+  'a forlorn hope', 'a long chance', 'an even thing', 'the likelier outcome',
+]);
+
+/**
+ * The attempt's standing before the roll, as a word.
+ * @param {number} pSuccess 0..1 success probability.
+ * @returns {string} a member of RETURN_ODDS_WORDS.
+ */
+export function returnOddsWordFor(pSuccess) {
+  const p = clamp01(pSuccess);
+  if (p < 0.25) return RETURN_ODDS_WORDS[0];
+  if (p < 0.5) return RETURN_ODDS_WORDS[1];
+  if (p < 0.75) return RETURN_ODDS_WORDS[2];
+  return RETURN_ODDS_WORDS[3];
+}
+
+/**
+ * How firmly the seat was expected to hold, worst-first. Read off the coup verdict's
+ * `pHold`, which `resolveCoupVerdict` bounds to 0.1..0.9 — so the two interior cuts sit
+ * a comfortable step inside both bounds rather than grazing them.
+ * @type {ReadonlyArray<string>}
+ */
+export const SEAT_GRIP_WORDS = Object.freeze(['brittle', 'uncertain', 'firm']);
+
+/**
+ * The incumbent's grip before the challenge, as a word.
+ * @param {number} pHold 0..1 chance the seat holds.
+ * @returns {string} a member of SEAT_GRIP_WORDS.
+ */
+export function seatGripWordFor(pHold) {
+  const p = clamp01(pHold);
+  if (p < 0.35) return SEAT_GRIP_WORDS[0];
+  if (p < 0.65) return SEAT_GRIP_WORDS[1];
+  return SEAT_GRIP_WORDS[2];
 }
 
 /**
@@ -187,14 +271,19 @@ function isVassal(snapshot, homeId) {
  * worse the instability). A condition outcome flows through applyWorldPulseOutcomes
  * unchanged.
  *
- * @param {{ kind:'rebellion'|'relief'|'splinter'|'disband', homeId:string, homeName:string, sourceId:string, ratio:number, pSuccess:number, roll:number, tick:number, headline:string, summary:string }} args
+ * @param {{ kind:'rebellion'|'relief'|'splinter'|'disband', homeId:string, homeName:string, sourceId:string, ratio:number, pSuccess:number, tick:number, headline:string, summary:string }} args
  * @returns {any}
  */
-function failedReturnOutcome({ kind, homeId, homeName, sourceId, ratio, pSuccess, roll, tick, headline, summary }) {
+function failedReturnOutcome({ kind, homeId, homeName, sourceId, ratio, pSuccess, tick, headline, summary }) {
   // A failed liberation/relief leaves the home weaker (war_exhaustion — economic
   // wound); a splinter/disband is an internal-instability seed (faction_challenge —
   // legitimacy + faction power + social trust). Severity ∝ how gutted the host is.
   const archetype = (kind === 'splinter' || kind === 'disband') ? 'faction_challenge' : 'war_exhaustion';
+  // ⚠ A splinter/disband is decided by the host's CONDITION alone — the caller passes
+  // pSuccess 0 and roll 0 because no attempt was made and no roll was drawn. The
+  // retired sentence printed "Success 0.00, roll 0.00" on both paths, reporting a
+  // throw that never happened; this fork is why the odds clause is withheld there.
+  const unrolled = archetype === 'faction_challenge';
   const severity = clamp(0.25, 0.7, 0.6 - ratio * 0.4);
   return {
     id: `world_outcome.return_${kind}.${stablePart(homeId)}.${tick}`,
@@ -208,7 +297,9 @@ function failedReturnOutcome({ kind, homeId, homeName, sourceId, ratio, pSuccess
     severity,
     headline,
     summary,
-    reasons: [`A returning army at ${(ratio * 100).toFixed(0)}% of its muster strength could not prevail (${kind}). Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`],
+    reasons: [unrolled
+      ? `A host come home ${returnMusterWordFor(ratio)} did not hold together.`
+      : `A host come home ${returnMusterWordFor(ratio)} could not prevail. It was ${returnOddsWordFor(pSuccess)}, and the day went against it.`],
     condition: {
       archetype,
       severity,
@@ -366,7 +457,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
           severity: 0.3,
           headline: `${homeName} throws off its occupiers`,
           summary: `${homeName}'s army returned to a captured home and broke the occupation; the settlement begins restoring its own authority.`,
-          reasons: [`A returning army (strength ${(ratio * 100).toFixed(0)}% of muster) broke the occupation. Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`],
+          reasons: [`A host come home ${returnMusterWordFor(ratio)} threw off the occupiers — ${returnOddsWordFor(pSuccess)}, and it came off.`],
           condition: {
             archetype: 'occupation_lifted',
             severity: 0.3,
@@ -376,7 +467,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
         });
       } else {
         outcomes.push(failedReturnOutcome({
-          kind: 'rebellion', homeId, homeName, sourceId, ratio, pSuccess, roll, tick,
+          kind: 'rebellion', homeId, homeName, sourceId, ratio, pSuccess, tick,
           headline: `${homeName}'s liberation falters`,
           summary: `${homeName}'s army came home too spent to break the occupation; the failed rising leaves the settlement weaker still.`,
         }));
@@ -402,7 +493,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
           severity: 0.3,
           headline: `${homeName} lifts the siege at its gates`,
           summary: `${homeName}'s army returned to a besieged home and relieved it; the settlement begins to recover.`,
-          reasons: [`A returning army (strength ${(ratio * 100).toFixed(0)}% of muster) relieved the siege. Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`],
+          reasons: [`A host come home ${returnMusterWordFor(ratio)} relieved the siege — ${returnOddsWordFor(pSuccess)}, and it came off.`],
           condition: {
             archetype: 'siege_lifted',
             severity: 0.3,
@@ -416,7 +507,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
         });
       } else {
         outcomes.push(failedReturnOutcome({
-          kind: 'relief', homeId, homeName, sourceId, ratio, pSuccess, roll, tick,
+          kind: 'relief', homeId, homeName, sourceId, ratio, pSuccess, tick,
           headline: `${homeName}'s relief column is broken`,
           summary: `${homeName}'s depleted army could not break through to its besieged home; the failed relief leaves the defenders more desperate.`,
         }));
@@ -432,9 +523,9 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
       // legitimacy verdict, and its strength tilts that verdict.
       if (ratio < SPLINTER_RATIO) {
         // Too spent to coup — the host disbands. A truly gutted one splinters.
-        if (ratio < SPLINTER_RATIO * 0.6) {
+        if (ratio < SPLINTER_RATIO * DISBAND_RATIO_SCALE) {
           outcomes.push(failedReturnOutcome({
-            kind: 'disband', homeId, homeName, sourceId, ratio, pSuccess: 0, roll: 0, tick,
+            kind: 'disband', homeId, homeName, sourceId, ratio, pSuccess: 0, tick,
             headline: `${homeName}'s host comes home broken`,
             summary: `${homeName}'s army returned too gutted to challenge the overlord's seat; remnants desert and the order tightens its grip.`,
           }));
@@ -468,7 +559,10 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
         severity: clamp(0.45, 1, 0.6),
         headline: `${winner.name} seizes power in ${homeName}`,
         summary: `${homeName}'s army marched home and the ${String(incumbentName).toLowerCase()} could not hold it. ${winner.name} now commands the government.`,
-        reasons: [verdict.reason, `Returning strength ${(ratio * 100).toFixed(0)}% of muster. Hold chance ${verdict.pHold}, roll ${verdict.roll}.`],
+        reasons: [
+          verdict.reason,
+          `The host came home ${returnMusterWordFor(ratio)}, and a grip that had looked ${seatGripWordFor(verdict.pHold)} did not survive its arrival.`,
+        ],
         powerTransfer: {
           toPowerName: winner.name,
           cause: 'coup',
@@ -496,7 +590,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
     // return is a postwar-instability seed (splinters: rebels/deserters). ────────────
     if (ratio < SPLINTER_RATIO) {
       outcomes.push(failedReturnOutcome({
-        kind: 'splinter', homeId, homeName, sourceId, ratio, pSuccess: 0, roll: 0, tick,
+        kind: 'splinter', homeId, homeName, sourceId, ratio, pSuccess: 0, tick,
         headline: `${homeName}'s broken host comes home`,
         summary: `${homeName}'s army returned a shadow of the force that marched out. Deserters scatter and the survivors are restive, a wound on the home order.`,
       }));

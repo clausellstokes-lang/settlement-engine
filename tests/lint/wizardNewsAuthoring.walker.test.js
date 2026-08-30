@@ -141,6 +141,23 @@ describe('Wizard News authoring presence — static census wall', () => {
     ]);
   });
 
+  // EXACT RE-PIN 2026-08-30, TE-HERALD-1 car HER-1 — FOUR ROWS RELOCATED AND RE-SIGNED,
+  // NO DEBT MOTION, LEDGER STILL 19. The humanization wave rewrote deploymentReturn.js's
+  // reader prose, adding three band ladders above the four `failedReturnOutcome` call
+  // sites (378 → 469, 418 → 509, 436 → 527, 498 → 592) and dropping the now-unused `roll`
+  // argument from each call's object literal.
+  // ⚠ THIS IS THE FIRST RE-PIN HERE WHOSE SIGNATURE ALSO MOVED, and that is why the
+  // ISSUES are the evidence rather than the signature. The two exact-re-pin notes above
+  // could say "SIGNATURE UNCHANGED" because those edits were purely above the site; this
+  // one edited the literal's own bytes, so a byte hash MUST move and proves nothing. What
+  // proves no debt moved is that all four rows carry BYTE-IDENTICAL `issues` sets before
+  // and after — the same three missing fields on all four, plus the same
+  // `missing-registration:unrouted:disband` / `:splinter` on the same two rows — each new
+  // row has a prior row at the SAME path AND column, and the ledger length is unchanged.
+  // Re-anchored at measured truth; nothing widened and the 19-row ceiling is untouched.
+  // The debt these rows name is REAL and still owed: it is authoring debt (no id, no
+  // settlementIds, no severity, two unrouted kinds), which is a different wave's subject
+  // from the prose-numerics debt this lane is paying.
   test('the frozen legacy ledger is exact, location-bound, and shrink-only', () => {
     expect(baseline).toMatchObject({ schemaVersion: 1, frozenAt: '2026-08-01' });
     expect(Array.isArray(baseline.entries)).toBe(true);
