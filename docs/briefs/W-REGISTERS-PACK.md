@@ -147,3 +147,9 @@ multiplier, banded):** L0 faint · L1 light · L2 full · L3 deep · L4 immersed
 10. captured_held: hardens or breaks? (Register III draft: seeded, weighted by current COURAGE.)
 11. Level words: `a_touch/marked/defining` vs `a shade/plain/consuming`.
 12. The family learn-rate ladder order (Register III).
+13. **(§806, panel-surfaced — two joined calls the chair may not make alone):** (a) drifted-vice
+    corruption eligibility depth: `marked` vs `defining`-only (the chair's lean); (b) THE NOVICE
+    CORNER: a first failed cruelty cannot make its actor characterologically LESS likely to
+    repeat (chastening is bounded at the core) — failure's deterrent there is worldly (costs,
+    reputation) with a faint stain remaining. Sign that, or flip to practice-marks-on-success-
+    only (a failed atrocity then leaves no stain). The arithmetic forbids having both.

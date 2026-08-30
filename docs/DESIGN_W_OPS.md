@@ -151,6 +151,32 @@ Sequencing: after W-LIVES cars 1–3 (the substrate it consumes); skeptic panel 
 coordinates with ES's own wave order (ES-2b/ES-5 arms land on the ES charter's schedule, not
 this volume's).
 
+## 8b. THE PANEL FOLD (ODQ §806 — findings against THIS volume, re-ruled; outranks above)
+
+- **F4 → the §3.4b termination proof is PRESERVED VERBATIM: the register FREEZES AT ROOTING.**
+  A rooted stay's continue-decision reads the appetite the spy ROOTED WITH (the man who stayed
+  is the man who decided), so the charter's "appetite is fixed ⇒ every stay terminates" pin
+  holds untouched; drift-raised tolerance applies only to the NEXT operation's acceptance.
+  L3/L4 get their explicit brake: placement-vetting events ride a monotone per-interval ramp of
+  the dwellRamp shape — the same self-limiting construction, ruled rather than hoped.
+- **F5 → the dispatcher premise corrected:** the ES rider IS a production caller once the flag
+  lights, and the ES certification row records the refusal of an autonomous per-tick dispatcher
+  (ES-7) — that refusal STANDS, cited here. This volume's dispatcher is therefore ONLY the
+  charter-sanctioned deliberation road (§3.12: unconfirmed-belief-before-decision, urgency,
+  timeout) plus doctrine targeting; and the ONE-MINT LAW binds it to the rider: a demand the
+  rider satisfies is consumed — the dispatcher reads UNMET demands only. No double-mint.
+- **F7 → R4's evidence has a NAMED home:** the evidence IS the existing corruption tie/leash
+  record — its holder and scope (local guild vs foreign patron/web) are already fields; GAP B's
+  death-succession rule applies to THAT record; any genuinely new field goes through the schema
+  gate at car spec, owner-visible.
+- **F8 → L4 placement ENROLLS THROUGH THE WEB'S CREATION SEAM** — the per-patron live-asset cap
+  and recruitment-degradation rules apply to placed seats exactly as to corrupted ones;
+  "applies verbatim" now covers creation, resolution, grip, and exposure alike.
+- **F15 → the L3 cover's persistence home is a RECON-THEN-GATE row:** `declaredPurpose` is
+  journey-scoped and journeys terminate, so a standing cover is NEW PERSISTED SCHEMA — designed
+  at car 3's spec and admitted through the owner gate, never assumed. The capture-arm wave is
+  referenced by the ES charter's own wave naming (not the shorthand used earlier in this file).
+
 ## 9. Owner-taste registers
 
 1. The mission-kind catalog and the envoy task rows (§4's candidates, incl. state_visit's fate).

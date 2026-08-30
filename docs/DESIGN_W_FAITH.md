@@ -187,10 +187,10 @@ is READ by flaw hooks (D2) but its writer is unchanged.
 | 0 | This volume (done) | Fable (chair) |
 | 1 | Schema + authoring + admission + DB checks (D1/D8 shapes) | Opus |
 | 2 | `deityTemper` authored arm + inertness pin + consumer census w/ denominator | Opus |
-| 3 | `faithField.js` kernel: equation, caps, the ONE magic-gate chokepoint, goldens | Opus (Fable review) |
+| 3 | `faithField.js` kernel: equation, caps, the ONE magic-gate chokepoint, goldens — **and its registration as a W-LIVES witness-plane source (§806/F14)** | Opus (Fable review) |
 | 4 | Boon/bane channel wiring to causal variables | Opus |
 | 5 | Flaw vocabulary + `FLAW_EFFECTS` + fortunes coupling | **Fable** (judgment-dense vocabulary) |
-| 6 | NPC drift leaf + `effectiveTraitPlane` chokepoint + lifecycle/regen proof | Opus (recon row first) |
+| 6 | ⚠ SUPERSEDED (§806/F14): the drift leaf is W-LIVES's (its cars 1–3); this car becomes the faith-pull SOURCE ADAPTER into the W-LIVES funnel + the clergy consumers' re-route | Opus (recon row first) |
 | 7 | Herald/dossier prose: crossings, faith panel, contextual narrative (§754.3) | **Fable** (voice) |
 | 8 | Owner-taste pack: every candidate register + tuning rows for signature | **Fable** |
 

@@ -359,3 +359,50 @@ in a cruel city" from receipts alone. No per-NPC memory store exists or may be m
 character + context + conditions cover it, by design; no age-scaled drift rates in v1 (a taste
 row, not a hole). **Small rule:** the AFFILIATION plane's "your god": clergy → their faction's
 deity; laity → the settlement patron scaled by devotion.
+
+## 15. THE PANEL FOLD (ODQ §806 — the §441 J7 skeptic pass, all findings dispositioned)
+
+The panel CONFIRMED every symbol claim and the loop-brake architecture; the following RE-RULINGS
+amend the sections above and OUTRANK them where they conflict:
+
+- **F1 → §1 re-ruled: CONSOLIDATION, not derivation.** The legacy weight tables are per-WORD
+  with asymmetric pole pairs and cross-table ratio conflicts — no per-axis lean × level scheme
+  can reproduce them. The catalog therefore carries the legacy per-word, per-column values
+  VERBATIM (one home, killing the parallel-tables hazard exactly as well); the lean × sign ×
+  level scheme governs ONLY drift dynamics and newly authored positions. Byte-identity is now
+  trivially satisfiable.
+- **F2 → corruptibility is a per-word column** for legacy words (FLAW_VECTOR is word-grained:
+  `cruel` is not corruptible while `callous` is); the per-axis corruption vector applies only to
+  DRIFTED vices. Dark-door behavior cannot move.
+- **F3 → the NOVICE CORNER is ruled and OWNER-VISIBLE (pack row 13):** at ≈zero drift,
+  chastening (bounded at core) cannot push below baseline, so failure's "opposite effect" at the
+  novice corner is delivered through the WORLDLY terms — the failure mode's costs and the known-
+  character stain lower the method's expected value — not through the soul; the characterological
+  opposite-effect grows with habituation. The alternative (practice marks on success only) is
+  the flip the owner may sign instead.
+- **F6 → death mints ONE typed chronicle receipt** (the legacy record — an event, not a
+  personality store); the derived known-character read terminates into it.
+- **F9 → the MATERIALIZATION FLOOR:** an ambient pull writes a drift key only when the
+  accumulated offset would cross a sub-band epsilon (candidate: ¼ of `a_touch`); below it,
+  nothing materializes — sparsity survives full-paradigm ambient pull structurally.
+- **F10 → two dispositions:** the stored `npcStates.alignment` and its four live consumers get
+  a census-with-denominator at car 5 (re-point to the derived read or declare it a projection
+  cache — no third state); and the mortal/divine relation is an ASYMMETRY, stated: for gods the
+  authored axes ARE the character (alignmentAxis stays authored); for mortals alignment is a
+  derived reading of the soul.
+- **F11 → the erosion property re-stated:** linear pull/decay equilibrate at x* ≈ pull/(1−decay)
+  per tick — so the assertion is (a) a PER-AXIS OFFSET CLAMP (explicit, band-bounded) and (b)
+  the SUMMED ambient equilibrium across source families sits below one band at every depth
+  short of `immersed`. Asserted over the aggregate, not the single term.
+- **F12 → two loops added to §9's enumeration** with property tests: the settlement↔citizen
+  milieu echo (citizens drift toward the town's character while their acts feed its channels)
+  and the group-character↔offers echo (GAP C's derived bench character feeding what courts
+  offer, which selects who serves).
+- **F13 → the corruption-depth call is RESTORED to the owner** (pack row 13 companion): `marked`
+  (as §4 wrote) vs `defining`-only (the chair's recorded lean) for drifted-vice eligibility.
+- **F15 corrections:** `diplomatic`/`methodical` are dispositioned in the PACK (capability /
+  modifier with static legacy leans) — §1.1's table defers to the pack's disposition; R6's
+  center reads the COURAGE and PRUDENCE axes + the `ambitious` static modifier + desperation
+  (no phantom "ambition family"); the LOCKSTEP pin's true home is `npcFacetContract.js`;
+  `branchedGoals` is a rule tree, so car 5 carries an explicit rule-tree → weighted-branch
+  conversion sub-task (priced, not assumed).
