@@ -226,7 +226,7 @@ describe('TE-HERALD-1 — the reader is told a word, and never a scalar', () => 
         expect(line.includes(word), `an odds word survived onto an unrolled path: ${line}`).toBe(false);
       }
     }
-    expect(lines.join(' ')).not.toMatch(/\b(?:odds|chance|likel)/i);
+    expect(lines.join(' ')).not.toMatch(/\b(?:odds|chance|likel)/i); // anchored: lines.length > 0 asserted above, and the rolled-path control test below proves an odds word DOES appear when a roll was drawn
   });
 
   test('a ROLLED failure DOES carry its odds word, so the fork above is a fork', () => {

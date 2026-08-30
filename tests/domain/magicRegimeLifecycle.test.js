@@ -113,7 +113,7 @@ describe('a crossing carries MATERIAL receipts (§3a, §8)', () => {
     const demotionReasons = result.event.reasons.join(' ');
     expect(demotionReasons).toMatch(/purse of this place has thinned enough to drop it/);
     expect(demotionReasons).toContain('from industrial to patronized');
-    expect(demotionReasons).not.toMatch(/\d+\.\d{2}/);
+    expect(demotionReasons).not.toMatch(/\d+\.\d{2}/); // anchored: the toMatch and toContain on the two lines above assert THIS string is live
   });
 
   it('a promotion names the rungs that opened, and the gate rises with it', () => {

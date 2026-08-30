@@ -114,26 +114,29 @@ describe('TE-HERALD-1 — the posture reasons speak words, and the gate is the b
     const joined = lines.join(' | ');
     expect(joined).toMatch(/High resentment shapes the posture\./);
     // The four census detector classes, applied to the OUTPUT.
-    expect(joined).not.toMatch(/\d+\.\d{2}/);
-    expect(joined).not.toMatch(/\d\s*%/);
-    expect(joined).not.toMatch(/×\s*\d|\d\s*×/);
-    expect(joined).not.toMatch(/\((?:0|1)\.\d+\)/);
+    expect(joined).not.toMatch(/\d+\.\d{2}/); // anchored: lines.length > 0 and the positive toMatch above assert THIS string is live
+    expect(joined).not.toMatch(/\d\s*%/); // anchored: same live `joined` the positive toMatch above matched
+    expect(joined).not.toMatch(/×\s*\d|\d\s*×/); // anchored: same live `joined` the positive toMatch above matched
+    expect(joined).not.toMatch(/\((?:0|1)\.\d+\)/); // anchored: same live `joined` the positive toMatch above matched
   });
 
   test('high trust and dependency are stated the same way', () => {
     const trust = linesOf({ relationshipType: 'trade_partner', trust: 0.9 }).join(' | ');
     expect(trust).toMatch(/High trust keeps the relationship functional\./);
-    expect(trust).not.toMatch(/\d+\.\d{2}/);
+    expect(trust).not.toMatch(/\d+\.\d{2}/); // anchored: the positive toMatch on the line above proves `trust` is live
     const dep = linesOf({ relationshipType: 'trade_partner', dependency: 0.95 }).join(' | ');
     expect(dep).toMatch(/Dependency makes the relationship materially unequal\./);
-    expect(dep).not.toMatch(/\d+\.\d{2}/);
+    expect(dep).not.toMatch(/\d+\.\d{2}/); // anchored: the positive toMatch on the line above proves `dep` is live
   });
 
   test('BELOW the gate the sentence is absent entirely, so the gate really is the band', () => {
     // This is the control that makes "the gate is the band" a measured claim: the word
     // "High" is honest only because the line cannot appear below the threshold.
     const quiet = linesOf({ resentment: 0.49, trust: 0.1, dependency: 0.1 }).join(' | ');
-    expect(quiet).not.toMatch(/High resentment/);
+    // LIVENESS FIRST: the below-gate posture still produces prose, so the absence below is
+    // the GATE's doing and not an empty collection.
+    expect(quiet.length, 'the below-gate posture produced no prose at all').toBeGreaterThan(0);
+    expect(quiet).not.toMatch(/High resentment/); // anchored: `quiet` asserted non-empty above, and `loud` two lines down produces the line from the SAME helper
     const loud = linesOf({ resentment: 0.51 }).join(' | ');
     expect(loud).toMatch(/High resentment/);
   });

@@ -668,7 +668,11 @@ describe('WR-1 current casus — the strategy producer cannot renew stale predat
     // Scoped to the casus line itself, so the pin measures THIS cure rather than every
     // other reason the chooser happens to emit.
     const casusLine = dark.reasons.find((r) => r.startsWith('Casus belli:'));
-    expect(casusLine).not.toMatch(/\(\d+\.\d{2}\)/);
+    // LIVENESS FIRST: `.find` returns undefined when nothing matches, and a bare
+    // not.toMatch on undefined passes vacuously — the exact shape this estate's
+    // negative-assertion walker exists to refuse.
+    expect(casusLine, 'no casus line was emitted at all').toBeTruthy();
+    expect(casusLine).not.toMatch(/\(\d+\.\d{2}\)/); // anchored: `casusLine` asserted truthy on the line above
     expect(lit.candidateType).toBe('strategy_hold');
     expect(lit.metadata.deployTargetId).toBeUndefined();
     expect(lit.reasons).toEqual(["Ironhold's strategy chooser selected hold."]);

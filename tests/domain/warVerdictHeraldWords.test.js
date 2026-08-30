@@ -164,7 +164,10 @@ describe('TE-HERALD-1 — the bargaining receipt speaks its own file\'s ladders'
         // where a consumer looks for them.
         expect(out.takeByForce01).toBeCloseTo(reach, 4);
         expect(out.mustGiveToSurvive01).toBeCloseTo(risk, 4);
-        expect(out.receipt).not.toMatch(/\d/);
+        // The receipt is anchored by its own positive shape, so the absence below cannot
+        // pass on an empty or missing string.
+        expect(out.receipt).toMatch(/believes a conquest is/);
+        expect(out.receipt).not.toMatch(/\d/); // anchored: the positive toMatch on the line above proves the receipt is live
       }
     }
   });
@@ -182,6 +185,7 @@ describe('TE-HERALD-1 — the bargaining receipt speaks its own file\'s ladders'
   test('the unknown read still says why, and still carries no scalar', () => {
     const out = conquestTermsRange({ partyId: 'ashford', known: false });
     expect(out.known).toBe(false);
-    expect(out.receipt).not.toMatch(/\d/);
+    expect(out.receipt).toMatch(/no bargaining range/);
+    expect(out.receipt).not.toMatch(/\d/); // anchored: the positive toMatch on the line above proves the receipt is live
   });
 });

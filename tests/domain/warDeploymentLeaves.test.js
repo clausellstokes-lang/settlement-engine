@@ -310,7 +310,7 @@ describe('warSiegeVerdict — the verdict, the will, and the occupier', () => {
     const ceilingLine = ceiling.reasons.find((r) => /ran to the hard limit/.test(r));
     expect(ceilingLine, 'the auto-resolve receipt no longer says the siege hit its limit').toBeTruthy();
     expect(ceilingLine).toMatch(/the walls were stormed/);
-    expect(ceilingLine).not.toMatch(/\d/);
+    expect(ceilingLine).not.toMatch(/\d/); // anchored: `ceilingLine` is asserted toBeTruthy and positively matched on the two lines above
     // …and the direction is a pure function of capacity, so a different stream
     // resolves identically.
     expect(atCeiling(60, 'a-different-seed').falls).toBe(true);
