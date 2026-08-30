@@ -99,6 +99,10 @@ import {
 } from './pactTriggers.js';
 import { PEACE_TERMS_TUNING, TERM_CATALOG, orderTermsByAsk, termLabel } from './peaceTermsCatalog.js';
 import { round4, treatyPairKey } from './peaceTermsPrimitives.js';
+// The estate's ONE strength derivation, imported from the same module the two sibling
+// readers use (mobilizationReactions.js, peaceReasons.js). No new edge: `beliefMap.js`,
+// already imported above, imports these exact two symbols from here.
+import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
 import {
   RELATIONSHIP_DEFAULTS, appendRelationshipTurningPoint, normalizeRelationshipType,
   relationshipKeyFromEdge,
@@ -600,14 +604,19 @@ function rememberRefusal({ worldState, proposal, tick }) {
  * a signature that contradicted the line beneath it. The body's `strengthFor || (…)` fallback
  * is the whole point of the null: an absent reader means "use the bounded default read".
  *
+ * `pressureIdx` is the per-tick pressure index the default strength reader needs. It is
+ * NULLABLE for the same reason every other pressure consumer's is: an absent index yields a
+ * zero pressure vector, which `settlementStrength` reads as "no pressure known" (the
+ * `opportunism.js` idiom, `settlementStrength(item, {})`) rather than as zero strength.
+ *
  * @param {{snapshot?: unknown, worldState: Record<string, unknown>,
  *   settlementUpdates?: Array<Record<string, unknown>>, digest?: unknown, season?: unknown,
- *   tick: number, strengthFor?: ((id: string) => number) | null}} args
+ *   tick: number, strengthFor?: ((id: string) => number) | null, pressureIdx?: unknown}} args
  * @returns {PactAdvanceResult}
  */
 export function advancePeacetimePacts({
   snapshot, worldState, settlementUpdates = [], digest = null, season = null, tick,
-  strengthFor = null,
+  strengthFor = null, pressureIdx = null,
 }) {
   const inert = {
     worldState, settlementUpdates, changed: false, newsEntries: [], receipts: [],
@@ -623,12 +632,40 @@ export function advancePeacetimePacts({
   const settlementOf = (id) => freshest.get(id)
     || recordOf(recordOf(items.find((it) => String(recordOf(it).id) === id)).settlement);
   const ids = items.map((it) => String(recordOf(it).id)).filter(Boolean).sort(codepoint);
-  // THE INJECTED STRENGTH READER, for the same reason the market stage injects three: the
-  // alliance web's own battery proves the read, and standing a war layer up inside every
-  // formation pin would turn this file into a war fixture. The default is a bounded read of
-  // the freshest record, which is what the web then filters through the observer's belief.
+  /** THE SNAPSHOT ITEM, with the freshest settlement spliced over it — `settlementStrength`
+   *  reads `item.settlement` (population, activeConditions) AND `item` (tier), so a bare
+   *  record is not enough. @param {string} id @returns {Record<string, unknown>|null} */
+  const itemOf = (id) => {
+    const item = items.find((it) => String(recordOf(it).id) === id);
+    const fresh = freshest.get(id);
+    if (fresh) return item ? { ...recordOf(item), settlement: fresh } : { id, settlement: fresh };
+    return item ? recordOf(item) : null;
+  };
+  // THE INJECTED STRENGTH READER, for the same reason the market stage injects three: standing
+  // a war layer up inside every formation pin would turn this file into a war fixture.
+  //
+  // ⚠ THE DEFAULT USED TO READ `settlement.militaryStrength` — A FIELD NO PRODUCTION CODE
+  // WRITES. Only `tests/helpers/pactFixture.js` ever set it, and the kernel injects no
+  // `strengthFor`, so EVERY court in EVERY live world priced at 0 and the shared-threat
+  // crossing could never clear its own floor band — while the sentence here claimed "the
+  // alliance web's own battery proves the read". It did: against a fixture-only field
+  // (§759.2 PACT-STRENGTH-ZERO, cured in T7/UNITS as a DECLARED SHIFT).
+  //
+  // The default is now the estate's ONE strength derivation, read exactly as the two
+  // siblings read it — `mobilizationReactions.js` and `peaceReasons.js` both call
+  // `settlementStrength(item, buildPressureSummary(pressureIdx, id))`. Memoized because the
+  // depth-two web asks for the same court once per observer pair.
+  /** @type {Map<string, number>} */
+  const strengthCache = new Map();
   const strength = strengthFor
-    || ((id) => clamp01(Number(recordOf(settlementOf(id)).militaryStrength) || 0));
+    || ((id) => {
+      const cached = strengthCache.get(id);
+      if (cached !== undefined) return cached;
+      const item = itemOf(id);
+      const value = item ? clamp01(Number(settlementStrength(item, buildPressureSummary(pressureIdx, id))) || 0) : 0;
+      strengthCache.set(id, value);
+      return value;
+    });
   const rows = canonicalAllianceRows({ ...recordOf(snapshot), worldState });
   const relationshipStates = recordOf(recordOf(worldState).relationshipStates);
 

@@ -64,12 +64,21 @@ export const B_ECONOMY = Object.freeze({
  * @param {{withThreat?: boolean}} [args]
  */
 export function pactSnapshot({ withThreat = false } = {}) {
-  // D and E carry a real `militaryStrength` so the depth-two web has WEIGHT to price. The
-  // read routes every strength through the observer's belief and falls back to this truth
-  // when the observer holds none, so the fixture works whether or not beliefs are active —
-  // which matters, because belief activation needs a spatial-canon marker this aspatial
-  // fixture deliberately does not carry.
-  const armed = { militaryStrength: 0.95 };
+  // D and E are BIG COURTS so the depth-two web has WEIGHT to price. The read routes every
+  // strength through the observer's belief and falls back to this TRUTH when the observer
+  // holds none, so the fixture works whether or not beliefs are active — which matters,
+  // because belief activation needs a spatial-canon marker this aspatial fixture
+  // deliberately does not carry.
+  //
+  // ⚠ THE WEIGHT IS SPELLED IN THE UNITS THE ENGINE READS, and it did not used to be. This
+  // was `{ militaryStrength: 0.95 }` — a field NO production code writes, which this file
+  // was the only writer of anywhere in the repo. The pact lane's default strength reader
+  // consumed it, so the web's "own battery proved the read" against a fixture-only field
+  // while every live world priced every court at 0 (§759.2 PACT-STRENGTH-ZERO). The lane
+  // now reads `settlementStrength(item, buildPressureSummary(...))` like its two siblings,
+  // whose inputs are TIER and POPULATION; a metropolis of 60,000 with no pressure index
+  // derives ≈0.99, which is the weight the old literal stood in for.
+  const armed = { tier: 'metropolis', population: 60000 };
   const settlements = [
     town('A', { ...A_ECONOMY }),
     town('B', { ...B_ECONOMY }),

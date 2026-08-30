@@ -11,6 +11,45 @@
  * quieter world than the pins is a fence proving that nothing happened where nothing was
  * going to.
  *
+ * ── SHIFT RECORD ─────────────────────────────────────────────────────────────────────────
+ * A behaviour move this suite pins is written here, or it is an undeclared shift.
+ *
+ * 2026-08-30 — FIRST RECORD (lane T7 · HYGIENE, car TE-UNITS-1). ⚠⚠ A DELIBERATE, DECLARED
+ *   PRODUCTION SHIFT, authorized at ODQ §763.2 and diagnosed at §759.2 (PACT-STRENGTH-ZERO).
+ *
+ *   CAUSE, in one sentence: `advancePeacetimePacts`'s DEFAULT strength reader consumed
+ *   `settlement.militaryStrength`, a field NO production code has ever written — the only
+ *   writer anywhere in the repo was `tests/helpers/pactFixture.js` — and the sole production
+ *   caller (`settlementLifecycleKernel.js`) injects no `strengthFor`, so every court in every
+ *   live world priced at exactly 0.
+ *
+ *   WHAT MOVES, and it is a single mechanism: the strength reader feeds NOTHING but
+ *   `readAllianceWebRisk` (via `crossingsFor`, and only when a hostile third party exists),
+ *   whose `band` is read by `scoreSharedThreat`, whose FLOOR BAND is `'quiet'`
+ *   (`pactTriggers.js:89`) — and a floor band returns NO_CROSSING. So with every strength at
+ *   0 the `shared_threat` trigger was STRUCTURALLY UNREACHABLE in production. The three other
+ *   triggers (trade demand, faith communion, migration pressure) never read strength at all
+ *   and are byte-unaffected. Nothing persisted changes shape; no golden covers this lane.
+ *
+ *   MEASURED, on 150 REAL settlements from `generateSettlementPipeline` (6 tiers × 5 cultures
+ *   × 5 terrains), with the enemy-ally rows built by the estate's own `canonicalAllianceRows`:
+ *     · OLD reader `settlement.militaryStrength` — n=150, min 0, median 0, max 0, NONZERO 0.
+ *       Not one generated settlement carries the field.
+ *     · NEW reader `settlementStrength(item, buildPressureSummary(pressureIdx, id))` —
+ *       n=150, min 0.4800, median 0.7757, max 0.9997, nonzero 150. With EVERY pressure
+ *       saturated at 1.0 (the honest floor, since each pressure term only subtracts):
+ *       min 0.0400, median 0.3357, max 0.5597.
+ *     · Web band over 75 enemy-ally pairs: OLD `{quiet: 75}` → NEW
+ *       `{decisive: 37, pressing: 34, present: 4}` — `quiet` 75/75 → 0/75.
+ *   ⇒ The shared-threat pact goes from never-drafted to draftable. That is the cure, not a
+ *   side effect: the lane was shipping one of its four triggers dead.
+ *
+ *   THE FIXTURE MOVED WITH IT, and had to: `pactFixture.pactSnapshot`'s armed courts D and E
+ *   are now `{ tier: 'metropolis', population: 60000 }` (≈0.99 through the real derivation)
+ *   in place of the literal `{ militaryStrength: 0.95 }` this file was the world's only
+ *   writer of. CONTROL EXECUTED: with `armed = {}` the shared-threat rung drops from the
+ *   composable pair to the bare NAP and this suite REDS — the arm is not vacuous.
+ *
  * @enforced-by this file
  */
 import { describe, expect, test } from 'vitest';
@@ -266,6 +305,36 @@ describe('THE STANDALONE NAP — the sentence the survey said could not be writt
     expect(draftPactSheet({
       trigger: 'shared_threat', fromId: 'A', toId: 'B', reciprocal: false, tick: 10, score01: 0.5,
     }).terms.map((t) => t.type)).toEqual(['non_aggression']);
+  });
+
+  test('THE §759.2 REGRESSION ARM: production-shaped courts price the web, and a zero reader kills it', () => {
+    // THE DEFECT THIS EXISTS TO CATCH is a lane whose DEFAULT strength reader consumes a
+    // field only a test fixture writes. So the world here is shaped the way the GENERATOR
+    // shapes settlements — tier and population, never `militaryStrength` — and the arm
+    // asserts the shared-threat occasion still crosses. Under the old default every court
+    // read 0, the web banded `quiet`, `scoreSharedThreat` returned NO_CROSSING, and this
+    // test would have been RED on the day the defect shipped.
+    const base = pactSnapshot({ withThreat: true });
+    const production = {
+      ...base,
+      settlements: base.settlements.map((it) => {
+        const { militaryStrength: _fixtureOnlyField, ...settlement } = it.settlement;
+        return { ...it, settlement: { ...settlement, tier: 'city', population: 12000 } };
+      }),
+    };
+    // The premise, asserted rather than assumed: not one court carries the fixture-only field.
+    expect(production.settlements.some((it) => 'militaryStrength' in it.settlement)).toBe(false);
+    const { first } = openThenAnswer(threatWorld(), production);
+    expect(pactProposalsOf(first.worldState).some((p) => p.trigger === 'shared_threat')).toBe(true);
+
+    // ANTI-VACUITY, and it is the whole point: inject the OLD production reality — every
+    // strength 0 — into the same world and the occasion disappears. The assertion above is
+    // therefore the strength read's doing and not the fixture's beliefs.
+    const zeroed = advancePeacetimePacts({
+      snapshot: production, worldState: threatWorld(), settlementUpdates: [],
+      tick: OPEN_TICK, strengthFor: () => 0,
+    });
+    expect(pactProposalsOf(zeroed.worldState).some((p) => p.trigger === 'shared_threat')).toBe(false);
   });
 
   test('NAP SYMMETRY: a peacetime pact blocks BOTH openers and stays repudiable at cost', () => {

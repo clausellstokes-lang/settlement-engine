@@ -556,8 +556,14 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   // (pacts receives the market's returned worldState object; demographics receives the
   // pacts'), which is what a swap actually breaks. Do not restore a bare "PINNED" here
   // without an enforcer address beside it. ──
+  // ⚠ `pIndex` IS LOAD-BEARING HERE, not decoration. Without it the pact lane's default
+  // strength reader has no pressure vector; with it the lane reads courts through the SAME
+  // `settlementStrength(item, buildPressureSummary(...))` the war layer and the peace-reason
+  // ledger read (§759.2 PACT-STRENGTH-ZERO — before T7 this stage passed nothing and the
+  // lane's fallback read a field only a test fixture ever wrote, pricing every court at 0).
   const pacts = advancePeacetimePacts({
     snapshot, worldState: market.worldState, digest: demoDigest, tick,
+    pressureIdx: pIndex,
     settlementUpdates: market.settlementUpdates,
     season: typeof asObject(asObject(hostWorldState).calendar).season === 'string'
       ? String(asObject(asObject(hostWorldState).calendar).season) : null,
