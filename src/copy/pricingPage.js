@@ -116,7 +116,12 @@ export const pricingPage = {
     areas: {
       'world-generation': 'World generation',
       'simulation':       'Simulation',
-      'maps-exports':     'Maps & exports',
+      // The group key stays 'maps-exports' (the ladder's area id); only the WORDS move.
+      // Its eight settlement-map rows left at §725/§726 and the export bundle is all
+      // that remains, so a heading reading 'Maps & exports' would advertise a map the
+      // table no longer contains — a trace on the website, which is the thing the
+      // owner's ruling forbids. Vetoable: no cell, row, gate or price moves with it.
+      'maps-exports':     'Exports',
       'ai':               'AI',
     },
     rows: {
@@ -127,16 +132,7 @@ export const pricingPage = {
       'same-engine':      'The full deterministic engine',
       'living-realm':     'The living Realm (advance time, neighbours)',
       'map-chains':       'Map chains',
-      'map-view':         'The town map',
-      'provenance-hover': 'Provenance on hover',
-      'all-lenses':       'Map lenses',
-      'panorama':         'The panorama view',
-      'map-editing':      'Map editing',
-      'dm-pins':          'DM pins',
-      'change-view':      'Change-view history',
-      'fog-table':        'The fog table layer',
       'interiors':        'Building interiors',
-      'v2-redraw':        'The v2 map redraw',
       'export-bundle':    'The settlement export bundle',
       'surveyor-stages':  'The Surveyor AI stages',
     },
