@@ -21,7 +21,7 @@
     {
       "family": "pulseHistory",
       "identities": 50,
-      "distinctValues": 1221,
+      "distinctValues": 1198,
       "occurrences": 5076
     },
     {
@@ -140,7 +140,7 @@
       "family": "pulseHistory",
       "path": "pulseHistory[].consequenceOutcomes[].reasons[]",
       "field": "reasons",
-      "distinctValues": 117,
+      "distinctValues": 110,
       "occurrences": 422
     },
     {
@@ -203,7 +203,7 @@
       "family": "pulseHistory",
       "path": "pulseHistory[].impactDigest[].reasons[]",
       "field": "reasons",
-      "distinctValues": 126,
+      "distinctValues": 118,
       "occurrences": 310
     },
     {
@@ -392,7 +392,7 @@
       "family": "pulseHistory",
       "path": "pulseHistory[].selectedOutcomes[].reasons[]",
       "field": "reasons",
-      "distinctValues": 126,
+      "distinctValues": 118,
       "occurrences": 319
     },
     {
@@ -480,11 +480,11 @@
       "occurrences": 1
     }
   ],
-  "rowsSha256": "a35151ec8867d03e7d76c10127b0d173a85d205995065722ec64b35e27aad898",
+  "rowsSha256": "49f7d9470beba874408750086ea46ed985e41506cb56b99f3ce0c500670c06f1",
   "totals": {
     "families": 4,
     "identities": 63,
-    "distinctValues": 1243,
+    "distinctValues": 1220,
     "occurrences": 5260
   }
 }

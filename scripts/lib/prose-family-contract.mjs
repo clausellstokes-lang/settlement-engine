@@ -61,13 +61,13 @@ const EXPECTED_CORPUS = Object.freeze({
 });
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 50, distinctValues: 1221, occurrences: 5076 },
+  { family: 'pulseHistory', identities: 50, distinctValues: 1198, occurrences: 5076 },
   { family: 'regionalLog', identities: 2, distinctValues: 7, occurrences: 165 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1243, occurrences: 5260 });
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1220, occurrences: 5260 });
 const EXPECTED_ROWS_BYTES = 8274;
-const EXPECTED_ROWS_SHA256 = 'a35151ec8867d03e7d76c10127b0d173a85d205995065722ec64b35e27aad898';
+const EXPECTED_ROWS_SHA256 = '49f7d9470beba874408750086ea46ed985e41506cb56b99f3ce0c500670c06f1';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

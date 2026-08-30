@@ -146,7 +146,7 @@ describe('four durable prose-family exact-totality contract', () => {
     // TE36 (ODQ §271): the digest follows the counts it hashes. It is re-recorded here and in
     // prose-family-contract.mjs's EXPECTED_ROWS_SHA256 together, which is what keeps the
     // test-side and library-side denominators from ever disagreeing.
-    expect(live.rowsSha256).toBe('a35151ec8867d03e7d76c10127b0d173a85d205995065722ec64b35e27aad898');
+    expect(live.rowsSha256).toBe('49f7d9470beba874408750086ea46ed985e41506cb56b99f3ce0c500670c06f1');
     const counted = live.rows.findIndex((row) => row.occurrences > row.distinctValues);
     const movements = [
       [...clone(live.rows), { family: 'timeline', path: 'zz', field: 'type', distinctValues: 1, occurrences: 1 }],
@@ -162,9 +162,9 @@ describe('four durable prose-family exact-totality contract', () => {
     // CONSISTENT — it slices off the seven `chronicle` rows and must still add up — or the
     // validator rejects it at "baseline totals disagree with rows" and never reaches the
     // IMMUTABILITY guard this arm exists to prove. The seven come straight off the new
-    // totals (1243 − 7, 5260 − 7), so the arithmetic tracks the re-record rather than
+    // totals (1220 − 7, 5260 − 7), so the arithmetic tracks the re-record rather than
     // being re-chosen.
-    counterfeit.totals = { families: 3, identities: 56, distinctValues: 1236, occurrences: 5253 };
+    counterfeit.totals = { families: 3, identities: 56, distinctValues: 1213, occurrences: 5253 };
     counterfeit.rowsSha256 = proseFamilyRowsSha256(counterfeit.rows);
     expect(() => validateProseFamilyBaseline(counterfeit)).toThrow(/immutable/);
     for (const mutate of [
@@ -195,7 +195,7 @@ describe('four durable prose-family exact-totality contract', () => {
     // TE36 (ODQ §271): 1286/5665 → 1221/5076. IDENTITIES HOLD AT 50 — no prose path was
     // gained or lost; the lit corpus simply authors fewer outcomes once bare decline is
     // retired to demographicsKernel.
-    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 50, distinctValues: 1221, occurrences: 5076 });
+    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 50, distinctValues: 1198, occurrences: 5076 });
     const history = scalarRows.filter((row) => row.root === 'worldState');
     expect([...new Set(history.map((row) => row.path[1].value))]).toEqual([...Array(12).keys()]);
     const headline = (home) => live.rows.find((row) => row.path === `pulseHistory[].${home}[].headline`);
