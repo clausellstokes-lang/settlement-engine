@@ -6909,7 +6909,37 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   titles −385 / suiteTitles −116 are NET: the train also ADDED titles to surviving files
     //     (the re-homed skin-seam persistence pins, the re-expressed massing determinism arm, the
     //     two model-drawability assertions, and the terminal census's five arms).
-    files: 2423, parked: 364, credited: 2059, titles: 20514, suiteTitles: 5662,
+    // ── TE-HERALD-1 (the humanization wave, ODQ §754.3), 2026-08-30, rebased onto 82991e1e3 ──
+    // 2423/364/2059/20514/5662 → the tuple below. Delta +5/+3/+2/+19/+6. Arithmetic closes:
+    // 367 + 2061 = 2428.
+    // ⭐⭐ THE FINGERPRINT REPRODUCED EXACTLY ON A BASE THAT FELL BY ~60 TEST FILES, and that
+    // is the cross-check that this lane's contribution was MEASURED and never COMPOSED. The
+    // same five arms were derived against 8ea9c871d (2484/364/2120/20899/5778 → +5/+3/+2/+19/+6)
+    // and again here against the strip train's much smaller estate; the deltas are identical
+    // to the digit because this lane's surface and the train's map deletions are disjoint —
+    // `comm -12` before the rebase returned exactly ONE shared path, THIS FILE, which is the
+    // conflict-by-construction and nothing else.
+    // ⭐ THE +5 FILES SPLIT 3 PARKED / 2 CREDITED, MEASURED, NOT PREDICTED. A predict-and-bank
+    // would have written +5 credited and red on the spot. A probe executed THIS FILE'S OWN
+    // `classify` (the vitest surface stubbed; walk/TEST_FILES/parkReasonsFor untouched, so it
+    // is this file's code and not a transcription) and reported, identically at both bases:
+    //   warVerdictHeraldWords.test.js       park=[]  11 titles / 4 suites
+    //   relationHeraldWords.test.js         park=[]   8 titles / 2 suites
+    //   deploymentReturnHeraldWords.test.js park=2    0 / 0
+    //   warCostHeraldWords.test.js          park=5    0 / 0
+    //   occupationHeraldWords.test.js       park=7    0 / 0
+    // — 11 + 8 = 19 titles and 4 + 2 = 6 suite titles, exactly the banked deltas. The three
+    // parked arms are parked by their `test.each` SHAPE, the census-neutral shape TE-NET-1's
+    // note records for roadNetworkIndex.test.js.
+    // ⚠ PARKED IS NOT WEAKER: all five arms RUN and are green. The census does not count a
+    // `test.each` table's titles as evidence addresses, so three arms contribute files-and-
+    // parked but no titles. Coverage is unchanged; only what the estate counts as an address is.
+    // ⚠ THIS PAYMENT WAS OWED EARLIER. The lane's charter said "pay whole at your tip" and it
+    // was not paid at either of the first two landings. It is paid here, whole, at the rebased
+    // tip. The omission is recorded rather than quietly absorbed. The probe was deleted before
+    // the tuple was recorded and this file is byte-identical to its landed form apart from this
+    // block — the landed row above it is kept VERBATIM.
+    files: 2428, parked: 367, credited: 2061, titles: 20533, suiteTitles: 5668,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
