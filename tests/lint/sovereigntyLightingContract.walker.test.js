@@ -482,7 +482,8 @@
  * build state: a table that asserts what it is supposed to be measuring can only ever
  * agree with itself.
  */
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, readdirSync, renameSync, statSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { parse } from 'espree';
@@ -518,6 +519,188 @@ const TEST_FILES = walk(join(ROOT, 'tests'))
 
 /** This walker's own address — door 4, and the one file that may never be a carrier. */
 const SELF_REL = 'tests/lint/sovereigntyLightingContract.walker.test.js';
+
+// ── THE CENSUS REGISTER (ODQ §778.2, TE-EFF-1 car 2) ─────────────────────────────────
+// The five figures used to be an inline constant a few thousand lines below, at the foot
+// of their own derivation history. They are now a file, and the reason is measured rather
+// than aesthetic: EVERY landing on the night of 2026-08-29/30 conflicted on that one line.
+// Two lanes measuring the same instrument from the same base produce tuples that are each
+// correct and JOINTLY MEANINGLESS — a composed delta is arithmetic performed on two
+// different trees — so the conflict could never be resolved by merging, only by
+// re-measuring. TE-QSTYLE's own block says so in as many words: "THE PRE-REBASE BLOCK WAS
+// DROPPED WHOLE, NOT MERGED, and that is the law rather than a convenience."
+//
+// ⭐ THE EXTRACTION DOES NOT MAKE THAT LAW UNNECESSARY — IT MAKES OBEYING IT CHEAP. The
+// resolution for a conflicted register is "take either side, then regenerate", and the
+// regeneration is one command. Nothing here permits a hand-composed figure; the register
+// simply stops dragging four thousand lines of history through every rebase.
+//
+// ⚠ THE HISTORY DELIBERATELY DID NOT MOVE. Every prior row, its cause and the census laws
+// stay in this file beside the assertions they explain, because a derivation history in a
+// JSON `_doc` array is a history nobody reads. Only the live tuple is a file.
+//
+// §769.4 WALKER-INVISIBLE REGISTER: the register is a `.json`, so TEST_FILES (which filters
+// `\.test\.(js|jsx)$`) cannot see it and the tuple cannot count itself. That invisibility is
+// ASSERTED below rather than assumed — renaming the register into census range would
+// otherwise be a silent off-by-one nobody could attribute.
+const CENSUS_BASELINE_REL = 'tests/lint/.lighting-census-baseline.json';
+const CENSUS_BASELINE_PATH = join(ROOT, CENSUS_BASELINE_REL);
+const CENSUS_FIGURE_KEYS = Object.freeze(['files', 'parked', 'credited', 'titles', 'suiteTitles']);
+// PROVENANCE IS LOAD-BEARING, NOT DECORATION. A tuple whose measuring sha is unknown cannot
+// be audited against the tree it was measured on, and the one failure this register could
+// introduce that the inline constant could not is a figure someone typed. Absent or blank
+// provenance therefore REDS — a register that accepts an anonymous number is a register that
+// has quietly become a place to park a guess.
+const CENSUS_PROVENANCE_KEYS = Object.freeze(['measuredAtSha', 'measuredBy', 'date', 'note']);
+
+function loadCensusBaseline() {
+  let raw;
+  try {
+    raw = readFileSync(CENSUS_BASELINE_PATH, 'utf8');
+  } catch (error) {
+    throw new Error(`the census register ${CENSUS_BASELINE_REL} is missing or unreadable`
+      + ` (${error.message}). It is not optional: without it this walker asserts nothing.`,
+    { cause: error });
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch (error) {
+    throw new Error(`the census register ${CENSUS_BASELINE_REL} is not valid JSON`
+      + ` (${error.message}) — regenerate it rather than repairing it by hand.`,
+    { cause: error });
+  }
+  for (const key of CENSUS_PROVENANCE_KEYS) {
+    const value = parsed[key];
+    if (typeof value !== 'string' || value.trim() === '') {
+      throw new Error(`the census register ${CENSUS_BASELINE_REL} is missing provenance field`
+        + ` '${key}'. Every figure here must name the sha it was measured at, who measured it,`
+        + ' when, and why it moved — a tuple nobody can attribute is a guess with a filename.'
+        + ' Regenerate it; never hand-fill the field.');
+    }
+  }
+  const figures = {};
+  for (const key of CENSUS_FIGURE_KEYS) {
+    const value = parsed[key];
+    if (!Number.isInteger(value) || value < 0) {
+      throw new Error(`the census register ${CENSUS_BASELINE_REL} figure '${key}' is`
+        + ` ${JSON.stringify(value)}, not a non-negative integer.`);
+    }
+    figures[key] = value;
+  }
+  return figures;
+}
+
+/**
+ * THE ONE SPELLING OF THE MEASUREMENT. Both the assertion arm and the regeneration arm read
+ * the estate through this, so the thing that is re-frozen is by construction the same thing
+ * that is asserted. A regeneration path with its own copy of these four expressions would be
+ * a second implementation that drifts, and the drift would be invisible precisely because
+ * both halves would agree with themselves.
+ */
+function measureCensus() {
+  const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
+  const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
+  const titles = credited.reduce((sum, { src }) => sum + liveTitlesIn(src).length, 0);
+  const suiteTitles = credited.reduce((sum, { src }) => sum + liveSuiteTitlesIn(src).length, 0);
+  return {
+    parked,
+    credited,
+    titles,
+    suiteTitles,
+    figures: {
+      files: TEST_FILES.length,
+      parked: parked.length,
+      credited: credited.length,
+      titles,
+      suiteTitles,
+    },
+  };
+}
+
+const gitOut = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+
+/**
+ * THE REGENERATION PATH. One command, documented in the register's own `_doc`:
+ *
+ *   LIGHTING_CENSUS_REFREEZE='<lane or seat id>' LIGHTING_CENSUS_NOTE='<why it moved>' \
+ *     npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+ *
+ * THREE REFUSALS, each for a failure this program has actually taken:
+ *
+ *  1. A DIRTY TREE. This census counts the WORKING TREE, and in a shared tree that working
+ *     tree can hold ANOTHER lane's uncommitted test files — measuring then charges their
+ *     files to you and writes a figure no checkout of your commit can reproduce. ES-1 was
+ *     bitten by exactly this and had to re-measure on a `git archive` of its own parent. The
+ *     register itself is the one permitted dirty path, so a refreeze is repeatable.
+ *  2. A PARTIAL WRITE. All five figures are measured, integer-checked and arithmetic-checked
+ *     BEFORE anything is written, and the write is a temp file plus a rename — so an
+ *     interrupted refreeze leaves the previous register intact rather than a half-tuple that
+ *     would read as a real measurement.
+ *  3. BLANK PROVENANCE. The lane id and the cause are required inputs. `REFREEZE=1` would
+ *     write `measuredBy: "1"`, which is provenance in shape only.
+ *
+ * ⭐ AND IT EXITS NON-ZERO ON SUCCESS, WHICH IS DELIBERATE. A mode that both rewrites the
+ * baseline and reports a green test is a mode that can silently disarm this guard for a whole
+ * gate run. Refreezing therefore always fails loudly, and the VERIFICATION is a separate,
+ * ordinary run of the same walker — that green is the receipt, not this one.
+ */
+function refreezeCensusBaseline() {
+  const measuredBy = (process.env.LIGHTING_CENSUS_REFREEZE ?? '').trim();
+  const note = (process.env.LIGHTING_CENSUS_NOTE ?? '').trim();
+  if (measuredBy === '' || measuredBy === '1' || note === '') {
+    throw new Error('census refreeze REFUSED — provenance is an input, not a formality.'
+      + ' Set LIGHTING_CENSUS_REFREEZE to the lane or seat doing the measuring (not "1") and'
+      + ' LIGHTING_CENSUS_NOTE to the cause of the movement.');
+  }
+
+  const dirty = gitOut('status', '--porcelain')
+    .split('\n')
+    .map((line) => line.slice(3).trim())
+    .filter(Boolean)
+    .filter((path) => path !== CENSUS_BASELINE_REL);
+  if (dirty.length) {
+    throw new Error('census refreeze REFUSED — the tree is dirty, and this census counts the'
+      + ' WORKING TREE. In a shared tree those paths may belong to another lane, and charging'
+      + ' their files to this measurement writes a figure no checkout can reproduce. Commit'
+      + ` first, then refreeze at the clean tip. Dirty: ${dirty.join(', ')}`);
+  }
+
+  const { figures } = measureCensus();
+  for (const key of CENSUS_FIGURE_KEYS) {
+    if (!Number.isInteger(figures[key]) || figures[key] < 0) {
+      throw new Error(`census refreeze REFUSED — measured '${key}' is`
+        + ` ${JSON.stringify(figures[key])}. Nothing was written.`);
+    }
+  }
+  if (figures.parked + figures.credited !== figures.files) {
+    throw new Error('census refreeze REFUSED — the measured figures do not close:'
+      + ` ${figures.parked} parked + ${figures.credited} credited !== ${figures.files} files.`
+      + ' Nothing was written.');
+  }
+
+  const previous = JSON.parse(readFileSync(CENSUS_BASELINE_PATH, 'utf8'));
+  const next = {
+    _doc: previous._doc,
+    measuredAtSha: gitOut('rev-parse', 'HEAD'),
+    measuredBy,
+    date: new Date().toISOString().slice(0, 10),
+    note,
+    ...figures,
+  };
+  const temporary = `${CENSUS_BASELINE_PATH}.refreeze-${process.pid}`;
+  writeFileSync(temporary, `${JSON.stringify(next, null, 2)}\n`, 'utf8');
+  renameSync(temporary, CENSUS_BASELINE_PATH);
+
+  const moved = CENSUS_FIGURE_KEYS
+    .map((key) => `${key} ${previous[key]} -> ${figures[key]}`)
+    .join(', ');
+  throw new Error(`census REFROZEN at ${next.measuredAtSha} by ${measuredBy}: ${moved}.`
+    + ' This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate —'
+    + ' re-run this walker without LIGHTING_CENSUS_REFREEZE, and THAT green is the proof.');
+}
+
+const censusRefreezeRequested = () => (process.env.LIGHTING_CENSUS_REFREEZE ?? '') !== '';
 
 /**
  * THE PARSER DOOR. These options are eslint.config.js's base `languageOptions` spelled
@@ -2688,6 +2871,14 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
   });
 
   test('THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed', () => {
+    // ── §778.2 REGENERATION ARM, FIRST STATEMENT IN THE TEST AND DELIBERATELY SO ──────
+    // It must run BEFORE the register is loaded: the whole point of a refreeze is that the
+    // register on disk is stale, so loading and validating it first would throw on exactly
+    // the state the refreeze exists to repair. It measures, refuses on a dirty tree or an
+    // incoherent measurement, writes all five atomically, and then FAILS ON PURPOSE — see
+    // refreezeCensusBaseline's own header for why a rewrite that reports green is a guard
+    // that can disarm itself.
+    if (censusRefreezeRequested()) refreezeCensusBaseline();
     // ── THE CHAIR'S SECOND RULING, AND WHY A FLOOR AND A CEILING WERE NOT ENOUGH ──────
     // Three cuts in a row stated this census in PROSE and two of them stated it WRONG, in the
     // same direction, for the same reason: the cut's own new arm added exactly the title its
@@ -6999,12 +7190,34 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //     suites are NESTED describes, which a top-level `^describe(` count misses; the
     //     walker counts every live suite title, and that difference is exactly why the
     //     arithmetic is asserted here rather than eyeballed.
-    files: 2430, parked: 367, credited: 2063, titles: 20656, suiteTitles: 5694,
+    // ── TE-EFF-1 CAR 2 (ODQ §778.2): THE LIVE TUPLE MOVED, AND ONLY THE LIVE TUPLE ────
+    // The five figures that stood on this line now live in tests/lint/.lighting-census-
+    // baseline.json, with provenance ({measuredAtSha, measuredBy, date, note}) the inline
+    // constant could never carry — the test-ratchet baseline's own precedent. THE CAUSE IS
+    // MEASURED: every landing on the night of 2026-08-29/30 conflicted here, and a
+    // conflicted census can only be resolved by REGENERATION, never by merging two correct
+    // tuples measured from the same base on different trees. TE-QSTYLE's block above says
+    // it plainly — "THE PRE-REBASE BLOCK WAS DROPPED WHOLE, NOT MERGED". The extraction does
+    // not repeal that law; it makes obeying it one command instead of a re-authored block.
+    //
+    // ⚠ EVERYTHING ABOVE THIS COMMENT IS THE ORIGINAL HISTORY, BYTE-FOR-BYTE. Not one prior
+    // row, ancestry pin or census law was rewritten, summarized or moved into the JSON. A
+    // derivation history parked in a `_doc` array is a history nobody reads, and rewriting a
+    // historical measurement to match a later tree is how a record becomes fiction — this
+    // file already says so, twice, about its own prose.
+    //
+    // The register is loaded, provenance-checked and integer-checked by loadCensusBaseline;
+    // it is regenerated by the arm at the head of this test. §769.4 walker-invisible: it is a
+    // `.json`, so TEST_FILES cannot see it and the tuple cannot count itself — asserted below.
+    ...loadCensusBaseline(),
     });
-    const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
-    const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
-    const titles = credited.reduce((sum, { src }) => sum + liveTitlesIn(src).length, 0);
-    const suiteTitles = credited.reduce((sum, { src }) => sum + liveSuiteTitlesIn(src).length, 0);
+    const { parked, credited, titles, suiteTitles } = measureCensus();
+    // …and the register really is out of census range. Renaming it into `*.test.js` would move
+    // `files` by one with no landing to attribute it to, which is the least debuggable shape a
+    // census error can take.
+    expect(TEST_FILES.some(({ rel }) => rel === CENSUS_BASELINE_REL),
+      'the census register is inside the counted estate — the tuple now counts itself')
+      .toBe(false);
     expect(TEST_FILES.length, 'the estate\'s file count moved — re-measure, do not re-word')
       .toBe(CENSUS.files);
     expect(parked.length, 'the parked-file count moved from SP-C\'s measured 358 —'
