@@ -223,6 +223,16 @@ export const PROSE_REGEN_SCANNER_DELTA_PATHS = Object.freeze([
  * lane changed no dependency and no script.
  */
 export const TREASURY_ADMISSION_SCANNER_DELTA_PATHS = Object.freeze([
+  // ⚠ THE FIFTH PATH IS NOT THIS LANE'S WORK, AND IT IS DECLARED RATHER THAN RECLASSIFIED.
+  // The strip-finish train removed the dead `gen:atlas-samples` script, so `package.json`
+  // differs from the schema-10 predecessor at the tree this rung is minted against. No
+  // parser moved and the temptation to call it an input is real — but package.json sits on
+  // the DETECTOR side by explicit estate law (any package.json byte is a mint trigger) and
+  // by this instrument's own classifier, so the lawful response is to name it in the
+  // governed delta and let the review accept it, never to widen the classifier the first
+  // time it inconveniences its author. The 8→9 rung did exactly this for two ADDED scripts,
+  // which is the precedent this row follows.
+  'package.json',
   'scripts/check-observed-shape-readers.mjs',
   'scripts/lib/observed-shape-baseline.mjs',
   'scripts/migrate-observed-shape-readers.mjs',
