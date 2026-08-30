@@ -1,24 +1,27 @@
 /**
- * marketPrices.test.js — Phase 5.5 round-21 Wave 7: the MARKET-PRICE display
- * read-model. Prices are a pure LAZY read over economicState + the M6a stock
- * bands (commodityStocks) + the M6d flow drift — read-only, zero engine feedback,
- * zero persistence. GENERATION IS SACRED: the selector never mutates a thing.
+ * marketPrices.test.js — the MARKET-MOVEMENT display read-model (Phase 5.5
+ * round-21 Wave 7, rebuilt under the PRICE-HEURISTICS LAW, ODQ §776: no
+ * in-world surface states an absolute price; movements against the settlement's
+ * own norm only). Movements are a pure LAZY read over economicState + the M6a
+ * stock bands (commodityStocks) + the M6d flow drift — read-only, zero engine
+ * feedback, zero persistence. GENERATION IS SACRED: the selector never mutates.
  *
- * Pins (the design's set): purity (no rng/clock/locale), determinism (same inputs
- * ⇒ same quotes), band MONOTONICITY (shortage > adequate > surplus for every
- * good, always), catalog TOTALITY (every good prices), the REGISTER guard (no
- * bare decimals in rendered copy), DORMANCY (aspatial ⇒ generation-band prices,
- * no crash), and byte-inertness (no numeric price leaks the spoken quote).
+ * Pins (the design's set): purity (no rng/clock/locale), determinism (same
+ * inputs ⇒ same movements), band MONOTONICITY (shortage reads dearer than
+ * adequate, adequate than surplus, for every good, always), catalog TOTALITY
+ * (every good moves), THE §776 REGISTER guard (no digits, no coin words, no
+ * absolute value anywhere in rendered copy — the currency-amount class this
+ * surface can never regress into), DORMANCY (aspatial ⇒ generation-band
+ * movements, no crash), and the M6a threshold parity anti-drift pin.
  */
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, it, expect } from 'vitest';
 import {
-  deriveMarketPrices, deriveMarketQuote, denominate, basePriceFor, unitFor,
-  resolveGood, commodityBandForGood, strongestDeviation, CRIER_FRAMES,
-  BASE_PRICE_BY_CLASS, SCARCITY_MULTIPLIER, DEFAULT_BASE_COPPERS,
-  BAND_STOCKPILE_TARGET, BAND_SHORTAGE_FRAC, BAND_SURPLUS_FRAC,
+  deriveMarketPrices, deriveMarketQuote, movementFor, resolveGood,
+  commodityBandForGood, strongestDeviation, CRIER_FRAMES, MOVEMENTS,
+  MOVEMENT_ORDER, BAND_STOCKPILE_TARGET, BAND_SHORTAGE_FRAC, BAND_SURPLUS_FRAC,
 } from '../../src/domain/display/marketPrices.js';
 import { GOOD_CATALOG } from '../../src/domain/region/goodsCatalog.js';
 // The CANONICAL M6a band source — imported HERE (tests are outside the
@@ -32,47 +35,58 @@ import { COMMODITY_TUNING, commodityBand } from '../../src/domain/spatial/commod
 const world = (stocks) => ({ spatialLedgers: stocks ? { commodityStocks: stocks } : {} });
 const ECO = { primaryExports: ['Grain', 'Milled flour'], primaryImports: ['Iron', 'Salt'] };
 
-const NO_DECIMAL = /\d\.\d/; // the "spreadsheet tell" the register guard forbids
+// THE §776 TELLS: an absolute value is a digit, a decimal, or a coin word.
+// Rendered market copy may carry NONE of them. (The currency-amount detector
+// class chartered to T9 grows from exactly this predicate.)
+const ABSOLUTE_TELL = /\d|gold|silver|copper|\bgp\b|\bsp\b|\bcp\b|coin/i;
+
+/** Rank on the dear→cheap axis (lower index = dearer). @param {string} m */
+const rank = (m) => MOVEMENT_ORDER.indexOf(/** @type {never} */ (m));
 
 describe('Wave 7 marketPrices — catalog TOTALITY (the walker)', () => {
-  it('every catalog GOOD resolves to a finite positive base, a unit, and a valid quote', () => {
+  it('every catalog GOOD resolves and moves — a typed movement with a spoken phrase, at every band', () => {
     for (const entry of Object.values(GOOD_CATALOG)) {
-      if (entry.kind !== 'good') continue; // services are not cried by the bushel
+      if (entry.kind !== 'good') continue; // services are not cried in the market
       const good = resolveGood(entry.id);
       expect(good, `${entry.id} resolves`).not.toBeNull();
-      const base = basePriceFor(good);
-      expect(Number.isFinite(base) && base >= 1, `${entry.id} base=${base}`).toBe(true);
-      expect(typeof unitFor(/** @type {NonNullable<typeof good>} */ (good))).toBe('string');
-      const q = deriveMarketQuote({ good: /** @type {NonNullable<typeof good>} */ (good), settlementId: 'town', band: 'adequate' });
-      expect(q.coppers).toBeGreaterThanOrEqual(1);
-      expect(q.spoken.length).toBeGreaterThan(0);
-      expect(q.priced).toContain(q.unit);
+      for (const band of ['shortage', 'adequate', 'surplus']) {
+        const q = deriveMarketQuote({ good: /** @type {NonNullable<typeof good>} */ (good), settlementId: 'town', band: /** @type {never} */ (band) });
+        expect(MOVEMENT_ORDER.includes(q.movement), `${entry.id}@${band} movement=${q.movement}`).toBe(true);
+        expect(q.phrase).toBe(/** @type {Record<string,string>} */ (MOVEMENTS)[q.movement]);
+        expect(q.phrase.length).toBeGreaterThan(0);
+      }
     }
   });
 
-  it('every BASE_PRICE_BY_CLASS anchor is a positive number, DEFAULT is the floor', () => {
-    for (const v of Object.values(BASE_PRICE_BY_CLASS)) expect(v).toBeGreaterThan(0);
-    expect(DEFAULT_BASE_COPPERS).toBeGreaterThan(0);
-    // A good whose class is unknown falls back to the default (total function).
-    expect(basePriceFor('no_such_class')).toBe(DEFAULT_BASE_COPPERS);
+  it('the movement vocabulary is total over every (band, drift) shape — junk included', () => {
+    const bands = ['shortage', 'adequate', 'surplus', null, undefined, 'garbage'];
+    for (const band of bands) for (const drift of bands) {
+      const m = movementFor(/** @type {never} */ (band), /** @type {never} */ (drift));
+      expect(MOVEMENT_ORDER.includes(m), `band=${band} drift=${drift} → ${m}`).toBe(true);
+    }
   });
 });
 
-describe('Wave 7 marketPrices — band MONOTONICITY', () => {
-  it('the scarcity multiplier is strictly monotone: shortage > adequate > surplus', () => {
-    expect(SCARCITY_MULTIPLIER.shortage).toBeGreaterThan(SCARCITY_MULTIPLIER.adequate);
-    expect(SCARCITY_MULTIPLIER.adequate).toBeGreaterThan(SCARCITY_MULTIPLIER.surplus);
-  });
-
-  it('for EVERY good, price(shortage) > price(adequate) > price(surplus) at one market', () => {
+describe('Wave 7 marketPrices — band MONOTONICITY on the movement axis', () => {
+  it('for EVERY good, shortage reads dearer than adequate, adequate dearer than surplus', () => {
     for (const entry of Object.values(GOOD_CATALOG)) {
       if (entry.kind !== 'good') continue;
       const good = /** @type {NonNullable<ReturnType<typeof resolveGood>>} */ (resolveGood(entry.id));
-      const dear = deriveMarketQuote({ good, settlementId: 'town', band: 'shortage' }).coppers;
-      const mid = deriveMarketQuote({ good, settlementId: 'town', band: 'adequate' }).coppers;
-      const cheap = deriveMarketQuote({ good, settlementId: 'town', band: 'surplus' }).coppers;
-      expect(dear, `${entry.id} shortage>adequate`).toBeGreaterThan(mid);
-      expect(mid, `${entry.id} adequate>surplus`).toBeGreaterThan(cheap);
+      const dear = rank(deriveMarketQuote({ good, settlementId: 'town', band: 'shortage' }).movement);
+      const mid = rank(deriveMarketQuote({ good, settlementId: 'town', band: 'adequate' }).movement);
+      const cheap = rank(deriveMarketQuote({ good, settlementId: 'town', band: 'surplus' }).movement);
+      expect(dear, `${entry.id} shortage dearer than adequate`).toBeLessThan(mid);
+      expect(mid, `${entry.id} adequate dearer than surplus`).toBeLessThan(cheap);
+    }
+  });
+
+  it('the vocabulary itself is ordered dear → cheap with "usual" at its centre', () => {
+    expect(MOVEMENT_ORDER[Math.floor(MOVEMENT_ORDER.length / 2)]).toBe('usual');
+    // Every movement names a phrase; every phrase measures against the norm.
+    for (const m of MOVEMENT_ORDER) {
+      const phrase = /** @type {Record<string,string>} */ (MOVEMENTS)[m];
+      expect(typeof phrase).toBe('string');
+      expect(phrase).toContain('usual price');
     }
   });
 });
@@ -84,53 +98,41 @@ describe('Wave 7 marketPrices — DETERMINISM (no rng, no clock)', () => {
     expect(a).toEqual(b);
   });
 
-  it('the same (settlement, good) always quotes the same coin; different markets differ', () => {
+  it('the same bands always speak the same phrase, in every market', () => {
     const grain = /** @type {NonNullable<ReturnType<typeof resolveGood>>} */ (resolveGood('Grain'));
-    const one = deriveMarketQuote({ good: grain, settlementId: 'aaa', band: 'adequate' }).coppers;
-    const oneAgain = deriveMarketQuote({ good: grain, settlementId: 'aaa', band: 'adequate' }).coppers;
-    expect(one).toBe(oneAgain);
-    // The local-colour jitter makes distinct markets generally quote distinct
-    // prices — sample a spread of ids so the assertion is not a coin-flip.
-    const prices = ['bbb', 'ccc', 'ddd', 'eee', 'fff'].map(id =>
-      deriveMarketQuote({ good: grain, settlementId: id, band: 'adequate' }).coppers);
-    expect(new Set([one, ...prices]).size).toBeGreaterThan(1);
+    const phrases = ['aaa', 'bbb', 'ccc'].map(id =>
+      deriveMarketQuote({ good: grain, settlementId: id, band: 'shortage' }).phrase);
+    expect(new Set(phrases).size).toBe(1);
+    expect(phrases[0]).toBe(MOVEMENTS.near_double);
   });
 });
 
-describe('Wave 7 marketPrices — the REGISTER guard (crier, not spreadsheet)', () => {
-  it('denominate renders coin words, NEVER a bare decimal', () => {
-    for (let cp = 1; cp <= 5000; cp += 7) {
-      const s = denominate(cp);
-      expect(s, `cp=${cp} → "${s}"`).not.toMatch(NO_DECIMAL);
-      expect(s).not.toMatch(/NaN|undefined|Infinity/);
-      expect(s).toMatch(/copper|silver|gold/);
+describe('Wave 7 marketPrices — THE §776 REGISTER GUARD (movement, never coin)', () => {
+  it('no movement phrase carries a digit, a decimal, or a coin word', () => {
+    for (const phrase of Object.values(MOVEMENTS)) {
+      expect(phrase, phrase).not.toMatch(ABSOLUTE_TELL);
     }
-    expect(denominate(1)).toBe('a copper');
-    expect(denominate(5)).toBe('five copper');
-    expect(denominate(15)).toBe('a silver and a half');
-    expect(denominate(40)).toBe('four silver');
-    expect(denominate(45)).toBe('four silver and a half');
-    expect(denominate(100)).toBe('a gold');
   });
 
-  it('no rendered quote or crier line carries a bare decimal', () => {
+  it('no rendered quote or crier line carries an absolute-value tell, at any band mix', () => {
     const stocks = { forge: { grain: 1, iron: 40 } }; // grain short, iron glut
-    const m = deriveMarketPrices({ economicState: ECO, worldState: world(stocks), settlementId: 'forge' });
+    const m = deriveMarketPrices({ economicState: ECO, worldState: world(stocks), settlementId: 'forge', flowDrift: { band: 'shortage' } });
     for (const q of [...m.exports, ...m.imports]) {
-      expect(q.priced, q.priced).not.toMatch(NO_DECIMAL);
-      expect(q.spoken).not.toMatch(NO_DECIMAL);
+      expect(q.phrase, q.phrase).not.toMatch(ABSOLUTE_TELL);
+      // The quote shape itself carries no numeric price field to leak.
+      expect('coppers' in q).toBe(false);
+      expect('raw' in q).toBe(false);
     }
-    if (m.highlight) expect(m.highlight.crierLine).not.toMatch(NO_DECIMAL);
+    expect(m.highlight).not.toBeNull();
+    expect(m.highlight?.crierLine).not.toMatch(ABSOLUTE_TELL);
   });
 
-  it('the flagship reads as coarse silver — grain in shortage runs ~four silver the bushel', () => {
+  it('the flagship reads as movement — grain in shortage runs nearly double its usual price', () => {
     const grain = /** @type {NonNullable<ReturnType<typeof resolveGood>>} */ (resolveGood('Grain'));
     const q = deriveMarketQuote({ good: grain, settlementId: 'riverside', band: 'shortage' });
-    expect(q.unit).toBe('bushel');
-    expect(q.coppers).toBeGreaterThanOrEqual(38);
-    expect(q.coppers).toBeLessThanOrEqual(48);
-    expect(q.spoken).toMatch(/^(three|four|five) silver/);
-    expect(q.priced).toMatch(/silver.*bushel$/);
+    expect(q.movement).toBe('near_double');
+    expect(q.phrase).toBe('nearly double its usual price');
+    expect(q.tag).toBe('dear');
   });
 });
 
@@ -143,7 +145,7 @@ describe('Wave 7 marketPrices — the M6a BAND read (commodityStocks)', () => {
     expect(commodityBandForGood(world(null), 'forge', 'grain')).toBeNull();  // no ledger
   });
 
-  it('a shortage-banded export is dearer than the same good adequate; a glut is cheaper', () => {
+  it('a shortage-banded export reads dearer than the same good adequate; a glut cheaper', () => {
     const dear = deriveMarketPrices({ economicState: ECO, worldState: world({ forge: { grain: 1 } }), settlementId: 'forge' });
     const flat = deriveMarketPrices({ economicState: ECO, worldState: world(null), settlementId: 'forge' });
     const glut = deriveMarketPrices({ economicState: ECO, worldState: world({ forge: { grain: 40 } }), settlementId: 'forge' });
@@ -151,8 +153,8 @@ describe('Wave 7 marketPrices — the M6a BAND read (commodityStocks)', () => {
     expect(grainOf(dear).band).toBe('shortage');
     expect(grainOf(flat).band).toBe('adequate');
     expect(grainOf(glut).band).toBe('surplus');
-    expect(grainOf(dear).coppers).toBeGreaterThan(grainOf(flat).coppers);
-    expect(grainOf(flat).coppers).toBeGreaterThan(grainOf(glut).coppers);
+    expect(rank(grainOf(dear).movement)).toBeLessThan(rank(grainOf(flat).movement));
+    expect(rank(grainOf(flat).movement)).toBeLessThan(rank(grainOf(glut).movement));
   });
 });
 
@@ -175,27 +177,37 @@ describe('Wave 7 marketPrices — M6a THRESHOLD PARITY (the anti-drift pin)', ()
   });
 });
 
-describe('Wave 7 marketPrices — the M6d DRIFT nudge', () => {
-  it('a shortage flow-drift shades every quote dearer; a surplus drift cheaper; absent ⇒ no change', () => {
+describe('Wave 7 marketPrices — the M6d DRIFT shade', () => {
+  it('a shortage flow-drift shades a steady good above the usual; a surplus drift under; absent ⇒ usual', () => {
     const grain = /** @type {NonNullable<ReturnType<typeof resolveGood>>} */ (resolveGood('Grain'));
-    const flat = deriveMarketQuote({ good: grain, settlementId: 'forge', band: 'adequate' }).coppers;
-    const dearer = deriveMarketQuote({ good: grain, settlementId: 'forge', band: 'adequate', driftBand: 'shortage' }).coppers;
-    const cheaper = deriveMarketQuote({ good: grain, settlementId: 'forge', band: 'adequate', driftBand: 'surplus' }).coppers;
-    expect(dearer).toBeGreaterThanOrEqual(flat);
-    expect(cheaper).toBeLessThanOrEqual(flat);
-    expect(dearer).toBeGreaterThan(cheaper);
+    const flat = deriveMarketQuote({ good: grain, settlementId: 'forge', band: 'adequate' });
+    const above = deriveMarketQuote({ good: grain, settlementId: 'forge', band: 'adequate', driftBand: 'shortage' });
+    const under = deriveMarketQuote({ good: grain, settlementId: 'forge', band: 'adequate', driftBand: 'surplus' });
+    expect(flat.movement).toBe('usual');
+    expect(above.movement).toBe('shade_above');
+    expect(under.movement).toBe('shade_under');
+    expect(rank(above.movement)).toBeLessThan(rank(flat.movement));
+    expect(rank(flat.movement)).toBeLessThan(rank(under.movement));
   });
 
-  it('the flow-drift band flows through deriveMarketPrices to the whole board', () => {
+  it('a good already dear or cheap keeps its class — the road shade never jumps a whole class', () => {
+    const grain = /** @type {NonNullable<ReturnType<typeof resolveGood>>} */ (resolveGood('Grain'));
+    for (const drift of ['shortage', 'surplus', null]) {
+      expect(deriveMarketQuote({ good: grain, settlementId: 'f', band: 'shortage', driftBand: /** @type {never} */ (drift) }).movement).toBe('near_double');
+      expect(deriveMarketQuote({ good: grain, settlementId: 'f', band: 'surplus', driftBand: /** @type {never} */ (drift) }).movement).toBe('third_under');
+    }
+  });
+
+  it('the flow-drift band flows through deriveMarketPrices to the whole steady board', () => {
     const noDrift = deriveMarketPrices({ economicState: ECO, worldState: world(null), settlementId: 'forge' });
     const withDrift = deriveMarketPrices({ economicState: ECO, worldState: world(null), settlementId: 'forge', flowDrift: { band: 'shortage' } });
-    const sum = (m) => [...m.exports, ...m.imports].reduce((/** @type {number} */ a, /** @type {{coppers:number}} */ q) => a + q.coppers, 0);
-    expect(sum(withDrift)).toBeGreaterThan(sum(noDrift));
+    expect(noDrift.exports.every((/** @type {{movement:string}} */ q) => q.movement === 'usual')).toBe(true);
+    expect(withDrift.exports.every((/** @type {{movement:string}} */ q) => q.movement === 'shade_above')).toBe(true);
   });
 });
 
 describe('Wave 7 marketPrices — DORMANCY / INERT-NOT-CRASH', () => {
-  it('aspatial (no ledger) ⇒ prices from generation bands at adequate, never crashes', () => {
+  it('aspatial (no ledger) ⇒ movements from generation bands at the usual, never crashes', () => {
     const m = deriveMarketPrices({ economicState: ECO, worldState: world(null), settlementId: 'forge' });
     expect(m.present).toBe(true);
     expect(m.exports.every((/** @type {{band:string}} */ q) => q.band === 'adequate')).toBe(true);
@@ -210,7 +222,7 @@ describe('Wave 7 marketPrices — DORMANCY / INERT-NOT-CRASH', () => {
     expect(() => deriveMarketPrices({ economicState: { primaryExports: [null, '', {}, 42] }, worldState: world(null), settlementId: 'forge' })).not.toThrow();
   });
 
-  it('SERVICES never price (a crier does not cry "four silver the financial service")', () => {
+  it('SERVICES never move (a crier does not cry the financial service)', () => {
     expect(resolveGood('Financial services')).toBeNull();
     const m = deriveMarketPrices({ economicState: { primaryExports: ['Financial services', 'Grain'], primaryImports: [] }, worldState: world(null), settlementId: 'forge' });
     expect(m.exports.map((/** @type {{id:string}} */ q) => q.id)).toEqual(['grain']);
@@ -218,19 +230,20 @@ describe('Wave 7 marketPrices — DORMANCY / INERT-NOT-CRASH', () => {
 });
 
 describe('Wave 7 marketPrices — the strongest-deviation HIGHLIGHT', () => {
-  it('a dear good outranks a cheap one; the crier line is well-formed', () => {
+  it('a dear good outranks a cheap one; the crier line is well-formed and coin-free', () => {
     const stocks = { forge: { grain: 1, iron: 40 } }; // grain dear, iron cheap
     const m = deriveMarketPrices({ economicState: ECO, worldState: world(stocks), settlementId: 'forge', flowDrift: { band: 'shortage' } });
     expect(m.highlight).not.toBeNull();
     expect(m.highlight?.tag).toBe('dear');
     // The crier FRAME varies view-time (content-vt-2, seeded on the good id); the
-    // FACTS are pinned — a DEAR line carrying the shortage receipt, ending as a
-    // spoken sentence, with no bare decimal.
+    // FACTS are pinned — a DEAR line carrying the movement phrase and the
+    // shortage receipt, ending as a spoken sentence, with no absolute tell.
     const line = m.highlight?.crierLine ?? '';
     expect(line).toContain('dear');
+    expect(line).toContain('nearly double its usual price');
     expect(line).toContain('for the roads are cut');
     expect(line.endsWith('.')).toBe(true);
-    expect(line).not.toMatch(NO_DECIMAL);
+    expect(line).not.toMatch(ABSOLUTE_TELL);
   });
 
   it('a steady-only board has no highlight', () => {
@@ -239,19 +252,20 @@ describe('Wave 7 marketPrices — the strongest-deviation HIGHLIGHT', () => {
 
   // ── CRIER-LINE frame variety (content-vt-2) ──────────────────────────────────
   const quote = (id, tag) => ({
-    id, label: 'Grain', unit: 'bushel', coppers: tag === 'dear' ? 40 : 8,
-    spoken: tag === 'dear' ? 'four silver' : 'eight copper',
-    priced: tag === 'dear' ? 'four silver the bushel' : 'eight copper the bushel',
-    band: tag === 'dear' ? 'shortage' : 'surplus', tag, raw: '40 cp',
+    id, label: 'Grain',
+    band: tag === 'dear' ? 'shortage' : 'surplus',
+    movement: tag === 'dear' ? 'near_double' : 'third_under',
+    phrase: tag === 'dear' ? MOVEMENTS.near_double : MOVEMENTS.third_under,
+    tag,
   });
 
-  it('CANONICAL-AT-ZERO: index 0 of each pool is the original crier frame', () => {
-    expect(CRIER_FRAMES.dear[0]).toBe('{label} runs {priced} — dear, {receipt}.');
-    expect(CRIER_FRAMES.cheap[0]).toBe('{label} runs {priced} — cheap, {receipt}.');
+  it('CANONICAL-AT-ZERO: index 0 of each pool is the pool\'s plainest line', () => {
+    expect(CRIER_FRAMES.dear[0]).toBe('{label} runs {phrase} — dear, {receipt}.');
+    expect(CRIER_FRAMES.cheap[0]).toBe('{label} runs {phrase} — cheap, {receipt}.');
     for (const [tag, pool] of Object.entries(CRIER_FRAMES)) {
       expect(pool.length, `${tag} has variety`).toBeGreaterThanOrEqual(2);
       for (const frame of pool) {
-        for (const slot of ['{label}', '{priced}', '{receipt}']) {
+        for (const slot of ['{label}', '{phrase}', '{receipt}']) {
           expect(frame.includes(slot), `${tag}: "${frame}" carries ${slot}`).toBe(true);
         }
         expect(frame.includes(tag), `${tag}: "${frame}" names the tag`).toBe(true);
@@ -264,8 +278,8 @@ describe('Wave 7 marketPrices — the strongest-deviation HIGHLIGHT', () => {
     const a = strongestDeviation([quote('grain', 'dear')], 'shortage')?.crierLine;
     const b = strongestDeviation([quote('grain', 'dear')], 'shortage')?.crierLine;
     expect(a).toBe(b);
-    // The facts (priced + receipt) ride whatever frame the good draws.
-    expect(a).toContain('four silver the bushel');
+    // The facts (movement + receipt) ride whatever frame the good draws.
+    expect(a).toContain('nearly double its usual price');
     expect(a).toContain('for the roads are cut');
   });
 
@@ -279,12 +293,24 @@ describe('Wave 7 marketPrices — the strongest-deviation HIGHLIGHT', () => {
   });
 });
 
-describe('Wave 7 marketPrices — PURITY (source scan)', () => {
+describe('Wave 7 marketPrices — PURITY + THE COIN MACHINERY STAYS DEAD (source scan)', () => {
+  const src = () => readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../../src/domain/display/marketPrices.js'), 'utf8');
+
   it('the module uses no wall clock, rng, or host-locale formatting', () => {
-    const src = readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../../src/domain/display/marketPrices.js'), 'utf8');
-    expect(src).not.toMatch(/Date\.now|new Date\b/);
-    expect(src).not.toMatch(/Math\.random/);
-    expect(src).not.toMatch(/toLocale[A-Z]/);
-    expect(src).not.toMatch(/localeCompare/);
+    expect(src()).not.toMatch(/Date\.now|new Date\b/);
+    expect(src()).not.toMatch(/Math\.random/);
+    expect(src()).not.toMatch(/toLocale[A-Z]/);
+    expect(src()).not.toMatch(/localeCompare/);
+  });
+
+  it('no absolute-coin derivation returns to this module (§776 — the deletion holds)', () => {
+    // The old coin machinery by its load-bearing identifiers. A revival of any
+    // of these names is a §776 regression walking back in the front door.
+    // (Positive control: the movement vocabulary IS here.)
+    const text = src();
+    expect(text).toContain('MOVEMENTS');
+    for (const dead of ['BASE_PRICE_BY_CLASS', 'denominate(', 'basePriceFor', 'localColor', 'coppers', 'SCARCITY_MULTIPLIER']) {
+      expect(text.includes(dead), `"${dead}" must stay deleted`).toBe(false);
+    }
   });
 });

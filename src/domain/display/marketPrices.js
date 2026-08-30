@@ -1,142 +1,99 @@
 /**
- * domain/display/marketPrices.js — THE MARKET-PRICE READ-MODEL
- * (Phase 5.5 round-21 Wave 7, "the market speaks in real coin").
+ * domain/display/marketPrices.js — THE MARKET-MOVEMENT READ-MODEL
+ * (Phase 5.5 round-21 Wave 7, rebuilt under the PRICE-HEURISTICS LAW,
+ * ODQ §776: "we do not have absolute prices — the DM's mandate").
  *
- * A pure DISPLAY read-model that surfaces believable in-world PRICES derived
- * from the live economy WITHOUT touching it. GENERATION IS SACRED (the M6d
- * ruling, verbatim precedent): prices are a LAZY DISPLAY READ over
- * `economicState` (the seeded trade profile) + the M6a commodity BANDS
- * (`commodityStocks`) + the M6d flow DRIFT — read-only, zero engine feedback
- * (prices never feed sim math — the endogeneity law), zero persistence, zero
- * eager bytes. No numeric prices exist in the engine BY DESIGN (M6a froze
- * that); this module is the fiction layer those qualitative bands always
- * intended. Same-seed byte-identity is preserved BY CONSTRUCTION: nothing here
- * is ever written back, so no golden can shift.
+ * A pure DISPLAY read-model that surfaces how the market has MOVED against the
+ * settlement's own norm — never a coin figure. The owner's law (§776.1,
+ * verbatim intent): no in-world economic surface ever states an ABSOLUTE price
+ * or monetary value; surfaces speak relative heuristics only — "nearly double
+ * its usual price", dear/cheap bands, a shade above or under. Final coin is the
+ * DM's to set at the table, exactly as the finite-semantics constitution
+ * intends. (The earlier form of this module derived "believable in-world coin"
+ * — four silver the bushel — from class anchors × band multipliers; the coin
+ * machinery is deleted, not hidden: the movement is now derived DIRECTLY from
+ * the typed bands, with no numeric price substrate left to leak.)
  *
- * THE DERIVATION (deterministic, rng-free):
- *   1. BASE PRICE per good — derived (never authored) from the goodsCatalog's
- *      classifying field (`category`, the catalog's bulk/rarity CLASS) via the
- *      documented BASE_PRICE_BY_CLASS table; an unknown class falls back to
- *      DEFAULT_BASE_COPPERS. Every catalog good resolves (the walker pin).
- *   2. SCARCITY MULTIPLIER from the M6a band (absent ⇒ adequate): shortage ×1.8,
- *      adequate ×1.0, surplus ×0.7. Band MONOTONICITY (shortage > adequate >
- *      surplus) is the load-bearing property and is pinned.
- *   3. LOCAL COLOR — a ±10% deterministic jitter via fnv1a32(`${sid}:${good}`):
- *      the newsVoice.js idiom, NO rng, so the same market always quotes the same
- *      price for the same world-state.
- *   4. DRIFT NUDGE (optional) — the M6d flowDerivedDependency band shades EVERY
- *      quote one step (±5%) when present (the roads choked ⇒ everything a touch
- *      dearer); absent ⇒ nothing (the dormancy shape).
- *   5. FORMATTER — `denominate()` renders coarse period coin ("four silver the
- *      bushel", "a copper the sack"), never a spreadsheet decimal. The raw
- *      coppers ride the tooltip only (the register rule).
+ * GENERATION IS SACRED (the M6d ruling, verbatim precedent): this is a LAZY
+ * DISPLAY READ over `economicState` (the seeded trade profile) + the M6a
+ * commodity BANDS (`commodityStocks`) + the M6d flow DRIFT — read-only, zero
+ * engine feedback, zero persistence, zero eager bytes. Same-seed byte-identity
+ * is preserved BY CONSTRUCTION: nothing here is ever written back.
+ *
+ * THE DERIVATION (deterministic, rng-free, and HONEST — every relative is a
+ * derivation from the settlement's own state, never flavor):
+ *   1. THE NORM is the settlement's own usual price for the good — the thing
+ *      the M6a 'adequate' band means. It is never numbered; it is the anchor
+ *      every movement phrase measures against.
+ *   2. MOVEMENT from the M6a band (absent ⇒ adequate): shortage reads as
+ *      'nearly double its usual price' (dear), surplus as 'a third under its
+ *      usual price' (cheap) — the same magnitudes the old multipliers (×1.8,
+ *      ×0.7) encoded, spoken instead of computed.
+ *   3. DRIFT SHADE (optional) — the M6d flowDerivedDependency band shades a
+ *      steady good one step ('a shade above/under its usual price') when the
+ *      roads choke or run thick; a good already dear or cheap keeps its own
+ *      class (a ±5% nudge never moved a quote a whole class in the old math,
+ *      and a movement vocabulary should not either). Absent ⇒ nothing (the
+ *      dormancy shape).
+ *   4. The vocabulary is a CLOSED, TYPED enum (MOVEMENTS) — finite semantics;
+ *      no free-text assembly, no digits, no coin words anywhere in the render.
  *
  * THE M6a BAND, READ LOCALLY. The per-good band is read straight off the
  * `commodityStocks` ledger with a LOCAL mirror of commodityFlow.js's band
- * thresholds — the EXACT newsVoice.js precedent (a local fnv1a32 copy rather
- * than importing the heavy conjunction module "which drags large content tables
- * into the news chunk"). Importing commodityFlow.js would drag its embattlement
- * / smuggle / dispatchEV / supplyShipments graph into this lazy display chunk;
- * the mirror keeps this a light leaf. The three mirrored constants
- * (STOCKPILE_TARGET / SHORTAGE_FRAC / SURPLUS_FRAC) are documented against their
- * COMMODITY_TUNING sources so a retune stays findable.
+ * thresholds — the EXACT newsVoice.js precedent (importing commodityFlow would
+ * drag its embattlement / smuggle / dispatchEV / supplyShipments graph into
+ * this lazy display chunk). The three mirrored constants are parity-pinned
+ * test-side against COMMODITY_TUNING so a retune REDS instead of drifting.
  *
- * PLAYER-VISIBLE. Bands are public economy (no DM truth), so prices need no
- * publicSafe scrub — free/anon see the same quotes.
+ * PLAYER-VISIBLE. Bands are public economy (no DM truth) — free/anon see the
+ * same movements.
  *
  * PRESENTATION ONLY. Pure; no store, no rng, no wall clock; INERT-NOT-CRASH on
- * absent / garbage ledgers (an aspatial world prices from generation-time bands,
+ * absent / garbage ledgers (an aspatial world reads from generation-time bands,
  * i.e. adequate, and never throws). Strict-clean; zero any-casts. Imported ONLY
- * by the lazy EconomicsTab chunk — NEVER by generation or the world-pulse kernel
- * (the SAME-SEED / GOLDEN laws), and no eager module may import it.
+ * by the lazy EconomicsTab chunk — NEVER by generation or the world-pulse
+ * kernel (the SAME-SEED / GOLDEN laws), and no eager module may import it.
  */
 
 import { getSpatialLedger } from '../spatial/distanceRead.js';
 import { normalizeGood } from '../region/goodsCatalog.js';
 import { compareCodepoint } from '../deterministicSort.js';
-import { formatCount } from '../formatNumber.js';
 
 /** @typedef {'shortage'|'adequate'|'surplus'} Band */
+/** @typedef {'near_double'|'shade_above'|'usual'|'shade_under'|'third_under'} Movement */
 
-// ── Coin system (D&D 5e): 1 gold = 100 copper, 1 silver = 10 copper ───────────
-export const COIN = Object.freeze({ GOLD: 100, SILVER: 10, COPPER: 1 });
-
-// ── BASE PRICE, in COPPERS per unit, keyed by the catalog CLASS (`category`) ──
-// The catalog's `category` is its bulk/rarity class; these anchors are chosen so
-// a staple bushel reads in single silver and a luxury in gold. Retunable; the
-// only pinned property is that every catalog good resolves to a finite positive
-// base (see DEFAULT_BASE_COPPERS + the walker pin). NB: the food anchor (24) is
-// calibrated so grain at the shortage band (×1.8) lands near "four silver" — the
-// design's flagship crier line.
-export const BASE_PRICE_BY_CLASS = Object.freeze({
-  food: 24,
-  raw_material: 40,
-  fuel: 20,
-  finished_good: 120,
-  luxury: 700,
-  service: 200,
-  arcane: 900,
-  military: 260,
-  transport: 160,
-  other: 55,
+// ── THE MOVEMENT VOCABULARY — closed, typed, ordered dear → cheap. ────────────
+// Every phrase measures against the settlement's OWN usual price (the norm the
+// 'adequate' band defines), so a movement is always an honest derivation. No
+// digits, no coin words — the register the §776 law mandates.
+/** @type {Readonly<Record<Movement, string>>} */
+export const MOVEMENTS = Object.freeze({
+  near_double: 'nearly double its usual price',
+  shade_above: 'a shade above its usual price',
+  usual: 'its usual price',
+  shade_under: 'a shade under its usual price',
+  third_under: 'a third under its usual price',
 });
 
-// The floor for an unrecognized class (a future category, or a malformed entry).
-export const DEFAULT_BASE_COPPERS = 55;
-
-// ── SCARCITY MULTIPLIER per M6a band. MONOTONE by construction (pinned). ──────
-export const SCARCITY_MULTIPLIER = Object.freeze({ shortage: 1.8, adequate: 1.0, surplus: 0.7 });
-
-// ── DRIFT NUDGE per M6d flow band: the roads' live throughput shades every
-// quote one step. adequate / absent ⇒ 1.0 (dormancy). ─────────────────────────
-export const DRIFT_STEP = 0.05;
-export const DRIFT_NUDGE = Object.freeze({ shortage: 1 + DRIFT_STEP, adequate: 1.0, surplus: 1 - DRIFT_STEP });
-
-// ── LOCAL COLOR — the ±10% per-market jitter range. ───────────────────────────
-export const LOCAL_COLOR_RANGE = 0.10;
+// The dear→cheap ordering of the vocabulary — the monotonicity axis the tests
+// pin (shortage must always read dearer than adequate, adequate than surplus).
+/** @type {ReadonlyArray<Movement>} */
+export const MOVEMENT_ORDER = Object.freeze(['near_double', 'shade_above', 'usual', 'shade_under', 'third_under']);
 
 // ── The M6a band thresholds, MIRRORED from commodityFlow.js COMMODITY_TUNING
 // (STOCKPILE_TARGET 8, SHORTAGE_FRAC 0.35, SURPLUS_FRAC 1.25). Local copies keep
-// this a light leaf (the newsVoice fnv1a32 precedent — importing commodityFlow
-// would drag its embattlement/smuggle/dispatchEV graph into this lazy display
-// chunk). DRIFT-PROOFED test-side (the parity-proof pattern, kernel-clamp/slugify
-// precedent): tests/domain/marketPrices.test.js imports the canonical
-// COMMODITY_TUNING and asserts these three EQUAL it, and sweeps
-// commodityBandForGood against the real commodityBand() — so a future retune
-// REDS the gate instead of silently drifting the price bands. Exported for that
-// pin only; no runtime consumer reads them off the module surface. ─────────────
+// this a light leaf (the newsVoice fnv1a32 precedent). DRIFT-PROOFED test-side:
+// tests/domain/marketPrices.test.js imports the canonical COMMODITY_TUNING and
+// asserts these three EQUAL it, and sweeps commodityBandForGood against the real
+// commodityBand() — so a future retune REDS the gate instead of silently
+// drifting the movement bands. Exported for that pin only. ────────────────────
 export const BAND_STOCKPILE_TARGET = 8;
 export const BAND_SHORTAGE_FRAC = 0.35;
 export const BAND_SURPLUS_FRAC = 1.25;
 
-// ── UNIT vocabulary — what the crier prices the good BY. Specific per good,
-// with a per-class fallback so custom / unknown goods still get a unit word. ───
-/** @type {Readonly<Record<string, string>>} */
-const UNIT_BY_GOOD = Object.freeze({
-  grain: 'bushel', flour: 'sack', fish: 'barrel', livestock: 'head',
-  provisions: 'cask', salt: 'measure', timber: 'load', stone: 'block',
-  clay: 'batch', iron: 'bar', fuel: 'load', textiles: 'bolt',
-  leather: 'hide', arms: 'piece', luxury_goods: 'piece', furs: 'pelt',
-  raw_materials: 'load', arcane_reagents: 'dram', alchemical_goods: 'vial',
-});
-/** @type {Readonly<Record<string, string>>} */
-const UNIT_BY_CLASS = Object.freeze({
-  food: 'measure', raw_material: 'load', fuel: 'load', finished_good: 'piece',
-  luxury: 'piece', service: 'service', arcane: 'dram', military: 'piece',
-  transport: 'load', other: 'lot',
-});
-const DEFAULT_UNIT = 'lot';
-
-// ── Number words for the crier's coarse count (1..12; larger falls to digits). ─
-/** @type {ReadonlyArray<string>} */
-const NUMBER_WORDS = Object.freeze([
-  'zero', 'a', 'two', 'three', 'four', 'five', 'six',
-  'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve',
-]);
-
-/** FNV-1a 32-bit — the pure jitter hash (no rng, no Date). A LOCAL copy of the
- *  8-line helper (the newsVoice.js precedent — heavy modules are not imported
- *  into a lazy display leaf just to reach a hash).
+/** FNV-1a 32-bit — the pure crier-frame selector hash (no rng, no Date). A
+ *  LOCAL copy of the 8-line helper (the newsVoice.js precedent — heavy modules
+ *  are not imported into a lazy display leaf just to reach a hash).
  *  @param {string} str @returns {number} */
 function fnv1a32(str) {
   let h = 0x811c9dc5;
@@ -164,8 +121,8 @@ function asObject(v) {
 
 /**
  * Resolve any trade label / good bag to a catalog GOOD (kind === 'good'), or
- * null for services / empties. Services are not cried by the bushel, so they
- * never price.
+ * null for services / empties. Services are not cried in the market, so they
+ * never move.
  * @param {unknown} value
  * @returns {ResolvedGood | null}
  */
@@ -176,42 +133,8 @@ export function resolveGood(value) {
 }
 
 /**
- * BASE PRICE in coppers for a good, derived from its catalog CLASS (`category`).
- * Total: an unknown / missing class falls back to DEFAULT_BASE_COPPERS, so every
- * good — catalog or custom — resolves to a finite positive base.
- * @param {ResolvedGood | { category?: string } | string | null | undefined} goodOrClass
- * @returns {number} integer coppers ≥ 1
- */
-export function basePriceFor(goodOrClass) {
-  const cls = typeof goodOrClass === 'string'
-    ? goodOrClass
-    : String((goodOrClass && goodOrClass.category) || 'other');
-  const table = /** @type {Record<string, number>} */ (BASE_PRICE_BY_CLASS);
-  const base = finiteNumber(table[cls], DEFAULT_BASE_COPPERS);
-  return Math.max(1, Math.round(base > 0 ? base : DEFAULT_BASE_COPPERS));
-}
-
-/** The crier's unit word for a good. @param {ResolvedGood} good @returns {string} */
-export function unitFor(good) {
-  return UNIT_BY_GOOD[good.id]
-    || /** @type {Record<string, string>} */ (UNIT_BY_CLASS)[good.category]
-    || DEFAULT_UNIT;
-}
-
-/**
- * The ±LOCAL_COLOR_RANGE deterministic jitter multiplier for one (settlement,
- * good): a pure fnv1a32 of the composite key, mapped to [1 − range, 1 + range].
- * @param {string} settlementId @param {string} goodId @returns {number}
- */
-function localColor(settlementId, goodId) {
-  const h = fnv1a32(`${settlementId}:${goodId}`);
-  const frac = (h % 1000) / 999; // [0, 1]
-  return 1 + (frac * 2 - 1) * LOCAL_COLOR_RANGE;
-}
-
-/**
  * The M6a stock band for a (settlement, good), read off `commodityStocks`, or
- * null when the ledger / entry is absent (⇒ the caller prices at 'adequate').
+ * null when the ledger / entry is absent (⇒ the caller reads 'adequate').
  * A local mirror of commodityFlow.js#commodityBand (see the module header).
  * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
  * @param {string} settlementId @param {string} goodId
@@ -228,18 +151,32 @@ export function commodityBandForGood(worldState, settlementId, goodId) {
 }
 
 /**
- * A single market quote — the coarse spoken price plus the raw coppers (tooltip)
- * and the band tag (dear / steady / cheap).
+ * The MOVEMENT for a (band, driftBand) pair — total over every input shape.
+ * Shortage and surplus own their class regardless of drift (a road shade never
+ * moved a quote a whole class); a steady good takes the drift's shade.
+ * @param {Band | null | undefined} band
+ * @param {Band | null | undefined} driftBand
+ * @returns {Movement}
+ */
+export function movementFor(band, driftBand) {
+  const b = band === 'shortage' || band === 'surplus' ? band : 'adequate';
+  if (b === 'shortage') return 'near_double';
+  if (b === 'surplus') return 'third_under';
+  if (driftBand === 'shortage') return 'shade_above';
+  if (driftBand === 'surplus') return 'shade_under';
+  return 'usual';
+}
+
+/**
+ * A single market movement — the typed movement, its spoken phrase, and the
+ * band tag (dear / steady / cheap). No coin field exists on this shape.
  * @typedef {Object} MarketQuote
  * @property {string} id
  * @property {string} label
- * @property {string} unit
- * @property {number} coppers      the raw integer price (tooltip only)
- * @property {string} spoken       the coarse period-coin phrase ("four silver")
- * @property {string} priced       "<spoken> the <unit>" (the market-crier quote)
  * @property {Band} band
+ * @property {Movement} movement
+ * @property {string} phrase       the spoken movement ("nearly double its usual price")
  * @property {'dear'|'steady'|'cheap'} tag
- * @property {string} raw          "<coppers> cp" (the spreadsheet tooltip)
  */
 
 /** @param {Band} band @returns {'dear'|'steady'|'cheap'} */
@@ -248,57 +185,25 @@ function tagFor(band) {
 }
 
 /**
- * Render coarse period coin from raw coppers — the dominant coin, snapped to the
- * nearest half with vulgar-fraction words ("four silver", "a copper", "half a
- * silver", "two gold and a half"). NEVER a bare decimal (the register guard). A
- * count above twelve falls to grouped digits ("15 gold") — still no decimal.
- * @param {number} coppers @returns {string}
- */
-export function denominate(coppers) {
-  const cp = Math.max(1, Math.round(finiteNumber(coppers, 1)));
-  const [coin, divisor] = cp >= COIN.GOLD ? ['gold', COIN.GOLD]
-    : cp >= COIN.SILVER ? ['silver', COIN.SILVER]
-    : ['copper', COIN.COPPER];
-  // Snap the scaled value to the nearest half — a crier's coarse quote.
-  const halves = Math.max(1, Math.round((cp / divisor) * 2));
-  const whole = Math.floor(halves / 2);
-  const hasHalf = halves % 2 === 1;
-  const countWord = whole >= 1 && whole < NUMBER_WORDS.length ? NUMBER_WORDS[whole] : formatCount(whole);
-
-  if (whole >= 1 && hasHalf) return `${countWord} ${coin} and a half`;
-  if (whole >= 1) return `${countWord} ${coin}`;
-  if (hasHalf) return `half a ${coin}`;
-  return `a ${coin}`; // unreachable (cp ≥ 1 ⇒ halves ≥ 1) — total-function guard
-}
-
-/**
- * Derive one good's full market quote.
+ * Derive one good's market movement.
  * @param {Object} args
  * @param {ResolvedGood} args.good
- * @param {string} args.settlementId
+ * @param {string} args.settlementId  (kept for signature stability; the movement
+ *   itself is a pure function of the bands — nothing per-market is numbered)
  * @param {Band | null | undefined} [args.band]        the M6a band (absent ⇒ adequate)
- * @param {Band | null | undefined} [args.driftBand]   the M6d flow band (absent ⇒ no nudge)
+ * @param {Band | null | undefined} [args.driftBand]   the M6d flow band (absent ⇒ no shade)
  * @returns {MarketQuote}
  */
-export function deriveMarketQuote({ good, settlementId, band, driftBand }) {
-  const useBand = /** @type {Band} */ (band || 'adequate');
-  const base = basePriceFor(good);
-  const scarcity = finiteNumber(/** @type {Record<string, number>} */ (SCARCITY_MULTIPLIER)[useBand], 1);
-  const jitter = localColor(String(settlementId), good.id);
-  const drift = driftBand ? finiteNumber(/** @type {Record<string, number>} */ (DRIFT_NUDGE)[driftBand], 1) : 1;
-  const coppers = Math.max(1, Math.round(base * scarcity * jitter * drift));
-  const unit = unitFor(good);
-  const spoken = denominate(coppers);
+export function deriveMarketQuote({ good, settlementId: _settlementId, band, driftBand }) {
+  const useBand = /** @type {Band} */ (band === 'shortage' || band === 'surplus' ? band : 'adequate');
+  const movement = movementFor(useBand, driftBand);
   return {
     id: good.id,
     label: good.label,
-    unit,
-    coppers,
-    spoken,
-    priced: `${spoken} the ${unit}`,
     band: useBand,
+    movement,
+    phrase: MOVEMENTS[movement],
     tag: tagFor(useBand),
-    raw: `${formatCount(coppers)} cp`,
   };
 }
 
@@ -312,44 +217,43 @@ function causalReceipt(tag, driftBand) {
   return driftBand === 'surplus' ? 'for the roads run thick with wagons' : 'for the season has been generous';
 }
 
-// ── The CRIER-LINE frame pools (content-vt-2) ───────────────────────────────
-// The market crier cried ONE fixed frame ("{label} runs {priced} — dear,
-// {receipt}."), so every settlement's economics tab read the same shape. Each
-// tag (dear/cheap) is now a small pool of interchangeable frames; the FACTS —
-// the good {label}, the coarse {priced} quote, and the causal {receipt} — ride
-// every frame unchanged (mirror-not-rederive), and only the crier's phrasing
-// varies. Selection is a pure FNV of the good's id, so a given good is always
-// cried the same way and different goods generally read differently.
-// CANONICAL-AT-ZERO: index 0 of each pool is the original line.
+// ── The CRIER-LINE frame pools (content-vt-2, re-voiced for movements) ───────
+// Each tag (dear/cheap) is a small pool of interchangeable frames; the FACTS —
+// the good {label}, the spoken {phrase} movement, and the causal {receipt} —
+// ride every frame unchanged (mirror-not-rederive), and only the crier's
+// phrasing varies. Selection is a pure FNV of the good's id, so a given good is
+// always cried the same way and different goods generally read differently.
+// CANONICAL-AT-ZERO: index 0 of each pool is the pool's plainest line.
 /** @type {Readonly<Record<'dear'|'cheap', ReadonlyArray<string>>>} */
 export const CRIER_FRAMES = Object.freeze({
   dear: Object.freeze([
-    '{label} runs {priced} — dear, {receipt}.',
-    '{label} is dear at {priced} now, {receipt}.',
-    "They're asking {priced} for {label} — dear, {receipt}.",
-    '{label} fetches {priced} these days — dear, {receipt}.',
+    '{label} runs {phrase} — dear, {receipt}.',
+    '{label} is dear now, {phrase}, {receipt}.',
+    "They're asking {phrase} for {label} — dear, {receipt}.",
+    '{label} fetches {phrase} these days — dear, {receipt}.',
   ]),
   cheap: Object.freeze([
-    '{label} runs {priced} — cheap, {receipt}.',
-    '{label} is cheap at {priced} now, {receipt}.',
-    "There's {label} going for {priced} — cheap, {receipt}.",
-    '{label} fetches only {priced} these days — cheap, {receipt}.',
+    '{label} runs {phrase} — cheap, {receipt}.',
+    '{label} is cheap now, {phrase}, {receipt}.',
+    "There's {label} going for {phrase} — cheap, {receipt}.",
+    '{label} fetches {phrase} these days — cheap, {receipt}.',
   ]),
 });
 
 /** Fill a crier frame for a tag, seeded on the good id (index 0 when seedless).
  *  @param {'dear'|'cheap'} tag @param {string} seed
- *  @param {{ label: string, priced: string, receipt: string }} slots @returns {string} */
-function crierLineFor(tag, seed, { label, priced, receipt }) {
+ *  @param {{ label: string, phrase: string, receipt: string }} slots @returns {string} */
+function crierLineFor(tag, seed, { label, phrase, receipt }) {
   const pool = CRIER_FRAMES[tag];
   const frame = seed ? pool[fnv1a32(`${seed}::${tag}`) % pool.length] : pool[0];
-  return frame.replace('{label}', label).replace('{priced}', priced).replace('{receipt}', receipt);
+  return frame.replace('{label}', label).replace('{phrase}', phrase).replace('{receipt}', receipt);
 }
 
 /**
  * The strongest-deviation "dear / cheap this season" highlight over a set of
  * quotes, or null when every good is steady. A shortage (dear) outranks a
- * surplus (cheap) for drama; ties break by dearer/cheaper coppers, then id.
+ * surplus (cheap) for drama; ties break by codepoint id (every good in a class
+ * carries the same movement, so the id is the whole residual order).
  * @param {MarketQuote[]} quotes @param {Band | null | undefined} driftBand
  * @returns {{ id: string, label: string, tag: 'dear'|'cheap', crierLine: string } | null}
  */
@@ -359,11 +263,9 @@ export function strongestDeviation(quotes, driftBand) {
   /** @type {MarketQuote | null} */
   let pick = null;
   if (dear.length) {
-    // Dearest first (highest coppers), then codepoint id for a stable tie-break.
-    pick = [...dear].sort((a, b) => (b.coppers - a.coppers) || compareCodepoint(a.id, b.id))[0];
+    pick = [...dear].sort((a, b) => compareCodepoint(a.id, b.id))[0];
   } else if (cheap.length) {
-    // Cheapest first (lowest coppers), then codepoint id.
-    pick = [...cheap].sort((a, b) => (a.coppers - b.coppers) || compareCodepoint(a.id, b.id))[0];
+    pick = [...cheap].sort((a, b) => compareCodepoint(a.id, b.id))[0];
   }
   if (!pick) return null;
   const tag = /** @type {'dear'|'cheap'} */ (pick.tag);
@@ -372,22 +274,22 @@ export function strongestDeviation(quotes, driftBand) {
     id: pick.id,
     label: pick.label,
     tag,
-    crierLine: crierLineFor(tag, String(pick.id ?? ''), { label: pick.label, priced: pick.priced, receipt }),
+    crierLine: crierLineFor(tag, String(pick.id ?? ''), { label: pick.label, phrase: pick.phrase, receipt }),
   };
 }
 
 /**
- * The whole market-prices view model for a settlement. Resolves the seeded
- * exports / imports to catalog goods, prices each at its M6a band × local color
- * × the M6d drift, and picks the one strongest deviation. INERT-NOT-CRASH:
- * absent economicState / worldState ⇒ an empty (present: false) model.
+ * The whole market-movements view model for a settlement. Resolves the seeded
+ * exports / imports to catalog goods, reads each good's M6a band and the M6d
+ * drift shade, and picks the one strongest deviation. INERT-NOT-CRASH: absent
+ * economicState / worldState ⇒ an empty (present: false) model.
  *
  * @param {Object} args
  * @param {{ primaryExports?: unknown, primaryImports?: unknown } | null | undefined} args.economicState
  * @param {{ spatialLedgers?: unknown } | null | undefined} [args.worldState]
  * @param {unknown} args.settlementId
  * @param {{ band?: Band } | null | undefined} [args.flowDrift]  the M6d drift (its
- *   settlement-wide band nudges every quote); absent ⇒ no nudge.
+ *   settlement-wide band shades every steady quote); absent ⇒ no shade.
  * @returns {{ present: boolean, exports: MarketQuote[], imports: MarketQuote[],
  *   highlight: { id: string, label: string, tag: 'dear'|'cheap', crierLine: string } | null }}
  */
@@ -400,7 +302,7 @@ export function deriveMarketPrices({ economicState, worldState = null, settlemen
   const driftBand = flowDrift && typeof flowDrift === 'object' ? flowDrift.band : null;
 
   /**
-   * Resolve a seeded label list to priced quotes: goods only, deduped by id,
+   * Resolve a seeded label list to movement quotes: goods only, deduped by id,
    * input order preserved (the generation "primary" ordering).
    * @param {unknown} labels @returns {MarketQuote[]}
    */

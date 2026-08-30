@@ -247,10 +247,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
     if (!campaign) return null;
     return flowDerivedDependency({ worldState: campaign.worldState, economicState: eco, settlementId: sid });
   }, [saveId, s, campaigns, eco]);
-  // MARKET PRICES (round-21 Wave 7) — the crier's coin, a pure display read over
-  // the SAME generation baseline + spatial ledgers, nudged by the M6d flow drift.
-  // Prices render even aspatially (no campaign / worldState ⇒ adequate bands from
-  // the generation trade profile — the dormancy shape); never mutates a thing.
+  // MARKET PRICES (round-21 Wave 7; §776 price-heuristics law) — the crier's
+  // MOVEMENTS against the settlement's own usual prices (never absolute coin), a
+  // pure display read over the SAME generation baseline + spatial ledgers,
+  // shaded by the M6d flow drift. Renders even aspatially (no campaign /
+  // worldState ⇒ adequate bands — the dormancy shape); never mutates a thing.
   const marketPrices = useMemo(() => {
     const sid = saveId != null ? String(saveId) : (s?.id != null ? String(s.id) : null);
     if (!sid) return null;
@@ -452,7 +453,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       {/* ── LIVE TRADE FLOW (M6d — measured throughput drift, additive) ────── */}
       {flowDrift && <LiveTradeFlowSection drift={flowDrift} />}
 
-      {/* ── MARKET PRICES (Wave 7 — the crier's coin, band-derived, additive) ── */}
+      {/* ── MARKET PRICES (Wave 7 — movement vs the usual, §776, band-derived) ── */}
       {marketPrices?.present && <MarketPricesSection prices={marketPrices} />}
 
       {/* ── CRITICAL IMPORTS ──────────────────────────────────────────────── */}
