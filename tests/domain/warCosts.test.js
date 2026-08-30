@@ -675,3 +675,97 @@ describe('WR-4 home-front read', () => {
     }
   });
 });
+
+// ── W-COIN-3 · THE COFFERS COMPONENT ─────────────────────────────────────────
+
+describe('W-COIN-3 coffers — the sixth component, and the dilution it must not cause', () => {
+  const OPENED_AT = 2;
+
+  /** The full home-front fixture, with a treasury record and a measurable army bolted on. */
+  const withCoffers = ({ coin = 600, lit = true, strength = 50, openedTick = OPENED_AT } = {}) => {
+    const args = fullHomeFrontArgs();
+    const item = args.snapshot.byId.get('actor');
+    return {
+      ...args,
+      deployment: { ...args.deployment, targetId: 'peer', currentEffectiveStrength: strength },
+      worldState: { ...args.worldState, ...(lit ? { simulationRules: { treasuryEnabled: true } } : {}) },
+      snapshot: {
+        ...args.snapshot,
+        byId: new Map([...args.snapshot.byId, ['actor', {
+          ...item,
+          settlement: {
+            ...item.settlement,
+            economicState: {
+              ...item.settlement.economicState,
+              treasury: { coin, openedTick, lastTick: 12, coinFlows: { taxed: 0, upkeep: 0, transferredIn: 0, transferredOut: 0, shortfall: 0 } },
+            },
+          },
+        }]]),
+      },
+    };
+  };
+
+  it('⛔ A DARK WORLD IS BYTE-IDENTICAL, treasury record present or not', () => {
+    // The record can EXIST on a dark world — a campaign lit, then darkened, keeps its
+    // ledgers — so the gate must be the flag and not the record's presence.
+    const bare = readWarHomeFront(fullHomeFrontArgs());
+    const darkWithLedger = readWarHomeFront(withCoffers({ lit: false }));
+    expect(Object.keys(darkWithLedger.components)).toEqual(['roads', 'stores', 'hands', 'institutions', 'markets']);
+    expect(darkWithLedger.components).not.toHaveProperty('coffers'); // anchored: the exact five-key equality directly above pins the whole component set, so an emptied read reds there rather than passing here.
+    expect(darkWithLedger.score01).toBe(bare.score01);
+    expect(JSON.stringify(darkWithLedger.receiptComponents)).toBe(JSON.stringify(bare.receiptComponents));
+  });
+
+  it('⛔⛔ LIT BUT UNOBSERVED IS ALSO BYTE-IDENTICAL — the §11.2 dilution pin', () => {
+    // THE HAZARD, STATED AND THEN PROVEN AGAINST: the aggregate is `sum / length` over the
+    // components, so a sixth component present at score 0 would pull the average DOWN and
+    // move a war-pressure read on every world where the treasury has nothing to say. Each
+    // of the three unobserved causes must therefore leave FIVE components, not six-at-zero.
+    const bare = readWarHomeFront(fullHomeFrontArgs());
+    const unobserved = {
+      'no army in the field': { ...withCoffers(), deployment: { ...fullHomeFrontArgs().deployment } },
+      'ledger younger than the window': withCoffers({ openedTick: 11 }),
+      'no ledger at all': (() => { const a = withCoffers(); const i = a.snapshot.byId.get('actor'); const { treasury, ...eco } = i.settlement.economicState; return { ...a, snapshot: { ...a.snapshot, byId: new Map([...a.snapshot.byId, ['actor', { ...i, settlement: { ...i.settlement, economicState: eco } }]]) } }; })(),
+    };
+    for (const [why, args] of Object.entries(unobserved)) {
+      const read = readWarHomeFront(args);
+      expect(Object.keys(read.components), why).toEqual(['roads', 'stores', 'hands', 'institutions', 'markets']);
+      expect(read.score01, `${why} moved the aggregate`).toBe(bare.score01);
+    }
+  });
+
+  it('LIT AND OBSERVED adds the sixth component, banded and attributed', () => {
+    const read = readWarHomeFront(withCoffers({ coin: 0 }));
+    expect(Object.keys(read.components)).toEqual(['roads', 'stores', 'hands', 'institutions', 'markets', 'coffers']);
+    expect(read.components.coffers.stateRead).toBe('economicState.treasury.coin');
+    expect(read.components.coffers.score01).toBe(1);              // a beggared crown, full pressure
+    expect(typeof read.components.coffers.band).toBe('string');
+    // …and the aggregate really did move, so the component is not decorative.
+    expect(read.score01).not.toBe(readWarHomeFront(fullHomeFrontArgs()).score01);
+  });
+
+  it('the score runs the RIGHT WAY — a full vault is less pressure than an empty one', () => {
+    // The fixture's army bands to `host` at 25 coin a tick, and the horizon is 12 ticks —
+    // so 300 coin is EXACTLY the horizon and already scores zero. Measured, not assumed:
+    // a first cut used 300 as the "middling" case and this arm caught it, which is the
+    // arm doing its job on a threshold that is easy to be one step wrong about.
+    const poor = readWarHomeFront(withCoffers({ coin: 0 })).components.coffers.score01;
+    const middling = readWarHomeFront(withCoffers({ coin: 150 })).components.coffers.score01;
+    const rich = readWarHomeFront(withCoffers({ coin: 100000 })).components.coffers.score01;
+    expect(poor).toBeGreaterThan(middling);
+    expect(middling).toBeGreaterThan(rich);
+    expect(rich).toBe(0);                                          // beyond the horizon: no pressure
+    expect(poor).toBe(1);
+    expect(middling).toBeCloseTo(0.5, 10);                         // 6 ticks of wages, half the horizon
+    // …and the horizon itself is where the pressure ENDS, not somewhere near it.
+    expect(readWarHomeFront(withCoffers({ coin: 300 })).components.coffers.score01).toBe(0);
+  });
+
+  it('the observation window is a THRESHOLD, and it is crossed exactly where it says', () => {
+    // A newly-opened treasury is empty because it is NEW. The read must refuse to speak
+    // until the ledger has history, and must speak the moment it does.
+    const at = (openedTick) => readWarHomeFront(withCoffers({ coin: 0, openedTick }));
+    expect(at(9).components).not.toHaveProperty('coffers');        // 12 − 9 = 3 < 4 // anchored: the sibling assertion below proves the SAME fixture one tick earlier DOES produce the component, so a read that had stopped producing it entirely reds there rather than passing here.
+    expect(at(8).components).toHaveProperty('coffers');            // 12 − 8 = 4 ≥ 4
+  });
+});

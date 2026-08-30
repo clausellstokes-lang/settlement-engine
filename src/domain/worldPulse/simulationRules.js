@@ -329,9 +329,22 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // because only `advanceTreasury` may open or move a ledger and only
   // `applyCoinDeltasToUpdates` may fold a cross-settlement delta onto one that is
   // already open. A second gate at the applicator would be a guard hiding behind a
-  // guard — it can reach no state the writer did not first create. W-COIN-2's
-  // warCosts / coalitionExpenditure READ doors join this entry when they land, and the
-  // certification row is AMENDED in the same act (A1.19).
+  // guard — it can reach no state the writer did not first create.
+  // ⭐ W-COIN-3 (2026-08-30) — THE TWO READ DOORS HAVE NOW LANDED, and the entry grows to
+  // THREE doors with a per-door necessity rationale apiece (A1.6), the certification row
+  // amended in the same act (A1.19):
+  //   (2) `warCosts.readWarHomeFront` — the `coffers` component's door, and
+  //   (3) `warCoalitionExpenditure.readCoalitionExpenditure` — its weighted twin.
+  // NEITHER IS REDUNDANT WITH THE WRITER DOOR, and the reason is a cell the writer gate
+  // cannot close: a campaign that was LIT, accumulated ledgers, and was then DARKENED
+  // still carries those records on its settlements. The writer stops moving them; nothing
+  // stops a READ from pricing war pressure off coin the owner has switched the layer off
+  // for. Each read therefore asks the flag by name before it looks at a vault at all.
+  // ⛔ AND EACH READ IS ADDITIONALLY GATED ON *OBSERVATION*, which is a separate clause
+  // and not a second flag: an unobserved coffers read is ABSENT from the component set
+  // rather than present at zero, because `readWarHomeFront` averages `sum / length` and a
+  // sixth component at zero would dilute the other five on every world the treasury has
+  // nothing to say about.
   // ⚠ THE INTERIM LAW, recorded because it governs when this key may be lit at all
   // (A1.21 / Q10, ODQ §763.2): lighting is the PRESET TABLE's, and the key ships LIT in
   // dramatic_campaign / living_realm / full_simulation ONLY AFTER W-COIN-2's band chip

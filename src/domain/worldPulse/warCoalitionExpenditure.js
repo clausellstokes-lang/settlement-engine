@@ -11,6 +11,8 @@
 
 import { clamp01 } from '../../kernel/math.js';
 import { readWarHomeFront, warHomeFrontBand } from './warCosts.js';
+// W-COIN-3 — the SAME coffers reading warCosts uses, and the same by-name flag door.
+import { coffersRead, treasuryActive } from './treasury.js';
 import { stablePart } from './stablePart.js';
 import { joinAnchorOf, warCoalitionActive } from './warCoalitionLedger.js';
 
@@ -22,6 +24,32 @@ export const COALITION_EXPENDITURE_TUNING = Object.freeze({
   FORCE_LOSS_W: 0.15,
   HOME_FRONT_W: 0.25,
   TERRITORY_W: 0.10,
+  POPULATION_FULL_AT: 0.12,
+});
+
+/**
+ * W-COIN-3 — THE SIBLING SIX-WEIGHT SET, used ONLY on a tick where the crown's purse is
+ * actually observed. The five-weight set above is FROZEN and untouched, which is what
+ * keeps every dark world — and every lit world whose ledger is younger than the
+ * observation window, and every party with no army in the field — reading its coalition
+ * pressure byte-identically to the day before this car landed.
+ *
+ * ⚠ A SIBLING SET RATHER THAN A SIXTH KEY ON THE EXISTING ONE, deliberately: adding
+ * `COFFERS_W` to the frozen object would leave the five old weights summing to 0.85
+ * whenever coffers was unobserved, silently deflating every unobserved read. Two closed
+ * sets, each summing to exactly 1, and a test that asserts both do.
+ *
+ * The five are shaved PROPORTIONALLY to make room, so the relative standing of population,
+ * attrition, force, home front and territory is unchanged — money is added to the picture
+ * without re-ranking what was already in it. TUNING-SIGNATURE-ADJACENT, every value.
+ */
+export const COALITION_EXPENDITURE_TUNING_WITH_COFFERS = Object.freeze({
+  POPULATION_W: 0.22,
+  ATTRITION_W: 0.21,
+  FORCE_LOSS_W: 0.13,
+  HOME_FRONT_W: 0.21,
+  TERRITORY_W: 0.08,
+  COFFERS_W: 0.15,
   POPULATION_FULL_AT: 0.12,
 });
 
@@ -205,13 +233,21 @@ export function readCoalitionExpenditure({
     : '';
   const territorialExposure01 = held.length || occupiedBy ? 1 : 0;
 
-  const T = COALITION_EXPENDITURE_TUNING;
+  // W-COIN-3 — THE COFFERS TERM, through the SAME reading warCosts uses (one question,
+  // one expression) and behind the same by-name flag door. Unobserved ⇒ the frozen
+  // five-weight set runs exactly as before, so this is additive-zero on every world the
+  // treasury has nothing true to say about.
+  const coffers = treasuryActive(state.simulationRules)
+    ? coffersRead(/** @type {Parameters<typeof coffersRead>[0]} */ (settlement), record, now)
+    : null;
+  const T = coffers?.observed ? COALITION_EXPENDITURE_TUNING_WITH_COFFERS : COALITION_EXPENDITURE_TUNING;
   const pressure01 = round4(clamp01(
     population01 * T.POPULATION_W
     + attrition01 * T.ATTRITION_W
     + forceLoss01 * T.FORCE_LOSS_W
     + homeFront.score01 * T.HOME_FRONT_W
-    + territorialExposure01 * T.TERRITORY_W,
+    + territorialExposure01 * T.TERRITORY_W
+    + (coffers?.observed ? coffers.score01 * COALITION_EXPENDITURE_TUNING_WITH_COFFERS.COFFERS_W : 0),
   ));
   const band = warHomeFrontBand(pressure01);
   const completeness = {
@@ -221,6 +257,16 @@ export function readCoalitionExpenditure({
     territory: true,
     storesHistorical: false,
     namedCast: false,
+    // FALSE until the ledger has history: a newly-opened empty treasury must never be
+    // read as a court that has been proven broke (the completeness idiom, applied to the
+    // one component whose emptiness has two completely different causes).
+    //
+    // ⛔ THE KEY IS ABSENT ENTIRELY ON A DARK WORLD, not present-and-false. `completeness`
+    // is part of this read's returned record, and A KEY IS A BYTE: writing `coffers: false`
+    // unconditionally would have changed the shape of every dark campaign's coalition read
+    // while every unit fixture stayed green. Present-and-false is the LIT world's honest
+    // "not yet"; absent is the dark world's "there is no such question here".
+    ...(coffers ? { coffers: coffers.observed } : {}),
   };
   const components = {
     population: { band: warHomeFrontBand(population01), source: 'deployment.deployedPopulation', complete: completeness.population },
@@ -228,6 +274,13 @@ export function readCoalitionExpenditure({
     force: { band: warHomeFrontBand(forceLoss01), source: 'deployment.currentEffectiveStrength', complete: completeness.force },
     homeFront: { band: homeFront.band, durationBand: homeFront.durationBand, source: 'warCosts.readWarHomeFront', complete: completeness.homeFront },
     territory: { band: warHomeFrontBand(territorialExposure01), heldSettlementIds: held, ...(occupiedBy ? { occupiedBy } : {}), source: 'worldState.occupations', complete: true },
+    // W-COIN-3 — present only when the purse is observed, for the same key-is-a-byte
+    // reason as the completeness row above. Unlike readWarHomeFront's aggregate this one
+    // is weighted rather than averaged, so an absent component does not dilute — but a
+    // present one on a dark world would still be a shape change nobody asked for.
+    ...(coffers?.observed ? {
+      coffers: { band: warHomeFrontBand(coffers.score01), source: 'economicState.treasury.coin', complete: true },
+    } : {}),
   };
   return {
     partyId: party,

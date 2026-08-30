@@ -15,6 +15,10 @@
 import { clamp01 } from '../../kernel/math.js';
 import { readRouteNetwork } from './routeNetworkLedger.js';
 import { storageCapacityMonths } from './foodStockpile.js';
+// W-COIN-3 — the coffers read and its flag door. `coffersRead` is the ONE reading of "how
+// long can this crown pay its army", shared with warCoalitionExpenditure so the two war
+// surfaces cannot score the same question from two independently-written expressions.
+import { coffersRead, treasuryActive } from './treasury.js';
 import {
   institutionStatusRef,
   readInstitutionStatusLedger,
@@ -459,6 +463,28 @@ export function readWarHomeFront({
   const lost = [...lostPartners.values()].sort((a, b) => codepoint(a.counterpartId, b.counterpartId));
   const marketScore = clamp01(lost.length * WAR_COSTS_TUNING.MARKET_LOSS_WEIGHT);
 
+  // ── COFFERS (W-COIN-3) — can the crown pay the army it has in the field? ────
+  //
+  // ⛔⛔ THE COMPONENT IS ABSENT UNLESS OBSERVED, AND THAT IS NOT FASTIDIOUSNESS. The
+  // aggregate below is `sum / length` over `Object.values(components)`, so a SIXTH
+  // component present at score 0 would pull the average down and move a war-pressure read
+  // on every world where the treasury has nothing to say. Absent-when-unobserved keeps the
+  // five-component reading BYTE-IDENTICAL on every dark world, on every lit world whose
+  // ledger is younger than the observation window, and on every actor with no army in the
+  // field. It is also exactly the discipline the five existing components already follow —
+  // "Every component is independently optional" — rather than a new rule invented here.
+  //
+  // ⛔ THE FLAG IS READ BY NAME AT THIS DOOR through the treasury layer's own `treasuryActive`,
+  // which is the ONE `treasuryEnabled === true` in the tree. THE PER-DOOR NECESSITY RATIONALE
+  // (A1.6): the writer door governs whether a ledger may EXIST; this door governs whether a
+  // ledger that exists may SPEAK into a war read. They are not redundant — a campaign that
+  // was lit, accumulated ledgers, and was then darkened would still carry the records, and
+  // without this gate their coin would keep pricing war pressure in a world whose owner has
+  // turned the layer off.
+  const coffers = treasuryActive(state.simulationRules)
+    ? coffersRead(/** @type {Parameters<typeof coffersRead>[0]} */ (settlement), record, throughTick)
+    : null;
+
   const components = {
     roads: {
       score01: roadScore,
@@ -489,6 +515,14 @@ export function readWarHomeFront({
       ...(lost[0]?.counterpartId ? { counterpartId: lost[0].counterpartId } : {}),
       ...(lost[0]?.good ? { good: lost[0].good } : {}),
     },
+    // The sixth component, present ONLY when the crown's purse has something true to say.
+    ...(coffers?.observed ? {
+      coffers: {
+        score01: coffers.score01,
+        band: warHomeFrontBand(coffers.score01),
+        stateRead: 'economicState.treasury.coin',
+      },
+    } : {}),
   };
   const componentScores = Object.values(components).map((component) => Number(component.score01) || 0);
   const base = componentScores.reduce((sum, value) => sum + value, 0) / componentScores.length;
