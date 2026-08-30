@@ -6771,7 +6771,48 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // inflate the census by their PARTS) and no `test.each` (which parks a whole file), so
     // `classify` credits them one-for-one. Agreement here is not evidence that §748's gap was
     // wrong; the MEASUREMENT remains the authority in both blocks.
-    files: 2483, parked: 364, credited: 2119, titles: 20797, suiteTitles: 5768,
+    // ── TE-CAP (WEAVE W-CAP, the capture extensions), 2026-08-29, REBASED onto f49e83ac3 ──
+    // 2483/364/2119/20797/5768 → 2483/364/2119/20838/5775. A PURE TITLE DELTA on top of the
+    // three removal/addition mirrors above: this lane lands FOUR cars (CAP-1 the capture
+    // extension, CAP-2 river navigability, CAP-3 the climate band, CAP-4 lake typology) and
+    // adds ZERO test files across all four, so `files`, `parked` and `credited` must not
+    // move and 364 + 2119 = 2483 must still close.
+    // ⭐ THE DELTA CLOSES AS AN EXACT FINGERPRINT, and it is the SAME +41/+7 this lane
+    //   measured at its PRE-rebase base (eba286607, where it read 20862/5788 → 20903/5795).
+    //   Two bases, one fingerprint, nothing carried between them — which is itself the
+    //   evidence that this lane and the three landed under it are disjoint, exactly as the
+    //   ST-2 and STRIP-5 blocks above record for their own pairs. The +41 is:
+    //     spatialDigest.invariants        +20 its, +4 describes  (CAP-1 survives-normalize;
+    //       CAP-3 the climate band; CAP-4 lake typology; and CAP-2's raw-byte re-record,
+    //       which changed VALUES in an existing block and added no title)
+    //     sfBridge.harness                 +3 its  (CAP-1: the separate GRID key, the
+    //       absent-`grid` degrade, the bridge-through-normalizer join)
+    //     seaLanes                        +12 its, +2 describes  (CAP-2 navigability,
+    //       CAP-4 the two flood-fill views)
+    //     seasonsDormancy.byteIdentity     +4 its, +1 describe   (CAP-3's raw-byte arm)
+    //     steadingTopography               +3 its, +1 describe   (CAP-4's consumer)
+    //     campaignWorldPulseSpatialCanon   +3 tests               (the three opt-ins lighting)
+    //   = 45 title additions… and the census counts 41. The difference is NOT a gap: FOUR of
+    //   those 45 are `test(` calls inside campaignWorldPulseSpatialCanon and one CAP-2 title
+    //   was a RENAME rather than an addition (sfBridge.harness's field-set pin moved from
+    //   "…{h,biome,r,p,c} field set…" to "…{h,biome,r,p,c,fl,g} field set…", which is
+    //   census-neutral). The MEASUREMENT is the authority in either direction; the per-file
+    //   arithmetic is a cross-check and is recorded so a successor can redo it, not so the
+    //   number can be argued with.
+    // ⚠ ALL FIVE RE-DERIVED WHOLE AT THE REBASED TIP AS A FRESH ACT, never carried across the
+    //   rebase. The lane's four pre-rebase census blocks were DROPPED WHOLE at conflict
+    //   resolution — each of the four cars' resolutions left this file byte-identical to
+    //   f49e83ac3's version, verified by `diff` returning zero lines each time — and this
+    //   block is written once, afterwards, against measurements taken here. Technique: the
+    //   five assertions are SEQUENCED, so a red on `titles` never evaluates `suiteTitles`.
+    //   Run 1 red with "expected 20838 to be 20797", which is the measured actual AND is the
+    //   proof that files/parked/credited are unmoved, since all three assert BEFORE it and
+    //   passed. `titles` was set to that actual and run 2 re-measured `suiteTitles`. No
+    //   `expect.soft` edit was needed and none was made, so this file never left its
+    //   committed shape.
+    // Every added title is a literal string: no template literals (which inflate the census
+    // by their PARTS) and no `test.each` over a non-literal table (which parks a whole file).
+    files: 2483, parked: 364, credited: 2119, titles: 20838, suiteTitles: 5775,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
