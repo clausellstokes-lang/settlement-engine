@@ -7218,6 +7218,46 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     expect(TEST_FILES.some(({ rel }) => rel === CENSUS_BASELINE_REL),
       'the census register is inside the counted estate — the tuple now counts itself')
       .toBe(false);
+    // ── THE REGISTER MUST STAY ONE MERGE HUNK (TE-EFF-1 car 2c) ───────────────────────
+    // ⛔ MEASURED, NOT FEARED. The whole point of the extraction is that a conflicted census
+    // is resolved by REGENERATION and never by composing figures from two trees — so the
+    // register was put through a synthetic three-way merge of two lanes' regenerations from
+    // one base. As written (provenance and all five figures on CONSECUTIVE lines) git cannot
+    // merge it: the run is one hunk, both sides conflict whole, and a lane must pick a side
+    // and re-measure. Then the same experiment was run with the figures held APART from the
+    // provenance by blank lines, and git happily auto-merged this:
+    //
+    //     files 2486 (THEIRS)  parked 364  credited 2122 (THEIRS)
+    //     titles 20908 (OURS)  suiteTitles 5779 (OURS)
+    //
+    // — a tuple composed from two different trees, which is the exact thing TE-QSTYLE's block
+    // above calls "each correct and jointly meaningless". ⭐⭐ AND THE CLOSURE ARM BELOW WOULD
+    // NOT HAVE CAUGHT IT: 364 + 2122 = 2486 still closes, so the composition would have
+    // reddened only on `titles`, and a lane repairing `titles` by hand would have LANDED
+    // `files` and `credited` measured on somebody else's tree.
+    //
+    // The adjacency is therefore load-bearing machinery, not formatting, and it is pinned
+    // here: exactly one line per key, from the first provenance key to the last figure, with
+    // nothing blank or interleaved between them. Reformat the register and this reds — which
+    // is the point, because the reformat is what would silently re-enable the composition.
+    const registerLines = readFileSync(CENSUS_BASELINE_PATH, 'utf8').split('\n');
+    const blockKeys = [...CENSUS_PROVENANCE_KEYS, ...CENSUS_FIGURE_KEYS];
+    const firstKeyLine = registerLines.findIndex((line) => line.includes(`"${blockKeys[0]}"`));
+    const lastKeyLine = registerLines.findIndex(
+      (line) => line.includes(`"${blockKeys[blockKeys.length - 1]}"`),
+    );
+    expect(firstKeyLine, `the register no longer spells "${blockKeys[0]}" on a line of its own`)
+      .toBeGreaterThan(-1);
+    expect(lastKeyLine, 'the register\'s key order changed — the merge-hunk guard is reading'
+      + ' a block that is no longer the provenance-plus-figures run')
+      .toBeGreaterThan(firstKeyLine);
+    expect(lastKeyLine - firstKeyLine + 1,
+      'the census register\'s provenance and figures are no longer ONE contiguous run of'
+      + ' lines. A blank line or an interleaved key lets git AUTO-MERGE two lanes\' tuples into'
+      + ' a composed one — measured: files/credited from one tree and titles/suiteTitles from'
+      + ' another, still closing arithmetically, so nothing below would catch it. Put the keys'
+      + ' back on consecutive lines.')
+      .toBe(blockKeys.length);
     expect(TEST_FILES.length, 'the estate\'s file count moved — re-measure, do not re-word')
       .toBe(CENSUS.files);
     expect(parked.length, 'the parked-file count moved from SP-C\'s measured 358 —'
