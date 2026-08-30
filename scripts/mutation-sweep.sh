@@ -97,6 +97,7 @@ MUTATED_FILES=(
   src/domain/townMap/siteGenesis.js
   src/domain/worldPulse/worldPulseFeedCuration.js
   src/lib/chronicle.js
+  src/kernel/prng.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -914,6 +915,18 @@ check_caught "corpus-coverage/chronicle summaryText projection deleted" src/lib/
 #     and after restoration.
 perl -0pi -e "s/'npc_bargain', 'npc_exploit'/'npc_exploit', 'npc_bargain'/" src/domain/worldPulse/worldPulseFeedCuration.js
 check_clear "corpus-coverage/summary impact set order swap stays clear" src/domain/worldPulse/worldPulseFeedCuration.js "npx vitest run tests/lint/newsVoiceContract.walker.test.js tests/lint/newsHeadlineContract.walker.test.js --no-file-parallelism" 16
+
+# 37. MAP-SURFACE TERMINAL CENSUS — settlement-map vocabulary returns OUTSIDE the
+#     allowlist (ODQ §725/§772, DESIGN_MAP_MODULE_SPLIT §11.4). The strip's promise is
+#     not "those files are gone" — it is that the vocabulary may only live inside the
+#     surfaces the rulings RETAINED. The plant writes the retired model builder's name
+#     into the seeded-PRNG kernel, which is tracked, clean, joins MUTATED_FILES in the
+#     same edit (so the E-A attribution control applies) and is deliberately NOT on the
+#     allowlist — it is engine substrate that has no business naming a map surface. The
+#     census must red on the FILE, not on a count, which is what makes it survive the
+#     WEAVE program adding realm-surface map words by design.
+perl -0pi -e "s/^ \* prng\.js — Seeded pseudo-random number generator wrapper\./ * prng.js — Seeded pseudo-random number generator wrapper. buildTownMapModel/m" src/kernel/prng.js
+check_caught "map-surface/vocabulary outside the allowlist" src/kernel/prng.js "npx vitest run tests/lint/settlementMapSurfaceAllowlist.walker.test.js"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
