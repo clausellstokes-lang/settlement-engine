@@ -8,7 +8,13 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐ PICKUP AT §749 (2026-08-30 ~00:15 CDT, ACCOUNT-SWITCH CHECKPOINT) — START HERE; supersedes §732's pickup.
+## ⭐⭐⭐⭐ PICKUP AT §751 (2026-08-29 ~21:30 CDT) — START HERE; supersedes §749's pickup below.
+
+**TE-STRIP-2 is MID-LANE in its worktree** (`…/5a850cca…/scratchpad/laneSTRIP2-tree`): cars 1–4 + the pin sweep are COMMITTED and proven (HEAD `4a0ba1d92`, tree clean; car 3 `669e50473` pre-severs · car 4 `9dc6057f6` lib deletions · pins `4a0ba1d92`); **CAR 5 IS SEVERED (§751.3)** — the StyleOverhaulPanel/styleOverhaul stack is now owner question **Q-STYLE** (chair recommends DELETE+DE-LIST as its own wave; it GATES STRIP-4's main act). Lane resume = ratchet drain → `git rebase --onto eba286607 1a2471990` → car 7 census re-freeze WHOLE at the rebased tip → ONE bare `check:tail` → chair-verify → CAS `claude/composite-r4` `eba286607` → tip → delete ref `laneWSEAM-prerebase-backup` (`c22cf17dc`).
+
+**Two parallel build lanes dispatched on `eba286607` (§751.5): TE-ST-2** (goods unification — the W-COIN critical path, §737.1) and **TE-CAP** (CAP-1..4). Both UNGATED, zero STRIP collision; they BUILD only and LAND after STRIP-2 (gates serialize). **The recon quartet is LANDED** (`docs/recon/R-STRIP5-CENSUS.md` · `R-STRIP6-CENSUS.md` · `R-MF-FLIPS.md` · `R-WEAVE-READY.md`): strip arc re-ordered **STRIP-2 → STRIP-5 → STRIP-4 (Q-STYLE + STRIP-5 gated) → Q-STYLE wave → STRIP-6 LAST**; the design registries left STRIP-4's charter (§751.2); MF-CH3 + MF-CG2 flips are execution-ready (R-MF-FLIPS); ten WEAVE cars buildable in parallel per R-WEAVE-READY's matrix. `docs/briefs/STRIP4-BRIEF.md` amended. Owner batch grows by **Q-STYLE**.
+
+## ⭐⭐⭐⭐ PICKUP AT §749 (2026-08-30 ~00:15 CDT, ACCOUNT-SWITCH CHECKPOINT) — superseded by §751 above; supersedes §732's pickup.
 
 **Build branch `claude/composite-r4` = `eba286607`** — STRIP-1 + STRIP-3 + the WEAVE seam wave are ALL landed, chair-verified, CASed (§747/§749.1). The legacy map is off the website; SEAM-0's silent false canon is repaired at the tip (the persisted-worlds posture call stays in the owner batch, §747.2).
 
