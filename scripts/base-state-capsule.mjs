@@ -33,7 +33,13 @@ import { SCOPE_FLOOR_RATIO } from './check-test-ratchet.mjs';
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const CAPSULE_PATH = 'docs/implementation/BASE_STATE.json';
 const RATCHET_BASELINE = 'scripts/.test-ratchet-baseline.json';
-const LIGHTING_WALKER = 'tests/lint/sovereigntyLightingContract.walker.test.js';
+// ⚠ THE LIGHTING CENSUS MOVED HOMES AT TE-EFF-1 CAR 2 (ODQ §778.2), AND THIS FILE WAS ONE OF ONLY
+// TWO CODE CONSUMERS THAT READ THE TUPLE. It used to espree-parse the `CENSUS` object literal out
+// of the walker; the walker now spreads a JSON register, so there are no numeric literals left to
+// find and `frozenNumbers` failed closed — which is the correct behaviour and is exactly how the
+// full gate caught it. The walker is still the MEASURING INSTRUMENT and still the thing that reds
+// when the estate moves; it is simply no longer where the frozen figures LIVE.
+const CENSUS_REGISTER = 'tests/lint/.lighting-census-baseline.json';
 const KIND_POOL_WALKER = 'tests/lint/kindPoolFloors.walker.test.js';
 const GUIDANCE_WALKER = 'tests/domain/guidanceRegistry.walker.test.js';
 const KILL_LIST = 'tests/design/deepCraftKillList.test.js';
@@ -73,7 +79,7 @@ const stamp = (read) => ({ kind: 'MEASURED', target: 'top', home: 'git', read })
 export const PROVENANCE = Object.freeze({
   stampedAt: stamp('git rev-parse --short=8 HEAD'),
   stampedDate: stamp('git show -s --format=%cs HEAD'),
-  lightingCensus: figure('PINNED', LIGHTING_WALKER, 'the CENSUS object literals'),
+  lightingCensus: figure('PINNED', CENSUS_REGISTER, 'the five figures, provenance-checked'),
   runtimeTests: figure('ARG', 'the landing test:ratchet receipt', '--runtime-tests=<N>'),
   frozenKnownFailures: figure('MEASURED', RATCHET_BASELINE, 'Object.keys(entries).length'),
   titleCensus: figure('PINNED', GUIDANCE_WALKER, 'TITLE_BASELINE'),
@@ -177,6 +183,37 @@ function frozenNumbers(row, ast, name, keys) {
       fail(row, `${name}.${key} is absent or not a numeric literal`);
     }
     return prop.value.value;
+  });
+}
+
+/**
+ * The five lighting-census figures, read from the register the walker asserts against.
+ *
+ * ⛔ PROVENANCE IS CHECKED HERE TOO, AND NOT ONLY IN THE WALKER. The capsule's whole contract is
+ * that a compiler may cite its figures as EXECUTED at the stamped sha — so stamping a tuple that
+ * names no measuring sha would launder an unattributed number into every packet compiled against
+ * the capsule. That is a worse failure than the missing figure this function replaced, so it fails
+ * closed on absent, non-string or blank provenance exactly as the walker does.
+ */
+function censusRegisterFigures(row, keys) {
+  const raw = readHome(row, CENSUS_REGISTER);
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch (error) {
+    fail(row, `the census register is not valid JSON: ${error.message}`);
+  }
+  for (const key of ['measuredAtSha', 'measuredBy', 'date', 'note']) {
+    if (typeof parsed[key] !== 'string' || parsed[key].trim() === '') {
+      fail(row, `the census register lacks provenance field '${key}' — a capsule must never stamp`
+        + ' a figure nobody can attribute to a tree');
+    }
+  }
+  return keys.map((key) => {
+    if (!Number.isInteger(parsed[key])) {
+      fail(row, `${key} is absent or not an integer in the census register`);
+    }
+    return parsed[key];
   });
 }
 
@@ -298,7 +335,7 @@ function ratchetPair(row, script, re, shell) {
 /** Every impure read, each fail-closed. Split from capsuleFrom so the pure assembler is testable. */
 export async function readAll(runtimeTests, io = {}) {
   const shell = io.shell ?? shellOut;
-  const lighting = frozenNumbers('lightingCensus', astOf('lightingCensus', LIGHTING_WALKER), 'CENSUS',
+  const lighting = censusRegisterFigures('lightingCensus',
     ['files', 'parked', 'credited', 'titles', 'suiteTitles']);
   const kill = frozenNumbers('killList', astOf('killList', KILL_LIST), 'CEILINGS',
     ['borderRadius', 'boxShadow', 'rgbaLiterals', 'tintedCallouts']);

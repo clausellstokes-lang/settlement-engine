@@ -40,7 +40,7 @@ const json = (rel) => JSON.parse(read(rel));
 const CAPSULE = 'docs/implementation/BASE_STATE.json';
 const STANDARD = 'docs/implementation/PACKET_STANDARD.md';
 const RATCHET_BASELINE = 'scripts/.test-ratchet-baseline.json';
-const LIGHTING = 'tests/lint/sovereigntyLightingContract.walker.test.js';
+const CENSUS_REGISTER = 'tests/lint/.lighting-census-baseline.json';
 const POOLS = 'tests/lint/kindPoolFloors.walker.test.js';
 
 /** Canned stdout for the rows that cross a process boundary. */
@@ -84,7 +84,6 @@ const numberNear = (source, re, label) => {
  * harness discriminates instead of always agreeing.
  */
 async function mismatchesAgainstHomes(readings) {
-  const lighting = read(LIGHTING);
   const pools = read(POOLS);
   const kills = read('tests/design/deepCraftKillList.test.js');
   const baseline = json(RATCHET_BASELINE);
@@ -100,18 +99,25 @@ async function mismatchesAgainstHomes(readings) {
     }).find((m) => m.ruleId === 'max-lines');
     return found ? Number(String(found.message).match(/\((\d+)\)/)[1]) : 1;
   };
-  // ⚠ THE CENSUS READ IS ANCHORED TO THE LIVE LINE ON PURPOSE, AND THE FIRST CUT OF IT WAS WRONG.
-  // A per-key `files: (\d+)` search matches the RETAINED ANCESTRY-PIN COMMENTS above the live
-  // constant — five of them, each a real prior tuple — so it read 2412/365/2047/19984/5638 off a
-  // history note and disagreed with the generator's espree read of the actual `CENSUS` object.
-  // The generator was right and this reader was wrong, which is the exact reason the two engines
-  // are kept different. Anchoring at line start excludes every `// … files: N` comment form.
-  const censusLine = lighting.match(
-    /^\s*files: (\d+), parked: (\d+), credited: (\d+), titles: (\d+), suiteTitles: (\d+),/m,
-  );
-  if (!censusLine) throw new Error('the battery could not independently read the live CENSUS line');
+  // ⚠ THE CENSUS MOVED HOMES AT TE-EFF-1 CAR 2 (ODQ §778.2) AND THIS READER MOVED WITH IT. The
+  // five figures are no longer a line in the walker; they are a JSON register the walker asserts
+  // against, so this battery reads the REGISTER — and it still reads it with a DIFFERENT ENGINE
+  // from the generator's, per this file's header rule that no expectation may be built out of the
+  // code under test. The generator does `JSON.parse` plus a provenance check; this does a
+  // line-anchored regex over the raw bytes.
+  //
+  // ⭐ THE HAZARD THE OLD READER CARRIED IS GONE, NOT MERELY MOVED, AND IT IS WORTH SAYING WHY.
+  // The previous cut of this read was WRONG: a per-key `files: (\d+)` search matched the RETAINED
+  // ANCESTRY-PIN COMMENTS above the live constant — five of them, each a real prior tuple — so it
+  // read 2412/365/2047/19984/5638 off a history note and disagreed with the generator. Line
+  // anchoring was the patch. The register has no history in it at all (the derivation history
+  // stayed in the walker, deliberately), so there is no comment for a per-key search to collide
+  // with; the anchor is kept anyway, because a `_doc` line could one day quote a figure.
+  const registerText = read(CENSUS_REGISTER);
+  const censusFigures = ['files', 'parked', 'credited', 'titles', 'suiteTitles'].map((key) =>
+    numberNear(registerText, new RegExp(`^\\s*"${key}": (\\d+)`, 'm'), `the register's ${key}`));
   const expected = {
-    lightingCensus: censusLine.slice(1, 6).join('/'),
+    lightingCensus: censusFigures.join('/'),
     killList: ['borderRadius', 'boxShadow', 'rgbaLiterals', 'tintedCallouts']
       .map((key) => numberNear(kills, new RegExp(`${key}: (\\d+),`), key)).join('/'),
     titleCensus: numberNear(read('tests/domain/guidanceRegistry.walker.test.js'),
