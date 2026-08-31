@@ -148,6 +148,12 @@ const EXEMPTIONS = {
   // premium content surface, not a dormant one — reported to the chair as a stop, and
   // this comment is where the next reader finds it.
   'src/components/map/TreatyPanel.jsx': 'content-visibility',
+  // DESK-4 (T11 car 8): the believed half of the perspective-standings view is
+  // BeliefDivergenceBand's question verbatim, two files away — may this viewer
+  // be shown GROUND-TRUTH-ADJACENT DM knowledge (a settlement's private belief
+  // model). Same spelling, same reason class, same non-convergence rationale as
+  // that row above.
+  'src/components/map/PerspectiveStandings.jsx': 'content-visibility',
   'src/components/map/useWorldMapCampaignModel.js': 'campaign-or-import-entitlement',
   'src/components/new/tabs/RumorsTab.jsx': 'content-visibility',
   // §805 split: the WarFaithTab row became two. WarTab spells the RumorsTab

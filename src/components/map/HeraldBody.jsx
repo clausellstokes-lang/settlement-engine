@@ -39,6 +39,7 @@ import HeraldForecast from './HeraldForecast.jsx';
 import HeraldAdjudication from './HeraldAdjudication.jsx';
 import RealmIntrigue from './RealmIntrigue.jsx';
 import BeliefDivergenceBand from './BeliefDivergenceBand.jsx';
+import PerspectiveStandings from './PerspectiveStandings.jsx';
 import RealmDocket from './RealmDocket.jsx';
 import AdvanceReport from './AdvanceReport.jsx';
 import TreatyPanel from './TreatyPanel.jsx';
@@ -233,6 +234,9 @@ export default function HeraldBody({
           <LiveWarStatus campaign={campaign} nameById={nameById} />
           <RealmIntrigue campaign={campaign} nameById={nameById} />
           <BeliefDivergenceBand campaign={campaign} nameById={nameById} />
+          {/* DESK-4 — one observer, its relations in plain words; the believed
+              half is DM-gated inside; the omniscient matrix stays refused. */}
+          <PerspectiveStandings campaign={campaign} nameById={nameById} />
           {showResolve && (
             <WarResolveSection
               campaign={campaign}

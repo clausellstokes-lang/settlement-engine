@@ -245,3 +245,72 @@ describe('DESK-5 door textures (the War door)', () => {
       .toMatch(/All 4 reports stand outside the current filter\./);
   });
 });
+
+// ── DESK-4 — perspective-anchored standings ("the world as X believes it") ───
+describe('PerspectiveStandings — one observer, plain words, DM-gated beliefs', () => {
+  const NAMES = new Map([['obs', 'Obsford'], ['foe', 'Foehold'], ['pal', 'Palmere']]);
+  const campaignFixture = () => ({
+    id: 'c9', settlementIds: ['obs', 'foe', 'pal'],
+    worldState: {
+      tick: 8,
+      deployments: {
+        obs: { targetId: 'foe', sinceTick: 2, casusReasons: [{ type: 'grievance', score: 1 }] },
+        pal: { targetId: 'foe', sinceTick: 3, joinLedger: [{ originAttackerId: 'obs', enemyId: 'foe', sourceCauseTypes: ['grievance'] }] },
+      },
+      spatialLedgers: {
+        beliefMaps: { obs: { seat: { foe: { strengthBand: 3, readiness: 0.8, allianceLabel: 'rival', faithLabel: null, confidence01: 0.6, lastUpdateTick: 4 } } } },
+      },
+    },
+  });
+
+  test('a premium DM sees the public war facts AND the believed half; terms carry explainers', async () => {
+    storeState = { auth: { tier: 'premium' }, isElevated: () => false };
+    const { default: PerspectiveStandings } = await import('../../src/components/map/PerspectiveStandings.jsx');
+    render(<PerspectiveStandings campaign={campaignFixture()} nameById={NAMES} />);
+    const block = screen.getByTestId('perspective-standings');
+    expect(block.textContent).toContain('The world as Obsford knows it');
+    // The coalition fact (public, from the war edges).
+    expect(block.textContent).toMatch(/Obsford campaigns beside Palmere/);
+    // The believed half (DM): strength/readiness words + confidence + staleness.
+    expect(block.textContent).toMatch(/believes Foehold formidable, in the field \(confident, word aging\)/);
+    // Term explainer rides the line (the churn-badge aria idiom).
+    expect(screen.getAllByLabelText(/DM knowledge/).length).toBeGreaterThan(0);
+  });
+
+  test('a free session keeps the public facts and NEVER the believed half (fail closed)', async () => {
+    storeState = { auth: { tier: 'free' }, isElevated: () => false };
+    const { default: PerspectiveStandings } = await import('../../src/components/map/PerspectiveStandings.jsx');
+    render(<PerspectiveStandings campaign={campaignFixture()} nameById={NAMES} />);
+    const block = screen.getByTestId('perspective-standings');
+    expect(block.textContent).toMatch(/campaigns beside Palmere/);
+    expect(block.textContent).not.toMatch(/believes/);
+  });
+
+  test('switching the observer re-anchors the page; a standing-less observer reads an honest nothing', async () => {
+    storeState = { auth: { tier: 'premium' }, isElevated: () => false };
+    const { default: PerspectiveStandings } = await import('../../src/components/map/PerspectiveStandings.jsx');
+    render(<PerspectiveStandings campaign={campaignFixture()} nameById={NAMES} />);
+    fireEvent.change(screen.getByLabelText('Pick the observing settlement'), { target: { value: 'foe' } });
+    const block = screen.getByTestId('perspective-standings');
+    expect(block.textContent).toContain('The world as Foehold knows it');
+    // Foehold's own standpoint: it is the besieged party — the same ledgers,
+    // re-anchored (and none of Obsford's belief lines leak across).
+    expect(block.textContent).toMatch(/Foehold is besieged by/);
+    expect(block.textContent).not.toMatch(/believes/);
+    cleanup();
+
+    // A realm at rest: settlements but no ledgers ⇒ the honest empty note,
+    // never a fabricated neutral matrix.
+    storeState = { auth: { tier: 'premium' }, isElevated: () => false };
+    render(<PerspectiveStandings campaign={{ id: 'c0', settlementIds: ['obs', 'pal'], worldState: { tick: 1 } }} nameById={NAMES} />);
+    expect(screen.getByTestId('perspective-standings').textContent)
+      .toMatch(/records no standing toward another settlement/);
+  });
+
+  test('no settlements ⇒ no standpoint ⇒ nothing renders (the door tests above stay quiet)', async () => {
+    storeState = { auth: { tier: 'premium' }, isElevated: () => false };
+    const { default: PerspectiveStandings } = await import('../../src/components/map/PerspectiveStandings.jsx');
+    const { container } = render(<PerspectiveStandings campaign={{ id: 'c1', name: 'Realm' }} nameById={NAMES} />);
+    expect(container.firstChild).toBeNull();
+  });
+});
