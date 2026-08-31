@@ -191,6 +191,32 @@ export const GENESIS_TIES_TARGET_SCHEMA = 12;
  *  Measured: predecessorSame 1413, new/decreased/gone/increased ALL ZERO. */
 export const DEAD_DEPENDENCY_TARGET_SCHEMA = 13;
 
+/** The schema-14 leaf target — THE WIDENED CLAUSE 4 (E-T2-7, lane T9).
+ *
+ *  ⭐ WHAT MOVED, AND WHY IT NEEDED A RUNG. Clause 4 of the virtual-dormant-writer
+ *  door retires a row whose flag has stopped being dark. It read only a WINDOW of the
+ *  flag manifest — the slice between the `DEFAULT_SIMULATION_RULES` and
+ *  `ENGINE_GATED_VIRTUAL_RULE_KEYS` declarations — and the entire preset table sits
+ *  beyond it: 41 of the manifest's 52 `<x>Enabled: true` lights are outside the window,
+ *  11 inside. A preset override spread is how every virtual flag in this estate is
+ *  actually lit, so the clause could not fire for the one path it was written to watch.
+ *  It is now 4a (the defaults, byte-unchanged) plus 4b, which reads the WHOLE executed
+ *  manifest, leaving no boundary to drift.
+ *
+ *  ⭐ WHY A RUNG FOR A CHANGE THAT CONVICTS NOTHING NEW TODAY. The widening lands in
+ *  `check-observed-shape-readers.mjs`, a governed detector source, and the shrink-only
+ *  `--write` refuses a moved detector BY DESIGN — frozen numbers taken under one
+ *  detector do not mean the same thing under another even when they are numerically
+ *  equal. That refusal is the instrument working, and a rung is the only lawful way
+ *  past it.
+ *
+ *  ⛔ AND THE RECONCILIATION MUST BE EMPTY, which is this rung's whole claim. 4b
+ *  convicts only a flag lit `true` OUTSIDE the defaults, and every flag carrying a
+ *  dormant-writer row is dark in the live manifest — the clause is armed and silent.
+ *  So any moved row would mean the widening was not inert and the mint must STOP
+ *  rather than bank it. */
+export const PRESET_LIGHT_TARGET_SCHEMA = 14;
+
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
  *
@@ -338,6 +364,26 @@ export const DEAD_DEPENDENCY_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-13 → 14 delta: THREE instrument paths and nothing else.
+ *
+ * The subject of this rung IS one of the instrument files, which is what makes its
+ * delta smaller than every rung since 10: there is no separate subject to declare.
+ *   - `check-observed-shape-readers.mjs` — clause 4b itself, plus the live-validator
+ *     binding moving from `validateSchema13Baseline` to `validateSchema14Baseline`;
+ *   - `observed-shape-baseline.mjs` — the 13 → 14 bump, the retired-13 constant and
+ *     its re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⛔ NO package file is in this delta and none may be: lane T9 changed no dependency
+ * and no script, and any `package.json` byte is itself a mint trigger.
+ */
+export const PRESET_LIGHT_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -360,6 +406,8 @@ const GENESIS_TIES_SCANNER_TRANSITION_POLICY =
   'schema-11-to-12-exact-scanner-transition-v1';
 const DEAD_DEPENDENCY_SCANNER_TRANSITION_POLICY =
   'schema-12-to-13-exact-scanner-transition-v1';
+const PRESET_LIGHT_SCANNER_TRANSITION_POLICY =
+  'schema-13-to-14-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -391,6 +439,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [TREASURY_ADMISSION_TARGET_SCHEMA]: PROSE_REGEN_TARGET_SCHEMA,
   [GENESIS_TIES_TARGET_SCHEMA]: TREASURY_ADMISSION_TARGET_SCHEMA,
   [DEAD_DEPENDENCY_TARGET_SCHEMA]: GENESIS_TIES_TARGET_SCHEMA,
+  [PRESET_LIGHT_TARGET_SCHEMA]: DEAD_DEPENDENCY_TARGET_SCHEMA,
 });
 
 /**
@@ -822,6 +871,18 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // subject tree is `src/**` and this rung touches only the two package files at the
     // root, so the unscanned digest cannot move and the report's `unscannedMovement`
     // is null. The permission is carried because the class is lawful, not exercised.
+    reviewableUnscannedMovement: true,
+  })],
+  [PRESET_LIGHT_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PRESET_LIGHT_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PRESET_LIGHT_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. MEASURED at this mint: nothing moved. `unscannedInputDigestOf` is
+    // the SUBJECT tree minus the SCAN tree, and this rung touches only three files
+    // under `scripts/`, which are not subject paths at all, so the digest cannot move
+    // and the report's `unscannedMovement` is null. The permission is carried because
+    // the class is lawful, not because this rung exercises it.
     reviewableUnscannedMovement: true,
   })],
 ]);
@@ -1864,13 +1925,15 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : DEAD_DEPENDENCY_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PRESET_LIGHT_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
     PROSE_REGEN_TARGET_SCHEMA, TREASURY_ADMISSION_TARGET_SCHEMA,
-    GENESIS_TIES_TARGET_SCHEMA, DEAD_DEPENDENCY_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${DEAD_DEPENDENCY_TARGET_SCHEMA} (live dead-dependency leaf),`
+    GENESIS_TIES_TARGET_SCHEMA, DEAD_DEPENDENCY_TARGET_SCHEMA,
+    PRESET_LIGHT_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${PRESET_LIGHT_TARGET_SCHEMA} (live preset-light leaf),`
+      + ` ${DEAD_DEPENDENCY_TARGET_SCHEMA} (retired dead-dependency leaf),`
       + ` ${GENESIS_TIES_TARGET_SCHEMA} (retired genesis-ties leaf),`
       + ` ${TREASURY_ADMISSION_TARGET_SCHEMA} (retired treasury-admission leaf),`
       + ` ${PROSE_REGEN_TARGET_SCHEMA} (retired prose-regen leaf),`

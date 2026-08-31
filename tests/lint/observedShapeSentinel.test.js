@@ -60,6 +60,7 @@ import {
   validateSchema11Baseline,
   validateSchema12Baseline,
   validateSchema13Baseline,
+  validateSchema14Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -1326,7 +1327,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // to the dropped `three` production dependency. package.json and package-lock.json are
     // deliberate detector inputs, so a dead-dep removal needs a migration — and its
     // reconciliation must be, and measurably is, EMPTY.
-    expect(BASELINE_SCHEMA).toBe(13);
+    expect(BASELINE_SCHEMA).toBe(14);
     expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
     expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
@@ -1341,7 +1342,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const stats = leafStats();
     const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
     expect(live.schema).toBe(BASELINE_SCHEMA);
-    expect(validateSchema13Baseline(live)).toBe(live);
+    expect(validateSchema14Baseline(live)).toBe(live);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1351,19 +1352,19 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     delete numeric.digests.rowTags;
     const unfiltered = { ...numeric, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema4Baseline(unfiltered)).toBe(unfiltered);
-    expect(() => validateSchema13Baseline(unfiltered)).toThrow();
+    expect(() => validateSchema14Baseline(unfiltered)).toThrow();
 
     const filtered = { ...numeric, schema: RETIRED_FILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema5Baseline(filtered)).toBe(filtered);
-    expect(() => validateSchema13Baseline(filtered)).toThrow();
+    expect(() => validateSchema14Baseline(filtered)).toThrow();
 
     const surface = { ...numeric, schema: RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema6Baseline(surface)).toBe(surface);
-    expect(() => validateSchema13Baseline(surface)).toThrow(/noncanonical fields/);
+    expect(() => validateSchema14Baseline(surface)).toThrow(/noncanonical fields/);
 
     const retiredBanked = { ...structuredClone(live), schema: RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA };
     expect(validateSchema7Baseline(retiredBanked)).toBe(retiredBanked);
-    expect(() => validateSchema13Baseline(retiredBanked)).toThrow();
+    expect(() => validateSchema14Baseline(retiredBanked)).toThrow();
 
     // ⭐ THE RETIRED-8 RUNG, MIRRORING THE SCHEMA-7 PAIR ABOVE. Schema 8's
     // validator must stay executable — the committed schema-8 genesis is the
@@ -1390,6 +1391,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // confused for one another now that 10 AND 11 are both retired.
     expect(() => validateSchema12Baseline(retiredEpochDark)).toThrow(/is not schema 12/);
     expect(() => validateSchema13Baseline(retiredEpochDark)).toThrow(/is not schema 13/);
+    expect(() => validateSchema14Baseline(retiredEpochDark)).toThrow(/is not schema 14/);
     expect(() => validateSchema9Baseline(live)).toThrow(/is not schema 9/);
 
     const missing = structuredClone(live);
@@ -1473,7 +1475,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(13);
+    expect(BASELINE_SCHEMA).toBe(14);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

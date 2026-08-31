@@ -95,7 +95,7 @@ import {
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema13Baseline,
+  validateSchema14Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -1237,7 +1237,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema13Baseline(baseline);
+  validateSchema14Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -1696,10 +1696,22 @@ function executedSourceOf(source) {
  *      the row claiming a gate no reader can find;
  *   3. the flag is still declared in ENGINE_GATED_VIRTUAL_RULE_KEYS — the estate's own
  *      manifest of keys that are gated but appear in NO defaults and NO preset;
- *   4. the flag is still absent from DEFAULT_SIMULATION_RULES. If a preset ever lights
- *      it, the corpus WILL observe the write and the read must be judged normally — the
- *      row has to die at that moment, not outlive its own premise.
+ *   4. the flag is still UNLIT — absent from DEFAULT_SIMULATION_RULES (4a) and lit
+ *      `true` nowhere else in the manifest (4b, the preset override spreads). The
+ *      moment either holds, the corpus WILL observe the write and the read must be
+ *      judged normally: the row has to die then, not outlive its own premise.
  * Any failure THROWS, naming the row and the clause. An unverifiable row is a lie.
+ *
+ * ⚠ 4b EXISTS BECAUSE 4a's WINDOW WAS THE WHOLE OF CLAUSE 4 AND COULD NOT SEE THE
+ * NORMAL LIGHTING PATH (E-T2-7, cured by lane T9). 4a slices the manifest between the
+ * `DEFAULT_SIMULATION_RULES` and `ENGINE_GATED_VIRTUAL_RULE_KEYS` declarations, and the
+ * ENTIRE preset table sits beyond that slice — measured on this manifest, 41 of the 52
+ * `<x>Enabled: true` lights in the file are outside the window and only 11 inside it.
+ * Since a preset override spread is how every virtual flag in this estate is actually
+ * lit (WAVES, ONE_REGEN, the eight war sub-flags), the clause could not fire for the
+ * path it was written to watch. 4b therefore reads the WHOLE executed manifest rather
+ * than a window: there is no boundary left to drift, and moving the preset table cannot
+ * re-open the hole.
  */
 export function assertVirtualDormantWriterEvidence(
   entries = VIRTUAL_DORMANT_WRITERS,
@@ -1747,8 +1759,29 @@ export function assertVirtualDormantWriterEvidence(
     );
     if (new RegExp(`(?<![.\\w])${escapeForRegExp(entry.flag)}\\s*:`).test(executedSourceOf(defaults))) {
       throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} is UNVERIFIABLE (clause 4):`
-        + ` ${entry.flag} is now declared in DEFAULT_SIMULATION_RULES, so the corpus DOES light it and this`
-        + ' read must be judged normally. Retire the row rather than outliving its own premise.');
+        + ` [4a, the defaults] ${entry.flag} is now declared in DEFAULT_SIMULATION_RULES, so the corpus DOES light it`
+        + ' and this read must be judged normally. Retire the row rather than outliving its own premise.');
+    }
+    // 4b — THE PRESET LIGHT, read over the WHOLE executed manifest rather than a window,
+    // because the window above cannot see the preset table at all (see the header). 4a
+    // has already thrown for anything in the defaults, so in practice this clause reports
+    // exactly what its message says: a light somewhere outside them.
+    //
+    // WHY `: true` AND NOT ANY DECLARATION. The corpus lights on `<x>Enabled: true`, so a
+    // preset that declares the flag FALSE leaves the write unobservable and this row's
+    // premise intact — convicting it here would be this instrument answering a question
+    // that is not its own. That case is NOT unguarded: a preset declaration of either
+    // polarity ends the key's VIRTUALITY, tests/lint/engineGatedRuleKeys.walker.test.js
+    // convicts it by name ("declared in DEFAULT_SIMULATION_RULES or a preset spread, so it
+    // is no longer VIRTUAL"), and the key's consequent removal from
+    // ENGINE_GATED_VIRTUAL_RULE_KEYS trips clause 3 above. Clause 4 owns the LIGHTING
+    // question; clause 3 owns the VIRTUALITY question, and the two meet at that removal.
+    if (new RegExp(`(?<![.\\w])${escapeForRegExp(entry.flag)}\\s*:\\s*true`).test(executedSourceOf(manifestSource))) {
+      throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} is UNVERIFIABLE (clause 4):`
+        + ` [4b, a preset light] ${entry.flag} is now lit \`true\` in ${VIRTUAL_FLAG_MANIFEST} outside the defaults —`
+        + ' a preset override spread, which is how every virtual flag in this estate is actually lit. The corpus DOES'
+        + ' observe the write from that moment and this read must be judged normally. Retire the row rather than'
+        + ' outliving its own premise.');
     }
     evidence.push({ identity: entry.identity, writer: entry.writer, flag: entry.flag, spellings });
   }
@@ -2558,7 +2591,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema13Baseline,
+    validateBaseline: validateSchema14Baseline,
     assertExplainedWriterRowTags,
     validateBaselineHistory,
     committedInputManifestsFor,

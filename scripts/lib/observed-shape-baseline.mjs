@@ -7,21 +7,47 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **13**: schema 12's tagged numeric heuristic-leaf envelope
- * re-governed to a DEPENDENCY THAT LEFT, and it is the first rung whose delta is
- * driven by neither the detector nor the inventory. `three@0.185.1` was a
- * PRODUCTION dependency with zero importers under every module syntax — the
- * portrait 3D view layer it once served is gone — so E-STRIP4-4 (chair order
- * TE-MINT-1, ODQ §783.3/§788.2(d)/§821) drops it. `package.json` and
- * `package-lock.json` are DELIBERATE detector sources here, because a dependency
- * bump can move the parser the scan runs on, and the shrink-only `--write`
- * refuses them by design. Nothing the scanner FINDS may move at such a rung, and
- * nothing did: the reconciliation is 1,413 rows carried unchanged and zero
- * new/decreased/gone/increased. The identity grammar, topology inventory,
- * envelope law and the nine-identity bank are all schema 9's, untouched.
+ * `BASELINE_SCHEMA` is **14**: schema 13's tagged numeric heuristic-leaf envelope
+ * re-governed to a DETECTOR THAT CAN NOW SEE THE PATH IT WAS WRITTEN TO WATCH.
+ * Like 11, this rung binds a repaired detector; unlike 11, the repair is a
+ * WIDENING of an existing clause rather than a new mechanism, and it adds no
+ * identity, no exemption and no filter.
  *
- * `RETIRED_GENESIS_TIES_BASELINE_SCHEMA` is **12**: schema 13's predecessor,
+ * WHAT WAS BROKEN (E-T2-7, measured by lane T9). Clause 4 of the virtual-dormant
+ * writer door retires a row whose flag has stopped being dark — "the corpus DOES
+ * light it now, so judge the read normally". It read a WINDOW of the flag
+ * manifest sliced between the `DEFAULT_SIMULATION_RULES` and
+ * `ENGINE_GATED_VIRTUAL_RULE_KEYS` declarations, and the entire preset table sits
+ * beyond that slice: of the 52 `<x>Enabled: true` lights in the manifest, 41 are
+ * outside the window and 11 inside. Since a preset override spread is how every
+ * virtual flag in this estate is actually lit, the clause could not fire for its
+ * own subject. Clause 4 is now 4a (the defaults, unchanged) plus 4b, which reads
+ * the WHOLE executed manifest — so there is no boundary left to drift and moving
+ * the preset table cannot re-open the hole.
+ *
+ * ⭐ NOTHING THE SCANNER FINDS MOVES AT THIS RUNG, and that is the point rather
+ * than a happy accident: 4b convicts only a flag lit `true` outside the defaults,
+ * and every flag carrying a dormant-writer row is dark in the live manifest, so
+ * the clause is armed and silent. The rung exists because the detector's BYTES
+ * moved, which is exactly the case the shrink-only `--write` refuses by design —
+ * frozen numbers taken under one detector do not mean the same thing under
+ * another, even when they happen to be equal. The identity grammar, topology
+ * inventory, envelope law and the nine-identity bank are all schema 9's,
+ * untouched.
+ *
+ * `RETIRED_DEAD_DEPENDENCY_BASELINE_SCHEMA` is **13**: schema 14's predecessor,
  * frozen. Never redefined, never deleted.
+ *
+ * `RETIRED_GENESIS_TIES_BASELINE_SCHEMA` is **12**: schema 13's tagged numeric
+ * heuristic-leaf envelope re-governed to a DEPENDENCY THAT LEFT, the first rung
+ * whose delta was driven by neither the detector nor the inventory.
+ * `three@0.185.1` was a PRODUCTION dependency with zero importers under every
+ * module syntax — the portrait 3D view layer it once served is gone — so
+ * E-STRIP4-4 (chair order TE-MINT-1, ODQ §783.3/§788.2(d)/§821) dropped it.
+ * `package.json` and `package-lock.json` are DELIBERATE detector sources there,
+ * because a dependency bump can move the parser the scan runs on. Its
+ * reconciliation was 1,413 rows carried unchanged and zero
+ * new/decreased/gone/increased.
  *
  * `RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA` is **11**: schema 12's tagged
  * numeric heuristic-leaf envelope
@@ -204,7 +230,14 @@ export const RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA = 11;
  *  against BASELINE_SCHEMA, and this constant exists so a schema-12 PREDECESSOR is
  *  still validated as schema 12 after the live number moves past it. */
 export const RETIRED_GENESIS_TIES_BASELINE_SCHEMA = 12;
-export const BASELINE_SCHEMA = 13;
+/** The RETIRED dead-dependency definition — schema 14's predecessor. Same tagged
+ *  topology envelope, the same nine-identity bank and the SAME identities; schema 14
+ *  re-governs it to the WIDENED clause 4 of the virtual-dormant-writer door (E-T2-7)
+ *  and, like 13, moves no row at all. Never redefined, never deleted — a live baseline
+ *  is validated against BASELINE_SCHEMA, and this constant exists so a schema-13
+ *  PREDECESSOR is still validated as schema 13 after the live number moves past it. */
+export const RETIRED_DEAD_DEPENDENCY_BASELINE_SCHEMA = 13;
+export const BASELINE_SCHEMA = 14;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -689,10 +722,23 @@ export function validateSchema12Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 12's tagged envelope re-governed to the dropped
+ *  `three` production dependency. Re-bound to its own LITERAL now that the authority
+ *  has moved to 14, exactly as its predecessors were: a retired validator that reads
+ *  `BASELINE_SCHEMA` stops validating the rung it is named after the moment the
+ *  number moves. */
+export function validateSchema13Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_DEAD_DEPENDENCY_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema13Baseline(baseline) {
+export function validateSchema14Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
