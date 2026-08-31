@@ -20,6 +20,7 @@
 
 import { requiredManifestKeys, PERSON_FACET_KEYS } from './groundingManifest.js';
 import { nameOf } from '../rulingPower.js';
+import { derivedAlignment } from '../npc/characterConsumers.js';
 
 /**
  * Structural slices of the store/world shapes THIS module reads (typed narrowly so the
@@ -74,13 +75,26 @@ function resolveVoice(entityClass, entity, settlement) {
 
 /** The person facets (NPC only) — alignment / temperament / role / goal from the NPC's own
  *  fields + live sim state (never another NPC's). Always emits all four keys (parity).
- *  @param {EntityLite} entity @param {NpcStateLite|null|undefined} npcState @param {string} entityId */
-function personFacets(entity, npcState, entityId) {
+ *
+ *  ⭐ W-LIVES L5 — THE PERSONA RE-ROUTE, AND IT SITS AT THE HEAD OF THE CHAIN.
+ *  R7 makes alignment a READING of the soul, never a stored fact, so the derived read
+ *  is consulted FIRST and the existing chain is its fallback. It is consulted through
+ *  `derivedAlignment`, which returns `claim:false` — and therefore `null` here —
+ *  whenever the lens carries no per-axis plane column, which is every caller today.
+ *  A `??` chain whose head is null is the chain without it, so this moves no byte.
+ *
+ *  ⚠ AND WHY IT MUST BE `claim`, NOT A WORD: a reading with nothing to read returns
+ *  no word at all. Had it returned `true_neutral` for "I cannot see", every NPC in
+ *  every campaign would have re-banded to the middle the day a lens was bound.
+ *  @param {EntityLite} entity @param {NpcStateLite|null|undefined} npcState @param {string} entityId
+ *  @param {import('../npc/characterConsumers.js').CharacterLens|null} [lens] */
+function personFacets(entity, npcState, entityId, lens) {
   const p = entity?.personality || {};
   const goal = entity?.goal;
+  const derived = derivedAlignment({ npc: entity, lens });
   /** @type {Record<string, unknown>} */
   const values = {
-    alignment: entity?.alignment ?? npcState?.alignment ?? p.alignment ?? null,
+    alignment: derived.word ?? entity?.alignment ?? npcState?.alignment ?? p.alignment ?? null,
     temperament: p.dominant ?? entity?.temperament ?? p.temperament ?? null,
     role: entity?.role ?? npcState?.role ?? null,
     goal: (typeof goal === 'object' && goal ? goal.short : undefined) ?? npcState?.shortGoal ?? goal ?? null,
@@ -97,13 +111,14 @@ function personFacets(entity, npcState, entityId) {
  *   settlement?: HomeLite|null, worldState?: WorldStateLite|null, settlements?: unknown[],
  *   tick?: number, askerId?: string|null, personaLabel?: string,
  *   deps?: { hegemonyFear?: Function, season?: Function, reframe?: Function },
+ *   lens?: import('../npc/characterConsumers.js').CharacterLens|null,
  * }} [args]
  * @returns {{ entityId: string, entityClass: string, voice: string, personaLabel: string,
  *            facets: Array<{ id: string, manifestKey: string, label?: string, data: unknown }> }}
  */
 export function buildPersonaSlice({
   entity, entityClass, settlement = null, worldState = null, settlements = [],
-  tick = 0, askerId = null, personaLabel = '', deps = {},
+  tick = 0, askerId = null, personaLabel = '', deps = {}, lens = null,
 } = {}) {
   const e = /** @type {EntityLite & HomeLite} */ (entity && typeof entity === 'object' ? entity : {});
   const cls = entityClass === 'settlement' || entityClass === 'faction' ? entityClass : 'npc';
@@ -117,7 +132,7 @@ export function buildPersonaSlice({
   const facets = [];
 
   // person facets (NPC only)
-  if (cls === 'npc') facets.push(...personFacets(e, npcState, entityId));
+  if (cls === 'npc') facets.push(...personFacets(e, npcState, entityId, lens));
 
   // (a) faction / archetype / stance — the entity's own affiliation + the home roster
   //

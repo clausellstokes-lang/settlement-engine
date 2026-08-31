@@ -15,6 +15,9 @@
  *   there being one function, not of two functions agreeing. Byte-identity is
  *   proved by REFERENCE where the design promises it.
  *
+ *   ⚠ AMENDED BY CAR L5: `targetedFootholds` KEEPS TRUE SIGHT, and the proof is
+ *   now the PROPERTY executed rather than a substring ban that L5 walked past —
+ *   see the re-pointed test below. The original sentence read:
  *   `targetedFootholds` KEEPS TRUE SIGHT, and the proof is that this car did not
  *   touch it: it reads `npc.personality` and never `npc.character`, so it has no
  *   code path a chart could disturb. Pinned so the day L5 re-points it, somebody
@@ -46,7 +49,7 @@ import {
 } from '../../../src/domain/npc/knownCharacter.js';
 import { AXIS_LEVELS, SPECTRUM_HALF_SPAN, effectiveCharacter } from '../../../src/domain/npc/characterDrift.js';
 import { npcCredibilityWeightOf } from '../../../src/domain/worldPulse/npcCredibility.js';
-import { targetedFootholds } from '../../../src/domain/worldPulse/clergyTraitPlane.js';
+import { npcTraitPlane, targetedFootholds } from '../../../src/domain/worldPulse/clergyTraitPlane.js';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 const KEY = 'save.town:npc_1';
@@ -212,22 +215,43 @@ describe('⭐⭐ THE SIGHT RULING — gods know souls, men know reputations', ()
     }
   });
 
-  test('⭐ targetedFootholds KEEPS TRUE SIGHT because it reads no chart at all', () => {
+  test('⭐ targetedFootholds KEEPS TRUE SIGHT — re-pointed by car L5, and still true', () => {
     const source = readFileSync(join(REPO_ROOT, 'src/domain/worldPulse/clergyTraitPlane.js'), 'utf8');
     // Asserted LIVE first: the file is pinned to hold the function before anything
     // is excluded from it.
     expect(source).toContain('export function targetedFootholds');
     expect(source).toContain('npcTraitPlane');
-    // The deity consumer reads `npc.personality`, never `npc.character`. It is
-    // therefore byte-unchanged by this car BY CONSTRUCTION — there is no path here
-    // a chart could disturb. The day car L5 re-points it at `effectiveCharacter`,
-    // these three lines red and somebody has to mean it.
+    // ⭐⭐ L4 WROTE THIS AS A SUBSTRING BAN AND CAR L5 WALKED STRAIGHT PAST IT.
+    // The ban named three spellings — `effectiveCharacter`, `knownCharacter`,
+    // `characterDrift` — and the re-route arrived through a FOURTH module,
+    // `characterConsumers`, so the guard that existed to make somebody MEAN the
+    // re-point stayed green while the re-point happened. That is the same lesson
+    // L4 itself minted one car earlier when a substring ban on `simulationRules`
+    // had to become a dereference ban: a ban over a hand-listed vocabulary guards
+    // the list, never the property.
+    //
+    // So the guard is REWRITTEN AS THE PROPERTY IT MEANT. The claim was never "this
+    // file imports nothing" — it was "a DEITY reads the TRUE chart". That is now
+    // checkable directly and positively: the file may reach the chart, and it must
+    // reach it through the seam that returns `effectiveCharacter`'s own output,
+    // never through the reputation read.
+    expect(source).toContain('effectiveDescriptors');
     // anchored: the file is pinned above to hold targetedFootholds, so it is live
-    expect(source).not.toContain('effectiveCharacter');
+    expect(source).not.toContain('knownCharacterOf');
     // anchored: the file is pinned above to hold targetedFootholds, so it is live
-    expect(source).not.toContain('knownCharacter');
-    // anchored: the file is pinned above to hold targetedFootholds, so it is live
-    expect(source).not.toContain('characterDrift');
+    expect(source).not.toContain('characterAsSeenBy');
+    // AND THE PROPERTY, EXECUTED rather than grepped: the same minister read with a
+    // lens whose drift resolver is live moves — so the deity's sight follows the
+    // TRUE chart, which is what "gods know souls" has to mean arithmetically.
+    const minister = {
+      id: 'npc_1', name: 'Alda', importance: 'pillar', linkedFactionIds: ['temple'],
+      personality: { dominant: 'patient' },
+      character: { axes: { MERCY: { pole: 'virtue', level: 'defining' } } },
+    };
+    const plane = (/** @type {any} */ lens) => npcTraitPlane(/** @type {any} */ (minister), lens);
+    const project = () => ({ word: 'cruel', displaces: ['compassionate', 'merciful'] });
+    expect(plane(null).e).toBeLessThanOrEqual(0);
+    expect(plane({ project, driftOf: () => ({ MERCY: { offset: -6, updatedTick: 1 } }) }).e).toBeGreaterThan(0);
   });
 
   test('and it still runs, untouched, returning its own shape', () => {

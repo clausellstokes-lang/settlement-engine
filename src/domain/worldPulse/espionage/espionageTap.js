@@ -51,7 +51,8 @@
  */
 import { decayedConfidence } from '../beliefMap.js';
 import { lieWillingness } from '../disinformationPlant.js';
-import { riskAppetiteOf } from '../npcLadderGoals.js';
+import { riskAppetiteOf, traitsOf } from '../npcLadderGoals.js';
+import { effectiveDescriptors } from '../../npc/characterConsumers.js';
 import { ROADS_TUNING, riskToleranceOf } from '../../roads/state.js';
 import { ESPIONAGE_TUNING, TAP_DEPTH, TAP_LEVELS } from './espionageMath.js';
 
@@ -229,11 +230,24 @@ export function accuracyCapFor({ tap, isTarget, hostConfidence01, staleness01, p
  * multiplies the ASSESSED RISK rather than the appetite, because the design's sentence is
  * that pride under-READS danger, not that it enjoys danger.
  *
- * @param {unknown} npc @returns {number} > 0
+ * ⭐ W-LIVES L5 — THE CHOKEPOINT RE-ROUTE. `lens` carries the paradigm chart in, and
+ * the extension is of the SAME shape this function already is: the ladder's reader
+ * stays the one home and reads the EFFECTIVE word list instead of the authored one
+ * (J-WR-10). Absent a lens — every production caller today — `effectiveDescriptors`
+ * returns `traitsOf`'s own array BY REFERENCE, so the appetite cannot differ from
+ * what it was before this seam existed.
+ *
+ * @param {unknown} npc
+ * @param {import('../../npc/characterConsumers.js').CharacterLens|null} [lens]
+ * @returns {number} > 0
  */
-export function flawDistortion(npc) {
+export function flawDistortion(npc, lens) {
+  const record = /** @type {Parameters<typeof riskAppetiteOf>[0]} */ (
+    npc && typeof npc === 'object' ? npc : {}
+  );
   const appetite = riskAppetiteOf(
-    /** @type {Parameters<typeof riskAppetiteOf>[0]} */ (npc && typeof npc === 'object' ? npc : {}),
+    record,
+    effectiveDescriptors({ words: traitsOf(record), npc: record, lens }),
   );
   const table = /** @type {Readonly<Record<string, number>>} */ (TAP_TUNING.FLAW_DISTORTION);
   const factor = table[appetite];
@@ -253,7 +267,8 @@ export function flawDistortion(npc) {
  * bar because a hostile-to-home satellite is a safe place to hear a lie.
  *
  * @param {{catch01?: unknown, clusterHostility01?: unknown, npc?: unknown,
- *   homeDesperation01?: unknown, poison01?: unknown}} args
+ *   homeDesperation01?: unknown, poison01?: unknown,
+ *   lens?: import('../../npc/characterConsumers.js').CharacterLens|null}} args
  * ⚠ NEITHER RETURNED NUMBER CARRIES AN `01` SUFFIX AND THAT IS DELIBERATE. Both are
  * COMPARABLE MAGNITUDES, not probabilities: the flaw distortion can lift an assessment past
  * 1 and desperation plus poison can lift the bar past 1 too. The estate's `01` suffix means
@@ -263,10 +278,10 @@ export function flawDistortion(npc) {
  * @returns {{standoff: boolean, assessedRisk: number, bar: number, receipt: string}}
  */
 export function standoffRead({
-  catch01, clusterHostility01, npc, homeDesperation01, poison01,
+  catch01, clusterHostility01, npc, homeDesperation01, poison01, lens,
 } = {}) {
   const T = TAP_TUNING;
-  const distortion = flawDistortion(npc);
+  const distortion = flawDistortion(npc, lens);
   const assessedRisk = round4(n01(catch01) * n01(clusterHostility01) * distortion);
   const appetite = Number(riskToleranceOf(npc));
   const stretched = (Number.isFinite(appetite) ? appetite : 0)

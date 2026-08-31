@@ -42,6 +42,9 @@ import {
   vettingTemperBand,
 } from '../../../src/domain/npc/characterConsumers.js';
 import { NPC_ALIGNMENTS } from '../../../src/domain/npc/npcFacetContract.js';
+import { npcTraitPlane, readClergyPlane, targetedFootholds } from '../../../src/domain/worldPulse/clergyTraitPlane.js';
+import { flawDistortion } from '../../../src/domain/worldPulse/espionage/espionageTap.js';
+import { buildPersonaSlice } from '../../../src/domain/ai/personaSlicer.js';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 const L1_CATALOG = join(REPO_ROOT, 'src/domain/npc/paradigmAxisCatalog.js');
@@ -83,6 +86,13 @@ function fixturePlane(/** @type {string} */ axisId) {
   return null;
 }
 
+/** The lens every production caller passes today: nothing bound at all. */
+const DARK_LENS = null;
+/** A lens with both seams bound — the comparator proved able to see. */
+const LIT_LENS = Object.freeze({ project: fixtureProject, planeOf: fixturePlane });
+/** @param {Record<string, {offset:number, updatedTick:number}>} entry */
+const lensWithDrift = (entry) => ({ ...LIT_LENS, driftOf: () => entry });
+
 describe('THE DOUBLE ABSENCE — measured, not assumed', () => {
   test('no generator writes an NPC chart, so effectiveAxesOf is empty on a real roster NPC', () => {
     expect(effectiveAxesOf(PLAIN_NPC, null)).toEqual({});
@@ -107,22 +117,22 @@ describe('THE DESCRIPTOR RE-ROUTE — reference identity is the byte-identity pr
   const words = Object.freeze(['patient', 'callous', 'cautious']);
 
   test('no projection bound ⇒ THE SAME ARRAY, by reference', () => {
-    const out = effectiveDescriptors({ words, npc: CHARTED_NPC, drift: null, project: null });
+    const out = effectiveDescriptors({ words, npc: CHARTED_NPC, lens: DARK_LENS });
     expect(out).toBe(words);
   });
 
   test('a projection bound but NO chart ⇒ still the same array, by reference', () => {
-    const out = effectiveDescriptors({ words, npc: PLAIN_NPC, drift: null, project: fixtureProject });
+    const out = effectiveDescriptors({ words, npc: PLAIN_NPC, lens: LIT_LENS });
     expect(out).toBe(words);
   });
 
   test('a chart whose axes the projection declines ⇒ still the same array, by reference', () => {
     const npc = { character: { axes: { INDUSTRY: { pole: 'vice', level: 'defining' } } } };
-    expect(effectiveDescriptors({ words, npc, drift: null, project: fixtureProject })).toBe(words);
+    expect(effectiveDescriptors({ words, npc, lens: LIT_LENS })).toBe(words);
   });
 
   test('THE COMPARATOR CAN SEE: a charted vice REPLACES the word it displaced', () => {
-    const out = effectiveDescriptors({ words, npc: CHARTED_NPC, drift: null, project: fixtureProject });
+    const out = effectiveDescriptors({ words, npc: CHARTED_NPC, lens: LIT_LENS });
     expect(out).not.toBe(words);
     // `callous` was displaced by MERCY's vice pole; the caller's own order survives.
     expect(out).toEqual(['patient', 'cruel', 'cautious', 'brave']);
@@ -130,41 +140,41 @@ describe('THE DESCRIPTOR RE-ROUTE — reference identity is the byte-identity pr
 
   test('an axis no authored word occupied is APPENDED, codepoint-ordered', () => {
     const bare = ['patient'];
-    const out = effectiveDescriptors({ words: bare, npc: CHARTED_NPC, drift: null, project: fixtureProject });
+    const out = effectiveDescriptors({ words: bare, npc: CHARTED_NPC, lens: LIT_LENS });
     expect(out).toEqual(['patient', 'brave', 'cruel']);
   });
 
   test('drift alone can move a word — the funnel\'s whole purpose, proved end to end', () => {
     const flipped = effectiveDescriptors({
-      words, npc: CHARTED_NPC, drift: { COURAGE: { offset: -6, updatedTick: 1 } }, project: fixtureProject,
+      words, npc: CHARTED_NPC, lens: lensWithDrift({ COURAGE: { offset: -6, updatedTick: 1 } }),
     });
     expect(flipped).toContain('cowardly');
     expect(flipped).not.toContain('brave');
   });
 
   test('a malformed word list is EMPTY, never a crash and never a guess', () => {
-    expect(effectiveDescriptors({ words: /** @type {any} */ (null), npc: PLAIN_NPC, project: fixtureProject })).toEqual([]);
-    expect(effectiveDescriptors({ words: /** @type {any} */ ('patient'), npc: PLAIN_NPC, project: null })).toEqual([]);
+    expect(effectiveDescriptors({ words: /** @type {any} */ (null), npc: PLAIN_NPC, lens: LIT_LENS })).toEqual([]);
+    expect(effectiveDescriptors({ words: /** @type {any} */ ('patient'), npc: PLAIN_NPC, lens: DARK_LENS })).toEqual([]);
   });
 
   test('a malformed list does NOT silence a chart — the caller\'s bug is not the soul\'s', () => {
     // Deliberate, and the direction matters: dropping the chart here would make a
     // caller-side shape error look like a person with no character, which is the one
     // failure this seam must never produce silently.
-    expect(effectiveDescriptors({ words: /** @type {any} */ (null), npc: CHARTED_NPC, project: fixtureProject }))
+    expect(effectiveDescriptors({ words: /** @type {any} */ (null), npc: CHARTED_NPC, lens: LIT_LENS }))
       .toEqual(['brave', 'cruel']);
   });
 });
 
 describe('THE RISK REGISTER (R6, R8)', () => {
   test('a soul with nothing to read sits at the neutral centre with the narrowest window', () => {
-    const bare = riskRegister({ npc: {}, drift: null });
+    const bare = riskRegister({ npc: {} });
     expect(bare.center).toBe(NEUTRAL_RISK_CENTER);
     expect(bare.breadth).toBe(MIN_RISK_BREADTH);
   });
 
   test('the ABSENT terms are declared, so "nobody is desperate" reads apart from "nobody asked"', () => {
-    expect(riskRegister({ npc: {}, drift: null }).absent).toEqual([...RISK_TERMS]);
+    expect(riskRegister({ npc: {} }).absent).toEqual([...RISK_TERMS]);
     expect(riskRegister({ npc: {}, desperation01: 0, disorder01: 0 }).absent).toEqual([]);
     // A supplied ZERO is supplied, not absent — the whole point of the declaration.
     expect(riskRegister({ npc: {}, desperation01: 0 }).absent).toEqual(['disorder01']);
@@ -269,7 +279,7 @@ describe('THE CORRUPTION DEPTH GATE (F13, pack row 13(a))', () => {
 
   test('drift alone can open the door — becoming reachable is the endpoint of an arc', () => {
     const drifted = corruptibleAxisByDepth({
-      npc: CHARTED_NPC, drift: { MERCY: { offset: -1, updatedTick: 1 } },
+      npc: CHARTED_NPC, lens: lensWithDrift({ MERCY: { offset: -1, updatedTick: 1 } }),
     });
     expect(corruptibleAxisByDepth({ npc: CHARTED_NPC })).toBe(null);
     expect(drifted).toBe('MERCY');
@@ -278,7 +288,7 @@ describe('THE CORRUPTION DEPTH GATE (F13, pack row 13(a))', () => {
 
 describe('R7 — THE DERIVED ALIGNMENT READING', () => {
   test('NO COLUMN ⇒ NO CLAIM, and `claim:false` is not `true_neutral`', () => {
-    const reading = derivedAlignment({ npc: CHARTED_NPC, drift: null, planeOf: null });
+    const reading = derivedAlignment({ npc: CHARTED_NPC, lens: DARK_LENS });
     expect(reading.claim).toBe(false);
     expect(reading.word).toBe(null);
     expect(reading.good).toBe(null);
@@ -286,12 +296,12 @@ describe('R7 — THE DERIVED ALIGNMENT READING', () => {
 
   test('a chart whose every axis the column declines ⇒ still NO CLAIM, never a middle', () => {
     const npc = { character: { axes: { INDUSTRY: { pole: 'vice', level: 'defining' } } } };
-    expect(derivedAlignment({ npc, planeOf: fixturePlane }).claim).toBe(false);
+    expect(derivedAlignment({ npc, lens: LIT_LENS }).claim).toBe(false);
   });
 
   test('THE COMPARATOR CAN SEE: a cruel soul reads evil-leaning and says so', () => {
     const cruel = { character: { axes: { MERCY: { pole: 'vice', level: 'defining' } } } };
-    const reading = derivedAlignment({ npc: cruel, planeOf: fixturePlane });
+    const reading = derivedAlignment({ npc: cruel, lens: LIT_LENS });
     expect(reading.claim).toBe(true);
     expect(reading.good).toBeLessThan(0);
     expect(reading.word).toBe('neutral_evil');
@@ -299,13 +309,13 @@ describe('R7 — THE DERIVED ALIGNMENT READING', () => {
 
   test('the same axis at the opposite pole reads the opposite way — the projection is signed', () => {
     const kind = { character: { axes: { MERCY: { pole: 'virtue', level: 'defining' } } } };
-    expect(derivedAlignment({ npc: kind, planeOf: fixturePlane }).good).toBeGreaterThan(0);
+    expect(derivedAlignment({ npc: kind, lens: LIT_LENS }).good).toBeGreaterThan(0);
   });
 
   test('"he was a good man once" is mechanical — drift alone flips the word', () => {
     const kind = { character: { axes: { MERCY: { pole: 'virtue', level: 'defining' } } } };
-    const before = derivedAlignment({ npc: kind, planeOf: fixturePlane });
-    const after = derivedAlignment({ npc: kind, drift: { MERCY: { offset: -6, updatedTick: 1 } }, planeOf: fixturePlane });
+    const before = derivedAlignment({ npc: kind, lens: LIT_LENS });
+    const after = derivedAlignment({ npc: kind, lens: lensWithDrift({ MERCY: { offset: -6, updatedTick: 1 } }) });
     expect(before.word).toBe('neutral_good');
     expect(after.word).toBe('neutral_evil');
   });
@@ -315,8 +325,8 @@ describe('R7 — THE DERIVED ALIGNMENT READING', () => {
       MERCY: { pole: 'vice', level: 'defining' }, INDUSTRY: { pole: 'virtue', level: 'defining' },
     } } };
     const only = { character: { axes: { MERCY: { pole: 'vice', level: 'defining' } } } };
-    expect(derivedAlignment({ npc: mixed, planeOf: fixturePlane }).good)
-      .toBe(derivedAlignment({ npc: only, planeOf: fixturePlane }).good);
+    expect(derivedAlignment({ npc: mixed, lens: LIT_LENS }).good)
+      .toBe(derivedAlignment({ npc: only, lens: LIT_LENS }).good);
   });
 
   test('every word this table can return is a member of the editor\'s own contract', () => {
@@ -398,5 +408,110 @@ describe('PROVENANCE + RECONCILE PINS — the mirror cannot outlive its source s
     const rows = [...source.matchAll(/id: '([A-Z]+)',[\s\S]*?corruptionVector: (null|'[a-z_]+')/g)];
     const scored = rows.filter((row) => row[2] !== 'null').map((row) => row[1]).sort();
     expect(scored).toEqual([...CORRUPTIBLE_AXES].sort());
+  });
+});
+
+// ── THE RE-ROUTES, AGAINST THE REAL CONSUMERS ────────────────────────────────
+/**
+ * ⭐⭐ THE POINT OF THIS BLOCK. Car L5's whole risk is that it wires four live
+ * production readers to a seam that cannot fire yet, and calls the resulting
+ * sameness a proof. So each re-route is asserted THREE ways, never one:
+ *
+ *   1. NO LENS vs the pre-car call shape — identical, on the real reader.
+ *   2. A DARK LENS (an object with nothing bound) — identical too, so a caller
+ *      that starts passing a lens before the catalog lands still moves no byte.
+ *   3. A LIT LENS on a CHARTED npc — DIFFERENT, which is what makes 1 and 2
+ *      evidence instead of a comparator that could not have seen anything.
+ */
+describe('THE RE-ROUTES — three ways each, because sameness alone proves nothing', () => {
+  /** A minister whose authored words the plane scores, plus a chart the lens can read. */
+  const MINISTER = Object.freeze({
+    id: 'npc_1', name: 'Alda', importance: 'pillar',
+    personality: Object.freeze({ dominant: 'patient', flaw: 'callous', modifier: 'cautious' }),
+  });
+  const CHARTED_MINISTER = Object.freeze({ ...MINISTER, character: CHARTED_NPC.character });
+  /** @param {object} npc */
+  const settlementOf = (npc) => ({
+    id: 's1',
+    powerStructure: { factions: [{ id: 'temple', archetype: 'religious' }] },
+    npcs: [{ ...npc, linkedFactionIds: ['temple'] }],
+  });
+
+  test('npcTraitPlane: no lens and a DARK lens agree with each other, exactly', () => {
+    expect(npcTraitPlane(/** @type {any} */ (MINISTER)))
+      .toEqual(npcTraitPlane(/** @type {any} */ (MINISTER), DARK_LENS));
+    expect(npcTraitPlane(/** @type {any} */ (CHARTED_MINISTER), DARK_LENS))
+      .toEqual(npcTraitPlane(/** @type {any} */ (MINISTER)));
+  });
+
+  test('npcTraitPlane: A LIT LENS ON A CHART MOVES IT — the comparator can see', () => {
+    const before = npcTraitPlane(/** @type {any} */ (CHARTED_MINISTER), DARK_LENS);
+    const after = npcTraitPlane(/** @type {any} */ (CHARTED_MINISTER), LIT_LENS);
+    // `callous` (e 0.6) becomes `cruel` (e 0.85) and `brave` joins: a sharper malice.
+    expect(after).not.toEqual(before);
+    expect(after.e).toBeGreaterThan(before.e);
+  });
+
+  test('readClergyPlane: byte-identical without a lens and with a dark one', () => {
+    const s = settlementOf(CHARTED_MINISTER);
+    const plain = readClergyPlane(/** @type {any} */ (s));
+    expect(JSON.stringify(readClergyPlane(/** @type {any} */ (s), DARK_LENS))).toBe(JSON.stringify(plain));
+    expect(plain.weight).toBeGreaterThan(0);
+  });
+
+  test('readClergyPlane: the lit lens moves the bench reading — GAP C\'s group projection', () => {
+    const s = settlementOf(CHARTED_MINISTER);
+    expect(JSON.stringify(readClergyPlane(/** @type {any} */ (s), LIT_LENS)))
+      .not.toBe(JSON.stringify(readClergyPlane(/** @type {any} */ (s))));
+  });
+
+  test('⚠ targetedFootholds KEEPS TRUE SIGHT and is byte-unchanged without a lens', () => {
+    const s = settlementOf(CHARTED_MINISTER);
+    const patron = { alignmentAxis: 'good', lawAxis: 'lawful', name: 'The Warden' };
+    const rivals = [{ ref: 'd2', snapshot: { alignmentAxis: 'evil', lawAxis: 'chaotic', name: 'The Worm' } }];
+    const plain = targetedFootholds(/** @type {any} */ (s), patron, rivals);
+    expect(JSON.stringify(targetedFootholds(/** @type {any} */ (s), patron, rivals, DARK_LENS)))
+      .toBe(JSON.stringify(plain));
+    // The DIVINE branch is `effectiveCharacter` reached through the same seam — the
+    // deity is never routed to `knownCharacterOf`, so a god's sight is the true chart
+    // and its lens is the same lens. Proved by the reading MOVING under a lit lens.
+    expect(JSON.stringify(targetedFootholds(/** @type {any} */ (s), patron, rivals, LIT_LENS)))
+      .not.toBe(JSON.stringify(plain));
+  });
+
+  test('flawDistortion: no lens, a dark lens, and the pre-car reading all agree', () => {
+    const bold = { personality: { flaw: 'reckless' } };
+    expect(flawDistortion(bold)).toBe(flawDistortion(bold, DARK_LENS));
+    expect(flawDistortion(bold)).toBeLessThan(1);
+    expect(flawDistortion({ personality: { flaw: 'timid' } })).toBeGreaterThan(1);
+  });
+
+  test('flawDistortion: A CHART CAN CHANGE A MAN\'S NERVE — the comparator can see', () => {
+    // Authored `cautious` reads LOW risk; a `defining` COURAGE that projects to
+    // `brave` is a HIGH_RISK word, so the same man under-reads the gate instead.
+    const timid = { personality: { dominant: 'cautious' }, character: CHARTED_NPC.character };
+    expect(flawDistortion(timid, DARK_LENS)).toBeGreaterThan(1);
+    expect(flawDistortion(timid, LIT_LENS)).toBeLessThan(1);
+  });
+
+  test('the persona surface: R7 heads the alignment chain and is null without a lens', () => {
+    const entity = { id: 'npc_1', personality: { dominant: 'patient' }, alignment: 'lawful_neutral' };
+    const alignmentOf = (/** @type {any} */ lens) => {
+      const slice = buildPersonaSlice({ entity, entityClass: 'npc', lens });
+      const row = slice.facets.find((f) => f.manifestKey === 'alignment');
+      return /** @type {any} */ (row?.data)?.alignment;
+    };
+    expect(alignmentOf(null)).toBe('lawful_neutral');
+    expect(alignmentOf(DARK_LENS)).toBe('lawful_neutral');
+  });
+
+  test('the persona surface: a charted soul\'s READING outranks its stored word', () => {
+    const entity = {
+      id: 'npc_1', alignment: 'lawful_neutral',
+      character: { axes: { MERCY: { pole: 'vice', level: 'defining' } } },
+    };
+    const slice = buildPersonaSlice({ entity, entityClass: 'npc', lens: LIT_LENS });
+    const row = slice.facets.find((f) => f.manifestKey === 'alignment');
+    expect(/** @type {any} */ (row?.data)?.alignment).toBe('neutral_evil');
   });
 });

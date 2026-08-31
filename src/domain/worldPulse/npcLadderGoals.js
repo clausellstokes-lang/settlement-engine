@@ -82,8 +82,12 @@ const LOW_RISK = new Set(['cautious', 'timid', 'prudent', 'loyal', 'humble', 'pa
 const SUPPRESSIVE = new Set(['cruel', 'ruthless', 'tyrannical', 'paranoid', 'vengeful']);
 
 /** The core trait words of an NPC (dominant/flaw/modifier), lowercased.
+ *
+ *  EXPORTED for W-LIVES L5 and for nothing else: the descriptor re-route needs this
+ *  reader's OWN base list to layer a chart onto, and re-deriving it elsewhere would
+ *  mint the fourth spelling of "an NPC's words" in a tree that already has three.
  *  @param {Record<string, unknown>} npc @returns {string[]} */
-function traitsOf(npc) {
+export function traitsOf(npc) {
   const p = npc.personality;
   if (typeof p === 'string') return [p.toLowerCase()];
   if (Array.isArray(p)) return p.filter((x) => typeof x === 'string').map((x) => x.toLowerCase());
@@ -91,9 +95,19 @@ function traitsOf(npc) {
   return [o.dominant, o.flaw, o.modifier].filter((x) => typeof x === 'string').map((x) => String(x).toLowerCase());
 }
 /** The NPC's risk appetite from its flaws (the design's "flaws = risk appetite").
- *  @param {Record<string, unknown>} npc @returns {'high'|'low'|'mid'} */
-export function riskAppetiteOf(npc) {
-  const traits = traitsOf(npc);
+ *
+ *  ⭐ W-LIVES L5: `words` is the RE-ROUTE SEAM. This is the estate's ONE word-grained
+ *  risk read (a registered coupling counterforce), so the character program EXTENDS
+ *  it rather than forking a rival — J-WR-10. A caller that has run the descriptor
+ *  re-route hands the EFFECTIVE list in; every existing caller passes nothing and
+ *  reads exactly `traitsOf(npc)`, which is why this change moves no byte.
+ *  @param {Record<string, unknown>} npc
+ *  @param {readonly string[]|null} [words] pre-computed effective descriptors
+ *  @returns {'high'|'low'|'mid'} */
+export function riskAppetiteOf(npc, words) {
+  const traits = (Array.isArray(words) && words.length
+    ? words.map((x) => String(x).toLowerCase())
+    : traitsOf(npc));
   if (traits.some((t) => HIGH_RISK.has(t))) return 'high';
   if (traits.some((t) => LOW_RISK.has(t))) return 'low';
   return 'mid';
