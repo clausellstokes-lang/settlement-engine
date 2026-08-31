@@ -49,6 +49,9 @@ import { describe, expect, test } from 'vitest';
 
 import { TEMPER_WORDS, deityTemper } from '../../src/domain/worldPulse/deityAxes.js';
 import { DEITY_TEMPER_KEYS } from '../../src/domain/customContentSchema.js';
+import { deitySnapshotFrom } from '../../src/domain/deitySnapshot.js';
+import { describeDeityEffects } from '../../src/domain/display/deityEffects.js';
+import { describeDeityDraft } from '../../src/components/compendium/deityDraftPreview.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -364,6 +367,53 @@ describe('W-FAITH F2c · PROVENANCE (how the authored word reaches each consumer
       editor, 'authoredTemper', 'temperamentAxis',
       'the dual-write mirrors the derivation, never the authored word',
     );
+  });
+});
+
+describe('W-FAITH F2c · THE PROVENANCE SPLIT, EXECUTED (not merely source-scanned)', () => {
+  // ⭐ THE WHOLE CENSUS IN FOUR ASSERTIONS. Everything above reads source; this runs
+  // the two paths side by side on ONE deity and shows them disagree — which is the
+  // claim, and the kind of claim a source scan can only ever suggest.
+  const EVIL_CHAOTIC = Object.freeze({
+    name: 'Vharr', alignmentAxis: 'evil', lawAxis: 'chaotic',
+    rankAxis: 'minor', temperamentAxis: 'warlike',
+  });
+  const WARLIKE_LINE = 'A warlike creed raises the realm\'s aggression';
+  const PEACELIKE_LINE = 'A peacelike creed tempers the realm\'s aggression';
+
+  test('the RAW-DRAFT path hears the authored word', () => {
+    // The compendium preview is handed the editor draft, so an author who sets a
+    // temper sees the coupling change under their hands.
+    expect(describeDeityDraft(EVIL_CHAOTIC).couplings).toContain(WARLIKE_LINE);
+    const authored = describeDeityDraft({ ...EVIL_CHAOTIC, authoredTemper: 'peacelike' }).couplings;
+    expect(authored).toContain(PEACELIKE_LINE);
+    expect(authored).not.toContain(WARLIKE_LINE);   // anchored: the line above proves the pipeline emits it
+  });
+
+  test('an authored NEUTRAL removes the tilt entirely, rather than losing to the axes', () => {
+    // The sharpest case for §797.4. A truthiness-shaped arm returns 'neutral' too, so
+    // what this really fixes is that neutral BEATS a derivation which says warlike —
+    // and the observable is the temperament coupling disappearing from the preview.
+    const neutral = describeDeityDraft({ ...EVIL_CHAOTIC, authoredTemper: 'neutral' }).couplings;
+    // The alignment coupling below is the LIVENESS ANCHOR for both negatives: it
+    // travels the same producer on the same call, so an emptied or re-shaped
+    // coupling list reds on it instead of passing these two vacuously.
+    expect(neutral).toContain('Evil-aligned worship lets corruption take root even without organized crime');
+    // anchored: the alignment coupling immediately above proves the list is live and correctly shaped
+    expect(neutral).not.toContain(WARLIKE_LINE);
+    // anchored: same list, same call — the alignment coupling above is the liveness anchor
+    expect(neutral).not.toContain(PEACELIKE_LINE);
+  });
+
+  test('⛔ the EMBED path does NOT — the same authored deity reads warlike through the writer', () => {
+    // THE CAR'S FINDING, executed. One deity, one authored word, two paths, two
+    // answers: the builder drops the key, so every consumer downstream of an embed
+    // goes on deriving. This is what the tripwire above protects, and what an owner
+    // would be deciding to change.
+    const embedded = deitySnapshotFrom({ ...EVIL_CHAOTIC, authoredTemper: 'peacelike' });
+    expect('authoredTemper' in embedded).toBe(false);
+    expect(deityTemper(embedded)).toBe('warlike');
+    expect(describeDeityEffects(embedded)).toContain(WARLIKE_LINE);
   });
 });
 
