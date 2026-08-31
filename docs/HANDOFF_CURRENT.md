@@ -8,7 +8,7 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐ THE OVERNIGHT RUN (§841) — the owner sleeps; the chair drives to JUST BEFORE THE SOAK. Halt thresholds: walkthrough · ultra keystroke · tuning signature · terminal soak. Ledger through §840: T10 LANDED (§835, tip `fa7e95f2a`); T2 mid-gate-2 after 17 cures under chair rulings (§§836-838 era); D2b building parts 1/2/4/5 (§827 premise corrected §837); T12's writer car open under the grace-window seal (§838, owner veto standing) with TE-VIRT-1 CHARTERED BLOCKING all future virtual flags (§840); RESIDUE-2 holding 2 cars (§839, WEB-9a→owner). Owner-desk accumulator: seal veto · leaderless word · shrine golden row · Surveyor ruling · Q-M7 · the registers pack.
+## ⭐⭐⭐⭐ THE OVERNIGHT RUN (§841) — the owner sleeps; the chair drives to JUST BEFORE THE SOAK. Halt thresholds: walkthrough · ultra keystroke · tuning signature · terminal soak. Ledger through §842: T10 LANDED (§835) and T2 · COIN LANDED (§842) — tip `acaaad63f`; T7's landing IS IN FLIGHT (releases the W-trains on its CAS); D2b building parts 1/2/4/5 (§827 premise corrected §837); T12's writer car open under the grace-window seal (§838, owner veto standing) with TE-VIRT-1 CHARTERED BLOCKING all future virtual flags (§840); RESIDUE-2 holding 2 cars (§839, WEB-9a→owner). Owner-desk accumulator: seal veto · leaderless word · shrine golden row · Surveyor ruling · Q-M7 · the registers pack.
 
 ## PICKUP AT §832 (2026-08-31, ACCOUNT-RETURN — all four §831 items RESUMED on live lanes) — START HERE; supersedes every card below.
 
