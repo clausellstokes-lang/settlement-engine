@@ -222,6 +222,26 @@ describe('SUBJECT RESOLUTION — forward only, and ambiguity refuses', () => {
     expect(subjectByNpcKey(ctxOf(), '')).toBeNull();
   });
 
+  test('⭐ A HOME THAT WILL NOT SAY WHERE IT IS ADDRESSES NOBODY', () => {
+    // The mutation pass found this guard unpinned. An anonymous home is not a
+    // harmless no-op: its entries would carry `settlementId: ''`, and the funnel
+    // resolves a durable identity by (settlementId, rosterId, name) — so two
+    // nameless places would collide into ONE key and merge two people's charts.
+    const nowhere = { placeId: '', placeSeed: SEED, cast: [ALDA, BERO] };
+    const ctx = ctxOf({
+      homes: [nowhere],
+      news: [{ id: 'w.1', impactKind: 'coup_succeeded', settlementIds: [TOWN], tick: 11 }],
+    });
+    expect(subjectByNpcKey(ctx, `${TOWN}:npc_1`)).toBeNull();
+    expect(subjectsByHome(ctx, '')).toEqual([]);
+    expect(collectLivedExperience(ctx)).toEqual([]);
+    // And the SAME roster under a named home does teach, so the emptiness above is
+    // the id guard rather than a fixture that could never have produced anything.
+    expect(collectLivedExperience(ctxOf({
+      news: [{ id: 'w.1', impactKind: 'coup_succeeded', settlementIds: [TOWN], tick: 11 }],
+    })).length).toBe(2);
+  });
+
   test('a settlement-addressed event reaches everybody who lives there', () => {
     expect(subjectsByHome(ctxOf(), TOWN).map((row) => row.npc.id)).toEqual(['npc_1', 'npc_2']);
     expect(subjectsByHome(ctxOf(), 'save.elsewhere')).toEqual([]);
