@@ -139,14 +139,24 @@ Every cell is a seeded ROLL RANGE, never a constant — the tier gates the range
 (prosperity, connectivity, war, corruption) tilt weights within it. The thorp's second faction
 exists only when the top-influence power is not the ruling power (the gap is the story).
 
-| Tier | Factions (roll) | Named NPCs per faction (roll) |
+**The two-stage roll at EVERY tier (§810.2):** roll the settlement's named-NPC **MASS** within the
+tier band, then **DISPERSE** it across factions by a second seeded weighted partition (all-in-one,
+one-each, and everything between all reachable — concentration follows influence, never
+determined by it; a distribution-shape fixture asserts real entropy per tier and ZERO mass
+outside the band). Each roster then rolls **RUNG OCCUPANCY** (head / middle / lowest — any rung
+may be vacant; the vacancy-plus-yearner pattern is over-weighted on purpose: the empty seat
+registers as an open ladder window and the yearner arrives with seek_promotion pre-loaded). Rank
+ceilings scale with tier (a thorp's head is at most notable; no pillars below town). **The band's
+edges are believability assertions** — a thorp can never roll seven named figures (§810.2b).
+
+| Tier | Factions (roll) | Named-NPC MASS (roll) |
 |---|---|---|
-| Thorp | 1 (+1 conditional) | **1** — the seat-holder IS the polity |
-| Hamlet | 1–2 | 1–2 |
-| Village | 2–3 | 1–2 |
-| Town | one per ranked power (3–5) | 1–2 |
-| City | 5–8, incl. 1–2 doubled niches (intra-power rivals) | 2–3 |
-| Metropolis | 7–10, incl. doubled niches | 2–3, full suites on select pillars |
+| Thorp | 1 (+1 conditional) | 1–3 |
+| Hamlet | 1–2 | 2–4 |
+| Village | 2–3 | 3–6 |
+| Town | one per ranked power (3–5) | 6–10 |
+| City | 5–8, incl. 1–2 doubled niches (intra-power rivals) | 12–20 |
+| Metropolis | 7–10, incl. doubled niches | 18–30, full suites on select pillars |
 
 **The ladder is ALIVE (§810.1):** the same ranges govern simulated tier growth — on promotion the
 fabric thickens toward the new band at a slow rolled cadence (one receipted emergence per
