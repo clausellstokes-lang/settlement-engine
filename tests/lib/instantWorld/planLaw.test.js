@@ -21,6 +21,7 @@ import {
   WORLD_CODE_PAYLOAD_VERSION,
   WORLD_CODE_PAYLOAD_LEGACY,
 } from '../../../src/lib/worldCode.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 const SEEDS = ['promise-1', 'promise-2', 'promise-3', 'realm-alpha', '12345'];
 const KNOBS = [
@@ -32,7 +33,7 @@ const KNOBS = [
 
 describe('POLIS-1 — THE PROMISE: a v1 plan is frozen for life', () => {
   test('law 1 writes NEITHER the law key NOR relations — absence IS the legacy plan', () => {
-    for (const seed of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
       for (const basicConfig of KNOBS) {
         const plan = deriveWorldPlan({ seed, basicConfig, planLaw: PLAN_LAW_LEGACY });
         expect(Object.prototype.hasOwnProperty.call(plan, 'planLaw')).toBe(false);
@@ -40,15 +41,17 @@ describe('POLIS-1 — THE PROMISE: a v1 plan is frozen for life', () => {
         expect(Object.prototype.hasOwnProperty.call(plan, 'requestedRealmSize')).toBe(false);
         expect(Object.prototype.hasOwnProperty.call(plan, 'requestedTone')).toBe(false);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'a law-1 plan carries none of law 2\'s four keys, under every knob set');
   });
 
   test('law 1 is byte-stable against itself across repeated derivations', () => {
-    for (const seed of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
       const a = deriveWorldPlan({ seed, basicConfig: KNOBS[1], planLaw: PLAN_LAW_LEGACY });
       const b = deriveWorldPlan({ seed, basicConfig: KNOBS[1], planLaw: PLAN_LAW_LEGACY });
       expect(JSON.stringify(a)).toBe(JSON.stringify(b));
-    }
+    });
+    expectNoSeedFailures(failures, 'two law-1 derivations of one seed are byte-identical');
   });
 
   test('an UNKNOWN plan law falls back to LEGACY, never to the newest', () => {
@@ -72,20 +75,22 @@ describe('POLIS-1 — fork isolation: the new draws displace nothing', () => {
   // STRING, not stream position, so law 2's three new streams cannot move the map-kind
   // roll or the site scatter that law 1 already produced.
   test('law 2 reproduces law 1\'s map template and site scatter exactly', () => {
-    for (const seed of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
       const one = deriveWorldPlan({ seed, basicConfig: KNOBS[0], planLaw: PLAN_LAW_LEGACY });
       const two = deriveWorldPlan({ seed, basicConfig: KNOBS[0], planLaw: PLAN_LAW_VERSION });
       expect(two.mapKind).toBe(one.mapKind);
       expect(JSON.stringify(two.sites)).toBe(JSON.stringify(one.sites));
-    }
+    });
+    expectNoSeedFailures(failures, 'law 2 displaces neither the map-kind roll nor the site scatter');
   });
 
   test('a "Random island" resolves identically under both laws', () => {
-    for (const seed of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
       const one = deriveWorldPlan({ seed, basicConfig: { mapKind: '' }, planLaw: PLAN_LAW_LEGACY });
       const two = deriveWorldPlan({ seed, basicConfig: { mapKind: '' }, planLaw: PLAN_LAW_VERSION });
       expect(two.mapKind).toBe(one.mapKind);
-    }
+    });
+    expectNoSeedFailures(failures, 'an unspecified map kind resolves to the same template under both laws');
   });
 });
 
@@ -129,11 +134,12 @@ describe('POLIS-1 — the founding ties (law 2)', () => {
   });
 
   test('the same seed mints the same ties (a plan is replayable)', () => {
-    for (const seed of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
       const a = deriveWorldPlan({ seed, basicConfig: { realmSize: 'large' }, planLaw: PLAN_LAW_VERSION });
       const b = deriveWorldPlan({ seed, basicConfig: { realmSize: 'large' }, planLaw: PLAN_LAW_VERSION });
       expect(JSON.stringify(a.relations)).toBe(JSON.stringify(b.relations));
-    }
+    });
+    expectNoSeedFailures(failures, 'two derivations of one seed mint byte-identical founding ties');
   });
 
   test('a realm too small to have neighbours holds no ties at all', () => {
