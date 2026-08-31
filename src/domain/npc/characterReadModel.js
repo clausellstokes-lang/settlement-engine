@@ -567,12 +567,16 @@ function compose({ action, row, axisId, who, word, chart }) {
  * A word for one axis AS THE CHART HOLDS IT — the displacement case, where the
  * receipt names two axes and no bands at all.
  *
- * ⚠ TYPE-TESTED, NOT VALUE-TESTED, for the same measured reason `tickOrNull` is: an
- * axis the chart does not carry reads through `Number(undefined)` as NaN and through
- * `|| 0` as NEUTRAL, and a neutral band has no pole — so the failure would look
- * exactly like an honest "this axis says nothing" instead of "this chart never
- * mentioned this axis". Both refuse, but only one of them is true, and a reader
- * debugging a silent displacement needs to know which.
+ * ⚠ TYPE-TESTED, NOT VALUE-TESTED, and a mutation plant MEASURED what that is worth —
+ * which is not what this comment first claimed. For an axis the chart simply does not
+ * carry, both forms refuse alike (`Number(undefined) || 0` is neutral, and a neutral
+ * band has no pole), so the type test buys nothing there and saying otherwise was an
+ * overclaim. What it actually buys is the case a numeric guard reads and this one
+ * refuses: a chart whose axis value is NOT A NUMBER — a serialized `'-3'`, a
+ * `{ pole, level }` object handed to the wrong door. `Number('-3')` is a perfectly
+ * good −3, so a numeric guard would name the man wrathful on the strength of a string
+ * nobody promised was a chart value. That is §711.6's family — a field whose TYPE is
+ * assumed at one consumer — and it is pinned below rather than asserted here.
  * @param {(position: {axisId: string, pole?: string, level?: string}) => string} word
  * @param {string} axisId @param {Record<string, unknown>} chart
  * @returns {string}
