@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a23e7ce83cb50cca244e018bf41aa6189c68d1d8",
-  "measuredBy": "T11-UI (Fable seat)",
+  "measuredAtSha": "ef309820203c189a035e3066a2100c85ae1a44db",
+  "measuredBy": "T11-landing",
   "date": "2026-08-31",
-  "note": "T11 UI train: 12 build cars + the anchor bill added test TITLES to existing suites only (zero new test files) — titles 20666 to 20713 measured at a23e7ce83; re-derived whole at the clean tip per the register path.",
-  "files": 2430,
-  "parked": 367,
-  "credited": 2063,
-  "titles": 20713,
-  "suiteTitles": 5710
+  "note": "Lane T11-UI (15 cars: §805 war/faith split + WAR and FAITH tabs, §807 gallery campaign view, §815 ruling chain, and the §773.1 UI-block rows DESK-1..5 / VAR-3 / POLIS-3 / POLIS-4) rebased onto claude/composite-r4 6770f878f and re-derived WHOLE at the landing tip per LANE_LAW_ADDENDUM_EFF1 sec.4 - never composed by arithmetic. THE LANE ADDS ZERO TEST FILES: every arm was extended into an existing suite on purpose, so files/parked/credited cannot move and the whole bill is titles. Title sources, decomposed: car 1 (warFaithSurfacing + premiumGateSingleSource + entityIndex retargets), car 2 (faithPanelModel), car 3 (galleryCampaignsTab §807 describe + createWorkflowRail viewer-mode describe: +1 suite title / +2 titles), car 4 (powerTabSupport ruling chain), cars 5-9 (the DESK rows: CommandPalette, heraldRegisterDoors, dossier.smoke, summaryTabPhase2, treatyDossierTab, dossierDepthTabs), car 10 (instantWorldMagicQuestion VAR-3 describe + lifecycleRoundTrip), cars 11-12 (travelersLayer gains the POLIS-3 and POLIS-4 layer describes). Cars 13a/13b are anchor and census bills and mint no title. REBASE NOTE: the createWorkflowRail conflict was resolved onto the LANDING BASE file, whose T10 UX-1 commit 560ac7f88 had deleted the block-self-hides describe; the lane appends the same +1 describe / +2 tests against either base, so its own delta is unchanged by the resolution.",
+  "files": 2442,
+  "parked": 370,
+  "credited": 2072,
+  "titles": 20900,
+  "suiteTitles": 5755
 }
