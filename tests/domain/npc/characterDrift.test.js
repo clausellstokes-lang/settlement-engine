@@ -39,6 +39,7 @@ import {
   MATERIALIZATION_EPSILON,
   MAX_AXIS_OFFSET,
   OFFSET_DECIMALS,
+  OFFSET_SCALE,
   SPECTRUM_HALF_SPAN,
   applyAxisDrift,
   axisOffsetAt,
@@ -91,7 +92,11 @@ describe('the constants are DERIVED, and the module says what is unsigned', () =
     expect(MATERIALIZATION_EPSILON).toBe(1 / 4);
     // The persisted width must be far finer than the floor, or the rounding step
     // would silently become the sparsity rule.
-    expect(10 ** -OFFSET_DECIMALS).toBeLessThan(MATERIALIZATION_EPSILON / 100);
+    expect(1 / OFFSET_SCALE).toBeLessThan(MATERIALIZATION_EPSILON / 100);
+    // And the scale is built by integer multiplication, never by `**` — a
+    // transcendental site is not bit-guaranteed across engines, which is how a
+    // same-seed replay diverges on somebody else machine and nowhere on yours.
+    expect(OFFSET_SCALE).toBe(10000);
   });
 
   test('the module declares itself OWNER-UNSIGNED and names its rows', () => {

@@ -481,7 +481,7 @@ export async function foldRegenIdentityAfterRegen(get, set, preservation) {
   if (!settlementId) return false;
   const holds = (/** @type {any} */ c) => (c?.settlementIds || []).some((/** @type {any} */ id) => String(id) === settlementId);
   if (!(get().campaigns || []).some(holds)) return false;
-  const { foldRegenIdentity } = await import('../domain/worldPulse/regenIdentityFold.js');
+  const { foldRegenIdentity } = await import('../domain/npc/regenIdentityFold.js');
   /** @type {string[]} */
   const movedIds = [];
   set(s => {
