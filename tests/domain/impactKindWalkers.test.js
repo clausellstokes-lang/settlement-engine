@@ -173,6 +173,17 @@ const EXPECTED_VOICE = {
   // it shares the cohort's trade DESK (the desk FILES, the crier VOICES). Deliberately
   // unvoiced (JUDGMENT, vetoable — the succession_question_opened precedent exactly).
   reaffirmed: null,
+  // W-COIN-2's two state-treasury beats. Both file at the trade DESK, and both are
+  // deliberately unvoiced for the reason this manifest keeps insisting on: the desk FILES a
+  // beat and the crier VOICES one. The trade crier's register is the market — goods, prices,
+  // roads — and a crown's LEDGER is not a market event. A vault crossing a band, or a court
+  // that cannot meet its army's wages, is a fact about the treasury's own books; hearing it
+  // cried in a market voice would misdescribe it exactly as the set-but-unclassified guard
+  // exists to prevent. Deliberately unvoiced (JUDGMENT, vetoable — the reaffirmed /
+  // succession_question_opened precedent exactly, and newsVoiceCategory already returns
+  // null for both through that same guard, so these rows decide rather than change).
+  treasury_shortfall: null,
+  treasury_band: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

@@ -250,6 +250,21 @@ const LAYER_PATTERNS = Object.freeze({
     // ⛔ AN EXACT-PATH REGEX, NOT A `treasur[A-Z]` PREFIX: a prefix would claim files nobody
     // has designed and silently widen a frozen family (the IN-1 precedent, verbatim).
     /^src\/domain\/worldPulse\/treasury\.js$/,
+    // W-COIN-2: the treasury's news leaf. It takes INTERIOR on exactly the reading that gave
+    // treasury.js INTERIOR one line above — a ruler's BOOKS are INTERIOR's own subject, and
+    // this leaf composes the beats those books produce (a vault crossing a band, a court that
+    // cannot meet its army's wages). The distinction is SUBJECT, not program.
+    // ⚠ STATED PLAINLY BECAUSE IT LOOKS LIKE A COUNTER-EXAMPLE: no other `*News.js` module in
+    // the estate carries a layer — sovereigntyNews, faithNews, informationNews, grammarNews
+    // and commercialReasonsNews all sit in the argued/unlayered roster. They are not the
+    // precedent here, because a family follows the SUBJECT a leaf owns and not the noun it is
+    // named after; this one owns the crown's books outright, the way peopleLedger.js owns
+    // people-conservation. Giving it a family is what will force W-COIN-4's realm aggregation
+    // and any TRADE consumer of the band to register their couplings rather than read across
+    // a port in silence.
+    // ⛔ AN EXACT-PATH REGEX, NOT A `treasur[A-Z]` PREFIX: the note above rules it, and a
+    // prefix here would have silently swallowed this very file instead of forcing this row.
+    /^src\/domain\/worldPulse\/treasuryNews\.js$/,
     // SP-C: the strategic posture read. It is an SP leaf, and it is NOT unlayered — the
     // distinction the two exclusions below draw is SUBJECT, not program. bandedStock and
     // bandFamilies are shared VOCABULARY every port spells against; this leaf composes a

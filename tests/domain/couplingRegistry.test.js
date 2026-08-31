@@ -25,6 +25,8 @@ import {
   WR6_PEOPLE_EXPENDITURE_COUPLING,
   WR6_TRADE_EXPENDITURE_COUPLING,
   WR6_WAR_COALITION_COUPLINGS,
+  WR6B_COALITION_COFFERS_COUPLING,
+  WR6B_WAR_TREASURY_COUPLINGS,
   WR7_ENVOY_COUPLINGS,
   WR7_CARRIED_SHEET_COUPLING,
   WR7_ENCOUNTER_COUPLING,
@@ -127,6 +129,11 @@ describe('CW-0 coupling registry', () => {
       ...WR4_WAR_COST_COUPLINGS,
       ...WR5_WAR_RULING_COUPLINGS,
       ...WR6_WAR_COALITION_COUPLINGS,
+      // W-COIN-3 (2026-08-31): the coalition's COFFERS term, licensing
+      // warCoalitionExpenditure.js's read of the INTERIOR treasury leaf. It takes its own
+      // wave letter because WR-6's array is pinned at seven rows and every member is
+      // asserted `owningWave === 'WR-6'` — appending here would have falsified both.
+      ...WR6B_WAR_TREASURY_COUPLINGS,
       ...WR7_ENVOY_COUPLINGS,
       ...TR1_CASUS_COMMERCII_COUPLINGS,
       // FP GR-2 (2026-08-06): the THIRD volume leaf, appended in wave order like the
@@ -560,6 +567,9 @@ describe('CW-0 coupling registry', () => {
       WR4_INSTITUTION_HOME_FRONT_COUPLING,
       WR5_SEAT_BOOKS_COUPLING,
       WR6_COALITION_BOOKS_COUPLING,
+      // W-COIN-3: the coffers term joins this bucket as a FOURTH row. The legacy
+      // first-row result below is unchanged, which is the property this test is named for.
+      WR6B_COALITION_COFFERS_COUPLING,
     ]);
     expect(Object.isFrozen(interiorWar)).toBe(true);
     expect(couplingRowFor('CPL-6', 'INTERIOR→WAR')).toBe(WR4_INSTITUTION_HOME_FRONT_COUPLING);

@@ -324,6 +324,12 @@ export const WHAT_PHRASES = Object.freeze({
   harvest: 'the harvest',
   hungry_gap: 'the lean season',
   spring_thaw: 'the spring thaw',
+  // W-COIN-2's two state-treasury beats. Deliberately distinct wording from
+  // `tax_revenue_disruption: 'coffers running short'` above, which already owns the obvious
+  // coin phrasing — a townsperson saying both about one settlement must not sound like an
+  // echo. Both read correctly capitalised-first and after "word of …".
+  treasury_shortfall: 'wages the crown cannot pay',
+  treasury_band: 'a change in the treasury',
   // people / migration
   flow_migration: 'people on the move',
   migration_pressure: 'people on the move',

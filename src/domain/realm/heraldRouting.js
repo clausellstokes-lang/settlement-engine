@@ -171,15 +171,9 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   settlement_resettled: 'trade', steading_founded: 'trade',
   population_growth: 'trade', population_emigration: 'trade', population_decline: 'trade',
   migration_flight: 'trade', mass_migration: 'trade', migration_pressure: 'trade',
-  // W-COIN-2, the state treasury's two beats. `trade` is this section's own declared
-  // scope — "goods, MONEY, roads, resources, institutions" — and the fiscal cohort it
-  // already holds settles it without a judgment call: `indebtedness` on the same line,
-  // `coalition_expenditure_read` and `coalition_debt_paid/unpaid` above, and
-  // `vassal_tribute_extraction` among them. A crown that cannot pay its army files here
-  // and not under `war` because of routing law 3 — the event's own nature is fiscal, and
-  // the war that caused it shows in the article's cause walk, exactly as a trade-caused
-  // siege files under war.
-  treasury_shortfall: 'trade', treasury_band: 'trade',
+  // ⛔ THE TREASURY BEATS ARE ROUTED BY PREFIX, NOT FROM HERE — see `['treasury_', 'trade']`
+  // in PREFIX_RULES below, and the reason recorded there. An EXACT_SECTION row for either
+  // beat grows a census asserted shrink-only, which has no lawful growth cure.
   market_shock: 'trade', indebtedness: 'trade', tier_change: 'trade', tier_promotion: 'trade',
   tier_demotion: 'trade', tier_up: 'trade', tier_down: 'trade',
   generosity_credit_default: 'trade', generosity_purchase: 'trade', generosity_trade_overture: 'trade',
@@ -376,6 +370,30 @@ export const PREFIX_RULES = Object.freeze(/** @type {ReadonlyArray<readonly [str
   ['faction_', 'events'],
   ['npc_', 'events'],
   ['tier_', 'trade'],
+  // treasury_${beat}: W-COIN-2's two state-treasury beats (treasury_shortfall, treasury_band).
+  // `trade` is this section's own declared scope — "goods, MONEY, roads, resources,
+  // institutions" — and the fiscal cohort settles the desk without a judgment call:
+  // `indebtedness`, `coalition_expenditure_read`, `coalition_debt_paid/unpaid` and
+  // `vassal_tribute_extraction` all file here. A crown that cannot pay its army files here
+  // and NOT under `war` because of routing law 3 — the event's own nature is fiscal, and the
+  // war that caused it shows in the article's cause walk, exactly as a trade-caused siege
+  // files under war.
+  //
+  // ⛔ A FAMILY PREFIX, NOT TWO EXACT_SECTION ROWS, AND THE REASON IS THE PIN'S OWN.
+  // pantheon.test.js's ANTI-TIDY PIN states it outright: a routed-but-unregistered row
+  // "grows a ceiling asserted shrink-only, which has no lawful growth cure". An exact row
+  // for either beat puts it in LEGACY_UNVOICED_TOKENS, whose 274 has never moved since the
+  // SP-E birth. `pantheon_extinction` is phrased, letter-filed and voice-decided `null` and
+  // deliberately carries NO exact row for precisely this reason; this is that precedent.
+  // Routing is UNCHANGED by the door — heraldRouting.walker accepts "an exact entry OR a
+  // family prefix" as explicit, so SECTION_OF stays 'trade' and no beat becomes an orphan.
+  //
+  // ⚠ THE CONSEQUENCE, RECORDED SO THE REVERSAL ROW IS WAITING (chair-accepted): these two
+  // kinds therefore live OUTSIDE the phrased-pool census — neither registered nor counted as
+  // unvoiced debt. That is honest ONLY because their prose is HAND-AUTHORED over the closed
+  // band vocabulary in treasuryNews.js, never pool-generated. The day treasury prose is
+  // pool-generated, this row comes out and the five registration homes are owed in full.
+  ['treasury_', 'trade'],
   ['resource_', 'trade'],
   ['population_', 'trade'],
   ['institution_', 'trade'],

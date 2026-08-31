@@ -37,6 +37,11 @@ import { deriveExportPosture } from './exportPosture.js';
 // byte; the treasury leaf's own header records that its importers are the pulse kernel,
 // this display read, and tests.
 import { hasOpenTreasury, treasuryBandOf } from '../worldPulse/treasury.js';
+// The sanctioned exact-value escape hatch for colour (tabPalette.js's own words), so the
+// band accents are lint-clean against the raw-color-literal budget and byte-identical to
+// the literals they replace. This module returns the chip's accent (J-T2-E) because
+// EconomicsTab.jsx sits exactly on its 600-line ceiling, so the colour has to live here.
+import { swatch } from '../../design/tokens.js';
 
 export { deriveExportPosture } from './exportPosture.js';
 
@@ -357,7 +362,7 @@ export function deriveGranaryOutlook(settlement) {
  *  sitting on a full vault is a fact about its hoard, not a report card. */
 /** @type {Readonly<Record<string, string>>} */
 const TREASURY_TILE_COLOR = Object.freeze({
-  empty: '#8b1a1a', lean: '#a0762a', adequate: '#1a5a28', full: '#1a5a28', overflowing: '#7A5010',
+  empty: swatch['#8B1A1A'], lean: swatch['#A0762A'], adequate: swatch['#1A5A28'], full: swatch['#1A5A28'], overflowing: swatch['#7A5010'],
 });
 
 /**

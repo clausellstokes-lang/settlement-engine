@@ -143,6 +143,13 @@ export function treasuryNewsEntries({ tick, now, states = [] }) {
   const crossings = states.filter((s) => s.bandCrossed && !s.shortfall);
   for (const s of crossings) {
     const fell = BAND_ORDER.indexOf(s.band) < BAND_ORDER.indexOf(s.previousBand);
+    // ⛔ HOISTED, AND IT MUST STAY HOISTED. significanceVocabulary.test.js scans
+    // `significance:\s*([^,\n]+)` and then lifts EVERY lowercase string literal out of the
+    // matched value — so an inline `s.band === 'empty' ? 'major' : 'notable'` offers the
+    // scanner `'empty'`, which is a BAND WORD and not an SP-6a tier, and the walker convicts
+    // it estate-wide. The comparison belongs to the band vocabulary; only the tiers belong in
+    // the property value. Inlining this predicate back reds that walker.
+    const emptied = s.band === 'empty';
     const court = courtOf(s);
     // ⚠ NAMED `standsNow`, NOT `now`. A local `now` here SHADOWS the `now` parameter —
     // the pinned tick timestamp every entry's `createdAt` carries — and the shadow is
@@ -164,8 +171,8 @@ export function treasuryNewsEntries({ tick, now, states = [] }) {
       impactKind: 'treasury_band',
       // A vault falling to nothing is the only crossing that rises above routine; the
       // rest are texture, and the feed governor should treat them as such.
-      significance: s.band === 'empty' ? 'major' : 'notable',
-      severity: s.band === 'empty' ? 0.55 : 0.3,
+      significance: emptied ? 'major' : 'notable',
+      severity: emptied ? 0.55 : 0.3,
       headline: fell ? `${court} draws down its treasury` : `${court} rebuilds its treasury`,
       summary,
       settlementIds: [String(s.id)],

@@ -16,7 +16,7 @@ import { describe, expect, it } from 'vitest';
 
 import { treasuryNewsEntries } from '../../src/domain/worldPulse/treasuryNews.js';
 import { TREASURY_BANDS, treasuryBandOf, advanceTreasury } from '../../src/domain/worldPulse/treasury.js';
-import { EXACT_SECTION, HERALD_SECTIONS } from '../../src/domain/realm/heraldRouting.js';
+import { SECTION_OF, isExplicitlyRouted, HERALD_SECTIONS } from '../../src/domain/realm/heraldRouting.js';
 
 const NOW = '2026-02-02T00:00:00.000Z';
 
@@ -141,10 +141,19 @@ describe('the beats are routable, banded and deterministic', () => {
     const kinds = [...new Set(everyBranch().map((e) => e.impactKind))];
     expect(kinds.sort()).toEqual(['treasury_band', 'treasury_shortfall']);
     for (const kind of kinds) {
-      const section = EXACT_SECTION[kind];
+      // ⛔ ASK THE GUARANTEE, NOT THE ALGORITHM. This arm used to index EXACT_SECTION
+      // directly, which pinned the DOOR the routing happens to use rather than the
+      // promise the beat depends on — and it reddened the moment the two beats moved to
+      // the `treasury_` family prefix, even though every one of them still routes to
+      // exactly the same section. SECTION_OF is the resolver every consumer actually
+      // calls, and isExplicitlyRouted is the no-orphan guarantee (it is TRUE for an exact
+      // row OR a family prefix, and FALSE only for a catch-all fall-through), so together
+      // they assert what this test always meant and survive either door.
+      const section = SECTION_OF(kind);
       expect(section, `${kind} has no Herald section`).toBeTruthy();
       expect(HERALD_SECTIONS).toContain(section);
       expect(section, 'the crown\'s purse is an economic event (routing law 3)').toBe('trade');
+      expect(isExplicitlyRouted(kind), `${kind} reaches 'trade' only by catch-all fall-through`).toBe(true);
     }
   });
 

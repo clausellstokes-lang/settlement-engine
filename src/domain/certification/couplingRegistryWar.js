@@ -349,6 +349,42 @@ export const WR6_WAR_COALITION_COUPLINGS = Object.freeze([
   WR6_PAIRWISE_SETTLEMENT_COUPLING,
 ]);
 
+/**
+ * WR-6b / CPL-6. W-COIN-3's COFFERS TERM. Coalition expenditure reads the crown's own
+ * vault to score how long it can keep paying for the war — an INTERIOR stock priced into
+ * a WAR pressure read, through the SAME single `coffersRead` reading warCosts uses, so two
+ * surfaces cannot score the same question from two independently written expressions.
+ *
+ * ⛔ WHY ITS OWN WR-6b GROUP AND NOT A ROW IN WR6_WAR_COALITION_COUPLINGS: that array is
+ * pinned at SEVEN rows and every member is asserted `owningWave === 'WR-6'`
+ * (couplingRegistry.test.js, "records the seven WR-6 reads"). This read landed with
+ * W-COIN-3 and not with the coalition wave, so it takes its own wave letter rather than
+ * falsifying either pin. No THIRTEENTH volume prefix is opened by it: `WR` is already
+ * chartered and the couplingId shape admits `WR-6b` through its own `\d+[a-z]?` clause.
+ *
+ * The counterforce is the read itself, and it is a real one: the coffers component is
+ * ABSENT unless the purse is OBSERVED, so a dark world scores the frozen five-weight set
+ * exactly as before and this coupling cannot speak at all.
+ */
+export const WR6B_COALITION_COFFERS_COUPLING = couplingRow({
+  couplingId: 'CPL-6.INTERIOR_TO_WAR.WR-6b.coalition_coffers',
+  pairId: 'CPL-6',
+  direction: 'INTERIOR→WAR',
+  read: 'src/domain/worldPulse/warCoalitionExpenditure.js#readCoalitionExpenditure',
+  receiptField: 'pulseRecord.warCoalitionEvidence[kind=coalition_expenditure_read].{components.coffers.band,components.coffers.source,completeness.coffers}',
+  counterforce: 'src/domain/worldPulse/warCoalitionExpenditure.js#readCoalitionExpenditure',
+  flags: ['warLayerEnabled', 'warTerminationEnabled', 'peaceEngineEnabled', 'coalitionLedgerEnabled', 'treasuryEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-6b',
+  intendedDesk: 'trade',
+  kinds: ['coalition_expenditure_read'],
+});
+
+/** The one WR-6b cross-layer read: the coalition's coffers term (W-COIN-3). */
+export const WR6B_WAR_TREASURY_COUPLINGS = Object.freeze([
+  WR6B_COALITION_COFFERS_COUPLING,
+]);
+
 const WR7_ENVOY_FLAGS = Object.freeze([
   'warLayerEnabled',
   'warTerminationEnabled',
