@@ -30,7 +30,7 @@ vi.mock('../../src/store/index.js', () => {
 
 import { useStore } from '../../src/store/index.js';
 import TreatyPanel from '../../src/components/map/TreatyPanel.jsx';
-import WarFaithTab from '../../src/components/new/tabs/WarFaithTab.jsx';
+import WarTab from '../../src/components/new/tabs/WarTab.jsx';
 import { renderAllTreaties } from '../../src/domain/display/treatyDocument.js';
 import {
   successionQuestionOpenLines,
@@ -156,7 +156,7 @@ function campaignOf(worldState) {
 
 /** Render one mount once: its exact markup, its dossier lines in render order, and every
  *  block's text in DOCUMENT order (which is how the beneath-the-age-line claim is read —
- *  WarFaithTab's longevity line carries no testid and this slice may not give it one). */
+ *  WarTab's longevity line carries no testid and this slice may not give it one; §805 split — the treaty block now lives in the WAR tab). */
 function snapshot(element) {
   const { container } = render(element);
   const html = container.innerHTML;
@@ -179,7 +179,7 @@ function tabOf(worldState, sid = 'march') {
       { id: 'march', settlement: { name: 'March' } },
     ],
   });
-  return snapshot(createElement(WarFaithTab, {
+  return snapshot(createElement(WarTab, {
     settlement: { id: sid, name: sid === 'march' ? 'March' : 'Crown' }, saveId: sid,
   }));
 }
@@ -496,7 +496,7 @@ describe('GR-4b-iii-b — the open-question dossier line', () => {
     expect(MARCH_LINES).toContain(line);
 
     // Both mounts render it, and each renders it BENEATH its longevity line. Read in
-    // DOCUMENT order rather than by testid, because WarFaithTab's age line carries none.
+    // DOCUMENT order rather than by testid, because WarTab's age line carries none.
     expect(doc.ageLine).toBeTruthy();
     for (const mount of [panelOf(state), tabOf(state)]) {
       expect(mount.lines).toEqual([line]);

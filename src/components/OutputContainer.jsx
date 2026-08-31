@@ -64,9 +64,9 @@ import DossierGroupTabStrip from './dossier/DossierGroupTabStrip.jsx';
 // effective lines the viewerCanAuthor alignment below costs — this file sits
 // EXACTLY at the 600-line components ceiling, so additions must be net-zero.
 import {
-  ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel, EconomicsTab, HistoryTab, MagicTab,
-  NPCsTab, NotesTab, OverviewTab, PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab, ServicesTab,
-  SubstrateTab, SummaryTab, SummaryTabV2, TraditionsTab, VersionsTab, ViabilityTab, WarFaithTab,
+  ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel, EconomicsTab, FaithTab, HistoryTab,
+  MagicTab, NPCsTab, NotesTab, OverviewTab, PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab,
+  ServicesTab, SubstrateTab, SummaryTab, SummaryTabV2, TraditionsTab, VersionsTab, ViabilityTab, WarTab,
 } from './dossier/dossierLazyTabs.js';
 
 
@@ -92,7 +92,7 @@ import {
 // from the strip by the resolver below.
 export const TAB_GROUPS = Object.freeze({
   summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
-  systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic', 'war_faith'] },
+  systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic'] },
   // World — NPC-FIRST (master's P8 "first-click-lands" ordering law, restored from
   // the composite's relationships-first regression per THE BASE RECONCILIATION MAP
   // SURFACE 1). Keeps the composite's `rumors` addition. `traditions` (owner: "the
@@ -100,8 +100,10 @@ export const TAB_GROUPS = Object.freeze({
   // culture next to daily life) was placed here by the deep-craft wave as a
   // data-only seam and WIRED at the composite fold: TraditionsTab, its TABS
   // registration and renderTab case arrived with claude/traditions and plugged
-  // into this already-placed slot with no reorder.
-  world:   { label: 'World',   tabs: ['npcs', 'relationships', 'rumors', 'daily_life', 'traditions', 'history', 'neighbours'] },
+  // into this already-placed slot with no reorder. §805 split the Systems-group
+  // War & Faith tab into WORLD-group `war` and `faith`, slotted after `rumors` —
+  // the epistemic run reads heard → believed (war) → worshipped (faith).
+  world:   { label: 'World',   tabs: ['npcs', 'relationships', 'rumors', 'war', 'faith', 'daily_life', 'traditions', 'history', 'neighbours'] },
   // STRIP-1: the Map group is REMOVED. The dossier reads Summary / Systems / World / Notes.
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });
@@ -498,23 +500,26 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     if (['dm_notes', 'ai_notes'].includes(t.id) && readOnly && !saveId) return false;
     return true;
   });
-  // Phase 5 W4e — War & Faith presence. The faith half renders SOMETHING unless
-  // the viewer is premium/elevated with no deity embed (FaithSection's HIDDEN
-  // mode): an embed → the read-only panel for all; a non-premium owner → the
-  // generic teaser (names NO deity). So the tab shows when the faith half would
-  // render OR the town is in a live campaign (war state). Premium + deity-free +
-  // non-campaign ⇒ no tab; a public deity-free dossier stays clean. Presence is
-  // tier-gated the SAME way FaithSection's CONTENT is — it never leaks a name.
+  // §805 — the split presences. WAR is a campaign story: the tab registers only
+  // for a clock-bound settlement (content self-gates to honest absence inside).
+  // FAITH keeps the old faith-half law exactly: it renders SOMETHING unless the
+  // viewer is premium/elevated with no deity embed (FaithSection's HIDDEN mode):
+  // an embed → the read-only panel for all; a non-premium owner → the generic
+  // teaser (names NO deity). Premium + deity-free ⇒ no tab; a public deity-free
+  // dossier stays clean. Presence is tier-gated the SAME way FaithSection's
+  // CONTENT is — it never leaks a name.
   const faithHasEmbed = !!(rawSettlement?.config?.primaryDeitySnapshot && typeof rawSettlement.config.primaryDeitySnapshot === 'object');
-  const hasWarFaith = faithHasEmbed || inCampaign || (!viewerIsPremium && !publicDossier);
+  const hasWarTab = inCampaign;
+  const hasFaithTab = faithHasEmbed || (!viewerIsPremium && !publicDossier);
   const allTabs = [...baseTabs,
     // Plot Hooks — a Summary sub-tab (spec §8); shown only when the settlement
     // actually surfaces structural hooks.
     ...(hasPlotHooks ? [{ id:'plot_hooks', label:'Plot Hooks', Icon: Drama }] : []),
-    // War & Faith (Systems) — OUR gated FaithSection + a war half from OUR
-    // warResolve read-models. Reuses the already-bundled Swords glyph (no new
-    // first-paint icon). Presence gate above.
-    ...(hasWarFaith ? [{ id:'war_faith', label:'War & Faith', Icon: Swords }] : []),
+    // §805 — WAR and FAITH (World). Reuse the already-bundled Swords / Sparkles
+    // glyphs (no new first-paint icon; Sparkles doubles for AI Notes the way
+    // Drama doubles for Traditions / Plot Hooks). Presence gates above.
+    ...(hasWarTab ? [{ id:'war', label:'War', Icon: Swords }] : []),
+    ...(hasFaithTab ? [{ id:'faith', label:'Faith', Icon: Sparkles }] : []),
     // Guidance (DM Compass) — the AI-narrated layer; only present once narration
     // produced it, and tinted purple in the strip below.
     ...(!playerView && hasDMCompass ? [{ id:'dm_compass', label:'Guidance', Icon: Compass }] : []),
@@ -711,11 +716,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'substrate':  return <SubstrateTab settlement={s} />;
       // STRIP-1: the `map` case is REMOVED with the tab (owner ruling, ODQ §725).
       case 'magic':      return <MagicTab settlement={s} />;
-      // War & Faith — OUR gated FaithSection + a war half from OUR light
-      // warStatus read-models. FaithSection self-gates by tier (full panel on an embed,
-      // generic teaser for free/anon naming NO deity, nothing for a premium
-      // deity-free town). Never THEIRS' ungated pantheon-leaking section.
-      case 'war_faith':  return <WarFaithTab settlement={s} saveId={saveId} publicDossier={publicDossier} />;
+      // §805 — WAR (the believed unit picture + DM truth) and FAITH (OUR gated
+      // FaithSection: full panel on an embed, generic teaser for free/anon naming
+      // NO deity, nothing for a premium deity-free town). Never THEIRS' ungated
+      // pantheon-leaking section.
+      case 'war':        return <WarTab settlement={s} saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
+      case 'faith':      return <FaithTab settlement={s} publicDossier={publicDossier} />;
       // Rumors & News — the trade-carrier rumor ledger, player-scrubbed; the
       // DM-truth reveal self-gates inside (premium owner, never playerView /
       // public dossier — the includeGroundTruth convention).

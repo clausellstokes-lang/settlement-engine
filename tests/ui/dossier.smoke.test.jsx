@@ -90,13 +90,21 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
     expect(typeof mod.default).toBe('function');
   });
 
-  // Phase 5 W4e — the three dossier-depth tabs register into the Systems group,
+  // Phase 5 W4e — the dossier-depth tabs register into the Systems group,
   // and the OURS-ahead mounted Versions tab is NOT displaced from Notes.
-  test('Systems group registers the Substrate / Magic / War & Faith sub-tabs', async () => {
+  // §805 moved War & Faith OUT of Systems into two WORLD-group tabs; the old
+  // combined id must never resurface in any group.
+  test('Systems keeps Substrate / Magic; World registers the split War and Faith tabs', async () => {
     const mod = await import('../../src/components/OutputContainer.jsx');
     expect(mod.TAB_GROUPS.systems.tabs).toEqual(
-      expect.arrayContaining(['substrate', 'magic', 'war_faith']),
+      expect.arrayContaining(['substrate', 'magic']),
     );
+    expect(mod.TAB_GROUPS.world.tabs).toEqual(
+      expect.arrayContaining(['war', 'faith']),
+    );
+    // anchored: the arrayContaining assertions above prove both groups resolve
+    // with live tab populations, so this absence cannot pass vacuously.
+    expect(Object.values(mod.TAB_GROUPS).flatMap((g) => g.tabs)).not.toContain('war_faith');
   });
 
   test('the mounted Versions tab (F26) stays registered under Notes', async () => {

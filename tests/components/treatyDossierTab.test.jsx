@@ -3,7 +3,8 @@
  * treatyDossierTab.test.jsx — W-PEACE-3 the treaty surfaces (§13 legibility).
  *
  * Pins the two UI homes for treaties-as-documents:
- *   • the dossier's War & Faith tab renders a settlement's treaty where it is a
+ *   • the dossier's WAR tab (§805 split; formerly War & Faith) renders a
+ *     settlement's treaty where it is a
  *     party — the terms, the house-voice compliance, and the fraying seam;
  *   • the realm TreatyPanel renders every treaty (and an honest empty note when
  *     none stand — the dormancy render).
@@ -27,7 +28,7 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 import { useStore } from '../../src/store/index.js';
-import WarFaithTab from '../../src/components/new/tabs/WarFaithTab.jsx';
+import WarTab from '../../src/components/new/tabs/WarTab.jsx';
 import TreatyPanel from '../../src/components/map/TreatyPanel.jsx';
 import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
 
@@ -55,13 +56,13 @@ function campaignWithTreaty() {
 beforeEach(() => useStore.__reset());
 afterEach(() => cleanup());
 
-describe('WarFaithTab — the treaty document where the settlement is a party', () => {
+describe('WarTab — the treaty document where the settlement is a party', () => {
   it('renders the settlement treaty: role, term, house-voice compliance, and the fraying seam', () => {
     const campaign = campaignWithTreaty();
     useStore.__set({ campaigns: [campaign], savedSettlements: [
       { id: 'iron', settlement: { name: 'Ironhold' } }, { id: 'weak', settlement: { name: 'Weakmoor' } },
     ] });
-    const { container } = render(<WarFaithTab settlement={{ id: 'weak', name: 'Weakmoor' }} saveId="weak" />);
+    const { container } = render(<WarTab settlement={{ id: 'weak', name: 'Weakmoor' }} saveId="weak" />);
     expect(screen.getByTestId('treaty-block')).toBeTruthy();
     expect(container.textContent).toContain('The Peace of Weakmoor');
     expect(container.textContent).toMatch(/as the bound party/);
@@ -75,7 +76,7 @@ describe('WarFaithTab — the treaty document where the settlement is a party', 
   it('a settlement with no treaty shows NO treaty block', () => {
     const campaign = { id: 'c1', settlementIds: ['iron', 'weak'], worldState: { tick: 5, canonizedAt: '2026-01-01T00:00:00.000Z', spatialLedgers: {} } };
     useStore.__set({ campaigns: [campaign], savedSettlements: [{ id: 'weak', settlement: { name: 'Weakmoor' } }] });
-    render(<WarFaithTab settlement={{ id: 'weak', name: 'Weakmoor' }} saveId="weak" />);
+    render(<WarTab settlement={{ id: 'weak', name: 'Weakmoor' }} saveId="weak" />);
     expect(screen.queryByTestId('treaty-block')).toBeNull();
   });
 });

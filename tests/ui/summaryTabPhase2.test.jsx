@@ -25,7 +25,7 @@ import { afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 
 import SummaryTabV2 from '../../src/components/new/SummaryTabV2.jsx';
-import WarFaithTab from '../../src/components/new/tabs/WarFaithTab.jsx';
+import WarTab from '../../src/components/new/tabs/WarTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 afterEach(cleanup);
@@ -53,9 +53,10 @@ describe('SummaryTabV2 + War & Faith (dossier keystone) — self-gating', () => 
     expect(queryByTestId('what-changed-panel')).toBeNull();
   });
 
-  test('a peaceful, deity-free, non-campaign settlement renders NO War & Faith section', () => {
-    const { queryByTestId } = render(<WarFaithTab settlement={town} saveId={null} />);
-    expect(queryByTestId('war-faith-section')).toBeNull();
+  test('a peaceful, non-campaign settlement renders NO war block in the WAR tab (§805 split)', () => {
+    const { queryByTestId, getByTestId } = render(<WarTab settlement={town} saveId={null} />);
+    expect(getByTestId('war-tab')).toBeTruthy();
+    expect(queryByTestId('war-block')).toBeNull();
   });
 
   // R-5b #22 — the remount pin. This is the assertion the Phase-2 move dropped

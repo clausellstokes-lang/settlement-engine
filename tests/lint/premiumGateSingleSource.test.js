@@ -150,7 +150,13 @@ const EXEMPTIONS = {
   'src/components/map/TreatyPanel.jsx': 'content-visibility',
   'src/components/map/useWorldMapCampaignModel.js': 'campaign-or-import-entitlement',
   'src/components/new/tabs/RumorsTab.jsx': 'content-visibility',
-  'src/components/new/tabs/WarFaithTab.jsx': 'content-visibility',
+  // §805 split: the WarFaithTab row became two. WarTab spells the RumorsTab
+  // includeGroundTruth line verbatim (may this viewer see GROUND TRUTH — unit
+  // positions' true picture + the belief band); FaithTab mirrors FaithSection's
+  // mode resolution to decide the honest-absence note. Both are the same
+  // content-visibility question the old combined tab carried.
+  'src/components/new/tabs/FaithTab.jsx': 'content-visibility',
+  'src/components/new/tabs/WarTab.jsx': 'content-visibility',
   'src/components/pricing/FounderTile.jsx': 'sell-to-the-tier',
   'src/components/pricing/PricingTierCards.jsx': 'sell-to-the-tier',
   'src/components/session/SessionMode.jsx': 'content-visibility',

@@ -247,6 +247,15 @@ function martialOf(settlement) {
   return m && typeof m === 'object' ? /** @type {MartialRecord} */ (m) : null;
 }
 
+/** Whether a settlement carries a projected martial record at all — the HONEST
+ *  PRESENCE read for display surfaces (§805 WAR tab): the site readers below
+ *  return identity defaults for an absent record (readiness 0, experience 1),
+ *  so a display that wants to say NOTHING rather than a fabricated zero asks
+ *  this first. @param {SimSettlement|null|undefined} settlement @returns {boolean} */
+export function hasMartialRecord(settlement) {
+  return martialOf(settlement) != null;
+}
+
 /** 0..1 readiness of a settlement (absent record ⇒ 0). @param {SimSettlement} settlement @returns {number} */
 export function readinessOf(settlement) {
   const m = martialOf(settlement);

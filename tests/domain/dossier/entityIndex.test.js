@@ -305,7 +305,7 @@ describe('dossier sink anchors + ids', () => {
     const entry = index.deities[0];
     expect(entry).toBeTruthy();
     expect(entry.type).toBe('deity');
-    expect(entry.tab).toBe('war_faith');
+    expect(entry.tab).toBe('faith');
     // WarFaithSection's outer div declares id={entityAnchor('deity', { name })};
     // it must equal the stored anchor (a true `dossier-deity-<slug>`, not the
     // old borrowed `dossier-settlement-<slug>`).

@@ -197,7 +197,7 @@ export const TYPE_TO_TAB = Object.freeze({
   npc: 'npcs',
   faction: 'power',
   institution: 'overview',
-  deity: 'war_faith',
+  deity: 'faith',
   settlement: 'overview',
   neighbour: 'relationships',
   event: 'history',

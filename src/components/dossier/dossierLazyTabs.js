@@ -24,8 +24,9 @@ export const ServicesTab = lazy(() => import('../new/tabs/ServicesTab'));
 export const PowerTab = lazy(() => import('../new/tabs/PowerTab'));
 // Phase 4 W-F6 — the FAITH surface (patron / pantheon ranks / piety arc /
 // legitimacy / cause chains), tier-gated inside. It now renders inside the
-// dedicated War & Faith tab (WarFaithTab, W4e) rather than under Power, so it's
-// still lazy — loaded with the WarFaithTab chunk on first open (ratchet: faith lazy).
+// dedicated FAITH tab (§805 split, formerly WarFaithTab/W4e) rather than under
+// Power, so it's still lazy — loaded with the FaithTab chunk on first open
+// (ratchet: faith lazy).
 // Phase 5 W-C4 — the patron/cult ASSIGNMENT control (the write half of the
 // embed-on-assign bridge). Editable dossiers only; self-gates by tier inside
 // (premium write · lapsed read-only · free upsell). Lazy so the registry + copy
@@ -46,10 +47,14 @@ export const NotesTab = lazy(() => import('../new/tabs/NotesTab.jsx'));
 // (Cog / Sparkles / Swords) and add nothing to the first-paint vendor-icons chunk.
 export const SubstrateTab = lazy(() => import('../new/tabs/SubstrateTab.jsx'));
 export const MagicTab = lazy(() => import('../new/tabs/MagicTab.jsx'));
-// War & Faith — composes OUR gated FaithSection (the constitutional premium seam)
-// with a war half from OUR warResolve read-models. NEVER THEIRS' ungated
-// WarFaithSection / useSettlementLiveWorld (those leak the live pantheon).
-export const WarFaithTab = lazy(() => import('../new/tabs/WarFaithTab.jsx'));
+// §805 — the WarFaithTab split into two WORLD-group tabs. WAR carries the
+// believed unit picture + staleness bands + the DM-truth divergence, the named
+// wars with typed casus, the muster/condition reads, and the treaties. FAITH
+// composes OUR gated FaithSection (the constitutional premium seam) — NEVER
+// THEIRS' ungated WarFaithSection / useSettlementLiveWorld (those leak the
+// live pantheon). Each stays lazy — loaded on first open.
+export const WarTab = lazy(() => import('../new/tabs/WarTab.jsx'));
+export const FaithTab = lazy(() => import('../new/tabs/FaithTab.jsx'));
 // Rumors & News (Phase 5.5 STEP 3.5) — what this settlement has HEARD of the
 // realm (the trade-carrier rumor ledger), player-scrubbed, with the DM-truth
 // reveal on the includeGroundTruth seam. Lazy; the tab itself only registers
