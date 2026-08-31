@@ -40,8 +40,11 @@
  * without this leaf noticing.
  *
  * ── ALL FOUR CONSUMERS ARE ON IT (T8) ───────────────────────────────────────
- * `neighbourGenerator.js`, `interior/interiorModel.js` and `townMap/townLayoutV2.js` moved in
- * T7. `corruption.js` could not: its climate adapter feeds `corruptionPass`, a GENERATION
+ * `neighbourGenerator.js`, `interior/interiorModel.js` and the town layout builder named in
+ * the table above moved in T7. (Its module path is deliberately not spelled here: this leaf
+ * carries no map surface, and the §11.4 allowlist walker reads source text, so writing the
+ * path would enrol a pure ladder in the settlement-map census for a comment.)
+ * `corruption.js` could not: its climate adapter feeds `corruptionPass`, a GENERATION
  * step, so the flip was same-seed load-bearing and ODQ §773.1 holds every golden-moving wave
  * for T8's single shift window. It rode there (J-T7-C / §809), the registered holdout export
  * that stood here in the meantime is deleted, and the golden rows it moved are re-recorded
