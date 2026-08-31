@@ -35,16 +35,16 @@
  },
  "digests": {
   "corpusMeta": "ef19224c20401a94c9b20611ff65e607bfaa5b345b3ec88eaa40b220e5e915bb",
-  "inventory": "21d5ed88889d3125def1f1d4dbb79c4abdd3fb5f39795a3c1d666cc0945e32fb",
-  "manifests": "a6af9734225605c18b287f384cc8047352e1cc760d0a25bc44eb91be2a3fa22e",
-  "migrationReview": "5398bcf82c9ba0913daa5d392e238f939f1eaab787c6f7589c3ff59b2a6468ae",
-  "rowTags": "5099d7cf6da15e3c2d34885392e870de3749d28fe47a8079d3e7428f5d1ea39e",
-  "scanStats": "43919fc77e08979074edaa59929c2647eccc0cdae0f970f167f78f8efc2c9135",
-  "sentinel": "f350c531078b4e99a8dedde6a23ab46fe2ad8c6039f060087700b01750cd9935"
+  "inventory": "406bf97109dcd7674cfcee9d6fac75ec2de30a1bb7307c6e029306c36b268a1a",
+  "manifests": "f50a400469d6adc7fc0d0242480e9b914b4cf7f196800cc3087aee68cdcaa137",
+  "migrationReview": "37ab2ea0d1e4bfe36c54ebd753592e7b186e05d3b0ffec3e4c41d3fe1179e28e",
+  "rowTags": "83b81cb1b20f039715385d514b40459728d8071c61e1e8ff7627a9375cebf49a",
+  "scanStats": "055db92311a9b3529163cc3b877c479fa4eac8ae433c77e94917e9c3acefdb8e",
+  "sentinel": "3aa2c6349b680be1d11e97ce000449d1c6b38121b9ac9eb55f95554d88c7c37a"
  },
- "frozen": "2026-08-30",
- "frozenAtSha": "89043e45b66722df3ddcc61555f6f9aa4c6234ed",
- "identities": 1410,
+ "frozen": "2026-08-31",
+ "frozenAtSha": "4789d98271aeecc8dbe1517ea0db0ca7183ceabf",
+ "identities": 1413,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -769,6 +769,11 @@
   "src/domain/inferSupplyChains.js": {
    "tierMax on raw": 1,
    "tierMin on raw": 1
+  },
+  "src/domain/instantWorld/genesisDiplomacy.js": {
+   "_slot on save": 2,
+   "neighbourNetwork on settlement": 2,
+   "tier on save": 1
   },
   "src/domain/institutions/institutionRoster.js": {
    "_worldPulseInactive on institutions": 1
@@ -2236,7 +2241,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "01090f5df072b082a6418333c50ba5c60d99e41b9c4365ef484613a7bb03e6da",
+   "digest": "8921d8f2ebd7033acdb888f9097c590c71290d59df82c56e8c2a81350bbdf6a6",
    "entries": [
     {
      "mode": "100644",
@@ -2255,8 +2260,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "0765a58e3468f4d57d5a8ea41fc2970ff47f2103014899f3a98f7b8753dd21a2",
-     "size": 151234,
+     "sha256": "4420a259ea1fdc3e36e5172dcc711384ed57a7a559757e2bf9915f2893ffa12d",
+     "size": 151326,
      "type": "file"
     },
     {
@@ -2276,8 +2281,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "d62cbb1a284777559a6b2ed679b5701a971d93714e96725e1f338cd37df3cb19",
-     "size": 45364,
+     "sha256": "200e85060ce73b3ed66524ffaa7bb03e34577bd692eb791defc6183f2c12d04b",
+     "size": 47336,
      "type": "file"
     },
     {
@@ -2304,8 +2309,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "bd1eb87b5a6b3c53890e1b83029a427d0406e349cc44218234b8ebb8ab171ef6",
-     "size": 86831,
+     "sha256": "9b737e9db031cea1143c2c1d3da95353f645384ca7e1eb234459ff9ec8d2b9ec",
+     "size": 91649,
      "type": "file"
     },
     {
@@ -2319,7 +2324,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "45135096cb37a594f0a7fa8af25f4657e8b964b6577ead11bc9182ff27c65f05",
+   "digest": "c09940d0a4f74274a857e493c3901cb6e2060fd6a4c1b669001dfc00db4aa665",
    "entries": [
     {
      "mode": "100644",
@@ -2338,8 +2343,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "0765a58e3468f4d57d5a8ea41fc2970ff47f2103014899f3a98f7b8753dd21a2",
-     "size": 151234,
+     "sha256": "4420a259ea1fdc3e36e5172dcc711384ed57a7a559757e2bf9915f2893ffa12d",
+     "size": 151326,
      "type": "file"
     },
     {
@@ -2359,8 +2364,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "d62cbb1a284777559a6b2ed679b5701a971d93714e96725e1f338cd37df3cb19",
-     "size": 45364,
+     "sha256": "200e85060ce73b3ed66524ffaa7bb03e34577bd692eb791defc6183f2c12d04b",
+     "size": 47336,
      "type": "file"
     },
     {
@@ -2387,8 +2392,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "bd1eb87b5a6b3c53890e1b83029a427d0406e349cc44218234b8ebb8ab171ef6",
-     "size": 86831,
+     "sha256": "9b737e9db031cea1143c2c1d3da95353f645384ca7e1eb234459ff9ec8d2b9ec",
+     "size": 91649,
      "type": "file"
     },
     {
@@ -8987,9 +8992,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/instantWorld/genesisDiplomacy.js",
+     "sha256": "405493a1e1471cba531b4faecbe1d0aa28161691efceaef8d691fb4d29f869b6",
+     "size": 20011,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/instantWorld/worldPlan.js",
-     "sha256": "03386738a6afdd7095ab980c13bef8d15b0fb827e32b300d4d24df4dc5889cc8",
-     "size": 11774,
+     "sha256": "29e4131d5b050fc747cbd5c68baddcad8edf49f5dbb6e87ccde19f4afa199e34",
+     "size": 17632,
      "type": "file"
     },
     {
@@ -9659,6 +9671,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/spatial/captureSidecar.js",
+     "sha256": "2849125caa8a69147d33fc83dd5a5cba3146f5a8ed40f26c25bb2fe15e7f9452",
+     "size": 11297,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/spatial/cohesionWeave.js",
      "sha256": "decad7d5b0891690631ba24908ac6afd1e188260aeab43b4ed8b1aa2d47f5bfb",
      "size": 23107,
@@ -9814,8 +9833,8 @@
     {
      "mode": "100644",
      "path": "src/domain/spatial/spatialDigest.js",
-     "sha256": "9017984a2e7892620925587eed8bb72e8fd62994c133b4ce3585f9ada485a2b5",
-     "size": 47380,
+     "sha256": "8b04c897f8bba570fc2230e2f4fb332182a55e622f924d68fe5467c56a1cd767",
+     "size": 48317,
      "type": "file"
     },
     {
@@ -14601,6 +14620,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/kernel/detPow.js",
+     "sha256": "693f536b04962de28271398b638eb839d1d3dfd7aca4f2739a394fc7ccca3df5",
+     "size": 6849,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/kernel/deterministicPng.js",
      "sha256": "e8f0b369a6f2d41df5f38dde249d4b1a5fe689f2e096622b7e40276a71a3fdb3",
      "size": 4716,
@@ -15435,8 +15461,15 @@
     {
      "mode": "100644",
      "path": "src/lib/instantWorld/composeInstantWorld.js",
-     "sha256": "ae169ded8ce4cacaa1b71bc48111f5ffb3138741509949448b08905c5845a957",
-     "size": 18934,
+     "sha256": "381ddb2b370ca24292776b2e80f7c5a430fccf090f0145aea2ff0434af14d0bf",
+     "size": 25579,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/lib/instantWorld/composerPipeline.js",
+     "sha256": "0b14a94d324d3c5f34c5fb86f6d67357117acf8c4a92e8136f8b10dfaafabbab",
+     "size": 8939,
      "type": "file"
     },
     {
@@ -15764,8 +15797,8 @@
     {
      "mode": "100644",
      "path": "src/lib/spatialPackCapture.js",
-     "sha256": "aacbfe207e243623f63c1f91767afa62910ce105e4c2453249632e3734b62e17",
-     "size": 15241,
+     "sha256": "c693b9a22055ec77b8e15e37580936397367f3e161ef9c396c8f2592faf724ec",
+     "size": 16186,
      "type": "file"
     },
     {
@@ -15890,8 +15923,8 @@
     {
      "mode": "100644",
      "path": "src/lib/worldCode.js",
-     "sha256": "7903436f3472b18bf0c7623a2b03d8e0fa67603fff44980b6ee5dbacbb74f4f8",
-     "size": 5934,
+     "sha256": "5d287e77e4375af5f508bf60157e70fa1d82974f7500097230c7075f86d51958",
+     "size": 8519,
      "type": "file"
     },
     {
@@ -16478,8 +16511,8 @@
     {
      "mode": "100644",
      "path": "src/store/campaignSpatialCanonize.js",
-     "sha256": "3d7e598f32052f6c59da37b426a40068cbf9f87287c514647eee1be96bced613",
-     "size": 11712,
+     "sha256": "93a40869fca72c36253d0d26096d9aca6ac9ffe6895d2426cb8790acf83f5d15",
+     "size": 12554,
      "type": "file"
     },
     {
@@ -16941,7 +16974,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a64318c04a54e82874df352bc0659f7b2c27635472869bea6b9b4006b96bbf8a",
+   "digest": "eeb53f5528faf134cd21dcf5d53c1046798d1d419f60e6dd32453984a88e8787",
    "entries": [
     {
      "mode": "100644",
@@ -23448,9 +23481,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/instantWorld/genesisDiplomacy.js",
+     "sha256": "405493a1e1471cba531b4faecbe1d0aa28161691efceaef8d691fb4d29f869b6",
+     "size": 20011,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/instantWorld/worldPlan.js",
-     "sha256": "03386738a6afdd7095ab980c13bef8d15b0fb827e32b300d4d24df4dc5889cc8",
-     "size": 11774,
+     "sha256": "29e4131d5b050fc747cbd5c68baddcad8edf49f5dbb6e87ccde19f4afa199e34",
+     "size": 17632,
      "type": "file"
     },
     {
@@ -24120,6 +24160,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/spatial/captureSidecar.js",
+     "sha256": "2849125caa8a69147d33fc83dd5a5cba3146f5a8ed40f26c25bb2fe15e7f9452",
+     "size": 11297,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/spatial/cohesionWeave.js",
      "sha256": "decad7d5b0891690631ba24908ac6afd1e188260aeab43b4ed8b1aa2d47f5bfb",
      "size": 23107,
@@ -24275,8 +24322,8 @@
     {
      "mode": "100644",
      "path": "src/domain/spatial/spatialDigest.js",
-     "sha256": "9017984a2e7892620925587eed8bb72e8fd62994c133b4ce3585f9ada485a2b5",
-     "size": 47380,
+     "sha256": "8b04c897f8bba570fc2230e2f4fb332182a55e622f924d68fe5467c56a1cd767",
+     "size": 48317,
      "type": "file"
     },
     {
@@ -29062,6 +29109,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/kernel/detPow.js",
+     "sha256": "693f536b04962de28271398b638eb839d1d3dfd7aca4f2739a394fc7ccca3df5",
+     "size": 6849,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/kernel/deterministicPng.js",
      "sha256": "e8f0b369a6f2d41df5f38dde249d4b1a5fe689f2e096622b7e40276a71a3fdb3",
      "size": 4716,
@@ -29896,8 +29950,15 @@
     {
      "mode": "100644",
      "path": "src/lib/instantWorld/composeInstantWorld.js",
-     "sha256": "ae169ded8ce4cacaa1b71bc48111f5ffb3138741509949448b08905c5845a957",
-     "size": 18934,
+     "sha256": "381ddb2b370ca24292776b2e80f7c5a430fccf090f0145aea2ff0434af14d0bf",
+     "size": 25579,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/lib/instantWorld/composerPipeline.js",
+     "sha256": "0b14a94d324d3c5f34c5fb86f6d67357117acf8c4a92e8136f8b10dfaafabbab",
+     "size": 8939,
      "type": "file"
     },
     {
@@ -30225,8 +30286,8 @@
     {
      "mode": "100644",
      "path": "src/lib/spatialPackCapture.js",
-     "sha256": "aacbfe207e243623f63c1f91767afa62910ce105e4c2453249632e3734b62e17",
-     "size": 15241,
+     "sha256": "c693b9a22055ec77b8e15e37580936397367f3e161ef9c396c8f2592faf724ec",
+     "size": 16186,
      "type": "file"
     },
     {
@@ -30351,8 +30412,8 @@
     {
      "mode": "100644",
      "path": "src/lib/worldCode.js",
-     "sha256": "7903436f3472b18bf0c7623a2b03d8e0fa67603fff44980b6ee5dbacbb74f4f8",
-     "size": 5934,
+     "sha256": "5d287e77e4375af5f508bf60157e70fa1d82974f7500097230c7075f86d51958",
+     "size": 8519,
      "type": "file"
     },
     {
@@ -30939,8 +31000,8 @@
     {
      "mode": "100644",
      "path": "src/store/campaignSpatialCanonize.js",
-     "sha256": "3d7e598f32052f6c59da37b426a40068cbf9f87287c514647eee1be96bced613",
-     "size": 11712,
+     "sha256": "93a40869fca72c36253d0d26096d9aca6ac9ffe6895d2426cb8790acf83f5d15",
+     "size": 12554,
      "type": "file"
     },
     {
@@ -31395,7 +31456,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "fa1e9b1ec32b49ba0d52ea4b1802c938fdc6befcbcdccc771cc918ba81791c00",
+   "digest": "3886fbc25b55c1655abaf7c68cf160d0e9f5d888fb19979f3bb7762e61d32009",
    "entries": [
     {
      "mode": "100644",
@@ -37993,9 +38054,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/instantWorld/genesisDiplomacy.js",
+     "sha256": "405493a1e1471cba531b4faecbe1d0aa28161691efceaef8d691fb4d29f869b6",
+     "size": 20011,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/instantWorld/worldPlan.js",
-     "sha256": "03386738a6afdd7095ab980c13bef8d15b0fb827e32b300d4d24df4dc5889cc8",
-     "size": 11774,
+     "sha256": "29e4131d5b050fc747cbd5c68baddcad8edf49f5dbb6e87ccde19f4afa199e34",
+     "size": 17632,
      "type": "file"
     },
     {
@@ -38665,6 +38733,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/spatial/captureSidecar.js",
+     "sha256": "2849125caa8a69147d33fc83dd5a5cba3146f5a8ed40f26c25bb2fe15e7f9452",
+     "size": 11297,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/spatial/cohesionWeave.js",
      "sha256": "decad7d5b0891690631ba24908ac6afd1e188260aeab43b4ed8b1aa2d47f5bfb",
      "size": 23107,
@@ -38820,8 +38895,8 @@
     {
      "mode": "100644",
      "path": "src/domain/spatial/spatialDigest.js",
-     "sha256": "9017984a2e7892620925587eed8bb72e8fd62994c133b4ce3585f9ada485a2b5",
-     "size": 47380,
+     "sha256": "8b04c897f8bba570fc2230e2f4fb332182a55e622f924d68fe5467c56a1cd767",
+     "size": 48317,
      "type": "file"
     },
     {
@@ -43607,6 +43682,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/kernel/detPow.js",
+     "sha256": "693f536b04962de28271398b638eb839d1d3dfd7aca4f2739a394fc7ccca3df5",
+     "size": 6849,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/kernel/deterministicPng.js",
      "sha256": "e8f0b369a6f2d41df5f38dde249d4b1a5fe689f2e096622b7e40276a71a3fdb3",
      "size": 4716,
@@ -44441,8 +44523,15 @@
     {
      "mode": "100644",
      "path": "src/lib/instantWorld/composeInstantWorld.js",
-     "sha256": "ae169ded8ce4cacaa1b71bc48111f5ffb3138741509949448b08905c5845a957",
-     "size": 18934,
+     "sha256": "381ddb2b370ca24292776b2e80f7c5a430fccf090f0145aea2ff0434af14d0bf",
+     "size": 25579,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/lib/instantWorld/composerPipeline.js",
+     "sha256": "0b14a94d324d3c5f34c5fb86f6d67357117acf8c4a92e8136f8b10dfaafabbab",
+     "size": 8939,
      "type": "file"
     },
     {
@@ -44770,8 +44859,8 @@
     {
      "mode": "100644",
      "path": "src/lib/spatialPackCapture.js",
-     "sha256": "aacbfe207e243623f63c1f91767afa62910ce105e4c2453249632e3734b62e17",
-     "size": 15241,
+     "sha256": "c693b9a22055ec77b8e15e37580936397367f3e161ef9c396c8f2592faf724ec",
+     "size": 16186,
      "type": "file"
     },
     {
@@ -44896,8 +44985,8 @@
     {
      "mode": "100644",
      "path": "src/lib/worldCode.js",
-     "sha256": "7903436f3472b18bf0c7623a2b03d8e0fa67603fff44980b6ee5dbacbb74f4f8",
-     "size": 5934,
+     "sha256": "5d287e77e4375af5f508bf60157e70fa1d82974f7500097230c7075f86d51958",
+     "size": 8519,
      "type": "file"
     },
     {
@@ -45484,8 +45573,8 @@
     {
      "mode": "100644",
      "path": "src/store/campaignSpatialCanonize.js",
-     "sha256": "3d7e598f32052f6c59da37b426a40068cbf9f87287c514647eee1be96bced613",
-     "size": 11712,
+     "sha256": "93a40869fca72c36253d0d26096d9aca6ac9ffe6895d2426cb8790acf83f5d15",
+     "size": 12554,
      "type": "file"
     },
     {
@@ -45940,30 +46029,30 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "89712e1b3490143967050f48dce456167a27aeb1388e2a2dfe5c5243f2e5d33c",
+  "bundleDigest": "400324e462e014a741e0c562d525e6815e0c7327e668baa43ff314847ace24d5",
   "corpusDigest": "f4f7a74198586cb8e2635ecc79627dad262bde841e1738290fb028720c0e5d93",
-  "currentArtifactDigest": "88a56febbc671934462e1c1416b6b906c4feb372df29b5ca9a803bbe64354f7a",
-  "currentDetectorDigest": "01090f5df072b082a6418333c50ba5c60d99e41b9c4365ef484613a7bb03e6da",
-  "currentFindingsDigest": "4250c92407b3716fa590f91a7f22d1a65e86ce3e545fa004b4aa19effaed9674",
-  "currentScannerSha": "89043e45b66722df3ddcc61555f6f9aa4c6234ed",
-  "currentScannerToolDigest": "ce36f726119ee40f754cb4cbef6b241208eca951bb53b4479e2397215b06b1df",
-  "detectorTreeDigest": "01090f5df072b082a6418333c50ba5c60d99e41b9c4365ef484613a7bb03e6da",
-  "executionTreeDigest": "45135096cb37a594f0a7fa8af25f4657e8b964b6577ead11bc9182ff27c65f05",
+  "currentArtifactDigest": "24b7ecc3d590c462c804f5308a34ac179a357cc9db668da8cf935f674aa95b41",
+  "currentDetectorDigest": "8921d8f2ebd7033acdb888f9097c590c71290d59df82c56e8c2a81350bbdf6a6",
+  "currentFindingsDigest": "ee06a40b23218c37a7519286de632141963ffadae62209d52c16f4a27d313501",
+  "currentScannerSha": "4789d98271aeecc8dbe1517ea0db0ca7183ceabf",
+  "currentScannerToolDigest": "e8b63876fcb9a317a4731ae638dd47a26e35ecdc14751db080e90d284a474c07",
+  "detectorTreeDigest": "8921d8f2ebd7033acdb888f9097c590c71290d59df82c56e8c2a81350bbdf6a6",
+  "executionTreeDigest": "c09940d0a4f74274a857e493c3901cb6e2060fd6a4c1b669001dfc00db4aa665",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "88a56febbc671934462e1c1416b6b906c4feb372df29b5ca9a803bbe64354f7a",
-  "legacyDetectorDigest": "01090f5df072b082a6418333c50ba5c60d99e41b9c4365ef484613a7bb03e6da",
-  "legacyScannerSha": "89043e45b66722df3ddcc61555f6f9aa4c6234ed",
-  "legacyScannerToolDigest": "ce36f726119ee40f754cb4cbef6b241208eca951bb53b4479e2397215b06b1df",
-  "predecessorBaselineDigest": "a0b48a45244248b164a7b1c607a51201b411a18059365253343fd52c4f7399d8",
-  "predecessorBaselineTextSha256": "badaad9c9946a9f3c6481af2219f4ed5084d7562a75931995911cd257292ad9d",
-  "predecessorInventoryDigest": "3427992fcdf9a473dd46b05c8ac24fe2edbe4f0c98d357bae9319a2f3480ad3a",
-  "reportDigest": "b6ba685dc28ad7f925b61aa8ea535015ef5bfbc0e9c61738aa63a9d63d12bc6d",
-  "reviewDigest": "a61a77aa4af4b40af9a75027cb519afa50a98a5a52d425425e2cd7b1fab8188d",
+  "legacyArtifactDigest": "24b7ecc3d590c462c804f5308a34ac179a357cc9db668da8cf935f674aa95b41",
+  "legacyDetectorDigest": "8921d8f2ebd7033acdb888f9097c590c71290d59df82c56e8c2a81350bbdf6a6",
+  "legacyScannerSha": "4789d98271aeecc8dbe1517ea0db0ca7183ceabf",
+  "legacyScannerToolDigest": "e8b63876fcb9a317a4731ae638dd47a26e35ecdc14751db080e90d284a474c07",
+  "predecessorBaselineDigest": "01a97677f90ac336b5571007cce20a357447988520e710066c1788141c757e42",
+  "predecessorBaselineTextSha256": "2f7d7eb2c0925027e1f75864c41d2b1be696721f2f329630f3ecba60f8cbb4a8",
+  "predecessorInventoryDigest": "21d5ed88889d3125def1f1d4dbb79c4abdd3fb5f39795a3c1d666cc0945e32fb",
+  "reportDigest": "a3e79741473a60207063f6cd5da556747c8903fbd71f6ceee920827c252e65aa",
+  "reviewDigest": "21d232b25782600a4ea2d962d99f59d5673ce7b5fbc80278443073fa3912dc27",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "a64318c04a54e82874df352bc0659f7b2c27635472869bea6b9b4006b96bbf8a",
-  "sourceTreeDigest": "fa1e9b1ec32b49ba0d52ea4b1802c938fdc6befcbcdccc771cc918ba81791c00",
-  "subjectSha": "89043e45b66722df3ddcc61555f6f9aa4c6234ed",
-  "targetInventoryDigest": "21d5ed88889d3125def1f1d4dbb79c4abdd3fb5f39795a3c1d666cc0945e32fb"
+  "scanTreeDigest": "eeb53f5528faf134cd21dcf5d53c1046798d1d419f60e6dd32453984a88e8787",
+  "sourceTreeDigest": "3886fbc25b55c1655abaf7c68cf160d0e9f5d888fb19979f3bb7762e61d32009",
+  "subjectSha": "4789d98271aeecc8dbe1517ea0db0ca7183ceabf",
+  "targetInventoryDigest": "406bf97109dcd7674cfcee9d6fac75ec2de30a1bb7307c6e029306c36b268a1a"
  },
  "minRows": 40,
  "originMinRows": 8,
@@ -46102,6 +46191,12 @@
     "rule": "explained-writer"
    }
   },
+  "src/domain/instantWorld/genesisDiplomacy.js": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
   "src/domain/locksPreservation.js": {
    "factions on locks": {
     "reason": "CR-OSR-SCHEMA-6 / M8 — re-triaged out of class (a)",
@@ -46212,23 +46307,23 @@
   }
  },
  "scanStats": {
-  "files": 2064,
-  "reads": 119159,
-  "resolved": 9344,
-  "unresolved": 109815
+  "files": 2068,
+  "reads": 119370,
+  "resolved": 9355,
+  "unresolved": 110015
  },
  "scannerProvenance": {
-  "detectorDigest": "01090f5df072b082a6418333c50ba5c60d99e41b9c4365ef484613a7bb03e6da",
-  "executionTreeDigest": "45135096cb37a594f0a7fa8af25f4657e8b964b6577ead11bc9182ff27c65f05",
-  "scanTreeDigest": "a64318c04a54e82874df352bc0659f7b2c27635472869bea6b9b4006b96bbf8a",
-  "sourceTreeDigest": "fa1e9b1ec32b49ba0d52ea4b1802c938fdc6befcbcdccc771cc918ba81791c00",
+  "detectorDigest": "8921d8f2ebd7033acdb888f9097c590c71290d59df82c56e8c2a81350bbdf6a6",
+  "executionTreeDigest": "c09940d0a4f74274a857e493c3901cb6e2060fd6a4c1b669001dfc00db4aa665",
+  "scanTreeDigest": "eeb53f5528faf134cd21dcf5d53c1046798d1d419f60e6dd32453984a88e8787",
+  "sourceTreeDigest": "3886fbc25b55c1655abaf7c68cf160d0e9f5d888fb19979f3bb7762e61d32009",
   "unscannedInputDigest": "2917154817a208a0be37ab496f9798a8fbc2cef90a823b1f15e875930ae2428c"
  },
- "schema": 11,
+ "schema": 12,
  "sentinel": {
-  "resolvedReads": 9344,
+  "resolvedReads": 9355,
   "totalKeys": 6611,
   "usableShapes": 338
  },
- "total": 1996
+ "total": 2001
 }

@@ -284,7 +284,11 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     expect({
       reads: persistedTags.reduce((sum, row) => sum + row.count, 0),
       addresses: persistedTags.length,
-    }).toEqual({ reads: 62, addresses: 42 }); // +2/+2: the ninth identity, banked at the schema-11 re-mint
+    }).toEqual({ reads: 64, addresses: 43 }); // +2/+1: genesisDiplomacy.js joins the
+    // neighbourNetwork row at the schema-12 mint (ODQ §819). ⚠ +2 READS but only +1
+    // ADDRESS, which is the shape a BANK-BY-RULE admission has and a new DECLARATION
+    // does not: the ninth identity added two of each because it was a new identity in
+    // two files; this adds one file to an identity that already had 24.
     // ⚠ THE PER-IDENTITY MAP IS THE POINT, NOT THE TOTAL. 60/40 is the same
     // arithmetic as 44/31 plus 16/9, and a total alone cannot tell a bank that
     // grew by the four declared eventLog identities from one that grew by four
@@ -297,7 +301,7 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
       }];
     }))).toEqual({
       'factions on locks': { reads: 2, addresses: 2 },
-      'neighbourNetwork on settlement': { reads: 36, addresses: 24 },
+      'neighbourNetwork on settlement': { reads: 38, addresses: 25 },
       'stresses on settlement': { reads: 4, addresses: 3 },
       'worldPulse on campaignState': { reads: 2, addresses: 2 },
       'appliedAt on eventLog': { reads: 1, addresses: 1 },
@@ -909,7 +913,11 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       + '.toLocaleString read onto an OBSERVED shape — TRIAGE the row, do not widen or relax this\n'
       + 'pin. The 22 surviving reads across 21 files are all on non-observed receivers.',
     ).toBe(0);
-    expect(live.explainedWriters.banked).toBe(62);
+    // ⭐ 62 → 64 at the schema-12 mint (ODQ §819): genesisDiplomacy.js's two reads of the
+    // already-declared M9 identity. The bank's DECLARED roster is untouched at nine —
+    // bank-by-rule tags a row from an existing declaration, so this figure moves while
+    // EXPLAINED_WRITER_EXEMPTIONS does not, and the two arms below still pin the roster.
+    expect(live.explainedWriters.banked).toBe(64);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -1035,7 +1043,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // Both figures falling by exactly one is what rules that out.
     // ⛔ These two literals were READ OFF the re-frozen baseline after the governed
     // `--write`, never predicted from the delta.
-    }).toEqual({ reads: 1996, identities: 1410, files: 388, bankedReads: 62, taggedRows: 42 });
+    }).toEqual({ reads: 2001, identities: 1413, files: 389, bankedReads: 64, taggedRows: 43 });
     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
       const rows = taggedAddresses.filter((row) => row.identity === identity);
       return [identity, {
@@ -1044,7 +1052,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       }];
     }))).toEqual({
       'factions on locks': { reads: 2, addresses: 2 },
-      'neighbourNetwork on settlement': { reads: 36, addresses: 24 },
+      'neighbourNetwork on settlement': { reads: 38, addresses: 25 },
       'stresses on settlement': { reads: 4, addresses: 3 },
       'worldPulse on campaignState': { reads: 2, addresses: 2 },
       'appliedAt on eventLog': { reads: 1, addresses: 1 },
@@ -1062,7 +1070,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // bank and therefore cannot satisfy the live count asserted above.
     const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
-    expect(clearOutright).toHaveLength(live.findings.length - 62);
+    expect(clearOutright).toHaveLength(live.findings.length - 64);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 
