@@ -153,6 +153,54 @@ const liveManifestEntries = (files) => files.map((file) => ({
 const baseline = JSON.parse(readFileSync(join(ROOT, 'scripts/.observed-shape-readers-baseline.json'), 'utf8'));
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 
+// ── ⛔ THE GOVERNED `--write` WAS HALF A CURE, AND THIS IS THE OTHER HALF ──────
+//
+// THE DEFECT. The shrink-only arm below tells a reader, in terms, that "a lawful
+// shrink is `node scripts/check-observed-shape-readers.mjs --write` ... NEVER
+// hand-edit a row". A lane that follows that instruction EXACTLY re-freezes the
+// register, watches the plain script exit 0 — and still lands the walker RED,
+// because this file kept its own HARDCODED TWINS of the very figures the
+// `--write` re-derives (`reads`/`identities`/`files` were literal `1999`/`1412`/
+// `388` beside a register holding exactly those three). The governed write is
+// blind to a test-file literal. SEAT-5 shipped that red by obeying the script.
+//
+// An instrument whose documented remediation leaves it red is not a strict
+// instrument; it is one that trains lanes to hand-edit the thing it forbids.
+//
+// THE CURE — ONE HOME PER FIGURE, chosen by WHO IS ALLOWED TO MOVE IT:
+//
+//   * the TREE-SHAPED figures (`reads`, `identities`, `files`) live in the
+//     REGISTER, because `baselineOf` re-derives all three from ONE scan and a
+//     lawful `--write` may only shrink them. Read them from there and the
+//     `--write` moves both sides of the assertion in a single act.
+//   * the BANK (`bankedReads`/`taggedRows`) keeps its LITERAL at the register
+//     pin below, because the bank is the one figure a derived re-freeze may
+//     never RAISE — only the governed reasoned path may — so a literal is
+//     exactly right there and a red on it is the governed event, announced.
+//
+// NOTHING BECOMES A SELF-COMPARISON. `registerFigures()` reads the FROZEN
+// register; the triple arm compares it against a LIVE full-tree scan, and the
+// bank arm compares the register's persisted `rowTags` against the governed
+// literal. Two independent productions on each side of both assertions.
+/** The register's tagged rows, one derivation shared by every consumer. */
+const registerRowTagRows = () => Object.entries(baseline.rowTags).flatMap(([file, row]) => (
+  Object.keys(row).map((identity) => ({
+    file, identity, count: baseline.inventory[file][identity],
+  }))
+));
+
+/** The frozen inventory triple + bank, AS THE REGISTER HOLDS THEM. */
+const registerFigures = () => {
+  const rows = registerRowTagRows();
+  return {
+    reads: baseline.total,
+    identities: baseline.identities,
+    files: Object.keys(baseline.inventory).length,
+    bankedReads: rows.reduce((sum, row) => sum + row.count, 0),
+    taggedRows: rows.length,
+  };
+};
+
 /** A heuristic-leaf finding: six keys exactly, no `site` and no `origins`. */
 const leafFinding = (file, pos, key, shape) => ({
   file, line: 1, pos, key, shapes: [shape], text: `row.${key}`,
@@ -276,11 +324,12 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
       + ' language-surface reads the declared M11 and M12 post-filters explain')
       .toBe(BASELINE_SCHEMA);
     expect(assertExplainedWriterRowTags(baseline)).toBe(baseline);
-    const persistedTags = Object.entries(baseline.rowTags).flatMap(([file, row]) => (
-      Object.keys(row).map((identity) => ({
-        file, identity, count: baseline.inventory[file][identity],
-      }))
-    ));
+    const persistedTags = registerRowTagRows();
+    // ⛔ THE ONE LITERAL THAT STAYS A LITERAL, and the reason is WHO MAY MOVE IT: a
+    // derived `--write` re-freeze may only LOWER or DELETE rows, so the bank can never
+    // GROW except by the governed reasoned path. A frozen number is therefore the right
+    // instrument here — a red on it is that governed event announcing itself — whereas
+    // the tree-shaped triple below reads the register, which the `--write` owns.
     expect({
       reads: persistedTags.reduce((sum, row) => sum + row.count, 0),
       addresses: persistedTags.length,
@@ -1105,9 +1154,16 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // the lane's build-time 62/42 because the LANDING BASE had already moved them at
     // the schema-12 mint (ODQ §819); the lane's own delta on them is zero, which is
     // why a rebase moves this pin by −2/−1/−1 and nothing else.
-    // ⛔ Literals READ OFF the register re-frozen through the governed `--write` at the
-    // landing tip; the T11 landing census bill carries the closing arithmetic.
-    }).toEqual({ reads: 1999, identities: 1412, files: 388, bankedReads: 64, taggedRows: 43 });
+    // ⛔ THE EXPECTED SIDE IS NO LONGER A LITERAL, AND THAT IS THE REPAIR. It was
+    // `{ reads: 1999, identities: 1412, files: 388, bankedReads: 64, taggedRows: 43 }` —
+    // five hardcoded twins of figures the register already holds, which the governed
+    // `--write` cannot see and therefore could not move. A lane that obeyed the
+    // shrink-only arm's own instruction re-froze the register and still landed red here.
+    // The register is now the single home for the tree-shaped three; the bank keeps its
+    // governed literal at the register pin above. The ledger of moves below is retained
+    // in full — it explains why the REGISTER holds what it holds, which is still the
+    // thing a reader needs and the thing no derivation can supply.
+    }).toEqual(registerFigures());
     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
       const rows = taggedAddresses.filter((row) => row.identity === identity);
       return [identity, {
@@ -1268,14 +1324,45 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // shrink no filter was clearing; the successors (WarTab/FaithTab) mint no
     // cohort row — their reads route through faithPanelModel / martialReadiness,
     // whose rows are domain-side and already frozen.
+    // ⛔ THE SECOND TWIN OF THE GOVERNED `--write`, FOUND BY EXECUTION. Both readings
+    // used to be hardcoded here — `{files:50,…}` and `{files:51,…}` — and a lawful
+    // ESTATE SHRINK in a `src/components/` file moves BOTH while the `--write` can
+    // reach neither, so a lane obeying the shrink-only arm still landed red. Measured,
+    // not reasoned: deleting one read from TierIcon.jsx in a scratch tree took the
+    // filtered reading to 49/128 and left this arm red AFTER a successful re-freeze.
+    // Note the SCRIPT never had this disease — `cohortOf` is a derivation over whatever
+    // inventory it is handed, and its own comment says a transcribed number would "rot
+    // away from the artifact it describes". Only the walker transcribed.
+    //
+    // THE FILTERED READING NOW READS THE REGISTER, so the `--write` moves both sides.
     const cohort = cohortOf(inventoryOf(live.findings));
-    expect(cohort).toMatchObject({ files: 50, identities: 129, counts: 193 });
-    // ⚠⚠ THE RAW READING IS PINNED BESIDE THE FILTERED ONE. Without this the
-    // cohort figure could fall for two completely different reasons — the filters
-    // clearing more, or the estate genuinely shrinking — and a single number
-    // cannot tell them apart. Pinning both makes the delta attributable.
-    expect(cohortOf(inventoryOf(live.raw.findings)))
-      .toMatchObject({ files: 51, identities: 147, counts: 241 });
+    const frozenCohort = cohortOf(baseline.inventory);
+    expect(cohort).toMatchObject({
+      files: frozenCohort.files,
+      identities: frozenCohort.identities,
+      counts: frozenCohort.counts,
+    });
+    // ⚠⚠ THE RAW READING IS PINNED BESIDE THE FILTERED ONE, AND THE PIN IS NOW THE
+    // GAP RATHER THAN THE ABSOLUTE. The claim this arm has always been making is that
+    // the cohort figure could fall for two completely different reasons — the filters
+    // clearing more, or the estate genuinely shrinking — and one number cannot tell
+    // them apart. That claim is about the RELATIONSHIP, so the relationship is what is
+    // frozen: the raw reading lives nowhere in the register (the register is
+    // post-filter), so what the filters CLEAR is the honest thing to hold as a literal.
+    // A pure estate shrink moves raw and filtered together and this gap HOLDS — cured
+    // end-to-end by the `--write`, with nothing left to hand-edit. A filter change moves
+    // them apart and reds HERE, named, which is the governed event announcing itself.
+    // Strictly stronger than two absolutes: those two reds could not tell the cases apart.
+    const rawCohort = cohortOf(inventoryOf(live.raw.findings));
+    expect({
+      files: rawCohort.files - cohort.files,
+      identities: rawCohort.identities - cohort.identities,
+      counts: rawCohort.counts - cohort.counts,
+    }, 'the schema-7 filters cleared a DIFFERENT amount of the unreviewed-UI cohort than'
+      + ' the frozen gap — this is a filter change, not an estate shrink, and it is'
+      + ' governed: re-derive the gap and say which filter moved and why').toEqual({
+      files: 1, identities: 18, counts: 48,
+    });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
 
