@@ -19,7 +19,7 @@
  */
 
 import { describe, test, expect, afterEach, beforeEach, vi } from 'vitest';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -46,6 +46,7 @@ import HeraldGazetteer from '../../src/components/map/HeraldGazetteer.jsx';
 import HeraldRemembrance from '../../src/components/map/HeraldRemembrance.jsx';
 import RealmInspector, { REALM_INSPECTOR_SECTIONS } from '../../src/components/map/RealmInspector.jsx';
 import { gazetteerRows, remembranceRows } from '../../src/components/map/heraldRegister.js';
+import { registerSpatialCaptureBridge, unregisterSpatialCaptureBridge } from '../../src/lib/spatialCaptureRegistry.js';
 
 // ── Fixtures: one living town, one engine remnant, one recorded destruction ──
 const ASHFORD = {
@@ -265,5 +266,53 @@ describe('the register partition — one roster, two halves', () => {
     // anchored: the in-roster sibling Ashford is asserted present in the SAME collection below.
     expect(living).not.toContain('Elsewhere');
     expect(living).toContain('Ashford');
+  });
+});
+
+// ── DESK-2 — word→map linkage on the Gazetteer register ──────────────────────
+describe('DESK-2 — gazetteer rows hover the map and carry the show-on-map verb', () => {
+  test('hovering a row writes the store hover field; leaving clears it', () => {
+    const setHovered = vi.fn();
+    const clearHovered = vi.fn();
+    storeState.setHoveredSettlementId = setHovered;
+    storeState.clearHoveredSettlementId = clearHovered;
+    storeState.mapState = { placements: {} };
+    render(<HeraldGazetteer campaign={{ id: 'c1', settlementIds: ['ashford'] }} saves={[ASHFORD]} />);
+    const row = screen.getAllByTestId('gazetteer-row')[0];
+    fireEvent.pointerEnter(row, { pointerType: 'mouse' });
+    expect(setHovered).toHaveBeenCalledWith('ashford');
+    fireEvent.pointerLeave(row);
+    expect(clearHovered).toHaveBeenCalled();
+  });
+
+  test('show-on-map renders only for a PLACED settlement in FMG mode, and flies the live bridge camera', () => {
+    storeState.setHoveredSettlementId = vi.fn();
+    storeState.clearHoveredSettlementId = vi.fn();
+    // Unplaced ⇒ no verb (it would be a dead button).
+    storeState.mapState = { placements: {} };
+    const first = render(<HeraldGazetteer campaign={{ id: 'c1', settlementIds: ['ashford'] }} saves={[ASHFORD]} />);
+    expect(screen.queryByTestId('gazetteer-show-on-map')).toBeNull();
+    first.unmount();
+
+    // Placed + FMG mode ⇒ the verb renders and flies the camera to the placement.
+    storeState.mapState = { placements: { b1: { settlementId: 'ashford', x: 320, y: 140 } } };
+    const bridge = { isReady: true, setViewport: vi.fn() };
+    registerSpatialCaptureBridge(bridge);
+    render(<HeraldGazetteer campaign={{ id: 'c1', settlementIds: ['ashford'] }} saves={[ASHFORD]} />);
+    fireEvent.click(screen.getByTestId('gazetteer-show-on-map'));
+    expect(bridge.setViewport).toHaveBeenCalledWith(expect.objectContaining({ cx: 320, cy: 140 }));
+    unregisterSpatialCaptureBridge(bridge);
+  });
+
+  test('an image-backdrop map hides the verb (the camera is mode-specific; no programmatic image camera exists)', () => {
+    storeState.setHoveredSettlementId = vi.fn();
+    storeState.clearHoveredSettlementId = vi.fn();
+    storeState.mapState = {
+      placements: { b1: { settlementId: 'ashford', x: 320, y: 140 } },
+      customBackdrop: { imageUrl: 'https://cdn/img.jpg', w: 100, h: 50 },
+    };
+    render(<HeraldGazetteer campaign={{ id: 'c1', settlementIds: ['ashford'] }} saves={[ASHFORD]} />);
+    expect(screen.getAllByTestId('gazetteer-row').length).toBeGreaterThan(0);
+    expect(screen.queryByTestId('gazetteer-show-on-map')).toBeNull();
   });
 });

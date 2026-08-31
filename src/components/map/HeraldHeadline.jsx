@@ -15,6 +15,7 @@
 
 import { useMemo, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
+import { useStore } from '../../store/index.js';
 
 import { BORDER, BORDER2, CARD, FS, GOLD, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
 import { AddressChain, AffectedSettlements } from './AddressChain.jsx';
@@ -173,8 +174,22 @@ export default function HeraldHeadline({ item, worldState, nameById, nested = fa
 /** A settlement group header for the nested form: the hoisted settlement name, linked,
  *  with the group's item count. Renders the realm-wide group as a plain heading. */
 export function HeraldGroupHeader({ group }) {
+  // DESK-2 — word→map linkage: hovering (or keyboard-focusing) a settlement's
+  // group header lights its marker on the map, the same store field the map's
+  // own pointer hover writes. Touch is excluded (the PlacementsLayer rule: a
+  // tap fires pointerenter with no paired leave and would stick the glow).
+  const setHovered = useStore(s => s.setHoveredSettlementId);
+  const clearHovered = useStore(s => s.clearHoveredSettlementId);
+  const hoverable = group.settlementId != null;
   return (
-    <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, borderBottom: `1px solid ${BORDER}`, paddingBottom: 3 }}>
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- hover-peek enhancement only: the header's real control is the native RealmEntityLink; onFocus/onBlur mirror the glow for keyboard users by focus-bubbling from it, and the wrapper is deliberately not a tab stop.
+    <div
+      style={{ display: 'flex', alignItems: 'baseline', gap: 8, borderBottom: `1px solid ${BORDER}`, paddingBottom: 3 }}
+      onPointerEnter={(e) => { if (hoverable && e.pointerType !== 'touch') setHovered?.(group.settlementId); }}
+      onPointerLeave={() => { if (hoverable) clearHovered?.(); }}
+      onFocus={() => { if (hoverable) setHovered?.(group.settlementId); }}
+      onBlur={() => { if (hoverable) clearHovered?.(); }}
+    >
       <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
         {group.settlementId != null
           ? <RealmEntityLink settlementSaveId={group.settlementId} label={group.name} />

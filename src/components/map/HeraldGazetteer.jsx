@@ -30,8 +30,10 @@ import { useStore } from '../../store/index.js';
 import { viewerSeesDmSecrets } from '../../domain/display/viewerSecrets.js';
 import { gazetteerRows } from './heraldRegister.js';
 import { isCalmThreat, threatDisplay } from './settlementThreat.js';
+import { canShowOnMap, showSettlementOnMap } from './showOnMap.js';
 import { Pill, Section } from './WorldPulsePrimitives.jsx';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
+import Button from '../primitives/Button.jsx';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, INK, SP, sans } from '../theme.js';
 
 /** The register's calm nothing-here state. A realm with no places is not broken. */
@@ -43,12 +45,22 @@ function EmptyRegister() {
   );
 }
 
-/** One register row: the name and its tier at a glance, the state as a sentence. */
-function RegisterRow({ row }) {
+/** One register row: the name and its tier at a glance, the state as a sentence.
+ *  DESK-2: hovering (or keyboard-focusing) a row lights the settlement's marker
+ *  on the map (the hover-glow layer); the "Show on map" verb flies the camera
+ *  to its placement — rendered only when it would actually work (placed ∧ FMG
+ *  mode; the camera is mode-specific and an image backdrop has no programmatic
+ *  camera). */
+function RegisterRow({ row, onHover, onLeave, showable }) {
   const threat = row.threat && !isCalmThreat(row.threat) ? threatDisplay(row.threat) : null;
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- hover-peek enhancement only: the row's real controls (the entity link, the show-on-map button) stay native; onFocus/onBlur mirror the glow for keyboard users by focus-bubbling from those controls, and the wrapper itself is deliberately not a tab stop.
     <div
       data-testid="gazetteer-row"
+      onPointerEnter={(e) => { if (e.pointerType !== 'touch') onHover?.(row.id); }}
+      onPointerLeave={() => onLeave?.()}
+      onFocus={() => onHover?.(row.id)}
+      onBlur={() => onLeave?.()}
       style={{
         display: 'grid', gap: 3,
         padding: '8px 10px',
@@ -67,6 +79,18 @@ function RegisterRow({ row }) {
           <span style={{ color: threat.text, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             {threat.label}
           </span>
+        )}
+        {showable && (
+          <Button
+            variant="ghost"
+            size="sm"
+            data-testid="gazetteer-show-on-map"
+            aria-label={`Show ${row.name} on the map`}
+            onClick={() => showSettlementOnMap(row.id)}
+            style={{ marginLeft: 'auto', padding: '0 6px', minHeight: 24, fontSize: FS.xxs, fontWeight: 800 }}
+          >
+            Show on map
+          </Button>
         )}
       </div>
       <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45, overflowWrap: 'anywhere' }}>
@@ -90,6 +114,17 @@ export default function HeraldGazetteer({ campaign, saves = [] }) {
     () => gazetteerRows({ campaign, saves, seesSecrets }),
     [campaign, saves, seesSecrets],
   );
+  // DESK-2 — word→map linkage: the hover setters (the PlacementsLayer pair,
+  // written from the word side) + per-row show-on-map availability.
+  const setHovered = useStore(s => s.setHoveredSettlementId);
+  const clearHovered = useStore(s => s.clearHoveredSettlementId);
+  const placements = useStore(s => s.mapState?.placements);
+  const imageMode = useStore(s => !!s.mapState?.customBackdrop?.imageUrl);
+  const showableIds = useMemo(() => {
+    if (imageMode) return new Set();
+    const state = { mapState: { placements: placements || {} } };
+    return new Set(rows.filter(row => canShowOnMap(state, row.id)).map(row => String(row.id)));
+  }, [rows, placements, imageMode]);
 
   return (
     <div data-testid="herald-gazetteer" style={{ display: 'grid', gap: SP.sm }}>
@@ -98,7 +133,15 @@ export default function HeraldGazetteer({ campaign, saves = [] }) {
           <EmptyRegister />
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {rows.map(row => <RegisterRow key={row.id} row={row} />)}
+            {rows.map(row => (
+              <RegisterRow
+                key={row.id}
+                row={row}
+                onHover={setHovered}
+                onLeave={clearHovered}
+                showable={showableIds.has(String(row.id))}
+              />
+            ))}
           </div>
         )}
       </Section>

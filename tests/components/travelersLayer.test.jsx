@@ -97,3 +97,29 @@ describe('TravelersLayer — sub-layers (§13)', () => {
     expect(envoy.textContent).toMatch(/Envoy of A, trade/);
   });
 });
+
+// ── DESK-2 — the word→map hover glow (a sibling one-ring layer) ──────────────
+describe('HoverGlowLayer — the word→map hover glow', () => {
+  test('idle / unplaced hover ⇒ renders nothing; a placed hover ⇒ one glow at the placement', async () => {
+    const { default: HoverGlowLayer } = await import('../../src/components/map/HoverGlowLayer.jsx');
+
+    STORE = { hoveredSettlementId: null, mapState: { placements: PLACEMENTS, viewport: { scale: 1 } } };
+    const idle = render(<svg><HoverGlowLayer /></svg>);
+    expect(idle.container.querySelector('[data-testid="hover-glow"]')).toBeNull();
+    idle.unmount();
+
+    STORE = { hoveredSettlementId: 'ghost', mapState: { placements: PLACEMENTS, viewport: { scale: 1 } } };
+    const unplaced = render(<svg><HoverGlowLayer /></svg>);
+    expect(unplaced.container.querySelector('[data-testid="hover-glow"]')).toBeNull();
+    unplaced.unmount();
+
+    STORE = { hoveredSettlementId: 'b', mapState: { placements: PLACEMENTS, viewport: { scale: 1 } } };
+    const lit = render(<svg><HoverGlowLayer /></svg>);
+    const glow = lit.container.querySelector('[data-testid="hover-glow"]');
+    expect(glow).not.toBeNull();
+    // The glow sits at the hovered settlement's own placement, never a hit target.
+    expect(glow.getAttribute('pointer-events')).toBe('none');
+    expect(glow.querySelector('circle').getAttribute('cx')).toBe('90');
+    expect(glow.querySelector('circle').getAttribute('cy')).toBe('90');
+  });
+});

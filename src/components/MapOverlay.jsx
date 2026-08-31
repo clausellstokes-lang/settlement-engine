@@ -35,6 +35,9 @@ import ForestsLayer      from './map/ForestsLayer.jsx';
 import HitLayer          from './map/HitLayer.jsx';
 import TreeSymbols       from './map/TreeSymbols.jsx';
 import PlacementsLayer   from './map/PlacementsLayer.jsx';
+// DESK-2 — the word→map hover glow (a self-gating one-ring layer; keeps
+// PlacementsLayer unsubscribed from hover state).
+import HoverGlowLayer    from './map/HoverGlowLayer.jsx';
 import { MAP_MODES }     from '../store/mapSlice.js';
 import { TextInputDialog } from './primitives/Dialog.jsx';
 
@@ -339,6 +342,9 @@ export default function MapOverlay({ bridge, transformOut }) {
               the road graph. Opt-in DM-truth lens (default off); dormant ledgers render
               nothing. Above war glyphs, below the settlement pins. */}
           {layers.travelers && <TravelersLayer />}
+          {/* DESK-2 — the word→map hover glow, under the pins so the marker
+              stays crisp above its halo. Self-gates to null when idle. */}
+          <HoverGlowLayer />
           {layers.placements !== false && <PlacementsLayer transformRef={transformRef} />}
           {layers.markers       && <MarkersLayer onEditMarker={marker => setEditDialog({ kind: 'marker', item: marker })} />}
           {layers.labels        && <LabelsLayer onEditLabel={label => setEditDialog({ kind: 'label', item: label })} />}
