@@ -435,16 +435,33 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       originCount: 8607,
       transitionCount: 14584,
     });
-    // ⭐ MOVED 2026-08-31 BY T4 · SEAT-B (W-SEAT SEAT-2b, the D4 attempt sensitivity), and
-    // these four figures are AFFIRMATIVE EVIDENCE rather than bookkeeping. The observed-shape
-    // corpus builds its world by lighting EVERY `*Enabled` flag it can find in source, so it
-    // is the one place in the estate where `legitimacyUpheavalEnabled` is LIT — and under it
-    // the political spawn gates roll differently, which is exactly what the key exists to do.
-    // regionalEventLog 73 → 75 and its unique twin move in LOCKSTEP (two more events, both
-    // distinct), and wizardNews accumulates 1567 → 1569 with unique 272 → 276. THE FIGURES
-    // MOVE UP, which is the honest direction for a sensitivity whose table straddles 1 on a
-    // corpus that happens to sit in the decline band. The FINDINGS INVENTORY DID NOT MOVE:
-    // no reader gained or lost a writer, only the corpus that exercises them is livelier.
+    // ⭐ MOVED 2026-08-31 BY T4 · SEAT-B (W-SEAT SEAT-2b). The observed-shape corpus builds
+    // its world by lighting EVERY `*Enabled` flag it can find in source, so it is the one
+    // place in the estate where `legitimacyUpheavalEnabled` is LIT — and under it the
+    // political spawn gates roll differently. regionalEventLog 73 → 75 and its unique twin
+    // move in LOCKSTEP, and wizardNews accumulates 1567 → 1569 with unique 272 → 276. The
+    // FINDINGS INVENTORY DID NOT MOVE: no reader gained or lost a writer, only the corpus
+    // that exercises them is livelier.
+    //
+    // ⛔⛔ THE ORIGINAL ATTRIBUTION ON THIS BLOCK WAS WRONG AND IS CORRECTED HERE (T4 resume
+    // leg 1, by execution). It read these figures as the per-archetype SENSITIVITY landing on
+    // "a corpus that happens to sit in the decline band". MEASURED, by single-variable
+    // controls in throwaway worktrees: with `insurgencyGate` alone forced dark-equivalent and
+    // EVERY OTHER lit row of the car still live, the corpus comes back BYTE-IDENTICAL to the
+    // base — same row digest, same 1220/5260 prose totals, same 25451 scalar rows. So the
+    // sensitivity table moves this corpus by ZERO through all four gates that carry it, and
+    // 100 % of these four figures is `insurgencyGate`'s occupied REPLACEMENT row.
+    //
+    // ⛔⛔ AND THESE FOUR FIGURES ARE ONE FIFTH OF A LARGER MOVE THAT IS **NOT** BANKED. The
+    // same corpus counters are hardcoded in FOUR further instruments — the prose-family
+    // baseline and its library constants, and the news-voice and news-headline baselines —
+    // and all four are RED at this tip. ⛔ THEY MUST NOT BE RE-FROZEN TO MATCH: the same
+    // controls show the replacement DELETES a Wizard News address home outright
+    // (`applied|stressor_escalate_insurgency`; homes 53 → 52, address identities 106 → 104),
+    // which is ODQ §786.2's deleted-beat REFUSAL and not a re-record. It is also insensitive
+    // to the replacement's own constants — two materially different spans give byte-identical
+    // corpora — so it is a DESIGN question about A2.2.6's replace-never-stack form, not a
+    // tuning one. Chair-gated; the full shift record is in the lane receipt's HOLD block.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
       wizardNewsFinalEntries: 240,
