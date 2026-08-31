@@ -7,6 +7,14 @@
  * presentation field in the all-category reference pack, runs the real
  * generator with the same seed, removes only named presentation/provenance
  * surfaces, and compares the remaining mechanics digest.
+ *
+ * ⛔ THE CLAIM IS TWO-SIDED, AND IT HAS TO BE. "The mechanics digest is
+ * unchanged" is satisfied perfectly, and forever, by a mutation that reaches
+ * nothing at all — which is how 26 of these 52 cases passed while proving
+ * nothing (ODQ §866, re-measured in the ledger below). Every case therefore
+ * asserts that its mutation is VISIBLE BEFORE the presentation strip as well as
+ * INVISIBLE AFTER it, and the cases that provably cannot manage the first half
+ * are named, attributed and capped rather than left to pass in silence.
  */
 
 import { describe, expect, it } from 'vitest';
@@ -476,6 +484,131 @@ function changedMechanicsPaths(left, right, path = '$', changes = []) {
 
 const PRESENTATION_CASES = presentationCases();
 
+// ── ⛔ THE INERTNESS PROOF THAT PROVED NOTHING FOR HALF ITS CASES (ODQ §866) ────
+//
+// §866 ruling (4) found this file's `deities.*` cases VACUOUS: the pipeline emits
+// `primaryDeitySnapshot: undefined`, so flipping a deity presentation field moves an
+// input the generated settlement never reads, and the two digests match for a reason
+// with nothing to do with presentation neutrality. F1c had cited exactly those cases as
+// "THE INDEPENDENT INERTNESS PROOF I did not write".
+//
+// ⛔⛔ RE-MEASURED HERE WITH THIS FILE'S OWN `alternativeValue` AND ITS OWN
+// `changedMechanicsPaths`, AND THE VACUITY IS TWICE WHAT §866 RECORDED: 26 of the 52
+// presentation cases discover nothing. Not one field family — FOUR WHOLE CATEGORIES.
+// One mechanism, four times over: the reference pack's `stressors`, `factions`,
+// `deities` and `traditions` definitions never materialize into the generated
+// settlement at all (a probe over the entire settlement finds no `localUid`, no name
+// and no `definition:<bucket>:<uid>` for any of them). `primaryDeitySnapshot:
+// undefined` was one symptom of four, not the fault itself.
+//
+// THE HOUSE LAW IS THAT AN INERTNESS CLAIM IS A BIT CLAIM — base arm against tip arm
+// on a comparator PROVEN ABLE TO SEE, never a self-comparison. This file asserted only
+// the SECOND half of its own claim, "invisible after the presentation strip", and never
+// the first, "visible before it". A mutation that reaches nothing anywhere satisfies
+// the second half perfectly, forever, and reports it as a pass.
+//
+// THE REPAIR, AND WHAT IT DELIBERATELY IS NOT. Making those four categories
+// materialize is a GENERATION-SIDE change and is out of scope for an instrument
+// repair; the bill is named here, not paid here. What IS taken is the thing that stops
+// a vacuous green shipping silently again — every case is now classified BY EXECUTION
+// into one of two arms:
+//
+//   * a DISCOVERING case must be VISIBLE BEFORE THE STRIP and INVISIBLE AFTER IT. That
+//     two-sided form is the only one in which the second half means anything.
+//   * a BLIND case must be GENUINELY BLIND, and REDS the moment it starts
+//     discriminating — so paying the generation-side bill is ANNOUNCED by the
+//     instrument rather than silently converted into a new green.
+//
+// The ledger can therefore only ever shrink. When it finally empties, delete it, the
+// blind arm and its two governance arms together and let one arm do the work again.
+
+/** The shared mechanism behind every declared-blind row, measured rather than assumed. */
+const NEVER_MATERIALIZES = 'the reference-pack definition never materializes into the'
+  + ' generated settlement — a probe over the whole settlement finds no localUid, no name'
+  + ' and no `definition:<bucket>:<uid>` for it — so the flipped presentation field is an'
+  + ' input nothing downstream reads, and the two sides agree for a reason that has'
+  + ' nothing to do with presentation neutrality';
+
+/** Why each declared-blind bucket discovers nothing. Attribution, not a shrug. */
+const DISCOVERY_BLIND_CAUSES = Object.freeze({
+  stressors: `stressors.*: ${NEVER_MATERIALIZES}.`,
+  factions: `factions.*: ${NEVER_MATERIALIZES}. ⚠ This is the row most likely to be`
+    + ' mistaken for covered, because the settlement DOES carry a `factions` array — but it'
+    + ' holds GENERATED factions only, and the custom compact is absent from it.',
+  deities: `deities.*: ${NEVER_MATERIALIZES}. This is the family ODQ §866 ruling (4) named,`
+    + ' through its symptom `primaryDeitySnapshot: undefined`; the measurement here shows'
+    + ' that symptom is one face of a four-category mechanism, not a deity-specific fault.',
+  traditions: `traditions.*: ${NEVER_MATERIALIZES}.`,
+});
+
+/**
+ * The cases that CANNOT discover anything at this tip — exact, per case, never per
+ * bucket, so a NEW presentation field added to a blind category still reds until
+ * somebody looks at it rather than inheriting the category's excuse.
+ */
+const DISCOVERY_BLIND_CASES = Object.freeze([
+  'stressors.name', 'stressors.description', 'stressors.severity', 'stressors.affects',
+  'stressors.disablesInstitutions', 'stressors.disablesGoods',
+  'deities.name', 'deities.temperamentAxis', 'deities.portfolio',
+  'traditions.name', 'traditions.motifElement', 'traditions.motifAct', 'traditions.epithet',
+  'factions.name', 'factions.authority', 'factions.archetype', 'factions.agenda',
+  'factions.scale', 'factions.methods', 'factions.magical', 'factions.criminal',
+  'factions.defenseRole', 'factions.description', 'factions.tierMin', 'factions.controls',
+  'factions.rivals',
+]);
+
+// MONOTONE-DOWN, both of them, and they are LITERALS rather than figures read out of the
+// list they cap — a ceiling derived from its own ledger proves list === list and rises
+// silently with every row added. A case may LEAVE the ledger; none may ever join it,
+// because a newly blind case is a vacuous green to fix, not a row to declare.
+const DISCOVERY_BLIND_CEILING = 26;
+const DISCOVERY_BLIND_BUCKET_CEILING = 4;
+
+const BLIND_KEYS = new Set(DISCOVERY_BLIND_CASES);
+const DISCOVERING_CASES = PRESENTATION_CASES.filter(({ key }) => !BLIND_KEYS.has(key));
+const BLIND_CASES = PRESENTATION_CASES.filter(({ key }) => BLIND_KEYS.has(key));
+
+/**
+ * One generation pair per case, carrying the TWO-PART DISCOVERY ANCHOR beside the
+ * projections.
+ *
+ *   `materialized` — did the mutated definition reach the settlement AT ALL? This is
+ *     the measured root cause stated directly, and it is the half that cannot be
+ *     faked: a definition the generator never instantiates can never demonstrate
+ *     anything about neutrality.
+ *   `reached` — what the flip moved in the settlement BEFORE any presentation surface
+ *     is stripped.
+ *
+ * ⚠ BOTH HALVES ARE NEEDED AND NEITHER IS REDUNDANT. `reached` alone is satisfiable
+ * by a provenance digest moving while the definition itself materializes nowhere —
+ * the settlement carries `customContentProvenance`, which is a stripped surface, so a
+ * pack-content hash shifting would light `reached` and prove nothing. `materialized`
+ * alone would not notice a field that reaches the settlement and then changes nothing.
+ * Together they say: the subject is really there, and flipping this field really moved
+ * something — which is what makes "and the mechanics digest did not move" a claim.
+ */
+function presentationProbe({ key, bucket, field }) {
+  const controlPack = customContentReferencePack();
+  const variantPack = variantFor({ bucket, field });
+  // The mutated definition is always index 0 of its bucket (see `variantFor`).
+  const subjectUid = variantPack[bucket][0].localUid;
+  const replacements = customNameTokens(controlPack, variantPack);
+  const seed = `presentation-neutrality:${key}`;
+  const control = generated(controlPack, seed);
+  const variant = generated(variantPack, seed);
+  const controlBlob = JSON.stringify(control);
+  return {
+    subjectUid,
+    materialized: Boolean(subjectUid) && (
+      controlBlob.includes(`definition:${bucket}:${subjectUid}`)
+      || controlBlob.includes(`"${subjectUid}"`)
+    ),
+    reached: changedMechanicsPaths(control, variant),
+    controlMechanics: canonicalMechanicsProjection(control, replacements),
+    variantMechanics: canonicalMechanicsProjection(variant, replacements),
+  };
+}
+
 describe('custom-content presentation-only claim neutrality', () => {
   it('discovers at least one presentation field in every authorable category', () => {
     const covered = new Set(
@@ -486,28 +619,89 @@ describe('custom-content presentation-only claim neutrality', () => {
     }
   });
 
-  it.each(PRESENTATION_CASES)(
+  it('the discovery partition is total, exact, attributed and anchored', () => {
+    const allKeys = PRESENTATION_CASES.map(({ key }) => key);
+    expect(new Set(allKeys).size, 'two cases share a key').toBe(allKeys.length);
+    expect(
+      DISCOVERING_CASES.length + BLIND_CASES.length,
+      'a presentation case escaped the partition — every case is discovering or declared blind',
+    ).toBe(PRESENTATION_CASES.length);
+    expect(new Set(DISCOVERY_BLIND_CASES).size, 'a key is declared blind twice')
+      .toBe(DISCOVERY_BLIND_CASES.length);
+    const known = new Set(allKeys);
+    expect(
+      DISCOVERY_BLIND_CASES.filter(key => !known.has(key)),
+      'a declared-blind key names no live presentation case — delete the stale row',
+    ).toEqual([]);
+    for (const key of DISCOVERY_BLIND_CASES) {
+      const [bucket] = key.split('.');
+      expect(
+        String(DISCOVERY_BLIND_CAUSES[bucket] || '').length,
+        `${key} is declared blind with a stub instead of a measured cause`,
+      ).toBeGreaterThan(60);
+    }
+  });
+
+  // ⛔ THE ANTI-VACUITY FLOOR ON THE INSTRUMENT ITSELF, AND IT LIVES IN ITS OWN TEST
+  // FOR A MEASURED REASON. It first sat at the foot of the partition arm above, and a
+  // plant that declared ALL 52 cases blind never reached it: the attribution loop threw
+  // first, so the one arm guarding against the whole file going vacuous was SHADOWED by
+  // an earlier assertion in the same test and could not be shown to fire at all. An arm
+  // that cannot be demonstrated independently is not an arm. Alone, it cannot be hidden.
+  it('the instrument itself is not vacuous — something is still being discriminated', () => {
+    expect(
+      DISCOVERING_CASES.length,
+      'EVERY presentation case is declared blind — this file now proves nothing whatsoever'
+      + ' about presentation neutrality while reporting a suite of passes, which is the exact'
+      + ' failure this ledger exists to make impossible.',
+    ).toBeGreaterThan(0);
+  });
+
+  it('the blind ledger is monotone-down — a case may leave it, never join it', () => {
+    expect(
+      DISCOVERY_BLIND_CASES.length,
+      'the blind set GREW. A newly vacuous case is a defect to fix, not a row to declare:'
+      + ' either the definition stopped materializing, or a new presentation field was added'
+      + ' to a category the generator never reaches.',
+    ).toBeLessThanOrEqual(DISCOVERY_BLIND_CEILING);
+    expect(
+      new Set(DISCOVERY_BLIND_CASES.map(key => key.split('.')[0])).size,
+      'a FIFTH category went blind — the four are stressors, deities, traditions, factions',
+    ).toBeLessThanOrEqual(DISCOVERY_BLIND_BUCKET_CEILING);
+  });
+
+  it.each(DISCOVERING_CASES)(
     '$key leaves the canonical mechanics digest unchanged',
-    ({ key, bucket, field }) => {
-      const controlPack = customContentReferencePack();
-      const variantPack = variantFor({ bucket, field });
-      const replacements = customNameTokens(controlPack, variantPack);
-      const seed = `presentation-neutrality:${key}`;
-      const control = generated(controlPack, seed);
-      const variant = generated(variantPack, seed);
-      const controlMechanics = canonicalMechanicsProjection(
-        control,
-        replacements,
-      );
-      const variantMechanics = canonicalMechanicsProjection(
-        variant,
-        replacements,
-      );
+    (testCase) => {
+      const { key, bucket } = testCase;
+      const {
+        materialized, subjectUid, reached, controlMechanics, variantMechanics,
+      } = presentationProbe(testCase);
+
+      // ⛔ HALF ONE — VISIBLE BEFORE THE STRIP. Without this anchor the digest equality
+      // below is satisfied perfectly by a mutation that reaches nothing whatsoever, which
+      // is precisely how 26 sibling cases passed across four categories at once (§866).
+      expect(
+        materialized,
+        `${key}: the mutated definition (${bucket}:${subjectUid}) does not appear in the`
+        + ' generated settlement at all, so this case cannot demonstrate anything about'
+        + ' presentation neutrality. That is the exact §866 failure: either the definition'
+        + ' stopped materializing (a real regression, and the interesting case), or this'
+        + ' case belongs in DISCOVERY_BLIND_CASES with a measured cause.',
+      ).toBe(true);
+      expect(
+        reached.length,
+        `${key}: the definition materializes, but flipping this presentation field moved`
+        + ' NOTHING anywhere in the settlement — so the digest equality this case asserts is'
+        + ' true for a reason unrelated to neutrality. Find out why the field is inert before'
+        + ' trusting the claim.',
+      ).toBeGreaterThan(0);
+
+      // HALF TWO — AND INVISIBLE AFTER IT.
       const changedPaths = changedMechanicsPaths(
         controlMechanics,
         variantMechanics,
       );
-
       expect(
         fingerprintContent(variantMechanics),
         `${key}; changed mechanics: ${[
@@ -523,17 +717,49 @@ describe('custom-content presentation-only claim neutrality', () => {
     },
   );
 
+  it.each(BLIND_CASES)(
+    '$key is DECLARED BLIND — it discovers nothing, and claims nothing',
+    (testCase) => {
+      const { key, bucket } = testCase;
+      const { materialized, reached } = presentationProbe(testCase);
+      // BOTH HALVES OF THE DECLARED CAUSE ARE ASSERTED, so the row reds if EITHER stops
+      // being true — a subject that starts materializing, or a flip that starts moving
+      // something. A declared blindness nobody re-measures is just a comment.
+      expect(
+        { materialized, reachedPaths: reached.length },
+        `${key}: DECLARED BLIND, but it is discriminating now (materialized=${materialized},`
+        + ` reached ${reached.length} path(s)). BANK THE WIN: delete this key from`
+        + ' DISCOVERY_BLIND_CASES and lower DISCOVERY_BLIND_CEILING by one, so the case joins the'
+        + ' discriminating arm and starts PROVING neutrality instead of merely declaring it.'
+        + ` The cause on file was: ${DISCOVERY_BLIND_CAUSES[bucket]}`,
+      ).toEqual({ materialized: false, reachedPaths: 0 });
+    },
+  );
+
   it.each(NAME_AUTHORITY_MATRIX)(
     'keeps adversarial custom names mechanically inert at $label',
     ({ config, seed, label }) => {
       const { control, adversarial } = adversarialNameMatrixPacks();
       const replacements = customNameTokens(control, adversarial);
+      const controlSettlement = generated(control, seed, config);
+      const adversarialSettlement = generated(adversarial, seed, config);
+      // ⛔ THE SAME DISCOVERY ANCHOR THE PER-FIELD ARM CARRIES (§866). This matrix runs
+      // eighteen tier/terrain/route cells, and a cell where the rename reached nothing
+      // would report inertness it never tested. Assert the comparator SAW the rename
+      // before believing that stripping presentation makes it vanish.
+      const reached = changedMechanicsPaths(controlSettlement, adversarialSettlement);
+      expect(
+        reached.length,
+        `${label}: the adversarial rename reached NOTHING in the generated settlement, so`
+        + ' this cell asserts inertness it never tested. Find out why the renamed'
+        + ' definitions stopped materializing at this tier/terrain/route before trusting it.',
+      ).toBeGreaterThan(0);
       const controlMechanics = canonicalMechanicsProjection(
-        generated(control, seed, config),
+        controlSettlement,
         replacements,
       );
       const adversarialMechanics = canonicalMechanicsProjection(
-        generated(adversarial, seed, config),
+        adversarialSettlement,
         replacements,
       );
       const changes = changedMechanicsPaths(
