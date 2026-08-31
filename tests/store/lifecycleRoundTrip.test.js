@@ -195,7 +195,7 @@ const WORLD_STATE_CONDITIONAL_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
   'spatialDigest', 'spatialLedgers', 'narrativeTempo', 'politicsLedgers',
-  'factionPairStates', 'envoyErrands',
+  'factionPairStates', 'envoyErrands', 'concludedWars',
 ]);
 
 /** The conditionally-present SCALAR gate (not a ledger — see worldState.js). */
@@ -465,6 +465,34 @@ function richWorldStateRaw() {
     politicsLedgers: { ashford: { blocs: [{ id: 'bloc1', members: ['reeve'], glue: ['grain'], end: 'grain_control', strain: 0.1, sinceTick: 3 }] } },
     factionPairStates: { 'league|temple': { trust: 0.5, resentment: 0.1 } },
     envoyErrands: [envoyErrandFixture()],
+    // W-MEM: one SEALED concluded-war record. Populated rather than stubbed because a
+    // fixture that hides population is how a defect class survives — this record must
+    // carry a member of every sub-shape the normalizer rebuilds (participants, casus
+    // pins, the fact block with an applied terminal outcome, banded costs, an
+    // engagement epitome), or the round trip proves only that an empty object clones.
+    concludedWars: {
+      'war.ashford.kelby.3.0': {
+        schemaVersion: 1,
+        warId: 'war.ashford.kelby.3.0',
+        originPair: ['ashford', 'kelby'],
+        originAttackerId: 'ashford',
+        openedTick: 3, concludedTick: 9, sealed: true, form: 'full',
+        participants: [
+          { id: 'ashford', label: 'Ashford', side: 'attacker' },
+          { id: 'kelby', label: 'Kelby', side: 'defender' },
+        ],
+        casusReasons: [{ type: 'grievance', score: 0.4, receipt: 'a torn seal', atTick: 3 }],
+        fact: {
+          closed: true,
+          closeRoad: 'conquest',
+          terminalOutcomes: [{ id: 'world_outcome.conquest.kelby.9', candidateType: 'conquest', targetSaveId: 'kelby', tick: 9 }],
+        },
+        victorId: 'ashford',
+        territorialOutcomes: [{ settlementId: 'kelby', kind: 'occupied', occupierId: 'ashford', tick: 9 }],
+        cost: { attackerRemainingBand: 'battered', exhaustionBands: { ashford: 'war-weary' } },
+        notableEngagements: [{ kind: 'field_battle', tick: 6, settlementIds: ['ashford', 'kelby'], sourceEventId: 'field_battle.ashford.kelby.6' }],
+      },
+    },
     futureLedgerX: { forwardCompat: true }, // unknown key — MUST pass through (tolerant-forward law)
   };
 }
@@ -567,7 +595,7 @@ describe('E-C completeness — every persisted family is registered (new family 
       'worldState conditional ledger',
       'add it to WORLD_STATE_CONDITIONAL_KEYS (and populate it in richWorldStateRaw so the round-trip covers it)',
     );
-    expect(CONDITIONAL_LEDGER_KEYS.at(-1)).toBe('envoyErrands');
+    expect(CONDITIONAL_LEDGER_KEYS.at(-1)).toBe('concludedWars');
     // The fully-populated ensure output carries EXACTLY base ∪ scalar ∪
     // conditional ∪ the forward-compat unknown — nothing invented, nothing lost.
     const ensured = ensureWorldState(richWorldStateRaw(), { id: CAMPAIGN_ID });
@@ -577,7 +605,7 @@ describe('E-C completeness — every persisted family is registered (new family 
       'ensured worldState (fully-populated fixture)',
       'a new persisted worldState key must be registered as base, conditional, or the scalar gate',
     );
-    expect(Object.keys(ensured).at(-1)).toBe('envoyErrands');
+    expect(Object.keys(ensured).at(-1)).toBe('concludedWars');
   });
 
   test('per-save campaignState: migrateSaveToV2 default block matches the registry exactly', async () => {

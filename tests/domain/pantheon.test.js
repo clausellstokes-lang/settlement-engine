@@ -606,12 +606,16 @@ describe('pantheon — realm arcs (Ascendancy / Twilight / the last altar)', () 
     expect(JSON.stringify(crossing.changes)).toContain('lastSeat');
     // anchored: this exact tick's `changes` carries the flag (asserted on the line above).
     expect(JSON.stringify(crossing.pantheon)).not.toContain('lastSeat');
-    // ZERO NEW TOP-LEVEL KEYS — the array's order IS the serialized key order, asserted
-    // rather than assumed.
+    // ZERO NEW TOP-LEVEL KEYS FROM THIS PACKET — the array's order IS the serialized
+    // key order, asserted rather than assumed. The list itself grows when an unrelated
+    // lane lands a conditional ledger (APPENDED AT THE END ONLY, the standing law at
+    // the array's own declaration); what this pin holds is that the pantheon packet
+    // added none and that the order never shuffles under one that did.
     expect([...CONDITIONAL_LEDGER_KEYS]).toEqual([
       'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
       'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog', 'spatialDigest',
       'spatialLedgers', 'narrativeTempo', 'politicsLedgers', 'factionPairStates', 'envoyErrands',
+      'concludedWars',
     ]);
     // A zero-seat remnant survives the lifecycle round trip as the ledger entry it already is.
     const remnant = { 'deity:The Pale Warden': { wins: 0, losses: 1, seats: 0, tier: 'cult', tierHeld: 0 } };

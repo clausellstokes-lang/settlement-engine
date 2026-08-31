@@ -94,6 +94,18 @@ export const WORLD_SNAPSHOT_HARD_DENY = Object.freeze([
   'politicsLedgers',
   'factionPairStates',
   'envoyErrands',
+  // W-MEM's concluded-war ledger. HARD-DENIED at landing, the default every
+  // conditional ledger but the pantheon takes: a war record carries casus receipts,
+  // the classifier's raw fact channels and the termination instrument's own bands —
+  // DM-truth of exactly the class its siblings above are denied for. The owner's
+  // Remembrance door reads the owner session, not the public snapshot, so the door
+  // works on day one regardless. A scrubbed public derivation (the field-by-field
+  // audience table in DESIGN_W_MEM §3.1) would be the second-ever allowlist entry
+  // and is a separate, owner-granted decision — with a stated cost while it is
+  // ungranted: a world IMPORTED from a public snapshot re-enters with an empty
+  // ledger, and its pre-import wars are then unrecorded FOREVER, because this
+  // ledger never backfills.
+  'concludedWars',
 ]);
 
 /** simulationRules keys safe to surface publicly (coarse world-shape toggles the

@@ -8,6 +8,7 @@ import { migrateTreatyClockMarkers } from './treatyClock.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { isWarReasonType } from './warReasonTaxonomy.js';
 import { normalizeJoinAnchor } from './warCoalitionLedger.js';
+import { normalizeConcludedWars } from './concludedWarRecord.js';
 import { migrateDispositionStats } from './dispositionLedger.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 2;
@@ -432,6 +433,18 @@ export function createDefaultWorldState(campaign = {}) {
 //                            generation baseline is sacred). The flow-derived economics
 //                            drift (display/tradeFlowEconomics.js) reads it; present
 //                            under the commodity-flow opt-in while goods move (sparse).
+//   • concludedWars    — W-MEM's Remembrance-grade ledger of wars that ENDED
+//                        (DESIGN_W_MEM §2, concludedWarRecord.js): { warId → the
+//                        append-closed typed record — pair, sides, casus pins,
+//                        the classifier's fact block, banded costs, ≤5 engagement
+//                        epitomes }. The deployment ledger above is the LIVE war
+//                        record and dies with the war on seven distinct roads; this
+//                        is the only durable trace a concluded war leaves. Written
+//                        across ticks (a record STAGES at its first belligerent
+//                        edge's close and SEALS when none is left), so it rides the
+//                        mutable clone branch; absent/empty ⇒ key omitted ⇒
+//                        byte-identical-dormant. APPEND-ONLY, and its records are
+//                        never rewritten, folded or pruned — that is lived history.
 // Exported for the public-snapshot deny-census walker (tests/security/
 // worldSnapshotDenyCensus.test.js), which asserts WORLD_SNAPSHOT_HARD_DENY covers every
 // conditional ledger except the public allowlist (security-privacy-r2-1). Export-only —
@@ -468,6 +481,21 @@ export const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   // state.  The owning normalizer validates, bounds, sorts, and deep-clones the
   // closed records; absent/non-array/empty ⇒ key omitted. APPEND-ONLY.
   'envoyErrands',
+  // W-MEM THE CONCLUDED-WAR LEDGER (worldState.concludedWars, DESIGN_W_MEM §2.1):
+  // { warId → ConcludedWarRecord } — the Remembrance-grade durable record of wars
+  // that ENDED. Mutable across ticks while a record is STAGED (a coalition joiner's
+  // edge can outlive the origin pair's, and the negotiated fact channels land inside
+  // the peace-mint window), immutable from SEAL. Rides the mutable
+  // deepCloneConditionalLedger branch. Materialized ONLY when the war-memory writer
+  // stages or seals its first record under its virtual flag; absent/empty ⇒ key
+  // omitted ⇒ byte-identical-dormant (the factionPairStates precedent). APPEND-ONLY.
+  //
+  // ⚠ THE KEY IS A REGISTRATION EVENT, NOT AN APPEND. Landing it here also obliges,
+  // in the SAME act: the public-snapshot deny-census classification (this ledger is
+  // HARD-DENIED — it is DM-truth of the same class as occupations and warPosture),
+  // the two exact-list pins and the two last-key pins that read this array, and the
+  // note that the hand-mirrored server-side deny list is now one key further behind.
+  'concludedWars',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR
@@ -522,9 +550,15 @@ export function ensureWorldStateWithEnvoyNormalizer(
     // identity; every other conditional ledger deep-clones (mutable across ticks).
     const materialized = key === 'envoyErrands'
       ? normalizeEnvoyRows(raw?.[key])
-      : FROZEN_CONDITIONAL_LEDGER_KEYS.has(key)
-        ? freezeConditionalLedger(raw?.[key])
-        : deepCloneConditionalLedger(raw?.[key]);
+      // W-MEM: the concluded-war ledger validates its records on EVERY load, lit or
+      // dark — the same deliberately-ungated persistence hygiene the deployment
+      // ledger takes above. It normalizes to undefined when empty, so drop-when-empty
+      // and the dormancy byte-identity both come free from the contract below.
+      : key === 'concludedWars'
+        ? normalizeConcludedWars(raw?.[key])
+        : FROZEN_CONDITIONAL_LEDGER_KEYS.has(key)
+          ? freezeConditionalLedger(raw?.[key])
+          : deepCloneConditionalLedger(raw?.[key]);
     if (Array.isArray(materialized)
       ? materialized.length > 0
       : materialized !== undefined) conditionalLedgers[key] = materialized;
