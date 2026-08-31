@@ -152,7 +152,12 @@ edges are believability assertions** — a thorp can never roll seven named figu
 faction, on every generation path — lifted only under a typed missing-ruling-seat stressor,
 which births the vacancy-and-yearner pattern at the throne itself (a succession story, never a
 null); the density shrink arm may never dissolve the ruling faction (events only); a both-ways
-fixture walks the invariant.
+fixture walks the invariant. **§810.4:** the rival's faction is a WEIGHTED ROLL scaling with the
+influence gap, any archetype ("not bounded in blood"); a faction mints WITH ≥1 NPC or not at all
+(the atomic mint — NPC-less factions unrepresentable); in play, an emptied roster DISSOLVES the
+faction with a chronicle receipt — except the ruling faction, which becomes a typed INTERREGNUM
+and engages the succession machinery. The walker asserts: roster ≥1, or ruling-in-interregnum,
+or dissolved-with-receipt — no fourth state.
 
 | Tier | Factions (roll) | Named-NPC MASS (roll) |
 |---|---|---|
