@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "90bf1966422a1bfef58e2e60ff1f51de7b6b6791",
-  "measuredBy": "lane F3c (Opus 5)",
+  "measuredAtSha": "be6bb24c5c7ba38545aaffb026bea137d8737123",
+  "measuredBy": "lane F4c (Opus 5)",
   "date": "2026-08-31",
-  "note": "W-FAITH F3c act 3 added ONE test file: mandateTemperReach",
-  "files": 2448,
+  "note": "W-FAITH F4c: ONE new test file (faithChannelWiring) + the fence gained FENCE 4 and two FENCE 1 arms + four executable mechanical claims",
+  "files": 2449,
   "parked": 370,
-  "credited": 2078,
-  "titles": 21044,
-  "suiteTitles": 5782
+  "credited": 2079,
+  "titles": 21073,
+  "suiteTitles": 5788
 }
