@@ -182,8 +182,14 @@ export function seatMarchTicks(worldState, fromId, toId) {
  * the march delay and the welcome.
  *
  * ⭐ THE MARCH HALF IS A REPAIR, NOT A FEATURE, AND THE PROSE ALREADY PROMISED IT.
- * `pulseKernel.js:2502` says of this very read: *"the arriving army tilts the verdict it
- * reaches in time; a column that arrives after the verdict marched to yesterday's coup."*
+ * `pulseKernel.js` says of this very read, at `the arriving army tilts the verdict it reaches in time`:
+ * *"…a column that arrives after the verdict marched to yesterday's coup."*
+ * (A CONTENT ANCHOR, not a line number, and the distinction is enforced: RULE 1 of
+ * `tests/lint/pulseKernelLineAddress.walker.test.js` freezes hand-keyed
+ * `pulseKernel.js:<digits>` citations at ZERO across src/ and tests/, with no allowlist,
+ * because a line number is text about source that no machine compares to source — every one
+ * of the fifteen it replaced was measured stale, the worst by 107 lines. This car wrote one
+ * anyway and the walker caught it.)
  * `interventionAdjFor` carried NO time term at all, so every committed column tilted at
  * full share the instant it committed, at any distance — the only thing making that
  * sentence partly true was the one-tick stage ordering, which is the same for a neighbour
