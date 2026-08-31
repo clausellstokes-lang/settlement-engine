@@ -421,7 +421,7 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/legacyGeneratorQuarantine.test.js': 1,
   'tests/domain/lineageClaim.test.js': 3,
   'tests/domain/lineageNews.test.js': 4,
-  'tests/domain/marketPrices.test.js': 10,
+  'tests/domain/marketPrices.test.js': 8,
   'tests/domain/migrationWithMortality.test.js': 2,
   'tests/domain/momentumLedger.test.js': 1,
   'tests/domain/negotiationExportLeg.test.js': 1,

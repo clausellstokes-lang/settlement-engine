@@ -135,6 +135,10 @@ describe('layout templates never print an authoring alternation (ODQ §767.3(e))
     const rosters = [inst('Market square'), inst('Parish church', 'Wayside shrine', 'Market square')];
     for (const tier of tiers) for (const terrain of terrains) for (const roster of rosters) {
       const { layout } = generateSpatialLayout(tier, roster, 'road', terrain);
+      // LIVENESS: this row really produced prose. Without it the sweep below would
+      // pass just as happily on an empty string or a table that drifted away.
+      expect(layout, `${tier}/${terrain}`).toMatch(/[a-z]{4,}/i);
+      // anchored: the toMatch liveness above proves this row rendered real prose
       expect(layout, `${tier}/${terrain}`).not.toMatch(/\bor\b/);
     }
   });

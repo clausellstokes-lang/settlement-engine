@@ -2469,10 +2469,14 @@ describe('11 — the mobile bottom nav is untouched by the directive', () => {
     const { container } = render(<App />);
     // Presence control: the mobile bar really did render (else every absence below
     // would be vacuous).
+    // The bar's seats moved (ODQ §767.3(f)): Realm was restored to the phone bar
+    // and About yielded its seat to the 5-slot cap, keeping its door in the footer
+    // ribbon. The footer nav is therefore excluded — this control is about the BAR.
     const labels = [...container.querySelectorAll('button')]
+      .filter((b) => !b.closest('nav[aria-label="Footer"]'))
       .map(label)
-      .filter((t) => ['Create', 'Library', 'Gallery', 'Compendium', 'About'].includes(t));
-    expect(labels).toEqual(['Create', 'Library', 'Gallery', 'Compendium', 'About']);
+      .filter((t) => ['Create', 'Library', 'Gallery', 'Compendium', 'About', 'Realm'].includes(t));
+    expect(labels).toEqual(['Create', 'Library', 'Realm', 'Gallery', 'Compendium']);
 
     expect(container.querySelectorAll('[data-testid="nav-fletch-band"]').length).toBe(0);
     expect(container.querySelectorAll('[data-testid^="nav-fletch-"]').length).toBe(0);

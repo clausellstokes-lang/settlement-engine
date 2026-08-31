@@ -609,7 +609,9 @@ export default function SettlementDetail({
         <div style={{fontFamily:sans,fontSize:FS.xxs,fontWeight:800,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>
           What a new roll keeps
         </div>
-        <Suspense fallback={null}><LockControls scope="world" /></Suspense>
+        <Suspense fallback={<div style={{fontFamily:sans,fontSize:FS.xxs,color:MUTED}}>Setting out the name, ground and seat locks…</div>}>
+          <LockControls scope="world" />
+        </Suspense>
       </div>
 
       {/* ── Campaign-state engine ─────────────────────────────────────────

@@ -17,6 +17,7 @@
 import React from 'react';
 import { describe, test, expect, beforeAll, afterEach } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { OverviewTab }      from '../../src/components/new/tabs/OverviewTab.jsx';
 import { ResourcesTab }     from '../../src/components/new/tabs/ResourcesTab.jsx';
@@ -79,10 +80,13 @@ describe('OverviewTab smoke', () => {
     const { container } = render(e(OverviewTab, { settlement: s }));
     const text = container.textContent;
     // The exact sentence pair — one period, a space, the PDF's "Consider:" form.
-    expect(text).toContain('monster incursions. Consider: Palisade or earthworks, Citizen militia.');
-    // The two shipped defects stay dead: the double stop and the joined words.
-    expect(text).not.toContain('incursions..');
-    expect(text).not.toContain('ConsiderPalisade');
+    const pair = 'monster incursions. Consider: Palisade or earthworks, Citizen militia.';
+    expect(text).toContain(pair);
+    // The two shipped defects stay dead: the double stop and the joined words. Both
+    // travel through the anchor, so a suggestion block that drifted away entirely can
+    // never read as "the defect is fixed".
+    expectAbsentWithAnchor(text, 'incursions..', pair, 'structural suggestion sentence pair');
+    expectAbsentWithAnchor(text, 'ConsiderPalisade', pair, 'structural suggestion sentence pair');
   });
 
   test('a single quarter is a "quarter", not "1 quarters"', () => {
@@ -91,8 +95,8 @@ describe('OverviewTab smoke', () => {
       spatialLayout: { layout: 'Village green beside the mill', quarters: [{ name: 'Market Quarter', desc: 'stalls' }] },
     };
     const { container } = render(e(OverviewTab, { settlement: s }));
-    expect(container.textContent).toContain('Spatial Layout (1 quarter)');
-    expect(container.textContent).not.toContain('1 quarters');
+    expectAbsentWithAnchor(container.textContent, '1 quarters', 'Spatial Layout (1 quarter)',
+      'single-quarter pluralization');
     // Plural control: two quarters still read as quarters.
     cleanup();
     const two = { ...s, spatialLayout: { ...s.spatialLayout, quarters: [...s.spatialLayout.quarters, { name: 'Shrine', desc: 'quiet' }] } };

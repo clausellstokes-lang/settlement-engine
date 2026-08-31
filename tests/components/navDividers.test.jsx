@@ -403,10 +403,14 @@ describe('mobile bottom nav — the dividers are desktop-only', () => {
     const { container } = render(<App />);
     // Presence control: the mobile bar really did render (else the absence
     // below would be vacuous).
+    // The bar's seats moved (ODQ §767.3(f)): Realm was restored to the phone bar
+    // and About yielded its seat to the 5-slot cap, keeping its door in the footer
+    // ribbon. The footer nav is therefore excluded — this control is about the BAR.
     const labels = [...container.querySelectorAll('button')]
+      .filter((b) => !b.closest('nav[aria-label="Footer"]'))
       .map((b) => b.textContent.trim())
-      .filter((txt) => ['Create', 'Library', 'Gallery', 'Compendium', 'About'].includes(txt));
-    expect(labels).toEqual(['Create', 'Library', 'Gallery', 'Compendium', 'About']);
+      .filter((txt) => ['Create', 'Library', 'Gallery', 'Compendium', 'About', 'Realm'].includes(txt));
+    expect(labels).toEqual(['Create', 'Library', 'Realm', 'Gallery', 'Compendium']);
     expect(container.querySelectorAll('[data-divider-kind]').length).toBe(0);
   });
 });
