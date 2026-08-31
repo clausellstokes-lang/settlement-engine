@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { STRESSOR_SPAWN_GATES, UPHEAVAL_TUNING } from '../../src/domain/worldPulse/stressorGates.js';
+import { evaluateStressorRules } from '../../src/domain/worldPulse/stressors.js';
 import { FACTION_ARCHETYPES } from '../../src/domain/factionArchetypes.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -210,6 +211,48 @@ describe('D4 ATTEMPT — the occupied arm REPLACES, and the arithmetic is why', 
     expect(lit.reasons.some((r) => /lost the people entirely/.test(r))).toBe(false);
   });
 
+  test('a STRESSOR-occupied town whose LEDGER has no record falls through, and is not made SAFER by the gap', () => {
+    // The scope the first landing of this row did not draw. `occupied` is the stressor
+    // spelling; `resistance` is the ledger's. With no ledger record the resolver answers its
+    // absent-record default, so the replacement would have fired at OCCUPIED_BASE — BELOW the
+    // pre-car cell — and a missing bookkeeping row would have decided the world. Falling
+    // through restores the stacked arithmetic: the occupation row and the deficit row both
+    // apply, and the car's own sensitivity applies on top.
+    const noLedger = STRESSOR_SPAWN_GATES.insurgency(
+      snapshotWith({ score: 20, rules: LIT, stressors: occupationStressor() }),
+      pressure,
+    );
+    // OCCUPIED_BASE is precisely the value the un-scoped row produced here, because an absent
+    // record resolves resistance to zero and the span contributes nothing. Asserting strictly
+    // above it is asserting the defect is gone, in the one place it was observable.
+    expect(noLedger.probabilityMult).toBeGreaterThan(UPHEAVAL_TUNING.OCCUPIED_BASE);
+    // …and the ROWS are the structural claim, tuning-proof where a literal would not be: both
+    // the occupation row and the deficit row are present, which is the stacked form.
+    expect(noLedger.reasons.some((r) => /lost the people entirely/.test(r))).toBe(true);
+    expect(noLedger.reasons.some((r) => /garrison post/.test(r))).toBe(true);
+  });
+
+  test('a MATURED VASSALAGE does not spend an occupier resistance it no longer has', () => {
+    // Ledger present, but the estate's own resolver calls a `vassalized` rung UNOCCUPIED.
+    // The replacement must not read that seat's resistance: the occupation it belonged to is
+    // over. This town takes the stacked rows like any other unoccupied-by-ledger seat.
+    const vassal = STRESSOR_SPAWN_GATES.insurgency(
+      snapshotWith({
+        score: 20,
+        rules: LIT,
+        stressors: occupationStressor(),
+        occupations: { oak: { occupierId: 'bleak', state: 'vassalized', resistance: 0.9, sinceTick: 0, stateHeld: 0, benefitYield: 0, lastTick: 0 } },
+      }),
+      pressure,
+    );
+    expect(vassal.reasons.some((r) => /lost the people entirely/.test(r))).toBe(true);
+    // ANTI-VACUITY: an agreeing ledger at the SAME resistance still takes the replacement, so
+    // this arm is discriminating the rung and not merely observing a dead branch.
+    const held = occupied(LIT, 0.9);
+    expect(held.reasons).toHaveLength(1);
+    expect(held.reasons.some((r) => /lost the people entirely/.test(r))).toBe(false);
+  });
+
   test('the 30..45 insurgency row exists only when LIT and only when UNOCCUPIED', () => {
     const darkMid = gate('insurgency', { score: 35 });
     const litMid = gate('insurgency', { score: 35, rules: LIT });
@@ -218,5 +261,86 @@ describe('D4 ATTEMPT — the occupied arm REPLACES, and the arithmetic is why', 
     // …and it is weaker than rebellion's own 30..45 row, which is the ruling: taking up
     // arms is the harder of the two steps.
     expect(1.2).toBeLessThan(1.3);
+  });
+});
+
+describe('D4 ATTEMPT — the escalation beat is REACHABLE, and a sampled corpus may never be read as proof it is not', () => {
+  // ⛔⛔ WHY THIS ARM EXISTS, and it is the sharpest thing this car learned.
+  //
+  // Lighting this key moved the observed-shape corpus off the histories it used to live, and
+  // the address `applied|stressor_escalate_insurgency` stopped appearing in it. That reads on
+  // every census exactly like a DELETED BEAT — the refusal shape — and it is not one. The
+  // spawn gates are consulted at exactly ONE site, the BIRTH loop in `stressors.js`; the
+  // escalation candidate is authored by a later loop that consults NO gate at all. So no
+  // value of any row in `insurgencyGate` can suppress an escalation. What changed was which
+  // worlds the corpus happens to roll, not what the engine is able to narrate.
+  //
+  // ⭐ THE STRUCTURAL POINT: a census that asks whether a beat APPEARS IN ONE SAMPLED CORPUS
+  // has not asked whether the engine can still AUTHOR it. This arm asks the second question
+  // directly, so the two can never again be confused — if the capability itself ever dies,
+  // this reds, where a corpus census cannot tell the difference.
+
+  const insurgencyStressor = (extra = {}) => ({
+    id: 'world_stressor.insurgency.oak',
+    type: 'insurgency',
+    label: 'Insurgency pressure',
+    status: 'active',
+    lifecycleStage: 'active',
+    severity: 0.5,
+    originSettlementId: 'oak',
+    affectedSettlementIds: ['oak'],
+    durationPolicy: 'structural',
+    ...extra,
+  });
+
+  // The escalation floor reads the ORIGIN's strongest pressure across the type's own kinds.
+  const pressureIdx = { get: (id, kind) => (id === 'oak' && kind === 'legitimacy' ? { score: 0.8 } : null) };
+
+  const escalationsFor = (opts) => evaluateStressorRules(
+    snapshotWith({ ...opts, stressors: [insurgencyStressor(), ...(opts.stressors || [])] }),
+    pressureIdx,
+    { tick: 5, pressures: [] },
+  ).filter((c) => c.candidateType === 'stressor_escalate_insurgency');
+
+  test('the beat authors with the key DARK, with it LIT, and under OCCUPATION while LIT', () => {
+    for (const [label, opts] of [
+      ['dark', { score: 20 }],
+      ['lit', { score: 20, rules: LIT }],
+      ['lit + occupied', {
+        score: 20,
+        rules: LIT,
+        stressors: occupationStressor(),
+        occupations: { oak: { occupierId: 'bleak', state: 'stabilized', resistance: 0.35, sinceTick: 0, stateHeld: 0, benefitYield: 0, lastTick: 0 } },
+      }],
+    ]) {
+      const found = escalationsFor(opts);
+      expect(found, `${label}: the escalation beat did not author`).toHaveLength(1);
+    }
+  });
+
+  test('the beat carries its whole address chain, so the identity a census reads is the one the engine mints', () => {
+    // The news-address law: address chain, typed action, names, reason. The home a corpus
+    // census buckets under is `applied|<candidateType>`, so the candidateType and its ruleId
+    // twin are the identity itself — pinning them is pinning the address.
+    const [beat] = escalationsFor({ score: 20, rules: LIT });
+    expect(beat.candidateType).toBe('stressor_escalate_insurgency');
+    expect(beat.ruleId).toBe('stressor_escalate_insurgency');
+    expect(beat.ruleFamily).toBe('stressor');
+    expect(beat.targetSaveId).toBe('oak');
+    expect(beat.headline).toMatch(/may intensify/);
+    expect(beat.summary).toMatch(/has not broken/);
+    expect(beat.reasons.length).toBeGreaterThan(0);
+  });
+
+  test('NO row of insurgencyGate can suppress it — the gate is a BIRTH gate and this is not a birth', () => {
+    // ANTI-VACUITY, and the whole reason the arm is trustworthy: the gate demonstrably still
+    // fires and demonstrably still differs between dark and lit on the SAME world, yet the
+    // escalation count is identical across every one of those worlds. If the escalation were
+    // gated after all, these two observations could not both hold.
+    const dark = gate('insurgency', { score: 35 });
+    const lit = gate('insurgency', { score: 35, rules: LIT });
+    expect(lit.probabilityMult).not.toBe(dark.probabilityMult);
+    expect(escalationsFor({ score: 35 })).toHaveLength(1);
+    expect(escalationsFor({ score: 35, rules: LIT })).toHaveLength(1);
   });
 });

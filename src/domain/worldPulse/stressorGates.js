@@ -672,9 +672,27 @@ function insurgencyGate(snapshot, pressure) {
   // BELIEVED IN would have had both a low deficit and a high resistance pushing opposite
   // ways through one product. The replacement also un-saturates the cell: see
   // UPHEAVAL_TUNING.OCCUPIED_BASE for the measurement that makes stacking unbuildable here.
-  const occupiedResistance = occupied && upheavalLit(snapshot)
-    ? occupationRegimeOf(snapshot?.worldState, sid).resistance
+  // ⛔ THE REPLACEMENT APPLIES ONLY WHERE OCCUPATION TRULY GOVERNS, and that is a SCOPE the
+  // first landing of this row did not draw. `occupied` above is the STRESSOR spelling; the
+  // `resistance` the replacement spends is the LEDGER's. Reading one and spending the other
+  // without asking whether the ledger agrees is the two-consumers-of-one-word failure this
+  // family keeps meeting, and it goes wrong in two directions that nothing here could red:
+  //   • a town occupied by STRESSOR with NO ledger record resolves `resistance` to its
+  //     absent-record default of 0, so the cell would fire at OCCUPIED_BASE — BELOW the 2.0
+  //     the pre-car code gave it, and below the 3.0 it gave in crisis. A missing ledger row
+  //     would have made an occupied town SAFER, which is a bookkeeping gap deciding a world.
+  //   • a MATURED VASSALAGE (ledger present, `occupied` false by the estate's own resolver,
+  //     because the rung is `vassalized`) would still have spent an occupier's resistance on
+  //     a seat that is no longer under occupation at all.
+  // So the predicate is the resolver's own `occupied`, exactly as this file already spells it
+  // in `occupierGovernsHere` further down. `occupied === true` implies
+  // `ledgerPresent === true` there (the no-`occupierId` path returns both false together), so
+  // this one read carries both questions. Anything the ledger does not confirm falls through
+  // to the stacked rows, which is the pre-car arithmetic plus this car's own rows.
+  const regime = occupied && upheavalLit(snapshot)
+    ? occupationRegimeOf(snapshot?.worldState, sid)
     : null;
+  const occupiedResistance = regime?.occupied ? regime.resistance : null;
   if (occupiedResistance !== null) {
     const T = UPHEAVAL_TUNING;
     return gateResult([
