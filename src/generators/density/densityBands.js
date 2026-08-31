@@ -170,6 +170,73 @@ export const RIVAL_ROLL = Object.freeze({ base: 0.22, perGap: 0.55, cap: 0.88 })
  */
 export const CONCENTRATION = Object.freeze({ min: 0.0, max: 2.6 });
 
+/**
+ * §810.8 R24 — THE RESOLUTION CLOCK, in ticks. "A succession that never resolves is a
+ * hole, not a story; termination is structural."
+ *
+ * The clock is how long claimants have to settle it themselves before the weighted roll
+ * settles it for them. The RULING seat runs the shorter clock: a headless government is
+ * the state R14 calls a hole, so the world does not tolerate it as long as it tolerates
+ * a guild without a master.
+ *
+ * ⛔ DRAFTS, owner-unsigned (car D4). Deliberately NOT borrowed from
+ * `DRIFT_REEMIT_COOLDOWN_TICKS`: that constant is a NEWS re-emit window, and the claim
+ * a succession clock makes is a different claim about the world. D2c borrowed it where
+ * the claim genuinely was the same (the emergence cadence); reusing it here would be
+ * the HK-4 razing-latch law applied backwards.
+ */
+export const SUCCESSION_CLOCK_TICKS = Object.freeze({
+  ruling_seat: 8,
+  faction_head: 12,
+});
+
+/**
+ * §810.8 R24's OUTCOME WEIGHTS — what the roll reads when play has not settled the
+ * succession by the clock's end.
+ *
+ * ⛔⛔ EVERY VALUE HERE IS A DRAFT AND THE OWNER'S PEN IS WHAT FREEZES IT (car D4).
+ * These are the judgment-dense numbers of the whole succession law: they decide how
+ * often a realm's politics resolve quietly, how often a house is lawfully displaced,
+ * and how often somebody takes the seat by force. A lane may not sign them. They are
+ * recorded here as the machinery's runnable DEFAULT — the grammar is proven on FIXED
+ * fixtures that drive each ending explicitly, so no fixture depends on these values.
+ *
+ * The terms are R24's own list, each read from a quantity the world already carries:
+ *
+ *   `continuityBase` / `perClaimant`     — HOUSE DEPTH. A house with people in it can
+ *                                          seat one of them; an empty one cannot.
+ *   `continuityLegitimacy`               — a legitimate order is succeeded, not replaced.
+ *   `transferBase` / `perLegitimacyGap`  — THE LEGITIMACY/INFLUENCE GAP. A challenger
+ *                                          with a case wins the seat lawfully.
+ *   `transferLegitimacyFloor`            — ⭐ below this the challenger has no CASE, and
+ *                                          R23's TRANSFER is defined by having one. A
+ *                                          challenger under the floor can still take the
+ *                                          seat — but only by OVERTHROW, which is the
+ *                                          whole distinction §810.8 draws.
+ *   `overthrowBase` / `perCoercionGap`   — arms. The gap is read from the coup
+ *                                          machinery's own coercion-weighted contenders.
+ *   `warTilt` / `instabilityTilt`        — WAR STATE and SETTLEMENT DISPOSITION. A town
+ *                                          at war with a shaken order is where seats get
+ *                                          taken rather than passed.
+ *
+ * ⬜ TWO OF R24's WEIGHTS ARE ABSENT ON PURPOSE, NOT FORGOTTEN: "the claimants'
+ * characters and risk registers" belong to W-LIVES, which has not landed. The seam is
+ * named in `successionGrammar.js`; inventing a lesser character term here would have to
+ * be unpicked when the real one arrives.
+ */
+export const SUCCESSION_WEIGHTS = Object.freeze({
+  continuityBase: 0.35,
+  perClaimant: 0.22,
+  continuityLegitimacy: 0.40,
+  transferBase: 0.10,
+  perLegitimacyGap: 0.55,
+  transferLegitimacyFloor: 0.45,
+  overthrowBase: 0.08,
+  perCoercionGap: 0.60,
+  warTilt: 0.35,
+  instabilityTilt: 0.30,
+});
+
 /** @param {string|null|undefined} tier @returns {string} the canonical tier key */
 export function tierKey(tier) {
   const t = String(tier || '').toLowerCase();

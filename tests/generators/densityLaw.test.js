@@ -52,6 +52,8 @@ import {
   DENSITY_BANDS,
   IMPORTANCE_ORDER,
   RANK_CEILING_BY_TIER,
+  SUCCESSION_CLOCK_TICKS,
+  SUCCESSION_WEIGHTS,
   TIER_ORDER,
   bandsForTier,
   clampImportanceToTier,
@@ -70,11 +72,41 @@ import {
   rollsRegisterVii,
 } from '../../src/generators/density/densityLaw.js';
 import {
+  RUNG_ROLE_FIELD,
   derivedRungOccupancy,
   importanceForRung,
   isHeadRungVacant,
   rungBandsForTier,
 } from '../../src/generators/density/densityRungs.js';
+// D3 — §810.7 R22 / §810.8 R23–R25: the titular reading and the resolution grammar.
+import {
+  CLAIM_BASES,
+  CLAIM_BASIS_BY_RULING_POWER,
+  TITLE_SCOPES,
+  TITLE_VACANCY_KINDS,
+  claimBasisFor,
+  claimantsFor,
+  readTitularVacancies,
+} from '../../src/generators/density/titularSuccession.js';
+import {
+  DEFEATED_HOUSE_DISPOSITIONS,
+  INSTITUTIONAL_OUTCOMES,
+  RULING_SEAT_OUTCOMES,
+  SEAT_CAUSE_BY_OUTCOME,
+  SUCCESSION_CLOCK_FIELD,
+  SUCCESSION_LESSONS,
+  SUCCESSION_REFUSALS,
+  normalizedChallengers,
+  planSuccessionResolution,
+  successionDueAtTick,
+} from '../../src/generators/density/successionGrammar.js';
+// ⭐ THE REAL PRODUCERS the grammar composes. Every vocabulary join below is measured
+// against these rather than against a spelling in the test — a literal would have
+// agreed with the drift instead of catching it (the D2c slug-separator lesson).
+import { RULING_POWERS } from '../../src/domain/spatial/cohesionWeave.js';
+import { RULING_POWER_CAUSES, transferRulingPower } from '../../src/domain/rulingPower.js';
+import { coupContenders } from '../../src/domain/rulingPowerCoup.js';
+import { governanceLedger } from '../../src/domain/governanceLedger.js';
 import { rollDensityPlan } from '../../src/generators/density/densityRoll.js';
 import { MISSING_SEAT_STRESSORS } from '../../src/generators/density/applyDensityLaw.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
@@ -1663,5 +1695,544 @@ describe('D2c — the cadence wired into the pulse (§810.1 R7/R8/R9, §810.3 R1
     });
     expect(run(promoted, 100).changed, 'a promotion sprouted a house in the same tick').toBe(false);
     expect(run(promoted, 100 + DRIFT_REEMIT_COOLDOWN_TICKS).changed).toBe(true);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// D3 — §810.7 R22 titular succession · §810.8 R23/R24/R25 the resolution grammar
+//
+// The laws above answer "does this house still exist?" (R18) and "does this town
+// carry the politics its tier supports?" (R7/R9). These answer a third question
+// they cannot: "this TITLE is empty — who takes it, and what happens to the house
+// that held it?"
+//
+// ⛔ NOTHING IN THIS BLOCK IS WIRED INTO THE PULSE, and that is the car's shape,
+// not an omission. The resolution's apply pass has to move a ruling seat, and the
+// estate's ONE seat-transfer primitive cannot express R23's central distinction —
+// convicted by execution below rather than asserted. Wiring a second `isGoverning`
+// writer to work around that is the one thing §810.8 forbids.
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/** Fixtures shared by both D3 blocks. Written out rather than borrowed from the
+ *  D2c blocks above: those shape a settlement for the CADENCE (institutions,
+ *  compound standing), and a succession fixture is about rungs and rosters. */
+const D3 = (() => {
+  const V2 = { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION };
+  /** A named figure at a stated importance band, optionally carrying the yearner mark. */
+  const npc = (name, house, importance, extra = {}) => ({
+    id: `npc.${name}`, name, factionAffiliation: house, status: 'active', importance, ...extra,
+  });
+  const yearner = (name, house, importance) => npc(name, house, importance, { [RUNG_ROLE_FIELD]: 'yearner' });
+  const house = (name, category, power, governing = false) => ({
+    faction: name, name, category, power, isGoverning: governing,
+  });
+  const town = ({ tier = 'town', factions, npcs = [], config = V2, legitimacy = 55 }) => ({
+    id: 'ashford', name: 'Ashford', tier, config, npcs,
+    powerStructure: {
+      governingName: (factions.find(f => f.isGoverning) || {}).name || null,
+      factions,
+      publicLegitimacy: { score: legitimacy, label: 'tolerated', govMultiplier: 1 },
+      factionRelationships: [],
+    },
+  });
+  /** The bands at `town`: head = pillar, middle = key, lowest = notable. Read from the
+   *  ONE rung mapping so a retune of Register VII cannot silently un-name these. */
+  const B = rungBandsForTier('town');
+  return { V2, npc, yearner, house, town, B };
+})();
+
+describe('D3 — §810.7 R22: a succession binds to the TITLE, never the house', () => {
+  const { V2, npc, yearner, house, town, B } = D3;
+
+  it('⭐ DORMANT (v1) reads NO titles at all — the census cannot pass by accident', () => {
+    const s = town({
+      config: {},
+      factions: [house('The Crown', 'noble', 40, true)],
+      npcs: [npc('Reeve', 'The Crown', B.middle)],
+    });
+    const read = readTitularVacancies(s, { tick: 10 });
+    expect(read.governed).toBe(false);
+    expect(read.census).toEqual([]);
+    expect(read.vacancies).toEqual([]);
+  });
+
+  it('⭐⭐ THE VACANCY IS HEAD-RUNG-EMPTY, NOT ROSTER-EMPTY — and R18 still says the house LIVES', () => {
+    // This is R22(b) in one fixture: a house with people in it and nobody in its head
+    // seat is a SUCCESSION, not a dissolution. The two readings are siblings, and the
+    // proof asks R18's REAL reader rather than restating its rule here.
+    const crown = house('The Crown', 'noble', 40, true);
+    const s = town({
+      factions: [crown],
+      npcs: [npc('Reeve', 'The Crown', B.middle), npc('Bailiff', 'The Crown', B.lowest)],
+    });
+    expect(isHeadRungVacant(factionRosterOf(s, crown), 'town'),
+      'the fixture must actually leave the head rung empty').toBe(true);
+
+    const titles = readTitularVacancies(s, { tick: 10 });
+    expect(titles.vacancies.map(v => [v.factionKey, v.kind])).toEqual([['The Crown', 'head_vacant']]);
+
+    // ⭐ R18's own reader, unchanged, on the same settlement: the house is CREWED.
+    expect(factionLifecycleStateOf(s, crown)).toBe('crewed');
+    expect(readFactionLifecycle(s, { tick: 10 }).reactions).toEqual([]);
+  });
+
+  it('R22(a): ONE vacancy shape at every scale — a throne, a temple and a guild differ only in CLAIM BASIS', () => {
+    const s = town({
+      factions: [
+        house('The Crown', 'noble', 40, true),
+        house('The Temple', 'religious', 25),
+        house('The Weavers', 'merchant', 20),
+      ],
+      npcs: [
+        npc('Reeve', 'The Crown', B.middle),
+        npc('Deacon', 'The Temple', B.middle),
+        npc('Journeyman', 'The Weavers', B.middle),
+      ],
+    });
+    const vac = readTitularVacancies(s, { tick: 10 }).vacancies;
+    // Every field but the basis and the key is identical — that IS "one vacancy shape".
+    expect(vac.map(v => v.kind)).toEqual(['head_vacant', 'head_vacant', 'head_vacant']);
+    expect(vac.map(v => v.scope)).toEqual(['ruling_seat', 'faction_head', 'faction_head']);
+    expect(vac.map(v => v.claimBasis)).toEqual(['blood', 'ladder', 'ladder']);
+    expect(vac.map(v => v.claimants.length)).toEqual([1, 1, 1]);
+  });
+
+  it('⭐ THE CLAIM VOCABULARY JOINS THE REAL RULING_POWERS TABLE, both directions', () => {
+    // A table that agrees only with itself proves nothing. Both directions are measured
+    // against the estate's own frozen government-form vocabulary.
+    expect([...RULING_POWERS].sort(),
+      'every government form must have a claim vocabulary — a missing row is a silent `ladder`')
+      .toEqual(Object.keys(CLAIM_BASIS_BY_RULING_POWER).sort());
+    for (const [power, basis] of Object.entries(CLAIM_BASIS_BY_RULING_POWER)) {
+      expect(RULING_POWERS.includes(power), `${power} is not a real ruling power`).toBe(true);
+      expect(CLAIM_BASES.includes(basis), `${basis} is off the claim register`).toBe(true);
+    }
+    expect(TITLE_SCOPES).toEqual(['ruling_seat', 'faction_head']);
+    expect(TITLE_VACANCY_KINDS).toEqual(['head_vacant', 'house_empty']);
+  });
+
+  it('⛔ THE GOVERNMENT FORM TYPES THE RULING SEAT AND NOTHING ELSE (R22(a))', () => {
+    // A guild head in an autocracy does not pass by blood. Reading the form for a
+    // non-governing house would give a temple the throne's vocabulary — "one vacancy
+    // SHAPE" misread as "one vacancy VOCABULARY".
+    expect(claimBasisFor(house('The Crown', 'noble', 40, true))).toBe('blood');
+    expect(claimBasisFor(house('The Crown', 'noble', 40, false))).toBe('ladder');
+    expect(claimBasisFor(house('The Temple', 'religious', 20, true))).toBe('faith');
+    expect(claimBasisFor(house('The Weavers', 'merchant', 20, true))).toBe('wealth');
+    expect(claimBasisFor(house('The Syndicate', 'criminal', 20, true))).toBe('arms');
+    // An archetype off the ruling map fails soft through `rulingPowerFromArchetype`'s
+    // own 'mixed', never through a second guard here.
+    expect(claimBasisFor(house('The Outsiders', 'other', 20, true))).toBe('ladder');
+  });
+
+  it('⭐⭐ THE YEARNER FIELD FINALLY HAS A READER — it wins a TIE, and never more than a tie', () => {
+    // `densityRungRole` has been written since D1 and read by nothing. R22 is its first
+    // consumer: a yearner is "one who aches for the seat", so it is a claimant. But
+    // intent buys a TIE-BREAK, not a promotion over a better-placed rival — letting a
+    // stored intent overrule the ladder would invent a power the settlement lacks.
+    const crown = house('The Crown', 'noble', 40, true);
+    const tied = town({
+      factions: [crown],
+      npcs: [npc('Reeve', 'The Crown', B.middle), yearner('Steward', 'The Crown', B.middle)],
+    });
+    expect(claimantsFor(tied, crown, 'town').map(c => c.name)).toEqual(['Steward', 'Reeve']);
+
+    const outranked = town({
+      factions: [crown],
+      npcs: [npc('Reeve', 'The Crown', B.middle), yearner('Steward', 'The Crown', B.lowest)],
+    });
+    expect(claimantsFor(outranked, crown, 'town').map(c => c.name),
+      'a yearner one band down must NOT leapfrog a better-standing rival')
+      .toEqual(['Reeve', 'Steward']);
+  });
+
+  it('`house_empty` yields ZERO claimants, and it is a different kind from `head_vacant`', () => {
+    const sworn = house('The Sworn', 'military', 25);
+    const s = town({ factions: [house('The Crown', 'noble', 40, true), sworn], npcs: [] });
+    const vac = readTitularVacancies(s, { tick: 10 }).vacancies;
+    const swornVac = vac.find(v => v.factionKey === 'The Sworn');
+    expect(swornVac.kind).toBe('house_empty');
+    expect(swornVac.claimants).toEqual([]);
+    expect(claimantsFor(s, sworn, 'town')).toEqual([]);
+  });
+
+  it('an OCCUPIED head is no vacancy, and its head is not a claimant for its own seat', () => {
+    const weavers = house('The Weavers', 'merchant', 30);
+    const s = town({
+      factions: [house('The Crown', 'noble', 40, true), weavers],
+      npcs: [npc('Reeve', 'The Crown', B.head), npc('Master', 'The Weavers', B.head)],
+    });
+    const read = readTitularVacancies(s, { tick: 10 });
+    expect(read.vacancies).toEqual([]);
+    expect(read.census.every(c => c.occupied)).toBe(true);
+    // Anyone at or above the head band would BE the head; asking for claimants of an
+    // occupied title returns nothing rather than nonsense.
+    expect(claimantsFor(s, weavers, 'town')).toEqual([]);
+  });
+});
+
+describe('D3 — §810.8 R23/R24/R25: the resolution grammar, and that it always ends', () => {
+  const { V2, npc, house, town, B } = D3;
+
+  /** A town whose ruling house is headless, with two rival powers to claim its seat. */
+  const contested = ({ claimants = 1, legitimacy = 55 } = {}) => town({
+    legitimacy,
+    factions: [
+      house('The Crown', 'noble', 40, true),
+      house('The Weavers', 'merchant', 30),
+      house('The Sworn', 'military', 25),
+    ],
+    npcs: [
+      ...Array.from({ length: claimants }, (_, i) => npc(`Reeve${i}`, 'The Crown', B.middle)),
+      npc('Master', 'The Weavers', B.head),
+      npc('Captain', 'The Sworn', B.head),
+    ],
+  });
+
+  /** The ruling-seat vacancy of a fixture, read through the real R22 reading. */
+  const vacancyOf = (s) => readTitularVacancies(s, { tick: 40 })
+    .vacancies.find(v => v.scope === 'ruling_seat');
+
+  /** ⭐ THE CHALLENGERS COME FROM THE COUP MACHINERY ITSELF, not from a literal here.
+   *  `legitimacy01` is the one term `coupContenders` does not carry (a coup needs no
+   *  case); `lawful` names which rival is given one. */
+  const challengersOf = (s, lawful) => coupContenders(s).challengers
+    .map(c => ({ ...c, legitimacy01: c.name === lawful ? 0.95 : 0.05 }));
+
+  /** Drive the grammar until it lands each reachable ending, and return one plan per
+   *  outcome. Deterministic: the seeds are enumerated, never sampled. */
+  const plansByOutcome = (input, order) => {
+    const out = {};
+    for (let i = 0; i < SEEDS; i += 1) {
+      const p = planSuccessionResolution({ ...input, rng: createPRNG(`d3-${i}`) });
+      if (!out[p.outcome]) out[p.outcome] = p;
+      if (Object.keys(out).length === order.length) break;
+    }
+    return out;
+  };
+
+  const RULING_INPUT = (s, lawful, over = {}) => ({
+    vacancy: vacancyOf(s),
+    config: V2,
+    tick: 60,
+    openedAtTick: 40,
+    challengers: challengersOf(s, lawful),
+    legitimacy01: governanceLedger(s).legitimacyScore / 100,
+    war01: 0.5,
+    stability01: 0.4,
+    ...over,
+  });
+
+  it('the outcome sets are CLOSED — three for the seat, three for an office, no fourth', () => {
+    expect(RULING_SEAT_OUTCOMES).toEqual(['continuity', 'transfer', 'overthrow']);
+    expect(INSTITUTIONAL_OUTCOMES).toEqual(['promotion', 'absorption', 'withering']);
+    expect(DEFEATED_HOUSE_DISPOSITIONS).toEqual(['held', 'demoted', 'scattered']);
+    expect(SUCCESSION_REFUSALS).toEqual(['dormant_law', 'no_vacancy', 'clock_running']);
+    expect(SUCCESSION_LESSONS).toEqual([
+      'house_power_held', 'house_power_fell', 'house_power_broken', 'house_power_taken',
+    ]);
+  });
+
+  it('⭐ EACH OF R23\'s THREE ENDINGS IS REACHABLE, and each carries its own receipt', () => {
+    const s = contested({ claimants: 2 });
+    const got = plansByOutcome(RULING_INPUT(s, 'The Weavers'), RULING_SEAT_OUTCOMES);
+    expect(Object.keys(got).sort(), 'an unreachable ending is a grammar with two members')
+      .toEqual(['continuity', 'overthrow', 'transfer']);
+
+    // CONTINUITY — the house holds, and it raises its own.
+    expect(got.continuity.defeatedHouse).toEqual({ key: 'The Crown', disposition: 'held', intoName: null });
+    expect(got.continuity.successor.name).toBe('Reeve0');
+    expect(got.continuity.powerTransfer).toBe(null);
+    expect(got.continuity.lesson).toBe('house_power_held');
+
+    // TRANSFER — lawful passage, and ⭐ THE HOUSE LIVES.
+    expect(got.transfer.defeatedHouse).toEqual({ key: 'The Crown', disposition: 'demoted', intoName: null });
+    expect(got.transfer.challenger.name, 'only a challenger with a CASE may take it lawfully').toBe('The Weavers');
+    expect(got.transfer.powerTransfer).toEqual({
+      toPowerName: 'The Weavers', cause: 'succession', tick: 60, losers: ['The Crown'],
+    });
+    expect(got.transfer.lesson).toBe('house_power_fell');
+
+    // OVERTHROW — the seat is seized, and ⭐ THE HOUSE ENDS, into the victor.
+    expect(got.overthrow.defeatedHouse.disposition).toBe('scattered');
+    expect(got.overthrow.defeatedHouse.intoName).toBe(got.overthrow.challenger.name);
+    expect(got.overthrow.powerTransfer.cause).toBe('coup');
+    expect(got.overthrow.lesson).toBe('house_power_broken');
+
+    // Every receipt names the house, the claim it was made in, and what became of it.
+    for (const p of Object.values(got)) {
+      expect(p.receipt.houseName).toBe('The Crown');
+      expect(p.receipt.claimBasis).toBe('blood');
+      expect(p.receipt.houseDisposition).toBe(p.defeatedHouse.disposition);
+      expect(p.receipt.lesson).toBe(p.lesson);
+    }
+  });
+
+  it('⭐⭐ THE DISTINCTION, PROVEN AGAINST R18\'s REAL READER: demoted LIVES, scattered ENDS', () => {
+    // §810.8: "the difference between transfer and overthrow is whether the old house
+    // lives, and that difference is where decades of story come from."
+    //
+    // ⚠ THE APPLIER BELOW IS THE FIXTURE'S, NOT SHIPPED MACHINERY — this car lands the
+    // law inert and the wiring car owns the real one. What is being proved is that the
+    // plan's TYPED DISPOSITION, applied faithfully, lands the two different R18 states.
+    // The verdict comes from `factionLifecycleStateOf` — R18's own reader — rather than
+    // from an assertion restating this test's intent.
+    const s = contested({ claimants: 2 });
+    const applyDisposition = (settlement, plan) => {
+      const d = plan.defeatedHouse;
+      if (d.disposition === 'held') return settlement;
+      const factions = settlement.powerStructure.factions.map(f => (
+        f.name === d.key ? { ...f, isGoverning: false } : { ...f, isGoverning: f.name === plan.challenger.name }
+      ));
+      // `scattered` re-affiliates the roster onto the victor — R9's fold idiom, and the
+      // only roster-emptying road an engine may take under §827's STATE-NEVER-FATE.
+      const npcs = d.disposition === 'scattered'
+        ? settlement.npcs.map(n => (n.factionAffiliation === d.key
+          ? { ...n, factionAffiliation: d.intoName } : n))
+        : settlement.npcs;
+      return { ...settlement, npcs, powerStructure: { ...settlement.powerStructure, factions } };
+    };
+    const stateAfter = (plan) => {
+      const next = applyDisposition(s, plan);
+      return factionLifecycleStateOf(next, next.powerStructure.factions.find(f => f.name === 'The Crown'));
+    };
+
+    const got = plansByOutcome(RULING_INPUT(s, 'The Weavers'), RULING_SEAT_OUTCOMES);
+    expect(stateAfter(got.transfer), 'a DEMOTED house still has its people — R18 must call it crewed')
+      .toBe('crewed');
+    expect(stateAfter(got.overthrow), 'a SCATTERED house has nobody left — R18\'s own road ends it')
+      .toBe('dissolved');
+    // And the dissolution is R18's to receipt, not this law's: the reaction it mints is
+    // the same `faction_dissolved` beat any other emptied house earns.
+    const overthrown = applyDisposition(s, got.overthrow);
+    expect(readFactionLifecycle(overthrown, { tick: 61 }).reactions
+      .filter(r => r.factionKey === 'The Crown').map(r => r.kind)).toEqual(['faction_dissolved']);
+  });
+
+  it('⛔⛔ THE CONVICTION: the estate\'s ONE seat-transfer primitive CANNOT honour `demoted`', () => {
+    // This is the car's headline finding, and it is measured against the real primitive
+    // rather than described. `transferRulingPower` RELABELS the governing row into the
+    // winner's government form: the defeated house leaves the roster entirely and the
+    // victor stays `isGoverning: false` ("the power behind the seat"). ⇒ R23's central
+    // distinction is unreachable downstream of this plan until that primitive can demote.
+    //
+    // The pin is a POSITIVE statement of the whole resulting roster, so it fails loudly
+    // the day the primitive is taught to demote — which is exactly when this car's
+    // escalated row has been answered and the wiring car may proceed.
+    const s = contested({ claimants: 2 });
+    const plan = plansByOutcome(RULING_INPUT(s, 'The Weavers'), RULING_SEAT_OUTCOMES).transfer;
+    const out = transferRulingPower(s, plan.powerTransfer.toPowerName, {
+      cause: plan.powerTransfer.cause, tick: plan.powerTransfer.tick, losers: plan.powerTransfer.losers,
+    });
+    expect(out.error).toBe(null);
+    const rows = out.settlement.powerStructure.factions.map(f => [f.name, f.isGoverning === true]);
+    expect(rows, 'THE CROWN IS GONE, AND THE VICTOR DOES NOT GOVERN — the demotion has nowhere to land')
+      .toEqual([['Merchant City Council', true], ['The Weavers', false], ['The Sworn', false]]);
+    // The only surviving trace of the defeated house is one string in a history list.
+    expect(out.settlement.powerStructure.previousGovernments)
+      .toEqual([{ label: 'The Crown', cause: 'succession', tick: 60 }]);
+  });
+
+  it('the seat causes are members of the REAL RULING_POWER_CAUSES, not spellings here', () => {
+    for (const [outcome, cause] of Object.entries(SEAT_CAUSE_BY_OUTCOME)) {
+      expect(RULING_SEAT_OUTCOMES.includes(outcome)).toBe(true);
+      expect(RULING_POWER_CAUSES.includes(cause), `${cause} is not a cause the primitive accepts`).toBe(true);
+    }
+    expect(SEAT_CAUSE_BY_OUTCOME).toEqual({ transfer: 'succession', overthrow: 'coup' });
+  });
+
+  it('⭐ THE LEGITIMACY FLOOR is what separates the two seat-taking endings', () => {
+    // A challenger with no CASE can still take the seat — but only by force. Drive the
+    // whole corpus with every challenger below the floor and TRANSFER must be
+    // unreachable while OVERTHROW is not.
+    const s = contested({ claimants: 1 });
+    const lawless = coupContenders(s).challengers.map(c => ({
+      ...c, legitimacy01: SUCCESSION_WEIGHTS.transferLegitimacyFloor - 0.01,
+    }));
+    const seen = new Set();
+    for (let i = 0; i < SEEDS; i += 1) {
+      seen.add(planSuccessionResolution({
+        ...RULING_INPUT(s, 'The Weavers'), challengers: lawless, rng: createPRNG(`d3-floor-${i}`),
+      }).outcome);
+    }
+    expect([...seen].sort(), 'a caseless challenger must reach OVERTHROW and never TRANSFER')
+      .toEqual(['continuity', 'overthrow']);
+  });
+
+  it('R24: while the clock runs the grammar decides NOTHING and DRAWS NOTHING', () => {
+    const s = contested({ claimants: 2 });
+    let draws = 0;
+    const counting = { random: () => { draws += 1; return 0.5; } };
+    const p = planSuccessionResolution({ ...RULING_INPUT(s, 'The Weavers'), tick: 41, rng: counting });
+    expect(p.resolved).toBe(false);
+    expect(p.reason).toBe('clock_running');
+    expect(p.dueAtTick).toBe(40 + SUCCESSION_CLOCK_TICKS.ruling_seat);
+    expect(draws, 'a law that draws while declining perturbs the stream it was gated off').toBe(0);
+
+    // The dormant and no-vacancy refusals return before the stream too.
+    expect(planSuccessionResolution({ ...RULING_INPUT(s, 'The Weavers'), config: {}, rng: counting }).reason)
+      .toBe('dormant_law');
+    expect(planSuccessionResolution({ ...RULING_INPUT(s, 'The Weavers'), vacancy: null, rng: counting }).reason)
+      .toBe('no_vacancy');
+    expect(draws).toBe(0);
+  });
+
+  it('a FUTURE-DATED vacancy mark buys no extra time (the razing-latch discipline)', () => {
+    // An imported or forged history whose tick sits ahead of the world's would otherwise
+    // hold a settlement's politics open forever.
+    const vac = { scope: 'ruling_seat', factionKey: 'The Crown', claimants: [] };
+    expect(successionDueAtTick(vac, 100, 40)).toBe(40 + SUCCESSION_CLOCK_TICKS.ruling_seat);
+    expect(successionDueAtTick(vac, 100, 9999)).toBe(100 + SUCCESSION_CLOCK_TICKS.ruling_seat);
+    // A title that fell vacant this tick starts its clock now, so a caller that has not
+    // yet persisted the mark still gets a well-defined due date to write.
+    expect(successionDueAtTick(vac, 100, null)).toBe(100 + SUCCESSION_CLOCK_TICKS.ruling_seat);
+    expect(successionDueAtTick({ scope: 'faction_head' }, 0, 0)).toBe(SUCCESSION_CLOCK_TICKS.faction_head);
+    expect(SUCCESSION_CLOCK_FIELD).toBe('successionUntilTick');
+  });
+
+  it('⭐⭐ R24 TERMINATION IS STRUCTURAL — every succession resolves, over the whole grid', () => {
+    // "A succession that never resolves is a hole, not a story." The property is asserted
+    // over the SPACE, not one fixture's habits: every scope × every roster depth × every
+    // challenger field × a wide seed corpus. A shape the corpus never produces would look
+    // clean, so the grid names the shapes that must occur.
+    const scopes = ['ruling_seat', 'faction_head'];
+    const depths = [0, 1, 3];
+    const fields = [[], [{ name: 'A', power: 20, weight: 20, legitimacy01: 0.9 }],
+      [{ name: 'A', power: 20, weight: 20, legitimacy01: 0.1 },
+        { name: 'B', power: 10, weight: 10, legitimacy01: 0.8 }]];
+    // ⚠ COLLECT, THEN ASSERT ONCE. A loop that asserts inline dies on the first bad
+    // cell and every later one goes unrun, so its failure count is a lower bound and a
+    // fix can be "verified" against a corpus that never reached the cells still broken.
+    // A termination PROPERTY in particular is worthless measured that way.
+    const broken = [];
+    let checked = 0;
+    for (const scope of scopes) {
+      for (const depth of depths) {
+        for (const challengers of fields) {
+          for (let i = 0; i < 60; i += 1) {
+            const p = planSuccessionResolution({
+              vacancy: {
+                scope, kind: depth ? 'head_vacant' : 'house_empty', factionKey: 'The Crown',
+                claimBasis: 'blood',
+                claimants: Array.from({ length: depth }, (_, k) => ({ key: `c${k}`, name: `C${k}`, standing: 1 })),
+              },
+              config: V2,
+              tick: 100,
+              openedAtTick: 40,
+              challengers,
+              legitimacy01: (i % 11) / 10,
+              war01: ((i * 3) % 11) / 10,
+              stability01: ((i * 7) % 11) / 10,
+              rng: createPRNG(`d3-term-${scope}-${depth}-${challengers.length}-${i}`),
+            });
+            const vocab = scope === 'ruling_seat' ? RULING_SEAT_OUTCOMES : INSTITUTIONAL_OUTCOMES;
+            const cell = `${scope}/depth${depth}/field${challengers.length}/seed${i}`;
+            if (!p.resolved) broken.push(`${cell}: UNRESOLVED (${p.reason})`);
+            else if (!vocab.includes(p.outcome)) broken.push(`${cell}: off-vocabulary ${p.outcome}`);
+            else if (!SUCCESSION_LESSONS.includes(p.lesson)) broken.push(`${cell}: off-register lesson ${p.lesson}`);
+            else if (!DEFEATED_HOUSE_DISPOSITIONS.includes(p.defeatedHouse.disposition)) {
+              broken.push(`${cell}: off-register disposition ${p.defeatedHouse.disposition}`);
+            }
+            checked += 1;
+          }
+        }
+      }
+    }
+    expect(broken, `${broken.length} of ${checked} successions failed to terminate cleanly`).toEqual([]);
+    expect(checked).toBe(scopes.length * depths.length * fields.length * 60);
+  });
+
+  it('⛔ THE HEIR-LESS ONE-PERSON POLITY (§817\'s D3 row): an answer, never a hole', () => {
+    // A house of one whose one member is gone: no claimant, and — the sharp case — no
+    // challenger either. R14 forbids the density law to end a government, so the ONLY
+    // structurally available answer is that the house holds the seat EMPTY. The clock
+    // terminated; the empty seat is the story, and it is exactly the state §810.5's
+    // stressor will read.
+    const alone = town({
+      factions: [house('The Crown', 'noble', 40, true)],
+      npcs: [],
+    });
+    const vac = vacancyOf(alone);
+    expect(vac.kind).toBe('house_empty');
+    expect(vac.claimants).toEqual([]);
+    expect(coupContenders(alone).challengers, 'the fixture must have nobody to take the seat').toEqual([]);
+
+    // Collected, not asserted inline: the claim is about EVERY seed, so a loop that
+    // stopped at the first bad one would report a lower bound and leave the rest unrun.
+    const wrong = [];
+    for (let i = 0; i < SEEDS; i += 1) {
+      const p = planSuccessionResolution({
+        vacancy: vac, config: V2, tick: 60, openedAtTick: 40,
+        challengers: coupContenders(alone).challengers,
+        legitimacy01: 0.5, war01: 1, stability01: 0,
+        rng: createPRNG(`d3-alone-${i}`),
+      });
+      const ok = p.resolved && p.outcome === 'continuity' && p.successor === null
+        && p.defeatedHouse.disposition === 'held' && p.powerTransfer === null;
+      if (!ok) wrong.push(`seed${i}: ${p.outcome}/${p.successor ? 'heir-invented' : 'no-heir'}`);
+    }
+    expect(wrong, `${wrong.length} of ${SEEDS} heir-less successions did not hold the seat`).toEqual([]);
+  });
+
+  it('R25 SCALE-DOWN: an office NEVER reaches a realm-scale ending, over the whole corpus', () => {
+    // "The realm-scale outcomes (rebellion, legitimacy transfer of the SEAT) belong to
+    // the ruling title alone." Structurally unreachable, not merely unlikely — so the
+    // proof drives the corpus with the strongest possible challenger field.
+    const seen = new Set();
+    const escaped = [];
+    for (let i = 0; i < SEEDS; i += 1) {
+      const p = planSuccessionResolution({
+        vacancy: {
+          scope: 'faction_head', kind: 'head_vacant', factionKey: 'The Weavers', claimBasis: 'ladder',
+          claimants: [{ key: 'j', name: 'Journeyman', standing: 1 }],
+        },
+        config: V2, tick: 60, openedAtTick: 40,
+        challengers: [{ name: 'The Sworn', power: 99, weight: 99, legitimacy01: 1 }],
+        legitimacy01: 0.1, war01: 1, stability01: 0,
+        rng: createPRNG(`d3-inst-${i}`),
+      });
+      seen.add(p.outcome);
+      if (p.powerTransfer || p.scope !== 'faction_head') escaped.push(`seed${i}: ${p.outcome}`);
+    }
+    expect(escaped, 'an office succession may never move the SEAT').toEqual([]);
+    expect([...seen].sort()).toEqual(['absorption', 'promotion', 'withering']);
+  });
+
+  it('R25: absorption SCATTERS into the absorber; withering leaves the house HELD', () => {
+    const base = {
+      vacancy: {
+        scope: 'faction_head', kind: 'head_vacant', factionKey: 'The Weavers', claimBasis: 'ladder',
+        claimants: [{ key: 'j', name: 'Journeyman', standing: 1 }],
+      },
+      config: V2, tick: 60, openedAtTick: 40,
+      challengers: [{ name: 'The Sworn', power: 40, weight: 40, legitimacy01: 0.8 }],
+      legitimacy01: 0.5, war01: 0.2, stability01: 0.3,
+    };
+    const got = {};
+    for (let i = 0; i < SEEDS && Object.keys(got).length < 3; i += 1) {
+      const p = planSuccessionResolution({ ...base, rng: createPRNG(`d3-r25-${i}`) });
+      if (!got[p.outcome]) got[p.outcome] = p;
+    }
+    expect(got.promotion.defeatedHouse).toEqual({ key: 'The Weavers', disposition: 'held', intoName: null });
+    expect(got.promotion.successor.name).toBe('Journeyman');
+    expect(got.absorption.defeatedHouse)
+      .toEqual({ key: 'The Weavers', disposition: 'scattered', intoName: 'The Sworn' });
+    expect(got.withering.defeatedHouse)
+      .toEqual({ key: 'The Weavers', disposition: 'held', intoName: null });
+    expect(got.withering.successor, 'a withering title stays empty by definition').toBe(null);
+  });
+
+  it('the challenger normaliser takes the coup machinery\'s OWN shape, ordered and total', () => {
+    const s = contested({ claimants: 1 });
+    const raw = coupContenders(s).challengers;
+    expect(raw.length, 'the fixture must actually field contenders').toBeGreaterThan(1);
+    const norm = normalizedChallengers(raw);
+    expect(norm.map(c => c.name)).toEqual(raw.map(c => c.name));
+    // Absent legitimacy degrades to 0.5 "unremarkable" — the convention the density
+    // particulars and the representation gap both follow.
+    expect(norm.every(c => c.legitimacy01 === 0.5)).toBe(true);
+    // Total on junk: nameless rows are dropped rather than ordered.
+    expect(normalizedChallengers(null)).toEqual([]);
+    expect(normalizedChallengers([{ power: 5 }, null])).toEqual([]);
   });
 });
