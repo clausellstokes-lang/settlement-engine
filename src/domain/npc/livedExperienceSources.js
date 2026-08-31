@@ -174,7 +174,7 @@ export function npcKeyOf(settlementId, npc, index) {
  * item it already holds:
  *
  *   placeId   `String(snapshotItem.id)`
- *   placeSeed `String(save?.seed || settlement?.seed || placeId)` — pulseKernel.js:663
+ *   placeSeed the seed pulseKernel already computes at `snapshotItem?.save?.seed`
  *   cast      `settlement.npcs`, IN ROSTER ORDER (the composite key is positional)
  *   patronRef `settlement.config.primaryDeitySnapshot._deityRef` (or its legacy spelling)
  *
@@ -196,9 +196,9 @@ export function npcKeyOf(settlementId, npc, index) {
  * @property {Record<string, unknown>} worldState
  * @property {ReadonlyArray<SourceHome>} homes
  *   RESOLVED BY THE CALLER, and that is a contract rather than a convenience.
- *   ⭐ THE SEED IS THE REASON. `pulseKernel.js:663` already computes a settlement
- *   seed — `String(snapshotItem?.save?.seed || snapshotItem?.settlement?.seed ||
- *   sid)` — and hands it to the verdict lane's `graduateNpc`. The durable-id mint
+ *   ⭐ THE SEED IS THE REASON. pulseKernel.js already computes a settlement seed at
+ *   `snapshotItem?.save?.seed` — falling back through the settlement's own and then
+ *   the id — and hands it to the verdict lane's `graduateNpc`. The durable-id mint
  *   HASHES that seed, so a second spelling of the line would graduate one person
  *   under two identities and nothing would ever red. Re-deriving it here would have
  *   been exactly that second spelling. The pulse computes it ONCE and passes it,
