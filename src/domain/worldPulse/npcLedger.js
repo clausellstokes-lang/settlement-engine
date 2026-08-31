@@ -63,6 +63,7 @@
  * @enforced-by tests/domain/npcLedgerIdentity.test.js,
  *   tests/domain/npcLedgerState.test.js,
  *   tests/domain/npcDmVerbs.test.js,
+ *   tests/domain/regenIdentityFold.test.js,
  *   tests/property/npcLedgerDormancyGolden.test.js
  */
 
@@ -663,6 +664,89 @@ export function graduateNpc({
     ? { ...ledger, placed: sortedRecords({ ...ledger.placed, [wnpcId]: /** @type {PlacementRecord} */ (record) }) }
     : { ...ledger, roamers: sortedRecords({ ...ledger.roamers, [wnpcId]: /** @type {RoamerRecord} */ (record) }) };
   return { worldState: setNpcLedger(worldState, nextLedger), wnpcId, minted: true, changed: true };
+}
+
+/**
+ * REFRESH THE ROSTER HALF OF `originRef` AFTER A ROSTER REROLL (W-LIVES car L2
+ * bridge). The one write this module makes that is not a graduation, a move, a
+ * removal or an exclusion, and it lives HERE because the ledger has exactly one
+ * writer and a second module doing key surgery on `originRef` would be the fork
+ * the single-writer discipline exists to prevent.
+ *
+ * WHAT GOES STALE, AND WHY IT IS NOT THE REBIND CLASS. The reverse lookup key is
+ * (settlementId, rosterId, name) and the NAME in it is deliberate: a reroll that
+ * re-issues npc_6 to somebody else changes the name, so a stranger at the old slot
+ * resolves to null and CANNOT inherit a graduated identity. The failure here is the
+ * opposite one. A preserved keeper does not rejoin the roster - it takes over a
+ * fresh slot and inherits that slot's id - so the SAME person at a MOVED slot also
+ * resolves to null (executed: originRef `npc_6`, keeper now at `npc_8`, lookup
+ * null), and the next graduation mints them a SECOND durable id. One soul, two
+ * ids, in a ledger whose law 6 says conservation. Rewriting the stored rosterId to
+ * the one the keeper inherited is the whole cure.
+ *
+ * MATCHED ON NAME AS WELL AS SLOT, always. Refreshing on `rosterId` alone would
+ * re-point a DEPARTED person's record at the slot a keeper now holds - inventing
+ * exactly the rebind the name in the key exists to make impossible.
+ *
+ * A GRADUATE WHO DID NOT SURVIVE THE REROLL IS LEFT ALONE, deliberately. They are
+ * gone from the roster but they are not gone from the world (law 6: the ledger is
+ * world-scoped and only the DM's KILL verb removes a soul), and their stale
+ * rosterId is harmless precisely because the name half of the key already refuses
+ * every stranger.
+ *
+ * DORMANT, no ledger, or nothing to refresh ⇒ the SAME worldState reference.
+ *
+ * @param {Record<string, unknown>|null|undefined} worldState
+ * @param {string} settlementId  the settlement whose roster was just rerolled
+ * @param {Array<{id?: unknown, fromId?: unknown, name?: unknown}>|null|undefined} preserved
+ *   the pipeline's preservation report; each entry carries the id the keeper
+ *   ARRIVED with, the id it INHERITED, and the name that identifies it
+ * @returns {{ worldState: any, changed: boolean, refreshed: string[] }}
+ */
+export function refreshOriginRefsAfterRegen(worldState, settlementId, preserved) {
+  const none = { worldState, changed: false, refreshed: /** @type {string[]} */ ([]) };
+  if (!npcConsequencesActive(worldState)) return none;
+  if (!hasNpcLedger(worldState) || !Array.isArray(preserved) || preserved.length === 0) return none;
+  const town = text(settlementId);
+  if (!town) return none;
+
+  /** Slot moves only, keyed on the FULL identity so a departed record cannot match.
+   *  @type {Map<string, string>} */
+  const moves = new Map();
+  for (const entry of preserved) {
+    const from = text(asObject(entry).fromId);
+    const to = text(asObject(entry).id);
+    const name = text(asObject(entry).name);
+    if (from && to && name && from !== to) moves.set(from + KEY_DELIM + name, to);
+  }
+  if (moves.size === 0) return none;
+
+  const ledger = npcLedgerOf(worldState);
+  /** @type {string[]} */
+  const refreshed = [];
+  /** @template T @param {Record<string, T>} map @returns {Record<string, T>} */
+  const rewrite = (map) => {
+    /** @type {Record<string, any>} */
+    const out = {};
+    for (const [id, rec] of Object.entries(map)) {
+      const ref = /** @type {OriginRef} */ (/** @type {any} */ (rec).originRef);
+      const to = ref && ref.settlementId === town ? moves.get(ref.rosterId + KEY_DELIM + ref.name) : undefined;
+      if (to === undefined) { out[id] = rec; continue; }
+      out[id] = { .../** @type {any} */ (rec), originRef: { ...ref, rosterId: to } };
+      refreshed.push(id);
+    }
+    return out;
+  };
+  const nextLedger = {
+    ...ledger,
+    roamers: rewrite(ledger.roamers),
+    placed: rewrite(ledger.placed),
+  };
+  if (refreshed.length === 0) return none;
+  // Narrowed by hasNpcLedger above: a world with a materialized ledger is an object.
+  const host = /** @type {Record<string, unknown>} */ (worldState);
+  const next = setNpcLedger(host, /** @type {NpcLedger} */ (nextLedger));
+  return { worldState: next, changed: next !== host, refreshed: refreshed.sort(compareCodepoint) };
 }
 
 /**

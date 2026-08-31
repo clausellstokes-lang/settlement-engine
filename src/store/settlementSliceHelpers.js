@@ -18,7 +18,7 @@ import { inferSuccessors } from '../domain/entities/successors.js';
 import { inferImportance } from '../domain/entities/npcs.js';
 import { makeActionResult } from './actionResult.js';
 import { remapNpcLocks, locksAfterFullGenerate } from '../domain/locksPreservation.js';
-import { persistSaveUpdate } from './campaignSliceShared.js';
+import { persistCampaignState, persistSaveUpdate } from './campaignSliceShared.js';
 
 // A+ P0.1: persistSaveUpdate is UNIFIED. The canon settlement path (applyEvent,
 // undoLastEvent, recordSnapshot, revertToSnapshot, destroySavedSettlement) imports
@@ -443,25 +443,91 @@ export function bindActiveSaveId(get, set, saveId) {
 }
 
 /**
- * THE ROSTER FOLD — the one step that lands a reroll's three outputs together.
+ * THE WORLD-IDENTITY STEP (lifecycle: REGEN) — the campaign twin of the two
+ * settlement-scoped remaps above.
+ *
+ * `locks.npcs` and `aiData.pinnedNpcs` are SELECTIONS the user made about a
+ * settlement. The campaign's `worldState` holds two more id-keyed homes for the
+ * same people — `npcStates` (every roster member's simulation row: corruption,
+ * exposures, momentum, rivalries) and the npcLedger's `originRef` — and NEITHER
+ * was in this fold. `npcStates` was the worse of the two: its key stays live
+ * across a reroll, so a dead person's corruption record silently became the
+ * record of whichever stranger inherited the slot, invisible to `pruneNpcStates`
+ * (the key never leaves the roster) and to any existence census (the row exists).
+ * The algebra and the reason a keeper is re-keyed while everybody else is dropped
+ * live in the pure leaf; this function is the reach.
+ *
+ * DYNAMIC IMPORT, on the npcVerbsSlice → npcVerbsBody precedent: the leaf pulls
+ * the ledger's spatial graph, and this module is EAGER, so a static edge would
+ * make every one of those bytes a first-paint byte for a step that runs only on a
+ * roster reroll.
+ *
+ * SCOPED TO THE ACTIVE SAVE'S OWN CAMPAIGNS. npcStates keys are built from the
+ * SAVE id, so a draft with no `activeSaveId` has no rows anywhere and returns
+ * immediately — the same guard, for the same reason, that remapPinnedNpcsAfterRegen
+ * carries. The fold runs INSIDE the `set()` so it reads the same draft it writes,
+ * and the campaign write is persisted exactly like a DM verb's.
+ *
+ * Dormant by construction: a campaign whose world state holds nothing for this
+ * settlement gets back the same reference and is never written.
+ *
+ * @param {() => any} get
+ * @param {(fn: (draft: any) => void) => void} set
+ * @param {{ preserved?: Array<{id?: string, fromId?: string, name?: string}> }|null|undefined} preservation
+ * @returns {Promise<boolean>} true when a campaign world state actually moved
+ */
+export async function foldRegenIdentityAfterRegen(get, set, preservation) {
+  const settlementId = String(get().activeSaveId || '');
+  if (!settlementId) return false;
+  const holds = (/** @type {any} */ c) => (c?.settlementIds || []).some((/** @type {any} */ id) => String(id) === settlementId);
+  if (!(get().campaigns || []).some(holds)) return false;
+  const { foldRegenIdentity } = await import('../domain/worldPulse/regenIdentityFold.js');
+  /** @type {string[]} */
+  const movedIds = [];
+  set(s => {
+    for (const campaign of s.campaigns || []) {
+      if (!holds(campaign) || !campaign.worldState) continue;
+      const folded = foldRegenIdentity({
+        worldState: campaign.worldState,
+        settlementId,
+        preserved: preservation?.preserved,
+      });
+      if (!folded.changed) continue;
+      campaign.worldState = folded.worldState;
+      movedIds.push(String(campaign.id));
+    }
+    // One persist for the whole fold. `changedId` is the hint the persist layer
+    // uses to name the row it touched, so it is only honest with a single mover.
+    if (movedIds.length > 0) persistCampaignState(s, movedIds.length === 1 ? movedIds[0] : null);
+  });
+  return movedIds.length > 0;
+}
+
+/**
+ * THE ROSTER FOLD — the one step that lands a reroll's outputs together.
  *
  * regenNPCsPipeline returns the new roster PARTS plus an out-of-band preservation
- * report, and two separate id-keyed maps depend on that report: `state.locks` and
- * the active save's `aiData.pinnedNpcs`. Folding them from one place is what keeps
- * "the roster moved but its map did not" impossible — the roster and the lock map
- * land in a single `set()`, and the pin remap follows immediately with its own
- * durable write (the pin is save-row state, so an in-memory-only rewrite would
- * ghost on reload).
+ * report, and FOUR id-keyed homes depend on that report: `state.locks`, the active
+ * save's `aiData.pinnedNpcs`, and — through foldRegenIdentityAfterRegen — the
+ * owning campaign's `worldState.npcStates` and npcLedger `originRef`s. Folding them
+ * from one place is what keeps "the roster moved but its map did not" impossible:
+ * the roster and the lock map land in a single `set()`, the pin remap follows
+ * immediately with its own durable write (the pin is save-row state, so an
+ * in-memory-only rewrite would ghost on reload), and the world-identity step lands
+ * in its own `set()` against the campaign it belongs to.
  *
  * @param {() => any} get
  * @param {(fn: (draft: any) => void) => void} set
  * @param {Record<string, any>} parts  the regenerated roster fields
- * @param {{ preserved?: Array<{id?: string, fromId?: string}> }|null|undefined} preservation
- * @returns {Promise<boolean>|undefined} the pin persist promise when pins moved
+ * @param {{ preserved?: Array<{id?: string, fromId?: string, name?: string}> }|null|undefined} preservation
+ * @returns {Promise<boolean|undefined>} settles when the pin write and the
+ *   world-identity fold have both landed; resolves to the pin persist's own result
  */
 export function foldRegeneratedRoster(get, set, parts, preservation) {
   set(s => { Object.assign(s.settlement, parts); remapLocksAfterRegen(s, preservation); });
-  return remapPinnedNpcsAfterRegen(get, set, preservation);
+  const pins = remapPinnedNpcsAfterRegen(get, set, preservation);
+  const identity = foldRegenIdentityAfterRegen(get, set, preservation);
+  return Promise.all([pins, identity]).then(([pinned]) => pinned);
 }
 
 /**

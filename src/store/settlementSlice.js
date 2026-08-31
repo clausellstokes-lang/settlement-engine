@@ -713,13 +713,14 @@ export const createSettlementSlice = (set, get) => ({
     if (section === 'npcs') {
       // `_preservation` is the pipeline's report, carried OUT OF BAND of the parts
       // (it must never land in the settlement blob) and destructured off here. A
-      // locked keeper INHERITS the id of the slot it took over, so BOTH npc-id-keyed
-      // maps have to be rewritten in the same step that folds the roster in —
+      // locked keeper INHERITS the id of the slot it took over, so EVERY npc-id-keyed
+      // map has to be rewritten in the same step that folds the roster in —
       // otherwise each one silently follows the stranger who got the old id on the
-      // next reroll. foldRegeneratedRoster owns all three writes (roster, `locks`,
-      // and the save row's `aiData.pinnedNpcs`) so they can never disagree.
+      // next reroll. foldRegeneratedRoster owns all the writes (roster, `locks`, the
+      // save row's `aiData.pinnedNpcs`, and the owning campaign's
+      // `worldState.npcStates` + npcLedger originRefs) so they can never disagree.
       const { _preservation, ...parts } = eng.regenNPCsPipeline(settlement, cfg, { locks });
-      foldRegeneratedRoster(get, set, parts, _preservation);
+      await foldRegeneratedRoster(get, set, parts, _preservation);
     } else if (section === 'history') {
       // This branch still assigns the whole history object, but the pipeline now
       // carries the parts a reroll has no business discarding, so the assignment
