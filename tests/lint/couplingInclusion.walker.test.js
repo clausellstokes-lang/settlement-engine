@@ -790,6 +790,45 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'The law-band modulation table is shared VOCABULARY, not a layer\'s state: four consumer families across two volumes read it — HABIT\'s learning rate-decay, and WC\'s relay efficiency, block cohesion and drift expression — and it owns none of their subjects. It is the bandFamilies / bandedStock / lawWord case exactly: a module every port spells against, carrying a SHAPE and no values. Giving it a layer home would make every port\'s own reading of a shared table read as a cross-layer coupling into whichever family won the name',
     reads: Object.freeze([]),
   }),
+  // ── W-OPS O1 (2026-08-31): THE OPERATION FAMILY'S TWO SUBSTRATE LEAVES ────────────
+  //
+  // Not a new argument — the bandFamilies / bandedStock / lawWord VOCABULARY reading and
+  // the HB-0 application of it, taken one volume across. DESIGN_W_OPS §1 rules that GOAL,
+  // MISSION and ERRAND are THREE CLASSES OF ONE GRAMMAR, and those three are willed in
+  // three different ports: a GOAL by INTERIOR's npc agency, a MISSION by INFORMATION's
+  // espionage layer and by the corruption web, an ERRAND by GRAMMAR's envoy spine. A
+  // vocabulary spoken by three ports owns none of their subjects, which is precisely the
+  // roster's own criterion.
+  //
+  // ⛔ AND THE LAYER DOOR IS SHUT BY ARITHMETIC, NOT BY PREFERENCE. `Object.keys(
+  // LAYER_PATTERNS)` is asserted at EXACTLY 7 in this file, so an eighth OPS family is a
+  // new PORT — a chair conversation on the FP volume's own §5 wave order, not something a
+  // train car may take in passing. The baseline door is shut by doctrine as well: a new
+  // .js under src/domain/worldPulse takes a family or an argued entry in the SAME commit,
+  // NEVER a baseline row, and the census scope regex recurses, so `operations/` is inside
+  // it from the day it exists.
+  //
+  // ⚠ THE TWO ROWS CARRY DIFFERENT `reads`, MEASURED RATHER THAN COPIED ACROSS — the same
+  // warning the HB pair carries, and for the same reason. The grammar leaf imports
+  // NOTHING AT ALL, which is what makes its empty reads structural. The dispatcher imports
+  // five modules and exactly ONE of them is layered; the other four are absent from the
+  // layer map (deterministicSort and contestMath live outside the census scope, stablePart
+  // is unlayered, and the grammar leaf is this very map's own argued row), and an
+  // unlayered read is not a cross-layer reach.
+  'src/domain/worldPulse/operations/operationGrammar.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'W-OPS substrate — the ONE typed operation record, its state machine and the owner-unsigned mission-kind catalog, spelled by every port that wills an operation (INTERIOR wills goals, INFORMATION and the corruption web will missions, GRAMMAR wills errands); it owns no subject, decides nothing, rolls nothing and reaches no world',
+    reads: Object.freeze([]),
+  }),
+  'src/domain/worldPulse/operations/missionDispatcher.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'W-OPS substrate — the §3.12 deliberation road run over a principal\'s unmet demands; it authors no verdict, holds no clock and walks no roster, taking every world fact as an argument, so what it owns is the CAP and the ordering rather than any port\'s subject',
+    reads: Object.freeze([
+      'src/domain/worldPulse/espionage/espionageDoctrine.js',
+      'src/domain/worldPulse/espionage/espionageMath.js',
+    ]),
+    readsReason: 'both INFORMATION reads are the ES charter\'s own vocabularies, called at their one home rather than copied here, and that is DELIBERATE: DESIGN_W_OPS §0 rules that this volume re-rules none of the ES charter\'s math, so §3.12\'s deliberation verdict and ES-5\'s three-word doctrine targeting are IMPORTED — a copied threshold or a transcribed target set would become a second spelling of one law that nobody notices until the two drift, and declaring the reach is what keeps the extension one-directional and visible',
+  }),
 });
 
 /** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
@@ -909,8 +948,24 @@ const ARGUED_HOSTS = Object.freeze([
  * therefore 0, it is declared `reads: []`, and NO edge leaves the pair scan. What the
  * raise buys is that the FIRST port this leaf ever reaches reds by name.
  * A twenty-fifth admission is the next deliberate act.
+ *
+ * ⏱ 24 → 26, W-OPS car O1, 2026-08-31 — the twenty-fifth and twenty-sixth admissions, taken
+ * together because they are one family and splitting them would leave the dispatcher
+ * importing a module this map did not yet know about. Both rows sit above with their full
+ * arguments; the short form is the HB-0 one, applied a volume across: DESIGN_W_OPS §1 rules
+ * GOAL / MISSION / ERRAND as three classes of ONE grammar, willed in three different ports,
+ * so the vocabulary they share owns none of their subjects.
+ * MEASURED AT THE RAISE, never copied between the two rows. The grammar leaf imports NOTHING
+ * — a zero-import module, so its `reads: []` is structural and cannot drift in either
+ * direction. The dispatcher imports six and exactly TWO are layered (`espionageDoctrine.js`
+ * and `espionageMath.js`, both INFORMATION, declared with their reason);
+ * `deterministicSort.js` and `region/contestMath.js` sit outside this census's scope,
+ * `stablePart.js` is unlayered, and the grammar leaf is this map's own row — an unlayered
+ * read is not a cross-layer reach. What the raise buys is that the SECOND port either leaf
+ * ever reaches reds by name.
+ * A twenty-seventh admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 24;
+const ARGUED_ROSTER_CEILING = 26;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;
