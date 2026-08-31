@@ -382,9 +382,14 @@ amend the sections above and OUTRANK them where they conflict:
   the flip the owner may sign instead.
 - **F6 → death mints ONE typed chronicle receipt** (the legacy record — an event, not a
   personality store); the derived known-character read terminates into it.
-- **F9 → the MATERIALIZATION FLOOR:** an ambient pull writes a drift key only when the
-  accumulated offset would cross a sub-band epsilon (candidate: ¼ of `a_touch`); below it,
-  nothing materializes — sparsity survives full-paradigm ambient pull structurally.
+- **F9 → the MATERIALIZATION FLOOR, AMENDED at §853 (L2 measured the original blocking its
+  own accumulation — nothing sub-floor is stored, so a per-tick sub-epsilon pull restarts from
+  zero forever; 50 ticks of a 0.2 pull mark nobody):** the floor stands, and the cure lives at
+  the SOURCE, not the store — **ambient/milieu sources emit at INTERVAL cadence with
+  time-integrated magnitude** (a season of exposure arrives as one quantum scaled by dwell time,
+  crossing the floor or honestly not — a truly faint exposure never marks, which is truth, not
+  loss). **Source-design law for L3/L4: no source may emit per-tick sub-floor pulls.** Sparsity
+  and accumulation both survive; no sub-floor accumulator state exists.
 - **F10 → two dispositions:** the stored `npcStates.alignment` and its four live consumers get
   a census-with-denominator at car 5 (re-point to the derived read or declare it a projection
   cache — no third state); and the mortal/divine relation is an ASYMMETRY, stated: for gods the
