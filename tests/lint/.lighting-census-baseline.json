@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "0d26defb50c1ae0bc1f81a830530ef759bd4366f",
-  "measuredBy": "SMALLS-landing",
+  "measuredAtSha": "d8809b24e106d92e1bd31385e275a19f0af7f258",
+  "measuredBy": "TE-MATERIAL-1 (Opus 5, lane MAT)",
   "date": "2026-08-31",
-  "note": "The smalls consist (RESIDUE-2 x2 + SP-W1 x3 + VOICE-1b x1) on a107bcde3; both in-train register commits dropped-as-empty per the DENS/T12 precedent and re-derived here. ONE new test file: allowlistRebuilderRegistry.walker.test.js (SP-W1) - CREDITED per its own fix car, 13 titles + 2 suites; every other consist test edit moved zero title lines (measured by diff).",
-  "files": 2456,
-  "parked": 371,
+  "note": "ONE new test file: tests/domain/livingContentMaterialization.test.js (TE-MATERIAL-1, d8809b24e), the executable contract for the living-content materialization law that pays ODQ 866 four-category blind bill dark-by-construction. It is PARKED, not credited, and that was MEASURED with the walker own classifier rather than predicted: reasons TEST_TABLE_UNPROVEN:it.each() x2 (the 26-case ledger and its name-filtered subset are an identifier and a call, never a static array literal) plus TEST_CONTEXT_PARAM:it.each() x1. It contributes 0 titles and 0 suiteTitles, so credited/titles/suiteTitles do not move and only files and parked do. SAME CLASS TE-INSTR-1 recorded for customContentPresentationClaims.test.js (97 tests, also parked): a data-driven contract cannot be credited by this census at all. These 45 tests run, pass, and are counted in no title census. No other file in this lane changed a title line; the two new src modules carry none.",
+  "files": 2457,
+  "parked": 372,
   "credited": 2085,
   "titles": 21128,
   "suiteTitles": 5810
