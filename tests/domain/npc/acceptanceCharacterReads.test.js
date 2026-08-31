@@ -141,7 +141,13 @@ describe('⛔ THE R6 COERCION CURE — null is ABSENT, never a supplied zero (fi
     }
   });
 
-  test('NaN and Infinity ARE numbers and neither is a reading', () => {
+  test('NaN and Infinity ARE numbers and neither is a reading — the COMPOSITION, named', () => {
+    // ⚠ THIS ARM IS THE REGISTER'S GUARD, NOT THIS LEAF'S, AND SAYING SO IS THE POINT.
+    // The leaf tests the TYPE — the half `Number.isFinite(Number(x))` cannot see — and
+    // the register rejects the two non-finite numbers. A planted removal of a
+    // finiteness check from the leaf SURVIVED this whole battery, which is how the
+    // redundancy was found; the branch was retired rather than pinned, and what remains
+    // asserted here is the true claim: the pair of guards composes to reject both.
     const read = acceptanceCharacterRead({
       npc: PLAIN, desperation01: Number.NaN, disorder01: Number.POSITIVE_INFINITY,
     });

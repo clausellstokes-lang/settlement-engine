@@ -51,6 +51,28 @@ function srcFiles() {
   return out;
 }
 
+/**
+ * ⛔⛔ DOES `file` REALLY EXPORT `symbol` — AS A WHOLE NAME, NOT AS A PREFIX?
+ *
+ * The substrate coupling's mutation battery found this hole INSIDE THE CURE FOR IT. Both
+ * censuses in this file resolved an export with `source.includes('export function ' + s)`,
+ * and `knownCharacter.js` declares `export function knownCharacterOf` — which CONTAINS
+ * `export function knownCharacter`. So a row awaiting the symbol that names nothing
+ * resolved cleanly against the symbol that does, and a planted revert of the respelled
+ * row SURVIVED a census written to catch exactly that.
+ *
+ * ⭐ FOURTH SIGHTING OF ONE LAW IN ONE WAVE: L4 turned a substring ban into a dereference
+ * ban; L5 stripped comments before every closure scan; this coupling found a frozen data
+ * roster convicted as an importer; and here a substring resolver admitted a longer name.
+ * The declaration is therefore matched with its own open paren, so the name must END
+ * where the roster says it ends.
+ *
+ * @param {string} source @param {string} symbol
+ */
+const exportsSymbol = (source, symbol) => (
+  new RegExp(`export function ${symbol}\\s*\\(`).test(source)
+);
+
 /** A lawful MISSION row, used as the base every refusal arm perturbs. */
 function lawfulMission() {
   return {
@@ -106,7 +128,7 @@ describe('W-OPS O1 — THE RECEIPT-FAMILY CENSUS, executed against the live tree
         continue;
       }
       const source = readFileSync(modulePath, 'utf8');
-      if (!source.includes(`export function ${row.receiptWriter}`)) {
+      if (!exportsSymbol(source, String(row.receiptWriter))) {
         failures.push(`${row.kind}: ${row.receiptModule} does not export ${row.receiptWriter}`);
       }
     }
@@ -312,7 +334,7 @@ describe('W-OPS O1 — the W-LIVES acceptance seams: four BOUND, one still pinne
         failures.push(`${row.seam}: module missing at ${row.home}`);
         continue;
       }
-      if (!readFileSync(modulePath, 'utf8').includes(`export function ${row.awaitedSymbol}`)) {
+      if (!exportsSymbol(readFileSync(modulePath, 'utf8'), String(row.awaitedSymbol))) {
         failures.push(`${row.seam}: ${row.home} does not export ${row.awaitedSymbol}`);
       }
     }
@@ -322,6 +344,12 @@ describe('W-OPS O1 — the W-LIVES acceptance seams: four BOUND, one still pinne
       + ' and correct the symbol rather than leaving the roster pointing at a spelling'
       + ' nothing answers to.',
     ).toEqual([]);
+    // ⛔ THE ANTI-PREFIX CONTROL, and it is not hypothetical: a substring resolver
+    // matched the roster's ORIGINAL wrong spelling against the right export, because
+    // one name is a prefix of the other. Pinned live against the two real files.
+    const knownRead = readFileSync(join(ROOT, 'src/domain/npc/knownCharacter.js'), 'utf8');
+    expect(exportsSymbol(knownRead, 'knownCharacterOf')).toBe(true);
+    expect(exportsSymbol(knownRead, 'knownCharacter')).toBe(false);
     // A BOUND ROW ALSO NAMES ITS ROUTE. The seam is not "this symbol exists" — it is
     // "acceptance reads it, and here is what it reads it through". A row that recorded
     // only the producer would be back to naming a fact nobody is obliged to honour.

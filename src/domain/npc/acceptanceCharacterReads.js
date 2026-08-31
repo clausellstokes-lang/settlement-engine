@@ -83,18 +83,25 @@ export const ACCEPTANCE_READ_TERMS = Object.freeze(
 );
 
 /**
- * A finite number, or `undefined` — never a coerced zero.
+ * A number, or `undefined` — never a coerced zero.
  *
- * ⛔ THE TEST IS ON THE TYPE. `typeof value !== 'number'` rejects `null`, `''`, `true`
- * and `undefined` alike, where `Number.isFinite(Number(value))` admits the first two as
- * a supplied zero. `Number.isFinite` is then still asked, because `NaN` and `Infinity`
- * ARE numbers and neither is a reading.
+ * ⛔ THE TEST IS ON THE TYPE, AND ONLY ON THE TYPE. `typeof value !== 'number'` rejects
+ * `null`, `''`, `true` and `undefined` alike, where `Number.isFinite(Number(value))`
+ * admits the first two as a supplied zero. The TYPE is the half the register cannot see,
+ * and it is therefore exactly the half a consumer owes it.
+ *
+ * ⚠ AND THE OTHER HALF IS DELIBERATELY NOT ASKED. This guard first also demanded
+ * `Number.isFinite`, and a planted removal of that demand SURVIVED the whole battery —
+ * because the register's own guard already rejects `NaN` and `Infinity`, so no input
+ * exists on which the two spellings differ. A branch no assertion can reach is a
+ * redundant guarantee dressed as a defence, and pinning it would have been a green that
+ * discovered nothing. The composition is what the suite asserts, and it says so.
  *
  * @param {unknown} value
  * @returns {number|undefined}
  */
 function finiteOrAbsent(value) {
-  return typeof value === 'number' && Number.isFinite(value) ? value : undefined;
+  return typeof value === 'number' ? value : undefined;
 }
 
 /**
