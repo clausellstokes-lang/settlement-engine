@@ -316,3 +316,61 @@ describe('DESK-2 — gazetteer rows hover the map and carry the show-on-map verb
     expect(screen.queryByTestId('gazetteer-show-on-map')).toBeNull();
   });
 });
+
+// ── DESK-1 — the census TABLE, the register's third legibility rung ──────────
+describe('DESK-1 — register⇄table toggle over the ONE deriver', () => {
+  const ELMWOOD = {
+    id: 'elmwood',
+    name: 'Elmwood',
+    settlement: {
+      id: 'elmwood', name: 'Elmwood', tier: 'city', population: 8200,
+      economicState: { prosperity: 'Struggling' }, config: { tier: 'city' },
+    },
+  };
+  const TABLE_SAVES = [ASHFORD, ELMWOOD];
+  const TABLE_CAMPAIGN = { id: 'c-table', settlementIds: ['ashford', 'elmwood'], worldState: { tick: 7 } };
+
+  beforeEach(() => {
+    storeState.mapState = { placements: {} };
+    storeState.setHoveredSettlementId = vi.fn();
+    storeState.clearHoveredSettlementId = vi.fn();
+  });
+
+  test('gazetteerRows carries the table words beside the sentence, and the numeric ONLY for a proven owner', () => {
+    const dm = gazetteerRows({ campaign: TABLE_CAMPAIGN, saves: TABLE_SAVES, seesSecrets: true });
+    expect(dm[0]).toMatchObject({ name: 'Ashford', tier: 'town', prosperity: 'prosperous', war: 'at peace', population: 1200 });
+    const player = gazetteerRows({ campaign: TABLE_CAMPAIGN, saves: TABLE_SAVES, seesSecrets: false });
+    expect(player[0].population).toBeNull();
+    expect(player[0].threat).toBeNull();
+  });
+
+  test('the toggle swaps register for table; the DM table carries the numeric column, sorted by header click', () => {
+    render(<HeraldGazetteer campaign={TABLE_CAMPAIGN} saves={TABLE_SAVES} />);
+    // Register is the default reading.
+    expect(screen.getAllByTestId('gazetteer-row').length).toBe(2);
+    fireEvent.click(screen.getByTestId('gazetteer-view-table'));
+    const tableRows = screen.getAllByTestId('gazetteer-table-row');
+    expect(tableRows.length).toBe(2);
+    // Default sort: name ascending — Ashford before Elmwood.
+    expect(tableRows[0].textContent).toContain('Ashford');
+    // DM columns present: population numerics render for the proven owner.
+    expect(tableRows[0].textContent).toContain('1200');
+    // Sort by tier: village < city ⇒ ascending puts the town first, then flip.
+    fireEvent.click(screen.getByRole('button', { name: 'Sort by Tier' }));
+    expect(screen.getAllByTestId('gazetteer-table-row')[0].textContent).toContain('Ashford'); // town < city
+    fireEvent.click(screen.getByRole('button', { name: 'Sort by Tier' }));
+    expect(screen.getAllByTestId('gazetteer-table-row')[0].textContent).toContain('Elmwood');
+  });
+
+  test('an unproven session gets the banded table alone — no threat, no population, no numeric anywhere', () => {
+    storeState.auth = { user: null };
+    render(<HeraldGazetteer campaign={TABLE_CAMPAIGN} saves={TABLE_SAVES} />);
+    fireEvent.click(screen.getByTestId('gazetteer-view-table'));
+    const table = screen.getByTestId('gazetteer-table');
+    expect(table.textContent).not.toContain('Population');
+    expect(table.textContent).not.toContain('Threat');
+    // The register law holds on the player tier: no raw population number.
+    expect(table.textContent).not.toContain('1200');
+    expect(table.textContent).not.toContain('8200');
+  });
+});

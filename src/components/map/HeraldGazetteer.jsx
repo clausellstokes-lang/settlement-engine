@@ -24,8 +24,9 @@
  * door pays nothing for it. @enforced-by tests/build/heraldRegisterDoorsLazy.test.js
  */
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
+import { TIER_ORDER, prosperityRank } from '../../data/constants.js';
 import { useStore } from '../../store/index.js';
 import { viewerSeesDmSecrets } from '../../domain/display/viewerSecrets.js';
 import { gazetteerRows } from './heraldRegister.js';
@@ -100,6 +101,83 @@ function RegisterRow({ row, onHover, onLeave, showable }) {
   );
 }
 
+// ── DESK-1 — the census TABLE, the register's second reading ─────────────────
+// The register's third legibility rung: glance (name+tier) → sentence (the row
+// line) → TABLE (the same derivations as sortable columns). Columns draw ONLY
+// from what gazetteerRows already derives — one deriver, two renders. The
+// player tier stays banded words; the ONE numeric column (population) exists
+// only when the rows carry it (seesSecrets — the DM-instrument tier).
+// The chartered militarization index is NOT here: no forces-per-population
+// metric is derivable (currentEffectiveStrength is a 0..100 capacity figure,
+// not a headcount — dividing it by population would be a unit fork), so the
+// column waits for a real ratio field rather than printing a false one.
+const WAR_CLAUSE_RANK = ['under siege', 'with its armies in the field', 'at peace'];
+const TABLE_SORTS = {
+  name: (a, b) => codepointCompare(a.name, b.name),
+  tier: (a, b) => TIER_ORDER.indexOf(a.tier) - TIER_ORDER.indexOf(b.tier),
+  prosperity: (a, b) => prosperityRank(a.prosperity) - prosperityRank(b.prosperity),
+  war: (a, b) => WAR_CLAUSE_RANK.indexOf(a.war) - WAR_CLAUSE_RANK.indexOf(b.war),
+  threat: (a, b) => codepointCompare(a.threat || '', b.threat || ''),
+  population: (a, b) => (a.population ?? 0) - (b.population ?? 0),
+};
+function codepointCompare(a, b) {
+  const x = String(a);
+  const y = String(b);
+  return x < y ? -1 : x > y ? 1 : 0;
+}
+
+function GazetteerTable({ rows, seesSecrets }) {
+  const [sortKey, setSortKey] = useState('name');
+  const [dir, setDir] = useState(1);
+  const sorted = useMemo(() => {
+    const cmp = TABLE_SORTS[sortKey] || TABLE_SORTS.name;
+    return [...rows].sort((a, b) => (cmp(a, b) || codepointCompare(a.name, b.name)) * dir);
+  }, [rows, sortKey, dir]);
+  const onSort = (key) => {
+    if (key === sortKey) setDir(d => -d);
+    else { setSortKey(key); setDir(1); }
+  };
+  const columns = [
+    ['name', 'Name'], ['tier', 'Tier'], ['prosperity', 'Prosperity'], ['war', 'War'],
+    ...(seesSecrets ? [['threat', 'Threat'], ['population', 'Population']] : []),
+  ];
+  const th = { textAlign: 'left', padding: '6px 8px', borderBottom: `1px solid ${BORDER}`, color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' };
+  const td = { padding: '6px 8px', borderBottom: `1px solid ${BORDER2}`, color: BODY, fontFamily: sans, fontSize: FS.xs, verticalAlign: 'baseline' };
+  return (
+    <div data-testid="gazetteer-table" style={{ overflowX: 'auto', border: `1px solid ${BORDER2}`, background: CARD }}>
+      <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+        <thead>
+          <tr>
+            {columns.map(([key, label]) => (
+              <th key={key} aria-sort={sortKey === key ? (dir === 1 ? 'ascending' : 'descending') : 'none'} style={th}>
+                <Button variant="ghost" size="sm" onClick={() => onSort(key)}
+                  aria-label={`Sort by ${label}`}
+                  style={{ padding: 0, minHeight: 24, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  {label}{sortKey === key ? (dir === 1 ? ' ▲' : ' ▼') : ''}
+                </Button>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map(row => (
+            <tr key={row.id} data-testid="gazetteer-table-row">
+              <td style={td}>
+                <RealmEntityLink settlementSaveId={row.id} label={row.name} style={{ color: INK, fontWeight: 800, fontSize: FS.xs }} />
+              </td>
+              <td style={td}>{row.tier}</td>
+              <td style={td}>{row.prosperity || '—'}</td>
+              <td style={td}>{row.war}</td>
+              {seesSecrets && <td style={td}>{row.threat || '—'}</td>}
+              {seesSecrets && <td style={{ ...td, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{row.population ?? '—'}</td>}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 /**
  * @param {Object} props
  * @param {any} props.campaign
@@ -126,11 +204,25 @@ export default function HeraldGazetteer({ campaign, saves = [] }) {
     return new Set(rows.filter(row => canShowOnMap(state, row.id)).map(row => String(row.id)));
   }, [rows, placements, imageMode]);
 
+  // DESK-1 — register⇄table: the register (glance + sentence) stays the
+  // default reading; the table is the sortable third rung over the SAME rows.
+  const [view, setView] = useState('register');
+
   return (
     <div data-testid="herald-gazetteer" style={{ display: 'grid', gap: SP.sm }}>
       <Section heading="The realm at large" count={rows.length}>
+        {rows.length > 0 && (
+          <div role="group" aria-label="Register or table view" style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
+            <Button variant={view === 'register' ? 'gold' : 'secondary'} size="sm" aria-pressed={view === 'register'}
+              data-testid="gazetteer-view-register" onClick={() => setView('register')}>Register</Button>
+            <Button variant={view === 'table' ? 'gold' : 'secondary'} size="sm" aria-pressed={view === 'table'}
+              data-testid="gazetteer-view-table" onClick={() => setView('table')}>Table</Button>
+          </div>
+        )}
         {rows.length === 0 ? (
           <EmptyRegister />
+        ) : view === 'table' ? (
+          <GazetteerTable rows={rows} seesSecrets={seesSecrets} />
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {rows.map(row => (

@@ -155,6 +155,8 @@ const PRINT_DEFERRED = [
 const FROZEN_DEFERRED = {
   'src/components/map/heraldRegister.js':
     'Gazetteer register rows: prosperity is banded into ONE word inside a glance sentence ("A prosperous town, at peace") — a register makes no freshness claim, and every row entity-links straight into the settlement dossier where the COVERED surfaces own the note. A second note per roster row would be noise, not honesty.',
+  'src/components/map/HeraldGazetteer.jsx':
+    'DESK-1 census table: renders heraldRegister\'s own banded prosperity WORD as a sortable column — the same one-word band the register sentence carries, never a tally or a count. The note leaf is per-settlement (it walks one settlement\'s trail) and this is a realm-wide roster; every row entity-links into the settlement dossier where the COVERED surfaces own the note. Same standing as heraldRegister.js above.',
   'src/components/OutputContainer.jsx':
     'Routing only: hands s.availableServices to ServicesTab as a prop. The covered child owns the note; a second one here would double it.',
   'src/components/ShareToGallery.jsx':

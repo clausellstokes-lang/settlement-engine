@@ -111,6 +111,16 @@ function article(phrase) {
   return /^[aeiou]/i.test(phrase) ? 'An' : 'A';
 }
 
+/** The register's war clause for a settlement's live status — one closed
+ *  three-word vocabulary shared by the sentence AND the DESK-1 table column. */
+function warClauseOf(warStatus) {
+  return warStatus?.besiegedBy?.length
+    ? 'under siege'
+    : warStatus?.besiegingTargets?.length
+      ? 'with its armies in the field'
+      : 'at peace';
+}
+
 /**
  * One living settlement's state, as a sentence. Never a number: the tier word
  * carries the size, the prosperity word carries the wealth, and the live war
@@ -124,23 +134,25 @@ function livingLine(settlement, warStatus) {
   const tier = tierWordOf(settlement);
   const prosperity = prosperityWordOf(settlement);
   const subject = prosperity ? `${prosperity} ${tier}` : tier;
-  const clause = warStatus?.besiegedBy?.length
-    ? 'under siege'
-    : warStatus?.besiegingTargets?.length
-      ? 'with its armies in the field'
-      : 'at peace';
-  return `${article(subject)} ${subject}, ${clause}.`;
+  return `${article(subject)} ${subject}, ${warClauseOf(warStatus)}.`;
 }
 
 /**
  * THE GAZETTEER — every settlement the realm still counts among the living, as a
  * compact register row.
  *
+ * DESK-1: beside the sentence, each row carries the SAME derivations as WORDS
+ * (`prosperity`, `war`) for the census table's columns — one deriver, two
+ * renders; the table can never disagree with the sentence. The one NUMERIC
+ * column (`population`) is DM-INSTRUMENT tier: like the threat read, it is
+ * built ONLY for a proven owner session — the player-facing register stays
+ * banded (the legibility law above is untouched).
+ *
  * @param {Object} args
  * @param {any} args.campaign
  * @param {ReadonlyArray<RegisterSave>} [args.saves]
  * @param {boolean} [args.seesSecrets]  a proven owner session (viewerSeesDmSecrets)
- * @returns {Array<{ id: string, name: string, tier: string, line: string, threat: string|null }>}
+ * @returns {Array<{ id: string, name: string, tier: string, line: string, threat: string|null, prosperity: string, war: string, population: number|null }>}
  */
 export function gazetteerRows({ campaign, saves, seesSecrets = false }) {
   const worldState = campaign?.worldState || {};
@@ -150,14 +162,19 @@ export function gazetteerRows({ campaign, saves, seesSecrets = false }) {
     const settlement = save?.settlement || {};
     if (lifecycleStatusOf(settlement) || isDestroyedRow(save)) continue; // the fallen half
     const id = registerIdOf(save);
+    const warStatus = settlementWarStatus({ settlementId: id, worldState, regionalGraph });
     rows.push({
       id,
       name: registerNameOf(save),
       tier: tierWordOf(settlement),
-      line: livingLine(settlement, settlementWarStatus({ settlementId: id, worldState, regionalGraph })),
+      line: livingLine(settlement, warStatus),
+      prosperity: prosperityWordOf(settlement),
+      war: warClauseOf(warStatus),
       // The threat read is a DM assessment of the country around the walls, not
       // a register fact — it is built only for a proven owner session.
       threat: seesSecrets ? String(settlement?.config?.monsterThreat || '') || null : null,
+      // DM-instrument numeric (DESK-1's table): never built for an unproven session.
+      population: seesSecrets ? num(settlement?.population, 0) : null,
     });
   }
   return rows;
