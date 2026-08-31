@@ -58,7 +58,7 @@
     "materializedIdentityResolution": "exact_definition_or_local_uid_then_unique_identity_free_legacy_name_fallback",
     "ambiguousNameMechanics": "fail_closed_without_exact_materialized_identity",
     "nativeKeywordFallback": "unstamped_legacy_only_current_custom_labels_mechanically_inert",
-    "presentationFieldCount": 52,
+    "presentationFieldCount": 58,
     "presentationBoundary": "same_seed_generation_with_canonical_mechanics_projection_unchanged",
     "presentationAdversarialTierRouteTerrainCases": 18,
     "assemblyCoherenceRngIsolation": "named_canonical_coherence_substream",

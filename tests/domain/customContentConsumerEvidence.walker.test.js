@@ -123,6 +123,12 @@ const CONSUMER_SITES = Object.freeze({
   'townMap.glyphAssign': 'src/domain/townMap/glyphAssign.js',
   'townScene.customBuildingPresentation': 'src/domain/townScene/customBuildingPresentation.js',
   tradeGoods: 'src/generators/economy/tradeGoods.js',
+  // The compat/diagnostic deity validator. It is the ONLY reader of W-FAITH F1c's
+  // six authored-character fields today: they are stored inert, so write-time
+  // validation is honestly all that consumes them until the F2c/F4c arms and the
+  // W-LIVES car-5 chart readers land. Naming a display or engine site instead
+  // would have been evidence of a read that does not happen.
+  validateDeity: 'src/domain/customContentSchema.js',
   'worldPulse.piety': 'src/domain/worldPulse/piety.js',
 });
 

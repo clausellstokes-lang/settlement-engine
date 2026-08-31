@@ -197,6 +197,98 @@ export const DEITY_LAW_KEYS = Object.freeze(DEITY_LAW.map((l) => l.key));
 // surface's counter — W-F6 wires the input field).
 export const DEITY_PORTFOLIO_MAX_LENGTH = 500;
 
+// ── W-FAITH F1c: the authored character surface (D1 / D3 / W_LIVES §6) ───────
+// Three additions, all OPTIONAL, all inert to the engine at this car: an authored
+// temper STANCE dial, leveled positions on the shared paradigm chart, and a typed
+// boon/bane pair. Nothing here has an engine reader yet (the authored temper arm is
+// W-FAITH F2c, the chart-position readers are W-LIVES car 5, the channel wiring is
+// W-FAITH F4c), so every existing deity reads byte-identically: absent means absent.
+//
+// VOCABULARY MIRRORS, not imports. These arrays restate three closed vocabularies
+// whose homes are elsewhere (`src/domain/npc/paradigmAxisCatalog.js` for the axes,
+// levels and poles; `schema/custom-content.manifest.json` for the admitted values).
+// The duplication is the module's established idiom and has the same reason as
+// TRADITION_ELEMENT_KEYS below: this module rides the small lazy 'custom-schema'
+// chunk that the store reaches by dynamic import at the validation chokepoint, and
+// importing the axis catalog would haul its whole table into every validation. A
+// drift guard pins each mirror to BOTH of its sources, so they cannot diverge.
+
+/** The two sides of every paradigm axis. Sign, in the volume's language. */
+export const DEITY_AXIS_POLES = Object.freeze(['virtue', 'vice']);
+
+/** Band words per side, ascending (pack Register II; owner-taste, unsigned). */
+export const DEITY_AXIS_LEVELS = Object.freeze(['a_touch', 'marked', 'defining']);
+
+// The axes a deity may be authored onto. This is the catalog's roster MINUS every
+// axis whose own EXISTENCE is a queued owner ruling: DEVOTION carries
+// `ownerRulingPending: true` (DESIGN_W_LIVES 1.1 row 17 asks whether piety is a
+// character axis at all), and admitting it here would freeze it into an authorable
+// vocabulary, an AI output schema and a migration snapshot ahead of that ruling.
+// The drift guard asserts exactly this rule against the catalog, so signing DEVOTION
+// in is one flag flip plus a regenerate, and the pin names it.
+export const DEITY_CHART_AXIS_IDS = Object.freeze([
+  'CANDOR', 'MERCY', 'COURAGE', 'TEMPER', 'GENEROSITY', 'HUMILITY', 'FIDELITY',
+  'INDUSTRY', 'JUSTICE', 'PRUDENCE', 'TRUST', 'CHEER', 'FORBEARANCE', 'PROTECTION',
+  'TEMPERANCE', 'CONTENT',
+]);
+
+/** One position per axis, so the roster length IS the cap (W_LIVES 1: one signed
+ *  leveled position per axis makes the no-same-axis rule arithmetic). */
+export const DEITY_MAX_CHART_POSITIONS = DEITY_CHART_AXIS_IDS.length;
+
+/** The admitted position tokens, `AXIS:pole:level`. DERIVED from the three
+ *  vocabularies above rather than transcribed, so a token can never be mistyped;
+ *  the drift guard pins the derived set against the manifest's own `values`. */
+export const DEITY_CHART_POSITION_KEYS = Object.freeze(
+  DEITY_CHART_AXIS_IDS.flatMap((axisId) => DEITY_AXIS_POLES.flatMap(
+    (pole) => DEITY_AXIS_LEVELS.map((level) => `${axisId}:${pole}:${level}`),
+  )),
+);
+
+/** The axis id of a position token, or '' when the token is not one of ours.
+ *  @param {unknown} token @returns {string} */
+export function deityChartAxisOf(token) {
+  const parts = String(token ?? '').split(':');
+  return parts.length === 3 && DEITY_CHART_AXIS_IDS.includes(parts[0]) ? parts[0] : '';
+}
+
+// Boon and bane channels (DESIGN_W_FAITH D3 candidate register, owner-UNSIGNED).
+// Each key names an EXISTING settlement causal quantity; none invents one. No
+// mechanical consumer reads them at this car, so nothing double-counts yet.
+export const DEITY_EFFECT_CHANNELS = Object.freeze([
+  { key: 'harvest',       label: 'Harvest and field' },
+  { key: 'trade',         label: 'Trade and markets' },
+  { key: 'craft',         label: 'Craft and making' },
+  { key: 'healing',       label: 'Healing and resistance to pestilence' },
+  { key: 'sea',           label: 'Sea and storm' },
+  { key: 'order',         label: 'Order and the keeping of law' },
+  { key: 'war_readiness', label: 'Readiness for war' },
+  { key: 'learning',      label: 'Learning and record' },
+  { key: 'hearth',        label: 'Hearth and household' },
+]);
+export const DEITY_EFFECT_CHANNEL_KEYS = Object.freeze(DEITY_EFFECT_CHANNELS.map((c) => c.key));
+
+// Banded magnitude, never a float (D3). These are the PULL bands of pack Register
+// III (faint / firm / heavy), deliberately NOT the axis band words: a boon is a
+// magnitude, not a position on a chart, and reusing the position ladder would
+// invite the two to be read as the same scale.
+export const DEITY_EFFECT_STRENGTHS = Object.freeze([
+  { key: 'faint', label: 'Faint' },
+  { key: 'firm',  label: 'Firm' },
+  { key: 'heavy', label: 'Heavy' },
+]);
+export const DEITY_EFFECT_STRENGTH_KEYS = Object.freeze(DEITY_EFFECT_STRENGTHS.map((s) => s.key));
+
+// DIVINE IMMUTABILITY, STRUCTURALLY (ODQ 800.3 J4 / DESIGN_W_LIVES 6): a deity has
+// no drift state, and the drift writer accepts NPCs only. The canonical admission
+// path already makes this unrepresentable, because it rejects EVERY unregistered
+// field and no drift key is registered. These spellings are refused BY NAME as well,
+// so the compat validator agrees with the chokepoint and the refusal is a stated law
+// rather than a side effect of a generic mechanism.
+export const DEITY_REFUSED_DRIFT_KEYS = Object.freeze([
+  'characterDrift', 'drift', 'driftState', 'axisDrift', 'effectiveCharacter',
+]);
+
 /**
  * Validate the historical deity shape for compatibility callers. Canonical
  * custom-content writes use `admitCustomContentDefinition`; this helper remains
@@ -214,7 +306,12 @@ export const DEITY_PORTFOLIO_MAX_LENGTH = 500;
  * optional free-text flavor field with zero mechanics. Absence is always fine;
  * a present value must be a string within DEITY_PORTFOLIO_MAX_LENGTH.
  *
- * @param {{ name?: unknown, alignmentAxis?: unknown, temperamentAxis?: unknown, rankAxis?: unknown, lawAxis?: unknown, portfolio?: unknown }} [deity]
+ * W-FAITH F1c adds six more ADDITIVE-TOLERANT optional fields — `authoredTemper`,
+ * `characterAxes`, and the two boon/bane pairs — plus one REFUSAL: no drift-state
+ * key may attach to a deity, because a god's character does not move. Absence of
+ * every one of them is the legacy shape, so an existing deity validates unchanged.
+ *
+ * @param {{ name?: unknown, alignmentAxis?: unknown, temperamentAxis?: unknown, rankAxis?: unknown, lawAxis?: unknown, portfolio?: unknown, authoredTemper?: unknown, characterAxes?: unknown, boonChannel?: unknown, boonStrength?: unknown, baneChannel?: unknown, baneStrength?: unknown }} [deity]
  * @returns {{ ok: boolean, errors: string[] }}
  */
 export function validateDeity(deity = {}) {
@@ -248,7 +345,88 @@ export function validateDeity(deity = {}) {
       errors.push(`portfolio must stay within ${DEITY_PORTFOLIO_MAX_LENGTH} characters.`);
     }
   }
+  // authoredTemper (W-FAITH D1): the authored STANCE dial. A separate field from the
+  // retired temperamentAxis mirror on purpose, so re-arming the old stored value can
+  // never shift content that was minted for compatibility rather than intent.
+  if (deity?.authoredTemper != null
+      && !DEITY_TEMPER_KEYS.includes(/** @type {string} */ (deity.authoredTemper))) {
+    errors.push(`authoredTemper must be one of: ${DEITY_TEMPER_KEYS.join(', ')}.`);
+  }
+  collectDeityChartErrors(errors, deity);
+  collectDeityAspectErrors(errors, deity);
+  // DIVINE IMMUTABILITY (ODQ 800.3 J4): a deity holds positions, never drift.
+  for (const key of DEITY_REFUSED_DRIFT_KEYS) {
+    if (deity != null && Object.prototype.hasOwnProperty.call(deity, key)) {
+      errors.push(`${key} cannot be stored on a deity: a god's character does not drift.`);
+    }
+  }
   return { ok: errors.length === 0, errors };
+}
+
+/**
+ * The chart-position half of validateDeity, split out so the validator stays under
+ * the module's complexity budget. Absent is always legal (a god at neutral on every
+ * axis is a real authorial choice). A present value is a token or list of tokens
+ * from the closed vocabulary, at most one position PER AXIS.
+ *
+ * The one-position-per-axis rule is the arithmetic the volume asks for, restated as
+ * a refusal: the admitted shape is a list, and a list can name an axis twice, so
+ * what is structural in the model has to be enforced here and in the DB CHECK.
+ *
+ * @param {string[]} errors  accumulator, appended in place
+ * @param {{ characterAxes?: unknown }} [deity]
+ */
+function collectDeityChartErrors(errors, deity = {}) {
+  const raw = deity?.characterAxes;
+  if (raw == null) return;
+  if (typeof raw !== 'string' && !Array.isArray(raw)) {
+    errors.push('characterAxes must be one position token or a list of them.');
+    return;
+  }
+  const tokens = Array.isArray(raw) ? raw : [raw];
+  if (tokens.length > DEITY_MAX_CHART_POSITIONS) {
+    errors.push(`characterAxes may carry at most ${DEITY_MAX_CHART_POSITIONS} positions.`);
+  }
+  /** @type {Set<string>} */
+  const axesSeen = new Set();
+  for (const token of tokens) {
+    if (typeof token !== 'string'
+        || !DEITY_CHART_POSITION_KEYS.includes(token)) {
+      errors.push('characterAxes entries must read AXIS:pole:level from the chart vocabulary.');
+      continue;
+    }
+    const axisId = deityChartAxisOf(token);
+    if (axesSeen.has(axisId)) {
+      errors.push(`characterAxes holds two positions on ${axisId}: an axis carries one position.`);
+      continue;
+    }
+    axesSeen.add(axisId);
+  }
+}
+
+/**
+ * The boon/bane half of validateDeity. Pure buff, pure bane, both, and neither are
+ * all legal (ODQ 797.4 — neutral is first-class), so the only structural rule is
+ * that a channel and its strength travel together: a channel with no magnitude, or
+ * a magnitude with no channel, is half a thought rather than a quiet default.
+ *
+ * @param {string[]} errors  accumulator, appended in place
+ * @param {{ boonChannel?: unknown, boonStrength?: unknown, baneChannel?: unknown, baneStrength?: unknown }} [deity]
+ */
+function collectDeityAspectErrors(errors, deity = {}) {
+  for (const aspect of ['boon', 'bane']) {
+    const channel = /** @type {Record<string, unknown>} */ (deity ?? {})[`${aspect}Channel`];
+    const strength = /** @type {Record<string, unknown>} */ (deity ?? {})[`${aspect}Strength`];
+    if (channel != null && !DEITY_EFFECT_CHANNEL_KEYS.includes(/** @type {string} */ (channel))) {
+      errors.push(`${aspect}Channel must be one of: ${DEITY_EFFECT_CHANNEL_KEYS.join(', ')}.`);
+    }
+    if (strength != null && !DEITY_EFFECT_STRENGTH_KEYS.includes(/** @type {string} */ (strength))) {
+      errors.push(`${aspect}Strength must be one of: ${DEITY_EFFECT_STRENGTH_KEYS.join(', ')}.`);
+    }
+    if ((channel == null) !== (strength == null)) {
+      errors.push(`${aspect}Channel and ${aspect}Strength must be authored together.`);
+    }
+  }
 }
 
 // ── Traditions (THE TRADITIONS wave, Engine Lift #4 / slice T-5) ───────────────
