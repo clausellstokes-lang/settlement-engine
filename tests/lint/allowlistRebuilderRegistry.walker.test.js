@@ -36,7 +36,7 @@
  * the reader side, the producer side, or both at once.
  *
  * And the class is LIVE, not historical. Eight such keys are minted today across
- * thirteen producer sites (the frozen ledger below). The plainest is `parties`:
+ * TEN producer sites (the frozen ledger below). The plainest is `parties`:
  * `peaceTerms.js` mints it on the treaty signing beat under a comment reading
  * "`parties` is retained because the treaty ledger's own readers speak it" — and
  * normalizeEntry drops it on the way in, so it is retained nowhere at all. A comment
@@ -60,8 +60,9 @@
  *
  * NEITHER DOOR IS SUFFICIENT ALONE, and that was measured, not assumed: door A alone
  * misses six sites in five files whose id is computed into a variable
- * (`realmVerbExecution.js`, `pulseHelpers.js`, `narrativeTempo.js`, `tableEvents.js`);
- * door B alone misses a site door A catches. The union is 88 sites in 55 files.
+ * (`realmVerbExecution.js`, `pulseHelpers.js`, `narrativeTempo.js`, `tableEvents.js`
+ * and `wizardNews.js` itself); door B alone misses one site door A catches. MEASURED at
+ * acaaad63f: 88 sites in 55 files — 81 through both doors, 6 door B only, 1 door A only.
  * `id` is REQUIRED on door B for a measured reason: without it the rule swept in
  * `chronicleGraph.js`'s ChronicleNode literals — a foreign shape that would have
  * forced five fictional rows into the frozen ledger below. normalizeEntry refuses an
@@ -461,7 +462,8 @@ const REBUILDERS = Object.freeze([
  * LEDGER 1 — keys a producer mints today that `normalizeEntry` does not name.
  * SHRINK-ONLY. A new key here is the class biting again and must be FIXED, never
  * added. A cured key must have its row DELETED so the win is banked.
- * Frozen 2026-08-31 at acaaad63f by lane SP-W1, measured (13 sites, 8 keys).
+ * Frozen 2026-08-31 at acaaad63f by lane SP-W1. MEASURED: 8 keys across 10 distinct
+ * producer sites (17 key-occurrences in all — `parties` alone appears at 8 of them).
  */
 const KNOWN_DROPPED_KEYS = Object.freeze([
   Object.freeze({
