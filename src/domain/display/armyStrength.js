@@ -69,13 +69,31 @@ export function latentStrength(settlementOrItem) {
 
 // Heuristic bands for the FRACTION of a deployed army's strength that remains after
 // attrition (currentEffectiveStrength / maxStartStrength), 1..0 → words.
+//
+// ⭐ ONE LADDER, TWO PROJECTIONS (W-MEM §2.2's band law). Each row now carries a stable
+// `key` beside its phrase. The phrase is DISPLAY COPY and may be re-worded; the key is
+// a typed token safe to PERSIST, which is what the concluded-war ledger stores so that
+// a re-worded phrase can never rewrite lived history — and so that a record whose whole
+// discipline is "no sentences" does not carry one. Both projections read these same
+// floors, so there is no second vocabulary for the quantity: adding a band, moving a
+// floor, or re-wording a phrase happens HERE, once.
 const REMAINING_BANDS = Object.freeze([
-  { floor: 0.85, phrase: 'still near full strength' },
-  { floor: 0.6, phrase: 'bloodied but holding, most of its strength still standing' },
-  { floor: 0.4, phrase: 'battered, roughly half its strength spent' },
-  { floor: 0.2, phrase: 'gutted, only a fraction of the host left to fight' },
-  { floor: 0, phrase: 'all but broken, a spent remnant in the field' },
+  { floor: 0.85, key: 'near_full', phrase: 'still near full strength' },
+  { floor: 0.6, key: 'bloodied', phrase: 'bloodied but holding, most of its strength still standing' },
+  { floor: 0.4, key: 'battered', phrase: 'battered, roughly half its strength spent' },
+  { floor: 0.2, key: 'gutted', phrase: 'gutted, only a fraction of the host left to fight' },
+  { floor: 0, key: 'broken', phrase: 'all but broken, a spent remnant in the field' },
 ]);
+
+/** The remaining-strength band keys, weakest-last. Closed and persistable.
+ * @type {ReadonlyArray<string>} */
+export const REMAINING_BAND_KEYS = Object.freeze(REMAINING_BANDS.map(b => b.key));
+
+/** @param {number} remainingFraction 0..1 @returns {{floor:number, key:string, phrase:string}} */
+function remainingBandOf(remainingFraction) {
+  const f = clamp01(remainingFraction);
+  return REMAINING_BANDS.find(b => f >= b.floor) || REMAINING_BANDS[REMAINING_BANDS.length - 1];
+}
 
 /**
  * The heuristic "how much of the army is left" phrase for a remaining-strength
@@ -84,9 +102,30 @@ const REMAINING_BANDS = Object.freeze([
  * @returns {string}
  */
 export function attritionPhrase(remainingFraction) {
-  const f = clamp01(remainingFraction);
-  const band = REMAINING_BANDS.find(b => f >= b.floor) || REMAINING_BANDS[REMAINING_BANDS.length - 1];
-  return band.phrase;
+  return remainingBandOf(remainingFraction).phrase;
+}
+
+/**
+ * The same band as a PERSISTABLE key. Total over 0..1, and total over garbage: a
+ * non-finite input clamps to the weakest band rather than throwing, because the caller
+ * is a persistence writer and a thrown band would cost a war its whole record.
+ * @param {number} remainingFraction 0..1
+ * @returns {string} one of REMAINING_BAND_KEYS
+ */
+export function remainingStrengthBandKey(remainingFraction) {
+  return remainingBandOf(remainingFraction).key;
+}
+
+/**
+ * Resolve a persisted remaining-strength band key back to its phrase. Returns '' for a
+ * key this build does not know — a record written by a newer build must render as
+ * silence, never as a wrong band.
+ * @param {unknown} key
+ * @returns {string}
+ */
+export function remainingStrengthPhraseFor(key) {
+  const band = REMAINING_BANDS.find(b => b.key === key);
+  return band ? band.phrase : '';
 }
 
 // The army's supporting condition (supply + morale, both 0..1) in plain words.

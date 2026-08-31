@@ -349,6 +349,50 @@ export function occupiedSettlements(settlementItems) {
 // re-tune the engine); a deeper scar reads "exhausted".
 const WAR_EXHAUSTION_FLOOR = 0.20;
 
+// ⭐ ONE LADDER, TWO PROJECTIONS (W-MEM §2.2's band law). The KEY is a typed token safe
+// to PERSIST; the WORD is display copy and may be re-worded. The concluded-war ledger
+// stores keys, so re-wording a band can never rewrite lived history. Both projections
+// read the SAME thresholds below — there is no second vocabulary for the quantity.
+/** @type {Readonly<Record<string, string>>} */
+const WAR_EXHAUSTION_WORDS = Object.freeze({
+  rested: 'rested',
+  near_peace: 'near peace',
+  war_weary: 'war-weary',
+  exhausted: 'exhausted',
+});
+
+/** The war-weariness band keys, lightest-first. Closed and persistable.
+ * @type {ReadonlyArray<string>} */
+export const WAR_EXHAUSTION_BAND_KEYS = Object.freeze(Object.keys(WAR_EXHAUSTION_WORDS));
+
+/**
+ * The war-weariness band for a 0..1 scar, as a PERSISTABLE key. Total over garbage: a
+ * non-finite scar reads as rested rather than throwing, because one caller is a
+ * persistence writer and a thrown band would cost a war its whole record.
+ * @param {number} value 0..1
+ * @returns {string} one of WAR_EXHAUSTION_BAND_KEYS
+ */
+export function warExhaustionBandKey(value) {
+  const v = Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
+  if (v <= 0) return 'rested';
+  if (v < WAR_EXHAUSTION_FLOOR) return 'near_peace';
+  if (v < 0.6) return 'war_weary';
+  return 'exhausted';
+}
+
+/**
+ * Resolve a persisted war-weariness band key back to its word. Returns '' for a key
+ * this build does not know — a record written by a newer build must render as silence,
+ * never as a wrong band.
+ * @param {unknown} key
+ * @returns {string}
+ */
+export function warExhaustionWordFor(key) {
+  return typeof key === 'string' && Object.prototype.hasOwnProperty.call(WAR_EXHAUSTION_WORDS, key)
+    ? WAR_EXHAUSTION_WORDS[key]
+    : '';
+}
+
 /**
  * Human war-weariness band for a 0..1 war-exhaustion scar. Below the engine's
  * condition floor reads as recovery ("near peace"); at/above it the realm is
@@ -358,11 +402,9 @@ const WAR_EXHAUSTION_FLOOR = 0.20;
  * @returns {'rested'|'near peace'|'war-weary'|'exhausted'}
  */
 export function warExhaustionBand(value) {
-  const v = Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
-  if (v <= 0) return 'rested';
-  if (v < WAR_EXHAUSTION_FLOOR) return 'near peace';
-  if (v < 0.6) return 'war-weary';
-  return 'exhausted';
+  return /** @type {'rested'|'near peace'|'war-weary'|'exhausted'} */ (
+    WAR_EXHAUSTION_WORDS[warExhaustionBandKey(value)]
+  );
 }
 
 /**
