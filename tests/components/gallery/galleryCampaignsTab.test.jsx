@@ -351,7 +351,7 @@ describe('CampaignWorldView — the §807 gallery campaign view', () => {
     const panels = screen.getAllByTestId('campaign-state-panel');
     const below = panels[panels.length - 1];
     expect(below.textContent).toContain('World Clock');
-    expect(below.textContent).not.toContain('The Tide');
+    expect(below.textContent).not.toContain('The Tide'); // anchored: the same panel just proved World Clock present, so the collection lives; the absent deity is the no-duplicate-surface claim.
   });
 
   test('sharer consent governs: sections without warNetwork/pantheon ⇒ NO header tabs (§807(d))', () => {

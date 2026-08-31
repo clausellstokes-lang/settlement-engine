@@ -104,7 +104,7 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
     );
     // anchored: the arrayContaining assertions above prove both groups resolve
     // with live tab populations, so this absence cannot pass vacuously.
-    expect(Object.values(mod.TAB_GROUPS).flatMap((g) => g.tabs)).not.toContain('war_faith');
+    expect(Object.values(mod.TAB_GROUPS).flatMap((g) => g.tabs)).not.toContain('war_faith'); // anchored: the arrayContaining assertions above pin both groups' live populations, so this absence cannot pass vacuously.
   });
 
   test('the mounted Versions tab (F26) stays registered under Notes', async () => {

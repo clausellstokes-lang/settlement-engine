@@ -283,7 +283,7 @@ describe('PerspectiveStandings — one observer, plain words, DM-gated beliefs',
     render(<PerspectiveStandings campaign={campaignFixture()} nameById={NAMES} />);
     const block = screen.getByTestId('perspective-standings');
     expect(block.textContent).toMatch(/campaigns beside Palmere/);
-    expect(block.textContent).not.toMatch(/believes/);
+    expect(block.textContent).not.toMatch(/believes/); // anchored: the same block just matched the public coalition fact, so the surface lives; the absent believes-line is the fail-closed claim.
   });
 
   test('switching the observer re-anchors the page; a standing-less observer reads an honest nothing', async () => {
@@ -296,7 +296,7 @@ describe('PerspectiveStandings — one observer, plain words, DM-gated beliefs',
     // Foehold's own standpoint: it is the besieged party — the same ledgers,
     // re-anchored (and none of Obsford's belief lines leak across).
     expect(block.textContent).toMatch(/Foehold is besieged by/);
-    expect(block.textContent).not.toMatch(/believes/);
+    expect(block.textContent).not.toMatch(/believes/); // anchored: the re-anchored header and siege line were proven above, so the surface lives; no belief may leak across observers.
     cleanup();
 
     // A realm at rest: settlements but no ledgers ⇒ the honest empty note,

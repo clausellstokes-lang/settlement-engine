@@ -140,7 +140,7 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
     expect(screen.queryByTestId('ruling-chain-npc')).toBeNull();
     const absence = screen.getByTestId('ruling-chain-absence');
     expect(absence.textContent).toMatch(/No named seat-holder stands in the record/);
-    expect(screen.getByTestId('ruling-chain').textContent).not.toContain('Plain Member');
+    expect(screen.getByTestId('ruling-chain').textContent).not.toContain('Plain Member'); // anchored: the chain block and its absence line were proven present above, so the surface lives; the absent name is the never-merely-senior claim.
   });
 
   it('a live missing-seat stressor reads AS the stressor story — the seat stands empty; claimants circle', () => {

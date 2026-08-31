@@ -196,7 +196,7 @@ describe('PipelineRail viewer mode — §807(b)', () => {
     expect(block).toBeTruthy();
     // No fabricated step receipts: the registry labels of a generating session
     // are absent (anchored: the block itself rendered above).
-    expect(block.textContent).not.toContain(metaForStep('generatePower').label);
+    expect(block.textContent).not.toContain(metaForStep('generatePower').label); // anchored: the rail's complementary role was found above, so the surface lives; the absent label is the viewer-mode claim itself.
   });
 
   test('no settlement prop and no history ⇒ the rail stays null (the pre-§807 gate, unchanged)', async () => {

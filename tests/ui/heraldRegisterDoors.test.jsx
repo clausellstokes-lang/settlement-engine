@@ -367,11 +367,11 @@ describe('DESK-1 — register⇄table toggle over the ONE deriver', () => {
     render(<HeraldGazetteer campaign={TABLE_CAMPAIGN} saves={TABLE_SAVES} />);
     fireEvent.click(screen.getByTestId('gazetteer-view-table'));
     const table = screen.getByTestId('gazetteer-table');
-    expect(table.textContent).not.toContain('Population');
-    expect(table.textContent).not.toContain('Threat');
+    expect(table.textContent).not.toContain('Population'); // anchored: the rows rendered (getAllByTestId above), so the table lives; the DM column is absent for the unproven session.
+    expect(table.textContent).not.toContain('Threat'); // anchored: same anchor: the rendered table above; the threat column is DM-only.
     // The register law holds on the player tier: no raw population number.
-    expect(table.textContent).not.toContain('1200');
-    expect(table.textContent).not.toContain('8200');
+    expect(table.textContent).not.toContain('1200'); // anchored: same anchor: the rendered table above; the register law bans the numeric on the player tier.
+    expect(table.textContent).not.toContain('8200'); // anchored: same anchor: the rendered table above; the second numeric would be the same leak.
   });
 });
 
@@ -417,9 +417,9 @@ describe('DESK-3 — one question, one picture, from the register rows', () => {
     render(<HeraldGazetteer campaign={C_CAMPAIGN} saves={C_SAVES} />);
     fireEvent.click(screen.getByTestId('gazetteer-view-compared'));
     const block = screen.getByTestId('realm-comparisons');
-    expect(block.textContent).not.toMatch(/folk/);
-    expect(block.textContent).not.toContain('1200');
-    expect(block.textContent).not.toContain('8200');
+    expect(block.textContent).not.toMatch(/folk/); // anchored: the comparisons block was proven present above; no population word may reach an unproven session's pictures.
+    expect(block.textContent).not.toContain('1200'); // anchored: same anchor: the present comparisons block; the numeric total is DM-only.
+    expect(block.textContent).not.toContain('8200'); // anchored: same anchor: the present comparisons block; the second numeric would be the same leak.
   });
 
   test('a dormant exhaustion ledger asks NO exhaustion question (never a fabricated zero row)', () => {
@@ -427,6 +427,6 @@ describe('DESK-3 — one question, one picture, from the register rows', () => {
     fireEvent.click(screen.getByTestId('gazetteer-view-compared'));
     expect(screen.getByTestId('realm-comparisons')).toBeTruthy();
     expect(screen.queryAllByTestId('comparison-exhaustion-row').length).toBe(0);
-    expect(screen.getByTestId('realm-comparisons').textContent).not.toContain('How worn the realm is');
+    expect(screen.getByTestId('realm-comparisons').textContent).not.toContain('How worn the realm is'); // anchored: the comparisons block was proven present on the line above; a dormant ledger asks no question.
   });
 });
