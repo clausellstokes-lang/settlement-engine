@@ -251,6 +251,25 @@ describe('SUBJECT RESOLUTION — forward only, and ambiguity refuses', () => {
     // A durable id nobody graduated resolves to nobody, rather than to slot zero.
     expect(subjectByDurableId(ctxOf({ worldState: out.worldState }), 'wnpc_deadbeef')).toBeNull();
   });
+
+  test('⭐⭐ A STRANGER AT THE OLD SLOT RESOLVES TO NOBODY — L2\'s rebind class', () => {
+    // The mutation pass found this pin blind, and the hazard it guards is the one
+    // car L2's whole recon was about: on a section reroll a slot does not orphan,
+    // it REBINDS — `npc_1` comes to name a different human being. Matching a
+    // durable identity on the slot id ALONE would hand a stranger a pardon that was
+    // somebody else's, and no prune could ever catch it because the key stays live.
+    const seeded = graduateNpc({
+      worldState: { tick: 4, simulationRules: { npcConsequencesEnabled: true } },
+      settlementSeed: SEED, settlementId: TOWN,
+      rosterIdentity: { rosterId: ALDA.id, name: ALDA.name, role: ALDA.role }, tick: 4,
+    });
+    // Alda still resolves in her own roster, which is what makes the refusal below
+    // a discrimination rather than a resolver that never works.
+    expect(subjectByDurableId(ctxOf({ worldState: seeded.worldState }), seeded.wnpcId).npc.name).toBe('Alda');
+    const stranger = npc('npc_1', 'Wolfhard');
+    const rerolled = ctxOf({ worldState: seeded.worldState, snapshotItems: [town([stranger, BERO])] });
+    expect(subjectByDurableId(rerolled, seeded.wnpcId)).toBeNull();
+  });
 });
 
 describe('THE ADAPTERS — each mapping proved against its REAL receipt shape', () => {
