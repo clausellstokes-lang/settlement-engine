@@ -212,7 +212,12 @@ describe('GR-0 dormancy — FENCE 4: the gate-polarity census', () => {
     // `ageYears` key rides. A FIFTH file reds here until somebody classifies it — which is
     // the whole point, because a second gate is a second spelling of one law.
     expect(mentions.map(({ rel }) => rel).sort()).toEqual([
-      'src/domain/certification/subsystemRowsVirtual.js',
+      // ⚠ RE-AIMED BY TE-VIRT-1 (ODQ §868/§870.4), not admitted as a new namer: the row
+      // moved WHOLE out of subsystemRowsVirtual.js when that file was decomposed at its
+      // 800/800 ceiling. Measured at the move — every spelling of this key left the old
+      // path (0 remaining) and arrived at the new one — so the census is the SAME EXACT
+      // SET at a new address, and its FIFTH-file discipline is untouched.
+      'src/domain/certification/subsystemRowsCompact.js',
       'src/domain/worldPulse/peaceTermsDocument.js',
       'src/domain/worldPulse/simulationRules.js',
       'src/domain/worldPulse/treatyLifecycleVoice.js',

@@ -69,8 +69,17 @@ const ARGUED_FIELD_SPELLERS = Object.freeze({
     'the vocabulary home — it declares the fields and derives their values',
   'src/domain/worldPulse/beliefMap.js':
     'the BeliefRecord typedef: the fields live on its rows, so its type surface must name them',
-  'src/domain/certification/subsystemRowsVirtual.js':
-    'the three certification rows: a row that cannot name the field it gates says nothing falsifiable',
+  'src/domain/certification/subsystemRowsBelief.js':
+    'the three certification rows: a row that cannot name the field it gates says nothing'
+    + ' falsifiable. ⚠ RE-AIMED, NOT ADMITTED — this entry read subsystemRowsVirtual.js until'
+    + ' TE-VIRT-1 (ODQ §868/§870.4) decomposed that file at its 800/800 ceiling and the three'
+    + ' SP-B rows moved WHOLE into the belief block leaf. Measured at the move: all seven'
+    + ' spellings left the old path (0 remaining) and arrived at the new one, so this is one'
+    + ' argued speller at a new address rather than a second speller — and BOTH arms of the'
+    + ' scan proved it, the offender arm on the new file and the still-names-a-field arm on'
+    + ' the old one. ⭐ THE CLASS THIS BELONGS TO: a certification row addressed by FILE PATH'
+    + ' is a hardcoded twin that no walker updates for you, so a lane that re-homes a row owes'
+    + ' every path-keyed census that names it. Five did in this decomposition.',
   'src/domain/worldPulse/sovereigntyMarketStage.js':
     'SP-B2, the first CONSUMER: beliefLegsOf reads conditionsBands off a belief record and'
     + ' renames its route rung onto the appraisal key, so it must spell the field it reads',
