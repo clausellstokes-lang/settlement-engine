@@ -13,8 +13,10 @@
  *   - a file ABOVE its baseline (or a new file with any debt) FAILS — fix the
  *     types, do not widen the baseline;
  *   - a file BELOW its baseline (or a stale entry) FAILS with the ratchet-down
- *     instruction (`node scripts/count-domain-any.mjs --update`) so the
- *     baseline can never go stale — the raw-button exact-set idiom;
+ *     instruction so the baseline can never go stale — the raw-button exact-set
+ *     idiom. ⚠ THAT INSTRUCTION IS COMPUTED, NEVER A LITERAL (`ratchetDownAdvice`
+ *     below): `--update` re-freezes the WHOLE TREE, so while the declared-overrun
+ *     ledger is non-empty the lawful path is a HAND-LOWERED SINGLE ROW;
  *   - the committed total can never rise past the pinned CEILING, even via
  *     `--update` (the domain-strict CEILING idiom).
  *
@@ -85,6 +87,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 //   - the exact-set governance below (no file below its baseline, no stale
 //     entries, baseline === tree) is untouched, so the banked number can only
 //     ever be ratcheted DOWN by `--update`.
+//     ⚠ THAT LAST CLAUSE IS SUPERSEDED and is left standing only as the record of
+//     what this ruling assumed. The 2026-08-07 declared-overrun ledger below makes
+//     `--update` a LAUNDERING path, not a ratchet-down path, for as long as the
+//     ledger is non-empty; `ratchetDownAdvice()` is the live answer.
 // Measured on a CLEAN worktree at HEAD 23d118eb (committed bytes only) —
 // three untracked Lane-P files were live in the shared tree at measurement
 // time and are deliberately NOT banked; in-flight work does not get banked.
@@ -252,6 +258,48 @@ const excessOf = (file, d) => {
   return Math.max(0, d.any - base.any) + Math.max(0, d.suppress - base.suppress);
 };
 
+// ── ⛔ THE RATCHET-DOWN INSTRUCTION, DERIVED — AND WHY IT MAY NOT BE A LITERAL ──
+//
+// THIS FILE USED TO PRESCRIBE, IN A FAILING TEST, THE ONE COMMAND IT FORBIDS 190
+// LINES HIGHER. The `no file is below its baseline` arm failed with "lock it in with
+// `node scripts/count-domain-any.mjs --update`", while the ⛔ block above rules that
+// `--update` re-freezes the WHOLE TREE and would bank every declared overrun as
+// permanent baseline. So the guard's own remediation path DISABLED the guard: a
+// reader who obeys the red launders exactly the debt this ledger exists to keep
+// visible, and the test that told them to goes green. That is worse than an
+// unhelpful message — it is a ratchet that argues for its own release.
+//
+// ⚠ IT WAS OBEYED. A whole-tree re-freeze banked 33 holes across two files that were
+// on NO list, and moved warDeployment 16 -> 17 — all of it foreign, base-owned debt
+// laundered into the frozen baseline by a lane following the instrument's own advice.
+//
+// THE CURE IS NOT BETTER WORDING, BECAUSE WORDING DRIFTS FROM THE LEDGER IT
+// DESCRIBES — which is precisely how the contradiction arose. The advice is DERIVED
+// from `DECLARED_OVERRUNS`, so there is no string in this file that can fall out of
+// sync with it, and the forbidden command is UNREACHABLE while a declared overrun
+// exists. When the ledger genuinely empties, `--update` becomes lawful again and this
+// function starts printing it again, in the same act, with no wording to remember.
+/** The lawful way to bank a shrink, computed from the ledger rather than transcribed. */
+const ratchetDownAdvice = () => {
+  const declared = Object.keys(DECLARED_OVERRUNS);
+  if (declared.length === 0) {
+    // Ledger empty: a whole-tree re-freeze banks nothing foreign, so the raw button
+    // is the cure again — the idiom the header describes.
+    return 'bank it with `node scripts/count-domain-any.mjs --update` (lawful here ONLY'
+      + ' because the declared-overrun ledger is currently EMPTY, so a whole-tree'
+      + ' re-freeze can bank no foreign debt)';
+  }
+  return 'HAND-LOWER ONLY THE ROW THAT MOVED, to its measured figure —'
+    + ' tests/lint/.domain-any-baseline.json for a baselined file, or its DECLARED_OVERRUNS'
+    + ' entry in this file for one of the declared'
+    + ` ${declared.length} (${declared.join(', ')}), lowering DECLARED_OVERRUN_CEILING by the`
+    + ' same amount when a declared row shrinks.'
+    + ' ⛔ DO NOT run `node scripts/count-domain-any.mjs --update` to clear this: it re-freezes'
+    + ' the WHOLE TREE and would bank every declared overrun above as permanent baseline —'
+    + ' the laundering this ledger exists to prevent, and a thing that has already happened'
+    + ' once. `--update` is the lawful cure only when the ledger is empty.';
+};
+
 describe('domain any-cast ratchet — the detector is honest', () => {
   test('counts every any/star form this codebase actually writes', () => {
     expect(countText('/** @type {any} */').any).toBe(1);
@@ -315,7 +363,10 @@ describe('domain any-cast ratchet — frozen baseline governance', () => {
       expect(file.startsWith('src/domain/'), `${file} is outside the domain`).toBe(true);
       expect(Number.isInteger(any) && any >= 0, `${file} has a malformed any count`).toBe(true);
       expect(Number.isInteger(suppress) && suppress >= 0, `${file} has a malformed suppress count`).toBe(true);
-      expect(any + suppress, `${file} is a zero-debt entry — remove it (run --update)`).toBeGreaterThan(0);
+      expect(
+        any + suppress,
+        `${file} is a zero-debt entry — delete its row: ${ratchetDownAdvice()}`,
+      ).toBeGreaterThan(0);
     }
   });
 
@@ -337,7 +388,9 @@ describe('domain any-cast ratchet — frozen baseline governance', () => {
 
   test('no file is below its baseline — ratchet down instead of leaving slack', () => {
     // Slack in the baseline is headroom a future regression could hide in.
-    // After a burn-down, freeze the win: node scripts/count-domain-any.mjs --update
+    // After a burn-down, bank the win by the path `ratchetDownAdvice()` names — which
+    // is a HAND-LOWERED SINGLE ROW for as long as any overrun is declared, never the
+    // whole-tree `--update` this file forbids in terms 190 lines above.
     const stale = [];
     for (const [file, base] of Object.entries(baseline.files)) {
       const cur = current.files[file] ?? { any: 0, suppress: 0 };
@@ -345,7 +398,10 @@ describe('domain any-cast ratchet — frozen baseline governance', () => {
         stale.push(`${file}: now ${cur.any} any / ${cur.suppress} suppress (baseline ${base.any}/${base.suppress})`);
       }
     }
-    expect(stale, `debt shrank below the baseline — lock it in with \`node scripts/count-domain-any.mjs --update\`:\n  ${stale.join('\n  ')}`).toEqual([]);
+    expect(
+      stale,
+      `debt shrank below the baseline — ${ratchetDownAdvice()}\n  ${stale.join('\n  ')}`,
+    ).toEqual([]);
   });
 
   test('baseline exactly matches the tree (airtight against any drift mode)', () => {
