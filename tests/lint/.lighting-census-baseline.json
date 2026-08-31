@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d19b1da0592a7302c12da6dc6db6afa0a17b3e2d",
-  "measuredBy": "T9-landing",
+  "measuredAtSha": "a23e7ce83cb50cca244e018bf41aa6189c68d1d8",
+  "measuredBy": "T11-UI (Fable seat)",
   "date": "2026-08-31",
-  "note": "Lane TE-GUARDS-1 (cars 1-6) plus its three landing acts, rebased onto claude/composite-r4 at bbf9f8a8c and re-derived WHOLE at the landing tip per LANE_LAW_ADDENDUM_EFF1 sec.4 - never composed by arithmetic. DECOMPOSED PER ACT, because a bill that is not decomposed is an absorber rather than a receipt (E-T9-4). Cars: car 1 +2 titles; car 2 +7 titles / +1 suite title (arms added to EXISTING suites on purpose, so no file enters the estate); car 3 -21 / -4, a bare `delete` statement parking tests/scripts/gateMutex.test.js whole; car 4 +0, its arms being loop-generated and the walker crediting only straight-line registrations; car 5 +1; car 6 +25 / +5, repairing car 3 and crediting its four arms for the first time. LANDING ACTS: the 98th-admission commit and the schema-14 mint are JSON-only and move nothing; landing act 1 is NET ZERO on purpose - car 5 pinned the clause-4 hole with an arm whose failure message said to delete it when the widening landed, so the pin (-1) came out in the same act that added the clause-4b arm (+1). FILE FIGURES DO NOT MOVE AT ALL: this lane adds no test file, and the 2442 already counts tests/generators/institutionToggleReader.test.js, which arrived from the branch before this base.",
-  "files": 2442,
-  "parked": 370,
-  "credited": 2072,
-  "titles": 20853,
-  "suiteTitles": 5740
+  "note": "T11 UI train: 12 build cars + the anchor bill added test TITLES to existing suites only (zero new test files) — titles 20666 to 20713 measured at a23e7ce83; re-derived whole at the clean tip per the register path.",
+  "files": 2430,
+  "parked": 367,
+  "credited": 2063,
+  "titles": 20713,
+  "suiteTitles": 5710
 }
