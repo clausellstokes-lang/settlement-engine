@@ -443,25 +443,49 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // FINDINGS INVENTORY DID NOT MOVE: no reader gained or lost a writer, only the corpus
     // that exercises them is livelier.
     //
-    // ⛔⛔ THE ORIGINAL ATTRIBUTION ON THIS BLOCK WAS WRONG AND IS CORRECTED HERE (T4 resume
-    // leg 1, by execution). It read these figures as the per-archetype SENSITIVITY landing on
-    // "a corpus that happens to sit in the decline band". MEASURED, by single-variable
-    // controls in throwaway worktrees: with `insurgencyGate` alone forced dark-equivalent and
-    // EVERY OTHER lit row of the car still live, the corpus comes back BYTE-IDENTICAL to the
-    // base — same row digest, same 1220/5260 prose totals, same 25451 scalar rows. So the
-    // sensitivity table moves this corpus by ZERO through all four gates that carry it, and
-    // 100 % of these four figures is `insurgencyGate`'s occupied REPLACEMENT row.
+    // ⛔⛔ THIS BLOCK HAS NOW CARRIED TWO WRONG ATTRIBUTIONS. BOTH ARE CORRECTED HERE (T4
+    // resume leg 2, by execution), and the correction is worth more than the figures.
     //
-    // ⛔⛔ AND THESE FOUR FIGURES ARE ONE FIFTH OF A LARGER MOVE THAT IS **NOT** BANKED. The
-    // same corpus counters are hardcoded in FOUR further instruments — the prose-family
-    // baseline and its library constants, and the news-voice and news-headline baselines —
-    // and all four are RED at this tip. ⛔ THEY MUST NOT BE RE-FROZEN TO MATCH: the same
-    // controls show the replacement DELETES a Wizard News address home outright
-    // (`applied|stressor_escalate_insurgency`; homes 53 → 52, address identities 106 → 104),
-    // which is ODQ §786.2's deleted-beat REFUSAL and not a re-record. It is also insensitive
-    // to the replacement's own constants — two materially different spans give byte-identical
-    // corpora — so it is a DESIGN question about A2.2.6's replace-never-stack form, not a
-    // tuning one. Chair-gated; the full shift record is in the lane receipt's HOLD block.
+    // The FIRST reading blamed the per-archetype SENSITIVITY. The SECOND blamed
+    // `insurgencyGate`'s occupied REPLACEMENT row and claimed the sensitivity moves this
+    // corpus by zero. ⛔ THE SECOND IS FALSIFIED THE HARDEST WAY: **THE OCCUPIED REPLACEMENT
+    // IS UNREACHABLE IN THIS CORPUS AND CANNOT HAVE MOVED ANY OF THESE FIGURES.** Measured
+    // four independent ways — an instrumented recorder on every `insurgencyGate` call reports
+    // `occupied` true on ZERO of them at BOTH the base and this tip; the reason string
+    // `Occupation breeds resistance` never appears in any observed gate result on either
+    // side; a scan of every scalar row in the corpus for `/occupation/i` returns EMPTY, so
+    // the corpus contains no occupation stressor at all; and scoping that row (this same
+    // commit) leaves every figure here, and the address-row sha256, BIT-IDENTICAL.
+    // ⭐ The three "constant sensitivity" controls behind the second reading were
+    // byte-identical because they were EDITING DEAD CODE — an arm that cannot discover
+    // anything, mistaken for an arm that discovered invariance.
+    //
+    // ⭐⭐ WHAT ACTUALLY MOVED, from the same recorder: the two LIT, REACHABLE rows of
+    // `insurgencyGate`. The crisis cell falls 1.5 → 1.275 (the sensitivity, × 0.85) and the
+    // contested cell rises 1 → 1.5 (the new 30..45 row, × its own 1.25 sensitivity). AND IT
+    // IS AN INTERACTION, NOT EITHER ROW: removing EITHER one alone returns this corpus to the
+    // base EXACTLY — 53 homes, 272 introductions, no drift on any of the four news keys.
+    //
+    // ⭐⭐ AND THEREFORE NOTHING WAS DELETED. `applied|stressor_escalate_insurgency` leaves
+    // this corpus (homes 53 → 52, address identities 106 → 104), which reads on every census
+    // exactly like §786.2's deleted-beat REFUSAL — and is not one. `insurgencyGate` is a
+    // SPAWN gate: `STRESSOR_SPAWN_GATES` is consulted at exactly ONE site, the birth loop at
+    // `stressors.js:701-703`, while the escalation candidate is authored by a later loop that
+    // consults NO gate at all. Corroboration in these very figures: birth_insurgency HOLDS at
+    // 2 → 2 and escalate_mass_migration HOLDS at 2 → 2. The corpus re-rolled onto histories
+    // where no insurgency meets the escalation floor; the engine never lost the beat.
+    // ⭐ THE STRUCTURAL LESSON, and it now has a guard: A CENSUS THAT ASKS WHETHER A BEAT
+    // APPEARS IN ONE SAMPLED CORPUS HAS NOT ASKED WHETHER THE ENGINE CAN STILL AUTHOR IT.
+    // `tests/domain/legitimacyUpheaval.test.js` now pins that second question directly, so
+    // the two can never again be confused here.
+    //
+    // ⛔ THESE FOUR FIGURES REMAIN ONE FIFTH OF A MOVE THAT IS **NOT** BANKED. The same
+    // corpus counters are hardcoded in FOUR further instruments — the prose-family baseline
+    // and its library constants, and the news-voice and news-headline baselines — and all
+    // four are RED at this tip. They are not re-frozen here: the movement is real
+    // (occurrences 5260 → 5297) and a frozen denominator re-mint is chair-gated by §858 and
+    // §785.2 precedent. The full, executable shift record — with this corrected cause — is in
+    // the lane receipt's HOLD block.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
       wizardNewsFinalEntries: 240,
