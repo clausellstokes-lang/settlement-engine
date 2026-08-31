@@ -149,7 +149,12 @@ function genesisNeighbourEntry(input) {
   };
 }
 
-/** The settlement tier ladder, lowest first — the ONLY signal genesis diplomacy has. */
+/**
+ * The settlement tier ladder, lowest first — the ONLY signal genesis diplomacy has.
+ * Typed as an open record because the lookup below is fed a RUNTIME string: an unknown
+ * tier must read as rank 0, not as a type error, and the `?? 0` is the answer to it.
+ * @type {Readonly<Record<string, number>>}
+ */
 const TIER_RANK = Object.freeze({
   thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, metropolis: 5,
 });
@@ -193,7 +198,7 @@ export function assignGenesisRelations(sites, rng) {
   const ties = /** @type {Array<{a:number,b:number,type:string,cause:string}>} */ ([]);
   const tieCount = new Map();
   const hasOverlord = new Set();
-  const countOf = (slot) => tieCount.get(slot) || 0;
+  const countOf = (/** @type {number} */ slot) => tieCount.get(slot) || 0;
 
   // Deterministic pair order: ascending slot, so the draw sequence is a function of
   // the plan alone and never of object iteration order.

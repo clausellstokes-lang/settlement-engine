@@ -59,7 +59,7 @@ export const SIDECAR_VERDICTS = Object.freeze({
 });
 
 /** 8-hex FNV-1a-32 of a string. */
-const hex = (s) => fnv1a32(s).toString(16).padStart(8, '0');
+const hex = (/** @type {string} */ s) => fnv1a32(s).toString(16).padStart(8, '0');
 
 /**
  * Hash a numeric cell array to a stable 8-hex stamp.
@@ -142,7 +142,14 @@ export function buildCaptureSidecar(pack, frame = {}) {
  *   detail:{ cellCount?:{stored:number, current:number}, positionHash?:{stored:string|null, current:string|null} } }}
  */
 export function compareCaptureSidecar(stored, pack) {
-  const none = (verdict, storedVersion = null, detail = {}) => (
+  // `storedVersion` is annotated rather than left to inference: a `= null` default infers
+  // the type `null`, and every caller below that reports a REAL version would then be
+  // handing a number to a null-only parameter. The default is a fallback, not the domain.
+  const none = (
+    /** @type {string} */ verdict,
+    /** @type {number|null} */ storedVersion = null,
+    /** @type {any} */ detail = {},
+  ) => (
     { verdict, storedVersion, matched: false, detail }
   );
   if (!stored || typeof stored !== 'object') return none(SIDECAR_VERDICTS.ABSENT);
