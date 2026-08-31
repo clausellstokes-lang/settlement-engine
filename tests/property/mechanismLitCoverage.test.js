@@ -126,11 +126,17 @@ for (const rel of litEligible) {
 // file existence + evidence on every run, so a reference can never go stale.
 /** @type {Record<string, { file: string, evidence: string, note: string }>} */
 const LIT_COVERED_BY = {
-  assizeKernel: {
-    file: 'tests/property/assizeDormancyGolden.test.js',
-    evidence: 'ANTI-VACUITY: LIT',
-    note: 'the golden’s lit half drives assizeEnabled:true through the real pulse and asserts a seated verdict beat',
-  },
+  // `assizeKernel` HAD A ROW HERE AND NO LONGER NEEDS ONE (struck 2026-08-31, lane DENS-land).
+  // Its registry entry named `tests/property/assizeDormancyGolden.test.js`, whose LIT half
+  // drives `assizeEnabled: true` through the real pulse — real coverage, but the INDIRECT kind
+  // this registry exists for. TE-DENSITY-1's `tests/generators/densityLaw.test.js` now imports
+  // `advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize`
+  // from `worldPulse/assizeKernel.js` DIRECTLY — the density chain composes onto that very
+  // head by the name-swap idiom, so the import is load-bearing rather than incidental — and the
+  // module therefore earns AUTO credit. The minimality assertion above ("`${mech}` now has
+  // direct-import lit coverage — strike its registry entry") fires on its own instruction, and
+  // striking the row is that instruction obeyed: the module is no less covered than it was, it
+  // is covered by a stronger road. Same disposition as `hegemony` below.
   chronicle: {
     file: 'tests/domain/worldPulseChronicleCuration.test.js',
     evidence: 'buildChronicleGrounding',
