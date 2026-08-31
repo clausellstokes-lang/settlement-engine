@@ -156,8 +156,11 @@ fixture walks the invariant. **§810.4:** the rival's faction is a WEIGHTED ROLL
 influence gap, any archetype ("not bounded in blood"); a faction mints WITH ≥1 NPC or not at all
 (the atomic mint — NPC-less factions unrepresentable); in play, an emptied roster DISSOLVES the
 faction with a chronicle receipt — except the ruling faction, which becomes a typed INTERREGNUM
-and engages the succession machinery. The walker asserts: roster ≥1, or ruling-in-interregnum,
-or dissolved-with-receipt — no fourth state.
+and engages the succession machinery. The walker asserts: roster ≥1, or ruling-under-missing-seat-stressor
+(§810.5: one closed stressor family serves birth and play), or dissolved-with-receipt — no fourth
+state. **§810.6:** a power gaining the seat in play without a faction has one MATERIALIZED —
+faction + tier-rolled roster + fresh souls in one atomic act, the same versioned law's third
+caller (birth · growth · ascension).
 
 | Tier | Factions (roll) | Named-NPC MASS (roll) |
 |---|---|---|
