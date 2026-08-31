@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "188c703388242cb66484ea257ac4e3018f1f71f2",
-  "measuredBy": "T12-landing",
+  "measuredAtSha": "e0cddf4ad4865c8ce71d744a17c99e7ad5c41b03",
+  "measuredBy": "DENS-landing",
   "date": "2026-08-31",
-  "note": "The W-MEM train (4 cars) rebased from dock 84ae0f104 (base 19a8c9197) onto claude/composite-r4 6b74ad5bf and re-derived WHOLE at the landing tip per LANE_LAW_ADDENDUM_EFF1 §4 — never composed by arithmetic. The train adds THREE test files (concludedWarLedger, fieldBattleRegion, concludedWarsWriter); the three existing suites it edits (pantheon, subsystemRowsVirtual, lifecycleRoundTrip) gain and lose ZERO titles, so no title interacts.",
-  "files": 2453,
-  "parked": 370,
-  "credited": 2083,
-  "titles": 21110,
-  "suiteTitles": 5807
+  "note": "TE-DENSITY-1 consist (D1+D2+D2b+D2c+D3, 15 replayed commits + 4 landing bills) rebased onto claude/composite-r4 1d27accdc; the rebase resolved both in-train refreezes to T12s tuple per LANE_LAW_ADDENDUM_EFF1 §4, so this re-derives WHOLE at the landing tip. The train adds TWO test files: densityLaw.test.js (parks — loop registration, 142 runtime tests proven 142/142 by direct run) and densityCreateBoundary.walker.test.js (credits, +7 titles +1 suite). The five test files the span edits gained and lost ZERO titles.",
+  "files": 2455,
+  "parked": 371,
+  "credited": 2084,
+  "titles": 21117,
+  "suiteTitles": 5808
 }
