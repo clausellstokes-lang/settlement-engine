@@ -240,35 +240,47 @@ export const DISPATCHABLE_MISSION_KINDS = Object.freeze(
 );
 
 /**
- * ── THE ACCEPTANCE SEAMS: NAMED, MEASURED ABSENT, AND DELIBERATELY NOT WIRED ───────────
+ * ── THE ACCEPTANCE SEAMS: FOUR NOW BOUND, ONE STILL PINNED ABSENT ──────────────────────
  *
  * DESIGN_W_OPS §1 rules that the `cast → accepted | refused` step reads four things: the
  * ⟨F8⟩ vetting refusal, §802 R1 WILLINGNESS, §803.1 R6's personal RISK REGISTER, and §802
- * R2's KNOWN CHARACTER of the counterparty. Three of those four live in W-LIVES cars that
- * have NOT LANDED on this branch.
+ * R2's KNOWN CHARACTER of the counterparty. When this leaf was written, three of those
+ * four lived in W-LIVES cars that had not landed on its branch, so the roster NAMED each
+ * seam, measured it absent, and pinned the absence with a producer census.
  *
- * ⛔ SO NOTHING HERE IMPORTS THEM, AND NOTHING HERE APPROXIMATES THEM. Reaching across an
- * unlanded stack is not available, and mirroring a formula whose home does not exist yet
- * would mint a second spelling of a law nobody has written — the exact failure the mirror
- * idiom exists to prevent, inverted. What this lane can honestly do is NAME each seam with
- * the symbol it is waiting for and the ruling that owns it, and pin the absence.
+ * ⭐ THE CENSUS FIRED, EXACTLY AS DESIGNED, AT THE SUBSTRATE COUPLING — the first tree on
+ * which W-LIVES' producers and this grammar have ever stood together. Its instruction was
+ * that "the wave that landed it must come back and wire acceptance rather than leaving a
+ * seam that has quietly outlived its own fact", and this roster is that discharge: the
+ * three landed seams now carry the module and the EXPORTED SYMBOL a reader can open, plus
+ * the ROUTE acceptance reads them through, and the census RESOLVES all three against the
+ * live tree instead of grepping for a name.
  *
- * ⭐ THE PIN IS A PRODUCER CENSUS, the `insideAssetAt` idiom verbatim: the test walks src/
- * and asserts that every `awaitedSymbol` below is still absent. THE DAY W-LIVES LANDS ONE,
- * THIS REDS — and the wave that landed it must come back and wire acceptance rather than
- * leaving a seam that has quietly outlived its own fact. An unlanded seam that nobody is
- * told about is how a phantom ships; an unlanded seam with a tripwire is a schedule.
+ * ⛔⛔ AND THE COUPLING CORRECTED THE ROSTER'S OWN SPELLING, WHICH IS THE FINDING WORTH
+ * MORE THAN THE FLIP. The `known_character` row awaited `knownCharacter`. NO SUCH SYMBOL
+ * EXISTS ANYWHERE IN THE ESTATE: the reader is `knownCharacterOf`, and every one of the
+ * census's matches on the old spelling was a COMMENT — three files explaining themselves,
+ * plus this leaf's own roster string. A mention census reports arrival for prose; a
+ * resolving census cannot. The row now names the real export and the pin opens the file.
  *
- * ⚠ `vetVolunteerEnvoy` is the ONE EXCEPTION and it is marked `landed: true`: the estate's
- * one vetting reader already exists, and ⟨F8⟩'s one-home law means car O2 consumes THAT
- * rather than forking a second. It is listed so the roster is the whole acceptance seam
- * and not just its missing half.
+ * ⛔ NOTHING HERE IMPORTS A PRODUCER, AND THAT IS UNCHANGED BY THE FLIP. `characterDrift`
+ * is pinned by its own suite to exactly ONE production door and `knownCharacter` to ZERO
+ * src importers; those darknesses are cars L4's and L5's and are not this leaf's to
+ * spend. `consumedThrough` therefore records the CHOKEPOINT each seam is read through
+ * rather than a direct reach, and the reading itself lives in the supplier leaf named on
+ * every bound row.
+ *
+ * ⭐ THE FIFTH SEAM STAYS PINNED ABSENT AND ITS ROW STAYS. §802 R1's willingness door has
+ * landed NOWHERE — the census measured zero sites in `src/` and zero in `tests/` — so
+ * wiring it would be minting a second spelling of a law nobody has written. The census
+ * keeps its row, and the day W-LIVES lands it, this reds again for the same good reason.
  */
 export const ACCEPTANCE_SEAMS = Object.freeze([
   Object.freeze({
     seam: 'vetting_refusal',
     awaitedSymbol: 'vetVolunteerEnvoy',
     home: 'src/domain/worldPulse/sendTwoDivergence.js',
+    consumedThrough: 'acceptanceCharacterReads.vettingInputFor — the INPUT ROW is composed and the verdict is left to the one home',
     ruling: 'ODQ §806 ⟨F8⟩ — one vetting home, importance-DESCENDING; neither program forks a second',
     landed: true,
   }),
@@ -276,31 +288,42 @@ export const ACCEPTANCE_SEAMS = Object.freeze([
     seam: 'willingness',
     awaitedSymbol: 'seek_compromise',
     home: null,
+    consumedThrough: null,
     ruling: 'ODQ §802 R1 — willing compromise emits through npcAgency\'s EXISTING candidate grammar toward a typed patron menu; acceptance is a REAL refusal reading the seeker\'s KNOWN character',
     landed: false,
   }),
   Object.freeze({
     seam: 'risk_register',
     awaitedSymbol: 'riskRegister',
-    home: null,
+    home: 'src/domain/npc/characterConsumers.js',
+    consumedThrough: 'acceptanceCharacterReads.acceptanceCharacterRead — the register is called on the chokepoint, and its absent[] is propagated whole',
     ruling: 'ODQ §803.1 R6/R8 — DERIVED never stored: centre from effective character × home-desperation, breadth from the CHAOS projection. ⚠ ODQ §806 F4: the register FREEZES AT ROOTING, so a rooted stay re-reads the appetite it rooted with and the §3.4b termination proof stands',
-    landed: false,
+    landed: true,
   }),
   Object.freeze({
     seam: 'known_character',
-    awaitedSymbol: 'knownCharacter',
-    home: null,
+    awaitedSymbol: 'knownCharacterOf',
+    home: 'src/domain/npc/knownCharacter.js',
+    consumedThrough: 'acceptanceCharacterReads — the KNOWN chart is an ARGUMENT (§14 GAP D: the caller runs the query), banded by the chokepoint\'s vettingTemperBand',
     ruling: 'ODQ §802 R2 + §802.1 — CHOOSE ON KNOWN, RESOLVE ON TRUE; mortals read reputation, deities keep true-sight',
-    landed: false,
+    landed: true,
   }),
   Object.freeze({
     seam: 'effective_character',
     awaitedSymbol: 'effectiveCharacter',
-    home: null,
+    home: 'src/domain/npc/characterDrift.js',
+    consumedThrough: 'acceptanceCharacterReads — reached ONLY as the chokepoint already reaches it; the drift family keeps its one production door',
     ruling: 'W-LIVES L5 — the chokepoint every consumer re-routes through; core + drift, sparse',
-    landed: false,
+    landed: true,
   }),
 ]);
+
+/**
+ * THE SUPPLIER the bound rows above are read through — named as a constant rather than
+ * left to a search, the `PARADIGM_WORD_PROJECTION_SEAM` idiom. Acceptance's character
+ * half lives there and NOT here, because this leaf decides nothing and reaches nothing.
+ */
+export const ACCEPTANCE_SUPPLIER_SEAM = 'src/domain/npc/acceptanceCharacterReads.js';
 
 /**
  * THE CLOSED REFUSAL VOCABULARY of `normalizeOperation`. Every refusal is separately

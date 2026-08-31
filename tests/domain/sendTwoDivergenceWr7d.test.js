@@ -284,19 +284,33 @@ describe('⭐⭐ THE ⟨F8⟩ ONE-HOME SCAN — the walker the charter said exis
     // not a score"), so the roster is enumerated with the decider named, and a THIRD
     // spelling still reds. Loosening the regex to exclude the file that tripped it
     // would have been the easy edit and would have retired the guard.
+    // ⭐ AND THE SUBSTRATE COUPLING ADDED THE SECOND DERIVER, WHICH IS WHY THE GUARD WAS
+    // BUILT. `acceptanceCharacterReads.vettingInputFor` composes the volunteer ROW this
+    // reader takes — it fills the `temperBand` field the ⟨F8⟩ arm has been waiting for
+    // and hands the row straight back — so W-OPS acceptance consumes the one vetting
+    // home instead of growing the second spelling this scan exists to forbid. The row
+    // is enrolled, not excluded, and it pays the same non-decider price.
     const DECIDER = 'src/domain/worldPulse/sendTwoDivergence.js';
-    const INPUT_DERIVERS = ['src/domain/npc/characterConsumers.js'];
+    const INPUT_DERIVERS = [
+      'src/domain/npc/acceptanceCharacterReads.js',
+      'src/domain/npc/characterConsumers.js',
+    ];
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
     const spellings = files
       .filter((file) => /function\s+\w*[vV]et(Volunteer|Candidate|Envoy|ting)\w*\s*\(/.test(readFileSync(file, 'utf8')))
       .map((file) => relative(REPO_ROOT, file))
       .sort();
     expect(spellings).toEqual([...INPUT_DERIVERS, DECIDER].sort());
-    // ...and the enumerated input derivers really cannot decide: none of them
-    // returns an acceptance, which is what makes their presence on the list safe.
+    // ...and the enumerated input derivers really cannot decide. The ban is on BOTH
+    // halves of the decider's verdict shape, not just one: `vetVolunteerEnvoy` answers
+    // `{accepted, quality, basis, reason}`, so a forked decider would have to emit an
+    // acceptance AND the basis it refused on. Banning `accepted:` alone would let a
+    // second reader that returned only a basis word pass as a deriver.
     for (const rel of INPUT_DERIVERS) {
       // anchored: `spellings` is asserted equal to the enumerated roster above, so each path is live
       expect(readFileSync(join(REPO_ROOT, rel), 'utf8'), rel).not.toContain('accepted:');
+      // anchored: same live path, pinned by the same roster equality one line above
+      expect(readFileSync(join(REPO_ROOT, rel), 'utf8'), rel).not.toContain('basis:');
     }
   });
 });

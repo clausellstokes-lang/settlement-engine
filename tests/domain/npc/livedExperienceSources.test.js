@@ -648,18 +648,55 @@ describe('DARK BY CONSTRUCTION — the closure, amended for this car', () => {
  */
 const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
 
+/**
+ * ⚠⚠ AND THE SCAN IS SHARPENED A SECOND TIME AT THE SUBSTRATE COUPLING — THE THIRD
+ * SIGHTING OF THIS FILE'S OWN LAW. L4 had to turn a substring ban on `simulationRules`
+ * into a DEREFERENCE ban because the catalog cites its own proof; L5 had to strip
+ * COMMENTS because three files were convicted for explaining themselves; and the
+ * coupling convicted a FROZEN DATA ROSTER for naming the seam it is holding a place
+ * for. `operationGrammar.js`'s acceptance roster records the module path and the
+ * exported symbol of every seam the acceptance step reads — that is a CITATION in data,
+ * exactly as the stripped comments were citations in prose, and it survived the strip
+ * only because it is not a comment.
+ *
+ * ⭐ THE CLAIM IS UNCHANGED AND THE DETECTOR IS STRICTLY STRONGER. "Imports the known
+ * read" now means an IMPORT SPECIFIER resolving to the module, or a DEREFERENCE of one
+ * of its exported symbols — which catches an aliased import the substring scan would
+ * also have caught AND a call the substring scan would have caught only by accident of
+ * spelling. What it stops catching is a module PATH quoted as data, which was never a
+ * dependency. Both halves are pinned by the control below, in both directions.
+ * @param {string} text
+ */
+const consumesKnownRead = (/** @type {string} */ text) => {
+  const code = stripComments(text);
+  return /from\s+'[^']*\/(livedExperienceSources|knownCharacter)\.js'/.test(code)
+    || /\b(knownCharacterOf|characterAsSeenBy|LIVED_EXPERIENCE_SOURCES)\s*[(.]/.test(code);
+};
+
   test('⭐ NO PRODUCTION CALLER: nothing in src imports the sources or the known read', () => {
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
+    expect(files.length).toBeGreaterThan(100);
     const importers = files
       .filter((file) => !/(livedExperienceSources|knownCharacter)\.js$/.test(file))
-      .filter((file) => /livedExperienceSources|knownCharacter/.test(stripComments(readFileSync(file, 'utf8'))))
+      .filter((file) => consumesKnownRead(readFileSync(file, 'utf8')))
       .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'));
     expect(importers).toEqual([]);
   });
 
-  test('⭐ AND THE STRIP DOES NOT BLIND IT — a planted import is still caught', () => {
-    // The anti-vacuity control the strip owes: a scan that stopped seeing things
-    // would report the same empty list forever.
+  test('⭐ AND THE SHARPENED SCAN DOES NOT BLIND IT — every real reach is still caught', () => {
+    // The anti-vacuity control the sharpening owes, in BOTH directions. A scan that
+    // stopped seeing things would report the same empty list forever, and a scan that
+    // still convicted citations would have bought the closure claim with legibility.
+    expect(consumesKnownRead("import { x } from './knownCharacter.js';")).toBe(true);
+    expect(consumesKnownRead("import { y } from '../npc/livedExperienceSources.js';")).toBe(true);
+    // AN ALIASED IMPORT PLUS A CALL — the reach a path-only scan could miss.
+    expect(consumesKnownRead('const r = knownCharacterOf({ npc });')).toBe(true);
+    expect(consumesKnownRead('const c = characterAsSeenBy({ viewer });')).toBe(true);
+    expect(consumesKnownRead('const s = LIVED_EXPERIENCE_SOURCES.length;')).toBe(true);
+    // AND THE TWO CITATIONS THAT ARE NOT DEPENDENCIES.
+    expect(consumesKnownRead('// a comment naming knownCharacterOf(x)\nconst a = 1;')).toBe(false);
+    expect(consumesKnownRead("const row = { home: 'src/domain/npc/knownCharacter.js' };")).toBe(false);
+    // anchored: the same predicate is pinned TRUE five lines above on real import syntax
     expect(stripComments("import { x } from './knownCharacter.js';")).toContain('knownCharacter');
     // anchored: the line above pins the SAME stripper returning a name out of real import syntax
     expect(stripComments('// a comment naming knownCharacter\nconst a = 1;')).not.toContain('knownCharacter');

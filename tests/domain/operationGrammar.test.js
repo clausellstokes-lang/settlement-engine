@@ -16,6 +16,7 @@ import { describe, expect, test } from 'vitest';
 
 import {
   ACCEPTANCE_SEAMS,
+  ACCEPTANCE_SUPPLIER_SEAM,
   DISPATCHABLE_MISSION_KINDS,
   MISSION_KINDS,
   MISSION_KIND_CATALOG,
@@ -277,7 +278,7 @@ describe('W-OPS O1 — the validator refuses total-on-garbage, and every arm is 
   });
 });
 
-describe('W-OPS O1 — the W-LIVES acceptance seams are NAMED, and their absence is pinned', () => {
+describe('W-OPS O1 — the W-LIVES acceptance seams: four BOUND, one still pinned absent', () => {
   test('the roster covers the four reads DESIGN_W_OPS §1 gives the acceptance step', () => {
     expect(ACCEPTANCE_SEAMS.map((row) => row.seam)).toEqual([
       'vetting_refusal',
@@ -289,14 +290,65 @@ describe('W-OPS O1 — the W-LIVES acceptance seams are NAMED, and their absence
     expect(ACCEPTANCE_SEAMS.every((row) => String(row.ruling).length > 40)).toBe(true);
   });
 
-  test('the ONE landed seam is the estate\'s one vetting reader, and its home is real', () => {
+  test('THE BINDING CENSUS — every LANDED seam resolves to a real module and a real EXPORT', () => {
+    // The census that replaced the absence pin for the four seams the substrate coupling
+    // brought together. It is the MISSION_KIND_CATALOG idiom applied one section down:
+    // the verdict is EXECUTED against the live tree, so a rename upstream reds this file
+    // rather than leaving the roster quietly pointing at nothing.
+    //
+    // ⛔ AND IT IS WHY THE `known_character` ROW HAD TO BE RESPELLED. The row awaited
+    // `knownCharacter`, which names NO symbol anywhere in the estate — the reader is
+    // `knownCharacterOf`. A mention census reported it ARRIVED on the strength of three
+    // comments; this one opens the file and asks the module what it exports.
     const landed = ACCEPTANCE_SEAMS.filter((row) => row.landed === true);
-    expect(landed.map((row) => row.awaitedSymbol)).toEqual(['vetVolunteerEnvoy']);
-    const home = readFileSync(join(ROOT, String(landed[0].home)), 'utf8');
-    expect(home.includes(`export function ${landed[0].awaitedSymbol}`)).toBe(true);
+    expect(landed.map((row) => row.seam)).toEqual([
+      'vetting_refusal', 'risk_register', 'known_character', 'effective_character',
+    ]);
+    /** @type {string[]} */
+    const failures = [];
+    for (const row of landed) {
+      const modulePath = join(ROOT, String(row.home));
+      if (!existsSync(modulePath)) {
+        failures.push(`${row.seam}: module missing at ${row.home}`);
+        continue;
+      }
+      if (!readFileSync(modulePath, 'utf8').includes(`export function ${row.awaitedSymbol}`)) {
+        failures.push(`${row.seam}: ${row.home} does not export ${row.awaitedSymbol}`);
+      }
+    }
+    expect(
+      failures,
+      'A bound acceptance seam must resolve to a real exported producer. Re-run the census'
+      + ' and correct the symbol rather than leaving the roster pointing at a spelling'
+      + ' nothing answers to.',
+    ).toEqual([]);
+    // A BOUND ROW ALSO NAMES ITS ROUTE. The seam is not "this symbol exists" — it is
+    // "acceptance reads it, and here is what it reads it through". A row that recorded
+    // only the producer would be back to naming a fact nobody is obliged to honour.
+    expect(landed.filter((row) => String(row.consumedThrough).length < 40).map((r) => r.seam))
+      .toEqual([]);
+    expect(landed.every((row) => String(row.consumedThrough).includes('acceptanceCharacterReads')))
+      .toBe(true);
+  });
+
+  test('the supplier the bound rows name is a real module, and the grammar still imports NOTHING from it', () => {
+    // The two halves of the same claim. The route the roster advertises must exist —
+    // otherwise `consumedThrough` is prose — and this leaf must still not reach it,
+    // because the drift family's one-door and the known read's zero-importer
+    // darknesses are cars L4's and L5's and are not this leaf's to spend.
+    expect(existsSync(join(ROOT, ACCEPTANCE_SUPPLIER_SEAM))).toBe(true);
+    const grammar = readFileSync(
+      join(ROOT, 'src/domain/worldPulse/operations/operationGrammar.js'), 'utf8',
+    );
+    expect(/^import\s/m.test(grammar)).toBe(false);
   });
 
   test('THE PRODUCER CENSUS — every unlanded seam symbol is still absent from src, and this reds the day one lands', () => {
+    // ⛔ ANTI-VACUITY FIRST. This census iterates the UNLANDED rows, so a roster whose
+    // rows had all been flipped would pass by asking nothing. The unlanded set is
+    // therefore pinned exactly: one row, and it is the willingness door.
+    expect(ACCEPTANCE_SEAMS.filter((row) => row.landed !== true).map((row) => row.seam))
+      .toEqual(['willingness']);
     const sources = srcFiles().map((file) => [relative(ROOT, file), readFileSync(file, 'utf8')]);
     /** @type {string[]} */
     const arrived = [];
