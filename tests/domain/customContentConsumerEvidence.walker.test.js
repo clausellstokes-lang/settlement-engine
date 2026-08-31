@@ -97,6 +97,13 @@ const CONSUMER_SITES = Object.freeze({
   // WR-2's pure read side recognizes the deity domain's closed mechanical set
   // and returns a neutral record for every other authored word.
   dispositionProfile: 'src/domain/worldPulse/dispositionProfile.js',
+  // W-FAITH F4c — the boon/bane channel pair's two consumers. `faithField` is the
+  // kernel that prices an authored channel and the register that decides which six of
+  // the nine name a real causal variable; `religionState` is the tick-END writer that
+  // projects the priced field onto the settlement so `causalState` can read it at the
+  // next tick's start. Both are named because the promotion of the four boon/bane keys
+  // to `mechanical` rests on that pair, not on either alone.
+  faithField: 'src/domain/worldPulse/faithField.js',
   'dependencyEngine.finishedGoodsSupply': 'src/lib/dependencyEngine.js',
   'dependencyEngine.foodImpactTally': 'src/lib/dependencyEngine.js',
   'dependencyEngine.relationshipRead': 'src/lib/dependencyEngine.js',
@@ -126,6 +133,7 @@ const CONSUMER_SITES = Object.freeze({
   institutionServices: 'src/generators/services/institutionServices.js',
   magicProfile: 'src/domain/magicProfile.js',
   pantheon: 'src/domain/worldPulse/pantheon.js',
+  religionState: 'src/domain/worldPulse/religionState.js',
   religiousContest: 'src/domain/worldPulse/religiousContest.js',
   resolveResources: 'src/generators/steps/resolveResources.js',
   servicesGenerator: 'src/generators/servicesGenerator.js',

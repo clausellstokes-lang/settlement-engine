@@ -1348,12 +1348,15 @@
           "key": "boonChannel",
           "schema": "deityEffectChannel",
           "ui": false,
-          "effect": "presentation",
+          "effect": "mechanical",
           "activation": "conditional",
-          "condition": "The settlement causal channel this deity blesses. Pairs with boonStrength; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet — the channel wiring is W-FAITH F4c, and the per-deity PRECEDENCE law (ODQ §851) is already in force: a deity carrying an authored boon or bane silences its legacy `domain` arm, so the two can never both price one quantity. The effect stays presentation until F4c lands a reader.",
+          "condition": "The settlement causal channel this deity blesses. Pairs with boonStrength; both or neither. MECHANICAL at W-FAITH F4c (ODQ 851): the pulse projects the influence field onto config.faithProfile.field at tick END; causalState reads it at the next tick's start and pushes one signed contributor onto the bound causal variable. Six channels bind to a real causal variable (harvest, trade, craft, healing, order, war_readiness); sea, learning and hearth name no settlement causal quantity anywhere in src/domain and are DECLARED UNBOUND in faithField.FAITH_UNBOUND_CHANNELS, which carries each measurement and is enforced by faithChannelWiring.test.js — authored there they mint no projected key and move no score. A deity carrying an authored boon or bane silences its legacy `domain` arm (one arm per deity), so the two can never both price one quantity. DORMANT BY ABSENCE today: no deity authors either, so no field key is minted and the substrate is byte-identical.",
           "consumers": [
+            "causalState",
             "deitySnapshot",
             "dispositionProfile",
+            "faithField",
+            "religionState",
             "validateDeity"
           ]
         },
@@ -1361,11 +1364,14 @@
           "key": "boonStrength",
           "schema": "deityEffectStrength",
           "ui": false,
-          "effect": "presentation",
+          "effect": "mechanical",
           "activation": "conditional",
-          "condition": "The banded magnitude of the boon. Pairs with boonChannel; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet: the channel wiring is W-FAITH F4c. Write-time validation and the embed writers are its only consumers today.",
+          "condition": "The banded magnitude of the boon (faint/firm/heavy), never a float; at full patron weight the three bands are worth 2, 4 and 8 score points. MECHANICAL at W-FAITH F4c (ODQ 851): the pulse projects the influence field onto config.faithProfile.field at tick END; causalState reads it at the next tick's start and pushes one signed contributor onto the bound causal variable. Six channels bind to a real causal variable (harvest, trade, craft, healing, order, war_readiness); sea, learning and hearth name no settlement causal quantity anywhere in src/domain and are DECLARED UNBOUND in faithField.FAITH_UNBOUND_CHANNELS, which carries each measurement and is enforced by faithChannelWiring.test.js — authored there they mint no projected key and move no score. A deity carrying an authored boon or bane silences its legacy `domain` arm (one arm per deity), so the two can never both price one quantity. DORMANT BY ABSENCE today: no deity authors either, so no field key is minted and the substrate is byte-identical.",
           "consumers": [
+            "causalState",
             "deitySnapshot",
+            "faithField",
+            "religionState",
             "validateDeity"
           ]
         },
@@ -1373,12 +1379,15 @@
           "key": "baneChannel",
           "schema": "deityEffectChannel",
           "ui": false,
-          "effect": "presentation",
+          "effect": "mechanical",
           "activation": "conditional",
-          "condition": "The settlement causal channel this deity blights. Pairs with baneStrength; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet — the channel wiring is W-FAITH F4c, and the per-deity PRECEDENCE law (ODQ §851) is already in force: a deity carrying an authored boon or bane silences its legacy `domain` arm, so the two can never both price one quantity. The effect stays presentation until F4c lands a reader.",
+          "condition": "The settlement causal channel this deity blights. Pairs with baneStrength; both or neither. MECHANICAL at W-FAITH F4c (ODQ 851): the pulse projects the influence field onto config.faithProfile.field at tick END; causalState reads it at the next tick's start and pushes one signed contributor onto the bound causal variable. Six channels bind to a real causal variable (harvest, trade, craft, healing, order, war_readiness); sea, learning and hearth name no settlement causal quantity anywhere in src/domain and are DECLARED UNBOUND in faithField.FAITH_UNBOUND_CHANNELS, which carries each measurement and is enforced by faithChannelWiring.test.js — authored there they mint no projected key and move no score. A deity carrying an authored boon or bane silences its legacy `domain` arm (one arm per deity), so the two can never both price one quantity. DORMANT BY ABSENCE today: no deity authors either, so no field key is minted and the substrate is byte-identical.",
           "consumers": [
+            "causalState",
             "deitySnapshot",
             "dispositionProfile",
+            "faithField",
+            "religionState",
             "validateDeity"
           ]
         },
@@ -1386,11 +1395,14 @@
           "key": "baneStrength",
           "schema": "deityEffectStrength",
           "ui": false,
-          "effect": "presentation",
+          "effect": "mechanical",
           "activation": "conditional",
-          "condition": "The banded magnitude of the bane. Pairs with baneChannel; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet: the channel wiring is W-FAITH F4c. Write-time validation and the embed writers are its only consumers today.",
+          "condition": "The banded magnitude of the bane (faint/firm/heavy), never a float; at full patron weight the three bands subtract 2, 4 and 8 score points. MECHANICAL at W-FAITH F4c (ODQ 851): the pulse projects the influence field onto config.faithProfile.field at tick END; causalState reads it at the next tick's start and pushes one signed contributor onto the bound causal variable. Six channels bind to a real causal variable (harvest, trade, craft, healing, order, war_readiness); sea, learning and hearth name no settlement causal quantity anywhere in src/domain and are DECLARED UNBOUND in faithField.FAITH_UNBOUND_CHANNELS, which carries each measurement and is enforced by faithChannelWiring.test.js — authored there they mint no projected key and move no score. A deity carrying an authored boon or bane silences its legacy `domain` arm (one arm per deity), so the two can never both price one quantity. DORMANT BY ABSENCE today: no deity authors either, so no field key is minted and the substrate is byte-identical.",
           "consumers": [
+            "causalState",
             "deitySnapshot",
+            "faithField",
+            "religionState",
             "validateDeity"
           ]
         }
