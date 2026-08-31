@@ -198,6 +198,10 @@
    "label": "epistemic/distribution bound collapsed to zero margin",
    "what": "Standing plant makes a registered upper bound sit exactly on its expected count while loosenPending keeps its tighter-than-derived shape admissible; the gate must red on zero margin and the under-2-sigma power floor. Fold 5f8dc783 made the manifest target tracked and clean."
   },
+  "tests/lint/densityCreateBoundary.walker.test.js": {
+   "kind": "rationale",
+   "rationale": "TE-DENSITY-1's create-boundary walker (ODQ §822). A RATIONALE rather than a plant because the file's catching power is not a behaviour a mutant could perturb — it is an EXACT PARTITION over a live source scan, asserted in BOTH directions and floored against vacuity inside the same file: arm 1 refuses an empty denominator, arm 2 reds on any module that reaches generateSettlementPipeline and is unclassified, arm 3 reds on a manifest row whose module has stopped reaching it, and arms 5 and 7 red on a BIRTH that does not mint the law and on the mint being named outside its declared homes. Each is a set-equality against the tree, so the only available 'mutation' is deleting a row or a call — which is exactly what those arms already assert, and a plant would restate the assertion rather than test it. ⚠ RECORDED HONESTLY, because this row is not its author's: the walker landed with D2's create-boundary car (b809fb143) and its totality entry was never filed, so tests/lint/mutationCoverageManifest.test.js has been red at every tip since. D2b flagged it inside a 14-row pre-existing set as suspected worktree environment; it is NOT environment — it is this train's own unpaid census bill, diagnosed by identity and paid at cause by D2c. Vetoable: replace with a kind:'mutation' plant in scripts/mutation-sweep.sh if the stronger form is wanted."
+  },
   "tests/lint/allianceWebRiskConsumers.walker.test.js": {
    "kind": "rationale",
    "ref": "one-web-census-executed"
