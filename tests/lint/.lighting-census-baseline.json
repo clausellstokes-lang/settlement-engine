@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "192089f877d5197f29b1f69b1002f8690a1612fc",
-  "measuredBy": "SEATA2-landing",
+  "measuredAtSha": "a3e08cca2a22fffeda01431ec24e231fa2bde2a1",
+  "measuredBy": "T4 · SEAT-B (Opus 5) — W-SEAT SEAT-5 + SEAT-2b",
   "date": "2026-08-31",
-  "note": "The W-SEAT SEAT-1..4 train (19 commits) rebased from the dock b85044099 onto claude/composite-r4 9f13aa4e3 and re-derived WHOLE at the landing tip per LANE_LAW_ADDENDUM_EFF1 §4 — never composed by arithmetic. The train adds EIGHT test files (foreignSeatResolver, foreignSeatDormancy.byteIdentity, warSeatBooksPartition, foreignPrimacyAxis, foreignSeatCoupAdj, seatIntervention, occupationPosture, anticipatedReactions), one per car plus SEAT-1s batched pair; the four existing suites it edits were untouched by the 87 landed commits, so no title interacts.",
-  "files": 2450,
+  "note": "Three new test files across two cars: occupationLiberationUninstall (SEAT-5, the liberation un-install) and legitimacyUpheaval + legitimacyUpheavalDormancy.byteIdentity (SEAT-2b, the D4 attempt sensitivity and its raw-byte dormancy pin). Re-derived WHOLE at the lane terminal per LANE_LAW_ADDENDUM section 4, not per car.",
+  "files": 2453,
   "parked": 370,
-  "credited": 2080,
-  "titles": 21043,
-  "suiteTitles": 5788
+  "credited": 2083,
+  "titles": 21077,
+  "suiteTitles": 5800
 }
