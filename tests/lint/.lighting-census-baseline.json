@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a92e5ae8cc2d1d3b6e8322375bda3c8b7e6ad243",
-  "measuredBy": "W-LIVES-L1 (Opus 5)",
+  "measuredAtSha": "f98694e9a0f675b2aa86f049c0859e252b962147",
+  "measuredBy": "Opus 5 (lane W-FAITH F1c)",
   "date": "2026-08-31",
-  "note": "W-LIVES car L1 added tests/domain/npc/paradigmAxisCatalog.test.js (the axis-catalog consolidation pins), credited",
-  "files": 2442,
+  "note": "W-FAITH F1c added tests/domain/deityAuthoredCharacter.test.js (62 statically registered tests in 8 describes) and 15 cases to the existing customContentDeities pglite suite",
+  "files": 2443,
   "parked": 370,
-  "credited": 2072,
-  "titles": 20862,
-  "suiteTitles": 5747
+  "credited": 2073,
+  "titles": 20924,
+  "suiteTitles": 5755
 }
