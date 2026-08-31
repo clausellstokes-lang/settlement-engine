@@ -59,18 +59,20 @@
  *                          which was a SECOND spelling of this question living at one call
  *                          site (the L10-L12 class this module exists to end).
  *   `raise dead`         — "Resurrection services … Raise dead. Expensive, not guaranteed"
- *   `cure … wounds`      — "Cure light wounds" (institutionServices, `Healer (divine, 1st
- *                          level)`). The severity words are ENUMERATED rather than `\w+` so
- *                          an apothecary that cures infected wounds is not convicted by a
- *                          wildcard. ⚠ ITS SECOND RECEIPT WAS SPENT BY TE-AGNOSTIC-1 — see
- *                          the note below.
- *   `lesser restoration` — ⚠⚠ RECEIPTLESS SINCE TE-AGNOSTIC-1 (ODQ §857) AND DELIBERATELY
- *                          RETAINED. Its receipt was the Druid Circle's
- *                          "Cure Wounds, Lesser Restoration. Slower than divine.", a pair of
- *                          rulebook proper nouns the setting-agnostic wave rewrote to
- *                          "Wounds closed and sickness lifted by magic." (the row still
- *                          asserts, through `magic` instead — measured, 4,609 authored
- *                          strings answer identically across that rewrite).
+ *   `cure … wounds`      — ⚠⚠ RECEIPTLESS SINCE TE-AGNOSTIC-1 (ODQ §857). Its two receipts
+ *                          were the Druid Circle's "Cure Wounds, Lesser Restoration…" and
+ *                          the service NAME "Cure light wounds"; the setting-agnostic wave
+ *                          spent both. The severity words remain ENUMERATED rather than
+ *                          `\w+` so an apothecary that cures infected wounds is not
+ *                          convicted by a wildcard.
+ *   `lesser restoration` — ⚠⚠ RECEIPTLESS SINCE TE-AGNOSTIC-1 for the same reason. Both
+ *                          rows still assert: the desc became "Wounds closed and sickness
+ *                          lifted by magic." and asserts through `magic`, and the renamed
+ *                          service `Wound closing` is gated on its NAME PLUS DESC, where
+ *                          "Basic divine healing." carries `divine healing`. Measured, not
+ *                          argued: 4,609 authored strings answer identically across the
+ *                          rewrite, and the gate itself (generationContext.allowsService)
+ *                          reads `name + desc`, never a name alone.
  *
  * ⛔⛔ SO THE HEADING'S CLAIM IS NOW NARROWER THAN IT READS, AND DELETING A RECEIPTLESS TOKEN
  * WOULD BE A REAL REGRESSION. This predicate does not only read THIS repo's corpus:

@@ -139,7 +139,7 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Wizard Tower": {
-    "Spellcasting (1st-3rd level)": { on: true, p: 0.8, desc: "Cantrips, light spells, minor enchantments for coin" },
+    "Spellcasting (minor)": { on: true, p: 0.8, desc: "Cantrips, light spells, minor enchantments for coin" },
     "Magical identification": { on: true, p: 0.9, desc: "Identify magical items, detect curses" },
     "Magical research access": { on: false, p: 0.5, desc: "Use library, consult wizard" },
     "Arcane scribing": { on: true, p: 0.6, desc: "Scroll creation, spell copying" }
@@ -169,7 +169,7 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Spellcasting Services": {
-    "Spellcasting (1st-8th level)": { on: true, p: 0.9, desc: "Near-full arcane capability available for hire" },
+    "Spellcasting (greater)": { on: true, p: 0.9, desc: "Near-full arcane capability available for hire" },
     "Teleportation": { on: false, p: 0.5, desc: "Long-distance instant travel for paying clients" },
     "Divination and scrying": { on: true, p: 0.7, desc: "Locate persons, find objects, read intentions" },
     "Resurrection services": { on: false, p: 0.4, desc: "Raise dead. Expensive, not guaranteed" }
@@ -1564,7 +1564,7 @@ export const INSTITUTION_SERVICES = {
     "Night watch": { on: true, p: 0.8, desc: "Continuous observation through the night." }
   },
   "Healer (divine, 1st level)": {
-    "Cure light wounds": { on: true, p: 1.0, desc: "Basic divine healing. Closes cuts, reduces fever, eases pain." },
+    "Wound closing": { on: true, p: 1.0, desc: "Basic divine healing. Closes cuts, reduces fever, eases pain." },
     "Purify food and water": { on: true, p: 0.8, desc: "Remove contamination from food and water through divine blessing." },
     "Remove minor disease": { on: false, p: 0.6, desc: "Treat common illnesses through divine intervention." },
     "Bless": { on: false, p: 0.5, desc: "Divine blessing for journeys, battles, or important undertakings." }

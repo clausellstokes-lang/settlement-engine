@@ -560,7 +560,7 @@ export const SERVICE_CATEGORY_MAP = {
   'Nature magic services': 'magic',
   'Planar services': 'magic',
   'Potions and elixirs': 'magic',
-  'Spellcasting (1st-3rd level)': 'magic',
+  'Spellcasting (minor)': 'magic',
   'Spellcasting services (1st-6th)': 'magic',
   'Utility enchantments': 'magic',
   'Weapon enchantment': 'magic',

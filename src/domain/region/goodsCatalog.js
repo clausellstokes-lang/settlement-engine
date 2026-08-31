@@ -536,7 +536,7 @@ function preferTradeLabel(a, b, entry) {
  * Only catalog GOODS merge across different spellings, and only on an EXACT
  * alias hit — a fuzzy token-overlap match is a guess, not an identity, so a
  * fuzzy-only label stays verbatim like an unrecognized one. Services
- * collapse only on identical text: "Spellcasting (1st-3rd level)" and
+ * collapse only on identical text: "Spellcasting (minor)" and
  * "Magical identification" both canonicalize to arcane_services, but they
  * are genuinely distinct exports — merging them would erase real variety.
  * Unrecognized labels get the same identical-text-only rule, annotations
