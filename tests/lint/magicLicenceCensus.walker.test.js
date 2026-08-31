@@ -40,7 +40,7 @@
  *
  * ⚠ `Healer (divine, 1st level)` IS DELIBERATELY HELD AT `low`, AND THE PREMISE IS REFUTED
  * FOR THAT ROW. Executed against the estate's own prose detector,
- * `textAssertsFunctionalMagic('Basic healing spells. Cure Wounds (10 GP).')` is TRUE: the
+ * `textAssertsFunctionalMagic('Basic healing spells. A closed wound costs 10 in gold.')` is TRUE: the
  * entry as authored is a first-level SPELLCASTER filed under faith, not a cultural healer
  * wrongly convicted. The doctrine gap it exposes is real but it is a CONTENT gap — the
  * catalog holds no cultural divine healer for a magic-free world to keep — and filling it is
@@ -162,9 +162,9 @@ const DECLARED_LICENCES = Object.freeze({
  *
  * ⭐ TE-CH-6 OWNED IT AND LEFT IT STANDING ANYWAY, WHICH IS A VERDICT AND NOT A DEFERRAL.
  * The row's own authored prose asserts functional magic — the estate's shared detector says
- * `textAssertsFunctionalMagic('Basic healing spells. Cure Wounds (10 GP).') === true` — so
+ * `textAssertsFunctionalMagic('Basic healing spells. A closed wound costs 10 in gold.') === true` — so
  * the entry is a first-level SPELLCASTER filed on a faith shelf. The licence is honest about
- * it and dropping it to `none` would put a Cure Wounds caster in a world with no spells.
+ * it and dropping it to `none` would put a healing spellcaster in a world with no spells.
  * The doctrine gap is that the catalog holds no CULTURAL divine healer at all; that is a
  * content gap and a new row, not a value in this table. Recorded in ODQ, not swallowed here.
  */
@@ -522,7 +522,7 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
       'Treat common illnesses through divine intervention.',
       'Remove contamination from food and water through divine blessing.',
       'Resurrection services Raise dead. Expensive, not guaranteed',
-      'Cure Wounds, Lesser Restoration. Slower than divine.',
+      'Wounds closed and sickness lifted by magic. Slower than divine.',
       'Induce prophetic dream states. Visions are real but not always interpretable.',
     ]) expect(textAssertsFunctionalMagic(claim), claim).toBe(true);
     // AND THE OTHER POLARITY, which is the doctrine and is the reason the tokens are
@@ -548,8 +548,8 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     // bare `divination` token would have convicted two rows written to prove magic is not
     // needed. This is why `divination` and `miracle` are not members.
     expect(textAssertsFunctionalMagic(
-      "'Divination' with no magic in it, worked by Deception. 1-5 GP.")).toBe(false);
+      "'Divination' with no magic in it, worked by Deception. 1-5 in gold.")).toBe(false);
     expect(textAssertsFunctionalMagic(
-      "Non-magical 'divination' using Deception. 1-5 GP.")).toBe(false);
+      "Non-magical 'divination' using Deception. 1-5 in gold.")).toBe(false);
   });
 });

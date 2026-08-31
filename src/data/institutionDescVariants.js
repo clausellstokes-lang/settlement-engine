@@ -15,8 +15,8 @@
  */
 export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   "city|Adventuring|Dungeon delving supply district": [
-    "Specialised kit for the delving trade. +1 weapons, silver weapons, and the like.",
-    "Gear for those who go underground. +1 weapons, silver weapons, and such.",
+    "Specialised kit for the delving trade. Warded weapons, silver weapons, and the like.",
+    "Gear for those who go underground. Warded weapons, silver weapons, and such.",
   ],
   "city|Adventuring|Mercenary quarter": [
     "Sellsword companies under proper organisation, mustering hundreds to thousands.",
@@ -215,8 +215,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Fights unlawful or half-lawful, staged in hidden places.",
   ],
   "city|Entertainment|Gambling district": [
-    "Gaming houses packed together, kept honest by Zone of Truth.",
-    "A concentration of gaming houses, with Zone of Truth to enforce fair play.",
+    "Gaming houses packed together, kept honest by compelled truth.",
+    "A concentration of gaming houses, with compelled truth to enforce fair play.",
   ],
   "city|Entertainment|Gambling halls": [
     "Houses given wholly to play. Not all of them lawful.",
@@ -247,16 +247,16 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "The city is home to an ancient dragon.",
   ],
   "city|Exotic|Dream parlors (high magic)": [
-    "Experiences worked by the 5th level Dream spell: lucid dreams shared between minds, and speech within them.",
-    "The 5th level Dream spell sold as experience, offering shared lucid dreaming and communication through it.",
+    "Experiences worked by dream-walking magic: lucid dreams shared between minds, and speech within them.",
+    "Dream-walking magic sold as experience, offering shared lucid dreaming and communication through it.",
   ],
   "city|Exotic|Golem workforce": [
     "Constructed servants, where the magic allows them.",
     "Servants made rather than born, if magic permits it.",
   ],
   "city|Exotic|Message network (high magic)": [
-    "A network of Sending Stones, or else Speaking Stones. A station runs 250 to 10,000 GP.",
-    "Paired Sending Stones or Speaking Stones, wired into a network. Each station costs from 250 to 10,000 GP.",
+    "A network of Speaking Stones, paired and set in place. A station runs 250 to 10,000 in gold.",
+    "Paired Speaking Stones, wired into a network. Each station costs from 250 to 10,000 in gold.",
   ],
   "city|Exotic|Planar traders": [
     "Wares carried in from other planes.",
@@ -339,8 +339,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "An association of magic-workers. Sustaining a chapter takes 2,000-5,000 population.",
   ],
   "city|Magic|Scroll scribe": [
-    "Spell scrolls sold across the counter, from 25 GP for a cantrip to 500 GP and up for a 3rd-level spell.",
-    "Scrolls for sale: a cantrip runs 25 GP, a 3rd-level spell 500 GP or more.",
+    "Spell scrolls sold across the counter, from 25 in gold for the smallest charm to 500 and up for a greater working.",
+    "Spell scrolls for sale: the smallest charm runs 25 in gold, a greater working 500 or more.",
   ],
   "city|Magic|Teleportation circle": [
     "A permanent teleportation circle. Its use is restricted and its upkeep dear, but any settlement fortunate enough to hold one is transformed by it.",
@@ -503,8 +503,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Chartered by the region's adventuring order and little more than a rough hall for it. Bounties go up on its board, monster hunters bed down inside, and when the garrison falls short it musters the defence. A frontier fixture where the country is dangerous.",
   ],
   "hamlet|Magic|Traveling hedge wizard": [
-    "Turns up now and then. Nothing above 1st-level spells.",
-    "Comes by on occasion. 1st-level magic and no higher.",
+    "Turns up now and then. Nothing above the smallest spells.",
+    "Comes by on occasion. The smallest magic and no higher.",
   ],
   "hamlet|Religious|Access to parish church": [
     "The nearest church is the village's, a typical 2-5km off.",
@@ -695,12 +695,12 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Horses, dogs, and falcons. Nothing more exotic.",
   ],
   "town|Adventuring|Charlatan fortune tellers": [
-    "'Divination' with no magic in it, worked by Deception. 1-5 GP.",
-    "Fortunes told by Deception rather than any real magic. A charge of 1-5 GP.",
+    "'Divination' with no magic in it, worked by Deception. 1-5 in gold.",
+    "Fortunes told by Deception rather than any real magic. A charge of 1-5 in gold.",
   ],
   "town|Adventuring|Hireling hall": [
-    "A board hiring out torchbearers at 1 GP a session and porters at 5.",
-    "Where torchbearers (1 GP/session) and porters (5 GP/session) take on work.",
+    "A board hiring out torchbearers at 1 in gold a session and porters at 5.",
+    "Where torchbearers (1 in gold a session) and porters (5 in gold a session) take on work.",
   ],
   "town|Adventuring|Merchant warehouses": [
     "Storage for merchants' goods held back for sale, transit, or the season's distribution. No trade-route settlement does without it.",
@@ -987,8 +987,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "The seat of assembly and administration.",
   ],
   "town|Magic|Alchemist shop": [
-    "Potions and alchemical wares. A basic healing draught runs 50 GP.",
-    "Alchemy and its bottled results, healing potions among them at 50 GP for the plain sort.",
+    "Potions and alchemical wares. A basic healing draught runs 50 in gold.",
+    "Alchemy and its bottled results, healing potions among them at 50 in gold for the plain sort.",
   ],
   "town|Magic|Elder Grove Council": [
     "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with nature's magic.",
@@ -1235,12 +1235,12 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Druids gathered in a circle and rooted to the country around them, ordering the seasons, mediating quarrels with wild creatures, and knowing the clean streams from the foul. Forested and remote places suit them best, yet they bend to circumstance. A few keep city gardens or concealed urban groves.",
   ],
   "village|Magic|Healer (divine, 1st level)": [
-    "Simple healing prayers. Cure Wounds runs 10 GP.",
-    "Basic curative magic. A Cure Wounds costs 10 GP.",
+    "Simple healing prayers. Divine healing closes a wound for 10 in gold.",
+    "Basic curative magic. A closed wound costs 10 in gold.",
   ],
   "village|Magic|Hedge wizard": [
-    "A modest resident spellcaster. 1st to 3rd level spells.",
-    "A minor caster who lives here. Spells of 1st through 3rd level.",
+    "A modest resident spellcaster. Minor spells only.",
+    "A minor caster who lives here. Minor spells and no greater.",
   ],
   "village|Religious|Graveyard": [
     "Hallowed ground about the church.",

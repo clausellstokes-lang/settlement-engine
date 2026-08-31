@@ -855,7 +855,7 @@ export const POWER_ROLES_BY_CATEGORY = {
       requiresInstKeyword: ['druid', 'elder grove', "warden's lodge"],
     },
     {
-      role: 'Warlock/Pact-Bound',
+      role: 'Warlock/Bargain-Sworn',
       title: 'sorcerer',
       priority: 6,
       minTier: 'town',

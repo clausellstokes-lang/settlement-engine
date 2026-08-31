@@ -454,7 +454,7 @@ export const GATE_FEATURES = {
   },
   "Teleportation circle": {
     minTier: "town",
-    reason: "Permanent teleportation requires substantial magical investment. Cost: 18,250 GP to create."
+    reason: "Permanent teleportation requires substantial magical investment. Cost: 18,250 in gold to create."
   },
   "Golem workforce": {
     minTier: "city",
@@ -469,7 +469,7 @@ export const GATE_FEATURES = {
   "Dream parlors (high magic)": {
     minTier: "metropolis",
     requires: ["Mages' district", "Academy of magic"],
-    reason: "5th-level Dream spell services require metropolis population (25,000+) and powerful casters."
+    reason: "Dream-walking magic services require metropolis population (25,000+) and powerful casters."
   },
   "Airship docking (high magic)": {
     minTier: "metropolis",
@@ -479,7 +479,7 @@ export const GATE_FEATURES = {
   "Message network (high magic)": {
     minTier: "metropolis",
     requires: ["Mages' guild", "Banking houses"],
-    reason: "Sending Stone networks require institutional coordination and 250\u201310,000 GP per station."
+    reason: "Speaking Stone networks require institutional coordination and 250\u201310,000 in gold per station."
   },
   "Planar embassy": {
     minTier: "metropolis",

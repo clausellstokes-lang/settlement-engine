@@ -246,7 +246,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   const magicFoodNoteFor = () =>
     hasDruidFood ? 'Druidic cultivation provides partial food supplement'
       : hasDivineFood ? 'Divine provision supplements food shortfall'
-        : hasArcaneFood ? 'Arcane Plant Growth provides minor food supplement'
+        : hasArcaneFood ? 'Arcane quickening of growth provides minor food supplement'
           : '';
   let magicFoodOffset = 0;
   let magicFoodNote = '';

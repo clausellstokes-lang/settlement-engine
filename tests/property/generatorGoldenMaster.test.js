@@ -175,7 +175,7 @@
  *   `arcane` tag beside their `religious` one and re-licensed `low` → `none`, so tag and
  *   licence AGREE in the data rather than being ordered by a rule — the TE-CH-5 shape.
  *     ⚠ `Healer (divine, 1st level)` IS HELD AT `low` AND §541.8's PREMISE IS REFUTED FOR IT.
- *     `textAssertsFunctionalMagic('Basic healing spells. Cure Wounds (10 GP).')` is TRUE, so
+ *     `textAssertsFunctionalMagic('Basic healing spells. A closed wound costs 10 in gold.')` is TRUE, so
  *     the entry as authored is a first-level SPELLCASTER filed under faith. The doctrine gap
  *     it exposes is a CONTENT gap — the catalog holds no cultural divine healer — not a
  *     licence value, and it is recorded rather than papered over.

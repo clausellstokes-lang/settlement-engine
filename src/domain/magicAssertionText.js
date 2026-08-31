@@ -59,10 +59,27 @@
  *                          which was a SECOND spelling of this question living at one call
  *                          site (the L10-L12 class this module exists to end).
  *   `raise dead`         — "Resurrection services … Raise dead. Expensive, not guaranteed"
- *   `cure … wounds`      — "Cure Wounds, Lesser Restoration" and "Cure light wounds". The
- *                          severity words are ENUMERATED rather than `\w+` so an apothecary
- *                          that cures infected wounds is not convicted by a wildcard.
- *   `lesser restoration` — same row; kept so a future row naming it alone is still caught.
+ *   `cure … wounds`      — "Cure light wounds" (institutionServices, `Healer (divine, 1st
+ *                          level)`). The severity words are ENUMERATED rather than `\w+` so
+ *                          an apothecary that cures infected wounds is not convicted by a
+ *                          wildcard. ⚠ ITS SECOND RECEIPT WAS SPENT BY TE-AGNOSTIC-1 — see
+ *                          the note below.
+ *   `lesser restoration` — ⚠⚠ RECEIPTLESS SINCE TE-AGNOSTIC-1 (ODQ §857) AND DELIBERATELY
+ *                          RETAINED. Its receipt was the Druid Circle's
+ *                          "Cure Wounds, Lesser Restoration. Slower than divine.", a pair of
+ *                          rulebook proper nouns the setting-agnostic wave rewrote to
+ *                          "Wounds closed and sickness lifted by magic." (the row still
+ *                          asserts, through `magic` instead — measured, 4,609 authored
+ *                          strings answer identically across that rewrite).
+ *
+ * ⛔⛔ SO THE HEADING'S CLAIM IS NOW NARROWER THAN IT READS, AND DELETING A RECEIPTLESS TOKEN
+ * WOULD BE A REAL REGRESSION. This predicate does not only read THIS repo's corpus:
+ * `customContent.js` and `arcaneIdentity.js` run it over USER-AUTHORED names and prose, which
+ * no wave here controls, and a player writing "Lesser Restoration" on a custom institution is
+ * exactly the claim a magic-free world must not make. A token whose corpus receipt a content
+ * wave spends therefore stays; what must be re-derived is this LIST, not the pattern. Re-derive
+ * by scanning the shipped corpora for each alternative, never by reasoning about which rows
+ * "probably" still say it.
  *   `prophetic dreams`   — "Prophetic dreams … Divination through induced vision states" and
  *                          "Induce prophetic dream states. Visions are real…". The second
  *                          says the visions ARE REAL, which is the functional claim itself.
