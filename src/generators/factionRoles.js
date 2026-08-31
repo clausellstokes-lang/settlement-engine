@@ -22,6 +22,7 @@ import {
 } from '../domain/content/customContentSemanticAuthority.js';
 import { factionDisplayNameOf, factionRefOf } from '../domain/factionRefs.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
+import { rollsRegisterVii } from './density/densityLaw.js';
 
 // inferImportance is not used directly here yet — kept on the import
 // graph for future expansion where archetype rules read existing NPC
@@ -272,6 +273,19 @@ export function ensureFactionStructuralNpcs(
   generationContext = null,
 ) {
   if (!settlement) return settlement;
+  // ── ODQ §817-Q1: UNDER THE REGISTER VII DENSITY LAW THIS APPENDER IS OFF ────
+  // Not disabled as cleanup — SUPERSEDED. §810.2's two-stage roll gives every
+  // seated faction ≥1 member (R17's atomic mint) and rolls one of them its head,
+  // so office coverage has become a CONSTRAINT ON THE ROLL. A post-roll appender
+  // cannot coexist with §810.2b's hard mass band: R-DENSITY-CENSUS §4 #6
+  // measured this function pushing 15 of 60 thorps ABOVE the candidate band by
+  // construction, while their *pipeline* mass was 60/60 inside it. The band did
+  // not move; the coverage did.
+  //
+  // A world whose own config carries no density-law marker takes the pre-law
+  // path below, unchanged — this is a version gate, not a deletion, and every
+  // existing world keeps its structural office-holders verbatim.
+  if (rollsRegisterVii(settlement.config || settlement._config || {})) return settlement;
   const worldLaw = resolveGenerationWorldLaw(
     generationContext,
     settlement.config || settlement._config || {},

@@ -21,6 +21,10 @@ import { generateDefenseProfile } from '../defenseGenerator.js';
 // watch captain, etc.) for any faction archetype that lacks them. Runs
 // at assembly so existing pipeline NPCs are deduplicated against.
 import { ensureFactionStructuralNpcs } from '../factionRoles.js';
+// ODQ §810's tier-gated density law: sizes the political roster to the tier's
+// faction band. Dormant (returns its input by reference, no draw) for any world
+// whose own config carries no density-law marker.
+import { resizePoliticalRoster } from '../density/applyDensityLaw.js';
 // Canonical-shape adapter (Tier 1.3). Stamps version fields, mints a
 // stable id, defaults canonical containers. Pure — does not restructure
 // legacy fields. Every freshly-generated settlement passes through here
@@ -221,6 +225,34 @@ registerStep('assembleSettlement', {
     settlement.economicState,
     tier,
   );
+
+  // ── ODQ §810 SEAM 1b: size the political roster to the tier's faction band.
+  //
+  // ⛔ IT HAS TO BE HERE, AFTER RECONCILIATION. `reconcilePowerStructure` REPLAYS
+  // the whole power generation and asserts the faction identity roster is
+  // unchanged (`assertStableGeneratedRoster`), then rebuilds the roster from the
+  // replay — so a resize at the population step both throws and is undone.
+  // Measured the hard way: the first wiring of this law trimmed at the
+  // population step and that guard convicted it.
+  //
+  // Runs BEFORE generateCoherence below, which is where the dispersal reads the
+  // roster. Version-gated: a world whose own config carries no density-law
+  // marker gets its powerStructure back by reference, with no draw taken.
+  const resized = resizePoliticalRoster({
+    tier,
+    config: settlement.config,
+    stress: settlement.stress,
+    powerStructure: settlement.powerStructure,
+    economicState: settlement.economicState,
+    // The roster the population step actually produced is the TRUE mass here,
+    // so the seat ceiling (R17: a house the mass cannot crew must not exist) is
+    // computed against a fact rather than against a second mass roll.
+    massOverride: (settlement.npcs || []).length,
+    rng,
+  });
+  if (resized.powerStructure !== settlement.powerStructure) {
+    settlement.powerStructure = resized.powerStructure;
+  }
 
   // Coherence mutates canonical NPC/faction mechanics. Give it a dedicated
   // stream so variable draw counts in pressure/arrival/defense presentation

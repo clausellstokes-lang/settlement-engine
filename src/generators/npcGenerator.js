@@ -17,6 +17,7 @@ import { drawUnique } from './hookVariety.js';
 import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
+import { legacyMassRange } from './density/densityLaw.js';
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js';
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
@@ -199,16 +200,11 @@ const computeNPCWeights = (config = {}, institutions = []) => {
   return weights;
 };
 
-// getNPCCountRange
-const getNPCCountRange = r =>
-  ({
-    thorp: { min: 2, max: 3 },
-    hamlet: { min: 3, max: 5 },
-    village: { min: 4, max: 7 },
-    town: { min: 6, max: 10 },
-    city: { min: 10, max: 15 },
-    metropolis: { min: 15, max: 20 },
-  })[r] || { min: 6, max: 10 };
+// getNPCCountRange — the v1 named-NPC mass band. The TABLE now lives in
+// density/densityLaw.js as LEGACY_MASS_RANGE, so both generation laws' mass
+// bands have one home, each labelled by its version. Values unchanged; the
+// unknown-tier fallback is still the town row.
+const getNPCCountRange = legacyMassRange;
 
 // formatNPCForDisplay
 const _formatNPCForDisplay = (r, s, o, d) => {
@@ -1440,12 +1436,19 @@ export const generateNPCs = (
   culture = 'germanic',
   config = {},
   generationContext = null,
+  massTarget = null,
 ) => {
   const { tier, institutions } = settlement;
   const worldLaw = resolveGenerationWorldLaw(generationContext, config);
   const weights = { ...computeNPCWeights(config, institutions), tradeRouteAccess: config?.tradeRouteAccess || 'road' };
   const { min, max } = getNPCCountRange(tier);
-  const targetCount = Math.max(randInt(min, max), Number(config?._minNpcCount) || 0);
+  // ⛔ THE ROLL IS UNCONDITIONAL. `massTarget` (ODQ §810's tier-gated mass band,
+  // supplied only under the Register VII density law) overrides the RESULT, never
+  // the draw — so a v1 world's stream position here, and everything downstream of
+  // it, is character-for-character what it always was. `getNPCCountRange`'s table
+  // IS the v1 mass band and stays the authority for every pre-law world.
+  const rolledCount = Math.max(randInt(min, max), Number(config?._minNpcCount) || 0);
+  const targetCount = Number(massTarget) > 0 ? Math.round(Number(massTarget)) : rolledCount;
   const npcs = [];
   // Settlement-scoped anti-repetition draw registry: shared across EVERY NPC in
   // this population, so the same loyalty STRING is never emitted twice (`titles`,

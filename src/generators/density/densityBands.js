@@ -1,0 +1,218 @@
+/**
+ * densityBands.js — THE TUNING SURFACE for the tier-gated political-density law
+ * (ODQ §§810–810.4, Register VII). ONE HOME for every number the law rolls
+ * within, so the owner's tuning signature lands in a single file (car D4).
+ *
+ * ⛔ EVERY VALUE IN THIS FILE IS A DRAFT. The chair's candidate ladder is
+ * recorded here as the machinery's DEFAULT so the roll is runnable and
+ * testable end to end; the numbers are signed LAST (the tuning-is-last law,
+ * ODQ §810 R5: "the machinery is chartered NOW …, the numbers are signed
+ * LAST"). Nothing outside this file may hard-code a band, a ceiling or a
+ * weight — `densityRoll.js` and `densityRungs.js` are deliberately
+ * band-AGNOSTIC and read every quantity from here, so retuning is an edit to
+ * this file alone and never a code change.
+ *
+ * THE BAND'S EDGES ARE BELIEVABILITY ASSERTIONS (§810.2b): a range endpoint is
+ * not a performance bound, it is a claim about what a settlement of that size
+ * can plausibly be. A thorp can never roll seven named figures; a metropolis
+ * never rolls two. The roll explores the envelope and structurally cannot leave
+ * it — `tests/generators/densityDistributionShape.test.js` asserts real entropy
+ * INSIDE every band and ZERO mass outside it.
+ *
+ * Pure data. No RNG, no imports from the roll, no React, no store.
+ */
+
+/** Tier order, smallest first. The one canonical spelling for this module family. */
+export const TIER_ORDER = Object.freeze([
+  'thorp', 'hamlet', 'village', 'town', 'city', 'metropolis',
+]);
+
+/** The importance vocabulary, weakest first. Mirrors `IMPORTANCE_WEIGHT` in
+ *  `domain/entities/npcs.js` (minor 0.0 · notable 0.4 · key 0.7 · pillar 1.0) —
+ *  that module stays the single resolver; this is only the ORDER the rung
+ *  mapping walks. */
+export const IMPORTANCE_ORDER = Object.freeze([
+  'minor', 'notable', 'key', 'pillar',
+]);
+
+/**
+ * Register VII's ladder. Per tier:
+ *
+ *   factions       — the settlement's POWER-SEAT count roll range
+ *                    (`powerStructure.factions`; §817-Q6 confirmed that list,
+ *                    not the `settlement.factions` NPC-grouping list).
+ *   mass           — the settlement's NAMED-NPC mass roll range. §817-Q1: this
+ *                    band governs the WHOLE named roster, structural office
+ *                    holders INCLUDED — which is why office coverage is a
+ *                    CONSTRAINT ON THE ROLL and never a post-roll append.
+ *   doubledNiches  — §810 R4's intra-power rivals: how many power niches may
+ *                    carry TWO contesting factions. Zero below city.
+ *   suite          — the per-faction roster size the dispersal aims at when
+ *                    mass allows ("a full suite of NPCs" at city+).
+ *   rivalBonusSeat — §810 R3's CONDITIONAL seat, written into Register VII's
+ *                    thorp row as the literal "1 (+1 conditional)". One extra
+ *                    seat ABOVE the rolled count, and only when §810.4 R16's
+ *                    weighted rival roll actually takes it. It is 1 at thorp
+ *                    because the thorp band has no width for a rival to win a
+ *                    slot inside; at every larger tier the band already has
+ *                    room, so the rival competes for an existing seat and this
+ *                    is 0. The believability envelope therefore reads
+ *                    [factions.min, factions.max + rivalBonusSeat] — declared
+ *                    here, asserted by the distribution-shape fixture, never
+ *                    an implicit overflow.
+ *
+ * MEASURED CONTEXT (R-DENSITY-CENSUS §5, 360 settlements at b85044099): today's
+ * generator sits 100% ABOVE the faction band at hamlet/village/town and 40% of
+ * metropolises sit BELOW the mass floor. This ladder is a real two-directional
+ * move, not a ratification — which is exactly why it lands behind a version
+ * gate rather than as an in-place retune.
+ */
+export const DENSITY_BANDS = Object.freeze({
+  thorp:      Object.freeze({ factions: { min: 1, max: 1 }, mass: { min: 1,  max: 3  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 1 }),
+  hamlet:     Object.freeze({ factions: { min: 1, max: 2 }, mass: { min: 2,  max: 4  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
+  village:    Object.freeze({ factions: { min: 2, max: 3 }, mass: { min: 3,  max: 6  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
+  town:       Object.freeze({ factions: { min: 3, max: 5 }, mass: { min: 6,  max: 10 }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
+  city:       Object.freeze({ factions: { min: 5, max: 8 }, mass: { min: 12, max: 20 }, doubledNiches: { min: 1, max: 2 }, suite: { min: 2, max: 3 }, rivalBonusSeat: 0 }),
+  metropolis: Object.freeze({ factions: { min: 7, max: 10 }, mass: { min: 18, max: 30 }, doubledNiches: { min: 1, max: 2 }, suite: { min: 2, max: 3 }, rivalBonusSeat: 0 }),
+});
+
+/** The band used for a tier this table does not name (custom/legacy spellings).
+ *  Deliberately the TOWN row — the middle of the ladder — so an unknown tier
+ *  degrades to a plausible settlement rather than to a thorp or a metropolis. */
+export const FALLBACK_TIER = 'town';
+
+/**
+ * §810.2 R11's RANK CEILING, per tier: the highest importance band a named
+ * figure may carry at this scale. "A thorp's head is at most notable; no
+ * pillars below town."
+ *
+ * MEASURED CONTEXT: `FACTION_ROLES` (generators/factionRoles.js) assigns
+ * pillar/key importances TIER-BLIND, which is why the census found 74 pillar
+ * NPCs below town (7 thorps, 22 hamlets, 37 villages). Under this law the
+ * ceiling is applied by `densityRungs.js` at the one place importance is
+ * stamped, so a tier-blind role table can no longer out-rank its settlement.
+ */
+export const RANK_CEILING_BY_TIER = Object.freeze({
+  thorp: 'notable', hamlet: 'notable', village: 'key',
+  town: 'pillar', city: 'pillar', metropolis: 'pillar',
+});
+
+/**
+ * §817-Q3, the chair's disposition: **an OCCUPIED head rung always rolls
+ * ≥ notable** — head ∈ [notable, tier ceiling]. An authored VACANCY may leave
+ * the planes dark; that is the receipted story-state, not an accident.
+ *
+ * This is the value that answers census consumer #3 (`clergyTraitPlane`'s
+ * ORG_POWER minor=0 floor, which mirrors `religionLegitimacy.orgPower` and
+ * shares the 0.4 threshold with `npcLadderState.RUNG_ELIGIBLE_FLOOR`): an
+ * occupied temple head is notable+ ⇒ weight ≥ 0.4 ⇒ the plane lights.
+ */
+export const HEAD_RUNG_FLOOR = 'notable';
+
+/**
+ * §810.2 R11's VACANCY WEIGHTS — the probability each rung is EMPTY at birth.
+ * "The VACANCY-PLUS-YEARNER pattern (no head priest, but one who aches for the
+ * seat) is deliberately over-weighted because it is the best story the
+ * generator can plant."
+ *
+ * `yearnerGivenHeadVacant` is that over-weight: given a vacant head, this is
+ * the chance the roll seeds a yearner one band below with `seek_promotion`
+ * pre-loaded rather than simply leaving the faction thin.
+ */
+export const VACANCY_WEIGHTS = Object.freeze({
+  head:   0.18,
+  middle: 0.35,
+  lowest: 0.30,
+  yearnerGivenHeadVacant: 0.75,
+});
+
+/**
+ * How the settlement's PARTICULARS tilt the rolls within the band (§810 R1:
+ * "a poor town may roll like a village, a rich crossroads village like a
+ * town"). Each entry is the maximum fraction of the band's WIDTH a particular
+ * may shift the roll's centre — the tilt moves the mean, it never moves the
+ * EDGES, so the believability envelope is untouched by construction.
+ *
+ * `vacancyTilt` is §810.2's "a poor or shrinking place runs understaffed; a
+ * prosperous one fills its benches" — a multiplier on the vacancy weights.
+ */
+export const PARTICULAR_TILTS = Object.freeze({
+  prosperity:   0.20,
+  connectivity: 0.12,
+  war:         -0.15,
+  corruption:  -0.08,
+  vacancyTilt:  0.45,
+});
+
+/**
+ * §810.4 R16 — THE RIVAL ROLL, WEIGHTED NOT GRANTED. A power out-influencing
+ * the ruling power gains a STRONGER roll for a faction of its own, the weight
+ * scaling with the influence gap; it is never a grant ("sometimes the
+ * out-influenced throne stands unchallenged — that too is a world").
+ *
+ *   base   — the chance a rival power with a ZERO gap takes a seat it would
+ *            not otherwise have won.
+ *   perGap — added per unit of normalised influence gap (0..1).
+ *   cap    — the ceiling; strictly below 1 so the roll can always decline.
+ */
+export const RIVAL_ROLL = Object.freeze({ base: 0.22, perGap: 0.55, cap: 0.88 });
+
+/**
+ * §810.2 R10's dispersal: "concentration FOLLOWS power without ever being
+ * determined by it." The partition weights each faction by its power raised to
+ * `concentrationExponent`; the exponent itself is ROLLED per settlement in
+ * [min, max], which is what makes all-in-the-ruling-power, spread-one-each and
+ * everything between reachable from the same law.
+ *
+ *   0  ⇒ power-blind (flat) — the spread-one-each end
+ *   1  ⇒ strictly power-proportional (today's `factionTarget` behaviour)
+ *   >1 ⇒ winner-takes-most — the all-in-one end
+ */
+export const CONCENTRATION = Object.freeze({ min: 0.0, max: 2.6 });
+
+/** @param {string|null|undefined} tier @returns {string} the canonical tier key */
+export function tierKey(tier) {
+  const t = String(tier || '').toLowerCase();
+  return TIER_ORDER.includes(t) ? t : FALLBACK_TIER;
+}
+
+/** The whole band row for a tier (never undefined — unknown tiers fall back).
+ *  @param {string|null|undefined} tier */
+export function bandsForTier(tier) {
+  return DENSITY_BANDS[tierKey(tier)];
+}
+
+/** The rank ceiling for a tier. @param {string|null|undefined} tier @returns {string} */
+export function rankCeilingForTier(tier) {
+  return RANK_CEILING_BY_TIER[tierKey(tier)] || 'pillar';
+}
+
+/** Index of an importance band in IMPORTANCE_ORDER, or -1.
+ *  @param {string|null|undefined} importance @returns {number} */
+export function importanceIndex(importance) {
+  return IMPORTANCE_ORDER.indexOf(String(importance || '').toLowerCase());
+}
+
+/** The believability envelope for a tier's FACTION COUNT, §810 R3's conditional
+ *  seat included. This — not `bands.factions` alone — is what the roll may
+ *  produce and what the distribution-shape fixture asserts against.
+ *  @param {string|null|undefined} tier @returns {{min: number, max: number}} */
+export function factionEnvelopeForTier(tier) {
+  const b = bandsForTier(tier);
+  return { min: b.factions.min, max: b.factions.max + (b.rivalBonusSeat || 0) };
+}
+
+/** Clamp an importance band to a tier's rank ceiling. Never returns a band
+ *  above the ceiling; never returns a band below `minimum` when one is given.
+ *  @param {string} importance @param {string|null|undefined} tier @param {string|null} [minimum] */
+export function clampImportanceToTier(importance, tier, minimum = null) {
+  const ceilIdx = importanceIndex(rankCeilingForTier(tier));
+  const minIdx = minimum ? importanceIndex(minimum) : 0;
+  let idx = importanceIndex(importance);
+  if (idx < 0) idx = 0;
+  // The ceiling wins over the floor: a tier whose ceiling sits BELOW the
+  // requested minimum caps at its ceiling rather than breaching the envelope.
+  idx = Math.min(idx, ceilIdx);
+  idx = Math.max(idx, Math.min(minIdx, ceilIdx));
+  return IMPORTANCE_ORDER[idx];
+}

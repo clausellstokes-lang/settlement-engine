@@ -10,6 +10,7 @@
 import { registerStep } from '../pipeline.js';
 import { generateNPCs, generateRelationships } from '../npcGenerator.js';
 import { generateFactions, generateConflicts } from '../powerGenerator.js';
+import { rollNamedMass } from '../density/applyDensityLaw.js';
 import { recordTrace } from '../../domain/trace.js';
 
 const FACTION_ATTRACTION = {
@@ -40,6 +41,21 @@ registerStep('generatePopulation', {
     economicState,
   } = ctx;
 
+  // ── ODQ §810 SEAM 1 (population): the tier-gated density law's MASS band.
+  // Version-gated — a world whose own config carries no density-law marker gets
+  // `null` here with no draw taken, and `generateNPCs` keeps its own roll.
+  // The roster SIZING is deliberately NOT here: the power roster is replayed and
+  // identity-asserted by `reconcilePowerStructure` at assembly, so it is resized
+  // after that, in assembleSettlement.
+  const densityMassTarget = rollNamedMass({
+    tier,
+    config: effectiveConfig,
+    stress: ctx.stress,
+    powerStructure,
+    economicState,
+    rng,
+  });
+
   // generateNPCs reads settlement.powerStructure (noble roles) and
   // settlement.economicState (goal commodity/faction tokens). This step depends on
   // generatePower, so both are present on ctx — pass them through or those branches
@@ -49,6 +65,7 @@ registerStep('generatePopulation', {
     culture,
     effectiveConfig,
     generationContext,
+    densityMassTarget,
   );
   const relationships = generateRelationships(npcs, effectiveConfig, institutions);
   const factions = generateFactions(npcs, relationships);

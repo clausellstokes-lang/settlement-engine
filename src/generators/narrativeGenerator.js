@@ -26,9 +26,11 @@
 
 import {
   clearActiveRng,
+  getActiveRng,
   random as _rng,
   setActiveRng,
 } from '../kernel/rngContext.js';
+import { disperseNamedRoster } from './density/applyDensityLaw.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody } from './narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from './stressPriority.js';
@@ -975,7 +977,32 @@ export const enrichNpcCoherence = (settlement) => {
     settlement.tier,
     settlement.config || {},
   );
-  return enrichNPCsWithStructure(rawMergedNpcs, settlement);
+  // ── ODQ §810 SEAM 2 (coherence): under the Register VII density law the
+  // two-stage roll's DISPERSAL supersedes mergeNPCLists' power-proportional
+  // cascade, and every figure is stamped with its rolled rung band.
+  //
+  // ⭐ THIS SEAM, NOT THE POPULATION STEP, IS WHERE THE DISPERSAL LIVES — because
+  // this function is the tail BOTH full assembly and NPC section-regen run
+  // ("a rerolled roster must carry the same factionAffiliation … as a freshly
+  // generated one"). Wiring the law here is what makes a regen reproduce the
+  // same political shape instead of a differently-dispersed one.
+  //
+  // Version-gated and draw-free under the dormant default: `disperseNamedRoster`
+  // returns the same array by reference for a world whose config carries no
+  // density-law marker, and `getActiveRng()` is a read, not a draw.
+  const densityRng = getActiveRng();
+  const dispersed = densityRng
+    ? disperseNamedRoster({
+      tier: settlement.tier,
+      config: settlement.config || {},
+      stress: settlement.stress,
+      powerStructure: settlement.powerStructure,
+      economicState: settlement.economicState,
+      npcs: rawMergedNpcs,
+      rng: densityRng,
+    }).npcs
+    : rawMergedNpcs;
+  return enrichNPCsWithStructure(dispersed, settlement);
 };
 
 /**

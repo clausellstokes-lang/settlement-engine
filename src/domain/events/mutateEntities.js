@@ -28,6 +28,8 @@ import { applyTierOutcomeToSettlement } from '../worldPulse/tierOutcomeApply.js'
 import { TIER_ORDER, POPULATION_RANGES, popToTier } from '../../data/constants.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../kernel/prng.js';
+import { rollsRegisterVii } from '../../generators/density/densityLaw.js';
+import { importanceForRung } from '../../generators/density/densityRungs.js';
 import { institutionIsFoodAnchor } from '../institutionClassify.js';
 import { withActiveCondition, withoutActiveCondition, deriveAllActiveConditions } from '../activeConditions.js';
 import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate, npcHomeInstitution } from '../corruption.js';
@@ -361,6 +363,24 @@ function addFaction(s, event) {
     (/** @type {MutEntity} */ f) => String(f.faction || f.name || '').toLowerCase() === name.toLowerCase(),
   );
   if (existing) return vetoMutation('faction_already_present', name);
+  // ── ODQ §817-Q2 — THE ATOMIC MINT BINDS THE EVENT LAYER TOO ────────────────
+  // §810.4 R17: "a faction and its first named NPC are ONE generation act — a
+  // faction mints WITH ≥1 NPC or does not mint at all; NPC-less factions are
+  // unrepresentable at birth on every generation path." The owner's own words
+  // settle whether an authored event counts as a path: "there are no NPC-less
+  // factions at all." R-DENSITY-CENSUS §4 #10 measured this mutator minting
+  // `memberNpcIds: []` unconditionally.
+  //
+  // ⛔ VERSION-GATED, AND THAT IS LOAD-BEARING, NOT TIMIDITY. Event chains are
+  // REPLAYED here (undo, rerun, rerun-keys), so an unconditional co-mint would
+  // add a person to every already-authored ADD_FACTION in every existing
+  // campaign the next time it replayed — lived history rewritten, which THE
+  // PROMISE forbids. A world born under the density law co-mints; a world born
+  // before it replays exactly what it always did.
+  const foundingNpc = rollsRegisterVii(s.config || s._config || {})
+    ? foundingMemberFor(s, event, name)
+    : null;
+  if (foundingNpc === REFUSED) return vetoMutation('faction_requires_member', name);
   const newFaction = {
     id: `faction.${slugify(name)}`,
     name,
@@ -369,16 +389,55 @@ function addFaction(s, event) {
     description: event.description || '',
     impairments: [],
     internalSeats: {},
-    memberNpcIds: [],
+    memberNpcIds: foundingNpc ? [foundingNpc.id] : [],
     createdByEventId: event.id, // so undo can drop the faction this event created
   };
+  // The founding member rides the SAME `createdByEventId`, so undo drops the
+  // house and its founder together — an atomic mint has to be an atomic undo.
+  const withNpc = foundingNpc
+    ? { ...s, npcs: [...(s.npcs || []), foundingNpc] }
+    : s;
   if (psFactions) {
-    return { ...s, powerStructure: { ...s.powerStructure, factions: [...psFactions, newFaction] } };
+    return { ...withNpc, powerStructure: { ...s.powerStructure, factions: [...psFactions, newFaction] } };
   }
   if (flatFactions) {
-    return { ...s, factions: [...flatFactions, newFaction] };
+    return { ...withNpc, factions: [...flatFactions, newFaction] };
   }
-  return { ...s, powerStructure: { ...(s.powerStructure || {}), factions: [newFaction] } };
+  return { ...withNpc, powerStructure: { ...(s.powerStructure || {}), factions: [newFaction] } };
+}
+
+/** The typed refusal sentinel — distinguishable from "no member needed" (null).
+ *  A sentinel rather than a throw so the veto stays the mutator's one exit. */
+const REFUSED = Symbol('faction_requires_member');
+
+/**
+ * Mint the founding member an atomic faction mint requires. A payload that
+ * names existing members satisfies the requirement without minting anyone.
+ *
+ * The founder's importance is the TIER'S HEAD BAND (§817-Q3: an occupied head
+ * always rolls ≥ notable, capped by the tier's rank ceiling), read from the one
+ * rung mapping — so an authored house's founder is exactly as senior as a
+ * rolled one, and no second importance policy comes into existence.
+ *
+ * @param {MutSettlement} s @param {MutateEvent} event @param {string} name
+ * @returns {Record<string, unknown>|null|typeof REFUSED}
+ */
+function foundingMemberFor(s, event, name) {
+  const named = event.payload?.memberNpcIds || event.payload?.linkedNpcIds;
+  if (Array.isArray(named) && named.length) return null; // already crewed
+  const founderName = event.payload?.founderName || `The ${name} Founder`;
+  if (!founderName.trim()) return REFUSED;
+  const npc = createNpc(/** @type {any} */ ({
+    name: founderName,
+    role: event.payload?.founderRole || 'Head',
+    importance: importanceForRung('head', s.tier),
+    factionAffiliation: name,
+    linkedFactionIds: [`faction.${slugify(name)}`],
+    _idSeed: `${event.id}:founder`,
+  }));
+  npc.createdByEventId = event.id;
+  npc.factionAffiliation = name;
+  return npc;
 }
 
 // ── NPC mutations ──────────────────────────────────────────────────────────
