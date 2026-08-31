@@ -2535,6 +2535,7 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(deeper.status, deeper.out).not.toBe(0);
       expect(deeper.out).toMatch(/\[em\] measured 43 > ceiling 30 \(\+13\)/);
       // and the count arm stayed silent, which is what makes this a discriminating proof
+      // anchored: the `[em]` breach line pinned on the assertion above proves this output IS the populated magnitude report, so the denial says the COUNT arm withheld itself rather than that the report drifted away or came back empty
       expect(deeper.out).not.toMatch(/\[files\]/);
     });
 
@@ -2547,6 +2548,7 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       });
       expect(r.status, r.out).toBe(0);
       expect(r.out).toMatch(/RATCHET DOWN: run `npm run test:ratchet:update`/);
+      // anchored: the RATCHET DOWN notice pinned on the assertion above proves the gate ran to its reporting tail with this row in hand, so the denial states the magnitude block DECLINED to measure a passing row rather than that the gate fell over before reaching either
       expect(r.out).not.toMatch(/MAGNITUDE REFUSED/);
     });
 
@@ -2618,8 +2620,8 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
         ],
       });
       expect(r.status, r.out).toBe(0);
-      // anchored: exit 0 with the OK verdict proves the gate ran the whole comparison
       expect(r.out).toMatch(/OK — no test regressions/);
+      // anchored: the OK verdict pinned on the assertion above proves the gate ran the whole scope comparison and printed its report, so the denial says the FILE floor stayed silent on an intact scope rather than that the output drifted away
       expect(r.out).not.toMatch(/FILE count collapsed/);
     });
 
