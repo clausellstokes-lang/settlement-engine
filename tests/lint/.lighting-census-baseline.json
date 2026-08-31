@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f98694e9a0f675b2aa86f049c0859e252b962147",
-  "measuredBy": "Opus 5 (lane W-FAITH F1c)",
+  "measuredAtSha": "09333e936728ae5b056a545794c12a188c6287f1",
+  "measuredBy": "Opus 5 (lane W-FAITH F2c)",
   "date": "2026-08-31",
-  "note": "W-FAITH F1c added tests/domain/deityAuthoredCharacter.test.js (62 statically registered tests in 8 describes) and 15 cases to the existing customContentDeities pglite suite",
-  "files": 2443,
+  "note": "W-FAITH F2c added tests/domain/deityTemperConsumerCensus.walker.test.js (25 statically registered tests in 8 describes) and re-titled/added tests in deityAuthoredCharacter.test.js when the authored temper arm landed",
+  "files": 2444,
   "parked": 370,
-  "credited": 2073,
-  "titles": 20924,
-  "suiteTitles": 5755
+  "credited": 2074,
+  "titles": 20952,
+  "suiteTitles": 5763
 }
