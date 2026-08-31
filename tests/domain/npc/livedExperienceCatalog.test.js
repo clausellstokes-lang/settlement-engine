@@ -186,9 +186,14 @@ describe('THE SOURCE QUALIFICATION CENSUS — walked against this tree, carried 
     ]);
   });
 
-  test('four of the nineteen receipted kinds are DARK — lit in no preset', () => {
+  test('three of the nineteen receipted kinds are DARK — lit in no preset', () => {
+    // ⭐ WAS FOUR. Car L4 executed the real preset table instead of reading the flag
+    // file, and `festival_kept` moved out: `traditionsEnabled` rides the ONE_REGEN
+    // fragment and is lit in dramatic_campaign, living_realm and full_simulation.
+    // The three below are lit in ZERO presets — npcCredibilityEnabled,
+    // npcConsequencesEnabled and infoStatecraftEnabled all return an empty list.
     expect([...RECEIPT_DARK_KINDS]).toEqual([
-      'caught_lying_exposed', 'festival_kept', 'pardoned_released', 'turned_by_crime',
+      'caught_lying_exposed', 'pardoned_released', 'turned_by_crime',
     ]);
     // The collection is asserted LIVE and non-trivial first, so the exclusions
     // below cannot pass because the unverified list drifted away to nothing.
