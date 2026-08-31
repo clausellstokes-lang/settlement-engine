@@ -191,6 +191,24 @@ describe('CLOSEST-PLANE-WINS — a dedupe over (person, event), not a filter', (
     expect(kindsOf(forward)).toEqual(kindsOf(reversed));
   });
 
+  test('⭐ a SAME-PLANE tie breaks on the kind\'s codepoint, not on who arrived first', () => {
+    // Both kinds are PERSONAL, so the plane cannot separate them. Without an
+    // explicit tie-break the survivor would be whichever entry the caller happened
+    // to push first — a world that differs by input order, which is the class every
+    // codepoint fold in this estate exists to prevent.
+    const dett = npc('npc_4', 'Dett');
+    const pair = [entry('goal_culminated', dett, 'evX'), entry('promotion_won', dett, 'evX')];
+    const forward = foldLivedExperience({ worldState: lit(), entries: pair, tick: 11 });
+    const reversed = foldLivedExperience({ worldState: lit(), entries: [...pair].reverse(), tick: 11 });
+    expect(JSON.stringify(forward.worldState)).toBe(JSON.stringify(reversed.worldState));
+    // ...and the winner is the codepoint-first kind, whichever way they arrived:
+    // goal_culminated pulls CONTENT/TEMPERANCE, promotion_won pulls CHEER/HUMILITY.
+    for (const out of [forward, reversed]) {
+      expect(Object.keys(driftEntryOf(out.worldState, idOf(out.worldState, dett))).sort())
+        .toEqual(['CONTENT', 'TEMPERANCE']);
+    }
+  });
+
   test('TWO PEOPLE, ONE EVENT: both learn — that is the design, not double-counting', () => {
     const dett = npc('npc_4', 'Dett');
     const emm = npc('npc_5', 'Emm');
@@ -521,9 +539,14 @@ describe('EVIDENCE BINDING — no later composer may guess an event', () => {
     const out = foldLivedExperience({
       worldState: lit(),
       // Both pull CHEER toward virtue, and together they cross a band.
-      // promotion_won is `career` (step 0); home_liberated is `realm` (step -1) —
+      // home_liberated is `realm` (step -1); promotion_won is `career` (step 0) —
       // so `career` is the heavier teacher and must be the cause on the receipt.
-      entries: [entry('promotion_won', emm, 'e1'), entry('home_liberated', emm, 'e2')],
+      // ⚠ THE EVENT IDS ARE DELIBERATELY ORDERED LIGHTEST-FIRST: the fold walks
+      // candidates in (subject, eventId, kind) order, so if the cause were "the
+      // first family seen" instead of "the heaviest", this fixture would answer
+      // `realm` and the assertion below would catch it. Ordering them the other
+      // way round makes the two rules agree and tests nothing.
+      entries: [entry('home_liberated', emm, 'e1'), entry('promotion_won', emm, 'e2')],
       tick: 11,
     });
     const cheer = out.receipts.find((row) => row.axisId === 'CHEER');
