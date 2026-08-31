@@ -425,14 +425,35 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
     return out;
   }
 
-  test('no src/ file imports characterDrift — the experience funnel is a later car', () => {
-    const importers = jsFilesUnder(join(REPO_ROOT, 'src'))
-      .filter((file) => !file.endsWith('characterDrift.js'))
+  test('the drift FAMILY is unreachable from production — closure, not a bare count', () => {
+    // AMENDED BY CAR L3, which is the act this pin was written to meet: its own
+    // comment said a red here "is the funnel car's act". The claim is unchanged —
+    // nothing in production can reach drift — but it is now proved as a CLOSURE
+    // over two steps instead of one, because the funnel legitimately imports this
+    // module and is itself imported by nobody.
+    //
+    // Weakening it to "characterDrift may have importers" would have been the easy
+    // edit and the wrong one: the closure is what the darkness claim actually is.
+    const FAMILY = ['characterDrift.js', 'livedExperienceCatalog.js', 'livedExperienceFunnel.js'];
+    const files = jsFilesUnder(join(REPO_ROOT, 'src'));
+    expect(files.length).toBeGreaterThan(100);
+    const outside = files.filter((file) => !FAMILY.some((member) => file.endsWith(member)));
+    // STEP 1: nothing outside the family names drift.
+    expect(outside
       .filter((file) => /characterDrift/.test(readFileSync(file, 'utf8')))
-      .map((file) => relative(REPO_ROOT, file));
-    // If this reds, a consumer was wired early. That is the funnel car's act, and it
-    // must arrive WITH the flag door TE-VIRT-1 owes and its own dormancy proof.
-    expect(importers).toEqual([]);
+      .map((file) => relative(REPO_ROOT, file))).toEqual([]);
+    // STEP 2: and nothing outside the family names the funnel either, so there is
+    // no path INTO the family at all. If this reds, a source adapter was wired
+    // early — car L4's act, and it must arrive with the flag door TE-VIRT-1 owes
+    // and its own dormancy proof.
+    expect(outside
+      .filter((file) => /livedExperience/.test(readFileSync(file, 'utf8')))
+      .map((file) => relative(REPO_ROOT, file))).toEqual([]);
+    // anchored: the family members really are present, so the closure is over a
+    // real set rather than passing because the names match nothing.
+    for (const member of FAMILY) {
+      expect(files.some((file) => file.endsWith(member)), `${member} is missing`).toBe(true);
+    }
   });
 
   test('the flag has no DEFAULT_SIMULATION_RULES entry, so no existing campaign carries it', () => {
