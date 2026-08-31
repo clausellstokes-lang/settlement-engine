@@ -170,3 +170,63 @@ describe('TravelRingsLayer — banded halos from the selected settlement', () =>
     }
   });
 });
+
+// ── POLIS-4 — the territory partition lens (digest.territory, ONE truth) ─────
+describe('TerritoryLayer — the canonized partition, impressionistically drawn', () => {
+  const PACK = makeGridPack({ cols: 5, rows: 4 });
+
+  test('THE PLACEMENT ASSERTION (fixture arm): every placed settlement owns its own seed cell in the partition', () => {
+    const placed = placeSettlements(PACK, IDS.length);
+    placed.forEach((p, i) => {
+      expect(DIGEST.territory[p.cellId], `settlement ${IDS[i]} does not own its own seed cell`).toBe(i);
+    });
+  });
+
+  test('no bridge ⇒ dark; a matching pack ⇒ land dots owned by settlements; a MISMATCHED pack draws NOTHING', async () => {
+    const { default: TerritoryLayer } = await import('../../src/components/map/TerritoryLayer.jsx');
+    const { registerSpatialCaptureBridge, unregisterSpatialCaptureBridge } = await import('../../src/lib/spatialCaptureRegistry.js');
+    const { waitFor } = await import('@testing-library/react');
+    const base = {
+      savedSettlements: IDS.map(id => ({ id, settlement: { name: id.toUpperCase(), tier: 'town' } })),
+      mapState: { placements: PLACEMENTS, customBackdrop: null },
+      campaigns: [{ id: 'camp', settlementIds: IDS, worldState: { tick: 5, spatialCanonVersion: 1, spatialDigest: DIGEST } }],
+      activeCampaignId: 'camp',
+    };
+
+    // No bridge registered ⇒ honest dark.
+    STORE = { ...base };
+    const dark = render(<svg><TerritoryLayer /></svg>);
+    await Promise.resolve();
+    expect(dark.container.querySelector('[data-testid="territory-overlay"]')).toBeNull();
+    dark.unmount();
+
+    // A matching live pack ⇒ the partition draws: dots on LAND cells only,
+    // each owned by a real settlement id from the digest's own roster.
+    const bridge = { isReady: true, getSpatialPack: () => Promise.resolve({ pack: { cells: PACK.cells } }) };
+    registerSpatialCaptureBridge(bridge);
+    STORE = { ...base };
+    const lit = render(<svg><TerritoryLayer /></svg>);
+    await waitFor(() => expect(lit.container.querySelector('[data-testid="territory-overlay"]')).not.toBeNull());
+    const overlay = lit.container.querySelector('[data-testid="territory-overlay"]');
+    expect(overlay.getAttribute('pointer-events')).toBe('none');
+    const dots = [...overlay.querySelectorAll('[data-territory-owner]')];
+    expect(dots.length).toBeGreaterThan(0);
+    for (const dot of dots) expect(IDS).toContain(dot.getAttribute('data-territory-owner'));
+    // The ocean bay stays unclaimed: no dot at the water corner cell (0,0).
+    const waterDot = dots.find(d => d.getAttribute('cx') === '0' && d.getAttribute('cy') === '0');
+    expect(waterDot).toBeUndefined();
+    lit.unmount();
+
+    // STRICT RECONCILIATION: a pack that no longer matches the digest's cell
+    // universe draws nothing (geometry moved since canonize — refuse, never
+    // misregister).
+    const smaller = makeGridPack({ cols: 3, rows: 3 });
+    const staleBridge = { isReady: true, getSpatialPack: () => Promise.resolve({ pack: { cells: smaller.cells } }) };
+    registerSpatialCaptureBridge(staleBridge);
+    STORE = { ...base };
+    const stale = render(<svg><TerritoryLayer /></svg>);
+    await new Promise(res => setTimeout(res, 10));
+    expect(stale.container.querySelector('[data-testid="territory-overlay"]')).toBeNull();
+    unregisterSpatialCaptureBridge(staleBridge);
+  });
+});

@@ -27,6 +27,8 @@ import WarFaithMapOverlay from './map/WarFaithMapOverlay.jsx';
 import TravelersLayer    from './map/TravelersLayer.jsx';
 // POLIS-3 — hopWeeks-banded travel rings from the selected settlement.
 import TravelRingsLayer  from './map/TravelRingsLayer.jsx';
+// POLIS-4 — the territory partition lens (digest.territory, impressionistic).
+import TerritoryLayer    from './map/TerritoryLayer.jsx';
 // V-3 THE TIMELAPSE — STATIC within this already-lazy map chunk (the FP-R idiom:
 // a lazy() would mint a preload entry). @enforced-by tests/build/vendorPdfLazy.test.js
 import TimelapseLayer    from './map/TimelapseLayer.jsx';
@@ -325,6 +327,9 @@ export default function MapOverlay({ bridge, transformOut }) {
               style={{ pointerEvents: 'none' }}
             />
           )}
+          {/* POLIS-4 — territory shading UNDER every structural layer (it is
+              ground tint, never chrome). Opt-in lens, default off. */}
+          {layers.territory && !imageMode && <TerritoryLayer />}
           {layers.forests       && <ForestsLayer />}
           {/* Geography-derived charted trails need FMG pack.cells — omitted in
               image mode (relationship/chain straight-line edges still render). */}

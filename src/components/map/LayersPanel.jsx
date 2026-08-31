@@ -265,6 +265,21 @@ export default function LayersPanel({ onClose }) {
             ))}
           </div>
         )}
+        {/* POLIS-4 — the territory partition lens, with its impressionism
+            DECLARED in the legend (the A1.2 §9 in-legend fork). */}
+        <LayerToggle
+          label="Territory"
+          checked={!!layers.territory}
+          onChange={() => toggleLayer('territory')}
+        />
+        {layers.territory && (
+          <div style={{ marginLeft: SP.md, marginBottom: SP.sm }}>
+            <span style={{ fontFamily: sans, fontSize: FS.micro, color: MUTED, lineHeight: 1.4 }}>
+              Impressionistic: sampled dots suggest each settlement's reach by road
+              (the canonized partition), not exact borders. Larger places read stronger.
+            </span>
+          </div>
+        )}
         {/* POLIS-3 — travel rings: banded halos from the SELECTED settlement,
             legend single-sourced from the layer's own band vocabulary. */}
         <LayerToggle

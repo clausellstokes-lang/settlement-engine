@@ -116,6 +116,11 @@ const DEFAULT_LAYERS = {
   // precedent); renders only when a spatial canon is stamped AND a settlement
   // is selected.
   travelRings: false,
+  // POLIS-4 (T11) — the territory partition lens: digest.territory (the ONE
+  // canonize-time partition) drawn as an impressionistic sampled dot field over
+  // the live pack's centroids. DEFAULT OFF; draws only when a spatial canon is
+  // stamped AND the live pack still matches it cell-for-cell.
+  territory: false,
   labels: true,
   markers: true,
   forests: true,
