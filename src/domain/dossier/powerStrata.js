@@ -43,6 +43,24 @@ import { factionArchetype } from '../factionArchetypes.js';
  * @typedef {RulingFaction & { powerLabel?: string }} StrataFaction
  */
 
+/**
+ * The settlement as the RULING CHAIN reads it (§815): the shared ruling-power
+ * contract plus the two keys the chain alone consults — `npcLadder`, handed
+ * STRAIGHT to ladderRead's own `{ npcLadder?: unknown }` readers, and `npcs`,
+ * the roster the ruler-title fallback scans. Neither belongs to the shared
+ * RulingPowerSettlement contract (which declares `powerStructure` and `tier`
+ * and nothing else), so both are declared locally, exactly as StrataFaction
+ * declares `powerLabel` above.
+ *
+ * ⚠ THIS IS A WIDENING OF THE PARAMETER, NOT OF A BASELINE. The chain read
+ * `settlement.npcLadder` and `settlement.npcs` from the day it landed; the
+ * declared parameter simply did not say so, and `RulingPowerSettlement` shares
+ * no property at all with `{ npcLadder?: unknown }`, which is why the call was
+ * a TS2559 rather than a quiet `any`. The cure names what the function reads —
+ * the typecheck ratchet's own instruction (fix them; do not widen the baseline).
+ * @typedef {RulingPowerSettlement & { npcLadder?: unknown, npcs?: unknown }} RulingChainSettlement
+ */
+
 /** @typedef {'ruler'|'contender'} PowerRole */
 
 /**
@@ -272,7 +290,7 @@ function isRulerTitled(npc) {
  *             pre-density line (§810.3 R12/R15 are not yet generation law;
  *             TE-DENSITY-1 is censusing the gap).
  *
- * @param {RulingPowerSettlement | null | undefined} settlement
+ * @param {RulingChainSettlement | null | undefined} settlement
  * @returns {{
  *   power: { name: string, archetype: string, powerLabel: string, government: string | null } | null,
  *   faction: { name: string, power: number, powerLabel: string, vacant: boolean } | null,
