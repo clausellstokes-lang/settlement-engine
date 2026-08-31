@@ -71,16 +71,20 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // to name. The habitat is the obligation being spread across suites nobody can
     // enumerate from the mint site; a flag-mint packet that named its surfaces from ONE
     // registry would end it, and that is TE-GUARDS-1's subject rather than this lane's.
-    // 27 → 28 at W-MEM (lane T12, 2026-08-31), which mints warMemoryEnabled with its
-    // certification row in the same commit. ⚠⚠⚠ FOUND LATE FOR THE FOURTH RECORDED TIME, at
-    // the terminal ratchet, exactly as the three comments above predict — the prediction is
-    // now four for four, which makes it a property of the habitat rather than a run of bad
-    // luck. ⭐ AND THE LEDGER ITSELF HAD ALREADY DRIFTED, which is the sharper half: the row
-    // above this one records 25 → 26, but the literal these lines replaced read 27. One bump
-    // (W-SEAT's foreignSeatEnabled) moved the numbers WITHOUT adding its row, so the ledger
-    // silently stopped being a history of the literal it annotates. That is the same defect
-    // one level up — a bill nobody can enumerate from the mint site gets paid in the numbers
-    // and skipped in the prose. Recorded rather than quietly renumbered.
+    // 26 → 27 at W-SEAT SEAT-1 (2026-08-30), `foreignSeatEnabled`.
+    // 27 → 28 at W-SEAT SEAT-2b (2026-08-31, lane T4 · SEAT-B), which mints
+    // `legitimacyUpheavalEnabled` with its certification row in the same commit.
+    // ⭐ AND THIS TIME THE PAIR WAS FOUND FIRST, NOT LAST, which is the point of the four
+    // notes above: the lane read the flag-mint bill off SEAT-1's own commit before writing a
+    // line, so this suite was a NAMED surface from the start rather than a terminal-gate
+    // surprise. The habitat is unchanged and still belongs to TE-GUARDS-1 — one registry the
+    // mint site can enumerate — but the record should show the practice works when a lane
+    // reconstructs the bill from the last mint's diff instead of from its own charter.
+    // ⛔ AND A LANDING HAZARD THIS LANE MEASURED RATHER THAN MET: T12 · WAR-MEMORY landed
+    // `warMemoryEnabled` on the build branch WHILE this car was being built, so at the
+    // landing tip these literals are 28 → 29, not 27 → 28. Both sides close arithmetically
+    // on their own base, which is exactly the still-closing-lie shape the lighting census
+    // forces onto consecutive lines. THE LANDING RE-MEASURES; it never re-applies these.
     expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(28);
     expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(28);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
