@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "45a9a7c7306d565016064be96b54c5db12d8db27",
-  "measuredBy": "T10-landing",
+  "measuredAtSha": "9810e4e2527e25832588976a961e8a85f5cc5da0",
+  "measuredBy": "T2-landing",
   "date": "2026-08-31",
-  "note": "T10 product-surface (TE-UX-1 + the §776 economics conversion) rebased onto 19a8c9197; no test file added — only titles move",
-  "files": 2435,
+  "note": "T2 Coin (W-COIN-2/3: upkeep sink + conservation walker, coin beats + band + chip, coffers arms) rebased onto fa7e95f2a",
+  "files": 2437,
   "parked": 368,
-  "credited": 2067,
-  "titles": 20741,
-  "suiteTitles": 5714
+  "credited": 2069,
+  "titles": 20786,
+  "suiteTitles": 5727
 }
