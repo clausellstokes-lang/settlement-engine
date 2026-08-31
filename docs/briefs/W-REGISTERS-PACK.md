@@ -148,6 +148,11 @@ may be vacant; the vacancy-plus-yearner pattern is over-weighted on purpose: the
 registers as an open ladder window and the yearner arrives with seek_promotion pre-loaded). Rank
 ceilings scale with tier (a thorp's head is at most notable; no pillars below town). **The band's
 edges are believability assertions** — a thorp can never roll seven named figures (§810.2b).
+**THE SEAT FLOOR (§810.3, hard gate):** the first named NPC always mints into the ruling power's
+faction, on every generation path — lifted only under a typed missing-ruling-seat stressor,
+which births the vacancy-and-yearner pattern at the throne itself (a succession story, never a
+null); the density shrink arm may never dissolve the ruling faction (events only); a both-ways
+fixture walks the invariant.
 
 | Tier | Factions (roll) | Named-NPC MASS (roll) |
 |---|---|---|
