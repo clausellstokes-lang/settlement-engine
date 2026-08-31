@@ -60,6 +60,14 @@ import { magicLedger } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
 import { defenseLedger } from './defenseLedger.js';
 import { WAR_RECOVERY_CONDITIONS, UPSWING_LIFT_CONDITIONS } from './worldPulse/archetypeCatalog.js';
+// W-FAITH F4c — the boon/bane channel term. ⚠ THE CYCLE WAS CHECKED, NOT ASSUMED, in a
+// file whose own header records one it had to route around: faithField's ENTIRE import
+// closure is kernel/math, worldPulse/piety → deityAxes, worldPulse/cultImpositionApply →
+// deityAxes, and magicLedger → data/constants — four leaves, none of which reaches
+// causalState or magicProfile. So this import cannot close the
+// causalState > deityEffects > magicProfile > causalState shape the DEITY_RANK_AUTHORITY
+// note below exists to avoid.
+import { faithChannelLift, FAITH_CHANNEL_BINDINGS } from './worldPulse/faithField.js';
 // DEITY_RANK_AUTHORITY is single-sourced in the dependency-free leaf
 // domain/deityConstants.js (amended W2b contract): the engine imports the LEAF,
 // never display/deityEffects.js — routing through deityEffects would close the
@@ -80,18 +88,76 @@ import { DEITY_RANK_AUTHORITY } from './deityConstants.js';
 // local amplifier (clergy-distorted); `megaphoneLaw` ∈ [0.4,1] is the LAW-channel
 // opposed-runner-up dampener (an orderly rival muting a chaotic patron, or vice
 // versa) that the law-derived lift (site #9) takes per the per-axis dampener rule.
+// ⚠⚠ W-FAITH F4c WIDENED THIS TO RETURN THE FIELD RECORD TOO, AND THE OBSERVED-SHAPE
+// RATCHET IS THE REASON IT IS ONE FUNCTION RATHER THAN TWO. `faithProfile on config` is
+// a key the GENERATOR never writes — the pulse mints it — so the ratchet caps each file's
+// reads of it by identity: this file's frozen ceiling is exactly ONE, and `faithField.js`
+// has no row at all (ceiling 0). A second reader here, or the obvious `faithChannelLift
+// (settlement, channel)` signature reading the settlement inside the kernel, each cost a
+// NEW row the governed re-freeze may not add. So the whole projected faith read-model is
+// taken in ONE read and handed down — which is also the better shape: one place in this
+// file knows how the pulse's faith record is spelled.
 /** @param {CausalSettlementSource | null | undefined} s
- *  @returns {{ localMult: number, megaphoneLaw: number }} */
+ *  @returns {{ localMult: number, megaphoneLaw: number, field: { channels?: Record<string, unknown> } | undefined }} */
 function pietyLocalAmp(s) {
   // The projected piety read-model is not declared on CausalSettlementSource.config
   // (it is minted by the pulse), so bridge through `unknown` to a structural read —
   // no `any` (the domain any-ratchet stays flat). Absent record ⇒ 1.0.
-  const cfg = /** @type {{ faithProfile?: { piety?: { localMult?: number, dampener?: { megaphoneLaw?: number } } } } | undefined} */ (
+  const cfg = /** @type {{ faithProfile?: { piety?: { localMult?: number, dampener?: { megaphoneLaw?: number } }, field?: { channels?: Record<string, unknown> } } } | undefined} */ (
     /** @type {unknown} */ (s?.config));
-  const p = cfg?.faithProfile?.piety;
+  const profile = cfg?.faithProfile;
+  const p = profile?.piety;
   const localMult = p && Number.isFinite(p.localMult) ? Number(p.localMult) : 1;
   const megaphoneLaw = p && p.dampener && Number.isFinite(p.dampener.megaphoneLaw) ? Number(p.dampener.megaphoneLaw) : 1;
-  return { localMult, megaphoneLaw };
+  return { localMult, megaphoneLaw, field: profile?.field };
+}
+
+/**
+ * ⭐⭐ W-FAITH F4c — THE BOON/BANE CHANNEL TERM, and it is ONE function because the
+ * alternative is six.
+ *
+ * Six derivers below name a channel; this decides what a channel is worth, pushes the
+ * receipt, and returns the delta. A seventh binding is therefore a one-line change in
+ * `FAITH_CHANNEL_BINDINGS` plus one call — never a seventh opinion about how a divine
+ * boon becomes a score.
+ *
+ * ⭐ DORMANT BY ABSENCE, which is stronger than dormant by flag. `faithChannelLift`
+ * answers a literal 0 unless the pulse projected a field record onto this settlement,
+ * and the pulse projects one only when some pantheon member carries an authored boon or
+ * bane. No deity in the estate does (the authoring surface is `ui:false`), so every
+ * settlement takes the `lift === 0` early return and no contributor is pushed — the
+ * substrate is byte-identical, and it is identical because there is nothing to add
+ * rather than because a small number rounded away.
+ *
+ * ⚠ THE POLARITY IS LOAD-BEARING. Every bound variable is `higher_is_better`, so a boon
+ * ADDS and a bane SUBTRACTS with no per-variable sign table. Binding a channel to
+ * `criminal_opportunity` (the estate's one lower-is-better variable) would silently
+ * invert the meaning of every boon aimed at it; `faithChannelWiring.test.js` asserts the
+ * polarity of every bound variable so that mistake cannot be made quietly.
+ *
+ * ⭐ THE BOUND VARIABLE IS READ FROM THE REGISTER, never restated at the call site: a
+ * deriver names only its channel, and `FAITH_CHANNEL_BINDINGS` is the single place that
+ * knows which variable that channel belongs to. A call site that could name its own
+ * variable could name the WRONG one, and nothing would ever red.
+ *
+ * @param {CausalSettlementSource} s
+ * @param {string} channel        a `FAITH_CHANNEL_BINDINGS` key
+ * @param {CausalContributor[]} contributors
+ * @returns {number} the signed integer delta already pushed (0 when the field is silent)
+ */
+function applyFaithChannel(s, channel, contributors) {
+  const lift = faithChannelLift(pietyLocalAmp(s).field, channel);
+  if (lift === 0) return 0;
+  const variable = FAITH_CHANNEL_BINDINGS[channel];
+  const label = /** @type {Record<string, string>} */ (VARIABLE_LABEL)[variable] || variable;
+  push(
+    contributors,
+    `faith.field.${channel}`,
+    lift > 0 ? 'divine_boon' : 'divine_bane',
+    lift,
+    `The pantheon's ${lift > 0 ? 'blessing' : 'blight'} on ${channel.replace(/_/g, ' ')} ${lift > 0 ? 'strengthens' : 'weakens'} ${label.toLowerCase()}.`,
+  );
+  return lift;
 }
 
 // ── Local typedefs ───────────────────────────────────────────────────────
@@ -483,6 +549,9 @@ function deriveFoodSecurity(s) {
     }
   }
 
+  // W-FAITH F4c — the `harvest` channel. 0 (no contributor) on every world today.
+  score += applyFaithChannel(s, 'harvest', contributors);
+
   return { score, contributors };
 }
 
@@ -690,6 +759,9 @@ function deriveTradeConnectivity(s) {
     scale: 18, effect: ['restored', 'cut'], tail: ['reopens trade flows.', 'disrupts trade flows.'],
   });
 
+  // W-FAITH F4c — the `trade` channel. 0 (no contributor) on every world today.
+  score += applyFaithChannel(s, 'trade', contributors);
+
   return { score, contributors };
 }
 
@@ -743,6 +815,9 @@ function deriveEconomicCapacity(s) {
       return magnitude;
     },
   });
+
+  // W-FAITH F4c — the `craft` channel. 0 (no contributor) on every world today.
+  score += applyFaithChannel(s, 'craft', contributors);
 
   return { score, contributors };
 }
@@ -889,6 +964,21 @@ function deriveLawOrder(s) {
         : 'erodes order and tolerates corruption'}${amp !== 1 ? ` (piety ×${amp.toFixed(2)})` : ''}.`);
   }
 
+  // W-FAITH F4c — the `order` channel, and it deliberately SITS BESIDE the law-axis term
+  // above rather than replacing or modulating it. They are different authored facts about
+  // a god: the term above reads its `lawAxis` (what kind of god it IS), this reads its
+  // authored `boon`/`bane` (what it DOES for this town). A lawful god that also blesses
+  // order legitimately does both, exactly as a lawful god that blesses harvest does one
+  // of each. That is coexistence, not the §851 double-count, which was about ONE intent
+  // reaching one quantity by two routes — and it is recorded here because "two deity
+  // terms on one variable" is the shape that ought to make a reader stop.
+  //
+  // ⚠ The two are also amplified DIFFERENTLY, on purpose: the law term multiplies by
+  // `pietyLocalAmp` because `deityLawDirection` has never met piety, while the channel
+  // term arrives with the full composite already folded in by `faithFieldOf`. See
+  // `faithChannelLift` — re-amplifying here would square the multiplier.
+  score += applyFaithChannel(s, 'order', contributors);
+
   return { score, contributors };
 }
 
@@ -923,6 +1013,9 @@ function deriveHealingCapacity(s) {
     scale: 20, mode: 'drain', effect: 'overrun', tail: 'overwhelms healing capacity.',
   });
 
+  // W-FAITH F4c — the `healing` channel. 0 (no contributor) on every world today.
+  score += applyFaithChannel(s, 'healing', contributors);
+
   return { score, contributors };
 }
 
@@ -956,6 +1049,21 @@ function deriveDefenseReadiness(s) {
   score += applyConditions(s, contributors, 'defense_readiness', {
     scale: 12, effect: ['recovering', 'strained'], tail: ['restores defense readiness.', 'taxes defense readiness.'],
   });
+
+  // W-FAITH F4c — the `war_readiness` channel.
+  //
+  // ⚠⚠ THIS IS THE ONE THE §851 PRECEDENCE LAW EXISTS FOR, and it is safe HERE because
+  // the collision was disarmed one car earlier, not because the two sites are far apart.
+  // `war_readiness` is both a `DEITY_EFFECT_CHANNELS` key and a `DEITY_DOMAIN_PRESSURE`
+  // key, so a deity authored `boon: war_readiness` would otherwise push the war bar
+  // through `dispositionProfile.deityPressureOf` AND lift defense readiness here — one
+  // intent counted twice. F3c landed the per-deity precedence in `supportedDomainOf`:
+  // a deity carrying an authored boon or bane has its legacy `domain` arm go silent FOR
+  // THAT DEITY, so the deity feeding this term is by construction not feeding that one.
+  // ⭐ The two quantities also differ: `deityPressureOf` moves a war THRESHOLD, this
+  // moves the readiness SCORE — but "different quantity" is an argument, and the
+  // precedence law is a proof, which is why the proof landed first.
+  score += applyFaithChannel(s, 'war_readiness', contributors);
 
   return { score, contributors };
 }

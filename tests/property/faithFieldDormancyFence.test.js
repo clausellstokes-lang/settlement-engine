@@ -36,16 +36,61 @@ import { describe, test, expect } from 'vitest';
 import { readdirSync, statSync, readFileSync } from 'node:fs';
 import { join, relative, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { faithFieldOf, faithChannelMult, FAITH_CHANNELS } from '../../src/domain/worldPulse/faithField.js';
 import { faithWitnessEntries } from '../../src/domain/worldPulse/faithWitnessSource.js';
+// W-FAITH F4c — FENCE 4 drives the real seam rather than the kernel, so it imports the
+// two production modules the wiring runs through. They are NOT members of FAITH_FIELD_SET
+// and so do not perturb the censuses above.
+import { projectReligionStateOntoSettlement } from '../../src/domain/worldPulse/religionState.js';
+import { deriveCausalState } from '../../src/domain/causalState.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
-/** The module set this car landed, as import specifiers a scan can look for. */
+/**
+ * ⛔ THE DORMANT GOLDEN — a sha256 prefix over the whole projected + derived corpus of
+ * FENCE 4, measured at this car's committed tip and frozen here. It is the byte-identity
+ * statement the replaced FENCE 1 owed: with nothing authored, the world this subsystem
+ * produces is character-for-character what it was.
+ *
+ * ⚠ IF THIS REDS, DO NOT RE-FREEZE IT. A moved golden means the DORMANT path changed,
+ * which is either a real regression or a legitimate behaviour shift that owes a written
+ * shift record. Re-freezing without one is how a promise stops being checkable.
+ */
+const DORMANT_GOLDEN = '6e85308b0f396a77';
+
+/**
+ * The module set this car landed, as REPO-RELATIVE PATHS.
+ *
+ * ⚠⚠ THEY WERE SUFFIXES (`'worldPulse/faithField.js'`) AND THE SUFFIX MATCH HAD A HOLE
+ * THIS BIG: a module INSIDE `src/domain/worldPulse/` imports its neighbour as
+ * `'./faithField.js'`, which ends with no suffix in that list. Every one of the ~250
+ * siblings in that directory — the likeliest home for a field consumer by a wide margin —
+ * could have imported the field with this census staying green.
+ *
+ * ⭐ FOUND BY ACCIDENT, WHICH IS THE POINT WORTH RECORDING. W-FAITH F4c wrote exactly
+ * that natural sibling import in `religionState.js`, and the census reported ONE importer
+ * where two existed. Nothing in the guard-the-guard arms could have caught it: they all
+ * import through the long `../../src/domain/worldPulse/…` path a TEST file must use, so
+ * the detector was only ever exercised on the shape that worked. ⇒ F3c's dormancy claim
+ * was narrower than its own words, and the cure is to resolve specifiers rather than to
+ * match their tails.
+ */
 const FAITH_FIELD_SET = Object.freeze([
-  'worldPulse/faithField.js',
-  'worldPulse/faithWitnessSource.js',
+  'src/domain/worldPulse/faithField.js',
+  'src/domain/worldPulse/faithWitnessSource.js',
 ]);
+
+/** Resolve an import specifier to a repo-relative path, or '' for a bare/package one.
+ *  This is what closes the sibling hole: `./faithField.js` seen from
+ *  `src/domain/worldPulse/religionState.js` resolves to the same path the long form does.
+ *  @param {string} fromRel the importing file, repo-relative
+ *  @param {string} spec    the specifier as written
+ *  @returns {string} */
+function resolveSpec(fromRel, spec) {
+  if (!spec.startsWith('.')) return '';
+  return relative(ROOT, join(ROOT, dirname(fromRel), spec)).replace(/\\/g, '/');
+}
 
 /** @param {string} dir @param {string[]} out */
 function walk(dir, out = []) {
@@ -76,21 +121,51 @@ function importersOf(files) {
   for (const { rel, src } of files) {
     // The set's own members may import each other legitimately; the census is about
     // consumers OUTSIDE the set.
-    if (FAITH_FIELD_SET.some((member) => rel.endsWith(member))) continue;
+    if (FAITH_FIELD_SET.includes(rel)) continue;
     for (const match of src.matchAll(IMPORT_RE)) {
-      if (FAITH_FIELD_SET.some((member) => match[1].endsWith(member))) { hits.push(rel); break; }
+      if (FAITH_FIELD_SET.includes(resolveSpec(rel, match[1]))) { hits.push(rel); break; }
     }
   }
   return hits.sort();
 }
 
 describe('FENCE 1 — the import-closure census (own-footprint, for a car with no caller)', () => {
-  test('NO production module imports the faith-field set', () => {
-    // Anchored: the positive control below proves this detector finds real importers,
-    // so the emptiness here is a MEASUREMENT rather than a broken scan.
+  test('the faith field\'s production importers are EXACTLY the declared consumers', () => {
+    // ⛔⛔ THIS ARM WAS "NO PRODUCTION MODULE IMPORTS THE FAITH-FIELD SET" UNTIL W-FAITH
+    // F4c WIRED THE CHANNELS. It is REPLACED here, in the commit that added the callers,
+    // exactly as this file's header and `faithField.js`'s header both required — never
+    // deleted, never loosened to a subset test. A fence kept past the thing it fences is
+    // a false claim with a passing status (F3c act 1's J5); a fence DELETED at that
+    // moment is worse, because the class it guarded then has no guard at all.
+    //
+    // What it guards now is the same property, stated for a subsystem that HAS callers:
+    // the consumer set is CLOSED and enumerated. An unplanned seventh importer — a
+    // display module reaching for the field, a second pulse site recomputing it — reds
+    // here rather than quietly becoming a coupling nobody reviewed.
     expect(
       importersOf(SRC_FILES),
-      'the faith field gained a caller — this fence is now the WRONG fence: replace it with a driven byte-identity golden in the commit that added the caller (W-FAITH F4c)',
+      'the faith field gained an UNDECLARED production consumer — add it here with its reason, or route through the two seams that already exist',
+    ).toEqual([
+      'src/domain/causalState.js',            // the boon/bane channel term (F4c)
+      'src/domain/worldPulse/religionState.js', // the tick-end projection writer (F4c)
+    ]);
+  });
+
+  test('⭐ the witness-plane source is STILL dark, and its census keeps the original teeth', () => {
+    // The set this file guards is two leaves, and only ONE of them gained a caller. The
+    // witness source (F3c act 2b) is still imported by nothing under `src/`, so for that
+    // half the strict-empty census is still the RIGHT fence and is kept verbatim rather
+    // than folded into the softer registry above. Folding them would have retired a live
+    // guarantee as a side effect of wiring an unrelated leaf.
+    const WITNESS = 'src/domain/worldPulse/faithWitnessSource.js';
+    const witnessImporters = SRC_FILES
+      .filter(({ rel }) => rel !== WITNESS)
+      .filter(({ rel, src }) => [...src.matchAll(IMPORT_RE)].some((m) => resolveSpec(rel, m[1]) === WITNESS))
+      .map(({ rel }) => rel)
+      .sort();
+    expect(
+      witnessImporters,
+      'the witness source gained a caller — it owes the W-LIVES funnel reconcile pin, and this fence must be replaced the way FENCE 1 just was',
     ).toEqual([]);
   });
 
@@ -115,12 +190,33 @@ describe('FENCE 1 — the import-closure census (own-footprint, for a car with n
     ];
     expect(importersOf(decoy)).toEqual(['src/fake/real.js']);
   });
+
+  test('⭐ guard the guard: a SIBLING-DIRECTORY import is detected — the hole this car found', () => {
+    // ⛔ THIS ARM EXISTS BECAUSE THE DETECTOR MISSED THIS SHAPE UNTIL W-FAITH F4c WROTE
+    // IT. `./faithField.js` from inside `src/domain/worldPulse/` matched no suffix in the
+    // old set, so the ~250 siblings in that directory — the likeliest consumers there are
+    // — were invisible to the census that claimed no production module imported the field.
+    // Every pre-existing guard-the-guard arm used the long path a TEST file must write, so
+    // none of them exercised the form that failed.
+    const siblings = [
+      { rel: 'src/domain/worldPulse/neighbour.js', src: "import { faithFieldOf } from './faithField.js';\n" },
+      { rel: 'src/domain/worldPulse/deep/inner.js', src: "import { faithFieldOf } from '../faithField.js';\n" },
+      { rel: 'src/domain/worldPulse/innocent.js', src: "import { x } from './piety.js';\n" },
+    ];
+    expect(importersOf(siblings)).toEqual([
+      'src/domain/worldPulse/deep/inner.js',
+      'src/domain/worldPulse/neighbour.js',
+    ]);
+  });
 });
 
 describe('FENCE 2 — the purity pin: no clock, no rng, no global state', () => {
+  // ⚠ `join(ROOT, member)` — the set became REPO-RELATIVE when FENCE 1's suffix hole was
+  // closed, so the old `join(ROOT, 'src/domain', member)` would now look for
+  // `src/domain/src/domain/…`. Moved with the set rather than left to throw.
   const SOURCES = FAITH_FIELD_SET.map((member) => ({
     member,
-    src: readFileSync(join(ROOT, 'src/domain', member), 'utf8'),
+    src: readFileSync(join(ROOT, member), 'utf8'),
   }));
 
   // A plain loop rather than `test.each(SOURCES)`: the lighting census parks a file
@@ -131,8 +227,11 @@ describe('FENCE 2 — the purity pin: no clock, no rng, no global state', () => 
     for (const { member, src } of SOURCES) {
       // Comment-stripped so a prose mention of Math.random cannot red this.
       const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|\s)\/\/[^\n]*/g, '$1');
+      // anchored: SOURCES.length is pinned to 2 above and `code` is real file text from disk
       expect(code, `${member}: Math.random`).not.toMatch(/Math\.random/);
+      // anchored: same pinned source list
       expect(code, `${member}: wall clock`).not.toMatch(/Date\.now|new Date\b/);
+      // anchored: same pinned source list
       expect(code, `${member}: performance clock`).not.toMatch(/performance\.now/);
     }
   });
@@ -145,6 +244,99 @@ describe('FENCE 2 — the purity pin: no clock, no rng, no global state', () => 
     const s = { id: 's', config: {} };
     const first = faithFieldOf(s, st);
     for (let i = 0; i < 25; i += 1) expect(faithFieldOf(s, st)).toEqual(first);
+  });
+});
+
+describe('FENCE 4 — the DRIVEN BYTE-IDENTITY GOLDEN (W-FAITH F4c, the replacement FENCE 1 owed)', () => {
+  // ⛔ THIS FENCE EXISTS BECAUSE FENCE 1 CHANGED SHAPE. While nothing imported the field,
+  // an import census was strictly stronger than a state pin. Now that two production
+  // modules DO import it, the census can only say the callers are the expected ones — it
+  // can no longer say the world does not move. That claim needs a driven world, and this
+  // is it: the real projection writer and the real causal substrate, over a corpus built
+  // to exercise every lever the field has, with NOTHING authored.
+  //
+  // ⭐ THE GOLDEN IS A FROZEN HASH, not a self-comparison. A pin that compared the corpus
+  // to itself would pass on any future change that perturbed both sides equally, which is
+  // the exact vacuity the WR-10 note at the top of this file warns about.
+
+  /** A pantheon that pulls every lever the field reads — ranks, standings, shares,
+   *  suppression, patron and non-patron — and authors NO boon or bane anywhere. */
+  const DORMANT_PANTHEON = {
+    patronRef: 'd.major',
+    deities: {
+      'd.major': { deityRef: 'd.major', snapshot: { _deityRef: 'd.major', name: 'Major', rankAxis: 'major', domain: 'harvest', lawAxis: 'lawful' }, share: 55, standing: 'ascendant', legitimacy: 0.9, niche: 'a', suppressed: false },
+      'd.minor': { deityRef: 'd.minor', snapshot: { _deityRef: 'd.minor', name: 'Minor', rankAxis: 'minor', domain: 'war' }, share: 30, standing: 'established', legitimacy: 0.5, niche: 'b', suppressed: false },
+      'd.cult': { deityRef: 'd.cult', snapshot: { _deityRef: 'd.cult', name: 'Cult', rankAxis: 'cult' }, share: 15, standing: 'cult', legitimacy: 0.2, niche: 'c', suppressed: false },
+      'd.gone': { deityRef: 'd.gone', snapshot: { _deityRef: 'd.gone', name: 'Gone', rankAxis: 'major' }, share: 0, standing: 'cult', legitimacy: 0, niche: 'd', suppressed: true },
+    },
+  };
+
+  /** Settlements spanning the magic dial (absent / alive / DEAD) and the piety record
+   *  (absent / present), because those are the two inputs that gate and scale the field.
+   *
+   *  ⚠⚠ THE PIETY ROW CARRIES ITS RECORD IN `pietyByCid`, NOT IN `config`, AND THE FIRST
+   *  CUT OF THIS FIXTURE HAD IT WRONG. `projectReligionStateOntoSettlement` REPLACES
+   *  `config.faithProfile` wholesale with the profile it builds this tick, so a piety
+   *  record planted on the incoming settlement is discarded before the field ever reads
+   *  it — the row would have looked devout and been measured at piety 1.0. Passing it the
+   *  way the pulse does is the only way this lever is actually pulled, and it is also the
+   *  live consequence of the car's "one record, one tick's truth" ordering. */
+  const CORPUS = [
+    { id: 'c.plain', name: 'Plain', population: 900, config: {} },
+    { id: 'c.magic', name: 'Magelight', population: 4200, config: { magicLevel: 'high' } },
+    { id: 'c.dead', name: 'Ashfall', population: 1500, config: { magicLevel: 'none', magicExists: false } },
+    { id: 'c.devout', name: 'Devout', population: 8000, config: { magicLevel: 'medium' } },
+  ];
+
+  /** The tick's piety read-model, keyed as the pulse keys it. Only the devout row has one,
+   *  so the corpus spans both the amplified and the unamplified case. */
+  const PIETY_BY_CID = { 'c.devout': { composite: 1.7, localMult: 1.3, local01: 0.8, dampener: { megaphoneLaw: 0.9 } } };
+
+  /** Drive the REAL seam over the corpus and return a stable digest of everything it
+   *  produced — the projected settlement AND the whole derived substrate. */
+  function digest(pantheon) {
+    const rows = CORPUS.map((base) => {
+      const projected = projectReligionStateOntoSettlement(base, { [base.id]: pantheon }, base.id, PIETY_BY_CID);
+      return { id: base.id, config: projected.config, causal: deriveCausalState(projected) };
+    });
+    return createHash('sha256').update(JSON.stringify(rows)).digest('hex').slice(0, 16);
+  }
+
+  test('the dormant corpus hashes to its frozen golden', () => {
+    // ⚠ MEASURED, NEVER TRANSCRIBED. If this reds, something moved the dormant path and
+    // the right response is to find out WHAT, not to re-freeze the constant.
+    expect(digest(DORMANT_PANTHEON)).toBe(DORMANT_GOLDEN);
+  });
+
+  test('no settlement in the dormant corpus carries a field key or a faith contributor', () => {
+    for (const base of CORPUS) {
+      const projected = projectReligionStateOntoSettlement(base, { [base.id]: DORMANT_PANTHEON }, base.id, PIETY_BY_CID);
+      const cfg = /** @type {{ faithProfile?: { field?: unknown } }} */ (projected.config);
+      expect(cfg.faithProfile, `${base.id}: the pantheon must still project a faith profile`).toBeTruthy();
+      expect(cfg.faithProfile?.field, `${base.id} minted a field key with nothing authored`).toBeUndefined();
+      const causal = deriveCausalState(projected);
+      for (const v of Object.values(causal.variables)) {
+        expect(v.contributors.some((c) => String(c.source).startsWith('faith.field.'))).toBe(false);
+      }
+    }
+  });
+
+  test('guard the guard: the digest MOVES when a boon is authored', () => {
+    // Without this the golden above could be a hash of a corpus the field never touches —
+    // a pin that would stay green if the whole wiring were deleted.
+    const authored = JSON.parse(JSON.stringify(DORMANT_PANTHEON));
+    authored.deities['d.major'].snapshot.boonChannel = 'harvest';
+    authored.deities['d.major'].snapshot.boonStrength = 'heavy';
+    expect(digest(authored)).not.toBe(DORMANT_GOLDEN);
+  });
+
+  test('guard the guard: a boon on an UNBOUND channel leaves the golden untouched', () => {
+    // The other half of the same claim — the three declared-unbound channels really are
+    // inert, proved on a driven world rather than by reading the register.
+    const authored = JSON.parse(JSON.stringify(DORMANT_PANTHEON));
+    authored.deities['d.major'].snapshot.boonChannel = 'learning';
+    authored.deities['d.major'].snapshot.boonStrength = 'heavy';
+    expect(digest(authored)).toBe(DORMANT_GOLDEN);
   });
 });
 

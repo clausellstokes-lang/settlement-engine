@@ -86,6 +86,67 @@ export const FAITH_CHANNELS = Object.freeze([
 export const FAITH_STRENGTHS = Object.freeze(['faint', 'firm', 'heavy']);
 
 /**
+ * ⭐⭐ THE CHANNEL → CAUSAL-VARIABLE BINDINGS (W-FAITH F4c). This table is the car,
+ * and it is a REGISTER rather than a comment because of what measuring it found.
+ *
+ * `customContentSchema.js` states the channel register's premise in terms:
+ *
+ *   > Each key names an EXISTING settlement causal quantity; none invents one.
+ *
+ * ⚠⚠ MEASURED AT THIS TIP, THAT IS TRUE OF SIX OF THE NINE AND FALSE OF THREE.
+ * `causalState.SYSTEM_VARIABLES` is the estate's causal substrate — sixteen named
+ * variables, each derived from a contributor chain — and `sea`, `learning` and
+ * `hearth` name nothing in it, nor anywhere else in `src/domain`:
+ *
+ *   • `sea`      — the estate's only sea quantity is `stormMultOf`
+ *                  (`spatial/navalLayer.js`), whose sole consumer is `roads/seaRoads.js`,
+ *                  in the SPATIAL layer behind the dark virtual `navalEnabled`.
+ *                  `causalState.js` reads no port, sea or naval input at all.
+ *   • `learning` — no settlement causal quantity of that name exists. The only
+ *                  `learning` in the engine is `LAW_BAND_KEYS`'s law-band ADAPTATION
+ *                  RATE and `dispositionTreatyLearningActive` — different concepts
+ *                  that would be actively wrong to bind to "Learning and record".
+ *   • `hearth`   — no fertility or household causal quantity exists. The word appears
+ *                  in a founding-myth vocabulary and as INTERIOR FURNITURE.
+ *
+ * ⛔ SO THE THREE ARE DECLARED UNBOUND RATHER THAN GIVEN A NEIGHBOUR'S HOME, and
+ * that refusal is the important half of this table. Binding `learning` to
+ * `social_trust` because it is nearby is the estate's own most-bitten class — a
+ * quantity acquiring a different meaning at each consumer while nothing ever reds.
+ * An authored `boon: learning` is therefore PROVABLY inert (this register says so,
+ * and `faithChannelWiring.test.js` executes it) rather than SILENTLY inert.
+ *
+ * The remedy is the pen's, not a lane's: §D3's vocabulary is an owner-UNSIGNED
+ * CANDIDATE register (the volume's own §3.4), so the owner either signs three new
+ * causal variables into the substrate, or strikes the three words from the register.
+ * Both are register acts. F6c carries the row.
+ *
+ * @type {Readonly<Record<string, string>>} channel → `causalState.SYSTEM_VARIABLES` member
+ */
+export const FAITH_CHANNEL_BINDINGS = Object.freeze({
+  harvest: 'food_security',
+  trade: 'trade_connectivity',
+  craft: 'economic_capacity',
+  healing: 'healing_capacity',
+  order: 'law_order',
+  war_readiness: 'defense_readiness',
+});
+
+/**
+ * The channels that name no causal quantity, each with the measurement that says so.
+ * Kept as a POSITIVE register rather than as the absence of a binding, so the set is
+ * enumerable, testable and impossible to shrink by accident: the wiring test asserts
+ * `FAITH_CHANNELS === keys(BINDINGS) ∪ keys(UNBOUND)` exactly, so a tenth channel, or
+ * a binding quietly deleted, reds rather than going silently inert.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const FAITH_UNBOUND_CHANNELS = Object.freeze({
+  sea: 'No settlement causal variable names the sea. The estate\'s only sea quantity is stormMultOf (spatial/navalLayer.js), consumed solely by roads/seaRoads.js in the spatial layer behind the dark virtual navalEnabled — not a causal variable, and not readable from a settlement.',
+  learning: 'No settlement causal variable names learning. The only engine uses of the word are LAW_BAND_KEYS\'s law-band adaptation rate and dispositionTreatyLearningActive, neither of which is "Learning and record".',
+  hearth: 'No fertility or household causal variable exists. The word appears only in a founding-myth vocabulary token and in interior furniture templates.',
+});
+
+/**
  * The seam name TE-VIRT-1 owes a home. Written as a STRING rather than read from
  * any rules object, because nothing reads it yet and a key that is only ever
  * compared against would read as a live gate that is permanently off — which is
@@ -128,6 +189,26 @@ export const FAITH_FIELD_TUNING = Object.freeze({
   // Whether that is right taste — a lower cap, or a louder STRENGTH ladder — is a
   // tuning row for the owner's signature, not a lane's call to make silently.
   DAMP_MAX: 0.6,
+  // W-FAITH F4c — THE CAUSAL SWING: score points on a `causalState` variable per unit
+  // of signed channel total. It is DERIVED from an existing calibrated constant rather
+  // than invented, which is the only reason a lane may set it at all:
+  //
+  //   `DEITY_LAW_TUNING.lawOrderSwing = 8` is the law_order swing a fully lawful patron
+  //   applies, and its own comment calibrates it as "comparable in scale to the
+  //   government-archetype term (±8), so a patron meaningfully tilts order without
+  //   overwhelming the institutional signals". At SWING = 20 a heavy boon from a lone
+  //   ascendant major patron holding the whole adherent pool (channel total 0.38 at
+  //   neutral piety) lifts its variable by round(0.38 × 20) = 8 — EXACTLY the lawful
+  //   patron's swing. The two authored deity levers therefore speak at one volume by
+  //   construction rather than by coincidence.
+  //
+  // ⚠ THE CLAMPED EXTREME IS LOUDER THAN THAT, and it is stated rather than hidden:
+  // `channels[ch]` already carries `pietyMultOf` (0.5..2.0), so a devout city can drive
+  // a channel to the DAMP_MAX backstop, where the lift is round(0.6 × 20) = 12. F3c's
+  // recorded 0.38 bound was measured at piety 1 and is a bound on the WEIGHT fold, not
+  // on the term; this car re-measures the reachable maximum end to end rather than
+  // inheriting that figure. Both numbers are owner-taste rows for F6c.
+  CAUSAL_SWING: 20,
 });
 
 /** @typedef {import('../settlement.schema.js').SimSettlement} SimSettlement */
@@ -326,4 +407,146 @@ export function faithFieldOf(settlement, religionState) {
 export function faithChannelMult(settlement, religionState, channel) {
   if (!FAITH_CHANNELS.includes(channel)) return 1;
   return faithFieldOf(settlement, religionState).mults[channel];
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// W-FAITH F4c — THE PROJECTION SEAM, and why the wiring needs one at all.
+//
+// `causalState.deriveCausalState(settlement)` takes ONLY a settlement. Every one of
+// its callers — dailyLife, the PDF system-state section, the dossier engine
+// sections, SubstrateTab, lib/structuralFingerprint, magicProfile — holds no
+// worldState and therefore no religion state, while `faithFieldOf` REQUIRES one
+// (F3c's M2: the projected `faithProfile.deities[]` carries share/standing/isPatron
+// but not each member's snapshot, so it cannot answer the authored boon/bane).
+// The field therefore cannot be computed at the causal site.
+//
+// The seam that resolves it is the estate's own, already worked twice in this very
+// subsystem: `projectReligionStateOntoSettlement` holds BOTH objects and already
+// attaches two conditional derived read-models — `piety` (W-F3) and `martial`
+// (W-F8). The field is the third, and it inherits their whole discipline:
+//
+//   • CONDITIONAL — absent unless some deity authors a boon or bane, which no deity
+//     in the estate does. A key is a byte; no key, no byte, byte-identical.
+//   • RE-DERIVED EVERY TICK from the religion state; never authoritative state, so
+//     it cannot drift out of agreement with the pantheon that produced it.
+//   • READ-TIMED — written at tick END, consumed at the next tick's START, exactly
+//     as piety is. This tick's field effects can never re-enter this tick's piety,
+//     which is the anti-runaway seam this file's header names.
+//
+// ⚠ DELIBERATELY NOT WIDENED: the alternative was to carry every member's snapshot
+// into `faithProfile.deities[]` so a causal reader could recompute the field. That is
+// a per-deity persisted-shape change on every faith settlement in the estate, and
+// F3c's M2 refused it on exactly that ground. One small computed record is the
+// cheaper honest shape.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** @typedef {{ channels: Record<string, number> }} FaithFieldProjection */
+
+/** Six decimals, the estate's persisted-float idiom — a projected read-model that is
+ *  re-derived every tick must not churn a save's bytes in the fifteenth digit.
+ *  ⚠ `-0` is normalised to `0`: `Math.round(-0.2)` is `-0`, which serialises as `-0`
+ *  and would make two arithmetically identical saves differ by a character.
+ *  @param {number} v @returns {number} */
+const round6 = (v) => {
+  const r = Math.round(v * 1e6) / 1e6;
+  return r === 0 ? 0 : r;
+};
+
+/**
+ * THE PROJECTED FIELD, or `null` when there is nothing to project.
+ *
+ * Only channels whose signed total is non-zero are carried, in codepoint order, so
+ * the record names what actually moved and a reader cannot mistake a silenced god for
+ * a present one (the same reasoning that keeps `contributors` empty under the magic
+ * gate rather than full of zeroes).
+ *
+ * ⭐⭐ IT ITERATES `FAITH_CHANNEL_BINDINGS`, NOT `FAITH_CHANNELS`, AND THAT IS A
+ * DELIBERATE NARROWING. The three channels that name no causal variable would otherwise
+ * mint a persisted key that NOTHING reads — a writer with no reader, the exact mirror of
+ * the reader-with-no-writer class the observed-shape ratchet caught in this very
+ * subsystem one car ago. Worse, it would make an authored `boon: learning` change a
+ * save's bytes while changing no behaviour at all, which is the shape of a promise
+ * quietly broken. Narrowed here, `boon: learning` mints no key, moves no score, and is
+ * inert in the strongest available sense: there is nothing of it anywhere.
+ *
+ * ⭐ NULL IS THE DORMANCY GUARANTEE AND IT IS EXACT. No religion state, no members,
+ * no authored boon/bane on a BOUND channel, or a dead-magic world ⇒ every total is
+ * exactly 0 ⇒ no channels ⇒ `null` ⇒ the caller attaches NO KEY. Legacy worlds cannot
+ * observe the feature because there is nothing to observe.
+ *
+ * @param {SimSettlement | null | undefined} settlement
+ * @param {FaithReligionState | null | undefined} religionState
+ * @returns {FaithFieldProjection | null}
+ */
+export function faithFieldProjection(settlement, religionState) {
+  const reading = faithFieldOf(settlement, religionState);
+  /** @type {Record<string, number>} */
+  const channels = {};
+  let any = false;
+  // Codepoint order: `Object.keys` on a frozen literal preserves insertion order, and the
+  // sort makes the record's key order a property of the CHANNEL NAMES rather than of how
+  // the register happens to be written — so re-ordering the register cannot churn a save.
+  for (const channel of Object.keys(FAITH_CHANNEL_BINDINGS).sort()) {
+    const total = round6(reading.channels[channel]);
+    if (total === 0) continue;
+    channels[channel] = total;
+    any = true;
+  }
+  return any ? { channels } : null;
+}
+
+/**
+ * One channel's signed total, read off a PROJECTION RECORD.
+ *
+ * Absent record, absent channel, unknown channel ⇒ literal 0, never `undefined`: a
+ * consumer that mistypes a channel gets silence, not a NaN in a score.
+ *
+ * ⚠⚠ IT TAKES THE RECORD, NOT THE SETTLEMENT, AND THE OBSERVED-SHAPE RATCHET IS WHY.
+ * The obvious signature is `(settlement, channel)` — and it costs this file a NEW
+ * `faithProfile on config` inventory row against a frozen ceiling of ZERO, because
+ * `faithProfile` is a key the GENERATOR never writes (the pulse mints it). The estate's
+ * cure for that class is to read the key where a row already exists and hand the value
+ * down, which is what `causalState.pietyLocalAmp` now does with its single frozen read.
+ * ⭐ It is also the better decomposition: this leaf stops needing to know what a
+ * settlement is, and becomes a pure function of the record it defined.
+ *
+ * @param {{ channels?: Record<string, unknown> } | null | undefined} field a projection record
+ * @param {string} channel
+ * @returns {number}
+ */
+export function faithChannelTotalOf(field, channel) {
+  const raw = field?.channels?.[channel];
+  return typeof raw === 'number' && Number.isFinite(raw) ? raw : 0;
+}
+
+/**
+ * THE ONE PLACE A CHANNEL TOTAL BECOMES A CAUSAL SCORE DELTA.
+ *
+ * `causalState`'s contributors are signed INTEGERS added to a 0..100 score, so the
+ * field's signed total is converted here and nowhere else — six derivers name a
+ * channel, and exactly one function decides what a channel is worth.
+ *
+ * ⚠⚠ THE PIETY AMPLIFIER IS **NOT** APPLIED HERE, AND THAT IS A CORRECTNESS
+ * REQUIREMENT RATHER THAN A STYLE CHOICE. `causalState`'s existing deity terms
+ * multiply their lift by `pietyLocalAmp(s)` because `deityLawDirection` is a bare
+ * axis sign that has never met piety. `faithFieldOf` ALREADY folds the full composite
+ * `pietyMultOf(settlement)` into every term, so amplifying again at the causal site
+ * would square the piety multiplier — a devout city's boon counted twice, which is
+ * exactly the double-count W-FAITH D1 forbids, wearing a second subsystem's clothes.
+ *
+ * ⭐ ROUNDING IS THE SPARSITY PROPERTY, not a rounding error: any total below
+ * 1/(2 × CAUSAL_SWING) = 0.025 rounds to 0 and pushes NO contributor, so a faint boon
+ * from a marginal cult is inaudible in the substrate rather than appearing as a
+ * receipt line worth zero points.
+ *
+ * @param {{ channels?: Record<string, unknown> } | null | undefined} field a projection record
+ * @param {string} channel
+ * @returns {number} a signed integer score delta; 0 when the field is silent here
+ */
+export function faithChannelLift(field, channel) {
+  if (!Object.prototype.hasOwnProperty.call(FAITH_CHANNEL_BINDINGS, channel)) return 0;
+  const lift = Math.round(faithChannelTotalOf(field, channel) * FAITH_FIELD_TUNING.CAUSAL_SWING);
+  // `Math.round(-0.2)` is `-0`; a `-0` delta would serialise as "-0" in a contributor
+  // receipt and compare unequal under Object.is. Normalised at the boundary.
+  return lift === 0 ? 0 : lift;
 }
