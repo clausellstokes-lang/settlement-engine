@@ -12,6 +12,15 @@
  * band-AGNOSTIC and read every quantity from here, so retuning is an edit to
  * this file alone and never a code change.
  *
+ * ⭐⭐ AND THE SIGNING ITSELF IS ONE FILE'S DIFF (car D4). `REGISTER_VII_SIGNATURE`
+ * below is the whole ritual: the owner edits the numbers here and flips the two
+ * words here, and `densityLaw.NEW_SETTLEMENT_DENSITY_LAW_VERSION` — the dial that
+ * decides which law a NEW world is born under — reads that pair and nothing else.
+ * Before D4 the values lived here and the dial lived in `densityLaw.js`, so the
+ * signature was a two-file act; the three tunables that were still camped beside
+ * their consumers (`FLOOR_LIFT_CHANCE`, `DOUBLED_NICHE_SHARE`, `VACANCY_WEIGHTS.cap`)
+ * came home in the same car.
+ *
  * THE BAND'S EDGES ARE BELIEVABILITY ASSERTIONS (§810.2b): a range endpoint is
  * not a performance bound, it is a claim about what a settlement of that size
  * can plausibly be. A thorp can never roll seven named figures; a metropolis
@@ -21,6 +30,37 @@
  *
  * Pure data. No RNG, no imports from the roll, no React, no store.
  */
+
+/**
+ * ⭐⭐ THE OWNER'S SIGNATURE — THE WHOLE RITUAL, IN THE ONE FILE (car D4).
+ *
+ * Every number below this record is the owner's pen. This record is what makes the
+ * signing act a SINGLE FILE'S DIFF: the values are edited here, and the two words that
+ * turn a draft ladder into the law new worlds are born under are edited here too.
+ *
+ *   `signed` — the pen has landed on the values in this file.
+ *   `live`   — and NEW worlds are minted under them.
+ *
+ * `densityLaw.NEW_SETTLEMENT_DENSITY_LAW_VERSION` is derived from this pair and from
+ * nothing else, so there is no second place to remember.
+ *
+ * ⛔ THE TWO WORDS ARE SEPARATE ON PURPOSE, AND THE ORDER IS STRUCTURAL. §810 R5 forbids
+ * minting new worlds under unsigned numbers, so `live` CANNOT light the law while `signed`
+ * is false — that ruling is machinery here rather than advice. Signing without lighting is
+ * a legal and useful state (sign, soak, then light); lighting without signing is not a
+ * state at all.
+ *
+ * ⛔ EXISTING WORLDS NEVER MOVE, whatever this record says. A world's law travels in its
+ * own persisted config and there is no migration (`densityLaw.js`, property 3), so both
+ * words only ever decide what a world BORN AFTER THE EDIT rolls. THE PROMISE ("a seed is a
+ * STARTING world forever") is untouched by either.
+ *
+ * ⛔ A LANE MAY NOT FLIP EITHER WORD. Both are the owner's, by nature (tuning signature).
+ */
+export const REGISTER_VII_SIGNATURE = Object.freeze({
+  signed: false,
+  live: false,
+});
 
 /** Tier order, smallest first. The one canonical spelling for this module family. */
 export const TIER_ORDER = Object.freeze([
@@ -118,13 +158,45 @@ export const HEAD_RUNG_FLOOR = 'notable';
  * `yearnerGivenHeadVacant` is that over-weight: given a vacant head, this is
  * the chance the roll seeds a yearner one band below with `seek_promotion`
  * pre-loaded rather than simply leaving the faction thin.
+ *
+ * `cap` is the ceiling a weight may reach AFTER `PARTICULAR_TILTS.vacancyTilt` has
+ * multiplied it — a war-torn, impoverished settlement runs understaffed, but never so
+ * understaffed that a rung is empty as a near-certainty. It came home from
+ * `densityRoll.js`'s `rollRoster` in car D4: that file's own header promises "not one
+ * number in this file", and this was the one it still carried.
  */
 export const VACANCY_WEIGHTS = Object.freeze({
   head:   0.18,
   middle: 0.35,
   lowest: 0.30,
   yearnerGivenHeadVacant: 0.75,
+  cap:    0.95,
 });
+
+/**
+ * §810.3 R13 — THE CHANCE A SETTLEMENT CARRYING A MISSING-SEAT STRESSOR IS ACTUALLY
+ * BORN RULERLESS. Deliberately not 1: the stressor is a climate, and most settlements
+ * under it still have somebody holding the chair.
+ *
+ * Came home from `applyDensityLaw.js` in car D4, which had parked it beside its one
+ * consumer with the note "belongs to the tuning surface's family … until D4 folds it in
+ * with the rest of the signed values".
+ */
+export const FLOOR_LIFT_CHANCE = 0.5;
+
+/**
+ * §810 R4 — WHAT SHARE OF ITS HOST'S POWER THE SECOND CLAIMANT ON A DOUBLED NICHE
+ * CARRIES. A second claimant SPLITS the niche's standing rather than inventing new
+ * power (the shares idiom), and it stands below its host because it is the challenger
+ * in that niche, not its equal.
+ *
+ * ⚠ THIS FILE ALREADY CITED THE NUMBER BEFORE IT HELD IT — `contestWidthForTier`'s
+ * docblock below reads "the second claimant carries ~0.55 of its host's power
+ * (`resizeSeats`)", and that measured claim is the reason the contest width had to
+ * widen at all. A tuning surface that DOCUMENTS a value it does not own is one retune
+ * away from documenting a lie; car D4 brought it home.
+ */
+export const DOUBLED_NICHE_SHARE = 0.55;
 
 /**
  * How the settlement's PARTICULARS tilt the rolls within the band (§810 R1:

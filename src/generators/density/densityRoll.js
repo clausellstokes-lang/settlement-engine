@@ -376,7 +376,7 @@ export function disperseMass(rng, seated, mass, concentration, suite, seatFloorK
  *                            officeRoleKey: string|null}>}}
  */
 export function rollRoster(rng, tier, size, vacancyMult, options = {}) {
-  const vac = k => Math.min(0.95, VACANCY_WEIGHTS[k] * vacancyMult);
+  const vac = k => Math.min(VACANCY_WEIGHTS.cap, VACANCY_WEIGHTS[k] * vacancyMult);
   // ⛔ THE DRAWS ARE UNCONDITIONAL AND IN A FIXED ORDER. Every rung rolls even
   // when `requireHead` will override it, so a ruling faction and an ordinary one
   // consume identical draw counts and the stream position of everything after

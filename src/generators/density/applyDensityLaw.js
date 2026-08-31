@@ -53,7 +53,9 @@
 import { matchFactionArchetype } from '../factionRoles.js';
 import { seatKey } from '../../domain/density/seatKey.js';
 import { FACTION_DESCRIPTORS } from '../../data/powerData.js';
-import { bandsForTier, tierKey } from '../../domain/density/densityBands.js';
+import {
+  DOUBLED_NICHE_SHARE, FLOOR_LIFT_CHANCE, bandsForTier, tierKey,
+} from '../../domain/density/densityBands.js';
 import { rollsRegisterVii } from '../../domain/density/densityLaw.js';
 import { RUNG_ROLE_FIELD } from '../../domain/density/densityRungs.js';
 import { rollDensityPlan } from './densityRoll.js';
@@ -70,12 +72,9 @@ import { prosperityRank01 } from '../../domain/prosperityRank.js';
  *  new vocabulary. CANDIDATE register — the owner's pen freezes it. */
 export const MISSING_SEAT_STRESSORS = Object.freeze(['succession_void']);
 
-/** The chance a settlement carrying a missing-seat stressor is actually BORN
- *  rulerless. Deliberately not 1: the stressor is a climate, and most
- *  settlements under it still have someone holding the chair. DRAFT — belongs
- *  to the tuning surface's family; kept beside its one consumer until D4 folds
- *  it in with the rest of the signed values. */
-export const FLOOR_LIFT_CHANCE = 0.5;
+/* `FLOOR_LIFT_CHANCE` moved to `domain/density/densityBands.js` in car D4 — the
+ * hand-off this line's own note asked for ("until D4 folds it in with the rest of the
+ * signed values"). Imported above; value unchanged. */
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 
@@ -282,8 +281,9 @@ function resizeSeats(powerStructure, plan, rng) {
       // pantheon niche-contest pattern; this is the tie it reads.
       contestsNiche: key,
       // A second claimant on one niche splits the niche's standing rather than
-      // inventing new power — the shares idiom, not a new power source.
-      power: Math.max(1, Math.round(num(host.power, 1) * 0.55)),
+      // inventing new power — the shares idiom, not a new power source. The share
+      // itself is a signed value and lives in `densityBands.DOUBLED_NICHE_SHARE`.
+      power: Math.max(1, Math.round(num(host.power, 1) * DOUBLED_NICHE_SHARE)),
     });
   }
   const factions = [...kept, ...minted];
