@@ -105,23 +105,23 @@ describe('the constants are DERIVED, and the module says what is unsigned', () =
     expect(DRIFT_PROVENANCE.ownerRows.length).toBeGreaterThanOrEqual(4);
   });
 
-  test('RECONCILE PIN — the mirrored band words must equal car L1\'s catalog', () => {
-    // AXIS_LEVELS is MIRRORED, not imported: L1's paradigmAxisCatalog is unlanded at
-    // this base, and importing an unlanded sibling would make this car unbuildable
-    // alone. The moment the two cars share a tree this assertion becomes the
-    // reconcile, so the mirror cannot outlive its source silently.
-    const catalog = join(REPO_ROOT, 'src/domain/npc/paradigmAxisCatalog.js');
-    if (!existsSync(catalog)) {
-      // Anchored: the absence is a FACT about this tree, asserted positively, not a
-      // skipped branch — and the sibling that does exist proves the path is right.
-      expect(existsSync(join(REPO_ROOT, 'src/domain/npc/characterDrift.js'))).toBe(true);
-      return;
-    }
-    const source = readFileSync(catalog, 'utf8');
-    const declared = /AXIS_LEVELS = Object\.freeze\(\[([^\]]*)\]\)/.exec(source);
-    expect(declared, 'the catalog still declares AXIS_LEVELS as a frozen literal').toBeTruthy();
-    const words = declared[1].split(',').map((w) => w.trim().replace(/^'|'$/g, '')).filter(Boolean);
-    expect(words).toEqual([...AXIS_LEVELS]);
+  test('RECONCILE PIN — the mirror is PROVEN, and the proof moved to ONE census', () => {
+    // ⭐⭐ THIS PIN WAS A SOURCE-TEXT REGEX SCRAPE OF L1's FILE, with a dead
+    // `existsSync` arm for a catalog that is now permanently present. It passed, but
+    // it asserted a claim about TEXT — the exact class the substrate coupling spent
+    // four walkers curing everywhere else in this file. The live equality now lives
+    // in `tests/domain/npc/paradigmAxisCatalog.test.js`'s MIRROR CENSUS, beside the
+    // other three restatements, because ONE census over four mirrors is a census and
+    // four scattered scrapes are four things to remember.
+    //
+    // ⚠ AND THE MIRROR ITSELF IS RETAINED DELIBERATELY. An import here would reach the
+    // catalog from `characterConsumers.js` — which `personaSlicer`, `clergyTraitPlane`
+    // and `espionageTap` all import — lighting a 628-line table on a production path
+    // and spending a darkness L1's own walker reserves to car L5's re-pointing. What
+    // is kept here is the LOCAL half: the ladder this module's own arithmetic depends on.
+    expect(existsSync(join(REPO_ROOT, 'src/domain/npc/paradigmAxisCatalog.js'))).toBe(true);
+    expect([...AXIS_LEVELS]).toEqual(['a_touch', 'marked', 'defining']);
+    expect(SPECTRUM_HALF_SPAN).toBe(AXIS_LEVELS.length);
   });
 });
 

@@ -305,21 +305,18 @@ describe('OWNER-UNSIGNED, and it says which calls are the pen\'s', () => {
 });
 
 describe('RECONCILE PINS — the mirror cannot outlive its source silently', () => {
-  test('the axis roster must equal car L1\'s catalog the moment they share a tree', () => {
-    // PARADIGM_AXIS_IDS is MIRRORED, not imported: L1's paradigmAxisCatalog is
-    // unlanded at this base, and importing an unlanded sibling would make this car
-    // unbuildable alone (the L2 idiom).
-    if (!existsSync(L1_CATALOG)) {
-      // Anchored: the absence is a FACT about this tree, asserted positively rather
-      // than skipped — and the sibling that DOES exist proves the path is right.
-      expect(existsSync(join(REPO_ROOT, 'src/domain/npc/characterDrift.js'))).toBe(true);
-      expect(PARADIGM_AXIS_IDS.length).toBe(17);
-      return;
-    }
-    const source = readFileSync(L1_CATALOG, 'utf8');
-    const ids = [...source.matchAll(/^\s*id: '([A-Z]+)',$/gm)].map((match) => match[1]);
-    expect(ids.length, 'the catalog still declares axes as `id: \'NAME\',` rows').toBeGreaterThan(0);
-    expect([...ids].sort()).toEqual([...PARADIGM_AXIS_IDS].sort());
+  test('the axis roster is no longer a mirror at all — it is DERIVED from car L1', () => {
+    // ⭐⭐ THE PIN OUTLIVED THE PROBLEM. This was a regex scrape of L1's source with a
+    // dead `existsSync` arm; at the substrate coupling the roster stopped being a
+    // hand-kept list and became `PARADIGM_AXES.map((axis) => axis.id)`. There is no
+    // second list to drift, so what is left to assert is that the derivation is real
+    // and non-trivial. The four-mirror census lives in L1's own suite.
+    expect(existsSync(L1_CATALOG)).toBe(true);
+    expect(PARADIGM_AXIS_IDS.length).toBe(17);
+    expect([...PARADIGM_AXIS_IDS]).toEqual([...PARADIGM_AXIS_IDS].sort());
+    // anchored: a derived roster that read back empty would satisfy a sorted-ness
+    // check trivially, so the membership of a known axis is asserted live.
+    expect(PARADIGM_AXIS_IDS).toContain('MERCY');
   });
 
   test('every (axis, pole) this table pulls on must resolve to a real pole word in L1', () => {

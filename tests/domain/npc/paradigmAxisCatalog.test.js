@@ -34,6 +34,20 @@ import {
   axisHomedWords, mintedWords,
 } from '../../../src/domain/npc/paradigmAxisCatalog.js';
 
+// ⭐ THE FOUR MIRRORS, imported LIVE for the mirror census. A test may import what a
+// production leaf may not: the census is the whole point of the coupling, and reading
+// the VALUES is what turns four declarations into four cross-checks.
+import { AXIS_LEVELS as DRIFT_AXIS_LEVELS } from '../../../src/domain/npc/characterDrift.js';
+import {
+  PARADIGM_AXIS_IDS as FUNNEL_AXIS_IDS,
+  EXPERIENCE_TABLE,
+  LIVED_EXPERIENCE_KINDS,
+} from '../../../src/domain/npc/livedExperienceCatalog.js';
+import {
+  CORRUPTIBLE_AXIS_VECTORS,
+  RISK_CENTER_AXES,
+} from '../../../src/domain/npc/characterConsumers.js';
+
 // The live tables — the authorities this catalog must agree with.
 import { TRAIT_ALIGNMENT, TRAIT_AGGRESSION } from '../../../src/data/npcTraitWeights.js';
 import { TRAIT_PLANE } from '../../../src/domain/worldPulse/clergyTraitPlane.js';
@@ -490,7 +504,15 @@ describe('DARK BY CONSTRUCTION — the catalog is consumed by nothing in src/', 
    * itself be unreachable from production, so the catalog is still dark THROUGH it.
    * "Car L5 owns the re-pointing" is unchanged — no legacy-word seam moved here.
    */
-  const ENROLLED_CONSUMERS = ['src/domain/worldPulse/faithWitnessSource.js'];
+  const ENROLLED_CONSUMERS = [
+    // The funnel catalog's axis roster, DERIVED from `PARADIGM_AXES[].id` instead of
+    // hand-kept — the one mirror of four where the import costs no darkness, because
+    // this leaf's own importers are themselves imported by nobody.
+    'src/domain/npc/livedExperienceCatalog.js',
+    // W-FAITH's witness adapter: `AXIS_LEVELS`, to map a deity's authored
+    // `AXIS:pole:level` token rung-for-rung onto the funnel's band ladder.
+    'src/domain/worldPulse/faithWitnessSource.js',
+  ].sort();
 
   test('the src consumers of paradigmAxisCatalog are the enrolled coupling roster, and nothing else', () => {
     const importers = jsFilesUnder(join(REPO_ROOT, 'src'))
@@ -503,32 +525,68 @@ describe('DARK BY CONSTRUCTION — the catalog is consumed by nothing in src/', 
     expect(importers).toEqual(ENROLLED_CONSUMERS);
   });
 
-  test('⭐ AND THE CATALOG IS STILL DARK THROUGH ITS ONE CONSUMER', () => {
-    // The half that keeps the roster honest: an enrolled consumer that production
-    // could reach would have opened the catalog by proxy. Nothing imports the
-    // witness adapter, so the dormancy claim survives the enrolment intact.
-    const files = jsFilesUnder(join(REPO_ROOT, 'src'));
-    const reachers = files
-      .filter((file) => !file.endsWith('faithWitnessSource.js'))
-      .filter((file) => {
-        const text = readFileSync(file, 'utf8');
-        // ⛔ THE SAME TWO-STAGE READ AS `dependsOnCatalog`, AND IT IS OWED HERE FOR A
-        // REASON THIS CAR MEASURED ON ITSELF: `livedExperienceCatalog.js`'s
-        // `faith_milieu` row carries the RECEIPT STRING
-        // `'faithWitnessSource.js:faithWitnessEntries (...)'`, and a comment-only
-        // strip convicted the catalog of calling the adapter. A quoted name is a
-        // citation exactly as a commented one is.
-        return /from\s+'[^']*\/faithWitnessSource\.js'/.test(stripComments(text))
-          || /\b(faithWitnessEntries|exposureDemotion|FAITH_WITNESS_KIND|FAITH_WITNESS_TUNING)\s*[([.]/
-            .test(codeWithoutCitations(text));
-      })
-      .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'));
-    expect(reachers).toEqual([]);
-    // anchored: the enrolled consumer really is on the tree and really does import
-    // the catalog, so neither list above passed by matching nothing.
-    const witness = readFileSync(join(REPO_ROOT, ENROLLED_CONSUMERS[0]), 'utf8');
-    expect(witness).toContain("from '../npc/paradigmAxisCatalog.js'");
-    expect(dependsOnCatalog(witness)).toBe(true);
+  test('⭐ AND THE CATALOG IS STILL DARK THROUGH EVERY ENROLLED CONSUMER', () => {
+    // ⭐⭐ THE HALF THAT KEEPS THE ROSTER HONEST, AND IT IS WHAT DECIDED WHICH MIRRORS
+    // BECAME IMPORTS. An enrolled consumer production could reach would have opened
+    // the catalog by proxy. Measured on this tree:
+    //
+    //   `faithWitnessSource.js`      imported by NOBODY                       ⇒ free
+    //   `livedExperienceCatalog.js`  imported by the funnel and the sources leaf,
+    //                                and BOTH of those are imported by nobody  ⇒ free
+    //   `characterDrift.js`          imported by `characterConsumers.js`, which
+    //                                `personaSlicer` / `clergyTraitPlane` /
+    //                                `espionageTap` import                     ⇒ NOT free
+    //   `characterConsumers.js`      the production door itself                ⇒ NOT free
+    //
+    // So two mirrors became imports and two did not, and the two that did not are
+    // proven EQUAL instead, live, by the mirror census below. That is not a weaker
+    // outcome — a declared mirror is not a cross-check, and a proven one is.
+    const texts = jsFilesUnder(join(REPO_ROOT, 'src'))
+      .map((file) => [relative(REPO_ROOT, file).replace(/\\/g, '/'), readFileSync(file, 'utf8')]);
+
+    /**
+     * Who reaches `rel`, ignoring the modules already known to be inside the dark
+     * closure. Two-stage read, exactly as `dependsOnCatalog` — and it is owed here for
+     * a reason this car measured on itself: `livedExperienceCatalog.js`'s `faith_milieu`
+     * row carries the RECEIPT STRING `'faithWitnessSource.js:faithWitnessEntries (...)'`,
+     * and a comment-only strip convicted the catalog of CALLING the adapter. A quoted
+     * name is a citation exactly as a commented one is.
+     * @param {string} rel @param {readonly string[]} symbols @param {readonly string[]} ignore
+     */
+    const reachersOf = (rel, symbols, ignore) => {
+      const base = rel.split('/').pop().replace('.js', '');
+      const moduleRe = new RegExp(`from\\s+'[^']*/${base}\\.js'`);
+      const symbolRe = new RegExp(`\\b(${symbols.join('|')})\\s*[([.]`);
+      return texts
+        .filter(([name]) => name !== rel && !ignore.includes(name))
+        .filter(([, text]) => moduleRe.test(stripComments(text)) || symbolRe.test(codeWithoutCitations(text)))
+        .map(([name]) => name);
+    };
+
+    // 1 — the witness adapter is reached by NOBODY.
+    expect(reachersOf('src/domain/worldPulse/faithWitnessSource.js',
+      ['faithWitnessEntries', 'exposureDemotion', 'FAITH_WITNESS_KIND', 'FAITH_WITNESS_TUNING'], [])).toEqual([]);
+    // 2 — the funnel catalog is reached only by the funnel family, whose own two
+    // members are reached by nobody. Both hops are asserted; a claim that stopped at
+    // the first hop would be a darkness proof one link short of the light.
+    expect(reachersOf('src/domain/npc/livedExperienceCatalog.js',
+      ['EXPERIENCE_TABLE', 'LIVED_EXPERIENCE_KINDS', 'AMBIENT_EXPERIENCE_KINDS', 'experienceKindOf', 'experienceRowOf'],
+      [])).toEqual(['src/domain/npc/livedExperienceFunnel.js', 'src/domain/npc/livedExperienceSources.js']);
+    expect(reachersOf('src/domain/npc/livedExperienceFunnel.js',
+      ['foldLivedExperience', 'effectiveChartOf', 'decayCharacterDrift', 'characterLegacyRecord'],
+      [])).toEqual(['src/domain/npc/livedExperienceSources.js']);
+    expect(reachersOf('src/domain/npc/livedExperienceSources.js',
+      ['collectLivedExperience', 'LIVED_EXPERIENCE_SOURCES', 'SOURCE_ADAPTER_OF'], [])).toEqual([]);
+
+    // anchored: both enrolled consumers really are on the tree and really do reach the
+    // catalog, so none of the lists above passed by matching nothing.
+    for (const rel of ENROLLED_CONSUMERS) {
+      const [, text] = texts.find(([name]) => name === rel);
+      expect(dependsOnCatalog(text), `${rel} must really consume the catalog`).toBe(true);
+    }
+    // …and the reacher scan itself finds things when there ARE things to find.
+    expect(reachersOf('src/domain/npc/characterConsumers.js',
+      ['riskRegister', 'vettingTemperBand', 'effectiveDescriptors'], []).length).toBeGreaterThan(2);
   });
 
   test('⭐⭐ THE DETECTOR IS ANTI-VACUOUS, AND ITS SYMBOLS ARE UNIQUELY OWNED', () => {
@@ -555,6 +613,115 @@ describe('DARK BY CONSTRUCTION — the catalog is consumed by nothing in src/', 
     }
     expect(exportersOf('AXIS_LEVELS').length).toBe(2);
     expect(CATALOG_SYMBOLS).not.toContain('AXIS_LEVELS');
+  });
+
+  /**
+   * ⭐⭐⭐ THE MIRROR CENSUS — ONE WALKER, AND IT IS WHAT TURNS FOUR DECLARATIONS INTO
+   * FOUR CROSS-CHECKS (L6's law: a declared mirror is not a cross-check).
+   *
+   * Four L-line leaves restated this catalog's axis ids, band words, poles and
+   * corruption vectors, each with a comment saying it MIRRORS rather than imports
+   * because L1 was unlanded. L1 is landed. Two of the four became imports (see the
+   * darkness measurement above); the remaining restatements are proven here.
+   *
+   * ⚠⚠ AND EVERY PIN THIS REPLACES WAS A SOURCE-TEXT REGEX SCRAPE OF THIS FILE. The
+   * old reconcile pins parsed the catalog's own source with expressions like
+   * `/id: '([A-Z]+)',[\s\S]*?corruptionVector: (null|'[a-z_]+')/g` — lazy quantifiers
+   * pairing an id with whatever `corruptionVector:` came next — and each carried a
+   * dead `existsSync` arm for a file that is now permanently present. They passed,
+   * but they asserted a claim about TEXT, which is precisely the class this coupling
+   * spent four walkers curing everywhere else. Every row below reads the LIVE value.
+   *
+   * ⭐ THE CENSUS IS TOTAL BY CONSTRUCTION, not by anyone remembering to extend it:
+   * the last test asserts that EVERY src file naming this catalog at all is either an
+   * enrolled consumer or an enrolled mirror. A fifth leaf cannot quietly restate the
+   * chart.
+   */
+  describe('THE MIRROR CENSUS — every restatement of this catalog, proven against the live value', () => {
+    const catalogIds = PARADIGM_AXES.map((axis) => axis.id).sort();
+
+    test('MIRROR 1/4 — characterDrift.AXIS_LEVELS (retained: an import would light the catalog through L5\'s door)', () => {
+      expect([...DRIFT_AXIS_LEVELS]).toEqual([...AXIS_LEVELS]);
+      // Both directions AND non-trivially: two empty ladders would agree.
+      expect(AXIS_LEVELS.length).toBe(3);
+      expect(DRIFT_AXIS_LEVELS.length).toBe(AXIS_LEVELS.length);
+    });
+
+    test('MIRROR 2/4 — livedExperienceCatalog.PARADIGM_AXIS_IDS (now DERIVED, so the fork is gone)', () => {
+      expect([...FUNNEL_AXIS_IDS]).toEqual(catalogIds);
+      expect(catalogIds.length).toBe(17);
+      // …and it is derived rather than restated: no second literal roster survives in
+      // that leaf. The claim is asserted on the CODE, comments and strings blanked.
+      const leaf = readFileSync(join(REPO_ROOT, 'src/domain/npc/livedExperienceCatalog.js'), 'utf8');
+      expect(leaf).toContain('PARADIGM_AXES.map((axis) => axis.id)');
+      const code = codeWithoutCitations(leaf);
+      for (const id of catalogIds) expect(code, `${id} is still hand-kept here`).not.toContain(id);
+    });
+
+    test('MIRROR 3/4 — characterConsumers.CORRUPTIBLE_AXIS_VECTORS equals the corruptionVector column', () => {
+      const fromCatalog = Object.fromEntries(PARADIGM_AXES
+        .filter((axis) => axis.corruptionVector)
+        .map((axis) => [axis.id, axis.corruptionVector]));
+      expect({ ...CORRUPTIBLE_AXIS_VECTORS }).toEqual(fromCatalog);
+      // L1 MEASURED the reach at seven of seventeen; a census that agreed on an empty
+      // column would prove nothing, so the count is pinned live at both ends.
+      expect(Object.keys(fromCatalog).length).toBe(7);
+      expect(PARADIGM_AXES.filter((axis) => axis.corruptionVector === null).length).toBe(10);
+    });
+
+    test('MIRROR 4/4 — characterConsumers.RISK_CENTER_AXES names REAL axes (a selection, not a copy)', () => {
+      // ⚠ THIS ONE COULD NEVER HAVE BEEN AN IMPORT, AND THAT IS A PROPERTY OF THE
+      // VALUE RATHER THAN OF THE LAYERING. F15 fixed WHICH two axes R6's centre reads;
+      // an import cannot express a choice, only the things chosen from. So the mirror
+      // stays and what is proven is that both names resolve — which is the whole of
+      // what could go wrong with it.
+      for (const axisId of [RISK_CENTER_AXES.nerve, RISK_CENTER_AXES.restraint]) {
+        expect(catalogIds, `${axisId} is read by R6 but unknown to the chart`).toContain(axisId);
+        expect(axisById(axisId), `${axisId} must resolve through the catalog's own reader`).toBeTruthy();
+      }
+      // anchored: a nonexistent axis really would fail, so the two passes above mean
+      // something.
+      expect(catalogIds).not.toContain('AMBITION');
+      expect(axisById('AMBITION')).toBeFalsy();
+    });
+
+    test('⭐ AND THE POLE WORDS EVERY FUNNEL PULL NAMES RESOLVE — live, not scraped', () => {
+      // The old pin built a regex per pull and matched it against this file's SOURCE.
+      // Same claim, asked of the objects.
+      const byId = new Map(PARADIGM_AXES.map((axis) => [axis.id, axis]));
+      let checked = 0;
+      for (const kind of LIVED_EXPERIENCE_KINDS) {
+        for (const pull of EXPERIENCE_TABLE[kind].pulls) {
+          const axis = byId.get(pull.axisId);
+          expect(axis, `${kind}: ${pull.axisId} is not a chart axis`).toBeTruthy();
+          expect(['virtue', 'vice'], `${kind}: ${pull.pole}`).toContain(pull.pole);
+          expect(axis[pull.pole].word.length, `${kind}: ${pull.axisId}.${pull.pole} has no word`).toBeGreaterThan(2);
+          checked += 1;
+        }
+      }
+      // anchored: the loop really ran over a substantial table.
+      expect(checked).toBeGreaterThan(40);
+    });
+
+    test('⛔⛔ THE CENSUS IS TOTAL — every src file naming this catalog is enrolled somewhere', () => {
+      // The ratchet that makes the four rows above a census rather than a list. A
+      // fifth leaf that restates the chart must join one of the two rosters or red
+      // here — it cannot arrive unnoticed the way these four did.
+      const MIRROR_LEAVES = [
+        'src/domain/customContentSchema.js',   // poles/levels/chart ids — proven in deityAuthoredCharacter.test.js
+        'src/domain/npc/characterConsumers.js',
+        'src/domain/npc/characterDrift.js',
+      ];
+      const namers = jsFilesUnder(join(REPO_ROOT, 'src'))
+        .filter((file) => !file.endsWith('paradigmAxisCatalog.js'))
+        .filter((file) => /paradigmAxisCatalog/.test(readFileSync(file, 'utf8')))
+        .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'))
+        .sort();
+      expect(namers).toEqual([...ENROLLED_CONSUMERS, ...MIRROR_LEAVES].sort());
+      // anchored: the scan is over a real tree and really found the enrolled set,
+      // so an empty or renamed roster could not pass this vacuously.
+      expect(namers.length).toBe(5);
+    });
   });
 
   test('the catalog imports nothing — the true-leaf law that keeps it first-paint safe', () => {

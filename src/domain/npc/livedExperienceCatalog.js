@@ -92,6 +92,10 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+// ⭐ THE ONE CROSS-LEAF IMPORT THE COUPLING ADDS, and it REPLACES a hand-kept copy of
+// the same seventeen ids rather than adding a reach. See `PARADIGM_AXIS_IDS` below for
+// why this leaf is the only one of the four mirrors where the import is free.
+import { PARADIGM_AXES } from './paradigmAxisCatalog.js';
 
 /**
  * THE THREE PLANES, ORDERED CLOSEST FIRST. The order IS the precedence law: index
@@ -142,33 +146,30 @@ export const PULL_POLES = Object.freeze(['virtue', 'vice']);
 export const SILENT_EXPERIENCE_KIND = 'ordinary_day';
 
 /**
- * The axis id roster, MIRRORED NOT IMPORTED from car L1's
- * `src/domain/npc/paradigmAxisCatalog.js` (`PARADIGM_AXES[].id`), which is
- * UNLANDED at this base — importing an unlanded sibling would make this car
- * unbuildable alone (the L2 idiom). Ids only: the pole WORDS stay L1's, and the
- * test reconciles both the roster and every (axis, pole) pair the moment the two
- * cars share a tree.
+ * ⭐⭐ THE AXIS ID ROSTER, NO LONGER MIRRORED — DERIVED FROM CAR L1'S CATALOG ITSELF.
+ *
+ * This was seventeen hand-kept strings with a comment saying "MIRRORED NOT IMPORTED:
+ * L1's `paradigmAxisCatalog.js` is UNLANDED at this base". The substrate coupling
+ * landed L1, so the reason expired and the fork with it. `PARADIGM_AXES[].id` IS the
+ * roster now; there is no second list left to drift.
+ *
+ * ⭐ AND THIS IS THE ONE MIRROR OF THE FOUR WHERE AN IMPORT COSTS NOTHING. The other
+ * three leaves are reachable from production through car L5's consumer door
+ * (`personaSlicer` / `clergyTraitPlane` / `espionageTap` import `characterConsumers.js`),
+ * so importing the catalog there would light a 628-line table on a live path and spend
+ * a darkness the catalog's own walker reserves to L5's deliberate re-pointing. This
+ * leaf's only importers are the funnel and the sources leaf, both of which are imported
+ * by nobody — so the catalog stays unreachable from production THROUGH it, which the
+ * catalog's suite asserts rather than assumes. The other three are proven equal by the
+ * one mirror census in `tests/domain/npc/paradigmAxisCatalog.test.js`.
+ *
+ * Codepoint-ordered, so the roster is permutation-independent exactly as the kind
+ * vocabulary below is.
  * @type {readonly string[]}
  */
-export const PARADIGM_AXIS_IDS = Object.freeze([
-  'CANDOR',
-  'CHEER',
-  'CONTENT',
-  'COURAGE',
-  'DEVOTION',
-  'FIDELITY',
-  'FORBEARANCE',
-  'GENEROSITY',
-  'HUMILITY',
-  'INDUSTRY',
-  'JUSTICE',
-  'MERCY',
-  'PROTECTION',
-  'PRUDENCE',
-  'TEMPER',
-  'TEMPERANCE',
-  'TRUST',
-]);
+export const PARADIGM_AXIS_IDS = Object.freeze(
+  PARADIGM_AXES.map((axis) => axis.id).sort(compareCodepoint),
+);
 
 /**
  * @typedef {Object} ExperiencePull

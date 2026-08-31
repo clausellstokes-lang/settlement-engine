@@ -582,17 +582,19 @@ describe('THE DEPTH GATE, END TO END — additive, dark-safe, and two vocabulari
       .toBeGreaterThan(0);
   });
 
-  test('RECONCILE PIN — the vectors must equal L1\'s own corruptionVector column', () => {
-    if (!existsSync(L1_CATALOG)) {
-      expect(Object.keys(CORRUPTIBLE_AXIS_VECTORS)).toHaveLength(7);
-      return;
-    }
-    const source = readFileSync(L1_CATALOG, 'utf8');
-    const rows = [...source.matchAll(/id: '([A-Z]+)',[\s\S]*?corruptionVector: (null|'[a-z_]+')/g)];
-    const fromCatalog = Object.fromEntries(rows
-      .filter((row) => row[2] !== 'null')
-      .map((row) => [row[1], row[2].slice(1, -1)]));
-    expect(fromCatalog).toEqual({ ...CORRUPTIBLE_AXIS_VECTORS });
+  test('RECONCILE PIN — the vectors are PROVEN against L1, and the proof moved to ONE census', () => {
+    // ⭐⭐ THIS PIN SCRAPED L1's SOURCE with a lazy quantifier — `id: '(NAME)',` then
+    // whatever `corruptionVector:` came next — and carried a dead `existsSync` arm.
+    // It was right, and it was right by luck of block ordering. The live equality is
+    // now one row of the MIRROR CENSUS in `tests/domain/npc/paradigmAxisCatalog.test.js`,
+    // which reads `PARADIGM_AXES[].corruptionVector` as VALUES and pins both the seven
+    // and the ten.
+    //
+    // ⚠ The mirror is RETAINED on purpose: this leaf is car L5's production door, so
+    // importing L1 here would light its whole table on a live path — the one thing
+    // L1's own darkness walker reserves to a deliberate re-pointing.
+    expect(existsSync(L1_CATALOG)).toBe(true);
+    expect(Object.keys(CORRUPTIBLE_AXIS_VECTORS)).toHaveLength(7);
   });
 });
 
@@ -678,11 +680,40 @@ describe('F10 — THE ALIGNMENT CENSUS, and the cache declared with its reconcil
   });
 
   test('the dead reader really is dead — personaSlicer has no production importer', () => {
+    // ⭐⭐ SHARPENED AT THE SUBSTRATE COUPLING — THE SEVENTH SIGHTING OF THIS ESTATE'S
+    // SUBSTRING LAW IN ONE ARC, AND THIS ONE FIRED ON A COMMENT WRITTEN TO EXPLAIN THE
+    // LAW. The reader-scan eleven lines above already strips comments, and its own
+    // control asserts that "a file that only COMMENTS about the field is NOT caught,
+    // which is the whole reason the strip exists". This test, in the same describe,
+    // was still a raw substring — so when `livedExperienceCatalog.js` gained a comment
+    // naming `personaSlicer` as one of the door's production consumers, the walker
+    // convicted it of IMPORTING a module it does not import.
+    //
+    // The claim is unchanged. An import specifier or a dereference of the module's own
+    // export, over comment- and string-stripped code.
+    const dependsOnSlicer = (/** @type {string} */ text) => (
+      /from\s+'[^']*\/personaSlicer\.js'/.test(stripComments(text))
+        || /\b(buildPersonaSlice|sliceManifestKeys|sliceCoversManifest)\s*[([.]/.test(
+          stripComments(text)
+            .replace(/'(?:[^'\\]|\\.)*'/g, "''")
+            .replace(/"(?:[^"\\]|\\.)*"/g, '""')
+            .replace(/`(?:[^`\\]|\\.)*`/g, '``'),
+        )
+    );
     const importers = jsFilesUnder(SRC)
       .filter((file) => !file.endsWith('personaSlicer.js'))
-      .filter((file) => /personaSlicer/.test(readFileSync(file, 'utf8')))
+      .filter((file) => dependsOnSlicer(readFileSync(file, 'utf8')))
       .map((file) => relative(REPO_ROOT, file));
     expect(importers).toEqual([]);
+    // ANTI-VACUITY, both directions — a scan that stopped seeing things would report
+    // this module dead forever, which is the one claim this test exists to make.
+    expect(dependsOnSlicer("import { buildPersonaSlice } from '../ai/personaSlicer.js';")).toBe(true);
+    expect(dependsOnSlicer('const f = buildPersonaSlice({ npc });')).toBe(true);
+    expect(dependsOnSlicer('// personaSlicer is a dead reader\nconst a = 1;')).toBe(false);
+    expect(dependsOnSlicer("const note = 'personaSlicer.js:buildPersonaSlice (unreachable)';")).toBe(false);
+    // anchored: the subject really is on the tree, so the empty list is a fact about
+    // its reachability rather than about a filename that matches nothing.
+    expect(jsFilesUnder(SRC).some((file) => file.endsWith('personaSlicer.js'))).toBe(true);
   });
 
   test('⭐ WHY THE CACHE STANDS: the derived read makes NO CLAIM while the column is unbound', () => {
