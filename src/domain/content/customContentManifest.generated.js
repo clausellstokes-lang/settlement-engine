@@ -1479,16 +1479,18 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
           ],
           "key": "authoredTemper",
           "ui": false,
-          "effect": "presentation",
+          "effect": "mechanical",
           "activation": "conditional",
-          "condition": "The authored stance dial (warlike/peacelike/neutral), distinct from the retired `temperamentAxis` mirror, which stays inert forever. W-FAITH F2c LANDED THE READ ARM: `deityAxes.deityTemper` returns an authored word when one is present (an authored `neutral` wins too) and derives from the alignment axes otherwise. The effect is PRESENTATION and that is measured, not assumed: `deitySnapshotFrom` and the three commit-time embed writers copy a named key list that does not include this key, so no engine consumer can see an authored word and no same-seed mechanics move. The one surface it reaches today is the compendium's deity draft preview, which is handed the raw editor draft. Carrying the key into the embed is an owner-gated persisted-shape act that would also promote this field to `mechanical`; tests/domain/deityTemperConsumerCensus.walker.test.js holds the tripwire. The chart-position readers are W-LIVES car 5 and the boon/bane channel wiring is W-FAITH F4c.",
+          "condition": "The authored stance dial (warlike/peacelike/neutral), distinct from the retired `temperamentAxis` mirror, which stays inert forever. W-FAITH F2c landed the read arm: `deityAxes.deityTemper` returns an authored word when one is present (an authored `neutral` wins too) and derives from the alignment axes otherwise. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. The effect is therefore MECHANICAL and measured: the authored word now reaches every embed consumer, and `disposition.computeAggressiveness` moves with it. Deities authored before W-FAITH F1c carry no such word and are unaffected — the shift fires only for content that uses the new field, which is the feature. The boon/bane channel wiring is W-FAITH F4c.",
           "consumers": [
             "deityAxes",
+            "deitySnapshot",
+            "disposition",
             "validateDeity"
           ],
-          "effectKind": "presentation",
+          "effectKind": "mechanical",
           "activationMode": "conditional",
-          "explanation": "The authored stance dial (warlike/peacelike/neutral), distinct from the retired `temperamentAxis` mirror, which stays inert forever. W-FAITH F2c LANDED THE READ ARM: `deityAxes.deityTemper` returns an authored word when one is present (an authored `neutral` wins too) and derives from the alignment axes otherwise. The effect is PRESENTATION and that is measured, not assumed: `deitySnapshotFrom` and the three commit-time embed writers copy a named key list that does not include this key, so no engine consumer can see an authored word and no same-seed mechanics move. The one surface it reaches today is the compendium's deity draft preview, which is handed the raw editor draft. Carrying the key into the embed is an owner-gated persisted-shape act that would also promote this field to `mechanical`; tests/domain/deityTemperConsumerCensus.walker.test.js holds the tripwire. The chart-position readers are W-LIVES car 5 and the boon/bane channel wiring is W-FAITH F4c."
+          "explanation": "The authored stance dial (warlike/peacelike/neutral), distinct from the retired `temperamentAxis` mirror, which stays inert forever. W-FAITH F2c landed the read arm: `deityAxes.deityTemper` returns an authored word when one is present (an authored `neutral` wins too) and derives from the alignment axes otherwise. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. The effect is therefore MECHANICAL and measured: the authored word now reaches every embed consumer, and `disposition.computeAggressiveness` moves with it. Deities authored before W-FAITH F1c carry no such word and are unaffected — the shift fires only for content that uses the new field, which is the feature. The boon/bane channel wiring is W-FAITH F4c."
         },
         {
           "type": "string-or-string-list",
@@ -1596,13 +1598,14 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
           "ui": false,
           "effect": "presentation",
           "activation": "conditional",
-          "condition": "Leveled positions on the shared paradigm chart, one token per axis as AXIS:pole:level. At most one position per axis; a deity carries no drift state (divine immutability). Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today.",
+          "condition": "Leveled positions on the shared paradigm chart, one token per axis as AXIS:pole:level. At most one position per axis; a deity carries no drift state (divine immutability). W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet — it is carried so the W-LIVES witness-plane faith source can read a patron's authored character off the embed — so the effect stays presentation. Write-time validation and the embed writers are its only consumers today.",
           "consumers": [
+            "deitySnapshot",
             "validateDeity"
           ],
           "effectKind": "presentation",
           "activationMode": "conditional",
-          "explanation": "Leveled positions on the shared paradigm chart, one token per axis as AXIS:pole:level. At most one position per axis; a deity carries no drift state (divine immutability). Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today."
+          "explanation": "Leveled positions on the shared paradigm chart, one token per axis as AXIS:pole:level. At most one position per axis; a deity carries no drift state (divine immutability). W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet — it is carried so the W-LIVES witness-plane faith source can read a patron's authored character off the embed — so the effect stays presentation. Write-time validation and the embed writers are its only consumers today."
         },
         {
           "type": "enum",
@@ -1621,13 +1624,15 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
           "ui": false,
           "effect": "presentation",
           "activation": "conditional",
-          "condition": "The settlement causal channel this deity blesses. Pairs with boonStrength; both or neither. Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today.",
+          "condition": "The settlement causal channel this deity blesses. Pairs with boonStrength; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet — the channel wiring is W-FAITH F4c, and the per-deity PRECEDENCE law (ODQ §851) is already in force: a deity carrying an authored boon or bane silences its legacy `domain` arm, so the two can never both price one quantity. The effect stays presentation until F4c lands a reader.",
           "consumers": [
+            "deitySnapshot",
+            "dispositionProfile",
             "validateDeity"
           ],
           "effectKind": "presentation",
           "activationMode": "conditional",
-          "explanation": "The settlement causal channel this deity blesses. Pairs with boonStrength; both or neither. Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today."
+          "explanation": "The settlement causal channel this deity blesses. Pairs with boonStrength; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet — the channel wiring is W-FAITH F4c, and the per-deity PRECEDENCE law (ODQ §851) is already in force: a deity carrying an authored boon or bane silences its legacy `domain` arm, so the two can never both price one quantity. The effect stays presentation until F4c lands a reader."
         },
         {
           "type": "enum",
@@ -1640,13 +1645,14 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
           "ui": false,
           "effect": "presentation",
           "activation": "conditional",
-          "condition": "The banded magnitude of the boon. Pairs with boonChannel; both or neither. Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today.",
+          "condition": "The banded magnitude of the boon. Pairs with boonChannel; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet: the channel wiring is W-FAITH F4c. Write-time validation and the embed writers are its only consumers today.",
           "consumers": [
+            "deitySnapshot",
             "validateDeity"
           ],
           "effectKind": "presentation",
           "activationMode": "conditional",
-          "explanation": "The banded magnitude of the boon. Pairs with boonChannel; both or neither. Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today."
+          "explanation": "The banded magnitude of the boon. Pairs with boonChannel; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet: the channel wiring is W-FAITH F4c. Write-time validation and the embed writers are its only consumers today."
         },
         {
           "type": "enum",
@@ -1665,13 +1671,15 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
           "ui": false,
           "effect": "presentation",
           "activation": "conditional",
-          "condition": "The settlement causal channel this deity blights. Pairs with baneStrength; both or neither. Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today.",
+          "condition": "The settlement causal channel this deity blights. Pairs with baneStrength; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet — the channel wiring is W-FAITH F4c, and the per-deity PRECEDENCE law (ODQ §851) is already in force: a deity carrying an authored boon or bane silences its legacy `domain` arm, so the two can never both price one quantity. The effect stays presentation until F4c lands a reader.",
           "consumers": [
+            "deitySnapshot",
+            "dispositionProfile",
             "validateDeity"
           ],
           "effectKind": "presentation",
           "activationMode": "conditional",
-          "explanation": "The settlement causal channel this deity blights. Pairs with baneStrength; both or neither. Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today."
+          "explanation": "The settlement causal channel this deity blights. Pairs with baneStrength; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet — the channel wiring is W-FAITH F4c, and the per-deity PRECEDENCE law (ODQ §851) is already in force: a deity carrying an authored boon or bane silences its legacy `domain` arm, so the two can never both price one quantity. The effect stays presentation until F4c lands a reader."
         },
         {
           "type": "enum",
@@ -1684,13 +1692,14 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
           "ui": false,
           "effect": "presentation",
           "activation": "conditional",
-          "condition": "The banded magnitude of the bane. Pairs with baneChannel; both or neither. Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today.",
+          "condition": "The banded magnitude of the bane. Pairs with baneChannel; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet: the channel wiring is W-FAITH F4c. Write-time validation and the embed writers are its only consumers today.",
           "consumers": [
+            "deitySnapshot",
             "validateDeity"
           ],
           "effectKind": "presentation",
           "activationMode": "conditional",
-          "explanation": "The banded magnitude of the bane. Pairs with baneChannel; both or neither. Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today."
+          "explanation": "The banded magnitude of the bane. Pairs with baneChannel; both or neither. W-FAITH F3c CARRIED THIS KEY INTO THE EMBED (ODQ §866): all four deity-embed writers — deitySnapshotFrom (which is also the restore-from-world path), setPrimaryDeity, imposeCult and reEmbedPrimaryDeity — now copy it through one shared picker, conditionally, so a deity that does not carry the field mints no key and every legacy embed stays byte-identical. No engine consumer reads it for effect yet: the channel wiring is W-FAITH F4c. Write-time validation and the embed writers are its only consumers today."
         }
       ],
       "dependencies": []

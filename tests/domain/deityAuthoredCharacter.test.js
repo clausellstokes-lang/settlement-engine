@@ -214,10 +214,26 @@ describe('W-FAITH F1c · the legacy shape is untouched (absence is the whole bac
     expect(shown).toEqual([]);
   });
 
-  test('none of the six claims a mechanical effect at this car', () => {
-    const mechanical = ['authoredTemper', 'characterAxes', 'boonChannel', 'boonStrength', 'baneChannel', 'baneStrength']
-      .filter((key) => manifestField(key).effect !== 'presentation');
-    expect(mechanical).toEqual([]);
+  test('EXACTLY ONE of the six claims a mechanical effect — the one the engine can now hear', () => {
+    // ⚠ FLIPPED AT W-FAITH F3c, and the flip is the point rather than an upkeep
+    // edit. F1c landed all six as `presentation` and that was MEASURED, not assumed:
+    // the embed writers copied a named key list that omitted them, so no engine
+    // consumer could see an authored value. F3c carried the six into all four
+    // writers (ODQ §866), and one of them — `authoredTemper` — has a live reader on
+    // the other side, so its label moved with the truth rather than after it.
+    //
+    // The other five stay presentation, and that is equally measured: they reach the
+    // embed but nothing reads them for effect until W-FAITH F4c wires the channels.
+    // A field is mechanical when a consumer moves, not when it becomes reachable.
+    const six = ['authoredTemper', 'characterAxes', 'boonChannel', 'boonStrength', 'baneChannel', 'baneStrength'];
+    expect(six.filter((key) => manifestField(key).effect === 'mechanical')).toEqual(['authoredTemper']);
+    expect(six.filter((key) => manifestField(key).effect === 'presentation')).toEqual([
+      'characterAxes', 'boonChannel', 'boonStrength', 'baneChannel', 'baneStrength',
+    ]);
+    // The mechanical one owes an executable claim; the promotion is not a label
+    // change. tests/domain/customContentMechanicalClaims.test.js holds that probe,
+    // and its exact-key assertion is what forces this pair to stay honest.
+    expect(manifestField('authoredTemper').consumers).toContain('disposition');
   });
 });
 

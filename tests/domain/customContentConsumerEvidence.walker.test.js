@@ -86,9 +86,14 @@ const CONSUMER_SITES = Object.freeze({
   // the axis fields; the domain module is where deitySnapshotFrom projects them.
   // The dependency-free temper seam. W-FAITH F2c gave `deityTemper` its authored
   // arm, so `authoredTemper` names this leaf as the file that actually reads the
-  // key — the seam, not the embed builder beneath it, which does NOT carry it.
+  // key. W-FAITH F3c then carried the key into the embed beneath it (ODQ §866),
+  // which is why `deitySnapshot` is now a declared consumer of the same field.
   deityAxes: 'src/domain/worldPulse/deityAxes.js',
   deitySnapshot: 'src/domain/deitySnapshot.js',
+  // The war-appetite consumer. It reads the temper through the seam (never the raw
+  // key — the census walker pins that), and its movement is the executable proof
+  // behind `authoredTemper`'s presentation→mechanical promotion at F3c.
+  disposition: 'src/domain/worldPulse/disposition.js',
   // WR-2's pure read side recognizes the deity domain's closed mechanical set
   // and returns a neutral record for every other authored word.
   dispositionProfile: 'src/domain/worldPulse/dispositionProfile.js',
