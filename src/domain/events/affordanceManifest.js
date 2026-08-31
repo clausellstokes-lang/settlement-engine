@@ -421,7 +421,15 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
   // ── Power ──────────────────────────────────────────────────────────────
   ADD_FACTION: entry({
     type: 'ADD_FACTION', family: 'Power', entityKind: 'settlement',
-    coversVetoCodes: ['empty_target', 'faction_already_present'],
+    // `faction_requires_member` is ODQ §817-Q2's atomic-mint refusal: under the
+    // Register VII density law a faction mints WITH a named member or not at
+    // all. It stays a predicate-free `ok()` on purpose — the gate is
+    // UNREACHABLE from the composer, which always supplies a target name, and
+    // the founder is derived from that name. It fires only for a programmatic
+    // caller that supplies neither a name nor a founder, which `empty_target`
+    // already refuses first. Claimed here so the parity walker's denominator
+    // stays whole rather than exempted.
+    coversVetoCodes: ['empty_target', 'faction_already_present', 'faction_requires_member'],
     predicate: () => ok(),
   }),
   IMPAIR_FACTION: entry({
