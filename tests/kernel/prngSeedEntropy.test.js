@@ -34,6 +34,7 @@
  * than dying on the first (tests/lint/seedLoopTotality.walker.test.js's class).
  */
 import { describe, test, expect, vi } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import {
   SEED_ENTROPY_LEN, SEED_SEQUENCE_LEN, SEED_SUFFIX_LEN, generateSeed,
 } from '../../src/kernel/prng.js';
@@ -118,10 +119,14 @@ describe('generateSeed does not repeat itself', () => {
     expect(busiest, 'no millisecond held two mints — this burst proved nothing').toBeGreaterThan(1);
 
     // Every sequence is fixed-width base36, so the seed length cannot move with the counter.
-    for (const seed of mints.slice(0, 200)) {
+    // COLLECTED, not asserted inline: an inline loop stops at the first bad mint, so its
+    // failure count is a lower bound and every later mint goes unrun — which is exactly the
+    // habit this file's own header says it does not keep.
+    const widthFailures = collectSeedFailures(mints.slice(0, 200), (seed) => {
       expect(sequenceOf(seed)).toHaveLength(SEED_SEQUENCE_LEN);
       expect(sequenceOf(seed)).toMatch(BASE36_RE);
-    }
+    });
+    expectNoSeedFailures(widthFailures, 'every minted sequence is fixed-width base36');
   });
 });
 

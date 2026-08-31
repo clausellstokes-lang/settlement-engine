@@ -40,7 +40,7 @@
  * without this leaf noticing.
  *
  * Pure, dependency-free and deliberately tiny — it is imported by a generator, two domain
- * derivers and the town-map layout builder, and none of them may drag another's graph in.
+ * derivers and the town layout builder, and none of them may drag another's graph in.
  */
 
 /**

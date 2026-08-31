@@ -24,6 +24,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from 'vitest';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import {
   PROSPERITY_LABELS,
   PROSPERITY_RANK,
@@ -138,8 +139,14 @@ describe('the vocabulary is closed, walked both directions', () => {
     const aliases = Object.keys(PROSPERITY_RANK).filter((k) => !PROSPERITY_LABELS.includes(k));
     expect(aliases.length).toBeGreaterThan(0);
     for (const alias of aliases) {
-      expect(PROSPERITY_LABELS, `${alias} is declared an alias but is also an emitted label`)
-        .not.toContain(alias);
+      // ANCHORED: a bare `not.toContain` here would pass just as happily if PROSPERITY_LABELS
+      // drifted to empty as it does when the alias is correctly excluded. 'Moderate' is a
+      // member of the emitted six asserted above, so the collection is proved live in the
+      // same breath as the exclusion.
+      expectAbsentWithAnchor(
+        PROSPERITY_LABELS, alias, 'Moderate',
+        `${alias} is declared an alias but is also an emitted label`,
+      );
     }
   });
 });

@@ -68,6 +68,15 @@ const importsOf = (source) => [
  */
 const TRUE_STATE_TOKENS = Object.freeze([
   'militaryStrength',
+  // ⚠ ADDED BY THE T7 LANDING, and the reason is the point of this list. The pact composer's
+  // guard-the-guard arm below proves the exclusion is load-bearing by showing this scan WOULD
+  // reject the composer. It used to match on `militaryStrength` — the fixture-only field whose
+  // removal was T7/UNITS car 1's whole DECLARED SHIFT (§759.2). The composer still reads truth,
+  // it now reads it through the estate's ONE strength derivation, so the token list follows the
+  // mechanism instead of the retired spelling. Verified against all three arms that consume this
+  // list: present in the composer, present in the TRUTH_READERS positive control, and absent from
+  // every one of the twelve negotiation modules — so the absence arm did not weaken.
+  'settlementStrength',
   'deriveMilitaryCapacity',
   'deriveSettlementPressures',
   'pressureModel',

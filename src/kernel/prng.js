@@ -150,8 +150,19 @@ export const SEED_SEQUENCE_LEN = 3;
 /** Total characters after the wall-clock prefix: the sequence, then the entropy. */
 export const SEED_SUFFIX_LEN = SEED_SEQUENCE_LEN + SEED_ENTROPY_LEN;
 
-/** How many mints one millisecond's sequence can hold before it wraps. */
-const SEED_SEQUENCE_CEILING = 36 ** SEED_SEQUENCE_LEN;
+/**
+ * How many mints one millisecond's sequence can hold before it wraps.
+ *
+ * ⚠ SPELLED AS REPEATED INTEGER MULTIPLICATION, NOT `**`. The exponentiation operator is a
+ * transcendental-float site to `tests/lint/transcendentalMathBaseline.test.js`, which holds
+ * this file at an allowance of ZERO because a seed mint is the root of every deterministic
+ * stream and `**` is not required to be correctly rounded across engines. The product of
+ * three exact small integers is, so the ceiling is derived from `SEED_SEQUENCE_LEN` — never
+ * restated as a literal — using only multiplication.
+ */
+const SEED_SEQUENCE_CEILING = Array.from(
+  { length: SEED_SEQUENCE_LEN },
+).reduce((n) => n * SEED_ALPHABET.length, 1);
 
 /** The millisecond the last mint was issued in, and how many have been issued in it. */
 let _mintClockMs = -1;
