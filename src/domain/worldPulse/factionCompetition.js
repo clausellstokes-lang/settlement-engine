@@ -165,6 +165,12 @@ function institutionsFor(item) {
     .slice(0, 12);
 }
 
+/**
+ * The contest's per-settlement WORK ITEM, as this module reads it. Loose because
+ * the pulse threads the same item through several layers, but NAMED and closed
+ * over the fields read here, so it is a type rather than an any-hole.
+ * @typedef {{ id?: string, settlement?: { tier?: string, config?: Record<string, unknown> & { tier?: string } } }} ContestItem
+ */
 /** @typedef {{ id: string, name: string }} InstitutionTarget */
 /** @typedef {{ id?: string, name?: string, status?: string, _worldPulseInactive?: boolean, impairments?: import('../entities/status.js').Impairment[] }} SuppressionInstitution */
 /** @typedef {{ status?: string, outcome?: { proposalPayload?: { kind?: string, factionId?: unknown } } }} FactionProposal */
@@ -229,7 +235,7 @@ function standingInstitutionFor(item, target) {
  * the same `rollsRegisterVii` gate the generator uses, never a global dial, so
  * an existing world is byte-identical whatever the dial is set to.
  *
- * @param {any} item @returns {number}
+ * @param {ContestItem} item @returns {number}
  */
 function contestWidthFor(item) {
   const settlement = item?.settlement;
@@ -237,6 +243,15 @@ function contestWidthFor(item) {
   return contestWidthForTier(settlement?.tier || settlement?.config?.tier);
 }
 
+/**
+ * ⭐ NAMED RATHER THAN `any`, DELIBERATELY. `topFactionEntries` had no annotation
+ * at all, which reads as an implicit any-hole under `typecheck:domain:strict`;
+ * annotating it `any` would have cured that gate and pushed this file's any-cast
+ * ledger further past its MONOTONE-DOWN allowance. `ContestItem` declares the
+ * fields this module actually reads and costs the ledger nothing — and reusing it
+ * on `contestWidthFor` above retires one pre-existing hole in the same act.
+ * @param {ContestItem} item @param {unknown} [worldState]
+ */
 function topFactionEntries(item, worldState = null) {
   const shares = presenceSharesFor(worldState, item);
   return settlementFactions(item)

@@ -220,10 +220,18 @@ export function rollNamedMass(input) {
  *
  * Returns the input powerStructure BY REFERENCE under the dormant default.
  *
+ * ⚠ `massOverride` IS DECLARED HERE BECAUSE IT IS ALREADY PASSED. The assembly
+ * step hands it the roster the population step actually produced, so the seat
+ * ceiling (R17: a house the mass cannot crew must not exist) is computed against
+ * a FACT rather than a second mass roll — see `assembleSettlement.js`. The field
+ * was live and undeclared, which reddened both this file and its caller on
+ * `typecheck:ratchet`. Declaring it moves no runtime byte.
+ *
  * @param {{
  *   tier?: string, config?: Record<string, unknown>, stress?: unknown,
  *   powerStructure?: {factions?: Array<Record<string, unknown>>}|null,
  *   economicState?: Record<string, unknown>|null,
+ *   massOverride?: number|null,
  *   rng: {random: () => number, fork: (l: string) => any},
  * }} input
  */

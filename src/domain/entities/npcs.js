@@ -48,6 +48,13 @@
  *  @property {(number|null)=} stabilityContribution  0-100 — how much their absence destabilizes
  *  @property {string[]=} serviceContribution  e.g. ["healing", "charity", "funerary_rites"]
  *  @property {string[]=} potentialSuccessors  npc ids the engine pre-suggests on death
+ *  @property {string=} factionAffiliation    the house this figure belongs to, by the
+ *    seat's display name — the key `factionAffiliation`, `ladderFactionKey` and
+ *    `npcInFaction` all join on. DECLARED at TE-DENSITY-1 D2b: the field was already
+ *    written (the coherence seam's `assignRoster`, the ADD_FACTION founder path) and
+ *    read across the estate, but it was undeclared here, so every writer had to cross
+ *    the boundary through a cast. Declaring it is a documentation of existing shape,
+ *    not a change to it — no persisted byte moves.
  *  @property {string=} removedByEventId
  *  @property {string=} createdByEventId       event that created this NPC (ADD_NPC); undo drops it
  *  @property {string=} notes                  free-form DM annotation

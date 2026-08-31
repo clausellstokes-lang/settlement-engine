@@ -188,7 +188,13 @@ export function rankCeilingForTier(tier) {
 }
 
 /** Index of an importance band in IMPORTANCE_ORDER, or -1.
- *  @param {string|null|undefined} importance @returns {number} */
+ *  ⚠ THE PARAM IS `unknown` BY IMPLEMENTATION, AND NOW SAYS SO. The body coerces
+ *  with `String(importance || '')`, so it has always accepted any value and
+ *  returns -1 for anything unrecognized; the old `string|null|undefined` was
+ *  narrower than the truth, which reddened `densityRungs.topImportanceIndex`
+ *  (its members' `importance` is declared `unknown`) on `typecheck:ratchet`.
+ *  Widening the declaration to match the body is documentation, not a change.
+ *  @param {unknown} importance @returns {number} */
 export function importanceIndex(importance) {
   return IMPORTANCE_ORDER.indexOf(String(importance || '').toLowerCase());
 }

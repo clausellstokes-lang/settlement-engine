@@ -308,8 +308,20 @@ export function disperseMass(rng, seated, mass, concentration, suite, seatFloorK
  * @param {string} tier
  * @param {number} size roster size (≥1, guaranteed by the atomic mint)
  * @param {number} vacancyMult
- * @param {{requireHead?: boolean, officeRoleKey?: string|null}} [options]
+ * ⚠ THE TWO ADDITIONS BELOW ARE DOCUMENTATION OF EXISTING SHAPE, NOT NEW FIELDS.
+ * `guaranteeYearner` is read at the throne (the §810.3 R13 floor-lift, where a
+ * yearner is guaranteed rather than rolled) and `rolledVacancies` is returned
+ * beside `occupancy` — both have been live since this function was written, but
+ * neither was declared, so `tsc` reddened every caller that used them. Declaring
+ * them cures four of the pre-existing `typecheck:ratchet` rows without moving a
+ * runtime byte. `rolledVacancies` is deliberately distinct from `occupancy`:
+ * occupancy is DERIVED from the stamped bands, this is what the roll actually
+ * drew — the §817-Q5 two-definitions-of-one-word hazard, kept separate on purpose.
+ *
+ * @param {{requireHead?: boolean, guaranteeYearner?: boolean,
+ *          officeRoleKey?: string|null}} [options]
  * @returns {{occupancy: {head: boolean, middle: boolean, lowest: boolean},
+ *            rolledVacancies: {head: boolean, middle: boolean, lowest: boolean},
  *            members: Array<{rung: string, importance: string, isYearner: boolean,
  *                            officeRoleKey: string|null}>}}
  */

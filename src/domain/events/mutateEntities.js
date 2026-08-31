@@ -427,15 +427,42 @@ function foundingMemberFor(s, event, name) {
   if (Array.isArray(named) && named.length) return null; // already crewed
   const founderName = event.payload?.founderName || `The ${name} Founder`;
   if (!founderName.trim()) return REFUSED;
-  const npc = createNpc(/** @type {any} */ ({
+  // No cast: `factionAffiliation` is now DECLARED on NpcStructural (npcs.js), so this
+  // literal is an honest `Partial<NpcStructural>`. The cast this replaces was the
+  // file's fourth any-hole against a MONOTONE-DOWN allowance of three — declaring the
+  // field retired it at the root instead of widening the ledger.
+  const npc = createNpc({
     name: founderName,
     role: event.payload?.founderRole || 'Head',
-    importance: importanceForRung('head', s.tier),
+    // ⭐ A ONE-FIELD ASSERTION, NOT A RE-WIDENING. Dropping the whole-object `any`
+    // above exposed a real imprecision the cast had been HIDING: `importanceForRung`
+    // derives its value from `IMPORTANCE_ORDER`, which is exactly `NpcImportance`,
+    // but `Object.freeze` on a bare literal array infers `readonly string[]`, so the
+    // whole chain (`clampImportanceToTier` → `rungBandsForTier` → `importanceForRung`)
+    // degrades to `string`. The assertion states the fact the producer cannot yet
+    // express. It is narrow and typed where the thing it replaces was total and
+    // untyped, so the file's any-hole ledger still moves DOWN.
+    // ⚠ DELIBERATELY NOT CURED AT THE ROOT HERE — documented, not a bug to re-find.
+    // Annotating `IMPORTANCE_ORDER` as `readonly NpcImportance[]` is the true fix and
+    // was BUILT AND MEASURED at D2b: it cures this site but reds `densityBands.js`
+    // (`rankCeilingForTier` returns `string` into `importanceIndex`), so the honest
+    // root cure is a 3-4 annotation pass across `src/generators/density/` — D1's
+    // surface, not this car's. It is charted in the receipt as an owed row.
+    importance: /** @type {import('../entities/npcs.js').NpcImportance} */ (
+      importanceForRung('head', s.tier)
+    ),
     factionAffiliation: name,
     linkedFactionIds: [`faction.${slugify(name)}`],
     _idSeed: `${event.id}:founder`,
-  }));
+  });
   npc.createdByEventId = event.id;
+  // ⚠ THIS LINE IS LOAD-BEARING AND READS AS REDUNDANT — it is not. The literal
+  // above also sets `factionAffiliation`, but `createNpc` builds from a DECLARED
+  // field set and drops undeclared keys, so the founder would reach the world
+  // house-less without this write and R17's atomic mint would be unsatisfied the
+  // moment the faction exists. VERIFIED BY EXECUTION at D2b (createNpc returns
+  // `factionAffiliation: undefined` for an input that carries it), not assumed —
+  // deleting it as a duplicate is a silent bug, so the reason is recorded here.
   npc.factionAffiliation = name;
   return npc;
 }
