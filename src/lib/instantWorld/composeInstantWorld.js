@@ -53,6 +53,7 @@
  */
 import { generateSettlementPipeline } from '../../generators/generateSettlementPipeline.js';
 import { DEFAULT_CONFIG } from '../../store/configSlice.js';
+import { birthConfig } from '../../generators/density/densityCreateBoundary.js';
 import { deriveGraphWithDiscoveredCandidates } from '../../domain/region/discoverDependencyCandidates.js';
 import { ensureRegionalGraph, ensureWizardNewsFeed } from '../../domain/region/index.js';
 import { ensureWorldState } from '../../domain/worldPulse/worldState.js';
@@ -112,6 +113,12 @@ const EPOCH_ISO = '1970-01-01T00:00:00.000Z';
 function memberConfigFor(site, plan) {
   return {
     ...DEFAULT_CONFIG,
+    // THE CREATE BOUNDARY (ODQ §822). A realm member is unambiguously a BIRTH —
+    // it is composed from DEFAULT_CONFIG with no prior world in the call — so it
+    // carries the density law a new world is born under. Dormant today:
+    // `birthConfig` spreads an EMPTY object while the dial sits at the default,
+    // so an Instant World's configs are byte-identical to pre-law ones.
+    ...birthConfig({}),
     settType: site.tier,
     // "Surprise-me within curated bounds": the pipeline rolls the priority
     // sliders (5..95) off the seed, and the DEFAULT_CONFIG random sentinels

@@ -102,7 +102,7 @@ import {
   _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession, loadSettlementContentRuntimeOptions,
   uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys,
-  sectionLocked, carryLockedSections, geographyLockedConfig, foldRegeneratedRoster, remapLocksAfterGenerate, persistLocksToActiveSave, planTimelineUndo, bindActiveSaveId } from './settlementSliceHelpers.js';
+  sectionLocked, carryLockedSections, geographyLockedConfig, birthConfig, foldRegeneratedRoster, remapLocksAfterGenerate, persistLocksToActiveSave, planTimelineUndo, bindActiveSaveId } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
@@ -367,7 +367,16 @@ export const createSettlementSlice = (set, get) => ({
     // geography is unlocked, so an unlocked generation is byte-identical to one
     // taken before locks existed. Under THE PROMISE this stays deterministic —
     // same seed + same config + same locks is the same world.
-    const fullConfig = geographyLockedConfig(state.locks, state.settlement, {
+    // THE CREATE BOUNDARY (ODQ §822) — the `birthConfig` wrapper. This action is a
+    // BIRTH on every call: it mints a brand-new town from the WIZARD FORM config,
+    // and `state.config` is never hydrated from a saved settlement (hydrateFromSave
+    // assigns the settlement, ids, phase, eventLog and locks — not config), so it
+    // can never re-stamp an existing world's law. Re-derivation of an existing world
+    // goes through regenSection, which reads `settlement.config` FIRST. Dormant
+    // today: birthConfig adds nothing while the dial sits at the default, so a
+    // generation's config stays byte-identical to a pre-law one. It WRAPS rather
+    // than adds a spread line because this file is size-ratcheted at tolerance 0.
+    const fullConfig = geographyLockedConfig(state.locks, state.settlement, birthConfig({
       ...config,
       _institutionToggles: institutionToggles,
       _categoryToggles:    categoryToggles,
@@ -378,7 +387,7 @@ export const createSettlementSlice = (set, get) => ({
       // flat 50s — and never writes the rolls back into the stored config.
       ...(state.randomSliderMode === true ? { _randomizePriorities: true } : {}),
       ...(neighbor ? { _importedNeighbor: neighbor } : {}),
-    });
+    }));
 
     const generationModules = await Promise.all([
       loadEngine(), loadSettlementContentRuntimeOptions(state),
