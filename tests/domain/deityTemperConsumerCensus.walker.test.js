@@ -1,0 +1,520 @@
+/**
+ * deityTemperConsumerCensus.walker.test.js — W-FAITH F2c: THE TEMPER CENSUS, WITH
+ * A DENOMINATOR.
+ *
+ * F2c gave `deityTemper` an authored arm (D1: `authoredTemper` present ⇒ that word;
+ * absent ⇒ the derivation exactly as before). `DESIGN_W_FAITH.md` §3 risk 1 names
+ * the failure that arm can cause — DOUBLE-COUNT, "authored temper + derived axes
+ * feeding the same site" — and §786.2 names the instrument: a census of every
+ * consumer WITH A FULL DENOMINATOR, every site dispositioned.
+ *
+ * ⭐ THE FINDING THIS FILE EXISTS TO MAKE PERMANENT, and it is not the one the
+ * volume expected. A census that only counted READERS would have reported eleven
+ * consumers and declared the arm live. Tracing where each one's deity OBJECT comes
+ * from says something else:
+ *
+ *   - `deitySnapshotFrom` and the three commit-time embed writers copy a NAMED key
+ *     list. `authoredTemper` is not in it. So every consumer that reads an EMBED —
+ *     which is the ENTIRE ENGINE, ten of the eleven — still derives, and cannot see
+ *     an authored word even after a user sets one.
+ *   - Exactly ONE surface is handed a RAW authored definition: the compendium's
+ *     deity draft preview (`deityDraftPreview.js` → `describeDeityEffects`). That is
+ *     where, and only where, the authored word is legible today.
+ *   - The twelfth site, `CustomContent.jsx`'s `temperamentAxis` dual-write, is
+ *     immune by construction: it builds a two-key literal, so the compat mirror goes
+ *     on mirroring the DERIVATION rather than the effective read. That is correct —
+ *     D1 retires that field forever — and it is pinned here so it stays that way.
+ *
+ * ⛔ CARRYING `authoredTemper` INTO THE EMBED IS AN OWNER-GATED ACT and F2c did not
+ * take it: it is a persisted-shape change across FOUR writers, and it promotes the
+ * field from `presentation` to `mechanical` in the manifest. The tripwire below
+ * reds the moment anyone does it, so the gate is a test rather than a memory.
+ *
+ * WHY A SOURCE SCAN. The thing under guard is AUTHORSHIP — a second temper read
+ * would be perfectly functional at runtime, which is exactly why nothing else would
+ * catch it. Same reasoning as `allianceWebRiskConsumers.walker.test.js`, whose shape
+ * this file follows deliberately.
+ *
+ * Every test here is STATICALLY registered — a `test.each` over non-literal data
+ * PARKS the whole file in the lighting census, and a parked file's assertions are
+ * evidence nowhere.
+ *
+ * @enforced-by this test
+ */
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { dirname, join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { describe, expect, test } from 'vitest';
+
+import { TEMPER_WORDS, deityTemper } from '../../src/domain/worldPulse/deityAxes.js';
+import { DEITY_TEMPER_KEYS } from '../../src/domain/customContentSchema.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+
+/** The temper seam's own home — the one file allowed to decide what a temper IS. */
+const OWNER = 'src/domain/worldPulse/deityAxes.js';
+
+/**
+ * THE DENOMINATOR. Every src module that calls `deityTemper`, with the PROVENANCE
+ * of the deity object it reads — because provenance, not the call count, is what
+ * decides whether an authored word can reach the site at all.
+ *
+ * `provenance` is one of:
+ *   'embed'      — `settlement.config.primaryDeitySnapshot` (or the religion-state
+ *                  `deities[ref].snapshot`, which is the same record by reference).
+ *                  `authoredTemper` is STRIPPED by the embed writers ⇒ unreachable.
+ *   'raw-draft'  — a raw authored definition, straight off the editor draft ⇒ the
+ *                  authored word IS legible here.
+ *   'literal'    — the site builds its own object literal ⇒ immune by construction.
+ *
+ * `probe` is a substring that must still be present in that file, so a relocation
+ * or rename reds the census instead of silently re-classifying a site.
+ */
+const CONSUMERS = Object.freeze([
+  Object.freeze({
+    file: 'src/domain/worldPulse/disposition.js',
+    provenance: 'embed',
+    probe: 'deityTemper(settlement?.config?.primaryDeitySnapshot)',
+    note: 'the signed warlike drive into computeAggressiveness',
+  }),
+  Object.freeze({
+    file: 'src/domain/worldPulse/relationshipRulesAdversarial.js',
+    provenance: 'embed',
+    probe: 'deityTemper(settlement?.config?.primaryDeitySnapshot)',
+    note: 'the trade-leverage embargo sharpener',
+  }),
+  Object.freeze({
+    file: 'src/domain/worldPulse/militaryStrength.js',
+    provenance: 'embed',
+    probe: 'const deity = s?.config?.primaryDeitySnapshot',
+    note: 'the will-facet patron bonus',
+  }),
+  Object.freeze({
+    file: 'src/domain/worldPulse/religiousContest.js',
+    provenance: 'embed',
+    probe: 'item?.settlement?.config?.primaryDeitySnapshot',
+    note: 'warbound occupation pull + the incumbent counter-force temper gap',
+  }),
+  Object.freeze({
+    file: 'src/domain/worldPulse/religionState.js',
+    provenance: 'embed',
+    probe: 'mandateAlignmentFit(settlement?.config?.primaryDeitySnapshot',
+    note: 'the divine-mandate regime fit',
+  }),
+  Object.freeze({
+    file: 'src/domain/worldPulse/religionLegitimacy.js',
+    provenance: 'embed',
+    probe: 'deityRulerFit(deity, lens)',
+    note: 'ruler fit / endorsement — deity + a deitySnapshotFor injector, both embeds',
+  }),
+  Object.freeze({
+    file: 'src/domain/worldPulse/cultImpositionApply.js',
+    provenance: 'embed',
+    probe: 'export function nicheOf(d)',
+    note: 'THE NICHE KEY — every caller passes an embed (religionState.js :175/:189/:219)',
+  }),
+  Object.freeze({
+    file: 'src/domain/worldPulse/martialReadiness.js',
+    provenance: 'embed',
+    probe: 'state.deities?.[patronRef]?.snapshot',
+    note: 'patron temper sign; religion-state snapshot, falling back to the config embed',
+  }),
+  Object.freeze({
+    file: 'src/domain/magicProfile.js',
+    provenance: 'embed',
+    probe: 'const deity = settlement?.config?.primaryDeitySnapshot',
+    note: 'magic-legality regulation + its two prose reasons',
+  }),
+  Object.freeze({
+    file: 'src/domain/display/deityEffects.js',
+    provenance: 'embed',
+    probe: 'export function describeDeityEffects(deitySnapshot)',
+    note: 'THE ONE SPLIT SITE — four of its five callers pass an embed; the fifth does not',
+  }),
+  Object.freeze({
+    file: 'src/components/compendium/CustomContent.jsx',
+    provenance: 'literal',
+    probe: 'temperamentAxis: deityTemper({',
+    note: 'the retired-field dual-write; a two-key literal, so the mirror keeps deriving',
+  }),
+]);
+
+/**
+ * The five callers of `describeDeityEffects`, which is the ONLY consumer whose
+ * provenance splits. Four hand it an embed; `deityDraftPreview` hands it the raw
+ * editor draft, and is therefore the single surface where an authored temper is
+ * legible today.
+ */
+const EFFECTS_CALLERS_EMBED = Object.freeze([
+  'src/components/map/PantheonPanel.jsx',
+  'src/components/new/tabs/MagicTab.jsx',
+  'src/components/settlement/faithPanelModel.js',
+  'src/pdf/lib/liveWorld.js',
+]);
+const EFFECTS_CALLER_RAW = 'src/components/compendium/deityDraftPreview.js';
+
+/**
+ * THE RETIRED-FIELD DIVERGENCE REGISTER — src modules that make a SEMANTIC read of
+ * the stored `temperamentAxis` instead of routing through the derivation. Every one
+ * is a display/export surface, and each can print a word the engine disagrees with.
+ *
+ * This register is SHRINK-ONLY and it is NOT this car's to empty: re-pointing these
+ * at `deityTemper` changes what a DM reads and what the AI narrative context is
+ * handed, which is a display-behaviour act with its own review. It is pinned here so
+ * the set cannot GROW quietly, and so the next lane inherits the addresses rather
+ * than re-finding them.
+ */
+const STORED_FIELD_READERS = Object.freeze([
+  'src/domain/display/warResolve.js',
+  'src/foundry/journalPages.js',
+  'src/pdf/lib/liveWorld.js',
+  'src/pdf/sections/FaithWar.jsx',
+]);
+
+/**
+ * Modules that COPY `temperamentAxis` without reading its meaning — the embed
+ * writers and the intent builder. They are passthrough, not consumers, and they are
+ * listed because the tripwire below quantifies over exactly this set.
+ */
+const EMBED_WRITERS = Object.freeze([
+  'src/domain/deitySnapshot.js',
+  'src/domain/events/mutateEntities.js',
+  'src/domain/worldPulse/applyWorldPulse.js',
+]);
+
+/** The write-time wall: it validates the key, it does not read it for meaning. */
+const WRITE_TIME_WALL = 'src/domain/customContentSchema.js';
+
+/** Generated manifest mirrors — the key appears as DATA, never as a read. */
+const GENERATED_MIRRORS = Object.freeze([
+  'src/domain/content/customContentAdmission.generated.js',
+  'src/domain/content/customContentManifest.generated.js',
+]);
+
+function walk(dir, out = []) {
+  for (const entry of readdirSync(dir)) {
+    const p = join(dir, entry);
+    if (statSync(p).isDirectory()) walk(p, out);
+    else if (/\.(js|jsx)$/.test(p)) out.push(p);
+  }
+  return out;
+}
+
+/** Every src module, repo-relative with forward slashes. */
+const SRC_MODULES = walk(join(ROOT, 'src'))
+  .map((p) => relative(ROOT, p).replace(/\\/g, '/'))
+  .sort();
+
+const sourceOf = (rel) => readFileSync(join(ROOT, rel), 'utf8');
+/** Source with comments stripped — a census must read code, not prose about it. */
+const codeOf = (rel) => sourceOf(rel)
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/^\s*\/\/.*$/gm, '');
+
+const CONSUMER_FILES = CONSUMERS.map((c) => c.file).sort();
+
+describe('W-FAITH F2c · THE DENOMINATOR (every deityTemper reader, none unaccounted)', () => {
+  test('the scanned module set is live and contains the seam\'s own home', () => {
+    // THE ANTI-VACUITY ANCHOR. A relocation that emptied this walk would make every
+    // census and every absence below pass while guarding nothing at all.
+    expect(SRC_MODULES.length).toBeGreaterThan(500);
+    expect(SRC_MODULES).toContain(OWNER);
+    expect(codeOf(OWNER)).toContain('export function deityTemper');
+  });
+
+  test('the consumer census is EXACTLY the eleven named modules', () => {
+    const found = SRC_MODULES.filter((rel) => {
+      if (rel === OWNER) return false;
+      return /\bdeityTemper\s*\(/.test(codeOf(rel));
+    });
+    expect(found).toEqual(CONSUMER_FILES);
+    expect(found).toHaveLength(11);
+  });
+
+  test('every named consumer still carries its declared provenance probe', () => {
+    // A census satisfied by a filename is the vacuity class this estate has already
+    // been bitten by. Each row must still be able to point at the SOURCE LINE that
+    // makes its provenance claim true.
+    const missing = [];
+    for (const row of CONSUMERS) {
+      if (!codeOf(row.file).includes(row.probe)) missing.push(`${row.file}: ${row.probe}`);
+    }
+    expect(missing).toEqual([]);
+  });
+
+  test('every consumer routes through the seam — nobody re-implements the derivation', () => {
+    // `deriveTemper` is exported for the seam's own use and for evidence harnesses.
+    // A second caller in src would be a private temper with its own weights, free to
+    // drift from the niche grid at the first re-tune and to skip the authored arm
+    // entirely. That is the double-count risk in its structural form.
+    const rivals = SRC_MODULES.filter((rel) => rel !== OWNER && /\bderiveTemper\b/.test(codeOf(rel)));
+    expect(rivals).toEqual([]);
+    // ANCHORED: the owner itself DOES define and call it, so the detector is proved
+    // live rather than merely matching nothing anywhere.
+    expect(/\bderiveTemper\s*\(/.test(codeOf(OWNER))).toBe(true);
+  });
+});
+
+describe('W-FAITH F2c · THE NO-DOUBLE-COUNT LAW (D1: no site reads both words for one term)', () => {
+  test('exactly ONE src module makes a semantic read of authoredTemper', () => {
+    // D1's own words: "the authored word overrides only the temper-word consumers —
+    // no double-count by construction, asserted by a test that no site reads both
+    // for the same term". This is that test, and the construction is what makes it
+    // provable: because the arm lives INSIDE the seam, a consumer physically cannot
+    // hold both words unless it reaches around the seam for the raw key.
+    const readers = SRC_MODULES.filter((rel) => /\bauthoredTemper\b/.test(codeOf(rel)));
+    expect(readers).toEqual([
+      ...GENERATED_MIRRORS,
+      WRITE_TIME_WALL,
+      OWNER,
+    ].sort());
+  });
+
+  test('the two non-seam mentions are a validator and generated data, never a read', () => {
+    // The write-time wall REFUSES a bad word; it never returns one as a temper.
+    const wall = codeOf(WRITE_TIME_WALL);
+    expect(wall).toContain('authoredTemper must be one of');
+    expectAbsentWithAnchor(
+      wall, 'deityTemper', 'authoredTemper',
+      'the write-time wall does not also compute a derived temper',
+    );
+    // The generated mirrors carry the key as manifest DATA (a field spec), which is
+    // why they match the scan at all. Neither imports the seam.
+    for (const rel of GENERATED_MIRRORS) {
+      expectAbsentWithAnchor(
+        codeOf(rel), 'deityAxes.js', 'authoredTemper',
+        `${rel} carries the key as data, not as a read`,
+      );
+    }
+  });
+
+  test('the seam answers with exactly one word — authored or derived, never blended', () => {
+    // The runtime half of the same law. For a deity carrying BOTH an authored word
+    // and axes that derive the opposite, there is one answer and it is the authored
+    // one; nothing averages, sums, or returns a pair.
+    const contradictory = { alignmentAxis: 'evil', lawAxis: 'chaotic', authoredTemper: 'peacelike' };
+    expect(deityTemper(contradictory)).toBe('peacelike');
+    expect(deityTemper({ alignmentAxis: 'evil', lawAxis: 'chaotic' })).toBe('warlike');
+    expect(TEMPER_WORDS).toContain(deityTemper(contradictory));
+  });
+});
+
+describe('W-FAITH F2c · PROVENANCE (how the authored word reaches each consumer — mostly, it does not)', () => {
+  test('the embed writers do NOT carry authoredTemper — the tripwire on a gated act', () => {
+    // ⛔ THE CAR'S HEADLINE FINDING, held as a test rather than as a paragraph.
+    // Adding the key to these writers makes the authored word reach the whole
+    // engine, and that is a persisted-shape change AND a presentation→mechanical
+    // promotion in the manifest. Both are owner-gated. When the gated act is taken,
+    // this test reds and its message is the checklist.
+    for (const rel of [...EMBED_WRITERS]) {
+      expectAbsentWithAnchor(
+        codeOf(rel), 'authoredTemper', 'temperamentAxis',
+        `${rel} does not yet carry the authored word into the embed`,
+      );
+    }
+  });
+
+  test('the embed writers agree on their key list, so the gap is uniform', () => {
+    // The gap is only safe while it is TOTAL. If one writer carried the key and the
+    // others did not, an authored deity would read one temper after a DM assign and
+    // another after an organic conversion — the divergence class this estate keeps
+    // a writer-parity test for.
+    for (const rel of EMBED_WRITERS) {
+      const code = codeOf(rel);
+      expect(code).toContain('temperamentAxis');
+      expect(code).toContain('domain');   // the one CONDITIONAL key, and the precedent
+    }
+  });
+
+  test('ten of the eleven consumers read an embed; the authored word cannot reach them', () => {
+    const byEmbed = CONSUMERS.filter((c) => c.provenance === 'embed').map((c) => c.file);
+    expect(byEmbed).toHaveLength(10);
+    // The consequence, stated as arithmetic rather than as prose: no consumer whose
+    // provenance is an embed is reachable by an authored word today.
+    expect(CONSUMERS.filter((c) => c.provenance === 'raw-draft')).toEqual([]);
+  });
+
+  test('the ONE surface handed a raw authored definition is the deity draft preview', () => {
+    // `describeDeityEffects` is the only consumer whose provenance splits, and this
+    // is the split. Four callers pass an embed; this one passes the editor draft, so
+    // an author who sets a temper sees its couplings in the preview immediately.
+    const preview = codeOf(EFFECTS_CALLER_RAW);
+    expect(preview).toContain('describeDeityEffects(draft');
+    for (const rel of EFFECTS_CALLERS_EMBED) {
+      expect(codeOf(rel)).toContain('describeDeityEffects(');
+    }
+    // …and the draft really is raw: the editor hands the component its whole draft
+    // rather than the manifest-filtered authored subset.
+    expect(codeOf('src/components/compendium/CustomContentEditor.jsx'))
+      .toContain('<DeityEffectPreview draft={draft} />');
+  });
+
+  test('the temperamentAxis dual-write stays pointed at the DERIVATION', () => {
+    // ⭐ THE SUBTLE ONE. `CustomContent.jsx` mints the retired compat mirror by
+    // calling the seam — and it passes a TWO-KEY LITERAL, so the arm cannot reach
+    // it. That is correct and must stay: D1 retires `temperamentAxis` forever, so
+    // the mirror must go on recording what the AXES say, never what the author
+    // chose. Spreading the draft into that call instead would quietly make the
+    // retired field authored again — the exact shift D1 refused.
+    const editor = codeOf('src/components/compendium/CustomContent.jsx');
+    expect(editor).toContain('temperamentAxis: deityTemper({');
+    expectAbsentWithAnchor(
+      editor, 'authoredTemper', 'temperamentAxis',
+      'the dual-write mirrors the derivation, never the authored word',
+    );
+  });
+});
+
+describe('W-FAITH F2c · THE RETIRED FIELD (inert to the seam, still legible on four surfaces)', () => {
+  test('the stored-field reader register is EXACTLY the four display surfaces', () => {
+    // SHRINK-ONLY. A new engine file reading `.temperamentAxis` for meaning is the
+    // regression D1's inertness promise exists to prevent, and it would land here.
+    const semantic = SRC_MODULES.filter((rel) => {
+      if (rel === WRITE_TIME_WALL || EMBED_WRITERS.includes(rel)) return false;
+      return /[.[]['"]?temperamentAxis/.test(codeOf(rel));
+    });
+    expect(semantic).toEqual([...STORED_FIELD_READERS].sort());
+  });
+
+  test('no worldPulse engine module makes a semantic read of the retired field', () => {
+    // The narrower, sharper claim: whatever the display surfaces do, the ENGINE is
+    // clean. `applyWorldPulse.js` is excluded as a passthrough writer and is the
+    // anchor that proves the filter is looking at the right directory.
+    const engine = SRC_MODULES.filter((rel) => rel.startsWith('src/domain/worldPulse/'));
+    expect(engine.length).toBeGreaterThan(50);
+    const offenders = engine.filter(
+      (rel) => !EMBED_WRITERS.includes(rel) && /[.[]['"]?temperamentAxis/.test(codeOf(rel)),
+    );
+    expect(offenders).toEqual([]);
+    expect(engine).toContain('src/domain/worldPulse/applyWorldPulse.js');
+  });
+
+  test('an authored temper is invisible on all four stored-field surfaces — recorded, not fixed', () => {
+    // The honest consequence of the two findings together: those surfaces print the
+    // RETIRED mirror, and the mirror is minted from the axes, so an authored word
+    // would not show there even once the embed carries it. Named here so the next
+    // lane inherits the addresses instead of rediscovering them.
+    for (const rel of STORED_FIELD_READERS) {
+      expectAbsentWithAnchor(
+        codeOf(rel), 'authoredTemper', 'temperamentAxis',
+        `${rel} still prints the retired mirror`,
+      );
+    }
+  });
+});
+
+describe('W-FAITH F2c · NO SPURIOUS NEWS (the arm changes READS, never history)', () => {
+  test('no news or receipt module is in the temper census at all', () => {
+    // THE FIRST HALF OF THE PROOF, and it is structural rather than empirical: the
+    // arm cannot mint a receipt it has no path to. Not one of the eleven consumers
+    // is a news/herald/receipt module, so nothing that voices a transition reads a
+    // temper word in the first place.
+    const voicing = CONSUMER_FILES.filter((rel) => /News|Herald|herald|ReceiptPools/.test(rel));
+    expect(voicing).toEqual([]);
+    // ANCHORED: the estate really does have such modules, and plenty of them — so
+    // this filter returning empty is a fact about the census, not about the regex.
+    const newsModules = SRC_MODULES.filter((rel) => /News\.js$/.test(rel));
+    expect(newsModules.length).toBeGreaterThan(10);
+    expect(newsModules).toContain('src/domain/worldPulse/dispositionNews.js');
+  });
+
+  test('the "martial temper changes" family is a LEARNED-STOCK crossing, not a deity read', () => {
+    // ⭐ THE HEADLINE NAME-COLLISION, disarmed. `disposition_martial_crossed` reads
+    // as though a patron's temper moving would fire it. It cannot: the transition is
+    // minted by the disposition LEDGER from banded war outcomes, and that module
+    // imports exactly one thing — the banded-stock leaf. It has no deity, no
+    // snapshot, and no route to the seam.
+    const ledger = codeOf('src/domain/worldPulse/dispositionLedger.js');
+    expect(ledger).toContain("from './bandedStock.js'");
+    expect(ledger).toContain('band_crossing');
+    expectAbsentWithAnchor(
+      ledger, 'deityTemper', 'band_crossing',
+      'the ledger that mints the crossing never reads a deity temper',
+    );
+    // The news leaf that voices it reads the deity only through the DOMAIN pressure
+    // table (`deity_war_pressure`), which is a different authored field entirely.
+    const news = codeOf('src/domain/worldPulse/dispositionNews.js');
+    expect(news).toContain('disposition_martial_crossed');
+    expect(news).toContain('deityPressureOf');
+    expectAbsentWithAnchor(
+      news, 'deityTemper', 'deityPressureOf',
+      'the disposition news leaf reads the domain pressure, never the temper',
+    );
+  });
+
+  test('nothing anywhere compares a PREVIOUS temper word to a current one', () => {
+    // THE SECOND HALF. A change-receipt needs a delta, and no module keeps a prior
+    // temper to difference against. So even a deity whose authored word contradicts
+    // its derivation — reachable today only on the draft-preview surface — has no
+    // machinery that could notice the disagreement and voice it.
+    const deltas = SRC_MODULES.filter(
+      (rel) => /\b(prev|prior|previous|last|old)Temper\b|\btemperChanged\b/i.test(codeOf(rel)),
+    );
+    expect(deltas).toEqual([]);
+    // ANCHORED: the estate DOES keep prior-state comparisons of this exact shape for
+    // other quantities, so an empty result is a fact about temper, not about the
+    // pattern. `martialReadiness` differences a prior record every tick.
+    expect(codeOf('src/domain/worldPulse/martialReadiness.js')).toContain('priorRec');
+  });
+});
+
+describe('W-FAITH F2c · THE TWELFTH CONSUMER (it is not in src, and it is a COPY)', () => {
+  test('the AI grounding bundle inlines deityTemper, and its copy carries the authored arm', () => {
+    // ⭐ THE CONSUMER A src-ONLY CENSUS CANNOT SEE. `aiGroundingBundle.js` is an
+    // esbuild BUNDLE of the domain layer, so it does not import the seam — it
+    // contains a COPY of it, and three copied call sites. A denominator that
+    // stopped at `src/` would have reported eleven consumers and missed the one
+    // that speaks to the AI layer.
+    //
+    // The freshness tests catch a stale HASH. This catches a stale MEANING: if the
+    // bundle is ever regenerated from a leaf without the arm, or hand-patched, the
+    // AI layer starts reading a different temper from the engine and nothing else
+    // would say so.
+    const bundle = readFileSync(
+      join(ROOT, 'supabase/functions/_shared/aiGroundingBundle.js'), 'utf8',
+    );
+    expect(bundle).toContain('function deityTemper(deity)');
+    expect(bundle).toContain('deity.authoredTemper');
+    // …and the copy agrees with the original on the guard, not just on the key.
+    for (const word of TEMPER_WORDS) expect(bundle).toContain(`"${word}"`);
+  });
+
+  test('no OTHER edge bundle carries a temper read of its own', () => {
+    // A second bundled copy would be a second temper, free to drift. The charter and
+    // output-schema bundles carry the manifest as DATA (hence the key appears), which
+    // is why the discriminator is the function definition rather than the word.
+    const shared = readdirSync(join(ROOT, 'supabase/functions/_shared'))
+      .filter((f) => f.endsWith('Bundle.js'))
+      .sort();
+    expect(shared.length).toBeGreaterThan(2);
+    const withCopy = shared.filter(
+      (f) => /function deityTemper\s*\(/.test(
+        readFileSync(join(ROOT, 'supabase/functions/_shared', f), 'utf8'),
+      ),
+    );
+    expect(withCopy).toEqual(['aiGroundingBundle.js']);
+  });
+});
+
+describe('W-FAITH F2c · THE VOCABULARY MIRROR (the leaf restates it, so it must be pinned)', () => {
+  test('TEMPER_WORDS equals the authoring vocabulary it mirrors', () => {
+    // The leaf imports NOTHING by design, so it cannot import DEITY_TEMPER_KEYS and
+    // must restate the three words. F1c pinned its three mirrors the same way; this
+    // is the fourth, and without it the arm could start accepting a word the
+    // authoring wall rejects, or rejecting one it accepts.
+    expect([...TEMPER_WORDS].sort()).toEqual([...DEITY_TEMPER_KEYS].sort());
+  });
+
+  test('the mirror is exactly the derivation\'s own output range', () => {
+    // Which is what makes the arm's guard non-vacuous: a word outside this set is
+    // not merely unauthorised, it is a word the derivation could never produce.
+    const produced = new Set([
+      deityTemper({ alignmentAxis: 'evil', lawAxis: 'chaotic' }),
+      deityTemper({ alignmentAxis: 'good', lawAxis: 'lawful' }),
+      deityTemper({ alignmentAxis: 'neutral', lawAxis: 'neutral' }),
+    ]);
+    expect([...produced].sort()).toEqual([...TEMPER_WORDS].sort());
+  });
+});

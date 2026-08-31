@@ -14,13 +14,32 @@
  * `deriveTemper` is the axis-integration DERIVATION: warlike/peacelike/neutral is
  * no longer an independent stored axis — it falls out of the two alignment axes
  * (evil + chaos push warlike; good + law push peacelike; the neutral core reads
- * neutral). `deityTemper` is the read-time DERIVATION every temper reader routes
- * through: it ALWAYS derives from the two alignment axes and NEVER consults a
- * stored `temperamentAxis`. The temperament axis is RETIRED as a load-bearing
- * field (W-F5 stage 1 — the axis-retirement wave dropped the byte-identity
- * short-circuit): the stored field still persists harmlessly in embeds and the DB
- * (migrations 049/056 keep the column + CHECK), but it is inert to every engine
- * temper read. Only a null/absent deity ⇒ undefined.
+ * neutral). `deityTemper` is the read-time seam every temper reader routes
+ * through. It has exactly TWO arms (W-FAITH D1, car F2c):
+ *
+ *   1. an AUTHORED `authoredTemper` wins — the stance dial the author set, and an
+ *      authored `neutral` is a REAL choice that beats a derivation which would
+ *      have said warlike (§797.4: neutral is first-class on every aspect);
+ *   2. otherwise the derivation from the two alignment axes, byte-for-byte as
+ *      before.
+ *
+ * ⛔ THE RETIRED FIELD STAYS RETIRED. `temperamentAxis` is NEVER consulted by
+ * either arm. It is RETIRED as a load-bearing field (W-F5 stage 1 dropped the
+ * byte-identity short-circuit): the stored field still persists harmlessly in
+ * embeds and the DB (migrations 049/056 keep the column + CHECK), but it is inert
+ * to every engine temper read. D1 chose a NEW field over re-arming that one
+ * precisely because every existing custom deity carries a `temperamentAxis` minted
+ * as a COMPAT MIRROR, not as intent — re-arming it would silently shift content a
+ * user never authored. Only a null/absent deity ⇒ undefined.
+ *
+ * ⚠ WHAT THE AUTHORED ARM CAN AND CANNOT REACH, measured at F2c and pinned by
+ * `tests/domain/deityTemperConsumerCensus.walker.test.js`: `deitySnapshotFrom`
+ * (domain/deitySnapshot.js) copies a NAMED key list and does not carry
+ * `authoredTemper`, so every consumer that reads an EMBED — the whole engine —
+ * still derives. The authored word reaches only the surfaces handed a RAW authored
+ * definition, which today is the compendium's deity draft preview. Carrying the
+ * key into the embed is an owner-gated persisted-shape act, deliberately NOT taken
+ * here; the census walker holds the tripwire.
  *
  * (Homed in worldPulse rather than the domain/deityConstants leaf so the W-F2 diff
  * stays clear of that leaf's edge-function bundle; corruption.js can still import it
@@ -83,16 +102,52 @@ export function deriveTemper(evilCoord, chaosCoord, context) {
 }
 
 /**
- * The READ-TIME temperament DERIVATION. Temper is derived from the two alignment
- * axes (evil01 + chaos01) for EVERY deity — a stored `temperamentAxis` is NO LONGER
- * consulted (axis retirement, W-F5 stage 1 dropped the byte-identity short-circuit).
- * A null/absent deity ⇒ undefined (the callers' pre-existing neutral fallback). The
- * `temperamentAxis` field remains in the typedef because embeds/DB still carry it,
- * but it is inert to this read. Pure.
- * @param {{ temperamentAxis?: string, alignmentAxis?: string, lawAxis?: string } | null} [deity]
+ * The three temper words, and the ONLY three `deityTemper` may return. This is a
+ * MIRROR of `customContentSchema.DEITY_TEMPER_KEYS`, restated here rather than
+ * imported because this leaf imports NOTHING by design (see the file header: every
+ * temper consumer must be able to read it without an import cycle, and
+ * customContentSchema is a heavy authoring module the pulse must never pull in).
+ * The duplication is pinned against its source in the F2c census walker, so the
+ * mirror cannot silently rot — the same discipline F1c applied to its three
+ * vocabulary mirrors.
+ *
+ * It is also `deriveTemper`'s declared output range, which is what makes the
+ * authored arm's guard non-vacuous: an `authoredTemper` outside this set cannot be
+ * a word the derivation would ever produce either.
+ * @type {readonly string[]}
+ */
+export const TEMPER_WORDS = Object.freeze(['warlike', 'peacelike', 'neutral']);
+
+/**
+ * The READ-TIME temper seam — TWO arms (W-FAITH D1, wired by car F2c).
+ *
+ * 1. **AUTHORED WINS.** A deity carrying a valid `authoredTemper` reads that word.
+ *    An authored `neutral` is a REAL choice and beats a derivation that would have
+ *    said warlike (§797.4 — neutral is first-class on every aspect), so the arm is
+ *    a set-membership test and never a truthiness test.
+ * 2. **OTHERWISE DERIVE**, from the two alignment axes (evil01 + chaos01), exactly
+ *    as before. Since no deity authored before F1c carries the field, EVERY read in
+ *    every existing world takes this arm ⇒ byte-identical.
+ *
+ * ⛔ The retired stored `temperamentAxis` is consulted by NEITHER arm (W-F5 stage 1
+ * dropped its short-circuit; D1 declines to re-arm it because it was minted as a
+ * compat mirror, not as intent). It stays in the typedef only because embeds and
+ * the DB still carry it.
+ *
+ * ⚠ An `authoredTemper` outside `TEMPER_WORDS` falls through to the derivation
+ * rather than being returned verbatim. That is not defensive noise: `nicheOf`
+ * (cultImpositionApply.js) builds a niche KEY out of this return value, so a word
+ * that escaped validation would mint a niche no other deity can ever share — the
+ * write-time walls (validateDeity, the admission projection, migration 200's CHECK)
+ * all refuse it, and this leaf declines to be the one place that would not.
+ *
+ * A null/absent deity ⇒ undefined (the callers' pre-existing neutral fallback). Pure.
+ * @param {{ authoredTemper?: string, temperamentAxis?: string, alignmentAxis?: string, lawAxis?: string } | null} [deity]
  * @returns {string | undefined}
  */
 export function deityTemper(deity) {
   if (!deity) return undefined;
+  const authored = deity.authoredTemper;
+  if (typeof authored === 'string' && TEMPER_WORDS.includes(authored)) return authored;
   return deriveTemper(evil01(deity), chaos01(deity));
 }

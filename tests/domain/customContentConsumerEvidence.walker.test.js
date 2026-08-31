@@ -84,6 +84,10 @@ const CONSUMER_SITES = Object.freeze({
   customSupplyChainReview: 'src/domain/content/customSupplyChainReview.js',
   // The store module of the same name is a 7-line re-export barrel with none of
   // the axis fields; the domain module is where deitySnapshotFrom projects them.
+  // The dependency-free temper seam. W-FAITH F2c gave `deityTemper` its authored
+  // arm, so `authoredTemper` names this leaf as the file that actually reads the
+  // key — the seam, not the embed builder beneath it, which does NOT carry it.
+  deityAxes: 'src/domain/worldPulse/deityAxes.js',
   deitySnapshot: 'src/domain/deitySnapshot.js',
   // WR-2's pure read side recognizes the deity domain's closed mechanical set
   // and returns a neutral record for every other authored word.

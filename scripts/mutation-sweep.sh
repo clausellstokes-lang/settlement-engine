@@ -98,6 +98,7 @@ MUTATED_FILES=(
   src/domain/worldPulse/worldPulseFeedCuration.js
   src/lib/chronicle.js
   src/kernel/prng.js
+  src/domain/deitySnapshot.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -927,6 +928,24 @@ check_clear "corpus-coverage/summary impact set order swap stays clear" src/doma
 #     WEAVE program adding realm-surface map words by design.
 perl -0pi -e "s/^ \* prng\.js — Seeded pseudo-random number generator wrapper\./ * prng.js — Seeded pseudo-random number generator wrapper. buildTownMapModel/m" src/kernel/prng.js
 check_caught "map-surface/vocabulary outside the allowlist" src/kernel/prng.js "npx vitest run tests/lint/settlementMapSurfaceAllowlist.walker.test.js"
+
+# 38. THE AUTHORED-TEMPER EMBED TRIPWIRE (W-FAITH F2c, D1 / ODQ §851). F2c gave
+#     `deityTemper` its authored arm but deliberately did NOT carry `authoredTemper`
+#     into the deity embed: that is a persisted-shape change across FOUR writers AND a
+#     presentation->mechanical promotion in the custom-content manifest, both
+#     owner-gated. The whole car rests on that gap being TOTAL, so the gap is held by a
+#     test rather than by a paragraph — and this plant is what proves that test can
+#     actually see the act it guards.
+#     The mutation IS the gated act, in miniature: one key added to the intent builder.
+#     Measured consequence if it went unnoticed — the corpus comparator recorded 54 of
+#     81 deity rows moving once the word reaches the engine (war appetite, military
+#     will, the niche key, the patron megaphone), so this is a same-seed shift wearing
+#     a schema edit's clothes. `deitySnapshotFrom` is the right target rather than one
+#     of the three commit writers because it is the RESTORE-FROM-WORLD path's builder:
+#     a key added to the writers but not here is silently stripped on restore, which is
+#     the sharper half of the same bug.
+perl -0pi -e "s/^    rankAxis: raw\.rankAxis,\$/    rankAxis: raw.rankAxis,\n    authoredTemper: raw.authoredTemper,/m" src/domain/deitySnapshot.js
+check_caught "faith-temper/authoredTemper carried into the deity embed" src/domain/deitySnapshot.js "npx vitest run tests/domain/deityTemperConsumerCensus.walker.test.js --no-file-parallelism --reporter=verbose" "the embed writers do NOT carry authoredTemper — the tripwire on a gated act"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
