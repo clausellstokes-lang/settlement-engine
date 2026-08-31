@@ -29,6 +29,7 @@ import {
   WR5_WAR_RULING_COUPLINGS,
   WR6_WAR_COALITION_COUPLINGS,
   WR6B_WAR_TREASURY_COUPLINGS,
+  WR6C_SEAT_REACTION_COUPLINGS,
   WR7_ENVOY_COUPLINGS,
   WF_FAITH_WAR_COUPLINGS,
 } from './couplingRegistryWar.js';
@@ -111,6 +112,8 @@ export {
   WR6_WAR_COALITION_COUPLINGS,
   WR6B_COALITION_COFFERS_COUPLING,
   WR6B_WAR_TREASURY_COUPLINGS,
+  WR6C_ANTICIPATED_REACTION_CASUS_COUPLING,
+  WR6C_SEAT_REACTION_COUPLINGS,
   WR7_PEACE_DISPATCH_COUPLING,
   WR7_HOME_DELIVERY_COUPLING,
   WR7_MOVING_PICTURE_COUPLING,
@@ -153,6 +156,17 @@ export const COUPLING_REGISTRY = Object.freeze([
   // FAITH one because its owningVolume IS WAR: the read lives in warTermination.js and
   // the row licenses that file's import of the faith leaf.
   ...WF_FAITH_WAR_COUPLINGS,
+  // W-SEAT SEAT-4 (2026-08-31, chair declaration ODQ §861): the anticipated-reaction CASUS,
+  // licensing anticipatedReactions.js's GRAMMAR read of treaty orientation.
+  // ⛔ APPENDED LAST, NOT FILED NEXT TO WR-6b, AND THE REASON IS A REAL ONE. Its wave letter
+  // puts it numerically beside WR-6b, but this list's ORDER is load-bearing: registration
+  // order is the legacy first-row tiebreak for `couplingRowFor`. Composed in numeric
+  // position it would sit ahead of WR-7 and TAKE the CPL-19 / GRAMMAR→INFO first-row seat
+  // from `WR7_SILENCE_INFERENCE_COUPLING` — silently changing what every single-row caller
+  // on that pair resolves to. A landing act does not move a legacy tiebreak to tidy an
+  // ordinal, so the row appends in LANDING order where it costs nothing. WR-6b had no such
+  // conflict: it joined its bucket last wherever it was composed.
+  ...WR6C_SEAT_REACTION_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

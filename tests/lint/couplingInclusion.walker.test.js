@@ -225,6 +225,26 @@ const LAYER_PATTERNS = Object.freeze({
     // has designed and silently widen a frozen family.
     /^src\/domain\/worldPulse\/secondOrderBelief\.js$/,
     /^src\/domain\/spatial\/(?:rumorNetwork|intelActs)\.js$/,
+    // W-SEAT SEAT-4: the anticipated-reaction forecast. HOMED BY CHAIR DECLARATION
+    // (ODQ §861, the SEAT-A2 landing) rather than by the landing lane's judgment, because
+    // this is the case the family has no free answer for: the leaf statically reads
+    // `beliefMap.js` (INFO) AND `treatyOrientation.js` (GRAMMAR), so EVERY home mints an
+    // unlicensed cross-layer pair, and the row that licenses one declares a coupling's
+    // direction, desk, flags and receipt address — a chair act, not a walker repair.
+    // ⭐ BOTH CANDIDATES WERE MEASURED BY PROBE BEFORE THE RULING, so the choice was made on
+    // subject and not on price: INFO ⇒ exactly ONE pair (GRAMMAR→INFO on the treatyOrientation
+    // read, now licensed as `WR-6c` in couplingRegistryWar.js); GRAMMAR ⇒ exactly one the
+    // other way (INFO→GRAMMAR on the beliefMap read). The cost is one row either way.
+    // INFO wins on SUBJECT: the module's heaviest substrate is the belief map and every band
+    // it returns is one court's PICTURE of another, which is the shape INFO already owns —
+    // "derive a court's decision input from beliefs while consulting a grammar vocabulary"
+    // is the espionage-career reading verbatim. The treaty read is the deliberate exception
+    // the leaf's own header argues for: a compact is TRUE STRUCTURE, never believed.
+    // It is NOT an ARGUED_UNLAYERED case: that roster is for modules owning no subject and
+    // spoken by every port, and this one owns the anticipated-reaction forecast outright.
+    // ⛔ AN EXACT-PATH REGEX, NOT AN `anticipated[A-Z]` PREFIX: the standing rule above — a
+    // prefix would claim files nobody has designed and silently widen a frozen family.
+    /^src\/domain\/worldPulse\/anticipatedReactions\.js$/,
   ],
   GRAMMAR: [
     // 2026-08-07: `negotiationPictures` widened to `negotiation[A-Z]`. The layering

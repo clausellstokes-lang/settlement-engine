@@ -385,6 +385,75 @@ export const WR6B_WAR_TREASURY_COUPLINGS = Object.freeze([
   WR6B_COALITION_COFFERS_COUPLING,
 ]);
 
+/**
+ * WR-6c / CPL-19. W-SEAT SEAT-4's ANTICIPATED-REACTION CASUS. Before a court takes a major
+ * decision it forecasts how the powers that matter will answer, and ONE of the three
+ * conditions that can actually hold a decision back is not a belief at all: whether the
+ * objecting power holds a live SUBORDINATING COMPACT over the decider. That is TRUE
+ * STRUCTURE, read from GRAMMAR's treaty orientation, deliberately NOT believed — a formal
+ * compact is a contract, and a casus computed from a stale picture would let a court talk
+ * itself out of an obligation it demonstrably has. The belief fog covers the other court's
+ * STATE, never the compact between them.
+ *
+ * ⛔ CHAIR DECLARATION — ODQ §861, THE SEAT-A2 LANDING. The importing leaf
+ * `anticipatedReactions.js` reads `beliefMap.js` (INFO) and `treatyOrientation.js`
+ * (GRAMMAR), so it had NO free layer home: every family mints an unlicensed pair, and the
+ * lane correctly refused to mint the licensing row on its own judgment — a registry row
+ * declares a coupling's direction, desk, flags and receipt address, which is a chair
+ * declaration and not a walker repair. The chair homed the leaf in INFO: its heaviest
+ * substrate is the belief map, and INFO already owns the shape of "derive a court's
+ * decision input from beliefs while consulting a grammar vocabulary" (the espionage-career
+ * precedent).
+ *
+ * ⭐ THE COST WAS MEASURED BEFORE IT WAS RULED, BY PROBE AND NOT BY PREDICTION — both
+ * candidate homes were placed and the walker run:
+ *   INFO home    ⇒ EXACTLY ONE unlicensed pair, GRAMMAR→INFO on the treatyOrientation read
+ *                  — this row, and the walker then goes green.
+ *   GRAMMAR home ⇒ exactly one the other way, INFO→GRAMMAR on the beliefMap read.
+ * The alternative was measured and NOT taken. Recording both is what makes the choice a
+ * decision rather than a discovery: the row costs one license either way, so the home was
+ * settled on where the module's subject lives, never on which was cheaper.
+ *
+ * ⛔ WHY WR-6c AND NOT A NEW W-SEAT PREFIX: the WR-6b precedent verbatim. A landing is no
+ * place to charter a thirteenth volume prefix, and the honest owner already exists — WR-6
+ * is the CALLED-COURT DELIBERATION family (the seat books and learned temperament that
+ * answer a call), and an anticipated-reaction forecast is precisely that family's
+ * ANTICIPATION arm. It takes its own wave letter because WR-6's array is pinned at seven
+ * rows with every member asserted `owningWave === 'WR-6'`; the couplingId shape admits
+ * `WR-6c` through its own `\d+[a-z]?` clause, so no prefix is opened.
+ * ⚠ THE FUTURE IS RESERVED, AND CHEAPLY: a chartered W-SEAT volume may RE-HOME this row by
+ * RENAME ALONE, with no re-licensing — the LICENSE is the chair's act and the prefix is
+ * bookkeeping.
+ *
+ * THE COUNTERFORCE IS REAL AND IT IS `heldBackBy`. A true casus is necessary but NOT
+ * sufficient: the power must also read `opposed` AND the court must be confident enough to
+ * act on the picture at all, so a formally-bound objector still moves nothing when the
+ * forecast is a half-forgotten rumour. Drop that and every hostile neighbour vetoes
+ * everything.
+ *
+ * DARK ⇒ NOTHING: `reactionsLit` reads `foreignSeatEnabled` by name with the strict
+ * `=== true` idiom, and every dark path returns the ONE frozen EMPTY array — the same
+ * reference every time — so the choke's byte-identity pin survives by construction and this
+ * coupling cannot speak at all.
+ */
+export const WR6C_ANTICIPATED_REACTION_CASUS_COUPLING = couplingRow({
+  couplingId: 'CPL-19.GRAMMAR_TO_INFO.WR-6c.anticipated_reaction_casus',
+  pairId: 'CPL-19',
+  direction: 'GRAMMAR→INFO',
+  read: 'src/domain/worldPulse/anticipatedReactions.js#reactionOf.holdsCompactOver',
+  receiptField: 'candidate[applyMode=proposal].anticipatedReaction.{heldBy,confidence01,band,casus}',
+  counterforce: 'src/domain/worldPulse/anticipatedReactions.js#heldBackBy',
+  flags: ['foreignSeatEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-6c',
+  intendedDesk: 'war',
+});
+
+/** The one WR-6c cross-layer read: the anticipated-reaction casus (W-SEAT SEAT-4). */
+export const WR6C_SEAT_REACTION_COUPLINGS = Object.freeze([
+  WR6C_ANTICIPATED_REACTION_CASUS_COUPLING,
+]);
+
 const WR7_ENVOY_FLAGS = Object.freeze([
   'warLayerEnabled',
   'warTerminationEnabled',

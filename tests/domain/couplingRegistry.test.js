@@ -27,6 +27,8 @@ import {
   WR6_WAR_COALITION_COUPLINGS,
   WR6B_COALITION_COFFERS_COUPLING,
   WR6B_WAR_TREASURY_COUPLINGS,
+  WR6C_ANTICIPATED_REACTION_CASUS_COUPLING,
+  WR6C_SEAT_REACTION_COUPLINGS,
   WR7_ENVOY_COUPLINGS,
   WR7_CARRIED_SHEET_COUPLING,
   WR7_ENCOUNTER_COUPLING,
@@ -162,6 +164,17 @@ describe('CW-0 coupling registry', () => {
       // WAR — the read lives in warTermination.js, and the row is what licenses that file's
       // cross-layer import of the faith leaf in the same commit.
       ...WF_FAITH_WAR_COUPLINGS,
+      // W-SEAT SEAT-4 (2026-08-31, chair declaration ODQ §861): the anticipated-reaction
+      // CASUS, licensing anticipatedReactions.js's GRAMMAR read of treaty orientation. The
+      // landing lane measured BOTH candidate layer homes by probe (INFO ⇒ this one row;
+      // GRAMMAR ⇒ one the other way) and correctly refused to mint the license itself — a
+      // registry row declares a coupling's direction, desk, flags and receipt address.
+      // ⛔ APPENDED LAST RATHER THAN FILED BESIDE WR-6b, DELIBERATELY: composed in numeric
+      // wave position it would precede WR-7 and TAKE the CPL-19 / GRAMMAR→INFO first-row
+      // seat from WR7_SILENCE_INFERENCE_COUPLING, changing what every single-row caller on
+      // that pair resolves to. The tiebreak is preserved below, which is what this test is
+      // named for.
+      ...WR6C_SEAT_REACTION_COUPLINGS,
     ]);
     expect(WR3_LINEAGE_COUPLING).toEqual({
       couplingId: 'CPL-3.POP_TO_WAR.WR-3.lineage',
@@ -645,6 +658,13 @@ describe('CW-0 coupling registry', () => {
         // above it is a read, which is why the direction's row list is worth reading in
         // order rather than as a set.
         ES3_GRADIENT_AMENDER_COUPLING,
+        // W-SEAT SEAT-4 is the EIGHTH, and the first on this direction owned by a WAR wave
+        // since WR-7 opened it — the anticipated-reaction casus, where GRAMMAR's treaty
+        // orientation answers the one question in a belief forecast that must NOT be
+        // believed. It sits LAST because COUPLING_REGISTRY appends it last, and it appends
+        // last precisely so WR-7's silence inference keeps the first-row seat asserted on
+        // the next line: a landing act does not move a legacy tiebreak to tidy an ordinal.
+        WR6C_ANTICIPATED_REACTION_CASUS_COUPLING,
       ]);
     expect(couplingRowFor('CPL-19', 'GRAMMAR→INFO')).toBe(WR7_SILENCE_INFERENCE_COUPLING);
     // ES-1's third row OPENS a pair: nobody had read across TRADE and GRAMMAR before, and
