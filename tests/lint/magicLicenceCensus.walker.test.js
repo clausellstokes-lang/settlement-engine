@@ -538,7 +538,11 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
       'Church legal proceedings for matters within clerical jurisdiction.',
       'Access to venerated relics and shrines for pilgrims.',
       'Crucifixes, reliquaries, saints’ images.',
-      'Consecrated ground around church.',
+      // The village Graveyard desc, re-quoted from the shipped data when the burial
+      // ladder's last legacy rung was rewritten (E-RES-5). The control is kept POINTED
+      // AT WHAT SHIPS: the terse predecessor was withdrawn from the catalog in the same
+      // act, so leaving it here would have guarded a string no world can any longer draw.
+      "Consecrated ground beside the church, on the parish's own plot, with a resident priest to close it. The rite keeps to the day of the death rather than waiting on a clergyman who comes through, and the parish has begun keeping the names in the same book as the baptisms. The ground nearest the church wall is spoken for generations ahead, and everyone here can say who holds it.",
       'Dramatic but meaningless predictions. Occasionally accidentally accurate.',
       'A claimed miracle or relic drew pilgrims in numbers the settlement was never built to hold',
       'The faith lends the ruler a measure of divine mandate.',
