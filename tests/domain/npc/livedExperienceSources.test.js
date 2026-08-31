@@ -630,7 +630,12 @@ describe('DARK BY CONSTRUCTION — the closure, amended for this car', () => {
     // L3's walker asserted NO importer and said a red here would be car L4's act.
     // This is that act, and the walker is TIGHTENED rather than loosened: the set is
     // pinned exactly, so a stray consumer still reds. The pulse call site is L5's.
-    expect(importers).toEqual([]);
+    //
+    // AMENDED BY CAR L7 — the read model, which reads the funnel's order and band
+    // words. It is a FAMILY MEMBER, not a production caller: nothing imports it, and
+    // the drift family's own closure walker enrols it and asserts that. The set stays
+    // exact, so the next namer still reds.
+    expect(importers.sort()).toEqual(['src/domain/npc/characterReadModel.js']);
   });
 
 /**
@@ -648,13 +653,36 @@ describe('DARK BY CONSTRUCTION — the closure, amended for this car', () => {
  */
 const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
 
-  test('⭐ NO PRODUCTION CALLER: nothing in src imports the sources or the known read', () => {
+  test('⭐ NO PRODUCTION CALLER: the known read is reachable from NOTHING, over two steps', () => {
+    // ⚠ AMENDED BY CAR L7, AND IT IS A NARROWING, SO IT IS PROVED IN TWO STEPS
+    // INSTEAD OF ONE RATHER THAN QUIETLY WIDENED. "Nothing in src names the known
+    // read" stopped being true the moment the read model routed the dossier through
+    // `characterAsSeenBy` — which is the point of that seam, and pretending otherwise
+    // would be the substring-ban mistake car L4 paid for and car L5 paid for again.
+    //
+    // The load-bearing claim was never "no file names it". It is that NO PRODUCTION
+    // PATH REACHES IT. So:
+    //   STEP 1 — exactly one non-family file may name it, and it is the read model;
+    //   STEP 2 — and the read model is itself imported by NOBODY, so the path that
+    //            step 1 admits terminates immediately and reaches no production code.
+    const READ_MODEL = 'src/domain/npc/characterReadModel.js';
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
+    expect(files.length).toBeGreaterThan(100);
     const importers = files
       .filter((file) => !/(livedExperienceSources|knownCharacter)\.js$/.test(file))
       .filter((file) => /livedExperienceSources|knownCharacter/.test(stripComments(readFileSync(file, 'utf8'))))
       .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'));
-    expect(importers).toEqual([]);
+    expect(importers.sort()).toEqual([READ_MODEL]);
+    // STEP 2 — the closure. If a surface ever wires the dossier, this is what reds,
+    // and it should: somebody has to mean it.
+    const readModelImporters = files
+      .filter((file) => !/characterReadModel\.js$/.test(file))
+      .filter((file) => /characterReadModel/.test(stripComments(readFileSync(file, 'utf8'))))
+      .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'));
+    expect(readModelImporters).toEqual([]);
+    // anchored: the read model really is present, so the closure is over a real file
+    // rather than passing because the name matches nothing.
+    expect(files.some((file) => file.endsWith('characterReadModel.js'))).toBe(true);
   });
 
   test('⭐ AND THE STRIP DOES NOT BLIND IT — a planted import is still caught', () => {

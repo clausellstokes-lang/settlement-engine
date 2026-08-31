@@ -723,7 +723,17 @@ describe('DARK BY CONSTRUCTION — two independent darknesses, one door', () => 
     // the ONE file allowed to, so a second consumer still reds. The adapter leaf is
     // itself imported by nobody (its own suite pins that), so the family remains
     // unreachable from production and the dormancy claim is unchanged.
-    expect(importers).toEqual(['src/domain/npc/livedExperienceSources.js']);
+    //
+    // AMENDED AGAIN BY CAR L7, the same way: the read model reads the funnel's order
+    // and its band words, so it names the family — and it is ITSELF imported by
+    // nobody (its own suite pins that, and the drift family's closure walker carries
+    // it as a member). The set stays EXACT, so a third namer still reds; what the
+    // dormancy claim rests on is unchanged, because neither named file is reachable
+    // from production.
+    expect(importers.sort()).toEqual([
+      'src/domain/npc/characterReadModel.js',
+      'src/domain/npc/livedExperienceSources.js',
+    ]);
   });
 
   test('⭐ ONE DOOR: the funnel mints NO flag of its own, it rides L2\'s', () => {
