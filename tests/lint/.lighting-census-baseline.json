@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "739fcf64171a2c39dcfa65e13cbc9e70ff032f4f",
-  "measuredBy": "T3 SEAT-A2 (SEAT-3)",
+  "measuredAtSha": "51551d051a473fb91fedbb113418543b8bb64835",
+  "measuredBy": "T3 SEAT-A2 (SEAT-4, terminal)",
   "date": "2026-08-31",
-  "note": "SEAT-3 adds tests/domain/occupationPosture.test.js (the occupier posture axis: the typed field, the decision that writes it, and the two ladder inputs it biases) and amends the SEAT-1 dormancy arms. Regenerated at the clean tip 739fcf641.",
-  "files": 2437,
+  "note": "SEAT-4 adds tests/domain/anticipatedReactions.test.js (the anticipated-reaction forecast and the choke pass that holds a decision back). Terminal member of the SEAT-2c/3/4 train; re-derived WHOLE at the clean tip 51551d051.",
+  "files": 2438,
   "parked": 367,
-  "credited": 2070,
-  "titles": 20785,
-  "suiteTitles": 5722
+  "credited": 2071,
+  "titles": 20809,
+  "suiteTitles": 5728
 }
