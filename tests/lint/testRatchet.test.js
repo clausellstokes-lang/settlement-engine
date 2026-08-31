@@ -42,6 +42,7 @@ import {
   runnerCommandOf, SOURCE_TEST_EXCLUDE, uncollectedOf, SCOPE_FLOOR_RATIO,
   classifyFailure, failureEvidenceOf, globalTestTimeoutOf, timeoutLiteralsOf,
   FAILURE_CLASSES, VITEST_DEFAULT_TEST_TIMEOUT,
+  MAGNITUDE_KINDS, measureMagnitude, magnitudeReportOf,
 } from '../../scripts/check-test-ratchet.mjs';
 // DERIVED, never restated: the discharge below asserts that the rehearsal train still
 // reaches the migration whose cure retired the owner-gated rows. A literal here would go
@@ -273,6 +274,86 @@ describe('per-test suite ratchet — static pins', () => {
     expect(baseline.totalTests).toBeGreaterThan(1000);
     expect(baseline.totalFiles).toBeGreaterThan(100);
     expect(Number.isInteger(baseline.skippedCeiling)).toBe(true);
+  });
+
+  test('⛔ `totalFiles` is COMPARED, not merely present — the pin above used to certify an inert figure', () => {
+    // ⚠⚠ THE TITLE OF THE PIN ABOVE WAS FALSE FOR `totalFiles`, and it said so in
+    // its own words: "the sentinels are not inert". `totalFiles` was computed by the
+    // gate, written by BOTH --bootstrap and --update, and asserted positive right
+    // there — while NO arm anywhere compared it to a live run. Three surfaces made
+    // it look armed and none of them was. Found by the §854.1 skeptic pass, filed as
+    // a guards-family row, and armed by TE-RATCHET-MAG.
+    //
+    // This is a SOURCE pin rather than a behavioural one on purpose: the behaviour is
+    // convicted by execution in 'a collapse in the total test FILE count reds' below.
+    // What this adds is the thing the executed pin cannot say — that the figure is read
+    // by the gate at all, so deleting the comparison reds here even if someone also
+    // deletes the executed test.
+    const gate = readFileSync(SCRIPT, 'utf8');
+    expect(
+      /baseline\.totalFiles/.test(gate),
+      'the gate no longer READS baseline.totalFiles — the sentinel is inert again',
+    ).toBe(true);
+    expect(
+      /total test FILE count collapsed/.test(gate),
+      'the file-floor refusal message is gone — the comparison was removed',
+    ).toBe(true);
+  });
+
+  // ── ⭐ TE-RATCHET-MAG — the banked rows' MAGNITUDE (ODQ §854) ────────────────
+  // Banking a row freezes its EXISTENCE. Every surviving census row is a ledgered
+  // enforcement walker whose verdict is a POPULATION, so without a magnitude the
+  // contents behind a permitted red are unbounded — measured at +109 em dashes across
+  // 29 further files with every gate green. These pins make the declaration mandatory
+  // and well-formed; the executed block convicts the gate that acts on it.
+  test('⛔ EVERY BANKED ROW DECLARES A MAGNITUDE — a permitted red may not be unbounded', () => {
+    for (const [id, row] of Object.entries(baseline.entries)) {
+      expect(
+        Array.isArray(row.magnitude) && row.magnitude.length > 0,
+        `${id}: no \`magnitude\`. Banking this row froze that it fails; nothing freezes HOW BIG it is,`
+        + ' so its population can grow to any size with the gate green. Measure it and freeze the figure.',
+      ).toBe(true);
+    }
+  });
+
+  test('⛔ every declared measure is WELL FORMED (a malformed one cannot refuse anything)', () => {
+    for (const [id, row] of Object.entries(baseline.entries)) {
+      for (const spec of row.magnitude || []) {
+        const where = `${id} [${spec?.name ?? '(unnamed)'}]`;
+        expect(typeof spec.name === 'string' && spec.name.trim().length > 0, `${where}: no name`).toBe(true);
+        expect(MAGNITUDE_KINDS, `${where}: kind must be one of ${MAGNITUDE_KINDS.join('|')}`).toContain(spec.kind);
+        expect(typeof spec.pattern === 'string' && spec.pattern.length > 0, `${where}: no pattern`).toBe(true);
+        expect(() => new RegExp(spec.pattern), `${where}: the pattern does not compile`).not.toThrow();
+        expect(Number.isInteger(spec.ceiling) && spec.ceiling >= 0, `${where}: ceiling must be a non-negative integer`).toBe(true);
+        expect(
+          String(spec.unit || '').length,
+          `${where}: no \`unit\` — a bare number nobody can read is not a measurement`,
+        ).toBeGreaterThan(10);
+      }
+    }
+  });
+
+  test('⛔⛔ NO measure can be satisfied by an EMPTY message (the vacuity that would disarm it silently)', () => {
+    // THE ANTI-VACUITY ARM, and it is the one that matters most here. A pattern whose
+    // capture group can match emptiness — `(\d*)`, an optional group that did not
+    // participate — reads as the number ZERO against ANY text, including a message that
+    // carries no figure at all. That measure would then sit under every ceiling forever
+    // and report a green: a magnitude guard that cannot fail, wearing the clothes of one
+    // that can. Every declared measure must be UNMEASURABLE against nothing.
+    for (const [id, row] of Object.entries(baseline.entries)) {
+      for (const spec of row.magnitude || []) {
+        const verdict = measureMagnitude(spec, '');
+        expect(
+          verdict.ok,
+          `${id} [${spec.name}]: this measure MEASURES ${verdict.measured} against an EMPTY message, so it`
+          + ' can never refuse anything. Require a digit and anchor the pattern on real message text.',
+        ).toBe(false);
+      }
+    }
+  });
+
+  test('the census _doc states the magnitude discipline (the file explains its own shape)', () => {
+    expect(baseline._doc).toMatch(/magnitude/i);
   });
 
   test('the ratchet is wired into `npm run check`', () => {
@@ -1074,6 +1155,18 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
   // row shape every arm below this one was written against.
   const T = (name, status = 'failed', extra = null) => ({ name, status, extra });
 
+  // ── TE-RATCHET-MAG's fixture pair ────────────────────────────────────────
+  // The default measure every injected census row carries, and the default failure
+  // message every injected BANKED row is given when the test does not write one itself.
+  // Chosen so the two agree at exactly 1: the fixtures below are about the ratchet's
+  // OTHER guards, and a magnitude that reds would make every one of them prove the wrong
+  // thing. The magnitude guard's own conviction proofs live in their own describe block
+  // and set these deliberately.
+  const DEFAULT_META_MAGNITUDE = Object.freeze([Object.freeze({
+    name: 'meta', kind: 'capture', pattern: 'population (\\d+)', ceiling: 1, unit: 'the meta fixture population',
+  })]);
+  const DEFAULT_META_MESSAGE = 'AssertionError: meta fixture population 1';
+
   /** Build a jest/vitest-shaped report. Absolute suite paths also pin normalization.
    *  `suiteStatus` carries the SUITE-level verdict vitest emits beside the rows —
    *  the only signal that separates a `beforeAll` explosion from a deliberate skip. */
@@ -1124,11 +1217,25 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
    * `report: null` = the runner wrote nothing; `rawReport` = arbitrary bytes.
    */
   function run({
-    entries = {}, totalTests, totalFiles = 10, skippedCeiling = 0, uncollectedSuites,
+    entries = {}, totalTests, totalFiles, skippedCeiling = 0, uncollectedSuites,
     suites = [], report, rawReport, exitCode = 1, args = [], noBaseline = false,
     captureRunner = false, inheritedVerifyDist = false,
   }) {
     const built = report === undefined ? reportOf(suites) : report;
+    // Give every BANKED, FAILING, message-less row the default message that pairs with
+    // DEFAULT_META_MAGNITUDE. Deliberately narrow: it never touches a row the test wrote a
+    // message for, never touches a row absent from the census (regressions keep their
+    // "the report carried no failure message" evidence line, which other pins assert), and
+    // never touches a non-failing row.
+    if (built && Array.isArray(built.testResults)) {
+      for (const suite of built.testResults) {
+        for (const a of suite.assertionResults || []) {
+          const id = `${normalizePath(suite.name || suite.file || '', ROOT)} :: ${a.fullName}`;
+          if (a.status !== 'failed' || !entries[id] || a.failureMessages) continue;
+          a.failureMessages = [DEFAULT_META_MESSAGE];
+        }
+      }
+    }
     let src = '-';
     if (rawReport !== undefined) src = tmpFile('json', rawReport);
     else if (built !== null) src = tmpFile('json', JSON.stringify(built));
@@ -1137,16 +1244,27 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
     if (inheritedVerifyDist) env.VERIFY_DIST = 'hostile-parent-value';
     const captureFile = captureRunner ? join(TMP, `capture-${seq += 1}.json`) : null;
     if (captureFile) env.TEST_RATCHET_CAPTURE_FILE = captureFile;
+    // ── TE-RATCHET-MAG: every banked row must declare a MAGNITUDE, so the harness
+    // supplies a default one and the matching failure message together. They are a PAIR:
+    // the gate fails closed on a banked row whose declared measure finds nothing, so a
+    // default magnitude without a default message would red every fixture below.
+    // A test that cares overrides either half (`magnitude:` on the entry, `extra:` on the row).
     if (!noBaseline) {
       const rows = Object.entries(entries).map(([id, r]) => [id, {
         file: r.file ?? id.split(' :: ')[0],
         test: r.test ?? id.split(' :: ')[1],
         subsystem: 'meta', cause: 'injected fixture for the meta-test', introducedAt: 'a'.repeat(40), class: 'debt',
+        magnitude: r.magnitude === undefined ? DEFAULT_META_MAGNITUDE : r.magnitude,
       }]);
       env.TEST_RATCHET_BASELINE = tmpFile('json', JSON.stringify({
         measuredAtSha: 'f'.repeat(40),
         totalTests: totalTests ?? Math.max(1, built ? rowsOf(built, ROOT).length : 1),
-        totalFiles,
+        // DERIVED from the injected report, exactly as `totalTests` above is. It used to be
+        // the constant 10, which was harmless only while `totalFiles` was inert: arming its
+        // floor (TE-RATCHET-MAG) turned that constant into a 10-file expectation every
+        // one-suite fixture failed. A test that means to convict the file floor passes its
+        // own figure.
+        totalFiles: totalFiles ?? Math.max(1, built ? new Set(rowsOf(built, ROOT).map((r) => r.file)).size : 1),
         skippedCeiling,
         ...(uncollectedSuites ? { uncollectedSuites } : {}),
         entries: Object.fromEntries(rows),
@@ -1449,7 +1567,11 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
           file: REAL,
           // The banked row carries a REAL failure message, so the evidence block
           // has everything it would need to print — and must still stay silent.
-          tests: [T('a', 'failed', { duration: 12.5, failureMessages: ['AssertionError: banked'] })],
+          // ⚠ It carries the `population 1` token because this row writes its OWN message
+          // and therefore opts out of the harness's default one; the default magnitude
+          // still has to find its figure, or the row reds as UNMEASURED (which is the
+          // fail-closed behaviour TE-RATCHET-MAG added, convicted in its own block below).
+          tests: [T('a', 'failed', { duration: 12.5, failureMessages: ['AssertionError: banked population 1'] })],
         }],
       });
       expect(r.status, r.out).toBe(0);
@@ -2272,6 +2394,312 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       });
       expect(r.status, r.out).not.toBe(0);
       expect(r.out).toMatch(/no baseline file/);
+    });
+  });
+
+  // ── ⭐⭐ TE-RATCHET-MAG: the BANKED row's magnitude, EXECUTED (ODQ §854) ──────
+  //
+  // Every pin in this block drives the REAL gate through the fake runner. The defect
+  // being closed is not hypothetical: banking the four voice rows collapsed ~150 per-FILE
+  // guards into 4 permitted reds, and the population then grew +109 em dashes across 29
+  // further files WITH EVERY GATE GREEN. The row's verdict never changed, because a
+  // walker's verdict is a POPULATION and `expected 1037 to be less than or equal to 670`
+  // reads identically at 1037 and at ten thousand.
+  //
+  // ⚠ EVERY ARM BELOW IS A MUTATION PROOF, not an assertion about intent: each one plants
+  // a magnitude the gate must refuse (or must not), and the PAIRED negative control sits
+  // beside it. A conviction with no control cannot tell a working guard from an always-red one.
+  describe('⭐ the banked-row MAGNITUDE ceiling — a permitted red may not GROW', () => {
+    const ID = identityOf(REAL, 'banked walker');
+    /** One banked row whose live message carries `population <n>`, with a declared ceiling. */
+    const atPopulation = (population, ceiling, extraSpec = {}) => run({
+      entries: {
+        [ID]: {
+          magnitude: [{
+            name: 'population', kind: 'capture', pattern: 'population (\\d+)', ceiling, unit: 'members', ...extraSpec,
+          }],
+        },
+      },
+      suites: [{
+        file: REAL,
+        tests: [T('banked walker', 'failed', { duration: 3, failureMessages: [`AssertionError: population ${population}`] })],
+      }],
+    });
+
+    test('⛔ THE CONVICTION — a banked row whose population EXCEEDS its ceiling REDS', () => {
+      const r = atPopulation(74, 62);
+      expect(r.status, r.out).not.toBe(0);
+      expect(r.out).toMatch(/BANKED-ROW MAGNITUDE REFUSED/);
+      expect(r.out).toMatch(/testRatchet\.test\.js :: banked walker/);
+      // The three figures a reader needs to act, and the delta computed rather than left
+      // to arithmetic in someone's head.
+      expect(r.out).toMatch(/\[population\] measured 74 > ceiling 62 \(\+12\)/);
+      expect(r.out).toMatch(/members/);
+      // ⛔ AND IT POINTS AT THE CURE, AWAY FROM THE CEILING. This row is already a
+      // permitted failure; the ceiling is the only thing still bounding it, so the one
+      // inference the block may print is "cut the population".
+      expect(r.out).toMatch(/CUT THE POPULATION, NEVER TO RAISE THE CEILING/);
+    });
+
+    test('NEGATIVE CONTROL: exactly AT the ceiling passes (it is not an always-red gate)', () => {
+      const r = atPopulation(62, 62);
+      expect(r.status, r.out).toBe(0);
+      expect(r.out).toMatch(/OK — no test regressions/);
+      // anchored: the OK verdict above proves the gate ran and printed its full report
+      expect(r.out).not.toMatch(/MAGNITUDE REFUSED|RATCHET DOWN/);
+    });
+
+    test('BELOW the ceiling passes and prints RATCHET DOWN (a ceiling above the truth stops ratcheting)', () => {
+      const r = atPopulation(40, 62);
+      expect(r.status, r.out).toBe(0);
+      expect(r.out).toMatch(/RATCHET DOWN: 1 magnitude ceiling\(s\)/);
+      expect(r.out).toMatch(/\[population\] measured 40 < ceiling 62/);
+    });
+
+    test('⛔ FAIL CLOSED: a banked row that declares NO magnitude REDS', () => {
+      // The door the whole car exists to shut. Before TE-RATCHET-MAG this was the
+      // ONLY state, and it was green.
+      const r = run({
+        entries: { [ID]: { magnitude: null } },
+        suites: [{ file: REAL, tests: [T('banked walker', 'failed', { failureMessages: ['AssertionError: population 9'] })] }],
+      });
+      expect(r.status, r.out).not.toBe(0);
+      expect(r.out).toMatch(/declares NO magnitude/);
+      expect(r.out).toMatch(/could NOT BE MEASURED — failing closed/);
+    });
+
+    test('⛔ FAIL CLOSED: a declared pattern that matches NOTHING REDS (unmeasured is not small)', () => {
+      // The subtle one. If this passed, deleting a row's measurable text — or letting the
+      // assertion drift into a new shape — would silently disarm the ceiling while the
+      // census still displayed a reassuring number.
+      const r = run({
+        entries: {
+          [ID]: {
+            magnitude: [{
+              name: 'population', kind: 'capture', pattern: 'population (\\d+)', ceiling: 62, unit: 'members',
+            }],
+          },
+        },
+        suites: [{
+          file: REAL,
+          tests: [T('banked walker', 'failed', { failureMessages: ['AssertionError: the shape of this message changed'] })],
+        }],
+      });
+      expect(r.status, r.out).not.toBe(0);
+      expect(r.out).toMatch(/matched NOTHING in the live failure message/);
+      // ⛔ and it must NOT invite the escape hatch of deleting the measure
+      expect(r.out).toMatch(/never delete the measure to clear this/);
+    });
+
+    test('a malformed measure REDS rather than being skipped (kind and ceiling are validated)', () => {
+      const badKind = atPopulation(9, 62, { kind: 'vibes' });
+      expect(badKind.status, badKind.out).not.toBe(0);
+      expect(badKind.out).toMatch(/`kind` must be one of capture\|count\|sum/);
+
+      const badCeiling = atPopulation(9, 62, { ceiling: 'lots' });
+      expect(badCeiling.status, badCeiling.out).not.toBe(0);
+      expect(badCeiling.out).toMatch(/`ceiling` must be a non-negative integer/);
+
+      const badPattern = atPopulation(9, 62, { pattern: 'population (\\d+' });
+      expect(badPattern.status, badPattern.out).not.toBe(0);
+      expect(badPattern.out).toMatch(/the pattern does not compile/);
+    });
+
+    test('⭐ `sum` catches a population that DEEPENS without gaining a member — the measured defect', () => {
+      // THE SHAPE §854 ACTUALLY MEASURED. A member count alone cannot see this: the same
+      // 29 files, each carrying more. The per-file voice arms are frozen on `sum` for
+      // exactly this reason.
+      const message = 'AssertionError: \na.js: current em:10\nb.js: current em:20\n';
+      const grown = 'AssertionError: \na.js: current em:10\nb.js: current em:33\n';
+      const spec = {
+        name: 'em', kind: 'sum', pattern: 'current em:(\\d+)', ceiling: 30, unit: 'em dashes',
+      };
+      // the member COUNT is identical across both messages — the control that proves the
+      // sum is doing work a roster count could not
+      const countSpec = {
+        name: 'files', kind: 'count', pattern: 'current em:', ceiling: 2, unit: 'files',
+      };
+      expect(measureMagnitude(countSpec, message).measured).toBe(2);
+      expect(measureMagnitude(countSpec, grown).measured).toBe(2);
+
+      const flat = run({
+        entries: { [ID]: { magnitude: [spec, countSpec] } },
+        suites: [{ file: REAL, tests: [T('banked walker', 'failed', { failureMessages: [message] })] }],
+      });
+      expect(flat.status, flat.out).toBe(0);
+
+      const deeper = run({
+        entries: { [ID]: { magnitude: [spec, countSpec] } },
+        suites: [{ file: REAL, tests: [T('banked walker', 'failed', { failureMessages: [grown] })] }],
+      });
+      expect(deeper.status, deeper.out).not.toBe(0);
+      expect(deeper.out).toMatch(/\[em\] measured 43 > ceiling 30 \(\+13\)/);
+      // and the count arm stayed silent, which is what makes this a discriminating proof
+      expect(deeper.out).not.toMatch(/\[files\]/);
+    });
+
+    test('a BANKED row that now PASSES is not magnitude-checked (the win is not punished)', () => {
+      // NEGATIVE CONTROL on the gate's scope. A repaired row belongs to the ratchet-down
+      // path; measuring a magnitude out of a message it no longer has would red every win.
+      const r = run({
+        entries: { [ID]: { magnitude: [{ name: 'population', kind: 'capture', pattern: 'population (\\d+)', ceiling: 0, unit: 'members' }] } },
+        suites: [{ file: REAL, tests: [T('banked walker', 'passed')] }],
+      });
+      expect(r.status, r.out).toBe(0);
+      expect(r.out).toMatch(/RATCHET DOWN: run `npm run test:ratchet:update`/);
+      expect(r.out).not.toMatch(/MAGNITUDE REFUSED/);
+    });
+
+    test('⛔ --update LOWERS a slack ceiling and HOLDS a breached one — a re-freeze never raises', () => {
+      // THE LAUNDERING DOOR, shut. If a re-freeze could raise a magnitude, every growth
+      // would bank itself the moment anyone ran the documented command — which is exactly
+      // what VOICE-1b measured on the voice fixture, and what the STRIP-never-raise ruling
+      // (ODQ line 266) forbids. Both directions are driven in ONE run.
+      const SLACK = identityOf(REAL, 'slack row');
+      const BREACH = identityOf(REAL, 'breached row');
+      const r = run({
+        entries: {
+          [SLACK]: { magnitude: [{ name: 'population', kind: 'capture', pattern: 'population (\\d+)', ceiling: 62, unit: 'members' }] },
+          [BREACH]: { magnitude: [{ name: 'population', kind: 'capture', pattern: 'population (\\d+)', ceiling: 5, unit: 'members' }] },
+        },
+        suites: [{
+          file: REAL,
+          tests: [
+            T('slack row', 'failed', { failureMessages: ['AssertionError: population 40'] }),
+            T('breached row', 'failed', { failureMessages: ['AssertionError: population 99'] }),
+          ],
+        }],
+        args: ['--update'],
+      });
+      expect(r.status, r.out).toBe(0);
+      expect(r.out).toMatch(/1 magnitude ceiling\(s\) RATCHETED DOWN/);
+      expect(r.out).toMatch(/magnitude ceiling\(s\) HELD — a re-freeze never raises one/);
+
+      const written = JSON.parse(readFileSync(r.baselineFile, 'utf8'));
+      expect(written.entries[SLACK].magnitude[0].ceiling, 'the slack ceiling must fall to the truth').toBe(40);
+      expect(
+        written.entries[BREACH].magnitude[0].ceiling,
+        'the breached ceiling must be HELD at 5 — raising it to 99 would bank the growth',
+      ).toBe(5);
+
+      // ⛔ AND THE HELD ROW STILL REDS THE GATE AFTERWARDS. A re-freeze that leaves the
+      // ceiling intact but quiets the gate would be the same laundering by another route,
+      // so the proof runs the ordinary gate against the RE-FROZEN census.
+      const after = run({
+        entries: {
+          [BREACH]: { magnitude: written.entries[BREACH].magnitude },
+        },
+        suites: [{ file: REAL, tests: [T('breached row', 'failed', { failureMessages: ['AssertionError: population 99'] })] }],
+      });
+      expect(after.status, after.out).not.toBe(0);
+      expect(after.out).toMatch(/\[population\] measured 99 > ceiling 5/);
+    });
+
+    test('⚠⚠ the ARMED file floor: a collapse in the total test FILE count reds', () => {
+      // The `totalFiles` sentinel that was computed, written, asserted-positive and
+      // COMPARED NOWHERE (§854.1). Frozen at 10 files, the run reports 1.
+      const r = run({
+        totalFiles: 10,
+        entries: {},
+        suites: [{ file: REAL, tests: [T('a', 'passed'), T('b', 'passed')] }],
+      });
+      expect(r.status, r.out).not.toBe(0);
+      expect(r.out).toMatch(/total test FILE count collapsed: 1 < 9/);
+      expect(r.out).toMatch(/whole suites left the run/);
+    });
+
+    test('NEGATIVE CONTROL: the file floor PASSES when the file scope is intact', () => {
+      const r = run({
+        totalFiles: 2,
+        entries: {},
+        suites: [
+          { file: REAL, tests: [T('a', 'passed')] },
+          { file: REAL2, tests: [T('b', 'passed')] },
+        ],
+      });
+      expect(r.status, r.out).toBe(0);
+      // anchored: exit 0 with the OK verdict proves the gate ran the whole comparison
+      expect(r.out).toMatch(/OK — no test regressions/);
+      expect(r.out).not.toMatch(/FILE count collapsed/);
+    });
+
+    test('⛔ the file floor is INDEPENDENT of the test floor (one can collapse while the other holds)', () => {
+      // THE PIN THAT SAYS THE NEW ARM IS NOT A DUPLICATE. The test count is intact (10 of a
+      // frozen 10) while the FILE count collapses (1 of a frozen 10) — the shape of a whole
+      // directory dropping out of `include` while one big suite survives. The old floor
+      // sits green through it; only the file floor refuses.
+      const tests = Array.from({ length: 10 }, (_, n) => T(`t${n}`, 'passed'));
+      const r = run({
+        totalTests: 10,
+        totalFiles: 10,
+        entries: {},
+        suites: [{ file: REAL, tests }],
+      });
+      expect(r.status, r.out).not.toBe(0);
+      expect(r.out).toMatch(/total test FILE count collapsed/);
+      // anchored: the FILE refusal above proves the scope sentinel ran and printed its list
+      expect(r.out, 'the TEST count floor must be silent — otherwise this proves nothing new').not.toMatch(/total test count collapsed/);
+    });
+  });
+
+  // ── the magnitude extractor, unit-pinned ────────────────────────────────────
+  describe('measureMagnitude — the three kinds, and the vacuity it refuses', () => {
+    const spec = (over) => ({
+      name: 'm', kind: 'capture', pattern: 'n=(\\d+)', ceiling: 1, unit: 'things', ...over,
+    });
+
+    test('capture reads the FIRST match; count counts matches; sum adds them', () => {
+      const text = 'n=7 n=11 n=2';
+      expect(measureMagnitude(spec(), text)).toEqual({ ok: true, measured: 7 });
+      expect(measureMagnitude(spec({ kind: 'count' }), text)).toEqual({ ok: true, measured: 3 });
+      expect(measureMagnitude(spec({ kind: 'sum' }), text)).toEqual({ ok: true, measured: 20 });
+    });
+
+    test('⛔⛔ a capture that can match EMPTINESS is UNMEASURED, never zero', () => {
+      // `Number('')` is 0, so a `(\d*)` spelling would report a magnitude of zero against
+      // any text at all — a measure that can never fail. This is the disarmed-guard shape
+      // one layer down from the defect the whole car exists to close.
+      const empty = measureMagnitude(spec({ pattern: '(\\d*)' }), 'no digits here');
+      expect(empty.ok).toBe(false);
+      expect(empty.why).toMatch(/not a bare integer/);
+      expect(empty.measured, 'an unmeasured verdict must carry NO figure').toBeUndefined();
+    });
+
+    test('a missing pattern, a bad kind, a bad ceiling and a nameless measure are all refused', () => {
+      expect(measureMagnitude(spec({ pattern: '' }), 'n=1').ok).toBe(false);
+      expect(measureMagnitude(spec({ kind: 'guess' }), 'n=1').ok).toBe(false);
+      expect(measureMagnitude(spec({ ceiling: -1 }), 'n=1').ok).toBe(false);
+      expect(measureMagnitude(spec({ ceiling: 1.5 }), 'n=1').ok).toBe(false);
+      expect(measureMagnitude(spec({ name: '  ' }), 'n=1').ok).toBe(false);
+      expect(measureMagnitude(null, 'n=1').ok).toBe(false);
+      expect(measureMagnitude([], 'n=1').ok).toBe(false);
+    });
+
+    test('magnitudeReportOf sorts the three verdicts, and an absent block lands wholly in `unmeasured`', () => {
+      const entry = {
+        magnitude: [
+          spec({ name: 'over', ceiling: 1 }), // measures 7 → breach
+          spec({ name: 'under', ceiling: 99 }), // measures 7 → slack
+          spec({ name: 'gone', pattern: 'absent=(\\d+)' }), // no match → unmeasured
+        ],
+      };
+      const report = magnitudeReportOf(entry, 'n=7');
+      expect(report.breaches.map((b) => b.name)).toEqual(['over']);
+      expect(report.slack.map((s) => s.name)).toEqual(['under']);
+      expect(report.unmeasured.map((u) => u.name)).toEqual(['gone']);
+
+      for (const absent of [undefined, null, []]) {
+        const none = magnitudeReportOf({ magnitude: absent }, 'n=7');
+        expect(none.unmeasured).toHaveLength(1);
+        expect(none.breaches).toEqual([]);
+        expect(none.slack).toEqual([]);
+      }
+    });
+
+    test('the kind roster is closed and the gate uses THIS list (not a private copy)', () => {
+      expect(MAGNITUDE_KINDS).toEqual(['capture', 'count', 'sum']);
+      const gate = readFileSync(SCRIPT, 'utf8');
+      expect(gate).toContain('export const MAGNITUDE_KINDS');
     });
   });
 

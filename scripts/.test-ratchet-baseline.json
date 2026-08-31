@@ -1,5 +1,5 @@
 {
-  "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
+  "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. Every entry MUST also carry a `magnitude` array: a banked row freezes its EXISTENCE, and the magnitude is what freezes its SIZE, so the population behind a permitted red cannot grow invisibly (ODQ 854, TE-RATCHET-MAG). `--update` can only REMOVE entries and LOWER magnitude ceilings; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
   "measuredAtSha": "689bf2cc609dcb45384c18c4853e890431611a26",
   "totalTests": 28565,
   "totalFiles": 2377,
@@ -12,7 +12,30 @@
       "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
       "cause": "THE SHIFT RECORD (VOICE-1b, ODQ 854 - this supersedes the 2026-08-07 text, which named one train and two stale figures). TWO trains landed the machine-generated dossier prose on 2026-08-03, not one. P-1 a277f53d336bee4fb2c1fded7e1e08412e7f5776 shipped the SIX state-prose desk leaves (src/data/dossierStateProse/*.generated.js) carrying 635 of the 779 em dashes the two trains landed - 81.5 percent, and it was NAMED NOWHERE until now; P-3 23d118eb25473f8a64e22253802a986045e596ad shipped the causal corpus (src/data/dossierCausalProse.generated.js) with the remaining 144. introducedAt moved from P-3 to P-1 because P-1 ALONE breached the ceiling: the committed baseline at a277f53d3^ totalled em 469 against a budget of 670, so 201 of headroom met 635 of new debt and the arms were already red before P-3 existed - a bisect started at P-3 would have found the row failing at its own parent. MECHANISM: both trains run through scripts/generate-dossier-state-prose.mjs, which transports authored markdown byte-for-byte and validates nothing; no arm exists between docs/content/*.md and docs/VOICE_AND_TONE.md, whose section 3 bans the em dash in any user-facing string. RE-MEASURED at 6770f878f: string-literal debt 1478 against 670 (the old text said 1369) and JSX debt 21 against 6 (the old text said 18). VOICE-1b then burned the corpus's DARK half - 299 pool-key and 142 title em dashes - taking Tier 2 from 1478 to 1028 with the reader-facing variant text untouched at 338. That burn is a DECLARED ONE-TIME SHIFT in the pool keys stateProseKernel.js drawVariant hashes into the draw, and it was free only because the corpus has zero product callers; it becomes impossible the day the stack is wired. The residual 338 stay with the owner-signed T5-ONE-REGEN constituent. THE CURE IS STRIP, NEVER RE-FREEZE (the standing STRIP-never-raise ruling at ODQ line 266); since VOICE-1b the documented refreeze REFUSES a raise mechanically (tests/helpers/shrinkOnlyBaseline.js).",
       "introducedAt": "a277f53d336bee4fb2c1fded7e1e08412e7f5776",
-      "class": "debt"
+      "class": "debt",
+      "magnitude": [
+        {
+          "name": "em",
+          "kind": "sum",
+          "pattern": "current em:(\\d+)",
+          "ceiling": 34,
+          "unit": "em dashes summed across every drifted src/**/*.jsx component file this arm lists"
+        },
+        {
+          "name": "bang",
+          "kind": "sum",
+          "pattern": "current em:\\d+ bang:(\\d+)",
+          "ceiling": 0,
+          "unit": "exclamation marks summed across the same files — an em-only measure cannot see bang drift (ODQ 854.1)"
+        },
+        {
+          "name": "files",
+          "kind": "count",
+          "pattern": "^\\S+: baseline em:",
+          "ceiling": 15,
+          "unit": "src/**/*.jsx component files whose count differs from their frozen per-file baseline"
+        }
+      ]
     },
     "tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) total JSX debt never grows past its committed budget": {
       "file": "tests/copy/voiceMechanics.test.js",
@@ -20,7 +43,16 @@
       "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
       "cause": "THE SHIFT RECORD (VOICE-1b, ODQ 854 - this supersedes the 2026-08-07 text, which named one train and two stale figures). TWO trains landed the machine-generated dossier prose on 2026-08-03, not one. P-1 a277f53d336bee4fb2c1fded7e1e08412e7f5776 shipped the SIX state-prose desk leaves (src/data/dossierStateProse/*.generated.js) carrying 635 of the 779 em dashes the two trains landed - 81.5 percent, and it was NAMED NOWHERE until now; P-3 23d118eb25473f8a64e22253802a986045e596ad shipped the causal corpus (src/data/dossierCausalProse.generated.js) with the remaining 144. introducedAt moved from P-3 to P-1 because P-1 ALONE breached the ceiling: the committed baseline at a277f53d3^ totalled em 469 against a budget of 670, so 201 of headroom met 635 of new debt and the arms were already red before P-3 existed - a bisect started at P-3 would have found the row failing at its own parent. MECHANISM: both trains run through scripts/generate-dossier-state-prose.mjs, which transports authored markdown byte-for-byte and validates nothing; no arm exists between docs/content/*.md and docs/VOICE_AND_TONE.md, whose section 3 bans the em dash in any user-facing string. RE-MEASURED at 6770f878f: string-literal debt 1478 against 670 (the old text said 1369) and JSX debt 21 against 6 (the old text said 18). VOICE-1b then burned the corpus's DARK half - 299 pool-key and 142 title em dashes - taking Tier 2 from 1478 to 1028 with the reader-facing variant text untouched at 338. That burn is a DECLARED ONE-TIME SHIFT in the pool keys stateProseKernel.js drawVariant hashes into the draw, and it was free only because the corpus has zero product callers; it becomes impossible the day the stack is wired. The residual 338 stay with the owner-signed T5-ONE-REGEN constituent. THE CURE IS STRIP, NEVER RE-FREEZE (the standing STRIP-never-raise ruling at ODQ line 266); since VOICE-1b the documented refreeze REFUSES a raise mechanically (tests/helpers/shrinkOnlyBaseline.js).",
       "introducedAt": "a277f53d336bee4fb2c1fded7e1e08412e7f5776",
-      "class": "debt"
+      "class": "debt",
+      "magnitude": [
+        {
+          "name": "total",
+          "kind": "capture",
+          "pattern": "expected (\\d+) to be less than or equal to 6$",
+          "ceiling": 40,
+          "unit": "total JSX em dashes against the hardcoded budget of 6"
+        }
+      ]
     },
     "tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)": {
       "file": "tests/copy/voiceMechanics.test.js",
@@ -28,7 +60,30 @@
       "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
       "cause": "THE SHIFT RECORD (VOICE-1b, ODQ 854 - this supersedes the 2026-08-07 text, which named one train and two stale figures). TWO trains landed the machine-generated dossier prose on 2026-08-03, not one. P-1 a277f53d336bee4fb2c1fded7e1e08412e7f5776 shipped the SIX state-prose desk leaves (src/data/dossierStateProse/*.generated.js) carrying 635 of the 779 em dashes the two trains landed - 81.5 percent, and it was NAMED NOWHERE until now; P-3 23d118eb25473f8a64e22253802a986045e596ad shipped the causal corpus (src/data/dossierCausalProse.generated.js) with the remaining 144. introducedAt moved from P-3 to P-1 because P-1 ALONE breached the ceiling: the committed baseline at a277f53d3^ totalled em 469 against a budget of 670, so 201 of headroom met 635 of new debt and the arms were already red before P-3 existed - a bisect started at P-3 would have found the row failing at its own parent. MECHANISM: both trains run through scripts/generate-dossier-state-prose.mjs, which transports authored markdown byte-for-byte and validates nothing; no arm exists between docs/content/*.md and docs/VOICE_AND_TONE.md, whose section 3 bans the em dash in any user-facing string. RE-MEASURED at 6770f878f: string-literal debt 1478 against 670 (the old text said 1369) and JSX debt 21 against 6 (the old text said 18). VOICE-1b then burned the corpus's DARK half - 299 pool-key and 142 title em dashes - taking Tier 2 from 1478 to 1028 with the reader-facing variant text untouched at 338. That burn is a DECLARED ONE-TIME SHIFT in the pool keys stateProseKernel.js drawVariant hashes into the draw, and it was free only because the corpus has zero product callers; it becomes impossible the day the stack is wired. The residual 338 stay with the owner-signed T5-ONE-REGEN constituent. THE CURE IS STRIP, NEVER RE-FREEZE (the standing STRIP-never-raise ruling at ODQ line 266); since VOICE-1b the documented refreeze REFUSES a raise mechanically (tests/helpers/shrinkOnlyBaseline.js).",
       "introducedAt": "a277f53d336bee4fb2c1fded7e1e08412e7f5776",
-      "class": "debt"
+      "class": "debt",
+      "magnitude": [
+        {
+          "name": "em",
+          "kind": "sum",
+          "pattern": "current em:(\\d+)",
+          "ceiling": 649,
+          "unit": "em dashes summed across every drifted src/data + src/domain string-literal file this arm lists"
+        },
+        {
+          "name": "bang",
+          "kind": "sum",
+          "pattern": "current em:\\d+ bang:(\\d+)",
+          "ceiling": 9,
+          "unit": "exclamation marks summed across the same files — an em-only measure cannot see bang drift (ODQ 854.1)"
+        },
+        {
+          "name": "files",
+          "kind": "count",
+          "pattern": "^\\S+: baseline em:",
+          "ceiling": 64,
+          "unit": "src/data + src/domain string-literal files whose count differs from their frozen per-file baseline"
+        }
+      ]
     },
     "tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget": {
       "file": "tests/copy/voiceMechanics.test.js",
@@ -36,7 +91,16 @@
       "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
       "cause": "THE SHIFT RECORD (VOICE-1b, ODQ 854 - this supersedes the 2026-08-07 text, which named one train and two stale figures). TWO trains landed the machine-generated dossier prose on 2026-08-03, not one. P-1 a277f53d336bee4fb2c1fded7e1e08412e7f5776 shipped the SIX state-prose desk leaves (src/data/dossierStateProse/*.generated.js) carrying 635 of the 779 em dashes the two trains landed - 81.5 percent, and it was NAMED NOWHERE until now; P-3 23d118eb25473f8a64e22253802a986045e596ad shipped the causal corpus (src/data/dossierCausalProse.generated.js) with the remaining 144. introducedAt moved from P-3 to P-1 because P-1 ALONE breached the ceiling: the committed baseline at a277f53d3^ totalled em 469 against a budget of 670, so 201 of headroom met 635 of new debt and the arms were already red before P-3 existed - a bisect started at P-3 would have found the row failing at its own parent. MECHANISM: both trains run through scripts/generate-dossier-state-prose.mjs, which transports authored markdown byte-for-byte and validates nothing; no arm exists between docs/content/*.md and docs/VOICE_AND_TONE.md, whose section 3 bans the em dash in any user-facing string. RE-MEASURED at 6770f878f: string-literal debt 1478 against 670 (the old text said 1369) and JSX debt 21 against 6 (the old text said 18). VOICE-1b then burned the corpus's DARK half - 299 pool-key and 142 title em dashes - taking Tier 2 from 1478 to 1028 with the reader-facing variant text untouched at 338. That burn is a DECLARED ONE-TIME SHIFT in the pool keys stateProseKernel.js drawVariant hashes into the draw, and it was free only because the corpus has zero product callers; it becomes impossible the day the stack is wired. The residual 338 stay with the owner-signed T5-ONE-REGEN constituent. THE CURE IS STRIP, NEVER RE-FREEZE (the standing STRIP-never-raise ruling at ODQ line 266); since VOICE-1b the documented refreeze REFUSES a raise mechanically (tests/helpers/shrinkOnlyBaseline.js).",
       "introducedAt": "a277f53d336bee4fb2c1fded7e1e08412e7f5776",
-      "class": "debt"
+      "class": "debt",
+      "magnitude": [
+        {
+          "name": "total",
+          "kind": "capture",
+          "pattern": "expected (\\d+) to be less than or equal to 670$",
+          "ceiling": 1037,
+          "unit": "total src/data + src/domain string-literal em dashes against the hardcoded budget of 670"
+        }
+      ]
     },
     "tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target": {
       "file": "tests/docs/enforcement-claims.test.js",
@@ -44,7 +108,16 @@
       "subsystem": "docs / enforcement-claim meta-pin",
       "cause": "A completeness claim in docs/FABLE_VALIDATION_QUEUE.md:179 (the R-BLD-10 chair ruling row) carries no resolvable @enforced-by target, so the meta-pin that refuses unbacked claims reds.",
       "introducedAt": "1caf2fbe3f294e7f7a9cee4266110fea8ef08979",
-      "class": "debt"
+      "class": "debt",
+      "magnitude": [
+        {
+          "name": "claims",
+          "kind": "count",
+          "pattern": "^\\S+\\.md:\\d+\\s",
+          "ceiling": 6,
+          "unit": "documentation completeness claims with no resolvable @enforced-by target"
+        }
+      ]
     },
     "tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01": {
       "file": "tests/lint/clampPrimitiveBaseline.test.js",
@@ -52,7 +125,16 @@
       "subsystem": "lint / clamp primitive ratchet",
       "cause": "The baseline lists 62 files that define a local clamp/clamp01 while the tree now has 73 — 11 new local clamp definitions landed instead of importing the shared primitive.",
       "introducedAt": "unbisectable: 11 separate local clamp definitions across many 2026-08 waves; no single introducing commit. Burn-down lane must route each to the shared primitive.",
-      "class": "debt"
+      "class": "debt",
+      "magnitude": [
+        {
+          "name": "population",
+          "kind": "capture",
+          "pattern": "expected \\[ …\\(62\\) \\] to deeply equal \\[ …\\((\\d+)\\) \\]",
+          "ceiling": 76,
+          "unit": "files defining a local clamp/clamp01 against a frozen baseline of 62"
+        }
+      ]
     },
     "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'trajectory_misread' retains the five receipt-annex families verbatim": {
       "file": "tests/lint/warCostKindPools.walker.test.js",
@@ -60,7 +142,16 @@
       "subsystem": "war / SP-6 phrased-kind registry (war costs)",
       "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
       "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
-      "class": "debt"
+      "class": "debt",
+      "magnitude": [
+        {
+          "name": "population",
+          "kind": "capture",
+          "pattern": "expected \\[ …\\(5\\) \\] to deeply equal \\[ …\\((\\d+)\\) \\]",
+          "ceiling": 10,
+          "unit": "receipt-annex families on this kind against the wired five"
+        }
+      ]
     },
     "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_losing' retains the five receipt-annex families verbatim": {
       "file": "tests/lint/warCostKindPools.walker.test.js",
@@ -68,7 +159,16 @@
       "subsystem": "war / SP-6 phrased-kind registry (war costs)",
       "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
       "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
-      "class": "debt"
+      "class": "debt",
+      "magnitude": [
+        {
+          "name": "population",
+          "kind": "capture",
+          "pattern": "expected \\[ …\\(5\\) \\] to deeply equal \\[ …\\((\\d+)\\) \\]",
+          "ceiling": 6,
+          "unit": "receipt-annex families on this kind against the wired five"
+        }
+      ]
     },
     "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_winning' retains the five receipt-annex families verbatim": {
       "file": "tests/lint/warCostKindPools.walker.test.js",
@@ -76,7 +176,16 @@
       "subsystem": "war / SP-6 phrased-kind registry (war costs)",
       "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
       "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
-      "class": "debt"
+      "class": "debt",
+      "magnitude": [
+        {
+          "name": "population",
+          "kind": "capture",
+          "pattern": "expected \\[ …\\(5\\) \\] to deeply equal \\[ …\\((\\d+)\\) \\]",
+          "ceiling": 6,
+          "unit": "receipt-annex families on this kind against the wired five"
+        }
+      ]
     },
     "tests/lint/warRulingKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-5 war rulings 'succession_demand_inherited' retains the five annex families without editorial cross-references": {
       "file": "tests/lint/warRulingKindPools.walker.test.js",
@@ -84,7 +193,16 @@
       "subsystem": "war / SP-6 phrased-kind registry (war rulings)",
       "cause": "'succession_demand_inherited' no longer retains the five annex families without editorial cross-references (measured 6).",
       "introducedAt": "unbisectable: same SP-6 registry drift as warCostKindPools. Burn-down lane must reconcile the registry against the pools.",
-      "class": "debt"
+      "class": "debt",
+      "magnitude": [
+        {
+          "name": "population",
+          "kind": "capture",
+          "pattern": "expected \\[ …\\(5\\) \\] to deeply equal \\[ …\\((\\d+)\\) \\]",
+          "ceiling": 6,
+          "unit": "annex families on this kind against the wired five"
+        }
+      ]
     }
   }
 }
