@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-31T05:03:38.801Z",
+  "generatedAt": "2026-08-31T05:34:21.895Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "ebee15dae5458791",
+  "sourceHash": "eac8e15d45b8c0c3",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -42,6 +42,7 @@
     "src/domain/magicLedger.js",
     "src/domain/magicProfile.js",
     "src/domain/npcProfile.js",
+    "src/domain/prosperityRank.js",
     "src/domain/regionalGraph.js",
     "src/domain/relationships/canonicalRelationship.js",
     "src/domain/rulingPower.js",
