@@ -105,6 +105,18 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // default: `espionageActive` refuses before the roster is touched at all.
     'src/domain/worldPulse/espionage/espionagePresence.js',
     'src/domain/worldPulse/factionCapture.js',
+    // TE-DENSITY-1 (§810.1 R8, the emergence mint): applyCadence reads the RAW roster of
+    // `fresh` — the freshest SAVED copy the write lands on — solely to append the minted
+    // FOUNDER (`npcs: [...npcs, founder]`) when a thicken step births a house. It is a
+    // MUTATION read of the stripNpcInfluence/DM-verbs idiom, not a stage read:
+    // participation-INDEPENDENT by construction, because the append must land on the raw
+    // saved roster — written through the filtered projection it would strand the alias
+    // copies (the JSON-alias trap) exactly as the H2 relinquishment would. No eligibility
+    // question is asked of the roster; nobody is filtered in or out. Dormant by default:
+    // the cadence runs only under the density law's version gate (`_densityLawVersion: 2`),
+    // which no shipped world carries — proven by the landing's three bit-identical
+    // dormancy probes.
+    'src/domain/worldPulse/factionDensityKernel.js',
     // D-7e clause (i) (round-3 F3): seatGratitudeSevToward reads the persisted LADDER
     // record's `.npcs` STANDINGS map (priorLedger[sid].npcs — ladder state, never the
     // settlement roster), so it is participation-independent by construction: a

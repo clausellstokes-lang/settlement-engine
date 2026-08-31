@@ -62,6 +62,7 @@ import { rollDensityPlan } from './densityRoll.js';
 // and the third sits behind an explicit `Number.isFinite` guard — so the kernel's non-finite
 // policy (⇒ 0) is unreachable here: a strictly safer floor, never a behaviour change.
 import { clamp01 } from '../../kernel/math.js';
+import { prosperityRank01 } from '../../domain/prosperityRank.js';
 
 /** The stressor family that may lift the seat floor (§810.3 R13 / §810.5). ONE
  *  closed vocabulary serves birth and play; `succession_void` already exists in
@@ -119,29 +120,21 @@ export function densityParticularsFrom(input = {}) {
   const route = String(config.tradeRouteAccess || 'road').toLowerCase();
   const ROUTE_CONNECTIVITY = { isolated: 0.1, road: 0.5, river: 0.65, coastal: 0.75, port: 0.9 };
   return {
-    prosperity01: prosperityBand01(prosperity),
+    prosperity01: prosperityRank01(prosperity),
     connectivity01: ROUTE_CONNECTIVITY[route] ?? 0.5,
     war01: clamp01(0.5 + 0.5 * stresses.filter(s => WAR.has(s)).length),
     corruption01: clamp01(0.5 + 0.5 * stresses.filter(s => CORRUPT.has(s)).length),
   };
 }
 
-/** Prosperity reaches this module as a BAND STRING on `economicState`, and as a
- *  number on some legacy/imported shapes. Read both; an unknown value is
- *  "unremarkable" rather than "poor", so a shape we do not recognise cannot
- *  quietly thin a settlement's politics.
- *  @param {unknown} value @returns {number} */
-function prosperityBand01(value) {
-  if (typeof value === 'number' && Number.isFinite(value)) {
-    return clamp01(value > 1 ? value / 100 : value);
-  }
-  const BANDS = {
-    destitute: 0.05, struggling: 0.2, poor: 0.25, modest: 0.45, stable: 0.5,
-    comfortable: 0.65, prosperous: 0.8, wealthy: 0.9, thriving: 0.9, rich: 0.95,
-  };
-  const key = String(value || '').trim().toLowerCase();
-  return BANDS[key] ?? 0.5;
-}
+/* Prosperity is read through `prosperityRank01` — THE canonical ladder — rather than a
+ * private band map: §759.3 measured four private ladders scoring the same Comfortable
+ * settlement 0.6, 0.5 and 0.65, and this module's first draft was the fifth. The leaf is
+ * TOTAL: a label in any of its shapes resolves on the one ladder, and everything else —
+ * including a bare NUMBER, whose unit no producer declares (§711.6) — degrades to
+ * NEUTRAL 0.5, this module's own "unremarkable, tilts nothing" doctrine. The magnitude
+ * sniff (`> 1 ? /100`) the first draft carried is exactly the undeclared-unit guess the
+ * factionPowerShare inventory exists to refuse. */
 
 /** @param {Record<string, unknown>} config @param {unknown} stress @returns {string[]} */
 function stressTypesOf(config, stress) {
