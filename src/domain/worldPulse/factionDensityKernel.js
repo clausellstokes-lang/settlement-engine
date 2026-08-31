@@ -200,8 +200,8 @@ function interregnumBeat({ sid, townName, houseName, reason, tick, now }) {
     score: 78,
     headline: `${townName}: the ruling seat stands empty`,
     summary: `The ${houseName} holds ${townName}'s seat and no longer holds a single `
-      + `named figure to sit in it. The house does not fall — a settlement cannot be `
-      + `left with nobody running anything — so the seat stands empty and open, and `
+      + `named figure to sit in it. The house does not fall, for a settlement cannot be `
+      + `left with nobody running anything, so the seat stands empty and open, and `
       + `whoever can make a claim will be heard. ${reason}`,
     kind: 'applied',
     impactKind: 'faction_interregnum',
@@ -505,7 +505,7 @@ function emergenceBeat({ sid, townName, houseName, tick, now }) {
     score: 50,
     headline: `${townName}: the ${houseName} rise among the powers`,
     summary: `${townName} has grown past the politics it had. A standing interest that `
-      + `nobody spoke for has found a voice and a name — the ${houseName} — and takes a `
+      + `nobody spoke for has found a voice and a name, the ${houseName}, and takes a `
       + `place among the houses that answer for this town.`,
     kind: 'applied',
     impactKind: 'faction_seat_formed',
@@ -529,7 +529,7 @@ function emergenceBeat({ sid, townName, houseName, tick, now }) {
  */
 function foldBeat({ sid, townName, houseName, intoName, moved, tick, now }) {
   const people = moved > 0
-    ? `Its named figures do not vanish — they take their places under the ${intoName}, `
+    ? `Its named figures do not vanish; they take their places under the ${intoName}, `
       + `which is what a fold is and what a killing is not. `
     : '';
   return {
