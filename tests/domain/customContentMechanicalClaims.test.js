@@ -32,6 +32,7 @@ import { corruptionPlaneMult } from '../../src/domain/worldPulse/piety.js';
 import { computeAggressiveness } from '../../src/domain/worldPulse/disposition.js';
 import { deitySnapshotFrom } from '../../src/domain/deitySnapshot.js';
 import { deityPressureOf } from '../../src/domain/worldPulse/dispositionProfile.js';
+import { projectReligionStateOntoSettlement } from '../../src/domain/worldPulse/religionState.js';
 import { inferSupplyChains } from '../../src/domain/inferSupplyChains.js';
 import { computeFinishedGoodsDemand } from '../../src/generators/economy/finishedGoodsDemand.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -948,6 +949,33 @@ function deityDraftSettlement(authoredTemper) {
   };
 }
 
+/**
+ * W-FAITH F4c — a boon/bane probe driven through the REAL chain, not a planted key:
+ * authored draft -> `deitySnapshotFrom` -> a religion state -> the tick-END projection
+ * `projectReligionStateOntoSettlement` -> `deriveSystemVariable`. Nothing here builds a
+ * `faithProfile` by hand, so a probe cannot pass on a writer that never carried the field
+ * (F3c's J4: `deitySettlement(field, value)` plants straight onto a snapshot and would).
+ *
+ * ⭐ THE CONTROL AND THE ACTIVATED ARM DIFFER IN EXACTLY ONE AUTHORED VALUE. For the two
+ * CHANNEL keys the control names `sea` — a channel measured to have no causal variable and
+ * therefore DECLARED UNBOUND — so the pair also proves the bound/unbound split rather than
+ * merely proving that something happened.
+ *
+ * @param {Record<string, string>} aspects the authored boon/bane pair
+ * @param {string} variable the causal variable to observe
+ */
+function faithChannelClaimProbe(aspects, variable) {
+  const snapshot = deitySnapshotFrom({
+    name: 'Channel Deity', alignmentAxis: 'neutral', lawAxis: 'neutral', rankAxis: 'major', ...aspects,
+  });
+  const settlement = projectReligionStateOntoSettlement(
+    { id: 'claim.faith', population: 4_000, config: {}, institutions: [] },
+    { 'claim.faith': { patronRef: 'd.c', deities: { 'd.c': { deityRef: 'd.c', snapshot, share: 100, standing: 'ascendant', legitimacy: 0.8, suppressed: false } } } },
+    'claim.faith',
+  );
+  return deriveSystemVariable(variable, settlement).score;
+}
+
 function claim(consumer, observation, probe) {
   return Object.freeze({ consumer, observation, probe });
 }
@@ -1140,6 +1168,38 @@ export const MECHANICAL_CLAIM_MATRIX = Object.freeze({
       activated: deityPressureOf(
         deitySettlement('domain', 'war'),
       ).thresholdFactor,
+    }),
+  ),
+  'deities.boonChannel': claim(
+    'causalState',
+    'a boon aimed at a BOUND channel lifts its causal variable, while the same boon aimed at a declared-unbound channel does not',
+    () => ({
+      control: faithChannelClaimProbe({ boonChannel: 'sea', boonStrength: 'heavy' }, 'food_security'),
+      activated: faithChannelClaimProbe({ boonChannel: 'harvest', boonStrength: 'heavy' }, 'food_security'),
+    }),
+  ),
+  'deities.boonStrength': claim(
+    'causalState',
+    'the boon\'s banded magnitude changes how far its causal variable moves',
+    () => ({
+      control: faithChannelClaimProbe({ boonChannel: 'harvest', boonStrength: 'faint' }, 'food_security'),
+      activated: faithChannelClaimProbe({ boonChannel: 'harvest', boonStrength: 'heavy' }, 'food_security'),
+    }),
+  ),
+  'deities.baneChannel': claim(
+    'causalState',
+    'a bane aimed at a BOUND channel lowers its causal variable, while the same bane aimed at a declared-unbound channel does not',
+    () => ({
+      control: faithChannelClaimProbe({ baneChannel: 'sea', baneStrength: 'heavy' }, 'trade_connectivity'),
+      activated: faithChannelClaimProbe({ baneChannel: 'trade', baneStrength: 'heavy' }, 'trade_connectivity'),
+    }),
+  ),
+  'deities.baneStrength': claim(
+    'causalState',
+    'the bane\'s banded magnitude changes how far its causal variable moves',
+    () => ({
+      control: faithChannelClaimProbe({ baneChannel: 'trade', baneStrength: 'faint' }, 'trade_connectivity'),
+      activated: faithChannelClaimProbe({ baneChannel: 'trade', baneStrength: 'heavy' }, 'trade_connectivity'),
     }),
   ),
   'deities.lawAxis': claim(
