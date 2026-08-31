@@ -86,12 +86,69 @@ function settlementOf(settlementOrItem) {
   return settlementOrItem?.settlement || settlementOrItem || {};
 }
 
-/** @param {any} settlement */
-function supportedDomainOf(settlement) {
-  const raw = settlement?.config?.primaryDeitySnapshot?.domain;
+/**
+ * ⭐⭐ THE PER-DEITY PRECEDENCE LAW (ODQ §851, from the owner's own §797 "in place of
+ * domains"), and this is the ONE site in the tree where it can be written.
+ *
+ * A deity carrying an AUTHORED boon or bane reads THOSE, and its legacy `domain` arm
+ * goes silent FOR THAT DEITY. A deity carrying only the legacy `domain` keeps its
+ * unchanged arm — THE PROMISE. One arm per deity, never both.
+ *
+ * WHY HERE AND NOWHERE ELSE. `supportedDomainOf` is the SOLE mechanical reader of
+ * `domain` in the estate: every other `.domain` hit is an embed writer or a consumer
+ * of `deityPressureOf`'s already-computed output. So the law is enforceable as a
+ * property of one function rather than as a convention several callers must remember
+ * — which is what makes it structural instead of documentary.
+ *
+ * ⚠ WHY IT MATTERS THAT THIS LANDS BEFORE F4c WIRES THE CHANNELS. `harvest` and
+ * `war_readiness` are BOTH a `DEITY_DOMAIN_PRESSURE` key and a `DEITY_EFFECT_CHANNELS`
+ * key. Wire the channels first and a deity authored `boon: harvest` would push the war
+ * bar through this function AND through the field — the same intent counted twice,
+ * which is precisely the collision §851 was raised to prevent. Landing the precedence
+ * first makes that double-count unconstructible rather than merely unlikely.
+ *
+ * ⭐ DORMANT-BY-ABSENCE TODAY, and that is the safety argument: no deity in the estate
+ * authors a boon or bane (the authoring surface is `ui:false`), so `authoredAspects`
+ * is false everywhere and this function is byte-identical on the whole corpus. The law
+ * is in place BEFORE the content that would trigger it exists.
+ *
+ * ⚠ BOTH HELPERS TAKE THE SNAPSHOT, NOT THE SETTLEMENT, and the observed-shape
+ * ratchet is why: `primaryDeitySnapshot on config` carries a FROZEN CEILING OF ONE
+ * READ for this file, and an earlier cut of this law read it in each helper — two
+ * reads, refused. Resolving the snapshot ONCE in `deityPressureOf` and passing it
+ * down is both the cure and the better shape: one place decides which deity the law
+ * is about.
+ *
+ * @param {Record<string, unknown> | null | undefined} snapshot a committed deity embed
+ * @returns {boolean} whether this deity's authored aspects supersede its legacy domain
+ */
+function authoredAspectsOf(snapshot) {
+  // Keyed on the CHANNEL, not the strength: the channel is what names the effect, and
+  // it is what `faithField.aspectTerm` keys on too — so "this deity has an authored
+  // aspect" means the same thing on both sides of the split.
+  const boon = snapshot?.boonChannel;
+  const bane = snapshot?.baneChannel;
+  return (typeof boon === 'string' && boon !== '') || (typeof bane === 'string' && bane !== '');
+}
+
+/** @param {Record<string, unknown> | null | undefined} snapshot */
+function supportedDomainOf(snapshot) {
+  if (authoredAspectsOf(snapshot)) return null;      // §851: one arm per deity
+  const raw = snapshot?.domain;
   if (typeof raw !== 'string') return null;
   const domain = raw.trim().toLowerCase();
   return Object.prototype.hasOwnProperty.call(DEITY_DOMAIN_PRESSURE, domain) ? domain : null;
+}
+
+/** @param {Record<string, unknown> | null | undefined} snapshot */
+function domainSupersededBy(snapshot) {
+  // Only a deity that WOULD otherwise have had a mechanical domain is "superseded";
+  // one with an unsupported domain, or none at all, was always silent here and must
+  // not claim a precedence that never fired.
+  if (!authoredAspectsOf(snapshot)) return false;
+  const raw = snapshot?.domain;
+  if (typeof raw !== 'string') return false;
+  return Object.prototype.hasOwnProperty.call(DEITY_DOMAIN_PRESSURE, raw.trim().toLowerCase());
 }
 
 /**
@@ -111,7 +168,10 @@ function supportedDomainOf(settlement) {
  */
 export function deityPressureOf(settlementOrItem, dispositionEntry = null) {
   const settlement = settlementOf(settlementOrItem);
-  const domain = supportedDomainOf(settlement);
+  // ONE read of `config.primaryDeitySnapshot` for the whole function (the frozen
+  // observed-shape ceiling for this file is exactly one).
+  const snapshot = settlement?.config?.primaryDeitySnapshot;
+  const domain = supportedDomainOf(snapshot);
   if (!domain) {
     return {
       domain: null,
@@ -121,7 +181,14 @@ export function deityPressureOf(settlementOrItem, dispositionEntry = null) {
       thresholdFactor: 1,
       suppressed: false,
       contradictions: [],
-      receipt: 'No supported local patron domain changes this court\'s bar for war.',
+      // ⚠ TWO REASONS, NOT ONE, AND THE READER MUST BE ABLE TO TELL THEM APART. "This
+      // court has no war-moving patron" and "this court's patron moves war through its
+      // authored blessing instead" are different facts about the world, and a single
+      // receipt covering both would report the §851 precedence as an absence — the
+      // exact confusion the law exists to remove.
+      receipt: domainSupersededBy(snapshot)
+        ? 'This patron\'s authored blessing and blight govern its influence; its older domain no longer moves this court\'s bar for war.'
+        : 'No supported local patron domain changes this court\'s bar for war.',
     };
   }
 

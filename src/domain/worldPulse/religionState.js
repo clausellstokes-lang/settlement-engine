@@ -666,11 +666,47 @@ function mandateGovWeight(government) {
 }
 
 /** Regime↔patron alignment fit (0..1): kindred props more, mismatch less. The
- * temper is read through the W-F2 shim (stored verbatim ⇒ byte-identical), and a
- * bounded LAW term folds in the axis the mandate was blind to: a lawful patron
- * props traditional rule harder, a chaotic patron props it less. The law term is 0
- * for a law-neutral/legacy patron (lawSign 0) ⇒ byte-identical on every existing
- * fixture; only law-authored patrons shift. @param {any} deity @param {any} government */
+ * temper is read through the W-F2 shim, and a bounded LAW term folds in the axis the
+ * mandate was blind to: a lawful patron props traditional rule harder, a chaotic
+ * patron props it less. The law term is 0 for a law-neutral/legacy patron (lawSign 0).
+ *
+ * ⚠⚠ THE `'peaceful'` SPELLING WAS A TYPO AND BOTH ITS SITES WERE DEAD (ODQ §866
+ * docket row 1, WIDENED by F3c's measurement). `deityTemper` answers only
+ * `TEMPER_WORDS` — `warlike | peacelike | neutral` — on BOTH arms: the authored arm
+ * guards on that set, and the derived arm is `deriveTemper`, whose declared range is
+ * those same three. The retired stored `temperamentAxis`, which IS where the legacy
+ * `'peaceful'` spelling lives, is consulted by NEITHER. So `temper === 'peaceful'`
+ * could never be true here, and the two branches below were unreachable.
+ *
+ * ⚠ AND IT WAS LIVE, NOT LATENT — the docket row understated this. `deityTemper`
+ * DERIVES `'peacelike'` for a good deity carrying no authored word at all, so the dead
+ * branches were being skipped for deities that exist on seeds TODAY, not merely for
+ * authored ones that do not exist yet.
+ *
+ * MEASURED SHIFT, and the matrix is NAMED so the figure can be reproduced rather than
+ * taken on trust: sweeping 17 governments × alignmentAxis{good,neutral,evil,absent} ×
+ * lawAxis{lawful,neutral,chaotic,absent} × authoredTemper{warlike,peacelike,neutral,
+ * absent} = **1,088 rows, of which 199 move**. Every moved row carries temper
+ * `peacelike` and sits in the despot family (20 per government) or the monarchy family
+ * (17 per government); theocracies and mandate-free governments are untouched. A
+ * peacelike patron now takes the −0.25 under a despotate and the +0.1 under a monarchy,
+ * as this function always meant it to.
+ *
+ * ⚠⚠ AND THE CLAMP HIDES THE CURE ON ONE WHOLE CLASS. A good/LAWFUL patron under a
+ * monarchy scores raw 1.02 uncured and 1.12 cured — `clamp01` sends both to 1.0, so its
+ * legitimacy equilibrium is 55 either way. That is why the monarchy family moves 17 rows
+ * and not 20, and it is a live trap for anyone pinning this cure: the obvious witness
+ * deity cannot see it. `mandateTemperReach.test.js` uses a good/CHAOTIC patron (53 → 54)
+ * for that branch and pins the saturated case separately so the 55 is never misread.
+ *
+ * ⛔ ONE SPELLING, NOT BOTH — deliberately unlike `religionLegitimacy.js:54` and
+ * `religiousContest.js:132`, which map `peaceful` AND `peacelike` and call the former
+ * "the legacy stored spelling". Those two read a RAW STORED AXIS, where a legacy save
+ * really can carry `'peaceful'`. This site reads `deityTemper`'s OUTPUT, whose
+ * vocabulary is closed at the wall. A both-spellings arm here would be dead code
+ * wearing a legacy-compatibility comment — the same false-claim-with-a-passing-status
+ * this cure exists to remove. Pinned by `mandateTemperReach.test.js`.
+ * @param {any} deity @param {any} government */
 function mandateAlignmentFit(deity, government) {
   const g = String(government || '').toLowerCase();
   if (/theocra/.test(g)) return 1;                                  // a theocracy IS its patron's faith
@@ -679,11 +715,11 @@ function mandateAlignmentFit(deity, government) {
   let fit = 0.75;
   if (/despot|autocra|imperial|empire/.test(g)) {                   // martial / authoritarian
     if (temper === 'warlike') fit += 0.25; if (align === 'evil') fit += 0.1;
-    if (temper === 'peaceful') fit -= 0.25; if (align === 'good') fit -= 0.1;
+    if (temper === 'peacelike') fit -= 0.25; if (align === 'good') fit -= 0.1;
     fit -= STANCE_TUNING.MANDATE_LAW * Math.max(0, -law);           // a chaotic patron props despots-by-fear LESS
   } else if (/monarch|feudal|kingdom|throne|royal|king|queen/.test(g)) {   // traditional order
     if (align === 'good' || align === 'neutral') fit += 0.15;
-    if (temper === 'peaceful' || temper === 'neutral') fit += 0.1;
+    if (temper === 'peacelike' || temper === 'neutral') fit += 0.1;
     if (align === 'evil') fit -= 0.15;
     fit += STANCE_TUNING.MANDATE_LAW * law;                         // a lawful patron props traditional monarchy harder
   }
