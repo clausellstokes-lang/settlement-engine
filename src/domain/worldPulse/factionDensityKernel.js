@@ -86,13 +86,23 @@ import { num, asObject, compareCodepoint } from './npcLadderState.js';
 import { stablePart } from './stablePart.js';
 import { DRIFT_REEMIT_COOLDOWN_TICKS } from './worldPulseFeedCuration.js';
 import { readFactionLifecycle, factionRosterOf } from '../../generators/density/factionLifecycle.js';
+import { planDensityCadence } from '../../generators/density/densityCadence.js';
+import { importanceForRung } from '../../generators/density/densityRungs.js';
 import { seatKey } from '../../generators/density/applyDensityLaw.js';
+import { createNpc } from '../entities/npcs.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { slugify } from '../../kernel/slugify.js';
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize } from './assizeKernel.js';
 
 /** The mark an emptied ruling house carries while its succession is unresolved.
  *  It is BOTH the once-per-state-change latch for the beat AND the named seam a
  *  future §810.5 stressor mint reads — one field, not two. */
 export const INTERREGNUM_MARK = 'interregnumSinceTick';
+
+/** The cadence clock, kept INSIDE `powerStructure` rather than as a new top-level
+ *  settlement key: the fabric's own pace belongs beside the fabric, and a nested
+ *  field costs no schema, no field-manifest row and no undo-list amendment. */
+export const CADENCE_CLOCK = 'densityStepTick';
 
 /**
  * Is this house's interregnum beat still inside the metronome's window?
@@ -267,6 +277,361 @@ function applyReactions(fresh, reactions, ctx) {
   };
 }
 
+// ── R8's CANDIDATE POOL — DERIVED, NOT INVENTED ───────────────────────────────────
+//
+// `densityCadence.js` takes the pool as INPUT and says why in its own header: R8 ranks
+// "a power strong in the influence ranking / legitimacy / economics but unrepresented",
+// and the settlement shape carries only the SEATED powers. D2b named that seam rather
+// than burying a design decision in a helper. This is the decision, made in the open.
+//
+// ⭐ THE UNREPRESENTED POWERS ARE THE SETTLEMENT'S OWN INSTITUTIONS. A town with a
+// temple and no faith house has a centre of power that is VISIBLE IN THE WORLD and
+// carries no seat — that is R8's sentence, not an analogy. Nothing is conjured from a
+// catalog of things the settlement does not have.
+//
+// ⭐⭐ AND IT CLOSES THE LOOP R7 OPENS. A tier promotion seats the new tier's REQUIRED
+// institutions (`tierOutcomeApply.js`), so the promotion literally creates the
+// unrepresented powers the fabric then thickens toward. The thickening has a cause in
+// the world rather than a quota to fill.
+//
+// ⭐⭐ THE INFLUENCE RANKING R8 NAMES ALREADY EXISTS, AND IT IS NOT A COUNT.
+// `economicState.compound` is the generator's own per-CATEGORY effective standing —
+// economyOutput, militaryEffective, religionInfluence, magicInfluence, criminalEffective,
+// each 0..100 and each already weighing the settlement's institutions, safety, trade and
+// tier. Reading THAT is reading the ranking R8 points at; counting institution rows by
+// hand would have been a second, weaker spelling of it sitting beside the real one.
+//
+// ⚠ AND THE FIRST DRAFT DID EXACTLY THAT, AND WAS CONVICTED BY THE ESTATE'S OWN
+// READER-WITH-NO-WRITER WALKER. It scored the pool from an institution tally and an
+// `economicState.prosperity01` that NO GENERATOR EVER WRITES — a guarded read that
+// cannot throw, degrades to a default, and leaves the arm behind it dead on every
+// generated world. The walker named it before a line of it shipped. The cure is not a
+// different default; it is reading the key the producer actually writes.
+//
+// The three R8 terms are weighted equally by `representationGapOf` and each is applied
+// WHERE IT MEANS SOMETHING, degrading to that module's own 0.5 "unremarkable" default
+// elsewhere — the convention it documents, so a partial context tilts nothing rather
+// than tilting wrongly. Influence is the category's own standing and always applies;
+// legitimacy applies to the powers that answer for the settlement's public standing;
+// economics to the powers that live off its trade.
+
+/** Faction-category ← the `compound` field carrying that category's standing. There is
+ *  deliberately no `noble` row: the governing power always holds a seat, so "an
+ *  unrepresented noble power" is not a state this reading can produce.
+ *  @type {Readonly<Record<string, string>>} */
+const POWER_STANDING_FIELD = Object.freeze({
+  economy: 'economyOutput',
+  religious: 'religionInfluence',
+  military: 'militaryEffective',
+  arcane: 'magicInfluence',
+  criminal: 'criminalEffective',
+});
+
+/** Faction-category ← institution-category. Both vocabularies are the tree's own; this
+ *  is the join between them, written once. An institution category that is nobody's
+ *  power base (Infrastructure, Entertainment) is deliberately absent.
+ *  ⚠ The index signature is declared rather than inferred: these are string→string
+ *  LOOKUPS whose miss is a real answer ("this category is nobody's power base"), and the
+ *  `if (!name)` guard on every read is what makes the widening honest.
+ *  @type {Readonly<Record<string, string>>} */
+const POWER_CATEGORY_OF_INSTITUTION = Object.freeze({
+  economy: 'economy',
+  crafts: 'economy',
+  religious: 'religious',
+  defense: 'military',
+  magic: 'arcane',
+  criminal: 'criminal',
+});
+
+/** The display name an unrepresented power of each category takes when it seats. Fixed
+ *  spellings, because a house's NAME is world-facing and must never be a slug.
+ *  @type {Readonly<Record<string, string>>} */
+const POWER_NAME_OF_CATEGORY = Object.freeze({
+  economy: 'Rising Merchants',
+  religious: 'Devout Assembly',
+  military: 'Sworn Companies',
+  arcane: 'Arcane Circle',
+  criminal: 'Shadow Interests',
+});
+
+/** Terms whose meaning is category-scoped. Anything not listed reads 0.5. */
+const LEGITIMACY_CATEGORIES = new Set(['religious']);
+const ECONOMICS_CATEGORIES = new Set(['economy', 'criminal']);
+
+/**
+ * R8's pool for one settlement: every power the world already contains that holds no seat.
+ *
+ * A category qualifies only when the settlement carries at least one LIVE institution of
+ * it — a merchant house cannot rise where there is no market — and it is then RANKED by
+ * the settlement's own compound standing for that category.
+ *
+ * PURE and TOTAL. A settlement with no institutions, or one whose every implied power is
+ * already seated, yields an empty array, and `planDensityCadence` then declines with its
+ * typed `no_candidate_power` rather than inventing a house to seat.
+ *
+ * @param {Record<string, unknown>} settlement
+ * @returns {Array<{key: string, name: string, category: string,
+ *                  influence01: number, legitimacy01: number, economics01: number}>}
+ */
+export function densityCandidatePowersFrom(settlement) {
+  /** @type {Set<string>} */
+  const present = new Set();
+  for (const raw of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
+    const category = POWER_CATEGORY_OF_INSTITUTION[String(asObject(raw).category || '').toLowerCase()];
+    if (category) present.add(category);
+  }
+  if (!present.size) return [];
+
+  const ps = asObject(settlement.powerStructure);
+  const seats = Array.isArray(ps.factions) ? /** @type {Record<string, unknown>[]} */ (ps.factions) : [];
+  const seatedCategories = new Set(seats.map(s => String(asObject(s).category || '').toLowerCase()));
+  const seatedKeys = new Set(seats.map(s => seatKey(s)));
+
+  const compound = asObject(asObject(settlement.economicState).compound);
+  const legitimacy = num(ps.publicLegitimacy && asObject(ps.publicLegitimacy).score, 50) / 100;
+  const economy = num(compound.economyOutput, 50) / 100;
+
+  const out = [];
+  for (const category of present) {
+    if (seatedCategories.has(category)) continue;
+    const name = POWER_NAME_OF_CATEGORY[category];
+    if (!name || seatedKeys.has(name)) continue;
+    out.push({
+      key: name,
+      name,
+      category,
+      influence01: num(compound[POWER_STANDING_FIELD[category]], 50) / 100,
+      legitimacy01: LEGITIMACY_CATEGORIES.has(category) ? legitimacy : 0.5,
+      economics01: ECONOMICS_CATEGORIES.has(category) ? economy : 0.5,
+    });
+  }
+  // Sorted so the pool handed to the law is itself order-independent; the law's own
+  // sort is total anyway, and a deterministic pool makes that easy to see.
+  return out.sort((a, b) => compareCodepoint(a.key, b.key));
+}
+
+/**
+ * Is the fabric allowed to take a step this interval?
+ *
+ * R7's cadence is "one receipted emergence per interval, never an instant sprout".
+ * The planner already returns AT MOST ONE step per call, so the remaining half of the
+ * ruling is the INTERVAL — and it is the metronome's own window, imported rather than
+ * re-typed, because the claim a second constant would make is the same claim.
+ *
+ * A settlement with no clock has never taken a step and never crossed a band under
+ * this law: it may act. A future-dated clock does not hold (the razing-latch discipline).
+ *
+ * @param {Record<string, unknown>} powerStructure @param {number} tick @returns {boolean}
+ */
+function cadenceReady(powerStructure, tick) {
+  const last = powerStructure[CADENCE_CLOCK];
+  if (last === undefined || last === null) return true;
+  const at = Number(last);
+  if (!Number.isFinite(at)) return true;
+  const age = tick - at;
+  return age < 0 || age >= DRIFT_REEMIT_COOLDOWN_TICKS;
+}
+
+/**
+ * The founding member an emerging house mints WITH (§810.4 R17: "a faction and its
+ * first named NPC are ONE generation act").
+ *
+ * ⚠ THE SHAPE IS THE EVENT LAYER'S, DELIBERATELY AND IN EVERY DETAIL — the same
+ * `createNpc` call, the same head-rung importance from the one rung mapping, the same
+ * `factionAffiliation` re-write after construction (which reads as redundant and is
+ * not: `createNpc` builds from a DECLARED field set and drops undeclared keys). A house
+ * that arrives by cadence is byte-shaped like one that arrives by DM verb, and no
+ * second importance policy comes into existence.
+ *
+ * ⚠ NO DRAW. `_idSeed` is a pure function of (settlement, tick, house), so the same
+ * world mints the same founder — determinism without a stream.
+ *
+ * ⬜ R8's "new named members roll their characters through the W-LIVES generation path"
+ * is NOT this. W-LIVES has not landed; when it does, THIS is the seam it replaces, and
+ * until then the estate's own shipped answer to "a house mints with a member" is used
+ * rather than a lesser private one.
+ *
+ * @param {{sid: string, tier: string|null|undefined, house: string, tick: number}} a
+ * @returns {Record<string, unknown>}
+ */
+function foundingMemberForEmergence({ sid, tier, house, tick }) {
+  const npc = createNpc({
+    name: `The ${house} Founder`,
+    role: 'Head',
+    importance: /** @type {import('../entities/npcs.js').NpcImportance} */ (
+      importanceForRung('head', tier)
+    ),
+    factionAffiliation: house,
+    linkedFactionIds: [`faction.${slugify(house)}`],
+    _idSeed: `density-emergence:${sid}:${tick}:${slugify(house)}`,
+  });
+  npc.factionAffiliation = house;
+  return npc;
+}
+
+/**
+ * The in-world receipt for a house that has risen among a settlement's powers.
+ * R7's own example sets the register: "a weavers' house rises among the town's powers".
+ *
+ * @param {{sid: string, townName: string, houseName: string, tick: number, now: string|null}} a
+ * @returns {Record<string, unknown>}
+ */
+function emergenceBeat({ sid, townName, houseName, tick, now }) {
+  return {
+    id: `wizard_news.${tick}.faction_seat_formed.${stablePart(sid)}.${stablePart(houseName)}`,
+    createdAt: now,
+    tick,
+    scope: 'local',
+    significance: 'notable',
+    severity: 0.4,
+    score: 50,
+    headline: `${townName}: the ${houseName} rise among the powers`,
+    summary: `${townName} has grown past the politics it had. A standing interest that `
+      + `nobody spoke for has found a voice and a name — the ${houseName} — and takes a `
+      + `place among the houses that answer for this town.`,
+    kind: 'applied',
+    impactKind: 'faction_seat_formed',
+    channelType: 'political_authority',
+    settlementIds: [sid],
+    impactIds: [],
+    channelIds: [],
+    sourceEventId: `faction_seat_formed.${sid}.${stablePart(houseName)}.${tick}`,
+    tags: ['world_pulse', 'faction_density', 'emergence'],
+    reasons: ['the settlement carries a standing interest that holds no seat'],
+  };
+}
+
+/**
+ * The in-world receipt for a house that has folded into another.
+ * R9's own example sets the register: "the guild hall stands empty".
+ *
+ * @param {{sid: string, townName: string, houseName: string, intoName: string,
+ *          moved: number, tick: number, now: string|null}} a
+ * @returns {Record<string, unknown>}
+ */
+function foldBeat({ sid, townName, houseName, intoName, moved, tick, now }) {
+  const people = moved > 0
+    ? `Its named figures do not vanish — they take their places under the ${intoName}, `
+      + `which is what a fold is and what a killing is not. `
+    : '';
+  return {
+    id: `wizard_news.${tick}.faction_seat_folded.${stablePart(sid)}.${stablePart(houseName)}`,
+    createdAt: now,
+    tick,
+    scope: 'local',
+    significance: 'notable',
+    severity: 0.45,
+    score: 52,
+    headline: `${townName}: the ${houseName} fold into the ${intoName}`,
+    summary: `${townName} no longer carries the politics it once did, and the weakest `
+      + `standing among its houses is the one that goes. The ${houseName} keep their hall `
+      + `no longer. ${people}The seat that ran this town is untouched: a shrinking place `
+      + `may lose a house, but never its government.`,
+    kind: 'applied',
+    impactKind: 'faction_seat_folded',
+    channelType: 'political_authority',
+    settlementIds: [sid],
+    impactIds: [],
+    channelIds: [],
+    sourceEventId: `faction_seat_folded.${sid}.${stablePart(houseName)}.${tick}`,
+    tags: ['world_pulse', 'faction_density', 'fold'],
+    reasons: ['the settlement fell below the fabric its tier supports'],
+  };
+}
+
+/**
+ * Apply at most ONE cadence step (§810.1 R7/R8/R9 with §810.3 R14) to one settlement.
+ *
+ * ⭐⭐ THE FOLD MOVES NOBODY OUT OF THE WORLD. R9's own words are "folds, MERGES, or
+ * goes to exile", and merging is the only one of the three an engine may do on its own:
+ * §827's STATE-NEVER-FATE binds this lane, and the engine kills no named character.
+ * The folded house's figures are re-affiliated onto the strongest remaining house, which
+ * ALSO keeps §817-Q8's always-affiliated invariant true — a fold that orphaned its
+ * roster would break that invariant AND hand R18 an empty house to dissolve next tick.
+ *
+ * @param {Record<string, unknown>} fresh
+ * @param {{sid: string, tick: number, now: string|null}} ctx
+ * @returns {{settlement: Record<string, unknown>|null, beats: Record<string, unknown>[]}}
+ */
+function applyCadence(fresh, ctx) {
+  const ps = asObject(fresh.powerStructure);
+  const seats = Array.isArray(ps.factions) ? /** @type {Record<string, unknown>[]} */ (ps.factions) : null;
+  if (!seats || !cadenceReady(ps, ctx.tick)) return { settlement: null, beats: [] };
+
+  const tier = String(fresh.tier || asObject(fresh.config).tier || '') || null;
+  const step = planDensityCadence({
+    tier: tier || undefined,
+    config: asObject(fresh.config),
+    powerStructure: { factions: seats },
+    candidatePowers: densityCandidatePowersFrom(fresh),
+  });
+  if (step.step === 'at_band' || step.reason) return { settlement: null, beats: [] };
+
+  const townName = typeof fresh.name === 'string' && fresh.name ? String(fresh.name) : ctx.sid;
+  const npcs = Array.isArray(fresh.npcs) ? /** @type {Record<string, unknown>[]} */ (fresh.npcs) : [];
+
+  if (step.step === 'thicken' && step.emergence) {
+    const house = String(step.emergence.name || step.emergence.key);
+    const founder = foundingMemberForEmergence({ sid: ctx.sid, tier, house, tick: ctx.tick });
+    return {
+      settlement: {
+        ...fresh,
+        npcs: [...npcs, founder],
+        powerStructure: {
+          ...ps,
+          [CADENCE_CLOCK]: ctx.tick,
+          factions: [...seats, {
+            id: `faction.${slugify(house)}`,
+            name: house,
+            faction: house,
+            status: 'active',
+            category: String(step.emergence.category || 'other'),
+            power: 1,
+            impairments: [],
+            internalSeats: {},
+            description: '',
+            memberNpcIds: [founder.id],
+            // Provenance the chronicle can read without re-deriving it.
+            materializedBy: 'density_cadence',
+            materializedAtTick: ctx.tick,
+          }],
+        },
+      },
+      beats: [emergenceBeat({ sid: ctx.sid, townName, houseName: house, tick: ctx.tick, now: ctx.now })],
+    };
+  }
+
+  if (step.step === 'thin' && step.thinning) {
+    const folding = String(step.thinning.key);
+    const remaining = seats.filter(s => seatKey(s) !== folding);
+    if (!remaining.length) return { settlement: null, beats: [] };
+    // The strongest remaining house takes them in. Ties break on the key, so the
+    // absorbing house is the same on every device from the same world.
+    const into = [...remaining].sort(
+      (a, b) => (num(b.power, 0) - num(a.power, 0)) || compareCodepoint(seatKey(a), seatKey(b)),
+    )[0];
+    const intoName = seatKey(into);
+    let moved = 0;
+    const nextNpcs = npcs.map((raw) => {
+      const npc = asObject(raw);
+      if (String(npc.factionAffiliation || '') !== folding) return raw;
+      moved += 1;
+      return { ...npc, factionAffiliation: intoName };
+    });
+    return {
+      settlement: {
+        ...fresh,
+        ...(moved ? { npcs: nextNpcs } : {}),
+        powerStructure: { ...ps, [CADENCE_CLOCK]: ctx.tick, factions: remaining },
+      },
+      beats: [foldBeat({
+        sid: ctx.sid, townName, houseName: folding, intoName, moved, tick: ctx.tick, now: ctx.now,
+      })],
+    };
+  }
+  return { settlement: null, beats: [] };
+}
+
 /**
  * THE DENSITY LANE'S MOVER — §810.4 R18 (roster-bound existence) and R20 (the
  * three-states invariant), applied.
@@ -325,25 +690,34 @@ export function advanceFactionDensity(args) {
     // what makes the walk free; the reaction count is not a gate at all.
     if (!reading.governed) continue;
 
-    const ui = updateIndex.get(sid);
-    const fresh = ui !== undefined && asObject(nextUpdates[ui]).settlement
-      ? asObject(asObject(nextUpdates[ui]).settlement)
-      : tickStart;
-
-    const applied = applyReactions(
-      fresh,
-      /** @type {Record<string, unknown>[]} */ (reading.reactions),
-      { sid, tick, now: nowIso },
-    );
-    if (!applied.settlement) continue;
     // A settlement with no update entry cannot be written this tick — the fold only
     // carries entries that exist. Saying so by SKIPPING (rather than minting an entry
     // this seam does not own) keeps the one-writer law intact.
+    const ui = updateIndex.get(sid);
     if (ui === undefined) continue;
+    const fresh = asObject(nextUpdates[ui]).settlement
+      ? asObject(asObject(nextUpdates[ui]).settlement)
+      : tickStart;
+
+    const ctx = { sid, tick, now: nowIso };
+    // ⭐ LIFECYCLE FIRST, CADENCE SECOND, AND THE ORDER IS LOAD-BEARING. R18 removes
+    // houses that have ceased to exist; the cadence then counts the seats that are
+    // actually there. Reversed, a settlement would thicken toward a band it already
+    // met on paper with a dissolved house still in the count.
+    const lifecycle = applyReactions(
+      fresh,
+      /** @type {Record<string, unknown>[]} */ (reading.reactions),
+      ctx,
+    );
+    const afterLifecycle = lifecycle.settlement || fresh;
+    const cadence = applyCadence(afterLifecycle, ctx);
+    const nextSettlement = cadence.settlement || lifecycle.settlement;
+    if (!nextSettlement) continue;
 
     if (!cloned) { nextUpdates = updates.slice(); cloned = true; }
-    nextUpdates[ui] = { ...asObject(nextUpdates[ui]), settlement: applied.settlement };
-    for (const beat of applied.beats) newsEntries.push(beat);
+    nextUpdates[ui] = { ...asObject(nextUpdates[ui]), settlement: nextSettlement };
+    for (const beat of lifecycle.beats) newsEntries.push(beat);
+    for (const beat of cadence.beats) newsEntries.push(beat);
   }
 
   // ⚠ `changed` must be true whenever EITHER output moved: applyPulseMover's guard

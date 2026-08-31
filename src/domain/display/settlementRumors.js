@@ -298,6 +298,10 @@ export const WHAT_PHRASES = Object.freeze({
   // the ONE house that may not end that way — the ruling seat, which stands empty instead.
   faction_dissolved: 'a house of power come to an end',
   faction_interregnum: 'a ruling seat left with nobody in it',
+  // §810.1 R7/R9: the fabric thickening toward a grown town's band, and thinning back
+  // when the town shrinks — one step per interval, each with its own receipt.
+  faction_seat_formed: 'a new house rising among the powers',
+  faction_seat_folded: 'a house folding into a stronger one',
   hierarchy_cascade: 'an upheaval in the ranks',
   authority_instability: 'a shaken authority',
   occupation_lifted: 'an occupation ended',

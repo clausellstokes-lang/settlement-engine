@@ -91,7 +91,9 @@ import {
 import {
   advanceFactionDensity,
   advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssizeAndDensity,
+  densityCandidatePowersFrom,
 } from '../../src/domain/worldPulse/factionDensityKernel.js';
+import { applyTierOutcomeToSettlement } from '../../src/domain/worldPulse/tierOutcomeApply.js';
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize } from '../../src/domain/worldPulse/assizeKernel.js';
 import { DRIFT_REEMIT_COOLDOWN_TICKS } from '../../src/domain/worldPulse/worldPulseFeedCuration.js';
 
@@ -1411,5 +1413,219 @@ describe('D2c — the density lane wired into the pulse (§810.4 R18/R20)', () =
     expect(composed.changed).toBe(bare.changed);
     expect(composed.worldState).toEqual(bare.worldState);
     expect(composed.newsEntries).toEqual(bare.newsEntries);
+  });
+});
+
+// ── D2c car 2: THE CADENCE WIRED (§810.1 R7/R8/R9 · §810.3 R14 · the tier hook) ──
+describe('D2c — the cadence wired into the pulse (§810.1 R7/R8/R9, §810.3 R14)', () => {
+  const V2 = { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION };
+  const inst = (name, category, extra = {}) => ({ name, category, status: 'active', ...extra });
+  /** @param {{tier?: string, factions: Array<Record<string, unknown>>,
+   *           institutions?: Array<Record<string, unknown>>,
+   *           npcs?: Array<Record<string, unknown>>, config?: Record<string, unknown>}} a */
+  const place = ({ tier = 'town', factions, institutions = [], npcs = [], config = V2 }) => ({
+    id: 'ashford', name: 'Ashford', tier, config, npcs, institutions,
+    powerStructure: { factions, publicLegitimacy: { score: 60 } },
+    // The generator's OWN per-category standing scale (0..100) — the influence ranking
+    // R8 names. Real keys, spelled as `economicState.js` writes them.
+    economicState: { compound: {
+      economyOutput: 70, religionInfluence: 40, militaryEffective: 30,
+      magicInfluence: 20, criminalEffective: 10,
+    } },
+  });
+  const snapOf = (...list) => ({ settlements: list.map(s => ({ id: s.id, settlement: s })) });
+  const updatesOf = (...list) => list.map(s => ({ saveId: s.id, save: {}, settlement: s }));
+  const run = (s, tick) => advanceFactionDensity({
+    snapshot: snapOf(s), worldState: {}, settlementUpdates: updatesOf(s), tick, now: null,
+  });
+  /** A crewed house, so R18 never fires and only the cadence is under test. */
+  const house = (name, category, power, governing = false) => ({
+    name, faction: name, category, power, isGoverning: governing,
+  });
+  const member = (name, houseName) => ({ id: `npc.${name}`, name, factionAffiliation: houseName, status: 'active' });
+
+  it('R8: the unrepresented powers are the settlement\'s OWN institutions, seated ones excluded', () => {
+    const s = place({
+      factions: [house('The Crown', 'noble', 20, true)],
+      institutions: [inst('Temple', 'Religious'), inst('Market', 'Economy'), inst('Granary', 'Economy'),
+        inst('Sewers', 'Infrastructure'), inst('Manor', 'Government')],
+    });
+    const pool = densityCandidatePowersFrom(s);
+    const keys = pool.map(p => p.category).sort();
+    // A category needs a LIVE institution to qualify — a merchant house cannot rise
+    // where there is no market. Infrastructure and Government map to no power base,
+    // and there is no `noble` row at all: the governing power always holds a seat.
+    expect(keys).toEqual(['economy', 'religious']);
+    // ⭐ INFLUENCE IS THE SETTLEMENT'S OWN COMPOUND STANDING FOR THAT CATEGORY, not a
+    // count of rows. The first draft counted institutions and read a `prosperity01` no
+    // generator writes; the reader-with-no-writer walker convicted it before it shipped.
+    const economy = pool.find(p => p.category === 'economy');
+    const religious = pool.find(p => p.category === 'religious');
+    expect(economy.influence01).toBeCloseTo(0.70, 10);
+    expect(religious.influence01).toBeCloseTo(0.40, 10);
+    // Each term applies where it MEANS something and degrades to the law's own
+    // "unremarkable" 0.5 elsewhere, rather than tilting wrongly.
+    expect(economy.economics01).toBeCloseTo(0.70, 10);
+    expect(economy.legitimacy01).toBeCloseTo(0.5, 10);
+    expect(religious.legitimacy01).toBeCloseTo(0.60, 10);
+    expect(religious.economics01).toBeCloseTo(0.5, 10);
+  });
+
+  it('a ruined or closed institution is nobody\'s power base, and a bare settlement yields none', () => {
+    const s = place({
+      factions: [],
+      institutions: [inst('Burned temple', 'Religious', { status: 'removed' }),
+        inst('Shuttered market', 'Economy', { _worldPulseInactive: true })],
+    });
+    expect(densityCandidatePowersFrom(s)).toEqual([]);
+    expect(densityCandidatePowersFrom(place({ factions: [] }))).toEqual([]);
+  });
+
+  it('⭐ R7/R17: thickening mints the house AND its first named figure in ONE act', () => {
+    // A town's envelope floor is above one seat, so this settlement is below its band.
+    const s = place({
+      factions: [house('The Crown', 'noble', 20, true)],
+      npcs: [member('Reeve', 'The Crown')],
+      institutions: [inst('Temple', 'Religious'), inst('Market', 'Economy'), inst('Granary', 'Economy')],
+    });
+    expect(factionEnvelopeForTier('town').min).toBeGreaterThan(1);
+    const out = run(s, 40);
+    expect(out.changed).toBe(true);
+    const next = out.settlementUpdates[0].settlement;
+    const seats = next.powerStructure.factions;
+    expect(seats).toHaveLength(2);
+    const risen = seats[1];
+    // R8 ordered it: economy carries the larger representation gap here.
+    expect(risen.category).toBe('economy');
+    expect(risen.materializedBy).toBe('density_cadence');
+    // ⛔ R17 — a faction mints WITH >= 1 NPC or does not mint at all. The founder is on
+    // the settlement's roster AND affiliated, so R18 cannot dissolve the house next tick.
+    expect(next.npcs).toHaveLength(2);
+    const founder = next.npcs[1];
+    expect(founder.factionAffiliation).toBe(risen.name);
+    expect(factionRosterOf(next, risen)).toHaveLength(1);
+    expect(out.newsEntries.map(e => e.impactKind)).toEqual(['faction_seat_formed']);
+    // The emergence takes NO draw: the same world mints the same founder id twice.
+    expect(run(s, 40).settlementUpdates[0].settlement.npcs[1].id).toBe(founder.id);
+  });
+
+  it('⭐⭐ R9 FOLDS AND MERGES — it never removes a person (STATE, NEVER FATE)', () => {
+    const seats = [
+      house('The Crown', 'noble', 20, true),
+      house('Strong House', 'economy', 15),
+      house('Weak House', 'religious', 2),
+    ];
+    // ⚠ EVERY house is crewed on purpose. An uncrewed one would be DISSOLVED by R18
+    // before the cadence ever looked at it — which is the two arms composing correctly,
+    // and would make this pin measure the wrong law. (It did, on the first run.)
+    const s = place({
+      tier: 'thorp', factions: seats,
+      npcs: [member('Reeve', 'The Crown'), member('Broker', 'Strong House'), member('Factor', 'Weak House')],
+    });
+    expect(factionEnvelopeForTier('thorp').max).toBeLessThan(3);
+    const out = run(s, 40);
+    const next = out.settlementUpdates[0].settlement;
+    expect(next.powerStructure.factions.map(f => f.name)).toEqual(['The Crown', 'Strong House']);
+    // The folded house's figure is RE-AFFILIATED, not removed: the roster count is
+    // unchanged and §817-Q8's always-affiliated invariant still holds.
+    //
+    // ⭐ THE ABSORBER IS THE STRONGEST REMAINING HOUSE, FULL STOP — and here that is the
+    // GOVERNMENT (standing 20 against 15). R14 exempts the ruling house from being
+    // FOLDED, not from taking people in, and a shrinking settlement consolidating toward
+    // its seat is the commonest shape the world has. One rule, no special case; ties
+    // break on the key so the absorbing house is the same on every device.
+    expect(next.npcs).toHaveLength(3);
+    expect(next.npcs[2].factionAffiliation).toBe('The Crown');
+    expect(next.npcs.every(n => next.powerStructure.factions.some(f => f.name === n.factionAffiliation)),
+      'a fold orphaned somebody — §817-Q8\'s always-affiliated invariant').toBe(true);
+    expect(out.newsEntries.map(e => e.impactKind)).toEqual(['faction_seat_folded']);
+  });
+
+  it('⛔ R14 AT THE WIRING: the government is never the house that folds, even as the weakest', () => {
+    // The convicting configuration — the ruling house has the LOWEST standing, which is
+    // exactly where a naive weakest-first fold would dissolve the government.
+    const s = place({
+      tier: 'thorp',
+      factions: [house('The Crown', 'noble', 1, true), house('Rich House', 'economy', 30),
+        house('Poor House', 'religious', 3)],
+      npcs: [member('Reeve', 'The Crown'), member('Banker', 'Rich House'), member('Curate', 'Poor House')],
+    });
+    const next = run(s, 40).settlementUpdates[0].settlement;
+    const names = next.powerStructure.factions.map(f => f.name);
+    expect(names, 'the density roll folded the government').toContain('The Crown');
+    expect(names).not.toContain('Poor House');
+  });
+
+  it('⭐ R7\'s CADENCE: one step per interval, on the metronome\'s own borrowed window', () => {
+    const s = place({
+      factions: [house('The Crown', 'noble', 20, true)],
+      npcs: [member('Reeve', 'The Crown')],
+      institutions: [inst('Temple', 'Religious'), inst('Market', 'Economy')],
+    });
+    const first = run(s, 40);
+    const after = first.settlementUpdates[0].settlement;
+    expect(after.powerStructure.densityStepTick).toBe(40);
+    // Inside the window the fabric holds still — "never an instant sprout".
+    for (let t = 41; t < 40 + DRIFT_REEMIT_COOLDOWN_TICKS; t += 1) {
+      const held = run(after, t);
+      expect(held.changed, `tick ${t} sprouted inside the cadence window`).toBe(false);
+    }
+    const next = run(after, 40 + DRIFT_REEMIT_COOLDOWN_TICKS);
+    expect(next.changed).toBe(true);
+    expect(next.newsEntries.map(e => e.impactKind)).toEqual(['faction_seat_formed']);
+  });
+
+  it('a v1 world takes no cadence step either — the whole lane is one gate', () => {
+    const s = place({
+      config: {}, factions: [house('The Crown', 'noble', 20, true)],
+      institutions: [inst('Temple', 'Religious'), inst('Market', 'Economy')],
+    });
+    const updates = updatesOf(s);
+    const out = advanceFactionDensity({ snapshot: snapOf(s), worldState: {}, settlementUpdates: updates, tick: 40, now: null });
+    expect(out.changed).toBe(false);
+    expect(out.settlementUpdates).toBe(updates);
+  });
+
+  it('⭐ THE TIER HOOK, both arms on ONE settlement: the stamp is the whole difference', () => {
+    // The `populationConserved` pin's own shape, because this is its precedent exactly.
+    const settlement = {
+      id: 'ashford', tier: 'hamlet', population: 380,
+      powerStructure: { factions: [], publicLegitimacy: { score: 60 } },
+      institutions: [],
+    };
+    const base = {
+      id: 'x', generatedAtTick: 4,
+      tierChange: { saveId: 'ashford', fromTier: 'hamlet', toTier: 'village', direction: 'promotion' },
+    };
+    const dark = applyTierOutcomeToSettlement(settlement, base);
+    const lit = applyTierOutcomeToSettlement(settlement, {
+      ...base, tierChange: { ...base.tierChange, densityBandCrossed: true },
+    });
+    // ⛔ THE DARK ARM MOVES NOT ONE BYTE OF THE FABRIC — object identity, not equality.
+    expect(dark.powerStructure).toBe(settlement.powerStructure);
+    expect(lit.powerStructure.densityStepTick).toBe(4);
+    expect(lit.powerStructure.factions, 'the stamp must add a clock, not rewrite the fabric')
+      .toBe(settlement.powerStructure.factions);
+    expect(lit.tier, 'the tier must still rise: only the clock is dispositioned').toBe('village');
+  });
+
+  it('the crossing clock actually delays the first emergence (the two halves compose)', () => {
+    const promoted = applyTierOutcomeToSettlement({
+      id: 'ashford', name: 'Ashford', tier: 'hamlet', population: 380, config: V2,
+      npcs: [member('Reeve', 'The Crown')],
+      institutions: [inst('Temple', 'Religious'), inst('Market', 'Economy')],
+      powerStructure: {
+        factions: [house('The Crown', 'noble', 20, true)], publicLegitimacy: { score: 60 },
+      },
+      economicState: { prosperity01: 0.6 },
+    }, {
+      id: 'x', generatedAtTick: 100,
+      tierChange: {
+        saveId: 'ashford', fromTier: 'hamlet', toTier: 'village',
+        direction: 'promotion', densityBandCrossed: true,
+      },
+    });
+    expect(run(promoted, 100).changed, 'a promotion sprouted a house in the same tick').toBe(false);
+    expect(run(promoted, 100 + DRIFT_REEMIT_COOLDOWN_TICKS).changed).toBe(true);
   });
 });

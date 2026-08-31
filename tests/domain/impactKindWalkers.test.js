@@ -86,6 +86,10 @@ const EXPECTED_VOICE = {
   // and npc_ladder precedents exactly). The explicit null IS the voice decision.
   faction_dissolved: null,
   faction_interregnum: null,
+  // §810.1 R7/R9's cadence beats join them for the same reason: a house rising or
+  // folding is a court beat that already names the house and the town in its own line.
+  faction_seat_formed: null,
+  faction_seat_folded: null,
   faction_capture: null, field_battle: null, generosity_credit_default: null,
   generosity_purchase: null, generosity_refuge: null, generosity_refusal: null,
   generosity_trade_overture: null, harvest: null, hierarchy_cascade: null, hungry_gap: null,

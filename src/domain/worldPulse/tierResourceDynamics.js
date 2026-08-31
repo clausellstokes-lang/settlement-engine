@@ -39,6 +39,10 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 // tier transition is still authored here and nowhere else. Dark (`demographicsEnabled`
 // absent, the virtual default) the input is not even computed.
 import { demographicsActive, tierViabilityOf } from './demographicsRates.js';
+// §810 R5's version gate, read HERE (where the settlement and the rules both are) rather
+// than at the applier, which sees neither the rules nor a reason to carry the density
+// family in its first-paint import closure.
+import { rollsRegisterVii } from '../../generators/density/densityLaw.js';
 
 // Minimum pressure for the city+ depletion floor to fire. The tier branch used to
 // emit depletion candidates regardless of pressure, so a quiescent zero-pressure
@@ -198,6 +202,22 @@ function tierCandidate(item, drift, tick, rules) {
   // legacy unconserved promotion mint, which a golden depends on; present means the
   // promotion raises the tier and touches nobody's head count.
   const populationConserved = rules.demographicsEnabled === true;
+  // ── §810.1 R7, STAMPED ON THE OUTCOME BY THE SAME PRECEDENT, ONE LINE ABOVE ──────
+  // R7: "when a settlement crosses a tier boundary, the political fabric THICKENS
+  // toward the new tier's band at a slow rolled cadence — one emergence per interval,
+  // NEVER AN INSTANT SPROUT". The cadence itself lives in the pulse's density lane; what
+  // the CROSSING owes it is the moment to start counting from, so a settlement that took
+  // a cadence step two ticks ago does not sprout a house the tick after it is promoted.
+  //
+  // It rides the outcome for the reason `populationConserved` does and for one more:
+  // tierOutcomeApply.js is a deliberately dependency-light leaf whose whole import list
+  // lands in the first-paint closure, and a version read there would put the density
+  // family in that closure to answer a question this mint can already answer.
+  //
+  // A CONDITIONAL KEY, ABSENT WHEN DARK — not `false`. The dark path's tierChange is
+  // serialized into pulseHistory and a frozen golden hashes it, so an always-present key
+  // would move every dark campaign's bytes. Absent is what v1 looks like.
+  const densityBandCrossed = rollsRegisterVii(item?.settlement?.config);
   const chance = clamp01(0.18 + (drift.streak - minimum + 1) * 0.13 + drift.severity * 0.24);
   return {
     id: `candidate.tier.${drift.direction}.${stablePart(item.id)}.${tick}`,
@@ -231,6 +251,7 @@ function tierCandidate(item, drift, tick, rules) {
       toTier: drift.toTier,
       direction: drift.direction,
       ...(populationConserved ? { populationConserved: true } : {}),
+      ...(densityBandCrossed ? { densityBandCrossed: true } : {}),
     },
     proposalPayload: {
       kind: 'tier_change',

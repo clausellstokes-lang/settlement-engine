@@ -333,10 +333,31 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
   // so the chronicle/audit surfaces can see it instead of an invisible population jump.
   const floorBump = mints ? Math.max(0, nextPopulation - currentPopulation) : 0;
 
+  // ── §810.1 R7: THE CROSSING RESTARTS THE FABRIC'S CLOCK ──────────────────────
+  // "the political fabric THICKENS toward the new tier's band at a slow rolled cadence
+  // — one emergence per interval, NEVER AN INSTANT SPROUT." The cadence itself belongs
+  // to the pulse's density lane; what a crossing owes it is the moment to count from,
+  // so a settlement that happened to take a step days ago does not sprout a house the
+  // tick after it is promoted. The clock lives INSIDE powerStructure — beside the fabric
+  // whose pace it sets — so this writes no new top-level settlement key and the DM
+  // SHIFT_TIER verb's frozen undo field list needs no amendment.
+  //
+  // The stamp rides on the OUTCOME for the reason `populationConserved` does: this
+  // applier sees only (settlement, outcome), may run many ticks after the candidate
+  // fired, and never sees the rules. Absent — every v1 world, and the DM SHIFT_TIER
+  // verb, which carries no stamp — ⇒ not one byte moves here, which is what keeps every
+  // pre-density golden identical.
+  const densityBandCrossed = outcome.tierChange.densityBandCrossed === true;
+  const crossingTick = outcome.generatedAtTick ?? outcome.tick ?? null;
+  const fabricClock = densityBandCrossed && Number.isFinite(Number(crossingTick))
+    ? { powerStructure: { ...(settlement.powerStructure || {}), densityStepTick: Number(crossingTick) } }
+    : {};
+
   return {
     ...settlement,
     tier: toTier,
     population: nextPopulation,
+    ...fabricClock,
     ...(floorBump > 0 ? {
       populationHistory: [
         ...(Array.isArray(settlement.populationHistory) ? settlement.populationHistory.slice(-11) : []),
