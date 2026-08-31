@@ -435,13 +435,24 @@ export const WR6B_WAR_TREASURY_COUPLINGS = Object.freeze([
  * `=== true` idiom, and every dark path returns the ONE frozen EMPTY array — the same
  * reference every time — so the choke's byte-identity pin survives by construction and this
  * coupling cannot speak at all.
+ *
+ * ⛔ THE RECEIPT ADDRESS IS STATE-ROOTED, AND THAT WAS EARNED RATHER THAN ASSUMED. The
+ * obvious address for a choke pass is the candidate it decorates — but a candidate is
+ * in-flight, not state, and `couplingReceiptSample` rejects any root that is neither a state
+ * root nor a returned read. The returned-read escape was available and is REFUSED here: that
+ * roster is FROZEN and shrink-only (seam SC-9) precisely so a new row cannot hide behind an
+ * unsampleable address, and this row would have been the fifth. The held decision genuinely
+ * persists: `applyWorldPulse` mints a proposal with `outcome: clone(outcome)`, so the whole
+ * `anticipatedReaction` block rides onto `worldState.proposals[].outcome` and is sampleable
+ * from state. The pass excludes `state_only` candidates, which is what keeps that branch
+ * reachable — a mechanical refresh is restored to `auto` before it ever gets there.
  */
 export const WR6C_ANTICIPATED_REACTION_CASUS_COUPLING = couplingRow({
   couplingId: 'CPL-19.GRAMMAR_TO_INFO.WR-6c.anticipated_reaction_casus',
   pairId: 'CPL-19',
   direction: 'GRAMMAR→INFO',
   read: 'src/domain/worldPulse/anticipatedReactions.js#reactionOf.holdsCompactOver',
-  receiptField: 'candidate[applyMode=proposal].anticipatedReaction.{heldBy,confidence01,band,casus}',
+  receiptField: 'worldState.proposals[status=pending].outcome.anticipatedReaction.{heldBy,confidence01,band,casus}',
   counterforce: 'src/domain/worldPulse/anticipatedReactions.js#heldBackBy',
   flags: ['foreignSeatEnabled'],
   owningVolume: 'WAR',
