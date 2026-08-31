@@ -38,8 +38,13 @@ import { RAZING_ROADS, razingOutcomeIdFor } from '../../src/domain/worldPulse/ra
 import { stablePart } from '../../src/domain/worldPulse/stablePart.js';
 
 const IDS = ['soak-a', 'soak-b', 'soak-c'];
+// ⚠ THE DEATH STAMP IS THE ENGINE'S OWN SPELLING, and the fixture has to be, or this
+// whole channel proves nothing. It read `{ died: true }` — a shape no source file writes,
+// invented here and nowhere else — which made the annihilation arm below pass against a
+// field the real harness never produces. `config.lifecycleDiedAtTick` is what the
+// settlement lifecycle mover actually stamps, and what the soak reads for its own flags.
 const saves = (ids = IDS, died = []) => ids.map((id) => ({
-  id, settlement: died.includes(id) ? { died: true } : {},
+  id, settlement: died.includes(id) ? { config: { lifecycleDiedAtTick: 12 } } : {},
 }));
 
 /** A war-open outcome, spelled exactly as warDeployment.js:1204 mints it. */
@@ -121,6 +126,27 @@ describe('WR-9d — the war convergence collector', () => {
     expect(sum(observation.endingsMix) + sum(observation.endingsUnclassified))
       .toBe(census.closedWars);
     expect(census.closedWars).toBe(2);
+  });
+
+  it('N3b — the PHANTOM death shape earns nothing, which is what N3 could not see', () => {
+    // The negative control for the spelling repair. `settlement.died` was the shape this
+    // collector read and no source file ever wrote; a fixture is the only place it ever
+    // existed. Feeding it now must produce NO annihilation, or the fixture is once again
+    // proving itself rather than the engine.
+    const phantom = (n, outcomes) => observeWarConvergenceYear({
+      year: n,
+      tick: n * TICKS_PER_YEAR,
+      result: { worldState: { tick: n * TICKS_PER_YEAR, deployments: {} }, selected: outcomes, pulseRecord: {} },
+      saves: IDS.map((id) => ({ id, settlement: id === 'soak-b' ? { died: true } : {} })),
+    });
+    const { observation } = buildWarConvergenceObservation({
+      yearly: [
+        phantom(1, [openOutcome('soak-a', 'soak-b', 4)]),
+        phantom(2, [closeOutcome('soak-a', 'soak-b', 56)]),
+      ],
+    });
+    expect(observation.endingsMix.annihilation).toBe(0);
+    expect(observation.endingsUnclassified.no_terminal_evidence).toBe(1);
   });
 
   it('counts a war that opens AND closes inside one year — the ledger census could not', () => {

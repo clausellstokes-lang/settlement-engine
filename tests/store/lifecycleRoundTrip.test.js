@@ -486,6 +486,10 @@ function richWorldStateRaw() {
           closed: true,
           closeRoad: 'conquest',
           terminalOutcomes: [{ id: 'world_outcome.conquest.kelby.9', candidateType: 'conquest', targetSaveId: 'kelby', tick: 9 }],
+          // W-MEM-P1: the annihilation channel, which had a reader and no producer at
+          // all until this train. It rides the fact block, so it is exactly the shape
+          // that would ghost on a lifecycle path if the normalizer's allowlist forgot it.
+          loserDied: true,
         },
         victorId: 'ashford',
         territorialOutcomes: [{ settlementId: 'kelby', kind: 'occupied', occupierId: 'ashford', tick: 9 }],

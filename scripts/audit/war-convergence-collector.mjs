@@ -111,7 +111,7 @@ export const CHANNEL_COVERAGE = Object.freeze({
   attackerId: 'filled — reconstructed from the outcome id prefix',
   defenderId: 'filled — reconstructed from the outcome id prefix',
   terminalOutcomes: 'filled — conquest and razing outcomes accumulated across every interior tick',
-  loserDied: 'filled — the defender save died flag',
+  loserDied: 'filled — the engine settlement death stamp, config.lifecycleDiedAtTick',
   treatyWritten: 'filled — the treaty ledger, keyed by the real treatyPairKey minter',
   peaceReason:
     'unfilled — no peace reason reaches the composed year result; warTermination publishes bands and a deciding term, not the reason token classifyWarEnding reads',
@@ -270,9 +270,18 @@ export function observeWarConvergenceYear({ year, tick, result, saves }) {
     .map((raw) => asText(asRecord(raw).decidingTerm))
     .filter((term) => WAR_TERMINATION_DECIDING_TERM_KEYS.includes(term));
 
+  // ⛔ THE SPELLING IS THE WHOLE FACT, AND IT WAS WRONG. This read was `settlement.died`,
+  // a field NOTHING in the tree ever writes — the only site that ever set it was this
+  // collector's own fixture, so `loserDied` was false for every war in every real soak and
+  // the `annihilation` ending was unreachable in the census that exists to measure ending
+  // coverage. The engine's death stamp is `config.lifecycleDiedAtTick`, dual-written onto
+  // the regen-surviving `_config` twin by the settlement lifecycle mover — and the soak
+  // harness that FEEDS this collector already reads exactly that for its own died flags
+  // (whole-world-soak.mjs, `yearlyDiedFlags`). Two consumers, one harness, one fact, two
+  // spellings, and the phantom one was the arm that graded coverage.
   const diedIds = (Array.isArray(saves) ? saves : [])
     .map((raw) => asRecord(raw))
-    .filter((save) => asRecord(save.settlement).died === true)
+    .filter((save) => Number.isFinite(Number(asRecord(asRecord(save.settlement).config).lifecycleDiedAtTick)))
     .map((save) => String(save.id ?? ''))
     .filter((id) => id !== '');
 
