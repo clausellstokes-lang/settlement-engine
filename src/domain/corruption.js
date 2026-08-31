@@ -52,6 +52,12 @@ const FLAW_VECTOR = Object.freeze({
 
 export const CORRUPTIBLE_FLAWS = Object.freeze(Object.keys(FLAW_VECTOR));
 
+/** The closed vocabulary of corruption VECTORS — derived from the flaw table's own
+ *  values, so it can never disagree with the map it summarises. W-LIVES L5 validates
+ *  a drifted vice's vector against this rather than defaulting an unknown word.
+ *  @type {readonly string[]} */
+export const CORRUPTION_VECTORS = Object.freeze([...new Set(Object.values(FLAW_VECTOR))].sort());
+
 /** @param {unknown} flaw */
 export function isCorruptibleFlaw(flaw) {
   if (!flaw) return false;
@@ -79,6 +85,48 @@ export function npcCorruptibleFlaw(npc) {
   return null;
 }
 
+/**
+ * ⭐ W-LIVES L5 — THE BANDED-DEPTH DOOR (DESIGN_W_LIVES §4, F2, F13).
+ *
+ * §4 makes this LOAD-BEARING under a full paradigm, in its own words: "latent greed
+ * in everyone must not make everyone corruptible". A chart lets every soul carry a
+ * little of every vice, so eligibility can no longer be mere presence — it has to be
+ * DEPTH, and only a vice at or past a signed band opens a door.
+ *
+ * ⚠ THIS FUNCTION READS NO CHART, AND THAT IS THE DESIGN, NOT A GAP. `corruption.js`
+ * is an EAGER first-paint module (see the header): importing `characterDrift.js` or
+ * the L5 consumer seam here would drag the whole W-LIVES stack into the entry's
+ * static closure and undo the FP-G3 reclaim this file exists downstream of. So the
+ * CALLER resolves the depth — `characterConsumers.corruptibleAxisByDepth`, which
+ * owns both of pack row 13(a)'s thresholds and the seven-axis reach — and hands the
+ * answer in as a word.
+ *
+ * ⚠⚠ AND IT IS ADDITIVE, NEVER SUBTRACTIVE. A soul the legacy word gate already
+ * made corruptible stays corruptible whatever the chart says. "Becoming reachable is
+ * the endpoint of a long arc" and an arc does not run backwards through a gate; a
+ * depth read that could CLOSE a door would also silently un-corrupt existing
+ * campaigns, which is a live behaviour change nobody signed.
+ *
+ * `driftedVice` ABSENT ⇒ exactly `npcCorruptibleFlaw`. That is every caller today.
+ *
+ * ⚠ IT RETURNS A VECTOR, NOT A FLAW, AND THE TWO ARE DIFFERENT VOCABULARIES. A
+ * caller that took a flaw word from one arm and a vector word from the other and
+ * then ran BOTH through `corruptionVectorForFlaw` would silently record a
+ * `fear`-drifted soul as `greed`, because that helper defaults an unmapped word.
+ * An unknown drifted vector is REFUSED against `CORRUPTION_VECTORS` rather than
+ * defaulted — the fail-closed direction on a gate.
+ *
+ * @param {import('./settlement.schema.js').SimNpc} npc
+ * @param {string|null} [driftedVector] the vector a deep drifted vice opens
+ * @returns {string|null} the corruption vector that opens the door, else null
+ */
+export function npcCorruptibleVector(npc, driftedVector) {
+  const authored = npcCorruptibleFlaw(npc);
+  if (authored) return corruptionVectorForFlaw(authored);
+  const drifted = typeof driftedVector === 'string' ? driftedVector.trim().toLowerCase() : '';
+  return CORRUPTION_VECTORS.includes(drifted) ? drifted : null;
+}
+
 /** True when the NPC carries a steady TEMPERAMENT (the personality.dominant
  *  slot). A temperament makes the NPC harder for the world-pulse sim to turn (it
  *  does NOT, on its own, make them corruptible — that requires a flaw).
@@ -95,9 +143,13 @@ export function npcHasTemperament(npc) {
  *                                       (a real, strictly-lower-but-positive chance)
  *  This governs ONLY the background sim. The manual "Impose corruption" DM
  *  override (mutate.js imposeCorruption) does NOT consult this — it turns any NPC.
- *  @param {import('./settlement.schema.js').SimNpc} npc @returns {number} a factor in [0, 1] */
-export function corruptibility(npc) {
-  if (!npcCorruptibleFlaw(npc)) return 0;
+ *  ⭐ W-LIVES L5: `driftedVector` is the banded-depth door (see npcCorruptibleVector).
+ *  ABSENT ⇒ this is exactly the pre-car function, which is every caller today.
+ *  @param {import('./settlement.schema.js').SimNpc} npc
+ *  @param {string|null} [driftedVector]
+ *  @returns {number} a factor in [0, 1] */
+export function corruptibility(npc, driftedVector) {
+  if (!npcCorruptibleVector(npc, driftedVector)) return 0;
   return npcHasTemperament(npc) ? CORRUPTION_TUNING.temperamentSteadiness : 1;
 }
 

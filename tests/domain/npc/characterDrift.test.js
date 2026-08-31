@@ -425,6 +425,21 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
     return out;
   }
 
+/**
+ * ⚠⚠ COMMENTS ARE STRIPPED BEFORE ANY CLOSURE SCAN, AMENDED BY CAR L5, AND IT IS A
+ * SHARPENING RATHER THAN A LOOSENING. An IMPORT is a dependency; a CITATION is not.
+ * L5's consumer seam is documented by name in the files that consume it — and in
+ * `corruption.js`, whose comment says in as many words that it must NOT import it —
+ * so a raw substring scan convicted three files for explaining themselves, and would
+ * have paid for the closure claim by making the code less legible. Exactly L4's own
+ * lesson one car earlier, when a substring ban on `simulationRules` had to become a
+ * DEREFERENCE ban because the catalog cites its own proof.
+ *
+ * The claim is unchanged and is asserted on the CODE.
+ * @param {string} text
+ */
+const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
   test('the drift family has exactly ONE production door, and the WRITERS stay sealed', () => {
     // AMENDED BY CAR L3, which is the act this pin was written to meet: its own
     // comment said a red here "is the funnel car's act". The claim is unchanged —
@@ -481,26 +496,26 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
     const outside = files.filter((file) => !FAMILY.some((member) => file.endsWith(member)));
     // STEP 1: the ONLY thing outside the family that names drift is the door.
     expect(outside
-      .filter((file) => /characterDrift/.test(readFileSync(file, 'utf8')))
+      .filter((file) => /characterDrift/.test(stripComments(readFileSync(file, 'utf8'))))
       .map((file) => relative(REPO_ROOT, file))).toEqual([DOOR]);
     // STEP 1b, the claim that now carries the darkness: NOTHING outside the family
     // — the door included — may name a drift WRITER. A read that cannot be followed
     // by a write is a read of a map nobody can fill.
     expect(files
       .filter((file) => !FAMILY.some((member) => file.endsWith(member)))
-      .filter((file) => /applyAxisDrift|writeAxisDrift/.test(readFileSync(file, 'utf8')))
+      .filter((file) => /applyAxisDrift|writeAxisDrift/.test(stripComments(readFileSync(file, 'utf8'))))
       .map((file) => relative(REPO_ROOT, file))).toEqual([]);
     // STEP 4: and the door's own importers are the enumerated three.
     expect(files
       .filter((file) => !file.endsWith('characterConsumers.js'))
-      .filter((file) => /characterConsumers/.test(readFileSync(file, 'utf8')))
+      .filter((file) => /characterConsumers/.test(stripComments(readFileSync(file, 'utf8'))))
       .map((file) => relative(REPO_ROOT, file)).sort()).toEqual(DOOR_CONSUMERS);
     // STEP 2: and nothing outside the family names the funnel either, so there is
     // no path INTO the family at all. If this reds, a source adapter was wired
     // early — car L4's act, and it must arrive with the flag door TE-VIRT-1 owes
     // and its own dormancy proof.
     expect(outside
-      .filter((file) => /livedExperience/.test(readFileSync(file, 'utf8')))
+      .filter((file) => /livedExperience/.test(stripComments(readFileSync(file, 'utf8'))))
       .map((file) => relative(REPO_ROOT, file))).toEqual([]);
     // STEP 3, added by car L4: and nothing outside the family names the reputation
     // read either. ⚠ STILL EMPTY AFTER L5, and that is a real fact about the car:
@@ -509,7 +524,7 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
     // production reader consumes `knownCharacterOf` yet. The KNOWN read's first
     // consumer is the vetting band's caller and O2's acceptance door.
     expect(outside
-      .filter((file) => /knownCharacter/.test(readFileSync(file, 'utf8')))
+      .filter((file) => /knownCharacter/.test(stripComments(readFileSync(file, 'utf8'))))
       .map((file) => relative(REPO_ROOT, file))).toEqual([]);
     // anchored: the family members really are present, so the closure is over a
     // real set rather than passing because the names match nothing.

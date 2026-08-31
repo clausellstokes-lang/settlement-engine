@@ -633,13 +633,36 @@ describe('DARK BY CONSTRUCTION — the closure, amended for this car', () => {
     expect(importers).toEqual([]);
   });
 
+/**
+ * ⚠⚠ COMMENTS ARE STRIPPED BEFORE ANY CLOSURE SCAN, AMENDED BY CAR L5, AND IT IS A
+ * SHARPENING RATHER THAN A LOOSENING. An IMPORT is a dependency; a CITATION is not.
+ * L5's consumer seam is documented by name in the files that consume it — and in
+ * `corruption.js`, whose comment says in as many words that it must NOT import it —
+ * so a raw substring scan convicted three files for explaining themselves, and would
+ * have paid for the closure claim by making the code less legible. Exactly L4's own
+ * lesson one car earlier, when a substring ban on `simulationRules` had to become a
+ * DEREFERENCE ban because the catalog cites its own proof.
+ *
+ * The claim is unchanged and is asserted on the CODE.
+ * @param {string} text
+ */
+const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
   test('⭐ NO PRODUCTION CALLER: nothing in src imports the sources or the known read', () => {
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
     const importers = files
       .filter((file) => !/(livedExperienceSources|knownCharacter)\.js$/.test(file))
-      .filter((file) => /livedExperienceSources|knownCharacter/.test(readFileSync(file, 'utf8')))
+      .filter((file) => /livedExperienceSources|knownCharacter/.test(stripComments(readFileSync(file, 'utf8'))))
       .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'));
     expect(importers).toEqual([]);
+  });
+
+  test('⭐ AND THE STRIP DOES NOT BLIND IT — a planted import is still caught', () => {
+    // The anti-vacuity control the strip owes: a scan that stopped seeing things
+    // would report the same empty list forever.
+    expect(stripComments("import { x } from './knownCharacter.js';")).toContain('knownCharacter');
+    expect(stripComments('// a comment naming knownCharacter\nconst a = 1;')).not.toContain('knownCharacter');
+    expect(stripComments('/** a block naming livedExperienceSources */\nconst a = 1;')).not.toContain('livedExperienceSources');
   });
 
   test('the sources leaf mints NO flag of its own and writes NO world state', () => {
