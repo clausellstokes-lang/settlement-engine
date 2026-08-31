@@ -608,6 +608,14 @@ function vassalageSeat(worldState, snapshot, sid, expectedPatronId) {
   /** @type {{ patronId: string, relState: Record<string, unknown> } | null} */
   let best = null;
   for (const rawEdge of edges) {
+    // ⛔ A NULL ELEMENT IS NOT AN EMPTY EDGE, AND THIS LEAF PROMISED IT WOULD NOT CRASH.
+    // `normalizeRelationshipEdge(edge = {})` defaults only on `undefined`, so a literal
+    // `null` in the edge array slips past the default and throws on `.relationshipType` —
+    // and this file's own header promises "INERT-NOT-CRASH on absent/garbage ledgers". Found
+    // by SEAT-4's garbage-ledger arm rather than by a reader; the seat resolver is now
+    // reached from three passes (the seat books, the primacy axis, the reaction forecast),
+    // and a throw here takes a whole pulse down rather than degrading one read.
+    if (!rawEdge || typeof rawEdge !== 'object') continue;
     const edge = normalizeRelationshipEdge(rawEdge);
     const s = getRelationshipSettlements(edge);
     const from = String(s.from ?? '');

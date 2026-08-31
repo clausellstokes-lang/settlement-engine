@@ -10,6 +10,7 @@ import { normalizeSimulationRules, politicalAutonomyOf } from './simulationRules
 import { governBirth, computeLowestPendingClass, dramaClassOf } from './narrativeTempo.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { applyForeignPrimacy } from './foreignPrimacy.js';
+import { applyAnticipatedReactions } from './anticipatedReactions.js';
 import { classifyRecurringConditionCandidate } from './conditionRefreshRecordMode.js';
 import {
   admitGuaranteedProposalOutcomes,
@@ -639,7 +640,14 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
   // ⛔ IT RETURNS THE SAME ARRAY REFERENCE WHEN DARK, so this line adds nothing
   // to the byte-identity the choke's own pin asserts — the reference-preserving
   // discipline the map above keeps is kept by construction rather than re-earned.
-  const routed = applyForeignPrimacy(autonomyRouted, snapshot);
+  // W-SEAT D5 (SEAT-4): and then the court's own FORECAST — a major decision it believes
+  // will bring an answer it cannot afford is HELD BACK rather than taken, routed to the
+  // authority lane carrying a typed record of whose answer was feared. Same contract as the
+  // primacy pass above: the SAME ARRAY REFERENCE when dark or when nothing is held, so the
+  // byte-identity this choke's own pin asserts is kept by construction. `isMajorOutcome` is
+  // a real invocation gate HERE in a way it cannot be at the strategy chooser, which has no
+  // outcome yet to classify.
+  const routed = applyAnticipatedReactions(applyForeignPrimacy(autonomyRouted, snapshot), snapshot, isMajorOutcome);
 
   return resolveCandidateConflicts(suppressEquivalentPendingProposalCandidates(routed, snapshot?.worldState), context.budgets || {});
 }
