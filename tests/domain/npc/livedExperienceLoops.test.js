@@ -296,7 +296,7 @@ describe('THE ADAPTER CANNOT DRIVE THE LOOP FASTER THAN THE CADENCE', () => {
     const out = SOURCE_ADAPTER_OF.dwell_milieu.read({
       tick: 40 * AMBIENT_CADENCE_TICKS,
       worldState: {},
-      snapshotItems: [{ id: TOWN, save: { seed: SEED }, settlement: { npcs: [held] } }],
+      homes: [{ placeId: TOWN, placeSeed: SEED, cast: [held] }],
       milieuVectorOf: () => [{ axisId: 'MERCY', pole: 'vice', band: 'faint' }],
     });
     expect(out.length).toBe(1);
