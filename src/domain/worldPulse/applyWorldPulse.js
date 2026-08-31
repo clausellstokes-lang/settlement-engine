@@ -311,6 +311,22 @@ export function applyWorldPulseOutcomes({
   const proposals = [];
   const newsEntries = [];
   const envoyEvidence = [];
+  /** @type {Array<Record<string, unknown>>} */
+  const rulingEvidence = [];
+  // ⭐ WR-5's TYPED FACTS ARE WANTED TWICE NOW, AND UNTIL THIS CAR ONLY ONE CONSUMER
+  // EVER SAW THEM. The news projection has always spent the array on the spot; the
+  // concluded-war record needs the governed FAMILY that closed the war, and because the
+  // typed kind was consumed and dropped at this boundary, `fact.seatTransitionFamily`
+  // had a reader in the ending classifier and no producer anywhere in the estate.
+  // Recovering it by reading the rendered sentence back is exactly what that record's
+  // own no-prose law forbids, so the fix is here, at the seam, where the kind is still
+  // a token. ONE FUNNEL: the two consumers cannot drift, and a future call site cannot
+  // feed the reader without feeding the ledger.
+  /** @param {Array<Record<string, unknown>>} evidence */
+  const publishRuling = (evidence) => {
+    rulingEvidence.push(...evidence);
+    newsEntries.push(...warRulingNewsEntries({ evidence, snapshot, now }));
+  };
   const lapsedOutcomeIds = [];
   // Direct state-only headlines stay off every public/raw-news surface, but the
   // rumor/belief plane historically consumed those entries as simulation input.
@@ -578,11 +594,7 @@ export function applyWorldPulseOutcomes({
         continue;
       }
       if (!peaceDecision.accepted) {
-        newsEntries.push(...warRulingNewsEntries({
-          evidence: peaceDecisionRulingEvidence({ outcome, decision: peaceDecision, tick }),
-          snapshot,
-          now,
-        }));
+        publishRuling(peaceDecisionRulingEvidence({ outcome, decision: peaceDecision, tick }));
         const priced = applyWarPeaceRefusal({
           worldState: state,
           settlementUpdates: [...settlementUpdates.values()],
@@ -616,11 +628,7 @@ export function applyWorldPulseOutcomes({
             if (entry?.saveId != null) settlementUpdates.set(String(entry.saveId), entry);
           }
         }
-        newsEntries.push(...warRulingNewsEntries({
-          evidence: priced.evidence,
-          snapshot,
-          now,
-        }));
+        publishRuling(priced.evidence);
         autoApplied.push({
           ...outcome,
           candidateType: 'peace_refused',
@@ -675,11 +683,7 @@ export function applyWorldPulseOutcomes({
         lapsedOutcomeIds.push(String(outcome.id || ''));
         continue;
       }
-      newsEntries.push(...warRulingNewsEntries({
-        evidence: peaceDecisionRulingEvidence({ outcome, decision: peaceDecision, tick }),
-        snapshot,
-        now,
-      }));
+      publishRuling(peaceDecisionRulingEvidence({ outcome, decision: peaceDecision, tick }));
       state = applyWarDecisionPolitics({
         worldState: state, snapshot,
         actorId: peaceDecision.offererId,
@@ -1045,14 +1049,7 @@ export function applyWorldPulseOutcomes({
             const beforeTransition = state;
             state = appendNpcLadderSeatTransition(state, sid, seatTransition);
             if (state !== beforeTransition) {
-              newsEntries.push(...warRulingNewsEntries({
-                evidence: governmentTransitionRulingEvidence({
-                  transition: seatTransition,
-                  outcome,
-                }),
-                snapshot,
-                now,
-              }));
+              publishRuling(governmentTransitionRulingEvidence({ transition: seatTransition, outcome }));
             }
           }
         }
@@ -1175,6 +1172,7 @@ export function applyWorldPulseOutcomes({
     ...(lapsedOutcomeIds.length ? { lapsedOutcomeIds } : {}),
     ...(rumorSeedEntries.length ? { rumorSeedEntries } : {}),
     ...(envoyEvidence.length ? { envoyEvidence } : {}),
+    ...(rulingEvidence.length ? { rulingEvidence } : {}),
   };
 }
 

@@ -12,10 +12,11 @@
  * still RECORDED, a war seals late rather than lying early, and a razing's road really
  * reconstructs — which it only does when the tick is resolved the way the estate spells it.
  */
+import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
 import { closeRoadFor, recordConcludedWars, warMemoryActive } from '../../src/domain/worldPulse/concludedWars.js';
-import { classifyWarEnding } from '../../src/domain/certification/warEndingClassifier.js';
+import { classifyWarEnding, RULER_CHANGE_ENDING_FAMILIES } from '../../src/domain/certification/warEndingClassifier.js';
 import { razingOutcomeIdFor } from '../../src/domain/worldPulse/razing.js';
 import { coalitionCallIdFor } from '../../src/domain/worldPulse/warCoalitionLedger.js';
 import { RESIDUE_STRIP_SITES } from '../../src/domain/worldPulse/pulseKernel.js';
@@ -321,6 +322,104 @@ describe('W-MEM-P1 — the annihilation channel finally has a producer', () => {
     const after = { ...before };
     expect(run({ rules: {}, worldState: after, diedAtOf: died(38) })).toBeNull();
     expect(JSON.stringify(after)).toBe(JSON.stringify(before));
+  });
+});
+
+describe('W-MEM-P2 — the seat-transition channel finally has a producer, for ALL FOUR families', () => {
+  // The charter priced this as "three of four families are discarded at the news
+  // boundary". Measured at the base it was worse: `fact.seatTransitionFamily` appeared
+  // nowhere in the writer at all, so the fourth family — whose facts DID reach the
+  // kernel — was never written either. Zero of four, not one.
+  const ruling = (kind, over = {}) => ({
+    kind, id: `ruling.${kind}`, tick: TICK, settlementId: 'ashford', counterpartId: 'kelby', ...over,
+  });
+  const factOf = (led) => /** @type {Record<string, unknown>} */ (wrote(led)['war.ashford.kelby.12.0'].fact);
+
+  test('every governed family lands, and each yields the ruler-change ending', () => {
+    for (const kind of RULER_CHANGE_ENDING_FAMILIES) {
+      const fact = factOf(run({ rulingEvidence: [ruling(kind)] }));
+      expect(fact.seatTransitionFamily, `${kind} must reach the record`).toBe(kind);
+      expect(classifyWarEnding({ ...fact, attackerId: 'ashford' }).ending).toBe('ruler_change');
+    }
+    // The denominator, asserted rather than assumed: four families, all covered above.
+    expect(RULER_CHANGE_ENDING_FAMILIES.length).toBe(4);
+  });
+
+  test('the ESCALATION twin is refused — same machinery, opposite fact', () => {
+    // successor_escalates_war is a court that changed hands and WIDENED the war. It is
+    // refused by the register itself, never by a substring test on the family name.
+    const fact = factOf(run({ rulingEvidence: [ruling('successor_escalates_war')] }));
+    expect(Object.prototype.hasOwnProperty.call(fact, 'seatTransitionFamily')).toBe(false);
+    expect(classifyWarEnding({ ...fact, attackerId: 'ashford' }).ending).not.toBe('ruler_change');
+  });
+
+  test('the match is by ADDRESS — another pair\'s succession is not this war\'s ending', () => {
+    const fact = factOf(run({
+      rulingEvidence: [ruling('successor_repudiates_war', { settlementId: 'briar', counterpartId: 'morrow' })],
+    }));
+    expect(Object.prototype.hasOwnProperty.call(fact, 'seatTransitionFamily')).toBe(false);
+  });
+
+  test('EITHER orientation matches — the court that changed hands sits on either side', () => {
+    expect(factOf(run({
+      rulingEvidence: [ruling('war_dissolved_by_verdict', { settlementId: 'kelby', counterpartId: 'ashford' })],
+    })).seatTransitionFamily).toBe('war_dissolved_by_verdict');
+  });
+
+  test('a half-addressed row cannot match — one named court is not a war', () => {
+    const fact = factOf(run({
+      rulingEvidence: [ruling('peace_party_overturns_warmonger', { counterpartId: '' })],
+    }));
+    expect(Object.prototype.hasOwnProperty.call(fact, 'seatTransitionFamily')).toBe(false);
+  });
+
+  test('with no evidence supplied the channel is ABSENT, not empty', () => {
+    const fact = factOf(run());
+    expect(Object.prototype.hasOwnProperty.call(fact, 'seatTransitionFamily')).toBe(false);
+  });
+
+  test('THE STAGED WATCH — a succession INSIDE the window still closes the record', () => {
+    // The court can change hands after the front is recalled; the recall and the
+    // succession are different ticks, so this channel needs the window as the treaty does.
+    const staged = wrote(run());
+    const sealed = wrote(recordConcludedWars({
+      worldState: world({ tick: TICK + 3, concludedWars: staged }), resolvedDeployments: [],
+      appliedOutcomes: [], newsEntries: [], tick: TICK + 3, rules: LIT, deferred: false,
+      rulingEvidence: [ruling('war_party_overturns_peacemaker')],
+    }))['war.ashford.kelby.12.0'];
+    expect(sealed.sealed).toBe(true);
+    expect(/** @type {Record<string, unknown>} */ (sealed.fact).seatTransitionFamily)
+      .toBe('war_party_overturns_peacemaker');
+  });
+
+  test('the watch is MONOTONE — the family does not vanish on a later empty tick', () => {
+    const withFamily = wrote(run({ rulingEvidence: [ruling('successor_repudiates_war')] }));
+    const later = recordConcludedWars({
+      worldState: world({ tick: TICK + 3, concludedWars: withFamily }), resolvedDeployments: [],
+      appliedOutcomes: [], newsEntries: [], tick: TICK + 3, rules: LIT, deferred: false,
+      rulingEvidence: [],
+    });
+    expect(/** @type {Record<string, unknown>} */ (
+      wrote(later)['war.ashford.kelby.12.0'].fact).seatTransitionFamily).toBe('successor_repudiates_war');
+  });
+
+  test('DARK STILL MEANS BYTE-IDENTICAL with evidence in hand', () => {
+    const before = world({ concludedWars: undefined });
+    const after = { ...before };
+    expect(run({ rules: {}, worldState: after, rulingEvidence: [ruling('successor_repudiates_war')] })).toBeNull();
+    expect(JSON.stringify(after)).toBe(JSON.stringify(before));
+  });
+
+  test('SP — the apply pass has exactly ONE ruling-news call site, and it is the funnel', () => {
+    // The habitat, not the instance. Three of these call sites existed and every one of
+    // them spent the typed array on the spot; a fourth was found while wiring the fix.
+    // With one funnel, a future site cannot feed the reader and starve the ledger — and
+    // this arm is what keeps that true, because nothing else in the tree connects them.
+    const source = readFileSync(
+      new URL('../../src/domain/worldPulse/applyWorldPulse.js', import.meta.url), 'utf8');
+    const calls = source.match(/warRulingNewsEntries\(/g) || [];
+    expect(calls.length, 'every WR-5 ruling must go through publishRuling').toBe(1);
+    expect(source).toContain('rulingEvidence.push(...evidence);');
   });
 });
 

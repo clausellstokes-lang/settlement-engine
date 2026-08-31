@@ -351,6 +351,38 @@ describe('WR-5 bilateral peace', () => {
     expect(second.newsEntries).toEqual([]);
   });
 
+  it('W-MEM-P2 — the typed WR-5 facts now SURVIVE the news boundary instead of dying at it', () => {
+    // Until this car the composers' arrays were spent on the news projection and
+    // dropped, so `fact.seatTransitionFamily` had a reader in the ending classifier and
+    // no producer anywhere. This is that boundary, EXECUTED through the whole apply pass.
+    const first = apply(fixture({ targetPopulation: 120, targetExhaustion: 0 }));
+    expect(Array.isArray(first.rulingEvidence)).toBe(true);
+    expect(first.rulingEvidence.length).toBeGreaterThan(0);
+    // ONE FUNNEL: every kind the reader was told is a kind the ledger was told, and
+    // vice versa. A future call site that fed one and not the other reds here.
+    const told = [...new Set(first.newsEntries.map((entry) => entry.impactKind))].sort();
+    const kept = [...new Set(first.rulingEvidence.map((row) => row.kind))].sort();
+    expect(kept).toEqual(told);
+    // Typed identities travel with the kind — the address the record matches a war by.
+    for (const row of first.rulingEvidence) {
+      expect(typeof row.kind).toBe('string');
+      expect(String(row.settlementId || '').length).toBeGreaterThan(0);
+    }
+  });
+
+  it('W-MEM-P2 CONTROL — a tick that rules on nothing carries no evidence key at all', () => {
+    // The absent-when-empty law: the key is omitted rather than present-and-empty, so a
+    // quiet tick's result is the same object shape it always was.
+    const f = fixture({ targetPopulation: 120, targetExhaustion: 0 });
+    const first = apply(f);
+    const secondSaves = f.saves.map((row) => (row.id === 'target'
+      ? { ...row, settlement: first.settlementUpdates.find((r) => r.saveId === 'target').settlement }
+      : row));
+    const second = apply(f, first.worldState, secondSaves, first.regionalGraph);
+    expect(second.newsEntries).toEqual([]);
+    expect(Object.prototype.hasOwnProperty.call(second, 'rulingEvidence')).toBe(false);
+  });
+
   it('charges patience only to an allied court actually co-besieging the offerer', () => {
     const ally = save('ally', 'Harbor', 2200);
     const bystander = save('bystander', 'Mere', 2200);

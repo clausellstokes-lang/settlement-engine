@@ -45,6 +45,38 @@ const T = SETTLEMENT_LIFECYCLE_TUNING;
 function num(v, fallback) {
   return typeof v === 'number' && Number.isFinite(v) ? v : fallback;
 }
+/**
+ * THE DEATH STAMP, READ THROUGH THE MODULE THAT WRITES IT.
+ *
+ * The tick a settlement's lifecycle ended, or null when it never did. This file is
+ * the stamp's ONE writer — it sets `config.lifecycleDiedAtTick` and its
+ * regen-surviving `_config` twin at terminal death, and deletes both at rebirth —
+ * so it is the honest home for the read as well.
+ *
+ * ⭐ THE ACCESSOR EXISTS BECAUSE A HAND-SPELLED PATH IS HOW THIS FIELD'S TWIN WAS
+ * LOST. The war-convergence census asked a settlement for `died`, a key nothing in
+ * the estate has ever written; it sat there being false for every war in every soak
+ * while the harness beside it read this stamp correctly. One exported reader is the
+ * cure for the habitat rather than for that one instance.
+ *
+ * Behaviour is IDENTICAL to the inline read it replaces: a finite number passes
+ * through unchanged, and anything else — absent, a string, NaN — answers null,
+ * which the one existing caller folds straight back to NaN.
+ *
+ * @param {unknown} settlement @returns {number|null}
+ */
+export function settlementDiedAtTick(settlement) {
+  // The receiver is spelled and NAMED exactly as the inline read it absorbs. The
+  // observed-shape detector grounds a read by a name prior over the shapes the corpus
+  // executed, and this key is already a listed finding in this file — because no seed
+  // ever runs a settlement to death, so the corpus has never SEEN the stamp its own
+  // engine writes. Preserving the spelling keeps that one row at one, and moves the
+  // register in neither direction.
+  const config = /** @type {{ lifecycleDiedAtTick?: number }} */ (asObject(settlement).config || {});
+  const stamp = config.lifecycleDiedAtTick;
+  return typeof stamp === 'number' && Number.isFinite(stamp) ? stamp : null;
+}
+
 /** @param {unknown} v @returns {Record<string, unknown>} */
 function asObject(v) {
   return v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Record<string, unknown>} */ (v) : {};
@@ -371,7 +403,7 @@ export function evaluateSettlementLifecycle(worldState, snapshot, pIndex, contex
         settlementTickStates[cid] = rest;
       }
       if (pendingLifecycle.has(cid)) continue;
-      const diedAt = num(/** @type {{ lifecycleDiedAtTick?: number }} */ (s.config || {}).lifecycleDiedAtTick, NaN);
+      const diedAt = settlementDiedAtTick(s) ?? NaN;
       // Generation-seeded ancients carry no death tick — always long fallow.
       const fallow = Number.isFinite(diedAt) ? tick - diedAt : T.RESETTLE_MIN_FALLOW;
       if (fallow < T.RESETTLE_MIN_FALLOW) continue;
