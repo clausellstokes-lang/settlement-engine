@@ -38,6 +38,9 @@ import {
 import {
   buildSettlementContentProvenance,
 } from '../domain/content/settlementContentProvenance.js';
+import {
+  buildLivingContentRoster,
+} from '../domain/content/livingContentRoster.js';
 import { createGenerationContext } from './generationContext.js';
 
 // Side-effect: registers all pipeline steps
@@ -148,6 +151,29 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
     );
     if (contentProvenance) {
       finalCtx.settlement.customContentProvenance = contentProvenance;
+    }
+    // ── THE INERT LIVING-CONTENT ROSTER (ODQ §866) ───────────────────────────
+    // DORMANT BY DEFAULT: `buildLivingContentRoster` returns null unless this
+    // world's own config carries `_livingContentLawVersion: 2`, so a v1 world —
+    // which is every world the product mints today — takes the same branch a
+    // run with no pack takes and this block writes not one byte.
+    //
+    // It sits HERE, beside the provenance receipt, for the same reason that
+    // receipt does: every RNG draw is finished by this line, so a roster can
+    // never perturb a seeded roll. It is also why the roster is built from the
+    // caller's `customContent` snapshot rather than from the settlement — it
+    // records what was IN SCOPE for the run, and deriving it from generator
+    // output would make it a second, weaker copy of the provenance receipt.
+    //
+    // ⛔ RECORDING, NOT ADOPTION. The roster never writes `settlement.factions`,
+    // `stressors`, `traditions` or `config.primaryDeitySnapshot`; see
+    // `livingContentRoster.js` for why that boundary is owner-gated.
+    const livingContentRoster = buildLivingContentRoster(
+      options.customContent || {},
+      finalCtx.settlement.config,
+    );
+    if (livingContentRoster) {
+      finalCtx.settlement.customContentRoster = livingContentRoster;
     }
   }
 
