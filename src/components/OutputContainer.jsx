@@ -721,7 +721,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // NO deity, nothing for a premium deity-free town). Never THEIRS' ungated
       // pantheon-leaking section.
       case 'war':        return <WarTab settlement={s} saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
-      case 'faith':      return <FaithTab settlement={s} publicDossier={publicDossier} />;
+      case 'faith':      return <FaithTab settlement={s} saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
       // Rumors & News — the trade-carrier rumor ledger, player-scrubbed; the
       // DM-truth reveal self-gates inside (premium owner, never playerView /
       // public dossier — the includeGroundTruth convention).

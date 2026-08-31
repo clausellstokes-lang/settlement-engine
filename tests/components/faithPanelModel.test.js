@@ -91,7 +91,7 @@ describe('faithPanelModel', () => {
         primaryDeitySnapshot: { name: 'Sun', rankAxis: 'major' },
         faithProfile: {
           deities: [
-            { deityRef: 'a', name: 'Sun', share: 60, standing: 'ascendant', legitimacy: 0.8, isPatron: true },
+            { deityRef: 'a', name: 'Sun', niche: 'peacelike:good', share: 60, standing: 'ascendant', legitimacy: 0.8, isPatron: true },
             { deityRef: 'b', name: 'Ash', share: 26, standing: 'established', legitimacy: 0.3, isPatron: false },
           ],
           contested: false, patronSecurity: 0.7, unaffiliated: 14,
@@ -111,6 +111,10 @@ describe('faithPanelModel', () => {
     expect(m.ranks).toHaveLength(2);
     expect(m.ranks[0].band.label).toBe('secure');       // 0.8
     expect(m.ranks[1].band.label).toBe('tenuous');      // 0.2
+    // §805 — the niche rides the rank row (the FAITH tab's occupancy table);
+    // a profile minted before the niche projection reads as an honest null.
+    expect(m.ranks[0].niche).toBe('peacelike:good');
+    expect(m.ranks[1].niche).toBeNull();
     expect(m.piety.trend).toBe('rising');               // 0.3 → 0.5
     expect(m.piety.bars).toHaveLength(3);               // authority / institutions / devotion
     expect(m.piety.amplifier.dir).toBe('up');

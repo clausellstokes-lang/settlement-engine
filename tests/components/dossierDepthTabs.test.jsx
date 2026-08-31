@@ -96,6 +96,70 @@ describe('FaithTab — the constitutional gate (free/anon see NO deity names)', 
   });
 });
 
+// ── §805 FAITH layout — the patron seat, niche occupancy, the realm pantheon ──
+const liveFaithTown = () => ({
+  id: 'home', name: 'Sunhold',
+  config: {
+    primaryDeitySnapshot: { name: 'Sunlord Aurelian', rankAxis: 'major' },
+    faithProfile: {
+      deities: [
+        { deityRef: 'a', name: 'Sunlord Aurelian', niche: 'peacelike:good', share: 60, standing: 'ascendant', legitimacy: 0.8, isPatron: true },
+        { deityRef: 'b', name: 'The Gloam', niche: 'warlike:evil', share: 25, standing: 'cult', legitimacy: 0.2, isPatron: false },
+      ],
+      contested: true, patronSecurity: 0.55, unaffiliated: 15,
+    },
+  },
+});
+const pantheonCampaign = () => ({
+  id: 'c-faith', settlementIds: ['home'],
+  worldState: { pantheon: { 'deity:sun': { seats: 2, wins: 1, losses: 0, tier: 'major' } } },
+});
+
+describe('FaithTab — the §805 layout (patron seat + niche occupancy + realm pantheon)', () => {
+  it('renders the patron seat with its legitimacy NOW, and the contested marker', () => {
+    useStore.__set({ auth: { tier: 'anon' } });
+    render(<FaithTab settlement={liveFaithTown()} />);
+    const seat = screen.getByTestId('faith-patron-seat');
+    expect(seat.textContent).toMatch(/Sunlord Aurelian holds the seat/);
+    expect(seat.textContent).toMatch(/secure/);           // legitimacy 0.8 band
+    expect(seat.textContent).toMatch(/rightful claim 80%/);
+    expect(seat.textContent).toMatch(/contested/i);
+  });
+
+  it('renders niche occupancy — who occupies which niche, one row per creed', () => {
+    useStore.__set({ auth: { tier: 'anon' } });
+    render(<FaithTab settlement={liveFaithTown()} />);
+    const rows = screen.getAllByTestId('faith-niche-row');
+    expect(rows).toHaveLength(2);
+    expect(rows[0].textContent).toMatch(/peacelike · good — Sunlord Aurelian \(patron\)/);
+    expect(rows[1].textContent).toMatch(/warlike · evil — The Gloam/);
+  });
+
+  it('a static embed (no live profile) renders NO fabricated seat or occupancy', () => {
+    useStore.__set({ auth: { tier: 'anon' } });
+    render(<FaithTab settlement={activePatronTown()} />);
+    expect(screen.getByTestId('faith-section')).toBeTruthy();
+    expect(screen.queryByTestId('faith-patron-seat')).toBeNull();
+    expect(screen.queryByTestId('faith-niches')).toBeNull();
+  });
+
+  it('the realm pantheon mounts for the premium DM alone (never playerView / public / anon)', () => {
+    useStore.__set({ auth: { tier: 'premium' }, campaigns: [pantheonCampaign()], savedSettlements: [] });
+    const first = render(<FaithTab settlement={liveFaithTown()} saveId="home" />);
+    expect(screen.getByTestId('faith-realm-pantheon')).toBeTruthy();
+    first.unmount();
+
+    useStore.__set({ auth: { tier: 'premium' }, campaigns: [pantheonCampaign()], savedSettlements: [] });
+    const second = render(<FaithTab settlement={liveFaithTown()} saveId="home" playerView />);
+    expect(screen.queryByTestId('faith-realm-pantheon')).toBeNull();
+    second.unmount();
+
+    useStore.__set({ auth: { tier: 'anon' }, campaigns: [pantheonCampaign()], savedSettlements: [] });
+    render(<FaithTab settlement={liveFaithTown()} saveId="home" />);
+    expect(screen.queryByTestId('faith-realm-pantheon')).toBeNull();
+  });
+});
+
 // ── §805 WAR tab — the epistemic constitution made legible ────────────────────
 const WAR_SAVES = [
   { id: 'home', settlement: { name: 'Homestead' } },

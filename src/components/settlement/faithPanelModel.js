@@ -170,6 +170,10 @@ export function faithPanelModel(settlement) {
         return {
           name: d.name, share: Math.round(num(d.share)), standing: d.standing,
           legitimacy, isPatron: !!d.isPatron, band: legitimacyBand(legitimacy),
+          // §805 — the NICHE the deity occupies (temperament:alignment, the
+          // religionState `nicheOf` token, projected verbatim by the pulse).
+          // Null for a profile minted before the niche projection existed.
+          niche: typeof d.niche === 'string' && d.niche ? d.niche : null,
         };
       })
     : [];
