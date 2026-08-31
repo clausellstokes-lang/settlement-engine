@@ -361,8 +361,10 @@ export function effectiveDescriptors({ words, npc, lens }) {
  * @param {Object} args
  * @param {unknown} args.npc
  * @param {CharacterLens|null|undefined} [args.lens]
- * @param {number} [args.desperation01]  0..1, the ES charter's own read; ABSENT ⇒ declared
- * @param {number} [args.disorder01]     0..1, `npcTraitPlane().c` lifted to 0..1; ABSENT ⇒ declared
+ * @param {unknown} [args.desperation01]  0..1, the ES charter's own read; anything that is
+ *        not a finite NUMBER is ABSENT and declared — `null`, `''`, `false` and `[]` all
+ *        coerce to a finite 0 and none of them is an answer
+ * @param {unknown} [args.disorder01]     0..1, `npcTraitPlane().c` lifted to 0..1; same rule
  * @returns {RiskRegister}
  */
 export function riskRegister({ npc, lens, desperation01, disorder01 }) {
@@ -382,9 +384,33 @@ export function riskRegister({ npc, lens, desperation01, disorder01 }) {
 
   /** @type {string[]} */
   const absent = [];
-  const hasDesperation = Number.isFinite(Number(desperation01));
+  // ⛔⛔ `typeof` BEFORE THE FINITE CHECK, AND THE PRODUCER IS THE LAST PLACE IT WAS
+  // MISSING — WHICH IS WHY THIS ONE WAS THE DANGEROUS ONE.
+  //
+  // This read was `Number.isFinite(Number(x))`. `Number(null)` is 0, `Number('')` is 0,
+  // `Number(false)` is 0 and `Number([])` is 0 — every one of them FINITE. So a caller
+  // with nothing to say was recorded as a caller who said ZERO, and the lie was
+  // INVISIBLE at both outputs: a supplied 0 and an absence produce the same `center`
+  // and the same `breadth`. The only place the two ever differed was `absent[]` — the
+  // list whose entire job is to tell a consumer "nobody asked" from "the answer is
+  // none", and the one field a passing test was least likely to look at.
+  //
+  // ⭐ THE SHAPE OF THIS BUG IS THE WHOLE POINT: BOTH CONSUMERS ALREADY GUARDED, AND
+  // THE PRODUCER DID NOT. `npcGoalBranches.branchedGoalsFor` types its `riskCenter`
+  // and says so in a comment naming this class as its "second sighting"; the
+  // acceptance supplier coerced through its own `finiteOrAbsent` before calling here.
+  // Two correct guards around one wrong one is exactly how a class survives being
+  // fixed twice — every caller was defended, and the chokepoint everyone reads was
+  // not. Curing it HERE is what makes the guards around it redundant rather than
+  // load-bearing (the acceptance supplier's has accordingly been retired: two
+  // spellings of one guard is the fork J-WR-10 forbids).
+  //
+  // `Number.isFinite` stays, and it is NOT redundant here the way the consumer's was:
+  // `typeof NaN === 'number'`, so the type test alone would admit NaN, and this is the
+  // guard that every other guard in the chain was relying on.
+  const hasDesperation = typeof desperation01 === 'number' && Number.isFinite(desperation01);
   if (!hasDesperation) absent.push('desperation01');
-  const hasDisorder = Number.isFinite(Number(disorder01));
+  const hasDisorder = typeof disorder01 === 'number' && Number.isFinite(disorder01);
   if (!hasDisorder) absent.push('disorder01');
   // DESPERATION PUSHES OUTWARD ONLY. A calm world is not the opposite of a desperate
   // one — it is the absence of the term, which is the neutral share, not a negative.

@@ -185,6 +185,51 @@ describe('THE RISK REGISTER (R6, R8)', () => {
     expect(riskRegister({ npc: {}, desperation01: 0 }).absent).toEqual(['disorder01']);
   });
 
+  test('⛔⛔ NULL IS NOT ZERO — every value that coerces to a finite 0 is still ABSENT', () => {
+    // ⭐⭐ THE ARM THIS TEST EXISTS FOR CANNOT BE SEEN FROM `center` OR `breadth`, AND
+    // THAT IS WHY THE BUG LIVED. The guard was `Number.isFinite(Number(x))`, and
+    // `Number(null)`, `Number('')`, `Number(false)` and `Number([])` are all a finite 0.
+    // Every one of them was therefore recorded as a SUPPLIED ZERO — and a supplied zero
+    // and an absence produce the SAME centre and the SAME breadth, so the only witness
+    // in the whole return value is `absent[]`.
+    //
+    // ⚠ A FIXTURE THAT CANNOT FIRE THE ARM PROVES NOTHING, so each value is driven
+    // through the register and the verdict is read off the one field that can see it,
+    // and the numeric outputs are asserted IDENTICAL at the same time — which is the
+    // proof that no other assertion in this suite could have caught it.
+    const bare = riskRegister({ npc: {} });
+    for (const value of [null, '', false, [], undefined, NaN, Infinity, 'x', {}]) {
+      const read = riskRegister({ npc: {}, desperation01: value, disorder01: value });
+      expect(read.absent, `${JSON.stringify(value) ?? String(value)} must be ABSENT, not a supplied zero`)
+        .toEqual([...RISK_TERMS]);
+      // …and the numbers agree with the empty call, which is exactly what made the
+      // old bug invisible: these two lines would have passed before the cure.
+      expect(read.center).toBe(bare.center);
+      expect(read.breadth).toBe(bare.breadth);
+    }
+  });
+
+  test('⭐ AND THE GUARD IS DISCRIMINATING — a REAL number is never mistaken for an absence', () => {
+    // The other direction, which is what stops the cure from being "declare everything
+    // absent". A test that only proved absences would pass on a guard that always says
+    // absent, and that guard would be just as wrong.
+    expect(riskRegister({ npc: {}, desperation01: 0, disorder01: 0 }).absent).toEqual([]);
+    expect(riskRegister({ npc: {}, desperation01: 1, disorder01: 1 }).absent).toEqual([]);
+    expect(riskRegister({ npc: {}, desperation01: 0.5, disorder01: 0.5 }).absent).toEqual([]);
+    // …and a supplied value really does move the outputs, so "supplied" is a fact about
+    // the reading and not only about the list.
+    expect(riskRegister({ npc: {}, desperation01: 1 }).center)
+      .toBeGreaterThan(riskRegister({ npc: {} }).center);
+    expect(riskRegister({ npc: {}, disorder01: 1 }).breadth)
+      .toBeGreaterThan(riskRegister({ npc: {} }).breadth);
+    // ⛔ THE NEGATIVE CONTROL FOR THE `Number.isFinite` HALF, which the type test alone
+    // cannot cover: `typeof NaN === 'number'`, so dropping the finite check would admit
+    // NaN as a supplied value and poison `center` with a NaN.
+    expect(riskRegister({ npc: {}, desperation01: NaN }).absent).toContain('desperation01');
+    expect(Number.isFinite(riskRegister({ npc: {}, desperation01: NaN }).center)).toBe(true);
+    expect(Number.isFinite(riskRegister({ npc: {}, disorder01: Infinity }).breadth)).toBe(true);
+  });
+
   test('COURAGE raises the centre and PRUDENCE lowers it — F15\'s named pair, both directions', () => {
     const brave = { character: { axes: { COURAGE: { pole: 'virtue', level: 'defining' } } } };
     const wary = { character: { axes: { PRUDENCE: { pole: 'virtue', level: 'defining' } } } };

@@ -141,13 +141,20 @@ describe('⛔ THE R6 COERCION CURE — null is ABSENT, never a supplied zero (fi
     }
   });
 
-  test('NaN and Infinity ARE numbers and neither is a reading — the COMPOSITION, named', () => {
-    // ⚠ THIS ARM IS THE REGISTER'S GUARD, NOT THIS LEAF'S, AND SAYING SO IS THE POINT.
-    // The leaf tests the TYPE — the half `Number.isFinite(Number(x))` cannot see — and
-    // the register rejects the two non-finite numbers. A planted removal of a
-    // finiteness check from the leaf SURVIVED this whole battery, which is how the
-    // redundancy was found; the branch was retired rather than pinned, and what remains
-    // asserted here is the true claim: the pair of guards composes to reject both.
+  test('NaN and Infinity ARE numbers and neither is a reading — the REGISTER\'s guard, named', () => {
+    // ⚠⚠ EVERY ARM IN THIS DESCRIBE IS NOW THE REGISTER'S GUARD, AND SAYING SO IS STILL
+    // THE POINT. At car 1 this leaf held a `finiteOrAbsent` of its own and only the
+    // finiteness half was the register's; a planted removal of that half SURVIVED the
+    // whole battery, which is how the redundancy was found. The substrate coupling then
+    // moved the TYPE test into `riskRegister` itself — the chokepoint every caller
+    // reads, rather than the one caller that remembered — so this leaf's copy became a
+    // second spelling of one guard and was retired in its turn.
+    //
+    // ⭐ WHAT THAT MAKES THIS DESCRIBE IS A CONSUMER-SIDE PROOF OF A PRODUCER-SIDE CURE,
+    // and it is worth more than it was: every test here now reds if the register's guard
+    // is reverted, which is exactly the evidence that retiring the local copy left no
+    // hole. Measured, not assumed — the plants that revert `riskRegister`'s two guards
+    // kill three of these rows.
     const read = acceptanceCharacterRead({
       npc: PLAIN, desperation01: Number.NaN, disorder01: Number.POSITIVE_INFINITY,
     });

@@ -38,20 +38,21 @@
  * second. So this leaf composes that reader's INPUT ROW and stops. What the seat decides
  * on the row remains the seat's, in the one home that already decides it.
  *
- * ── ⛔ THE R6 COERCION CURE, MET AT THE CONSUMER (car O2's finding O2-D) ─────────────
- * `riskRegister` tests presence with `Number.isFinite(Number(x))`, and `Number(null)`
- * and `Number('')` are both `0` and both finite — so a caller handing `null` for a term
- * it does not hold is recorded as having SUPPLIED ZERO. The numeric outcome coincides in
- * both readings (a desperation lean of 0; an absent disorder giving the minimum
- * breadth), so the collapse is invisible in `center` and `breadth` and shows ONLY in
- * `absent[]`. A consumer that read the two numbers and dropped `absent[]` would silently
- * convert "nobody asked" into "nobody is desperate".
+ * ── ⛔ THE R6 COERCION CURE HAS MOVED TO THE PRODUCER, AND THIS LEAF'S COPY IS RETIRED ─
+ * `riskRegister` used to test presence with `Number.isFinite(Number(x))`, and
+ * `Number(null)` and `Number('')` are both `0` and both finite — so a caller handing
+ * `null` for a term it does not hold was recorded as having SUPPLIED ZERO. The numeric
+ * outcome coincides in both readings, so the collapse was invisible in `center` and
+ * `breadth` and showed ONLY in `absent[]`.
  *
- * This leaf therefore tests the TYPE, never the numeric value, and normalizes anything
- * that is not a finite number to `undefined` BEFORE the register sees it — so the
- * register's own `absent[]` is correct at the source rather than corrected downstream.
- * The cure is the consumer's because the register's guard is car L5's leaf, and this
- * lane does not edit another car's home to fix its own call.
+ * This leaf carried the cure at the CONSUMER, because at the time the register was
+ * another car's home and this lane would not edit it to fix its own call. The substrate
+ * coupling owns both, so the guard now lives in the register itself, where every caller
+ * gets it instead of only the callers that remembered. What was here was a second
+ * spelling of one guard — the fork J-WR-10 forbids — and, once the producer is right, a
+ * branch no input can distinguish: the estate's own law is to RETIRE a redundant
+ * guarantee rather than pin it. The suite asserts the composition and names whose guard
+ * it is asserting.
  *
  * ── DARK: NO PRODUCTION CALLER, NO FLAG, NO NEW STATE ────────────────────────────────
  * Nothing under `src/` imports this leaf and its suite asserts the empty importer set.
@@ -83,28 +84,6 @@ export const ACCEPTANCE_READ_TERMS = Object.freeze(
 );
 
 /**
- * A number, or `undefined` — never a coerced zero.
- *
- * ⛔ THE TEST IS ON THE TYPE, AND ONLY ON THE TYPE. `typeof value !== 'number'` rejects
- * `null`, `''`, `true` and `undefined` alike, where `Number.isFinite(Number(value))`
- * admits the first two as a supplied zero. The TYPE is the half the register cannot see,
- * and it is therefore exactly the half a consumer owes it.
- *
- * ⚠ AND THE OTHER HALF IS DELIBERATELY NOT ASKED. This guard first also demanded
- * `Number.isFinite`, and a planted removal of that demand SURVIVED the whole battery —
- * because the register's own guard already rejects `NaN` and `Infinity`, so no input
- * exists on which the two spellings differ. A branch no assertion can reach is a
- * redundant guarantee dressed as a defence, and pinning it would have been a green that
- * discovered nothing. The composition is what the suite asserts, and it says so.
- *
- * @param {unknown} value
- * @returns {number|undefined}
- */
-function finiteOrAbsent(value) {
-  return typeof value === 'number' ? value : undefined;
-}
-
-/**
  * @typedef {Object} AcceptanceCharacterRead
  * @property {{center: number, breadth: number, absent: readonly string[]}} register
  *           R6's reading, produced by the chokepoint's own function
@@ -120,7 +99,9 @@ function finiteOrAbsent(value) {
  *
  * THREE DECISION ARMS, and each one exists to keep an ABSENCE from reading as a VALUE:
  *
- *   1. a desperation that is not a number is ABSENT, never a supplied zero (finding O2-D)
+ *   1. a desperation that is not a number is ABSENT, never a supplied zero (finding O2-D
+ *      — the guard is the REGISTER'S since the substrate coupling; this leaf passes the
+ *      caller's value through unchanged and its suite proves the absence still lands)
  *   2. a disorder that is not a number is ABSENT, never a supplied zero (same finding)
  *   3. NO KNOWN CHART GIVES `temperBand: null`, NOT `'ordinary'`.
  *
@@ -141,12 +122,10 @@ function finiteOrAbsent(value) {
  * @returns {AcceptanceCharacterRead}
  */
 export function acceptanceCharacterRead({ npc, lens, knownChart, desperation01, disorder01 }) {
-  const register = riskRegister({
-    npc,
-    lens,
-    desperation01: finiteOrAbsent(desperation01),
-    disorder01: finiteOrAbsent(disorder01),
-  });
+  // ⭐ THE TERMS GO THROUGH UNTOUCHED. The register itself now tests the TYPE, so
+  // normalizing here would be a second spelling of its guard — and one that hides
+  // whether the guard downstream still works.
+  const register = riskRegister({ npc, lens, desperation01, disorder01 });
   const hasChart = knownChart !== null && typeof knownChart === 'object';
   const absent = [...register.absent];
   if (!hasChart) absent.push('knownChart');
