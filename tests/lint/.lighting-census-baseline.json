@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f8c4a9b1fc8b19db8c47d2477cc08fcb0c187334",
-  "measuredBy": "W-LIVES-L3",
+  "measuredAtSha": "b197b07a4d35dcc399ee1bbb0bded4fcf449b513",
+  "measuredBy": "W-LIVES-L4",
   "date": "2026-08-31",
-  "note": "car L3 landed two test files: the lived-experience vocabulary and the experience funnel",
-  "files": 2447,
+  "note": "car L4 landed three test files: the source adapters, the known-character read and the F12 loop properties",
+  "files": 2450,
   "parked": 370,
-  "credited": 2077,
-  "titles": 20970,
-  "suiteTitles": 5767
+  "credited": 2080,
+  "titles": 21050,
+  "suiteTitles": 5785
 }
