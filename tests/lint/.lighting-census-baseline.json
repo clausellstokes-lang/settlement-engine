@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "cb8ff8dbc7ac828919aefe83d99a429c29bb153d",
-  "measuredBy": "T3 SEAT-A (Opus seat) — W-SEAT SEAT-1 ratchet cure",
+  "measuredAtSha": "61ab6dfa32b9325dac4bae7f7a00dee6c3624898",
+  "measuredBy": "T3 SEAT-A2 (SEAT-2a)",
   "date": "2026-08-31",
-  "note": "+1 test title in tests/domain/foreignSeatResolver.test.js: the observed-shape ratchet removed a dead modifiers arm from legitimateRemnantOf, and the test that pinned it was re-stated as two arms (archetype exclusion + the deliberate absence). Measured at the clean tip cb8ff8dbc.",
-  "files": 2432,
+  "note": "SEAT-2a added tests/domain/warSeatBooksPartition.test.js — the seat-books partition law, its source scan and the discovery-grade lit proof",
+  "files": 2433,
   "parked": 367,
-  "credited": 2065,
-  "titles": 20701,
-  "suiteTitles": 5701
+  "credited": 2066,
+  "titles": 20718,
+  "suiteTitles": 5705
 }
