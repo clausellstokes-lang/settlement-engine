@@ -148,6 +148,12 @@ exists only when the top-influence power is not the ruling power (the gap is the
 | City | 5–8, incl. 1–2 doubled niches (intra-power rivals) | 2–3 |
 | Metropolis | 7–10, incl. doubled niches | 2–3, full suites on select pillars |
 
+**The ladder is ALIVE (§810.1):** the same ranges govern simulated tier growth — on promotion the
+fabric thickens toward the new band at a slow rolled cadence (one receipted emergence per
+interval), the spawn filling the largest representation gap first (a power strong in influence /
+legitimacy / economics but unrepresented); on decline it thins, weakest standing first
+(anti-ratchet — vetoable). New members roll their characters through the W-LIVES path.
+
 ## REGISTER VI — THE ACCUMULATED TASTE ROWS (one-line calls, gathered from §§798–803.2)
 
 1. Drift half-life per axis class: `a_year` vs **`a_few_years` (chair lean)**.
