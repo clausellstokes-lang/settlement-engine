@@ -682,7 +682,40 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       expect(() => assertVirtualDormantWriterEvidence([invented])).toThrow(/UNVERIFIABLE \(clause [23]\)/);
     });
 
-    test('CLAUSE 4 CONVICTS: a flag that has become preset-lit outlives its own premise', () => {
+    // ⛔⛔ THIS ARM WAS RENAMED, AND THE RENAME IS THE FINDING (lane T9, E-T2-7 measured).
+    // It was titled "a flag that has become PRESET-LIT" — and it plants into the DEFAULTS:
+    // the sentinel below lands just above the ENGINE_GATED declaration, INSIDE the window
+    // clause 4 slices. So the preset case, the one the title advertised, was tested by
+    // nothing, and an auditor reading test titles would have concluded it was covered.
+    // That is the more dangerous half of the defect, and it is the half a test file can
+    // cure on its own, so it is cured here: the title now says what the plant does.
+    //
+    // THE HOLE ITSELF IS STILL OPEN, DELIBERATELY, AND IT IS NOT THIS LANE'S TO CLOSE.
+    // MEASURED on src/domain/worldPulse/simulationRules.js: clause 4's window runs from
+    // the first `DEFAULT_SIMULATION_RULES` (line 23) to the first
+    // `ENGINE_GATED_VIRTUAL_RULE_KEYS` (line 185), and the whole preset table begins 363
+    // lines PAST its end — so of the 52 `<x>Enabled: true` lights the manifest performs,
+    // 41 are outside the window and only 11 inside it. Since a preset override spread is
+    // how every virtual flag in this estate is actually lit (WAVES, ONE_REGEN, the eight
+    // war sub-flags), clause 4 cannot fire for the path it was written to watch.
+    //
+    // WHY IT IS DEFERRED RATHER THAN FIXED HERE: the cure is nine lines in
+    // scripts/check-observed-shape-readers.mjs, which is a PINNED DETECTOR SOURCE
+    // (scannerToolFiles, 11 files). Editing it moves the detector digest, and the estate
+    // then requires a GOVERNED MIGRATION — `--write --migrate-schema --migration-review=
+    // <bundle.json>` — which the history shows is always re-minted against THE TREE BEING
+    // LANDED (b77a35b8f, 87b57bada), never against a lane tip that will rebase away. The
+    // widening is written, and its reproduce-then-clear control was EXECUTED against the
+    // real pre-cure code: a preset lighting the flag PASSED the old clause and THROWS
+    // under the new one. It waits on a chartered mint, not on anybody's time.
+    //
+    // ⚠ NOT UNGUARDED ESTATE-WIDE, and the row must say so rather than overstate itself:
+    // a preset declaration of EITHER polarity ends the key's virtuality, and
+    // tests/lint/engineGatedRuleKeys.walker.test.js convicts that by name, which forces
+    // the key out of ENGINE_GATED_VIRTUAL_RULE_KEYS and trips clause 3 above. What the
+    // hole costs is the fourth door's SELF-SUFFICIENCY: the scan can clear a finding on a
+    // premise that has become false while a sibling instrument, in a different run, reds.
+    test('CLAUSE 4a CONVICTS: a flag that has re-entered DEFAULT_SIMULATION_RULES outlives its own premise', () => {
       // The row's whole premise is "the corpus never lights this". The moment the flag
       // is declared in DEFAULT_SIMULATION_RULES the corpus DOES light it, the write IS
       // observed, and the read must be judged normally. The row must die at that moment.
@@ -691,6 +724,59 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       expect(() => assertVirtualDormantWriterEvidence([REAL], {
         readSource: (path) => (path === VIRTUAL_FLAG_MANIFEST ? manifest : readFileSync(join(ROOT, path), 'utf8')),
       })).toThrow(/UNVERIFIABLE \(clause 4\)/);
+    });
+
+    // ⭐⭐ THE HOLE, PINNED THROUGH THE DOOR'S OWN FRONT ENTRANCE RATHER THAN DESCRIBED.
+    // The note on the arm above states a defect in prose, and prose rots without ever
+    // saying so — this lane's own car 1 settled that question the other way (one claim,
+    // CHECKED). So the deferral is executable: the arm plants a real preset light and
+    // asserts the door LETS IT THROUGH, which is the defect, stated as behaviour.
+    //
+    // ⛔ IF THIS ARM REDS, NOTHING IS BROKEN — THE HOLE WAS CLOSED. Delete this arm and
+    // the deferral note above it, and land the widening from the lane's saved patch
+    // (T9-car5-DEFERRED-clause4b.patch) with its governed migration. The pin exists so
+    // that discharging the deferral is a LOUD act: it cannot be silently forgotten, and
+    // it cannot be silently fixed twice.
+    test('THE DEFERRED HOLE, PINNED: clause 4 does NOT see a preset light (E-T2-7, awaiting a governed mint)', () => {
+      const real = readFileSync(join(ROOT, VIRTUAL_FLAG_MANIFEST), 'utf8');
+      const anchor = 'export const SIMULATION_RULE_PRESETS = Object.freeze({';
+      expect(real, 'the preset-table anchor moved; re-point this plant').toContain(anchor);
+
+      const plant = (value) => real.replace(
+        anchor,
+        `const PRESET_LIGHT_SENTINEL = { treasuryEnabled: ${value} };\n${anchor}`,
+      );
+      const drive = (manifest) => assertVirtualDormantWriterEvidence([REAL], {
+        readSource: (path) => (path === VIRTUAL_FLAG_MANIFEST ? manifest : readFileSync(join(ROOT, path), 'utf8')),
+      });
+
+      // GUARD THE GUARD: the plant must sit OUTSIDE clause 4's window, or this arm is
+      // measuring the wrong region and its green would mean nothing.
+      const lit = plant('true');
+      expect(lit.indexOf('PRESET_LIGHT_SENTINEL'))
+        .toBeGreaterThan(lit.indexOf('ENGINE_GATED_VIRTUAL_RULE_KEYS'));
+
+      // THE DEFECT ITSELF. A preset lighting the flag `true` is exactly the premise
+      // failure clause 4's own header says it refuses — and the door verifies the row
+      // anyway, because the window cannot reach the preset table.
+      expect(
+        drive(lit),
+        'clause 4 now CONVICTS a preset light — the hole is closed. Delete this pin and'
+        + ' the deferral note above it; the widening has landed.',
+      ).toHaveLength(1);
+
+      // NON-VACUITY: the same door DOES convict when the plant lands inside the window,
+      // so the green above means "the window cannot see the preset table", never "this
+      // door convicts nothing".
+      const inWindow = real.replace(
+        'export const ENGINE_GATED_VIRTUAL_RULE_KEYS',
+        'const IN_WINDOW_SENTINEL = { treasuryEnabled: true };\nexport const ENGINE_GATED_VIRTUAL_RULE_KEYS',
+      );
+      expect(() => drive(inWindow)).toThrow(/UNVERIFIABLE \(clause 4\)/);
+
+      // …and the UNDOCTORED manifest verifies, so neither result above is a refusal of
+      // everything. treasuryEnabled is dark in the defaults and in all SEVEN presets today.
+      expect(drive(real)).toHaveLength(1);
     });
 
     test('the structural law refuses a malformed, duplicated or double-doored row', () => {
