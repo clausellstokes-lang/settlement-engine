@@ -326,8 +326,11 @@ export function readWarPeaceDecision({
   // read actually establishes that direction. An inherited charge can override
   // the current ruler's books; that case is receipted by `inheritedDemand`
   // instead of falsely attributing the choice to the current seat or realm.
+  // ⚠ `'foreign'` joined at W-SEAT SEAT-2a. Without it an occupier-carried decision
+  // recorded `interestServed: null` — indistinguishable on the receipt from a
+  // decision no book carried, which is the one thing this field exists to deny.
   const interestServed = booksDirection === actualAction
-    && ['realm', 'seat', 'patron'].includes(booksInterest)
+    && ['realm', 'seat', 'patron', 'foreign'].includes(booksInterest)
     ? booksInterest
     : null;
   const reason = inheritedDemand

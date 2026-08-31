@@ -511,17 +511,35 @@ export function termsRangesOverlap(left, right) {
  * above the floor, so a fixture can show the same seat diverging below the band
  * and agreeing above it.
  *
+ * ⛔ THE FOREIGN BOOK IS THE ONE THAT DOES NOT COLLAPSE, AND THAT IS THE RULING,
+ * not an omission. This models "a ruler of ashes rules nothing": the LOCAL seat's
+ * private interest converges on the realm's because the seat dies with the realm.
+ * An occupier or overlord is not the one facing ashes — its book is held in another
+ * town, by a court whose survival this threat does not touch — so it passes through
+ * untouched and the partition still closes:
+ *   `settlement + (seat+patron)·collapse + seat·kept + patron·kept + foreign === 1`.
+ * A foreign book folded in here would have made an occupied town's decisions become
+ * MORE its own the closer it came to being conquered, which is backwards.
+ *
+ * ⚠ AND THIS IS THE ONE LICENSED HAND-READ OF A WEIGHT FIELD OUTSIDE
+ * `warSeatBooks.js`. That file's partition law forbids enumerating weight names
+ * anywhere else; this module's own header declares "no imports at all", and that
+ * older constraint wins. The fourth weight is therefore named LITERALLY here, and
+ * this paragraph is the record so a fifth book's author finds this site by reading
+ * the law rather than by being bitten.
+ *
  * @param {{ settlementWeight01?: unknown, seatWeight01?: unknown, patronWeight01?: unknown,
- *   continueBias01?: unknown, peaceBias01?: unknown }|null|undefined} books
+ *   foreignWeight01?: unknown, continueBias01?: unknown, peaceBias01?: unknown }|null|undefined} books
  * @param {ConquestFeasibilityRead|null|undefined} read
  * @returns {{ collapsed: boolean, settlementWeight01: number, seatWeight01: number,
- *   patronWeight01: number, collapse01: number, receipt: string }}
+ *   patronWeight01: number, foreignWeight01: number, collapse01: number, receipt: string }}
  */
 export function collapseSeatBooksUnderThreat(books, read) {
   const row = recordOf(books);
   const settlement = clamp01(Number(row.settlementWeight01) || 0);
   const seat = clamp01(Number(row.seatWeight01) || 0);
   const patron = clamp01(Number(row.patronWeight01) || 0);
+  const foreign = clamp01(Number(row.foreignWeight01) || 0);
   const feasibility = recordOf(read);
   const threat = feasibility.known === true && typeof feasibility.beingConqueredRisk01 === 'number'
     ? feasibility.beingConqueredRisk01
@@ -533,6 +551,7 @@ export function collapseSeatBooksUnderThreat(books, read) {
       settlementWeight01: round4(settlement),
       seatWeight01: round4(seat),
       patronWeight01: round4(patron),
+      foreignWeight01: round4(foreign),
       collapse01: 0,
       receipt: 'the seat keeps its own books: the war is not yet its own survival.',
     };
@@ -546,6 +565,7 @@ export function collapseSeatBooksUnderThreat(books, read) {
     settlementWeight01: round4(clamp01(settlement + (seat + patron) * collapse01)),
     seatWeight01: round4(seat * kept),
     patronWeight01: round4(patron * kept),
+    foreignWeight01: round4(foreign),
     collapse01,
     receipt: `the threat is ${text(feasibility.threatBand)}: the seat's private book folds into the realm's,`
       + ' because a ruler of ashes rules nothing.',

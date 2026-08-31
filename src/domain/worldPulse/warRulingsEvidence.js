@@ -23,16 +23,26 @@ function wholeTick(value) {
   return Number.isFinite(number) ? Math.max(0, Math.floor(number)) : 0;
 }
 
-/** Whose recorded interest actually points toward the offer that was made. */
+/**
+ * Whose recorded interest actually points toward the offer that was made.
+ *
+ * ⚠ `'foreign'` JOINED THE VOCABULARY AT W-SEAT SEAT-2a, AND ITS ABSENCE HERE WAS
+ * A WRONG POSITIVE, NOT A GAP. An unlisted interest failed the membership test and
+ * returned `null`, which made the whole offer produce no evidence at all — but had
+ * it merely fallen through the second test it would have been credited to `'realm'`,
+ * publishing "the realm's position carried the decision" about a peace an occupier
+ * carried. Both outcomes are wrong in different directions, which is exactly why
+ * the fourth book is enumerated here rather than left to a default.
+ */
 function peaceInterestServed(read) {
   const row = asObject(read);
   const interest = String(row.booksInterest || '');
   const direction = String(row.booksDirection || '');
-  if (!['realm', 'seat', 'patron'].includes(interest)) return null;
+  if (!['realm', 'seat', 'patron', 'foreign'].includes(interest)) return null;
   // A private book pointing away from peace cannot be credited with the offer;
   // the realm terms overcame it. Realm/even books leave the realm as the honest
   // attributable interest rather than inventing a private motive.
-  if ((interest === 'seat' || interest === 'patron') && direction === 'peace') return interest;
+  if (['seat', 'patron', 'foreign'].includes(interest) && direction === 'peace') return interest;
   return 'realm';
 }
 
@@ -79,10 +89,25 @@ export function peaceDecisionRulingEvidence({ outcome = null, decision = null, t
     interestServed,
   };
   /** @type {Array<Record<string,unknown>>} */
-  const evidence = [{
-    ...offerBase,
-    kind: interestServed === 'realm' ? 'sued_for_peace_realm' : 'sued_for_peace_seat',
-  }];
+  const evidence = [];
+  // ⛔ THE FOREIGN BOOK ABSTAINS FROM BOTH SUING KINDS, AND THE ABSTENTION IS A
+  // RULING RATHER THAN A FALL-THROUGH. Neither existing sentence is true of an
+  // occupier-carried peace: `sued_for_peace_realm` says the realm's own position
+  // decided, and `sued_for_peace_seat` requires an `npc` identity that resolves to
+  // the LOCAL ruler and reads "on the settlement's behalf" — it would name the
+  // wrong person for the right event. A reader-facing kind for a foreign-carried
+  // decision is chartered in the volume's D8 bill (five kinds, minted together,
+  // paying the full V6-B3 authoring/pool/herald census); minting one alone here
+  // would pay that whole bill for a fifth of the benefit. Until it lands the fact
+  // is receipted where the estate's primary receipt lives — `booksInterest`,
+  // `foreignSeatId`, `foreignSeatBand` and `booksReason` on the termination read.
+  // DELIBERATELY DEFERRED, DOCUMENTED, NOT A BUG TO RE-FIND.
+  if (interestServed !== 'foreign') {
+    evidence.push({
+      ...offerBase,
+      kind: interestServed === 'realm' ? 'sued_for_peace_realm' : 'sued_for_peace_seat',
+    });
+  }
   if (interestServed === 'patron') {
     evidence.push({ ...offerBase, kind: 'ruler_books_compromised' });
   }

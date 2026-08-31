@@ -53,7 +53,7 @@ import {
   normalizeParlayTermSheet,
 } from './negotiationPictures.js';
 import { negotiationExportLeg } from './negotiationPicturesExportLeg.js';
-import { readWarSeatBooks } from './warSeatBooks.js';
+import { readWarSeatBooks, seatBooksPartition } from './warSeatBooks.js';
 import { stampDeploymentRecall } from './warIntent.js';
 
 /** @typedef {import('../spatial/distanceRead.js').SpatialDigest} SpatialDigest */
@@ -257,7 +257,11 @@ export function deriveArmyEnvoyIntent({
   const since = Number(frontSinceTick);
   if (!actor || !target || actor === target || !Number.isInteger(since) || since < 0) return null;
   const read = asObject(books);
-  const privateBook = clamp01(num(read.seatWeight01, 0) + num(read.patronWeight01, 0));
+  // "The whole private book" must mean EVERY book that is not the realm's. Summing
+  // two named fields excluded the overt foreign seat, so an occupied court's envoy
+  // never reached `PRIVATE_BOOK_MIN` and its `terms_shop`/`imprison` intents were
+  // suppressed — an absence, which is the failure shape nothing ever reds on.
+  const privateBook = seatBooksPartition(read).privateMass01;
   const continueBias = clamp01(num(read.continueBias01, 0.5));
   const peaceBias = clamp01(num(read.peaceBias01, 0.5));
   const malice = clamp01(num(read.malice01, 0.5));

@@ -60,7 +60,7 @@ import { DISPOSITION_CHANNEL_TUNING, readDispositionChannel } from './dispositio
 import { thresholdFactorOf } from './dispositionProfile.js';
 import { peaceReasonsFor } from './peaceReasons.js';
 import { REASON_MIRRORS } from './warReasonTaxonomy.js';
-import { readWarSeatBooks } from './warSeatBooks.js';
+import { readWarSeatBooks, seatBooksPartition } from './warSeatBooks.js';
 import { settlementAlignment } from './settlementAlignment.js';
 import { natureWordFor } from './conquestDoctrineStage.js';
 import { makeBelievedRazings } from './believedRazings.js';
@@ -77,8 +77,13 @@ export const SOVEREIGNTY_SALE_VERDICTS = Object.freeze([
 ]);
 
 /** WHOSE BOOKS the sale would serve. Borrowed VERBATIM from `readWarSeatBooks`'s own
- *  `interestKind` — J-WR-10 forbids a second spelling of an existing concept. */
-export const SOVEREIGNTY_BOOKS_INTERESTS = Object.freeze(['realm', 'seat', 'patron']);
+ *  `interestKind` — J-WR-10 forbids a second spelling of an existing concept.
+ *  ⚠ `'foreign'` JOINED AT W-SEAT SEAT-2a and the widening is load-bearing, not
+ *  cosmetic: this list is a normalizing filter, so an unlisted kind was silently
+ *  REWRITTEN to `'realm'` two lines below — a wrong positive claim about who
+ *  decided, not an abstention. An occupier's book carrying a sale must never be
+ *  reported as the realm's own judgment. */
+export const SOVEREIGNTY_BOOKS_INTERESTS = Object.freeze(['realm', 'seat', 'patron', 'foreign']);
 
 /**
  * THE VERDICT TABLE, as data rather than as a branch chain. The keys are exactly the
@@ -259,17 +264,23 @@ export function readSovereigntySaleIntent(input) {
   const books = readWarSeatBooks({
     worldState, snapshot: row.snapshot ?? null, actorId: sellerId, opponentId: buyerId,
   });
-  const privateWeight01 = Math.max(
-    Number(books.seatWeight01) || 0, Number(books.patronWeight01) || 0,
-  );
+  // ⛔ THIS WAS `Math.max(seat, patron)`, AND IT WAS CORRECT ONLY BECAUSE OF THE XOR.
+  // The two domestic private weights could never both be non-zero, so a max over
+  // them happened to equal their sum. A fourth, NON-exclusive book makes a max
+  // STRUCTURALLY wrong rather than merely incomplete — it breaks before the
+  // sum-to-one assumption does, and it fails SILENTLY toward "the books agree".
+  // The partition answers the mass question once, for every book there will ever be.
+  const privateWeight01 = seatBooksPartition(books).privateMass01;
   const interestKind = SOVEREIGNTY_BOOKS_INTERESTS.includes(String(books.interestKind))
     ? String(books.interestKind)
     : 'realm';
   const booksDiverge = privateWeight01
     >= SOVEREIGNTY_INTENT_TUNING.PRIVATE_BOOKS_DIVERGENCE_FLOOR01;
-  const booksName = booksDiverge && interestKind === 'patron'
-    ? "a foreign patron's books"
-    : booksDiverge ? "the ruling seat's own books" : "the realm's books";
+  const booksName = booksDiverge && interestKind === 'foreign'
+    ? "the seat that looms over this court"
+    : booksDiverge && interestKind === 'patron'
+      ? "a foreign patron's books"
+      : booksDiverge ? "the ruling seat's own books" : "the realm's books";
   const securityBand = text(books.securityBand) || 'unseated';
 
   const bond = liveKinshipBond(worldState, sellerId, buyerId);

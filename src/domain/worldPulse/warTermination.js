@@ -51,7 +51,7 @@ import {
 } from './momentum.js';
 import { WAR_TERMINATION_DECIDING_TERM_KEYS } from '../certification/warConvergenceContract.js';
 import { deityPressureOf, thresholdFactorOf } from './dispositionProfile.js';
-import { readWarSeatBooks } from './warSeatBooks.js';
+import { readWarSeatBooks, seatBooksPartition } from './warSeatBooks.js';
 import { corruptionVerdictIdFor } from './warAuthorityVerdict.js';
 import { allianceObligationReason } from './warCoalitionLedger.js';
 
@@ -376,25 +376,57 @@ function trajectoryPressure01(marginBand) {
   return 0;
 }
 
-/** Weighted ruler/realm objective blend without adding a fifth term. */
-function blendBooksTerm(realmTerm, privateTerm, books) {
-  const realmWeight = finite01(books.settlementWeight01);
-  const privateWeight = clamp01(
-    finite01(books.seatWeight01) + finite01(books.patronWeight01),
-  );
-  const total = realmWeight + privateWeight;
+/**
+ * Weighted realm / domestic-private / FOREIGN objective blend, without adding a
+ * fifth deciding term. The four WR-1 terms, their bands and `decidingTerm` are
+ * untouched: this changes what each term is worth, never how many there are.
+ *
+ * ⛔⛔ THIS LINE WAS THE SHARPEST SILENT-FAILURE SITE IN THE WHOLE SEAT-BOOKS
+ * FAMILY, AND ODQ §823 ORDERED IT CURED FIRST. It used to hand-sum
+ * `settlementWeight01` and `seat + patron` and then divide by its OWN computed
+ * total. Because the three weights were a closed partition, that division was a
+ * no-op — until a fourth book existed, at which point `total` fell below 1 and
+ * the divide SILENTLY REDISTRIBUTED the fourth book's mass across the three this
+ * function happened to know, moving `cause01`, `continue01` and `stop01` (and
+ * therefore `decidingTerm`, `suePressure01` and the disposition itself) with no
+ * receipt anywhere admitting it. It neither threw nor produced a NaN. The most
+ * defensive line in the file was the most dangerous one precisely BECAUSE it was
+ * defensive — a fail-open normalizer is indistinguishable from a correct answer.
+ *
+ * The cure is §823's "explicit fourth-weight admission": the foreign book gets
+ * its own DIRECTION (the occupier's or overlord's own court bias, resolved by
+ * `readWarSeatBooks` from that court's seat) and its own product in the blend,
+ * and the masses come from `seatBooksPartition` so no field name is enumerated
+ * here again. A fifth book joins by widening that partition, not by editing this.
+ *
+ * ⚠ DARK-PATH BIT IDENTITY, NOT CLOSENESS. With no foreign book `foreignWeight`
+ * is exactly `0`; `x * 0` is `0` and `y + 0` is `y` for every finite double, so
+ * this reproduces the previous expression to the LAST BIT rather than to some
+ * number of decimals. That is what the raw-byte dormancy bar requires and it is
+ * why `domesticPrivateMass01` is summed once and multiplied once — distributing
+ * it into two products would have moved the last bit on the dark path (§713.3's
+ * law: `n × k` is not `k` summed `n` times).
+ */
+function blendBooksTerm(realmTerm, privateTerm, books, foreignTerm = 0) {
+  const { realmMass01: realm, domesticPrivateMass01: own, foreignMass01: away } = seatBooksPartition(books);
+  const total = realm + own + away;
   if (!(total > 0)) return finite01(realmTerm);
-  return clamp01(
-    (finite01(realmTerm) * realmWeight + finite01(privateTerm) * privateWeight) / total,
-  );
+  return clamp01((finite01(realmTerm) * realm + finite01(privateTerm) * own + finite01(foreignTerm) * away) / total);
 }
 
 /** Qualitative private-books line for the decision receipt. */
 function seatBooksReason(books, actorName, contributed, momentumBroken) {
   const seat = String(books.rulerName || '');
   const patron = String(books.patronName || '');
+  const overlord = String(books.foreignSeatName || '');
   let line;
-  if (books.interestKind === 'patron') {
+  // ⚠ THE FOREIGN ARM COMES FIRST BECAUSE THE FALL-THROUGH WAS THE DEFECT. Without
+  // it an occupier-carried decision took the `seat` arm and told the reader that
+  // the town's own ruler had weighed the war — the receipt actively denying the
+  // one fact the decision turned on.
+  if (books.interestKind === 'foreign') {
+    line = `${actorName}'s council answers to ${overlord || 'the power that holds the town'}, not to itself.`;
+  } else if (books.interestKind === 'patron') {
     line = patron
       ? `The court's private account answers to ${patron}, not only to ${actorName}.`
       : `The court's private account answers to a foreign patron whose seat cannot be named from this record.`;
@@ -748,11 +780,25 @@ export function readWarTerminations({
       peaceBias01: clamp01(books.peaceBias01 + rivalTriumphPull),
       continueBias01: clamp01(books.continueBias01 - rivalTriumphPull),
     } : books;
+    // The foreign court votes with ITS OWN direction — resolved by the books read
+    // from that court's own seat — and never with the occupied ruler's, which is
+    // what a three-book blend made it do by silent redistribution. The rival-
+    // triumph pull above is the LOCAL seat's fear and deliberately does not move it.
+    // ⚠ READ THROUGH `asObject`, NOT OFF THE INFERRED SHAPE, AND THE REASON IS A
+    // FINDING RATHER THAN A STYLE NOTE. The foreign fields are a CONDITIONAL SPREAD
+    // on the producer, so a direct `.foreignContinueBias01` is a `+2` on
+    // `typecheck:domain:strict` (TS2551/TS2339) — a checker no targeted vitest run
+    // reaches, which is how SEAT-1 met the same ratchet at the terminal gate. The
+    // tolerant read is also the honest one: these keys are ABSENT on the dark path
+    // by design, and code that pretends otherwise would be the first thing to break
+    // when someone drops the conditional spread to make the types quieter.
+    const foreignBook = asObject(decisionBooks);
+    const foreignHold = finite01(foreignBook.foreignContinueBias01);
     const cause01 = effectiveCause.validPins > 0
-      ? blendBooksTerm(realmCause01, decisionBooks.continueBias01, decisionBooks)
+      ? blendBooksTerm(realmCause01, decisionBooks.continueBias01, decisionBooks, foreignHold)
       : 0;
-    continue01 = blendBooksTerm(realmContinue01, decisionBooks.peaceBias01, decisionBooks);
-    stop01 = blendBooksTerm(realmStop01, decisionBooks.continueBias01, decisionBooks);
+    continue01 = blendBooksTerm(realmContinue01, decisionBooks.peaceBias01, decisionBooks, finite01(foreignBook.foreignPeaceBias01));
+    stop01 = blendBooksTerm(realmStop01, decisionBooks.continueBias01, decisionBooks, foreignHold);
     const booksContributed = Math.abs(cause01 - realmCause01) > 0.0001
       || Math.abs(continue01 - realmContinue01) > 0.0001
       || Math.abs(stop01 - realmStop01) > 0.0001;
