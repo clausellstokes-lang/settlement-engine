@@ -104,13 +104,28 @@ describe('detPow — determinism is STRUCTURAL, and the scan is the proof', () =
   // Strip comments so the prose describing the ban does not trip the scan for it.
   const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
 
+  // THE LIVENESS ANCHOR BOTH SOURCE-SCAN ARMS BELOW STAND ON. A scan over a FILE has a
+  // vacuity mode the outputs do not: if the read moved, the module were renamed, or the
+  // comment-strip above over-matched and returned nothing, `code` would be empty and
+  // EVERY absence claim about it would pass while proving nothing at all. So each arm
+  // first pins that `code` is the live kernel it means. The pin is deliberately the
+  // module's own export line rather than a length floor: a length floor survives the
+  // wrong file being read, and this cannot.
+  const KERNEL_SIGNATURE = 'export function detPow(x, y)';
+
   test('the kernel calls NO implementation-approximated Math function', () => {
     // The ES2026 list the house ratchet uses, minus sqrt (correctly rounded by spec).
     const banned = /\bMath\s*\.\s*(acos|acosh|asin|asinh|atan|atan2|atanh|cbrt|cos|cosh|exp|expm1|hypot|log|log10|log1p|log2|pow|sin|sinh|tan|tanh)\s*\(/;
+    expect(code).toContain(KERNEL_SIGNATURE);
+    // The pin above proves `code` is the live detPow source, so a drifted read or an
+    // over-eager comment-strip reds THERE rather than passing vacuously here.
+    // anchored: `code` is pinned to contain the kernel's own export line on the line above
     expect(code).not.toMatch(banned);
   });
 
   test('the kernel uses NO `**` operator — the very thing it replaces', () => {
+    expect(code).toContain(KERNEL_SIGNATURE);
+    // anchored: same pin, same reason — an empty `code` cannot satisfy the assertion above
     expect(code).not.toMatch(/\*\*/);
   });
 

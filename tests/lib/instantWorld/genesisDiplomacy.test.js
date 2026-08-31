@@ -173,6 +173,7 @@ describe('POLIS-2 — ids, provenance, and the absence of fabricated history', (
     expect(link.description).toContain('Brackenford');
     expect(link.description).toContain(GENESIS_RELATION_CAUSES.tier_dominance.phrase);
     // No number, no date, no outcome word: the grammar is pinned to the typed cause.
+    // anchored: the two toContain assertions above prove `link.description` is the live materialized sentence, so an absent or drifted description reds there
     expect(link.description).not.toMatch(/\b\d+\b/);
   });
 });
@@ -234,10 +235,17 @@ describe('POLIS-2 — the closed vocabulary is DERIVED, not re-listed', () => {
   });
 
   test('no cause claims a geographic fact — geography does not exist at compose time', () => {
+    // THE LIVENESS ANCHOR: this arm is a loop over a roster, and an EMPTIED roster never
+    // enters the body — so both absence claims below would hold while the vocabulary they
+    // police had vanished entirely. Pin the roster is populated before asserting what it
+    // does not say.
+    expect(GENESIS_CAUSE_TOKENS.length).toBeGreaterThan(0);
     for (const token of GENESIS_CAUSE_TOKENS) {
+      // anchored: the roster is pinned non-empty above, so an emptied vocabulary reds there
       expect(token).not.toMatch(/frontier|border|coast|river|strait|sea|mountain/i);
-      expect(GENESIS_RELATION_CAUSES[token].phrase)
-        .not.toMatch(/frontier|border|coast|river|strait|mountain/i);
+      const phrase = GENESIS_RELATION_CAUSES[token].phrase;
+      // anchored: same non-empty pin, and the phrase is read from the live table BY that same token, so a token with no row throws on the line above rather than passing as an absence
+      expect(phrase).not.toMatch(/frontier|border|coast|river|strait|mountain/i);
     }
   });
 });
