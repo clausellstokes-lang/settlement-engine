@@ -800,7 +800,7 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     expect({ hits, calls }).toEqual({ hits: 9, calls: 6 });
   });
 
-  test('`hash01` CALLER modules = 15, and the figure is a caller count not a mention count', () => {
+  test('`hash01` CALLER modules = 16, and the figure is a caller count not a mention count', () => {
     // grep -rn "hash01(" src | grep -v "function hash01(" | cut -d: -f1 | sort -u | wc -l
     // ⚠ THE VOLUME FROZE TEN. Measured at the EP base it was FOURTEEN — the four arrivals were
     // the espionage trio and informationNews, landed by families EP never touches. That is why
@@ -813,9 +813,18 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // THE POINT, NOT A COST: every new caller of the cured root is one fewer site that could
     // have copied the uncured one, and the nine sites still carrying it are docketed as
     // CR-IN1C-DRIFT. Authorized at ODQ §350 with the registry mint.
+    // ⭐ RE-RECORDED 2026-08-31 BY W-OPS O1: 15 → 16, a DECLARED arrival rather than a discovered
+    // one. `src/domain/worldPulse/operations/missionDispatcher.js` is the W-OPS deliberation road,
+    // and it takes the CURED root for the same reason every caller above it did: its per-demand
+    // rank is a keyed hash over `(principal, tick, demand)` and a raw `fnv % n` would alias the
+    // rank onto a parity class of demand ids. ⛔ IT COMPOSES NO ROOT AND READS NO WORLD — the key
+    // is built from arguments, exactly the fabricRng disposition recorded two arms below, which is
+    // why this counter is the ONLY arm of this file the member moves. The caller is DARK at this
+    // commit (zero importers under src/, pinned by tests/domain/missionDispatcher.test.js), so the
+    // arrival is a source fact and not yet a behaviour.
     const callers = ALL_FILES.filter((f) => read(f).split('\n')
       .some((l) => l.includes('hash01(') && !/function hash01\(/.test(l)));
-    expect(callers).toHaveLength(15);
+    expect(callers).toHaveLength(16);
     const mentions = ALL_FILES.filter((f) => read(f).includes('hash01'));
     expect(mentions.length, 'MENTIONS is a different, larger population').toBeGreaterThan(callers.length);
   });
