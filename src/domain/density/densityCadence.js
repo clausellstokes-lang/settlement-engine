@@ -82,6 +82,7 @@ export const CADENCE_REFUSALS = Object.freeze([
   'ruling_only',          // R14: the only foldable house is the government's
 ]);
 
+/** @param {unknown} v @param {number} [d] */
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 
 /**
@@ -103,6 +104,7 @@ export function representationGapOf(power) {
   return (influence + legitimacy + economics) / 3;
 }
 
+/** @param {string} step @param {string|null} reason */
 function declined(step, reason) {
   return Object.freeze({ step, reason, emergence: null, thinning: null });
 }

@@ -249,10 +249,10 @@ export const SUCCESSION_WEIGHTS = Object.freeze({
   instabilityTilt: 0.30,
 });
 
-/** @param {string|null|undefined} tier @returns {string} the canonical tier key */
+/** @param {string|null|undefined} tier @returns {keyof typeof DENSITY_BANDS} the canonical tier key — GUARANTEED a band-table member (unknown tiers fall back) */
 export function tierKey(tier) {
   const t = String(tier || '').toLowerCase();
-  return TIER_ORDER.includes(t) ? t : FALLBACK_TIER;
+  return /** @type {keyof typeof DENSITY_BANDS} */ (TIER_ORDER.includes(t) ? t : FALLBACK_TIER);
 }
 
 /** The whole band row for a tier (never undefined — unknown tiers fall back).
