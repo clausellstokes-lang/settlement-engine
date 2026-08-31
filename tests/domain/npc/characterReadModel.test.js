@@ -339,6 +339,37 @@ describe('W-LIVES L7 — the articles (the news address law)', () => {
       .toBe('Aldric is no longer trusting.');
   });
 
+  test('⛔ MUTATION PLANT #9\'s CURE: the reasons DEDUPLICATE and sort', () => {
+    // Every receipt in the standard set carries ONE source kind, so dropping the
+    // dedupe-and-sort changed nothing any assertion could see. Two lessons of the
+    // same kind in one tick are ONE reason, and the order is the record's, not the
+    // adapter's.
+    const receipts = [{
+      kind: 'band_crossing', wnpcId: 'w1', axisId: 'COURAGE', tick: 10,
+      crossing: { from: 'virtue_a_touch', to: 'virtue_marked', cause: 'ordeal', tick: 10 },
+      sourceKinds: ['survived_battle', 'betrayed_by_friend', 'survived_battle'],
+      sourceEventIds: ['e1', 'e2'],
+    }];
+    expect(compose({ receipts }).articles[0].reasons)
+      .toEqual(['a battle survived', "a friend's betrayal"]);
+  });
+
+  test('⛔ MUTATION PLANT #15\'s CURE: a chart value that is NOT A NUMBER is refused', () => {
+    // §711.6's family. `Number('-3')` is a perfectly good −3, so a numeric guard would
+    // name the man wrathful on the strength of a string nobody promised was a chart
+    // value. The displacement is the only frame that reads the chart, so it is where
+    // the type check is observable.
+    const receipts = receiptSet().filter((row) => row.kind === 'displacement');
+    expect(receipts.length).toBe(1);
+    const refused = compose({ receipts, chart: { TEMPER: '-3', COURAGE: 2 } });
+    expect(refused.articles).toEqual([]);
+    expect(refused.refusals.map((r) => r.reason)).toEqual(['no_word']);
+    // anchored: the SAME receipt composes when the same values are real numbers, so
+    // this is the TYPE being refused and not the displacement being broken
+    expect(compose({ receipts, chart: { TEMPER: -3, COURAGE: 2 } }).articles[0].line)
+      .toBe('Aldric runs more wrathful now than brave.');
+  });
+
   test('⛔ NO ENGINE TOKEN, NO NUMERAL AND NO PRONOUN reaches a composed line', () => {
     const NUMERAL = /[0-9]/;
     const TOKEN = /_/;
@@ -480,6 +511,30 @@ describe('W-LIVES L7 — GAP D: biography is a query, not a store', () => {
     expect(bio.marks).toEqual(['a battle survived', "a friend's betrayal", DECAY_CLAUSE]);
   });
 
+  test('⛔ MUTATION PLANT #17\'s CURE: the marks are CHRONOLOGICAL, on a case where that differs from sorted', () => {
+    // ⚠ THE ORDERING TEST ABOVE WAS VACUOUS AND ONLY A PLANT FOUND IT: the standard
+    // set's three clauses happen to arrive in alphabetical order, so sorting them
+    // changed nothing. That is car L5's own law one car later — an ordering assertion
+    // proves nothing unless the two orders actually differ. This fixture inverts them.
+    const receipts = [
+      {
+        kind: 'band_crossing', wnpcId: 'w1', axisId: 'TEMPER', tick: 5,
+        crossing: { from: 'neutral', to: 'virtue_marked', cause: 'creed', tick: 5 },
+        sourceKinds: ['took_holy_orders'], sourceEventIds: ['e1'],
+      },
+      {
+        kind: 'band_crossing', wnpcId: 'w1', axisId: 'COURAGE', tick: 9,
+        crossing: { from: 'neutral', to: 'virtue_marked', cause: 'ordeal', tick: 9 },
+        sourceKinds: ['survived_battle'], sourceEventIds: ['e2'],
+      },
+    ];
+    const marks = biographyOf({ receipts, wnpcId: 'w1' }).marks;
+    expect(marks).toEqual(['the taking of holy orders', 'a battle survived']);
+    // anchored: the two orders really are different here, which is what the assertion
+    // above is worth — sorted would put the battle first
+    expect([...marks].sort()).not.toEqual(marks);
+  });
+
   test('a soul the record never names has no biography, and says so', () => {
     const bio = biographyOf({ receipts: receiptSet(), wnpcId: 'nobody' });
     expect(bio.lived).toBe(false);
@@ -579,6 +634,12 @@ describe('W-LIVES L7 — totality, purity and the declared seam', () => {
     expect(bandParts(null)).toEqual({ pole: '', level: '' });
     expect(bandParts('virtue_shouted')).toEqual({ pole: '', level: '' });
     expect(bandParts('neutral')).toEqual({ pole: '', level: '' });
+    // ⛔ MUTATION PLANT #4's CURE. The three rows above all fail on the LEVEL, so
+    // dropping the POLE check entirely left every one of them green — a malformed
+    // disclosure could carry `pole: 'sideways'` into the projection unchallenged.
+    // A valid level with an invalid pole is the only shape that tests the pole check.
+    expect(bandParts('sideways_marked')).toEqual({ pole: '', level: '' });
+    expect(bandParts('virtue_marked')).toEqual({ pole: 'virtue', level: 'marked' });
     expect(chartValuesOf(undefined)).toEqual({});
     expect(() => characterArticles({ receipts: null, wnpcId: '', name: '' })).not.toThrow();
     expect(() => biographyOf({ receipts: 'nonsense', wnpcId: 'w1' })).not.toThrow();
