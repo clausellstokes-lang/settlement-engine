@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e0cddf4ad4865c8ce71d744a17c99e7ad5c41b03",
-  "measuredBy": "DENS-landing",
+  "measuredAtSha": "0d26defb50c1ae0bc1f81a830530ef759bd4366f",
+  "measuredBy": "SMALLS-landing",
   "date": "2026-08-31",
-  "note": "TE-DENSITY-1 consist (D1+D2+D2b+D2c+D3, 15 replayed commits + 4 landing bills) rebased onto claude/composite-r4 1d27accdc; the rebase resolved both in-train refreezes to T12s tuple per LANE_LAW_ADDENDUM_EFF1 §4, so this re-derives WHOLE at the landing tip. The train adds TWO test files: densityLaw.test.js (parks — loop registration, 142 runtime tests proven 142/142 by direct run) and densityCreateBoundary.walker.test.js (credits, +7 titles +1 suite). The five test files the span edits gained and lost ZERO titles.",
-  "files": 2455,
+  "note": "The smalls consist (RESIDUE-2 x2 + SP-W1 x3 + VOICE-1b x1) on a107bcde3; both in-train register commits dropped-as-empty per the DENS/T12 precedent and re-derived here. ONE new test file: allowlistRebuilderRegistry.walker.test.js (SP-W1) - CREDITED per its own fix car, 13 titles + 2 suites; every other consist test edit moved zero title lines (measured by diff).",
+  "files": 2456,
   "parked": 371,
-  "credited": 2084,
-  "titles": 21117,
-  "suiteTitles": 5808
+  "credited": 2085,
+  "titles": 21128,
+  "suiteTitles": 5810
 }
