@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "436b1b1b0c27c02525cf317bee856a2fdf14f44e",
-  "measuredBy": "T3 SEAT-A2 (SEAT-2c)",
+  "measuredAtSha": "739fcf64171a2c39dcfa65e13cbc9e70ff032f4f",
+  "measuredBy": "T3 SEAT-A2 (SEAT-3)",
   "date": "2026-08-31",
-  "note": "SEAT-2c adds tests/domain/seatIntervention.test.js (D9 wave 1: the eligibility widening, the hop-priced march, the uninvited share discount) and splits convergenceReactive.js out of convergence.js. Regenerated at the clean tip 436b1b1b0.",
-  "files": 2436,
+  "note": "SEAT-3 adds tests/domain/occupationPosture.test.js (the occupier posture axis: the typed field, the decision that writes it, and the two ladder inputs it biases) and amends the SEAT-1 dormancy arms. Regenerated at the clean tip 739fcf641.",
+  "files": 2437,
   "parked": 367,
-  "credited": 2069,
-  "titles": 20764,
-  "suiteTitles": 5718
+  "credited": 2070,
+  "titles": 20785,
+  "suiteTitles": 5722
 }
