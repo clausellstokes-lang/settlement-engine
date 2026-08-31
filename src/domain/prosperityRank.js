@@ -39,6 +39,14 @@
  * directions against `prosperity.js`'s own LABELS array, so a seventh label cannot be minted
  * without this leaf noticing.
  *
+ * ── ALL FOUR CONSUMERS ARE ON IT (T8) ───────────────────────────────────────
+ * `neighbourGenerator.js`, `interior/interiorModel.js` and `townMap/townLayoutV2.js` moved in
+ * T7. `corruption.js` could not: its climate adapter feeds `corruptionPass`, a GENERATION
+ * step, so the flip was same-seed load-bearing and ODQ §773.1 holds every golden-moving wave
+ * for T8's single shift window. It rode there (J-T7-C / §809), the registered holdout export
+ * that stood here in the meantime is deleted, and the golden rows it moved are re-recorded
+ * under the SHIFT RECORD in `tests/property/generatorGoldenMaster.test.js`.
+ *
  * Pure, dependency-free and deliberately tiny — it is imported by a generator, two domain
  * derivers and the town layout builder, and none of them may drag another's graph in.
  */
@@ -133,48 +141,4 @@ export function prosperityRank01(value) {
     if (folded.includes(key)) return FOLDED[key];
   }
   return PROSPERITY_RANK_NEUTRAL;
-}
-
-// ── THE ONE CONSUMER NOT YET ON THE CANONICAL LADDER ─────────────────────────
-//
-// ⚠ REGISTERED HERE RATHER THAN LEFT AS A PRIVATE LITERAL IN ITS OWN FILE, which is the whole
-// point: a divergence in the leaf is a divergence a reader and a walker can both see.
-//
-// `corruption.js`'s climate adapter feeds `corruptionPass`, a GENERATION pipeline step, so its
-// ladder is same-seed load-bearing. MEASURED IN THIS LANE, by bisection against
-// `tests/property/generatorGoldenMaster.test.js` at `73a3fce69`: with corruption reverted and
-// every other consumer moved, drift = 0 of 525; with corruption moved and every other consumer
-// reverted, drift = 91 of 525. So all ninety-one rows are this consumer and no other.
-//
-// ODQ §773.1 couples every golden-moving wave into T8's SINGLE shift window — the same law
-// that already moved the priorityCategory relabel out of this train — so the flip does not
-// ride T7. IT IS SCHEDULED, NOT PARKED (§764.4): T8 deletes the two exports below, points
-// `corruption.js` at `prosperityRank01`, and re-records the 91 rows under a SHIFT RECORD
-// naming this cause. `tests/domain/prosperityRank.test.js` asserts the legacy ladder has
-// EXACTLY ONE importer and pins the six labels on which the two ladders disagree, so it can
-// neither spread nor drift while it waits.
-//
-// The values and the resolution ORDER are `corruption.js`'s verbatim, insertion-order
-// substring scan and 0.4 default included, because "byte-identical until T8" is the claim.
-const PRE_T8_CORRUPTION_SCORE = Object.freeze({
-  subsistence: 0.0, destitute: 0.0, poor: 0.2, struggling: 0.2, meager: 0.2,
-  moderate: 0.4, modest: 0.4, stable: 0.45, comfortable: 0.6,
-  prosperous: 0.8, thriving: 0.8, wealthy: 1.0, affluent: 1.0, opulent: 1.0,
-});
-
-/** The single file still reading the pre-T8 ladder. Asserted by the leaf's own suite. */
-export const PROSPERITY_RANK_PRE_T8_CORRUPTION_CONSUMER = 'src/domain/corruption.js';
-
-/** The pre-T8 ladder itself, exported so its suite can pin the disagreement label by label. */
-export const PROSPERITY_RANK_PRE_T8_CORRUPTION = PRE_T8_CORRUPTION_SCORE;
-
-/**
- * `corruption.js`'s prosperity read, VERBATIM, pending T8's golden window.
- * Do not add a caller: the leaf's suite asserts this has exactly one.
- * @param {unknown} value @returns {number} 0..1
- */
-export function prosperityRank01PreT8Corruption(value) {
-  const s = String(value || '').toLowerCase();
-  for (const [k, v] of Object.entries(PRE_T8_CORRUPTION_SCORE)) { if (s.includes(k)) return v; }
-  return 0.4; // unknown → middling
 }

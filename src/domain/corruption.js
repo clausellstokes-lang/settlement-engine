@@ -19,7 +19,7 @@
  */
 
 import { institutionHasTag, TAG } from '../lib/entities.js';
-import { prosperityRank01PreT8Corruption } from './prosperityRank.js';
+import { prosperityRank01 } from './prosperityRank.js';
 // TRAIT_ALIGNMENT lives in the zero-import leaf data/npcTraitWeights.js (npcData.js
 // re-exports it). npcAlignmentScore below reads it. corruption.js is EAGER (first paint),
 // so it imports the LIGHT leaf directly — importing from npcData.js would drag that 64 kB
@@ -498,12 +498,14 @@ export function guildEffectiveSecurity(security, strength) {
 // FOUR private re-quantifications of the same six-label categorical, on three different
 // scales (§759.3, the §711.6 family). It now lives in `domain/prosperityRank.js`, the one
 // leaf, whose header carries the full divergence table and the argument for the ladder that
-// won. THIS consumer still reads the PRE-T8 ladder, and deliberately: it feeds
-// `corruptionPass`, a generation step, so flipping it moves 91 of 525 generator-golden rows
-// (measured by bisection in T7) — and §773.1 couples every golden-moving wave into T8's one
-// shift window. The values are unchanged from the map that stood here; the divergence is now
-// a REGISTERED export with a walker holding it to a single importer, instead of a private
-// literal no reader could see. T8 deletes it.
+// won. This consumer was the LAST holdout: it feeds `corruptionPass`, a generation step, so
+// moving it was same-seed load-bearing and §773.1 held it for T8's single shift window.
+// FLIPPED IN T8 (J-T7-C, ODQ §809) — the registered holdout export and the walker that held
+// it to this one importer are both gone, and the golden rows the flip moved are re-recorded
+// under the SHIFT RECORD in `tests/property/generatorGoldenMaster.test.js`, which names this
+// cause. The dead symbol is deliberately NOT spelled here: the leaf's suite scans src/ for it
+// by name, so writing it in a comment is how it gets copied back.
+// The class is closed: FOUR consumers, ONE ladder, and the leaf's suite keeps it that way.
 
 /**
  * The ONE criminal-organization detector (tag/name backfill OR criminal
@@ -548,7 +550,7 @@ export function readCorruptionClimate(settlement) {
   return {
     crime,
     security,
-    prosperity: prosperityRank01PreT8Corruption(eco.prosperity),
+    prosperity: prosperityRank01(eco.prosperity),
     hasCriminalInst,
     criminalInstitutions,
   };
