@@ -574,8 +574,21 @@ const dependsOn = (text, moduleRe, symbols) => (
     //   · the FUNNEL stays sealed, which is what actually produces pulls (step 2);
     //   · the door's own production importers are enumerated BY NAME (step 4), so
     //     a fifth consumer cannot arrive without somebody meaning it.
+    //
+    // AMENDED A FOURTH TIME BY CAR L7, and by GROWING the family exactly as cars L3
+    // and L4 did rather than loosening anything. `characterReadModel.js` is the read
+    // model and the prose: it names the drift module, the funnel AND the reputation
+    // read, and it is imported by NOBODY — the shape every family member has had.
+    //
+    // ⭐ AND IT IS NOT A DOOR CONSUMER, DELIBERATELY. L7 needs car L1's word
+    // projection, whose seam constant lives on the door (`characterConsumers.js`).
+    // Importing that constant would have made this file the door's FOURTH walker and
+    // quietly changed what step 4 means. It CITES the seam in a comment instead —
+    // which car L5's comment-stripping amendment made free — and takes the projection
+    // as an injected argument. A documentation constant is not a dependency.
     const FAMILY = [
       'characterDrift.js',
+      'characterReadModel.js',
       'knownCharacter.js',
       'livedExperienceCatalog.js',
       'livedExperienceFunnel.js',
