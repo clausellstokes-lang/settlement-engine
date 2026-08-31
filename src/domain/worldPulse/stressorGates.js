@@ -33,6 +33,7 @@ import { governanceLedger } from '../governanceLedger.js';
 import { magicLedger, ARCANE_INSTITUTION_PATTERN } from '../magicLedger.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { coupContenders } from '../rulingPowerCoup.js';
+import { occupationRegimeOf } from '../rulingPowerSeat.js';
 import { resolveBlockadeBypassChannel } from './foodStockpile.js';
 import {
   institutionClassValue,
@@ -727,6 +728,54 @@ function magicDeadzoneGate(snapshot, pressure) {
   ]);
 }
 
+/**
+ * THE OCCUPIED PREDICATE AT THE COUP GATE — W-SEAT SEAT-1, D4's named move
+ * ("the coupSpawnGate's occupation-null moves from the stressor spelling to THE
+ * occupied predicate", law §2.1), landed FLAG-GATED exactly as A1.1.2 rules.
+ *
+ * ⚠ THIS IS A MEASURED WIDENING, NOT PLUMBING, AND THE MEASUREMENT CAME FIRST.
+ * A1.1.2 forbids assuming the two spellings agree, so SEAT-1 measured them
+ * (receipt: the four-case probe in `tests/domain/foreignSeatResolver.test.js`,
+ * "the occupied-predicate delta"). They diverge in BOTH directions because they
+ * read two arrays that no writer links:
+ *
+ *   • LEDGER-ONLY (`worldState.occupations[sid]`): a war-layer conquest mints a
+ *     ledger row at occupation.js:966 and NEVER a `type:'occupation'` stressor.
+ *     Measured: the stressor spelling reads `false`, so THIS GATE OPENS and a
+ *     coup spawns in a town whose seat is already held at spearpoint. That is
+ *     the live defect the move cures.
+ *   • STRESSOR-ONLY (`worldState.stressors`): a generation-authored `occupied`
+ *     stress (stressorPicker.js:38) or a pressure-born occupation stressor has
+ *     no ledger row at all. The gate blocks today, and MUST keep blocking.
+ *
+ * So the lit predicate is the UNION, never a swap: it can only ever block MORE
+ * coups than today, never fewer. ⛔ AND THE DARK PATH KEEPS THE STRESSOR
+ * SPELLING VERBATIM — that is the written admission A1.1.2 demands, not an
+ * oversight: a dark world's coup gate behaves byte-identically to before this
+ * commit, and "0-when-dark" is NEVER cited as a licence for a predicate swap.
+ * Promotion to an unconditional declared repair is an OWNER ruling with this
+ * measurement in hand, not a later lane's judgment call.
+ *
+ * The flag is read off the WORLD STATE rather than normalized rules — a virtual
+ * key has no DEFAULT_SIMULATION_RULES entry to normalize, so the normalizer
+ * would strip it (the `brokerageEffectsActive` idiom, brokerageStamps.js:397).
+ *
+ * @param {any} snapshot @param {string} sid @returns {boolean}
+ */
+function occupierGovernsHere(snapshot, sid) {
+  const stressorSpelling = activeTypesAt(snapshot, sid).has('occupation');
+  // ⛔ THE POSITIVE `=== true` SPELLING IS LOAD-BEARING, NOT STYLE. The engine-gated-key
+  // census (tests/lint/engineGatedRuleKeys.walker.test.js) discovers virtual flags by
+  // scanning for exactly this form; a `!== true` early-return reads identically at runtime
+  // and is INVISIBLE to it, which would leave this key manifested with no measured gate.
+  // The errandSpine row records the same trap from the other side.
+  const simulationRules = snapshot?.worldState?.simulationRules;
+  if (simulationRules?.foreignSeatEnabled === true) {
+    return stressorSpelling || occupationRegimeOf(snapshot?.worldState, sid).occupied;
+  }
+  return stressorSpelling;
+}
+
 // ── Coup spawn gate (moved verbatim-in-spirit from stressors.js) ───────────
 // A coup is gated on settlement POLITICS rather than raw pressure alone: it
 // needs an exposed seat (legitimacy Contested or worse — rare at Contested,
@@ -746,7 +795,7 @@ function coupSpawnGate(snapshot, pressure) {
   const legitimacy = settlement.powerStructure?.publicLegitimacy;
   const score = Number.isFinite(legitimacy?.score) ? legitimacy.score : 50;
   if (score >= 45) return null; // Tolerated or better — nobody moves
-  if (activeTypesAt(snapshot, sid).has('occupation')) return null; // the occupier IS the authority
+  if (occupierGovernsHere(snapshot, sid)) return null; // the occupier IS the authority
   const { challengers } = coupContenders(settlement);
   if (!challengers.length) return null;
   const ra = entry?.causal?.scores?.ruling_authority;

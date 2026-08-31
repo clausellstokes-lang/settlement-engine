@@ -46,7 +46,7 @@ function codeOnly(source) {
 }
 
 describe('WC-0E · the war-circulation flags, the contribution ledger shape, and the blocks[] arm', () => {
-  it('joins both flags to the manifest and holds the triple bijection at 25', () => {
+  it('joins both flags to the manifest and holds the triple bijection at 27', () => {
     for (const flag of FLAGS) expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(flag);
     // 22 → 23 at EP-1 (2026-08-16), which mints advanceEpochEnabled with its certification
     // row in the same commit. THIS FILE IS A NAMED PATH ON EVERY FLAG-MINTING PACKET for
@@ -71,8 +71,8 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // to name. The habitat is the obligation being spread across suites nobody can
     // enumerate from the mint site; a flag-mint packet that named its surfaces from ONE
     // registry would end it, and that is TE-GUARDS-1's subject rather than this lane's.
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(26);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(26);
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(27);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(27);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

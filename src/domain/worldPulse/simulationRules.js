@@ -414,6 +414,33 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // un-normalized — the fail-OPEN direction on a persistence surface.
   'warCirculationEnabled',
   'contributionLedgerEnabled',
+  // Joined 2026-08-30 by W-SEAT car SEAT-1 under CR-WR10-C item 4 (the compiled charter's
+  // §3 flag law), in the SAME commit as its first real gate read and its AUTHORED
+  // certification row. ONE read: stressorGates.occupierGovernsHere, the door D4 names —
+  // the coup spawn gate's occupied test moving from the STRESSOR spelling to the ledger
+  // predicate. It is read off `snapshot.worldState.simulationRules` rather than the
+  // normalized rules, because a virtual key has no DEFAULT_SIMULATION_RULES entry and the
+  // normalizer would strip it (the brokerageEffectsActive idiom).
+  // ⛔ THIS KEY LIGHTS A PREDICATE WIDENING, WHICH IS WHY IT IS A FLAG AND NOT A REPAIR.
+  // A1.1.2 forbids swapping an occupied-predicate on the "0-when-dark" argument, because a
+  // predicate swap is a behaviour change in BOTH directions and dark-identity says nothing
+  // about it. The two spellings were MEASURED to diverge both ways before this landed
+  // (receipt in tests/domain/foreignSeatResolver.test.js), the lit form is their UNION so
+  // it can only block MORE coups than today, and the dark form is the stressor spelling
+  // VERBATIM. Promotion to an unconditional repair is an owner ruling with that
+  // measurement in hand, not a later lane's judgment.
+  // ⚠ TWO SIBLING KEYS ARE CHARTERED AND DELIBERATELY NOT MINTED HERE (A1.2.12's three-key
+  // topology): the DOMESTIC §736 upheaval-scaling key, which has no foreign seat involved
+  // at all, mints with car SEAT-2b, and the irregular-force key with SEAT-7 — each with
+  // the car that carries its first gate read, because a flag mint is a train boundary and
+  // three keys at once would leave two of them readerless.
+  // ⛔ AND THEIR NAMES ARE DELIBERATELY NOT SPELLED IN THIS COMMENT. The mechanism
+  // lit-coverage walker builds its flag DENOMINATOR by scanning this file's RAW SOURCE for
+  // /\b[a-zA-Z][a-zA-Z0-9]*Enabled\b/ — comments are NOT blanked — so writing a future
+  // key's literal name here mints it into the denominator years before it has a gate or a
+  // lit proof, and the ratchet reds naming a flag that does not exist. Measured, not
+  // guessed: spelling both siblings here put BOTH into `uncoveredFlags` on the first run.
+  'foreignSeatEnabled',
 ]);
 
 /**

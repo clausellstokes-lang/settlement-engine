@@ -173,14 +173,19 @@ describe('the covering array and its constraint manifest', () => {
     // mis-declared as virtual would have moved one of those two arms and this line would
     // have said so. The `union − governed` figure rises with it by construction (57 → 58):
     // a virtual key is never normalizer-governed.
-    expect(census.virtual.length).toBe(26);
+    // ⭐ AND 26 → 27 AT W-SEAT SEAT-1 (2026-08-30), which mints `foreignSeatEnabled` with its
+    // certification row in one commit. THE CLOSURE IS AGAIN THE PROOF: `union` moves 83 → 84
+    // in lockstep while governed (25) and ungoverned (32) do NOT move, confirming the key is
+    // genuinely VIRTUAL — absent from DEFAULT_SIMULATION_RULES and from every preset spread.
+    // `union − governed` rises with it by construction (58 → 59).
+    expect(census.virtual.length).toBe(27);
     expect(census.overlap).toEqual([]);
-    expect(census.union.length).toBe(83);
+    expect(census.union.length).toBe(84);
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
     // rises with the virtual arm by construction: a virtual key is never governed.
-    expect(census.union.length - census.governed.length).toBe(58);
+    expect(census.union.length - census.governed.length).toBe(59);
     expect(census.nonBoolean.length).toBe(13);
   });
 

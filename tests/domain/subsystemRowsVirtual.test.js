@@ -180,6 +180,7 @@ const UNDERCITY_HIGH_WATER = 'undercityHighWaterEnabled';
 // own door) in a single commit: the §49-ruling-3 cost above, paid in the same three
 // module-scope edits and carrying ZERO new test titles here.
 const TREASURY = 'treasuryEnabled';
+const FOREIGN_SEAT = 'foreignSeatEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
@@ -191,6 +192,7 @@ const VIRTUAL_RULES = Object.freeze([
   FAITH_UNSEATING,
   UNDERCITY_HIGH_WATER,
   TREASURY,
+  FOREIGN_SEAT,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -243,6 +245,13 @@ const LANE_LEAVES = Object.freeze({
   // tracing this member's zero-candidate claim through it would measure the whole pulse's
   // vocabulary rather than this lane's.
   [TREASURY]: ['src/domain/worldPulse/treasury.js'],
+  // W-SEAT SEAT-1. ONE FILE, and it really is one file: the resolvers, the band table, the
+  // grip table and the remnant law all live in the seat leaf. The GATE DOOR —
+  // stressorGates.js, where `occupierGovernsHere` reads the key — is in the row's wider
+  // `module` list and deliberately NOT here: it is the shared spawn-gate registry for
+  // twenty stressor types, and tracing this lane's zero-candidate claim through it would
+  // measure the entire stressor vocabulary rather than this lane's.
+  [FOREIGN_SEAT]: ['src/domain/rulingPowerSeat.js'],
   [AXES]: ['src/domain/worldPulse/beliefAxes.js'],
   // All three subject families share ONE gate door (beliefAxes.subjectAxesActive) and ONE
   // derivation leaf, so all three name the same pair. That is the honest scope: the leaf

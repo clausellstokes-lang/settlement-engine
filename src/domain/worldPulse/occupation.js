@@ -72,11 +72,11 @@ import {
   storedOccupierBenefit,
   warSpoilsEndedOutcome,
 } from './occupationRecordMode.js';
+// `normalizeRelationshipEdge` / `ensureRelationshipState` / `relationshipRoles`
+// were dropped from this import when SEAT-1 deleted the dead `vassalOverlordOf`
+// (see the note at the foot of this file) — that function was their only reader.
 import {
-  normalizeRelationshipEdge,
   relationshipKeyFromEdge,
-  ensureRelationshipState,
-  relationshipRoles,
   getRelationshipSettlements,
 } from './relationshipEvolution.js';
 // WR-8 amendment N — CONQUEST EXECUTION. `conquestDoctrineActive` is the flag
@@ -1307,21 +1307,15 @@ export const OCCUPATION_TUNING = Object.freeze({
   BENEFIT_RELIEF_SCALE,
 });
 
-/**
- * Detect a vassal edge `homeId` is the JUNIOR of (re-export of the deploymentReturn idiom
- * for occupation-aware liberation in tests/integration). Pure read of the pre-tick edges.
- * @param {PulseSnapshot} snapshot
- * @param {string} homeId
- * @returns {string|null} the overlord id, or null.
- */
-export function vassalOverlordOf(snapshot, homeId) {
-  const states = snapshot?.worldState?.relationshipStates || {};
-  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
-    const edge = normalizeRelationshipEdge(rawEdge);
-    const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
-    if (relState.relationshipType !== 'vassal') continue;
-    const roles = relationshipRoles(edge, relState);
-    if (String(roles.juniorId) === String(homeId)) return String(roles.seniorId ?? '');
-  }
-  return null;
-}
+// ⛔ `vassalOverlordOf` WAS HERE AND IS DELETED BY W-SEAT SEAT-1 (law §2.1's
+// resolver collapse). It took a SNAPSHOT and walked the relationship edges,
+// while `traditions/relations.js` carried a module-private function of the SAME
+// NAME that took a WORLDSTATE and read the OCCUPATIONS LEDGER — one name, two
+// questions, two substrates, which is §711.6's shape exactly. This one was a
+// DEAD EXPORT (measured: zero callers in src/, tests/, scripts/, api/,
+// mcp-server/, tools/ — its own docstring claimed it existed "for
+// tests/integration" and no test imported it either), so deleting it moves no
+// behaviour. The ledger question now has ONE home, `rulingPowerSeat.vassalOverlordOf`;
+// the edge question was never a separate public quantity and lives as one arm of
+// `rulingPowerSeat.foreignSeatOf`. Recorded rather than silently removed so the
+// next reader does not re-mint it here.

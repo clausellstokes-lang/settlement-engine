@@ -41,6 +41,7 @@ import { createPRNG } from '../../kernel/prng.js';
 import { slugify } from '../../kernel/slugify.js';
 import { reexpressed } from './politics.js';
 import { yearStreamSeedOf } from '../advanceEpochLedger.js';
+import { vassalOverlordOf } from '../rulingPowerSeat.js';
 
 /** @typedef {import('./genesis.js').TraditionRec} TraditionRec */
 
@@ -73,21 +74,16 @@ function logMutation(rec, year, kind, cause) {
 }
 
 // ── §8 the occupation read (the ONE imposition authority) ──────────────────────
-/**
- * The overlord id currently VASSALIZING a settlement, or null. Reads `worldState.occupations`
- * (the top-level occupation ledger — the documented exception to the spatialLedgers namespace,
- * per occupation.js): a record with state 'vassalized' (STATE_LADDER rung 4, the steady-state
- * max) is the ONE trigger. Any other state (or an absent record — the liberated exit rung) ⇒ null.
- * Pure, total.
- * @param {Record<string, unknown>} worldState @param {string} sid @returns {string|null}
- */
-function vassalOverlordOf(worldState, sid) {
-  const occ = asObject(asObject(worldState).occupations)[sid];
-  const o = asObject(occ);
-  if (String(o.state) !== 'vassalized') return null;
-  const overlordId = typeof o.occupierId === 'string' && o.occupierId ? o.occupierId : null;
-  return overlordId;
-}
+// ⛔ THE LOCAL `vassalOverlordOf` IS GONE — it now comes from the seat leaf
+// (W-SEAT SEAT-1, law §2.1's resolver collapse). It was a module-private
+// function reading `worldState.occupations` for the `vassalized` rung, and a
+// SECOND function of the same name existed in occupation.js reading the
+// relationship EDGES from a SNAPSHOT: one name, two questions, two substrates
+// (§711.6). The behaviour imported below is THIS file's semantics verbatim —
+// ledger, `state === 'vassalized'`, the `occupierId` key (NOT `overlordId`; the
+// scar is pinned at tests/domain/advanceEpochStampSurvival.test.js:582) — so the
+// two call sites below are unchanged in every input. The dead edge-walking twin
+// was deleted rather than kept.
 
 /** The highest-scale ACTIVE (non-suppressed) tradition in a rec set — the rite an overlord
  *  imposes / a migrant carries. Codepoint tie-break for determinism. Null when the set is

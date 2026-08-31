@@ -45,6 +45,8 @@
  *   tests/domain/subsystemRowsVirtual.test.js
  */
 
+import { SEAT_SUBSYSTEM_ROWS } from './subsystemRowsSeat.js';
+
 /** @typedef {import('./subsystemCertification.js').SubsystemRow} SubsystemRow */
 
 /**
@@ -1411,6 +1413,14 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // HARNESS inside that car's act (A1.22), not this one's.
     soakEvidence: 'unobserved',
   }),
+  // ── W-SEAT (SEAT-1..): the seat family's rows live in their own leaf ────────
+  // ⛔ NOT AN ARBITRARY SPLIT. This file stood at 788 effective lines against the layer's
+  // 800-line max-lines ceiling — the previous mint left twelve lines of headroom and an
+  // honest certification row costs ~35, so the next mint was always going to red the wall.
+  // The W-SEAT program charters THREE virtual keys, which makes it a habitat problem rather
+  // than a one-row problem. `VIRTUAL_SUBSYSTEM_ROWS` remains the ONE export every consumer,
+  // walker and bijection reads, so nothing downstream moves; see subsystemRowsSeat.js.
+  ...SEAT_SUBSYSTEM_ROWS,
 ]);
 
 /**
