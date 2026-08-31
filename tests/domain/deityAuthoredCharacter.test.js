@@ -1,20 +1,22 @@
 /**
  * deityAuthoredCharacter.test.js — W-FAITH F1c: the deity's authored character.
  *
- * The car adds six OPTIONAL fields to the deity shape and NO engine behavior:
+ * F1c added six OPTIONAL fields to the deity shape and NO engine behavior:
  * `authoredTemper` (the D1 stance dial), `characterAxes` (leveled positions on the
  * shared paradigm chart, W-LIVES §6), and the two boon/bane channel+strength pairs
- * (D3). Every one of them is stored inert this car; the arms that read them are
- * W-FAITH F2c/F4c and W-LIVES car 5.
+ * (D3). ⚠ **W-FAITH F2c WIRED THE FIRST OF THEM** — `deityTemper` now has an
+ * authored arm, and the four tests that said otherwise are flipped in place and
+ * marked. The remaining five fields are still stored inert; their arms are W-FAITH
+ * F4c and W-LIVES car 5.
  *
  * WHAT THIS FILE PROVES, in four groups:
  *
- *   1. THE INERTNESS PIN (the car's conviction claim). The retired stored
- *      `temperamentAxis` is inert to every engine temper read, and so is the new
- *      `authoredTemper` AT THIS CAR. Both halves matter: the first is D1's standing
- *      promise, the second is this car's own "changed nothing" claim, and only the
- *      pair distinguishes "the authored arm is not wired yet" from "the authored arm
- *      is wired and happens to agree".
+ *   1. THE INERTNESS PIN (the conviction claim, now split). The retired stored
+ *      `temperamentAxis` is inert to every engine temper read — D1's STANDING
+ *      promise, unchanged and load-bearing forever — while `authoredTemper` now
+ *      OVERRIDES the derivation. Both halves still matter, and their disjointness is
+ *      the whole point: they are what distinguishes "the new dial works" from "the
+ *      old compat mirror woke up", which are indistinguishable from the outside.
  *   2. VALIDATION, accept and reject, for every new field, through BOTH walls — the
  *      canonical admission chokepoint (the manifest projection, which is what the
  *      store actually calls) and the compat validator `validateDeity`.
@@ -92,7 +94,7 @@ function manifestSchemaOf(key) {
   return MANIFEST.schemas[manifestField(key).schema];
 }
 
-describe('W-FAITH F1c · THE INERTNESS PIN (the old field cannot wake, the new one is not wired)', () => {
+describe('W-FAITH F1c/F2c · THE INERTNESS PIN (the old field cannot wake; the new dial is now wired)', () => {
   test('deityTemper ignores the stored temperamentAxis across all 27 axis combinations', () => {
     // The conviction shape: hold alignment and law fixed, vary ONLY the stored
     // temperament, and the derived answer must not move. Done over the whole cross
@@ -130,20 +132,33 @@ describe('W-FAITH F1c · THE INERTNESS PIN (the old field cannot wake, the new o
       .toBe('warlike');
   });
 
-  test('authoredTemper does not move the temper read AT THIS CAR', () => {
-    // This car ships SCHEMA only. The authored arm is F2c's, and until it lands the
-    // honest claim is that authoring the field changes nothing at all.
+  test('authoredTemper OVERRIDES the derivation — the D1 arm, wired by F2c', () => {
+    // ⚠ FLIPPED BY W-FAITH F2c. At F1c this test asserted the opposite ("authoring
+    // the field changes nothing at all"), because the arm had not landed. It has.
+    // The retired-axis pin two tests up is UNCHANGED and still green beside it —
+    // that pair is what distinguishes "the new dial works" from "the old field woke".
     expect(deityTemper({ alignmentAxis: 'evil', lawAxis: 'chaotic', authoredTemper: 'peacelike' }))
-      .toBe('warlike');
-    expect(deityTemper({ alignmentAxis: 'good', lawAxis: 'lawful', authoredTemper: 'warlike' }))
       .toBe('peacelike');
+    expect(deityTemper({ alignmentAxis: 'good', lawAxis: 'lawful', authoredTemper: 'warlike' }))
+      .toBe('warlike');
   });
 
-  test('a deity carrying every new field reads the same temper as one carrying none', () => {
+  test('an authored NEUTRAL is a real choice and beats a derivation that would say warlike', () => {
+    // §797.4: neutral is first-class on every aspect. A truthiness-shaped arm would
+    // pass every other case in this file and fail exactly here, so this is the test
+    // that fixes the arm's SHAPE rather than merely its direction.
+    expect(deityTemper({ alignmentAxis: 'evil', lawAxis: 'chaotic' })).toBe('warlike');
+    expect(deityTemper({ alignmentAxis: 'evil', lawAxis: 'chaotic', authoredTemper: 'neutral' }))
+      .toBe('neutral');
+  });
+
+  test('the OTHER five new fields are still inert to the temper read', () => {
+    // F1c's claim, narrowed by F2c to exactly the fields F2c did not wire. The
+    // chart positions and the two boon/bane pairs move nothing here; their arms are
+    // W-LIVES car 5 and W-FAITH F4c.
     const bare = deityTemper(LEGACY);
     const dressed = deityTemper({
       ...LEGACY,
-      authoredTemper: 'warlike',
       characterAxes: ['MERCY:vice:defining', 'CANDOR:virtue:marked'],
       boonChannel: 'harvest',
       boonStrength: 'firm',
@@ -151,6 +166,26 @@ describe('W-FAITH F1c · THE INERTNESS PIN (the old field cannot wake, the new o
       baneStrength: 'faint',
     });
     expect(dressed).toBe(bare);
+  });
+
+  test('an authoredTemper outside the vocabulary falls through to the derivation', () => {
+    // The write-time walls refuse it; this leaf declines to be the one place that
+    // would not. It matters because nicheOf() builds a niche KEY out of this return
+    // value — a word that escaped validation would mint an unshareable niche.
+    for (const bad of ['brooding', '', 'Warlike', 'peaceful']) {
+      expect(deityTemper({ alignmentAxis: 'evil', lawAxis: 'chaotic', authoredTemper: bad }))
+        .toBe('warlike');
+    }
+    // …and the guard is not vacuous: the three legal words DO come back verbatim.
+    for (const good of DEITY_TEMPER_KEYS) {
+      expect(deityTemper({ alignmentAxis: 'evil', lawAxis: 'chaotic', authoredTemper: good }))
+        .toBe(good);
+    }
+  });
+
+  test('a null/absent deity still reads undefined — the arm added no new answer', () => {
+    expect(deityTemper(null)).toBeUndefined();
+    expect(deityTemper(undefined)).toBeUndefined();
   });
 });
 

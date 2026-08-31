@@ -1480,13 +1480,14 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
           "ui": false,
           "effect": "presentation",
           "activation": "conditional",
-          "condition": "The authored stance dial (warlike/peacelike/neutral), distinct from the retired `temperamentAxis` mirror. Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today.",
+          "condition": "The authored stance dial (warlike/peacelike/neutral), distinct from the retired `temperamentAxis` mirror, which stays inert forever. W-FAITH F2c LANDED THE READ ARM: `deityAxes.deityTemper` returns an authored word when one is present (an authored `neutral` wins too) and derives from the alignment axes otherwise. The effect is PRESENTATION and that is measured, not assumed: `deitySnapshotFrom` and the three commit-time embed writers copy a named key list that does not include this key, so no engine consumer can see an authored word and no same-seed mechanics move. The one surface it reaches today is the compendium's deity draft preview, which is handed the raw editor draft. Carrying the key into the embed is an owner-gated persisted-shape act that would also promote this field to `mechanical`; tests/domain/deityTemperConsumerCensus.walker.test.js holds the tripwire. The chart-position readers are W-LIVES car 5 and the boon/bane channel wiring is W-FAITH F4c.",
           "consumers": [
+            "deityAxes",
             "validateDeity"
           ],
           "effectKind": "presentation",
           "activationMode": "conditional",
-          "explanation": "The authored stance dial (warlike/peacelike/neutral), distinct from the retired `temperamentAxis` mirror. Stored inert. No engine or display consumer reads it yet: the authored temper arm lands in W-FAITH F2c, the chart-position readers in W-LIVES car 5, and the boon/bane channel wiring in W-FAITH F4c. Write-time validation is the only consumer today."
+          "explanation": "The authored stance dial (warlike/peacelike/neutral), distinct from the retired `temperamentAxis` mirror, which stays inert forever. W-FAITH F2c LANDED THE READ ARM: `deityAxes.deityTemper` returns an authored word when one is present (an authored `neutral` wins too) and derives from the alignment axes otherwise. The effect is PRESENTATION and that is measured, not assumed: `deitySnapshotFrom` and the three commit-time embed writers copy a named key list that does not include this key, so no engine consumer can see an authored word and no same-seed mechanics move. The one surface it reaches today is the compendium's deity draft preview, which is handed the raw editor draft. Carrying the key into the embed is an owner-gated persisted-shape act that would also promote this field to `mechanical`; tests/domain/deityTemperConsumerCensus.walker.test.js holds the tripwire. The chart-position readers are W-LIVES car 5 and the boon/bane channel wiring is W-FAITH F4c."
         },
         {
           "type": "string-or-string-list",
