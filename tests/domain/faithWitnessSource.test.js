@@ -15,6 +15,19 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DEITY_CHART_AXIS_IDS } from '../../src/domain/customContentSchema.js';
 import { PARADIGM_AXES, AXIS_LEVELS } from '../../src/domain/npc/paradigmAxisCatalog.js';
+// ⭐⭐ THE RECONCILE PINS BELOW ARE NOW LIVE IMPORTS, AND THAT IS THE FLIP THIS FILE
+// WAS BUILT TO MAKE. `faithWitnessSource.js`'s header promised that "every vocabulary
+// it shares with the funnel is MIRRORED under a reconcile pin that flips to a live
+// equality the moment the two cars share a tree". They share a tree. A pin that
+// regex-scraped the other stack's SOURCE TEXT could pass on a comment; these read the
+// values the funnel will actually use.
+import {
+  AMBIENT_EXPERIENCE_KINDS,
+  EXPERIENCE_TABLE,
+  LIVED_EXPERIENCE_KINDS,
+  RECEIPTED_EXPERIENCE_KINDS,
+  PULL_BANDS as FUNNEL_PULL_BANDS,
+} from '../../src/domain/npc/livedExperienceCatalog.js';
 import { INTERVAL_WEEKS } from '../../src/domain/worldPulse/intervalWeeks.js';
 import {
   FAITH_WITNESS_KIND,
@@ -62,40 +75,74 @@ function emit(religionState, { dweltTicks = ONE_SEASON, settlement = SETTLEMENT 
 
 describe('RECONCILE PINS — a mirror cannot outlive its source silently', () => {
   test('PULL_BANDS must equal the funnel catalog\'s the moment they share a tree', () => {
-    if (!existsSync(L2_CATALOG)) {
-      // Anchored: the absence is a FACT about this tree, asserted positively rather
-      // than skipped — and the sibling that DOES exist proves the path is right.
-      expect(existsSync(join(REPO_ROOT, 'src/domain/npc/paradigmAxisCatalog.js'))).toBe(true);
-      expect([...PULL_BANDS]).toEqual(['faint', 'firm', 'heavy']);
-      expect(PULL_BANDS.length).toBe(AXIS_LEVELS.length);
-      return;
-    }
-    const source = readFileSync(L2_CATALOG, 'utf8');
-    const match = source.match(/export const PULL_BANDS = Object\.freeze\(\[([^\]]*)\]\)/);
-    expect(match, 'the catalog still declares PULL_BANDS as a frozen literal').toBeTruthy();
-    const bands = [...(match?.[1] ?? '').matchAll(/'([a-z_]+)'/g)].map((m) => m[1]);
-    expect(bands).toEqual([...PULL_BANDS]);
+    // ⭐ THE FALLBACK ARM IS GONE, AND ITS REMOVAL IS THE POINT. It existed only to
+    // say something honest while the catalog was on another stack; the catalog is a
+    // static import above now, so that branch is one no assertion could ever reach —
+    // and this estate's own law is to RETIRE an unreachable branch rather than pin it.
+    // The mirror is proven against the live value, both ways.
+    expect([...PULL_BANDS]).toEqual([...FUNNEL_PULL_BANDS]);
+    expect(PULL_BANDS.length).toBe(AXIS_LEVELS.length);
+    // anchored: the shared value is non-trivial, so the equality above is not two
+    // empty arrays agreeing.
+    expect(FUNNEL_PULL_BANDS.length).toBe(3);
+    // and the catalog file really is where the import says it is.
+    expect(existsSync(L2_CATALOG)).toBe(true);
   });
 
   test('⛔ THE DEBT: this car\'s kind must be ADMITTED to the funnel\'s catalog', () => {
-    if (!existsSync(L2_CATALOG)) {
-      // The debt, stated as an assertion rather than as a comment. There is no
-      // faith-exposure kind in the funnel's 31: `god_fortunes_*` are receipted but
-      // already carry L4 adapters (§856 non-overlap forbids reuse) and `dwell_milieu`
-      // is roads-owned. So this kind is MINTED here and OWED there.
-      expect(FAITH_WITNESS_KIND).toBe('faith_milieu');
-      expect(FAITH_WITNESS_PLANE).toBe('witness');
-      expect(FAITH_WITNESS_FAMILY).toBe('milieu');
-      return;
-    }
-    // ⭐ THE FLIP. Once the trees are shared this stops being a declaration and
-    // becomes a live requirement: the catalog must carry the row, on the plane and
-    // family this adapter emits, marked ambient (F9 requires a declared span).
-    const source = readFileSync(L2_CATALOG, 'utf8');
+    // The debt's own statement, kept verbatim because it is what made it
+    // unforgettable: there was no faith-exposure kind in the funnel's 31 —
+    // `god_fortunes_*` are receipted but already carry L4 adapters (§856 non-overlap
+    // forbids reuse) and `dwell_milieu` is roads-owned. So the kind was MINTED here
+    // and OWED there. It is now ADMITTED there, and this is where that is proven.
+    expect(FAITH_WITNESS_KIND).toBe('faith_milieu');
+    expect(FAITH_WITNESS_PLANE).toBe('witness');
+    expect(FAITH_WITNESS_FAMILY).toBe('milieu');
+    // ⭐ THE FLIP, EXECUTED AT THE SUBSTRATE COUPLING. Once the trees are shared this
+    // stops being a declaration and becomes a live requirement: the catalog must
+    // carry the row, on the plane and family this adapter emits, marked ambient (F9
+    // requires a declared span).
+    //
+    // ⭐⭐ AND IT IS ASKED OF THE LIVE MODULE, NOT OF ITS SOURCE TEXT. The pin was
+    // written as a substring scan because it could not import a catalog that was not
+    // in its tree; the catalog is here now, so the debt is discharged against the
+    // VALUES the funnel will actually read. A source scan would have passed on the
+    // word `faith_milieu:` appearing in a comment — which is precisely the citation
+    // class this coupling spent four walkers curing.
+    const row = EXPERIENCE_TABLE[FAITH_WITNESS_KIND];
     expect(
-      source.includes(`${FAITH_WITNESS_KIND}:`),
+      row,
       `the funnel catalog has no '${FAITH_WITNESS_KIND}' row — this adapter's output is refused at the door until it does`,
-    ).toBe(true);
+    ).toBeTruthy();
+    expect(LIVED_EXPERIENCE_KINDS).toContain(FAITH_WITNESS_KIND);
+    expect(row.plane).toBe(FAITH_WITNESS_PLANE);
+    expect(row.family).toBe(FAITH_WITNESS_FAMILY);
+    // F9: an ambient row is what lets this adapter's integrated span be honoured.
+    expect(row.ambient).toBe(true);
+    expect(AMBIENT_EXPERIENCE_KINDS).toContain(FAITH_WITNESS_KIND);
+    // ⭐ AND THE DEBT IS PAID IN SUBSTANCE, NOT IN LETTER: an admitted row that the
+    // funnel still refuses would leave the adapter exactly as mute as before. A
+    // `sourceUnverified` row is refused at the door by construction, and the funnel
+    // accepts a CALLER-SUPPLIED pull vector only for an ambient kind whose tabled
+    // vector is empty — which is the shape this adapter emits.
+    expect(row.sourceUnverified).toBe(false);
+    expect(RECEIPTED_EXPERIENCE_KINDS).toContain(FAITH_WITNESS_KIND);
+    expect(row.pulls).toEqual([]);
+    expect(row.receipt).toBeTruthy();
+  });
+
+  test('⭐ THE KIND IS NOT A SECOND SPELLING OF THE ROW BESIDE IT', () => {
+    // `dwell_milieu` and `faith_milieu` share a plane, a family and the ambient flag
+    // — deliberately, they are the same SHAPE — so the thing that must never
+    // collapse is that they are two rows with two receipts. W-LIVES §3 lists them
+    // separately and §6 names the faith pull explicitly.
+    const faith = EXPERIENCE_TABLE[FAITH_WITNESS_KIND];
+    const dwell = EXPERIENCE_TABLE.dwell_milieu;
+    expect(dwell).toBeTruthy();
+    expect(faith.plane).toBe(dwell.plane);
+    expect(faith.family).toBe(dwell.family);
+    expect(faith.receipt).not.toBe(dwell.receipt);
+    expect(FAITH_WITNESS_KIND).not.toBe('dwell_milieu');
   });
 
   test('the cadence is IMPORTED, not mirrored — one season, from the estate\'s own table', () => {

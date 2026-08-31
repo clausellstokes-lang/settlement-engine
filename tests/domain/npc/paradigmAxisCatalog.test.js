@@ -408,14 +408,153 @@ describe('DARK BY CONSTRUCTION — the catalog is consumed by nothing in src/', 
     return out;
   }
 
-  test('no src/ file imports paradigmAxisCatalog — car L5 owns the re-pointing, not L1', () => {
+  /**
+   * ⚠⚠ COMMENTS ARE STRIPPED, AND A FROZEN SEAM STRING IS A CITATION TOO. This
+   * walker never received L5's amendment, and the substrate coupling is what
+   * exposed it: FOUR of the five files it convicted do not import this catalog at
+   * all. Classified by hand, code vs comment vs data:
+   *
+   *   `customContentSchema.js`    line 208, a COMMENT explaining why it mirrors
+   *   `characterDrift.js`         line 123, a COMMENT explaining why it mirrors
+   *   `livedExperienceCatalog.js` lines 43 and 146, COMMENTS, same reason
+   *   `characterConsumers.js`     line 52 a comment, and line 98 the frozen constant
+   *                               `PARADIGM_WORD_PROJECTION_SEAM =
+   *                               'paradigmAxisCatalog.js#wordForAxisPosition'` — a
+   *                               SEAM NAME held as data so the landing car can find
+   *                               its address by symbol instead of by search. Naming
+   *                               the import you have NOT yet made is the opposite of
+   *                               having made it.
+   *
+   * The four leaves each explain, in prose, that they MIRROR rather than import —
+   * so the old detector convicted them for documenting the very restraint the
+   * closure is asserting.
+   * @param {string} text
+   */
+  const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
+  /**
+   * ⛔ `AXIS_LEVELS` IS NOT ON THIS ROSTER, AND THAT IS MEASURED, NOT STYLISTIC:
+   * `characterDrift.js` exports the same name, so a dereference arm carrying it
+   * would convict every reader of the DRIFT module of reading the CATALOG. The
+   * control below proves each entry is owned by exactly one module.
+   */
+  const CATALOG_SYMBOLS = Object.freeze([
+    'PARADIGM_AXES', 'TRAIT_COLUMNS', 'CATALOG_PROVENANCE', 'LEGACY_WORD_LEVEL',
+    'CAPABILITY_WORDS', 'MODIFIER_WORDS', 'UNPOOLED_LEGACY_WORDS', 'POOL_DUPLICATE_WORDS',
+    'axisById', 'traitColumns', 'derivedTraitPlane', 'derivedTraitAlignment',
+    'derivedTraitAggression', 'derivedFlawVector', 'axisPositionForWord',
+    'wordForAxisPosition', 'axisHomedWords', 'mintedWords',
+  ]);
+
+
+  /**
+   * ⛔⛔⛔ AND A SYMBOL INSIDE A STRING LITERAL IS A CITATION TOO — THE SIXTH SIGHTING
+   * OF THIS ESTATE'S LAW, AND IT CONVICTED THE VERY CAR THAT WROTE THE CURE.
+ *
+   * The dereference arm above was added to catch an aliased import plus a call. On its
+   * first run it convicted `livedExperienceCatalog.js` of depending on the witness
+   * adapter — on the strength of the RECEIPT STRING that names it:
+   * `'faithWitnessSource.js:faithWitnessEntries (religionState pantheon ...)'`. A quoted
+   * name followed by a space and a paren is indistinguishable from a call to a scanner
+   * that only strips comments.
+ *
+   * ⭐ THE GENERALISATION, and it is the one this whole family has been converging on:
+   * COMMENTS AND STRING LITERALS ARE BOTH CITATIONS. Only two things are dependencies —
+   * an import specifier, and a dereference in CODE. So the module arm is asked BEFORE
+   * strings are blanked (an import specifier IS a string literal), and the symbol arm is
+   * asked AFTER. Ban lists, seam-name constants, `home:` paths and receipt strings all
+   * fall out of the detector at once, because they were always the same shape.
+   * @param {string} text
+   */
+  const codeWithoutCitations = (text) => stripComments(text)
+    .replace(/'(?:[^'\\]|\\.)*'/g, "''")
+    .replace(/"(?:[^"\\]|\\.)*"/g, '""')
+    .replace(/`(?:[^`\\]|\\.)*`/g, '``');
+
+  /** @param {string} text */
+  const dependsOnCatalog = (text) => (
+    /from\s+'[^']*\/paradigmAxisCatalog\.js'/.test(stripComments(text))
+      || new RegExp(`\\b(${CATALOG_SYMBOLS.join('|')})\\s*[([.]`).test(codeWithoutCitations(text))
+  );
+
+  /**
+   * THE ENROLLED CONSUMER ROSTER — one row, and it is the coupling itself.
+   *
+   * ⭐ THIS IS A TIGHTENING, NOT AN OPENING, AND THE TEST BELOW IS WHERE THE
+   * DIFFERENCE IS PAID. The old claim was "nobody", which the coupling made false:
+   * W-FAITH's `faithWitnessSource.js` imports `AXIS_LEVELS` to map a deity's
+   * authored `AXIS:pole:level` token rung-for-rung onto the funnel's band ladder —
+   * the one import that makes the witness adapter possible with zero invented
+   * vocabulary (§806/F14; W-LIVES §6). The new claim is STRICTLY MORE: the set is
+   * pinned exactly, so a stray consumer still reds, AND the enrolled consumer must
+   * itself be unreachable from production, so the catalog is still dark THROUGH it.
+   * "Car L5 owns the re-pointing" is unchanged — no legacy-word seam moved here.
+   */
+  const ENROLLED_CONSUMERS = ['src/domain/worldPulse/faithWitnessSource.js'];
+
+  test('the src consumers of paradigmAxisCatalog are the enrolled coupling roster, and nothing else', () => {
     const importers = jsFilesUnder(join(REPO_ROOT, 'src'))
       .filter((file) => !file.endsWith('paradigmAxisCatalog.js'))
-      .filter((file) => /paradigmAxisCatalog/.test(readFileSync(file, 'utf8')))
-      .map((file) => relative(REPO_ROOT, file));
-    // If this reds, a consumer was re-pointed early. That is car L5's act, and it
-    // must arrive WITH the byte-identity proof for the seam it moves.
-    expect(importers).toEqual([]);
+      .filter((file) => dependsOnCatalog(readFileSync(file, 'utf8')))
+      .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'))
+      .sort();
+    // If this reds with a NEW name, a consumer was re-pointed early. That is car
+    // L5's act, and it must arrive WITH the byte-identity proof for the seam it moves.
+    expect(importers).toEqual(ENROLLED_CONSUMERS);
+  });
+
+  test('⭐ AND THE CATALOG IS STILL DARK THROUGH ITS ONE CONSUMER', () => {
+    // The half that keeps the roster honest: an enrolled consumer that production
+    // could reach would have opened the catalog by proxy. Nothing imports the
+    // witness adapter, so the dormancy claim survives the enrolment intact.
+    const files = jsFilesUnder(join(REPO_ROOT, 'src'));
+    const reachers = files
+      .filter((file) => !file.endsWith('faithWitnessSource.js'))
+      .filter((file) => {
+        const text = readFileSync(file, 'utf8');
+        // ⛔ THE SAME TWO-STAGE READ AS `dependsOnCatalog`, AND IT IS OWED HERE FOR A
+        // REASON THIS CAR MEASURED ON ITSELF: `livedExperienceCatalog.js`'s
+        // `faith_milieu` row carries the RECEIPT STRING
+        // `'faithWitnessSource.js:faithWitnessEntries (...)'`, and a comment-only
+        // strip convicted the catalog of calling the adapter. A quoted name is a
+        // citation exactly as a commented one is.
+        return /from\s+'[^']*\/faithWitnessSource\.js'/.test(stripComments(text))
+          || /\b(faithWitnessEntries|exposureDemotion|FAITH_WITNESS_KIND|FAITH_WITNESS_TUNING)\s*[([.]/
+            .test(codeWithoutCitations(text));
+      })
+      .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'));
+    expect(reachers).toEqual([]);
+    // anchored: the enrolled consumer really is on the tree and really does import
+    // the catalog, so neither list above passed by matching nothing.
+    const witness = readFileSync(join(REPO_ROOT, ENROLLED_CONSUMERS[0]), 'utf8');
+    expect(witness).toContain("from '../npc/paradigmAxisCatalog.js'");
+    expect(dependsOnCatalog(witness)).toBe(true);
+  });
+
+  test('⭐⭐ THE DETECTOR IS ANTI-VACUOUS, AND ITS SYMBOLS ARE UNIQUELY OWNED', () => {
+    expect(dependsOnCatalog("import { AXIS_LEVELS } from '../npc/paradigmAxisCatalog.js';")).toBe(true);
+    expect(dependsOnCatalog('const a = axisById("MERCY");')).toBe(true);
+    expect(dependsOnCatalog('const n = PARADIGM_AXES.length;')).toBe(true);
+    // …and the four citation shapes that were convicted before the cure.
+    expect(dependsOnCatalog('/** MIRRORED NOT IMPORTED from paradigmAxisCatalog.js */\nconst a = 1;')).toBe(false);
+    expect(dependsOnCatalog('// the authority is paradigmAxisCatalog.wordForAxisPosition\nconst a = 1;')).toBe(false);
+    expect(dependsOnCatalog("export const SEAM = 'paradigmAxisCatalog.js#wordForAxisPosition';")).toBe(false);
+    expect(dependsOnCatalog("const row = { home: 'src/domain/npc/paradigmAxisCatalog.js' };")).toBe(false);
+    // ⛔ AND THE STRING-LITERAL CITATION — the shape that convicted this very car's
+    // own catalog row. A quoted symbol followed by a space and a paren is not a call.
+    expect(dependsOnCatalog("const receipt = 'paradigmAxisCatalog.js:axisById (the authority)';")).toBe(false);
+    // ⭐ THE UNIQUE-OWNERSHIP CONTROL and the anchor that makes it discriminating.
+    // ⚠ READ EACH FILE ONCE. The first cut re-read all of `src/` PER SYMBOL and
+    // timed out at 20s — an O(files x symbols) walk dressed as a one-line helper.
+    const texts = jsFilesUnder(join(REPO_ROOT, 'src')).map((file) => readFileSync(file, 'utf8'));
+    /** @param {string} symbol */
+    const exportersOf = (symbol) => texts
+      .filter((text) => new RegExp(`^export (const|function) ${symbol}\\b`, 'm').test(text));
+    for (const symbol of CATALOG_SYMBOLS) {
+      expect(exportersOf(symbol), `${symbol} must be owned by exactly one module`).toHaveLength(1);
+    }
+    expect(exportersOf('AXIS_LEVELS').length).toBe(2);
+    expect(CATALOG_SYMBOLS).not.toContain('AXIS_LEVELS');
   });
 
   test('the catalog imports nothing — the true-leaf law that keeps it first-paint safe', () => {

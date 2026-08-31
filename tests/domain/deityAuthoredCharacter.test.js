@@ -225,11 +225,26 @@ describe('W-FAITH F1c · the legacy shape is untouched (absence is the whole bac
     // The other five stay presentation, and that is equally measured: they reach the
     // embed but nothing reads them for effect until W-FAITH F4c wires the channels.
     // A field is mechanical when a consumer moves, not when it becomes reachable.
+    //
+    // ⭐⭐ FLIPPED A SECOND TIME AT THE SUBSTRATE COUPLING, AND THE SECOND FLIP WAS
+    // OWED BY F4c ITSELF. F4c act 2 wired the four boon/bane keys to real causal
+    // variables and promoted them in the manifest — its own executable claim probe
+    // (`customContentMechanicalClaims.test.js`) is GREEN on all five. This exact-key
+    // assertion is the sibling that F4c did not carry forward, so it went on
+    // asserting the F3c-era truth. The set moves with the measurement, not ahead of
+    // it, and the equality stays EXACT on both halves: a sixth promotion still reds.
+    //
+    // ⚠ `characterAxes` STAYS PRESENTATION, and that is the load-bearing half. The
+    // coupling landed `faithWitnessSource.js`, which reads `characterAxes` — but that
+    // adapter has ZERO src importers (pinned in `paradigmAxisCatalog.test.js`), so no
+    // consumer MOVES on the value. A field is mechanical when a consumer moves, not
+    // when a reader exists. Lighting that road is W-FAITH car 6's act, and its bill
+    // includes this label.
     const six = ['authoredTemper', 'characterAxes', 'boonChannel', 'boonStrength', 'baneChannel', 'baneStrength'];
-    expect(six.filter((key) => manifestField(key).effect === 'mechanical')).toEqual(['authoredTemper']);
-    expect(six.filter((key) => manifestField(key).effect === 'presentation')).toEqual([
-      'characterAxes', 'boonChannel', 'boonStrength', 'baneChannel', 'baneStrength',
+    expect(six.filter((key) => manifestField(key).effect === 'mechanical')).toEqual([
+      'authoredTemper', 'boonChannel', 'boonStrength', 'baneChannel', 'baneStrength',
     ]);
+    expect(six.filter((key) => manifestField(key).effect === 'presentation')).toEqual(['characterAxes']);
     // The mechanical one owes an executable claim; the promotion is not a label
     // change. tests/domain/customContentMechanicalClaims.test.js holds that probe,
     // and its exact-key assertion is what forces this pair to stay honest.

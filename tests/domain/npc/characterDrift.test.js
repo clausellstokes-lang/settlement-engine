@@ -440,6 +440,88 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
  */
 const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
 
+/**
+ * ⛔⛔ AND STRIPPING COMMENTS IS NOT ENOUGH — A FROZEN DATA ROSTER IS A CITATION TOO,
+ * AND SO IS A REFUSAL LIST. THE SUBSTRATE COUPLING FOUND BOTH, AND THE SECOND IS A
+ * SHAPE NOBODY HAD SEEN.
+ *
+ * L4 turned a substring ban into a dereference ban because the catalog cites its own
+ * proof. L5 stripped comments because three files were convicted for explaining
+ * themselves. The coupling then convicted TWO MORE files that survived the strip
+ * because neither citation was a comment:
+ *
+ *   • `operationGrammar.js` records `home: 'src/domain/npc/characterDrift.js'` in a
+ *     frozen acceptance roster — a module PATH quoted as data, never a dependency;
+ *   • `customContentSchema.js` lists `'characterDrift'` inside
+ *     `DEITY_REFUSED_DRIFT_KEYS` — ⭐ a BAN LIST. It names the symbol for the express
+ *     purpose of REFUSING it, which is the exact opposite of depending on it. A
+ *     detector that reads a refusal as a dependency has inverted its own question.
+ *
+ * ⭐ THE CLAIM IS UNCHANGED AND THE DETECTOR IS STRICTLY STRONGER: an IMPORT SPECIFIER
+ * resolving to the module, or a DEREFERENCE of one of its uniquely-owned exports —
+ * which additionally catches an aliased import plus a call that the path scan alone
+ * would miss. Both directions are pinned by the control below.
+ *
+ * ⚠ `AXIS_LEVELS` is deliberately ABSENT from the drift roster: `paradigmAxisCatalog.js`
+ * exports that name too, so a dereference arm carrying it would convict every reader
+ * of the catalog. The uniqueness control measures this rather than trusting it.
+ */
+const DRIFT_SYMBOLS = Object.freeze([
+  'characterDriftActive', 'characterDriftOf', 'setCharacterDrift', 'driftEntryOf',
+  'axisOffsetOf', 'axisOffsetAt', 'effectiveCharacter', 'applyAxisDrift', 'writeAxisDrift',
+  'CHARACTER_DRIFT_KEY', 'CHARACTER_DRIFT_FLAG_KEY', 'DRIFT_PROVENANCE',
+]);
+const FUNNEL_SYMBOLS = Object.freeze([
+  'EXPERIENCE_TABLE', 'LIVED_EXPERIENCE_KINDS', 'AMBIENT_EXPERIENCE_KINDS',
+  'experienceKindOf', 'experienceRowOf',
+  'foldLivedExperience', 'effectiveChartOf', 'decayCharacterDrift', 'characterLegacyRecord',
+  'collectLivedExperience', 'LIVED_EXPERIENCE_SOURCES', 'SOURCE_ADAPTER_OF',
+]);
+const CONSUMER_SYMBOLS = Object.freeze([
+  'riskRegister', 'vettingTemperBand', 'effectiveDescriptors', 'derivedAlignment',
+  'effectiveAxesOf', 'lensDrift', 'viceDepth', 'corruptibleAxisByDepth',
+  'RISK_TERMS', 'CORRUPTIBLE_AXIS_VECTORS', 'RISK_CENTER_AXES',
+  // ⛔ `VETTING_TEMPER_BANDS` IS DELIBERATELY ABSENT — and the uniqueness control
+  // below is what found it, on this very car's first run. `sendTwoDivergence.js`
+  // exports that name too, so a dereference arm carrying it would have convicted an
+  // envoy leaf of reading the character door. The trap fired on the person who wrote
+  // the trap, which is the only kind of control worth having.
+]);
+const KNOWN_SYMBOLS = Object.freeze(['knownCharacterOf', 'characterAsSeenBy']);
+
+/**
+ * @param {string} text @param {RegExp} moduleRe @param {readonly string[]} symbols
+ */
+
+/**
+ * ⛔⛔⛔ AND A SYMBOL INSIDE A STRING LITERAL IS A CITATION TOO — THE SIXTH SIGHTING
+ * OF THIS ESTATE'S LAW, AND IT CONVICTED THE VERY CAR THAT WROTE THE CURE.
+ *
+ * The dereference arm above was added to catch an aliased import plus a call. On its
+ * first run it convicted `livedExperienceCatalog.js` of depending on the witness
+ * adapter — on the strength of the RECEIPT STRING that names it:
+ * `'faithWitnessSource.js:faithWitnessEntries (religionState pantheon ...)'`. A quoted
+ * name followed by a space and a paren is indistinguishable from a call to a scanner
+ * that only strips comments.
+ *
+ * ⭐ THE GENERALISATION, and it is the one this whole family has been converging on:
+ * COMMENTS AND STRING LITERALS ARE BOTH CITATIONS. Only two things are dependencies —
+ * an import specifier, and a dereference in CODE. So the module arm is asked BEFORE
+ * strings are blanked (an import specifier IS a string literal), and the symbol arm is
+ * asked AFTER. Ban lists, seam-name constants, `home:` paths and receipt strings all
+ * fall out of the detector at once, because they were always the same shape.
+ * @param {string} text
+ */
+const codeWithoutCitations = (text) => stripComments(text)
+  .replace(/'(?:[^'\\]|\\.)*'/g, "''")
+  .replace(/"(?:[^"\\]|\\.)*"/g, '""')
+  .replace(/`(?:[^`\\]|\\.)*`/g, '``');
+
+const dependsOn = (text, moduleRe, symbols) => (
+  moduleRe.test(stripComments(text))
+    || new RegExp(`\\b(${symbols.join('|')})\\s*[([.]`).test(codeWithoutCitations(text))
+);
+
   test('the drift family has exactly ONE production door, and the WRITERS stay sealed', () => {
     // AMENDED BY CAR L3, which is the act this pin was written to meet: its own
     // comment said a red here "is the funnel car's act". The claim is unchanged —
@@ -485,18 +567,43 @@ const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(
     ];
     /** The ONE production door onto the family — car L5's consumer seam. */
     const DOOR = 'src/domain/npc/characterConsumers.js';
-    /** Every production file allowed to walk through it, enumerated. */
+    /**
+     * Every production file allowed to walk through it, enumerated.
+     *
+     * ⛔⛔ THE FOURTH ROW WAS HIDING BEHIND A RED, AND THAT IS THE FINDING, NOT THE
+     * ROW. `acceptanceCharacterReads.js` (the W-OPS acceptance supplier, landed by
+     * the coupling's own car 1) really does import the door — and this STEP 4
+     * roster never caught it, because STEP 1 above was already failing on a
+     * citation, and vitest stops a test at its first failed assertion. The car that
+     * landed it measured "zero new reds" truthfully and still moved this roster
+     * without anyone seeing it.
+     *
+     * ⭐ THE LAW: a red at an early assertion BLINDS every later assertion in the
+     * same test — the estate's `&&`-chain lesson, arriving inside a single test
+     * body. A walker with four enumerated claims is four claims only while it is
+     * green.
+     *
+     * The row is enrolled rather than excluded: the supplier is a deliberate, ruled
+     * consumer (it reads the chokepoint alone, precisely so it need not import
+     * `characterDrift.js` or `knownCharacter.js`), and it is itself imported by
+     * nobody in src — pinned two tests below, so the darkness claim still holds
+     * through it.
+     */
     const DOOR_CONSUMERS = [
       'src/domain/ai/personaSlicer.js',
+      'src/domain/npc/acceptanceCharacterReads.js',
       'src/domain/worldPulse/clergyTraitPlane.js',
       'src/domain/worldPulse/espionage/espionageTap.js',
     ];
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
     expect(files.length).toBeGreaterThan(100);
     const outside = files.filter((file) => !FAMILY.some((member) => file.endsWith(member)));
-    // STEP 1: the ONLY thing outside the family that names drift is the door.
+    // STEP 1: the ONLY thing outside the family that DEPENDS ON drift is the door.
+    // ⭐ "names" became "depends on" at the substrate coupling — see the detector's
+    // own header: a frozen `home:` path and a REFUSAL LIST both name this module
+    // without depending on it, and both were convicted by the old spelling.
     expect(outside
-      .filter((file) => /characterDrift/.test(stripComments(readFileSync(file, 'utf8'))))
+      .filter((file) => dependsOn(readFileSync(file, 'utf8'), /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS))
       .map((file) => relative(REPO_ROOT, file))).toEqual([DOOR]);
     // STEP 1b, the claim that now carries the darkness: NOTHING outside the family
     // — the door included — may name a drift WRITER. A read that cannot be followed
@@ -508,14 +615,14 @@ const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(
     // STEP 4: and the door's own importers are the enumerated three.
     expect(files
       .filter((file) => !file.endsWith('characterConsumers.js'))
-      .filter((file) => /characterConsumers/.test(stripComments(readFileSync(file, 'utf8'))))
+      .filter((file) => dependsOn(readFileSync(file, 'utf8'), /from\s+'[^']*\/characterConsumers\.js'/, CONSUMER_SYMBOLS))
       .map((file) => relative(REPO_ROOT, file)).sort()).toEqual(DOOR_CONSUMERS);
     // STEP 2: and nothing outside the family names the funnel either, so there is
     // no path INTO the family at all. If this reds, a source adapter was wired
     // early — car L4's act, and it must arrive with the flag door TE-VIRT-1 owes
     // and its own dormancy proof.
     expect(outside
-      .filter((file) => /livedExperience/.test(stripComments(readFileSync(file, 'utf8'))))
+      .filter((file) => dependsOn(readFileSync(file, 'utf8'), /from\s+'[^']*\/livedExperience(Funnel|Catalog|Sources)\.js'/, FUNNEL_SYMBOLS))
       .map((file) => relative(REPO_ROOT, file))).toEqual([]);
     // STEP 3, added by car L4: and nothing outside the family names the reputation
     // read either. ⚠ STILL EMPTY AFTER L5, and that is a real fact about the car:
@@ -524,13 +631,74 @@ const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(
     // production reader consumes `knownCharacterOf` yet. The KNOWN read's first
     // consumer is the vetting band's caller and O2's acceptance door.
     expect(outside
-      .filter((file) => /knownCharacter/.test(stripComments(readFileSync(file, 'utf8'))))
+      .filter((file) => dependsOn(readFileSync(file, 'utf8'), /from\s+'[^']*\/knownCharacter\.js'/, KNOWN_SYMBOLS))
       .map((file) => relative(REPO_ROOT, file))).toEqual([]);
     // anchored: the family members really are present, so the closure is over a
     // real set rather than passing because the names match nothing.
     for (const member of FAMILY) {
       expect(files.some((file) => file.endsWith(member)), `${member} is missing`).toBe(true);
     }
+  });
+
+  test('⭐⭐ THE SHARPENED DETECTOR IS ANTI-VACUOUS IN BOTH DIRECTIONS', () => {
+    // Owed by the sharpening, in both directions: a scan that stopped seeing things
+    // would report the same rosters forever, and a scan that still convicted
+    // citations would have bought the closure by making the code less legible.
+    expect(dependsOn("import { effectiveCharacter } from './characterDrift.js';", /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(true);
+    // AN ALIASED IMPORT PLUS A CALL — the reach a path-only scan misses.
+    expect(dependsOn('const c = effectiveCharacter({ npc });', /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(true);
+    expect(dependsOn('const w = writeAxisDrift(state);', /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(true);
+    // ⛔ AND THE TWO CITATION SHAPES THE COUPLING ACTUALLY FOUND — a frozen `home:`
+    // path, and a BAN LIST. Both were convicted by the old spelling; neither is a
+    // dependency, and the second is the opposite of one.
+    expect(dependsOn("const row = { home: 'src/domain/npc/characterDrift.js' };", /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(false);
+    expect(dependsOn("const REFUSED = Object.freeze(['characterDrift', 'drift', 'effectiveCharacter']);", /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(false);
+    expect(dependsOn('// characterDrift lives elsewhere\nconst a = 1;', /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(false);
+    // ⛔ AND THE STRING-LITERAL CITATION — a receipt or seam name held as data.
+    expect(dependsOn("const receipt = 'characterDrift.js:writeAxisDrift (the sealed writer)';", /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(false);
+    // …and the stripper itself is pinned live in both directions.
+    expect(stripComments("import { x } from './characterDrift.js';")).toContain('characterDrift');
+    expect(stripComments('/** a block naming effectiveCharacter */\nconst a = 1;')).not.toContain('effectiveCharacter');
+  });
+
+  test('⛔⛔ EVERY DEREFERENCE SYMBOL IS EXPORTED BY EXACTLY ONE src FILE', () => {
+    // The trap the sharpening invents for itself, and it is only reachable once two
+    // lines share a tree: a dereference arm keyed on a name TWO modules export
+    // convicts whichever file uses the OTHER one's.
+    // ⚠ READ EACH FILE ONCE. The first cut re-read all of `src/` PER SYMBOL and
+    // timed out at 20s — an O(files x symbols) walk dressed as a one-line helper.
+    const texts = jsFilesUnder(join(REPO_ROOT, 'src')).map((file) => readFileSync(file, 'utf8'));
+    /** @param {string} symbol */
+    const exportersOf = (symbol) => texts
+      .filter((text) => new RegExp(`^export (const|function) ${symbol}\\b`, 'm').test(text));
+    for (const symbol of [...DRIFT_SYMBOLS, ...FUNNEL_SYMBOLS, ...CONSUMER_SYMBOLS, ...KNOWN_SYMBOLS]) {
+      expect(exportersOf(symbol), `${symbol} must be owned by exactly one module`).toHaveLength(1);
+    }
+    // ⭐ ANCHORED, AND THE ANCHOR IS THE FINDING: `AXIS_LEVELS` really is exported by
+    // BOTH `characterDrift.js` and `paradigmAxisCatalog.js` on this coupled tree, so
+    // the check above discriminates rather than passing trivially — and it is exactly
+    // why that name is absent from DRIFT_SYMBOLS.
+    expect(exportersOf('AXIS_LEVELS').length).toBe(2);
+    expect(DRIFT_SYMBOLS).not.toContain('AXIS_LEVELS');
+  });
+
+  test('⭐ THE DOOR\'S FOURTH CONSUMER IS ITSELF DARK — the darkness survives the new row', () => {
+    // The DOOR_CONSUMERS roster gained `acceptanceCharacterReads.js` above. That row
+    // is only safe if nothing reaches IT either, so the transitive claim is asserted
+    // rather than assumed.
+    const files = jsFilesUnder(join(REPO_ROOT, 'src'));
+    const reachers = files
+      .filter((file) => !file.endsWith('acceptanceCharacterReads.js'))
+      .filter((file) => dependsOn(
+        readFileSync(file, 'utf8'),
+        /from\s+'[^']*\/acceptanceCharacterReads\.js'/,
+        ['acceptanceCharacterRead', 'vettingInputFor', 'ACCEPTANCE_READ_TERMS', 'ACCEPTANCE_READ_PROVENANCE'],
+      ))
+      .map((file) => relative(REPO_ROOT, file));
+    expect(reachers).toEqual([]);
+    // anchored: the supplier really is on the tree, so the empty list is a fact
+    // about its reachability and not about a path that matched nothing.
+    expect(files.some((file) => file.endsWith('acceptanceCharacterReads.js'))).toBe(true);
   });
 
   test('the flag has no DEFAULT_SIMULATION_RULES entry, so no existing campaign carries it', () => {

@@ -391,6 +391,46 @@ export const EXPERIENCE_TABLE = Object.freeze({
     sourceUnverified: false,
     ownerRulingPending: true,
   }),
+  // ⭐⭐ ADMITTED AT THE SUBSTRATE COUPLING — the kind W-FAITH's witness adapter
+  // MINTED and this catalog OWED (§806/F14; DESIGN_W_FAITH D4/D5(2); W-LIVES §6).
+  // `faithWitnessSource.js` has emitted `faith_milieu` since car F3c and declared,
+  // in its own header, that "this adapter's output is refused at the funnel door by
+  // construction, which is the correct dormant state" until the row exists. The two
+  // stacks now share a tree, so the debt is paid rather than restated.
+  //
+  // ⚠ WHY IT IS NOT A SECOND SPELLING OF `dwell_milieu`, WHICH WOULD BE THE EASY
+  // MISTAKE. Both are witness/milieu/ambient and both ride the SAME dwell — but they
+  // read different teachers off it: `dwell_milieu` is what a settlement's CONDUCT
+  // teaches a soul who lives in it, `faith_milieu` is what its GODS do. W-LIVES §3
+  // lists them as separate witness-plane sources and §6 names the faith pull
+  // explicitly, so folding them would delete a distinction the volumes make. The
+  // §856 non-overlap law is not engaged: it governs signals npcGrowthKernel already
+  // eats, and no term here is one of its eight.
+  //
+  // ⚠ PULLS EMPTY, FOR THE SECOND TIME IN THIS TABLE AND FOR A DIFFERENT REASON.
+  // `dwell_milieu`'s vector is a read of the HOST SETTLEMENT; this one's is a read
+  // of the DEITY'S AUTHORED CHART (`characterAxes`), demoted by exposure. Neither is
+  // a constant a table could hold, and the funnel accepts a caller-supplied vector
+  // ONLY for an ambient kind whose tabled vector is empty — so this shape is forced
+  // by the funnel's own guard, not chosen.
+  //
+  // ⛔ THE ADAPTER IS REAL BUT IT IS NOT HOMED IN `livedExperienceSources.js`, and
+  // that is stated in `ADAPTER_HOMED_ELSEWHERE` there rather than left to be
+  // discovered. Registering it into the source roster is W-FAITH car 6's bill (the
+  // faith-pull SOURCE ADAPTER + the clergy re-route, Opus seat, recon row first).
+  faith_milieu: Object.freeze({
+    plane: 'witness',
+    family: 'milieu',
+    pulls: Object.freeze([]),
+    ambient: true,
+    receipt: 'faithWitnessSource.js:faithWitnessEntries (religionState pantheon x pietyField) x roadsKernel.js whereabouts dwell',
+    receiptDark: false,
+    sourceUnverified: false,
+    // The row's EXISTENCE is ruled (W-LIVES §6, W-FAITH D4). What is unsigned is the
+    // adapter's exposure ladder, and that lives in `FAITH_WITNESS_TUNING` where the
+    // pen can reach it — not here.
+    ownerRulingPending: false,
+  }),
   // NO RECEIPT AT THIS GRAIN: the settlement's plague ending IS receipted
   // (`stressor_aftermath` over a `disease_outbreak`, carrying peakSeverity), but
   // "this person survived it" is not — that needs presence-at-home, which is
@@ -534,6 +574,7 @@ export const LIVED_EXPERIENCE_PROVENANCE = Object.freeze({
     'taste row 6 — whether refused_by_patron teaches at all (carried with the register draft so there is something to strike)',
     'taste row 12 — the family learn-rate ladder ORDER (carried as LESSON_FAMILIES order; the funnel derives its steps from that order mechanically rather than authoring rates)',
     'dwell_milieu carries NO fixed pulls: §800.4 makes its vector a read of the HOST settlement, so the adapter computes it and the table refuses to freeze a variable',
+    'faith_milieu (admitted at the substrate coupling, §806/F14) carries no fixed pulls either, for a DIFFERENT reason: its vector is the DEITY\'S AUTHORED chart demoted by exposure. Its existence is ruled (W-LIVES §6); what is unsigned is the exposure ladder in faithWitnessSource.FAITH_WITNESS_TUNING, and whether a soul may be taught by BOTH milieu rows in one season is an aggregate question F11 answers over the summed ambient equilibrium rather than per-row',
     'whether the commitment kinds (took_holy_orders, converted_faith) belong on the PERSONAL plane as drafted here, or ride AFFILIATION with the rest of the creed family',
   ]),
   // Raised BY the source census, and each is a decision above this lane's seat.
@@ -542,7 +583,7 @@ export const LIVED_EXPERIENCE_PROVENANCE = Object.freeze({
     '⚠⚠ THE MILIEU SOURCE ONLY SEES VISITORS: whereabouts is away-only (roads DELETES the key at home), so §800.4\'s "gentle man in a cruel city" cannot reach a resident today. npcResidency.js is the fit and has zero importers; its certification row calls the deposit NOT EXPRESSIBLE FROM ANY RECEIPT',
     'THE WITNESS PLANE IS NEARLY EMPTY: per-PERSON belief about an event does not exist (beliefMap observers and subjects are both SETTLEMENTS), so news_believed_* has no source at all — the register\'s largest single gap',
     'refused_by_patron: the tree has already ruled a refusal is NOT an event, in those words. Taste row 6 asks whether it should teach; this asks whether it can be heard',
-    'TWELVE of THIRTY-ONE kinds carry no receipt (SOURCE_UNVERIFIED_KINDS) and THREE of the remaining nineteen are receipt-dark (RECEIPT_DARK_KINDS): the lit surface is far smaller than the register implies, and FIVE are on by DEFAULT — corruption_exposed, goal_culminated, faction_captured, faction_cleansed and coup_at_home (car L4 corrected the last two figures by executing the real preset table rather than reading the flag files: festival_kept is preset-lit, not dark, and the coup verdict rides the default-on stressorsEnabled)',
+    'TWELVE of THIRTY-TWO kinds carry no receipt (SOURCE_UNVERIFIED_KINDS) and THREE of the remaining twenty are receipt-dark (RECEIPT_DARK_KINDS): the lit surface is far smaller than the register implies, and FIVE are on by DEFAULT — corruption_exposed, goal_culminated, faction_captured, faction_cleansed and coup_at_home (car L4 corrected the last two figures by executing the real preset table rather than reading the flag files: festival_kept is preset-lit, not dark, and the coup verdict rides the default-on stressorsEnabled)',
   ]),
   consumers: 'livedExperienceFunnel.js only; NONE in production by design (the adapters are car L4)',
 });

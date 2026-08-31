@@ -711,19 +711,105 @@ describe('DARK BY CONSTRUCTION — two independent darknesses, one door', () => 
     return out;
   }
 
+  /**
+   * ⚠⚠ COMMENTS ARE STRIPPED BEFORE ANY CLOSURE SCAN — L5's amendment, which this
+   * walker did not receive until the substrate coupling. An IMPORT is a dependency;
+   * a CITATION is not.
+   * @param {string} text
+   */
+  const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
+  /**
+   * ⛔ THE SYMBOLS MUST BE UNIQUELY OWNED IN `src/`. `AMBIENT_CADENCE_TICKS` is
+   * exported by this very funnel AND by `faithWitnessSource.js`, and `PULL_BANDS` by
+   * three files — a dereference arm naming either would convict the wrong file. The
+   * control below measures that rather than trusting it.
+   */
+  const FUNNEL_FAMILY_SYMBOLS = Object.freeze([
+    'EXPERIENCE_TABLE', 'LIVED_EXPERIENCE_KINDS', 'AMBIENT_EXPERIENCE_KINDS',
+    'experienceKindOf', 'experienceRowOf',
+    'foldLivedExperience', 'effectiveChartOf', 'decayCharacterDrift', 'characterLegacyRecord',
+    'collectLivedExperience', 'LIVED_EXPERIENCE_SOURCES', 'SOURCE_ADAPTER_OF',
+  ]);
+
+
+  /**
+   * ⛔⛔⛔ AND A SYMBOL INSIDE A STRING LITERAL IS A CITATION TOO — THE SIXTH SIGHTING
+   * OF THIS ESTATE'S LAW, AND IT CONVICTED THE VERY CAR THAT WROTE THE CURE.
+ *
+   * The dereference arm above was added to catch an aliased import plus a call. On its
+   * first run it convicted `livedExperienceCatalog.js` of depending on the witness
+   * adapter — on the strength of the RECEIPT STRING that names it:
+   * `'faithWitnessSource.js:faithWitnessEntries (religionState pantheon ...)'`. A quoted
+   * name followed by a space and a paren is indistinguishable from a call to a scanner
+   * that only strips comments.
+ *
+   * ⭐ THE GENERALISATION, and it is the one this whole family has been converging on:
+   * COMMENTS AND STRING LITERALS ARE BOTH CITATIONS. Only two things are dependencies —
+   * an import specifier, and a dereference in CODE. So the module arm is asked BEFORE
+   * strings are blanked (an import specifier IS a string literal), and the symbol arm is
+   * asked AFTER. Ban lists, seam-name constants, `home:` paths and receipt strings all
+   * fall out of the detector at once, because they were always the same shape.
+   * @param {string} text
+   */
+  const codeWithoutCitations = (text) => stripComments(text)
+    .replace(/'(?:[^'\\]|\\.)*'/g, "''")
+    .replace(/"(?:[^"\\]|\\.)*"/g, '""')
+    .replace(/`(?:[^`\\]|\\.)*`/g, '``');
+
+  /** @param {string} text */
+  const dependsOnFunnelFamily = (text) => (
+    /from\s+'[^']*\/livedExperience(Funnel|Catalog|Sources)\.js'/.test(stripComments(text))
+      || new RegExp(`\\b(${FUNNEL_FAMILY_SYMBOLS.join('|')})\\s*[([.]`).test(codeWithoutCitations(text))
+  );
+
   test('the ONLY src namer of the funnel family is car L4\'s adapter leaf', () => {
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
     expect(files.length).toBeGreaterThan(100);
     const importers = files
       .filter((file) => !/livedExperience(Funnel|Catalog)\.js$/.test(file))
-      .filter((file) => /livedExperience/.test(readFileSync(file, 'utf8')))
+      .filter((file) => dependsOnFunnelFamily(readFileSync(file, 'utf8')))
       .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'));
     // AMENDED BY CAR L4 — the act this pin was written to meet, and it is
     // TIGHTENED rather than opened. The old form said "nobody"; the new form names
     // the ONE file allowed to, so a second consumer still reds. The adapter leaf is
     // itself imported by nobody (its own suite pins that), so the family remains
     // unreachable from production and the dormancy claim is unchanged.
+    //
+    // ⭐⭐ AND THE DETECTOR WAS SHARPENED AT THE SUBSTRATE COUPLING. This walker was
+    // still a RAW substring over UNSTRIPPED source, so W-FAITH's `faithWitnessSource.js`
+    // was convicted on TWO COMMENT LINES that say the funnel is not in its tree. It
+    // imports nothing from the family. The roster it must equal is unchanged; only
+    // the question "does this file depend on the family" is now asked properly.
     expect(importers).toEqual(['src/domain/npc/livedExperienceSources.js']);
+  });
+
+  test('⭐⭐ THE SHARPENED DETECTOR IS ANTI-VACUOUS, AND ITS SYMBOLS ARE UNIQUELY OWNED', () => {
+    // Both directions, because a scan that stopped seeing things would report the
+    // same one-file roster forever.
+    expect(dependsOnFunnelFamily("import { x } from './livedExperienceCatalog.js';")).toBe(true);
+    expect(dependsOnFunnelFamily('const out = foldLivedExperience({ entries });')).toBe(true);
+    expect(dependsOnFunnelFamily('const row = EXPERIENCE_TABLE[kind];')).toBe(true);
+    expect(dependsOnFunnelFamily('/** MIRRORED from livedExperienceCatalog */\nconst a = 1;')).toBe(false);
+    expect(dependsOnFunnelFamily('// foldLivedExperience lives elsewhere\nconst a = 1;')).toBe(false);
+    expect(dependsOnFunnelFamily("const row = { home: 'src/domain/npc/livedExperienceFunnel.js' };")).toBe(false);
+    // ⛔ AND THE STRING-LITERAL CITATION — a receipt naming an adapter is not a call.
+    expect(dependsOnFunnelFamily("const r = 'livedExperienceFunnel.js:foldLivedExperience (the door)';")).toBe(false);
+    // ⭐ THE UNIQUE-OWNERSHIP CONTROL — the trap the sharpening invents for itself,
+    // reachable only once two lines share a tree.
+    // ⚠ READ EACH FILE ONCE. The first cut re-read all of `src/` PER SYMBOL and
+    // timed out at 20s — an O(files x symbols) walk dressed as a one-line helper.
+    const texts = jsFilesUnder(join(REPO_ROOT, 'src')).map((file) => readFileSync(file, 'utf8'));
+    /** @param {string} symbol */
+    const exportersOf = (symbol) => texts
+      .filter((text) => new RegExp(`^export (const|function) ${symbol}\\b`, 'm').test(text));
+    for (const symbol of FUNNEL_FAMILY_SYMBOLS) {
+      expect(exportersOf(symbol), `${symbol} must be owned by exactly one module`).toHaveLength(1);
+    }
+    // anchored: these three really do have multiple owners on this tree, so the
+    // check above discriminates rather than passing trivially.
+    expect(exportersOf('AMBIENT_CADENCE_TICKS').length).toBeGreaterThan(1);
+    expect(exportersOf('PULL_BANDS').length).toBeGreaterThan(1);
   });
 
   test('⭐ ONE DOOR: the funnel mints NO flag of its own, it rides L2\'s', () => {

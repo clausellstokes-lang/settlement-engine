@@ -822,6 +822,39 @@ export const NON_OVERLAP_BLOCKED_KINDS = Object.freeze(
 );
 
 /**
+ * ⭐⭐ THE KINDS WHOSE ADAPTER IS REAL BUT LIVES IN ANOTHER LEAF — added at the
+ * substrate coupling, and it is a WIDENING OF WHAT THE GUARD CAN SAY rather than a
+ * hole punched in it.
+ *
+ * The totality guard below reds when a receipted kind lands with nobody to read it,
+ * and that claim is exactly right. What it could not previously EXPRESS is the case
+ * the coupling produced: `faith_milieu`'s adapter is real, is 268 lines of tested
+ * pure code, and is homed in `worldPulse/faithWitnessSource.js` because it needs
+ * `faithField.memberWeight` and `piety.pietyMultOf` — neither of which belongs in an
+ * npc leaf. Before this map the only two things sayable about that kind were both
+ * FALSE: mark it `sourceUnverified` (it has a receipt) or claim an adapter here
+ * (there isn't one).
+ *
+ * ⛔ THIS IS A CITATION, NOT A DEPENDENCY, AND DELIBERATELY SO. The value is a path
+ * plus an exported symbol, held as data — this file imports nothing new, so the
+ * family's closure and the coupling's cross-layer pair count are both untouched. The
+ * binding census in `tests/domain/npc/livedExperienceSources.test.js` RESOLVES each
+ * entry against the live tree (module must exist; the symbol must be declared there),
+ * so a rename, a typo, or a deleted export reds here rather than rotting quietly.
+ * That is strictly more than the guard could check before.
+ *
+ * ⚠ AN ENTRY HERE IS A DEBT, NOT AN EXEMPTION. It records that some OTHER car owes
+ * the registration: `faith_milieu`'s is W-FAITH car 6 (the faith-pull source adapter
+ * + the clergy consumers' re-route, §806/F14). When that car lands, the kind moves
+ * into `LIVED_EXPERIENCE_SOURCES` and its row leaves this map.
+ *
+ * @type {Readonly<Record<string, string>>}
+ */
+export const ADAPTER_HOMED_ELSEWHERE = Object.freeze({
+  faith_milieu: 'src/domain/worldPulse/faithWitnessSource.js#faithWitnessEntries',
+});
+
+/**
  * THE EIGHT SIGNALS THE OTHER FUNNEL EATS, and the tokens each one actually matches
  * on upstream — walked against this tree, not transcribed from the map. The map's
  * `signal` names are the kernel's INTERNAL vocabulary; these are the strings a
@@ -938,11 +971,26 @@ for (const row of LIVED_EXPERIENCE_SOURCES) {
 }
 
 // And the reverse direction, which is the one that reds when a receipted kind lands
-// with nobody to read it: every receipted kind except the silent one must have a row.
+// with nobody to read it: every receipted kind except the silent one must have a row
+// HERE, or a named out-of-leaf home in ADAPTER_HOMED_ELSEWHERE. The second arm was
+// added at the substrate coupling; it does not weaken the claim, because "nobody
+// reads it" and "somebody named, resolvable, and provably present reads it" are
+// different facts and the guard previously could only say the first.
 for (const kind of RECEIPTED_EXPERIENCE_KINDS) {
   if (kind === SILENT_EXPERIENCE_KIND) continue;
-  if (!Object.prototype.hasOwnProperty.call(SOURCE_ADAPTER_OF, kind)) {
-    throw new Error(`livedExperienceSources: ${kind} carries a receipt (${str(EXPERIENCE_TABLE[kind].receipt)}) but no adapter reads it`);
+  if (Object.prototype.hasOwnProperty.call(SOURCE_ADAPTER_OF, kind)) continue;
+  if (Object.prototype.hasOwnProperty.call(ADAPTER_HOMED_ELSEWHERE, kind)) continue;
+  throw new Error(`livedExperienceSources: ${kind} carries a receipt (${str(EXPERIENCE_TABLE[kind].receipt)}) but no adapter reads it`);
+}
+
+// ...and the map may not drift into a second registry: an entry that ALSO has a row
+// here is a fork, and an entry for a kind the catalog does not carry is a ghost.
+for (const kind of Object.keys(ADAPTER_HOMED_ELSEWHERE)) {
+  if (Object.prototype.hasOwnProperty.call(SOURCE_ADAPTER_OF, kind)) {
+    throw new Error(`livedExperienceSources: ${kind} is registered here AND declared homed elsewhere — one kind, one adapter`);
+  }
+  if (!Object.prototype.hasOwnProperty.call(EXPERIENCE_TABLE, kind)) {
+    throw new Error(`livedExperienceSources: ${kind} is declared homed elsewhere but the catalog carries no such kind`);
   }
 }
 

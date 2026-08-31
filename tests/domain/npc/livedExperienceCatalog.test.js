@@ -81,7 +81,10 @@ describe('THE FAMILY PARTITION — asserted both ways, which is the whole point'
     expect(new Set([...taught, ...silent]).size).toBe(LIVED_EXPERIENCE_KINDS.length);
     // anchored: the vocabulary is asserted non-trivial here, so an emptied kind
     // list could not make the three equalities above pass vacuously.
-    expect(LIVED_EXPERIENCE_KINDS.length).toBe(31);
+    // ⭐ 31 -> 32 AT THE SUBSTRATE COUPLING: `faith_milieu` was admitted, paying the
+    // debt W-FAITH's witness adapter had carried in a reconcile pin since car F3c
+    // (§806/F14). A DECLARED count shift, not a drift.
+    expect(LIVED_EXPERIENCE_KINDS.length).toBe(32);
   });
 
   test('every family has kinds, and every kind\'s family is a real family', () => {
@@ -172,11 +175,15 @@ describe('THE SOURCE QUALIFICATION CENSUS — walked against this tree, carried 
     }
   });
 
-  test('the measured verdicts: 12 of 31 kinds have no receipt at all', () => {
+  test('the measured verdicts: 12 of 32 kinds have no receipt at all', () => {
     // These are ACTUALS from a walk of this tree, not a target. If a source lands
     // (or is found to be a phantom) this figure moves and the row moves with it.
     expect(SOURCE_UNVERIFIED_KINDS.length).toBe(12);
-    expect(RECEIPTED_EXPERIENCE_KINDS.length).toBe(19);
+    // ⭐ 19 -> 20: `faith_milieu` arrives RECEIPTED (its adapter is real and homed in
+    // `worldPulse/faithWitnessSource.js`, declared there and resolved against the
+    // tree by `ADAPTER_HOMED_ELSEWHERE`). The unverified figure does NOT move — this
+    // landing added a source, it did not find one missing.
+    expect(RECEIPTED_EXPERIENCE_KINDS.length).toBe(20);
     expect(SOURCE_UNVERIFIED_KINDS.length + RECEIPTED_EXPERIENCE_KINDS.length)
       .toBe(LIVED_EXPERIENCE_KINDS.length);
     expect([...SOURCE_UNVERIFIED_KINDS]).toEqual([
@@ -186,7 +193,7 @@ describe('THE SOURCE QUALIFICATION CENSUS — walked against this tree, carried 
     ]);
   });
 
-  test('three of the nineteen receipted kinds are DARK — lit in no preset', () => {
+  test('three of the twenty receipted kinds are DARK — lit in no preset', () => {
     // ⭐ WAS FOUR. Car L4 executed the real preset table instead of reading the flag
     // file, and `festival_kept` moved out: `traditionsEnabled` rides the ONE_REGEN
     // fragment and is lit in dramatic_campaign, living_realm and full_simulation.
@@ -252,12 +259,19 @@ describe('PULLS ARE BAND WORDS — no float can enter this table', () => {
     }
   });
 
-  test('the ambient kinds are declared, and dwell_milieu carries no fixed vector', () => {
-    expect([...AMBIENT_EXPERIENCE_KINDS]).toEqual(['dwell_milieu', 'plague_season_survived']);
+  test('the ambient kinds are declared, and NEITHER milieu row carries a fixed vector', () => {
+    // ⭐ `faith_milieu` joined at the substrate coupling (§806/F14). Codepoint order.
+    expect([...AMBIENT_EXPERIENCE_KINDS]).toEqual(['dwell_milieu', 'faith_milieu', 'plague_season_survived']);
     // §800.4 makes the milieu vector a READ of the host settlement, so a constant
     // here would be a variable frozen — the adapter supplies it, the funnel checks it.
     expect(pullsOfKind('dwell_milieu')).toEqual([]);
     expect(EXPERIENCE_TABLE.dwell_milieu.ambient).toBe(true);
+    // …and the faith row is empty for a DIFFERENT reason — its vector is a read of
+    // the DEITY'S authored chart, demoted by exposure. Same shape, different teacher,
+    // and the funnel accepts a caller-supplied vector only on exactly this shape.
+    expect(pullsOfKind('faith_milieu')).toEqual([]);
+    expect(EXPERIENCE_TABLE.faith_milieu.ambient).toBe(true);
+    expect(EXPERIENCE_TABLE.faith_milieu.receipt).not.toBe(EXPERIENCE_TABLE.dwell_milieu.receipt);
   });
 });
 

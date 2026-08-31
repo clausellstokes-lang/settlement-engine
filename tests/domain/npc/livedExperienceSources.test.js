@@ -37,6 +37,7 @@ import { describe, expect, test } from 'vitest';
 
 import {
   ADAPTED_EXPERIENCE_KINDS,
+  ADAPTER_HOMED_ELSEWHERE,
   GROWTH_SIGNAL_TOKENS,
   LIVED_EXPERIENCE_SOURCES,
   MILIEU_DWELL_STATE,
@@ -103,9 +104,22 @@ function presetsLighting(flag) {
 
 describe('THE REGISTRY — one row per receipted kind, and the law is a load-time refusal', () => {
   test('every receipted kind except the silent one has exactly one adapter', () => {
+    // ⭐ AMENDED AT THE SUBSTRATE COUPLING, AND THE AMENDMENT IS A SECOND COLUMN
+    // RATHER THAN A LOOSER SUM. `faith_milieu` arrived receipted with its adapter
+    // homed in `worldPulse/faithWitnessSource.js` (it needs `faithField.memberWeight`
+    // and `piety`, neither of which belongs in an npc leaf). The claim is unchanged —
+    // EVERY receipted kind has EXACTLY ONE adapter — but "exactly one" is now
+    // partitioned across two rosters, and the partition is asserted DISJOINT and
+    // TOTAL below, so a kind cannot hide by being counted in the other column.
     const owed = RECEIPTED_EXPERIENCE_KINDS.filter((kind) => kind !== SILENT_EXPERIENCE_KIND);
-    expect(ADAPTED_EXPERIENCE_KINDS.length).toBe(owed.length);
-    expect([...ADAPTED_EXPERIENCE_KINDS]).toEqual([...owed].sort());
+    const elsewhere = Object.keys(ADAPTER_HOMED_ELSEWHERE).sort();
+    expect(ADAPTED_EXPERIENCE_KINDS.length + elsewhere.length).toBe(owed.length);
+    expect([...ADAPTED_EXPERIENCE_KINDS, ...elsewhere].sort()).toEqual([...owed].sort());
+    // DISJOINT: nothing may be claimed by both rosters.
+    for (const kind of elsewhere) expect(ADAPTED_EXPERIENCE_KINDS, kind).not.toContain(kind);
+    // …and the out-of-leaf column is SMALL and NAMED, so it cannot quietly become
+    // the place adapters go to avoid being written.
+    expect(elsewhere).toEqual(['faith_milieu']);
     expect(LIVED_EXPERIENCE_SOURCES.length).toBe(18);
     // One row per kind: a duplicate would make SOURCE_ADAPTER_OF silently drop one.
     expect(Object.keys(SOURCE_ADAPTER_OF).length).toBe(LIVED_EXPERIENCE_SOURCES.length);
@@ -625,11 +639,21 @@ describe('DARK BY CONSTRUCTION — the closure, amended for this car', () => {
     expect(files.length).toBeGreaterThan(100);
     const importers = files
       .filter((file) => !/livedExperience(Funnel|Catalog|Sources)\.js$/.test(file))
-      .filter((file) => /livedExperience/.test(readFileSync(file, 'utf8')))
+      .filter((file) => dependsOnFunnelFamily(readFileSync(file, 'utf8')))
       .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'));
     // L3's walker asserted NO importer and said a red here would be car L4's act.
     // This is that act, and the walker is TIGHTENED rather than loosened: the set is
     // pinned exactly, so a stray consumer still reds. The pulse call site is L5's.
+    //
+    // ⭐⭐ AND THE DETECTOR WAS CURED AT THE SUBSTRATE COUPLING — FOURTH SIGHTING OF
+    // THIS FILE'S OWN LAW, AND THE CURE WAS ALREADY WRITTEN ELEVEN LINES BELOW. This
+    // walker still used a RAW `/livedExperience/` substring over UNSTRIPPED source
+    // while its sibling `consumesKnownRead` (same describe, same file) had already
+    // been sharpened twice. When W-FAITH's stack arrived, `faithWitnessSource.js` was
+    // convicted as an importer of this family on the strength of TWO COMMENT LINES
+    // that say, in as many words, that the funnel is NOT in its tree. It imports
+    // nothing from the family. The claim is unchanged; the detector now asks for an
+    // import specifier or a dereference, exactly as its sibling does.
     expect(importers).toEqual([]);
   });
 
@@ -673,6 +697,68 @@ const consumesKnownRead = (/** @type {string} */ text) => {
     || /\b(knownCharacterOf|characterAsSeenBy|LIVED_EXPERIENCE_SOURCES)\s*[(.]/.test(code);
 };
 
+/**
+ * ⛔⛔ THE SYMBOLS THE DEREFERENCE ARM MAY NAME MUST BE UNIQUE IN `src/`, AND THAT IS
+ * A TRAP THE SHARPENED DETECTOR INVENTED FOR ITSELF — IT ONLY BECOMES VISIBLE ONCE
+ * TWO LINES SHARE A TREE.
+ *
+ * The estate's cure for a substring detector has been "ask for an import specifier or
+ * a DEREFERENCE of an exported symbol". That is strictly stronger than a name scan —
+ * but a dereference arm keyed on a symbol TWO modules export convicts whichever file
+ * uses the other one's. Measured on this coupled tree: `AMBIENT_CADENCE_TICKS` is
+ * exported by both `livedExperienceFunnel.js` and `faithWitnessSource.js`,
+ * `AXIS_LEVELS` by both `characterDrift.js` and `paradigmAxisCatalog.js`, and
+ * `PULL_BANDS` by three files. A detector naming any of those three would report the
+ * wrong file with total confidence.
+ *
+ * So the roster below is deliberately narrow, and the control at the foot of this
+ * describe PROVES each entry is exported by exactly ONE file under `src/`. A future
+ * car that duplicates one of these names reds the control rather than silently
+ * poisoning the closure.
+ */
+const FUNNEL_FAMILY_SYMBOLS = Object.freeze([
+  'EXPERIENCE_TABLE', 'LIVED_EXPERIENCE_KINDS', 'AMBIENT_EXPERIENCE_KINDS',
+  'experienceKindOf', 'experienceRowOf',
+  'foldLivedExperience', 'effectiveChartOf', 'decayCharacterDrift', 'characterLegacyRecord',
+  'collectLivedExperience', 'LIVED_EXPERIENCE_SOURCES', 'SOURCE_ADAPTER_OF',
+]);
+
+/**
+ * Does this source really DEPEND on the funnel family, as opposed to talking about it?
+ * Import specifier resolving to one of the three leaves, or a dereference of one of
+ * their uniquely-owned exports, over comment-stripped code.
+ * @param {string} text
+ */
+
+/**
+ * ⛔⛔⛔ AND A SYMBOL INSIDE A STRING LITERAL IS A CITATION TOO — THE SIXTH SIGHTING
+ * OF THIS ESTATE'S LAW, AND IT CONVICTED THE VERY CAR THAT WROTE THE CURE.
+ *
+ * The dereference arm above was added to catch an aliased import plus a call. On its
+ * first run it convicted `livedExperienceCatalog.js` of depending on the witness
+ * adapter — on the strength of the RECEIPT STRING that names it:
+ * `'faithWitnessSource.js:faithWitnessEntries (religionState pantheon ...)'`. A quoted
+ * name followed by a space and a paren is indistinguishable from a call to a scanner
+ * that only strips comments.
+ *
+ * ⭐ THE GENERALISATION, and it is the one this whole family has been converging on:
+ * COMMENTS AND STRING LITERALS ARE BOTH CITATIONS. Only two things are dependencies —
+ * an import specifier, and a dereference in CODE. So the module arm is asked BEFORE
+ * strings are blanked (an import specifier IS a string literal), and the symbol arm is
+ * asked AFTER. Ban lists, seam-name constants, `home:` paths and receipt strings all
+ * fall out of the detector at once, because they were always the same shape.
+ * @param {string} text
+ */
+const codeWithoutCitations = (text) => stripComments(text)
+  .replace(/'(?:[^'\\]|\\.)*'/g, "''")
+  .replace(/"(?:[^"\\]|\\.)*"/g, '""')
+  .replace(/`(?:[^`\\]|\\.)*`/g, '``');
+
+const dependsOnFunnelFamily = (/** @type {string} */ text) => (
+  /from\s+'[^']*\/livedExperience(Funnel|Catalog|Sources)\.js'/.test(stripComments(text))
+    || new RegExp(`\\b(${FUNNEL_FAMILY_SYMBOLS.join('|')})\\s*[([.]`).test(codeWithoutCitations(text))
+);
+
   test('⭐ NO PRODUCTION CALLER: nothing in src imports the sources or the known read', () => {
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
     expect(files.length).toBeGreaterThan(100);
@@ -702,6 +788,84 @@ const consumesKnownRead = (/** @type {string} */ text) => {
     expect(stripComments('// a comment naming knownCharacter\nconst a = 1;')).not.toContain('knownCharacter');
     // anchored: same stripper, pinned live two lines above on a real import
     expect(stripComments('/** a block naming livedExperienceSources */\nconst a = 1;')).not.toContain('livedExperienceSources');
+  });
+
+  test('⭐⭐ THE FUNNEL-FAMILY DETECTOR IS ANTI-VACUOUS IN BOTH DIRECTIONS TOO', () => {
+    // The same control the known-read scan owes, owed again by the arm the coupling
+    // sharpened. Without it the closure could report an empty list forever.
+    expect(dependsOnFunnelFamily("import { x } from './livedExperienceCatalog.js';")).toBe(true);
+    expect(dependsOnFunnelFamily("import { y } from '../npc/livedExperienceFunnel.js';")).toBe(true);
+    expect(dependsOnFunnelFamily("import { z } from '../npc/livedExperienceSources.js';")).toBe(true);
+    // AN ALIASED IMPORT PLUS A USE — the reach a path-only scan misses.
+    expect(dependsOnFunnelFamily('const r = foldLivedExperience({ entries });')).toBe(true);
+    expect(dependsOnFunnelFamily('const n = LIVED_EXPERIENCE_KINDS.length;')).toBe(true);
+    expect(dependsOnFunnelFamily('const row = EXPERIENCE_TABLE[kind];')).toBe(true);
+    // AND THE CITATIONS THAT ARE NOT DEPENDENCIES — the two shapes that actually
+    // reached this walker: a header comment naming the family, and a module path
+    // quoted as data.
+    expect(dependsOnFunnelFamily('// foldLivedExperience lives on the other stack\nconst a = 1;')).toBe(false);
+    expect(dependsOnFunnelFamily('/** MIRRORED from livedExperienceCatalog PULL_BANDS */\nconst a = 1;')).toBe(false);
+    expect(dependsOnFunnelFamily("const row = { home: 'src/domain/npc/livedExperienceFunnel.js' };")).toBe(false);
+    // ⛔ AND THE STRING-LITERAL CITATION — the shape that convicted the catalog on
+    // this car's first run, off its own `faith_milieu` receipt.
+    expect(dependsOnFunnelFamily("const receipt = 'faithWitnessSource.js:faithWitnessEntries (pantheon x dwell)';")).toBe(false);
+    expect(dependsOnFunnelFamily("const r = 'livedExperienceFunnel.js:foldLivedExperience (the door)';")).toBe(false);
+  });
+
+  test('⛔⛔ EVERY DEREFERENCE SYMBOL IS EXPORTED BY EXACTLY ONE src FILE — the trap the sharpening invented', () => {
+    // A dereference arm keyed on a name TWO modules export convicts the wrong file
+    // with total confidence, and this only becomes reachable once two lines share a
+    // tree. Measured here rather than trusted.
+    // ⚠ READ EACH FILE ONCE. The first cut re-read all of `src/` PER SYMBOL and
+    // timed out at 20s — an O(files x symbols) walk dressed as a one-line helper.
+    const texts = jsFilesUnder(join(REPO_ROOT, 'src'))
+      .map((file) => [relative(REPO_ROOT, file).replace(/\\/g, '/'), readFileSync(file, 'utf8')]);
+    /** @param {string} symbol */
+    const exportersOf = (symbol) => texts
+      .filter(([, text]) => new RegExp(`^export (const|function) ${symbol}\\b`, 'm').test(text))
+      .map(([rel]) => rel);
+    for (const symbol of FUNNEL_FAMILY_SYMBOLS) {
+      expect(exportersOf(symbol), `${symbol} must be owned by exactly one module`).toHaveLength(1);
+    }
+    // ⭐ ANCHORED, AND THE ANCHOR IS THE FINDING: three names on this tree really do
+    // have two or three owners, so the check above is discriminating rather than
+    // trivially satisfiable. These are exactly the names the roster refuses.
+    expect(exportersOf('AXIS_LEVELS').length).toBeGreaterThan(1);
+    expect(exportersOf('PULL_BANDS').length).toBeGreaterThan(1);
+    expect(exportersOf('AMBIENT_CADENCE_TICKS').length).toBeGreaterThan(1);
+    for (const banned of ['AXIS_LEVELS', 'PULL_BANDS', 'AMBIENT_CADENCE_TICKS']) {
+      expect(FUNNEL_FAMILY_SYMBOLS).not.toContain(banned);
+    }
+  });
+
+  test('⛔ THE OUT-OF-LEAF ADAPTER MAP RESOLVES AGAINST THE LIVE TREE, symbol and all', () => {
+    // `ADAPTER_HOMED_ELSEWHERE` is a CITATION held as data — this leaf imports
+    // nothing new for it. A citation that nobody resolves is how a roster starts
+    // naming things that do not exist (the coupling has now seen that twice), so it
+    // is resolved here: the module must be on the tree and must really declare the
+    // symbol. Matched with the declaration's own OPEN PAREN, because
+    // `export function fooBar(` CONTAINS `export function foo` — the prefix hole car
+    // 1 found inside its own cure.
+    const entries = Object.entries(ADAPTER_HOMED_ELSEWHERE);
+    expect(entries.length).toBeGreaterThan(0);
+    for (const [kind, home] of entries) {
+      const [modulePath, symbol] = home.split('#');
+      expect(symbol, `${kind} must name a symbol, not just a module`).toBeTruthy();
+      const source = readFileSync(join(REPO_ROOT, modulePath), 'utf8');
+      expect(source.includes(`export function ${symbol}(`), `${modulePath} must export ${symbol}`).toBe(true);
+      // …and the kind it claims is really the kind that module emits.
+      expect(source).toContain(`'${kind}'`);
+    }
+    // ANTI-PREFIX CONTROL, pinned live against the real declaration.
+    const witness = readFileSync(join(REPO_ROOT, 'src/domain/worldPulse/faithWitnessSource.js'), 'utf8');
+    expect(witness.includes('export function faithWitnessEntries(')).toBe(true);
+    expect(witness.includes('export function faithWitnessEntr(')).toBe(false);
+    // AND THE MAP IS A DEBT, NOT A PARKING SPACE: every kind in it carries a receipt
+    // (an unreceipted kind is refused by the funnel and needs no adapter at all).
+    for (const kind of Object.keys(ADAPTER_HOMED_ELSEWHERE)) {
+      expect(RECEIPTED_EXPERIENCE_KINDS, kind).toContain(kind);
+      expect(SOURCE_ADAPTER_OF[kind], `${kind} may not be registered in both places`).toBeUndefined();
+    }
   });
 
   test('the sources leaf mints NO flag of its own and writes NO world state', () => {
