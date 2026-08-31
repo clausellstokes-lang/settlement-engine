@@ -31,6 +31,14 @@
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { STRESSOR_CATALOG } from '../../src/domain/worldPulse/stressorsCore.js';
 import { GEN_TO_PULSE_TYPE } from '../../src/domain/stressorPicker.js';
+import {
+  FACTION_LIFECYCLE_STATES,
+  ROSTER_ABSENT_STATUSES,
+  factionLifecycleStateOf,
+  factionRosterOf,
+  isOnRoster,
+  readFactionLifecycle,
+} from '../../src/generators/density/factionLifecycle.js';
 import { describe, it, expect } from 'vitest';
 import { createPRNG } from '../../src/kernel/prng.js';
 import {
@@ -785,5 +793,151 @@ describe('D2b — the stressor vocabulary has two planes and only one is dormant
     // author must confirm the new member is catalog-only per the block comment.
     expect(MISSING_SEAT_STRESSORS).toEqual(['succession_void']);
     expect(STRESS_TYPE_MAP[MISSING_SEAT_STRESSORS[0]], 'the family\'s birth-capable member lost its generation row').toBeTruthy();
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TE-DENSITY-1 D2b — §810.4 R18 / R20: ROSTER-BOUND EXISTENCE, AND NO FOURTH STATE.
+//
+// R18 makes a faction's existence bind to its named roster: reach zero and the
+// house ceases to exist, with a chronicle receipt. R14 carves out the ruling
+// house — "the density roll dissolved the government" is not a story, it is a
+// hole — so an emptied ruling seat becomes a typed INTERREGNUM instead. R20 then
+// asserts over EVERY faction that it is `crewed`, `ruling_interregnum`, or
+// `dissolved`, and never a fourth thing.
+//
+// ⭐ THE READER HAS NO WRITE PATH AND NO DRAW. §827's "STATE, NEVER FATE" is a
+// constraint on where the decision lives: nothing here removes anyone, and the
+// engine never sweeps. It is also why this law is dormancy-safe BY CONSTRUCTION
+// rather than by gating — a module that never calls `_rng()` cannot perturb the
+// ambient stream, which is exactly the failure mode the two-planes block above
+// measured at 104/240.
+const v2Cfg = { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION };
+const house = (name, extra = {}) => ({ faction: name, ...extra });
+const figure = (name, affiliation, status = 'active') => ({
+  name, factionAffiliation: affiliation, status,
+});
+
+describe('D2b — §810.4 R18/R20: a faction exists exactly as long as its roster does', () => {
+  it('the state vocabulary is CLOSED at three — a fourth would break R20 by definition', () => {
+    expect(FACTION_LIFECYCLE_STATES).toEqual(['crewed', 'ruling_interregnum', 'dissolved']);
+  });
+
+  it('a crewed house reads `crewed`, and its roster is the figures actually on it', () => {
+    const s = {
+      config: v2Cfg,
+      powerStructure: { factions: [house('The Weavers'), house('The Ward', { isGoverning: true })] },
+      npcs: [figure('Ilse', 'The Weavers'), figure('Rega', 'The Ward'), figure('Odo', 'The Weavers')],
+    };
+    expect(factionLifecycleStateOf(s, s.powerStructure.factions[0])).toBe('crewed');
+    expect(factionRosterOf(s, s.powerStructure.factions[0]).map(n => n.name)).toEqual(['Ilse', 'Odo']);
+  });
+
+  it('R18: an emptied NON-ruling house dissolves, and says why in its own reaction', () => {
+    const s = {
+      config: v2Cfg,
+      powerStructure: { factions: [house('The Weavers'), house('The Ward', { isGoverning: true })] },
+      // The weavers' last factor is dead — a DM/party act, not an engine sweep.
+      npcs: [figure('Ilse', 'The Weavers', 'dead'), figure('Rega', 'The Ward')],
+    };
+    const { reactions, census } = readFactionLifecycle(s, { tick: 12 });
+    expect(census.find(c => c.key === 'The Weavers').state).toBe('dissolved');
+    expect(reactions).toHaveLength(1);
+    expect(reactions[0].kind).toBe('faction_dissolved');
+    expect(reactions[0].factionKey).toBe('The Weavers');
+    expect(reactions[0].tick).toBe(12);
+    // The receipt must carry its reason, or the chronicle line has to re-derive
+    // it from a shape that no longer exists by the time anyone reads it.
+    expect(reactions[0].reason).toMatch(/roster/i);
+  });
+
+  it('⛔ R14: an emptied RULING house does NOT dissolve — it becomes a typed interregnum', () => {
+    const s = {
+      config: v2Cfg,
+      powerStructure: { factions: [house('The Weavers'), house('The Ward', { isGoverning: true })] },
+      npcs: [figure('Ilse', 'The Weavers'), figure('Rega', 'The Ward', 'exiled')],
+    };
+    const { reactions, census } = readFactionLifecycle(s, { tick: 3 });
+    expect(census.find(c => c.key === 'The Ward').state).toBe('ruling_interregnum');
+    expect(reactions.map(r => r.kind)).toEqual(['ruling_interregnum']);
+    // ⚠ The exemption is LOUD, not silent: an emptied government still raises a
+    // reaction, so a caller that forgets to handle it fails visibly instead of
+    // leaving a headless government looking healthy.
+    expect(reactions[0].factionKey).toBe('The Ward');
+    expect(reactions.some(r => r.kind === 'faction_dissolved')).toBe(false);
+  });
+
+  it('the absent-status line is EXACT in both directions (irreversible causes only)', () => {
+    expect(ROSTER_ABSENT_STATUSES).toEqual(['dead', 'exiled', 'removed']);
+    // Present: reversible or still-in-the-house.
+    for (const st of ['active', 'retired', 'missing']) {
+      expect(isOnRoster({ status: st }), `${st} must keep a figure ON the roster`).toBe(true);
+    }
+    // Absent: R18's three named roads, all irreversible.
+    for (const st of ['dead', 'exiled', 'removed']) {
+      expect(isOnRoster({ status: st }), `${st} must take a figure OFF the roster`).toBe(false);
+    }
+    // ⛔ `missing` is the load-bearing one: dissolution is PERMANENT, so a
+    // reversible absence must never trigger it. Flipping this is a design
+    // change, not a tidy-up — see ROSTER_ABSENT_STATUSES' docblock.
+    expect(isOnRoster({ status: 'missing' })).toBe(true);
+  });
+
+  it('the reader NEVER mutates the settlement it reads (state, never fate)', () => {
+    const s = {
+      config: v2Cfg,
+      powerStructure: { factions: [house('The Weavers'), house('The Ward', { isGoverning: true })] },
+      npcs: [figure('Ilse', 'The Weavers', 'dead'), figure('Rega', 'The Ward', 'dead')],
+    };
+    const before = JSON.stringify(s);
+    readFactionLifecycle(s, { tick: 1 });
+    expect(JSON.stringify(s), 'readFactionLifecycle wrote to the world it was reading').toBe(before);
+  });
+
+  it('THE PROMISE: a v1 world is not governed by this invariant at all', () => {
+    const s = {
+      config: {},
+      powerStructure: { factions: [house('The Weavers')] },
+      npcs: [figure('Ilse', 'The Weavers', 'dead')],
+    };
+    const out = readFactionLifecycle(s, { tick: 1 });
+    // Not "a census that happens to pass" — an EMPTY one, so a v1 red is
+    // structurally impossible (§827 scopes the R20 walker to v2).
+    expect(out).toEqual({ governed: false, census: [], reactions: [] });
+  });
+
+  it('⭐ R20 THE WALKER: every faction of every real v2 world is in one of the three states', () => {
+    // v2-scoped per §827. This walks REAL generated worlds rather than fixtures,
+    // so it can convict the generator and not just this module's arithmetic.
+    let walked = 0;
+    for (const tier of TIER_ORDER) {
+      for (let i = 0; i < 6; i++) {
+        const s = generateSettlementPipeline(
+          { settType: tier, tier, ...v2Cfg },
+          null,
+          { seed: `r20-walker-${tier}-${i}`, customContent: {} },
+        );
+        const { governed, census } = readFactionLifecycle(s, { tick: 0 });
+        expect(governed, 'a v2 world must be governed by the invariant').toBe(true);
+        expect(census.length, `${tier}#${i} generated no factions to walk`).toBeGreaterThan(0);
+        for (const row of census) {
+          expect(
+            FACTION_LIFECYCLE_STATES,
+            `${tier}#${i} · ${row.key} reached a FOURTH state: ${row.state}`,
+          ).toContain(row.state);
+          walked++;
+        }
+        // R17's atomic mint means a freshly born world has no empty house at
+        // all — every faction is crewed at birth. A dissolved or interregnum
+        // state AT BIRTH would mean the mint failed, so this is the arm that
+        // makes the walker discriminating rather than merely tautological.
+        expect(
+          census.every(c => c.state === 'crewed'),
+          `${tier}#${i} was BORN with an uncrewed house — R17's atomic mint failed`,
+        ).toBe(true);
+      }
+    }
+    // Anti-vacuity: a walker that walked nothing passes every assertion.
+    expect(walked, 'the R20 walker asserted over nothing').toBeGreaterThan(60);
   });
 });
