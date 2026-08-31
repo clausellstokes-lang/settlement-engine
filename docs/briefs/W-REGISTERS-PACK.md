@@ -133,6 +133,21 @@ deliver_ultimatum · negotiate_ransom · arrange_tribute · trade_embassy · hos
 state_visit (⚠ awaits receipt verification at dispatch). **Depth exposure bands (milieu
 multiplier, banded):** L0 faint · L1 light · L2 full · L3 deep · L4 immersed.
 
+## REGISTER VII — THE DENSITY LADDER (ODQ §810; ROLL RANGES, values signed at the tuning pass)
+
+Every cell is a seeded ROLL RANGE, never a constant — the tier gates the range, particulars
+(prosperity, connectivity, war, corruption) tilt weights within it. The thorp's second faction
+exists only when the top-influence power is not the ruling power (the gap is the story).
+
+| Tier | Factions (roll) | Named NPCs per faction (roll) |
+|---|---|---|
+| Thorp | 1 (+1 conditional) | **1** — the seat-holder IS the polity |
+| Hamlet | 1–2 | 1–2 |
+| Village | 2–3 | 1–2 |
+| Town | one per ranked power (3–5) | 1–2 |
+| City | 5–8, incl. 1–2 doubled niches (intra-power rivals) | 2–3 |
+| Metropolis | 7–10, incl. doubled niches | 2–3, full suites on select pillars |
+
 ## REGISTER VI — THE ACCUMULATED TASTE ROWS (one-line calls, gathered from §§798–803.2)
 
 1. Drift half-life per axis class: `a_year` vs **`a_few_years` (chair lean)**.
