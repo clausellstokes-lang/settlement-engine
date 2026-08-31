@@ -9,6 +9,7 @@ import { deriveFlowCandidates } from './flows.js';
 import { normalizeSimulationRules, politicalAutonomyOf } from './simulationRules.js';
 import { governBirth, computeLowestPendingClass, dramaClassOf } from './narrativeTempo.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
+import { applyForeignPrimacy } from './foreignPrimacy.js';
 import { classifyRecurringConditionCandidate } from './conditionRefreshRecordMode.js';
 import {
   admitGuaranteedProposalOutcomes,
@@ -608,7 +609,7 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
   // its rationale). Guaranteed residual aftermaths never pass through here —
   // they are consequences, not initiations, and stay auto by design.
   const autonomy = politicalAutonomyOf(rules);
-  const routed = autonomy === 'dm_only' || autonomy === 'recommendations'
+  const autonomyRouted = autonomy === 'dm_only' || autonomy === 'recommendations'
     ? recordClassified.map(candidate => {
       if (!candidate) return candidate;
       // A state-only record is background reducer work, not a political choice.
@@ -621,6 +622,24 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
       return applyMode === candidate.applyMode ? candidate : { ...candidate, applyMode };
     })
     : recordClassified;
+
+  // ── W-SEAT D2's PRIMACY AXIS (A1.1.6) ──────────────────────────────────────
+  // A SECOND, FLAG-GATED PASS, DELIBERATELY PLACED AFTER THE AUTONOMY ROUTING
+  // AND NOT INSIDE IT. The two axes answer different questions — the map above
+  // answers "may this apply without approval", this one answers "whose decision
+  // is this at all" — and A1.1.6 requires the primacy contract to be TYPED and
+  // DISTINCT from applyMode, because a candidate marked `proposal` by a dm_only
+  // campaign and one marked `proposal` because a foreign army holds the town are
+  // indistinguishable if routing is the only record.
+  //
+  // The volume's original placement (inside `authorityFor`) is struck: that
+  // function sees only `rules`, so it cannot know which town is deciding. Here
+  // the whole context is present.
+  //
+  // ⛔ IT RETURNS THE SAME ARRAY REFERENCE WHEN DARK, so this line adds nothing
+  // to the byte-identity the choke's own pin asserts — the reference-preserving
+  // discipline the map above keeps is kept by construction rather than re-earned.
+  const routed = applyForeignPrimacy(autonomyRouted, snapshot);
 
   return resolveCandidateConflicts(suppressEquivalentPendingProposalCandidates(routed, snapshot?.worldState), context.budgets || {});
 }
