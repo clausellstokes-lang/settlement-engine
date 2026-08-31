@@ -242,8 +242,11 @@ export function resolvePlacementCells(staged, rawPack) {
  * noticed, and `placements` may legitimately come back EMPTY when no row could be tied
  * to a cell — the caller refuses on that (`spatial_placements_unresolved`) rather than
  * freezing a digest seeded from nothing.
+ * SEAM-3 widened it again: `sidecar` stamps WHICH GEOMETRY this capture held, and is null
+ * when the pack is unreadable — a capture can succeed while its stamp declines.
  * @returns {Promise<{ pack: any, placements: Array<{id:string, cellId:number}>,
- *   cellResolution: Array<{id:string, from:number|null, to:number|null, reason:string}> } | null>}
+ *   cellResolution: Array<{id:string, from:number|null, to:number|null, reason:string}>,
+ *   sidecar: ReturnType<typeof buildCaptureSidecar> } | null>}
  */
 export async function captureSpatialPack({ campaignId, get }) {
   const bridge = getSpatialCaptureBridge();

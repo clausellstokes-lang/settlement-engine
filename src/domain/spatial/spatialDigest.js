@@ -571,7 +571,11 @@ function buildTerrainDisagreements(seeds, idOf, placements, pack) {
  *           spatialGeometryVersion?:number, costLawVersion?:number,
  *           overlayVersion?:number, seasonalRoads?:boolean, seaLanes?:boolean, teleport?:boolean,
  *           biomeTexture?:boolean, climateTexture?:boolean, lakes?:boolean,
- *           cellResolution?:Array<{id:string, from:number|null, to:number|null, reason:string}>|null }} input
+ *           cellResolution?:Array<{id:string, from:number|null, to:number|null, reason:string}>|null,
+ *           sidecar?:object|null }} input
+ *           `sidecar` is SEAM-3's provenance stamp, typed here as the opaque object this
+ *           builder treats it as: it is carried VERBATIM into the capture receipt and never
+ *           re-derived, so the digest deliberately knows nothing about its interior.
  */
 export function buildSpatialDigest(input) {
   const pack = normalizeSpatialPack(input?.pack);

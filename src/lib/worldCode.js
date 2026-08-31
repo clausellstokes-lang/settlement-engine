@@ -150,7 +150,10 @@ export function encodeWorldCode(world) {
  * Decode a share code back to its world identity. Fails CLOSED: returns null for
  * any malformed / tampered / unknown-scheme / unknown-version / bad-checksum input.
  * @param {unknown} code
- * @returns {{ version: number, seed: string, basicConfig: { realmSize?: string, tone?: string, mapKind?: string } } | null}
+ * @returns {{ version: number, planLaw: number, seed: string,
+ *   basicConfig: { realmSize?: string, tone?: string, mapKind?: string } } | null}
+ *   `planLaw` is DERIVED from the payload version, never read from the code's own bytes —
+ *   which is why a v1 code cannot be talked into replaying under a later law.
  */
 export function decodeWorldCode(code) {
   if (typeof code !== 'string' || !code) return null;

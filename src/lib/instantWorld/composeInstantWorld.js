@@ -185,6 +185,9 @@ function mintSettlement(engine, site, contentRuntime, memberConfig) {
  * }} [args.contentRuntime] exact reviewed runtime; omission means vanilla
  * @param {() => string} [args.idFactory]            injectable id source (determinism)
  * @param {() => string} [args.clock]                injectable ISO clock (determinism)
+ * @param {number} [args.planLaw]                    plan-law version, threaded to
+ *   `deriveWorldPlan`; absent ⇒ the legacy law, so an existing caller composes the
+ *   same world it always did
  * @returns {{
  *   campaign: any,
  *   settlements: any[],

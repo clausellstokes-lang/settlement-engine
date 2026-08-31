@@ -43,7 +43,12 @@ const SPATIAL_DIGEST_MAX_BYTES = 400_000;
  *   sessionFence?: any, isSessionCurrent?: (sessionFence:any)=>boolean,
  *   options?: { captureSpatialPack?: (ctx:{campaignId:string, get:Function}) =>
  *     Promise<{pack:any, placements:Array<{id:any,cellId:any}>,
- *       cellResolution?:Array<{id:string, from:number|null, to:number|null, reason:string}>}|null> } }} args
+ *       cellResolution?:Array<{id:string, from:number|null, to:number|null, reason:string}>,
+ *       sidecar?:object|null}|null> } }} args
+ *   The injected capture's reply is declared HERE as well as at its producer, because the
+ *   seam is a dependency injection: a test double supplies this shape without ever reaching
+ *   `captureSpatialPack`. SEAM-3's `sidecar` is optional on BOTH sides for that reason — an
+ *   older double that predates the stamp is still a valid capture.
  * @returns {Promise<{ok:boolean, reason?:string, spatialCanonVersion?:number, digestBytes?:number}>}
  */
 export async function runSpatialCanonize({

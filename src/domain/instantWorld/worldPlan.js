@@ -209,7 +209,9 @@ export function isRandomSentinel(v) { return v === ''; }
 /**
  * Derive the full, deterministic plan from the outer seed + basic knobs.
  *
- * @param {{ seed?: string, basicConfig?: { realmSize?: string, tone?: string, mapKind?: string, magic?: string } }} [args]
+ * @param {{ seed?: string, basicConfig?: { realmSize?: string, tone?: string, mapKind?: string, magic?: string },
+ *           planLaw?: number }} [args] `planLaw` selects the derivation law; absent or
+ *           unrecognised ⇒ the LEGACY law, which is what keeps a v1 code replaying forever.
  * @returns {{
  *   seed: string,
  *   realmSize: string,
