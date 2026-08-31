@@ -1029,8 +1029,9 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // `realmMagicChoice` (MG-1, DESIGN_REALM_MAGIC_TOGGLE §4). The ABSENCE direction
       // is covered by the legacy-blob tests below and the RETIRED-KEY direction by the
       // stale-key arm at the end of this family, which is why moving the bag in either
-      // direction is safe rather than a cohort fork.
-      displayPrefs: { realmMagicChoice: 'yes' },
+      // direction is safe rather than a cohort fork. VAR-3 (T11) added
+      // `instantKnobPins` — a current-shape blob carries it whole.
+      displayPrefs: { realmMagicChoice: 'yes', instantKnobPins: { realmSize: false, tone: false, mapKind: false } },
       advanceAutoResolve: true,
     };
     const merged = mergePersistedState(JSON.parse(JSON.stringify(blob)), currentStub());
@@ -1083,7 +1084,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     store.getState().setRealmMagicChoice('no');
     // The persist hop, exactly as the store performs it: partialize → JSON → merge.
     const blob = JSON.parse(JSON.stringify(partializeOf(store.getState())));
-    expect(blob.displayPrefs).toEqual({ realmMagicChoice: 'no' });
+    expect(blob.displayPrefs).toEqual({ realmMagicChoice: 'no', instantKnobPins: { realmSize: false, tone: false, mapKind: false } });
     const merged = mergePersistedState(blob, currentStub());
     expect(merged.displayPrefs.realmMagicChoice).toBe('no');
   });

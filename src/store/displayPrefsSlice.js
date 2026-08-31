@@ -73,7 +73,18 @@ export const DEFAULT_DISPLAY_PREFS = Object.freeze({
   // before this knob existed was, so a returning user's first modal pre-selects
   // the world they already know.
   realmMagicChoice: 'yes',
+  // VAR-3 (T11) — the Instant World wizard's per-knob "keep this" pins:
+  // "keep my tone, surprise me otherwise". A pinned knob is HELD when the
+  // wizard's Surprise-me reroll runs; the knobs themselves stay ordinary
+  // user input. Same discipline as realmMagicChoice above: a preference about
+  // the MACHINE, never generator input on its own — what reaches the composer
+  // is always the knob value standing in the form when the DM generates.
+  instantKnobPins: Object.freeze({ realmSize: false, tone: false, mapKind: false }),
 });
+
+/** The closed pinnable-knob vocabulary (the three basic knobs; the magic knob
+ *  is a mandatory modal question and cannot be pinned by design). */
+const PINNABLE_KNOBS = new Set(['realmSize', 'tone', 'mapKind']);
 
 // The `(set, get)` signature is the store's slice convention AND the anchor the
 // operationRegistry census walker uses to locate a slice object, so `get` stays in
@@ -99,5 +110,24 @@ export const createDisplayPrefsSlice = (set, get) => ({
       state.displayPrefs.realmMagicChoice = typeof choice === 'string' && choice
         ? choice
         : DEFAULT_DISPLAY_PREFS.realmMagicChoice;
+    }),
+
+  /**
+   * VAR-3 — pin (or unpin) one of the wizard's three basic knobs against the
+   * Surprise-me reroll. Vocabulary-clamped to the closed knob set: an unknown
+   * knob writes nothing (never a junk key into the persisted bag). A returning
+   * user's bag from before this key rehydrates to all-unpinned via the merge.
+   *
+   * @param {unknown} knob one of 'realmSize' | 'tone' | 'mapKind'
+   * @param {unknown} pinned
+   */
+  setInstantKnobPin: (knob, pinned) =>
+    set(state => {
+      if (typeof knob !== 'string' || !PINNABLE_KNOBS.has(knob)) return;
+      state.displayPrefs.instantKnobPins = {
+        ...DEFAULT_DISPLAY_PREFS.instantKnobPins,
+        ...(state.displayPrefs.instantKnobPins || {}),
+        [knob]: !!pinned,
+      };
     }),
 });

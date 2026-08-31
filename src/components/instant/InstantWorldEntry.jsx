@@ -26,7 +26,7 @@ import { REALM_SIZES, TONES, MAP_KINDS, MAGIC_CHOICES, DEFAULT_REALM_SIZE, DEFAU
 import Button from '../primitives/Button.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import { ChoiceDialog } from '../primitives/Dialog.jsx';
-import { INK, BODY, MUTED, BORDER, BORDER2, CARD, CARD_HDR, GOLD, sans, serif_, FS, SP, swatch } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, BORDER2, CARD, CARD_HDR, GOLD, GOLD_TXT, sans, serif_, FS, SP, swatch } from '../theme.js';
 
 const REALM_OPTIONS = Object.values(REALM_SIZES).map(s => ({ id: s.id, label: s.label }));
 const TONE_OPTIONS = TONES.map(t => ({ id: t.id, label: t.label }));
@@ -53,6 +53,10 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
     ? s.displayPrefs.realmMagicChoice
     : DEFAULT_MAGIC));
   const setRealmMagicChoice = useStore(s => s.setRealmMagicChoice);
+  // VAR-3 — the per-knob pins (device-scoped; all-unpinned for a bag from
+  // before the key existed, via the displayPrefs merge).
+  const knobPins = useStore(s => s.displayPrefs?.instantKnobPins) || {};
+  const setInstantKnobPin = useStore(s => s.setInstantKnobPin);
 
   const canGenerate = tier === 'premium' || isElevated;
 
@@ -85,6 +89,18 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
     if (busy) return;
     setError(null);
     setAskMagic(true);
+  };
+
+  // VAR-3 — Surprise me rerolls the SEED and every UNPINNED knob; a kept knob
+  // holds ("keep my tone, surprise me otherwise"). Plain Math.random like
+  // freshSeed itself: this rewrites FORM state the DM still confirms by
+  // generating — determinism lives in the seed, not in the dice that pick it.
+  const surpriseMe = () => {
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    setSeed(freshSeed());
+    if (!knobPins.realmSize) setRealmSize(pick(Object.keys(REALM_SIZES)));
+    if (!knobPins.tone) setTone(pick(TONES.map(x => x.id)));
+    if (!knobPins.mapKind) setMapKind(pick(MAP_KINDS.map(x => x.id)));
   };
 
   const handleMagicAnswer = async (magic) => {
@@ -139,15 +155,15 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
       {/* ── Basic config (premium, expanded) ───────────────────────────── */}
       {open && canGenerate && (
         <div style={{ padding: SP.lg, display: 'grid', gap: SP.lg }}>
-          <Knob label="Realm size" hint={REALM_SIZES[realmSize]?.blurb}>
+          <Knob label="Realm size" hint={REALM_SIZES[realmSize]?.blurb} action={<KnobPin knob="realmSize" pins={knobPins} setPin={setInstantKnobPin} />}>
             <Segmented options={REALM_OPTIONS} value={realmSize} onChange={setRealmSize} size="sm" ariaLabel="Realm size" />
           </Knob>
 
-          <Knob label="Tone" hint={TONES.find(t => t.id === tone)?.blurb}>
+          <Knob label="Tone" hint={TONES.find(t => t.id === tone)?.blurb} action={<KnobPin knob="tone" pins={knobPins} setPin={setInstantKnobPin} />}>
             <Segmented options={TONE_OPTIONS} value={tone} onChange={setTone} size="sm" ariaLabel="Tone" />
           </Knob>
 
-          <Knob label="Map kind">
+          <Knob label="Map kind" action={<KnobPin knob="mapKind" pins={knobPins} setPin={setInstantKnobPin} />}>
             <select
               aria-label="Map kind"
               value={mapKind}
@@ -161,7 +177,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
             </select>
           </Knob>
 
-          <Knob label="Seed" hint="Everything else is a surprise. Same seed always rebuilds the same realm.">
+          <Knob label="Seed" hint="Surprise me rerolls the seed and every unpinned knob — kept knobs hold. Same seed always rebuilds the same realm.">
             <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center', flexWrap: 'wrap' }}>
               <input
                 aria-label="Seed"
@@ -172,7 +188,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
                   border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`, minHeight: 34, minWidth: 140,
                 }}
               />
-              <Button variant="ghost" size="sm" onClick={() => setSeed(freshSeed())} data-testid="instant-world-surprise">
+              <Button variant="ghost" size="sm" onClick={surpriseMe} data-testid="instant-world-surprise">
                 Surprise me
               </Button>
             </div>
@@ -235,14 +251,34 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
   );
 }
 
-function Knob({ label, hint, children }) {
+function Knob({ label, hint, children, action = null }) {
   return (
     <div style={{ display: 'grid', gap: SP.xs }}>
-      <span style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 900, letterSpacing: 0.4, textTransform: 'uppercase', color: MUTED }}>
+      <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, letterSpacing: 0.4, textTransform: 'uppercase', color: MUTED }}>
         {label}
+        {action}
       </span>
       {children}
       {hint && <span style={{ fontFamily: sans, fontSize: FS.xxs, color: BODY, lineHeight: 1.4 }}>{hint}</span>}
     </div>
+  );
+}
+
+/** VAR-3 — the per-knob "keep this" pin: pinned knobs are HELD when Surprise me
+ *  rerolls the rest ("keep my tone, surprise me otherwise"). Device-scoped
+ *  (displayPrefs), never generator input on its own. */
+function KnobPin({ knob, pins, setPin }) {
+  const pinned = !!pins?.[knob];
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      aria-pressed={pinned}
+      data-testid={`knob-pin-${knob}`}
+      onClick={() => setPin?.(knob, !pinned)}
+      style={{ marginLeft: 'auto', padding: '0 6px', minHeight: 22, fontSize: FS.xxs, fontWeight: 800, color: pinned ? GOLD_TXT : MUTED, letterSpacing: 0 }}
+    >
+      {pinned ? '✦ kept' : 'keep this'}
+    </Button>
   );
 }

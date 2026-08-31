@@ -268,6 +268,11 @@ export const OPERATIONS = Object.freeze({
   // 'not-applicable' because re-answering the question IS the inverse and the value is
   // outside canon entirely.
   setRealmMagicChoice: { opType:'setRealmMagicChoice', label:"Remember the realm magic answer", description:"Remembers which answer the Instant World's magic question starts on for this browser: a world of magic, or a mundane one. The question is still asked before every realm, and the realm follows the answer given then.", klass:'mechanical', slice:'displayPrefsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
+  // VAR-3 (T11): same standing as setRealmMagicChoice — a persisted device
+  // preference ("keep my tone, surprise me otherwise") that never reaches a
+  // generator on its own; the reroll it constrains only rewrites FORM state the
+  // DM still confirms by generating. targetScope 'global', no inverse verb.
+  setInstantKnobPin: { opType:'setInstantKnobPin', label:"Pin a realm knob against Surprise me", description:"Keeps one of the Instant World's three knobs (size, tone, map kind) held while Surprise me rerolls the rest. A preference about this browser, not about any realm.", klass:'mechanical', slice:'displayPrefsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   // Realm directive 7 (J-D7): REGISTERED, not EXEMPT, for the SAME reason as
   // setRealmMagicChoice above. It was exempt while it was session-only chrome; the
   // full auto-resolve wave made it a PERSISTED play mode (it rides the store/index.js

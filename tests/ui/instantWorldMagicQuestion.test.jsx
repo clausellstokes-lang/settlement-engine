@@ -143,3 +143,55 @@ describe('MG-1 — the answer is remembered per device', () => {
     expect(document.activeElement?.textContent).toContain('A world of magic');
   });
 });
+
+// ── VAR-3 — per-knob "keep this" pins + the widened Surprise me ──────────────
+describe('VAR-3 — keep my tone, surprise me otherwise', () => {
+  function mountWithPins({ pins = { realmSize: false, tone: false, mapKind: false } } = {}) {
+    const setInstantKnobPin = vi.fn();
+    state = {
+      auth: { tier: 'premium' },
+      isElevated: () => false,
+      instantWorld: vi.fn().mockResolvedValue({ ok: true }),
+      instantWorldBusy: false,
+      setPurchaseModalOpen: vi.fn(),
+      setActivePricingMoment: vi.fn(),
+      displayPrefs: { realmMagicChoice: 'yes', instantKnobPins: pins },
+      setRealmMagicChoice: vi.fn(),
+      setInstantKnobPin,
+    };
+    render(<InstantWorldEntry />);
+    fireEvent.click(screen.getByTestId('instant-world-open'));
+    return { setInstantKnobPin };
+  }
+
+  test('each basic knob carries a pin toggle writing the device preference', () => {
+    const { setInstantKnobPin } = mountWithPins();
+    fireEvent.click(screen.getByTestId('knob-pin-tone'));
+    expect(setInstantKnobPin).toHaveBeenCalledWith('tone', true);
+    // A pinned knob's toggle unpins (aria-pressed carries the state).
+    cleanup();
+    const second = mountWithPins({ pins: { realmSize: false, tone: true, mapKind: false } });
+    const pin = screen.getByTestId('knob-pin-tone');
+    expect(pin.getAttribute('aria-pressed')).toBe('true');
+    fireEvent.click(pin);
+    expect(second.setInstantKnobPin).toHaveBeenCalledWith('tone', false);
+  });
+
+  test('Surprise me rerolls the unpinned knobs and HOLDS the kept one', () => {
+    // Deterministic dice: always pick the last option, which differs from every
+    // default (large / dramatic_campaign / sfArchipelago).
+    const rand = vi.spyOn(Math, 'random').mockReturnValue(0.999999);
+    try {
+      mountWithPins({ pins: { realmSize: false, tone: true, mapKind: false } });
+      fireEvent.click(screen.getByTestId('instant-world-surprise'));
+      // Unpinned knobs moved off their defaults… (Segmented renders buttons
+      // with aria-pressed, not radios.)
+      expect(screen.getByRole('button', { name: 'Large', pressed: true })).toBeTruthy();
+      // …the kept tone HELD at its default.
+      expect(screen.getByRole('button', { name: 'Realistic', pressed: true })).toBeTruthy();
+      expect(screen.getByLabelText('Map kind').value).toBe('sfArchipelago');
+    } finally {
+      rand.mockRestore();
+    }
+  });
+});
