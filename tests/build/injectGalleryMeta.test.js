@@ -90,19 +90,34 @@ describe('the slug bound — the og-image twin', () => {
     expect(meta.image).toBe(`${SUPA}/functions/v1/og-image?slug=oak-mere_42`);
   });
 
-  test.each([
-    ['a path separator', 'a b/c'],
-    ['a query injection', 'oak?x=1'],
-    ['an angle bracket', '<script>'],
-    ['an over-long token', OVER_LONG],
-    ['an empty slug', ''],
-  ])('%s degrades to the collection URL + default card', (_label, slug) => {
-    expect(isValidGallerySlug(slug)).toBe(false);
-    const meta = buildGalleryMeta(slug, null, { origin: ORIGIN, supabaseUrl: SUPA });
-    expect(meta.url).toBe(`${ORIGIN}/gallery`);
-    expect(meta.image).toBe(`${ORIGIN}/og-craft.png`);
-    // Nothing junk is reflected into the head at all.
-    expect(meta.url).not.toContain(slug.slice(0, 8) || 'never');
+  // ⚠️ THIS WAS `test.each([…literal rows…])('%s …', (_label, slug) => …)` AND THE
+  // ROWS ARE UNCHANGED — only the callback's PARAMETER is gone. The lighting census
+  // (tests/lint/sovereigntyLightingContract.walker.test.js) refuses to credit ANY
+  // registration callback that declares a parameter, and `each` exists to hand the row
+  // to one, so this whole file's five assertions ran, passed, and were credited in NO
+  // title census. An inline literal table does not fix that — this table was ALREADY
+  // literal; see `staticTableRows`' corrected header, where 51 files in this same state
+  // are counted. The reformat that works is exactly this one: a plain parameterless
+  // test looping over the rows in its body with a per-row label. The rows are collected
+  // rather than asserted one at a time, so a break now reports EVERY failing slug
+  // instead of only the first — which is what the `each` form gave up in exchange.
+  test('out-of-bound slugs degrade to the collection URL + default card', () => {
+    const wrong = [];
+    for (const [label, slug] of [
+      ['a path separator', 'a b/c'],
+      ['a query injection', 'oak?x=1'],
+      ['an angle bracket', '<script>'],
+      ['an over-long token', OVER_LONG],
+      ['an empty slug', ''],
+    ]) {
+      if (isValidGallerySlug(slug)) { wrong.push(`${label}: accepted as a valid slug`); continue; }
+      const meta = buildGalleryMeta(slug, null, { origin: ORIGIN, supabaseUrl: SUPA });
+      if (meta.url !== `${ORIGIN}/gallery`) wrong.push(`${label}: url ${meta.url}`);
+      if (meta.image !== `${ORIGIN}/og-craft.png`) wrong.push(`${label}: image ${meta.image}`);
+      // Nothing junk is reflected into the head at all.
+      if (meta.url.includes(slug.slice(0, 8) || 'never')) wrong.push(`${label}: junk reflected into ${meta.url}`);
+    }
+    expect(wrong, `an out-of-bound slug reached the head:\n  ${wrong.join('\n  ')}`).toEqual([]);
   });
 
   test('the bound accepts the full 64-character width', () => {
