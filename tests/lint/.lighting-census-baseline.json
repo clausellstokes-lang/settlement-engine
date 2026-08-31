@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "844f38f68cfde2f25e153bc5fd5a41289028bc4f",
+  "measuredAtSha": "02f6a2455404d0d4c910531ee967bdbc834da8c8",
   "measuredBy": "TE-INSTR-2 (lane INSTR2, Opus 5)",
   "date": "2026-08-31",
-  "note": "R2 adds one arm to this walker — the monotone-down census of the each-family park debt, which convicts the false inline-literal-table reformat. The remaining R2 changes are the corrected staticTableRows header and new assertions inside an existing arm, neither of which carries a title. No file added, none parked or unparked.",
+  "note": "R3 de-parks tests/build/injectGalleryMeta.test.js by taking the CORRECTED reformat R2 measured: its already-literal test.each table keeps all five rows but loses the callback parameter, so the file leaves TEST_CONTEXT_PARAM and becomes credited. parked -1, credited +1, and the titles the file contributes enter the evidence layer for the first time. No test file added or removed.",
   "files": 2455,
-  "parked": 371,
-  "credited": 2084,
-  "titles": 21124,
-  "suiteTitles": 5809
+  "parked": 370,
+  "credited": 2085,
+  "titles": 21145,
+  "suiteTitles": 5814
 }
