@@ -760,7 +760,12 @@ function magicDeadzoneGate(snapshot, pressure) {
  * key has no DEFAULT_SIMULATION_RULES entry to normalize, so the normalizer
  * would strip it (the `brokerageEffectsActive` idiom, brokerageStamps.js:397).
  *
- * @param {any} snapshot @param {string} sid @returns {boolean}
+ * ⚠ THE SHAPE IS SPELLED OUT RATHER THAN LEFT `any`, and that is the any-cast
+ * ratchet's law rather than taste: this file's allowance is a frozen number and a
+ * new hole regrows debt a burn-down closed. The two keys named here are the only
+ * two this function reads off the snapshot.
+ * @param {{worldState?: {simulationRules?: Record<string, unknown>}}} snapshot
+ * @param {string} sid @returns {boolean}
  */
 function occupierGovernsHere(snapshot, sid) {
   const stressorSpelling = activeTypesAt(snapshot, sid).has('occupation');

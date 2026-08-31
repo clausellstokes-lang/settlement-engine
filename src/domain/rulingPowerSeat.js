@@ -355,8 +355,8 @@ function closenessBetween(snapshot, worldState, a, b, label) {
   if (!itemA || !itemB) return 0;
   const tradeTie01 = label && Number.isFinite(TRADE_TIE[label]) ? TRADE_TIE[label] : 0;
   return clamp01(cultureAffinity(
-    buildCultureVector(/** @type {Parameters<typeof buildCultureVector>[0]} */ (itemA), /** @type {any} */ (worldState)),
-    buildCultureVector(/** @type {Parameters<typeof buildCultureVector>[0]} */ (itemB), /** @type {any} */ (worldState)),
+    buildCultureVector(/** @type {Parameters<typeof buildCultureVector>[0]} */ (itemA), asObject(worldState)),
+    buildCultureVector(/** @type {Parameters<typeof buildCultureVector>[0]} */ (itemB), asObject(worldState)),
     { tradeTie01 },
   ));
 }
@@ -372,7 +372,7 @@ function tradeBetween(snapshot, a, b) {
   if (!Array.isArray(graph.channels)) return 0;
   let best = 0;
   for (const [from, to] of [[a, b], [b, a]]) {
-    const channels = activeChannelsFrom(/** @type {any} */ (graph), from, {
+    const channels = activeChannelsFrom(/** @type {Parameters<typeof activeChannelsFrom>[0]} */ (graph), from, {
       types: /** @type {string[]} */ (/** @type {unknown} */ (TRADE_CHANNEL_TYPES)),
     });
     for (const channel of channels) {
@@ -398,7 +398,7 @@ function treatyFloorFor(worldState, settlementId, patronId) {
   const byPatron = {};
   for (const key of Object.keys(rows).sort(compareCodepoint)) {
     const treaty = asObject(rows[key]);
-    const orientation = treatyOrientationOf(/** @type {any} */ (treaty));
+    const orientation = treatyOrientationOf(treaty);
     if (!orientation || orientation.resolved !== true) continue;
     if (String(orientation.obligorId) !== settlementId) continue;
     const obligee = String(orientation.obligeeId || '');
@@ -554,7 +554,7 @@ function vassalageSeat(worldState, snapshot, sid, expectedPatronId) {
     ? /** @type {unknown[]} */ (asObject(shaped.regionalGraph).edges)
     : Array.isArray(shaped.relationships) ? /** @type {unknown[]} */ (shaped.relationships) : [];
 
-  /** @type {{ patronId: string, relState: Record<string, any> } | null} */
+  /** @type {{ patronId: string, relState: Record<string, unknown> } | null} */
   let best = null;
   for (const rawEdge of edges) {
     const edge = normalizeRelationshipEdge(rawEdge);
@@ -570,7 +570,7 @@ function vassalageSeat(worldState, snapshot, sid, expectedPatronId) {
     if (expectedPatronId && patronId !== expectedPatronId) continue;
     // Codepoint-first on same-substrate multiplicity (A1.2.15).
     if (best === null || compareCodepoint(patronId, best.patronId) < 0) {
-      best = { patronId, relState: /** @type {Record<string, any>} */ (relState) };
+      best = { patronId, relState: asObject(relState) };
     }
   }
   if (!best) return null;
