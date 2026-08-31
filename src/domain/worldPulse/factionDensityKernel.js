@@ -85,10 +85,10 @@
 import { num, asObject, compareCodepoint } from './npcLadderState.js';
 import { stablePart } from './stablePart.js';
 import { DRIFT_REEMIT_COOLDOWN_TICKS } from './worldPulseFeedCuration.js';
-import { readFactionLifecycle, factionRosterOf } from '../../generators/density/factionLifecycle.js';
-import { planDensityCadence } from '../../generators/density/densityCadence.js';
-import { importanceForRung } from '../../generators/density/densityRungs.js';
-import { seatKey } from '../../generators/density/applyDensityLaw.js';
+import { readFactionLifecycle, factionRosterOf } from '../density/factionLifecycle.js';
+import { planDensityCadence } from '../density/densityCadence.js';
+import { importanceForRung } from '../density/densityRungs.js';
+import { seatKey } from '../density/seatKey.js';
 import { createNpc } from '../entities/npcs.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { slugify } from '../../kernel/slugify.js';

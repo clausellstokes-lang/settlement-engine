@@ -28,8 +28,8 @@ import { applyTierOutcomeToSettlement } from '../worldPulse/tierOutcomeApply.js'
 import { TIER_ORDER, POPULATION_RANGES, popToTier } from '../../data/constants.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../kernel/prng.js';
-import { rollsRegisterVii } from '../../generators/density/densityLaw.js';
-import { importanceForRung } from '../../generators/density/densityRungs.js';
+import { rollsRegisterVii } from '../density/densityLaw.js';
+import { importanceForRung } from '../density/densityRungs.js';
 import { institutionIsFoodAnchor } from '../institutionClassify.js';
 import { withActiveCondition, withoutActiveCondition, deriveAllActiveConditions } from '../activeConditions.js';
 import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate, npcHomeInstitution } from '../corruption.js';

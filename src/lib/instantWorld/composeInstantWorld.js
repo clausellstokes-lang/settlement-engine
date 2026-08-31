@@ -53,7 +53,7 @@
  */
 import { generateSettlementPipeline } from '../../generators/generateSettlementPipeline.js';
 import { DEFAULT_CONFIG } from '../../store/configSlice.js';
-import { birthConfig } from '../../generators/density/densityCreateBoundary.js';
+import { birthConfig } from '../../domain/density/densityCreateBoundary.js';
 import { deriveGraphWithDiscoveredCandidates } from '../../domain/region/discoverDependencyCandidates.js';
 import { ensureRegionalGraph, ensureWizardNewsFeed } from '../../domain/region/index.js';
 import { ensureWorldState } from '../../domain/worldPulse/worldState.js';

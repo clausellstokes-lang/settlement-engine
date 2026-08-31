@@ -42,7 +42,7 @@ import { demographicsActive, tierViabilityOf } from './demographicsRates.js';
 // §810 R5's version gate, read HERE (where the settlement and the rules both are) rather
 // than at the applier, which sees neither the rules nor a reason to carry the density
 // family in its first-paint import closure.
-import { rollsRegisterVii } from '../../generators/density/densityLaw.js';
+import { rollsRegisterVii } from '../density/densityLaw.js';
 
 // Minimum pressure for the city+ depletion floor to fire. The tier branch used to
 // emit depletion candidates regardless of pressure, so a quiescent zero-pressure

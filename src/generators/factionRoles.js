@@ -22,7 +22,7 @@ import {
 } from '../domain/content/customContentSemanticAuthority.js';
 import { factionDisplayNameOf, factionRefOf } from '../domain/factionRefs.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { rollsRegisterVii } from './density/densityLaw.js';
+import { rollsRegisterVii } from '../domain/density/densityLaw.js';
 
 // inferImportance is not used directly here yet — kept on the import
 // graph for future expansion where archetype rules read existing NPC

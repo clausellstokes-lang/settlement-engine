@@ -39,12 +39,12 @@ import {
   VACANCY_WEIGHTS,
   bandsForTier,
   tierKey,
-} from './densityBands.js';
+} from '../../domain/density/densityBands.js';
 import {
   RUNG_KEYS,
   derivedRungOccupancy,
   importanceForRung,
-} from './densityRungs.js';
+} from '../../domain/density/densityRungs.js';
 // ⚠ THE KERNEL'S CLAMP, NOT A LOCAL COPY. `clamp01` had been hand-rolled ~70 times across
 // the engine with THREE divergent non-finite behaviours before `kernel/math.js` became the
 // one home, and `tests/lint/clampPrimitiveBaseline.test.js` forbids a new local copy. Every

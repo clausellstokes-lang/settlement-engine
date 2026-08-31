@@ -69,11 +69,11 @@
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { factionArchetype } from '../../domain/factionArchetypes.js';
 import { rulingPowerFromArchetype } from '../../domain/spatial/cohesionWeave.js';
-import { importanceIndex } from './densityBands.js';
-import { rollsRegisterVii } from './densityLaw.js';
-import { factionRosterOf } from './factionLifecycle.js';
-import { isHeadRungVacant, rungBandsForTier, RUNG_ROLE_FIELD } from './densityRungs.js';
-import { seatKey } from './applyDensityLaw.js';
+import { importanceIndex } from '../../domain/density/densityBands.js';
+import { rollsRegisterVii } from '../../domain/density/densityLaw.js';
+import { factionRosterOf } from '../../domain/density/factionLifecycle.js';
+import { isHeadRungVacant, rungBandsForTier, RUNG_ROLE_FIELD } from '../../domain/density/densityRungs.js';
+import { seatKey } from '../../domain/density/seatKey.js';
 
 /** The scales a title can sit at. The RULING SEAT takes §810.8's full three-ended
  *  grammar; every other head rung takes R25's reduced family. CLOSED — there is no

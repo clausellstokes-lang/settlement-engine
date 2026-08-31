@@ -111,8 +111,8 @@ import { compareCodepoint } from '../../domain/deterministicSort.js';
 // the kernel's explicit non-finite policy (⇒ 0) is a strictly safer floor, never a
 // behaviour change.
 import { clamp01 } from '../../kernel/math.js';
-import { SUCCESSION_CLOCK_TICKS, SUCCESSION_WEIGHTS } from './densityBands.js';
-import { rollsRegisterVii } from './densityLaw.js';
+import { SUCCESSION_CLOCK_TICKS, SUCCESSION_WEIGHTS } from '../../domain/density/densityBands.js';
+import { rollsRegisterVii } from '../../domain/density/densityLaw.js';
 
 /** §810.8 R23 — the ruling seat's three endings. CLOSED; the pins assert this set
  *  exactly, because "closed" is the whole content of a finite-semantics ruling. */

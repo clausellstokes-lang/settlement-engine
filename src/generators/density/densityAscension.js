@@ -42,10 +42,10 @@
  *      how a new law joins an existing world without moving it.
  */
 
-import { bandsForTier, tierKey } from './densityBands.js';
-import { rollsRegisterVii } from './densityLaw.js';
+import { bandsForTier, tierKey } from '../../domain/density/densityBands.js';
+import { rollsRegisterVii } from '../../domain/density/densityLaw.js';
 import { rollInBand, rollRoster } from './densityRoll.js';
-import { seatKey } from './applyDensityLaw.js';
+import { seatKey } from '../../domain/density/seatKey.js';
 import { slugify } from '../../kernel/slugify.js';
 
 /** Every reason ascension may decline to materialize. A typed refusal is a

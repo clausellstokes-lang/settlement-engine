@@ -30,7 +30,7 @@ import { join, relative, sep } from 'node:path';
 import {
   BOUNDARY_CLASSES,
   PIPELINE_REACHERS,
-} from '../../src/generators/density/densityCreateBoundary.js';
+} from '../../src/domain/density/densityCreateBoundary.js';
 
 const SRC = join(process.cwd(), 'src');
 
@@ -44,8 +44,8 @@ const MINT_SYMBOLS = ['birthConfig', 'newSettlementDensityLaw'];
  *  mint without being pipeline callers; they are the mint's home and its pass-
  *  through, not generation sites. */
 const MINT_HOMES = Object.freeze([
-  'src/generators/density/densityCreateBoundary.js',
-  'src/generators/density/densityLaw.js',
+  'src/domain/density/densityCreateBoundary.js',
+  'src/domain/density/densityLaw.js',
   'src/store/settlementSliceHelpers.js',
 ]);
 

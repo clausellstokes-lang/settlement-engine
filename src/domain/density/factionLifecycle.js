@@ -44,7 +44,7 @@
  */
 
 import { rollsRegisterVii } from './densityLaw.js';
-import { seatKey } from './applyDensityLaw.js';
+import { seatKey } from './seatKey.js';
 
 /** The three legal states of a faction under §810.4. There is no fourth. */
 export const FACTION_LIFECYCLE_STATES = Object.freeze([

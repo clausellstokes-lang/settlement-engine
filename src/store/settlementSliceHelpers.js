@@ -37,7 +37,7 @@ export { sectionLocked, carryLockedSections, geographyLockedConfig } from '../do
 // and keeps one helper import home rather than gaining a static import of its own.
 // `birthConfig` marks a generation as a BIRTH — see densityCreateBoundary.js for the
 // manifest of which pipeline callers are births and which must never mint.
-export { birthConfig } from '../generators/density/densityCreateBoundary.js';
+export { birthConfig } from '../domain/density/densityCreateBoundary.js';
 
 const MAX_VERSION_HISTORY = 50;
 

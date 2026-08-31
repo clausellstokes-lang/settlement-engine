@@ -63,10 +63,10 @@
  * honest; inventing it here would bury a design decision in a helper.
  */
 
-import { compareCodepoint } from '../../domain/deterministicSort.js';
+import { compareCodepoint } from '../deterministicSort.js';
 import { factionEnvelopeForTier, tierKey } from './densityBands.js';
 import { rollsRegisterVii } from './densityLaw.js';
-import { seatKey } from './applyDensityLaw.js';
+import { seatKey } from './seatKey.js';
 // ⚠ THE KERNEL'S CLAMP, NOT A LOCAL COPY (`tests/lint/clampPrimitiveBaseline.test.js`).
 // All three call sites below pass through `num` first, so the kernel's explicit non-finite
 // policy (⇒ 0) is unreachable here — a strictly safer floor, never a behaviour change.

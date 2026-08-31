@@ -38,14 +38,14 @@ import {
   factionRosterOf,
   isOnRoster,
   readFactionLifecycle,
-} from '../../src/generators/density/factionLifecycle.js';
+} from '../../src/domain/density/factionLifecycle.js';
 import { ASCENSION_REFUSALS, planSeatAscension } from '../../src/generators/density/densityAscension.js';
 import {
   CADENCE_REFUSALS,
   CADENCE_STEPS,
   planDensityCadence,
   representationGapOf,
-} from '../../src/generators/density/densityCadence.js';
+} from '../../src/domain/density/densityCadence.js';
 import { describe, it, expect } from 'vitest';
 import { createPRNG } from '../../src/kernel/prng.js';
 import {
@@ -59,7 +59,7 @@ import {
   clampImportanceToTier,
   factionEnvelopeForTier,
   importanceIndex,
-} from '../../src/generators/density/densityBands.js';
+} from '../../src/domain/density/densityBands.js';
 import {
   DEFAULT_DENSITY_LAW_VERSION,
   DENSITY_LAW_CONFIG_KEY,
@@ -70,14 +70,14 @@ import {
   readDensityLawVersion,
   resolveDensityLawVersion,
   rollsRegisterVii,
-} from '../../src/generators/density/densityLaw.js';
+} from '../../src/domain/density/densityLaw.js';
 import {
   RUNG_ROLE_FIELD,
   derivedRungOccupancy,
   importanceForRung,
   isHeadRungVacant,
   rungBandsForTier,
-} from '../../src/generators/density/densityRungs.js';
+} from '../../src/domain/density/densityRungs.js';
 // D3 — §810.7 R22 / §810.8 R23–R25: the titular reading and the resolution grammar.
 import {
   CLAIM_BASES,

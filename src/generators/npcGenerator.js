@@ -17,7 +17,7 @@ import { drawUnique } from './hookVariety.js';
 import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { legacyMassRange } from './density/densityLaw.js';
+import { legacyMassRange } from '../domain/density/densityLaw.js';
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js';
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';

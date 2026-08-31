@@ -25,8 +25,8 @@ import { powerHighWaterOf, undercityHighWaterActive, withPowerHighWater } from '
 // so it is read from the ladder's own tuning surface rather than restated here.
 // The domain layer already imports the generators layer for exactly this kind of
 // shared law (resourceDynamicsKernel, institutionLifecycle, mutateEntities).
-import { LEGACY_CONTEST_WIDTH, contestWidthForTier } from '../../generators/density/densityBands.js';
-import { rollsRegisterVii } from '../../generators/density/densityLaw.js';
+import { LEGACY_CONTEST_WIDTH, contestWidthForTier } from '../density/densityBands.js';
+import { rollsRegisterVii } from '../density/densityLaw.js';
 
 // Canonical archetype → factionCompetition's local vocabulary (the FACTION_POWER_BASES
 // keys). Folds the archetypes this layer doesn't model: government/other → civic,

@@ -50,12 +50,12 @@
  * hard band, so the coverage moved inside the roll rather than the band moving.
  */
 
-import { factionDisplayNameOf } from '../../domain/factionRefs.js';
 import { matchFactionArchetype } from '../factionRoles.js';
+import { seatKey } from '../../domain/density/seatKey.js';
 import { FACTION_DESCRIPTORS } from '../../data/powerData.js';
-import { bandsForTier, tierKey } from './densityBands.js';
-import { rollsRegisterVii } from './densityLaw.js';
-import { RUNG_ROLE_FIELD } from './densityRungs.js';
+import { bandsForTier, tierKey } from '../../domain/density/densityBands.js';
+import { rollsRegisterVii } from '../../domain/density/densityLaw.js';
+import { RUNG_ROLE_FIELD } from '../../domain/density/densityRungs.js';
 import { rollDensityPlan } from './densityRoll.js';
 // ⚠ THE KERNEL'S CLAMP, NOT A LOCAL COPY (`tests/lint/clampPrimitiveBaseline.test.js`).
 // All three call sites below are provably finite — two are `0.5 + 0.5 * <array length>`,
@@ -79,12 +79,10 @@ export const FLOOR_LIFT_CHANCE = 0.5;
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 
-/** The stable key for a power seat — the display name, which is what
- *  `factionAffiliation`, `ladderFactionKey` and `npcInFaction` all join on.
- *  @param {Record<string, unknown>} seat @returns {string} */
-export function seatKey(seat) {
-  return factionDisplayNameOf(seat) || String(seat?.faction || seat?.name || '');
-}
+/* `seatKey` moved to `domain/density/seatKey.js` at the DENS landing (bill 7) —
+ * the pulse seam joins on it at tick time, and importing the BIRTH writer for a
+ * three-line key was the static edge that pulled the generator closure into
+ * first paint. Imported back above; body verbatim at its new home. */
 
 /**
  * Adapt `powerStructure.factions` into the roll's power shape.
