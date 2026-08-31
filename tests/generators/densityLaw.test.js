@@ -59,6 +59,7 @@ import {
 } from '../../src/generators/density/densityRungs.js';
 import { rollDensityPlan } from '../../src/generators/density/densityRoll.js';
 import { MISSING_SEAT_STRESSORS } from '../../src/generators/density/applyDensityLaw.js';
+import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { importanceWeight, inferImportance } from '../../src/domain/entities/npcs.js';
 import {
@@ -614,6 +615,51 @@ describe('end to end — the law through the real pipeline', () => {
       }
     }
     expect(checked).toBeGreaterThan(0);
+  });
+});
+
+describe('§817-Q2 — the atomic mint binds the event layer', () => {
+  const settlementWith = (law) => ({
+    tier: 'town',
+    config: law ? { [DENSITY_LAW_CONFIG_KEY]: law } : {},
+    npcs: [],
+    powerStructure: { factions: [{ faction: 'Town Council', isGoverning: true, power: 30 }] },
+  });
+  const event = { id: 'evt.1', type: 'ADD_FACTION', targetId: 'faction.The_Weavers_House', payload: {} };
+
+  it('a v1 world replays ADD_FACTION exactly as it always did — no member appears', () => {
+    // ⛔ THE REASON THIS IS GATED. Event chains are REPLAYED (undo, rerun); an
+    // unconditional co-mint would add a person to every already-authored
+    // ADD_FACTION in every existing campaign the next time it replayed. Lived
+    // history is immutable.
+    const out = mutateSettlement({ settlement: settlementWith(null), event });
+    const minted = out.powerStructure.factions.find(f => f.faction === 'The Weavers House');
+    expect(minted).toBeTruthy();
+    expect(minted.memberNpcIds).toEqual([]);
+    expect(out.npcs).toHaveLength(0);
+  });
+
+  it('a v2 world co-mints the founding member, at the tier\'s head band, undoable as one act', () => {
+    const out = mutateSettlement({ settlement: settlementWith(REGISTER_VII_DENSITY_LAW_VERSION), event });
+    const minted = out.powerStructure.factions.find(f => f.faction === 'The Weavers House');
+    expect(minted.memberNpcIds).toHaveLength(1);
+    expect(out.npcs).toHaveLength(1);
+    const founder = out.npcs[0];
+    expect(minted.memberNpcIds[0]).toBe(founder.id);
+    expect(founder.factionAffiliation).toBe('The Weavers House');
+    expect(founder.importance).toBe(importanceForRung('head', 'town'));
+    // An atomic mint has to be an atomic UNDO: house and founder carry the same
+    // creating event, which is the key `withoutEventCreations` drops by.
+    expect(founder.createdByEventId).toBe(event.id);
+    expect(minted.createdByEventId).toBe(event.id);
+  });
+
+  it('a payload that already names members is not given a second one', () => {
+    const out = mutateSettlement({
+      settlement: settlementWith(REGISTER_VII_DENSITY_LAW_VERSION),
+      event: { ...event, payload: { memberNpcIds: ['npc_7'] } },
+    });
+    expect(out.npcs).toHaveLength(0);
   });
 });
 

@@ -31,8 +31,26 @@
  * ladder values are DRAFTS until the owner's pen lands at the tuning pass
  * (tuning-is-last). Minting new worlds under unsigned numbers would ship draft
  * distributions into real settlements, which §810 R5 forbids. The machinery is
- * complete and exercised — the distribution-shape fixtures drive v2 explicitly
- * — and the flip is one edit here.
+ * complete and exercised — the distribution-shape fixtures drive v2 explicitly.
+ *
+ * ⛔⛔ THE FLIP IS NOT YET ONE LINE, AND THE MISSING PIECE IS NAMED HERE RATHER
+ * THAN DISCOVERED LATER. `newSettlementDensityLaw()` has NO CALLER: this car
+ * deliberately did not wire it into the store, because the store's generate
+ * action is BOTH a birth and a regeneration (`settlementSlice.js`'s
+ * `generateSettlementPipeline(fullConfig, …)` is reached by each), and
+ * `fullConfig` for a regeneration is the existing world's own config. Minting
+ * there unconditionally — or even non-clobbering, since a pre-law world's
+ * config is markerless — would stamp the new law onto worlds that already
+ * exist the first time they were regenerated after the flip. That is precisely
+ * the PROMISE breach this gate exists to prevent, and it is why
+ * `layoutLawVersion` mints at the SAVE chokepoints (three of them, each
+ * demonstrably a create) rather than at generation.
+ *
+ * ⇒ OWED BEFORE THE FLIP: a create-boundary car that establishes which store
+ * path is a BIRTH and mints there. Until it lands, the dial is flip-ready but
+ * unreachable from the product, and a v2 world can only be produced by passing
+ * `_densityLawVersion: 2` in a config explicitly (which is how every fixture in
+ * `tests/generators/densityLaw.test.js` drives it).
  *
  * Pure. No RNG, no store, no React.
  */
