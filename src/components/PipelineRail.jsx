@@ -231,14 +231,21 @@ function SimulationSpine({ settlement }) {
   );
 }
 
-export default function PipelineRail({ compact = false }) {
+export default function PipelineRail({ compact = false, settlement: settlementProp = null }) {
   const history = useStore(s => s.pipelineHistory);
   // Read the active settlement so trace lookups + the spine card have
   // their data source. Subscribes through useStore so a regeneration
-  // refreshes the rail.
-  const settlement = useStore(s => s.settlement);
+  // refreshes the rail. §807(b): a READ-ONLY shared dossier passes its own
+  // settlement instead — the viewer's store holds neither a settlement nor a
+  // pipelineHistory, so the rail renders the settlement-derived simulation
+  // spine alone (the step list belongs to the generating session and is
+  // honestly absent for a viewer, never fabricated).
+  const storeSettlement = useStore(s => s.settlement);
+  const settlement = settlementProp || storeSettlement;
+  const viewerMode = !!settlementProp && (!history || history.length === 0);
 
-  if (!history || history.length === 0) return null;
+  if ((!history || history.length === 0) && !viewerMode) return null;
+  if (viewerMode && simulationSpineRows(settlement).length === 0) return null;
 
   return (
     <aside
@@ -268,8 +275,8 @@ export default function PipelineRail({ compact = false }) {
         </p>
         {/* Visual legend — explains the cog vs quill grammar exactly
             once, at the top, so the meaning is set before the user
-            reads any step. */}
-        <div style={{
+            reads any step. Viewer mode has no step list, so no legend. */}
+        {!viewerMode && <div style={{
           display: 'flex', gap: 14, marginTop: 10,
           fontSize: FS.xxs, color: MUTED, fontWeight: 600,
           textTransform: 'uppercase', letterSpacing: '0.04em',
@@ -289,7 +296,7 @@ export default function PipelineRail({ compact = false }) {
             }} />
             {t('pipeline.quillLabel')}
           </span>
-        </div>
+        </div>}
       </header>
 
       {/* Simulation spine — the 7-line distillation. Only renders when
@@ -297,19 +304,21 @@ export default function PipelineRail({ compact = false }) {
           of bare settlements via simulationSpineRows. */}
       <SimulationSpine settlement={settlement} />
 
-      <ol style={{
-        listStyle: 'none', padding: 0, margin: 0,
-        display: 'flex', flexDirection: 'column', gap: 0,
-      }}>
-        {history.map((entry, i) => (
-          <StepRow
-            key={`${entry.id}-${i}`}
-            entry={entry}
-            isLast={i === history.length - 1}
-            traces={tracesByStep(settlement, entry.id)}
-          />
-        ))}
-      </ol>
+      {!viewerMode && (
+        <ol style={{
+          listStyle: 'none', padding: 0, margin: 0,
+          display: 'flex', flexDirection: 'column', gap: 0,
+        }}>
+          {history.map((entry, i) => (
+            <StepRow
+              key={`${entry.id}-${i}`}
+              entry={entry}
+              isLast={i === history.length - 1}
+              traces={tracesByStep(settlement, entry.id)}
+            />
+          ))}
+        </ol>
+      )}
     </aside>
   );
 }

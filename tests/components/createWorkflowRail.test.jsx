@@ -37,6 +37,10 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
+// The §807(b) viewer-mode negative reads its expected label off the REAL step
+// registry rather than a hand-written string, so a registry relabel can never
+// make the absence pass for the wrong reason.
+import { metaForStep } from '../../src/generators/steps/stepMetadata.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -171,5 +175,34 @@ describe('the simulation record stays reachable, lazy, and single-doored', () =>
       .filter((p) => /^\s*import[^\n]*from\s*['"][^'"]*PipelineRail\.jsx['"]/m.test(readFileSync(p, 'utf8')))
       .map((p) => relative(ROOT, p));
     expect(staticImporters).toEqual([]);
+  });
+});
+
+// ── §807(b) — the rail's VIEWER MODE (a shared dossier, no pipelineHistory) ───
+// The read-only public dossier keeps "How this was simulated": the drawer passes
+// the SHARED settlement, and the rail renders the settlement-derived simulation
+// spine alone — the step list belongs to the generating session and is honestly
+// absent for a viewer, never fabricated from nothing.
+// ⚠ THE SINGLE-DOOR PIN ABOVE STILL HOLDS AND IS WHY THIS SITS HERE: §807(b)'s
+// PublicSimulationBand mounts the DRAWER, not the rail, so `src/` still has
+// exactly one dynamic importer of PipelineRail.jsx. The dynamic import below is
+// in tests/, outside that scan's root.
+describe('PipelineRail viewer mode — §807(b)', () => {
+  test('a passed settlement with NO store history renders the spine, and no step rows', async () => {
+    H.state = makeState({ pipelineHistory: [], settlement: null });
+    const { default: PipelineRail } = await import('../../src/components/PipelineRail.jsx');
+    render(<PipelineRail settlement={SETTLEMENT} />);
+    const block = await screen.findByRole('complementary', { name: 'How this was simulated' });
+    expect(block).toBeTruthy();
+    // No fabricated step receipts: the registry labels of a generating session
+    // are absent (anchored: the block itself rendered above).
+    expect(block.textContent).not.toContain(metaForStep('generatePower').label);
+  });
+
+  test('no settlement prop and no history ⇒ the rail stays null (the pre-§807 gate, unchanged)', async () => {
+    H.state = makeState({ pipelineHistory: [], settlement: null });
+    const { default: PipelineRail } = await import('../../src/components/PipelineRail.jsx');
+    const { container } = render(<PipelineRail />);
+    expect(container.firstChild).toBeNull();
   });
 });

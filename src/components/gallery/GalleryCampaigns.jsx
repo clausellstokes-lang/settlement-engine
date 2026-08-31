@@ -22,11 +22,10 @@
  */
 import { useState, useEffect, useCallback } from 'react';
 import { useStore } from '../../store';
-import { navigate } from '../../hooks/useRoute.js';
 import { t } from '../../copy/index.js';
 import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
 import AlivenessBadge from './AlivenessBadge.jsx';
-import CampaignStatePanel from './CampaignStatePanel.jsx';
+import CampaignWorldView from './CampaignWorldView.jsx';
 import Button from '../primitives/Button.jsx';
 import EmptyState from '../primitives/EmptyState.jsx';
 import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
@@ -155,12 +154,9 @@ export default function GalleryCampaigns({ onNavigate }) {
     }
   }, [isPremium, importGalleryMapWithCampaign, setActiveCampaign, onNavigate]);
 
-  // Member cross-link → the settlement's public dossier (/gallery/:slug). Uses
-  // the route module's navigate (the useGalleryPageState idiom) because
-  // onNavigate is the view-only setter.
-  const openMemberDossier = useCallback((slug) => {
-    if (slug) navigate('gallery', { params: { slug } });
-  }, []);
+  // Member cross-links now live inside CampaignWorldView (§807): a member with
+  // a shared dossier payload opens INLINE below the map; only a payload-less
+  // published member still navigates to its standalone /gallery/:slug page.
 
   return (
     <div style={{ fontFamily: sans }}>
@@ -173,11 +169,13 @@ export default function GalleryCampaigns({ onNavigate }) {
         }}>{notice.text}</div>
       )}
 
-      {/* ── Campaign preview: the map + the campaign-level share surface ── */}
+      {/* ── Campaign preview — the §807 gallery campaign view: the read-only
+             realm map as INDEX (map-header WAR/FAITH tabs riding it), ONE
+             full-width read-only dossier below as CONTENT, and the sharer's
+             remaining living-world sections. CampaignWorldView owns the whole
+             shape; this branch keeps the identity block + Import. ── */}
       {viewingSlug && (() => {
         const d = detail || {};
-        const img = d.imageUrl || d.mapState?.customBackdrop?.imageUrl || null;
-        const memberList = Array.isArray(d.members) ? d.members : [];
         return (
           <div>
             <Button variant="ghost" size="sm" onClick={() => setViewingSlug(null)} style={{ marginBottom: SP.md }}>← Back to campaigns</Button>
@@ -185,47 +183,18 @@ export default function GalleryCampaigns({ onNavigate }) {
             {!detailLoading && !d.slug && <p style={{ color: MUTED, fontSize: FS.sm }}>This campaign is no longer available.</p>}
             {!detailLoading && d.slug && (
               <div style={{ display: 'grid', gap: SP.md }}>
-                <div style={{ border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden' }}>
-                  {img && (
-                    <div style={{ background: CARD_ALT, maxHeight: 380, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <img src={img} alt={d.imageAlt || d.name || 'Campaign map'} style={{ maxWidth: '100%', maxHeight: 380, display: 'block' }} />
-                    </div>
+                <div style={{ border: `1px solid ${BORDER}`, background: CARD, padding: SP.lg, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+                  <div style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK_DEEP }}>{d.name || 'Untitled campaign'}</div>
+                  {d.realmArcSummary && (
+                    <div style={{ fontSize: FS.sm, color: INK, fontStyle: 'italic', lineHeight: 1.5 }}>{d.realmArcSummary}</div>
                   )}
-                  <div style={{ padding: SP.lg, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-                    <div style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK_DEEP }}>{d.name || 'Untitled campaign'}</div>
-                    {d.realmArcSummary && (
-                      <div style={{ fontSize: FS.sm, color: INK, fontStyle: 'italic', lineHeight: 1.5 }}>{d.realmArcSummary}</div>
-                    )}
-                    {d.description && <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5 }}>{d.description}</div>}
-                    {memberList.length > 0 && (
-                      <div>
-                        <div style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 700, color: INK, margin: `${SP.xs}px 0` }}>Settlements ({memberList.length})</div>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
-                          {memberList.map((mm, i) => mm.public_slug ? (
-                            <Button key={mm.old_id || i} variant="ghost" size="sm"
-                              aria-label={`Open the public dossier for ${mm.name || 'this settlement'}`}
-                              onClick={() => openMemberDossier(mm.public_slug)}>
-                              {mm.name || 'Settlement'}{mm.tier ? ` · ${mm.tier}` : ''}
-                            </Button>
-                          ) : (
-                            <span key={mm.old_id || i} style={{ fontSize: FS.xs, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px` }}>
-                              {mm.name || 'Settlement'}{mm.tier ? ` · ${mm.tier}` : ''}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    <Button variant="gold" size="md" onClick={() => handleImport(d.slug)} busy={importingSlug === d.slug}
-                      style={{ alignSelf: 'flex-start', marginTop: SP.xs }}>
-                      {importingSlug === d.slug ? 'Importing…' : (isPremium ? 'Import map + settlements' : 'Import (premium)')}
-                    </Button>
-                  </div>
+                  {d.description && <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5 }}>{d.description}</div>}
+                  <Button variant="gold" size="md" onClick={() => handleImport(d.slug)} busy={importingSlug === d.slug}
+                    style={{ alignSelf: 'flex-start', marginTop: SP.xs }}>
+                    {importingSlug === d.slug ? 'Importing…' : (isPremium ? 'Import map + settlements' : 'Import (premium)')}
+                  </Button>
                 </div>
-                {/* The campaign-level share surface: the owner's opted-in living-world
-                    sections (stored, pre-sanitized snapshot — never a live read). */}
-                {d.world?.snapshot && (
-                  <CampaignStatePanel snapshot={d.world.snapshot} sections={d.world.sections} />
-                )}
+                <CampaignWorldView detail={d} />
               </div>
             )}
           </div>

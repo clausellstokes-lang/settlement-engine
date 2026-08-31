@@ -13,12 +13,25 @@
  *     visitor sees the full campaign grid — the caps bind ACTIONS (the import
  *     press shows the premium notice), never rendering.
  */
-import { afterEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 
 import GalleryPage from '../../../src/components/GalleryPage.jsx';
 import GalleryCampaigns from '../../../src/components/gallery/GalleryCampaigns.jsx';
 import CampaignStatePanel from '../../../src/components/gallery/CampaignStatePanel.jsx';
+import CampaignWorldView from '../../../src/components/gallery/CampaignWorldView.jsx';
+
+// §807 — the dossier stack is the heaviest chunk in the app; the world view
+// lazy-mounts it on selection. The stub captures the dossier payload so the
+// wiring (single mount, replace-on-click, the fail-closed shareDm) is pinned
+// without paying the full OutputContainer render this suite never needed.
+const dossierCapture = vi.hoisted(() => ({ mounts: [] }));
+vi.mock('../../../src/components/PublicDossierView.jsx', () => ({
+  default: ({ dossier }) => {
+    dossierCapture.mounts.push(dossier);
+    return <div data-testid="stub-public-dossier">{dossier?.name}</div>;
+  },
+}));
 
 const mocks = vi.hoisted(() => ({
   galleryApi: {
@@ -253,5 +266,109 @@ describe('CampaignStatePanel — no raw engine counter reaches the public share'
     expect(text.length).toBeGreaterThan(40);
     expect(text).toContain('The wharves overflow');
     expect(/\btick\s*\d/i.test(text), `raw counter survived: ${text}`).toBe(false);
+  });
+});
+
+// ── §807 — the shared-campaign gallery view: index + one dossier + header tabs ─
+describe('CampaignWorldView — the §807 gallery campaign view', () => {
+  const DETAIL = {
+    slug: 'the-reach', name: 'The Reach', imageUrl: 'https://cdn.example/reach.jpg',
+    mapState: {
+      customBackdrop: { imageUrl: 'https://cdn.example/backdrop.jpg', w: 1000, h: 500 },
+      placements: {
+        b1: { settlementId: 's-1', x: 250, y: 100 },
+        b2: { settlementId: 's-2', x: 700, y: 300 },
+        b3: { settlementId: 's-gone', x: 10, y: 10 }, // no member row ⇒ no pin
+      },
+    },
+    world: {
+      snapshot: {
+        pantheon: [{ deityId: 'd1', name: 'The Tide', tier: 'major', seats: 2, wins: 1, losses: 0 }],
+        warNetwork: { sieges: [{ targetId: 's-2', targetName: 'Farhold', coalitionNames: ['Nearby'] }], tradeWars: [], channels: [] },
+        worldClock: { tick: 12, calendar: { year: 1, month: 3, season: 'summer' } },
+      },
+      sections: ['worldClock', 'pantheon', 'warNetwork'],
+    },
+    members: [
+      { old_id: 's-1', name: 'Nearby', tier: 'town', public_slug: 'nearby', settlement: { name: 'Nearby' }, chronicle: [] },
+      { old_id: 's-2', name: 'Farhold', tier: 'village', public_slug: null, settlement: { name: 'Farhold' }, chronicle: [] },
+    ],
+  };
+
+  let scrollSpy;
+  beforeEach(() => {
+    dossierCapture.mounts.length = 0;
+    // jsdom has no scrollIntoView; the §807(a) head-first law is pinned on it.
+    scrollSpy = vi.fn();
+    Element.prototype.scrollIntoView = scrollSpy;
+  });
+  afterEach(() => cleanup());
+
+  test('renders the read-only index: pan/zoom frame, true-position pins, and the member rail', () => {
+    render(<CampaignWorldView detail={DETAIL} />);
+    expect(screen.getByTestId('campaign-realm-index')).toBeTruthy();
+    // Pins for the two members with placements; the orphan placement mints none.
+    expect(screen.getAllByTestId('campaign-map-pin')).toHaveLength(2);
+    expect(screen.getByTestId('campaign-member-rail')).toBeTruthy();
+    // No dossier is mounted before a selection — the hint stands in its place.
+    expect(screen.queryByTestId('campaign-selected-dossier')).toBeNull();
+    expect(dossierCapture.mounts).toHaveLength(0);
+  });
+
+  test('click a pin ⇒ ONE full-width read-only dossier below; clicking another REPLACES it (§807(e)) and scrolls to the head (§807(a))', async () => {
+    render(<CampaignWorldView detail={DETAIL} />);
+    // The pin and the rail chip share one accessible label (one action, two
+    // affordances) — this arm drives the PIN, inside the index frame.
+    fireEvent.click(within(screen.getByTestId('campaign-realm-index')).getByLabelText('Open the dossier for Nearby'));
+    expect(await screen.findByTestId('campaign-selected-dossier')).toBeTruthy();
+    await waitFor(() => expect(dossierCapture.mounts).toHaveLength(1));
+    expect(dossierCapture.mounts[0].name).toBe('Nearby');
+    // Fail closed: a campaign share never opts a member into DM content.
+    expect(dossierCapture.mounts[0].shareDm).toBe(false);
+    await waitFor(() => expect(scrollSpy).toHaveBeenCalled());
+
+    // Replace-on-click: ONE mounted dossier, now Farhold — never two.
+    fireEvent.click(within(screen.getByTestId('campaign-member-rail')).getByLabelText('Open the dossier for Farhold'));
+    await waitFor(() => expect(screen.getByTestId('stub-public-dossier').textContent).toBe('Farhold'));
+    expect(screen.getAllByTestId('stub-public-dossier')).toHaveLength(1);
+  });
+
+  test('the WAR and FAITH world tabs ride the MAP HEADER (§807(c)), gated by the sharer sections (§807(d))', () => {
+    render(<CampaignWorldView detail={DETAIL} />);
+    const tabs = screen.getByTestId('campaign-map-header-tabs');
+    expect(tabs.textContent).toContain('War');
+    expect(tabs.textContent).toContain('Faith');
+    // War tab renders the warNetwork slice in the header area.
+    fireEvent.click(screen.getByRole('tab', { name: 'War' }));
+    expect(screen.getByTestId('campaign-header-war').textContent).toMatch(/Farhold.*under siege/);
+    // Faith tab renders the pantheon slice.
+    fireEvent.click(screen.getByRole('tab', { name: 'Faith' }));
+    expect(screen.getByTestId('campaign-header-faith').textContent).toContain('The Tide');
+    // The panel below the dossier keeps the OTHER shared sections but not the
+    // header-carried ones (no duplicate war/pantheon surface). The active
+    // header tab mounts its own CampaignStatePanel, so scope to the LAST panel
+    // in document order (the below-dossier one).
+    const panels = screen.getAllByTestId('campaign-state-panel');
+    const below = panels[panels.length - 1];
+    expect(below.textContent).toContain('World Clock');
+    expect(below.textContent).not.toContain('The Tide');
+  });
+
+  test('sharer consent governs: sections without warNetwork/pantheon ⇒ NO header tabs (§807(d))', () => {
+    const detail = { ...DETAIL, world: { snapshot: DETAIL.world.snapshot, sections: ['worldClock'] } };
+    render(<CampaignWorldView detail={detail} />);
+    expect(screen.queryByTestId('campaign-map-header-tabs')).toBeNull();
+    expect(screen.getByTestId('campaign-realm-index')).toBeTruthy();
+  });
+
+  test('a generated-terrain share (no backdrop) renders the map ground with NO fabricated pins; the rail is the index', () => {
+    const detail = { ...DETAIL, mapState: { placements: DETAIL.mapState.placements } };
+    render(<CampaignWorldView detail={detail} />);
+    expect(screen.getByTestId('campaign-realm-index')).toBeTruthy();
+    expect(screen.queryAllByTestId('campaign-map-pin')).toHaveLength(0);
+    expect(screen.getByTestId('campaign-member-rail')).toBeTruthy();
+    // The rail still opens the inline dossier.
+    fireEvent.click(within(screen.getByTestId('campaign-member-rail')).getByLabelText('Open the dossier for Nearby'));
+    expect(screen.getByTestId('campaign-selected-dossier')).toBeTruthy();
   });
 });

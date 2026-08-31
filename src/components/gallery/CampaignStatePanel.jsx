@@ -278,6 +278,21 @@ const SECTION_RENDERERS = {
 };
 
 /**
+ * §807(c) — does a section have anything to render for this snapshot? Answered
+ * through the SAME renderer self-gates the panel itself uses (never a second
+ * spelling of a section's emptiness), so a header tab's presence can never
+ * disagree with what the panel would actually paint.
+ * @param {Record<string, any> | null | undefined} snapshot
+ * @param {string} key one of the SECTION_KEYS
+ * @returns {boolean}
+ */
+export function sectionHasContent(snapshot, key) {
+  if (!snapshot || typeof snapshot !== 'object') return false;
+  const renderer = SECTION_RENDERERS[key];
+  return !!renderer && renderer(snapshot) != null;
+}
+
+/**
  * @param {Object} props
  * @param {Record<string, any> | null} [props.snapshot]  the pre-sanitized public
  *   world snapshot (worldSnapshotPublic shape: worldClock, chronicle, pantheon,

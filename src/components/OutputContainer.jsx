@@ -43,6 +43,9 @@ const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.j
 // flag('tableView') && userPrefs.tableViewOpen, so the chunk loads the
 // moment the user opens it and never before.
 const TableView = lazy(() => import('./TableView.jsx'));
+// §807(b) — the READ-ONLY shared dossier KEEPS "How this was simulated"
+// (§777's survivor). The band is a sibling leaf; the drawer stays lazy inside.
+const PublicSimulationBand = lazy(() => import('./dossier/PublicSimulationBand.jsx'));
 // STRIP-1 (owner ruling, ODQ §725): the legacy settlement-map tab is GONE from the
 // product. The dossier's tab set is Summary / Systems / World / Notes — there is no
 // fifth Map tab, no MapTabShell specifier, and no map body to keep off first paint.
@@ -508,9 +511,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // teaser (names NO deity). Premium + deity-free ⇒ no tab; a public deity-free
   // dossier stays clean. Presence is tier-gated the SAME way FaithSection's
   // CONTENT is — it never leaks a name.
-  const faithHasEmbed = !!(rawSettlement?.config?.primaryDeitySnapshot && typeof rawSettlement.config.primaryDeitySnapshot === 'object');
-  const hasWarTab = inCampaign;
-  const hasFaithTab = faithHasEmbed || (!viewerIsPremium && !publicDossier);
+  const hasFaithTab = !!(rawSettlement?.config?.primaryDeitySnapshot && typeof rawSettlement.config.primaryDeitySnapshot === 'object') || (!viewerIsPremium && !publicDossier);
   const allTabs = [...baseTabs,
     // Plot Hooks — a Summary sub-tab (spec §8); shown only when the settlement
     // actually surfaces structural hooks.
@@ -518,7 +519,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // §805 — WAR and FAITH (World). Reuse the already-bundled Swords / Sparkles
     // glyphs (no new first-paint icon; Sparkles doubles for AI Notes the way
     // Drama doubles for Traditions / Plot Hooks). Presence gates above.
-    ...(hasWarTab ? [{ id:'war', label:'War', Icon: Swords }] : []),
+    ...(inCampaign ? [{ id:'war', label:'War', Icon: Swords }] : []),
     ...(hasFaithTab ? [{ id:'faith', label:'Faith', Icon: Sparkles }] : []),
     // Guidance (DM Compass) — the AI-narrated layer; only present once narration
     // produced it, and tinted purple in the strip below.
@@ -856,6 +857,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             <LifecycleSpine stage={lifecycleStage} />
           </div>
         )}
+        {/* §807(b) — a shared world shows its machinery proudly: the read-only
+            public dossier keeps the "How this was simulated" drawer trigger. */}
+        {publicDossier && <Suspense fallback={null}><PublicSimulationBand settlement={rawSettlement} /></Suspense>}
         {/* P121 — Single chrome band below the header — collapses the old violet
             narrative-layer strip + owner/visitor actions strip into one calm row
             (see DossierActionBand). Skipped in readOnly (public viewer), where

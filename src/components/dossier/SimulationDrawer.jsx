@@ -42,7 +42,10 @@ const sans = '"Nunito", system-ui, sans-serif';
  * the consumer mounts it; the drawer is portal-style — fixed-position
  * over the page chrome — so it doesn't push content around.
  */
-export default function SimulationDrawer({ variant = 'inline' }) {
+// §807(b): a READ-ONLY shared dossier passes its own `settlement` so the rail
+// renders the settlement-derived simulation spine for a viewer whose store
+// holds no pipelineHistory (the owner mounts keep the store path, unchanged).
+export default function SimulationDrawer({ variant = 'inline', settlement = null }) {
   // 'inline' = the parchment owner-action band (ghost + light border) — the
   // default, byte-identical to the pre-variant render for existing mounts.
   // 'toolbar' = the dark sticky wizard toolbar, where the trigger joins Back /
@@ -162,7 +165,7 @@ export default function SimulationDrawer({ variant = 'inline' }) {
                   Loading simulation record…
                 </div>
               }>
-                <PipelineRail compact={false} />
+                <PipelineRail compact={false} settlement={settlement} />
               </Suspense>
             </div>
           </aside>
