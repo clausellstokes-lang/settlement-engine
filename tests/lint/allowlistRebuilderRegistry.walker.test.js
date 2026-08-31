@@ -667,6 +667,33 @@ const CLASS_ROSTER = Object.freeze([
   }),
 ]);
 
+/**
+ * Keys minted at a producer site that the registered rebuilder does not emit — the
+ * whole measurement DIRECTION 1 and DIRECTION 2 read in opposite directions.
+ *
+ * Computed at module scope deliberately: a `describe` body must be a STRAIGHT-LINE
+ * block (declarations and calls only). A bare hoisting block inside one parks the
+ * whole file out of the lighting census on `SUITE_NOT_STRAIGHT_LINE`, and a parked
+ * file contributes ZERO titles as evidence — measured on this very file, which
+ * parked on its first refreeze for exactly that reason.
+ */
+function measureDroppedKeys() {
+  const dropped = new Map();
+  const home = srcFiles.find(({ rel }) => rel === REBUILDERS[0].module);
+  if (!home) return dropped;
+  const allow = emittedKeys(home.source, REBUILDERS[0].rebuilder).keys;
+  for (const site of allProducerSites) {
+    for (const key of site.keys) {
+      if (allow.has(key)) continue;
+      if (!dropped.has(key)) dropped.set(key, []);
+      dropped.get(key).push(`${site.path}:${site.line}`);
+    }
+  }
+  return dropped;
+}
+
+const droppedToday = measureDroppedKeys();
+
 // ── Tests ───────────────────────────────────────────────────────────────────────
 
 describe('SP-W1 allowlist-rebuilder registry — guard the guard', () => {
@@ -818,20 +845,6 @@ describe('SP-W1 allowlist-rebuilder registry — guard the guard', () => {
 });
 
 describe('SP-W1 allowlist-rebuilder registry — BOTH WAYS against the tree', () => {
-  /** Keys minted at a producer site that the registered rebuilder does not emit. */
-  const droppedToday = new Map();
-  {
-    const wizardNews = srcFiles.find(({ rel }) => rel === REBUILDERS[0].module);
-    const allow = emittedKeys(wizardNews.source, REBUILDERS[0].rebuilder).keys;
-    for (const site of allProducerSites) {
-      for (const key of site.keys) {
-        if (allow.has(key)) continue;
-        if (!droppedToday.has(key)) droppedToday.set(key, []);
-        droppedToday.get(key).push(`${site.path}:${site.line}`);
-      }
-    }
-  }
-
   test('DIRECTION 1 — no producer mints a key the rebuilder silently drops', () => {
     const known = new Set(KNOWN_DROPPED_KEYS.map((row) => row.key));
     const unknown = [...droppedToday.entries()]
