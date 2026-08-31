@@ -54,6 +54,12 @@
  *   5. EVERY ENTRY IS ATTRIBUTED. Each row carries `subsystem`, `cause`,
  *      `introducedAt` and `class`. An entry without an attribution is a defect
  *      being laundered into debt, so tests/lint/testRatchet.test.js refuses one.
+ *   6. EVERY ENTRY DECLARES ITS MAGNITUDE. Banking a row freezes its EXISTENCE;
+ *      the magnitude is what freezes its SIZE. Every surviving census row is an
+ *      enforcement walker whose verdict is a POPULATION, not a boolean, so
+ *      without this the contents behind a permitted red grow invisibly — measured
+ *      at +109 em dashes across 29 files with every gate green (ODQ §854). See
+ *      THE MAGNITUDE CEILING block further down.
  *
  * ── USAGE ───────────────────────────────────────────────────────────────────
  *   npm run test:ratchet          # the gate step (wired into `npm run check`)
@@ -450,11 +456,165 @@ export function pendingGapOf(report, countedNonRun) {
   return gap > 0 ? { declared, counted: countedNonRun, gap } : null;
 }
 
+/**
+ * ── ⚠⚠ THE MAGNITUDE CEILING — why a BANKED row now has to say how big it is ──
+ *
+ * THE DEFECT THIS CLOSES (ODQ §854, TE-VOICE-1's report; chartered as TE-RATCHET-MAG).
+ * The permit is one line — the regression filter below drops any id present in
+ * `entries` and asks NOTHING further. That is correct for an ordinary failing test,
+ * whose verdict is a boolean: it fails, it is banked, there is nothing more to
+ * measure. It is WRONG for the only kind of row this census still holds.
+ *
+ * EVERY surviving census row is a LEDGERED ENFORCEMENT WALKER (tests/lint/testRatchet.test.js
+ * asserts that partition), and a walker's verdict is not a boolean — it is a POPULATION.
+ * `expected 1037 to be less than or equal to 670` fails identically at 1037, at 1400 and at
+ * ten thousand. So banking the row froze its EXISTENCE and left its CONTENTS unbounded:
+ *
+ *   MEASURED, §854: banking the per-TEST rows collapsed ~150 per-FILE guards into 4
+ *   permitted reds, and the population then grew +109 em dashes across 29 further files
+ *   WITH EVERY GATE GREEN.
+ *
+ * That is the house's own A-RED-RATCHET'S-CONTENTS-GROW-INVISIBLY hazard, which had been
+ * measured for the lighting walker and never for this one.
+ *
+ * ── THE CURE: A CEILING BESIDE THE ROW COUNT ────────────────────────────────
+ * A banked row now declares one or more MEASURES over the failure message the runner
+ * ALREADY carried (see `rowsOf` — `failureMessages` is passed through verbatim, so this
+ * costs no extra runner work and invents no new source of truth). Each measure names a
+ * pattern, an extractor kind, and a frozen ceiling. The row stays banked; its SIZE does not.
+ *
+ *   kind      what it reads                                    the growth it catches
+ *   capture   one capture group of the FIRST match             a total that rises
+ *   count     how many times the pattern matches               a roster that gains members
+ *   sum       one capture group summed over EVERY match        a per-item inventory that
+ *                                                              deepens anywhere in it
+ *
+ * `sum` is the one that answers the measured defect above: a per-file arm listing
+ * `current em:66` per drifted file rises when a NEW file joins AND when an EXISTING file
+ * deepens, which a member count alone cannot see.
+ *
+ * ⛔ FAIL CLOSED, AND THE DIRECTION MATTERS. A banked row that is FAILING and whose
+ * pattern matches NOTHING is REFUSED, never passed. A message that no longer carries its
+ * declared measure has not been measured, and an unmeasured magnitude is not a small one —
+ * it is an unknown one, which is the exact state this instrument exists to end. Note the
+ * asymmetry that makes zero matches unambiguous: if the debt had genuinely gone to zero the
+ * row would be PASSING, and a passing row is handled by the ratchet-down path and never
+ * reaches here at all.
+ *
+ * ⛔ AND `--update` MAY ONLY LOWER A CEILING. It re-freezes each magnitude at
+ * `min(frozen, measured)`, exactly as it already does for `skippedCeiling`. A re-freeze that
+ * could RAISE one would let the next growth bank itself silently — which is the STRIP-never-raise
+ * ruling (ODQ line 266) applied to the figure rather than to the row.
+ */
+export const MAGNITUDE_KINDS = ['capture', 'count', 'sum'];
+
+/**
+ * Measure ONE declared magnitude against ONE failure message.
+ * Returns `{ ok: true, measured }` or `{ ok: false, why }` — never throws, because a
+ * malformed spec must RED the gate with an explanation, not crash it into a vacuous exit.
+ * Exported so the meta-test drives the SAME function the gate uses.
+ */
+export function measureMagnitude(spec, message) {
+  const text = String(message ?? '');
+  if (!spec || typeof spec !== 'object' || Array.isArray(spec)) {
+    return { ok: false, why: 'the measure is not an object' };
+  }
+  const {
+    name, kind, pattern, ceiling,
+  } = spec;
+  const group = Number.isInteger(spec.group) ? spec.group : 1;
+  if (typeof name !== 'string' || !name.trim()) {
+    return { ok: false, why: 'the measure has no `name` — a nameless figure cannot be argued with' };
+  }
+  if (!MAGNITUDE_KINDS.includes(kind)) {
+    return { ok: false, why: `\`kind\` must be one of ${MAGNITUDE_KINDS.join('|')} (got ${JSON.stringify(kind)})` };
+  }
+  if (typeof pattern !== 'string' || !pattern) {
+    return { ok: false, why: 'the measure declares no `pattern`' };
+  }
+  if (!Number.isInteger(ceiling) || ceiling < 0) {
+    return { ok: false, why: `\`ceiling\` must be a non-negative integer (got ${JSON.stringify(ceiling)})` };
+  }
+  let re;
+  try {
+    // `capture` reads the first match only; the aggregating kinds need the global flag.
+    re = new RegExp(pattern, kind === 'capture' ? 'm' : 'gm');
+  } catch (error) {
+    return { ok: false, why: `the pattern does not compile: ${error.message}` };
+  }
+  // ⚠ DIGITS ONLY, and the strictness is load-bearing rather than fussy. `Number('')` is
+  // ZERO, so a pattern whose capture group can match EMPTINESS — `(\d*)`, or an optional
+  // group that did not participate — would report a magnitude of 0 against any message at
+  // all, including one that carries no figure. That is a measure which cannot fail, i.e.
+  // the same disarmed guard one layer down. An empty or non-numeric capture is UNMEASURED.
+  const digitsOf = (raw, where) => {
+    if (raw === undefined) return { ok: false, why: `capture group ${group} does not exist ${where}` };
+    if (!/^\d+$/.test(String(raw))) {
+      return { ok: false, why: `capture group ${group} is not a bare integer ${where} (${JSON.stringify(raw)})` };
+    }
+    return { ok: true, value: Number(raw) };
+  };
+  if (kind === 'capture') {
+    const match = re.exec(text);
+    if (!match) return { ok: false, why: 'the pattern matched NOTHING in the live failure message' };
+    const digits = digitsOf(match[group], 'in the match');
+    return digits.ok ? { ok: true, measured: digits.value } : digits;
+  }
+  const matches = [...text.matchAll(re)];
+  if (matches.length === 0) return { ok: false, why: 'the pattern matched NOTHING in the live failure message' };
+  if (kind === 'count') return { ok: true, measured: matches.length };
+  let measured = 0;
+  for (const match of matches) {
+    const digits = digitsOf(match[group], 'in every match');
+    if (!digits.ok) return digits;
+    measured += digits.value;
+  }
+  return { ok: true, measured };
+}
+
+/**
+ * Every declared magnitude of ONE banked row, sorted into the three verdicts the gate acts on.
+ * A row that declares no magnitude at all lands wholly in `unmeasured` — see the fail-closed
+ * note above. Exported so the meta-test can assert the partition rather than re-deriving it.
+ */
+export function magnitudeReportOf(entry, message) {
+  const specs = entry?.magnitude;
+  if (!Array.isArray(specs) || specs.length === 0) {
+    return {
+      unmeasured: [{
+        name: '(none declared)',
+        why: 'this banked row declares NO magnitude, so its population is unbounded — the exact'
+          + ' state TE-RATCHET-MAG closes. Add a `magnitude` array with the measured figure.',
+      }],
+      breaches: [],
+      slack: [],
+    };
+  }
+  const unmeasured = [];
+  const breaches = [];
+  const slack = [];
+  for (const spec of specs) {
+    const verdict = measureMagnitude(spec, message);
+    const name = (spec && typeof spec.name === 'string' && spec.name) || '(unnamed)';
+    if (!verdict.ok) {
+      unmeasured.push({ name, why: verdict.why });
+    } else if (verdict.measured > spec.ceiling) {
+      breaches.push({ name, measured: verdict.measured, ceiling: spec.ceiling, unit: spec.unit });
+    } else if (verdict.measured < spec.ceiling) {
+      slack.push({ name, measured: verdict.measured, ceiling: spec.ceiling, unit: spec.unit });
+    }
+  }
+  return { unmeasured, breaches, slack };
+}
+
 const BOOTSTRAP_DOC = 'PER-TEST failure census for the source phase (all tests except tests/build/**).'
   + ' SHRINK-ONLY. A failing test ABSENT'
   + ' from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution'
   + ' — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it.'
-  + ' `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit.'
+  + ' Every entry MUST also carry a `magnitude` array: a banked row freezes its EXISTENCE, and the'
+  + ' magnitude is what freezes its SIZE, so the population behind a permitted red cannot grow'
+  + ' invisibly (ODQ 854, TE-RATCHET-MAG). `--update` can only REMOVE entries and LOWER magnitude'
+  + ' ceilings; adding one is a deliberate, attributed hand edit.'
   + ' See scripts/check-test-ratchet.mjs.';
 
 /**
@@ -806,7 +966,16 @@ export async function run(argv = []) {
     const entries = {};
     for (const r of [...failing].sort((a, b) => a.id.localeCompare(b.id))) {
       entries[r.id] = {
-        file: r.file, test: r.fullName, subsystem: null, cause: null, introducedAt: null, class: null,
+        file: r.file,
+        test: r.fullName,
+        subsystem: null,
+        cause: null,
+        introducedAt: null,
+        class: null,
+        // NULL, never a figure this mode measured for itself. A bootstrap that froze a
+        // magnitude it had just read would bank whatever the tree happened to hold, which
+        // is the same laundering the null attributions above exist to refuse.
+        magnitude: null,
       };
     }
     fs.writeFileSync(BASELINE, `${JSON.stringify({
@@ -925,6 +1094,26 @@ export async function run(argv = []) {
     );
   }
 
+  // (2b) FILE FLOOR — ⚠⚠ THE SENTINEL THAT WAS COMPUTED, WRITTEN, AND COMPARED NOWHERE.
+  // `totalFiles` has been measured at line ~590, persisted by BOTH --bootstrap and
+  // --update, and read by a static pin that only asserts it is a positive number
+  // ("the scope figures are present and positive (the sentinels are not inert)") — while
+  // no arm anywhere ever compared it to a live run. It was INERT: a sentinel that looks
+  // armed in the census, in the writer and in its own pin, and could not refuse anything.
+  // Found by the §854.1 skeptic pass and filed as a guards-family row; armed here.
+  //
+  // IT IS NOT A DUPLICATE OF THE COUNT FLOOR ABOVE. The two collapse independently: a
+  // whole DIRECTORY dropping out of `include` takes many files and may take few tests,
+  // while a single enormous suite failing to collect takes many tests and one file. The
+  // test floor sees the second and can sit green through the first.
+  const fileFloor = Math.floor((baseline.totalFiles || 0) * SCOPE_FLOOR_RATIO);
+  if (baseline.totalFiles && totalFiles < fileFloor) {
+    scopeFailures.push(
+      `  total test FILE count collapsed: ${totalFiles} < ${fileFloor} `
+      + `(${Math.round(SCOPE_FLOOR_RATIO * 100)}% of the frozen ${baseline.totalFiles}) — whole suites left the run`,
+    );
+  }
+
   // (3) SCOPE COLLAPSE — judged BEFORE the skip ceiling, because a collapse that
   // reaches the ceiling arm is reported as the wrong event entirely (header note).
   // THE GAP IS THE GATE. The clock is consulted only once the gap has established that
@@ -1003,8 +1192,39 @@ export async function run(argv = []) {
     }
     const kept = {};
     const dropped = [];
+    const loweredMagnitudes = [];
+    const heldMagnitudes = [];
     for (const [id, row] of Object.entries(entries)) {
-      if (liveFailingIds.has(id)) kept[id] = row; else dropped.push(id);
+      if (!liveFailingIds.has(id)) { dropped.push(id); continue; }
+      // ⛔ MONOTONE DOWN, exactly like `skippedCeiling` below: a re-freeze may LOWER a
+      // magnitude and may never RAISE one. If it could raise, every growth would bank
+      // itself the moment anyone ran the documented re-freeze — which is precisely the
+      // laundering VOICE-1b measured on the voice fixture and the STRIP-never-raise
+      // ruling (ODQ line 266) forbids. A breach therefore SURVIVES the re-freeze and the
+      // gate stays red until the debt is actually cut.
+      if (!Array.isArray(row.magnitude) || row.magnitude.length === 0) { kept[id] = row; continue; }
+      const message = (liveById.get(id)?.failureMessages || [])[0] || '';
+      kept[id] = {
+        ...row,
+        magnitude: row.magnitude.map((spec) => {
+          const verdict = measureMagnitude(spec, message);
+          if (!verdict.ok) {
+            heldMagnitudes.push(`${id} [${spec?.name ?? '(unnamed)'}]: ${verdict.why}`);
+            return spec;
+          }
+          if (verdict.measured >= spec.ceiling) {
+            if (verdict.measured > spec.ceiling) {
+              heldMagnitudes.push(
+                `${id} [${spec.name}]: measured ${verdict.measured} EXCEEDS the frozen ${spec.ceiling}`
+                + ' — held, never raised',
+              );
+            }
+            return spec;
+          }
+          loweredMagnitudes.push(`${id} [${spec.name}]: ${spec.ceiling} → ${verdict.measured}`);
+          return { ...spec, ceiling: verdict.measured };
+        }),
+      };
     }
     fs.writeFileSync(BASELINE, `${JSON.stringify({
       ...baseline,
@@ -1018,6 +1238,15 @@ export async function run(argv = []) {
     console.log(`[test-ratchet] baseline updated: ${Object.keys(kept).length} failing test(s) remain, `
       + `${dropped.length} removed.`);
     if (dropped.length) console.log(dropped.map((id) => `  - ${id}`).join('\n'));
+    if (loweredMagnitudes.length) {
+      console.log(`[test-ratchet] ${loweredMagnitudes.length} magnitude ceiling(s) RATCHETED DOWN:`);
+      console.log(loweredMagnitudes.map((line) => `  ↓ ${line}`).join('\n'));
+    }
+    if (heldMagnitudes.length) {
+      console.log(`[test-ratchet] ⚠ ${heldMagnitudes.length} magnitude ceiling(s) HELD — a re-freeze never raises one:`);
+      console.log(heldMagnitudes.map((line) => `  = ${line}`).join('\n'));
+      console.log('  The gate stays RED on these until the population is actually cut.');
+    }
     if (vanished.length) {
       console.log(`[test-ratchet] ⚠ ${vanished.length} of those did not RUN AT ALL (their file is still on disk).`);
       console.log('  They were renamed, deleted or de-registered rather than fixed. Confirm each was');
@@ -1097,6 +1326,71 @@ export async function run(argv = []) {
     lines.push(`Frozen census is ${Object.keys(entries).length} failing test(s), measured at ${baseline.measuredAtSha || 'unknown'}.`);
     lines.push('Run `npm run test` for the unfiltered reporter output.');
     return fail(lines);
+  }
+
+  // ── ⚠⚠ THE MAGNITUDE GATE — the banked rows' CONTENTS, not just their existence ──
+  // See the MAGNITUDE CEILING block above `BOOTSTRAP_DOC` for the defect and the design.
+  // This runs AFTER the regression block on purpose, and the separation is deliberate:
+  // a regression red is about a failure that is NEW, this red is about a failure that is
+  // PERMITTED and GROWING, and they take different repairs. Keeping them apart also
+  // leaves the regression block's evidence bytes — pinned by the meta-test — untouched.
+  //
+  // Only rows that are BANKED and CURRENTLY FAILING are measured. A banked row that now
+  // passes is a win and belongs to the ratchet-down path below; a row that is banked and
+  // SKIPPED was already refused as `hidden` above.
+  const magnitudeBreaches = [];
+  const magnitudeUnmeasured = [];
+  const magnitudeSlack = [];
+  for (const [id, entry] of Object.entries(entries)) {
+    if (!liveFailingIds.has(id)) continue;
+    const message = (liveById.get(id)?.failureMessages || [])[0] || '';
+    const verdicts = magnitudeReportOf(entry, message);
+    for (const row of verdicts.unmeasured) magnitudeUnmeasured.push({ id, ...row });
+    for (const row of verdicts.breaches) magnitudeBreaches.push({ id, ...row });
+    for (const row of verdicts.slack) magnitudeSlack.push({ id, ...row });
+  }
+
+  if (magnitudeBreaches.length || magnitudeUnmeasured.length) {
+    const lines = ['[test-ratchet] BANKED-ROW MAGNITUDE REFUSED — a permitted red may not GROW:'];
+    if (magnitudeBreaches.length) {
+      lines.push(`  ${magnitudeBreaches.length} banked row measure(s) EXCEED their frozen ceiling:`);
+      for (const row of magnitudeBreaches) {
+        lines.push(`    ${row.id}`);
+        lines.push(
+          `      [${row.name}] measured ${row.measured} > ceiling ${row.ceiling}`
+          + ` (+${row.measured - row.ceiling})${row.unit ? ` — ${row.unit}` : ''}`,
+        );
+      }
+      lines.push('');
+      lines.push('  ⛔ THE CURE IS TO CUT THE POPULATION, NEVER TO RAISE THE CEILING. This row is already');
+      lines.push('    a permitted failure; the ceiling is the only thing still bounding what sits behind it.');
+      lines.push('    `--update` will NOT raise it (it re-freezes at the minimum), which is deliberate.');
+    }
+    if (magnitudeUnmeasured.length) {
+      lines.push(`  ${magnitudeUnmeasured.length} banked row measure(s) could NOT BE MEASURED — failing closed:`);
+      for (const row of magnitudeUnmeasured) {
+        lines.push(`    ${row.id}`);
+        lines.push(`      [${row.name}] ${row.why}`);
+      }
+      lines.push('');
+      lines.push('  An unmeasured magnitude is an UNKNOWN one, not a small one. If the assertion legitimately');
+      lines.push('    changed shape, re-derive the pattern against the live message and re-freeze the figure');
+      lines.push('    in the SAME act — never delete the measure to clear this.');
+    }
+    lines.push('');
+    lines.push(`Frozen census is ${Object.keys(entries).length} failing test(s), measured at ${baseline.measuredAtSha || 'unknown'}.`);
+    return fail(lines);
+  }
+
+  if (magnitudeSlack.length) {
+    // Same doctrine as the row-level RATCHET DOWN below: a silent pass lets a ceiling
+    // drift permanently above the truth, which is how a ratchet stops ratcheting.
+    console.log(`[test-ratchet] RATCHET DOWN: ${magnitudeSlack.length} magnitude ceiling(s) now sit ABOVE the`
+      + ' measured truth — run `npm run test:ratchet:update` to bank the win:');
+    for (const row of magnitudeSlack) {
+      console.log(`  ↓ ${row.id}`);
+      console.log(`      [${row.name}] measured ${row.measured} < ceiling ${row.ceiling}`);
+    }
   }
 
   // An allowlisted collection failure that now COLLECTS is a real win, and the
