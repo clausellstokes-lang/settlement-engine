@@ -258,7 +258,14 @@ import { hasLadder, ladderRungsOf, ladderFactionKeyOf } from '../townMap/ladderR
 
 /** Does this NPC's text read as a RULER (the agency layer's own labels)?
  *  Reads name/role/title only — the generator writes no npc `label`, and the
- *  observed-shape ratchet holds this file to reads the corpus can ground. */
+ *  observed-shape ratchet holds this file to reads the corpus can ground.
+ *  The parameter is declared as the three text keys it reads and nothing else:
+ *  this file lives inside the domain kernel's STRICT scope, where an undeclared
+ *  parameter is an implicit `any` and a ratchet red. Each key is optional and
+ *  each read is `|| ''`-guarded, so a roster row missing any of them is answered
+ *  `false` rather than throwing.
+ *  @param {{ name?: string, role?: string, title?: string } | null | undefined} npc
+ *  @returns {boolean} */
 function isRulerTitled(npc) {
   const text = `${npc?.name || ''} ${npc?.role || ''} ${npc?.title || ''}`.toLowerCase();
   return (NPC_ROLE_ARCHETYPES.ruler?.labels || []).some((label) => text.includes(label));
