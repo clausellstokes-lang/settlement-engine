@@ -240,13 +240,43 @@ describe('W-SEAT dormancy — the virtual flag is byte-identical when dark', () 
     expect(seatKeyPaths(run({ foreignSeatEnabled: false }))).toEqual([]);
   });
 
-  it('the LIT path ALSO writes no seat key — the seat is derived, never persisted', () => {
-    // Law §2.2. The one persisted field the design allows (the CHOSEN posture, Q-S2) is a
-    // SEAT-3 field on the occupations record and is deliberately absent from this car, so
-    // the lit path puts no byte on disk either. This is the invariant that makes the flag
-    // safe to light and unlight mid-campaign.
-    expect(seatKeyPaths(run({ foreignSeatEnabled: true }))).toEqual([]);
+  it('the LIT path writes NO DERIVED seat key — the seat itself is still never persisted', () => {
+    // ⚠ THIS ARM WAS AMENDED BY SEAT-3, AND ITS OWN PREVIOUS TEXT NAMED THE CAR THAT WOULD
+    // DO IT: "the one persisted field the design allows (the CHOSEN posture, Q-S2) is a
+    // SEAT-3 field on the occupations record and is deliberately absent from THIS car."
+    // That car has now landed, so the invariant is restated rather than loosened.
+    //
+    // WHAT STILL HOLDS, AND IT IS THE PART THAT MATTERS: law §2.2 says the SEAT is derived
+    // and never persisted, and no `foreignSeat`, `foreignSeats`, `seatWeight01` or
+    // `foreignSeatBand` key exists anywhere in a lit world. The single exception Q-S2
+    // GRANTED is a DECISION, and a decision is state by the law's own carve-out.
+    const lit = seatKeyPaths(run({ foreignSeatEnabled: true }));
+    for (const path of lit) {
+      expect(path, `a non-posture seat key reached the ledger: ${path}`).toMatch(/\.occupations\.[^.]+\.posture$/);
+    }
   });
+
+  it('⛔ a dark world never acquires a posture byte, however long it runs', () => {
+    // The half of the posture's dormancy claim this fixture CAN carry. A posture is written
+    // only by a receipted decision and the decision is minted only under the lit flag, so a
+    // dark world cannot acquire the byte by any route — asserted here over four times the
+    // usual horizon, because a byte that appears on tick 30 is still a dormancy failure.
+    expect(seatKeyPaths(run({}, 40)), 'a dark world acquired a posture byte').toEqual([]);
+    expect(seatKeyPaths(run({ foreignSeatEnabled: false }, 40))).toEqual([]);
+  });
+
+  // ⚠ THE POSITIVE WITNESS FOR THE POSTURE BYTE DELIBERATELY DOES NOT LIVE HERE, AND SAYING
+  // SO IS THE POINT. It was written here first and FAILED — correctly: this fixture's
+  // occupation sits at `stabilized` with no compliant regime and no garrison, so its ladder
+  // never climbs a rung across 40 ticks, the decision is never occasioned, and the arm
+  // measured NOTHING while looking exactly like a passing dormancy test would. Rather than
+  // reshape SEAT-1's dormancy fixture to serve SEAT-3's proof — which would have made this
+  // file's own byte-identity arms depend on a ladder that now moves — the witness lives in
+  // `tests/domain/occupationPosture.test.js`, which drives `evaluateOccupations` over a
+  // world built to climb and asserts the mint, the chosen band and the persisted key.
+  // A permissive assertion with its witness in another file is honest; a permissive
+  // assertion with no witness anywhere is the vacuous green this program has already
+  // measured once.
 
   it('determinism: the same rules patch twice is byte-identical, dark and lit', () => {
     expect(JSON.stringify(run({}))).toBe(JSON.stringify(run({})));

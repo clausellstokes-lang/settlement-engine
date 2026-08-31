@@ -300,6 +300,152 @@ const OVEREXTENSION_PER_OCCUPATION = 0.12;
 // inverse of war_exhaustion: it EXTENDS supply endurance). Bounded by the cap above.
 const BENEFIT_RELIEF_SCALE = 0.55;
 
+// ── THE POSTURE (W-SEAT D3 / SEAT-3) ──────────────────────────────────────────────
+/**
+ * ⭐ WHAT THE POSTURE IS FOR, IN ONE SENTENCE: the ladder conflates how much CONTROL an
+ * occupier has with how it TREATS the town, and the owner's directive (§735.2) asks for
+ * "a mixed responsibility to cultivate and exploit" — a CHOICE. `extractive` is a rung the
+ * machine climbs through, not a policy anyone picked; this axis is the policy.
+ *
+ * ⛔ IT TILTS THE CLASSIFIER'S INPUTS AND NEVER FORKS A SECOND STATE MACHINE (volume §3-D3).
+ * There is exactly one ladder, one hysteresis and one set of rungs; posture moves the
+ * SUITABILITY and the RESISTANCE KINETICS that feed them, which is why exploit is a wasting
+ * asset (more now, a town that fights harder and stabilizes slower) and cultivate is the
+ * honest road to `vassalized` (less now, resistance that decays, suitability that climbs).
+ *
+ * ⚠ THE VOLUME SAID "MODULATE THE EXISTING CONSTANTS" AND THAT WAS NOT ACHIEVABLE AS
+ * WRITTEN — measured. The coefficients this axis has to tilt are INLINE UNNAMED LITERALS:
+ * `stabilizationSuitability`'s `0.7 / 0.22 / 0.12` and `advanceResistance`'s `1.4 / 0.5`
+ * are spelled in the expressions themselves, so there was nothing named to modulate. The
+ * tables below are therefore MINTED rather than reused, and each is a multiplier or an
+ * addend ON an existing term rather than a replacement FOR one — the distinction that keeps
+ * `administer` an exact identity.
+ * @type {ReadonlyArray<string>}
+ */
+export const OCCUPATION_POSTURES = Object.freeze(['exploit', 'administer', 'cultivate']);
+
+/**
+ * ⛔ THE DEFAULT IS THE CONSTANT `administer`, AND IT IS A CONSTANT BY RULING (A1.2.11) —
+ * NEVER DERIVED FROM THE OCCUPIER'S DISPOSITION. A disposition-derived default oscillates
+ * with a score that moves for unrelated reasons, so a court that chose nothing would appear
+ * to keep changing its mind; worse, it FABRICATES a policy nobody adopted and then narrates
+ * it. A non-default band exists only after that court's own receipted decision.
+ */
+export const OCCUPATION_POSTURE_DEFAULT = 'administer';
+
+/**
+ * The ADDEND on `stabilizationSuitability`. Exploit makes a town harder to hold; cultivate
+ * makes it easier. Sized well under the hysteresis band's own width
+ * (ADVANCE 0.58 − REGRESS 0.34 = 0.24) so a posture BIASES the ladder rather than
+ * overriding it — the rung must still be earned through the dwell.
+ * @type {Readonly<Record<string, number>>}
+ */
+const POSTURE_SUITABILITY_ADJ = Object.freeze({ exploit: -0.08, administer: 0, cultivate: 0.08 });
+
+/**
+ * The multipliers on the two resistance kinetics. These are deliberately RECIPROCAL-ISH
+ * rather than independent: an exploiting occupier both breeds grievance faster and suppresses
+ * it more slowly, which is the same fact seen from two sides, and letting them drift apart
+ * would let a tuning pass build a posture that is somehow good at both.
+ * @type {Readonly<Record<string, number>>}
+ */
+const POSTURE_RESISTANCE_GROW_MULT = Object.freeze({ exploit: 1.3, administer: 1, cultivate: 0.7 });
+/** @type {Readonly<Record<string, number>>} */
+const POSTURE_RESISTANCE_DECAY_MULT = Object.freeze({ exploit: 0.7, administer: 1, cultivate: 1.3 });
+
+/**
+ * Resolve the posture a record is under, for ONE tick's arithmetic.
+ *
+ * ⛔ THE GATE LIVES HERE AND NOWHERE ELSE. `evaluateOccupations` is the single caller that
+ * has `rules` in scope, so the flag is read ONCE per record and the modulated functions
+ * below take the RESOLVED posture rather than the record's raw field. That is what makes
+ * A1.2.11's dark clause literally true rather than approximately true: with the key dark
+ * the field is NEVER READ AT ALL — not read-and-ignored — so a world that was lit, chose a
+ * posture, and was unlit again behaves exactly like a world that never chose one, and the
+ * `present-field-dark` fixture proves it rather than asserting it.
+ *
+ * ⛔ The positive `=== true` spelling is what the engine-gated-key census can see; a
+ * negative-polarity early return is invisible to it (SEAT-1 paid a red for that).
+ *
+ * @param {{ posture?: unknown } | null | undefined} record
+ * @param {Record<string, unknown> | null | undefined} rules
+ * @returns {string} a member of OCCUPATION_POSTURES; the default for absent/garbage/dark
+ */
+export function occupationPostureOf(record, rules) {
+  if (!rules || typeof rules !== 'object') return OCCUPATION_POSTURE_DEFAULT;
+  if (/** @type {Record<string, unknown>} */ (rules).foreignSeatEnabled !== true) return OCCUPATION_POSTURE_DEFAULT;
+  const raw = record && typeof record === 'object' ? String(record.posture ?? '') : '';
+  return OCCUPATION_POSTURES.includes(raw) ? raw : OCCUPATION_POSTURE_DEFAULT;
+}
+
+/**
+ * Reader-facing prose for each posture. SCALAR-FREE by the estate's reader-text law — no
+ * digits, no percentages, no tuning vocabulary — because this rides a receipt a player
+ * reads, not a debug line.
+ * @type {Readonly<Record<string, string>>}
+ */
+const POSTURE_PROSE = Object.freeze({
+  exploit: 'take what it can while it can, and let the town resent it.',
+  administer: 'hold it steadily, taking neither more nor less than the occupation costs.',
+  cultivate: 'spend on the place and win it over, in the hope of keeping it for good.',
+});
+
+/**
+ * The two thresholds the occupier's court weighs when it sets a policy. Both are read off
+ * the OCCUPATION's own measured state — the town's usefulness and how hard it is fighting —
+ * rather than off any score that moves for unrelated reasons.
+ *
+ * ⛔⛔ BOTH NUMBERS ARE SET FROM A MEASURED DISTRIBUTION, NOT CHOSEN, AND THE FIRST DRAFT OF
+ * ONE OF THEM WAS DEAD ON ARRIVAL. `POSTURE_RICH_AT` was first written as a round `0.6`.
+ * Swept over the whole tier × prosperity × legitimacy grid the corpus produces (320 cells),
+ * `occupiedUsefulness` spans **0.3177 → 0.6060** with p50 0.4649 and p75 0.5114 — so a 0.6
+ * gate was above the ninety-ninth percentile and the `exploit` arm would have fired for
+ * essentially nothing while passing every existence census that asked only whether the
+ * branch was reachable. That is the recorded hazard verbatim: A SHAPE THE CORPUS NEVER
+ * PRODUCES LOOKS CLEAN. The value below is the measured p75 — the genuinely large-and-rich
+ * quarter of the ladder — and it was caught by a probe before a single test was written.
+ *
+ * `resistanceTarget` over the same grid spans 0.1170 → 0.7730 (p50 0.3223, p75 0.5298), and
+ * a fresh conquest starts at 0.35, so 0.45 sits between the median and the upper quartile:
+ * a town has to be genuinely fighting, not merely sullen, and roughly the top third can get
+ * there. Both are re-measurable by the same sweep; neither may be rounded to a nicer number
+ * without re-running it.
+ */
+const POSTURE_RESTIVE_AT = 0.45;   // above this the town is fighting, not merely sullen
+const POSTURE_RICH_AT = 0.51;      // above this the town is worth stripping (measured p75)
+
+/**
+ * THE DECISION — what an occupier's court chooses when it is actually presented with the
+ * question. Pure; returns a member of OCCUPATION_POSTURES.
+ *
+ * ⛔ THIS IS THE **CHOICE**, NOT THE **DEFAULT**, AND A1.2.11 BANS ONLY THE SECOND. The
+ * amendment forbids a disposition-DERIVED default because a court that chose nothing would
+ * otherwise appear to keep changing its mind as an unrelated score drifted, and because it
+ * fabricates a policy nobody adopted. Absent a decision the answer stays the CONSTANT
+ * `administer`. But a decision a court actually takes is allowed to be reasoned — that is
+ * what every autonomous decision in this engine is, `occupation_vassalized` included.
+ *
+ * ⚠ THE OSCILLATION THE AMENDMENT FEARED IS CLOSED STRUCTURALLY, NOT BY TUNING: the mint
+ * fires only when the occupation ARRIVES at a new rung of `extractive` or better, so a
+ * court is asked at most three times in an occupation's whole life and never on a quiet
+ * tick. The rung change IS the occasion — before `extractive` the occupier is still
+ * fighting for control and has no yield to have a policy about (the benefit scale is 0.12
+ * and below), and each climb materially changes the question.
+ *
+ * @param {number} usefulness01  the occupied town's economic worth to a holder
+ * @param {number} resistance01  the occupied town's resistance AFTER this tick's advance
+ * @returns {string}
+ */
+export function occupationPostureChoice(usefulness01, resistance01) {
+  const restive = clamp01(num(resistance01));
+  const useful = clamp01(num(usefulness01));
+  // A town that is fighting must be won over or lost; stripping it feeds the fight.
+  if (restive >= POSTURE_RESTIVE_AT) return 'cultivate';
+  // A rich, quiet town is what an occupier came for.
+  if (useful >= POSTURE_RICH_AT) return 'exploit';
+  return OCCUPATION_POSTURE_DEFAULT;
+}
+
 /** @param {any} v @param {number} [d] @returns {number} */
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 
@@ -356,8 +502,20 @@ export function createOccupationRecord(occupierId, tick) {
  */
 export function conveyOccupationRecord(record, buyerId, tick, resistanceStart) {
   const t = Math.max(0, Math.floor(num(tick)));
+  // ⛔ W-SEAT D3 (SEAT-3): THE POSTURE DOES **NOT** RIDE ACROSS A SALE, and this is a
+  // deliberate divergence from the "unrelated fields ride across untouched" precedent
+  // (`sovereigntyTransferWr10w.test.js` asserts it for `benefitYield`). Posture is not an
+  // unrelated field — it is the ONE field on this record that encodes a DECISION, and
+  // A1.2.11's whole ruling is that a non-default band exists only after a court's own
+  // receipted decision. A buyer inheriting the seller's policy is precisely the fabricated
+  // un-chosen policy the amendment forbids, arriving through a door the amendment did not
+  // think to close. The docstring above already says what a sale changes: "the clock and
+  // the consent" — and a posture IS consent. Dropping it returns the holding to the derived
+  // default until the buyer's own court is asked, which the ladder will do the next time
+  // the occupation climbs a rung. Absent ⇒ `administer`, so this costs no byte either way.
+  const { posture: _soldPosture, ...carried } = /** @type {Record<string, unknown>} */ (record ?? {});
   return {
-    ...record,
+    ...carried,
     occupierId: String(buyerId),
     state: String(record?.state ?? ''),
     sinceTick: t,
@@ -463,18 +621,27 @@ function hasCompliantRegime(item) {
  * when suitability ≥ ADVANCE_THRESHOLD, regresses when ≤ REGRESS_THRESHOLD, holds inside
  * the band. Pure.
  *
+ * ⭐ W-SEAT D3: the POSTURE biases this, and the `administer` branch is the pre-posture
+ * expression VERBATIM rather than the same expression plus a zero. `x + 0 === x` is exact
+ * for every finite double, so the arithmetic would have been safe either way — but a
+ * literal early return is bit-identity BY CONSTRUCTION, and this value feeds a hysteresis
+ * whose thresholds decide a persisted rung on every existing save.
+ *
  * @param {{ resistance: number }} record
  * @param {any} occupiedItem
  * @param {boolean} occupierStillPresent  is the occupier's army still committed here?
+ * @param {string} [posture]  the RESOLVED posture (see `occupationPostureOf`); the default
+ *   is the identity, so every pre-SEAT-3 3-arg caller is unchanged.
  * @returns {number} 0..1
  */
-export function stabilizationSuitability(record, occupiedItem, occupierStillPresent) {
+export function stabilizationSuitability(record, occupiedItem, occupierStillPresent, posture = OCCUPATION_POSTURE_DEFAULT) {
   const resistance = clamp01(num(record?.resistance));
   const compliant = hasCompliantRegime(occupiedItem) ? 0.22 : 0;
   // Garrison presence helps hold the ground while stabilizing.
   const garrison = occupierStillPresent ? 0.12 : 0;
   // Suitability falls ~1:1 with resistance; compliance + garrison lift it.
-  return clamp01(0.7 - resistance + compliant + garrison);
+  if (posture === OCCUPATION_POSTURE_DEFAULT) return clamp01(0.7 - resistance + compliant + garrison);
+  return clamp01(0.7 - resistance + compliant + garrison + (POSTURE_SUITABILITY_ADJ[posture] ?? 0));
 }
 
 /**
@@ -483,11 +650,24 @@ export function stabilizationSuitability(record, occupiedItem, occupierStillPres
  * (compliant regime) and state (a stabilized occupation has broken the resistance). The
  * net move is bounded per tick. Pure; returns the next resistance 0..1.
  *
+ * ⭐ W-SEAT D3: the POSTURE scales BOTH kinetics, and it is the sharper half of the axis —
+ * §736's own words are that an occupied town's rebellion risk reads resistance, and
+ * "extractive raises it, cultivate dampens". The `administer` branch is the pre-posture
+ * expression VERBATIM: multiplying by an exact 1.0 is bit-safe, but this value is PERSISTED
+ * on the record and compounds tick over tick, so a literal branch is the honest instrument.
+ *
+ * ⚠ THE GROW TERM KEEPS ITS `Math.min(…, target − prev)` CEILING **OUTSIDE** THE POSTURE
+ * MULTIPLIER, so an exploiting occupier can approach the resistance target FASTER but can
+ * never OVERSHOOT it. Scaling after the clamp would have let a posture push resistance past
+ * the town's own intactness-driven target — inventing grievance the settlement's inputs do
+ * not support, and quietly making the target stop being a target.
+ *
  * @param {{ resistance: number, state: string }} record
  * @param {any} occupiedItem
+ * @param {string} [posture]  the RESOLVED posture; the default is the identity.
  * @returns {number} 0..1
  */
-export function advanceResistance(record, occupiedItem) {
+export function advanceResistance(record, occupiedItem, posture = OCCUPATION_POSTURE_DEFAULT) {
   const prev = clamp01(num(record?.resistance));
   const target = resistanceTarget(occupiedItem);
   const compliant = hasCompliantRegime(occupiedItem);
@@ -496,8 +676,17 @@ export function advanceResistance(record, occupiedItem) {
   // proxy; (1 − scale) is how much the occupation is "still fighting" rather than holding.
   const stateSuppress = clamp01(1 - benefitScaleFor(record?.state));
   // Grow toward target; decay from suppression. A compliant regime accelerates the decay.
-  const grow = prev < target ? Math.min(RESISTANCE_GROW_PER_TICK, target - prev) * clamp01(stateSuppress) : 0;
-  const decay = RESISTANCE_DECAY_PER_TICK * (compliant ? 1.4 : 1) * (1 - clamp01(stateSuppress) * 0.5);
+  if (posture === OCCUPATION_POSTURE_DEFAULT) {
+    const grow = prev < target ? Math.min(RESISTANCE_GROW_PER_TICK, target - prev) * clamp01(stateSuppress) : 0;
+    const decay = RESISTANCE_DECAY_PER_TICK * (compliant ? 1.4 : 1) * (1 - clamp01(stateSuppress) * 0.5);
+    return clamp01(prev + grow - decay);
+  }
+  const growMult = POSTURE_RESISTANCE_GROW_MULT[posture] ?? 1;
+  const decayMult = POSTURE_RESISTANCE_DECAY_MULT[posture] ?? 1;
+  const grow = prev < target
+    ? Math.min(RESISTANCE_GROW_PER_TICK * growMult, target - prev) * clamp01(stateSuppress)
+    : 0;
+  const decay = RESISTANCE_DECAY_PER_TICK * decayMult * (compliant ? 1.4 : 1) * (1 - clamp01(stateSuppress) * 0.5);
   return clamp01(prev + grow - decay);
 }
 
@@ -920,6 +1109,11 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
   // dark by default, behind the whole WR chain) ⇒ every expression below this
   // point is the pre-wire one and this layer is byte-identical. ──────────────
   const conquestLit = conquestDoctrineActive(worldState);
+  // W-SEAT D3 (SEAT-3): the posture axis's ONE gate read, hoisted out of the per-record
+  // loop. Dark ⇒ no posture candidate is ever minted, so no posture byte can ever reach a
+  // ledger, so `occupationPostureOf` below never has a field to not-read. The two halves
+  // of the dormancy claim (nothing written, nothing read) therefore share one condition.
+  const postureLit = /** @type {Record<string, unknown>} */ (rules)?.foreignSeatEnabled === true;
   /** Theoretical military capacity, cached per id — the truth read the EXECUTION
    *  half is entitled to (belief decides the march; the world decides whether it
    *  worked). Reuses the same model `occupiedUsefulness` already runs on. */
@@ -999,9 +1193,13 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     const treatyHold = occupationHoldFor(worldState, occupiedId, rec.occupierId, t);
     const present = treatyHold || occupierStillPresent(graph, deployments, rec.occupierId, occupiedId);
 
+    // W-SEAT D3 (SEAT-3): the occupier's CHOSEN posture, resolved ONCE per record. This is
+    // the ONE place the flag is read for this axis, so with the key dark the field below is
+    // never touched at all and A1.2.11's "the dark path NEVER reads the field" is literal.
+    const posture = occupationPostureOf(rec, rules);
     // Resistance first (from the pre-tick state), then suitability, then state.
-    const nextResistance = advanceResistance(rec, occupiedItem);
-    const suitability = stabilizationSuitability({ ...rec, resistance: nextResistance }, occupiedItem, present);
+    const nextResistance = advanceResistance(rec, occupiedItem, posture);
+    const suitability = stabilizationSuitability({ ...rec, resistance: nextResistance }, occupiedItem, present, posture);
     // Pass the current tick so a contested occupation stuck in the hysteresis dead-band
     // is force-resolved after MAX_CONTESTED_DWELL ticks instead of grinding forever.
     const advanced = advanceOccupationState(rec, suitability, t);
@@ -1070,12 +1268,71 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
       nextState = prevState;
       nextStateHeld = 0;
     }
+    // ── W-SEAT D3 (SEAT-3) — THE POSTURE DECISION. ────────────────────────────────
+    // The occupier's court is asked what it wants from this town, and it is asked ONLY on
+    // the tick the occupation CLIMBS to a rung where the question is real. Below
+    // `extractive` the occupier is still fighting for control and has no yield to have a
+    // policy about (the benefit scale is 0.12 and under); each climb from there materially
+    // changes the question, so a court is asked at most three times in an occupation's
+    // whole life and never on a quiet tick. That bound is what closes A1.2.11's oscillation
+    // worry STRUCTURALLY rather than by tuning a hysteresis onto a second axis.
+    //
+    // ⛔ THE FIELD IS WRITTEN HERE, WHERE EVERY OTHER FIELD OF THIS RECORD IS WRITTEN, and
+    // that is a correction to this car's own first draft. The write was first put in
+    // `applyWorldPulseOutcomes` as a payload-keyed arm — which would have made `posture`
+    // the ONLY field of the occupation record written from outside the occupation layer,
+    // and it was refused by a harder fact: `applyWorldPulse.js` is size-baselined at
+    // EXACTLY 941 effective lines with zero tolerance in both directions, and the arm took
+    // it to 954. The ceiling forced a re-read, and the re-read said the ledger's own layer
+    // was always the right home. The outcome below is the RECEIPT of the decision, exactly
+    // as `occupation_transition` outcomes receipt the state machine's own moves.
+    let nextPosture = rec.posture;
+    if (postureLit
+      && stateRank(nextState) > stateRank(prevState)
+      && stateRank(nextState) >= stateRank('extractive')) {
+      const wasPosture = occupationPostureOf(rec, rules);
+      const chosen = occupationPostureChoice(occupiedUsefulness(occupiedItem), nextResistance);
+      // Nothing to write and nothing to receipt when the court re-affirms what it already had.
+      if (chosen !== wasPosture) {
+        nextPosture = chosen;
+        const occupiedName = nameFor(occupiedId);
+        const occupierName = nameFor(rec.occupierId);
+        outcomes.push({
+          id: `world_outcome.occupation_posture.${stablePart(occupiedId)}.${t}`,
+          type: 'occupation_posture',
+          candidateType: 'occupation_posture',
+          ruleId: 'occupation_posture',
+          ruleFamily: 'occupation',
+          applyMode: 'auto',
+          probability: 1,
+          // ⚠ THE ACTOR IS THE OCCUPIER AND THE LEDGER ROW IS KEYED BY THE OCCUPIED.
+          // `vassalizationOutcomes` carries the same explicit second id for the same
+          // reason: a consumer that reverse-engineered the affected row from
+          // `targetSaveId` would find the OCCUPIER's row, which is usually absent.
+          targetSaveId: String(rec.occupierId),
+          occupiedSaveId: String(occupiedId),
+          severity: 0.35,
+          headline: `${occupierName} settles its policy for ${occupiedName}`,
+          summary: `${occupierName}'s council has decided how it means to hold ${occupiedName}: ${POSTURE_PROSE[chosen]}`,
+          reasons: [
+            `The occupation has reached ${nextState}, and the question of what to do with the town is now a real one.`,
+            `The town is ${resistanceWordFor(nextResistance)}.`,
+          ],
+          metadata: { fromPosture: wasPosture, toPosture: chosen },
+        });
+      }
+    }
     occupations[occupiedId] = {
       ...rec,
       state: nextState,
       stateHeld: nextStateHeld,
       resistance: nextResistance,
       lastTick: t,
+      // ⛔ SPREAD CONDITIONALLY, NEVER `posture: nextPosture`. A dark world's record has no
+      // `posture` key, and writing `posture: undefined` would put the KEY on the object —
+      // `JSON.stringify` drops an undefined VALUE but the raw-byte dormancy comparator is
+      // not the only reader, and a key that exists-with-undefined is a different object.
+      ...(nextPosture ? { posture: String(nextPosture) } : {}),
     };
     // A stabilization advance banks a small disposition WIN for the occupier (a
     // consolidating empire grows more confident); a regression a small loss.
@@ -1090,6 +1347,7 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     if (nextState === 'vassalized' && prevState !== 'vassalized') {
       arrivedAtVassalized.add(String(occupiedId));
     }
+
 
     // ── Resistance condition on the OCCUPIED (grows on intact/loyalist, shrinks on
     // devastated/compliant). Only surfaced once it clears the floor (byte-light). ────

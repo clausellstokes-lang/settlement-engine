@@ -142,6 +142,11 @@ const SOURCE_ANCHORS = Object.freeze({
   conquest: "ruleId: 'war_layer_conquest',\n      ruleFamily: 'stressor',\n      applyMode: 'auto'",
   occupation_transition: "ruleId: `occupation_${archetype}`,\n    ruleFamily: 'stressor',\n    applyMode: 'auto'",
   occupation_vassalized: "ruleId: 'occupation_vassalized',\n      ruleFamily: 'relationship',\n      applyMode: 'auto'",
+  // W-SEAT D3 (SEAT-3). Ten-space indentation, not six: this mint sits one block deeper
+  // than the vassalization one (inside the per-record step-3 loop, inside the arrival
+  // guard), and the anchor is a LITERAL source substring — an indentation that does not
+  // match the file is a pin that silently guards nothing.
+  occupation_posture: "ruleId: 'occupation_posture',\n          ruleFamily: 'occupation',\n          applyMode: 'auto'",
   npc_goal_culmination: "probability: 0.9,\n    applyMode: 'auto'",
   trade_war: "ruleId: `trade_war_${archetype}`,\n    ruleFamily: 'stressor',\n    applyMode: 'auto'",
   // auto with a separate lock axis (NOT the proposal flag). M10a routes the coup

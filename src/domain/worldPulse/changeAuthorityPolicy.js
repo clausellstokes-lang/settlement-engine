@@ -270,6 +270,19 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     rationale:
       'Vassalization is the terminal state of an occupation that has run its course; it is implied by the conquest, not a new premise.',
   }),
+  occupation_posture: Object.freeze({
+    authority: 'auto',
+    module: 'occupation.js',
+    consultsProposalFlag: false,
+    // NOT campaign-altering, and the distinction is the whole reason this row is cheap:
+    // vassalization moves SOVEREIGNTY, which is why it is a major and carries the whole
+    // residue-strip apparatus. A posture is a POLICY the same holder sets over a holding it
+    // already has — reversible, sovereignty-neutral, and nothing about the campaign's shape
+    // turns on it. Classing it major would have bought a five-way residue sync for a
+    // decision that banks no residue at all.
+    rationale:
+      'How an occupier means to hold a town it already holds is a policy of the same court, not a change of hands; it is asked only when the occupation climbs to a rung where the yield question becomes real.',
+  }),
   npc_goal_culmination: Object.freeze({
     authority: 'auto',
     module: 'npcAgency.js',
