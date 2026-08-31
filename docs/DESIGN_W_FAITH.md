@@ -97,8 +97,13 @@ war-readiness, learning, hearth/fertility). Pure buff (boon only), pure bane, bo
 legal (§797.4). Strength is a banded word, never a float. **The magic gate is ONE chokepoint** in the
 field application (§ D4): where the world's magic dial says magic does not exist, boon/bane
 contribute a ZERO mechanical term and survive as cultural emphasis in prose only. `portfolio` stays
-free-text flavor; nothing is demolished — "domains" never had mechanics here, so boon/bane are clean
-additions, not a migration.
+free-text flavor. ⚠ **CORRECTED BY F1c's MEASUREMENT (ODQ §851): "domains never had mechanics" was
+FALSE** — the deity `domain` field is effect:mechanical and moves war disposition via
+dispositionProfile; `harvest` and `war_readiness` collide with it. **THE PRECEDENCE RULING (§851,
+per the owner's own §797 "in place of domains"):** a deity carrying authored boon/bane reads THOSE
+and its legacy domain arm goes silent FOR THAT DEITY; a deity carrying only the legacy domain keeps
+its unchanged arm (THE PROMISE) — one arm per deity, never both, asserted structurally. F4c builds
+under this law.
 
 ### D4 — The influence field: every deity, weighted; the patron as amplifier
 One new pure leaf (`faithField.js`) computes, per settlement and per unsuppressed pantheon member:
