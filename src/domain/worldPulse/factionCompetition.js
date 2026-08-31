@@ -21,6 +21,12 @@ import { presenceSharesFor } from './espionage/espionagePresence.js';
 // recover once the roster has moved past it. The gate, the reader and the monotone fold all live
 // in the undercity leaf; this file supplies the two seams and nothing else.
 import { powerHighWaterOf, undercityHighWaterActive, withPowerHighWater } from '../undercity/colonization.js';
+// §817-Q4 / ODQ §822 — the contest WIDTH is a consequence of the density ladder,
+// so it is read from the ladder's own tuning surface rather than restated here.
+// The domain layer already imports the generators layer for exactly this kind of
+// shared law (resourceDynamicsKernel, institutionLifecycle, mutateEntities).
+import { LEGACY_CONTEST_WIDTH, contestWidthForTier } from '../../generators/density/densityBands.js';
+import { rollsRegisterVii } from '../../generators/density/densityLaw.js';
 
 // Canonical archetype → factionCompetition's local vocabulary (the FACTION_POWER_BASES
 // keys). Folds the archetypes this layer doesn't model: government/other → civic,
@@ -213,6 +219,24 @@ function standingInstitutionFor(item, target) {
  * is pinned rather than left to be rediscovered. See espionagePresence.js's header.
  * @param {any} item @param {unknown} [worldState]
  */
+/**
+ * §817-Q4 / ODQ §822 — how many factions this settlement's contest evaluates.
+ *
+ * ⛔ VERSION-GATED, AND THAT IS THE WHOLE SAFETY ARGUMENT. Widening the
+ * evaluated set changes which factions can propose, which changes candidate
+ * events, which changes simulation outcomes — so on a v1 world this MUST return
+ * the literal pre-law 3. It reads the settlement's OWN persisted config through
+ * the same `rollsRegisterVii` gate the generator uses, never a global dial, so
+ * an existing world is byte-identical whatever the dial is set to.
+ *
+ * @param {any} item @returns {number}
+ */
+function contestWidthFor(item) {
+  const settlement = item?.settlement;
+  if (!rollsRegisterVii(settlement?.config)) return LEGACY_CONTEST_WIDTH;
+  return contestWidthForTier(settlement?.tier || settlement?.config?.tier);
+}
+
 function topFactionEntries(item, worldState = null) {
   const shares = presenceSharesFor(worldState, item);
   return settlementFactions(item)
@@ -229,7 +253,7 @@ function topFactionEntries(item, worldState = null) {
       };
     })
     .sort((/** @type {any} */ a, /** @type {any} */ b) => b.rawPower - a.rawPower)
-    .slice(0, 3);
+    .slice(0, contestWidthFor(item));
 }
 
 /** @param {any} worldState @param {any} snapshot @param {any} rng */

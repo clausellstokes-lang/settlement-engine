@@ -202,6 +202,50 @@ export function factionEnvelopeForTier(tier) {
   return { min: b.factions.min, max: b.factions.max + (b.rivalBonusSeat || 0) };
 }
 
+/**
+ * ⛔ THE PRE-LAW CONTEST WIDTH — `factionCompetition.js`'s literal `.slice(0, 3)`,
+ * named here so the v1 arm is a NAMED CONSTANT rather than a magic number
+ * repeated in two files. Every existing world evaluates exactly three factions,
+ * and that must not move: it is shipped simulation behaviour.
+ */
+export const LEGACY_CONTEST_WIDTH = 3;
+
+/**
+ * §817-Q4 / ODQ §822 — HOW MANY FACTIONS THE CONTEST MACHINERY EVALUATES.
+ *
+ * ⭐ THE PROBLEM THIS SOLVES, MEASURED. `factionCompetition.js#topFactionEntries`
+ * sorts a settlement's factions by raw power and evaluates a fixed top THREE.
+ * Under Register VII a city seats 5–8 houses and a metropolis 7–10, of which
+ * 1–2 are §810 R4's DOUBLED NICHES — two claimants contesting one power's niche.
+ * The second claimant carries ~0.55 of its host's power (`resizeSeats`), which
+ * pushes it down the ranking: over 240 measured v2 settlements, **361 of 362
+ * doubled-niche pairs had at least one member outside the top three**, so R4
+ * would mint a rivalry that the contest machinery it explicitly reuses could
+ * never evaluate.
+ *
+ * ⭐ THE WIDTH SCALES WITH THE LADDER, AND THE SELECTION KEY DOES NOT MOVE.
+ * D8's ruling — selection stays on RAW POWER — is untouched (see that function's
+ * own docblock: discounting the sort key would make an absent faction DISAPPEAR
+ * rather than merely weigh less). This widens only HOW MANY of that same
+ * raw-power ordering are evaluated.
+ *
+ * ⛔ IT IS A FLOOR, NEVER A NARROWING. `Math.max(LEGACY_CONTEST_WIDTH, …)` is
+ * load-bearing: the thorp and hamlet envelopes top out at 2, and letting the
+ * width fall to 2 would EVALUATE FEWER factions than the engine does today —
+ * a coverage regression wearing a feature's commit message. The width may only
+ * grow. Measured result across the ladder: **3 · 3 · 3 · 5 · 8 · 10**.
+ *
+ * Derived from the faction envelope rather than tabulated, so the owner's
+ * signature on `DENSITY_BANDS` at the tuning pass retunes this automatically and
+ * no second table can drift out of agreement with the first.
+ *
+ * @param {string|null|undefined} tier
+ * @returns {number}
+ */
+export function contestWidthForTier(tier) {
+  return Math.max(LEGACY_CONTEST_WIDTH, factionEnvelopeForTier(tier).max);
+}
+
 /** Clamp an importance band to a tier's rank ceiling. Never returns a band
  *  above the ceiling; never returns a band below `minimum` when one is given.
  *  @param {string} importance @param {string|null|undefined} tier @param {string|null} [minimum] */
