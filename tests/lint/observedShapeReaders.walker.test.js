@@ -1091,7 +1091,23 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // Both figures falling by exactly one is what rules that out.
     // ⛔ These two literals were READ OFF the re-frozen baseline after the governed
     // `--write`, never predicted from the delta.
-    }).toEqual({ reads: 2001, identities: 1413, files: 389, bankedReads: 64, taggedRows: 43 });
+    // ⭐ MOVED 2026-08-31 BY T11 CAR 1 (§805), the third lawful ESTATE-SHRINK shape:
+    // a FILE deletion, not a dead-arm strike. WarFaithTab.jsx died in the WAR/FAITH
+    // split and its only row (`primaryDeitySnapshot on config` ×2) left with it, so
+    // reads fall by two and identities and files by one each: 2001/1413/389 →
+    // 1999/1412/388. The successors add NO row — FaithTab reads the embed through
+    // faithPanelModel (which owns that identity already) and WarTab asks
+    // martialReadiness's new hasMartialRecord instead of spelling the faithProfile
+    // read a second time — measured at the pre-refreeze scan on this very tree: zero
+    // NEW findings, exactly ONE STALE row (the deleted file's).
+    // ⚠ bankedReads/taggedRows HOLD at 64/43 (a shrink that moved the banked figures
+    // would be a cleared row wearing a shrink's clothes). They read 64/43 rather than
+    // the lane's build-time 62/42 because the LANDING BASE had already moved them at
+    // the schema-12 mint (ODQ §819); the lane's own delta on them is zero, which is
+    // why a rebase moves this pin by −2/−1/−1 and nothing else.
+    // ⛔ Literals READ OFF the register re-frozen through the governed `--write` at the
+    // landing tip; the T11 landing census bill carries the closing arithmetic.
+    }).toEqual({ reads: 1999, identities: 1412, files: 388, bankedReads: 64, taggedRows: 43 });
     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
       const rows = taggedAddresses.filter((row) => row.identity === identity);
       return [identity, {
@@ -1244,14 +1260,22 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    * dated account).
    */
   test('the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size', () => {
+    // ⭐ MOVED 2026-08-31 BY T11 CAR 1 (§805): WarFaithTab.jsx deleted in the
+    // WAR/FAITH split, its one identity (`primaryDeitySnapshot on config` ×2)
+    // leaving BOTH readings in lockstep — filtered 51/130/195 → 50/129/193, raw
+    // 52/148/243 → 51/147/241 (−1 file / −1 identity / −2 counts on each). The
+    // two readings moving TOGETHER is the signature of a whole-file estate
+    // shrink no filter was clearing; the successors (WarTab/FaithTab) mint no
+    // cohort row — their reads route through faithPanelModel / martialReadiness,
+    // whose rows are domain-side and already frozen.
     const cohort = cohortOf(inventoryOf(live.findings));
-    expect(cohort).toMatchObject({ files: 51, identities: 130, counts: 195 });
+    expect(cohort).toMatchObject({ files: 50, identities: 129, counts: 193 });
     // ⚠⚠ THE RAW READING IS PINNED BESIDE THE FILTERED ONE. Without this the
     // cohort figure could fall for two completely different reasons — the filters
     // clearing more, or the estate genuinely shrinking — and a single number
     // cannot tell them apart. Pinning both makes the delta attributable.
     expect(cohortOf(inventoryOf(live.raw.findings)))
-      .toMatchObject({ files: 52, identities: 148, counts: 243 });
+      .toMatchObject({ files: 51, identities: 147, counts: 241 });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
 
