@@ -551,11 +551,26 @@ describe('R3 — full-pulse integration (the local faith gate)', () => {
     };
   }
 
+  // ⚠ THE TICK BUDGET IS LOAD-BEARING, AND IT WAS RAISED 12 → 40 IN T8 WITH A MEASUREMENT.
+  // These cases assert that an evil patron corrupts a CRIME-FREE town, i.e. that onset fires
+  // at all — and onset is rare by design here: crime 0 and the fixture's own `prosperity:
+  // 'Poor'` put the per-NPC hazard near its floor. At 12 ticks the first onset landed between
+  // tick 8 and 12, so the assertion was riding on one lucky draw rather than on the invariant.
+  // T8's ruled prosperity-ladder flip (J-T7-C / ODQ §809 — `corruption.js` moved onto the one
+  // canonical ladder) reads 'Poor' as 0.25 where the old private ladder read 0.2, which is a
+  // 25% RELATIVE DROP in onset hazard here (0.0168 → 0.0126 with the evil patron's disfavor),
+  // and it pushed the first onset out to between tick 30 and 36. MEASURED both sides, first
+  // corrupt NPC by tick budget: base 8→0, 12→1; tip 30→0, 36→1, 48→1.
+  // The budget is raised rather than the assertion loosened or the town's economy retuned:
+  // widening the observation window changes no modelled quantity, so these cases now test the
+  // invariant with margin instead of a coin-flip. That the ruled shift makes deity-driven
+  // corruption meaningfully rarer on lived campaigns is a real consequence, declared here and
+  // in `corruption.js`'s own header rather than absorbed by a fixture edit.
   function runManyTicks({ deity, rules }) {
     let campaign = campaignFixture({ deity, rules });
     let saves = [save('a', 'Ashford', { deity }), save('b', 'Briarwatch')];
     let result;
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 40; i++) {
       result = previewCampaignWorldPulse({ campaign, saves, interval: 'one_month', now: NOW });
       // feed the evolved worldState back so corruption accrues across ticks.
       campaign = { ...campaign, worldState: result.worldState };
