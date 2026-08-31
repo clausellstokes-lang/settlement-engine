@@ -479,13 +479,16 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // `tests/domain/legitimacyUpheaval.test.js` now pins that second question directly, so
     // the two can never again be confused here.
     //
-    // ⛔ THESE FOUR FIGURES REMAIN ONE FIFTH OF A MOVE THAT IS **NOT** BANKED. The same
-    // corpus counters are hardcoded in FOUR further instruments — the prose-family baseline
-    // and its library constants, and the news-voice and news-headline baselines — and all
-    // four are RED at this tip. They are not re-frozen here: the movement is real
-    // (occurrences 5260 → 5297) and a frozen denominator re-mint is chair-gated by §858 and
-    // §785.2 precedent. The full, executable shift record — with this corrected cause — is in
-    // the lane receipt's HOLD block.
+    // ⭐ THE STILL-CLOSING LIE IS CLOSED. These four figures stood for two commits as ONE
+    // FIFTH of a move whose other four instruments — the prose-family baseline and its
+    // library constants, and the news-voice and news-headline baselines — remained frozen on
+    // the OLD corpus and RED. ALL FIVE NOW CLOSE ON THE SAME CORPUS, re-frozen under an
+    // explicit chair grant taken on the CORRECTED attribution above, each through its own
+    // governed regeneration with every value read back out of the derivation rather than
+    // hand-typed. The shift record lives in those three contracts' own headers. The movement
+    // is a DECLARED distribution shift (occurrences 5260 → 5297, and one address home
+    // departing), ruled not to engage §786.2 because the reachability pin proves the
+    // escalation capability never left.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
       wizardNewsFinalEntries: 240,

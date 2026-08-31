@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "corpus": {
-    "scalarRows": 25451,
+    "scalarRows": 25560,
     "canonEventLogEntries": 1,
     "wizardNewsFinalEntries": 240,
-    "wizardNewsAccumulatedEntries": 1567,
-    "wizardNewsUnique": 272,
+    "wizardNewsAccumulatedEntries": 1569,
+    "wizardNewsUnique": 276,
     "pulseHistory": 12,
-    "regionalEventLog": 73,
-    "regionalEventLogUnique": 73,
+    "regionalEventLog": 75,
+    "regionalEventLogUnique": 75,
     "aiChronicle": 1
   },
   "familyTotals": [
@@ -21,14 +21,14 @@
     {
       "family": "pulseHistory",
       "identities": 50,
-      "distinctValues": 1198,
-      "occurrences": 5076
+      "distinctValues": 1201,
+      "occurrences": 5111
     },
     {
       "family": "regionalLog",
       "identities": 2,
       "distinctValues": 7,
-      "occurrences": 165
+      "occurrences": 167
     },
     {
       "family": "timeline",
@@ -92,14 +92,14 @@
       "path": "pulseHistory[].consequenceOutcomes[].headline",
       "field": "headline",
       "distinctValues": 73,
-      "occurrences": 186
+      "occurrences": 185
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].consequenceOutcomes[].metadata.pressureEvidence.kind",
       "field": "kind",
       "distinctValues": 1,
-      "occurrences": 3
+      "occurrences": 6
     },
     {
       "family": "pulseHistory",
@@ -140,29 +140,29 @@
       "family": "pulseHistory",
       "path": "pulseHistory[].consequenceOutcomes[].reasons[]",
       "field": "reasons",
-      "distinctValues": 110,
-      "occurrences": 422
+      "distinctValues": 113,
+      "occurrences": 425
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].consequenceOutcomes[].stressor.type",
       "field": "type",
       "distinctValues": 3,
-      "occurrences": 7
+      "occurrences": 8
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].consequenceOutcomes[].summary",
       "field": "summary",
-      "distinctValues": 76,
-      "occurrences": 186
+      "distinctValues": 77,
+      "occurrences": 185
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].consequenceOutcomes[].type",
       "field": "type",
       "distinctValues": 8,
-      "occurrences": 186
+      "occurrences": 185
     },
     {
       "family": "pulseHistory",
@@ -176,63 +176,63 @@
       "path": "pulseHistory[].impactDigest[].channelType",
       "field": "channelType",
       "distinctValues": 1,
-      "occurrences": 148
+      "occurrences": 150
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].impactDigest[].headline",
       "field": "headline",
-      "distinctValues": 84,
-      "occurrences": 148
+      "distinctValues": 83,
+      "occurrences": 150
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].impactDigest[].impactKind",
       "field": "impactKind",
-      "distinctValues": 31,
-      "occurrences": 148
+      "distinctValues": 30,
+      "occurrences": 150
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].impactDigest[].kind",
       "field": "kind",
       "distinctValues": 2,
-      "occurrences": 148
+      "occurrences": 150
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].impactDigest[].reasons[]",
       "field": "reasons",
-      "distinctValues": 118,
-      "occurrences": 310
+      "distinctValues": 120,
+      "occurrences": 322
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].impactDigest[].scope",
       "field": "scope",
       "distinctValues": 2,
-      "occurrences": 148
+      "occurrences": 150
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].impactDigest[].summary",
       "field": "summary",
-      "distinctValues": 89,
-      "occurrences": 148
+      "distinctValues": 90,
+      "occurrences": 150
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].impactDigest[].tags[]",
       "field": "tags",
-      "distinctValues": 40,
-      "occurrences": 591
+      "distinctValues": 39,
+      "occurrences": 599
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].mechanicalOutcomes[].headline",
       "field": "headline",
       "distinctValues": 29,
-      "occurrences": 56
+      "occurrences": 54
     },
     {
       "family": "pulseHistory",
@@ -246,84 +246,84 @@
       "path": "pulseHistory[].mechanicalOutcomes[].reasons[]",
       "field": "reasons",
       "distinctValues": 47,
-      "occurrences": 156
+      "occurrences": 150
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].mechanicalOutcomes[].summary",
       "field": "summary",
       "distinctValues": 29,
-      "occurrences": 56
+      "occurrences": 54
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].mechanicalOutcomes[].type",
       "field": "type",
       "distinctValues": 2,
-      "occurrences": 56
+      "occurrences": 54
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].mechanicalRumorSeeds[].channelType",
       "field": "channelType",
       "distinctValues": 1,
-      "occurrences": 19
+      "occurrences": 18
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].mechanicalRumorSeeds[].headline",
       "field": "headline",
-      "distinctValues": 18,
-      "occurrences": 19
+      "distinctValues": 17,
+      "occurrences": 18
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].mechanicalRumorSeeds[].impactKind",
       "field": "impactKind",
       "distinctValues": 5,
-      "occurrences": 19
+      "occurrences": 18
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].mechanicalRumorSeeds[].kind",
       "field": "kind",
       "distinctValues": 1,
-      "occurrences": 19
+      "occurrences": 18
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].mechanicalRumorSeeds[].reasons[]",
       "field": "reasons",
-      "distinctValues": 33,
-      "occurrences": 57
+      "distinctValues": 31,
+      "occurrences": 54
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].mechanicalRumorSeeds[].scope",
       "field": "scope",
       "distinctValues": 1,
-      "occurrences": 19
+      "occurrences": 18
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].mechanicalRumorSeeds[].summary",
       "field": "summary",
-      "distinctValues": 18,
-      "occurrences": 19
+      "distinctValues": 17,
+      "occurrences": 18
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].mechanicalRumorSeeds[].tags[]",
       "field": "tags",
       "distinctValues": 8,
-      "occurrences": 76
+      "occurrences": 72
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].resolvedStressors[].type",
       "field": "type",
-      "distinctValues": 1,
-      "occurrences": 1
+      "distinctValues": 2,
+      "occurrences": 3
     },
     {
       "family": "pulseHistory",
@@ -343,15 +343,15 @@
       "family": "pulseHistory",
       "path": "pulseHistory[].selectedOutcomes[].headline",
       "field": "headline",
-      "distinctValues": 80,
-      "occurrences": 151
+      "distinctValues": 79,
+      "occurrences": 153
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].selectedOutcomes[].metadata.pressureEvidence.kind",
       "field": "kind",
       "distinctValues": 1,
-      "occurrences": 4
+      "occurrences": 7
     },
     {
       "family": "pulseHistory",
@@ -392,29 +392,29 @@
       "family": "pulseHistory",
       "path": "pulseHistory[].selectedOutcomes[].reasons[]",
       "field": "reasons",
-      "distinctValues": 118,
-      "occurrences": 319
+      "distinctValues": 120,
+      "occurrences": 331
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].selectedOutcomes[].stressor.type",
       "field": "type",
       "distinctValues": 3,
-      "occurrences": 8
+      "occurrences": 9
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].selectedOutcomes[].summary",
       "field": "summary",
-      "distinctValues": 88,
-      "occurrences": 151
+      "distinctValues": 89,
+      "occurrences": 153
     },
     {
       "family": "pulseHistory",
       "path": "pulseHistory[].selectedOutcomes[].type",
       "field": "type",
       "distinctValues": 8,
-      "occurrences": 151
+      "occurrences": 153
     },
     {
       "family": "pulseHistory",
@@ -449,7 +449,7 @@
       "path": "regionalGraph.eventLog[].sourceEvent.type",
       "field": "type",
       "distinctValues": 1,
-      "occurrences": 73
+      "occurrences": 75
     },
     {
       "family": "timeline",
@@ -480,11 +480,11 @@
       "occurrences": 1
     }
   ],
-  "rowsSha256": "49f7d9470beba874408750086ea46ed985e41506cb56b99f3ce0c500670c06f1",
+  "rowsSha256": "04a14e3ab42674a2178ab6acd0fe3bf0cd918d2c1bfb82d8531fb3e3cca63e68",
   "totals": {
     "families": 4,
     "identities": 63,
-    "distinctValues": 1220,
-    "occurrences": 5260
+    "distinctValues": 1223,
+    "occurrences": 5297
   }
 }

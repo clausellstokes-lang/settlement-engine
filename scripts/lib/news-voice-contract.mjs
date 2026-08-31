@@ -2,8 +2,20 @@ const ROW_KEYS = Object.freeze([
   'home', 'field', 'expectedVoiceClass', 'observedVoiceClass', 'distinctValues', 'occurrences',
 ]);
 const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']);
+// ── RE-FROZEN 2026-08-31 BY T4 · SEAT-B, CHAIR-GRANTED. A DECLARED DISTRIBUTION SHIFT ─────
+// CAUSE: `a3e08cca2` lighting `legitimacyUpheavalEnabled` — the INTERACTION of the two
+// reachable rows it added to `insurgencyGate` (sensitivity 1.5 → 1.275 on the crisis cell,
+// the new 30..45 band row 1 → 1.5 on the contested one). ⛔ NOT the occupied replacement,
+// which is unreachable in this corpus. Either row removed alone restores the old figures.
+// ⭐ THE CONSERVATION IS WHAT SAYS THIS IS A RE-ROLL AND NOT A LOSS: introductions and
+// retirements rise by the same four, so `finalEntries` HOLDS at 240 to the digit. The one
+// home that left (`applied|stressor_escalate_insurgency`, 53 → 52) is proven still
+// reachable in tests/domain/legitimacyUpheaval.test.js — spawn gates cannot suppress an
+// escalation, which is authored by an ungated loop — so §786.2's refusal does not bind.
+// ⚠ THE LIVE HALF OF THIS CONTRACT DID NOT MOVE AT ALL: the seven retro rows are untouched
+// at 7/48/53, all of them `npc_*` homes, and the outstanding voice debt is still empty.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 272, retirements: 32, finalEntries: 240, homes: 53,
+  pulseRoots: 12, introductions: 276, retirements: 36, finalEntries: 240, homes: 52,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

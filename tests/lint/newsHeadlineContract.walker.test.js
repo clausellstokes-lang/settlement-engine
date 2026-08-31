@@ -100,10 +100,20 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
   });
 
-  it('A2 freezes all 106 address rows and their canonical digest', () => {
+  it('A2 freezes all 104 address rows and their canonical digest', () => {
+    // ⛔ T4 · SEAT-B (2026-08-31, chair-granted): 106 → 104, and the title moved with the
+    // figure rather than being left to lie. ONE HOME LEFT THE CORPUS —
+    // `applied|stressor_escalate_insurgency`, one home across its two fields — when
+    // `a3e08cca2` lit `legitimacyUpheavalEnabled` and the political spawn odds re-rolled the
+    // corpus onto histories that do not contain an insurgency escalation. ⭐ IT IS NOT A
+    // DELETED BEAT: `compareNewsAddressRows` throws `vanished` by construction because that
+    // is the right default, but spawn gates cannot suppress an escalation — they are
+    // consulted only in the birth loop, while the escalate candidate is authored by an
+    // ungated one — and the capability is pinned directly in
+    // tests/domain/legitimacyUpheaval.test.js.
     expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
     expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
-    expect(baseline.addressTotality.totals).toEqual({ homes: 53, fields: 2, identities: 106, prospectiveIdentities: 14, indicativeIdentities: 92, distinctValues: 400, occurrences: 544 });
+    expect(baseline.addressTotality.totals).toEqual({ homes: 52, fields: 2, identities: 104, prospectiveIdentities: 14, indicativeIdentities: 90, distinctValues: 402, occurrences: 552 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

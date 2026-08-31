@@ -5,8 +5,28 @@ const REWRITE_KEYS = Object.freeze(['source', 'flags', 'replacement', 'distinctV
 const INERT_KEYS = Object.freeze(['source', 'flags', 'replacement', 'reason']);
 const RAW_KEYS = Object.freeze(['rootOrdinal', 'pulseIndex', 'field', 'outcomeIndex', 'headline']);
 const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 272, retirements: 32, finalEntries: 240, homes: 53 });
-const ADDRESS_TOTALS = Object.freeze({ homes: 53, fields: 2, identities: 106, prospectiveIdentities: 14, indicativeIdentities: 92, distinctValues: 400, occurrences: 544 });
+// ── RE-FROZEN 2026-08-31 BY T4 · SEAT-B, CHAIR-GRANTED. A DECLARED DISTRIBUTION SHIFT ─────
+// CAUSE: `a3e08cca2` lighting `legitimacyUpheavalEnabled` — the INTERACTION of the two
+// reachable rows it added to `insurgencyGate` (the per-archetype sensitivity, crisis cell
+// 1.5 → 1.275, and the new 30..45 band row, contested cell 1 → 1.5). ⛔ NOT the occupied
+// replacement: that branch is UNREACHABLE in this corpus, which contains no occupation
+// stressor at all. Removing EITHER row alone restores the pre-car figures exactly.
+//
+// ⛔⛔ ONE ADDRESS HOME LEFT THE CORPUS AND IT IS NOT A DELETED BEAT.
+// `applied|stressor_escalate_insurgency` goes 53 → 52 homes and 106 → 104 identities. The
+// escalation is still fully authorable: `insurgencyGate` is a BIRTH gate — spawn gates are
+// consulted at exactly one site, the birth loop — while the escalate candidate is authored
+// by a later loop that consults NO gate, so no row here can suppress one. The corpus simply
+// re-rolled onto histories that do not contain it, corroborated by `birth_insurgency` and
+// `escalate_mass_migration` both HOLDING at 2. ⭐ The capability is pinned directly in
+// tests/domain/legitimacyUpheaval.test.js, because A CENSUS THAT ASKS WHETHER A BEAT APPEARS
+// IN ONE SAMPLED CORPUS HAS NOT ASKED WHETHER THE ENGINE CAN STILL AUTHOR IT.
+//
+// The rewrite RULE COUNT is unchanged at 26, active 16 and inert 10 both HOLD, and the
+// ten zero-count identities are the same ten — no rule crossed, so no new inert row is
+// claimed here and none needs authority.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 276, retirements: 36, finalEntries: 240, homes: 52 });
+const ADDRESS_TOTALS = Object.freeze({ homes: 52, fields: 2, identities: 104, prospectiveIdentities: 14, indicativeIdentities: 90, distinctValues: 402, occurrences: 552 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
@@ -17,17 +37,17 @@ const RAW_LIVENESS = Object.freeze({
     // repetitive: removing 21 occurrences of a handful of spellings leaves a shorter, more
     // varied lane. The selectedOutcomes lane is UNCHANGED — ordinary population drift was
     // already `state_only` and never a Chronicle beat.
-    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 56, distinctValues: 29, prospectiveOccurrences: 52, prospectiveDistinctValues: 28, indicativeOccurrences: 4, indicativeDistinctValues: 1 }),
-    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 151, distinctValues: 80, prospectiveOccurrences: 95, prospectiveDistinctValues: 66, indicativeOccurrences: 56, indicativeDistinctValues: 14 }),
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 54, distinctValues: 29, prospectiveOccurrences: 50, prospectiveDistinctValues: 28, indicativeOccurrences: 4, indicativeDistinctValues: 1 }),
+    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 153, distinctValues: 79, prospectiveOccurrences: 95, prospectiveDistinctValues: 64, indicativeOccurrences: 58, indicativeDistinctValues: 15 }),
   ]),
   // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
   // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
-  union: Object.freeze({ headlineOccurrences: 207, distinctValues: 80, prospectiveOccurrences: 147, prospectiveDistinctValues: 66, indicativeOccurrences: 60, indicativeDistinctValues: 14 }),
+  union: Object.freeze({ headlineOccurrences: 207, distinctValues: 79, prospectiveOccurrences: 145, prospectiveDistinctValues: 64, indicativeOccurrences: 62, indicativeDistinctValues: 15 }),
 });
 // TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
 // no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus
 // stopped producing its headline. That is the whole shape of this re-record.
-const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 16, inertRules: 10, distinctValues: 66, occurrences: 147 });
+const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 16, inertRules: 10, distinctValues: 64, occurrences: 145 });
 
 export const KNOWN_INERT_HEADLINE_REWRITES = Object.freeze([
   { source: '\\bmay close its doors\\b', flags: '', replacement: 'closes its doors', reason: 'institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-closure authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no closure headline.' },

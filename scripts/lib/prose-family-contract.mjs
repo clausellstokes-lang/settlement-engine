@@ -54,20 +54,46 @@ const EXPECTED_ROOTS = new Map([
 // ⚠ SCOPE: `demographicsEnabled` is virtual and false in every shipped preset. This
 // denominator is the ONLY place in the estate that observes the lit engine, so no player,
 // no shipped golden and no dark-control cell sees any of this.
+//
+// ── RE-FROZEN 2026-08-31 BY T4 · SEAT-B, CHAIR-GRANTED. A DECLARED DISTRIBUTION SHIFT ─────
+// CAUSE: `a3e08cca2` (W-SEAT SEAT-2b) lighting `legitimacyUpheavalEnabled`. Precisely, the
+// INTERACTION of the two reachable rows it added to `insurgencyGate` — the per-archetype
+// sensitivity taking the legitimacy-crisis cell 1.5 → 1.275, and the new 30..45 band row
+// taking the contested cell 1 → 1.5. ⛔ NOT the occupied replacement, which two earlier
+// attributions blamed: that branch is UNREACHABLE in this corpus (an instrumented recorder
+// saw `occupied` true on 0 of 21 calls at base and 0 of 18 at tip, and a scan of every
+// scalar row for /occupation/i returns EMPTY — the corpus holds no occupation stressor at
+// all). ⭐ AND IT IS AN INTERACTION: removing EITHER row alone returns this corpus to the
+// pre-car figures EXACTLY, so neither is the cause on its own.
+//
+// THE SHAPE: 63 identities, 4 families, and EXPECTED_ROWS_BYTES all HOLD; ZERO rows added
+// and ZERO removed; `chronicle` and `timeline` byte-identical. Occurrences move in BOTH
+// directions — 19 rows up, 15 down, none to zero, minimum still 1 — which is the signature
+// of a re-rolled sample rather than a suppressed emission. Net 5260 → 5297.
+//
+// ⚠ THE PRECEDENT'S DISCRIMINATOR, ADDRESSED RATHER THAN STEPPED OVER. HER-12 recorded
+// that "a row whose OCCURRENCES fell would be a deleted beat and a STOP". Fifteen rows fall
+// here and this is still not that case: that rule guards a beat that STOPPED BEING
+// AUTHORED, and no row died. The one address that left the corpus outright,
+// `applied|stressor_escalate_insurgency` (homes 53 → 52, address identities 106 → 104), is
+// proven still REACHABLE — `insurgencyGate` is a BIRTH gate, the escalate candidate is
+// authored by a later loop that consults no gate, and the pin lives in
+// tests/domain/legitimacyUpheaval.test.js. §786.2's vanished-identity refusal therefore
+// does not bind, per the chair's ruling on this measurement.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 25451, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
-  wizardNewsAccumulatedEntries: 1567, wizardNewsUnique: 272, pulseHistory: 12,
-  regionalEventLog: 73, regionalEventLogUnique: 73, aiChronicle: 1,
+  scalarRows: 25560, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
+  wizardNewsAccumulatedEntries: 1569, wizardNewsUnique: 276, pulseHistory: 12,
+  regionalEventLog: 75, regionalEventLogUnique: 75, aiChronicle: 1,
 });
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 50, distinctValues: 1198, occurrences: 5076 },
-  { family: 'regionalLog', identities: 2, distinctValues: 7, occurrences: 165 },
+  { family: 'pulseHistory', identities: 50, distinctValues: 1201, occurrences: 5111 },
+  { family: 'regionalLog', identities: 2, distinctValues: 7, occurrences: 167 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1220, occurrences: 5260 });
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1223, occurrences: 5297 });
 const EXPECTED_ROWS_BYTES = 8274;
-const EXPECTED_ROWS_SHA256 = '49f7d9470beba874408750086ea46ed985e41506cb56b99f3ce0c500670c06f1';
+const EXPECTED_ROWS_SHA256 = '04a14e3ab42674a2178ab6acd0fe3bf0cd918d2c1bfb82d8531fb3e3cca63e68';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;
