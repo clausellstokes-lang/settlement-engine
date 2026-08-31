@@ -16,7 +16,7 @@
  */
 import { describe, expect, test } from 'vitest';
 
-import { foldRegenIdentity, npcStatesAfterRosterReroll } from '../../src/domain/worldPulse/regenIdentityFold.js';
+import { foldRegenIdentity, npcStatesAfterRosterReroll } from '../../src/domain/npc/regenIdentityFold.js';
 import { graduateNpc, npcLedgerOf } from '../../src/domain/worldPulse/npcLedger.js';
 import { npcId } from '../../src/domain/worldPulse/npcAgency.js';
 

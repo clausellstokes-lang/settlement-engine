@@ -88,7 +88,7 @@
  *   tests/store/npcStateRegenRebind.test.js
  */
 
-import { refreshOriginRefsAfterRegen } from './npcLedger.js';
+import { refreshOriginRefsAfterRegen } from '../worldPulse/npcLedger.js';
 
 /**
  * THE KEY FORMAT, RE-SPELLED ON PURPOSE, AND PINNED.
@@ -130,11 +130,12 @@ function survivorsOf(preserved) {
  * Returns the SAME worldState reference when there is nothing to rewrite - no
  * states at all, or no key belonging to this settlement.
  *
- * @param {Record<string, any>|null|undefined} worldState
+ * @param {Record<string, unknown>|null|undefined} worldState
  * @param {string} settlementId  the SAVE id npcStates keys are built from
  * @param {Array<{id?: string, fromId?: string}>|null|undefined} preserved
  *   the preservation report's `preserved` half; absent/empty means NOBODY survived
- * @returns {{ worldState: any, changed: boolean, moved: string[], dropped: string[] }}
+ * @returns {{ worldState: Record<string, unknown>|null|undefined, changed: boolean,
+ *   moved: string[], dropped: string[] }}
  */
 export function npcStatesAfterRosterReroll(worldState, settlementId, preserved) {
   const unchanged = { worldState, changed: false, moved: /** @type {string[]} */ ([]), dropped: /** @type {string[]} */ ([]) };
@@ -144,7 +145,7 @@ export function npcStatesAfterRosterReroll(worldState, settlementId, preserved) 
   if (!prefix || prefix === ':') return unchanged;
 
   const survivors = survivorsOf(preserved);
-  /** @type {Record<string, any>} */
+  /** @type {Record<string, unknown>} */
   const next = {};
   /** @type {Map<string, string>} */
   const rekeyed = new Map();
@@ -168,9 +169,13 @@ export function npcStatesAfterRosterReroll(worldState, settlementId, preserved) 
   // Pass 2 - rivalryTargets hold npcState KEYS, so a rivalry has to follow the
   // same two verdicts its subject did or it points at the stranger too.
   if (rekeyed.size > 0 || gone.size > 0) {
-    for (const [key, state] of Object.entries(next)) {
+    for (const [key, raw] of Object.entries(next)) {
+      const state = raw && typeof raw === 'object' && !Array.isArray(raw)
+        ? /** @type {Record<string, unknown>} */ (raw)
+        : null;
       const targets = state && Array.isArray(state.rivalryTargets) ? state.rivalryTargets : null;
-      if (!targets || targets.length === 0) continue;
+      if (!targets || targets.length === 0 || !state) continue;
+      /** @type {unknown[]} */
       const kept = [];
       let moved = false;
       for (const target of targets) {
@@ -204,10 +209,10 @@ export function npcStatesAfterRosterReroll(worldState, settlementId, preserved) 
  * for the other.
  *
  * @param {Object} args
- * @param {Record<string, any>|null|undefined} args.worldState
+ * @param {Record<string, unknown>|null|undefined} args.worldState
  * @param {string} args.settlementId
  * @param {Array<{id?: string, fromId?: string, name?: string}>|null|undefined} args.preserved
- * @returns {{ worldState: any, changed: boolean, npcStatesMoved: string[],
+ * @returns {{ worldState: Record<string, unknown>|null|undefined, changed: boolean, npcStatesMoved: string[],
  *   npcStatesDropped: string[], originRefsRefreshed: string[] }}
  */
 export function foldRegenIdentity({ worldState, settlementId, preserved }) {

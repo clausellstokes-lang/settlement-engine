@@ -701,7 +701,7 @@ export function graduateNpc({
  * @param {Array<{id?: unknown, fromId?: unknown, name?: unknown}>|null|undefined} preserved
  *   the pipeline's preservation report; each entry carries the id the keeper
  *   ARRIVED with, the id it INHERITED, and the name that identifies it
- * @returns {{ worldState: any, changed: boolean, refreshed: string[] }}
+ * @returns {{ worldState: Record<string, unknown>|null|undefined, changed: boolean, refreshed: string[] }}
  */
 export function refreshOriginRefsAfterRegen(worldState, settlementId, preserved) {
   const none = { worldState, changed: false, refreshed: /** @type {string[]} */ ([]) };
@@ -724,15 +724,18 @@ export function refreshOriginRefsAfterRegen(worldState, settlementId, preserved)
   const ledger = npcLedgerOf(worldState);
   /** @type {string[]} */
   const refreshed = [];
-  /** @template T @param {Record<string, T>} map @returns {Record<string, T>} */
+  /**
+   * @template {RoamerRecord|PlacementRecord} T
+   * @param {Record<string, T>} map @returns {Record<string, T>}
+   */
   const rewrite = (map) => {
-    /** @type {Record<string, any>} */
+    /** @type {Record<string, T>} */
     const out = {};
     for (const [id, rec] of Object.entries(map)) {
-      const ref = /** @type {OriginRef} */ (/** @type {any} */ (rec).originRef);
+      const ref = rec.originRef;
       const to = ref && ref.settlementId === town ? moves.get(ref.rosterId + KEY_DELIM + ref.name) : undefined;
       if (to === undefined) { out[id] = rec; continue; }
-      out[id] = { .../** @type {any} */ (rec), originRef: { ...ref, rosterId: to } };
+      out[id] = { ...rec, originRef: { ...ref, rosterId: to } };
       refreshed.push(id);
     }
     return out;

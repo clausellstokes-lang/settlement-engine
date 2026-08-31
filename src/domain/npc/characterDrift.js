@@ -162,6 +162,22 @@ export const MATERIALIZATION_EPSILON = 1 / 4;
 export const OFFSET_DECIMALS = 4;
 
 /**
+ * `10 ** OFFSET_DECIMALS`, built by INTEGER MULTIPLICATION rather than by `**`.
+ *
+ * Not style: `**` is a transcendental site, and the estate's transcendental ratchet
+ * refuses new ones in `src/domain` because they are the forms whose last bits are
+ * NOT guaranteed identical across JavaScript engines — which is how a same-seed
+ * replay diverges on somebody else's machine and nowhere on yours. A loop of
+ * multiplications by 10 is correctly rounded at every step and exact for every
+ * decimal width this constant will ever take.
+ */
+export const OFFSET_SCALE = (() => {
+  let scale = 1;
+  for (let i = 0; i < OFFSET_DECIMALS; i += 1) scale *= 10;
+  return scale;
+})();
+
+/**
  * Provenance, in the module, so a reader who arrives at the code before the docs
  * learns the signature status here (the L1 catalog's idiom).
  * @type {Readonly<{ status: string, signedBy: string|null, keyRuling: string, ownerRows: readonly string[], consumers: string }>}
@@ -201,10 +217,10 @@ function tickOf(v) {
  * which rounds -0.5 to -0 and +0.5 to +1 — an asymmetry that would make a virtue
  * curdling into its own vice behave differently from the reverse, on a spectrum
  * whose whole point is that the two directions are the same journey.
- * @param {number} value @param {number} decimals @returns {number}
+ * @param {number} value @param {number} scale the persisted width, as OFFSET_SCALE
+ * @returns {number}
  */
-function roundSymmetric(value, decimals) {
-  const scale = 10 ** decimals;
+function roundSymmetric(value, scale) {
   const scaled = Math.abs(value) * scale;
   const rounded = Math.round(scaled) / scale;
   // `+ 0` normalizes -0 to 0 so a zeroed offset serializes as `0`, never `-0`.
@@ -225,6 +241,25 @@ export function characterDriftActive(worldState) {
  * @typedef {Object} AxisDrift
  * @property {number} offset      signed, in bands; clamped to +/-MAX_AXIS_OFFSET
  * @property {number} updatedTick the tick this offset was written ON
+ */
+
+/**
+ * @typedef {Object} DriftWriteResult
+ * @property {Record<string, unknown>} worldState
+ * @property {boolean} changed
+ * @property {boolean} materialized
+ * @property {number} offset
+ */
+
+/**
+ * @typedef {Object} GraduatedDriftWriteResult
+ * @property {Record<string, unknown>} worldState
+ * @property {string|null} wnpcId
+ * @property {boolean} changed
+ * @property {boolean} materialized
+ * @property {boolean} graduated
+ * @property {number} offset
+ * @property {string|null} refusal
  */
 
 /**
@@ -250,7 +285,7 @@ export function characterDriftOf(worldState) {
     const entry = {};
     for (const axisId of Object.keys(axes).sort(compareCodepoint)) {
       const cell = asObject(axes[axisId]);
-      const offset = clampOffset(roundSymmetric(num(cell.offset), OFFSET_DECIMALS));
+      const offset = clampOffset(roundSymmetric(num(cell.offset), OFFSET_SCALE));
       // AN OFFSET UNDER THE FLOOR IS NOT AN ENTRY (F9, read side): a hand-edited or
       // legacy map holding a sub-epsilon cell reads exactly like one that never had
       // it, so the sparsity law cannot be defeated by the shape of a stored file.
@@ -293,7 +328,8 @@ function clampOffset(offset) {
 }
 
 /**
- * The drift entry for a durable identity, or an empty object. @param {any} worldState
+ * The drift entry for a durable identity, or an empty object.
+ * @param {{ characterDrift?: unknown } | null | undefined} worldState
  * @param {string} wnpcId @returns {Record<string, AxisDrift>}
  */
 export function driftEntryOf(worldState, wnpcId) {
@@ -304,7 +340,8 @@ export function driftEntryOf(worldState, wnpcId) {
  * The stored offset on one axis (0 when there is none). The RAW read — for
  * persistence, for a chart surface, and for the accumulator that decides the next
  * write. A per-tick consumer wants `axisOffsetAt` instead.
- * @param {any} worldState @param {string} wnpcId @param {string} axisId @returns {number}
+ * @param {{ characterDrift?: unknown } | null | undefined} worldState
+ * @param {string} wnpcId @param {string} axisId @returns {number}
  */
 export function axisOffsetOf(worldState, wnpcId, axisId) {
   const cell = driftEntryOf(worldState, wnpcId)[String(axisId)];
@@ -315,7 +352,8 @@ export function axisOffsetOf(worldState, wnpcId, axisId) {
  * The offset a reader at `tick` may see: READ-LAST. An offset written ON this tick
  * is not yet visible, so every consumer in one fold reads the same chart regardless
  * of where it runs in the order.
- * @param {any} worldState @param {string} wnpcId @param {string} axisId @param {number} tick
+ * @param {{ characterDrift?: unknown } | null | undefined} worldState
+ * @param {string} wnpcId @param {string} axisId @param {number} tick
  * @returns {number}
  */
 export function axisOffsetAt(worldState, wnpcId, axisId, tick) {
@@ -364,7 +402,7 @@ export function valuePosition(value) {
  *
  * @param {{ character?: unknown } | null | undefined} npc
  * @param {Record<string, AxisDrift> | null | undefined} drift  the entry for THIS npc
- * @returns {any} the effective character, or the authored one unchanged
+ * @returns {unknown} the effective character, or the authored one unchanged
  */
 export function effectiveCharacter(npc, drift) {
   const core = asObject(npc).character;
@@ -400,7 +438,7 @@ export function effectiveCharacter(npc, drift) {
  * @param {string} args.axisId
  * @param {number} args.delta   signed, in bands, at full precision
  * @param {number} args.tick
- * @returns {{ worldState: any, changed: boolean, materialized: boolean, offset: number }}
+ * @returns {DriftWriteResult}
  */
 export function applyAxisDrift({ worldState, wnpcId, axisId, delta, tick }) {
   const id = String(wnpcId == null ? '' : wnpcId);
@@ -411,7 +449,7 @@ export function applyAxisDrift({ worldState, wnpcId, axisId, delta, tick }) {
   const drift = characterDriftOf(worldState);
   const entry = drift[id] || {};
   const prior = entry[axis] ? entry[axis].offset : 0;
-  const offset = clampOffset(roundSymmetric(prior + num(delta), OFFSET_DECIMALS));
+  const offset = clampOffset(roundSymmetric(prior + num(delta), OFFSET_SCALE));
   const materialized = Math.abs(offset) >= MATERIALIZATION_EPSILON;
   if (!materialized && !entry[axis]) return { ...none, offset: 0 };
 
@@ -458,13 +496,12 @@ export function applyAxisDrift({ worldState, wnpcId, axisId, delta, tick }) {
  * @param {string} args.axisId
  * @param {number} args.delta
  * @param {number} args.tick
- * @returns {{ worldState: any, wnpcId: string|null, changed: boolean,
- *   materialized: boolean, graduated: boolean, offset: number, refusal: string|null }}
+ * @returns {GraduatedDriftWriteResult}
  */
 export function writeAxisDrift({
   worldState, settlementSeed, settlementId, rosterIdentity, axisId, delta, tick,
 }) {
-  /** @param {string} refusal @returns {any} */
+  /** @param {string} refusal @returns {GraduatedDriftWriteResult} */
   const refuse = (refusal) => ({
     worldState, wnpcId: null, changed: false, materialized: false, graduated: false, offset: 0, refusal,
   });
@@ -474,7 +511,7 @@ export function writeAxisDrift({
   // keeps graduation idempotent and keeps the floor in charge of who graduates.
   const existing = durableIdForRoster(worldState, settlementId, rosterIdentity);
   const prior = existing ? axisOffsetOf(worldState, existing, axisId) : 0;
-  const prospective = clampOffset(roundSymmetric(prior + num(delta), OFFSET_DECIMALS));
+  const prospective = clampOffset(roundSymmetric(prior + num(delta), OFFSET_SCALE));
   if (Math.abs(prospective) < MATERIALIZATION_EPSILON) {
     // Below the floor: no key, and — the point of doing this BEFORE the mint — no
     // graduation either. A soul is not made world-scoped by a nudge that vanished.
