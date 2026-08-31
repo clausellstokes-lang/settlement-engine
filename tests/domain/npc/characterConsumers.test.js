@@ -153,6 +153,7 @@ describe('THE DESCRIPTOR RE-ROUTE — reference identity is the byte-identity pr
       words, npc: CHARTED_NPC, lens: lensWithDrift({ COURAGE: { offset: -6, updatedTick: 1 } }),
     });
     expect(flipped).toContain('cowardly');
+    // anchored: `flipped` is asserted above to CONTAIN `cowardly`, so the list is live
     expect(flipped).not.toContain('brave');
   });
 
@@ -261,6 +262,7 @@ describe('THE CORRUPTION DEPTH GATE (F13, pack row 13(a))', () => {
     const lazy = { character: { axes: { INDUSTRY: { pole: 'vice', level: 'defining' } } } };
     expect(corruptibleAxisByDepth({ npc: lazy, threshold: 'a_touch' })).toBe(null);
     expect(CORRUPTIBLE_AXES).toHaveLength(7);
+    // anchored: CORRUPTIBLE_AXES is asserted to have length 7 one line above, so it is live
     expect(CORRUPTIBLE_AXES).not.toContain('INDUSTRY');
   });
 
@@ -339,6 +341,7 @@ describe('R7 — THE DERIVED ALIGNMENT READING', () => {
   });
 
   test('⚠⚠ `chaotic_good` HAS NO WORD — the fallback drops the LAW half, never the moral one', () => {
+    // anchored: four positive alignmentWord rows below read members OUT of NPC_ALIGNMENTS
     expect(NPC_ALIGNMENTS).not.toContain('chaotic_good');
     expect(alignmentWord(-1, 1)).toBe('neutral_good');
     // The eight cells that DO have words are unaffected by that fallback.

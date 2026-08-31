@@ -661,7 +661,9 @@ const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(
     // The anti-vacuity control the strip owes: a scan that stopped seeing things
     // would report the same empty list forever.
     expect(stripComments("import { x } from './knownCharacter.js';")).toContain('knownCharacter');
+    // anchored: the line above pins the SAME stripper returning a name out of real import syntax
     expect(stripComments('// a comment naming knownCharacter\nconst a = 1;')).not.toContain('knownCharacter');
+    // anchored: same stripper, pinned live two lines above on a real import
     expect(stripComments('/** a block naming livedExperienceSources */\nconst a = 1;')).not.toContain('livedExperienceSources');
   });
 

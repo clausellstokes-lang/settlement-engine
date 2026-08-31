@@ -285,6 +285,7 @@ describe('⭐⭐ THE ⟨F8⟩ ONE-HOME SCAN — the walker the charter said exis
     // ...and the enumerated input derivers really cannot decide: none of them
     // returns an acceptance, which is what makes their presence on the list safe.
     for (const rel of INPUT_DERIVERS) {
+      // anchored: `spellings` is asserted equal to the enumerated roster above, so each path is live
       expect(readFileSync(join(REPO_ROOT, rel), 'utf8'), rel).not.toContain('accepted:');
     }
   });
