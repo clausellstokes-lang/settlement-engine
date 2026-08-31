@@ -80,7 +80,9 @@
  *      a CURED key also REDS, demanding its now-stale row be deleted so the win is
  *      banked. The list may only shrink; nothing may buy itself a row.
  *   2. CLASS_ROSTER — the exact set of allowlist rebuilders in the three trees that
- *      hold persisted shape (`worldPulse/`, `region/`, `store/`) at >= 8 aligned keys.
+ *      hold persisted shape (`worldPulse/`, `region/`, `store/`) at >= 6 aligned keys
+ *      (SP-W1 froze this tier at >= 8 with 29 rows; SP-W2 lowered it to >= 6 and the
+ *      roster is 59 — see ROSTER_MIN_KEYS for the measured tier curve and why 6).
  *      A NEW one REDS, so a rebuilder cannot join the estate unreviewed. Rows are
  *      keyed by module + function and NOT by line, so ordinary work above a site
  *      relocates nothing.
@@ -111,8 +113,37 @@ const PERSISTED_TREES = Object.freeze([
   'src/store/',
 ]);
 
-/** A rebuild must name at least this many aligned keys to enter the roster. */
-const ROSTER_MIN_KEYS = 8;
+/**
+ * A rebuild must name at least this many aligned keys to enter the roster.
+ *
+ * SP-W2 LOWERED THIS 8 -> 6 (ODQ §846's chartered "≥6 tier"), which took the roster
+ * 29 -> 59. The tier is a THRESHOLD ON EVIDENCE, not on danger, and the widening is
+ * what proved it: the two rows that document a live write-only field on a persisted
+ * shape — relationshipMemory's writer/reader pair — sit at 6 and 7 aligned keys and
+ * were both INVISIBLE at 8. A tier that cannot see a pair cannot see a pairing.
+ *
+ * Why 6 and not lower, MEASURED rather than argued — a frozen number nobody re-derived
+ * is this walker's own defect one level up. The tier curve over the three persisted
+ * trees at this tip:
+ *
+ *     minKeys   4     5     6     7     8     9    10
+ *     rows    202   101    59    38    29    17    13
+ *
+ * The floor is set at the knee. Dropping 6 -> 5 DOUBLES the ledger (59 -> 101) and the
+ * 42 rows it adds are dominated by shapes that reconstruct nothing: the five-key news
+ * envelope field bag `[significance, kind, familyId, audience, section]` alone recurs
+ * SIX times, in commercialReasonsNews, envoyNews, lineageNews, sovereigntyNews,
+ * warCoalitionNews and warRulingsNews — counted, not estimated — beside plain call bags
+ * like `roads[snapshot, graph, saves, tick, now]`. Rows nobody can review are how a shrink-only
+ * ledger rots into fiction, and DIRECTION 2 exists precisely to stop that.
+ *
+ * ⚠ Stated honestly rather than overclaimed: 6 does NOT buy a clean partition. Argument
+ * bags survive at 6 too (`routeNetworkDecay::cost` is `[worldState, a, b, grade, season,
+ * tick]` and reconstructs nothing) — they are simply few enough to CLASSIFY each one, and
+ * they are classified below as `not-a-rebuilder` with a reason apiece. The tier buys a
+ * reviewable denominator, not a pure one.
+ */
+const ROSTER_MIN_KEYS = 6;
 
 // ── AST machinery ───────────────────────────────────────────────────────────────
 
@@ -529,6 +560,13 @@ const CLASS_ROSTER = Object.freeze([
       + ' DOES spread its source, so the omission is an asymmetry rather than a stated policy.',
   }),
   Object.freeze({
+    module: 'src/domain/region/propagation.js', fn: 'impact', status: 'not-a-rebuilder',
+    reason: 'mints a FRESH RegionalImpact: a computed impactId and conditionId, the channel\'s own'
+      + ' endpoints, and cloned goods. The seven aligned keys are read off the `detail`'
+      + ' OPTIONS BAG, not off a record being reconstructed, so there is no prior shape to be'
+      + ' faithful to.',
+  }),
+  Object.freeze({
     module: 'src/domain/region/wizardNews.js', fn: 'normalizeEntry', status: 'registered',
     reason: 'the worked example: the feed entry rebuild, run at every append AND over persisted'
       + ' save data on every read. Governed key-by-key by DIRECTION 1 against both producer doors.',
@@ -549,6 +587,28 @@ const CLASS_ROSTER = Object.freeze([
       + ' authoritative and the stamp is re-derived each tick, so a stale field self-heals.',
   }),
   Object.freeze({
+    module: 'src/domain/worldPulse/chronicle.js', fn: 'headlines', status: 'lossy',
+    reason: 'the AI chronicle GROUNDING payload: six fields per entry, deliberately narrowed so'
+      + ' the model is grounded on headlines rather than handed the whole feed. Carrying more'
+      + ' is the thing this projection exists to prevent, so a coverage law would invert its'
+      + ' purpose.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/coalitionRatification.js', fn: 'ballot', status: 'not-a-rebuilder',
+    reason: 'the ARGUMENT BAG handed to normalizeRatificationBallot, which is the real'
+      + ' constructor and owns the ballot\'s shape. The keys off `row` are inputs to a mint,'
+      + ' not a rebuild; the normalizer downstream is where a ballot coverage law would have'
+      + ' to live.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/convergence.js', fn: 'interventionLedger', status: 'unpaired',
+    reason: '⚠ A REAL DOOR: the defensive normalizer over the PERSISTED intervention ledger,'
+      + ' re-run on every load of worldState. An InterventionRecord field a producer sets and'
+      + ' this list omits is dropped at load. Its `state` tail rides the byte-neutral'
+      + ' conditional spread. No producer rule declared yet — the records are minted across'
+      + ' several convergence stages.',
+  }),
+  Object.freeze({
     module: 'src/domain/worldPulse/demographicsHerald.js', fn: 'demographicNews', status: 'not-a-rebuilder',
     reason: 'assembles a FRESH news envelope from a caller field bag plus constants and a computed'
       + ' id; nothing is being reconstructed. ⚠ It is a PRODUCER, and its `causeClass` is dropped'
@@ -560,14 +620,73 @@ const CLASS_ROSTER = Object.freeze([
       + ' gate, so shape drift FAILS CLOSED instead of dropping silently.',
   }),
   Object.freeze({
+    module: 'src/domain/worldPulse/disinformationPlant.js', fn: 'patch', status: 'not-a-rebuilder',
+    reason: 'mints a fresh envoy_picture_patch COMMAND with a computed id, a constant kind and'
+      + ' the lineage ids; the six keys off exactTarget are the address it is patching. The'
+      + ' patch contract is a new shape, not a reconstruction of the picture it names.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/envoyEncounter.js', fn: 'encounterCandidate', status: 'not-a-rebuilder',
+    reason: 'assembles a fresh encounter record from TWO sources (the envoy and the army) plus a'
+      + ' hashed id and the tick. Nothing is being reconstructed, and a two-source composition'
+      + ' has no single prior shape a coverage law could be written against.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/envoyErrandProjection.js', fn: 'homeDeliveryFor', status: 'lossy',
+    reason: 'a home-delivery PROJECTION of an errand: three ids plus three sub-records each'
+      + ' rebuilt by its own declared normalizer (offer, acceptance, termSheet). Derived on'
+      + ' demand for the home mouth and never written back, so nothing can be lost by it.',
+  }),
+  Object.freeze({
     module: 'src/domain/worldPulse/espionage/espionageGauntlet.js', fn: 'dwellRisk01', status: 'not-a-rebuilder',
     reason: 'the named keys are the ARGUMENT BAG for catchChance01, which returns a number; no object'
       + ' is reconstructed and nothing is persisted from this literal.',
   }),
   Object.freeze({
+    module: 'src/domain/worldPulse/espionage/espionageProductStage.js', fn: 'gathering', status: 'not-a-rebuilder',
+    reason: 'the per-stop gathering receipt, composed from the walk, the dwell and the stop read'
+      + ' — three sources plus computed marks. ⚠ Espionage-tree row: it is DARK behind'
+      + ' espionageActive at the stage head, and this walker writes no src byte, so its'
+      + ' dormancy is untouched.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/espionage/espionageProductStage.js', fn: 'receipt', status: 'not-a-rebuilder',
+    reason: 'the standoff receipt minted off a fresh `decision` return; the decision object is'
+      + ' itself the product of the call immediately above, so this is a hand-off of a'
+      + ' just-computed value rather than a reconstruction of anything stored. Also'
+      + ' espionage-dark by the same gate.',
+  }),
+  Object.freeze({
     module: 'src/domain/worldPulse/npcLadderState.js', fn: 'goal', status: 'unpaired',
     reason: 'the ladder record\'s read and write halves (normalizeGoal, and the byte-stable standing'
       + ' writer); both name 8 keys off the persisted shape. No producer rule declared yet.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/npcLadderState.js', fn: 'normalizeContests', status: 'unpaired',
+    reason: '⚠ A REAL DOOR and the declared sibling of the already-rostered `goal`: the defensive'
+      + ' normalizer over PERSISTED ladder contests, keyed and re-emitted per contest id. A'
+      + ' contest field a producer sets and this list omits never survives a save. No producer'
+      + ' rule yet.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/npcLadderState.js', fn: 'st', status: 'unpaired',
+    reason: 'normalizeStanding — the persisted LadderStanding\'s defensive read. ⭐ Its six aligned'
+      + ' keys are the REQUIRED core; the additive-optional tail (lastExposed, wasOusted,'
+      + ' lastLieSeen, bonds) is attached by conditional assignment AFTER the literal, which'
+      + ' is the file\'s own legacy-safe idiom and is invisible to an object-literal detector.'
+      + ' Judge the tail by hand.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/npcVerdictApply.js', fn: 'receipt', status: 'not-a-rebuilder',
+    reason: 'the DM-truth receipt minted under the single covert attachment key, composed off a'
+      + ' live `decision` with every field re-typed through text()/Number(). A fresh frozen'
+      + ' record whose whole point is that the estate-wide scrub can hold it out by one key.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/npcVerdictTable.js', fn: 'npcVerdictFor', status: 'not-a-rebuilder',
+    reason: 'assembles the verdict return from THREE sources (the decision, the context and the'
+      + ' state) plus derived facets. The six keys off `decision` are one contributor to a new'
+      + ' record, not a reconstruction of the decision itself.',
   }),
   Object.freeze({
     module: 'src/domain/worldPulse/peaceTermsDocument.js', fn: 'treatyDocument', status: 'lossy',
@@ -578,6 +697,12 @@ const CLASS_ROSTER = Object.freeze([
     module: 'src/domain/worldPulse/pulseHelpers.js', fn: 'compactImpactDigest', status: 'lossy',
     reason: 'a bounded 14-field digest of impact entries, score-sorted and sliced to 18 for the'
       + ' pulse record. Compaction is the stated job; a coverage law would forbid its purpose.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/pulseHelpers.js', fn: 'compactNpcPatch', status: 'lossy',
+    reason: 'the third member of this file\'s compaction family beside compactImpactDigest and'
+      + ' compactOutcomeForHistory, both already rostered lossy: a bounded seven-field npc'
+      + ' patch digest for the pulse record. Compaction is the stated job.',
   }),
   Object.freeze({
     module: 'src/domain/worldPulse/pulseHelpers.js', fn: 'compactOutcomeForHistory', status: 'lossy',
@@ -597,14 +722,55 @@ const CLASS_ROSTER = Object.freeze([
       + ' true) — the same explanation-row projection, and lossy for the same reason.',
   }),
   Object.freeze({
+    module: 'src/domain/worldPulse/razingExecution.js', fn: 'razing', status: 'lossy',
+    reason: 'carries the razing plan\'s MECHANISMS onto the outcome so they ride it atomically,'
+      + ' exactly as the conquest\'s sack does. Its own comment names the contract — the fields'
+      + ' the downstream estates consume — so the omission of the rest of the plan is the'
+      + ' declared point.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/relationshipMemory.js', fn: 'persistedPostureRow', status: 'unpaired',
+    reason: '⭐ THE READ HALF of this wave\'s headline pair: it rebuilds a posture row from the'
+      + ' PERSISTED `relState.relationshipMemory` blob on the prefer-persisted path. Faithful'
+      + ' to what it reads, and paired to its own writer below by DIRECTION 4 rather than by a'
+      + ' producer rule.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/relationshipMemory.js', fn: 'relationshipMemory', status: 'unpaired',
+    reason: '⭐ THE WRITE HALF: refreshRelationshipMemory mints the persisted blob every refresh.'
+      + ' It is the reader\'s ONLY producer and it lives in this same file, which is what makes'
+      + ' the pair enumerable where the estate\'s other rows are not — see DIRECTION 4 and'
+      + ' KNOWN_UNREAD_KEYS.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/relationshipMemory.js', fn: 'sanitized', status: 'lossy',
+    reason: 'the AI relationship payload: every string clipText-clipped to a byte budget, the'
+      + ' list sliced to maxRelationships and the memories to maxMemories. Bounded and'
+      + ' truncating by construction — a coverage law would forbid the budget it exists to'
+      + ' enforce.',
+  }),
+  Object.freeze({
     module: 'src/domain/worldPulse/relationshipState.js', fn: 'ensureRelationshipState', status: 'unpaired',
     reason: 'the per-edge relationship record\'s ensure/default pass over the existing row, re-run'
       + ' every tick over worldState.relationshipStates: a dropped key here is straight save-loss.',
   }),
   Object.freeze({
+    module: 'src/domain/worldPulse/resourceDynamicsKernel.js', fn: 'editsOf', status: 'unpaired',
+    reason: 'a total constructor over `config.resourceEdits` that array-defaults all six edit'
+      + ' lists; its typedef sits directly above it. A seventh edit list added to the config'
+      + ' shape and not named here reads as empty forever. No producer rule declared for'
+      + ' resourceEdits yet.',
+  }),
+  Object.freeze({
     module: 'src/domain/worldPulse/resourceDynamicsKernel.js', fn: 'resourceProjection', status: 'lossy',
     reason: 'builds a JSON comparison KEY over the 11 chain facts a transition owns; its docstring'
       + ' states that persisted chains carry extra fields which survive the merge separately.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/routeNetworkCharter.js', fn: 'edge', status: 'not-a-rebuilder',
+    reason: 'the ARGUMENT BAG for routeEdge(), which is the real edge constructor; the keys off'
+      + ' `verdict` are the charter\'s inputs to a mint, joined by a provenance string and the'
+      + ' tick. Sibling anatomy to the already-rostered dwellRisk01.',
   }),
   Object.freeze({
     module: 'src/domain/worldPulse/routeNetworkCharter.js', fn: 'verdictOf', status: 'unpaired',
@@ -620,6 +786,13 @@ const CLASS_ROSTER = Object.freeze([
     module: 'src/domain/worldPulse/routeNetworkConsumersInterdiction.js', fn: 'severanceOf', status: 'unpaired',
     reason: 'a total constructor for the SeveranceReading typedef from a partial field bag; its'
       + ' output has no in-tree consumer yet, so no producer rule can be declared for it.',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/routeNetworkDecay.js', fn: 'cost', status: 'not-a-rebuilder',
+    reason: 'the argument bag for effectiveCorridorCost01(), which returns a number that is then'
+      + ' folded into a scalar score. ⚠ The clearest evidence that the ≥6 tier does not'
+      + ' partition cleanly: `[worldState, a, b, grade, season, tick]` is a call shape, and it'
+      + ' is classified, not hidden.',
   }),
   Object.freeze({
     module: 'src/domain/worldPulse/routeNetworkDecay.js', fn: 'decayVerdictOf', status: 'unpaired',
@@ -643,6 +816,27 @@ const CLASS_ROSTER = Object.freeze([
       + ' ids and ticks is its declared contract rather than an oversight.',
   }),
   Object.freeze({
+    module: 'src/domain/worldPulse/warCoalitionLedger.js', fn: 'normalizeJoinAnchor', status: 'not-a-rebuilder',
+    reason: 'mints the join-anchor FACT after refusing every malformed input — the callId is'
+      + ' re-derived through coalitionCallIdFor and the record is rejected unless it matches.'
+      + ' A constructor that validates its way to a new fact, not a rebuild of the strings'
+      + ' bag.',
+  }),
+  Object.freeze({
+    module: 'src/store/actionResult.js', fn: 'makeActionResult', status: 'unpaired',
+    reason: 'the total constructor for ActionResult from a partial field bag, with veto/queued'
+      + ' riding the byte-neutral conditional spread. Action results are transient and never'
+      + ' persisted, so a dropped key costs one composer branch rather than a save. Same'
+      + ' anatomy as verdictOf.',
+  }),
+  Object.freeze({
+    module: 'src/store/aiPersistenceEnvelope.js', fn: 'buildAiDataBlob', status: 'unpaired',
+    reason: '⚠ A REAL DOOR: it rebuilds the PERSISTED aiData blob whole from `previous` merged'
+      + ' with `patch` on every AI write, so an aiData key named by neither list is erased by'
+      + ' the next patch. Faithful today; no producer rule declared because the patch sources'
+      + ' are many.',
+  }),
+  Object.freeze({
     module: 'src/store/authSlice.js', fn: 'authSignIn', status: 'unpaired',
     reason: 'replaces the whole auth slice from the sign-in result; the key list must cover the'
       + ' slice\'s declared shape, and today it does. Auth is excluded from persistence by design.',
@@ -658,14 +852,55 @@ const CLASS_ROSTER = Object.freeze([
       + ' auth-change callback args), which is the third and fourth spelling of one shape.',
   }),
   Object.freeze({
+    module: 'src/store/campaignAdvanceSession.js', fn: 'buildPausedAdvanceCursor', status: 'unpaired',
+    reason: '⚠ A REAL DOOR: the paused-advance cursor is persisted so a session can resume and so'
+      + ' undo can return the DM to the pre-advance world. An advance-result field this list'
+      + ' omits does not survive the pause. No producer rule declared for the advance result'
+      + ' shape yet.',
+  }),
+  Object.freeze({
+    module: 'src/store/campaignPulseHelpers.js', fn: 'campaignStateForRegionalImpact', status: 'unpaired',
+    reason: '⚠ ONE OF TWO HAND-COPIES of the ten-key campaignState envelope — the other is'
+      + ' settlementSliceHelpers::pickleCampaignState. Both write the same persisted shape;'
+      + ' DRIFT BETWEEN THE TWO is the live hazard here, exactly as with authSlice\'s four'
+      + ' spellings.',
+  }),
+  Object.freeze({
+    module: 'src/store/campaignSlice.js', fn: 'migrateMapState', status: 'lossy',
+    reason: 'the v1 -> v2 mapState MIGRATION. It re-keys legacy placements into the v2 record and'
+      + ' names the seven fields v2 declares; dropping the rest of a v1 placement is what a'
+      + ' schema migration IS. ⚠ One-way and irreversible, so the row is a note as much as a'
+      + ' classification.',
+  }),
+  Object.freeze({
     module: 'src/store/campaignSlice.js', fn: 'saveCampaignMap', status: 'unpaired',
     reason: 'writes campaign mapState as an explicit key list before persistCampaignState, so an'
       + ' unnamed mapState key is lost AT SAVE. A real door; no producer rule declared yet.',
   }),
   Object.freeze({
+    module: 'src/store/importReconciliationCommandTransaction.js', fn: 'remote', status: 'not-a-rebuilder',
+    reason: 'the argument bag for commitImportReconciliationCommand(), assembled from four'
+      + ' different branches of the command (targets, expected, correlation, params). A'
+      + ' multi-source call shape with no single prior record behind it.',
+  }),
+  Object.freeze({
+    module: 'src/store/instantWorldBody.js', fn: 'saveEntry', status: 'unpaired',
+    reason: '⚠ A REAL DOOR on the IMPORT path: this is the record handed to savesService.save()'
+      + ' for each bundled settlement, so a bundle-entry field it does not name never reaches'
+      + ' the durable save at all. Faithful to today\'s bundle shape; no producer rule'
+      + ' declared.',
+  }),
+  Object.freeze({
     module: 'src/store/persistProjection.js', fn: 'partializeStoreState', status: 'lossy',
     reason: 'the device-local zustand partialize — it IS the persistence door, and excluding auth,'
       + ' capabilities, reporter leases and generated worlds by construction is its documented point.',
+  }),
+  Object.freeze({
+    module: 'src/store/settlementSliceHelpers.js', fn: 'pickleCampaignState', status: 'unpaired',
+    reason: '⚠ THE OTHER HAND-COPY of the ten-key campaignState envelope (see'
+      + ' campaignPulseHelpers:: campaignStateForRegionalImpact). It is the save-time'
+      + ' serializer, so a campaignState key named by neither copy dies at the pickle. The two'
+      + ' lists agreeing today is not a guarantee.',
   }),
 ]);
 
@@ -764,6 +999,16 @@ describe('SP-W1 allowlist-rebuilder registry — guard the guard', () => {
     };`).length).toBe(0);
     // Below the threshold is below the threshold.
     expect(allowlistRebuilds('const row = { a: src.a, b: src.b, c: src.c };').length).toBe(0);
+    // ⭐ SP-W2 — THE FLOOR IS PINNED EXACTLY AT ITS OWN VALUE, both sides. A threshold
+    // asserted only from above drifts silently the next time someone edits the constant:
+    // five aligned keys must NOT enter the roster and six MUST, at whatever
+    // ROSTER_MIN_KEYS currently says, so the pin tracks the constant instead of a
+    // hard-coded 6 that would quietly disagree with it.
+    const aligned = (n) => `const row = { ${
+      Array.from({ length: n }, (_, i) => `k${i}: src.k${i}`).join(', ')} };`;
+    expect(allowlistRebuilds(aligned(ROSTER_MIN_KEYS - 1)).length, 'one key below the floor')
+      .toBe(0);
+    expect(allowlistRebuilds(aligned(ROSTER_MIN_KEYS)).length, 'exactly at the floor').toBe(1);
     // ⚠ THE SPELLING THAT ESCAPED THE FIRST DETECTOR, and it is live in the tree:
     // `...cloneObject(raw)` carries every unnamed key through, so the literal is NOT an
     // allowlist — but a bare-identifier spread check convicts it anyway. worldState.js's
