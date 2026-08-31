@@ -7,7 +7,24 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **12**: schema 11's tagged numeric heuristic-leaf envelope
+ * `BASELINE_SCHEMA` is **13**: schema 12's tagged numeric heuristic-leaf envelope
+ * re-governed to a DEPENDENCY THAT LEFT, and it is the first rung whose delta is
+ * driven by neither the detector nor the inventory. `three@0.185.1` was a
+ * PRODUCTION dependency with zero importers under every module syntax — the
+ * portrait 3D view layer it once served is gone — so E-STRIP4-4 (chair order
+ * TE-MINT-1, ODQ §783.3/§788.2(d)/§821) drops it. `package.json` and
+ * `package-lock.json` are DELIBERATE detector sources here, because a dependency
+ * bump can move the parser the scan runs on, and the shrink-only `--write`
+ * refuses them by design. Nothing the scanner FINDS may move at such a rung, and
+ * nothing did: the reconciliation is 1,413 rows carried unchanged and zero
+ * new/decreased/gone/increased. The identity grammar, topology inventory,
+ * envelope law and the nine-identity bank are all schema 9's, untouched.
+ *
+ * `RETIRED_GENESIS_TIES_BASELINE_SCHEMA` is **12**: schema 13's predecessor,
+ * frozen. Never redefined, never deleted.
+ *
+ * `RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA` is **11**: schema 12's tagged
+ * numeric heuristic-leaf envelope
  * re-governed to a SUBJECT TREE that grew a new reader, which makes this rung a
  * third kind again. 9 and 10 were envelope re-reconciliations that declared
  * nothing; 11 bound a repaired DETECTOR; this one changes no detector SEMANTICS
@@ -24,9 +41,6 @@
  * nine DECLARED identities all remain unchanged — no mechanism is added and no
  * exemption is declared, because bank-by-rule tags a row from the existing
  * declaration rather than minting a new one.
- *
- * `RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA` is **11**: schema 12's
- * predecessor, frozen. Never redefined, never deleted.
  *
  * `RETIRED_PROSE_REGEN_BASELINE_SCHEMA` is **10**: schema 11's predecessor,
  * frozen. Never redefined, never deleted.
@@ -183,7 +197,14 @@ export const RETIRED_PROSE_REGEN_BASELINE_SCHEMA = 10;
  *  constant exists so a schema-11 PREDECESSOR is still validated as schema 11
  *  after the live number moves past it. */
 export const RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA = 11;
-export const BASELINE_SCHEMA = 12;
+/** The RETIRED genesis-ties definition — schema 13's predecessor. Same tagged
+ *  topology envelope, the same nine-identity bank and the SAME 1,413 identities;
+ *  schema 13 re-governs it to the dropped `three` production dependency and moves
+ *  no row at all. Never redefined, never deleted — a live baseline is validated
+ *  against BASELINE_SCHEMA, and this constant exists so a schema-12 PREDECESSOR is
+ *  still validated as schema 12 after the live number moves past it. */
+export const RETIRED_GENESIS_TIES_BASELINE_SCHEMA = 12;
+export const BASELINE_SCHEMA = 13;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -656,10 +677,22 @@ export function validateSchema11Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 11's tagged envelope grown by the three genesis rows.
+ *  Re-bound to its own LITERAL now that the authority has moved to 13, exactly as its
+ *  predecessors were: a retired validator that reads `BASELINE_SCHEMA` stops validating
+ *  the rung it is named after the moment the number moves. */
+export function validateSchema12Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema12Baseline(baseline) {
+export function validateSchema13Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

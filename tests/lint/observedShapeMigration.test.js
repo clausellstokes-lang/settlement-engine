@@ -13,6 +13,7 @@ import {
 } from '../../scripts/lib/observed-shape-governance.mjs';
 import {
   assertPredecessorCustody,
+  DEAD_DEPENDENCY_TARGET_SCHEMA,
   GENESIS_TIES_TARGET_SCHEMA,
   TREASURY_ADMISSION_TARGET_SCHEMA,
   BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
@@ -1151,7 +1152,7 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // with the live schema is what makes the bare CLI mean the current mint.
       expect(() => runMigration([
         `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`,
-      ])).toThrow(/predecessor baseline must be a schema-11 object/); // ODQ §819: the live rung is 12, so its predecessor is 11
+      ])).toThrow(/predecessor baseline must be a schema-12 object/); // TE-MINT-1: the live rung is 13, so its predecessor is 12
       // …and the RETIRED live target of the previous mint is still reachable by
       // name, still refusing the same schema-2 predecessor for its own reason.
       expect(() => runMigration([
@@ -1172,8 +1173,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // inverse pin does not red; it quietly stops testing anything, because the
       // number it names has become valid.
       expect(() => runMigration([
-        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=13',
-      ])).toThrow(/--target-schema must be 12/);
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=14',
+      ])).toThrow(/--target-schema must be 13/);
       expect(() => runMigration([`--predecessor=${predecessorPath}`, '--target-schema=3']))
         .toThrow(/usage:/);
     } finally {
@@ -1207,11 +1208,12 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(PROSE_REGEN_TARGET_SCHEMA).toBe(10);
     expect(TREASURY_ADMISSION_TARGET_SCHEMA).toBe(11);
     expect(GENESIS_TIES_TARGET_SCHEMA).toBe(12);
+    expect(DEAD_DEPENDENCY_TARGET_SCHEMA).toBe(13);
     // ⚠⚠ THE CHAIN IS SINGLE-STEP, PINNED AS AN EXACT TABLE. A skipped rung —
     // 2 → 6, which would re-bank a two-mints-old inventory as if four filters
     // had run — is not expressible, because no such pairing exists.
     expect(LEAF_MIGRATION_PREDECESSOR).toEqual({
-      4: 2, 5: 4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9, 11: 10, 12: 11,
+      4: 2, 5: 4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9, 11: 10, 12: 11, 13: 12,
     });
     // The kind is DERIVED from the table, so a target can never name a migration
     // it did not perform.
@@ -1245,13 +1247,13 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     // schema 10 became live. A probe left pointing at a number the table has
     // since adopted stops proving the predicate is total and starts proving
     // nothing at all, while still passing for the wrong reason.
-    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 13))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12;/);
+    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 14))
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13;/);
     // ⚠ AND OMITTING IT IS THE SAME REFUSAL, WHICH IS WHY THERE IS NO DEFAULT:
     // a defaulted target is the one input in this chain a caller could get wrong
     // silently, and it would decide which migration ran.
     expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12;/);
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13;/);
 
     // A6 positive arm: one valid schema-6 envelope can advance exactly one rung
     // to 7, retaining the numeric inventory alphabet and reconciliation ledger.

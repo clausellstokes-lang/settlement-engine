@@ -171,6 +171,25 @@ export const TREASURY_ADMISSION_TARGET_SCHEMA = 11;
  *  is declared: bank-by-rule tags a row from the EXISTING declaration, so the bank's
  *  nine declared identities are untouched and only the tagged ROW COUNT moves. */
 export const GENESIS_TIES_TARGET_SCHEMA = 12;
+/** The LIVE target: schema 12's tagged topology inventory re-governed to a DEPENDENCY
+ *  THAT LEFT — the first rung whose delta is driven by neither the detector nor the
+ *  inventory. E-STRIP4-4 (chair order TE-MINT-1, ODQ §783.3/§788.2(d)/§821) drops
+ *  `three@0.185.1`, a PRODUCTION dependency with zero importers under every module
+ *  syntax; the portrait 3D view layer it once served is gone, and
+ *  `tests/architecture/archViewWall.test.js` already asserts its total absence from
+ *  shipped source while deferring the package.json byte to "STRIP-6's sweep". This is
+ *  that sweep.
+ *
+ *  ⭐ WHY A RUNG AT ALL FOR A DEAD DEPENDENCY. `package.json` and `package-lock.json`
+ *  are DELIBERATE governed detector inputs — check-observed-shape-readers.mjs says why
+ *  in its own words, "a dependency bump can move the parser" — so the shrink-only
+ *  `--write` refuses them by design and only a migration can bind the new bytes.
+ *
+ *  ⛔ AND THE RECONCILIATION MUST BE EMPTY, which is this rung's whole claim. Removing
+ *  a package nothing imports cannot change what the scanner FINDS, so any moved row
+ *  would mean the drop was not inert and the mint must STOP rather than bank it.
+ *  Measured: predecessorSame 1413, new/decreased/gone/increased ALL ZERO. */
+export const DEAD_DEPENDENCY_TARGET_SCHEMA = 13;
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -292,6 +311,33 @@ export const GENESIS_TIES_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-12 → 13 detector delta — FIVE paths, in two groups that must not be
+ * confused with one another:
+ *   • package.json + package-lock.json — THE SUBJECT OF THIS RUNG. `three@0.185.1`
+ *     and its single lock record leave; the diff is 8 deletions and ZERO insertions,
+ *     with no registry-metadata churn. These two sit on the DETECTOR side by explicit
+ *     estate law (any package.json byte is a mint trigger) and by this instrument's own
+ *     classifier, so the lawful response is to name them in the governed delta and let
+ *     the review accept them — the 8→9 and 10→11 rungs each did exactly this.
+ *   • the three instrument files — the bump and retired-12 validator, this rung, and
+ *     the checker's live-validator binding. Bookkeeping, carried for the same reason
+ *     the 11→12 rung carried them, and no detector semantics move.
+ *
+ * ⛔ NOTHING ELSE MOVED, and that is verified rather than assumed: a recorded-vs-computed
+ * sweep over all eleven governed inputs at the schema-12 freeze reported exactly these
+ * two package files MOVED and the other nine SAME — including
+ * `tests/fixtures/spatialPackFixtures.js`, whose owed digest (§783.3) the schema-12
+ * freeze had already absorbed.
+ */
+export const DEAD_DEPENDENCY_SCANNER_DELTA_PATHS = Object.freeze([
+  'package-lock.json',
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -312,6 +358,8 @@ const TREASURY_ADMISSION_SCANNER_TRANSITION_POLICY =
   'schema-10-to-11-exact-scanner-transition-v1';
 const GENESIS_TIES_SCANNER_TRANSITION_POLICY =
   'schema-11-to-12-exact-scanner-transition-v1';
+const DEAD_DEPENDENCY_SCANNER_TRANSITION_POLICY =
+  'schema-12-to-13-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -342,6 +390,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [PROSE_REGEN_TARGET_SCHEMA]: EPOCH_DARK_CORPUS_TARGET_SCHEMA,
   [TREASURY_ADMISSION_TARGET_SCHEMA]: PROSE_REGEN_TARGET_SCHEMA,
   [GENESIS_TIES_TARGET_SCHEMA]: TREASURY_ADMISSION_TARGET_SCHEMA,
+  [DEAD_DEPENDENCY_TARGET_SCHEMA]: GENESIS_TIES_TARGET_SCHEMA,
 });
 
 /**
@@ -763,6 +812,16 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // artifacts (the two AI edge-shared bundles under `supabase/functions/_shared/`) are
     // not subject paths at all and cannot move this digest. The permission is carried
     // because the class is lawful, not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [DEAD_DEPENDENCY_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: DEAD_DEPENDENCY_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: DEAD_DEPENDENCY_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9. MEASURED at this mint: nothing moved. The
+    // subject tree is `src/**` and this rung touches only the two package files at the
+    // root, so the unscanned digest cannot move and the report's `unscannedMovement`
+    // is null. The permission is carried because the class is lawful, not exercised.
     reviewableUnscannedMovement: true,
   })],
 ]);
@@ -1805,13 +1864,14 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : GENESIS_TIES_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : DEAD_DEPENDENCY_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
     PROSE_REGEN_TARGET_SCHEMA, TREASURY_ADMISSION_TARGET_SCHEMA,
-    GENESIS_TIES_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${GENESIS_TIES_TARGET_SCHEMA} (live genesis-ties leaf),`
+    GENESIS_TIES_TARGET_SCHEMA, DEAD_DEPENDENCY_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${DEAD_DEPENDENCY_TARGET_SCHEMA} (live dead-dependency leaf),`
+      + ` ${GENESIS_TIES_TARGET_SCHEMA} (retired genesis-ties leaf),`
       + ` ${TREASURY_ADMISSION_TARGET_SCHEMA} (retired treasury-admission leaf),`
       + ` ${PROSE_REGEN_TARGET_SCHEMA} (retired prose-regen leaf),`
       + ` ${EPOCH_DARK_CORPUS_TARGET_SCHEMA} (retired epoch-dark leaf),`

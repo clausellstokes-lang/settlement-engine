@@ -15,6 +15,7 @@ import {
   RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
   RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
   RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
+  RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -29,6 +30,7 @@ import {
   validateSchema10Baseline,
   validateSchema11Baseline,
   validateSchema12Baseline,
+  validateSchema13Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -264,7 +266,14 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // express INVENTORY GROWTH and refuses it in those words. It admits three rows for
     // `src/domain/instantWorld/genesisDiplomacy.js`, one of them tagged BY RULE, and
     // declares NO new mechanism and NO new exemption.
-    expect(BASELINE_SCHEMA).toBe(12);
+    // ⭐ SCHEMA 13 (lane T5-CURE / TE-MINT-1, chair order ODQ §783.3/§788.2(d)/§821).
+    // Schema 12's tagged topology envelope re-governed to a DEPENDENCY THAT LEFT — the
+    // first rung driven by neither the detector nor the inventory. `three@0.185.1` had
+    // zero importers; package.json and package-lock.json are deliberate detector inputs
+    // ("a dependency bump can move the parser"), so only a migration can bind the new
+    // bytes. Its reconciliation is EMPTY by construction, and measured so.
+    expect(BASELINE_SCHEMA).toBe(13);
+    expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
     expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
     expect(RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA).toBe(9);
@@ -422,6 +431,14 @@ function validSchema10Baseline() {
 function validSchema11Baseline() {
   const baseline = validSchema7Baseline();
   baseline.schema = RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-12 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 and schema-11 fixtures above record. */
+function validSchema12Baseline() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_GENESIS_TIES_BASELINE_SCHEMA;
   return baseline;
 }
 
@@ -641,13 +658,15 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     const epochDark = validSchema9Baseline();
     const proseRegen = validSchema10Baseline();
     const treasuryAdmission = validSchema11Baseline();
+    const genesisTies = validSchema12Baseline();
     const live = validLiveBaseline();
     expect(validateSchema7Baseline(retired)).toBe(retired);
     expect(validateSchema8Baseline(baseline)).toBe(baseline);
     expect(validateSchema9Baseline(epochDark)).toBe(epochDark);
     expect(validateSchema10Baseline(proseRegen)).toBe(proseRegen);
     expect(validateSchema11Baseline(treasuryAdmission)).toBe(treasuryAdmission);
-    expect(validateSchema12Baseline(live)).toBe(live);
+    expect(validateSchema12Baseline(genesisTies)).toBe(genesisTies);
+    expect(validateSchema13Baseline(live)).toBe(live);
     expect(() => validateSchema7Baseline(baseline)).toThrow(/is not schema 7/);
     expect(() => validateSchema8Baseline(retired)).toThrow(/is not schema 8/);
     // ⚠ EVERY ADJACENT PAIR IS PINNED IN BOTH DIRECTIONS FOR ONE REASON: FOUR
@@ -670,6 +689,13 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     expect(() => validateSchema12Baseline(epochDark)).toThrow(/is not schema 12/);
     expect(() => validateSchema11Baseline(live)).toThrow(/is not schema 11/);
     expect(() => validateSchema12Baseline(treasuryAdmission)).toThrow(/is not schema 12/);
+    // …and the LIVE validator names 13. ⚠ THE 12/13 PAIR IS THE TIGHTEST YET: schema 13
+    // re-governs schema 12's envelope with NOT ONE row moved — the two baselines differ
+    // in the schema number and the recorded package digests and in nothing else — so the
+    // number is the ONLY thing keeping a stale freeze from validating as a current one.
+    expect(() => validateSchema13Baseline(epochDark)).toThrow(/is not schema 13/);
+    expect(() => validateSchema13Baseline(genesisTies)).toThrow(/is not schema 13/);
+    expect(() => validateSchema12Baseline(live)).toThrow(/is not schema 12/);
     expect(() => validateSchema9Baseline(live)).toThrow(/is not schema 9/);
     expect(() => validateSchema8Baseline(live)).toThrow(/is not schema 8/);
     expect(() => validateSchema7Baseline(live)).toThrow(/is not schema 7/);
