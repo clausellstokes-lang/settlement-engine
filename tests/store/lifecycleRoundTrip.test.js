@@ -490,6 +490,9 @@ function richWorldStateRaw() {
           // all until this train. It rides the fact block, so it is exactly the shape
           // that would ghost on a lifecycle path if the normalizer's allowlist forgot it.
           loserDied: true,
+          // W-MEM-P2: the governed WR-5 family that closed the war, carried as a TOKEN
+          // from the seam that minted it — never read back out of a rendered sentence.
+          seatTransitionFamily: 'war_dissolved_by_verdict',
         },
         victorId: 'ashford',
         territorialOutcomes: [{ settlementId: 'kelby', kind: 'occupied', occupierId: 'ashford', tick: 9 }],

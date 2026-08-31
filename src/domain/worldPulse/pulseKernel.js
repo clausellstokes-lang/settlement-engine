@@ -76,7 +76,7 @@ import { advanceUpswing } from './upswingKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
 import { applyLineageBirthsToGraph } from './lineageMemberBirth.js';
-import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
+import { evaluateSettlementLifecycle, settlementDiedAtTick } from './settlementLifecycleFirstClass.js';
 import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons, peaceReasonsFor } from './peaceReasons.js';
@@ -2814,8 +2814,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // to strip, so this site's residue is byte-neutral by construction rather than by care.
   // `diedAtOf` reads THIS tick's settlements rather than the pre-tick snapshot, so a
   // town that dies on the closing tick is seen on that tick; the staged record re-reads
-  // it through the grace window regardless, which is what makes the channel whole.
-  const nextConcludedWars = recordConcludedWars({ worldState: memoryState, resolvedDeployments: war.resolvedDeployments, appliedOutcomes: applied.autoApplied, newsEntries: wizardNews?.entries, tick: worldState.tick, rules: simulationRules, deferred: deferMajors, inCanon: (id) => !!postTimeSnapshot?.byId?.has?.(id), diedAtOf: (id) => settlementUpdates.find((u) => String(u.saveId) === id)?.settlement?.config?.lifecycleDiedAtTick, windDown: !simulationRules?.warLayerEnabled });
+  // it through the grace window regardless, which is what makes the channel whole. The
+  // stamp is read through `settlementDiedAtTick`, the accessor exported by the module
+  // that WRITES it — never by spelling the path here, which is the habit that left the
+  // war census asking settlements for a key nothing in the estate has ever written.
+  // `rulingEvidence` is the UNION of the two seams WR-5 facts are minted at — the apply
+  // pass now returns its array instead of spending it at the news boundary, and the
+  // verdict dissolution already had one here. Both, or the record learns three families
+  // out of four and calls that the whole story.
+  const nextConcludedWars = recordConcludedWars({ worldState: memoryState, resolvedDeployments: war.resolvedDeployments, appliedOutcomes: applied.autoApplied, newsEntries: wizardNews?.entries, tick: worldState.tick, rules: simulationRules, deferred: deferMajors, inCanon: (id) => !!postTimeSnapshot?.byId?.has?.(id), diedAtOf: (id) => settlementDiedAtTick(settlementUpdates.find((u) => String(u.saveId) === id)?.settlement), rulingEvidence: [...(applied.rulingEvidence || []), ...verdictDissolutions.evidence], windDown: !simulationRules?.warLayerEnabled });
   if (nextConcludedWars) memoryState = { ...memoryState, concludedWars: nextConcludedWars };
   // @pulse-stage: finalize_receipt
   const finalRegionalGraph = applyLineageBirthsToGraph(applied.regionalGraph, memberBirths, now);

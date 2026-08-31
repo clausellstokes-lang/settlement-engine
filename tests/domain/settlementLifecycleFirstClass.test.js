@@ -29,6 +29,7 @@ import {
   applySettlementLifecycleOutcomeToSettlement,
   remnantGradeOf,
   lifecycleStatusOf,
+  settlementDiedAtTick,
 } from '../../src/domain/worldPulse/settlementLifecycleFirstClass.js';
 import { collectRealizedEmigrationEvents } from '../../src/domain/worldPulse/migrationKernel.js';
 import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
@@ -479,6 +480,49 @@ describe('the death writer (scarcity + fates + geometry status)', () => {
 });
 
 // ── RESETTLEMENT ───────────────────────────────────────────────────────────────
+describe('settlementDiedAtTick — the death stamp, read through the module that writes it', () => {
+  // The accessor exists because a HAND-SPELLED PATH to this field is how its twin was
+  // lost: the war-convergence census asked a settlement for `died`, a key nothing in the
+  // estate has ever written, and sat there answering false for every war in every soak.
+  // One exported reader removes the habitat. These arms hold it to BEHAVIOUR IDENTITY
+  // with the inline read it absorbed, because the resettle fallow gate reads it.
+  it('admits a finite number unchanged, and nothing else', () => {
+    expect(settlementDiedAtTick({ config: { lifecycleDiedAtTick: 700 } })).toBe(700);
+    expect(settlementDiedAtTick({ config: { lifecycleDiedAtTick: 0 } })).toBe(0);
+    // The predicate is `typeof === 'number' && Number.isFinite` — exactly the one the
+    // inline `num(v, NaN)` used. A stricter accessor (coercing, flooring, refusing
+    // negatives) would have quietly changed which remnants may be reborn.
+    for (const junk of ['700', true, null, undefined, NaN, Infinity, -Infinity, {}, []]) {
+      expect(settlementDiedAtTick({ config: { lifecycleDiedAtTick: junk } })).toBeNull();
+    }
+    expect(settlementDiedAtTick({ config: { lifecycleDiedAtTick: -4 } })).toBe(-4);
+    expect(settlementDiedAtTick({ config: { lifecycleDiedAtTick: 12.5 } })).toBe(12.5);
+  });
+
+  it('answers null on every shape that carries no stamp at all', () => {
+    for (const shape of [null, undefined, {}, { config: null }, { config: {} }, 'not a settlement', []]) {
+      expect(settlementDiedAtTick(/** @type {never} */ (shape))).toBeNull();
+    }
+  });
+
+  it('reads what the DEATH WRITER really stamps — not a shape invented here', () => {
+    // The anti-vacuity arm, and the one that matters: the fixture is produced by the REAL
+    // writer, so a rename of the stamp breaks this test instead of leaving it green
+    // against a private spelling. That is precisely the failure mode the census had.
+    const dead = applySettlementLifecycleOutcomeToSettlement(thorp('a', { peakTier: 'city' }), {
+      id: 'outcome.death.a',
+      targetSaveId: 'a',
+      candidateType: 'settlement_terminal_death',
+      lifecyclePatch: { kind: 'terminal_death', saveId: 'a' },
+      metadata: { tick: 641 },
+    });
+    expect(lifecycleStatusOf(dead)).toBe('relic_ruin');
+    expect(settlementDiedAtTick(dead)).toBe(641);
+    // A LIVING settlement never carries one — the channel is a fact, not a default.
+    expect(settlementDiedAtTick(thorp('b'))).toBeNull();
+  });
+});
+
 describe('resettlement (the privileged birth site)', () => {
   it('a remnant past its fallow emits a conserved candidate: deltas sum to EXACTLY zero', () => {
     const snapshot = makeSnapshot({

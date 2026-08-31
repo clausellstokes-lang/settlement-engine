@@ -67,6 +67,10 @@ import { treatyLedgerOf } from './treatyEnforcement.js';
 import { joinAnchorOf } from './warCoalitionLedger.js';
 import { remainingStrengthBandKey } from '../display/armyStrength.js';
 import { warExhaustionBandKey } from '../display/warStatus.js';
+// The register is IMPORTED rather than re-spelled. A local copy would be a second
+// vocabulary for one quantity — the exact fork this record's own design refuses — and
+// the classifier that reads the field is where the register is declared.
+import { RULER_CHANGE_ENDING_FAMILIES } from '../certification/warEndingClassifier.js';
 import {
   NOTABLE_ENGAGEMENT_CAP,
   isKnownCloseRoad,
@@ -142,6 +146,39 @@ function principalDied(pair, openedTick, diedAtOf) {
     const diedAt = wholeTick(diedAtOf(id));
     return diedAt != null && diedAt >= openedTick;
   });
+}
+
+/**
+ * THE SEAT-TRANSITION CHANNEL, which had a reader and no producer either.
+ *
+ * WR-5's composers already mint a typed `kind` for all four governed families. Until
+ * this car every one of them was spent on the news projection and dropped at that
+ * boundary, so `fact.seatTransitionFamily` — the sole evidence for the `ruler_change`
+ * ending — was never written by anything, not even the one family whose facts already
+ * reached the kernel. Reading the rendered sentence back out is what the record's own
+ * no-prose law forbids, so the kind is carried as a token from the seam that mints it.
+ *
+ * ⭐ THE MATCH IS BY ADDRESS, NEVER BY PROSE. An evidence row carries `settlementId` and
+ * `counterpartId`; a row belongs to this war when those two ARE its origin pair, in
+ * either orientation, because the court that changed hands can sit on either side.
+ * `successor_escalates_war` is the same machinery producing the OPPOSITE fact — a court
+ * that changed hands and widened the war — and it is refused by the register itself
+ * rather than by a substring test, which is why the register is imported and not retyped.
+ *
+ * @param {Array<Record<string, unknown>>} evidence @param {string[]} pair
+ * @returns {string}
+ */
+function seatTransitionFor(evidence, pair) {
+  if (pair.length !== 2) return '';
+  for (const raw of evidence) {
+    const row = recordOf(raw);
+    const kind = text(row.kind);
+    if (!RULER_CHANGE_ENDING_FAMILIES.includes(kind)) continue;
+    const here = text(row.settlementId);
+    const there = text(row.counterpartId);
+    if ((here === pair[0] && there === pair[1]) || (here === pair[1] && there === pair[0])) return kind;
+  }
+  return '';
 }
 
 /**
@@ -280,12 +317,13 @@ function engagementsFor(entries, pair) {
  * @param {boolean} args.deferred true on a paused tick — the writer stands down
  * @param {(id: string) => boolean} [args.inCanon] canon membership of the tick snapshot
  * @param {(id: string) => unknown} [args.diedAtOf] the engine's settlement death stamp
+ * @param {Array<Record<string, unknown>>} [args.rulingEvidence] this tick's WR-5 facts
  * @param {boolean} [args.windDown] the war layer resolved everything this tick
  * @returns {Record<string, unknown>|null}
  */
 export function recordConcludedWars({
-  worldState, resolvedDeployments, appliedOutcomes, newsEntries,
-  tick, rules, deferred, inCanon = () => true, diedAtOf = () => null, windDown = false,
+  worldState, resolvedDeployments, appliedOutcomes, newsEntries, tick, rules, deferred,
+  inCanon = () => true, diedAtOf = () => null, rulingEvidence = [], windDown = false,
 }) {
   if (!warMemoryActive(rules)) return null;
   // A paused tick parks every major and knows no verdict. Standing down here is what
@@ -302,6 +340,7 @@ export function recordConcludedWars({
   const exhaustion = recordOf(state.warExhaustion);
   const outcomes = (Array.isArray(appliedOutcomes) ? appliedOutcomes : []).map(recordOf);
   const feed = (Array.isArray(newsEntries) ? newsEntries : []).map(recordOf);
+  const rulings = Array.isArray(rulingEvidence) ? rulingEvidence : [];
   // ⚠ THE TREATY LEDGER IS NOT A TOP-LEVEL KEY — it is a SPATIAL ledger, reached only
   // through its one entry point. Reading `worldState.treatyLedger` would have compiled,
   // typechecked and silently answered "no treaty" for every war ever recorded. And the
@@ -375,6 +414,7 @@ export function recordConcludedWars({
     const victor = terminal.length
       ? (terminal[0].targetSaveId === targetId ? attackerId : targetId)
       : road === 'siege_abandoned' ? targetId : text(existing.victorId);
+    const seatFamily = seatTransitionFor(rulings, address.pair);
 
     next[warId] = normalizeConcludedWarRecord({
       ...existing,
@@ -403,6 +443,7 @@ export function recordConcludedWars({
           ...terminal,
         ],
         ...(principalDied(address.pair, address.openedTick, diedAtOf) ? { loserDied: true } : {}),
+        ...(seatFamily ? { seatTransitionFamily: seatFamily } : {}),
         ...(treatyStandsFor(address.pair) ? { treatyWritten: true } : {}),
       },
       ...(victor ? { victorId: victor } : {}),
@@ -444,18 +485,30 @@ export function recordConcludedWars({
     // goes back — so a resettlement, the one path that deletes the death stamp and only
     // after a fallow far longer than this window, cannot unmake a death the war saw.
     const fact = recordOf(record.fact);
+    const pair = pairOf(record);
     const died = fact.loserDied === true
-      || principalDied(pairOf(record), wholeTick(record.openedTick) ?? 0, diedAtOf);
+      || principalDied(pair, wholeTick(record.openedTick) ?? 0, diedAtOf);
+    // The court can change hands AFTER the front is recalled — the succession that ends
+    // a war and the war's last carrier row are different ticks — so this channel needs
+    // the window as much as the treaty does.
+    const family = text(fact.seatTransitionFamily) || seatTransitionFor(rulings, pair);
     const closedAt = wholeTick(record.concludedTick) ?? tick;
     const holds = live.has(key) || tick - closedAt < PEACE_TERMS_TUNING.PEACE_MINT_WINDOW;
+    const learned = died !== (fact.loserDied === true) || family !== text(fact.seatTransitionFamily);
     // Nothing learned and nothing ready ⇒ no ledger churn, which is what keeps a quiet
     // tick free of bytes it did not earn.
-    if (holds && died === (fact.loserDied === true)) continue;
+    if (holds && !learned) continue;
     // Sealed with what it has. An absence stays typed and absent — a channel the
     // estate never produced is never invented to fill a field.
     next[key] = {
       ...record,
-      ...(died ? { fact: { ...fact, loserDied: true } } : {}),
+      ...(learned
+        ? { fact: {
+          ...fact,
+          ...(died ? { loserDied: true } : {}),
+          ...(family ? { seatTransitionFamily: family } : {}),
+        } }
+        : {}),
       ...(holds ? {} : { sealed: true }),
     };
     changed = true;
