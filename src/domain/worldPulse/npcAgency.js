@@ -17,6 +17,7 @@ import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
 // H17: per-advance indices replacing evaluateNpcRules' O(states × (settlements + edges)) rescan.
 import { settlementByIdIndex, edgeAdjacencyIndex } from './tickIndices.js';
 import { NPC_GOAL_NEWS, pickLine } from './eventProse.js';
+import { branchedGoalsFor } from './npcGoalBranches.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
   ruler: {
@@ -385,53 +386,21 @@ function contextForNpc(snapshot, state) {
 }
 
 /**
- * @param {any} previousTier
- * @param {any} nextTier
- */
-function tierDirection(previousTier, nextTier) {
-  const order = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-  const prev = order.indexOf(previousTier);
-  const next = order.indexOf(nextTier);
-  if (prev < 0 || next < 0 || prev === next) return null;
-  return next > prev ? 'promotion' : 'demotion';
-}
-
-/**
+ * ⭐ W-LIVES L5 (F15) — THE RULE TREE MOVED OUT, AND IT IS A TABLE NOW.
+ *
+ * Eleven nested `if`s lived here and their behaviour was FIRST MATCH WINS. F15
+ * priced the conversion to a weighted branch table as this car's sub-task, and the
+ * table's weights make the old behaviour a theorem rather than a test result: with
+ * no character tilt supplied — which is every caller in this file — the highest
+ * priority eligible rule has the strictly highest score, always.
+ *
+ * The tree left with its own `tierDirection`, which had no other reader here. Its
+ * home is now `src/domain/worldPulse/npcGoalBranches.js`.
  * @param {any} state
  * @param {any} context
  */
 function branchedGoals(state, context) {
-  const dir = tierDirection(state.contextTier, context.tier);
-  if (context.relationship === 'vassal') {
-    if (['dissident', 'military', 'civic'].includes(state.roleArchetype)) {
-      return { shortGoal: 'organize_autonomy', longGoal: 'break_vassalage' };
-    }
-    return { shortGoal: 'survive_tribute', longGoal: 'bind_external_patron' };
-  }
-  if (context.relationship === 'overlord') {
-    return { shortGoal: 'secure_tribute', longGoal: 'expand_influence' };
-  }
-  if (context.crisis) {
-    if (['healer', 'religious', 'labor_resource'].includes(state.roleArchetype)) {
-      return { shortGoal: 'protect_followers', longGoal: 'restore_order' };
-    }
-    if (state.corruption) return { shortGoal: 'exploit_desperation', longGoal: 'expand_influence' };
-    return { shortGoal: 'survive_crisis', longGoal: 'restore_order' };
-  }
-  if (dir === 'promotion') {
-    if (state.roleArchetype === 'merchant') return { shortGoal: 'join_guild', longGoal: 'expand_trade_house' };
-    if (state.roleArchetype === 'military') return { shortGoal: 'secure_new_garrison', longGoal: 'professionalize_guard' };
-    if (['ruler', 'civic', 'heir'].includes(state.roleArchetype)) return { shortGoal: 'formalize_new_charter', longGoal: 'secure_office' };
-    return { shortGoal: 'profit_from_change', longGoal: 'expand_influence' };
-  }
-  if (dir === 'demotion') {
-    if (state.corruption) return { shortGoal: 'punish_rivals', longGoal: 'exploit_desperation' };
-    return { shortGoal: 'survive_crisis', longGoal: 'protect_followers' };
-  }
-  if (context.relationship === 'hostile' || context.relationship === 'cold_war') {
-    return { shortGoal: 'mobilize_defenses', longGoal: 'settle_rivalry' };
-  }
-  return null;
+  return branchedGoalsFor({ state, context });
 }
 
 /** @param {any} dotRank */
