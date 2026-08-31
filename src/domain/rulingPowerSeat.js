@@ -113,6 +113,15 @@ export const SEAT_TUNING = Object.freeze({
   TREATY_ONLY_CEILING: 0.44,
   /** Per-tie contribution of a subordinating treaty term, before compliance decay. */
   TREATY_TIE_STEP: 0.15,
+  /**
+   * The FIFTH signed additive term's magnitude in the coup pHold clamp (D4's
+   * SUCCESS moment). Set to the estate's POLITICAL-READ tier (`authorityAdj` and
+   * `economicAdj` are both ±0.125) and DELIBERATELY BELOW the physical tier
+   * (`interventionAdj` and `warSentimentAdj` are both ±0.22): a foreign seat is
+   * standing and leverage, not an army in the square. The army's term already
+   * exists beside this one and must stay the louder of the two.
+   */
+  COUP_PHOLD_WEIGHT: 0.125,
 });
 
 /**
@@ -531,6 +540,48 @@ export function foreignSeatOf(worldState, snapshot, settlementId) {
   }
 
   return null;
+}
+
+/**
+ * `foreignSeatCoupAdj` — D4's SUCCESS moment: the FIFTH signed additive term in
+ * the coup verdict's `pHold` clamp.
+ *
+ * THE RULING, AND IT IS ONE DERIVATION FOR BOTH REGIMES (§711.6): **a foreign seat
+ * defends the government it deals with.** An occupier crowned the sitting row
+ * (conquest relabels the old governing faction rather than seating a separate one),
+ * and an overlord's compact is written with that same sitting row — so a coup
+ * threatens the arrangement in either regime, and the seat's weight lands on the
+ * incumbent's side. The volume's "the seat backs OR RESISTS a challenger" is
+ * satisfied by exactly this: resisting a challenger IS backing the incumbent.
+ *
+ * ⛔ THE CASE THIS DELIBERATELY DOES NOT MODEL is the seat that DISCARDS its
+ * client. That is a typed STAKE in D11's intervention market (SEAT-8), where a
+ * court weighs what it stands to gain from the chaos through its own believed
+ * picture — not a sign a scalar here should be inventing. Choosing a signed
+ * alignment here would have been a second, cheaper resolver for a quantity the
+ * design already assigns elsewhere. JUDGMENT — vetoable.
+ *
+ * ⚠ WHERE IT ACTUALLY REACHES, STATED, because the obvious reading is wrong.
+ * SEAT-1's own cure makes `coupSpawnGate` REFUSE a coup birth in a ledger-occupied
+ * town when this flag is lit, so under occupation the stressor-born verdict is
+ * mostly unreachable and this term's live population is VASSALAGE. The two layers
+ * are consistent — force at spearpoint suppresses the plot before it forms, and
+ * where it does form the seat leans on it — but a reader who assumed "this is the
+ * occupation term" would mis-tune it.
+ *
+ * 0 when the flag is dark, when no seat resolves, or when the seat's weight is 0 ⇒
+ * the verdict is byte-identical (the `interventionAdjFor` idiom verbatim).
+ *
+ * @param {unknown} worldState @param {unknown} snapshot @param {string} settlementId
+ * @returns {number} signed, bounded by `SEAT_TUNING.COUP_PHOLD_WEIGHT`
+ */
+export function foreignSeatCoupAdj(worldState, snapshot, settlementId) {
+  // ⛔ The positive `=== true` spelling is the engine-gated-key census's only
+  // discoverable form; a negative-polarity early return is invisible to it.
+  if (asObject(asObject(worldState).simulationRules).foreignSeatEnabled !== true) return 0;
+  const seat = foreignSeatOf(worldState, snapshot, settlementId);
+  if (!seat) return 0;
+  return round4(SEAT_TUNING.COUP_PHOLD_WEIGHT * clamp01(seat.weight01));
 }
 
 /**

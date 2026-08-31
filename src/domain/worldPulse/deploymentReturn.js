@@ -33,6 +33,7 @@
  */
 
 import { resolveCoupVerdict } from '../rulingPowerCoup.js';
+import { foreignSeatCoupAdj } from '../rulingPowerSeat.js';
 import {
   relationshipKeyFromEdge,
   normalizeRelationshipEdge,
@@ -535,11 +536,24 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
       // Strength to spare → the legitimacy coup verdict, tilted by the army's strength
       // (a stronger returning host topples a weak seat more readily). The strength tilt
       // feeds the verdict severity so a near-full host coups decisively.
+      // W-SEAT D4. ⚠ THIS PATH IS VASSALAGE-ONLY BY CONSTRUCTION and the reason is worth
+      // stating: the `isOccupied(snapshot, homeId)` branch above returns first, so a home
+      // held at spearpoint routes to liberation-or-failed-rebellion and NEVER reaches this
+      // verdict. What can reach it is a returning host in a town whose overlord holds a
+      // compact rather than a garrison — exactly the case the seat's scalar weight models.
+      // 0 when the flag is dark or no seat resolves => byte-identical.
+      //
+      // ⚠ AND THE COMPOSITION HERE IS DELIBERATELY THINNER THAN coup.js's: this site
+      // supplies NONE of warSentimentAdj / interventionAdj / economicAdj, which is a
+      // pre-existing choice this car does not revisit. The seat term joins because it is
+      // derivable from exactly the arguments this function already takes; the other three
+      // need per-tick reads it deliberately does not perform. Recorded, not smuggled.
       const verdict = resolveCoupVerdict({
         settlement: item.settlement,
         rng: recordRng.fork('coup'),
         severity: clamp(0.45, 0.85, 0.4 + ratio * 0.5),
         rulingAuthorityScore: item.causal?.scores?.ruling_authority ?? null,
+        foreignSeatAdj: foreignSeatCoupAdj(worldState, snapshot, homeId),
       });
       if (verdict.holds || !verdict.winner) continue; // order held — generic clear (no residual)
       const winner = /** @type {{ name: string, archetype: string }} */ (verdict.winner);

@@ -139,12 +139,13 @@ export function coupContenders(settlement) {
  * @param {number} [args.warSentimentAdj]  P2 flag: signed shift to the incumbent hold-chance from war sentiment (0 = off)
  * @param {number} [args.interventionAdj]  W-CONVERGENCE flag: signed shift to the incumbent hold-chance from surviving foreign interveners — +raises for an incumbent-backer, −lowers for a challenger-backer (0 = off ⇒ byte-identical)
  * @param {number} [args.economicAdj]  coherence-13 flag (economicCoupReadEnabled): signed shift to the incumbent hold-chance from the settlement's economic capacity — a prosperous seat holds, a hollowed treasury falls; the caller supplies 0 when the flag is dark ⇒ byte-identical (the warSentimentAdj precedent)
+ * @param {number} [args.foreignSeatAdj]  W-SEAT D4 (foreignSeatEnabled): signed shift from the occupier or overlord who looms over this court — a foreign seat DEFENDS the government it deals with, so the term is positive by construction; 0 when the flag is dark or no seat resolves ⇒ byte-identical
  * @returns {{ holds:boolean, pHold:number, roll:number,
  *            winner:{name:string,archetype:string}|null,
  *            challengers:Array<{name:string, archetype:string, power:number, weight:number}>,
  *            incumbent:Object, reason:string }}
  */
-export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0, interventionAdj = 0, economicAdj = 0 }) {
+export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0, interventionAdj = 0, economicAdj = 0, foreignSeatAdj = 0 }) {
   const { challengers, incumbent } = coupContenders(settlement);
   if (!challengers.length) {
     return {
@@ -173,7 +174,21 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     // economicAdj (coherence-13): 0 when economicCoupReadEnabled is dark ⇒ byte-identical.
     // A prosperous seat (high economic_capacity) holds; a hollowed treasury falls. Same ±0.125
     // magnitude as authorityAdj; the caller supplies the signed value, the clamp bounds the sum.
-    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0) + (Number(interventionAdj) || 0) + (Number(economicAdj) || 0)));
+    // foreignSeatAdj (W-SEAT D4): 0 when foreignSeatEnabled is dark ⇒ byte-identical. The
+    // occupier or overlord defends the government it deals with, so this term is positive by
+    // construction; it is sized at the POLITICAL tier (±0.125) and never at the physical one.
+    //
+    // ⚠⚠ THE ADJ BUDGET, DECLARED — F3 named this and it is now real. FIVE signed terms
+    // compose here (authority ±0.125 · warSentiment ±0.22 · intervention ±0.22 · economic
+    // ±0.125 · foreignSeat +0.125) and SEAT-7's forceRatioAdj is chartered as a SIXTH.
+    // Worst-case they sum to ±0.815 against a clamp of [0.1, 0.9] over a base of
+    // `share × severityDrag`, which lives in roughly [0, 1.15]. The risk is NOT overflow —
+    // the clamp bounds it — it is SATURATION: enough adjs pointing one way pin pHold to a
+    // clamp edge and `share`, the thing the contest is actually about, stops mattering.
+    // The budget is asserted rather than hoped for at
+    // tests/domain/foreignSeatCoupAdj.test.js, and the composition is a declared row on the
+    // tuning walking sheet. ⛔ SEAT-2 → SEAT-7 are SERIAL on this file for that reason.
+    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0) + (Number(interventionAdj) || 0) + (Number(economicAdj) || 0) + (Number(foreignSeatAdj) || 0)));
   }
 
   const roll = rng.random();

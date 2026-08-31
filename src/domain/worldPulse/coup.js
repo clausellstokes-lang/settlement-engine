@@ -34,6 +34,7 @@ import { computeWarSentiment } from './disposition.js';
 // W-CONVERGENCE — a surviving foreign intervener tilts the verdict (interventionAdj).
 // 0 when the intervention layer is dark ⇒ byte-identical (the warSentimentAdj precedent).
 import { interventionAdjFor } from './convergence.js';
+import { foreignSeatCoupAdj } from '../rulingPowerSeat.js';
 // M10a — a coup is an ACTOR-INITIATED campaign-altering major; its applyMode routes
 // through the shared authority policy so the seat-change joins the approval queue
 // under the forcing modes AND under routine-with-major-approval (byte-identical
@@ -125,6 +126,13 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
     const economicAdj = (rules?.economicCoupReadEnabled === true && Number.isFinite(economicCapacityScore))
       ? (Number(economicCapacityScore) - 50) / 400
       : 0;
+    // W-SEAT D4 (foreignSeatEnabled, a VIRTUAL flag): the occupier or overlord who looms
+    // over this court defends the government it deals with. 0 when the flag is dark or no
+    // seat resolves => byte-identical (the interventionAdj precedent). ⚠ SEAT-1's own cure
+    // makes coupSpawnGate REFUSE a birth in a ledger-occupied town when this flag is lit,
+    // so this term's live population is VASSALAGE rather than occupation — consistent (force
+    // at spearpoint suppresses the plot before it forms) but not the obvious reading.
+    const foreignSeatAdj = foreignSeatCoupAdj(worldState, snapshot, saveId);
     const verdict = /** @type {any} */ (resolveCoupVerdict({
       settlement: entry.settlement,
       rng,
@@ -133,6 +141,7 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       warSentimentAdj,
       interventionAdj,
       economicAdj,
+      foreignSeatAdj,
     }));
     const settlementName = entry.name || entry.settlement?.name || saveId;
     const incumbentName = verdict.incumbent?.name || 'the ruling power';
