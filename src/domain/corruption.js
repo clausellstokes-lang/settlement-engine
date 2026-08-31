@@ -558,6 +558,19 @@ export function guildEffectiveSecurity(security, strength) {
 // cause. The dead symbol is deliberately NOT spelled here: the leaf's suite scans src/ for it
 // by name, so writing it in a comment is how it gets copied back.
 // The class is closed: FOUR consumers, ONE ladder, and the leaf's suite keeps it that way.
+//
+// ⚠⚠ THE FLIP REACHES FURTHER THAN THE GOLDENS IT WAS PRICED AGAINST, AND THAT IS DECLARED
+// RATHER THAN DISCOVERED LATER. §809 priced this as 91 of 525 generator-golden rows, which is
+// the GENERATION-TIME half (`corruptionPass`). But this climate is also read every tick by
+// `worldPulse/npcAgency` (spawn / onset / exposure), `worldPulse/factionCapture` (advance /
+// recover) and `undercity/{colonization,sewerDerivation}` — so wherever a settlement's label
+// is one the two ladders disagreed on, its LIVED-CAMPAIGN corruption rates moved too.
+// MEASURED, on the R3 integration fixture (a crime-free `Poor` town under an evil patron):
+// onset hazard 0.0168 → 0.0126, a 25% relative drop, which moved the first corrupt NPC from
+// tick ~9 to tick ~33. No golden covers that path, which is exactly why it is written here.
+// The direction is coherent — the canonical ladder scores Poor/Moderate/Comfortable HIGHER
+// and Struggling/Wealthy LOWER, and prosperity is a counter-force to corruption throughout
+// this file — so the shift makes poor-but-not-destitute settlements modestly cleaner.
 
 /**
  * The ONE criminal-organization detector (tag/name backfill OR criminal
