@@ -32,37 +32,41 @@
  *      (the same bag that carries `_seed`), so a save, a load, a same-seed
  *      regen and an undo all replay the law the world was BORN under. The
  *      only way a world runs v2 is to have been created under v2.
- *   4. THE DIAL IS ONE LINE. `NEW_SETTLEMENT_DENSITY_LAW_VERSION` is the sole
- *      place a new world's law is chosen; flipping it is the owner's tuning-
- *      signature act (car D4), and reverting it is the same one line.
+ *   4. THE DIAL HAS ONE SOURCE. `NEW_SETTLEMENT_DENSITY_LAW_VERSION` is the sole
+ *      place a new world's law is chosen, and car D4 gave that choice a single
+ *      home to be MADE in: it is derived from `densityBands.REGISTER_VII_SIGNATURE`
+ *      and from nothing else, so the owner's tuning signature — the numbers AND
+ *      the go-live — is one file's diff. Nothing here is edited to sign or to
+ *      revert.
  *
  * ⛔ THE DIAL IS AT 1 AND THAT IS THE RULING, NOT AN OMISSION. Register VII's
  * ladder values are DRAFTS until the owner's pen lands at the tuning pass
  * (tuning-is-last). Minting new worlds under unsigned numbers would ship draft
- * distributions into real settlements, which §810 R5 forbids. The machinery is
- * complete and exercised — the distribution-shape fixtures drive v2 explicitly.
+ * distributions into real settlements, which §810 R5 forbids — and since D4 that
+ * refusal is STRUCTURAL: the signature's `live` word cannot light the law while its
+ * `signed` word is false. The machinery is complete and exercised — the
+ * distribution-shape fixtures drive v2 explicitly.
  *
- * ⛔⛔ THE FLIP IS NOT YET ONE LINE, AND THE MISSING PIECE IS NAMED HERE RATHER
- * THAN DISCOVERED LATER. `newSettlementDensityLaw()` has NO CALLER: this car
- * deliberately did not wire it into the store, because the store's generate
- * action is BOTH a birth and a regeneration (`settlementSlice.js`'s
- * `generateSettlementPipeline(fullConfig, …)` is reached by each), and
- * `fullConfig` for a regeneration is the existing world's own config. Minting
- * there unconditionally — or even non-clobbering, since a pre-law world's
- * config is markerless — would stamp the new law onto worlds that already
- * exist the first time they were regenerated after the flip. That is precisely
- * the PROMISE breach this gate exists to prevent, and it is why
- * `layoutLawVersion` mints at the SAVE chokepoints (three of them, each
- * demonstrably a create) rather than at generation.
- *
- * ⇒ OWED BEFORE THE FLIP: a create-boundary car that establishes which store
- * path is a BIRTH and mints there. Until it lands, the dial is flip-ready but
- * unreachable from the product, and a v2 world can only be produced by passing
- * `_densityLawVersion: 2` in a config explicitly (which is how every fixture in
- * `tests/generators/densityLaw.test.js` drives it).
+ * ⭐ THE FLIP IS NOW ONE LINE, AND THE BLOCKER THIS FILE USED TO NAME IS
+ * DISCHARGED. D1 recorded here that `newSettlementDensityLaw()` had NO CALLER,
+ * because the store's generate action looked like both a birth and a regeneration
+ * and minting there would have stamped the new law onto worlds that already exist —
+ * the PROMISE breach this gate exists to prevent. §822 chartered the cure and D2
+ * built it: `densityCreateBoundary.js` classifies every module that can reach the
+ * settlement pipeline as BIRTH / DERIVED / PREVIEW, `birthConfig` is the one mint,
+ * and the two BIRTH callers (`store/settlementSlice.js`,
+ * `lib/instantWorld/composeInstantWorld.js`) both spread it today.
+ * `tests/lint/densityCreateBoundary.walker.test.js` holds that manifest to the tree,
+ * so a new pipeline reacher cannot get its class wrong silently. D1's own premise
+ * was OVERTURNED on executed evidence in the same car: `state.config` is the wizard's
+ * FORM state and is never hydrated from a save, so the store's generate action is an
+ * unambiguous birth. The correction is kept rather than deleted because the reasoning
+ * that looked right is the reasoning a future reader will re-derive.
  *
  * Pure. No RNG, no store, no React.
  */
+
+import { REGISTER_VII_SIGNATURE } from './densityBands.js';
 
 /** The density-law versions this build can generate under. v1 is the DORMANT
  *  default (absent ⇒ v1 ⇒ byte-identical to every pre-law world and golden);
@@ -76,12 +80,16 @@ export const DEFAULT_DENSITY_LAW_VERSION = 1;
 /** The version Register VII's ladder rolls under. */
 export const REGISTER_VII_DENSITY_LAW_VERSION = 2;
 
-/** ⭐ THE ONE DIAL — the density law a NEWLY-created world mints under. Held at
- *  the dormant default until the owner signs Register VII's values at the
- *  tuning pass; flipping it to REGISTER_VII_DENSITY_LAW_VERSION is that pass's
- *  one-line act, and reverting is the same one line. EXISTING worlds are
- *  untouched either way — they never pass through create again. */
-export const NEW_SETTLEMENT_DENSITY_LAW_VERSION = DEFAULT_DENSITY_LAW_VERSION;
+/** ⭐ THE ONE DIAL — the density law a NEWLY-created world mints under. It is
+ *  DERIVED, never edited: `densityBands.REGISTER_VII_SIGNATURE` is where the owner
+ *  signs the values and lights the law, and this reads that pair so the whole tuning
+ *  act stays one file's diff (car D4). Both words must be true — §810 R5's "never
+ *  mint under unsigned numbers", made structural. EXISTING worlds are untouched
+ *  either way; they never pass through create again. */
+export const NEW_SETTLEMENT_DENSITY_LAW_VERSION =
+  REGISTER_VII_SIGNATURE.signed && REGISTER_VII_SIGNATURE.live
+    ? REGISTER_VII_DENSITY_LAW_VERSION
+    : DEFAULT_DENSITY_LAW_VERSION;
 
 /** The config key the law rides on. Underscore-prefixed like `_seed`: a
  *  resolved generation input, carried on the persisted `settlement.config`. */
