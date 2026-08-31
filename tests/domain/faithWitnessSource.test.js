@@ -117,8 +117,10 @@ describe('RECONCILE PINS — a mirror cannot outlive its source silently', () =>
 describe('THE CADENCE GATE — F9 as amended, satisfied by arithmetic', () => {
   const devoutPantheon = () => state([member({ axes: 'MERCY:virtue:defining' })]);
 
-  test.each([0, 1, 7, 12])('%i ticks of dwell teaches NOTHING — under one whole season', (dwelt) => {
-    expect(emit(devoutPantheon(), { dweltTicks: dwelt })).toEqual([]);
+  test('under one whole season teaches NOTHING, at every sub-cadence dwell', () => {
+    for (let dwelt = 0; dwelt < AMBIENT_CADENCE_TICKS; dwelt += 1) {
+      expect(emit(devoutPantheon(), { dweltTicks: dwelt }), `${dwelt} ticks`).toEqual([]);
+    }
   });
 
   test('exactly one season teaches once, with a span of exactly one cadence', () => {

@@ -123,12 +123,18 @@ describe('FENCE 2 — the purity pin: no clock, no rng, no global state', () => 
     src: readFileSync(join(ROOT, 'src/domain', member), 'utf8'),
   }));
 
-  test.each(SOURCES)('$member reads no wall-clock and no rng', ({ src }) => {
-    // Comment-stripped so a prose mention of Math.random cannot red this.
-    const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|\s)\/\/[^\n]*/g, '$1');
-    expect(code).not.toMatch(/Math\.random/);
-    expect(code).not.toMatch(/Date\.now|new Date\b/);
-    expect(code).not.toMatch(/performance\.now/);
+  // A plain loop rather than `test.each(SOURCES)`: the lighting census parks a file
+  // whose `each` table is a named binding, and a parked fence is one the census can
+  // no longer prove runs — which is precisely the failure this fence guards against.
+  test('neither leaf reads a wall-clock or an rng', () => {
+    expect(SOURCES.length, 'the source list is empty — this arm is scanning nothing').toBe(2);
+    for (const { member, src } of SOURCES) {
+      // Comment-stripped so a prose mention of Math.random cannot red this.
+      const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|\s)\/\/[^\n]*/g, '$1');
+      expect(code, `${member}: Math.random`).not.toMatch(/Math\.random/);
+      expect(code, `${member}: wall clock`).not.toMatch(/Date\.now|new Date\b/);
+      expect(code, `${member}: performance clock`).not.toMatch(/performance\.now/);
+    }
   });
 
   test('the same inputs give the same reading, every time', () => {
