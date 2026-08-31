@@ -434,7 +434,20 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
     //
     // Weakening it to "characterDrift may have importers" would have been the easy
     // edit and the wrong one: the closure is what the darkness claim actually is.
-    const FAMILY = ['characterDrift.js', 'livedExperienceCatalog.js', 'livedExperienceFunnel.js'];
+    //
+    // AMENDED AGAIN BY CAR L4, and again by GROWING the family rather than
+    // loosening the rule. The source adapters and the reputation read are the two
+    // new members: each legitimately names the family, and each is itself imported
+    // by nobody. The claim is still that there is no path INTO the family from
+    // production — only the family's own membership moved, and every member is
+    // asserted present below so the closure cannot pass over a set of typos.
+    const FAMILY = [
+      'characterDrift.js',
+      'knownCharacter.js',
+      'livedExperienceCatalog.js',
+      'livedExperienceFunnel.js',
+      'livedExperienceSources.js',
+    ];
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
     expect(files.length).toBeGreaterThan(100);
     const outside = files.filter((file) => !FAMILY.some((member) => file.endsWith(member)));
@@ -448,6 +461,13 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
     // and its own dormancy proof.
     expect(outside
       .filter((file) => /livedExperience/.test(readFileSync(file, 'utf8')))
+      .map((file) => relative(REPO_ROOT, file))).toEqual([]);
+    // STEP 3, added by car L4: and nothing outside the family names the reputation
+    // read either. The mortal consumers that will call it are car L5's re-routes,
+    // and the pulse call site that will drive the adapters is L5's too — so the
+    // family is still sealed on every side, with two more members inside it.
+    expect(outside
+      .filter((file) => /knownCharacter/.test(readFileSync(file, 'utf8')))
       .map((file) => relative(REPO_ROOT, file))).toEqual([]);
     // anchored: the family members really are present, so the closure is over a
     // real set rather than passing because the names match nothing.

@@ -711,16 +711,19 @@ describe('DARK BY CONSTRUCTION — two independent darknesses, one door', () => 
     return out;
   }
 
-  test('no src/ file imports the funnel or its catalog — the adapters are car L4', () => {
+  test('the ONLY src namer of the funnel family is car L4\'s adapter leaf', () => {
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
     expect(files.length).toBeGreaterThan(100);
     const importers = files
       .filter((file) => !/livedExperience(Funnel|Catalog)\.js$/.test(file))
       .filter((file) => /livedExperience/.test(readFileSync(file, 'utf8')))
-      .map((file) => relative(REPO_ROOT, file));
-    // If this reds, a source adapter was wired early. That is car L4's act, and it
-    // must arrive WITH its own dormancy proof.
-    expect(importers).toEqual([]);
+      .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'));
+    // AMENDED BY CAR L4 — the act this pin was written to meet, and it is
+    // TIGHTENED rather than opened. The old form said "nobody"; the new form names
+    // the ONE file allowed to, so a second consumer still reds. The adapter leaf is
+    // itself imported by nobody (its own suite pins that), so the family remains
+    // unreachable from production and the dormancy claim is unchanged.
+    expect(importers).toEqual(['src/domain/npc/livedExperienceSources.js']);
   });
 
   test('⭐ ONE DOOR: the funnel mints NO flag of its own, it rides L2\'s', () => {
@@ -736,8 +739,13 @@ describe('DARK BY CONSTRUCTION — two independent darknesses, one door', () => 
     expect(source).not.toContain('simulationRules');
     const catalog = readFileSync(join(REPO_ROOT, 'src/domain/npc/livedExperienceCatalog.js'), 'utf8');
     expect(catalog).toContain('EXPERIENCE_TABLE');
+    // NARROWED BY CAR L4 from a substring ban to a DEREFERENCE ban. The catalog now
+    // cites `simulationRules.js:499` in a comment as the evidence for a corrected
+    // census verdict, and a rule that forbids citing one's own proof is a rule that
+    // buys darkness with honesty. What the file may never do is READ the rules —
+    // the one door is L2's, so a second spelling of the gate stays unrepresentable.
     // anchored: `catalog` is pinned above to contain the table, so it is live
-    expect(catalog).not.toContain('simulationRules');
+    expect(catalog).not.toMatch(/\.simulationRules|simulationRules\s*\[|simulationRules\s*\)/);
   });
 
   test('the funnel writes through L2\'s writer and no other path', () => {

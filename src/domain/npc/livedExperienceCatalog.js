@@ -350,6 +350,10 @@ export const EXPERIENCE_TABLE = Object.freeze({
   home_liberated: row('affiliation', 'realm',
     [pull('CHEER', 'virtue', 'heavy'), pull('FORBEARANCE', 'virtue', 'faint')],
     'deploymentReturn.js:occupation_lifted'),
+  // ⭐ DEFAULT-ON, and car L4's executed census is what found it: the coup verdict
+  // rides `stressorsEnabled`, which is TRUE in DEFAULT_SIMULATION_RULES and lit in
+  // all six presets. This row was drafted as though it were preset-gated; it is the
+  // FIFTH default-on kind, and the only one on the affiliation plane.
   coup_at_home: row('affiliation', 'realm',
     [pull('TRUST', 'vice', 'heavy'), pull('PRUDENCE', 'virtue', 'faint')],
     'coup.js:coup_succeeded | coup_suppressed'),
@@ -410,14 +414,19 @@ export const EXPERIENCE_TABLE = Object.freeze({
     [pull('MERCY', 'vice', 'faint'), pull('TRUST', 'vice', 'faint')], null),
   news_believed_triumph: row('witness', 'word',
     [pull('CHEER', 'virtue', 'faint'), pull('COURAGE', 'virtue', 'faint')], null),
-  // DARK (`traditionsEnabled`) and AGGREGATE by its own header — "the town's
-  // festival, never a named soul's fate". The per-soul join EXISTS and the adapter
-  // must use it: the roads `observance` purpose sends a NAMED npc to a festival, so
-  // the legitimate hook is that journey CROSSED with the tradition's outcome.
+  // ⭐ NOT DARK — CORRECTED BY CAR L4's EXECUTED PRESET CENSUS. This row was drafted
+  // `receiptDark: true`; running the real preset table shows `traditionsEnabled`
+  // sits in the ONE_REGEN fragment (`simulationRules.js:499`) and is therefore lit
+  // in dramatic_campaign, living_realm and full_simulation — the SAME three presets
+  // as roads and the ladder. It is preset-gated, exactly like `captured_held` and
+  // `promotion_won`, and not dark at all.
+  // AGGREGATE by its own header, though — "the town's festival, never a named
+  // soul's fate". The per-soul join EXISTS and the adapter uses it: the roads
+  // `observance` purpose sends a NAMED npc to a festival, so the legitimate hook is
+  // that journey CROSSED with the tradition's outcome.
   festival_kept: row('witness', 'word',
     [pull('CHEER', 'virtue', 'faint'), pull('CONTENT', 'virtue', 'faint')],
-    'traditionsKernel.js:tradition (TRADITION_OUTCOME) x roads observance',
-    { receiptDark: true }),
+    'traditionsKernel.js:tradition (TRADITION_OUTCOME) x roads observance'),
 
   // ── THE SILENT KIND ───────────────────────────────────────────────────────
   // No family, so it teaches nothing; a real vocabulary member, so the fallback is
@@ -533,7 +542,7 @@ export const LIVED_EXPERIENCE_PROVENANCE = Object.freeze({
     '⚠⚠ THE MILIEU SOURCE ONLY SEES VISITORS: whereabouts is away-only (roads DELETES the key at home), so §800.4\'s "gentle man in a cruel city" cannot reach a resident today. npcResidency.js is the fit and has zero importers; its certification row calls the deposit NOT EXPRESSIBLE FROM ANY RECEIPT',
     'THE WITNESS PLANE IS NEARLY EMPTY: per-PERSON belief about an event does not exist (beliefMap observers and subjects are both SETTLEMENTS), so news_believed_* has no source at all — the register\'s largest single gap',
     'refused_by_patron: the tree has already ruled a refusal is NOT an event, in those words. Taste row 6 asks whether it should teach; this asks whether it can be heard',
-    'TWELVE of THIRTY-ONE kinds carry no receipt (SOURCE_UNVERIFIED_KINDS) and FOUR of the remaining nineteen are receipt-dark (RECEIPT_DARK_KINDS): the lit surface is far smaller than the register implies, and only corruption_exposed, goal_culminated, faction_captured and faction_cleansed are on by DEFAULT',
+    'TWELVE of THIRTY-ONE kinds carry no receipt (SOURCE_UNVERIFIED_KINDS) and THREE of the remaining nineteen are receipt-dark (RECEIPT_DARK_KINDS): the lit surface is far smaller than the register implies, and FIVE are on by DEFAULT — corruption_exposed, goal_culminated, faction_captured, faction_cleansed and coup_at_home (car L4 corrected the last two figures by executing the real preset table rather than reading the flag files: festival_kept is preset-lit, not dark, and the coup verdict rides the default-on stressorsEnabled)',
   ]),
   consumers: 'livedExperienceFunnel.js only; NONE in production by design (the adapters are car L4)',
 });
