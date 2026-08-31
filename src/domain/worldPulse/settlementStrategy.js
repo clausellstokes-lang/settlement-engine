@@ -40,14 +40,15 @@
  */
 
 import {
-  settlementStrength,
-  buildPressureSummary,
   getRelationshipSettlements,
   relationshipKeyFromEdge,
   normalizeRelationshipEdge,
   ensureRelationshipState,
   relationshipRoles,
 } from './relationshipEvolution.js';
+// THE STRENGTH-AND-EDGE READ LAYER, carved out to bring this file under the 800-line
+// domain ceiling. Pure reads over the single pre-tick snapshot; bodies verbatim, one-way.
+import { HOSTILE_TYPES, hostileEdgeBetween, strongestNonHostileNeighbour, buildStrengthLookup } from './settlementStrategyReads.js';
 import { computeAggressiveness } from './disposition.js';
 import { deityPressureOf, thresholdFactorOf } from './dispositionProfile.js';
 import { humanizeToken } from '../display/humanizeEngineTokens.js';
@@ -107,9 +108,6 @@ function inputTick(value) {
 }
 
 /** @typedef {{ fork?: (key: string) => { random: () => number } }|null} RngLike */
-
-// The hostile/adversarial axis a settlement can act on (besiege / escalate).
-const HOSTILE_TYPES = new Set(['hostile', 'cold_war', 'rival']);
 
 // Sue-for-peace winds an edge ONE step DOWN the hostility ladder, landing on the
 // SAME labels the reactive de-escalation levers use (hostile_truce → cold_war,
@@ -288,28 +286,6 @@ function misjudgmentReason(mis, name, targetName) {
 }
 
 /**
- * Per-settlement strength lookup from the SINGLE pre-tick snapshot, using the SAME
- * pressure index the relationship contests + the war layer read — so the chooser's
- * "do I out-muscle this target?" can never diverge from the deploy gate.
- * @param {any} snapshot @param {any} pressureIdx @returns {(id: any) => number}
- */
-function buildStrengthLookup(snapshot, pressureIdx) {
-  const cache = new Map();
-  return (/** @type {any} */ id) => {
-    const key = String(id);
-    if (cache.has(key)) return cache.get(key);
-    const item = snapshot?.byId?.get?.(key);
-    if (!item) {
-      cache.set(key, 0);
-      return 0;
-    }
-    const strength = settlementStrength(item, buildPressureSummary(pressureIdx, key));
-    cache.set(key, strength);
-    return strength;
-  };
-}
-
-/**
  * The observer's BELIEF-SOURCED strength lookup: the raw ground-truth `strengthFor`
  * for a SELF read, else the observer's banded belief (or the neutral mid band when
  * it holds no belief — max-uncertainty). Used ONLY when beliefs are live; the
@@ -422,59 +398,11 @@ export function strategyEmergencyRecallFor(snapshot, settlementId, tick = null) 
   return context.homeBesieged || context.vassalBesieged;
 }
 
-/**
- * The relationship edge between two settlements (raw), for a sue-for-peace proposal.
- * @param {any} snapshot @param {any} a @param {any} b
- */
-function hostileEdgeBetween(snapshot, a, b) {
-  const aId = String(a);
-  const bId = String(b);
-  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
-    const edge = normalizeRelationshipEdge(rawEdge);
-    const s = getRelationshipSettlements(edge);
-    const paired = (String(s.from) === aId && String(s.to) === bId)
-      || (String(s.from) === bId && String(s.to) === aId);
-    if (paired) return rawEdge;
-  }
-  return null;
-}
-
 // Loose sim shapes for the war-5 lever helpers below (zero any-holes: the looseness
 // lives in pulseShapes.js's own baseline). StrategyContext mirrors contextFor's return.
 /** @typedef {import('./pulseShapes.js').PulseSnapshot} PulseSnapshot */
 /** @typedef {import('./pulseShapes.js').RelationshipNudge} RelationshipNudge */
 /** @typedef {{ hostileTargets: string[], vassalIds: string[], homeBesieged: boolean, vassalBesieged: boolean, besieging: string[] }} StrategyContext */
-
-/**
- * The strongest NON-hostile neighbour of `sId` — the target for the outward/build M9a
- * levers (credit / missionize / legitimacy). Codepoint-stable tie-break; null when the
- * settlement has no non-hostile edge. Reads only the pre-tick snapshot (order-free).
- * @param {PulseSnapshot} snapshot @param {string|number} sId @param {(id:string)=>number} strengthFor @returns {string|null}
- */
-function strongestNonHostileNeighbour(snapshot, sId, strengthFor) {
-  const id = String(sId);
-  const states = snapshot?.worldState?.relationshipStates || {};
-  /** @type {string|null} */
-  let best = null;
-  let bestStrength = -Infinity;
-  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
-    const edge = normalizeRelationshipEdge(rawEdge);
-    const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
-    if (HOSTILE_TYPES.has(relState.relationshipType)) continue;
-    const { from, to } = getRelationshipSettlements(edge);
-    const a = String(from);
-    const b = String(to);
-    if (a !== id && b !== id) continue;
-    const other = a === id ? b : a;
-    if (!snapshot?.byId?.has?.(other)) continue;
-    const s = strengthFor(other);
-    if (s > bestStrength || (s === bestStrength && (best == null || other < best))) {
-      bestStrength = s;
-      best = other;
-    }
-  }
-  return best;
-}
 
 /**
  * Build a BOUNDED, AUTO relationship nudge for a chosen M9a lever (war-5): pick the edge
