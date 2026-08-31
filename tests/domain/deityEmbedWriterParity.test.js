@@ -1,7 +1,8 @@
 /**
- * deityEmbedWriterParity.test.js — the THREE deity-embed writers, pinned against
+ * deityEmbedWriterParity.test.js — the FOUR deity-embed writers, pinned against
  * one canonical field set (Wave R-5b, item 13c; closed out by the T4 ONE-REGEN
- * batch, which both restored the missing axis and retired the fourth writer).
+ * batch, which both restored the missing axis and retired the premade-pool writer;
+ * widened at W-FAITH F3c, ODQ §866, when the authored-character keys entered).
  *
  * THE CLASS THIS CLOSES: "embed writers drift apart." Separate places build a
  * settlement's frozen deity record, each by hand-picking fields (never a spread,
@@ -16,8 +17,20 @@
  *                             organic conversion commit (module-private, so it is
  *                             driven here through applyWorldPulseOutcomes, the
  *                             only door the kernel itself uses)
+ *   4. deitySnapshotFrom      src/domain/deitySnapshot.js — the INTENT builder the
+ *                             store dispatches through, and the SAME function the
+ *                             restore-from-world lane re-picks a persisted patron
+ *                             through. Writers 1–3 commit; this one is what the
+ *                             commit is handed, and what a restore rebuilds.
  *
- * A FOURTH writer once existed: `poolDeityEmbed`, the premade-pool embed builder
+ * ⛔ WHY THE FOURTH MATTERS MORE THAN ITS ORDINAL. A key added to writers 1–3 and
+ * NOT to writer 4 survives every assign and every conversion and is then silently
+ * STRIPPED the first time a DM restores an ousted patron from the living world —
+ * a data-loss path with no error, no receipt, and a green parity test if the
+ * parity test only knew about the commit writers. F3c's carry therefore lands
+ * atomically across all four, and the sweep plants its regression at writer 4.
+ *
+ * A FIFTH writer once existed: `poolDeityEmbed`, the premade-pool embed builder
  * in the generation step that baked a starting pantheon into every seed. The T4
  * batch retired the premade pool under the deity doctrine (no premade deities —
  * custom content only), and the builder went with it. Nothing replaced it: the
@@ -35,7 +48,10 @@
  *   • the two rots removed with it: the ousted patron's ref is never inherited
  *     by the incoming deity, and the `converted:` namespace no longer exists;
  *   • that the restored `lawAxis` is REACHABLE — it changes the coordinate the
- *     engine actually reads, not merely a stored field (the last describe block).
+ *     engine actually reads, not merely a stored field (the last describe block);
+ *   • F3c's carry: all four writers agree on the six authored-character keys, the
+ *     restore ROUND-TRIP preserves them, a list-valued key survives as a list, and
+ *     a deity carrying none of them still produces a byte-identical embed.
  */
 
 import { describe, expect, test } from 'vitest';
@@ -46,11 +62,33 @@ import { applyWorldPulseOutcomes } from '../../src/domain/worldPulse/applyWorldP
 // reads the axis the way the engine does, never by re-deriving the mapping here.
 import { chaos01, deityTemper } from '../../src/domain/worldPulse/deityAxes.js';
 import { deityIdOf } from '../../src/domain/worldPulse/pantheon.js';
+// Writer 4 and its shared picker. `deitySnapshotFrom` is BOTH the intent builder
+// the store dispatches through and the restore-from-world path, which is why the
+// carry had to reach it in the same act as the three commit-time writers.
+import { DEITY_AUTHORED_CHARACTER_KEYS, deitySnapshotFrom } from '../../src/domain/deitySnapshot.js';
 
 /** The field set every disciplined deity embed carries. */
 const CANONICAL_KEYS = ['_deityRef', 'name', 'alignmentAxis', 'temperamentAxis', 'rankAxis', 'lawAxis'];
 
-/** A fully-specified source deity — every optional field present, so an omission is visible. */
+/**
+ * The CONDITIONAL keys — carried only when the authored record has them. `domain`
+ * is the long-standing precedent; the six authored-character keys joined it at
+ * W-FAITH F3c (ODQ §866), which is why this list and `DEITY_AUTHORED_CHARACTER_KEYS`
+ * are pinned against each other below rather than both restated by hand.
+ */
+const CONDITIONAL_KEYS = ['domain', ...DEITY_AUTHORED_CHARACTER_KEYS];
+
+/**
+ * A fully-specified source deity — every optional field present, so an omission is
+ * visible. ⚠ This fixture is the file's DISCOVERY instrument: a writer that forgot
+ * one of the six authored-character keys is invisible to a fixture that does not
+ * author them, so every new conditional key must land here in the same act that
+ * lands it in the writers.
+ *
+ * `characterAxes` is a LIST on purpose — it is the one string-or-string-list field,
+ * and a writer that coerced it with `String()` would silently join it into one
+ * corrupt token that every downstream splitter would then mis-read.
+ */
 const SOURCE = {
   name: 'Vael',
   alignmentAxis: 'good',
@@ -58,6 +96,12 @@ const SOURCE = {
   rankAxis: 'major',
   lawAxis: 'lawful',
   domain: 'war',
+  authoredTemper: 'peacelike',
+  characterAxes: ['MERCY:virtue:marked', 'TRUST:vice:a_touch'],
+  boonChannel: 'harvest',
+  boonStrength: 'firm',
+  baneChannel: 'sea',
+  baneStrength: 'faint',
 };
 
 const withRef = (ref, extra = {}) => ({ _deityRef: ref, ...SOURCE, ...extra });
@@ -124,14 +168,14 @@ describe('deity embed writers — one canonical field set', () => {
   test('setPrimaryDeity (DM assign) writes the canonical keys plus the optional domain', () => {
     const next = assign(baseSettlement(), 'custom:lu_vael', SOURCE);
     expect(Object.keys(next.config.primaryDeitySnapshot).sort())
-      .toEqual([...CANONICAL_KEYS, 'domain'].sort());
+      .toEqual([...CANONICAL_KEYS, ...CONDITIONAL_KEYS].sort());
     expect(next.config.primaryDeitySnapshot._deityRef).toBeTruthy();
   });
 
   test('imposeCult (DM cult) writes the same canonical keys plus the optional domain', () => {
     const next = impose(baseSettlement(), 'custom:lu_vael', SOURCE);
     const entry = next.config.cultDeitySnapshots[0];
-    expect(Object.keys(entry).sort()).toEqual([...CANONICAL_KEYS, 'domain'].sort());
+    expect(Object.keys(entry).sort()).toEqual([...CANONICAL_KEYS, ...CONDITIONAL_KEYS].sort());
     expect(entry._deityRef).toBeTruthy();
   });
 
@@ -141,7 +185,7 @@ describe('deity embed writers — one canonical field set', () => {
     expect(embed._deityRef).toBeTruthy();
     // The T4 ONE-REGEN batch restored lawAxis here. The conversion writer now
     // produces the same key set as the DM assign, on every axis.
-    expect(Object.keys(embed).sort()).toEqual([...CANONICAL_KEYS, 'domain'].sort());
+    expect(Object.keys(embed).sort()).toEqual([...CANONICAL_KEYS, ...CONDITIONAL_KEYS].sort());
     expect(embed.lawAxis).toBe('lawful');           // carried from SOURCE, not defaulted
   });
 
@@ -151,13 +195,132 @@ describe('deity embed writers — one canonical field set', () => {
     const next = reEmbedViaPulse(baseSettlement(), { _deityRef: 'deity:core:old', ...legacy });
     expect(next.config.primaryDeitySnapshot.lawAxis).toBe('neutral');
   });
+
+  test('deitySnapshotFrom (the intent builder) carries the same conditional keys, minus the ref it does not mint', () => {
+    // Writer 4. It is the one writer that does NOT stamp `_deityRef` — the store
+    // dispatches the ref alongside the snapshot — so its key set is the canonical
+    // list without that one, plus every conditional key present on the source.
+    const built = deitySnapshotFrom(SOURCE);
+    expect(Object.keys(built).sort())
+      .toEqual([...CANONICAL_KEYS.filter((k) => k !== '_deityRef'), ...CONDITIONAL_KEYS].sort());
+  });
+});
+
+describe('W-FAITH F3c · THE CARRY — four writers, one act (ODQ §866)', () => {
+  test('all four writers carry every authored-character key, and the list is not restated by hand', () => {
+    // ⭐ THE ATOMICITY PROOF. Four writers are driven through their REAL doors and
+    // their outputs intersected: a key missing from any one of them fails here, and
+    // the expected list is the module's own exported roster rather than a fixture
+    // copy of it, so a key added to the roster with no writer support also fails.
+    const built = deitySnapshotFrom(SOURCE);
+    const assigned = assign(baseSettlement(), 'custom:lu_vael', SOURCE).config.primaryDeitySnapshot;
+    const culted = impose(baseSettlement(), 'custom:lu_vael', SOURCE).config.cultDeitySnapshots[0];
+    const converted = reEmbedViaPulse(baseSettlement(), withRef('deity:core:vael')).config.primaryDeitySnapshot;
+
+    expect(DEITY_AUTHORED_CHARACTER_KEYS.length).toBe(6);
+    for (const key of DEITY_AUTHORED_CHARACTER_KEYS) {
+      for (const [writer, embed] of [
+        ['deitySnapshotFrom', built], ['setPrimaryDeity', assigned],
+        ['imposeCult', culted], ['reEmbedPrimaryDeity', converted],
+      ]) {
+        expect(key in embed, `${writer} dropped ${key} — the carry is not atomic`).toBe(true);
+        expect(embed[key], `${writer} altered ${key}`).toEqual(SOURCE[key]);
+      }
+    }
+  });
+
+  test('⛔ THE RESTORE ROUND-TRIP — a persisted embed re-picked through the builder loses nothing', () => {
+    // The sharper half of the same bug, executed. A DM restores an ousted patron by
+    // handing its PERSISTED snapshot back through `deitySnapshotFrom`; before the
+    // carry reached writer 4, every authored-character key died silently on that
+    // path while surviving every other one.
+    const committed = assign(baseSettlement(), 'custom:lu_vael', SOURCE).config.primaryDeitySnapshot;
+    const restored = deitySnapshotFrom(committed);
+    for (const key of DEITY_AUTHORED_CHARACTER_KEYS) {
+      expect(restored[key], `${key} was stripped on restore`).toEqual(SOURCE[key]);
+    }
+    // …and a SECOND round-trip is a fixed point, so a restore of a restore is safe.
+    expect(deitySnapshotFrom(restored)).toEqual(restored);
+  });
+
+  test('the list-valued key survives as a LIST — no writer coerces it to a joined string', () => {
+    // ⚠ The failure this forbids is quiet and total: `String(['A:virtue:marked'])`
+    // yields 'A:virtue:marked', and with two entries a comma-joined token no reader
+    // can split back. The fixture authors two entries precisely so a coercion shows.
+    expect(SOURCE.characterAxes).toHaveLength(2);
+    for (const embed of [
+      deitySnapshotFrom(SOURCE),
+      assign(baseSettlement(), 'custom:lu_vael', SOURCE).config.primaryDeitySnapshot,
+      impose(baseSettlement(), 'custom:lu_vael', SOURCE).config.cultDeitySnapshots[0],
+      reEmbedViaPulse(baseSettlement(), withRef('deity:core:vael')).config.primaryDeitySnapshot,
+    ]) {
+      expect(Array.isArray(embed.characterAxes)).toBe(true);
+      expect(embed.characterAxes).toEqual(['MERCY:virtue:marked', 'TRUST:vice:a_touch']);
+    }
+  });
+
+  test('a LEGACY deity carrying none of the six mints none of the six — the byte-identity ground', () => {
+    // ⭐ WHY THE CARRY IS SAFE, stated as a key set rather than as a promise. Every
+    // deity authored before W-FAITH F1c carries none of these fields, so every one
+    // of them still produces exactly the embed it produced before this car.
+    const legacy = {
+      name: 'Old Vael', alignmentAxis: 'good', temperamentAxis: 'warlike',
+      rankAxis: 'major', lawAxis: 'lawful', domain: 'war',
+    };
+    const embeds = [
+      deitySnapshotFrom(legacy),
+      assign(baseSettlement(), 'custom:lu_old', legacy).config.primaryDeitySnapshot,
+      impose(baseSettlement(), 'custom:lu_old', legacy).config.cultDeitySnapshots[0],
+      reEmbedViaPulse(baseSettlement(), { _deityRef: 'deity:core:old', ...legacy }).config.primaryDeitySnapshot,
+    ];
+    for (const embed of embeds) {
+      for (const key of DEITY_AUTHORED_CHARACTER_KEYS) {
+        expect(key in embed, `${key} appeared on a deity that never authored it`).toBe(false);
+      }
+      // The anchor: the embed is real and fully built, so the six absences above are
+      // a measurement rather than the shape of an empty object.
+      expect(embed.domain).toBe('war');
+      expect(embed.lawAxis).toBe('lawful');
+    }
+  });
+
+  test('the authored word now REACHES the engine — the gap F2c measured is closed', () => {
+    // EFFECT-REACHABILITY, the same discipline the lawAxis pin above applies. A key
+    // set alone would pass even if every reader ignored the field; this drives the
+    // committed embed through the actual consumer seam. The deity's axes derive
+    // 'peacelike' on their own, so the fixture authors the CONTRADICTING word to
+    // make the arm's answer unambiguous.
+    const contradicting = { ...SOURCE, alignmentAxis: 'evil', lawAxis: 'chaotic', authoredTemper: 'peacelike' };
+    expect(deityTemper({ alignmentAxis: 'evil', lawAxis: 'chaotic' })).toBe('warlike');
+    const committed = assign(baseSettlement(), 'custom:lu_vael', contradicting).config.primaryDeitySnapshot;
+    expect(deityTemper(committed)).toBe('peacelike');
+    const converted = reEmbedViaPulse(baseSettlement(), { _deityRef: 'deity:core:vael', ...contradicting })
+      .config.primaryDeitySnapshot;
+    expect(deityTemper(converted)).toBe('peacelike');
+  });
 });
 
 describe('the restored axis is REACHABLE — it changes what the engine reads (T4)', () => {
-  /** Drive a conversion with the given lawAxis and read the committed embed. */
-  const convertWith = (/** @type {string} */ axis) =>
-    reEmbedViaPulse(baseSettlement(), withRef('deity:core:vael', { lawAxis: axis }))
-      .config.primaryDeitySnapshot;
+  /**
+   * Drive a conversion with the given lawAxis and read the committed embed.
+   *
+   * ⚠ `authoredTemper` is dropped from the source here, and that is the point of
+   * the whole block rather than a convenience: this pin measures the DERIVATION
+   * from the two alignment axes, and after F3c's carry an authored word reaches the
+   * embed and legitimately silences that derivation (W-FAITH D1 — authored wins).
+   * A fixture that authored a temper would make `deityTemper` answer the author on
+   * both ends of the axis, and the pin would then report "the lift is not armed"
+   * when in truth it was reading a different arm. Measuring the derivation requires
+   * a deity that derives.
+   */
+  const convertWith = (/** @type {string} */ axis) => {
+    const { authoredTemper, ...derives } = SOURCE;
+    expect(authoredTemper).toBeTruthy();            // the field really was dropped
+    return reEmbedViaPulse(
+      baseSettlement(),
+      { _deityRef: 'deity:core:vael', ...derives, lawAxis: axis },
+    ).config.primaryDeitySnapshot;
+  };
 
   // EFFECT-REACHABILITY (EP discipline): a parity pin alone would pass even if
   // every reader ignored the field. This drives the axis through the ACTUAL

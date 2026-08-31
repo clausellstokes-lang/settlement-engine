@@ -3,6 +3,8 @@ import { clamp01 } from '../../kernel/math.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { advanceRegionalImpacts, appendWizardNewsEntries, deriveWizardNewsEntriesFromGraphChange, ensureRegionalGraph, ensureWizardNewsFeed, legacyRegionalConditionId, propagateRegionalEvent, setRegionalImpactStatus, syncRelationshipChannelBundle } from '../region/index.js';
 import { deityIdOf } from './pantheon.js';
+// The ONE commit-time embed builder every persisting writer shares (W-FAITH F3c).
+import { commitDeityEmbed } from '../deitySnapshot.js';
 import { queueRegionalImpacts, addRegionalChannels, mintDirectedChannel } from '../region/graph.js';
 import { activeSpatialDigest, getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { parkArrivals, drainDueArrivals } from '../spatial/spatialArrival.js';
@@ -242,22 +244,12 @@ function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any}
 function reEmbedPrimaryDeity(/** @type {any} */ settlement, /** @type {any} */ snapshot) {
   const ref = settlement && snapshot ? deityIdOf(snapshot) : null;
   if (!ref) return settlement;
-  // NET-ZERO SHAPE (size-ratchet discipline): the embed is named and the config
-  // is built in the return, so restoring lawAxis below costs the file no
-  // effective line. Behavior is identical — same keys, same freeze, same order.
-  const embed = Object.freeze({
-    _deityRef: ref,
-    name: String(snapshot.name || ''),
-    alignmentAxis: snapshot.alignmentAxis || 'neutral',
-    temperamentAxis: snapshot.temperamentAxis || 'neutral',
-    rankAxis: snapshot.rankAxis || 'minor',
-    // lawAxis: the SAME default discipline both DM writers use (mutateEntities
-    // setPrimaryDeity/imposeCult) — a legacy 3-axis deity carries none ⇒
-    // 'neutral', which reads chaos01 0.5, the no-signal midpoint. Restored at
-    // T4: this was the one deliberate writer asymmetry.
-    lawAxis: snapshot.lawAxis || 'neutral',
-    ...(snapshot.domain ? { domain: String(snapshot.domain) } : {}),
-  });
+  // ONE SHARED BUILDER (W-FAITH F3c): the hand copy that used to live here — and
+  // that was the writer which silently dropped `lawAxis` until T4 restored it — is
+  // now `commitDeityEmbed`, so all three commit-time writers cannot part again.
+  // Same keys, same order, same freeze; the conversion path's own job is resolving
+  // the ref, which it still does above.
+  const embed = commitDeityEmbed(ref, snapshot);
   return { ...settlement, config: { ...(settlement.config || {}), primaryDeityRef: ref, primaryDeitySnapshot: embed } };
 }
 

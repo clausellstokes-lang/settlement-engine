@@ -11,24 +11,33 @@
  * ⭐ THE FINDING THIS FILE EXISTS TO MAKE PERMANENT, and it is not the one the
  * volume expected. A census that only counted READERS would have reported eleven
  * consumers and declared the arm live. Tracing where each one's deity OBJECT comes
- * from says something else:
+ * from said something else — and that provenance map is what turned out to matter:
  *
  *   - `deitySnapshotFrom` and the three commit-time embed writers copy a NAMED key
- *     list. `authoredTemper` is not in it. So every consumer that reads an EMBED —
- *     which is the ENTIRE ENGINE, ten of the eleven — still derives, and cannot see
- *     an authored word even after a user sets one.
- *   - Exactly ONE surface is handed a RAW authored definition: the compendium's
- *     deity draft preview (`deityDraftPreview.js` → `describeDeityEffects`). That is
- *     where, and only where, the authored word is legible today.
+ *     list, and at F2c `authoredTemper` was not in it. So every consumer that read
+ *     an EMBED — the ENTIRE ENGINE, ten of the eleven — still derived, and could not
+ *     see an authored word even after a user set one.
+ *   - Exactly ONE surface was handed a RAW authored definition: the compendium's
+ *     deity draft preview (`deityDraftPreview.js` → `describeDeityEffects`). That was
+ *     where, and only where, the authored word was legible.
  *   - The twelfth site, `CustomContent.jsx`'s `temperamentAxis` dual-write, is
  *     immune by construction: it builds a two-key literal, so the compat mirror goes
  *     on mirroring the DERIVATION rather than the effective read. That is correct —
  *     D1 retires that field forever — and it is pinned here so it stays that way.
  *
- * ⛔ CARRYING `authoredTemper` INTO THE EMBED IS AN OWNER-GATED ACT and F2c did not
- * take it: it is a persisted-shape change across FOUR writers, and it promotes the
- * field from `presentation` to `mechanical` in the manifest. The tripwire below
- * reds the moment anyone does it, so the gate is a test rather than a memory.
+ * ⭐⭐ THE GAP IS NOW CLOSED, AND THIS FILE RECORDS THE CLOSING RATHER THAN GUARDING
+ * IT. W-FAITH F3c carried the six authored-character keys into all four writers in
+ * one act (ODQ §866), so the ten embed consumers now hear an authored word. F2c's
+ * tripwire — `the embed writers do NOT carry authoredTemper` — was written to be a
+ * GO-SIGNAL for exactly that act, and it was deleted BY that act rather than left to
+ * red forever; a tripwire kept past the thing it was tripping on is just a false
+ * claim with a passing status. What replaces it is the inverse assertion, executed:
+ * the embed path and the raw-draft path now agree, and the tests below prove they
+ * agree by running BOTH rather than by scanning either.
+ *
+ * ⛔ WHAT STILL MUST NOT DRIFT: the writers must route through ONE picker
+ * (`authoredCharacterEmbedKeys`), not four hand copies, and exactly one src module
+ * may make a SEMANTIC read of the authored word. Both are pinned below.
  *
  * WHY A SOURCE SCAN. The thing under guard is AUTHORSHIP — a second temper read
  * would be perfectly functional at runtime, which is exactly why nothing else would
@@ -177,14 +186,48 @@ const STORED_FIELD_READERS = Object.freeze([
 ]);
 
 /**
- * Modules that COPY `temperamentAxis` without reading its meaning — the embed
- * writers and the intent builder. They are passthrough, not consumers, and they are
- * listed because the tripwire below quantifies over exactly this set.
+ * Modules that COPY embed fields without reading their meaning — the two commit-time
+ * writer files and the intent builder. They are passthrough, not consumers, and the
+ * uniformity pin below quantifies over exactly this set. (Three files, four writers:
+ * `mutateEntities.js` holds both `setPrimaryDeity` and `imposeCult`.)
  */
 const EMBED_WRITERS = Object.freeze([
   'src/domain/deitySnapshot.js',
   'src/domain/events/mutateEntities.js',
   'src/domain/worldPulse/applyWorldPulse.js',
+]);
+
+/**
+ * The ONE module that names the six authored-character keys. Every other writer
+ * spreads its picker, which is why the key names appear in one place rather than
+ * four — the drift habitat F3c removed rather than policed.
+ */
+const EMBED_ROSTER = 'src/domain/deitySnapshot.js';
+
+/**
+ * The two shared builders, and the files that may name them. `commitDeityEmbed` is
+ * what the three PERSISTING writers call; `authoredCharacterEmbedKeys` is the key
+ * picker inside it, which the intent builder also spreads directly. Between them
+ * there is exactly one copy of the embed's field list in the tree.
+ */
+const COMMIT_BUILDER = 'commitDeityEmbed(';
+const KEY_PICKER = 'authoredCharacterEmbedKeys(';
+/** The two files holding the three commit-time writers. */
+const COMMIT_WRITER_FILES = Object.freeze([
+  'src/domain/events/mutateEntities.js',
+  'src/domain/worldPulse/applyWorldPulse.js',
+]);
+
+/**
+ * The one module that writes an embed-SHAPED literal without being a writer: a
+ * hardcoded demo deity for the region-wake replay, whose snapshot deliberately
+ * carries only the fields its selectors read. It is a display FIXTURE, so it neither
+ * persists anything nor can drift from the writers in a way any world would feel —
+ * but it matches the structural scan below, so it is named here with its reason
+ * rather than dodged by weakening the scan.
+ */
+const EMBED_LITERAL_FIXTURES = Object.freeze([
+  'src/domain/display/regionWakeReplay.js',
 ]);
 
 /** The write-time wall: it validates the key, it does not read it for meaning. */
@@ -267,15 +310,22 @@ describe('W-FAITH F2c · THE NO-DOUBLE-COUNT LAW (D1: no site reads both words f
     // for the same term". This is that test, and the construction is what makes it
     // provable: because the arm lives INSIDE the seam, a consumer physically cannot
     // hold both words unless it reaches around the seam for the raw key.
+    //
+    // F3c added ONE name to this set — `deitySnapshot.js`, which holds the embed
+    // roster. That it is one file rather than four is the shared picker's doing: the
+    // three commit-time writers spread `authoredCharacterEmbedKeys(...)` and never
+    // spell any of the six keys, so the carry widened the COPY surface by a single
+    // module while leaving the READ surface at exactly one.
     const readers = SRC_MODULES.filter((rel) => /\bauthoredTemper\b/.test(codeOf(rel)));
     expect(readers).toEqual([
       ...GENERATED_MIRRORS,
+      EMBED_ROSTER,
       WRITE_TIME_WALL,
       OWNER,
     ].sort());
   });
 
-  test('the two non-seam mentions are a validator and generated data, never a read', () => {
+  test('the three non-seam mentions are a validator, generated data, and an embed roster — never a read', () => {
     // The write-time wall REFUSES a bad word; it never returns one as a temper.
     const wall = codeOf(WRITE_TIME_WALL);
     expect(wall).toContain('authoredTemper must be one of');
@@ -291,6 +341,20 @@ describe('W-FAITH F2c · THE NO-DOUBLE-COUNT LAW (D1: no site reads both words f
         `${rel} carries the key as data, not as a read`,
       );
     }
+    // ⭐ THE THIRD, ADDED BY F3c. The embed roster names the key in a COPY list. It
+    // must never grow an opinion about what the word MEANS — a writer that branched
+    // on the temper would be a second derivation, which is the double-count D1 exists
+    // to forbid, hiding inside a builder no consumer census would think to read.
+    const roster = codeOf(EMBED_ROSTER);
+    expect(roster).toContain('DEITY_AUTHORED_CHARACTER_KEYS');
+    expectAbsentWithAnchor(
+      roster, 'deityTemper', 'authoredTemper',
+      'the embed roster copies the word, it never interprets it',
+    );
+    expectAbsentWithAnchor(
+      roster, 'warlike', 'authoredTemper',
+      'no temper VOCABULARY appears in the roster — it copies keys, not values',
+    );
   });
 
   test('the seam answers with exactly one word — authored or derived, never blended', () => {
@@ -304,39 +368,48 @@ describe('W-FAITH F2c · THE NO-DOUBLE-COUNT LAW (D1: no site reads both words f
   });
 });
 
-describe('W-FAITH F2c · PROVENANCE (how the authored word reaches each consumer — mostly, it does not)', () => {
-  test('the embed writers do NOT carry authoredTemper — the tripwire on a gated act', () => {
-    // ⛔ THE CAR'S HEADLINE FINDING, held as a test rather than as a paragraph.
-    // Adding the key to these writers makes the authored word reach the whole
-    // engine, and that is a persisted-shape change AND a presentation→mechanical
-    // promotion in the manifest. Both are owner-gated. When the gated act is taken,
-    // this test reds and its message is the checklist.
-    for (const rel of [...EMBED_WRITERS]) {
-      expectAbsentWithAnchor(
-        codeOf(rel), 'authoredTemper', 'temperamentAxis',
-        `${rel} does not yet carry the authored word into the embed`,
-      );
+describe('W-FAITH F3c · PROVENANCE (how the authored word reaches each consumer — now, it does)', () => {
+  test('every embed writer routes through a SHARED builder — the field list has one copy', () => {
+    // ⭐ THE REPLACEMENT FOR F2c'S TRIPWIRE, and it guards the opposite property.
+    // The carry is only safe while it is TOTAL: if one writer carried the keys and
+    // another did not, an authored deity would read one temper after a DM assign and
+    // another after an organic conversion — the divergence class this estate keeps a
+    // writer-parity test for, and the exact bug the pre-T4 `lawAxis` gap WAS.
+    //
+    // F3c removed that bug's HABITAT rather than policing it: the three commit-time
+    // writers no longer keep hand copies of the embed literal at all, so a writer
+    // cannot half-carry the field list. It can only fail to call the builder, which
+    // is a far louder mistake and is what this test sees.
+    for (const rel of COMMIT_WRITER_FILES) {
+      expect(codeOf(rel), `${rel} no longer routes through the shared commit builder`)
+        .toContain(COMMIT_BUILDER);
     }
-  });
-
-  test('the embed writers agree on their key list, so the gap is uniform', () => {
-    // The gap is only safe while it is TOTAL. If one writer carried the key and the
-    // others did not, an authored deity would read one temper after a DM assign and
-    // another after an organic conversion — the divergence class this estate keeps
-    // a writer-parity test for.
-    for (const rel of EMBED_WRITERS) {
+    // The intent builder spreads the key picker directly — it is not a commit-time
+    // writer and carries its own (deliberately different) absent-field defaults.
+    expect(codeOf(EMBED_ROSTER)).toContain(KEY_PICKER);
+    // ⛔ THE LOAD-BEARING HALF: exactly one module BUILDS a deity embed. An embed
+    // literal is recognisable by carrying its own identity beside the axes, so that
+    // co-occurrence is the scan — a writer that grew its own copy back is the only
+    // way the drift this file guards can return, and it would show up here.
+    const buildsAnEmbed = SRC_MODULES.filter((rel) => {
       const code = codeOf(rel);
-      expect(code).toContain('temperamentAxis');
-      expect(code).toContain('domain');   // the one CONDITIONAL key, and the precedent
-    }
+      return /_deityRef:/.test(code) && /temperamentAxis:\s/.test(code);
+    });
+    expect(buildsAnEmbed).toEqual([EMBED_ROSTER, ...EMBED_LITERAL_FIXTURES].sort());
+    const naming = EMBED_WRITERS.filter((rel) => /\bDEITY_AUTHORED_CHARACTER_KEYS\b/.test(codeOf(rel)));
+    expect(naming).toEqual([EMBED_ROSTER]);
   });
 
-  test('ten of the eleven consumers read an embed; the authored word cannot reach them', () => {
+  test('ten of the eleven consumers read an embed — and the embed now carries the word', () => {
     const byEmbed = CONSUMERS.filter((c) => c.provenance === 'embed').map((c) => c.file);
     expect(byEmbed).toHaveLength(10);
-    // The consequence, stated as arithmetic rather than as prose: no consumer whose
-    // provenance is an embed is reachable by an authored word today.
+    // The consequence, stated as arithmetic rather than as prose: the ten consumers
+    // F2c measured as unreachable are exactly the ten the carry reached. Nothing was
+    // re-pointed at a different source — the SOURCE started carrying the field.
     expect(CONSUMERS.filter((c) => c.provenance === 'raw-draft')).toEqual([]);
+    expect(deityTemper(deitySnapshotFrom({
+      alignmentAxis: 'evil', lawAxis: 'chaotic', authoredTemper: 'peacelike',
+    }))).toBe('peacelike');
   });
 
   test('the ONE surface handed a raw authored definition is the deity draft preview', () => {
@@ -405,15 +478,21 @@ describe('W-FAITH F2c · THE PROVENANCE SPLIT, EXECUTED (not merely source-scann
     expect(neutral).not.toContain(PEACELIKE_LINE);
   });
 
-  test('⛔ the EMBED path does NOT — the same authored deity reads warlike through the writer', () => {
-    // THE CAR'S FINDING, executed. One deity, one authored word, two paths, two
-    // answers: the builder drops the key, so every consumer downstream of an embed
-    // goes on deriving. This is what the tripwire above protects, and what an owner
-    // would be deciding to change.
+  test('⭐ the EMBED path NOW AGREES — the same authored deity reads peacelike through the writer', () => {
+    // F2c'S FINDING, INVERTED BY F3c AND STILL EXECUTED. The identical assertion
+    // that once proved the gap now proves the closing: one deity, one authored word,
+    // two paths, ONE answer. Keeping the shape of the old test rather than deleting
+    // it is deliberate — the two receipts are directly comparable, and the day the
+    // builder drops the key again this reds in the same place it used to pass.
     const embedded = deitySnapshotFrom({ ...EVIL_CHAOTIC, authoredTemper: 'peacelike' });
-    expect('authoredTemper' in embedded).toBe(false);
-    expect(deityTemper(embedded)).toBe('warlike');
-    expect(describeDeityEffects(embedded)).toContain(WARLIKE_LINE);
+    expect('authoredTemper' in embedded).toBe(true);
+    expect(deityTemper(embedded)).toBe('peacelike');
+    expect(describeDeityEffects(embedded)).toContain(PEACELIKE_LINE);
+    // The control, on the SAME builder: a deity that authors nothing still derives,
+    // so the arm is answering the author rather than answering everything.
+    const bare = deitySnapshotFrom(EVIL_CHAOTIC);
+    expect('authoredTemper' in bare).toBe(false);
+    expect(deityTemper(bare)).toBe('warlike');
   });
 });
 

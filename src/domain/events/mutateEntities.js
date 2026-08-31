@@ -24,6 +24,9 @@ import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 // resourceTaxonomy) into the first-paint closure. The fat modules re-export the
 // same leaf objects, so both paths read ONE applier (referential identity).
 import { reconcileCultImposition } from '../worldPulse/cultImpositionApply.js';
+// The ONE commit-time embed builder every persisting writer shares (W-FAITH F3c /
+// ODQ §866), so the writers cannot drift apart as they once did on `lawAxis`.
+import { commitDeityEmbed } from '../deitySnapshot.js';
 import { applyTierOutcomeToSettlement } from '../worldPulse/tierOutcomeApply.js';
 import { TIER_ORDER, POPULATION_RANGES, popToTier } from '../../data/constants.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
@@ -933,20 +936,11 @@ function setPrimaryDeity(s, event) {
   }
 
   config.primaryDeityRef = ref;
-  // Embed a self-contained copy. We re-pick the exact snapshot fields (never
-  // spread the raw payload) so an unexpected field — especially any wall-clock
-  // stamp — can never leak into the embedded record a deriver reads.
-  config.primaryDeitySnapshot = Object.freeze({
-    _deityRef: ref,
-    name: String(snapshot.name || ''),
-    alignmentAxis: snapshot.alignmentAxis || 'neutral',
-    temperamentAxis: snapshot.temperamentAxis || 'neutral',
-    rankAxis: snapshot.rankAxis || 'minor',
-    // lawAxis: a legacy 3-axis deity carries none ⇒ default 'neutral' (no
-    // law_order term, byte-identical to a deity-free settlement on that axis).
-    lawAxis: snapshot.lawAxis || 'neutral',
-    ...(snapshot.domain ? { domain: String(snapshot.domain) } : {}),
-  });
+  // Embed a self-contained copy through the ONE shared commit-time builder, which
+  // re-picks the exact snapshot fields (never spreads the raw payload) so an
+  // unexpected field — especially any wall-clock stamp — cannot leak into the
+  // embedded record a deriver reads.
+  config.primaryDeitySnapshot = commitDeityEmbed(ref, snapshot);
   return { ...s, config };
 }
 
@@ -980,17 +974,12 @@ function imposeCult(s, event) {
     return { ...s, config };
   }
 
-  // Add/replace path. Embed a self-contained, frozen copy (re-pick exact fields —
-  // never spread the raw payload), then reconcile it against capacity + niche.
-  const entry = Object.freeze({
-    _deityRef: String(ref || snapshot._deityRef || snapshot.name || ''),
-    name: String(snapshot.name || ''),
-    alignmentAxis: snapshot.alignmentAxis || 'neutral',
-    temperamentAxis: snapshot.temperamentAxis || 'neutral',
-    rankAxis: snapshot.rankAxis || 'minor',
-    lawAxis: snapshot.lawAxis || 'neutral',
-    ...(snapshot.domain ? { domain: String(snapshot.domain) } : {}),
-  });
+  // Add/replace path. Embed a self-contained, frozen copy through the shared
+  // commit-time builder, then reconcile it against capacity + niche. The ref
+  // resolution is this writer's OWN — a cult may be imposed without an explicit
+  // ref, so it falls back through the snapshot's identity — and that is exactly the
+  // decision the shared builder leaves to its callers.
+  const entry = commitDeityEmbed(String(ref || snapshot._deityRef || snapshot.name || ''), snapshot);
   const tier = s.tier || config.tier || 'village';
   const result = reconcileCultImposition({ patron: config.primaryDeitySnapshot || null, cults, tier, deity: entry });
   if (result.action === 'refused') {

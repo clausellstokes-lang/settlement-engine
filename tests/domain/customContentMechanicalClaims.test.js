@@ -29,6 +29,8 @@ import {
 } from '../../src/domain/content/customSupplyChainActivation.js';
 import { deriveAllCapacities } from '../../src/domain/capacityModel.js';
 import { corruptionPlaneMult } from '../../src/domain/worldPulse/piety.js';
+import { computeAggressiveness } from '../../src/domain/worldPulse/disposition.js';
+import { deitySnapshotFrom } from '../../src/domain/deitySnapshot.js';
 import { deityPressureOf } from '../../src/domain/worldPulse/dispositionProfile.js';
 import { inferSupplyChains } from '../../src/domain/inferSupplyChains.js';
 import { computeFinishedGoodsDemand } from '../../src/generators/economy/finishedGoodsDemand.js';
@@ -922,6 +924,30 @@ function deitySettlement(axis, value) {
   };
 }
 
+/**
+ * A settlement whose patron embed was built by the REAL intent builder from an
+ * authored draft — the provenance chain a user's authored deity actually travels
+ * (editor draft → `deitySnapshotFrom` → `config.primaryDeitySnapshot`).
+ *
+ * The axes are held at the neutral core so the DERIVATION answers 'neutral' for
+ * both arms, which means any movement between them is the authored word's alone.
+ */
+function deityDraftSettlement(authoredTemper) {
+  return {
+    population: 4_000,
+    config: {
+      primaryDeitySnapshot: deitySnapshotFrom({
+        name: 'Claim Deity',
+        alignmentAxis: 'neutral',
+        lawAxis: 'neutral',
+        rankAxis: 'minor',
+        authoredTemper,
+      }),
+    },
+    institutions: [],
+  };
+}
+
 function claim(consumer, observation, probe) {
   return Object.freeze({ consumer, observation, probe });
 }
@@ -1087,6 +1113,21 @@ export const MECHANICAL_CLAIM_MATRIX = Object.freeze({
         alignmentAxis: 'evil',
         lawAxis: 'chaotic',
       }, 1),
+    }),
+  ),
+  'deities.authoredTemper': claim(
+    'disposition',
+    'an authored temper changes the settlement\'s canonical war appetite, through the real embed builder',
+    () => ({
+      // ⭐ THIS PROBE GOES THROUGH THE WRITER ON PURPOSE. Its siblings plant a field
+      // straight onto a hand-built `primaryDeitySnapshot`, which would pass here even
+      // if no writer carried the key — the exact vacuity that made this field look
+      // presentation for a whole car. Routing through `deitySnapshotFrom` (writer 4,
+      // and the restore path) makes the claim what the label says: an AUTHORED value
+      // reaches a canonical observable. Both arms hold the alignment axes fixed, so
+      // the only thing moving is the authored word.
+      control: computeAggressiveness(deityDraftSettlement('peacelike'), {}),
+      activated: computeAggressiveness(deityDraftSettlement('warlike'), {}),
     }),
   ),
   'deities.domain': claim(
