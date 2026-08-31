@@ -11,7 +11,7 @@
  * at the top level of its describe, and every loop lives INSIDE an `it`.
  *
  * ⚠ THE FILE NAME AND HOME ARE PART OF THE CONTRACT. `mutationCoverage.shared.mjs`
- * makes a file a governed invariant automatically by living in one of seven enforcer
+ * makes a file a governed invariant automatically by living in one of the enforcer
  * dirs or by a basename matching `census|scan|baseline|ratchet|walker|…|contract|pin`.
  * This file sits in `tests/domain/` and matches none of them, so it is an ordinary
  * behavior battery. That dodge is deliberate and is lost to a rename.

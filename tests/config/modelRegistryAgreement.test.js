@@ -39,7 +39,7 @@
  *
  * WHY THE BASENAME IS "modelRegistryAgreement" AND NOT "...Parity" (implementer judgment,
  * vetoable, recorded because it deviates from the wave brief's suggested filename):
- * tests/config is NOT one of the seven ENFORCER_DIRS, but the E-A enumeration rule
+ * tests/config is NOT one of the ENFORCER_DIRS, but the E-A enumeration rule
  * (tests/lint/mutationCoverage.shared.mjs) ALSO matches on basename nomenclature, and
  * "parity" is one of its tokens. A file named ...Parity.test.js is therefore enumerated as
  * an enforcement-spine member and owes an entry in scripts/mutation-coverage-manifest.json.

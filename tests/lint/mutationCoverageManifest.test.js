@@ -44,10 +44,12 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import {
+  ADMITTED_TREE_REF,
   enumerateInvariants,
   parseSweepLabels,
   parseSweepMutationTargets,
   parseGuardedMutatedFiles,
+  subjectCouplingOf,
 } from './mutationCoverage.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -64,11 +66,14 @@ const metaEntries = Object.entries(manifest.meta ?? {});
 describe('mutation-coverage manifest — the totality contract (E-A)', () => {
   test('guard-the-guard: enumeration and label parsing are not vacuous', () => {
     // If the enumerator or the label regex silently broke, everything below
-    // would pass on empty sets. Today: 450 invariant files, 61 sweep labels —
+    // would pass on empty sets. Today: 644 invariant files, 61 sweep labels —
     // the floors below had rotted to the 2026-05 figures (300/22), which is two
     // thirds of the corpus a broken enumerator could have dropped unnoticed.
     // Floors TIGHTEN toward reality; they are never raised to admit a budget.
-    expect(enumerated.length).toBeGreaterThanOrEqual(440);
+    // 2026-08-30: 547 -> 644 as tests/generators joined ENFORCER_DIRS (ODQ 764.2),
+    // so the floor tightens with it — left at 440 it would have gone on passing
+    // with the entire admitted tree dropped back out of the walk.
+    expect(enumerated.length).toBeGreaterThanOrEqual(630);
     expect(sweepLabels.length).toBeGreaterThanOrEqual(61);
     expect(new Set(sweepLabels).size, 'duplicate labels in mutation-sweep.sh — labels are the join key and must be unique').toBe(sweepLabels.length);
   });
@@ -170,6 +175,58 @@ describe('mutation-coverage manifest — the totality contract (E-A)', () => {
     expect(guardedFiles.length, 'the MUTATED_FILES parse is not vacuous').toBeGreaterThanOrEqual(40);
     expect(mutationTargets.length, 'the mutation-target parse is not vacuous').toBeGreaterThanOrEqual(50);
     expect(new Set(guardedFiles).size, 'duplicate rows in MUTATED_FILES').toBe(guardedFiles.length);
+  });
+
+  // ── THE ADMITTED TREE (ODQ 764.2) ───────────────────────────────────────────
+  // tests/generators joined ENFORCER_DIRS on the 759.4 finding that 97 of its 108
+  // files were invisible here. They came in on ONE shared rationale, and a shared
+  // rationale is the cheapest thing in this file to abuse: ninety-seven rows can
+  // point at one paragraph and nothing re-reads whether the paragraph is still
+  // true of any of them. So the paragraph's claim is re-derived from disk, per
+  // member, every run — a member gutted to a smoke check reds BY NAME.
+  test('THE ADMITTED-TREE CLAIM: every member still scans or executes its subject and asserts', () => {
+    const members = invariantEntries.filter(([, e]) => e.ref === ADMITTED_TREE_REF);
+    expect(
+      members.length,
+      'the admitted-tree membership collapsed — this arm would pass vacuously',
+    ).toBeGreaterThanOrEqual(90);
+
+    const offenders = [];
+    for (const [rel] of members) {
+      if (!rel.startsWith('tests/generators/')) {
+        offenders.push(`${rel}: cites the tests/generators admission from outside that tree`);
+        continue;
+      }
+      const { importsSubject, scansSubject, asserts } = subjectCouplingOf(readFileSync(join(ROOT, rel), 'utf8'));
+      if (!importsSubject && !scansSubject) offenders.push(`${rel}: neither imports nor scans anything under src/`);
+      else if (!asserts) offenders.push(`${rel}: reaches its subject but asserts nothing`);
+    }
+    expect(
+      offenders,
+      `\nThese files were admitted to ENFORCER_DIRS on the claim that they already scan or execute`
+      + ` production material and assert on what came back. That claim is no longer true of them, so the`
+      + ` shared rationale no longer covers them: give each its own mutation plant or its own written`
+      + ` rationale, or restore the coupling:\n${offenders.join('\n')}\n`,
+    ).toEqual([]);
+  });
+
+  test('THE PLANTED CONTROL: the coupling predicate refuses a member that reaches nothing', () => {
+    // Without this the arm above could be a broken regex admitting everything. The
+    // control drives the SAME function the live arm calls — a control that
+    // re-implements the detector proves nothing about the detector.
+    const importing = "import { generate } from '../../src/generators/x.js';\ntest('t', () => { expect(generate()).toBe(1); });";
+    const scanning = "const s = readFileSync(join(ROOT, 'src/generators/x.js'), 'utf8');\nexpect(s).toContain('export');";
+    const gutted = "test('t', () => { expect(true).toBe(true); });";
+    const mute = "import { generate } from '../../src/generators/x.js';\ntest('t', () => { generate(); });";
+
+    expect(subjectCouplingOf(importing).coupled, 'an importing, asserting member must be ADMITTED').toBe(true);
+    expect(subjectCouplingOf(scanning).coupled, 'a source-scanning, asserting member must be ADMITTED').toBe(true);
+    expect(subjectCouplingOf(gutted).coupled, 'a member that reaches no subject must be REFUSED').toBe(false);
+    expect(subjectCouplingOf(mute).coupled, 'a member that reaches its subject and asserts nothing must be REFUSED').toBe(false);
+    // …and it DISCRIMINATES: a test-tree import is not production material, and a
+    // src/ token inside prose is not a scan.
+    expect(subjectCouplingOf("import x from '../helpers/fixture.js';\nexpect(x).toBe(1);").coupled).toBe(false);
+    expect(subjectCouplingOf("// walks src/ looking for drift\ntest('t', () => { expect(1).toBe(1); });").coupled).toBe(false);
   });
 
   test('SHRINK-ONLY: uncovered count equals uncoveredBaseline exactly', () => {
