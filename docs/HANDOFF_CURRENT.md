@@ -1,14 +1,28 @@
 # HANDOFF — CURRENT PROGRAM STATE (model-agnostic successor bootstrap)
 
-**Updated 2026-08-29 at the §724 DESCOPE SITTING (ledger through §724; refreshed at every collection per ODQ §233). This file is refreshed at
-every collection (ODQ §233). If you are a successor — any model, any account —
+**Updated 2026-08-31 at the §871 DENS-LANDING COLLECTION (ledger through §871.2; refreshed at
+every collection per ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; ODQ §§150–§276 plus collecting/amending §§287–§289 contain the map
 program's decisions; SPEC fold labels §§277–§286 are design sections, not missing ODQ entries).
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐ PICKUP AT §869 (2026-08-31 ~10:30, ROLLING CARD — rewritten whole at every collection; the owner switches accounts at usage max, a successor lands HERE) — START HERE; supersedes every card below.
+## ⭐⭐⭐⭐ PICKUP AT §871 (2026-08-31 ~15:40, ROLLING CARD — rewritten whole at every collection) — START HERE; supersedes every card below.
+
+**Build branch `claude/composite-r4` = `a107bcde33e1e77c117338afdb894f83d2ac0930` (TE-DENSITY-1 LANDED §871 — 24 commits, nine landing bills, nine gates; the proving gate ratchet 10/29,366 · STRICT DIST 51/433 · load 5.66). Ledger through §871.2.** The Fable chair landed it as §870's successor; the owner ratified the two dist-budget raises in-session (closure 1,042,000 · engine 676,000, the train's declared weight).
+
+**⭐⭐ STANDING OWNER DIRECTIVES OF THIS SITTING (§871.2):** run UP TO FOUR lanes filled wherever appropriate · a 30-min stall/occupancy heartbeat (⚠ SESSION-LOCAL cron 13,43 * * * * — dies with the session; SUCCESSOR RE-ARMS IT) · Fable manages/architects/validates, Opus implements/verifies, §787 fit-crossover both ways · ALL decisions delegated to the chair's judgment (by-nature carve-outs: legal, cull, tuning signatures, pushes) · **CONTINUE THROUGH EVERYTHING UP TO — NOT INCLUDING — THE TERMINAL SOAK** (walk + ONE regen precede it; tuning last). ⭐⭐ **A GATE WINDOW IS A QUIET WINDOW** (§871.1): before ANY landing gate, message every live lane to suspend heavy execution, sleep 180s, record load/disk guard lines in the gate log; release on the verdict. The mutex fences vitest-vs-vitest ONLY.
+
+**HOLDING COMPLETE, landing order (§863 as amended §871.2):** THE SMALLS (RESIDUE-2 `4b937c662` + SP-W1 `b61a6585` + VOICE-1b, one landing — NEXT, takes the gate slot) → **THE CHARACTER SUBSTRATE** (L1-stack `14bbcbc5f` + L2-stack `2e4fc0ea0` + O1 `4e918ab5e` — ⚠ the two stacks are on DIVERGENT LINES whose mirrored vocabularies reconcile ONLY at this coupling; L6's pack refresh measured it; a declared mirror is NOT a cross-check) → T8 `0999f8059` (+its §860 routing act) → T4 `9cab53af8` (⭐ its STOP-discriminator call = the owner's veto check) → TE-VIRT-1 `038311ed2` (wall 800→282, doors homed; ⚠ W-LIVES door has TWO SPELLINGS — the door lane reconciles) → TE-AGNOSTIC-1 `7d4cb16ea` (305 golden rows under two shift records) → TE-CEIL `64a4be807` → TE-INSTR-1 `15fefc765` — each landing per the §824 ritual + the quiet window.
+
+**LIVE LANES:** W-MEM-P1/P2 (P1 `b804da4e1` landed; P2 staged — loserDied was a DOUBLE reader-without-writer; FOUR discard sites, one funnel) · F4c (on the F-stack) · O2 (on the L-stack, sibling of nothing now — L6 was a document car, its pack landed §871.2) · SP-W2 · INSTR-2 (the --update tool hardening + the parked-suite gap). **D4 dispatches onto `a107bcde3` at the next free slot** (D3's pin is on the branch; + the §865 demote repair).
+
+**THE OWNER'S DESK:** the pack rows 13(a)(b) + Register VII values (the pack is now the L6-refreshed 623-line edition at docs/briefs/W-REGISTERS-PACK.md — ⭐ its most expensive row is §856's non-overlap GRAIN, row 15, which silences corruption_exposed) · the THREE §857 legal surfaces (the class-name count was over-stated; one construction existed, cured) · F1c's migration `200_deity_authored_character.sql` · T4's STOP-discriminator veto check · the god_fortunes two-census lighting hole · Q-M7 · the §838/§827/§835/§839/§859/§865 rows unchanged.
+
+**Chartered, ready when slots free:** the remaining W-cars (L7-L8 · O3-O7 · F5c-F7c) · TE-GROWTH-MIG · TE-RATCHET-MAG · the §866 materialization charter (four categories never reach settlements — generation-side) · then T13 TRANS → TE-GOLDEN-1 → residue/OSR-mint/parity → the walk + ONE regen → **STOP (the terminal soak is the owner's, tuning last: the 300y runaway + the map leg are its inputs)**. Account-switch protocol per §869 unchanged: survey every lane (HEAD+porcelain+receipt, 529 law) before trusting anything; resume landings first; ⚠ re-arm the heartbeat; the memory index is OVER its 17KB ceiling — FOLD before appending, never trim.
+
+## (superseded) PICKUP AT §869 (2026-08-31 ~10:30, ROLLING CARD — the account-switch card this sitting resumed from)
 
 **Build branch `claude/composite-r4` = `1d27accdc` (T12 · WAR-MEMORY LANDED §868 — the wars are remembered; the virtual-flag file sits at 800 EXACT with SEAT-A2's `subsystemRowsSeat.js` as TE-VIRT-1's worked pattern). Ledger through §868.** EIGHT trains landed this era: T10 · T2 · T7 · T6 · T9 · T11 · SEAT-A2 (§864) · T12 (§868).
 
