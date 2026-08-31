@@ -94,6 +94,17 @@
  * declared producer rule yet. They are exempt from DIRECTION 1 and they are exempt in
  * WRITING, with a reason each, which is the difference between a deferral and a hole.
  *
+ * SP-W2 UPDATE — the reach is now wider than one registered row, and narrower than it
+ * looks. 59 rows at the >= 6 tier: 1 registered, 17 lossy, 26 unpaired, 15
+ * not-a-rebuilder. The pairability review (see THE PAIRABILITY REVIEW below) governed
+ * three groups that were previously exempt in prose only — the two gate-immune rows now
+ * have their gate CHECKED (DIRECTION 4), the one enumerable writer/reader pair is covered
+ * (DIRECTION 5), and the hand-copied shapes are held to agreement (DIRECTION 6). ⭐ The
+ * remaining exemptions are still exemptions, and the reason they are not laws is written
+ * beside each of them rather than implied by silence: a producer set nobody can enumerate
+ * cannot be governed by a coverage rule without inventing rows, which §846's own J-2 row
+ * already ruled the wrong trade.
+ *
  * @enforced-module src/domain/region/wizardNews.js
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -408,6 +419,116 @@ export function emittedKeys(source, fnName) {
     if (name) keys.add(name);
   }
   return { found: true, keys, spreadsSource };
+}
+
+// ── SP-W2: the three readers the pairability review needed ──────────────────────
+
+/**
+ * The object literal a named function assigns to a local `varName` — the WRITE half of a
+ * writer/reader pair, which `emittedKeys` cannot reach because it reads the RETURN literal
+ * and a writer's blob is a local that gets stored into a parent record.
+ */
+export function assignedObjectKeys(source, fnName, varName) {
+  const ast = parseModule(source);
+  let body = null;
+  simple(ast, {
+    FunctionDeclaration(node) { if (node.id?.name === fnName) body = node.body; },
+    VariableDeclarator(node) {
+      if (node.id?.type === 'Identifier' && node.id.name === fnName
+        && node.init?.body?.type === 'BlockStatement') body = node.init.body;
+    },
+  });
+  if (!body) return { found: false, keys: new Set() };
+  const keys = new Set();
+  let found = false;
+  simple(body, {
+    VariableDeclarator(node) {
+      if (node.id?.type !== 'Identifier' || node.id.name !== varName) return;
+      if (node.init?.type !== 'ObjectExpression') return;
+      found = true;
+      for (const key of objectKeys(node.init)) keys.add(key);
+    },
+  });
+  return { found, keys };
+}
+
+/**
+ * Every property name a named function reads off one source identifier — the READ half.
+ * Deliberately NOT the aligned-key rule: a reader that renames on the way through
+ * (`memoryScore: round2(blob.score)`) has still READ the key, and a coverage law that
+ * missed renames would report a false gap on the estate's commonest projection idiom.
+ */
+export function keysReadOff(source, fnName, sourceName) {
+  const ast = parseModule(source);
+  let body = null;
+  simple(ast, {
+    FunctionDeclaration(node) { if (node.id?.name === fnName) body = node.body; },
+    VariableDeclarator(node) {
+      if (node.id?.type === 'Identifier' && node.id.name === fnName
+        && node.init?.body?.type === 'BlockStatement') body = node.init.body;
+    },
+  });
+  if (!body) return { found: false, keys: new Set() };
+  const keys = new Set();
+  simple(body, {
+    MemberExpression(node) {
+      if (node.object?.type !== 'Identifier' || node.object.name !== sourceName) return;
+      if (!node.computed && node.property.type === 'Identifier') keys.add(node.property.name);
+      else if (node.property.type === 'Literal' && typeof node.property.value === 'string') {
+        keys.add(node.property.value);
+      }
+    },
+  });
+  return { found: true, keys };
+}
+
+/**
+ * Whether a named function refuses any row whose key set is not EXACTLY a declared list —
+ * the `hasExactKeys(row, …)` / `exactKeys(row, …)` idiom. This is what makes two roster
+ * rows structurally immune to the whole class: an extra producer key does not get dropped,
+ * it makes the constructor return null. SP-W2 re-derived both by hand before trusting the
+ * inherited prose, and both held — so the exemption becomes CHECKED rather than believed.
+ */
+export function hasExactKeyGate(source, fnName) {
+  const ast = parseModule(source);
+  let body = null;
+  simple(ast, {
+    FunctionDeclaration(node) { if (node.id?.name === fnName) body = node.body; },
+    VariableDeclarator(node) {
+      if (node.id?.type === 'Identifier' && node.id.name === fnName
+        && node.init?.body?.type === 'BlockStatement') body = node.init.body;
+    },
+  });
+  if (!body) return false;
+  let gated = false;
+  simple(body, {
+    CallExpression(node) {
+      if (node.callee?.type === 'Identifier' && /^(has)?[eE]xactKeys$/.test(node.callee.name)) {
+        gated = true;
+      }
+    },
+  });
+  return gated;
+}
+
+/**
+ * Every object literal assigned to `<anything>.<property>` in one module, as a key list
+ * PER LITERAL and never unioned. The per-literal part is the whole point: `initAuth`
+ * carries TWO copies of the auth-slice shape, and a union of them would hide a drift
+ * BETWEEN them — which is the exact hazard the roster's authSlice rows name.
+ */
+export function assignedMemberLiterals(source, property) {
+  const copies = [];
+  simple(parseModule(source), {
+    AssignmentExpression(node) {
+      const left = node.left;
+      if (left?.type !== 'MemberExpression' || left.computed) return;
+      if (left.property?.type !== 'Identifier' || left.property.name !== property) return;
+      if (node.right?.type !== 'ObjectExpression') return;
+      copies.push(objectKeys(node.right).sort());
+    },
+  });
+  return copies;
 }
 
 // ── The producer rule: two doors over one composed predicate ─────────────────────
@@ -905,6 +1026,120 @@ const CLASS_ROSTER = Object.freeze([
 ]);
 
 /**
+ * ── SP-W2 · THE PAIRABILITY REVIEW (ODQ §846's second half) ─────────────────────
+ *
+ * The charter asked whether the 14 `unpaired` rows could be PAIRED — governed by a real
+ * rule instead of an exemption in prose. Reviewed one at a time against the code, they
+ * are not one family, and only three groups can be governed at all:
+ *
+ *   1. TWO ARE STRUCTURALLY IMMUNE, and the immunity is machine-checkable. The two envoy-
+ *      picture canonicalizers sit behind an exact-key gate: a row whose key set is not
+ *      EXACTLY the declared list makes the constructor return null, so an extra producer
+ *      key cannot be silently dropped. ⭐ SP-W1 asserted this in prose; SP-W2 re-derived
+ *      both by hand before trusting it (brokerage's `hasExactKeys(row, expected)` at the
+ *      head of `envoyPictureTarget`; disinfo's `exactKeys(target, PAID_PLANT_TARGET_KEYS)`
+ *      inside `commissionedPlantAt`) and BOTH HELD. The review's product is therefore not
+ *      a correction but a PROMOTION: DIRECTION 4 now checks the gate still exists, so
+ *      deleting it reds instead of quietly turning a written exemption into a lie.
+ *
+ *   2. ONE PAIR IS GENUINELY PAIRABLE — and it is the pair the >=6 tier existed to find.
+ *      `relationshipMemory`'s writer and reader live in ONE file, so the reader's producer
+ *      is enumerable where the estate's others are not. DIRECTION 5 governs it, and it
+ *      immediately found a live gap: see KNOWN_UNREAD_KEYS.
+ *
+ *   3. THE HAND-COPIED SHAPES are pairable only as a DRIFT law, not a coverage one. Four
+ *      auth-slice copies and two campaignState copies each rebuild one shape in several
+ *      places; no producer rule applies, but the copies must AGREE. DIRECTION 6 asserts it.
+ *
+ * The remaining rows are recorded as not-pairable with their reason already in the roster:
+ * the total constructors over transient verdicts (verdictOf, severanceOf, decayVerdictOf)
+ * have no persisted shape to be faithful TO, and the persisted normalizers (normalizeEdge,
+ * ensureRelationshipState, stressorsCore, saveCampaignMap, and SP-W2's four new doors)
+ * have producers spread across too many stages to enumerate honestly today. Saying so is
+ * the deferral; inventing a rule for them would be the hole.
+ */
+
+/** Rows whose roster exemption RESTS on an exact-key gate, and the function that carries it. */
+const GATED_ROWS = Object.freeze([
+  Object.freeze({
+    module: 'src/domain/worldPulse/brokerageServicesPlant.js',
+    rosterFn: 'target', gateFn: 'envoyPictureTarget',
+  }),
+  Object.freeze({
+    module: 'src/domain/worldPulse/disinformationPlant.js',
+    rosterFn: 'exactTarget', gateFn: 'commissionedPlantAt',
+  }),
+]);
+
+/**
+ * The one writer/reader pair in the estate whose producer is enumerable: both halves are
+ * in one file, so the reader's coverage of the writer is a real, checkable law.
+ */
+const PAIRED_SHAPES = Object.freeze([
+  Object.freeze({
+    shape: 'relationship_memory_blob',
+    module: 'src/domain/worldPulse/relationshipMemory.js',
+    writerFn: 'refreshRelationshipMemory',
+    writerVar: 'relationshipMemory',
+    readerFn: 'persistedPostureRow',
+    readerSource: 'blob',
+  }),
+]);
+
+/**
+ * LEDGER 3 — keys the writer mints onto a PERSISTED shape that its own reader never reads
+ * back. SHRINK-ONLY in both directions, exactly like KNOWN_DROPPED_KEYS: a NEW unread key
+ * reds, and a key that becomes read demands its stale row be deleted.
+ *
+ * ⚠ THIS IS NOT THE SAME DEFECT AS A DROPPED KEY, and conflating the two would be the
+ * lie. A dropped key dies at the door. An unread key SURVIVES the save perfectly and
+ * simply has no consumer — the blob is stored whole. That makes it a completeness
+ * question about the reader, not a loss, which is why it gets its own ledger and its own
+ * direction rather than being smuggled into DIRECTION 1's.
+ */
+const KNOWN_UNREAD_KEYS = Object.freeze([
+  Object.freeze({
+    shape: 'relationship_memory_blob',
+    key: 'updatedAtTick',
+    reason: 'MEASURED: the writer stamps it into the persisted blob, and the ONLY read of'
+      + ' `relationshipMemory.updatedAtTick` anywhere in src/ is the line that mints it —'
+      + ' it is copied once to the parent record\'s `postureUpdatedAtTick`, and THAT sibling'
+      + ' is what every consumer reads (relationshipState.js preserves it through'
+      + ' ensureRelationshipState). So the blob copy is a write-only field on a persisted'
+      + ' shape: not save-loss, and not this walker\'s to cure — removing a key from a'
+      + ' persisted shape is a behaviour change on saved worlds, the same owner-class act'
+      + ' §846 ruled the registered-row car to be. Recorded here so it is not re-found.',
+  }),
+]);
+
+/**
+ * Shapes rebuilt by hand in more than one place. No producer rule governs them; what
+ * governs them is that the copies must name the SAME keys.
+ */
+const TWINNED_SHAPES = Object.freeze([
+  Object.freeze({
+    shape: 'campaign_state_envelope',
+    kind: 'returned',
+    sites: Object.freeze([
+      Object.freeze({ module: 'src/store/settlementSliceHelpers.js', fn: 'pickleCampaignState' }),
+      Object.freeze({ module: 'src/store/campaignPulseHelpers.js', fn: 'campaignStateForRegionalImpact' }),
+    ]),
+    reason: 'the save-time serializer and the regional-impact writer are two hand-copies of'
+      + ' one ten-key persisted envelope. A key added to one and not the other is a'
+      + ' campaignState field that survives one write path and dies on the other.',
+  }),
+  Object.freeze({
+    shape: 'auth_slice',
+    kind: 'assigned',
+    module: 'src/store/authSlice.js',
+    property: 'auth',
+    reason: 'the whole-slice auth replacement, spelled FOUR times across authSignIn,'
+      + ' authSignUp and initAuth (which carries two). SP-W1 named drift between the'
+      + ' copies as the real hazard rather than producer coverage; this is that law.',
+  }),
+]);
+
+/**
  * Keys minted at a producer site that the registered rebuilder does not emit — the
  * whole measurement DIRECTION 1 and DIRECTION 2 read in opposite directions.
  *
@@ -1030,6 +1265,49 @@ describe('SP-W1 allowlist-rebuilder registry — guard the guard', () => {
     };`).length, 'a one-hop aliased whole-source spread is still a carry').toBe(0);
   });
 
+  test('SP-W2 — the three pairability readers are driven against planted probes', () => {
+    // Same discipline the emitted-key reader gets: a reader that has never been shown a
+    // shape it must REFUSE is not known to discriminate, and a silently-empty answer from
+    // any of these three makes its whole direction pass vacuously.
+    const writerProbe = `
+      export function refresh(x) {
+        const blob = { a: x.a, b: x.b, gone: x.gone };
+        const other = { z: 1 };
+        return { blob, other };
+      }`;
+    const wrote = assignedObjectKeys(writerProbe, 'refresh', 'blob');
+    expect(wrote.found).toBe(true);
+    expect([...wrote.keys].sort()).toEqual(['a', 'b', 'gone']);
+    // It must not answer for a variable that is not there, nor for a missing function.
+    expect(assignedObjectKeys(writerProbe, 'refresh', 'nope').found).toBe(false);
+    expect(assignedObjectKeys(writerProbe, 'noSuchFn', 'blob').found).toBe(false);
+
+    // The reader counts a RENAMED read, which is the point: `q: f(src.b)` has read `b`.
+    const readerProbe = `
+      function read(row) {
+        const src = row.blob;
+        return { a: src.a, q: round(src.b), missing: other.c, lit: src['d'] };
+      }`;
+    const readKeys = keysReadOff(readerProbe, 'read', 'src');
+    expect([...readKeys.keys].sort(), 'renamed and string-literal reads both count')
+      .toEqual(['a', 'b', 'd']);
+    expect(keysReadOff(readerProbe, 'noSuchFn', 'src').found).toBe(false);
+
+    // The gate detector must fire on both house spellings and clear a function with none.
+    expect(hasExactKeyGate('function f(r){ if (!hasExactKeys(r, K)) return null; return {}; }', 'f'))
+      .toBe(true);
+    expect(hasExactKeyGate('function f(r){ if (!exactKeys(r, K)) return null; return {}; }', 'f'))
+      .toBe(true);
+    expect(hasExactKeyGate('function f(r){ return { a: r.a }; }', 'f'), 'no gate is no gate')
+      .toBe(false);
+
+    // Per-literal, never unioned — a union would hide drift BETWEEN two copies in one fn.
+    const twinProbe = `
+      const s1 = () => { state.auth = { a: 1, b: 2 }; };
+      const s2 = () => { state.auth = { a: 1, c: 3 }; state.other = { z: 1 }; };`;
+    expect(assignedMemberLiterals(twinProbe, 'auth')).toEqual([['a', 'b'], ['a', 'c']]);
+  });
+
   test('both producer doors discriminate, and each is driven THROUGH the composed predicate', () => {
     // Pinning the two doors individually is NOT enough: a predicate assembled from two
     // halves can lose one half without any red, because no site in the tree needs it
@@ -1141,6 +1419,116 @@ describe('SP-W1 allowlist-rebuilder registry — BOTH WAYS against the tree', ()
       + ' if it is faithful but has no producer rule yet. A REMOVED one is a win: delete its row.'
       + ' Rows are keyed by module + function, so this cannot red on a line move alone.\n',
     ).toEqual(declared);
+  });
+
+  test('DIRECTION 4 — every gate-exempt row still HAS its gate', () => {
+    // A roster row whose written reason is "the class cannot bite here, it fails closed"
+    // is only true while the gate exists. Delete the `exactKeys` call and the reason
+    // becomes a lie that no test contradicts — a frozen ledger's worst failure mode.
+    const ungated = [];
+    for (const row of GATED_ROWS) {
+      const file = srcFiles.find(({ rel }) => rel === row.module);
+      if (!file) { ungated.push(`${row.module}: not in the scan`); continue; }
+      if (!hasExactKeyGate(file.source, row.gateFn)) {
+        ungated.push(`${row.module}::${row.gateFn} (roster row \`${row.rosterFn}\`)`);
+      }
+      // The row it exempts must actually still be ON the roster, or the pair has rotted.
+      const onRoster = CLASS_ROSTER.some(
+        (entry) => entry.module === row.module && entry.fn === row.rosterFn,
+      );
+      if (!onRoster) ungated.push(`${row.module}::${row.rosterFn} left the roster`);
+    }
+    expect(
+      ungated,
+      '\nA roster row is exempted because its constructor REFUSES any row whose key set is'
+      + ' not exactly the declared list — so an extra producer key returns null instead of'
+      + ' being dropped. That gate is gone. Either restore it, or reclassify the roster row:'
+      + ' without the gate it is an ordinary allowlist rebuild and the class CAN bite it.\n',
+    ).toEqual([]);
+  });
+
+  test('DIRECTION 5 — the one enumerable writer/reader pair really is covered', () => {
+    const gaps = [];
+    const known = new Set(KNOWN_UNREAD_KEYS.map((row) => `${row.shape}::${row.key}`));
+    const seen = new Set();
+    for (const pair of PAIRED_SHAPES) {
+      const file = srcFiles.find(({ rel }) => rel === pair.module);
+      if (!file) { gaps.push(`${pair.shape}: ${pair.module} is not in the scan`); continue; }
+      const written = assignedObjectKeys(file.source, pair.writerFn, pair.writerVar);
+      const read = keysReadOff(file.source, pair.readerFn, pair.readerSource);
+      if (!written.found) { gaps.push(`${pair.shape}: writer ${pair.writerFn}/${pair.writerVar} not found`); continue; }
+      if (!read.found) { gaps.push(`${pair.shape}: reader ${pair.readerFn} not found`); continue; }
+      // NON-VACUITY: a pair that reads or writes nothing proves nothing.
+      expect(written.keys.size, `${pair.shape}: the writer emitted no keys`).toBeGreaterThan(1);
+      expect(read.keys.size, `${pair.shape}: the reader read no keys`).toBeGreaterThan(1);
+      for (const key of [...written.keys].sort()) {
+        if (read.keys.has(key)) continue;
+        seen.add(`${pair.shape}::${key}`);
+        if (!known.has(`${pair.shape}::${key}`)) gaps.push(`${pair.shape}::${key}`);
+      }
+    }
+    expect(
+      gaps,
+      '\nThe writer mints a key onto a PERSISTED shape that its own reader never reads back.'
+      + ' The blob still saves whole, so nothing is lost — but the field has no consumer,'
+      + ' which on a persisted shape is either a missing read or a field that should never'
+      + ' have been minted. Name it in the reader, or record it in KNOWN_UNREAD_KEYS with a'
+      + ' reason. Do NOT delete it from the writer here: that is a persisted-shape change.\n',
+    ).toEqual([]);
+    // Shrink-only, the same both-directions law KNOWN_DROPPED_KEYS carries.
+    const stale = KNOWN_UNREAD_KEYS
+      .filter((row) => !seen.has(`${row.shape}::${row.key}`))
+      .map((row) => `${row.shape}::${row.key}`);
+    expect(
+      stale,
+      '\nA frozen unread key is now READ (or its writer is gone). That is a WIN: delete the'
+      + ' stale row so the ledger only ever shrinks.\n',
+    ).toEqual([]);
+    for (const row of KNOWN_UNREAD_KEYS) {
+      expect(row.reason.length, `${row.key}: the reason is too thin to be one`).toBeGreaterThan(40);
+    }
+  });
+
+  test('DIRECTION 6 — the hand-copied shapes have not drifted apart', () => {
+    const drifted = [];
+    for (const shape of TWINNED_SHAPES) {
+      /** @type {string[][]} */
+      let copies = [];
+      if (shape.kind === 'returned') {
+        for (const site of shape.sites) {
+          const file = srcFiles.find(({ rel }) => rel === site.module);
+          if (!file) { drifted.push(`${shape.shape}: ${site.module} is not in the scan`); continue; }
+          const read = emittedKeys(file.source, site.fn);
+          if (!read.found) { drifted.push(`${shape.shape}: ${site.module}::${site.fn} not found`); continue; }
+          copies.push([...read.keys].sort());
+        }
+      } else {
+        const file = srcFiles.find(({ rel }) => rel === shape.module);
+        if (!file) { drifted.push(`${shape.shape}: ${shape.module} is not in the scan`); continue; }
+        copies = assignedMemberLiterals(file.source, shape.property);
+      }
+      // NON-VACUITY: one copy cannot disagree with itself, so a shape that has collapsed
+      // to a single spelling is a WIN that must retire its row rather than pass silently.
+      if (copies.length < 2) {
+        drifted.push(`${shape.shape}: only ${copies.length} copy found — if the duplication`
+          + ' is genuinely gone that is a win, and this row should be DELETED');
+        continue;
+      }
+      const [first, ...rest] = copies;
+      for (let i = 0; i < rest.length; i += 1) {
+        if (JSON.stringify(rest[i]) !== JSON.stringify(first)) {
+          drifted.push(`${shape.shape}: copy 1 names [${first.join(', ')}]`
+            + ` but copy ${i + 2} names [${rest[i].join(', ')}]`);
+        }
+      }
+    }
+    expect(
+      drifted,
+      '\nOne shape is rebuilt by hand in several places and the copies no longer name the'
+      + ' same keys. A key added to one copy and not the others survives one write path and'
+      + ' dies on the rest — the allowlist-rebuilder class wearing a different coat. Add the'
+      + ' key to every copy, or collapse the copies into one writer.\n',
+    ).toEqual([]);
   });
 
   test('every roster row is well-formed, and the registered row is the one DIRECTION 1 governs', () => {
