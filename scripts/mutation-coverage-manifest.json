@@ -210,6 +210,11 @@
    "kind": "rationale",
    "ref": "one-web-census-executed"
   },
+  "tests/lint/allowlistRebuilderRegistry.walker.test.js": {
+   "kind": "rationale",
+   "rationale": "SP-W1 allowlist-rebuilder class walker. Every figure it asserts is recomputed from source on each run by an acorn walk of all 1,563 src/*.js files: the rebuilder's emitted key list is read from its own returned literal (never hand-copied, so rebuild and assertion cannot drift), and the producer denominator is a two-door union predicate over object literals. Both frozen ledgers are proved in BOTH directions against that live derivation -- a new dropped key reds, and a CURED key also reds demanding its stale row be deleted -- so neither can rot into fiction. The file carries five of its own adversarial controls that execute on every run: the emitted-key reader is driven against a planted probe (conditional spread seen, nested sub-record not seen, whole-source spread detected, unknown name reports absence); the class detector is driven against a rebuild, a spread-carrying form, a renamed-key projection and a below-threshold form; and BOTH producer doors are driven individually AND through the composed predicate, which is the estate's recorded cure for a defense-in-depth half deleting itself unnoticed. The scan asserts ZERO parse failures and measures its own .jsx exclusion rather than assuming it, so it cannot fail open by silently shrinking its denominator. A standing single-point source mutation would sample one branch of machinery whose whole design is exact bidirectional derivation. The removers were additionally proven by hand at build time: planting `region: battle.region` on the field-battle producer in armyTransitKernel.js reddened DIRECTION 1 naming the exact key and site, and reverting cleared it.",
+   "kindNote": "rationale rather than a planted sweep mutation: a plant additionally requires a MUTATED_FILES row, and the sibling registry walkers (errandConsumerRegistry, serviceCategoryRegistration, satellitesLedgerWriters) all took rationales. Upgrading to a plant later is a strict improvement needing no baseline movement."
+  },
   "tests/lint/satellitesLedgerWriters.walker.test.js": {
    "kind": "rationale",
    "ref": "satellites-authority-census-executed-2026-08-04"
