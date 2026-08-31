@@ -132,7 +132,7 @@ in a commit message.
 | 2 | MODIFY | `src/components/gallery/CampaignStatePanel.jsx` |
 | 3 | MODIFY | `src/pdf/sections/FaithWar.jsx` |
 | 4 | MODIFY | `src/pdf/sections/PowerStructure.jsx` |
-| 5 | MODIFY | `src/components/new/tabs/WarFaithTab.jsx` |
+| 5 | MODIFY | `src/components/new/tabs/WarTab.jsx` (⚠ re-addressed 2026-08-31, §805 lane T11: landed against `WarFaithTab.jsx`, which the WAR/FAITH split deleted after moving the `tickDurationLabel` cure verbatim into `WarTab.jsx` — the path follows the content; the edit is not retired) |
 | 6 | MODIFY | `src/components/home/LandingArtifacts.jsx` |
 | 7 | MODIFY | `src/components/contentStudio/ContentSampleReceipt.jsx` |
 | 8 | MODIFY | `src/components/settlements/RealmStrip.jsx` |

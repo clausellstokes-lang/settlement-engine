@@ -5178,7 +5178,7 @@
         },
         {
           "action": "MODIFY",
-          "path": "src/components/new/tabs/WarFaithTab.jsx"
+          "path": "src/components/new/tabs/WarTab.jsx"
         },
         {
           "action": "CREATE",
@@ -5289,7 +5289,7 @@
           "src/domain/worldPulse/grammarReceiptPools.js",
           "src/domain/worldPulse/grammarNews.js",
           "src/components/map/TreatyPanel.jsx",
-          "src/components/new/tabs/WarFaithTab.jsx",
+          "src/components/new/tabs/WarTab.jsx",
           "tests/domain/treatySuccessionDossier.test.js",
           "tests/lint/grammarLifecycleKindPools.walker.test.js",
           "tests/lint/kindPoolFloors.walker.test.js",
@@ -10139,7 +10139,7 @@
         },
         {
           "action": "MODIFY",
-          "path": "src/components/new/tabs/WarFaithTab.jsx"
+          "path": "src/components/new/tabs/WarTab.jsx"
         },
         {
           "action": "MODIFY",
