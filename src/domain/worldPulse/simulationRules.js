@@ -413,6 +413,29 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // malformed saves only while the flag was lit would leave a dark world's saves
   // un-normalized — the fail-OPEN direction on a persistence surface.
   'warCirculationEnabled',
+  // Joined 2026-08-31 by lane T12 (W-MEM, ODQ §834) under CR-WR10-C item 4 (the compiled
+  // charter's §3 flag law), in the SAME commit as its ONE first real gate read —
+  // `concludedWars.warMemoryActive`, read BY NAME with the strict `=== true` idiom — and
+  // its AUTHORED certification row. Never a pending entry: the pending list is empty and
+  // stays empty, because manifesting is itself the act that makes a virtual key
+  // censusable and therefore the act that comes due. It sorts here because that is
+  // alphabetical order — `warCirculation` before `warMemory` — not precedence.
+  // ⚠ WHY IT TOOK A ROW RATHER THAN AN EXEMPTION, the undercityHighWater test verbatim:
+  // it writes a real PERSISTED field. The gate opens `worldState.concludedWars`, a
+  // conditionally-materialized ledger of append-closed war records. A persisted-state
+  // writer is exactly what the exempt list's own comment refuses to shrug at.
+  // ⚠ THE LOAD-BEARING SPELLING: the gate's receiver is named `rules`, not
+  // `simulationRules`, and that is deliberate rather than stylistic — the observed-shape
+  // corpus discovers a flag by matching a `simulationRules.<x>Enabled` receiver, and a
+  // key discovered there would be judged as one the corpus can light, which it cannot.
+  // ⛔ THE READ IS SPELLED BY NAME rather than through a frozen-list `.every()` for the
+  // reason this census exists: a computed member access attributes to NO key and would be
+  // fully wired, genuinely gated, and invisible here.
+  // ⛔ THIS KEY TAKES THE LAST SEAT subsystemRowsVirtual.js has (chair, TE-VIRT-1): that
+  // file stands at its 800-line layer ceiling once this row lands, so the NEXT virtual
+  // flag is blocked behind its decomposition. Recorded here because this is where the
+  // next lane will look.
+  'warMemoryEnabled',
   'contributionLedgerEnabled',
   // Joined 2026-08-30 by W-SEAT car SEAT-1 under CR-WR10-C item 4 (the compiled charter's
   // §3 flag law), in the SAME commit as its first real gate read and its AUTHORED

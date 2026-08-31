@@ -181,6 +181,10 @@ const UNDERCITY_HIGH_WATER = 'undercityHighWaterEnabled';
 // module-scope edits and carrying ZERO new test titles here.
 const TREASURY = 'treasuryEnabled';
 const FOREIGN_SEAT = 'foreignSeatEnabled';
+// W-MEM (lane T12). The Remembrance ledger of concluded wars, joined with its manifest
+// entry and its ONE by-name gate read (warMemoryActive, worldPulse/concludedWars.js) in a
+// single commit — the §49-ruling-3 cost above, paid in the same module-scope edits.
+const WAR_MEMORY = 'warMemoryEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
@@ -193,6 +197,7 @@ const VIRTUAL_RULES = Object.freeze([
   UNDERCITY_HIGH_WATER,
   TREASURY,
   FOREIGN_SEAT,
+  WAR_MEMORY,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -252,6 +257,24 @@ const LANE_LEAVES = Object.freeze({
   // twenty stressor types, and tracing this lane's zero-candidate claim through it would
   // measure the entire stressor vocabulary rather than this lane's.
   [FOREIGN_SEAT]: ['src/domain/rulingPowerSeat.js'],
+  // W-MEM. THE WRITER AND ITS SHAPE LEAF — the gate where the flag is read and the record
+  // it opens. pulseKernel.js is in the row's wider `module` list because a reader needs the
+  // call site's address, and is deliberately absent here: it is the pulse mouth, and tracing
+  // this lane's zero-candidate claim through it would measure every other subsystem's
+  // vocabulary at once. ZERO-CANDIDATE by construction — the writer mints no outcome and
+  // composes no beat; it folds a secondary ledger, which is why the row's eventTypes is
+  // empty rather than merely unfilled.
+  // W-MEM. THE GATE FILE ALONE, the same scoping treasury and politics take: this is
+  // where the flag is read and where the ledger is folded. concludedWarRecord.js is in
+  // the row's wider `module` list because a reader needs the record's shape, and is
+  // deliberately NOT here — it is the SHAPE leaf, and the fact-row it builds names the
+  // classifier's own field vocabulary rather than minting any of it.
+  // ⭐ ZERO-CANDIDATE, AND NOW LITERALLY SO: the writer mints no outcome and composes no
+  // beat, so the row's eventTypes is empty and MEANS empty. It reads no candidate
+  // vocabulary either — the engine-outcome-to-fact-row conversion was rehomed to the
+  // shape leaf that owns it, which is where that field name belongs on ownership
+  // grounds and which leaves this claim provable by the trace rather than by argument.
+  [WAR_MEMORY]: ['src/domain/worldPulse/concludedWars.js'],
   [AXES]: ['src/domain/worldPulse/beliefAxes.js'],
   // All three subject families share ONE gate door (beliefAxes.subjectAxesActive) and ONE
   // derivation leaf, so all three name the same pair. That is the honest scope: the leaf

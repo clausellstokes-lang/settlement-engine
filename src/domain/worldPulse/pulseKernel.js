@@ -28,7 +28,7 @@ import { advanceMartialReadiness, buildThreatByCid } from './martialReadiness.js
 import { advanceConquestFeeds } from './conquestFeeds.js';
 import { advanceMercenaryMarket } from './mercenaryMarket.js';
 import { isSubsystemActive } from './subsystemActivation.js';
-import { deploymentReturnOutcomes } from './deploymentReturn.js';
+import { deploymentReturnOutcomes } from './deploymentReturn.js'; import { recordConcludedWars } from './concludedWars.js';
 import { evaluateOccupations } from './occupation.js';
 import { addRegionalChannels, setRegionalChannelStatus } from '../region/graph.js';
 import { aftermathNewsEntries, graduationNewsEntries, recordGraduationsIntoHistory } from './stressorAftermath.js';
@@ -147,6 +147,7 @@ export const RESIDUE_STRIP_SITES = Object.freeze([
   { id: 'strategy_deploy',       banks: 'deployment seed + war_front channel + deploy-tick exhaustion ratchet + conscription/levy debits', coveredBy: 'warConservationDismiss.test.js' },
   { id: 'conquest',              banks: 'occupation seed + conquest disposition ratchet',     coveredBy: 'worldPulseDeferMajorResidue.test.js' },
   { id: 'occupation_vassalized', banks: 'vassal promotion + advance-win disposition residue', coveredBy: 'worldPulseDeferMajorResidue.test.js' },
+  { id: 'concluded_wars',        banks: 'the concluded-war record (W-MEM) — staged or sealed out of band',  coveredBy: 'concludedWarsWriter.test.js' },
 ]);
 
 // The upward pressure to mobilize: a settlement RAMPS its war posture
@@ -2792,13 +2793,18 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       },
     });
     if (cracks.changed) {
-      memoryState = /** @type {typeof memoryState} */ (cracks.worldState);
-      settlementUpdates = cracks.settlementUpdates;
-      if (cracks.newsEntries.length) {
-        wizardNews = appendObservedWizardNewsEntries(wizardNews, cracks.newsEntries, { now }, newsReceiptSink);
-      }
+      memoryState = /** @type {typeof memoryState} */ (cracks.worldState); settlementUpdates = cracks.settlementUpdates;
+      if (cracks.newsEntries.length) wizardNews = appendObservedWizardNewsEntries(wizardNews, cracks.newsEntries, { now }, newsReceiptSink);
     }
   }
+  // W-MEM — THE CONCLUDED-WAR LEDGER, the last fold of this stage and deliberately so:
+  // it must see this tick's applied verdicts, its treaty mint and its engagement feed,
+  // all of which land above. Dark ⇒ returns null ⇒ not one byte moves.
+  // @residue-strip: concluded_wars  (registered in RESIDUE_STRIP_SITES; sync-enforced)
+  // The STRIP is the defer gate inside the writer itself: a paused tick banks no record
+  // to strip, so this site's residue is byte-neutral by construction rather than by care.
+  const nextConcludedWars = recordConcludedWars({ worldState: memoryState, resolvedDeployments: war.resolvedDeployments, appliedOutcomes: applied.autoApplied, newsEntries: wizardNews?.entries, tick: worldState.tick, rules: simulationRules, deferred: deferMajors, inCanon: (id) => !!postTimeSnapshot?.byId?.has?.(id), windDown: !simulationRules?.warLayerEnabled });
+  if (nextConcludedWars) memoryState = { ...memoryState, concludedWars: nextConcludedWars };
   // @pulse-stage: finalize_receipt
   const finalRegionalGraph = applyLineageBirthsToGraph(applied.regionalGraph, memberBirths, now);
   const appliedCoalitionEvidence = warCoalitionEvidenceFromOutcomes(applied.autoApplied);

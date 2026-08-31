@@ -28,6 +28,7 @@
 // (a new residue-banking layer must add BOTH a registry entry AND a guard check here).
 export const GUARDED_RESIDUE_TYPES = Object.freeze([
   'war_mobilization', 'strategy_deploy', 'conquest', 'occupation_vassalized',
+  'concluded_wars',
 ]);
 
 // DOCUMENTED ALLOWLIST (r2 worldpulse-tick-core-1) — the moral-drift (spatialLedgers.moralDrift)
@@ -84,6 +85,26 @@ function residueCheckers(worldState, channels) {
     conquest: (/** @type {any} */ major) => {
       const target = String(major.targetSaveId); // conquest targetSaveId = the conquered (occupied) id
       return occupations[target] !== undefined ? `occupations[${target}] survived` : null;
+    },
+    // W-MEM. The concluded-war ledger is written OUT OF BAND at consequence_fold, so it
+    // owes this guard like any other residue-banking layer. Its strip is the writer's own
+    // defer gate — a paused tick returns before it reads anything — so the honest check is
+    // that a SUPPRESSED major left no record behind it. Keyed on the suppressed major's
+    // target, which for a conquest is the CONQUERED settlement, and matched against the
+    // participants of any record still staged: a sealed record is history and is never a
+    // leak, however it got there.
+    concluded_wars: (/** @type {any} */ major) => {
+      const target = String(major.targetSaveId);
+      const ledger = worldState?.concludedWars || {};
+      for (const key of Object.keys(ledger).sort()) {
+        const record = ledger[key] || {};
+        if (record.sealed === true) continue;
+        const parties = Array.isArray(record.participants) ? record.participants : [];
+        if (parties.some((/** @type {any} */ p) => String(p?.id) === target)) {
+          return `concludedWars[${key}] banked a staged record naming ${target}`;
+        }
+      }
+      return null;
     },
     occupation_vassalized: (/** @type {any} */ major) => {
       const occupied = major.occupiedSaveId != null ? String(major.occupiedSaveId) : null;

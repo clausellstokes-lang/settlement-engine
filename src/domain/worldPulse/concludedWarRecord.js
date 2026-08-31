@@ -544,6 +544,39 @@ export function normalizeConcludedWars(value) {
 }
 
 /**
+ * THE ENGINE OUTCOME → FACT ROW conversion, homed here because the fact row's SHAPE is
+ * this file's business and the writer's is placement. Returns null for an outcome that
+ * is not one of the two terminal kinds a war can end on.
+ *
+ * ⚠ THE TICK IS RESOLVED, NEVER ASSUMED. The razing road is recovered downstream by
+ * RE-MINTING the outcome id from (road, razer, victim, TICK) and comparing for EQUALITY
+ * — ids are never parsed, because settlement ids may contain dots and a mis-split would
+ * mis-attribute an atrocity. Resolve the tick wrongly and EVERY razing reports its road
+ * unreconstructable, taking its whole war to unclassified. Outcomes publish it as
+ * `generatedAtTick`; a bare `tick` is accepted so a hand-built fixture reads like a real
+ * outcome; and the caller's own tick is the exact fallback for a same-tick writer.
+ *
+ * @param {unknown} value @param {number} tick
+ * @returns {{ row: Record<string, unknown>, razed: boolean }|null}
+ */
+export function terminalOutcomeFrom(value, tick) {
+  const outcome = recordOf(value);
+  const kind = text(outcome.candidateType);
+  if (kind !== 'conquest' && kind !== 'razing') return null;
+  const id = text(outcome.id);
+  if (!id) return null;
+  return {
+    row: {
+      id,
+      candidateType: kind,
+      targetSaveId: text(outcome.targetSaveId),
+      tick: wholeTick(outcome.generatedAtTick) ?? wholeTick(outcome.tick) ?? tick,
+    },
+    razed: kind === 'razing',
+  };
+}
+
+/**
  * Is this a close road the current build knows? Used by the WRITE side, where an
  * unmapped road is a finding worth reding a discovery arm over. The READ side
  * never asks: an unknown road on a loaded record is a future, not a fault.

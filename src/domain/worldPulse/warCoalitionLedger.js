@@ -121,7 +121,15 @@ export function normalizeJoinAnchor(raw, deploymentPartyId = null, deploymentTar
   };
 }
 
-/** One record or none; malformed/multiple ledgers never become facts. */
+/** One record or none; malformed/multiple ledgers never become facts.
+ *
+ * ⚠ THE `@param` TAGS ARE LOAD-BEARING, for the reason normalizeJoinAnchor states
+ * above and this function was missed by: with them absent, tsc infers `partyId` from
+ * its `= null` DEFAULT ALONE — `null | undefined` — so every caller passing a real id
+ * reddens the strict domain check against a signature nobody wrote.
+ * @param {unknown} deployment
+ * @param {string|null} [partyId]
+ */
 export function joinAnchorOf(deployment, partyId = null) {
   const row = asObject(deployment);
   if (!Array.isArray(row.joinLedger) || row.joinLedger.length !== 1
