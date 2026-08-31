@@ -140,15 +140,15 @@ export function prosperityHeaderPoolKey(rank, access) {
   const narrow = NARROW_ACCESS.includes(access);
   if (rank >= HIGH_RUNG_FROM) {
     return narrow
-      ? 'COMBINATION C2 — a high rung on a narrow approach (isolated / mountain_pass)'
-      : 'COMBINATION C1 — a high rung on a working approach';
+      ? 'COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)'
+      : 'COMBINATION C1: a high rung on a working approach';
   }
   if (rank <= LOW_RUNG_TO) {
     return narrow
-      ? 'COMBINATION C5 — a low rung on a narrow approach'
-      : 'COMBINATION C4 — a low rung on a working approach';
+      ? 'COMBINATION C5: a low rung on a narrow approach'
+      : 'COMBINATION C4: a low rung on a working approach';
   }
-  return 'COMBINATION C3 — the middle rungs';
+  return 'COMBINATION C3: the middle rungs';
 }
 
 /**
@@ -176,9 +176,9 @@ export function foodSecurityPoolKey(foodSecurityLabel, stockpile) {
  */
 export function foodTilePoolKey(foodBalance) {
   if (!foodBalance?.available) return null;
-  if (Number(foodBalance.deficit) > 0) return 'FOOD — deficit';
-  if (Number(foodBalance.surplus) > 0) return 'FOOD — surplus';
-  return 'FOOD — balanced';
+  if (Number(foodBalance.deficit) > 0) return 'FOOD: deficit';
+  if (Number(foodBalance.surplus) > 0) return 'FOOD: surplus';
+  return 'FOOD: balanced';
 }
 
 /**
@@ -189,7 +189,7 @@ export function foodTilePoolKey(foodBalance) {
 export function granaryPoolKey(granaryOutlook) {
   if (!granaryOutlook?.available) return null;
   const band = text(granaryOutlook.band);
-  return band ? `GRANARY — ${band}` : null;
+  return band ? `GRANARY: ${band}` : null;
 }
 
 /**

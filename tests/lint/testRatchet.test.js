@@ -722,14 +722,26 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // The discharge itself is recorded in OWNER_GATED_DISCHARGE at the top of this file,
   // where the pin that used to refuse it now checks the cure is still in the tree.
   const WALKER_ROWS_OWED = Object.freeze({
+    // ⭐⭐ 2026-08-31, VOICE-1b (ODQ §854) — THE FOUR VOICE BLOCKERS WERE STALE IN BOTH
+    // FIGURES AND PRESCRIPTION, AND THE PRESCRIPTION WAS THE FORBIDDEN CURE. Each of the
+    // four lines below used to say the cure was "a re-freeze of the voice ratchet fixture
+    // at a measured sha". The standing STRIP-never-raise ruling (ODQ line 266, where a
+    // 23-em-dash breach in aiCharter.js was STRIPPED 681 → 658 rather than banked) forbids
+    // exactly that, and a blocker line naming the forbidden cure is how the forbidden cure
+    // gets run — measured: re-freezing would NOT have gone green, because both budget arms
+    // compare against HARDCODED constants, so four reds would have become TWO, green ON the
+    // banked growth, with a RATCHET-DOWN notice inviting these very rows' deletion. The
+    // figures were stale too (1369/18 recorded; 1478/21 measured at 6770f878f). The cure is
+    // now enforced rather than merely prescribed: tests/helpers/shrinkOnlyBaseline.js makes
+    // the documented `UPDATE_VOICE_BASELINE=1` refreeze THROW on any total that would rise.
     'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget':
-      'NOT FREED — needs a re-freeze of the voice ratchet fixture at a measured sha (string-literal debt 1369 against a budget of 670, from Lane P-3 generated corpora). Own wave: the re-freeze is large and the corpora are machine-generated.',
+      'NOT FREED — 1028 string-literal em dashes against a hardcoded budget of 670 (1478 before VOICE-1b burned the dark half; the blocker previously recorded a stale 1369). CAUSE: two 2026-08-03 trains, P-1 `a277f53d3` (the six state-prose desk leaves, 635 em, 81.5% of it, named nowhere until §854) and P-3 `23d118eb2` (the causal corpus, 144 em), both through a generator that transports authored markdown byte-for-byte and validates nothing. ⛔ THE CURE IS STRIP, NOT RE-FREEZE (ODQ line 266, STRIP-never-raise): re-freezing banks the growth, turns the two per-file arms green ON it, and invites deleting these census rows. The remaining debt is dominated by the 338 READER-prose em dashes in the dossier corpora, which are the owner-signed T5-ONE-REGEN constituent — that regen is the wave that frees this row.',
     'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
-      'NOT FREED — the per-file arm of the same string-literal ratchet; same re-freeze, same wave.',
+      'NOT FREED — the per-file arm of the same string-literal ratchet; same trains, same STRIP prescription, same T5-regen wave. ⚠ This arm is the one that actually names the drifted files, so it is the arm that must NEVER be re-frozen: banking it is what would make the growth invisible again.',
     'tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) total JSX debt never grows past its committed budget':
-      'NOT FREED — the JSX arm of the same ratchet (18 against a budget of 6); same re-freeze, same wave.',
+      'NOT FREED — 21 JSX em dashes against a hardcoded budget of 6 (the blocker previously recorded a stale 18; the P-1/P-3 burn did not touch this arm, and cannot — the drift here is component copy). Same STRIP prescription: rewrite the component strings per docs/VOICE_AND_TONE.md §6; never raise the six.',
     'tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
-      'NOT FREED — the per-file JSX arm of the same ratchet; same re-freeze, same wave.',
+      'NOT FREED — the per-file JSX arm of the same ratchet; same STRIP prescription, same wave. Nine components carry the growth against a baseline of zero for each.',
     'tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target':
       'NOT FREED — the cure is to give the R-BLD-10 chair-ruling row in docs/FABLE_VALIDATION_QUEUE.md a resolvable @enforced-by target, which is a chair ruling about that row, not a ratchet edit.',
     // ⭐⭐ 2026-08-30, TE-RESIDUE-1 — THE metronome ROW LEFT, AND IT LEFT THE RIGHT WAY.

@@ -5,7 +5,7 @@
 /** @type {Readonly<Record<string, object>>} */
 export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
   "DS-STR-1": {
-    "title": "DS-STR-1 — Overview › Active crisis banners · `settlement.stress[] {type, icon, label, colour, summary, crisisHook}`",
+    "title": "DS-STR-1: Overview › Active crisis banners · `settlement.stress[] {type, icon, label, colour, summary, crisisHook}`",
     "slots": [
       "settlement",
       "season",
@@ -608,7 +608,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "ARITY — several banners standing at once": [
+      "ARITY: several banners standing at once": [
         {
           "angle": "counterforce",
           "text": "{settlement} is carrying more than one crisis at once, and they are not independent — each makes the others harder to end.",
@@ -649,14 +649,14 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-STR-2": {
-    "title": "DS-STR-2 — Stressor lifecycle, counterforce, synergy and origin · `worldState.stressors[] {type, severity, status, lifecycleStage, memoryStrength, originContext}` × `counterforceAssessment` × `synergyAssessment`",
+    "title": "DS-STR-2: Stressor lifecycle, counterforce, synergy and origin · `worldState.stressors[] {type, severity, status, lifecycleStage, memoryStrength, originContext}` × `counterforceAssessment` × `synergyAssessment`",
     "slots": [
       "settlement",
       "counterpart",
       "reason"
     ],
     "pools": {
-      "LIFECYCLE — emerging": [
+      "LIFECYCLE: emerging": [
         {
           "angle": "unfolding",
           "text": "The trouble is new here. It shows in small displacements — a schedule slipping, a price moving — and has not yet been named out loud.",
@@ -673,7 +673,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "LIFECYCLE — active": [
+      "LIFECYCLE: active": [
         {
           "angle": "visitor",
           "text": "The crisis is fully underway and the town is arranged around it — everything ordinary now happens in its margins.",
@@ -692,7 +692,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "LIFECYCLE — peaking": [
+      "LIFECYCLE: peaking": [
         {
           "angle": "counterforce",
           "text": "It is as bad as it has been. Whatever the town had in reserve is being spent, and there is no obvious second reserve.",
@@ -709,7 +709,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "LIFECYCLE — easing": [
+      "LIFECYCLE: easing": [
         {
           "angle": "unfolding",
           "text": "The worst has passed. The town is not recovered, but it has begun to plan past the trouble rather than around it.",
@@ -726,7 +726,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "LIFECYCLE — residual": [
+      "LIFECYCLE: residual": [
         {
           "angle": "elder",
           "text": "The crisis is over and the town still moves as though it were not — the habits it forced have outlived the reason for them.",
@@ -745,7 +745,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "COUNTERFORCE — floorsMet with a strong score": [
+      "COUNTERFORCE: floorsMet with a strong score": [
         {
           "angle": "counterforce",
           "text": "The town is meeting this well. Its strengths line up against exactly this kind of trouble, and the trouble is losing ground faster than it would elsewhere.",
@@ -764,7 +764,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "COUNTERFORCE — floorsMet: false": [
+      "COUNTERFORCE: floorsMet: false": [
         {
           "angle": "threshold",
           "text": "The town is strong in most of what this demands and short in one part, and the short part sets the pace.",
@@ -783,7 +783,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "COUNTERFORCE — a named leading source": [
+      "COUNTERFORCE: a named leading source": [
         {
           "angle": "counterforce",
           "text": "What is carrying {settlement} through this is {reason} — the rest of the town's strengths are following that one.",
@@ -807,7 +807,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "COUNTERFORCE — weak or absent": [
+      "COUNTERFORCE: weak or absent": [
         {
           "angle": "street",
           "text": "The town has little to bring against this. It will end when it ends, and not because of anything {settlement} does.",
@@ -828,7 +828,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "SYNERGY — famine × disease_outbreak": [
+      "SYNERGY: famine × disease_outbreak": [
         {
           "angle": "ledger",
           "text": "Hunger and sickness are compounding here — the ill cannot work the fields, and the fields are why they are ill.",
@@ -847,7 +847,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "SYNERGY — famine × siege": [
+      "SYNERGY: famine × siege": [
         {
           "angle": "counterforce",
           "text": "The hunger cannot lift while the lines hold. Relief exists; it is simply on the wrong side of the walls.",
@@ -864,7 +864,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "SYNERGY — occupation × insurgency": [
+      "SYNERGY: occupation × insurgency": [
         {
           "angle": "unfolding",
           "text": "The resistance is bleeding the garrison. Occupation and revolt feed each other here, and the arrangement costs the occupier more each season.",
@@ -883,7 +883,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "SYNERGY — mass_migration × disease_outbreak": [
+      "SYNERGY: mass_migration × disease_outbreak": [
         {
           "angle": "visitor",
           "text": "The camps and the contagion are one problem — people packed close enough to shelter each other are packed close enough to infect each other.",
@@ -902,7 +902,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "SYNERGY — coup_detat × succession_void": [
+      "SYNERGY: coup_detat × succession_void": [
         {
           "angle": "threshold",
           "text": "An empty seat invites the knives. The vacancy did not cause the conspiracy, but it removed every reason not to have one.",
@@ -919,7 +919,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "SYNERGY — market_shock × indebtedness": [
+      "SYNERGY: market_shock × indebtedness": [
         {
           "angle": "ledger",
           "text": "The crash and the debt are one problem now — creditors are calling in what they are owed precisely because they doubt it is collectable.",
@@ -938,7 +938,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — foreign_sponsored": [
+      "ORIGIN: foreign_sponsored": [
         {
           "angle": "ledger",
           "text": "The trouble here has a foreign hand behind it — coin that traces back across a border, and someone local living better than their station explains.",
@@ -957,7 +957,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — abandoned_agent": [
+      "ORIGIN: abandoned_agent": [
         {
           "angle": "unfolding",
           "text": "Whoever set this in motion has stopped paying for it. The work continues out of habit and desperation rather than instruction.",
@@ -974,7 +974,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — internal_conspiracy": [
+      "ORIGIN: internal_conspiracy": [
         {
           "angle": "counterforce",
           "text": "No border explains this. The knife came from inside {settlement}, and the loyalty tests spreading through the council say so more clearly than any evidence.",
@@ -993,7 +993,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — declared_war": [
+      "ORIGIN: declared_war": [
         {
           "angle": "visitor",
           "text": "The hostility here is open. {counterpart}'s banners are shown, its intentions stated, and its supply lines are the only part not on display.",
@@ -1014,7 +1014,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "ORIGIN — unattributed": [
+      "ORIGIN: unattributed": [
         {
           "angle": "street",
           "text": "No banner has been raised. The town knows it is under pressure and does not know from whom.",
@@ -1031,7 +1031,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — resistance": [
+      "ORIGIN: resistance": [
         {
           "angle": "unfolding",
           "text": "This is a resistance rather than a revolt — it was born under an occupation, and it defines itself against the occupier rather than the seat.",
@@ -1050,7 +1050,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "ORIGIN — palace_coup": [
+      "ORIGIN: palace_coup": [
         {
           "angle": "visitor",
           "text": "The conspiracy is a courtly one. Invitations to private dinners are circulating, and the guest list is the plot.",
@@ -1067,7 +1067,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — barracks_coup": [
+      "ORIGIN: barracks_coup": [
         {
           "angle": "unfolding",
           "text": "The garrison is the danger. It drilled at midnight without orders, or with orders nobody will admit to giving.",
@@ -1084,7 +1084,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — merchant_cabal": [
+      "ORIGIN: merchant_cabal": [
         {
           "angle": "ledger",
           "text": "The money has turned against the seat. Credit has dried up for anyone aligned with the ruling power, and no house will say why.",
@@ -1103,7 +1103,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "ORIGIN — temple_putsch": [
+      "ORIGIN: temple_putsch": [
         {
           "angle": "street",
           "text": "The sermons have changed. Obedience to unworthy rulers is suddenly a live question, and it is being asked from a pulpit.",
@@ -1120,7 +1120,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — arcane_ascendancy": [
+      "ORIGIN: arcane_ascendancy": [
         {
           "angle": "visitor",
           "text": "The casters are moving on the seat. Wards around the council hall have failed more than once this season, and the mages responsible shrug.",
@@ -1139,7 +1139,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "ORIGIN — council_schism": [
+      "ORIGIN: council_schism": [
         {
           "angle": "ledger",
           "text": "The government has split against itself. A rump session voted itself emergency powers while the chamber stood half empty.",
@@ -1156,7 +1156,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — popular_revolt": [
+      "ORIGIN: popular_revolt": [
         {
           "angle": "street",
           "text": "The streets rose on their own. No faction owns this yet, which is what makes it dangerous to everyone.",
@@ -1173,7 +1173,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — servile_uprising": [
+      "ORIGIN: servile_uprising": [
         {
           "angle": "street",
           "text": "The bound labour of {settlement} has risen against the households that held it. The work songs in the fields changed first, and the overseers did not understand the new words.",
@@ -1192,7 +1192,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — tax_revolt": [
+      "ORIGIN: tax_revolt": [
         {
           "angle": "ledger",
           "text": "The levies of a drowning treasury finally broke the commons. Collectors travel in pairs, then in fours, and lately not at all.",
@@ -1211,7 +1211,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "ORIGIN — arcane_burnout": [
+      "ORIGIN: arcane_burnout": [
         {
           "angle": "visitor",
           "text": "The magic here is gone because it was spent. Where the surge burned hottest, candles gutter and wards lie cold.",
@@ -1230,7 +1230,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ORIGIN — leyline_silence": [
+      "ORIGIN: leyline_silence": [
         {
           "angle": "unfolding",
           "text": "The magic simply stopped answering. No omen, no surge, no warning — only the silence, and nobody yet knows why.",
@@ -1252,14 +1252,14 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-CND-1": {
-    "title": "DS-CND-1 — Active conditions: severity, direction, provenance and family · `settlement.activeConditions[] {archetype, severity, severityBand, status, triggeredAt, duration, causes[], affectedSystems[]}`",
+    "title": "DS-CND-1: Active conditions: severity, direction, provenance and family · `settlement.activeConditions[] {archetype, severity, severityBand, status, triggeredAt, duration, causes[], affectedSystems[]}`",
     "slots": [
       "settlement",
       "reason",
       "timeband_age"
     ],
     "pools": {
-      "SEVERITY — low": [
+      "SEVERITY: low": [
         {
           "angle": "ledger",
           "text": "The condition is present and light — it shows in the accounting rather than the streets.",
@@ -1278,7 +1278,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "SEVERITY — medium": [
+      "SEVERITY: medium": [
         {
           "angle": "ledger",
           "text": "The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.",
@@ -1297,7 +1297,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "SEVERITY — high": [
+      "SEVERITY: high": [
         {
           "angle": "visitor",
           "text": "This is one of the defining facts about the town at present. Systems that ought to be independent are all bending around it.",
@@ -1316,7 +1316,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "SEVERITY — critical": [
+      "SEVERITY: critical": [
         {
           "angle": "counterforce",
           "text": "The town is at its limit. There is no capacity left to absorb this, and nothing behind it that could absorb the next thing.",
@@ -1335,7 +1335,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "DIRECTION — worsening": [
+      "DIRECTION: worsening": [
         {
           "angle": "unfolding",
           "text": "It is getting worse, steadily rather than suddenly; each season costs a little more than the one before.",
@@ -1352,7 +1352,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "DIRECTION — stable, and the FLAT case (no valid directional status)": [
+      "DIRECTION: stable, and the FLAT case (no valid directional status)": [
         {
           "angle": "ledger",
           "text": "It holds where it is. Neither the pressure nor the response is gaining, and the balance has become the normal state.",
@@ -1369,7 +1369,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "DIRECTION — easing": [
+      "DIRECTION: easing": [
         {
           "angle": "unfolding",
           "text": "It is lifting. Slowly, and from a level the town remembers clearly, but lifting.",
@@ -1388,7 +1388,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "ARCHETYPE — reconstruction": [
+      "ARCHETYPE: reconstruction": [
         {
           "angle": "unfolding",
           "text": "The town is rebuilding. What was broken is being replaced, and the race is between the rebuilding and the memory of why it was needed.",
@@ -1407,7 +1407,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ARCHETYPE — boom": [
+      "ARCHETYPE: boom": [
         {
           "angle": "ledger",
           "text": "The town is prosperous. Trade runs in its favour, and the expectation of that has become part of the economy rather than a comment on it.",
@@ -1426,7 +1426,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ARCHETYPE — flourishing": [
+      "ARCHETYPE: flourishing": [
         {
           "angle": "ledger",
           "text": "This is a good stretch for the town. There is room here for things that are not strictly necessary, and the accounts carry them without strain.",
@@ -1445,7 +1445,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "PROVENANCE — causes[] or triggeredAt.sourceEventType populated": [
+      "PROVENANCE: causes[] or triggeredAt.sourceEventType populated": [
         {
           "angle": "ledger",
           "text": "The condition traces back to {reason}, and the trace is not disputed — the town knows exactly what did this.",
@@ -1469,7 +1469,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "PROVENANCE — no causes[] and no sourceEventType": [
+      "PROVENANCE: no causes[] and no sourceEventType": [
         {
           "angle": "ledger",
           "text": "The condition stands. Nothing in the record explains where it came from, and the town has stopped asking.",
@@ -1490,7 +1490,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "DURATION — inside the expiry wind-down window": [
+      "DURATION: inside the expiry wind-down window": [
         {
           "angle": "unfolding",
           "text": "It is nearly over. The condition is winding down on its own schedule rather than anyone's effort.",
@@ -1507,7 +1507,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "FAMILY — acute crisis": [
+      "FAMILY: acute crisis": [
         {
           "angle": "visitor",
           "text": "This is an emergency the town is inside of — not a policy, not a trend, an event with a shape and an end.",
@@ -1526,7 +1526,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "FAMILY — regional transmission": [
+      "FAMILY: regional transmission": [
         {
           "angle": "ledger",
           "text": "The trouble did not begin here. It arrived along a connection {settlement} depends on, and the dependence is why it arrived.",
@@ -1547,7 +1547,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "FAMILY — war layer, aggressor side": [
+      "FAMILY: war layer, aggressor side": [
         {
           "angle": "ledger",
           "text": "The war is being fought elsewhere and paid for here. Men, coin and grain leave; nothing comes back on the same schedule.",
@@ -1566,7 +1566,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "FAMILY — occupation layer": [
+      "FAMILY: occupation layer": [
         {
           "angle": "counterforce",
           "text": "Holding this place costs more than it returns. Garrisons, administrators and suppression tie down strength that was meant for elsewhere.",
@@ -1585,7 +1585,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "FAMILY — recovery": [
+      "FAMILY: recovery": [
         {
           "angle": "unfolding",
           "text": "The worst is behind {settlement}. What remains is the work of being a normal town again, which is slower than it looks.",

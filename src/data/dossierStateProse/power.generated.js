@@ -5,7 +5,7 @@
 /** @type {Readonly<Record<string, object>>} */
 export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
   "DS-POW-1": {
-    "title": "DS-POW-1 — `Power › Public legitimacy banner` · `powerStructure.publicLegitimacy{score,label,breakdown{prosperity,safety,defense,food},governanceFractured}`",
+    "title": "DS-POW-1: `Power › Public legitimacy banner` · `powerStructure.publicLegitimacy{score,label,breakdown{prosperity,safety,defense,food},governanceFractured}`",
     "sectionTarget": [
       "power",
       "overview"
@@ -371,7 +371,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-POW-2": {
-    "title": "DS-POW-2 — `Power › Stability + governing authority header` · `powerStructure.{stability, governingName, factions[], recentConflict}`",
+    "title": "DS-POW-2: `Power › Stability + governing authority header` · `powerStructure.{stability, governingName, factions[], recentConflict}`",
     "sectionTarget": [
       "power"
     ],
@@ -540,7 +540,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "no token matched — unclassified (the plain-description floor)": [
+      "no token matched: unclassified (the plain-description floor)": [
         {
           "angle": "ledger",
           "text": "{faction} holds the hall at {settlement} and the town's affairs run through it.",
@@ -647,7 +647,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-POW-3": {
-    "title": "DS-POW-3 — `Power › The Ladder` · `rungs[]{npcId,name,standing} + ladderInstabilityOf`",
+    "title": "DS-POW-3: `Power › The Ladder` · `rungs[]{npcId,name,standing} + ladderInstabilityOf`",
     "sectionTarget": [
       "power"
     ],
@@ -806,7 +806,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-POW-4": {
-    "title": "DS-POW-4 — `Power › Rule and succession` · `coupContenders(settlement) + powerStructure.previousGovernments[]`",
+    "title": "DS-POW-4: `Power › Rule and succession` · `coupContenders(settlement) + powerStructure.previousGovernments[]`",
     "sectionTarget": [
       "power",
       "history (the lineage arm)"
@@ -937,7 +937,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "legitimacyHold — public backing hardens the hold": [
+      "legitimacyHold: public backing hardens the hold": [
         {
           "angle": "street",
           "text": "The town is behind whoever sits at {settlement}, and a ruler with the town behind them can do things a ruler without it cannot attempt.",
@@ -962,7 +962,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "legitimacyHold — public opinion neither helps nor hurts": [
+      "legitimacyHold: public opinion neither helps nor hurts": [
         {
           "angle": "ledger",
           "text": "Public opinion at {settlement} is doing nothing to the {seat} either way, which leaves the hold resting entirely on what {faction} can muster for itself.",
@@ -989,7 +989,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "legitimacyHold — public rejection is breaking the hold": [
+      "legitimacyHold: public rejection is breaking the hold": [
         {
           "angle": "street",
           "text": "The town has turned on whoever sits at {settlement}, and the turning is doing more damage to the hold than any rival has managed.",
@@ -1074,7 +1074,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-POW-5": {
-    "title": "DS-POW-5 — `POWER — ruling structure, governing body, and the ruling-power lens` · `powerStructure.{government,governingName,governingFaction,factions[]} + structuralLens({economicBase,governingArchetype})`",
+    "title": "DS-POW-5: `POWER: ruling structure, governing body, and the ruling-power lens` · `powerStructure.{government,governingName,governingFaction,factions[]} + structuralLens({economicBase,governingArchetype})`",
     "sectionTarget": [
       "power",
       "economy (the economic-base arm)"
@@ -1381,7 +1381,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "governing body name — a SLOT, never a baked noun": [
+      "governing body name: a SLOT, never a baked noun": [
         {
           "angle": "ledger",
           "text": "What governs {settlement} calls itself the {seat}, and the name is precise about the town's size and pretensions in a way outsiders routinely mistake.",
@@ -1409,7 +1409,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-POW-6": {
-    "title": "DS-POW-6 — `POWER — public legitimacy, criminal capture, safety (the ladder cells the surfaces do not reach)` · `governanceLedger(settlement) + factionStates[].captureState + safetyProfile`",
+    "title": "DS-POW-6: `POWER: public legitimacy, criminal capture, safety (the ladder cells the surfaces do not reach)` · `governanceLedger(settlement) + factionStates[].captureState + safetyProfile`",
     "sectionTarget": [
       "power",
       "defense (the safety and criminal-structure arms)"
@@ -1762,7 +1762,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-POW-7": {
-    "title": "DS-POW-7 — `POWER — blocs, coalitions, and the divided court` · `worldState.politicsLedgers[cid].blocs[]{members,glue,end,strain,covert}`",
+    "title": "DS-POW-7: `POWER: blocs, coalitions, and the divided court` · `worldState.politicsLedgers[cid].blocs[]{members,glue,end,strain,covert}`",
     "sectionTarget": [
       "power"
     ],
@@ -1800,7 +1800,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "consolidation 0 — a fully divided court (live layer, no ruling bloc)": [
+      "consolidation 0: a fully divided court (live layer, no ruling bloc)": [
         {
           "angle": "ledger",
           "text": "No combination at {settlement} holds enough of the hall to govern it; every decision must be assembled separately, and several are not assembled at all.",

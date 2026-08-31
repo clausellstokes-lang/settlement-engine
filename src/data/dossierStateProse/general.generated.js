@@ -5,14 +5,14 @@
 /** @type {Readonly<Record<string, object>>} */
 export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
   "DS-POP-1": {
-    "title": "DS-POP-1 — Population: banded counts, demographic receipts and movement · `spatialLedgers.migration` × demographic receipts `{births, deaths, deficit01}` × `QUANTITY_BANDS` × `beliefMap.populationTrendBand`",
+    "title": "DS-POP-1: Population: banded counts, demographic receipts and movement · `spatialLedgers.migration` × demographic receipts `{births, deaths, deficit01}` × `QUANTITY_BANDS` × `beliefMap.populationTrendBand`",
     "slots": [
       "settlement",
       "counterpart",
       "season"
     ],
     "pools": {
-      "QUANTITY — nobody": [
+      "QUANTITY: nobody": [
         {
           "angle": "ledger",
           "text": "Nobody left {settlement} in {season}. That is a small fact and, in a year like this one, not a trivial one.",
@@ -32,7 +32,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "QUANTITY — a few souls": [
+      "QUANTITY: a few souls": [
         {
           "angle": "ledger",
           "text": "A few souls left {settlement} in {season} — few enough that everyone can name them, which is its own kind of record.",
@@ -52,7 +52,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "QUANTITY — a dozen or so": [
+      "QUANTITY: a dozen or so": [
         {
           "angle": "street",
           "text": "A dozen or so have gone. That is a street's worth in a place this size, and the street shows it.",
@@ -69,7 +69,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "QUANTITY — dozens": [
+      "QUANTITY: dozens": [
         {
           "angle": "visitor",
           "text": "Dozens have left {settlement}. The workshops run with gaps in them, and the gaps are not being filled.",
@@ -88,7 +88,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "QUANTITY — a hundred or so": [
+      "QUANTITY: a hundred or so": [
         {
           "angle": "visitor",
           "text": "A hundred or so have gone from {settlement}, which is a visible subtraction — whole quarters are quieter than they were.",
@@ -107,7 +107,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "QUANTITY — several hundred": [
+      "QUANTITY: several hundred": [
         {
           "angle": "ledger",
           "text": "Several hundred have left {settlement}. The town is measurably smaller, and its institutions have not shrunk to match.",
@@ -126,7 +126,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "QUANTITY — many hundreds": [
+      "QUANTITY: many hundreds": [
         {
           "angle": "elder",
           "text": "Many hundreds have gone. {settlement} is a substantially different settlement than it was, and it has not finished discovering how.",
@@ -145,7 +145,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "QUANTITY — thousands": [
+      "QUANTITY: thousands": [
         {
           "angle": "visitor",
           "text": "Thousands have gone from {settlement}. This is not a decline; it is an evacuation on a slower schedule.",
@@ -164,7 +164,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "HERALD KIND — hungry_gap": [
+      "HERALD KIND: hungry_gap": [
         {
           "angle": "ledger",
           "text": "The lean season has cost {settlement} people — not to the road but to the ground, and the burial rolls run longer than the harvest explains.",
@@ -185,7 +185,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "HERALD KIND — migration_flight": [
+      "HERALD KIND: migration_flight": [
         {
           "angle": "unfolding",
           "text": "Families are taking to the road. What they are leaving is not a rumour to them, and the columns out of {settlement} grow longer rather than shorter.",
@@ -206,7 +206,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "RECEIPT — births exceed deaths": [
+      "RECEIPT: births exceed deaths": [
         {
           "angle": "ledger",
           "text": "More are born here than buried, and have been for a while — the town is growing from inside rather than from the road.",
@@ -225,7 +225,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "RECEIPT — births and deaths in balance": [
+      "RECEIPT: births and deaths in balance": [
         {
           "angle": "ledger",
           "text": "The rolls balance. {settlement} replaces itself and does not exceed itself, which is what most settlements do most of the time.",
@@ -244,7 +244,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "RECEIPT — deficit01 positive": [
+      "RECEIPT: deficit01 positive": [
         {
           "angle": "ledger",
           "text": "More are buried here than born. The town is not emptying quickly, and it is not replacing itself either.",
@@ -263,7 +263,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "CANDIDATE KIND — growth": [
+      "CANDIDATE KIND: growth": [
         {
           "angle": "visitor",
           "text": "The town is taking people in faster than it loses them. The building is happening at the edges, which is where it always happens first.",
@@ -282,7 +282,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "CANDIDATE KIND — emigration": [
+      "CANDIDATE KIND: emigration": [
         {
           "angle": "unfolding",
           "text": "The town is losing people to the road in organized numbers — this is departure rather than decline, and it has a destination.",
@@ -301,7 +301,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "CANDIDATE KIND — decline": [
+      "CANDIDATE KIND: decline": [
         {
           "angle": "elder",
           "text": "The town is shrinking without anyone particularly leaving. It is losing people the slow way, and nothing about it makes a scene.",
@@ -355,12 +355,12 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-POP-2": {
-    "title": "DS-POP-2 — The population trend lens, woven · `populationTrendBand(settlement.populationHistory) → {band −2..+2, net, window}`",
+    "title": "DS-POP-2: The population trend lens, woven · `populationTrendBand(settlement.populationHistory) → {band −2..+2, net, window}`",
     "slots": [
       "settlement"
     ],
     "pools": {
-      "BAND −2 — has been emptying": [
+      "BAND −2: has been emptying": [
         {
           "angle": "ledger",
           "text": "The town has been emptying over the recent readings — not all at once, and not from any single cause visible from here.",
@@ -379,7 +379,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "BAND −1 — has been thinning": [
+      "BAND −1: has been thinning": [
         {
           "angle": "ledger",
           "text": "{settlement} has been thinning over the recent readings — steadily, mildly, and with nothing in particular to point at.",
@@ -398,7 +398,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "BAND 0 — has held level": [
+      "BAND 0: has held level": [
         {
           "angle": "ledger",
           "text": "The town's numbers have held level across the recent readings. Nothing has been gained, and nothing lost.",
@@ -417,7 +417,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "BAND +1 — has been growing": [
+      "BAND +1: has been growing": [
         {
           "angle": "ledger",
           "text": "{settlement} has been growing steadily over the recent readings — modestly, and consistently enough to plan around.",
@@ -436,7 +436,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "BAND +2 — has been swelling": [
+      "BAND +2: has been swelling": [
         {
           "angle": "unfolding",
           "text": "{settlement} has been swelling over the recent readings. The growth has outrun the town's arrangements, and the arrangements are visibly behind.",
@@ -496,7 +496,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-GEN-1": {
-    "title": "DS-GEN-1 — Power/Overview/History › Current tensions . `history.currentTensions[] {type, description, severity[], factions[], plotHooks[]}`",
+    "title": "DS-GEN-1: Power/Overview/History › Current tensions . `history.currentTensions[] {type, description, severity[], factions[], plotHooks[]}`",
     "sectionTarget": [
       "tensions",
       "power (the faction-named arms)"
@@ -1039,7 +1039,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-GEN-2": {
-    "title": "DS-GEN-2 — Power/Overview › Active conflicts . `settlement.conflicts[] {parties[2], issue, stakes, intensity, plotHooks[]}`",
+    "title": "DS-GEN-2: Power/Overview › Active conflicts . `settlement.conflicts[] {parties[2], issue, stakes, intensity, plotHooks[]}`",
     "sectionTarget": [
       "power",
       "tensions"
@@ -1207,7 +1207,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-GEN-3": {
-    "title": "DS-GEN-3 — Overview › Systems Health dashboard . `defenseProfile.scores{military,monster,internal,economic,magical} · economicState.prosperity · safetyProfile.safetyLabel · economicViability.viable · defenseProfile.readiness.label · economicState.foodSecurity{label,resilienceScore}`",
+    "title": "DS-GEN-3: Overview › Systems Health dashboard . `defenseProfile.scores{military,monster,internal,economic,magical} · economicState.prosperity · safetyProfile.safetyLabel · economicViability.viable · defenseProfile.readiness.label · economicState.foodSecurity{label,resilienceScore}`",
     "sectionTarget": [
       "defense (the three defence axes)",
       "economy (economic resilience",
@@ -1221,7 +1221,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "settlement"
     ],
     "pools": {
-      "scores.military — STRONG": [
+      "scores.military: STRONG": [
         {
           "angle": "visitor",
           "text": "{settlement} can put a real body of armed men on its walls, and the men look like they have done it before.",
@@ -1244,7 +1244,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.military — ADEQUATE": [
+      "scores.military: ADEQUATE": [
         {
           "angle": "visitor",
           "text": "{settlement} keeps enough men under arms to be taken seriously and not enough to be feared.",
@@ -1267,7 +1267,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.military — WEAK": [
+      "scores.military: WEAK": [
         {
           "angle": "visitor",
           "text": "The watch at {settlement} is a watch and not a garrison, and the difference is visible at the gate.",
@@ -1290,7 +1290,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.military — CRITICAL": [
+      "scores.military: CRITICAL": [
         {
           "angle": "visitor",
           "text": "There is nothing at {settlement} that would stop anybody who meant to come in.",
@@ -1313,7 +1313,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.monster — STRONG": [
+      "scores.monster: STRONG": [
         {
           "angle": "visitor",
           "text": "{settlement} is built for what comes out of the country around it: heavy shutters, close outbuildings, and nothing left standing alone.",
@@ -1336,7 +1336,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.monster — ADEQUATE": [
+      "scores.monster: ADEQUATE": [
         {
           "angle": "visitor",
           "text": "{settlement} has taken the ordinary precautions against the country's ordinary dangers and stopped there.",
@@ -1359,7 +1359,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.monster — WEAK": [
+      "scores.monster: WEAK": [
         {
           "angle": "visitor",
           "text": "{settlement} sits closer to unworked country than its defences acknowledge.",
@@ -1382,7 +1382,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.monster — CRITICAL": [
+      "scores.monster: CRITICAL": [
         {
           "angle": "visitor",
           "text": "The country around {settlement} is not held at all, and the town's edge is wherever the last house happens to stand.",
@@ -1405,7 +1405,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.internal — STRONG": [
+      "scores.internal: STRONG": [
         {
           "angle": "visitor",
           "text": "Order in {settlement} is kept quietly, which is the expensive kind: a stranger sees very little enforcement and very little disorder.",
@@ -1428,7 +1428,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.internal — ADEQUATE": [
+      "scores.internal: ADEQUATE": [
         {
           "angle": "visitor",
           "text": "{settlement} is orderly on the main streets and less particular about the others.",
@@ -1451,7 +1451,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.internal — WEAK": [
+      "scores.internal: WEAK": [
         {
           "angle": "visitor",
           "text": "There is more going on in {settlement} than the watch troubles itself with, and it is not hidden particularly well.",
@@ -1474,7 +1474,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.internal — CRITICAL": [
+      "scores.internal: CRITICAL": [
         {
           "angle": "visitor",
           "text": "Whatever authority {settlement} has does not reach into its own streets.",
@@ -1497,7 +1497,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.economic — STRONG": [
+      "scores.economic: STRONG": [
         {
           "angle": "ledger",
           "text": "{settlement} could lose a season's trade and go on paying its people; there is enough behind the market to absorb it.",
@@ -1520,7 +1520,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.economic — ADEQUATE": [
+      "scores.economic: ADEQUATE": [
         {
           "angle": "ledger",
           "text": "{settlement} has some depth behind it and not a great deal; a season's disruption would be felt and survived.",
@@ -1543,7 +1543,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.economic — WEAK": [
+      "scores.economic: WEAK": [
         {
           "angle": "ledger",
           "text": "{settlement} runs close to what it takes in: one interruption would reach the households inside the season.",
@@ -1566,7 +1566,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.economic — CRITICAL": [
+      "scores.economic: CRITICAL": [
         {
           "angle": "ledger",
           "text": "{settlement} holds no reserve at all; what comes in is spent before it is counted.",
@@ -1589,7 +1589,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.magical — STRONG": [
+      "scores.magical: STRONG": [
         {
           "angle": "visitor",
           "text": "The Art is worked openly in {settlement} and worked well; what it does here is infrastructure rather than spectacle.",
@@ -1612,7 +1612,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.magical — ADEQUATE": [
+      "scores.magical: ADEQUATE": [
         {
           "angle": "visitor",
           "text": "{settlement} has somebody who can do what is usually needed and knows what is beyond them.",
@@ -1635,7 +1635,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.magical — WEAK": [
+      "scores.magical: WEAK": [
         {
           "angle": "visitor",
           "text": "Whatever the Art does elsewhere, it does very little in {settlement}.",
@@ -1658,7 +1658,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "scores.magical — CRITICAL": [
+      "scores.magical: CRITICAL": [
         {
           "angle": "visitor",
           "text": "Nothing in {settlement} is held up by the Art, and nothing here would know what to do with it.",
@@ -1681,7 +1681,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "prosperity — Poverty / Impoverished": [
+      "prosperity: Poverty / Impoverished": [
         {
           "angle": "visitor",
           "text": "{settlement} is a poor town and does not disguise it: what is here is here because it could not be sold.",
@@ -1704,7 +1704,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "prosperity — Struggling / Poor": [
+      "prosperity: Struggling / Poor": [
         {
           "angle": "visitor",
           "text": "{settlement} is short of comfortable and knows precisely how short.",
@@ -1727,7 +1727,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "prosperity — Moderate / Modest": [
+      "prosperity: Moderate / Modest": [
         {
           "angle": "visitor",
           "text": "{settlement} is neither rich nor poor, and the fact that nothing about it is remarkable is the most accurate thing to say about it.",
@@ -1750,7 +1750,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "prosperity — Comfortable / Prosperous": [
+      "prosperity: Comfortable / Prosperous": [
         {
           "angle": "visitor",
           "text": "{settlement} has the look of a town where the ordinary year leaves something over.",
@@ -1773,7 +1773,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "prosperity — Wealthy / Thriving": [
+      "prosperity: Wealthy / Thriving": [
         {
           "angle": "visitor",
           "text": "{settlement} is rich in the way that shows in the paving and the doorframes before it shows in anybody's clothes.",
@@ -1796,7 +1796,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "safetyProfile.safetyLabel — head word in {Secure, Controlled, Quarantined}": [
+      "safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}": [
         {
           "angle": "visitor",
           "text": "A stranger walks {settlement} at any hour and the town's only interest in them is commercial.",
@@ -1819,7 +1819,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "safetyProfile.safetyLabel — head word in {Tense, Strained, Restricted, Unsafe}": [
+      "safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}": [
         {
           "angle": "visitor",
           "text": "{settlement} is workable and watchful: a stranger is served, and also noticed.",
@@ -1842,7 +1842,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "safetyProfile.safetyLabel — head word in {Dangerous, Desperate}": [
+      "safetyProfile.safetyLabel: head word in {Dangerous, Desperate}": [
         {
           "angle": "visitor",
           "text": "{settlement} is a place to be careful in, and being careful is not sufficient.",
@@ -1865,7 +1865,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "economicViability.viable — true": [
+      "economicViability.viable: true": [
         {
           "angle": "ledger",
           "text": "{settlement} is a town that works: what it needs, it can get, and what it makes, it can move.",
@@ -1895,7 +1895,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "economicViability.viable — false": [
+      "economicViability.viable: false": [
         {
           "angle": "ledger",
           "text": "The arithmetic of {settlement} does not close: what the town requires exceeds what its ground and its trade together supply.",
@@ -1925,7 +1925,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "defenseProfile.readiness.label — Fortress": [
+      "defenseProfile.readiness.label: Fortress": [
         {
           "angle": "visitor",
           "text": "{settlement} is a hard place to take and looks it from a long way off.",
@@ -1941,7 +1941,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "defenseProfile.readiness.label — Well-Defended": [
+      "defenseProfile.readiness.label: Well-Defended": [
         {
           "angle": "visitor",
           "text": "{settlement} is defended properly rather than impressively: the works are sound and none of them are for show.",
@@ -1957,7 +1957,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "defenseProfile.readiness.label — Defensible": [
+      "defenseProfile.readiness.label: Defensible": [
         {
           "angle": "visitor",
           "text": "{settlement} has something to fight from, and fighting from it would be work.",
@@ -1973,7 +1973,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "defenseProfile.readiness.label — Lightly Defended": [
+      "defenseProfile.readiness.label: Lightly Defended": [
         {
           "angle": "visitor",
           "text": "{settlement} has walls in the sense that there is a line where the town stops.",
@@ -1989,7 +1989,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "defenseProfile.readiness.label — Vulnerable": [
+      "defenseProfile.readiness.label: Vulnerable": [
         {
           "angle": "visitor",
           "text": "{settlement}'s defences are a gesture, and it is not a gesture anyone is fooled by.",
@@ -2005,7 +2005,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "defenseProfile.readiness.label — Undefended": [
+      "defenseProfile.readiness.label: Undefended": [
         {
           "angle": "visitor",
           "text": "{settlement} has no defences at all, and the openness is the first thing about it.",
@@ -2021,7 +2021,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "foodSecurity.label — Secure": [
+      "foodSecurity.label: Secure": [
         {
           "angle": "ledger",
           "text": "{settlement} feeds itself out of its own ground, and the granary is a convenience rather than a defence.",
@@ -2051,7 +2051,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "foodSecurity.label — Surplus": [
+      "foodSecurity.label: Surplus": [
         {
           "angle": "ledger",
           "text": "{settlement} grows more than it eats, and the difference is the town's best argument with everyone around it.",
@@ -2081,7 +2081,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "foodSecurity.label — Pressured": [
+      "foodSecurity.label: Pressured": [
         {
           "angle": "ledger",
           "text": "{settlement} covers its need and covers it exactly; nothing in the granary is spare.",
@@ -2111,7 +2111,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "foodSecurity.label — Import-Dependent": [
+      "foodSecurity.label: Import-Dependent": [
         {
           "angle": "ledger",
           "text": "{settlement} does not grow what it eats. The gap is bought, and the buying is the largest standing commitment the town has.",
@@ -2141,7 +2141,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "foodSecurity.label — Deficit": [
+      "foodSecurity.label: Deficit": [
         {
           "angle": "ledger",
           "text": "What {settlement} needs exceeds what it produces and what it can bring in together, and the shortfall is carried by the households.",
@@ -2171,7 +2171,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "foodSecurity.label — Deficit — Active Famine": [
+      "foodSecurity.label: Deficit × Active Famine": [
         {
           "angle": "ledger",
           "text": "{settlement} is short of food past the point that stores or purchase can answer, and the rolls are being kept for reasons other than trade.",
@@ -2204,7 +2204,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-GEN-5": {
-    "title": "DS-GEN-5 — Overview › Situation (the standing approach) . `settlement.arrivalScene` (frozen) + the LIVE companion keyed on `config.tradeRouteAccess` × primary stress presence",
+    "title": "DS-GEN-5: Overview › Situation (the standing approach) . `settlement.arrivalScene` (frozen) + the LIVE companion keyed on `config.tradeRouteAccess` × primary stress presence",
     "sectionTarget": [
       "overview"
     ],
@@ -2365,7 +2365,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-GEN-6": {
-    "title": "DS-GEN-6 — Overview › Settlement origin (why it exists) . `settlement.settlementReason[]` from `tier` × `config.tradeRouteAccess` × `config.terrainType` × food-deficit ratio × `config.magicExists` / `priorityMagic`, with the arm's authored variant selected draw-free from the settlement seed",
+    "title": "DS-GEN-6: Overview › Settlement origin (why it exists) . `settlement.settlementReason[]` from `tier` × `config.tradeRouteAccess` × `config.terrainType` × food-deficit ratio × `config.magicExists` / `priorityMagic`, with the arm's authored variant selected draw-free from the settlement seed",
     "sectionTarget": [
       "overview",
       "economy (the deficit arms)"
@@ -2584,7 +2584,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "tier overlay — metropolis": [
+      "tier overlay: metropolis": [
         {
           "angle": "ledger",
           "text": "{settlement} no longer serves an economic function for its region. It is the economic function.",
@@ -2605,7 +2605,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "tier overlay — city": [
+      "tier overlay: city": [
         {
           "angle": "ledger",
           "marks": [
@@ -2634,7 +2634,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "tier overlay — thorp / hamlet": [
+      "tier overlay: thorp / hamlet": [
         {
           "angle": "street",
           "text": "{settlement} is small enough that every household knows its purpose, and surplus, where there is any, is modest.",
@@ -2657,7 +2657,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "tier overlay — other tiers": [
+      "tier overlay: other tiers": [
         {
           "angle": "ledger",
           "text": "{settlement} is the size that a place of this kind settles at, and it has settled there.",
@@ -2683,7 +2683,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-GEN-7": {
-    "title": "DS-GEN-7 — Overview › Warnings & coherence notes . `structuralViolations[]{institution,group,reason,severity}` · `coherenceNotes[]{note,severity,tab,type}` · `structuralSuggestions[]{reason,suggested[]}`",
+    "title": "DS-GEN-7: Overview › Warnings & coherence notes . `structuralViolations[]{institution,group,reason,severity}` · `coherenceNotes[]{note,severity,tab,type}` · `structuralSuggestions[]{reason,suggested[]}`",
     "sectionTarget": [
       "overview",
       "per-note tab field routes the second target (economics",
@@ -2697,7 +2697,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "band"
     ],
     "pools": {
-      "power_economic — criminal faction in a transit hub": [
+      "power_economic: criminal faction in a transit hub": [
         {
           "angle": "ledger",
           "marks": [
@@ -2736,7 +2736,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "power_economic — powerful criminal faction in a prosperous settlement": [
+      "power_economic: powerful criminal faction in a prosperous settlement": [
         {
           "angle": "ledger",
           "marks": [
@@ -2775,7 +2775,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "stress_economic — siege against trade income": [
+      "stress_economic: siege against trade income": [
         {
           "angle": "ledger",
           "text": "{settlement} is under siege, and the trade income on its books is what the town earned before the gates shut; what it earns now is close to nothing.",
@@ -2805,7 +2805,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "power_stress — occupation against stated stability": [
+      "power_stress: occupation against stated stability": [
         {
           "angle": "ledger",
           "text": "{settlement} is under occupation, and the stability recorded for it describes the surface: the town is quiet because it is held, which is a different fact from the town being settled.",
@@ -2835,7 +2835,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "power_economic — temple economy under a secular seat": [
+      "power_economic: temple economy under a secular seat": [
         {
           "angle": "ledger",
           "text": "Economic activity in {settlement} runs through the religious houses while formal governance rests with {govFaction}; whoever holds the trade and the tithes holds more practical power than whoever holds the seat.",
@@ -2867,7 +2867,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "historical_economic — the recovery narrative": [
+      "historical_economic: the recovery narrative": [
         {
           "angle": "elder",
           "text": "{settlement}'s prosperity was rebuilt and not inherited: the town went down a generation and more ago, and came back inside the memory of people still working.",
@@ -2946,7 +2946,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-GEN-8": {
-    "title": "DS-GEN-8 — Overview › Steadings, remnant and ancient ruin (lifecycle) . `worldState.spatialLedgers.satellites[sid].steadings{}` · `settlement.lifecycleStatus` · `history.ancientRuin{name, yearsAgo}`",
+    "title": "DS-GEN-8: Overview › Steadings, remnant and ancient ruin (lifecycle) . `worldState.spatialLedgers.satellites[sid].steadings{}` · `settlement.lifecycleStatus` · `history.ancientRuin{name, yearsAgo}`",
     "sectionTarget": [
       "population",
       "history (the ancient ruin)"
@@ -3058,7 +3058,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "steading row — organic": [
+      "steading row: organic": [
         {
           "angle": "ledger",
           "text": "{steading} holds {band} and works {resource} for {settlement}.",
@@ -3087,7 +3087,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "steading row — provenance: 'forced'": [
+      "steading row: provenance: 'forced'": [
         {
           "angle": "ledger",
           "text": "{steading} holds {band} and was founded by decree rather than by settlement; {settlement}'s hall put it where it is and put people in it.",
@@ -3114,7 +3114,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "steading row — charterPending": [
+      "steading row: charterPending": [
         {
           "angle": "ledger",
           "text": "{steading} holds {band} and has no charter yet; what it is entitled to is being decided at {settlement}.",
@@ -3142,7 +3142,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-REL-1": {
-    "title": "DS-REL-1 — Relationships › Neighbour network and cross-settlement ties . `neighbourNetwork[]{neighbourName, relationshipType, description, npcConnections[], plotHooks[]}` · `neighborRelationship` (live) · `interSettlementRelationships[]` · `crossSettlementConflicts[]`",
+    "title": "DS-REL-1: Relationships › Neighbour network and cross-settlement ties . `neighbourNetwork[]{neighbourName, relationshipType, description, npcConnections[], plotHooks[]}` · `neighborRelationship` (live) · `interSettlementRelationships[]` · `crossSettlementConflicts[]`",
     "sectionTarget": [
       "relations"
     ],
@@ -3422,7 +3422,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-REL-2": {
-    "title": "DS-REL-2 — Relationships/Overview › Prominent relationship and emergent conditions . `settlement.prominentRelationship.phrasing` · `relationships[].flagDriven` count",
+    "title": "DS-REL-2: Relationships/Overview › Prominent relationship and emergent conditions . `settlement.prominentRelationship.phrasing` · `relationships[].flagDriven` count",
     "sectionTarget": [
       "relations",
       "overview"
@@ -3528,7 +3528,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-GEN-9": {
-    "title": "DS-GEN-9 — History › Identity header, timeline, founding and major events . `history{age, historicalCharacter, founding{reason,foundedBy,initialChallenge,overcoming,stressNote}, historicalEvents[]{type,name,description,yearsAgo,severity,anchored,lastingEffects[],plotHooks[]}, eventsTimeline[]}`",
+    "title": "DS-GEN-9: History › Identity header, timeline, founding and major events . `history{age, historicalCharacter, founding{reason,foundedBy,initialChallenge,overcoming,stressNote}, historicalEvents[]{type,name,description,yearsAgo,severity,anchored,lastingEffects[],plotHooks[]}, eventsTimeline[]}`",
     "sectionTarget": [
       "history"
     ],
@@ -3609,7 +3609,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "event type — disaster": [
+      "event type: disaster": [
         {
           "angle": "elder",
           "marks": [
@@ -3659,7 +3659,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "event type — political": [
+      "event type: political": [
         {
           "angle": "ledger",
           "marks": [
@@ -3708,7 +3708,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "event type — economic": [
+      "event type: economic": [
         {
           "angle": "ledger",
           "marks": [
@@ -3757,7 +3757,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "event type — religious": [
+      "event type: religious": [
         {
           "angle": "elder",
           "marks": [
@@ -3804,7 +3804,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "event type — magical": [
+      "event type: magical": [
         {
           "angle": "elder",
           "marks": [
@@ -3852,7 +3852,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "event type — demographic": [
+      "event type: demographic": [
         {
           "angle": "ledger",
           "marks": [
@@ -3900,7 +3900,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "event type — exile_return": [
+      "event type: exile_return": [
         {
           "angle": "elder",
           "marks": [
@@ -3944,7 +3944,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "event type — occupation_infiltration": [
+      "event type: occupation_infiltration": [
         {
           "angle": "elder",
           "marks": [
@@ -3988,7 +3988,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "recency framing — Recent": [
+      "recency framing: Recent": [
         {
           "angle": "street",
           "text": "It is recent enough at {settlement} that the people it happened to are the people running the town.",
@@ -4004,7 +4004,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "recency framing — Living memory": [
+      "recency framing: Living memory": [
         {
           "angle": "elder",
           "text": "There are people in {settlement} who were there, and their account is not quite the town's account.",
@@ -4020,7 +4020,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "recency framing — Last century": [
+      "recency framing: Last century": [
         {
           "angle": "elder",
           "text": "It is out of living memory at {settlement} and inside the memory of the buildings.",
@@ -4036,7 +4036,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "recency framing — Ancient": [
+      "recency framing: Ancient": [
         {
           "angle": "elder",
           "text": "{settlement} inherited the consequence and not the event; what happened is a fact here rather than a memory.",
@@ -4052,7 +4052,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "recency framing — Deep history": [
+      "recency framing: Deep history": [
         {
           "angle": "elder",
           "text": "It is older than {settlement}'s own account of itself, and the town's explanation of it is a reconstruction.",
@@ -4071,7 +4071,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-GEN-10": {
-    "title": "DS-GEN-10 — PDF › overview / economics / defense / viability / power slices (the parallel surface) . the same settlement fields, re-shaped per chapter",
+    "title": "DS-GEN-10: PDF › overview / economics / defense / viability / power slices (the parallel surface) . the same settlement fields, re-shaped per chapter",
     "sectionTarget": [
       "the printed chapter openers"
     ],
@@ -4079,7 +4079,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "settlement"
     ],
     "pools": {
-      "PRINT-NATIVE CHAPTER OPENERS — overview": [
+      "PRINT-NATIVE CHAPTER OPENERS: overview": [
         {
           "angle": "ledger",
           "text": "What follows is {settlement} as it was surveyed, and where a thing has been re-judged since, the page says so.",
@@ -4102,7 +4102,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "PRINT-NATIVE CHAPTER OPENERS — economics": [
+      "PRINT-NATIVE CHAPTER OPENERS: economics": [
         {
           "angle": "ledger",
           "text": "What {settlement} earns, what it eats, and what it owes, in that order.",
@@ -4125,7 +4125,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "PRINT-NATIVE CHAPTER OPENERS — defense": [
+      "PRINT-NATIVE CHAPTER OPENERS: defense": [
         {
           "angle": "ledger",
           "text": "What {settlement} can field, hold, and survive.",
@@ -4148,7 +4148,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "PRINT-NATIVE CHAPTER OPENERS — viability": [
+      "PRINT-NATIVE CHAPTER OPENERS: viability": [
         {
           "angle": "ledger",
           "text": "Whether {settlement} works, and on what terms.",
@@ -4171,7 +4171,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "PRINT-NATIVE CHAPTER OPENERS — power": [
+      "PRINT-NATIVE CHAPTER OPENERS: power": [
         {
           "angle": "ledger",
           "text": "Who decides at {settlement}, and who has to be consulted first.",
@@ -4197,7 +4197,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-HK-1": {
-    "title": "DS-HK-1 — HOOKS FRAMING — the state a hook is framed FROM (never the hook prose itself)",
+    "title": "DS-HK-1: HOOKS FRAMING: the state a hook is framed FROM (never the hook prose itself)",
     "sectionTarget": [
       "the hooks panel header",
       "clock framings sit with the clock"
@@ -4211,7 +4211,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "npc"
     ],
     "pools": {
-      "category npc — the people are the opening": [
+      "category npc: the people are the opening": [
         {
           "angle": "street",
           "text": "What is worth doing in {settlement} is worth doing because of who is in it; the town's difficulties have names attached before they have causes.",
@@ -4241,7 +4241,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "category faction — the blocs are the opening": [
+      "category faction: the blocs are the opening": [
         {
           "angle": "ledger",
           "text": "{settlement}'s live questions are questions between groups, and each group would rather have a third party settle it than concede.",
@@ -4271,7 +4271,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "category tension — the standing quarrels are the opening": [
+      "category tension: the standing quarrels are the opening": [
         {
           "angle": "street",
           "text": "{settlement} runs on arrangements that everyone here has agreed not to test, and the untested places are where the town is soft.",
@@ -4301,7 +4301,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "category economics — the books are the opening": [
+      "category economics: the books are the opening": [
         {
           "angle": "ledger",
           "text": "What {settlement} needs and what {settlement} can get do not line up, and the gap is a standing invitation to anyone who can close it.",
@@ -4331,7 +4331,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "category safety — the streets are the opening": [
+      "category safety: the streets are the opening": [
         {
           "angle": "street",
           "text": "{settlement} has more trouble than it has people to answer it, and the shortfall is where the work is.",
@@ -4361,7 +4361,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "category history — the past is the opening": [
+      "category history: the past is the opening": [
         {
           "angle": "unfolding",
           "text": "{settlement} has business with its own past that has not finished, and the unfinished parts are on the record rather than in dispute.",
@@ -4391,7 +4391,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "category relationship — the ties are the opening": [
+      "category relationship: the ties are the opening": [
         {
           "angle": "street",
           "text": "What binds people in {settlement} also obliges them, and the obligations do not all point the same way.",
@@ -4553,7 +4553,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-GEN-11": {
-    "title": "DS-GEN-11 — Viability › The coherence verdict . `economicViability.{viable, summary, issues[]}` × the first-survey caveat × `criticalIssueCount`",
+    "title": "DS-GEN-11: Viability › The coherence verdict . `economicViability.{viable, summary, issues[]}` × the first-survey caveat × `criticalIssueCount`",
     "sectionTarget": [
       "viability",
       "overview"
@@ -4563,7 +4563,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "band"
     ],
     "pools": {
-      "viable: true — the arithmetic closes": [
+      "viable: true: the arithmetic closes": [
         {
           "angle": "ledger",
           "text": "{settlement} holds together as a settlement: what it needs it can get, what it makes it can move, and the pieces of it explain each other.",
@@ -4591,7 +4591,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "the MARGINAL arm — neither verdict returned": [
+      "the MARGINAL arm: neither verdict returned": [
         {
           "angle": "ledger",
           "text": "Whether {settlement} holds together is not a settled question. The pieces mostly fit, and the places where they do not are the places worth reading.",
@@ -4619,7 +4619,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "viable: false — the arithmetic does not close": [
+      "viable: false: the arithmetic does not close": [
         {
           "angle": "ledger",
           "text": "{settlement}'s outgoings stand above everything its land and its custom bring in, and nothing on the record accounts for the difference.",
@@ -4649,7 +4649,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "criticalIssueCount — critical contradictions on the record": [
+      "criticalIssueCount: critical contradictions on the record": [
         {
           "angle": "ledger",
           "text": "{band} of the contradictions in {settlement}'s record are the serious kind: not a rough edge, a thing that cannot be true alongside the thing beside it.",

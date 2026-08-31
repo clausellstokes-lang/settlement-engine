@@ -5,7 +5,7 @@
 /** @type {Readonly<Record<string, object>>} */
 export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
   "JF-CPL-1a": {
-    "title": "JF-CPL-1a — WAR → TRADE",
+    "title": "JF-CPL-1a: WAR → TRADE",
     "sectionTarget": [
       "economy",
       "defense"
@@ -106,7 +106,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-1b": {
-    "title": "JF-CPL-1b — TRADE → WAR",
+    "title": "JF-CPL-1b: TRADE → WAR",
     "sectionTarget": [
       "tensions",
       "economy"
@@ -200,7 +200,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-2a": {
-    "title": "JF-CPL-2a — WAR → FAITH",
+    "title": "JF-CPL-2a: WAR → FAITH",
     "sectionTarget": [
       "faith",
       "history"
@@ -290,7 +290,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-2b": {
-    "title": "JF-CPL-2b — FAITH → WAR",
+    "title": "JF-CPL-2b: FAITH → WAR",
     "sectionTarget": [
       "tensions",
       "faith"
@@ -385,7 +385,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-3a": {
-    "title": "JF-CPL-3a — WAR → POP",
+    "title": "JF-CPL-3a: WAR → POP",
     "sectionTarget": [
       "population",
       "history"
@@ -474,7 +474,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-3b": {
-    "title": "JF-CPL-3b — POP → WAR",
+    "title": "JF-CPL-3b: POP → WAR",
     "sectionTarget": [
       "tensions",
       "population"
@@ -561,7 +561,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-4a": {
-    "title": "JF-CPL-4a — WAR → INFO",
+    "title": "JF-CPL-4a: WAR → INFO",
     "sectionTarget": [
       "relations",
       "defense"
@@ -646,7 +646,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-4b": {
-    "title": "JF-CPL-4b — INFO → WAR",
+    "title": "JF-CPL-4b: INFO → WAR",
     "sectionTarget": [
       "tensions",
       "relations"
@@ -733,7 +733,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-5a": {
-    "title": "JF-CPL-5a — WAR → GRAMMAR",
+    "title": "JF-CPL-5a: WAR → GRAMMAR",
     "sectionTarget": [
       "relations",
       "economy"
@@ -823,7 +823,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-5b": {
-    "title": "JF-CPL-5b — GRAMMAR → WAR",
+    "title": "JF-CPL-5b: GRAMMAR → WAR",
     "sectionTarget": [
       "tensions",
       "relations"
@@ -916,7 +916,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-6a": {
-    "title": "JF-CPL-6a — WAR → INTERIOR",
+    "title": "JF-CPL-6a: WAR → INTERIOR",
     "sectionTarget": [
       "power",
       "tensions"
@@ -1005,7 +1005,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-6b": {
-    "title": "JF-CPL-6b — INTERIOR → WAR",
+    "title": "JF-CPL-6b: INTERIOR → WAR",
     "sectionTarget": [
       "power",
       "relations"
@@ -1100,7 +1100,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-7a": {
-    "title": "JF-CPL-7a — TRADE → FAITH",
+    "title": "JF-CPL-7a: TRADE → FAITH",
     "sectionTarget": [
       "faith",
       "economy"
@@ -1198,7 +1198,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-7b": {
-    "title": "JF-CPL-7b — FAITH → TRADE",
+    "title": "JF-CPL-7b: FAITH → TRADE",
     "sectionTarget": [
       "economy",
       "faith"
@@ -1294,7 +1294,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-8a": {
-    "title": "JF-CPL-8a — TRADE → POP",
+    "title": "JF-CPL-8a: TRADE → POP",
     "sectionTarget": [
       "population",
       "economy"
@@ -1381,7 +1381,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-8b": {
-    "title": "JF-CPL-8b — POP → TRADE",
+    "title": "JF-CPL-8b: POP → TRADE",
     "sectionTarget": [
       "economy",
       "population"
@@ -1470,7 +1470,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-9a": {
-    "title": "JF-CPL-9a — TRADE → INFO",
+    "title": "JF-CPL-9a: TRADE → INFO",
     "sectionTarget": [
       "relations",
       "economy"
@@ -1564,7 +1564,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-9b": {
-    "title": "JF-CPL-9b — INFO → TRADE",
+    "title": "JF-CPL-9b: INFO → TRADE",
     "sectionTarget": [
       "economy",
       "tensions"
@@ -1658,7 +1658,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-10a": {
-    "title": "JF-CPL-10a — TRADE → GRAMMAR",
+    "title": "JF-CPL-10a: TRADE → GRAMMAR",
     "sectionTarget": [
       "relations",
       "economy"
@@ -1749,7 +1749,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-10b": {
-    "title": "JF-CPL-10b — GRAMMAR → TRADE",
+    "title": "JF-CPL-10b: GRAMMAR → TRADE",
     "sectionTarget": [
       "economy",
       "relations"
@@ -1840,7 +1840,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-11a": {
-    "title": "JF-CPL-11a — TRADE → INTERIOR",
+    "title": "JF-CPL-11a: TRADE → INTERIOR",
     "sectionTarget": [
       "power",
       "economy"
@@ -1934,7 +1934,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-11b": {
-    "title": "JF-CPL-11b — INTERIOR → TRADE",
+    "title": "JF-CPL-11b: INTERIOR → TRADE",
     "sectionTarget": [
       "economy",
       "power"
@@ -2022,7 +2022,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-12a": {
-    "title": "JF-CPL-12a — FAITH → POP",
+    "title": "JF-CPL-12a: FAITH → POP",
     "sectionTarget": [
       "population",
       "faith"
@@ -2107,7 +2107,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-12b": {
-    "title": "JF-CPL-12b — POP → FAITH",
+    "title": "JF-CPL-12b: POP → FAITH",
     "sectionTarget": [
       "faith",
       "population"
@@ -2195,7 +2195,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-13a": {
-    "title": "JF-CPL-13a — FAITH → INFO",
+    "title": "JF-CPL-13a: FAITH → INFO",
     "sectionTarget": [
       "relations",
       "faith"
@@ -2285,7 +2285,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-13b": {
-    "title": "JF-CPL-13b — INFO → FAITH",
+    "title": "JF-CPL-13b: INFO → FAITH",
     "sectionTarget": [
       "faith",
       "history"
@@ -2372,7 +2372,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-14a": {
-    "title": "JF-CPL-14a — FAITH → GRAMMAR",
+    "title": "JF-CPL-14a: FAITH → GRAMMAR",
     "sectionTarget": [
       "relations",
       "faith"
@@ -2461,7 +2461,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-14b": {
-    "title": "JF-CPL-14b — GRAMMAR → FAITH",
+    "title": "JF-CPL-14b: GRAMMAR → FAITH",
     "sectionTarget": [
       "faith",
       "relations"
@@ -2547,7 +2547,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-15a": {
-    "title": "JF-CPL-15a — FAITH → INTERIOR",
+    "title": "JF-CPL-15a: FAITH → INTERIOR",
     "sectionTarget": [
       "power",
       "faith"
@@ -2631,7 +2631,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-15b": {
-    "title": "JF-CPL-15b — INTERIOR → FAITH",
+    "title": "JF-CPL-15b: INTERIOR → FAITH",
     "sectionTarget": [
       "faith",
       "power"
@@ -2719,7 +2719,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-16a": {
-    "title": "JF-CPL-16a — POP → INFO",
+    "title": "JF-CPL-16a: POP → INFO",
     "sectionTarget": [
       "relations",
       "population"
@@ -2811,7 +2811,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-16b": {
-    "title": "JF-CPL-16b — INFO → POP",
+    "title": "JF-CPL-16b: INFO → POP",
     "sectionTarget": [
       "population",
       "economy"
@@ -2892,7 +2892,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-17a": {
-    "title": "JF-CPL-17a — POP → GRAMMAR",
+    "title": "JF-CPL-17a: POP → GRAMMAR",
     "sectionTarget": [
       "population",
       "relations"
@@ -2975,7 +2975,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-17b": {
-    "title": "JF-CPL-17b — GRAMMAR → POP",
+    "title": "JF-CPL-17b: GRAMMAR → POP",
     "sectionTarget": [
       "population",
       "relations"
@@ -3059,7 +3059,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-18a": {
-    "title": "JF-CPL-18a — POP → INTERIOR",
+    "title": "JF-CPL-18a: POP → INTERIOR",
     "sectionTarget": [
       "power",
       "population"
@@ -3140,7 +3140,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-18b": {
-    "title": "JF-CPL-18b — INTERIOR → POP",
+    "title": "JF-CPL-18b: INTERIOR → POP",
     "sectionTarget": [
       "population",
       "power"
@@ -3222,7 +3222,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-19a": {
-    "title": "JF-CPL-19a — INFO → GRAMMAR",
+    "title": "JF-CPL-19a: INFO → GRAMMAR",
     "sectionTarget": [
       "relations",
       "history"
@@ -3306,7 +3306,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-19b": {
-    "title": "JF-CPL-19b — GRAMMAR → INFO",
+    "title": "JF-CPL-19b: GRAMMAR → INFO",
     "sectionTarget": [
       "relations"
     ],
@@ -3386,7 +3386,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-20a": {
-    "title": "JF-CPL-20a — INFO → INTERIOR",
+    "title": "JF-CPL-20a: INFO → INTERIOR",
     "sectionTarget": [
       "power",
       "relations"
@@ -3469,7 +3469,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-20b": {
-    "title": "JF-CPL-20b — INTERIOR → INFO",
+    "title": "JF-CPL-20b: INTERIOR → INFO",
     "sectionTarget": [
       "power",
       "relations"
@@ -3549,7 +3549,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-21a": {
-    "title": "JF-CPL-21a — GRAMMAR → INTERIOR",
+    "title": "JF-CPL-21a: GRAMMAR → INTERIOR",
     "sectionTarget": [
       "power",
       "economy"
@@ -3634,7 +3634,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-CPL-21b": {
-    "title": "JF-CPL-21b — INTERIOR → GRAMMAR",
+    "title": "JF-CPL-21b: INTERIOR → GRAMMAR",
     "sectionTarget": [
       "relations",
       "power"
@@ -3716,7 +3716,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SC-danegeld_loop": {
-    "title": "JF-SC-danegeld_loop — GRAMMAR → WAR",
+    "title": "JF-SC-danegeld_loop: GRAMMAR → WAR",
     "sectionTarget": [
       "tensions",
       "defense"
@@ -3800,7 +3800,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SC-league_drift": {
-    "title": "JF-SC-league_drift — WAR → GRAMMAR",
+    "title": "JF-SC-league_drift: WAR → GRAMMAR",
     "sectionTarget": [
       "relations",
       "economy"
@@ -3882,7 +3882,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SC-recognition_gambit": {
-    "title": "JF-SC-recognition_gambit — GRAMMAR → WAR",
+    "title": "JF-SC-recognition_gambit: GRAMMAR → WAR",
     "sectionTarget": [
       "tensions",
       "relations"
@@ -3968,7 +3968,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SC-neutrals_cargo": {
-    "title": "JF-SC-neutrals_cargo — WAR → WAR",
+    "title": "JF-SC-neutrals_cargo: WAR → WAR",
     "sectionTarget": [
       "tensions",
       "economy"
@@ -4051,7 +4051,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SC-leaky_embargo": {
-    "title": "JF-SC-leaky_embargo — TRADE → TRADE",
+    "title": "JF-SC-leaky_embargo: TRADE → TRADE",
     "sectionTarget": [
       "economy",
       "relations"
@@ -4142,7 +4142,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SC-pretenders_war": {
-    "title": "JF-SC-pretenders_war — INTERIOR → WAR",
+    "title": "JF-SC-pretenders_war: INTERIOR → WAR",
     "sectionTarget": [
       "power",
       "tensions"
@@ -4228,7 +4228,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SC-opium_cycle": {
-    "title": "JF-SC-opium_cycle — TRADE → WAR",
+    "title": "JF-SC-opium_cycle: TRADE → WAR",
     "sectionTarget": [
       "economy",
       "history"
@@ -4313,7 +4313,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SC-interdict": {
-    "title": "JF-SC-interdict — FAITH → INTERIOR",
+    "title": "JF-SC-interdict: FAITH → INTERIOR",
     "sectionTarget": [
       "power",
       "faith"
@@ -4395,7 +4395,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SC-stab_in_the_back": {
-    "title": "JF-SC-stab_in_the_back — WAR → INTERIOR",
+    "title": "JF-SC-stab_in_the_back: WAR → INTERIOR",
     "sectionTarget": [
       "power",
       "history"
@@ -4476,7 +4476,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SC-crusade": {
-    "title": "JF-SC-crusade — FAITH → WAR",
+    "title": "JF-SC-crusade: FAITH → WAR",
     "sectionTarget": [
       "tensions",
       "faith"
@@ -4562,7 +4562,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SC-melian_refusal": {
-    "title": "JF-SC-melian_refusal — WAR → WAR",
+    "title": "JF-SC-melian_refusal: WAR → WAR",
     "sectionTarget": [
       "relations",
       "tensions"
@@ -4644,7 +4644,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SS-reformation": {
-    "title": "JF-SS-reformation — INTERIOR → FAITH",
+    "title": "JF-SS-reformation: INTERIOR → FAITH",
     "sectionTarget": [
       "faith",
       "power"
@@ -4723,7 +4723,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SS-pilgrim_road": {
-    "title": "JF-SS-pilgrim_road — FAITH → WAR",
+    "title": "JF-SS-pilgrim_road: FAITH → WAR",
     "sectionTarget": [
       "tensions",
       "faith"
@@ -4812,7 +4812,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SS-house_run": {
-    "title": "JF-SS-house_run — INFORMATION → TRADE",
+    "title": "JF-SS-house_run: INFORMATION → TRADE",
     "sectionTarget": [
       "economy",
       "relations"
@@ -4895,7 +4895,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SS-diaspora_return": {
-    "title": "JF-SS-diaspora_return — POPULATIONS → WAR",
+    "title": "JF-SS-diaspora_return: POPULATIONS → WAR",
     "sectionTarget": [
       "history",
       "population"
@@ -4980,7 +4980,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SS-corner_and_mitre": {
-    "title": "JF-SS-corner_and_mitre — TRADE → FAITH",
+    "title": "JF-SS-corner_and_mitre: TRADE → FAITH",
     "sectionTarget": [
       "faith",
       "economy"
@@ -5063,7 +5063,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-SS-rush_and_war": {
-    "title": "JF-SS-rush_and_war — INFORMATION → WAR",
+    "title": "JF-SS-rush_and_war: INFORMATION → WAR",
     "sectionTarget": [
       "history",
       "defense"
@@ -5139,7 +5139,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-W-grievance_to_war": {
-    "title": "JF-W-grievance_to_war — WAR → WAR",
+    "title": "JF-W-grievance_to_war: WAR → WAR",
     "sectionTarget": [
       "tensions",
       "defense"
@@ -5223,7 +5223,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-W-ally_to_turncoat": {
-    "title": "JF-W-ally_to_turncoat — WAR → WAR",
+    "title": "JF-W-ally_to_turncoat: WAR → WAR",
     "sectionTarget": [
       "relations",
       "defense"
@@ -5307,7 +5307,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-W-razing_to_reckoning": {
-    "title": "JF-W-razing_to_reckoning — WAR → WAR",
+    "title": "JF-W-razing_to_reckoning: WAR → WAR",
     "sectionTarget": [
       "defense",
       "history"
@@ -5392,7 +5392,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-T-corner_to_riot": {
-    "title": "JF-T-corner_to_riot — TRADE → TRADE",
+    "title": "JF-T-corner_to_riot: TRADE → TRADE",
     "sectionTarget": [
       "economy",
       "power"
@@ -5473,7 +5473,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-T-credit_to_betrayal": {
-    "title": "JF-T-credit_to_betrayal — TRADE → TRADE",
+    "title": "JF-T-credit_to_betrayal: TRADE → TRADE",
     "sectionTarget": [
       "economy",
       "relations"
@@ -5559,7 +5559,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-T-venture_to_ruin": {
-    "title": "JF-T-venture_to_ruin — TRADE → TRADE",
+    "title": "JF-T-venture_to_ruin: TRADE → TRADE",
     "sectionTarget": [
       "economy",
       "power"
@@ -5644,7 +5644,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-F-tithe_to_schism": {
-    "title": "JF-F-tithe_to_schism — FAITH → FAITH",
+    "title": "JF-F-tithe_to_schism: FAITH → FAITH",
     "sectionTarget": [
       "faith",
       "power"
@@ -5722,7 +5722,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-F-suppression_to_underground": {
-    "title": "JF-F-suppression_to_underground — FAITH → FAITH",
+    "title": "JF-F-suppression_to_underground: FAITH → FAITH",
     "sectionTarget": [
       "faith",
       "history"
@@ -5804,7 +5804,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-F-omen_to_failed_prophecy": {
-    "title": "JF-F-omen_to_failed_prophecy — FAITH → FAITH",
+    "title": "JF-F-omen_to_failed_prophecy: FAITH → FAITH",
     "sectionTarget": [
       "faith",
       "power"
@@ -5887,7 +5887,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-P-boom_to_bust": {
-    "title": "JF-P-boom_to_bust — POP → POP",
+    "title": "JF-P-boom_to_bust: POP → POP",
     "sectionTarget": [
       "population",
       "economy"
@@ -5980,7 +5980,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-P-petition_to_riot": {
-    "title": "JF-P-petition_to_riot — POP → POP",
+    "title": "JF-P-petition_to_riot: POP → POP",
     "sectionTarget": [
       "power",
       "population"
@@ -6056,7 +6056,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-P-exodus_to_refounding": {
-    "title": "JF-P-exodus_to_refounding — POP → POP",
+    "title": "JF-P-exodus_to_refounding: POP → POP",
     "sectionTarget": [
       "population",
       "history"
@@ -6144,7 +6144,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-I-lure_to_war": {
-    "title": "JF-I-lure_to_war — INFO → INFO",
+    "title": "JF-I-lure_to_war: INFO → INFO",
     "sectionTarget": [
       "defense",
       "relations"
@@ -6232,7 +6232,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-I-plant_to_backfire": {
-    "title": "JF-I-plant_to_backfire — INFO → INFO",
+    "title": "JF-I-plant_to_backfire: INFO → INFO",
     "sectionTarget": [
       "relations",
       "economy"
@@ -6319,7 +6319,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-I-courier_to_treason": {
-    "title": "JF-I-courier_to_treason — INFO → INFO",
+    "title": "JF-I-courier_to_treason: INFO → INFO",
     "sectionTarget": [
       "relations",
       "power"
@@ -6404,7 +6404,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-G-signed_to_lapse": {
-    "title": "JF-G-signed_to_lapse — GRAMMAR → GRAMMAR",
+    "title": "JF-G-signed_to_lapse: GRAMMAR → GRAMMAR",
     "sectionTarget": [
       "relations",
       "history"
@@ -6490,7 +6490,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-G-succession_to_repudiation": {
-    "title": "JF-G-succession_to_repudiation — GRAMMAR → GRAMMAR",
+    "title": "JF-G-succession_to_repudiation: GRAMMAR → GRAMMAR",
     "sectionTarget": [
       "power",
       "relations"
@@ -6577,7 +6577,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-N-strain_to_coup": {
-    "title": "JF-N-strain_to_coup — INTERIOR → INTERIOR",
+    "title": "JF-N-strain_to_coup: INTERIOR → INTERIOR",
     "sectionTarget": [
       "power",
       "economy"
@@ -6662,7 +6662,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "JF-N-burial_to_digup": {
-    "title": "JF-N-burial_to_digup — INTERIOR → INTERIOR",
+    "title": "JF-N-burial_to_digup: INTERIOR → INTERIOR",
     "sectionTarget": [
       "history",
       "relations"

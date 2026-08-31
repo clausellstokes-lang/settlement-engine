@@ -347,7 +347,13 @@ function parseAnnex(src, headerRe, label) {
       // so a following bullet cannot inherit a heading that was never a group).
       const group = bulletRow && lastBold !== null ? poolKeyOf(lastBold) : '';
       if (boldRow) lastBold = null;
-      openPool(group ? `${group} — ${rowKey}` : rowKey);
+      // THE JOIN IS A COLON, NOT AN EM DASH (VOICE-1b, §854). A group-plus-row key is
+      // the label/title separator VOICE_AND_TONE §6 sends to a colon, and the separator
+      // this line MINTS is the one em dash in a pool key no author can reach: it is not
+      // in either annex, so 56 of the corpus's 299 key em dashes could only be burned
+      // here. The key is hashed into the draw (stateProseKernel.js `drawVariant`), so
+      // this separator is renameable only while the corpus is dark.
+      openPool(group ? `${group}: ${rowKey}` : rowKey);
       for (const m of compact[2].matchAll(COMPACT_VARIANT_RE)) {
         const { angle, marks } = parseTag(m[2]);
         const lead = m[3].match(LEADING_TAG_RE);

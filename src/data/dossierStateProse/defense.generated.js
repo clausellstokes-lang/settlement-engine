@@ -5,7 +5,7 @@
 /** @type {Readonly<Record<string, object>>} */
 export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
   "DS-DEF-1": {
-    "title": "DS-DEF-1 — `Defense › Defensive posture header` · `defenseProfile.readiness + resourceAnalysis.{terrain,strategicValue} + safetyProfile.guardEffectivenessDesc`",
+    "title": "DS-DEF-1: `Defense › Defensive posture header` · `defenseProfile.readiness + resourceAnalysis.{terrain,strategicValue} + safetyProfile.guardEffectivenessDesc`",
     "sectionTarget": [
       "defense"
     ],
@@ -207,7 +207,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-DEF-2": {
-    "title": "DS-DEF-2 — `Defense › Threat assessment (the five readiness rows)` · `defenseProfile.scores{monster,military,internal,economic,disaster} + institutions{walls,garrison,militia,charter} + config.monsterThreat + compound.inst`",
+    "title": "DS-DEF-2: `Defense › Threat assessment (the five readiness rows)` · `defenseProfile.scores{monster,military,internal,economic,disaster} + institutions{walls,garrison,militia,charter} + config.monsterThreat + compound.inst`",
     "sectionTarget": [
       "defense"
     ],
@@ -217,7 +217,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "route"
     ],
     "pools": {
-      "Beasts & Monsters — plagued, perimeter AND organized force": [
+      "Beasts & Monsters: plagued, perimeter AND organized force": [
         {
           "angle": "ledger",
           "text": "The country around {settlement} is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.",
@@ -240,7 +240,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Beasts & Monsters — plagued, perimeter but NO force to hold it": [
+      "Beasts & Monsters: plagued, perimeter but NO force to hold it": [
         {
           "angle": "ledger",
           "text": "{settlement} has a wall and nobody to man it. The line is a chokepoint on paper and a chokepoint requires people standing in it, which this town cannot supply for more than a night.",
@@ -263,7 +263,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Beasts & Monsters — plagued, NO perimeter and NO force": [
+      "Beasts & Monsters: plagued, NO perimeter and NO force": [
         {
           "angle": "ledger",
           "text": "An embattled country and nothing organized standing in it: {settlement} has no line, no force and no specialist recourse, and survival here rests on terrain, distance and the ability to leave.",
@@ -284,7 +284,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Beasts & Monsters — frontier, credible deterrence": [
+      "Beasts & Monsters: frontier, credible deterrence": [
         {
           "angle": "ledger",
           "text": "{settlement} sits on an active frontier with a line and a force behind it — most of what comes out of the country will not press a defended perimeter, and most of what comes here does not.",
@@ -305,7 +305,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Beasts & Monsters — frontier, force without a perimeter": [
+      "Beasts & Monsters: frontier, force without a perimeter": [
         {
           "angle": "ledger",
           "text": "{settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards.",
@@ -326,7 +326,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "Beasts & Monsters — settled, defenses beyond the need": [
+      "Beasts & Monsters: settled, defenses beyond the need": [
         {
           "angle": "counterforce",
           "text": "There is very little in the country around {settlement} and there are substantial works facing it; whatever the walls here are for, it is not the creatures.",
@@ -349,7 +349,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Beasts & Monsters — settled, nothing organized": [
+      "Beasts & Monsters: settled, nothing organized": [
         {
           "angle": "ledger",
           "text": "{settlement} keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap.",
@@ -370,7 +370,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Invasion & War — walls AND professional garrison": [
+      "Invasion & War: walls AND professional garrison": [
         {
           "angle": "ledger",
           "text": "{settlement} has a line and professionals to hold it, which is real deterrence against raiding and against a conventional assault; it is not a posture rated for a long siege without stores behind it.",
@@ -391,7 +391,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "Invasion & War — walls with citizen militia": [
+      "Invasion & War: walls with citizen militia": [
         {
           "angle": "ledger",
           "text": "Walls at {settlement} with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.",
@@ -412,7 +412,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Invasion & War — walls with NO force": [
+      "Invasion & War: walls with NO force": [
         {
           "angle": "ledger",
           "text": "{settlement} has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.",
@@ -433,7 +433,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "Invasion & War — force with NO walls": [
+      "Invasion & War: force with NO walls": [
         {
           "angle": "ledger",
           "text": "{settlement} keeps a professional force and no perimeter. It answers raiders well and cannot hold a siege, because there is nothing here to hold.",
@@ -454,7 +454,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Invasion & War — militia only": [
+      "Invasion & War: militia only": [
         {
           "angle": "ledger",
           "text": "{settlement} can put armed citizens on their own ground, which counts for something against a disorganized raid and for nothing at all against a disciplined force.",
@@ -475,7 +475,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Invasion & War — neither walls nor force": [
+      "Invasion & War: neither walls nor force": [
         {
           "angle": "ledger",
           "text": "{settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.",
@@ -496,7 +496,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "Internal Security — full legal chain (court AND prison)": [
+      "Internal Security: full legal chain (court AND prison)": [
         {
           "angle": "ledger",
           "text": "{settlement} can arrest, try and hold, and having all three means the town's law is a process rather than a threat.",
@@ -519,7 +519,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Internal Security — court without detention": [
+      "Internal Security: court without detention": [
         {
           "angle": "ledger",
           "text": "{settlement} tries offences it cannot hold anyone for; the sentences available here are money and exile, and both of them fall unevenly.",
@@ -540,7 +540,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Internal Security — detention without process": [
+      "Internal Security: detention without process": [
         {
           "angle": "ledger",
           "text": "{settlement} can hold people and has no settled way of deciding whether it should, which makes enforcement here a matter of who is doing it.",
@@ -563,7 +563,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Internal Security — no legal infrastructure": [
+      "Internal Security: no legal infrastructure": [
         {
           "angle": "ledger",
           "text": "There is no legal machinery at {settlement}; order here rests on force alone, and force alone deters only while it is present.",
@@ -584,7 +584,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Economic Survival — STRONG": [
+      "Economic Survival: STRONG": [
         {
           "angle": "ledger",
           "text": "{settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the garrison can be kept paid while they last.",
@@ -605,7 +605,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Economic Survival — ADEQUATE": [
+      "Economic Survival: ADEQUATE": [
         {
           "angle": "ledger",
           "text": "{settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.",
@@ -626,7 +626,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Economic Survival — WEAK": [
+      "Economic Survival: WEAK": [
         {
           "angle": "ledger",
           "text": "Chronic shortfall at {settlement} limits what the town can do in an emergency before the emergency starts; the pay is irregular, and irregular pay shows up as morale exactly when it matters.",
@@ -649,7 +649,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Economic Survival — CRITICAL": [
+      "Economic Survival: CRITICAL": [
         {
           "angle": "ledger",
           "text": "{settlement} cannot fund a response to anything. Any sustained pressure exhausts the town's capacity almost immediately and then continues.",
@@ -670,7 +670,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Disasters & Famine — granary AND hospital": [
+      "Disasters & Famine: granary AND hospital": [
         {
           "angle": "ledger",
           "text": "{settlement} holds food against a bad year and has somewhere to put the sick; between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
@@ -691,7 +691,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Disasters & Famine — granary AND parish care only": [
+      "Disasters & Famine: granary AND parish care only": [
         {
           "angle": "ledger",
           "text": "There is food stored at {settlement} and there are clergy who tend the sick — reserves against hunger, and against disease something better than nothing and well short of a hospital.",
@@ -712,7 +712,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Disasters & Famine — granary, NO medical provision": [
+      "Disasters & Famine: granary, NO medical provision": [
         {
           "angle": "ledger",
           "text": "{settlement} can feed itself through a failed harvest and has nothing at all against disease; a sickness here spreads until it stops of its own accord.",
@@ -733,7 +733,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Disasters & Famine — NO reserves, hospital present": [
+      "Disasters & Famine: NO reserves, hospital present": [
         {
           "angle": "ledger",
           "text": "{settlement} can treat and contain an outbreak and keeps no food against a bad harvest; a crop failure here becomes hardship the same season it happens.",
@@ -754,7 +754,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "Disasters & Famine — NO reserves, NO medical provision": [
+      "Disasters & Famine: NO reserves, NO medical provision": [
         {
           "angle": "ledger",
           "text": "{settlement} holds no food against a bad year and has nobody to treat the sick; a failed harvest is immediate hardship here and a plague runs until it burns out.",
@@ -778,7 +778,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-DEF-3": {
-    "title": "DS-DEF-3 — `Defense › Public order banner` · `defenseProfile.scores.internal + safetyProfile.{safetyLabel,safetyDesc}`",
+    "title": "DS-DEF-3: `Defense › Public order banner` · `defenseProfile.scores.internal + safetyProfile.{safetyLabel,safetyDesc}`",
     "sectionTarget": [
       "defense",
       "power"
@@ -967,7 +967,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-DEF-4": {
-    "title": "DS-DEF-4 — `Defense › Criminal structure + capture consequence` · `deriveCriminalStructure(settlement) + powerStructure.criminalCaptureState + safetyProfile.criminalInstitutions[]`",
+    "title": "DS-DEF-4: `Defense › Criminal structure + capture consequence` · `deriveCriminalStructure(settlement) + powerStructure.criminalCaptureState + safetyProfile.criminalInstitutions[]`",
     "sectionTarget": [
       "defense",
       "power (the capture arm)"
@@ -1221,7 +1221,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-DEF-5": {
-    "title": "DS-DEF-5 — `Defense › Armed forces & fortifications` · `defenseProfile.institutions{walls,garrison,militia,watch,mercenary,charter,magicDef}`",
+    "title": "DS-DEF-5: `Defense › Armed forces & fortifications` · `defenseProfile.institutions{walls,garrison,militia,watch,mercenary,charter,magicDef}`",
     "sectionTarget": [
       "defense"
     ],
@@ -1478,7 +1478,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-DEF-6": {
-    "title": "DS-DEF-6 — `Defense › Supporting capabilities` · `scores.economic/magical + compound.inst{hasMagicInst,hasCourtSystem,hasPrison,hasHospital,hasChurch,hasGranary,hasPort,hasNavy} + tradeAccess + blockade`",
+    "title": "DS-DEF-6: `Defense › Supporting capabilities` · `scores.economic/magical + compound.inst{hasMagicInst,hasCourtSystem,hasPrison,hasHospital,hasChurch,hasGranary,hasPort,hasNavy} + tradeAccess + blockade`",
     "sectionTarget": [
       "defense",
       "economy (the backing and logistics arms)"
@@ -1975,7 +1975,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-DEF-7": {
-    "title": "DS-DEF-7 — `Defense › Live defense readiness + war front` · `causalState.variables.defense_readiness{band,contributors[]} vs frozen defenseProfile.scores · warStatus.{besiegedBy,besiegingTargets}`",
+    "title": "DS-DEF-7: `Defense › Live defense readiness + war front` · `causalState.variables.defense_readiness{band,contributors[]} vs frozen defenseProfile.scores · warStatus.{besiegedBy,besiegingTargets}`",
     "sectionTarget": [
       "defense",
       "tensions"
@@ -2250,7 +2250,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-DEF-8": {
-    "title": "DS-DEF-8 — `Defense › Active military status` · `settlement.stress[].type → DEFENSE_STRESS_STATUS + stress.{summary,viabilityNote}`",
+    "title": "DS-DEF-8: `Defense › Active military status` · `settlement.stress[].type → DEFENSE_STRESS_STATUS + stress.{summary,viabilityNote}`",
     "sectionTarget": [
       "defense"
     ],
@@ -2354,7 +2354,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-DEF-9": {
-    "title": "DS-DEF-9 — `Viability › Magic dependency` · `defenseProfile.magicDependency + economicState.activeChains[].magicNote`",
+    "title": "DS-DEF-9: `Viability › Magic dependency` · `defenseProfile.magicDependency + economicState.activeChains[].magicNote`",
     "sectionTarget": [
       "viability",
       "overview"
@@ -2445,7 +2445,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-DEF-10": {
-    "title": "DS-DEF-10 — `DEFENSE — the five arms, readiness badges, and military posture` · `defenseProfile.{scores,economicGates,institutions} + defenseProfileHasWalls + DEFENSE_STRESS_STATUS`",
+    "title": "DS-DEF-10: `DEFENSE: the five arms, readiness badges, and military posture` · `defenseProfile.{scores,economicGates,institutions} + defenseProfileHasWalls + DEFENSE_STRESS_STATUS`",
     "sectionTarget": [
       "defense"
     ],

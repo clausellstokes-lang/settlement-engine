@@ -5,7 +5,7 @@
 /** @type {Readonly<Record<string, object>>} */
 export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
   "DS-WAR-1": {
-    "title": "DS-WAR-1 — `War & Faith › War block` · `settlementWarStatus + settlementWarExhaustion + settlementMobilization + settlementOccupation + occupierHoldings`",
+    "title": "DS-WAR-1: `War & Faith › War block` · `settlementWarStatus + settlementWarExhaustion + settlementMobilization + settlementOccupation + occupierHoldings`",
     "sectionTarget": [
       "tensions",
       "defense"
@@ -191,7 +191,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "mobilization — climbing the ramp, still distant": [
+      "mobilization: climbing the ramp, still distant": [
         {
           "angle": "ledger",
           "text": "{settlement} is turning toward war and is not near it; the muster has begun and the economy has barely started shifting behind it.",
@@ -212,7 +212,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "mobilization — climbing, close to ready": [
+      "mobilization: climbing, close to ready": [
         {
           "angle": "ledger",
           "text": "{settlement} is within a season of being able to march. What remains is the last of the provisioning, and the provisioning is nearly done.",
@@ -233,7 +233,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "mobilization — fully ready": [
+      "mobilization: fully ready": [
         {
           "angle": "ledger",
           "text": "{settlement} is mobilized. The town could march this season, and everything it is doing instead is a choice.",
@@ -256,7 +256,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "mobilization — COVERT": [
+      "mobilization: COVERT": [
         {
           "angle": "ledger",
           "marks": [
@@ -546,7 +546,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-WAR-2": {
-    "title": "DS-WAR-2 — `War & Faith › Treaty block` · `renderTreatiesForSettlement(worldState,sid) → docs[]{complianceState, termLines[]{family,type,yearsRemaining,fraying,strainLine}}`",
+    "title": "DS-WAR-2: `War & Faith › Treaty block` · `renderTreatiesForSettlement(worldState,sid) → docs[]{complianceState, termLines[]{family,type,yearsRemaining,fraying,strainLine}}`",
     "sectionTarget": [
       "relations",
       "tensions"
@@ -1206,7 +1206,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-WAR-3": {
-    "title": "DS-WAR-3 — `War & Faith › Whole-tab dormant note` · `no war beat AND no treaty AND faith HIDDEN`",
+    "title": "DS-WAR-3: `War & Faith › Whole-tab dormant note` · `no war beat AND no treaty AND faith HIDDEN`",
     "sectionTarget": [
       "faith",
       "tensions"
@@ -1251,7 +1251,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-WAR-4": {
-    "title": "DS-WAR-4 — `PDF › liveWorld slice` · `campaign.worldState read through the same pure selectors + aggressionPosture`",
+    "title": "DS-WAR-4: `PDF › liveWorld slice` · `campaign.worldState read through the same pure selectors + aggressionPosture`",
     "sectionTarget": [
       "the printed chapter openers",
       "tensions"
@@ -1376,7 +1376,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-WAR-5": {
-    "title": "DS-WAR-5 — `WAR-ADJACENT — posture, siege, occupation, blockade, treaty burden, recovery` · `worldState.{warPosture,deployments,occupations,spatialLedgers.treaties} + regionalGraph war_front channels + activeConditions aftermath archetypes`",
+    "title": "DS-WAR-5: `WAR-ADJACENT: posture, siege, occupation, blockade, treaty burden, recovery` · `worldState.{warPosture,deployments,occupations,spatialLedgers.treaties} + regionalGraph war_front channels + activeConditions aftermath archetypes`",
     "sectionTarget": [
       "tensions",
       "defense"
@@ -2110,14 +2110,14 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-FTH-1": {
-    "title": "DS-FTH-1 — War & Faith › Faith panel (ACTIVE mode) · `faithPanelModel(settlement) → {patron, cults, ranks, piety, unaffiliated, mandate, sinkSentence, patronFallSentence, live}`",
+    "title": "DS-FTH-1: War & Faith › Faith panel (ACTIVE mode) · `faithPanelModel(settlement) → {patron, cults, ranks, piety, unaffiliated, mandate, sinkSentence, patronFallSentence, live}`",
     "slots": [
       "settlement",
       "creed",
       "rival_creed"
     ],
     "pools": {
-      "PATRON — rankAxis: major": [
+      "PATRON: rankAxis: major": [
         {
           "angle": "visitor",
           "text": "{creed} is the patron here, and it is no local creed — the same rite is kept across enough of the realm to carry weight well past {settlement}'s walls.",
@@ -2142,7 +2142,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "PATRON — rankAxis: minor": [
+      "PATRON: rankAxis: minor": [
         {
           "angle": "ledger",
           "text": "{creed} is the patron here, kept in a handful of settlements and nowhere near all of them; its reach ends not far past the district.",
@@ -2166,7 +2166,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "PATRON — rankAxis: cult": [
+      "PATRON: rankAxis: cult": [
         {
           "angle": "visitor",
           "text": "The patron of {settlement} is {creed}, a creed with few other homes — what it lacks in reach it holds in intensity.",
@@ -2190,7 +2190,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "CULTS — cults[] present beneath the patron": [
+      "CULTS: cults[] present beneath the patron": [
         {
           "angle": "visitor",
           "text": "Beneath {creed}, smaller observances keep their own shrines — tolerated, attended, and not confused with the town's own rite.",
@@ -2211,7 +2211,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "DEVOTION — devout": [
+      "DEVOTION: devout": [
         {
           "angle": "street",
           "text": "Devotion here runs deep — the rites are kept by people who would keep them without being asked.",
@@ -2230,7 +2230,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "DEVOTION — faithful": [
+      "DEVOTION: faithful": [
         {
           "angle": "ledger",
           "text": "The town keeps its faith properly. Attendance is the rule rather than the exception, and lapsing is noticed.",
@@ -2249,7 +2249,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "DEVOTION — observant": [
+      "DEVOTION: observant": [
         {
           "angle": "street",
           "text": "Faith here is habit more than fervour — the rites are kept, and kept without much heat.",
@@ -2268,7 +2268,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "DEVOTION — lukewarm": [
+      "DEVOTION: lukewarm": [
         {
           "angle": "visitor",
           "text": "The benches are thinly filled. The rites survive as custom rather than conviction, and the custom is wearing.",
@@ -2287,7 +2287,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "DEVOTION — secular": [
+      "DEVOTION: secular": [
         {
           "angle": "ledger",
           "text": "Devotion here is nearly gone. The building stands and the rites are performed, largely for the people who have always performed them.",
@@ -2306,7 +2306,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "ARC — trend: rising": [
+      "ARC: trend: rising": [
         {
           "angle": "unfolding",
           "text": "Devotion is climbing, and the reason is plain enough: the town lives by the creed it professes, and the professing has followed the living.",
@@ -2323,7 +2323,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ARC — trend: falling": [
+      "ARC: trend: falling": [
         {
           "angle": "unfolding",
           "text": "Devotion is ebbing. The town no longer lives as its creed asks, and the observance is following the conduct rather than correcting it.",
@@ -2340,7 +2340,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ARC — trend: steady": [
+      "ARC: trend: steady": [
         {
           "angle": "ledger",
           "text": "Devotion holds where it has been. Nothing is pulling it up and nothing is pulling it down.",
@@ -2357,7 +2357,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "STANDINGS — the patron dominant": [
+      "STANDINGS: the patron dominant": [
         {
           "angle": "ledger",
           "text": "The patron holds most of the town's adherence outright; the other creeds keep shrines rather than congregations.",
@@ -2378,7 +2378,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "STANDINGS — the patron pressed by a near rival": [
+      "STANDINGS: the patron pressed by a near rival": [
         {
           "angle": "threshold",
           "text": "The patron holds the seat, but not comfortably — {rival_creed} has taken enough of the town's adherence to be counted.",
@@ -2399,7 +2399,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "STANDINGS — a plural field, no majority": [
+      "STANDINGS: a plural field, no majority": [
         {
           "angle": "ledger",
           "text": "No creed commands {settlement}. Adherence is divided across several rites, none of them near a majority.",
@@ -2418,7 +2418,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "SINK — unaffiliated present, arc falling": [
+      "SINK: unaffiliated present, arc falling": [
         {
           "angle": "ledger",
           "text": "A growing share of the town keeps no god at all — the share is not going to a rival rite, it is going out of the rites altogether.",
@@ -2437,7 +2437,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "SINK — unaffiliated present, arc rising": [
+      "SINK: unaffiliated present, arc rising": [
         {
           "angle": "unfolding",
           "text": "The unaffiliated are drifting back toward the observances — crisis has a way of ending indifference.",
@@ -2454,7 +2454,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "MANDATE — contested, or patron security below the floor": [
+      "MANDATE: contested, or patron security below the floor": [
         {
           "angle": "counterforce",
           "text": "The ruler's claim gets no help from the observances — a divided faith cannot lend authority it does not itself hold.",
@@ -2471,7 +2471,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "MANDATE — a dominant church": [
+      "MANDATE: a dominant church": [
         {
           "angle": "ledger",
           "text": "The observance stands behind the seat, and it is an observance worth standing behind — the ruler governs with the creed's open endorsement.",
@@ -2488,7 +2488,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "MANDATE — a measure of divine mandate": [
+      "MANDATE: a measure of divine mandate": [
         {
           "angle": "ledger",
           "text": "The creed lends the ruler some standing — not the whole of the seat's authority, but a serviceable part of it.",
@@ -2527,7 +2527,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-FTH-2": {
-    "title": "DS-FTH-2 — War & Faith › Faith teaser (free / anon; names no deity) · `absence of config.primaryDeitySnapshot × viewer tier`",
+    "title": "DS-FTH-2: War & Faith › Faith teaser (free / anon; names no deity) · `absence of config.primaryDeitySnapshot × viewer tier`",
     "slots": [
       "settlement"
     ],
@@ -2583,7 +2583,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-FTH-3": {
-    "title": "DS-FTH-3 — Religion state: standing, niche, legitimacy, falls, rank, wealth and season · `worldState.religionStates[cid] {patronRef, deities{share, standing, legitimacy, niche, tenure, suppressed, covert}, patronFalls[]}` × `templeWealth`",
+    "title": "DS-FTH-3: Religion state: standing, niche, legitimacy, falls, rank, wealth and season · `worldState.religionStates[cid] {patronRef, deities{share, standing, legitimacy, niche, tenure, suppressed, covert}, patronFalls[]}` × `templeWealth`",
     "slots": [
       "settlement",
       "creed",
@@ -2593,7 +2593,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "timeband_span"
     ],
     "pools": {
-      "STANDING — cult": [
+      "STANDING: cult": [
         {
           "angle": "ledger",
           "text": "{creed} is kept here by a few households and no more — a following rather than a congregation, and one the town's other rites do not take seriously.",
@@ -2614,7 +2614,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "STANDING — established": [
+      "STANDING: established": [
         {
           "angle": "ledger",
           "text": "{creed} is properly settled here — enough of the town keeps it that its days are the town's days, without its holding the seat.",
@@ -2635,7 +2635,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "STANDING — ascendant": [
+      "STANDING: ascendant": [
         {
           "angle": "unfolding",
           "text": "{creed} has risen to the front rank of {settlement}'s faiths — its share is large enough to make it patron-eligible, and everyone concerned has noticed.",
@@ -2655,7 +2655,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "NICHE — slots saturated at tier capacity": [
+      "NICHE: slots saturated at tier capacity": [
         {
           "angle": "counterforce",
           "text": "The town sustains as many faiths as it can. A new creed arriving here does not join the field; it displaces something.",
@@ -2674,7 +2674,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "NICHE — slots open": [
+      "NICHE: slots open": [
         {
           "angle": "ledger",
           "text": "The town has room for more faith than it keeps. Shrines stand unclaimed, and an arriving creed would find space rather than resistance.",
@@ -2693,7 +2693,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "NICHE — the patron's niche carries a contestant": [
+      "NICHE: the patron's niche carries a contestant": [
         {
           "angle": "counterforce",
           "text": "Two creeds occupy the same ground here — the same temper, the same alignment, the same kind of believer. That is not coexistence; it is a schism with a calendar.",
@@ -2714,7 +2714,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "NICHE — every niche uncontested": [
+      "NICHE: every niche uncontested": [
         {
           "angle": "ledger",
           "text": "Each of the town's creeds keeps its own ground. They divide the year without dividing the households, and nobody competes for the same believer.",
@@ -2733,7 +2733,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "LEGITIMACY — secure": [
+      "LEGITIMACY: secure": [
         {
           "angle": "elder",
           "text": "The patron's claim is not questioned here. Whatever the shares say, the town regards {creed} as the rightful faith of this place, and has for {timeband_span}.",
@@ -2755,7 +2755,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "LEGITIMACY — established": [
+      "LEGITIMACY: established": [
         {
           "angle": "ledger",
           "text": "The patron's claim is accepted without being revered — nobody disputes it, and nobody would call it sacred.",
@@ -2774,7 +2774,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "LEGITIMACY — tenuous": [
+      "LEGITIMACY: tenuous": [
         {
           "angle": "counterforce",
           "text": "The patron's right to the seat is thin. It holds the benches and it does not hold the argument, and the town has begun to notice the difference.",
@@ -2793,7 +2793,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "LEGITIMACY — contested": [
+      "LEGITIMACY: contested": [
         {
           "angle": "ledger",
           "text": "The patron's claim is broadly rejected. It holds the seat on numbers alone, which is not how seats stay held.",
@@ -2812,7 +2812,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "FALL — displaced": [
+      "FALL: displaced": [
         {
           "angle": "unfolding",
           "text": "The seat changed hands. {rival_creed} drew away enough of the town's adherence to take it, steadily and without any single decisive week.",
@@ -2834,7 +2834,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "FALL — discredited": [
+      "FALL: discredited": [
         {
           "angle": "ledger",
           "text": "The patron lost the seat on its right rather than its numbers — the claim failed, and the following followed the claim.",
@@ -2853,7 +2853,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "FALL — imposed": [
+      "FALL: imposed": [
         {
           "angle": "ledger",
           "text": "The patron here arrived with an authority rather than a following — the creed followed the garrison, and the calendar changed by order.",
@@ -2873,7 +2873,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "FALL — suppressed": [
+      "FALL: suppressed": [
         {
           "angle": "ledger",
           "text": "The old creed was put down rather than displaced. Its shrines are closed, its days unmarked, and its adherents keep it in whatever form needs no building.",
@@ -2892,7 +2892,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "PANTHEON RANK — Cult": [
+      "PANTHEON RANK: Cult": [
         {
           "angle": "ledger",
           "text": "The creed holds barely any settlement seats anywhere — a fringe following with one town's worth of conviction behind it.",
@@ -2911,7 +2911,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "PANTHEON RANK — Minor": [
+      "PANTHEON RANK: Minor": [
         {
           "angle": "ledger",
           "text": "The faith holds a few seats across the realm — enough to be known on the road, not enough to be assumed.",
@@ -2930,7 +2930,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "PANTHEON RANK — Major": [
+      "PANTHEON RANK: Major": [
         {
           "angle": "ledger",
           "text": "This is one of the realm's first-rank faiths — kept as patron in enough settlements that its clergy speak to rulers rather than about them.",
@@ -2949,7 +2949,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TEMPLE WEALTH — rich": [
+      "TEMPLE WEALTH: rich": [
         {
           "angle": "ledger",
           "text": "{institution} holds a considerable coffer — enough to lend, enough to build, and enough that the question of what it is for gets asked occasionally.",
@@ -2970,7 +2970,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "TEMPLE WEALTH — modest": [
+      "TEMPLE WEALTH: modest": [
         {
           "angle": "ledger",
           "text": "{institution} is solvent and no more. Its coffer covers the rites, the roof, and a bad season, in that order of priority.",
@@ -2989,7 +2989,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TEMPLE WEALTH — drawn down": [
+      "TEMPLE WEALTH: drawn down": [
         {
           "angle": "ledger",
           "text": "{institution}'s coffer is empty. What the tithe brings in leaves again immediately, and the fabric is beginning to show it.",
@@ -3008,7 +3008,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "COVERT CONGREGATION — deities[ref].covert present": [
+      "COVERT CONGREGATION: deities[ref].covert present": [
         {
           "angle": "ledger",
           "marks": [
@@ -3038,7 +3038,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "PILGRIM SEASON — heavy": [
+      "PILGRIM SEASON: heavy": [
         {
           "angle": "visitor",
           "text": "The pilgrim road is busy. {settlement} takes in more travellers in {season} than it houses in any other part of the year, and the town's whole trade bends toward them.",
@@ -3060,7 +3060,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "PILGRIM SEASON — thin": [
+      "PILGRIM SEASON: thin": [
         {
           "angle": "visitor",
           "text": "The road is quiet. The pilgrims come at their season and this is not it, and the town's inns are honest about the difference.",
@@ -3077,7 +3077,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "PILGRIM SEASON — suppressed by road danger": [
+      "PILGRIM SEASON: suppressed by road danger": [
         {
           "angle": "counterforce",
           "text": "The pilgrims are not coming. The rite has not changed and the road has — what was a devotional journey is now a risk with a devotional excuse.",

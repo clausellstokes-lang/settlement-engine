@@ -38,7 +38,7 @@
  * SHRINK-ONLY, baselined in tests/copy/.prose-leak-jsx-baseline.json.
  */
 import { describe, expect, it } from 'vitest';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -55,6 +55,7 @@ import {
   scanJsxSegmentTree,
   scanJsxTree,
 } from '../helpers/jsxLiteralWalk.js';
+import { writeShrinkOnlyBaseline } from '../helpers/shrinkOnlyBaseline.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const JSX_BASELINE_PATH = join(ROOT, 'tests/copy/.prose-leak-jsx-baseline.json');
@@ -367,8 +368,14 @@ for (const { rel, strings } of JSX_SCAN) {
   if (Object.values(c).some((n) => n > 0)) currentJsxLeaks[rel] = c;
 }
 
+// SHRINK-ONLY, ENFORCED (VOICE-1b, ODQ §854). This write answers the SAME
+// UPDATE_VOICE_BASELINE=1 command documented on voiceMechanics.test.js, and carried the
+// same unguarded no-shrink shape: running the documented refreeze for the voice ratchet
+// silently rewrote this engine-token baseline too, in whatever direction the tree had
+// drifted. writeShrinkOnlyBaseline throws instead of writing when any of the five leak
+// metrics would rise.
 if (UPDATE) {
-  writeFileSync(JSX_BASELINE_PATH, JSON.stringify(currentJsxLeaks, null, 1) + '\n');
+  writeShrinkOnlyBaseline(JSX_BASELINE_PATH, currentJsxLeaks, 'the proseLeak JSX engine-token baseline');
 }
 
 const ZERO_LEAKS = { flagKey: 0, tick: 0, week: 0, schema: 0, rawId: 0 };

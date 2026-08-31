@@ -157,8 +157,8 @@ describe('anchored liveness at the desk grain', () => {
     // annex answers that by authoring C2 and C5 without the slot at all. So the desk
     // reaches no pool that could ever want an approach word it does not have, and an
     // isolated town renders a full sentence rather than a degraded one.
-    for (const key of ['COMBINATION C2 — a high rung on a narrow approach (isolated / mountain_pass)',
-      'COMBINATION C5 — a low rung on a narrow approach']) {
+    for (const key of ['COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)',
+      'COMBINATION C5: a low rung on a narrow approach']) {
       for (const variant of DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-1'].pools[key]) {
         expect(variant.slots, `${key} must not need {access}`).not.toContain('access');
       }
@@ -189,7 +189,7 @@ describe('the legibility rungs', () => {
     expect(desk.prosperityHeader.detail).toContainEqual({ label: 'Approach', value: 'the crossroads' });
     expect(desk.prosperityHeader.provenance).toEqual({
       blockId: 'DS-ECO-1',
-      poolKey: 'COMBINATION C3 — the middle rungs',
+      poolKey: 'COMBINATION C3: the middle rungs',
       angle: expect.any(String),
     });
     expect(desk.granaryTile.glance).toBe('stocked');

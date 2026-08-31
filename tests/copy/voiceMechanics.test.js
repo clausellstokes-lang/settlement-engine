@@ -37,9 +37,30 @@
  *   - APPROVED sweep landed → regenerate: UPDATE_VOICE_BASELINE=1 npx vitest run
  *     tests/copy/voiceMechanics.test.js  (shrink-only: totals may never grow;
  *     this regenerates BOTH the Tier-2 and Tier-3/JSX baselines).
+ *
+ * ⭐ THE SHIFT RECORD (VOICE-1b, 2026-08-31; the full entry lives with this instrument's
+ * banked rows in scripts/.test-ratchet-baseline.json). TWO trains landed the generated
+ * dossier corpora on 2026-08-03, not one: P-1 `a277f53d3` (six state-prose desk leaves,
+ * 635 em, 81.5% of the drift, named nowhere until ODQ §854) and P-3 `23d118eb2` (the
+ * causal corpus, 144 em). P-1 alone breached the budget — 469 committed against 670 at
+ * `a277f53d3^` left 201 of headroom for 635 of new debt — so the rows' `introducedAt`
+ * moved from P-3 to P-1. Measured here at `6770f878f`: 1478 / 21, not the 1369 / 18 the
+ * blockers had recorded. VOICE-1b then burned the corpus's DARK half (299 pool-key + 142
+ * title em dashes, 1478 → 1028); those pool keys are hashed into the draw
+ * (stateProseKernel.js `drawVariant`), so that was a DECLARED one-time shift, free only
+ * while the corpus has zero product callers. The 338 reader-facing variant sentences were
+ * deliberately NOT touched: they are the owner-signed T5-ONE-REGEN constituent.
+ *
+ * ⭐ THE SHRINK-ONLY CLAIM IS NOW ENFORCED (VOICE-1b, ODQ §854). Both writes above
+ * went through a bare `writeFileSync`, so the documented command BANKED whatever
+ * drift it found — the one thing the ratchet exists to forbid, performed by its own
+ * documented cure. They now route through
+ * tests/helpers/shrinkOnlyBaseline.js#writeShrinkOnlyBaseline, which THROWS rather
+ * than writing when any metric total would rise. The same variable drives
+ * tests/copy/proseLeak.test.js, whose write carries the identical guard.
  */
 import { describe, expect, it } from 'vitest';
-import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -49,6 +70,7 @@ import { pricingPage } from '../../src/copy/pricingPage.js';
 import { footer } from '../../src/copy/footer.js';
 import { deityAuthoring } from '../../src/copy/deityAuthoring.js';
 import { extractJsxProseStrings, scanJsxTree } from '../helpers/jsxLiteralWalk.js';
+import { writeShrinkOnlyBaseline } from '../helpers/shrinkOnlyBaseline.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const BASELINE_PATH = join(ROOT, 'tests/copy/.voice-mechanics-baseline.json');
@@ -151,8 +173,11 @@ for (const rel of SCANNED_FILES) {
   if (c.em > 0 || c.bang > 0) current[rel] = c;
 }
 
+// SHRINK-ONLY, ENFORCED (VOICE-1b). The docstring above has always said "totals may
+// never grow"; until this guard nothing checked, so the documented command banked
+// whatever drift it found. writeShrinkOnlyBaseline throws instead of writing.
 if (UPDATE) {
-  writeFileSync(BASELINE_PATH, JSON.stringify(current, null, 1) + '\n');
+  writeShrinkOnlyBaseline(BASELINE_PATH, current, 'the Tier-2 src/data + src/domain voice baseline');
 }
 
 // ── Tier 3 (E-E): the JSX component scan ─────────────────────────────────────
@@ -177,7 +202,7 @@ for (const { rel, strings } of JSX_SCAN) {
 }
 
 if (UPDATE) {
-  writeFileSync(JSX_BASELINE_PATH, JSON.stringify(currentJsx, null, 1) + '\n');
+  writeShrinkOnlyBaseline(JSX_BASELINE_PATH, currentJsx, 'the Tier-3 src/**/*.jsx voice baseline');
 }
 
 describe('E2 voiceMechanics — the copy registries carry no em dash and no exclamation point', () => {

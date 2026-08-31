@@ -8,14 +8,14 @@ import { ECONOMY_FRESHNESS_SENTENCES } from '../../domain/display/economyFreshne
 /** @type {Readonly<Record<string, object>>} */
 export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
   "DS-ECO-1": {
-    "title": "DS-ECO-1 — Economics › Prosperity header · `economicState.{prosperity, economicComplexity, tradeAccess, compound.economyOutput, situationDesc}`",
+    "title": "DS-ECO-1: Economics › Prosperity header · `economicState.{prosperity, economicComplexity, tradeAccess, compound.economyOutput, situationDesc}`",
     "slots": [
       "settlement",
       "access",
       "complexity"
     ],
     "pools": {
-      "COMBINATION C1 — a high rung on a working approach": [
+      "COMBINATION C1: a high rung on a working approach": [
         {
           "angle": "visitor",
           "text": "A stranger reads {settlement}'s standing off its {access} before anyone tells him: the traffic is steady, the {complexity} keeps more hands busy than the town strictly needs, and none of it looks improvised.",
@@ -42,7 +42,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "COMBINATION C2 — a high rung on a narrow approach (isolated / mountain_pass)": [
+      "COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)": [
         {
           "angle": "visitor",
           "text": "{settlement} is richer than its road suggests. Nothing reaches it easily and the stores are deep and the halls are finished anyway.",
@@ -65,7 +65,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "COMBINATION C3 — the middle rungs": [
+      "COMBINATION C3: the middle rungs": [
         {
           "angle": "street",
           "text": "{settlement} manages. The {complexity} covers what the town needs and leaves a little over, and the little over is what the year gets argued about.",
@@ -88,7 +88,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "COMBINATION C4 — a low rung on a working approach": [
+      "COMBINATION C4: a low rung on a working approach": [
         {
           "angle": "ledger",
           "text": "{settlement} sits on a working {access} and still counts short. The traffic is real; the share of it that stays here is not.",
@@ -111,7 +111,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "COMBINATION C5 — a low rung on a narrow approach": [
+      "COMBINATION C5: a low rung on a narrow approach": [
         {
           "angle": "visitor",
           "text": "{settlement} is poor and hard to reach, and the two read as one fact: what the road does not carry, the town does without.",
@@ -137,13 +137,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-ECO-2": {
-    "title": "DS-ECO-2 — Economics › At-a-glance tiles · `foodBalance{dailyProduction,dailyNeed,surplus,deficit}` + `deficitPct` + `deriveGranaryOutlook(s){available,season,band}`",
+    "title": "DS-ECO-2: Economics › At-a-glance tiles · `foodBalance{dailyProduction,dailyNeed,surplus,deficit}` + `deficitPct` + `deriveGranaryOutlook(s){available,season,band}`",
     "slots": [
       "settlement",
       "season"
     ],
     "pools": {
-      "FOOD — deficit": [
+      "FOOD: deficit": [
         {
           "angle": "ledger",
           "text": "{settlement} does not grow what it eats. The daily count comes up short and the shortfall is made good off the road, week on week, as a standing line in the accounts.",
@@ -162,7 +162,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "FOOD — surplus": [
+      "FOOD: surplus": [
         {
           "angle": "ledger",
           "text": "{settlement} eats well below what it raises. The excess is counted, stored, and argued over rather than needed.",
@@ -183,7 +183,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "FOOD — balanced": [
+      "FOOD: balanced": [
         {
           "angle": "ledger",
           "text": "What {settlement} raises and what {settlement} eats come out level. There is no shortfall to cover and nothing spare to sell.",
@@ -204,7 +204,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "GRANARY — well stocked": [
+      "GRANARY: well stocked": [
         {
           "angle": "ledger",
           "text": "The granary stands near its capacity going into {season}. The stores reach past the turn of the year with room to spare.",
@@ -228,7 +228,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "GRANARY — stocked": [
+      "GRANARY: stocked": [
         {
           "angle": "ledger",
           "text": "The granary holds a working reserve into {season} — enough to carry the town through, not enough to lend.",
@@ -252,7 +252,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "GRANARY — thin": [
+      "GRANARY: thin": [
         {
           "angle": "ledger",
           "text": "The granary runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons, and the measuring is being done.",
@@ -275,7 +275,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "GRANARY — nearly empty": [
+      "GRANARY: nearly empty": [
         {
           "angle": "ledger",
           "text": "The granary is very nearly out. What remains is counted daily and issued against a list.",
@@ -297,7 +297,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-ECO-3": {
-    "title": "DS-ECO-3 — Economics › Live Trade Flow drift · `spatialLedgers.tradeFlow[sid]{in,out}` + `isTradeDependent(economicState)` → `{throughputBand, dependency, magnitude}`",
+    "title": "DS-ECO-3: Economics › Live Trade Flow drift · `spatialLedgers.tradeFlow[sid]{in,out}` + `isTradeDependent(economicState)` → `{throughputBand, dependency, magnitude}`",
     "slots": [
       "settlement"
     ],
@@ -415,13 +415,13 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-ECO-4": {
-    "title": "DS-ECO-4 — Economics › Market Prices · `deriveMarketPrices(...)` → `{exports[], imports[], highlight{label,tag,crierLine}}`",
+    "title": "DS-ECO-4: Economics › Market Prices · `deriveMarketPrices(...)` → `{exports[], imports[], highlight{label,tag,crierLine}}`",
     "slots": [
       "settlement",
       "good"
     ],
     "pools": {
-      "HIGHLIGHT — dear": [
+      "HIGHLIGHT: dear": [
         {
           "angle": "ledger",
           "text": "{good} is the price everyone here quotes first, and it quotes high — the stores are short of it and the crier's reckoning follows the shortage rather than any rate.",
@@ -452,7 +452,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "HIGHLIGHT — cheap": [
+      "HIGHLIGHT: cheap": [
         {
           "angle": "ledger",
           "text": "{good} sells for little here — the stores are heavy with it and the reckoning has come down to meet the pile.",
@@ -483,7 +483,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "NO HIGHLIGHT — everything steady": [
+      "NO HIGHLIGHT: everything steady": [
         {
           "angle": "ledger",
           "text": "Nothing in {settlement}'s market is priced out of the ordinary. Every good the town trades sits within its accustomed reckoning.",
@@ -507,7 +507,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "MIXED — exports dear, imports cheap": [
+      "MIXED: exports dear, imports cheap": [
         {
           "angle": "ledger",
           "text": "The two halves of this market disagree. What the town sells is dear and what the town buys is cheap, and both readings come off the same week's stocks.",
@@ -534,7 +534,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-ECO-5": {
-    "title": "DS-ECO-5 — Economics › Economic Flows chain cards · `economicState.activeChains[]{status, dependency, entrepot, entrepotNote, magicNote, magicRecovery, processingInstitutions[], outputs[]}`",
+    "title": "DS-ECO-5: Economics › Economic Flows chain cards · `economicState.activeChains[]{status, dependency, entrepot, entrepotNote, magicNote, magicRecovery, processingInstitutions[], outputs[]}`",
     "slots": [
       "settlement",
       "chain",
@@ -592,7 +592,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "RUNNING (canonical stable) — draw only with the note fields empty (R-DST-F)": [
+      "RUNNING (canonical stable): draw only with the note fields empty (R-DST-F)": [
         {
           "angle": "ledger",
           "text": "The {chain} runs whole. {institution} has what it needs, the outputs come off as expected, and nothing in the line is being covered for.",
@@ -641,7 +641,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "MAGICALLY SUSTAINED — a small prop (low magicRecovery)": [
+      "MAGICALLY SUSTAINED: a small prop (low magicRecovery)": [
         {
           "angle": "ledger",
           "text": "The {chain} is held up by a working rather than by its own supply, and the working covers a corner of what the line needs.",
@@ -665,7 +665,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "MAGICALLY SUSTAINED — a large prop (high magicRecovery)": [
+      "MAGICALLY SUSTAINED: a large prop (high magicRecovery)": [
         {
           "angle": "ledger",
           "text": "The {chain} runs almost whole on a working. The books show the output nearly where it belongs and the line beneath it replaced rather than repaired.",
@@ -688,7 +688,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "OPERATIONAL — the service economy (no line of supply behind it)": [
+      "OPERATIONAL: the service economy (no line of supply behind it)": [
         {
           "angle": "ledger",
           "text": "{institution} sells work rather than goods. There is no line of supply to break — the service stands as long as the house stands.",
@@ -715,7 +715,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-SUP-1": {
-    "title": "DS-SUP-1 — Supply › SupplyChainsPanel node graph · `activeChains[]{resource, resourceDepleted, upstreamMissing[], processingInstitutions[], outputs[], exportable, entrepot, upstreamNote}` × roster presence",
+    "title": "DS-SUP-1: Supply › SupplyChainsPanel node graph · `activeChains[]{resource, resourceDepleted, upstreamMissing[], processingInstitutions[], outputs[], exportable, entrepot, upstreamNote}` × roster presence",
     "slots": [
       "settlement",
       "chain",
@@ -855,7 +855,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "BLOCKED — nothing can be got away": [
+      "BLOCKED: nothing can be got away": [
         {
           "angle": "ledger",
           "text": "The {chain} is on the rolls and off the road. There is no way to move what it makes, so it is not being made.",
@@ -881,7 +881,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-ECO-6": {
-    "title": "DS-ECO-6 — Economics › Shadow economy · `economicState.safetyProfile{blackMarketCapture, economicDragDesc, criminalInstitutions[], crimeTypes[]}` + `activeChains[needKey==='criminal_economy']`",
+    "title": "DS-ECO-6: Economics › Shadow economy · `economicState.safetyProfile{blackMarketCapture, economicDragDesc, criminalInstitutions[], crimeTypes[]}` + `activeChains[needKey==='criminal_economy']`",
     "slots": [
       "settlement",
       "faction",
@@ -889,7 +889,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "good"
     ],
     "pools": {
-      "TIER — a large share off the books (≥30)": [
+      "TIER: a large share off the books (≥30)": [
         {
           "angle": "ledger",
           "marks": [
@@ -927,7 +927,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TIER — significant off-book activity (≥15)": [
+      "TIER: significant off-book activity (≥15)": [
         {
           "angle": "canonical",
           "text": "Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.",
@@ -960,7 +960,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TIER — minor shadow activity (≥3)": [
+      "TIER: minor shadow activity (≥3)": [
         {
           "angle": "canonical",
           "text": "Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.",
@@ -996,7 +996,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-ECO-7": {
-    "title": "DS-ECO-7 — Economics/Services › Economy freshness note · `reconciliationLog[]` walked to the last `regenerate` boundary × `variant ∈ {tallies, catalog}`",
+    "title": "DS-ECO-7: Economics/Services › Economy freshness note · `reconciliationLog[]` walked to the last `regenerate` boundary × `variant ∈ {tallies, catalog}`",
     "slots": [
       "settlement"
     ],
@@ -1058,7 +1058,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-ECO-8": {
-    "title": "DS-ECO-8 — LADDER › prosperity tier · `economicState.prosperity` (7 rungs, `prosperityRank` 0..6)",
+    "title": "DS-ECO-8: LADDER › prosperity tier · `economicState.prosperity` (7 rungs, `prosperityRank` 0..6)",
     "slots": [
       "settlement"
     ],
@@ -1201,7 +1201,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-ECO-9": {
-    "title": "DS-ECO-9 — LADDER › food security + the food ledger + the siege interaction · `economicState.foodSecurity` (6 rungs) + `foodLedger(){resilienceScore, storageMonths, deficitPct}` + `stockpile.{blockaded, blockadeBypass}`",
+    "title": "DS-ECO-9: LADDER › food security + the food ledger + the siege interaction · `economicState.foodSecurity` (6 rungs) + `foodLedger(){resilienceScore, storageMonths, deficitPct}` + `stockpile.{blockaded, blockadeBypass}`",
     "slots": [
       "settlement",
       "season"
@@ -1371,7 +1371,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-SUP-2": {
-    "title": "DS-SUP-2 — LADDER › canonical supply-chain status + the break-cause clause library · `deriveSupplyChainState(chain, settlement)` → `{status, upstreamNote, magicNote, magicRecovery, resourceCondition, dependency, regionalPressures[], substituteActive}` + `supplyShipments{severingCause, weeksCut}`",
+    "title": "DS-SUP-2: LADDER › canonical supply-chain status + the break-cause clause library · `deriveSupplyChainState(chain, settlement)` → `{status, upstreamNote, magicNote, magicRecovery, resourceCondition, dependency, regionalPressures[], substituteActive}` + `supplyShipments{severingCause, weeksCut}`",
     "slots": [
       "settlement",
       "chain",
@@ -1554,14 +1554,14 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-ECO-10": {
-    "title": "DS-ECO-10 — LADDER › export posture, market scarcity, and the freshness caveat · `deriveExportPosture(settlement){status, exports, count, isEntrepot, access}` + `commodityBandForGood(...)`",
+    "title": "DS-ECO-10: LADDER › export posture, market scarcity, and the freshness caveat · `deriveExportPosture(settlement){status, exports, count, isEntrepot, access}` + `commodityBandForGood(...)`",
     "slots": [
       "settlement",
       "good",
       "access"
     ],
     "pools": {
-      "POSTURE — none": [
+      "POSTURE: none": [
         {
           "angle": "ledger",
           "text": "{settlement} sells nothing outward. What the town makes, the town uses, and the accounts have no export column at all.",
@@ -1580,7 +1580,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "POSTURE — limited": [
+      "POSTURE: limited": [
         {
           "angle": "ledger",
           "text": "{settlement} exports one thing. The whole of the town's outward trade rests on {good} and there is nothing behind it.",
@@ -1602,7 +1602,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "POSTURE — vulnerable": [
+      "POSTURE: vulnerable": [
         {
           "angle": "ledger",
           "text": "{settlement} has goods to sell and no dependable way to move them. The exports are real and the road they leave by is not.",
@@ -1623,7 +1623,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "POSTURE — entrepot": [
+      "POSTURE: entrepot": [
         {
           "angle": "ledger",
           "text": "{settlement} sells on what it never made. The export column is full of goods that entered the town as imports the same season.",
@@ -1642,7 +1642,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "POSTURE — import_dependent": [
+      "POSTURE: import_dependent": [
         {
           "angle": "ledger",
           "text": "{settlement} buys more than it sells, and the imbalance is structural rather than seasonal. What the town needs, the town does not make.",
@@ -1661,7 +1661,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "POSTURE — established": [
+      "POSTURE: established": [
         {
           "angle": "ledger",
           "text": "{settlement} sells several things outward and depends on none of them alone. The export column is broad enough to lose a line without losing the trade.",
@@ -1680,7 +1680,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "SCARCITY — shortage": [
+      "SCARCITY: shortage": [
         {
           "angle": "ledger",
           "text": "The stores of {good} are well under what the market keeps, and the reckoning has climbed accordingly.",
@@ -1704,7 +1704,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "SCARCITY — adequate": [
+      "SCARCITY: adequate": [
         {
           "angle": "ledger",
           "text": "{good} sits at its accustomed level in the stores, and its price sits with it.",
@@ -1727,7 +1727,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "SCARCITY — surplus": [
+      "SCARCITY: surplus": [
         {
           "angle": "ledger",
           "text": "{settlement} holds more {good} than it keeps room for, and the reckoning has come down under the weight of it.",
@@ -1751,7 +1751,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "THE FRESHNESS CAVEAT — for any surface printing a derived tally": [
+      "THE FRESHNESS CAVEAT: for any surface printing a derived tally": [
         {
           "angle": "ledger",
           "text": "The tallies below are the last survey's. They describe what {settlement} was judged to hold and may not carry what has happened since.",
@@ -1773,7 +1773,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-ECO-11": {
-    "title": "DS-ECO-11 — Resources/Overview › Terrain identity, economic strengths, and the exploitation ladder · `resourceAnalysis.{terrain, strategicValue, economicStrengths[], exploitation{unexploited[], partiallyExploited[], fullyExploited[]}}`",
+    "title": "DS-ECO-11: Resources/Overview › Terrain identity, economic strengths, and the exploitation ladder · `resourceAnalysis.{terrain, strategicValue, economicStrengths[], exploitation{unexploited[], partiallyExploited[], fullyExploited[]}}`",
     "slots": [
       "settlement",
       "resource",
@@ -1782,7 +1782,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "institution"
     ],
     "pools": {
-      "TERRAIN — Coastal": [
+      "TERRAIN: Coastal": [
         {
           "angle": "visitor",
           "text": "{settlement} keeps its back to the land and its face to the water, and everything the town is good at begins at the tideline.",
@@ -1803,7 +1803,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TERRAIN — Plains": [
+      "TERRAIN: Plains": [
         {
           "angle": "ledger",
           "text": "{settlement} sits on ground that grows things without argument, and the town's whole arrangement follows from that one fact.",
@@ -1824,7 +1824,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TERRAIN — Forest": [
+      "TERRAIN: Forest": [
         {
           "angle": "ledger",
           "text": "The timber and what lives in it are {settlement}'s standing wealth; the fields here are clearings rather than country.",
@@ -1845,7 +1845,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TERRAIN — Hills": [
+      "TERRAIN: Hills": [
         {
           "angle": "ledger",
           "text": "{settlement} works ground that rises: small fields, hard carting, and whatever the slopes hold that the flat land does not.",
@@ -1866,7 +1866,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TERRAIN — Mountains": [
+      "TERRAIN: Mountains": [
         {
           "angle": "ledger",
           "text": "What {settlement} lives on comes out of the rock rather than off the ground, and the season is short at both ends.",
@@ -1885,7 +1885,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TERRAIN — River": [
+      "TERRAIN: River": [
         {
           "angle": "ledger",
           "text": "The water is {settlement}'s road and its mill both, and the town's earnings divide along it rather than around it.",
@@ -1906,7 +1906,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TERRAIN — Desert": [
+      "TERRAIN: Desert": [
         {
           "angle": "ledger",
           "text": "{settlement} exists where it does because of water rather than soil; the ground gives almost nothing and the town's whole economy is arrangement.",
@@ -1927,7 +1927,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TERRAIN — Swamp": [
+      "TERRAIN: Swamp": [
         {
           "angle": "ledger",
           "text": "The ground under {settlement} will not carry a heavy building or a straight road, and every trade the town has is shaped by that refusal.",
@@ -1948,7 +1948,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TERRAIN — Tundra": [
+      "TERRAIN: Tundra": [
         {
           "angle": "ledger",
           "text": "The working year at {settlement} is short and the storing year is long, and the town's accounts are really an argument about that ratio.",
@@ -1969,7 +1969,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TERRAIN — anything else (the default accent)": [
+      "TERRAIN: anything else (the default accent)": [
         {
           "angle": "ledger",
           "text": "The country around {settlement} is ordinary country, and what the town earns it earns by working it rather than by being anywhere in particular.",
@@ -1990,7 +1990,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "ECONOMIC STRENGTHS — the roster is populated": [
+      "ECONOMIC STRENGTHS: the roster is populated": [
         {
           "angle": "ledger",
           "text": "{settlement} has more than one thing it is good at, and the list is short enough that everybody here could recite it.",
@@ -2011,7 +2011,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "ECONOMIC STRENGTHS — none recorded": [
+      "ECONOMIC STRENGTHS: none recorded": [
         {
           "angle": "ledger",
           "text": "Nothing about {settlement}'s ground or its trades stands out as a strength. The town works, and works at nothing in particular.",
@@ -2032,7 +2032,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "STRATEGIC VALUE — the generator's assessment, framed": [
+      "STRATEGIC VALUE: the generator's assessment, framed": [
         {
           "angle": "ledger",
           "text": "What {settlement} is worth to anybody else is a separate question from what it is worth to itself, and the two answers are not close.",
@@ -2051,7 +2051,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "EXPLOITATION — unexploited, exportValue: high": [
+      "EXPLOITATION: unexploited, exportValue: high": [
         {
           "angle": "ledger",
           "text": "There is {resource} in {settlement}'s country worth real money and nothing in the town takes it out of the ground.",
@@ -2084,7 +2084,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "EXPLOITATION — unexploited, exportValue: medium or low": [
+      "EXPLOITATION: unexploited, exportValue: medium or low": [
         {
           "angle": "ledger",
           "text": "{settlement} leaves {resource} unworked, and the leaving is a reasonable decision — what it would fetch would barely cover the working.",
@@ -2109,7 +2109,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "EXPLOITATION — partiallyExploited": [
+      "EXPLOITATION: partiallyExploited": [
         {
           "angle": "ledger",
           "text": "{settlement} works part of the line that {resource} could support: the raw material moves, and it moves before it has been made into anything worth more.",
@@ -2142,7 +2142,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "EXPLOITATION — fullyExploited": [
+      "EXPLOITATION: fullyExploited": [
         {
           "angle": "ledger",
           "text": "The {resource} in {settlement}'s country is worked all the way through: the ground gives it, {institution} finishes it, and it leaves as {good}.",
@@ -2169,14 +2169,14 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-ECO-12": {
-    "title": "DS-ECO-12 — Economics › Income sources and the trade profile · `economicState.{incomeSources[]{source,percentage,isCriminal,desc}, primaryExports[], primaryImports[], localProduction[], isEntrepot}`",
+    "title": "DS-ECO-12: Economics › Income sources and the trade profile · `economicState.{incomeSources[]{source,percentage,isCriminal,desc}, primaryExports[], primaryImports[], localProduction[], isEntrepot}`",
     "slots": [
       "settlement",
       "good",
       "faction"
     ],
     "pools": {
-      "INCOME MIX — one source carries the town": [
+      "INCOME MIX: one source carries the town": [
         {
           "angle": "ledger",
           "text": "Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name.",
@@ -2197,7 +2197,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "INCOME MIX — two or three sources between them": [
+      "INCOME MIX: two or three sources between them": [
         {
           "angle": "ledger",
           "text": "{settlement}'s earnings come from a handful of trades in roughly comparable portions, and no one of them could carry the town alone.",
@@ -2218,7 +2218,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "INCOME MIX — a broad spread, no leader": [
+      "INCOME MIX: a broad spread, no leader": [
         {
           "angle": "ledger",
           "text": "Nothing {settlement} does earns a real portion of the whole; the town's income is a great many small columns and no large one.",
@@ -2241,7 +2241,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "INCOME MIX — a criminal line is present": [
+      "INCOME MIX: a criminal line is present": [
         {
           "angle": "ledger",
           "marks": [
@@ -2272,7 +2272,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "INCOME MIX — the criminal line leads": [
+      "INCOME MIX: the criminal line leads": [
         {
           "angle": "ledger",
           "marks": [
@@ -2302,7 +2302,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "TRADE PROFILE — exports and imports both present": [
+      "TRADE PROFILE: exports and imports both present": [
         {
           "angle": "ledger",
           "text": "{settlement} sends {good} out and takes other goods in, and the two columns are the whole of the town's dealings with the world.",
@@ -2324,7 +2324,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "TRADE PROFILE — no significant exports": [
+      "TRADE PROFILE: no significant exports": [
         {
           "angle": "ledger",
           "text": "{settlement} sends nothing out worth recording. What the town makes, the town uses, and the outward column is empty rather than thin.",
@@ -2345,7 +2345,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           ]
         }
       ],
-      "TRADE PROFILE — imports only, nothing outward": [
+      "TRADE PROFILE: imports only, nothing outward": [
         {
           "angle": "ledger",
           "text": "More arrives at {settlement} than leaves it, and what pays for the difference is not in the trade columns.",
@@ -2364,7 +2364,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TRADE PROFILE — local production listed": [
+      "TRADE PROFILE: local production listed": [
         {
           "angle": "ledger",
           "text": "A good portion of what {settlement} consumes is made inside its own walls, and never appears in either trade column.",
@@ -2385,7 +2385,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "slots": []
         }
       ],
-      "TRADE PROFILE — isEntrepot, transit goods marked among the exports": [
+      "TRADE PROFILE: isEntrepot, transit goods marked among the exports": [
         {
           "angle": "ledger",
           "text": "Some of what leaves {settlement} as an export never belonged to the town — it arrived, was counted, and went on, and the earnings are in the counting.",
@@ -2409,7 +2409,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-SUP-3": {
-    "title": "DS-SUP-3 — Services › The tier-expected catalog and its absences · `EXPECTED_SERVICES_BY_TIER[tier]` against `availableServices` × the per-category impairment counts",
+    "title": "DS-SUP-3: Services › The tier-expected catalog and its absences · `EXPECTED_SERVICES_BY_TIER[tier]` against `availableServices` × the per-category impairment counts",
     "slots": [
       "settlement",
       "institution"

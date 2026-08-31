@@ -300,7 +300,7 @@
   "bang": 6
  },
  "src/domain/worldPulse/momentum.js": {
-  "em": 6,
+  "em": 5,
   "bang": 0
  },
  "src/domain/worldPulse/moralInstitutionPressure.js": {
@@ -340,7 +340,7 @@
   "bang": 0
  },
  "src/domain/worldPulse/peaceTerms.js": {
-  "em": 15,
+  "em": 6,
   "bang": 0
  },
  "src/domain/worldPulse/pulseKernel.js": {

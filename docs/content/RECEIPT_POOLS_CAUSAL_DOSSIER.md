@@ -308,7 +308,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-1a — WAR → TRADE
+### JF-CPL-1a: WAR → TRADE
 > *the blockade that starves the siege — seizure, interdiction, and the treaty that moves real grain*
 
 **SECTION-TARGET:** `economy` · also `defense`
@@ -324,7 +324,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-1b — TRADE → WAR
+### JF-CPL-1b: TRADE → WAR
 > *merchants waging war without banners — the salient tie that dampens, the contested flip that escalates*
 
 **SECTION-TARGET:** `tensions` · also `economy`
@@ -340,7 +340,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-2a — WAR → FAITH
+### JF-CPL-2a: WAR → FAITH
 > *the creed follows the garrison — occupation converts, the imposed flip stains, and the war dies with the god*
 
 **SECTION-TARGET:** `faith` · also `history`
@@ -356,7 +356,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-2b — FAITH → WAR
+### JF-CPL-2b: FAITH → WAR
 > *the casus a holy man hands a general — the schism axis outranks the stranger*
 
 **SECTION-TARGET:** `tensions` · also `faith`
@@ -372,7 +372,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-3a — WAR → POP
+### JF-CPL-3a: WAR → POP
 > *armies make refugees — the sack conserved, the flight scored, the exodus remembered*
 
 **SECTION-TARGET:** `population` · also `history`
@@ -388,7 +388,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-3b — POP → WAR
+### JF-CPL-3b: POP → WAR
 > *hungry realms make armies — pressure reaches motive and never incidence, and the court may be wrong about it*
 
 **SECTION-TARGET:** `tensions` · also `population`
@@ -404,7 +404,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-4a — WAR → INFO
+### JF-CPL-4a: WAR → INFO
 > *the two liars whose war cannot end — the discount, and the army as rumor carrier*
 
 **SECTION-TARGET:** `relations` · also `defense`
@@ -420,7 +420,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-4b — INFO → WAR
+### JF-CPL-4b: INFO → WAR
 > *a war started by an edited sentence — the belief-wrapped chooser marching on a misjudgment*
 
 **SECTION-TARGET:** `tensions` · also `relations`
@@ -436,7 +436,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-5a — WAR → GRAMMAR
+### JF-CPL-5a: WAR → GRAMMAR
 > *the dictated peace — the victor drafts unilaterally from a believed margin at the one mint*
 
 **SECTION-TARGET:** `relations` · also `economy`
@@ -452,7 +452,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-5b — GRAMMAR → WAR
+### JF-CPL-5b: GRAMMAR → WAR
 > *the peace that pre-paid the next war — enforcement bites, strain breeds revanchism, the default is a casus*
 
 **SECTION-TARGET:** `tensions` · also `relations`
@@ -468,7 +468,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-6a — WAR → INTERIOR
+### JF-CPL-6a: WAR → INTERIOR
 > *the war that cost the seat — sentiment tilts the coup hold, the climb-down charges legitimacy*
 
 **SECTION-TARGET:** `power` · also `tensions`
@@ -484,7 +484,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-6b — INTERIOR → WAR
+### JF-CPL-6b: INTERIOR → WAR
 > *the interior replaces the seat and re-reads the war — the two books, the veto, the war party inside the walls*
 
 **SECTION-TARGET:** `power` · also `relations`
@@ -500,7 +500,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-7a — TRADE → FAITH
+### JF-CPL-7a: TRADE → FAITH
 > *money and mitres in one ledger — the trade edge as conversion carrier and the credit that buys standing*
 
 **SECTION-TARGET:** `faith` · also `economy`
@@ -516,7 +516,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-7b — FAITH → TRADE
+### JF-CPL-7b: FAITH → TRADE
 > *the conscience embargo — abhorrence prices the trade, and contraband is relational*
 
 **SECTION-TARGET:** `economy` · also `faith`
@@ -532,7 +532,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-8a — TRADE → POP
+### JF-CPL-8a: TRADE → POP
 > *bread decides where people can live — the import arm, the artery band, the siege by starvation*
 
 **SECTION-TARGET:** `population` · also `economy`
@@ -548,7 +548,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-8b — POP → TRADE
+### JF-CPL-8b: POP → TRADE
 > *mouths are the demand side — columns become flows and the boomtown earns its centrality*
 
 **SECTION-TARGET:** `economy` · also `population`
@@ -564,7 +564,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-9a — TRADE → INFO
+### JF-CPL-9a: TRADE → INFO
 > *the caravan as witness — every arrival corrects the say, and the stamp ladder prices the hop*
 
 **SECTION-TARGET:** `relations` · also `economy`
@@ -580,7 +580,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-9b — INFO → TRADE
+### JF-CPL-9b: INFO → TRADE
 > *runs started by whispered association — believed scarcity, the frightened endpoint, the corner*
 
 **SECTION-TARGET:** `economy` · also `tensions`
@@ -596,7 +596,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-10a — TRADE → GRAMMAR
+### JF-CPL-10a: TRADE → GRAMMAR
 > *wool for wine — the trade-demand crossing that proposes a pact between courts at peace*
 
 **SECTION-TARGET:** `relations` · also `economy`
@@ -612,7 +612,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-10b — GRAMMAR → TRADE
+### JF-CPL-10b: GRAMMAR → TRADE
 > *the term that binds a market — and the defaulted grain pact that angers like a defaulted peace*
 
 **SECTION-TARGET:** `economy` · also `relations`
@@ -628,7 +628,7 @@ offered by default; the second is where a section composer may also draw.
 
 ---
 
-### JF-CPL-11a — TRADE → INTERIOR
+### JF-CPL-11a: TRADE → INTERIOR
 > *the house that got rich off the route and then bought the seat*
 
 **SECTION-TARGET:** `power` · also `economy`
@@ -650,7 +650,7 @@ a ledgered credit, attributed as such.
 
 ---
 
-### JF-CPL-11b — INTERIOR → TRADE
+### JF-CPL-11b: INTERIOR → TRADE
 > *the seat's books and the crowd's grievance price the house — the commerce bloc and the countinghouse's counterweight*
 
 **SECTION-TARGET:** `economy` · also `power`
@@ -666,7 +666,7 @@ a ledgered credit, attributed as such.
 
 ---
 
-### JF-CPL-12a — FAITH → POP
+### JF-CPL-12a: FAITH → POP
 > *a creed suppressed is a town emptied — and the pilgrim road that feeds two economies*
 
 **SECTION-TARGET:** `population` · also `faith`
@@ -686,7 +686,7 @@ only, and no variant below has anyone commanding a departure.
 
 ---
 
-### JF-CPL-12b — POP → FAITH
+### JF-CPL-12b: POP → FAITH
 > *culture travels with population — the rite adopted from the influx, the crisis that converts in the cracks*
 
 **SECTION-TARGET:** `faith` · also `population`
@@ -702,7 +702,7 @@ only, and no variant below has anyone commanding a departure.
 
 ---
 
-### JF-CPL-13a — FAITH → INFO
+### JF-CPL-13a: FAITH → INFO
 > *the rite read across the border — believed devotion, and the neighbour's picture gone stale*
 
 **SECTION-TARGET:** `relations` · also `faith`
@@ -724,7 +724,7 @@ deliberate — dramatic irony is the product.
 
 ---
 
-### JF-CPL-13b — INFO → FAITH
+### JF-CPL-13b: INFO → FAITH
 > *a calamity read as wrath, and the prophecy that failed*
 
 **SECTION-TARGET:** `faith` · also `history`
@@ -745,7 +745,7 @@ the reader.
 
 ---
 
-### JF-CPL-14a — FAITH → GRAMMAR
+### JF-CPL-14a: FAITH → GRAMMAR
 > *the church as the peace's grammar, not its subject — the faith-brother broker and the communion trigger*
 
 **SECTION-TARGET:** `relations` · also `faith`
@@ -761,7 +761,7 @@ the reader.
 
 ---
 
-### JF-CPL-14b — GRAMMAR → FAITH
+### JF-CPL-14b: GRAMMAR → FAITH
 > *the signed creed — access can be signed and conviction cannot; the term extracted at war-exit stains*
 
 **SECTION-TARGET:** `faith` · also `relations`
@@ -777,7 +777,7 @@ the reader.
 
 ---
 
-### JF-CPL-15a — FAITH → INTERIOR
+### JF-CPL-15a: FAITH → INTERIOR
 > *the divine mandate that seats and unseats — the ruler's stance is a large part of a creed's standing, and the creed's standing is a large part of the seat's*
 
 **SECTION-TARGET:** `power` · also `faith`
@@ -793,7 +793,7 @@ the reader.
 
 ---
 
-### JF-CPL-15b — INTERIOR → FAITH
+### JF-CPL-15b: INTERIOR → FAITH
 > *the revenue dispute that became a reformation — the seat presses the temple and the creed splits*
 
 **SECTION-TARGET:** `faith` · also `power`
@@ -809,7 +809,7 @@ the reader.
 
 ---
 
-### JF-CPL-16a — POP → INFO
+### JF-CPL-16a: POP → INFO
 > *news travels behind the column — and the strike grows in the telling at every hop*
 
 **SECTION-TARGET:** `relations` · also `population`
@@ -825,7 +825,7 @@ the reader.
 
 ---
 
-### JF-CPL-16b — INFO → POP
+### JF-CPL-16b: INFO → POP
 > *the letters home that told the truth too late — the rush chases the belief, the bust corrects it*
 
 **SECTION-TARGET:** `population` · also `economy`
@@ -841,7 +841,7 @@ the reader.
 
 ---
 
-### JF-CPL-17a — POP → GRAMMAR
+### JF-CPL-17a: POP → GRAMMAR
 > *the crowded realm proposes the compact before it exports the crisis*
 
 **SECTION-TARGET:** `population` · also `relations`
@@ -857,7 +857,7 @@ the reader.
 
 ---
 
-### JF-CPL-17b — GRAMMAR → POP
+### JF-CPL-17b: GRAMMAR → POP
 > *settlement by signed compact — the labor charter with a permit lane, and the flow physics that must deliver it*
 
 **SECTION-TARGET:** `population` · also `relations`
@@ -873,7 +873,7 @@ the reader.
 
 ---
 
-### JF-CPL-18a — POP → INTERIOR
+### JF-CPL-18a: POP → INTERIOR
 > *the petition marched — grievance climbs the rung ladder and the seat answers or pays*
 
 **SECTION-TARGET:** `power` · also `population`
@@ -889,7 +889,7 @@ the reader.
 
 ---
 
-### JF-CPL-18b — INTERIOR → POP
+### JF-CPL-18b: INTERIOR → POP
 > *the levy refused — the seat's act reaches the people, and the crowd that is never heard stops petitioning and leaves*
 
 **SECTION-TARGET:** `population` · also `power`
@@ -905,7 +905,7 @@ the reader.
 
 ---
 
-### JF-CPL-19a — INFO → GRAMMAR
+### JF-CPL-19a: INFO → GRAMMAR
 > *diplomacy powered by a believed document — the pact bought with a lie, its margin still on the record*
 
 **SECTION-TARGET:** `relations` · also `history`
@@ -921,7 +921,7 @@ the reader.
 
 ---
 
-### JF-CPL-19b — GRAMMAR → INFO
+### JF-CPL-19b: GRAMMAR → INFO
 > *the table as an intelligence surface — the decaying snapshot, send-two, and the one honest channel that is the traitor's*
 
 **SECTION-TARGET:** `relations`
@@ -937,7 +937,7 @@ the reader.
 
 ---
 
-### JF-CPL-20a — INFO → INTERIOR
+### JF-CPL-20a: INFO → INTERIOR
 > *a court divided by what it believed — the council schism, and the forgery that fell with the house that made it*
 
 **SECTION-TARGET:** `power` · also `relations`
@@ -953,7 +953,7 @@ the reader.
 
 ---
 
-### JF-CPL-20b — INTERIOR → INFO
+### JF-CPL-20b: INTERIOR → INFO
 > *the sweep and the silence — deliberate counter-intelligence, and the court that knew and sat still*
 
 **SECTION-TARGET:** `power` · also `relations`
@@ -969,7 +969,7 @@ the reader.
 
 ---
 
-### JF-CPL-21a — GRAMMAR → INTERIOR
+### JF-CPL-21a: GRAMMAR → INTERIOR
 > *the tribute that drains the payer's own hall — strain attributed inward at last, and the crowd that reads the drain*
 
 **SECTION-TARGET:** `power` · also `economy`
@@ -985,7 +985,7 @@ the reader.
 
 ---
 
-### JF-CPL-21b — INTERIOR → GRAMMAR
+### JF-CPL-21b: INTERIOR → GRAMMAR
 > *the successor who disavows the ancien régime's signature — and the heir who honors it instead*
 
 **SECTION-TARGET:** `relations` · also `power`
@@ -1007,7 +1007,7 @@ the reader.
 
 ---
 
-### JF-SC-danegeld_loop — GRAMMAR → WAR
+### JF-SC-danegeld_loop: GRAMMAR → WAR
 > *THE DANEGELD LOOP — tribute paid to the extorter teaches extortion; the payee's outcome-learned appetite reads the payment as a win and returns*
 
 **FENCE (R-DOS-K):** variants 1 and 6 read the outcome-learning record the story canon marks VERIFY-AT-BUILD. Absent that wire at build, this family ships at four and those two are HELD, never rewritten around.
@@ -1024,7 +1024,7 @@ the reader.
 
 ---
 
-### JF-SC-league_drift — WAR → GRAMMAR
+### JF-SC-league_drift: WAR → GRAMMAR
 > *THE LEAGUE DRIFT — defensive contributions renegotiated from strength, ossifying into tribute*
 
 **SECTION-TARGET:** `relations` · also `economy`
@@ -1040,7 +1040,7 @@ the reader.
 
 ---
 
-### JF-SC-recognition_gambit — GRAMMAR → WAR
+### JF-SC-recognition_gambit: GRAMMAR → WAR
 > *THE RECOGNITION GAMBIT — a third party's pact with a contested satellite IS recognition, and the parent's grievance mints off the pairwise act itself*
 
 **SECTION-TARGET:** `tensions` · also `relations`
@@ -1056,7 +1056,7 @@ the reader.
 
 ---
 
-### JF-SC-neutrals_cargo — WAR → WAR
+### JF-SC-neutrals_cargo: WAR → WAR
 > *THE NEUTRAL'S CARGO — a blockader's seizure of a third party's caravan mints the neutral's grievance; the war spreads through trade*
 
 **SECTION-TARGET:** `tensions` · also `economy`
@@ -1072,7 +1072,7 @@ the reader.
 
 ---
 
-### JF-SC-leaky_embargo — TRADE → TRADE
+### JF-SC-leaky_embargo: TRADE → TRADE
 > *THE LEAKY EMBARGO — exclusion is pairwise, so the embargoed buys through a third market; the smugglers' road is its retail arm*
 
 **SECTION-TARGET:** `economy` · also `relations`
@@ -1088,7 +1088,7 @@ the reader.
 
 ---
 
-### JF-SC-pretenders_war — INTERIOR → WAR
+### JF-SC-pretenders_war: INTERIOR → WAR
 > *THE PRETENDER'S WAR — the harbored émigré as legitimacy cover for the host's invasion, and the restored puppet who repudiates the restorer*
 
 **SECTION-TARGET:** `power` · also `tensions`
@@ -1104,7 +1104,7 @@ the reader.
 
 ---
 
-### JF-SC-opium_cycle — TRADE → WAR
+### JF-SC-opium_cycle: TRADE → WAR
 > *THE OPIUM CYCLE — contraband dispute to trade war to real war to extractive treaty to a long memory to revanchism, the whole coin in one arc*
 
 **SECTION-TARGET:** `economy` · also `history`
@@ -1120,7 +1120,7 @@ the reader.
 
 ---
 
-### JF-SC-interdict — FAITH → INTERIOR
+### JF-SC-interdict: FAITH → INTERIOR
 > *THE INTERDICT — the temple's mandate-withdrawal as domestic sanction, the divine mandate machinery pointed at the seat*
 
 **FENCE (R-DOS-K):** no engine-side excommunication verb exists (CPL-15 DECLARED EMPTY). Every variant below renders the withdrawal through the mandate and stance lanes only — a temple here withholds, and never declares, bans or sentences.
@@ -1137,7 +1137,7 @@ the reader.
 
 ---
 
-### JF-SC-stab_in_the_back — WAR → INTERIOR
+### JF-SC-stab_in_the_back: WAR → INTERIOR
 > *THE STAB-IN-THE-BACK — post-defeat blame redirection riding the witch-hunt and legitimacy lanes*
 
 **SECTION-TARGET:** `power` · also `history`
@@ -1153,7 +1153,7 @@ the reader.
 
 ---
 
-### JF-SC-crusade — FAITH → WAR
+### JF-SC-crusade: FAITH → WAR
 > *THE CRUSADE — sacred claims aligning across many pairs at once; a web that feels called*
 
 **FENCE (R-DOS-K):** Law One over a web that feels called. The alignment is a fact the record carries; the calling is what the town SAYS, always attributed and never confirmed. No variant lets a god act, order, summon or approve.
@@ -1170,7 +1170,7 @@ the reader.
 
 ---
 
-### JF-SC-melian_refusal — WAR → WAR
+### JF-SC-melian_refusal: WAR → WAR
 > *the pragmatic override declined; strength demands, the weak choose pride, and the price is paid*
 
 **SECTION-TARGET:** `relations` · also `tensions`
@@ -1193,7 +1193,7 @@ the reader.
 
 ---
 
-### JF-SS-reformation — INTERIOR → FAITH
+### JF-SS-reformation: INTERIOR → FAITH
 > *SIGNATURE STORY 1 — the tax dispute that becomes a reformation*
 
 **SECTION-TARGET:** `faith` · also `power`
@@ -1210,7 +1210,7 @@ the reader.
 
 ---
 
-### JF-SS-pilgrim_road — FAITH → WAR
+### JF-SS-pilgrim_road: FAITH → WAR
 > *SIGNATURE STORY 2 — the pilgrimage route that becomes a war target*
 
 **SECTION-TARGET:** `tensions` · also `faith`
@@ -1227,7 +1227,7 @@ the reader.
 
 ---
 
-### JF-SS-house_run — INFORMATION → TRADE
+### JF-SS-house_run: INFORMATION → TRADE
 > *SIGNATURE STORY 3 — the bank broken by a believed rumour*
 
 **SECTION-TARGET:** `economy` · also `relations`
@@ -1244,7 +1244,7 @@ the reader.
 
 ---
 
-### JF-SS-diaspora_return — POPULATIONS → WAR
+### JF-SS-diaspora_return: POPULATIONS → WAR
 > *SIGNATURE STORY 4 — the diaspora that funds the return*
 
 **SECTION-TARGET:** `history` · also `population`
@@ -1261,7 +1261,7 @@ the reader.
 
 ---
 
-### JF-SS-corner_and_mitre — TRADE → FAITH
+### JF-SS-corner_and_mitre: TRADE → FAITH
 > *SIGNATURE STORY 5 — the famine speculator who buys a bishopric*
 
 **SECTION-TARGET:** `faith` · also `economy`
@@ -1278,7 +1278,7 @@ the reader.
 
 ---
 
-### JF-SS-rush_and_war — INFORMATION → WAR
+### JF-SS-rush_and_war: INFORMATION → WAR
 > *SIGNATURE STORY 6 — the border town whose gold rush starts a war nobody wanted*
 
 **SECTION-TARGET:** `history` · also `defense`
@@ -1301,7 +1301,7 @@ the reader.
 
 ---
 
-### JF-W-grievance_to_war — WAR → WAR
+### JF-W-grievance_to_war: WAR → WAR
 > *the incident that becomes a name in the war ledger — grievance ripens into casus, and the one opener answers it*
 
 **SECTION-TARGET:** `tensions` · also `defense`
@@ -1319,7 +1319,7 @@ the reader.
 
 ---
 
-### JF-W-ally_to_turncoat — WAR → WAR
+### JF-W-ally_to_turncoat: WAR → WAR
 > *the ally of convenience who crosses the web — the side-switch recorded, and the join read that remembers it forever after*
 
 **SECTION-TARGET:** `relations` · also `defense`
@@ -1336,7 +1336,7 @@ the reader.
 
 ---
 
-### JF-W-razing_to_reckoning — WAR → WAR
+### JF-W-razing_to_reckoning: WAR → WAR
 > *the terror that backfires — the razing judged on the observer's axis, the atrocity casus answered, the vengeance license collected*
 
 **SECTION-TARGET:** `defense` · also `history`
@@ -1353,7 +1353,7 @@ the reader.
 
 ---
 
-### JF-T-corner_to_riot — TRADE → TRADE
+### JF-T-corner_to_riot: TRADE → TRADE
 > *the corner that ends at the granary door — profiteering, conscience pressure, and the seizure the crowd makes*
 
 **SECTION-TARGET:** `economy` · also `power`
@@ -1370,7 +1370,7 @@ the reader.
 
 ---
 
-### JF-T-credit_to_betrayal — TRADE → TRADE
+### JF-T-credit_to_betrayal: TRADE → TRADE
 > *the debt that becomes a grievance — credit extended, the default, the betrayal-class casus commercii*
 
 **SECTION-TARGET:** `economy` · also `relations`
@@ -1387,7 +1387,7 @@ the reader.
 
 ---
 
-### JF-T-venture_to_ruin — TRADE → TRADE
+### JF-T-venture_to_ruin: TRADE → TRADE
 > *the house that overreached — the venture failed, the books broken, the name ruined, the bloc realigned*
 
 **SECTION-TARGET:** `economy` · also `power`
@@ -1404,7 +1404,7 @@ the reader.
 
 ---
 
-### JF-F-tithe_to_schism — FAITH → FAITH
+### JF-F-tithe_to_schism: FAITH → FAITH
 > *the levy on the altar that splits the altar — pressure, dispute, contest, and the remnant floor that decides split from suppression*
 
 **SECTION-TARGET:** `faith` · also `power`
@@ -1421,7 +1421,7 @@ the reader.
 
 ---
 
-### JF-F-suppression_to_underground — FAITH → FAITH
+### JF-F-suppression_to_underground: FAITH → FAITH
 > *the creed driven under the floor — suppression, the covert rite kept, and then exposure or flight*
 
 **SECTION-TARGET:** `faith` · also `history`
@@ -1438,7 +1438,7 @@ the reader.
 
 ---
 
-### JF-F-omen_to_failed_prophecy — FAITH → FAITH
+### JF-F-omen_to_failed_prophecy: FAITH → FAITH
 > *the wrath read into the famine, and the reading the harvest refuted — the institution charged off its own calamity*
 
 **SECTION-TARGET:** `faith` · also `power`
@@ -1455,7 +1455,7 @@ the reader.
 
 ---
 
-### JF-P-boom_to_bust — POP → POP
+### JF-P-boom_to_bust: POP → POP
 > *the believed boom and its bust — the rush, the wall, the turned-back column, and the letters home that correct the promise*
 
 **SECTION-TARGET:** `population` · also `economy`
@@ -1472,7 +1472,7 @@ the reader.
 
 ---
 
-### JF-P-petition_to_riot — POP → POP
+### JF-P-petition_to_riot: POP → POP
 > *the rung ladder — petition, gathering, refusal, riot; and the seat that answered instead, for less*
 
 **SECTION-TARGET:** `power` · also `population`
@@ -1489,7 +1489,7 @@ the reader.
 
 ---
 
-### JF-P-exodus_to_refounding — POP → POP
+### JF-P-exodus_to_refounding: POP → POP
 > *the generation that left and the grandsons who came back — departure memory, the kin pull, the ruin raised again on the old stones*
 
 **SECTION-TARGET:** `population` · also `history`
@@ -1506,7 +1506,7 @@ the reader.
 
 ---
 
-### JF-I-lure_to_war — INFO → INFO
+### JF-I-lure_to_war: INFO → INFO
 > *the bait that was taken — the plant commissioned, the lure sprung, the march made on a story somebody paid for*
 
 **SECTION-TARGET:** `defense` · also `relations`
@@ -1523,7 +1523,7 @@ the reader.
 
 ---
 
-### JF-I-plant_to_backfire — INFO → INFO
+### JF-I-plant_to_backfire: INFO → INFO
 > *the lie that charged its own author — exposure, blowback, and every later signal converging slower*
 
 **SECTION-TARGET:** `relations` · also `economy`
@@ -1540,7 +1540,7 @@ the reader.
 
 ---
 
-### JF-I-courier_to_treason — INFO → INFO
+### JF-I-courier_to_treason: INFO → INFO
 > *the channel that was already theirs — the turned courier, the divergent accounts of one parlay, the treason named*
 
 **SECTION-TARGET:** `relations` · also `power`
@@ -1558,7 +1558,7 @@ the reader.
 
 ---
 
-### JF-G-signed_to_lapse — GRAMMAR → GRAMMAR
+### JF-G-signed_to_lapse: GRAMMAR → GRAMMAR
 > *the compact that died of old age — signed, frayed, hollowed, lapsed, and until GR-0 nobody said so aloud*
 
 **SECTION-TARGET:** `relations` · also `history`
@@ -1575,7 +1575,7 @@ the reader.
 
 ---
 
-### JF-G-succession_to_repudiation — GRAMMAR → GRAMMAR
+### JF-G-succession_to_repudiation: GRAMMAR → GRAMMAR
 > *the heir at the oath — the succession question opened, and the father's signature disavowed or reaffirmed*
 
 **SECTION-TARGET:** `power` · also `relations`
@@ -1592,7 +1592,7 @@ the reader.
 
 ---
 
-### JF-N-strain_to_coup — INTERIOR → INTERIOR
+### JF-N-strain_to_coup: INTERIOR → INTERIOR
 > *the king who paid — tribute strain attributed inward, the crowd reading the drain, the seat that fell for a bill it did not incur*
 
 **SECTION-TARGET:** `power` · also `economy`
@@ -1609,7 +1609,7 @@ the reader.
 
 ---
 
-### JF-N-burial_to_digup — INTERIOR → INTERIOR
+### JF-N-burial_to_digup: INTERIOR → INTERIOR
 > *the grudge buried at a price, and the party that never forgave the burying digging it up again*
 
 **SECTION-TARGET:** `history` · also `relations`
