@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-31T10:56:54.228Z",
+  "generatedAt": "2026-08-31T13:03:54.712Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "a50767573cf019d3",
+  "sourceHash": "a2cbf6b4645b1327",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -80,6 +80,7 @@
     "src/domain/tradeRouteSemantics.js",
     "src/domain/worldPulse/archetypeCatalog.js",
     "src/domain/worldPulse/bandedStock.js",
+    "src/domain/worldPulse/concludedWarRecord.js",
     "src/domain/worldPulse/demographicsRates.js",
     "src/domain/worldPulse/demographicsRisk.js",
     "src/domain/worldPulse/demographicsWorks.js",
