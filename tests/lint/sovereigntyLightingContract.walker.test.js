@@ -2547,8 +2547,12 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
   // set it caps — a ceiling read out of its own population proves population == population.
   // Burn them by taking the reformat that works (a plain parameterless test looping over the
   // rows in its body); never pad them.
-  const EACH_FAMILY_PARK_CEILING = 112;
-  const LITERAL_TABLE_STILL_PARKED_CEILING = 51;
+  // ⭐ BANKED ONCE ALREADY, IN THE COMMIT THAT DECLARED THEM: 112/51 -> 111/50, by taking
+  // the corrected reformat on tests/build/injectGalleryMeta.test.js — an inline literal
+  // table with a row parameter, which is the exact class the old header sent lanes to
+  // build. Its five rows now run inside one parameterless test and the file is CREDITED.
+  const EACH_FAMILY_PARK_CEILING = 111;
+  const LITERAL_TABLE_STILL_PARKED_CEILING = 50;
 
   test('⛔ THE EACH-FAMILY PARK DEBT ONLY SHRINKS — and the false reformat reds here', () => {
     const isEachShape = (reason) => /\.(each|for)\(/.test(reason);
