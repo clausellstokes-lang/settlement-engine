@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "5b6ff3ff1d9d5e932b44d715879901a8219c0420",
-  "measuredBy": "T6-landing",
+  "measuredAtSha": "426f4cf657c8092b225c8f233f03ae4263c44bb4",
+  "measuredBy": "W-LIVES-L2",
   "date": "2026-08-31",
-  "note": "T6 REALM-NET rebased onto 7ce5ca61f",
-  "files": 2442,
+  "note": "car L2 landed three test files: the regen identity fold contract, the store rebind proof, and the drift state laws",
+  "files": 2445,
   "parked": 370,
-  "credited": 2072,
-  "titles": 20839,
-  "suiteTitles": 5738
+  "credited": 2075,
+  "titles": 20889,
+  "suiteTitles": 5749
 }
