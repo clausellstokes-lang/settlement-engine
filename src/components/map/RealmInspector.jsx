@@ -659,6 +659,7 @@ export default function RealmInspector({
               focusId={focusId}
               focusName={focusName}
               narrowing={narrowing}
+              totalCounts={feed.counts}
               nameById={nameById}
               saves={saves}
               emptyHandlers={emptyHandlers}

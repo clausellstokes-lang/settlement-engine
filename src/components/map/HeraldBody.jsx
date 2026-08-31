@@ -26,6 +26,8 @@ import { lazy, useState } from 'react';
 import { BookOpen, LayoutList } from 'lucide-react';
 
 import { BODY, BORDER, CARD_ALT, FS, GOLD, INK, RED, SECOND, SP, sans } from '../theme.js';
+import { useStore } from '../../store/index.js';
+import Button from '../primitives/Button.jsx';
 import { IconButton } from './IconButton.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
 import { hasLiveWarState } from '../../domain/display/warStatus.js';
@@ -58,6 +60,36 @@ const HeraldRemembrance = lazy(() => import('./HeraldRemembrance.jsx'));
 // consequence economy is dark), so this mount is only ever reached by a realm that runs
 // the lane at all.
 const HeraldWanderers = lazy(() => import('./HeraldWanderers.jsx'));
+
+// DESK-5 — door→overlay affinity: the one-tap, REVERSIBLE map-lens chip. A door
+// with a natural map lens offers to light it (and to dim it again — the chip is
+// its own undo); it never lights a lens unasked (the upstream auto-Layers.show
+// idiom is deliberately not adopted — a door visit must not silently rewrite
+// the reader's map). Keys must exist in DEFAULT_LAYERS (toggleLayer refuses
+// unknown keys).
+const DOOR_LENSES = Object.freeze({
+  war: { layerKey: 'warFaith', label: 'war & faith lens' },
+  events: { layerKey: 'regionalImpacts', label: 'events lens' },
+  wanderers: { layerKey: 'travelers', label: 'travelers lens' },
+});
+function DoorLensChip({ section }) {
+  const lens = DOOR_LENSES[section] || null;
+  const lit = useStore(s => (lens ? !!s.mapState?.layers?.[lens.layerKey] : false));
+  const toggleLayer = useStore(s => s.toggleLayer);
+  if (!lens) return null;
+  return (
+    <Button
+      variant={lit ? 'gold' : 'secondary'}
+      size="sm"
+      aria-pressed={lit}
+      data-testid={`door-lens-${section}`}
+      onClick={() => toggleLayer?.(lens.layerKey)}
+      style={{ justifySelf: 'start' }}
+    >
+      {lit ? `Dim the ${lens.label} on the map` : `Light the ${lens.label} on the map`}
+    </Button>
+  );
+}
 
 // A calm peacetime note (the War door's live-block empty tail).
 function PeacetimeNote({ campaign }) {
@@ -145,6 +177,7 @@ export default function HeraldBody({
   focusId = null,
   focusName = '',
   narrowing = false,
+  totalCounts = null,
   nameById,
   saves = [],
   emptyHandlers,
@@ -157,6 +190,8 @@ export default function HeraldBody({
 }) {
   const showResolve = flag('warEconomySurfacing');
   const bySection = feed.bySection || {};
+  // DESK-5 — the unfiltered per-door denominator for the footer sentence.
+  const totalFor = (id) => (totalCounts && Number.isFinite(totalCounts[id]) ? totalCounts[id] : null);
   // A focus/filter that empties a door reads as the local edition's "nothing here",
   // not a broken panel — the "table of contents" the tab badges also carry.
   const focusEmpty = (base) => (focusId != null ? `Nothing at ${focusName}.` : narrowing ? 'Nothing matches the current filter.' : base);
@@ -192,8 +227,9 @@ export default function HeraldBody({
 
   if (section === 'war') {
     return (
-      <HeraldSection items={bySection.war} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No war reported since the last turning. The realm holds.')}>
+      <HeraldSection items={bySection.war} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No war reported since the last turning. The realm holds.')} totalCount={totalFor('war')} narrowing={narrowing}>
         <div style={{ display: 'grid', gap: SP.sm }}>
+          <DoorLensChip section="war" />
           <LiveWarStatus campaign={campaign} nameById={nameById} />
           <RealmIntrigue campaign={campaign} nameById={nameById} />
           <BeliefDivergenceBand campaign={campaign} nameById={nameById} />
@@ -212,7 +248,7 @@ export default function HeraldBody({
 
   if (section === 'faith') {
     return (
-      <HeraldSection items={bySection.faith} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No faith stirred since the last turning. The altars are quiet.')}>
+      <HeraldSection items={bySection.faith} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No faith stirred since the last turning. The altars are quiet.')} totalCount={totalFor('faith')} narrowing={narrowing}>
         <div style={{ display: 'grid', gap: SP.md }}>
           <PantheonPanel campaign={campaign} />
           <AssignDeityFromMap campaign={campaign} />
@@ -223,14 +259,18 @@ export default function HeraldBody({
 
   if (section === 'trade') {
     return (
-      <HeraldSection items={bySection.trade} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No trade shifted since the last turning. The roads run as they did.')}>
+      <HeraldSection items={bySection.trade} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No trade shifted since the last turning. The roads run as they did.')} totalCount={totalFor('trade')} narrowing={narrowing}>
         <TreatyPanel campaign={campaign} nameById={nameById} />
       </HeraldSection>
     );
   }
 
   if (section === 'events') {
-    return <HeraldSection items={bySection.events} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('Little else of note since the last turning.')} />;
+    return (
+      <HeraldSection items={bySection.events} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('Little else of note since the last turning.')} totalCount={totalFor('events')} narrowing={narrowing}>
+        <DoorLensChip section="events" />
+      </HeraldSection>
+    );
   }
 
   if (section === 'divination') {
@@ -274,7 +314,12 @@ export default function HeraldBody({
   }
 
   if (section === 'wanderers') {
-    return <HeraldWanderers campaign={campaign} saves={saves} />;
+    return (
+      <div style={{ display: 'grid', gap: SP.sm }}>
+        <DoorLensChip section="wanderers" />
+        <HeraldWanderers campaign={campaign} saves={saves} />
+      </div>
+    );
   }
 
   if (section === 'adjudication') {

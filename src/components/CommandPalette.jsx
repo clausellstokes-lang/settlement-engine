@@ -28,12 +28,36 @@ import { captureSavedSettlementsHydration } from '../store/savedSettlementsHydra
 // apply on landing, so an auth page redirects rather than misleads.
 const DEST_EXTRA = new Set(['account', 'pricing', 'founders']);
 
+// DESK-5 — the map's overlay toggles as palette commands. Each runs the store's
+// own toggleLayer (an unknown key is refused there, never invented here) and
+// lands the reader on the map so the flip is visible. The premium-locked chains
+// lens is deliberately absent — a command that silently draws nothing for most
+// tiers is a dead verb; its toggle stays in LayersPanel beside its lock.
+const LAYER_COMMANDS = [
+  ['roads', 'roads'],
+  ['relationships', 'the relationship web'],
+  ['forests', 'forests'],
+  ['labels', 'labels'],
+  ['markers', 'markers'],
+  ['travelers', 'the travelers lens'],
+  ['warFaith', 'the war & faith glyphs'],
+  ['regionalImpacts', 'regional impacts'],
+];
+
 function buildItems(savedSettlements) {
   const out = [];
   for (const r of ROUTES) {
     if (r.guard === 'elevated') continue;
     if (!(r.nav || DEST_EXTRA.has(r.view))) continue;
     out.push({ id: `route:${r.view}`, label: r.nav?.label || r.title, hint: 'Page', page: true, run: () => navigate(r.view) });
+  }
+  for (const [key, label] of LAYER_COMMANDS) {
+    out.push({
+      id: `layer:${key}`,
+      label: `Toggle ${label} on the map`,
+      hint: 'Map lens',
+      run: () => { navigate('map'); useStore.getState().toggleLayer?.(key); },
+    });
   }
   for (const save of savedSettlements || []) {
     const id = save?.id || save?.settlement?.id;

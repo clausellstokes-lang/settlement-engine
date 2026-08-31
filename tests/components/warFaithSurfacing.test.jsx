@@ -42,6 +42,7 @@ vi.mock('../../src/components/map/WarResolveSection.jsx', () => ({
 }));
 
 import RealmInspector from '../../src/components/map/RealmInspector.jsx';
+import HeraldSection from '../../src/components/map/HeraldSection.jsx';
 import WarFaithMapOverlay from '../../src/components/map/WarFaithMapOverlay.jsx';
 import SimulationRulesDialog from '../../src/components/map/SimulationRulesDialog.jsx';
 
@@ -186,5 +187,61 @@ describe('SimulationRulesDialog engine gates', () => {
       }));
       expect(onClose).toHaveBeenCalled();
     });
+  });
+});
+
+// ── DESK-5 — the War door's map-lens chip + the filtered-denominator footer ───
+describe('DESK-5 door textures (the War door)', () => {
+  const baseProps = {
+    open: true, onSection: vi.fn(), onClose: vi.fn(),
+    canManageCampaigns: true, tier: 'premium', inspectorSize: 'default', onSetSize: vi.fn(),
+  };
+
+  test('the door→overlay affinity chip is one-tap and reversible (toggleLayer, never auto-lit)', async () => {
+    const toggleLayer = vi.fn();
+    storeState = {
+      savedSettlements: [],
+      campaigns: [],
+      mapState: { layers: { warFaith: false } },
+      toggleLayer,
+    };
+    render(<RealmInspector {...baseProps} section="war" campaign={{ id: 'c1', name: 'Realm', worldState: {} }} />);
+    const chip = await screen.findByTestId('door-lens-war');
+    // Never auto-lit: mounting the door called no toggle.
+    expect(toggleLayer).not.toHaveBeenCalled();
+    expect(chip.getAttribute('aria-pressed')).toBe('false');
+    expect(chip.textContent).toMatch(/Light the war & faith lens/);
+    fireEvent.click(chip);
+    expect(toggleLayer).toHaveBeenCalledWith('warFaith');
+
+    // Reversible: with the lens lit the same chip reads as the dimmer.
+    cleanup();
+    storeState = { ...storeState, mapState: { layers: { warFaith: true } }, toggleLayer: vi.fn() };
+    render(<RealmInspector {...baseProps} section="war" campaign={{ id: 'c1', name: 'Realm', worldState: {} }} />);
+    const litChip = await screen.findByTestId('door-lens-war');
+    expect(litChip.getAttribute('aria-pressed')).toBe('true');
+    expect(litChip.textContent).toMatch(/Dim the war & faith lens/);
+  });
+
+  test('a narrowing filter names its denominator as a sentence; unfiltered pages carry no footer', async () => {
+    storeState = { savedSettlements: [], campaigns: [], mapState: { layers: {} } };
+    // Unfiltered: no footer (the heading count already says the total).
+    render(<RealmInspector {...baseProps} section="war" campaign={{ id: 'c1', name: 'Realm', worldState: {} }} />);
+    await screen.findByTestId('door-lens-war');
+    expect(screen.queryByTestId('herald-filter-footer')).toBeNull();
+    cleanup();
+
+    // Positive: the footer is a sentence naming the denominator, driven straight
+    // through HeraldSection (the four report doors share this one surface).
+    const items = [{ id: 'w1', section: 'war', headline: 'A siege', severity: 0.5, tick: 3, subject: {}, affectedIds: [] }];
+    render(<HeraldSection items={items} emptyLead="quiet" nameById={new Map()} totalCount={5} narrowing />);
+    expect(screen.getByTestId('herald-filter-footer').textContent)
+      .toMatch(/1 of 5 reports shown; the rest stand outside the current filter\./);
+    cleanup();
+
+    // Emptied-by-filter: the sentence still names the whole register.
+    render(<HeraldSection items={[]} emptyLead="quiet" nameById={new Map()} totalCount={4} narrowing />);
+    expect(screen.getByTestId('herald-filter-footer').textContent)
+      .toMatch(/All 4 reports stand outside the current filter\./);
   });
 });

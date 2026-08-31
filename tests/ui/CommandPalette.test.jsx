@@ -167,3 +167,22 @@ describe('CommandPalette — the jump bar', () => {
     expect(navigate).toHaveBeenCalledWith('settlements', { params: { id: 's9' } });
   });
 });
+
+// ── DESK-5 — overlay toggles as palette commands ─────────────────────────────
+describe('CommandPalette — map-lens commands (DESK-5)', () => {
+  it('typing finds a lens command; choosing it lands on the map AND flips the store toggle', async () => {
+    const toggleLayer = vi.fn();
+    mockState = { ...mockState, toggleLayer };
+    render(<CommandPalette onClose={() => {}} />);
+    fireEvent.change(screen.getByRole('combobox'), { target: { value: 'travelers' } });
+    const option = await screen.findByRole('option', { name: /Toggle the travelers lens on the map/ });
+    fireEvent.click(option);
+    expect(navigate).toHaveBeenCalledWith('map');
+    expect(toggleLayer).toHaveBeenCalledWith('travelers');
+  });
+
+  it('lens commands stay out of the empty-query page list (search-only verbs)', () => {
+    render(<CommandPalette onClose={() => {}} />);
+    expect(screen.queryByRole('option', { name: /Toggle .* on the map/ })).toBeNull();
+  });
+});

@@ -35,8 +35,13 @@ function ordered(items = []) {
  * @param {Map<string,string>} [props.nameById]
  * @param {import('react').ReactNode} [props.children]  a live block rendered above the feed
  * @param {string} [props.title]     the feed section heading
+ * @param {number} [props.totalCount]  DESK-5: the door's UNFILTERED report count. When a
+ *   narrowing filter hides part of the page, the footer says so as a SENTENCE
+ *   (the filtered-denominator law: a narrowed list must name its denominator,
+ *   or the reader mistakes the filter for the realm).
+ * @param {boolean} [props.narrowing]  whether any focus/search/attention/severity filter is live
  */
-export default function HeraldSection({ items = [], emptyLead, worldState, nameById, children, title = 'Since the last turning' }) {
+export default function HeraldSection({ items = [], emptyLead, worldState, nameById, children, title = 'Since the last turning', totalCount = null, narrowing = false }) {
   // THE SORT LAW: the urgent pin (true cross-realm crises) floats above the alphabet;
   // the rest cluster by settlement, groups ordered alphabetically, severity-then-
   // recency within.
@@ -77,6 +82,16 @@ export default function HeraldSection({ items = [], emptyLead, worldState, nameB
                 ))}
               </div>
             ))}
+          </div>
+        )}
+        {/* DESK-5 — the filtered-denominator footer, as a sentence. Renders only
+            when a live filter actually hides reports; an unfiltered page carries
+            no footer (the count chip in the heading already says the total). */}
+        {narrowing && Number.isFinite(totalCount) && totalCount > items.length && (
+          <div data-testid="herald-filter-footer" style={{ marginTop: 8, color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic', lineHeight: 1.5 }}>
+            {items.length === 0
+              ? `All ${totalCount} report${totalCount === 1 ? '' : 's'} stand outside the current filter.`
+              : `${items.length} of ${totalCount} reports shown; the rest stand outside the current filter.`}
           </div>
         )}
       </Section>
