@@ -270,6 +270,22 @@ describe('SUBJECT RESOLUTION — forward only, and ambiguity refuses', () => {
     const rerolled = ctxOf({ worldState: seeded.worldState, snapshotItems: [town([stranger, BERO])] });
     expect(subjectByDurableId(rerolled, seeded.wnpcId)).toBeNull();
   });
+
+  test('⭐ AND A NAMESAKE AT ANOTHER SLOT IS NOT THE SAME PERSON EITHER', () => {
+    // The mirror of the pin above, and the mutation pass owed it too: matching on
+    // the NAME alone refuses the stranger correctly and then hands the lesson to a
+    // namesake. Both halves of the ledger's identity key have to agree, which is
+    // exactly what `durableIdForRoster` itself requires.
+    const seeded = graduateNpc({
+      worldState: { tick: 4, simulationRules: { npcConsequencesEnabled: true } },
+      settlementSeed: SEED, settlementId: TOWN,
+      rosterIdentity: { rosterId: 'npc_2', name: 'Alda', role: 'Reeve' }, tick: 4,
+    });
+    const twins = [npc('npc_1', 'Alda'), npc('npc_2', 'Alda')];
+    const hit = subjectByDurableId(ctxOf({ worldState: seeded.worldState, snapshotItems: [town(twins)] }), seeded.wnpcId);
+    // The SECOND Alda is the graduated one. A name-only resolver returns the first.
+    expect(hit.npc.id).toBe('npc_2');
+  });
 });
 
 describe('THE ADAPTERS — each mapping proved against its REAL receipt shape', () => {

@@ -869,7 +869,11 @@ export function nonOverlapCollisions() {
 export function collectLivedExperience(ctx) {
   /** @type {Array<Record<string, unknown>>} */
   const out = [];
-  for (const row of [...LIVED_EXPERIENCE_SOURCES].sort((a, b) => compareCodepoint(a.kind, b.kind))) {
+  // The registry is walked in DECLARATION order and the OUTPUT is sorted below.
+  // A mutation pass proved a second sort here unobservable — the adapters are pure
+  // reads with no side effects, so only the output order can be seen, and one
+  // guarantee that is pinned beats two of which only one is.
+  for (const row of LIVED_EXPERIENCE_SOURCES) {
     if (row.blocked !== null) continue;
     for (const item of row.read(ctx)) out.push(item);
   }
