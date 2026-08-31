@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "622507a08fc2e57fdbdcfb9713f33fa410390b34",
-  "measuredBy": "T7-landing",
+  "measuredAtSha": "a92e5ae8cc2d1d3b6e8322375bda3c8b7e6ad243",
+  "measuredBy": "W-LIVES-L1 (Opus 5)",
   "date": "2026-08-31",
-  "note": "T7 Hygiene rebased onto acaaad63f",
-  "files": 2441,
+  "note": "W-LIVES car L1 added tests/domain/npc/paradigmAxisCatalog.test.js (the axis-catalog consolidation pins), credited",
+  "files": 2442,
   "parked": 370,
-  "credited": 2071,
-  "titles": 20819,
-  "suiteTitles": 5735
+  "credited": 2072,
+  "titles": 20862,
+  "suiteTitles": 5747
 }
