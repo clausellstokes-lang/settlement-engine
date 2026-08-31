@@ -368,6 +368,14 @@ describe('SEAT-2c — uninvited entry finally costs something', () => {
     // quietly: the leaf may not so much as name the convergence tuning.
     const leafSrc = readFileSync(join(ROOT, 'src/domain/worldPulse/seatIntervention.js'), 'utf8');
     const code = leafSrc.split('\n').filter((l) => !/^\s*(\*|\/\/)/.test(l)).join('\n');
+    // THE LIVENESS ANCHOR (EP-1), and it is not ceremony: the subject here is a
+    // COMMENT-STRIPPED source string, so the two ways this negative could go vacuous are the
+    // leaf being renamed/moved and the strip regex eating the whole body. Both leave `code`
+    // empty or tiny, and a bare not.toMatch passes happily on an empty string. Asserting the
+    // tuning constant IS still in the stripped source proves the subject is the real leaf's
+    // real code before the exclusion is allowed to mean anything.
+    expect(code, 'the stripped leaf source no longer contains its own tuning constant — the subject drifted, so the exclusion below would be vacuous').toMatch(/UNINVITED_TILT_KEEP01/);
+    // anchored: the assertion directly above proves `code` is the live, non-empty, stripped leaf source travelling the same read path, so this exclusion cannot pass by the subject having drifted away
     expect(code).not.toMatch(/LEGIT_COST|CONVERGENCE_TUNING/);
     // And the coincidence itself, asserted so a tuning pass that breaks it is VISIBLE here
     // rather than silently making the header's comment a lie.

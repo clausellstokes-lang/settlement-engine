@@ -28,6 +28,7 @@ import {
   applyAnticipatedReactions,
 } from '../../src/domain/worldPulse/anticipatedReactions.js';
 import { BELIEF_TUNING } from '../../src/domain/worldPulse/beliefMap.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -121,7 +122,10 @@ describe('SEAT-4 — the bounded relevant set', () => {
     const selfEdge = [...EDGES, { id: 'e3', from: SELF, to: SELF, relationshipType: 'allied' }];
     const ws = worldWith({});
     const powers = relevantPowersFor(ws, snapshotWith(selfEdge, ws), SELF);
-    expect(powers).not.toContain(SELF);
+    // ANCHORED (EP-1): ALLY travels the SAME edge loop that would admit the self-edge, so a
+    // drift that stopped reading `regionalGraph.edges` at all — the one regression this arm
+    // exists to catch — reds on the anchor instead of passing the exclusion vacuously.
+    expectAbsentWithAnchor(powers, SELF, ALLY, 'relevantPowersFor drops the decider');
     expect([...powers].sort()).toEqual(powers);
   });
 

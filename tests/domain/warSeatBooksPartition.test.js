@@ -361,6 +361,7 @@ describe('SEAT-2a — the interestKind vocabulary is four values, and every bran
       const source = readFileSync(path.join(SRC_ROOT, rel), 'utf8');
       expect(source, `${rel} still enumerates a shorter interest list`).toContain(expected);
       expect(source, `${rel} kept the three-value list somewhere`)
+        // anchored: the toContain two lines up is the liveness anchor — it asserts the FOUR-value list IS present in this very `source` string, so a drift that renamed, moved or emptied the file reds there first and this exclusion can never pass on an absent subject
         .not.toContain("['realm', 'seat', 'patron']");
     }
   });

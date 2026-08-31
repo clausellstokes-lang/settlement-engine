@@ -139,6 +139,26 @@ const LAYER_PATTERNS = Object.freeze({
     // ⛔ AN EXACT-PATH REGEX, NOT A `contribution[A-Z]` PREFIX: a prefix would claim files
     // nobody has designed and silently widen a frozen family (the IN-1 precedent, verbatim).
     /^src\/domain\/worldPulse\/contributionLedger\.js$/,
+    // W-SEAT SEAT-2c: Stage 3, the REACTIVE ART OF WAR, split out of convergence.js along that
+    // file's own declared belief-vs-live-state boundary. What a power does when it believes a
+    // column is coming — reinforce, intercept, counter-intervene, stand — is WAR's own subject
+    // outright, on the reading that gave peopleLedger.js WAR and emigreErrand.js INTERIOR: the
+    // distinction is SUBJECT, not program. Its one layered read is spatial/armyTransit.js, which
+    // is WAR already, so the home mints no cross-layer pair — the leaf simply stops being
+    // invisible to this ratchet, which is the whole point of giving a new file a family.
+    // ⛔ AN EXACT-PATH REGEX, NOT A `convergence[A-Z]` PREFIX: the standing rule above, and here
+    // it has teeth — a prefix would also silently claim `convergence.js` itself, which is
+    // baselined-unlayered, shrinking a baseline the volume says may never move by accident.
+    /^src\/domain\/worldPulse\/convergenceReactive\.js$/,
+    // W-SEAT SEAT-2c: who may march to a contest, how long the march takes, and what an
+    // unwelcome column keeps of its tilt. A march and its arrival time is WAR's subject on the
+    // same reading; the leaf's layered read is `armyMarchWeeks` in spatial/armyTransit.js — WAR
+    // — so this home too mints no pair. It is NOT an ARGUED_UNLAYERED case: that roster is for
+    // modules owning no subject and spoken by every port, and this one owns march eligibility.
+    // ⛔ AN EXACT-PATH REGEX, NOT A `seat[A-Z]` PREFIX: a prefix would claim the whole W-SEAT
+    // program's unwritten leaves for WAR, and the seat's other files are not WAR's subject at
+    // all — foreignPrimacy.js is INTERIOR two families down, which is the counter-example.
+    /^src\/domain\/worldPulse\/seatIntervention\.js$/,
   ],
   TRADE: [
     /^src\/domain\/worldPulse\/(?:routeNetwork|tradeRoute|tradeWar|commodity|merchant|foodStockpile|foodLedger)/,
@@ -291,6 +311,18 @@ const LAYER_PATTERNS = Object.freeze({
     // above rules it, and the reason is unchanged — a prefix would claim files nobody
     // has designed and silently widen a frozen family.
     /^src\/domain\/worldPulse\/emigreErrand\.js$/,
+    // W-SEAT SEAT-2a: the primacy axis — WHICH DECISIONS a foreign power may reach, and
+    // whether the local court still proposes them or is refused outright. "Whose decision
+    // is this at all" is the INTERIOR reading verbatim — the subject is who rules and what
+    // ruling costs at home — and the fact that the power doing the reaching is foreign is
+    // about the ACTOR, not the subject, exactly as an occupier's tax is still TRADE's.
+    // It is NOT an ARGUED_UNLAYERED case: the argued roster is for modules owning no
+    // subject and spoken by every port, and this one owns the override class outright.
+    // The leaf's only domain read is `src/domain/rulingPowerSeat.js`, which sits outside
+    // CENSUS_SCOPE_RE and every family, so this home mints no cross-layer pair.
+    // ⛔ AN EXACT-PATH REGEX, NOT A `foreign[A-Z]` PREFIX: the standing rule, and here it
+    // would be actively wrong — `foreignGuestHold.js` is a different subject entirely.
+    /^src\/domain\/worldPulse\/foreignPrimacy\.js$/,
   ],
 });
 

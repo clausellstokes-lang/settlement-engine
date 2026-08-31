@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "frozenAt": "2026-08-01",
   "policy": "Exact legacy exceptions only. Rows may be deleted after source repair; never add or raise the 19-row ceiling.",
-  "rePinnedAt": "2026-08-03",
-  "rePinNote": "EXACT RE-PIN, not a widening: the ceiling stays 19, no row was added, and every row's ISSUE SET is byte-identical to the frozen one. Two chronicleGraph rows moved 258->260 and 273->279 with NEW signatures because commit 397c184b (Lane HR (1)) replaced their two inline noun-phrase fallbacks with the shared PULSE_OUTCOME_FALLBACK / PULSE_IMPACT_FALLBACK constants from receiptClauseFloor.js and added a comment above the first. The debt itself did not move: both rows still carry exactly missing-field:id plus their unrouted bare kind. The separately-pinned proposal-undo EXCLUSION also relocated (779->852, signature unchanged, cause 526c5e31); it lives in tests/lint/newsAuthoringCensus.shared.mjs, not in this ledger.",
+  "rePinnedAt": "2026-08-31",
+  "rePinNote": "EXACT RE-PIN, not a widening: the ceiling stays 19, no row was added or removed, and every row's COLUMN, SIGNATURE and ISSUE SET is byte-identical to the frozen one. Four deploymentReturn.js rows relocated 469->470, 509->510, 527->528 and 592->606 when the W-SEAT landing replayed commit 038d42d1b (T3 SEAT-2b, the fifth coup adj) above them: +1 line at :34 (the foreignSeatCoupAdj import) shifts all four by one, and +13 at ~:536 (the D4 comment block and the foreignSeatAdj argument) shifts the last by a further thirteen -- 1 + 13 = 14, which is exactly 592 -> 606. ALL FOUR SIGNATURES ARE UNCHANGED (71a3960daf0dafcd, f6d0d2ee095609c1, e89c70fad56f6e12, 345c4241083f3ebc), and sourceSignature hashes only the literal's own whitespace-normalized bytes -- so four unchanged hashes are affirmative proof that no literal was edited and this is a PURE RELOCATION. The debt is undiminished and undisturbed; the walker is location-bound on purpose, so ordinary landed work relocates its rows and it reds until a maintainer re-measures. That is the design working, not a defect in it. Re-measured at the landing tip, after every source-moving cure of this landing act had landed.",
   "entries": [
     {
       "path": "src/domain/display/chronicleGraph.js",
@@ -71,7 +71,7 @@
     },
     {
       "path": "src/domain/worldPulse/deploymentReturn.js",
-      "line": 469,
+      "line": 470,
       "column": 43,
       "signature": "71a3960daf0dafcd",
       "issues": [
@@ -82,7 +82,7 @@
     },
     {
       "path": "src/domain/worldPulse/deploymentReturn.js",
-      "line": 509,
+      "line": 510,
       "column": 43,
       "signature": "f6d0d2ee095609c1",
       "issues": [
@@ -93,7 +93,7 @@
     },
     {
       "path": "src/domain/worldPulse/deploymentReturn.js",
-      "line": 527,
+      "line": 528,
       "column": 45,
       "signature": "e89c70fad56f6e12",
       "issues": [
@@ -105,7 +105,7 @@
     },
     {
       "path": "src/domain/worldPulse/deploymentReturn.js",
-      "line": 592,
+      "line": 606,
       "column": 41,
       "signature": "345c4241083f3ebc",
       "issues": [

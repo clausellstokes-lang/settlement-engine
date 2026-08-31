@@ -76,12 +76,33 @@ export const REACTION_TUNING = Object.freeze({
   MOBILIZED_AT: 0.5,
 });
 
-/** Relationship labels that read as friendly, hostile, or neither. Mirrors the war layer's
- *  own sets rather than sharing them: those are module-private in `convergence.js`, and a
- *  cross-module import for two frozen sets would couple the belief layer to the war kernel.
- *  Pinned in the suite so the two can never drift apart. */
-const FRIENDLY_LABELS = Object.freeze(['allied', 'trade_partner', 'vassal', 'patron']);
-const HOSTILE_LABELS = Object.freeze(['hostile', 'cold_war', 'rival', 'criminal_network']);
+/**
+ * Relationship labels that read as friendly, hostile, or neither. Mirrors the war layer's
+ * own sets rather than sharing them: those are module-private in `convergence.js`, and a
+ * cross-module import for two frozen sets would couple the belief layer to the war kernel.
+ * Pinned in the suite so the two can never drift apart.
+ *
+ * ⛔ `REACTION_`-PREFIXED ON THE RN-A0 PRECEDENT, AND THE PREFIX IS LOAD-BEARING. These were
+ * first written as the bare `FRIENDLY_LABELS` / `HOSTILE_LABELS`, which COLLIDE across
+ * modules with DIFFERENT MEMBERSHIP — `FRIENDLY_LABELS` is also bound in `beliefMap.js`
+ * (which carries `client`, this set does not) and `HOSTILE_LABELS` in
+ * `informationStatecraft.js` and `brokerageServicesRules.js` (neither carries
+ * `criminal_network`, this set does). RN-A0 renamed `conquestDoctrineStage.js`'s pair to
+ * `COALITION_*` for exactly this reason and left the other declarations their names;
+ * `tests/lint/postureNameCollision.walker.test.js` pins that disposition, so a fourth bare
+ * declaration REDS rather than drifting. The collision has no runtime symptom — every module
+ * is internally consistent — which is precisely why it must be caught by name: the damage
+ * lands later, on the reader who carries one site's meaning to another (§711.6's lesson in
+ * its identifier form). The prefix names WHOSE census this is.
+ *
+ * ⚠ THE SUFFIX IS `_REL`, NOT `_LABELS`, BECAUSE THAT NAMES THE ACTUAL SOURCE. The membership
+ * is mirrored from `convergence.js`'s `FRIENDLY_REL` / `HOSTILE_REL` — the war layer's
+ * relationship sets — and the suite asserts it against those, not against the belief layer's
+ * similarly-named-but-different pair. The original `_LABELS` spelling pointed the reader at
+ * the wrong ancestor.
+ */
+const REACTION_FRIENDLY_REL = Object.freeze(['allied', 'trade_partner', 'vassal', 'patron']);
+const REACTION_HOSTILE_REL = Object.freeze(['hostile', 'cold_war', 'rival', 'criminal_network']);
 
 /** The one empty array every dark path returns, so "no forecast" is reference-identical
  *  across calls and a consumer's own byte-identity pin survives by construction.
@@ -225,8 +246,8 @@ export function reactionOf(worldState, snapshot, deciderId, powerId, trueLabel) 
       : REACTION_TUNING.UNKNOWN_CONFIDENCE;
 
   let band = 'indifferent';
-  if (FRIENDLY_LABELS.includes(label)) band = 'supportive';
-  else if (HOSTILE_LABELS.includes(label)) {
+  if (REACTION_FRIENDLY_REL.includes(label)) band = 'supportive';
+  else if (REACTION_HOSTILE_REL.includes(label)) {
     // A hostile power that is also believed to be MOBILIZED is not merely wary of the
     // decision — it is looking for one. Readiness is the one STATE axis the record holds
     // that bears on how an answer is likely to be delivered.

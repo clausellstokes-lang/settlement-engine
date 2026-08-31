@@ -31,7 +31,7 @@ import {
   occupiedUsefulness,
 } from '../../src/domain/worldPulse/occupation.js';
 import { CHANGE_AUTHORITY_POLICY } from '../../src/domain/worldPulse/changeAuthorityPolicy.js';
-import { isExplicitlyRouted } from '../../src/domain/realm/heraldRouting.js';
+import { isExplicitlyRouted, EXACT_SECTION, SECTION_OF } from '../../src/domain/realm/heraldRouting.js';
 
 // ── Fixtures ────────────────────────────────────────────────────────────────
 
@@ -250,6 +250,18 @@ describe('SEAT-3 — the wasting asset and the honest road', () => {
     // `candidateType:` literal and reds on any that `isExplicitlyRouted` does not know.
     // Asserted here too so the reason is legible at the car rather than only at the walker.
     expect(isExplicitlyRouted('occupation_posture')).toBe(true);
+    // ⛔⛔ THE ANTI-TIDY PIN (the pantheon A5 shape, verbatim in intent). This beat is routed
+    // by the `occupation_` FAMILY PREFIX and must NOT acquire an EXACT_SECTION row: a routed-
+    // but-unregistered exact row grows LEGACY_UNVOICED_TOKENS, a ceiling asserted shrink-only
+    // with no lawful growth cure. It shipped as an exact row and red four assertions across
+    // kindPoolFloors and pantheon A5 before the landing moved it to the prefix. The two
+    // sibling positives make the absence a fact about THIS KIND rather than about the map.
+    expect('occupation_vassalized' in EXACT_SECTION).toBe(true);
+    expect('occupation_lifted' in EXACT_SECTION).toBe(true);
+    expect('occupation_posture' in EXACT_SECTION).toBe(false);
+    // ...and it still reaches the war desk, so the prefix bought the census nothing at the
+    // reader's expense — the routing outcome is identical to the exact row it replaced.
+    expect(SECTION_OF('occupation_posture')).toBe('war');
     // NOT campaign-altering, and that is the load-bearing half: vassalization moves
     // SOVEREIGNTY and pays a five-way residue-strip sync for it; a posture is a policy the
     // same holder sets over a holding it already has, banks no residue, and would have

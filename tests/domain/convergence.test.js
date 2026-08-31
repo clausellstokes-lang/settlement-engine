@@ -28,6 +28,17 @@ import {
   reinforceVerbFactory, interceptVerbFactory,
   mercenaryReinforcement, mercenaryReinforcementOf,
 } from '../../src/domain/worldPulse/convergence.js';
+// ⛔ THE LEAF IS IMPORTED DIRECTLY, AND THE BARREL IMPORT ABOVE STAYS. SEAT-2c split Stage 3
+// out to `convergenceReactive.js` and had `convergence.js` RE-EXPORT all four symbols so that
+// "no consumer import site moves and no test changed" — which is exactly why the mechanism
+// lit-coverage walker went blind to it: its only sensor is the literal import specifier, so a
+// module reached solely through a re-export seam reads as never driven though every one of its
+// laws is proved below. Naming the leaf here restores AUTO credit at its true home. The barrel
+// spelling is deliberately NOT repointed: `reactiveResponse` / `REACTIVE_RELATIONS` /
+// `contestSideLookup` arriving through `convergence.js` is the only standing proof that the
+// split's re-export seam still carries Stage 3, and moving them would buy the same credit while
+// silently retiring that proof.
+import { REACTIVE_MOVES } from '../../src/domain/worldPulse/convergenceReactive.js';
 import { hostilePairFor } from '../../src/domain/worldPulse/armyTransitKernel.js';
 
 const litRules = { simulationRules: { warLayerEnabled: true, interventionEnabled: true } };
@@ -357,6 +368,10 @@ describe('W-CONVERGENCE §6 PIN — phantom-column reactivity (a FALSE belief is
     expect(phantom.priced).toBe(true);             // the reaction commits real force
     expect(phantom.believedReal).toBe(false);       // ...to a column that isn't there
     expect(phantom.receipt).toMatch(/rumor/i);
+    // The move is a member of the leaf's OWN closed vocabulary, read from the leaf rather than
+    // from the barrel — so a reaction can never answer with a word the vocabulary does not
+    // contain. `REACTIVE_MOVES` was exported and asserted by nothing until now.
+    expect(REACTIVE_MOVES).toContain(phantom.move);
   });
 
   it('no believed column ⇒ the muster stands down (no priced reaction)', () => {

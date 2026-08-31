@@ -94,8 +94,10 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   intervention_ordered: 'war', intervention: 'war', intervention_clash: 'war',
   strategy_deploy: 'war', strategy_defend: 'war', strategy_hold: 'war',
   strategy_return_home: 'war', strategy_sue_for_peace: 'war',
+  // ⛔ `occupation_posture` IS ROUTED BY PREFIX, NOT FROM HERE — see `['occupation_', 'war']`
+  // in PREFIX_RULES below, and the reason recorded there. An EXACT_SECTION row for that beat
+  // grows a census asserted shrink-only, which has no lawful growth cure.
   occupation: 'war', occupation_lifted: 'war', occupation_vassalized: 'war',
-  occupation_posture: 'war',
   occupation_resistance: 'war', occupation_burden: 'war', occupation_burden_cleared: 'war',
   wartime: 'war', vassal_rebellion: 'war', rebellion_vassal: 'war',
   cold_war_supply_sanctions: 'war', ally_burden: 'war', alliance_burden: 'war', relief_burden: 'war',
@@ -398,6 +400,30 @@ export const PREFIX_RULES = Object.freeze(/** @type {ReadonlyArray<readonly [str
   ['resource_', 'trade'],
   ['population_', 'trade'],
   ['institution_', 'trade'],
+  // occupation_${beat}: W-SEAT SEAT-3's posture beat (occupation_posture) and the six
+  // occupation beats that already carried exact rows. `war` is not a judgment call here —
+  // ALL SEVEN known members of this family route to `war` today, so the prefix re-routes
+  // nothing; it only stops the seventh from having to buy an exact row.
+  //
+  // ⛔ A FAMILY PREFIX, NOT AN EXACT_SECTION ROW, ON THE `treasury_` / `pantheon_extinction`
+  // PRECEDENT RECORDED ABOVE. An exact row puts the token in LEGACY_UNVOICED_TOKENS, whose
+  // 274 is asserted SHRINK-ONLY and has no lawful growth cure — `occupation_posture` shipped
+  // as an exact row and red four assertions across kindPoolFloors and pantheon A5 for exactly
+  // that reason. Routing is UNCHANGED by the door: `isExplicitlyRouted` accepts "an exact
+  // entry OR a family prefix", so SECTION_OF stays 'war' and the beat is never an orphan.
+  // The six older beats KEEP their exact rows — an exact match wins over a prefix in
+  // SECTION_OF, so nothing about them moves, and a future occupation beat that needs a
+  // different desk can still say so with a row of its own.
+  //
+  // ⚠ THE CONSEQUENCE, RECORDED SO THE REVERSAL ROW IS WAITING: this kind therefore lives
+  // OUTSIDE the phrased-pool census — neither registered nor counted as unvoiced debt. That
+  // is honest ONLY because its prose is HAND-AUTHORED over the closed three-member
+  // OCCUPATION_POSTURES vocabulary in occupation.js, never pool-generated. The day posture
+  // prose is pool-generated, this row comes out and the five registration homes are owed in
+  // full — and note the sharper trap the faith lane recorded: a REGISTERED kind routing only
+  // by prefix would raise the estate-wide registered-minus-routed difference and quietly
+  // claim to be deskless. The prefix is lawful here precisely because this kind is unregistered.
+  ['occupation_', 'war'],
   ['mobilization_reaction_', 'war'],
   // strategy_${move}: military-posture dominant (defend/hold/deploy/return_home/
   // sue_for_peace/pre_empt); the economic/faith levers keep their exact overrides

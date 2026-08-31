@@ -39,6 +39,24 @@
  *      were edited; the DEBT did not, and that is the check that matters here — both
  *      rows still carry exactly `missing-field:id` plus their unrouted bare kind.
  *
+ * EXACT RE-PIN 2026-08-31 — FOUR ROWS MOVED, AND THIS ONE IS THE PUREST CASE YET. The
+ * W-SEAT landing act rebased the SEAT-1..4 train onto the build tip, and replaying
+ * `038d42d1b` (T3 SEAT-2b, the fifth coup adj) inserted fourteen lines into
+ * `src/domain/worldPulse/deploymentReturn.js` ABOVE all four of its frozen rows:
+ * `469 → 470`, `509 → 510`, `527 → 528`, `592 → 606`. The arithmetic is legible: `+1`
+ * at `:34` (the `foreignSeatCoupAdj` import) shifts every row by one, and `+13` at
+ * `~:536` (the D4 comment block and the `foreignSeatAdj` argument) shifts only the last
+ * by a further thirteen — 1 + 13 = 14, which is exactly `592 → 606`.
+ *   ⭐ ALL FOUR SIGNATURES ARE UNCHANGED (`71a3960d…`, `f6d0d2ee…`, `e89c70fa…`,
+ *   `345c4241…`), and `sourceSignature` hashes only the literal's own
+ *   whitespace-normalized bytes — so unlike rows 2+3 of the 2026-08-03 re-pin above,
+ *   here there is affirmative proof that not one literal was edited. Nothing was
+ *   bought and nothing was repaired: the ceiling is still 19, no row was added or
+ *   removed, and every column and issue set is byte-identical.
+ *   ⚠ RE-MEASURED AT THE LANDING TIP, deliberately, and not mid-train: this ledger is
+ *   location-bound, so a re-pin taken before the act's later source-moving cures had
+ *   landed would simply have to be paid twice.
+ *
  * @enforced-module src/domain/region/wizardNews.js
  * @enforced-module src/domain/realm/heraldRouting.js
  */
