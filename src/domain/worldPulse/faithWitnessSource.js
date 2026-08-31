@@ -193,15 +193,25 @@ export function exposureDemotion(exposure) {
  * DORMANT ⇒ an EMPTY array (not a null, not an entry with no pulls): a funnel caller
  * distinguishes "nothing to teach" from "something malformed" by count alone.
  *
+ * ⚠ `settlementSeed` ARRIVES FROM THE CALLER AND IS NOT READ OFF THE SETTLEMENT, and
+ * that is a correction the estate's own instrument forced. An earlier cut read
+ * `settlement.placeSeed ?? settlement.seed`; `check-observed-shape-readers` refused
+ * both as reads of keys no writer produces — and it was right. A settlement carries
+ * no seed: `pulseKernel` resolves one as `save.seed || settlement.seed || id`, i.e.
+ * from the SAVE. So this adapter asks for it rather than guessing, exactly as L4's
+ * `milieuEntries` asks for its host vector rather than inventing a direction for a
+ * city it has not read.
+ *
  * @param {Object} args
  * @param {SimSettlement | null | undefined} args.settlement
  * @param {FaithReligionState | null | undefined} args.religionState
  * @param {Record<string, unknown> | null | undefined} args.npc the dwelling soul
  * @param {number} args.dweltTicks ticks this soul has dwelt among this faith
  * @param {string} args.eventId the evidence this lesson binds to
+ * @param {string} [args.settlementSeed] the save's seed for this settlement
  * @returns {readonly WitnessEntry[]}
  */
-export function faithWitnessEntries({ settlement, religionState, npc, dweltTicks, eventId }) {
+export function faithWitnessEntries({ settlement, religionState, npc, dweltTicks, eventId, settlementSeed }) {
   // 1 — THE CADENCE GATE. Integrated time, floor-divided; nothing below one whole
   // season. This is the F9 cure, and it runs before any other work.
   const cadences = Math.floor((Number(dweltTicks) || 0) / AMBIENT_CADENCE_TICKS);
@@ -216,7 +226,7 @@ export function faithWitnessEntries({ settlement, religionState, npc, dweltTicks
   // record; narrowed here rather than cast, so the null case is visible.
   const piety = settlement ? pietyMultOf(settlement) : 1;
   const settlementId = str(settlement?.id);
-  const settlementSeed = str(settlement?.placeSeed ?? settlement?.seed);
+  const seed = str(settlementSeed);
   const spanTicks = cadences * AMBIENT_CADENCE_TICKS;
 
   /** @type {WitnessEntry[]} */
@@ -245,7 +255,7 @@ export function faithWitnessEntries({ settlement, religionState, npc, dweltTicks
       kind: FAITH_WITNESS_KIND,
       plane: FAITH_WITNESS_PLANE,
       settlementId,
-      settlementSeed,
+      settlementSeed: seed,
       npc: /** @type {Record<string, unknown>} */ (npc),
       // Composed so two gods of one pantheon are DISTINCT evidence rather than two
       // rows claiming the same event — the funnel keys receipts on this.
