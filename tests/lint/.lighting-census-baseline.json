@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "de325429f556bd66431e40c85c4d0b12fb0dd2b6",
+  "measuredAtSha": "ece7b8bed1133bb5a86e3ceed17dd538a461c0d9",
   "measuredBy": "W-LIVES-L7",
   "date": "2026-08-31",
-  "note": "car L7 landed ONE test file, the read model and prose battery (characterReadModel.test.js), and the bill reconciles to the digit: files +1, credited +1, parked FLAT at 370 (the proof Door 2 credited it rather than parking it), titles +41 for the file's 41 tests, suiteTitles +6 for its 6 describe blocks. Nothing else in the estate moved. The four census reds surviving at this tip (couplingInclusion, domainAnyCastBaseline, observedShapeReaders, proseNumerics) were measured IDENTICAL at the base 2e4fc0ea0 in a separate control worktree; they are car L5's four documented open debts and none of them is this car's.",
+  "note": "car L7 car 3 added THREE test blocks — the cures for the four mutations car 1's battery proved blind — so only the title layer moves: files FLAT at 2453, parked FLAT at 370, credited FLAT at 2083, titles +3 (41 -> 44 in characterReadModel.test.js, re-counted with grep -c), suiteTitles FLAT at 5806 (no new describe). A file-layer that is flat while the title layer moves is the proof no file landed. The four census reds still standing at this tip were measured IDENTICAL at the base 2e4fc0ea0 in a control worktree and are car L5's four documented open debts, none of them this car's.",
   "files": 2453,
   "parked": 370,
   "credited": 2083,
-  "titles": 21180,
+  "titles": 21183,
   "suiteTitles": 5806
 }
