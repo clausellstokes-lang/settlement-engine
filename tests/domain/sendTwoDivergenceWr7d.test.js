@@ -220,6 +220,16 @@ describe('⭐ THE ⟨F8⟩ CHARACTER TERM (W-LIVES L5) — an input, never the r
       .toBe('foreign_tie');
     expect(vetVolunteerEnvoy({ quality: 'careful', volunteer: volunteer({ temperBand: 'dutiful', loyaltyBand: 'suspect' }) }).basis)
       .toBe('loyalty');
+    // ⛔ THE DISCRIMINATING ROWS, AND THEY WERE MISSING. The two rows above both use
+    // `dutiful` — a band that NEVER fires the temper arm — so hoisting that arm above
+    // the records changes nothing either of them can see, and a mutation that did
+    // exactly that SURVIVED. Order is only observable on a man whose CHARACTER would
+    // refuse him and whose RECORDS refuse him too: correct is the record's basis,
+    // hoisted is `temper`.
+    expect(vetVolunteerEnvoy({ quality: 'careful', volunteer: volunteer({ temperBand: 'self_serving', foreignTieBand: 'close' }) }).basis)
+      .toBe('foreign_tie');
+    expect(vetVolunteerEnvoy({ quality: 'careful', volunteer: volunteer({ temperBand: 'self_serving', loyaltyBand: 'suspect' }) }).basis)
+      .toBe('loyalty');
     // And a HURRIED court never looks at any of it — Q's betrayal arm survives.
     expect(vetVolunteerEnvoy({ quality: 'hurried', volunteer: volunteer({ temperBand: 'self_serving' }) }).accepted)
       .toBe(true);

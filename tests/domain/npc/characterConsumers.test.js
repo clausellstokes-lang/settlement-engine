@@ -370,7 +370,15 @@ describe('THE VETTING BAND (⟨F8⟩)', () => {
   });
 
   test('a shallow FIDELITY reads `ordinary` — a seat refuses on a conviction, not a lean', () => {
+    // ⛔ THIS BAND WAS PINNED ON THE VICE SIDE ONLY, and a mutation SURVIVED because
+    // of it: loosening `value >= SPECTRUM_HALF_SPAN` to `value > 0` promotes a
+    // merely-loyal man to `dutiful`, and nothing above could see it — the two rows
+    // that move the band both use `defining`, and the one shallow row was a VICE.
+    // The shallow band is now closed on BOTH poles, at both rungs below conviction.
     expect(vettingTemperBand({ axes: { FIDELITY: { pole: 'vice', level: 'marked' } } })).toBe('ordinary');
+    expect(vettingTemperBand({ axes: { FIDELITY: { pole: 'virtue', level: 'marked' } } })).toBe('ordinary');
+    expect(vettingTemperBand({ axes: { FIDELITY: { pole: 'virtue', level: 'a_touch' } } })).toBe('ordinary');
+    expect(vettingTemperBand({ axes: { FIDELITY: { pole: 'vice', level: 'a_touch' } } })).toBe('ordinary');
   });
 
   test('every band this returns is a member of the closed vocabulary', () => {
