@@ -599,8 +599,17 @@ describe('gate-mutex lock identity — every DOCUMENTED spelling folds onto one 
   };
   // The bare default: the path `npm run check:tail` takes. GATE_MUTEX_LOCK_DIR must
   // be actively removed — this suite's own harness exports it for every other case.
-  const bareEnv = { ...process.env };
-  delete bareEnv.GATE_MUTEX_LOCK_DIR;
+  //
+  // ⛔ REMOVED BY DESTRUCTURING, NOT BY `delete`, AND THE SPELLING IS LOAD-BEARING. The
+  // first cut of this suite wrote `const bareEnv = { ...process.env };` followed by
+  // `delete bareEnv.GATE_MUTEX_LOCK_DIR;` — and that ONE bare statement is not a
+  // registration, so tests/lint/sovereigntyLightingContract.walker.test.js classified
+  // this describe as SUITE_NOT_STRAIGHT_LINE and all four arms below as
+  // TEST_UNREGISTERED. The whole FILE parked: 21 credited test titles and 4 suite titles
+  // went to zero, and the four guards this suite exists to provide became unprovable
+  // while still passing. Nothing but the lighting census noticed. Keep every statement in
+  // this block a declaration or a registration.
+  const { GATE_MUTEX_LOCK_DIR: _laneOverride, ...bareEnv } = process.env;
 
   const documented = [...new Set(
     DOC_SOURCES
