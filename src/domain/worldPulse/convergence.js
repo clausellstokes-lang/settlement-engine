@@ -91,6 +91,11 @@ import { MERCENARY_MARKET_PATTERN } from './mercenaryMarket.js';
 // D4 (DESIGN_SIM_DEPTH_R2): fear of a rival AS A HEGEMON amplifies the DENIAL motive. One-
 // directional (hegemonyFear never imports convergence); 0 when no sphere ⇒ byte-identical.
 import { makeHegemonyFear } from './hegemonyFear.js';
+// W-SEAT D9 (SEAT-2c): the eligibility widening and the march/welcome keep factor. Every
+// arm returns its IDENTITY value (the same array reference, or exactly 1) unless the
+// VIRTUAL `foreignSeatEnabled` is lit — never `interventionEnabled`, which is preset-LIT,
+// and which A2/F6 forbids widening autonomous minting behind.
+import { seatSuitorsFor, seatColumnKeep01, seatInterventionLit } from './seatIntervention.js';
 
 /** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
 /** A settlement item on the pre-tick snapshot (loose — the war-layer read shape). The
@@ -536,17 +541,40 @@ export function recordsForTarget(ledger, targetId) {
  * interveners' signed strength-shares into interventionTilt. 0 when dormant / no records
  * ⇒ resolveCoupVerdict is byte-identical. The share is each intervener's strength over
  * the total intervener strength at the target (a token column barely tilts).
+ *
+ * ⭐ W-SEAT D9 (SEAT-2c) — THE MARCH AND THE WELCOME, AND THE MARCH HALF IS A REPAIR.
+ * `pulseKernel.js` says of THIS read: "the arriving army tilts the verdict it reaches in
+ * time; a column that arrives after the verdict marched to yesterday's coup." There was no
+ * time term here at all — every committed column tilted at full share the instant it
+ * committed, at any distance, and the only thing making that sentence partly true was the
+ * one-tick stage ordering, which is identical for a neighbour and for an empire six weeks
+ * away. `seatColumnKeep01` supplies the missing term (hop-priced through `armyMarchWeeks`,
+ * the estate's ONE march derivation) together with the UNINVITED discount that finally
+ * gives `interventionLegitimacy`'s never-charged price a consequence.
+ *
+ * ⛔ THE DARK PATH IS THE PRE-D9 EXPRESSION LITERALLY, NOT AN ARITHMETIC EQUIVALENT. The
+ * ternary below keeps `r.strength / total` un-multiplied when the seat key is dark, on
+ * `warSeatBooks`'s own standard: a `× 1` that is never evaluated cannot round differently,
+ * and this file's consumers include a HASHED same-seed golden whose lit arm sets
+ * `interventionEnabled` and never the seat key.
+ *
  * @param {{ simulationRules?: unknown, spatialLedgers?: unknown } | null | undefined} worldState @param {string} saveId
+ * @param {number|null} [tick] the resolving tick. ABSENT ⇒ no march term, so every caller
+ *   that has no clock keeps its pre-D9 answer exactly.
  * @returns {number}
  */
-export function interventionAdjFor(worldState, saveId) {
+export function interventionAdjFor(worldState, saveId, tick = null) {
   if (!interventionActive(worldState)) return 0;
   const ledger = interventionLedger(worldState);
   const recs = recordsForTarget(ledger, saveId);
   if (!recs.length) return 0;
   const total = recs.reduce((s, r) => s + Math.max(0, r.strength), 0);
   if (total <= 0) return 0;
-  const shares = recs.map((r) => ({ side: r.side, strengthShare01: r.strength / total }));
+  const seatLit = seatInterventionLit(worldState);
+  const shares = recs.map((r) => ({
+    side: r.side,
+    strengthShare01: seatLit ? (r.strength / total) * seatColumnKeep01(worldState, r, tick) : r.strength / total,
+  }));
   return interventionTilt(shares);
 }
 
@@ -1002,7 +1030,15 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
     // contest per tick; interventions accrue over ticks, never a same-tick swarm).
     /** @type {{ patronId: string, relType: string, side: string, motive: string, receipt: string, chosen: ReturnType<typeof scoreMotives>, pull: number, patronStrength01: number } | null} */
     let best = null;
-    for (const { otherId: patronId, relType } of neighborsOf(edges, targetId)) {
+    // W-SEAT D9 (SEAT-2c) — THE ELIGIBILITY RULE: a relationship EDGE, as ever, **OR** the
+    // contested settlement's foreign SEAT. `neighborsOf` can only see edges, so an overlord
+    // whose compact lives in a different substrate was structurally invisible here: the
+    // `vassalized` rung whose relabel `vassalizationOutcomes` skipped, and the subordinating
+    // treaty tie. Those two are the whole live population of the widening — every other seat
+    // basis is either edge-backed already or sits in a town where SEAT-1's own cure refuses
+    // the coup birth. Returns THIS SAME ARRAY when the seat key is dark, so a preset-lit
+    // intervention world iterates exactly the list it iterated before.
+    for (const { otherId: patronId, relType } of seatSuitorsFor(worldState, snapshot, targetId, neighborsOf(edges, targetId))) {
       if (patronId === targetId) continue;
       if (busy.has(patronId)) continue; // one-army law
       const key = `${patronId}:${targetId}`;

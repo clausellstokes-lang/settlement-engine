@@ -115,7 +115,14 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       ? WAR_SENTIMENT_PHOLD_WEIGHT * computeWarSentiment(entry.settlement, warExhaustion[saveId])
       : 0;
     // W-CONVERGENCE: the surviving foreign interveners' signed tilt (0 when dark).
-    const interventionAdj = interventionAdjFor(worldState, saveId);
+    // ⭐ W-SEAT D9 (SEAT-2c): the resolving TICK is now passed, because a column's share is
+    // worth nothing until the column arrives. `pulseKernel` already told the reader that
+    // "a column that arrives after the verdict marched to yesterday's coup"; until this
+    // argument existed there was no clock here to make that true, and a relief force six
+    // weeks away tilted the verdict exactly as hard as the neighbour across the ford. The
+    // march term is behind `foreignSeatEnabled`, so a dark world reads the same number it
+    // always read — and a caller that passes no tick keeps the old answer by construction.
+    const interventionAdj = interventionAdjFor(worldState, saveId, tick);
     // coherence-13 (economicCoupReadEnabled, a VIRTUAL flag ABSENT from DEFAULT_SIMULATION_RULES):
     // a prosperous seat holds, a hollowed treasury falls. Reads the settlement's already-derived
     // economic_capacity causal score (symmetric to ruling_authority above), centered at 50 and
