@@ -76,7 +76,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
-import { riskAppetiteOf } from '../worldPulse/npcLadderGoals.js';
+import { riskAppetiteOf, traitsOf } from '../worldPulse/npcLadderGoals.js';
 import {
   AXIS_LEVELS,
   SPECTRUM_HALF_SPAN,
@@ -205,17 +205,52 @@ function clamp01(v) {
  * The effective chart's axes, or an empty map. TOTAL, so every read below is a plain
  * lookup: an absent chart, a malformed one and a soul with no axes are one case, and
  * that case is "this reading makes no claim".
- * @param {{ character?: unknown }|null|undefined} npc
+ * ⚠ `npc` IS `unknown` ON PURPOSE. The re-routed consumers hand in their own roster
+ * types (`SimNpc`, the AI layer's `EntityLite`), and a narrow structural parameter
+ * makes each of those a strict-mode error at the call site — which is a type wall
+ * pretending to be a contract, on a function that is already total over garbage.
+ * @param {unknown} npc
  * @param {Record<string, { offset: number, updatedTick: number }>|null|undefined} drift
  * @returns {Record<string, { pole?: 'virtue'|'vice', level?: string }>}
  */
 export function effectiveAxesOf(npc, drift) {
+  const chart = effectiveCharacter(/** @type {{ character?: unknown }} */ (asObject(npc)), drift);
   return /** @type {Record<string, { pole?: 'virtue'|'vice', level?: string }>} */ (
-    asObject(asObject(effectiveCharacter(npc, drift)).axes)
+    asObject(asObject(chart).axes)
   );
 }
 
 // ── 1. THE DESCRIPTOR RE-ROUTE ────────────────────────────────────────────────
+/**
+ * ⭐ THE LENS — the ONE shape every re-routed consumer takes, so four call sites
+ * learn one vocabulary instead of four.
+ *
+ * Both halves are seams and both are unbound in this tree. `driftOf` resolves a
+ * roster NPC to its drift entry, which needs a worldState and a durable-id lookup
+ * that none of the re-routed consumers has or should grow; `project` is L1's
+ * `wordForAxisPosition`. A lens with neither is the lens every production caller
+ * passes today, and it is exactly the identity.
+ *
+ * @typedef {Object} CharacterLens
+ * @property {((npc: unknown) => Record<string, { offset: number, updatedTick: number }>|null)} [driftOf]
+ * @property {((position: { axisId: string, pole?: 'virtue'|'vice', level?: string }) => { word: string, displaces: readonly string[] }|null)} [project]
+ * @property {((axisId: string) => { e: number, c: number }|null)} [planeOf]
+ */
+
+/**
+ * The drift entry a lens resolves for one NPC, or null. TOTAL: an absent lens, an
+ * absent resolver and a resolver that finds nothing are one case.
+ * @param {unknown} npc @param {CharacterLens|null|undefined} lens
+ * @returns {Record<string, { offset: number, updatedTick: number }>|null}
+ */
+export function lensDrift(npc, lens) {
+  const resolve = asObject(lens).driftOf;
+  if (typeof resolve !== 'function') return null;
+  const entry = resolve(npc);
+  return entry && typeof entry === 'object'
+    ? /** @type {Record<string, { offset: number, updatedTick: number }>} */ (entry) : null;
+}
+
 /**
  * ⭐ A CONSUMER'S OWN WORD LIST, AS THE EFFECTIVE CHART NOW READS IT.
  *
@@ -234,16 +269,15 @@ export function effectiveAxesOf(npc, drift) {
  *
  * @param {Object} args
  * @param {readonly string[]} args.words       the caller's OWN authored descriptor list
- * @param {{ character?: unknown }|null|undefined} [args.npc]
- * @param {Record<string, { offset: number, updatedTick: number }>|null|undefined} [args.drift]
- * @param {((position: { axisId: string, pole?: 'virtue'|'vice', level?: string }) => { word: string, displaces: readonly string[] }|null)|null} [args.project]
- *        L1's `wordForAxisPosition`, bound at the consist landing. Absent ⇒ no claim.
+ * @param {unknown} [args.npc]
+ * @param {CharacterLens|null|undefined} [args.lens]
  * @returns {readonly string[]} the caller's array itself, or a new list
  */
-export function effectiveDescriptors({ words, npc, drift, project }) {
+export function effectiveDescriptors({ words, npc, lens }) {
   const base = Array.isArray(words) ? words : [];
+  const project = asObject(lens).project;
   if (typeof project !== 'function') return base;
-  const axes = effectiveAxesOf(npc, drift);
+  const axes = effectiveAxesOf(npc, lensDrift(npc, lens));
   const axisIds = Object.keys(axes).sort(compareCodepoint);
   if (axisIds.length === 0) return base;
 
@@ -307,21 +341,25 @@ export function effectiveDescriptors({ words, npc, drift, project }) {
  * noise is an owner-taste row R8 itself parks.
  *
  * @param {Object} args
- * @param {{ character?: unknown, personality?: unknown }|null|undefined} args.npc
- * @param {Record<string, { offset: number, updatedTick: number }>|null|undefined} [args.drift]
+ * @param {unknown} args.npc
+ * @param {CharacterLens|null|undefined} [args.lens]
  * @param {number} [args.desperation01]  0..1, the ES charter's own read; ABSENT ⇒ declared
  * @param {number} [args.disorder01]     0..1, `npcTraitPlane().c` lifted to 0..1; ABSENT ⇒ declared
  * @returns {RiskRegister}
  */
-export function riskRegister({ npc, drift, desperation01, disorder01 }) {
-  const axes = effectiveAxesOf(npc, drift);
+export function riskRegister({ npc, lens, desperation01, disorder01 }) {
+  const axes = effectiveAxesOf(npc, lensDrift(npc, lens));
   const nerve = positionValue(axes[RISK_CENTER_AXES.nerve]);
   const restraint = positionValue(axes[RISK_CENTER_AXES.restraint]);
   // The pair spans ±2·HALF_SPAN between them, so the normalized lean is ±1 and the
   // share below is the only thing that decides how far the pair may move the centre.
   const axisLean = (nerve - restraint) / (2 * SPECTRUM_HALF_SPAN);
 
-  const appetite = riskAppetiteOf(asObject(npc));
+  // THE APPETITE TERM ROUTES THROUGH THE SAME RE-ROUTE the consumers do, so a soul
+  // whose chart moved a word is read by the estate's own reader on the MOVED word.
+  const appetite = riskAppetiteOf(asObject(npc), effectiveDescriptors({
+    words: traitsOf(asObject(npc)), npc, lens,
+  }));
   const appetiteLean = appetite === 'high' ? 1 : appetite === 'low' ? -1 : 0;
 
   /** @type {string[]} */
@@ -376,17 +414,17 @@ export function viceDepth(position) {
  * is the endpoint of a long arc" and an arc does not run backwards through a gate.
  *
  * @param {Object} args
- * @param {{ character?: unknown }|null|undefined} args.npc
- * @param {Record<string, { offset: number, updatedTick: number }>|null|undefined} [args.drift]
+ * @param {unknown} args.npc
+ * @param {CharacterLens|null|undefined} [args.lens]
  * @param {string} [args.threshold]  an AXIS_LEVELS member; defaults to the owner's field
  * @returns {string|null} the axis id that opened the door (codepoint-first), or null
  */
-export function corruptibleAxisByDepth({ npc, drift, threshold }) {
+export function corruptibleAxisByDepth({ npc, lens, threshold }) {
   const want = AXIS_LEVELS.indexOf(String(threshold ?? CORRUPTION_DEPTH_GATE.threshold)) + 1;
   // An unreadable threshold refuses everything rather than admitting everything: the
   // failure direction on a gate is always toward fewer doors.
   if (want <= 0) return null;
-  const axes = effectiveAxesOf(npc, drift);
+  const axes = effectiveAxesOf(npc, lensDrift(npc, lens));
   for (const axisId of Object.keys(axes).sort(compareCodepoint)) {
     if (!CORRUPTIBLE_AXES.includes(axisId)) continue;
     if (viceDepth(axes[axisId]) >= want) return axisId;
@@ -425,16 +463,17 @@ export function corruptibleAxisByDepth({ npc, drift, threshold }) {
  * that stops the cache and the read from ever becoming two opinions.
  *
  * @param {Object} args
- * @param {{ character?: unknown }|null|undefined} args.npc
- * @param {Record<string, { offset: number, updatedTick: number }>|null|undefined} [args.drift]
- * @param {((axisId: string) => { e: number, c: number }|null)|null} [args.planeOf]
- *        L1's per-axis `planeLean` column, bound at the consist landing. Absent ⇒ no claim.
+ * @param {unknown} args.npc
+ * @param {CharacterLens|null|undefined} [args.lens]
+ *        the lens whose `planeOf` is L1's per-axis `planeLean` column, bound at the
+ *        consist landing. Absent ⇒ no claim.
  * @returns {AlignmentReading}
  */
-export function derivedAlignment({ npc, drift, planeOf }) {
+export function derivedAlignment({ npc, lens }) {
   const none = Object.freeze({ claim: false, good: null, law: null, word: null });
+  const planeOf = asObject(lens).planeOf;
   if (typeof planeOf !== 'function') return none;
-  const axes = effectiveAxesOf(npc, drift);
+  const axes = effectiveAxesOf(npc, lensDrift(npc, lens));
   const axisIds = Object.keys(axes).sort(compareCodepoint);
   let evil = 0; let chaos = 0; let read = 0;
   for (const axisId of axisIds) {

@@ -425,7 +425,7 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
     return out;
   }
 
-  test('the drift FAMILY is unreachable from production — closure, not a bare count', () => {
+  test('the drift family has exactly ONE production door, and the WRITERS stay sealed', () => {
     // AMENDED BY CAR L3, which is the act this pin was written to meet: its own
     // comment said a red here "is the funnel car's act". The claim is unchanged —
     // nothing in production can reach drift — but it is now proved as a CLOSURE
@@ -441,6 +441,26 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
     // by nobody. The claim is still that there is no path INTO the family from
     // production — only the family's own membership moved, and every member is
     // asserted present below so the closure cannot pass over a set of typos.
+    //
+    // ⭐⭐ AMENDED A THIRD TIME BY CAR L5, AND THIS ONE IS AN HONEST NARROWING, SO
+    // IT IS WRITTEN DOWN RATHER THAN QUIETLY ABSORBED. L5's whole car is the
+    // consumer re-routes §4 asks for, so production DOES now reach the family: the
+    // clergy plane, the espionage tap and the persona surface all import
+    // `characterConsumers.js`. "No path in" is therefore no longer true and must
+    // not be pretended.
+    //
+    // What replaces it is STRONGER on the half that matters and CHECKED on the
+    // half that changed. The load-bearing claim was never that the chart is
+    // unreadable — it is that NOTHING IN PRODUCTION CAN WRITE A DRIFT OFFSET. So:
+    //
+    //   · the DOOR is enumerated: exactly one non-family file may name the drift
+    //     module, and it is the consumer seam (step 1);
+    //   · the WRITERS are sealed absolutely: no file outside the family may name
+    //     `applyAxisDrift` or `writeAxisDrift` at all — a NEW step, and the one
+    //     that carries the darkness now (step 1b);
+    //   · the FUNNEL stays sealed, which is what actually produces pulls (step 2);
+    //   · the door's own production importers are enumerated BY NAME (step 4), so
+    //     a fifth consumer cannot arrive without somebody meaning it.
     const FAMILY = [
       'characterDrift.js',
       'knownCharacter.js',
@@ -448,13 +468,33 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
       'livedExperienceFunnel.js',
       'livedExperienceSources.js',
     ];
+    /** The ONE production door onto the family — car L5's consumer seam. */
+    const DOOR = 'src/domain/npc/characterConsumers.js';
+    /** Every production file allowed to walk through it, enumerated. */
+    const DOOR_CONSUMERS = [
+      'src/domain/ai/personaSlicer.js',
+      'src/domain/worldPulse/clergyTraitPlane.js',
+      'src/domain/worldPulse/espionage/espionageTap.js',
+    ];
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
     expect(files.length).toBeGreaterThan(100);
     const outside = files.filter((file) => !FAMILY.some((member) => file.endsWith(member)));
-    // STEP 1: nothing outside the family names drift.
+    // STEP 1: the ONLY thing outside the family that names drift is the door.
     expect(outside
       .filter((file) => /characterDrift/.test(readFileSync(file, 'utf8')))
+      .map((file) => relative(REPO_ROOT, file))).toEqual([DOOR]);
+    // STEP 1b, the claim that now carries the darkness: NOTHING outside the family
+    // — the door included — may name a drift WRITER. A read that cannot be followed
+    // by a write is a read of a map nobody can fill.
+    expect(files
+      .filter((file) => !FAMILY.some((member) => file.endsWith(member)))
+      .filter((file) => /applyAxisDrift|writeAxisDrift/.test(readFileSync(file, 'utf8')))
       .map((file) => relative(REPO_ROOT, file))).toEqual([]);
+    // STEP 4: and the door's own importers are the enumerated three.
+    expect(files
+      .filter((file) => !file.endsWith('characterConsumers.js'))
+      .filter((file) => /characterConsumers/.test(readFileSync(file, 'utf8')))
+      .map((file) => relative(REPO_ROOT, file)).sort()).toEqual(DOOR_CONSUMERS);
     // STEP 2: and nothing outside the family names the funnel either, so there is
     // no path INTO the family at all. If this reds, a source adapter was wired
     // early — car L4's act, and it must arrive with the flag door TE-VIRT-1 owes
@@ -463,9 +503,11 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
       .filter((file) => /livedExperience/.test(readFileSync(file, 'utf8')))
       .map((file) => relative(REPO_ROOT, file))).toEqual([]);
     // STEP 3, added by car L4: and nothing outside the family names the reputation
-    // read either. The mortal consumers that will call it are car L5's re-routes,
-    // and the pulse call site that will drive the adapters is L5's too — so the
-    // family is still sealed on every side, with two more members inside it.
+    // read either. ⚠ STILL EMPTY AFTER L5, and that is a real fact about the car:
+    // the re-routes L5 landed all take the TRUE chart (the clergy bench is GAP C's
+    // structural group projection; the footholds are a deity's sight), so no
+    // production reader consumes `knownCharacterOf` yet. The KNOWN read's first
+    // consumer is the vetting band's caller and O2's acceptance door.
     expect(outside
       .filter((file) => /knownCharacter/.test(readFileSync(file, 'utf8')))
       .map((file) => relative(REPO_ROOT, file))).toEqual([]);

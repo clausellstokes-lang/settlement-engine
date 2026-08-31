@@ -31,6 +31,7 @@ import { npcCorruptibleFlaw, npcAlignmentScore } from '../corruption.js';
 import { factionArchetype } from '../factionArchetypes.js';
 import { entityLinksFaction } from '../factionRefs.js';
 import { evil01, chaos01 } from './deityAxes.js';
+import { effectiveDescriptors } from '../npc/characterConsumers.js';
 
 /**
  * The trait→plane table: a lowercased AUTHORED personality descriptor (dominant /
@@ -114,11 +115,28 @@ function authoredTraits(npc) {
  * the traits carry, so a conflicted NPC (e.g. "compassionate" + "corrupt") reports
  * a large spread even though the signed sums partly cancel (conflict = variance,
  * not a bland zero). A trait-neutral NPC reads {e:0,c:0,spread:0}. Pure.
- * @param {import('../settlement.schema.js').SimNpc} npc @returns {{ e: number, c: number, spread: number }}
+ *
+ * ⭐ W-LIVES L5 — THE CHOKEPOINT RE-ROUTE, AND IT SERVES BOTH PUBLIC READS AT ONCE.
+ * `readClergyPlane` and `targetedFootholds` both project per NPC through here, so
+ * one seam re-points both. `lens` carries the paradigm chart in; absent it (every
+ * production caller today) `effectiveDescriptors` hands back `authoredTraits`'s OWN
+ * ARRAY by reference and this loop cannot compute anything it did not compute
+ * before — the byte-identity is structural, not asserted.
+ *
+ * ⚠ BOTH READS TAKE THE **TRUE** CHART, and that is a ruling, not an oversight.
+ * `targetedFootholds` is a DEITY read (§12 R2: gods know souls) and must keep true
+ * sight. `readClergyPlane` is GAP C's group projection — a bench's character is the
+ * org-power-weighted projection of who staffs it, a structural fact about the
+ * institution rather than any observer's belief about a man. Neither is an OBSERVER,
+ * so neither reads KNOWN character; the known read lands where an observer is named,
+ * which is the vetting band and O2's acceptance door.
+ * @param {import('../settlement.schema.js').SimNpc} npc
+ * @param {import('../npc/characterConsumers.js').CharacterLens|null} [lens]
+ * @returns {{ e: number, c: number, spread: number }}
  */
-export function npcTraitPlane(npc) {
+export function npcTraitPlane(npc, lens) {
   let e = 0; let c = 0; let spread = 0;
-  for (const t of authoredTraits(npc)) {
+  for (const t of effectiveDescriptors({ words: authoredTraits(npc), npc, lens })) {
     const lean = TRAIT_PLANE[String(t).trim().toLowerCase()];
     if (!lean) continue;
     e += lean.e; c += lean.c;
@@ -155,9 +173,10 @@ function orgPower(npc) {
  * trait-neutral unflawed priesthood, reads EXACTLY zero on every field. Pure.
  *
  * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {import('../npc/characterConsumers.js').CharacterLens|null} [lens] W-LIVES L5
  * @returns {ClergyPlaneReading}
  */
-export function readClergyPlane(settlement) {
+export function readClergyPlane(settlement, lens) {
   const ps = settlement?.powerStructure || {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
   const clergyFactions = factions.filter((f) => (
@@ -175,7 +194,7 @@ export function readClergyPlane(settlement) {
     if (!clergyFactions.some((faction) => entityLinksFaction(npc, faction, factions))) continue;
     const w = orgPower(npc);
     if (w <= 0) continue;
-    const plane = npcTraitPlane(npc);
+    const plane = npcTraitPlane(npc, lens);
     // Malice reading of the whole NPC: the trait projection sharpened toward the
     // authored alignment score (the same signal the corruption lens reads).
     const malice = clamp(0.5 * plane.e + 0.5 * (-npcAlignmentScore(npc)), -1, 1);
@@ -232,9 +251,10 @@ const deityPlaneOf = (/** @type {DeitySnapshot} */ d) => ({ e: 2 * evil01(d) - 1
  * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {DeitySnapshot|null|undefined} patronDeity
  * @param {Array<{ ref: string, snapshot: DeitySnapshot }>} rivals present non-patron deities
+ * @param {import('../npc/characterConsumers.js').CharacterLens|null} [lens] W-LIVES L5; TRUE sight
  * @returns {Array<{ npcId: string, npcName: string, rivalRef: string, rivalName: string, availability: number }>}
  */
-export function targetedFootholds(settlement, patronDeity, rivals) {
+export function targetedFootholds(settlement, patronDeity, rivals, lens) {
   const T = FOOTHOLD_TUNING;
   if (!patronDeity || !Array.isArray(rivals) || !rivals.length) return [];
   const ps = settlement?.powerStructure || {};
@@ -252,7 +272,7 @@ export function targetedFootholds(settlement, patronDeity, rivals) {
   for (const npc of npcs) {
     if (!clergyFactions.some((faction) => entityLinksFaction(npc, faction, factions))) continue;
     if (orgPower(npc) < T.MIN_ORG_POWER) continue;
-    const plane = npcTraitPlane(npc);
+    const plane = npcTraitPlane(npc, lens);
     if (plane.spread <= 0) continue;                          // trait-neutral ⇒ never available
     ministers.push({ id: String(npc?.id ?? ''), name: String(npc?.name || npc?.id || 'a minister'), plane });
   }
