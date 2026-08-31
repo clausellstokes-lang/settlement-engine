@@ -18,6 +18,63 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-30 — THE HEDGES THAT NAMED NOTHING (25 rows of 525 moved; 0 rows added, 0
+ *   removed, 0 ROSTERS changed). Lane T10 landing, re-recording car UX-2's §767.3(e)
+ *   hedge kill. RULED at ODQ §830 — the drift is the train's OWN DECLARED SHIFT, so the
+ *   governed ritual re-records it rather than the landing curing it away.
+ *   THE CAUSE IS TWO AUTHORED TEMPLATE ROWS in `spatialGenerator.js`, each printing an
+ *   unresolved AUTHORING ALTERNATION straight to the user:
+ *     village × desert — 'a central well and mosque or chapel' → the sacred noun is now
+ *       DERIVED from the roster the generator was handed: church family → ' and its
+ *       church', shrine → ' and a wayside shrine', neither → the clause drops. The old
+ *       string named 'mosque', a building NO institution in the catalog ever mints
+ *       (re-verified at this tip: 0 occurrences anywhere in src/ but the new comment).
+ *     town × hills — 'the castle or keep visible…' → 'the keep visible…'. The car's
+ *       stated reason re-verified here: `institutionalCatalog.js` holds 0 castle rows,
+ *       so the sentence commits to the one word the tier can honestly carry.
+ *   ⛔ THE COVERAGE CLAIM THAT SHIPPED WITH THIS SHIFT WAS WRONG, AND IT IS CORRECTED
+ *   HERE RATHER THAN RIDDEN SILENTLY. Car UX-2 declared the shift honestly and then said
+ *   "No golden or fixture covers these strings (measured)". THIS MANIFEST COVERS THEM,
+ *   across all 12 cultures, and reds on them — which is how the landing gate found it.
+ *   The shift was real and declared; only the claim that nothing pinned it was false.
+ *   THE COMPLETE PATH-TEMPLATE CENSUS IS ONE TEMPLATE, and that is the whole finding:
+ *     $.spatialLayout.layout changed                        25 changes / 25 rows
+ *   ZERO templates ADDED, ZERO REMOVED, zero array-length moves, zero key-order moves. No
+ *   roster, institution count, settlement name, economy figure, trace row or rng draw
+ *   moves anywhere — measured over WHOLE SETTLEMENTS base-vs-tip, never inferred from the
+ *   hash. Old → new is one sentence per row, 13 rows carrying the keep and 12 the church.
+ *   TOTALITY CONTROL: the landing BASE (`19a8c9197`) reproduces all 525 committed hashes
+ *   with 0 mismatches, so 25 is A COUNT AND NOT A SAMPLE — and the same run proves no
+ *   drift was inherited from the 50 commits this landing rebased onto. The tip then
+ *   reproduces 500 of 525, and the re-recorded manifest agrees ROW FOR ROW (525 of 525)
+ *   with an independently computed one, so two instruments fixed this file's contents.
+ *   ⭐ THE DRIFT SET IS THE EDIT'S OWN FINGERPRINT, AND ITS CONTROL COULD HAVE FIRED.
+ *   It is exactly {all 12 `village|*|desert`} ∪ {all 12 `town|*|hills`} ∪ {ONE of the
+ *   four `town|germanic|auto|random_trade` seeds}. That last row is the informative one:
+ *   its weighted terrain roll resolves to HILLS at seed golden-master-v3, so it lands ON
+ *   an edited row, while its three siblings roll riverside, riverside and plains and land
+ *   on untouched ones. ⭐ THE ROLL ITSELF DID NOT MOVE — `$.config.terrainType` is absent
+ *   from the census above on all four, so what changed is the row landed on, not the
+ *   landing. An rng cascade would have moved all four and moved more than one template;
+ *   `spatialGenerator.js` contains no rng at all (0 hits for rng|random|Math.random) and
+ *   the derivation is a pure string scan over the roster handed in, so it can consume no
+ *   draw. CROSS-CONTROLS that stayed byte-identical and would have convicted a tier-wide
+ *   or terrain-wide cause: `village|germanic|HILLS`, `town|germanic|DESERT`, village
+ *   plains, town coastal. The change is row-specific, not tier- or terrain-wide.
+ *   ⚠ A CORPUS GAP, NAMED RATHER THAN CLOSED: all 12 desert villages resolve to the
+ *   CHURCH branch, so this manifest pins neither the shrine branch nor the dropped
+ *   clause. Both are pinned by unit test instead — tests/generators/spatialGenerator.test.js
+ *   asserts all three branches plus a 6 tiers × 7 terrains × 2 rosters sweep convicting any
+ *   layout row that carries an either/or. Adding a golden row is an ADDITION and therefore
+ *   owner-signed (precedent aa33eba5), so the gap is left named, not quietly filled.
+ *   ⚠ THE LANDING'S OTHER GENERATOR-PATH EDIT MOVES NOTHING HERE, stated so nobody
+ *   re-prices it later: `steps/stepMetadata.js` re-worded two step summaries (§767.3(d)),
+ *   and NO `$.simulationTrace` template appears in the census — those receipts are not in
+ *   the hashed output.
+ *   THE PROMISE. A stored settlement is never re-derived; only newly generated worlds get
+ *   the honest sentence. Two worlds from one seed — one saved before this lands, one
+ *   generated after — differ in exactly this line and nothing else.
+ *
  * 2026-08-30 — THE BURIAL LADDER (441 rows of 525 moved; 0 rows added, 0 removed). Lane
  *   TE-RESIDUE-1, the content car ODQ §763.1 granted, curing §708.5. THE DEFECT WAS AN
  *   ABSENCE: the catalog held exactly ONE burial row in 311 — `Graveyard`, village-only —
