@@ -34,7 +34,12 @@ import {
   gitDirPresent,
   gitResolvesCommit,
 } from '../helpers/gitObjectStore.js';
-import { countDomain, countText } from '../../scripts/count-domain-any.mjs';
+import {
+  DECLARED_OVERRUNS,
+  countDomain,
+  countText,
+  updatePlan,
+} from '../../scripts/count-domain-any.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // Committed any+suppress ceiling — lower it as holes are typed; NEVER raise.
@@ -155,6 +160,24 @@ const CEILING = 2287;
 // ⛔ DO NOT run `--update` to make this list go away. `--update` re-freezes the
 // WHOLE TREE, which would bank commercialReasons.js's 31 holes as permanent debt.
 // Each row above is cleared by TYPING the hole, one file at a time.
+//
+// ── AND THAT PROHIBITION IS NOW THE TOOL'S, BECAUSE A COMMENT STOPPED NOBODY ──
+// THREE LANES OBEYED THE SHRINK ARM'S INSTRUCTION AND RAN `--update` IN ONE DAY
+// (2026-08-31: TE-CEIL step 6, W-FAITH F3c act 3, and TE-INSTR-1's own R1 docket
+// row), each producing a diff that created commercialReasons/envoyPulse rows and
+// RAISED warDeployment 16 -> 17. All three caught it by reading the diff; the
+// tool helped none of them. The prohibition sat 150 lines above the instruction
+// and nothing joined them.
+//
+// It is joined now, in the only place that can enforce it: `--update` REFUSES to
+// create or raise a row for any file in this ledger, names every refusal, and
+// exits non-zero. That is why `DECLARED_OVERRUNS` MOVED INTO
+// scripts/count-domain-any.mjs and is IMPORTED here — the writer has to own the
+// list it may not write, and a second copy of the file keys living in this file
+// would have been the hardcoded-twin class instead of a cure. Every governance
+// arm below still lives here, over the imported object; the ONE ledger now drives
+// both the tool's refusal and the shrink arm's advice, so they can never disagree
+// and they switch together the day the ledger is emptied.
 
 const baseline = JSON.parse(readFileSync(join(ROOT, 'tests/lint/.domain-any-baseline.json'), 'utf8'));
 const current = countDomain();
@@ -195,36 +218,10 @@ const current = countDomain();
 // they become 0 it reds with "delete the row". That is the same law the baseline's own
 // `no file is below its baseline` arm already enforces, and it is what stops a
 // quarantine drifting upward in effect. A red here is a WIN being banked, not a break.
-const DECLARED_OVERRUNS = Object.freeze({
-  'src/domain/worldPulse/commercialReasons.js': {
-    any: 31,
-    suppress: 0,
-    introducedAt: 'd7ea69a4baf64d8c4281650b5160103519f453ef',
-    cause: 'TR-1 THE CASUS COMMERCII added the file already carrying 31 holes, and a file absent '
-      + 'from the baseline has an allowance of ZERO, so it has been over since its first commit. '
-      + 'THE LARGEST SINGLE DEBT ON THIS LIST, and the reason `--update` is forbidden here: a '
-      + 'blanket re-freeze would bank all 31 as permanent baseline. Cleared only by typing the '
-      + 'commercial-reason payload shapes, one at a time.',
-  },
-  'src/domain/worldPulse/warDeployment.js': {
-    any: 17,
-    suppress: 0,
-    introducedAt: '172e5f2252fada7e297ff2355147e4e42979ad2d',
-    cause: 'Lane WZ-2 piece 3 (the license ledger) took this file from 16 holes to 17 against a '
-      + 'baseline of 16. The smallest row on the list and the cheapest to clear: ONE hole, in a '
-      + 'file the wave-5b burn-down already gave named pulseShapes typedefs (89 -> 64).',
-  },
-  'src/domain/worldPulse/envoyPulse.js': {
-    any: 2,
-    suppress: 0,
-    introducedAt: 'e0c8646ee36fdfc6a34f7e8d20dce8885b2dffa3',
-    cause: 'The `= {}` destructure idiom sweep left `regionalGraph?:any, wizardNews?:any` in '
-      + "advanceEnvoyDiplomacyPulse's @param. ⚠ TYPING THEM `unknown` WAS TRIED, RE-MEASURED AND "
-      + 'IS BACKWARDS — it adds two domain-strict errors here and two more in pulseKernel under '
-      + 'BOTH configs (the full re-measurement is in this file\'s header ledger above). The honest '
-      + 'cure needs the real WizardNewsFeed / region-graph shapes threaded through both files.',
-  },
-});
+// ⭐ THE OBJECT ITSELF NOW LIVES IN scripts/count-domain-any.mjs AND IS IMPORTED ABOVE.
+// Not a relocation for tidiness: the WRITER has to own the list it may not write, or
+// `--update` re-freezes rows this ledger exists to keep out of the baseline. Every arm
+// that AUDITS the ledger stayed here, and there is still exactly one copy of every figure.
 
 // A LITERAL total EXCESS (measured occurrences minus baselined allowance, summed over the
 // ledger), not a figure derived from the object it is supposed to cap — a ceiling read out
@@ -338,6 +335,12 @@ describe('domain any-cast ratchet — frozen baseline governance', () => {
   test('no file is below its baseline — ratchet down instead of leaving slack', () => {
     // Slack in the baseline is headroom a future regression could hide in.
     // After a burn-down, freeze the win: node scripts/count-domain-any.mjs --update
+    // ⚠ THIS INSTRUCTION USED TO BE A TRAP AND IS NOW SAFE TO OBEY, which is why it still
+    // stands. `--update` re-freezes the whole tree, so obeying it while the declared-overrun
+    // ledger was non-empty banked 34 holes of declared debt as permanent baseline (three lanes
+    // did exactly that on 2026-08-31). The counter now REFUSES to create or raise a declared
+    // row, copies each one's committed value through untouched, names every refusal and exits
+    // non-zero — so the worst this command can now do to a declared file is nothing at all.
     const stale = [];
     for (const [file, base] of Object.entries(baseline.files)) {
       const cur = current.files[file] ?? { any: 0, suppress: 0 };
@@ -345,7 +348,21 @@ describe('domain any-cast ratchet — frozen baseline governance', () => {
         stale.push(`${file}: now ${cur.any} any / ${cur.suppress} suppress (baseline ${base.any}/${base.suppress})`);
       }
     }
-    expect(stale, `debt shrank below the baseline — lock it in with \`node scripts/count-domain-any.mjs --update\`:\n  ${stale.join('\n  ')}`).toEqual([]);
+    const declaredStale = stale.filter((row) => row.split(':')[0] in DECLARED_OVERRUNS);
+    expect(
+      stale,
+      'debt shrank below the baseline — lock it in with `node scripts/count-domain-any.mjs'
+      + ' --update`. It re-freezes every file EXCEPT the declared overruns, whose committed rows'
+      + ' it copies through untouched and names on stderr (it exits non-zero when it does, which'
+      + ' is not a failure — re-read the register to see what it wrote).'
+      + (declaredStale.length
+        ? '\n  ⛔ A DECLARED-OVERRUN FILE IS IN THIS LIST, and `--update` will NOT move it: a'
+          + " declared row's movement is the LEDGER's governed path. Lower that row's declared"
+          + ' figure to bank the win, or delete the row once the baseline covers the file, and'
+          + ' only then does an ordinary --update take it over.'
+        : '')
+      + `:\n  ${stale.join('\n  ')}`,
+    ).toEqual([]);
   });
 
   test('baseline exactly matches the tree (airtight against any drift mode)', () => {
@@ -497,5 +514,123 @@ describe('domain any-cast ratchet — the declared-overrun ledger is honest', ()
       .toBeLessThanOrEqual(DECLARED_OVERRUN_CEILING);
     expect(declaredFiles.length, 'a FOURTH file was declared — the ledger is monotone-down in rows too')
       .toBeLessThanOrEqual(3);
+  });
+});
+
+// ── ⛔ THE `--update` GUARD ITSELF, CONVICTED RATHER THAN DESCRIBED ───────────
+// The ledger above is a bill; this describe is the reason the bill cannot be paid by
+// accident. `--update` re-freezes the WHOLE TREE, and for a whole day the ratchet's own
+// shrink arm prescribed it while the header three screens up forbade it — so three
+// separate lanes ran it, and all three caught the laundering by READING THE DIFF. The
+// tool now refuses, and a refusal nobody executes is the same kind of claim the ledger
+// itself replaced: a comment. These arms drive `updatePlan` — the pure function the CLI
+// writes through — with synthetic trees, so the refusal is proven without touching the
+// register, and then once more against the LIVE ledger so the synthetic cannot be the
+// only population it works on.
+describe('domain any-cast ratchet — `--update` refuses to bank a declared overrun', () => {
+  const LEDGER = Object.freeze({
+    'src/domain/a.js': { any: 9, suppress: 0, introducedAt: 'a'.repeat(40), cause: 'x'.repeat(70) },
+    'src/domain/b.js': { any: 4, suppress: 1, introducedAt: 'b'.repeat(40), cause: 'y'.repeat(70) },
+  });
+  /** A synthetic tree in countDomain()'s exact output shape. */
+  const treeOf = (files) => {
+    let totalAny = 0;
+    let totalSuppress = 0;
+    for (const f of Object.values(files)) { totalAny += f.any; totalSuppress += f.suppress; }
+    return { total: totalAny + totalSuppress, totalAny, totalSuppress, files };
+  };
+
+  test('⛔ a declared file ABSENT from the baseline is NEVER created — the commercialReasons shape', () => {
+    // The 31-hole row: absent by design, allowance ZERO, and a blanket re-freeze would have
+    // written it in as permanent debt. This is the largest of the three real rows and the one
+    // whose cause names `--update` in terms.
+    const tree = treeOf({ 'src/domain/a.js': { any: 9, suppress: 0 }, 'src/domain/keep.js': { any: 2, suppress: 0 } });
+    const committed = { files: { 'src/domain/keep.js': { any: 2, suppress: 0 } } };
+    const { next, refusals } = updatePlan(tree, committed, LEDGER);
+    expect(Object.keys(next.files), 'the declared file was banked into the baseline').toEqual(['src/domain/keep.js']);
+    expect(next.total, 'the total absorbed the declared holes even though the row was refused').toBe(2);
+    expect(refusals.map((r) => r.file), 'the refusal did not NAME the file it refused').toEqual(['src/domain/a.js']);
+    expect(refusals[0].kept, 'a file with no committed row was reported as if it had one').toBe(null);
+    expect(refusals[0].measured).toEqual({ any: 9, suppress: 0 });
+  });
+
+  test('⛔ a declared file is never RAISED — the warDeployment shape, the raise the ratchet forbids', () => {
+    // 16 -> 17 is the whole of that row, and it is the half that makes the trap a regression
+    // rather than merely a widening: the `no file exceeds its baseline` arm forbids a raise
+    // outright, so `--update` writing one put the register into a state the gate refuses.
+    const tree = treeOf({ 'src/domain/b.js': { any: 4, suppress: 1 } });
+    const committed = { files: { 'src/domain/b.js': { any: 3, suppress: 1 } } };
+    const { next, refusals } = updatePlan(tree, committed, LEDGER);
+    expect(next.files['src/domain/b.js'], 'the declared row was raised to the measurement').toEqual({ any: 3, suppress: 1 });
+    expect(next.total).toBe(4);
+    expect(refusals).toEqual([{ file: 'src/domain/b.js', measured: { any: 4, suppress: 1 }, kept: { any: 3, suppress: 1 } }]);
+  });
+
+  test('⛔ a declared file is never LOWERED either, and that direction is deliberate', () => {
+    // Banking a declared shrink here would silently empty the ledger's excess while the row
+    // still claims its old figure — the ledger's exactness arm would then be comparing a
+    // declared number against a baseline that had already absorbed the win. The shrink is
+    // banked by LOWERING THE LEDGER ROW; only then does the file stop being declared.
+    const tree = treeOf({ 'src/domain/b.js': { any: 1, suppress: 0 } });
+    const committed = { files: { 'src/domain/b.js': { any: 3, suppress: 1 } } };
+    const { next, refusals } = updatePlan(tree, committed, LEDGER);
+    expect(next.files['src/domain/b.js']).toEqual({ any: 3, suppress: 1 });
+    expect(refusals.map((r) => r.file)).toEqual(['src/domain/b.js']);
+    // …and the same holds when the file drops out of the tree entirely.
+    const gone = updatePlan(treeOf({}), committed, LEDGER);
+    expect(gone.next.files['src/domain/b.js'], 'a declared row vanished from the register').toEqual({ any: 3, suppress: 1 });
+    expect(gone.refusals).toEqual([{ file: 'src/domain/b.js', measured: null, kept: { any: 3, suppress: 1 } }]);
+  });
+
+  test('a LAWFUL update still works — undeclared rows are re-frozen, stale ones dropped', () => {
+    // The accuracy half. Without it the refusal is indistinguishable from a tool that has
+    // simply stopped writing, which is the way a guard becomes a disabled guard.
+    const tree = treeOf({ 'src/domain/shrank.js': { any: 2, suppress: 0 }, 'src/domain/grew.js': { any: 7, suppress: 1 } });
+    const committed = {
+      files: {
+        'src/domain/shrank.js': { any: 5, suppress: 0 },
+        'src/domain/grew.js': { any: 6, suppress: 1 },
+        'src/domain/vanished.js': { any: 4, suppress: 0 },
+      },
+    };
+    const { next, refusals } = updatePlan(tree, committed, LEDGER);
+    expect(refusals, 'an undeclared file was refused').toEqual([]);
+    expect(next.files).toEqual({ 'src/domain/grew.js': { any: 7, suppress: 1 }, 'src/domain/shrank.js': { any: 2, suppress: 0 } });
+    expect(next.totalAny).toBe(9);
+    expect(next.totalSuppress).toBe(1);
+    expect(next.total).toBe(10);
+  });
+
+  test('⛔ THE GUARD-THE-GUARD ARM: an EMPTY ledger re-freezes the WHOLE tree, live', () => {
+    // Everything above is satisfied by a planner that refuses too much, and the estate has
+    // been bitten by exactly that shape (a guard whose accuracy half was never written). Run
+    // the LIVE tally through the LIVE baseline with the ledger emptied: the plan must be the
+    // measurement itself, key for key, so the refusal is proven to come from the ledger and
+    // from nothing else — and the day the ledger empties, `--update` is whole again.
+    const { next, refusals } = updatePlan(current, baseline, {});
+    expect(refusals, 'rows were refused with an EMPTY ledger — the guard is refusing on its own').toEqual([]);
+    expect(next.files).toEqual(current.files);
+    expect(next.total).toBe(current.total);
+    expect(next.totalAny).toBe(current.totalAny);
+    expect(next.totalSuppress).toBe(current.totalSuppress);
+    expect(Object.keys(next.files).length, 'the live tally is empty — this arm proved nothing').toBeGreaterThan(100);
+  });
+
+  test('⛔ every LIVE declared row is refused against the LIVE register', () => {
+    // The synthetic arms above prove the RULE; this one proves it reaches the three files the
+    // ledger actually names, on the register actually committed. A refusal that works only on
+    // a two-row fixture is the vacuity this whole file exists to refuse.
+    const { next, refusals } = updatePlan(current, baseline);
+    expect(refusals.map((r) => r.file).sort(), 'the live ledger and the live refusal set disagree')
+      .toEqual(Object.keys(DECLARED_OVERRUNS).sort());
+    for (const file of Object.keys(DECLARED_OVERRUNS)) {
+      const committed = baseline.files[file];
+      expect(next.files[file], `${file}: --update would have moved a declared row`)
+        .toEqual(committed ? { any: committed.any, suppress: committed.suppress } : undefined);
+    }
+    // …and what it WOULD write is exactly the register that is committed, so running
+    // `--update` on a clean tip today is a no-op rather than a 12-insertion laundering diff.
+    expect(next.files, 'a clean-tip --update would still move the committed register').toEqual(baseline.files);
+    expect(next.total).toBe(baseline.total);
   });
 });
