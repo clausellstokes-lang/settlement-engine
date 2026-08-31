@@ -421,16 +421,35 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // reads, never a new blind spot. THE FINDINGS INVENTORY DID NOT MOVE AT ALL — the frozen
     // per-file debt in .observed-shape-readers-baseline.json is byte-identical, so no reader
     // gained or lost a writer; only the corpus that exercises them is smaller.
+    // ⭐ MOVED 2026-08-31 BY T4 · SEAT-B (W-SEAT SEAT-5, the liberation un-install):
+    // `transitionCount` 14586 → 14584, and shapeCount/originCount HOLD. Two transitions
+    // leave because two READS left, and both are the same cure: `applyWorldPulse.js`'s
+    // conquest branch moved its extraction-condition construction into the authority leaf
+    // (three `powerTransfer on outcome` reads out, one back in) and that leaf's two inline
+    // `modifiers on factions` reads collapsed onto one shared reader. The corpus itself did
+    // not change — no flag, no producer and no world moved — so shapeCount and originCount
+    // holding is the affirmative proof that this is a READER shrink and not a corpus one.
+    // Every figure moves DOWN, the safe direction for a reader-with-no-writer ratchet.
     expect(corpus.meta).toMatchObject({
       shapeCount: 1300,
       originCount: 8607,
-      transitionCount: 14586,
+      transitionCount: 14584,
     });
+    // ⭐ MOVED 2026-08-31 BY T4 · SEAT-B (W-SEAT SEAT-2b, the D4 attempt sensitivity), and
+    // these four figures are AFFIRMATIVE EVIDENCE rather than bookkeeping. The observed-shape
+    // corpus builds its world by lighting EVERY `*Enabled` flag it can find in source, so it
+    // is the one place in the estate where `legitimacyUpheavalEnabled` is LIT — and under it
+    // the political spawn gates roll differently, which is exactly what the key exists to do.
+    // regionalEventLog 73 → 75 and its unique twin move in LOCKSTEP (two more events, both
+    // distinct), and wizardNews accumulates 1567 → 1569 with unique 272 → 276. THE FIGURES
+    // MOVE UP, which is the honest direction for a sensitivity whose table straddles 1 on a
+    // corpus that happens to sit in the decline band. The FINDINGS INVENTORY DID NOT MOVE:
+    // no reader gained or lost a writer, only the corpus that exercises them is livelier.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
       wizardNewsFinalEntries: 240,
-      wizardNewsAccumulatedEntries: 1567,
-      wizardNewsUnique: 272,
+      wizardNewsAccumulatedEntries: 1569,
+      wizardNewsUnique: 276,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, the same one cause. The regional event log carries the
       // pulse's selected outcomes, and the retired bare-decline family was 36 of them.
@@ -439,8 +458,8 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // and never a Chronicle beat. Only the state lane got quieter, which is exactly what
       // retiring a state-only candidate should do and is the arithmetic that tells the two
       // layers apart.
-      regionalEventLog: 73,
-      regionalEventLogUnique: 73,
+      regionalEventLog: 75,
+      regionalEventLogUnique: 75,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
@@ -1107,7 +1126,22 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // why a rebase moves this pin by −2/−1/−1 and nothing else.
     // ⛔ Literals READ OFF the register re-frozen through the governed `--write` at the
     // landing tip; the T11 landing census bill carries the closing arithmetic.
-    }).toEqual({ reads: 1999, identities: 1412, files: 388, bankedReads: 64, taggedRows: 43 });
+    // ⭐ MOVED 2026-08-31 BY T4 · SEAT-B (W-SEAT SEAT-5), the fourth lawful ESTATE-SHRINK
+    // shape and the first that is a pure READ-SITE shrink: no file died, no arm was struck,
+    // no identity left. 1999 → 1997, and identities/files HOLD at 1412/388 — which is the
+    // whole proof, because a shrink that moved those would be a deleted row wearing a
+    // shrink's clothes. The two reads are `powerTransfer on outcome` 10 → 9 in
+    // applyWorldPulse.js and `modifiers on factions` 2 → 1 in applyWorldPulseOccupationAuthority.js;
+    // both were FORCED rather than chosen (the mouth sat at exactly its frozen ceiling, so
+    // SEAT-5's one new read had nowhere to go until three left with the extraction condition).
+    // bankedReads/taggedRows HOLD at 64/43: this lane's delta on them is zero.
+    // ⛔⛔ AND THE HAZARD THIS COST, WORTH MORE THAN THE FIGURES: the script's own guidance
+    // says to cure a stale row with the governed `scripts/check-observed-shape-readers.mjs
+    // --write` and NEVER to hand-edit — so a lane that follows it exactly re-freezes the JSON,
+    // watches the plain run exit 0, and STILL LANDS RED HERE, because this walker keeps its
+    // own hardcoded twins of the same figures and the governed write is blind to them. The
+    // register and this file are ONE instrument in two halves; move both, in the same act.
+    }).toEqual({ reads: 1997, identities: 1412, files: 388, bankedReads: 64, taggedRows: 43 });
     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
       const rows = taggedAddresses.filter((row) => row.identity === identity);
       return [identity, {

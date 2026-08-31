@@ -181,6 +181,11 @@ const UNDERCITY_HIGH_WATER = 'undercityHighWaterEnabled';
 // module-scope edits and carrying ZERO new test titles here.
 const TREASURY = 'treasuryEnabled';
 const FOREIGN_SEAT = 'foreignSeatEnabled';
+// W-SEAT SEAT-2b (T4 · SEAT-B). The DOMESTIC half of the seat program's three-key topology,
+// minted with its manifest entry, its certification row and its ONE by-name gate read
+// (stressorGates.upheavalLit) in a single commit — the §49-ruling-3 cost above, paid in the
+// same three module-scope edits and carrying ZERO new test titles here.
+const LEGITIMACY_UPHEAVAL = 'legitimacyUpheavalEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
@@ -192,7 +197,7 @@ const VIRTUAL_RULES = Object.freeze([
   FAITH_UNSEATING,
   UNDERCITY_HIGH_WATER,
   TREASURY,
-  FOREIGN_SEAT,
+  FOREIGN_SEAT, LEGITIMACY_UPHEAVAL,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -252,6 +257,12 @@ const LANE_LEAVES = Object.freeze({
   // twenty stressor types, and tracing this lane's zero-candidate claim through it would
   // measure the entire stressor vocabulary rather than this lane's.
   [FOREIGN_SEAT]: ['src/domain/rulingPowerSeat.js'],
+  // SEAT-2b. THE GATE FILE ALONE, and here the lane really is one file: the flag read, the
+  // sensitivity table and every row it composes all live in stressorGates.js. rulingPower.js
+  // and factionArchetypes.js supply the governing-seat read and the archetype vocabulary and
+  // are deliberately absent — they are shared readers for a dozen lanes, and tracing this
+  // lane's zero-candidate claim through them would measure the whole political layer.
+  [LEGITIMACY_UPHEAVAL]: ['src/domain/worldPulse/stressorGates.js'],
   [AXES]: ['src/domain/worldPulse/beliefAxes.js'],
   // All three subject families share ONE gate door (beliefAxes.subjectAxesActive) and ONE
   // derivation leaf, so all three name the same pair. That is the honest scope: the leaf

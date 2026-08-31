@@ -46,7 +46,7 @@ function codeOnly(source) {
 }
 
 describe('WC-0E · the war-circulation flags, the contribution ledger shape, and the blocks[] arm', () => {
-  it('joins both flags to the manifest and holds the triple bijection at 27', () => {
+  it('joins both flags to the manifest and holds the triple bijection at 28', () => {
     for (const flag of FLAGS) expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(flag);
     // 22 → 23 at EP-1 (2026-08-16), which mints advanceEpochEnabled with its certification
     // row in the same commit. THIS FILE IS A NAMED PATH ON EVERY FLAG-MINTING PACKET for
@@ -71,8 +71,22 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // to name. The habitat is the obligation being spread across suites nobody can
     // enumerate from the mint site; a flag-mint packet that named its surfaces from ONE
     // registry would end it, and that is TE-GUARDS-1's subject rather than this lane's.
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(27);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(27);
+    // 26 → 27 at W-SEAT SEAT-1 (2026-08-30), `foreignSeatEnabled`.
+    // 27 → 28 at W-SEAT SEAT-2b (2026-08-31, lane T4 · SEAT-B), which mints
+    // `legitimacyUpheavalEnabled` with its certification row in the same commit.
+    // ⭐ AND THIS TIME THE PAIR WAS FOUND FIRST, NOT LAST, which is the point of the four
+    // notes above: the lane read the flag-mint bill off SEAT-1's own commit before writing a
+    // line, so this suite was a NAMED surface from the start rather than a terminal-gate
+    // surprise. The habitat is unchanged and still belongs to TE-GUARDS-1 — one registry the
+    // mint site can enumerate — but the record should show the practice works when a lane
+    // reconstructs the bill from the last mint's diff instead of from its own charter.
+    // ⛔ AND A LANDING HAZARD THIS LANE MEASURED RATHER THAN MET: T12 · WAR-MEMORY landed
+    // `warMemoryEnabled` on the build branch WHILE this car was being built, so at the
+    // landing tip these literals are 28 → 29, not 27 → 28. Both sides close arithmetically
+    // on their own base, which is exactly the still-closing-lie shape the lighting census
+    // forces onto consecutive lines. THE LANDING RE-MEASURES; it never re-applies these.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(28);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(28);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

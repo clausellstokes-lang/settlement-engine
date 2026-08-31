@@ -178,14 +178,21 @@ describe('the covering array and its constraint manifest', () => {
     // in lockstep while governed (25) and ungoverned (32) do NOT move, confirming the key is
     // genuinely VIRTUAL — absent from DEFAULT_SIMULATION_RULES and from every preset spread.
     // `union − governed` rises with it by construction (58 → 59).
-    expect(census.virtual.length).toBe(27);
+    // ⭐ AND 27 → 28 AT W-SEAT SEAT-2b (2026-08-31), which mints `legitimacyUpheavalEnabled`
+    // with its certification row in one commit. THE CLOSURE IS AGAIN THE PROOF AND IT IS THE
+    // ONLY THING THAT DISTINGUISHES A VIRTUAL MINT FROM A PRESET ONE: `union` moves 84 → 85
+    // in lockstep while governed (25) and ungoverned (32) do NOT move, which is affirmative
+    // evidence the key is absent from DEFAULT_SIMULATION_RULES and from every preset spread.
+    // A key that had leaked into either would have moved `governed` and the sum would still
+    // have closed — so the lockstep, not the sum, is the assertion doing the work.
+    expect(census.virtual.length).toBe(28);
     expect(census.overlap).toEqual([]);
-    expect(census.union.length).toBe(84);
+    expect(census.union.length).toBe(85);
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
     // rises with the virtual arm by construction: a virtual key is never governed.
-    expect(census.union.length - census.governed.length).toBe(59);
+    expect(census.union.length - census.governed.length).toBe(60);
     expect(census.nonBoolean.length).toBe(13);
   });
 

@@ -89,4 +89,53 @@ export const SEAT_SUBSYSTEM_ROWS = Object.freeze([
     // first moves a decision that receipts.
     soakEvidence: 'unobserved',
   }),
+  Object.freeze({
+    rule: 'legitimacyUpheavalEnabled',
+    title: 'Legitimacy-scaled upheaval (how brittle THIS kind of seat is to THIS kind of decline)',
+    module: 'src/domain/worldPulse/stressorGates.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: this key mints no `candidateType`. It scales the PROBABILITY of
+      // candidate families that already exist (coup_detat, rebellion, insurgency), so its lit
+      // difference is a different roll on the same vocabulary, never a new candidate.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY, and a commitment rather than an omission: this car mints ZERO
+      // news kinds. Declaring a mover family here would grade this row ALIVE off another
+      // lane's beat — the recorded moverFamily hazard, and the sibling row above refuses it
+      // for the same reason.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, and it is this row's honest weakness: the upheaval scaling OWNS
+      // NO STATE. It is a pure read over the settlement's own governing archetype and its own
+      // legitimacy score, both of which other subsystems write; it holds no ledger, mints no
+      // id, and creates no key anywhere, lit or dark.
+      stateKeys: Object.freeze([]),
+      other: 'LEGITIMACY-SCALED UPHEAVAL: the owner directive (ODQ 736) that "any attempted coup or rebellion has a scaling factor according to the legitimacy of the ruling powers". ⛔ AND THE FIRST THING THIS CAR MEASURED IS THAT HALF OF IT WAS ALREADY WIRED, which changes what the key may honestly light. Every political spawn gate in stressorGates.js already carries legitimacy band rows - politicalFractureGate below 30 and below 45, rebellionGate below 30 and below 45, insurgencyGate below 30, criminalCorridorGate below 40 - and coupSpawnGate already multiplies by a band of its own. So the volume\'s "gate mult+reason rows scaled by the ruler\'s legitimacy band" would have been A SECOND RESOLVER FOR A QUANTITY THE GATES ALREADY ANSWER, which law 2.1 forbids, and a silent double-count besides: the same score would have moved the same probability twice through one product with no receipt saying so. WHAT WAS GENUINELY MISSING is the amendment\'s other half, the PER-ARCHETYPE SENSITIVITY, and it had no expression anywhere in the tree: an autocracy is brittle to a sudden crisis and a council to a long slow decline, and before this car a military junta and a town council faced identical odds at identical scores. THE TABLE IS A REDISTRIBUTION AND NOT AN INFLATION, and the suite asserts that property rather than the literals: for every archetype the crisis and decline multipliers straddle 1, so lighting this key cannot raise upheaval everywhere at once - it can only move WHICH seats are fragile WHEN. CRIMINAL is absent from the table by design and mirrors COUP_COERCION\'s own choice explicitly rather than by accident, because criminal factions are filtered out of contention at the contender step and a sensitivity for them would price a seat that can never be contested openly. THE BAND EDGES ARE THE GATES\' OWN 30 AND 45 RATHER THAN A MINTED DERIVATION: the estate already holds THREE copies of the legitimacy band table (rulingPower.js, timeProgression.js and generators/factionDynamics.js, the third deliberately unshared across the domain-to-generators boundary ratchet), and a fourth spelling here is exactly the 711.6 failure this family keeps refusing - one number, two units, every consumer internally consistent, nothing ever reds. THE OCCUPIED ARM REPLACES RATHER THAN STACKS, AND THAT IS ARITHMETIC RATHER THAN PREFERENCE (A2.2.6): insurgencyGate\'s two existing rows are 2.0 for occupation and 1.5 for a crisis score, whose product is EXACTLY 3.0, which is EXACTLY the file\'s GATE_MULT_MAX - so on the one cell D4 targets, an occupied town in legitimacy crisis, every additional stacked multiplier is arithmetically INVISIBLE and the entire occupied population sits pinned at one flat saturated value. Stacking there provably cannot express anything. The lit form replaces both rows with ONE resistance-scaled row spanning the same top, so a boiling occupation still saturates at 3.0 while a fresh conquest sits near 2.1 and the middle of the range exists again. THE SECOND REASON TO REPLACE IS A SIGN FIGHT THE AMENDMENT PREDICTED AND THIS CAR MEASURED: occupation resistance carries the settlement\'s live legitimacy at +0.3 weight, while every gate reads legitimacy INVERTED, so summing a resistance term with a legitimacy-deficit term makes the two inputs pull against each other inside one product - a town whose ruler is believed in would have had a low deficit and a high resistance cancelling, and nothing would have reddened. THE 30-TO-45 ROW insurgencyGate NEVER HAD IS DECIDED HERE, because D4\'s rows are chartered to decide it and the asymmetry with rebellionGate (which has always had both bands) was unexplained: a merely tolerated regime faces a WEAKER pull toward armed insurgency than toward rebellion, 1.2 against 1.3, because taking up arms is the harder of the two steps. AND THE SENSITIVITY IS CLAMPED AT EXACTLY ONE SITE, coupSpawnGate, on purpose: that gate is the only political gate in the file that does not compose through gateResult, so nothing in it runs through clampMult and its product is unbounded today. A new factor may not be the one that discovers that, so this car clamps its own contribution there and leaves the pre-existing unboundedness exactly as it found it, recorded rather than cured. WHAT THIS KEY DELIBERATELY DOES NOT LIGHT: the AFTERMATH half of D4. Its two legs were measured and each needs a coupling that does not exist yet - every coup mint severity in coup.js traces to ONE line that reads only stressor-intrinsic fields with a 0.3 floor, so scaling them is a genuinely new channel on five outcomes; and the reseed is keyed on CAUSE alone, with archetype reaching toGovernment, seatCategory, the government description and the transfer receipt but NEVER newScore, so the volume\'s "scaled by the same read" has no existing archetype channel into legitimacy at all. Both are recorded as owed with their measurements rather than half-built. WHAT IT NEVER DOES: no persisted state, no rng, no wall clock, no writes; the gates it touches keep their exact dark expressions, and every lit factor either multiplies by exactly 1 or is dropped from the composer entirely, so a dark run\'s probabilityMult is the pre-car arithmetic to the last bit AND its reasons array is the pre-car prose word for word. The lane is pinned at tests/domain/legitimacyUpheaval.test.js and tests/domain/legitimacyUpheavalDormancy.byteIdentity.test.js.',
+    }),
+    // The gates this key reaches run on every candidate stressor birth, so the cadence is
+    // the pulse's own — even though the lit difference is a different roll rather than a beat.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_the_pre_car_arithmetic_and_the_pre_car_prose',
+        description: 'With the key dark, `upheavalSensitivity` returns exactly 1 before it looks at the archetype at all, `sensitivityRow` returns false so the composer never sees it, and the occupied replacement is never constructed — so every gate returns the multiplier it returned before this commit AND the same reasons in the same order. The strict `=== true` read refuses every truthy non-true value, so a string "true" or a 1 lights nothing.',
+        check: 'Expressible from source and asserted that way, plus behaviourally in tests/domain/legitimacyUpheavalDormancy.byteIdentity.test.js: the same seeded world advanced the same ticks with the key absent and with it explicitly false, serialized with raw JSON.stringify and no normalizer, plus a truthy-refusal arm and a lit ANTI-VACUITY drive so a green cannot mean the instrument compared nothing.',
+      }),
+      Object.freeze({
+        name: 'the_table_redistributes_and_never_inflates',
+        description: 'For EVERY archetype in the sensitivity table the crisis and decline multipliers straddle 1 — one at or above it, one at or below — so lighting this key cannot raise the odds of upheaval everywhere at once. It moves which seats are fragile when, which is the directive\'s content; a table that only ever multiplied up would be a global difficulty knob wearing a design\'s clothes.',
+        check: 'Expressible from source and asserted that way in tests/domain/legitimacyUpheaval.test.js, over the WHOLE table rather than sampled rows, together with a totality arm pinning that the table\'s key set is the archetype roster minus CRIMINAL — so a new archetype cannot silently fall through to the OTHER row unnoticed.',
+      }),
+      Object.freeze({
+        name: 'the_occupied_arm_replaces_and_never_stacks',
+        description: 'Under a live occupation the lit insurgency gate composes exactly ONE row. The two dark rows (occupation 2.0 and crisis 1.5) multiply to exactly GATE_MULT_MAX, so any stacked term there is arithmetically invisible; and summing a resistance term with a legitimacy-deficit term would put two inputs that carry the same score with opposite signs into one product. Replacement is the only shape that can express anything on that cell.',
+        check: 'Expressible from source and asserted behaviourally in tests/domain/legitimacyUpheaval.test.js: the dark occupied+crisis cell is driven and measured at the clamp ceiling, the lit cell is driven across the resistance range and asserted to span rather than pin, and the lit row count is asserted to be one.',
+      }),
+    ]),
+    // No channel at all, so the row can never be graded ALIVE from a receipt and says so.
+    // UNOBSERVED for this lane's standing reason — the soak builds its rules from the
+    // full_simulation spread, which declares no virtual key — and for a second reason of
+    // its own: the lit behaviour at this car is a gate REFUSAL, which leaves no receipt
+    // row even on a lit run. The observation window belongs to SEAT-2a, where the seat
+    // first moves a decision that receipts.
+    soakEvidence: 'unobserved',
+  }),
 ]);
