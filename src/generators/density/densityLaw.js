@@ -4,8 +4,17 @@
  * VERSIONED GENERATION LAW … existing worlds keep their version verbatim; new
  * worlds roll the new ladder").
  *
- * THE IDIOM IS `layoutLawVersion`'s, deliberately and in every detail
- * (domain/townMap/mapEdits.js). The four properties copied verbatim, because
+ * THE IDIOM IS `layoutLawVersion`'s, deliberately and in every detail — the
+ * estate's one prior versioned-generation-law gate. Its reader is spelled
+ * `readLayoutLawVersion` (named again in property 2 below), and grepping that
+ * symbol is how a reader reaches it. ⚠ The module PATH is deliberately NOT
+ * spelled here, and that is a law rather than a style: ODQ §725 made the layout
+ * surface a separate module, and a terminal census holds its surviving
+ * vocabulary to a closed allowlist of retained surfaces. A generator citing that
+ * path would have to widen the allowlist for a provenance note — the exact
+ * direction the census exists to refuse. Naming the SYMBOL costs the reader
+ * nothing and the census nothing.
+ * The four properties are copied verbatim, because
  * each one is load-bearing under THE PROMISE ("a seed is a STARTING world
  * forever"):
  *

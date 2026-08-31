@@ -167,8 +167,20 @@ export const RIVAL_ROLL = Object.freeze({ base: 0.22, perGap: 0.55, cap: 0.88 })
  *   0  ⇒ power-blind (flat) — the spread-one-each end
  *   1  ⇒ strictly power-proportional (today's `factionTarget` behaviour)
  *   >1 ⇒ winner-takes-most — the all-in-one end
+ *
+ * ⛔ `halvings` IS NOT A TUNING TASTE — IT IS WHAT MAKES THE EXPONENT REPLAYABLE.
+ * The exponent is applied on a DYADIC LADDER of `1 << halvings` = 64 steps, because
+ * `Math.pow` is implementation-approximated per the ECMAScript spec: two engines may
+ * return different bits for the same power, and a same-seed world would then fork ACROSS
+ * ENGINES — which THE PROMISE ("a seed is a STARTING world forever") cannot survive.
+ * `Math.sqrt` is required CORRECTLY ROUNDED by that same spec and multiplication is
+ * exactly specified, so `x^(k/64)` reached by six halvings and a squaring chain is
+ * bit-identical everywhere. The tree's transcendental ratchet forbids the alternative
+ * outright and its declared-overrun ledger is monotone-down and full, so this is not a
+ * preference: it is the only lawful spelling. Raising `halvings` refines the ladder and
+ * costs one more sqrt; it never restores `Math.pow`.
  */
-export const CONCENTRATION = Object.freeze({ min: 0.0, max: 2.6 });
+export const CONCENTRATION = Object.freeze({ min: 0.0, max: 2.6, halvings: 6 });
 
 /**
  * §810.8 R24 — THE RESOLUTION CLOCK, in ticks. "A succession that never resolves is a

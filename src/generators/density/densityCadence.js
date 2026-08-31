@@ -67,6 +67,10 @@ import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { factionEnvelopeForTier, tierKey } from './densityBands.js';
 import { rollsRegisterVii } from './densityLaw.js';
 import { seatKey } from './applyDensityLaw.js';
+// ⚠ THE KERNEL'S CLAMP, NOT A LOCAL COPY (`tests/lint/clampPrimitiveBaseline.test.js`).
+// All three call sites below pass through `num` first, so the kernel's explicit non-finite
+// policy (⇒ 0) is unreachable here — a strictly safer floor, never a behaviour change.
+import { clamp01 } from '../../kernel/math.js';
 
 /** The three things an interval can do to the fabric. CLOSED. */
 export const CADENCE_STEPS = Object.freeze(['thicken', 'thin', 'at_band']);
@@ -79,7 +83,6 @@ export const CADENCE_REFUSALS = Object.freeze([
 ]);
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
-const clamp01 = v => (v < 0 ? 0 : v > 1 ? 1 : v);
 
 /**
  * R8's REPRESENTATION GAP for one unrepresented power, in 0..1.

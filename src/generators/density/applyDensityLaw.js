@@ -57,6 +57,11 @@ import { bandsForTier, tierKey } from './densityBands.js';
 import { rollsRegisterVii } from './densityLaw.js';
 import { RUNG_ROLE_FIELD } from './densityRungs.js';
 import { rollDensityPlan } from './densityRoll.js';
+// ⚠ THE KERNEL'S CLAMP, NOT A LOCAL COPY (`tests/lint/clampPrimitiveBaseline.test.js`).
+// All three call sites below are provably finite — two are `0.5 + 0.5 * <array length>`,
+// and the third sits behind an explicit `Number.isFinite` guard — so the kernel's non-finite
+// policy (⇒ 0) is unreachable here: a strictly safer floor, never a behaviour change.
+import { clamp01 } from '../../kernel/math.js';
 
 /** The stressor family that may lift the seat floor (§810.3 R13 / §810.5). ONE
  *  closed vocabulary serves birth and play; `succession_void` already exists in
@@ -72,7 +77,6 @@ export const MISSING_SEAT_STRESSORS = Object.freeze(['succession_void']);
 export const FLOOR_LIFT_CHANCE = 0.5;
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
-const clamp01 = v => (v < 0 ? 0 : v > 1 ? 1 : v);
 
 /** The stable key for a power seat — the display name, which is what
  *  `factionAffiliation`, `ladderFactionKey` and `npcInFaction` all join on.

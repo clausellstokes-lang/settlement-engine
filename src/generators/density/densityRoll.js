@@ -45,14 +45,60 @@ import {
   derivedRungOccupancy,
   importanceForRung,
 } from './densityRungs.js';
+// ⚠ THE KERNEL'S CLAMP, NOT A LOCAL COPY. `clamp01` had been hand-rolled ~70 times across
+// the engine with THREE divergent non-finite behaviours before `kernel/math.js` became the
+// one home, and `tests/lint/clampPrimitiveBaseline.test.js` forbids a new local copy. Every
+// value reaching it in this file is already finite — each of the five call sites passes
+// through `num` first, or through `Math.max(1e-9, …)` — so the kernel's explicit non-finite
+// policy (⇒ 0) is unreachable here and is a strictly safer floor, never a behaviour change.
+import { clamp01 } from '../../kernel/math.js';
 
 /** @typedef {{key: string, name?: string, category?: string, power?: number,
  *             isGoverning?: boolean, officeRoleKey?: string|null}} DensityPower */
 /** @typedef {{prosperity01?: number, connectivity01?: number, war01?: number,
  *             corruption01?: number}} DensityParticulars */
 
-const clamp01 = v => (v < 0 ? 0 : v > 1 ? 1 : v);
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
+
+/** The dyadic ladder the dispersal exponent is quantised onto: 1 << 6 = 64 steps. */
+const CONCENTRATION_STEPS = 1 << CONCENTRATION.halvings;
+
+/**
+ * `base ** (steps / CONCENTRATION_STEPS)` — computed with ONLY operations the
+ * ECMAScript spec pins to the bit.
+ *
+ * ⛔ WHY NOT `Math.pow`. `Math.pow` is implementation-APPROXIMATED: the spec permits
+ * each engine its own result, so the same seed can produce a different dispersal on a
+ * different engine — a same-seed fork across engines, which is exactly what THE PROMISE
+ * forbids. `Math.sqrt` is required CORRECTLY ROUNDED and `*` is exactly specified, so a
+ * chain of six halvings followed by exponentiation-by-squaring is bit-identical
+ * everywhere. `tests/lint/transcendentalMathBaseline.test.js` enforces this repo-wide;
+ * its declared-overrun ledger is monotone-down and at its ceiling, so reformulating was
+ * the only path open — and it is the better one regardless.
+ *
+ * The cost is RESOLUTION, not shape: the exponent lands on one of 167 rungs across
+ * [0, 2.6] instead of a continuum. §810.2 R10 asks that all-in-the-ruling-power,
+ * spread-one-each "and everything between" stay reachable, and 167 rungs is a continuum
+ * as far as a weighted deal over a settlement's named mass can tell.
+ *
+ * @param {number} base ≥ 1e-6 by construction at the one call site
+ * @param {number} steps integer rungs on the 1/64 ladder, ≥ 0
+ * @returns {number}
+ */
+function powBySteps(base, steps) {
+  if (steps <= 0) return 1;
+  let root = base;
+  for (let i = 0; i < CONCENTRATION.halvings; i += 1) root = Math.sqrt(root);
+  let out = 1;
+  let acc = root;
+  let e = steps;
+  while (e > 0) {
+    if (e % 2 === 1) out *= acc;
+    acc *= acc;
+    e = Math.floor(e / 2);
+  }
+  return out;
+}
 
 /**
  * A seeded roll inside a hard band, tilted by the settlement's particulars.
@@ -269,7 +315,11 @@ export function disperseMass(rng, seated, mass, concentration, suite, seatFloorK
   }
 
   // 3. Deal the rest by weight, honouring the suite ceiling while it can.
-  const weightOf = p => Math.pow(Math.max(num(p.power, 1), 1e-6), concentration);
+  // The exponent is quantised onto the dyadic ladder ONCE, outside the deal, so every
+  // unit in one settlement is weighted by the same rung. See `powBySteps`: this is a
+  // cross-engine replayability requirement, not a rounding convenience.
+  const steps = Math.max(0, Math.round(num(concentration, 0) * CONCENTRATION_STEPS));
+  const weightOf = p => powBySteps(Math.max(num(p.power, 1), 1e-6), steps);
   const cap = Math.max(1, Math.round(num(suite?.max, 3)));
   while (remaining > 0) {
     let pool = seated.filter(p => (counts.get(p.key) || 0) < cap);

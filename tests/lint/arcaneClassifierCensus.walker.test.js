@@ -190,7 +190,14 @@ const KNOWN_UNCONVERTED = Object.freeze({
   // byte-identical; 93e7ed50 added one import at line 23 and pushed the table down a
   // line. Address rot, not a new site — re-freezing here would have banked a wrong
   // address, and deleting the row would have re-presented the same pattern as new.
-  'src/generators/factionRoles.js:58':
+  // RE-POINTED AGAIN 58 → 59 on 2026-08-31 (TE-DENSITY-1 landing), for the SAME cause
+  // and verified the same way: the pattern text is byte-identical to the target's, and
+  // D1's car added exactly one import (`rollsRegisterVii`, line 25) above the table.
+  // ⚠ Both arms of this census fired on the one-line move — "a NEW classifier at :59"
+  // and "the recorded site is no longer at :58" — which is the walker working: a
+  // line-addressed register cannot tell a move from a birth without being told, and
+  // being told is cheaper than the alternative. Third address re-point on this row.
+  'src/generators/factionRoles.js:59':
     'CONTEXTUALLY SCOPED, not the class. The Archmagister\'s `linkToInst` runs only INSIDE the already-classified `arcane:` bucket, so tower|academy|college is searching an arcane faction\'s own building, not deciding whether one is arcane. Listed for completeness so a future audit does not re-find it as a defect.',
   'src/generators/isolationGenerator.js:97':
     'CONTEXTUALLY SCOPED, not the class. "Does this settlement already have an arcane maintainer?" runs inside the magic-forcing arm and searches the Magic-category catalog, where "academy" means "Academy of magic".',

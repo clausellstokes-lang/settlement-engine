@@ -656,7 +656,14 @@ describe('end to end — the law through the real pipeline', () => {
     // re-orders the final roster by a relevance score (faction power + role
     // bonus), so index 0 of the SHIPPED settlement is a presentation order, not
     // the generation order the seating actually reads.
+    // seed-loop: collected — the two arms below COLLECT and assert once, outside the
+    // loop. An inline `expect` stops at the first failing seed, so its failure count is
+    // a lower bound and every later seed goes unrun; this control's whole value is the
+    // COMPLETE list of seeds where a head of government was moved, because one stray
+    // seed and forty stray seeds are different diagnoses of the same red.
     const HEAD_OF_GOVERNMENT = /\b(mayor|governor|elder|reeve)\b/i;
+    /** @type {string[]} */ const unseated = [];
+    /** @type {string[]} */ const moved = [];
     let checked = 0;
     for (const tier of TIER_ORDER) {
       for (let i = 0; i < E2E_SEEDS; i += 1) {
@@ -666,15 +673,21 @@ describe('end to end — the law through the real pipeline', () => {
         const gov1 = (v1.powerStructure?.factions || []).find(f => f.isGoverning);
         const gov2 = (v2.powerStructure?.factions || []).find(f => f.isGoverning);
         // R14: the density roll never unseats the government.
-        expect(gov1?.faction).toBe(gov2?.faction);
+        if (gov1?.faction !== gov2?.faction) {
+          unseated.push(`${seed}: v1 governed by ${String(gov1?.faction)}, v2 by ${String(gov2?.faction)}`);
+        }
         const leader1 = v1.npcs.find(n => HEAD_OF_GOVERNMENT.test(String(n.role || '')));
         if (!leader1 || leader1.factionAffiliation !== gov1?.faction) continue;
         const leader2 = v2.npcs.find(n => n.role === leader1.role);
         if (!leader2) continue; // the mass band may not have room for this role
         checked += 1;
-        expect(leader2.factionAffiliation).toBe(gov2?.faction);
+        if (leader2.factionAffiliation !== gov2?.faction) {
+          moved.push(`${seed}: ${String(leader1.role)} sits in ${String(leader2.factionAffiliation)}, government is ${String(gov2?.faction)}`);
+        }
       }
     }
+    expect(unseated, 'R14: the density roll unseated the government on these seeds').toEqual([]);
+    expect(moved, 'the law moved a head of government out of the governing house on these seeds').toEqual([]);
     expect(checked).toBeGreaterThan(0);
   });
 });
