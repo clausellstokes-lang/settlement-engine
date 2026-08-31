@@ -160,6 +160,41 @@ export const NPC_GOAL_NEWS = Object.freeze({
 });
 
 // ════════════════════════════════════════════════════════════════════════════════════
+// NPC CANDIDATE BANDS (T8, ODQ §774.2 — the metronome cure). Law 3 of this module,
+// applied to the one agency reason that was still printing engine scalars: the candidate
+// receipt said `Pressure gate 0.62, ambition 0.41.` A per-tick jittering float made every
+// re-emission a different STRING, so `isMetronomeRepeat` — the six-tick de-duplicator
+// built to stop exactly this repetition — could never fire on the family. Banding is what
+// lets it fire, which is the whole point of the ruling.
+//
+// TWO BANDS EACH, so the sentence has FOUR fixed spellings. Both cuts sit INSIDE the live
+// range, which is narrower than 0..1 because `npcAgency`'s own gate refuses a candidate
+// below them: pressure reaches here only at ≥ 0.34 (dotRank ≥ 3) or ≥ 0.42, and ambition
+// only at ≥ 0.42. A ladder cut at, say, 0.25 would have a permanently dead rung.
+// ════════════════════════════════════════════════════════════════════════════════════
+
+/** The pressure cut. Above it the gate was cleared comfortably; at or below, only just. */
+export const NPC_PRESSURE_BAND_CUT = 0.66;
+/** The ambition cut. Both bands are reachable: the gate admits ambition from 0.42 up. */
+export const NPC_AMBITION_BAND_CUT = 0.7;
+
+/**
+ * How far past its gate the candidate's pressure sat, in world words.
+ * @param {number} pressure 0..1 @returns {string}
+ */
+export function npcPressureWord(pressure) {
+  return Number(pressure) >= NPC_PRESSURE_BAND_CUT ? 'well clear of' : 'barely over';
+}
+
+/**
+ * How hard the candidate is pushing, in world words.
+ * @param {number} ambition 0..1 @returns {string}
+ */
+export function npcAmbitionWord(ambition) {
+  return Number(ambition) >= NPC_AMBITION_BAND_CUT ? 'hungry' : 'steady';
+}
+
+// ════════════════════════════════════════════════════════════════════════════════════
 // CALAMITY (CRITICAL — bucket-neutral by constitution). Title keeps "Great Calamity"
 // + name + year; summary/reasons never assert a kind and speak the bucket.
 // ════════════════════════════════════════════════════════════════════════════════════

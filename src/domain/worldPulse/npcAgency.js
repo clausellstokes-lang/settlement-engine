@@ -16,7 +16,7 @@ import { resolveLeash } from '../corruptionLeash.js';
 import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
 // H17: per-advance indices replacing evaluateNpcRules' O(states × (settlements + edges)) rescan.
 import { settlementByIdIndex, edgeAdjacencyIndex } from './tickIndices.js';
-import { NPC_GOAL_NEWS, pickLine } from './eventProse.js';
+import { NPC_GOAL_NEWS, npcAmbitionWord, npcPressureWord, pickLine } from './eventProse.js';
 import { branchedGoalsFor } from './npcGoalBranches.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
@@ -880,7 +880,7 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     summary: `${state.name}'s ${state.shortGoal.replace(/_/g, ' ')} goal can advance through ${actionPhrase}.`,
     reasons: [
       `${state.roleArchetype.replace(/_/g, ' ')} role favors ${actionFamily.replace(/_/g, ' ')}.`,
-      `Pressure gate ${pressure.toFixed(2)}, ambition ${state.ambition.toFixed(2)}.`,
+      `Pressure sat ${npcPressureWord(pressure)} the gate, and the ambition behind it is ${npcAmbitionWord(state.ambition)}.`,
       state.corruption ? `Rare corrupted ${state.ideal.replace(/_/g, ' ')} ideal modifies behavior.` : `Ideal: ${state.ideal.replace(/_/g, ' ')}.`,
     ],
     npcPatch: {

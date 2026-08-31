@@ -12,6 +12,7 @@ import {
   warReceipt, peaceReceipt, hegemonyReceipt,
   WAR_RECEIPTS, PEACE_RECEIPTS,
   EVENT_PROSE_REGISTRY, FORBIDDEN_CALAMITY_KINDS,
+  NPC_AMBITION_BAND_CUT, NPC_PRESSURE_BAND_CUT, npcAmbitionWord, npcPressureWord,
 } from '../../src/domain/worldPulse/eventProse.js';
 import {
   fnv1a32 as leafFnv1a32,
@@ -242,5 +243,70 @@ describe('the selection kernel is a RE-HOME, not a copy (WEAVE NAME-1)', () => {
     expect(leafFnv1a32('')).toBe(0x811c9dc5);
     expect(leafFnv1a32('a')).toBe(0xe40c292c);
     expect(leafFnv1a32('foobar')).toBe(0xbf9cf968);
+  });
+});
+
+describe('NPC candidate bands — the metronome cure (ODQ §774.2)', () => {
+  // These bands exist so `isMetronomeRepeat` can fire. A band nobody can reach would make
+  // the sentence effectively single-valued and defeat the guard a second way, so the arms
+  // below prove reachability INSIDE the gate's live range rather than over a nominal 0..1.
+  // npcAgency admits a candidate only at pressure >= 0.34 (dotRank >= 3) or >= 0.42, and
+  // ambition >= 0.42 — see the gate in candidateForAction's caller.
+  const PRESSURE_FLOOR = 0.34;
+  const AMBITION_FLOOR = 0.42;
+
+  it('both cuts sit strictly inside the live range, so neither band is dead on arrival', () => {
+    expect(NPC_PRESSURE_BAND_CUT).toBeGreaterThan(PRESSURE_FLOOR);
+    expect(NPC_PRESSURE_BAND_CUT).toBeLessThan(1);
+    expect(NPC_AMBITION_BAND_CUT).toBeGreaterThan(AMBITION_FLOOR);
+    expect(NPC_AMBITION_BAND_CUT).toBeLessThan(1);
+  });
+
+  it('all FOUR sentences are reachable by values the gate actually admits', () => {
+    const pressures = [];
+    const ambitions = [];
+    for (let i = 0; i <= 100; i += 1) {
+      pressures.push(PRESSURE_FLOOR + (1 - PRESSURE_FLOOR) * (i / 100));
+      ambitions.push(AMBITION_FLOOR + (1 - AMBITION_FLOOR) * (i / 100));
+    }
+    const spellings = new Set();
+    for (const p of pressures) {
+      for (const a of ambitions) {
+        spellings.add(`Pressure sat ${npcPressureWord(p)} the gate, and the ambition behind it is ${npcAmbitionWord(a)}.`);
+      }
+    }
+    expect(spellings.size).toBe(4);
+    // ANTI-VACUITY: the sweep must reach both rungs of BOTH ladders, or "4" could be two
+    // ladders' worth of one word each crossed with a live one.
+    expect(new Set(pressures.map(npcPressureWord)).size).toBe(2);
+    expect(new Set(ambitions.map(npcAmbitionWord)).size).toBe(2);
+  });
+
+  it('the sentence carries no numeral — this is what the prose-numerics ratchet convicted', () => {
+    for (const p of [0.34, 0.5, 0.66, 0.99, 1]) {
+      for (const a of [0.42, 0.6, 0.7, 0.95, 1]) {
+        const line = `Pressure sat ${npcPressureWord(p)} the gate, and the ambition behind it is ${npcAmbitionWord(a)}.`;
+        // The subject is a literal built in this test body from both band readers, and the
+        // toContain below proves it live: an empty or thrown reader reds there before the
+        // negative is reached, so the negative cannot outlive its own collection.
+        expect(line).toContain('Pressure sat ');
+        // anchored: the toContain on the line above is this negative's liveness proof.
+        expect(line, `${p}/${a} rendered a digit`).not.toMatch(/\d/);
+      }
+    }
+  });
+
+  it('TOTAL over junk: a missing or malformed scalar still yields a word, never NaN', () => {
+    for (const junk of [undefined, null, '', NaN, 'x', {}, []]) {
+      expect(typeof npcPressureWord(/** @type {any} */ (junk))).toBe('string');
+      expect(typeof npcAmbitionWord(/** @type {any} */ (junk))).toBe('string');
+    }
+  });
+
+  it('the band is monotone: a higher scalar never reads as the weaker word', () => {
+    expect(npcPressureWord(NPC_PRESSURE_BAND_CUT)).toBe(npcPressureWord(1));
+    expect(npcPressureWord(NPC_PRESSURE_BAND_CUT - 0.01)).toBe(npcPressureWord(PRESSURE_FLOOR));
+    expect(npcAmbitionWord(NPC_AMBITION_BAND_CUT)).toBe(npcAmbitionWord(1));
+    expect(npcAmbitionWord(NPC_AMBITION_BAND_CUT - 0.01)).toBe(npcAmbitionWord(AMBITION_FLOOR));
   });
 });
