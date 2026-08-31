@@ -63,6 +63,30 @@ import {
 export const GENESIS_LINK_SOURCE = 'genesis_diplomacy';
 
 /**
+ * One record on a member's neighbour plane. Deliberately an OPEN record rather than this
+ * module's own entry shape: the array a genesis tie joins already carries links minted by
+ * the hand-chartered route and by channel discovery, and narrowing it here would be a
+ * claim about THEIR bytes that this module has no standing to make.
+ * @typedef {Record<string, unknown>} NeighbourLink
+ */
+
+/**
+ * The settlement half of a composed member save — only the keys this module reads or
+ * writes. `neighbourNetwork` is absent on a member with no ties, and that absence is the
+ * dormancy claim, so it is optional rather than defaulted.
+ * @typedef {{ name?: string, tier?: string|null,
+ *   neighbourNetwork?: NeighbourLink[] }} GenesisMemberSettlement
+ */
+
+/**
+ * A composed member save as the materializer sees it: the id every downstream consumer
+ * matches on, the authored ladder fields the faction de-dup pass may have rewritten, the
+ * slot the plan addressed it by, and the settlement it wraps.
+ * @typedef {{ id?: string, name?: string, tier?: string|null, _slot?: number,
+ *   settlement?: GenesisMemberSettlement }} GenesisMemberSave
+ */
+
+/**
  * The closed selection vocabulary a genesis tie may be drawn from — the estate's
  * existing picker roster, not a new one (D6: "types drawn ONLY from the existing
  * closed vocabularies"). Deriving it from RELATIONSHIP_SELECTIONS rather than
@@ -186,7 +210,7 @@ const TIER_RANK = Object.freeze({
  * already exist.
  *
  * @param {Array<{ slot: number, tier: string }>} sites the plan's sites, in slot order
- * @param {{ chance: (p:number)=>boolean, pick: (a:any[])=>any }} rng a forked stream
+ * @param {{ chance: (p:number)=>boolean, pick: <T>(a:T[])=>T }} rng a forked stream
  * @returns {Array<{ a: number, b: number, type: string, cause: string }>}
  */
 export function assignGenesisRelations(sites, rng) {
@@ -194,7 +218,7 @@ export function assignGenesisRelations(sites, rng) {
   if (list.length < 2) return [];
   const MAX_TIES_PER_SEAT = 2;
 
-  const rankOf = (/** @type {any} */ s) => (TIER_RANK[String(s?.tier)] ?? 0);
+  const rankOf = (/** @type {{ tier?: string }} */ s) => (TIER_RANK[String(s?.tier)] ?? 0);
   const ties = /** @type {Array<{a:number,b:number,type:string,cause:string}>} */ ([]);
   const tieCount = new Map();
   const hasOverlord = new Set();
@@ -261,7 +285,7 @@ export function assignGenesisRelations(sites, rng) {
  * looking like a feature. The receipt makes every refusal countable by a caller.
  *
  * @param {{
- *   settlements: Array<{ id: string, name?: string, tier?: string, _slot?: number, settlement?: any }>,
+ *   settlements: Array<GenesisMemberSave & { id: string }>,
  *   relations?: Array<{ a: number, b: number, type: string, cause: string }> | null,
  * }} input
  * @returns {{ linked: number, refusedUnknownSlot: number, refusedSelfPair: number,
@@ -335,9 +359,9 @@ export function materializeGenesisRelations({ settlements, relations }) {
   return receipt;
 }
 
-/** @param {any} save */
+/** @param {GenesisMemberSave} save */
 function nameOf(save) { return String(save?.settlement?.name || save?.name || ''); }
-/** @param {any} save */
+/** @param {GenesisMemberSave} save */
 function tierOf(save) { return save?.settlement?.tier || save?.tier || null; }
 
 /**
@@ -345,8 +369,8 @@ function tierOf(save) { return save?.settlement?.tier || save?.tier || null; }
  * tie actually exists. A member with no founding ties keeps no `neighbourNetwork`
  * key at all, so its bytes are unchanged from a realm composed before this module
  * existed — the absent-when-dark discipline applied per MEMBER, not merely per realm.
- * @param {any} save
- * @param {any} entry
+ * @param {GenesisMemberSave} save
+ * @param {NeighbourLink} entry
  */
 function appendLink(save, entry) {
   const settlement = save.settlement;

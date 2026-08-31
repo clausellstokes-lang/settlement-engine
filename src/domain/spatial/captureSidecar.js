@@ -58,6 +58,39 @@ export const SIDECAR_VERDICTS = Object.freeze({
   UNREADABLE: 'geometry_unreadable',
 });
 
+/**
+ * One cell centroid, in EITHER of the two spellings a pack may carry: the `[x, y]` pair
+ * the raw FMG pack uses, or the `{ x, y }` record the normalized pack carries. Both are
+ * read, and a missing entry is tolerated rather than refused — a stamp over a sparse
+ * array is still a stamp, it simply hashes the gap.
+ * @typedef {[number, number] | { x?: number, y?: number } | null | undefined} CellPoint
+ */
+
+/**
+ * A captured pack as this module reads it — raw or normalized, and only the keys the
+ * stamp actually touches. Everything is optional because `buildCaptureSidecar` answers
+ * "unreadable" rather than throwing on a pack that carries none of them.
+ * @typedef {{ cellCount?:number, p?:ArrayLike<CellPoint>, h?:ArrayLike<number>,
+ *   cells?:{ p?:ArrayLike<CellPoint>, h?:ArrayLike<number> } }} CapturedPack
+ */
+
+/**
+ * The stamp itself. The four leading fields are REQUIRED because `buildCaptureSidecar`
+ * always writes all four; the frame fields are additive-when-known (a key that is absent
+ * means "not observed", never "observed as nothing").
+ * @typedef {{ version:number, cellCount:number, positionHash:string|null,
+ *   heightHash:string|null, graphWidth?:number, graphHeight?:number,
+ *   mapSeed?:string, mapKind?:string }} CaptureSidecar
+ */
+
+/**
+ * What a comparison OBSERVED, for a reader who wants the numbers behind the verdict
+ * rather than the verdict alone. Both halves are optional: the version doors return
+ * before any field is read, so their detail is legitimately empty.
+ * @typedef {{ cellCount?:{ stored:number, current:number },
+ *   positionHash?:{ stored:string|null, current:string|null } }} SidecarComparisonDetail
+ */
+
 /** 8-hex FNV-1a-32 of a string. */
 const hex = (/** @type {string} */ s) => fnv1a32(s).toString(16).padStart(8, '0');
 
@@ -84,7 +117,7 @@ function hashCells(arr, count) {
  * Hash the cell CENTROIDS — the geometry a stored coordinate actually resolves against.
  * `cells.p` is an array of [x, y] pairs; both halves participate, because a pack whose
  * points moved only in y would otherwise stamp identically to one that never moved.
- * @param {ArrayLike<any>|null|undefined} points
+ * @param {ArrayLike<CellPoint>|null|undefined} points
  * @param {number} count
  */
 function hashPoints(points, count) {
@@ -102,21 +135,19 @@ function hashPoints(points, count) {
 /**
  * Build the provenance stamp for a captured pack.
  *
- * @param {{ cellCount?:number, p?:ArrayLike<any>, cells?:{ p?:ArrayLike<any>, h?:ArrayLike<number> }, h?:ArrayLike<number> }} pack
- *        a captured pack, raw or normalized — both shapes are read
+ * @param {CapturedPack|null|undefined} pack a captured pack, raw or normalized — both
+ *        shapes are read, and an absent one is answered rather than refused
  * @param {{ graphWidth?:number, graphHeight?:number, mapSeed?:string, mapKind?:string }} [frame]
  *        the coordinate frame and map plan, when the caller can observe them. TOLERATED
  *        ABSENT (the CAP-1 posture A1.2.10 names): a stamp without them is still a valid
  *        stamp, it simply answers fewer questions.
- * @returns {{ version:number, cellCount:number, positionHash:string|null,
- *   heightHash:string|null, graphWidth?:number, graphHeight?:number,
- *   mapSeed?:string, mapKind?:string } | null} null when the pack is unreadable
+ * @returns {CaptureSidecar | null} null when the pack is unreadable
  */
 export function buildCaptureSidecar(pack, frame = {}) {
   const points = pack?.cells?.p ?? pack?.p;
   const heights = pack?.cells?.h ?? pack?.h;
-  const count = Number.isFinite(pack?.cellCount) && Number(pack.cellCount) > 0
-    ? Number(pack.cellCount)
+  const count = Number.isFinite(pack?.cellCount) && Number(pack?.cellCount) > 0
+    ? Number(pack?.cellCount)
     : (heights?.length || points?.length || 0);
   if (!count) return null;
   return {
@@ -136,10 +167,10 @@ export function buildCaptureSidecar(pack, frame = {}) {
 /**
  * Compare a STORED stamp against the pack now in hand.
  *
- * @param {any} stored the sidecar frozen with the canon (or null/absent)
- * @param {any} pack the pack being captured now
+ * @param {CaptureSidecar|null|undefined} stored the sidecar frozen with the canon (or absent)
+ * @param {CapturedPack|null|undefined} pack the pack being captured now
  * @returns {{ verdict:string, storedVersion:number|null, matched:boolean,
- *   detail:{ cellCount?:{stored:number, current:number}, positionHash?:{stored:string|null, current:string|null} } }}
+ *   detail:SidecarComparisonDetail }}
  */
 export function compareCaptureSidecar(stored, pack) {
   // `storedVersion` is annotated rather than left to inference: a `= null` default infers
@@ -148,7 +179,7 @@ export function compareCaptureSidecar(stored, pack) {
   const none = (
     /** @type {string} */ verdict,
     /** @type {number|null} */ storedVersion = null,
-    /** @type {any} */ detail = {},
+    /** @type {SidecarComparisonDetail} */ detail = {},
   ) => (
     { verdict, storedVersion, matched: false, detail }
   );
