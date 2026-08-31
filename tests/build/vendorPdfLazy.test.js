@@ -468,7 +468,14 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // ~85 B house margin: tightening it is the composite-gate/owner move the C5 note
 // reserves, and this margin is what the remaining build waves' honest registration
 // costs have to spend. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_BUDGET_BYTES = 1_040_000;
+// RAISE 1,040,000 -> 1,042,000 (OWNER-RATIFIED 2026-08-31, the DENS landing): the
+// TE-DENSITY-1 consist is the declared cost — the density pulse seam and its shared
+// vocabulary leaves (domain/density/*, eager engine-core members by the ESD
+// derivation) spent the reserved margin exactly as this note anticipated honest
+// registration costs would. MEASURED at the ratification: 1,041,284 across the
+// closure, T12's tip green on this row, so the whole delta is the train's own.
+// Monotone-down and owner-signed discipline unchanged.
+const CLOSURE_BUDGET_BYTES = 1_042_000;
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -640,8 +647,14 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // first-paint closure IMPROVED over this lane, and the closure budget
     // above is the guard that proves it. The growth is the 26 new
     // generation-critical-path modules the generation remediation added.
+    // CEILING RAISE 673_000 -> 676_000 (OWNER-RATIFIED 2026-08-31, the DENS
+    // landing): measured 675,323. The "something eager re-merged" diagnosis does
+    // NOT apply — nothing re-merged; the TE-DENSITY-1 consist added ~700 effective
+    // lines of genuinely new generation code (densityRoll, applyDensityLaw,
+    // densityAscension, successionGrammar, titularSuccession) to the lazy engine,
+    // where generation code belongs. T12's tip was green on this row.
     expect(size).toBeGreaterThan(300_000);
-    expect(size).toBeLessThan(673_000);
+    expect(size).toBeLessThan(676_000);
   });
 
   // ── The affordance manifest stays a LAZY LEAF (Composer V2 §2) ───────────
