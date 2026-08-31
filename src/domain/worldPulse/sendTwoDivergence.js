@@ -44,9 +44,24 @@ export const VOLUNTEER_LOYALTY_BANDS = Object.freeze(['suspect', 'uncertain', 'p
 /** Known ties to a foreign patron. Closed; `none` is an absence, not a silence. */
 export const VOLUNTEER_TIE_BANDS = Object.freeze(['none', 'known', 'close']);
 
-/** Why a volunteer was refused or accepted. Closed. */
+/** What the seat's own reading of a man's CHARACTER says, per W-LIVES L5's
+ *  `characterConsumers.vettingTemperBand`. Closed, and MIRRORED not imported: this
+ *  leaf's import reach is pinned to `['./envoyTestimony.js']` by the K3 purity
+ *  walker, and reaching into the character stack for three words would break a
+ *  guarantee worth more than the import. The reconcile pin asserts the equality.
+ *  @type {readonly string[]} */
+export const VETTING_TEMPER_BANDS = Object.freeze(['self_serving', 'ordinary', 'dutiful']);
+
+/**
+ * Why a volunteer was refused or accepted. Closed.
+ *
+ * ⭐ W-LIVES L5 adds `temper` — the ⟨F8⟩ character input §4 asks for. It is APPENDED
+ * rather than inserted, because this roster is read positionally by kind-pool
+ * instruments and an ordinal seat-theft is how a single-row resolver silently starts
+ * returning a different answer (§864's own lesson, paid once already).
+ */
 export const VETTING_BASES = Object.freeze([
-  'loyalty', 'foreign_tie', 'no_time_to_look', 'nothing_found',
+  'loyalty', 'foreign_tie', 'no_time_to_look', 'nothing_found', 'temper',
 ]);
 
 /** @param {unknown} value @returns {Record<string, unknown>} */
@@ -182,6 +197,7 @@ export function vetVolunteerEnvoy({ quality, volunteer } = {}) {
   const foreignTieBand = closedValue(row.foreignTieBand, VOLUNTEER_TIE_BANDS);
   if (!care) return refusal('invalid_quality');
   if (!npcId || !loyaltyBand || !foreignTieBand) return refusal('invalid_volunteer');
+  const temperBand = closedValue(row.temperBand, VETTING_TEMPER_BANDS);
   if (care === 'hurried') {
     // The court does not look. Nothing about the man changes; only whether
     // anybody read him before handing him the realm's true picture.
@@ -194,6 +210,21 @@ export function vetVolunteerEnvoy({ quality, volunteer } = {}) {
   }
   if (loyaltyBand === 'suspect') {
     return { accepted: false, quality: care, basis: 'loyalty', reason: 'vetted' };
+  }
+  // ⭐ W-LIVES L5 — THE CHARACTER TERM, AND IT SITS LAST ON PURPOSE. §4 wants
+  // effective temperament to enter this reader as an INPUT TERM, not to become the
+  // reader: the seat's own RECORDS still decide first, and a man the records damn is
+  // refused on the records. Character only speaks about a man the paperwork clears.
+  //
+  // ⚠ AND IT IS THE **KNOWN** CHART, never the true one. §12 R2 makes a court a
+  // MORTAL consumer — men know reputations — which is exactly what makes a well-run
+  // treachery read `dutiful` here, the property this module's own header insists on.
+  // The caller derives the band through `characterConsumers.vettingTemperBand` over
+  // `knownCharacter.characterAsSeenBy({ viewer: 'mortal' })`.
+  //
+  // ABSENT ⇒ '' ⇒ this arm cannot fire, which is every caller today.
+  if (temperBand === 'self_serving') {
+    return { accepted: false, quality: care, basis: 'temper', reason: 'vetted' };
   }
   return { accepted: true, quality: care, basis: 'nothing_found', reason: 'vetted' };
 }

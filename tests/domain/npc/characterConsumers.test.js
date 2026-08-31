@@ -15,13 +15,14 @@
  *
  * @enforced-by this test
  */
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 import {
   CORRUPTIBLE_AXES,
+  CORRUPTIBLE_AXIS_VECTORS,
   CORRUPTION_DEPTH_GATE,
   CONSUMER_SEAM_PROVENANCE,
   MAX_RISK_BREADTH,
@@ -35,6 +36,7 @@ import {
   VETTING_TEMPER_BANDS,
   alignmentWord,
   corruptibleAxisByDepth,
+  corruptionVectorByDepth,
   derivedAlignment,
   effectiveAxesOf,
   effectiveDescriptors,
@@ -42,6 +44,8 @@ import {
   vettingTemperBand,
 } from '../../../src/domain/npc/characterConsumers.js';
 import { NPC_ALIGNMENTS } from '../../../src/domain/npc/npcFacetContract.js';
+import { CORRUPTION_VECTORS, corruptibility, npcCorruptibleFlaw, npcCorruptibleVector }
+  from '../../../src/domain/corruption.js';
 import { npcTraitPlane, readClergyPlane, targetedFootholds } from '../../../src/domain/worldPulse/clergyTraitPlane.js';
 import { flawDistortion } from '../../../src/domain/worldPulse/espionage/espionageTap.js';
 import { buildPersonaSlice } from '../../../src/domain/ai/personaSlicer.js';
@@ -513,5 +517,206 @@ describe('THE RE-ROUTES — three ways each, because sameness alone proves nothi
     const slice = buildPersonaSlice({ entity, entityClass: 'npc', lens: LIT_LENS });
     const row = slice.facets.find((f) => f.manifestKey === 'alignment');
     expect(/** @type {any} */ (row?.data)?.alignment).toBe('neutral_evil');
+  });
+});
+
+
+describe('THE DEPTH GATE, END TO END — additive, dark-safe, and two vocabularies apart', () => {
+  const DEEP_MERCY = { character: { axes: { MERCY: { pole: 'vice', level: 'defining' } } } };
+  const DEEP_COURAGE = { character: { axes: { COURAGE: { pole: 'vice', level: 'defining' } } } };
+
+  test('the axis map speaks VECTORS, and every one is a member of the engine\'s own set', () => {
+    expect(Object.keys(CORRUPTIBLE_AXIS_VECTORS).sort()).toEqual([...CORRUPTIBLE_AXES]);
+    for (const [axisId, vector] of Object.entries(CORRUPTIBLE_AXIS_VECTORS)) {
+      expect(CORRUPTION_VECTORS, axisId).toContain(vector);
+    }
+  });
+
+  test('a deep drifted vice hands corruption.js a VECTOR it can act on', () => {
+    expect(corruptionVectorByDepth({ npc: DEEP_MERCY })).toBe('greed');
+    expect(corruptionVectorByDepth({ npc: DEEP_COURAGE })).toBe('fear');
+    expect(corruptionVectorByDepth({ npc: PLAIN_NPC })).toBe(null);
+  });
+
+  test('⚠ THE TWO VOCABULARIES: a fear-drifted soul is NOT recorded as greedy', () => {
+    // The trap this pin exists for: `corruptionVectorForFlaw` DEFAULTS an unmapped
+    // word to `greed`, so a vector routed through the flaw reader would have made
+    // every drifted door a greed door. The vector arm is validated, not defaulted.
+    const steady = { personality: { dominant: 'patient' } };
+    expect(npcCorruptibleVector(steady, corruptionVectorByDepth({ npc: DEEP_COURAGE }))).toBe('fear');
+    expect(npcCorruptibleVector(steady, 'not_a_vector')).toBe(null);
+  });
+
+  test('⭐ ADDITIVE, NEVER SUBTRACTIVE — a corruptible man stays corruptible', () => {
+    const greedy = { personality: { flaw: 'greedy' } };
+    expect(npcCorruptibleFlaw(greedy)).toBe('greedy');
+    // No drifted door, a wrong one, and a real one all leave him eligible.
+    for (const arg of [undefined, null, 'fear', 'greed']) {
+      expect(npcCorruptibleVector(greedy, arg), String(arg)).toBe('greed');
+      expect(corruptibility(greedy, arg), String(arg)).toBeGreaterThan(0);
+    }
+  });
+
+  test('⭐ AND THE ARC RUNS FORWARD: a steady soul becomes reachable only through DEPTH', () => {
+    const steady = { personality: { dominant: 'patient' } };
+    expect(corruptibility(steady)).toBe(0);
+    expect(corruptibility(steady, corruptionVectorByDepth({ npc: PLAIN_NPC }))).toBe(0);
+    // A `marked` vice opens nothing under the SAFER default; `defining` opens it.
+    const marked = { ...steady, character: { axes: { MERCY: { pole: 'vice', level: 'marked' } } } };
+    expect(corruptibility(steady, corruptionVectorByDepth({ npc: marked }))).toBe(0);
+    expect(corruptibility(steady, corruptionVectorByDepth({ npc: { ...steady, ...DEEP_MERCY } })))
+      .toBeGreaterThan(0);
+    // ...and under the OTHER owner arm the `marked` soul becomes reachable too.
+    expect(corruptibility(steady, corruptionVectorByDepth({ npc: marked, threshold: 'marked' })))
+      .toBeGreaterThan(0);
+  });
+
+  test('RECONCILE PIN — the vectors must equal L1\'s own corruptionVector column', () => {
+    if (!existsSync(L1_CATALOG)) {
+      expect(Object.keys(CORRUPTIBLE_AXIS_VECTORS)).toHaveLength(7);
+      return;
+    }
+    const source = readFileSync(L1_CATALOG, 'utf8');
+    const rows = [...source.matchAll(/id: '([A-Z]+)',[\s\S]*?corruptionVector: (null|'[a-z_]+')/g)];
+    const fromCatalog = Object.fromEntries(rows
+      .filter((row) => row[2] !== 'null')
+      .map((row) => [row[1], row[2].slice(1, -1)]));
+    expect(fromCatalog).toEqual({ ...CORRUPTIBLE_AXIS_VECTORS });
+  });
+});
+
+// ── F10: THE `npcStates.alignment` CENSUS, WITH A DENOMINATOR ────────────────
+/**
+ * ⭐⭐ F10 asks car 5 to census the stored `npcStates.alignment` and its live
+ * consumers, then either RE-POINT them to R7's derived read or DECLARE the field a
+ * projection cache — "no third state".
+ *
+ * ⚠ AND THE FIRST THING THE CENSUS DID WAS CORRECT F10'S OWN PREMISE. F10 says
+ * "its FOUR live consumers". Measured: THREE read sites exist, and only TWO are
+ * live — `settlementPolitics.leaderAlignmentKinship` (bloc formation) and
+ * `warSeatBooks.rulerAlignment` (the ruler's war-continuation bias). The third,
+ * `personaSlicer.personFacets`, has ZERO importers under src/ and is unreachable
+ * from the running app; it is a real, correctly-shaped reader with no call path.
+ *
+ * THE RULING (vetoable): the field is DECLARED A PROJECTION CACHE, and the reason
+ * is measured rather than preferred. `derivedAlignment` returns `claim:false` while
+ * L1's per-axis plane column is unbound, so re-pointing the two live consumers today
+ * would hand bloc formation and the war layer NOTHING on every existing campaign.
+ * A stored, write-once, seeded roll is also lived history under THE PROMISE. So the
+ * cache stands and the pin below is what stops it and the read becoming two
+ * opinions: everything R7 can say must be a word both live parsers can read.
+ */
+describe('F10 — THE ALIGNMENT CENSUS, and the cache declared with its reconcile pin', () => {
+  const SRC = join(REPO_ROOT, 'src');
+  /** @param {string} dir @param {string[]} out */
+  function jsFilesUnder(dir, out = []) {
+    for (const entry of readdirSync(dir)) {
+      const full = join(dir, entry);
+      if (statSync(full).isDirectory()) jsFilesUnder(full, out);
+      else if (/\.(js|jsx)$/.test(entry)) out.push(full);
+    }
+    return out;
+  }
+  /**
+   * ⚠ COMMENTS ARE STRIPPED FIRST, and that is the difference between a census and
+   * a grep. Four files in this tree carry guard COMMENTS saying they never read the
+   * field ("NEVER reads npcStates.alignment (RNG-rolled)"), and a naive scan counts
+   * every one of them as a reader — a denominator inflated by the very discipline
+   * that keeps it honest.
+   * @param {string} text
+   */
+  const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
+  /** Files that actually READ an alignment off an npcState-shaped record. */
+  function readerFilesIn(sources) {
+    return sources
+      .filter(([, text]) => {
+        const code = stripComments(text);
+        return /npcStates/.test(code) && /\.alignment\b/.test(code);
+      })
+      .map(([file]) => relative(REPO_ROOT, file))
+      .sort();
+  }
+  /** @returns {Array<[string, string]>} */
+  const sourcesUnderSrc = () => jsFilesUnder(SRC).map((file) => [file, readFileSync(file, 'utf8')]);
+
+  test('THE DENOMINATOR: three read sites, enumerated, and a fourth reds', () => {
+    const DISPOSITIONED = [
+      // LIVE — bloc formation reads a PAIR of rulers' kinship each tick.
+      'src/domain/worldPulse/settlementPolitics.js',
+      // LIVE — the ruler's war-continuation vs peace-seeking bias.
+      'src/domain/worldPulse/warSeatBooks.js',
+      // NOT LIVE — zero importers under src/; a reader with no call path.
+      'src/domain/ai/personaSlicer.js',
+    ].sort();
+    expect(readerFilesIn(sourcesUnderSrc())).toEqual(DISPOSITIONED);
+  });
+
+  test('⭐ THE DETECTOR IS NOT VACUOUS — a planted fourth reader is caught', () => {
+    const planted = /** @type {Array<[string, string]>} */ ([
+      ...sourcesUnderSrc(),
+      [join(SRC, 'zz_planted.js'), 'const a = worldState.npcStates[id].alignment;'],
+    ]);
+    expect(readerFilesIn(planted)).toContain('src/zz_planted.js');
+    // ...and a file that only COMMENTS about the field is NOT caught, which is the
+    // whole reason the strip exists.
+    const commented = /** @type {Array<[string, string]>} */ ([
+      [join(SRC, 'zz_guard.js'), '// NEVER reads npcStates.alignment (RNG-rolled).\nexport const x = 1;'],
+    ]);
+    expect(readerFilesIn(commented)).toEqual([]);
+  });
+
+  test('the dead reader really is dead — personaSlicer has no production importer', () => {
+    const importers = jsFilesUnder(SRC)
+      .filter((file) => !file.endsWith('personaSlicer.js'))
+      .filter((file) => /personaSlicer/.test(readFileSync(file, 'utf8')))
+      .map((file) => relative(REPO_ROOT, file));
+    expect(importers).toEqual([]);
+  });
+
+  test('⭐ WHY THE CACHE STANDS: the derived read makes NO CLAIM while the column is unbound', () => {
+    // This is the measurement that decides the ruling, asserted rather than argued.
+    // Re-pointing the two live consumers at a reading that says nothing would zero
+    // bloc formation and the ruler bias on every existing campaign.
+    expect(derivedAlignment({ npc: CHARTED_NPC, lens: DARK_LENS }).claim).toBe(false);
+    expect(derivedAlignment({ npc: CHARTED_NPC, lens: DARK_LENS }).word).toBe(null);
+    // ...and it is NOT vacuous: with a column bound it speaks.
+    expect(derivedAlignment({ npc: CHARTED_NPC, lens: LIT_LENS }).claim).toBe(true);
+  });
+
+  test('⭐⭐ THE RECONCILE PIN: every word R7 can produce is readable by BOTH live parsers', () => {
+    // The cache and the read must never become two vocabularies. Both live consumers
+    // parse the stored word by SUBSTRING (`.includes('lawful')` / `('good')`), so the
+    // pin is that each derived word carries a token each parser can find — otherwise
+    // a future re-point hands them a word that silently bands to the neutral middle.
+    const cells = [[1, 1], [1, 0], [1, -1], [0, 1], [0, 0], [0, -1], [-1, 1], [-1, 0], [-1, -1]];
+    for (const [law, good] of cells) {
+      const word = alignmentWord(law, good);
+      expect(NPC_ALIGNMENTS, `${law},${good}`).toContain(word);
+      // A `true_neutral`/`neutral_*` word is deliberately unreadable on its law half
+      // by both parsers, and both fall to 0.5 there — which is the SAME answer they
+      // give the stored `true_neutral` today, so the cache's own behaviour is met.
+      const lawful = word.includes('lawful') || word.includes('chaotic') || word.includes('neutral') || word.includes('true');
+      const moral = word.includes('good') || word.includes('evil') || word.includes('neutral');
+      expect(lawful, word).toBe(true);
+      expect(moral, word).toBe(true);
+    }
+  });
+
+  test('⚠ AND THE SECOND FINDING: the categorical parser has TWO homes, not one', () => {
+    // `alignmentAxes` is spelled twice — settlementPolitics returns {law, good} and
+    // warSeatBooks returns {lawfulness01, malice01}, INVERTED on the moral axis. They
+    // agree today because both parse the same substrings, and nothing checks that
+    // they keep agreeing. Named here rather than merged: re-pointing two LIVE readers
+    // at one parser is a behaviour risk this car did not take, and the pin at least
+    // makes the duplication visible to whoever does.
+    const homes = jsFilesUnder(SRC)
+      .filter((file) => /function alignmentAxes\s*\(/.test(readFileSync(file, 'utf8')))
+      .map((file) => relative(REPO_ROOT, file))
+      .sort();
+    expect(homes).toEqual([
+      'src/domain/worldPulse/settlementPolitics.js',
+      'src/domain/worldPulse/warSeatBooks.js',
+    ]);
   });
 });

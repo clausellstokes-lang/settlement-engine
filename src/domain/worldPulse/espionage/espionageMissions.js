@@ -109,9 +109,19 @@ export function covertDrawWeight(importance) {
  * would hand a seat a fact it has no way to hold. The dispatcher wave supplies them from
  * the court's own records.
  *
+ * ⭐ W-LIVES L5 — AND SO IS THE TEMPER BAND, for the SAME reason and one more. §12 R2
+ * makes a court a MORTAL consumer, so what a seat may read about a man's character is
+ * his KNOWN chart and never his true one; deriving it here from the roster record
+ * would hand the seat exactly the fact the boundary above exists to withhold. The
+ * band therefore arrives through `volunteerBandsFor` like its two siblings, and the
+ * caller derives it with `characterConsumers.vettingTemperBand` over
+ * `knownCharacter.characterAsSeenBy({ viewer: 'mortal' })`. Absent ⇒ the arm cannot
+ * fire, which is every caller today.
+ *
  * @param {{worldState?:unknown, settlementId?:unknown, settlement?:unknown,
  *   quality?:unknown, volunteerBandsFor?:((identity:{rosterId:string, name:string,
- *   role:string}) => {loyaltyBand?:string, foreignTieBand?:string})|null}} [args]
+ *   role:string}) => {loyaltyBand?:string, foreignTieBand?:string,
+ *   temperBand?:string})|null}} [args]
  * @returns {{operative:Record<string, unknown>|null, identity:Record<string, string>|null,
  *   durableId:string, notoriety01:number, competence01:number,
  *   vetting:Record<string, unknown>|null, reason:string}}
@@ -158,6 +168,11 @@ export function castCovertOperative({
         npcId: entry.durableId || entry.identity.rosterId,
         loyaltyBand: bands.loyaltyBand || 'uncertain',
         foreignTieBand: bands.foreignTieBand || 'none',
+        // NO DEFAULT WORD. `loyaltyBand` and `foreignTieBand` default to their
+        // NEUTRAL members because a seat always holds some record; a seat that has
+        // not read a man's character holds NOTHING, and spelling that as `ordinary`
+        // would make an absent reading indistinguishable from a middling one.
+        temperBand: bands.temperBand,
       },
     });
     if (vetting.accepted !== true) { refused = true; continue; }

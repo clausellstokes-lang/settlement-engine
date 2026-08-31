@@ -110,17 +110,35 @@ export const PARADIGM_WORD_PROJECTION_SEAM = 'paradigmAxisCatalog.js#wordForAxis
 export const RISK_CENTER_AXES = Object.freeze({ nerve: 'COURAGE', restraint: 'PRUDENCE' });
 
 /**
- * The axes a DRIFTED vice can make corruptible at all, MIRRORED from L1's
- * `PARADIGM_AXES[].corruptionVector != null`. L1 MEASURED this reach: seven of
- * seventeen. The other ten carry no legacy flaw column on their vice side, so a soul
- * who drifts into `lazy` or `treacherous` opens no door — an owner row (13(a)'s
- * companion), carried here so the gate's silence on ten axes is a stated property
- * rather than a mystery.
- * @type {readonly string[]}
+ * The axes a DRIFTED vice can make corruptible AT ALL, and the corruption VECTOR
+ * each one opens — MIRRORED from L1's `PARADIGM_AXES[].corruptionVector`. L1
+ * MEASURED this reach: seven of seventeen. The other ten carry no legacy flaw column
+ * on their vice side, so a soul who drifts into `lazy` or `treacherous` opens no
+ * door however deep it runs — an owner row (13(a)'s companion), carried here so the
+ * gate's silence on ten axes is a stated property rather than a mystery.
+ *
+ * ⚠ THE VALUES ARE VECTORS, NOT FLAWS. `corruption.js` keeps two vocabularies —
+ * seventeen flaw WORDS and the four VECTORS they map onto — and the estate's
+ * `corruptionVectorForFlaw` DEFAULTS an unmapped word to `greed`, so handing a
+ * vector into the flaw reader would silently record a `fear`-drifted soul as greedy.
+ * The reconcile pin checks the values against L1 and the vocabulary against
+ * `CORRUPTION_VECTORS`, both ways.
+ * @type {Readonly<Record<string, string>>}
  */
-export const CORRUPTIBLE_AXES = Object.freeze([
-  'CANDOR', 'COURAGE', 'GENEROSITY', 'HUMILITY', 'JUSTICE', 'MERCY', 'TRUST',
-]);
+export const CORRUPTIBLE_AXIS_VECTORS = Object.freeze({
+  CANDOR: 'forbidden_patron',
+  COURAGE: 'fear',
+  GENEROSITY: 'greed',
+  HUMILITY: 'hunger_for_status',
+  JUSTICE: 'greed',
+  MERCY: 'greed',
+  TRUST: 'fear',
+});
+
+/** The seven axis ids, codepoint-ordered — derived, never a second hand-kept list. */
+export const CORRUPTIBLE_AXES = Object.freeze(
+  Object.keys(CORRUPTIBLE_AXIS_VECTORS).sort(compareCodepoint),
+);
 
 /**
  * ⭐ THE OWNER-SIGNABLE DEPTH GATE (F13, pack row 13(a) — UNSIGNED).
@@ -430,6 +448,20 @@ export function corruptibleAxisByDepth({ npc, lens, threshold }) {
     if (viceDepth(axes[axisId]) >= want) return axisId;
   }
   return null;
+}
+
+/**
+ * The corruption VECTOR a deep drifted vice opens, ready to hand to
+ * `corruption.npcCorruptibleVector` — the whole depth gate in one call.
+ * @param {Object} args
+ * @param {unknown} args.npc
+ * @param {CharacterLens|null|undefined} [args.lens]
+ * @param {string} [args.threshold]
+ * @returns {string|null}
+ */
+export function corruptionVectorByDepth({ npc, lens, threshold }) {
+  const axisId = corruptibleAxisByDepth({ npc, lens, threshold });
+  return axisId ? CORRUPTIBLE_AXIS_VECTORS[axisId] : null;
 }
 
 // ── 4. THE DERIVED ALIGNMENT READING (R7) ─────────────────────────────────────
