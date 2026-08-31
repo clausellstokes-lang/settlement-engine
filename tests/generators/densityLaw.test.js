@@ -28,6 +28,9 @@
  * retunes the law without touching this file — and a retune that breaks an
  * invariant still reds.
  */
+import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { STRESSOR_CATALOG } from '../../src/domain/worldPulse/stressorsCore.js';
+import { GEN_TO_PULSE_TYPE } from '../../src/domain/stressorPicker.js';
 import { describe, it, expect } from 'vitest';
 import { createPRNG } from '../../src/kernel/prng.js';
 import {
@@ -685,5 +688,102 @@ describe('determinism — a seed is a world', () => {
     const large = rollDensityPlan({ tier: 'city', rng: createPRNG('fork-1'), powers: powersFixture({ count: 14 }) });
     expect(large.namedMass).toBe(small.namedMass);
     expect(large.concentration).toBe(small.concentration);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TE-DENSITY-1 D2b — THE TWO STRESSOR PLANES, AND WHICH ONE IS DORMANT.
+//
+// ⛔⛔ WHY THIS GUARD EXISTS, AND WHY IT IS NOT A MAGIC NUMBER. §810.5 charters a
+// SECOND member of the missing-seat family (the leaderless type, beside
+// `succession_void`), and ODQ §827 ruled it minted on the stated premise that a
+// v2 version gate makes the "same-seed risk structurally zero". THAT PREMISE IS
+// TRUE IN ONE PLANE AND FALSE IN THE OTHER, and nothing in the tree said so:
+//
+//   PLANE A — `STRESS_TYPE_MAP` (generation). NOT DORMANT, AT ANY PROBABILITY.
+//     `stressGenerator.js` Mode 3 Fisher-Yates-shuffles `Object.keys(STRESS_TYPE_MAP)`
+//     against the SHARED ambient stream (N-1 draws), then calls `_rng()`
+//     UNCONDITIONALLY on line 346 before comparing it to the row's probability. So the
+//     KEY COUNT — not the probability — sets both the shuffle length and the draw
+//     count, `requiresTier`'s `continue` happens AFTER the shuffle, and
+//     `probability: 0` still burns a draw and still re-permutes every other stressor's
+//     test value.
+//
+//   PLANE B — `STRESSOR_CATALOG` (pulse/campaign). DORMANT. Six members already live
+//     here with no generation row, so a campaign-only stressor is an established,
+//     tested class.
+//
+// ⭐ MEASURED TWICE, BY TWO SEATS, ON DIFFERENT CORPORA — and the figure is quoted
+// WITH ITS INVOCATION, because a figure carried without one reads exactly like a
+// behaviour shift. Corpus = 6 tiers x N seeds through the real
+// `generateSettlementPipeline` at `REGISTER_VII_DENSITY_LAW_VERSION`, canonical-JSON
+// hashed, arms in SEPARATE PROCESSES:
+//     seed `dens-d2b-*`      (first seat)  — plane A moved  89 of 240
+//     seed `d2b-planeA-*`    (resume seat) — plane A moved 104 of 240; plane B moved
+//                                            0 of 240 against the SAME baseline
+// Both arms scored 240/240 DISTINCT hashes, so the instrument discriminates and the
+// zero is a real zero rather than a probe comparing nothing. The two plane-A counts
+// differ because the seed prefixes differ; the FINDING is what reproduces, and it
+// reproduces exactly — a probability-0 generation row is never free.
+//
+// ⇒ THE LEADERLESS TYPE MUST BE MINTED IN PLANE B ONLY. That is not a compromise:
+// §810.5's junction fires in PLAY (a ruling roster empties), never at birth, so the
+// campaign plane is its correct home and the generation plane would buy nothing at
+// the price of every existing golden.
+//
+// The pins below are INVENTORY RATCHETS on both planes. They are deliberately exact
+// in both directions: a plane that GREW needs the reasoning above applied, and a
+// plane that SHRANK means a vocabulary left the estate unnoticed.
+describe('D2b — the stressor vocabulary has two planes and only one is dormant', () => {
+  it('PLANE A is pinned: a generation row is same-seed load-bearing, so its size may not drift', () => {
+    // ⛔ CHANGING THIS NUMBER IS AN OWNER-SIGNED ONE-REGEN, NEVER A BUILD EDIT.
+    // Adding a row here shifts EVERY existing world on its own seed — names, NPCs,
+    // history, factions, economy — because the ambient stream offset propagates
+    // through the whole pipeline downstream of stress. If you need a new stressor
+    // and do NOT need it born at generation, add it to STRESSOR_CATALOG instead and
+    // this pin stays still. See the block comment above for the measurement.
+    expect(
+      Object.keys(STRESS_TYPE_MAP).length,
+      'STRESS_TYPE_MAP changed size: this is a same-seed generation shift for every '
+      + 'existing world, not an additive vocabulary edit. A campaign-only stressor '
+      + 'belongs in STRESSOR_CATALOG, which is dormant.',
+    ).toBe(15);
+  });
+
+  it('PLANE B is pinned, and it is the plane a campaign-only member joins', () => {
+    expect(Object.keys(STRESSOR_CATALOG).length).toBe(21);
+  });
+
+  it('the campaign-only class is real, non-empty, and exactly the six that carry no generation row', () => {
+    // The anti-vacuity arm: if this set were empty, "add it to the catalog instead"
+    // would be advice with no precedent behind it. It is not empty — these six are
+    // the standing proof that a catalog member needs no generation row.
+    const campaignOnly = Object.keys(STRESSOR_CATALOG)
+      .filter(type => !Object.values(GEN_TO_PULSE_TYPE).includes(type))
+      .sort();
+    expect(campaignOnly).toEqual([
+      'coup_detat', 'criminal_corridor', 'magic_deadzone',
+      'magical_instability', 'market_shock', 'rebellion',
+    ]);
+  });
+
+  it('the two planes are well-formed: every bridge entry resolves in BOTH directions', () => {
+    // The bridge is what makes "campaign-only" a definable class at all. If a bridge
+    // entry dangled, the campaign-only set above would be computed from a broken
+    // denominator and the pin would be measuring nothing.
+    for (const [genKey, pulseType] of Object.entries(GEN_TO_PULSE_TYPE)) {
+      expect(STRESS_TYPE_MAP[genKey], `bridge source ${genKey} has no generation row`).toBeTruthy();
+      expect(STRESSOR_CATALOG[pulseType], `bridge target ${pulseType} has no catalog row`).toBeTruthy();
+    }
+  });
+
+  it('the missing-seat family today has exactly one member, and it is birth-capable', () => {
+    // §810.5's SECOND member is NOT minted here — D2b priced it and escalated
+    // (the Herald voicing ratchet forbids a new routed-but-unvoiced token, and the
+    // cure is a chair-signed prose corpus, which §827 reserved to the owner's pen).
+    // This pin is the tripwire: when the second member lands, this reds and its
+    // author must confirm the new member is catalog-only per the block comment.
+    expect(MISSING_SEAT_STRESSORS).toEqual(['succession_void']);
+    expect(STRESS_TYPE_MAP[MISSING_SEAT_STRESSORS[0]], 'the family\'s birth-capable member lost its generation row').toBeTruthy();
   });
 });
