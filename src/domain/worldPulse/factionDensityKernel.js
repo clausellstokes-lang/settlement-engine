@@ -99,6 +99,24 @@ import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsA
  *  future §810.5 stressor mint reads — one field, not two. */
 export const INTERREGNUM_MARK = 'interregnumSinceTick';
 
+/**
+ * The id a house takes, in the ONE spelling the estate already mints faction ids in.
+ *
+ * ⚠⚠ THIS IS AN IDENTITY-BEARING JOIN AND THE FIRST DRAFT BROKE IT. `kernel/slugify.js`
+ * defaults to a DASH separator; the event layer's `mutateHelpers.slugify` — the spelling
+ * `ADD_FACTION` mints with and `linkedFactionIds` joins on — passes `{ sep: '_' }`, as
+ * does `densityAscension.js`. A cadence-minted house therefore carried
+ * `faction.the-weavers` while the same house minted by DM verb carried
+ * `faction.the_weavers`: one polity, two ids, no join, and nothing would have thrown.
+ * That is exactly the aliasing class `slugify.js`'s own header warns about, and it was
+ * caught by the estate's slug-idiom ratchet reding on a SIBLING file, not by review.
+ *
+ * @param {string} house @returns {string}
+ */
+function factionIdFor(house) {
+  return `faction.${slugify(house, { sep: '_' })}`;
+}
+
 /** The cadence clock, kept INSIDE `powerStructure` rather than as a new top-level
  *  settlement key: the fabric's own pace belongs beside the fabric, and a nested
  *  field costs no schema, no field-manifest row and no undo-list amendment. */
@@ -462,8 +480,8 @@ function foundingMemberForEmergence({ sid, tier, house, tick }) {
       importanceForRung('head', tier)
     ),
     factionAffiliation: house,
-    linkedFactionIds: [`faction.${slugify(house)}`],
-    _idSeed: `density-emergence:${sid}:${tick}:${slugify(house)}`,
+    linkedFactionIds: [factionIdFor(house)],
+    _idSeed: `density-emergence:${sid}:${tick}:${slugify(house, { sep: '_' })}`,
   });
   npc.factionAffiliation = house;
   return npc;
@@ -581,7 +599,7 @@ function applyCadence(fresh, ctx) {
           ...ps,
           [CADENCE_CLOCK]: ctx.tick,
           factions: [...seats, {
-            id: `faction.${slugify(house)}`,
+            id: factionIdFor(house),
             name: house,
             faction: house,
             status: 'active',

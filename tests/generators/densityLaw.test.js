@@ -96,6 +96,7 @@ import {
 import { applyTierOutcomeToSettlement } from '../../src/domain/worldPulse/tierOutcomeApply.js';
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize } from '../../src/domain/worldPulse/assizeKernel.js';
 import { DRIFT_REEMIT_COOLDOWN_TICKS } from '../../src/domain/worldPulse/worldPulseFeedCuration.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 // ── The corpus ───────────────────────────────────────────────────────────────
 // Wide enough that a one-in-many shape is not a coin flip: the §713.2 lesson is
@@ -1550,10 +1551,13 @@ describe('D2c — the cadence wired into the pulse (§810.1 R7/R8/R9, §810.3 R1
         house('Poor House', 'religious', 3)],
       npcs: [member('Reeve', 'The Crown'), member('Banker', 'Rich House'), member('Curate', 'Poor House')],
     });
+    const before = s.powerStructure.factions.map(f => f.name);
     const next = run(s, 40).settlementUpdates[0].settlement;
     const names = next.powerStructure.factions.map(f => f.name);
     expect(names, 'the density roll folded the government').toContain('The Crown');
-    expect(names).not.toContain('Poor House');
+    // ANCHORED: a bare `not.toContain` would pass just as happily if the fold had
+    // emptied the whole roster, so the removal is asserted against the BEFORE list.
+    expectPresentThenAbsent(before, names, 'Poor House', 'R14: the weakest NON-ruling house folds');
   });
 
   it('⭐ R7\'s CADENCE: one step per interval, on the metronome\'s own borrowed window', () => {
@@ -1607,6 +1611,38 @@ describe('D2c — the cadence wired into the pulse (§810.1 R7/R8/R9, §810.3 R1
     expect(lit.powerStructure.factions, 'the stamp must add a clock, not rewrite the fabric')
       .toBe(settlement.powerStructure.factions);
     expect(lit.tier, 'the tier must still rise: only the clock is dispositioned').toBe('village');
+  });
+
+  it('⛔ THE ID JOINS THE EVENT LAYER\'S — measured against the real minter, not a spelling', () => {
+    // ⚠⚠ THIS PIN EXISTS BECAUSE THE JOIN WAS BROKEN AND NOTHING THREW.
+    // `kernel/slugify` defaults to a DASH; the event layer mints faction ids with an
+    // UNDERSCORE. A cadence-minted house carried `faction.the-weavers` while the same
+    // house minted by DM verb carried `faction.the_weavers` — one polity, two ids, no
+    // join. The pin compares against the REAL producer rather than a hand-spelled
+    // literal, because a literal would have agreed with the bug.
+    const HOUSE = 'Rising Merchants';
+    const viaVerb = mutateSettlement({
+      settlement: {
+        tier: 'town', config: V2, npcs: [],
+        powerStructure: { factions: [], seatOfPower: 'The Crown' },
+      },
+      // The targetId spelling the event layer actually parses: `faction.<Underscored_Name>`,
+      // which `labelFromTarget` turns back into 'Rising Merchants'.
+      event: { id: 'ev.join', type: 'ADD_FACTION', targetId: 'faction.Rising_Merchants', payload: {} },
+    }).powerStructure.factions.find(f => f.faction === HOUSE);
+
+    const s = place({
+      factions: [house('The Crown', 'noble', 20, true)],
+      npcs: [member('Reeve', 'The Crown')],
+      institutions: [inst('Market', 'Economy'), inst('Granary', 'Economy')],
+    });
+    const viaCadence = run(s, 40).settlementUpdates[0].settlement.powerStructure.factions[1];
+    expect(viaCadence.name, 'the fixture must actually seat the house this pin is about').toBe(HOUSE);
+    expect(viaCadence.id).toBe(viaVerb.id);
+    // The founder's linkedFactionIds must join the SAME id, or an atomic mint is
+    // atomic in name only.
+    const founder = run(s, 40).settlementUpdates[0].settlement.npcs[1];
+    expect(founder.linkedFactionIds).toEqual([viaVerb.id]);
   });
 
   it('the crossing clock actually delays the first emergence (the two halves compose)', () => {

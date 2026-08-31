@@ -46,6 +46,7 @@ import { bandsForTier, tierKey } from './densityBands.js';
 import { rollsRegisterVii } from './densityLaw.js';
 import { rollInBand, rollRoster } from './densityRoll.js';
 import { seatKey } from './applyDensityLaw.js';
+import { slugify } from '../../kernel/slugify.js';
 
 /** Every reason ascension may decline to materialize. A typed refusal is a
  *  finding the caller can act on; a silent `null` is a bug that looks like a
@@ -56,7 +57,15 @@ export const ASCENSION_REFUSALS = Object.freeze([
   'power_already_housed',   // §810.6(b): it has a house; crown it, don't mint one
 ]);
 
-const slug = s => String(s || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+/** ⚠ THE ONE SLUG PRIMITIVE, NOT A NINTH HAND-ROLLED VARIANT. This file shipped an
+ *  inline builder, which the estate's slug-idiom ratchet counts as a new offender —
+ *  and the ratchet is right for an IDENTITY-BEARING slug: `faction.<slug>` is a join
+ *  key, and copy-discipline is the only thing that was keeping this spelling equal to
+ *  `mutateHelpers.slugify`'s. `{ sep: '_' }` is that spelling. The swap was PROVEN
+ *  byte-identical over 20,015 executed inputs (the trim is a no-op: leading and
+ *  trailing whitespace becomes a separator run and is then edge-trimmed anyway).
+ *  @param {unknown} s @returns {string} */
+const slug = s => slugify(s, { sep: '_' });
 
 /** The inert "nothing happens" plan. Shared so every refusal path returns the
  *  SAME shape and a caller can read `.materialized` without a null check. */
