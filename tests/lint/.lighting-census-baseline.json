@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "09333e936728ae5b056a545794c12a188c6287f1",
-  "measuredBy": "Opus 5 (lane W-FAITH F2c)",
+  "measuredAtSha": "142e13bdf397a4122f19f0e8ba94cca2a80a43f8",
+  "measuredBy": "Opus 5 (lane W-FAITH F3c)",
   "date": "2026-08-31",
-  "note": "W-FAITH F2c added tests/domain/deityTemperConsumerCensus.walker.test.js (25 statically registered tests in 8 describes) and re-titled/added tests in deityAuthoredCharacter.test.js when the authored temper arm landed",
+  "note": "W-FAITH F3c act 1 (the embed carry, ODQ 866): deityEmbedWriterParity gained the four-writer atomicity describe and deityTemperConsumerCensus lost F2c tripwire, deleted BY the act it was the go-signal for",
   "files": 2444,
   "parked": 370,
   "credited": 2074,
-  "titles": 20952,
-  "suiteTitles": 5763
+  "titles": 20957,
+  "suiteTitles": 5764
 }
