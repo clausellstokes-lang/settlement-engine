@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-30T21:12:51.799Z",
+  "generatedAt": "2026-08-31T01:08:02.947Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "6f2e2eff52b2dced",
+  "sourceHash": "8f40e544b5275cd8",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -51,6 +51,7 @@
     "src/domain/foodLedger.js",
     "src/domain/governanceLedger.js",
     "src/domain/healingLedger.js",
+    "src/domain/instantWorld/genesisDiplomacy.js",
     "src/domain/instantWorld/worldPlan.js",
     "src/domain/institutionClassify.js",
     "src/domain/institutions/institutionRoster.js",
