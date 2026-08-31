@@ -59,6 +59,43 @@ POLL_SECONDS="${GATE_MUTEX_POLL_SECONDS:-30}"
 # `$(id -u)` suffix keeps the pid probe (`kill -0`) from hitting cross-user EPERM, which
 # would otherwise let one user's live holder look dead to another's reclaim arm.
 LOCK_DIR="${GATE_MUTEX_LOCK_DIR:-/tmp/settlementforge-vitest-gate.$(id -u).lock}"
+# ⛔⛔ THE ALIAS FOLD — PINNING THE DEFAULT WAS ONLY HALF THE IDENTITY PROPERTY.
+# The paragraph above cured the DEFAULT. It did not cure the OVERRIDE, and the
+# override is what every lane actually uses: `docs/LANE_LAW_ADDENDUM_EFF1.md` §2
+# instructs every lane, twice, to
+#     export GATE_MUTEX_LOCK_DIR=/tmp/settlementforge-vitest-gate.lock
+# which is NOT this script's default — the default carries a `$(id -u)` suffix. So
+# `npm run check:tail` (the REAL GATE, which exports nothing) and every lane's
+# targeted run (which exports the documented string) were locking two physically
+# different directories, and the comment below this one asserted they were mutually
+# excluded while they were not. The shared pool lived beside one path and the
+# exclusive gate held the other, so the addendum's central safety claim — "a live
+# exclusive holder excludes them" — was void for exactly the population it was
+# written for. A sibling lane measured load 345 on 8 cores and three red gate runs.
+#
+# THE CURE IS IN THE ACQUIRER, NOT IN THE DOCS. A doc fix cannot reach the briefs
+# already in flight, and the next lane law to name a path will be wrong the same
+# way. Every historical and documented spelling of THE GATE'S OWN LOCK FAMILY folds
+# here onto one canonical path, so a lane on any base and a lane on tip cannot both
+# believe they hold "the" lock. The fold key is the FAMILY NAME, never the
+# directory — that is what makes it independent of TMPDIR, of the launch context,
+# and of which base the caller's script came from. A path outside the family (the
+# per-test temp locks in tests/scripts/gateMutex.test.js) is left untouched, which
+# is what keeps a deliberately isolated lock deliberately isolated.
+GATE_MUTEX_CANONICAL_LOCK_DIR="/tmp/settlementforge-vitest-gate.$(id -u).lock"
+_gm_uid="$(id -u)"
+_gm_stripped="$LOCK_DIR"
+while [ "${_gm_stripped%/}" != "$_gm_stripped" ]; do _gm_stripped="${_gm_stripped%/}"; done
+case "${_gm_stripped##*/}" in
+    settlementforge-vitest-gate.lock|"settlementforge-vitest-gate.${_gm_uid}.lock")
+        if [ "$_gm_stripped" != "$GATE_MUTEX_CANONICAL_LOCK_DIR" ]; then
+            echo "gate-mutex: folding lock alias '$LOCK_DIR' onto the canonical" \
+                 "'$GATE_MUTEX_CANONICAL_LOCK_DIR' — one lock family, one path." >&2
+        fi
+        LOCK_DIR="$GATE_MUTEX_CANONICAL_LOCK_DIR"
+        ;;
+esac
+unset _gm_stripped
 OWNER_FILE="$LOCK_DIR/pid"
 REAPER_DIR="${LOCK_DIR}.reaper"
 REAPER_OWNER_FILE="$REAPER_DIR/pid"
@@ -610,6 +647,15 @@ run_shared() {
 MODE=inspect
 case "${1:-}" in
     '') ;;
+    --print-lock-dir)
+        # The ALIAS FOLD's own witness: print the path this invocation WOULD lock and
+        # exit, taking nothing. A guard that had to acquire the real lock to learn its
+        # identity could not run inside the gate it guards, so the identity question
+        # would go on being answered by reading two files and hoping.
+        [ "$#" -eq 1 ] || usage
+        printf '%s\n' "$LOCK_DIR"
+        exit 0
+        ;;
     --wait)
         [ "$#" -eq 1 ] || usage
         MODE=wait

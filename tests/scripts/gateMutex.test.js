@@ -573,3 +573,104 @@ describe('gate-mutex TIERS — shared admission, exclusive exclusion', () => {
     expect(existsSync(f.lock)).toBe(false);
   });
 });
+
+// ── THE ALIAS FOLD (lane T9) ─────────────────────────────────────────────────
+// Pinning the DEFAULT was only half the identity property, and the sibling suite
+// above pins only that half. The other half is the OVERRIDE, which is what every
+// lane actually uses: docs/LANE_LAW_ADDENDUM_EFF1.md §2 instructs every lane,
+// twice, to export `/tmp/settlementforge-vitest-gate.lock` — a path the default
+// has never been, because the default carries a `$(id -u)` suffix. So the REAL
+// GATE (`npm run check:tail`, exporting nothing) and every lane's targeted run
+// (exporting the documented string) locked two physically different directories,
+// while the script's own comment asserted they were mutually excluded.
+//
+// The cure is the acquirer's alias fold, and THIS is what keeps it honest: the
+// documented incantations are read OUT OF THE DOCS THEMSELVES and each is executed
+// through `--print-lock-dir`, so a future lane law that names a fourth spelling
+// reds here instead of quietly splitting the population again.
+describe('gate-mutex lock identity — every DOCUMENTED spelling folds onto one path', () => {
+  const DOC_SOURCES = ['docs/LANE_LAW_ADDENDUM_EFF1.md', 'CONTRIBUTING.md'];
+  const printLockDir = (env) => {
+    const result = spawnSync('sh', [SCRIPT, '--print-lock-dir'], {
+      cwd: ROOT, encoding: 'utf8', env: { ...process.env, ...env },
+    });
+    expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(0);
+    return result.stdout.trim();
+  };
+  // The bare default: the path `npm run check:tail` takes. GATE_MUTEX_LOCK_DIR must
+  // be actively removed — this suite's own harness exports it for every other case.
+  const bareEnv = { ...process.env };
+  delete bareEnv.GATE_MUTEX_LOCK_DIR;
+
+  const documented = [...new Set(
+    DOC_SOURCES
+      .filter((rel) => existsSync(resolve(ROOT, rel)))
+      .flatMap((rel) => [
+        ...readFileSync(resolve(ROOT, rel), 'utf8').matchAll(/GATE_MUTEX_LOCK_DIR=(\S+)/g),
+      ].map((m) => m[1])),
+  )];
+
+  it('the docs really do name a lock path, and it is NOT the script default', () => {
+    // The anti-vacuity half, and it is the whole point: if the docs stopped naming
+    // a path, the fold arm below would pass over an empty list. And if the named
+    // path were already the default, this suite would prove nothing about aliasing.
+    expect(documented.length, 'no GATE_MUTEX_LOCK_DIR incantation found in the lane law — '
+      + 'the fold arm below would be vacuous').toBeGreaterThanOrEqual(1);
+    const bare = printLockDir(bareEnv);
+    expect(documented.some((p) => p !== bare),
+      'every documented path is already the default — this suite has become a tautology, '
+      + 'which is fine, but delete it rather than letting it read as coverage').toBe(true);
+  });
+
+  it('every documented incantation locks the SAME directory as the bare gate', () => {
+    const bare = printLockDir(bareEnv);
+    expect(bare).toContain('settlementforge-vitest-gate');
+    const resolved = documented.map((p) => ({ documented: p, locks: printLockDir({ GATE_MUTEX_LOCK_DIR: p }) }));
+    const split = resolved.filter((r) => r.locks !== bare);
+    expect(
+      split,
+      `\nA documented GATE_MUTEX_LOCK_DIR incantation locks a DIFFERENT directory than the`
+      + ` bare gate does. Two callers following two published instructions are then not`
+      + ` mutually excluded at all, and both will print that they acquired the lock. Fold the`
+      + ` spelling in scripts/gate-mutex.sh's alias fold, or change the doc:\nbare gate locks`
+      + ` ${bare}\n${split.map((r) => `${r.documented} locks ${r.locks}`).join('\n')}\n`,
+    ).toEqual([]);
+  });
+
+  it('THE PLANTED CONTROL: the fold is a family fold, not a blanket rewrite', () => {
+    const bare = printLockDir(bareEnv);
+    // A path OUTSIDE the lock family must survive untouched — otherwise every
+    // deliberately-isolated lock (this suite's own per-test fixtures, and any future
+    // one) would silently join the real gate and the fold would be a catastrophe
+    // wearing a cure's name.
+    const isolated = join(tmpdir(), 'gate-mutex-fold-control', 'vitest.lock');
+    expect(printLockDir({ GATE_MUTEX_LOCK_DIR: isolated })).toBe(isolated);
+    // …and the family fold really is folding, in each historical spelling: the
+    // documented one, a TMPDIR-derived one (the reverted default's shape), and a
+    // trailing-slash one. If any of these stopped folding the arm above would go
+    // quiet on a real split.
+    expect(printLockDir({ GATE_MUTEX_LOCK_DIR: '/tmp/settlementforge-vitest-gate.lock' })).toBe(bare);
+    expect(printLockDir({
+      GATE_MUTEX_LOCK_DIR: join(tmpdir(), 'settlementforge-vitest-gate.lock'),
+    })).toBe(bare);
+    expect(printLockDir({ GATE_MUTEX_LOCK_DIR: '/tmp/settlementforge-vitest-gate.lock/' })).toBe(bare);
+  });
+
+  it('--print-lock-dir takes NOTHING: no lock, no reaper, no shared slot', () => {
+    // A witness that ACQUIRED what it reports could not run inside the gate it
+    // guards — it would contend with, and briefly block, a live gate on this box.
+    // ⚠ Measured on a path this suite OWNS, never on the real lock: a live sibling
+    // gate makes the real lock exist for reasons that have nothing to do with this
+    // witness, and an arm that reds on a neighbour's honest work is not a guard.
+    const f = fixture();
+    const probe = join(f.root, 'never-acquired.lock');
+    expect(printLockDir({ GATE_MUTEX_LOCK_DIR: probe })).toBe(probe);
+    expect(existsSync(probe), 'the witness mode acquired the lock it only meant to name').toBe(false);
+    expect(existsSync(`${probe}.reaper`)).toBe(false);
+    expect(existsSync(`${probe}.shared`)).toBe(false);
+    // …anchored: the same script on the same path DOES create it when actually run,
+    // so the absences above measure the witness mode and not an inert path.
+    expect(run(probe, ['--run', '--', 'sh', '-c', `mkdir -p '${f.root}/proof'`]).status).toBe(0);
+    expect(existsSync(join(f.root, 'proof')), 'the anchor run did not run').toBe(true);
+  });
+});

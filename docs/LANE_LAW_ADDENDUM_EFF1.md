@@ -64,6 +64,27 @@ behaviour is exactly what it always was**, so every standing incantation —
 including the bare `check:tail` and the exported `GATE_MUTEX_LOCK_DIR` idiom the
 lane briefs carry — keeps working unchanged.
 
+> ⛔ **THE PATH BELOW WAS NOT THE SCRIPT'S DEFAULT, AND FOR A WHILE THAT SPLIT THE
+> POPULATION IN TWO (cured 2026-08-30, lane T9).** This section instructs every
+> lane, twice, to export `/tmp/settlementforge-vitest-gate.lock`. The script's
+> default has a `$(id -u)` suffix — a different directory. So `npm run check:tail`,
+> which exports nothing, and every lane's targeted run, which exports the string
+> below, were **not mutually excluded at all**; both printed that they had acquired
+> the lock, the shared pool sat beside one path while the exclusive gate held the
+> other, and a sibling lane measured load 345 on eight cores with three red gate
+> runs before anyone asked which directory was being locked.
+>
+> **You need change nothing.** The cure is in the acquirer, not in this paragraph:
+> `scripts/gate-mutex.sh` now folds every spelling of the gate's own lock family
+> onto one canonical path, keyed on the FAMILY NAME rather than the directory, so
+> it is independent of `TMPDIR`, of the launch context, and of which base your
+> `gate-mutex.sh` came from. A lock path outside the family is left untouched, so a
+> deliberately isolated lock stays isolated. `sh scripts/gate-mutex.sh
+> --print-lock-dir` reports the path an invocation would take, and acquires
+> nothing. `tests/scripts/gateMutex.test.js` reads the incantations **out of this
+> file** and executes each one, so a future lane law that names a fourth spelling
+> reds instead of silently splitting the population again.
+
 ### Exclusive (the default; the real gate)
 
 ```sh
