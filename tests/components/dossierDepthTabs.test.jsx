@@ -122,7 +122,14 @@ describe('FaithTab — the §805 layout (patron seat + niche occupancy + realm p
     const seat = screen.getByTestId('faith-patron-seat');
     expect(seat.textContent).toMatch(/Sunlord Aurelian holds the seat/);
     expect(seat.textContent).toMatch(/secure/);           // legitimacy 0.8 band
-    expect(seat.textContent).toMatch(/rightful claim 80%/);
+    // ⭐ THE BAND IS THE WHOLE READING, and the raw percentage that used to sit
+    // beside it is GONE (T11 landing, 2026-08-31). It read "(rightful claim 80%)"
+    // one space after the word "secure" — an engine scalar restating a band word,
+    // the prose-numerics class this estate kills; tests/lint/proseNumerics.test.js
+    // reddened on it at the landing gate. This pin is now the humanization itself.
+    // anchored: the three matches above prove this seat rendered, so the absence
+    // below is about the percentage and not about an empty node.
+    expect(seat.textContent).not.toMatch(/\d+%/);
     expect(seat.textContent).toMatch(/contested/i);
   });
 
@@ -133,6 +140,17 @@ describe('FaithTab — the §805 layout (patron seat + niche occupancy + realm p
     expect(rows).toHaveLength(2);
     expect(rows[0].textContent).toMatch(/peacelike · good — Sunlord Aurelian \(patron\)/);
     expect(rows[1].textContent).toMatch(/warlike · evil — The Gloam/);
+    // THE FOLLOWING IS IN WORDS, and the two rungs are pinned APART so a band
+    // table that collapsed to one word could not pass: share 60 and share 25 are
+    // deliberately either side of the 50 cut. The standing token is the engine's
+    // own finite word, rendered verbatim.
+    expect(rows[0].textContent).toMatch(/ascendant · most of the town/);
+    expect(rows[1].textContent).toMatch(/cult · a large minority/);
+    // anchored: both rows matched their creed names above, so they rendered —
+    // this absence is about the raw percentage the row used to print, not about
+    // an empty node. (T11 landing: `{d.share}%` was copied in shape from
+    // FaithSection.jsx:174, which is BANKED prose-numerics debt, not an idiom.)
+    expect(`${rows[0].textContent}${rows[1].textContent}`).not.toMatch(/\d+%/);
   });
 
   it('a static embed (no live profile) renders NO fabricated seat or occupancy', () => {

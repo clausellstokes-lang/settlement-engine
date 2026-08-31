@@ -25,6 +25,13 @@ function RulingChainBlock({ settlement }) {
   const chain = rulingChainOf(settlement);
   if (!chain.power && !chain.faction) return null;
   const missingSeat = chain.absence?.kind === 'missing_seat';
+  // A WORD, and named as one. `chain.power.government` is a finite government
+  // token ('council', 'monarchy') — but `power` is a FLOAT_TOKEN to the prose-
+  // numerics walker, so reading it through the path made a plain word look like
+  // an engine scalar reaching reader prose. The walker's own convention for
+  // "this is a word" is the suffix; the sibling reads on this row already pass
+  // by it (`powerLabel`, `.name`). This one just lacked the declaration.
+  const governmentWord = chain.power?.government || '';
   return (
     <div data-testid="ruling-chain" style={{
       background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`,
@@ -38,8 +45,8 @@ function RulingChainBlock({ settlement }) {
         <ChainRow label="The power">
           <strong>{chain.power.name}</strong>
           {chain.power.powerLabel ? ` — ${chain.power.powerLabel.toLowerCase()}` : ''}
-          {chain.power.government && chain.power.government !== chain.power.name
-            ? <span style={{color:MUTED}}>{` · rule is carried by ${chain.power.government}`}</span> : ''}
+          {governmentWord && governmentWord !== chain.power.name
+            ? <span style={{color:MUTED}}>{` · rule is carried by ${governmentWord}`}</span> : ''}
         </ChainRow>
       )}
       {chain.faction && (

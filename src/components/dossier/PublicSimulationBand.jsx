@@ -10,16 +10,25 @@
  * sibling leaf (the DossierGroupTabStrip idiom) so OutputContainer stays under
  * the components max-lines ceiling.
  */
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import { SP, swatch } from '../theme.js';
 
 const SimulationDrawer = lazy(() => import('./SimulationDrawer.jsx'));
 
-/** @param {{ settlement: any }} props */
+/**
+ * ⚠ NO SUSPENSE BOUNDARY OF ITS OWN, DELIBERATELY. This leaf is itself mounted
+ * inside a lazy boundary in OutputContainer, and that boundary carries the
+ * NARRATED fallback ("Opening the simulation record…"). A second boundary here
+ * would have bought nothing but a second silent seam and a second wait the
+ * reader has to sit through — React resolves a suspending child at the nearest
+ * ancestor boundary, which is exactly the one already narrating. One lazy
+ * chunk, one witnessed wait (the witnessed-wait ratchet's own doctrine).
+ * @param {{ settlement: any }} props
+ */
 export default function PublicSimulationBand({ settlement }) {
   return (
     <div style={{ padding: `${SP.sm}px ${SP.lg}px 0`, background: swatch['#FAF8F4'] }}>
-      <Suspense fallback={null}><SimulationDrawer settlement={settlement} /></Suspense>
+      <SimulationDrawer settlement={settlement} />
     </div>
   );
 }

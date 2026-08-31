@@ -113,6 +113,32 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // byte-identical on every one, the census stays at 227 against a 227 ceiling, and no other
 // row in either file could have moved with them. The whole baseline diff is fourteen lines,
 // seven -/+ pairs.
+// T11 · UI LANDING (§805/§807/§815, 2026-08-31) — SEVEN NEW LEAKS HUMANIZED, EIGHT PURE LINE
+// MOVES RE-ADDRESSED, NO CEILING CHANGE. The lane's own gate run was the first instrument to
+// see this file, and it caught both shapes at once. They are recorded separately because they
+// are answered differently, which is the whole point of the exact-identity baseline:
+//   · THE SEVEN ARE PAID, NOT BANKED. FaithTab's patron line carried
+//     `(rightful claim ${Math.round(patron.legitimacy * 100)}%)` one space after the band word
+//     that already said it — an engine scalar restating a word — and it is DELETED, not
+//     re-sited. Its niche rows carried `{d.standing} · {d.share}%`, copied in shape from
+//     FaithSection.jsx:174, which is itself BANKED DEBT in this very file: `standing` is a
+//     finite typed word and is now named `standingWord`, and `share` is banded through a new
+//     `shareBandLabel` beside faithPanelModel's two existing band helpers. PowerTab's
+//     `chain.power.government` and WarTab's `b.confidence`/`b.staleness` were words all along,
+//     read through paths whose FLOAT_TOKENS (`power`, `confidence`) made them look scalar;
+//     each is declared at its render with this walker's own word-suffix convention, which the
+//     sibling fields on the very same WarTab record (`strengthWord`, `readinessWord`) already
+//     use. ⚠ THE LESSON WORTH KEEPING: a banked row is DEBT, never a sanctioned idiom to copy
+//     into a new surface — the debt in FaithSection is exactly what taught FaithTab the shape.
+//   · THE EIGHT ARE ADDRESS ROT. §815 inserts the ruling-chain block at the top of PowerTab
+//     and §807(b) adds a mount to OutputContainer, so rows below them re-address:
+//     OutputContainer 966 -> 979, LayersPanel 229 -> 231 (x2), PowerTab 81 -> 149,
+//     130 -> 198, 200 -> 268 (x2), 212 -> 280. Same shape as CR-FP-2's eighty-eight, HK-1's
+//     six, TE-CH-4's one, TE-CAP's two and T7's seven: path, category and snippet are
+//     byte-identical on all eight, and the whole baseline diff is sixteen lines, eight -/+
+//     pairs, verified by grepping the diff for any changed line that is not a `"line"` value.
+// The census ends at 227 against a 227 ceiling — the seven additions net out against nothing,
+// because they were cured rather than counted. No ceiling moved in either direction.
 // ══ LOWERED BY TE-HERALD-1, THE HUMANIZATION WAVE (owner directive, ODQ §754.3;
 //    boundary ruled §763.2) ═══════════════════════════════════════════════════════
 // This is the wave the four sentences frozen above were "owed". The debt named in the

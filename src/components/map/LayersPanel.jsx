@@ -294,7 +294,15 @@ export default function LayersPanel({ onClose }) {
             </span>
             {travelRingLegend().map(row => (
               <span key={row.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: sans, fontSize: FS.micro, color: MUTED }}>
-                <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: '50%', border: `2px solid ${row.color}`, flexShrink: 0 }} />
+                {/* A RULE, NOT A RING. The band key was drawn as a rounded 8x8
+                    circle and tripped the deep-craft kill list's radius ceiling
+                    (85 > 84) — the rounded-plate tell this estate flattens on
+                    sight. A 2px rule in the band's own colour is the panel's
+                    landed idiom (rules on the ground, never rounded chips), reads
+                    as a BAND rather than a point, and costs the ceiling nothing.
+                    ⚠ That ratchet counts COMMENT lines too, by design — so this
+                    note must not spell the property it just removed. */}
+                <span aria-hidden="true" style={{ width: 10, height: 2, background: row.color, flexShrink: 0 }} />
                 {row.word}
               </span>
             ))}

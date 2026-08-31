@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, lazy, Suspense } from 'react';
-import { FS, SP, swatch } from './theme.js';
+import { FS, MUTED, SP, sans, swatch } from './theme.js';
 import { runTemplateNarrative } from '../generators/aiLayer';
 import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText, Clock } from 'lucide-react';
 import { useStore } from '../store/index.js';
@@ -858,8 +858,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           </div>
         )}
         {/* §807(b) — a shared world shows its machinery proudly: the read-only
-            public dossier keeps the "How this was simulated" drawer trigger. */}
-        {publicDossier && <Suspense fallback={null}><PublicSimulationBand settlement={rawSettlement} /></Suspense>}
+            public dossier keeps the "How this was simulated" drawer trigger.
+            THE ONE BOUNDARY FOR THIS CHUNK, and it NARRATES (the witnessed-wait
+            ratchet): PublicSimulationBand deliberately carries no Suspense of its
+            own, so this fallback covers both its lazy import and the drawer's. */}
+        {publicDossier && <Suspense fallback={<div role="status" style={{ padding: `${SP.sm}px ${SP.lg}px 0`, color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Opening the simulation record…</div>}><PublicSimulationBand settlement={rawSettlement} /></Suspense>}
         {/* P121 — Single chrome band below the header — collapses the old violet
             narrative-layer strip + owner/visitor actions strip into one calm row
             (see DossierActionBand). Skipped in readOnly (public viewer), where

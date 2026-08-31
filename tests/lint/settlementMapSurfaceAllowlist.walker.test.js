@@ -69,13 +69,20 @@ const SKIP_DIR = new Set(['node_modules', 'dist', '.git', 'coverage']);
 const BINARY = /\.(png|jpg|jpeg|gif|webp|avif|mp4|webm|woff2?|ttf|otf|ico|pdf|glb|zip)$/i;
 
 /**
- * ⛔ THE ALLOWLIST — fourteen SURFACES, each naming the ruling that retains it and the paths
+ * ⛔ THE ALLOWLIST — fifteen SURFACES, each naming the ruling that retains it and the paths
  * it covers. A path is a directory prefix or an exact file. Order is irrelevant; overlap is fine.
- * ⚠ It is fourteen and not the fifteen the census drafted because the ROWS-ARE-EARNED arm below
- * convicted this list on its first run: four drafted paths — the vendored realm fork, the realm
- * export, the world-map e2e journey and the frozen plate directory — carry NONE of this
- * vocabulary, so listing them was headroom rather than permission. The instrument audited its
- * own author before it audited the estate, which is the behaviour it exists to have.
+ * ⚠ It was FOURTEEN at its founding, and not the fifteen that census drafted, because the
+ * ROWS-ARE-EARNED arm below convicted this list on its first run: four drafted paths — the
+ * vendored realm fork, the realm export, the world-map e2e journey and the frozen plate
+ * directory — carry NONE of this vocabulary, so listing them was headroom rather than
+ * permission. The instrument audited its own author before it audited the estate, which is the
+ * behaviour it exists to have.
+ * ⭐ FIFTEENTH ADDED 2026-08-31 (lane T11 landing, ODQ §815): the ruling-chain read-model, ONE
+ * FILE and not its directory. It is the first row this census earned by REDDING rather than by
+ * being drafted — arm 1 caught §815 pushing the retained ladder read down out of an
+ * already-excused component into a read-model directory no ruling had reviewed, which is
+ * precisely the review this instrument exists to force. The row itself carries the reasoning
+ * and the rejected wider draft.
  */
 const ALLOWLIST = Object.freeze([
   {
@@ -107,6 +114,11 @@ const ALLOWLIST = Object.freeze([
     surface: 'the world-pulse kernels',
     at: ['src/domain/worldPulse/', 'src/domain/advanceEpochLedger.js', 'src/domain/rulingPowerCoup.js', 'src/domain/traditions/genesis.js'],
     why: 'S2: engine kernels read the retained ladder and urban-fabric readers, and the epoch ledger sits deliberately above the directories that stream from it.',
+  },
+  {
+    surface: 'the ruling-chain read-model (ONE FILE, deliberately not the directory)',
+    at: ['src/domain/dossier/powerStrata.js'],
+    why: 'ODQ §815 (2026-08-31, lane T11): the Power tab\'s "Who runs this place?" chain resolves its named ruler through the RETAINED headless ladder reader — the same `src/domain/townMap/ladderRead.js` the first row of this list retains by name ("the ladder/fabric readers"), and the same import already made by src/components/new/tabs/PowerTab.jsx, src/domain/rulingPowerCoup.js, and worldPulse\'s roads and traditions kernels. ⭐ THE CENSUS CAUGHT A REAL MOVE AND THAT IS WHY THIS ROW IS NARROW: §815 pushed the ladder resolution DOWN out of the component (already excused by the broad `src/components/` row) into the read-model, which is architecturally right — a derivation belongs in a read-model, not a renderer — and which moved the vocabulary into a directory no ruling had yet reviewed. ⛔ NOT A RETURNING CAPABILITY, and the distinction is the one §725 draws: this file renders nothing, imports no renderer, emits no plate and consumes no map OUTPUT; it reads one rung\'s standing off a retained headless substrate to answer "who holds the seat". A row for the whole `src/domain/dossier/` directory was drafted and REJECTED as headroom — the dossier tree has exactly one file speaking this vocabulary, and naming the file keeps the next one red. Vetoable at the chair\'s desk.',
   },
   {
     surface: 'the realm / world map — a different surface entirely',

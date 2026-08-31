@@ -28,6 +28,11 @@ import { useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { activeSpatialDigest, hopWeeks } from '../../domain/spatial/distanceRead.js';
 import { seasonForTick } from '../../domain/worldPulse/worldState.js';
+// The estate's ONE spelling of a week-count in prose. Used rather than a local
+// plural ternary because the proseLeak adjacency arm reads `week${…}` as a raw
+// engine token reaching a component — and it is right to: a hand-rolled plural
+// is exactly how the humanizer gets forked one site at a time.
+import { tickDurationLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { GOLD, GREEN, MUTED, SECOND, swatch } from '../theme.js';
 
 /** The closed band vocabulary: ceiling (weeks) → word + tone. Unreachable is
@@ -85,7 +90,7 @@ export default function TravelRingsLayer() {
         band: band ? band.id : 'unreachable',
         color: band ? band.color : swatch.danger,
         tip: band
-          ? `${nameOf(id)}: ${band.word} from ${nameOf(anchor)} (${weeks} week${weeks === 1 ? '' : 's'} by road, this season).`
+          ? `${nameOf(id)}: ${band.word} from ${nameOf(anchor)} (${tickDurationLabel(weeks)} by road, this season).`
           : `${nameOf(id)}: no road reaches it from ${nameOf(anchor)}.`,
       });
     }

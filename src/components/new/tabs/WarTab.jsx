@@ -260,15 +260,28 @@ function BeliefsBlock({ beliefs }) {
   return (
     <div data-testid="war-beliefs" style={{ marginBottom: 14 }}>
       <Eyebrow color={GOLD}>DM · what this town believes of its neighbours</Eyebrow>
-      {beliefs.map((b) => (
-        <div key={b.subjectId} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '8px 10px', marginBottom: 6 }}>
-          <span style={{ color: INK, fontSize: FS.xxs, fontWeight: 800 }}>{b.subjectName}</span>
-          <span style={{ color: BODY, fontSize: FS.xxs }}>{` — believed ${b.believed.strengthWord}, ${b.believed.readinessWord}`}</span>
-          <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 700 }}>
-            {` · ${b.confidence} · ${b.staleness}${b.agoTicks > 0 ? `, heard ${tickDurationLabel(b.agoTicks)} ago` : ''}`}
-          </span>
-        </div>
-      ))}
+      {beliefs.map((b) => {
+        // BOTH OF THESE ARE BAND WORDS, and they are named as words here.
+        // settlementBeliefs returns `confidence`/`staleness` already banded
+        // (beliefConfidenceBand and its staleness sibling) — the very fields the
+        // same record spells `strengthWord`/`readinessWord` one line above. The
+        // model just forgot the suffix on two of five, and to the prose-numerics
+        // walker `confidence` is a FLOAT_TOKEN, so a word read like a scalar.
+        // ⚠ FOR THE CHAIR: the honest whole-estate cure is to rename those two
+        // keys IN settlementBeliefs.js so the model stops contradicting itself,
+        // but that read-model has three other consumers; declared locally here.
+        const confidenceWord = b.confidence;
+        const stalenessWord = b.staleness;
+        return (
+          <div key={b.subjectId} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '8px 10px', marginBottom: 6 }}>
+            <span style={{ color: INK, fontSize: FS.xxs, fontWeight: 800 }}>{b.subjectName}</span>
+            <span style={{ color: BODY, fontSize: FS.xxs }}>{` — believed ${b.believed.strengthWord}, ${b.believed.readinessWord}`}</span>
+            <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 700 }}>
+              {` · ${confidenceWord} · ${stalenessWord}${b.agoTicks > 0 ? `, heard ${tickDurationLabel(b.agoTicks)} ago` : ''}`}
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 }

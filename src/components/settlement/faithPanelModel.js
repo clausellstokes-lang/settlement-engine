@@ -38,6 +38,30 @@ export function legitimacyBand(v) {
   return { label: 'contested', tone: 'bad' };
 }
 
+/**
+ * A 0..100 adherent share → HOW MUCH OF THE TOWN, in words. The third band in
+ * this file's family, and it exists for the reason the other two do: a creed's
+ * following is a thing a reader understands as a proportion of the people they
+ * can see, not as an engine percentage. Closed vocabulary, six rungs, boundaries
+ * chosen so each word means something a DM can act on at the table — "about
+ * half" is a contested town, "a handful" is a cult with a door and no street.
+ *
+ * ⚠ FaithSection renders the raw `{d.share}%` beside a bar, and that row is
+ * BANKED prose-numerics debt (tests/lint/.prose-numerics-baseline.json), not a
+ * sanctioned idiom to copy. A NEW surface humanizes; only the old debt waits for
+ * its wave.
+ * @param {number} share0to100 @returns {string}
+ */
+export function shareBandLabel(share0to100) {
+  const s = num(share0to100);
+  if (s >= 75) return 'nearly the whole town';
+  if (s >= 50) return 'most of the town';
+  if (s >= 35) return 'about half the town';
+  if (s >= 15) return 'a large minority';
+  if (s >= 5) return 'a small following';
+  return 'a handful';
+}
+
 /** A 0..1 lagged piety reading → a devotion band label. @param {number} local01 @returns {string} */
 export function pietyBandLabel(local01) {
   if (local01 >= 0.75) return 'devout';

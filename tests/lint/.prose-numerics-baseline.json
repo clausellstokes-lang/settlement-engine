@@ -13,7 +13,7 @@
   },
   {
     "path": "src/components/OutputContainer.jsx",
-    "line": 966,
+    "line": 979,
     "category": "floatInterpolation",
     "snippet": "{displayProgress || 'Regenerating\\u2026'}"
   },
@@ -223,13 +223,13 @@
   },
   {
     "path": "src/components/map/LayersPanel.jsx",
-    "line": 229,
+    "line": 231,
     "category": "floatInterpolation",
     "snippet": "{Math.round(regionalMinSeverity * 100)}"
   },
   {
     "path": "src/components/map/LayersPanel.jsx",
-    "line": 229,
+    "line": 231,
     "category": "percentToken",
     "snippet": "{Math.round(regionalMinSeverity * 100)}"
   },
@@ -553,31 +553,31 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 81,
+    "line": 149,
     "category": "floatInterpolation",
     "snippet": "{leg.score}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 130,
+    "line": 198,
     "category": "floatInterpolation",
     "snippet": "{governing.power}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 200,
+    "line": 268,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 200,
+    "line": 268,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 212,
+    "line": 280,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },

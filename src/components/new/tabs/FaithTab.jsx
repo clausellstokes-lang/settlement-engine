@@ -27,7 +27,7 @@
 
 import { Suspense, lazy, useMemo } from 'react';
 import FaithSection from '../../settlement/FaithSection.jsx';
-import { faithPanelModel } from '../../settlement/faithPanelModel.js';
+import { faithPanelModel, shareBandLabel } from '../../settlement/faithPanelModel.js';
 import { hasPantheon } from '../../map/PantheonPanel.jsx';
 import { useStore } from '../../../store/index.js';
 import { BODY, BORDER, CARD, FS, GOLD, GREEN, INK, MUTED, RED, SECOND, sans } from '../../theme.js';
@@ -59,7 +59,12 @@ function PatronSeatBlock({ patron, contested }) {
         <strong style={{ color: INK }}>{patron.name}</strong>
         {' holds the seat — its claim is '}
         <strong style={{ color: BAND_TONE[patron.band.tone] || BODY }}>{patron.band.label}</strong>
-        <span style={{ color: MUTED }}>{` (rightful claim ${Math.round(patron.legitimacy * 100)}%)`}</span>
+        {/* THE PARENTHETICAL PERCENTAGE IS GONE, not relocated. It read
+            "(rightful claim 62%)" one space after the band word that already
+            says exactly that in the reader's language — an engine scalar
+            restating a word, which is the prose-numerics class this estate
+            kills. The band carries the meaning; the float carried only
+            precision the table cannot use. */}
         {contested && <span style={{ color: RED }}>{', and a rival creed presses the seat'}</span>}.
       </div>
     </div>
@@ -75,16 +80,25 @@ function NicheOccupancyBlock({ ranks }) {
       <div style={{ fontSize: FS.xxs, fontWeight: 800, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
         Niche occupancy
       </div>
-      {ranks.map((d) => (
-        <div key={d.name} data-testid="faith-niche-row" style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '8px 10px', marginBottom: 6 }}>
-          <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, textTransform: 'capitalize' }}>
-            {d.niche ? nicheWords(d.niche) : 'niche unrecorded'}
-          </span>
-          <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs }}>
-            {' — '}{d.name}{d.isPatron ? ' (patron)' : ''} · {d.standing} · {d.share}%
-          </span>
-        </div>
-      ))}
+      {ranks.map((d) => {
+        // TWO WORDS, BOTH NAMED AS WORDS. `standing` is already a finite typed
+        // token out of religionState ('ascendant' / 'cult' / …) — it only read
+        // as a scalar because `standing` is a FLOAT_TOKEN to the prose-numerics
+        // walker. `share` genuinely IS a number, so it is BANDED rather than
+        // renamed: this row is a new surface, and a new surface humanizes.
+        const standingWord = d.standing;
+        const followingWord = shareBandLabel(d.share);
+        return (
+          <div key={d.name} data-testid="faith-niche-row" style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '8px 10px', marginBottom: 6 }}>
+            <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, textTransform: 'capitalize' }}>
+              {d.niche ? nicheWords(d.niche) : 'niche unrecorded'}
+            </span>
+            <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs }}>
+              {' — '}{d.name}{d.isPatron ? ' (patron)' : ''} · {standingWord} · {followingWord}
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -126,7 +140,10 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
       <FaithSection settlement={settlement} publicDossier={publicDossier} />
       {pantheonCampaign && (
         <div data-testid="faith-realm-pantheon" style={{ marginTop: 16 }}>
-          <Suspense fallback={<div style={{ padding: 12, color: MUTED, fontFamily: sans, fontSize: FS.xs }}>Loading the realm pantheon…</div>}>
+          {/* The wait is WITNESSED, not confessed (the witnessed-wait ratchet's
+              own instruction: narrate it in the world's voice). "Opening the …"
+              is this estate's landed idiom for a door being opened for you. */}
+          <Suspense fallback={<div role="status" style={{ padding: 12, color: MUTED, fontFamily: sans, fontSize: FS.xs }}>Opening the realm pantheon…</div>}>
             <PantheonPanel campaign={pantheonCampaign} />
           </Suspense>
         </div>
