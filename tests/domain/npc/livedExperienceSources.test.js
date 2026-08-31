@@ -79,18 +79,15 @@ const ALDA = npc('npc_1', 'Alda');
 const BERO = npc('npc_2', 'Bero');
 
 /**
- * One REAL snapshot item — `{ id, save, settlement }`, the shape `worldSnapshot`
- * builds and `pulseKernel` walks. Deliberately not a bespoke projection: the
- * observed-shape ratchet reds on a read of a key no writer produces, and it caught
- * exactly that when this fixture was an invented `{settlementId, roster}` shape.
+ * One home AS THE CALLER RESOLVES IT — the documented contract, built here exactly
+ * as `SourceHome` says the pulse seam must build it. The adapters read nothing
+ * else about a settlement: the plumbing (and in particular the seed line, which the
+ * durable-id mint hashes) lives at the pulse, where it already exists once.
  */
-const town = (roster = [ALDA, BERO], config = undefined) => ({
-  id: TOWN,
-  save: { seed: SEED },
-  settlement: { id: TOWN, npcs: roster, ...(config ? { config } : {}) },
-});
+const town = (cast = [ALDA, BERO], patronRef = '') =>
+  ({ placeId: TOWN, placeSeed: SEED, cast, patronRef });
 
-const ctxOf = (extra = {}) => ({ tick: 11, worldState: {}, snapshotItems: [town()], ...extra });
+const ctxOf = (extra = {}) => ({ tick: 11, worldState: {}, homes: [town()], ...extra });
 const kindsOf = (entries) => entries.map((row) => row.kind).sort();
 
 /** The presets that light a flag, MEASURED off the real preset table. */
@@ -232,7 +229,7 @@ describe('SUBJECT RESOLUTION — forward only, and ambiguity refuses', () => {
 
   test('⭐ A SHARED NAME REFUSES — corruptionEvents leaves a name and nothing else', () => {
     const twins = [npc('npc_1', 'Alda'), npc('npc_2', 'Alda')];
-    const ctx = ctxOf({ snapshotItems: [town(twins)] });
+    const ctx = ctxOf({ homes: [town(twins)] });
     // Picking the first match would teach one soul about another's disgrace, and it
     // would be unfindable afterwards. A name is not an identity.
     expect(subjectByDisplayName(ctx, TOWN, 'Alda')).toBeNull();
@@ -267,7 +264,7 @@ describe('SUBJECT RESOLUTION — forward only, and ambiguity refuses', () => {
     // a discrimination rather than a resolver that never works.
     expect(subjectByDurableId(ctxOf({ worldState: seeded.worldState }), seeded.wnpcId).npc.name).toBe('Alda');
     const stranger = npc('npc_1', 'Wolfhard');
-    const rerolled = ctxOf({ worldState: seeded.worldState, snapshotItems: [town([stranger, BERO])] });
+    const rerolled = ctxOf({ worldState: seeded.worldState, homes: [town([stranger, BERO])] });
     expect(subjectByDurableId(rerolled, seeded.wnpcId)).toBeNull();
   });
 
@@ -282,7 +279,7 @@ describe('SUBJECT RESOLUTION — forward only, and ambiguity refuses', () => {
       rosterIdentity: { rosterId: 'npc_2', name: 'Alda', role: 'Reeve' }, tick: 4,
     });
     const twins = [npc('npc_1', 'Alda'), npc('npc_2', 'Alda')];
-    const hit = subjectByDurableId(ctxOf({ worldState: seeded.worldState, snapshotItems: [town(twins)] }), seeded.wnpcId);
+    const hit = subjectByDurableId(ctxOf({ worldState: seeded.worldState, homes: [town(twins)] }), seeded.wnpcId);
     // The SECOND Alda is the graduated one. A name-only resolver returns the first.
     expect(hit.npc.id).toBe('npc_2');
   });
@@ -349,14 +346,12 @@ describe('THE ADAPTERS — each mapping proved against its REAL receipt shape', 
   });
 
   test('⭐ faction_cleansed is read from the RECORD, because the news entry loses `from`', () => {
-    const pulseRecord = {
-      factionCaptureEvents: [
+    const captureTransitions = [
         { settlementId: TOWN, name: 'The Ring', from: 'corrupted', to: 'capture' },
         { settlementId: TOWN, name: 'The Ring', from: 'capture', to: 'corrupted' },
-        { settlementId: TOWN, name: 'The Ring', from: 'equilibrium', to: 'corrupted' },
-      ],
-    };
-    const ctx = ctxOf({ pulseRecord });
+      { settlementId: TOWN, name: 'The Ring', from: 'equilibrium', to: 'corrupted' },
+    ];
+    const ctx = ctxOf({ captureTransitions });
     // Two people live in the town, so each transition teaches two souls.
     expect(SOURCE_ADAPTER_OF.faction_captured.read(ctx).length).toBe(2);
     expect(SOURCE_ADAPTER_OF.faction_cleansed.read(ctx).length).toBe(2);
@@ -385,7 +380,7 @@ describe('THE ADAPTERS — each mapping proved against its REAL receipt shape', 
       // patron rule these two kinds have a receipt and no reachable subject at all.
       settlementIds: [], tick: 11, tags: ['world_pulse', 'pantheon', 'ascendancy', 'deity:the_lady'],
     }];
-    const faithful = ctxOf({ news, snapshotItems: [town([ALDA, BERO], { primaryDeitySnapshot: { _deityRef: 'deity:the_lady' } })] });
+    const faithful = ctxOf({ news, homes: [town([ALDA, BERO], 'deity:the_lady')] });
     expect(SOURCE_ADAPTER_OF.god_fortunes_rose.read(faithful).length).toBe(2);
     // A town under another patron learns nothing, and a town under none learns nothing.
     expect(SOURCE_ADAPTER_OF.god_fortunes_rose.read(ctxOf({ news })).length).toBe(0);
@@ -449,7 +444,7 @@ describe('⭐⭐ THE F9 SOURCE LAW (§853) AT THE ADAPTER — it never makes the
   });
   const vector = () => [{ axisId: 'MERCY', pole: 'vice', band: 'faint' }];
   const milieuCtx = (subject, tick) => ({
-    tick, worldState: {}, snapshotItems: [town([subject])], milieuVectorOf: vector,
+    tick, worldState: {}, homes: [town([subject])], milieuVectorOf: vector,
   });
 
   test('a dwell shorter than the cadence emits NOTHING — not a pull that would be refused', () => {
@@ -495,7 +490,7 @@ describe('⭐⭐ THE F9 SOURCE LAW (§853) AT THE ADAPTER — it never makes the
   });
 
   test('no host vector ⇒ no lesson: the adapter never invents a city it has not read', () => {
-    const ctx = { tick: AMBIENT_CADENCE_TICKS, worldState: {}, snapshotItems: [town([hostage(0)])] };
+    const ctx = { tick: AMBIENT_CADENCE_TICKS, worldState: {}, homes: [town([hostage(0)])] };
     expect(SOURCE_ADAPTER_OF.dwell_milieu.read(ctx)).toEqual([]);
     expect(SOURCE_ADAPTER_OF.dwell_milieu.read({ ...ctx, milieuVectorOf: () => [] })).toEqual([]);
   });
@@ -533,14 +528,14 @@ describe('⭐⭐ THE §856 NON-OVERLAP PIN — computed, and it BLOCKS the stron
   });
 
   test('⭐ A BLOCKED ADAPTER IS NOT CALLED AT ALL — the block is structural', () => {
-    const pulseRecord = { corruptionEvents: [{ settlementId: TOWN, name: 'Alda', kind: 'ousted' }] };
+    const corruptionEvents = [{ settlementId: TOWN, name: 'Alda', kind: 'ousted' }];
     const news = [{ id: 'w.1', impactKind: 'occupation_lifted', settlementIds: [TOWN], tick: 11 }];
     // Each blocked adapter WOULD produce entries if it were called — asserted here
     // so the emptiness below is a block, not an adapter that never worked.
-    expect(SOURCE_ADAPTER_OF.corruption_exposed.read(ctxOf({ pulseRecord })).length).toBe(1);
+    expect(SOURCE_ADAPTER_OF.corruption_exposed.read(ctxOf({ corruptionEvents })).length).toBe(1);
     expect(SOURCE_ADAPTER_OF.home_liberated.read(ctxOf({ news })).length).toBe(2);
     // And the collector emits neither.
-    const collected = collectLivedExperience(ctxOf({ pulseRecord, news }));
+    const collected = collectLivedExperience(ctxOf({ corruptionEvents, news }));
     expect(kindsOf(collected)).toEqual([]);
   });
 
@@ -566,7 +561,7 @@ describe('THE COLLECTOR — deterministic, total, and it feeds the real funnel',
 
   test('an empty or malformed context collects nothing and throws nothing', () => {
     expect(collectLivedExperience({})).toEqual([]);
-    expect(collectLivedExperience({ tick: 'x', worldState: null, snapshotItems: 'nope', news: 7 })).toEqual([]);
+    expect(collectLivedExperience({ tick: 'x', worldState: null, homes: 'nope', news: 7 })).toEqual([]);
   });
 
   test('⭐ END TO END: collected entries move a real soul through the real funnel', () => {

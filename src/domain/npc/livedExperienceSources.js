@@ -168,15 +168,22 @@ export function npcKeyOf(settlementId, npc, index) {
 }
 
 /**
- * @typedef {Object} SourceHome  ONE RESOLVED SNAPSHOT ITEM, lane-local.
+ * @typedef {Object} SourceHome  ONE SETTLEMENT, AS THE CALLER RESOLVED IT.
+ *
+ * The caller builds one of these per settlement it is folding, from the snapshot
+ * item it already holds:
+ *
+ *   placeId   `String(snapshotItem.id)`
+ *   placeSeed `String(save?.seed || settlement?.seed || placeId)` — pulseKernel.js:663
+ *   cast      `settlement.npcs`, IN ROSTER ORDER (the composite key is positional)
+ *   patronRef `settlement.config.primaryDeitySnapshot._deityRef` (or its legacy spelling)
  *
  * ⚠ THE FIELD NAMES ARE DELIBERATELY NOT A SETTLEMENT'S. This record is derived
  * FROM a settlement and is not one, and the observed-shape ratchet is what taught
  * the distinction: an earlier draft called it `settlement` and gave it `roster` and
  * `settlementId`, so every read looked like a read of a settlement key that no
- * writer in the estate produces — which is exactly the dead-arm class that ratchet
- * exists to catch. Naming a derived thing after the thing it derives from is how a
- * reader ends up believing the engine writes a shape nobody writes.
+ * writer in the estate produces. Naming a derived thing after the thing it derives
+ * from is how a reader ends up believing the engine writes a shape nobody writes.
  * @property {string} placeId
  * @property {string} placeSeed
  * @property {ReadonlyArray<object>} cast
@@ -187,15 +194,30 @@ export function npcKeyOf(settlementId, npc, index) {
  * @typedef {Object} SourceContext   everything the tick ALREADY produced
  * @property {number} tick
  * @property {Record<string, unknown>} worldState
- * @property {ReadonlyArray<Record<string, unknown>>} snapshotItems
- *   THE PULSE'S OWN SNAPSHOT ITEMS — `{ id, name, save, settlement }`, exactly as
- *   `worldSnapshot` builds them and `pulseKernel` walks them. Deliberately NOT a
- *   bespoke `{settlementId, seed, roster}` projection: that shape has no writer
- *   anywhere in the estate, and a read of a key the real generator never writes
- *   cannot throw — it degrades to a default, and the arm behind it is dead on
- *   every generated world. The observed-shape ratchet caught exactly that here.
+ * @property {ReadonlyArray<SourceHome>} homes
+ *   RESOLVED BY THE CALLER, and that is a contract rather than a convenience.
+ *   ⭐ THE SEED IS THE REASON. `pulseKernel.js:663` already computes a settlement
+ *   seed — `String(snapshotItem?.save?.seed || snapshotItem?.settlement?.seed ||
+ *   sid)` — and hands it to the verdict lane's `graduateNpc`. The durable-id mint
+ *   HASHES that seed, so a second spelling of the line would graduate one person
+ *   under two identities and nothing would ever red. Re-deriving it here would have
+ *   been exactly that second spelling. The pulse computes it ONCE and passes it,
+ *   which is one writer instead of two.
+ *   The other reason is the estate's observed-shape ratchet: reading `save.seed`,
+ *   `settlement.seed` and `config.primaryDeitySnapshot` here put five reads of
+ *   engine shapes into a mapping leaf that has no business knowing them. Both keys
+ *   are real (their writers are the SAVE PATH and the AUTHORED-INPUT surfaces, the
+ *   ratchet's own M8/M9 classes) — but the plumbing belongs at the pulse seam, and
+ *   the ratchet is what made that legible.
  * @property {ReadonlyArray<Record<string, unknown>>} [news]     normalized WizardNewsEntry rows
- * @property {Record<string, unknown>} [pulseRecord]             this tick's record projections
+ * @property {ReadonlyArray<Record<string, unknown>>} [corruptionEvents]
+ *   `pulseRecord.corruptionEvents` — the NARROWED projection
+ *   `{settlementId, name, kind, criminalInstitution, homeInstitution}`.
+ * @property {ReadonlyArray<Record<string, unknown>>} [captureTransitions]
+ *   `pulseRecord.factionCaptureEvents` — `{settlementId, name, from, to}`. Named as
+ *   its own input rather than reached through the record, for the same reason
+ *   `homes` is: an adapter should say which surface it needs, not go rummaging in a
+ *   record for it. The two ends matter here — see `factionEntries`.
  */
 
 /**
@@ -213,31 +235,20 @@ export function npcKeyOf(settlementId, npc, index) {
 // ── SUBJECT RESOLVERS — pure, and none of them guesses ───────────────────────
 
 /**
- * Every settlement in the context, resolved off the REAL snapshot item and
- * codepoint-ordered so a collection is a property of the input set rather than of
- * its arrival order.
- *
- * ⚠ THE SEED LINE IS THE ESTATE'S OWN, COPIED RATHER THAN INVENTED:
- * `pulseKernel.js:663` resolves a settlement seed as
- * `save?.seed || settlement?.seed || sid`, and the durable-id mint hashes it — so a
- * second spelling here would graduate the same person under a different identity
- * than the verdict lane does, and nothing would ever red.
+ * The caller's homes, normalized and codepoint-ordered so a collection is a
+ * property of the input set rather than of its arrival order. A home with no id is
+ * dropped — an adapter cannot address a place that will not say where it is.
  * @param {SourceContext} ctx @returns {SourceHome[]}
  */
 function orderedSettlements(ctx) {
-  return asArray(asObject(ctx).snapshotItems)
+  return asArray(asObject(ctx).homes)
     .map((raw) => {
-      const item = asObject(raw);
-      const save = asObject(item.save);
-      const settlement = asObject(item.settlement);
-      const settlementId = str(item.id) || str(settlement.id);
-      const config = asObject(settlement.config);
-      const patron = asObject(config.primaryDeitySnapshot);
+      const home = asObject(raw);
       return /** @type {SourceHome} */ ({
-        placeId: settlementId,
-        placeSeed: str(save.seed) || str(settlement.seed) || settlementId,
-        cast: asArray(settlement.npcs),
-        patronRef: str(patron._deityRef) || str(patron.primaryDeityRef),
+        placeId: str(home.placeId),
+        placeSeed: str(home.placeSeed),
+        cast: asArray(home.cast),
+        patronRef: str(home.patronRef),
       });
     })
     .filter((home) => home.placeId)
@@ -384,14 +395,14 @@ function newsRows(ctx, match) {
 }
 
 /**
- * The rows of one `pulseRecord` projection, in order. These arrays are already
- * capped and ordered by their producer; they carry no id, so the adapter mints the
- * evidence id from the record's own fields plus the tick.
+ * The rows of one caller-supplied record projection, in order. These arrays are
+ * already capped and ordered by their producer; they carry no id, so the adapter
+ * mints the evidence id from the row's own fields plus the tick.
  * @param {SourceContext} ctx @param {string} key
  * @returns {Array<Record<string, unknown>>}
  */
 function recordRows(ctx, key) {
-  return asArray(asObject(asObject(ctx).pulseRecord)[key]).map((row) => asObject(row));
+  return asArray(asObject(ctx)[key]).map((row) => asObject(row));
 }
 
 /** @param {SourceContext} ctx @returns {number} */
@@ -753,7 +764,7 @@ export const LIVED_EXPERIENCE_SOURCES = Object.freeze([
 function factionEntries(ctx, kind) {
   const now = tickOf(ctx);
   const out = [];
-  for (const raw of recordRows(ctx, 'factionCaptureEvents')) {
+  for (const raw of recordRows(ctx, 'captureTransitions')) {
     const transition = asObject(raw);
     const from = str(transition.from);
     const to = str(transition.to);
