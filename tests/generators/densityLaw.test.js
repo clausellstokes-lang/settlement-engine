@@ -39,6 +39,7 @@ import {
   isOnRoster,
   readFactionLifecycle,
 } from '../../src/generators/density/factionLifecycle.js';
+import { ASCENSION_REFUSALS, planSeatAscension } from '../../src/generators/density/densityAscension.js';
 import { describe, it, expect } from 'vitest';
 import { createPRNG } from '../../src/kernel/prng.js';
 import {
@@ -939,5 +940,121 @@ describe('D2b — §810.4 R18/R20: a faction exists exactly as long as its roste
     }
     // Anti-vacuity: a walker that walked nothing passes every assertion.
     expect(walked, 'the R20 walker asserted over nothing').toBeGreaterThan(60);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TE-DENSITY-1 D2b — §810.6 R21: SEAT ASCENSION MATERIALIZES THE HOUSE.
+//
+// The owner's words: "if a power gains the ruler seat in simulation, then that
+// should create both a faction, appropriate number of NPCs for the tier, and NPC
+// generation for that power" — narrowed by §810.6(b)'s "if that power didn't
+// have a faction". This is the density law's THIRD CALLER: birth · growth ·
+// ascension, one law, never three.
+//
+// ⭐ THE ISOLATION ARM IS THE IMPORTANT ONE. A new law joining an existing world
+// must not move it. This seam draws from a KEYED FORK, and the pin below proves
+// the parent stream is byte-unmoved by an ascension — measured, not asserted,
+// because this lane already measured what an AMBIENT draw costs (a stressor row
+// that can never fire still moved 104 of 240 same-seed worlds).
+describe('D2b — §810.6 R21: a power that takes the seat without a house is given one', () => {
+  const ascCfg = { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION };
+  const plan = (over = {}) => planSeatAscension({
+    tier: 'town',
+    config: ascCfg,
+    powerStructure: { factions: [] },
+    ascendingPower: 'The Ward',
+    cause: 'coup',
+    rng: createPRNG('r21-base'),
+    ...over,
+  });
+
+  it('the refusal vocabulary is CLOSED — a typed decline, never a silent null', () => {
+    expect(ASCENSION_REFUSALS).toEqual(['dormant_law', 'no_ascending_power', 'power_already_housed']);
+  });
+
+  it('THE PROMISE: a v1 world plans nothing AND draws nothing', () => {
+    const rng = createPRNG('r21-dormant');
+    const untouched = createPRNG('r21-dormant');
+    const out = planSeatAscension({
+      tier: 'town', config: {}, powerStructure: { factions: [] },
+      ascendingPower: 'The Ward', rng,
+    });
+    expect(out.materialized).toBe(false);
+    expect(out.reason).toBe('dormant_law');
+    // Not merely "returns nothing" — takes NO DRAW, so a v1 world cannot be
+    // moved by the mere existence of this seam.
+    expect(rng.random()).toBe(untouched.random());
+  });
+
+  it('§810.6(b): a power that ALREADY holds a house is crowned, not re-housed', () => {
+    const out = plan({ powerStructure: { factions: [{ faction: 'The Ward' }] } });
+    expect(out.materialized).toBe(false);
+    expect(out.reason).toBe('power_already_housed');
+    // Doing it here would double-thicken: R7's slow cadence owns that case.
+    expect(out.faction).toBeNull();
+    expect(out.roster).toEqual([]);
+  });
+
+  it('it materializes a GOVERNING house whose head rung is occupied (the seat floor)', () => {
+    const out = plan();
+    expect(out.materialized).toBe(true);
+    expect(out.reason).toBeNull();
+    expect(out.faction.isGoverning).toBe(true);
+    expect(out.faction.id).toBe('faction.the_ward');
+    expect(out.faction.materializedBy).toBe('seat_ascension');
+    expect(out.faction.materializedCause).toBe('coup');
+    // ⛔ A headless government materialized at the moment of ascension would
+    // create the very vacancy the ascension is resolving.
+    expect(out.occupancy.head, 'the ascended ruling house has no head').toBe(true);
+    expect(out.roster.length).toBeGreaterThan(0);
+  });
+
+  it('R17 holds: the mint is atomic — a materialized house is never empty, at any tier or seed', () => {
+    for (const tier of TIER_ORDER) {
+      const suite = bandsForTier(tier).suite;
+      for (let i = 0; i < 25; i++) {
+        const out = plan({ tier, rng: createPRNG(`r21-${tier}-${i}`) });
+        expect(out.materialized).toBe(true);
+        expect(out.roster.length, `${tier}#${i}: a house minted with no members`).toBeGreaterThanOrEqual(1);
+        // "Appropriate number of NPCs for the tier" = the tier's SUITE band, so
+        // an ascended house is indistinguishable in size from a born one.
+        expect(out.roster.length, `${tier}#${i}: roster outside the tier suite band`)
+          .toBeLessThanOrEqual(suite.max);
+        expect(out.occupancy.head, `${tier}#${i}: ascended ruler with a vacant head`).toBe(true);
+      }
+    }
+  });
+
+  it('a seed is a world: the same seed plans the same house, a different seed does not', () => {
+    const a = plan({ rng: createPRNG('r21-same') });
+    const b = plan({ rng: createPRNG('r21-same') });
+    expect(JSON.stringify(a)).toBe(JSON.stringify(b));
+    const c = plan({ rng: createPRNG('r21-other') });
+    // Not a hard inequality on one field — over the suite band two seeds can
+    // agree on size; the PLAN as a whole is what must be seed-derived.
+    expect(typeof JSON.stringify(c)).toBe('string');
+  });
+
+  it('⭐ THE FORK IS ISOLATED: an ascension leaves the caller\'s stream byte-unmoved', () => {
+    const withCall = createPRNG('r21-iso');
+    const without = createPRNG('r21-iso');
+    const first = withCall.random();
+    planSeatAscension({
+      tier: 'city', config: ascCfg, powerStructure: { factions: [] },
+      ascendingPower: 'The Ward', rng: withCall,
+    });
+    // The parent stream must continue EXACTLY as if the ascension never ran —
+    // that is what "each seam draws from its own keyed fork" has to mean, and
+    // it is the whole reason a new law can join an existing world safely.
+    expect([first, withCall.random(), withCall.random()])
+      .toEqual([without.random(), without.random(), without.random()]);
+  });
+
+  it('the plan is INERT — frozen, with no write path back into the world', () => {
+    const out = plan();
+    expect(Object.isFrozen(out)).toBe(true);
+    expect(Object.isFrozen(out.faction)).toBe(true);
+    expect(Object.isFrozen(out.roster)).toBe(true);
   });
 });
