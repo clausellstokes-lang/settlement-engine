@@ -36,6 +36,11 @@ import { methodClash, lawSign, STANCE_TUNING } from './deityStance.js';
 // short-circuit reader (absent record ⇒ literal 1.0), so the mandate coupling is
 // byte-identical on every deity-free / tick-0 / zero-span fixture.
 import { pietyMultOf } from './piety.js';
+// W-FAITH F4c — the influence-field projection builder. The import graph stays acyclic:
+// faithField imports only kernel/math, piety, cultImpositionApply and magicLedger, none
+// of which reaches back here. It answers null for every settlement whose pantheon
+// authors no boon or bane, which is every settlement in the estate today.
+import { faithFieldProjection } from './faithField.js';
 
 export const RELIGION_TUNING = Object.freeze({
   SLOTS_BY_TIER,
@@ -643,7 +648,27 @@ export function projectReligionStateOntoSettlement(settlement, religionStates, s
     // the faith panel's cause-chain line. FLAG AND RING — see the simulationRules param note.
     ...(simulationRules?.faithUnseatingEnabled === true && Array.isArray(state.patronFalls) && state.patronFalls.length ? { patronFall: state.patronFalls[0] } : {}),
   };
-  return { ...settlement, config: { ...settlement.config, faithProfile } };
+  // W-FAITH F4c: the influence-field read-model — the THIRD conditional derived record
+  // beside `piety` (W-F3) and `martial` (W-F8), and it carries their whole discipline.
+  // It is what lets `causalState` reach the field at all: `deriveCausalState` takes only
+  // a settlement, and every one of its callers holds no religion state (F3c's M2).
+  //
+  // ⭐ COMPUTED AGAINST THE SETTLEMENT THAT ALREADY CARRIES **THIS** TICK'S PIETY, not
+  // the one that still carries last tick's. `faithFieldOf` folds `pietyMultOf` into every
+  // term, and `pietyMultOf` reads `config.faithProfile.piety` — so building the field
+  // before the attach would mint a record whose `field` and whose `piety` disagreed by
+  // one tick while sitting in the same object. One record, one tick's truth. The
+  // consumption side is unchanged and is where the anti-runaway seam lives: the causal
+  // reader sees this at the NEXT tick's start, so this tick's field can never re-enter
+  // this tick's piety.
+  //
+  // ABSENT unless some deity authors a boon or bane (`faithFieldProjection` answers null
+  // when every bound channel's total is exactly 0) ⇒ no key ⇒ byte-identical under the
+  // dormancy oracle, on every world in the estate today.
+  const withPiety = { ...settlement, config: { ...settlement.config, faithProfile } };
+  const field = faithFieldProjection(withPiety, state);
+  if (!field) return withPiety;
+  return { ...settlement, config: { ...settlement.config, faithProfile: { ...faithProfile, field } } };
 }
 
 // ── Divine-mandate legitimacy coupling ───────────────────────────────────────

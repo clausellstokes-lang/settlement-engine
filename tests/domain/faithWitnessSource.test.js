@@ -323,8 +323,14 @@ describe('THE ENTRY SHAPE — funnel intake, one entry per deity', () => {
     const [entry] = entries;
     const CHANNEL_WORDS = ['harvest', 'trade', 'craft', 'healing', 'sea', 'order', 'war_readiness', 'learning', 'hearth'];
     const TEMPER_WORDS = ['warlike', 'peacelike', 'neutral'];
+    // ⭐ THE LIVENESS ANCHOR, added by W-FAITH F4c. Without it every assertion below
+    // passes on an EMPTY `pulls` array — the collection drifting away reads exactly like
+    // the words being correctly excluded, which is the vacuity the negative-assertion
+    // walker exists to refuse. The sibling test above already pins this; this arm did not.
+    expect(entry.pulls.length, 'no pulls to inspect — the arm below would prove nothing').toBeGreaterThan(0);
     const text = JSON.stringify(entry.pulls);
     for (const word of [...CHANNEL_WORDS, ...TEMPER_WORDS]) {
+      // anchored: entry.pulls.length is pinned non-empty three lines above
       expect(text, `a witness pull carried '${word}' — that is the field's road, not this one`).not.toContain(word);
     }
   });

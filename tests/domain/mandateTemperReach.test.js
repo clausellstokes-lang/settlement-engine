@@ -64,6 +64,7 @@ describe('ROW 1a — WHY ONE SPELLING IS THE WHOLE CURE', () => {
   test('⛔ `deityTemper` can NEVER answer \'peaceful\', on either arm', () => {
     // This is the assertion that licenses a single-spelling cure. If it ever fails,
     // `mandateAlignmentFit` needs a both-spellings arm and this file is the warning.
+    // anchored: the NEXT line pins TEMPER_WORDS to its exact three members
     expect(TEMPER_WORDS).not.toContain('peaceful');
     expect([...TEMPER_WORDS]).toEqual(['warlike', 'peacelike', 'neutral']);
 
@@ -96,6 +97,7 @@ describe('ROW 1a — WHY ONE SPELLING IS THE WHOLE CURE', () => {
   test('a good/lawful deity DERIVES peacelike with no authoring at all — the live-today half', () => {
     // The docket row said "the day authored words exist". It is live now: this deity
     // authors nothing and still reaches both cured branches.
+    // anchored: the NEXT line drives GOOD_LAWFUL through deityTemper and pins the answer
     expect(GOOD_LAWFUL).not.toHaveProperty('authoredTemper');
     expect(deityTemper(GOOD_LAWFUL)).toBe('peacelike');
   });
