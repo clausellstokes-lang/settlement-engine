@@ -18,6 +18,59 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-31 — THE TRADES THAT WERE FILED AS GOVERNMENT (322 rows of 525 moved; 0 rows
+ *   added, 0 removed, 0 templates added or removed, 0 array-length moves, 0 key-order moves).
+ *   Lane T8. RULED: ODQ §759.5 docketed the defect and §773.1 moved the relabel OUT of the
+ *   hygiene train and INTO this window precisely because it moves goldens; the chair approved
+ *   the corrected denominator at §858.
+ *   THE DEFECT WAS A LABEL, AND THE CHARTER'S COUNT OF IT WAS WRONG. §759.5 said "~26 craft
+ *   trades filed `priorityCategory 'government'`". Enumerated at this base it is THIRTY, and
+ *   the four-row gap matters because it proves the rows were never listed — so this lane
+ *   listed them and dispositioned each one instead of relabelling a number.
+ *   THE BOUNDARY IS THE CATALOG'S OWN, NOT THIS LANE'S INVENTION, which is what makes 27 of
+ *   30 defensible and 3 of 30 refusals. `tests/data/priorityCategoryPlausibility.test.js`
+ *   already ratified the three-way split when an earlier run was spot-fixed: Midwife → crafts
+ *   (a maker), Village scribe → government (civic, DELIBERATELY), Wildfowler → economy
+ *   (harvest). Applying that same rule:
+ *     19 → `crafts`   makers working a material: Maltster · Sawmill · Tannery · Fuller · Dyer
+ *                     · Potter · Brickmaker · Brewer · Cobbler · Tailor · Smelter · Sawmill
+ *                     (commercial) · Brewery · Tanner (established) · Cobbler's guild ·
+ *                     Tailor's guild · Chandler · Glassblower · Ropemaker
+ *      8 → `economy`  extraction, husbandry, carriage and retail, matching the shelf's own
+ *                     Stone quarry / Mine / Charcoal burner / Dairy farmer rows: Peat cutter ·
+ *                     Mine (open cast) · Shepherd · Pack animal trader · Stable yard ·
+ *                     Beekeeper · Fishmonger · Stable master
+ *      3 KEPT         Mint (striking coin is sovereign) · Town crier (the settlement's own
+ *                     voice) · Village scribe (keeper of record and custom). The divergence
+ *                     is DATA, as `categoryGovernance`'s header says, and the existing pin on
+ *                     Village scribe therefore passes unchanged rather than being edited.
+ *   ⛔ `infrastructure` WAS FORBIDDEN AND THAT IS A FINDING, NOT A STYLE CHOICE: it is absent
+ *   from `institutionProfile`'s INST_CATEGORY_TO_FACTION, so filing a stable yard there would
+ *   have deleted it from the support web entirely — a silent capability loss dressed as a
+ *   tidier taxonomy.
+ *   THE COMPLETE PATH-TEMPLATE CENSUS IS ONE TEMPLATE, measured over whole settlements
+ *   base-vs-tip:
+ *     $.institutions[].priorityCategory            1643 changes / 322 rows
+ *   ZERO other templates. No institution appears or disappears, no roster reorders, no
+ *   faction, name, economy figure, trace row or rng draw moves anywhere — the relabel is a
+ *   pure re-facing of an existing field, which is why 1643 changes touch exactly one path.
+ *   ⭐ THE CONSEQUENCE IS REAL AND IT IS NOT IN THIS MANIFEST, so it is measured here rather
+ *   than asserted from §759.5's wording. The label's live consumer is render-time
+ *   (`display/institutionProfile.js`, `dossier/powerSupport.js`), and `crafts` and `economy`
+ *   both map to the ECONOMY faction while `government` maps to the government one. Executed
+ *   over all 17,361 institutions in the corpus, the backing faction moves on exactly 1,643 —
+ *   the same count as the label changes, so the correspondence is 1:1 — across 322 of 525
+ *   settlements. The largest single class is the one §759.5 was pointing at:
+ *     493  null → Guild Council        240  null → Merchant Guilds       (no backer at all)
+ *     251  Town Council → Merchant Guilds   109  City Council → Merchant Guilds
+ *   ⭐ ROUGHLY EIGHT HUNDRED OF THE MOVES ARE `null` → A REAL FACTION: a village tannery filed
+ *   as 'government' in a settlement whose power structure has no government faction showed NO
+ *   backer whatsoever. The relabel does not merely re-point those rows, it gives them one.
+ *   TOTALITY CONTROL: the parent commit (`918df1dc4`) reproduces all 525 committed hashes with
+ *   0 mismatches, so 203 byte-identical is a count and 322 is not a floor.
+ *   THE PROMISE. A stored settlement is never re-derived; only newly generated worlds get the
+ *   corrected labels. A world saved before this lands keeps its trades filed as government.
+ *
  * 2026-08-31 — THE LAST PRIVATE PROSPERITY LADDER (91 rows of 525 moved; 0 rows added,
  *   0 removed, 0 templates added or removed, 0 array-length moves, 0 key-order moves).
  *   Lane T8, the shift window's first car. RULED: J-T7-C at ODQ §809, scheduled into this

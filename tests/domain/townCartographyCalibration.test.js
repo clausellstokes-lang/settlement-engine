@@ -64,6 +64,34 @@
  * ── SHIFT RECORD ─────────────────────────────────────────────────────────────
  * A frozen measurement cannot show WHY it moved, so every re-record is written here.
  *
+ * 2026-08-31 — THE TRADES CHANGED QUARTERS (lane T8; 207 rows of 504 moved, 0 added,
+ *   0 removed). RULED: ODQ §759.5 / §773.1, chair-approved at §858. This is NOT a
+ *   cartography change — no premise, cap, packer or glyph rule was touched. T8 corrected 27
+ *   catalog rows whose `priorityCategory` said 'government' while the institution was a trade
+ *   (a tannery, a cobbler, a shepherd), and `townMap/institutionAssignment` reads that field
+ *   to decide which quarter a building belongs to. The trades therefore moved out of the
+ *   civic quarter and into the craft, industrial and merchant ones, which is the correct
+ *   answer and a different map.
+ *   EXACTLY THREE FIELDS MOVED, measured over the whole manifest rather than sampled:
+ *     cartoBuildings 171 rows · cartoRowBytes 146 rows · cartoDupTranslate 170 rows
+ *   `institutions`, `districts`, `sceneBuildings`, `dark`, `outcome` and `reported` are
+ *   UNCHANGED on all 504 rows — so no roster moved, and ⭐ W4's premise-failure inventory is
+ *   still ZERO at every tier: not one settlement became unable to draw a map.
+ *   TWO FROZEN MAXIMA FELL AND ARE BANKED (the ratchet's own compliance path):
+ *     town maxBuildings 115 -> 112 · city 203 -> 198
+ *   ⚠ AND ONE READING ROSE, NAMED RATHER THAN BURIED, because it is a real if small cost on
+ *   a surface the owner looks at: the repeated-SHAPE rate went village 66 -> 78, town
+ *   59 -> 64, city 52 permille. Moving trades into shared craft and industrial quarters puts
+ *   more buildings of the same glyph family side by side, so the drawn map repeats itself
+ *   slightly more — about one building in thirteen at village tier, up from one in fifteen.
+ *   Every tier remains well under its derived ceiling and `CARTOGRAPHY_HEADROOM_PERMILLE` is
+ *   untouched, but the three derived ceilings are a readout of the reading and rose with it
+ *   (106 -> 125, 95 -> 103, 82 -> 84) — stated at the assertion too, so nobody reads that as
+ *   a cap being raised to fit. If the owner would rather have the old density, the lever is
+ *   the packer's glyph variety, not this taxonomy.
+ *   The generator-side half of the same shift is recorded in
+ *   `tests/property/generatorGoldenMaster.test.js` (322 of 525 rows, one template).
+ *
  * 2026-08-23 — FIRST RECORD (lane TE-CG-1, packet MF-CG1). Corpus captured at
  *   00e7af61 through the committed re-record arm below. 504 rows; dark compile
  *   504/504 clean; 287 lit failures in exactly TWO premise classes — 266
@@ -299,8 +327,8 @@ const FROZEN = Object.freeze({
   thorp: Object.freeze({ throws: 0, maxInstitutions: 12, maxBuildings: 13 }),
   hamlet: Object.freeze({ throws: 0, maxInstitutions: 25, maxBuildings: 27 }),
   village: Object.freeze({ throws: 0, maxInstitutions: 41, maxBuildings: 46 }),
-  town: Object.freeze({ throws: 0, maxInstitutions: 63, maxBuildings: 115 }),
-  city: Object.freeze({ throws: 0, maxInstitutions: 56, maxBuildings: 203 }),
+  town: Object.freeze({ throws: 0, maxInstitutions: 63, maxBuildings: 112 }),
+  city: Object.freeze({ throws: 0, maxInstitutions: 56, maxBuildings: 198 }),
   metropolis: Object.freeze({ throws: 0, maxInstitutions: 65, maxBuildings: 264 }),
 });
 
@@ -348,9 +376,9 @@ const FROZEN = Object.freeze({
 const DUPLICATES = Object.freeze({
   thorp: Object.freeze({ permille: 147 }),
   hamlet: Object.freeze({ permille: 218 }),
-  village: Object.freeze({ permille: 66 }),
-  town: Object.freeze({ permille: 59 }),
-  city: Object.freeze({ permille: 51 }),
+  village: Object.freeze({ permille: 78 }),
+  town: Object.freeze({ permille: 64 }),
+  city: Object.freeze({ permille: 52 }),
   metropolis: Object.freeze({ permille: 58 }),
 });
 
@@ -1020,7 +1048,13 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     expect(drift).toEqual([]);
     // The ceilings are the derivation evaluated, not a second table: a reader can
     // check every one of them by hand against DUPLICATES and the declared headroom.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([236, 349, 106, 95, 82, 93]);
+    // ⚠ THESE THREE ROSE WITH THE READING, AND THAT IS THE DERIVATION, NOT A RAISED CAP.
+    // `duplicateCeilingPermille` is reading + CARTOGRAPHY_HEADROOM_PERMILLE, so re-freezing
+    // village/town/city upward in T8 lifts their derived ceilings with them (106 -> 125,
+    // 95 -> 103, 82 -> 84). The invariant that actually bounds this surface is the headroom
+    // constant, which is UNCHANGED; the ceiling is a readout of it, and a reader who wants
+    // the bound should read the headroom, not these six numbers.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([236, 349, 125, 103, 84, 93]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });
