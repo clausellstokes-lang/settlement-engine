@@ -8,8 +8,14 @@
  *   FREE TEXT        matches rendered prose and resolved settlement names, and
  *                    never reaches into arbitrary deep record fields.
  *   THE AUDIENCE LAW covert entries never reach a projection that could not read
- *                    them. FAIL CLOSED — the default, and an unreadable
- *                    provenance is covert, not canon. The hardest pin here.
+ *                    them. The fail-closed is in the PARAMETER — `includeCovert`
+ *                    defaults FALSE — and the pins below are all on MARKED
+ *                    entries, including a marker the normalizer never lifted.
+ *                    An UNMARKED entry passes, which every result-bearing
+ *                    search in this file pins positively by running with
+ *                    `includeCovert` unset; this header used to claim an
+ *                    unreadable provenance read as covert, and no test ever
+ *                    said so because the code has never done it (§833 docket).
  *   ORGANIZATION     grouped by desk and time band, deterministically ordered.
  *   THE READER SHELL every declared-pending facet has a WIRED reader that lights
  *                    the moment a typed ref appears on the record — proved by

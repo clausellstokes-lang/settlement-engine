@@ -192,12 +192,46 @@ export function facetAvailability(entries = [], ctx = {}) {
 }
 
 /**
- * THE AUDIENCE GATE. Covert entries are dropped unless the caller has PROVEN a
- * DM session. Fail closed: the default is false, and an entry whose provenance
- * cannot be read at all is treated as covert rather than as canon.
+ * THE AUDIENCE GATE. A MARKED covert entry is dropped unless the caller has
+ * PROVEN a DM session.
+ *
+ * WHERE THE FAIL-CLOSED IS, STATED PRECISELY, because the prose here used to
+ * claim more than the code does and a reader trusted it (§833 docket). The
+ * fail-closed property the spine's audience law requires (DESIGN_FP_SPINE.md
+ * "includeCovert discipline; search is a view, never a leak") lives in the
+ * PARAMETER: `includeCovert` defaults to FALSE at every entry point — this
+ * file's `searchHerald`, and `rumorHeraldLink.js`'s two — so the unsafe call is
+ * the one a caller has to type. It does NOT live in this predicate's default
+ * answer.
+ *
+ * THIS PREDICATE IS DEFAULT-OPEN, BY DESIGN. An entry carrying no covert marker
+ * reads as canon and passes. That is the estate's one covert-visibility
+ * convention, not a deviation from it: `includeCovert` filters MARKED rows and
+ * passes unmarked ones wherever it appears (npcLedgerProjection.js states the
+ * seam; mobilizationStatus.js, tradePressure.js, politicsRead.js follow it). A
+ * gate that hid every unmarked row would empty the paper, whose default job is
+ * to print canon.
+ *
+ * ⚠ AND A MALFORMED ENTRY READS AS CANON, NOT AS COVERT. `asObject` narrows any
+ * non-object — null, undefined, an array, a string — to `{}`, so `recordsOf`
+ * yields two empty records, no marker is found, and the answer is `true`. The
+ * withdrawn sentence claimed the opposite. Nothing upstream produces such an
+ * entry today (heraldFeed.js lifts `covert: true` to `provenance: 'covert'`);
+ * if a caller ever admits unvalidated rows, the validation belongs at THAT
+ * seam, not here — narrowing a broken entry to an empty one is exactly the
+ * habit the cartography leaves refused.
+ *
+ * ⛔ DELIBERATELY DEFERRED, DO NOT "FIX" IN PASSING: the
+ * `visibility === 'covert'` disjunct below is a DEAD spelling — the domain
+ * writes `covert: true` or `visibility: 'gm'`, never `'covert'`. Re-pointing it
+ * would make a currently-dead check live, which is a behavior change on a
+ * security-adjacent surface; raised at FABLE_VALIDATION_QUEUE.md:7444 and ruled
+ * by the chair (H7, 2026-08-11) to STAY DEAD pending a chartered wave. The
+ * `covert === true` arm beside it IS live and is what actually gates today.
+ *
  * @param {Record<string, unknown>} entry
  * @param {boolean} includeCovert
- * @returns {boolean}
+ * @returns {boolean} true when the entry may be shown to this audience
  */
 export function readableBy(entry, includeCovert) {
   const provenance = asObject(entry).provenance;
