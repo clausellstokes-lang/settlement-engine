@@ -48,14 +48,16 @@ function state(members, patronRef) {
   return { deities, patronRef: patronRef === undefined ? members[0]?.deityRef ?? null : patronRef };
 }
 
-const SETTLEMENT = Object.freeze({ id: 's.town', placeSeed: 'seed-town', config: {} });
+const SETTLEMENT = Object.freeze({ id: 's.town', config: {} });
+/** The save's seed, supplied BY THE CALLER — a settlement carries none (see the adapter). */
+const SEED = 'seed-town';
 const NPC = Object.freeze({ id: 'npc_1', name: 'Ada', role: 'priestess' });
 
 /** One season of dwell — the smallest span this source may emit. */
 const ONE_SEASON = 13;
 
 function emit(religionState, { dweltTicks = ONE_SEASON, settlement = SETTLEMENT } = {}) {
-  return faithWitnessEntries({ settlement, religionState, npc: NPC, dweltTicks, eventId: 'ev.1' });
+  return faithWitnessEntries({ settlement, religionState, npc: NPC, dweltTicks, eventId: 'ev.1', settlementSeed: SEED });
 }
 
 describe('RECONCILE PINS — a mirror cannot outlive its source silently', () => {
@@ -161,6 +163,7 @@ describe('THE CADENCE GATE — F9 as amended, satisfied by arithmetic', () => {
         npc: NPC,
         dweltTicks: /** @type {any} */ (dwelt),
         eventId: 'ev.1',
+        settlementSeed: SEED,
       }), `dwell ${String(dwelt)}`).toEqual([]);
     }
   });
@@ -234,7 +237,7 @@ describe('THE BAND LADDER — exposure steps DOWN from the authored level, never
       member({ ref: 'd.cult', share: 30, rank: 'minor', standing: 'established', axes: 'MERCY:virtue:defining' }),
     ], 'd.patron');
     // exposure 0.108 ⇒ faint. Under a composite of 2.5 it becomes 0.27 ⇒ one rung ⇒ firm.
-    const devout = { id: 's.devout', placeSeed: 'x', config: { faithProfile: { piety: { composite: 2.5 } } } };
+    const devout = { id: 's.devout', config: { faithProfile: { piety: { composite: 2.5 } } } };
     expect(emit(st)[0].pulls[0].band).toBe('faint');
     expect(emit(st, { settlement: devout })[0].pulls[0].band).toBe('firm');
   });
@@ -331,7 +334,7 @@ describe('THE ENTRY SHAPE — funnel intake, one entry per deity', () => {
     // cultural emphasis in prose only". A god's character working on the people who
     // live among its priests IS that cultural emphasis; gating it would delete the
     // very thing D3 says survives.
-    const dead = { id: 's.dead', placeSeed: 'sd', config: { magicLevel: 'medium', magicExists: false } };
+    const dead = { id: 's.dead', config: { magicLevel: 'medium', magicExists: false } };
     const entries = emit(state([member({ axes: 'MERCY:virtue:defining' })]), { settlement: dead });
     expect(entries.length).toBe(1);
     expect(entries[0].pulls).toEqual([{ axisId: 'MERCY', pole: 'virtue', band: 'heavy' }]);
@@ -343,7 +346,7 @@ describe('THE ENTRY SHAPE — funnel intake, one entry per deity', () => {
     }
     expect(faithWitnessEntries({
       settlement: SETTLEMENT, religionState: state([member({ axes: 'MERCY:virtue:defining' })]),
-      npc: null, dweltTicks: 52, eventId: 'ev.1',
+      npc: null, dweltTicks: 52, eventId: 'ev.1', settlementSeed: SEED,
     })).toEqual([]);
   });
 

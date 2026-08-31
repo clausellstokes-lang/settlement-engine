@@ -141,16 +141,10 @@ const str = (v) => (typeof v === 'string' ? v : '');
 
 /**
  * 0-HOLE DISCIPLINE: this leaf declares no `any`. A settlement arrives as the
- * estate's `SimSettlement`, and the one shape that is NOT that — the magic ledger's
- * own read surface — is PROJECTED explicitly below rather than cast across, which is
- * `magicBufferApply`'s stated idiom and keeps the narrowing where it is checkable.
- * @param {unknown} value @returns {Record<string, unknown>}
+ * estate's own `SimSettlement`, and every other shape it meets is reached through
+ * the module that owns that shape rather than re-read here — which is what keeps
+ * this file off the observed-shape ratchet entirely.
  */
-const asRecord = (value) => (
-  value && typeof value === 'object' && !Array.isArray(value)
-    ? /** @type {Record<string, unknown>} */ (value)
-    : {}
-);
 
 /**
  * THE ONE MAGIC-GATE CHOKEPOINT (D3). Where the world's magic dial says magic does
@@ -176,20 +170,16 @@ const asRecord = (value) => (
  * @returns {0 | 1}
  */
 export function magicGate01(settlement) {
-  // PROJECTED, not cast (magicBufferApply's discipline): the ledger owns a read
-  // surface this file does not, so the three fields it reads are narrowed here where
-  // the narrowing is checkable, rather than asserted across a shape mismatch.
-  const config = asRecord(settlement?.config);
-  const legacyBand = asRecord(settlement).magicLevel;
-  const ledger = magicLedger({
-    config: {
-      magicLevel: typeof config.magicLevel === 'string' ? config.magicLevel : undefined,
-      priorityMagic: Number.isFinite(Number(config.priorityMagic))
-        ? Number(config.priorityMagic) : undefined,
-      magicExists: config.magicExists === false ? false : undefined,
-    },
-    magicLevel: typeof legacyBand === 'string' ? legacyBand : undefined,
-  });
+  // ⚠ THE LEDGER IS CALLED WHOLE RATHER THAN PROJECTED INTO, AND THE OBSERVED-SHAPE
+  // RATCHET IS WHY. An earlier cut of this function re-read `config.magicExists` and
+  // the legacy `settlement.magicLevel` itself, in `magicBufferApply`'s
+  // explicit-projection style. That style is right where a caller's shape genuinely
+  // differs — and wrong here: it minted this file its OWN reads of two keys the
+  // generator never writes, which `check-observed-shape-readers` refused as NEW rows
+  // against a new file's ceiling of 0. Calling the ledger whole keeps those reads in
+  // `magicLedger.js`, where the estate's frozen rows for them already live, and
+  // leaves exactly one module in the tree that knows how a magic dial is spelled.
+  const ledger = magicLedger(settlement);
   return ledger.present === true && ledger.magicExists === false ? 0 : 1;
 }
 
