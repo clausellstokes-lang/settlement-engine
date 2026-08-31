@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "0d26defb50c1ae0bc1f81a830530ef759bd4366f",
-  "measuredBy": "SMALLS-landing",
+  "measuredAtSha": "dd991cc3e559599fc80afef18d7d5ce119305bf9",
+  "measuredBy": "laneRMAG (TE-RATCHET-MAG, Opus 5)",
   "date": "2026-08-31",
-  "note": "The smalls consist (RESIDUE-2 x2 + SP-W1 x3 + VOICE-1b x1) on a107bcde3; both in-train register commits dropped-as-empty per the DENS/T12 precedent and re-derived here. ONE new test file: allowlistRebuilderRegistry.walker.test.js (SP-W1) - CREDITED per its own fix car, 13 titles + 2 suites; every other consist test edit moved zero title lines (measured by diff).",
+  "note": "TE-RATCHET-MAG (ODQ 854) added 22 executed/static pins and 2 describe blocks to tests/lint/testRatchet.test.js - the magnitude ceiling arms, the measureMagnitude unit block and the armed totalFiles floor. NO new test file, so files/parked/credited are unmoved and only the two title layers shift: titles +22, suiteTitles +2. Predicted before measuring and matched to the digit.",
   "files": 2456,
   "parked": 371,
   "credited": 2085,
-  "titles": 21128,
-  "suiteTitles": 5810
+  "titles": 21150,
+  "suiteTitles": 5812
 }
