@@ -50,9 +50,16 @@ volume (owner call: PRUDENCE-vice expression, or modifier as drafted here). ⚠ 
 appears in BOTH the positive and neutral pools (a live duplication) — dispositioned here as a
 modifier; the pools deduplicate at car 1.
 
-**Count check (panel-auditable):** 45 positive = 32 axis-homed + 10 capabilities + 3 shared-
-expression words; 30 negative = 29 axis-homed + 1 modifier (stubborn, pending the owner call);
-30 neutral = 8 reassigned (†) + 22 modifiers. Zero words silently dropped.
+**Count check (MEASURED by L1's executed census, §849 — supersedes the drafted figures):**
+45 positive = **34** axis-homed + 10 capabilities + **1** (`methodical`; no word is shared
+between axes at all); 30 negative = 29 axis-homed + 1 modifier (stubborn, pending the owner
+call); 30 neutral = **7** reassigned (†) + **23** modifiers. Zero words silently dropped. ⚠ L1
+also measured: NINE TRAIT_PLANE keys belong to NO pool (capricious, disciplined, dutiful,
+erratic, impulsive, orderly, rebellious, rigid, traditional — undrawable, carried verbatim with
+a completeness pin); NINE axes have a null vice-pole drift lean (the tables never scored them);
+drifted-vice corruption reaches only **7 of 17** axes — direct input to row 13(a); `methodical`
+dedup costs behavior THREE ways (length-indexed draw re-hashes the 525 golden manifest; the bank
+mirror rejects stored facets; the word reaches TRAIT_PLANE via both pools) → owner row.
 
 ## REGISTER II — LEVELS AND BAND WORDS
 
