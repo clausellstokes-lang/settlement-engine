@@ -81,11 +81,28 @@ here.
 
 ## 2. THE CENSUS
 
-Counted at `1d27accdc`, over `src/`. **57 authored sites** carry a rulebook
-tell; **6 are the owner's legal carve-out and are not touched by any engine
-lane**; **8 are join keys deferred to a keys car**; **43 are cured by this
-wave**, of which 9 are comments or docs (output-neutral) and 34 are generated
-output (output-moving).
+Counted at `1d27accdc`, over `src/`. The tables below were the census's own
+enumeration; the totals here are **re-derived from the landed diff after car 5**
+rather than carried forward from the first estimate, because a census that
+reports its opening guess as its closing figure is the defect this file spends
+§4 on.
+
+Measured over `git diff 1d27accdc..HEAD -- src`, counting added lines that carry
+a cure (deduplicated by line, so a line curing two families counts once):
+
+| | Count |
+| --- | --- |
+| Cured sites in `src/` | **61** |
+| ...of which comments (output-neutral) | 9 |
+| ...of which code and string literals (output-moving) | 52 |
+| Alignment label rows (output-neutral, not a string cure) | 8 + the select |
+| EXCLUDED, owner's legal carve-out (§2f) | 3 surfaces |
+| DEFERRED to a keys car (§2g) | 2 families, 14 sites |
+
+By family: `in gold` 21 · spell-level scale 10 · service names 9 ·
+`Speaking Stone(s)` 5 · `dream-walking` 4 · `compelled truth` 4 ·
+conjured/quickened 4 · `warded weapons` 3 · `arcane fabrication` 3 ·
+comment-only lifts 3 · `poison sensed` 1 · `Bargain-Sworn` 1.
 
 ### 2a. Currency — `GP` (20 string sites + 1 comment)
 
@@ -330,3 +347,45 @@ LANDED packet. That account was true at its landing and is part of the program's
 ledger, not live content. **Deliberately left standing** — falsifying a landed
 record to make a grep come back clean would be the worse defect. Named here so a
 future sweep that finds them knows they are history, not residue.
+
+---
+
+## 5. THE GUARD — Tier 4 of the voice ratchet (car 6)
+
+Cars 1 to 5 are a cleanup. Without machinery the next content wave writes the
+tells straight back, so the cure becomes an event rather than a property.
+
+`tests/copy/voiceMechanics.test.js` gains a **Tier 4: the setting-agnostic tell
+ban**, HARD ZERO over every string literal in `src/data` and `src/domain`. It
+lives in the existing voice-ratchet file deliberately: that file already walks
+exactly this corpus with exactly this tiered shape, and a NEW lint test file
+would have cost three censuses for no added reach.
+
+**Four detectors, in two shapes:**
+
+| Detector | Shape | Why |
+| --- | --- | --- |
+| `currency GP` | a number adjacent to `GP` | the rulebook UNIT, without convicting `GPS` |
+| `spell-level scale` | `\d+(st\|nd\|rd\|th)[- ]level` | the rulebook SCALE, hyphen or space |
+| `item plus` | `+N weapon/armour/sword/shield` | the other SCALE, without convicting `a +1 modifier` |
+| `named spell` | CASE-SENSITIVE list | Title Case is the tell: a tanner may `cure hides`, a catalogue may not sell `Cure Wounds` |
+| `named spell (no ordinary reading)` | CASE-INSENSITIVE list | ⭐ exists because of §4's real miss: `paired sending stones`, lowercase, walked past a Title-Case sweep |
+
+**The quarantine is EXACT-SET-EQUAL to what is measured**, in both directions: a
+new tell reds, and a quarantine row whose text has been cured must be struck, so
+the keys car cannot land while leaving dead prose behind. Seven rows, every one
+a `Healer (divine, 1st level)` join key or the three unreachable `servicesData`
+lookup sources, each with its written reason.
+
+**MUTANT-PROVEN.** A guard never shown to fail is not a guard. Three tells were
+seeded into `src/data/narrativeData.js` and the walk executed against the real
+tree; all four detectors fired, each on its own row, and the seed was reverted.
+The seeded sentence `Scrolls from a cantrip to a 3rd-level spell, and +1 weapons
+besides.` is the sharpest single line in the proof: `3rd-level` and `+1 weapons`
+are both convicted while `cantrip` in the same breath is correctly spared, which
+is both halves of §0's rule in one assertion.
+
+`magicAssertionText.js` is deliberately NOT quarantined and does not need to be:
+its ledger names the spent receipts in COMMENTS and its pattern carries them in a
+REGEX LITERAL, and Tier 2's extractor reads neither. Measured, not assumed — the
+file produces zero Tier-4 hits.
