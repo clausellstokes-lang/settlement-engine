@@ -127,8 +127,7 @@ describe('FaithTab — the §805 layout (patron seat + niche occupancy + realm p
     // one space after the word "secure" — an engine scalar restating a band word,
     // the prose-numerics class this estate kills; tests/lint/proseNumerics.test.js
     // reddened on it at the landing gate. This pin is now the humanization itself.
-    // anchored: the three matches above prove this seat rendered, so the absence
-    // below is about the percentage and not about an empty node.
+    // anchored: the seat's name, band and contested marker are all asserted PRESENT on this same textContent (above and below), so an emptied node cannot pass this absence.
     expect(seat.textContent).not.toMatch(/\d+%/);
     expect(seat.textContent).toMatch(/contested/i);
   });
@@ -146,10 +145,9 @@ describe('FaithTab — the §805 layout (patron seat + niche occupancy + realm p
     // own finite word, rendered verbatim.
     expect(rows[0].textContent).toMatch(/ascendant · most of the town/);
     expect(rows[1].textContent).toMatch(/cult · a large minority/);
-    // anchored: both rows matched their creed names above, so they rendered —
-    // this absence is about the raw percentage the row used to print, not about
-    // an empty node. (T11 landing: `{d.share}%` was copied in shape from
-    // FaithSection.jsx:174, which is BANKED prose-numerics debt, not an idiom.)
+    // T11 landing: `{d.share}%` was copied in shape from FaithSection.jsx:174, which is
+    // BANKED prose-numerics debt rather than a sanctioned idiom — hence the absence below.
+    // anchored: BOTH rows are asserted above to carry their creed name, niche and banded following on this exact joined textContent, so an emptied render cannot pass this.
     expect(`${rows[0].textContent}${rows[1].textContent}`).not.toMatch(/\d+%/);
   });
 
