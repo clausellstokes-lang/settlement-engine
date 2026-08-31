@@ -27,6 +27,7 @@ import { describe, expect, test } from 'vitest';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { INSTITUTION_GROUPINGS, PRIORITY_CATEGORIES } from '../../src/data/categoryVocabulary.js';
 import { FACTION_DESCRIPTORS } from '../../src/data/powerData.js';
+import { CULTURE_PROFILES } from '../../src/data/cultureProfiles.js';
 import { CASCADE_GROUPING_ORDER } from '../../src/generators/cascadeGenerator.js';
 
 // Flatten tier -> grouping -> name -> entry into rows carrying both axes.
@@ -127,5 +128,93 @@ describe('data-schema.4 — cascade reaches every live grouping', () => {
   test('the only cascade key beyond live groupings is the reserved "Essential"', () => {
     const extra = CASCADE_GROUPING_ORDER.filter((g) => !usedGroupings.has(g)).sort();
     expect(extra).toEqual(['Essential']);
+  });
+});
+
+// ── THE CULTURE-BIAS KEY RATCHET (T8, ODQ §759.5) ────────────────────────────────
+// `cultureInstitutionMultiplier` weights a culture's institution likelihood by matching
+// its `institutionBias.categories` keys against the GROUPING text and its `.keywords`
+// keys against the institution NAME — both by lowercased substring. A key that matches
+// nothing is not an error anywhere: the loop simply never multiplies, so the authored
+// intent is silently absent and every world looks fine. §759.5 measured three such keys;
+// the walker below measured FOURTEEN, and the gap is the reason the ratchet exists at all.
+//
+// ⚠ WHY THE DEAD KEYS ARE FROZEN RATHER THAN FIXED OR DELETED. Both cures are out of a
+// lane's hands and for the same reason: a bias weight is a TUNING VALUE.
+//   - RETARGETING is a tuning-signature change. `Agriculture` plainly means the Economy
+//     shelf (it holds the dairy farmers, salt works, quarries and mines), but retargeting
+//     it would make three cultures' agrarian bias REAL for the first time and move
+//     generated institution distributions. Worse, mesoamerican already declares
+//     `Economy: 1.07` beside `Agriculture: 1.07`, so a retarget COMPOUNDS to 1.07 × 1.07
+//     rather than restating the intent — the boundary is the owner's, not a lane's.
+//   - DELETING drops authored intent that three cultures were written with.
+// So the fourteen are inventoried, each with its reason, and the set can only SHRINK. A
+// new dead key reds immediately; a cured one forces its row out of this list, which is the
+// §761.3 named-exception idiom applied to data instead of prose.
+const KNOWN_DEAD_BIAS_KEYS = Object.freeze([
+  // culture         kind         key             what it was reaching for
+  ['celtic', 'categories', 'Agriculture'], //     the Economy shelf's husbandry rows
+  ['celtic', 'keywords', 'livestock'], //         no catalog name contains it
+  ['slavic', 'categories', 'Agriculture'], //     as celtic
+  ['slavic', 'keywords', 'timber'], //            the sawmills are named 'Sawmill'
+  ['east_asian', 'keywords', 'canal'], //         no canal institution exists
+  ['east_asian', 'keywords', 'garden'], //        no garden institution exists
+  ['mesoamerican', 'categories', 'Agriculture'], // and it would COMPOUND with Economy 1.07
+  ['mesoamerican', 'keywords', 'temple'], //      the sacred rows are named otherwise
+  ['mesoamerican', 'keywords', 'garden'], //      as east_asian
+  ['mesoamerican', 'keywords', 'causeway'], //    no causeway institution exists
+  ['mesoamerican', 'keywords', 'reservoir'], //   no reservoir institution exists
+  ['south_asian', 'keywords', 'temple'], //       as mesoamerican
+  ['steppe', 'keywords', 'horse'], //             the stables are named 'Stable master' etc.
+  ['steppe', 'keywords', 'pasture'], //           no pasture institution exists
+]);
+
+describe('§759.5 — every culture-bias key can match something (shrink-only)', () => {
+  const groupingText = INSTITUTION_GROUPINGS.map((g) => String(g).toLowerCase());
+  const nameText = rows.map((r) => r.name.toLowerCase());
+  const matches = (kind, key) => {
+    const needle = String(key).toLowerCase();
+    return kind === 'categories'
+      ? groupingText.some((g) => g.includes(needle))
+      : nameText.some((n) => n.includes(needle));
+  };
+  const liveKeys = [];
+  const deadKeys = [];
+  for (const [culture, profile] of Object.entries(CULTURE_PROFILES)) {
+    const bias = profile?.institutionBias;
+    if (!bias) continue;
+    for (const kind of ['categories', 'keywords']) {
+      for (const key of Object.keys(bias[kind] || {})) {
+        (matches(kind, key) ? liveKeys : deadKeys).push([culture, kind, key]);
+      }
+    }
+  }
+
+  test('the census is live — most keys DO match, so an empty dead set would mean something', () => {
+    // ANCHOR. Without this, "no new dead keys" would pass just as happily if
+    // CULTURE_PROFILES were emptied, the grouping vocabulary renamed, or the catalog
+    // failed to load — the vacuity class tests/helpers/anchoredNegatives.js exists for.
+    expect(liveKeys.length).toBeGreaterThanOrEqual(60);
+    expect(liveKeys.length + deadKeys.length).toBe(81);
+    expect(nameText.length).toBeGreaterThanOrEqual(250);
+  });
+
+  test('the dead set is EXACTLY the frozen inventory — new ones red, cured ones must be removed', () => {
+    const live = deadKeys.map((r) => r.join('|')).sort();
+    const frozen = KNOWN_DEAD_BIAS_KEYS.map((r) => r.join('|')).sort();
+    expect(
+      live,
+      'a culture-bias key changed its liveness. A NEW dead key means an authored bias silently '
+      + 'does nothing — fix the key or the vocabulary. A key that came ALIVE means its row must '
+      + 'leave KNOWN_DEAD_BIAS_KEYS, so the win is banked and the list can only shrink. '
+      + 'Retargeting a dead key to a live grouping is a TUNING change and is owner-signed.',
+    ).toEqual(frozen);
+  });
+
+  test('the detector is not vacuous — it convicts a planted dead key and clears a planted live one', () => {
+    expect(matches('categories', 'Agriculture')).toBe(false); // the real one
+    expect(matches('categories', 'Economy')).toBe(true); // the shelf it was reaching for
+    expect(matches('keywords', 'definitely-not-an-institution')).toBe(false);
+    expect(matches('keywords', 'smith')).toBe(true); // Blacksmith, Resident smith (part-time)
   });
 });
