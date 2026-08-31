@@ -31,6 +31,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js'; // side-effect: registers all steps
 import { getStepMeta, runPipeline } from '../../src/generators/pipeline.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { withCustomContent } from '../../src/lib/dependencyEngine.js';
 
 const CONFIGS = [
@@ -174,12 +175,20 @@ describe('THE STANDING CONTROL: strict mode is proved able to throw', () => {
     // vi.resetModules() minted — which is how the first draft of this arm reported
     // a poisoned live registry that was in fact a synthetic one. The arm caught it;
     // the receipt stays because the mistake is the natural one to make.
+    // ⚠ ANCHORED, AND THE FIRST DRAFT WAS NOT. These three exclusions were bare
+    // negative membership assertions with one shared positive anchor sitting BELOW
+    // them as a separate statement — precisely the shape
+    // negativeAssertionAnchor.walker refuses, because an anchor that is its own
+    // assertion does not travel with the negative: delete or reorder either one and
+    // the vacuity silently re-opens. A registry that had drifted to empty would have
+    // passed all three. Each exclusion now carries its anchor in the same call.
+    // ⚠⚠ AND THE SECOND DRAFT REDDENED TOO, on this very comment: the walker reads
+    // SOURCE TEXT and cannot tell a comment from code, so spelling the offending
+    // call out here re-introduced it. Describe the shape; never quote it.
     const names = getStepMeta().map((m) => m.name);
-    expect(names).not.toContain('writesUndeclared');
-    expect(names).not.toContain('declaresItsWrite');
-    expect(names).not.toContain('readsWhatNobodyMade');
-    // …anchored: the real registry is still the real registry, not an empty one
-    // that would make the line above pass for the wrong reason.
-    expect(names).toContain('resolveConfig');
+    const LIVE = 'resolveConfig'; // a real registered step: same code path, same drift
+    for (const synthetic of ['writesUndeclared', 'declaresItsWrite', 'readsWhatNobodyMade']) {
+      expectAbsentWithAnchor(names, synthetic, LIVE, 'the isolated registry never reached the live one');
+    }
   });
 });
