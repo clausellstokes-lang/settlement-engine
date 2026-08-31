@@ -495,6 +495,34 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'prose substrate — the ONE deterministic variant-selection kernel (FNV-1a, canonical-at-zero), spoken by every port\'s prose pools; a port here would make every other layer\'s phrasing pick a cross-layer coupling',
     reads: Object.freeze([]),
   }),
+  // ── 2026-08-30, W-SEAM SEAM-3 (T5 train): the capture provenance stamp ─────────
+  //
+  // The SAME argument waterBodies.js and spatialLedgerAccess.js carry above, and it is
+  // the map-geometry reading rather than a new one. What this leaf owns is "is the pack
+  // in hand the geometry these coordinates came from" — a question about the MAP, asked
+  // at capture and again at a headless re-canonize. It is not TRADE's sea lanes, not
+  // WAR's transit, not POP's migration: every port that reads a stored coordinate asks
+  // it, and filing it under whichever port happens to capture first would make every
+  // OTHER port's read of pure map provenance a cross-layer coupling into that port. The
+  // distinction is SUBJECT, not program — the same one that gave peopleLedger.js WAR and
+  // waterBodies.js no port at all. Checked against all seven family patterns: none
+  // claims the name.
+  //
+  // AND NOT THE BASELINE, for the reason spatialLedgerAccess.js records: that file is
+  // for the volume's §4 PRE-PROGRAM debt, and a module minted this week is not that — a
+  // baseline row would launder a program-era edit into permanent invisibility, and the
+  // baseline size is an exact 179 the volume says may never grow.
+  //
+  // WHAT IT COSTS, MEASURED: its outbound reach is ONE import,
+  // `../../kernel/proseHash.js`, which sits outside src/domain entirely and therefore
+  // carries no layer, so its LAYERED reach measures 0, it is declared `reads: []`, and
+  // NO edge leaves the pair scan. What the raise buys is that the FIRST port this leaf
+  // ever reaches reds by name.
+  'src/domain/spatial/captureSidecar.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'map-geometry substrate — the provenance stamp answering "is the pack in hand the geometry these coordinates came from" (W-SEAM SEAM-3), asked by every port that reads a stored coordinate; a port here would make a pure map-provenance read a cross-layer coupling into whichever family won the name',
+    reads: Object.freeze([]),
+  }),
   // ── 2026-08-10: THREE LEAVES THAT LANDED WITHOUT THEIR CLASSIFICATION ──────────
   //
   // These three are not new arguments. They are the SAME two arguments already on this
@@ -726,8 +754,23 @@ const ARGUED_HOSTS = Object.freeze([
  * is 0, it is declared `reads: []`, and NO edge leaves the pair scan. What the raise buys
  * is that the FIRST port this leaf ever reaches reds by name.
  * A twenty-third admission is the next deliberate act.
+ *
+ * 22 → 23 on 2026-08-30 (W-SEAM SEAM-3, the T5 train), recorded rather than merely made,
+ * and it is the CAP-4 raise two paragraphs up applied to map PROVENANCE instead of map
+ * SHAPE. `src/domain/spatial/captureSidecar.js` stamps WHICH GEOMETRY a capture actually
+ * held, so a later capture or a headless re-canonize can PROVE the pack in hand is the one
+ * a canon's coordinates came from instead of inferring it from a witness row. Filing that
+ * under the port that happens to capture first would make every OTHER port's read of pure
+ * map provenance a cross-layer coupling into that port — the inversion the substrate
+ * reading exists to prevent — and no spatial family pattern claims the name anyway,
+ * checked against all seven. MEASURED AT THE RAISE, on the same reading CAP-4 and NAME-1
+ * carry: the leaf's outbound reach is ONE import, `../../kernel/proseHash.js`, which sits
+ * outside src/domain and therefore carries no layer, so its LAYERED reach is 0, it is
+ * declared `reads: []`, and NO edge leaves the pair scan. What the raise buys is that the
+ * FIRST port this leaf ever reaches reds by name.
+ * A twenty-fourth admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 22;
+const ARGUED_ROSTER_CEILING = 23;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;
