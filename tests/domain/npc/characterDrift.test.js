@@ -722,4 +722,70 @@ const dependsOn = (text, moduleRe, symbols) => (
     // second reader cannot invent a second spelling of the same door.
     expect(source.split(CHARACTER_DRIFT_FLAG_KEY).length - 1).toBeLessThanOrEqual(4);
   });
+
+  test('⛔⛔ ONE SPELLING — the volume\'s two other door names are minted NOWHERE in code', () => {
+    // ⭐⭐ TE-VIRT-1'S TWO-SPELLING FIND, SETTLED RATHER THAN CARRIED. DESIGN_W_LIVES §8
+    // names TWO virtual doors, `livedExperienceEnabled` (funnel + drift) and
+    // `paradigmChartEnabled` (the catalog-backed read path); the built seam has ONE.
+    // The ruling and both tombstones live at `CHARACTER_DRIFT_FLAG_KEY`'s declaration;
+    // this is the walker that keeps them true, because a door whose name is undecided
+    // is a door two cars will register twice.
+    //
+    // ⚠⚠ COMMENTS ARE STRIPPED AND STRINGS ARE NOT, AND THAT ASYMMETRY IS THE WHOLE
+    // POINT OF THIS TEST — it is where this arc's citation law INVERTS.
+    //
+    // Everywhere else in this file a string literal is a CITATION: a `home:` path, a
+    // seam name, a receipt naming an adapter. None of those is a dependency, because
+    // the question there is what a module DEPENDS ON. Here the question is different:
+    // a simulation-rules flag IS a string. `CHARACTER_DRIFT_FLAG_KEY =
+    // 'characterDriftEnabled'` does not cite a door, it MINTS one. So for this claim a
+    // quoted name is the strongest possible evidence, and blanking strings would make
+    // the walker unable to see the very thing it is looking for.
+    //
+    // ⭐ THE LAW, STATED PROPERLY: a string is a citation when the module's DEPENDENCY
+    // is in question, and a MINT when the string itself is the artifact. Which strip
+    // to use is a property of the claim, never of the syntax — and this test and the
+    // four closure walkers above it need opposite answers from the same file.
+    //
+    // §769.4 requires a tombstone to be phrased as an ACT rather than a token, and
+    // prose is exactly what survives that distinction: the retired names live in this
+    // tree once each, in a comment, saying what was decided and why.
+    const RETIRED = ['livedExperienceEnabled', 'paradigmChartEnabled'];
+    const minters = jsFilesUnder(join(REPO_ROOT, 'src'))
+      .filter((file) => {
+        const code = stripComments(readFileSync(file, 'utf8'));
+        return RETIRED.some((name) => code.includes(name));
+      })
+      .map((file) => relative(REPO_ROOT, file));
+    expect(minters).toEqual([]);
+    // ANTI-VACUITY, and it is the load-bearing half: the retired names ARE present in
+    // this tree as prose, so an empty result is a fact about the CODE and not about a
+    // pair of strings that appear nowhere at all. Without this the walker would pass
+    // just as happily if the tombstones had been deleted.
+    const seam = readFileSync(join(REPO_ROOT, 'src/domain/npc/characterDrift.js'), 'utf8');
+    for (const name of RETIRED) {
+      expect(seam, `${name} must be tombstoned, not silently dropped`).toContain(name);
+      expect(stripComments(seam), `${name} must be prose, never a minted token`).not.toContain(name);
+    }
+    // …and each tombstone is phrased as an ACT, per §769.4 — a bare dead name is what
+    // the law exists to forbid.
+    expect(seam).toContain('WAS RULED THE SAME DOOR AS THIS ONE');
+    expect(seam).toContain('WAS RULED UNNECESSARY');
+    // …and the surviving spelling IS minted — the same scan, the opposite verdict,
+    // which is what proves the scan discriminates rather than blanking everything.
+    expect(stripComments(seam)).toContain(CHARACTER_DRIFT_FLAG_KEY);
+  });
+
+  test('⭐ AND NO KEY IS REGISTERED — the door car\'s bill is still the door car\'s', () => {
+    // The ruling settles the SPELLING and nothing else. Registering it is a separate
+    // act with its own certification row, and a reconcile car that quietly registered
+    // a flag would have lit a subsystem while claiming to be tidying a name.
+    const manifest = readFileSync(join(REPO_ROOT, 'src/domain/worldPulse/simulationRules.js'), 'utf8');
+    expect(manifest).toContain('ENGINE_GATED_VIRTUAL_RULE_KEYS');
+    // anchored: the manifest is the real one, asserted live one line above.
+    expect(manifest).not.toContain(CHARACTER_DRIFT_FLAG_KEY);
+    for (const preset of ['dramatic_campaign', 'living_realm', 'full_simulation']) {
+      expect(manifest, `${preset} must not carry the drift key`).toContain(preset);
+    }
+  });
 });

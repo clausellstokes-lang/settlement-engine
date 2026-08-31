@@ -115,6 +115,42 @@ export const CHARACTER_DRIFT_KEY = 'characterDrift';
  * Named as a constant rather than spelled inline at the one read site so the flag
  * car can find its own address by symbol, and so a second reader can never invent a
  * second spelling of the same switch.
+ *
+ * ── ⭐⭐ THE ONE-SPELLING RULING (substrate coupling; TE-VIRT-1's two-spelling find) ──
+ *
+ * DESIGN_W_LIVES §8 specifies TWO virtual doors by name, and the built seam has ONE.
+ * TE-VIRT-1 found the discrepancy and it is settled here rather than carried, because
+ * a door whose name is undecided is a door two cars will register twice. Both of the
+ * volume's names are recorded below as ACTS — what was decided and why — rather than
+ * as dead tokens, per the §769.4 tombstone law; neither is minted anywhere in the
+ * tree, and `tests/domain/npc/characterDrift.test.js` walks the code to prove it.
+ *
+ * ⛔ TOMBSTONE 1 — `livedExperienceEnabled` WAS RULED THE SAME DOOR AS THIS ONE, AND
+ * IS NOT MINTED. The volume gives it "funnel + drift"; the built seam gates both
+ * through this single key, and that is not an accident of construction but a law the
+ * funnel's own suite already pins in as many words — "ONE DOOR: the funnel mints NO
+ * flag of its own, it rides L2's", because a family with two switches has a half-lit
+ * state and nobody ever tests it. Minting the second name would create exactly the
+ * half-lit cell that pin exists to make unrepresentable. Same door, one spelling, and
+ * the spelling that survives is the one the code already reads.
+ *
+ * ⛔ TOMBSTONE 2 — `paradigmChartEnabled` WAS RULED UNNECESSARY, AND ITS DARKNESS IS
+ * STRUCTURAL INSTEAD. The volume wants a flag on "the catalog-backed read path", so
+ * that "legacy words keep projecting identically when dark". That guarantee is
+ * already delivered, and delivered more strongly, by an INJECTION rather than a
+ * switch: `characterConsumers.effectiveDescriptors` hands back THE CALLER'S OWN ARRAY
+ * BY REFERENCE while `PARADIGM_WORD_PROJECTION_SEAM` is unbound, so the identity is
+ * structural rather than asserted. A flag that could only ever be ON once an
+ * injection was bound would be a switch on a road that cannot speak — a second thing
+ * to get wrong protecting a property that cannot be violated. If the pen later wants
+ * a user-facing dial for the read path, it registers beside this key rather than
+ * reviving a name that never had a reader.
+ *
+ * ⚠ AND NO KEY IS REGISTERED HERE, DELIBERATELY. This ruling settles the SPELLING;
+ * putting `characterDriftEnabled` into `ENGINE_GATED_VIRTUAL_RULE_KEYS` is the door
+ * car's own bill and carries its own certification row. The seam stays dark: absent
+ * from DEFAULT_SIMULATION_RULES, absent from every preset, and every writer below is
+ * a whole-function early return.
  */
 export const CHARACTER_DRIFT_FLAG_KEY = 'characterDriftEnabled';
 
