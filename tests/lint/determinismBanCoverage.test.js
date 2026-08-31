@@ -103,6 +103,20 @@ const LAYERS = [
     required: [],
     forbidden: [NEW_DATE, DATE_NOW],
   },
+  {
+    // ODQ 764.2 / 759.4, lane T9: instantWorld composes a whole starting realm from
+    // a seed and sat outside every determinism block — src/lib/ carries only the
+    // size ratchet. Its one covered member (src/domain/instantWorld/worldPlan.js)
+    // was in scope by the accident of its directory. The block reds nothing today;
+    // it buys the property forward. The store and component EDGES stay out on
+    // purpose (they mint the one timestamp and the UI reroll seed) — see the
+    // eslint.config.js block's scope note.
+    name: 'instantWorld composer (seeded realm mint)',
+    roots: ['src/lib/instantWorld'], exts: /\.js$/,
+    exempt: [],
+    required: [MATH_RANDOM, DATE_NOW, NEW_DATE, LOCALE_COMPARE],
+    forbidden: [],
+  },
 ];
 
 function walk(dir, exts, out = []) {

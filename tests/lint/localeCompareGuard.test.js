@@ -61,12 +61,17 @@ describe('localeCompare determinism guard (F13)', () => {
     expect(CALL_RE.test(src)).toBe(false);
   });
 
-  test('eslint.config.js bans localeCompare in the generators, domain, workers, kernel, and pdf determinism blocks', () => {
+  test('eslint.config.js bans localeCompare in the generators, domain, workers, kernel, pdf, and instantWorld determinism blocks', () => {
     const cfg = readFileSync(join(ROOT, 'eslint.config.js'), 'utf8');
     // The ban selector appears once per determinism block: generators + domain +
-    // workers + kernel(non-prng) + kernel/prng.js + pdf = 6.
+    // workers + kernel(non-prng) + kernel/prng.js + pdf + lib/instantWorld = 7.
+    // (6 → 7 on 2026-08-30, lane T9: the instantWorld composer joined the
+    // determinism scopes under ODQ 764.2 / 759.4. The count is EXACT on purpose —
+    // it is what makes a silently deleted ban block red here — so it moves with
+    // the block and never ahead of it.)
     const hits = cfg.match(/callee\.property\.name='localeCompare'/g) || [];
-    expect(hits.length).toBe(6);
+    expect(hits.length).toBe(7);
+    expect(cfg).toContain("files: ['src/lib/instantWorld/**/*.js']");
     // Every block is scoped to its tree/file.
     expect(cfg).toContain("files: ['src/generators/**/*.js']");
     expect(cfg).toContain("files: ['src/domain/**/*.js']");

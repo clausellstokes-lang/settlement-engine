@@ -98,6 +98,7 @@ MUTATED_FILES=(
   src/domain/worldPulse/worldPulseFeedCuration.js
   src/lib/chronicle.js
   src/kernel/prng.js
+  src/lib/instantWorld/factionDedup.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -927,6 +928,18 @@ check_clear "corpus-coverage/summary impact set order swap stays clear" src/doma
 #     WEAVE program adding realm-surface map words by design.
 perl -0pi -e "s/^ \* prng\.js — Seeded pseudo-random number generator wrapper\./ * prng.js — Seeded pseudo-random number generator wrapper. buildTownMapModel/m" src/kernel/prng.js
 check_caught "map-surface/vocabulary outside the allowlist" src/kernel/prng.js "npx vitest run tests/lint/settlementMapSurfaceAllowlist.walker.test.js"
+
+# 47. Determinism — the instantWorld composer's ban (ODQ 764.2 / 759.4, lane T9).
+#     instantWorld mints a whole starting realm from a seed and sat outside EVERY
+#     determinism block: src/lib/ carries only the size ratchet, so the composer and
+#     its faction-dedup leaf were governed by nothing on this axis. The new
+#     eslint.config.js block reds nothing on the clean tree — it is a ratchet over
+#     code that is already correct — which is exactly why it needs a plant: a scope
+#     that convicts nothing today is indistinguishable from a scope that convicts
+#     nothing ever. A raw draw in the composer forks the same-seed world THE PROMISE
+#     says is that seed's starting world forever.
+printf '\nconst _mut = Math.random();\n' >> src/lib/instantWorld/factionDedup.js
+check_caught "determinism/instantWorld Math.random()" src/lib/instantWorld/factionDedup.js "npx eslint src/lib/instantWorld/factionDedup.js"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

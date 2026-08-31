@@ -478,6 +478,73 @@ export default [
     },
   },
 
+  // ── [determinism-instantworld] (ODQ 764.2 / 759.4, lane T9) ─────────────────
+  // instantWorld composes a whole starting realm from a seed, and it sat OUTSIDE
+  // every determinism block: `src/lib/` carries only the size ratchet, so the
+  // composer and its faction-dedup leaf were governed by nothing on this axis.
+  // Its one already-covered member (`src/domain/instantWorld/worldPlan.js`) was in
+  // scope only by the accident of living under src/domain.
+  //
+  // ⚠ THIS BLOCK REDS NOTHING TODAY, AND THAT IS THE POINT — say which greens are
+  // DISCOVERY and which are REGRESSION-prevention (ODQ 711.4). Measured at the
+  // landing: composeInstantWorld.js and factionDedup.js carry ZERO hits for any
+  // selector below. This is a RATCHET over code that is already correct, not a
+  // cure; it buys the property forward, on a surface that mints a realm the
+  // PROMISE says is that seed's starting world forever.
+  //
+  // SCOPE NOTE — WHY ONLY src/lib/instantWorld AND NOT THE WHOLE FEATURE. The
+  // surface has two deliberate wall-clock/entropy seams and both are EDGES, where
+  // impurity belongs: `src/store/instantWorldBody.js` mints one `new Date()` and
+  // threads it into the pure composer (its own comment says so), and
+  // `src/components/instant/InstantWorldEntry.jsx` draws a UI reroll seed from
+  // Math.random. Pulling the store or the component layer under a determinism ban
+  // would convict those two edges and force either a suppression or a worse
+  // design; the seeded core is what must be pure. @enforced-by this rule block +
+  // tests/lint/determinismBanCoverage.test.js (the instantWorld layer row).
+  {
+    files: ['src/lib/instantWorld/**/*.js'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
+          message: 'Determinism: use random()/pick()/chance()/randInt() from rngContext.js, not Math.random() — a raw draw breaks same-seed replay.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          message: 'Determinism: Date.now() is non-reproducible in the seeded composer. Thread a timestamp in from the store edge instead.',
+        },
+        {
+          selector: "NewExpression[callee.name='Date'][arguments.length=0]",
+          message: 'Determinism: new Date() reads wall-clock time and breaks same-seed replay. The store edge (instantWorldBody.js) mints the one timestamp and threads it in; construct from an explicit value here.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleString']",
+          message: 'Determinism: toLocaleString() formats through the host ICU/locale tables — the same number persists as "8,000" on a US host and "8.000" on a German one, so same seed no longer replays byte-exact. Use formatCount from domain/formatNumber.js (the cross-device-stable number format).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleDateString']",
+          message: 'Determinism: toLocaleDateString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit date fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleTimeString']",
+          message: 'Determinism: toLocaleTimeString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit time fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "NewExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+      ],
+    },
+  },
+
   // ── Accessibility (jsx-a11y) — ERROR (hardened 2026-06) ──────────────────────
   // The component/PDF JSX layer is excluded from tsc and had no a11y linting, so
   // accessibility gaps accumulated invisibly. These started at WARN for an

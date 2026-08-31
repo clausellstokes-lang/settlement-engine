@@ -127,17 +127,21 @@ describe('locale-formatting determinism guard', () => {
       .toBeGreaterThan(0);
   });
 
-  test('eslint.config.js bans locale formatting in the generators, domain, workers, and kernel determinism blocks', () => {
+  test('eslint.config.js bans locale formatting in the generators, domain, workers, kernel, and instantWorld determinism blocks', () => {
     const cfg = readFileSync(join(ROOT, 'eslint.config.js'), 'utf8');
     // Each ban selector appears once per determinism block: generators + domain +
-    // workers + kernel(non-prng) + kernel/prng.js = 5.
+    // workers + kernel(non-prng) + kernel/prng.js + lib/instantWorld = 6.
+    // (5 → 6 on 2026-08-30, lane T9: the instantWorld composer joined the
+    // determinism scopes under ODQ 764.2 / 759.4. An EXACT count is the point —
+    // it is what makes a silently deleted ban block red here instead of nowhere,
+    // so it moves with the block and never ahead of it.)
     for (const method of ['toLocaleString', 'toLocaleDateString', 'toLocaleTimeString']) {
       const hits = cfg.match(new RegExp(`callee\\.property\\.name='${method}'`, 'g')) || [];
-      expect(hits.length, `${method} ban selector count`).toBe(5);
+      expect(hits.length, `${method} ban selector count`).toBe(6);
     }
-    // Intl is banned as both `new Intl.X(...)` and `Intl.X(...)` per block: 2 × 5 = 10.
+    // Intl is banned as both `new Intl.X(...)` and `Intl.X(...)` per block: 2 × 6 = 12.
     const intlHits = cfg.match(/callee\.object\.name='Intl'/g) || [];
-    expect(intlHits.length).toBe(10);
+    expect(intlHits.length).toBe(12);
     // The ban message routes authors to the sanctioned formatter.
     expect(cfg).toMatch(/formatNumber\.js/);
   });
