@@ -36,14 +36,14 @@
  "digests": {
   "corpusMeta": "ef19224c20401a94c9b20611ff65e607bfaa5b345b3ec88eaa40b220e5e915bb",
   "inventory": "406bf97109dcd7674cfcee9d6fac75ec2de30a1bb7307c6e029306c36b268a1a",
-  "manifests": "3fe924256bc923417903a1f33594293cf8029202d38231d58b08790a6d75218a",
+  "manifests": "4fb879859e2fbf3cf79fc2ad99293f0a224614824387de8ce76952526b14793c",
   "migrationReview": "d7ac137e83256cf03b5c8be7ad98356c9905d92dcf76b3aa9247e7ea9ef000be",
   "rowTags": "83b81cb1b20f039715385d514b40459728d8071c61e1e8ff7627a9375cebf49a",
-  "scanStats": "8c1cbbfc3124cf265f1cf9b9ff2c5a7dedb1d9f84a65b6a757369a411c24dd48",
+  "scanStats": "b5173a18cdd84e982ef6a9313ec1971f380580ec0fe93efefad902b0f83f520b",
   "sentinel": "3198a3591f59e38deb0f27c0182d9a8cc1f1edfe6637b4e5d0667a3c15792227"
  },
  "frozen": "2026-08-31",
- "frozenAtSha": "6a27991e9454d13ef286564354a7b6b0e6ccca91",
+ "frozenAtSha": "847d40b829f4593e5913a44dc9bb40cb03e33ffa",
  "identities": 1413,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2324,7 +2324,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "1a5041ad5ff3d62abf4d0368f00e375d3d2158a910ce21cf4657dc55742531b9",
+   "digest": "cfb5d2e2a958fe90d6beb56dbb2d1ec0ea70d8a5ab262757a9dee26dbb451c14",
    "entries": [
     {
      "mode": "100644",
@@ -7670,8 +7670,8 @@
     {
      "mode": "100644",
      "path": "src/domain/content/customContentManifest.generated.js",
-     "sha256": "7adc376b3810e4ac4feb9f7656586574813f801141e7ab3cf9176044c8338fe5",
-     "size": 63981,
+     "sha256": "2d766b7d730b3e4572d8f2384bd5b58744919bfcdb67ff9feca219ad4a7ca08e",
+     "size": 65244,
      "type": "file"
     },
     {
@@ -11184,8 +11184,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/deityAxes.js",
-     "sha256": "c752be9c513e9e6f91b8045707b37bb934ff5ee75210293007bb874b8e789682",
-     "size": 5043,
+     "sha256": "886bdce09c49d87d117022f00fb97d485bb8678507f8c03c353a071c03128d27",
+     "size": 8321,
      "type": "file"
     },
     {
@@ -17009,7 +17009,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "7971f3783f391c166ab05dec1fd9e892fa17cfb445e6e0a09644b1b827537ae1",
+   "digest": "5cbbf86375b975fb0685d5d11bc7b910e19196d9c7a3d80136731ab42e698671",
    "entries": [
     {
      "mode": "100644",
@@ -25708,8 +25708,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/deityAxes.js",
-     "sha256": "c752be9c513e9e6f91b8045707b37bb934ff5ee75210293007bb874b8e789682",
-     "size": 5043,
+     "sha256": "886bdce09c49d87d117022f00fb97d485bb8678507f8c03c353a071c03128d27",
+     "size": 8321,
      "type": "file"
     },
     {
@@ -31526,7 +31526,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "c4be1f80ec3ef4df2e0c7b4598490c43002beab7100b8542081f805985cc1633",
+   "digest": "f0c68e5179da22aa8e3894f47d011fdc05ab2722067a6b6a38a2f39daaa7b581",
    "entries": [
     {
      "mode": "100644",
@@ -36802,8 +36802,8 @@
     {
      "mode": "100644",
      "path": "src/domain/content/customContentManifest.generated.js",
-     "sha256": "7adc376b3810e4ac4feb9f7656586574813f801141e7ab3cf9176044c8338fe5",
-     "size": 63981,
+     "sha256": "2d766b7d730b3e4572d8f2384bd5b58744919bfcdb67ff9feca219ad4a7ca08e",
+     "size": 65244,
      "type": "file"
     },
     {
@@ -40316,8 +40316,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/deityAxes.js",
-     "sha256": "c752be9c513e9e6f91b8045707b37bb934ff5ee75210293007bb874b8e789682",
-     "size": 5043,
+     "sha256": "886bdce09c49d87d117022f00fb97d485bb8678507f8c03c353a071c03128d27",
+     "size": 8321,
      "type": "file"
     },
     {
@@ -46413,16 +46413,16 @@
  },
  "scanStats": {
   "files": 2073,
-  "reads": 119614,
+  "reads": 119616,
   "resolved": 9354,
-  "unresolved": 110260
+  "unresolved": 110262
  },
  "scannerProvenance": {
   "detectorDigest": "fa8af30282cc0476bd3311c0e83e4acba685a1a0592e391b5df2762cd02328be",
-  "executionTreeDigest": "1a5041ad5ff3d62abf4d0368f00e375d3d2158a910ce21cf4657dc55742531b9",
-  "scanTreeDigest": "7971f3783f391c166ab05dec1fd9e892fa17cfb445e6e0a09644b1b827537ae1",
-  "sourceTreeDigest": "c4be1f80ec3ef4df2e0c7b4598490c43002beab7100b8542081f805985cc1633",
-  "unscannedInputDigest": "bc8e4f97ec896bddbc57eab4b0cf7d366e37a92a21917521a4dab01d0325e083"
+  "executionTreeDigest": "cfb5d2e2a958fe90d6beb56dbb2d1ec0ea70d8a5ab262757a9dee26dbb451c14",
+  "scanTreeDigest": "5cbbf86375b975fb0685d5d11bc7b910e19196d9c7a3d80136731ab42e698671",
+  "sourceTreeDigest": "f0c68e5179da22aa8e3894f47d011fdc05ab2722067a6b6a38a2f39daaa7b581",
+  "unscannedInputDigest": "051d52f7a9ae1f3524d13400b7365a4018dae6855c9d9e514fa66b8c03be3b77"
  },
  "schema": 13,
  "sentinel": {
