@@ -205,35 +205,37 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //     carried forward from the lane's running notes. The four figures written by hand were
 //     ALL wrong by a few rows, and re-deriving them is the only reason that did not ship in
 //     a comment — which is this file's own standing complaint about numbers in prose.
-//     ⛔⛔ ONE SITE IS DELIBERATELY LEFT UNCURED, AND IT IS THE MOST INTERESTING ROW IN
-//     THIS WHOLE WAVE. `npcAgency.js:914` ("Pressure gate 0.62, ambition 0.41.") is STOPPED
-//     — two rows that stay — because humanizing it MOVES A SAME-SEED GOLDEN, and the cause
-//     is worth every line of this note:
-//       `worldPulseFeedCuration.js:128` `isMetronomeRepeat` suppresses a beat that repeats
-//       the same impactKind, headline, settlements AND REASONS inside a six-tick window
+//     ⭐ THE ONE SITE THIS WAVE STOPPED IS NOW CURED, AND ITS DEBT IS DISCHARGED (T8, ODQ
+//     §774.2 ratifying J-HER-I). HER-7 left `npcAgency.js:914` ("Pressure gate 0.62,
+//     ambition 0.41.") standing as two named rows, because humanizing it MOVES A SAME-SEED
+//     GOLDEN and that is not a call an implementing seat folds into a prose wave. The
+//     ruling came, the shift was taken in T8's declared window, and the census fell
+//     227 → 225 (floatInterpolation 149 → 148, twoDecimalScore 12 → 11) with ADDED 0 and
+//     exactly those two rows REMOVED — the ceilings above came down with it.
+//     THE MECHANISM IS WORTH KEEPING EVEN THOUGH THE DEBT IS GONE, because it is the
+//     suppressor-defeat class and E-HER-9 hunts its siblings in T9:
+//       `worldPulseFeedCuration.js` `isMetronomeRepeat` suppresses a beat that repeats the
+//       same impactKind, headline, settlements AND REASONS inside a six-tick window
 //       (`DRIFT_REEMIT_COOLDOWN_TICKS`), and `stateOnlyRumorSeedsFromHistory` runs the
 //       PRIVATE rumor seeds through the same predicate. A per-tick jittering float in a
-//       reason made every re-emission a different string, so the suppressor never fired on
-//       this family. Banded to one of four fixed sentences, it fires — and one rumor,
-//       `trade:candidate.npc.reform.d_n_d.7`, stops being seeded at all and vanishes from
-//       every downstream ledger. `tests/property/rumorLedgerGolden.test.js` reds on exactly
-//       one of its three configs.
-//     ⭐ THE PUBLIC NEWS ENTRIES ARE BYTE-IDENTICAL EITHER WAY — 61 entries, same ticks,
-//       same kinds, same headlines. The whole effect lives on the STATE-ONLY seed path,
-//       which is why it took a ledger-level diff rather than an entry diff to see it, and
-//       why a lane that only checked "did the feed change" would have shipped it blind.
-//     THE JUDGMENT (J-HER-I): the shift is almost certainly DESIRABLE — the estate built
-//     `isMetronomeRepeat` to stop exactly this repetition and a float was defeating it —
-//     but taking it means RE-RECORDING a same-seed golden manifest, which is not a call an
-//     implementing seat folds into a prose wave. The site is stopped, the two rows stay as
-//     named debt, and the ruling is owed. Curing it later is a two-line change plus a
-//     declared shift record.
-const REVIEWED_TOTAL_CEILING = 227;
+//       reason made every re-emission a different STRING, so the suppressor never fired on
+//       this family — the float was not merely ugly, it was DISABLING A GUARD. Banded to
+//       four fixed sentences, it fires.
+//     ⚠ ADDRESS ROT, corrected rather than carried: this note used to cite
+//       `worldPulseFeedCuration.js:128`. The predicate has since moved to :140 and :128 is
+//       now a different function, which is why the citation here is by NAME and not by line.
+//     ⭐ THE PUBLIC NEWS ENTRIES ARE BYTE-IDENTICAL EITHER WAY. The whole effect lives on
+//       the STATE-ONLY seed path, which is why it took a ledger-level diff rather than an
+//       entry diff to see it, and why a lane that only checked "did the feed change" would
+//       have shipped it blind. The measured golden movement is recorded in the SHIFT RECORD
+//       in `tests/property/rumorLedgerGolden.test.js`, re-measured at T8's own base rather
+//       than inherited from HER-7's figures.
+const REVIEWED_TOTAL_CEILING = 225;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 149,
+  floatInterpolation: 148,
   percentToken: 56,
   multiplier: 10,
-  twoDecimalScore: 12,
+  twoDecimalScore: 11,
   pushIndirection: 0,
 });
 
@@ -540,11 +542,11 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     expect(categoryCeilingTotal).toBe(REVIEWED_TOTAL_CEILING);
     expect(
       ceilingViolations(baseline),
-      'The committed baseline exceeds the reviewed 227-row census. Remove the leak; never raise a ceiling.',
+      'The committed baseline exceeds the reviewed 225-row census. Remove the leak; never raise a ceiling.',
     ).toEqual([]);
     expect(
       ceilingViolations(LIVE.hits),
-      'The live tree exceeds the reviewed 227-row census. Humanize the new leak; never raise a ceiling.',
+      'The live tree exceeds the reviewed 225-row census. Humanize the new leak; never raise a ceiling.',
     ).toEqual([]);
   });
 
@@ -559,8 +561,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 228 exceeds reviewed ceiling 227',
-      'floatInterpolation 150 exceeds reviewed ceiling 149',
+      'total 226 exceeds reviewed ceiling 225',
+      'floatInterpolation 149 exceeds reviewed ceiling 148',
     ]);
   });
 

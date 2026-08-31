@@ -172,7 +172,12 @@ describe('metronome suppression (feed curation, not ledger curation)', () => {
     severity: 0.4,
     headline: `${name} may protect`,
     summary: 'A guardian steps up.',
-    reasons: ['Pressure gate 0.40, loyalty 0.70.'],
+    // The banded candidate receipt npcAgency actually emits since T8's metronome cure
+    // (ODQ §774.2). It used to interpolate two per-tick floats, which made every
+    // re-emission a unique string and stopped `isMetronomeRepeat` firing at all — the very
+    // predicate these cases exercise. Kept in step with the engine so the fixture is not a
+    // quotation of a sentence nothing writes any more.
+    reasons: ['Pressure sat barely over the gate, and the ambition behind it is steady.'],
     targetSaveId: 'alpha',
     npcId: `alpha:${name.toLowerCase().replace(/\s+/g, '_')}:0`,
     npcPatch: { momentum: 0.1 },
@@ -231,7 +236,7 @@ describe('significance honesty', () => {
       severity: 0.5,
       headline: 'Reeve Alda may seek promotion',
       summary: 'Ambition stirs.',
-      reasons: ['Pressure gate 0.40, ambition 0.60.'],
+      reasons: ['Pressure sat barely over the gate, and the ambition behind it is steady.'],
       targetSaveId: 'alpha',
       npcId: 'alpha:reeve_alda:0',
       npcPatch: { momentum: 0.2 },

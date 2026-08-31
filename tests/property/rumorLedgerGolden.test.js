@@ -14,6 +14,40 @@
  * across runs and machines — asserted by the two-run determinism test.
  *
  * Capture/refresh: UPDATE_GOLDEN=1 npx vitest run tests/property/rumorLedgerGolden.test.js
+ *
+ * ── SHIFT RECORD ────────────────────────────────────────────────────────────
+ * A hash manifest cannot show WHY it moved, so every re-record is written down here.
+ * Re-recording without adding a row is a deleted alarm.
+ *
+ * 2026-08-31 — THE METRONOME FINALLY FIRES (1 config of 3 moved; 0 configs added, 0
+ *   removed). Lane T8, the shift window. RULED at ODQ §774.2, which ratified J-HER-I:
+ *   the cure and this re-record ride T8's declared window, with the record naming the cause.
+ *   THE CAUSE IS A GUARD THAT COULD NEVER FIRE. `worldPulseFeedCuration`'s
+ *   `isMetronomeRepeat` suppresses a beat repeating the same impactKind, headline,
+ *   settlements AND REASONS inside a six-tick window, and `stateOnlyRumorSeedsFromHistory`
+ *   runs the PRIVATE rumor seeds through the same predicate. `npcAgency`'s candidate receipt
+ *   interpolated two per-tick floats — `Pressure gate 0.62, ambition 0.41.` — so every
+ *   re-emission was a different STRING, the reasons key never matched, and the suppressor had
+ *   never fired on this family since the day it was built. The sentence is now banded to four
+ *   fixed spellings (`eventProse.npcPressureWord` / `npcAmbitionWord`), so it fires.
+ *   THE COMPLETE DIFF IS ONE VANISHED RUMOR, measured over the whole projection base-vs-tip
+ *   and never inferred from a hash. In `rl-c|14|unreliable`, the seed
+ *   `trade:candidate.npc.reform.d_n_d.7` stops being seeded and disappears from ALL FOUR
+ *   settlement ledgers (17 keys → 16 on each of a, b, c, d). Not one surviving rumor moved:
+ *   zero changes to hop, arrival, eventTick, lineage root or length, independence,
+ *   completeness band, accuracy band, magnitude or relay on any other key in any ledger.
+ *   That is precisely what the suppressor is for — a repeat that was escaping it.
+ *   ⭐ THE OTHER TWO CONFIGS ARE BYTE-IDENTICAL, and they are this record's control:
+ *   `rl-a|8|perfect_delayed` and `rl-b|8|unreliable` run the same changed code and their
+ *   hashes do not move, so 1 of 3 is a count of a cause and not a sample of a cascade.
+ *   ⚠ THE FIGURE WAS RE-MEASURED, NOT INHERITED. HER-7's note predicted "exactly one of its
+ *   three configs" at a tree five landings older; this lane re-derived it at its own base and
+ *   the prediction held to the config, the settlement set and the key.
+ *   TOTALITY CONTROL: the lane's base reproduces all three committed hashes with 0
+ *   mismatches, so the two unmoved rows are unmoved and not merely unchecked.
+ *   CONTAINMENT: the whole of tests/property/ was run at the tip; this is the only manifest
+ *   that moved. The public news entries are unaffected — the effect lives entirely on the
+ *   STATE-ONLY seed path, which is why an entry-level diff would have shown nothing.
  */
 import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';

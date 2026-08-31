@@ -990,18 +990,6 @@
     "snippet": "Math.round(resolved.relief.demand01 * 10000)"
   },
   {
-    "path": "src/domain/worldPulse/npcAgency.js",
-    "line": 914,
-    "category": "floatInterpolation",
-    "snippet": "`Pressure gate ${pressure.toFixed(2)}, ambition ${state.ambition.toFixed(2)}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/npcAgency.js",
-    "line": 914,
-    "category": "twoDecimalScore",
-    "snippet": "`Pressure gate ${pressure.toFixed(2)}, ambition ${state.ambition.toFixed(2)}.`"
-  },
-  {
     "path": "src/domain/worldPulse/warCoalitionExpenditure.js",
     "line": 295,
     "category": "floatInterpolation",
