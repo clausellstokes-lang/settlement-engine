@@ -11,11 +11,12 @@
  *   1. the ladder is TOTAL and MONOTONE over the emitted vocabulary;
  *   2. the vocabulary is CLOSED, walked BOTH DIRECTIONS against `prosperity.js`'s own LABELS
  *      array — so a seventh label cannot be minted without this suite noticing;
- *   3. the three consumers that moved onto the canonical ladder are the only importers of it
- *      that matter, and NO consumer keeps a private ladder (a source scan for the shape);
- *   4. the ONE pre-T8 holdout has EXACTLY ONE importer, and the labels the two ladders
- *      disagree on are pinned by value — so the registered divergence can neither spread nor
- *      drift while it waits for T8's golden window.
+ *   3. ALL FOUR consumers read the canonical ladder, and NO consumer keeps a private ladder
+ *      (a source scan for the shape);
+ *   4. the pre-T8 corruption holdout is GONE — neither the export nor an importer of it
+ *      survives anywhere. T8 flipped `corruption.js` onto the canonical ladder (J-T7-C,
+ *      ODQ §809) and re-recorded the generator goldens that moved; this arm is what stops
+ *      the divergence being re-minted under its old name.
  *
  * @enforced-by this file
  */
@@ -25,15 +26,13 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from 'vitest';
 
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import * as prosperityRankLeaf from '../../src/domain/prosperityRank.js';
 import {
   PROSPERITY_LABELS,
   PROSPERITY_RANK,
   PROSPERITY_RANK_NEUTRAL,
-  PROSPERITY_RANK_PRE_T8_CORRUPTION,
-  PROSPERITY_RANK_PRE_T8_CORRUPTION_CONSUMER,
   prosperityLabelOf,
   prosperityRank01,
-  prosperityRank01PreT8Corruption,
 } from '../../src/domain/prosperityRank.js';
 import { deriveProsperityLabel } from '../../src/generators/economy/prosperity.js';
 import { createPRNG } from '../../src/kernel/prng.js';
@@ -254,48 +253,74 @@ describe('the habitat is gone', () => {
     expect(isPrivateLadder('// a comfortable settlement is not a wealthy one')).toBe(false);
   });
 
-  test('the three moved consumers import the canonical ladder', () => {
+  test('ALL FOUR consumers import the canonical ladder', () => {
     for (const rel of ['src/generators/neighbourGenerator.js', 'src/domain/interior/interiorModel.js',
-      'src/domain/townMap/townLayoutV2.js']) {
+      'src/domain/townMap/townLayoutV2.js', 'src/domain/corruption.js']) {
       expect(read(rel), `${rel} no longer reads the one ladder`).toMatch(/prosperityRank01\b/);
     }
   });
 });
 
-describe('the pre-T8 holdout is registered, single, and pinned', () => {
-  test('EXACTLY ONE importer, and it is the declared one', () => {
-    const importers = SRC.filter((rel) => rel !== 'src/domain/prosperityRank.js'
-      && /prosperityRank01PreT8Corruption/.test(read(rel)));
+describe('the pre-T8 corruption holdout is GONE, and cannot be re-minted under its name', () => {
+  // T7 could not flip `corruption.js` onto this ladder: its climate adapter feeds
+  // `corruptionPass`, a GENERATION step, so the flip was same-seed load-bearing and ODQ
+  // §773.1 holds every golden-moving wave for T8's single shift window. T7 therefore
+  // REGISTERED the divergence as an export here, held to one importer by a walker, with the
+  // disagreeing labels pinned by value (J-T7-C). T8 executed the flip and re-recorded the
+  // generator-golden rows it moved under a SHIFT RECORD naming this cause.
+  //
+  // These arms are what the registration turns into once it is discharged: the walker that
+  // permitted EXACTLY ONE importer now permits NONE, so the removal is a property of the
+  // tree rather than a fact about one commit.
+  test('the leaf exports no pre-T8 ladder — not the table, not the reader, not the consumer pin', () => {
+    for (const name of ['PROSPERITY_RANK_PRE_T8_CORRUPTION',
+      'PROSPERITY_RANK_PRE_T8_CORRUPTION_CONSUMER', 'prosperityRank01PreT8Corruption']) {
+      expect(
+        prosperityRankLeaf[name],
+        `${name} is exported again — the one-ladder class has re-opened under its old name`,
+      ).toBeUndefined();
+    }
+    // ANCHOR: the same namespace read still finds the canonical reader, so the three
+    // undefineds above measure removal and not a failed import.
+    expect(prosperityRankLeaf.prosperityRank01).toBeTypeOf('function');
+  });
+
+  test('NO file under src/ names the pre-T8 reader, and the scan that says so is live', () => {
+    // ANCHOR FIRST: the identical scan for the CANONICAL reader must find the four
+    // consumers. That proves SRC is populated and the regex machinery works, so the empty
+    // result below is a selection and not a vacuous green (tests/helpers/anchoredNegatives).
+    const canonical = SRC.filter((rel) => rel !== 'src/domain/prosperityRank.js'
+      && /prosperityRank01\b/.test(read(rel)));
+    expect(canonical).toEqual(expect.arrayContaining([
+      'src/domain/corruption.js', 'src/domain/interior/interiorModel.js',
+      'src/domain/townMap/townLayoutV2.js', 'src/generators/neighbourGenerator.js',
+    ]));
+
+    const holdouts = SRC.filter((rel) => /prosperityRank01PreT8Corruption|PRE_T8_CORRUPTION/.test(read(rel)));
     expect(
-      importers,
-      'the pre-T8 corruption ladder has gained (or lost) a consumer. It exists ONLY because '
-      + 'flipping corruption.js moves 91 of 525 generator-golden rows and §773.1 couples that '
-      + "into T8's single shift window. It is not a general-purpose ladder.",
-    ).toEqual([PROSPERITY_RANK_PRE_T8_CORRUPTION_CONSUMER]);
+      holdouts,
+      'a pre-T8 prosperity ladder is back. It existed ONLY because flipping corruption.js '
+      + 'moved generator-golden rows and §773.1 coupled that into T8\'s shift window. That '
+      + 'window has closed: there is one ladder now, and a second one is a defect.',
+    ).toEqual([]);
   });
 
-  test('the disagreement is pinned label by label — this is the T8 work order', () => {
-    const disagreements = PROSPERITY_LABELS
-      .filter((label) => prosperityRank01(label) !== prosperityRank01PreT8Corruption(label))
-      .map((label) => [label, prosperityRank01PreT8Corruption(label), prosperityRank01(label)]);
-    expect(disagreements).toEqual([
-      // label            pre-T8   canonical
-      ['Struggling', 0.2, 0.1],
-      ['Poor', 0.2, 0.25],
-      ['Moderate', 0.4, 0.5],
-      ['Comfortable', 0.6, 0.65],
-      ['Wealthy', 1.0, 0.95],
+  test('the five labels that moved are pinned at the values corruption.js now reads', () => {
+    // The T7 registration pinned this table as a DISAGREEMENT (pre-T8 -> canonical). The
+    // disagreement is discharged, so the same five labels are pinned here at their new
+    // values — the record of what the shift actually did to the corruption climate.
+    expect(PROSPERITY_LABELS.map((label) => [label, prosperityRank01(label)])).toEqual([
+      // label            was (pre-T8)   is (canonical)
+      ['Struggling', 0.1], //   0.2
+      ['Poor', 0.25], //        0.2
+      ['Moderate', 0.5], //     0.4
+      ['Comfortable', 0.65], // 0.6
+      ['Prosperous', 0.8], //   0.8 — the one that never disagreed
+      ['Wealthy', 0.95], //     1.0
     ]);
-    // Prosperous agrees at 0.8 on both, which is why it is absent above.
-    expect(prosperityRank01('Prosperous')).toBe(prosperityRank01PreT8Corruption('Prosperous'));
-  });
-
-  test('the holdout table is the one corruption.js used, unchanged', () => {
-    expect(PROSPERITY_RANK_PRE_T8_CORRUPTION).toEqual({
-      subsistence: 0.0, destitute: 0.0, poor: 0.2, struggling: 0.2, meager: 0.2,
-      moderate: 0.4, modest: 0.4, stable: 0.45, comfortable: 0.6,
-      prosperous: 0.8, thriving: 0.8, wealthy: 1.0, affluent: 1.0, opulent: 1.0,
-    });
-    expect(prosperityRank01PreT8Corruption('nothing recognisable')).toBe(0.4);
+    // The unknown default moved with them: the pre-T8 reader answered 0.4, the canonical
+    // ladder answers its declared neutral.
+    expect(prosperityRank01('nothing recognisable')).toBe(PROSPERITY_RANK_NEUTRAL);
+    expect(PROSPERITY_RANK_NEUTRAL).toBe(0.5);
   });
 });

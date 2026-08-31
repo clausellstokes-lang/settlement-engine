@@ -6,6 +6,7 @@ import {
   readCorruptionClimate,
   guildStrength, guildEffectiveSecurity, GUILD_TUNING,
 } from '../../src/domain/corruption.js';
+import { PROSPERITY_RANK_NEUTRAL } from '../../src/domain/prosperityRank.js';
 
 describe('corruption — eligibility + vectors', () => {
   it('recognizes corruptible flaws and rejects benign ones', () => {
@@ -126,7 +127,12 @@ describe('corruption — settlement climate adapter', () => {
     const c = readCorruptionClimate({});
     expect(c.hasCriminalInst).toBe(false);
     expect(c.crime).toBeGreaterThanOrEqual(0);
-    expect(c.prosperity).toBe(0.4); // unknown → middling
+    // Unknown → the ONE ladder's declared neutral. Was 0.4 while corruption.js carried its
+    // own private ladder; T8 flipped it onto `prosperityRank01` (J-T7-C / ODQ §809) and the
+    // neutral moved with it. The generator goldens this shifted are re-recorded under the
+    // SHIFT RECORD in tests/property/generatorGoldenMaster.test.js.
+    expect(c.prosperity).toBe(PROSPERITY_RANK_NEUTRAL);
+    expect(PROSPERITY_RANK_NEUTRAL).toBe(0.5);
   });
 });
 

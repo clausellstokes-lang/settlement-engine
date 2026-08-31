@@ -18,6 +18,56 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-31 — THE LAST PRIVATE PROSPERITY LADDER (91 rows of 525 moved; 0 rows added,
+ *   0 removed, 0 templates added or removed, 0 array-length moves, 0 key-order moves).
+ *   Lane T8, the shift window's first car. RULED: J-T7-C at ODQ §809, scheduled into this
+ *   window by §773.1's coupling law — T7 measured the flip, could not take it inside a
+ *   behavior-preserving train, and REGISTERED it instead of parking it.
+ *   THE CAUSE IS ONE FIELD READ ON TWO LADDERS. `economicState.prosperity` is a six-label
+ *   categorical with no declared unit (the §711.6 family), and four consumers had privately
+ *   re-quantified it to 0..1 on three different scales. T7 moved three of them onto
+ *   `domain/prosperityRank.js`. The fourth, `corruption.js`'s climate adapter, feeds
+ *   `corruptionPass` — a GENERATION step — so its flip was same-seed load-bearing and had to
+ *   wait for this window. It now reads `prosperityRank01` like its three siblings, and the
+ *   registered holdout export, its single-importer walker and its disagreement pin are gone.
+ *   THE LADDER MOVED ON FIVE OF SIX LABELS (was → is): Struggling 0.2 → 0.1 · Poor 0.2 → 0.25 ·
+ *   Moderate 0.4 → 0.5 · Comfortable 0.6 → 0.65 · Wealthy 1.0 → 0.95. `Prosperous` reads 0.8 on
+ *   BOTH, and that coincidence is this record's control (below). The unknown default moved
+ *   0.4 → 0.5, the leaf's declared neutral.
+ *   THE COMPLETE PATH-TEMPLATE CENSUS IS ONE TEMPLATE, measured over WHOLE SETTLEMENTS
+ *   base-vs-tip and never inferred from a hash:
+ *     $.simulationTrace[].causes[].effect            114 changes / 91 rows
+ *   Old → new is one receipt line per corrupted NPC — `onset chance 0.165` → `onset chance
+ *   0.158` — the string `corruptionPass` writes to say WHY that NPC was generated corrupt.
+ *   ⭐ NO NPC CHANGED CORRUPTION STATE ON ANY ROW, AND THAT IS A MEASUREMENT, NOT A HOPE.
+ *   `rng.chance(p)` consumes its draw whatever `p` is, so the stream never moves; only the
+ *   comparison could flip, and on these 525 rows none did — a flip would have moved
+ *   `$.npcs[].corrupt`, a `causes[]` length, or a `secondaryAffiliation`, and the census shows
+ *   zero of all three. It CAN flip elsewhere: this is a real behavioral shift on the corrupted
+ *   cohort, and the corpus happens not to contain a row near enough to a threshold.
+ *   ⭐ THE DRIFT SET IS THE EDIT'S OWN FINGERPRINT, AND ITS CONTROL FIRES. Of 525 rows, 270
+ *   reach `corruptionPass` at all (it returns before any trace when no criminal institution is
+ *   present, so thorp/hamlet/village never reach it — 0 of 252, and 0 of those moved). Of the
+ *   270 that DO reach it, the split is exact:
+ *     Comfortable  55 reached / 55 moved      Moderate    12 reached / 12 moved
+ *     Poor         24 reached / 24 moved      Prosperous 179 reached /  0 moved
+ *   55 + 12 + 24 = 91. Every row carrying a label the two ladders DISAGREE on moved; every row
+ *   carrying the ONE label they agree on did not. `Prosperous` is therefore a live negative
+ *   control INSIDE the same mechanism — 179 rows that run the changed code and are byte-
+ *   identical — so the 91 is a count of a cause, not a sample of a cascade. No roster,
+ *   institution, settlement name, economy figure, faction or rng draw moves anywhere.
+ *   TOTALITY CONTROL: this lane's base (`6770f878f`) reproduces all 525 committed hashes with
+ *   0 mismatches, proved twice by different instruments — the suite's own run, and a standalone
+ *   harness that rebuilds every row from the manifest's own keys. So 434 byte-identical is a
+ *   count, and 91 is not a floor.
+ *   CONTAINMENT BEYOND THIS MANIFEST: the whole of `tests/property/` was run at the tip —
+ *   83 files, and the 82 that are not this one all pass. The climate's `prosperity` field has
+ *   readers outside generation (`worldPulse/npcAgency`, `factionCapture`, `undercity/
+ *   colonization`, `undercity/sewerDerivation`), and NO dormancy or world-pulse golden moved.
+ *   THE PROMISE. A stored settlement is never re-derived; only newly generated worlds get the
+ *   one ladder. Two worlds from one seed — one saved before this lands, one generated after —
+ *   differ in the onset-chance receipt on their corrupted NPCs and in nothing else.
+ *
  * 2026-08-30 — THE HEDGES THAT NAMED NOTHING (25 rows of 525 moved; 0 rows added, 0
  *   removed, 0 ROSTERS changed). Lane T10 landing, re-recording car UX-2's §767.3(e)
  *   hedge kill. RULED at ODQ §830 — the drift is the train's OWN DECLARED SHIFT, so the
