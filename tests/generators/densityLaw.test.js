@@ -40,6 +40,12 @@ import {
   readFactionLifecycle,
 } from '../../src/generators/density/factionLifecycle.js';
 import { ASCENSION_REFUSALS, planSeatAscension } from '../../src/generators/density/densityAscension.js';
+import {
+  CADENCE_REFUSALS,
+  CADENCE_STEPS,
+  planDensityCadence,
+  representationGapOf,
+} from '../../src/generators/density/densityCadence.js';
 import { describe, it, expect } from 'vitest';
 import { createPRNG } from '../../src/kernel/prng.js';
 import {
@@ -1056,5 +1062,187 @@ describe('D2b — §810.6 R21: a power that takes the seat without a house is gi
     expect(Object.isFrozen(out)).toBe(true);
     expect(Object.isFrozen(out.faction)).toBe(true);
     expect(Object.isFrozen(out.roster)).toBe(true);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TE-DENSITY-1 D2b — §810.1 R7/R8/R9 + §810.3 R14: THE LADDER IS ALIVE.
+//
+// R7  the SAME ranges govern birth AND simulated promotion; the fabric thickens
+//     toward the new band at a slow rolled cadence — ONE emergence per interval.
+// R8  the spawn fills the LARGEST REPRESENTATION GAP first (influence /
+//     legitimacy / economics, but unrepresented).
+// R9  symmetry is mandatory — density THINS on decline, weakest standing first,
+//     because one-way thickening is a ratchet and a settlement that grew then
+//     shrank would keep a metropolis's fabric on a village's bones.
+// R14 the RULING house is exempt from thinning. Only events may end it.
+//
+// ⭐ THE CADENCE IS ENFORCED BY THE RETURN SHAPE, NOT BY A COUNTER. The planner
+// returns AT MOST ONE step, so a caller running it once per interval gets
+// exactly R7's cadence and a caller looping it is visibly doing something the
+// law does not sanction. And it takes NO DRAW AT ALL — every ordering is total
+// and deterministic — which is the strongest dormancy guarantee available.
+describe('D2b — §810.1 R7/R8/R9 + R14: the ladder is alive, and it thins as well as thickens', () => {
+  const cadCfg = { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION };
+  const seatsOf = (n, { rulingWeakest = false } = {}) => Array.from({ length: n }, (_, i) => ({
+    faction: `House ${i}`,
+    // `rulingWeakest` makes the government the LOWEST-standing house, which is
+    // the only configuration that can actually convict R14.
+    power: rulingWeakest ? (i === 0 ? 0 : 10 + i) : 10 - i,
+    isGoverning: i === 0,
+  }));
+
+  it('both vocabularies are CLOSED', () => {
+    expect(CADENCE_STEPS).toEqual(['thicken', 'thin', 'at_band']);
+    expect(CADENCE_REFUSALS).toEqual(['dormant_law', 'no_candidate_power', 'ruling_only']);
+  });
+
+  it('THE PROMISE: a v1 world is never thickened or thinned', () => {
+    const out = planDensityCadence({
+      tier: 'city', config: {}, powerStructure: { factions: seatsOf(2) },
+      candidatePowers: [{ key: 'Guild', influence01: 1 }],
+    });
+    expect(out.step).toBe('at_band');
+    expect(out.reason).toBe('dormant_law');
+    expect(out.emergence).toBeNull();
+    expect(out.thinning).toBeNull();
+  });
+
+  it('R8: the spawn fills the LARGEST representation gap first', () => {
+    const out = planDensityCadence({
+      tier: 'city', config: cadCfg, powerStructure: { factions: seatsOf(2) },
+      candidatePowers: [
+        { key: 'Temple', influence01: 0.3, legitimacy01: 0.4, economics01: 0.2 },
+        { key: 'Guild', influence01: 0.9, legitimacy01: 0.8, economics01: 0.9 },
+        { key: 'Watch', influence01: 0.5, legitimacy01: 0.5, economics01: 0.5 },
+      ],
+    });
+    expect(out.step).toBe('thicken');
+    expect(out.emergence.key).toBe('Guild');
+    expect(out.emergence.gapScore).toBeCloseTo((0.9 + 0.8 + 0.9) / 3, 10);
+    // R7: ONE. There is no plural in the shape to accidentally drain.
+    expect(out.thinning).toBeNull();
+  });
+
+  it('R8\'s ordering is TOTAL — equal gaps break on the key, never on pool order', () => {
+    const even = { influence01: 0.5, legitimacy01: 0.5, economics01: 0.5 };
+    const a = planDensityCadence({
+      tier: 'city', config: cadCfg, powerStructure: { factions: seatsOf(2) },
+      candidatePowers: [{ key: 'Zed', ...even }, { key: 'Ash', ...even }],
+    });
+    const b = planDensityCadence({
+      tier: 'city', config: cadCfg, powerStructure: { factions: seatsOf(2) },
+      candidatePowers: [{ key: 'Ash', ...even }, { key: 'Zed', ...even }],
+    });
+    expect(a.emergence.key).toBe('Ash');
+    expect(b.emergence.key).toBe('Ash');
+  });
+
+  it('an unrepresented pool is REQUIRED — the law declines rather than inventing a house', () => {
+    const out = planDensityCadence({
+      tier: 'city', config: cadCfg, powerStructure: { factions: seatsOf(2) }, candidatePowers: [],
+    });
+    expect(out.step).toBe('thicken');
+    expect(out.reason).toBe('no_candidate_power');
+    expect(out.emergence).toBeNull();
+  });
+
+  it('a candidate that is ALREADY seated is not a representation gap', () => {
+    const out = planDensityCadence({
+      tier: 'city', config: cadCfg, powerStructure: { factions: seatsOf(2) },
+      candidatePowers: [{ key: 'House 1', influence01: 1, legitimacy01: 1, economics01: 1 }],
+    });
+    expect(out.reason).toBe('no_candidate_power');
+  });
+
+  it('R9: on decline the WEAKEST-STANDING house folds first (the anti-ratchet)', () => {
+    const out = planDensityCadence({
+      tier: 'thorp', config: cadCfg, powerStructure: { factions: seatsOf(5) },
+    });
+    expect(out.step).toBe('thin');
+    // seatsOf gives descending power with the ruler strongest, so the weakest
+    // NON-ruling house is the last one.
+    expect(out.thinning.key).toBe('House 4');
+    expect(out.thinning.standing).toBe(6);
+    expect(out.emergence).toBeNull();
+  });
+
+  it('⛔ R14: the ruling house is NOT folded EVEN WHEN IT IS THE WEAKEST THING THERE', () => {
+    // The only configuration that can convict R14: the government has the
+    // lowest standing in the settlement, so a naive weakest-first sort would
+    // pick it and dissolve the government by density roll — the "hole".
+    const out = planDensityCadence({
+      tier: 'thorp', config: cadCfg,
+      powerStructure: { factions: seatsOf(5, { rulingWeakest: true }) },
+    });
+    expect(out.step).toBe('thin');
+    expect(out.thinning.key).not.toBe('House 0');
+    expect(out.thinning.standing).toBeGreaterThan(0);
+  });
+
+  it('R14 again: when the ONLY foldable houses are ruling, it declines instead of folding one', () => {
+    const out = planDensityCadence({
+      tier: 'thorp', config: cadCfg,
+      powerStructure: { factions: [0, 1, 2].map(i => ({ faction: `Gov ${i}`, power: 1, isGoverning: true })) },
+    });
+    expect(out.step).toBe('thin');
+    expect(out.reason).toBe('ruling_only');
+    expect(out.thinning).toBeNull();
+  });
+
+  it('inside the band nothing happens, and it SAYS so rather than returning a null to interpret', () => {
+    for (const tier of TIER_ORDER) {
+      const env = factionEnvelopeForTier(tier);
+      const out = planDensityCadence({
+        tier, config: cadCfg, powerStructure: { factions: seatsOf(env.min) },
+      });
+      expect(out.step, `${tier} at band min should be at_band`).toBe('at_band');
+      expect(out.reason).toBeNull();
+    }
+  });
+
+  it('⭐ SYMMETRY (R9): every tier can both thicken below its band and thin above it', () => {
+    // The anti-ratchet arm proper. If a tier could only thicken, a settlement
+    // that grew and then shrank would keep the larger fabric forever.
+    for (const tier of TIER_ORDER) {
+      const env = factionEnvelopeForTier(tier);
+      if (env.min > 0) {
+        const below = planDensityCadence({
+          tier, config: cadCfg,
+          powerStructure: { factions: seatsOf(Math.max(0, env.min - 1)) },
+          candidatePowers: [{ key: 'Newcomer', influence01: 0.9 }],
+        });
+        expect(below.step, `${tier} below band must thicken`).toBe('thicken');
+      }
+      const above = planDensityCadence({
+        tier, config: cadCfg, powerStructure: { factions: seatsOf(env.max + 2) },
+      });
+      expect(above.step, `${tier} above band must thin`).toBe('thin');
+      expect(above.thinning, `${tier} above band produced no foldable house`).not.toBeNull();
+    }
+  });
+
+  it('the gap score degrades to "unremarkable" on a partial context rather than tilting wrongly', () => {
+    expect(representationGapOf({})).toBeCloseTo(0.5, 10);
+    expect(representationGapOf({ influence01: 1 })).toBeCloseTo((1 + 0.5 + 0.5) / 3, 10);
+    // Out-of-range inputs clamp rather than skewing the mean.
+    expect(representationGapOf({ influence01: 99, legitimacy01: -5, economics01: 0.5 }))
+      .toBeCloseTo((1 + 0 + 0.5) / 3, 10);
+  });
+
+  it('the plan is INERT and the planner takes NO DRAW (no rng is even accepted)', () => {
+    const out = planDensityCadence({
+      tier: 'city', config: cadCfg, powerStructure: { factions: seatsOf(2) },
+      candidatePowers: [{ key: 'Guild', influence01: 0.9 }],
+    });
+    expect(Object.isFrozen(out)).toBe(true);
+    expect(Object.isFrozen(out.emergence)).toBe(true);
+    // Called twice with no seed and no rng, it is byte-identical — determinism
+    // without a stream is the strongest dormancy guarantee this law can offer.
+    const again = planDensityCadence({
+      tier: 'city', config: cadCfg, powerStructure: { factions: seatsOf(2) },
+      candidatePowers: [{ key: 'Guild', influence01: 0.9 }],
+    });
+    expect(JSON.stringify(out)).toBe(JSON.stringify(again));
   });
 });
