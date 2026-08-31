@@ -229,8 +229,12 @@ describe('ES-5b A5 — THE DECLARED ONE-TICK LAG (§0.2, CR-ES5B-2)', () => {
       'advanceSettlementPolitics({',
       // 3. the rules roll, which reaches this wave's NEW consumer through evaluateFactionRules.
       'evaluateWorldPulseRules(',
-      // 4. the roads stage — the SOLE per-tick writer of npc.whereabouts.
-      'advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize({',
+      // 4. the roads stage — the SOLE per-tick writer of npc.whereabouts. The chain head's
+      //    NAME is the ledger of what is composed onto it, so it grows with each member
+      //    (…AndCommonsAndAssize → …AndCommonsAndAssizeAndDensity, TE-DENSITY-1 D2c): the
+      //    frozen kernel changes by name only, and re-quoting the anchor here is the price.
+      //    The STAGE this pin orders against is unmoved — the roads writer still runs inside it.
+      'advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssizeAndDensity({',
     ];
     const at = ANCHORS.map((anchor) => {
       const first = kernel.indexOf(anchor);

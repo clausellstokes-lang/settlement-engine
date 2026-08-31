@@ -237,7 +237,11 @@ describe('ES-5d A5 — THE HANDOFF IS SAME-TICK, AND THE PULSE ORDER IS WHY (dev
     // that names them carry no parenthesis, so neither can be mistaken for a call.
     const pulse = readFileSync(join(ROOT, 'src/domain/worldPulse/pulseKernel.js'), 'utf8');
     const espionageAt = pulse.indexOf('advanceEnvoyDiplomacyPulse({');
-    const ladderAt = pulse.indexOf('AndCommonsAndAssize({');
+    // ⚠ The chain head's NAME grows with every member composed onto its tail (the estate's
+    // name-swap idiom), so this anchor is re-quoted whenever a lane joins it —
+    // …AndCommonsAndAssize → …AndCommonsAndAssizeAndDensity (TE-DENSITY-1 D2c). What the pin
+    // measures is unchanged: the ONE call site of the ladder chain, still after the espionage pass.
+    const ladderAt = pulse.indexOf('AndCommonsAndAssizeAndDensity({');
     expect(espionageAt, 'the espionage pass call site moved — re-derive the handoff lag')
       .toBeGreaterThan(0);
     expect(ladderAt, 'the ladder chain call site moved — re-derive the handoff lag')

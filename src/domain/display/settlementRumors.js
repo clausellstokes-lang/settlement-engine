@@ -294,6 +294,10 @@ export const WHAT_PHRASES = Object.freeze({
   faction_government_challenge: 'a challenge to those in power',
   faction_rival_power_contest: 'a contest between rival powers',
   faction_capture: 'a faction seizing control',
+  // TE-DENSITY-1 (§810.4 R18/R19): a house whose last named figure left the roster, and
+  // the ONE house that may not end that way — the ruling seat, which stands empty instead.
+  faction_dissolved: 'a house of power come to an end',
+  faction_interregnum: 'a ruling seat left with nobody in it',
   hierarchy_cascade: 'an upheaval in the ranks',
   authority_instability: 'a shaken authority',
   occupation_lifted: 'an occupation ended',

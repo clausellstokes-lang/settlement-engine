@@ -86,6 +86,14 @@ import {
   ladderFactionKey,
   rungCapForTier,
 } from '../../src/domain/worldPulse/npcLadderState.js';
+// D2c — the WIRING seam. The pure laws above are read; these are the caller that
+// applies them, and the window it borrows rather than authors.
+import {
+  advanceFactionDensity,
+  advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssizeAndDensity,
+} from '../../src/domain/worldPulse/factionDensityKernel.js';
+import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize } from '../../src/domain/worldPulse/assizeKernel.js';
+import { DRIFT_REEMIT_COOLDOWN_TICKS } from '../../src/domain/worldPulse/worldPulseFeedCuration.js';
 
 // ── The corpus ───────────────────────────────────────────────────────────────
 // Wide enough that a one-in-many shape is not a coin flip: the §713.2 lesson is
@@ -1244,5 +1252,164 @@ describe('D2b — §810.1 R7/R8/R9 + R14: the ladder is alive, and it thins as w
       candidatePowers: [{ key: 'Guild', influence01: 0.9 }],
     });
     expect(JSON.stringify(out)).toBe(JSON.stringify(again));
+  });
+});
+
+// ── D2c: THE WIRING SEAM (§810.4 R18/R20 applied at the pulse) ───────────────
+// The laws above are pure readings; these pins are about the CALLER — the mover
+// that turns a reading into a write, a receipt, and nothing else. They live in
+// this file rather than a new one deliberately: the density lane has one home,
+// and a new test file would red three censuses for no gain in legibility.
+describe('D2c — the density lane wired into the pulse (§810.4 R18/R20)', () => {
+  const V2 = { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION };
+
+  /** A settlement whose houses and roster are stated outright.
+   *  @param {{id?: string, config?: Record<string, unknown>,
+   *           factions: Array<Record<string, unknown>>,
+   *           npcs?: Array<Record<string, unknown>>}} a */
+  const town = ({ id = 'ashford', config = V2, factions, npcs = [] }) => ({
+    id, name: 'Ashford', config, npcs,
+    powerStructure: { factions, seatOfPower: 'The Crown' },
+  });
+  /** @param {Record<string, unknown>} s */
+  const snapOf = (...list) => ({ settlements: list.map(s => ({ id: s.id, settlement: s })) });
+  /** @param {Record<string, unknown>} s */
+  const updatesOf = (...list) => list.map(s => ({ saveId: s.id, save: {}, settlement: s }));
+  /** @param {Record<string, unknown>} u */
+  const factionsIn = (u) => u.settlement.powerStructure.factions;
+
+  const CROWN = { name: 'The Crown', faction: 'The Crown', isGoverning: true, power: 40 };
+  const WEAVERS = { name: 'The Weavers', faction: 'The Weavers', power: 12 };
+  const factor = (house, status = 'active') => ({
+    id: `npc.${house}`, name: `A factor of ${house}`, factionAffiliation: house, status,
+  });
+
+  it('⭐ DORMANT (v1) IS A NO-OP BY REFERENCE, not merely by value', () => {
+    // The dormancy claim is a BIT claim. Object identity is the strongest form of it
+    // this seam can assert: applyPulseMover forwards these references untouched, so a
+    // v1 world's tick is byte-identical to one taken before the lane existed.
+    const s = town({ config: {}, factions: [CROWN, WEAVERS], npcs: [] });
+    const worldState = { tick: 5 };
+    const updates = updatesOf(s);
+    const out = advanceFactionDensity({ snapshot: snapOf(s), worldState, settlementUpdates: updates, tick: 5, now: null });
+    expect(out.changed).toBe(false);
+    expect(out.worldState).toBe(worldState);
+    expect(out.settlementUpdates).toBe(updates);
+    expect(out.newsEntries).toEqual([]);
+  });
+
+  it('R18: a house whose roster emptied is SWEPT from live state, with one receipt', () => {
+    const s = town({ factions: [CROWN, WEAVERS], npcs: [factor('The Crown'), factor('The Weavers', 'dead')] });
+    const out = advanceFactionDensity({ snapshot: snapOf(s), worldState: {}, settlementUpdates: updatesOf(s), tick: 9, now: null });
+    expect(out.changed).toBe(true);
+    // The Crown is crewed and stays; the Weavers' last factor is dead, so the house is gone.
+    expect(factionsIn(out.settlementUpdates[0]).map(f => f.name)).toEqual(['The Crown']);
+    expect(out.newsEntries).toHaveLength(1);
+    expect(out.newsEntries[0].impactKind).toBe('faction_dissolved');
+    // The house shape, because an id-less receipt is DROPPED by the feed in silence.
+    expect(out.newsEntries[0].id).toBe('wizard_news.9.faction_dissolved.ashford.the_weavers');
+    expect(out.newsEntries[0].settlementIds).toEqual(['ashford']);
+    // The dead factor is HISTORY and is not swept with the house (R18: history stays).
+    expect(out.settlementUpdates[0].settlement.npcs).toHaveLength(2);
+  });
+
+  it('⛔ R14/R19: the RULING house is never swept — it is marked into a receipted interregnum', () => {
+    const s = town({ factions: [CROWN, WEAVERS], npcs: [factor('The Crown', 'exiled'), factor('The Weavers')] });
+    const out = advanceFactionDensity({ snapshot: snapOf(s), worldState: {}, settlementUpdates: updatesOf(s), tick: 4, now: null });
+    const houses = factionsIn(out.settlementUpdates[0]);
+    expect(houses.map(f => f.name)).toEqual(['The Crown', 'The Weavers']);
+    expect(houses[0].interregnumSinceTick).toBe(4);
+    expect(out.newsEntries).toHaveLength(1);
+    expect(out.newsEntries[0].impactKind).toBe('faction_interregnum');
+    expect(out.newsEntries[0].significance).toBe('major');
+  });
+
+  it('⭐ THE LATCH: a standing interregnum does NOT re-emit every tick (the E4-2a flood class)', () => {
+    const s = town({ factions: [CROWN], npcs: [factor('The Crown', 'dead')] });
+    const first = advanceFactionDensity({ snapshot: snapOf(s), worldState: {}, settlementUpdates: updatesOf(s), tick: 4, now: null });
+    expect(first.newsEntries).toHaveLength(1);
+    // Feed the mover its OWN output as the next tick's world. The state re-reads
+    // identically — that is precisely what makes it the flood class — and the latch
+    // is what keeps the second tick silent.
+    const marked = first.settlementUpdates[0].settlement;
+    for (const tick of [5, 6, 7, 8, 9]) {
+      const again = advanceFactionDensity({
+        snapshot: snapOf(marked), worldState: {}, settlementUpdates: updatesOf(marked), tick, now: null,
+      });
+      expect(again.newsEntries, `tick ${tick} re-emitted a standing interregnum`).toEqual([]);
+      expect(again.changed, `tick ${tick} churned an unchanged world`).toBe(false);
+    }
+  });
+
+  it('the latch releases at the metronome\'s OWN window, which is borrowed and never re-typed', () => {
+    const s = town({ factions: [CROWN], npcs: [factor('The Crown', 'dead')] });
+    const first = advanceFactionDensity({ snapshot: snapOf(s), worldState: {}, settlementUpdates: updatesOf(s), tick: 0, now: null });
+    const marked = first.settlementUpdates[0].settlement;
+    const atWindow = advanceFactionDensity({
+      snapshot: snapOf(marked), worldState: {}, settlementUpdates: updatesOf(marked),
+      tick: DRIFT_REEMIT_COOLDOWN_TICKS, now: null,
+    });
+    expect(atWindow.newsEntries).toHaveLength(1);
+    // A FUTURE-DATED mark does not latch, or an imported history could silence a
+    // settlement's politics forever (the razing latch's own discipline).
+    const forged = { ...marked, powerStructure: { ...marked.powerStructure,
+      factions: marked.powerStructure.factions.map(f => ({ ...f, interregnumSinceTick: 9999 })) } };
+    const past = advanceFactionDensity({
+      snapshot: snapOf(forged), worldState: {}, settlementUpdates: updatesOf(forged), tick: 3, now: null,
+    });
+    expect(past.newsEntries).toHaveLength(1);
+  });
+
+  it('⭐ THE CONFIRMATION: a house re-crewed mid-tick is NOT dissolved by a tick-start reading', () => {
+    // The law reads the tick's OPENING picture so no mover ordering can change its
+    // verdict; the write then lands on the freshest copy. Between those two moments a
+    // sibling mover may have seated somebody, and an irreversible consequence may only
+    // fire on a fact that is still true when it is applied.
+    const tickStart = town({ factions: [CROWN, WEAVERS], npcs: [factor('The Crown')] });
+    const fresh = town({ factions: [CROWN, WEAVERS], npcs: [factor('The Crown'), factor('The Weavers')] });
+    const out = advanceFactionDensity({
+      snapshot: snapOf(tickStart), worldState: {}, settlementUpdates: updatesOf(fresh), tick: 2, now: null,
+    });
+    expect(factionsIn(out.settlementUpdates[0]).map(f => f.name)).toEqual(['The Crown', 'The Weavers']);
+    expect(out.newsEntries).toEqual([]);
+    expect(out.changed).toBe(false);
+  });
+
+  it('a resolved interregnum clears its mark by ABSENCE, and does so silently', () => {
+    const marked = town({
+      factions: [{ ...CROWN, interregnumSinceTick: 1 }],
+      npcs: [factor('The Crown')],
+    });
+    const out = advanceFactionDensity({ snapshot: snapOf(marked), worldState: {}, settlementUpdates: updatesOf(marked), tick: 12, now: null });
+    expect(out.changed).toBe(true);
+    // Cleared by absence, not by writing a null: an absent key is what "no interregnum"
+    // looks like everywhere else in the tree, and a null would move a byte on every save.
+    expect('interregnumSinceTick' in factionsIn(out.settlementUpdates[0])[0]).toBe(false);
+    expect(out.newsEntries, 'a recovered seat is the record; it is not a second beat').toEqual([]);
+  });
+
+  it('settlements are walked in CODEPOINT order, so no host\'s iteration order can move a world', () => {
+    const a = town({ id: 'zzz', factions: [WEAVERS], npcs: [] });
+    const b = town({ id: 'aaa', factions: [WEAVERS], npcs: [] });
+    const out = advanceFactionDensity({
+      snapshot: { settlements: [{ id: 'zzz', settlement: a }, { id: 'aaa', settlement: b }] },
+      worldState: {}, settlementUpdates: updatesOf(a, b), tick: 3, now: null,
+    });
+    expect(out.newsEntries.map(e => e.settlementIds[0])).toEqual(['aaa', 'zzz']);
+  });
+
+  it('the composed chain head returns the PRIOR object identity when the lane is dormant', () => {
+    // The name-swap seam: pulseKernel calls the composed head, so a dormant density
+    // lane must be indistinguishable from the assize chain it wraps.
+    const s = town({ config: {}, factions: [CROWN], npcs: [] });
+    const args = {
+      snapshot: snapOf(s), worldState: { tick: 1 }, settlementUpdates: updatesOf(s),
+      saves: [], graph: null, tick: 1, now: null,
+    };
+    const composed = advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssizeAndDensity(args);
+    const bare = advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize(args);
+    expect(composed.changed).toBe(bare.changed);
+    expect(composed.worldState).toEqual(bare.worldState);
+    expect(composed.newsEntries).toEqual(bare.newsEntries);
   });
 });

@@ -100,7 +100,7 @@ import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThresh
 import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceNaval, navalActive } from './navalKernel.js';
 import { advanceSupplyWebWarfare, supplyWebWarfareActive } from './supplyWebWarfare.js';
-import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize } from './assizeKernel.js';
+import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssizeAndDensity } from './factionDensityKernel.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
 import { advanceInformationStatecraft, infoStatecraftActive, makeCredibilityWeightFn, makeBlaineyCredibilityFn, makeSightFn } from './informationStatecraft.js';
@@ -2647,7 +2647,16 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // mark). The commons deposits a petition the assize can answer THIS tick (the cohesive loop);
   // the organic legitimacy/unrest feedback closes it NEXT tick. Both DORMANT behind their virtual
   // flags ⇒ complete no-ops (the assize + commons-voice dormancy goldens prove byte-identity). No rng.
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize({
+  // THE DENSITY LANE (§810.4 R18/R20) is composed onto the same chain's tail (…AndAssizeAndDensity —
+  // the roads-onto-traditions name-swap idiom again, so the FROZEN pulseKernel changes by name only
+  // and this wiring costs it ZERO lines). It runs LAST, over the fully-settled tick, because R18 is a
+  // REACTION to an accomplished fact: a faction whose named roster has reached zero ceases to exist
+  // (live state swept, receipts and grudges kept), and the ONE house that may not — the ruling seat,
+  // which §810.3 R14 forbids the density law to fold — is marked into a receipted interregnum instead.
+  // Gated NOT by a virtual flag (§840 caps those estate-wide) but by the world's OWN persisted law
+  // version, `_densityLawVersion`: the product dial is held at v1, so every world it makes today reads
+  // dormant here and the mover returns its inputs by reference. NO rng — the leaf takes no draw at all.
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssizeAndDensity({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates, saves,
     graph: applied.regionalGraph, tick: worldState.tick, now,
   }), memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));

@@ -78,6 +78,14 @@ const EXPECTED_VOICE = {
   // WR-3's graduation beat owns its authored lineage sentence; it must not
   // borrow a generic events or war crier voice on top of that receipt.
   lineage_edge_recorded: null,
+  // TE-DENSITY-1 (§810.4 R18 / §810.3 R14): a house ending because its roster emptied, and
+  // a ruling seat left standing empty, both carry their own authored in-world receipt naming
+  // the house and the town. Neither borrows a crier VoiceCategory — there is no existing
+  // category for "a polity ceased to exist", and inventing one to cover two beats would put
+  // a generic voice over a line that already says the specific thing (the lineage_edge_recorded
+  // and npc_ladder precedents exactly). The explicit null IS the voice decision.
+  faction_dissolved: null,
+  faction_interregnum: null,
   faction_capture: null, field_battle: null, generosity_credit_default: null,
   generosity_purchase: null, generosity_refuge: null, generosity_refusal: null,
   generosity_trade_overture: null, harvest: null, hierarchy_cascade: null, hungry_gap: null,

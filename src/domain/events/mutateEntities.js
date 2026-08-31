@@ -343,11 +343,25 @@ function restoreFaction(s, event) {
 
 /**
  * ADD_FACTION — introduce a new faction. Idempotent by canonical name: an
- * existing faction is left byte-for-byte unchanged. Factions have impairment
- * and restoration events, but no removal lifecycle; ADD_FACTION must not act as
- * a hidden resurrection path for unsupported provenance fields. New factions
- * write to powerStructure.factions (the canonical location) so the
- * power-structure rerun and seat logic see them.
+ * existing faction is left byte-for-byte unchanged. New factions write to
+ * powerStructure.factions (the canonical location) so the power-structure rerun
+ * and seat logic see them.
+ *
+ * ⚠ THE OLD "NO REMOVAL LIFECYCLE" LINE IS RETIRED, AND THE REASON IS §810.4 R18.
+ * This docblock used to read "Factions have impairment and restoration events, but
+ * no removal lifecycle". That was true of the EVENT layer and it is still true of
+ * the event layer — no verb here removes a house — but it is no longer true of the
+ * world. R18 ruled roster-bound existence: in simulation, a faction whose named
+ * roster reaches zero (death, exile, departure) CEASES TO EXIST, with a chronicle
+ * receipt; history stays and live state is swept. The pulse's density lane
+ * (`worldPulse/factionDensityKernel.js`) is that lifecycle's one writer, gated by
+ * the world's own `_densityLawVersion`, so a world born before the law never sees it.
+ *
+ * WHAT STILL BINDS HERE, UNCHANGED: ADD_FACTION must not act as a hidden
+ * resurrection path for unsupported provenance fields. If anything, R18 sharpens
+ * that — a name can now legitimately have been dissolved, so re-adding one must
+ * mint a NEW house on the ordinary road (atomic, with its founding member per R17)
+ * and must never restore a record the world already ended.
  */
 /**
  * @param {MutSettlement} s

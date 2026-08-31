@@ -36,7 +36,7 @@
  * MEASURED, NOT INHERITED, AND CITED BY SEAM RATHER THAN BY LINE NUMBER (a line number is text
  * ABOUT source that nothing compares TO source). In pulseKernel.js, `simulateCampaignWorldPulse`
  * calls the espionage product pass at its own `const envoys = advanceEnvoyDiplomacyPulse({` and
- * the ladder chain at `advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize({`,
+ * the ladder chain at `advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssizeAndDensity({`,
  * unconditionally and in that order, in ONE function body, both handed the SAME
  * `tick: worldState.tick`. So the depositor runs EARLIER IN THE SAME PULSE than the consumer.
  *
