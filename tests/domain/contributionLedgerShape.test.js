@@ -46,7 +46,7 @@ function codeOnly(source) {
 }
 
 describe('WC-0E · the war-circulation flags, the contribution ledger shape, and the blocks[] arm', () => {
-  it('joins both flags to the manifest and holds the triple bijection at 27', () => {
+  it('joins both flags to the manifest and holds the triple bijection at 28', () => {
     for (const flag of FLAGS) expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(flag);
     // 22 → 23 at EP-1 (2026-08-16), which mints advanceEpochEnabled with its certification
     // row in the same commit. THIS FILE IS A NAMED PATH ON EVERY FLAG-MINTING PACKET for
@@ -71,8 +71,18 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // to name. The habitat is the obligation being spread across suites nobody can
     // enumerate from the mint site; a flag-mint packet that named its surfaces from ONE
     // registry would end it, and that is TE-GUARDS-1's subject rather than this lane's.
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(27);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(27);
+    // 27 → 28 at W-MEM (lane T12, 2026-08-31), which mints warMemoryEnabled with its
+    // certification row in the same commit. ⚠⚠⚠ FOUND LATE FOR THE FOURTH RECORDED TIME, at
+    // the terminal ratchet, exactly as the three comments above predict — the prediction is
+    // now four for four, which makes it a property of the habitat rather than a run of bad
+    // luck. ⭐ AND THE LEDGER ITSELF HAD ALREADY DRIFTED, which is the sharper half: the row
+    // above this one records 25 → 26, but the literal these lines replaced read 27. One bump
+    // (W-SEAT's foreignSeatEnabled) moved the numbers WITHOUT adding its row, so the ledger
+    // silently stopped being a history of the literal it annotates. That is the same defect
+    // one level up — a bill nobody can enumerate from the mint site gets paid in the numbers
+    // and skipped in the prose. Recorded rather than quietly renumbered.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(28);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(28);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

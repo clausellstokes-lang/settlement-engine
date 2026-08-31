@@ -139,6 +139,16 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //     pairs, verified by grepping the diff for any changed line that is not a `"line"` value.
 // The census ends at 227 against a 227 ceiling — the seven additions net out against nothing,
 // because they were cured rather than counted. No ceiling moved in either direction.
+// T12 · W-MEM LANDING (ODQ §834, 2026-08-31) — ONE PURE LINE MOVE, ZERO NEW LEAKS.
+// The Remembrance ledger's registration car inserts twelve lines into worldSnapshotPublic.js
+// at its hard-deny block, entirely ABOVE the one banked row that file carries, so that row
+// re-addresses 603 -> 615. Path, category and snippet are byte-identical, the census stays at
+// 227 against a 227 ceiling, and no category count moves (floatInterpolation holds at 149).
+// Same shape as CR-FP-2's eighty-eight, HK-1's six, TE-CH-4's one, TE-CAP's two, T7's seven
+// and T11's eight; the whole baseline diff is two lines, one -/+ pair. ⭐ WORTH SAYING
+// PLAINLY, because the lane's brief predicted the opposite: this lane authored NO new prose
+// numeric. Its own new leaves carry none, and the row that moved is pre-existing banked debt
+// — a cap computation, not reader prose — so there was nothing here to humanize.
 // ══ LOWERED BY TE-HERALD-1, THE HUMANIZATION WAVE (owner directive, ODQ §754.3;
 //    boundary ruled §763.2) ═══════════════════════════════════════════════════════
 // This is the wave the four sentences frozen above were "owed". The debt named in the

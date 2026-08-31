@@ -93,14 +93,14 @@ function residueCheckers(worldState, channels) {
     // target, which for a conquest is the CONQUERED settlement, and matched against the
     // participants of any record still staged: a sealed record is history and is never a
     // leak, however it got there.
-    concluded_wars: (/** @type {any} */ major) => {
+    concluded_wars: (/** @type {import('./pulseShapes.js').PulseOutcome} */ major) => {
       const target = String(major.targetSaveId);
       const ledger = worldState?.concludedWars || {};
       for (const key of Object.keys(ledger).sort()) {
         const record = ledger[key] || {};
         if (record.sealed === true) continue;
         const parties = Array.isArray(record.participants) ? record.participants : [];
-        if (parties.some((/** @type {any} */ p) => String(p?.id) === target)) {
+        if (parties.some((/** @type {Record<string, unknown>} */ p) => String(p?.id) === target)) {
           return `concludedWars[${key}] banked a staged record naming ${target}`;
         }
       }

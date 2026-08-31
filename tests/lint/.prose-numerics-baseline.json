@@ -901,7 +901,7 @@
   },
   {
     "path": "src/domain/display/worldSnapshotPublic.js",
-    "line": 603,
+    "line": 615,
     "category": "floatInterpolation",
     "snippet": "Math.floor(finiteNum(options.maxHeadlinesPerTick, 12))"
   },
