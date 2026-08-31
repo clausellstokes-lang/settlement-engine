@@ -998,6 +998,36 @@ function straightLineBlock(statements) {
  * (64 files call `each`/`for` on a non-literal table; three were already parked). They are
  * ENUMERATED in the landing commit as reformat debt, and the reformat is an inline literal
  * table. ZERO estate files use an empty literal or a tagged-template table.
+ *
+ * ⛔⛔ AND THAT LAST SENTENCE WAS FALSE — CORRECTED 2026-08-31 (TE-INSTR-2), BY MEASUREMENT.
+ * An inline literal table is NECESSARY AND NOT SUFFICIENT. It clears THIS rule and lands the
+ * file on G1 instead, because `each`/`for` hand the ROW to the callback and `contextFreeCallback`
+ * refuses a registration callback that declares ANY parameter — so the prescribed reformat
+ * converts `TEST_TABLE_UNPROVEN` into `TEST_CONTEXT_PARAM` and CREDITS NOTHING. A table-driven
+ * test that cannot read its row is not a reformat, it is a deletion.
+ *
+ * MEASURED AT a107bcde3 over the whole estate, and the numbers are why this is a correction
+ * rather than a caveat: 2,455 test files, 371 parked. 112 of them — 30 % OF THE ENTIRE PARKED
+ * POPULATION — park SOLELY on the each/for family. Of those, 51 park ONLY on
+ * `*_CONTEXT_PARAM:*.each()`, which this classifier can only reach when `tableOk` is already
+ * TRUE: those 51 files ALREADY HAVE THE INLINE LITERAL TABLE THIS COMMENT PRESCRIBED AND ARE
+ * PARKED ANYWAY. The remaining 55 park on `TABLE_UNPROVEN` alone — i.e. doing the prescribed
+ * reformat on all 55 would move them into the 51 and bank NOTHING.
+ *
+ * ⭐ THE ONE REFORMAT THAT ACTUALLY CREDITS A TABLE-DRIVEN FILE is the one W-FAITH F3c's J11
+ * arrived at independently: a plain `it`/`test` whose callback takes NO PARAMETER, looping over
+ * the rows INSIDE its body with a per-row assertion label (the estate's
+ * `expect(problems, msg).toEqual([])` idiom, which also reports every failing row instead of
+ * only the first). Its costs are real and must be sized before it is taken: the runtime test
+ * count falls to one per loop, and the whole loop runs under ONE 20 s `testTimeout` that
+ * `argFormAccepts` forbids raising per-test — so a slow table must be split into several
+ * bucket-sized plain tests rather than collapsed into one.
+ *
+ * ⚠ THIS WAS NOT A DRAFTING SLIP, AND THE BATTERY IS WHY IT SURVIVED: every literal-table
+ * source in this file's own accuracy controls is written with a PARAMETERLESS callback — a
+ * shape no estate file writes — so the arm proving "a literal table is credited" proved it
+ * through a door the estate never walks through. The missing pin is added beside those
+ * controls: the same literal table, credited without a parameter and parked with one.
  * @param {any} arg @returns {boolean}
  */
 const CREDITED_TABLE_MODIFIERS = new Set(['each', 'for']);
@@ -2467,12 +2497,105 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       expect(carries(src), `${label} was PARKED but vitest really runs it`).toBe(true);
     }
 
+    // ── ⛔⛔ THE SHAPE THE ESTATE ACTUALLY WRITES, WHICH NO ARM ABOVE NAMES ─────────────
+    // Every one of the six literal-table controls above hands its callback NO PARAMETER. That
+    // is not a shape any real table-driven test can use, because the whole point of `each` is
+    // to read the row — so the arm proving "a literal table is credited" proves it through a
+    // door the estate never walks through, and `staticTableRows`' own header prescribed the
+    // inline literal table as THE reformat on the strength of it. MEASURED at a107bcde3: 51
+    // estate files already carry an inline literal table and are parked anyway, on G1.
+    //
+    // The pair below is the whole correction, and neither half is redundant: SAME literal
+    // table, SAME grammar, SAME registration — only the parameter differs, and it decides
+    // credit. Delete G1's clause and the second line reds; delete this rule and the first.
+    expect(parkedFor(`it.each([1, 2])('${PROBE} — %s', () => {});\n`),
+      'a parameterless literal table stopped being credited — the reformat has no landing at all')
+      .toEqual([]);
+    expect(parkedFor(`it.each([1, 2])('${PROBE} — %s', (row) => { expect(row).toBeTruthy(); });\n`),
+      'the row-reading literal table was CREDITED — then the inline-literal reformat really does'
+      + ' work and this file\'s corrected header is wrong; re-measure before believing it')
+      .toEqual(['TEST_CONTEXT_PARAM:it.each()']);
+    // …and the same on the SUITE side, so the correction is not a test-level accident.
+    expect(parkedFor(`describe.each([1, 2])('outer %s', (row) => {\n`
+      + `  it('${PROBE} — inside', () => {});\n});\n`))
+      .toEqual(['SUITE_CONTEXT_PARAM:describe.each()', 'TEST_UNREGISTERED:it']);
+    // …AND THE REFORMAT THAT DOES WORK, pinned so the corrected prescription is executable
+    // rather than advisory: a plain test, no parameter, the rows read inside the body.
+    expect(parkedFor(`const ROWS = [1, 2];\n`
+      + `it('${PROBE} — every row', () => { for (const row of ROWS) expect(row).toBeTruthy(); });\n`),
+    'the only reformat that credits a table-driven file stopped working')
+      .toEqual([]);
+
     // THE THIRD-POSITIONAL BAG IS NOT A ROUTE, AND IT IS NAMED RATHER THAN GUARDED.
     // EXECUTED: `it(name, fn, { skip: true })` throws under 4.1.8 — `Signature
     // "test(name, fn, { ... })" was deprecated in Vitest 3 and removed in Vitest 4` — so the
     // file dies loudly and forges nothing. This walker CREDITS it, which is correct: a source
     // that cannot run at all is not a source that can lie about running.
     expect(carries(`it('${PROBE} — third positional', () => {}, { skip: true });\n`)).toBe(true);
+  });
+
+  // ── ⛔ THE EACH-FAMILY PARK DEBT, AS A NUMBER THAT ONLY SHRINKS ────────────────────
+  // `staticTableRows`' corrected header states three estate figures, and a stated figure in
+  // this file is an ASSERTION or it is a sentence. These two ceilings make it machinery, and
+  // they do more than account: the SECOND one CONVICTS THE OLD PRESCRIPTION. A lane that
+  // reads the pre-correction advice and reformats a parked `each` file to an inline literal
+  // table moves it out of `TABLE_UNPROVEN` and into `CONTEXT_PARAM` — the file is still
+  // parked, the census still cannot see its assertions, and the only visible trace is this
+  // number going UP. It reds, by name, in the same commit that did the useless work.
+  //
+  // BOTH ARE MONOTONE-DOWN LITERALS, measured at a107bcde3, and neither is derived from the
+  // set it caps — a ceiling read out of its own population proves population == population.
+  // Burn them by taking the reformat that works (a plain parameterless test looping over the
+  // rows in its body); never pad them.
+  const EACH_FAMILY_PARK_CEILING = 112;
+  const LITERAL_TABLE_STILL_PARKED_CEILING = 51;
+
+  test('⛔ THE EACH-FAMILY PARK DEBT ONLY SHRINKS — and the false reformat reds here', () => {
+    const isEachShape = (reason) => /\.(each|for)\(/.test(reason);
+    const eachFamily = /^(TEST|SUITE)_(CONTEXT_PARAM|TABLE_UNPROVEN):/;
+    const contextParam = /^(TEST|SUITE)_CONTEXT_PARAM:/;
+    const parkedFiles = TEST_FILES
+      .map(({ rel, src }) => ({ rel, reasons: parkReasonsFor(src) }))
+      .filter(({ reasons }) => reasons.length > 0);
+    const eachOnly = parkedFiles.filter(({ reasons }) =>
+      reasons.every((r) => eachFamily.test(r) && isEachShape(r)));
+    const literalTableStillParked = parkedFiles.filter(({ reasons }) =>
+      reasons.every((r) => contextParam.test(r) && isEachShape(r)));
+
+    // ANTI-VACUITY FIRST, because both assertions below are satisfied by measuring nothing.
+    // The classifier must have walked the real estate, and the parked population it walked is
+    // the one the census arm pins exactly — so these ceilings cap a live measurement.
+    expect(TEST_FILES.length, 'the estate scan found nothing — the ceilings below cap an empty set')
+      .toBeGreaterThan(300);
+    expect(parkedFiles.length, 'no file in the estate parked at all — the classifier is not classifying')
+      .toBeGreaterThan(0);
+    // …and the subset relation, so the two literals cannot be nudged independently: every
+    // already-literal-table file is by construction an each-family file.
+    const eachOnlyRels = new Set(eachOnly.map(({ rel }) => rel));
+    expect(
+      literalTableStillParked.filter(({ rel }) => !eachOnlyRels.has(rel)),
+      'a file parked ONLY on an each-shaped CONTEXT_PARAM is not in the each-family set —'
+      + ' the two figures below are no longer measuring nested populations',
+    ).toEqual([]);
+
+    expect(
+      eachOnly.length,
+      'MORE files now park solely because of `each`/`for` than the frozen ceiling allows. This'
+      + ' number is not permitted to rise: the cure is a plain parameterless test looping over'
+      + ' the rows in its body, never a new `each` call.'
+      + `\n  ${eachOnly.slice(0, 12).map(({ rel }) => rel).join('\n  ')}`,
+    ).toBeLessThanOrEqual(EACH_FAMILY_PARK_CEILING);
+
+    expect(
+      literalTableStillParked.length,
+      '⛔ MORE files now carry an INLINE LITERAL TABLE AND ARE STILL PARKED than the frozen'
+      + ' ceiling allows. This is what the old prescription produced: an inline literal table'
+      + ' clears TABLE_UNPROVEN and lands on G1, because `each` hands the row to the callback'
+      + ' and a registration callback that declares ANY parameter parks the file. The reformat'
+      + ' that credits a table-driven file is a plain `it`/`test` with NO parameter, looping'
+      + ' over the rows inside its body with a per-row assertion label. See `staticTableRows`.'
+      + `\n  ${literalTableStillParked.slice(0, 12).map(({ rel }) => rel).join('\n  ')}`,
+    ).toBeLessThanOrEqual(LITERAL_TABLE_STILL_PARKED_CEILING);
   });
 
   test('DOOR 2+3 REFUSE THE BODY AND THE BLOCK — run-control that is not the call at all', () => {
