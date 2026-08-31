@@ -36,6 +36,7 @@ import {
   RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
   RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
+  RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -56,6 +57,7 @@ import {
   validateSchema9Baseline,
   validateSchema10Baseline,
   validateSchema11Baseline,
+  validateSchema12Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -1312,11 +1314,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
   // no count figure can distinguish from a swap. Schemas 8, 9 and 10 joined
   // schema 7 in the tagged half, and that is said here rather than in the name.
   test('A5: schemas 4-6 retain the numeric law and schema 7 adds authenticated row tags', () => {
-    // ⭐ SCHEMA 11 (TE-OSHAPE-2, ODQ §771.2/§771.3). Schema 10's tagged topology envelope
-    // re-governed to a DETECTOR THAT GENUINELY CHANGED — the first rung since 8→9 that is
-    // not a pure envelope re-reconciliation. It binds TE-OSHAPE-1's provenance-drift repair
-    // and fourth door, and grows the explained-writer bank by ONE.
-    expect(BASELINE_SCHEMA).toBe(11);
+    // ⭐ SCHEMA 12 (lane T5-CURE, chair ruling ODQ §819). Schema 11's tagged topology
+    // envelope re-governed to a SUBJECT TREE THAT GREW A NEW READER. It changes NO detector
+    // semantics — its two-path delta is the schema rung and this tool's own pairing row —
+    // and exists only because the shrink-only `--write` cannot express INVENTORY GROWTH.
+    // It declares no new mechanism and no new exemption: the one tagged row it admits is
+    // tagged BY RULE from the already-declared M9 identity.
+    expect(BASELINE_SCHEMA).toBe(12);
+    expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
     expect(RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA).toBe(9);
     expect(RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA).toBe(8);
@@ -1329,7 +1334,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const stats = leafStats();
     const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
     expect(live.schema).toBe(BASELINE_SCHEMA);
-    expect(validateSchema11Baseline(live)).toBe(live);
+    expect(validateSchema12Baseline(live)).toBe(live);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1339,19 +1344,19 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     delete numeric.digests.rowTags;
     const unfiltered = { ...numeric, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema4Baseline(unfiltered)).toBe(unfiltered);
-    expect(() => validateSchema11Baseline(unfiltered)).toThrow();
+    expect(() => validateSchema12Baseline(unfiltered)).toThrow();
 
     const filtered = { ...numeric, schema: RETIRED_FILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema5Baseline(filtered)).toBe(filtered);
-    expect(() => validateSchema11Baseline(filtered)).toThrow();
+    expect(() => validateSchema12Baseline(filtered)).toThrow();
 
     const surface = { ...numeric, schema: RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema6Baseline(surface)).toBe(surface);
-    expect(() => validateSchema11Baseline(surface)).toThrow(/noncanonical fields/);
+    expect(() => validateSchema12Baseline(surface)).toThrow(/noncanonical fields/);
 
     const retiredBanked = { ...structuredClone(live), schema: RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA };
     expect(validateSchema7Baseline(retiredBanked)).toBe(retiredBanked);
-    expect(() => validateSchema11Baseline(retiredBanked)).toThrow();
+    expect(() => validateSchema12Baseline(retiredBanked)).toThrow();
 
     // ⭐ THE RETIRED-8 RUNG, MIRRORING THE SCHEMA-7 PAIR ABOVE. Schema 8's
     // validator must stay executable — the committed schema-8 genesis is the
@@ -1373,9 +1378,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     };
     expect(validateSchema9Baseline(retiredEpochDark)).toBe(retiredEpochDark);
     expect(() => validateSchema10Baseline(retiredEpochDark)).toThrow(/is not schema 10/);
-    // …and the LIVE rung refuses it by ITS number, so the two validators cannot be
-    // confused for one another now that 10 is itself retired.
     expect(() => validateSchema11Baseline(retiredEpochDark)).toThrow(/is not schema 11/);
+    // …and the LIVE rung refuses it by ITS number, so no two of these validators can be
+    // confused for one another now that 10 AND 11 are both retired.
+    expect(() => validateSchema12Baseline(retiredEpochDark)).toThrow(/is not schema 12/);
     expect(() => validateSchema9Baseline(live)).toThrow(/is not schema 9/);
 
     const missing = structuredClone(live);
@@ -1454,12 +1460,12 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       baselineSchema: artifactBaselineSchemaOf('legacy-leaf'),
       siteSchema: 'source-position-v1',
     });
-    // ⚠ The ARTIFACT schema is 2 and the BASELINE schema in force is 11. They
+    // ⚠ The ARTIFACT schema is 2 and the BASELINE schema in force is 12. They
     // are different numbers naming different things, and conflating them is what
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(11);
+    expect(BASELINE_SCHEMA).toBe(12);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

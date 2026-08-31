@@ -148,6 +148,29 @@ export const PROSE_REGEN_TARGET_SCHEMA = 10;
  *  was, and the 8→9 header says it best: refusing it would leave the instrument
  *  permanently dark. */
 export const TREASURY_ADMISSION_TARGET_SCHEMA = 11;
+/** The LIVE target: schema 11's tagged topology inventory re-governed to a SUBJECT
+ *  TREE THAT GREW A NEW READER, and this rung is a third kind again. 9 and 10 were
+ *  envelope re-reconciliations that declared nothing; 11 bound a detector that
+ *  genuinely changed. This one changes NO detector semantics whatever — its whole
+ *  reason for existing is that the shrink-only `--write` cannot express INVENTORY
+ *  GROWTH, and refuses it in those words ("growth or an identity swap cannot be
+ *  re-frozen"). That refusal is the instrument working; a migration is the only
+ *  thing that can express the other side of it.
+ *
+ *  WHAT GREW. The T5 GENESIS train landed `src/domain/instantWorld/genesisDiplomacy.js`
+ *  (POLIS-2), the materializer that turns a plan's slot-addressed founding ties into
+ *  neighbour links on the composed members. It reads three keys the GENERATION corpus
+ *  never observes, and all three have real writers one lifecycle step out from
+ *  generation:
+ *    • `_slot on save`  — written at `composeInstantWorld.js:344` (`_slot: site.slot`)
+ *    • `tier on save`   — written at `composeInstantWorld.js:329`
+ *    • `neighbourNetwork on settlement` — the DECLARED M9 save-time identity, which
+ *      this module now also writes at compose time; it is tagged BY RULE here, as its
+ *      24 siblings already are.
+ *  Chair ruling ODQ §819 admits all three. ⛔ NO mechanism is added and NO exemption
+ *  is declared: bank-by-rule tags a row from the EXISTING declaration, so the bank's
+ *  nine declared identities are untouched and only the tagged ROW COUNT moves. */
+export const GENESIS_TIES_TARGET_SCHEMA = 12;
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -239,6 +262,36 @@ export const TREASURY_ADMISSION_SCANNER_DELTA_PATHS = Object.freeze([
   'tests/fixtures/spatialPackFixtures.js',
 ]);
 
+/**
+ * The schema-11 → 12 detector delta — THREE paths, and every one of them is the schema
+ * rung itself rather than a change of detector semantics:
+ *   • observed-shape-baseline.mjs — the bump and the retired-11 validator;
+ *   • migrate-observed-shape-readers.mjs — this rung;
+ *   • check-observed-shape-readers.mjs — the LIVE-VALIDATOR BINDING and nothing else.
+ *     `runtime.validateBaseline` names the live validator BY NAME, so a rung that renames
+ *     it (each one does, so the retired validators keep their own numbers) necessarily
+ *     moves this file too. It is three identical `validateSchema11Baseline` →
+ *     `validateSchema12Baseline` token replacements: the import, the row-tag assertion's
+ *     envelope check, and the runtime binding. No filter, no door, no declaration.
+ *
+ * ⚠ THE FIRST DRAFT OF THIS CONSTANT DECLARED TWO PATHS AND WAS WRONG, which is recorded
+ * because the instrument is what caught it rather than review: dropping the checker made
+ * `run()` validate a schema-12 baseline with the schema-11 validator and six sentinel arms
+ * reddened with "baseline is not schema 11". `governedScannerTransitionOf` would then have
+ * refused the mint anyway — modified paths must EQUAL the declared set — so the delta and
+ * the code cannot silently disagree in either direction.
+ *
+ * ⛔ `package.json` and the lockfile are NOT in this set and must not be. The 10→11 rung
+ * had to declare package.json because the strip-finish train had moved it; nothing has
+ * moved it since, this lane changed no dependency and no script, and any package.json
+ * byte is a mint trigger under estate law.
+ */
+export const GENESIS_TIES_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -257,6 +310,8 @@ const BANKED_EXPLAINED_WRITER_SCANNER_TRANSITION_POLICY =
   'schema-6-to-7-exact-scanner-transition-v1';
 const TREASURY_ADMISSION_SCANNER_TRANSITION_POLICY =
   'schema-10-to-11-exact-scanner-transition-v1';
+const GENESIS_TIES_SCANNER_TRANSITION_POLICY =
+  'schema-11-to-12-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -286,6 +341,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [EPOCH_DARK_CORPUS_TARGET_SCHEMA]: CORPUS_COVERAGE_TARGET_SCHEMA,
   [PROSE_REGEN_TARGET_SCHEMA]: EPOCH_DARK_CORPUS_TARGET_SCHEMA,
   [TREASURY_ADMISSION_TARGET_SCHEMA]: PROSE_REGEN_TARGET_SCHEMA,
+  [GENESIS_TIES_TARGET_SCHEMA]: TREASURY_ADMISSION_TARGET_SCHEMA,
 });
 
 /**
@@ -692,6 +748,21 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     deltaPaths: TREASURY_ADMISSION_SCANNER_DELTA_PATHS,
     inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
     policy: TREASURY_ADMISSION_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [GENESIS_TIES_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: GENESIS_TIES_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: GENESIS_TIES_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching 8→9, 9→10 and 10→11: the flag is PER-TARGET and never retroactive,
+    // and setting it false would make this rung refuse an unscanned movement that is
+    // lawful and reviewable — which is precisely what left this instrument dark once
+    // already. ⭐ MEASURED AT THIS MINT, THOUGH, NOTHING MOVED: the report's
+    // `unscannedMovement` is null. `unscannedInputDigestOf` is the SUBJECT tree minus the
+    // SCAN tree, and the subject tree is `src/**` — so the T5 train's regenerated
+    // artifacts (the two AI edge-shared bundles under `supabase/functions/_shared/`) are
+    // not subject paths at all and cannot move this digest. The permission is carried
+    // because the class is lawful, not because this rung exercises it.
     reviewableUnscannedMovement: true,
   })],
 ]);
@@ -1734,12 +1805,14 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : TREASURY_ADMISSION_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : GENESIS_TIES_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
-    PROSE_REGEN_TARGET_SCHEMA, TREASURY_ADMISSION_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${TREASURY_ADMISSION_TARGET_SCHEMA} (live treasury-admission leaf),`
+    PROSE_REGEN_TARGET_SCHEMA, TREASURY_ADMISSION_TARGET_SCHEMA,
+    GENESIS_TIES_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${GENESIS_TIES_TARGET_SCHEMA} (live genesis-ties leaf),`
+      + ` ${TREASURY_ADMISSION_TARGET_SCHEMA} (retired treasury-admission leaf),`
       + ` ${PROSE_REGEN_TARGET_SCHEMA} (retired prose-regen leaf),`
       + ` ${EPOCH_DARK_CORPUS_TARGET_SCHEMA} (retired epoch-dark leaf),`
       + ` ${CORPUS_COVERAGE_TARGET_SCHEMA} (retired corpus-coverage leaf),`

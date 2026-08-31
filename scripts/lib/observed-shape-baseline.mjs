@@ -7,14 +7,26 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **11**: schema 10's tagged numeric heuristic-leaf envelope
- * re-governed to a DETECTOR that genuinely changed, which is what makes this rung
- * different from 9 and 10. Those two were envelope re-reconciliations that
- * declared nothing; this one binds a REPAIRED detector (TE-OSHAPE-1's provenance
- * drift classifier and its fourth door) plus ONE bank growth — the ninth
- * explained-writer identity, `isCriminal on incomeSources`, admitted under the
- * new `conditional-generator-branch` mechanism (ODQ §771.2). The identity
- * grammar, topology inventory and envelope law remain schema 9's, unchanged.
+ * `BASELINE_SCHEMA` is **12**: schema 11's tagged numeric heuristic-leaf envelope
+ * re-governed to a SUBJECT TREE that grew a new reader, which makes this rung a
+ * third kind again. 9 and 10 were envelope re-reconciliations that declared
+ * nothing; 11 bound a repaired DETECTOR; this one changes no detector SEMANTICS
+ * at all — its three-path delta is the bump, this rung, and the checker's
+ * live-validator binding — and exists solely because the shrink-only `--write`
+ * cannot express INVENTORY GROWTH. The T5 GENESIS train landed
+ * `src/domain/instantWorld/genesisDiplomacy.js`, which reads three keys the
+ * generation corpus never observes — `_slot on save` and `tier on save`, both
+ * written by the COMPOSER (`src/lib/instantWorld/composeInstantWorld.js`), and
+ * `neighbourNetwork on settlement`, the already-declared M9 save-time identity
+ * this module now also writes at compose time. Chair ruling ODQ §819 admits all
+ * three; the third carries the explained-writer tag BY RULE, as its 24 siblings
+ * do. The identity grammar, topology inventory, envelope law and the bank's
+ * nine DECLARED identities all remain unchanged — no mechanism is added and no
+ * exemption is declared, because bank-by-rule tags a row from the existing
+ * declaration rather than minting a new one.
+ *
+ * `RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA` is **11**: schema 12's
+ * predecessor, frozen. Never redefined, never deleted.
  *
  * `RETIRED_PROSE_REGEN_BASELINE_SCHEMA` is **10**: schema 11's predecessor,
  * frozen. Never redefined, never deleted.
@@ -163,7 +175,15 @@ export const RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA = 9;
  *  constant exists so a schema-10 PREDECESSOR is still validated as schema 10
  *  after the live number moves past it. */
 export const RETIRED_PROSE_REGEN_BASELINE_SCHEMA = 10;
-export const BASELINE_SCHEMA = 11;
+/** The RETIRED treasury-admission definition — schema 12's predecessor. Same
+ *  tagged topology envelope and the same NINE-identity bank; schema 12 re-governs
+ *  it to a subject tree that grew a new reader and admits three inventory rows the
+ *  shrink-only re-freeze cannot express (ODQ §819). Never redefined, never
+ *  deleted — a live baseline is validated against BASELINE_SCHEMA, and this
+ *  constant exists so a schema-11 PREDECESSOR is still validated as schema 11
+ *  after the live number moves past it. */
+export const RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA = 11;
+export const BASELINE_SCHEMA = 12;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -623,10 +643,23 @@ export function validateSchema10Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 10's tagged numeric topology envelope re-governed
+ *  to the repaired detector and a bank grown to nine. Re-bound to its own LITERAL
+ *  now that the authority has moved to 12, exactly as `validateSchema10Baseline`
+ *  was when 11 landed: a retired validator that reads `BASELINE_SCHEMA` stops
+ *  validating the rung it is named after the moment the number moves. */
+export function validateSchema11Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema11Baseline(baseline) {
+export function validateSchema12Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

@@ -14,6 +14,7 @@ import {
   RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
   RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
+  RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -27,6 +28,7 @@ import {
   validateSchema9Baseline,
   validateSchema10Baseline,
   validateSchema11Baseline,
+  validateSchema12Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -255,11 +257,15 @@ describe('observed-shape schema-3 baseline envelope', () => {
 
   test('the RETIRED exact definition still names schema 3, and refuses the live schema', () => {
     expect(RETIRED_EXACT_BASELINE_SCHEMA).toBe(3);
-    // ⭐ SCHEMA 11 (TE-OSHAPE-2, ODQ §771.2/§771.3). Schema 10's tagged topology envelope
-    // re-governed to a DETECTOR THAT GENUINELY CHANGED — the first rung since 8→9 that is
-    // not a pure envelope re-reconciliation. It binds TE-OSHAPE-1's provenance-drift repair
-    // and fourth door, and grows the explained-writer bank by ONE.
-    expect(BASELINE_SCHEMA).toBe(11);
+    // ⭐ SCHEMA 12 (lane T5-CURE, chair ruling ODQ §819). Schema 11's tagged topology
+    // envelope re-governed to a SUBJECT TREE THAT GREW A NEW READER — a third kind of
+    // rung again. 9 and 10 declared nothing; 11 bound a repaired DETECTOR; 12 changes no
+    // detector semantics at all and exists only because the shrink-only `--write` cannot
+    // express INVENTORY GROWTH and refuses it in those words. It admits three rows for
+    // `src/domain/instantWorld/genesisDiplomacy.js`, one of them tagged BY RULE, and
+    // declares NO new mechanism and NO new exemption.
+    expect(BASELINE_SCHEMA).toBe(12);
+    expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
     expect(RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA).toBe(9);
     expect(RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA).toBe(8);
@@ -407,6 +413,15 @@ function validSchema9Baseline() {
 function validSchema10Baseline() {
   const baseline = validSchema7Baseline();
   baseline.schema = RETIRED_PROSE_REGEN_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-11 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 fixture above records: a retired fixture that reads `BASELINE_SCHEMA` stops
+ *  testing the rung it is named after the moment the authority moves past it. */
+function validSchema11Baseline() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA;
   return baseline;
 }
 
@@ -625,12 +640,14 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     const baseline = validSchema8Baseline();
     const epochDark = validSchema9Baseline();
     const proseRegen = validSchema10Baseline();
+    const treasuryAdmission = validSchema11Baseline();
     const live = validLiveBaseline();
     expect(validateSchema7Baseline(retired)).toBe(retired);
     expect(validateSchema8Baseline(baseline)).toBe(baseline);
     expect(validateSchema9Baseline(epochDark)).toBe(epochDark);
     expect(validateSchema10Baseline(proseRegen)).toBe(proseRegen);
-    expect(validateSchema11Baseline(live)).toBe(live);
+    expect(validateSchema11Baseline(treasuryAdmission)).toBe(treasuryAdmission);
+    expect(validateSchema12Baseline(live)).toBe(live);
     expect(() => validateSchema7Baseline(baseline)).toThrow(/is not schema 7/);
     expect(() => validateSchema8Baseline(retired)).toThrow(/is not schema 8/);
     // ⚠ EVERY ADJACENT PAIR IS PINNED IN BOTH DIRECTIONS FOR ONE REASON: FOUR
@@ -644,8 +661,15 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     expect(() => validateSchema8Baseline(epochDark)).toThrow(/is not schema 8/);
     expect(() => validateSchema7Baseline(epochDark)).toThrow(/is not schema 7/);
     expect(() => validateSchema10Baseline(epochDark)).toThrow(/is not schema 10/);
-    // …and the LIVE validator names 11, so the retired rung above keeps its own number.
     expect(() => validateSchema11Baseline(epochDark)).toThrow(/is not schema 11/);
+    // …and the LIVE validator names 12, so every retired rung above keeps its own number.
+    // ⚠ THE 11/12 PAIR IS NOW THE TIGHTEST ONE: schema 12 re-governs schema 11's envelope
+    // with NOTHING ELSE CHANGED — not even a detector byte — so these two are identical in
+    // every field except the number, and only the number keeps a stale freeze from
+    // validating as a current one.
+    expect(() => validateSchema12Baseline(epochDark)).toThrow(/is not schema 12/);
+    expect(() => validateSchema11Baseline(live)).toThrow(/is not schema 11/);
+    expect(() => validateSchema12Baseline(treasuryAdmission)).toThrow(/is not schema 12/);
     expect(() => validateSchema9Baseline(live)).toThrow(/is not schema 9/);
     expect(() => validateSchema8Baseline(live)).toThrow(/is not schema 8/);
     expect(() => validateSchema7Baseline(live)).toThrow(/is not schema 7/);

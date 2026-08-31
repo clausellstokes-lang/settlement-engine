@@ -89,11 +89,12 @@ import {
   RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
   RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
+  RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema11Baseline,
+  validateSchema12Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -142,6 +143,7 @@ export {
   RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
   RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
+  RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1233,7 +1235,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema11Baseline(baseline);
+  validateSchema12Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2554,7 +2556,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema11Baseline,
+    validateBaseline: validateSchema12Baseline,
     assertExplainedWriterRowTags,
     validateBaselineHistory,
     committedInputManifestsFor,
