@@ -110,6 +110,12 @@ const DEFAULT_LAYERS = {
   // sub-layers, set on demand). The army/migrant sub-layers read LIVE ledgers with no
   // flag; the envoy sub-layer is present only when the roads ledger is lit (§13).
   travelers: false,
+  // POLIS-3 (T11) — the travel-rings lens: hopWeeks-banded settlement groupings
+  // from the SELECTED settlement ("within a week's ride"), drawn as banded halos
+  // on the markers — never Euclidean contours. DEFAULT OFF (the travelers
+  // precedent); renders only when a spatial canon is stamped AND a settlement
+  // is selected.
+  travelRings: false,
   labels: true,
   markers: true,
   forests: true,

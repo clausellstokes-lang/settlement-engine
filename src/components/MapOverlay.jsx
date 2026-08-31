@@ -25,6 +25,8 @@ import ChainEdges        from './map/ChainEdges.jsx';
 import RegionalCausalityLayer from './map/RegionalCausalityLayer.jsx';
 import WarFaithMapOverlay from './map/WarFaithMapOverlay.jsx';
 import TravelersLayer    from './map/TravelersLayer.jsx';
+// POLIS-3 — hopWeeks-banded travel rings from the selected settlement.
+import TravelRingsLayer  from './map/TravelRingsLayer.jsx';
 // V-3 THE TIMELAPSE — STATIC within this already-lazy map chunk (the FP-R idiom:
 // a lazy() would mint a preload entry). @enforced-by tests/build/vendorPdfLazy.test.js
 import TimelapseLayer    from './map/TimelapseLayer.jsx';
@@ -342,6 +344,9 @@ export default function MapOverlay({ bridge, transformOut }) {
               the road graph. Opt-in DM-truth lens (default off); dormant ledgers render
               nothing. Above war glyphs, below the settlement pins. */}
           {layers.travelers && <TravelersLayer />}
+          {/* POLIS-3 — travel-time rings from the selected settlement (banded
+              halos, never contours). Opt-in lens, default off. */}
+          {layers.travelRings && <TravelRingsLayer />}
           {/* DESK-2 — the word→map hover glow, under the pins so the marker
               stays crisp above its halo. Self-gates to null when idle. */}
           <HoverGlowLayer />

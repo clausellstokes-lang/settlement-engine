@@ -24,6 +24,8 @@ import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMap
 // relationshipEdgeStyle (the drawn edge + the key can never disagree, P11). This
 // panel used to re-declare a byte-identical-but-drift-armed copy.
 import { REL_TYPES } from './relationshipEdgeStyle.js';
+// POLIS-3 — the travel-rings legend, single-sourced from the layer's own bands.
+import { travelRingLegend } from './TravelRingsLayer.jsx';
 
 const REGIONAL_IMPACT_STATUS_FILTERS = ['queued', 'applied', 'resolved', 'ignored', 'expired'];
 const DEFAULT_REGIONAL_IMPACT_FILTER = ['queued', 'applied', 'resolved'];
@@ -260,6 +262,26 @@ export default function LayersPanel({ onClose }) {
                 active={travelersFilter.has(s.id)}
                 onClick={() => toggleTravelerSub(s.id)}
               />
+            ))}
+          </div>
+        )}
+        {/* POLIS-3 — travel rings: banded halos from the SELECTED settlement,
+            legend single-sourced from the layer's own band vocabulary. */}
+        <LayerToggle
+          label="Travel rings"
+          checked={!!layers.travelRings}
+          onChange={() => toggleLayer('travelRings')}
+        />
+        {layers.travelRings && (
+          <div style={{ marginLeft: SP.md, marginBottom: SP.sm, display: 'grid', gap: 2 }}>
+            <span style={{ fontFamily: sans, fontSize: FS.micro, color: MUTED, lineHeight: 1.4 }}>
+              From the selected settlement, by road, this season. Select a settlement to see its rings.
+            </span>
+            {travelRingLegend().map(row => (
+              <span key={row.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: sans, fontSize: FS.micro, color: MUTED }}>
+                <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: '50%', border: `2px solid ${row.color}`, flexShrink: 0 }} />
+                {row.word}
+              </span>
             ))}
           </div>
         )}

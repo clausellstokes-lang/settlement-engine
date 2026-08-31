@@ -123,3 +123,50 @@ describe('HoverGlowLayer — the word→map hover glow', () => {
     expect(glow.querySelector('circle').getAttribute('cy')).toBe('90');
   });
 });
+
+// ── POLIS-3 — travel rings: hopWeeks-banded settlement groupings ─────────────
+describe('TravelRingsLayer — banded halos from the selected settlement', () => {
+  test('travelBandOf is the closed vocabulary; unreachable is its own honest null', async () => {
+    const { travelBandOf, TRAVEL_BANDS } = await import('../../src/components/map/TravelRingsLayer.jsx');
+    expect(TRAVEL_BANDS.map(b => b.id)).toEqual(['week', 'fortnight', 'month', 'far']);
+    expect(travelBandOf(1).id).toBe('week');
+    expect(travelBandOf(2).id).toBe('fortnight');
+    expect(travelBandOf(4).id).toBe('month');
+    expect(travelBandOf(9).id).toBe('far');
+    expect(travelBandOf(null)).toBeNull();
+  });
+
+  test('no selection ⇒ nothing; no spatial canon ⇒ nothing; selected + canon ⇒ one banded halo per OTHER settlement', async () => {
+    const { default: TravelRingsLayer } = await import('../../src/components/map/TravelRingsLayer.jsx');
+    const base = {
+      savedSettlements: IDS.map(id => ({ id, settlement: { name: id.toUpperCase() } })),
+      mapState: { placements: PLACEMENTS, viewport: { scale: 1 } },
+      campaigns: [{ id: 'camp', settlementIds: IDS, worldState: { tick: 5, spatialCanonVersion: 1, spatialDigest: DIGEST } }],
+      activeCampaignId: 'camp',
+    };
+
+    STORE = { ...base, selectedSettlementId: null };
+    const idle = render(<svg><TravelRingsLayer /></svg>);
+    expect(idle.container.querySelector('[data-testid="travel-rings-overlay"]')).toBeNull();
+    idle.unmount();
+
+    STORE = { ...base, selectedSettlementId: 'a', campaigns: [{ id: 'camp', settlementIds: IDS, worldState: { tick: 5 } }] };
+    const dark = render(<svg><TravelRingsLayer /></svg>);
+    expect(dark.container.querySelector('[data-testid="travel-rings-overlay"]')).toBeNull();
+    dark.unmount();
+
+    STORE = { ...base, selectedSettlementId: 'a' };
+    const lit = render(<svg><TravelRingsLayer /></svg>);
+    const overlay = lit.container.querySelector('[data-testid="travel-rings-overlay"]');
+    expect(overlay).not.toBeNull();
+    expect(overlay.getAttribute('pointer-events')).toBe('none');
+    const halos = [...overlay.querySelectorAll('[data-travel-band]')];
+    expect(halos.length).toBe(2); // b and c — never the anchor itself
+    for (const halo of halos) {
+      // Every halo wears a band from the closed vocabulary (or the honest
+      // unreachable), and its tip is a sentence anchored on the observer.
+      expect(['week', 'fortnight', 'month', 'far', 'unreachable']).toContain(halo.getAttribute('data-travel-band'));
+      expect(halo.getAttribute('aria-label')).toMatch(/from A|no road reaches it from A/);
+    }
+  });
+});
