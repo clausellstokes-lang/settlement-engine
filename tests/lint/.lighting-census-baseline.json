@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "192089f877d5197f29b1f69b1002f8690a1612fc",
-  "measuredBy": "SEATA2-landing",
+  "measuredAtSha": "188c703388242cb66484ea257ac4e3018f1f71f2",
+  "measuredBy": "T12-landing",
   "date": "2026-08-31",
-  "note": "The W-SEAT SEAT-1..4 train (19 commits) rebased from the dock b85044099 onto claude/composite-r4 9f13aa4e3 and re-derived WHOLE at the landing tip per LANE_LAW_ADDENDUM_EFF1 §4 — never composed by arithmetic. The train adds EIGHT test files (foreignSeatResolver, foreignSeatDormancy.byteIdentity, warSeatBooksPartition, foreignPrimacyAxis, foreignSeatCoupAdj, seatIntervention, occupationPosture, anticipatedReactions), one per car plus SEAT-1s batched pair; the four existing suites it edits were untouched by the 87 landed commits, so no title interacts.",
-  "files": 2450,
+  "note": "The W-MEM train (4 cars) rebased from dock 84ae0f104 (base 19a8c9197) onto claude/composite-r4 6b74ad5bf and re-derived WHOLE at the landing tip per LANE_LAW_ADDENDUM_EFF1 §4 — never composed by arithmetic. The train adds THREE test files (concludedWarLedger, fieldBattleRegion, concludedWarsWriter); the three existing suites it edits (pantheon, subsystemRowsVirtual, lifecycleRoundTrip) gain and lose ZERO titles, so no title interacts.",
+  "files": 2453,
   "parked": 370,
-  "credited": 2080,
-  "titles": 21043,
-  "suiteTitles": 5788
+  "credited": 2083,
+  "titles": 21110,
+  "suiteTitles": 5807
 }
