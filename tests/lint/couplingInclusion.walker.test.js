@@ -159,6 +159,22 @@ const LAYER_PATTERNS = Object.freeze({
     // program's unwritten leaves for WAR, and the seat's other files are not WAR's subject at
     // all — foreignPrimacy.js is INTERIOR two families down, which is the counter-example.
     /^src\/domain\/worldPulse\/seatIntervention\.js$/,
+    // W-MEM (lane T12): the Remembrance ledger of concluded wars, and the record shape it
+    // opens. What a war WAS once it is over — its sides, its casus pins, the fact block a
+    // classifier reads an ending out of — is WAR's own subject as outright as anything in
+    // this list, on the identical reading that gave peopleLedger.js and contributionLedger.js
+    // their homes: the distinction is SUBJECT, not program. It is NOT an ARGUED_UNLAYERED
+    // case; that roster is for modules owning no subject and spoken by every port, and these
+    // two own concluded-war memory and nothing else. A family home is what forces the
+    // writer's reads to register as couplings instead of crossing a port in silence — which
+    // matters more here than usual, because this writer's whole job is to read across the
+    // war layer's siblings at the one tick their state is about to be deleted.
+    // ⛔ EXACT-PATH REGEXES, NOT A `concluded[A-Z]` PREFIX: the standing rule above (the IN-1
+    // precedent), and it binds normally here — a prefix would claim the unwritten leaves of a
+    // ledger whose read-side door (Remembrance) is chartered but deliberately NOT built in
+    // this train, so the files it would pre-claim are exactly the ones nobody has designed.
+    /^src\/domain\/worldPulse\/concludedWars\.js$/,
+    /^src\/domain\/worldPulse\/concludedWarRecord\.js$/,
   ],
   TRADE: [
     /^src\/domain\/worldPulse\/(?:routeNetwork|tradeRoute|tradeWar|commodity|merchant|foodStockpile|foodLedger)/,

@@ -29,6 +29,9 @@ import {
   WR6B_WAR_TREASURY_COUPLINGS,
   WR6C_ANTICIPATED_REACTION_CASUS_COUPLING,
   WR6C_SEAT_REACTION_COUPLINGS,
+  WMEM_CONCLUDED_WAR_COUPLINGS,
+  WMEM_TREATY_AT_SEAL_COUPLING,
+  WMEM_SEAL_GRACE_WINDOW_COUPLING,
   WR7_ENVOY_COUPLINGS,
   WR7_CARRIED_SHEET_COUPLING,
   WR7_ENCOUNTER_COUPLING,
@@ -175,6 +178,16 @@ describe('CW-0 coupling registry', () => {
       // that pair resolves to. The tiebreak is preserved below, which is what this test is
       // named for.
       ...WR6C_SEAT_REACTION_COUPLINGS,
+      // W-MEM (lane T12, ODQ §834): the Remembrance ledger's two GRAMMAR reads — the
+      // treaty that stands for a concluding pair, and the peace-mint window the seal waits
+      // out. WR-6d takes the next wave LETTER for the same reason W-COIN took 6b and
+      // W-SEAT took 6c: a war-side program that is not itself a numbered WR wave lands its
+      // rows under one, and WR-6's array is pinned at seven rows by count and by owningWave.
+      // ⛔ APPENDED AFTER WR-6c, WHICH PRESERVES WR-6c'S OWN ARGUMENT RATHER THAN DISPLACING
+      // IT: that argument is about order relative to WR-7, not about being the final line.
+      // These two can take no first-row seat in any case — CPL-5 / GRAMMAR→WAR is already
+      // held by WR7_HOME_DELIVERY_COUPLING, which the assertion further down re-proves.
+      ...WMEM_CONCLUDED_WAR_COUPLINGS,
     ]);
     expect(WR3_LINEAGE_COUPLING).toEqual({
       couplingId: 'CPL-3.POP_TO_WAR.WR-3.lineage',
@@ -605,11 +618,15 @@ describe('CW-0 coupling registry', () => {
     // GR-3's `mutual_defense` is the THIRD read on this direction and the first owned by
     // GRAMMAR. It is deliberately LAST: registration order is the legacy first-row
     // tiebreak, and WR-7's home delivery keeps that seat.
+    // W-MEM's two (WR-6d) are the FOURTH and FIFTH reads on this direction, appended last
+    // for the same reason GR-3's was: the seat below is a legacy tiebreak, not a ranking.
     expect(couplingRowsFor('CPL-5', 'GRAMMAR→WAR'))
       .toEqual([
         WR7_HOME_DELIVERY_COUPLING,
         WR7_CARRIED_SHEET_COUPLING,
         GR3_MUTUAL_DEFENSE_COUPLING,
+        WMEM_TREATY_AT_SEAL_COUPLING,
+        WMEM_SEAL_GRACE_WINDOW_COUPLING,
       ]);
     expect(couplingRowFor('CPL-5', 'GRAMMAR→WAR')).toBe(WR7_HOME_DELIVERY_COUPLING);
     // GR-3's other two open their pairs: nobody had read across CPL-14 or CPL-17 before.

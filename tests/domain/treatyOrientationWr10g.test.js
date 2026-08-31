@@ -681,10 +681,25 @@ const ORIENTATION_CONSUMERS = Object.freeze([
   ['worldPulse/settlementPolitics.js', 'revanchism accrues on the party a treaty BINDS'],
 ]);
 
-/** The ONE module allowed to spell the war pair in code: it WRITES those fields onto the
- *  record it mints, and reads them back off a carried term sheet — neither of which is a
- *  ledger row whose orientation is in question. */
-const WAR_PAIR_WRITERS = Object.freeze(['worldPulse/peaceTerms.js']);
+/** The TWO modules allowed to spell the war pair in code. Each WRITES those fields onto a
+ *  record IT mints and reads them back off its own artifact — never off a ledger row whose
+ *  orientation is in question, which is the whole subject of this ruling.
+ *
+ *  - `peaceTerms.js`: PASS 2's obligor write, read back off a carried term sheet.
+ *  - `concludedWars.js` (W-MEM, lane T12): mints `victorId` onto the concluded-war record
+ *    from the tick's TERMINAL OUTCOMES — the occupier on a conquest or razing, the standing
+ *    defender on a feasibility collapse, and structurally ABSENT on every negotiated,
+ *    dissolved or canon road. Its one read-back, `existing.victorId`, is its OWN prior
+ *    record for the same warId (`existing = recordOf(next[warId])`), which a re-entrant
+ *    write must preserve. It is in this census's population only because it also calls
+ *    `treatyLedgerOf` — and the ONLY field it ever reads off a treaty there is `.parties`,
+ *    to answer "does a treaty stand for this pair". It never resolves a treaty's victor or
+ *    loser by hand, which is the defect this ruling exists to forbid; measured at the
+ *    landing tip before this entry was written, not asserted from the shape of the name. */
+const WAR_PAIR_WRITERS = Object.freeze([
+  'worldPulse/peaceTerms.js',
+  'worldPulse/concludedWars.js',
+]);
 
 /** A module reads the treaty ledger when it names it. */
 const READS_LEDGER_RE = /treatyLedgerOf\s*\(|['"`]treaties['"`]|\.treaties\b/;

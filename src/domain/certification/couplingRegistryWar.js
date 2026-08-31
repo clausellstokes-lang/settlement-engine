@@ -674,3 +674,68 @@ export const WF1D_DISSOLUTION_FALL_COUPLING = couplingRow({
 export const WF_FAITH_WAR_COUPLINGS = Object.freeze([
   WF1D_DISSOLUTION_FALL_COUPLING,
 ]);
+
+/** W-MEM (lane T12). The Remembrance writer is WAR and both of its GRAMMAR reads are
+ * about the SAME question asked at two different moments — has this war's negotiated
+ * ending finished happening yet — so they are two rows rather than one: they have
+ * different evidence, different failure modes, and one can hold while the other moves. */
+const WMEM_CONCLUDED_WAR_FLAGS = Object.freeze([
+  'warLayerEnabled',
+  'warTerminationEnabled',
+  'peaceEngineEnabled',
+  'warMemoryEnabled',
+]);
+
+/** W-MEM / CPL-5. Whether a treaty STANDS for the concluding pair is GRAMMAR's fact, and
+ * the record copies the answer rather than the treaty. Two things make this a coupling
+ * worth a row instead of an incidental import. First, the ledger is NOT a top-level key —
+ * it is a spatial ledger reachable only through `treatyLedgerOf`, and a writer that read
+ * `worldState.treatyLedger` would have compiled, typechecked, and silently answered "no
+ * treaty" for every war ever recorded. Second, the match is by PARTIES and not by key,
+ * because treaties are keyed by a graph-derived relationship edge id that a war writer
+ * re-minting it would be inventing a second spelling of. The counterforce is the same
+ * read: no treaty standing for the pair leaves `treatyWritten` structurally ABSENT, never
+ * `false` — an absence the estate never produced is not invented to fill a field. */
+export const WMEM_TREATY_AT_SEAL_COUPLING = couplingRow({
+  couplingId: 'CPL-5.GRAMMAR_TO_WAR.WR-6d.treaty_stands_for_the_pair',
+  pairId: 'CPL-5',
+  direction: 'GRAMMAR→WAR',
+  read: 'src/domain/worldPulse/concludedWars.js#recordConcludedWars.treatyStandsFor',
+  receiptField: 'worldState.concludedWars[].fact.{treatyWritten,closed,closeRoad}',
+  counterforce: 'src/domain/worldPulse/concludedWars.js#recordConcludedWars.treatyStandsFor',
+  flags: WMEM_CONCLUDED_WAR_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WR-6d',
+  intendedDesk: 'war',
+});
+
+/** W-MEM / CPL-5. THE SEAL GRACE WINDOW, and it exists because of a measured ordering
+ * fact rather than a preference: the treaty mint does NOT fire on the tick a war ends.
+ * `peaceTerms.js` says so in its own words — the deployment recall "is NOT the trigger" —
+ * and the real trigger is a relationship incident inside GRAMMAR's `PEACE_MINT_WINDOW`.
+ * A record sealed at conclusion would therefore report NO TREATY for a war that is about
+ * to acquire one, and because `terms` is the classifier's last precedence key and needs
+ * its own positive evidence, the commonest ending of all — negotiation — would classify
+ * as `no_terminal_evidence`. So the WINDOW ITSELF is the coupling: WAR borrows GRAMMAR's
+ * own constant rather than minting a second number that could drift from it, and a record
+ * stays staged until the window it names has elapsed. The counterforce is the same read —
+ * a record whose window has NOT elapsed is left staged and unsealed, which is what makes
+ * the immutability-at-seal law bind on a fact block that is actually finished. */
+export const WMEM_SEAL_GRACE_WINDOW_COUPLING = couplingRow({
+  couplingId: 'CPL-5.GRAMMAR_TO_WAR.WR-6d.seal_grace_window',
+  pairId: 'CPL-5',
+  direction: 'GRAMMAR→WAR',
+  read: 'src/domain/worldPulse/concludedWars.js#recordConcludedWars.sealPass',
+  receiptField: 'worldState.concludedWars[].{sealed,concludedTick}',
+  counterforce: 'src/domain/worldPulse/concludedWars.js#recordConcludedWars.sealPass',
+  flags: WMEM_CONCLUDED_WAR_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WR-6d',
+  intendedDesk: 'war',
+});
+
+/** The GRAMMAR×WAR couplings the W-MEM train lands against the war volume. */
+export const WMEM_CONCLUDED_WAR_COUPLINGS = Object.freeze([
+  WMEM_TREATY_AT_SEAL_COUPLING,
+  WMEM_SEAL_GRACE_WINDOW_COUPLING,
+]);

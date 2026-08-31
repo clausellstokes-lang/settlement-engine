@@ -32,6 +32,7 @@ import {
   WR6C_SEAT_REACTION_COUPLINGS,
   WR7_ENVOY_COUPLINGS,
   WF_FAITH_WAR_COUPLINGS,
+  WMEM_CONCLUDED_WAR_COUPLINGS,
 } from './couplingRegistryWar.js';
 // The first non-WAR leaf (FP wave TR-1). One sibling per volume, as CW-0w slice 1 built
 // this family to accept.
@@ -126,6 +127,9 @@ export {
   WR7_ENVOY_COUPLINGS,
   WF1D_DISSOLUTION_FALL_COUPLING,
   WF_FAITH_WAR_COUPLINGS,
+  WMEM_TREATY_AT_SEAL_COUPLING,
+  WMEM_SEAL_GRACE_WINDOW_COUPLING,
+  WMEM_CONCLUDED_WAR_COUPLINGS,
 } from './couplingRegistryWar.js';
 
 export const COUPLING_REGISTRY = Object.freeze([
@@ -167,6 +171,17 @@ export const COUPLING_REGISTRY = Object.freeze([
   // ordinal, so the row appends in LANDING order where it costs nothing. WR-6b had no such
   // conflict: it joined its bucket last wherever it was composed.
   ...WR6C_SEAT_REACTION_COUPLINGS,
+  // W-MEM (lane T12, ODQ §834): the Remembrance ledger's two GRAMMAR reads — the treaty
+  // that stands for a concluding pair, and the peace-mint window the seal waits out.
+  // ⛔ APPENDED AFTER WR-6c, WHICH LEAVES WR-6c'S OWN APPEND-LAST ARGUMENT INTACT. That
+  // argument is about ORDER RELATIVE TO WR-7, not about being the literal last line: it
+  // exists so WR-6c cannot take the CPL-19 / GRAMMAR→INFO first-row seat from
+  // WR7_SILENCE_INFERENCE_COUPLING, and appending behind it preserves that exactly.
+  // These two rows cannot take a first-row seat from anyone in any case: their pair and
+  // direction is CPL-5 / GRAMMAR→WAR, whose first row is WR7_HOME_DELIVERY_COUPLING,
+  // composed well ahead of here — checked rather than assumed, because the tiebreak is a
+  // legacy resolution rule and a landing act does not move one to tidy an ordinal.
+  ...WMEM_CONCLUDED_WAR_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
