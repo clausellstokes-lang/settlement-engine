@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "51551d051a473fb91fedbb113418543b8bb64835",
-  "measuredBy": "T3 SEAT-A2 (SEAT-4, terminal)",
+  "measuredAtSha": "192089f877d5197f29b1f69b1002f8690a1612fc",
+  "measuredBy": "SEATA2-landing",
   "date": "2026-08-31",
-  "note": "SEAT-4 adds tests/domain/anticipatedReactions.test.js (the anticipated-reaction forecast and the choke pass that holds a decision back). Terminal member of the SEAT-2c/3/4 train; re-derived WHOLE at the clean tip 51551d051.",
-  "files": 2438,
-  "parked": 367,
-  "credited": 2071,
-  "titles": 20809,
-  "suiteTitles": 5728
+  "note": "The W-SEAT SEAT-1..4 train (19 commits) rebased from the dock b85044099 onto claude/composite-r4 9f13aa4e3 and re-derived WHOLE at the landing tip per LANE_LAW_ADDENDUM_EFF1 §4 — never composed by arithmetic. The train adds EIGHT test files (foreignSeatResolver, foreignSeatDormancy.byteIdentity, warSeatBooksPartition, foreignPrimacyAxis, foreignSeatCoupAdj, seatIntervention, occupationPosture, anticipatedReactions), one per car plus SEAT-1s batched pair; the four existing suites it edits were untouched by the 87 landed commits, so no title interacts.",
+  "files": 2450,
+  "parked": 370,
+  "credited": 2080,
+  "titles": 21043,
+  "suiteTitles": 5788
 }
