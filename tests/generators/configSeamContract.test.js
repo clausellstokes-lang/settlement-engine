@@ -23,10 +23,16 @@ const read = (rel) => (existsSync(resolve(ROOT, rel)) ? readFileSync(resolve(ROO
 
 // ── The UI writers: config keys stamped via updateConfig({ … }) ──────────────
 const UI_WRITERS = ['src/components/GenerateWizard.jsx', 'src/components/ConfigurationPanel.jsx'];
-function writtenConfigKeys() {
+
+/**
+ * The writer-side detector, over SOURCE TEXTS rather than paths — so the standing
+ * control at the bottom can drive THIS function over a doctored copy instead of
+ * re-implementing it. (ODQ 764.2, lane T9: this file was one of the five
+ * `kind:"uncovered"` seam contracts, green with nothing proving it could red.)
+ */
+function writtenConfigKeysIn(sources) {
   const keys = new Set();
-  for (const f of UI_WRITERS) {
-    const src = read(f);
+  for (const src of sources) {
     // Each updateConfig({ … }) object literal (allowing a leading `isRandom ? …` and
     // ONE level of nested braces for values like { ...state, [k]: v }).
     const callRe = /updateConfig\(\s*(?:[^)?]*\?\s*)?\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g;
@@ -34,13 +40,24 @@ function writtenConfigKeys() {
     while ((m = callRe.exec(src))) {
       // Top-level object keys: `ident:` (skip computed `[expr]:` — those are dynamic
       // priority-slider writes whose literal names appear in the arc-preset write).
-      const keyRe = /(?:^|[,{]\s*)([a-zA-Z_][a-zA-Z0-9_]*)\s*:/g;
+      // ⚠ THE LEADING `^\s*` IS LOAD-BEARING AND WAS MISSING (lane T9, found by the
+      // standing control below on its first run). The outer callRe consumes the
+      // opening brace, so m[1] begins with the whitespace before the FIRST key; a
+      // bare `^` could never match it, and only keys preceded by a comma were ever
+      // seen. Measured at the cure: the live key set is IDENTICAL either way (17 and
+      // 17), because every first key today also appears after a comma in some other
+      // literal — so the hole had cost nothing YET. A new wizard key written as the
+      // sole or first key of its own updateConfig call would have been invisible to
+      // the exact walker built to catch it.
+      const keyRe = /(?:^\s*|[,{]\s*)([a-zA-Z_][a-zA-Z0-9_]*)\s*:/g;
       let k;
       while ((k = keyRe.exec(m[1]))) keys.add(k[1]);
     }
   }
   return keys;
 }
+const writerSources = () => UI_WRITERS.map(read);
+const writtenConfigKeys = () => writtenConfigKeysIn(writerSources());
 
 // ── The pipeline readers: config-like accessors across src/generators/** ─────
 // Readers destructure/alias config under several names (config / effectiveConfig /
@@ -55,12 +72,12 @@ function walkJs(dir, acc = []) {
   }
   return acc;
 }
-function readConfigKeys() {
+/** The reader-side detector, over SOURCE TEXTS — same reason as its writer twin. */
+function readConfigKeysIn(sources) {
   const keys = new Set();
   const dotRe = new RegExp(`(?:${CFG_ALIASES})\\.([a-zA-Z_][a-zA-Z0-9_]*)`, 'g');
   const destructRe = new RegExp(`\\{([^{}]+)\\}\\s*=\\s*(?:${CFG_ALIASES})\\b`, 'g');
-  for (const file of walkJs(resolve(ROOT, 'src/generators'))) {
-    const src = readFileSync(file, 'utf-8');
+  for (const src of sources) {
     let m;
     while ((m = dotRe.exec(src))) keys.add(m[1]);
     while ((m = destructRe.exec(src))) {
@@ -72,6 +89,12 @@ function readConfigKeys() {
   }
   return keys;
 }
+const readerSources = () => walkJs(resolve(ROOT, 'src/generators')).map((f) => readFileSync(f, 'utf-8'));
+const readConfigKeys = () => readConfigKeysIn(readerSources());
+
+/** The seam verdict itself, so the live arm and the control share one comparator. */
+const droppedKeys = (written, read_, exceptions) =>
+  [...written].filter((k) => !read_.has(k) && !(k in exceptions));
 
 // Config keys the wizard writes that are DELIBERATELY consumed OUTSIDE the
 // deterministic generator pipeline (the store / finalization), not by a generator
@@ -92,7 +115,7 @@ describe('config seam — every wizard-written config key has a pipeline reader 
   it('no wizard config key is silently dropped by the pipeline', () => {
     const written = writtenConfigKeys();
     const read_ = readConfigKeys();
-    const dropped = [...written].filter((k) => !read_.has(k) && !(k in NON_PIPELINE_KEYS));
+    const dropped = droppedKeys(written, read_, NON_PIPELINE_KEYS);
     expect(
       dropped,
       `Wizard writes config ${dropped.join(', ')} but NO src/generators reader consumes it — `
@@ -105,5 +128,46 @@ describe('config seam — every wizard-written config key has a pipeline reader 
     const written = writtenConfigKeys();
     const stale = Object.keys(NON_PIPELINE_KEYS).filter((k) => !written.has(k));
     expect(stale, `stale seam exceptions (no longer written by the wizard): ${stale.join(', ')}`).toEqual([]);
+  });
+
+  // ── THE STANDING CONTROL (ODQ 764.2) ───────────────────────────────────────
+  // The non-vacuity self-check above proves the two detectors found SOMETHING; it
+  // does not prove the seam verdict can convict. Both halves of this walker are
+  // regexes over source text, and a regex that has rotted to matching a smaller
+  // vocabulary makes the drop list shorter, never longer — so the walker's failure
+  // mode is silence. The control drives the SAME three functions the live arms
+  // drive, over a DOCTORED IN-MEMORY COPY of the real writer and reader sources
+  // (never a file on disk), and asserts the conviction lands by name.
+  it('THE PLANTED CONTROL: a wizard key with no reader is convicted, and a reader clears it', () => {
+    const PLANTED = 'aKeyNoPipelineReaderConsumes';
+    const writers = writerSources();
+    const readers = readerSources();
+    expect(writers.some((s) => s.includes('updateConfig(')), 'the writer corpus lost its subject').toBe(true);
+
+    // The plant is a real writer idiom appended to a real writer source.
+    const doctoredWriters = [...writers, `updateConfig({ ${PLANTED}: 1 });`];
+    const writtenWithPlant = writtenConfigKeysIn(doctoredWriters);
+    expect(writtenWithPlant.has(PLANTED), 'the writer detector did not even see the plant').toBe(true);
+
+    const read_ = readConfigKeysIn(readers);
+    expect(droppedKeys(writtenWithPlant, read_, NON_PIPELINE_KEYS)).toEqual([PLANTED]);
+
+    // …and the cure clears it: give the planted key a pipeline reader.
+    const doctoredReaders = [...readers, `const x = config.${PLANTED};`];
+    expect(
+      droppedKeys(writtenWithPlant, readConfigKeysIn(doctoredReaders), NON_PIPELINE_KEYS),
+    ).toEqual([]);
+
+    // …and so does the documented exception, the walker's other legitimate exit.
+    // (Merged, not substituted: replacing the register outright resurfaces the real
+    // `useCustomContent` exception — which this control's first draft did, and the
+    // walker was right to say so.)
+    expect(
+      droppedKeys(writtenWithPlant, read_, { ...NON_PIPELINE_KEYS, [PLANTED]: 'planted' }),
+    ).toEqual([]);
+
+    // DISCRIMINATION: undoctored, the verdict is silent — so the conviction above
+    // is the plant's doing and not a walker that convicts everything.
+    expect(droppedKeys(writtenConfigKeysIn(writers), read_, NON_PIPELINE_KEYS)).toEqual([]);
   });
 });

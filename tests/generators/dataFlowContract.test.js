@@ -37,6 +37,18 @@
  * both reads and provides), never listed here — so a new double-produced key
  * inherits the requirement automatically instead of waiting for someone to
  * remember. Zero runtime cost: the pipeline never reads the field.
+ *
+ * ── WHY THE CHECKS ARE FUNCTIONS AND NOT INLINE LOOPS (ODQ 764.2, lane T9) ──
+ * This file was one of the five `kind:"uncovered"` rows in the mutation-coverage
+ * manifest: a seam contract with nothing proving IT can red. Its subject is not
+ * source text, so the house string-doctoring idiom does not reach it, and the
+ * sweep's disk-mutate path is closed to build lanes (its revert is the checkout
+ * family this program's shared-tree protocol forbids outright). The cure is
+ * neither: each check is now a PURE FUNCTION of (order, meta), so a DOCTORED
+ * COPY of the live registry can be driven through THE SAME FUNCTION the live arm
+ * calls — a standing control that runs on every ordinary invocation rather than a
+ * weekly one. A control that re-implements the detector proves nothing about the
+ * detector, so nothing below re-implements anything.
  */
 import { describe, it, expect } from 'vitest';
 import '../../src/generators/generateSettlementPipeline.js'; // registers all steps
@@ -45,41 +57,76 @@ import { getStepOrder, getStepMeta } from '../../src/generators/pipeline.js';
 const META = new Map(getStepMeta().map((m) => [m.name, m]));
 const ORDER = getStepOrder();
 
+/** Reads with no earlier producer, in `order`. The soundness check itself. */
+const soundnessViolations = (order, meta) => {
+  const producedBefore = (key, idx) => order.slice(0, idx).some((n) => {
+    const m = meta.get(n);
+    return m.provides.includes(key) || m.mutates.includes(key);
+  });
+  const violations = [];
+  order.forEach((name, idx) => {
+    for (const k of meta.get(name).reads) {
+      if (!producedBefore(k, idx)) violations.push(`${name} reads "${k}" but no earlier step provides/mutates it`);
+    }
+  });
+  return violations;
+};
+
+/** Declared reads no step anywhere produces. The phantom-read check itself. */
+const phantomReads = (meta) => {
+  const produced = new Set();
+  for (const m of meta.values()) {
+    m.provides.forEach((k) => produced.add(k));
+    m.mutates.forEach((k) => produced.add(k));
+  }
+  const phantom = [];
+  for (const m of meta.values()) {
+    for (const k of m.reads) if (!produced.has(k)) phantom.push(`${m.name}:${k}`);
+  }
+  return phantom;
+};
+
+/** Steps declaring at least one read. The populated-contract check itself. */
+const stepsWithReads = (order, meta) => order.filter((n) => meta.get(n).reads.length > 0);
+
+/** Steps that read a key they also provide. The re-derivation check itself. */
+const rederiversIn = (order, meta) => order.filter((n) => {
+  const m = meta.get(n);
+  return m.reads.some((k) => m.provides.includes(k));
+}).sort();
+
+/**
+ * A copy of the live registry with ONE step's declaration patched. Deep enough
+ * that the live registry — a process-wide singleton other suites share — is never
+ * touched: the arrays are rebuilt, not aliased.
+ */
+const doctor = (name, patch) => {
+  const copy = new Map();
+  for (const [k, m] of META) {
+    copy.set(k, {
+      ...m,
+      reads: [...m.reads],
+      provides: [...m.provides],
+      mutates: [...m.mutates],
+    });
+  }
+  Object.assign(copy.get(name), patch);
+  return copy;
+};
+
 describe('pipeline reads/produces data-flow contract (A+ generators.3)', () => {
   it('every declared read is produced by an EARLIER step (deps order respects the data graph)', () => {
-    const producedBefore = (key, idx) => ORDER.slice(0, idx).some((n) => {
-      const m = META.get(n);
-      return m.provides.includes(key) || m.mutates.includes(key);
-    });
-    const violations = [];
-    ORDER.forEach((name, idx) => {
-      for (const k of META.get(name).reads) {
-        if (!producedBefore(k, idx)) {
-          violations.push(`${name} reads "${k}" but no earlier step provides/mutates it`);
-        }
-      }
-    });
-    expect(violations).toEqual([]);
+    expect(soundnessViolations(ORDER, META)).toEqual([]);
   });
 
   it('every declared read key is produced by SOME step (no phantom reads)', () => {
-    const produced = new Set();
-    for (const m of META.values()) {
-      m.provides.forEach((k) => produced.add(k));
-      m.mutates.forEach((k) => produced.add(k));
-    }
-    const phantom = [];
-    for (const m of META.values()) {
-      for (const k of m.reads) if (!produced.has(k)) phantom.push(`${m.name}:${k}`);
-    }
-    expect(phantom).toEqual([]);
+    expect(phantomReads(META)).toEqual([]);
   });
 
   it('the reads contract is populated for every data-consuming step (not silently empty)', () => {
     // resolveConfig is the lone pure-source step (consumes only initial config);
     // every other step declares >=1 read. A drift that empties the decls fails here.
-    const withReads = ORDER.filter((n) => META.get(n).reads.length > 0);
-    expect(withReads.length).toBe(ORDER.length - 1);
+    expect(stepsWithReads(ORDER, META).length).toBe(ORDER.length - 1);
     expect(META.get('resolveConfig').reads).toEqual([]);
   });
 
@@ -92,16 +139,71 @@ describe('pipeline reads/produces data-flow contract (A+ generators.3)', () => {
     // soundness test: resolveStress produces `stress` before both stress
     // re-derivers). Pin the known re-derivers so the pattern is documented, not
     // accidental.
-    const rederivers = ORDER.filter((n) => {
-      const m = META.get(n);
-      return m.reads.some((k) => m.provides.includes(k));
-    });
-    expect(rederivers.sort()).toEqual([
+    expect(rederiversIn(ORDER, META)).toEqual([
       'coherenceRepairPass',
       'economyReconcilePass',
       'isolationPass',
       'stressConfirmPass',
     ]);
+  });
+
+  // ── THE STANDING CONTROLS (ODQ 764.2) ──────────────────────────────────────
+  // Four green assertions over one registry can be four assertions over an EMPTY
+  // registry, or over checks whose loops no longer run. Each control drives the
+  // same function its live sibling drives, over a doctored copy, and asserts the
+  // conviction lands BY NAME — attribution, not just a red.
+  describe('THE STANDING CONTROLS: each check is proved able to convict', () => {
+    it('the registry itself is not vacuous — an empty one would pass every arm above', () => {
+      expect(ORDER.length).toBeGreaterThan(10);
+      expect(META.size).toBe(ORDER.length);
+      // …and the checks are reading the reads they claim to read.
+      expect(stepsWithReads(ORDER, META).length).toBeGreaterThan(10);
+    });
+
+    it('SOUNDNESS convicts a step scheduled before its own producer', () => {
+      // Move the last step to the front: whatever it reads is now read before
+      // anything produces it. This is the drift the arm exists to catch — a deps
+      // order edited without re-checking the data graph.
+      const moved = ORDER[ORDER.length - 1];
+      const planted = [moved, ...ORDER.slice(0, -1)];
+      const found = soundnessViolations(planted, META);
+      expect(found.length).toBeGreaterThan(0);
+      expect(found.every((v) => v.startsWith(`${moved} reads `))).toBe(true);
+      // …and it DISCRIMINATES: the live order is silent.
+      expect(soundnessViolations(ORDER, META)).toEqual([]);
+    });
+
+    it('NO-PHANTOM-READS convicts a read of a key no step produces', () => {
+      const victim = ORDER[ORDER.length - 1];
+      const planted = doctor(victim, { reads: [...META.get(victim).reads, 'aKeyNoStepProduces'] });
+      expect(phantomReads(planted)).toEqual([`${victim}:aKeyNoStepProduces`]);
+      expect(phantomReads(META)).toEqual([]);
+    });
+
+    it('THE POPULATED CONTRACT convicts a step whose reads were silently emptied', () => {
+      const victim = ORDER[ORDER.length - 1];
+      const planted = doctor(victim, { reads: [] });
+      expect(stepsWithReads(ORDER, planted).length).toBe(ORDER.length - 2);
+      expect(stepsWithReads(ORDER, META).length).toBe(ORDER.length - 1);
+    });
+
+    it('THE RE-DERIVER PIN convicts a fifth step quietly re-providing what it reads', () => {
+      // resolveConfig is the one step with no reads, so making it re-provide is the
+      // cleanest fifth re-deriver available and cannot collide with an existing one.
+      const planted = doctor('resolveConfig', { reads: ['config'], provides: ['config'] });
+      expect(rederiversIn(ORDER, planted)).toContain('resolveConfig');
+      expect(rederiversIn(ORDER, planted)).toHaveLength(5);
+      expect(rederiversIn(ORDER, META)).toHaveLength(4);
+    });
+
+    it('the doctoring never touches the live registry (the controls cannot poison a sibling suite)', () => {
+      // getStepMeta() hands out the process-wide singleton other suites read.
+      const victim = ORDER[ORDER.length - 1];
+      const before = [...META.get(victim).reads];
+      doctor(victim, { reads: ['aKeyNoStepProduces'] });
+      expect(META.get(victim).reads).toEqual(before);
+      expect(getStepMeta().find((m) => m.name === victim).reads).toEqual(before);
+    });
   });
 });
 
