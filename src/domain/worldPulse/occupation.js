@@ -65,6 +65,12 @@ import { stablePart } from './worldState.js';
 import { occupationHoldFor } from './treatyEnforcement.js';
 import { deriveMilitaryCapacity } from './militaryStrength.js';
 import { isLiveWarFront } from './warFrontReads.js';
+// W-SEAT D7 (SEAT-5): the liberation un-install. The seat leaf is already a static import
+// of the sibling war kernels (deploymentReturn.js) and this module is never in the
+// first-paint closure, so no chunk boundary moves; the AUTHORITY leaf below imports
+// nothing at all, which is why the lift can live there and be called from both sides.
+import { legitimateRemnantOf } from '../rulingPowerSeat.js';
+import { OCCUPATION_LIFT_KIND, liftOccupationAuthority } from './applyWorldPulseOccupationAuthority.js';
 import {
   occupationBurdenClearanceOutcome,
   occupationContext,
@@ -938,6 +944,59 @@ export function freshConquestsFrom(warOutcomes = []) {
 }
 
 /**
+ * THE LIBERATION TRANSFER (W-SEAT D7 / SEAT-5) — the payload that turns a liberation from
+ * a six-tick condition into a roster the town can live in. ONE derivation, consumed by
+ * BOTH `occupation_lifted` producers (this module's resistance collapse and
+ * `deploymentReturn`'s returning host), so the two paths can never drift apart.
+ *
+ * ⭐ THE ORDER IS LOAD-BEARING AND IT IS THE OPPOSITE OF THE OBVIOUS ONE. The remnant is
+ * resolved on the roster AS IT WILL BE AFTER THE LIFT, never on the cut one. On the
+ * measured conquest fixture the cut roster ranks Merchant Guilds (16) above The Garrison
+ * (8) — but the garrison is at 8 only because the occupier disarmed it, and restoring it
+ * puts it at 27. Choosing on the cut roster would let the occupier pick the town's next
+ * government from beyond the grave, which is precisely the authority D7 exists to give
+ * back. The lift is therefore run twice on identical inputs (once here to choose, once at
+ * the applier to apply) rather than cached — it is a pure fold over a frozen roster.
+ *
+ * ⛔ THE RECEIPT NEVER CLAIMS A FORMER STANDING (A1.1.4b). Nothing in the estate records
+ * pre-cut powers, the cut is lossy, and one marker covers two factors — so this is a
+ * declared ESTIMATE and the prose says "restoring", never "restored to what it was".
+ * A1.1.4(a)'s per-faction pre-cut snapshot is OWNER-GATED (Q-S8) and deliberately NOT
+ * taken here; when it is granted it rides THIS payload — it cannot be looked up later,
+ * because the ledger row is deleted inside the same pass that emits the outcome, and
+ * `conditionOutcome`/`deriveActiveCondition` are closed shapes that drop unknown keys.
+ *
+ * `null` when the seat key is dark, when the roster has no legitimate remnant to seat, or
+ * when there is nothing to lift — so a dark world emits no payload, the applier's lift is
+ * never reached with a marker, and every liberated settlement serializes byte-identically.
+ *
+ * @param {unknown} worldState  the live pulse world state (its typedef declares no
+ *   `simulationRules`, which is why a virtual key is read through a narrowing cast rather
+ *   than off the declared shape — the `brokerageEffectsActive` idiom)
+ * @param {{ settlement?: unknown }|null|undefined} item  the occupied settlement's snapshot
+ *   item (or the settlement itself — both shapes are handled, snapshot-first)
+ * @param {number} tick
+ * @returns {{ toPowerName: string, cause: 'appointment', tick: number, occupationLift: string }|null}
+ */
+export function occupationLiftTransfer(worldState, item, tick) {
+  // ⛔ The strict positive `=== true` spelling is the engine-gated-key census's only
+  // discoverable form, read off worldState.simulationRules because a virtual key has no
+  // DEFAULT_SIMULATION_RULES entry to normalize (the foreignSeatCoupAdj idiom verbatim).
+  const rules = /** @type {{ simulationRules?: { foreignSeatEnabled?: unknown } }|null|undefined} */ (worldState)?.simulationRules;
+  if (rules?.foreignSeatEnabled !== true) return null;
+  const settlement = item?.settlement || item;
+  const lifted = liftOccupationAuthority(settlement, { occupationLift: OCCUPATION_LIFT_KIND });
+  if (lifted === settlement) return null;
+  const remnant = legitimateRemnantOf(lifted);
+  const toPowerName = String(remnant?.faction || remnant?.name || '').trim();
+  if (!toPowerName) return null;
+  // `appointment` is ALREADY in the frozen RULING_POWER_CAUSES vocabulary and carries its
+  // own LEGITIMACY_SEEDS and STABILITY_BY_CAUSE rows, so A1.1.5's primary ruling costs no
+  // vocabulary growth (law §2.6). The honest `liberation` spelling stays Q-S7, owner's.
+  return { toPowerName, cause: 'appointment', tick, occupationLift: OCCUPATION_LIFT_KIND };
+}
+
+/**
  * Settlements liberated/relieved this tick (occupation broken). Read from the deployment-
  * return + occupation outcomes: an `occupation_lifted` or `siege_lifted` condition on a
  * settlement means it threw off / relieved its occupation. Those occupations exit the
@@ -1223,7 +1282,10 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
       });
       const occupiedName = nameFor(occupiedId);
       const occupierName = nameFor(rec.occupierId);
-      outcomes.push(conditionOutcome({
+      // W-SEAT D7 (SEAT-5): the roster half of "the settlement reclaims its own
+      // authority". Null when dark ⇒ the pushed object is the pre-SEAT-5 one, key for key.
+      const liftTransfer = occupationLiftTransfer(worldState, occupiedItem, t);
+      const liftedOutcome = conditionOutcome({
         id: dispositionSourceEventId,
         archetype: 'occupation_lifted',
         targetSaveId: occupiedId,
@@ -1234,7 +1296,10 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         tick: t,
         sourceEventTargetId: String(rec.occupierId),
         causes: [{ source: occupiedId, effect: 'occupation_lifted', reason: `${occupiedName}'s resistance broke ${occupierName}'s occupation.` }],
-      }));
+      });
+      // Dark ⇒ the SAME OBJECT is pushed, not an equal one: the dormancy claim is by
+      // reference rather than by arithmetic, the standard this family already holds itself to.
+      outcomes.push(liftTransfer ? { ...liftedOutcome, powerTransfer: liftTransfer } : liftedOutcome);
       continue;
     }
 

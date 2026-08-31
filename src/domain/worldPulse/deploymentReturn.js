@@ -34,6 +34,7 @@
 
 import { resolveCoupVerdict } from '../rulingPowerCoup.js';
 import { foreignSeatCoupAdj } from '../rulingPowerSeat.js';
+import { occupationLiftTransfer } from './occupation.js';
 import {
   relationshipKeyFromEdge,
   normalizeRelationshipEdge,
@@ -446,6 +447,11 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
       const pSuccess = returnSuccessProbability(ratio);
       const roll = recordRng.fork('liberation').random();
       if (roll < pSuccess) {
+        // W-SEAT D7 (SEAT-5): the second `occupation_lifted` producer, and the same ONE
+        // derivation — "the settlement begins restoring its own authority" below had no
+        // writer behind it on either path. Null when the seat key is dark, in which case
+        // the pushed object is key-for-key the pre-SEAT-5 one.
+        const liftTransfer = occupationLiftTransfer(worldState, item, tick);
         outcomes.push({
           id: `world_outcome.occupation_lifted.${stablePart(homeId)}.${tick}`,
           type: 'condition',
@@ -459,6 +465,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
           headline: `${homeName} throws off its occupiers`,
           summary: `${homeName}'s army returned to a captured home and broke the occupation; the settlement begins restoring its own authority.`,
           reasons: [`A host come home ${returnMusterWordFor(ratio)} threw off the occupiers — ${returnOddsWordFor(pSuccess)}, and it came off.`],
+          ...(liftTransfer ? { powerTransfer: liftTransfer } : {}),
           condition: {
             archetype: 'occupation_lifted',
             severity: 0.3,

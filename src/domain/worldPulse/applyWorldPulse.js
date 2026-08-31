@@ -1,5 +1,4 @@
 
-import { clamp01 } from '../../kernel/math.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { advanceRegionalImpacts, appendWizardNewsEntries, deriveWizardNewsEntriesFromGraphChange, ensureRegionalGraph, ensureWizardNewsFeed, legacyRegionalConditionId, propagateRegionalEvent, setRegionalImpactStatus, syncRelationshipChannelBundle } from '../region/index.js';
 import { deityIdOf } from './pantheon.js';
@@ -73,7 +72,7 @@ import { envoyNewsEntries } from './envoyNews.js';
 import { clone, affectedSaveIdsForOutcome, settlementChanged, saveLike } from './applyWorldPulsePrimitives.js';
 import { relationshipOutcomeDisposition, openCoalitionEnemyRelationship, applyRelationshipLabelToGraph, relationshipEdgeForOutcome, roleOrientedEdge, writeRelationshipLabelToNeighbourNetworks, cascadeNewsEntry } from './applyWorldPulseRelationshipGraph.js';
 import { FACTION_PAYLOAD_KINDS, applyFactionPayloadEffect } from './applyWorldPulseFactionRoster.js';
-import { installOccupationAuthority } from './applyWorldPulseOccupationAuthority.js';
+import { conquestExtractionCondition, installOccupationAuthority, liftOccupationAuthority } from './applyWorldPulseOccupationAuthority.js';
 import { mergeStressorUpsert } from './applyWorldPulseStressorMerge.js';
 import { seedBetrayalTraitor } from './applyWorldPulseBetrayal.js';
 // THE TYPE SURFACE IS PART OF THE PUBLIC SURFACE (R-BLD-9 / the file-2 lesson):
@@ -171,30 +170,16 @@ function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any}
     // cause === 'conquest' so every pre-existing (coup) transfer is byte-identical.
     if (outcome.powerTransfer.cause === 'conquest') {
       next = installOccupationAuthority(next, outcome.powerTransfer.toPowerName);
-      // Occupation parity: a GENERATION-occupied town carries the
-      // vassal_extraction condition (conditionPromotion maps the 'occupied' stress
-      // into it), so a PULSE-conquered town must too — that condition is what the
-      // substrate (deriveCausalState), the pressure model, AND population flight all
-      // read as "occupation." Stamp it alongside the conquest's war_pressure so the
-      // two faces of an occupation (military strain + economic extraction) both land.
-      // Idempotent by id (withActiveCondition replaces same-id), so a re-fired
-      // conquest never double-stamps. Conquest-only ⇒ a coup is byte-identical.
-      next = withActiveCondition(next, {
-        archetype: 'vassal_extraction',
-        severity: clamp01(0.55 + (outcome.severity || 0) * 0.15),
-        triggeredAt: {
-          tick: outcome.powerTransfer.tick ?? null,
-          sourceEventType: 'WAR_LAYER_CONQUEST',
-          sourceEventTargetId: String(saveId),
-        },
-        causes: [{
-          source: outcome.powerTransfer.toPowerName,
-          effect: 'occupation_extraction',
-          reason: `${outcome.powerTransfer.toPowerName} extracts wealth, troops, and authority from the conquered settlement.`,
-        }],
-      });
+      // The extraction condition's construction moved VERBATIM into the authority leaf
+      // beside the install it belongs to — see `conquestExtractionCondition` there for the
+      // parity reasoning, which did not change. Two things this buys, both measured:
+      // `check:observed-shape-readers` counts `powerTransfer on outcome` reads PER FILE
+      // against a frozen ceiling of 10, and this mouth was at exactly 10 — so SEAT-5's one
+      // new read had nowhere to go until three left; and the mouth shrinks, which is a
+      // win the size ratchet banks rather than spends.
+      next = withActiveCondition(next, conquestExtractionCondition(outcome.powerTransfer, outcome.severity, saveId));
     }
-    const result = transferRulingPower(next, outcome.powerTransfer.toPowerName, {
+    const result = transferRulingPower(liftOccupationAuthority(next, outcome.powerTransfer), outcome.powerTransfer.toPowerName, {
       cause: outcome.powerTransfer.cause || 'coup',
       tick: outcome.powerTransfer.tick ?? null,
       losers: outcome.powerTransfer.losers || [],
