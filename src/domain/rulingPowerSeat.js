@@ -156,7 +156,8 @@ export const OCCUPATION_RUNGS = Object.freeze([
 /** The terminal rung, which A1.1.8 resolves OUT of occupation and INTO vassalage. */
 const VASSALIZED_RUNG = 'vassalized';
 
-/** worst-compliance decay on a subordinating tie: honored 1 · strained 0.6 · defaulted 0.2. */
+/** worst-compliance decay on a subordinating tie: honored 1 · strained 0.6 · defaulted 0.2.
+ * @type {Readonly<Record<string, number>>} */
 const COMPLIANCE_SCALE = Object.freeze({ honored: 1, strained: 0.6, defaulted: 0.2 });
 
 /**
@@ -315,8 +316,19 @@ export function legitimateRemnantOf(settlement) {
   let best = null;
   for (const faction of factions) {
     if (!faction || faction === governing) continue;
-    const modifiers = Array.isArray(faction.modifiers) ? faction.modifiers.map(String) : [];
-    if (modifiers.includes('occupier')) continue;
+    // ⛔ THE OCCUPIER IS EXCLUDED BY ARCHETYPE, AND DELIBERATELY NOT BY MODIFIER.
+    // The obvious second belt — `faction.modifiers.includes('occupier')` — was written
+    // here and then REMOVED, because `scripts/check-observed-shape-readers.mjs` measured
+    // it as a read of a key NO GENERATOR PRODUCES: `modifiers` is written only by the
+    // SIM (applyWorldPulseOccupationAuthority mints the occupier row with it), so on a
+    // freshly generated world that arm is dead and can only degrade to its default. The
+    // estate already carries `modifiers on factions` as ACCEPTED DEBT in five files
+    // (rulingPower, occupation, applyWorldPulseOccupationAuthority, ladderRead,
+    // pdf/viewModel) and its ratchet law is "never add a file, never add an identity" —
+    // so becoming the sixth to buy a redundant check was the wrong trade.
+    // It IS redundant: the sim mints the occupier row with `category: 'occupation'`, and
+    // `factionArchetype` reads category first, so the archetype test below catches every
+    // occupier the estate actually produces.
     if (factionArchetype(faction) === A.OCCUPATION) continue;
     const name = nameOf(faction);
     if (!name) continue;

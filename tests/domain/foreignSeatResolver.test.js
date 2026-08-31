@@ -248,13 +248,33 @@ describe('SEAT-1 — legitimateRemnantOf (A1.1.9)', () => {
     expect(remnant?.faction).toBe('Merchant League');
   });
 
-  it('excludes the occupier by MODIFIER even when its category is not occupation', () => {
+  it('excludes the occupier by ARCHETYPE — the shape the sim actually mints', () => {
+    // `applyWorldPulseOccupationAuthority` mints the occupier row with
+    // `category: 'occupation'`, and `factionArchetype` reads category first.
+    const remnant = legitimateRemnantOf(withFactions([
+      { faction: 'Occupation Authority', power: 60, isGoverning: true },
+      { faction: 'Ironhold occupation authority', power: 90, category: 'occupation', modifiers: ['occupier'] },
+      { faction: 'Temple', power: 30 },
+    ]));
+    expect(remnant?.faction).toBe('Temple');
+  });
+
+  it('does NOT exclude on the `occupier` MODIFIER alone, and that is deliberate', () => {
+    // ⚠ THIS PINS AN ABSENCE, AND THE ABSENCE WAS MEASURED RATHER THAN CHOSEN.
+    // A `modifiers.includes('occupier')` belt was written here and removed:
+    // `scripts/check-observed-shape-readers.mjs` measured it as a read of a key NO
+    // GENERATOR PRODUCES (modifiers is sim-written only), so on a generated world the
+    // arm is dead and can only degrade to its default. The estate carries that identity
+    // as accepted debt in five files and its ratchet law forbids adding a sixth, so the
+    // redundant belt was not worth a new inventory row. A row carrying the modifier but
+    // NOT the archetype is a shape the estate never mints; if one ever appears, this
+    // assertion is what will say so.
     const remnant = legitimateRemnantOf(withFactions([
       { faction: 'Occupation Authority', power: 60, isGoverning: true },
       { faction: 'Foreign Garrison', power: 90, category: 'military', modifiers: ['occupier'] },
       { faction: 'Temple', power: 30 },
     ]));
-    expect(remnant?.faction).toBe('Temple');
+    expect(remnant?.faction).toBe('Foreign Garrison');
   });
 
   it('breaks a power tie on codepoint order, never locale collation', () => {
