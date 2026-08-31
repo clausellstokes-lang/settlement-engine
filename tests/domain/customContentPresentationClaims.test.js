@@ -522,6 +522,29 @@ const PRESENTATION_CASES = presentationCases();
 // The ledger can therefore only ever shrink. When it finally empties, delete it, the
 // blind arm and its two governance arms together and let one arm do the work again.
 
+// ── ⚠ THIS FILE IS PARKED IN THE LIGHTING CENSUS — ITS TESTS ARE CREDITED NOWHERE ──
+//
+// MEASURED, not inferred, and recorded here so the next hand does not re-pay for it: a
+// plain unambiguous `it('…')` was inserted into this file and
+// tests/lint/sovereigntyLightingContract.walker.test.js was run — it stayed GREEN at
+// 33/33. `parkReasonsFor` parks this source, and a parked file contributes ZERO to
+// `titles` and `suiteTitles` (that walker, `titles: parked ? [] : …`). So the four static
+// registrations the §866 repair added moved the lighting census by NOTHING, and its
+// governed refreeze re-measured all five figures BYTE-IDENTICAL.
+//
+// ⛔ TWO CONSEQUENCES, AND THE SECOND IS THE ONE THAT MATTERS.
+//   1. No lighting-census bill is owed for this file — do not "pay" one. A refreeze here
+//      would only overwrite the provenance note of the landing that actually set the
+//      figures, claiming a measurement nobody made.
+//   2. This file's 97 tests RUN AND PASS AND ARE CREDITED IN NO TITLE CENSUS AT ALL. That
+//      is the same class F1c recorded for its own parked suite. It is a real coverage-
+//      accounting gap, it is NOT this repair's to close (de-parking is surgery on the
+//      file's shape, not an instrument repair), and it is named here so it is not
+//      re-found as a surprise.
+// The census that DOES move is scripts/.test-ratchet-baseline.json's runtime `totalTests`
+// (94 -> 97 for this file, +3); it needs the full unfiltered suite and is re-derived WHOLE
+// at a landing, never composed by arithmetic.
+
 /** The shared mechanism behind every declared-blind row, measured rather than assumed. */
 const NEVER_MATERIALIZES = 'the reference-pack definition never materializes into the'
   + ' generated settlement — a probe over the whole settlement finds no localUid, no name'
