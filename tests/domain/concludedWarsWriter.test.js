@@ -237,6 +237,93 @@ describe('THE SEAL LAW and its grace window', () => {
   });
 });
 
+describe('W-MEM-P1 — the annihilation channel finally has a producer', () => {
+  // `fact.loserDied` had a READER (warEndingClassifier) and no writer anywhere: the one
+  // census that claimed to fill it read `settlement.died`, a field no source file sets.
+  // These arms hold the repair to the estate's real stamp, config.lifecycleDiedAtTick.
+  const died = (at, ids = ['kelby']) => (id) => (ids.includes(id) ? at : undefined);
+
+  test('a principal that died at or after the war opened earns the ending', () => {
+    const fact = /** @type {Record<string, unknown>} */ (
+      wrote(run({ diedAtOf: died(38) }))['war.ashford.kelby.12.0'].fact);
+    expect(fact.loserDied).toBe(true);
+    expect(classifyWarEnding({ ...fact, attackerId: 'ashford' }).ending).toBe('annihilation');
+  });
+
+  test('DEATH IS THE EVIDENCE OF LOSING — the attacker dying earns it too', () => {
+    // No victor has to be resolved first. Whichever principal ceased to exist is the
+    // losing belligerent, and reading only the defender would miss half the fact.
+    expect(/** @type {Record<string, unknown>} */ (
+      wrote(run({ diedAtOf: died(38, ['ashford']) }))['war.ashford.kelby.12.0'].fact).loserDied).toBe(true);
+  });
+
+  test('a stamp OLDER than the war refuses — a ghost cannot have been a belligerent', () => {
+    const fact = /** @type {Record<string, unknown>} */ (
+      wrote(run({ diedAtOf: died(11) }))['war.ashford.kelby.12.0'].fact);
+    // anchored: the omit-not-default law — an unearned channel is structurally absent,
+    // never present-and-false, because a false would assert the estate looked and knew.
+    expect(Object.prototype.hasOwnProperty.call(fact, 'loserDied')).toBe(false);
+    expect(classifyWarEnding({ ...fact, attackerId: 'ashford' }).ending).not.toBe('annihilation');
+  });
+
+  test('an ALLY dying is not this war\'s annihilation — the ORIGIN PAIR is the war', () => {
+    const fact = /** @type {Record<string, unknown>} */ (
+      wrote(run({ diedAtOf: died(38, ['briar']) }))['war.ashford.kelby.12.0'].fact);
+    expect(Object.prototype.hasOwnProperty.call(fact, 'loserDied')).toBe(false);
+  });
+
+  test('with no resolver supplied the channel is ABSENT, not false', () => {
+    const fact = /** @type {Record<string, unknown>} */ (wrote(run())['war.ashford.kelby.12.0'].fact);
+    expect(Object.prototype.hasOwnProperty.call(fact, 'loserDied')).toBe(false);
+  });
+
+  test('THE STAGED RECORD IS A WATCH — a death inside the grace window still lands', () => {
+    // The war closes with everyone alive; the loser dies two ticks later, while the
+    // record is staged. Sealing at conclusion would have lost the fact entirely.
+    const staged = wrote(run());
+    expect(Object.prototype.hasOwnProperty.call(
+      /** @type {Record<string, unknown>} */ (staged['war.ashford.kelby.12.0'].fact), 'loserDied')).toBe(false);
+    const sealed = wrote(recordConcludedWars({
+      worldState: world({ tick: TICK + 3, concludedWars: staged }), resolvedDeployments: [],
+      appliedOutcomes: [], newsEntries: [], tick: TICK + 3, rules: LIT, deferred: false,
+      diedAtOf: died(TICK + 2),
+    }))['war.ashford.kelby.12.0'];
+    expect(sealed.sealed).toBe(true);
+    expect(/** @type {Record<string, unknown>} */ (sealed.fact).loserDied).toBe(true);
+  });
+
+  test('the watch is MONOTONE — a stamp that later vanishes cannot unmake the fact', () => {
+    // Resettlement is the one path that DELETES lifecycleDiedAtTick. It cannot reach a
+    // war this record already saw: the fallow it must keep is far longer than this
+    // window, and the fact is carried forward rather than re-polled.
+    const withDeath = wrote(run({ diedAtOf: died(38) }));
+    const later = recordConcludedWars({
+      worldState: world({ tick: TICK + 3, concludedWars: withDeath }), resolvedDeployments: [],
+      appliedOutcomes: [], newsEntries: [], tick: TICK + 3, rules: LIT, deferred: false,
+      diedAtOf: () => undefined,
+    });
+    expect(/** @type {Record<string, unknown>} */ (
+      wrote(later)['war.ashford.kelby.12.0'].fact).loserDied).toBe(true);
+  });
+
+  test('a quiet staged tick that learns NOTHING still returns null — no ledger churn', () => {
+    const staged = wrote(run());
+    expect(recordConcludedWars({
+      worldState: world({ tick: TICK + 1, concludedWars: staged }), resolvedDeployments: [],
+      appliedOutcomes: [], newsEntries: [], tick: TICK + 1, rules: LIT, deferred: false,
+      diedAtOf: died(11),
+    })).toBeNull();
+  });
+
+  test('DARK STILL MEANS BYTE-IDENTICAL with a resolver in hand', () => {
+    // The negative control for the whole car: a wired producer must not light a dark world.
+    const before = world({ concludedWars: undefined });
+    const after = { ...before };
+    expect(run({ rules: {}, worldState: after, diedAtOf: died(38) })).toBeNull();
+    expect(JSON.stringify(after)).toBe(JSON.stringify(before));
+  });
+});
+
 describe('coalition folding and the record body', () => {
   test('a joiner folds onto the ORIGIN pair — one war, one record', () => {
     // Keyed naively a coalition would acquire a second name the day an ally marched.

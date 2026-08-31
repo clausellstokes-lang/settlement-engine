@@ -2803,7 +2803,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // @residue-strip: concluded_wars  (registered in RESIDUE_STRIP_SITES; sync-enforced)
   // The STRIP is the defer gate inside the writer itself: a paused tick banks no record
   // to strip, so this site's residue is byte-neutral by construction rather than by care.
-  const nextConcludedWars = recordConcludedWars({ worldState: memoryState, resolvedDeployments: war.resolvedDeployments, appliedOutcomes: applied.autoApplied, newsEntries: wizardNews?.entries, tick: worldState.tick, rules: simulationRules, deferred: deferMajors, inCanon: (id) => !!postTimeSnapshot?.byId?.has?.(id), windDown: !simulationRules?.warLayerEnabled });
+  // `diedAtOf` reads THIS tick's settlements rather than the pre-tick snapshot, so a
+  // town that dies on the closing tick is seen on that tick; the staged record re-reads
+  // it through the grace window regardless, which is what makes the channel whole.
+  const nextConcludedWars = recordConcludedWars({ worldState: memoryState, resolvedDeployments: war.resolvedDeployments, appliedOutcomes: applied.autoApplied, newsEntries: wizardNews?.entries, tick: worldState.tick, rules: simulationRules, deferred: deferMajors, inCanon: (id) => !!postTimeSnapshot?.byId?.has?.(id), diedAtOf: (id) => settlementUpdates.find((u) => String(u.saveId) === id)?.settlement?.config?.lifecycleDiedAtTick, windDown: !simulationRules?.warLayerEnabled });
   if (nextConcludedWars) memoryState = { ...memoryState, concludedWars: nextConcludedWars };
   // @pulse-stage: finalize_receipt
   const finalRegionalGraph = applyLineageBirthsToGraph(applied.regionalGraph, memberBirths, now);

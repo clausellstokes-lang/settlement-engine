@@ -107,6 +107,43 @@ const wholeTick = (value) => {
   return Number.isInteger(n) && n >= 0 ? n : null;
 };
 
+/** The war's two principals, off a record already in the ledger.
+ * @param {Record<string, unknown>} record @returns {string[]} */
+const pairOf = (record) => (Array.isArray(record.originPair) ? record.originPair : []).map(String);
+
+/**
+ * THE ANNIHILATION CHANNEL, which had a reader and no producer anywhere.
+ *
+ * `fact.loserDied` is the sole evidence for the `annihilation` ending
+ * (`warEndingClassifier.js` — "the losing belligerent died in the closing window"), and
+ * nothing in the estate ever wrote it. The one census that CLAIMED to fill it read
+ * `settlement.died`, a field no source file sets; the soak harness beside that census
+ * reads the engine's real stamp, `config.lifecycleDiedAtTick`, which the lifecycle mover
+ * dual-writes onto the regen-surviving `_config` twin. This is that stamp, threaded.
+ *
+ * ⭐ DEATH IS THE EVIDENCE OF LOSING, so no victor has to be resolved first: a principal
+ * that ceased to exist is the losing belligerent, whichever side of the war it stood on.
+ * Only the ORIGIN PAIR counts — an ally's death is not this war's annihilation — and a
+ * stamp older than the war's own opening is refused, because a settlement that was
+ * already gone cannot have been a belligerent in it.
+ *
+ * ⭐ THE WINDOW IS THE SEAL, not a second constant and not a second spelling of one. The
+ * record is re-read on every pass while it is staged, so a death landing on the closing
+ * tick or inside the grace window is seen; after the seal the record is append-closed.
+ * A razing is deliberately NOT this: the classifier holds the two disjoint by
+ * construction, because a razed town becomes a remnant and a remnant has not died.
+ *
+ * @param {string[]} pair @param {number} openedTick
+ * @param {(id: string) => unknown} diedAtOf
+ * @returns {boolean}
+ */
+function principalDied(pair, openedTick, diedAtOf) {
+  return pair.some((id) => {
+    const diedAt = wholeTick(diedAtOf(id));
+    return diedAt != null && diedAt >= openedTick;
+  });
+}
+
 /**
  * THE MECHANICAL CLOSE ROAD. The war layer's carrier collapses four of its seven
  * roads onto one withdrawal token, so the road is recovered here from inputs the
@@ -242,12 +279,13 @@ function engagementsFor(entries, pair) {
  * @param {{ warMemoryEnabled?: unknown } | null} args.rules
  * @param {boolean} args.deferred true on a paused tick — the writer stands down
  * @param {(id: string) => boolean} [args.inCanon] canon membership of the tick snapshot
+ * @param {(id: string) => unknown} [args.diedAtOf] the engine's settlement death stamp
  * @param {boolean} [args.windDown] the war layer resolved everything this tick
  * @returns {Record<string, unknown>|null}
  */
 export function recordConcludedWars({
   worldState, resolvedDeployments, appliedOutcomes, newsEntries,
-  tick, rules, deferred, inCanon = () => true, windDown = false,
+  tick, rules, deferred, inCanon = () => true, diedAtOf = () => null, windDown = false,
 }) {
   if (!warMemoryActive(rules)) return null;
   // A paused tick parks every major and knows no verdict. Standing down here is what
@@ -364,6 +402,7 @@ export function recordConcludedWars({
             ? /** @type {unknown[]} */ (recordOf(existing.fact).terminalOutcomes) : []),
           ...terminal,
         ],
+        ...(principalDied(address.pair, address.openedTick, diedAtOf) ? { loserDied: true } : {}),
         ...(treatyStandsFor(address.pair) ? { treatyWritten: true } : {}),
       },
       ...(victor ? { victorId: victor } : {}),
@@ -397,12 +436,28 @@ export function recordConcludedWars({
   }
   for (const key of Object.keys(next).sort(codepoint)) {
     const record = recordOf(next[key]);
-    if (record.sealed !== false || live.has(key)) continue;
+    if (record.sealed !== false) continue;
+    // ⭐ A STAGED RECORD IS ALSO A WATCH, and the watch is what makes the grace window
+    // mean something on the fact channels as well as on the treaty. A principal can die
+    // on the closing tick itself or inside the window, and while the record is staged it
+    // is the only thing still looking. The read is MONOTONE — once true the fact never
+    // goes back — so a resettlement, the one path that deletes the death stamp and only
+    // after a fallow far longer than this window, cannot unmake a death the war saw.
+    const fact = recordOf(record.fact);
+    const died = fact.loserDied === true
+      || principalDied(pairOf(record), wholeTick(record.openedTick) ?? 0, diedAtOf);
     const closedAt = wholeTick(record.concludedTick) ?? tick;
-    if (tick - closedAt < PEACE_TERMS_TUNING.PEACE_MINT_WINDOW) continue;
+    const holds = live.has(key) || tick - closedAt < PEACE_TERMS_TUNING.PEACE_MINT_WINDOW;
+    // Nothing learned and nothing ready ⇒ no ledger churn, which is what keeps a quiet
+    // tick free of bytes it did not earn.
+    if (holds && died === (fact.loserDied === true)) continue;
     // Sealed with what it has. An absence stays typed and absent — a channel the
     // estate never produced is never invented to fill a field.
-    next[key] = { ...record, sealed: true };
+    next[key] = {
+      ...record,
+      ...(died ? { fact: { ...fact, loserDied: true } } : {}),
+      ...(holds ? {} : { sealed: true }),
+    };
     changed = true;
   }
 
