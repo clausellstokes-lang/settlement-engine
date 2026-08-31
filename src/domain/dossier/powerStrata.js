@@ -224,3 +224,119 @@ export function groupRelationships(relationships) {
   }
   return groups;
 }
+
+// ── §815 — THE RULING CHAIN: power → faction → named NPC ─────────────────────
+
+/**
+ * The finite ruler-role vocabulary is npcAgency's NPC_ROLE_ARCHETYPES — the ONE
+ * spelling of what a ruler-titled NPC looks like (inferRoleArchetype's own
+ * table). Imported rather than re-listed so the display chain can never drift
+ * from the agency layer's classification. (powerStrata's only consumer is the
+ * lazy Power tab chunk, so the worldPulse import costs no first-paint bytes.)
+ */
+import { NPC_ROLE_ARCHETYPES } from '../worldPulse/npcAgency.js';
+import { npcInFaction } from '../worldPulse/npcLadderState.js';
+import { hasLadder, ladderRungsOf, ladderFactionKeyOf } from '../townMap/ladderRead.js';
+
+/** Does this NPC's text read as a RULER (the agency layer's own labels)?
+ *  Reads name/role/title only — the generator writes no npc `label`, and the
+ *  observed-shape ratchet holds this file to reads the corpus can ground. */
+function isRulerTitled(npc) {
+  const text = `${npc?.name || ''} ${npc?.role || ''} ${npc?.title || ''}`.toLowerCase();
+  return (NPC_ROLE_ARCHETYPES.ruler?.labels || []).some((label) => text.includes(label));
+}
+
+/**
+ * §815 — the full RULING CHAIN, three links of one answer ("Who runs this
+ * place?"), with HONEST ABSENCE at each link:
+ *
+ *   power   — the governing POWER (the seat): the ruler entry of THE POWERS
+ *             stratum + the settlement's government body. Null when no seat
+ *             stands in the data (the chain then starts at its first honest
+ *             absence).
+ *   faction — the governing faction (governingFactionOf), with the
+ *             missing-seat state surfaced (derived from the succession_void
+ *             stressor's claimant blocs — see the signal note in the body).
+ *   npc     — the named ruling NPC, resolved in the estate's own order:
+ *             (1) the governing faction's TOP LADDER RUNG — warSeatBooks'
+ *                 rulingSeatId convention (simulation-backed; tick-gated);
+ *             (2) a ruler-titled roster NPC (NPC_ROLE_ARCHETYPES.ruler labels),
+ *                 preferring one seated IN the governing faction (npcInFaction),
+ *                 falling back to a settlement-wide unique ruler title.
+ *             NEVER a merely-senior member: showing seniority as rulership
+ *             would paper over the §810.3 seat-floor gap the view must record
+ *             instead (the warSeatBooks law — no NPC identity is invented).
+ *   absence — when npc is null: a MISSING-SEAT story when the vacancy is the
+ *             stressor's (the seat stands empty; claimants circle — read from
+ *             the claimant blocs the stressor injects), else the honest
+ *             pre-density line (§810.3 R12/R15 are not yet generation law;
+ *             TE-DENSITY-1 is censusing the gap).
+ *
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @returns {{
+ *   power: { name: string, archetype: string, powerLabel: string, government: string | null } | null,
+ *   faction: { name: string, power: number, powerLabel: string, vacant: boolean } | null,
+ *   npc: { name: string, role: string, via: 'ladder' | 'roster' } | null,
+ *   absence: { kind: 'missing_seat' | 'unrecorded', claimants: string[], line: string } | null,
+ * }}
+ */
+export function rulingChainOf(settlement) {
+  const ps = settlement?.powerStructure || {};
+  const factions = Array.isArray(ps.factions) ? ps.factions : [];
+  const governing = /** @type {StrataFaction | null} */ (governingFactionOf(settlement));
+  const government = typeof ps.government === 'string' && ps.government ? ps.government : null;
+
+  const power = governing
+    ? { name: nameOf(governing), archetype: factionArchetype(governing), powerLabel: governing.powerLabel || '', government }
+    : null;
+  // THE MISSING-SEAT SIGNAL: the succession_void stressor ALWAYS injects its
+  // claimant blocs ('Claimant …' in the generator's own naming, both branches),
+  // alongside the governing faction's 'vacant' modifier — so claimant-presence
+  // is the same generation-time predicate, read through nameOf alone (the
+  // observed-shape ratchet holds this file to corpus-groundable reads; the
+  // `modifiers` marker has a writer the corpus never exercises). When R13's
+  // typed missing-seat stressor family lands, the view keys on THAT — the gap
+  // is recorded for TE-DENSITY-1, not papered over here.
+  const claimants = factions.map((f) => nameOf(f)).filter((n) => /claimant/i.test(n));
+  const vacant = claimants.length > 0;
+  const faction = governing
+    ? { name: nameOf(governing), power: num(governing.power), powerLabel: governing.powerLabel || '', vacant }
+    : null;
+
+  // (1) The ladder-backed ruler — the governing faction's top rung.
+  let npc = null;
+  if (governing && hasLadder(settlement)) {
+    const rungs = ladderRungsOf(settlement, ladderFactionKeyOf(governing));
+    if (rungs.length > 0 && !vacant) {
+      npc = { name: rungs[0].name, role: 'first of the governing house', via: /** @type {'ladder'} */ ('ladder') };
+    }
+  }
+  // (2) A ruler-titled roster NPC (generation-time; never merely-senior).
+  if (!npc && governing && !vacant) {
+    const roster = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+    const rulers = roster.filter((n) => n && !n.ousted && isRulerTitled(n));
+    const fkey = ladderFactionKeyOf(governing);
+    const seated = rulers.find((n) => npcInFaction(n, governing, fkey, factions));
+    const chosen = seated || (rulers.length === 1 ? rulers[0] : null);
+    if (chosen) {
+      npc = { name: String(chosen.name || ''), role: String(chosen.role || chosen.title || 'ruler'), via: /** @type {'roster'} */ ('roster') };
+    }
+  }
+
+  // (3) Honest absence — the stressor's story, or the pre-density truth.
+  let absence = null;
+  if (!npc) {
+    if (vacant) {
+      const line = `The seat stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`} — ${claimants.join(', ')}.`;
+      absence = { kind: /** @type {'missing_seat'} */ ('missing_seat'), claimants, line };
+    } else if (governing) {
+      absence = {
+        kind: /** @type {'unrecorded'} */ ('unrecorded'),
+        claimants: [],
+        line: 'No named seat-holder stands in the record — the chain ends, honestly, at the faction.',
+      };
+    }
+  }
+
+  return { power, faction, npc, absence };
+}

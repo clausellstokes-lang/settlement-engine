@@ -102,3 +102,80 @@ describe('PowerTab — the institution-support web (on THE POWERS card)', () => 
     expect(within(detail).getByText(SUPPORT_BASIS.founded)).toBeTruthy();
   });
 });
+
+// ── §815 — THE RULING CHAIN: power → faction → named NPC, honest absence ─────
+describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
+  const base = () => ({
+    id: 'settlement.chainburg',
+    name: 'Chainburg',
+    powerStructure: {
+      government: 'Town Council',
+      factions: [
+        { faction: 'Merchant Guild', power: 55, powerLabel: 'Dominant', category: 'economy', isGoverning: true },
+        { faction: 'The Watch', power: 30, category: 'military' },
+      ],
+    },
+    npcs: [],
+  });
+
+  it('renders all three links when a ruler-titled NPC sits in the governing faction', () => {
+    const s = base();
+    s.npcs = [
+      { id: 'n1', name: 'Aldric Vane', role: 'Guildmaster Mayor', factionAffiliation: 'Merchant Guild' },
+      { id: 'n2', name: 'Plain Member', role: 'Clerk', factionAffiliation: 'Merchant Guild' },
+    ];
+    render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    const chain = screen.getByTestId('ruling-chain');
+    expect(chain.textContent).toContain('Who runs this place?');
+    expect(chain.textContent).toContain('Merchant Guild');
+    expect(chain.textContent).toContain('Town Council');
+    expect(screen.getByTestId('ruling-chain-npc').textContent).toBe('Aldric Vane');
+    expect(screen.queryByTestId('ruling-chain-absence')).toBeNull();
+  });
+
+  it('NEVER shows a merely-senior member as the seat — the chain ends honestly at the faction', () => {
+    const s = base();
+    s.npcs = [{ id: 'n2', name: 'Plain Member', role: 'Senior Clerk', factionAffiliation: 'Merchant Guild', importance: 9 }];
+    render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    expect(screen.queryByTestId('ruling-chain-npc')).toBeNull();
+    const absence = screen.getByTestId('ruling-chain-absence');
+    expect(absence.textContent).toMatch(/No named seat-holder stands in the record/);
+    expect(screen.getByTestId('ruling-chain').textContent).not.toContain('Plain Member');
+  });
+
+  it('a live missing-seat stressor reads AS the stressor story — the seat stands empty; claimants circle', () => {
+    const s = base();
+    s.powerStructure.factions[0].modifiers = ['vacant'];
+    s.powerStructure.factions.push(
+      { faction: 'Claimant Bloc A', power: 18, desc: 'Legal claim.' },
+      { faction: 'Claimant Bloc B', power: 15, desc: 'Popular claim.' },
+    );
+    // Even a ruler-titled NPC does not fill a VACANT seat — the stressor owns it.
+    s.npcs = [{ id: 'n1', name: 'Old Mayor', role: 'Mayor (deposed)', factionAffiliation: 'Merchant Guild' }];
+    render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    const absence = screen.getByTestId('ruling-chain-absence');
+    expect(absence.textContent).toMatch(/The seat stands empty; 2 claimants circle — Claimant Bloc A, Claimant Bloc B\./);
+    expect(screen.getByTestId('ruling-chain').textContent).toMatch(/the seat itself stands vacant/);
+    expect(screen.queryByTestId('ruling-chain-npc')).toBeNull();
+  });
+
+  it('a ladder-lit world resolves the seat from the governing faction top rung (warSeatBooks convention)', () => {
+    const s = base();
+    s.npcLadder = {
+      factions: {
+        // The mirror key is ladderFactionKeyOf's own spelling: `fac.` + slug.
+        'fac.merchant_guild': { rungs: [{ npcId: 'x1', name: 'Serena Copperlane', standing: 0.9 }, { npcId: 'x2', name: 'Under Clerk', standing: 0.4 }] },
+      },
+    };
+    render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    expect(screen.getByTestId('ruling-chain-npc').textContent).toBe('Serena Copperlane');
+  });
+
+  it('a pre-density settlement with no NPCs renders the chain as far as the data goes', () => {
+    const s = base();
+    render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    const chain = screen.getByTestId('ruling-chain');
+    expect(chain.textContent).toContain('Merchant Guild');
+    expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/ends, honestly, at the faction/);
+  });
+});

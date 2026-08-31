@@ -7,6 +7,64 @@ import { useStore } from '../../../store/index.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } from '../../../domain/townMap/ladderRead.js';
 import { PowerStrata } from './power/PowerStrata.jsx';
+import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
+
+/** §815 — one row of the ruling chain: a small uppercase link label + the answer. */
+function ChainRow({ label, children }) {
+  return (
+    <div style={{display:'flex',alignItems:'baseline',gap:10}}>
+      <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.07em',flex:'0 0 72px'}}>{label}</span>
+      <span style={{fontSize:FS.sm,color:swatch.inkMag,lineHeight:1.5,minWidth:0}}>{children}</span>
+    </div>
+  );
+}
+
+/** §815 — the full RULING CHAIN: power → faction → named NPC, three legible
+ *  rows of one answer ("Who runs this place?"), honest absence at each link. */
+function RulingChainBlock({ settlement }) {
+  const chain = rulingChainOf(settlement);
+  if (!chain.power && !chain.faction) return null;
+  const missingSeat = chain.absence?.kind === 'missing_seat';
+  return (
+    <div data-testid="ruling-chain" style={{
+      background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`,
+      borderLeft: `4px solid ${missingSeat ? swatch['#8B1A1A'] : swatch['#A0762A']}`,
+      padding: '12px 16px', marginBottom: 14, display: 'flex', flexDirection: 'column', gap: 6,
+    }}>
+      <div style={{fontSize:FS.xxs,fontWeight:800,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.07em'}}>
+        Who runs this place?
+      </div>
+      {chain.power && (
+        <ChainRow label="The power">
+          <strong>{chain.power.name}</strong>
+          {chain.power.powerLabel ? ` — ${chain.power.powerLabel.toLowerCase()}` : ''}
+          {chain.power.government && chain.power.government !== chain.power.name
+            ? <span style={{color:MUTED}}>{` · rule is carried by ${chain.power.government}`}</span> : ''}
+        </ChainRow>
+      )}
+      {chain.faction && (
+        <ChainRow label="The faction">
+          <strong>{chain.faction.name}</strong>
+          {` holds the governing seat`}
+          {chain.faction.vacant && <span style={{color:swatch['#8B1A1A'],fontWeight:700}}>{' — the seat itself stands vacant'}</span>}.
+        </ChainRow>
+      )}
+      {chain.npc && (
+        <ChainRow label="The seat">
+          <strong data-testid="ruling-chain-npc">{chain.npc.name}</strong>
+          <span style={{color:MUTED}}>{` — ${chain.npc.role}`}</span>
+        </ChainRow>
+      )}
+      {chain.absence && (
+        <ChainRow label="The seat">
+          <span data-testid="ruling-chain-absence" style={{color: missingSeat ? swatch['#8B1A1A'] : MUTED, fontStyle:'italic'}}>
+            {chain.absence.line}
+          </span>
+        </ChainRow>
+      )}
+    </div>
+  );
+}
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
@@ -62,6 +120,9 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
     <div style={{paddingBottom:16}}>
       <TabIntro tabKey="power" />
       <NarrativeNote note={narrativeNote} />
+
+      {/* ── §815 — THE RULING CHAIN (the one answer, first) ──────────────── */}
+      <RulingChainBlock settlement={s} />
 
       {/* ── PUBLIC LEGITIMACY BANNER ──────────────────────────────────────── */}
       {leg && (
