@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e3c1183f7a3fbc633fedfd0092c9e928cf20441a",
-  "measuredBy": "T3 SEAT-A2 (SEAT-2a primacy axis)",
+  "measuredAtSha": "3a61206d584fde072d980187291139b015c6758b",
+  "measuredBy": "T3 SEAT-A2 (SEAT-2b fifth adj)",
   "date": "2026-08-31",
-  "note": "SEAT-2a added tests/domain/foreignPrimacyAxis.test.js — the D2 primacy axis register, its emitter-reachability scan and the vassal-vs-occupier discrimination",
-  "files": 2434,
+  "note": "SEAT-2b added tests/domain/foreignSeatCoupAdj.test.js — D4 SUCCESS, the fifth pHold term and the declared adj budget",
+  "files": 2435,
   "parked": 367,
-  "credited": 2067,
-  "titles": 20732,
-  "suiteTitles": 5709
+  "credited": 2068,
+  "titles": 20742,
+  "suiteTitles": 5712
 }
