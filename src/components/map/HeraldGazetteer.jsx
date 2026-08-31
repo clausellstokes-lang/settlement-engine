@@ -32,6 +32,7 @@ import { viewerSeesDmSecrets } from '../../domain/display/viewerSecrets.js';
 import { gazetteerRows } from './heraldRegister.js';
 import { isCalmThreat, threatDisplay } from './settlementThreat.js';
 import { canShowOnMap, showSettlementOnMap } from './showOnMap.js';
+import RealmComparisons from './RealmComparisons.jsx';
 import { Pill, Section } from './WorldPulsePrimitives.jsx';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 import Button from '../primitives/Button.jsx';
@@ -212,17 +213,25 @@ export default function HeraldGazetteer({ campaign, saves = [] }) {
     <div data-testid="herald-gazetteer" style={{ display: 'grid', gap: SP.sm }}>
       <Section heading="The realm at large" count={rows.length}>
         {rows.length > 0 && (
-          <div role="group" aria-label="Register or table view" style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
+          <div role="group" aria-label="Register, table, or compared view" style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
             <Button variant={view === 'register' ? 'gold' : 'secondary'} size="sm" aria-pressed={view === 'register'}
               data-testid="gazetteer-view-register" onClick={() => setView('register')}>Register</Button>
             <Button variant={view === 'table' ? 'gold' : 'secondary'} size="sm" aria-pressed={view === 'table'}
               data-testid="gazetteer-view-table" onClick={() => setView('table')}>Table</Button>
+            <Button variant={view === 'compared' ? 'gold' : 'secondary'} size="sm" aria-pressed={view === 'compared'}
+              data-testid="gazetteer-view-compared" onClick={() => setView('compared')}>Compared</Button>
           </div>
         )}
         {rows.length === 0 ? (
           <EmptyRegister />
         ) : view === 'table' ? (
           <GazetteerTable rows={rows} seesSecrets={seesSecrets} />
+        ) : view === 'compared' ? (
+          <RealmComparisons
+            rows={rows}
+            worldState={campaign?.worldState || null}
+            nameFor={(id) => rows.find(r => String(r.id) === String(id))?.name || String(id)}
+          />
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {rows.map(row => (

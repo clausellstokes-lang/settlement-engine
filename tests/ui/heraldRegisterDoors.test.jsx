@@ -374,3 +374,59 @@ describe('DESK-1 — register⇄table toggle over the ONE deriver', () => {
     expect(table.textContent).not.toContain('8200');
   });
 });
+
+// ── DESK-3 — the authored comparison charts (the Compared view) ──────────────
+describe('DESK-3 — one question, one picture, from the register rows', () => {
+  const ELMWOOD2 = {
+    id: 'elmwood',
+    name: 'Elmwood',
+    settlement: {
+      id: 'elmwood', name: 'Elmwood', tier: 'city', population: 8200,
+      economicState: { prosperity: 'Struggling' }, config: { tier: 'city' },
+    },
+  };
+  const C_SAVES = [ASHFORD, ELMWOOD2];
+  const C_CAMPAIGN = {
+    id: 'c-cmp', settlementIds: ['ashford', 'elmwood'],
+    worldState: { tick: 7, warExhaustion: { ashford: 0.5 } },
+  };
+
+  beforeEach(() => {
+    storeState.mapState = { placements: {} };
+    storeState.setHoveredSettlementId = vi.fn();
+    storeState.clearHoveredSettlementId = vi.fn();
+  });
+
+  test('the Compared view answers the tier question as bar + SENTENCE, DM numeric riding the deriver own gate', () => {
+    render(<HeraldGazetteer campaign={C_CAMPAIGN} saves={C_SAVES} />);
+    fireEvent.click(screen.getByTestId('gazetteer-view-compared'));
+    const block = screen.getByTestId('realm-comparisons');
+    const tierRows = screen.getAllByTestId('comparison-tier-row');
+    expect(tierRows.length).toBe(2); // town + city
+    // The sentence IS the label: count + war split + the DM population total
+    // (the rows carry population — a proven owner session).
+    expect(tierRows[0].getAttribute('aria-label')).toMatch(/1 town — 1 at peace · 1200 folk\./);
+    // Prosperity + exhaustion questions render from the same rows/ledgers.
+    expect(screen.getAllByTestId('comparison-prosperity-row').length).toBe(2);
+    expect(screen.getAllByTestId('comparison-exhaustion-row')[0].getAttribute('aria-label')).toMatch(/Ashford stands war-weary\./);
+    expect(block.textContent).toContain('Each picture answers one question');
+  });
+
+  test('an unproven session gets counts and words only — no population numeric anywhere in the pictures', () => {
+    storeState.auth = { user: null };
+    render(<HeraldGazetteer campaign={C_CAMPAIGN} saves={C_SAVES} />);
+    fireEvent.click(screen.getByTestId('gazetteer-view-compared'));
+    const block = screen.getByTestId('realm-comparisons');
+    expect(block.textContent).not.toMatch(/folk/);
+    expect(block.textContent).not.toContain('1200');
+    expect(block.textContent).not.toContain('8200');
+  });
+
+  test('a dormant exhaustion ledger asks NO exhaustion question (never a fabricated zero row)', () => {
+    render(<HeraldGazetteer campaign={{ ...C_CAMPAIGN, worldState: { tick: 7 } }} saves={C_SAVES} />);
+    fireEvent.click(screen.getByTestId('gazetteer-view-compared'));
+    expect(screen.getByTestId('realm-comparisons')).toBeTruthy();
+    expect(screen.queryAllByTestId('comparison-exhaustion-row').length).toBe(0);
+    expect(screen.getByTestId('realm-comparisons').textContent).not.toContain('How worn the realm is');
+  });
+});
