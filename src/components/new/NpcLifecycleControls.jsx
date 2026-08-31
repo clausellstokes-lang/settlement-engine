@@ -2,7 +2,8 @@ import { FS, MUTED, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
 import {
-  NPC_ALIGNMENTS, NPC_TEMPERAMENTS, NPC_ROLE_ARCHETYPES, NPC_GOALS, npcFacetOf,
+  NPC_ALIGNMENTS, NPC_ALIGNMENT_LABELS, NPC_TEMPERAMENTS, NPC_ROLE_ARCHETYPES,
+  NPC_GOALS, npcFacetOf,
 } from '../../domain/npc/npcBank.js';
 import { STASIS_REASONS } from '../../domain/npc/npcOps.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -50,6 +51,20 @@ const STASIS_LABELS = Object.freeze({
 export function humanizeNpcFacet(value) {
   const words = String(value || '').replace(/[_-]+/g, ' ').trim();
   return words ? words.charAt(0).toUpperCase() + words.slice(1) : '';
+}
+
+/**
+ * The reader's words for ONE facet value. Alignment is the exception the general
+ * humanizer cannot serve: its symbols are a nine-cell rulebook grid whose
+ * spelling three parsers depend on (npcFacetContract's NPC_ALIGNMENT_LABELS
+ * carries the whole rule), so the reader gets the LABEL and the stored token
+ * keeps its shape. Every other facet humanizes straight through.
+ *
+ * @param {string} kind @param {string} value
+ */
+export function facetOptionLabel(kind, value) {
+  if (kind === 'alignment' && NPC_ALIGNMENT_LABELS[value]) return NPC_ALIGNMENT_LABELS[value];
+  return humanizeNpcFacet(value);
 }
 
 export function hasNpcLifecycleAction(npc) {
@@ -159,7 +174,7 @@ export default function NpcLifecycleControls({
                   <option value="">No change</option>
                   {vocab.map(value => (
                     <option key={value} value={value}>
-                      {humanizeNpcFacet(value)}
+                      {facetOptionLabel(kind, value)}
                     </option>
                   ))}
                 </select>

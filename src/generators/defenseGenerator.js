@@ -181,7 +181,7 @@ const computeDefenseScores = (
     if (hasInst('wizard\'s tower')) military += 5; // visible high-level fortification
     if (hasArcaneGuild)             military += 8; // organised coordinated magic defense
   }
-  // Divine martial blessing (Bless spell, Crusader morale)
+  // Divine martial blessing (a battle blessing, crusading morale)
   if (hasDivineStrong && relPri >= 70) military += 6;
 
   const hasAnyDefense = inst.hasWalls || inst.hasGarrison || inst.hasMilitia ||
@@ -246,9 +246,9 @@ const computeDefenseScores = (
   if (inst.hasMilitia)      internal +=  8;
   if (inst.hasCharterHall)  internal +=  5;
 
-  // Arcane surveillance (Scrying, Detect Thoughts)
+  // Arcane surveillance (scrying, thought-reading)
   if (hasArcane && magPri >= 50) internal += Math.min(8, Math.round((magPri - 50) * 0.16));
-  // Divine social cohesion (Zone of Truth, sanctuary, confessional intelligence)
+  // Divine social cohesion (compelled truth, sanctuary, confessional intelligence)
   if (hasDivine && relPri >= 60) internal += Math.min(10, Math.round((relPri - 60) * 0.25));
 
   const hasLawInfra = inst.hasCourtSystem || inst.hasPrison || inst.hasGarrison || inst.hasWatch;
@@ -374,7 +374,7 @@ const computeDefenseScores = (
       milPenalty  = Math.round(milPenalty  * 0.5); // -10 → -5
       monsterPenalty = Math.round(monsterPenalty * 0.5); // wardens keep patrols fed
     }
-    // Divine: Create Food and Water, Bless crops. A mitigation CAPS the
+    // Divine: food and water conjured, crops blessed. A mitigation CAPS the
     // penalty — Math.min, never Math.max: the old Math.max form WORSENED the
     // score whenever the druid branch had already reduced the penalty below
     // the divine cap (stacking two mitigations must not out-penalize one).
@@ -382,7 +382,7 @@ const computeDefenseScores = (
       econPenalty = Math.min(econPenalty, Math.round(20 * 0.6)); // -20 → -12 (caps)
       milPenalty  = Math.min(milPenalty,  Math.round(10 * 0.6)); // -10 → -6 (caps)
     }
-    // Arcane: minor Goodberry, Plant Growth
+    // Arcane: minor conjured forage, quickened growth
     if (hasArcane && magPri >= 50)
       econPenalty = Math.min(econPenalty, Math.round(20 * 0.75)); // -20 → -15 (caps)
     // Alchemy: preservation extends existing stores
