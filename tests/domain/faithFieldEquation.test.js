@@ -403,17 +403,25 @@ describe('THE DORMANCY GUARANTEE — exactly 0 and exactly 1, on every path to a
     ['a pantheon that authors no boon or bane', state([member({ share: 100 })])],
   ];
 
-  test.each(ABSENCES)('%s ⇒ every channel EXACTLY 0 and every multiplier EXACTLY 1', (unused, religionState) => {
-    const field = faithFieldOf(BARE, /** @type {any} */ (religionState));
-    for (const ch of FAITH_CHANNELS) {
-      // `toBe` and not `toBeCloseTo`: the claim is that a legacy world cannot
-      // observe the feature because there is NOTHING to observe, not because a
-      // small number rounded away. A 1e-17 here would falsify the whole landing.
-      expect(field.channels[ch]).toBe(0);
-      expect(field.mults[ch]).toBe(1);
-      expect(faithChannelMult(BARE, /** @type {any} */ (religionState), ch)).toBe(1);
+  // ⚠ A PLAIN LOOP RATHER THAN `test.each(ABSENCES)`, AND DELIBERATELY SO. The
+  // lighting census PARKS a file whose `each` table is a named binding it cannot
+  // statically prove (`TEST_TABLE_UNPROVEN`), and a parked file contributes no
+  // credited titles — the census can no longer vouch that these assertions run at
+  // all. Every row carries its label in the assertion message instead, so a failure
+  // still names which absence broke.
+  test('every path to absence ⇒ every channel EXACTLY 0 and every multiplier EXACTLY 1', () => {
+    for (const [label, religionState] of ABSENCES) {
+      const field = faithFieldOf(BARE, /** @type {any} */ (religionState));
+      for (const ch of FAITH_CHANNELS) {
+        // `toBe` and not `toBeCloseTo`: the claim is that a legacy world cannot
+        // observe the feature because there is NOTHING to observe, not because a
+        // small number rounded away. A 1e-17 here would falsify the whole landing.
+        expect(field.channels[ch], `${label} · ${ch} total`).toBe(0);
+        expect(field.mults[ch], `${label} · ${ch} mult`).toBe(1);
+        expect(faithChannelMult(BARE, /** @type {any} */ (religionState), ch), `${label} · ${ch} reader`).toBe(1);
+      }
+      expect(field.contributors, `${label} · contributors`).toEqual([]);
     }
-    expect(field.contributors).toEqual([]);
   });
 
   test('a settlement that is null or undefined is dormant rather than a throw', () => {
