@@ -36,14 +36,14 @@
  "digests": {
   "corpusMeta": "ef19224c20401a94c9b20611ff65e607bfaa5b345b3ec88eaa40b220e5e915bb",
   "inventory": "406bf97109dcd7674cfcee9d6fac75ec2de30a1bb7307c6e029306c36b268a1a",
-  "manifests": "2f610db1c6335996909ff84b20e0cded81febc30271c5a06ff71c39e543ca2b4",
+  "manifests": "b87b18198ecf43a2e53e48b4a22146660d9ab4a73e877f963d0b2ca38f587e77",
   "migrationReview": "d7ac137e83256cf03b5c8be7ad98356c9905d92dcf76b3aa9247e7ea9ef000be",
   "rowTags": "83b81cb1b20f039715385d514b40459728d8071c61e1e8ff7627a9375cebf49a",
-  "scanStats": "5951c3ca1a104dcbd80636478703fe7cdb70dae46128d20a298a17fb9bf4a4ba",
-  "sentinel": "3198a3591f59e38deb0f27c0182d9a8cc1f1edfe6637b4e5d0667a3c15792227"
+  "scanStats": "7ee682eb192ca9e6132230b4c610d42b0fdd533d0d7d2b89ce172925790eeca1",
+  "sentinel": "fa9020ed6771e3bfb3945c1e6eeb8d26162f2f2d27579449e3ed1d261e33492d"
  },
  "frozen": "2026-08-31",
- "frozenAtSha": "b657208d61c7a78a2f97f1dea3cd40e36a7baabc",
+ "frozenAtSha": "bb920f17acb445368fff2cbe18eb10fd7ce93eaa",
  "identities": 1413,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2324,7 +2324,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "599c1a18c9d34452b085aced6cb88f6934ed1232c7187fb60d4f0135d1e4b180",
+   "digest": "385b8b405124e756cad2c12765a1c1747c94b22a7e6d1c8cccef3ed1b40b1fb0",
    "entries": [
     {
      "mode": "100644",
@@ -7264,8 +7264,8 @@
     {
      "mode": "100644",
      "path": "src/domain/causalState.js",
-     "sha256": "f82216e00dbdebc801f43bebbbee11c28cbb66a40ecbd21af5cfdcdd8e8396dc",
-     "size": 70239,
+     "sha256": "5a7771c514720d554eda445e92725f06b3c54163b2b438ee19efc29f9fb68627",
+     "size": 77117,
      "type": "file"
     },
     {
@@ -7670,8 +7670,8 @@
     {
      "mode": "100644",
      "path": "src/domain/content/customContentManifest.generated.js",
-     "sha256": "f7949f4ca698d4eeea74c3d0df4dc6509521e44ac742e1788dc0bc57f38cc212",
-     "size": 69227,
+     "sha256": "28fb5a0dacb4d4ccbbb0aec6beac815b6a1cd1dbbb00c8b8decbb35ae05b6459",
+     "size": 71997,
      "type": "file"
     },
     {
@@ -11345,8 +11345,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/dispositionProfile.js",
-     "sha256": "21c0086e070f2d9e6ba34937108947165e74290ef5ce0c6def2122eaced4e823",
-     "size": 6682,
+     "sha256": "01b121cfb44f41a53e2fe5e8fa78e4d713218181597bac95bef319814b1d78c5",
+     "size": 10820,
      "type": "file"
     },
     {
@@ -11659,6 +11659,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/faithField.js",
+     "sha256": "86efa0189e1a8534fc8a7669fb91c6e43f180d9ad9a77ad6776421c42fa39cf1",
+     "size": 31313,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/faithNews.js",
      "sha256": "b704913f95ca64f930cfc3ea2af3af11407f8d3faf6e6b510435992490675be0",
      "size": 12226,
@@ -11669,6 +11676,13 @@
      "path": "src/domain/worldPulse/faithReceiptPools.js",
      "sha256": "5a593f846331ddefcfc82efd82a1bb927b032bcf528cfc565116aa17c72b3771",
      "size": 4385,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/faithWitnessSource.js",
+     "sha256": "b155fcddbbfc7fb110b64e8518764d39211cd531ce834e48492a6f8dc2c8451f",
+     "size": 13807,
      "type": "file"
     },
     {
@@ -12752,8 +12766,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/religionState.js",
-     "sha256": "2c263270f6ede99e0771b19b824578c119c3200fdcefbdf6f135360b50d383d2",
-     "size": 48614,
+     "sha256": "fc1daa8d2af6c49897f55c5506d3ba50097e37f507cac71dc29270b0f052ee1a",
+     "size": 52988,
      "type": "file"
     },
     {
@@ -17009,7 +17023,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "43dc99e1f1b80af868df55ad597a7eef7b4ef3afba54673b9db8d17f57ad01f8",
+   "digest": "bca436fa3918382a2395de38cb2c17e8061252c8c9137a789a7a2c68474bad73",
    "entries": [
     {
      "mode": "100644",
@@ -21816,8 +21830,8 @@
     {
      "mode": "100644",
      "path": "src/domain/causalState.js",
-     "sha256": "f82216e00dbdebc801f43bebbbee11c28cbb66a40ecbd21af5cfdcdd8e8396dc",
-     "size": 70239,
+     "sha256": "5a7771c514720d554eda445e92725f06b3c54163b2b438ee19efc29f9fb68627",
+     "size": 77117,
      "type": "file"
     },
     {
@@ -25869,8 +25883,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/dispositionProfile.js",
-     "sha256": "21c0086e070f2d9e6ba34937108947165e74290ef5ce0c6def2122eaced4e823",
-     "size": 6682,
+     "sha256": "01b121cfb44f41a53e2fe5e8fa78e4d713218181597bac95bef319814b1d78c5",
+     "size": 10820,
      "type": "file"
     },
     {
@@ -26183,6 +26197,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/faithField.js",
+     "sha256": "86efa0189e1a8534fc8a7669fb91c6e43f180d9ad9a77ad6776421c42fa39cf1",
+     "size": 31313,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/faithNews.js",
      "sha256": "b704913f95ca64f930cfc3ea2af3af11407f8d3faf6e6b510435992490675be0",
      "size": 12226,
@@ -26193,6 +26214,13 @@
      "path": "src/domain/worldPulse/faithReceiptPools.js",
      "sha256": "5a593f846331ddefcfc82efd82a1bb927b032bcf528cfc565116aa17c72b3771",
      "size": 4385,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/faithWitnessSource.js",
+     "sha256": "b155fcddbbfc7fb110b64e8518764d39211cd531ce834e48492a6f8dc2c8451f",
+     "size": 13807,
      "type": "file"
     },
     {
@@ -27276,8 +27304,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/religionState.js",
-     "sha256": "2c263270f6ede99e0771b19b824578c119c3200fdcefbdf6f135360b50d383d2",
-     "size": 48614,
+     "sha256": "fc1daa8d2af6c49897f55c5506d3ba50097e37f507cac71dc29270b0f052ee1a",
+     "size": 52988,
      "type": "file"
     },
     {
@@ -31526,7 +31554,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "4272661f3835dc6729d5f1e3ee3c2cb7968d4b0c3e92a743dec75a9ff235673f",
+   "digest": "5dbce8fbe06bc8b55eff2a2d568bca34a60e8f39535b29267df48641cba249ab",
    "entries": [
     {
      "mode": "100644",
@@ -36396,8 +36424,8 @@
     {
      "mode": "100644",
      "path": "src/domain/causalState.js",
-     "sha256": "f82216e00dbdebc801f43bebbbee11c28cbb66a40ecbd21af5cfdcdd8e8396dc",
-     "size": 70239,
+     "sha256": "5a7771c514720d554eda445e92725f06b3c54163b2b438ee19efc29f9fb68627",
+     "size": 77117,
      "type": "file"
     },
     {
@@ -36802,8 +36830,8 @@
     {
      "mode": "100644",
      "path": "src/domain/content/customContentManifest.generated.js",
-     "sha256": "f7949f4ca698d4eeea74c3d0df4dc6509521e44ac742e1788dc0bc57f38cc212",
-     "size": 69227,
+     "sha256": "28fb5a0dacb4d4ccbbb0aec6beac815b6a1cd1dbbb00c8b8decbb35ae05b6459",
+     "size": 71997,
      "type": "file"
     },
     {
@@ -40477,8 +40505,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/dispositionProfile.js",
-     "sha256": "21c0086e070f2d9e6ba34937108947165e74290ef5ce0c6def2122eaced4e823",
-     "size": 6682,
+     "sha256": "01b121cfb44f41a53e2fe5e8fa78e4d713218181597bac95bef319814b1d78c5",
+     "size": 10820,
      "type": "file"
     },
     {
@@ -40791,6 +40819,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/worldPulse/faithField.js",
+     "sha256": "86efa0189e1a8534fc8a7669fb91c6e43f180d9ad9a77ad6776421c42fa39cf1",
+     "size": 31313,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/worldPulse/faithNews.js",
      "sha256": "b704913f95ca64f930cfc3ea2af3af11407f8d3faf6e6b510435992490675be0",
      "size": 12226,
@@ -40801,6 +40836,13 @@
      "path": "src/domain/worldPulse/faithReceiptPools.js",
      "sha256": "5a593f846331ddefcfc82efd82a1bb927b032bcf528cfc565116aa17c72b3771",
      "size": 4385,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/worldPulse/faithWitnessSource.js",
+     "sha256": "b155fcddbbfc7fb110b64e8518764d39211cd531ce834e48492a6f8dc2c8451f",
+     "size": 13807,
      "type": "file"
     },
     {
@@ -41884,8 +41926,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/religionState.js",
-     "sha256": "2c263270f6ede99e0771b19b824578c119c3200fdcefbdf6f135360b50d383d2",
-     "size": 48614,
+     "sha256": "fc1daa8d2af6c49897f55c5506d3ba50097e37f507cac71dc29270b0f052ee1a",
+     "size": 52988,
      "type": "file"
     },
     {
@@ -46412,21 +46454,21 @@
   }
  },
  "scanStats": {
-  "files": 2073,
-  "reads": 119601,
-  "resolved": 9354,
-  "unresolved": 110247
+  "files": 2075,
+  "reads": 119667,
+  "resolved": 9356,
+  "unresolved": 110311
  },
  "scannerProvenance": {
   "detectorDigest": "fa8af30282cc0476bd3311c0e83e4acba685a1a0592e391b5df2762cd02328be",
-  "executionTreeDigest": "599c1a18c9d34452b085aced6cb88f6934ed1232c7187fb60d4f0135d1e4b180",
-  "scanTreeDigest": "43dc99e1f1b80af868df55ad597a7eef7b4ef3afba54673b9db8d17f57ad01f8",
-  "sourceTreeDigest": "4272661f3835dc6729d5f1e3ee3c2cb7968d4b0c3e92a743dec75a9ff235673f",
-  "unscannedInputDigest": "0191dd0e604c2b90f40575da370bf6ef42f3e4ab082ade58584b8c13298c3897"
+  "executionTreeDigest": "385b8b405124e756cad2c12765a1c1747c94b22a7e6d1c8cccef3ed1b40b1fb0",
+  "scanTreeDigest": "bca436fa3918382a2395de38cb2c17e8061252c8c9137a789a7a2c68474bad73",
+  "sourceTreeDigest": "5dbce8fbe06bc8b55eff2a2d568bca34a60e8f39535b29267df48641cba249ab",
+  "unscannedInputDigest": "a1c1c9143b3c5a6a1f3b8fce972bff455dcd87c7717602f8bfbf904ce6d4ef32"
  },
  "schema": 13,
  "sentinel": {
-  "resolvedReads": 9354,
+  "resolvedReads": 9356,
   "totalKeys": 6611,
   "usableShapes": 338
  },
