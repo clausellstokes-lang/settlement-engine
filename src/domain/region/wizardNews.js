@@ -92,6 +92,9 @@ const MAX_ENTRIES = 240;
  * @property {string[]} [termSheetIds] Governed carried-sheet provenance addresses.
  * @property {string} [source]
  * @property {boolean} [covert]
+ * @property {string} [region] Q-W4 — the engagement's PLACE as a settlement id, present
+ *   only when the emitting layer resolved one. An id, never a terrain class and never a
+ *   name: the place sentence is re-authored from this id at render.
  * @property {string} [familyId] SP-6 structural template family.
  * @property {string} [audience] Governed reader audience for authored receipts.
  * @property {string} [section] Governed Herald desk for authored receipts.
@@ -127,6 +130,7 @@ const MAX_ENTRIES = 240;
  * @property {Array<string | number | null | undefined>} [termSheetIds]
  * @property {string} [source]
  * @property {boolean} [covert]
+ * @property {string} [region]
  * @property {string} [familyId]
  * @property {string} [audience]
  * @property {string} [section]
@@ -601,6 +605,18 @@ function normalizeEntry(entry, options = {}) {
     // World Book's player-face isCovertEntry filter is live end-to-end instead of
     // a dead branch (SB2 finding: covert marks must not survive into the handout).
     ...(entry.covert === true ? { covert: true } : {}),
+    // Q-W4 — THE ENGAGEMENT'S PLACE, as a settlement id. Same byte-neutral conditional
+    // idiom as `covert` above, and for the same reason that defect taught: this
+    // rebuilder is an ALLOWLIST, so a field the writer sets and normalizeEntry does not
+    // name is silently dropped on the very first append and again on every load —
+    // leaving a live reader branch dead against every persisted feed. A field battle is
+    // the one engagement whose site existed at mint time and was spent entirely on a
+    // display name baked into `reasons[0]`; persisting the ID lets the place sentence be
+    // re-authored at render instead of parsed back out of our own prose. Absent when the
+    // emitting layer resolved no region ⇒ no key ⇒ every existing feed is byte-identical.
+    ...(typeof entry.region === 'string' && entry.region.trim()
+      ? { region: entry.region.trim() }
+      : {}),
     // SP-6 family identity is metadata, never prose. It records which structural
     // template produced the rendered sentence; changing slot fills cannot disguise
     // a repeated family from the soak instrument.

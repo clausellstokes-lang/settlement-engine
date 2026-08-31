@@ -617,6 +617,15 @@ function fieldBattleNews(battle, snapshot, tick, now, loserBefore, loserAfter, f
     impactIds: [],
     channelIds: [],
     sourceEventId: `field_battle.${pair[0]}.${pair[1]}.${tick}`,
+    // Q-W4 — THE PLACE, PERSISTED AS AN ID. Until now the battle's site existed only
+    // inside `reasons[0]`'s display name and was lost the moment the sentence was
+    // written, so the engagement narrative had to say nothing about where a field
+    // battle happened rather than parse its own prose back into a fact. Conditional:
+    // absent when the transit layer resolved no region — never '' and never a null
+    // sentinel — so a world that fights no field battle is byte-identical, and the
+    // terrain class is deliberately NOT derived here (two terrain vocabularies exist;
+    // the id is persisted and terrain resolves through its one reader).
+    ...(String(battle.region || '').trim() ? { region: String(battle.region).trim() } : {}),
     tags: fog.blind ? ['world_pulse', 'war', 'field_battle', 'fought_blind'] : ['world_pulse', 'war', 'field_battle'],
     reasons,
     createdAt: now,
