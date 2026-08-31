@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "3a61206d584fde072d980187291139b015c6758b",
-  "measuredBy": "T3 SEAT-A2 (SEAT-2b fifth adj)",
+  "measuredAtSha": "436b1b1b0c27c02525cf317bee856a2fdf14f44e",
+  "measuredBy": "T3 SEAT-A2 (SEAT-2c)",
   "date": "2026-08-31",
-  "note": "SEAT-2b added tests/domain/foreignSeatCoupAdj.test.js — D4 SUCCESS, the fifth pHold term and the declared adj budget",
-  "files": 2435,
+  "note": "SEAT-2c adds tests/domain/seatIntervention.test.js (D9 wave 1: the eligibility widening, the hop-priced march, the uninvited share discount) and splits convergenceReactive.js out of convergence.js. Regenerated at the clean tip 436b1b1b0.",
+  "files": 2436,
   "parked": 367,
-  "credited": 2068,
-  "titles": 20742,
-  "suiteTitles": 5712
+  "credited": 2069,
+  "titles": 20764,
+  "suiteTitles": 5718
 }
