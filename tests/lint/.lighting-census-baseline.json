@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d7e7721ec434c9d8958a2d9cbe128f87602eb5b3",
-  "measuredBy": "SUBSTRATE-landing",
+  "measuredAtSha": "860c0ae680b1d6521f93cfdc8ac185a4eef91969",
+  "measuredBy": "T8-landing-a-cured-park",
   "date": "2026-09-01",
-  "note": "The SUBSTRATE COUPLING landed whole: 21 new test files (W-LIVES L1-L5, W-FAITH F1c-F4c, W-OPS O1) plus the coupling's own cars 1-7, 8 edited suites. Re-derived at the coupling tip; NO file parks.",
+  "note": "T8 SHIFT landing (9 commits on 598642981): predicted 2477/371/2106/21805/5947 — the train moves the census through ONE file (categoryGovernance.test.js +3 titles/+1 suite, the dead-bias ratchet block after its straight-line hoist); elsewhere net zero. First refreeze banked an unattributed park, reverted; attribution in laneT8PARK-receipt.md.",
   "files": 2477,
   "parked": 371,
   "credited": 2106,
-  "titles": 21802,
-  "suiteTitles": 5946
+  "titles": 21805,
+  "suiteTitles": 5947
 }
