@@ -89,11 +89,13 @@ describe('react-pdf path tofus (not crashes) on exotic unicode', () => {
     expect(buf.length).toBeGreaterThan(1000);
   }, 30000);
 
-  test('the smart-punctuation "fortified" is still ligature-defused (safe() ran)', async () => {
+  test('safe() is transparent — every script survives it verbatim', async () => {
     const { safe } = await import('../../src/pdf/lib/format.js');
-    // safe() leaves the CJK/emoji code points untouched (they tofu at render),
-    // but the fi in "fortified" is still split by a ZWNJ.
-    expect(safe(SMART)).toContain(`fortif‌ied`);
+    // ⚠ Was `expect(safe(SMART)).toContain('fortif<ZWNJ>ied')` until 2026-09-01:
+    // safe() used to split the "fi" with a zero-width non-joiner. U+200C is
+    // covered by NO embedded face, so that joiner was itself the thing forcing a
+    // non-embedded font. safe() now mutates nothing at all.
+    expect(safe(SMART)).toBe(SMART);
     // Non-Latin code points survive the pass verbatim (no strip / no fold).
     expect(safe(CJK)).toContain('龍');
     expect(safe(ARABIC)).toContain('مدينة');

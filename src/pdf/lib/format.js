@@ -85,10 +85,11 @@ export function noteText(item) {
  * humanize — turn `snake_case`, `kebab-case`, or `camelCase` keys into Title Case.
  * Strings already containing spaces are returned as-is (with light casing).
  *
- * Idempotent: strips any ZWNJ from prior `noLig()` calls before processing,
- * because `\b\w` treats ZWNJ as a non-word character and would otherwise
- * cap the letter after it ("Shellf[ZWNJ]ish" → "Shellf[ZWNJ]Ish" → "ShellfIsh"
- * once the ZWNJ goes invisible in the reader).
+ * Idempotent: strips any ZWNJ before processing, because `\b\w` treats ZWNJ as
+ * a non-word character and would otherwise cap the letter after it
+ * ("Shellf[ZWNJ]ish" → "Shellf[ZWNJ]Ish" → "ShellfIsh" once the ZWNJ goes
+ * invisible in the reader). noLig() no longer inserts any, but user-authored
+ * data can still carry one — see stripZwnj.
  */
 export function humanize(s) {
   if (!s || typeof s !== 'string') return s || '';
@@ -163,25 +164,38 @@ export function safePct(n) {
 }
 
 /**
- * noLig — defuse OpenType ligature substitutions that the bundled Lora fontkit
- * subset renders incorrectly (notably `fi`/`fl`/`ffi`/`ffl`, where the ligated
- * glyph drops the dotted-i and looks like the user typed `f` instead of `fi`).
+ * noLig — IDENTITY for strings. Retained as the declared render chokepoint; it
+ * no longer mutates anything.
  *
- * We insert a zero-width non-joiner (U+200C) between the problematic pairs so
- * fontkit can't fuse them. The character is invisible in PDF readers but
- * blocks the GSUB lookup. Apply on every string we hand to <Text> or
- * <TextInput>; idempotent (won't double-insert if already there).
+ * ⚠ HISTORY, because emptying this body changed paid-surface bytes.
+ * It used to insert a zero-width non-joiner (U+200C) between every
+ * `fi`/`fl`/`ff`/`ffi`/`ffl` to block a `liga` GSUB lookup in the pre-v2 Lora
+ * and Nunito faces, whose ligated glyph dropped the dotted-i. The v2 re-cut
+ * REMOVED those lookups from all eight faces — measured: `availableFeatures`
+ * carries no `liga`/`clig`/`dlig`/`hlig`/`rlig`, and `layout()` of a 33-char
+ * ligature-bait string returns 33 glyphs, 1:1. The guard had nothing left to
+ * defuse. tests/build/fontsAndMeta.test.js §3d now pins that as an executed
+ * guarantee instead of prose: if it ever reds, fix the FONT — do not resurrect
+ * the insertion.
+ *
+ * ⛔ WHAT IT STILL DID, AND WHY IT HAD TO GO. U+200C is covered by NONE of the
+ * eight embedded faces. @react-pdf does not draw an uncovered codepoint as a
+ * `.notdef` box — it substitutes a NON-EMBEDDED base-14 `/Helvetica` and encodes
+ * by low-byte truncation. So every insertion split the text run onto an
+ * unembedded font: 25–86 such runs per dossier, on 100% of exports, measured —
+ * and a fallback run SWALLOWS ADJACENT COVERED CHARACTERS (one measured run
+ * carried the ZWNJ *and* a legible hyphen). The cure had outlived its disease
+ * and become the disease. tests/pdf/renderedFontEmbedding.test.js is the
+ * render-level arm that now holds the line.
+ *
+ * Kept as a seam rather than deleted outright: it is the chokepoint that 39
+ * `safe()` call sites and the Dense primitives render through, so a future font
+ * problem has exactly one place to be fixed. Contract preserved exactly —
+ * non-strings pass through, nullish becomes ''.
  */
-const ZWNJ = '\u200C';
 export function noLig(s) {
   if (!s || typeof s !== 'string') return s || '';
-  if (s.indexOf('f') === -1) return s;
-  return s
-    .replace(/ffi/g, `f${ZWNJ}f${ZWNJ}i`)
-    .replace(/ffl/g, `f${ZWNJ}f${ZWNJ}l`)
-    .replace(/fi/g, `f${ZWNJ}i`)
-    .replace(/fl/g, `f${ZWNJ}l`)
-    .replace(/ff/g, `f${ZWNJ}f`);
+  return s;
 }
 
 /**
@@ -193,14 +207,22 @@ export function safe(s) {
 }
 
 /**
- * stripZwnj — remove the zero-width non-joiners noLig inserts. ZWNJ persists
- * through `.toUpperCase()` / `textTransform: 'uppercase'` and creates a
- * line-break opportunity inside the word in some PDF readers (so "Conflict"
- * → "Conf‌lict" → uppercased to "CONF‌LICT" → renders as "CONF LICT").
+ * stripZwnj — remove any zero-width non-joiner (U+200C) from a string.
  *
- * Apply in any uppercase-styled Text node (Pill, Tag, label, ChapterBand
- * eyebrow). The Lora ligatures we need to defuse are only triggered between
- * lowercase letters anyway, so stripping ZWNJ from uppercase text is safe.
+ * ⚠ ITS SOURCE CHANGED, ITS VALUE DID NOT. This was written to undo noLig()'s
+ * own insertions; noLig is now identity, so nothing in this codebase emits a
+ * ZWNJ any more. What remains is the case that matters MORE: a ZWNJ arriving in
+ * USER-AUTHORED data (custom content names, deity portfolios, tradition
+ * epithets). src/domain/customContentSchema.js validates type and length only —
+ * there is no charset validation anywhere in it — so a pasted ZWNJ reaches the
+ * renderer, where it is covered by NONE of the eight embedded faces and would
+ * split the run onto a non-embedded Helvetica. Keep this call live.
+ *
+ * ZWNJ also persists through `.toUpperCase()` / `textTransform: 'uppercase'` and
+ * creates a line-break opportunity inside the word in some PDF readers (so
+ * "Conflict" → "Conf<ZWNJ>lict" → "CONF<ZWNJ>LICT" → renders as "CONF LICT"),
+ * which is why the uppercase-styled nodes (Pill, Tag, label, ChapterBand
+ * eyebrow) call it rather than trusting their input.
  */
 export function stripZwnj(s) {
   if (s == null) return '';
