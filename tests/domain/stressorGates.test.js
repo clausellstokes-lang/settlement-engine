@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+
 import { describe, expect, test } from 'vitest';
 
 import {
@@ -306,5 +308,104 @@ describe('organic birth gates', () => {
     expect(result.resolved).toHaveLength(1);
     expect(result.resolved[0].type).toBe('slave_revolt');
     expect(STRESSOR_CATALOG.slave_revolt.deprecated).toBe(true);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SAME-SEED WINDOW (SHIFT RECORD SR-d, 2026-09-01, the WAR landing's mini-window
+// R-T4-MINIWIN on the base `105c65cd1`). ONE CAUSE: the coup gate's raw legitimacy read.
+//
+// CAUSE. `coupSpawnGate` held this file's ONLY bypass of `governanceLedger`. Four sibling
+// gates — politicalFracture, insurgency, rebellion, criminalCorridor — read the conserved
+// legitimacy quantity through the ledger; the coup gate read
+// `Number.isFinite(publicLegitimacy?.score) ? … : 50` straight off the settlement.
+// laneT4-receipt.md:399 recorded it and its consequence, and left it deferred-named. The
+// mini-window's building lane was delegated the include-or-park call and INCLUDED it.
+//
+// WHY THE BYPASS WAS NOT COSMETIC. The ledger deliberately honours a LEGACY BARE-NUMBER
+// `publicLegitimacy` — its whole reason for existing is to unify the null/legacy handling
+// four lenses each did differently — while `?.score` on a bare number is `undefined`, so the
+// coup gate fell to a neutral 50 on exactly those saves. On a legacy world in legitimacy
+// crisis every other gate saw the real score and the coup gate refused, at its 45 threshold.
+//
+// MOVEMENT SCOPE — THREE CELLS, AND THE GENERATOR CANNOT MINT ANY OF THEM. Measured over the
+// whole shape space: canonical object, string score, NaN score, null and absent read
+// identically both ways; only the bare number moves, and on two of three sampled values the
+// gate flips REFUSES -> opens. Every producer in `src/` writes the object form, and every sim
+// writer spreads `{ ...pl, score }`, which upgrades a bare number on first write — so no
+// corpus, golden or probe arm can reach this delta. Probes A, B and C: bit-identical.
+//
+// ⛔ THE STOP: a second raw read of the conserved quantity appearing in this file is a STOP.
+// The source-scan arm below is what makes that enforceable rather than aspirational.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** A settlement whose `publicLegitimacy` is whatever shape the arm is testing. */
+function coupTown(publicLegitimacy) {
+  return {
+    powerStructure: {
+      publicLegitimacy,
+      factions: [
+        { faction: 'The Seat', category: 'government', power: 50, isGoverning: true },
+        { faction: 'The Challengers', category: 'noble', power: 40 },
+      ],
+      conflicts: [],
+    },
+  };
+}
+const coupPressure = pressureRow('oak', 'political', 80);
+const coupGateOn = (publicLegitimacy) => STRESSOR_SPAWN_GATES.coup_detat(
+  snapshotWith({ settlement: coupTown(publicLegitimacy), causal: { ruling_authority: 20 } }),
+  coupPressure,
+);
+const rebellionGateOn = (publicLegitimacy) => STRESSOR_SPAWN_GATES.rebellion(
+  snapshotWith({ settlement: coupTown(publicLegitimacy), causal: { ruling_authority: 20 } }),
+  coupPressure,
+);
+const GATES_SOURCE = readFileSync(new URL('../../src/domain/worldPulse/stressorGates.js', import.meta.url), 'utf8');
+
+describe('SR-d — the coup gate reads legitimacy through the ledger (the :399 cure)', () => {
+  test('a LEGACY bare-number save in crisis opens the gate that used to refuse it', () => {
+    // DISCOVERY-grade: this arm did not pass before the cure. The gate saw 50 and returned
+    // null while the town's own recorded legitimacy was 20.
+    expect(coupGateOn(20)).toBeTruthy();
+    // ANTI-VACUITY, both directions. The canonical object at the same score must also open
+    // (so the legacy shape is not being special-cased) …
+    expect(coupGateOn({ score: 20 })).toBeTruthy();
+    // … and a legacy bare number ABOVE the threshold must still refuse, so the cure is
+    // "read the real number", never "open more often".
+    expect(coupGateOn(80)).toBeNull();
+    expect(coupGateOn({ score: 80 })).toBeNull();
+  });
+
+  test('the coup gate and a ledger-reading sibling finally agree about one town', () => {
+    // The defect stated as the disagreement it was: on a legacy save the rebellion gate
+    // (ledger) called the town contested while the coup gate called it tolerated.
+    expect(rebellionGateOn(20)).toBeTruthy();
+    expect(coupGateOn(20)).toBeTruthy();
+    // And they agree the other way too, on a shape neither honours.
+    expect(coupGateOn('20')).toBeNull();
+  });
+
+  test('every non-legacy shape is unmoved, threshold included', () => {
+    // REGRESSION-grade, and deliberately exhaustive at the boundary: the ledger's neutral
+    // default is the same 50 the raw read used, so nothing but the bare number can move.
+    expect(coupGateOn({ score: 44 })).toBeTruthy();
+    expect(coupGateOn({ score: 45 })).toBeNull();
+    expect(coupGateOn({ score: NaN })).toBeNull();
+    expect(coupGateOn({ score: '20' })).toBeNull();
+    expect(coupGateOn(null)).toBeNull();
+    expect(coupGateOn(undefined)).toBeNull();
+  });
+
+  test('the conserved quantity has ONE read-point in this file and the scan enforces it', () => {
+    // STRUCTURAL, not stylistic: the §711.6 failure mode is a shared quantity acquiring a
+    // second reader with its own null-handling, which is exactly what :399 was. The scan
+    // drops whole-line comments only — its declared limit is a trailing comment on a code
+    // line, which the ledger-call count below covers from the other side.
+    const code = GATES_SOURCE.split('\n')
+      .filter((l) => !l.trim().startsWith('//') && !l.trim().startsWith('*'))
+      .join('\n');
+    expect(code).not.toContain('publicLegitimacy');
+    expect(code.split('governanceLedger(').length - 1).toBeGreaterThanOrEqual(5);
   });
 });

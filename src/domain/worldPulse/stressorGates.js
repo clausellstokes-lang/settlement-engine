@@ -965,8 +965,23 @@ function coupSpawnGate(snapshot, pressure) {
   const entry = snapshot?.byId?.get?.(sid);
   const settlement = entry?.settlement;
   if (!settlement) return null; // gated births require political context
-  const legitimacy = settlement.powerStructure?.publicLegitimacy;
-  const score = Number.isFinite(legitimacy?.score) ? legitimacy.score : 50;
+  // ⭐ THROUGH THE LEDGER, LIKE EVERY OTHER GATE IN THIS FILE — the :399 cure
+  // (R-T4-MINIWIN, SHIFT RECORD SR-d). This line was the file's ONLY bypass of
+  // `governanceLedger`: four sibling gates (politicalFracture, insurgency, rebellion,
+  // criminalCorridor) read the conserved quantity through the ledger and this one read the
+  // raw field. The bypass was NOT cosmetic. The ledger deliberately honours a LEGACY
+  // BARE-NUMBER `publicLegitimacy` — that is the null/legacy handling it exists to unify —
+  // while `Number.isFinite(legitimacy?.score)` sees `undefined` on exactly those saves and
+  // falls to a neutral 50. So on a legacy world in legitimacy crisis every other gate saw
+  // the real score and the coup gate refused to open, at 45.
+  //
+  // ⛔ THE MOVEMENT IS THREE CELLS AND THE GENERATOR CANNOT MINT ANY OF THEM. Measured over
+  // the whole shape space: canonical object, string score, NaN score, null and absent all
+  // read identically both ways; only the bare number moves, and on two of its three sampled
+  // values the gate flips REFUSES -> opens. Every producer in `src/` writes the object form,
+  // and every sim writer spreads `{ ...pl, score }`, which upgrades a bare number to an
+  // object on first write — so no corpus, golden or probe arm can reach this delta.
+  const score = governanceLedger(settlement).legitimacyScore;
   if (score >= 45) return null; // Tolerated or better — nobody moves
   if (occupierGovernsHere(snapshot, sid)) return null; // the occupier IS the authority
   const { challengers } = coupContenders(settlement);
