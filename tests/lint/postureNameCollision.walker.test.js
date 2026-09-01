@@ -69,12 +69,36 @@ const DOMAIN_FILES = walk(join(ROOT, 'src', 'domain')).map((p) => ({
 }));
 
 /**
+ * ⛔ THE LICENCE FOR THE SUBSTRING PROBE IN BOTH COUNTERS BELOW, and the invariant a
+ * future alternative must not break.
+ *
+ * EVERY alternative of both regexes interpolates `${name}` as a LITERAL, so a source
+ * that does not contain the name as a substring cannot match either of them — the probe
+ * is therefore output-equivalent BY CONSTRUCTION, not by measurement. It is here because
+ * this file walks the whole `src/domain` tree ONCE PER NAME (15 walks over 200+ files at
+ * the names it asks about), and the alternation is ~100x the cost of `String#includes`.
+ *
+ * ⚠ IF A LATER ALTERNATIVE STOPS REQUIRING THE LITERAL NAME, delete the probe in the
+ * same edit. The negative-control test below asserts the invariant directly: it renames
+ * the name out of every definition and export spelling and demands ZERO matches, which
+ * is exactly the property the probe leans on — a cost cut that silently became a
+ * correctness cut is the shape this file exists to refuse.
+ *
+ * COST CUT, never a budget: measured 2026-08-31 at 853e0e9ba, this file's worst test ran
+ * 3,796 ms isolated (5,851 ms at load 11.7) against the 20,000 ms suite budget — 99% of
+ * it once the measured worst per-test contention factor of 5.23x is applied. The ratchet's
+ * FIRST option (scripts/check-test-ratchet.mjs:1074) is to cut the row's per-run work,
+ * and this is that cut; no assertion moves and no budget is declared.
+ */
+
+/**
  * Where `name` is BOUND: a function declaration or a const/let/var binding, exported or
  * not. Deliberately not object properties — a `{ riskToleranceOf }` shorthand publishes
  * a binding made elsewhere and is counted by the export census instead.
  * @param {string} code @param {string} name @returns {number}
  */
 function definitionCount(code, name) {
+  if (!code.includes(name)) return 0;
   const re = new RegExp(
     String.raw`(?:^|[;{}\n])\s*(?:export\s+)?(?:default\s+)?(?:async\s+)?function\s+${name}\b`
     + String.raw`|(?:^|[;{}\n])\s*(?:export\s+)?(?:const|let|var)\s+${name}\s*=`,
@@ -89,6 +113,7 @@ function definitionCount(code, name) {
  * @param {string} code @param {string} name @returns {number}
  */
 function exportCount(code, name) {
+  if (!code.includes(name)) return 0;
   const re = new RegExp(
     String.raw`export\s+(?:default\s+)?(?:async\s+)?function\s+${name}\b`
     + String.raw`|export\s+(?:const|let|var)\s+${name}\s*=`
@@ -148,6 +173,29 @@ describe('the scanner BITES before anything is claimed absent (guard the guard)'
     // what makes the documentation and the enforcement able to coexist.
     const quoted = codeOnly('/** roads exports riskToleranceOf(npc). export function riskToleranceOf() {} */\n');
     expect(definitionCount(quoted, ROADS_NAME)).toBe(0);
+
+    // ⛔ THE LICENCE FOR THE SUBSTRING PROBE, asserted rather than asserted-in-prose (see
+    // the block above `definitionCount`). Every spelling BOTH counters recognise, written
+    // out under a DIFFERENT name: a source that does not carry the literal name must score
+    // ZERO on both, at every spelling. That is precisely the property `code.includes(name)`
+    // short-circuits on, so an alternative that stopped requiring the literal name would
+    // red HERE — the cost cut cannot silently become a correctness cut.
+    const foreign = [
+      'export function courageOf(npc) { return 1; }',
+      'function courageOf(npc) { return 1; }',
+      'export const courageOf = (npc) => 1;',
+      'const courageOf = function (npc) { return 1; };',
+      'let courageOf = null;',
+      'export async function courageOf(npc) { return 1; }',
+      'export { courageOf };',
+      'export { a, courageOf, b };',
+      'export { courage as courageOf };',
+    ];
+    for (const source of foreign) {
+      expect(source.includes(ROADS_NAME), `fixture accidentally carries the name: ${source}`).toBe(false);
+      expect(definitionCount(source, ROADS_NAME), `definition false positive: ${source}`).toBe(0);
+      expect(exportCount(source, ROADS_NAME), `export false positive: ${source}`).toBe(0);
+    }
   });
 
   test('the denominator is real: the domain tree is non-empty and readable', () => {
