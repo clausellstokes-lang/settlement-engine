@@ -276,11 +276,40 @@ export function globalTestTimeoutOf(root = ROOT) {
  * `STACK_TRACE_ERROR` arm convicts every real vitest kill whatever the threshold
  * says. So the scan errs wide on purpose, and the literals are PRINTED rather than
  * silently folded in.
+ *
+ * ⛔ IT WAS NOT ERRING WIDE. MEASURED 2026-08-31 (TE-BUDGET-1), the digit-only spellings
+ * below read ZERO literals out of `tests/joins/ordering.test.js` — THIS GATE'S OWN NAMED
+ * HOUSE PRECEDENT for the cure it recommends — because `60_000` carries a NUMERIC
+ * SEPARATOR and `\d{4,}` needs four CONSECUTIVE digits. 106 test files spell their budget
+ * that way. Every one of them was being classified against the 20,000 ms suite budget it
+ * had explicitly overridden, which is exactly the narrow threshold this header calls the
+ * only direction able to INVENT a TIMEOUT label on a genuine assertion failure. The
+ * separator is house style, not a different budget, so it is now read as one.
+ *
+ * ⚠ WHAT IS STILL MISSED, STATED RATHER THAN LEFT TO BE RE-FOUND: a budget passed as a
+ * NAMED CONSTANT (`}, CORPUS_BUDGET_MS)` — tests/lint/siteCoherenceRatchet.test.js:70,
+ * a 120,000 ms budget) is invisible to a text scan and stays invisible. Resolving it needs
+ * const-folding, which is a different instrument; it is docketed, not silently accepted.
+ *
+ * ⛔ NOTHING THIS FUNCTION RETURNS CAN CHANGE A VERDICT. Its output reaches only
+ * `evidenceFor`, which appends PRINTED lines to failure arrays that are already non-empty,
+ * and feeds `classifyFailure`'s budget. No threshold, exit code or census row moves.
  */
 export function timeoutLiteralsOf(src) {
   const found = new Set();
-  for (const m of String(src).matchAll(/\}\s*,\s*(\d{4,})\s*\)/g)) found.add(Number(m[1]));
-  for (const m of String(src).matchAll(/\btimeout\s*:\s*(\d{3,})\b/g)) found.add(Number(m[1]));
+  /** `60_000` and `60000` are ONE budget written two ways; the separator is house style. */
+  const NUMERAL = String.raw`\d[\d_]*\d|\d`;
+  const digitsOf = (raw) => raw.replace(/_/g, '');
+  // The length floors are unchanged and are applied to the SEPARATOR-FREE digits, so
+  // `}, 999)` is still an argument list and `{ timeout: 50 }` is still not a budget.
+  for (const m of String(src).matchAll(new RegExp(String.raw`\}\s*,\s*(${NUMERAL})\s*\)`, 'g'))) {
+    const digits = digitsOf(m[1]);
+    if (digits.length >= 4) found.add(Number(digits));
+  }
+  for (const m of String(src).matchAll(new RegExp(String.raw`\btimeout\s*:\s*(${NUMERAL})\b`, 'g'))) {
+    const digits = digitsOf(m[1]);
+    if (digits.length >= 3) found.add(Number(digits));
+  }
   return [...found].sort((a, b) => a - b);
 }
 
