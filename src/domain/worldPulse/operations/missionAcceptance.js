@@ -242,8 +242,8 @@ export function registerGoverning({ register, rootedRegister } = {}) {
  * acceptance step's business, not the window's.
  *
  * @param {Object} args
- * @param {unknown} args.register  a readable register
- * @param {unknown} args.risk01    0..1, the operation's priced risk; ABSENT ⇒ unreadable
+ * @param {unknown} [args.register]  a readable register
+ * @param {unknown} [args.risk01]    0..1, the operation's priced risk; ABSENT ⇒ unreadable
  * @returns {{side:string, distance:number|null, low:number|null, high:number|null}}
  */
 export function priceAgainstRegister({ register, risk01 } = {}) {
@@ -275,7 +275,7 @@ export function priceAgainstRegister({ register, risk01 } = {}) {
  * @param {Object} args
  * @param {unknown} [args.operationId]
  * @param {unknown} [args.vetting]         a `vetVolunteerEnvoy` verdict
- * @param {unknown} [args.willing]         §802 R1; absent ⇒ the door is dark ⇒ no refusal
+ * @param {unknown} [args.willing]         R1 (§802); absent ⇒ the door is dark ⇒ no refusal
  * @param {unknown} [args.register]        a live `riskRegister` result
  * @param {unknown} [args.rootedRegister]  a `freezeRegisterAtRooting` result (F4)
  * @param {unknown} [args.risk01]          the operation's priced risk, 0..1
