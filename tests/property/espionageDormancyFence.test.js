@@ -184,13 +184,24 @@ function world({ canon = 1, infoMode = 'unreliable', spine = true, espionage = t
 const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
 
 /**
- * ⛔ THE PRE-COUPLING CORPUS GOLDEN. Executed against a `git archive` of committed
- * `853e0e9ba` — the base this landing was built on, whose tree carries NO
- * `src/domain/worldPulse/operations/` directory at all, so the espionage set had no src
- * importer there and this number is a measurement of a world the caller never touched.
- * ⛔ THIS NUMBER MOVING IS A STOP, NEVER A RE-RECORD.
+ * ⛔ THE CORPUS GOLDEN — RE-RECORDED ONCE, AT T8, UNDER THE PROGRAM'S ONE RULED
+ * SAME-SEED WINDOW (SHIFT RECORD, 2026-09-01, T8 landing at `598642981`+10).
+ *
+ * History: the original value `a5207e29…f835bcb` was executed against a git archive of
+ * `853e0e9ba` (pre-coupling) and HELD through the substrate landing's gate 6 — the
+ * coupling, the espionage caller included, moved no byte, exactly as it claimed. Then
+ * T8 — the arc's ONE deliberately-priced same-seed shift (ODQ §858/§860; cars 1 and 3:
+ * the prosperityRank01 flip and the 27-row priorityCategory relabel with backing
+ * factions) — lawfully moved generation. The movement is attributed to ZERO RESIDUE by
+ * the landing's probe battery (410/600 moved on the A corpus = car1 53 + car3 389 +
+ * car2 0; single-variable reverts reconstruct it exactly; laneT8PROBE-receipt.md), so
+ * the mover is FOUND, which is what the old text demanded before touching this line.
+ * This value is the same 360-settlement corpus measured at the T8 landing tip
+ * (replica receipt: t8-fence-corpus.mjs, 360/360 distinct).
+ * ⛔ THE STOP IS RE-ARMED: T13 TRANS is the LAST ruled mover left in the arc. This
+ * number moving again outside T13's own recorded window is a STOP, never a re-record.
  */
-const PRE_COUPLING_CORPUS_SHA = 'a5207e2915011bd6ef1bfde43dc82c6a6af1921d814bd32b3792c14c5f835bcb';
+const PRE_COUPLING_CORPUS_SHA = '500cc1118fbb6ad39eda4103484b9bcb10e59c7802f8c25ab7b99680086e5880';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
