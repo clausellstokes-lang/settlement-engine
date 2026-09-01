@@ -1,6 +1,7 @@
 # TE-AGNOSTIC-1 — the setting-agnostic engine vocabulary (ODQ §857)
 
-**Status: the census bill (car 1). Cures land in cars 2 and 3.**
+**Status: LANDED. Car 1 the census bill · car 2 the output-neutral cures · car 3
+the corpus rewrite (shift record 1) · car 4 the service names (shift record 2).**
 
 The product is SETTING-AGNOSTIC by law. That law binds the ENGINE: the prose,
 vocabulary tables and service names a generated world carries must not read as
@@ -165,12 +166,28 @@ TRADEMARK-adjacent and wait for the owner's pen:
 
 ### 2g. DEFERRED — the keys car
 
-Institution keys, not service names. Each is a join key in G3's families:
-`Healer (divine, 1st level)` (11 sites incl. an order-authoritative generated
-file and four test pins) and `servicesData.js:44-46`'s three
-`spellcasting services (1st-Nth level)` LOCALE override SOURCES (matched against
-institution names; renaming one silently kills a live mapping if a producer
-still emits the old name). Recorded here so the rows cannot be lost.
+Institution keys, not service names.
+
+**`Healer (divine, 1st level)`** — 11 sites, including the ORDER-AUTHORITATIVE
+generated file `institutionServiceKeys.generated.js` and four by-name pins in
+`magicLicenceCensus.walker` plus one in `arcaneIdentity.test`. This is G3's
+family exactly. Its own SERVICE (`Cure light wounds`) was cured; the institution
+key is a keys-car row.
+
+**`servicesData.js:44-46`** — three `spellcasting services (1st-Nth level)`
+LOCALE override SOURCES. **Measured rather than assumed:** the lookup is an
+EXACT lowercased key access (`LOCALE_SERVICE_OVERRIDES[instName.toLowerCase()]`
+at `generators/services/institutionServices.js:111`, and the same shape at
+`display/institutionProfile.js:118`), and no producer in `src/` emits an
+institution named `spellcasting services (1st-Nth level)`. So the three rows are
+UNREACHABLE today. **Deliberately NOT renamed:** renaming an unreachable lookup
+source only invents a differently-dead key that reads even less like a plausible
+institution name. Their honest disposition is deletion, which belongs to a
+dead-code car with its own bill, not to a vocabulary wave. Recorded so the rows
+cannot be lost.
+
+**`Druid Circle`** — not deferred but KEPT, per §0. A druidic circle is Celtic,
+not a rulebook class.
 
 ---
 
@@ -218,3 +235,53 @@ like. A behaviour change would not have respected that shape.
    keys, counts, numbers, names or structure moved. And the three rows the
    manifest independently called HELD show ZERO diff (all 14 addresses fall in the
    four MOVED sections) — the two instruments agree from opposite ends.
+
+### SHIFT RECORD 2 — car 4, the three SERVICE names
+
+**Cause: TE-AGNOSTIC-1 / ODQ §857**, the rulebook-scale service names.
+`Spellcasting (1st-3rd level)` → `Spellcasting (minor)` ·
+`Spellcasting (1st-8th level)` → `Spellcasting (greater)` ·
+`Cure light wounds` → `Wound closing`. Eleven sites across
+`institutionServices`, `supplyChainData`, `serviceCategoryTables`,
+`goodsCatalog` (a comment), and two tests that pin the registration census.
+
+| Measure | Value |
+| --- | --- |
+| Rows moved by car 4 alone | **156** of 525 |
+| By tier | metropolis 80/84 · city 72/84 · town 4/105 · village, hamlet, thorp 0 |
+| Wave CUMULATIVE against the pre-wave base | **305** of 525 (UNCHANGED from car 3) |
+
+⭐ The cumulative figure not moving is itself a receipt: every row car 4 touched
+had already moved in car 3, so the two cars edit the same institutions rather
+than widening the blast radius.
+
+**The names are LIVE, and the swap is exact.** Generating 112 worlds
+(4 tiers × 7 terrains × 4 seeds) at base and at tip:
+
+| Name | base | tip |
+| --- | --- | --- |
+| `Cure light wounds` → `Wound closing` | 3/112 | 3/112 |
+| `Spellcasting (1st-3rd level)` → `(minor)` | 52/112 | 52/112 |
+| `Spellcasting (1st-8th level)` → `(greater)` | 52/112 | 52/112 |
+| the three OLD names, at tip | — | **0/112** |
+
+Present in exactly the same worlds under the new name, and the old names reach
+zero. Not a dead-row rename dressed up as a cure.
+
+**The one deliberate classifier movement in the whole wave, stated plainly.**
+The invariance probe returns 4,609 rows with **ZERO answer flips on all 4,600
+shared keys**; the 9 keys that changed ADDRESS are these three services × three
+arms. Across that rename the asserting total falls 264 → 263, and the single
+row is `svcName · Healer (divine, 1st level)|Cure light wounds` (1) →
+`Wound closing` (0). **That arm is not read by anything.** Measured, not
+reasoned: `generationContext.allowsService` gates on
+`` `${entity.name} ${entity.desc}` ``, all seven call sites
+(`servicesGenerator:361`, `serviceRollMaterialization:158,216`,
+`economyReconcilePass:255`) pass service OBJECTS, and the `svcJoin` and
+`svcDesc` arms both hold at 1 for all three services because
+`Basic divine healing.` carries the `divine healing` token.
+
+**Structural control, re-run:** 39,037 lines a side, 40 changed lines = 20
+substitutions, every one a cured string; six addresses more than car 3, all six
+the Spellcasting names inside the city and metropolis sections. The three HELD
+rows still show ZERO.

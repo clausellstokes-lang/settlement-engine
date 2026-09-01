@@ -136,7 +136,7 @@ describe('trade-goods subsumption', () => {
   });
 
   test('distinct services never merge even when they share a catalog id', () => {
-    const out = subsumeTradeGoods(['Spellcasting (1st-3rd level)', 'Magical identification']);
+    const out = subsumeTradeGoods(['Spellcasting (minor)', 'Magical identification']);
     expect(out).toHaveLength(2);
   });
 

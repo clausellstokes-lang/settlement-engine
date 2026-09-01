@@ -990,7 +990,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         ],
         intermediateGoods: [],
         // Outputs are goods/services only — institution names live in processingInstitutions.
-        outputs: ['Medical care (basic)', 'Spellcasting (1st-3rd level)'],
+        outputs: ['Medical care (basic)', 'Spellcasting (minor)'],
         services: ['healing', 'magic'],
         exportable: false,
         entrepot: false,
@@ -1094,10 +1094,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         intermediateGoods: [],
         // Outputs are goods/services only — institution names live in processingInstitutions.
         outputs: [
-          'Spellcasting (1st-3rd level)',
+          'Spellcasting (minor)',
           'Magical identification',
           'Enchanting services',
-          'Spellcasting (1st-8th level)',
+          'Spellcasting (greater)',
           'Teleportation',
         ],
         services: ['magic'],
