@@ -535,6 +535,32 @@ export default defineConfig({
           // eagerly), so give it its own small chunk instead of letting
           // Rollup fold it into the big lazy engine chunk. Nothing here
           // imports a generator, so this never drags the engine.
+          // ── T13 TRANS: the transcendental kernel rides its OWN LAZY chunk ──
+          // detMath.js is the deterministic replacement for the 22 approximated
+          // Math functions across the seeded trees. It must NOT ride the eager
+          // `kernel` chunk with prng/rngContext: every one of its consumers is
+          // lazy generation code (the census sites all sit in src/domain, which
+          // Rollup emits as per-file lazy chunks plus applyWorldPulse), and the
+          // eager kernel chunk is a first-paint closure member. MEASURED at the
+          // T13 build base: detMath minifies to 2,086 B against a first-paint
+          // closure margin of 995 B (1,046,005 of 1,047,000), so routing it eager
+          // would red the budget by roughly 1,091 B and turn a code change into a
+          // ceiling-raise ask. Nor may it ride the big lazy `engine` chunk: that
+          // one is at 675,339 B against a 676,000 ceiling — 661 B of margin — so
+          // it would red bill row 13 instead.
+          //
+          // So it gets its OWN small lazy chunk, exactly the settlement-normalize /
+          // custom-schema / content-identity precedent above ("pin the modules into
+          // their own small lazy chunk instead"), and for the same reason: placement
+          // is behaviourally invisible for a pure deterministic leaf, and the
+          // alternative makes a budget the owner's problem for no product gain.
+          // Its only outward edge is Math.floor and its own constants — it imports
+          // NOTHING — so this chunk can never drag anything behind it.
+          // @guarded-by tests/build/vendorPdfLazy.test.js: the det-math placement pin
+          // (kernel-chunk absence + own-chunk presence) and the first-paint budget.
+          if (id.includes('/src/kernel/detMath.js'))
+            return 'det-math';
+
           if (id.includes('/src/kernel/'))
             return 'kernel';
 

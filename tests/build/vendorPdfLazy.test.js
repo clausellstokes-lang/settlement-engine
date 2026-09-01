@@ -712,6 +712,78 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     expect(size).toBeLessThan(676_000);
   });
 
+  // ── T13 TRANS: the transcendental kernel's CHUNK PLACEMENT ───────────────
+  // `src/kernel/detMath.js` replaces the 22 implementation-approximated Math
+  // functions across the seeded trees. Its placement is a BUDGET decision, not a
+  // taste one, and it is pinned here because the measurement that forced it is not
+  // reproducible by reading the source: routed into the eager `kernel` chunk it
+  // costs the first-paint closure ~2,086 B against a 995 B margin (a red, and an
+  // owner-gated ceiling ask); routed into the big lazy `engine` chunk it costs
+  // bill row 13 the same way, against 661 B. It therefore rides its OWN small lazy
+  // chunk (the settlement-normalize / custom-schema precedent). Nothing about that
+  // is visible to a reader of detMath.js, so a future lane deleting the
+  // manualChunks rule as "redundant" would silently re-create a budget red.
+  //
+  // The SOURCE arm runs everywhere (no dist needed) and is the one that actually
+  // stops the regression; the DIST arms below prove the rule does what it says.
+  it('the det-math manualChunks rule is present in vite.config.js', () => {
+    const config = readFileSync(join(process.cwd(), 'vite.config.js'), 'utf-8');
+    // Liveness anchor first: prove we read the real config, so an empty or moved
+    // read reds HERE rather than passing every absence claim below vacuously.
+    expect(config).toContain("if (id.includes('/src/kernel/'))");
+    expect(
+      config,
+      'the det-math chunk rule is gone — detMath.js would fall through to the EAGER'
+      + ' kernel chunk and red the first-paint closure budget (measured: +2,086 B raw'
+      + ' against a 995 B margin). Re-read the rule comment before removing it.',
+    ).toContain("if (id.includes('/src/kernel/detMath.js'))");
+    // ORDER MATTERS: the specific rule must precede the general /src/kernel/ one,
+    // or it never fires. A containment check alone would miss a re-ordering.
+    expect(
+      config.indexOf("id.includes('/src/kernel/detMath.js')"),
+      'the det-math rule now sits AFTER the general /src/kernel/ rule, so it can never'
+      + ' fire — detMath would ride the eager kernel chunk again',
+    ).toBeLessThan(config.indexOf("if (id.includes('/src/kernel/'))\n"));
+  });
+
+  it.skipIf(!requireDistRead)('detMath rides its own lazy chunk, never the eager kernel chunk', () => {
+    const files = readdirSync(assetsDir);
+    const kernelChunks = files.filter((f) => /^kernel-[A-Za-z0-9_-]+\.js$/.test(f));
+    expect(kernelChunks.length, 'expected exactly one kernel chunk').toBe(1);
+    const kernelSrc = readFileSync(join(assetsDir, kernelChunks[0]), 'utf-8');
+    // THE MARKER WAS CHOSEN BY READING A REAL EMITTED CHUNK, NOT BY GUESSING AT THE
+    // SOURCE. Two traps were measured and avoided. (1) Minification mangles every
+    // identifier, so names are useless. (2) The obvious literal `6227020800` (1/13!) is
+    // NOT present in the output at all — esbuild constant-folds `1 / 6227020800` to
+    // `16059043836821613e-26` — and it is not detMath-specific anyway, because
+    // `detPow.js` carries the same factorial and legitimately rides THIS chunk the
+    // moment it gains a consumer. What survives folding AND belongs only to detMath is
+    // its log10 change-of-base constant, its underflow rail, and its Cody-Waite ln2
+    // high word. Any ONE of them here means detMath leaked into first paint.
+    const DET_MATH_FINGERPRINT = /3010299956639812|-1075|6931471803691238/;
+    expect(
+      DET_MATH_FINGERPRINT.test(kernelSrc),
+      'the eager kernel chunk now carries detMath — the first-paint closure budget is'
+      + ' about to red. Check the manualChunks det-math rule.',
+    ).toBe(false);
+
+    // NON-VACUITY, and it is not optional: an absence assertion over a fingerprint that
+    // matches nothing passes forever. When a det-math chunk exists (i.e. some consumer
+    // reaches the kernel), the SAME regex must match it — that is the proof this arm can
+    // see. When no consumer exists yet the module is tree-shaken away entirely, there is
+    // no chunk to check and the absence above is trivially true, which we say out loud
+    // rather than dress up as a pass.
+    const detMathChunks = files.filter((f) => /^det-math-[A-Za-z0-9_-]+\.js$/.test(f));
+    if (detMathChunks.length) {
+      expect(
+        DET_MATH_FINGERPRINT.test(readFileSync(join(assetsDir, detMathChunks[0]), 'utf-8')),
+        'the det-math fingerprint no longer matches the det-math chunk itself — the marker'
+        + ' has rotted, so the absence check above is proving nothing. Re-derive it from the'
+        + ' emitted chunk.',
+      ).toBe(true);
+    }
+  });
+
   // ── The affordance manifest stays a LAZY LEAF (Composer V2 §2) ───────────
   // The manifest (domain/events/affordanceManifest.js) rides the lazy composer
   // chunk exactly like registryProse — never the eager closure. A NAMED guard
