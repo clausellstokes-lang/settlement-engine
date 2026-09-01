@@ -85,6 +85,13 @@ export function SettlementPDF({
   // The export date — injectable, mirroring the World Book cover (opts.now).
   // Null keeps the wall-clock read inside Cover, so legacy callers are unchanged.
   now = null,
+  // The document's CreationDate. `now` is the printed COVER LABEL (a display
+  // string); this is the metadata timestamp, and they are deliberately separate
+  // props because they are separate facts — a cover can read "Cyfrin 1, 2026" in
+  // a world calendar that no Date can express. react-pdf defaults this to
+  // `new Date()`, so leaving it unset made every export of one unchanged
+  // settlement differ in bytes. Null keeps that default: legacy callers unchanged.
+  creationDate = null,
 }) {
   const safe = settlement || {};
   const vm = buildViewModel({
@@ -148,6 +155,12 @@ export function SettlementPDF({
       title={`${safe.name || 'Settlement'}: Dossier`}
       author="SettlementForge"
       creator="SettlementForge"
+      // Pinned rather than left to react-pdf's default 'react-pdf', so a paid
+      // artifact's info dict names the product beside its engine instead of the
+      // dependency alone. Truthful about both, and version-free by construction.
+      producer="SettlementForge (react-pdf)"
+      // undefined ⇒ react-pdf's own `new Date()` default, the pre-seam behaviour.
+      creationDate={creationDate ? new Date(creationDate) : undefined}
       subject={`Settlement dossier${useAi ? ' (AI narrative edition)' : ''}`}
     >
       {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} isAnonymous={isAnonymous} now={now} />}
