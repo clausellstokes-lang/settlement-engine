@@ -218,7 +218,7 @@ describe('campaign PDF — member ids resolve across the id-type seam', () => {
     // anchored: 'ashford' proves the index rows rendered at all, so Grimhold's
     // absence is a selection rather than an empty page.
     expect(painted).toContain('ashford');
-    expect(painted).not.toContain('grimhold');
+    expect(painted).not.toContain('grimhold'); // anchored: 'ashford' asserted present above — the index rows rendered, so Grimhold's absence is a selection
   });
 });
 

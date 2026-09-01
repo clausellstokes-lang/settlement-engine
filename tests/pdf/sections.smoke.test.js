@@ -179,9 +179,9 @@ describe('IdentityDailyLife — the food balance reads as a tri-state, not a bin
   test('a BALANCED settlement is never told it runs a surplus of zero', () => {
     const text = chapterText(BALANCED);
     // The anchor row and the Daily Life callout both stop claiming a surplus.
-    expect(text).not.toContain('+0 units');
-    expect(text).not.toContain('Surplus of 0 units');
-    expect(text).not.toContain('The local food supply is reliable');
+    expect(text).not.toContain('+0 units'); // anchored: 'Balanced' + 'in balance' are asserted PRESENT below — the chapter rendered and chose the third word
+    expect(text).not.toContain('Surplus of 0 units'); // anchored: same — the callout rendered ('in balance' below)
+    expect(text).not.toContain('The local food supply is reliable'); // anchored: same — the verdict sentence rendered as 'in balance' below
     // ...and both say the estate's own third word instead.
     expect(text).toContain('Balanced');
     expect(text).toContain('in balance');
@@ -192,8 +192,8 @@ describe('IdentityDailyLife — the food balance reads as a tri-state, not a bin
     // anchored: the chapter demonstrably rendered (the identity rows are present),
     // so the absence below is a suppression rather than an empty page.
     expect(text).toContain('Balanceford');
-    expect(text).not.toContain('+0 units');
-    expect(text).not.toContain('Surplus of 0 units');
-    expect(text).not.toContain('Balanced');
+    expect(text).not.toContain('+0 units'); // anchored: 'Balanceford' asserted present above — the chapter rendered, so this absence is a suppression
+    expect(text).not.toContain('Surplus of 0 units'); // anchored: same anchor ('Balanceford' above)
+    expect(text).not.toContain('Balanced'); // anchored: same anchor ('Balanceford' above) — no food data means NO third word either
   });
 });

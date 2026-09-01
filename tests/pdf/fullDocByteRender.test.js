@@ -117,7 +117,7 @@ describe('the dossier is byte-reproducible when its date seam is held (R8b)', ()
   test('the producer names the product, not the renderer', async () => {
     const text = (await renderFixed()).toString('latin1');
     // Measured at base: exactly one `(react-pdf)` literal — the Producer value.
-    expect(text).not.toContain('(react-pdf)');
+    expect(text).not.toContain('(react-pdf)'); // anchored: 'SettlementForge' asserted present on the next line — the info dict rendered and names the product
     expect(text).toContain('SettlementForge');
   }, 60_000);
 
