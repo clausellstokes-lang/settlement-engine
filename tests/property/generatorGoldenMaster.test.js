@@ -650,7 +650,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { readFileSync, existsSync, mkdirSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { resolve, dirname } from 'node:path';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { CULTURE_PROFILE_KEYS } from '../../src/domain/cultureProfiles.js';
@@ -761,7 +762,7 @@ describe('generator golden master (cross-build output stability)', () => {
       const out = {};
       for (const c of rows) out[keyOf(c)] = hashFor(c);
       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
+      recordGolden({ surface: 'generator-golden-master', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
       expect(Object.keys(out).length).toBe(rows.length);
     }, 120_000);
     return;

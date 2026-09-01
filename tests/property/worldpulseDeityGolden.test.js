@@ -22,7 +22,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { dirname, resolve } from 'node:path';
 
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
@@ -173,7 +174,7 @@ describe('worldPulse deity golden master (deity-activated cross-build mechanical
       const out = {};
       for (const c of rows) out[pulseKeyOf(c)] = pulseHashFor(c);
       if (!existsSync(dirname(PULSE_MANIFEST))) mkdirSync(dirname(PULSE_MANIFEST), { recursive: true });
-      writeFileSync(PULSE_MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
+      recordGolden({ surface: 'worldpulse-golden-master', path: PULSE_MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
       expect(Object.keys(out).length).toBe(rows.length);
     });
     return;

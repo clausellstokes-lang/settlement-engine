@@ -265,7 +265,8 @@
  *
  * @enforced-by tests/fixtures/cartographyCalibrationCorpus.js
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { dirname, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
@@ -468,7 +469,7 @@ describe('W0 the frozen record, and the one arm that re-records it', () => {
       // rows of `{}` and only W1's outcome arm noticed. Sorting the entries is the shape
       // that cannot do that.
       const sorted = Object.fromEntries(Object.keys(out).sort().map((key) => [key, out[key]]));
-      writeFileSync(MANIFEST, `${JSON.stringify(sorted, null, 1)}\n`);
+      recordGolden({ surface: 'cartography-calibration-corpus', path: MANIFEST, produce: () => `${JSON.stringify(sorted, null, 1)}\n` });
       expect(Object.keys(out).length).toBe(rows.length);
     }
     expect(existsSync(MANIFEST), 'run UPDATE_CARTOGRAPHY_CALIBRATION=1 to create it').toBe(true);

@@ -9,7 +9,8 @@
  */
 import { describe, expect, it } from 'vitest';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { dirname, resolve } from 'node:path';
 import { buildTimelineTrack } from '../../src/domain/display/timelineTrack.js';
 
@@ -41,7 +42,7 @@ describe('GOLDEN — V-3 timeline track (pulseHistory → track) → bytes', () 
     const record = { hash: hashOf(track), frames: track.frames.length, ticks: track.ticks };
     if (UPDATE) {
       mkdirSync(dirname(MANIFEST), { recursive: true });
-      writeFileSync(MANIFEST, JSON.stringify(record, null, 2) + '\n');
+      recordGolden({ surface: 'timeline-track-golden', path: MANIFEST, produce: () => JSON.stringify(record, null, 2) + '\n' });
     }
     expect(
       existsSync(MANIFEST),

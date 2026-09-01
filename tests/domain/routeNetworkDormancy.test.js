@@ -60,7 +60,8 @@
  */
 import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { dirname, resolve } from 'node:path';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { makeGridPack, placePortSettlements } from '../fixtures/spatialPackFixtures.js';
@@ -146,7 +147,7 @@ const live = liveHashes();
 
 if (process.env.UPDATE_GOLDEN === '1') {
   mkdirSync(dirname(MANIFEST), { recursive: true });
-  writeFileSync(MANIFEST, `${JSON.stringify(live, null, 2)}\n`);
+  recordGolden({ surface: 'route-network-dormancy-golden', path: MANIFEST, produce: () => `${JSON.stringify(live, null, 2)}\n` });
 }
 
 describe('J1 dormancy: the dark path is the input path (Law 7)', () => {
