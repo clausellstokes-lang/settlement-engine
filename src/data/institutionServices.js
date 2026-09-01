@@ -482,10 +482,10 @@ export const INSTITUTION_SERVICES = {
     "Weather reading": { on: false, p: 0.6, desc: "Read signs for planting, harvest, and travel." }
   },
   "Druid Circle": {
-    "Nature magic services": { on: true, p: 1.0, desc: "Speak with Animals, Detect Poison, Purify Food, Pass Without Trace." },
+    "Nature magic services": { on: true, p: 1.0, desc: "Speaking with animals, poison sensed, food purified, passage that leaves no track." },
     "Seasonal rituals": { on: true, p: 0.9, desc: "Solstice and equinox ceremonies." },
     "Wilderness guidance": { on: true, p: 0.8, desc: "Route guidance through dangerous wilderness." },
-    "Healing (nature)": { on: false, p: 0.6, desc: "Cure Wounds, Lesser Restoration. Slower than divine." },
+    "Healing (nature)": { on: false, p: 0.6, desc: "Wounds closed and sickness lifted by magic. Slower than divine." },
     "Weather forecasting": { on: false, p: 0.7, desc: "Accurate short-term weather prediction." }
   },
   "Warden's Lodge": {

@@ -144,8 +144,15 @@ Cured per G2: an agnostic LABEL over an unchanged SYMBOL.
 ### 2e. One rulebook role construction
 
 `src/data/historyData.js:858` — `Warlock/Pact-Bound`. `Warlock` is Old English
-and stays; the pairing with a binding pact is the rulebook's class, not the
-folklore. Cured to `Witch/Bargain-Sworn`.
+(`wǣrloga`, oath-breaker) and STAYS; the pairing with a binding pact is the
+rulebook's class, not the folklore. Cured to `Warlock/Bargain-Sworn`.
+
+⚠ The first draft of this cure read `Witch/Bargain-Sworn`, and it was WRONG for a
+reason worth keeping: `warlock` is an alternative in BOTH
+`MAGIC_ASSERTION_PATTERN` and `ARCANE_CERTAIN_PATTERN`, and `witch` is in the
+first but NOT the second. Swapping the word would have silently changed one
+classifier's answer on this role while leaving the other's intact. Keeping the
+half that is genuine folklore also kept both classifiers exactly where they were.
 
 ### 2f. EXCLUDED — the owner's legal carve-out (§857 ruling 2)
 
@@ -174,3 +181,40 @@ by construction. That is why §857 placed this wave BEFORE TE-GOLDEN-1's freeze
 rather than after it: the shift is taken once, deliberately, with a record, and
 the goldens freeze over the cured corpus. Cures that touch only comments, docs
 or display labels are output-neutral and carry no shift.
+
+### SHIFT RECORD 1 — car 3, `tests/fixtures/generator-golden-master.json`
+
+**Cause: TE-AGNOSTIC-1 / ODQ §857, the setting-agnostic corpus rewrite.**
+Re-recorded through the file's own governed ritual
+(`UPDATE_GOLDEN=1 npx vitest run tests/property/generatorGoldenMaster.test.js`).
+
+| Measure | Value |
+| --- | --- |
+| Corpus rows | 525 (key set UNCHANGED, asserted) |
+| Hashes moved | **305** |
+| Hashes held | 220 |
+| By tier | town 105/105 · city 84/84 · metropolis 80/84 · village 36/84 · hamlet **0/84** · thorp **0/84** |
+
+The tier distribution is the shift's own control. Thorps and hamlets hold none of
+the cured institutions, and they moved by exactly zero. Village moved on fewer
+than half its rows, which is what a probabilistic institution roll should look
+like. A behaviour change would not have respected that shape.
+
+**Two independent instruments say the shift is PROSE AND NOTHING ELSE:**
+
+1. **The classifier-invariance probe** ran `textAssertsFunctionalMagic` over every
+   authored service name, service desc, desc variant, catalog name, catalog desc,
+   and spatial gate reason at base and at tip: **4,609 rows, 264 asserting, diff
+   EMPTY.** Not one row changed which side of the magic gate it falls on. This is
+   what makes the rewrite guard-safe rather than merely careful: several cures had
+   to keep a token they were deleting the words of (`Cure Wounds, Lesser
+   Restoration` → `Wounds closed and sickness lifted by magic` keeps the row
+   asserting through `magic`), and several had to AVOID gaining one
+   (`+1 weapons` → `warded`, never `enchanted`, which would have convicted a
+   mundane row).
+2. **A structural control across two worktrees.** Seven golden rows generated at
+   the pre-car-3 commit and at tip, serialized whole and diffed: 39,037 lines each
+   side, **28 changed lines = 14 substitutions, every one a cured string.** Zero
+   keys, counts, numbers, names or structure moved. And the three rows the
+   manifest independently called HELD show ZERO diff (all 14 addresses fall in the
+   four MOVED sections) — the two instruments agree from opposite ends.

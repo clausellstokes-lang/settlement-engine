@@ -375,7 +375,7 @@ describe('L12 LEAK — customContent reads the canonical band, not a raw string'
       expect(classifyCustomInstitution({ name }).inferredCategory, name).not.toBe('arcane');
     }
     // ⚠ `Healer (divine, 1st level)` IS NOT IN THAT LIST, and the omission is a verdict. Its
-    // authored desc — 'Basic healing spells. Cure Wounds (10 GP).' — asserts functional magic
+    // authored desc — 'Basic healing spells. A closed wound costs 10 in gold.' — asserts functional magic
     // by the estate's own detector, so the row is a spellcaster filed under faith rather than
     // a faith institution wrongly convicted. Its tag still reads MUNDANE and its licence still
     // reads `low`; the two disagree, and that disagreement is pinned in

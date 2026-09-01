@@ -317,7 +317,7 @@ export const institutionalCatalog = {
       'Traveling hedge wizard': {
         required: false,
         baseChance: 0.2,
-        desc: 'Occasional visits. 1st level spells only.',
+        desc: 'Occasional visits. The smallest spells only.',
         tags: ['arcane'],
         magicLicense: 'low',
         priorityCategory: 'magic',
@@ -821,7 +821,7 @@ export const institutionalCatalog = {
         required: false,
         baseChance: 0.3,
         exclusiveGroup: 'magicalAuthority',
-        desc: 'Low-level resident caster. 1st-3rd level spells.',
+        desc: 'A resident caster of modest reach. Minor spells only.',
         tags: ['arcane'],
         magicLicense: 'low',
         priorityCategory: 'magic',
@@ -848,16 +848,16 @@ export const institutionalCatalog = {
         // ⚠ LICENCE HELD AT `low` BY MEASUREMENT, NOT BY OMISSION (TE-CH-6, ODQ §541.8).
         // §541.8 named this row as the shipped deity-doctrine violation. Executed against the
         // estate's own prose detector the premise does not hold FOR THIS ROW:
-        // `textAssertsFunctionalMagic('Basic healing spells. Cure Wounds (10 GP).')` is TRUE,
+        // `textAssertsFunctionalMagic('Basic healing spells. A closed wound costs 10 in gold.')`
         // so the entry as authored is a first-level SPELLCASTER the catalog files under faith,
         // not a cultural healer the engine wrongly convicts. A world where spells do not work
         // genuinely cannot hold it, and `low` says exactly that.
         // THE DOCTRINE GAP IS REAL AND IT IS A CONTENT GAP: the catalog holds no CULTURAL
         // divine healer for a magic-free world to keep. Filling it is a new row and the
-        // owner's call; re-licensing this one while its own prose says Cure Wounds would ship
+        // owner's call; re-licensing this one while its own prose says healing spells would ship
         // a contradiction rather than cure one. The disagreement between this row's mundane
         // TAG and its `low` licence is pinned in tests/lint/magicLicenceCensus.walker.test.js.
-        desc: 'Basic healing spells. Cure Wounds (10 GP).',
+        desc: 'Basic healing spells. A closed wound costs 10 in gold.',
         tags: ['divine', 'healing'],
         magicLicense: 'low',
         priorityCategory: 'religion',
@@ -1398,7 +1398,7 @@ export const institutionalCatalog = {
         required: false,
         forbiddenTradeRoutes: ['isolated'],
         baseChance: 0.4,
-        desc: 'Potions, alchemical items. Basic healing potions (50 GP).',
+        desc: 'Potions, alchemical items. Basic healing potions (50 in gold).',
         // TE-CH-5 / ODQ §541: `arcane` removed — the row declares `magicLicense: 'none'`
         // and `alchemy` is a TRADE tag (TRADE_INST_TAGS), so tag and licence now agree
         // in the DATA instead of being ordered by a precedence rule.
@@ -1436,7 +1436,7 @@ export const institutionalCatalog = {
       'Hireling hall': {
         required: false,
         baseChance: 0.5,
-        desc: 'Job board for torchbearers (1 GP/session), porters (5 GP/session).',
+        desc: 'Job board for torchbearers (1 in gold a session), porters (5 in gold a session).',
         tags: [],
         priorityCategory: 'adventuring',
       },
@@ -1450,7 +1450,7 @@ export const institutionalCatalog = {
       'Charlatan fortune tellers': {
         required: false,
         baseChance: 0.3,
-        desc: "Non-magical 'divination' using Deception. 1-5 GP.",
+        desc: "Non-magical 'divination' using Deception. 1-5 in gold.",
         tags: [],
         priorityCategory: 'adventuring',
       },
@@ -1979,7 +1979,7 @@ export const institutionalCatalog = {
         required: false,
         forbiddenTradeRoutes: ['isolated'],
         baseChance: 0.5,
-        desc: 'Spell scrolls for sale. 25 GP (cantrip) to 500+ GP (3rd level).',
+        desc: 'Spell scrolls for sale. 25 in gold for the smallest charm, 500 and up for a greater working.',
         tags: ['arcane'],
         magicLicense: 'medium',
         priorityCategory: 'magic',
@@ -2151,7 +2151,7 @@ export const institutionalCatalog = {
         minTier: 'metropolis',
         exclusiveGroup: 'gamblingScale',
         baseChance: 0.8,
-        desc: 'Concentrated gaming houses. Zone of Truth enforcement.',
+        desc: 'Concentrated gaming houses. Play kept honest by compelled truth.',
         tags: [],
         priorityCategory: 'entertainment',
       },
@@ -2189,7 +2189,7 @@ export const institutionalCatalog = {
       'Dungeon delving supply district': {
         required: false,
         baseChance: 0.5,
-        desc: 'Specialized adventuring gear. +1 weapons, silver weapons, etc.',
+        desc: 'Specialized adventuring gear. Warded weapons, silver weapons, etc.',
         tags: [],
         priorityCategory: 'adventuring',
       },
@@ -2240,7 +2240,7 @@ export const institutionalCatalog = {
         required: false,
         minTier: 'metropolis',
         baseChance: 0.2,
-        desc: '5th level Dream spell experiences. Lucid shared dreams, communication.',
+        desc: 'Dream-walking magic sold as experience. Lucid shared dreams, communication.',
         tags: ['arcane', 'exotic'],
         magicLicense: 'high',
         priorityCategory: 'exotic',
@@ -2258,7 +2258,7 @@ export const institutionalCatalog = {
         required: false,
         minTier: 'metropolis',
         baseChance: 0.3,
-        desc: 'Sending Stones network or Speaking Stones. 250-10,000 GP per station.',
+        desc: 'Paired Speaking Stones set in a network. 250-10,000 in gold per station.',
         tags: ['arcane', 'exotic'],
         magicLicense: 'high',
         priorityCategory: 'exotic',
