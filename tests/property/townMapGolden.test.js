@@ -13,7 +13,8 @@
  */
 import { describe, expect, it } from 'vitest';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { dirname, resolve } from 'node:path';
 
 import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
@@ -74,7 +75,7 @@ describe('GOLDEN — town-map model', () => {
     const record = { hash, ...meta };
     if (UPDATE) {
       mkdirSync(dirname(MANIFEST), { recursive: true });
-      writeFileSync(MANIFEST, JSON.stringify(record, Object.keys(record).sort(), 2) + '\n');
+      recordGolden({ surface: 'town-map-golden', path: MANIFEST, produce: () => JSON.stringify(record, Object.keys(record).sort(), 2) + '\n' });
     }
     // Fail-closed: a missing manifest must NOT self-mint a fresh green pin. A
     // merge/checkout that drops the fixture reds here — with regen instructions —

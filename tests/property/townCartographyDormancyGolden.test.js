@@ -32,7 +32,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { dirname, resolve } from 'node:path';
 
 import {
@@ -93,7 +94,7 @@ describe('town cartography — dormancy golden (the fence TC-2..TC-5 are measure
       const out = {};
       for (const row of rows) out[keyOf(row)] = dormantHashFor(row);
       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
-      writeFileSync(MANIFEST, `${JSON.stringify(out, Object.keys(out).sort(), 2)}\n`);
+      recordGolden({ surface: 'town-cartography-dormancy-golden', path: MANIFEST, produce: () => `${JSON.stringify(out, Object.keys(out).sort(), 2)}\n` });
       expect(Object.keys(out).length).toBe(rows.length);
     }, 180_000);
     return;

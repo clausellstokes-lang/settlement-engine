@@ -58,7 +58,8 @@
  */
 
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { dirname, join, resolve } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -535,7 +536,7 @@ describe('WR-2 disposition channels — dormancy fence (re-scoped, LANE DG)', ()
       for (const row of rows) manifestRows[keyOf(row)] = hashOf(wr2SurfaceProjection(darkRun(row)));
       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
       const payload = { scope: SCOPE, rows: manifestRows };
-      writeFileSync(MANIFEST, `${JSON.stringify(payload, null, 2)}\n`);
+      recordGolden({ surface: 'disposition-channels-dormancy-golden', path: MANIFEST, produce: () => `${JSON.stringify(payload, null, 2)}\n` });
       expect(Object.keys(manifestRows)).toHaveLength(rows.length);
     }, 120_000);
     return;
