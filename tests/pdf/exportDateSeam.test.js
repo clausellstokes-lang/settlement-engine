@@ -161,3 +161,63 @@ describe('campaign PDF — culture is read from the RESOLVED config', () => {
     }
   });
 });
+
+/**
+ * MEMBER RESOLUTION. `campaign.settlementIds` and a save's `id` are the same
+ * identity written by two different producers, and NOTHING in the persisted shape
+ * forces them to the same JavaScript type — the import panel round-trips whatever
+ * the source file carried, and a legacy save can hold a numeric id. The exporter
+ * resolved members with a raw `Set.has(s.id)`, so one type mismatch resolves ZERO
+ * members and the paid artifact prints a cover with no settlements at all rather
+ * than failing loudly. Nine sibling sites across src/ (mapEntityIds.js:41,
+ * RoadScenePanel.jsx:64, resolveExportSeam.js:28-33, AuspicePanel.jsx:59,
+ * PantheonPanel.jsx:77, RealmVerbComposer.jsx:62, AdminSimTuningPanel.jsx:47,
+ * AssignDeityFromMap.jsx:46, SettlementsPanel.jsx:723) already coerce both ends
+ * with `String`; the two exporters were the outliers.
+ */
+describe('campaign PDF — member ids resolve across the id-type seam', () => {
+  function member(id, name) {
+    return { id, name, settlement: { name, tier: 'town', population: 1500, npcs: [], neighbourNetwork: [] } };
+  }
+
+  function paintedNames(campaign, saves, file) {
+    try {
+      generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026' });
+      return paintedText(file).toLowerCase();
+    } finally {
+      rmSync(file, { force: true });
+    }
+  }
+
+  test('NUMERIC save ids resolve against STRING settlementIds', () => {
+    const painted = paintedNames(
+      { id: 'c13', name: 'Numeric Saves', settlementIds: ['1', '2'] },
+      [member(1, 'Ashford'), member(2, 'Grimhold')],
+      'campaign-numeric-saves.pdf',
+    );
+    expect(painted).toContain('ashford');
+    expect(painted).toContain('grimhold');
+  });
+
+  test('STRING save ids resolve against NUMERIC settlementIds', () => {
+    const painted = paintedNames(
+      { id: 'c14', name: 'Numeric Ids', settlementIds: [1, 2] },
+      [member('1', 'Ashford'), member('2', 'Grimhold')],
+      'campaign-numeric-ids.pdf',
+    );
+    expect(painted).toContain('ashford');
+    expect(painted).toContain('grimhold');
+  });
+
+  test('a genuine non-member is still excluded (the coercion is not a wildcard)', () => {
+    const painted = paintedNames(
+      { id: 'c15', name: 'Exclusion', settlementIds: ['1'] },
+      [member(1, 'Ashford'), member(2, 'Grimhold')],
+      'campaign-exclusion.pdf',
+    );
+    // anchored: 'ashford' proves the index rows rendered at all, so Grimhold's
+    // absence is a selection rather than an empty page.
+    expect(painted).toContain('ashford');
+    expect(painted).not.toContain('grimhold');
+  });
+});

@@ -296,3 +296,29 @@ describe('edge cases', () => {
     expect(book.sections.map).toBe(false);
   });
 });
+
+/**
+ * MEMBER RESOLUTION across the id-type seam. Same defect, same cause as the campaign
+ * PDF's (pinned in exportDateSeam.test.js): `collectWorldBook` resolved members with
+ * a raw `Set.has(s.id)`, so a numeric save id against a string `settlementIds` (or the
+ * reverse) collected ZERO dossiers and the paid World Book printed an empty book.
+ * Nine sibling sites in src/ already coerce both ends with `String`.
+ */
+describe('member ids resolve across the id-type seam', () => {
+  const member = (id, name) => ({ id, name, settlement: { name, tier: 'town', population: 1500 } });
+
+  it('NUMERIC save ids resolve against STRING settlementIds', () => {
+    const wb = collectWorldBook({ id: 'w1', name: 'WB', settlementIds: ['1', '2'] }, [member(1, 'Ashford'), member(2, 'Grimhold')]);
+    expect(wb.dossiers.map(d => d.name)).toEqual(['Ashford', 'Grimhold']);
+  });
+
+  it('STRING save ids resolve against NUMERIC settlementIds', () => {
+    const wb = collectWorldBook({ id: 'w2', name: 'WB', settlementIds: [1, 2] }, [member('1', 'Ashford'), member('2', 'Grimhold')]);
+    expect(wb.dossiers.map(d => d.name)).toEqual(['Ashford', 'Grimhold']);
+  });
+
+  it('a genuine non-member is still excluded (the coercion is not a wildcard)', () => {
+    const wb = collectWorldBook({ id: 'w3', name: 'WB', settlementIds: ['1'] }, [member(1, 'Ashford'), member(2, 'Grimhold')]);
+    expect(wb.dossiers.map(d => d.name)).toEqual(['Ashford']);
+  });
+});

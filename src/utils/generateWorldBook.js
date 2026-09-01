@@ -201,8 +201,12 @@ export function collectWorldBook(campaign, allSaves = [], opts = {}) {
   const { faithUnlocked = false } = opts;
   if (!campaign) return { present: false, mode };
   const player = mode === 'player';
-  const ids = new Set(campaign.settlementIds || []);
-  const members = (Array.isArray(allSaves) ? allSaves : []).filter(s => ids.has(s.id));
+  // ⚠ BOTH ENDS COERCE — the same id-type seam the campaign PDF carries (see
+  // generateCampaignPDF.js's note): a numeric save id against a string
+  // `settlementIds` collected ZERO dossiers and printed an empty book. Pinned in
+  // tests/pdf/worldBook.test.js.
+  const ids = new Set((campaign.settlementIds || []).map(String));
+  const members = (Array.isArray(allSaves) ? allSaves : []).filter(s => ids.has(String(s.id)));
 
   const dossiers = members.map(save => {
     const projected = player ? toPublicSafe(save.settlement || {}) : (save.settlement || {});
