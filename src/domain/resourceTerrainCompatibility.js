@@ -22,7 +22,7 @@
  * PURE: one src/data import, no store, no React, no I/O, no Date/Math.random.
  *
  * @enforced-by tests/build/domainGeneratorsBoundary.test.js,
- *   tests/domain/steadingTopography.test.js, tests/generators/resolveResources.test.js
+ *   tests/domain/steadingTopography.test.js, tests/generators/terrainOverrideResolution.test.js
  */
 
 import { RESOURCE_DATA } from '../data/goods/identity.js';
