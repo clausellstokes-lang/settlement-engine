@@ -96,6 +96,7 @@ describe('Timeline — engine prose renders verbatim at every Text boundary', ()
   test('no boundary emits a zero-width non-joiner', () => {
     // U+200C is covered by NONE of the eight embedded faces; one anywhere in the
     // chapter splits that run onto a non-embedded Helvetica.
+    // anchored: six sibling tests pin exact source strings against this SAME `text`.
     expect(text).not.toContain(ZWNJ);
   });
 });

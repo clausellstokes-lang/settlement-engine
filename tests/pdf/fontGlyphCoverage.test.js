@@ -2,11 +2,11 @@
  * fontGlyphCoverage.test.js — build gate against PDF "tofu".
  *
  * The dossier PDF embeds exactly eight TTFs (public/fonts: Lora ×4 +
- * Nunito ×4). @react-pdf renders any codepoint the active font lacks as
- * a blank .notdef box ("tofu"). Several sections had shipped literal
- * glyphs absent from every embedded font — arrows (→ ← ↔), a lightning
- * bolt (↯), a four-point star (✦), a warning sign (⚠) — so paying
- * customers printed empty boxes.
+ * Nunito ×4). ⛔ CORRECTED 2026-09-01 — @react-pdf does NOT render an
+ * uncovered codepoint as a blank .notdef box. It substitutes a
+ * NON-EMBEDDED base-14 Helvetica and truncates to the low byte, so 影
+ * prints "q", → prints "’", ⚠ prints nothing. Sections had shipped such
+ * literals — so paying customers printed WRONG LETTERS, not boxes.
  *
  * This test is the durable guard. It:
  *   1. Loads the real embedded TTFs with fontkit and builds the set of

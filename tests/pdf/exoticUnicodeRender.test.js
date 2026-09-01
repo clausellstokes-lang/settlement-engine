@@ -3,17 +3,17 @@
  *
  * Exotic-unicode render guard for the react-pdf export path.
  *
- * `safe()` (src/pdf/lib/format.js) only defuses the Lora f-ligatures — it does
- * NOT transliterate or strip non-Latin scripts. That is deliberate: the Lora
- * subset simply has no glyph for CJK / Arabic / emoji, so those code points
- * render as "tofu" (a missing-glyph box). The contract this test pins is that
- * unrenderable glyphs TOFU rather than CRASH: react-pdf's layout/pagination must
- * still produce a valid PDF when an NPC's name, blurb, and secrets are full of
- * CJK, RTL Arabic, emoji, and smart punctuation.
+ * `safe()` (src/pdf/lib/format.js) is now IDENTITY and does NOT transliterate or
+ * strip non-Latin scripts — the embedded faces simply have no glyph for CJK /
+ * Arabic / emoji. ⛔ CORRECTED 2026-09-01: those code points do NOT render as
+ * "tofu" (a missing-glyph box). react-pdf substitutes a NON-EMBEDDED Helvetica
+ * and truncates to the low byte — 影 prints "q", 街 "W", م "E". The contract
+ * pinned here is ONLY that they do not CRASH: layout/pagination still produce a
+ * valid PDF. ⚠ NOT that they render right — renderedFontEmbedding.test.js convicts them.
  *
  * (The campaign PDF, by contrast, uses jsPDF/Helvetica and folds these to ASCII
  * placeholders — see campaignPdfSanitize.test.js. This file is the react-pdf
- * counterpart: no fold, glyphs tofu, but the document is still well-formed.)
+ * counterpart: no fold, but the document is still well-formed.)
  */
 
 import { fileURLToPath } from 'node:url';
@@ -82,8 +82,8 @@ describe('react-pdf path tofus (not crashes) on exotic unicode', () => {
       React.createElement(NotableNPCs, { settlement: {}, vm }));
 
     // The contract: renderToBuffer must NOT throw on unrenderable glyphs, and it
-    // must emit a well-formed PDF (the tofu boxes are a visual fallback, not a
-    // structural failure).
+    // must emit a well-formed PDF (the substituted letters are a visual defect,
+    // not a structural failure — this arm pins only that it stays well-formed).
     const buf = await renderToBuffer(element);
     expect(buf.slice(0, 5).toString('latin1')).toBe('%PDF-');
     expect(buf.length).toBeGreaterThan(1000);
