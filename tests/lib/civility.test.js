@@ -4,8 +4,12 @@
  *
  * The design names four pins for this guard; three of them live here (the
  * fourth — "the server refuses what a bypassed client submits" — is the SQL
- * mirror's, asserted structurally in tests/lint/civilityMirrors.test.js because
- * this suite has no live database):
+ * mirror's, and it is EXECUTED rather than asserted: tests/security/
+ * civilityGuard.pglite.test.js loads migration 195's functions into pglite and
+ * runs THESE SAME shared vectors through both mirrors, verdict for verdict.
+ * ADDRESS CORRECTION: this line named tests/lint/civilityMirrors.test.js, which
+ * has never existed on any branch; the "no live database" reason it gave is also
+ * obsolete — the pglite suite supplies one):
  *
  *   1. shared vectors green on this mirror
  *   2. the Scunthorpe fixture set (innocent-containing-substring names PASS)

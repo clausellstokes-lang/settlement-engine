@@ -31,7 +31,10 @@
  * members** and 940 of 2,140 power factions hold no rung at all. Leaving a
  * member unstamped is therefore not a cosmetic omission — it is how the ruling
  * seat goes ladder-invisible. `densityRoll.js` stamps every member and
- * `tests/generators/densityRungMapping.test.js` asserts it.
+ * `tests/generators/densityLaw.test.js` asserts it (its §817-Q5/Q3 block:
+ * "every named figure the roll places is STAMPED with a known importance").
+ * ADDRESS CORRECTION: the name above replaces
+ * `tests/generators/densityRungMapping.test.js`, which has never existed.
  *
  * ════════════════════════════════════════════════════════════════════════════
  * THE BANDS, AND WHY THEY AGREE WITH `RUNG_CAP_BY_TIER` WITHOUT TOUCHING IT

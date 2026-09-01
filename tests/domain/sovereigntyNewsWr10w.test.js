@@ -1,5 +1,7 @@
 /**
- * sovereigntyNews.test.js — WR-10's reader projection, pinned at the projector.
+ * sovereigntyNewsWr10w.test.js — WR-10's reader projection, pinned at the projector.
+ * (ADDRESS CORRECTION: this header named sovereigntyNews.test.js, a file that has
+ * never existed on any branch — the header was mis-naming its own file.)
  *
  * The kind-pool walker (tests/lint/sovereigntyKindPools.walker.test.js) owns the corpus,
  * the census and the desks. THIS file owns what the projector does with a typed fact:

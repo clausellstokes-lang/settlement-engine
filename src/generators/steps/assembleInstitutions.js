@@ -721,8 +721,13 @@ registerStep('assembleInstitutions', {
 
   // Wave 8 — stamp catalog identity on every catalog-derived institution.
   // Pure name→id lookup: consumes no rng, changes no other field, so
-  // same-seed output is byte-identical except the new catalogId fields
-  // (pinned by tests/joins/institutionIdentity.test.js). Custom/DM
+  // same-seed output is byte-identical except the new catalogId fields.
+  // ADDRESS CORRECTION: that one-time pre-vs-post comparison was pinned in
+  // tests/joins/institutionIdentity.test.js, RETIRED at the W6 master merge
+  // (151f8ac38) and never replaced — it cannot be re-run. What IS pinned today is
+  // the standing property: tests/property/generatorGoldenMaster.test.js hashes each
+  // settlement WITH its catalogId fields, so drift in this stamp moves a golden.
+  // Custom/DM
   // institutions carry no catalogId; every id-first join falls back to the
   // legacy name matcher for them (and for legacy saves).
   for (const inst of /** @type {any[]} */ (institutions)) {

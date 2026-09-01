@@ -39,8 +39,11 @@
  * `f(inst.name, tags.includes('x'))` counts as a label join). Both are
  * accepted costs of a regex gate — the counts below were hand-audited.
  * The load-bearing chain joins are converted and pinned elsewhere
- * (tests/joins/institutionIdentity.test.js); this gate keeps the REST of the
- * habitat from growing back.
+ * (tests/joins/chains.test.js — "every chain resolves through the id mapping too"
+ * and "the id mapping agrees with the fuzzy matcher pattern-by-pattern"); this
+ * gate keeps the REST of the habitat from growing back. ADDRESS CORRECTION: this
+ * line named tests/joins/institutionIdentity.test.js, RETIRED at the W6 master
+ * merge (151f8ac38).
  */
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';

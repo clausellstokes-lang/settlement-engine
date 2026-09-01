@@ -17,8 +17,11 @@
  *      (worldPulse / spatial / generators / generate*). EVERY same-seed-shifting constant
  *      lives behind that call graph (see the golden fixtures), so a golden-shifting
  *      constant cannot be named by any valid entry. The validator rejects it, and the
- *      walker test (tests/domain/autoTunableRegistryWalker.test.js) fails the GATE if one
- *      is ever added — the "impossible to cross" enforcement.
+ *      walker test (tests/domain/autoTunableRailsWalker.test.js) fails the GATE if one
+ *      is ever added — the "impossible to cross" enforcement. (ADDRESS CORRECTION:
+ *      the name above replaces tests/domain/autoTunableRegistryWalker.test.js, which
+ *      has never existed on any branch; the rails walker rejects a worldPulse/spatial/
+ *      generator module and THROWS from assertValidRegistry, which is the claim.)
  *   3. THE LANE CLASSIFIER (laneClassifier.js) additionally forces lane B on any proposal
  *      flagged `shiftsGolden` by the soak battery — belt-and-suspenders against a
  *      mis-declared surface.

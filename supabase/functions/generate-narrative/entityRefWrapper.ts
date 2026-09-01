@@ -17,8 +17,11 @@
  *   - npc id   = npc.id ?? npc.refId ?? slugifyEntity(name)   (entityIdFor 'npc')
  *   - faction  = factionIdFromName(name) = `faction.<snake>`
  *   - neighbour= entry.id ?? `neighbour.<slugifyEntity(name)>` (neighbourIdFor)
- * A parity test (tests/lib/entityRefWrapper.parity.test.js) asserts these match
+ * A parity test (tests/edgeFunctions/entityRefWrapper.test.js) asserts these match
  * the client helpers for a sample npc + faction so drift fails CI, not prod.
+ * ADDRESS CORRECTION: the name above replaces the never-existing address
+ * tests/lib/entityRefWrapper.parity.test.js; the edgeFunctions suite IS the parity
+ * block, importing both the server helpers and buildDossierEntityIndex.
  *
  * The model is NEVER trusted to emit tokens — this is pure post-processing over
  * a fixed name set the server controls. Wrapping rules:

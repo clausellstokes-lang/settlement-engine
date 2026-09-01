@@ -14,10 +14,14 @@
  *
  * Consumers:
  *   - tests/lib/civility.test.js          (the client mirror, executed)
- *   - tests/lint/civilityMirrors.test.js  (the server mirror's SQL is asserted
- *                                          to carry the same lists + folds; the
- *                                          SQL itself runs only against a live
- *                                          database, which this suite has none of)
+ *   - tests/security/civilityGuard.pglite.test.js
+ *                                         (the server mirror, EXECUTED: migration
+ *                                          195's SQL functions are loaded into
+ *                                          pglite and run over these same vectors,
+ *                                          verdict for verdict against the client)
+ *     ADDRESS CORRECTION: this row named tests/lint/civilityMirrors.test.js, which
+ *     has never existed on any branch. The pglite suite is the real consumer, and
+ *     it imports these arrays directly.
  *
  * The vectors are deliberately CLINICAL and few. They are not a corpus — they
  * are the named fixture SETS the design pins:

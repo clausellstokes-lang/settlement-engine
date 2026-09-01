@@ -3,8 +3,12 @@
  *
  * Extracted so the authoring manager (CustomContent.jsx) and the premium upsell
  * preview (CustomContentGate.jsx) could render it without the two files
- * importing each other — that mutual import was a fresh ESM cycle (see
- * tests/architecture/importCycles.test.js). The Gate does not render it today,
+ * importing each other — that mutual import was a fresh ESM cycle, guarded today
+ * by tests/architecture/layerBoundaries.test.js's shrink-only dependency-cycle
+ * baseline ("dependency-cycle set equals the checked-in baseline"). ADDRESS
+ * CORRECTION: this line named tests/architecture/importCycles.test.js, RETIRED at
+ * the W2 master merge (de9b0361c); the SCC guard moved, it did not disappear.
+ * The Gate does not render it today,
  * so CustomContent.jsx is the only importer; the leaf shape stays because it
  * keeps the manager under the component-size ratchet.
  */

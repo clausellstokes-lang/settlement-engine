@@ -16,8 +16,10 @@
  * not a performance bound, it is a claim about what a settlement of that size
  * can plausibly be. A thorp can never roll seven named figures; a metropolis
  * never rolls two. The roll explores the envelope and structurally cannot leave
- * it — `tests/generators/densityDistributionShape.test.js` asserts real entropy
- * INSIDE every band and ZERO mass outside it.
+ * it — `tests/generators/densityLaw.test.js` asserts real entropy
+ * INSIDE every band and ZERO mass outside it (its §810.2b believability-envelope
+ * block, per tier). ADDRESS CORRECTION: the name above replaces
+ * `tests/generators/densityDistributionShape.test.js`, which has never existed.
  *
  * Pure data. No RNG, no imports from the roll, no React, no store.
  */

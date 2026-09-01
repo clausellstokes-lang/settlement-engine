@@ -28,8 +28,11 @@
  * Not one number in this file. Every quantity is read from `densityBands.js`,
  * the tuning surface, so the owner's signature at the tuning pass is an edit to
  * that file alone (car D4). This module is band-AGNOSTIC by construction and
- * `tests/generators/densityDistributionShape.test.js` re-derives its
- * expectations from the same table rather than restating any figure.
+ * `tests/generators/densityLaw.test.js` re-derives its
+ * expectations from the same table rather than restating any figure (its header
+ * states the rule: no number from the tuning surface is restated there).
+ * ADDRESS CORRECTION: the name above replaces
+ * `tests/generators/densityDistributionShape.test.js`, which has never existed.
  */
 
 import {

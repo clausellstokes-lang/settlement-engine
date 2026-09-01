@@ -41,8 +41,15 @@
  * which exists because it was needed. It STRENGTHENS two of them: the scope
  * sentinel checks the resolved file set against the baseline's own membership
  * rather than a single directory probe, and that sentinel has its own injectable
- * seam so its failure paths are exercised by a meta-test
- * (tests/lint/fullTypecheckFailClosed.test.js) instead of merely asserted.
+ * seam so its failure paths are EXERCISED instead of merely asserted.
+ * ⚠ ADDRESS CORRECTION (measured, not remembered): this docblock used to name
+ * `tests/lint/fullTypecheckFailClosed.test.js` as that meta-test. THAT FILE HAS
+ * NEVER EXISTED on any branch — unlike the two siblings it was modelled on
+ * (`tests/lint/domainStrictFailClosed.test.js`,
+ * `tests/lint/hazardRegistryFailClosed.test.js`), which do. The meta-test was
+ * FOLDED IN rather than shipped separately: `tests/lint/fullTypecheckRatchet.test.js`
+ * carries it as its "EXECUTED PINS" half, driving this script through the three
+ * env seams below. The GUARANTEE was always real; only the address was fiction.
  *
  * ── USAGE ───────────────────────────────────────────────────────────────────
  *   npm run typecheck:ratchet          # the gate step (wired into `npm run check`)
@@ -69,10 +76,11 @@ import url from 'node:url';
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
 
 // TESTABILITY SEAMS (ported from check-domain-strict.mjs, plus a third).
-// The fail-closed meta-test injects a fake tsc, a fake --listFilesOnly and a temp
-// baseline so every failure path is EXERCISED without touching the real
-// toolchain or the committed baseline. A ratchet whose failure paths are never
-// run is a ratchet nobody has proven works.
+// tests/lint/fullTypecheckRatchet.test.js — its EXECUTED PINS half, the fold that
+// stands in for a fail-closed sibling (see the address correction above) — injects
+// a fake tsc, a fake --listFilesOnly and a temp baseline so every failure path is
+// EXERCISED without touching the real toolchain or the committed baseline. A
+// ratchet whose failure paths are never run is a ratchet nobody has proven works.
 const BASELINE = process.env.FULL_TYPECHECK_BASELINE
   || path.join(ROOT, 'scripts', '.full-typecheck-baseline.json');
 const TSC_CMD = process.env.FULL_TYPECHECK_TSC_CMD;

@@ -30,7 +30,12 @@ import { resourceKeyForLabel } from '../domain/resourceSemantics.js';
 // stamped institutions (inst.catalogId, assembleInstitutions) compare by id —
 // exact and rename-proof. Because the id-set is BUILT from the fuzzy matcher,
 // the id path selects EXACTLY the institutions the fuzzy path selected for
-// generated rosters (pinned in tests/joins/institutionIdentity.test.js); the
+// generated rosters. That equivalence is pinned by tests/joins/chains.test.js
+// ("every chain resolves through the id mapping too" + "the id mapping agrees
+// with the fuzzy matcher pattern-by-pattern"), over the catalog x pattern space.
+// ADDRESS CORRECTION: this line named tests/joins/institutionIdentity.test.js,
+// RETIRED at the W6 master merge (151f8ac38). Its end-to-end arm over a REAL
+// GENERATED ROSTER has no successor, so that half is unenforced today. The
 // known false matches ('Mill' pattern → 'Access to external mill') are frozen
 // as-is, not silently changed. Institutions WITHOUT a catalogId (legacy saves,
 // custom/DM content, cascade additions) keep the original fuzzy name match.
