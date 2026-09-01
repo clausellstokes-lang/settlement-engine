@@ -35,11 +35,13 @@
  * the drift guard in `tests/domain/deityFlaws.test.js` pins every mirrored word to
  * both sources.
  *
- * PURE + rng-free + store-blind: imports only `kernel/math`. A variance-shaped
- * modulation (capricious) is therefore NOT CONSTRUCTIBLE here, which is why its row
- * is declared dormant rather than approximated.
+ * PURE + rng-free + store-blind: imports only `kernel/math` and the tuning surface,
+ * which itself imports nothing. A variance-shaped modulation (capricious) is
+ * therefore NOT CONSTRUCTIBLE here, which is why its row is declared dormant rather
+ * than approximated.
  */
 import { clamp01 } from '../../kernel/math.js';
+import { DEITY_FLAW_TUNING } from './faithTuningSurface.js';
 
 /**
  * Provenance of the candidate register, carried in the module so a reader who
@@ -126,25 +128,14 @@ export const FLAW_EFFECTS = Object.freeze({
 });
 
 /**
- * ⚠ EVERY NUMBER BELOW IS AN OWNER-UNSIGNED CANDIDATE (§763's tuning carve-out).
- * The SHAPE is the car's claim; the values are the pen's.
+ * W-FAITH F6c — THE TUNING MOVED TO THE SIGNATURE SURFACE. `DEITY_FLAW_TUNING`
+ * (JEALOUS_BOON_FADE, LEVEL_SCALE, WRATH_SHARPEN_RUNGS — every one an owner-unsigned
+ * candidate, §763) now lives in `faithTuningSurface.js`, the one file the owner's
+ * pen edits, and is re-exported here VERBATIM — the same object, not a copy — so
+ * every existing import path still resolves. The per-value derivation notes moved
+ * with the numbers they explain.
  */
-export const DEITY_FLAW_TUNING = Object.freeze({
-  // The fraction of the boon lost at FULL contest by a `defining` jealous god. At 1,
-  // the blessing fades in exact proportion to the share rivals hold: a god whose
-  // pantheon is half contested blesses at half strength before weighting. Legible by
-  // construction; the value is a taste row.
-  JEALOUS_BOON_FADE: 1,
-  // How deeply each authored level engages a modulation. The axis level is a POSITION
-  // band, not a magnitude band (the schema keeps the two ladders distinct on purpose),
-  // so this is the kernel's interpretation of the position ladder, exactly as
-  // FAITH_FIELD_TUNING.STRENGTH interprets the magnitude ladder.
-  LEVEL_SCALE: Object.freeze({ a_touch: 0.35, marked: 0.7, defining: 1 }),
-  // Rungs of exposure demotion a falling-fortunes wrathful pull recovers. One rung:
-  // the god is felt more keenly, never above its authored ceiling (arithmetic, not
-  // discipline — the demotion is floored at 0).
-  WRATH_SHARPEN_RUNGS: 1,
-});
+export { DEITY_FLAW_TUNING };
 
 /** @param {unknown} v @returns {string} */
 const str = (v) => (typeof v === 'string' ? v : '');

@@ -66,6 +66,7 @@ import { PIETY_TUNING, pietyMultOf } from './piety.js';
 import { deityRankStrength } from './cultImpositionApply.js';
 import { magicLedger } from '../magicLedger.js';
 import { FLAW_EFFECTS, jealousBoonScale01 } from './deityFlaws.js';
+import { FAITH_FIELD_TUNING, FAITH_FIELD_DOOR } from './faithTuningSurface.js';
 
 /**
  * The channel vocabulary, MIRRORED from `customContentSchema.DEITY_EFFECT_CHANNEL_KEYS`
@@ -153,69 +154,19 @@ export const FAITH_UNBOUND_CHANNELS = Object.freeze({
 });
 
 /**
- * The seam name TE-VIRT-1 owes a home. Written as a STRING rather than read from
- * any rules object, because nothing reads it yet and a key that is only ever
- * compared against would read as a live gate that is permanently off — which is
- * indistinguishable, to the next lane, from a feature that was tried and shelved.
+ * W-FAITH F6c — THE TUNING AND THE DOOR MOVED TO THE SIGNATURE SURFACE.
+ *
+ * `FAITH_FIELD_TUNING` (PATRON_AMP, STRENGTH, DAMP_MAX, CAUSAL_SWING — every one an
+ * owner-unsigned candidate, §763) and `FAITH_FIELD_DOOR` now live in
+ * `faithTuningSurface.js`, the ONE file the owner's pen edits, so the tune-and-sign
+ * act is a single file's diff (the D4 density-signature pattern). They are
+ * re-exported here VERBATIM — same objects, not copies — so every existing import
+ * path still resolves and a fork between the two spellings is unconstructible
+ * (pinned by identity in `tests/domain/faithTuningSurface.test.js`). The derivation
+ * notes for each value, including the CAUSAL_SWING lawOrderSwing-parity note and the
+ * DAMP_MAX 63 % reachable-band note, moved with the numbers they explain.
  */
-export const FAITH_FIELD_DOOR = 'faithFieldEnabled';
-
-/**
- * ⚠ EVERY NUMBER BELOW IS AN OWNER-UNSIGNED CANDIDATE (§763's tuning carve-out).
- * The SHAPE is the car's claim; the values are the pen's.
- */
-export const FAITH_FIELD_TUNING = Object.freeze({
-  // The patron is louder than a co-resident cult, but not categorically different —
-  // the whole point of a FIELD is that the patron stopped being the only voice.
-  PATRON_AMP: 1.6,
-  // Band → signed magnitude, before any weighting. `heavy` at full weight is a
-  // quarter-turn on a channel; a cult with a faint boon is nearly inaudible, which
-  // is the intended texture.
-  STRENGTH: Object.freeze({ faint: 0.05, firm: 0.12, heavy: 0.25 }),
-  // THE SATURATION CAP — the piety module's own DAMP_MAX by value and by intent.
-  //
-  // ⚠⚠ IT IS A BACKSTOP, NOT THE RUNAWAY GUARANTEE, AND THAT WAS MEASURED RATHER
-  // THAN ASSUMED. The first draft of this file claimed "ten heavy-boon deities move
-  // a channel no further than the cap"; executing it showed ten heavy-boon deities
-  // reach 0.25175, and that NO conserved pantheon can reach 0.6 at all. The real
-  // bound is STRUCTURAL: `renormShares` conserves the adherent pool at 100 points,
-  // so Σ share01 ≤ 1 and the whole fold is bounded by
-  //     max|channel| = STRENGTH.heavy × DEITY_RANK_STRENGTH.major × PATRON_AMP
-  //                  = 0.25 × 0.95 × 1.6 = 0.38
-  // attained only by a lone ascendant major patron holding the entire pool. A
-  // pantheon cannot run away because ADDING a god DIVIDES the pool rather than
-  // adding to it — a stronger guarantee than a clamp, because it holds by
-  // construction instead of by a number somebody could raise.
-  //
-  // The clamp stays, and is live rather than dead code: it binds the moment a
-  // caller hands in an UNNORMALISED state (measured — ten members at 100 share each
-  // clamp to exactly 0.6). Both halves are pinned in `faithFieldEquation.test.js`.
-  //
-  // ⚠ FOR THE PEN (F6c): the reachable band therefore uses 63 % of the declared cap.
-  // Whether that is right taste — a lower cap, or a louder STRENGTH ladder — is a
-  // tuning row for the owner's signature, not a lane's call to make silently.
-  DAMP_MAX: 0.6,
-  // W-FAITH F4c — THE CAUSAL SWING: score points on a `causalState` variable per unit
-  // of signed channel total. It is DERIVED from an existing calibrated constant rather
-  // than invented, which is the only reason a lane may set it at all:
-  //
-  //   `DEITY_LAW_TUNING.lawOrderSwing = 8` is the law_order swing a fully lawful patron
-  //   applies, and its own comment calibrates it as "comparable in scale to the
-  //   government-archetype term (±8), so a patron meaningfully tilts order without
-  //   overwhelming the institutional signals". At SWING = 20 a heavy boon from a lone
-  //   ascendant major patron holding the whole adherent pool (channel total 0.38 at
-  //   neutral piety) lifts its variable by round(0.38 × 20) = 8 — EXACTLY the lawful
-  //   patron's swing. The two authored deity levers therefore speak at one volume by
-  //   construction rather than by coincidence.
-  //
-  // ⚠ THE CLAMPED EXTREME IS LOUDER THAN THAT, and it is stated rather than hidden:
-  // `channels[ch]` already carries `pietyMultOf` (0.5..2.0), so a devout city can drive
-  // a channel to the DAMP_MAX backstop, where the lift is round(0.6 × 20) = 12. F3c's
-  // recorded 0.38 bound was measured at piety 1 and is a bound on the WEIGHT fold, not
-  // on the term; this car re-measures the reachable maximum end to end rather than
-  // inheriting that figure. Both numbers are owner-taste rows for F6c.
-  CAUSAL_SWING: 20,
-});
+export { FAITH_FIELD_TUNING, FAITH_FIELD_DOOR };
 
 /** @typedef {import('../settlement.schema.js').SimSettlement} SimSettlement */
 /** @typedef {{ deityRef?: unknown, snapshot?: Record<string, unknown>, share?: unknown, standing?: unknown, suppressed?: unknown }} FaithMember */

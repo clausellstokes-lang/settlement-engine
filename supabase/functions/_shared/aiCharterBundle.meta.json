@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-01T02:22:10.143Z",
+  "generatedAt": "2026-09-01T03:17:05.331Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "1cbfa159c1c82243",
+  "sourceHash": "df945c43f3c7a3bc",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -88,6 +88,7 @@
     "src/domain/worldPulse/demographicsWorks.js",
     "src/domain/worldPulse/dispositionLedger.js",
     "src/domain/worldPulse/faithField.js",
+    "src/domain/worldPulse/faithTuningSurface.js",
     "src/domain/worldPulse/intervalWeeks.js",
     "src/domain/worldPulse/namedPersonTransit.js",
     "src/domain/worldPulse/partyImpactKinds.js",

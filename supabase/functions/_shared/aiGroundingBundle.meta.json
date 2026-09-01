@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-01T02:22:10.029Z",
+  "generatedAt": "2026-09-01T03:17:05.281Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "2afd5742522b867c",
+  "sourceHash": "1ec34fee4d3cceb8",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -58,6 +58,7 @@
     "src/domain/worldPulse/deityAxes.js",
     "src/domain/worldPulse/deityFlaws.js",
     "src/domain/worldPulse/faithField.js",
+    "src/domain/worldPulse/faithTuningSurface.js",
     "src/domain/worldPulse/piety.js",
     "src/domain/worldPulse/pulseHelpers.js",
     "src/domain/worldPulse/relationshipCompatibility.js",
