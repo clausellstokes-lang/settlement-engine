@@ -56,15 +56,21 @@ import {
   CUSTOM_CONTENT_MANIFEST,
 } from '../../src/domain/content/customContentManifest.js';
 import {
-  DEFAULT_LIVING_CONTENT_LAW_VERSION,
   LIVING_CONTENT_BUCKETS,
-  LIVING_CONTENT_LAW_CONFIG_KEY,
   NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION,
+  newSettlementLivingContentLaw,
+} from '../../src/domain/content/livingContentLaw.js';
+// THE GATE IS THE SEAM'S. The version vocabulary and the closed membership test
+// live on the ENGINE side of the lazy boundary, because the synchronous pipeline
+// must answer dormant-or-lit before anything is loaded.
+import {
+  DEFAULT_LIVING_CONTENT_LAW_VERSION,
+  LIVING_CONTENT_LAW_CONFIG_KEY,
   ROSTER_LIVING_CONTENT_LAW_VERSION,
   materializesLivingContent,
-  newSettlementLivingContentLaw,
   readLivingContentLawVersion,
-} from '../../src/domain/content/livingContentLaw.js';
+  registerLivingContentRosterBuilder,
+} from '../../src/domain/content/livingContentSeam.js';
 import {
   LIVING_CONTENT_ADOPTION_SURFACES,
   LIVING_CONTENT_ROSTER_SCHEMA_VERSION,
@@ -75,6 +81,13 @@ import {
   customContentReferencePack,
   identifyCustomContentPack,
 } from '../fixtures/customContentReferencePack.js';
+
+// ⛔ THE SEAM MUST BE ARMED BEFORE ANY LIT PIPELINE RUN. The roster payload is
+// reached through a dynamic import in production (livingContentSeam.js), and the
+// pipeline throws rather than quietly degrading when a v2 world finds no builder
+// registered. Registering the real builder here is what makes every lit arm below
+// exercise the SAME path production takes after `loadLivingContentRoster()`.
+registerLivingContentRosterBuilder(buildLivingContentRoster);
 
 const CONFIG = Object.freeze({
   settType: 'town',
