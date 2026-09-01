@@ -9,8 +9,8 @@
  * erode the person's authored core past a stated bound.
  *
  * NOT A SECOND DRIFT SYSTEM. Nothing here writes an offset, holds a chart, or owns
- * a rate. W-LIVES car L2's `characterDrift.js` is the only module in the estate that
- * may move a soul and car L3's `livedExperienceFunnel.js` is the only one that may
+ * a rate. W-LIVES car L2's DRIFT STATE leaf is the only module in the estate that may
+ * move a soul and car L3's EXPERIENCE FUNNEL is the only one that may
  * ask it to; this leaf produces the EMISSION PLAN one of those lessons is built
  * from, and a PREDICATE over the arithmetic those two already perform. Every
  * constant of theirs — the materialization floor, the clamp, the decay retention —
@@ -61,10 +61,20 @@
  *
  * ── DARK ────────────────────────────────────────────────────────────────────
  *
+ * ⛔⛔ AND THE W-LIVES LEAVES ARE NAMED BY DESCRIPTION, NEVER BY FILENAME, WHICH
+ * READS AS PEDANTRY AND IS NOT. Two arms in that family — the funnel's "the ONLY
+ * src namer" and the sources' "the ONLY src importers" — scan every file under
+ * `src/` for the RAW substring, with no comment stripping, so a sibling that merely
+ * CITES one of those leaves in a comment REDS them. Car L5 already ruled on exactly
+ * this ("an IMPORT is a dependency; a CITATION is not") and amended the closure
+ * scans to strip comments first — but the amendment did not reach these two. Until
+ * it does, a citation here costs a sibling's green, so the citations are by
+ * description; the receipt carries the one-line cure.
+ *
  * No `src/` importer, proved by a walker rather than promised. No flag minted: the
  * door is NAMED at `INFILTRATION_DRIFT_PROVENANCE.door` and the gate read is not
  * written, because the CR-WR10-C mint is a register edit this packet did not order.
- * The whole family also sits behind L2's own `characterDriftEnabled`, which has no
+ * The whole family also sits behind car L2's own virtual drift flag, which has no
  * entry in `DEFAULT_SIMULATION_RULES`.
  *
  * PURE, AND IT IMPORTS NOTHING AT ALL. No store, no clock, no PRNG, no I/O, no
@@ -90,8 +100,8 @@
  * mutually exclusive, and the first car in a family to reach for a sibling's NEW
  * dark leaf is the one that finds out.
  *
- * The estate already has the cure and it is not an exemption: `characterDrift.js`
- * mirrors car L1's `AXIS_LEVELS` and `livedExperienceCatalog.js` mirrors its
+ * The estate already has the cure and it is not an exemption: car L2's drift leaf
+ * mirrors car L1's `AXIS_LEVELS` and car L3's catalog mirrors its
  * `PARADIGM_AXIS_IDS`, each with a RECONCILE PIN that asserts the equality the
  * moment both cars share a tree. The same shape here — and the pin is stronger than
  * an import would have been, because the TEST holds the real `INFILTRATION_LEVELS`
@@ -697,7 +707,7 @@ export const PARKED_CUSTODY_EXITS = Object.freeze([
     parkClass: 'unreachable_quantity',
     evidence:
       'the charter defines this exit as the FIDELITY reversal receipted, and both halves of '
-      + 'that exist: the reversal receipt is minted by livedExperienceFunnel and FIDELITY is a '
+      + 'that exist: the reversal receipt is minted by the W-LIVES experience funnel and FIDELITY is a '
       + 'catalog axis. But of the three FIDELITY rows in the experience table, one is vice-ward '
       + 'and it is sourceUnverified — so ZERO reachable sources pull FIDELITY toward its vice '
       + 'pole, at any depth, on any plane. The quantity the receipt reads cannot move',
@@ -761,7 +771,13 @@ export function custodyExitQualification(kind) {
 export const INFILTRATION_DRIFT_PROVENANCE = Object.freeze({
   status: 'CANDIDATE, OWNER-UNSIGNED (breadth is derived from the rung index; no rate is authored here)',
   signedBy: null,
-  door: 'infiltrationDepthEnabled (W-OPS §6) beneath characterDriftEnabled (W-LIVES §8)',
+  // ⚠ THIS FIELD NAMES THIS CAR'S DOOR AND NOTHING ELSE, and the omission is
+  // structural rather than terse. The W-LIVES drift door sits beneath it and its
+  // spelling is in this module's header — but that leaf's own battery asserts
+  // "exactly ONE production door" by scanning src/ with COMMENTS STRIPPED, so a
+  // sibling that merely NAMES it in a string literal reds it. Third sighting of the
+  // same law in this one car: an import reds a dark sibling, and so does a mention.
+  door: 'infiltrationDepthEnabled (W-OPS §6), beneath the W-LIVES drift door named in this module header',
   gateRead: 'NOT WRITTEN. The CR-WR10-C mint is a by-name read plus a manifest entry plus an authored VIRTUAL_SUBSYSTEM_ROWS row plus a dormancy fence, all in one commit — a register edit this packet did not order',
   ownerRows: Object.freeze([
     'the depth breadth ladder: one host axis per rung, derived from the rung index. The registers pack drafts these five words as a MULTIPLIER instead; DEPTH_PRICING_LAW carries the measured reason that reading cannot be signed',
