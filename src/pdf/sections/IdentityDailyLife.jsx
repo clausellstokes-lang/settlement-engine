@@ -81,11 +81,20 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
           />
           <KeyValRow
             pairs={[
+              // Tri-state, matching every sibling renderer (EconomicsTrade's
+              // FoodBalanceBlock and Overview's FoodBalanceBar both guard on
+              // `> 0`) and the domain's own word for the third state
+              // (dossierViewModel.js:141 `display = 'Balanced'`). The old
+              // `foodSurplus != null` fallback printed "+0 units" for a
+              // settlement in balance. The no-data case is nulled upstream in
+              // viewModel.js, so a missing row here means "not calculated".
               a.foodDeficit > 0
                 ? { label: 'FOOD',  value: `−${num(a.foodDeficit)} units` }
-                : a.foodSurplus != null
+                : a.foodSurplus > 0
                   ? { label: 'FOOD',  value: `+${num(a.foodSurplus)} units` }
-                  : null,
+                  : (a.foodDeficit != null || a.foodSurplus != null)
+                    ? { label: 'FOOD',  value: 'Balanced' }
+                    : null,
               a.defenseLabel     ? { label: 'DEFENSE',   value: humanize(a.defenseLabel) } : null,
               a.defenseScoreAvg != null ? { label: 'SCORE AVG', value: smart(a.defenseScoreAvg) } : null,
               a.magicalCapability ? { label: 'MAGIC', value: humanize(a.magicalCapability) } : null,
@@ -236,14 +245,22 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
             ))
           ) : (
             d.foodBalance && (
+              // ⚠ TRI-STATE, not a binary. The `else` branch used to claim a
+              // "Surplus of 0 units" in the GOOD tone for a settlement that
+              // simply ran level — a verdict off a number that says nothing.
+              // `warn` is the print-gold tone the screen already spends on this
+              // exact state (EconomicsTab:297-298 pairs 'Balanced' with #a0762a,
+              // which IS palette.warn).
               <Callout
-                tone={d.foodBalance.deficit > 0 ? 'bad' : 'good'}
+                tone={d.foodBalance.deficit > 0 ? 'bad' : d.foodBalance.surplus > 0 ? 'good' : 'warn'}
                 kicker="FOOD BALANCE"
               >
                 <Text style={{ ...type.body, fontSize: pt['9.5'] }}>
                   {d.foodBalance.deficit > 0
                     ? `Deficit of ${smart(d.foodBalance.deficit)} units. The settlement depends on imports for daily survival.`
-                    : `Surplus of ${smart(d.foodBalance.surplus || 0)} units. The local food supply is reliable.`}
+                    : d.foodBalance.surplus > 0
+                      ? `Surplus of ${smart(d.foodBalance.surplus)} units. The local food supply is reliable.`
+                      : 'Production and need are in balance. The settlement feeds itself, with nothing spare against a bad year.'}
                 </Text>
               </Callout>
             )

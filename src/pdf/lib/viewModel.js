@@ -283,8 +283,15 @@ function identitySlice(s, canonical = s) {
       prosperity:     ec?.prosperity || null,
       complexity:     ec?.economicComplexity || null,
       safety:         sp?.safetyLabel || null,
-      foodDeficit:    food.deficit ?? null,
-      foodSurplus:    food.surplus ?? null,
+      // ⚠ AN UNCOMPUTED ECONOMY IS NOT A BALANCED ONE. deriveFoodBalance returns
+      // `available:false` with 0/0 for a settlement whose economy was never
+      // computed, and the raw `?? null` let those zeros through — so a threadbare
+      // save printed "FOOD +0 units" in the anchor panel, asserting a fact where
+      // none exists. Nulling them here (rather than at the reader) means the
+      // chapter's existing `!= null` gate and its `.filter(Boolean)` row grammar
+      // do the right thing unchanged: no food data, no FOOD row.
+      foodDeficit:    food.available ? (food.deficit ?? null) : null,
+      foodSurplus:    food.available ? (food.surplus ?? null) : null,
       culturalNotes:  canonical?.culturalNotes ?? s?.culturalNotes ?? null,
       magicDependency: !!dp?.magicDependency,
       magicalCapability: dp?.magicalCapability || null,
