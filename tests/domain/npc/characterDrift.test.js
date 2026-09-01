@@ -877,6 +877,14 @@ describe('THE AUTHORED CORE HAS ONE READER — and this census is what makes it 
       // `.character` off the KnownReading `knownCharacterOf` just composed. Asserted
       // by its own text below so this row cannot quietly absorb a raw soul read.
       'src/domain/npc/knownCharacter.js': 1,
+      // ⭐⭐ A SHAPE GATE, NOT A CONSUMER — W-OPS car O4's arrival, classified rather than
+      // waved through. `knownReadingOrRefusal` reads `.character` off a CALLER-SUPPLIED
+      // value for one purpose: to refuse anything that is not a KnownReading. The line is
+      // `asObject(row.character).axes`, the "has it a chart" half of a structural guard
+      // that also demands `confidence` and `disclosedAxes`. It reaches no roster record,
+      // holds no soul, and imports nothing from this family — the darkness arms in
+      // `livedExperienceSources.test.js` prove that half. Pinned on its text below.
+      'src/domain/worldPulse/envoyTaskCatalog.js': 1,
       // ── NOT A SOUL: the SETTLEMENT's authored `character` PROSE field. A different
       //    key on a different record that happens to share a word, carried by three
       //    presentation surfaces. Enrolled so the census is TOTAL rather than scoped.
@@ -887,11 +895,12 @@ describe('THE AUTHORED CORE HAS ONE READER — and this census is what makes it 
     expect(readCensus()).toEqual(CENSUS);
   });
 
-  test('⭐ the only DOMAIN reader outside the accessor reads its OWN projection', () => {
+  test('⭐ the DOMAIN readers outside the accessor are a PROJECTION and a SHAPE GATE, and nothing else', () => {
     const domain = Object.keys(readCensus()).filter((file) => file.startsWith('src/domain/'));
     expect(domain.sort()).toEqual([
       'src/domain/npc/characterDrift.js',
       'src/domain/npc/knownCharacter.js',
+      'src/domain/worldPulse/envoyTaskCatalog.js',
     ]);
     // The knownCharacter row is the sight seam reading the reading it just built —
     // `knownCharacterOf({...}).character` — and NOT a second hand-spelled read of a
@@ -904,6 +913,16 @@ describe('THE AUTHORED CORE HAS ONE READER — and this census is what makes it 
     // stripped text, so a renamed or re-shaped seam reds there rather than reporting a raw
     // soul read absent from a file the pin no longer sees.
     expectAbsentWithAnchor(seam, 'asObject(npc).character', '}).character;', 'the sight seam reads its own reading');
+    // ⭐⭐ AND THE THIRD ROW IS A REFUSAL, WHICH IS WHY IT IS ALLOWED TO EXIST. The gate
+    // reads the value it was HANDED to decide whether to refuse it; it never reaches a
+    // roster. Pinned the same way as the seam above, so the day somebody turns the gate
+    // into a consumer — by spelling a soul read beside it — this reds rather than the row
+    // quietly absorbing a second meaning.
+    const gate = codeWithoutCitations(
+      readFileSync(join(REPO_ROOT, 'src/domain/worldPulse/envoyTaskCatalog.js'), 'utf8'),
+    );
+    expect(gate).toContain('asObject(row.character).axes');
+    expectAbsentWithAnchor(gate, 'asObject(npc).character', 'asObject(row.character).axes', 'the shape gate reads the reading it was handed');
   });
 
   test('the two folded-in readers now route through the accessor', () => {
