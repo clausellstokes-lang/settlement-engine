@@ -81,6 +81,7 @@ import LinkNeighbourCard from './settlementDetail/SettlementDetailLinkNeighbourC
 import SettlementDetailEditNames from './settlementDetail/SettlementDetailEditNames.jsx';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch } from './theme';
 import { REL_HEX, relColor } from './settlements/relationshipColors.js';
+import { track, EVENTS } from '../lib/analytics.js';
 
 // §67.2: the copy that stood here carried the canonical VALUES but was missing
 // `vassal` and `criminal_network` entirely, so those two live edge types fell to
@@ -416,6 +417,12 @@ export default function SettlementDetail({
       if (kind === 'foundry') {
         await generateFoundryModule(currentSettlement, exportOpts);
       } else {
+        // THE FUNNEL'S DENOMINATOR (see analyticsEvents.js:88). Emitted here, in the
+        // PDF branch only — the Foundry branch above produces a different artifact
+        // and PDF_EXPORT_COMPLETED never fires for it. Before the exporter's dynamic
+        // import, so a chunk that never loads still counts as an export the user
+        // asked for.
+        track(EVENTS.PDF_EXPORT_CLICKED, { scope: 'settlement' });
         await generateSettlementPDF(currentSettlement, {
           ...exportOpts,
           isFounder: liveStore.isFounder?.() ?? false,

@@ -23,6 +23,7 @@ import DeleteConfirmation from '../DeleteConfirmation';
 import { emblem } from '../../design/organic/ornament/compose.js';
 import { useStore } from '../../store/index.js';
 import { relColor } from './relationshipColors.js';
+import { track, EVENTS } from '../../lib/analytics.js';
 
 // Relationship-type swatch for the neighbour chips. §67.2: the inline copy that
 // stood here was NOT a cosmetic duplicate — it rendered `allied` in the canonical
@@ -105,6 +106,12 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
     setExportError(null);
     setExportBusy(true);
     try {
+      // THE FUNNEL'S DENOMINATOR. `PDF_EXPORT_COMPLETED` fires from inside the
+      // exporter; this is its intent counterpart, and it was defined, documented
+      // and mirrored to the edge bundle while being emitted NOWHERE. It fires
+      // HERE, before the exporter's dynamic import, so a chunk that never loads
+      // still counts as an export the user asked for.
+      track(EVENTS.PDF_EXPORT_CLICKED, { scope: 'settlement' });
       await generateSettlementPDF(s.settlement, { phase: canonPhaseOf(s) });
     } catch (err) {
       setExportError(err?.message ? `PDF export failed: ${err.message}` : 'PDF export failed. Please try again.');

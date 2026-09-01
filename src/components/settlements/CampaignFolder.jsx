@@ -26,6 +26,7 @@ import RegionalGraphSummary from '../region/RegionalGraphSummary.jsx';
 import { SettlementCard } from './SettlementCard.jsx';
 import RealmStrip from './RealmStrip.jsx';
 import { regionalCountsForSave } from './helpers.js';
+import { track, EVENTS } from '../../lib/analytics.js';
 
 // Screen-reader-only clip (the hidden caption + column heads) and a zero-box
 // <th> style so the folder table carries accessible column semantics without
@@ -144,6 +145,11 @@ export function CampaignFolder({
     setWbError(null);
     setWbBusy(true);
     try {
+      // Campaign-scope intent. ⚠ RECORDED: unlike the campaign PDF and the dossier,
+      // generateWorldBook emits NO PDF_EXPORT_COMPLETED, so this scope currently has
+      // an intent count with no completion count. Adding that counterpart is an
+      // analytics-surface change, not this repair.
+      track(EVENTS.PDF_EXPORT_CLICKED, { scope: 'campaign' });
       await generateWorldBook(campaign, settlements, { mode, faithUnlocked });
     } catch (err) {
       setWbError(err?.message ? `World Book failed: ${err.message}` : 'World Book export failed. Please try again.');
@@ -174,6 +180,12 @@ export function CampaignFolder({
     setPdfError(null);
     setPdfBusy(true);
     try {
+      // THE FUNNEL'S DENOMINATOR. `PDF_EXPORT_COMPLETED` fires from inside the
+      // exporter; this is its intent counterpart, and it was defined, documented
+      // and mirrored to the edge bundle while being emitted NOWHERE. It fires
+      // HERE, before the exporter's dynamic import, so a chunk that never loads
+      // still counts as an export the user asked for.
+      track(EVENTS.PDF_EXPORT_CLICKED, { scope: 'campaign' });
       await generateCampaignPDF(campaign, settlements, { faithUnlocked });
     } catch (err) {
       setPdfError(err?.message ? `PDF export failed: ${err.message}` : 'PDF export failed. Please try again.');
