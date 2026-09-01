@@ -62,6 +62,16 @@
  * observed relative error. Tests may call the platform Math; `tests/` is outside the
  * scanned trees.
  *
+ * ⭐ THE SPLIT (T13 Car 1c). This file is the CORE, and it holds exactly what the two
+ * EAGER census sites reach: `corruption.js:532` needs detExp and
+ * `relationships/canonicalRelationship.js:230` needs detLog10. Every other wrapper —
+ * exp2Det, halfLifeKeep, detTanh, detIntPow — lives in `detMathDecay.js` because its
+ * consumers are all LAZY. The two are separate CHUNKS, not just separate files: Rollup
+ * emits one chunk per chunk-name, so a single name would put both halves in the eager
+ * first-paint closure and make it pay for decay code it never calls. Measured at the
+ * T13 dispatch base, the eager first-paint closure has under 1 kB of margin, so that is
+ * not a theoretical tidiness — it is the difference between fitting and an owner ask.
+ * @enforced-by tests/build/vendorPdfLazy.test.js (the det-math placement pins)
  * @enforced-by tests/kernel/detMath.test.js
  * @enforced-by tests/kernel/detMathIdentity.test.js
  */
@@ -69,7 +79,7 @@
 /** 1 / ln(2), to double precision. A CONSTANT, not a computed transcendental. */
 const LOG2E = 1.4426950408889634;
 /** ln(2), to double precision. */
-const LN2 = 0.6931471805599453;
+export const LN2 = 0.6931471805599453;
 /** log10(2), to double precision — the log2 -> log10 change of base. */
 const LOG10_2 = 0.30102999566398120;
 /** sqrt(2) — the centring pivot for the mantissa. A constant, not a call. */
@@ -82,8 +92,8 @@ const SQRT2 = 1.4142135623730951;
  * bit-identity probe in the identity suite, which includes both rails) and turns a
  * potentially thousand-iteration loop into two comparisons.
  */
-const EXP2_OVERFLOW_AT = 1024;
-const EXP2_UNDERFLOW_AT = -1075;
+export const EXP2_OVERFLOW_AT = 1024;
+export const EXP2_UNDERFLOW_AT = -1075;
 
 /**
  * ln(2) SPLIT IN TWO so the exponent reduction is EXACT (the Cody-Waite idiom).
@@ -110,25 +120,24 @@ const LN2_LO = 1.90821492927058770002e-10;
  * @param {number} t
  * @returns {number}
  */
-function expm1Small(t) {
-  let p = 1 / 6227020800;       // 1/13!
-  p = p * t + 1 / 479001600;    // 1/12!
-  p = p * t + 1 / 39916800;     // 1/11!
-  p = p * t + 1 / 3628800;      // 1/10!
-  p = p * t + 1 / 362880;       // 1/9!
-  p = p * t + 1 / 40320;        // 1/8!
-  p = p * t + 1 / 5040;         // 1/7!
-  p = p * t + 1 / 720;          // 1/6!
-  p = p * t + 1 / 120;          // 1/5!
-  p = p * t + 1 / 24;           // 1/4!
-  p = p * t + 1 / 6;            // 1/3!
-  p = p * t + 1 / 2;            // 1/2!
-  p = p * t + 1;                // 1/1!
-  return t * p;
+export function expm1Small(t) {
+  // HORNER, AS A LOOP OVER EXACT INTEGER DIVISORS. Mathematically the same series
+  // the explicit chain spelled — t*(1 + t/2*(1 + t/3*(...))) — but the coefficients
+  // are DIVIDED BY k at each step instead of multiplied by a pre-rounded 1/k!.
+  // Two consequences, both wanted. (1) Bytes: esbuild constant-folds `1 / 479001600`
+  // into `2.08767569878681e-9`, which is EIGHT CHARACTERS LONGER than the source it
+  // replaced, and it does that to all fourteen coefficients; `k` is a loop variable,
+  // so `/ k` cannot be folded at all. (2) Precision: dividing by a small exact
+  // integer is a single correctly-rounded operation, where a pre-rounded reciprocal
+  // carries its own rounding into every term. Determinism is untouched — still only
+  // +, *, / and compare, every one of them exactly rounded by IEEE-754.
+  let p = 0;
+  for (let k = 13; k >= 1; k -= 1) p = (p + 1) * t / k;
+  return p;
 }
 
 /** Apply an exact power of two by doubling/halving. Exact: only the exponent shifts. */
-function scaleByPow2(value, exponent) {
+export function scaleByPow2(value, exponent) {
   let s = value;
   let n = exponent;
   while (n > 0) { s = s * 2; n = n - 1; }
@@ -158,47 +167,17 @@ export function log2Det(x) {
   const z = (m - 1) / (m + 1);
   const z2 = z * z;
   // Horner over the odd atanh coefficients 2/(2k+1), highest term first.
-  let s = 2 / 19;
-  s = s * z2 + 2 / 17;
-  s = s * z2 + 2 / 15;
-  s = s * z2 + 2 / 13;
-  s = s * z2 + 2 / 11;
-  s = s * z2 + 2 / 9;
-  s = s * z2 + 2 / 7;
-  s = s * z2 + 2 / 5;
-  s = s * z2 + 2 / 3;
-  s = s * z2 + 2;
+  // HORNER OVER THE ODD atanh COEFFICIENTS, AS A LOOP. Bit-for-bit the same
+  // sequence of operations the explicit chain performed: the first iteration is
+  // `0 * z2 + 2/19`, and `0 * z2` is exactly 0 for the non-negative z2 here, so the
+  // seed is exactly the `2/19` the chain started from. `2 / k` is a correctly-rounded
+  // division of two exact doubles, identical to the folded literal it replaces.
+  let s = 0;
+  for (let k = 19; k >= 1; k -= 2) s = s * z2 + 2 / k;
   const lnM = z * s;
   return e + lnM * LOG2E;
 }
 
-/**
- * 2^y for finite y, from + - * / only.
- *
- * The integer part is applied by repeated doubling (exact); only the fractional part
- * goes through the series, so the error never grows with the magnitude of y.
- *
- * ⭐ THE REDUCTION ROUNDS TO NEAREST, NOT DOWN, AND THAT IS A PRECISION DECISION.
- * Flooring leaves a fraction in [0, 1) and a series argument up to 0.693, where the
- * truncated Taylor tail is worth ~6e-14 relative — and worse, it puts a NEARLY-ZERO
- * exponent at the very WORST point of the series (y = -0.003 floors to n = -1, f = 0.997).
- * That is not hypothetical: it was measured here as the dominant error of the whole
- * half-life family, 3.4e-14 at age 1.04 against a 312-week half-life. Rounding to nearest
- * halves the fraction to [-0.5, 0.5], so |t| <= 0.347 and the tail falls to ~3e-18, at
- * the cost of one extra addition.
- * @param {number} y
- * @returns {number}
- */
-export function exp2Det(y) {
-  // The rails: same answer as walking the loops, without walking them.
-  if (y >= EXP2_OVERFLOW_AT) return Infinity;
-  if (y <= EXP2_UNDERFLOW_AT) return 0;
-
-  const n = Math.floor(y + 0.5);
-  const f = y - n;              // f in [-0.5, 0.5]
-  const t = f * LN2;            // |t| <= 0.3466
-  return scaleByPow2(1 + expm1Small(t), n);
-}
 
 /**
  * e^x — the drop-in for `Math.exp` in seeded code.
@@ -278,106 +257,8 @@ export function detLog10(x) {
   return log2Det(x) * LOG10_2;
 }
 
-/**
- * tanh(x) — the drop-in for `Math.tanh` in seeded code.
- *
- * Computed as -m / (m + 2) with m = e^(-2|x|) - 1, then signed. Algebraically that is the
- * familiar (1 - u) / (1 + u) with u = e^(-2|x|) — but ⭐ THE SUBTRACTION IS NEVER
- * PERFORMED. For a small drive u is within 1e-4 of 1, so forming `1 - u` throws away
- * every significant digit: that spelling measured 1.8e-10 relative error on this exact
- * band, four orders of magnitude outside budget. Taking `m` straight from `detExpm1`
- * builds the small numerator out of small terms instead, and the same expression stays
- * OVERFLOW-SAFE at the other end: m falls to -1 for large |x|, so the result saturates
- * EXACTLY at +/-1 rather than dividing two infinities. tanh(0) is EXACTLY 0, and the
- * function is monotone through the band edges its consumers threshold on.
- * @param {number} x
- * @returns {number}
- */
-export function detTanh(x) {
-  if (x === 0) return 0;
-  if (Number.isNaN(x)) return NaN;
-  if (x === Infinity) return 1;
-  if (x === -Infinity) return -1;
-  const negative = x < 0;
-  const a = negative ? -x : x;
-  const m = detExpm1(-2 * a);       // in [-1, 0]
-  const magnitude = -m / (m + 2);
-  return negative ? -magnitude : magnitude;
-}
 
-/**
- * THE HALF-LIFE KEEP FACTOR — the fraction of a stock that SURVIVES `age` units when the
- * stock halves every `halfLife` units. The one canonical spelling of the idiom that was
- * hand-copied to sixteen sites (§797.5/§808).
- *
- * ⭐ pow(0.5, k) IS 2^-k, so this skips the log2 leg entirely: it calls exp2Det directly
- * on the negated exponent. That halves the error budget against a general
- * `detPow(0.5, k)` route AND makes whole-period decay EXACT — at k = 1, 2, 3 … the
- * fractional part is zero, the series returns its constant term 1, and the integer part
- * is applied by exact halving, so one half-life returns exactly 0.5, two exactly 0.25,
- * and so on forever.
- *
- * Edge behaviour mirrors `Math.pow(0.5, age / halfLife)` EXACTLY so this is a true
- * drop-in: a NaN ratio answers NaN, a zero half-life with positive age answers 0
- * (the ratio is Infinity), and a negative age GROWS the stock, as the arithmetic says.
- * @param {number} age elapsed units (ticks or weeks — the caller's unit, consistently)
- * @param {number} halfLife units per halving; callers clamp this positive
- * @returns {number} the surviving fraction in [0, 1] for non-negative age
- */
-export function halfLifeKeep(age, halfLife) {
-  const k = age / halfLife;
-  if (Number.isNaN(k)) return NaN;
-  if (k === Infinity) return 0;
-  if (k === -Infinity) return Infinity;
-  return exp2Det(-k);
-}
 
-/**
- * base^n for an INTEGER exponent — square-and-multiply, the DENS dyadic precedent
- * (§870.1) without the sqrt rungs, which a whole exponent does not need.
- *
- * Every step is an exact IEEE-754 multiply, so the only error is the accumulated
- * rounding of ~log2(n) products — far tighter than routing through the two series. It is
- * NOT bit-identical to `Math.pow`, which is why every integer-exponent site is a declared
- * shift (§3.2).
- *
- * A NON-INTEGER exponent is NOT silently accepted: it falls through to the general
- * two-series route, so a caller whose "count" turns out fractional gets the right answer
- * rather than a plausible wrong one. That route is spelled inline rather than importing
- * `detPow.js`, because `detPow`'s series live behind an export its own header declares
- * suite-only ("not part of the kernel's consumer surface") — see the module header's note
- * on why the two kernels stay independent and machine-compared.
- * @param {number} base
- * @param {number} n integer exponent
- * @returns {number}
- */
-export function detIntPow(base, n) {
-  if (n === 0) return 1;
-  if (n === 1) return base;
-  if (Number.isNaN(base) || Number.isNaN(n)) return NaN;
-  if (!Number.isFinite(n) || !Number.isInteger(n)) {
-    // The general route, for the exponent this helper was not given.
-    if (base === 1) return 1;
-    if (base === 0) return n > 0 ? 0 : Infinity;
-    if (base < 0) return NaN;
-    if (!Number.isFinite(base)) return n > 0 ? Infinity : 0;
-    if (!Number.isFinite(n)) return n > 0 ? (base > 1 ? Infinity : 0) : (base > 1 ? 0 : Infinity);
-    return exp2Det(n * log2Det(base));
-  }
-
-  const negative = n < 0;
-  let e = negative ? -n : n;
-  let result = 1;
-  let acc = base;
-  while (e > 0) {
-    // Exact: the low bit of a non-negative integer, from floor and doubling only.
-    const half = Math.floor(e / 2);
-    if (e - half - half === 1) result = result * acc;
-    e = half;
-    if (e > 0) acc = acc * acc;
-  }
-  return negative ? 1 / result : result;
-}
 
 /**
  * THE FRACTIONAL-POWER SITES keep using `detPow` from `./detPow.js` as minted — this
@@ -386,4 +267,4 @@ export function detIntPow(base, n) {
  */
 
 /** Exposed for the precision suites; not part of the kernel's consumer surface. */
-export const __internals = Object.freeze({ log2Det, exp2Det, LOG2E, LN2, LOG10_2, SQRT2 });
+export const __internals = Object.freeze({ log2Det, expm1Small, LOG2E, LN2, LOG10_2, SQRT2 });

@@ -62,16 +62,13 @@ function log2Det(x) {
   const z = (m - 1) / (m + 1);
   const z2 = z * z;
   // Horner over the odd atanh coefficients 2/(2k+1), highest term first.
-  let s = 2 / 19;
-  s = s * z2 + 2 / 17;
-  s = s * z2 + 2 / 15;
-  s = s * z2 + 2 / 13;
-  s = s * z2 + 2 / 11;
-  s = s * z2 + 2 / 9;
-  s = s * z2 + 2 / 7;
-  s = s * z2 + 2 / 5;
-  s = s * z2 + 2 / 3;
-  s = s * z2 + 2;
+  // HORNER OVER THE ODD atanh COEFFICIENTS, AS A LOOP. Bit-for-bit the same
+  // sequence of operations the explicit chain performed: the first iteration is
+  // `0 * z2 + 2/19`, and `0 * z2` is exactly 0 for the non-negative z2 here, so the
+  // seed is exactly the `2/19` the chain started from. `2 / k` is a correctly-rounded
+  // division of two exact doubles, identical to the folded literal it replaces.
+  let s = 0;
+  for (let k = 19; k >= 1; k -= 2) s = s * z2 + 2 / k;
   const lnM = z * s;
   return e + lnM * LOG2E;
 }

@@ -22,9 +22,8 @@
  * armies), so this is a live case, not a formality.
  */
 import { describe, test, expect } from 'vitest';
-import {
-  log2Det, exp2Det, detExp, detLn, detLog10, detTanh, halfLifeKeep, detIntPow, __internals,
-} from '../../src/kernel/detMath.js';
+import { log2Det, detExp, detLn, detLog10, __internals } from '../../src/kernel/detMath.js';
+import { exp2Det, detTanh, halfLifeKeep, detIntPow } from '../../src/kernel/detMathDecay.js';
 
 /** Worst relative error of `mine` against `ref` over a sampled domain. */
 function worstRelative(samples, mine, ref) {
