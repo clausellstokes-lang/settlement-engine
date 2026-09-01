@@ -775,6 +775,34 @@ describe('the leaf is dark, injected, and has no opinion of its own about the dr
     expect(INFILTRATION_DRIFT_PROVENANCE.ownerRows.length).toBeGreaterThanOrEqual(4);
   });
 
+  // ⛔⛔ THE GUARD FOR A CLASS THAT HAS ALREADY BITTEN THREE SIBLING CARS. Two arms in
+  // the W-LIVES family scan every file under src/ for the RAW substring of their own
+  // leaf names with NO comment stripping, so a car that merely CITES one of those
+  // leaves reds a dormancy claim it never touched; two others strip comments first,
+  // per car L5's ruling that a citation is not a dependency. Measured at this car's
+  // base, three W-OPS leaves already red one of them and no receipt records it. This
+  // leaf therefore cites the W-LIVES leaves BY DESCRIPTION, and this arm is what stops
+  // a later editor restoring the filenames and taking a sibling's green with them.
+  test('the leaf names no W-LIVES leaf in raw source and no W-LIVES writer in code', () => {
+    for (const banned of ['livedExperience', 'characterDrift']) {
+      expectAbsentWithAnchor(
+        LEAF_SOURCE, banned, 'W-LIVES',
+        'the two un-amended closure arms scan raw source, so even a comment costs a sibling',
+      );
+    }
+    // ⚠ LEAF_CODE, NOT LEAF_LOGIC, AND THE DIFFERENCE IS THE WHOLE ARM. The sibling
+    // arms strip comments and leave STRING LITERALS standing, so a writer named in a
+    // provenance string reds them exactly as a read would. This car learned that twice
+    // in one sitting — a `door:` string and a park row both convicted it — so the scan
+    // here matches what those arms actually do rather than what a read would be.
+    for (const banned of ['knownCharacter', 'effectiveCharacter', 'characterAsSeenBy', 'applyAxisDrift', 'writeAxisDrift']) {
+      expectAbsentWithAnchor(
+        LEAF_CODE, banned, 'DEPTH_PRICING_LAW',
+        'the comment-stripping closure arms leave strings standing, so a named writer costs a green',
+      );
+    }
+  });
+
   test('the leaf spells codepoint order the same way the estate does', () => {
     const words = ['b', 'A', 'a', 'B', 'Z_a', 'Z'];
     const mine = [...words].sort((a, b) => (a < b ? -1 : (a > b ? 1 : 0)));
