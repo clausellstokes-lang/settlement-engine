@@ -17,6 +17,7 @@ import {
   RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
   RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
   RETIRED_DEAD_DEPENDENCY_BASELINE_SCHEMA,
+  RETIRED_PRESET_LIGHT_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -33,6 +34,7 @@ import {
   validateSchema12Baseline,
   validateSchema13Baseline,
   validateSchema14Baseline,
+  validateSchema15Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -274,7 +276,14 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // zero importers; package.json and package-lock.json are deliberate detector inputs
     // ("a dependency bump can move the parser"), so only a migration can bind the new
     // bytes. Its reconciliation is EMPTY by construction, and measured so.
-    expect(BASELINE_SCHEMA).toBe(14);
+    // ⭐ SCHEMA 15 (lane T8, chair ruling R-T8-OSR option C). Schema 14's tagged topology
+    // envelope re-governed to a CLASSIFIER THAT NO LONGER CALLS A RECORD A MAP: the
+    // corpus builder's churn branch judged a node by a corner of it, so a fixed record
+    // with two optional ledgers collapsed into an id-keyed map and its grandchildren's
+    // keys landed on its own shape. The branch now states the guarantee its two sibling
+    // branches already had. Classification-only, so its reconciliation is EMPTY — the
+    // cured tip reproduces the schema-14 register row for row.
+    expect(BASELINE_SCHEMA).toBe(15);
     expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
     expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
@@ -449,6 +458,14 @@ function validSchema12Baseline() {
 function validSchema13Baseline() {
   const baseline = validSchema7Baseline();
   baseline.schema = RETIRED_DEAD_DEPENDENCY_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-14 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 through schema-13 fixtures above record. */
+function validSchema14Baseline() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_PRESET_LIGHT_BASELINE_SCHEMA;
   return baseline;
 }
 
@@ -670,6 +687,7 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     const treasuryAdmission = validSchema11Baseline();
     const genesisTies = validSchema12Baseline();
     const deadDependency = validSchema13Baseline();
+    const presetLight = validSchema14Baseline();
     const live = validLiveBaseline();
     expect(validateSchema7Baseline(retired)).toBe(retired);
     expect(validateSchema8Baseline(baseline)).toBe(baseline);
@@ -678,7 +696,8 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     expect(validateSchema11Baseline(treasuryAdmission)).toBe(treasuryAdmission);
     expect(validateSchema12Baseline(genesisTies)).toBe(genesisTies);
     expect(validateSchema13Baseline(deadDependency)).toBe(deadDependency);
-    expect(validateSchema14Baseline(live)).toBe(live);
+    expect(validateSchema14Baseline(presetLight)).toBe(presetLight);
+    expect(validateSchema15Baseline(live)).toBe(live);
     expect(() => validateSchema7Baseline(baseline)).toThrow(/is not schema 7/);
     expect(() => validateSchema8Baseline(retired)).toThrow(/is not schema 8/);
     // ⚠ EVERY ADJACENT PAIR IS PINNED IN BOTH DIRECTIONS FOR ONE REASON: FOUR
@@ -706,15 +725,24 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // nothing else.
     expect(() => validateSchema13Baseline(epochDark)).toThrow(/is not schema 13/);
     expect(() => validateSchema13Baseline(genesisTies)).toThrow(/is not schema 13/);
-    // …and the LIVE validator names 14. ⚠⚠ THE 13/14 PAIR IS THE TIGHTEST YET, and tighter
-    // than 12/13 was: schema 14 re-governs schema 13's envelope with NOT ONE row moved AND
-    // NOT ONE recorded digest differing outside the three instrument files — a widened
+    // ⚠⚠ THE 13/14 PAIR: schema 14 re-governs schema 13's envelope with NOT ONE row moved
+    // AND NOT ONE recorded digest differing outside the three instrument files — a widened
     // detector clause that convicts nothing in the live manifest leaves the two baselines
-    // identical in every field except the number and the scanner provenance. The number is
-    // the ONLY thing keeping a stale freeze from validating as a current one.
+    // identical in every field except the number and the scanner provenance.
     expect(() => validateSchema14Baseline(epochDark)).toThrow(/is not schema 14/);
     expect(() => validateSchema14Baseline(genesisTies)).toThrow(/is not schema 14/);
     expect(() => validateSchema14Baseline(deadDependency)).toThrow(/is not schema 14/);
+    expect(() => validateSchema13Baseline(presetLight)).toThrow(/is not schema 13/);
+    // …and the LIVE validator names 15. ⚠⚠ THE 14/15 PAIR IS AS TIGHT AS 13/14 WAS AND FOR
+    // the same reason: schema 15's rung is CLASSIFICATION-ONLY, so the cured register
+    // reproduces schema 14's row for row and the two baselines differ in the number and
+    // the scanner provenance ALONE. The number is the only thing keeping a stale freeze
+    // from validating as a current one.
+    expect(() => validateSchema15Baseline(epochDark)).toThrow(/is not schema 15/);
+    expect(() => validateSchema15Baseline(genesisTies)).toThrow(/is not schema 15/);
+    expect(() => validateSchema15Baseline(deadDependency)).toThrow(/is not schema 15/);
+    expect(() => validateSchema15Baseline(presetLight)).toThrow(/is not schema 15/);
+    expect(() => validateSchema14Baseline(live)).toThrow(/is not schema 14/);
     expect(() => validateSchema13Baseline(live)).toThrow(/is not schema 13/);
     expect(() => validateSchema12Baseline(live)).toThrow(/is not schema 12/);
     expect(() => validateSchema9Baseline(live)).toThrow(/is not schema 9/);

@@ -104,6 +104,7 @@ import {
   validateSchema8Baseline,
   validateSchema9Baseline,
   validateSchema10Baseline,
+  validateSchema14Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -216,6 +217,38 @@ export const DEAD_DEPENDENCY_TARGET_SCHEMA = 13;
  *  So any moved row would mean the widening was not inert and the mint must STOP
  *  rather than bank it. */
 export const PRESET_LIGHT_TARGET_SCHEMA = 14;
+
+/** The schema-15 leaf target — THE CHURN RULE GIVEN A STABLE-CORE GUARD (R-T8-OSR,
+ *  chair ruling option C, lane T8).
+ *
+ *  ⭐ WHAT MOVED, AND WHY IT NEEDED A RUNG. The corpus builder collapses a node into
+ *  an id-keyed map on three independent branches. Two of them quantify over EVERY
+ *  key — `exactIdKeys` proves key ≡ value.id, and `allObject`/`allArray` require the
+ *  whole node to be homogeneous — but the third, the CHURN branch, judged a node by a
+ *  CORNER of it: two traversable keys seen on under 80 % of its instances were enough,
+ *  whatever the rest of the node did. A fixed record carrying two optional ledgers was
+ *  therefore classified as a map. The branch now states the guarantee its two siblings
+ *  already had: a node at least `SCHEMA_PRESENCE` of whose keys are schema keys is a
+ *  RECORD WITH OPTIONAL FIELDS, and no number of coming-and-going traversable fields
+ *  can reclassify it. ONE constant governs the key-level reading and the node-level one
+ *  so the two can never drift apart.
+ *
+ *  ⭐ WHY A RUNG FOR A CHANGE THAT IS PURE CLASSIFICATION. The cure lands in
+ *  `scripts/lib/observed-shape-corpus.mjs`, a governed detector source, and the
+ *  shrink-only `--write` refuses a moved detector BY DESIGN — frozen numbers taken
+ *  under one detector do not mean the same thing under another even when they are
+ *  numerically equal. That refusal is the instrument working, and a rung is the only
+ *  lawful way past it.
+ *
+ *  ⛔ AND THE RECONCILIATION MUST BE EMPTY, which is this rung's whole claim. The cure
+ *  is CLASSIFICATION-ONLY — it removes a mislabel and the `/dynamic` facet the mislabel
+ *  minted — so the live inventory at the cured tip reproduces the schema-14 predecessor
+ *  ROW FOR ROW. Measured in advance: 1,999 reads / 1,412 identities / 388 files,
+ *  violations 0 and stale 0, which is the frozen register exactly. The mint must
+ *  therefore report predecessorSame 1412 with new, gone, increased and decreased ALL
+ *  ZERO; any moved row means the cure was not classification-only and the mint STOPS
+ *  rather than banking it. */
+export const STABLE_CORE_TARGET_SCHEMA = 15;
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -384,6 +417,34 @@ export const PRESET_LIGHT_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-14 → 15 delta: FOUR paths, every one of them an instrument file.
+ *   - `observed-shape-corpus.mjs` — THE SUBJECT: the churn rule's stable-core guard;
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema14Baseline` to `validateSchema15Baseline`;
+ *   - `observed-shape-baseline.mjs` — the 14 → 15 bump, the retired-14 constant and
+ *     its re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⭐ THE SUBJECT IS ITSELF A DETECTOR SOURCE, as it was at the 7→8 corpus-coverage
+ * rung — the only other rung whose subject was this same file — so the set is four
+ * instrument paths rather than a subject plus its bookkeeping.
+ *
+ * ⛔ NO package file is in this delta and none may be, and here that is MEASURED
+ * rather than asserted: a recorded-vs-computed sweep of all eleven governed inputs
+ * against the schema-14 freeze reported `package.json` and `package-lock.json`
+ * byte-SAME, with `observed-shape-corpus.mjs` the ONLY moved entry before this rung
+ * was written. Any `package.json` byte is itself a mint trigger, so an extra path
+ * here — or one of these four remaining byte-identical — is a different migration and
+ * fails closed.
+ */
+export const STABLE_CORE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -408,6 +469,8 @@ const DEAD_DEPENDENCY_SCANNER_TRANSITION_POLICY =
   'schema-12-to-13-exact-scanner-transition-v1';
 const PRESET_LIGHT_SCANNER_TRANSITION_POLICY =
   'schema-13-to-14-exact-scanner-transition-v1';
+const STABLE_CORE_SCANNER_TRANSITION_POLICY =
+  'schema-14-to-15-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -440,6 +503,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [GENESIS_TIES_TARGET_SCHEMA]: TREASURY_ADMISSION_TARGET_SCHEMA,
   [DEAD_DEPENDENCY_TARGET_SCHEMA]: GENESIS_TIES_TARGET_SCHEMA,
   [PRESET_LIGHT_TARGET_SCHEMA]: DEAD_DEPENDENCY_TARGET_SCHEMA,
+  [STABLE_CORE_TARGET_SCHEMA]: PRESET_LIGHT_TARGET_SCHEMA,
 });
 
 /**
@@ -448,6 +512,15 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
  * `if (schema === 4) … else if (schema === 5) …` chain is two places to forget
  * a rung. Schema 2 has no entry because it is the UNGOVERNED predecessor and
  * has no validator of its own — the structural checks below are its law.
+ *
+ * ⚠ THE TABLE IS NOT DENSE, AND THE HOLE IS OLDER THAN THIS RUNG: schemas 11, 12
+ * and 13 have no entry, so a predecessor at one of those numbers is admitted on
+ * the structural checks alone rather than on its own governed envelope law. That
+ * is the three rungs 11→12, 12→13 and 13→14 each not extending this table, not a
+ * ruling that those envelopes are unguarded; the 14 entry below is this rung
+ * paying its own way rather than adding a fourth omission. ⚠ Filling 11–13 would
+ * change what three RETIRED pairings accept and is deliberately NOT done here —
+ * documented so it is not re-found as a mystery.
  */
 const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA]: validateSchema4Baseline,
@@ -457,6 +530,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [CORPUS_COVERAGE_TARGET_SCHEMA]: validateSchema8Baseline,
   [EPOCH_DARK_CORPUS_TARGET_SCHEMA]: validateSchema9Baseline,
   [PROSE_REGEN_TARGET_SCHEMA]: validateSchema10Baseline,
+  // The schema-15 rung's own predecessor. `validateSchema14Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 14
+  // as schema 14 after the live number moves past it.
+  [PRESET_LIGHT_TARGET_SCHEMA]: validateSchema14Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -883,6 +960,18 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // under `scripts/`, which are not subject paths at all, so the digest cannot move
     // and the report's `unscannedMovement` is null. The permission is carried because
     // the class is lawful, not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [STABLE_CORE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: STABLE_CORE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: STABLE_CORE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree,
+    // and the subject tree is `src/**`; this rung touches four files under `scripts/`,
+    // which are not subject paths at all, so the digest cannot move and the report's
+    // `unscannedMovement` is null. The permission is carried because the class is
+    // lawful, not because this rung exercises it.
     reviewableUnscannedMovement: true,
   })],
 ]);
@@ -1925,14 +2014,15 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PRESET_LIGHT_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : STABLE_CORE_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
     PROSE_REGEN_TARGET_SCHEMA, TREASURY_ADMISSION_TARGET_SCHEMA,
     GENESIS_TIES_TARGET_SCHEMA, DEAD_DEPENDENCY_TARGET_SCHEMA,
-    PRESET_LIGHT_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${PRESET_LIGHT_TARGET_SCHEMA} (live preset-light leaf),`
+    PRESET_LIGHT_TARGET_SCHEMA, STABLE_CORE_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${STABLE_CORE_TARGET_SCHEMA} (live stable-core leaf),`
+      + ` ${PRESET_LIGHT_TARGET_SCHEMA} (retired preset-light leaf),`
       + ` ${DEAD_DEPENDENCY_TARGET_SCHEMA} (retired dead-dependency leaf),`
       + ` ${GENESIS_TIES_TARGET_SCHEMA} (retired genesis-ties leaf),`
       + ` ${TREASURY_ADMISSION_TARGET_SCHEMA} (retired treasury-admission leaf),`

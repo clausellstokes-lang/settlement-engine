@@ -421,26 +421,56 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // reads, never a new blind spot. THE FINDINGS INVENTORY DID NOT MOVE AT ALL — the frozen
     // per-file debt in .observed-shape-readers-baseline.json is byte-identical, so no reader
     // gained or lost a writer; only the corpus that exercises them is smaller.
+    // ── RE-RECORDED 2026-09-01 BY THE T8 LANDING, TWO CAUSES AND THEY MUST NOT BE POOLED ──
+    // 1300/8607/14586 → 1298/8556/14490. ⚠ THE NET IS NOT EITHER CAUSE: the two run in
+    // OPPOSITE directions on origins and transitions, so all three arms are recorded.
+    //   • BASE → tip, T8 CAR 1 alone (the ruled `prosperityRank01` flip, §858):
+    //     1300/8607/14586 → 1298/**8630**/**14614**. The corruption-onset hazard moves, so a
+    //     12-interval corpus stops reaching two `candidate.npc.protect.osr013_npc_3.*` shapes
+    //     (−2) while reaching further elsewhere (+23 origins, +28 transitions). MEASURED at a
+    //     car-1-reverted control, which reads the frozen 1300/8607/14586 exactly, ZERO residue.
+    //   • tip → cured, THE CHURN-RULE CURE alone (chair ruling R-T8-OSR, option C, in
+    //     `observed-shape-corpus.mjs`): 1298/8630/14614 → 1298/**8556**/**14490**, i.e.
+    //     **−74 origins and −124 transitions and NO shape**. A partial wildcard collapse no
+    //     longer fires on a node whose key population is overwhelmingly stable, so seven
+    //     records stop minting a `/dynamic` facet that was never theirs.
+    //   • The NET of the two is −2 / −51 / −96, which is the figure pinned below.
+    // ⭐ THE FINDINGS INVENTORY DID NOT MOVE AT ALL: the shrink-only arm below reads
+    // violations 0 / stale 0 against the frozen schema-14 baseline, so the corpus that
+    // exercises the estate got smaller and MORE honest while not one reader gained or lost
+    // a writer. That is the safe direction for a reader-with-no-writer ratchet.
     expect(corpus.meta).toMatchObject({
-      shapeCount: 1300,
-      originCount: 8607,
-      transitionCount: 14586,
+      shapeCount: 1298,
+      originCount: 8556,
+      transitionCount: 14490,
     });
+    // ── RE-RECORDED 2026-09-01 BY THE T8 LANDING (§858's priced companion movement) ──
+    // FOUR fields move and ALL FOUR are T8 CAR 1, not the churn cure: accumulated
+    // 1567 → 1565, unique 272 → 268, regionalEventLog 73 → 74 and its unique 73 → 74.
+    // ⭐ THE SAME CORPUS MOVEMENT IS RECORDED IN THE THREE COMPANION HOMES IN THIS SAME
+    // ACT — news-voice CORPUS 272/32/53 → 268/28/51, news-headline ADDRESS_TOTALS, and
+    // prose-family regionalLog {7, 165} → {8, 169}. One shift written down in four places
+    // is what tells a real estate movement from a walker drifting on its own.
+    // ⚠ THE NEWS LAYER MOVING DOWN WHILE THE REGIONAL LOG MOVES UP is the signature of
+    // the onset delay, not of a lost writer: a corruption beat that no longer fires in 12
+    // intervals frees the pulse to select a different outcome, which the state lane logs.
+    // ⭐ ATTRIBUTED BY EXECUTION, NOT INFERENCE: this walker ran GREEN at the pre-T8 base,
+    // so the base reads the frozen 1567/272/73/73; the UNCURED T8 tip already read
+    // 1565/268/74/74, and so does the CURED tip — the churn cure moves none of the four.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
       wizardNewsFinalEntries: 240,
-      wizardNewsAccumulatedEntries: 1567,
-      wizardNewsUnique: 272,
+      wizardNewsAccumulatedEntries: 1565,
+      wizardNewsUnique: 268,
       pulseHistory: 12,
-      // TE36 (ODQ §271): 109 → 73, the same one cause. The regional event log carries the
-      // pulse's selected outcomes, and the retired bare-decline family was 36 of them.
-      // ⭐ THE NEWS LAYER DID NOT MOVE — wizardNewsFinalEntries 240, accumulated 1567, unique
-      // 272 are all unchanged — because ordinary population drift was already `state_only`
-      // and never a Chronicle beat. Only the state lane got quieter, which is exactly what
-      // retiring a state-only candidate should do and is the arithmetic that tells the two
-      // layers apart.
-      regionalEventLog: 73,
-      regionalEventLogUnique: 73,
+      // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
+      // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
+      // reading of "the news layer did not move" is DATED: T8 car 1 moved both layers, in
+      // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
+      // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
+      // the control that keeps the two layers legibly apart.
+      regionalEventLog: 74,
+      regionalEventLogUnique: 74,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);

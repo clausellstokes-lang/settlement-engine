@@ -102,6 +102,17 @@ const FIELD_SEGMENT = 'field:';
 const ARRAY_ELEMENT_SEGMENT = 'element';
 const DYNAMIC_VALUE_SEGMENT = 'dynamic';
 const MAX_WALK_DEPTH = 64;
+/**
+ * A key observed on at least this share of a node's instances is a SCHEMA key:
+ * something the writers put there, not something a run happened to produce.
+ *
+ * ⭐ THE SAME SHARE IS THEN APPLIED ONE LEVEL UP, and deliberately the same
+ * number rather than a second one: a NODE at least this share of whose keys are
+ * schema keys is a schema RECORD. One constant governs both readings so the
+ * node-level judgement can never drift away from the key-level one it is built
+ * from. See the churn rule in `discoverDynamicPlans`.
+ */
+const SCHEMA_PRESENCE = 0.8;
 
 const jsonScalar = (value) => (
   value === null
@@ -420,12 +431,36 @@ function discoverDynamicPlans(paths, known) {
     if (sets.length < 2) continue;
     const frequencies = new Map();
     for (const set of sets) for (const key of set) frequencies.set(key, (frequencies.get(key) || 0) + 1);
+    const presenceOf = (key) => (frequencies.get(key) || 0) / sets.length;
     const churned = keys.filter((key) => {
       const kinds = node.fieldKinds.get(key) || new Set();
-      return (frequencies.get(key) || 0) / sets.length < 0.8
+      return presenceOf(key) < SCHEMA_PRESENCE
         && kinds.size === 1 && (kinds.has('object') || kinds.has('array'));
     });
-    if (churned.length >= 2) collapse(churned);
+    // ⭐⭐ CHURN IS EVIDENCE OF A RUNTIME-KEYED MAP ONLY WHERE THE NODE ITSELF HAS
+    // NO SCHEMA. THE GUARANTEE: a node whose key population is overwhelmingly
+    // stable — at least `SCHEMA_PRESENCE` of its keys observed on at least that
+    // share of its instances — is a RECORD WITH OPTIONAL FIELDS, and no number of
+    // coming-and-going traversable fields can reclassify it as an id-keyed map.
+    //
+    // The two branches above already carry that property because each quantifies
+    // over EVERY key: `exactIdKeys` proves key ≡ value.id, and `allObject`/
+    // `allArray` require the whole node to be homogeneous and its children alike.
+    // This branch is the weakest of the three and was the only one that judged a
+    // node by a CORNER of it, so a fixed record could be called a map on the
+    // evidence of two optional ledgers while the rest of its schema stood still.
+    //
+    // ⛔ WHY THAT MATTERS MORE THAN A MISLABEL. A partial collapse is not inert:
+    // the collapsed children are observed a second time at the node's `/dynamic`
+    // path, `shapeNameOf` deliberately ignores `dynamic` segments, and so the
+    // GRANDCHILDREN's keys land on the parent's own leaf-name shape. A record can
+    // therefore acquire a key set that is not its own and a row count that is not
+    // its own — and once that count crosses the reader ratchet's too-thin-to-judge
+    // floor, a shape that was never judged starts judging every read of it against
+    // a union it never had. The floor lives in the consumer; the honesty of the
+    // classification has to live here.
+    const schemaKeys = keys.filter((key) => presenceOf(key) >= SCHEMA_PRESENCE);
+    if (churned.length >= 2 && schemaKeys.length < SCHEMA_PRESENCE * keys.length) collapse(churned);
   }
   for (const [path, plan] of [...next]) {
     if (!plan.collapsed.size && !plan.union.size) next.delete(path);

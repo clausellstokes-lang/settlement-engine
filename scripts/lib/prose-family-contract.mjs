@@ -54,20 +54,48 @@ const EXPECTED_ROOTS = new Map([
 // ⚠ SCOPE: `demographicsEnabled` is virtual and false in every shipped preset. This
 // denominator is the ONLY place in the estate that observes the lit engine, so no player,
 // no shipped golden and no dark-control cell sees any of this.
+// ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860, the cited-companion clause), IN THE
+// SAME ACT AS `tests/lint/.prose-family-contract-baseline.json` ─────────────────────────────────
+// ⭐ THE SHAPE IS AGAIN UNTOUCHED, WHICH IS THE ONE THING WORTH SAYING FIRST: 63 identities before
+// and after, ZERO added and ZERO removed, four families still nonempty, `chronicle` (7/7/7) and
+// `timeline` (4/8/12) byte-identical. 26 of the 63 rows moved, every one of them a COUNT on a path
+// this contract already governed. Reviewed row by row against the predecessor before the write;
+// the review is in laneT8ROUTE-receipt.md, not summarised away here.
+// ⚠ THE ROWS DIGEST IS THE ONE FIGURE THAT CANNOT BE PATCHED BY HAND. It is the sha256 of the
+// regenerated rows, and `EXPECTED_ROWS_BYTES` is `Buffer.byteLength(JSON.stringify(rows))` of the
+// same array — both are re-derived from ONE `deriveProseFamilyContract` run, never transcribed.
+//
+// THE CAUSES, DECOMPOSED BY SINGLE-VARIABLE CONTROL RATHER THAN BY ARGUMENT. Restoring ONLY
+// src/domain/prosperityRank.js + src/domain/corruption.js to the landing base `598642981` (cars 2,
+// 3, both addenda and the F6 bundle bill left at the tip) measures scalarRows 25438, pulseHistory
+// {1057, 5063}, regionalLog {7, 165} — the FROZEN regionalLog exactly. So:
+//   cars 2 + 3    scalarRows −13, pulseHistory distinctValues −141 / occurrences −13, regionalLog 0.
+//                 Car 3's priorityCategory relabel is the distinctValues half (the `reasons[]`
+//                 vocabularies: consequence 110 → 74, impactDigest 118 → 80, mechanical 47 → 25,
+//                 rumour-seed 33 → 20, selected 118 → 80 — backing factions re-spelling their
+//                 reasons); car 2's rumour dedup is the occurrences half.
+//   car 1         scalarRows −39, pulseHistory {−9, −45}, and ALL of regionalLog {7 → 8, 165 → 169}
+//                 plus ALL of the news layer (accumulated 1567 → 1565, unique 272 → 268). The
+//                 corruption-onset shift §858 priced (~9 → ~33 ticks) reaches a 12-interval corpus:
+//                 `pulseHistory[].corruptionEvents[].kind` occurrences 3 → 1 is that shift, read
+//                 directly.
+// ⚠ SCOPE, unchanged from the TE36 note above: `demographicsEnabled` is virtual and false in every
+// shipped preset, and this denominator is the ONLY place in the estate that observes the lit
+// engine. No player, no shipped golden and no dark-control cell sees any of this.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 25451, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
-  wizardNewsAccumulatedEntries: 1567, wizardNewsUnique: 272, pulseHistory: 12,
-  regionalEventLog: 73, regionalEventLogUnique: 73, aiChronicle: 1,
+  scalarRows: 25399, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
+  wizardNewsAccumulatedEntries: 1565, wizardNewsUnique: 268, pulseHistory: 12,
+  regionalEventLog: 74, regionalEventLogUnique: 74, aiChronicle: 1,
 });
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 50, distinctValues: 1198, occurrences: 5076 },
-  { family: 'regionalLog', identities: 2, distinctValues: 7, occurrences: 165 },
+  { family: 'pulseHistory', identities: 50, distinctValues: 1048, occurrences: 5018 },
+  { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 169 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1220, occurrences: 5260 });
-const EXPECTED_ROWS_BYTES = 8274;
-const EXPECTED_ROWS_SHA256 = '49f7d9470beba874408750086ea46ed985e41506cb56b99f3ce0c500670c06f1';
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1071, occurrences: 5206 });
+const EXPECTED_ROWS_BYTES = 8271;
+const EXPECTED_ROWS_SHA256 = '687ae7e525ac1f7ab1daffe8c4a41afc8b3cfe92f7e65d9c8a70006786e445a9';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

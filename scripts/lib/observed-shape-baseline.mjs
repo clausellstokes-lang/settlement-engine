@@ -7,33 +7,46 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **14**: schema 13's tagged numeric heuristic-leaf envelope
- * re-governed to a DETECTOR THAT CAN NOW SEE THE PATH IT WAS WRITTEN TO WATCH.
- * Like 11, this rung binds a repaired detector; unlike 11, the repair is a
- * WIDENING of an existing clause rather than a new mechanism, and it adds no
- * identity, no exemption and no filter.
+ * `BASELINE_SCHEMA` is **15**: schema 14's tagged numeric heuristic-leaf envelope
+ * re-governed to a DETECTOR THAT NO LONGER CALLS A RECORD A MAP. Like 11 and 14,
+ * this rung binds a repaired detector; unlike either, the repair is to the
+ * CLASSIFIER the corpus is built from rather than to a door the gate consults,
+ * and it adds no identity, no exemption and no filter.
  *
- * WHAT WAS BROKEN (E-T2-7, measured by lane T9). Clause 4 of the virtual-dormant
- * writer door retires a row whose flag has stopped being dark — "the corpus DOES
- * light it now, so judge the read normally". It read a WINDOW of the flag
- * manifest sliced between the `DEFAULT_SIMULATION_RULES` and
- * `ENGINE_GATED_VIRTUAL_RULE_KEYS` declarations, and the entire preset table sits
- * beyond that slice: of the 52 `<x>Enabled: true` lights in the manifest, 41 are
- * outside the window and 11 inside. Since a preset override spread is how every
- * virtual flag in this estate is actually lit, the clause could not fire for its
- * own subject. Clause 4 is now 4a (the defaults, unchanged) plus 4b, which reads
- * the WHOLE executed manifest — so there is no boundary left to drift and moving
- * the preset table cannot re-open the hole.
+ * WHAT WAS BROKEN (R-T8-OSR, measured by lane T8). The corpus builder collapses a
+ * node into an id-keyed map on three branches. Two quantify over EVERY key —
+ * `exactIdKeys` proves key ≡ value.id; `allObject`/`allArray` require the whole
+ * node to be homogeneous — but the CHURN branch judged a node by a CORNER of it:
+ * two traversable keys seen on under 80 % of its instances sufficed, whatever the
+ * rest of the node did, so a fixed record carrying two optional ledgers was
+ * classified as a map. That is not a mislabel that stays put. The collapsed
+ * children are observed a second time under the node's `/dynamic` path, leaf
+ * shape names deliberately ignore `dynamic` segments, and so the GRANDCHILDREN's
+ * keys land on the record's own shape — which can then cross the reader ratchet's
+ * too-thin-to-judge floor and start judging every read against a key union it
+ * never had. The churn branch now carries the guarantee its two siblings already
+ * had: a node at least `SCHEMA_PRESENCE` of whose keys are schema keys is a
+ * RECORD WITH OPTIONAL FIELDS and cannot be collapsed.
  *
- * ⭐ NOTHING THE SCANNER FINDS MOVES AT THIS RUNG, and that is the point rather
- * than a happy accident: 4b convicts only a flag lit `true` outside the defaults,
- * and every flag carrying a dormant-writer row is dark in the live manifest, so
- * the clause is armed and silent. The rung exists because the detector's BYTES
- * moved, which is exactly the case the shrink-only `--write` refuses by design —
- * frozen numbers taken under one detector do not mean the same thing under
- * another, even when they happen to be equal. The identity grammar, topology
- * inventory, envelope law and the nine-identity bank are all schema 9's,
- * untouched.
+ * ⭐ NOTHING THE SCANNER FINDS MOVES AT THIS RUNG, and that is measured rather
+ * than hoped: the cure is classification-only, and the live inventory at the
+ * cured tip reproduces the schema-14 register ROW FOR ROW — 1,999 reads / 1,412
+ * identities / 388 files, violations 0, stale 0. The rung exists because the
+ * detector's BYTES moved, which is exactly the case the shrink-only `--write`
+ * refuses by design — frozen numbers taken under one detector do not mean the
+ * same thing under another, even when they happen to be equal. The identity
+ * grammar, topology inventory, envelope law and the nine-identity bank are all
+ * schema 9's, untouched.
+ *
+ * `RETIRED_PRESET_LIGHT_BASELINE_SCHEMA` is **14**: schema 13's tagged numeric
+ * heuristic-leaf envelope re-governed to a DETECTOR THAT COULD NOW SEE THE PATH
+ * IT WAS WRITTEN TO WATCH. Clause 4 of the virtual-dormant-writer door read a
+ * WINDOW of the flag manifest sliced between the `DEFAULT_SIMULATION_RULES` and
+ * `ENGINE_GATED_VIRTUAL_RULE_KEYS` declarations, and the entire preset table sat
+ * beyond that slice — 41 of the manifest's 52 `<x>Enabled: true` lights outside
+ * the window, 11 inside — so the clause could not fire for its own subject. It
+ * became 4a (the defaults, unchanged) plus 4b, which reads the WHOLE executed
+ * manifest. Its reconciliation moved not one row.
  *
  * `RETIRED_DEAD_DEPENDENCY_BASELINE_SCHEMA` is **13**: schema 14's predecessor,
  * frozen. Never redefined, never deleted.
@@ -237,7 +250,14 @@ export const RETIRED_GENESIS_TIES_BASELINE_SCHEMA = 12;
  *  is validated against BASELINE_SCHEMA, and this constant exists so a schema-13
  *  PREDECESSOR is still validated as schema 13 after the live number moves past it. */
 export const RETIRED_DEAD_DEPENDENCY_BASELINE_SCHEMA = 13;
-export const BASELINE_SCHEMA = 14;
+/** The RETIRED preset-light definition — schema 15's predecessor. Same tagged topology
+ *  envelope, the same nine-identity bank and the SAME 1,412 identities; schema 15
+ *  re-governs it to the churn rule's STABLE-CORE GUARD (R-T8-OSR) and, like 13 and 14,
+ *  moves no row at all. Never redefined, never deleted — a live baseline is validated
+ *  against BASELINE_SCHEMA, and this constant exists so a schema-14 PREDECESSOR is
+ *  still validated as schema 14 after the live number moves past it. */
+export const RETIRED_PRESET_LIGHT_BASELINE_SCHEMA = 14;
+export const BASELINE_SCHEMA = 15;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -735,10 +755,23 @@ export function validateSchema13Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 13's tagged envelope re-governed to the WIDENED
+ *  clause 4 of the virtual-dormant-writer door. Re-bound to its own LITERAL now that
+ *  the authority has moved to 15, exactly as its predecessors were: a retired
+ *  validator that reads `BASELINE_SCHEMA` stops validating the rung it is named after
+ *  the moment the number moves. */
+export function validateSchema14Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_PRESET_LIGHT_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema14Baseline(baseline) {
+export function validateSchema15Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

@@ -2,8 +2,25 @@ const ROW_KEYS = Object.freeze([
   'home', 'field', 'expectedVoiceClass', 'observedVoiceClass', 'distinctValues', 'occurrences',
 ]);
 const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']);
+// ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860, the cited-companion clause) ──────
+// 272/32/53 → 268/28/51. pulseRoots 12 and finalEntries 240 DO NOT MOVE, and conservation still
+// closes: 268 − 28 = 240. The corpus is unchanged in size; the same twelve pulse roots simply
+// author four fewer Wizard News introductions, retire four fewer of them, and reach two fewer
+// kind|impactKind homes.
+// ⭐ THE CAUSE IS CAR 1 ALONE, AND THE SINGLE-VARIABLE CONTROL SAYS SO RATHER THAN THE ARGUMENT.
+// With ONLY src/domain/prosperityRank.js and src/domain/corruption.js restored to the landing
+// base 598642981 — cars 2, 3, both addenda and the F6 edge-bundle bill left at the tip — the
+// tuple measures 12/272/32/240/53, i.e. the FROZEN value, unmoved. So the ruled J-T7-C prosperity
+// flip's corruption-onset consequence (§858: first corrupt NPC ~9 → ~33 ticks) is the whole of
+// this movement, and car 2's rumour dedup — the obvious suspect, and the one §858's dispatch
+// would have been read as naming — moves this tuple by EXACTLY ZERO.
+// ⚠ THE BEFORE-PICTURE NAMED ONE FIELD AND THREE MOVED. The loop below throws on the FIRST
+// mismatch, so a red reading "introductions drifted: expected 272, got 268" is silent about
+// `retirements` and `homes`. Anyone re-recording this from a failure message alone would have
+// left two thirds of the drift in place; the figures here are measured from a probe that reports
+// every field instead of throwing on the first.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 272, retirements: 32, finalEntries: 240, homes: 53,
+  pulseRoots: 12, introductions: 268, retirements: 28, finalEntries: 240, homes: 51,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

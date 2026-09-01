@@ -5,8 +5,23 @@ const REWRITE_KEYS = Object.freeze(['source', 'flags', 'replacement', 'distinctV
 const INERT_KEYS = Object.freeze(['source', 'flags', 'replacement', 'reason']);
 const RAW_KEYS = Object.freeze(['rootOrdinal', 'pulseIndex', 'field', 'outcomeIndex', 'headline']);
 const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 272, retirements: 32, finalEntries: 240, homes: 53 });
-const ADDRESS_TOTALS = Object.freeze({ homes: 53, fields: 2, identities: 106, prospectiveIdentities: 14, indicativeIdentities: 92, distinctValues: 400, occurrences: 544 });
+// ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) — THE SECOND COPY OF THE SAME TUPLE.
+// This literal and `scripts/lib/news-voice-contract.mjs`'s must agree byte for byte: the headline
+// walker reconstructs through the VOICE contract's `reconstructWizardNewsIntroductions`, so a
+// tuple updated in one home and not the other reds here with the other file's message. The
+// provenance and the single-variable control are recorded once, at the voice contract's copy.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 268, retirements: 28, finalEntries: 240, homes: 51 });
+// ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
+// 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
+// is still headline-and-summary and nothing was added to it.
+// ⭐ THE HOMES DELTA IS NOT A COUNT, IT IS TWO NAMES, AND NAMING THEM IS THE WHOLE PROVENANCE:
+// `applied|cause_lifecycle` and `queued|npc_exploit` VANISH, each taking its headline row and its
+// summary row (2 homes × 2 fields = the 4 identities). That is car 1's corruption-onset shift
+// (§858: first corrupt NPC ~9 → ~33 ticks) read directly off the news layer — a 12-interval corpus
+// no longer reaches a cause-lifecycle beat, and no NPC is corrupt enough to be queued to exploit.
+// The single-variable control agrees: with car 1's two src files restored to the landing base, the
+// whole tuple reads its FROZEN value, cars 2 and 3 notwithstanding.
+const ADDRESS_TOTALS = Object.freeze({ homes: 51, fields: 2, identities: 102, prospectiveIdentities: 12, indicativeIdentities: 90, distinctValues: 393, occurrences: 536 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
@@ -17,17 +32,31 @@ const RAW_LIVENESS = Object.freeze({
     // repetitive: removing 21 occurrences of a handful of spellings leaves a shorter, more
     // varied lane. The selectedOutcomes lane is UNCHANGED — ordinary population drift was
     // already `state_only` and never a Chronicle beat.
-    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 56, distinctValues: 29, prospectiveOccurrences: 52, prospectiveDistinctValues: 28, indicativeOccurrences: 4, indicativeDistinctValues: 1 }),
+    // T8 · SHIFT (§858 + §860): 56/29/52/28 → 54/28/50/27. TWO mechanical headlines leave, and the
+    // distinct count follows them down by one — the opposite of TE36's rise, because this time the
+    // departing records are NOT a repetitive family but two ordinary one-off beats.
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 54, distinctValues: 28, prospectiveOccurrences: 50, prospectiveDistinctValues: 27, indicativeOccurrences: 4, indicativeDistinctValues: 1 }),
+    // ⭐ THE SELECTED LANE IS BYTE-IDENTICAL FOR THE SECOND RE-RECORD RUNNING (151/80/95/66/56/14),
+    // and that is the control, not a coincidence: it is the lane the corruption work never authors
+    // into, so a movement here would have meant the drift was wider than car 1.
     Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 151, distinctValues: 80, prospectiveOccurrences: 95, prospectiveDistinctValues: 66, indicativeOccurrences: 56, indicativeDistinctValues: 14 }),
   ]),
   // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
   // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
-  union: Object.freeze({ headlineOccurrences: 207, distinctValues: 80, prospectiveOccurrences: 147, prospectiveDistinctValues: 66, indicativeOccurrences: 60, indicativeDistinctValues: 14 }),
+  // T8 · SHIFT: the union follows the mechanical lane alone AGAIN — 207 → 205 and 147 → 145, the
+  // same two. `distinctValues` holds at 80 and both indicative halves hold, so the arithmetic says
+  // the two departed headlines were prospective and already spelled elsewhere in the union.
+  union: Object.freeze({ headlineOccurrences: 205, distinctValues: 80, prospectiveOccurrences: 145, prospectiveDistinctValues: 66, indicativeOccurrences: 60, indicativeDistinctValues: 14 }),
 });
 // TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
 // no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus
 // stopped producing its headline. That is the whole shape of this re-record.
-const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 16, inertRules: 10, distinctValues: 66, occurrences: 147 });
+// T8 · SHIFT (§858 + §860): 147 → 145 occurrences, and NOTHING ELSE MOVES — rules 26, active 16,
+// inert 10, distinctValues 66 all hold. ⭐ No rule crossed in either direction, so
+// KNOWN_INERT_HEADLINE_REWRITES needs no new row and this re-record required NO new inert-row
+// authority ("New inert rows require authority" — none is claimed here). Verified by deriving the
+// live zero-count identity set and comparing it to the declared one: identical, 10 of 10.
+const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 16, inertRules: 10, distinctValues: 66, occurrences: 145 });
 
 export const KNOWN_INERT_HEADLINE_REWRITES = Object.freeze([
   { source: '\\bmay close its doors\\b', flags: '', replacement: 'closes its doors', reason: 'institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-closure authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no closure headline.' },

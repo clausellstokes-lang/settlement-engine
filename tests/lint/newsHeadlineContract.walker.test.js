@@ -100,10 +100,13 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
   });
 
-  it('A2 freezes all 106 address rows and their canonical digest', () => {
+  it('A2 freezes all 102 address rows and their canonical digest', () => {
     expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
     expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
-    expect(baseline.addressTotality.totals).toEqual({ homes: 53, fields: 2, identities: 106, prospectiveIdentities: 14, indicativeIdentities: 92, distinctValues: 400, occurrences: 544 });
+    // T8 · SHIFT (§858 + §860): 106 → 102 identities over 53 → 51 homes. The two homes that leave
+    // are `applied|cause_lifecycle` and `queued|npc_exploit`, each surrendering its headline and
+    // summary row; the provenance is recorded once, at news-headline-contract.mjs's ADDRESS_TOTALS.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 51, fields: 2, identities: 102, prospectiveIdentities: 12, indicativeIdentities: 90, distinctValues: 393, occurrences: 536 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {
