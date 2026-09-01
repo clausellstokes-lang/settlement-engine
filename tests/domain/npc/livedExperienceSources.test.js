@@ -696,12 +696,28 @@ const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(
  * also have caught AND a call the substring scan would have caught only by accident of
  * spelling. What it stops catching is a module PATH quoted as data, which was never a
  * dependency. Both halves are pinned by the control below, in both directions.
+ *
+ * ⛔⛔ AND SHARPENED A THIRD TIME AT THE W-OPS COUPLING — THIS ARM WAS THE ESTATE'S LAST
+ * RAW CORNER, AND ITS OWN SIBLING HAD CARRIED THE CURE FOR A CAR ALREADY. `stripComments`
+ * blanks comments and nothing else, so the symbol arm still read STRING LITERALS as code.
+ * `envoyTaskCatalog.js` records, in the `structuralGuard` provenance string that justifies
+ * its shape gate, that `characterAsSeenBy({viewer:'deity'})` returns a bare chart — and
+ * this arm convicted it of CALLING the thing it was explaining it does not call. Fourth
+ * time this file has paid the same tuition: L4's dereference ban, L5's comment strip, the
+ * coupling's data-roster sighting, and now a receipt string.
+ *
+ * ⭐ THE CLAIM IS UNCHANGED AND THE SPLIT IS THE SIBLING'S, EXACTLY. The MODULE arm is
+ * asked BEFORE strings are blanked — an import specifier IS a string literal, and blanking
+ * it would blind that half — and the SYMBOL arm is asked AFTER, over
+ * `codeWithoutCitations`. `dependsOnFunnelFamily` below has been built this way since the
+ * sixth-sighting cure; this arm now matches it line for line.
  * @param {string} text
  */
 const consumesKnownRead = (/** @type {string} */ text) => {
   const code = stripComments(text);
   return /from\s+'[^']*\/(livedExperienceSources|knownCharacter)\.js'/.test(code)
-    || /\b(knownCharacterOf|characterAsSeenBy|LIVED_EXPERIENCE_SOURCES)\s*[(.]/.test(code);
+    || /\b(knownCharacterOf|characterAsSeenBy|LIVED_EXPERIENCE_SOURCES)\s*[(.]/
+      .test(codeWithoutCitations(text));
 };
 
 /**
@@ -811,6 +827,13 @@ const dependsOnFunnelFamily = (/** @type {string} */ text) => (
     // AND THE TWO CITATIONS THAT ARE NOT DEPENDENCIES.
     expect(consumesKnownRead('// a comment naming knownCharacterOf(x)\nconst a = 1;')).toBe(false);
     expect(consumesKnownRead("const row = { home: 'src/domain/npc/knownCharacter.js' };")).toBe(false);
+    // ⛔ AND THE STRING-LITERAL CITATION WITH CALL SHAPE — the third sharpening's own
+    // offender, in miniature. `envoyTaskCatalog.js` was convicted of CALLING
+    // `characterAsSeenBy` by the provenance string that explains it does not. A quoted
+    // symbol followed by a paren is indistinguishable from a call to a stripper that
+    // only blanks comments, so this line reds if the symbol arm ever goes back to raw.
+    expect(consumesKnownRead("const g = 'a chart from characterAsSeenBy({viewer}) carries neither';")).toBe(false);
+    expect(consumesKnownRead("const r = 'knownCharacter.js:knownCharacterOf (the bare chart)';")).toBe(false);
     // anchored: the same predicate is pinned TRUE five lines above on real import syntax
     expect(stripComments("import { x } from './knownCharacter.js';")).toContain('knownCharacter');
     // anchored: the line above pins the SAME stripper returning a name out of real import syntax
