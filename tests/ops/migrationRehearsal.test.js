@@ -76,7 +76,7 @@ describe('bounded migration rehearsal plan', () => {
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
     expect(plan.appliedHead).toBe(121);
     expect(plan.repoHead).toBe(200);
-    expect(plan.pendingCount).toBe(78);
+    expect(plan.pendingCount).toBe(79);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
       [137, 156],
@@ -103,11 +103,11 @@ describe('bounded migration rehearsal plan', () => {
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 78 }, (_, index) => 122 + index),
+      Array.from({ length: 79 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
-    expect(plan.waves.at(-8)).toMatchObject({
+    expect(plan.waves.at(-9)).toMatchObject({
       id: 'surveyor-probe-and-tier-price',
       from: 191,
       to: 192,
@@ -119,7 +119,7 @@ describe('bounded migration rehearsal plan', () => {
         name: 'spend_credits',
       }],
     });
-    expect(plan.waves.at(-7)).toMatchObject({
+    expect(plan.waves.at(-8)).toMatchObject({
       id: 'bilateral-user-route-command',
       from: 193,
       to: 193,
@@ -131,7 +131,7 @@ describe('bounded migration rehearsal plan', () => {
         name: 'assert_create_route_half',
       }],
     });
-    expect(plan.waves.at(-6)).toMatchObject({
+    expect(plan.waves.at(-7)).toMatchObject({
       id: 'operator-messages-consent-and-courier',
       from: 194,
       to: 194,
@@ -155,7 +155,7 @@ describe('bounded migration rehearsal plan', () => {
         name: 'list_my_operator_messages',
       }],
     });
-    expect(plan.waves.at(-5)).toMatchObject({
+    expect(plan.waves.at(-6)).toMatchObject({
       id: 'civility-guard-and-public-identity',
       from: 195,
       to: 195,
@@ -177,7 +177,7 @@ describe('bounded migration rehearsal plan', () => {
     // diagnostic soak harness; no running code path reads the table, which is why its
     // forward-only posture is cheap and why reversing it is nonetheless a
     // data-destroying act that must be deliberate.
-    expect(plan.waves.at(-4)).toMatchObject({
+    expect(plan.waves.at(-5)).toMatchObject({
       id: 'simulation-metrics-storage',
       from: 196,
       to: 196,
@@ -199,7 +199,7 @@ describe('bounded migration rehearsal plan', () => {
     // existing column, and its whole risk is WHICH rows. Its `expectedObjects` is
     // therefore a single already-existing table, and the thing an operator must
     // actually review is the predicate, not the DDL.
-    expect(plan.waves.at(-3)).toMatchObject({
+    expect(plan.waves.at(-4)).toMatchObject({
       id: 'consent-person-adjacent-default',
       from: 197,
       to: 197,
@@ -227,7 +227,7 @@ describe('bounded migration rehearsal plan', () => {
     // together: the durable aggregate that must exist BEFORE the window shortens, and
     // the two prune/maintenance functions that decide what disappears. Pinning only
     // the table would let a rehearsal call the wave "additive".
-    expect(plan.waves.at(-2)).toMatchObject({
+    expect(plan.waves.at(-3)).toMatchObject({
       id: 'retention-numbers',
       from: 198,
       to: 198,
@@ -395,8 +395,8 @@ describe('bounded migration rehearsal plan', () => {
     const numbers = staged.copied.map((name) => Number(name.split('_')[0]));
 
     expect(snapshot).toMatchObject({
-      repoHead: 199,
-      migrationCount: 199,
+      repoHead: 200,
+      migrationCount: 200,
       configSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
     });
@@ -514,7 +514,7 @@ describe('clone admission is positive and source-bound', () => {
     expect(`${result.stdout}${result.stderr}`).not.toContain('super-secret');
     expect(JSON.parse(result.stdout)).toMatchObject({
       appliedHead: MIGRATION_TRAIN_BASE_HEAD,
-      repoHead: 199,
+      repoHead: 200,
     });
   });
 });
