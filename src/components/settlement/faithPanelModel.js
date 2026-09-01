@@ -18,6 +18,11 @@
 
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
 import { divineMandateStatus } from '../../domain/worldPulse/religionState.js';
+// W-FAITH F7c — the deepening read-model (top-3 character, boon/bane, the
+// cumulative field in band words). Computed HERE, from the records this model
+// has already read off config, so the observed-shape inventory gains no new
+// row anywhere: the component consumes `model.deepening` and reads nothing.
+import { faithDeepeningOf } from '../../domain/display/faithDeepening.js';
 
 /** @param {unknown} x @param {number} [fallback] @returns {number} */
 function num(x, fallback = 0) {
@@ -224,8 +229,16 @@ export function faithPanelModel(settlement) {
   // this panel's, which deliberately reads only its own settlement.
   const patronFallSentence = (profile && FALL_SENTENCE[profile.patronFall?.cause]) || null;
 
+  // W-FAITH F7c — the deepening rows, from the SAME records read above (the
+  // embed snapshots and the projected profile); nothing authored ⇒ empty maps.
+  const deepening = faithDeepeningOf({
+    patron: patronSnap,
+    cults: cultsSnap,
+    field: profile && profile.field && typeof profile.field === 'object' ? profile.field : null,
+  });
+
   return {
-    hasEmbed: true, live,
+    hasEmbed: true, live, deepening,
     patron: {
       name: patronSnap.name,
       rankAxis: patronSnap.rankAxis || null,

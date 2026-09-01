@@ -24,6 +24,10 @@ import {
   ARMY_DEPLOYED_CAPACITY_PENALTY,
 } from '../worldPulse/warDeployment.js';
 import { computeWarSentiment } from '../worldPulse/disposition.js';
+// W-FAITH F7c (the §866 docket): the temper seam — display reads the derivation,
+// never the retired stored temperamentAxis (W-F5 stage 2's own re-plumb, applied
+// to the last four display surfaces that still read the mirror).
+import { deityTemper } from '../worldPulse/deityAxes.js';
 import { resolveBlockadeBypassChannel } from '../worldPulse/foodStockpile.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from './warStatus.js';
 
@@ -159,7 +163,12 @@ function readFaith(settlement, besiegedBy, settlementOf) {
   const patron = {
     name: deity.name || null,
     alignment: deity.alignmentAxis || null,   // good | evil | neutral
-    temper: deity.temperamentAxis || null,     // warlike | peacelike | neutral
+    // W-FAITH F7c (the §866 docket): the temper comes from the SAME derivation
+    // the engine drives on (deityAxes.deityTemper — authored word wins, else the
+    // axes), never the retired stored mirror, so this read-model can no longer
+    // print a word the simulation disagrees with. Neutral says nothing — the
+    // same spelling the alignment/law fields already use here.
+    temper: displayTemper(deity),              // warlike | peacelike | null
   };
   /** @type {Array<{ besieger: string, deity: string|null, opposedOn: string[] }>} */
   const opposed = [];
@@ -168,10 +177,19 @@ function readFaith(settlement, besiegedBy, settlementOf) {
     if (!bd) continue;
     const opposedOn = [];
     if (isOpposite(patron.alignment, bd.alignmentAxis, 'good', 'evil')) opposedOn.push('alignment');
-    if (isOpposite(patron.temper, bd.temperamentAxis, 'warlike', 'peacelike')) opposedOn.push('temperament');
+    if (isOpposite(patron.temper, displayTemper(bd), 'warlike', 'peacelike')) opposedOn.push('temperament');
     if (opposedOn.length) opposed.push({ besieger: String(bid), deity: bd.name || null, opposedOn });
   }
   return { patron, opposed };
+}
+
+/** The engine's temper for a display surface: the derivation's word, with
+ *  neutral spelled as null (neutral says nothing — the lawAxis idiom).
+ * @param {{ authoredTemper?: string, temperamentAxis?: string, alignmentAxis?: string, lawAxis?: string } | null} [deity]
+ * @returns {string|null} */
+function displayTemper(deity) {
+  const temper = deityTemper(deity);
+  return temper && temper !== 'neutral' ? temper : null;
 }
 
 /** Are two axis values diametrically opposed (a↔b, either order)? */
