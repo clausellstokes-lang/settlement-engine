@@ -2445,6 +2445,39 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(timeoutLiteralsOf('fn(() => { g(); }, 999);')).toEqual([]);
       expect(timeoutLiteralsOf('const rows = list.map((r) => r.id);')).toEqual([]);
 
+      // ── THE NUMERIC SEPARATOR, WHICH IS THE HOUSE SPELLING ────────────────
+      // ⛔ THE SCAN WAS NOT ERRING WIDE (TE-BUDGET-1, measured 2026-08-31). `\d{4,}` needs
+      // four CONSECUTIVE digits, so `60_000` — the spelling of the gate's OWN named house
+      // precedent at tests/joins/ordering.test.js:289, and of 106 test files — read as NO
+      // budget at all, and every one of those files was classified against the 20,000 ms
+      // suite budget it had explicitly overridden. That is the NARROW direction the
+      // function's header calls the only one able to INVENT a TIMEOUT label on a genuine
+      // assertion failure. `60_000` and `60000` are one budget written two ways.
+      //
+      // The separator is BUILT, never written: a bare `60_000` in this file's own source
+      // would be found by the very scan under test and would widen this file's printed
+      // budget — the same hazard the interpolation above is designed out of.
+      // The house grouping (`60_000`), and a mid-number separator for the short cases the
+      // grouping rule leaves alone. Both are ASSERTED to have actually inserted a
+      // separator before they are used, so none of the arms below can pass vacuously on a
+      // helper that quietly returned plain digits.
+      const sep = (n) => String(n).replace(/\B(?=(\d{3})+$)/g, '_');
+      const mid = (n) => String(n).replace(/^(\d)/, '$1_');
+      expect(sep(perTest)).toMatch(/^\d+_\d{3}$/);
+      expect(mid(999)).toMatch(/^\d_\d+$/);
+      expect(timeoutLiteralsOf(`register('slow', async () => { await x(); }, ${sep(perTest)});`))
+        .toEqual([perTest]);
+      expect(timeoutLiteralsOf(`await findByRole('button', { timeout: ${sep(queryBudget)} });`))
+        .toEqual([queryBudget]);
+      // Both spellings of the SAME budget collapse to one entry — a separator is not a
+      // second, different clock.
+      expect(timeoutLiteralsOf(`register('a', () => {}, ${perTest});\nregister('b', () => {}, ${sep(perTest)});`))
+        .toEqual([perTest]);
+      // ...and the length floors are applied to the SEPARATOR-FREE digits, so a separator
+      // cannot smuggle a short number past them.
+      expect(timeoutLiteralsOf(`fn(() => { g(); }, ${mid(999)});`)).toEqual([]);
+      expect(timeoutLiteralsOf(`bridge.call('x', {}, { timeout: ${mid(50)} });`)).toEqual([]);
+
       // ── THE PRINTED LINES ──────────────────────────────────────────────────
       // The gate prints exactly what this returns, so pin the bytes here and the
       // arms above are what makes the end-to-end assertions non-circular.
