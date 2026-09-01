@@ -586,8 +586,30 @@ const dependsOn = (text, moduleRe, symbols) => (
     // quietly changed what step 4 means. It CITES the seam in a comment instead —
     // which car L5's comment-stripping amendment made free — and takes the projection
     // as an injected argument. A documentation constant is not a dependency.
+    //
+    // AMENDED A FIFTH TIME BY CAR L8 — the edit surface — and by GROWING the family
+    // exactly as L3, L4 and L7 did. `characterEdit.js` (the authored core's wall and
+    // its one lawful writer) and `characterEditView.js` (the whole chart with a
+    // read-only ghost) both name the drift module — the first for the spectrum
+    // vocabulary, the second for the §4 chokepoint that COMPOSES the ghost — and
+    // both are imported by NOBODY outside the family. The shape every member has had.
+    //
+    // ⭐ AND THE GROWTH PAYS FOR ITSELF WITH A SHARPENING, not with a promise. The
+    // authored core is the half of a chart the ENGINE may never touch, so L8 brings
+    // a writer whose seal is the exact mirror of step 1b's: STEP 1c below states
+    // that nothing outside the family may name `writeAuthoredChart` either. Without
+    // it, the one writer this car added would be the one writer the closure could
+    // not see — and a drift map nobody can fill is worth little beside an authored
+    // core anybody can overwrite.
+    //
+    // ⚠ NOT A DOOR CONSUMER, deliberately, for L7's reason: neither module imports
+    // `characterConsumers.js`, so step 4's meaning is untouched and the enumerated
+    // three stay three. L8's axis roster is INJECTED for the same reason L7 injects
+    // the word projection.
     const FAMILY = [
       'characterDrift.js',
+      'characterEdit.js',
+      'characterEditView.js',
       'characterReadModel.js',
       'knownCharacter.js',
       'livedExperienceCatalog.js',
@@ -640,6 +662,21 @@ const dependsOn = (text, moduleRe, symbols) => (
     expect(files
       .filter((file) => !FAMILY.some((member) => file.endsWith(member)))
       .filter((file) => /applyAxisDrift|writeAxisDrift/.test(stripComments(readFileSync(file, 'utf8'))))
+      .map((file) => relative(REPO_ROOT, file))).toEqual([]);
+    // STEP 1c, car L8's mirror of 1b and the price of its membership: NOTHING
+    // outside the family may name the AUTHORED CORE's writer. The drift half of a
+    // chart is sealed by 1b; this is the user's half, which the engine may never
+    // touch at all, and an unsealed writer of it would be worse than an unsealed
+    // drift writer — it would let production overwrite what the pen wrote.
+    expect(files
+      .filter((file) => !FAMILY.some((member) => file.endsWith(member)))
+      .filter((file) => /writeAuthoredChart/.test(stripComments(readFileSync(file, 'utf8'))))
+      .map((file) => relative(REPO_ROOT, file))).toEqual([]);
+    // STEP 1d: and the edit surface itself is reached from nowhere — the whole L8
+    // car is dark by ABSENCE rather than by a flag, which is the stronger claim of
+    // the two (a flag can be turned on by accident; an unimported module cannot).
+    expect(outside
+      .filter((file) => /characterEdit/.test(stripComments(readFileSync(file, 'utf8'))))
       .map((file) => relative(REPO_ROOT, file))).toEqual([]);
     // STEP 4: and the door's own importers are the enumerated three.
     expect(files
