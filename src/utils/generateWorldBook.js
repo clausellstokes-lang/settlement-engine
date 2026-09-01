@@ -23,6 +23,7 @@
  */
 import { jsPDF } from 'jspdf';
 import { formatCount } from '../domain/formatNumber.js';
+import { resolveSettlementCulture } from '../domain/resolveCulture.js';
 import { truncateAtWord } from '../lib/text.js';
 import { getAllModifiers } from '../lib/relationshipGraph.js';
 import { autoLayout } from './graphLayout.js';
@@ -127,7 +128,7 @@ function buildDossierEntry(save, st_, player) {
     name: st_.name || save.name || 'Unnamed',
     tier: st_.tier || '',
     population: Number(st_.population) || 0,
-    culture: st_.culture || '',
+    culture: resolveSettlementCulture(st_) || '',
     overview: String(overview || ''),
     institutions: inst.map(i => i?.name || i?.type || '').filter(Boolean),
     npcs: npcs.map(n => ({ name: n?.name || '', role: n?.role || '', influence: player ? null : (n?.influence ?? null) })),

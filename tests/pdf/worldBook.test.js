@@ -16,7 +16,10 @@ function fixtureCampaign() {
   const ashford = {
     id: 'ashford', name: 'Ashford',
     settlement: {
-      name: 'Ashford', tier: 'town', population: 1800, culture: 'Hillfolk',
+      // ⚠ culture sits on the RESOLVED CONFIG, the only address the engine writes.
+      // This fixture carried it at the settlement ROOT — a key with no writer
+      // anywhere — which is why the dossier's blank culture never reded here.
+      name: 'Ashford', tier: 'town', population: 1800, config: { culture: 'Hillfolk' },
       history: { historicalCharacter: 'A grain town that outlasted a hard famine.' },
       institutions: [{ name: 'The Granary Guild' }, { name: 'Ashford Watch' }],
       // ⚠ THE HOOK MOVED OFF THE SETTLEMENT ROOT (2026-08-11). It used to be
@@ -106,6 +109,40 @@ describe('collectWorldBook — structure', () => {
     expect(ash.npcs[0].influence).toBe(8);
     // The DM book DOES surface the hook text.
     expect(JSON.stringify(book)).toContain('COVERTHOOK');
+  });
+
+  // The SAME dead-address defect the campaign PDF carried: the dossier read
+  // `st_.culture`, a key no writer produces, so the settlement line
+  // ("<tier> - <pop> souls - <culture>") dropped its culture for every save the
+  // current generator makes. The fixture above encoded that same dead address,
+  // which is why the suite could never have caught it.
+  it('a dossier resolves culture from the RESOLVED config, not the never-written root', () => {
+    const modern = {
+      id: 'tidewatch',
+      name: 'Tidewatch',
+      settlement: { name: 'Tidewatch', tier: 'town', population: 900, config: { culture: 'tide_reaver' } },
+    };
+    const book = collectWorldBook(
+      { ...campaign, settlementIds: [...campaign.settlementIds, 'tidewatch'] },
+      [...saves, modern],
+      { mode: 'dm' },
+    );
+    expect(book.dossiers.find(d => d.id === 'tidewatch').culture).toBe('tide_reaver');
+    expect(book.dossiers.find(d => d.id === 'ashford').culture).toBe('Hillfolk');
+  });
+
+  it('the materialized culturalIdentity.key resolves a config-stripped save', () => {
+    const stripped = {
+      id: 'keyed',
+      name: 'Keyford',
+      settlement: { name: 'Keyford', tier: 'village', population: 300, culturalIdentity: { key: 'norse' } },
+    };
+    const book = collectWorldBook(
+      { ...campaign, settlementIds: [...campaign.settlementIds, 'keyed'] },
+      [...saves, stripped],
+      { mode: 'dm' },
+    );
+    expect(book.dossiers.find(d => d.id === 'keyed').culture).toBe('norse');
   });
 });
 
