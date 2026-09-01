@@ -991,13 +991,13 @@
   },
   {
     "path": "src/domain/worldPulse/npcAgency.js",
-    "line": 914,
+    "line": 883,
     "category": "floatInterpolation",
     "snippet": "`Pressure gate ${pressure.toFixed(2)}, ambition ${state.ambition.toFixed(2)}.`"
   },
   {
     "path": "src/domain/worldPulse/npcAgency.js",
-    "line": 914,
+    "line": 883,
     "category": "twoDecimalScore",
     "snippet": "`Pressure gate ${pressure.toFixed(2)}, ambition ${state.ambition.toFixed(2)}.`"
   },
