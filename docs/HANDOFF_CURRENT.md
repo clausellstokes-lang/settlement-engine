@@ -1,6 +1,6 @@
 # HANDOFF — CURRENT PROGRAM STATE (model-agnostic successor bootstrap)
 
-**Updated 2026-09-01 at the §874 SUBSTRATE-LANDING COLLECTION (ledger through §874.8; refreshed at
+**Updated 2026-09-01 at the §875 T8-LANDING COLLECTION (ledger through §875.2; refreshed at
 every collection per ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; ODQ §§150–§276 plus collecting/amending §§287–§289 contain the map
@@ -8,7 +8,15 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐ PICKUP AT §874 (2026-09-01 ~02:45, ROLLING CARD — THE CHARACTER SUBSTRATE LANDED) — START HERE; supersedes every card below.
+## ⭐⭐⭐⭐ PICKUP AT §875 (2026-09-01 ~05:25, ROLLING CARD — T8 · SHIFT LANDED; THE BUILD TRACK IS COMPLETE) — START HERE; supersedes every card below.
+
+**Build branch `claude/composite-r4` = `6308a27b8ad0d4679754b76245b1d340ed8c6969` (T8 LANDED §875 — 12 commits, gate green FIRST RUN: ratchet 10/30,080 ceiling 10, STRICT DIST 51/433; sealed `refs/preserve/landing-T8-2026-09-01`). Ledger through §875.2. EVERY CAR IN THE PROGRAM IS BUILT (O7 closed the track).** T8 was the arc's ONE ruled same-seed window — executed with zero residue (probes attribute 91+322 exactly; the espionage fence's golden moved ONCE under the window and its STOP re-armed scoped to T13, the LAST ruled mover). R-T8-OSR: the churn rule narrowed to the stable core via governed schema migration 14→15, reconciliation EMPTY as claimed.
+
+**ONE LINE TO RESUME: read §875–§875.2, then `825f209c…/scratchpad/DISPATCH-QUEUE.md` (re-arm the dispatcher cron 13,43 * * * * from its protocol text), then board WAR.** ⭐⭐ LANDING ORDER (§874.8): **WAR (next) → HYGIENE → INSTRUMENTS → FOLLOW-ONS → TAIL-O → TAIL-L → TAIL-F** → residue/OSR-mint window → T13 TRANS (owner REC first) → TE-GOLDEN-1 (owner REC) → the walk + ONE regen (owner present) → ⛔ STOP before the terminal soak. WAR BOARDING = half-2's 13 one-liners (WAR-PREBOARD-HALF1.md §8) + the chair's COUNTERSIGN of the T4 mini-window rider (Q3's ruling: 2–3 NEW Opus cars + two-arm probe battery INSIDE the consist; the two-vs-three movers delta resolves explicitly) + authoritative picks `b804da4e1`+`3fba3d050` (⚠ NOT `84ae0f104` — superseded). The §824 ritual + quiet windows + the efficiency protocol (split pre-boards · pre-staged docks · verified probe-artifact reuse; probe base may reuse T8's SEALED tip artifact hash-verified) bind every landing.
+
+**THE OWNER'S DESK (§874 card's 25 lines stand, plus):** the R-T8-OSR bug-or-truth fork (car 1's corruption-climate depth vs §858's pricing — tuning-pass input, readings named §875.1) · O5's ambient-reversal fork (§873.1) · O7's 5 unsigned prose ownerRows · J-O6-1 (does W-OPS owe a tuning-signature surface?) · the Wealthy-label probe-coverage caveat (§875) · everything else per the §874 card below.
+
+## (superseded) PICKUP AT §874 (2026-09-01 ~02:45, ROLLING CARD — THE CHARACTER SUBSTRATE LANDED) — the §875 card above supersedes.
 
 **Build branch `claude/composite-r4` = `59864298150dbacf30b9771bb9355fbd70ab3b88` (THE CHARACTER SUBSTRATE LANDED §874 — 54 commits, gate 6 first: ratchet 10/30,072 ceiling 10, STRICT DIST 51/433, sealed `refs/preserve/landing-SUB-2026-09-01`). Ledger through §874.8.** The owner's cure+ratify executed (closure 1,047,000, measured 1,046,369); ⭐ J-W6-3: the transfer-ceiling raise measured then REFUSED — the signed proportional raise stays BANKED, applicable without a new ask if a future consist reds (§874.1, vetoable). Memory FOLD 25 executed (index 15,113 B, checks a–f green).
 
