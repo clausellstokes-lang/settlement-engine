@@ -186,49 +186,43 @@ describe('healthPip + needsAttention', () => {
 });
 
 /**
- * DESTRUCTION IS THE END OF THE HEALTH SCALE, NOT A POINT ON IT.
+ * DESTRUCTION IS DECIDED BY THE CALLER — AND THIS FILE PINS THAT CONTRACT.
  *
  * `deriveSystemState` bands a LIVING settlement's four dimensions. A settlement the
  * canon records as destroyed still carries the blob it had when it stood, so the
- * derivation happily returned "Stable" for a town that no longer exists — and the
- * Library row printed that word beside its own Destroyed rubric (the defect
- * DestroySettlementControl.jsx recorded as deliberately deferred). The pip is the
- * only consumer-visible half; `needsAttention` (the toolbar's attention filter) and
- * LibraryToolbar's severity sort read the SAME derivation, so a destroyed town could
- * also be floated up as needing attention.
+ * derivation bands it happily and every CONSUMER must suppress it — otherwise the
+ * Library row prints "Stable" beside its own Destroyed rubric (the defect
+ * DestroySettlementControl.jsx recorded as deliberately deferred), and the toolbar's
+ * severity sort and attention filter, which read the same value, can float a town
+ * that no longer exists.
  *
- * The cure is at the derivation, not at the three call sites: a destroyed settlement
- * has no live band, so `healthPip` yields null — the column's, the filter's and the
- * sort's EXISTING null grammar, which every consumer already handles. No second
- * lifecycle encoding is added anywhere (the Phase column remains the row's single
- * lifecycle encoding, per SettlementCard's spine note).
+ * ⚠ THE GUARD DELIBERATELY DOES NOT LIVE HERE, AND THAT IS LOAD-BEARING. "Destroyed"
+ * is canon on the SAVE ROW — settlementSlice's destroySavedSettlement applies
+ * domain/events/mutateEntities.js's `destroySettlement`, which stamps
+ * `status: 'destroyed'` onto the settlement of a saved row — and a bare settlement
+ * blob passed to this pure model has no library canon attached to ask. Every reader
+ * in the app therefore asks the ROW: SettlementCard's `alreadyDestroyed`,
+ * heraldRegister's `isDestroyedRow`, LibraryToolbar's two call sites.
+ *
+ * ⛔ A guard placed inside `healthPip` ALSO REDS A GOVERNED GATE. The
+ * reader-with-no-writer scan (scripts/check-observed-shape-readers.mjs) measured a
+ * NEW `status on settlement` row for this file — "1994 findings" against a frozen
+ * 1993 — because the GENERATION corpus never destroys anything, so the writer is
+ * invisible to it. The row is banked for the two files that legitimately carry it
+ * (heraldRegister.js, lineageClaim.js) and the ratchet may never add a third.
+ * These arms exist so nobody "tidies" the guard back down here.
  */
-describe('a destroyed settlement has no live health band', () => {
+describe('healthPip does NOT itself know about destruction (the caller must)', () => {
   const destroyedTown = { ...peacefulTown, status: 'destroyed' };
 
-  it('healthPip yields null for a destroyed settlement', () => {
-    // Control: the SAME blob while it stood does band, so the null is the status
-    // and not an unbandable fixture.
+  it('bands a destroyed settlement exactly as it bands a standing one', () => {
+    // Not an endorsement — a PIN on where the guard belongs. Consumers are pinned
+    // in settlementCardSignals.test.jsx and libraryToolbar.test.js.
+    expect(healthPip(destroyedTown)).toEqual(healthPip(peacefulTown));
     expect(healthPip(peacefulTown)).not.toBeNull();
-    expect(healthPip(destroyedTown)).toBeNull();
   });
 
-  it('a destroyed settlement never needs attention', () => {
-    const destroyedCrisis = {
-      id: 's-crisis-gone',
-      status: 'destroyed',
-      config: { monsterThreat: 'plagued', nearbyResourcesState: { iron: 'depleted', timber: 'depleted' }, tradeRouteAccess: 'isolated' },
-      economicState: { prosperity: 'Struggling' },
-      powerStructure: { factions: [{}, {}, {}, {}, {}], conflicts: [{}, {}, {}] },
-      stressors: [{ type: 'siege' }, { type: 'famine' }, { type: 'plague' }],
-    };
-    // Control: the same blob undestroyed DOES need attention.
-    const { status: _dropped, ...stillStanding } = destroyedCrisis;
-    expect(needsAttention(stillStanding)).toBe(true);
-    expect(needsAttention(destroyedCrisis)).toBe(false);
-  });
-
-  it('a standing settlement is untouched (the guard reads status, nothing else)', () => {
+  it('a standing settlement is untouched by any status value', () => {
     expect(healthPip({ ...peacefulTown, status: 'active' })).toEqual(healthPip(peacefulTown));
   });
 });
