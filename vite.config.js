@@ -189,12 +189,33 @@ export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   // pipeline — no first-paint module reaches it, so ESD would route it eager for
   // nothing. Excised and deliberately UNPINNED (the FP-G11 behaviour): an
   // unpinned excision co-locates into the lazy `engine` chunk, which is exactly
-  // where its one importer already lives. It is a zero-import leaf, so excising
-  // it removes nothing else from engine-core. Its payload —
+  // where its one importer already lives. Its payload —
   // livingContentLaw/livingContentRoster and the whole content-manifest closure
   // behind them — never enters ESD at all, because the seam reaches it through a
   // dynamic import() that neither vite derivation follows.
+  // ⚠ AMENDED (SEAMCYCLE, 2026-09-01): the seam is NO LONGER a zero-import leaf,
+  // and the row below it is why. Breaking the F29 seam/roster/law import cycle
+  // moved the seam's version vocabulary into livingContentLawVersion.js, so the
+  // seam now carries exactly one static edge — to that leaf.
   '/src/domain/content/livingContentSeam.js',
+  // livingContentLawVersion.js — THE SAME PREMISE, ONE HOP ON, AND IT IS EXCISED
+  // FOR THE SAME REASON RATHER THAN BY ANALOGY. The excisions above are applied
+  // by .delete() AFTER the closure is derived, so without this row the leaf would
+  // stay in ESD on the seam's account and ride EAGER engine-core — and no
+  // first-paint module reaches it either, so that would be first-paint bytes paid
+  // for nothing, which is the exact sentence the seam's own row is written on.
+  // MEASURED both ways at the cure (SEAMCYCLE, dock builds): without this row,
+  // engine-core +214 B and the first-paint closure 1,046,564 -> 1,046,778, taking
+  // the closure margin from 436 B to 222 B and re-hashing 112 chunks (the
+  // engine-core hash cascades into every chunk that imports it, cache-busting
+  // them for returning users); WITH this row, all 483 chunks are byte- AND
+  // content-hash-IDENTICAL to the pre-cure build. The cycle cure is therefore
+  // free, which is the only shape worth shipping against a three-figure margin.
+  // Excised and deliberately UNPINNED, like the seam: nothing eager reaches it,
+  // so Rollup co-locates it into the lazy `engine` chunk where its one emitted
+  // importer already lives (@guarded-by tests/build/engineChunkLazy.test.js's
+  // orphan-excision guard, which reds if it ever DOES become eager-reachable).
+  '/src/domain/content/livingContentLawVersion.js',
   '/src/domain/priorityBands.js',
   '/src/domain/townMap/glyphAssign.js',
   '/src/domain/townScene/customBuildingPresentation.js',

@@ -17,8 +17,18 @@
  * deliberately do not follow (`computeEngineSharedDomain` / `computeEagerModule
  * Graph`), so routing the roster behind one keeps every byte of it — and of its
  * manifest closure — out of first paint AND out of the budgeted `engine` chunk.
- * What stays behind is this file: the version gate, a one-slot registry, and the
- * loader.
+ * What stays behind is this file: a one-slot registry and the loader.
+ *
+ * ⛔ THE VERSION GATE ITSELF NOW LIVES IN `livingContentLawVersion.js`, AND THAT
+ * MOVE WAS FORCED BY A CYCLE, NOT BY TASTE. The vocabulary was declared here and
+ * read by BOTH siblings, so with the dynamic edge counted as an edge — and
+ * `tests/architecture/layerBoundaries.test.js` counts it, correctly — seam,
+ * roster and law formed one strongly-connected component of size 3 and the
+ * shrink-only cycle ratchet went RED. The dynamic edge below is the one edge
+ * that could not move, so the shared vocabulary moved instead, into a
+ * dependency-free leaf (the `deityConstants.js` pattern the ratchet's own
+ * message prescribes). This file still answers dormant-or-lit SYNCHRONOUSLY,
+ * because the leaf it imports loads nothing.
  *
  * ⭐ THE DARK PATH LOADS NOTHING AND CANNOT DIVERGE. `livingContentRosterFor`
  * tests the law FIRST and returns the same `null` a run with no pack returns, so
@@ -38,66 +48,14 @@
  * Pure. No RNG, no store, no React. One module-level slot, written once.
  *
  * @guarded-by tests/build/vendorPdfLazy.test.js (the first-paint byte budget +
- *   the engine ceiling) and tests/domain/livingContentSeam.test.js.
+ *   the engine ceiling), tests/build/livingContentSeamLazy.test.js and
+ *   tests/domain/livingContentMaterialization.test.js.
  */
 
-/** The config key the law rides on. Underscore-prefixed like `_seed`: a
- *  resolved generation input, carried on the persisted `settlement.config`.
- *  Declared HERE, not in `livingContentLaw.js`, so the engine-side gate and the
- *  lazy-side law read one spelling and cannot drift apart. */
-export const LIVING_CONTENT_LAW_CONFIG_KEY = '_livingContentLawVersion';
-
-/** The living-content law versions this build can generate under. v1 is the
- *  DORMANT default (absent ⇒ v1 ⇒ byte-identical to every pre-law world and
- *  golden); v2 materializes the inert roster.
- *  @type {ReadonlyArray<number>} */
-export const LIVING_CONTENT_LAW_VERSIONS = Object.freeze([1, 2]);
-
-/** The default (dormant) living-content law version — no roster, no key. */
-export const DEFAULT_LIVING_CONTENT_LAW_VERSION = 1;
-
-/** The version the inert living-content roster materializes under. */
-export const ROSTER_LIVING_CONTENT_LAW_VERSION = 2;
-
-/**
- * The living-content law version a value selects. Absent / unknown /
- * non-enabled ⇒ the dormant default, so every pre-law world and golden stays
- * byte-identical and a future version cannot be selected by accident before it
- * ships. A CLOSED membership test, not a `>=` compare — fail closed.
- *
- * @param {unknown} value
- * @returns {number}
- */
-export function readLivingContentLawVersion(value) {
-  const n = Number(value);
-  return LIVING_CONTENT_LAW_VERSIONS.includes(n)
-    && n !== DEFAULT_LIVING_CONTENT_LAW_VERSION
-    ? n
-    : DEFAULT_LIVING_CONTENT_LAW_VERSION;
-}
-
-/**
- * The living-content law version a generation run obeys, read from its config.
- *
- * ⚠ THIS READS THE CONFIG AND NOTHING ELSE, ON PURPOSE. It must NOT fall back
- * to `NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION`: an existing world's persisted
- * config carries no marker, so a dial-derived fallback would silently re-birth
- * every old world under the new law the moment the dial flipped — the exact
- * PROMISE breach the version gate exists to prevent.
- *
- * @param {Record<string, unknown>|null|undefined} config
- * @returns {number}
- */
-export function resolveLivingContentLawVersion(config) {
-  return readLivingContentLawVersion(config?.[LIVING_CONTENT_LAW_CONFIG_KEY]);
-}
-
-/** Does this config's world materialize the inert living-content roster?
- *  @param {Record<string, unknown>|null|undefined} config @returns {boolean} */
-export function materializesLivingContent(config) {
-  return resolveLivingContentLawVersion(config)
-    === ROSTER_LIVING_CONTENT_LAW_VERSION;
-}
+// The gate is the LEAF's. Importing it here is what keeps this file's answer
+// synchronous while the payload stays behind the dynamic boundary below; the
+// leaf imports nothing, so this edge costs no closure.
+import { materializesLivingContent } from './livingContentLawVersion.js';
 
 /** @type {((customContent:unknown, config:unknown) => unknown)|null} */
 let rosterBuilder = null;

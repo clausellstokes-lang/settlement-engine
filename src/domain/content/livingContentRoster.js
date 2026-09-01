@@ -61,8 +61,10 @@ import {
   projectCustomDefinitionIdentity,
 } from './customDefinitionIdentityProjection.js';
 import { LIVING_CONTENT_BUCKETS } from './livingContentLaw.js';
-// The gate is the SEAM's, not the law file's — see livingContentSeam.js.
-import { materializesLivingContent } from './livingContentSeam.js';
+// The gate is the dependency-free LEAF's, not the law file's and not the seam's
+// — importing it from the seam is what closed the F29 cycle. See
+// livingContentLawVersion.js.
+import { materializesLivingContent } from './livingContentLawVersion.js';
 
 /** The roster's own schema version, independent of the settlement's. An older
  *  saved world carries no roster at all, so this starts at 1 and a widening

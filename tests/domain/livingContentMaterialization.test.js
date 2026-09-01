@@ -60,15 +60,21 @@ import {
   NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION,
   newSettlementLivingContentLaw,
 } from '../../src/domain/content/livingContentLaw.js';
-// THE GATE IS THE SEAM'S. The version vocabulary and the closed membership test
+// THE GATE IS THE LEAF'S. The version vocabulary and the closed membership test
 // live on the ENGINE side of the lazy boundary, because the synchronous pipeline
-// must answer dormant-or-lit before anything is loaded.
+// must answer dormant-or-lit before anything is loaded — and they live in a
+// dependency-free leaf rather than in the seam because the seam/roster/law trio
+// was otherwise a 3-module import cycle (tests/architecture/layerBoundaries).
 import {
   DEFAULT_LIVING_CONTENT_LAW_VERSION,
   LIVING_CONTENT_LAW_CONFIG_KEY,
   ROSTER_LIVING_CONTENT_LAW_VERSION,
   materializesLivingContent,
   readLivingContentLawVersion,
+} from '../../src/domain/content/livingContentLawVersion.js';
+// The REGISTRY half is still the seam's, and arming it is what makes every lit
+// arm below take the same path production takes after loadLivingContentRoster().
+import {
   registerLivingContentRosterBuilder,
 } from '../../src/domain/content/livingContentSeam.js';
 import {
