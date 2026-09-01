@@ -5930,7 +5930,7 @@
       ],
       "requiredSymbols": [
         {
-          "path": "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "path": "tests/helpers/codeOnlySource.js",
           "symbol": "export function codeOnly"
         },
         {
