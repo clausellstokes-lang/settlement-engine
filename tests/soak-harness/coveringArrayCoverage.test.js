@@ -185,14 +185,18 @@ describe('the covering array and its constraint manifest', () => {
     // evidence the key is absent from DEFAULT_SIMULATION_RULES and from every preset spread.
     // A key that had leaked into either would have moved `governed` and the sum would still
     // have closed — so the lockstep, not the sum, is the assertion doing the work.
-    expect(census.virtual.length).toBe(28);
+    // ⭐ AND 28 → 29 AT THE WAR LANDING (§876): the coupled union carries T12's
+    // `warMemoryEnabled` beside SEAT-2b's mint — re-measured, never re-applied.
+    expect(census.virtual.length).toBe(29);
     expect(census.overlap).toEqual([]);
-    expect(census.union.length).toBe(85);
+    // 85 -> 86 at the WAR landing (§876): the same coupled-union key, same re-measure.
+    expect(census.union.length).toBe(86);
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
     // rises with the virtual arm by construction: a virtual key is never governed.
-    expect(census.union.length - census.governed.length).toBe(60);
+    // 60 -> 61 at the WAR landing (§876): the coupled key is virtual, not governed.
+    expect(census.union.length - census.governed.length).toBe(61);
     expect(census.nonBoolean.length).toBe(13);
   });
 

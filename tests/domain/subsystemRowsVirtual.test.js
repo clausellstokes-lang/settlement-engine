@@ -181,6 +181,15 @@ const UNDERCITY_HIGH_WATER = 'undercityHighWaterEnabled';
 // module-scope edits and carrying ZERO new test titles here.
 const TREASURY = 'treasuryEnabled';
 const FOREIGN_SEAT = 'foreignSeatEnabled';
+// W-MEM (lane T12). The Remembrance ledger of concluded wars, joined with its manifest
+// entry and its ONE by-name gate read (warMemoryActive, worldPulse/concludedWars.js) in a
+// single commit — the §49-ruling-3 cost above, paid in the same module-scope edits.
+// (Restored at the WAR landing, §876 — pick 3 took T4's side, which predates T12's row.
+// ⚠ ORDER IS MEASURED, NEVER REASONED: the registry array and this rows mirror order
+// DIFFERENTLY (ENGINE_GATED has warMemory at its T12 position; the rows composition puts
+// it LAST) — two authored placements failed before the import-probe settled it. By name
+// everywhere in the product; ordered only here.)
+const WAR_MEMORY = 'warMemoryEnabled';
 // W-SEAT SEAT-2b (T4 · SEAT-B). The DOMESTIC half of the seat program's three-key topology,
 // minted with its manifest entry, its certification row and its ONE by-name gate read
 // (stressorGates.upheavalLit) in a single commit — the §49-ruling-3 cost above, paid in the
@@ -197,7 +206,7 @@ const VIRTUAL_RULES = Object.freeze([
   FAITH_UNSEATING,
   UNDERCITY_HIGH_WATER,
   TREASURY,
-  FOREIGN_SEAT, LEGITIMACY_UPHEAVAL,
+  FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, WAR_MEMORY,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -262,6 +271,7 @@ const LANE_LEAVES = Object.freeze({
   // and factionArchetypes.js supply the governing-seat read and the archetype vocabulary and
   // are deliberately absent — they are shared readers for a dozen lanes, and tracing this
   // lane's zero-candidate claim through them would measure the whole political layer.
+  [WAR_MEMORY]: ['src/domain/worldPulse/concludedWars.js'],
   [LEGITIMACY_UPHEAVAL]: ['src/domain/worldPulse/stressorGates.js'],
   [AXES]: ['src/domain/worldPulse/beliefAxes.js'],
   // All three subject families share ONE gate door (beliefAxes.subjectAxesActive) and ONE

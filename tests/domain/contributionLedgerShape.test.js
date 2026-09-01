@@ -85,8 +85,10 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // landing tip these literals are 28 → 29, not 27 → 28. Both sides close arithmetically
     // on their own base, which is exactly the still-closing-lie shape the lighting census
     // forces onto consecutive lines. THE LANDING RE-MEASURES; it never re-applies these.
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(28);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(28);
+    // RE-MEASURED AT THE WAR LANDING (§876), exactly as the hazard note above ordered:
+    // the coupled union is 29 (T12's warMemoryEnabled + SEAT-2b's legitimacyUpheavalEnabled).
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(29);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(29);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

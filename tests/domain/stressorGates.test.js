@@ -405,7 +405,9 @@ describe('SR-d — the coup gate reads legitimacy through the ledger (the :399 c
     const code = GATES_SOURCE.split('\n')
       .filter((l) => !l.trim().startsWith('//') && !l.trim().startsWith('*'))
       .join('\n');
-    expect(code).not.toContain('publicLegitimacy');
+    // anchored: the governanceLedger( call-count on the NEXT line is this removal's liveness
+    // anchor — the raw reads were REPLACED by ledger calls, so absence + >=5 calls is the pair.
+    expect(code).not.toContain('publicLegitimacy'); // anchored: the governanceLedger( call-count on the next line is this removal's liveness pair — the raw reads were REPLACED by ledger calls
     expect(code.split('governanceLedger(').length - 1).toBeGreaterThanOrEqual(5);
   });
 });
