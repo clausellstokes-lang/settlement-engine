@@ -1,7 +1,8 @@
 # TE-AGNOSTIC-1 — the setting-agnostic engine vocabulary (ODQ §857)
 
 **Status: LANDED. Car 1 the census bill · car 2 the output-neutral cures · car 3
-the corpus rewrite (shift record 1) · car 4 the service names (shift record 2).**
+the corpus rewrite (shift record 1) · car 4 the service names (shift record 2) ·
+car 5 the display-layer residue the first census missed (§4).**
 
 The product is SETTING-AGNOSTIC by law. That law binds the ENGINE: the prose,
 vocabulary tables and service names a generated world carries must not read as
@@ -285,3 +286,47 @@ reasoned: `generationContext.allowsService` gates on
 substitutions, every one a cured string; six addresses more than car 3, all six
 the Spellcasting names inside the city and metropolis sections. The three HELD
 rows still show ZERO.
+
+---
+
+## 4. CAR 5 — THE RESIDUE THE FIRST CENSUS MISSED, AND WHY IT MISSED IT
+
+Re-sweeping the whole of `src/` for every cured family after cars 3 and 4 turned
+up four rows the §857 census and this file's own §2 both missed. **All four were
+missed the same way: the census looked where content is AUTHORED
+(`src/data`, `src/generators`) and these live where content is DISPLAYED or
+DOCUMENTED.**
+
+| Address | Miss | Cure |
+| --- | --- | --- |
+| `src/domain/display/institutionVocabulary.js:254` | `paired sending stones`, LOWERCASE, so a Title-Case proper-noun sweep walked past it | `paired speaking stones` |
+| `src/domain/display/institutionVocabulary.js:309` | `from cheap cantrips to costly higher magic` — a POWER LADDER, which is the one shape §0 says `cantrip` may not take | `from cheap charms to costly greater workings` |
+| `src/domain/worldPulse/magicForms.js:17` | a design comment QUOTING two catalog descs car 3 rewrote | quotes re-synced |
+| `src/domain/worldPulse/magicFormsPractitioner.js:15` | the same, one file over | quotes re-synced |
+
+⭐ **THE LESSON WORTH KEEPING: a content wave owes a re-sweep of the DISPLAY layer
+and of every comment that QUOTES the corpus.** A doc that quotes a string the
+corpus no longer contains is the same defect this wave cured in
+`magicAssertionText`'s receipt ledger, one layer up.
+
+Car 5 does NOT move the generator goldens (`generatorGoldenMaster` passes
+untouched) because `institutionVocabulary` is read at DISPLAY time, not during
+generation. It is nevertheless reader-visible, which is the whole point.
+
+### The three `cantrip` sites deliberately LEFT
+
+`serviceCategoryTables.js:552` (`'Cantrips and minor magic'`),
+`institutionServices.js:142` (`"Cantrips, light spells, minor enchantments…"`)
+and the matcher `serviceAvailability.js:50` (`svc.includes('cantrip')`) all keep
+the word, per §0: here it reads as the Scots noun, not as a level. Leaving them
+also leaves the matcher pointed at a name that still exists, which is G3's law.
+
+### Historical records are NOT rewritten
+
+`docs/implementation/packets/catalog-hygiene/MF-CH6.md`,
+`docs/implementation/PACKET_MANIFEST.json` and `docs/implementation/INDEX.md`
+quote `'Basic healing spells. Cure Wounds (10 GP).'` in their account of a
+LANDED packet. That account was true at its landing and is part of the program's
+ledger, not live content. **Deliberately left standing** — falsifying a landed
+record to make a grep come back clean would be the worse defect. Named here so a
+future sweep that finds them knows they are history, not residue.

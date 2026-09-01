@@ -14,9 +14,9 @@
  * the authored entries that realize it and the tier the catalog authors them at, so
  * the ladder is a reading of existing content rather than a second content system:
  *
- *   practitioner  hamlet   'Traveling hedge wizard' ("Occasional visits. 1st level
- *                 village  spells only."), 'Hedge wizard' ("Low-level resident
- *                          caster."). One person, no institution worth the name.
+ *   practitioner  hamlet   'Traveling hedge wizard' ("Occasional visits. The smallest
+ *                 village  spells only."), 'Hedge wizard' ("A resident caster of modest
+ *                          reach."). One person, no institution worth the name.
  *   circle        village  'Druid Circle', and at town 'Elder Grove Council' and
  *                 town     'Teleportation circle' ("Rare permanent circle. EXTREMELY
  *                          EXPENSIVE to construct and maintain. Requires magical

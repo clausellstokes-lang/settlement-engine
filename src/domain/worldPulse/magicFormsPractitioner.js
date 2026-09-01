@@ -12,7 +12,7 @@
  * A circle is a group, a tower is a building, a guild is an institution, a foundry is
  * a works. Only the bottom rung is small enough that the institution and the person
  * are the same object, and the catalog says so in its own prose: 'Traveling hedge
- * wizard' is "Occasional visits" and 'Hedge wizard' is a "Low-level resident caster".
+ * wizard' is "Occasional visits" and 'Hedge wizard' is "a resident caster of modest reach".
  * Those are descriptions of a PERSON that happen to occupy an institution slot.
  *
  * THE THORP IS THE PROOF. institutionalCatalog authors NO Magic category at thorp at
