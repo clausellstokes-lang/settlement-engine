@@ -113,8 +113,9 @@ describe('W-OPS O4 — the census denominators are the tree\'s, not the catalog\
     expect(ENVOY_TASK_PROVENANCE.census.dispositionSourceKinds).toBe(DISPOSITION_SOURCE_KINDS.length);
   });
 
-  test('⭐ THE SIXTEEN CARRY THE JOURNEY, NEVER THE TASK KIND — which is why the envoy '
-    + 'family alone can qualify nothing', () => {
+  test('⭐ the sixteen carry the JOURNEY, never the TASK KIND', () => {
+    // …which is why the envoy family alone can qualify nothing, and (R) must test the
+    // DOWNSTREAM outcome family instead.
     // Anchored on a member that DOES travel this collection, so the exclusion cannot pass
     // by the whole registry having drifted away.
     expectAbsentWithAnchor(
@@ -162,8 +163,9 @@ describe('W-OPS O4 — every admitted row names a family this tree actually writ
     }
   });
 
-  test('⭐ the catalog\'s purpose classes SURVIVE the spine\'s own vocabulary — a bogus class '
-    + 'would drop out of the derived list and shrink it', () => {
+  test('⭐ the catalog purpose classes survive the spine own vocabulary', () => {
+    // A bogus class would DROP OUT of the derived list and shrink it — the list is filtered
+    // through the real vocabulary rather than restated beside it.
     const declared = [...new Set(ENVOY_TASK_CATALOG.map((row) => row.ridesPurposeClass))].sort();
     expect([...CATALOG_PURPOSE_CLASSES]).toEqual(declared);
     for (const rides of CATALOG_PURPOSE_CLASSES) {
@@ -206,8 +208,9 @@ describe('W-OPS O4 — the parked rows are parked for reasons this tree still ho
     );
   });
 
-  test('⭐⭐ trade_embassy is THE row that proves the two conjuncts are separate: its family '
-    + 'is REAL and its road is NOT', () => {
+  test('⭐⭐ trade_embassy proves the two conjuncts are separate', () => {
+    // Its receipt family is REAL and its road is NOT — the only row in the census that
+    // passes one conjunct and fails the other.
     // (R) passes — measured against the real frozen vocabulary.
     expect(DISPOSITION_SOURCE_KINDS).toContain('trade_contest');
     // (E) fails — measured against the real consumer registry.
@@ -282,8 +285,9 @@ describe('W-OPS O4 — the two-sights law is structural, not promised', () => {
     expect(typeof gate.confidence).toBe('number');
   });
 
-  test('⭐ A CONFIDENCE NUMBER IS NOT PROVENANCE — a chart wearing a borrowed confidence is '
-    + 'still refused, because the DISCLOSED AXES are what say the record spoke at all', () => {
+  test('⭐ a confidence number is NOT provenance', () => {
+    // A chart wearing a BORROWED confidence is still refused: the disclosed axes are what
+    // say the record spoke at all.
     // The near-miss this guard actually exists for: not a true chart (those have no
     // confidence and the first clause catches them), but a chart dressed with a confidence
     // taken from somewhere else — a belief record, a negotiation picture, a caller's own
@@ -319,8 +323,8 @@ describe('W-OPS O4 — the two-sights law is structural, not promised', () => {
     expect(knownReadingOrRefusal(trueChart).ok).toBe(false);
   });
 
-  test('⭐ characterAsSeenBy({viewer:"mortal"}) is ALSO refused — it returns the BARE chart, '
-    + 'so the gate demands the RESULT and not the chart', () => {
+  test('⭐ characterAsSeenBy mortal is ALSO refused — it returns the bare chart', () => {
+    // The gate demands the knownCharacterOf RESULT, never the chart it carries.
     const mortalChart = characterAsSeenBy({ viewer: 'mortal', npc: BRAVE_NPC, drift: null });
     expect(knownReadingOrRefusal(mortalChart).ok).toBe(false);
   });
@@ -335,8 +339,9 @@ describe('W-OPS O4 — the two-sights law is structural, not promised', () => {
     expect(verdict.fit).toBe('refused');
   });
 
-  test('⭐⭐ A TRUE CHART REFUSES THE WHOLE MENU, including wait_them_out which never reads '
-    + 'the envoy — a partial refusal would leave one row looking valid', () => {
+  test('⭐⭐ a true chart refuses the WHOLE menu, wait_them_out included', () => {
+    // wait_them_out never reads the envoy, yet it must still refuse: a partial refusal
+    // would leave exactly one row looking valid.
     const menu = negotiationMenuFor({
       counterpartNerve: READ_NERVE,
       envoyChart: effectiveCharacter(BRAVE_NPC, null),
@@ -351,8 +356,8 @@ describe('W-OPS O4 — the two-sights law is structural, not promised', () => {
     for (const row of clean) expect(row.refusal).toBe('');
   });
 
-  test('⭐⭐ A BAND WITH NO RECEIPT BEHIND IT IS NOT A READ — the clause that stops a '
-    + 'counterpart-ledger band being laundered into knowledge', () => {
+  test('⭐⭐ a band with NO receipt behind it is not a read', () => {
+    // The clause that stops a counterpart-ledger band being laundered into knowledge.
     const laundered = { present: true, band: 'restrained', heldReceiptIds: [] };
     const verdict = counterpartFitRead({ methodKind: 'press_hard', counterpartNerve: laundered });
     expect(verdict.known).toBe(false);
@@ -416,8 +421,8 @@ describe('W-OPS O4 — an unread court is unread, not a middle band', () => {
 // ── 7. THE METHOD MENU ───────────────────────────────────────────────────────────
 
 describe('W-OPS O4 — the R3b method menu', () => {
-  test('⭐ the volume\'s own sentence, made arithmetic: press the cowardly court, never '
-    + 'the brave one', () => {
+  test('⭐ press the cowardly court, never the brave one', () => {
+    // The volume's own sentence, made arithmetic.
     const cowardly = counterpartFitRead({
       methodKind: 'press_hard',
       counterpartNerve: { present: true, band: 'restrained', heldReceiptIds: ['e1'] },
@@ -430,8 +435,8 @@ describe('W-OPS O4 — the R3b method menu', () => {
     expect(brave.fit).toBe('misfires');
   });
 
-  test('⭐ THE BAND WORDS ARE BORROWED, NOT MINTED — every band a method names is a real '
-    + 'member of the appetite ladder', () => {
+  test('⭐ the band words are BORROWED, not minted', () => {
+    // Every band a method names is a real member of the appetite ladder.
     for (const method of NEGOTIATION_METHODS) {
       for (const band of [...method.fitsNerve, ...method.misfiresOn]) {
         expect(APPETITE_BAND_LADDER).toContain(band);
@@ -511,8 +516,9 @@ describe('W-OPS O4 — the leaf is dark and forks nothing', () => {
     expect(others).toEqual([]);
   });
 
-  test('⚠ the catalog does NOT touch ENVOY_PURPOSES — a task kind is chartered, a purpose '
-    + 'is persisted, and they are different grains', () => {
+  test('⚠ the catalog does NOT touch ENVOY_PURPOSES', () => {
+    // A task kind is CHARTERED; a purpose is PERSISTED. Different grains, and the persisted
+    // one is total by pin.
     expect([...ENVOY_PURPOSES]).toEqual(['sue', 'self_parlay']);
     expectAbsentWithAnchor(
       [...ENVOY_PURPOSES], 'negotiate_treaty', 'sue', 'the persisted envoy purposes',
