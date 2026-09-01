@@ -184,3 +184,51 @@ describe('healthPip + needsAttention', () => {
     expect(needsAttention(null)).toBe(false);
   });
 });
+
+/**
+ * DESTRUCTION IS THE END OF THE HEALTH SCALE, NOT A POINT ON IT.
+ *
+ * `deriveSystemState` bands a LIVING settlement's four dimensions. A settlement the
+ * canon records as destroyed still carries the blob it had when it stood, so the
+ * derivation happily returned "Stable" for a town that no longer exists — and the
+ * Library row printed that word beside its own Destroyed rubric (the defect
+ * DestroySettlementControl.jsx recorded as deliberately deferred). The pip is the
+ * only consumer-visible half; `needsAttention` (the toolbar's attention filter) and
+ * LibraryToolbar's severity sort read the SAME derivation, so a destroyed town could
+ * also be floated up as needing attention.
+ *
+ * The cure is at the derivation, not at the three call sites: a destroyed settlement
+ * has no live band, so `healthPip` yields null — the column's, the filter's and the
+ * sort's EXISTING null grammar, which every consumer already handles. No second
+ * lifecycle encoding is added anywhere (the Phase column remains the row's single
+ * lifecycle encoding, per SettlementCard's spine note).
+ */
+describe('a destroyed settlement has no live health band', () => {
+  const destroyedTown = { ...peacefulTown, status: 'destroyed' };
+
+  it('healthPip yields null for a destroyed settlement', () => {
+    // Control: the SAME blob while it stood does band, so the null is the status
+    // and not an unbandable fixture.
+    expect(healthPip(peacefulTown)).not.toBeNull();
+    expect(healthPip(destroyedTown)).toBeNull();
+  });
+
+  it('a destroyed settlement never needs attention', () => {
+    const destroyedCrisis = {
+      id: 's-crisis-gone',
+      status: 'destroyed',
+      config: { monsterThreat: 'plagued', nearbyResourcesState: { iron: 'depleted', timber: 'depleted' }, tradeRouteAccess: 'isolated' },
+      economicState: { prosperity: 'Struggling' },
+      powerStructure: { factions: [{}, {}, {}, {}, {}], conflicts: [{}, {}, {}] },
+      stressors: [{ type: 'siege' }, { type: 'famine' }, { type: 'plague' }],
+    };
+    // Control: the same blob undestroyed DOES need attention.
+    const { status: _dropped, ...stillStanding } = destroyedCrisis;
+    expect(needsAttention(stillStanding)).toBe(true);
+    expect(needsAttention(destroyedCrisis)).toBe(false);
+  });
+
+  it('a standing settlement is untouched (the guard reads status, nothing else)', () => {
+    expect(healthPip({ ...peacefulTown, status: 'active' })).toEqual(healthPip(peacefulTown));
+  });
+});
