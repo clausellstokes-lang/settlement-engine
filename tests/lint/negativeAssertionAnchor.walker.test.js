@@ -197,7 +197,21 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/build/firstPaintNonJs.test.js': 2,
   'tests/build/fontsAndMeta.test.js': 5,
   'tests/build/foundryLazy.test.js': 5,
-  'tests/build/injectGalleryMeta.test.js': 7,
+  // 7 -> 6 at the INSTRUMENTS consist landing (2026-09-01): a WIN BANKED, not a ceiling
+  // moved. TE-INSTR-2's R3 `02f6a2455` rewrote this file's `test.each([...])` into a
+  // parameterless loop so the lighting census could credit it, and the rewrite converted the
+  // per-row bare containment negative on `meta.url` into a collect-and-assert over an empty
+  // array. The un-anchored site is GONE, so the count really is 6 and this row follows it
+  // DOWN, which is the only direction it may move. Found by this walker over the five
+  // trains' content composed, which no single train's battery covered: R3 never ran it.
+  // ⚠ AND WRITING THIS ROW TAUGHT US SOMETHING ABOUT THE SCANNER, recorded rather than
+  // dropped: the first draft of this very comment SPELLED the assertion it describes, and
+  // the walker convicted its own file at this line — the scan does NOT strip comments, so
+  // prose that quotes a bare negative is indistinguishable from one. Its sibling
+  // `clampPrimitiveBaseline.test.js` does strip them. Not cured here (a scanner change is
+  // its own act with its own census); named so the next hand does not re-find it by
+  // accident, and worked around by describing the assertion instead of quoting it.
+  'tests/build/injectGalleryMeta.test.js': 6,
   'tests/build/metaShell.test.js': 5,
   'tests/build/ogImageRaster.test.js': 2,
   'tests/build/sitemap.test.js': 2,
