@@ -39,6 +39,7 @@ import {
 } from '../../../src/domain/npc/characterEditView.js';
 import { AXIS_LEVELS, NEUTRAL_POSITION, SPECTRUM_HALF_SPAN } from '../../../src/domain/npc/characterDrift.js';
 import { EDITABLE_FIELDS, isEditablePath } from '../../../src/domain/userEdits.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { tagEntityCanon } from '../../../src/domain/canonStatus.js';
 import { PRESERVATION_RULES, REGENERATION_MODES, preservesEntity } from '../../../src/domain/regenerationPolicy.js';
 import { mergePreservedNpcs } from '../../../src/domain/regenerationPreservation.js';
@@ -281,8 +282,16 @@ describe('characterEdit — the chart stays OUT of the prose registry', () => {
     // no-effect and idempotence gates would be permanently false), and
     // walkUserEdits feeds the AI's PROSE grounding payload.
     expect(isEditablePath('npc', AUTHORED_CHART_KEY)).toBe(false);
-    expect(EDITABLE_FIELDS.npc).not.toContain(AUTHORED_CHART_KEY);
-    for (const paths of Object.values(EDITABLE_FIELDS)) {
+    // ⚠ ANCHORED BY A LIVE SIBLING. A bare absence here is TRUE both when the chart key is
+    // correctly kept out and when the npc roster was emptied or re-keyed out from under the
+    // test — and the second reading is the regression this arm exists to catch. `personality`
+    // is a prose path on the same roster and would vanish under the same drift.
+    expectAbsentWithAnchor(
+      EDITABLE_FIELDS.npc, AUTHORED_CHART_KEY, 'personality', 'EDITABLE_FIELDS.npc',
+    );
+    for (const [type, paths] of Object.entries(EDITABLE_FIELDS)) {
+      expect(paths.length, `${type} has no editable paths at all`).toBeGreaterThan(0);
+      // anchored: the line above proves THIS entry is live and populated on every iteration, so the absence below cannot pass on an emptied roster
       expect(paths).not.toContain(AUTHORED_CHART_KEY);
     }
   });
