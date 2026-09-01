@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "5869560d92c031b047c7055bc1addbec09d48104",
-  "measuredBy": "W-OPS-O4",
+  "measuredAtSha": "9614ec0deaefe9f7487344a3e3f28d281d1ccd7d",
+  "measuredBy": "W-OPS-O5",
   "date": "2026-09-01",
-  "note": "W-OPS car O4 landed ONE test file, tests/domain/envoyTaskCatalog.test.js — 8 describes / 50 straight-line arms, zero loop-registered and zero census-blind concatenated titles. The SRC leaf envoyTaskCatalog.js is invisible to this census (it counts tests/ only), so files and credited move by exactly one and parked stays flat.",
-  "files": 2455,
+  "note": "car O5 lands tests/domain/infiltrationDrift.test.js — 9 suites and 65 statically registered arms, no loop-registered arms and no concatenated titles",
+  "files": 2456,
   "parked": 370,
-  "credited": 2085,
-  "titles": 21270,
-  "suiteTitles": 5824
+  "credited": 2086,
+  "titles": 21335,
+  "suiteTitles": 5833
 }
