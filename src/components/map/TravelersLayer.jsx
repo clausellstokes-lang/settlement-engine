@@ -22,7 +22,7 @@
 import { useMemo } from 'react';
 import { useStore } from '../../store';
 import { swatch } from '../theme.js';
-import { progress01, pointAlongPath, chevronPoints } from '../../domain/roads/travelersGeometry.js';
+import { progress01, pointAlongPath, chevronPoints } from './travelersGeometry.js';
 import {
   getSpatialLedger, activeSpatialDigest, candidateRoutes, isPort, isTeleportNode, hopWeeks,
 } from '../../domain/spatial/distanceRead.js';
