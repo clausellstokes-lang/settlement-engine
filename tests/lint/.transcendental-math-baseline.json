@@ -1,5 +1,5 @@
 {
-  "total": 48,
+  "total": 44,
   "files": {
     "src/domain/corruption.js": 1,
     "src/domain/region/contestMath.js": 4,
@@ -7,11 +7,9 @@
     "src/domain/roads/state.js": 1,
     "src/domain/roads/travelersGeometry.js": 4,
     "src/domain/spatial/armyTransit.js": 1,
-    "src/domain/spatial/generosityEV.js": 1,
     "src/domain/spatial/moralDrift.js": 1,
     "src/domain/spatial/pestilence.js": 1,
     "src/domain/spatial/tradeFlow.js": 1,
-    "src/domain/townMap/siteGenesis.js": 2,
     "src/domain/worldPulse/attrition.js": 1,
     "src/domain/worldPulse/beliefMap.js": 3,
     "src/domain/worldPulse/corruptionWeb.js": 4,
@@ -30,7 +28,6 @@
     "src/domain/worldPulse/populationDynamics.js": 1,
     "src/domain/worldPulse/relationshipMemory.js": 2,
     "src/domain/worldPulse/relationshipRuleHelpers.js": 1,
-    "src/domain/worldPulse/stressors.js": 1,
     "src/domain/worldPulse/urbanFabricKernel.js": 2
   }
 }
