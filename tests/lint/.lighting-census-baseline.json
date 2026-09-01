@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "0b48bfa830e8cd87006b0ce8d072db52b104b574",
-  "measuredBy": "W-OPS-O2",
-  "date": "2026-08-31",
-  "note": "W-OPS car O2 landed ONE test file, tests/domain/missionAcceptance.test.js (the acceptance seam battery). parked FLAT at 370 while both title layers moved is the proof Door 2 admitted it. The figures reconcile exactly: files +1, credited +1, titles +41 and suiteTitles +8, all of them straight-line registrations in the one new file (8 describe blocks, 41 test blocks, zero loop-generated arms, which the walker credits in full). No existing suite was appended to and no production file carries a test title, so nothing else moves.",
-  "files": 2453,
+  "measuredAtSha": "ccf90b66aad3980fb3ff0ad7a1864f0d37d06336",
+  "measuredBy": "W-OPS-O3",
+  "date": "2026-09-01",
+  "note": "W-OPS car O3 landed ONE test file, tests/domain/infiltrationDepth.test.js (the infiltration L3/L4 battery). parked FLAT at 370 while both title layers moved is the proof Door 2 admitted it. The figures reconcile exactly: files +1, credited +1, titles +40 and suiteTitles +8, all of them straight-line registrations in the one new file (8 describe blocks, 40 test blocks, zero loop-generated arms, which the walker credits in full). No existing suite was appended to and the car's src leaf is invisible to this census, whose subject is tests/ alone, so nothing else moves.",
+  "files": 2454,
   "parked": 370,
-  "credited": 2083,
-  "titles": 21180,
-  "suiteTitles": 5808
+  "credited": 2084,
+  "titles": 21220,
+  "suiteTitles": 5816
 }
