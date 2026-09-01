@@ -723,15 +723,34 @@ describe('DARK BY CONSTRUCTION — the catalog is consumed by nothing in src/', 
         'src/domain/npc/characterConsumers.js',
         'src/domain/npc/characterDrift.js',
       ];
+      // ⭐ CITATION LEAVES — files that name the catalog ONLY in prose (a comment or a JSDoc
+      // block citing car L1's PARADIGM_WORD_PROJECTION_SEAM), never in code. Enrolled so the
+      // census stays TOTAL without amputating a correct citation; the control below proves
+      // each names it in ZERO code positions, so an import or a dereference arriving in any
+      // of them reds this arm rather than hiding behind the roster. The estate's own citation
+      // law (this file's `:477`: comments AND strings are citations), applied to its own
+      // census. W-LIVES L7 cites the seam at characterReadModel.js:24/:29; W-LIVES L8 at
+      // characterEdit.js:118 and characterEditView.js:44.
+      const CITATION_LEAVES = [
+        'src/domain/npc/characterEdit.js',
+        'src/domain/npc/characterEditView.js',
+        'src/domain/npc/characterReadModel.js',
+      ];
+      for (const rel of CITATION_LEAVES) {
+        const raw = readFileSync(join(REPO_ROOT, rel), 'utf8');
+        expect(raw, `${rel} must really name the catalog`).toMatch(/paradigmAxisCatalog/);
+        // anchored: the positive on the line above proves this file's raw text really names the catalog, so the strip below is doing work rather than matching an empty subject
+        expect(codeWithoutCitations(raw), `${rel} must cite the catalog in prose only`).not.toMatch(/paradigmAxisCatalog/);
+      }
       const namers = jsFilesUnder(join(REPO_ROOT, 'src'))
         .filter((file) => !file.endsWith('paradigmAxisCatalog.js'))
         .filter((file) => /paradigmAxisCatalog/.test(readFileSync(file, 'utf8')))
         .map((file) => relative(REPO_ROOT, file).replace(/\\/g, '/'))
         .sort();
-      expect(namers).toEqual([...ENROLLED_CONSUMERS, ...MIRROR_LEAVES].sort());
+      expect(namers).toEqual([...ENROLLED_CONSUMERS, ...MIRROR_LEAVES, ...CITATION_LEAVES].sort());
       // anchored: the scan is over a real tree and really found the enrolled set,
       // so an empty or renamed roster could not pass this vacuously.
-      expect(namers.length).toBe(5);
+      expect(namers.length).toBe(8);
     });
   });
 
