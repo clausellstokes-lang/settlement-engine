@@ -191,3 +191,72 @@ describe('generateSettlementPDF forwards the reproducibility seam (production en
     expect(props.creationDate).toBeNull();
   });
 });
+
+/**
+ * THE DOWNLOAD FILENAME. Both sibling exporters cap their slug at 40 characters —
+ * generateWorldBook.js:490 does it through the kernel primitive
+ * (`slugify(title, { max: 40, fallback: 'world' })`) and generateCampaignPDF.js
+ * does it with a `.slice(0, 40)` on a hand-inlined builder. The dossier's was the
+ * only UNCAPPED one: a settlement name of any length became a filename of that
+ * length, and it was a NINTH hand-inlined copy of the slug idiom that
+ * tests/lint/slugifyIdiomBaseline.test.js exists to shrink.
+ *
+ * The anchor is observed, not fabricated: `HTMLAnchorElement.prototype.click` is
+ * wrapped for the duration of the export so the pin reads the `download` the real
+ * code set on the real element.
+ *
+ * ⚠ NOT FIXED HERE, AND NOT FIXABLE BY A SLUG: a WHOLLY non-Latin name still falls
+ * back to `settlement_dossier.pdf`, because every ASCII-only slug — the kernel's
+ * included — empties it. Giving such a buyer their own name in the filename means
+ * transliteration, which is the same product question as the parked non-Latin
+ * glyph item, not a slug repair. Pinned below as the CURRENT behaviour so the gap
+ * is visible rather than assumed away.
+ */
+describe('generateSettlementPDF — the download filename matches its siblings', () => {
+  const LONG = 'Thornbury Under The Everwatchful Cliffs Of Old Kingsmoor And The Sundered Vale';
+
+  async function downloadNameFor(name) {
+    const origCreate = globalThis.URL.createObjectURL;
+    const origRevoke = globalThis.URL.revokeObjectURL;
+    const origClick = globalThis.HTMLAnchorElement.prototype.click;
+    let captured = null;
+    globalThis.URL.createObjectURL = () => 'blob:pdf';
+    globalThis.URL.revokeObjectURL = () => {};
+    globalThis.HTMLAnchorElement.prototype.click = function click() { captured = this.download; };
+    try {
+      const { generateSettlementPDF } = await import('../../src/utils/generateSettlementPDF.js');
+      await generateSettlementPDF({ ...generate(), name });
+      return captured;
+    } finally {
+      globalThis.URL.createObjectURL = origCreate;
+      globalThis.URL.revokeObjectURL = origRevoke;
+      globalThis.HTMLAnchorElement.prototype.click = origClick;
+    }
+  }
+
+  test('an ordinary name is unchanged', async () => {
+    expect(await downloadNameFor('Ashford')).toBe('ashford_dossier.pdf');
+  });
+
+  test('a very long name is capped at 40 characters, as both siblings cap', async () => {
+    const download = await downloadNameFor(LONG);
+    // anchored: a real filename came back, so the length check is on a real slug.
+    expect(download).toMatch(/_dossier\.pdf$/);
+    const slug = download.replace(/_dossier\.pdf$/, '');
+    expect(slug.length).toBeLessThanOrEqual(40);
+    // It is a genuine prefix of the name, not a truncation to nothing.
+    expect(slug.startsWith('thornbury_under_the')).toBe(true);
+  });
+
+  test('the cap never leaves a trailing separator', async () => {
+    // 'Ashford Under Cliff Of Old Kingsmoor Xyz' puts a word boundary near 40.
+    for (const name of [LONG, 'Ashford Under Cliff Of Old Kingsmoor Abcde Fghij', 'A'.repeat(60)]) {
+      const slug = (await downloadNameFor(name)).replace(/_dossier\.pdf$/, '');
+      expect(slug.endsWith('_')).toBe(false);
+    }
+  });
+
+  test('a wholly non-Latin name still falls back (CURRENT behaviour, recorded)', async () => {
+    expect(await downloadNameFor('北京')).toBe('settlement_dossier.pdf');
+  });
+});
