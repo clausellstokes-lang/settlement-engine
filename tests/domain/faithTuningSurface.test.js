@@ -36,6 +36,7 @@ import {
 } from '../../src/domain/worldPulse/faithTuningSurface.js';
 import * as faithField from '../../src/domain/worldPulse/faithField.js';
 import * as deityFlaws from '../../src/domain/worldPulse/deityFlaws.js';
+import * as faithChannelBindings from '../../src/domain/worldPulse/faithChannelBindings.js';
 import * as faithWitnessSource from '../../src/domain/worldPulse/faithWitnessSource.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -159,6 +160,7 @@ describe('the coverage roster — what signing signs, held to the tables both wa
     const HOMES = {
       'src/domain/worldPulse/faithField.js': faithField,
       'src/domain/worldPulse/deityFlaws.js': deityFlaws,
+      'src/domain/worldPulse/faithChannelBindings.js': faithChannelBindings,
     };
     expect(vocabularyRows.length).toBe(6);
     for (const row of vocabularyRows) {
