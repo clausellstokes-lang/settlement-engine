@@ -500,7 +500,7 @@ export function knownReadingOrRefusal(reading) {
  * the silent-zero the risk register's `absent[]` exists to prevent.
  *
  * @param {Object} args
- * @param {string} args.methodKind one of NEGOTIATION_METHOD_KINDS
+ * @param {string} [args.methodKind] one of NEGOTIATION_METHOD_KINDS
  * @param {{band?: unknown, present?: unknown, heldReceiptIds?: unknown}|null} [args.counterpartNerve]
  *   the OBSERVER's read of the other court's nerve, with the receipts it was read from
  * @param {unknown} [args.envoyChart] a knownCharacterOf RESULT for the envoy being sent
