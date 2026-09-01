@@ -63,6 +63,7 @@ import {
   EXPERIENCE_TABLE,
 } from '../../../src/domain/npc/livedExperienceCatalog.js';
 import { AMBIENT_CADENCE_TICKS, foldLivedExperience } from '../../../src/domain/npc/livedExperienceFunnel.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { characterDriftOf } from '../../../src/domain/npc/characterDrift.js';
 import { npcId } from '../../../src/domain/worldPulse/npcAgency.js';
 import { stablePart } from '../../../src/domain/worldPulse/stablePart.js';
@@ -116,6 +117,7 @@ describe('THE REGISTRY — one row per receipted kind, and the law is a load-tim
     expect(ADAPTED_EXPERIENCE_KINDS.length + elsewhere.length).toBe(owed.length);
     expect([...ADAPTED_EXPERIENCE_KINDS, ...elsewhere].sort()).toEqual([...owed].sort());
     // DISJOINT: nothing may be claimed by both rosters.
+    // anchored: the two lines directly above are a SUM and a SET EQUALITY over this same roster against a non-empty `owed`, so an emptied or re-keyed ADAPTED_EXPERIENCE_KINDS reds there before this exclusion is reached
     for (const kind of elsewhere) expect(ADAPTED_EXPERIENCE_KINDS, kind).not.toContain(kind);
     // …and the out-of-leaf column is SMALL and NAMED, so it cannot quietly become
     // the place adapters go to avoid being written.
@@ -833,8 +835,12 @@ const dependsOnFunnelFamily = (/** @type {string} */ text) => (
     expect(exportersOf('AXIS_LEVELS').length).toBeGreaterThan(1);
     expect(exportersOf('PULL_BANDS').length).toBeGreaterThan(1);
     expect(exportersOf('AMBIENT_CADENCE_TICKS').length).toBeGreaterThan(1);
+    // ⚠ THE EXPORTER COUNTS ABOVE ANCHOR THE TREE, NOT THE ROSTER — and the `for` loop over
+    // FUNNEL_FAMILY_SYMBOLS would pass VACUOUSLY on an empty one. `foldLivedExperience` is
+    // the roster's own anchor: the funnel's entry point must still be enrolled, or these
+    // three refusals are refusals from nothing.
     for (const banned of ['AXIS_LEVELS', 'PULL_BANDS', 'AMBIENT_CADENCE_TICKS']) {
-      expect(FUNNEL_FAMILY_SYMBOLS).not.toContain(banned);
+      expectAbsentWithAnchor(FUNNEL_FAMILY_SYMBOLS, banned, 'foldLivedExperience', 'the shared-name refusals');
     }
   });
 

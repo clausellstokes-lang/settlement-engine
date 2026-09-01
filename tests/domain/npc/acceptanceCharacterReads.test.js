@@ -19,6 +19,7 @@ import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from 'vitest';
 
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../../helpers/anchoredNegatives.js';
 import {
   MAX_RISK_BREADTH,
   MIN_RISK_BREADTH,
@@ -117,16 +118,18 @@ describe('⛔ THE R6 COERCION CURE — null is ABSENT, never a supplied zero (fi
     const unasked = acceptanceCharacterRead({ npc: BOLD, desperation01: null });
     expect(unasked.register.center).toBe(asked.register.center);
     expect(unasked.register.breadth).toBe(asked.register.breadth);
-    expect(asked.absent).not.toContain('desperation01');
-    expect(unasked.absent).toContain('desperation01');
+    // The two absence claims are ONE anchored transition: the unasked read is the liveness
+    // anchor (the register demonstrably CAN report this key absent), and supplying the
+    // value is the operation that must remove it. Split apart, the negative half would
+    // survive `absent[]` emptying, re-keying or never being built.
+    expectPresentThenAbsent(unasked.absent, asked.absent, 'desperation01', 'supplying desperation01');
   });
 
   test('null disorder and a supplied ZERO agree on breadth and DISAGREE on absent[]', () => {
     const asked = acceptanceCharacterRead({ npc: BOLD, disorder01: 0 });
     const unasked = acceptanceCharacterRead({ npc: BOLD, disorder01: null });
     expect(unasked.register.breadth).toBe(asked.register.breadth);
-    expect(asked.absent).not.toContain('disorder01');
-    expect(unasked.absent).toContain('disorder01');
+    expectPresentThenAbsent(unasked.absent, asked.absent, 'disorder01', 'supplying disorder01');
   });
 
   test('every non-number spelling of "I do not hold this" is ABSENT, not a zero', () => {
@@ -185,7 +188,10 @@ describe('⭐ THE THIRD ARM — no chart gives NO BAND, not an ordinary man', ()
     // never made. The two cases must be separable here or nowhere.
     const read = acceptanceCharacterRead({ npc: BOLD, knownChart: KNOWN_SILENT });
     expect(read.temperBand).toBe('ordinary');
-    expect(read.absent).not.toContain('knownChart');
+    // `desperation01` is the anchor because it is UNSUPPLIED on this same call and rides the
+    // same `absent[]` register, so any drift that empties or re-keys the list reds on the
+    // anchor rather than passing the exclusion.
+    expectAbsentWithAnchor(read.absent, 'knownChart', 'desperation01', 'a chart that says nothing');
   });
 
   test('the band is read from the KNOWN chart, at both poles', () => {
@@ -327,11 +333,19 @@ describe('DARK BY CONSTRUCTION — the supplier has no production caller and rea
   test('⛔ and it names no drift writer, no world state and no flag', () => {
     const source = readFileSync(join(ROOT, LEAF), 'utf8');
     // Asserted LIVE first, so the exclusions below cannot pass on a path that read back
-    // empty (the anti-vacuity idiom this estate's closure scans all carry).
-    expect(source).toContain('ACCEPTANCE_READ_TERMS');
-    expect(source).not.toContain('writeAxisDrift');
-    expect(source).not.toContain('setCharacterDrift');
+    // empty (the anti-vacuity idiom this estate's closure scans all carry). The two
+    // substring exclusions now carry that liveness MECHANICALLY, through the anchored
+    // helper; the two REGEX exclusions cannot — the helper answers toContain questions
+    // only — so they take a live positive of their own, in their own matcher, and the
+    // reviewed annotation says which arm is holding them up.
+    expectAbsentWithAnchor(source, 'writeAxisDrift', 'ACCEPTANCE_READ_TERMS', 'the drift writer');
+    expectAbsentWithAnchor(source, 'setCharacterDrift', 'ACCEPTANCE_READ_TERMS', 'the drift setter');
+    expect(source, 'the regex arm matched nothing on a live leaf — the exclusions below would be vacuous')
+      .toMatch(/\bACCEPTANCE_READ_TERMS\b/);
+    // ⚠ THE KEYWORD MUST BE ON THE LINE IMMEDIATELY ABOVE — the walker reads one line back,
+    // anchored: the live positive regex two lines up runs the same matcher over this same `source`, so an empty or re-shaped read reds THERE, never silently here
     expect(source).not.toMatch(/\bworldState\b/);
+    // anchored: same live positive regex above — it fires on this exact string or nothing does
     expect(source).not.toMatch(/simulationRules|Enabled'/);
   });
 
@@ -340,6 +354,12 @@ describe('DARK BY CONSTRUCTION — the supplier has no production caller and rea
     // only the operations family. Naming the willingness door in THIS file would trip
     // that census on a leaf that wired nothing — so the absence is asserted rather than
     // trusted to review. (This test file is under tests/ and the census does not walk it.)
-    expect(readFileSync(join(ROOT, LEAF), 'utf8')).not.toContain('seek_compromise');
+    // `ACCEPTANCE_READ_TERMS` is the anchor: it is this leaf's own declared vocabulary, so a
+    // read that came back empty, or a leaf that was renamed out from under this pin, reds on
+    // the anchor instead of reporting the willingness seam absent from a file it never read.
+    expectAbsentWithAnchor(
+      readFileSync(join(ROOT, LEAF), 'utf8'), 'seek_compromise', 'ACCEPTANCE_READ_TERMS',
+      'the fifth seam stays unnamed here',
+    );
   });
 });

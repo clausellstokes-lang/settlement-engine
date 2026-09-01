@@ -55,6 +55,7 @@ import {
   writeAxisDrift,
 } from '../../../src/domain/npc/characterDrift.js';
 import { durableIdForRoster, npcLedgerOf } from '../../../src/domain/worldPulse/npcLedger.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../../helpers/anchoredNegatives.js';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
@@ -673,6 +674,7 @@ const dependsOn = (text, moduleRe, symbols) => (
     expect(dependsOn("const receipt = 'characterDrift.js:writeAxisDrift (the sealed writer)';", /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(false);
     // …and the stripper itself is pinned live in both directions.
     expect(stripComments("import { x } from './characterDrift.js';")).toContain('characterDrift');
+    // anchored: the subject is a LITERAL built on this very line so it cannot drift away, and the line above proves the same stripper KEEPS a name it must keep
     expect(stripComments('/** a block naming effectiveCharacter */\nconst a = 1;')).not.toContain('effectiveCharacter');
   });
 
@@ -694,7 +696,10 @@ const dependsOn = (text, moduleRe, symbols) => (
     // the check above discriminates rather than passing trivially — and it is exactly
     // why that name is absent from DRIFT_SYMBOLS.
     expect(exportersOf('AXIS_LEVELS').length).toBe(2);
-    expect(DRIFT_SYMBOLS).not.toContain('AXIS_LEVELS');
+    // ⚠ THE EXPORTER COUNT ANCHORS THE TREE, NOT THE ROSTER. `writeAxisDrift` is the roster's
+    // own anchor: it must still be IN `DRIFT_SYMBOLS` for the exclusion to mean anything, or
+    // an emptied roster would report `AXIS_LEVELS` correctly kept out of nothing at all.
+    expectAbsentWithAnchor(DRIFT_SYMBOLS, 'AXIS_LEVELS', 'writeAxisDrift', 'the two-owner name stays out');
   });
 
   test('⭐ THE DOOR\'S FOURTH CONSUMER IS ITSELF DARK — the darkness survives the new row', () => {
@@ -778,9 +783,12 @@ const dependsOn = (text, moduleRe, symbols) => (
     // pair of strings that appear nowhere at all. Without this the walker would pass
     // just as happily if the tombstones had been deleted.
     const seam = readFileSync(join(REPO_ROOT, 'src/domain/npc/characterDrift.js'), 'utf8');
+    const seamCode = stripComments(seam);
     for (const name of RETIRED) {
-      expect(seam, `${name} must be tombstoned, not silently dropped`).toContain(name);
-      expect(stripComments(seam), `${name} must be prose, never a minted token`).not.toContain(name);
+      // ONE anchored transition rather than two loose halves: the raw seam is the liveness
+      // anchor (the tombstone demonstrably EXISTS), and the comment strip is the operation
+      // that must remove it. A deleted tombstone now reds on the anchor.
+      expectPresentThenAbsent(seam, seamCode, name, `${name} is prose, never a minted token`);
     }
     // …and each tombstone is phrased as an ACT, per §769.4 — a bare dead name is what
     // the law exists to forbid.
@@ -892,7 +900,10 @@ describe('THE AUTHORED CORE HAS ONE READER — and this census is what makes it 
       readFileSync(join(REPO_ROOT, 'src/domain/npc/knownCharacter.js'), 'utf8'),
     );
     expect(seam).toContain('}).character;');
-    expect(seam).not.toContain('asObject(npc).character');
+    // The composed-reading spelling is the anchor: it must still be present in this same
+    // stripped text, so a renamed or re-shaped seam reds there rather than reporting a raw
+    // soul read absent from a file the pin no longer sees.
+    expectAbsentWithAnchor(seam, 'asObject(npc).character', '}).character;', 'the sight seam reads its own reading');
   });
 
   test('the two folded-in readers now route through the accessor', () => {

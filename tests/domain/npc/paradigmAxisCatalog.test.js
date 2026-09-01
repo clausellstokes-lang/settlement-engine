@@ -54,6 +54,7 @@ import { TRAIT_PLANE } from '../../../src/domain/worldPulse/clergyTraitPlane.js'
 import { CORRUPTIBLE_FLAWS, corruptionVectorForFlaw } from '../../../src/domain/corruption.js';
 import { NPC_PERSONALITY_TRAITS } from '../../../src/data/npcData.js';
 import { NPC_TEMPERAMENTS } from '../../../src/domain/npc/npcFacetContract.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 const sorted = (/** @type {Iterable<string>} */ xs) => [...xs].sort();
@@ -612,7 +613,10 @@ describe('DARK BY CONSTRUCTION — the catalog is consumed by nothing in src/', 
       expect(exportersOf(symbol), `${symbol} must be owned by exactly one module`).toHaveLength(1);
     }
     expect(exportersOf('AXIS_LEVELS').length).toBe(2);
-    expect(CATALOG_SYMBOLS).not.toContain('AXIS_LEVELS');
+    // ⚠ THE EXPORTER COUNT ANCHORS THE TREE, NOT THE ROSTER, and the loop above passes
+    // vacuously on an empty one. `axisById` is the roster's own anchor — the catalog's
+    // reader must still be enrolled, or the two-owner name is kept out of nothing.
+    expectAbsentWithAnchor(CATALOG_SYMBOLS, 'AXIS_LEVELS', 'axisById', 'the two-owner name stays out');
   });
 
   /**
@@ -655,7 +659,12 @@ describe('DARK BY CONSTRUCTION — the catalog is consumed by nothing in src/', 
       const leaf = readFileSync(join(REPO_ROOT, 'src/domain/npc/livedExperienceCatalog.js'), 'utf8');
       expect(leaf).toContain('PARADIGM_AXES.map((axis) => axis.id)');
       const code = codeWithoutCitations(leaf);
-      for (const id of catalogIds) expect(code, `${id} is still hand-kept here`).not.toContain(id);
+      // The DERIVATION is the anchor, and it must survive the same strip the ids are judged
+      // by — otherwise a strip that blanked the whole file would report all seventeen ids
+      // correctly absent from nothing.
+      for (const id of catalogIds) {
+        expectAbsentWithAnchor(code, id, 'PARADIGM_AXES.map((axis) => axis.id)', `${id} is still hand-kept here`);
+      }
     });
 
     test('MIRROR 3/4 — characterConsumers.CORRUPTIBLE_AXIS_VECTORS equals the corruptionVector column', () => {
@@ -679,9 +688,11 @@ describe('DARK BY CONSTRUCTION — the catalog is consumed by nothing in src/', 
         expect(catalogIds, `${axisId} is read by R6 but unknown to the chart`).toContain(axisId);
         expect(axisById(axisId), `${axisId} must resolve through the catalog's own reader`).toBeTruthy();
       }
-      // anchored: a nonexistent axis really would fail, so the two passes above mean
-      // something.
-      expect(catalogIds).not.toContain('AMBITION');
+      // ⚠ THE ANNOTATION THAT USED TO SIT HERE WAS INVISIBLE: it ran to a SECOND line, and
+      // the walker reads only the line immediately above the assertion, so this site was
+      // un-anchored in fact while reading as annotated. Anchored mechanically instead —
+      // R6's own `nerve` axis must still be in the roster for the refusal to mean anything.
+      expectAbsentWithAnchor(catalogIds, 'AMBITION', RISK_CENTER_AXES.nerve, 'a phantom axis resolves nowhere');
       expect(axisById('AMBITION')).toBeFalsy();
     });
 
