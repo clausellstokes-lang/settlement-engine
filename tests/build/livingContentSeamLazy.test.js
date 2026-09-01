@@ -44,12 +44,18 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { EAGER_FIRST_PAINT_MODULES } from '../../vite.config.js';
+// THE VOCABULARY AND THE LOADER ARE TWO FILES, and the split is the F29 cycle
+// cure: the seam kept only the loader half, so the gate symbols are imported
+// from the dependency-free leaf. Importing them from the seam again would need a
+// re-export there, which is the byte-costed shape livingContentLaw.js measured.
 import {
   DEFAULT_LIVING_CONTENT_LAW_VERSION,
   LIVING_CONTENT_LAW_CONFIG_KEY,
   ROSTER_LIVING_CONTENT_LAW_VERSION,
-  livingContentRosterFor,
   materializesLivingContent,
+} from '../../src/domain/content/livingContentLawVersion.js';
+import {
+  livingContentRosterFor,
 } from '../../src/domain/content/livingContentSeam.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');

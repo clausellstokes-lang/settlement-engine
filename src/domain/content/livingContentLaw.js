@@ -52,32 +52,39 @@
  */
 
 /**
- * ⛔ THE GATE ITSELF LIVES IN `livingContentSeam.js`, NOT HERE, AND THIS FILE
- * RE-EXPORTS IT SO THERE IS EXACTLY ONE SPELLING OF THE LAW.
+ * ⛔ THE GATE ITSELF LIVES IN `livingContentLawVersion.js`, NOT HERE, AND THIS
+ * FILE ONLY READS IT — SO THERE IS EXACTLY ONE SPELLING OF THE LAW.
  *
- * The seam is the sliver of this law the generator engine carries: the pipeline
- * must decide DORMANT-or-LIT synchronously, before anything is loaded, so the
- * version constants and the closed membership test have to sit on the engine
- * side of the lazy boundary. Everything below — the buckets, the dial and the
- * create-boundary fragment — is only ever read on the lit path or at the create
- * boundary, both of which are already lazy, so it rides the lazy chunk with the
- * roster. Re-exporting rather than re-declaring is what keeps a second, drifting
- * copy of `_livingContentLawVersion` from ever existing (see
- * `livingContentSeam.js` for the measured reason the boundary is here at all).
+ * The version vocabulary is the sliver of this law the generator engine carries:
+ * the pipeline must decide DORMANT-or-LIT synchronously, before anything is
+ * loaded, so the version constants and the closed membership test have to sit on
+ * the engine side of the lazy boundary. Everything below — the buckets, the dial
+ * and the create-boundary fragment — is only ever read on the lit path or at the
+ * create boundary, both of which are already lazy, so it rides the lazy chunk
+ * with the roster. Reading the leaf rather than re-declaring is what keeps a
+ * second, drifting copy of `_livingContentLawVersion` from ever existing (see
+ * `livingContentSeam.js` for the measured reason the boundary exists at all).
+ *
+ * ⚠ IT USED TO IMPORT THESE FROM `livingContentSeam.js`, AND THAT EDGE IS WHAT
+ * MADE THE CYCLE. Seam →(dynamic) roster →(static) law →(static) seam is a
+ * strongly-connected component of size 3, and `layerBoundaries.test.js` counts
+ * the dynamic specifier as an edge. The vocabulary moved to a dependency-free
+ * leaf; this import moved with it, and nothing else about this file changed.
  */
 import {
   LIVING_CONTENT_LAW_CONFIG_KEY,
   DEFAULT_LIVING_CONTENT_LAW_VERSION,
-} from './livingContentSeam.js';
+} from './livingContentLawVersion.js';
 
 // ⛔ AND IT IS DELIBERATELY NOT RE-EXPORTED FROM HERE. A convenience
-// `export { … } from './livingContentSeam.js'` block was written first and
-// MEASURED: because this file rides the lazy roster chunk and the seam rides the
-// engine chunk, re-exporting seven seam symbols forces the engine chunk to keep
-// all seven live for the roster chunk to forward — the engine chunk grew by
-// ~1,047 B on the day the payload is retained, against a 677 B ceiling margin.
-// Gate consumers therefore import from `livingContentSeam.js` directly, which is
-// also the honest edge: the gate is engine-side vocabulary, not lazy vocabulary.
+// `export { … } from './livingContentLawVersion.js'` block was written first and
+// MEASURED against the seam: because this file rides the lazy roster chunk and
+// the vocabulary rides the engine side, re-exporting seven symbols forces the
+// engine side to keep all seven live for the roster chunk to forward — the
+// engine chunk grew by ~1,047 B on the day the payload is retained, against a
+// 677 B ceiling margin. Gate consumers therefore import from
+// `livingContentLawVersion.js` directly, which is also the honest edge: the gate
+// is engine-side vocabulary, not lazy vocabulary.
 
 /** ⭐ THE ONE DIAL — the living-content law a NEWLY-created world mints under.
  *  Held at the dormant default until the owner rules on lighting; flipping it to
