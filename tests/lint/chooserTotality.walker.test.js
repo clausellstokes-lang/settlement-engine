@@ -120,15 +120,70 @@ function walk(dir, out = []) {
 }
 
 /**
- * Comments and import specifiers blanked, OFFSETS PRESERVED. Without this the scan reads a
- * JSDoc mention and an import line as uses — the narrower-than-claim defect class in its
- * other direction.
+ * ⭐ STRING LITERAL TEXT blanked, OFFSETS PRESERVED — and template INTERPOLATIONS kept.
+ *
+ * ⛔ WHY THIS EXISTS, AND IT IS THIS ESTATE'S OWN LAW ARRIVING AT ITS SEVENTH SITE. The
+ * claim this scan makes is a USE claim ("does this module INVOKE a weighted-chooser
+ * idiom"), and for a use claim a string is a CITATION: a call cannot execute from inside a
+ * quoted literal. The comment strip above already concedes exactly that for prose. The
+ * registry is the file that proves the concession was incomplete — `habitForkRegistry.js`
+ * lives inside a scan root and every row it holds DESCRIBES an idiom in a `reason` string,
+ * so the moment a row quoted a call with its own open paren the totality walker CONVICTED
+ * ITS OWN REGISTRY, minting `habitForkRegistry.js#HABIT_FORK_REGISTRY` as a "discovered
+ * fork" that can never be classified because it is not a fork. Three earlier rows escaped
+ * only by punctuation — they spell `(hash01)` with the paren on the wrong side — so the
+ * hole was live and invisible from the registry's first commit.
+ *
+ * ⚠ NARROWER THAN "BLANK EVERY STRING", DELIBERATELY. A template interpolation is CODE, so
+ * `` `${hash01(seed)}` `` is a real use and must still mint; only the literal text between
+ * the interpolations is blanked. Both halves are pinned by the guard-the-guard case below.
+ *
+ * @param {string} src @returns {string}
+ */
+function blankStringLiterals(src) {
+  const out = src.split('');
+  /** @type {Array<{ quote: string, depth: number }>} */
+  const stack = [];
+  for (let i = 0; i < src.length; i += 1) {
+    const ch = src[i];
+    const top = stack[stack.length - 1];
+    if (!top) {
+      if (ch === `'` || ch === `"` || ch === '`') stack.push({ quote: ch, depth: 0 });
+      continue;
+    }
+    if (ch === '\\') { // an escape consumes its successor, quote or not
+      if (i + 1 < src.length && src[i + 1] !== '\n') out[i + 1] = ' ';
+      out[i] = ' ';
+      i += 1;
+      continue;
+    }
+    if (top.quote === '`' && ch === '$' && src[i + 1] === '{') {
+      stack.push({ quote: '${', depth: 0 }); // interpolated CODE — leave it standing
+      i += 1;
+      continue;
+    }
+    if (top.quote === '${') {
+      if (ch === '{') top.depth += 1;
+      else if (ch === '}') { if (top.depth === 0) stack.pop(); else top.depth -= 1; }
+      else if (ch === `'` || ch === `"` || ch === '`') stack.push({ quote: ch, depth: 0 });
+      continue;
+    }
+    if (ch === top.quote) { stack.pop(); continue; }
+    if (ch !== '\n') out[i] = ' '; // blank the TEXT, keep the line structure
+  }
+  return out.join('');
+}
+
+/**
+ * Comments, string-literal text and import specifiers blanked, OFFSETS PRESERVED. Without
+ * this the scan reads a JSDoc mention, a quoted citation and an import line as uses — the
+ * narrower-than-claim defect class in its other direction.
  * @param {string} src @returns {string}
  */
 function codeOnly(src) {
-  const stripped = src
+  const stripped = blankStringLiterals(src
     .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
-    .replace(/(^|[^:])\/\/[^\n]*/g, (m, lead) => lead + ' '.repeat(m.length - lead.length));
+    .replace(/(^|[^:])\/\/[^\n]*/g, (m, lead) => lead + ' '.repeat(m.length - lead.length)));
   return stripped.replace(
     /^\s*(?:import|export)\b[^\n]*?from\s*['"][^'"]*['"];?[^\n]*$/gm,
     (m) => ' '.repeat(m.length),
@@ -194,6 +249,26 @@ describe('HB-1 — the chooser-totality partition and the named-domain checklist
     expect(Object.keys(IDIOM_SIGNATURES)).toHaveLength(3);
     expect(DISCOVERED).toContain('src/domain/worldPulse/settlementStrategy.js#evaluateSettlementStrategyRules');
     expect(DISCOVERED.length).toBeGreaterThan(GUARD_CHAIN_CHOOSERS.length);
+    // ⭐ THE STRING STRIP IS PINNED IN BOTH DIRECTIONS, because a strip that blanked one
+    // character too many would silently DELETE discoveries and this whole walker would
+    // report SUCCESS for the same reason a missed root does. The registry's own row shape
+    // is the negative case (it convicted `habitForkRegistry.js#HABIT_FORK_REGISTRY` before
+    // the strip existed); a plain call and an INTERPOLATED call are the two positives.
+    const stripped = codeOnly(`const reason = 'a keyed hash01(principalId) race';`);
+    // anchored: the subject is a LITERAL built on the line above and the length arm below proves the strip returned that exact string rather than nothing
+    expect(stripped, 'a quoted CITATION still reads as a use').not.toMatch(/\bhash01\s*\(/);
+    expect(stripped, 'the strip changed the line length — offsets no longer line up')
+      .toHaveLength(`const reason = 'a keyed hash01(principalId) race';`.length);
+    expect(codeOnly(`const roll = hash01(seed);`), 'a REAL call stopped minting')
+      .toMatch(/\bhash01\s*\(/);
+    expect(
+      codeOnly('const key = `${hash01(seed)}`;'),
+      'a template INTERPOLATION is code, not text — blanking it would hide a real use',
+    ).toMatch(/\bhash01\s*\(/);
+    expect(
+      codeOnly(`const s = 'it\\'s quoted'; const roll = softmaxWeights(w);`),
+      'an ESCAPED quote ended the literal early and swallowed the code after it',
+    ).toMatch(/\bsoftmaxWeights\s*\(/);
     // ⭐ THE NORMALIZATION IS REAL WORK, not a no-op. If a row ever carried its own suffix
     // this function would be silently idempotent for it, the registry would read as an
     // importer to every filename-keyed source scan, and the siting cure would be undone
