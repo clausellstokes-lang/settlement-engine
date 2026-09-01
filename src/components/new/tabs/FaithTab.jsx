@@ -28,6 +28,7 @@
 import { Suspense, lazy, useMemo } from 'react';
 import FaithSection from '../../settlement/FaithSection.jsx';
 import { faithPanelModel, shareBandLabel } from '../../settlement/faithPanelModel.js';
+import { faithDeepeningOf } from '../../../domain/display/faithDeepening.js';
 import { hasPantheon } from '../../map/PantheonPanel.jsx';
 import { useStore } from '../../../store/index.js';
 import { BODY, BORDER, CARD, FS, GOLD, GREEN, INK, MUTED, RED, SECOND, sans } from '../../theme.js';
@@ -71,10 +72,41 @@ function PatronSeatBlock({ patron, contested }) {
   );
 }
 
-/** Who occupies which niche of the pantheon. One row per creed — the future
- *  home of the per-deity top-3 / boon-bane / cumulative-field rows (W-LIVES /
- *  W-FAITH); until those trains land the row carries only what exists. */
-function NicheOccupancyBlock({ ranks }) {
+/** W-FAITH F7c — one creed's deepening rows: the top-3 authored character in
+ *  the pinned total order, and the boon/bane picks as the band words they are
+ *  authored in. The jealous marker on a boon is the flaw register's typed
+ *  cause, muted so it reads as colour rather than alarm. Absent data renders
+ *  nothing — the rows exist only where a deity authored something. */
+function DepthRows({ depth }) {
+  return (
+    <>
+      {depth.top3.length > 0 && (
+        <div data-testid="faith-depth-character" style={{ color: BODY, fontFamily: sans, fontSize: FS.pico, lineHeight: 1.5, marginTop: 4 }}>
+          <span style={{ color: MUTED, fontWeight: 700 }}>Known for </span>
+          {depth.top3.map((r, i) => (
+            <span key={`${r.axisId}:${r.pole}`}>
+              {i > 0 && ' · '}
+              <span style={{ textTransform: 'capitalize' }}>{r.word}</span>
+              {` (${r.levelWord})`}
+            </span>
+          ))}
+        </div>
+      )}
+      {depth.gifts.map((g) => (
+        <div key={g.kind} data-testid={`faith-depth-${g.kind}`} style={{ color: BODY, fontFamily: sans, fontSize: FS.pico, lineHeight: 1.5, marginTop: 2 }}>
+          <span style={{ color: g.kind === 'boon' ? GREEN : RED, fontWeight: 800, textTransform: 'capitalize' }}>{g.kind}</span>
+          {' · '}{g.channelWord}{' · '}{g.strength}
+          {g.flaw && <span style={{ color: MUTED, fontStyle: 'italic' }}>{' · '}{g.flaw}</span>}
+        </div>
+      ))}
+    </>
+  );
+}
+
+/** Who occupies which niche of the pantheon. One row per creed — carrying the
+ *  W-FAITH F7c deepening rows (top-3 character, boon & bane) for any deity
+ *  that authored them; a creed with nothing authored keeps its one-line row. */
+function NicheOccupancyBlock({ ranks, depth }) {
   return (
     <div data-testid="faith-niches" style={{ marginBottom: 14 }}>
       <div style={{ fontSize: FS.xxs, fontWeight: 800, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
@@ -96,9 +128,37 @@ function NicheOccupancyBlock({ ranks }) {
             <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs }}>
               {' — '}{d.name}{d.isPatron ? ' (patron)' : ''} · {standingWord} · {followingWord}
             </span>
+            {depth[d.name] && <DepthRows depth={depth[d.name]} />}
           </div>
         );
       })}
+    </div>
+  );
+}
+
+/** W-FAITH F7c — THE CUMULATIVE FIELD IN BAND WORDS. One row per channel the
+ *  whole pantheon audibly moves, off the tick-END projection: the direction
+ *  and the magnitude band, every threshold derived from the F6c tuning
+ *  surface (see faithDeepening.fieldEffectRows). Dark world, no authored
+ *  boon/bane, or a magic-dead dial ⇒ no projection ⇒ this block is absent. */
+function FieldBlock({ rows }) {
+  return (
+    <div data-testid="faith-field-block" style={{ marginBottom: 14 }}>
+      <div style={{ fontSize: FS.xxs, fontWeight: 800, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
+        Divine influence
+      </div>
+      {rows.map((r) => (
+        <div key={r.channel} data-testid="faith-field-row" style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '8px 10px', marginBottom: 6 }}>
+          <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, textTransform: 'capitalize' }}>
+            {r.channelWord}
+          </span>
+          <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs }}>
+            {' · '}
+            <span style={{ color: r.direction === 'blessed' ? GREEN : RED, fontWeight: 700 }}>{r.direction}</span>
+            {' · '}{r.band}
+          </span>
+        </div>
+      ))}
     </div>
   );
 }
@@ -116,6 +176,23 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
   const campaigns = useStore(s => s.campaigns);
 
   const model = useMemo(() => faithPanelModel(settlement), [settlement]);
+
+  // W-FAITH F7c — the deepening model: the embed and the tick-END field
+  // projection handed DOWN as records. The domain leaf never reads a
+  // settlement (components are the observed-shape wall's excluded scope, so
+  // the config reads live here), and everything absent stays absent.
+  const deepening = useMemo(() => {
+    const config = settlement?.config || {};
+    const patron = config.primaryDeitySnapshot && typeof config.primaryDeitySnapshot === 'object'
+      ? config.primaryDeitySnapshot : null;
+    const profile = config.faithProfile && typeof config.faithProfile === 'object'
+      ? config.faithProfile : null;
+    return faithDeepeningOf({
+      patron,
+      cults: Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots : null,
+      field: profile && profile.field && typeof profile.field === 'object' ? profile.field : null,
+    });
+  }, [settlement]);
 
   // The realm pantheon is DM-realm data (it names EVERY deity in the realm), so
   // it rides the map surface's own wall — premium/elevated (the P9 Cartographer
@@ -135,7 +212,10 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
   return (
     <div data-testid="faith-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
       {patronRank && <PatronSeatBlock patron={patronRank} contested={!!model.contested} />}
-      {model.hasEmbed && model.ranks.length > 0 && <NicheOccupancyBlock ranks={model.ranks} />}
+      {model.hasEmbed && model.ranks.length > 0 && <NicheOccupancyBlock ranks={model.ranks} depth={deepening.byName} />}
+      {/* W-FAITH F7c — the cumulative field, band words only; absent when the
+          projection is (dark world, nothing authored, or a dead-magic dial). */}
+      {model.hasEmbed && deepening.fieldRows.length > 0 && <FieldBlock rows={deepening.fieldRows} />}
       {/* The gated faith surface — the constitutional seam, unchanged. */}
       <FaithSection settlement={settlement} publicDossier={publicDossier} />
       {pantheonCampaign && (
