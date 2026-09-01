@@ -126,12 +126,30 @@ describe('Phase 7 — live chapter present + the *Axis-not-tier fix', () => {
     expect(lw.deity).not.toBeNull();
     expect(lw.deity.rankAxis).toBe('major');
     expect(lw.deity.alignmentAxis).toBe('evil');
-    expect(lw.deity.temperamentAxis).toBe('warlike');
+    // W-FAITH F7c: `temper` is the DERIVATION's word (Maug is evil ⇒ warlike);
+    // the retired stored temperamentAxis no longer reaches this slice.
+    expect(lw.deity.temper).toBe('warlike');
+    expect('temperamentAxis' in lw.deity).toBe(false);
     // describeDeityEffects (read from *Axis) produced the engine couplings.
     expect(lw.deity.effects.length).toBeGreaterThan(0);
     expect(lw.deity.effects.join(' ')).toMatch(/corrupt/i);   // evil → corruption
     expect(lw.deity.effects.join(' ')).toMatch(/aggression/i); // warlike → aggression
     expect(lw.deity.effects.join(' ')).toMatch(/magic legality/i); // major → magic
+  });
+
+  it('W-FAITH F7c THE SHIFT, executed: an authored word beats a disagreeing stored mirror', () => {
+    // The stored mirror says warlike and the axes agree — but the author said
+    // peacelike, and the seam answers the author. Before F7c this slice printed
+    // the mirror and the authored word was invisible in the PDF.
+    const authoredTown = {
+      ...warTown,
+      config: {
+        ...warTown.config,
+        primaryDeitySnapshot: { ...warTown.config.primaryDeitySnapshot, authoredTemper: 'peacelike' },
+      },
+    };
+    const lw = buildPdfLiveWorld({ settlement: authoredTown, campaign: warCampaign });
+    expect(lw.deity.temper).toBe('peacelike');
   });
 
   it('the rendered Faith & War chapter prints the live front, the deity, and its axes', () => {
@@ -140,7 +158,7 @@ describe('Phase 7 — live chapter present + the *Axis-not-tier fix', () => {
     expect(texts).toMatch(/Faith & War/);
     expect(texts).toMatch(/Maug/);
     expect(texts).toMatch(/major/i);    // rankAxis printed
-    expect(texts).toMatch(/warlike/i);  // temperamentAxis printed
+    expect(texts).toMatch(/warlike/i);  // the derived temper printed (F7c)
     expect(texts).toMatch(/grain/i);    // trade-war prize printed
     expect(texts).toMatch(/Brightvale/); // besieged target resolved by nameFor
   });

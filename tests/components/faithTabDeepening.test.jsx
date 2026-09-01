@@ -133,6 +133,10 @@ describe('FaithTab — the F7c deepening rows in the T11 shell', () => {
       name: 'Quietford',
       config: { latentPantheon: { patron: { name: LATENT, characterAxes: ['TEMPER:vice:defining'], boonChannel: 'harvest', boonStrength: 'heavy' } } },
     }} saveId={null} />);
+    // The liveness anchor: the gated surface rendered its teaser, so the render
+    // is real faith content and the negative below cannot pass vacuously.
+    expect(screen.getByTestId('faith-teaser')).toBeTruthy();
+    // anchored: the faith-teaser assertion above proves the render is live
     expect(container.textContent).not.toContain(LATENT);
     expect(screen.queryByTestId('faith-depth-character')).toBeNull();
     expect(screen.queryByTestId('faith-field-block')).toBeNull();
@@ -146,6 +150,10 @@ describe('FaithTab — the F7c deepening rows in the T11 shell', () => {
       screen.getByTestId('faith-depth-bane'),
       screen.getByTestId('faith-field-block'),
     ];
-    for (const node of nodes) expect(node.textContent).not.toMatch(/\d/);
+    for (const node of nodes) {
+      expect(node.textContent.length).toBeGreaterThan(0);
+      // anchored: the non-empty assertion above proves this node carries live text
+      expect(node.textContent).not.toMatch(/\d/);
+    }
   });
 });

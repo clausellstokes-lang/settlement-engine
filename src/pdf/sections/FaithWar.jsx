@@ -288,7 +288,10 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
             </Text>
             {deity.rankAxis && <Tag tone="gold">{cap(deity.rankAxis)}</Tag>}
             {deity.alignmentAxis && <Tag tone={ALIGN_TONE[deity.alignmentAxis] || 'muted'}>{cap(deity.alignmentAxis)}</Tag>}
-            {deity.temperamentAxis && <Tag tone={deity.temperamentAxis === 'warlike' ? 'bad' : 'cool'}>{cap(deity.temperamentAxis)}</Tag>}
+            {/* W-FAITH F7c: `temper` is the engine derivation off the liveWorld
+                slice (authored wins, else the axes; neutral is null and prints
+                nothing) — the retired stored temperamentAxis is gone from it. */}
+            {deity.temper && <Tag tone={deity.temper === 'warlike' ? 'bad' : 'cool'}>{cap(deity.temper)}</Tag>}
             {deity.lawAxis && <Tag tone={deity.lawAxis === 'lawful' ? 'good' : 'warn'}>{cap(deity.lawAxis)}</Tag>}
           </View>
           {deity.domain && (

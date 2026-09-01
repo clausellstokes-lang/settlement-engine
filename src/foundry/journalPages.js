@@ -385,7 +385,9 @@ function faithWarPage(vm) {
     deity ? md('', `## Patron deity — ${esc(deity.name)}`,
       kv('Rank', deity.rankAxis ? cap(deity.rankAxis) : null),
       kv('Alignment', deity.alignmentAxis ? cap(deity.alignmentAxis) : null),
-      kv('Temperament', deity.temperamentAxis ? cap(deity.temperamentAxis) : null),
+      // W-FAITH F7c: the derivation's word off the liveWorld slice; neutral is
+      // null there and prints no row (the retired stored mirror is gone).
+      kv('Temperament', deity.temper ? cap(deity.temper) : null),
       kv('Domain', deity.domain ? humanize(deity.domain) : null),
       (deity.effects || []).length ? md('', '### Faith effects', deity.effects.map(bullet)) : null,
     ) : null,

@@ -68,6 +68,10 @@ import { settlementTradePressure } from '../../domain/display/tradePressure.js';
 import { pantheonStandings, deityDisplayName } from '../../domain/display/pantheonDepth.js';
 import { realmArcLines } from '../../domain/display/realmArcSummary.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
+// W-FAITH F7c (the §866 docket): the temper seam — the printed temper is the
+// engine's own derivation (authored word wins, else the axes), never the retired
+// stored temperamentAxis mirror.
+import { deityTemper } from '../../domain/worldPulse/deityAxes.js';
 import { computeAggressiveness, AGGRESSION_TUNING } from '../../domain/worldPulse/disposition.js';
 import { divineMandateStatus, patronContestOdds } from '../../domain/worldPulse/religionState.js';
 // pdf-1: the living-world reads the on-screen dossier already shows — rumors,
@@ -203,14 +207,19 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
 
   // ── Deity (axis fields, NEVER tier/alignment) ────────────────────────────
   const snap = s?.config?.primaryDeitySnapshot || null;
+  // W-FAITH F7c: the temper is the DERIVATION's word (deityTemper — authored
+  // wins, else the axes), so the printed tag can never disagree with the engine
+  // drive; the retired stored temperamentAxis is not read. Neutral says nothing,
+  // exactly as lawAxis already spells it below.
+  const patronTemper = snap ? deityTemper(snap) : undefined;
   const deity = snap
     ? {
         name: snap.name || 'Unnamed deity',
-        // READ the *Axis fields — the snapshot carries rankAxis/alignmentAxis/
-        // temperamentAxis, NOT a legacy tier/alignment.
+        // READ the *Axis fields — the snapshot carries rankAxis/alignmentAxis,
+        // NOT a legacy tier/alignment.
         rankAxis: snap.rankAxis || null,
         alignmentAxis: snap.alignmentAxis || null,
-        temperamentAxis: snap.temperamentAxis || null,
+        temper: patronTemper && patronTemper !== 'neutral' ? patronTemper : null,
         // lawAxis — a legacy 3-axis snapshot has none ⇒ null ⇒ no law tag.
         lawAxis: snap.lawAxis && snap.lawAxis !== 'neutral' ? snap.lawAxis : null,
         domain: snap.domain || null,
@@ -240,10 +249,14 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
   // the throne. Reads config.faithProfile (pulse-projected) + government ⇒ null off-campaign.
   const mandate = divineMandateStatus(s);
   // DM-imposed cults — minor faiths beneath the patron (present even without a campaign).
+  // W-FAITH F7c: the cult rows carry name/rank/alignment only — no consumer of
+  // this slice ever read a cult temper (measured: FaithWar and journalPages
+  // print name + alignment), and a stored-mirror key with no reader is exactly
+  // the class this docket retires.
   const cults = Array.isArray(s?.config?.cultDeitySnapshots)
     ? s.config.cultDeitySnapshots.filter(Boolean).map((/** @type {any} */ c) => ({
         name: c.name || 'a cult', rankAxis: c.rankAxis || null,
-        alignmentAxis: c.alignmentAxis || null, temperamentAxis: c.temperamentAxis || null,
+        alignmentAxis: c.alignmentAxis || null,
       }))
     : [];
 
