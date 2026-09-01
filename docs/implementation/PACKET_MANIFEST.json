@@ -3348,7 +3348,7 @@
           "symbol": "VIRTUAL_SUBSYSTEM_ROWS"
         },
         {
-          "path": "src/domain/certification/subsystemRowsVirtual.js",
+          "path": "src/domain/certification/subsystemRowsBelief.js",
           "symbol": "dormancy_rests_on_the_gate_and_on_the_absence_rule"
         },
         {
