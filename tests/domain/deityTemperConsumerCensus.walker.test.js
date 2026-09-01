@@ -187,11 +187,20 @@ const STORED_FIELD_READERS = Object.freeze([
 
 /**
  * Modules that COPY embed fields without reading their meaning — the two commit-time
- * writer files and the intent builder. They are passthrough, not consumers, and the
- * uniformity pin below quantifies over exactly this set. (Three files, four writers:
- * `mutateEntities.js` holds both `setPrimaryDeity` and `imposeCult`.)
+ * writer files, the intent builder, and the commit leaf that holds the shared builder
+ * itself. They are passthrough, not consumers, and the uniformity pin below quantifies
+ * over exactly this set. (Four files, four writers: `mutateEntities.js` holds both
+ * `setPrimaryDeity` and `imposeCult`.)
+ *
+ * ⚠ THE FOURTH ENTRY ARRIVED BY A SPLIT, NOT BY A NEW WRITER (SUBSTRATE coupling wave 6,
+ * REC-2). `deityCommitEmbed.js` is the roster, the picker and `commitDeityEmbed` lifted
+ * out of `deitySnapshot.js` verbatim so the EAGER mutation router can persist an embed
+ * without loading the authoring and restore halves. It MUST be in this set: the retired
+ * `temperamentAxis` register below excludes writers by name, and a builder that copies
+ * the retired field would otherwise be read as a new SEMANTIC consumer of it.
  */
 const EMBED_WRITERS = Object.freeze([
+  'src/domain/deityCommitEmbed.js',
   'src/domain/deitySnapshot.js',
   'src/domain/events/mutateEntities.js',
   'src/domain/worldPulse/applyWorldPulse.js',
@@ -201,8 +210,21 @@ const EMBED_WRITERS = Object.freeze([
  * The ONE module that names the six authored-character keys. Every other writer
  * spreads its picker, which is why the key names appear in one place rather than
  * four — the drift habitat F3c removed rather than policed.
+ *
+ * ⚠ THE ADDRESS MOVED WITH THE SYMBOL at SUBSTRATE wave 6 and the roster is still ONE
+ * file. It is deliberately NOT re-exported from `deitySnapshot.js`: a re-export line
+ * would be a second module naming the keys, which is precisely what the pin below
+ * refuses — so the consumers follow the symbol to its home instead.
  */
-const EMBED_ROSTER = 'src/domain/deitySnapshot.js';
+const EMBED_ROSTER = 'src/domain/deityCommitEmbed.js';
+
+/**
+ * Writer 4, the INTENT builder — the one persisting writer that is not commit-time and
+ * that spreads the shared picker directly rather than through `commitDeityEmbed`. It is
+ * named separately from the roster because the two stopped being the same file when the
+ * commit side moved to its own leaf.
+ */
+const INTENT_BUILDER = 'src/domain/deitySnapshot.js';
 
 /**
  * The two shared builders, and the files that may name them. `commitDeityEmbed` is
@@ -311,11 +333,14 @@ describe('W-FAITH F2c · THE NO-DOUBLE-COUNT LAW (D1: no site reads both words f
     // provable: because the arm lives INSIDE the seam, a consumer physically cannot
     // hold both words unless it reaches around the seam for the raw key.
     //
-    // F3c added ONE name to this set — `deitySnapshot.js`, which holds the embed
-    // roster. That it is one file rather than four is the shared picker's doing: the
-    // three commit-time writers spread `authoredCharacterEmbedKeys(...)` and never
-    // spell any of the six keys, so the carry widened the COPY surface by a single
-    // module while leaving the READ surface at exactly one.
+    // F3c added ONE name to this set — the module that holds the embed roster. That it
+    // is one file rather than four is the shared picker's doing: the three commit-time
+    // writers spread `authoredCharacterEmbedKeys(...)` and never spell any of the six
+    // keys, so the carry widened the COPY surface by a single module while leaving the
+    // READ surface at exactly one.
+    // ⚠ SUBSTRATE wave 6 MOVED that module (`deitySnapshot.js` → `deityCommitEmbed.js`)
+    // without widening the set — the roster is a symbol at a new address, not a new
+    // copy, and the count on both sides of this assertion is unchanged.
     const readers = SRC_MODULES.filter((rel) => /\bauthoredTemper\b/.test(codeOf(rel)));
     expect(readers).toEqual([
       ...GENERATED_MIRRORS,
@@ -386,6 +411,10 @@ describe('W-FAITH F3c · PROVENANCE (how the authored word reaches each consumer
     }
     // The intent builder spreads the key picker directly — it is not a commit-time
     // writer and carries its own (deliberately different) absent-field defaults.
+    // ⚠ Since SUBSTRATE wave 6 the picker's HOME and the intent builder are different
+    // files, so both are asserted: the leaf must still define it, and writer 4 must
+    // still spread it. Asserting only one of the two would let the other quietly stop.
+    expect(codeOf(INTENT_BUILDER)).toContain(KEY_PICKER);
     expect(codeOf(EMBED_ROSTER)).toContain(KEY_PICKER);
     // ⛔ THE LOAD-BEARING HALF: exactly one module BUILDS a deity embed. An embed
     // literal is recognisable by carrying its own identity beside the axes, so that

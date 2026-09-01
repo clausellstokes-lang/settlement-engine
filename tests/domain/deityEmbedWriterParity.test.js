@@ -65,7 +65,13 @@ import { deityIdOf } from '../../src/domain/worldPulse/pantheon.js';
 // Writer 4 and its shared picker. `deitySnapshotFrom` is BOTH the intent builder
 // the store dispatches through and the restore-from-world path, which is why the
 // carry had to reach it in the same act as the three commit-time writers.
-import { DEITY_AUTHORED_CHARACTER_KEYS, deitySnapshotFrom } from '../../src/domain/deitySnapshot.js';
+// ⚠ TWO ADDRESSES SINCE SUBSTRATE WAVE 6, and the split is the point: the ROSTER lives
+// in the zero-import commit leaf (the eager mutation router imports only that), while
+// writer 4 stays in the read-side module. Importing the roster from its one home rather
+// than through a re-export is what keeps `deityTemperConsumerCensus`'s "exactly one src
+// module names these six keys" arm true.
+import { DEITY_AUTHORED_CHARACTER_KEYS } from '../../src/domain/deityCommitEmbed.js';
+import { deitySnapshotFrom } from '../../src/domain/deitySnapshot.js';
 
 /** The field set every disciplined deity embed carries. */
 const CANONICAL_KEYS = ['_deityRef', 'name', 'alignmentAxis', 'temperamentAxis', 'rankAxis', 'lawAxis'];

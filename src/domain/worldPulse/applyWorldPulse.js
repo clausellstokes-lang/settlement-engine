@@ -4,7 +4,11 @@ import { withActiveCondition } from '../activeConditions.js';
 import { advanceRegionalImpacts, appendWizardNewsEntries, deriveWizardNewsEntriesFromGraphChange, ensureRegionalGraph, ensureWizardNewsFeed, legacyRegionalConditionId, propagateRegionalEvent, setRegionalImpactStatus, syncRelationshipChannelBundle } from '../region/index.js';
 import { deityIdOf } from './pantheon.js';
 // The ONE commit-time embed builder every persisting writer shares (W-FAITH F3c).
-import { commitDeityEmbed } from '../deitySnapshot.js';
+// ⚠ The symbol's one home is now `deityCommitEmbed.js` (SUBSTRATE wave 6, REC-2). This
+// module is not on the eager path, so it pays nothing either way — it is re-pointed
+// because the estate's rule is that the address follows the symbol, and two spellings of
+// one import is how a later reader concludes there are two builders.
+import { commitDeityEmbed } from '../deityCommitEmbed.js';
 import { queueRegionalImpacts, addRegionalChannels, mintDirectedChannel } from '../region/graph.js';
 import { activeSpatialDigest, getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { parkArrivals, drainDueArrivals } from '../spatial/spatialArrival.js';

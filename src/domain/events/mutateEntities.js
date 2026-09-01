@@ -26,7 +26,12 @@ import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 import { reconcileCultImposition } from '../worldPulse/cultImpositionApply.js';
 // The ONE commit-time embed builder every persisting writer shares (W-FAITH F3c /
 // ODQ §866), so the writers cannot drift apart as they once did on `lawAxis`.
-import { commitDeityEmbed } from '../deitySnapshot.js';
+// ⛔⛔ FROM THE ZERO-IMPORT LEAF, NEVER FROM `deitySnapshot.js` — the same first-paint
+// law the cultImpositionApply note above states, measured again at SUBSTRATE wave 6:
+// this module is eager, and reaching the builder through `deitySnapshot.js` dragged the
+// AUTHORING and RESTORE halves (`deitySnapshotFrom`, `worldFaithsForSave`, both lazy-only
+// consumers) into first paint for 653 B. Re-widening this specifier re-spends them.
+import { commitDeityEmbed } from '../deityCommitEmbed.js';
 import { applyTierOutcomeToSettlement } from '../worldPulse/tierOutcomeApply.js';
 import { TIER_ORDER, POPULATION_RANGES, popToTier } from '../../data/constants.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
