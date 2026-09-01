@@ -14,6 +14,37 @@ export const NPC_ALIGNMENTS = Object.freeze([
   'chaotic_neutral', 'lawful_evil', 'neutral_evil', 'chaotic_evil',
 ]);
 
+/**
+ * THE READER'S WORDS FOR THE EIGHT ALIGNMENT SYMBOLS (TE-AGNOSTIC-1, ODQ §857).
+ *
+ * ⛔ THE SYMBOL IS THE CONTRACT AND IT DOES NOT MOVE. Three separate parsers read
+ * the stored string by substring — `warSeatBooks.js` alignmentAxes,
+ * `settlementPolitics.js` and `npcReplacement.js` all ask
+ * `token.includes('lawful' | 'chaotic' | 'good' | 'evil')`, and
+ * warSeatBooks:305 carries the standing warning that a text sweep of those words
+ * breaks all three SILENTLY. The retarget is BY SYMBOL: the transport vocabulary
+ * above is untouched, saved worlds keep reading, same-seed bytes do not move, and
+ * only what the reader SEES changes.
+ *
+ * The product is setting-agnostic by law, so the reader does not get one
+ * publisher's nine-cell grid. Each label names the two axes the engine actually
+ * models: the order axis (orderly / pragmatic / wilful) and the conscience axis
+ * (kindly / detached / ruthless). Every consumer that renders a facet must use
+ * this map for `alignment` rather than humanizing the raw symbol.
+ *
+ * @type {Readonly<Record<string, string>>}
+ */
+export const NPC_ALIGNMENT_LABELS = Object.freeze({
+  lawful_good:     'Orderly and kindly',
+  neutral_good:    'Pragmatic and kindly',
+  lawful_neutral:  'Orderly and detached',
+  true_neutral:    'Pragmatic and detached',
+  chaotic_neutral: 'Wilful and detached',
+  lawful_evil:     'Orderly and ruthless',
+  neutral_evil:    'Pragmatic and ruthless',
+  chaotic_evil:    'Wilful and ruthless',
+});
+
 /** @type {readonly string[]} */
 export const NPC_TEMPERAMENTS = Object.freeze([
   'honest', 'brave', 'compassionate', 'wise', 'loyal', 'generous', 'patient',

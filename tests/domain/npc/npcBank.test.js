@@ -9,7 +9,7 @@
 import { describe, expect, test } from 'vitest';
 import { NPC_PERSONALITY_TRAITS } from '../../../src/data/npcData.js';
 import {
-  NPC_ALIGNMENTS, NPC_TEMPERAMENTS, NPC_ROLE_ARCHETYPES, NPC_GOALS, NPC_SEED_GOALS,
+  NPC_ALIGNMENTS, NPC_ALIGNMENT_LABELS, NPC_TEMPERAMENTS, NPC_ROLE_ARCHETYPES, NPC_GOALS, NPC_SEED_GOALS,
   NPC_GOAL_CATALOG, NPC_FACET_KINDS, ROLE_GOAL_CHAIN,
   npcFacetOf, isBankValid, validateNpcFacet, bankVocabulary,
   goalChainForRole, goalTransitions, roleGoalAffinity, roleInstitutionLegal,
@@ -31,6 +31,21 @@ describe('NPC bank — zero-drift vocabulary mirror', () => {
 
   test('alignment vocab covers every value the engine can seed', () => {
     for (const a of ENGINE_ALIGNMENTS) expect(NPC_ALIGNMENTS).toContain(a);
+  });
+
+  test('TE-AGNOSTIC-1 — the reader label set is EXACTLY TOTAL over the symbol set, and no label leaks the grid', () => {
+    // ODQ §857: the stored SYMBOL is the contract (three parsers read it by
+    // substring) and the reader gets a setting-agnostic LABEL instead. Both
+    // directions are pinned so the split cannot rot: a new symbol with no label
+    // would render as a raw token, and a stale label naming a symbol that no
+    // longer exists would be dead copy nobody could find.
+    expect(Object.keys(NPC_ALIGNMENT_LABELS).sort()).toEqual([...NPC_ALIGNMENTS].sort());
+    // ...and no label may reintroduce the rulebook's own grid words, which is the
+    // whole point of paying for the indirection.
+    for (const [symbol, label] of Object.entries(NPC_ALIGNMENT_LABELS)) {
+      expect(label, symbol).not.toMatch(/lawful|chaotic|\bgood\b|\bevil\b|neutral/i);
+      expect(label.length, symbol).toBeGreaterThan(0);
+    }
   });
 
   test('goal vocab covers every base goal the engine seeds (NPC_SEED_GOALS ⊆ NPC_GOALS)', () => {

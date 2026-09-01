@@ -43,6 +43,7 @@ import {
 } from './npcFacetContract.js';
 export {
   NPC_ALIGNMENTS,
+  NPC_ALIGNMENT_LABELS,
   NPC_FACET_KINDS,
   NPC_GOAL_CATALOG,
   NPC_GOALS,

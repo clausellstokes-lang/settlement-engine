@@ -98,7 +98,13 @@ describe('NPC lifecycle actions', () => {
       />,
     );
 
-    expect(screen.getByRole('option', { name: 'Lawful good' })).toBeTruthy();
+    // TE-AGNOSTIC-1 (ODQ §857): the alignment option shows the SETTING-AGNOSTIC
+    // label, never the humanized symbol. The symbol itself is untouched (three
+    // parsers read it by substring), so this arm pins BOTH halves of that split:
+    // the reader sees the label, and neither the raw symbol nor the rulebook
+    // grid's own words reach the page.
+    expect(screen.getByRole('option', { name: 'Orderly and kindly' })).toBeTruthy();
+    expect(screen.queryByRole('option', { name: 'Lawful good' })).toBeNull();
     expect(screen.getByRole('option', { name: 'Away on a journey' })).toBeTruthy();
     expect(screen.getByRole('option', { name: 'In seclusion' })).toBeTruthy();
     expect(screen.getByRole('combobox', { name: /set role archetype/i })).toBeTruthy();
