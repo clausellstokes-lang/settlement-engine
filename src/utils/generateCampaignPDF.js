@@ -31,7 +31,10 @@ import { realmArcLines } from '../domain/display/realmArcSummary.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 
 /** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
-function durationBand(ms) {
+// Exported for generateWorldBook, which reports the same campaign-scope completion
+// event. The settlement exporter keeps its own copy (a separate chunk); a THIRD
+// hand-inlined copy here is what this export exists to prevent.
+export function durationBand(ms) {
   const n = Number(ms);
   if (!Number.isFinite(n) || n < 0) return 'unknown';
   if (n < 5000) return 'lt_5s';
