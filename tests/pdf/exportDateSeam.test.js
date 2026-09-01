@@ -221,3 +221,72 @@ describe('campaign PDF — member ids resolve across the id-type seam', () => {
     expect(painted).not.toContain('grimhold');
   });
 });
+
+/**
+ * THE FOOTER. Two defects in one mechanism, and one cure removes the habitat of both.
+ *
+ * (1) `footer(d, campaignName, pageN, totalPagesHint)` has always accepted a total, and
+ *     renders "Page N of M" when given one — but ALL ELEVEN call sites passed three
+ *     arguments, so the parameter was dead and the reader never saw a page count.
+ * (2) The chapter calls stamped footers by hand, and `buildNetworkAppendix` can return
+ *     WITHOUT advancing pageN (it early-returns when getAllModifiers throws, and when no
+ *     settlement has network effects) while its caller stamped a footer unconditionally.
+ *     The previous chapter had already stamped that same page, so it was painted TWICE,
+ *     one footer over the other. The living-world call site showed the correct shape —
+ *     `if (rlw.pageN !== pageN) { … footer(…) }` — so the file already disagreed with
+ *     itself about how this is done.
+ *
+ * The cure is a SINGLE WRITER: the per-chapter stamps are gone, and every page is
+ * footered exactly once in one final pass, after the document is complete and the total
+ * is therefore knowable. A double stamp is now unreachable by construction rather than
+ * by a guard someone must remember to copy, and "of M" is exact rather than a
+ * placeholder patched up afterwards. Page 1 (the cover) stays unfootered, as before.
+ */
+describe('campaign PDF — every page is footered exactly once, and says its page count', () => {
+  function member(id, name, settlement) {
+    return { id, name, settlement: { name, tier: 'town', population: 1200, npcs: [], neighbourNetwork: [], ...settlement } };
+  }
+
+  function paint(campaign, saves, file) {
+    try {
+      generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026' });
+      return paintedText(file);
+    } finally {
+      rmSync(file, { force: true });
+    }
+  }
+
+  // Two members with NO neighbour links: settlements.length > 1 (so the appendix is
+  // attempted) but no settlement has network effects (so it early-returns without
+  // advancing the page) — the exact shape that double-stamped.
+  const NO_EFFECTS = [member('n1', 'Ashford'), member('n2', 'Grimhold')];
+
+  test('the page count is rendered — the total is no longer a dead parameter', () => {
+    const painted = paint({ id: 'f1', name: 'Footer Count', settlementIds: ['n1', 'n2'] }, NO_EFFECTS, 'campaign-footer-count.pdf');
+    expect(painted).toMatch(/Page \d+ of \d+/);
+  });
+
+  test('the printed total equals the number of pages the reader can turn to', () => {
+    const painted = paint({ id: 'f2', name: 'Footer Total', settlementIds: ['n1', 'n2'] }, NO_EFFECTS, 'campaign-footer-total.pdf');
+    const totals = [...painted.matchAll(/Page \d+ of (\d+)/g)].map(m => Number(m[1]));
+    expect(totals.length).toBeGreaterThan(0);
+    // One total, agreed by every page.
+    expect(new Set(totals).size).toBe(1);
+    // The highest page number printed is that total (the cover carries no footer,
+    // so the footered pages run 2..total).
+    const pages = [...painted.matchAll(/Page (\d+) of \d+/g)].map(m => Number(m[1]));
+    expect(Math.max(...pages)).toBe(totals[0]);
+  });
+
+  test('no page is stamped twice (the appendix early-return no longer double-footers)', () => {
+    const painted = paint({ id: 'f3', name: 'Footer Once', settlementIds: ['n1', 'n2'] }, NO_EFFECTS, 'campaign-footer-once.pdf');
+    const pages = [...painted.matchAll(/Page (\d+) of \d+/g)].map(m => Number(m[1]));
+    expect(pages.length).toBeGreaterThan(0);
+    // anchored: pages were demonstrably footered, so this compares real stamps.
+    expect(pages.length).toBe(new Set(pages).size);
+    // And every footered page from 2..max is present exactly once — no gaps either.
+    expect([...new Set(pages)].sort((a, b) => a - b)).toEqual(
+      Array.from({ length: Math.max(...pages) - 1 }, (_, i) => i + 2),
+    );
+  });
+});
