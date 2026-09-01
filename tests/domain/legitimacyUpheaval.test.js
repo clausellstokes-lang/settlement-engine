@@ -344,3 +344,105 @@ describe('D4 ATTEMPT — the escalation beat is REACHABLE, and a sampled corpus 
     expect(escalationsFor({ score: 35, rules: LIT })).toHaveLength(1);
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SAME-SEED WINDOW (SHIFT RECORD SR-c, 2026-09-01, the WAR landing's mini-window
+// R-T4-MINIWIN on the base `105c65cd1`). ONE CAUSE: the coup gate's unbounded product.
+//
+// CAUSE. `coupSpawnGate` is the ONE gate in `stressorGates.js` that does not compose through
+// `gateResult`, so for its whole life its `probabilityMult` escaped `clampMult` while all
+// nineteen siblings were bounded to [GATE_MULT_MIN, GATE_MULT_MAX] = [0.1, 3]. SEAT-2b
+// clamped only the FACTOR it was adding and recorded the gate's unboundedness as a deferred
+// declared shift (laneT4-receipt.md:384). The cure composes the whole product through the
+// bound and retires the now-redundant factor-level clamp.
+//
+// ⛔ MEASURED MOVEMENT: ZERO — AND THAT FALSIFIES THE PREMISE OF THE DEFERRAL ITSELF.
+// :384 deferred the cure because "curing it is a same-seed shift on every world with a
+// contested seat". It is not, and the input set is small enough to settle by enumeration
+// rather than by sampling: `bandMult` has 2 values, `authorityMult` 4, `sensitivity` 1 when
+// dark and 8 when lit. Driven through the REAL gate over a 1,848-cell grid (11 governing
+// categories x 7 legitimacy scores x 12 authority scores x dark/lit), the dark products
+// occupy [0.21, 1.5] with 8 distinct values and the lit ones [0.1785, 1.875] with 49 — every
+// one already inside the bound. Base-vs-tip on that grid is BIT-IDENTICAL, 1,848 rows.
+// So SR-c is a STRUCTURAL cure with an executed zero-movement proof: no golden re-records,
+// no probe arm should see it (A, B and C all bit-identical), and it is filed as a SHIFT
+// RECORD anyway so the window's bookkeeping stays complete and falsifiable.
+//
+// ⛔ THE STOP: the extremes below are a RATCHET, not decoration. If a later factor pushes a
+// reachable product past 1.875 the head-room shrinks and this pin reds — which is the whole
+// point of curing the bound before the factor that would have discovered it arrives.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** The gate's own bound. Anchored below to a real gate output, never to this transcription. */
+const GATE_MULT_MIN = 0.1;
+const GATE_MULT_MAX = 3;
+
+const COUP_CATEGORIES = Object.freeze(['government', 'noble', 'military', 'religious',
+  'merchant', 'civic', 'craft', 'labor', 'outsider', 'other', 'criminal']);
+const COUP_SCORES = Object.freeze([0, 10, 20, 29, 30, 40, 44]);
+const COUP_AUTHORITIES = Object.freeze([0, 10, 14, 15, 20, 29, 30, 40, 49, 50, 60, 99]);
+
+function coupSnap(category, score, authority, lit) {
+  return {
+    worldState: { tick: 4, stressors: [], ...(lit ? { simulationRules: LIT } : {}) },
+    regionalGraph: { edges: [], channels: [] },
+    byId: new Map([['oak', {
+      settlement: settlementWith(category, score),
+      causal: { scores: { ruling_authority: authority } },
+    }]]),
+  };
+}
+
+/** Every reachable product, driven through the real gate. Module scope: the describes stay straight-line. */
+function coupGrid(lit) {
+  const out = [];
+  for (const category of COUP_CATEGORIES) {
+    for (const score of COUP_SCORES) {
+      for (const authority of COUP_AUTHORITIES) {
+        const r = STRESSOR_SPAWN_GATES.coup_detat(coupSnap(category, score, authority, lit), pressure);
+        if (r) out.push(r.probabilityMult);
+      }
+    }
+  }
+  return out;
+}
+
+describe('SR-c — the coup gate composes through the estate bound (the :384 cure)', () => {
+  test('the bound literals are anchored to a real gate output, not to a transcription', () => {
+    // `insurgencyGate`'s occupied rows saturate at exactly GATE_MULT_MAX — the estate's own
+    // measurement, already asserted twice above. Reading it here means a moved bound reds
+    // this suite instead of silently rewriting what "bounded" means.
+    const saturated = STRESSOR_SPAWN_GATES.insurgency(
+      snapshotWith({ score: 20, stressors: occupationStressor(), occupations: { oak: { resistance: 1 } } }),
+      pressure,
+    );
+    expect(saturated.probabilityMult).toBe(GATE_MULT_MAX);
+    expect(GATE_MULT_MIN).toBeLessThan(GATE_MULT_MAX);
+  });
+
+  test('every reachable coup multiplier lands inside the bound, dark and lit', () => {
+    const dark = coupGrid(false);
+    const lit = coupGrid(true);
+    // ANTI-VACUITY FIRST: a grid the gate refused everywhere would pass this trivially.
+    expect(dark).toHaveLength(924);
+    expect(lit).toHaveLength(924);
+    for (const v of dark.concat(lit)) {
+      expect(v).toBeGreaterThanOrEqual(GATE_MULT_MIN);
+      expect(v).toBeLessThanOrEqual(GATE_MULT_MAX);
+    }
+  });
+
+  test('the bound is the IDENTITY today, and the head-room to it is the ratchet', () => {
+    const dark = coupGrid(false);
+    const lit = coupGrid(true);
+    // The measured extremes of the whole reachable set. These are the numbers SR-c records:
+    // the clamp cannot have moved anything, because nothing ever reached it.
+    expect(Math.min(...dark)).toBe(0.21);
+    expect(Math.max(...dark)).toBe(1.5);
+    expect(Math.min(...lit)).toBeCloseTo(0.1785, 10);
+    expect(Math.max(...lit)).toBe(1.875);
+    // …and the grid is genuinely varied, so the extremes are not one value repeated.
+    expect(new Set(dark).size).toBe(8);
+    expect(new Set(lit).size).toBe(49);
+  });
+});

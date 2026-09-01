@@ -975,16 +975,29 @@ function coupSpawnGate(snapshot, pressure) {
   const authority = Number.isFinite(ra) ? ra : 50;
   const bandMult = score < 30 ? 1 : 0.35; // rare at Contested, likely at Crisis
   const authorityMult = authority < 15 ? 1.5 : authority < 30 ? 1.2 : authority < 50 ? 1 : 0.6;
-  // W-SEAT D4 (SEAT-2b) — the per-archetype sensitivity, and the ONLY thing this car adds
-  // to this gate. The band scaling §736 asks for is ALREADY HERE as `bandMult`; adding a
-  // second band multiplier would be a second resolver for one quantity and a double-count.
-  // ⚠ AND THE SENSITIVITY IS THE ONLY ONE OF THE THREE FACTORS THAT IS CLAMPED, on purpose:
-  // this gate is the one gate in the file that does NOT compose through `gateResult`, so
-  // nothing here runs through `clampMult` and its product is unbounded. A new factor may not
-  // be the one that discovers that. `sensitivity` is 1 when dark, so `x * 1` is bit-exact.
-  const sensitivity = clampMult(upheavalSensitivity(snapshot, settlement, score));
+  // W-SEAT D4 (SEAT-2b) — the per-archetype sensitivity. The band scaling §736 asks for is
+  // ALREADY HERE as `bandMult`; adding a second band multiplier would be a second resolver
+  // for one quantity and a double-count.
+  const sensitivity = upheavalSensitivity(snapshot, settlement, score);
+  // ⭐ THE PRODUCT IS BOUNDED LIKE EVERY OTHER GATE'S — the :384 cure (R-T4-MINIWIN, SHIFT
+  // RECORD SR-c). This is the one gate in the file that does not compose through
+  // `gateResult`, so for its whole life its product escaped `clampMult` while all nineteen
+  // siblings were bounded to [0.1, 3]. SEAT-2b clamped its new FACTOR alone and recorded the
+  // gate's unboundedness as a deferred declared shift; the mini-window closes it at the
+  // composition, where the invariant actually lives, and the factor-level clamp is retired as
+  // redundant rather than left as a second bound on one quantity.
+  //
+  // ⛔ AND IT MOVES NOTHING TODAY — MEASURED, WHICH FALSIFIES THE PREMISE OF ITS OWN
+  // DEFERRAL. laneT4-receipt.md:384 deferred the cure because "curing it is a same-seed shift
+  // on every world with a contested seat". The input set is finite and was enumerated WHOLE:
+  // `bandMult` has 2 values, `authorityMult` 4, `sensitivity` 1 dark and 8 lit. All 8 dark
+  // products fall in [0.21, 1.5] and all 64 lit ones in [0.1785, 1.875] — every one already
+  // inside [0.1, 3], so the clamp is the identity on every reachable state and the dark
+  // products are bit-identical through it. The top cell has 2.00x of head-room before the
+  // bound bites. So this is a STRUCTURAL cure with an executed zero-movement proof, not a
+  // same-seed mover; the pin lives in tests/domain/stressorGates.test.js.
   return {
-    probabilityMult: bandMult * authorityMult * sensitivity,
+    probabilityMult: clampMult(bandMult * authorityMult * sensitivity),
     reasons: [
       'Legitimacy is openly contested; the seat stands exposed.',
       `Governing authority ${authority < 30 ? 'is crumbling' : authority < 50 ? 'is strained' : 'still holds'}.`,
