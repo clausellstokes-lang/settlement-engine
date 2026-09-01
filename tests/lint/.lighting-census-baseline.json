@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "2efcd0fef335c2504c2469cc943b6d488c9c5e2b",
-  "measuredBy": "W-OPS-O5",
+  "measuredAtSha": "33139e602931acb3e899c7be23d5bd6cd805c2e3",
+  "measuredBy": "W-OPS-O7",
   "date": "2026-09-01",
-  "note": "car O5 adds one arm to tests/domain/infiltrationDrift.test.js — the W-LIVES citation guard, which is why the third build commit exists; suites unchanged at 9",
-  "files": 2456,
+  "note": "car O7 adds tests/domain/operationsVoice.test.js — the operations voice battery: 8 suites, 57 statically registered one-line-literal arms",
+  "files": 2457,
   "parked": 370,
-  "credited": 2086,
-  "titles": 21336,
-  "suiteTitles": 5833
+  "credited": 2087,
+  "titles": 21393,
+  "suiteTitles": 5841
 }
