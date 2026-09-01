@@ -22,9 +22,14 @@
  * Every other mover on this chain is dark behind a virtual `<x>Enabled` flag. This
  * one is NOT, and that is deliberate on two independent grounds:
  *
- *   1. §840 chartered a HARD CEILING — `subsystemRowsVirtual.js` sits at exactly
- *      800/800 and NO further virtual flag may land estate-wide until TE-VIRT-1's
- *      decomposition car does. "Any density successor" is named in that ruling.
+ *   1. §840 chartered a HARD CEILING — at this car's commit `subsystemRowsVirtual.js`
+ *      sat at exactly 800/800 and NO further virtual flag could land estate-wide
+ *      until TE-VIRT-1's decomposition car did; "any density successor" is named in
+ *      that ruling. ⭐ THAT CEILING IS DISCHARGED (TE-VIRT-1 landed the
+ *      decomposition at the ENGINE-HYGIENE landing; the file measures 282/800), so
+ *      the estate-wide block is HISTORY and this clause is a record of why the car
+ *      chose as it did — NOT a live blocker for any reader. Ground 2 below was
+ *      always the load-bearing half and is untouched by the discharge.
  *   2. The density law already HAS its dormancy gate, and it is a better one.
  *      `rollsRegisterVii(settlement.config)` reads the version the world was BORN
  *      under (`_densityLawVersion`), which travels in the persisted config beside

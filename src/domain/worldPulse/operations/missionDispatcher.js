@@ -67,10 +67,13 @@
  * (DESIGN_W_OPS §6), and lighting it is the CR-WR10-C VIRTUAL-FLAG MINT — one by-name
  * `rules.missionDispatcherEnabled === true` read, a manifest entry in
  * `ENGINE_GATED_VIRTUAL_RULE_KEYS`, an AUTHORED row in `VIRTUAL_SUBSYSTEM_ROWS`, and a
- * dormancy fence, ALL IN ONE COMMIT. ⛔ That mint is BLOCKED at this tip and the blocker is
- * arithmetic, not doctrine: `subsystemRowsVirtual.js` sits at 800/800 effective lines, so
- * the authored row cannot be added until that file is decomposed. Naming the wall here is
- * how the flag car meets a known cost instead of discovering one.
+ * dormancy fence, ALL IN ONE COMMIT. ⭐ THE WALL THIS HEADER NAMED IS GONE: it read
+ * "BLOCKED — `subsystemRowsVirtual.js` sits at 800/800 effective lines, so the authored
+ * row cannot be added until that file is decomposed", and TE-VIRT-1's decomposition car
+ * did exactly that at the ENGINE-HYGIENE landing — the file is 282/800 and the W-OPS
+ * family has its own reserved leaf, `certification/subsystemRowsOps.js`, to author into.
+ * Naming the CURED wall here is still how the flag car meets a known cost instead of
+ * discovering one: the cost is now the four-part mint above, and nothing else.
  *
  * PURE: no Date, no Math.random, no store, no I/O, no mutation, no world read. Every input
  * arrives as an argument.

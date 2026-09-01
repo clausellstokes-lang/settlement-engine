@@ -11,9 +11,14 @@
  * `docs/DESIGN_W_OPS.md` §6: "Doors: the inherited ES/errand stack +
  * `missionDispatcherEnabled` and `infiltrationDepthEnabled` (virtual, dark by
  * default, lit in full simulation). Dark ⇒ zero keys written ⇒ byte-identical."
- * Neither is built anywhere in the estate yet — the volume is designed, not
- * landed — so this home is reserved on the strength of a chartered design, which
- * is exactly the case the tail slot exists for.
+ *
+ * ⭐ ONE OF THE TWO IS NOW BUILT-AND-DARK, measured at this landing rather than
+ * assumed: `src/domain/worldPulse/operations/missionDispatcher.js` exists (W-OPS
+ * O1), names `missionDispatcherEnabled` as its door in its own header, and is
+ * pinned to an EMPTY src importer set by `tests/domain/missionDispatcher.test.js`
+ * — so its home is reserved against a landed seam, not only a chartered design.
+ * `infiltrationDepthEnabled` is still design-only, and for it this leaf is the
+ * chartered-design case the tail slot exists for.
  *
  * ⚠ THE ANCESTOR ROW STAYS WHERE IT IS, DELIBERATELY. W-OPS joins the ES charter
  * "by EXTENSION rather than collision", the mission dispatcher is named as "ES's
