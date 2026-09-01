@@ -271,9 +271,9 @@ export const DISPATCHABLE_MISSION_KINDS = Object.freeze(
  * every bound row.
  *
  * ⭐ THE FIFTH SEAM STAYS PINNED ABSENT AND ITS ROW STAYS. §802 R1's willingness door has
- * landed NOWHERE — the census measured zero sites in `src/` and zero in `tests/` — so
- * wiring it would be minting a second spelling of a law nobody has written. The census
- * keeps its row, and the day W-LIVES lands it, this reds again for the same good reason.
+ * landed NOWHERE A PRODUCER READS IT — the census scans `src/` outside `operations/`, where
+ * O2's `WILLINGNESS_KIND` and its tests name the word unwired — so wiring it would mint a
+ * second spelling of a law nobody has written; the day W-LIVES lands it, this reds again.
  */
 export const ACCEPTANCE_SEAMS = Object.freeze([
   Object.freeze({
