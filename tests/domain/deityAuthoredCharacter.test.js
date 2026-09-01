@@ -214,17 +214,17 @@ describe('W-FAITH F1c · the legacy shape is untouched (absence is the whole bac
     expect(shown).toEqual([]);
   });
 
-  test('EXACTLY ONE of the six claims a mechanical effect — the one the engine can now hear', () => {
-    // ⚠ FLIPPED AT W-FAITH F3c, and the flip is the point rather than an upkeep
-    // edit. F1c landed all six as `presentation` and that was MEASURED, not assumed:
-    // the embed writers copied a named key list that omitted them, so no engine
-    // consumer could see an authored value. F3c carried the six into all four
-    // writers (ODQ §866), and one of them — `authoredTemper` — has a live reader on
-    // the other side, so its label moved with the truth rather than after it.
-    //
-    // The other five stay presentation, and that is equally measured: they reach the
-    // embed but nothing reads them for effect until W-FAITH F4c wires the channels.
-    // A field is mechanical when a consumer moves, not when it becomes reachable.
+  test('EXACTLY FIVE of the six claim a mechanical effect — the ones the engine can now hear', () => {
+    // ⚠ FLIPPED AT W-FAITH F3c AND AGAIN AT F4c, and both flips are the point
+    // rather than upkeep edits. F1c landed all six as `presentation` and that was
+    // MEASURED: the embed writers copied a named key list that omitted them, so no
+    // engine consumer could see an authored value. F3c carried the six into all
+    // four writers (ODQ §866) and `authoredTemper` gained its live reader; F4c
+    // act 2 (`be6bb24c5`) then wired the boon/bane channels to the causal
+    // substrate and promoted the four channel keys with executable claim probes.
+    // A field is mechanical when a consumer moves, not when it becomes reachable —
+    // which is exactly why `characterAxes` alone stays presentation here: its
+    // readers today are the flaw register and display, never a causal writer.
     //
     // ⭐⭐ FLIPPED A SECOND TIME AT THE SUBSTRATE COUPLING, AND THE SECOND FLIP WAS
     // OWED BY F4c ITSELF. F4c act 2 wired the four boon/bane keys to real causal
@@ -240,15 +240,27 @@ describe('W-FAITH F1c · the legacy shape is untouched (absence is the whole bac
     // consumer MOVES on the value. A field is mechanical when a consumer moves, not
     // when a reader exists. Lighting that road is W-FAITH car 6's act, and its bill
     // includes this label.
+    //
+    // ⚠ REPAIRED AT W-FAITH F7c: this arm still spelled the pre-F4c truth
+    // (exactly one) and was RED at the clean F6c base — measured in a clean
+    // archive of 65d2e9ade, not assumed. F4c's affected set did not include this
+    // suite, so the stale claim survived two cars unseen.
+    //
+    // ⚠ AT THE COUPLED TIP THE PICK WAS ASSERTION-NEUTRAL: the substrate coupling had
+    // already repaired the BODY on this line (the paragraph above), so what W-FAITH F7c
+    // contributes here is the truthful TITLE and this provenance. Both records are kept
+    // because they describe two different lines, and dropping either would leave a
+    // reader unable to say who repaired what.
     const six = ['authoredTemper', 'characterAxes', 'boonChannel', 'boonStrength', 'baneChannel', 'baneStrength'];
     expect(six.filter((key) => manifestField(key).effect === 'mechanical')).toEqual([
       'authoredTemper', 'boonChannel', 'boonStrength', 'baneChannel', 'baneStrength',
     ]);
     expect(six.filter((key) => manifestField(key).effect === 'presentation')).toEqual(['characterAxes']);
-    // The mechanical one owes an executable claim; the promotion is not a label
-    // change. tests/domain/customContentMechanicalClaims.test.js holds that probe,
-    // and its exact-key assertion is what forces this pair to stay honest.
+    // The mechanical ones owe executable claims; a promotion is not a label
+    // change. tests/domain/customContentMechanicalClaims.test.js holds those
+    // probes, and its exact-key assertion is what forces this pair to stay honest.
     expect(manifestField('authoredTemper').consumers).toContain('disposition');
+    expect(manifestField('boonChannel').consumers).toContain('causalState');
   });
 });
 
