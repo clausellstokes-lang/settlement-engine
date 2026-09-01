@@ -27,6 +27,7 @@
 import { describe, test, expect, afterEach, beforeEach, vi } from 'vitest';
 import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import { faithChapterVisible } from '../../src/pdf/variants.js';
+import { track, EVENTS } from '../../src/lib/analytics.js';
 
 afterEach(cleanup);
 
@@ -275,5 +276,33 @@ describe('SettlementDetail handlePdfExport — W4f campaign/faith threading', ()
       hasLiveWorld: !!options.campaign,
       faithUnlocked: options.faithUnlocked,
     })).toBe(false);
+  });
+});
+
+/**
+ * THE FUNNEL'S DENOMINATOR, PROVEN THROUGH A MOUNTED SURFACE. `PDF_EXPORT_CLICKED`
+ * was a frozen constant with a dictionary row, an edge-bundle mirror and a
+ * name-assertion in tests/lib/analytics.test.js — and no emitter anywhere in src/,
+ * so `PDF_EXPORT_COMPLETED` counted successes against nothing. A source scan guards
+ * the class (tests/lib/analytics.test.js); this pins the behaviour on a real export
+ * click, through the same mounted SettlementDetail the threading pins above drive.
+ *
+ * It must fire BEFORE the exporter is reached: the export surfaces load the PDF
+ * module by dynamic import, so an emit inside the exporter would miss exactly the
+ * failure a denominator exists to reveal — a chunk that never loads.
+ */
+describe('an export click reports intent (the funnel denominator)', () => {
+  test('clicking export emits PDF_EXPORT_CLICKED with the settlement scope', async () => {
+    storeState.auth = { tier: 'premium', user: { id: 'u1' } };
+    // The mocked track is a file-level spy shared by every test above, so clear it
+    // first — otherwise "exactly one" would count this file's earlier exports and
+    // the assertion would mean nothing.
+    track.mockClear();
+    await mountAndExport();
+    const clicked = track.mock.calls.filter(([name]) => name === EVENTS.PDF_EXPORT_CLICKED);
+    // anchored: exactly one intent per click — not zero, and not a double-fire that
+    // would inflate the denominator against COMPLETED.
+    expect(clicked).toHaveLength(1);
+    expect(clicked[0][1]).toMatchObject({ scope: 'settlement' });
   });
 });

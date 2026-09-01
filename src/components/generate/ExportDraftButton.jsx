@@ -27,6 +27,7 @@ import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import { sans, FS, SP, swatch } from '../theme.js';
+import { track, EVENTS } from '../../lib/analytics.js';
 
 // Lazy so the PDF chunk only loads when the user actually exports.
 const generateSettlementPDF = (...args) =>
@@ -54,6 +55,12 @@ export default function ExportDraftButton() {
     try {
       // Read live at export time so refines/edits since open are included.
       const s = useStore.getState();
+      // THE FUNNEL'S DENOMINATOR. `PDF_EXPORT_COMPLETED` fires from inside the
+      // exporter; this is its intent counterpart, and it was defined, documented
+      // and mirrored to the edge bundle while being emitted NOWHERE. It fires
+      // HERE, before the exporter's dynamic import, so a chunk that never loads
+      // still counts as an export the user asked for.
+      track(EVENTS.PDF_EXPORT_CLICKED, { scope: 'settlement' });
       await generateSettlementPDF(s.settlement, {
         aiSettlement: s.aiSettlement,
         aiDailyLife: s.aiDailyLife,

@@ -17,6 +17,9 @@ import {
   EVENTS, track, Funnel, markAnonGenerated, hasPriorAnonGeneration,
 } from '../../src/lib/analytics.js';
 import { setConsent } from '../../src/lib/consent.js';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join, relative } from 'node:path';
 
 let providerCalls;
 let originalProvider;
@@ -201,5 +204,65 @@ describe('Tier 8.8 — Provider dispatch', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     expect(() => track(EVENTS.HOMEPAGE_VIEW)).not.toThrow();
     expect(warn).toHaveBeenCalled();
+  });
+});
+
+/**
+ * THE EXPORT FUNNEL HAD A NUMERATOR AND NO DENOMINATOR.
+ *
+ * `PDF_EXPORT_CLICKED` is a frozen constant (analyticsEvents.js:88), is mirrored into
+ * the edge bundle, has a row in the generated dictionary, and is asserted by name in
+ * the schema pin above — and was EMITTED NOWHERE in src/. Its counterpart
+ * `PDF_EXPORT_COMPLETED` fires from inside both exporters, so the funnel could report
+ * successes against nothing. The taxonomy doc states the relationship as settled fact
+ * ("existing `pdf_export_clicked` = intent, this = success",
+ * docs/analytics-event-taxonomy.md:186), which made the gap invisible to a reader:
+ * the documentation asserted a denominator that did not exist.
+ *
+ * A constant, a doc row and a name-assertion are exactly the three things that can all
+ * be green while nothing emits, so the guard here is a SOURCE SCAN over the emitters:
+ * every component that actually invokes an exporter must also emit the intent event.
+ * That is the property that was false, and it is the one a future export surface can
+ * silently break by copying a handler without the emit.
+ */
+describe('the PDF export funnel has a denominator (PDF_EXPORT_CLICKED is emitted)', () => {
+  const EXPORT_CALL = /\bawait\s+generate(SettlementPDF|CampaignPDF|WorldBook)\s*\(/;
+
+  function walkComponents(dir, out = []) {
+    for (const entry of readdirSync(dir)) {
+      const p = join(dir, entry);
+      if (statSync(p).isDirectory()) walkComponents(p, out);
+      else if (/\.jsx?$/.test(entry)) out.push(p);
+    }
+    return out;
+  }
+
+  const COMPONENTS = join(
+    dirname(fileURLToPath(import.meta.url)), '..', '..', 'src', 'components',
+  );
+  const exportingFiles = walkComponents(COMPONENTS)
+    .filter(p => EXPORT_CALL.test(readFileSync(p, 'utf8')))
+    .map(p => relative(join(COMPONENTS, '..', '..'), p).replace(/\\/g, '/'))
+    .sort();
+
+  it('the scan finds the export surfaces at all (the guard is not vacuous)', () => {
+    // anchored: if this ever drops to zero the scan has stopped matching and every
+    // assertion below would pass over an empty list.
+    expect(exportingFiles.length).toBeGreaterThanOrEqual(5);
+  });
+
+  it('every component that invokes an exporter emits PDF_EXPORT_CLICKED', () => {
+    const missing = exportingFiles.filter(rel => !readFileSync(
+      join(COMPONENTS, '..', '..', rel), 'utf8',
+    ).includes('PDF_EXPORT_CLICKED'));
+    expect(missing).toEqual([]);
+  });
+
+  it('the event is a real registry constant, not a bare string at the call site', () => {
+    for (const rel of exportingFiles) {
+      const src = readFileSync(join(COMPONENTS, '..', '..', rel), 'utf8');
+      expect(src, `${rel} must emit via EVENTS.PDF_EXPORT_CLICKED`)
+        .toMatch(/EVENTS\.PDF_EXPORT_CLICKED/);
+    }
   });
 });
