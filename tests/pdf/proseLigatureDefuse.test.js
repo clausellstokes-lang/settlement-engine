@@ -45,6 +45,7 @@ describe('ProseText — plain segments render verbatim', () => {
     const text = collectText(tree).join('');
     // Byte-identical: the chokepoint is transparent, and inserts no joiner.
     expect(text).toBe('The first fleet sailed at dawn.');
+    // anchored: the toBe above pins the whole leaf text — a dead boundary reds there.
     expect(text).not.toContain(ZWNJ);
   });
 });
@@ -60,6 +61,7 @@ describe('EntityRef — labels render verbatim', () => {
     const node = EntityRef({ id: 'faction.goldfinch', index });
     const text = collectText(node).join('');
     expect(text).toBe('The Goldfinch Guild');
+    // anchored: the toBe above pins the whole leaf text — a dead boundary reds there.
     expect(text).not.toContain(ZWNJ);
   });
 
@@ -67,6 +69,7 @@ describe('EntityRef — labels render verbatim', () => {
     const node = EntityRef({ id: 'faction.gone', index, fallback: 'the conflict' });
     const text = collectText(node).join('');
     expect(text).toBe('the conflict');
+    // anchored: the toBe above pins the whole leaf text — a dead boundary reds there.
     expect(text).not.toContain(ZWNJ);
   });
 });
@@ -114,6 +117,7 @@ describe('NotableNPCs — body prose renders verbatim (FullCard)', () => {
     const tree = NotableNPCs({ settlement: {}, vm: vmWithNpc(npc) });
     const text = deepText(tree).join("");
     // The blurb's f-clusters (fortified, fields, stiff, fletcher) survive intact.
+    // anchored: the two toContain below prove the blurb and name rendered.
     expect(text).not.toContain(ZWNJ);
     expect(text).toContain('fortified gatehouse');
     // The name ("Griffin" = the old ffi case) reaches the leaf verbatim.
@@ -132,6 +136,7 @@ describe('NotableNPCs — body prose renders verbatim (FullCard)', () => {
     const tree = NotableNPCs({ settlement: {}, vm: vmWithNpc(npc) });
     const text = deepText(tree).join("");
     // Every body field's content reaches the leaf verbatim, joiner-free.
+    // anchored: the four toContain below prove every body field rendered.
     expect(text).not.toContain(ZWNJ);
     expect(text).toContain('Fiercely efficient');
     expect(text).toContain('fitted officer coat');

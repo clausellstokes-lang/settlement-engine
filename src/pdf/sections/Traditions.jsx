@@ -12,8 +12,8 @@
  * the chapter remains a declared additive section for settlements with a mirror.
  *
  * The register uses the TEXT motif label (element · act), not the tab's unicode
- * glyph — the embedded PDF fonts do not cover the dingbat set, so a glyph would
- * print as a missing box. The motif reads in words instead.
+ * glyph — no embedded face covers the dingbat set, and react-pdf substitutes a
+ * non-embedded Helvetica and truncates: ✦ would print "&", NOT a box. Words instead.
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
