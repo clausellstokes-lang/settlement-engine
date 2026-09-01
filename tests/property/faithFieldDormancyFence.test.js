@@ -89,6 +89,7 @@ const FAITH_FIELD_SET = Object.freeze([
   'src/domain/worldPulse/deityFlaws.js', // W-FAITH F5c — the vice-pole flaw register joins the set: its lawful importers are the two leaves beside it (set members, so the census skips them), and any OTHER production importer reds in FENCE 1 exactly as an undeclared field consumer would
   'src/domain/worldPulse/faithChannelBindings.js',
   'src/domain/worldPulse/faithField.js',
+  'src/domain/worldPulse/faithTuningSurface.js', // W-FAITH F6c — the tuning signature surface joins the set: its lawful importers are the three leaves it feeds (set members, so the census skips them), and a display module reaching straight for an unsigned tuning table reds in FENCE 1 exactly as an undeclared field consumer would
   'src/domain/worldPulse/faithWitnessSource.js',
 ]);
 
@@ -237,17 +238,19 @@ describe('FENCE 2 — the purity pin: no clock, no rng, no global state', () => 
   // whose `each` table is a named binding, and a parked fence is one the census can
   // no longer prove runs — which is precisely the failure this fence guards against.
   test('no leaf in the set reads a wall-clock or an rng', () => {
-    // 4 at this composition: SUBSTRATE wave 6 split the binding leaf out of the field,
-    // and W-FAITH F5c joined the flaw register — so the purity pin covers both. A
-    // variance-shaped "capricious" modulation smuggling an rng in reds here.
+    // 5 at this composition, and each member joined for its own reason: SUBSTRATE wave 6
+    // split the binding leaf out of the field; W-FAITH F5c joined the flaw register (a
+    // variance-shaped "capricious" modulation smuggling an rng in reds here); W-FAITH F6c
+    // joined the tuning signature surface (a "tuned" value smuggling a clock or rng draw
+    // in reds here).
     // ⛔ THE COUNT IS PINNED RATHER THAN DERIVED so a member silently dropping out of
     // FAITH_FIELD_SET cannot quietly shrink what this arm scans — the anti-vacuity guard
     // is the point.
-    expect(SOURCES.length, 'the source list is empty — this arm is scanning nothing').toBe(4);
+    expect(SOURCES.length, 'the source list is empty — this arm is scanning nothing').toBe(5);
     for (const { member, src } of SOURCES) {
       // Comment-stripped so a prose mention of Math.random cannot red this.
       const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|\s)\/\/[^\n]*/g, '$1');
-      // anchored: SOURCES.length is pinned to 4 above and `code` is real file text from disk
+      // anchored: SOURCES.length is pinned to 5 above and `code` is real file text from disk
       expect(code, `${member}: Math.random`).not.toMatch(/Math\.random/);
       // anchored: same pinned source list
       expect(code, `${member}: wall clock`).not.toMatch(/Date\.now|new Date\b/);
