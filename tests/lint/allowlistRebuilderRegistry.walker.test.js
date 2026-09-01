@@ -82,7 +82,8 @@
  *   2. CLASS_ROSTER — the exact set of allowlist rebuilders in the three trees that
  *      hold persisted shape (`worldPulse/`, `region/`, `store/`) at >= 6 aligned keys
  *      (SP-W1 froze this tier at >= 8 with 29 rows; SP-W2 lowered it to >= 6 and the
- *      roster is 59 — see ROSTER_MIN_KEYS for the measured tier curve and why 6).
+ *      roster was 59 at SP-W2's base, 60 at the INSTRUMENTS landing tip — see
+ *      ROSTER_MIN_KEYS for the measured tier curve and why 6).
  *      A NEW one REDS, so a rebuilder cannot join the estate unreviewed. Rows are
  *      keyed by module + function and NOT by line, so ordinary work above a site
  *      relocates nothing.
@@ -96,7 +97,13 @@
  *
  * SP-W2 UPDATE — the reach is now wider than one registered row, and narrower than it
  * looks. 59 rows at the >= 6 tier: 1 registered, 17 lossy, 26 unpaired, 15
- * not-a-rebuilder. The pairability review (see THE PAIRABILITY REVIEW below) governed
+ * not-a-rebuilder — SP-W2's own measurement at its base, kept as the record of what that
+ * car reviewed. ⭐ AT THE INSTRUMENTS LANDING TIP THE ROSTER IS **60**: 1 registered,
+ * 17 lossy, **27 unpaired**, 15 not-a-rebuilder. The 60th is
+ * `operations/operationGrammar.js::normalizeOperation`, which arrived beneath this train
+ * from the SUBSTRATE landing's W-OPS O1 `c4e480140` and was classified at the landing rather
+ * than waved through — DIRECTION 3 doing precisely its job, on ruled work, under a held car.
+ * The pairability review (see THE PAIRABILITY REVIEW below) governed
  * three groups that were previously exempt in prose only — the two gate-immune rows now
  * have their gate CHECKED (DIRECTION 4), the one enumerable writer/reader pair is covered
  * (DIRECTION 5), and the hand-copied shapes are held to agreement (DIRECTION 6). ⭐ The
@@ -808,6 +815,28 @@ const CLASS_ROSTER = Object.freeze([
     reason: 'assembles the verdict return from THREE sources (the decision, the context and the'
       + ' state) plus derived facets. The six keys off `decision` are one contributor to a new'
       + ' record, not a reconstruction of the decision itself.',
+  }),
+  // ⭐ THE 60th ROW, CLASSIFIED AT THE INSTRUMENTS LANDING (2026-09-01, lane INSTR-land).
+  // DIRECTION 3 caught it exactly as designed: the roster was measured at 59 on SP-W2's own
+  // base and the branch had grown a 60th rebuilder beneath the train. Attributed by an
+  // adding-commit search, not by argument — `c4e480140` "W-OPS O1: the one grammar, and a
+  // deliberation road that can only read what the rider left", which landed in the SUBSTRATE
+  // span (absent at `853e0e9ba`, present at the substrate CAS `598642981`). Ruled work
+  // arriving under a held train, which is the case this arm exists to make impossible to miss.
+  Object.freeze({
+    module: 'src/domain/worldPulse/operations/operationGrammar.js', fn: 'normalizeOperation',
+    status: 'unpaired',
+    reason: 'the operation grammar\'s total-on-garbage validator: it refuses through'
+      + ' operationRefusal and then reads SIX named keys off the row, so a seventh field a'
+      + ' future producer sets would be dropped rather than refused. NOT `lossy` — narrowing is'
+      + ' not its job, refusal is; and NOT `not-a-rebuilder` — the input IS an operation being'
+      + ' reconstructed, not an options bag being minted from. It is `unpaired` in the strictest'
+      + ' sense available: MEASURED at this tip, the operations family has ZERO src consumers of'
+      + ' normalizeOperation (only its own tests/domain/operationGrammar.test.js) and no operation'
+      + ' record crosses a save boundary yet, so there is no producer set to enumerate and a'
+      + ' coverage rule here would have to invent its rows. ⚠ THE ROW IS THE PLACE THE PAIRING'
+      + ' BECOMES OWED: the day a producer writes an operation into persisted worldPulse state,'
+      + ' this becomes a real door and wants DIRECTION 1 governance, not a renewed exemption.',
   }),
   Object.freeze({
     module: 'src/domain/worldPulse/peaceTermsDocument.js', fn: 'treatyDocument', status: 'lossy',
