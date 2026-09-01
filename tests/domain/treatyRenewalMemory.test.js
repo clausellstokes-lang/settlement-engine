@@ -257,7 +257,12 @@ describe('GR-5A — the monotone memory (treatyRenewalEnabled)', () => {
     // naming this key reds until somebody classifies it, which is the point.
     const naming = SRC_FILES.filter(({ src }) => src.includes(FLAG)).map(({ rel }) => rel).sort();
     expect(naming).toEqual([
-      'src/domain/certification/subsystemRowsVirtual.js',
+      // ⚠ RE-AIMED BY TE-VIRT-1 (ODQ §868/§870.4), not admitted as a new namer: the row
+      // moved WHOLE out of subsystemRowsVirtual.js when that file was decomposed at its
+      // 800/800 ceiling. Measured at the move — every spelling of this key left the old
+      // path (0 remaining) and arrived at the new one — so the census is the SAME EXACT
+      // SET at a new address, and its FIFTH-file discipline is untouched.
+      'src/domain/certification/subsystemRowsCompact.js',
       'src/domain/worldPulse/pactAmendment.js',
       'src/domain/worldPulse/simulationRules.js',
     ]);
