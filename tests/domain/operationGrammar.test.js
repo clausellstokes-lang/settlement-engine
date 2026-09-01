@@ -408,6 +408,13 @@ describe('W-OPS O1 — the W-LIVES acceptance seams: four BOUND, one still pinne
     const arrived = [];
     for (const row of ACCEPTANCE_SEAMS) {
       if (row.landed === true) continue;
+      // ⛔ CANNOT-CATCH (§879 V2): this arm's green at the coupled tip is a SCOPE fact, not a
+      // strip fact — `operations/` is excluded on the line below, and O2's `WILLINGNESS_KIND`
+      // ('seek_compromise', missionAcceptance.js:123) lives inside it. And because the strip
+      // stops at comments BY DESIGN (a kind word LANDS as a string literal), a kind word held
+      // in a receipt STRING outside `operations/` convicts here exactly as a landing would —
+      // the arm cannot tell a string-literal citation from a string-literal landing. Read a
+      // red here as "a producer outside operations/ names the word", then classify by hand.
       const namers = sources
         .filter(([file]) => !file.startsWith('src/domain/worldPulse/operations/'))
         .filter(([, source]) => new RegExp(`\\b${row.awaitedSymbol}\\b`).test(source))
