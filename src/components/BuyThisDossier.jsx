@@ -15,9 +15,9 @@
  *   · signed-in, no export gate, SAVED but no durable right yet → the $2.99
  *     durable purchase, keyed to this save.                      reason 'unpurchased'
  *   · signed-in, no export gate, UNSAVED draft → "save it first".reason 'unsaved'
- * In OUR current tier gates the free tier CAN export, so 'unpurchased'/'unsaved'
- * are dormant-but-wired: they light up the instant the free-export gate is ever
- * flipped, with no further change here.
+ * ⛔ CORRECTED 2026-09-01: TIER_GATE.free.export is FALSE (authSlice.js:49), so a free
+ * account CANNOT export and 'unpurchased'/'unsaved' are the LIVE paid path, not
+ * dormant-but-wired. Comment only — the entitlement bit itself is the owner's call.
  *
  * Failure modes (anon one-time path): a secure-token or stash-write failure stops
  * the checkout BEFORE redirect so a buyer can never pay for a dossier we cannot
