@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "b2b2eedd82420ee9a983d1cd587f5db0bfe59ba7",
-  "measuredBy": "lane F5c (Fable 5)",
+  "measuredAtSha": "8cdf0a35bbbbd27bffc4ee2d5cf03e0ef8579fa8",
+  "measuredBy": "lane F6c (Fable 5)",
   "date": "2026-09-01",
-  "note": "W-FAITH F5c: ONE new test file (deityFlaws) + the flaw arms in the equation and witness suites + the fence set grew to three leaves",
-  "files": 2450,
+  "note": "faithTuningSurface.test.js joins the census: the F6c tuning signature surface suite (20 titles), one new test file",
+  "files": 2451,
   "parked": 370,
-  "credited": 2080,
-  "titles": 21119,
-  "suiteTitles": 5797
+  "credited": 2081,
+  "titles": 21139,
+  "suiteTitles": 5803
 }
