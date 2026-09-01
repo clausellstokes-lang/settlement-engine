@@ -33,6 +33,5 @@
   "src/lib/accountData.js",
   "src/lib/entities.js",
   "src/lib/shareImage.js",
-  "src/utils/generateCampaignPDF.js",
-  "src/utils/generateSettlementPDF.js"
+  "src/utils/generateCampaignPDF.js"
 ]
