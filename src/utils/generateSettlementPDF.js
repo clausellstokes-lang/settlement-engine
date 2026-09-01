@@ -208,6 +208,16 @@ export async function generateSettlementPDF(settlement, options = {}) {
     // discourages bulk scraping of the anonymous homepage hero for
     // resale and signals "free preview" without being obnoxious.
     isAnonymous = false,
+    // ⚠ THE REPRODUCIBILITY SEAM. SettlementPDF has accepted an injectable `now`
+    // (the printed cover label) since the export-date seam landed, but this
+    // function — the one every export surface actually calls — never accepted or
+    // forwarded it, so the seam was reachable ONLY from tests that construct
+    // SettlementPDF directly. `creationDate` is the document-metadata half:
+    // react-pdf defaults it to `new Date()`, so two exports of ONE unchanged
+    // settlement differed in bytes with no way for a caller to hold them still.
+    // Both default to null ⇒ wall clock, exactly as before.
+    now = null,
+    creationDate = null,
   } = options;
 
   const startedAt = Date.now();
@@ -232,6 +242,10 @@ export async function generateSettlementPDF(settlement, options = {}) {
     variant,
     isFounder,
     isAnonymous,
+    // Both are structured-cloneable (a string and a Date), so the worker path
+    // carries them exactly as the main-thread fallback does.
+    now,
+    creationDate,
   };
 
   let blob;
