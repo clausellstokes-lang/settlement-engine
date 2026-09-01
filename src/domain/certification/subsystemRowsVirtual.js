@@ -63,6 +63,8 @@
  *   subsystemRowsCoin.js      row 26      FAMILY  W-COIN
  *   subsystemRowsSeat.js      row 27      FAMILY  W-SEAT (SEAT-1's original leaf)
  *   subsystemRowsMemory.js    row 28      FAMILY  W-MEM
+ *   subsystemRowsLives.js     (empty)     HOME    W-LIVES's waiting doors
+ *   subsystemRowsOps.js       (empty)     HOME    W-OPS's waiting doors
  *
  * TO ADD A ROW: the key must be in `ENGINE_GATED_VIRTUAL_RULE_KEYS`
  * (worldPulse/simulationRules.js) — that manifest is what puts it in the census in
@@ -87,7 +89,9 @@
 import { BELIEF_SUBSYSTEM_ROWS } from './subsystemRowsBelief.js';
 import { COIN_SUBSYSTEM_ROWS } from './subsystemRowsCoin.js';
 import { COMPACT_SUBSYSTEM_ROWS } from './subsystemRowsCompact.js';
+import { LIVES_SUBSYSTEM_ROWS } from './subsystemRowsLives.js';
 import { MEMORY_SUBSYSTEM_ROWS } from './subsystemRowsMemory.js';
+import { OPS_SUBSYSTEM_ROWS } from './subsystemRowsOps.js';
 import { SEAT_SUBSYSTEM_ROWS } from './subsystemRowsSeat.js';
 
 /** @typedef {import('./subsystemCertification.js').SubsystemRow} SubsystemRow */
@@ -562,6 +566,18 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
   // subsystemRowsMemory.js. It is the LAST authored row, so W-MEM-P1 and
   // W-MEM-P2 can append to that leaf without moving any other row's index.
   ...MEMORY_SUBSYSTEM_ROWS,
+  // ── THE TWO WAITING DOORS · HOMES, NOT BEHAVIOUR (TE-VIRT-1 part (c)) ──────
+  // Both leaves are EMPTY and spreading an empty frozen array is a no-op, so these
+  // two lines change nothing any consumer can observe. They exist so the W-LIVES and
+  // W-OPS door cars add a ROW to a file that already exists rather than authoring a
+  // family leaf at a landing — the act ODQ §868 recorded T12 refusing. Each leaf
+  // names the keys it waits for; they are spelled THERE and not here, because a key
+  // spelled twice is a file enrolled twice in every mention scan that key carries.
+  // ⛔ NOTHING IS LIT AND NO KEY IS REGISTERED: a manifest entry whose gate read is
+  // not in the tree reds engineGatedRuleKeys direction 1, and key + gate read + row
+  // are ONE commit by standing law. That commit is the door car's, not this one's.
+  ...LIVES_SUBSYSTEM_ROWS,
+  ...OPS_SUBSYSTEM_ROWS,
 ]);
 
 /**
