@@ -1,6 +1,6 @@
 # HANDOFF — CURRENT PROGRAM STATE (model-agnostic successor bootstrap)
 
-**Updated 2026-09-01 at the §878 OWNER PAUSE (ledger through §878.1; refreshed at
+**Updated 2026-09-01 at the §879 RETROVALIDATION SITTING (ledger through §879.4; refreshed at
 every collection per ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; ODQ §§150–§276 plus collecting/amending §§287–§289 contain the map
@@ -8,7 +8,21 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐ PICKUP AT §878 (2026-09-01, THE OWNER'S PAUSE CARD — the program is STOPPED CLEAN for a Claude update) — START HERE; supersedes every card below.
+## ⭐⭐⭐⭐ PICKUP AT §879 (2026-09-01 — THE RETROVALIDATION IS PAID; the seat is FABLE 5.1 on the §447 split; the arc RESUMES) — START HERE; supersedes every card below.
+
+**THE SEAT:** Fable 5.1 chairs/architects/validates; Opus 5 implements/verifies (§447's split). Trailers accepted by `chair-commit.sh`: `Seat: Fable 5 — validated` · `Seat: Fable 5.1 — validated` · `Seat: Opus 5 — Fable-unvalidated`. **THE RETROVALIDATION (§879) IS PAID for the inverted span** — 64 items, 45 RATIFIED · 17 AMENDED · 2 REVERSED · 0 EVIDENCE-THIN; every §877 row carries a `*RULED (§879)*` line and the twelve lanes are enrolled and ruled as §879.1–§879.12 in `docs/FABLE_RETROVALIDATION_QUEUE.md`. ⛔ The historical strata (§685's dark window, §687–§723) stay QUEUED at the owner's trigger — the queue is NOT empty.
+
+**Branch `claude/composite-r4` = `8b07ce45f179b583c6a152412a23777cb1a15a38` (HYGIENE landed §877). Ledger through §879.4.**
+
+**⛔ WHAT THE PASS CHANGED ABOUT THE ARC (binding):** **Rider R5** on the coupled FOLLOW-ONS+TAIL-O+TAIL-L consist — compose slot 4's STEP-1 filter over the BASE's `consumesKnownRead`, never L7's literal regex (verbatim = RED, no cure) · **TAIL-F checklist +1** — compose `faithFieldDormancyFence.test.js` by union in both conflict regions and re-pin `SOURCES.length` to FIVE · **picked-car trailer convention**: a pick keeps its AUTHOR's `Seat:` only · **INSTRLAND's three resume riders** in `825f209c…/scratchpad/INSTRLAND-RESUME-NOTE.md` (bill A REPLACES, HZ-SERVICECAT 1/3, the dormancy anchor over the SET) · the `✅ EP-g2 RESOLVED-EXECUTED` row is landed (§879.3).
+
+**THE IN-FLIGHT TREES (529 law: SURVEY BEFORE RESUMING):** `laneINSTRLAND-tree` `eb150f31b` p0 (22 commits; resumes → ratchet `--update` · bill A · dormancy proof · plants · HOLD) · `lanePAIDFIX-tree` `0dac7b074` (repair 1 COMMITTED + RATIFIED; repair 2 PARKED to the owner — jsPDF mojibake, a design choice; repairs 3–5 + the new repair 6 `DestroySettlementControl.jsx:31` resume; ⚠ its new `src/domain/resolveCulture.js` owes FOUR censuses at its landing) · `laneGLYPH-tree` `f09ce3ff7` (Car B COMMITTED + RATIFIED, paid bytes −1,873/−1,751/−806, owner's veto stands, lands BEFORE the GOLDEN freeze; Car A staged — must land GREEN behind B or STOP; then Car C).
+
+**⛔⛔ OWNER ROWS ON THE DESK (`825f209c…/scratchpad/TUNING-DESK.md`):** the PDF prints the WRONG LETTER (dossier) · the non-Latin-name repair is a DESIGN choice (campaign PDF: embed a font · transliterate · keep-and-mark; chair recommends embed) · `authSlice.js:489` under-grants a tier · four architecture volumes live on ANOTHER LINE (import or annotate — IP class) · `seat_agent` is an unsigned register candidate · the lighting-day cost (+1,047 B engine; margin 266 B).
+
+**THE ARC FROM HERE (Efficiency Protocol II binding — couple on measurement · lanes DRAIN before a gate · pre-stage off the critical path):** finish INSTRUMENTS → gate → CAS/seal/§880 → the COUPLED consist (with R5) → TAIL-F alone (with the fence union) → mint window (L7 docket in `DISPATCH-QUEUE.md`) → T13 (charter assembled + fidelity-clean; REC awaits the chair's signature) → GOLDEN freeze (every paid-surface byte change BEFORE it) → walk + ONE regen (owner) → ⛔ STOP before the terminal soak. Owner's standing order (2026-09-01): continue to the soak, 30-minute dispatcher, up to four lanes.
+
+## (superseded) PICKUP AT §878 (2026-09-01, THE OWNER'S PAUSE CARD) — the §879 card above supersedes.
 
 **⛔ FIRST ACT ON RESUME IS NOT A LANDING — IT IS THE RETROVALIDATION.** The owner ordered (§878, verbatim): *"Now go back to using Fabel, doing the retro validation and the previous split tasks! Bring everything to a pause so I can update Claude."* **THE SEAT IS BACK TO §447's SPLIT** — Fable manages/architects/validates/recons/chairs, Opus implements/verifies, §787 fit-crossover both ways. §876.5's Opus inversion is CLOSED; its marking law is PERMANENT. **A Fable seat re-derives the queue BEFORE any new lane opens**: six rows landed at §877, **NINE more lanes completed since** (TAILFCURE · CLAIMHAB · LOSTPIN · COUPLING · TOFU · ENFORCEDBY · PHANTOM · FOLLOWAMEND · INSTRPREP) and **THREE were stopped mid-flight** (INSTRLAND · PAIDFIX · GLYPH) — every one owes its row; each lane's receipt in `825f209c…/scratchpad/` carries a drafted `## RETROVALIDATION ROW`.
 
