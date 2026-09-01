@@ -1,6 +1,6 @@
 # HANDOFF — CURRENT PROGRAM STATE (model-agnostic successor bootstrap)
 
-**Updated 2026-09-01 at the §876 WAR-LANDING COLLECTION (ledger through §876.5; refreshed at
+**Updated 2026-09-01 at the §878 OWNER PAUSE (ledger through §878.1; refreshed at
 every collection per ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; ODQ §§150–§276 plus collecting/amending §§287–§289 contain the map
@@ -8,7 +8,23 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐ PICKUP AT §876 (2026-09-01 ~15:00, ROLLING CARD — WAR LANDED; THE SEAT IS NOW OPUS) — START HERE; supersedes every card below.
+## ⭐⭐⭐⭐ PICKUP AT §878 (2026-09-01, THE OWNER'S PAUSE CARD — the program is STOPPED CLEAN for a Claude update) — START HERE; supersedes every card below.
+
+**⛔ FIRST ACT ON RESUME IS NOT A LANDING — IT IS THE RETROVALIDATION.** The owner ordered (§878, verbatim): *"Now go back to using Fabel, doing the retro validation and the previous split tasks! Bring everything to a pause so I can update Claude."* **THE SEAT IS BACK TO §447's SPLIT** — Fable manages/architects/validates/recons/chairs, Opus implements/verifies, §787 fit-crossover both ways. §876.5's Opus inversion is CLOSED; its marking law is PERMANENT. **A Fable seat re-derives the queue BEFORE any new lane opens**: six rows landed at §877, **NINE more lanes completed since** (TAILFCURE · CLAIMHAB · LOSTPIN · COUPLING · TOFU · ENFORCEDBY · PHANTOM · FOLLOWAMEND · INSTRPREP) and **THREE were stopped mid-flight** (INSTRLAND · PAIDFIX · GLYPH) — every one owes its row; each lane's receipt in `825f209c…/scratchpad/` carries a drafted `## RETROVALIDATION ROW`.
+
+**Branch `claude/composite-r4` = `8b07ce45f179b583c6a152412a23777cb1a15a38` (HYGIENE landed §877 — FIVE landings this arc: §874 substrate · §875 T8 · §876 WAR · §877 HYGIENE, all first-or-second-run green). Ledger through §878.1.**
+
+**⭐ THE PAUSE STATE — SURVEYED, SEALED, NOTHING LOST (529 law: SURVEY BEFORE RESUMING, never assume):**
+- `laneINSTRLAND-tree` **`eb150f31b`, 22 commits, porcelain 0** — the INSTRUMENTS landing stopped AT its lighting register bill (5 predicted / 5 matched; the one park-state change is a DE-park). Seal `refs/preserve/pause-instrland-2026-09-01`. RESUME: its remaining terminal-window acts → HOLD → the chair gates.
+- `lanePAIDFIX-tree` **`0dac7b074`, 2 commits** — ⭐ **the culture defect is FIXED AND COMMITTED** (the campaign PDF + World Book read culture from an address nothing writes). Seal `pause-paidfix-2026-09-01`. Dirty = TWO UNTRACKED probe artifacts only (`.dormancy.mjs`, `.paidfix/`). RESUME: repairs 2–5 of 5.
+- `laneGLYPH-tree` **`f09ce3ff7`, 1 commit** — ⭐⭐ **CAR B LANDED: "delete noLig()'s body — 74/25/74 non-embedded runs per dossier become 0/0/0"**. Seal `pause-glyph-2026-09-01`. Dirty = Car A's NINE staged files mid-commit (the render-level assertion + one new test file). RESUME: finish Car A (it must land GREEN after B — if it does not, STOP: B did not remove the whole population), then Car C.
+- Eight further sealed tips: the four landings + `tailo-cures` `e455c3fa4` · `tailf-cures` `b441e6e58` · `phantom-cures` `c1da0ada4` · `enforcedby-car1` `ab786aaa6`. Every other dock is porcelain 0 at a sealed or branch sha.
+
+**⛔⛔ TWO OWNER ROWS WAITING, BOTH PAID-SURFACE (full text in `825f209c…/scratchpad/TUNING-DESK.md`):** (a) **the PDF prints the WRONG LETTER, not a tofu box** (`影`→`q`, `街`→`W`, `⚠`→invisible; reachability proven; Car B's cure changes paid bytes ⇒ owner's veto, and ⭐ CHAIR-RULED: **any paid-surface byte change lands BEFORE the GOLDEN freeze**) · (b) `authSlice.js:489` skips `resolveTier` — under-grants, fails closed, but entitlement is the owner's class.
+
+**THE ARC AFTER THE RETROVALIDATION:** finish INSTRUMENTS → the **COUPLED** FOLLOW-ONS+TAIL-O+TAIL-L consist (one gate, ≈1.5 h saved, ruled on measurement) → TAIL-F alone → the mint window → T13 (charter assembled + fidelity-clean, REC awaits the chair's signature) → GOLDEN freeze (charter assembled, gate discharged) → the walk + ONE regen (owner present) → ⛔ STOP before the terminal soak. Protocols binding: EFFICIENCY PROTOCOL II (couple on measurement · lanes DRAIN before a gate · pre-stage off the critical path) and everything in `825f209c…/scratchpad/DISPATCH-QUEUE.md`.
+
+## (superseded) PICKUP AT §876 (2026-09-01 ~15:00 — WAR LANDED; THE SEAT IS NOW OPUS) — the §878 card above supersedes.
 
 **Build branch `claude/composite-r4` = `3f9201e39966e94c4f4b70bad25c263daca51039` (WAR-TRUTH LANDED §876 — 14 commits, gate green FIRST RUN: ratchet 10/30,156 ceiling 10, STRICT DIST 51/433; sealed `refs/preserve/landing-WAR-2026-09-01`). Ledger through §876.5.** THREE LANDINGS THIS SITTING (§874 substrate · §875 T8 · §876 WAR), all first-or-second-run green. ⭐ WAR's probe A came back **BIT-IDENTICAL on base, picks-only AND full-consist** — the whole consist moves not one byte of any generated world.
 
