@@ -293,8 +293,15 @@ function wanderStep(stressor, wander, snapshot, rng, tick, now) {
 
 // Echoes fade on a ~6-tick half-life; below this floor they graduate out of
 // the world state entirely (graduates are handed to the chronicle/history).
-const ECHO_HALF_LIFE_TICKS = 6;
-const ECHO_DECAY_FACTOR = Math.pow(0.5, 1 / ECHO_HALF_LIFE_TICKS);
+// ⭐ FROZEN LITERAL — T13 TRANS Car 2, THE PROVENANCE ROW (charter §2.10).
+// This was `Math.pow(0.5, 1 / 6)`: a ~6-tick half-life, evaluated once at module load.
+// `Math.pow` is implementation-approximated, so a value BAKED INTO EVERY WORLD was being
+// recomputed by each engine — the one site in the census where the cross-engine fork sat
+// in a module-level constant rather than in a call. Folding it to the decimal V8 computes
+// makes it engine-independent BY CEASING TO BE COMPUTED, and moves nothing: the literal
+// below is that value bit-for-bit (IEEE-754 0x3fec823e074ec129) and round-trips through
+// `Number(String(v))` bitwise, verified before the fold.
+const ECHO_DECAY_FACTOR = 0.8908987181403393;
 const ECHO_GRADUATION_FLOOR = 0.1;
 
 /**

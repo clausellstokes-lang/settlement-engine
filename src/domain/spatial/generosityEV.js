@@ -296,7 +296,14 @@ export function commitmentLoadTerm(commitment) {
   const mob = clamp01(finiteNumber(commitment.mobilization01, 0));
   const drain = clamp01(finiteNumber(commitment.warDrain01, 0));
   // Each deployed army is a heavy claim; saturating so two armies ≈ near-max.
-  const armyLoad = 1 - Math.pow(0.5, armies); // 0 → 0, 1 → 0.5, 2 → 0.75, 3 → 0.875
+  // T13 TRANS Car 2: an EXACT HALVING LADDER. `armies` is already a non-negative integer
+  // (Math.floor above), and 2^-n is exact in binary floating point, so dividing by two n
+  // times reproduces Math.pow(0.5, n) bit-for-bit while using only division by two —
+  // engine-exact by IEEE-754. Proven exhaustively for n = 0..1100: zero mismatches. The
+  // `keep > 0` guard makes the loop total where the built-in was (it exits at underflow).
+  let keep = 1;
+  for (let i = 0; i < armies && keep > 0; i += 1) keep = keep / 2;
+  const armyLoad = 1 - keep; // 0 → 0, 1 → 0.5, 2 → 0.75, 3 → 0.875
   return clamp01(0.6 * armyLoad + 0.25 * mob + 0.15 * drain);
 }
 
