@@ -183,14 +183,38 @@ describe('self-hosted fonts + social meta (build gate)', () => {
     expect(ttfFaces.length).toBe(8);
   });
 
-  it.each(ttfFaces)('%s exposes no ligature feature and shapes 1:1', (file) => {
-    const font = createFont(readFileSync(resolve(ROOT, 'public', 'fonts', file)));
-    const present = (font.availableFeatures || []).filter((f) => LIGATURE_FEATURES.includes(f));
-    expect(present, `${file} re-introduced ligature lookups: ${present.join(', ')}`).toEqual([]);
-    // Belt and braces: even absent the feature tags, prove the shaper does not
-    // fuse the classic bait string. 33 characters must yield 33 glyphs.
-    const { glyphs } = font.layout(LIGATURE_BAIT);
-    expect(glyphs.length, `${file} ligated "${LIGATURE_BAIT}"`).toBe(LIGATURE_BAIT.length);
+  // ⚠ ONE NAMED TEST THAT LOOPS INSIDE — deliberately NOT `it.each`, and the
+  // reason is measured rather than stylistic. A parameterised callback generates
+  // titles the lighting census's reader cannot recognise statically, so `it.each`
+  // PARKS THIS WHOLE FILE — and a parked file's titles are census-invisible, so it
+  // took the OTHER fourteen literal titles in this file out of evidence with it.
+  // Measured 2026-09-01 across three trees: the census is green at 8b07ce45f and
+  // red at f09ce3ff7, moving parked +1 / credited -1 / titles -12 / suiteTitles -1
+  // — exactly this file's twelve literal titles and one describe going dark. The
+  // registry-walker idiom (loop INSIDE a named test, never generate tests from a
+  // loop) keeps the file credited AND still fails by name on the offending face.
+  it('no embedded face exposes a ligature feature, and every face shapes 1:1', () => {
+    const offenders = [];
+    let examined = 0;
+    for (const file of ttfFaces) {
+      const font = createFont(readFileSync(resolve(ROOT, 'public', 'fonts', file)));
+      examined += 1;
+      const present = (font.availableFeatures || []).filter((f) => LIGATURE_FEATURES.includes(f));
+      if (present.length) offenders.push(`${file} re-introduced ligature lookups: ${present.join(', ')}`);
+      // Belt and braces: even absent the feature tags, prove the shaper does not
+      // fuse the classic bait string. 33 characters must yield 33 glyphs.
+      const { glyphs } = font.layout(LIGATURE_BAIT);
+      if (glyphs.length !== LIGATURE_BAIT.length) {
+        offenders.push(`${file} ligated "${LIGATURE_BAIT}": ${glyphs.length} glyphs for ${LIGATURE_BAIT.length} chars`);
+      }
+    }
+    // Non-vacuity INSIDE the loop's own arm: a loop that ran zero times would
+    // otherwise report an empty offender list and pass.
+    expect(examined, 'the ligature sweep examined no face').toBe(8);
+    expect(
+      offenders,
+      `ligature regression — fix the FONT, do not resurrect noLig():\n  ${offenders.join('\n  ')}`,
+    ).toEqual([]);
   });
 
   it('U+200C ZWNJ is covered by NO embedded face (why inserting it was harmful)', () => {
