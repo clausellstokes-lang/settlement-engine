@@ -721,7 +721,7 @@ describe('ES-4 — seam 5: the axis vocabulary flows ONE WAY, from SP-B into the
     // time a ladder moved.
     const sources = espionageSources();
     const rungs = ['trace', 'stirring', 'steady', 'established', 'bare', 'thin', 'stocked',
-      'deep', 'shunned', 'overlooked', 'sought', 'coveted', 'thorp', 'hamlet', 'village',
+      'shunned', 'overlooked', 'sought', 'coveted', 'thorp', 'hamlet', 'village',
       'town', 'city', 'metropolis'];
     const quoted = (source, word) => new RegExp(`['"]${word}['"]`).test(source);
     const spellers = [];
@@ -746,6 +746,31 @@ describe('ES-4 — seam 5: the axis vocabulary flows ONE WAY, from SP-B into the
     const collisions = (readFileSync(join(ROOT, ESPIONAGE_DIR, 'espionageMissions.js'), 'utf8')
       .match(/['"]none['"]/g) || []).length;
     expect(collisions, 'the foreignTieBand fallback grew a sibling').toBe(1);
+    // ⚠ THE SECOND MEASURED COLLISION, DECLARED IN THE SAME EXACT-PAIR SHAPE AS `'none'`
+    // ABOVE, AND FOR THE SAME REASON. W-OPS cars O5 and O7 land the infiltration EXPOSURE
+    // ladder — `DEPTH_EXPOSURE_WORDS = ['faint', 'light', 'full', 'deep', 'immersed']`
+    // (infiltrationDrift.js:132) and its rung mirror (operationsVoice.js:476-482) — and
+    // `'deep'` is a member of THAT ladder as well as of the conditions SUPPLY rungs
+    // (bare/thin/stocked/deep). The two vocabularies share an English word and nothing
+    // else: the exposure ladder is derived inside the espionage set from a dwell reading,
+    // never from the belief layer's conditions, and the arm above proves STRUCTURALLY that
+    // no espionage module can reach the appraisal to borrow one. Pinned as EXACT pairs —
+    // these files, this word, these counts — so a THIRD speller, or a second occurrence in
+    // either file, reds here. An exemption for the word would not have done that.
+    const deepSpellers = Object.entries(sources)
+      .filter(([, source]) => quoted(source, 'deep'))
+      .map(([file]) => file)
+      .sort();
+    expect(deepSpellers, 'a third espionage module spells the word — re-measure it before'
+      + ' widening this row, because the exposure ladder owns that rung too')
+      .toEqual([
+        `${ESPIONAGE_DIR}/infiltrationDrift.js`,
+        `${ESPIONAGE_DIR}/operationsVoice.js`,
+      ]);
+    for (const file of deepSpellers) {
+      const deepHits = (readFileSync(join(ROOT, file), 'utf8').match(/['"]deep['"]/g) || []).length;
+      expect(deepHits, `${file}: the exposure ladder's rung grew a sibling`).toBe(1);
+    }
     // THE MUTANT, EXECUTED: the rung scan really bites.
     const planted = { ...sources, [`${ESPIONAGE_DIR}/espionageProducts.js`]: "const b = 'established';" };
     expect(Object.entries(planted).filter(([, source]) => quoted(source, 'established')).map(([f]) => f))
