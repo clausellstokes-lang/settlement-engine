@@ -177,3 +177,39 @@ describe('applyLibraryFilters — Phase 3 filters', () => {
     expect(out[0].id).toBe('c');
   });
 });
+
+/**
+ * A DESTROYED TOWN IS NOT IN CRISIS — IT IS OVER.
+ *
+ * Both of this toolbar's health reads go through the same derivation the Library
+ * card's pip uses (`healthPip` / `needsAttention`), and that derivation bands the
+ * blob a destroyed settlement still carries from when it stood. So without a guard
+ * a town the canon records as destroyed could out-rank a standing settlement in the
+ * "Needs attention" SORT and be surfaced by the "in crisis" FILTER. Both ask the
+ * SAVE ROW (`isDestroyedRow`), where "destroyed" is canon — see the contract pin in
+ * livingWorldSignals.test.js for why the guard is not in the derivation.
+ */
+describe('applyLibraryFilters — a destroyed row carries no live health', () => {
+  // A blob with enough pressure to band Vulnerable/Critical, so it WOULD surface.
+  const crisisBlob = {
+    name: 'Ashfall',
+    config: { monsterThreat: 'plagued', nearbyResourcesState: { iron: 'depleted', timber: 'depleted' }, tradeRouteAccess: 'isolated' },
+    economicState: { prosperity: 'Struggling' },
+    powerStructure: { factions: [{}, {}, {}, {}, {}], conflicts: [{}, {}, {}] },
+    stressors: [{ type: 'siege' }, { type: 'famine' }, { type: 'plague' }],
+  };
+  const standing = { id: 'alive', name: 'Ashfall', tier: 'town', savedAt: 1700003000000, settlement: { ...crisisBlob } };
+  const destroyed = { id: 'gone', name: 'Ashfall', tier: 'town', savedAt: 1700004000000, settlement: { ...crisisBlob, status: 'destroyed' } };
+
+  it('the in-crisis filter keeps the standing town (the control) and drops the destroyed one', () => {
+    const out = applyLibraryFilters([standing, destroyed], { filters: { inCrisis: true } });
+    expect(out.map(r => r.id)).toEqual(['alive']);
+  });
+
+  it('the needs-attention sort does not float a destroyed town above a standing one', () => {
+    const out = applyLibraryFilters([destroyed, standing], { sort: 'attention' });
+    // anchored: both rows survive the pipeline, so this is an ORDERING claim.
+    expect(out).toHaveLength(2);
+    expect(out[0].id).toBe('alive');
+  });
+});
