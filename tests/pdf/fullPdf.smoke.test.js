@@ -260,3 +260,72 @@ describe('generateSettlementPDF — the download filename matches its siblings',
     expect(await downloadNameFor('北京')).toBe('settlement_dossier.pdf');
   });
 });
+
+/**
+ * THE WORKER HAD NO DEADLINE. `renderPdfBlobInWorker` posts a render and parks a
+ * `{ resolve, reject }` in the module-level `pending` map keyed by render id. Every
+ * way the worker can FAIL is handled — a rejected message, a construction failure, a
+ * script-level `onerror` (which tears the worker down, latches it broken and fails
+ * every pending render as unavailable) — but the one thing it cannot fail at was
+ * SILENCE. A worker that never answers leaves `pending.get(id)` alive forever, and
+ * the caller's await never settles: the export UI keeps its spinner, no error is
+ * ever shown, and no fallback is ever attempted. Not a hang the user can distinguish
+ * from a slow render.
+ *
+ * The deadline reuses the machinery already there rather than inventing a new
+ * failure mode: it is treated exactly as `onerror` treats a script-level failure —
+ * terminate, latch broken, reject as `pdfWorkerUnavailable` — so the caller takes
+ * the SAME main-thread fallback it already takes, and the buyer gets their dossier
+ * instead of a spinner. Latching also means a wedged worker costs the deadline ONCE,
+ * not once per export.
+ *
+ * ⛔ NOT ADDED, DELIBERATELY: progress reporting. A "still rendering…" channel is a
+ * capability, not a repair, and is recorded for the owner rather than smuggled in
+ * under a timeout fix.
+ */
+describe('the PDF worker has a deadline (a silent worker cannot hang the export)', () => {
+  test('a worker that never answers falls back to the main thread instead of hanging', async () => {
+    const origWorker = globalThis.Worker;
+    const origCreate = globalThis.URL.createObjectURL;
+    const origRevoke = globalThis.URL.revokeObjectURL;
+    const origClick = globalThis.HTMLAnchorElement.prototype.click;
+    const posted = [];
+    let terminated = 0;
+    class SilentWorker {
+      postMessage(message) { posted.push(message); }   // ...and never answers.
+      terminate() { terminated += 1; }
+    }
+    globalThis.Worker = SilentWorker;
+    globalThis.URL.createObjectURL = () => 'blob:pdf';
+    globalThis.URL.revokeObjectURL = () => {};
+    globalThis.HTMLAnchorElement.prototype.click = function click() {};
+    vi.resetModules();          // a fresh module: `workerBroken` is not yet latched
+    vi.useFakeTimers();
+    try {
+      renderedElements.length = 0;
+      const { generateSettlementPDF, PDF_WORKER_TIMEOUT_MS } = await import('../../src/utils/generateSettlementPDF.js');
+      // The deadline is a real, bounded number — not Infinity, not absent.
+      expect(Number.isFinite(PDF_WORKER_TIMEOUT_MS)).toBe(true);
+      expect(PDF_WORKER_TIMEOUT_MS).toBeGreaterThan(0);
+
+      const settled = generateSettlementPDF(generate());
+      // anchored: the worker really was used, so the fallback below is a FALLBACK
+      // and not just "the worker path was never taken in jsdom".
+      expect(posted).toHaveLength(1);
+      await vi.advanceTimersByTimeAsync(PDF_WORKER_TIMEOUT_MS + 1000);
+      await settled;
+
+      // The export completed by rendering on the main thread.
+      expect(renderedElements).toHaveLength(1);
+      // The wedged worker was torn down, exactly as a script-level failure is.
+      expect(terminated).toBe(1);
+    } finally {
+      vi.useRealTimers();
+      globalThis.Worker = origWorker;
+      globalThis.URL.createObjectURL = origCreate;
+      globalThis.URL.revokeObjectURL = origRevoke;
+      globalThis.HTMLAnchorElement.prototype.click = origClick;
+      vi.resetModules();
+    }
+  }, 20_000);
+});
