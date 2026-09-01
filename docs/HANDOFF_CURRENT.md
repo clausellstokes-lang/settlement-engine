@@ -1,6 +1,6 @@
 # HANDOFF — CURRENT PROGRAM STATE (model-agnostic successor bootstrap)
 
-**Updated 2026-09-01 at the §875 T8-LANDING COLLECTION (ledger through §875.2; refreshed at
+**Updated 2026-09-01 at the §876 WAR-LANDING COLLECTION (ledger through §876.5; refreshed at
 every collection per ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; ODQ §§150–§276 plus collecting/amending §§287–§289 contain the map
@@ -8,7 +8,19 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐ PICKUP AT §875 (2026-09-01 ~05:25, ROLLING CARD — T8 · SHIFT LANDED; THE BUILD TRACK IS COMPLETE) — START HERE; supersedes every card below.
+## ⭐⭐⭐⭐ PICKUP AT §876 (2026-09-01 ~15:00, ROLLING CARD — WAR LANDED; THE SEAT IS NOW OPUS) — START HERE; supersedes every card below.
+
+**Build branch `claude/composite-r4` = `3f9201e39966e94c4f4b70bad25c263daca51039` (WAR-TRUTH LANDED §876 — 14 commits, gate green FIRST RUN: ratchet 10/30,156 ceiling 10, STRICT DIST 51/433; sealed `refs/preserve/landing-WAR-2026-09-01`). Ledger through §876.5.** THREE LANDINGS THIS SITTING (§874 substrate · §875 T8 · §876 WAR), all first-or-second-run green. ⭐ WAR's probe A came back **BIT-IDENTICAL on base, picks-only AND full-consist** — the whole consist moves not one byte of any generated world.
+
+**⭐⭐ THE SEAT IS INVERTED (§876.5, owner): EVERY LANE DISPATCHES OPUS.** The §685 marking law binds hardest now — an Opus act Fable did not architect/validate/manage lands its row in `docs/FABLE_RETROVALIDATION_QUEUE.md` IN THE SAME ACT (chair-commit.sh refuses otherwise; presence is not a row). Work Fable validated BEFORE the switch (§§873–876.4, both build charters, the five pre-board halves, the walk manifest, the tuning desk) needs NO row — state the boundary per act, never assume it. Carve-outs UNCHANGED: legal · tuning signatures · the walk's presence · deploys/pushes · the TERMINAL SOAK.
+
+**ONE LINE TO RESUME: read §876–§876.5, then `825f209c…/scratchpad/DISPATCH-QUEUE.md`, then board HYGIENE off HYG-PREBOARD-HALF1.md's 15 one-liners.** ⭐⭐ ORDER (§874.8): **HYGIENE (next) → INSTRUMENTS → FOLLOW-ONS → TAIL-O+TAIL-L (coupled) → TAIL-F** → the mint window (L7, opens and stays open) → T13 (L8, charter ASSEMBLED, REC awaits the chair's signature) → GOLDEN freeze (L9, charter ASSEMBLED, closes the window; ⚠ EP-g2 located-or-chartered is its gate) → the walk + ONE regen (owner present) → ⛔ STOP before the terminal soak.
+
+**EVERYTHING AHEAD IS PREPARED — nothing left is unverified paper.** Both final builds: charters assembled and FIDELITY-CHECKED (CHARTER-FIDELITY-REPORT.md: both VERBATIM-CLEAN, 0 blocking, 5 minor drifts to fix at signature; the second-hand R-FENCE-SCOPE quote settles MATCH). Every landing: a banked pre-board half-1 + a one-page half-2. The fence's scope is now exactly **{AGN@HYG · T13}** (§876.1) and T13's charter drafts its terminal re-arm to ZERO windows — the posture GOLDEN then signs forever.
+
+**THE OWNER'S DESK (three documents, all banked):** `TUNING-DESK.md` (12/12 inputs, dependency-ordered; the §745.1-vs-§844 flag RESOLVED no-contradiction) · `WALK-MANIFEST-RECOMPILED.md` (7+1 decisions; F3 closed as already-ruled; ⚠ warMemoryEnabled must be FORCED in the preview) · the LEGAL batch (MINT-PREBOARD-HALF1.md — notices + the `three` entry + founder-transfer, one sitting, owner's pen). Plus the standing desk rows from the §875 card below.
+
+## (superseded) PICKUP AT §875 (2026-09-01 ~05:25, ROLLING CARD — T8 · SHIFT LANDED) — the §876 card above supersedes.
 
 **Build branch `claude/composite-r4` = `6308a27b8ad0d4679754b76245b1d340ed8c6969` (T8 LANDED §875 — 12 commits, gate green FIRST RUN: ratchet 10/30,080 ceiling 10, STRICT DIST 51/433; sealed `refs/preserve/landing-T8-2026-09-01`). Ledger through §875.2. EVERY CAR IN THE PROGRAM IS BUILT (O7 closed the track).** T8 was the arc's ONE ruled same-seed window — executed with zero residue (probes attribute 91+322 exactly; the espionage fence's golden moved ONCE under the window and its STOP re-armed scoped to T13, the LAST ruled mover). R-T8-OSR: the churn rule narrowed to the stable core via governed schema migration 14→15, reconciliation EMPTY as claimed.
 
