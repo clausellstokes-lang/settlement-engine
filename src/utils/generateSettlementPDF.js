@@ -29,11 +29,14 @@
  *
  * Fallback doctrine: the main-thread path survives ONLY for environments where
  * the worker cannot be CONSTRUCTED (no Worker global, CSP worker-src block,
- * script-level load/eval failure, non-cloneable props). That is feature
- * detection, not user-agent sniffing. A render error INSIDE a healthy worker
- * propagates as an export failure — the same document would fail identically
- * on the main thread, so retrying there would just freeze the page before
- * showing the same error.
+ * script-level load/eval failure, non-cloneable props), or where a constructed
+ * worker goes SILENT past its deadline (PDF_WORKER_TIMEOUT_MS — a worker that
+ * neither answers nor errors is unusable in exactly the same sense, and was the
+ * one failure mode with no handler: its pending render never settled and the
+ * export kept a spinner forever). That is feature detection, not user-agent
+ * sniffing. A render error INSIDE a healthy worker propagates as an export
+ * failure — the same document would fail identically on the main thread, so
+ * retrying there would just freeze the page before showing the same error.
  *
  * Lazy-chunk contract (tests/build/vendorPdfLazy.test.js): this module has NO
  * static import of @react-pdf/renderer. The worker carries its own bundle of
@@ -68,7 +71,22 @@ function durationBand(ms) {
 let pdfWorker = null;
 let workerBroken = false;
 let nextRenderId = 1;
-const pending = new Map(); // renderId → { resolve, reject }
+const pending = new Map(); // renderId → { resolve, reject, timer }
+
+/**
+ * The worker's DEADLINE. Every way the worker can FAIL is already handled — a
+ * rejected message, a construction failure, a script-level `onerror` — but the one
+ * thing it could not fail at was SILENCE: a worker that never answers left its
+ * `pending` entry alive forever and the caller's await never settled, so the export
+ * kept its spinner with no error and no fallback.
+ *
+ * Sized against a MEASURED render, not a guess: tests/pdf/fullDocByteRender.test.js
+ * records a real full-document byte render at 30,013 ms under full-suite CPU
+ * contention. Four times that is generous for a slow device on a large dossier while
+ * still bounding the hang. Exported so a pin can assert the deadline without
+ * hard-coding a number that would drift away from this one.
+ */
+export const PDF_WORKER_TIMEOUT_MS = 120_000;
 
 // Marker for "the worker path is unusable in this environment" — routes the
 // caller to the main-thread fallback, as distinct from a real render error
@@ -76,7 +94,10 @@ const pending = new Map(); // renderId → { resolve, reject }
 const workerUnavailable = (err) => Object.assign(err, { pdfWorkerUnavailable: true });
 
 function failAllPending(err) {
-  for (const { reject } of pending.values()) reject(err);
+  for (const { reject, timer } of pending.values()) {
+    if (timer !== undefined) clearTimeout(timer);
+    reject(err);
+  }
   pending.clear();
 }
 
@@ -105,6 +126,7 @@ function getPdfWorker() {
     const entry = pending.get(id);
     if (!entry) return;
     pending.delete(id);
+    if (entry.timer !== undefined) clearTimeout(entry.timer);
     if (ok) entry.resolve(blob);
     else entry.reject(new Error(error || 'PDF render failed in worker'));
   };
@@ -144,6 +166,27 @@ function renderPdfBlobInWorker(props) {
       // boundary there), so treat as worker-unavailable for this export.
       pending.delete(id);
       reject(workerUnavailable(err));
+      return;
+    }
+    // The render is in flight, so start its clock. A silent worker is treated
+    // EXACTLY as `onerror` treats a script-level failure — tear it down, latch it
+    // broken, fail every in-flight render as worker-unavailable — so the caller
+    // takes the SAME main-thread fallback it already takes and the user gets their
+    // dossier instead of a spinner. Latching matters: a wedged worker costs the
+    // deadline ONCE, not once per export for the rest of the session.
+    const entry = pending.get(id);
+    if (entry) {
+      entry.timer = setTimeout(() => {
+        if (!pending.has(id)) return;
+        console.warn(`[PDF export] worker exceeded ${PDF_WORKER_TIMEOUT_MS}ms; falling back to main thread`);
+        const dead = pdfWorker;
+        pdfWorker = null;
+        workerBroken = true;
+        try { dead?.terminate(); } catch { /* already gone */ }
+        // failAllPending rejects and disarms EVERY in-flight render, this one
+        // included, so there is no second rejection to make here.
+        failAllPending(workerUnavailable(new Error(`PDF render exceeded ${PDF_WORKER_TIMEOUT_MS}ms in the worker`)));
+      }, PDF_WORKER_TIMEOUT_MS);
     }
   });
 }
