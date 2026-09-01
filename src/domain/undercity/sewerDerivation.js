@@ -38,12 +38,21 @@
  *                                 get laid under a quarter being rebuilt
  *   HIGH_WATER_POPULATION RAISES  the peak past the cesspit-failure line
  *   FOUNDING_CHARTER      RAISES  weight ZERO, marked NO_TYPED_HOME. §311.7.2 named a
- *                                 planned/charter/military founding kind that DOES NOT EXIST:
- *                                 `grep -rn 'founding\.kind|foundingKind' src` → 0 hits. ⛔
+ *                                 planned/charter/military founding kind, and NO SUCH KIND
+ *                                 EXISTS. ⚠ THE JUSTIFYING MEASUREMENT HAS MOVED, AND THE
+ *                                 DISPOSITION HAS NOT — re-measured at this tip, the field
+ *                                 `founding.kind` IS live: `INSTITUTION_FOUNDING_KINDS`
+ *                                 (`../institutionFounding.js`) is the CLOSED TRIPLE
+ *                                 FOUNDED / FOUNDED_UNDATED / PRE_SEED, all three minted by
+ *                                 `institutionFoundingOf` and all three read in
+ *                                 `./monotoneComponents.js`. NONE of the three is the
+ *                                 charter family, so this cause still has no typed home to
+ *                                 read — the deferral stands on the SURVIVING reason, never
+ *                                 on the retired "zero hits" grep. ⛔
  *                                 Regex-matching the prose `founding.reason` is REFUSED BY NAME
  *                                 (the name-string idiom). The slot stays typed at zero so the
- *                                 shape is right when R-7 lands the field; until then it is a
- *                                 pinned NO-OP (measured inert on 420 real settlements).
+ *                                 shape is right when R-7 lands that FOURTH kind; until then it
+ *                                 is a pinned NO-OP (measured inert on 420 real settlements).
  *
  * ⚠⚠ THE CALAMITY CAUSE READS THAT A CALAMITY HAPPENED, NEVER WHICH KIND. `spatial/calamity.js`
  * (:260) is explicit: the stamp title is "BUCKET-NEUTRAL by constitution … the engine never
