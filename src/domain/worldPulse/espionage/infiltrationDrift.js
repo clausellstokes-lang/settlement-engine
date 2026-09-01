@@ -241,8 +241,8 @@ export function depthBandOf(level) {
  * id ascending. Pinned rather than left to arrival order because the plan takes a
  * PREFIX of this list, so a caller whose vector arrived in a different order would
  * otherwise expose a spy to a different half of the same city.
- * @param {ReadonlyArray<{axisId?: unknown, pole?: unknown, band?: unknown}>} vector the host's pulls
- * @param {readonly string[]} bandLadder the funnel's own PULL_BANDS, ascending, handed in
+ * @param {ReadonlyArray<{axisId?: unknown, pole?: unknown, band?: unknown}>} [vector] the host's pulls
+ * @param {readonly string[]} [bandLadder] the funnel's own PULL_BANDS, ascending, handed in
  * @returns {ReadonlyArray<Readonly<{axisId: string, pole: string, band: string}>>}
  */
 export function orderedHostVector(vector, bandLadder) {
@@ -289,11 +289,11 @@ export function orderedHostVector(vector, bandLadder) {
  * sub-floor magnitude for it to refuse.
  *
  * @param {Object} args the plan request
- * @param {unknown} args.level a rung name or level number
- * @param {number} args.dwellTicks ticks dwelt at the host so far
- * @param {number} args.cadenceTicks the funnel's AMBIENT_CADENCE_TICKS, handed in
- * @param {ReadonlyArray<{axisId?: unknown, pole?: unknown, band?: unknown}>} args.hostVector the host's own pulls, READ BY THE CALLER
- * @param {readonly string[]} args.bandLadder the funnel's PULL_BANDS, ascending
+ * @param {unknown} [args.level] a rung name or level number
+ * @param {number} [args.dwellTicks] ticks dwelt at the host so far
+ * @param {number} [args.cadenceTicks] the funnel's AMBIENT_CADENCE_TICKS, handed in
+ * @param {ReadonlyArray<{axisId?: unknown, pole?: unknown, band?: unknown}>} [args.hostVector] the host's own pulls, READ BY THE CALLER
+ * @param {readonly string[]} [args.bandLadder] the funnel's PULL_BANDS, ascending
  * @returns {ExposurePlan}
  */
 export function depthExposurePlan({ level, dwellTicks, cadenceTicks, hostVector, bandLadder } = {}) {
@@ -363,8 +363,8 @@ export const EQUILIBRIUM_REGIMES = Object.freeze(['floor_reset', 'linear']);
  * arithmetic it claims to bound, and keeps a transcendental site out of this file.
  *
  * @param {Object} args the floor and the decay
- * @param {number} args.epsilon L2's MATERIALIZATION_EPSILON
- * @param {number} args.retention what one period of decay leaves of a unit offset
+ * @param {number} [args.epsilon] L2's MATERIALIZATION_EPSILON
+ * @param {number} [args.retention] what one period of decay leaves of a unit offset
  * @returns {number}
  */
 export function erosionCeiling({ epsilon, retention } = {}) {
@@ -394,9 +394,9 @@ export function erosionCeiling({ epsilon, retention } = {}) {
  * the offset climbs to the linear fixed point.
  *
  * @param {Object} args the pull and the machinery it lands in
- * @param {number} args.quantum the per-period magnitude, in bands
- * @param {number} args.epsilon L2's MATERIALIZATION_EPSILON
- * @param {number} args.retention what one period of decay leaves of a unit offset
+ * @param {unknown} [args.quantum] the per-period magnitude, in bands
+ * @param {number} [args.epsilon] L2's MATERIALIZATION_EPSILON
+ * @param {number} [args.retention] what one period of decay leaves of a unit offset
  * @param {number} [args.bandWidth] one band, in the same units; defaults to 1
  * @returns {EquilibriumRead}
  */
@@ -445,10 +445,10 @@ export function ambientEquilibrium({ quantum, epsilon, retention, bandWidth } = 
  * never see that on its own.
  *
  * @param {Object} args the summed pull and the machinery it lands in
- * @param {Record<string, number>} args.perAxisQuanta summed per-period magnitude per axis
- * @param {number} args.epsilon L2's MATERIALIZATION_EPSILON
- * @param {number} args.retention what one period of decay leaves of a unit offset
- * @param {number} args.clamp L2's MAX_AXIS_OFFSET
+ * @param {Record<string, number>} [args.perAxisQuanta] summed per-period magnitude per axis
+ * @param {number} [args.epsilon] L2's MATERIALIZATION_EPSILON
+ * @param {number} [args.retention] what one period of decay leaves of a unit offset
+ * @param {number} [args.clamp] L2's MAX_AXIS_OFFSET
  * @param {number} [args.bandWidth] one band, in the same units; defaults to 1
  * @returns {ErosionBoundRead}
  */
@@ -507,10 +507,10 @@ export function aggregateErosionBound({ perAxisQuanta, epsilon, retention, clamp
  * disappears is an exclusion nobody can audit.
  *
  * @param {Object} args the per-axis quantum and the machinery
- * @param {number} args.quantumPerAxis what one host pull resolves to, per axis, per period
- * @param {number} args.epsilon L2's MATERIALIZATION_EPSILON
- * @param {number} args.retention what one period of decay leaves of a unit offset
- * @param {number} args.clamp L2's MAX_AXIS_OFFSET
+ * @param {number} [args.quantumPerAxis] what one host pull resolves to, per axis, per period
+ * @param {number} [args.epsilon] L2's MATERIALIZATION_EPSILON
+ * @param {number} [args.retention] what one period of decay leaves of a unit offset
+ * @param {number} [args.clamp] L2's MAX_AXIS_OFFSET
  * @param {number} [args.bandWidth] one band, in the same units; defaults to 1
  * @returns {ReadonlyArray<Readonly<{level: string, exposure: string, breadth: number, bounded: boolean, aggregate: number, bound: number, worst: number, regime: string, holds: boolean}>>}
  */
@@ -588,10 +588,10 @@ export function viceWardReachability(rows, axisIds) {
  *   a RECEIPT — the crossing mints something, which the funnel's reversal receipt does
  *
  * @param {Object} args the axis, the chart and the bound
- * @param {string} args.axisId the axis the arc runs on, normally FIDELITY
- * @param {Readonly<{unreachableAxes: readonly string[]}>} args.reachability a viceWardReachability read
- * @param {number} args.corePosition the authored signed position on that axis
- * @param {number} args.ambientBound the largest offset ambient pull can reach, per aggregateErosionBound
+ * @param {string} [args.axisId] the axis the arc runs on, normally FIDELITY
+ * @param {Readonly<{unreachableAxes: readonly string[]}>} [args.reachability] a viceWardReachability read
+ * @param {number} [args.corePosition] the authored signed position on that axis
+ * @param {number} [args.ambientBound] the largest offset ambient pull can reach, per aggregateErosionBound
  * @returns {Readonly<{axisId: string, hasRoad: boolean, ambientReach: number, ambientCrosses: boolean, verdict: string}>}
  */
 export function goingNativeVerdict({ axisId, reachability, corePosition, ambientBound } = {}) {
