@@ -815,3 +815,368 @@ on 2026-08-05** ("the things that YOU find great are not what the community find
 A Fable seat should check this one against the marketing doctrine, not against the code.
 *Receipts:* ODQ §689 · the owner's message, quoted verbatim there.
 *Priority:* **P1** — it is a taste-and-positioning call, the class §236.2 names.
+
+
+---
+
+## §877 · THE FIRST APPEND UNDER THE INVERTED SEAT (owner's §876.5 directive, 2026-09-01)
+
+⛔ The queue's previous row was §723 (2026-08-26) — correct history: §724/§725 returned the chair to a Fable
+seat, so §§724–876.4 owed nothing. The owner's 2026-09-01 directive (*"Use opus for everything now… anything
+that is made with opus that has not been validated or architected, or managed by fable needs to be marked for
+review by fable"*) inverts that, and these six rows are the first payment. Each lane STATED ITS OWN BOUNDARY:
+the chair's rulings, plans, pre-boards and charters are Fable-validated and are NOT re-litigated here — only
+the lanes' own judgment calls are. ⚠ TWO LANES WERE IN FLIGHT at this collection (laneTAILFCURE, laneCLAIMHAB)
+and owe their rows at their completion — §877 does NOT claim their work exists.
+
+**§877 · THE ENGINE-HYGIENE CONSIST LANDS — nine picks, six landing acts, and four judgment
+calls the chair did not rule · 2026-09-01 · SEAT: Opus 5.**
+
+⛔ **BOUNDARY, stated by the lane:** everything Fable architected or ruled is NOT in this row —
+the pre-board's findings (the fence collision, REC-1, the stale-figure enumeration, the hunk maps,
+the bundle ∩, the registry-constant flip), **R-FENCE-SCOPE** and its §876.1 resolution to
+{AGN@HYG · T13}, the intra-consist order **VIRT→CEIL→AGN with NO split**, the adopted riders (the
+RMAG tripwire re-check, the 120-second settling experiment as the first act, the §5a amendment
+car's pack-§4 text and the Ops-leaf optional rider), and the plan's conflict-resolution DIRECTIONS
+(recompute at the tip, hand-apply, never `--update`). Only the calls below are the lane's.
+
+*What was judged:*
+**(1) SCOPE OF THE AMENDMENT CAR — WIDENED beyond the chartered text.** The chair chartered item 1
+(the pack §4 door-ruling text) and an optional rider for item 3 (the Ops leaf). I added TWO more,
+both comment-only: the Lives leaf's SECOND stale claim ("characterDrift.js does not exist on this
+branch yet" — false at the merged tip; the deferral conclusion re-grounded on the measured live
+cause, 0 gate reads in simulationRules.js), and — the larger call — the 800/800 wall in
+`missionDispatcher.js:71` ("that mint is BLOCKED") and `factionDensityKernel.js:26` ("NO further
+virtual flag may land estate-wide"), both of which THIS CONSIST discharged two commits earlier
+(measured 282/800 with the enforcer's own Linter). I LEFT the same figure in
+`subsystemRowsCompact.js` and `subsystemRowsSeat.js` because there it is a historical record, not
+a live blocker. Rationale: a false estate-wide blocker is the cheapest way to cost another lane a
+wave, and the cause landed in this act.
+**(2) THE OSR — I REFUSED the brief's terminal-window instruction** to run a fresh `--write` in a
+clean clone. The pre-board's coupling row C2 says this consist is not an OSR writer and owes a
+PLAIN run only; no train touches the OSR walker. A write would have moved `frozenAtSha` and
+re-frozen an envelope this consist did not change. Ran PLAIN at three tips instead: exit 0, 1996
+exact, envelope blob untouched.
+**(3) THE STALE BLOCKER FIGURES — I EDITED an instrument file's prose outside the chartered
+scope.** `testRatchet.test.js`'s WALKER_ROWS_OWED recorded the voice debt as 1028/670 and 21/6;
+executed at the boarding base it is 1108/670 and 40/6, and the pre-board quoted the stale figures
+as current because it read them rather than ran them. Corrected in the ratchet bill WITH the
+measuring sha attached, on the §854 precedent for exactly this act. (The consist itself adds ZERO
+to either total — identical at base and tip.)
+**(4) SEAT TRAILERS ON PICKS** — I APPENDED `Seat: Opus 5 (lane HYG-land)` to every picked car's
+preserved message. The WAR landing (Fable-validated) left picked messages untouched. I chose
+brief-literal compliance plus provenance (source lane's trailer above mine); the trees stay
+patch-identical, only the messages differ from WAR's convention.
+**(5) THE TWO REDS THE RATCHET REFUSED — cured at cause, and ONE of the cures adds a REGISTRY
+ROW.** `mechanismLitCoverage` gained a `LIT_COVERED_BY` entry for `settlementStrategyReads`
+(CEIL's new leaf) naming `tests/domain/settlementStrategy.test.js` with the evidence string
+'a COLD_WAR edge thaws to rival'. I chose that over (a) adding a direct import of the leaf to a
+test — which would have manufactured a coupling CEIL deliberately avoided ("all six exports still
+exported from the head so no consumer import path moved") — and over (b) adding the name to the
+shrink-only baseline, which would bank a defect. The precedent is the instrument's own
+`treatyTermRoles` row, minted for the identical shape. The second cure annotates AGN car 2's bare
+`not.toMatch` with the walker's third sanctioned form (`// anchored:`) rather than a helper,
+because the negative is a regex over a string and `expectAbsentWithAnchor` has no member to take.
+**Also mine, smaller:** resolving the cars 3/4 FIXTURE conflict to the LANDED side (the plan ruled
+the src side, not the fixture) and landing cars 3–6 with `generatorGoldenMaster` DECLARED-red until
+the terminal re-record; regenerating the battery's base arms rather than reusing WAR's sealed
+artifacts, with node_modules CLONED not symlinked; staging the two generation-inert bundle metas
+(WAR's precedent); and ruling that residue must be measured with MULTISET semantics per path
+template, not positionally.
+
+*What Fable re-derives:*
+- (1) is the only call that changed FILES the chair did not name. Re-read the four comment diffs
+  and confirm the two "wall discharged" edits are wanted at all, and that leaving the Compact/Seat
+  mentions is the right line between record and blocker.
+- (2) is a refusal of an instruction in the dispatch. If the chair meant HYG to advance the OSR
+  envelope regardless, the write is still owed and my plain-only reading is wrong.
+- (3) touches a test-ratchet instrument. Confirm that correcting a WALKER_ROWS_OWED figure is a
+  landing's act and not the T5-ONE-REGEN wave's, and that the measuring-sha convention is wanted.
+- (4) sets a convention for every later landing: do picked cars carry the landing seat's trailer or
+  only their author's? WAR and HYG now differ, and one of them should become the rule.
+- (5)'s `LIT_COVERED_BY` row is a REGISTRY entry with an evidence string that a future edit to
+  `settlementStrategy.test.js` can silently invalidate (the instrument checks the string still
+  appears, which is the guard). Confirm the entry is the wanted disposition rather than giving the
+  leaf a direct-import lit test.
+- The packet-manifest cure (bill 1) is mechanically forced and swept over all 43 pins, but the
+  CLASS is worth a Fable pass: TE-VIRT-1's receipt marked "no census outside the 28 suites is
+  disturbed" PLAUSIBLE from a grep of tests/ and scripts/ — `docs/` was outside the search. Any
+  other decomposition in flight may owe the same sweep.
+- ⭐ **THE CLASS BEHIND BOTH BILL 1 AND BILL (5) IS ONE CLASS, AND IT IS WORTH A RULING: a
+  DECOMPOSITION owes every registry that keys on a MODULE PATH or a SYMBOL'S HOME** —
+  `docs/implementation/PACKET_MANIFEST.json`'s requiredSymbols, `mechanismLitCoverage`'s
+  direct-import credit, and (already known) the size baseline and the coupling walker. **Three
+  consecutive landings have now been bitten by a member of it** (substrate bill 7's `codeOnly`,
+  this landing's two). A pre-board checklist item would have caught both in minutes.
+
+*Receipts:* `$SP/laneHYGLAND-receipt.md` · tip **`8b07ce45f179b583c6a152412a23777cb1a15a38`** on
+`claude/composite-r4`'s base `3f9201e39` · logs in `$SP/HYG-*.log` (fence BASE/AGN/VIRTTIP/
+RERECORD, virt-battery, ceil-battery, golden PRE/record/POST, bundle, lighting
+measure+refreeze+plain, ratchet-update) · probe artifacts `$SP/HYG-A|B-{BASE,PICKS,FULL}.tsv`,
+`$SP/HYG-resA-{BASE,FULL}.json`, `$SP/HYG-census-{BASE,TIP}.json`,
+`$SP/HYG-probeC-{PRECEIL,TIP}.tsv`.
+
+*Priority:* **P2** — nothing here is load-bearing for correctness (every claim is executed and the
+gate is the chair's), but (1) and (3) widened this landing's file scope on my own judgment and (4)
+sets a cross-landing convention that should be ruled once rather than per lane. **(2) is P1-shaped
+only if the chair actually intended the OSR write.**
+
+**§877.1 · THE TAIL-O CURE CARS — four cars built at a proxy coupled tip after the briefed dock
+was proven impossible · 2026-09-01 · SEAT: Opus 5.**
+
+⭐ **BOUNDARY, stated by the lane:** this row covers **only my own judgment calls**. The chair's
+prior rulings — the **O6-B option (c) ruling**, the **coupling ruling** (TAIL-O+TAIL-L, one consist,
+cut point before L8), and **J-O7-1's parking** — are Fable-validated and are **NOT** in this row.
+Where I touched option (c), what I am submitting for re-derivation is my *measured correction to
+its wording*, not the ruling.
+
+*What was judged:* (1) Docking the cure cars on a **proxy coupled tip** rather than the O-chain
+tip, on the finding that neither cure site exists there (J-TC-1/J-TC-2). (2) **CAR 3's strip stops
+at comments, not strings** — the sibling's cure would blind the census to a snake_case kind word's
+only landing shape (J-TC-3). (3) **CAR 4 enrols the shape-gate read and rewrites the sibling arm's
+title**, moving a standing claim about the authored core (J-TC-4). (4) **Building CARs 3 and 4 at
+all**, rather than reporting them for a later packet (J-TC-6). (5) The **PARTITION correction** to
+option (c)'s drafted wording — `seat_agent` is annex-only, so "every annex row names a catalog
+kind" is false (J-TC-5 home choice rides with it).
+
+*What Fable re-derives:* (a) That `consumesKnownRead` and `operations/operationGrammar.js` are
+genuinely ABSENT at `9cee5c849` — the whole dock deviation rests on it. (b) That comment-strip vs
+string-blank really do differ for `seek_compromise`, i.e. that a real willingness landing arrives
+as a string literal; if a landing could arrive as an identifier, CAR 3's boundary is wrong.
+(c) Whether enrolling a refusal-only read is the right shape for L2's census, or whether the census
+should exclude refusal reads by construction — the alternative I named but did not take. (d) That
+CARs 3 and 4 are TAIL-O's to pay and not FOLLOW's or a later packet's. (e) That `seat_agent`'s
+annex-only status is by design and not itself a defect.
+
+*Receipts:* Cars `f03fa7549` · `577164974` · `a4ee75006` · `e455c3fa4` on `$SP/laneTAILOCURE-tree`
+(tip `e455c3fa4`, porcelain 0, base `49faf37e3`), sealed
+**`refs/preserve/tailo-cures-2026-09-01`**. Logs: `/tmp/tc-car1-before.log` (charted red
+reproduced) · `/tmp/tc-car1-before-wide.log` (5 reds, pre-stand-in) · `/tmp/tc-car1-before2.log`
+(4 reds, faithful) · `/tmp/tc-after-all.log` (646/646, exit 0) · `/tmp/tc-plant.log` (8 predicted
+reds) · `/tmp/tc-tipproof.log` · `/tmp/tc-preplant.sha` (restore proof) · `$SP/tc-probe-car3.mjs`
+(the comment-vs-string measurement) · `$SP/tc-probe-layers.mjs`.
+
+*Priority:* **HIGH (P1-shaped) for (b) and (d)** — both bind what the TAIL-O landing must carry,
+and (b) is a claim about a door that has not been built, so it cannot be settled by running
+anything. **MEDIUM for (c)** — it moves a standing instrument and the chair may prefer the
+alternative. **LOW for (a) and (e)** — both are one-command re-reads.
+
+**§877.2 · THE M1a DEFERRAL SWEEP — the denominator measured by class, and one class in four
+disguises · 2026-09-01 · SEAT: Opus 5.**
+
+**Boundary, stated by the lane:** the rows below record **ONLY this lane's own judgment calls**.
+The chair's standing rulings are Fable-validated and **excluded**: the §876.3 MF-CH2B pre-ruling,
+the §764.4/§764.5 charter and its map-module exception, §782.3's MF-CH2B car-not-flip
+ratification, the H7 `heraldIndex` STAY-DEAD ruling, the STRIP-never-raise ruling (ODQ line 266),
+the §825 legal-batch one-sitting ruling, and the EP-g2 dispositions already in the ODQ. Where a
+row below cites one of those, it cites it as a **premise**, not as a call.
+
+*What was judged:* **J-M1A-1** — the §764.4 sweep scoped by an **EMERGENT vs SCOPE-BOUNDARY**
+test: only emergent (found-and-parked defect) deferrals are launch-path; chartered-later and
+owner-gated classes are *presented by name*, not scheduled. This is my reading of "nothing emergent
+should ever be delayed", and it is what makes a 78-row prose class resolve to 12 launch-path rows
+instead of 78. **J-M1A-2** — the denominator was defined to include the **machine registers**
+(hazard registry, tolerated-red register, 19 only-shrinks baselines = 1,452 rows), not only marker
+prose; I judged that a ratchet entry IS a documented deferral in the estate's own sense.
+**J-M1A-3** — `S2` (HZ-SERVICECAT), `S3/S4/S5` (three rotted attributions) and `O-7` (EP-g2) ruled
+**register/ledger consequence ⇒ chair rows, not lane edits**, against the alternative of fixing
+them in-dock. **J-M1A-4** — `O-2` was **repaired rather than tabled**, on the judgment that a
+comment-only re-point of a *never-existent* address, with the real home proven by reading its env
+seams, meets the brief's step-5(b) "same certainty" bar. **J-M1A-5** — the other **13** rotted
+citations (O-3/O-3b) were **NOT** repaired, on the judgment that re-pointing a pin requires reading
+the replacement, which O-3's six candidates had not had. **J-M1A-6** — `O-1` (the
+`enforcement-claims` corpus excludes source docblocks) named as the **habitat** and proposed as a
+structural-prevention row, with its three-census landing cost flagged, rather than built.
+**J-M1A-7** — the `docs/**` prose layer ruled **out of scope** for the sweep and recorded as a
+deliberate deferral. **J-M1A-8** — ranked S3/S4/S5 **above** S2 for pre-freeze urgency, on the
+reasoning that the freeze certifies against those registers.
+
+*What Fable re-derives:* (a) That the EMERGENT/SCOPE-BOUNDARY split (J-M1A-1) is the right reading
+of §764.4 — and that the **12** named emergent rows are the right 12, in particular whether
+`engagementNarrative.js:65` (`sea_battle`) is genuinely the only reader-visible one. (b) That the
+three rotted attributions are rot and not a **legitimate declared shift** whose record lives
+elsewhere in the ledger (I searched the registers, not the whole ODQ, for a superseding row).
+(c) That HZ-SERVICECAT's new walker actually **enforces the class** the entry describes (silent
+`'equipment'` fallthrough), not merely a neighbouring one — I proved the walker EXISTS and
+references the map 21×; I did **not** prove it catches the three recorded mis-folds. (d) That
+O-2's repair names the correct home — i.e. that `fullTypecheckRatchet.test.js`'s EXECUTED PINS half
+really exercises the **scope sentinel's** failure paths, not only the ratchet's. (e) That the O-4
+doc absences are strip casualties rather than an IP-exposure removal that owes a citation sweep.
+
+*Receipts:* `$SP/M1A-DEFERRAL-SWEEP.md` §§1–7 · `$SP/laneM1A-receipt.md` §2 (22 rows, each with
+its command) · commits `46c8d9414` + `8bc0d0699` in `$SP/laneM1A-tree` · `$SP/M1A-pins-final.log`
+(**5 files / 64 tests / exit 0**) · `$SP/M1A-osr-a.log` (**44 tests / exit 0**) ·
+`$SP/M1A-redrows.log` + `$SP/M1A-redrows-BASE.log` (the five rotted figures, tip and clean base) ·
+`$SP/M1A-preexisting-base.log` (the pre-existing red earned) · `$SP/M1A-ratchet-run.log` (exit 0,
+173/173) · `$SP/phantom2.txt` (60 absent citations) · `$SP/M1A-eslint-{a,b}.log` (exit 0).
+
+*Priority:* **HIGH (P1-shaped) for (b) and (c)** — they are ledger-register edits the chair will
+make on my measurement, and (c) is the difference between a ratchet move and a false one.
+**MEDIUM for (a) and (d). LOW for (e).**
+
+**§877.3 · THE MAT LAZY-ROSTER SEAM — the architectural cure, and the falsification found on the
+way · 2026-09-01 · SEAT: Opus 5.**
+
+**Boundary, stated by the lane:** this row covers ONLY this lane's own calls — the seam design, its
+placement, its byte measurements and its dormancy claim. It does **NOT** cover the chair's prior
+ruling to try the architectural cure first, nor MAT's own build (`d8809b24e`), which is picked
+verbatim.
+
+*What was judged:* (a) That a dynamic-import seam is the right cure, and that the seam belongs at
+`src/domain/content/livingContentSeam.js` behind one `ENGINE_SHARED_DOMAIN_EXCISIONS` entry rather
+than in `src/generators/` with no vite edit. (b) That the gate moves to the seam and is
+deliberately NOT re-exported by `livingContentLaw.js`. (c) That the payload is NOT retained today,
+deferring a measured +1,047 B engine cost to the lighting car. (d) That `c90e0cb76` should be
+dropped from the consist and the lighting census re-derived at the landing. (e) That a fail-loud
+throw — not a silent `null` — is the correct lit-path behaviour when the payload is unloaded.
+(f) That committing two cars in my own detached dock beat leaving it clean.
+
+*What Fable re-derives:* 1. **The falsification, independently**: build `3f9201e39` and
+`3f9201e39 + d8809b24e`, and confirm the engine row is GREEN (+576) while the raw closure is RED by
+48,584 — because the whole fork the chair was handed rests on that inversion. 2. **That the excision
+is a routing declaration and not a ceiling**, and that `engineChunkLazy`'s excision guard genuinely
+does not demand a pin for a first-paint-unreachable excision. 3. **That the dormancy corpus is not
+too narrow**: 4 routes × 6 types × 15 seeds with `customContent` bearing the real pack — does a
+route exist that could move and is not covered (imported neighbour, regen, section reroll)?
+4. **That the fail-loud throw cannot fire on any path a v1 world can take**, including a saved world
+replayed through `config._seed`. 5. **That dropping `c90e0cb76` loses nothing else** — it also
+carried MAT's park finding and the refreeze-defect note, which must survive in the receipt if the
+car does not. 6. **The lighting-day arithmetic** (+1,047 / +456), since it is the number a future
+owner ask would be built on.
+
+*Receipts:* `$SP/MAT-SEAM-DESIGN.md` · `$SP/laneMATSEAM-receipt.md` §1–§4 ·
+`$SP/matseam-{base,tip,seam,seamB,seamC2,FINAL,TIP}-chunks.txt` · `$SP/matseam-{base,tip}-vpl.log`
+(governed test, both arms) · `$SP/matseam-closure.mjs` (verbatim replica of the governed closure
+method) · `$SP/matseam-dormancy.mjs` + `$SP/matseam-dorm-{BASE,TIP}.txt` ·
+`$SP/matseam-FINAL-tests.log`, `$SP/matseam-TIP-tests.log`, `$SP/matseam-lint.log`,
+`$SP/matseam-census{1,2}.log` · dock `e5c68607e` (porcelain 0) ·
+`$SP/MAT-SEAM-full-vs-3f9201e39.patch` · `$SP/matseam-MAT-asis.patch`.
+
+*Priority:* **HIGH on (1)** — it inverts the pre-board's verdict and therefore the chair's fork, and
+one build settles it. **HIGH on (3)+(4)** — they are the determinism claims, and a lazy seam that
+moves a same-seed byte is the one outcome that must not ship. **MEDIUM on (2)+(5)+(6).**
+
+**§877.4 · EP-g2 RULED BUILT; L9's gate discharged on the LOCATED branch; the stale forecast
+struck · 2026-09-01 · SEAT: Opus 5.**
+
+**Boundary, stated by the lane:** the rows below record **ONLY this lane's own judgment calls**.
+The chair's pre-existing rulings — the L9 trigger's wording, the freeze-before-walk order, the
+ODQ:319 EP-g2 disposition itself, §740.1's undercity descope, the A1/A4 charter amendments — are
+**cited, never re-judged**, and are deliberately absent from this row.
+
+*What was judged:* **J-EPG2-1** — EP-g2 ruled **BUILT** at `3f9201e39`, L9's gate discharged on the
+LOCATED branch, and **no charter drafted** (a deliberate refusal to produce the deliverable the
+brief allowed for). **J-EPG2-2** — the *"41% of golden keys / 39% of worlds — the batch's largest
+mover"* figure ruled **STALE-AS-FORECAST** and recommended **struck** from GOLDEN-BUILD-CHARTER
+PART IV.1 and WALK-MANIFEST row 8, with replacement wording proposed. **J-EPG2-3** — WALK-MANIFEST
+row 8 recompiled *"CARRIED, build-state caveat"* → **"AMENDED — EXECUTED"**, sibling of rows 1/2/3
+in one commit. **J-EPG2-4** — **R-7 ruled NOT a live constituent** of the regen batch (retire; defer
+with its module-side consumer), resolving row 10's fork. **J-EPG2-5** — recommended (vetoable) that
+the chair land a **✅ EP-g2 RESOLVED-EXECUTED** row in the ODQ, the open pick being the measured
+root cause of the whole re-derivation. **J-EPG2-6** — the `sewerDerivation.js:42` stale-grep
+classified a **comment-evidence defect, disposition unchanged**, and left unfixed as not this
+lane's to make. *(⚠ J-EPG2-6 was subsequently REPAIRED by lane M1A as `46c8d9414` — see §877.2 —
+so the chair should read this row as the finding and M1A's row as the act.)*
+
+*What Fable re-derives:* (a) That `01bbc1aa7` is the sole landing commit of **all three** pieces —
+re-run `git log -S` on each distinctive string ("Do not let the subject manufacture evidence",
+`EP_G3_OWNER_DEFERRED_GATE_KEYS`, and the `institutionLadders.js` path log) and confirm convergence
+on one sha. (b) That the **discrimination plant is honest**: re-disable `structuralValidator.js:406`'s
+`.delete(instName)` in a fresh dock and confirm `generatorGoldenMaster` reds — and confirm the
+reading that **202 ≠ a pending movement** (corpus grew 523→525; T8's 91 and §860's 322 landed over
+it). (c) That the shift ledger's *"must not be restated as 41%"* sentence is verbatim at
+`3f9201e39:docs/GOLDEN_SHIFT_LEDGER.md:~1717` — the whole of J-EPG2-2 rests on it. (d) That EP-g2
+truly adds **no row** to the PART IV.2 [A1] enrollment census (it is neither an env spelling, a
+same-seed instrument, nor an in-file corpus constant) — the one claim that could let a real escapee
+through if wrong. (e) That `PRE_SEED` is live and that **no** planned/charter/military kind exists,
+so R-7's `FOUNDING_CHARTER` slot is genuinely inert at weight zero.
+
+*Receipts:* `$SP/laneEPG2-receipt.md` §§1–5 · `$SP/EPG2-pins.log` (7 files / **97 tests** / exit 0)
+· `$SP/EPG2-golden-control.log` (3 tests / exit 0) · `$SP/EPG2-golden-plant.log` (**202-key red**,
+exit 1) · commit `01bbc1aa7` stat · `3f9201e39:docs/GOLDEN_SHIFT_LEDGER.md` §"2026-07-28 — T5" ·
+`3f9201e39:src/data/institutionLadders.js` · `…:src/generators/structuralValidator.js:401–411` ·
+`…:tests/generators/effectReachability.coverage.test.js:216–218,438–445` ·
+`…:tests/data/institutionNameIntegrity.test.js:26–32,86–91` ·
+`…:src/domain/institutionFounding.js:42–45,142–147` ·
+`…:src/domain/undercity/sewerDerivation.js:41–46`.
+
+*Priority:* **J-EPG2-1 and J-EPG2-2 are BLOCKING on L9** — the first releases the freeze's gate,
+the second removes a stale figure that would misprice the act; both must land before the chair
+signs the REC. **J-EPG2-3 and J-EPG2-4** ride the chair's WALK-MANIFEST countersign, before L10.
+**J-EPG2-5** is hygiene with real recurrence cost — land it whenever the ODQ is next written, but
+land it. **J-EPG2-6** is a pre-freeze-safe one-line comment repair with zero golden motion.
+
+⛔ **THE BOUNDARY, STATED EXPLICITLY.** Everything below is **only this compiler's own compilation
+judgments**. The chair's rulings I transcribed are **Fable-validated and EXCLUDED**: R-FENCE-SCOPE
+and its §876.1 resolution, the HYG intra-consist order and its adopted riders, the TAIL-O cure
+lane's four chair adoptions (the four cars, the FOLLOW routing, the wiring-car parking, the O6-B
+option (c) ruling), the M1a sweep's four chair rulings, the chair's ruling to try MAT's
+architectural cure first, the §876.4 grant, the §876.5 seat law, and both build charters' adopted
+amendment sets. **The lanes' own rows in §3 are the LANES' judgments, not mine — I collected them;
+I did not author them.**
+
+**§877.6 · The §877 collection compiled while the gate ran · 2026-09-01 · SEAT: Opus 5.**
+
+*What was judged:*
+**(1) THE PENDING BOUNDARY — where I drew the ⏳ line.** I ruled six pending groups (CAS · gate
+verdict · seal · seat line · the *branch-level* fence state · dock disposition) and, in particular,
+I ruled the **branch-level fence state PENDING even though the dock proves it**: the fence's scope
+reads {T13} and its constant reads `72acacd8…` at `8b07ce45f`, but neither is true of
+`claude/composite-r4` until the CAS, and T13's charter §9 step 4 reads the *branch*. I also folded
+the lane's own PLAUSIBLE (the bare gate's non-vitest stages unrun) **into** the gate-verdict slot
+rather than listing it as a finding.
+**(2) THE STREAK COUNT — I counted ONE conviction and left one CONTESTED** (§8 below). The TAIL-O
+dock is convicted because the chair owned it in writing ("FINDING ZERO IS THE CHAIR'S ERROR, OWNED"
++ "streak +1 (to §877)"). The HYGIENE brief's OSR `--write` I did **not** convict, because the lane
+itself frames it as a refusal whose correctness depends on what the chair meant — **conviction there
+requires the chair's own word, and I declined to supply it.** I also declined to count the MAT
+premise (§8 borderline 1), following the §876.5 precedent of naming borderlines without counting
+them.
+**(3) THE ROW RENUMBERING AND THE TABLE→FIELD CONVERSION.** Four lanes drafted their rows as
+markdown TABLES; the queue's house format is field lines. I converted the layout and **renumbered
+each lane's `§NNN` to the §877.x rider it rides** so the queue's row ids resolve against the ledger.
+Field CONTENT is verbatim. One editorial insertion is marked in italics inside §3.5 (noting that
+M1A repaired J-EPG2-6), because two lanes' rows otherwise contradict on whether that repair
+happened.
+**(4) THE MEMORY RECOMMENDATION — one stub, not three.** I verified the two candidate laws already
+exist and recommend **folding the "detector census is not a leaf census" law INTO the coupled-tip
+stub** rather than minting a third file, on the index's hard-ceiling constraint. That is a
+compression judgment and it can lose a hook.
+**(5) THE §877.5 DEDUPE.** I ruled the memory figures and the §745.1-vs-§844 resolution **already
+sealed at §876.3** and cut them from §877's new content, keeping only the fidelity verdicts, which
+the ledger does not carry. If the chair wants §877 to restate the memory estate for the successor
+card's sake, that is a deliberate re-carry, not a gap.
+**(6) THE DESK DELTA'S SHAPE — I ruled desk row 24 DISCHARGED-BY-FALSIFICATION rather than
+answered**, and replaced it with a forward-looking lighting-day row. That reframing is mine; the
+measurements are MAT-SEAM's.
+
+*What Fable re-derives:*
+- (a) **The (2) call is the one with teeth.** Re-read the HYGIENE dispatch brief's terminal-window
+  list and rule whether the `--write` instruction was an error or an intention. If it was an
+  intention, the streak is unchanged **and** laneHYGLAND's refusal (§3.1 field 2) becomes P1 and the
+  OSR write is still owed.
+- (b) That the six ⏳ groups are the right six — specifically whether the **dock disposition** and the
+  **branch-level fence state** are genuinely pending facts or mechanical follow-ups that should not
+  occupy a slot.
+- (c) That renumbering the lanes' `§NNN` to §877.x (3) does not misattribute any lane's row to a
+  rider it did not produce — the mapping is HYGLAND→§877, TAILOCURE→§877.1, M1A→§877.2,
+  MATSEAM→§877.3, EPG2→§877.4.
+- (d) That folding the detector-census law into the coupled-tip stub (4) does not bury a hook that
+  will be needed on its own — it is the compaction class the index has already been bitten by.
+- (e) That flagging laneCLAIMHAB and laneTAILFCURE as **in-flight rather than delinquent** is right;
+  if either lane is in fact dead, §877 must say so, and §876.5's unmarked-is-owed rule then bites.
+
+*Receipts:* `$SP/877-MATERIALS.md` (this file) · the eleven sources named in its header, each read
+whole · live read-only verifications quoted in the header (`rev-parse` on `claude/composite-r4` and
+`refs/preserve/tailo-cures-2026-09-01`; `rev-list --count` and seat-trailer grep on
+`laneHYGLAND-tree`; HEADs of laneM1A/laneMATSEAM/laneTAILOCURE/laneTAILF/laneCLAIMHAB; the memory
+estate's file census, mtime count, description census and MEMORY.md md5; the ODQ EP-g2 grep and the
+three sibling ✅ rows; `git log` on `docs/FABLE_RETROVALIDATION_QUEUE.md`).
+
+*Priority:* **P2 overall.** Nothing here is load-bearing for correctness — every carried figure is a
+lane's executed evidence and every gate/CAS fact is ⏳. **(a) is P1-shaped** because it decides
+whether a landing owes an unperformed register write; **(c) is P4** (one-command re-read).
+
+**§877.6 · The §877 collection compiled while the gate ran · 2026-09-01 · SEAT: Opus 5.**
+
+---
