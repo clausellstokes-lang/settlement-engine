@@ -192,3 +192,34 @@ describe('SettlementCard — saved-on date (defect 7b: never "Invalid Date")', (
     expect(screen.queryByText(/Invalid Date/i)).toBeNull();
   });
 });
+
+/**
+ * A DESTROYED ROW DOES NOT PRINT A LIVE HEALTH BAND. DestroySettlementControl.jsx
+ * documented this as deliberately deferred: "the Health column still reads the band
+ * derived from the settlement blob, so a destroyed town can show 'Stable' beside its
+ * Destroyed mark". Cured at the derivation (livingWorldSignals.healthPip), so the
+ * Health column falls back to the dash it ALREADY renders when no system state can
+ * be derived — the column's existing null grammar, not a new one, and no second
+ * lifecycle encoding beside the Phase column's Destroyed rubric.
+ */
+describe('SettlementCard — a destroyed row carries no live health band', () => {
+  const destroyedSave = {
+    ...peacefulSave,
+    id: 's-gone',
+    settlement: { ...peacefulSave.settlement, status: 'destroyed' },
+  };
+
+  it('a standing row DOES paint its health pip (the control)', () => {
+    render(<SettlementCard s={peacefulSave} {...baseProps} currentCampaignId={null} />);
+    expect(screen.getByTestId('health-pip')).toBeTruthy();
+  });
+
+  it('a destroyed row paints its Destroyed rubric and NO health band word', () => {
+    render(<SettlementCard s={destroyedSave} {...baseProps} currentCampaignId={null} />);
+    // anchored: the row demonstrably rendered, and its lifecycle mark is present —
+    // so the pip's absence is a suppression, not an unmounted card.
+    expect(screen.getByText('Greenhollow')).toBeTruthy();
+    expect(screen.getByText('Destroyed')).toBeTruthy();
+    expect(screen.queryByTestId('health-pip')).toBeNull();
+  });
+});

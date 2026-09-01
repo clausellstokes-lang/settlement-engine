@@ -71,6 +71,17 @@ const ATTENTION_BANDS = new Set(['Vulnerable', 'Critical']);
  * @returns {{ band: string, color: string, severity: number, label: string } | null}
  */
 export function healthPip(settlement) {
+  // ⚠ DESTRUCTION IS THE END OF THE SCALE, NOT A POINT ON IT. A destroyed
+  // settlement still carries the blob it had when it stood, so deriveSystemState
+  // banded it happily and the Library row printed "Stable" beside its own
+  // Destroyed rubric. Every consumer of this derivation was affected, not just the
+  // pip: the toolbar's attention filter (needsAttention) and its severity sort read
+  // the same value, so a town that no longer exists could be floated up as needing
+  // attention. Guarding HERE rather than at the three call sites keeps them
+  // coherent and spends no new grammar — null is the value the pip column, the
+  // filter and the sort ALREADY handle. The row's Destroyed mark stays where it
+  // belongs (the Phase column, this row's single lifecycle encoding).
+  if (settlement?.status === 'destroyed') return null;
   let systemState;
   try {
     systemState = settlement ? deriveSystemState(settlement) : null;
