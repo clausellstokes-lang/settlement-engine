@@ -8,7 +8,11 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐ PICKUP AT §872 (2026-08-31 ~16:35, ROLLING CARD — rewritten whole at every collection) — START HERE; supersedes every card below.
+## ⭐⭐⭐⭐ PICKUP AT §873 (2026-09-01 ~00:30, WINDOW-CLOSE CARD — the owner's 5-hour window expired mid-landing; a successor lands HERE) — START HERE; supersedes every card below.
+
+**ONE LINE TO RESUME: read §873 in the ledger tail, then `825f209c…/scratchpad/DISPATCH-QUEUE.md` (the owner-ordered auto-dispatcher's queue — re-arm its cron from the protocol text in that file), then act on §873's three per-lane marks in order.** Branch `claude/composite-r4` = `853e0e9ba` (SMALLS §872); **the SUBSTRATE landing sits at 49 commits, ONE act from its gate** (laneSUB-tree @ `806b514c8`, porcelain 4 = wave 6's REC-1 cure mid-flight, owner-ratified cure+ratify ruling in §873); the faith build line is COMPLETE 7/7; O6/O7 are the only unbuilt cars; every landing to the stop line has a skeptic-amended plan AND a boarding pack; the close's two trains (T13, TE-GOLDEN) hold their drafted volumes awaiting panels. THE STOP LINE: everything up to, NOT including, the terminal soak. The full §872-era protocol block below still binds (quiet windows, seats, the packet-row law, disk hygiene).
+
+## (superseded) PICKUP AT §872 (2026-08-31 ~16:35, ROLLING CARD) — the §873 card above supersedes.
 
 **Build branch `claude/composite-r4` = `853e0e9ba4aa1f6df5703082a8fcbc11208819d5` (THE SMALLS LANDED §872 — first-run green gate, ratchet 10/29,377 — after TE-DENSITY-1 LANDED §871 at `a107bcde3`, nine bills, nine gates). Ledger through §872.1.** TWO landings this sitting, both quiet-window gates; the owner ratified the two dist-budget raises in-session (closure 1,042,000 · engine 676,000).
 
