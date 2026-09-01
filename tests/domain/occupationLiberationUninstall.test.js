@@ -10,6 +10,7 @@ import { RULING_POWER_CAUSES, transferRulingPower } from '../../src/domain/rulin
 import { legitimateRemnantOf } from '../../src/domain/rulingPowerSeat.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { applyStressEventFactions } from '../../src/generators/power/stressFactions.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -21,6 +22,46 @@ import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 // forever while its own prose said "the settlement reclaims its own authority". These arms
 // are DISCOVERY-grade against that absence, not regression-grade: nothing here passed
 // before the car, and the dark column below is what the whole tree did until it landed.
+//
+// ─────────────────────────────────────────────────────────────────────────────
+// SAME-SEED WINDOW (SHIFT RECORD SR-b, 2026-09-01, the WAR landing's mini-window
+// R-T4-MINIWIN on the base `105c65cd1`). ONE CAUSE: the military predicate.
+//
+// CAUSE. `applyWorldPulseOccupationAuthority.isMilitaryFaction` asked a DIFFERENT question
+// from the generator whose transform it exists to reproduce. It read
+// `category === 'military' || /\b(milit|guard|garrison|warrior|legion|soldier)\b/`; the
+// generator (`generators/power/stressFactions.js`, the `ke('occupied')` arm) reads
+// `name.includes('military') || name.includes('guard')`. laneT4-receipt.md:257-261 found it,
+// called the file's parity comment false, and deferred the cure to a declared-shift window.
+// This is that window.
+//
+// WHICH SIDE WAS DECLARED TRUE — THE GENERATOR'S — and the record states it because the
+// choice decides which probe moves. A generator-side cure would move the 600-settlement
+// generation corpus (probe A) and the espionage fence's 360-corpus; the sim-side cure moves
+// only the war path (probe C). Sim-side was taken: this family's chartered purpose is to
+// COPY the generator, and widening the generator is a same-seed generation act inside the
+// owner's tuning carve-out.
+//
+// MEASURED, not asserted. 13 of a 23-name corpus disagreed, and the `category` clause was
+// the main cause rather than the regex: every generated faction carries a category from
+// `inferFactionCategory`, whose `military` bucket is sixteen keywords wide. The sim
+// therefore disarmed to x0.3 a class the generator only suppresses to x0.82 — including the
+// generator's OWN 'Occupation Authority' (20 -> 6) and 'Resistance Network' (8 -> 2) rows,
+// which the generator explicitly exempts by name.
+//
+// MOVEMENT SCOPE — ZERO on every launched world, and it is PROVEN rather than argued.
+// `isMilitaryFaction` has exactly ONE caller (`installOccupationAuthority`), reachable only
+// from `applyWorldPulse.js`'s `cause === 'conquest'` branch; `cause: 'conquest'` is minted at
+// exactly one site tree-wide (`warDeployment.js:823`), reachable only under
+// `warLayerEnabled`, which is `false` in DEFAULT_SIMULATION_RULES and overridden by NO named
+// preset. Probes A and B cannot reach it at all; probe C reaches it only on a war-LIT arm.
+// The in-tree instruments that DO move are this file's conquest fixture and
+// `warDeployment.test.js`'s Z1 arm — both moved in this same act, cause cited, and the
+// fixture's military row is renamed to a name BOTH predicates call military so the SEAT-5
+// ordering discovery survives on its own merits instead of on the defect.
+//
+// ⛔ THE STOP: this predicate moving again outside a recorded window is a STOP, never a
+// re-record. The generator's own narrow matcher is the docketed OWNER-GATED half.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const LIT = { simulationRules: { foreignSeatEnabled: true } };
@@ -35,7 +76,7 @@ function conquered() {
     powerStructure: {
       factions: [
         { faction: 'Town Council', power: 40, isGoverning: true, category: 'government' },
-        { faction: 'The Garrison', power: 25, isGoverning: false, category: 'military' },
+        { faction: 'The Town Guard', power: 25, isGoverning: false, category: 'military' },
         { faction: 'Merchant Guilds', power: 20, isGoverning: false, category: 'merchant' },
         { faction: 'Temple of Light', power: 15, isGoverning: false, category: 'religious' },
       ],
@@ -100,8 +141,8 @@ describe('SEAT-5 — what the lit un-install actually does to the roster', () =>
     const s = conquered();
     const lifted = liftOccupationAuthority(s, { occupationLift: OCCUPATION_LIFT_KIND });
     // `disarmed` names ONE factor (×0.3) and the generator never writes it, so it inverts.
-    expect(byName(s, 'The Garrison').power).toBe(8);
-    expect(byName(lifted, 'The Garrison').power).toBe(27);
+    expect(byName(s, 'The Town Guard').power).toBe(8);
+    expect(byName(lifted, 'The Town Guard').power).toBe(27);
     // `occupied` names TWO factors (×0.6 governing, ×0.82 civic) and the discriminator
     // `isGoverning` is destroyed by the crowning, so the power is deliberately LEFT.
     // Inverting it would fabricate the discriminator and over-restore.
@@ -171,9 +212,9 @@ describe('SEAT-5 — the remnant is chosen on the LIFTED roster (the ordering pi
     // THE DISCOVERY: these DISAGREE on a real conquest fixture. The garrison ranks below
     // the merchants only because the occupier disarmed it; restoring it puts it on top.
     expect(onCut.faction).toBe('Merchant Guilds');
-    expect(onLifted.faction).toBe('The Garrison');
+    expect(onLifted.faction).toBe('The Town Guard');
     // And the payload the producers emit takes the LIFTED answer.
-    expect(occupationLiftTransfer(LIT, { settlement: s }, 20).toPowerName).toBe('The Garrison');
+    expect(occupationLiftTransfer(LIT, { settlement: s }, 20).toPowerName).toBe('The Town Guard');
   });
 
   test('no legitimate remnant ⇒ no payload, rather than a seat invented for the town', () => {
@@ -252,7 +293,7 @@ describe('SEAT-5 — driven through evaluateOccupations (the producer, not the l
         powerStructure: {
           factions: [
             { faction: 'Town Council', power: 40, isGoverning: true, category: 'government' },
-            { faction: 'The Garrison', power: 25, isGoverning: false, category: 'military' },
+            { faction: 'The Town Guard', power: 25, isGoverning: false, category: 'military' },
             { faction: 'Merchant Guilds', power: 20, isGoverning: false, category: 'merchant' },
           ],
         },
@@ -311,5 +352,100 @@ describe('SEAT-5 — driven through evaluateOccupations (the producer, not the l
     expect(JSON.stringify(dark.outcomes)).toBe(JSON.stringify(lit.outcomes.map(strip)));
     // …and the lit run is genuinely different, so the comparator is not comparing nothing.
     expect(JSON.stringify(dark.outcomes)).not.toBe(JSON.stringify(lit.outcomes));
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SR-b — THE MILITARY PREDICATE IS THE GENERATOR'S (cause :261, the mini-window).
+//
+// ⭐ THE AGREEMENT ARM BELOW DRIVES BOTH REAL IMPLEMENTATIONS RATHER THAN TRANSCRIBING
+// EITHER. A pin that re-spells the generator's rule inside the test is a SECOND SPELLING
+// of the shared quantity — the §711.6 failure this whole cure exists to close — and it
+// would go on passing after the generator's own matcher moved. So the generator's real
+// `applyStressEventFactions` is run against the sim's real `installOccupationAuthority`
+// on the same roster, and the two cut DECISIONS are compared.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** One non-governing faction, cut by the SIM's install. Returns its row. */
+const simCut = (name, power) => installOccupationAuthority(
+  { powerStructure: { factions: [
+    { faction: 'Town Council', power: 40, isGoverning: true, category: 'government' },
+    { faction: name, power, isGoverning: false, category: 'military' },
+  ] } },
+  'Ironhold',
+).powerStructure.factions.find((f) => f.faction === name);
+
+/** The same faction, cut by the GENERATOR's own `occupied` stress arm. Returns its row. */
+const genCut = (name, power) => {
+  const factions = [
+    { faction: 'Town Council', power: 40, isGoverning: true },
+    { faction: name, power },
+  ];
+  applyStressEventFactions(factions, (k) => k === 'occupied', null, false, {}, []);
+  return factions.find((f) => f.faction === name);
+};
+
+// The corpus is module-scope and the arms below are straight-line `test` statements: a
+// loop at describe-statement position parks the whole file in the lighting census
+// (SUITE_NOT_STRAIGHT_LINE), which is T8's §875.2 lesson paid once already.
+const PREDICATE_CORPUS = Object.freeze([
+  'The Garrison', 'Town Guard', 'City Guards', 'City Watch', 'Military Order',
+  'Mercenary Company', 'Occupation Authority', 'Resistance Network', 'War Council',
+  'Knightly Order', 'Soldiers of the Vale', 'The Legion', 'Warrior Lodge',
+  'Adventurers Charter', 'Monster Hunter Lodge', 'Huscarl Retinue', 'Merchant Guilds',
+]);
+
+describe('SEAT-5 — the install asks the GENERATOR question about a military faction', () => {
+  test('the row laneT4 measured: a category-military name the generator spares takes the CIVIC cut', () => {
+    // 'The Garrison' is `inferFactionCategory` military and generator-CIVIC — the exact row
+    // laneT4-receipt.md:257-261 measured at 8 by the sim and 21 by the generator. Both say 21
+    // now, and the marker moves with the cut: a civic cut is `occupied`, never `disarmed`.
+    const row = simCut('The Garrison', 25);
+    expect(row.power).toBe(21);
+    expect(mods(row)).toEqual(['occupied']);
+    expect(genCut('The Garrison', 25).power).toBe(21);
+  });
+
+  test('the cure is a NARROWING and not a deletion: a name both sides call military is still disarmed', () => {
+    const row = simCut('Town Guard', 25);
+    expect(row.power).toBe(8);
+    expect(mods(row)).toEqual(['disarmed']);
+    expect(genCut('Town Guard', 25).power).toBe(8);
+  });
+
+  test('the generator OWN occupation rows are no longer gutted by a pulse re-conquest', () => {
+    // A generation-occupied town later pulse-conquered used to have the generator's two
+    // protected rows disarmed to 6 and 2. They now take the civic cut the generator's own
+    // exemption would have spared them entirely — a residual named in the source comment,
+    // and a x0.82 that is no longer a x0.3.
+    expect(simCut('Occupation Authority', 20).power).toBe(16);
+    expect(simCut('Resistance Network', 8).power).toBe(7);
+  });
+
+  test('sim and generator agree on the DISARM DECISION for every name in the corpus', () => {
+    // ⚠ THE COMPARISON IS THE DECISION, NOT THE RESULTING POWER, and the difference is a
+    // measurement rather than a convenience: on 'Occupation Authority' and 'Resistance
+    // Network' the generator applies NEITHER cut (its by-name exemption leaves them at 25)
+    // while this install has no exemption and applies the civic x0.82. That residual is
+    // named in the source comment as NOT mirrored; it is a different cause from this record's
+    // and comparing raw powers here would silently fold the two together.
+    // At power 25 the three answers are distinct — 8 disarmed, 21 civic, 25 exempt.
+    const genDisarmed = (n) => genCut(n, 25).power === 8;
+    const simDisarmed = (n) => mods(simCut(n, 25)).includes('disarmed');
+    // ANTI-VACUITY FIRST: the corpus must contain both answers, or agreement is trivial.
+    expect(new Set(PREDICATE_CORPUS.map(genDisarmed)).size).toBe(2);
+    for (const name of PREDICATE_CORPUS) {
+      expect([name, simDisarmed(name)]).toEqual([name, genDisarmed(name)]);
+    }
+  });
+
+  test('and the agreement is falsifiable: the retired predicate disagreed on fourteen', () => {
+    // NO RE-IMPLEMENTATION. The retired rule's FIRST clause was `category === 'military'`,
+    // and every faction `simCut` builds carries exactly that category — so the old sim
+    // disarmed all seventeen of these while the generator disarms three. The control is
+    // therefore a count over the generator's real answers, which cannot rot into fiction.
+    const generatorDisarms = PREDICATE_CORPUS.filter((n) => genCut(n, 25).power === 8);
+    expect(generatorDisarms).toHaveLength(3);
+    expect(PREDICATE_CORPUS.length - generatorDisarms.length).toBe(14);
   });
 });

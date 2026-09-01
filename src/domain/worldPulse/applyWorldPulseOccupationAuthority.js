@@ -11,13 +11,42 @@
 /** @typedef {import('../settlement.schema.js').SimFaction} SimFaction */
 /** @typedef {import('../settlement.schema.js').SimInstitution} SimInstitution */
 
-// Occupation-parity multipliers — mirror the GENERATOR's `occupied`-stress
-// transform (powerGenerator.js ~1223): the conqueror disarms the locals so a
-// PULSE-conquered town looks like a GENERATION-occupied one, not a town that
-// merely swapped a flag. A local military/guard faction is gutted (×0.3 — the
-// "disarm"); the deposed governing seat is humbled (×0.6) + marked 'occupied';
-// every other local civic faction is suppressed (×0.82). Idempotent by the
-// 'occupied'/'disarmed' modifier guard so a re-fired conquest never re-cuts.
+// Occupation-parity multipliers — the GENERATOR's `occupied`-stress transform
+// (`generators/power/stressFactions.js`, the `ke('occupied')` arm): the conqueror
+// disarms the locals so a PULSE-conquered town looks like a GENERATION-occupied
+// one, not a town that merely swapped a flag. A local military/guard faction is
+// gutted (×0.3 — the "disarm"); the deposed governing seat is humbled (×0.6) +
+// marked 'occupied'; every other local civic faction is suppressed (×0.82).
+// Idempotent by the 'occupied'/'disarmed' modifier guard so a re-fired conquest
+// never re-cuts.
+//
+// ⛔ THIS BLOCK ONCE SAID "mirror", AND IT WAS NOT TRUE. The claim is narrowed to
+// what is MEASURED, because the estate's own §711.6 lesson is that a comment
+// asserting a parity nobody re-measures is how two consumers of one quantity
+// drift apart in silence. What IS mirrored, and what is NOT, both stated:
+//
+//   MIRRORED — the three multipliers (0.3 / 0.6 / 0.82) and, as of the WAR
+//   landing's mini-window (R-T4-MINIWIN, cause :261), the MILITARY PREDICATE:
+//   `isMilitaryFaction` below is now the generator's own name test, character for
+//   character in effect. See its docblock for the measurement that forced it.
+//
+//   NOT MIRRORED, each measured rather than assumed, and each a deliberate,
+//   DOCUMENTED deferral rather than a bug to re-find:
+//     • COMPOUNDING. The generator's arms are four independent `&&` clauses, so a
+//       GOVERNING military row takes 0.6 AND 0.3 (and a noble row takes a further
+//       ×0.7). This install is an if/else-if ladder: exactly one cut per faction.
+//     • THE TWO PROTECTED ROWS. The generator exempts its own 'Occupation
+//       Authority' and 'Resistance Network' rows from the civic cut by name; this
+//       install has no such exemption, so a generation-occupied town that is later
+//       pulse-conquered suppresses the generator's two occupation rows. (Before the
+//       :261 cure it DISARMED them: 20 → 6 and 8 → 2, measured.)
+//     • THE NOBLE CUT (×0.7 on Noble Families / Noble Houses / Landed Gentry) and
+//       its appended desc sentence have no expression here at all.
+//     • THE MARKERS THEMSELVES ARE SIM-ONLY AND THAT IS ON PURPOSE. The generator
+//       writes 'occupied' on the GOVERNING row alone and never writes 'disarmed';
+//       this install marks every row it cuts, which is what makes the SEAT-5
+//       un-install reversible. Widening the generator to match is a GENERATION-side
+//       same-seed act (the owner's tuning carve-out), not this file's to take.
 const OCCUPATION_DISARM = 0.3;
 const OCCUPATION_GOVERNING_CUT = 0.6;
 const OCCUPATION_CIVIC_CUT = 0.82;
@@ -55,11 +84,43 @@ const modifiersOf = (f) => {
 
 /** @param {import('../settlement.schema.js').SimFaction} f */
 const factionNameOf = (f) => String(f?.faction || f?.name || '').trim();
-/** @param {import('../settlement.schema.js').SimFaction} f */
+/**
+ * THE GENERATOR'S OWN MILITARY PREDICATE, and it is deliberately NOT a better one.
+ *
+ * ⛔ THIS FUNCTION IS THE :261 CURE (R-T4-MINIWIN, SHIFT RECORD SR-b). It used to read
+ * `category === 'military' || /\b(milit|guard|garrison|warrior|legion|soldier)\b/`, which
+ * is a DIFFERENT question from the one the generator asks one line above the multipliers
+ * it shares. MEASURED over a 23-name corpus: 13 disagreed, and the regex was not even the
+ * main cause — EVERY generated faction carries a `category`, written by
+ * `rulingStructure.js:700` from `inferFactionCategory`, whose `military` bucket is sixteen
+ * keywords wide (Garrison · Watch · Knight · Mercenary · Occupation · Resistance ·
+ * Adventurer · Charter · Monster Hunter · Huscarl …). So the sim disarmed to ×0.3 a whole
+ * class the generator only suppresses to ×0.82 — including, absurdly, the generator's OWN
+ * 'Occupation Authority' and 'Resistance Network' rows, which the generator explicitly
+ * exempts. Two towns with the same faction under the same occupation held different
+ * rosters depending on WHEN the occupation happened.
+ *
+ * ⭐ THE GENERATOR'S SIDE WAS DECLARED TRUE, and the choice is recorded because it decides
+ * which probe moves (SR-b): a generator-side cure moves the 600-settlement generation
+ * corpus; the sim-side cure moves only the war path. Two reasons, in order:
+ *   1. This file's entire chartered purpose is to reproduce the GENERATOR's occupied
+ *      transform on a pulse-conquered town. When the two disagree, the generator is the
+ *      reference by construction — the sim is the copy.
+ *   2. A generated world's starting roster is the world's own truth (THE PROMISE), and
+ *      widening the generator's matcher is a same-seed generation act in the owner's
+ *      tuning carve-out. It is not a landing lane's to take.
+ *
+ * ⚠ DELIBERATELY DEFERRED, DOCUMENTED, NOT A BUG TO RE-FIND: the generator's predicate is
+ * a lowercase SUBSTRING test, so it is narrow in its own right — it calls 'Military Order'
+ * and 'City Guards' military but not 'City Watch', 'Mercenary Company', 'Knightly Order'
+ * or 'The Garrison', and it does call 'Vanguard Consortium' military. Widening it is the
+ * generation-side act named above: OWNER-GATED, and docketed rather than taken here.
+ *
+ * @param {import('../settlement.schema.js').SimFaction} f
+ */
 const isMilitaryFaction = (f) => {
-  const cat = String(f?.category || f?.archetype || '').toLowerCase();
   const nm = factionNameOf(f).toLowerCase();
-  return cat === 'military' || /\b(milit|guard|garrison|warrior|legion|soldier)\b/.test(nm);
+  return nm.includes('military') || nm.includes('guard');
 };
 
 /**
@@ -184,8 +245,11 @@ export const OCCUPATION_LIFT_KIND = 'occupation_lifted';
  *   `disarmed`  ×0.3   a military faction              told them apart — is exactly what
  *                                                      `transferRulingPower` then reshapes.
  *
- * The cut is also `Math.max(0, Math.round(…))`, so it is LOSSY in the small: a garrison
- * cut 25 → 8 divides back to 26.67, not 25. And the GENERATOR writes `occupied` too
+ * The cut is also `Math.max(0, Math.round(…))`, so it is LOSSY in the small: a town guard
+ * cut 25 → 8 divides back to 26.67, not 25. (The example says "town guard" and not
+ * "garrison" since the :261 cure: a faction NAMED 'The Garrison' is no longer disarmed by
+ * this install, because the generator does not disarm it either.) And the GENERATOR writes
+ * `occupied` too
  * (`generators/power/stressFactions.js` — on the governing row only, with the civic and
  * noble cuts left UNMARKED), which means a town generation-occupied and later
  * pulse-conquered carries the marker for cuts the sim never made. The install's own

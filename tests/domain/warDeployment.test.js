@@ -66,7 +66,7 @@ function victim(id, name) {
     legitimacy: 24,
     factions: [
       { faction: 'Village Elders', category: 'civic', power: 30, isGoverning: true },
-      { faction: 'Hedge Wardens', category: 'military', power: 22 },
+      { faction: 'Hedge Guard', category: 'military', power: 22 },
     ],
   });
 }
@@ -434,7 +434,15 @@ describe('Z1 — pulse-conquered occupation parity (matches a generation-occupie
     const deployments = { strong: { targetId: 'weak', sinceTick: 1, role: 'siege' } };
     let worldState = { rngSeed: 'war-seed', tick: 4, relationshipStates: edges.relationshipStates, deployments, simulationRules: { warLayerEnabled: true } };
 
-    // The victim's pre-conquest military faction (Hedge Wardens, power 22).
+    // ⚠ THE FIXTURE'S MILITARY ROW WAS RENAMED BY SR-b (the WAR mini-window, cause :261),
+    // and the rename is the point rather than cosmetics: this arm's own title claims parity
+    // with a generation-occupied town, and it was passing on a faction — 'Hedge Wardens' —
+    // that the GENERATOR would never have disarmed at all. The arm was certifying the very
+    // mismatch laneT4-receipt.md:257-261 recorded. 'Hedge Guard' is a name BOTH the sim's
+    // (now generator-identical) predicate and the generator's own call military, so the ×0.3
+    // assertion below is finally an end-to-end proof of the parity the title claims.
+    // The SHIFT RECORD is in tests/domain/occupationLiberationUninstall.test.js.
+    // The victim's pre-conquest military faction (Hedge Guard, power 22).
     const PRE_MILITARY_POWER = 22;
     let parity = false;
     for (let i = 0; i < 60 && !parity; i += 1) {
@@ -449,7 +457,7 @@ describe('Z1 — pulse-conquered occupation parity (matches a generation-occupie
       const conquered = (ps.previousGovernments || []).some(g => g.cause === 'conquest');
       if (conquered) {
         // The local military faction was disarmed (×0.3) and flagged.
-        const military = (ps.factions || []).find(f => /hedge wardens/i.test(f.faction || f.name || ''));
+        const military = (ps.factions || []).find(f => /hedge guard/i.test(f.faction || f.name || ''));
         expect(military).toBeTruthy();
         expect(military.power).toBeLessThanOrEqual(Math.round(PRE_MILITARY_POWER * 0.3) + 1);
         expect((military.modifiers || []).includes('disarmed')).toBe(true);
