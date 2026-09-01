@@ -94,7 +94,7 @@ function DepthRows({ depth }) {
       {depth.gifts.map((g) => (
         <div key={g.kind} data-testid={`faith-depth-${g.kind}`} style={{ color: BODY, fontFamily: sans, fontSize: FS.pico, lineHeight: 1.5, marginTop: 2 }}>
           <span style={{ color: g.kind === 'boon' ? GREEN : RED, fontWeight: 800, textTransform: 'capitalize' }}>{g.kind}</span>
-          {' · '}{g.channelWord}{' · '}{g.strength}
+          {' · '}{g.channelWord}{' · '}{g.strengthWord}
           {g.flaw && <span style={{ color: MUTED, fontStyle: 'italic' }}>{' · '}{g.flaw}</span>}
         </div>
       ))}

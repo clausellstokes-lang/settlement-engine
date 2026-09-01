@@ -91,15 +91,15 @@ describe('boonBaneRows — band words, and the register-derived jealous marker',
       baneChannel: 'war_readiness', baneStrength: 'heavy',
     });
     expect(rows).toEqual([
-      { kind: 'boon', channel: 'harvest', channelWord: 'harvest', strength: 'firm', flaw: null },
-      { kind: 'bane', channel: 'war_readiness', channelWord: 'war readiness', strength: 'heavy', flaw: null },
+      { kind: 'boon', channel: 'harvest', channelWord: 'harvest', strengthWord: 'firm', flaw: null },
+      { kind: 'bane', channel: 'war_readiness', channelWord: 'war readiness', strengthWord: 'heavy', flaw: null },
     ]);
   });
 
   test('an UNBOUND channel still displays — authored faith is cultural emphasis (D3)', () => {
     const rows = boonBaneRows({ boonChannel: 'sea', boonStrength: 'faint' });
     expect(rows).toEqual([
-      { kind: 'boon', channel: 'sea', channelWord: 'sea', strength: 'faint', flaw: null },
+      { kind: 'boon', channel: 'sea', channelWord: 'sea', strengthWord: 'faint', flaw: null },
     ]);
   });
 
@@ -246,7 +246,7 @@ describe('faithDeepeningOf — the per-settlement join', () => {
     const strings = [];
     for (const depth of Object.values(model.byName)) {
       for (const r of depth.top3) strings.push(r.word, r.levelWord);
-      for (const g of depth.gifts) strings.push(g.channelWord, g.strength, g.flaw ?? '');
+      for (const g of depth.gifts) strings.push(g.channelWord, g.strengthWord, g.flaw ?? '');
     }
     for (const r of model.fieldRows) strings.push(r.channelWord, r.direction, r.band);
     expect(strings.length).toBeGreaterThan(0);   // anchored: the fixture above authors rows

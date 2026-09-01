@@ -139,6 +139,39 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //     pairs, verified by grepping the diff for any changed line that is not a `"line"` value.
 // The census ends at 227 against a 227 ceiling — the seven additions net out against nothing,
 // because they were cured rather than counted. No ceiling moved in either direction.
+// TAIL-F · W-FAITH LANDING (the F5c->F6c->F7c consist) — ONE ROW THAT WAS NEVER DEBT, CURED
+// BY RENAME, AND SEVEN PURE LINE MOVES. NO CEILING CHANGE, NO DEBT MOTION.
+//   · THE ONE IS NOT A LEAK, AND THE PRECEDENT FOR SAYING SO IS IN THIS FILE. F7c's faith-tab
+//     deepening rows render `{' · '}{g.channelWord}{' · '}{g.strength}` at FaithTab.jsx:97.
+//     `strength` HOLDS A WORD — the model types it `@property {string}` over the closed
+//     vocabulary `faint | firm | heavy`, and the leaf's own arm 'NO NUMERAL ever reaches a
+//     display string' asserts that no digit occurs in any emitted string. ⚠ THAT SENTENCE IS
+//     WRITTEN IN WORDS ON PURPOSE: spelling the matcher call here convicted this very file
+//     in `negativeAssertionAnchor`, which line-scans the TEST corpus and cannot tell a
+//     citation from a call — the same shape §879.15's PAIDFIX row records, where the prose
+//     was right and only its placement was wrong for a line-scan walker. The detector
+//     fired on the IDENTIFIER, whose last camel token is a FLOAT_TOKEN — character for
+//     character the shape HER-7 already ruled above at `settlementPolitics.js:358`, whose
+//     note reads 'the cure is the RENAME and nothing else; the emitted sentence is
+//     byte-identical'. So: `strength` -> `strengthWord`, matching the two siblings on the
+//     very same record (`channelWord`, and the top-3 rows' `levelWord`) and the
+//     `strengthWord`/`readinessWord` pair T11's note names on the WarTab record. The rendered
+//     sentence is byte-identical; the row leaves this census because it was never owed.
+//     ⚠ IT IS CALLED OUT RATHER THAN COUNTED QUIETLY, exactly as HER-7's note demands of a
+//     census row cleared by renaming — and it is the SECOND sighting of T11's lesson that a
+//     banked row is debt and never an idiom to copy: FaithSection taught FaithTab the shape,
+//     and FaithTab taught the deepening model this one.
+//   · THE SEVEN ARE ADDRESS ROT. F7c act 3 replaces the retired `temperamentAxis` tag with the
+//     derived `temper` and puts a three-line rationale above it at FaithWar.jsx:289 — entirely
+//     ABOVE every row that file owns — so all seven re-address +3: 332 -> 335 (x2),
+//     340 -> 343 (x2), 410 -> 413 (x3). Same shape as CR-FP-2's eighty-eight, HK-1's six,
+//     TE-CH-4's one, TE-CAP's two, T7's seven, T11's eight and T12's one: path, category and
+//     snippet are byte-identical on all seven (verified by reading each snippet back at its NEW
+//     address, not assumed), FaithWar.jsx owns exactly seven rows and all seven moved, and the
+//     whole baseline diff is fourteen lines, seven -/+ pairs — grepped for any changed line
+//     that is not a `"line"` value, as T11's note prescribes, and there is none.
+// The census ends at 225 against a 225 ceiling; floatInterpolation holds at 148. No ceiling
+// moved in either direction, and this consist authored no prose numeric that survives.
 // T12 · W-MEM LANDING (ODQ §834, 2026-08-31) — ONE PURE LINE MOVE, ZERO NEW LEAKS.
 // The Remembrance ledger's registration car inserts twelve lines into worldSnapshotPublic.js
 // at its hard-deny block, entirely ABOVE the one banked row that file carries, so that row
