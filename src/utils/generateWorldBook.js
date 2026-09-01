@@ -489,7 +489,12 @@ export function generateWorldBook(campaign, allSaves = [], opts = {}) {
   pageN = buildRealmChapter(d, book, pageN);
   // Last chapter: its returned page count is not read again (the doc saves next).
   buildReceiptsAppendix(d, book, pageN);
-  const slug = slugify(book.title || 'world', { max: 40, fallback: 'world' });
+  // ⚠ The kernel edge-trims BEFORE applying `max`, so a title whose 40th character
+  // is a separator would download as `world-book-…-cliffs-.pdf`. Re-trimmed at the
+  // call site (the kernel is deliberately untouched — several call sites mint
+  // PERSISTED ids through its `max`), matching the two sibling exporters.
+  const slug = slugify(book.title || 'world', { max: 40, fallback: 'world' })
+    .replace(/-+$/, '') || 'world';
   d.save(`world-book-${slug}${book.mode === 'player' ? '-player' : ''}.pdf`);
 
   // Export succeeded (doc.save triggered the download). The two sibling exporters

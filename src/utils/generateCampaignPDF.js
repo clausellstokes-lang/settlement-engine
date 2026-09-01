@@ -16,6 +16,7 @@ import { jsPDF } from 'jspdf';
 import { formatCount } from '../domain/formatNumber.js';
 import { resolveSettlementCulture } from '../domain/resolveCulture.js';
 import { autoLayout } from './graphLayout.js';
+import { slugify } from '../kernel/slugify.js';
 import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relationshipGraph.js';
 import { REL_RGB, relRgb } from '../components/settlements/relationshipColors.js';
 import { truncateAtWord } from '../lib/text.js';
@@ -962,12 +963,24 @@ export function generateCampaignPDF(campaign, allSaves, opts = {}) {
     footer(doc, campaign.name, p, totalPages);
   }
 
-  // Filename
-  const slug = (campaign.name || 'campaign')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 40) || 'campaign';
+  // Filename. Through the ONE slugify primitive rather than a hand-inlined builder
+  // (the class tests/lint/slugifyIdiomBaseline.test.js exists to shrink).
+  //
+  // PARITY, PROVEN PER SITE as that ratchet's header demands: this copy LOWERED
+  // THEN STRIPPED — the same order the kernel uses — so unlike the dossier
+  // exporter's copy (which stripped then lowered) it is BYTE-IDENTICAL to the
+  // kernel across every probed input, including empty, null, wholly non-Latin,
+  // separator-only, exotic-case and over-length names.
+  //
+  // ⚠ THE CAP CAN LAND MID-SEPARATOR. The kernel edge-trims BEFORE applying `max`
+  // (its documented contract, and NOT changeable here — several call sites mint
+  // PERSISTED ids through the same primitive), so slicing at 40 can leave a
+  // trailing '-' and the file downloads as `campaign-…-cliffs-.pdf`. The re-trim is
+  // therefore this caller's business, exactly as it is in generateSettlementPDF.js
+  // and generateWorldBook.js.
+  const slug = slugify(campaign.name, {
+    max: 40, empty: 'campaign', fallback: 'campaign',
+  }).replace(/-+$/, '') || 'campaign';
 
   doc.save(`campaign-${slug}.pdf`);
 

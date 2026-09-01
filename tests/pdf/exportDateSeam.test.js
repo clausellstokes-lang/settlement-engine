@@ -20,7 +20,7 @@
  * Sections after the date seam: culture address, member resolution, sanitiser.
  */
 import { describe, test, expect } from 'vitest';
-import { rmSync } from 'node:fs';
+import { existsSync, rmSync } from 'node:fs';
 import { Cover } from '../../src/pdf/sections/Cover.jsx';
 import { generateCampaignPDF } from '../../src/utils/generateCampaignPDF.js';
 import { paintedText } from '../helpers/jsPdfPaintedText.js';
@@ -288,5 +288,49 @@ describe('campaign PDF — every page is footered exactly once, and says its pag
     expect([...new Set(pages)].sort((a, b) => a - b)).toEqual(
       Array.from({ length: Math.max(...pages) - 1 }, (_, i) => i + 2),
     );
+  });
+});
+
+/**
+ * THE DOWNLOAD FILENAME'S CAP CAN LAND MID-SEPARATOR. The kernel slugify primitive
+ * edge-trims BEFORE applying `max` (its documented contract — and not changeable,
+ * because several call sites mint PERSISTED ids through it), so a cap at 40 can slice
+ * straight through a separator and leave it dangling. The dossier exporter carried
+ * this and was cured at its call site in repair 10; the two campaign-scope exporters
+ * carry the identical latency, which repair 10 recorded rather than fixed.
+ *
+ * "Thornbury Under The Everwatchful Cliffs …" is the shape that exposes it: its slug
+ * is exactly `thornbury-under-the-everwatchful-cliffs-` at 40 characters, so the file
+ * downloaded as `campaign-thornbury-…-cliffs-.pdf` — a name ending in a hyphen before
+ * the extension. Measured, not supposed.
+ */
+describe('campaign PDF — the 40-character cap never leaves a dangling separator', () => {
+  const LONG = 'Thornbury Under The Everwatchful Cliffs Of Old Kingsmoor And The Sundered Vale';
+
+  function savedNameFor(name) {
+    // The painter names the file itself; find which of the two candidates landed.
+    const trimmed = 'campaign-thornbury-under-the-everwatchful-cliffs.pdf';
+    const dangling = 'campaign-thornbury-under-the-everwatchful-cliffs-.pdf';
+    try {
+      generateCampaignPDF({ id: 'slug1', name, settlementIds: [] }, [], { now: 'Cyfrin 1, 2026' });
+      if (existsSync(trimmed)) return trimmed;
+      if (existsSync(dangling)) return dangling;
+      return null;
+    } finally {
+      rmSync(trimmed, { force: true });
+      rmSync(dangling, { force: true });
+    }
+  }
+
+  test('a long campaign name is capped at 40 and trimmed clean', () => {
+    const saved = savedNameFor(LONG);
+    // anchored: a file really was written under one of the two candidate names, so
+    // the assertion below is about WHICH, not about a missing export.
+    expect(saved).not.toBeNull();
+    const slug = saved.replace(/^campaign-/, '').replace(/\.pdf$/, '');
+    expect(slug.length).toBeLessThanOrEqual(40);
+    expect(slug.endsWith('-')).toBe(false);
+    // Still a genuine prefix of the name, not a truncation to nothing.
+    expect(slug.startsWith('thornbury-under-the')).toBe(true);
   });
 });
