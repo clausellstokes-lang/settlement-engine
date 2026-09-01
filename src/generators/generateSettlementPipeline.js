@@ -39,8 +39,8 @@ import {
   buildSettlementContentProvenance,
 } from '../domain/content/settlementContentProvenance.js';
 import {
-  buildLivingContentRoster,
-} from '../domain/content/livingContentRoster.js';
+  livingContentRosterFor,
+} from '../domain/content/livingContentSeam.js';
 import { createGenerationContext } from './generationContext.js';
 
 // Side-effect: registers all pipeline steps
@@ -168,7 +168,16 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
     // ⛔ RECORDING, NOT ADOPTION. The roster never writes `settlement.factions`,
     // `stressors`, `traditions` or `config.primaryDeitySnapshot`; see
     // `livingContentRoster.js` for why that boundary is owner-gated.
-    const livingContentRoster = buildLivingContentRoster(
+    // ⛔ REACHED THROUGH THE SEAM, NEVER IMPORTED DIRECTLY. A static import of
+    // `livingContentRoster.js` here is a GENERATOR→DOMAIN edge, and
+    // vite.config.js's `computeEngineSharedDomain()` routes the transitive
+    // closure of every such edge into the EAGER `engine-core` chunk — measured
+    // at 3f9201e39, the direct import moved the first-paint static closure
+    // 1,045,910 → 1,095,584 against a 1,047,000 ceiling by dragging the content
+    // manifest closure eager with it. `livingContentSeam.js` is the sliver that
+    // stays: it answers dormant-or-lit synchronously and loads the payload only
+    // on the lit path.
+    const livingContentRoster = livingContentRosterFor(
       options.customContent || {},
       finalCtx.settlement.config,
     );
@@ -183,6 +192,7 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
 
   return finalCtx.settlement;
 }
+
 
 /**
  * Refresh everything a relationship denormalizes about its two NPCs.

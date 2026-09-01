@@ -184,6 +184,17 @@ export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   '/src/domain/content/settlementContentProvenance.js',
   '/src/domain/content/customSupplyChainActivation.js',
   '/src/domain/content/customTradeEndpointProjection.js',
+  // MAT-SEAM (2026-09-01): livingContentSeam.js is the ONLY living-content
+  // module the pipeline statically imports, and its sole importer is that
+  // pipeline — no first-paint module reaches it, so ESD would route it eager for
+  // nothing. Excised and deliberately UNPINNED (the FP-G11 behaviour): an
+  // unpinned excision co-locates into the lazy `engine` chunk, which is exactly
+  // where its one importer already lives. It is a zero-import leaf, so excising
+  // it removes nothing else from engine-core. Its payload —
+  // livingContentLaw/livingContentRoster and the whole content-manifest closure
+  // behind them — never enters ESD at all, because the seam reaches it through a
+  // dynamic import() that neither vite derivation follows.
+  '/src/domain/content/livingContentSeam.js',
   '/src/domain/priorityBands.js',
   '/src/domain/townMap/glyphAssign.js',
   '/src/domain/townScene/customBuildingPresentation.js',
