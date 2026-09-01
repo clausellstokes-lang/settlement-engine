@@ -43,6 +43,7 @@
  */
 import React from 'react';
 import { normalizeSettlement } from '../domain/normalizeSettlement.js';
+import { slugify } from '../kernel/slugify.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
 
@@ -261,10 +262,29 @@ export async function generateSettlementPDF(settlement, options = {}) {
   const a = document.createElement('a');
   a.href = url;
 
-  const safeName = (settlement?.name || 'settlement')
-    .replace(/[^a-z0-9]+/gi, '_')
-    .replace(/^_+|_+$/g, '')
-    .toLowerCase() || 'settlement';
+  // ⚠ CAPPED, AND THROUGH THE ONE PRIMITIVE. This was a ninth hand-inlined copy of
+  // the slug idiom (the class tests/lint/slugifyIdiomBaseline.test.js exists to
+  // shrink) and the only exporter whose filename was UNCAPPED — a long settlement
+  // name became a filename of that length, while generateWorldBook.js:490 caps at
+  // 40 through this same primitive and generateCampaignPDF.js caps at 40 by hand.
+  //
+  // ONE-TIME SHIFT, deliberate: the inline copy STRIPPED THEN LOWERED (`/gi`),
+  // while the kernel LOWERS THEN STRIPS. Identical for ASCII; on the exotic cases
+  // where they diverge the kernel keeps MORE of the name (U+0130 'İ' lowercases to
+  // 'i' + a combining mark and survives as 'i', where strip-first discarded it).
+  // The filename is a download label, not a persisted identity, so no join or id
+  // depends on the difference.
+  //
+  // ⚠ THE CAP CAN LAND MID-SEPARATOR. The kernel edge-trims BEFORE applying `max`
+  // (its documented contract, and NOT changeable here — several call sites mint
+  // PERSISTED ids through the same primitive), so slicing at 40 can leave a
+  // trailing '_' and the file would download as `..._cliffs__dossier.pdf`. The
+  // re-trim is therefore this caller's business. Both siblings carry the same
+  // latent flaw (generateWorldBook.js:490 via `max: 40`, generateCampaignPDF.js
+  // via `.slice(0, 40)`); they are OUT OF SCOPE here and recorded for the chair.
+  const safeName = slugify(settlement?.name, {
+    sep: '_', max: 40, empty: 'settlement', fallback: 'settlement',
+  }).replace(/_+$/, '') || 'settlement';
   const suffix = narrativeMode ? '_narrative' : '_dossier';
   a.download = `${safeName}${suffix}.pdf`;
 
