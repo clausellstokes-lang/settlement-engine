@@ -51,8 +51,8 @@
  * PURE, TOTAL, DETERMINISTIC: no clock, no RNG, no I/O, no mutation of inputs. The
  * advance consumes ZERO draws, so it cannot perturb the pulse stream even when lit.
  *
- * @enforced-by tests/domain/magicRegimeLifecycle.test.js,
- *   tests/domain/magicRegimeShells.test.js
+ * @enforced-by tests/domain/magicRegimeLifecycle.test.js
+ *   (the shells' own pin was planned, never written; those arms live in that file)
  */
 
 import { clamp01 } from '../../kernel/math.js';

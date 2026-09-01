@@ -82,7 +82,16 @@ const isCommentLine = (line, idx) =>
   /^\s*(\/\/|\*|\/\*)/.test(line) || line.slice(0, idx).includes('//');
 
 // ── target classification ────────────────────────────────────────────────────
-const FILE_EXT_RE = /\.(?:js|mjs|cjs|ts|json)$/;
+// TWO PINS OVER ONE TAG MUST AGREE ON WHAT A TARGET IS. The existence sibling's
+// PATH_RE has always accepted .jsx/.tsx; this set did not, so to THIS pin a
+// `tests/ui/causalityPopup.test.jsx` was not a target at all — and parseTargets below
+// BREAKS at the first token it does not recognise, so such a tag parsed to ZERO
+// targets and its claim would have been convicted as NAKED while carrying a perfectly
+// real enforcer. Measured at 8b07ce45f: 9 tags in this corpus name a .jsx/.tsx
+// enforcer and NONE of them sits within ±3 lines of a claim, so closing the
+// disagreement convicts nothing, banks nothing, and moves no arm — it retires a false
+// red that was waiting for the first claim written beside one of those nine.
+const FILE_EXT_RE = /\.(?:js|jsx|mjs|cjs|ts|tsx|json)$/;
 const isPathTarget = (t) => FILE_EXT_RE.test(t);
 const isRuleTarget = (t) => /^[a-z0-9@-]+\/[a-z0-9-]+$/.test(t) && !FILE_EXT_RE.test(t);
 const CORE_RULES = new Set(['max-lines', 'no-restricted-syntax', 'no-restricted-imports', 'no-console']);
@@ -292,7 +301,13 @@ describe('enforcement-claims meta-pin (A+ P1.1)', () => {
   function resolveTarget(t) {
     if (isPathTarget(t)) {
       if (!fs.existsSync(rel(t))) return { ok: false, why: `path does not exist: ${t}` };
-      if (t.startsWith('tests/') && t.endsWith('.test.js')) {
+      // `.test.jsx` joins `.test.js` here for the same reason .jsx joined FILE_EXT_RE:
+      // vitest's default include is `**/*.{test,spec}.?(c|m)[jt]s?(x)`, and 369 of the
+      // suite's files are .test.jsx. Recognising a .jsx target above without widening
+      // this branch would have sent every one of them down the command-text fallback
+      // and reported "not referenced by any `npm run check` sub-script" — false, and
+      // exactly the kind of red that gets an arm rubber-stamped instead of obeyed.
+      if (t.startsWith('tests/') && /\.test\.jsx?$/.test(t)) {
         // The vitest CLASS must be in the chain; which spelling carries it is an
         // implementation detail — same reasoning as the typecheck class below.
         // It is `test:ratchet` since 2026-08-07: the bare boolean step was red,
