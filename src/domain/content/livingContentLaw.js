@@ -51,17 +51,33 @@
  * Pure. No RNG, no store, no React.
  */
 
-/** The living-content law versions this build can generate under. v1 is the
- *  DORMANT default (absent ⇒ v1 ⇒ byte-identical to every pre-law world and
- *  golden); v2 materializes the inert roster.
- *  @type {ReadonlyArray<number>} */
-export const LIVING_CONTENT_LAW_VERSIONS = Object.freeze([1, 2]);
+/**
+ * ⛔ THE GATE ITSELF LIVES IN `livingContentSeam.js`, NOT HERE, AND THIS FILE
+ * RE-EXPORTS IT SO THERE IS EXACTLY ONE SPELLING OF THE LAW.
+ *
+ * The seam is the sliver of this law the generator engine carries: the pipeline
+ * must decide DORMANT-or-LIT synchronously, before anything is loaded, so the
+ * version constants and the closed membership test have to sit on the engine
+ * side of the lazy boundary. Everything below — the buckets, the dial and the
+ * create-boundary fragment — is only ever read on the lit path or at the create
+ * boundary, both of which are already lazy, so it rides the lazy chunk with the
+ * roster. Re-exporting rather than re-declaring is what keeps a second, drifting
+ * copy of `_livingContentLawVersion` from ever existing (see
+ * `livingContentSeam.js` for the measured reason the boundary is here at all).
+ */
+import {
+  LIVING_CONTENT_LAW_CONFIG_KEY,
+  DEFAULT_LIVING_CONTENT_LAW_VERSION,
+} from './livingContentSeam.js';
 
-/** The default (dormant) living-content law version — no roster, no key. */
-export const DEFAULT_LIVING_CONTENT_LAW_VERSION = 1;
-
-/** The version the inert living-content roster materializes under. */
-export const ROSTER_LIVING_CONTENT_LAW_VERSION = 2;
+// ⛔ AND IT IS DELIBERATELY NOT RE-EXPORTED FROM HERE. A convenience
+// `export { … } from './livingContentSeam.js'` block was written first and
+// MEASURED: because this file rides the lazy roster chunk and the seam rides the
+// engine chunk, re-exporting seven seam symbols forces the engine chunk to keep
+// all seven live for the roster chunk to forward — the engine chunk grew by
+// ~1,047 B on the day the payload is retained, against a 677 B ceiling margin.
+// Gate consumers therefore import from `livingContentSeam.js` directly, which is
+// also the honest edge: the gate is engine-side vocabulary, not lazy vocabulary.
 
 /** ⭐ THE ONE DIAL — the living-content law a NEWLY-created world mints under.
  *  Held at the dormant default until the owner rules on lighting; flipping it to
@@ -70,10 +86,6 @@ export const ROSTER_LIVING_CONTENT_LAW_VERSION = 2;
  *  they never pass through create again. */
 export const NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION =
   DEFAULT_LIVING_CONTENT_LAW_VERSION;
-
-/** The config key the law rides on. Underscore-prefixed like `_seed`: a
- *  resolved generation input, carried on the persisted `settlement.config`. */
-export const LIVING_CONTENT_LAW_CONFIG_KEY = '_livingContentLawVersion';
 
 /**
  * ⛔ THE FOUR LIVING-CONTENT BUCKETS, AND WHY THESE FOUR.
@@ -95,47 +107,6 @@ export const LIVING_CONTENT_BUCKETS = Object.freeze([
   'stressors',
   'traditions',
 ]);
-
-/**
- * The living-content law version a value selects. Absent / unknown /
- * non-enabled ⇒ the dormant default, so every pre-law world and golden stays
- * byte-identical and a future version cannot be selected by accident before it
- * ships.
- *
- * @param {unknown} value
- * @returns {number}
- */
-export function readLivingContentLawVersion(value) {
-  const n = Number(value);
-  return LIVING_CONTENT_LAW_VERSIONS.includes(n)
-    && n !== DEFAULT_LIVING_CONTENT_LAW_VERSION
-    ? n
-    : DEFAULT_LIVING_CONTENT_LAW_VERSION;
-}
-
-/**
- * The living-content law version a generation run obeys, read from its config.
- *
- * ⚠ THIS READS THE CONFIG AND NOTHING ELSE, ON PURPOSE. It must NOT fall back
- * to `NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION`: an existing world's persisted
- * config carries no marker, so a dial-derived fallback would silently re-birth
- * every old world under the new law the moment the dial flipped — the exact
- * PROMISE breach the version gate exists to prevent. New worlds acquire their
- * marker at the CREATE boundary (`newSettlementLivingContentLaw`), never here.
- *
- * @param {Record<string, unknown>|null|undefined} config
- * @returns {number}
- */
-export function resolveLivingContentLawVersion(config) {
-  return readLivingContentLawVersion(config?.[LIVING_CONTENT_LAW_CONFIG_KEY]);
-}
-
-/** Does this config's world materialize the inert living-content roster?
- *  @param {Record<string, unknown>|null|undefined} config @returns {boolean} */
-export function materializesLivingContent(config) {
-  return resolveLivingContentLawVersion(config)
-    === ROSTER_LIVING_CONTENT_LAW_VERSION;
-}
 
 /**
  * The config fragment a NEWLY-created world is minted with, to be spread into

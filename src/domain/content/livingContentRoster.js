@@ -60,7 +60,9 @@ import {
 import {
   projectCustomDefinitionIdentity,
 } from './customDefinitionIdentityProjection.js';
-import { LIVING_CONTENT_BUCKETS, materializesLivingContent } from './livingContentLaw.js';
+import { LIVING_CONTENT_BUCKETS } from './livingContentLaw.js';
+// The gate is the SEAM's, not the law file's — see livingContentSeam.js.
+import { materializesLivingContent } from './livingContentSeam.js';
 
 /** The roster's own schema version, independent of the settlement's. An older
  *  saved world carries no roster at all, so this starts at 1 and a widening
