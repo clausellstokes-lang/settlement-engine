@@ -1,11 +1,10 @@
 {
-  "total": 44,
+  "total": 40,
   "files": {
     "src/domain/corruption.js": 1,
     "src/domain/region/contestMath.js": 4,
     "src/domain/relationships/canonicalRelationship.js": 1,
     "src/domain/roads/state.js": 1,
-    "src/domain/roads/travelersGeometry.js": 4,
     "src/domain/spatial/armyTransit.js": 1,
     "src/domain/spatial/moralDrift.js": 1,
     "src/domain/spatial/pestilence.js": 1,

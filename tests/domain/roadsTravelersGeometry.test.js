@@ -2,7 +2,7 @@
  * roadsTravelersGeometry.test.js — pure geometry for the Travelers overlay (R-6; §13).
  */
 import { describe, it, expect } from 'vitest';
-import { progress01, pointAlongPath, chevronPoints, clamp01 } from '../../src/domain/roads/travelersGeometry.js';
+import { progress01, pointAlongPath, chevronPoints, clamp01 } from '../../src/components/map/travelersGeometry.js';
 
 describe('roads travelers geometry (§13)', () => {
   it('progress01 clamps and handles bad spans', () => {

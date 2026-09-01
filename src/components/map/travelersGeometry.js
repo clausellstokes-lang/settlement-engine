@@ -1,5 +1,5 @@
 /**
- * roads/travelersGeometry.js — pure geometry for THE TRAVELERS OVERLAY (§13). Position a
+ * components/map/travelersGeometry.js — pure geometry for THE TRAVELERS OVERLAY (§13). Position a
  * moving thing (army column / migrant column / named envoy) along the polyline between its
  * path's settlement placements, at a derived fraction t ∈ [0,1], plus the heading for a
  * direction chevron.
@@ -7,6 +7,23 @@
  * FIRST-PAINT LAW: a LAZY LEAF importing ONLY the kernel clamp primitive (code-quality-4:
  * the ONE clamp01), read only from the lazy TravelersLayer. Pure, total, deterministic — the
  * derived-at-render discipline (ChainEdges).
+ *
+ * ⭐ RELOCATED HERE BY T13 TRANS Car 2 (Car 0's measured verdict, option (c)). This module
+ * held the census's four TRIG sites — Math.hypot, Math.atan2, Math.cos, Math.sin — the only
+ * family whose cure would have needed a detTrig kernel with argument reduction, the hardest
+ * and most error-prone precision engineering in the train. It did not need one, because it
+ * was never generation code: the sole code consumer is TravelersLayer.jsx beside it (an SVG
+ * overlay rendered from MapOverlay), routeNetworkLedger.js only NAMES it in a header comment
+ * ("Geometry is DERIVED"), and nothing persists its output. Under the transcendental
+ * charter, src/components/** is presentation and accepts these calls; moving the file to sit
+ * with its consumer therefore retires all four sites as CODE MOTION — no kernel, no hypot
+ * shift, no shift-record row, and the same engine computing the same bytes.
+ *
+ * ⚠ The `progress01` export shares a NAME with an independently-computed property in four
+ * worldPulse transit modules (namedPersonTransit, routeNetworkConsumersTransit,
+ * envoyErrandTransit, npcCirculationTransit). They do NOT import this file — they compute
+ * their own from clamp01 — and the collision is recorded here because a symbol grep alone
+ * makes this module look generation-reachable when it is not.
  *
  * @enforced-by tests/domain/roadsTravelersGeometry.test.js
  */
