@@ -26,9 +26,19 @@
  * census cannot vouch for (F3c act 2's J11, paid for once already in this train).
  */
 import { describe, test, expect } from 'vitest';
+// ⚠ TWO ADDRESSES SINCE SUBSTRATE WAVE 6, and this file is where the split is proved.
+// The BINDING and its pricing pair live in the zero-import leaf `faithChannelBindings.js`
+// so the EAGER `causalState.js` can price a channel without dragging the field kernel and
+// `piety.js` into the first-paint closure; the FIELD keeps everything that needs a
+// settlement. Both halves are imported from their own homes rather than through a
+// re-export, which is what makes this file the leaf's LIT WALKTHROUGH — the mechanism
+// lit-coverage ratchet grants AUTO credit only for a direct import, and a re-export would
+// have left the leaf a worldPulse mechanism with no standing lit proof.
 import {
-  FAITH_CHANNELS, FAITH_CHANNEL_BINDINGS, FAITH_UNBOUND_CHANNELS, FAITH_FIELD_TUNING,
-  faithFieldProjection, faithChannelTotalOf, faithChannelLift,
+  FAITH_CHANNEL_BINDINGS, faithChannelTotalOf, faithChannelLift,
+} from '../../src/domain/worldPulse/faithChannelBindings.js';
+import {
+  FAITH_CHANNELS, FAITH_UNBOUND_CHANNELS, FAITH_FIELD_TUNING, faithFieldProjection,
 } from '../../src/domain/worldPulse/faithField.js';
 import { projectReligionStateOntoSettlement } from '../../src/domain/worldPulse/religionState.js';
 import { deriveCausalState, SYSTEM_VARIABLES, variablePolarity } from '../../src/domain/causalState.js';

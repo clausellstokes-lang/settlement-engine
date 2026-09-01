@@ -69,12 +69,15 @@ import { magicLedger } from '../magicLedger.js';
 // measured, it made the closure 291 B WORSE (FP-G17). So the substrate now imports
 // `faithChannelBindings.js` and this file imports it too: the field still reads the
 // register it iterates, the causal site no longer reaches through the field to get it,
-// and the measured closure fell 1,054,284 → 1,047,041 B.
-// ⚠ The three names are RE-EXPORTED verbatim below, so every existing consumer address
-// still resolves — the symbols moved, the API did not.
+// and the measured closure fell 1,054,284 → 1,047,050 B.
+// ⚠⚠ AND NOTHING IS RE-EXPORTED FROM HERE, which is a REVERSAL of this car's first cut
+// and the reversal is the interesting half. A convenience re-export kept every consumer
+// address stable — and left the leaf a `worldPulse` MECHANISM with no direct importer,
+// which `mechanismLitCoverage`'s ratchet correctly reds: AUTO lit credit is granted for a
+// direct import, so a re-export would have hidden a new mechanism behind an old address
+// and left it lit-unproven. The consumers follow the symbol to its one home instead
+// (§870.4's law), and the re-export would have had no reader left in any case.
 import { FAITH_CHANNEL_BINDINGS, CAUSAL_SWING } from './faithChannelBindings.js';
-
-export { FAITH_CHANNEL_BINDINGS, faithChannelTotalOf, faithChannelLift } from './faithChannelBindings.js';
 
 /**
  * The channel vocabulary, MIRRORED from `customContentSchema.DEITY_EFFECT_CHANNEL_KEYS`
@@ -451,8 +454,9 @@ export function faithFieldProjection(settlement, religionState) {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // `faithChannelTotalOf` and `faithChannelLift` — THE PRICING PAIR — now live in
-// `faithChannelBindings.js` beside the register they read, and are RE-EXPORTED from the
-// top of this file so every consumer's address is unchanged. They moved because
-// `causalState.js` is eager: see the import block's note, and REC-1 in the SUBSTRATE
-// coupling's wave-6 receipt for the measured closure.
+// `faithChannelBindings.js` beside the register they read, and are imported FROM THERE
+// by everything that uses them: the eager `causalState.js` and the wiring test. They
+// moved because `causalState.js` is eager (see the import block's note, and REC-1 in the
+// SUBSTRATE coupling's wave-6 receipt for the measured closure), and they are NOT
+// re-exported here — the address follows the symbol.
 // ─────────────────────────────────────────────────────────────────────────────
