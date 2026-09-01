@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "0d26defb50c1ae0bc1f81a830530ef759bd4366f",
-  "measuredBy": "SMALLS-landing",
-  "date": "2026-08-31",
-  "note": "The smalls consist (RESIDUE-2 x2 + SP-W1 x3 + VOICE-1b x1) on a107bcde3; both in-train register commits dropped-as-empty per the DENS/T12 precedent and re-derived here. ONE new test file: allowlistRebuilderRegistry.walker.test.js (SP-W1) - CREDITED per its own fix car, 13 titles + 2 suites; every other consist test edit moved zero title lines (measured by diff).",
-  "files": 2456,
+  "measuredAtSha": "d7e7721ec434c9d8958a2d9cbe128f87602eb5b3",
+  "measuredBy": "SUBSTRATE-landing",
+  "date": "2026-09-01",
+  "note": "The SUBSTRATE COUPLING landed whole: 21 new test files (W-LIVES L1-L5, W-FAITH F1c-F4c, W-OPS O1) plus the coupling's own cars 1-7, 8 edited suites. Re-derived at the coupling tip; NO file parks.",
+  "files": 2477,
   "parked": 371,
-  "credited": 2085,
-  "titles": 21128,
-  "suiteTitles": 5810
+  "credited": 2106,
+  "titles": 21802,
+  "suiteTitles": 5946
 }
