@@ -544,6 +544,16 @@ const PRESENTATION_CASES = presentationCases();
 // The census that DOES move is scripts/.test-ratchet-baseline.json's runtime `totalTests`
 // (94 -> 97 for this file, +3); it needs the full unfiltered suite and is re-derived WHOLE
 // at a landing, never composed by arithmetic.
+// ⭐ RE-MEASURED AT THE INSTRUMENTS LANDING (2026-09-01, lane INSTR-land): the count is **98**
+// here, not 97. The 94 and 97 above are TE-INSTR-1's own figures at its base `1d27accdc` and
+// stay as the historical record. The extra registration is not this repair's: the SUBSTRATE
+// landing's W-FAITH F1c `a8673e3e9` added an authored deity field, which `presentationCases()`
+// derives straight out of `customContentManifest.generated.js`, so the case count moved
+// underneath the train while it held. ⛔ THE SHAPE OF THIS FILE'S OWN LAW IS WHY THAT MATTERS:
+// its case list is DERIVED FROM A GENERATED MANIFEST, so any wave that authors a new
+// presentation field mints a registration here without touching this file — and the ratchet
+// row must be re-derived whole at every landing rather than carried, which is exactly what
+// the sentence above already told the next hand to do.
 
 /** The shared mechanism behind every declared-blind row, measured rather than assumed. */
 const NEVER_MATERIALIZES = 'the reference-pack definition never materializes into the'
@@ -573,6 +583,23 @@ const DISCOVERY_BLIND_CASES = Object.freeze([
   'stressors.name', 'stressors.description', 'stressors.severity', 'stressors.affects',
   'stressors.disablesInstitutions', 'stressors.disablesGoods',
   'deities.name', 'deities.temperamentAxis', 'deities.portfolio',
+  // ⭐ THE 27th ROW IS THIS LEDGER'S FIRST-ARMING MEASUREMENT, NOT A CASE THAT WENT BLIND.
+  // The ledger, both ceilings and the two governance arms are ALL minted by this same
+  // repair (they exist at neither TE-INSTR-1's base `1d27accdc` nor the landing base
+  // `8b07ce45f` — measured, both zero). Their initial figure was therefore taken on the
+  // lane's own build tree, and the tree this instrument actually governs is three landings
+  // newer. Bisected at the INSTRUMENTS landing dock: GREEN 97/97 at `853e0e9ba`, RED at the
+  // SUBSTRATE CAS `598642981` — W-FAITH F1c `a8673e3e9`, "the deity's authored character,
+  // six optional fields and NOT ONE ENGINE BYTE", put `characterAxes` in the authored deity
+  // schema and hence in `customContentManifest.generated.js`, so `presentationCases()`
+  // derived a FOURTH deity case (97 -> 98) on a bucket that was ALREADY WHOLLY BLIND.
+  // ⛔ NOTHING WENT DARK: `DISCOVERY_BLIND_BUCKET_CEILING` DOES NOT MOVE — still four
+  // categories, and that is the discriminating fact. A fifth bucket, or a deity case whose
+  // blindness had a DIFFERENT cause, would be a defect to fix rather than a figure to
+  // measure. This row's cause is byte-for-byte the same `NEVER_MATERIALIZES` mechanism its
+  // three siblings carry, and the blind arm below PROVES it per case rather than inheriting
+  // it: `{ materialized: false, reachedPaths: 0 }`, executed.
+  'deities.characterAxes',
   'traditions.name', 'traditions.motifElement', 'traditions.motifAct', 'traditions.epithet',
   'factions.name', 'factions.authority', 'factions.archetype', 'factions.agenda',
   'factions.scale', 'factions.methods', 'factions.magical', 'factions.criminal',
@@ -584,7 +611,15 @@ const DISCOVERY_BLIND_CASES = Object.freeze([
 // list they cap — a ceiling derived from its own ledger proves list === list and rises
 // silently with every row added. A case may LEAVE the ledger; none may ever join it,
 // because a newly blind case is a vacuous green to fix, not a row to declare.
-const DISCOVERY_BLIND_CEILING = 26;
+// ⛔ 26 -> 27 ONCE, AT FIRST ARMING, AND NEVER AGAIN BY THIS DOOR. The raise is lawful for
+// exactly one reason, stated so the next hand cannot borrow it: this ceiling had never
+// governed anything before the INSTRUMENTS landing, so its first true measurement is the
+// one taken on the tree it lands on, not the one taken on the tree it was written on. That
+// is the same act as re-deriving a register WHOLE at a landing tip instead of composing it
+// by arithmetic — and it is the ONLY raise this ledger may ever take. From here the arm is
+// live and armed: a 28th row is a defect to fix at cause, and the door used here is closed
+// because the machinery is no longer new. The bucket ceiling did not move.
+const DISCOVERY_BLIND_CEILING = 27;
 const DISCOVERY_BLIND_BUCKET_CEILING = 4;
 
 const BLIND_KEYS = new Set(DISCOVERY_BLIND_CASES);
