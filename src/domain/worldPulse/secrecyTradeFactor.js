@@ -18,7 +18,7 @@
  * AFTER this one), per the WR-6/WR-8 pointer discipline: the wave that owns the trade read
  * is the wave that wires the penalty into it. Until then this export has ZERO consumers in
  * src/, and that is not an oversight — it is what makes "dark ⇒ trade bytes identical"
- * true by construction rather than by argument. `tests/property/secrecyTradeDormancyFence.js`
+ * true by construction rather than by argument. `tests/property/secrecyTradeDormancyFence.test.js`
  * pins the zero-consumer fact itself, so TRADE's landing turns that pin RED and the seam
  * cannot be wired without someone reading this note.
  *

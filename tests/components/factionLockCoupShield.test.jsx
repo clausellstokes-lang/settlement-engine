@@ -4,7 +4,7 @@
  *
  * The coup shield has been built and tested for a long time: worldPulse/coup.js
  * `lockedGoverningFaction` reads `campaignState.locks.factions` and downgrades a
- * successful coup from auto-applied to a PROPOSAL, and tests/domain/rulingPower.js
+ * successful coup from auto-applied to a PROPOSAL, and tests/domain/rulingPower.test.js
  * pins that reader directly. `setLock` has always been generic, and
  * domain/locksPreservation.js already documents the array surviving a full
  * regenerate. The single missing piece was a row in LockControls' WORLD_LOCKS:

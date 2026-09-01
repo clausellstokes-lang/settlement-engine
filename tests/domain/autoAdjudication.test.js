@@ -17,7 +17,7 @@
  *   5. IDEMPOTENCE — re-running the pass over an already-ruled docket rules nothing
  *      and returns by reference, so a double call can never double-apply a major.
  *
- * FIXTURE: the rival/hostile two-edge realm from tests/store/advancePauseResume.js —
+ * FIXTURE: the rival/hostile two-edge realm from tests/store/advancePauseResume.test.js —
  * a live corpus whose one_month advance mints six proposal-gated majors through the
  * real candidate pipeline. Deliberately NOT a hand-built proposal row: a synthetic
  * fixture would prove the fold, never the pipeline the fold has to survive.

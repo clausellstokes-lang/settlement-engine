@@ -20,7 +20,7 @@
  * regression — a struggling criminal town that stops producing crime-pressure
  * outputs — reds loudly.
  *
- * CANNOT-CATCH: prose drift in HowToUse itself (handbookClaimsParity.test.jsx
+ * CANNOT-CATCH: prose drift in HowToUse itself (handbookClaimsParity.test.js
  * covers the wording side); single-seed cherry-picking (this is prevalence,
  * not per-seed guarantee — the conceptIntro's "will have" is illustrative).
  */

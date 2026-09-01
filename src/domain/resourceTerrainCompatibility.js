@@ -13,7 +13,7 @@
  *
  * A shared leaf that both layers need belongs in the layer BOTH may import. Leaving
  * it in src/generators forced every new simulation reader to open a fresh
- * domain -> generators edge, which is the cycle tests/build/domainGeneratorsBoundary.js
+ * domain -> generators edge, which is the cycle tests/build/domainGeneratorsBoundary.test.js
  * exists to stop metastasizing; that ratchet's own instruction is "move the shared
  * leaf down a layer". This is that move. src/generators/terrainHelpers.js re-exports
  * the symbol, so every existing caller is untouched and the frozen baseline is

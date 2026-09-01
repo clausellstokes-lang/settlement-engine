@@ -26,7 +26,7 @@
  * WHY THIS FILE LIVES IN src/domain AND NOT src/generators (moved 2026-08-07).
  * It was authored under src/generators, but three of its five consumers are domain
  * modules (dossier/plotHooks.js, dossier/hookRetention.js, hookEscalation.js), and
- * those edges REDDENED tests/build/domainGeneratorsBoundary.js: the domain is the pure
+ * those edges REDDENED tests/build/domainGeneratorsBoundary.test.js: the domain is the pure
  * kernel every other layer trusts, so it must not reach UP into generators. The cure
  * for that ratchet is inversion, never a widened baseline — and inversion is free here
  * because this module is a zero-import leaf that imports nothing from either layer. It

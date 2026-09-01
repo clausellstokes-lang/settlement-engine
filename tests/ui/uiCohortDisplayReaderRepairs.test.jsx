@@ -44,7 +44,7 @@
  * whose other row must stay dark. Break the renderer and the anchor reds first.
  *
  * SCOPE NOTE (pin 1): the membership scan itself — String-normalized, active-
- * campaign-only — is already pinned in tests/store/campaignMembershipIdNormalization.js.
+ * campaign-only — is already pinned in tests/store/campaignMembershipIdNormalization.test.js.
  * What is pinned HERE is the WIRING: that the card resolves its campaign through
  * that selector and NOT through a field on the save. The save fixtures below
  * therefore carry no `campaignId`, exactly as a real save row carries none.
