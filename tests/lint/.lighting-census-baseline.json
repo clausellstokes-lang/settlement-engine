@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a808e56b5cb6747c7ebc899a5f14e40e155b3f20",
-  "measuredBy": "Fable 5 (lane F7c)",
+  "measuredAtSha": "53fd462193d66d233aec99e30c66fb1cb10d2f07",
+  "measuredBy": "Opus 5 (lane TAIL-F-CURE)",
   "date": "2026-09-01",
-  "note": "F7c deepening rows: two new test files (tests/domain/display/faithDeepening.test.js, tests/components/faithTabDeepening.test.jsx) plus new arms in the grafted faithPanelModel suite, the temper census walker, warResolve and liveWorld suites",
+  "note": "TAIL-F cure act 1 added three arms to tests/domain/faithTuningSurface.test.js - the home census that convicts a stranded roster home and a forked tuning value; three test titles and one suite title, no file movement.",
   "files": 2453,
   "parked": 370,
   "credited": 2083,
-  "titles": 21168,
-  "suiteTitles": 5808
+  "titles": 21171,
+  "suiteTitles": 5809
 }
