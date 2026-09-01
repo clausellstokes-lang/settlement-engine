@@ -33,8 +33,9 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import * as fontkit from 'fontkit';
 
 const ROOT = process.cwd();
 const html = readFileSync(resolve(ROOT, 'index.html'), 'utf-8');
@@ -156,6 +157,47 @@ describe('self-hosted fonts + social meta (build gate)', () => {
       }
     }
     expect(total, `woff2 total = ${total} bytes`).toBeLessThanOrEqual(ALL_WOFF2_BUDGET_BYTES);
+  });
+
+  // ── 3d. the v2 TTFs are LIGATURE-FREE — the premise `noLig()` was deleted on ─
+  // Until 2026-09-01 src/pdf/lib/format.js carried noLig(), which inserted a
+  // U+200C ZWNJ between every fi/fl/ff/ffi/ffl to block the `liga` GSUB lookup
+  // in the pre-v2 faces. The v2 re-cut REMOVED those lookups, so the guard had
+  // nothing left to defuse — and U+200C is covered by NONE of the 8 faces, so
+  // every insertion split the text run onto a NON-EMBEDDED base-14 Helvetica
+  // (25–86 such runs per dossier, measured, swallowing adjacent covered
+  // characters). The guard was deleted; THIS is what makes that safe.
+  //
+  // The ratchet comment above ("ligature-stripped v2 TTFs") asserted this state
+  // in prose only — a re-vendor could have reintroduced `liga` and nothing would
+  // have reded. It is now an executed guarantee. If this ever fails, a re-cut
+  // brought ligature lookups back: fix the FONT, do not resurrect noLig().
+  const LIGATURE_FEATURES = ['liga', 'dlig', 'clig', 'hlig', 'rlig'];
+  const LIGATURE_BAIT = 'fortified official conflict staff';
+  const createFont = fontkit.create || fontkit.default?.create;
+  const ttfFaces = readdirSync(resolve(ROOT, 'public', 'fonts'))
+    .filter((f) => f.toLowerCase().endsWith('.ttf'))
+    .sort();
+
+  it('the font set under test is the real 8 embedded faces (not vacuous)', () => {
+    expect(ttfFaces.length).toBe(8);
+  });
+
+  it.each(ttfFaces)('%s exposes no ligature feature and shapes 1:1', (file) => {
+    const font = createFont(readFileSync(resolve(ROOT, 'public', 'fonts', file)));
+    const present = (font.availableFeatures || []).filter((f) => LIGATURE_FEATURES.includes(f));
+    expect(present, `${file} re-introduced ligature lookups: ${present.join(', ')}`).toEqual([]);
+    // Belt and braces: even absent the feature tags, prove the shaper does not
+    // fuse the classic bait string. 33 characters must yield 33 glyphs.
+    const { glyphs } = font.layout(LIGATURE_BAIT);
+    expect(glyphs.length, `${file} ligated "${LIGATURE_BAIT}"`).toBe(LIGATURE_BAIT.length);
+  });
+
+  it('U+200C ZWNJ is covered by NO embedded face (why inserting it was harmful)', () => {
+    for (const file of ttfFaces) {
+      const font = createFont(readFileSync(resolve(ROOT, 'public', 'fonts', file)));
+      expect(new Set(font.characterSet).has(0x200c), `${file} now covers U+200C`).toBe(false);
+    }
   });
 
   // ── 4. Open Graph / Twitter unfurl set ────────────────────────────────────
