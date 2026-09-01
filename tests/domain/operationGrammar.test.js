@@ -52,6 +52,31 @@ function srcFiles() {
 }
 
 /**
+ * ⛔⛔ A CITATION IS NOT A LANDING — AND THE PRODUCER CENSUS LEARNED IT THE ESTATE'S USUAL
+ * WAY, BY CONVICTING A FILE FOR EXPLAINING ITSELF.
+ *
+ * The census below asks whether any file under `src/` NAMES an awaited seam symbol, and it
+ * asked over RAW BYTES. W-OPS car O4's `envoyTaskCatalog.js` carries a header paragraph
+ * saying, in as many words, that it declines to add a purpose — "it is the same line sibling
+ * car O2 declined to cross with `seek_compromise`" — and the census read that sentence as
+ * the willingness door having LANDED. Same shape as `livedExperienceSources.test.js`'s
+ * comment strip and its dereference ban before that.
+ *
+ * ⭐ COMMENTS ONLY, AND DELIBERATELY NOT STRING LITERALS. The sibling detectors go on to
+ * blank strings, because the symbols THEY chase are JS identifiers and a quoted identifier
+ * is a receipt. This census is different in kind: `seek_compromise` is a snake_case KIND
+ * WORD, and a kind word lands as `kind: 'seek_compromise'` — a string literal. Blanking
+ * strings here would cure the false conviction by going blind to the very landing the arm
+ * exists to catch, so the strip stops at comments and the control below pins both halves.
+ * @param {string} text
+ */
+function withoutComments(text) {
+  return text
+    .replace(/\/\*[\s\S]*?\*\//g, ' ')
+    .replace(/(^|[^:])\/\/[^\n]*/g, '$1 ');
+}
+
+/**
  * ⛔⛔ DOES `file` REALLY EXPORT `symbol` — AS A WHOLE NAME, NOT AS A PREFIX?
  *
  * The substrate coupling's mutation battery found this hole INSIDE THE CURE FOR IT. Both
@@ -377,7 +402,8 @@ describe('W-OPS O1 — the W-LIVES acceptance seams: four BOUND, one still pinne
     // therefore pinned exactly: one row, and it is the willingness door.
     expect(ACCEPTANCE_SEAMS.filter((row) => row.landed !== true).map((row) => row.seam))
       .toEqual(['willingness']);
-    const sources = srcFiles().map((file) => [relative(ROOT, file), readFileSync(file, 'utf8')]);
+    const sources = srcFiles()
+      .map((file) => [relative(ROOT, file), withoutComments(readFileSync(file, 'utf8'))]);
     /** @type {string[]} */
     const arrived = [];
     for (const row of ACCEPTANCE_SEAMS) {
@@ -394,6 +420,25 @@ describe('W-OPS O1 — the W-LIVES acceptance seams: four BOUND, one still pinne
       + ' acceptance read to the real symbol and flip the roster row to landed:true, rather'
       + ' than leaving a named seam that has outlived its own fact.',
     ).toEqual([]);
+  });
+
+  test('⭐⭐ THE STRIP DOES NOT BLIND THE CENSUS — a kind word in a string still lands', () => {
+    // Both directions, because a census cured by going blind reports "nothing has landed"
+    // forever and reads exactly like a census that is working. Driven off the ROSTER rather
+    // than a transcribed word, so re-spelling the awaited symbol moves this control with it.
+    const awaited = String(ACCEPTANCE_SEAMS.find((row) => row.landed !== true)?.awaitedSymbol);
+    expect(awaited).toBe('seek_compromise');
+    const names = new RegExp(`\\b${awaited}\\b`);
+    // ⭐ A REAL LANDING. A snake_case kind word lands as a STRING LITERAL in a producer,
+    // which is exactly why this strip stops at comments instead of blanking strings.
+    expect(names.test(withoutComments("export const W = Object.freeze([{ kind: 'seek_compromise' }]);")))
+      .toBe(true);
+    // ⛔ AND THE TWO CITATION SHAPES — the block comment that actually convicted
+    // `envoyTaskCatalog.js`, and its line-comment sibling.
+    expect(names.test(withoutComments('/**\n * O2 declined to cross with `seek_compromise`.\n */\nconst a = 1;')))
+      .toBe(false);
+    expect(names.test(withoutComments('// declined to cross with seek_compromise\nconst a = 1;')))
+      .toBe(false);
   });
 });
 
