@@ -47,6 +47,16 @@ import {
 } from '../../src/domain/worldPulse/espionage/infiltrationDepth.js';
 import { ESPIONAGE_TUNING, dwellRamp } from '../../src/domain/worldPulse/espionage/espionageMath.js';
 import { CORRUPTION_WEB_TUNING } from '../../src/domain/worldPulse/corruptionWeb.js';
+// O6-B's reconcile pin reads the ONE dispatch registry from its own home. The LEAF still
+// does not — arm 6's `expectAbsentWithAnchor` on `MISSION_KIND_CATALOG` is what keeps the
+// union an append; this is the BATTERY reaching across, which is the only place the two
+// sights can be held in one hand.
+import {
+  DISPATCHABLE_MISSION_KINDS,
+  MISSION_KINDS,
+  isDispatchableKind,
+  missionKindRow,
+} from '../../src/domain/worldPulse/operations/operationGrammar.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -442,6 +452,107 @@ describe('W-OPS O3 §0 — the task qualification law, encoded rather than asser
       codeOf(LEAF), 'MISSION_KIND_CATALOG', 'PLACEMENT_MISSION_KINDS',
       'the extension set is named, the one home is not re-spelled',
     );
+  });
+});
+
+// ── 6b. O6-B — THE place_agent RECONCILE PIN ─────────────────────────────────────
+
+/**
+ * ⭐⭐ ONE KIND WORD, TWO HONEST SIGHTS — AND THE CHAIR RULED THEM BOTH KEPT.
+ *
+ * O1's catalog row and O3's annex row both say `place_agent`, and they disagree on every
+ * column that carries meaning. They are not a contradiction: they answer DIFFERENT
+ * QUESTIONS. O1 asks what a placement's SUCCESS writes and finds nothing — no placement or
+ * cover writer exists anywhere under `src`, so its verdict is `unverified`. O3 asks what a
+ * placement's FAILURE writes and finds a live record family with a live cause word — the
+ * covert custody hold — held only behind the arm the ES charter opens, so its verdict is
+ * `verified` with `writerLanded:false`.
+ *
+ * ⛔ A MERGE UNDER ONE ROW WOULD HAVE ERASED A REAL ENCODING DIFFERENCE. Whichever family
+ * and whichever verdict the merged row picked, the other sight would be gone and no reader
+ * could recover it — and the merge would additionally have to mint a two-family schema,
+ * moving O1's derived-dispatchability law to pay for it. Option (b), forking the kind word,
+ * was rejected for the opposite reason: two kinds for ONE act forks the dispatcher's
+ * vocabulary against finite-semantics economy.
+ *
+ * ⭐ SO THE RULING IS "BOTH ROWS, IN THEIR OWN HOMES, PLUS THIS PIN" — the estate's
+ * mirror-with-reconcile-pin idiom, zero vocabulary minted. The catalog stays the ONE
+ * dispatch registry; the annex is a per-level EXTENSION SET. What this pin adds that neither
+ * home can assert alone is the JOIN, in both directions, and the one invariant that makes
+ * the future safe: while the annex says the capture write has not landed, the catalog row
+ * stays `unverified`. The day the ES charter opens that write, BOTH rows move in the same
+ * commit or this reds.
+ *
+ * @enforced-by this test
+ */
+describe('W-OPS O6-B — place_agent is TWO honest sights, and neither may absorb the other', () => {
+  test('⭐⭐ the collision is EXACTLY ONE kind, and the append is exactly one more', () => {
+    // Pinned as a PARTITION rather than a subset claim. The annex does NOT promise that
+    // every row names a catalog kind — `seat_agent` is a genuine append, which is what the
+    // extension set exists to do. What must never drift unnoticed is WHICH rows collide:
+    // a second collision is a second two-sights ruling somebody owes.
+    const catalogKinds = new Set(MISSION_KINDS);
+    const shared = PLACEMENT_MISSION_KIND_WORDS.filter((kind) => catalogKinds.has(kind));
+    const appended = PLACEMENT_MISSION_KIND_WORDS.filter((kind) => !catalogKinds.has(kind));
+    expect(shared).toEqual(['place_agent']);
+    expect(appended).toEqual(['seat_agent']);
+  });
+
+  test('⭐ BOTH rows are found BY KIND in their own homes, so this pin cannot pass on absence', () => {
+    // The anti-vacuity floor for everything below: an arm that read `undefined` from either
+    // home would satisfy most `not.toBe` comparisons by accident.
+    expect(PLACEMENT_MISSION_KINDS.find((row) => row.kind === 'place_agent')).toBeTruthy();
+    expect(missionKindRow('place_agent')).toBeTruthy();
+  });
+
+  test('⛔⛔ the two rows keep their OWN encodings — a merge would red exactly here', () => {
+    const annex = PLACEMENT_MISSION_KINDS.find((row) => row.kind === 'place_agent');
+    const catalog = missionKindRow('place_agent');
+    // O1's SUCCESS-receipt question, one-word verdict.
+    expect(catalog?.receiptFamily).toBe('infiltration_placement');
+    expect(catalog?.receiptWriter).toBeNull();
+    expect(catalog?.sourceVerdict).toBe('unverified');
+    // O3's FAILURE-receipt question, two-field verdict.
+    expect(annex?.receiptFamily).toBe('foreign_guest_hold_covert');
+    expect(annex?.receiptWriter).toBe('FOREIGN_GUEST_HOLD_COVERT_CAUSE');
+    expect(annex?.sourceVerdict).toBe('verified');
+    // ⛔ AND THEY DISAGREE ON EVERY COLUMN THAT CARRIES THE DIFFERENCE. A merged row would
+    // have to pick one of each pair, and every pick erases a sight that is true.
+    expect(annex?.receiptFamily).not.toBe(catalog?.receiptFamily);
+    expect(annex?.sourceVerdict).not.toBe(catalog?.sourceVerdict);
+    expect(annex?.receiptWriter).not.toBe(catalog?.receiptWriter);
+    // ⭐ THE DIFFERENCE IS AN ENCODING, NOT ONLY A VALUE. The catalog spells its doubt with
+    // `sourceUnverified`; the annex spells readiness with `writerLanded`. A row carrying
+    // both keys is a merged row wearing two hats, and it reds here.
+    expect(Object.keys(catalog ?? {})).toContain('sourceUnverified');
+    expect(Object.keys(catalog ?? {})).not.toContain('writerLanded');
+    expect(Object.keys(annex ?? {})).toContain('writerLanded');
+    expect(Object.keys(annex ?? {})).not.toContain('sourceUnverified');
+  });
+
+  test('⭐ the CATALOG is the ONE dispatch registry — the annex mints no dispatchability', () => {
+    const annex = PLACEMENT_MISSION_KINDS.find((row) => row.kind === 'place_agent');
+    // The sharpest statement of the ruling: the annex says `verified` and the kind is STILL
+    // not dispatchable, because dispatchability derives from the CATALOG's verdict column
+    // and from nothing else. If the annex ever became a second dispatch source, this reds.
+    expect(annex?.sourceVerdict).toBe('verified');
+    expect(isDispatchableKind('place_agent')).toBe(false);
+    expect(DISPATCHABLE_MISSION_KINDS).not.toContain('place_agent');
+    // …and the APPENDED kind is not dispatchable either — it is not in the registry at all,
+    // which is the same refusal for the same reason rather than a second rule.
+    expect(missionKindRow('seat_agent')).toBeNull();
+    expect(isDispatchableKind('seat_agent')).toBe(false);
+    expect(DISPATCHABLE_MISSION_KINDS).not.toContain('seat_agent');
+  });
+
+  test('⛔ THE RECONCILE INVARIANT — the capture write opens BOTH rows in one commit or reds', () => {
+    const annex = PLACEMENT_MISSION_KINDS.find((row) => row.kind === 'place_agent');
+    const catalog = missionKindRow('place_agent');
+    // Written as ONE total assertion rather than a conditional: an `if` guard here would let
+    // the arm stop asking the day the premise moved, which is precisely the day it matters.
+    // Flipping either half alone reds; flipping both together is the one-commit act the
+    // ruling asks for.
+    expect([annex?.writerLanded, catalog?.sourceVerdict]).toEqual([false, 'unverified']);
   });
 });
 
