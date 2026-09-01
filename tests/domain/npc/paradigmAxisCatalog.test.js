@@ -567,17 +567,36 @@ describe('DARK BY CONSTRUCTION — the catalog is consumed by nothing in src/', 
     // 1 — the witness adapter is reached by NOBODY.
     expect(reachersOf('src/domain/worldPulse/faithWitnessSource.js',
       ['faithWitnessEntries', 'exposureDemotion', 'FAITH_WITNESS_KIND', 'FAITH_WITNESS_TUNING'], [])).toEqual([]);
-    // 2 — the funnel catalog is reached only by the funnel family, whose own two
-    // members are reached by nobody. Both hops are asserted; a claim that stopped at
-    // the first hop would be a darkness proof one link short of the light.
+    // 2 — the funnel catalog is reached only by the funnel family, whose own members
+    // are reached by nobody. EVERY hop is asserted; a claim that stopped at the first
+    // hop would be a darkness proof one link short of the light.
+    //
+    // ⭐ AMENDED BY CAR L7 — A THIRD MEMBER ON THIS HOP, NOT A HOLE IN IT.
+    // `characterReadModel.js` imports the catalog's kind roster (its :65-68) and the
+    // funnel's band words (its :69-76), so it genuinely reaches BOTH and belongs on both
+    // lists. What keeps this test's TITLE true is the hop below: the read model is
+    // itself reached by NOBODY, so the branch it opens terminates before production. Its
+    // own suite pins the same closure from the other end (livedExperienceSources.test.js
+    // › ⭐ NO PRODUCTION CALLER, step 2), and this arm is where the catalog's darkness
+    // pays for it.
     expect(reachersOf('src/domain/npc/livedExperienceCatalog.js',
       ['EXPERIENCE_TABLE', 'LIVED_EXPERIENCE_KINDS', 'AMBIENT_EXPERIENCE_KINDS', 'experienceKindOf', 'experienceRowOf'],
-      [])).toEqual(['src/domain/npc/livedExperienceFunnel.js', 'src/domain/npc/livedExperienceSources.js']);
+      [])).toEqual([
+      'src/domain/npc/characterReadModel.js',
+      'src/domain/npc/livedExperienceFunnel.js',
+      'src/domain/npc/livedExperienceSources.js',
+    ]);
     expect(reachersOf('src/domain/npc/livedExperienceFunnel.js',
       ['foldLivedExperience', 'effectiveChartOf', 'decayCharacterDrift', 'characterLegacyRecord'],
-      [])).toEqual(['src/domain/npc/livedExperienceSources.js']);
+      [])).toEqual(['src/domain/npc/characterReadModel.js', 'src/domain/npc/livedExperienceSources.js']);
     expect(reachersOf('src/domain/npc/livedExperienceSources.js',
       ['collectLivedExperience', 'LIVED_EXPERIENCE_SOURCES', 'SOURCE_ADAPTER_OF'], [])).toEqual([]);
+    // 2c — the branch car L7 opened, closed. The read model is the ONLY new reacher on
+    // hop 2, and nothing reaches IT, so the catalog is still dark through it. (Vacuity is
+    // covered by this test's own closing control, which proves `reachersOf` finds things
+    // when there are things to find.)
+    expect(reachersOf('src/domain/npc/characterReadModel.js',
+      ['characterDossier', 'biographyOf', 'characterArticles', 'readingOf', 'leadLine'], [])).toEqual([]);
 
     // anchored: both enrolled consumers really are on the tree and really do reach the
     // catalog, so none of the lists above passed by matching nothing.
