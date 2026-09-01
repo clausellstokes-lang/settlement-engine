@@ -10,7 +10,10 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // walker reconstructs through the VOICE contract's `reconstructWizardNewsIntroductions`, so a
 // tuple updated in one home and not the other reds here with the other file's message. The
 // provenance and the single-variable control are recorded once, at the voice contract's copy.
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 268, retirements: 28, finalEntries: 240, homes: 51 });
+// ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876) — STILL THE SECOND COPY OF THE SAME TUPLE.
+// 268/28/51 → 272/32/50. The provenance, the five-arm single-variable control and the falsified
+// dispatch causes are recorded once, at the voice contract's copy, exactly as before.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 272, retirements: 32, finalEntries: 240, homes: 50 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -21,7 +24,25 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 268, retirements: 
 // no longer reaches a cause-lifecycle beat, and no NPC is corrupt enough to be queued to exploit.
 // The single-variable control agrees: with car 1's two src files restored to the landing base, the
 // whole tuple reads its FROZEN value, cars 2 and 3 notwithstanding.
-const ADDRESS_TOTALS = Object.freeze({ homes: 51, fields: 2, identities: 102, prospectiveIdentities: 12, indicativeIdentities: 90, distinctValues: 393, occurrences: 536 });
+// ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876) ───────────────────────────────────────────
+// 51/2/102/12/90/393/536 → 50/2/100/12/88/393/544. `fields` holds at 2 for the third re-record
+// running, as it must, and `prospectiveIdentities` holds at 12: nothing was added to the address
+// grammar and no prospective home was touched.
+// ⭐⭐ `distinctValues` HOLDS AT 393 EXACTLY WHILE `occurrences` RISES 8 AND A HOME LEAVES, AND
+// THAT COINCIDENCE IS THE FINDING RATHER THAN AN ACCIDENT. Decomposed row by row: ONE home
+// vanishes, `applied|stressor_escalate_insurgency`, taking its headline and its summary row
+// (−2 identities, −2 distinct, −4 occurrences); the surviving rows move +2 distinct / +12
+// occurrences. The two sums cancel on distinct and do not on occurrences. `5a529f100` (T4
+// SEAT-2b) declares its legitimacy-sensitivity table a REDISTRIBUTION and not an inflation —
+// "it can only move WHICH seats are fragile WHEN" — and a vocabulary that holds its size while
+// its homes are re-dealt is that claim measured from outside the car.
+// THE SEVEN HOMES THAT MOVE, NAMED, because a count is not a provenance: down —
+// `applied|npc_exploit` 3/3 → 2/2 and `applied|npc_suppress` 6/9 → 5/8 on both fields; up —
+// `applied|stressor_aftermath` and `applied|stressor_residual` 1/1 → 2/3, the two
+// `applied|stressor_birth_*` homes, and `applied|trade_pressure` +1 occurrence on both fields.
+// The single-variable control and the two falsified dispatch causes are recorded once, at
+// `scripts/lib/news-voice-contract.mjs`.
+const ADDRESS_TOTALS = Object.freeze({ homes: 50, fields: 2, identities: 100, prospectiveIdentities: 12, indicativeIdentities: 88, distinctValues: 393, occurrences: 544 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
@@ -35,18 +56,32 @@ const RAW_LIVENESS = Object.freeze({
     // T8 · SHIFT (§858 + §860): 56/29/52/28 → 54/28/50/27. TWO mechanical headlines leave, and the
     // distinct count follows them down by one — the opposite of TE36's rise, because this time the
     // departing records are NOT a repetitive family but two ordinary one-off beats.
-    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 54, distinctValues: 28, prospectiveOccurrences: 50, prospectiveDistinctValues: 27, indicativeOccurrences: 4, indicativeDistinctValues: 1 }),
-    // ⭐ THE SELECTED LANE IS BYTE-IDENTICAL FOR THE SECOND RE-RECORD RUNNING (151/80/95/66/56/14),
-    // and that is the control, not a coincidence: it is the lane the corruption work never authors
-    // into, so a movement here would have meant the drift was wider than car 1.
-    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 151, distinctValues: 80, prospectiveOccurrences: 95, prospectiveDistinctValues: 66, indicativeOccurrences: 56, indicativeDistinctValues: 14 }),
+    // WAR LANDING (§876): 54/28/50/27/4/1 → 53/28/49/27/4/1. ONE mechanical headline leaves and it
+    // was prospective; both distinct counts and the whole indicative half hold, so the departing
+    // record was a duplicate spelling of one already in the lane.
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 53, distinctValues: 28, prospectiveOccurrences: 49, prospectiveDistinctValues: 27, indicativeOccurrences: 4, indicativeDistinctValues: 1 }),
+    // ⭐ THE CONTROL THAT HELD FOR TWO RE-RECORDS NOW MOVES, AND THAT IS THE POINT OF KEEPING IT.
+    // T8 recorded this lane byte-identical twice running because the corruption work never authors
+    // into it. WAR LANDING (§876): 151/80/95/66/56/14 → 153/78/95/63/58/15, and the shape names the
+    // new cause without ambiguity. `prospectiveOccurrences` HOLDS AT 95 while prospective distinct
+    // falls 66 → 63 and the indicative half rises 56/14 → 58/15: the public lane authors the same
+    // number of "may" beats in FEWER spellings and two more settled ones. That is `5a529f100`'s
+    // upheaval gates re-dealing which seats are fragile when — a lane the corruption work could not
+    // reach, and the first cause in three re-records that does.
+    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 153, distinctValues: 78, prospectiveOccurrences: 95, prospectiveDistinctValues: 63, indicativeOccurrences: 58, indicativeDistinctValues: 15 }),
   ]),
   // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
   // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
   // T8 · SHIFT: the union follows the mechanical lane alone AGAIN — 207 → 205 and 147 → 145, the
   // same two. `distinctValues` holds at 80 and both indicative halves hold, so the arithmetic says
   // the two departed headlines were prospective and already spelled elsewhere in the union.
-  union: Object.freeze({ headlineOccurrences: 205, distinctValues: 80, prospectiveOccurrences: 145, prospectiveDistinctValues: 66, indicativeOccurrences: 60, indicativeDistinctValues: 14 }),
+  // WAR LANDING (§876): the union no longer follows one lane — BOTH move, in opposite directions
+  // on occurrences (mechanical −1, selected +2), so 205 → 206 and 145 → 144 and 60 → 62.
+  // ⭐ THE STRUCTURAL FACT THAT SURVIVES ALL THREE RE-RECORDS: `union.distinctValues` equals the
+  // SELECTED lane's exactly — 80 = 80 before, 78 = 78 now — so the mechanical lane's 28 spellings
+  // are still a strict subset of the public lane's. That is what makes the union's distinct half
+  // an honest check on the lanes rather than a restatement of them.
+  union: Object.freeze({ headlineOccurrences: 206, distinctValues: 78, prospectiveOccurrences: 144, prospectiveDistinctValues: 63, indicativeOccurrences: 62, indicativeDistinctValues: 15 }),
 });
 // TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
 // no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus
@@ -56,7 +91,16 @@ const RAW_LIVENESS = Object.freeze({
 // KNOWN_INERT_HEADLINE_REWRITES needs no new row and this re-record required NO new inert-row
 // authority ("New inert rows require authority" — none is claimed here). Verified by deriving the
 // live zero-count identity set and comparing it to the declared one: identical, 10 of 10.
-const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 16, inertRules: 10, distinctValues: 66, occurrences: 145 });
+// WAR LANDING (§876): 66 → 63 distinct and 145 → 144 occurrences, and again NOTHING ELSE MOVES —
+// rules 26, active 16, inert 10 all hold. ⭐ NO RULE CROSSED IN EITHER DIRECTION for the second
+// re-record running, so `KNOWN_INERT_HEADLINE_REWRITES` needs no new row and NO NEW INERT-ROW
+// AUTHORITY IS CLAIMED HERE. Verified the way T8 verified it, by deriving the live zero-count
+// identity set and comparing it to the declared one: identical, 10 of 10.
+// SIX OF THE 26 RULES MOVED, NAMED: `may emerge` 3/4 → 3/7, `may exploit` 3/6 → 2/5,
+// `may intensify` 2/4 → 1/2, `may reform` 23/50 → 23/49, `may suppress` 6/12 → 5/11, `may take
+// hold` 5/18 → 5/19. The three that lose a spelling are the −3 distinct; the occurrences net to
+// −1. Every one of them is an upheaval-adjacent verb, which is `5a529f100` read off the registry.
+const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 16, inertRules: 10, distinctValues: 63, occurrences: 144 });
 
 export const KNOWN_INERT_HEADLINE_REWRITES = Object.freeze([
   { source: '\\bmay close its doors\\b', flags: '', replacement: 'closes its doors', reason: 'institutionLifecycle.js::evaluateInstitutionLifecycle is the live institution-closure authoring seam; the executed AO-0 12-record persisted public+mechanical union contains no closure headline.' },

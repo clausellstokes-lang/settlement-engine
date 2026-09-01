@@ -100,13 +100,19 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
   });
 
-  it('A2 freezes all 102 address rows and their canonical digest', () => {
+  it('A2 freezes all 100 address rows and their canonical digest', () => {
     expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
     expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
     // T8 · SHIFT (§858 + §860): 106 → 102 identities over 53 → 51 homes. The two homes that leave
     // are `applied|cause_lifecycle` and `queued|npc_exploit`, each surrendering its headline and
     // summary row; the provenance is recorded once, at news-headline-contract.mjs's ADDRESS_TOTALS.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 51, fields: 2, identities: 102, prospectiveIdentities: 12, indicativeIdentities: 90, distinctValues: 393, occurrences: 536 });
+    // WAR LANDING (§876): 102 → 100 over 51 → 50 homes. ONE home leaves this time,
+    // `applied|stressor_escalate_insurgency`, and it is `5a529f100`'s occupied insurgency arm —
+    // which the car REPLACES rather than stacks, because 2.0 × 1.5 already saturates GATE_MULT_MAX.
+    // ⭐ `distinctValues` HOLDS AT 393 THROUGH ALL OF THAT while occurrences rise 536 → 544: the
+    // vocabulary is the same size, dealt to different homes. Provenance and the five-arm control
+    // are recorded once, at news-headline-contract.mjs's ADDRESS_TOTALS.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 50, fields: 2, identities: 100, prospectiveIdentities: 12, indicativeIdentities: 88, distinctValues: 393, occurrences: 544 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

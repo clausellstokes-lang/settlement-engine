@@ -82,20 +82,50 @@ const EXPECTED_ROOTS = new Map([
 // ⚠ SCOPE, unchanged from the TE36 note above: `demographicsEnabled` is virtual and false in every
 // shipped preset, and this denominator is the ONLY place in the estate that observes the lit
 // engine. No player, no shipped golden and no dark-control cell sees any of this.
+// ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876), IN THE SAME ACT AS
+// `tests/lint/.prose-family-contract-baseline.json` ────────────────────────────────────────────
+// ⭐ THE SHAPE IS UNTOUCHED FOR THE THIRD RE-RECORD RUNNING: 63 identities before and after, ZERO
+// added and ZERO removed, four families still nonempty, `chronicle` (7/7/7) and `timeline` (4/8/12)
+// byte-identical yet again. 25 of the 63 rows moved, every one a COUNT on a path this contract
+// already governed. The row-by-row review is in the lane receipt, not summarised away here.
+// ⚠⚠ `EXPECTED_ROWS_BYTES` DID NOT MOVE, AND THAT IS A COINCIDENCE OF DIGIT WIDTHS, NOT A
+// DORMANCY PROOF. 25 rows changed their counts and the digit-count changes happen to cancel to
+// zero, so the array is 8271 bytes at both ends. THE DIGEST MOVES — that is the pin that is
+// actually load-bearing here, and a byte pin alone would have read GREEN over a real movement.
+// Both figures are re-derived from ONE `deriveProseFamilyContract` run and never transcribed.
+//
+// THE CAUSE, BY FIVE-ARM SINGLE-VARIABLE CONTROL RATHER THAN BY ARGUMENT, and it is ONE CAR.
+// `6308a27b8` (landing base) and `ca7a6ba6a` (T4 SEAT-5) both measure the FROZEN denominator
+// exactly — scalarRows 25399, pulseHistory {1048, 5018}, regionalLog {8, 169}, digest
+// `687ae7e5…`. `5a529f100` (T4 SEAT-2b) measures the ENTIRE tip: 25527, {1051, 5075}, {8, 176},
+// digest `4cf433b2…`. `0e27b7742`, `fc155e476`, `105c65cd1` and all three WAR mini-window cars
+// move it by EXACTLY ZERO — every artifact byte-identical to the picks-only arm.
+// ⛔ SO THE TWO CAUSES THE LANE BRIEF NAMED ARE FALSIFIED: W-MEM's `publishRuling` funnel is
+// unreached by a 12-interval AO-0 corpus, and T4's occupation-authority prose moves nothing here.
+// SEAT-2b mints `legitimacyUpheavalEnabled` with its first reader `stressorGates.upheavalLit`;
+// this corpus lights every `*Enabled` flag, so the key is live HERE and nowhere else.
+// ⭐ REGIONALLOG IS THE CLEANEST READING IN THE FILE: `distinctValues` HOLDS AT 8 while
+// occurrences go 169 → 176. The audit log records the same eight KINDS of change, seven more
+// times — an upheaval re-deal, not a new kind of event, and the car's own "redistribution, not
+// inflation" invariant measured from the far side of the estate.
+// ⚠ SCOPE, unchanged from both notes above: `demographicsEnabled` and now
+// `legitimacyUpheavalEnabled` are virtual and false in every shipped preset, and this denominator
+// is the ONLY place in the estate that observes the lit engine. No player, no shipped golden and
+// no dark-control cell sees any of this.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 25399, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
-  wizardNewsAccumulatedEntries: 1565, wizardNewsUnique: 268, pulseHistory: 12,
-  regionalEventLog: 74, regionalEventLogUnique: 74, aiChronicle: 1,
+  scalarRows: 25527, canonEventLogEntries: 1, wizardNewsFinalEntries: 240,
+  wizardNewsAccumulatedEntries: 1567, wizardNewsUnique: 272, pulseHistory: 12,
+  regionalEventLog: 77, regionalEventLogUnique: 77, aiChronicle: 1,
 });
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 50, distinctValues: 1048, occurrences: 5018 },
-  { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 169 },
+  { family: 'pulseHistory', identities: 50, distinctValues: 1051, occurrences: 5075 },
+  { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 176 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1071, occurrences: 5206 });
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 63, distinctValues: 1074, occurrences: 5270 });
 const EXPECTED_ROWS_BYTES = 8271;
-const EXPECTED_ROWS_SHA256 = '687ae7e525ac1f7ab1daffe8c4a41afc8b3cfe92f7e65d9c8a70006786e445a9';
+const EXPECTED_ROWS_SHA256 = '4cf433b2d508986fad5a1afdb8c2bd700751186411e87c179d39b927ff849a39';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

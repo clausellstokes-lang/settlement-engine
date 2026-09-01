@@ -104,7 +104,13 @@ describe('four durable prose-family exact-totality contract', () => {
     }
     expect(Object.fromEntries([...nullHomes].sort(([left], [right]) => codepoint(left, right)))).toEqual({
       'pulseHistory[].consequenceOutcomes[].type': 5,
-      'pulseHistory[].impactDigest[].channelType': 148,
+      // WAR LANDING (§876): 148 → 150, and it is the SAME reading of the same arm a third time —
+      // the impact digest carries two more records because `5a529f100`'s upheaval gates author
+      // two more public beats, and the null-VALUE census follows the records that produced them.
+      // ⭐ THE OTHER FOUR NULL HOMES ARE UNCHANGED, INCLUDING THE RUMOUR-SEED LANE THAT MOVED LAST
+      // TIME. Four of five homes standing still is what keeps this a null-RETENTION arm and not a
+      // corpus-size arm — a cause that moved every home would prove nothing about retention.
+      'pulseHistory[].impactDigest[].channelType': 150,
       'pulseHistory[].mechanicalOutcomes[].type': 4,
       // TE36 (ODQ §271): 30 → 19. The retired bare-decline outcomes were seeding rumours;
       // the null-VALUE census follows the outcomes that produced them. Every other null home
@@ -148,11 +154,16 @@ describe('four durable prose-family exact-totality contract', () => {
     // row array still holds exactly 63 paths and only their counts shrank.
     // T8 · SHIFT (§858 + §860): 8274 → 8271, three bytes, DIGITS again — 26 of the 63 rows moved
     // and not one path was added or removed, so the array is three characters shorter.
+    // ⚠⚠ WAR LANDING (§876): 8271 → 8271, AND THE BYTE PIN IS THEREFORE BLIND HERE. 25 rows moved
+    // their counts and the digit-width changes cancel to exactly zero, so this assertion would
+    // have passed unchanged over a real movement. It is kept because a coincidence is not a
+    // licence to delete a pin — but the DIGEST below is the arm that actually convicts, and this
+    // is the first re-record in which the two disagree about whether anything happened.
     expect(Buffer.byteLength(JSON.stringify(live.rows))).toBe(8271);
     // TE36 (ODQ §271): the digest follows the counts it hashes. It is re-recorded here and in
     // prose-family-contract.mjs's EXPECTED_ROWS_SHA256 together, which is what keeps the
     // test-side and library-side denominators from ever disagreeing.
-    expect(live.rowsSha256).toBe('687ae7e525ac1f7ab1daffe8c4a41afc8b3cfe92f7e65d9c8a70006786e445a9');
+    expect(live.rowsSha256).toBe('4cf433b2d508986fad5a1afdb8c2bd700751186411e87c179d39b927ff849a39');
     const counted = live.rows.findIndex((row) => row.occurrences > row.distinctValues);
     const movements = [
       [...clone(live.rows), { family: 'timeline', path: 'zz', field: 'type', distinctValues: 1, occurrences: 1 }],
@@ -170,7 +181,10 @@ describe('four durable prose-family exact-totality contract', () => {
     // IMMUTABILITY guard this arm exists to prove. The seven come straight off the new
     // totals (1071 − 7, 5206 − 7), so the arithmetic tracks the re-record rather than
     // being re-chosen.
-    counterfeit.totals = { families: 3, identities: 56, distinctValues: 1064, occurrences: 5199 };
+    // WAR LANDING (§876): 1064/5199 → 1067/5263, the same seven off the new totals (1074 − 7,
+    // 5270 − 7). `chronicle` is byte-identical at 7/7/7 for the third re-record running, which is
+    // why this counterfeit's arithmetic keeps tracking with a single subtraction.
+    counterfeit.totals = { families: 3, identities: 56, distinctValues: 1067, occurrences: 5263 };
     counterfeit.rowsSha256 = proseFamilyRowsSha256(counterfeit.rows);
     expect(() => validateProseFamilyBaseline(counterfeit)).toThrow(/immutable/);
     for (const mutate of [
@@ -206,11 +220,16 @@ describe('four durable prose-family exact-totality contract', () => {
     // the landing base this family reads 1057/5063, so cars 2+3 own −141 distinct / −13
     // occurrences (car 3's relabel re-spells the `reasons[]` vocabularies; car 2's dedup removes
     // records) and car 1 owns the remaining −9 / −45.
-    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 50, distinctValues: 1048, occurrences: 5018 });
+    // WAR LANDING (§876): 1048/5018 → 1051/5075, and IDENTITIES HOLD AT 50 for the third
+    // re-record running. This time the halves are not split at all: a five-arm control puts the
+    // WHOLE movement on `5a529f100` (T4 SEAT-2b) and measures ZERO from every other pick and from
+    // all three WAR mini-window cars — including W-MEM's `publishRuling` funnel, which the lane
+    // brief named as the cause and which this corpus never reaches.
+    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 50, distinctValues: 1051, occurrences: 5075 });
     const history = scalarRows.filter((row) => row.root === 'worldState');
     expect([...new Set(history.map((row) => row.path[1].value))]).toEqual([...Array(12).keys()]);
     const headline = (home) => live.rows.find((row) => row.path === `pulseHistory[].${home}[].headline`);
-    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 80, occurrences: 151 });
+    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 78, occurrences: 153 });
     // TE36: the two lanes that carried the retired family move; `selectedOutcomes` above does
     // NOT, because ordinary population drift was already `state_only` and never selected.
     // mechanical distinctValues RISES (24 → 29) while its occurrences fall — the retired
@@ -218,8 +237,14 @@ describe('four durable prose-family exact-totality contract', () => {
     // T8 · SHIFT: 29/56 → 28/54 and 73/186 → 73/184. `selectedOutcomes` above is UNMOVED at
     // 80/151 for the third re-record running — the two lanes that move are the two the corruption
     // and rumour work authors into, and the lane that never carried either holds still.
-    expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 28, occurrences: 54 });
-    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 73, occurrences: 184 });
+    // ⭐ WAR LANDING (§876): THE LANE THAT HELD STILL FOR THREE RE-RECORDS IS THE ONE THAT MOVES
+    // MOST, and that inversion is the cleanest signature in this file that the cause is a new one.
+    // `selectedOutcomes` 80/151 → 78/153 (the public lane the upheaval gates author into);
+    // `mechanicalOutcomes` 28/54 → 28/53, losing one occurrence and no spelling; and
+    // `consequenceOutcomes` 73/184 → 72/184, losing one spelling and no occurrence — the exact
+    // mirror image, and between them the arithmetic of a re-deal rather than of a gain or a loss.
+    expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 28, occurrences: 53 });
+    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 72, occurrences: 184 });
   });
 
   it('A6 reaches the regional audit log while proving its selected prose zero', () => {
@@ -231,12 +256,18 @@ describe('four durable prose-family exact-totality contract', () => {
     // base this family reads the frozen 2/7/165 exactly, cars 2 and 3 notwithstanding. The
     // corruption-onset shift §858 priced puts one more audited event into the regional log and one
     // more distinct change KIND with it, so distinctValues rises 7 → 8 for the first time here.
-    expect(familyTotal(live, 'regionalLog')).toEqual({ family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 169 });
-    expect(scalarMeta).toMatchObject({ regionalEventLog: 74, regionalEventLogUnique: 74 });
+    // ⭐ WAR LANDING (§876): 169 → 176 and `distinctValues` HOLDS AT 8. TE36 held both identities
+    // and distinct while occurrences fell; T8 moved both; this time the audit log records the same
+    // EIGHT kinds of change, seven more times. That is the shape of a re-deal — `5a529f100`'s
+    // legitimacy-sensitivity table moving WHICH seats are fragile WHEN, never how many kinds of
+    // thing can happen — and it is the same claim the car's own redistribution invariant makes,
+    // measured here from the far side of the estate rather than from inside the gate.
+    expect(familyTotal(live, 'regionalLog')).toEqual({ family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 176 });
+    expect(scalarMeta).toMatchObject({ regionalEventLog: 77, regionalEventLogUnique: 77 });
     const regional = scalarRows.filter((row) => row.root === 'pulseResult'
       && row.path[0]?.value === 'regionalGraph' && row.path[1]?.value === 'eventLog');
     expect([...new Set(regional.map((row) => row.rootOrdinal))]).toEqual([...Array(12).keys()]);
-    expect(new Set(regional.map((row) => `${row.rootOrdinal}|${row.path[2].value}`)).size).toBe(74);
+    expect(new Set(regional.map((row) => `${row.rootOrdinal}|${row.path[2].value}`)).size).toBe(77);
     expect(live.rows.filter((row) => row.family === 'regionalLog')).toEqual([
       // TE36: `changes[].kind` is BYTE-IDENTICAL at 6/92 — the retired outcomes carried a
       // sourceEvent but no graph change, so only the second row moves. That asymmetry is the
@@ -244,8 +275,12 @@ describe('four durable prose-family exact-totality contract', () => {
       // T8 · SHIFT: this time BOTH rows move and in the SAME direction — 6/92 → 7/95 and 1/73 →
       // 1/74. The asymmetry is gone because the added event is the opposite kind of event to the
       // one TE36 retired: it carries a graph change AND a sourceEvent, so it lands in both rows.
-      { family: 'regionalLog', path: 'regionalGraph.eventLog[].changes[].kind', field: 'kind', distinctValues: 7, occurrences: 95 },
-      { family: 'regionalLog', path: 'regionalGraph.eventLog[].sourceEvent.type', field: 'type', distinctValues: 1, occurrences: 74 },
+      // WAR LANDING (§876): both rows move up again — 7/95 → 7/99 and 1/74 → 1/77 — and NEITHER
+      // distinct count moves. Three added events carry a graph change and a sourceEvent each, and
+      // four graph changes between them; no new KIND of change appears in either row, which is
+      // what separates "the same world, dealt differently" from "a new kind of thing happening".
+      { family: 'regionalLog', path: 'regionalGraph.eventLog[].changes[].kind', field: 'kind', distinctValues: 7, occurrences: 99 },
+      { family: 'regionalLog', path: 'regionalGraph.eventLog[].sourceEvent.type', field: 'type', distinctValues: 1, occurrences: 77 },
     ]);
     const prose = new Set(['headline', 'narrativeSummary', 'reason', 'reasons', 'summary', 'summaryText', 'thesis', 'triggeredBy']);
     expect(live.rows.filter((row) => row.family === 'regionalLog' && prose.has(row.field))).toEqual([]);

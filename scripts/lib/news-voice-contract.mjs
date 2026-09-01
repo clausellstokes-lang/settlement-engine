@@ -19,8 +19,38 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // `retirements` and `homes`. Anyone re-recording this from a failure message alone would have
 // left two thirds of the drift in place; the figures here are measured from a probe that reports
 // every field instead of throwing on the first.
+// ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876), IN THE SAME ACT AS THE OSR WALKER ───────
+// 268/28/51 → 272/32/50. pulseRoots 12 and finalEntries 240 do not move for the second
+// re-record running, and conservation still closes: 272 − 32 = 240.
+// ⚠ THE BEFORE-PICTURE NAMED ONE FIELD AND THREE MOVED — AGAIN, AND ONE OF THEM MOVED THE
+// OTHER WAY. The red read "introductions drifted: expected 268, got 272" and was silent about
+// `retirements` (28 → 32) and about `homes` (51 → **50**). A re-record taken from that message
+// alone would have written 272/28/51: wrong in two fields and failing conservation besides.
+// ⭐ AND THIS IS NOT A REVERT OF THE T8 BLOCK ABOVE. `introductions`/`retirements` land back on
+// the pre-T8 272/32 by arithmetic coincidence; `homes` does not — it read 53 before T8, 51 after
+// it, and 50 now. Three re-records, three different values, one monotone cause each.
+// ⭐⭐ THE CAUSE IS ONE CAR, `5a529f100` (T4 SEAT-2b), AND A FIVE-ARM SINGLE-VARIABLE CONTROL SAYS
+// SO RATHER THAN THE DISPATCH. One corpus build per arm, every field of all three contracts:
+//   `6308a27b8` landing base   12/268/28/240/51 — the FROZEN tuple exactly, ZERO residue
+//   `ca7a6ba6a` T4 SEAT-5      12/268/28/240/51 — unmoved
+//   `5a529f100` T4 SEAT-2b     12/272/32/240/50 — THE WHOLE MOVEMENT, complete, in one car
+//   `0e27b7742` · `fc155e476` · `105c65cd1` · the three mini-window cars — ZERO further movement
+// ⛔ SO BOTH CAUSES THE LANE BRIEF NAMED ARE FALSIFIED AT THIS CORPUS. W-MEM's `publishRuling`
+// funnel (`105c65cd1`) moves this tuple by EXACTLY ZERO — a 12-interval AO-0 corpus never
+// reaches it — and so does T4's occupation-authority prose (`ca7a6ba6a`). The OSR `scalarMeta`
+// figures the brief reasoned from (unique 272, accumulated 1567, regionalEventLog 77) are
+// RIGHT; only the attribution was wrong, and a coincidence of size is what made it plausible.
+// THE MECHANISM: SEAT-2b mints `legitimacyUpheavalEnabled` and gives it its first reader,
+// `stressorGates.upheavalLit`, reached from the coup, rebellion and insurgency spawn gates.
+// This corpus lights EVERY `*Enabled` flag, so the new key is live HERE and NOWHERE ELSE — it is
+// false in every shipped preset, the same scope this contract family has carried since TE36.
+// ⭐ The car declares its sensitivity table a REDISTRIBUTION and not an inflation, and the news
+// layer corroborates that claim independently: `applied|stressor_escalate_insurgency` leaves the
+// address book entirely (the occupied insurgency arm the car REPLACES rather than stacks) while
+// four other stressor homes reach further, and the address `distinctValues` total holds at 393
+// exactly. Fewer homes, more occurrences, the same vocabulary size — that is redistribution.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 268, retirements: 28, finalEntries: 240, homes: 51,
+  pulseRoots: 12, introductions: 272, retirements: 32, finalEntries: 240, homes: 50,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([
