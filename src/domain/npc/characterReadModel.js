@@ -148,6 +148,7 @@ export const EXPERIENCE_CLAUSES = Object.freeze({
   dwell_milieu: 'the long habit of the place',
   faction_captured: 'a house taken from within',
   faction_cleansed: 'a house cleaned out',
+  faith_milieu: 'the long habit of the gods of the place',
   festival_kept: 'a festival kept',
   goal_culminated: 'an ambition carried through',
   god_fortunes_fell: 'the falling fortunes of a god',
