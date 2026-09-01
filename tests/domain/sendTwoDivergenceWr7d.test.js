@@ -291,9 +291,18 @@ describe('⭐⭐ THE ⟨F8⟩ ONE-HOME SCAN — the walker the charter said exis
     // home instead of growing the second spelling this scan exists to forbid. The row
     // is enrolled, not excluded, and it pays the same non-decider price.
     const DECIDER = 'src/domain/worldPulse/sendTwoDivergence.js';
+    // ⭐ AND W-OPS CAR O3 ADDED THE THIRD DERIVER, ON THE SAME TERMS. `infiltrationDepth`'s
+    // `placementVettingRamp(intervalIdx)` returns a NUMBER out of
+    // `INFILTRATION_DEPTH_TUNING.PLACEMENT_RAMP` — a ramp multiplier for the placement
+    // interval, not a verdict — so it is an input the decider may read and never a second
+    // place a refusal can be minted. Enrolled rather than excluded, exactly as the two rows
+    // above were, and it pays the same non-decider price in the loop below (measured: the
+    // leaf holds zero `accepted:` and zero `basis:`). Loosening the regex to let a ramp
+    // through would have retired the guard for every future speller.
     const INPUT_DERIVERS = [
       'src/domain/npc/acceptanceCharacterReads.js',
       'src/domain/npc/characterConsumers.js',
+      'src/domain/worldPulse/espionage/infiltrationDepth.js',
     ];
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
     const spellings = files
