@@ -1117,7 +1117,24 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // why a rebase moves this pin by −2/−1/−1 and nothing else.
     // ⛔ Literals READ OFF the register re-frozen through the governed `--write` at the
     // landing tip; the T11 landing census bill carries the closing arithmetic.
-    }).toEqual({ reads: 1996, identities: 1411, files: 388, bankedReads: 64, taggedRows: 43 });
+    // ⭐ MOVED 2026-09-01 BY lane PAID-REPAIR (repair 1/5), a DEAD-ARM STRIKE — the
+    // first shrink shape, not a file deletion. The campaign PDF and the World Book both
+    // read a top-level `settlement.culture`, a key NO writer in src/ produces; the
+    // exporters now read domain/resolveCulture.js (config.culture, then the
+    // materialized culturalIdentity.key). `culture on settlement` leaves
+    // generateCampaignPDF.js at ×2 and generateWorldBook.js at ×1, so reads fall by
+    // THREE and identities by TWO — one identity per file, both files keeping their
+    // other rows: 1996/1411 → 1993/1409.
+    // ⚠ FILES HOLDS AT 388 AND THAT IS THE LOAD-BEARING HALF. The cure introduces a
+    // NEW module, src/domain/resolveCulture.js, which reads `config.culture` and
+    // `culturalIdentity.key` — both abundantly written — plus the guarded sentinel
+    // compare. Had either resolved to a dead key the new file would have minted its own
+    // row and `files` would read 389 while reads/identities still fell: a mint and a
+    // shrink cancelling to look like a clean strike. 388 is what rules that out, and it
+    // is why the chokepoint could be introduced without a schema genesis (`--write`
+    // may never add a file).
+    // ⚠ bankedReads/taggedRows HOLD at 64/43 — this lane cleared no row and tagged none.
+    }).toEqual({ reads: 1993, identities: 1409, files: 388, bankedReads: 64, taggedRows: 43 });
     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
       const rows = taggedAddresses.filter((row) => row.identity === identity);
       return [identity, {
