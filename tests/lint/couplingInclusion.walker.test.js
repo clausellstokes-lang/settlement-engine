@@ -440,6 +440,19 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'SP substrate — the shared band/severity vocabulary, spelled by every layer',
     reads: Object.freeze([]),
   }),
+  // SUBSTRATE COUPLING (W-LIVES L5 F15, landed at this consist): the goal rule tree became
+  // a RULE TABLE, extracted VERBATIM from npcAgency.js so the 830-wall could fall (the size
+  // baseline's own burn-down entry records the act). The table owns NO subject — it is the
+  // rule tree's data, weights and directions, with a two-line delegate as its only consumer
+  // — and wave 3 proved it mints zero cross-layer pairs (couplingInclusion byte-identical
+  // base vs tip). Its parent npcAgency.js sits in the PRE-PROGRAM baseline, a door closed
+  // to new files by that register's own law, and giving the table a family home would claim
+  // a subject the data does not own.
+  'src/domain/worldPulse/npcGoalBranches.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'L5 rule table — npcAgency\'s goal tree as data, extracted verbatim; no subject, one delegate consumer',
+    reads: Object.freeze([]),
+  }),
   'src/domain/worldPulse/bandedStock.js': Object.freeze({
     kind: 'substrate',
     reason: 'SP substrate — the shared decay law over that vocabulary',
@@ -965,7 +978,11 @@ const ARGUED_HOSTS = Object.freeze([
  * ever reaches reds by name.
  * A twenty-seventh admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 26;
+// 26 -> 27 at the SUBSTRATE COUPLING landing: npcGoalBranches.js admitted as substrate —
+// L5's rule table, extracted verbatim from the pre-program-baselined npcAgency.js; owns no
+// subject, one delegate consumer, zero cross-layer pairs proven at the coupling (the full
+// argument sits on its roster entry above). Deliberate, in this diff, per this anchor's law.
+const ARGUED_ROSTER_CEILING = 27;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;
