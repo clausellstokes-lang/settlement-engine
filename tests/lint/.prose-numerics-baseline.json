@@ -1231,43 +1231,43 @@
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 332,
+    "line": 335,
     "category": "floatInterpolation",
     "snippet": "{d.share}"
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 332,
+    "line": 335,
     "category": "percentToken",
     "snippet": "{d.share}"
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 340,
+    "line": 343,
     "category": "floatInterpolation",
     "snippet": "`${i > 0 ? ', ' : ''}${o.name} ${Math.round(o.odds * 100)}%`"
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 340,
+    "line": 343,
     "category": "percentToken",
     "snippet": "`${i > 0 ? ', ' : ''}${o.name} ${Math.round(o.odds * 100)}%`"
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 410,
+    "line": 413,
     "category": "floatInterpolation",
     "snippet": "{b.confidence}"
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 410,
+    "line": 413,
     "category": "floatInterpolation",
     "snippet": "{b.readiness}"
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 410,
+    "line": 413,
     "category": "floatInterpolation",
     "snippet": "{b.strength}"
   },

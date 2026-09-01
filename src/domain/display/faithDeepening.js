@@ -138,7 +138,15 @@ export function characterTop3(snapshot) {
  * @property {'boon'|'bane'} kind
  * @property {string} channel      the authored channel key
  * @property {string} channelWord  the channel in display words
- * @property {string} strength     the authored band word (`faint` | `firm` | `heavy`)
+ * @property {string} strengthWord the authored band word (`faint` | `firm` | `heavy`). ⚠ NAMED
+ *                                 WITH THE `…Word` SUFFIX DELIBERATELY: a binding whose last
+ *                                 camel token is a FLOAT_TOKEN reads as a scalar to the prose-
+ *                                 numerics detector even when it provably holds a word, and
+ *                                 `tests/lint/proseNumerics.test.js` has already ruled that
+ *                                 exact shape once (`settlementPolitics.js:358`, a binding
+ *                                 named `strength` holding a word): the cure is the RENAME and
+ *                                 nothing else. It also matches the two siblings on this very
+ *                                 record, `channelWord` and the top-3 rows' `levelWord`.
  * @property {string|null} flaw    the boon-side flaw word when the deity holds the
  *                                 modulating vice position; null otherwise, and
  *                                 always null on the bane (the charter: the BOON
@@ -169,7 +177,7 @@ export function boonBaneRows(snapshot) {
   if (FAITH_CHANNELS.includes(boonChannel) && FAITH_STRENGTHS.includes(boonStrength)) {
     rows.push({
       kind: 'boon', channel: boonChannel, channelWord: channelWords(boonChannel),
-      strength: boonStrength, flaw: jealous,
+      strengthWord: boonStrength, flaw: jealous,
     });
   }
   const baneChannel = str(snapshot.baneChannel);
@@ -177,7 +185,7 @@ export function boonBaneRows(snapshot) {
   if (FAITH_CHANNELS.includes(baneChannel) && FAITH_STRENGTHS.includes(baneStrength)) {
     rows.push({
       kind: 'bane', channel: baneChannel, channelWord: channelWords(baneChannel),
-      strength: baneStrength, flaw: null,
+      strengthWord: baneStrength, flaw: null,
     });
   }
   return rows;
