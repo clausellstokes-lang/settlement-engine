@@ -64,3 +64,28 @@ describe('forceLayout — deterministic relationship-map layout', () => {
     expect(autoLayout(nodes, edges)).toEqual(autoLayout(nodes, edges));
   });
 });
+
+/**
+ * THE EDGE-KEY CONTRACT. forceLayout reads `edge.from` / `edge.to` (:111-112) and
+ * `continue`s past any edge whose endpoints it cannot resolve — a deliberate guard
+ * against dangling ids that doubles as a SILENT SINK for a wrongly-shaped edge. A
+ * caller handing it `{source, target}` gets a layout with every spring dropped and
+ * no error, no warning and no visible difference below 9 nodes (circularLayout
+ * ignores edges entirely). generateWorldBook.js did exactly that.
+ *
+ * These pin the trap itself so the next caller cannot re-enter it unseen.
+ */
+describe('forceLayout — the edge shape is {from,to}, and a wrong shape is silently dropped', () => {
+  test('springs demonstrably move the layout (edges are not decorative)', () => {
+    const nodes = nineNodes();
+    const withSprings = forceLayout(nodes, ringEdges(nodes));
+    const noSprings = forceLayout(nodes, []);
+    expect(withSprings).not.toEqual(noSprings);
+  });
+
+  test('{source,target} edges are silently ignored — identical to passing NO edges', () => {
+    const nodes = nineNodes();
+    const wrongShape = ringEdges(nodes).map(e => ({ source: e.from, target: e.to }));
+    expect(forceLayout(nodes, wrongShape)).toEqual(forceLayout(nodes, []));
+  });
+});
