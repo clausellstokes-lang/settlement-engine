@@ -153,6 +153,43 @@ afterEach(() => {
   for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true });
 });
 
+/**
+ * ⛔ THE PER-TEST BUDGETS BELOW ARE A COST CURE, NEVER DEBT (TE-BUDGET-1, 2026-08-31).
+ *
+ * WHY THIS FILE AND NOT ITS NEIGHBOURS. Every case here builds its OWN throwaway Git
+ * repository and drives real `git` subprocesses through it, so the row's cost is
+ * PROCESS-SPAWN bound, not CPU bound — and spawn cost degrades far faster under load
+ * than arithmetic does. MEASURED at 853e0e9ba on 2026-08-31, one instrument, per TEST
+ * (`--reporter=json`), never per file:
+ *
+ *   isolated, load avg 4.9 over 8 cores : worst test 3,453 ms, file span 17,660 ms
+ *   contended, load avg 27 over 8 cores : worst test 9,872 ms, file span 61,912 ms
+ *   ⇒ per-test contention factor 2.47x - 5.23x, the widest measured anywhere in this car.
+ *
+ * At 9,872 ms the worst row already spends HALF the 20,000 ms suite budget at a load the
+ * estate reaches with four lanes running; the chair's recorded red for this file was at
+ * load 236, roughly nine times that. So the budget is not decoration — without it this
+ * row reds on a GREEN assertion and the census is then invited to bank a defect that does
+ * not exist (scripts/check-test-ratchet.mjs:1074, tests/lint/testRatchet.test.js:471).
+ *
+ * WHY BUDGETED AND NOT CUT. The ratchet's FIRST option is to cut the row's per-run work,
+ * and the obvious cut — one shared repository fixture across the ten cases — is refused
+ * here rather than deferred quietly: eight of these cases MUTATE the repo (dirty trees,
+ * sealed HEADs, corrupt state, foreign staged dirt), and sharing a fixture across them
+ * would make each case's precondition depend on its neighbours' order. That is a
+ * correctness change wearing a performance change's clothes. Docketed as a cut that needs
+ * design judgment, not taken by this car.
+ *
+ * WHY 60_000. It is the estate's house grain for exactly this cure
+ * (tests/joins/ordering.test.js:289 and twenty pglite siblings), and against this file's
+ * own measurements it is 17.4x the worst ISOLATED test and 6.1x the worst CONTENDED one —
+ * i.e. it absorbs another six-fold degradation on top of the contention actually
+ * reproduced. ⛔ The suite-wide `testTimeout` at vite.config.js:810 is NOT touched: raising
+ * it would hide the next row and would make a genuinely hung test slower to report.
+ *
+ * Each row carries its OWN measured figure below, so the headroom is auditable per case
+ * rather than per file, and a case that grows into its budget is visible before it reds.
+ */
 describe('IA-2 implementation sessions', () => {
   it('dispatches a clean READY descendant and stores a private seal outside status', () => {
     const repo = makeRepo();
@@ -176,7 +213,7 @@ describe('IA-2 implementation sessions', () => {
       expect(statSync(path).mode & 0o777).toBe(0o600);
     }
     expect(git(repo.root, ['status', '--porcelain=v1', '--untracked-files=all'])).toBe(before);
-  });
+  }, 60_000); // measured 1,513 ms isolated 2026-08-31 (3,730 ms at load 27) — measured budget, never debt
 
   it('rejects non-READY, wrong branch/base, dirty MODIFY, and existing CREATE preflight', () => {
     const blocked = makeRepo();
@@ -198,7 +235,7 @@ describe('IA-2 implementation sessions', () => {
     const existingCreate = makeRepo();
     write(existingCreate.root, 'scripts/new-target.mjs', 'export const created = true;\n');
     expect(() => create(existingCreate)).toThrow(/CREATE target.*absent.*Git-clean/);
-  });
+  }, 60_000); // measured 2,646 ms isolated 2026-08-31 (8,738 ms at load 27) — measured budget, never debt
 
   it('accepts an unchanged descendant but rejects descendant substrate changes', () => {
     const unchanged = makeRepo();
@@ -252,7 +289,7 @@ describe('IA-2 implementation sessions', () => {
     git(retiredChanged.root, ['commit', '-q', '-m', 'change verified retirement target']);
     expect(() => create(retiredChanged))
       .toThrow(/descendant changed declared substrate.*foreign\/staged/);
-  });
+  }, 60_000); // measured 3,453 ms isolated 2026-08-31 (9,872 ms at load 27) — measured budget, never debt
 
   it('seals foreign staged/unstaged/untracked dirt while allowing only target edits', () => {
     const repo = makeRepo();
@@ -278,7 +315,7 @@ describe('IA-2 implementation sessions', () => {
     expect(() => assertImplementationScope(session)).toThrow(/foreign work drifted/);
     write(repo.root, 'foreign/unstaged.txt', 'unstaged-dirty\n');
     expect(() => assertImplementationScope(session)).not.toThrow();
-  });
+  }, 60_000); // measured 2,417 ms isolated 2026-08-31 (9,306 ms at load 27) — measured budget, never debt
 
   it('rejects sealed HEAD and authority drift', () => {
     const headDrift = makeRepo();
@@ -290,7 +327,7 @@ describe('IA-2 implementation sessions', () => {
     const authoritySession = create(authorityDrift);
     write(authorityDrift.root, INDEX_PATH, `${readFileSync(join(authorityDrift.root, INDEX_PATH))}\n`);
     expect(() => assertImplementationScope(authoritySession)).toThrow(/authority drifted/);
-  });
+  }, 60_000); // measured 2,135 ms isolated 2026-08-31 (8,085 ms at load 27) — measured budget, never debt
 
   it('fails closed on malformed Git inspection and missing or corrupt seals', () => {
     const notGit = realpathSync(mkdtempSync(join(tmpdir(), 'implementation-session-not-git-')));
@@ -301,7 +338,7 @@ describe('IA-2 implementation sessions', () => {
     expect(() => openImplementationSession({ rootDir: repo.root, packetId: 'IA-2T' })).toThrow();
     unlinkSync(session.sealPath);
     expect(() => openImplementationSession({ rootDir: repo.root, packetId: 'IA-2T' })).toThrow();
-  });
+  }, 60_000); // measured 996 ms isolated 2026-08-31 (4,093 ms at load 27) — measured budget, never debt
 
   it('keeps replaceable state integrity and never reuses corrupt state', () => {
     const session = create(makeRepo());
@@ -324,7 +361,7 @@ describe('IA-2 implementation sessions', () => {
     tampered.payload.sequence = 99;
     writeFileSync(session.statePath, `${JSON.stringify(tampered)}\n`);
     expect(readSessionState(session)).toBeNull();
-  });
+  }, 60_000); // measured 927 ms isolated 2026-08-31 (3,904 ms at load 27) — measured budget, never debt
 
   it('publishes immutable receipts and derives only latest exact-state resume evidence', () => {
     const session = create(makeRepo());
@@ -373,7 +410,7 @@ describe('IA-2 implementation sessions', () => {
       remaining: plan.map(({ id }) => id),
       selected: plan.map(({ id }) => id),
     });
-  });
+  }, 60_000); // measured 1,286 ms isolated 2026-08-31 (6,722 ms at load 27) — measured budget, never debt
 
   it('keeps locks conservative, heartbeats RUNNING-only, and the CLI strict', () => {
     const repo = makeRepo();
@@ -439,7 +476,7 @@ describe('IA-2 implementation sessions', () => {
       stderr = '';
     }
     expect(stdout).toBe('');
-  });
+  }, 60_000); // measured 1,218 ms isolated 2026-08-31 (4,479 ms at load 27) — measured budget, never debt
 
   it('accepts only the exact dispatch CLI form before publishing a session', () => {
     const repo = makeRepo();
@@ -453,5 +490,5 @@ describe('IA-2 implementation sessions', () => {
     expect(JSON.parse(stdout)).toMatchObject({ id: 'IA-2T' });
     expect(stderr).toBe('');
     expect(inspectImplementationWorktree(repo.root).head).toBe(repo.head);
-  });
+  }, 60_000); // measured 1,070 ms isolated 2026-08-31 (2,978 ms at load 27) — measured budget, never debt
 });
