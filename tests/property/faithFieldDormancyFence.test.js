@@ -162,6 +162,11 @@ describe('FENCE 1 — the import-closure census (own-footprint, for a car with n
       // BINDING LEAF, not `faithField.js` — a first-paint cure, not a decoupling, which
       // is why it is still in this roster and why the leaf is in the set above.
       'src/domain/causalState.js',
+      // W-FAITH F7c: the faith tab's deepening read-model. Reads ONLY the frozen
+      // registers (channels/strengths/bindings), the tuning surface's tables and
+      // the pure faithChannelLift, to band a HANDED-IN projection record for
+      // display — it computes no field, holds no state, and writes nothing.
+      'src/domain/display/faithDeepening.js',
       'src/domain/worldPulse/religionState.js', // the tick-end projection writer (F4c)
     ]);
   });
