@@ -7,7 +7,10 @@
  * asymmetry, the installed-regime obligation mint (leverage-weighted), and proxy-stays-
  * proxy foreign_clash detection. The dormancy byte-identity pin is the fenced golden
  * (interventionDormancyGolden.test.js); the interventionAdj=0⇒byte-identical-verdict pin
- * lives in rulingPowerCoup.intervention.test.js.
+ * lives in tests/domain/rulingPower.test.js, whose W-CONVERGENCE block asserts
+ * "interventionAdj=0 ⇒ byte-identical to omitting the term (the dormancy law)".
+ * ADDRESS CORRECTION: this line named rulingPowerCoup.intervention.test.js, which
+ * has never existed on any branch.
  */
 
 import { describe, it, expect } from 'vitest';

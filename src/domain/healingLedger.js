@@ -47,8 +47,10 @@ export const HEALING_INSTITUTION_PATTERN =
  * A graveyard is where care FAILED; it is not informal care (§782.4 E-RES-11, cured in T7).
  *
  * The five names are the catalog's own burial ladder; the stems are chosen so a sixth burial
- * house cannot slip past, and `tests/domain/healingCareServices.test.js` asserts the pattern
- * covers exactly those five and no care house.
+ * house cannot slip past, and `tests/domain/healingLedger.test.js` asserts the pattern
+ * covers exactly those five and no care house — its E-RES-11 block, verbatim: "the burial
+ * pattern covers the catalog ladder and no care house". ADDRESS CORRECTION: this line
+ * named `tests/domain/healingCareServices.test.js`, which has never existed on any branch.
  */
 export const BURIAL_INSTITUTION_PATTERN = /(graveyard|burial|cemeter|charnel|ossuar)/i;
 

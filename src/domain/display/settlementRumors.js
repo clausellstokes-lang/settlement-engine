@@ -110,8 +110,12 @@ function avalanche32(h) {
 // capitalized-first ("Soldiers marching to war in X") and after "word of …".
 // Any UNKNOWN token falls to whatPhrase()'s neutral fallback, never the raw token.
 // Pure display; byte-inert to the engine (goldens never import this).
-// Exported for the impactKind walker (tests/domain/settlementRumors.walker.test.js),
+// Exported for the impactKind walker (tests/domain/impactKindWalkers.test.js),
 // which source-scans every minted impactKind and reds until it is phrased here.
+// ADDRESS CORRECTION: this line named tests/domain/settlementRumors.walker.test.js,
+// which has never existed on any branch. The WALKER is real: impactKindWalkers
+// imports WHAT_PHRASES from this module, scans every `impactKind: '<literal>'`
+// mint under src/domain, and reds on any kind that is not phrased here.
 /** @type {Readonly<Record<string, string>>} */
 export const WHAT_PHRASES = Object.freeze({
   // war / conflict candidate types
@@ -365,7 +369,7 @@ export const WHAT_PHRASES = Object.freeze({
   cause_lifecycle: 'shifting fortunes',
   // ── post-A1 merged-wave impactKinds (content-immersion-r2-1/-2) ────────────
   // Every minted impactKind must be phrased here or the impactKind walker
-  // (settlementRumors.walker.test.js) reds — no more raw de-underscored slugs
+  // (tests/domain/impactKindWalkers.test.js) reds — no more raw de-underscored slugs
   // ('generosity relief', 'intervention clash') reaching player headlines.
   // W-UPSWING abundance / downturn
   boom: 'flush times',

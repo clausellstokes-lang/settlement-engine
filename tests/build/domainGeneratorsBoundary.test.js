@@ -10,8 +10,13 @@
  * with it — and, before the first-paint fix, why it could land eagerly in the
  * entry chunk. The full inversion (pushing the shared leaves DOWN into a layer
  * both can import, or DI-ing the generator fns in) is risky and deferred; with
- * worldPulse now lazy-loaded out of the entry chunk (see worldPulseLazy.test.js
- * + src/store/campaignWorldPulseSlice.js), the cycle has ZERO first-paint cost.
+ * worldPulse now lazy-loaded out of the entry chunk (see
+ * tests/build/campaignRuntimeLazy.test.js + src/store/campaignWorldPulseSlice.js),
+ * the cycle has ZERO first-paint cost. ADDRESS CORRECTION: this line named
+ * tests/build/worldPulseLazy.test.js, which DID exist and was RETIRED at the W6
+ * master merge (151f8ac38). The guarantee moved rather than died: the campaign
+ * runtime capsule pins assert the pulse slice body — and worldState.js /
+ * simulationRules.js — are absent from the first-paint source closure.
  *
  * THE RATCHET (this test): freeze the CURRENT set of domain→generators edges as
  * a burndown baseline and FAIL if a NEW edge appears. The baseline can only

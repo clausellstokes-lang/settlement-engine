@@ -4,12 +4,16 @@ import { join } from 'node:path';
 
 // The bundled Lora/Nunito faces embed NO arrow/dingbat glyphs — verified with fontTools,
 // every codepoint below is absent from all 8 faces, so react-pdf renders it as a .notdef
-// tofu box in the (paid) PDF. EconomicsTrade was fixed once
-// (economicsTradeGlyphTofu.test.js, a render-level check) but the same glyphs had crept
-// into 10 other sections as row markers and directional arrows. This scans EVERY
-// section's RENDERED source for the whole tofu set so a reintroduced glyph reds the gate
-// instead of shipping a box to a paying customer. Comment lines are excluded — some
-// deliberately DOCUMENT which glyphs are tofu (e.g. SupplyChainFlow's design note).
+// tofu box in the (paid) PDF. EconomicsTrade was fixed once by a render-level check
+// (tests/pdf/economicsTradeGlyphTofu.test.js — it DID exist and was RETIRED at the W6
+// master merge, 151f8ac38). ⚠ NO RENDER-LEVEL tofu check survived it: this file and
+// tests/pdf/fontGlyphCoverage.test.js are both SOURCE scans over src/pdf/sections/**.
+// EconomicsTrade is still covered (this file readdirs every section .jsx), but a glyph
+// composed at RENDER time would escape both. The same glyphs had crept into 10 other
+// sections as row markers and directional arrows. This scans EVERY section's RENDERED
+// source for the whole tofu set so a reintroduced glyph reds the gate instead of
+// shipping a box to a paying customer. Comment lines are excluded — some deliberately
+// DOCUMENT which glyphs are tofu (e.g. SupplyChainFlow's design note).
 //
 // Font-covered replacements in use: ✦→*, ↯→·, →→», ←→«, ↔→·, ⚠→!, ▸→» (all present in
 // every face). If you need a marker/arrow, use one of those, not a dingbat.

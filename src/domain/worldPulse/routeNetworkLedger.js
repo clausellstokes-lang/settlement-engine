@@ -35,7 +35,10 @@
  * re-proved server-side by its migration, because the two lanes must agree without
  * either owning the other. This module therefore states the law in one function
  * and a source scan pins every producer in the estate to the same shape
- * (routeNetworkLaw.test.js); it deliberately does NOT import the sibling, so
+ * (tests/domain/routeNetworkLedger.test.js, its "J1 the one edge-id law across
+ * src/domain" block — a real source scan with its own non-vacuity arm; ADDRESS
+ * CORRECTION: this line named routeNetworkLaw.test.js, which has never existed
+ * on any branch); it deliberately does NOT import the sibling, so
  * neither lane can break the other by refactoring.
  *
  * PURE, TOTAL, DETERMINISTIC: no clock, no RNG, no I/O, no ambient anything.
