@@ -73,6 +73,7 @@ import { AXIS_LEVELS } from '../npc/paradigmAxisCatalog.js';
 import { pietyMultOf } from './piety.js';
 import { memberWeight } from './faithField.js';
 import { wrathSharpenedDemotion } from './deityFlaws.js';
+import { FAITH_WITNESS_TUNING } from './faithTuningSurface.js';
 
 /**
  * THE KIND THIS CAR MINTS AND THE OTHER STACK'S CATALOG MUST ADMIT.
@@ -103,25 +104,13 @@ export const AMBIENT_CADENCE_TICKS = INTERVAL_WEEKS.one_season;
 export const PULL_BANDS = Object.freeze(['faint', 'firm', 'heavy']);
 
 /**
- * ⚠ OWNER-UNSIGNED CANDIDATES (§763's tuning carve-out). The SHAPE — a step ladder
- * that only ever steps DOWN — is the car's claim; the thresholds are the pen's.
+ * W-FAITH F6c — THE TUNING MOVED TO THE SIGNATURE SURFACE. `FAITH_WITNESS_TUNING`
+ * (FULL_EXPOSURE, PART_EXPOSURE — owner-unsigned candidates, §763) now lives in
+ * `faithTuningSurface.js`, the one file the owner's pen edits, and is re-exported
+ * here VERBATIM — the same object, not a copy — so every existing import path still
+ * resolves. The step-DOWN ladder law (§856) and its notes moved with the thresholds.
  */
-export const FAITH_WITNESS_TUNING = Object.freeze({
-  // Exposure thresholds on `memberWeight × pietyMult`. A soul among a dominant,
-  // devoutly-kept faith feels its god at the level the god is authored at; a soul
-  // among a minor cult feels a fainter version of the same character; below the
-  // last rung it is not marked at all.
-  //
-  // ⭐ THE LADDER ONLY STEPS DOWN — never up (§856: "family ladders step never
-  // multiply"). An authored `defining` on a tiny cult must not teach as `heavy`,
-  // and no exposure however total may teach MORE than the god is authored to be.
-  // The deity's authored level is a CEILING; exposure decides how far below it the
-  // lesson lands.
-  FULL_EXPOSURE: 0.6,   // ≥ this: the lesson lands at the authored level
-  PART_EXPOSURE: 0.25,  // ≥ this: one rung down
-  // below PART_EXPOSURE: two rungs down — which silences `a_touch` and `marked`
-  // outright, and leaves only a `defining` god faintly felt through a small cult.
-});
+export { FAITH_WITNESS_TUNING };
 
 /** @typedef {import('../settlement.schema.js').SimSettlement} SimSettlement */
 /** @typedef {import('./faithField.js').FaithMember} FaithMember */
