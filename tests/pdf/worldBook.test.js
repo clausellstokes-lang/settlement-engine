@@ -442,7 +442,7 @@ describe('a completed World Book reports itself (the funnel numerator)', () => {
     expect(props).toMatchObject({ scope: 'campaign', narrative_mode: false });
     expect(typeof props.duration_band).toBe('string');
     // The campaign sibling omits canon_phase at this scope; the shapes must match.
-    expect(props).not.toHaveProperty('canon_phase');
+    expect(props).not.toHaveProperty('canon_phase'); // anchored: toMatchObject({ scope, narrative_mode }) above proves props is the live COMPLETED payload
   });
 
   it('the player face reports too (both faces are real exports)', () => {
