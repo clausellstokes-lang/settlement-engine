@@ -57,7 +57,7 @@
 // leaf imports nothing, so this edge costs no closure.
 import { materializesLivingContent } from './livingContentLawVersion.js';
 
-/** @type {((customContent:unknown, config:unknown) => unknown)|null} */
+/** @type {((customContent:unknown, config:Record<string,unknown>|null|undefined) => unknown)|null} */
 let rosterBuilder = null;
 
 /**
@@ -65,7 +65,7 @@ let rosterBuilder = null;
  * and, in tests, directly — so a suite can drive the lit path synchronously
  * without asserting on module-load order.
  *
- * @param {(customContent:unknown, config:unknown) => unknown} builder
+ * @param {(customContent:unknown, config:Record<string,unknown>|null|undefined) => unknown} builder
  * @returns {void}
  */
 export function registerLivingContentRosterBuilder(builder) {
