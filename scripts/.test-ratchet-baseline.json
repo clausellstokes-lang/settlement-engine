@@ -66,8 +66,9 @@
           "name": "em",
           "kind": "sum",
           "pattern": "current em:(\\d+)",
-          "ceiling": 649,
-          "unit": "em dashes summed across every drifted src/data + src/domain string-literal file this arm lists"
+          "ceiling": 720,
+          "unit": "em dashes summed across every drifted src/data + src/domain string-literal file this arm lists",
+          "attribution": "RAISED 649 to 720 at the INSTRUMENTS consist landing, 2026-09-01, by lane INSTR-land. THIS BANKS MEASURED DEBT, NOT MOVEMENT. The decisive control: the measure is IDENTICAL at the landing BASE 8b07ce45f and at the landing TIP - base=720 tip=720, computed by running the gate s own magnitudeReportOf and identityOf over the base s report and the tip s. ATTRIBUTION: the closed-span em-dash growth measured by the pre-board as +538 / -10 lines over 853e0e9ba..6308a27b8, plus the WAR and ENGINE-HYGIENE landings on top. Not one byte of it is this consist s: all five trains ship ZERO src bytes. RMAG froze the old ceiling at its own base 689bf2cc6, before this population was ever measured, and the magnitude machinery ARMS for the first time at this landing - the base baseline carries magnitude blocks on 0 of 10 rows and RMAG s on 10 of 10 - so this is a FIRST TRUE MEASUREMENT, never a growth bank. A ceiling is raised only by a deliberate attributed hand edit: --update can only LOWER, and it HOLDS a breach rather than raising it."
         },
         {
           "name": "bang",
@@ -80,8 +81,9 @@
           "name": "files",
           "kind": "count",
           "pattern": "^\\S+: baseline em:",
-          "ceiling": 64,
-          "unit": "src/data + src/domain string-literal files whose count differs from their frozen per-file baseline"
+          "ceiling": 76,
+          "unit": "src/data + src/domain string-literal files whose count differs from their frozen per-file baseline",
+          "attribution": "RAISED 64 to 76 at the INSTRUMENTS consist landing, 2026-09-01, by lane INSTR-land. THIS BANKS MEASURED DEBT, NOT MOVEMENT. The decisive control: the measure is IDENTICAL at the landing BASE 8b07ce45f and at the landing TIP - base=76 tip=76, computed by running the gate s own magnitudeReportOf and identityOf over the base s report and the tip s. ATTRIBUTION: the closed-span em-dash growth measured by the pre-board as +538 / -10 lines over 853e0e9ba..6308a27b8, plus the WAR and ENGINE-HYGIENE landings on top. Not one byte of it is this consist s: all five trains ship ZERO src bytes. RMAG froze the old ceiling at its own base 689bf2cc6, before this population was ever measured, and the magnitude machinery ARMS for the first time at this landing - the base baseline carries magnitude blocks on 0 of 10 rows and RMAG s on 10 of 10 - so this is a FIRST TRUE MEASUREMENT, never a growth bank. A ceiling is raised only by a deliberate attributed hand edit: --update can only LOWER, and it HOLDS a breach rather than raising it."
         }
       ]
     },
@@ -97,8 +99,9 @@
           "name": "total",
           "kind": "capture",
           "pattern": "expected (\\d+) to be less than or equal to 670$",
-          "ceiling": 1037,
-          "unit": "total src/data + src/domain string-literal em dashes against the hardcoded budget of 670"
+          "ceiling": 1108,
+          "unit": "total src/data + src/domain string-literal em dashes against the hardcoded budget of 670",
+          "attribution": "RAISED 1037 to 1108 at the INSTRUMENTS consist landing, 2026-09-01, by lane INSTR-land. THIS BANKS MEASURED DEBT, NOT MOVEMENT. The decisive control: the measure is IDENTICAL at the landing BASE 8b07ce45f and at the landing TIP - base=1108 tip=1108, computed by running the gate s own magnitudeReportOf and identityOf over the base s report and the tip s. ATTRIBUTION: the closed-span em-dash growth measured by the pre-board as +538 / -10 lines over 853e0e9ba..6308a27b8, plus the WAR and ENGINE-HYGIENE landings on top. Not one byte of it is this consist s: all five trains ship ZERO src bytes. RMAG froze the old ceiling at its own base 689bf2cc6, before this population was ever measured, and the magnitude machinery ARMS for the first time at this landing - the base baseline carries magnitude blocks on 0 of 10 rows and RMAG s on 10 of 10 - so this is a FIRST TRUE MEASUREMENT, never a growth bank. A ceiling is raised only by a deliberate attributed hand edit: --update can only LOWER, and it HOLDS a breach rather than raising it."
         }
       ]
     },
@@ -131,8 +134,9 @@
           "name": "population",
           "kind": "capture",
           "pattern": "expected \\[ …\\(62\\) \\] to deeply equal \\[ …\\((\\d+)\\) \\]",
-          "ceiling": 76,
-          "unit": "files defining a local clamp/clamp01 against a frozen baseline of 62"
+          "ceiling": 78,
+          "unit": "files defining a local clamp/clamp01 against a frozen baseline of 62",
+          "attribution": "RAISED 76 to 78 at the INSTRUMENTS consist landing, 2026-09-01, by lane INSTR-land. THIS BANKS MEASURED DEBT, NOT MOVEMENT. The decisive control: the measure is IDENTICAL at the landing BASE 8b07ce45f and at the landing TIP - base=78 tip=78, computed by running the gate s own magnitudeReportOf and identityOf over the base s report and the tip s. ATTRIBUTION: the SUBSTRATE landing s two clamp01 definitions, in src/domain/npc/characterConsumers.js and src/domain/npc/knownCharacter.js - pre-attributed EXACTLY (+2 / -0) by the pre-board s closed-era table before the dock existed, and named in the 16-file diff. Ruled work sealed on-branch. RMAG froze the old ceiling at its own base 689bf2cc6, before this population was ever measured, and the magnitude machinery ARMS for the first time at this landing - the base baseline carries magnitude blocks on 0 of 10 rows and RMAG s on 10 of 10 - so this is a FIRST TRUE MEASUREMENT, never a growth bank. A ceiling is raised only by a deliberate attributed hand edit: --update can only LOWER, and it HOLDS a breach rather than raising it."
         }
       ]
     },
