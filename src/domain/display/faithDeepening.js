@@ -38,7 +38,14 @@
  */
 
 import { axisById, wordForAxisPosition, AXIS_LEVELS } from '../npc/paradigmAxisCatalog.js';
-import { FAITH_CHANNELS, FAITH_STRENGTHS, faithChannelLift } from '../worldPulse/faithField.js';
+import { FAITH_CHANNELS, FAITH_STRENGTHS } from '../worldPulse/faithField.js';
+// `faithChannelLift` lives in the zero-import bindings leaf, not in the field: SUBSTRATE
+// wave 6 moved the pricing pair there with the CAUSAL_SWING it reads, and `faithField.js`
+// deliberately does not re-export it (the no-re-export ruling). Both files are members of
+// FAITH_FIELD_SET and this module is already a DECLARED consumer in the dormancy fence's
+// FENCE 1 roster, whose own entry says it reads the bindings — `importersOf` counts an
+// importing file once, so this second set-member edge is census-neutral by construction.
+import { faithChannelLift } from '../worldPulse/faithChannelBindings.js';
 import { FAITH_FIELD_TUNING } from '../worldPulse/faithTuningSurface.js';
 import { FLAW_EFFECTS, DEITY_FLAWS, viceLevelOf } from '../worldPulse/deityFlaws.js';
 
