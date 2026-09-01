@@ -54,9 +54,20 @@
  * surface signs exactly what the coverage roster names — no more, and provably no
  * less (the both-ways partition arm reds on a tunable without a coverage row).
  *
- * PURE + rng-free + store-blind: this file imports NOTHING. It is a member of
- * FAITH_FIELD_SET, so the dormancy fence's consumer census and purity pin cover it.
+ * PURE + rng-free + store-blind. It imports exactly one thing — the bindings leaf's
+ * `CAUSAL_SWING`, whose home moved there with the pricing function that reads it — and
+ * that leaf imports nothing at all. It is a member of FAITH_FIELD_SET, so the dormancy
+ * fence's consumer census and purity pin cover it.
  */
+
+// ⭐ THE ONE IMPORT, AND IT IS WHAT KEEPS THE SURFACE HONEST RATHER THAN WHAT
+// COMPROMISES IT. `CAUSAL_SWING` lives in the zero-import bindings leaf the substrate
+// split out of the field, and the table below carries THAT binding rather than a second
+// literal of the same number: a copy would fork a tuning value across two homes with
+// every consumer internally consistent and nothing red. The leaf imports nothing, so the
+// first-paint closure this surface sits behind is unchanged, and both files are members
+// of FAITH_FIELD_SET, so the dormancy fence's import census skips the edge by design.
+import { CAUSAL_SWING } from './faithChannelBindings.js';
 
 /**
  * THE SIGNATURE RECORD. Two words; see the header for why not one.
@@ -153,7 +164,7 @@ export const FAITH_FIELD_TUNING = Object.freeze({
   // ⚠ THE CLAMPED EXTREME IS LOUDER THAN THAT, and it is stated rather than hidden:
   // the term already carries `pietyMultOf` (0.5..2.0), so a devout city can drive
   // a channel to the DAMP_MAX backstop, where the lift is round(0.6 × 20) = 12.
-  CAUSAL_SWING: 20,
+  CAUSAL_SWING,
 });
 
 /**
@@ -223,14 +234,14 @@ export const FAITH_TUNING_COVERAGE = Object.freeze([
   Object.freeze({ kind: 'tunable', table: 'FAITH_FIELD_TUNING', key: 'PATRON_AMP', note: 'How much louder the patron is than a co-resident cult.' }),
   Object.freeze({ kind: 'tunable', table: 'FAITH_FIELD_TUNING', key: 'STRENGTH', note: 'The kernel reading of the three authored strength bands.' }),
   Object.freeze({ kind: 'tunable', table: 'FAITH_FIELD_TUNING', key: 'DAMP_MAX', note: 'The channel backstop; the reachable band uses 63 percent of it (pack row 30).' }),
-  Object.freeze({ kind: 'tunable', table: 'FAITH_FIELD_TUNING', key: 'CAUSAL_SWING', note: 'Score points per unit channel total; derived to lawOrderSwing parity (pack row 31).' }),
+  Object.freeze({ kind: 'tunable', table: 'FAITH_FIELD_TUNING', key: 'CAUSAL_SWING', note: 'Score points per unit channel total; derived to lawOrderSwing parity (pack row 31). The VALUE lives in faithChannelBindings.js beside the pricing function; this table carries that binding by reference, so signing here signs the one number.' }),
   Object.freeze({ kind: 'tunable', table: 'DEITY_FLAW_TUNING', key: 'JEALOUS_BOON_FADE', note: 'Boon fraction lost at full contest by a defining jealous god.' }),
   Object.freeze({ kind: 'tunable', table: 'DEITY_FLAW_TUNING', key: 'LEVEL_SCALE', note: 'How deeply each authored position level engages a flaw modulation.' }),
   Object.freeze({ kind: 'tunable', table: 'DEITY_FLAW_TUNING', key: 'WRATH_SHARPEN_RUNGS', note: 'Demotion rungs a falling-fortunes wrathful pull recovers (pack row 33).' }),
   Object.freeze({ kind: 'tunable', table: 'FAITH_WITNESS_TUNING', key: 'FULL_EXPOSURE', note: 'Exposure at which a lesson lands at the authored level.' }),
   Object.freeze({ kind: 'tunable', table: 'FAITH_WITNESS_TUNING', key: 'PART_EXPOSURE', note: 'Exposure at which a lesson lands one rung down.' }),
   Object.freeze({ kind: 'vocabulary', exportName: 'FAITH_CHANNELS', home: 'src/domain/worldPulse/faithField.js', note: 'The nine effect-channel words; the pack had no such register (F1c M1), so the roster is D3 prose awaiting the pen.' }),
-  Object.freeze({ kind: 'vocabulary', exportName: 'FAITH_CHANNEL_BINDINGS', home: 'src/domain/worldPulse/faithField.js', note: 'The six channels that name a real causal variable.' }),
+  Object.freeze({ kind: 'vocabulary', exportName: 'FAITH_CHANNEL_BINDINGS', home: 'src/domain/worldPulse/faithChannelBindings.js', note: 'The six channels that name a real causal variable. Its home is the zero-import bindings leaf the substrate split out; faithField deliberately does not re-export it (the no-re-export ruling), so the roster follows the symbol to its one home.' }),
   Object.freeze({ kind: 'vocabulary', exportName: 'FAITH_UNBOUND_CHANNELS', home: 'src/domain/worldPulse/faithField.js', note: 'The three channels that name nothing; sign three variables or strike three words (pack row 26).' }),
   Object.freeze({ kind: 'vocabulary', exportName: 'FAITH_STRENGTHS', home: 'src/domain/worldPulse/faithField.js', note: 'The three authored strength band words, mirrored from the schema.' }),
   Object.freeze({ kind: 'vocabulary', exportName: 'DEITY_FLAWS', home: 'src/domain/worldPulse/deityFlaws.js', note: 'The eight D2 flaw words as dispositioned onto the chart: two modulate, one declared dormant (pack row 27), four vocabulary-only, meddling unhomed (pack row 28).' }),
