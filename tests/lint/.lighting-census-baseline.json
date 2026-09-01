@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "ccf90b66aad3980fb3ff0ad7a1864f0d37d06336",
-  "measuredBy": "W-OPS-O3",
+  "measuredAtSha": "5869560d92c031b047c7055bc1addbec09d48104",
+  "measuredBy": "W-OPS-O4",
   "date": "2026-09-01",
-  "note": "W-OPS car O3 landed ONE test file, tests/domain/infiltrationDepth.test.js (the infiltration L3/L4 battery). parked FLAT at 370 while both title layers moved is the proof Door 2 admitted it. The figures reconcile exactly: files +1, credited +1, titles +40 and suiteTitles +8, all of them straight-line registrations in the one new file (8 describe blocks, 40 test blocks, zero loop-generated arms, which the walker credits in full). No existing suite was appended to and the car's src leaf is invisible to this census, whose subject is tests/ alone, so nothing else moves.",
-  "files": 2454,
+  "note": "W-OPS car O4 landed ONE test file, tests/domain/envoyTaskCatalog.test.js — 8 describes / 50 straight-line arms, zero loop-registered and zero census-blind concatenated titles. The SRC leaf envoyTaskCatalog.js is invisible to this census (it counts tests/ only), so files and credited move by exactly one and parked stays flat.",
+  "files": 2455,
   "parked": 370,
-  "credited": 2084,
-  "titles": 21220,
-  "suiteTitles": 5816
+  "credited": 2085,
+  "titles": 21270,
+  "suiteTitles": 5824
 }
