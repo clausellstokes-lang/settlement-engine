@@ -1,16 +1,16 @@
 /**
  * generateCampaignPDF.js — Campaign-level export.
  *
- * One PDF that zooms out across a whole campaign:
+ * One PDF that zooms out across a whole campaign, in EMITTED order (corrected
+ * 2026-09-01 — the old list omitted 6 and mis-numbered 7):
  *   1. Cover page (campaign name + stats)
  *   2. Settlement index (one-line roster, sortable)
  *   3. Relationship map (force-directed diagram across all settlements)
  *   4. Cross-settlement NPC connections (who talks to whom, across places)
  *   5. Per-settlement digest (one card per settlement — not the full sheet)
- *   6. Network effects appendix (cascading modifiers)
- *
- * Uses the same visual language as generateSettlementPDF.js but at a
- * higher altitude — prose is short, lists are wide, the goal is DM at-a-glance.
+ *   6. State of the Realm (living-world chapter; SELF-GATES — legacy campaigns skip)
+ *   7. Network effects appendix (cascading modifiers)
+ * Same visual language as generateSettlementPDF.js at a higher altitude.
  */
 import { jsPDF } from 'jspdf';
 import { formatCount } from '../domain/formatNumber.js';

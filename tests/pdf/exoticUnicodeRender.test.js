@@ -11,9 +11,9 @@
  * pinned here is ONLY that they do not CRASH: layout/pagination still produce a
  * valid PDF. ⚠ NOT that they render right — renderedFontEmbedding.test.js convicts them.
  *
- * (The campaign PDF, by contrast, uses jsPDF/Helvetica and folds these to ASCII
- * placeholders — see campaignPdfSanitize.test.js. This file is the react-pdf
- * counterpart: no fold, but the document is still well-formed.)
+ * (The campaign PDF, by contrast, uses jsPDF/Helvetica and folds these to ASCII in
+ * s() at generateCampaignPDF.js:83-89. ⛔ CORRECTED 2026-09-01: there is NO
+ * campaignPdfSanitize.test.js — no test asserts that fold. This is the react-pdf side.)
  */
 
 import { fileURLToPath } from 'node:url';
@@ -52,7 +52,7 @@ const ARABIC = 'مدينة الظلال والرمال';                    // A
 const EMOJI  = 'The Gilded 🗡️ Coin 🏰 Guild 🔥';         // emoji + ZWJ sequences
 const SMART  = '“The fortified keep” — its ledgers… don’t balance.'; // smart punct + ligature
 
-describe('react-pdf path tofus (not crashes) on exotic unicode', () => {
+describe('react-pdf path substitutes (does not crash) on exotic unicode', () => {
   test('CJK / Arabic / emoji / smart-punctuation NPCs render to a valid PDF', async () => {
     const { NotableNPCs } = await import('../../src/pdf/sections/NotableNPCs.jsx');
 
