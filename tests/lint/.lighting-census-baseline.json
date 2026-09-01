@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "ece7b8bed1133bb5a86e3ceed17dd538a461c0d9",
-  "measuredBy": "W-LIVES-L7",
-  "date": "2026-08-31",
-  "note": "car L7 car 3 added THREE test blocks — the cures for the four mutations car 1's battery proved blind — so only the title layer moves: files FLAT at 2453, parked FLAT at 370, credited FLAT at 2083, titles +3 (41 -> 44 in characterReadModel.test.js, re-counted with grep -c), suiteTitles FLAT at 5806 (no new describe). A file-layer that is flat while the title layer moves is the proof no file landed. The four census reds still standing at this tip were measured IDENTICAL at the base 2e4fc0ea0 in a control worktree and are car L5's four documented open debts, none of them this car's.",
-  "files": 2453,
+  "measuredAtSha": "adedb7325481f7d783232c1d790b969e4541321a",
+  "measuredBy": "W-LIVES-L8",
+  "date": "2026-09-01",
+  "note": "car L8 (the edit surface) landed ONE new test file, tests/domain/npc/characterEdit.test.js: 27 anchored titles, 5 describes, and ZERO census modifiers (.each/.only/runIf/skipIf all absent) so it parks nothing. tests/domain/npc/characterDrift.test.js gained ASSERTIONS inside an existing test (the darkness closure grew by two family members and two new steps, 1c and 1d) and NOT a test, so its anchored-title count is 33 at both ends and it moves no layer. Predicted before measuring: files 2454, parked 370, credited 2084, titles 21210, suiteTitles 5811. The two reds standing at this tip are check:observed-shape-readers (NEW character on npcs in characterDrift.js — proved byte-identical at the base 110a2e1df in a control worktree; this line predates the substrate line accessor cure) and nothing else of this car.",
+  "files": 2454,
   "parked": 370,
-  "credited": 2083,
-  "titles": 21183,
-  "suiteTitles": 5806
+  "credited": 2084,
+  "titles": 21210,
+  "suiteTitles": 5811
 }
