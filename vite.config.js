@@ -558,6 +558,11 @@ export default defineConfig({
           // NOTHING — so this chunk can never drag anything behind it.
           // @guarded-by tests/build/vendorPdfLazy.test.js: the det-math placement pin
           // (kernel-chunk absence + own-chunk presence) and the first-paint budget.
+          // The LAZY half rides its own chunk NAME. Sharing a name with the core
+          // would put both halves in one chunk and hand the eager first-paint closure
+          // the decay wrappers it never calls — the exact defect the split cures.
+          if (id.includes('/src/kernel/detMathDecay.js'))
+            return 'det-math-decay';
           if (id.includes('/src/kernel/detMath.js'))
             return 'det-math';
 

@@ -26,9 +26,8 @@
 import { describe, test, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import {
-  log2Det, exp2Det, detExp, detExpm1, detLn, detLog10, detTanh, halfLifeKeep, detIntPow, __internals,
-} from '../../src/kernel/detMath.js';
+import { log2Det, detExp, detExpm1, detLn, detLog10, __internals } from '../../src/kernel/detMath.js';
+import { exp2Det, detTanh, halfLifeKeep, detIntPow } from '../../src/kernel/detMathDecay.js';
 import { __internals as detPowInternals } from '../../src/kernel/detPow.js';
 
 /** A probe set spanning every real domain the cured sites present. */
@@ -42,9 +41,15 @@ const REAL_PROBES = [
 ];
 
 describe('detMath — determinism is STRUCTURAL, and the scan is the proof', () => {
-  const source = readFileSync(fileURLToPath(new URL('../../src/kernel/detMath.js', import.meta.url)), 'utf8');
-  // Strip comments so the prose describing the ban does not trip the scan for it.
-  const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+  const read = (rel) => readFileSync(fileURLToPath(new URL(rel, import.meta.url)), 'utf8');
+  const strip = (t) => t.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+  // BOTH halves of the split kernel are scanned. Asserting over both inside each test
+  // rather than minting a second describe keeps the title count flat and makes it
+  // impossible to add a third kernel file that quietly escapes the scan.
+  const source = read('../../src/kernel/detMath.js');
+  const decaySource = read('../../src/kernel/detMathDecay.js');
+  const code = strip(source);
+  const decayCode = strip(decaySource);
 
   // THE LIVENESS ANCHOR BOTH SOURCE-SCAN ARMS BELOW STAND ON. A scan over a FILE has a
   // vacuity mode the outputs do not: if the read moved, the module were renamed, or the
@@ -52,31 +57,42 @@ describe('detMath — determinism is STRUCTURAL, and the scan is the proof', () 
   // absence claim about it would pass while proving nothing at all. The pin is the
   // module's own export line rather than a length floor — a length floor survives the
   // wrong file being read, and this cannot.
-  const KERNEL_SIGNATURE = 'export function exp2Det(y)';
+  const KERNEL_SIGNATURE = 'export function detExp(x)';
+  const DECAY_SIGNATURE = 'export function exp2Det(y)';
 
   test('the kernel calls NO implementation-approximated Math function', () => {
     // The ES2026 list the house ratchet uses, minus sqrt (correctly rounded by spec).
     const banned = /\bMath\s*\.\s*(acos|acosh|asin|asinh|atan|atan2|atanh|cbrt|cos|cosh|exp|expm1|hypot|log|log10|log1p|log2|pow|sin|sinh|tan|tanh)\s*\(/;
     expect(code).toContain(KERNEL_SIGNATURE);
-    // anchored: `code` is pinned to contain the kernel's own export line on the line above
+    expect(decayCode).toContain(DECAY_SIGNATURE);
+    // anchored: each source is pinned to contain its own export line on the lines above
     expect(code).not.toMatch(banned);
+    expect(decayCode).not.toMatch(banned);
   });
 
   test('the kernel uses NO `**` operator — the very thing it replaces', () => {
     expect(code).toContain(KERNEL_SIGNATURE);
-    // anchored: same pin, same reason — an empty `code` cannot satisfy the assertion above
+    expect(decayCode).toContain(DECAY_SIGNATURE);
+    // anchored: same pins, same reason — an empty source cannot satisfy them
     expect(code).not.toMatch(/\*\*/);
+    expect(decayCode).not.toMatch(/\*\*/);
   });
 
   test('the only Math member the kernel touches is the EXACT floor', () => {
     expect(code).toContain(KERNEL_SIGNATURE);
-    const members = [...new Set((code.match(/Math\s*\.\s*[A-Za-z0-9_]+/g) || []).map((s) => s.replace(/\s+/g, '')))];
-    expect(members).toEqual(['Math.floor']);
+    expect(decayCode).toContain(DECAY_SIGNATURE);
+    // \b matters: without it this matches `Math.js` inside the import specifier
+    // `./detMath.js` and reports a Math member that does not exist. Measured — the
+    // split introduced exactly that false positive on its first run.
+    const membersOf = (t) => [...new Set((t.match(/\bMath\s*\.\s*[A-Za-z0-9_]+/g) || []).map((m) => m.replace(/\s+/g, '')))];
+    expect(membersOf(code)).toEqual(['Math.floor']);
+    expect(membersOf(decayCode)).toEqual(['Math.floor']);
   });
 
   test('the counter that governs the ratchet scores this file at ZERO sites', async () => {
     const counter = await import('../../scripts/count-transcendental-math.mjs');
     expect(counter.countText(source)).toBe(0);
+    expect(counter.countText(decaySource)).toBe(0);
   });
 });
 

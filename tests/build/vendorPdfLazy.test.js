@@ -737,6 +737,18 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
       + ' kernel chunk and red the first-paint closure budget (measured: +2,086 B raw'
       + ' against a 995 B margin). Re-read the rule comment before removing it.',
     ).toContain("if (id.includes('/src/kernel/detMath.js'))");
+    expect(
+      config,
+      'the det-math-decay rule is gone — the lazy wrappers would share the core chunk and'
+      + ' the first-paint closure would pay for exp2Det/halfLifeKeep it never calls',
+    ).toContain("if (id.includes('/src/kernel/detMathDecay.js'))");
+    // The DECAY rule must precede the CORE rule: `detMath.js` is a substring of
+    // `detMathDecay.js`'s path check only in the other direction, but the core rule's
+    // `id.includes('/src/kernel/detMath.js')` does NOT match the decay file — still, the
+    // order is pinned so a future reader cannot reorder them into ambiguity.
+    expect(
+      config.indexOf("id.includes('/src/kernel/detMathDecay.js')"),
+    ).toBeLessThan(config.indexOf("id.includes('/src/kernel/detMath.js')"));
     // ORDER MATTERS: the specific rule must precede the general /src/kernel/ one,
     // or it never fires. A containment check alone would miss a re-ordering.
     expect(
