@@ -251,53 +251,18 @@ const BACKLOG_RULE_KEYS = Object.freeze({
 const PENDING_MANIFEST_KEYS = Object.freeze([]);
 
 /**
- * Blank out comments AND string/template contents while preserving every offset, so
- * a `rules.fooEnabled === true` written in PROSE (a row's `other` text, a header
- * paragraph, an invariant description) is not measured as a gate. Template
- * `${...}` expressions are kept: they are code.
- * @param {string} src @returns {string}
+ * ⭐ THE SOURCE STRIP MOVED TO `tests/helpers/codeOnlySource.js` AND IS RE-EXPORTED HERE.
+ * The body is unchanged; only its HOME moved. It had to move because importing a symbol
+ * from a `.test.js` file re-evaluates that module, so each of this walker's ten importers
+ * re-registers this file's suites inside its own — which made a new adopter cost a lighting
+ * census re-freeze rather than an import line. The helper carries no describe/test, so the
+ * next walker that needs a USE-claim strip pays nothing and writes no second spelling.
+ * ⚠ The ten existing importers are DELIBERATELY untouched: re-pointing them is a register
+ * act (each one's title tuple would move), and this car does not own that bill.
  */
-export function codeOnly(src) {
-  const out = src.split('');
-  const n = src.length;
-  let i = 0;
-  const blank = (a, b) => { for (let k = a; k < b && k < n; k++) if (out[k] !== '\n') out[k] = ' '; };
-  while (i < n) {
-    const c = src[i]; const d = src[i + 1];
-    if (c === '/' && d === '/') { let j = i; while (j < n && src[j] !== '\n') j++; blank(i, j); i = j; continue; }
-    if (c === '/' && d === '*') {
-      let j = i + 2;
-      while (j < n && !(src[j] === '*' && src[j + 1] === '/')) j++;
-      blank(i, Math.min(j + 2, n)); i = j + 2; continue;
-    }
-    if (c === '"' || c === "'") {
-      let j = i + 1;
-      while (j < n) {
-        if (src[j] === '\\') { j += 2; continue; }
-        if (src[j] === c || src[j] === '\n') break;
-        j++;
-      }
-      blank(i + 1, j); i = j + 1; continue;
-    }
-    if (c === '`') {
-      let j = i + 1;
-      while (j < n) {
-        if (src[j] === '\\') { blank(j, j + 2); j += 2; continue; }
-        if (src[j] === '`') break;
-        if (src[j] === '$' && src[j + 1] === '{') {
-          let depth = 1; j += 2;
-          while (j < n && depth > 0) { if (src[j] === '{') depth++; else if (src[j] === '}') depth--; j++; }
-          continue;
-        }
-        if (src[j] !== '\n') out[j] = ' ';
-        j++;
-      }
-      i = j + 1; continue;
-    }
-    i++;
-  }
-  return out.join('');
-}
+import { codeOnly } from '../helpers/codeOnlySource.js';
+
+export { codeOnly };
 
 /**
  * ARM 1 — the strict gate idiom on a CANONICAL receiver. `rules` or

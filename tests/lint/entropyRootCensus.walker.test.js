@@ -47,6 +47,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, test, expect } from 'vitest';
 
+import { codeOnly } from '../helpers/codeOnlySource.js';
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = join(ROOT, 'src');
 
@@ -822,11 +824,38 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // why this counter is the ONLY arm of this file the member moves. The caller is DARK at this
     // commit (zero importers under src/, pinned by tests/domain/missionDispatcher.test.js), so the
     // arrival is a source fact and not yet a behaviour.
-    const callers = ALL_FILES.filter((f) => read(f).split('\n')
+    // ⛔⛔ THE ARM'S TITLE SAID "A CALLER COUNT NOT A MENTION COUNT" AND THE DETECTOR WAS A
+    // MENTION SCAN. It read RAW source, so a comment, a receipt string or a frozen roster's
+    // prose counted as a call — and nothing had exposed it because nothing else in src/ had
+    // ever spelled the call inside a string. The substrate coupling's HBF-35 row does, in
+    // order to record WHY the dispatch cut is a determinism device, and the census convicted
+    // the registry of calling the thing it classifies. That is the SECOND instrument in one
+    // wave to convict its own roster this way (chooserTotality's partition was the first),
+    // and the CURE IS SHARED WITH IT rather than spelled twice: `codeOnly` blanks comments
+    // and string TEXT while keeping template `${…}` interpolations, which are code.
+    // ⭐ THE FIGURE DOES NOT MOVE AND THAT IS THE POINT — measured both ways over the live
+    // tree, RAW = 17 and CODE-ONLY = 16, dropping EXACTLY the registry and no real caller.
+    // So this is a detector that finally matches its own title, never a re-record: a
+    // citation was never a caller, and the sixteen were right before and after.
+    const callers = ALL_FILES.filter((f) => codeOnly(read(f)).split('\n')
       .some((l) => l.includes('hash01(') && !/function hash01\(/.test(l)));
     expect(callers).toHaveLength(16);
+    // ⭐ AND THE TWO POPULATIONS NOW DIFFER IN KIND RATHER THAN BY LUCK. `mentions` stays a
+    // RAW scan deliberately — it is the mention population, and the contrast is the claim.
     const mentions = ALL_FILES.filter((f) => read(f).includes('hash01'));
     expect(mentions.length, 'MENTIONS is a different, larger population').toBeGreaterThan(callers.length);
+    // GUARD THE GUARD, both directions: a strip that blanked one character too many would
+    // silently DELETE callers and this census would report a clean shrink. A quoted citation
+    // must vanish, a plain call must survive, and an INTERPOLATED call must survive.
+    // anchored: the subject is a LITERAL built on this line and the two positives below run the same matcher over the same stripper, so a strip that returned nothing reds there
+    expect(codeOnly("const r = 'a keyed hash01(x) race';")).not.toMatch(/hash01\(/);
+    expect(codeOnly('const r = hash01(seed);')).toMatch(/hash01\(/);
+    expect(codeOnly('const k = `${hash01(seed)}`;')).toMatch(/hash01\(/);
+    // …and the registry really is the file the strip drops, asserted rather than assumed.
+    expect(ALL_FILES.filter((f) => read(f).split('\n')
+      .some((l) => l.includes('hash01(') && !/function hash01\(/.test(l)))
+      .filter((f) => !callers.includes(f)))
+      .toEqual(['src/domain/worldPulse/habitForkRegistry.js']);
   });
 
   test('hash-helper DEFINITIONS in src = 31', () => {

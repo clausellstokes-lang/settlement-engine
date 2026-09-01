@@ -44,6 +44,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
+import { codeOnly as blankCommentsAndStrings } from '../helpers/codeOnlySource.js';
+
 import {
   FORK_ARITIES,
   FORK_CLASS_VOCABULARY,
@@ -120,59 +122,27 @@ function walk(dir, out = []) {
 }
 
 /**
- * ⭐ STRING LITERAL TEXT blanked, OFFSETS PRESERVED — and template INTERPOLATIONS kept.
+ * ⛔ THE STRIP IS THE ESTATE'S OWN, NOT A SECOND SPELLING OF IT — and the first cut of this
+ * cure WAS that second spelling, which is why the retirement is recorded rather than
+ * quietly done. `codeOnly` already existed, already blanked comments AND string text with
+ * offsets preserved, already kept template `${...}` interpolations standing, and was
+ * already imported by ten files; it lived in a `.test.js`, so adopting it cost a lighting
+ * census re-freeze (a test-file import re-registers that file's suites). The body moved to
+ * `tests/helpers/codeOnlySource.js`, the old home re-exports it, and this walker imports it
+ * — one guard, one spelling, no register moved.
  *
- * ⛔ WHY THIS EXISTS, AND IT IS THIS ESTATE'S OWN LAW ARRIVING AT ITS SEVENTH SITE. The
- * claim this scan makes is a USE claim ("does this module INVOKE a weighted-chooser
- * idiom"), and for a use claim a string is a CITATION: a call cannot execute from inside a
- * quoted literal. The comment strip above already concedes exactly that for prose. The
- * registry is the file that proves the concession was incomplete — `habitForkRegistry.js`
- * lives inside a scan root and every row it holds DESCRIBES an idiom in a `reason` string,
- * so the moment a row quoted a call with its own open paren the totality walker CONVICTED
- * ITS OWN REGISTRY, minting `habitForkRegistry.js#HABIT_FORK_REGISTRY` as a "discovered
- * fork" that can never be classified because it is not a fork. Three earlier rows escaped
- * only by punctuation — they spell `(hash01)` with the paren on the wrong side — so the
- * hole was live and invisible from the registry's first commit.
- *
- * ⚠ NARROWER THAN "BLANK EVERY STRING", DELIBERATELY. A template interpolation is CODE, so
- * `` `${hash01(seed)}` `` is a real use and must still mint; only the literal text between
- * the interpolations is blanked. Both halves are pinned by the guard-the-guard case below.
- *
- * @param {string} src @returns {string}
+ * ⛔ WHY THIS WALKER NEEDS IT AT ALL, AND IT IS THIS ESTATE'S OWN LAW AT ITS SEVENTH SITE.
+ * The claim here is a USE claim ("does this module INVOKE a weighted-chooser idiom"), and
+ * for a use claim a string is a CITATION: a call cannot execute from inside a quoted
+ * literal. The comment strip already conceded that for prose. The registry is the file that
+ * proves the concession was incomplete — `habitForkRegistry.js` lives inside a scan root and
+ * every row DESCRIBES an idiom in a `reason` string, so the moment a row quoted a call with
+ * its own open paren the totality walker CONVICTED ITS OWN REGISTRY, minting
+ * `habitForkRegistry.js#HABIT_FORK_REGISTRY` as a "discovered fork" that can never be
+ * classified because it is not a fork. Three earlier rows escaped only by punctuation — they
+ * spell the name with the paren on the wrong side — so the hole was live and invisible from
+ * the registry's first commit.
  */
-function blankStringLiterals(src) {
-  const out = src.split('');
-  /** @type {Array<{ quote: string, depth: number }>} */
-  const stack = [];
-  for (let i = 0; i < src.length; i += 1) {
-    const ch = src[i];
-    const top = stack[stack.length - 1];
-    if (!top) {
-      if (ch === `'` || ch === `"` || ch === '`') stack.push({ quote: ch, depth: 0 });
-      continue;
-    }
-    if (ch === '\\') { // an escape consumes its successor, quote or not
-      if (i + 1 < src.length && src[i + 1] !== '\n') out[i + 1] = ' ';
-      out[i] = ' ';
-      i += 1;
-      continue;
-    }
-    if (top.quote === '`' && ch === '$' && src[i + 1] === '{') {
-      stack.push({ quote: '${', depth: 0 }); // interpolated CODE — leave it standing
-      i += 1;
-      continue;
-    }
-    if (top.quote === '${') {
-      if (ch === '{') top.depth += 1;
-      else if (ch === '}') { if (top.depth === 0) stack.pop(); else top.depth -= 1; }
-      else if (ch === `'` || ch === `"` || ch === '`') stack.push({ quote: ch, depth: 0 });
-      continue;
-    }
-    if (ch === top.quote) { stack.pop(); continue; }
-    if (ch !== '\n') out[i] = ' '; // blank the TEXT, keep the line structure
-  }
-  return out.join('');
-}
 
 /**
  * Comments, string-literal text and import specifiers blanked, OFFSETS PRESERVED. Without
@@ -181,10 +151,7 @@ function blankStringLiterals(src) {
  * @param {string} src @returns {string}
  */
 function codeOnly(src) {
-  const stripped = blankStringLiterals(src
-    .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
-    .replace(/(^|[^:])\/\/[^\n]*/g, (m, lead) => lead + ' '.repeat(m.length - lead.length)));
-  return stripped.replace(
+  return blankCommentsAndStrings(src).replace(
     /^\s*(?:import|export)\b[^\n]*?from\s*['"][^'"]*['"];?[^\n]*$/gm,
     (m) => ' '.repeat(m.length),
   );
