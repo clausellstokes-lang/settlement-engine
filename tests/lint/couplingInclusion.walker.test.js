@@ -359,6 +359,23 @@ const LAYER_PATTERNS = Object.freeze({
     // ⛔ AN EXACT-PATH REGEX, NOT A `foreign[A-Z]` PREFIX: the standing rule, and here it
     // would be actively wrong — `foreignGuestHold.js` is a different subject entirely.
     /^src\/domain\/worldPulse\/foreignPrimacy\.js$/,
+    // TE-CEIL: the settlement chooser's STRENGTH-AND-EDGE READ LAYER, carved out to bring
+    // settlementStrategy.js under the 800-line domain ceiling. Its subject is how strong a
+    // court is under the shared pressure index, which raw relationship edge pairs two
+    // settlements, and which non-hostile neighbour is strongest — INTERIOR's subject verbatim,
+    // on exactly the reading that gave strategicPosture.js its family: the distinction is
+    // SUBJECT, not program. It is NOT an ARGUED_UNLAYERED case; that roster is for modules
+    // owning no subject and spoken by every port, and this leaf speaks ONE.
+    // ⭐ THE CHOOSER ITSELF STAYS UNCLAIMED, and that is the point of the split rather than an
+    // inconsistency: settlementStrategy.js reads INTERIOR, INFO, WAR and GRAMMAR in one breath,
+    // which is why it has always been unlayered debt. The belief-fogged reads (misjudgmentFor /
+    // trueRelationshipType / makeBeliefStrengthFor) were deliberately LEFT in it so this leaf
+    // speaks no second port, and the exhaustion pair stayed with them for a different register's
+    // sake. This leaf's ONLY import is relationshipEvolution.js, INTERIOR's own, so this home
+    // mints NO cross-layer pair — measured, not asserted.
+    // ⛔ AN EXACT-PATH REGEX, NOT A `settlementStrategy[A-Z]` PREFIX: the standing rule above —
+    // a prefix would claim files nobody has designed and silently widen a frozen family.
+    /^src\/domain\/worldPulse\/settlementStrategyReads\.js$/,
   ],
 });
 
