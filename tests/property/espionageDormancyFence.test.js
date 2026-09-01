@@ -184,8 +184,36 @@ function world({ canon = 1, infoMode = 'unreliable', spine = true, espionage = t
 const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
 
 /**
- * ⛔ THE CORPUS GOLDEN — RE-RECORDED ONCE, AT T8, UNDER THE PROGRAM'S ONE RULED
- * SAME-SEED WINDOW (SHIFT RECORD, 2026-09-01, T8 landing at `598642981`+10).
+ * ⛔ THE CORPUS GOLDEN — RE-RECORDED AT EACH OF THE ARC'S *NAMED CHARTERED WINDOWS*,
+ * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
+ * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
+ *
+ * ── 2026-09-01, ENGINE-HYGIENE (`500cc111…` → `72acacd8…`) ──────────────────
+ * THE MOVER WAS NAMED BEFORE IT LANDED, WHICH IS THE WHOLE POINT OF THIS FENCE.
+ * TE-AGNOSTIC-1's two output-moving cars carry their own SHIFT RECORDS (commit
+ * messages + docs/DESIGN_SETTING_AGNOSTIC.md § SHIFT RECORD 1/2) and cure rulebook
+ * tells in generated settlement prose. This corpus is germanic across six tiers ×
+ * four routes, so it sits directly in their blast radius — 43 of their 305 moved
+ * golden rows are germanic. THE PRE-BOARD PREDICTED IT AND THE LANDING PRICED IT:
+ * a settling experiment run BEFORE any pick, on the boarding base plus the six AGN
+ * cars alone, produced `72acacd8…` — the exact value this constant now holds, and
+ * an attribution that cannot be back-fitted.
+ * RESIDUE ZERO, ON THE OTHER TWO TRAINS: the fence ran 21/21 GREEN at the boarding
+ * base, again at the VIRT tip and again at the CEIL tip, so neither of this consist's
+ * other trains moves one byte of this corpus. 100 % is AGN's.
+ * ANTI-VACUITY, PRESERVED AND RE-PROVEN: 360 rows, 0 errors, 360 DISTINCT hashes —
+ * the arms above this assertion, which passed on the very run that convicted the
+ * constant.
+ * ⛔ THE SCOPE IS NOW RE-NARROWED TO ONE. Chair ruling R-FENCE-SCOPE (ODQ §876.1)
+ * amended the §875.2 seal, which had named T13 as the last mover and was measured
+ * TOO STRONG: AGN's chartered movement was already in flight. The amended scope was
+ * {WAR-mini iff generator-side · AGN@HYG · T13}; WAR-mini measured generation-inert
+ * (fence 21/21 on three arms) and AGN@HYG is discharged HERE, so the remaining named
+ * window is exactly **{T13 TRANS}**. Any movement outside T13's own recorded window
+ * is a STOP, never a re-record. ⭐ AND THE LAW THE AMENDMENT MINTED, kept where the
+ * next sealer will read it: A SEAL MUST NAME ALL CHARTERED WINDOWS, OR NONE.
+ *
+ * ── 2026-09-01, T8 (`a5207e29…` → `500cc111…`) ──────────────────────────────
  *
  * History: the original value `a5207e29…f835bcb` was executed against a git archive of
  * `853e0e9ba` (pre-coupling) and HELD through the substrate landing's gate 6 — the
@@ -196,12 +224,12 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * the landing's probe battery (410/600 moved on the A corpus = car1 53 + car3 389 +
  * car2 0; single-variable reverts reconstruct it exactly; laneT8PROBE-receipt.md), so
  * the mover is FOUND, which is what the old text demanded before touching this line.
- * This value is the same 360-settlement corpus measured at the T8 landing tip
- * (replica receipt: t8-fence-corpus.mjs, 360/360 distinct).
- * ⛔ THE STOP IS RE-ARMED: T13 TRANS is the LAST ruled mover left in the arc. This
- * number moving again outside T13's own recorded window is a STOP, never a re-record.
+ * That value (`500cc111…`) was the same 360-settlement corpus measured at the T8
+ * landing tip (replica receipt: t8-fence-corpus.mjs, 360/360 distinct). It is
+ * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
+ * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '500cc1118fbb6ad39eda4103484b9bcb10e59c7802f8c25ab7b99680086e5880';
+const PRE_COUPLING_CORPUS_SHA = '72acacd8583f70f6b0a5a551ad067f32eb35060e5e08cf8589e8e2135a5c4f6d';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
@@ -263,10 +291,13 @@ describe('FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain 
       .toBe(rows.length);
     expect(
       sha(rows.join('\n')),
-      'THE PRE-COUPLING CORPUS MOVED. This is a STOP, not a re-record: the golden was'
-      + ' executed in a git archive of 853e0e9ba, and the coupling — the espionage'
-      + " caller included — is claiming it moved no byte of the world a player gets."
-      + ' Find the mover before touching this constant.',
+      'THE DRIVEN CORPUS MOVED. This is a STOP, not a re-record. The constant is'
+      + ' re-recorded ONLY inside a NAMED CHARTERED WINDOW, and after the'
+      + ' ENGINE-HYGIENE landing spent AGN\'s, exactly ONE remains: T13 TRANS.'
+      + ' Anything else moving this number is an unpriced same-seed shift in the world'
+      + ' a player gets. FIND THE MOVER — and attribute it to zero residue — before'
+      + ' touching this constant; see this file\'s golden header for how the last two'
+      + ' windows did it.',
     ).toBe(PRE_COUPLING_CORPUS_SHA);
   }, 120_000);
 
