@@ -43,6 +43,11 @@ describe('NPC bank — zero-drift vocabulary mirror', () => {
     // ...and no label may reintroduce the rulebook's own grid words, which is the
     // whole point of paying for the indirection.
     for (const [symbol, label] of Object.entries(NPC_ALIGNMENT_LABELS)) {
+      // The assertion above this loop pins `Object.keys(NPC_ALIGNMENT_LABELS)` EXACTLY equal
+      // to `NPC_ALIGNMENTS`, so an emptied or drifted map reds THERE before this loop can run
+      // zero times; the length arm below proves each subject is a real string, not an absent
+      // one. Both anchors are on the same collection this negative reads.
+      // anchored: the key-set totality arm above cannot pass on an empty or drifted map, and the length arm below cannot pass on an absent label.
       expect(label, symbol).not.toMatch(/lawful|chaotic|\bgood\b|\bevil\b|neutral/i);
       expect(label.length, symbol).toBeGreaterThan(0);
     }
