@@ -169,27 +169,31 @@ const KNOWN_DEAD_BIAS_KEYS = Object.freeze([
   ['steppe', 'keywords', 'pasture'], //           no pasture institution exists
 ]);
 
-describe('§759.5 — every culture-bias key can match something (shrink-only)', () => {
-  const groupingText = INSTITUTION_GROUPINGS.map((g) => String(g).toLowerCase());
-  const nameText = rows.map((r) => r.name.toLowerCase());
-  const matches = (kind, key) => {
-    const needle = String(key).toLowerCase();
-    return kind === 'categories'
-      ? groupingText.some((g) => g.includes(needle))
-      : nameText.some((n) => n.includes(needle));
-  };
-  const liveKeys = [];
-  const deadKeys = [];
-  for (const [culture, profile] of Object.entries(CULTURE_PROFILES)) {
-    const bias = profile?.institutionBias;
-    if (!bias) continue;
-    for (const kind of ['categories', 'keywords']) {
-      for (const key of Object.keys(bias[kind] || {})) {
-        (matches(kind, key) ? liveKeys : deadKeys).push([culture, kind, key]);
-      }
+// Hoisted to module scope: the lighting census's straight-line law (G2, the eighth cut)
+// admits only declarations inside a describe block — a `for…of` at statement position parks
+// the file whole (SUITE_NOT_STRAIGHT_LINE), which is the census refusing to guess, not a bug.
+// The walk below is a pure move from the §759.5 suite; `rows` above is computed the same way.
+const groupingText = INSTITUTION_GROUPINGS.map((g) => String(g).toLowerCase());
+const nameText = rows.map((r) => r.name.toLowerCase());
+const matches = (kind, key) => {
+  const needle = String(key).toLowerCase();
+  return kind === 'categories'
+    ? groupingText.some((g) => g.includes(needle))
+    : nameText.some((n) => n.includes(needle));
+};
+const liveKeys = [];
+const deadKeys = [];
+for (const [culture, profile] of Object.entries(CULTURE_PROFILES)) {
+  const bias = profile?.institutionBias;
+  if (!bias) continue;
+  for (const kind of ['categories', 'keywords']) {
+    for (const key of Object.keys(bias[kind] || {})) {
+      (matches(kind, key) ? liveKeys : deadKeys).push([culture, kind, key]);
     }
   }
+}
 
+describe('§759.5 — every culture-bias key can match something (shrink-only)', () => {
   test('the census is live — most keys DO match, so an empty dead set would mean something', () => {
     // ANCHOR. Without this, "no new dead keys" would pass just as happily if
     // CULTURE_PROFILES were emptied, the grouping vocabulary renamed, or the catalog
