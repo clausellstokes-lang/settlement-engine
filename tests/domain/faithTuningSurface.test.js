@@ -21,7 +21,7 @@
  *      consumer (the D4 car's ratchet, applied to this family).
  */
 import { describe, test, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -213,5 +213,90 @@ describe('the one-home ratchet — a tuning table cannot be re-minted beside a c
       'export const DEITY_FLAW_TUNING =',
       'export const FAITH_WITNESS_TUNING =',
     ]);
+  });
+});
+
+/**
+ * ⭐⭐ THE HOME CENSUS — ONE NAME, ONE HOME, AND THE ROSTER POINTING AT IT.
+ *
+ * WHY IT EXISTS, AND IT IS A MEASUREMENT RATHER THAN A PRECAUTION. The ratchet above
+ * asks whether a FEEDER re-minted a whole tuning TABLE. It cannot see the failure this
+ * family actually has: a RELOCATION car and a CONSOLIDATION car colliding on a single
+ * value's HOME. Each tree is green alone — every arm above is internally consistent —
+ * and the union either strands a `home:` pointer on a file that stopped exporting the
+ * name, or grows a SECOND definition of the same constant while nothing reds at all.
+ * Both were measured on this surface against the substrate's channel-bindings split:
+ * the stranded pointer convicts through the vocabulary arm, and the second definition
+ * convicted NOWHERE. That silence is the estate's most-bitten class (a quantity with
+ * more than one home, every consumer internally consistent), and these two arms are
+ * what ends it here.
+ *
+ * The scope is the FAITH LAYER as the coupling walker already spells it, so this
+ * census mints no new vocabulary of its own.
+ */
+describe('the home census — one name, one home, and the roster points at it', () => {
+  const FAITH_LAYER_FILE = /^(?:faith|sacred|religion|pantheon|conversion|piety|deity|temple)[A-Za-z0-9]*\.js$/;
+  const LAYER_DIR = 'src/domain/worldPulse';
+
+  /** Read the faith layer as [repo-relative path, source] pairs.
+   *  @returns {[string, string][]} */
+  const readLayer = () => readdirSync(join(ROOT, LAYER_DIR))
+    .filter((f) => FAITH_LAYER_FILE.test(f))
+    .sort()
+    .map((f) => /** @type {[string, string]} */ ([`${LAYER_DIR}/${f}`, readFileSync(join(ROOT, LAYER_DIR, f), 'utf8')]));
+
+  /** Files that DEFINE `name` at top level. The `^` anchor is what keeps a comment
+   *  mentioning the name out of the count — every comment line in this estate is
+   *  indented behind ` *` or `//`.
+   *  @param {string} name @param {readonly [string, string][]} layer @returns {string[]} */
+  const definersIn = (name, layer) => layer
+    .filter(([, src]) => new RegExp(`^export const ${name}\\b`, 'm').test(src))
+    .map(([rel]) => rel);
+
+  /** True when the surface's own table carries a VALUE for `key` rather than a
+   *  shorthand reference to an imported binding — `KEY: 20` versus `KEY,`.
+   *  @param {string} key @param {string} surfaceSrc @returns {boolean} */
+  const tableCarriesValue = (key, surfaceSrc) => new RegExp(`^ {2}${key}: `, 'm').test(surfaceSrc);
+
+  test('every vocabulary register has exactly one faith-layer definition, and it is the row home', () => {
+    const layer = readLayer();
+    expect(layer.length, 'the faith layer scan read nothing — it is broken, not clean').toBeGreaterThan(0);
+    // anchored: the non-empty scan above proves the loop below runs over real sources
+    for (const row of FAITH_TUNING_COVERAGE.filter((r) => r.kind === 'vocabulary')) {
+      const homes = definersIn(row.exportName, layer);
+      expect(homes, `${row.exportName}: expected exactly one faith-layer definition`).toHaveLength(1);
+      expect(homes[0], `${row.exportName} is defined at ${homes[0]} but the roster homes it at ${row.home}`).toBe(row.home);
+    }
+  });
+
+  test('every tunable key has exactly ONE definition — a table value or a bare export, never both', () => {
+    const layer = readLayer();
+    const surface = layer.find(([rel]) => rel.endsWith('/faithTuningSurface.js'));
+    expect(surface, 'the surface itself was not in the layer scan — the scan is broken').toBeTruthy();
+    // anchored: the assertion above proves `surface` is the real surface source pair
+    const surfaceSrc = /** @type {[string, string]} */ (surface)[1];
+    for (const row of FAITH_TUNING_COVERAGE.filter((r) => r.kind === 'tunable')) {
+      const key = /** @type {string} */ (row.key);
+      const bare = definersIn(key, layer);
+      const homes = tableCarriesValue(key, surfaceSrc) ? [`${LAYER_DIR}/faithTuningSurface.js (${row.table})`, ...bare] : bare;
+      expect(homes, `${key}: one home or the value forks — found ${homes.length}`).toHaveLength(1);
+    }
+  });
+
+  test('guard the guards: both detectors convict a planted second home and a moved home', () => {
+    const planted = /** @type {[string, string][]} */ ([
+      ['src/domain/worldPulse/faithField.js', 'export const FAITH_CHANNELS = 1;\n'],
+      ['src/domain/worldPulse/faithElsewhere.js', 'export const FAITH_CHANNELS = 2;\n// a comment naming export const CAUSAL_SWING = 20 must NOT count\n'],
+    ]);
+    // the moved-home shape: two definers where the roster can only name one
+    expect(definersIn('FAITH_CHANNELS', planted)).toEqual([
+      'src/domain/worldPulse/faithField.js',
+      'src/domain/worldPulse/faithElsewhere.js',
+    ]);
+    // the comment immunity the `^` anchor buys, stated rather than assumed
+    expect(definersIn('CAUSAL_SWING', planted)).toEqual([]);
+    // the table-value detector separates a carried VALUE from a carried REFERENCE
+    expect(tableCarriesValue('CAUSAL_SWING', 'export const T = Object.freeze({\n  CAUSAL_SWING: 20,\n});\n')).toBe(true);
+    expect(tableCarriesValue('CAUSAL_SWING', 'export const T = Object.freeze({\n  CAUSAL_SWING,\n});\n')).toBe(false);
   });
 });
