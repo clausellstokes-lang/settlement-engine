@@ -18,6 +18,54 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-09-01 — THE ENGINE STOPS QUOTING A RULEBOOK (305 rows of 525 moved; 0 rows added,
+ *   0 removed, 0 templates added or removed, 0 array-length moves). Lane TE-AGNOSTIC-1,
+ *   cars `f2c1ad181` (car 3) and `97d119c9b` (car 4), landed at the ENGINE-HYGIENE consist.
+ *   RULED: ODQ §857 chartered the setting-agnostic cure and both cars carry their own SHIFT
+ *   RECORDS — in their commit messages and in docs/DESIGN_SETTING_AGNOSTIC.md (§ SHIFT RECORD
+ *   1 and 2), which is WHY this row exists: the records were never in this header, so a
+ *   re-record without adding here would have been the deleted alarm the law above names.
+ *   ⚠ THIS IS A RE-RECORD ONTO A WORLD THE CARS NEVER SAW. T8 re-recorded the manifest twice
+ *   after these cars were cut (§858, §860), so their carried fixtures (`e06025d9…`,
+ *   `a68fa0de…`) were re-records of a dead context and were DROPPED at the pick; the landing
+ *   regenerated ONCE at the coupled tip instead of merging two re-records.
+ *   THE BASE-SIDE TOTALITY, AND IT IS THE LOAD-BEARING HALF: the boarding base `3f9201e39`
+ *   was regenerated as OBJECTS from committed bytes in its own detached worktree and
+ *   reproduced the committed manifest on ALL 525 ROWS — 0 mismatches, key set identical — so
+ *   this consist is the ONLY source of the drift and nothing else had crept in. The
+ *   re-recorded manifest then matched an INDEPENDENT census of the tip on all 525 rows, so
+ *   the number below is corroborated by a second instrument rather than by itself.
+ *   BY TIER, which reproduces car 3's own table to the digit: town 105/105 · city 84/84 ·
+ *   metropolis 80/84 · village 36/84 · hamlet 0/84 · thorp 0/84. The two tiers that hold are
+ *   the control: a thorp and a hamlet draw none of the cured institutions.
+ *   THE COMPLETE PATH-TEMPLATE CENSUS IS TWELVE TEMPLATES, measured over whole settlements
+ *   base-vs-tip with array indices collapsed:
+ *     $.institutions[].desc                                407 changes / 220 rows
+ *     $.economicState.activeChains[].outputs[]             312 changes / 156 rows
+ *     $.economicViability.metrics.foodBalance.magicFoodNote 167 changes / 167 rows
+ *     $.economicState.primaryExports[]                     118 changes / 118 rows
+ *     $.defenseProfile.institutions.magicDef[].desc        113 changes / 113 rows
+ *     $.economicState.activeChains[].magicNote              36 changes / 36 rows
+ *     $.economicState.localProduction[]                     26 changes / 26 rows
+ *     $.availableServices.magic[].desc                      12 changes / 12 rows
+ *     $.relationships[].npc1Role · npc2Role · $.factions[].members[].role · $.npcs[].role
+ *                                                            7 changes / 1 row
+ *   ZERO templates added, ZERO removed, ZERO array-length moves.
+ *   ⭐ AND THE RESIDUE IS ZERO AT THE STRING LEVEL, WHICH IS STRONGER THAN THE TEMPLATE
+ *   COUNT: every changed leaf was enumerated as an old→new pair and there are exactly
+ *   EIGHTEEN distinct substitutions, all of them cured rulebook tells — the level scale
+ *   ("Spellcasting (1st-3rd level)" → "(minor)", 301 ×; "(1st-8th level)" → "(greater)",
+ *   155 ×), the currency unit ("50 GP" → "50 in gold" and six siblings), the named spells
+ *   ("Arcane Plant Growth" → "Arcane quickening of growth", "Zone of Truth enforcement" →
+ *   "Play kept honest by compelled truth", "Conjure Animals" → "Conjured game"), the item
+ *   plus ("+1 weapons" → "Warded weapons") and ONE role token
+ *   ("Warlock/Pact-Bound" → "Warlock/Bargain-Sworn", car 5's loop-until-dry find, 7 ×).
+ *   No third class exists, which is what the pre-board's acceptance test asked for: a
+ *   substitution outside this list would have been a STOP.
+ *   THE PROMISE. A stored settlement is never re-derived; only newly generated worlds get
+ *   the un-quoted prose. Two worlds from one seed — one saved before this lands, one after —
+ *   differ in exactly these eighteen strings and nothing else.
+ *
  * 2026-08-31 — THE TRADES THAT WERE FILED AS GOVERNMENT (322 rows of 525 moved; 0 rows
  *   added, 0 removed, 0 templates added or removed, 0 array-length moves, 0 key-order moves).
  *   Lane T8. RULED: ODQ §759.5 docketed the defect and §773.1 moved the relabel OUT of the
