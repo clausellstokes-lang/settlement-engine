@@ -373,9 +373,18 @@ function buildMapChapter(d, book, pageN) {
   }
   const frameY = y0 + 2, frameH = 150;
   rect(d, ML, frameY, CW, frameH, CREAM, TAN);
+  // ⚠ THE EDGES GO IN UNCHANGED. `book.map.edges` is already `{from, to, type}` —
+  // the shape forceLayout reads (graphLayout.js:111-112) and the shape the campaign
+  // PDF's own map passes verbatim (generateCampaignPDF.js:336-339). This call used
+  // to remap them to `{source, target}`, so `indexById.get(undefined)` missed and
+  // the layout `continue`d past EVERY edge: every spring in the force simulation was
+  // dropped and the realm was laid out as if nothing connected to anything. It is
+  // invisible below 9 settlements (autoLayout returns circularLayout for ≤8 and
+  // ignores edges), which is why no small fixture ever caught it. Do not "normalize"
+  // this shape on the way in — the sink is silent.
   const positioned = autoLayout(
     book.map.nodes.map(n => ({ id: n.id, label: n.name })),
-    book.map.edges.map(e => ({ source: e.from, target: e.to, type: e.type })),
+    book.map.edges,
   );
   const pos = new Map(positioned.map(p => [String(p.id), p]));
   const px = (v) => ML + 10 + v * (CW - 20);
