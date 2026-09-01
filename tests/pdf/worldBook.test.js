@@ -8,9 +8,21 @@
  * Pins: deterministic collection for a fixed fixture · every section present · the
  * player-safe face carries ZERO covert marks (toPublicSafe engaged).
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+
+// PASSTHROUGH SPY on the layout entry point. It does NOT fabricate a shape or a
+// return value — the real autoLayout runs and the real positions are painted; the
+// spy exists only so a pin can read the edges the World Book ACTUALLY hands it.
+// (The World Book's map chapter is module-private, and its geometry is not
+// recoverable from the painted stream without re-deriving the chapter's private
+// frame constants — observing the real call is the honest instrument.)
+vi.mock('../../src/utils/graphLayout.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  return { ...actual, autoLayout: vi.fn(actual.autoLayout) };
+});
 import { existsSync, rmSync, statSync } from 'node:fs';
 import { collectWorldBook, generateWorldBook, realmChapterRows } from '../../src/utils/generateWorldBook.js';
+import { autoLayout } from '../../src/utils/graphLayout.js';
 
 function fixtureCampaign() {
   const ashford = {
@@ -320,5 +332,69 @@ describe('member ids resolve across the id-type seam', () => {
   it('a genuine non-member is still excluded (the coercion is not a wildcard)', () => {
     const wb = collectWorldBook({ id: 'w3', name: 'WB', settlementIds: ['1'] }, [member(1, 'Ashford'), member(2, 'Grimhold')]);
     expect(wb.dossiers.map(d => d.name)).toEqual(['Ashford']);
+  });
+});
+
+/**
+ * THE REALM MAP'S SPRINGS. buildMapModel emits edges as `{from, to, type}` — the
+ * shape graphLayout's forceLayout reads (:111-112) and the shape the campaign PDF's
+ * own map hands it verbatim (generateCampaignPDF.js:336-339). The World Book's map
+ * chapter alone REMAPPED them to `{source, target, type}` on the way in, so
+ * `indexById.get(undefined)` missed on every edge and forceLayout `continue`d past
+ * all of them: EVERY spring in the force simulation was silently dropped, and the
+ * realm map was laid out as if no settlement were connected to any other.
+ *
+ * It is invisible below 9 settlements — autoLayout returns circularLayout for ≤8 and
+ * ignores edges entirely — which is why a small fixture could never catch it. These
+ * pins therefore use a NINE-settlement realm, the smallest that reaches the force
+ * path, and read the edges the painter actually handed the layout (tests/utils/
+ * graphLayout.determinism.test.js pins the sink itself: a `{source,target}` edge set
+ * lays out identically to no edges at all).
+ */
+describe('the realm map hands the layout edges it can actually read (9+ settlements)', () => {
+  function ringRealm() {
+    const ids = Array.from({ length: 9 }, (_, i) => `ring-${i}`);
+    const saves = ids.map((id, i) => ({
+      id,
+      name: `Hold ${i}`,
+      settlement: {
+        name: `Hold ${i}`, tier: 'town', population: 900,
+        neighbourNetwork: [{ id: ids[(i + 1) % ids.length], relationshipType: 'trade_partner' }],
+      },
+    }));
+    return { campaign: { id: 'ring', name: 'The Ring', settlementIds: ids }, saves };
+  }
+
+  it('the map model itself carries {from,to} edges (the producer is not the defect)', () => {
+    const { campaign, saves } = ringRealm();
+    const book = collectWorldBook(campaign, saves, {});
+    expect(book.map.nodes).toHaveLength(9);
+    expect(book.map.edges).toHaveLength(9);
+    for (const e of book.map.edges) {
+      expect(typeof e.from).toBe('string');
+      expect(typeof e.to).toBe('string');
+    }
+  });
+
+  it('the painter hands those edges to autoLayout UNCHANGED — every spring survives', () => {
+    const { campaign, saves } = ringRealm();
+    const book = collectWorldBook(campaign, saves, {});
+    const file = 'world-book-the-ring.pdf';
+    autoLayout.mockClear();
+    try {
+      generateWorldBook(campaign, saves, { mode: 'dm', now: '1/1/2026' });
+    } finally {
+      rmSync(file, { force: true });
+    }
+    expect(autoLayout).toHaveBeenCalled();
+    const [, edgesPassed] = autoLayout.mock.calls[autoLayout.mock.calls.length - 1];
+    expect(edgesPassed).toHaveLength(9);
+    // Every endpoint the layout will read must be a real node id — the exact
+    // resolution forceLayout performs before it decides to keep or drop a spring.
+    const nodeIds = new Set(book.map.nodes.map(n => String(n.id)));
+    for (const e of edgesPassed) {
+      expect(nodeIds.has(String(e.from))).toBe(true);
+      expect(nodeIds.has(String(e.to))).toBe(true);
+    }
   });
 });
