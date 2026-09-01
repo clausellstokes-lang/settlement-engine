@@ -75,8 +75,18 @@ const DORMANT_GOLDEN = '6e85308b0f396a77';
  * the detector was only ever exercised on the shape that worked. ⇒ F3c's dormancy claim
  * was narrower than its own words, and the cure is to resolve specifiers rather than to
  * match their tails.
+ *
+ * ⭐⭐ THE THIRD MEMBER ARRIVED BY A SPLIT, NOT BY A NEW FEATURE (SUBSTRATE coupling wave
+ * 6, REC-1). `faithChannelBindings.js` is the register plus the pricing pair, lifted out
+ * of `faithField.js` verbatim so the EAGER `causalState.js` can price a channel without
+ * dragging the field kernel and `piety.js` into the first-paint closure. It is listed
+ * here rather than left outside the set for one reason that matters to this census: with
+ * it outside, `causalState.js` would have silently LEFT the FENCE 1 roster below — the
+ * consumer would still exist, and the fence would report it gone. A split that shrinks a
+ * census is the census failing, not the coupling ending.
  */
 const FAITH_FIELD_SET = Object.freeze([
+  'src/domain/worldPulse/faithChannelBindings.js',
   'src/domain/worldPulse/faithField.js',
   'src/domain/worldPulse/faithWitnessSource.js',
 ]);
@@ -146,7 +156,10 @@ describe('FENCE 1 — the import-closure census (own-footprint, for a car with n
       importersOf(SRC_FILES),
       'the faith field gained an UNDECLARED production consumer — add it here with its reason, or route through the two seams that already exist',
     ).toEqual([
-      'src/domain/causalState.js',            // the boon/bane channel term (F4c)
+      // The boon/bane channel term (F4c). ⚠ Since SUBSTRATE wave 6 it reaches the
+      // BINDING LEAF, not `faithField.js` — a first-paint cure, not a decoupling, which
+      // is why it is still in this roster and why the leaf is in the set above.
+      'src/domain/causalState.js',
       'src/domain/worldPulse/religionState.js', // the tick-end projection writer (F4c)
     ]);
   });
@@ -223,7 +236,10 @@ describe('FENCE 2 — the purity pin: no clock, no rng, no global state', () => 
   // whose `each` table is a named binding, and a parked fence is one the census can
   // no longer prove runs — which is precisely the failure this fence guards against.
   test('neither leaf reads a wall-clock or an rng', () => {
-    expect(SOURCES.length, 'the source list is empty — this arm is scanning nothing').toBe(2);
+    // 3 since SUBSTRATE wave 6 split the binding leaf out of the field. ⛔ THE COUNT IS
+    // PINNED RATHER THAN DERIVED so a member silently dropping out of FAITH_FIELD_SET
+    // cannot quietly shrink what this arm scans — the anti-vacuity guard is the point.
+    expect(SOURCES.length, 'the source list is empty — this arm is scanning nothing').toBe(3);
     for (const { member, src } of SOURCES) {
       // Comment-stripped so a prose mention of Math.random cannot red this.
       const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|\s)\/\/[^\n]*/g, '$1');

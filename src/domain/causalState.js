@@ -61,13 +61,21 @@ import { healingLedger } from './healingLedger.js';
 import { defenseLedger } from './defenseLedger.js';
 import { WAR_RECOVERY_CONDITIONS, UPSWING_LIFT_CONDITIONS } from './worldPulse/archetypeCatalog.js';
 // W-FAITH F4c — the boon/bane channel term. ⚠ THE CYCLE WAS CHECKED, NOT ASSUMED, in a
-// file whose own header records one it had to route around: faithField's ENTIRE import
-// closure is kernel/math, worldPulse/piety → deityAxes, worldPulse/cultImpositionApply →
-// deityAxes, and magicLedger → data/constants — four leaves, none of which reaches
-// causalState or magicProfile. So this import cannot close the
+// file whose own header records one it had to route around: the binding leaf's import
+// closure is EMPTY, so this import can close no cycle at all — least of all the
 // causalState > deityEffects > magicProfile > causalState shape the DEITY_RANK_AUTHORITY
 // note below exists to avoid.
-import { faithChannelLift, FAITH_CHANNEL_BINDINGS } from './worldPulse/faithField.js';
+//
+// ⛔⛔ IT READS THE BINDING LEAF, NEVER `faithField.js`, AND THAT IS A FIRST-PAINT
+// REQUIREMENT RATHER THAN A STYLE CHOICE (SUBSTRATE coupling wave 6, REC-1). This module
+// is EAGER — reachable from `main.jsx` through the store — so a static import here is
+// first-paint weight for the WHOLE closure of whatever it names. Pointing it at
+// `faithField.js` for two symbols cost 1,054,284 − 1,047,041 = 7,243 B of eager bundle,
+// most of it `worldPulse/piety.js` dragged in behind the field, and a lazy chunk pin
+// cannot cure it: measured, pinning made the closure 291 B WORSE, because an eager
+// importer re-parents its own "lazy" chunk (FP-G17). Re-widening this specifier to
+// `./worldPulse/faithField.js` would silently re-spend those bytes with every test green.
+import { faithChannelLift, FAITH_CHANNEL_BINDINGS } from './worldPulse/faithChannelBindings.js';
 // DEITY_RANK_AUTHORITY is single-sourced in the dependency-free leaf
 // domain/deityConstants.js (amended W2b contract): the engine imports the LEAF,
 // never display/deityEffects.js — routing through deityEffects would close the
