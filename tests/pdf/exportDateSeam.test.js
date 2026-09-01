@@ -12,6 +12,12 @@
  * The jsPDF lane is asserted by inflating the painted content streams and reading
  * the drawn TEXT — a content assertion, never a byte-identity comparison (this
  * file's sibling doctrine in generateWorldBook.js's header).
+ *
+ * ⭐ THIS FILE IS ALSO THE CAMPAIGN-PDF PAINTED-CONTENT SUITE. It is the only live
+ * suite that imports BOTH generateCampaignPDF and the painted-text reader, so the
+ * paid-surface repairs whose only honest proof is "what did the page actually say"
+ * are pinned here rather than in a new file (a new test file reds three censuses).
+ * Sections after the date seam: culture address, member resolution, sanitiser.
  */
 import { describe, test, expect } from 'vitest';
 import { rmSync } from 'node:fs';
@@ -70,6 +76,86 @@ describe('campaign PDF — the export date is injectable (the World Book seam)',
     try {
       generateCampaignPDF(campaign, saves);
       expect(paintedText(file)).toContain(`Generated ${new Date().toLocaleDateString('en-US')}`);
+    } finally {
+      rmSync(file, { force: true });
+    }
+  });
+});
+
+/**
+ * CULTURE ADDRESS. The generator writes the resolved culture to
+ * `settlement.config.culture` (assembleSettlement.js stores effectiveConfig);
+ * NOTHING has ever written a top-level `settlement.culture` — PlacementDetailCard.jsx
+ * recorded that in prose, and scripts/.observed-shape-readers-baseline.json carried
+ * `culture on settlement` frozen for this very file. The campaign PDF read only the
+ * dead address, so four surfaces (cover Cultures stat, cover culture list, index
+ * CULTURE column, digest culture pill) printed blank for EVERY modern save.
+ * domain/resolveCulture.js is now the one read. Executed against the live generator:
+ * `settlement.culture` is `undefined`, `settlement.config.culture` is `"germanic"`.
+ */
+describe('campaign PDF — culture is read from the RESOLVED config', () => {
+  function member(id, name, settlement) {
+    return { id, name, settlement: { name, tier: 'town', population: 1500, npcs: [], neighbourNetwork: [], ...settlement } };
+  }
+
+  test('a culture that lives ONLY under settlement.config.culture reaches the page', () => {
+    const file = 'campaign-coast-watch.pdf';
+    try {
+      // The real generator shape: resolved config, no top-level culture key.
+      const saves = [member('gen-1', 'Tidewatch', { config: { culture: 'tide_reaver' } })];
+      generateCampaignPDF({ id: 'c9', name: 'Coast Watch', settlementIds: ['gen-1'] }, saves, { now: 'Cyfrin 1, 2026' });
+      const painted = paintedText(file).toLowerCase();
+      // The label is painted on three surfaces; one occurrence is the repair, and
+      // the count proves the cover list, the index column and the digest pill all
+      // resolved it rather than just one of them.
+      expect(painted).toContain('tide reaver');
+      expect(painted.split('tide reaver').length - 1).toBeGreaterThanOrEqual(3);
+    } finally {
+      rmSync(file, { force: true });
+    }
+  });
+
+  test('the materialized culturalIdentity.key resolves a config-stripped save', () => {
+    const file = 'campaign-keyed.pdf';
+    try {
+      // assembleSettlement stamps culturalIdentity on the settlement ROOT; it is the
+      // one live root address, and it survives a save whose config was stripped.
+      const saves = [member('keyed-1', 'Keyford', { culturalIdentity: { key: 'norse' } })];
+      generateCampaignPDF({ id: 'c10', name: 'Keyed', settlementIds: ['keyed-1'] }, saves, { now: 'Cyfrin 1, 2026' });
+      expect(paintedText(file).toLowerCase()).toContain('norse');
+    } finally {
+      rmSync(file, { force: true });
+    }
+  });
+
+  test('the DEAD root address settlement.culture is no longer read', () => {
+    // ONE-TIME BEHAVIOUR SHIFT, stated: the exporter used to print a top-level
+    // `settlement.culture`. No writer in src/ produces that key (the generator
+    // writes config.culture + culturalIdentity; normalizeSettlement's identity
+    // lift is still deferred; no import path mints it), so no producible save
+    // changes — but a hand-built fixture that carried it now prints nothing.
+    const file = 'campaign-dead-key.pdf';
+    try {
+      const saves = [member('dead-1', 'Twinford', { culture: 'stale_root' })];
+      generateCampaignPDF({ id: 'c11', name: 'Dead Key', settlementIds: ['dead-1'] }, saves, { now: 'Cyfrin 1, 2026' });
+      const painted = paintedText(file).toLowerCase();
+      expect(painted).toContain('twinford');
+      // anchored: 'twinford' is painted by the SAME index + digest rows that carry the culture column and pill, so those rows demonstrably rendered — the absence is a selection, not an empty page.
+      expect(painted).not.toContain('stale root');
+    } finally {
+      rmSync(file, { force: true });
+    }
+  });
+
+  test('the `random_culture` UI sentinel is never printed as a culture', () => {
+    const file = 'campaign-sentinel.pdf';
+    try {
+      const saves = [member('sent-1', 'Rollford', { config: { culture: 'random_culture' } })];
+      generateCampaignPDF({ id: 'c12', name: 'Sentinel', settlementIds: ['sent-1'] }, saves, { now: 'Cyfrin 1, 2026' });
+      const painted = paintedText(file).toLowerCase();
+      expect(painted).toContain('rollford');
+      // anchored: 'rollford' is painted by the SAME index row that carries the culture column, so its presence proves that row rendered at all.
+      expect(painted).not.toContain('random culture');
     } finally {
       rmSync(file, { force: true });
     }
