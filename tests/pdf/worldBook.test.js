@@ -457,3 +457,34 @@ describe('a completed World Book reports itself (the funnel numerator)', () => {
     expect(track.mock.calls.filter(([n]) => n === EVENTS.PDF_EXPORT_COMPLETED)).toHaveLength(1);
   });
 });
+
+/**
+ * THE SAME CAP LATENCY, ON THE BOUND BOOK. `slugify(title, { max: 40 })` edge-trims
+ * BEFORE it caps, so a title whose 40th character is a separator downloads as
+ * `world-book-…-cliffs-.pdf`. Cured at this call site, exactly as the dossier
+ * exporter was (repair 10) and the campaign exporter is — the kernel is deliberately
+ * untouched, because several call sites mint PERSISTED ids through its `max`.
+ */
+describe('the World Book filename cap never leaves a dangling separator', () => {
+  const LONG = 'Thornbury Under The Everwatchful Cliffs Of Old Kingsmoor And The Sundered Vale';
+
+  it('a long book title is capped at 40 and trimmed clean', () => {
+    const trimmed = 'world-book-thornbury-under-the-everwatchful-cliffs.pdf';
+    const dangling = 'world-book-thornbury-under-the-everwatchful-cliffs-.pdf';
+    let saved = null;
+    try {
+      generateWorldBook({ id: 'wb-slug', name: LONG, settlementIds: [] }, [], { mode: 'dm', now: '1/1/2026' });
+      if (existsSync(trimmed)) saved = trimmed;
+      else if (existsSync(dangling)) saved = dangling;
+    } finally {
+      rmSync(trimmed, { force: true });
+      rmSync(dangling, { force: true });
+    }
+    // anchored: a book really was painted and saved under one of the two candidates.
+    expect(saved).not.toBeNull();
+    const slug = saved.replace(/^world-book-/, '').replace(/\.pdf$/, '');
+    expect(slug.length).toBeLessThanOrEqual(40);
+    expect(slug.endsWith('-')).toBe(false);
+    expect(slug.startsWith('thornbury-under-the')).toBe(true);
+  });
+});
