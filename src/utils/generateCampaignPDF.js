@@ -878,8 +878,15 @@ export function generateCampaignPDF(campaign, allSaves, opts = {}) {
   if (!campaign) throw new Error('generateCampaignPDF: missing campaign');
 
   const startedAt = Date.now();
-  const ids = new Set(campaign.settlementIds || []);
-  const settlements = (allSaves || []).filter(s => ids.has(s.id));
+  // ⚠ BOTH ENDS COERCE. `settlementIds` and a save's `id` are one identity written
+  // by two producers, and nothing in the persisted shape forces them to one JS type
+  // (an imported campaign round-trips whatever its source file carried). A raw
+  // `has(s.id)` resolves ZERO members on a type mismatch and the paid artifact
+  // prints a settlement-less cover instead of failing loudly. Nine sibling sites
+  // (mapEntityIds.js:41, resolveExportSeam.js:28-33, AuspicePanel.jsx:59, …) already
+  // use this idiom; the two exporters were the outliers. Pinned in exportDateSeam.
+  const ids = new Set((campaign.settlementIds || []).map(String));
+  const settlements = (allSaves || []).filter(s => ids.has(String(s.id)));
 
   if (settlements.length === 0) {
     // Still emit a cover page so the user sees something.
