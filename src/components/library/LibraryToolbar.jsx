@@ -23,6 +23,7 @@ import { useState } from 'react';
 import { sans, FS, SP, R, swatch, BORDER, PARCH, INK, MUTED, BODY } from '../theme.js';
 import { isCanonSave, savePhase } from '../../domain/campaign/canon.js';
 import { settlementSignals, needsAttention, healthPip } from '../settlements/livingWorldSignals.js';
+import { isDestroyedRow } from '../map/heraldRegister.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Segmented from '../primitives/Segmented.jsx';
@@ -54,6 +55,11 @@ export const SORT_OPTIONS = Object.freeze({
 function attentionSeverity(save) {
   const sett = save?.settlement;
   if (!sett) return 0;
+  // A destroyed town has no live health to rank: the derivation still bands the
+  // blob it had when it stood, so without this it could out-rank a standing
+  // settlement in "Needs attention". Same reason the Library card suppresses its
+  // pip; asked of the SAVE ROW, where "destroyed" is canon (isDestroyedRow).
+  if (isDestroyedRow(save)) return 0;
   return healthPip(sett)?.severity || 0;
 }
 
@@ -122,7 +128,9 @@ export function applyLibraryFilters(saves, { query = '', sort = 'recent', filter
   // In crisis floats off the SAME health derivation as the "Needs attention" sort
   // (deriveSystemState) — a strained/critical band. Pure function of the save.
   if (filters.inCrisis) {
-    out = out.filter(s => needsAttention(s.settlement));
+    // A town the canon records as destroyed is not in crisis — it is over. Without
+    // this the same stale derivation that fed the sort would surface it here too.
+    out = out.filter(s => !isDestroyedRow(s) && needsAttention(s.settlement));
   }
   // At war reads the LIVE campaign worldState the parent resolves per save. With
   // no context (e.g. an isolated test without campaign wiring) it matches nothing.

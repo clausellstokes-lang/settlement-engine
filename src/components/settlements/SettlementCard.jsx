@@ -142,7 +142,16 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
     regionalGraph,
     nameFor,
   }), [s.settlement, s.id, worldState, regionalGraph, nameFor]);
-  const health = useMemo(() => healthPip(s.settlement), [s.settlement]);
+  // A destroyed row carries NO live health band: the Health column falls to the
+  // dash it already renders when no system state can be derived (its existing null
+  // grammar, not a new one), and the crisis rail follows, so the two channels stay
+  // in sync instead of drifting to a red rail with no pip explaining it. Reads the
+  // SAME `alreadyDestroyed` derivation that hides the destroy affordance, so the
+  // suppression lands in the same repaint.
+  const health = useMemo(
+    () => (alreadyDestroyed ? null : healthPip(s.settlement)),
+    [s.settlement, alreadyDestroyed],
+  );
 
   // The settlement's own seeded medallion (16px), memoized per name — the same
   // ornament composer the dossier header + colophon draw from, so a settlement
