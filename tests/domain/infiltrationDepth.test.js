@@ -525,8 +525,10 @@ describe('W-OPS O6-B — place_agent is TWO honest sights, and neither may absor
     // `sourceUnverified`; the annex spells readiness with `writerLanded`. A row carrying
     // both keys is a merged row wearing two hats, and it reds here.
     expect(Object.keys(catalog ?? {})).toContain('sourceUnverified');
+    // anchored: the positive on the line above reads the SAME key set, so a row that vanished or was re-keyed reds THERE rather than passing here
     expect(Object.keys(catalog ?? {})).not.toContain('writerLanded');
     expect(Object.keys(annex ?? {})).toContain('writerLanded');
+    // anchored: the positive on the line above reads the SAME key set, so a row that vanished or was re-keyed reds THERE rather than passing here
     expect(Object.keys(annex ?? {})).not.toContain('sourceUnverified');
   });
 
@@ -537,12 +539,21 @@ describe('W-OPS O6-B — place_agent is TWO honest sights, and neither may absor
     // and from nothing else. If the annex ever became a second dispatch source, this reds.
     expect(annex?.sourceVerdict).toBe('verified');
     expect(isDispatchableKind('place_agent')).toBe(false);
-    expect(DISPATCHABLE_MISSION_KINDS).not.toContain('place_agent');
+    // ⚠ ANCHORED BY A LIVE SIBLING, NOT BY A BARE ABSENCE. `DISPATCHABLE_MISSION_KINDS` is
+    // DERIVED (`MISSION_KIND_CATALOG.filter((row) => row.sourceVerdict === 'verified')`), so an
+    // emptied or re-keyed catalog would satisfy a bare `not.toContain` exactly as a correct
+    // exclusion does. `confirm_belief` travels that same filter and must still be there.
+    expectAbsentWithAnchor(
+      DISPATCHABLE_MISSION_KINDS, 'place_agent', 'confirm_belief', 'the ONE dispatch registry',
+    );
     // …and the APPENDED kind is not dispatchable either — it is not in the registry at all,
     // which is the same refusal for the same reason rather than a second rule.
     expect(missionKindRow('seat_agent')).toBeNull();
     expect(isDispatchableKind('seat_agent')).toBe(false);
-    expect(DISPATCHABLE_MISSION_KINDS).not.toContain('seat_agent');
+    // anchored by the same live sibling, for the same reason as the pair above
+    expectAbsentWithAnchor(
+      DISPATCHABLE_MISSION_KINDS, 'seat_agent', 'confirm_belief', 'the ONE dispatch registry',
+    );
   });
 
   test('⛔ THE RECONCILE INVARIANT — the capture write opens BOTH rows in one commit or reds', () => {
