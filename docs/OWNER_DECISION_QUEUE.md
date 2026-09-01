@@ -31997,3 +31997,269 @@ fourth sighting, taken at collection).
 - **§872.1 THE POST-§871 BOARD (rider): four more trains complete, two mid-build, and the traps of the day.** COMPLETE AND HOLDING: **W-OPS O2** `a1981ab96` (the acceptance seam + R6-reading leaf; ⭐ THREE outranking finds: the scratchpad held a DECOY dispatch packet — 84 bytes of captured `git show` ERROR text a prior lane redirected into a file named for its target, defused by the chair with a pointer note; **W-OPS is a DIAMOND** — O1 is NOT an ancestor of the L-stack, 4 of its 5 awaited acceptance symbols landed on the L-line, so the substrate landing owes the wiring reconcile; **R6's presence guard admits null/'' as a supplied zero** — invisible in the numbers, visible only in absent[], L5's leaf, docketed) · **SP-W2** `b46167c47` (⭐ the chair's brief GLOSSED SP AS ESPIONAGE — it is STRUCTURAL PREVENTION, the lane proved it from the §838→§846 charter chain and built the chartered scope; zero src bytes; the ≥6-tier roster 29→59 + three pairability DIRECTIONS; ⭐ `relationshipMemory.updatedAtTick` is a WRITE-ONLY FIELD ON A PERSISTED SHAPE — owner-class, docketed; its cherry-picked SP-W1 cars drop-as-empty at its own landing; LAW: **a dispatch brief POINTS at the charter, never paraphrases it**) · **TE-INSTR-2** `aa5d54008` (the --update tool now REFUSES declared-overrun rows — and the four-state proof showed the trap WORSE than all three receipts recorded: it banks the MEASURED count, laundering even undeclared growth; ⭐ the parked-population walker PRESCRIBED A REFORMAT THAT CANNOT WORK — 51 estate files already obeyed it and stayed parked; corrected at cause with two monotone-down ceilings and discharged on a real file, parked 371→370 at its tip; the presentation-claims de-park DEFERRED on landing order behind INSTR-1's R3). MID-BUILD, both quiet-window-compliant through two gates: **D4** (both builds written: the Register VII signature as ONE file's diff with signed/live as two words making §810 R5 structural, three strays home at exact values; the §865 demote — ⭐ ON THE CENTRAL FORK THE LANE FOLLOWED §810.8'S VERBATIM OVER §865'S PROSE: lawful passage demotes, force removes, J4 vetoable OWNER-VISIBLE; two unplanned dividends: D3's orphaned-NPC defect cured for the lawful family, the loser-grudge edge becomes live revanche) · **F4c** (six of nine boon/bane channels wired; ⭐ THREE causal keys name NOTHING in src/domain — sea/learning/hearth declared UNBOUND to the pen rather than mis-bound; F3c's dormancy fence was BLIND TO SIBLING IMPORTS, cured with a positive control; the generatedAt-revert practice measured incompatible with the CR-EB-2(b) window law — RETIREMENT chair-endorsed, owner-vetoable). HYGIENE: two post-gate temp sweeps + densland-base/laneL6-tree worktrees removed + two post-CAS dist trees (disk 842MB→3.4Gi across the day); ⚠ the container runs tight — EVERY landing gate now carries disk guard lines and a pre-gate sweep is standing practice. (2026-08-31; SEAT: Fable 5 — validated)
 - **§873 WINDOW-CLOSE MARK (the owner's 5-hour window expires; the successor resumes MID-LANDING) — PER-LANE MARKS, fresh-read seconds before the close. ⚠ THE LIVE AGENTS AND THE DISPATCHER CRON DIE WITH THE SESSION; worktrees, commits, receipts, packs and the QUEUE FILE survive. THE SUCCESSOR'S SPINE IS `825f209c…/scratchpad/DISPATCH-QUEUE.md` — read it, re-arm the dispatcher cron from its own protocol text, then resume the marks below.** (1) **THE SUBSTRATE LANDING, one act from its gate**: laneSUB-tree @ `806b514c8` (49 commits above `853e0e9ba`; branch NOT CASed) with **porcelain 4 — wave 6 died MID-CURE**: `M causalState.js · M faithField.js · M faithFieldDormancyFence.test.js · ?? faithChannelBindings.js` = REC-1 (the faith causal-binding leaf strip) IN FLIGHT, REC-2 + the ratification car NOT started. The OWNER RATIFIED (in-session): REC-1+REC-2 source cures, then closure budget 1,042,000→1,047,000 + the near-spent gzip/Brotli ceilings raised proportionally, REC-3 chartered separately never spent against this overrun. Resume authority: the receipt's '## WAVE 5' STOP report (the measured REC designs: base 1,041,628 · HEAD 1,054,284 · REC-1 1,047,041 · REC-1+2 1,046,388; the two eager edges causalState.js:70→faithField→piety and mutateEntities.js:29→deitySnapshot) + '## WAVE 6' checkpoints. 529 LAW on the dirty files: survey the partial leaf-strip, keep-or-redo whole. Then: gate 5 (QUIET WINDOW: suspend msgs + 180s settle + pre-gate disk sweep + guards) → chair-verify own reads → CAS `853e0e9ba`→tip → seal refs/preserve → the FULL substrate collection as §874 from `825f209c…/scratchpad/873-MATERIALS.md` (compiled, ⏳slots marked; includes the memory fold steps + the landing-order ruling the packs await). (2) **O5** building clean: laneO5-tree @ `3fbfb5733` (O4's tip), porcelain 0, receipt started — re-dispatch its remainder per laneO5-receipt.md + the packet row (depth-priced drift · custody exits · going-native F11-shaped bound; Opus seat). (3) **The follow-ons boarding pack** lane died mid-write (no FOLLOW-BOARDING-PACK.md yet) — re-dispatch from its brief in the queue's B9 class. HOLDING COMPLETE THIS SITTING beyond §872.1: O3 `6714f754a` · O4 `3fbfb5733` (the titleArgs +-blindness first sighting: 10 blind arms in 24,904 calls) · F5c `e0b4c371b` · F6c `65d2e9ade` (Register IX pack rows at laneF6c-pack-rows.md) · F7c `eabae6920` — **THE FAITH LINE IS COMPLETE 7/7** · L8 `a16a8bb9b` (the edit-surface recon discharged; gallery-chart round-trip OWNER-GATED). BUILD REMAINDER: O6, O7 only. THE PAPER (all in `825f209c…/scratchpad/`): five landing plans (skeptic-amended ×2 passes) + FIVE boarding packs (T8/WAR/HYG/INSTR done, FOLLOW owed) + WALK-PROTOCOL + laneOSRMINT-plan + DESIGN_T13_TRANS-draft (~420 lines, panel-ready) + DESIGN_TE_GOLDEN-draft (~350 lines) + 873-MATERIALS + MEMORY-FOLD-PLAN (fold 25, md5-guarded). OWNER RULINGS THIS SITTING: the first-paint cure+ratify (above) · the L5/F5c-era seat corrections law (read the packet row before EVERY dispatch; the F/O lines cannot see the packets doc — quote rows into briefs). The stop line stands: EVERYTHING UP TO, NOT INCLUDING, THE TERMINAL SOAK. (2026-09-01; SEAT: Fable 5 — validated)
 - **§873.1 RIDER: the fifth boarding pack BEAT the window** — FOLLOW-BOARDING-PACK.md is COMPLETE (supersedes §873's item 3; do not re-dispatch). Its three findings bind the follow-ons landing: MAT's engine payload measured ≈3,763 B against a 677 B margin — **red by ~5×, boarding gated on the wave-6 ratified figures or a further REC**; the closure question's ownership INVERTS — the substrate span itself added ≈+6,018 B to first-paint-closure modules, so the budget conversation is the substrate's before D4's; and the tail-car consist proposal stands as three linear chains (TAIL-O first, TAIL-L alone, TAIL-F last and twice-gated — its surface is under wave 6's live edit and it re-derives D4's six bundles). All five landing packs now exist. (2026-09-01; SEAT: Fable 5 — validated)
+
+**§874 THE CHARACTER SUBSTRATE COUPLING LANDS — chair-verified and CASed: `claude/composite-r4` `853e0e9ba` → `598642981` (full `59864298150dbacf30b9771bb9355fbd70ab3b88`), **54 commits**, sealed `refs/preserve/landing-SUB-2026-09-01`. GATE 6 GREEN at the tip (gate-sub6.log): `[test-ratchet] OK — no test regressions (10 known failure(s) of 30072 tests, ceiling 10)` · `STRICT DIST OK — 51 discovered/reported file(s), 433 test(s), zero failed/non-run/uncollected/missing/extra/duplicate rows` · all eleven validators + typecheck ratchet + domain-strict + lint (0 errors) green · TRUE_EXIT=0 · porcelain EMPTY both sides · guards: disk 16Gi pre/post, load 2.73 pre / 9.34 post. The compile-time 42 commits grew to 54 — bills 6/7, car 12, wave 6 cars 1/1b/2/3, car 4 — the story is §874.1.** THE THREE-LINE COUPLING: L-line (laneL2-tree `2e4fc0ea0`,
+W-LIVES L2+L3+L4+L5 — 21 hand-driven picks of 30, the first NINE verified landed twins from
+the TE-NET dock; 17 landed + 4 register bills verified-dropped) · F-line (laneF4c-tree
+`b9df4101a`, L1+F1c+F2c+F3c+F4c — 11 landed, 10 register bills dropped-as-empty, the
+mutation-sweep UNION composed BY HAND, plants 47 and 38 both surviving) · O1 (`4e918ab5e`,
+clean) — then SEVEN coupling cars + SIX landing bills, every pick per-commit per the §872
+hand-driven law (an unexpected empty pick INVESTIGATED, never skipped). ⚠ the zsh word-split
+trap bit the pick loop TWICE (${=VAR} law recorded). [CONFIRMED — receipt + git log]
+
+⭐⭐ **THE ACCEPTANCE CENSUS FIRED ON SCHEDULE** — the §872.1 diamond obligation arrived as
+a failing test: `operationGrammar` 24/25 the day the L-line's four symbols landed. And the
+producer census was a MENTION CENSUS: it read `knownCharacter` as ARRIVED on the strength of
+three comments and a roster string, for a symbol that names NOTHING (the estate's is
+`knownCharacterOf`); its sibling walker was the same mistake inverted, red on frozen roster
+DATA. The wiring: NEW `acceptanceCharacterReads.js` reads through the `characterConsumers`
+chokepoint ALONE (chart + ⟨F8⟩ verdict INJECTED; zero new cross-layer pairs, proven
+byte-identical on `couplingInclusion`), the census became BINDING (resolves module + export
+against the live tree, anti-vacuity pin: the unlanded set is exactly `['willingness']`), and
+the ⟨F8⟩ one-home ban was TIGHTENED to both halves of the verdict shape while its own
+tripwire was paid. [CONFIRMED]
+
+⭐⭐ **THE WRITER-LESS READ, AND RELOCATION CANNOT CURE (wave 3, car 7)** — `npc.character`
+has ZERO homes in the whole observed corpus (6507 rows / 107 keys) and NO writer exists to
+name, so no register door could absorb the read; MEASURED TWICE: moving the read re-mints
+the identical NEW row at the new file — **the row follows the READ, not the file**. Cure at
+the read itself: ONE accessor `authoredCharacterOf` beside the vocabulary's owner, a THIRD
+site the brief never named folded in (`livedExperienceFunnel:312` — the register only ever
+saw ONE site in three), the guarantee moved to a census STRICTLY STRONGER than the register
+(spelling-complete: property access AND destructuring; total; per-file per-count), and the
+accessor enrolled in `DRIFT_SYMBOLS` (a planted outside importer proves it reds). `--write`
+THREW at base, exit 0 at tip, frozen inventory 1999/1412/388 BYTE-IDENTICAL. [CONFIRMED]
+
+⭐⭐ **THE LIGHTING CENSUS PREDICTED FOUR OF FIVE TO THE DIGIT AND THE FIFTH NAMED A MODEL
+DEFECT (bill 3)** — files/parked/credited/suiteTitles exact (2477/371/2106/5946); titles
+−15, attributed WHOLE to ONE file and ONE cause: `customContentDeities.pglite.test.js` opens
+its suites `describe.runIf(...)` ⇒ SUITE_NOT_RUNNING, parked at both ends. EXECUTED, not
+reasoned: reverting that file left the walker GREEN; the positive control (reverting a
+credited file, −6 titles) went RED at 21796 vs 21802 — an instrument that could not see six
+could not have proved fifteen. **The defect named: the model carried `each`/`only` and not
+`runIf`/`skipIf` — a predict-five must carry all four.** [CONFIRMED]
+
+**THE SEVEN CROSS-REDS: six cured at cause, five of them ONE LAW (wave 2)** — four of five
+accused `paradigmAxisCatalog` importers do not import it (comments, a seam-name constant,
+and a BAN LIST convicted as a dependency — the substring law's FIFTH and SIXTH sightings,
+the sixth a NEW FORM: a refusal roster convicted of depending on what it refuses; the cure
+already existed eleven lines below the disease). `faith_milieu` admitted
+`sourceUnverified:false` (paid in SUBSTANCE — a refused row would have greened the pin over
+an undischarged debt) and PROVEN END TO END: adapter emits 1, funnel applies 1, one soul
+moves; door shut ⇒ same worldState BY REFERENCE. The four mirrors: measured ALL EQUAL first,
+then **the DARKNESS decided which two became imports** (livedExperienceCatalog's fork is
+GONE; three mirrors retained + proven by ONE live-value census, total by construction —
+three source-scrape pins with dead `existsSync` arms retired). R6's null-as-zero cured AT
+THE PRODUCER — both consumers were already guarding the leaf that was wrong ("two correct
+guards wrapped around one wrong one is how a class survives being fixed twice"). The door's
+ONE spelling: `characterDriftEnabled`; both volume names tombstoned as ACTS, NO key
+registered (a planted registration reds). ⭐⭐ AND THE CITATION LAW INVERTS: a
+simulation-rules flag string is a MINT, not a citation — **citation vs mint is a property of
+the CLAIM, never the syntax** (topic file written). [CONFIRMED]
+
+**MUTATION BATTERIES: 44 plants ACROSS THE LANDING (16+17+11), 3 first-pass survivors, all
+cured, zero stale banked** — ⛔⛔ survivor 1 was INSIDE THE CURE: the binding census resolved
+`export function knownCharacter` as a PREFIX of `knownCharacterOf` — *the census written to
+catch the wrong spelling matched it against the right one* (fourth substring-law sighting in
+one wave, first inside its own cure; cured with the declaration's open paren in BOTH
+censuses). Survivor 2 a redundant guard RETIRED rather than pinned (no input reaches it);
+survivor 3 the accessor's `asObject` vs `entity||{}` — killed by an array that CARRIES the
+key. [CONFIRMED]
+
+**THE BILLS:** 1 `f0b6ff892` five bundles ONE window (discharged the coupling's TEN
+predicted reds at once — proven GREEN at `853e0e9ba` first in a git-backed extract, 38
+files/935 tests) · 2 `d7e7721ec` observed-shape register re-derived whole — moved in
+NEITHER direction · 3 `1312c5b8b` the lighting census (above) · 4 `a98e4fc31` the three
+standing reds paid (`npcGoalBranches.js` ARGUED_UNLAYERED as substrate, roster ceiling
+26→27 in the same diff per the anchor's own law; `applyWorldPulse.js` banked 941→934;
+`docs/DEPLOY.md` migration head → `200_deity_authored_character.sql`, DEPLOYMENT still the
+owner's manual act; 87/87 one run) · 5 `a9db6707e` ⭐ **THE SENTINEL'S TWO COLLECTION
+DEATHS CURED** — the scope sentinel refused a vacuous pass on two suites whose every test
+had left the census: (i) `migrationRehearsal` THREW AT COLLECTION because the wave manifest
+ended at 199 while the repo head is 200 — **the final bounded wave MINTED and REVIEWED**
+(`deity-authored-character-check`, [200,200], the 049/056 idiom, forward-only; the old
+tail's pin re-points BY ID exactly as its own comment anticipated); (ii)
+`determinismBanCoverage` threw in beforeAll — the coupling's eslint ignore of the generated
+admission projection resolves NO config; the file now walks the layer's own exempt door
+carrying the ignore's own reason, and the walker is HARDENED: an ignored file is a NAMED
+FINDING, never a crash that converts ten tests into skips. Skips return to the pre-coupling
+1 · 5b `bbf615b73` ⛔ **THE CHAIR'S OWN UNGATED-COMMIT FAULT, OWNED IN THE HISTORY, NOT
+SMOOTHED**: bill 5's proof was committed past 3 red by an ungated chain; the reds were all
+199-era pins the wave append itself owed (pendingCount 78→79 + enumeration length, two
+repoHead literals, migrationCount 199→200, every `plan.waves.at(-N)` relative pin shifting
+by one — the file's own tail comments anticipated exactly this append); bill 5b ran the full
+two-suite proof FIRST and committed only on exit 0. [CONFIRMED — all six bill messages read
+from the commits]
+
+**THE CARS:** 1 `2f8ca87b9` · 2 `86a089a38` · 3 `019334804` · 4 `d144110f5` · 5 `64c17df7e`
+· 6 `aba45d7a0` · 7 `8e129c07e`. **Whole-suite at `aba45d7a0`: `tests/domain/` 7 failed →
+1 failed (15,343/15,344 passed, +20 tests, file count UNCHANGED at 949 — no new-test-file
+census cost); the last red was the bundle refreeze bill 1 then discharged.** Method laws
+minted, memory topic files WRITTEN by the lane (10 total; the chair places the rows): the
+citation-or-mint law ⭐⭐⭐ · the prefix-admitting resolver · dereference detectors inherit
+shared export names · an early red blinds every later assertion · every-consumer-guarded /
+producer-not · ⚠⚠ `git archive` extracts FALSE-RED index-hashing suites (`git init` +
+alternates is the sound harness) · an invalid vitest reporter exits 1 and measures nothing ·
+a mention census reports arrival for prose · retire-a-redundant-guard · osr-row-follows-
+the-read + lighting-predict-five-model (post-plan, see §3). ⚠ the volume hit 100% mid-wave-2
+(ENOSPC; ~900 MB free at wave end; disk remains the binding constraint). DEFERRED,
+documented: `npc.character` still has NO WRITER (L8's edit surface, DESIGN_W_LIVES §7 recon
+row — persistence-shape, owner-class) · `riskRegister`'s THIRD absence of the class (widening
+`RISK_TERMS` belongs to its owner) · W-FAITH car 6 owes `faith_milieu`'s registration + the
+`characterAxes` promotion · the observed-shape instrument has NO DOOR for
+"writer-scheduled-but-unbuilt" (a fifth door is an instrument change, chair/owner-gated) ·
+no flag, no preset, no production caller anywhere. (2026-08-31/09-01; the landing ran Fable chair + Opus wiring/reconcile/coupling waves; SEAT: Fable 5 — validated)
+
+- **§874.1 WAVES 5–6 AND THE SIX GATES (rider): the owner's cure+ratify executed, the refusal that outran its own ratification, and the two laws the gate minted.** WAVE 5 (Opus) STOPPED on measurement: base 1,041,628 · HEAD 1,054,284 · REC-1 1,047,041 · REC-1+2 1,046,388 comment-stripped closure bytes; the dispatch brief's ESD diagnosis FALSIFIED — the real cause was TWO EAGER STATIC EDGES (`causalState.js:70`→faithField→piety · `mutateEntities.js:29`→deitySnapshot). THE OWNER RATIFIED IN-SESSION (AskUserQuestion, "Cure + ratify"): REC-1+REC-2 source cures, closure 1,042,000→1,047,000 with proportional transfer raises, REC-3 chartered separately and never spent against this overrun. WAVE 6 (Opus, chair-directed, 5 cars): car 1 `4abdbb8cb` REC-1's binding leaf (−7,234 B); ⛔ car 1b `285aab951` — CAR 1 SHIPPED A RED: running `tests/property` WHOLE found `mechanismLitCoverage` +`faithChannelBindings` — the compatibility re-export from `faithField.js` (kept so no consumer address moved) left the NEW mechanism with no direct importer, a new mechanism hidden behind an old address; cured at cause (the wiring test imports the leaf; the re-export DELETED, which also removed a reader-less writer; baseline untouched at 24 rows). ⭐⭐ LAW: **a new src module owes its DIRECTORY'S registries, not only the censuses its symbols move.** Car 2 `ebfe0b918` REC-2's commit-embed leaf (−681 B). Car 3 `899c96c88` the ratification: closure 1,047,000, measured 1,046,369 (631 under), provenance in the file's idiom naming both cures and wave 5's REC-3 refusal. ⭐⭐ **J-W6-3 (chair, vetoable, ACCEPTED): the transfer-ceiling raise was MEASURED, THEN REFUSED.** The ratification's premise was wave 5's "<1.9 kB from red"; at the cured tip gzip is 332,064/337,000 (4,936 B clear, 1.486%) and Brotli 278,569/283,000 (4,431 B, 1.590%) — 2.4–2.6× the premise. Raising anyway is the incidental raise the constant's own constitution forbids; TIME-IS-NOT-THE-CONSTRAINT is not engaged (the unchanged ceilings bind nothing). **The signed proportional raise stays BANKED**: a future consist that reds either ceiling may apply it under the existing ratification without a new owner ask, citing this row. Veto is one word — both alternative constant pairs are computed in the file (proportional-of-raw 332,264/278,737, refused as a lowering; own-5% 348,300/292,500, refused as an unasked raise). PROBES: A `16ffd3ea…` and B `3f258073…` diff EMPTY at every wave-6 tip — ⛔ CONTAINMENT proofs, not dormancy (wave 4's loader trace: the corpus reaches 2 of the 35 touched files); the load-bearing proof is FENCE 4's driven `DORMANT_GOLDEN 6e85308b0f396a77`, held. Mutation controls in-tree and sha-restored: `CAUSAL_SWING` 20→21 reds the calibration arm; `harvest`→`social_trust` reds BOTH driven wiring arms. THE GATES: 1–4 pre-close (gate 4's ONLY red the budget row wave 6 existed to cure); GATE 5 RED at `899c96c88` — SIX reds, ONE family: aiCharter/aiGrounding/aiOutputSchema STALE + their three reproducibility rows, because `causalState.js` and the faith surface are bundle INPUTS (gate 4 had passed this stage at bill 7 — the debt was wave 6's own, not foreign, not contention). CAR 4 `598642981`: `build:edge-shared` at the clean tip, ALL 8 family files in ONE window — ⛔ the chair's first, trimmed car (three bundles only, timestamp-only sibling metas reverted) was REFUSED by CR-EB-2 (b) (generatedAt spread 20,204 s > 600): **the sibling timestamps are the one-window law's receipts, not noise**. ⭐⭐ LAW: **a domain edit on a bundle-input surface owes the WHOLE edge-bundle family re-derived in ONE window** (bill 1's "five bundles ONE window" now understood as the instrument's requirement, not style). ⭐ CROSS-CONFIRMATION: the regenerated grounding graph DROPS faithField/piety/cultImpositionApply/kernel-math and GAINS faithChannelBindings (−581 lines net across three bundles) — REC-1's architecture visible on the EDGE surface, independent of the first-paint measurement. Proofs 935/935 staged AND at the committed tip. Gate 6 green per §874. (2026-09-01; SEAT: Fable 5 — validated)
+- **§874.2 RIDER — R1 · TE-RATCHET-MAG (RMAG) — COMPLETE AND HOLDING.** Tip `b19f20631` (3 cars on
+`853e0e9ba`: `64a940b2a` the magnitude car · `dd991cc3e` liveness anchors · `b19f20631`
+lighting census five-for-five). THE CAR: every banked test-ratchet row now declares a
+`magnitude` block (kind/pattern/ceiling/unit) applied to the LIVE `failureMessages[0]` the
+runner already carried verbatim — reds on growth while the row stays banked, fails CLOSED on
+no-match/no-declaration, `--update` may only LOWER; the inert `totalFiles` sentinel ARMED
+(computed, written, compared NOWHERE — three surfaces made it look armed, none was). Two
+anti-vacuity teeth convicted by execution (`Number('')===0` emptiness ban; the frozen side
+written INTO the pattern so a forbidden re-freeze breaks the match). 7 plants / 7 killing;
+landing proof: the REAL gate over the full 29,399-test corpus GATE_EXIT=0, all 14 measures
+measured; **sensitivity ±1 proven live** (a ceiling lowered by one reds the full-suite run).
+⭐ **THE PROSE-VS-MEASURED FINDING (the charter's hazard, stated exactly):** four owed rows
+carry attribution prose disagreeing with measured truth by **+19 (JSX 21→40) / +9
+(string-literal 1028→1037) / +3 (clamp 73→76) / +5 (claims 1→6)** — byte-identical at BOTH
+`f5a827d93` and `853e0e9ba`, so the prose was wrong when written; *nothing had ever compared
+them*. ⭐ TWO TRAPS, both caught only by a check: (i) the first anchor fix SILENTLY did not
+work — three-line comment blocks put a continuation line in the walker's one-line window (the
+same shape as the defect the car closes, one layer up); (ii) a restore wrote the COMMIT
+MESSAGE instead of the blob (`git show "$SHA:path"` under zsh), exit 0 — caught only by
+porcelain, cured by `git cat-file -p` + sha256 verify. **Never trust a restore you did not
+hash-verify.** Denominator correction to the charter: the "seven owed rows" is the CEILING;
+the population is 6 (+4 admitted = all 10 banked rows covered). [ALL CONFIRMED from receipt]
+- **§874.3 RIDER — R2 · TE-BUDGET-1 (BUD) — COMPLETE AND HOLDING.** Tip `f63abf60a` (2 cars: `3cba129d7` cut +
+budget · `f63abf60a` the blind scan cured). ⭐ **THE DIAGNOSIS THE PRIORS COULD NOT CARRY:
+`testTimeout` is a PER-TEST clock and every chair docket figure was a FILE WALL TIME** — a
+file can burn 151 s with no test near 20 s; three of the five named rows are not in the class
+at all on the correct reading. The class line DERIVED, not assumed: worst isolated test ×
+5.23 (the worst per-test contention factor MEASURED — and the factor is a property of the
+ROW, not the machine: regex-bound rows degrade 1.5–2×, the process-spawn row 5.23× at the
+same instant). Cures: `postureNameCollision` CUT (substring prefilter; worst test 3,796 →
+26.3 ms, 151× under budget while contended; 576,600-check output-equivalence probe, 0
+mismatches) · `implementationSession` BUDGETED per row at the house grain (60_000). R6 is the
+mechanism proof WITH NEGATIVE CONTROL: budget forced to 3,000 ms — base 4 failed (the rows
+really cross), tip 10 passed (the budget absorbs it). ⭐ **THE BLIND BUDGET READER
+(pre-existing, cured car 1b):** the ratchet's `timeoutLiteralsOf` trailing-arg regex requires
+4+ CONSECUTIVE digits, so the estate's dominant `60_000`-style spelling was INVISIBLE to it
+across 106 files — the one direction its own header says can invent a TIMEOUT label. Still
+docketed (R9): blind to NAMED-CONSTANT budgets (`CORPUS_BUDGET_MS`) · the missing
+per-test-headroom instrument (needs a chair ruling on freezing a duration ratchet) ·
+honest limit stated: the natural >20 s crossing was NOT reproduced (77% of budget at load 44;
+the chair's recorded red was at load 236 — driving there would have manufactured false reds
+in sibling lanes). [ALL CONFIRMED from receipt]
+- **§874.4 RIDER — R3 · R-GODFORTUNES (GF) — MEASUREMENT COMPLETE, read-only, porcelain EMPTY at exit.** THE
+VERDICT: `god_fortunes_rose`/`fell` **AUTHOR in all 7 presets — no rules flag exists anywhere
+in either chain**; the only gate is `isSubsystemActive(snapshot,'religion')`, a predicate over
+AUTHORED deity data. **Verdict word: DEFAULT-ON (DATA-GATED)** — a class the register's five
+words cannot say (bare DEFAULT-ON over-claims; PRESET(n) lies). RESOLVED at this collection: the chair ADOPTS the word (§874.8) and §4's pack rows land in this commit. Ten arms executed; the ones that bite: cold start fires tick 2 in all 7
+presets · a deity-free world emits ZERO over 156 ticks (the data gate proven) · every-patron-
+dropped FREEZES the ledger (a realm's faith going out entirely is SILENT) · `faithSpread`
+changes SCORE only (86→94/84→92) · default-preset engine reachability 2/24 seeds (rate
+PLAUSIBLE, fixture-shaped). ⛔ three self-caught errors, each would have shipped a false
+verdict: a CONFOUNDED SEED (arm label inside the seed — "when the arm label is in the seed,
+the seed is the finding") · a vacuous threading arm (`pulse.saves` does not exist) · a hash
+compare that passed on two EMPTY strings (zsh ate `$sha:path` as a `:s` modifier;
+`da39a3ee…` is the SHA-1 of nothing — print counts beside hashes). Cross-line transfer
+CONFIRMED (blobs identical; preset block byte-identical sha1 `4e6e260f4d8c0ecb`). Two
+consequences for the desk (§5): DEVOTION taste row 4 now costs two LIVE sources; the adapter
+join is a POSITIONAL TAG SLOT (`tags[3]`, `settlementIds:[]`) — L2's fragile-address class,
+own row. Out of packet, recorded: `pantheon_extinction` (the ONE flag-gated sibling) lighting
+unmeasured. [ALL CONFIRMED from receipt except the seed-rate, labeled PLAUSIBLE there]
+- **§874.5 RIDER — R4 · TE-GROWTH-MIG (GMIG) — ⛔ STOP RECLASSIFICATION, nothing built (read-only, no dock).**
+The lane returned **HOLD: owner's work on three independent grounds** — (a) PERSISTED-SHAPE:
+the fold re-keys live campaign state `spatialLedgers.npcGrowth[npcId]` →
+`characterDrift[wnpcId]`; a revert does not undo a world written through the flip; (b) a
+behavior move on a SHIPPED, LIT surface (3 of 7 presets; §856's own words anticipate a
+declared shift); (c) it DISSOLVES an open owner row (§867's signal×soul grain — choosing the
+grain IS the ruling). ⚠ NAMING CORRECTION TO THE DISPATCH BRIEF: the brief conflated
+`growthLedger.js` (map fabric, CAR-FOUND line only, NOT on this branch — its frozenRadius
+item is separately owner-parked §721.5/§722.12) with `npcGrowthKernel.js` (worldPulse, the
+actual charter). Census with denominators all CONFIRMED at `853e0e9ba` (8/8 signals · 3 src
+importers + 1 declared row · presets 3/7 · GROWTH_TUNING 13/13 unit-declared — NO lawful
+code-side slice exists). Blocker: the migration's destination existed on NO dockable tree at
+recon time — RESOLVED at this collection: the substrate CAS (§874) lands the W-LIVES funnel on the branch, discharging the BLOCKER half; the owner classification is untouched. Recommended sequencing if the owner
+signs: charter the flip with its own SHIFT RECORD + save-migration disposition, never as a
+lane car. Collision note for the eventual builder: the substrate touched `npcResidency.js` and
+the `acquiredTraits` readers. [ALL CONFIRMED from receipt]
+- **§874.6 RIDER — R5 · THE LANDING-PLANNING ARC (compact rider) — seven plans + the walk protocol + the
+skeptic pass, all read-only under the quiet window.** WHERE THEY LIVE (all in $SP):
+`laneT8LAND-plan.md` (T8·SHIFT + §860 routing act — first after substrate) ·
+`laneWARLAND-plan.md` (WAR-TRUTH consist, T4·SEAT-B + W-MEM-P1/P2, recommends ONE landing) ·
+`laneINSTRLAND-plan.md` (five-train instruments consist: INSTR-1/INSTR-2/BUD/RMAG/SP-W2, incl.
+bill A the prose RE-POINT and bill B the census) · `laneHYGLAND-plan.md` (engine-hygiene:
+VIRT→CEIL→AGN) · `laneFOLLOWLAND-plan.md` (character follow-ons: L7·O2·MAT·D4 — PROVISIONAL
+ON THE SUBSTRATE GATE, re-seal every target from the real CAS tip) · `laneT13-plan.md`
+(T13·TRANS: measured **50 sites/33 files** at `853e0e9ba`; design→panel→build; carries the
+owner REC draft — THE LAST same-seed mover) · `laneGOLDEN-plan.md` (TE-GOLDEN-1 freeze:
+freeze register + governed re-record door; carries REC-GOLDEN-1 with Q1–Q4) ·
+`WALK-PROTOCOL.md` (the four owner doors; the Q-S3 lighting packet; the ONE-REGEN
+constituent manifest — ⚠ the chair must RE-COMPILE it at dispatch, several rows predate the
+map descope; the four capture classes) · `PLANS-SKEPTIC-REPORT.md` + skeptic-t8-files/
+skeptic-keys-base/skeptic-keys-t4 (receipts).
+**THE SKEPTIC PASS (three plans attacked, refute-mode, all evidence executed):** WAR
+survived best (nothing load-bearing refuted). T8: 3 refuted (the base-drift census missed
+`proseNumerics.test.js` — THREE moved files, not two · the npcAgency 830 size-row NO LONGER
+EXISTS — substrate car deleted it, file at 794/800 layer rule, T8's car-2 budget is ≤+6
+lines · the substrate survey row stale at bill-1 when the tree is at 5b). INSTR: modeled its
+landing base as `853e0e9ba` and the model is three landings stale BY CONSTRUCTION — its §8
+halt rule fires unconditionally on ruled work, the census base tuple is dead (SUB tip already
+2477/371/2106/21802/5946), the `f6378cac6` "1,590 src files" figure false at the real tip,
+the foreign-drift classifier INVERTED (ruled landings do exactly what it calls foreign), the
+test-ratchet baseline is a THREE-WRITER file no plan listed, and its "third landing" position
+has NO ledger backing vs §871.2's order (chair ruling owed). Cross-plan couplings C1–C8
+mapped (one walker file three writers in sequence; one register four writers; bundles benign
+if WAR executes as written; drop-as-empty sets disjoint). RESOLVED at this collection: the queue-order ruling is §874.8's; the plan-fix pass applies AT EACH BOARDING against the live tip (T8's runs now via the dispatched pre-board lane).
+**THE CHAIR-BRIEF-ERROR STREAK, counted from the receipts (this compiler's count — the chair
+may re-scope): FIVE clear instances post-§872** — (1) GMIG: the brief conflated
+growthLedger/npcGrowthKernel [laneGMIG-receipt §2] · (2) BUD: the docket's figures were file
+wall times against a per-test clock — 3 of 5 named rows not in the class [laneBUD-receipt
+R2] · (3) RMAG: the charter's "all seven owed rows" — seven is the CEILING, the population
+is 6 [laneRMAG-receipt, denominator correction] · (4) T8: the dispatch's "six disagreement
+labels" — the six-label table has FIVE disagreeing, Prosperous agrees [laneT8LAND-plan §3,
+skeptic-confirmed at prosperityRank.test.js:308–326] · (5) GOLDEN: the dispatching brief's
+premise "walk + ONE regen precede the freeze" contradicts the ledger's ruled order
+(§764.3/§841/§871.2: freeze first) — and ONE_REGEN is the NAME of the re-record batch, not a
+runtime gate [laneGOLDEN-plan §4]. Borderline sixth: FOLLOWLAND sharpened the brief's own
+named-risk 158 B D4 margin to UNKNOWN (the brief flagged it; not strictly an error). The
+streak's earlier member (SP-W2's espionage gloss) is already collected at §872.1; the
+standing law there — **a dispatch brief POINTS at the charter, never paraphrases it** — is
+what this streak keeps proving. [streak items CONFIRMED individually from the named receipts]
+- **§874.7 RIDER — R6 · TE-MATERIAL-1 (MAT) — COMPLETE AND HOLDING; per the compile brief only post-§872
+content rides (⚠ see §6 discrepancy 1).** Tip `c90e0cb76` (2 cars on `853e0e9ba`:
+`d8809b24e` law+roster+wiring+45-test contract · `c90e0cb76` census + park finding + refreeze
+defect). THE BUILD: the four BLIND reference-pack categories (stressors 6 · deities 3 ·
+traditions 4 · factions 13 = the §866/INSTR-1 26) materialize into ONE version-gated ADDITIVE
+inert roster key `customContentRoster` — dark by default (`densityLaw` idiom, dial held at
+v1), because the fixture states adoption is FORBIDDEN by design; materialization ≠ adoption,
+and the four provenance surfaces ARE the F2c line (tripwired, not prosed). Aliveness
+STRICTLY NESTED: dark 0/26 → lit 26/26, escaped 0, in the repaired instrument's OWN anchor
+semantics (the R3 repair is NOT an ancestor of this line — extracted read-only, no sibling
+merge). Five conviction plants; ⭐ PLANT E is the one that matters: a flip-INVARIANT adoption
+leaves all 26 aliveness cases GREEN and only the F2c tripwire catches it — two arms each
+catching what the other misses. Three dormancy proofs character-for-character incl. probe C,
+THIS LANE'S OWN pack-bearing probe (probe A drives `customContent:{}` and cannot see this
+law in either arm — §713.2 honored one layer in). ⚠ measured: the law marker rides TWO
+config echoes (`config` AND `_config` — a first dormancy cut failed by exactly 29 bytes).
+⛔ THE PARK FINDING: predicted five, got FOUR wrong — the new file is PARKED
+(TEST_TABLE_UNPROVEN ×2 + TEST_CONTEXT_PARAM on `it.each`); a first cure converted both
+tables to literals and the file STILL parked (a partial hypothesis read as refuted; only the
+classifier probe settled it). Same class as INSTR-1's, now with mechanism: **a data-driven
+contract cannot be credited by this census at all** — 142 passing tests across two files
+counted in no title census; deliberately NOT worked around. ⚠ A DEFECT IN THE LIGHTING
+REFREEZE ITSELF, found by executing the ritual: `gitOut` trims the whole porcelain blob, so
+the FIRST line mis-slices and the register is not excluded from its own dirty-path check —
+the refreeze refuses itself precisely when the register is the only dirty path (= every
+re-refreeze). Named, not fixed (another lane's governed instrument). STILL OWED (owner/desk
+items → §5): the lighting decision (dial→v2) · the create-boundary car · the F2c adoption
+crossing · three persistence paths traced at lighting (publicSafe allowlist drops the roster
+from DM-shares · accountImportBody id-resolution · provenance receiptHash widening =
+persisted-shape). Ratchet delta stated as DELTA only: totalTests +45, totalFiles +1 —
+re-derive WHOLE at its landing. [ALL CONFIRMED from receipt]
+
+- **§874.8 THE LANDING-ORDER RULING, THE COLLECTION'S RESOLUTIONS, AND THE BOARD.** ⭐⭐ **RULING (chair, vetoable): the landing order is T8 → WAR → HYGIENE → INSTRUMENTS → FOLLOW-ONS, then the tail chains TAIL-O → TAIL-L → TAIL-F** (the follow-pack's three-chain proposal adopted; TAIL-F twice-gated — its surface was under wave 6's live edit and it re-derives D4's six bundles; O5-D's known-red row rides TAIL-O's plan). Rationale: INSTR's consist re-points instrument baselines with three sequential writers (skeptic couplings C1–C8) — it lands AFTER the content consists it would otherwise re-measure mid-flight, answering the skeptic's finding that its "third landing" position had no ledger backing; FOLLOW-ONS lands last because MAT/D4 re-price against every earlier consist and MAT's engine payload measured ≈3,763 B against a 677 B margin (red ~5×) — MAT boards only per FOLLOWLAND Q2's owner path if still red at its re-measure. Every plan receives the skeptic's drafted fix list at boarding, re-verified against the live tip (T8's pre-board verification lane dispatched at this collection). DISCREPANCY RESOLUTIONS (the compiler's four): (1) TE-MATERIAL-1 appears nowhere earlier in this ledger (chair-confirmed by grep) — §874.7 carries its FULL completion; (2) the owner desk of record is the compile's 25-line consolidation — carried to the HANDOFF card at this collection; (3) the GODFORTUNES verdict word **DEFAULT-ON (DATA-GATED): adopted** — the pack's two rows, legend bullet, counts line, and census-gap closure landed in THIS commit (docs/briefs/W-REGISTERS-PACK.md); (4) substrate bills 4/5/5b were appended late to the landing receipt with the gap owned — the commit messages remain authoritative. THE MEMORY FOLD EXECUTED (fold 25, md5-guarded — the guard held exactly): index 17,342→15,113 B; checks a–f ALL GREEN (7/7 folded rows byte-verbatim in the archive, 5/5 index-only hooks present, zero dangling links, the fold chain resolves); check (d) surfaced ELEVEN post-plan topic files — the plan's two anticipated plus seven wave-lane files plus this landing's two new laws — all given roster rows in `archive-2026-08-31-lane-rows-index.md`; the L40/MAP-LEG one-liner applied. THE BOARD AT COLLECTION: O5 HOLDING `ba5ef0f5e` (its ambient-reversal fork on the desk, §873.1) · O6 DISPATCHED (⭐ the packet row read FIRST: seat **Fable** — "Catalog registers for the pen (mission kinds, task rows, depth rates)") · T8 pre-board verification DISPATCHED (read-only, Fable) · O7 queues on O6's hold · both lanes were killed at birth by the usage-window reset and re-dispatched after a clean 529 survey (porcelain 0, no partial edits). DEFERRED, documented: the landed substrate worktree is RETAINED until the T8 pre-board lane finishes its greps against it (the removed-at-CAS law deliberately deferred; disk unpressured at 16 Gi) · VOICE-1b stays sequenced OUT of this collection (rides the INSTRUMENTS landing as bill A, per the skeptic's C3 wording rule). (2026-09-01; SEAT: Fable 5 — validated)

@@ -209,6 +209,12 @@ your reading; the code says `vice` / `virtue`.
 carried IN THE TABLE, so it can be checked rather than trusted:
 
 - **DEFAULT-ON (5)** — lit with no flag or with a flag true in the defaults.
+- **DEFAULT-ON, DATA-GATED (2)** — no rules flag exists anywhere in the chain, so **no preset can darken it**;
+  the gate is `isSubsystemActive(snapshot,'religion')` (`subsystemActivation.js:42-48`), a predicate over
+  AUTHORED content (`config.primaryDeitySnapshot` / `cultDeitySnapshots`). A deity-free realm emits nothing
+  for 156 ticks in all seven presets; a realm with four co-religionist settlements emits on tick 2 in all
+  seven. ⚠ `faithSpreadEnabled` changes the arc's SCORE (86→94 / 84→92) and NOT its existence — a flag-file
+  read would have filed these as PRESET (2). [Measured by R-GODFORTUNES, 2026-08-31; verdict word adopted at §874.]
 - **PRESET (n)** — receipted, lit in n of the six presets.
 - **DARK (3)** — the receipt is real machinery; its flag is lit in NO preset. Wire it; nothing comes.
 - **NO RECEIPT (12)** — nothing in the engine emits it. **The funnel REFUSES these at the door**
@@ -243,8 +249,8 @@ carried IN THE TABLE, so it can be checked rather than trusted:
 | home_occupied | AFFILIATION | realm | MERCY→callous firm · FIDELITY→loyal firm (siege solidarity) | **PRESET (2)** — the war layer is false in the defaults |
 | home_liberated | AFFILIATION | realm | CHEER→optimistic heavy · FORBEARANCE→forgiving faint | **PRESET (2)**, ⛔ **BLOCKED** |
 | coup_at_home | AFFILIATION | realm | TRUST→paranoid heavy · PRUDENCE→prudent faint | **DEFAULT-ON** ⭐ the fifth, and the only one on this plane |
-| god_fortunes_rose | AFFILIATION | creed | DEVOTION→pious firm | **RECEIPTED — LIGHTING UNMEASURED** ⚠ see the census gap below |
-| god_fortunes_fell | AFFILIATION | creed | DEVOTION→worldly firm | **RECEIPTED — LIGHTING UNMEASURED** ⚠ |
+| god_fortunes_rose | AFFILIATION | creed | DEVOTION→pious firm | **DEFAULT-ON (DATA-GATED)** — lit in all 7 presets; needs an authored patron deity |
+| god_fortunes_fell | AFFILIATION | creed | DEVOTION→worldly firm | **DEFAULT-ON (DATA-GATED)** — same gate; fires with `rose` on the same tick |
 | dwell_milieu (continuous) | WITNESS | milieu | all axes toward host's poles, faint × depth band — **the vector is the ADAPTER's, never the table's** | **PRESET (3)**, and it reaches **ONE dwell state** (see below) |
 | news_believed_atrocity | WITNESS | word | MERCY→callous faint · TRUST→paranoid faint | **NO RECEIPT, NO HABITAT** — belief observers and subjects are both SETTLEMENTS |
 | news_believed_triumph | WITNESS | word | CHEER→optimistic faint · COURAGE→brave faint | **NO RECEIPT, NO HABITAT** — the register's largest single gap |
@@ -254,7 +260,7 @@ carried IN THE TABLE, so it can be checked rather than trusted:
 
 **Counts, re-verified at L6 by counting the built table itself:** 31 kinds · planes personal **16**,
 affiliation **9**, witness **6** · families ordeal 5, bond 2, fall 1, career 4, house 4, realm 3, creed
-4, repute 2, word 3, milieu 2, silent 1 · **12** no-receipt · **3** dark · **5** default-on · **2**
+4, repute 2, word 3, milieu 2, silent 1 · **12** no-receipt · **3** dark · **5** default-on · **2** default-on-data-gated · **2**
 blocked · **2** ambient (must declare a dwell span).
 
 Family learn-rate ladder (candidate, heaviest first): **ordeal > bond > fall > career > house >
@@ -277,6 +283,9 @@ receipted rows whose PRESET LIGHTING **neither L3 nor L4 measured**. L3's four-b
 list them and L4's corrections did not reach them. Their lighting is therefore **unknown**, and it must
 be measured by EXECUTING the preset table, not by reading the flag files — that distinction is what
 moved four counts and one address at L4.
+**→ CLOSED (2026-08-31, R-GODFORTUNES, ledger §874 rider):** measured by EXECUTING the chains — ten arms;
+no rules flag exists in either chain; the only gate is authored deity data. Verdict rows above updated to
+**DEFAULT-ON (DATA-GATED)**; the source census needs no new row.
 
 ### REGISTER III-b — THE ADAPTER ADDRESSES (built; 18 rows, each verified in the tree)
 
