@@ -28,13 +28,19 @@
  * the affordance (useOwnerScopedSaves subscribes to savedSettlements, which the
  * action writes).
  *
+ * CLOSED (was the deferral below): the Health column no longer prints a live band
+ * beside the Destroyed mark. The fear was that suppressing it meant a SECOND change
+ * to the ledger's column grammar — it did not, because the cure is at the
+ * derivation: `livingWorldSignals.healthPip` returns null for a destroyed
+ * settlement, so the column falls to the dash it ALREADY renders when no system
+ * state can be derived. That also cures the two consumers the deferral never named
+ * (the toolbar's attention filter and its severity sort, which read the same
+ * derivation and could float a town that no longer exists).
+ *
  * DELIBERATELY DEFERRED, documented so nobody re-finds it as a bug:
- *   • The Health column still reads the band derived from the settlement blob, so
- *     a destroyed town can show "Stable" beside its Destroyed mark. Suppressing or
- *     re-tensing that column is a SECOND change to the ledger's column grammar and
- *     was left out of the mark's diff deliberately; the same goes for surfacing
- *     `destroyedCause` on the row (it is recorded on the settlement and in the
- *     DESTROY_SETTLEMENT log entry, and the dossier is where a cause is read).
+ *   • `destroyedCause` is still not surfaced on the row. It is recorded on the
+ *     settlement and in the DESTROY_SETTLEMENT log entry, and the dossier is where
+ *     a cause is read.
  *   • The affordance is offered on CANON rows only (a vetoable judgment). On a
  *     draft, the action's own `phase: currentCampaignState.phase || 'canon'`
  *     would open a campaign timeline behind the GM as a side effect of destroying
