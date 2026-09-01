@@ -475,12 +475,67 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // registration costs would. MEASURED at the ratification: 1,041,284 across the
 // closure, T12's tip green on this row, so the whole delta is the train's own.
 // Monotone-down and owner-signed discipline unchanged.
-const CLOSURE_BUDGET_BYTES = 1_042_000;
+//
+// ── RAISE 1,042,000 -> 1,047,000 (OWNER-RATIFIED 2026-09-01, the SUBSTRATE COUPLING) ──
+// THE DECLARED COST IS THE CHARACTER/FAITH SUBSTRATE'S GENUINELY-EAGER REMAINDER, AND
+// "REMAINDER" IS THE LOAD-BEARING WORD: this is what is left AFTER two extractions, not
+// the landing's raw overrun. The coupling measured 1,054,284 at its tip (+12,284), and
+// the +12,656 against its base decomposed as 10,535 B of newly-eager modules, 1,974 B of
+// growth inside already-eager ones, and 147 B of corruption.js in engine-core.
+//   • REC-1 (-7,234) moved the faith causal binding — the channel→variable register, the
+//     total reader, the lift and CAUSAL_SWING — into the zero-import leaf
+//     worldPulse/faithChannelBindings.js, so the EAGER causalState.js stopped dragging
+//     the field kernel AND worldPulse/piety.js (28,584 B, lazy since it was written).
+//   • REC-2 (-681) did the same for domain/deityCommitEmbed.js, so the EAGER mutation
+//     router stopped dragging deitySnapshot.js's authoring and restore halves.
+//   • ⛔ NEITHER WAS CURABLE BY PLACEMENT, and that was proved by execution rather than
+//     by citing FP-G17: pinning the newly-eager modules to a dedicated lazy chunk made
+//     the closure 291 B WORSE, because an eager importer re-parents its own lazy chunk.
+//     A genuinely-eager static edge admits only the WAVE-D cure — move the FUNCTION.
+// What remains is registration cost no extraction can remove: the two leaves' own bytes,
+// causalState's new deriver, mutateEntities' two new call sites, the store helpers, and
+// corruption.js. MEASURED at the ratification: 1,046,369 across the same 8 chunks —
+// 631 B under this ceiling, i.e. this raise funds the remainder and nothing else.
+//
+// ⛔⛔ THE UNRELATED RECLAIM WAS REFUSED, AND THAT REFUSAL IS WHY THIS IS A RAISE RATHER
+// THAN A GREEN ROW. Wave 5 measured a 12-member ENGINE_SHARED_DOMAIN reclaim worth
+// -26,546 B that would have cleared this budget in one placement-only commit, honest by
+// the FP-G16 bar. It was refused because ESD is byte-identical base-to-tip: those holes
+// pre-date this coupling by many landings, and spending them to absorb this landing's
+// honest +12,656 would bank a baseline in which the overrun never happened — a gate that
+// goes green on someone else's headroom has measured nothing. It is chartered separately
+// as REC-3, each member still owing its own semantic pin (the FP-G11 law), and it is the
+// owner's move, not a lane's. Monotone-down and owner-signed discipline unchanged.
+const CLOSURE_BUDGET_BYTES = 1_047_000;
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
 // Brotli 269,548. The ~5% platform margin absorbs zlib-version variance while
 // still catching a payload that is raw-small but compression-hostile.
+//
+// ── (2026-09-01, THE SUBSTRATE COUPLING) BOTH CEILINGS HOLD — THE RAISE WAS MEASURED
+//    AND THEN REFUSED, AND THE MEASUREMENT IS WHY ────────────────────────────────────
+// The wave that raised the raw budget above was chartered to raise these two with it,
+// on wave 5's finding that they sat UNDER 1.9 kB from red (gzip 335,162 / Brotli
+// 281,122 at the uncured tip). ⭐ THE CURES CHANGED THAT INPUT. Measured at the cured
+// tip, on the same eight chunks the raw figure above comes from:
+//     gzip     332,064 / 337,000   —  4,936 B of margin (1.486 %)
+//     Brotli   278,569 / 283,000   —  4,431 B of margin (1.590 %)
+// i.e. 2.6x and 2.4x the margin wave 5 warned about. The reason for the raise had
+// evaporated by the time the raise was due, so raising anyway would have been the
+// INCIDENTAL raise the line above this one forbids in terms.
+// ⚠ THE OTHER TWO CANDIDATES WERE COMPUTED RATHER THAN WAVED AWAY, so a chair or owner
+// who disagrees can act on arithmetic rather than re-measure:
+//   • measured + the RAW BUDGET's own proportional margin (1,047,000/1,046,369 =
+//     +0.0603 %) gives 332,264 / 278,737. That is a LOWERING, constitutionally free —
+//     and REFUSED, because it would cut this pair's variance absorber from 1.5 % to
+//     0.06 %. These ceilings' declared job is to survive a zlib-version bump; a ratchet
+//     that reds on a toolchain upgrade has stopped measuring the payload.
+//   • measured + this pair's OWN declared ~5 % platform margin (337,000/321,341 =
+//     1.04873; 283,000/269,548 = 1.04990) gives 348,300 / 292,500. That IS a raise, and
+//     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
+// Leaving both untouched is the only one of the three that neither spends owner headroom
+// nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
 const CLOSURE_GZIP_BUDGET_BYTES = 337_000;
 const CLOSURE_BROTLI_BUDGET_BYTES = 283_000;
 
