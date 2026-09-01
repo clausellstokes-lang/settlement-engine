@@ -151,6 +151,11 @@ const EXEMPTIONS = {
   'src/components/map/useWorldMapCampaignModel.js': 'campaign-or-import-entitlement',
   'src/components/new/tabs/RumorsTab.jsx': 'content-visibility',
   'src/components/new/tabs/WarFaithTab.jsx': 'content-visibility',
+  // W-FAITH F7c: the T11 shell grafted verbatim onto this line. FaithTab mirrors
+  // FaithSection's mode resolution to decide the honest-absence note — the same
+  // content-visibility question the combined tab above carries (upstream's own
+  // exemption row for the §805 split, carried with the graft).
+  'src/components/new/tabs/FaithTab.jsx': 'content-visibility',
   'src/components/pricing/FounderTile.jsx': 'sell-to-the-tier',
   'src/components/pricing/PricingTierCards.jsx': 'sell-to-the-tier',
   'src/components/session/SessionMode.jsx': 'content-visibility',
