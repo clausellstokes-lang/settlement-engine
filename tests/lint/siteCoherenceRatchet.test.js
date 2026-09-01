@@ -525,7 +525,16 @@ describe('site-coherence contradiction ratchet (Wave 0 — inventory freezing, n
     // an edit, so any motion here is an out-of-scope ratchet edit.
     expect(registry.classFloor, 'classFloor moved — a floor edit is out of SCW-0\'s scope').toBe(27);
     expect(registry.machineryFloor, 'machineryFloor moved — a floor edit is out of SCW-0\'s scope').toBe(9);
-    expect(registry.documentBaseline, 'documentBaseline moved').toBe(6);
+    // ⭐ 6 -> 5 at the INSTRUMENTS consist landing (2026-09-01): HZ-SERVICECAT converted
+    // DOCUMENT -> MACHINERY, and `documentBaseline` is the ONE literal the estate holds
+    // EXACT (the registry's own `_doc`: "EXACT-SHRINK-ONLY for the wholly unenforced
+    // pile"). Leaving it at 6 against a live count of 5 would BANK A FREE DOCUMENT SLOT —
+    // a gate that then admits the next undefended class in silence, which is the precise
+    // habitat the conversion exists to close. This move is a SHRINK and therefore lawful
+    // under the ratchet's own direction; `classFloor`, `machineryFloor` and `owedBaseline`
+    // are deliberately NOT touched, because they already carry slack today and tightening
+    // them is the out-of-scope ratchet edit the comment above forbids.
+    expect(registry.documentBaseline, 'documentBaseline moved — it is EXACT-shrink-only, so it moves only with a DOCUMENT class leaving the pile').toBe(5);
     expect(registry.owedBaseline, 'owedBaseline moved').toBe(18);
   });
 });

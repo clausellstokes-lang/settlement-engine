@@ -51,7 +51,7 @@
   ],
   "measuredAtSha": "bd5e49f6f34a486c460bc0fdcd0f8c6441550996",
   "measuredAtDate": "2026-08-07",
-  "documentBaseline": 6,
+  "documentBaseline": 5,
   "owedBaseline": 18,
   "machineryFloor": 9,
   "classFloor": 27,
@@ -268,7 +268,7 @@
         "any file matching tests/**/*.contract.test.*",
         "any new tests/lint/*.test.js"
       ],
-      "upgradePath": "This is what every DOCUMENT-status vacuity class should look like. Use as the shape template when upgrading HZ-DEADBAND and HZ-SERVICECAT."
+      "upgradePath": "This is what every DOCUMENT-status vacuity class should look like. Use as the shape template when upgrading HZ-DEADBAND and HZ-SERVICECAT. ⭐ 2026-09-01: HZ-SERVICECAT took this shape and is now MACHINERY, so HZ-DEADBAND is the one that still owes it."
     },
     {
       "id": "HZ-NETCURRENT",
@@ -382,18 +382,18 @@
     {
       "id": "HZ-SERVICECAT",
       "title": "An unregistered institution-service name NEVER reds — it silently defaults to 'equipment'",
-      "status": "DOCUMENT",
+      "status": "MACHINERY",
       "acceptedReason": null,
       "memory": ["service-rng-law-and-silent-category-fallthrough.md"],
-      "enforcer": { "paths": [], "inChain": false, "note": "ZERO enforcement — `grep -rl SERVICE_CATEGORY_MAP tests/` returns no files." },
+      "enforcer": { "paths": ["tests/lint/serviceCategoryRegistration.walker.test.js"], "inChain": true, "note": "CONVERTED DOCUMENT → MACHINERY at the INSTRUMENTS consist landing, 2026-09-01, on a re-measurement rather than a memory. The walker that closes this class landed at `0f7424f73` ('The service classifier gets its census, and the disclosed shift that moved nothing') and this row went on saying ZERO ENFORCEMENT for every commit since — the register lagging a cure that had already landed, which is this row's own defect class arriving one level up. RE-MEASURED at the landing base `8b07ce45f`: the walker EXISTS on disk (34,104 B) and `SERVICE_CATEGORY_MAP` has 21 references under `tests/` across 3 files — 19 in the walker itself, 1 in sovereigntyLightingContract.walker.test.js, 1 in generatorGoldenMaster.test.js — against 8 files tree-wide including the two producers src/generators/services/serviceCategoryTables.js and serviceClassifier.js. ⚠ THE SHA ABOVE IS THIS ROW'S OWN PROVENANCE AND IS DELIBERATELY CARRIED IN PROSE: no row in this register has a per-row measuredAtSha field and minting one here would fork a governed register's schema for a single row, so the note — the field that actually lied — is where the provenance goes. The envelope's `measuredAtSha` is NOT advanced: the other 28 rows really were measured at `bd5e49f6f` and its staleness is the honest record of that." },
       "instances": 3,
-      "instanceEvidence": "CONFIRMED by grep at HEAD: no test file references SERVICE_CATEGORY_MAP. Memory states 'three live mis-folds measured, no walker exists.' Sibling law in the same file: adding an institution service MOVES GOLDENS unless on:false, and `p >= 1` is NOT stream-neutrality at a criminal provider (156/525 rows).",
+      "instanceEvidence": "⛔ SUPERSEDED 2026-09-01, and the superseded sentence stays as the record of what was true when it was written. IT SAID: 'CONFIRMED by grep at HEAD: no test file references SERVICE_CATEGORY_MAP' — true at the 2026-08-07 envelope sha `bd5e49f6f`, false from `0f7424f73` onward. LIVE: 21 references across 3 test files, the census walker among them. The three measured mis-folds are the instances this class counts and they are now covered by a totality walker rather than by a memory. Sibling law in the same memory file, unchanged and still uncovered by this row: adding an institution service MOVES GOLDENS unless on:false, and `p >= 1` is NOT stream-neutrality at a criminal provider (156/525 rows).",
       "triggers": [
         "any addition to the institution-services catalog",
         "any change under src/generators/ touching service names",
         "any run of gen:institution-service-keys"
       ],
-      "upgradePath": "TOP OWED WALKER: 3 measured instances, zero enforcement, trivially-shaped cure (a totality walker over SERVICE_CATEGORY_MAP). Already queued as open task #33."
+      "upgradePath": "⭐ DISCHARGED 2026-09-01 — the upgrade this row described was BUILT at `0f7424f73` and the row simply never noticed. It read: 'TOP OWED WALKER: 3 measured instances, zero enforcement, trivially-shaped cure (a totality walker over SERVICE_CATEGORY_MAP). Already queued as open task #33.' The cure landed in exactly the shape prescribed, and the status flip at this landing is the register catching up to it. WHAT IS STILL OWED, so that MACHINERY is not read as more than it is: the walker covers the CATEGORY REGISTRATION totality, not the sibling golden-movement law recorded in the same memory file — that law has no enforcer and belongs to a different class if anyone charters one."
     },
     {
       "id": "HZ-GROUNDMOVE",
