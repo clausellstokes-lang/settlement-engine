@@ -13,17 +13,42 @@
  *
  * So fence 1 is restated at the level where the claim actually lives:
  *
- *   FENCE 1 — THE IMPORT-CLOSURE CENSUS (own-footprint). No production module under
- *     src/ imports the espionage set or the two shared leaves' espionage-facing use.
- *     For a subsystem with no caller this is STRICTLY STRONGER than a state pin: a
- *     state pin passes on a quiet fixture, while this fails the moment a caller exists
- *     — which is exactly the commit that owes a real fence-1. Its guard-the-guard is a
- *     positive control: the detector must FIND the imports that do exist (this file's,
- *     and the unit tests').
- *     ⚠ ITS LIMIT, STATED: it sees static `from '…'` specifiers only. A dynamic
- *     `await import()` would cross it unseen, exactly as it crosses the coupling
- *     inclusion ratchet's own scan. When ES-1 mounts a real caller, this fence is
- *     REPLACED by a driven byte-identity golden, not extended.
+ *   ⭐⭐ FENCE 1 — REPLACED AT THE SUBSTRATE COUPLING, BY ITS OWN INSTRUCTION. Until this
+ *     commit fence 1 was an IMPORT-CLOSURE CENSUS asserting that NO production module
+ *     imports the espionage set, and its own failure message named its successor: "the
+ *     espionage layer gained a caller — this fence is now the wrong fence: replace it
+ *     with a driven byte-identity golden in the commit that added the caller." W-OPS car
+ *     O1 added that caller — `operations/missionDispatcher.js` imports
+ *     `DOCTRINE_TARGETINGS`, `DELIBERATION_VERDICTS` and `deliberationRead` — so the
+ *     emptiness claim is now FALSE and the census is retired rather than widened.
+ *
+ *     ⛔⛔ AND THE CALLER IS NOT THE CALLER THE OLD TEXT ANTICIPATED, WHICH CHANGES WHAT
+ *     AN HONEST REPLACEMENT LOOKS LIKE. The text was written for ES-1 mounting a caller
+ *     on a LIVE path. MEASURED here instead: `missionDispatcher.js` has ZERO src
+ *     importers of its own, imports the espionage set's ARITHMETIC AND VOCABULARY and
+ *     NOT its gate, and never reads `espionageEnabled` at all. So the import chain
+ *     TERMINATES one hop further out than it used to, and lighting the espionage flag
+ *     cannot reach the new edge even in principle.
+ *
+ *     THE REPLACEMENT IS THEREFORE TWO ARMS, and the second is the load-bearing one:
+ *       (a) THE DRIVEN GOLDEN — 360 settlements (six tiers x four route accesses x
+ *           fifteen seeds, MAT probe-C's shape) driven at this tip must hash to
+ *           `PRE_COUPLING_CORPUS_SHA`, executed in a `git archive` of committed
+ *           `853e0e9ba`, whose tree carries no `operations/` directory at all.
+ *       (b) THE REACHABILITY CHAIN — the espionage set's src importer set is EXACTLY
+ *           `[missionDispatcher.js]`, and THAT module's src importer set is EMPTY.
+ *
+ *     ⚠⚠ ARM (a)'s REACH IS DECLARED, NOT ASSUMED, because §713.2 rules that a dormancy
+ *     instrument can pass by comparing nothing. MEASURED with a loader hook over the
+ *     real graph: the corpus loads 213 modules and reaches exactly TWO of the coupling's
+ *     35 touched src files (`corruption.js`, `customContentSchema.js`) — and NONE of the
+ *     espionage set, the dispatcher, or the npc/worldPulse cars. ⇒ ARM (a) IS A
+ *     CONTAINMENT PROOF, NEVER A DORMANCY ONE, and it is shipped saying so. Its
+ *     discrimination is not argued either: a planted `corruption.js` flaw-vector swap
+ *     moves the corpus sha and restoring it moves it back (recorded in the lane receipt).
+ *     ⚠ Its limit is inherited: the chain scan sees static `from '…'` specifiers only, so
+ *     a dynamic `await import()` crosses it unseen, exactly as it crosses the coupling
+ *     inclusion ratchet's own scan.
  *
  *   FENCE 2 — DIFFERENTIAL, ABSENT vs EXPLICIT FALSE, over the whole door matrix. No
  *     fixture, so it cannot rot. Its designed blind spot is that it stays green if the
@@ -52,15 +77,20 @@
  *   THE LIT MUTANT. A flag that can never be lit is a dead flag wearing a dormancy
  *     fence's clothes, and every assertion above would pass over it. So the set closes
  *     by satisfying all three doors and requiring the gate to open — and by requiring
- *     fences 1, 3 and 4 to STAY GREEN with it open, which is the whole content of "dark
- *     by construction": lighting a flag nothing reads moves nothing.
+ *     fences 3 and 4 AND fence 1's reachability chain to STAY GREEN with it open, which
+ *     is the whole content of "dark by construction": lighting a flag nothing reads moves
+ *     nothing. ⚠ RE-SHAPED at the coupling: its fence-1 re-statement used to be "the src
+ *     importer set is still empty", which is no longer true of ANY tree; it is now "the
+ *     chain still terminates", which is the claim that survived the caller's arrival.
  */
+import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test, vi } from 'vitest';
 
 import { codeOnly } from '../lint/engineGatedRuleKeys.walker.test.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 /** FENCE 3's recorder. Hoisted, because vi.mock factories hoist above the imports. */
 const calls = { doctrine: 0, catchRolls: 0 };
@@ -150,14 +180,112 @@ function world({ canon = 1, infoMode = 'unreliable', spine = true, espionage = t
   };
 }
 
-describe('FENCE 1 — the import-closure census (own-footprint, for a wave with no caller)', () => {
-  test('NO production module imports the espionage set', () => {
-    // anchored: the positive control below proves this detector finds real importers, so
-    // the emptiness here is a measurement rather than a broken scan.
-    expect(importersOf(SRC_FILES), 'the espionage layer gained a caller — this fence is now the wrong fence: replace it with a driven byte-identity golden in the commit that added the caller').toEqual([]);
-  });
+/** THE ONE CALLER W-OPS car O1 added, and the only one this fence admits. */
+const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
 
-  test('guard the guard: the detector DOES find the importers that exist', () => {
+/**
+ * ⛔ THE PRE-COUPLING CORPUS GOLDEN. Executed against a `git archive` of committed
+ * `853e0e9ba` — the base this landing was built on, whose tree carries NO
+ * `src/domain/worldPulse/operations/` directory at all, so the espionage set had no src
+ * importer there and this number is a measurement of a world the caller never touched.
+ * ⛔ THIS NUMBER MOVING IS A STOP, NEVER A RE-RECORD.
+ */
+const PRE_COUPLING_CORPUS_SHA = 'a5207e2915011bd6ef1bfde43dc82c6a6af1921d814bd32b3792c14c5f835bcb';
+
+const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
+const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
+const CORPUS_SEEDS = 15;
+
+/** Key-sorted structural serializer — the corpus hash is over THIS form, not JSON order. */
+function stable(v) {
+  if (v === null || typeof v !== 'object') return JSON.stringify(v) ?? 'null';
+  if (Array.isArray(v)) return `[${v.map(stable).join(',')}]`;
+  return `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${stable(v[k])}`).join(',')}}`;
+}
+const sha = (s) => createHash('sha256').update(s).digest('hex');
+
+/**
+ * Which files import `spec` (a repo-relative module path), by static specifier. Two
+ * spellings are admitted and no more: the directory-qualified tail, and a SIBLING's bare
+ * `./name.js` — a bare basename anywhere else would convict a same-named module in
+ * another directory, which is the substring class this landing has met six times.
+ * @param {{rel: string, src: string}[]} files @param {string} spec @returns {string[]}
+ */
+function importersOfModule(files, spec) {
+  const parts = spec.split('/');
+  const twoDeep = parts.slice(-2).join('/');
+  const sibling = `./${parts[parts.length - 1]}`;
+  const dir = parts.slice(0, -1).join('/');
+  const hits = [];
+  for (const { rel, src } of files) {
+    if (rel === spec) continue;
+    for (const match of src.matchAll(IMPORT_RE)) {
+      const specifier = match[1];
+      const isSibling = specifier === sibling && rel.startsWith(`${dir}/`);
+      if (specifier.endsWith(`/${twoDeep}`) || isSibling) { hits.push(rel); break; }
+    }
+  }
+  return hits.sort();
+}
+
+describe('FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates', () => {
+  test('THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus', () => {
+    const rows = [];
+    for (const tier of CORPUS_TIERS) {
+      for (const route of CORPUS_ROUTES) {
+        for (let i = 0; i < CORPUS_SEEDS; i += 1) {
+          const seed = `SUBw4-fence1-${tier}-${route}-${String(i).padStart(3, '0')}`;
+          const settlement = generateSettlementPipeline(
+            { settType: tier, tier, tradeRouteAccess: route, culture: 'germanic' }, null, { seed },
+          );
+          rows.push(`${tier}\t${route}\t${seed}\t${sha(stable(settlement))}`);
+        }
+      }
+    }
+    // ⭐ ANTI-VACUITY FIRST, because a corpus that errored or collapsed would hash
+    // stably to a wrong constant and read as a pass. The row count is the shape, and
+    // the DISTINCT count is the discrimination: 360 identical settlements would be a
+    // generator that stopped seeing its seed, and this arm would never say so.
+    expect(rows).toHaveLength(CORPUS_TIERS.length * CORPUS_ROUTES.length * CORPUS_SEEDS);
+    expect(rows.filter((row) => row.includes('\tERROR:')), 'the corpus threw').toEqual([]);
+    expect(new Set(rows.map((row) => row.split('\t')[3])).size, 'the corpus stopped discriminating seeds')
+      .toBe(rows.length);
+    expect(
+      sha(rows.join('\n')),
+      'THE PRE-COUPLING CORPUS MOVED. This is a STOP, not a re-record: the golden was'
+      + ' executed in a git archive of 853e0e9ba, and the coupling — the espionage'
+      + " caller included — is claiming it moved no byte of the world a player gets."
+      + ' Find the mover before touching this constant.',
+    ).toBe(PRE_COUPLING_CORPUS_SHA);
+  }, 120_000);
+
+  test('THE REACHABILITY CHAIN terminates, and the detector that says so is not blind', () => {
+    // ⛔ THE CLAIM THAT REPLACED "NOBODY IMPORTS IT". The set has exactly ONE src
+    // importer and that importer has NONE, so no engine entry point reaches the layer.
+    expect(
+      importersOf(SRC_FILES),
+      'the espionage set gained a SECOND src importer, or lost the one it has. This fence'
+      + ' admits exactly one, because exactly one is what the chain argument covers —'
+      + ' a new importer needs its own reachability reading, not a wider roster.',
+    ).toEqual([THE_CALLER]);
+    expect(
+      importersOfModule(SRC_FILES, THE_CALLER),
+      'the one admitted caller ACQUIRED a caller of its own — the chain no longer'
+      + ' terminates and the espionage layer is reachable from production.',
+    ).toEqual([]);
+    // ⭐ AND THE EDGE IS ARITHMETIC, NOT THE GATE — which is why lighting the flag cannot
+    // reach it. The caller takes the doctrine vocabulary and the deliberation read; it
+    // does not import `espionageGate.js` and never names the flag.
+    const caller = SRC_FILES.find((f) => f.rel === THE_CALLER);
+    expect(caller, 'the admitted caller vanished from the tree').toBeTruthy();
+    expect(caller.src).toContain('DOCTRINE_TARGETINGS');
+    expect(caller.src).toContain('deliberationRead');
+    // anchored: the two toContain assertions directly above prove this same source string is live and populated, so an unreadable or renamed leaf reds there rather than certifying the gate unimported here
+    expect(caller.src).not.toContain('espionageGate.js');
+    // anchored: same live source, same two positives above — an empty read cannot reach this line
+    expect(caller.src).not.toContain(FLAG);
+    // GUARD THE GUARD: the detector must FIND the importers that exist, or every
+    // enumeration above is a broken scan reporting a clean tree.
     const testImporters = importersOf(TEST_FILES);
     expect(testImporters.length, 'the scan found nothing anywhere — it is broken, not clean').toBeGreaterThan(2);
     expect(testImporters).toContain('tests/domain/espionageMath.test.js');
@@ -165,10 +293,7 @@ describe('FENCE 1 — the import-closure census (own-footprint, for a wave with 
     // NOTE this file is NOT in that list, and the omission is correct: it reaches the
     // set through `vi.mock` + dynamic `await import`, which is exactly the blind spot
     // fence 1's header declares. Asserting its absence keeps the limit honest.
-    // anchored: the two toContain assertions above prove this very list is populated
-    // with real importers, so this absence measures the dynamic-import blind spot
-    // rather than an empty scan.
-    // anchored: the two toContain assertions above prove this list is populated.
+    // anchored: the two toContain assertions above prove this very list is populated with real importers, so this absence measures the dynamic-import blind spot rather than an empty scan
     expect(testImporters).not.toContain(relative(ROOT, fileURLToPath(import.meta.url)).replace(/\\/g, '/'));
     // And the scan really is scoped to consumers OUTSIDE the set: the doctrine leaf
     // imports the shared vocabulary, and that is not a consumer edge.
@@ -314,8 +439,13 @@ describe('THE LIT MUTANT — the gate can be opened, and opening it moves nothin
     expect(espionageActive(lit)).toBe(true);
     // FENCE 3, re-run lit: opening a gate nothing reads calls nothing.
     expect(calls.doctrine + calls.catchRolls).toBe(0);
-    // FENCE 1, re-stated: the source tree does not change when a flag is set, and that
-    // is the point — the darkness is structural, not conditional.
-    expect(importersOf(SRC_FILES)).toEqual([]);
+    // ⚠ FENCE 1, RE-STATED AT THE COUPLING. This arm used to assert the src importer set
+    // was EMPTY with the gate open — a claim that is no longer true of ANY tree, so
+    // re-asserting it here would have been the same wrong fence in a second place. The
+    // claim that SURVIVED the caller's arrival is the one restated: the chain still
+    // terminates. The source tree does not change when a flag is set, and that is the
+    // point — the darkness is structural, not conditional.
+    expect(importersOf(SRC_FILES)).toEqual([THE_CALLER]);
+    expect(importersOfModule(SRC_FILES, THE_CALLER)).toEqual([]);
   });
 });
