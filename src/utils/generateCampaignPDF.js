@@ -14,6 +14,7 @@
  */
 import { jsPDF } from 'jspdf';
 import { formatCount } from '../domain/formatNumber.js';
+import { resolveSettlementCulture } from '../domain/resolveCulture.js';
 import { autoLayout } from './graphLayout.js';
 import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relationshipGraph.js';
 import { REL_RGB, relRgb } from '../components/settlements/relationshipColors.js';
@@ -194,7 +195,7 @@ function buildCover(d, campaign, settlements, generatedLabel) {
     tierCounts[tier] = (tierCounts[tier] || 0) + 1;
     totalPop += Number(s.settlement?.population) || 0;
     totalNPCs += (s.settlement?.npcs || []).length;
-    if (s.settlement?.culture) cultures.add(s.settlement.culture);
+    const cul = resolveSettlementCulture(s.settlement); if (cul) cultures.add(cul);
   }
 
   // Two-column stat grid
@@ -296,7 +297,7 @@ function buildIndex(d, campaignName, settlements, pageN) {
     d.setFont('helvetica','normal'); d.setFontSize(7); st(d, BROWN);
     d.text(truncate(st_.tier || '-', 14), ML + 65, y);
     d.text(String(formatCount(Number(st_.population) || 0)), ML + 95, y);
-    d.text(truncate(String(st_.culture || '-').replace(/_/g,' '), 20), ML + 118, y);
+    d.text(truncate(String(resolveSettlementCulture(st_) || '-').replace(/_/g,' '), 20), ML + 118, y);
 
     d.setFont('helvetica','bold');
     st(d, links > 0 ? GOLD : MUTED);
@@ -570,7 +571,7 @@ function buildDigest(d, campaignName, settlements, pageN) {
     const pops = formatCount(Number(st_.population) || 0);
     const right1 = `${pops} pop`;
     const right2 = s(st_.tier || '');
-    const right3 = s(String(st_.culture || '').replace(/_/g,' '));
+    const right3 = s(String(resolveSettlementCulture(st_) || '').replace(/_/g,' '));
     const pw1 = pill(right1);
     const pw2 = pill(right2);
     const pw3 = pill(right3);
