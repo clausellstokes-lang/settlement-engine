@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 199;
+export const MIGRATION_TRAIN_REPO_HEAD = 200;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -487,6 +487,30 @@ export const MIGRATION_WAVES = Object.freeze([
     }),
     expectedObjects: Object.freeze([
       Object.freeze({ kind: 'function', name: 'report_referral_funnel' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'deity-authored-character-check',
+    from: 200,
+    to: 200,
+    purpose: 'W-FAITH F1c\'s legacy-table half (the 049/056 idiom): ONE re-stated CHECK '
+      + 'on public.custom_content admitting the deity\'s authored character — '
+      + 'authoredTemper (optional; warlike/peacelike/neutral; absent reads as "derive"), '
+      + 'the paradigm-chart positions, and the typed boon/bane pairs. It creates no '
+      + 'table, no column, no function, no policy and writes no row — DROP CONSTRAINT '
+      + 'IF EXISTS then ADD CONSTRAINT custom_content_deity_axes_check is the whole '
+      + 'wave. The JS admission wall, the edge validator and migration 185\'s '
+      + '_custom_content_record_valid already refuse the same malformed values, so '
+      + 'this is the only half of the law not yet true in production. Reviewed at the '
+      + 'SUBSTRATE landing when the scope sentinel demanded the manifest extend; '
+      + 'DEPLOYMENT remains the owner\'s manual act, and until it the repo head '
+      + 'sits visibly ahead of the applied head by design.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: FORWARD_ONLY_REASON,
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'table', name: 'public.custom_content' }),
     ]),
   }),
 ]);

@@ -61,7 +61,12 @@ const LAYERS = [
   {
     name: 'domain kernel (pure)',
     roots: ['src/domain'], exts: /\.js$/,
-    exempt: ['src/domain/clock.js'], // the sole sanctioned wall-clock seam
+    // clock.js: the sole sanctioned wall-clock seam. The generated admission
+    // projection joined eslint.config.js's ignores at the SUBSTRATE landing (it is
+    // regenerated and BYTE-CHECKED by validate:custom-content-manifest in the gate,
+    // so lint buys nothing regeneration does not prove) — an ignored file has NO
+    // resolvable config, so it walks through this door with that same reason.
+    exempt: ['src/domain/clock.js', 'src/domain/content/customContentAdmission.generated.js'],
     required: [MATH_RANDOM, IMPORT_META, NEW_DATE, DATE_NOW, LOCALE_COMPARE],
     forbidden: [],
   },
@@ -155,6 +160,16 @@ describe('determinism eslint-ban coverage (last-wins shadow guard)', () => {
       const bad = [];
       for (const abs of files) {
         const cfg = await eslint.calculateConfigForFile(abs);
+        // An eslint-IGNORED file resolves NO config at all (flat config returns
+        // undefined) — which means no determinism ban covers it. That is a FINDING,
+        // never a crash: a thrown beforeAll converts every test here into a skip,
+        // which is exactly the blindness the scope sentinel exists to refuse.
+        if (!cfg) {
+          bad.push(`${norm(abs)}: IGNORED by eslint.config.js — no determinism ban can `
+            + 'cover an ignored file. Exempt it here with the ignore\'s own reason, or '
+            + 'remove it from the ignores.');
+          continue;
+        }
         const { severity, selectors } = readRule(cfg);
         const missing = layer.required.filter((s) => !selectors.includes(s));
         const leaked = layer.forbidden.filter((s) => selectors.includes(s));

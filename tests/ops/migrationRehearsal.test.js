@@ -75,7 +75,7 @@ describe('bounded migration rehearsal plan', () => {
 
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
     expect(plan.appliedHead).toBe(121);
-    expect(plan.repoHead).toBe(199);
+    expect(plan.repoHead).toBe(200);
     expect(plan.pendingCount).toBe(78);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
@@ -96,6 +96,7 @@ describe('bounded migration rehearsal plan', () => {
       [197, 197],
       [198, 198],
       [199, 199],
+      [200, 200],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
@@ -267,13 +268,29 @@ describe('bounded migration rehearsal plan', () => {
     // on the money path was the refused alternative. Its `expectedObjects` is therefore a
     // single function, and it is pinned here rather than left to the relative walk above so
     // that a later wave appended past it cannot quietly inherit this row's identity.
-    expect(plan.waves.at(-1)).toMatchObject({
+    // (The SUBSTRATE landing appended wave 200 past it — exactly the event this pin
+    // anticipated — so the pin re-points BY ID, and the new tail takes its own pin below.)
+    expect(plan.waves.find((wave) => wave.id === 'referral-funnel-report')).toMatchObject({
       id: 'referral-funnel-report',
       from: 199,
       to: 199,
       expectedObjects: [{
         kind: 'function',
         name: 'report_referral_funnel',
+      }],
+    });
+    // ⭐ THE NEW TAIL WAVE (200, W-FAITH F1c): one re-stated CHECK on the legacy
+    // custom_content table — the deity's authored character admitted at the database
+    // wall, the 049/056 idiom. No table, no column, no function, no row; the JS wall
+    // and migration 185 already enforce the same law, so this is its only
+    // not-yet-true-in-production half. Deployment stays the owner's manual act.
+    expect(plan.waves.at(-1)).toMatchObject({
+      id: 'deity-authored-character-check',
+      from: 200,
+      to: 200,
+      expectedObjects: [{
+        kind: 'table',
+        name: 'public.custom_content',
       }],
     });
     // …and 199, like 197, takes its posture from its OWN annotation rather than the wave
