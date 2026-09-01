@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-31T20:29:23.676Z",
+  "generatedAt": "2026-09-01T02:22:10.029Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "48cb1fae3a15e880",
+  "sourceHash": "2afd5742522b867c",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -56,6 +56,7 @@
     "src/domain/worldPulse/archetypeCatalog.js",
     "src/domain/worldPulse/cultImpositionApply.js",
     "src/domain/worldPulse/deityAxes.js",
+    "src/domain/worldPulse/deityFlaws.js",
     "src/domain/worldPulse/faithField.js",
     "src/domain/worldPulse/piety.js",
     "src/domain/worldPulse/pulseHelpers.js",

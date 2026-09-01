@@ -365,3 +365,98 @@ describe('THE ENTRY SHAPE — funnel intake, one entry per deity', () => {
     expect(Object.isFrozen(first[0].pulls)).toBe(true);
   });
 });
+
+describe('THE WRATHFUL SHARPENING (W-FAITH F5c) — the temper pull sharpens while fortunes fall', () => {
+  /** A wrathful-and-cruel god, deliberately NOT the patron so the exposure sits in the
+   *  one-rung-down band: weight = 0.5 × 0.95 × 1 (no patron amp) = 0.475, piety 1,
+   *  and 0.25 ≤ 0.475 < 0.6 ⇒ demotion 1. Authored `marked` (rung 1) therefore
+   *  teaches at rung 0 = `faint` unless the sharpening recovers the rung. */
+  const WRATH = () => state([
+    member({ ref: 'd.wrath', share: 50, axes: ['MERCY:vice:marked', 'TEMPER:vice:marked'] }),
+  ], null);
+  const FALLING = Object.freeze({ 'd.wrath': Object.freeze({ wins: 1, losses: 3 }) });
+
+  function emitWith(religionState, pantheon) {
+    return faithWitnessEntries({
+      settlement: SETTLEMENT, religionState, npc: NPC, dweltTicks: ONE_SEASON,
+      eventId: 'ev.1', settlementSeed: SEED, pantheon,
+    });
+  }
+
+  test('no ledger, a level book, and a rising book all leave the pulls byte-identical', () => {
+    const base = emitWith(WRATH(), undefined);
+    // The baseline itself: both vice pulls demoted one rung to `faint`.
+    expect(base.length).toBe(1);
+    expect(base[0].pulls).toEqual([
+      { axisId: 'MERCY', pole: 'vice', band: 'faint' },
+      { axisId: 'TEMPER', pole: 'vice', band: 'faint' },
+    ]);
+    // Absent arg, absent entry, level fortunes, rising fortunes: all the same output.
+    expect(emitWith(WRATH(), null)).toEqual(base);
+    expect(emitWith(WRATH(), {})).toEqual(base);
+    expect(emitWith(WRATH(), { 'd.wrath': { wins: 2, losses: 2 } })).toEqual(base);
+    expect(emitWith(WRATH(), { 'd.wrath': { wins: 3, losses: 1 } })).toEqual(base);
+  });
+
+  test('⭐ falling fortunes sharpen THE TEMPER PULL ONLY — per-position attachment, in one entry', () => {
+    const sharp = emitWith(WRATH(), FALLING);
+    expect(sharp.length).toBe(1);
+    expect(sharp[0].pulls).toEqual([
+      // MERCY keeps its plain exposure demotion: `faint`. The sharpening is not a
+      // property of the god; it is a property of the one vice position it attaches to.
+      { axisId: 'MERCY', pole: 'vice', band: 'faint' },
+      // TEMPER recovers the demoted rung: authored `marked` teaches as `firm`.
+      { axisId: 'TEMPER', pole: 'vice', band: 'firm' },
+    ]);
+  });
+
+  test('the sharpening reads the RIGHT deity\'s entry — a rival\'s bad book moves nothing', () => {
+    const base = emitWith(WRATH(), undefined);
+    expect(emitWith(WRATH(), { 'd.other': { wins: 0, losses: 9 } })).toEqual(base);
+  });
+
+  test('⭐ THE CEILING PIN: at full exposure the sharpening cannot push past the authored level', () => {
+    // The patron at half the pool: 0.5 × 0.95 × 1.6 = 0.76 ≥ 0.6 ⇒ demotion 0 — the
+    // pull already lands AT the authored ceiling. Falling fortunes must leave it
+    // there: `defining` teaches `heavy`, and there is no rung above `heavy`.
+    const st = state([
+      member({ ref: 'd.wrath', share: 50, axes: ['TEMPER:vice:defining'] }),
+    ]);
+    const pulls = emitWith(st, FALLING)[0].pulls;
+    expect(pulls).toEqual([{ axisId: 'TEMPER', pole: 'vice', band: 'heavy' }]);
+  });
+
+  test('the VIRTUE pole never sharpens — a patient god is not wrathful about losing', () => {
+    const st = state([
+      member({ ref: 'd.wrath', share: 50, axes: ['TEMPER:virtue:marked'] }),
+    ], null);
+    const pulls = emitWith(st, FALLING)[0].pulls;
+    expect(pulls).toEqual([{ axisId: 'TEMPER', pole: 'virtue', band: 'faint' }]);
+  });
+
+  test('⭐ the sharpening can RECOVER a pull exposure had silenced — deliberate, and stated', () => {
+    // Authored `a_touch` (rung 0) at demotion 1 lands at rung −1: below the floor,
+    // so the god teaches nothing and no entry is emitted. As its fortunes fall the
+    // wrathful position recovers the rung and is faintly felt — the god grows harsher
+    // as its fortunes fail, still never above its authored ceiling.
+    const st = () => state([
+      member({ ref: 'd.wrath', share: 50, axes: ['TEMPER:vice:a_touch'] }),
+    ], null);
+    expect(emitWith(st(), undefined)).toEqual([]);
+    const sharp = emitWith(st(), FALLING);
+    expect(sharp.length).toBe(1);
+    expect(sharp[0].pulls).toEqual([{ axisId: 'TEMPER', pole: 'vice', band: 'faint' }]);
+  });
+
+  test('the sharpened output is still frozen, deterministic and shape-identical', () => {
+    // The funnel's intake shape is mirror-pinned against the absent W-LIVES catalog;
+    // the sharpening may move a BAND VALUE only, never widen the shape.
+    const first = emitWith(WRATH(), FALLING);
+    for (let i = 0; i < 10; i += 1) expect(emitWith(WRATH(), FALLING)).toEqual(first);
+    expect(Object.isFrozen(first[0].pulls)).toBe(true);
+    expect(Object.keys(first[0].pulls[0]).sort()).toEqual(['axisId', 'band', 'pole']);
+    expect(Object.keys(first[0]).sort()).toEqual(
+      ['eventId', 'kind', 'npc', 'plane', 'pulls', 'settlementId', 'settlementSeed', 'spanTicks'],
+    );
+  });
+});

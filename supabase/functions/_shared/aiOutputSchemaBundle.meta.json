@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-31T20:29:23.876Z",
+  "generatedAt": "2026-09-01T02:22:10.257Z",
   "entry": "src/domain/aiOutputSchema.js",
-  "sourceHash": "f5694416a76dead8",
+  "sourceHash": "35d31c5bf8e5956b",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -83,6 +83,7 @@
     "src/domain/worldPulse/bandedStock.js",
     "src/domain/worldPulse/cultImpositionApply.js",
     "src/domain/worldPulse/deityAxes.js",
+    "src/domain/worldPulse/deityFlaws.js",
     "src/domain/worldPulse/demographicsRates.js",
     "src/domain/worldPulse/demographicsRisk.js",
     "src/domain/worldPulse/demographicsWorks.js",

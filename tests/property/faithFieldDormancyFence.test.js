@@ -77,6 +77,7 @@ const DORMANT_GOLDEN = '6e85308b0f396a77';
  * match their tails.
  */
 const FAITH_FIELD_SET = Object.freeze([
+  'src/domain/worldPulse/deityFlaws.js', // W-FAITH F5c — the vice-pole flaw register joins the set: its lawful importers are the two leaves beside it (set members, so the census skips them), and any OTHER production importer reds in FENCE 1 exactly as an undeclared field consumer would
   'src/domain/worldPulse/faithField.js',
   'src/domain/worldPulse/faithWitnessSource.js',
 ]);
@@ -222,8 +223,10 @@ describe('FENCE 2 — the purity pin: no clock, no rng, no global state', () => 
   // A plain loop rather than `test.each(SOURCES)`: the lighting census parks a file
   // whose `each` table is a named binding, and a parked fence is one the census can
   // no longer prove runs — which is precisely the failure this fence guards against.
-  test('neither leaf reads a wall-clock or an rng', () => {
-    expect(SOURCES.length, 'the source list is empty — this arm is scanning nothing').toBe(2);
+  test('no leaf in the set reads a wall-clock or an rng', () => {
+    // 3 since W-FAITH F5c: the flaw register joined the set, so the purity pin covers
+    // it too — a variance-shaped "capricious" modulation smuggling an rng in reds here.
+    expect(SOURCES.length, 'the source list is empty — this arm is scanning nothing').toBe(3);
     for (const { member, src } of SOURCES) {
       // Comment-stripped so a prose mention of Math.random cannot red this.
       const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|\s)\/\/[^\n]*/g, '$1');

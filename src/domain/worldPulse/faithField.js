@@ -36,7 +36,12 @@
  *     where a volume contradicts itself the RISK REGISTER wins — it is the half
  *     written to be defended. The deity's character reaches PEOPLE instead, on a
  *     different plane, through `faithWitnessSource.js`.
- *   • THE FLAW. Vice-pole modulation is F5c's, attached to chart positions.
+ *   • THE FLAW — LANDED (W-FAITH F5c), attached to chart positions, not to any
+ *     standalone enum (the D2 supersession, ODQ §800.3 J2). The register and both
+ *     modulation readers live in `deityFlaws.js`; this file applies exactly ONE of
+ *     them — the JEALOUS boon fade, inside `aspectTerm`'s boon addend, so it is
+ *     inside the gated product and a magic-dead zero stays exactly zero. The
+ *     WRATHFUL pull sharpening is `faithWitnessSource.js`'s, on the other plane.
  *
  * READ TIMING is the estate's: `pietyMultOf` reads `config.faithProfile.piety`,
  * which the religion projection writes at tick END and every amplified site consumes
@@ -60,6 +65,7 @@ import { clamp, clamp01 } from '../../kernel/math.js';
 import { PIETY_TUNING, pietyMultOf } from './piety.js';
 import { deityRankStrength } from './cultImpositionApply.js';
 import { magicLedger } from '../magicLedger.js';
+import { FLAW_EFFECTS, jealousBoonScale01 } from './deityFlaws.js';
 
 /**
  * The channel vocabulary, MIRRORED from `customContentSchema.DEITY_EFFECT_CHANNEL_KEYS`
@@ -214,11 +220,21 @@ export const FAITH_FIELD_TUNING = Object.freeze({
 /** @typedef {import('../settlement.schema.js').SimSettlement} SimSettlement */
 /** @typedef {{ deityRef?: unknown, snapshot?: Record<string, unknown>, share?: unknown, standing?: unknown, suppressed?: unknown }} FaithMember */
 /** @typedef {{ deities?: Record<string, FaithMember>, patronRef?: unknown }} FaithReligionState */
-/** @typedef {{ deityRef: string, channel: string, weight: number, term: number }} FaithContribution */
+/** @typedef {{ deityRef: string, channel: string, weight: number, term: number, flaw?: string }} FaithContribution */
 /** @typedef {{ channels: Record<string, number>, mults: Record<string, number>, contributors: readonly FaithContribution[], gated: boolean, members: number }} FaithFieldReading */
 
 /** @param {unknown} v @returns {string} */
 const str = (v) => (typeof v === 'string' ? v : '');
+
+/**
+ * The flaw word whose modulation rides the boon term, DERIVED from the register so
+ * the register stays the single decision point: re-homing or striking the jealous
+ * row in `deityFlaws.FLAW_EFFECTS` moves or silences this cause with it. When no
+ * `boon_term` effect exists the fade below is always the literal 1, so the empty
+ * fallback is never observable in a contributor.
+ * @type {string}
+ */
+const BOON_FLAW = Object.values(FLAW_EFFECTS).find((e) => e.modulates === 'boon_term')?.flaw ?? '';
 
 /**
  * 0-HOLE DISCIPLINE: this leaf declares no `any`. A settlement arrives as the
@@ -306,16 +322,24 @@ export function memberWeight(member, isPatron) {
  * Both halves are SET-MEMBERSHIP tests, never truthiness: an authored value outside
  * the closed vocabulary contributes nothing rather than being coerced into a band.
  *
+ * ⭐ THE JEALOUS FLAW (W-FAITH F5c) SCALES THE BOON ADDEND ONLY — `boonScale01` is
+ * `deityFlaws.jealousBoonScale01`'s answer, defaulting to the literal 1 so every
+ * pre-flaw caller is byte-identical. The scale lives INSIDE this term, and the term
+ * is inside the fold's `× gate` product, so a magic-dead world's zero stays exactly
+ * zero no matter what a flaw does — the one-magic-gate law, held by construction.
+ * The bane is deliberately untouched: the charter says the BOON weakens.
+ *
  * @param {Record<string, unknown> | null | undefined} snapshot
  * @param {string} channel
+ * @param {number} [boonScale01] the jealous fade, 0..1; default 1 (inert)
  * @returns {number}
  */
-export function aspectTerm(snapshot, channel) {
+export function aspectTerm(snapshot, channel, boonScale01 = 1) {
   if (!snapshot || !FAITH_CHANNELS.includes(channel)) return 0;
   const mag = /** @type {Record<string, number>} */ (
     /** @type {unknown} */ (FAITH_FIELD_TUNING.STRENGTH));
   let term = 0;
-  if (str(snapshot.boonChannel) === channel) term += mag[str(snapshot.boonStrength)] ?? 0;
+  if (str(snapshot.boonChannel) === channel) term += (mag[str(snapshot.boonStrength)] ?? 0) * boonScale01;
   if (str(snapshot.baneChannel) === channel) term -= mag[str(snapshot.baneStrength)] ?? 0;
   return term;
 }
@@ -359,6 +383,17 @@ export function faithFieldOf(settlement, religionState) {
   // Absent settlement ⇒ the same literal 1 `pietyMultOf` answers for an absent
   // record; narrowed here rather than cast, so the null case is visible.
   const piety = settlement ? pietyMultOf(settlement) : 1;
+  // W-FAITH F5c — THE JEALOUS FADE, computed once per member because it is
+  // channel-blind (the fade is about the boon, whichever channel carries it).
+  // `contested01` counts RIVAL GODS ONLY — the other ACTIVE members' pool fraction.
+  // Unbelief does not contest: a sole god among the faithless keeps its whole
+  // blessing, which is the honest reading of "share is contested". On a conserved
+  // pantheon this is (100 − own share)/100 minus the godless remainder.
+  const totalShare = members.reduce((sum, { member }) => sum + (Number(member?.share) || 0), 0);
+  const voices = members.map(({ member, isPatron }) => {
+    const contested01 = clamp01((totalShare - (Number(member?.share) || 0)) / 100);
+    return { member, isPatron, boonScale01: jealousBoonScale01(member?.snapshot, contested01) };
+  });
   /** @type {Record<string, number>} */
   const channels = {};
   /** @type {Record<string, number>} */
@@ -368,8 +403,8 @@ export function faithFieldOf(settlement, religionState) {
 
   for (const channel of FAITH_CHANNELS) {
     let total = 0;
-    for (const { member, isPatron } of members) {
-      const aspect = aspectTerm(member?.snapshot, channel);
+    for (const { member, isPatron, boonScale01 } of voices) {
+      const aspect = aspectTerm(member?.snapshot, channel, boonScale01);
       if (aspect === 0) continue;
       const weight = memberWeight(member, isPatron);
       // THE ONE GATE, applied to the term rather than to the sum: a dead-magic world
@@ -378,7 +413,17 @@ export function faithFieldOf(settlement, religionState) {
       const term = aspect * weight * piety * gate;
       if (term === 0) continue;
       total += term;
-      contributors.push({ deityRef: str(member?.deityRef), channel, weight, term });
+      contributors.push({
+        deityRef: str(member?.deityRef),
+        channel,
+        weight,
+        term,
+        // The typed cause (D2: herald colour rides the flaw token), a key ONLY when
+        // the fade actually touched this term — the boon channel, scale off 1. A
+        // dormant or bane-side contribution keeps its exact pre-flaw shape.
+        ...(boonScale01 !== 1 && str(member?.snapshot?.boonChannel) === channel
+          ? { flaw: BOON_FLAW } : {}),
+      });
     }
     // THE BACKSTOP. Signed and symmetric, so an unnormalised pantheon of blighters
     // bottoms out exactly as an unnormalised pantheon of blessers tops out. On a

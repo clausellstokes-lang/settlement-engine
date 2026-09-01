@@ -28,6 +28,7 @@ import {
   aspectTerm,
   faithFieldOf,
   faithChannelMult,
+  faithFieldProjection,
 } from '../../src/domain/worldPulse/faithField.js';
 
 /** A pantheon member, shaped as `religionState` writes one. */
@@ -443,5 +444,120 @@ describe('THE DORMANCY GUARANTEE — exactly 0 and exactly 1, on every path to a
     const before = JSON.stringify(st);
     faithFieldOf(BARE, st);
     expect(JSON.stringify(st)).toBe(before);
+  });
+});
+
+describe('THE JEALOUS FLAW (W-FAITH F5c) — the boon fades as share is contested, inside the gate', () => {
+  /** The jealous patron and its rival: the geometry every arm below shares.
+   *  jeal — major, ascendant, PATRON, share 55, heavy harvest boon, CONTENT vice at defining.
+   *  rival — minor, established, share 45, nothing authored.
+   *  contested01(jeal) = 45/100 = 0.45 (rival share only — unbelief does not contest)
+   *  fade = 1 − JEALOUS_BOON_FADE 1 × LEVEL_SCALE.defining 1 × 0.45 = 0.55 */
+  function pantheonWith(axes) {
+    return state([
+      member({ ref: 'd.jeal', rank: 'major', share: 55, standing: 'ascendant', boonChannel: 'harvest', boonStrength: 'heavy', ...(axes ? { characterAxes: axes } : {}) }),
+      member({ ref: 'd.rival', rank: 'minor', share: 45, standing: 'established' }),
+    ], 'd.jeal');
+  }
+
+  test('aspectTerm scales the BOON addend by the fade — and the default is the literal 1', () => {
+    const snap = { boonChannel: 'harvest', boonStrength: 'heavy' };
+    // heavy 0.25 × fade 0.55 = 0.1375
+    expect(aspectTerm(snap, 'harvest', 0.55)).toBeCloseTo(0.1375, 12);
+    // the two-argument call is the pre-flaw call, byte-identical: 0.25 × 1 = 0.25
+    expect(aspectTerm(snap, 'harvest')).toBe(0.25);
+  });
+
+  test('the BANE is untouched by the fade — the charter says the BOON weakens', () => {
+    const snap = { baneChannel: 'harvest', baneStrength: 'heavy' };
+    // −0.25 whatever the fade: the scale multiplies an addend this snapshot lacks.
+    expect(aspectTerm(snap, 'harvest', 0.55)).toBe(-0.25);
+    expect(aspectTerm(snap, 'harvest', 0)).toBe(-0.25);
+  });
+
+  test('the fold: a defining-jealous patron blesses at 0.55 of its unflawed self', () => {
+    // Unflawed control: heavy 0.25 × w(0.55 × 0.95 × 1 × 1.6 = 0.836) × piety 1 × gate 1 = 0.209
+    const control = faithFieldOf(BARE, /** @type {any} */ (pantheonWith(null)));
+    expect(control.channels.harvest).toBeCloseTo(0.209, 12);
+    // Flawed: boon addend 0.25 × 0.55 = 0.1375; × 0.836 = 0.11495
+    const flawed = faithFieldOf(BARE, /** @type {any} */ (pantheonWith(['CONTENT:vice:defining'])));
+    expect(flawed.channels.harvest).toBeCloseTo(0.11495, 12);
+  });
+
+  test('a VIRTUE position on the same axis fades nothing — the vice-pole law', () => {
+    const virtuous = faithFieldOf(BARE, /** @type {any} */ (pantheonWith(['CONTENT:virtue:defining'])));
+    expect(virtuous.channels.harvest).toBeCloseTo(0.209, 12);
+  });
+
+  test('the typed cause: the faded contributor carries the flaw token, the control does not', () => {
+    const flawed = faithFieldOf(BARE, /** @type {any} */ (pantheonWith(['CONTENT:vice:defining'])));
+    expect(flawed.contributors.length).toBe(1);
+    expect(flawed.contributors[0].flaw).toBe('jealous');
+    const control = faithFieldOf(BARE, /** @type {any} */ (pantheonWith(null)));
+    expect(control.contributors.length).toBe(1);
+    // Asserted POSITIVELY as a key-set claim: a dormant contribution keeps its exact
+    // pre-flaw shape, no flaw key minted.
+    expect(Object.keys(control.contributors[0]).sort()).toEqual(['channel', 'deityRef', 'term', 'weight']);
+  });
+
+  test('⛔ THE MAGIC-GATE PIN: a flaw multiplying a magic-zeroed term stays EXACTLY zero', () => {
+    // The world's dial says magic does not exist; the jealous patron authors a heavy
+    // boon under full contest. The fade lives INSIDE the gated product, so the term is
+    // exactly 0 — not small, 0 — the contributor list is EMPTY and the projection is
+    // null. A mutation that lets any flaw arm ADD after the gate reds this arm.
+    const DEAD = { id: 's.dead', config: { magicLevel: 'none', magicExists: false } };
+    const st = /** @type {any} */ (pantheonWith(['CONTENT:vice:defining']));
+    const gated = faithFieldOf(DEAD, st);
+    expect(gated.gated).toBe(true);
+    for (const ch of FAITH_CHANNELS) {
+      expect(gated.channels[ch], `${ch} total under a dead-magic dial`).toBe(0);
+      expect(gated.mults[ch], `${ch} mult under a dead-magic dial`).toBe(1);
+    }
+    expect(gated.contributors).toEqual([]);
+    expect(faithFieldProjection(DEAD, st)).toBeNull();
+  });
+
+  test('an UNBOUND channel stays unbound with the flaw in play — no key, no score', () => {
+    // The jealous god's boon on `learning` (declared unbound at F4c) mints nothing,
+    // fade or no fade: the projection iterates the BINDINGS, and the flaw layer never
+    // touches the binding registry.
+    const st = state([
+      member({ ref: 'd.jeal', rank: 'major', share: 55, standing: 'ascendant', boonChannel: 'learning', boonStrength: 'heavy', characterAxes: ['CONTENT:vice:defining'] }),
+      member({ ref: 'd.rival', rank: 'minor', share: 45, standing: 'established' }),
+    ], 'd.jeal');
+    expect(faithFieldProjection(BARE, /** @type {any} */ (st))).toBeNull();
+  });
+
+  test('a vice position WITHOUT a boon or bane lights nothing — axes alone are not aspects', () => {
+    const st = state([
+      member({ ref: 'd.dark', rank: 'major', share: 55, standing: 'ascendant', characterAxes: ['CONTENT:vice:defining', 'TEMPER:vice:defining'] }),
+      member({ ref: 'd.rival', rank: 'minor', share: 45, standing: 'established' }),
+    ], 'd.dark');
+    const field = faithFieldOf(BARE, /** @type {any} */ (st));
+    for (const ch of FAITH_CHANNELS) {
+      expect(field.channels[ch], `${ch}: a flaw with no aspect moved a channel`).toBe(0);
+    }
+    expect(field.contributors).toEqual([]);
+    expect(faithFieldProjection(BARE, /** @type {any} */ (st))).toBeNull();
+  });
+
+  test('a SOLE jealous god among the faithless keeps its whole blessing — unbelief does not contest', () => {
+    // One member at share 55, the remaining 45 points godless: contested01 = 0/100 = 0,
+    // so the fade is the literal 1 and the total is the control's own 0.209.
+    const st = state([
+      member({ ref: 'd.jeal', rank: 'major', share: 55, standing: 'ascendant', boonChannel: 'harvest', boonStrength: 'heavy', characterAxes: ['CONTENT:vice:defining'] }),
+    ], 'd.jeal');
+    expect(faithFieldOf(BARE, /** @type {any} */ (st)).channels.harvest).toBeCloseTo(0.209, 12);
+  });
+
+  test('a SUPPRESSED rival does not contest — only active voices hold share against the jealous', () => {
+    // The rival is suppressed (share 0 by the religion engine's own suppression write,
+    // but even with a stale share the member is filtered before the fold): the jealous
+    // god reads contested01 = 0 and blesses whole.
+    const st = state([
+      member({ ref: 'd.jeal', rank: 'major', share: 55, standing: 'ascendant', boonChannel: 'harvest', boonStrength: 'heavy', characterAxes: ['CONTENT:vice:defining'] }),
+      member({ ref: 'd.rival', rank: 'minor', share: 45, standing: 'established', suppressed: true }),
+    ], 'd.jeal');
+    expect(faithFieldOf(BARE, /** @type {any} */ (st)).channels.harvest).toBeCloseTo(0.209, 12);
   });
 });

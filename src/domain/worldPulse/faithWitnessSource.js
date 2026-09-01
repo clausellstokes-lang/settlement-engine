@@ -54,12 +54,25 @@
  * the people who live among its priests IS that cultural emphasis. Gating it would
  * delete the very thing D3 says survives.
  *
+ * ── THE WRATHFUL SHARPENING (W-FAITH F5c) ───────────────────────────────────────
+ * A deity holding the TEMPER vice position (wrathful, under `deityFlaws.js`'s
+ * candidate table) is felt MORE KEENLY while its faith fortunes fall: that one
+ * pull's exposure demotion is reduced by one rung, floored at 0, so the authored
+ * level stays a hard ceiling (§856's ladder law, held by arithmetic). The fortunes
+ * arrive as an OPTIONAL `pantheon` argument — the per-deity ledger
+ * (`worldState.pantheon`), handed in by the caller exactly as the seed is, never
+ * guessed off a settlement. Absent, nothing sharpens and every pre-flaw caller is
+ * byte-identical. Per-position attachment is literal: the sharpening rides the
+ * TEMPER:vice token itself, and every other pull of the same god keeps its plain
+ * exposure demotion.
+ *
  * PURE: no rng, no wall-clock, no mutation, codepoint-ordered output.
  */
 import { INTERVAL_WEEKS } from './intervalWeeks.js';
 import { AXIS_LEVELS } from '../npc/paradigmAxisCatalog.js';
 import { pietyMultOf } from './piety.js';
 import { memberWeight } from './faithField.js';
+import { wrathSharpenedDemotion } from './deityFlaws.js';
 
 /**
  * THE KIND THIS CAR MINTS AND THE OTHER STACK'S CATALOG MUST ADMIT.
@@ -209,9 +222,13 @@ export function exposureDemotion(exposure) {
  * @param {number} args.dweltTicks ticks this soul has dwelt among this faith
  * @param {string} args.eventId the evidence this lesson binds to
  * @param {string} [args.settlementSeed] the save's seed for this settlement
+ * @param {Record<string, { wins?: unknown, losses?: unknown }> | null | undefined} [args.pantheon]
+ *   the per-deity faith-fortunes ledger (`worldState.pantheon`), keyed by the SAME
+ *   refs the religion state keys its members by (applyWorldPulse pins that identity).
+ *   Handed in by the caller, never read off a settlement; absent means no sharpening.
  * @returns {readonly WitnessEntry[]}
  */
-export function faithWitnessEntries({ settlement, religionState, npc, dweltTicks, eventId, settlementSeed }) {
+export function faithWitnessEntries({ settlement, religionState, npc, dweltTicks, eventId, settlementSeed, pantheon }) {
   // 1 — THE CADENCE GATE. Integrated time, floor-divided; nothing below one whole
   // season. This is the F9 cure, and it runs before any other work.
   const cadences = Math.floor((Number(dweltTicks) || 0) / AMBIENT_CADENCE_TICKS);
@@ -239,10 +256,16 @@ export function faithWitnessEntries({ settlement, religionState, npc, dweltTicks
 
     const exposure = memberWeight(member, ref === patronRef) * piety;
     const demotion = exposureDemotion(exposure);
+    // W-FAITH F5c — the wrathful sharpening reads THIS deity's fortunes entry. The
+    // demotion is resolved PER TOKEN: only the vice position the modulation attaches
+    // to is sharpened, and only while the fortunes fall. It can recover a pull that
+    // exposure had silenced (a wrathful god faintly felt through a small cult as its
+    // fortunes fall) — deliberate, and pinned as such in the unit suite.
+    const fortunes = pantheon && typeof pantheon === 'object' ? pantheon[ref] : undefined;
     /** @type {WitnessPull[]} */
     const pulls = [];
     for (const token of positions) {
-      const pull = pullFromPosition(token, demotion);
+      const pull = pullFromPosition(token, wrathSharpenedDemotion(token, demotion, fortunes));
       if (pull) pulls.push(pull);
     }
     // An entry with no surviving pull is NOT emitted: the funnel would refuse it,
