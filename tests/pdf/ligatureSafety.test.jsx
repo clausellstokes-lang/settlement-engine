@@ -31,6 +31,7 @@ describe('PDF string chokepoint is transparent', () => {
   test('noLig passes every former f-ligature cluster through byte-identically', () => {
     for (const word of ['Griffin', 'Waffle', 'Refined', 'Reflected', 'Offer']) {
       expect(noLig(word)).toBe(word);
+      // anchored: the toBe above pins the FULL string — it cannot have gone empty.
       expect(noLig(word)).not.toContain(ZWNJ);
     }
   });
@@ -61,6 +62,7 @@ describe('SafeText wrapper', () => {
   test('passes a string child through byte-identically', () => {
     const el = SafeText({ children: 'Griffin Hall' });
     expect(el.props.children).toBe('Griffin Hall');
+    // anchored: the toBe above pins the exact child — an emptied child reds there first.
     expect(el.props.children).not.toContain(ZWNJ);
   });
 
