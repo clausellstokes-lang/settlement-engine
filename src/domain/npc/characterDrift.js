@@ -426,6 +426,43 @@ export function valuePosition(value) {
   return { pole: raw < 0 ? 'vice' : 'virtue', level: AXIS_LEVELS[magnitude - 1] };
 }
 
+// ── THE AUTHORED CORE'S ONE READER ────────────────────────────────────────────
+/**
+ * ⭐⭐ THE ONE READ OF THE AUTHORED CORE. Every reader in the estate routes here.
+ *
+ * ⛔ NOTHING IN THIS TREE WRITES `npc.character`, and that is MEASURED rather than
+ * assumed: the observed-shape corpus carries 6,507 npc rows across 107 observed keys
+ * and the key sits on NO shape at all (what a generator writes is `personality`).
+ * `characterConsumers.js` states the same fact in its own header. The chart arrives
+ * with car L8's edit surface — DESIGN_W_LIVES §7, whose NPC authoring surface is
+ * still an undischarged RECON ROW — so until that car lands this read answers
+ * `undefined` on every world this engine can generate.
+ *
+ * ⭐ THAT ABSENCE IS PRECISELY WHY THE READ GETS ONE HOME. A key with no writer,
+ * hand-spelled at N sites, is N addresses the writer's car must find and N spellings
+ * free to drift; this estate has spent whole cars killing that shape. THREE
+ * hand-spelled sites existed before this one — the chokepoint below,
+ * `knownCharacter.knownCharacterOf` and `livedExperienceFunnel.effectiveChartOf` —
+ * and only ONE of the three was ever visible to the observed-shape register, because
+ * the other two sit behind receivers its resolver cannot pin. A guard that sees one
+ * of three sites was never the guard for this key; the census in
+ * `tests/domain/npc/characterDrift.test.js` is, and it is SPELLING-COMPLETE where the
+ * register is resolution-dependent.
+ *
+ * TOTAL, and byte-sparse in both directions: null, a non-object, an array, and an
+ * entity carrying no chart are ONE case, and that case is `undefined` — never `{}`,
+ * which would be an authored chart claiming to exist. ABSENT = NEUTRAL = ZERO BYTES.
+ * A present chart comes back AS AUTHORED, BY REFERENCE, which is what keeps the
+ * chokepoint's byte-identity claim structural rather than asserted.
+ *
+ * @param {{ character?: unknown } | null | undefined} entity  a roster record
+ * @returns {unknown} the authored core by reference, or `undefined`
+ */
+export function authoredCharacterOf(entity) {
+  const { character } = asObject(entity);
+  return character;
+}
+
 // ── THE CHOKEPOINT (design §4) ────────────────────────────────────────────────
 /**
  * THE ONE READ EVERY CONSUMER USES. Core plus drift, banded back into the authored
@@ -441,7 +478,7 @@ export function valuePosition(value) {
  * @returns {unknown} the effective character, or the authored one unchanged
  */
 export function effectiveCharacter(npc, drift) {
-  const core = asObject(npc).character;
+  const core = authoredCharacterOf(npc);
   const entry = /** @type {Record<string, AxisDrift>} */ (asObject(drift));
   const axisIds = Object.keys(entry);
   if (axisIds.length === 0) return core;

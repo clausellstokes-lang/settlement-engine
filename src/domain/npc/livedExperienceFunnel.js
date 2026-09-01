@@ -130,6 +130,7 @@ import {
   AXIS_LEVELS,
   MATERIALIZATION_EPSILON,
   applyAxisDrift,
+  authoredCharacterOf,
   characterDriftActive,
   driftEntryOf,
   positionValue,
@@ -309,7 +310,7 @@ export function bandWordOf(value) {
  * @returns {Record<string, number>}
  */
 export function effectiveChartOf(npc, drift) {
-  const authored = asObject(asObject(asObject(npc).character).axes);
+  const authored = asObject(asObject(authoredCharacterOf(npc)).axes);
   const entry = asObject(drift);
   /** @type {Record<string, number>} */
   const chart = {};

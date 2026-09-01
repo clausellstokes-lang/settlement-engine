@@ -69,6 +69,7 @@ import { npcCredibilityWeightOf } from '../worldPulse/npcCredibility.js';
 import {
   AXIS_LEVELS,
   SPECTRUM_HALF_SPAN,
+  authoredCharacterOf,
   effectiveCharacter,
   positionValue,
   valuePosition,
@@ -221,7 +222,7 @@ export function beliefConfidence({ worldState, subjectNpcKey, observer, observer
 export function knownCharacterOf({
   npc, disclosures, worldState, subjectNpcKey, observer, observerDrift, tick, flags,
 }) {
-  const core = asObject(npc).character;
+  const core = authoredCharacterOf(npc);
   const confidence = beliefConfidence({
     worldState: asObject(worldState),
     subjectNpcKey: str(subjectNpcKey),

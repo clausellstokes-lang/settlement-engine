@@ -42,6 +42,7 @@ import {
   OFFSET_SCALE,
   SPECTRUM_HALF_SPAN,
   applyAxisDrift,
+  authoredCharacterOf,
   axisOffsetAt,
   axisOffsetOf,
   characterDriftActive,
@@ -412,18 +413,22 @@ describe('GRADUATION — on first materialized write, and never on a nudge', () 
   });
 });
 
-describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
-  /** @param {string} dir @returns {string[]} */
-  function jsFilesUnder(dir) {
-    /** @type {string[]} */
-    const out = [];
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      const full = join(dir, entry.name);
-      if (entry.isDirectory()) out.push(...jsFilesUnder(full));
-      else if (/\.(js|jsx|ts|tsx|mjs)$/.test(entry.name)) out.push(full);
-    }
-    return out;
+// ── THE SHARED SOURCE-WALKING HELPERS ─────────────────────────────────────────
+// Hoisted to module scope by the substrate coupling's authored-core car: the
+// authored-core census below asks the SAME two questions the darkness closure
+// asks — which files, and what does the EXECUTED source say — and a second copy
+// of a citation-blanker is the fork this file has spent four amendments killing.
+/** @param {string} dir @returns {string[]} */
+function jsFilesUnder(dir) {
+  /** @type {string[]} */
+  const out = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...jsFilesUnder(full));
+    else if (/\.(js|jsx|ts|tsx|mjs)$/.test(entry.name)) out.push(full);
   }
+  return out;
+}
 
 /**
  * ⚠⚠ COMMENTS ARE STRIPPED BEFORE ANY CLOSURE SCAN, AMENDED BY CAR L5, AND IT IS A
@@ -439,6 +444,33 @@ describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
  * @param {string} text
  */
 const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
+/**
+ * ⛔⛔⛔ AND A SYMBOL INSIDE A STRING LITERAL IS A CITATION TOO — THE SIXTH SIGHTING
+ * OF THIS ESTATE'S LAW, AND IT CONVICTED THE VERY CAR THAT WROTE THE CURE.
+ *
+ * The dereference arm above was added to catch an aliased import plus a call. On its
+ * first run it convicted `livedExperienceCatalog.js` of depending on the witness
+ * adapter — on the strength of the RECEIPT STRING that names it:
+ * `'faithWitnessSource.js:faithWitnessEntries (religionState pantheon ...)'`. A quoted
+ * name followed by a space and a paren is indistinguishable from a call to a scanner
+ * that only strips comments.
+ *
+ * ⭐ THE GENERALISATION, and it is the one this whole family has been converging on:
+ * COMMENTS AND STRING LITERALS ARE BOTH CITATIONS. Only two things are dependencies —
+ * an import specifier, and a dereference in CODE. So the module arm is asked BEFORE
+ * strings are blanked (an import specifier IS a string literal), and the symbol arm is
+ * asked AFTER. Ban lists, seam-name constants, `home:` paths and receipt strings all
+ * fall out of the detector at once, because they were always the same shape.
+ * @param {string} text
+ */
+const codeWithoutCitations = (text) => stripComments(text)
+  .replace(/'(?:[^'\\]|\\.)*'/g, "''")
+  .replace(/"(?:[^"\\]|\\.)*"/g, '""')
+  .replace(/`(?:[^`\\]|\\.)*`/g, '``');
+
+describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
+
 
 /**
  * ⛔⛔ AND STRIPPING COMMENTS IS NOT ENOUGH — A FROZEN DATA ROSTER IS A CITATION TOO,
@@ -469,6 +501,12 @@ const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(
 const DRIFT_SYMBOLS = Object.freeze([
   'characterDriftActive', 'characterDriftOf', 'setCharacterDrift', 'driftEntryOf',
   'axisOffsetOf', 'axisOffsetAt', 'effectiveCharacter', 'applyAxisDrift', 'writeAxisDrift',
+  // ⭐ THE ACCESSOR IS A DRIFT EXPORT AND IS ENROLLED HERE DELIBERATELY. It is the
+  // authored core's ONE reader, so a production file that imported it would be
+  // walking into the family exactly as an `effectiveCharacter` importer would, and
+  // STEP 1 must catch it. Enrolling it is a SHARPENING: without this row the one
+  // symbol this car added would be the one symbol the closure could not see.
+  'authoredCharacterOf',
   'CHARACTER_DRIFT_KEY', 'CHARACTER_DRIFT_FLAG_KEY', 'DRIFT_PROVENANCE',
 ]);
 const FUNNEL_SYMBOLS = Object.freeze([
@@ -493,29 +531,6 @@ const KNOWN_SYMBOLS = Object.freeze(['knownCharacterOf', 'characterAsSeenBy']);
  * @param {string} text @param {RegExp} moduleRe @param {readonly string[]} symbols
  */
 
-/**
- * ⛔⛔⛔ AND A SYMBOL INSIDE A STRING LITERAL IS A CITATION TOO — THE SIXTH SIGHTING
- * OF THIS ESTATE'S LAW, AND IT CONVICTED THE VERY CAR THAT WROTE THE CURE.
- *
- * The dereference arm above was added to catch an aliased import plus a call. On its
- * first run it convicted `livedExperienceCatalog.js` of depending on the witness
- * adapter — on the strength of the RECEIPT STRING that names it:
- * `'faithWitnessSource.js:faithWitnessEntries (religionState pantheon ...)'`. A quoted
- * name followed by a space and a paren is indistinguishable from a call to a scanner
- * that only strips comments.
- *
- * ⭐ THE GENERALISATION, and it is the one this whole family has been converging on:
- * COMMENTS AND STRING LITERALS ARE BOTH CITATIONS. Only two things are dependencies —
- * an import specifier, and a dereference in CODE. So the module arm is asked BEFORE
- * strings are blanked (an import specifier IS a string literal), and the symbol arm is
- * asked AFTER. Ban lists, seam-name constants, `home:` paths and receipt strings all
- * fall out of the detector at once, because they were always the same shape.
- * @param {string} text
- */
-const codeWithoutCitations = (text) => stripComments(text)
-  .replace(/'(?:[^'\\]|\\.)*'/g, "''")
-  .replace(/"(?:[^"\\]|\\.)*"/g, '""')
-  .replace(/`(?:[^`\\]|\\.)*`/g, '``');
 
 const dependsOn = (text, moduleRe, symbols) => (
   moduleRe.test(stripComments(text))
@@ -787,5 +802,154 @@ const dependsOn = (text, moduleRe, symbols) => (
     for (const preset of ['dramatic_campaign', 'living_realm', 'full_simulation']) {
       expect(manifest, `${preset} must not carry the drift key`).toContain(preset);
     }
+  });
+});
+
+describe('THE AUTHORED CORE HAS ONE READER — and this census is what makes it true', () => {
+  // ⛔⛔ WHY THIS CENSUS EXISTS, AND WHY THE OBSERVED-SHAPE REGISTER IS NOT ENOUGH.
+  //
+  // `npc.character` is written by NOTHING in this tree — measured, not assumed: the
+  // observed-shape corpus carries 6,507 npc rows over 107 observed keys and this key
+  // is on NO shape at all. Its writer is car L8's edit surface, whose NPC authoring
+  // home is still an undischarged RECON ROW (DESIGN_W_LIVES §7).
+  //
+  // The observed-shape register convicts a read of such a key ONLY when its own
+  // resolver can pin the receiver to exactly one corpus shape. THREE hand-spelled
+  // sites existed before this car and it saw exactly ONE of them: `knownCharacterOf`
+  // reads through a destructured parameter whose only call site is dark, and
+  // `effectiveChartOf` likewise. A guard that sees one site in three is not the guard
+  // for this key — it is an accident of resolution.
+  //
+  // ⭐ So the three sites were folded into ONE accessor, and the guard is HERE, where
+  // it is SPELLING-COMPLETE (property access AND destructuring — the register's own
+  // detector inspects property access only) and TOTAL over `src/`, enumerated by file
+  // and by count so a second site in an already-enrolled file reds just as loudly as
+  // a new file does.
+  const AUTHORED_CORE_READ = /\.character\b(?!\w)|\{[^{}\n]*\bcharacter\b[^{}\n]*\}\s*=/g;
+
+  /** Every read site in `src/`, by repository-relative path, on EXECUTED source. */
+  function readCensus() {
+    /** @type {Record<string, number>} */
+    const census = {};
+    for (const file of jsFilesUnder(join(REPO_ROOT, 'src'))) {
+      const hits = codeWithoutCitations(readFileSync(file, 'utf8')).match(AUTHORED_CORE_READ);
+      if (hits) census[relative(REPO_ROOT, file).split('\\').join('/')] = hits.length;
+    }
+    return census;
+  }
+
+  test('the DETECTOR sees both spellings, and neither a sibling key nor a citation', () => {
+    // Anti-vacuity, both directions. Without this a typo in the pattern would empty
+    // the census and every claim below would pass by asking nothing — the estate's
+    // own vacuous-green class, met head on.
+    const match = (text) => (codeWithoutCitations(text).match(AUTHORED_CORE_READ) || []).length;
+    expect(match('const core = asObject(npc).character;')).toBe(1);
+    expect(match('const { character } = asObject(entity);')).toBe(1);
+    expect(match('const { character, axes } = record;')).toBe(1);
+    // SIBLING KEYS ARE NOT THIS KEY. `characterAxes` is W-FAITH's flat deity field
+    // and `characterDriftEnabled` is this module's own door; a detector that swept
+    // them in would convict half the estate and mean nothing.
+    expect(match('const a = deity.characterAxes;')).toBe(0);
+    expect(match("rules[CHARACTER_DRIFT_FLAG_KEY] === true;")).toBe(0);
+    expect(match('const x = npc.characterDrift;')).toBe(0);
+    // A CITATION IS NOT A READ — the estate's own law, and the reason the census
+    // runs on executed source rather than raw bytes.
+    expect(match("const home = 'src/domain/npc/characterDrift.js';")).toBe(0);
+    expect(match('// the authored core lives at npc.character')).toBe(0);
+    expect(match('/** reads `npc.character` by reference */')).toBe(0);
+  });
+
+  test('⛔ EVERY read of the key in src/ is enumerated, by file AND by count', () => {
+    // Each row is classified, because an unclassified roster is a list of things
+    // somebody once saw rather than a claim about anything.
+    const CENSUS = {
+      // ⭐ THE ACCESSOR — the ONE read of a SOUL's authored core in the estate.
+      'src/domain/npc/characterDrift.js': 1,
+      // THE MODULE'S OWN PROJECTION, not a roster record: `characterAsSeenBy` reads
+      // `.character` off the KnownReading `knownCharacterOf` just composed. Asserted
+      // by its own text below so this row cannot quietly absorb a raw soul read.
+      'src/domain/npc/knownCharacter.js': 1,
+      // ── NOT A SOUL: the SETTLEMENT's authored `character` PROSE field. A different
+      //    key on a different record that happens to share a word, carried by three
+      //    presentation surfaces. Enrolled so the census is TOTAL rather than scoped.
+      'src/components/organic/samples/DossierSample.jsx': 1,
+      'src/foundry/journalPages.js': 2,
+      'src/pdf/sections/Overview.jsx': 3,
+    };
+    expect(readCensus()).toEqual(CENSUS);
+  });
+
+  test('⭐ the only DOMAIN reader outside the accessor reads its OWN projection', () => {
+    const domain = Object.keys(readCensus()).filter((file) => file.startsWith('src/domain/'));
+    expect(domain.sort()).toEqual([
+      'src/domain/npc/characterDrift.js',
+      'src/domain/npc/knownCharacter.js',
+    ]);
+    // The knownCharacter row is the sight seam reading the reading it just built —
+    // `knownCharacterOf({...}).character` — and NOT a second hand-spelled read of a
+    // roster record. Pinned on the text, so re-spelling it into a soul read reds.
+    const seam = codeWithoutCitations(
+      readFileSync(join(REPO_ROOT, 'src/domain/npc/knownCharacter.js'), 'utf8'),
+    );
+    expect(seam).toContain('}).character;');
+    expect(seam).not.toContain('asObject(npc).character');
+  });
+
+  test('the two folded-in readers now route through the accessor', () => {
+    // The claim is about the CODE, because "they call it" is exactly what a future
+    // edit can undo silently. Both files import the symbol and neither spells the
+    // key by hand any more (the census above already proves the second half).
+    for (const file of ['src/domain/npc/knownCharacter.js', 'src/domain/npc/livedExperienceFunnel.js']) {
+      const raw = readFileSync(join(REPO_ROOT, file), 'utf8');
+      // ⭐ THE ASYMMETRY IS THIS FILE'S OWN LAW, not a convenience: an IMPORT
+      // SPECIFIER *is* a string literal, so the module arm is asked BEFORE strings
+      // are blanked and the symbol arm AFTER. Asking both after blanking is how the
+      // first cut of this pin convicted nobody of importing anything.
+      expect(stripComments(raw)).toMatch(/from\s+'\.\/characterDrift\.js'/);
+      expect(codeWithoutCitations(raw)).toContain('authoredCharacterOf');
+    }
+  });
+
+  test('ABSENT = NEUTRAL = ZERO BYTES — every absence is one case, and it is undefined', () => {
+    expect(authoredCharacterOf(undefined)).toBeUndefined();
+    expect(authoredCharacterOf(null)).toBeUndefined();
+    expect(authoredCharacterOf(0)).toBeUndefined();
+    expect(authoredCharacterOf('npc_6')).toBeUndefined();
+    // ⛔ AN ARRAY IS NOT A RECORD, AND THE MUTATION BATTERY IS WHY THIS ROW READS AS
+    // IT DOES. The obvious spelling — a roster array whose FIRST ELEMENT holds a
+    // chart — cannot discriminate: a plant that swapped this module's own `asObject`
+    // for a bare `entity || {}` SURVIVED it, because `[...].character` is `undefined`
+    // under both readings. The distinguishing input is an array that CARRIES the key,
+    // which is exactly the guarantee `asObject` exists to deliver, and it is the
+    // shape a caller who hands in the whole roster by mistake actually produces.
+    expect(authoredCharacterOf([{ character: { axes: {} } }])).toBeUndefined();
+    const rosterWithKey = /** @type {unknown[] & { character?: unknown }} */ ([]);
+    rosterWithKey.character = { axes: { CANDOR: { pole: 'virtue', level: 'marked' } } };
+    expect(authoredCharacterOf(rosterWithKey)).toBeUndefined();
+    expect(authoredCharacterOf({ id: 'npc_6' })).toBeUndefined();
+    // NEVER `{}` — an empty object is an authored chart claiming to exist.
+    expect(authoredCharacterOf({ id: 'npc_6' })).not.toEqual({});
+  });
+
+  test('A PRESENT CHART COMES BACK AS AUTHORED, BY REFERENCE', () => {
+    const core = { axes: { CANDOR: { pole: 'virtue', level: 'marked' } } };
+    expect(authoredCharacterOf({ id: 'npc_6', character: core })).toBe(core);
+    // Non-chart values travel verbatim too: the accessor reads, it does not judge.
+    // A malformed core is the CHOKEPOINT's problem, and it is total over garbage.
+    expect(authoredCharacterOf({ character: 'nonsense' })).toBe('nonsense');
+    expect(authoredCharacterOf({ character: null })).toBeNull();
+  });
+
+  test('⭐ THE CHOKEPOINT IS UNMOVED — the accessor reproduces the raw read exactly', () => {
+    // The old body was `asObject(npc).character`. Same answers, and the by-reference
+    // identity that the byte-identity claim rests on is asserted through the
+    // chokepoint itself rather than only on the accessor.
+    const core = { axes: { MERCY: { pole: 'vice', level: 'a_touch' } } };
+    for (const npc of [{ character: core }, { id: 'x', character: core }]) {
+      expect(authoredCharacterOf(npc)).toBe(effectiveCharacter(npc, undefined));
+      expect(effectiveCharacter(npc, {})).toBe(core);
+    }
+    expect(effectiveCharacter({ id: 'no chart' }, undefined)).toBeUndefined();
+    expect(effectiveCharacter(null, undefined)).toBeUndefined();
   });
 });
