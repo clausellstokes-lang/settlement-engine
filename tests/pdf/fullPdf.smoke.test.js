@@ -24,7 +24,25 @@
  * here runs in ~100ms and catches the class of bugs we actually see.
  */
 
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
+
+// PASSTHROUGH mock of the renderer: every primitive stays real (the element trees
+// this suite builds are unaffected), and ONLY `pdf` is swapped for a capture that
+// records the element the PRODUCTION entry point actually renders. It fabricates no
+// props and no shape — it reads the real call. generateSettlementPDF is otherwise
+// unmockable end-to-end here: its real body needs a Blob URL and a fontkit render
+// this suite deliberately avoids paying (see the header).
+const renderedElements = [];
+vi.mock('@react-pdf/renderer', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    pdf: (element) => {
+      renderedElements.push(element);
+      return { toBlob: async () => new Blob(['%PDF-'], { type: 'application/pdf' }) };
+    },
+  };
+});
 import React from 'react';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
@@ -123,5 +141,53 @@ describe('PDF full-document assembly smoke test', () => {
       variant: 'canon_dossier',
     });
     expect(element).toBeTruthy();
+  });
+});
+
+/**
+ * THE EXPORT-DATE SEAM REACHES THE PRODUCTION ENTRY POINT.
+ *
+ * SettlementPDF has carried an injectable `now` since the export-date seam landed,
+ * and Cover consumes it — but `generateSettlementPDF`, the function every export
+ * surface actually calls, never accepted or forwarded it. So the seam was reachable
+ * ONLY from tests that construct SettlementPDF directly (exportDateSeam.test.js):
+ * no production export could ever be rendered reproducibly, and the artifact's
+ * `creationDate` was likewise left to react-pdf's wall-clock default. Both are
+ * forwarded now, and these pins hold the whole chain — options → props → document —
+ * rather than the component half of it.
+ */
+describe('generateSettlementPDF forwards the reproducibility seam (production entry point)', () => {
+  const origCreate = globalThis.URL.createObjectURL;
+  const origRevoke = globalThis.URL.revokeObjectURL;
+
+  async function exportWith(options) {
+    // jsdom implements neither; the real body calls both around the download anchor.
+    globalThis.URL.createObjectURL = () => 'blob:pdf';
+    globalThis.URL.revokeObjectURL = () => {};
+    try {
+      renderedElements.length = 0;
+      const { generateSettlementPDF } = await import('../../src/utils/generateSettlementPDF.js');
+      await generateSettlementPDF(generate(), options);
+      expect(renderedElements).toHaveLength(1);
+      return renderedElements[0].props;
+    } finally {
+      globalThis.URL.createObjectURL = origCreate;
+      globalThis.URL.revokeObjectURL = origRevoke;
+    }
+  }
+
+  test('an injected `now` and `creationDate` reach the rendered document props', async () => {
+    const when = new Date('1987-06-05T12:00:00Z');
+    const props = await exportWith({ now: 'Cyfrin 1, 2026', creationDate: when });
+    expect(props.now).toBe('Cyfrin 1, 2026');
+    expect(new Date(props.creationDate).toISOString()).toBe(when.toISOString());
+  });
+
+  test('omitting them keeps the wall-clock defaults (no caller behaviour change)', async () => {
+    const props = await exportWith({});
+    // anchored: the export demonstrably ran and rendered (asserted in exportWith),
+    // so these nulls are the untouched defaults rather than a skipped render.
+    expect(props.now).toBeNull();
+    expect(props.creationDate).toBeNull();
   });
 });
