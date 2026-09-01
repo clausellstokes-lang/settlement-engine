@@ -29,7 +29,8 @@ import { getAllModifiers } from '../lib/relationshipGraph.js';
 import { autoLayout } from './graphLayout.js';
 import { toPublicSafe } from '../domain/display/publicSafe.js';
 import { tickCalendarLabel } from '../domain/display/humanizeEngineTokens.js';
-import { collectRealmSummary } from './generateCampaignPDF.js';
+import { collectRealmSummary, durationBand } from './generateCampaignPDF.js';
+import { track, EVENTS } from '../lib/analytics.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { slugify } from '../kernel/slugify.js';
 
@@ -475,6 +476,7 @@ function buildRealmChapter(d, book, pageN) {
  */
 export function generateWorldBook(campaign, allSaves = [], opts = {}) {
   if (!campaign) throw new Error('generateWorldBook: missing campaign');
+  const startedAt = Date.now();
   const book = collectWorldBook(campaign, allSaves, opts);
   const d = new jsPDF({ unit: 'mm', format: 'a4', compress: true });
   let pageN = 1;
@@ -489,4 +491,26 @@ export function generateWorldBook(campaign, allSaves = [], opts = {}) {
   buildReceiptsAppendix(d, book, pageN);
   const slug = slugify(book.title || 'world', { max: 40, fallback: 'world' });
   d.save(`world-book-${slug}${book.mode === 'player' ? '-player' : ''}.pdf`);
+
+  // Export succeeded (doc.save triggered the download). The two sibling exporters
+  // have always reported here; the World Book never did, so every book a buyer
+  // successfully downloaded read in the funnel as an export that was asked for and
+  // never arrived — its intent counterpart fires at CampaignFolder.jsx:147. Same
+  // event, same moment, and the SAME payload shape the campaign sibling emits:
+  // `canon_phase` is omitted at campaign scope (a multi-settlement export has no
+  // single phase) and there is no narrative variant. `mode` is deliberately NOT a
+  // prop — a new key would have to be documented in the taxonomy first.
+  //
+  // Fire-and-forget, exactly as the siblings are: an analytics fault must never
+  // surface as an export failure. NOT emitted here: captureFingerprint's
+  // per-settlement structural snapshots. The campaign PDF writes those, and adding a
+  // second writer of the same snapshots is a data-shape decision, not funnel
+  // consistency — recorded rather than smuggled in.
+  try {
+    track(EVENTS.PDF_EXPORT_COMPLETED, {
+      scope: 'campaign',
+      narrative_mode: false,
+      duration_band: durationBand(Date.now() - startedAt),
+    });
+  } catch { /* analytics never breaks export */ }
 }

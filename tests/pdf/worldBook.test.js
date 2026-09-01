@@ -16,6 +16,13 @@ import { describe, it, expect, vi } from 'vitest';
 // (The World Book's map chapter is module-private, and its geometry is not
 // recoverable from the painted stream without re-deriving the chapter's private
 // frame constants — observing the real call is the honest instrument.)
+// PASSTHROUGH spy on the analytics sink. Only `track` is swapped; EVENTS and every
+// other export stay real, so the pin asserts the REAL constant the exporter emits.
+vi.mock('../../src/lib/analytics.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  return { ...actual, track: vi.fn() };
+});
+
 vi.mock('../../src/utils/graphLayout.js', async (importOriginal) => {
   const actual = await importOriginal();
   return { ...actual, autoLayout: vi.fn(actual.autoLayout) };
@@ -23,6 +30,7 @@ vi.mock('../../src/utils/graphLayout.js', async (importOriginal) => {
 import { existsSync, rmSync, statSync } from 'node:fs';
 import { collectWorldBook, generateWorldBook, realmChapterRows } from '../../src/utils/generateWorldBook.js';
 import { autoLayout } from '../../src/utils/graphLayout.js';
+import { track, EVENTS } from '../../src/lib/analytics.js';
 
 function fixtureCampaign() {
   const ashford = {
@@ -396,5 +404,56 @@ describe('the realm map hands the layout edges it can actually read (9+ settleme
       expect(nodeIds.has(String(e.from))).toBe(true);
       expect(nodeIds.has(String(e.to))).toBe(true);
     }
+  });
+});
+
+/**
+ * THE WORLD BOOK IS A PAID EXPORT THAT REPORTED NOTHING WHEN IT SUCCEEDED.
+ *
+ * Both siblings emit PDF_EXPORT_COMPLETED the moment the download is triggered —
+ * generateSettlementPDF.js after `a.click()`, generateCampaignPDF.js after
+ * `doc.save()` — and this lane's repair 12 gave all three exports their intent
+ * counterpart (PDF_EXPORT_CLICKED, emitted for the World Book at
+ * CampaignFolder.jsx:147). The World Book emitted NO completion at all, so the
+ * campaign scope carried an intent count whose completion count was missing one of
+ * its two producers: every World Book a buyer successfully downloaded read, in the
+ * funnel, as an export that was asked for and never arrived.
+ *
+ * Funnel consistency, not a new capability: same event, same moment in the flow,
+ * same payload SHAPE the campaign sibling already emits (`canon_phase` is omitted at
+ * campaign scope because a multi-settlement export has no single phase, and there is
+ * no narrative variant).
+ */
+describe('a completed World Book reports itself (the funnel numerator)', () => {
+  it('emits PDF_EXPORT_COMPLETED once, with the campaign-scope payload shape', () => {
+    const { campaign, saves } = fixtureCampaign();
+    const file = 'world-book-the-long-winter.pdf';
+    track.mockClear();
+    try {
+      generateWorldBook(campaign, saves, { mode: 'dm', now: '1/1/2026' });
+    } finally {
+      rmSync(file, { force: true });
+    }
+    const completed = track.mock.calls.filter(([name]) => name === EVENTS.PDF_EXPORT_COMPLETED);
+    // anchored: exactly one per export — not zero, and not a double-fire that would
+    // over-count the numerator against PDF_EXPORT_CLICKED.
+    expect(completed).toHaveLength(1);
+    const [, props] = completed[0];
+    expect(props).toMatchObject({ scope: 'campaign', narrative_mode: false });
+    expect(typeof props.duration_band).toBe('string');
+    // The campaign sibling omits canon_phase at this scope; the shapes must match.
+    expect(props).not.toHaveProperty('canon_phase');
+  });
+
+  it('the player face reports too (both faces are real exports)', () => {
+    const { campaign, saves } = fixtureCampaign();
+    const file = 'world-book-the-long-winter-player.pdf';
+    track.mockClear();
+    try {
+      generateWorldBook(campaign, saves, { mode: 'player', now: '1/1/2026' });
+    } finally {
+      rmSync(file, { force: true });
+    }
+    expect(track.mock.calls.filter(([n]) => n === EVENTS.PDF_EXPORT_COMPLETED)).toHaveLength(1);
   });
 });
