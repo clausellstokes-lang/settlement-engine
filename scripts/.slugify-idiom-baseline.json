@@ -32,6 +32,5 @@
   "src/generators/steps/subsumptionPass.js",
   "src/lib/accountData.js",
   "src/lib/entities.js",
-  "src/lib/shareImage.js",
-  "src/utils/generateCampaignPDF.js"
+  "src/lib/shareImage.js"
 ]
