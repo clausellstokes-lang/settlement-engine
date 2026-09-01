@@ -178,6 +178,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
     try {
       // Lazy import keeps the @react-pdf/renderer chunk out of the initial
       // bundle for users who land here but never trigger a download.
+      track(EVENTS.PDF_EXPORT_CLICKED, { scope: 'settlement' });
       const { generateSettlementPDF } = await import('../utils/generateSettlementPDF.js');
       await generateSettlementPDF(settlement, { isAnonymous: false });
     } catch (e) {
