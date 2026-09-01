@@ -1,6 +1,6 @@
 # HANDOFF — CURRENT PROGRAM STATE (model-agnostic successor bootstrap)
 
-**Updated 2026-09-01 at the §879 RETROVALIDATION SITTING (ledger through §879.4; refreshed at
+**Updated 2026-09-01 at the §879.5 CUTOFF-PREP REFRESH (ledger through §879.5; refreshed at
 every collection per ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; ODQ §§150–§276 plus collecting/amending §§287–§289 contain the map
@@ -9,6 +9,8 @@ The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
 ## ⭐⭐⭐⭐ PICKUP AT §879 (2026-09-01 — THE RETROVALIDATION IS PAID; the seat is FABLE 5.1 on the §447 split; the arc RESUMES) — START HERE; supersedes every card below.
+
+⏱ **LIVE STATE, refreshed for a LIKELY USAGE CUTOFF (owner, 2026-09-01: "I'm likely to run out of five hour weekly usage so prepare for that for seamless transition").** Background lanes DIE with the session. ⭐ **`825f209c…/scratchpad/RESUME-BRIEFS-2026-09-01.md` carries every running lane's full brief and resume state** — re-dispatch from it anything found unwritten. RUNNING AT THIS REFRESH: **INSTRLAND** (Opus; dock `laneINSTRLAND-tree`; durable in its commits + append-only receipt; will HOLD before the gate) · **three CODE ASSESSORS** (Fable; read-only; outputs `ASSESS-ENGINE.md` / `ASSESS-SURFACES.md` / `ASSESS-ESTATE.md` in the same scratchpad — if absent at resume, the lane died before writing) answering the owner's pending question (verbatim in the briefs file): a CODE-ONLY, documents-excluded, exhaustive assessment of product · UX · code quality · architecture, as designed and after soak+tune — ⛔ OWED IN CHAT, not the ledger, synthesised by the chair from the three reports. OWED WHEN SLOTS FREE: PAIDFIX repairs 3–6 and GLYPH Cars A→C (briefs in the same file). OWNER'S STANDING ORDER (2026-09-01): continue landing and implementing everything up to the soak, 30-minute dispatcher (session-only cron `13,43 * * * *` — RE-ARM on resume), up to four lanes where appropriate; carve-outs unchanged.
 
 **THE SEAT:** Fable 5.1 chairs/architects/validates; Opus 5 implements/verifies (§447's split). Trailers accepted by `chair-commit.sh`: `Seat: Fable 5 — validated` · `Seat: Fable 5.1 — validated` · `Seat: Opus 5 — Fable-unvalidated`. **THE RETROVALIDATION (§879) IS PAID for the inverted span** — 64 items, 45 RATIFIED · 17 AMENDED · 2 REVERSED · 0 EVIDENCE-THIN; every §877 row carries a `*RULED (§879)*` line and the twelve lanes are enrolled and ruled as §879.1–§879.12 in `docs/FABLE_RETROVALIDATION_QUEUE.md`. ⛔ The historical strata (§685's dark window, §687–§723) stay QUEUED at the owner's trigger — the queue is NOT empty.
 
