@@ -151,6 +151,23 @@ const CONSUMERS = Object.freeze([
     probe: 'temperamentAxis: deityTemper({',
     note: 'the retired-field dual-write; a two-key literal, so the mirror keeps deriving',
   }),
+  // W-FAITH F7c (the §866 docket): the two former stored-field readers that
+  // resolve a temper THEMSELVES now do it through the seam. The other two former
+  // readers (FaithWar.jsx, journalPages.js) read the `temper` field off the
+  // liveWorld slice and are therefore downstream of liveWorld's call, not
+  // consumers of the seam.
+  Object.freeze({
+    file: 'src/domain/display/warResolve.js',
+    provenance: 'embed',
+    probe: 'const deity = settlement?.config?.primaryDeitySnapshot',
+    note: 'the faith-opposition read + the AI narrative context temper (F7c re-point)',
+  }),
+  Object.freeze({
+    file: 'src/pdf/lib/liveWorld.js',
+    provenance: 'embed',
+    probe: 'const snap = s?.config?.primaryDeitySnapshot || null',
+    note: 'the printed patron temper for the PDF/foundry surfaces (F7c re-point)',
+  }),
 ]);
 
 /**
@@ -169,21 +186,19 @@ const EFFECTS_CALLER_RAW = 'src/components/compendium/deityDraftPreview.js';
 
 /**
  * THE RETIRED-FIELD DIVERGENCE REGISTER — src modules that make a SEMANTIC read of
- * the stored `temperamentAxis` instead of routing through the derivation. Every one
- * is a display/export surface, and each can print a word the engine disagrees with.
+ * the stored `temperamentAxis` instead of routing through the derivation.
  *
- * This register is SHRINK-ONLY and it is NOT this car's to empty: re-pointing these
- * at `deityTemper` changes what a DM reads and what the AI narrative context is
- * handed, which is a display-behaviour act with its own review. It is pinned here so
- * the set cannot GROW quietly, and so the next lane inherits the addresses rather
- * than re-finding them.
+ * ⭐ EMPTIED BY W-FAITH F7c (the §866 docket — the display act this register's own
+ * note reserved for "the next lane"). The four former readers — warResolve.js,
+ * journalPages.js, liveWorld.js, FaithWar.jsx — now hear the derivation:
+ * warResolve and liveWorld call `deityTemper` themselves (they joined CONSUMERS
+ * above, with probes), and FaithWar/journalPages read the `temper` field off the
+ * liveWorld slice. DECLARED DISPLAY SHIFT: a deity whose stored mirror disagreed
+ * with its axes (or its authored word) now displays — and hands the AI narrative
+ * context — the engine's answer. The register stays, EMPTY and shrink-only, so a
+ * new stored-field read anywhere in src/ lands here and reds.
  */
-const STORED_FIELD_READERS = Object.freeze([
-  'src/domain/display/warResolve.js',
-  'src/foundry/journalPages.js',
-  'src/pdf/lib/liveWorld.js',
-  'src/pdf/sections/FaithWar.jsx',
-]);
+const STORED_FIELD_READERS = Object.freeze([]);
 
 /**
  * Modules that COPY embed fields without reading their meaning — the two commit-time
@@ -270,13 +285,15 @@ describe('W-FAITH F2c · THE DENOMINATOR (every deityTemper reader, none unaccou
     expect(codeOf(OWNER)).toContain('export function deityTemper');
   });
 
-  test('the consumer census is EXACTLY the eleven named modules', () => {
+  test('the consumer census is EXACTLY the thirteen named modules', () => {
+    // Eleven at F2c/F3c; W-FAITH F7c re-pointed the two self-resolving display
+    // surfaces (warResolve, liveWorld) through the seam, so they joined.
     const found = SRC_MODULES.filter((rel) => {
       if (rel === OWNER) return false;
       return /\bdeityTemper\s*\(/.test(codeOf(rel));
     });
     expect(found).toEqual(CONSUMER_FILES);
-    expect(found).toHaveLength(11);
+    expect(found).toHaveLength(13);
   });
 
   test('every named consumer still carries its declared provenance probe', () => {
@@ -400,9 +417,9 @@ describe('W-FAITH F3c · PROVENANCE (how the authored word reaches each consumer
     expect(naming).toEqual([EMBED_ROSTER]);
   });
 
-  test('ten of the eleven consumers read an embed — and the embed now carries the word', () => {
+  test('twelve of the thirteen consumers read an embed — and the embed now carries the word', () => {
     const byEmbed = CONSUMERS.filter((c) => c.provenance === 'embed').map((c) => c.file);
-    expect(byEmbed).toHaveLength(10);
+    expect(byEmbed).toHaveLength(12);
     // The consequence, stated as arithmetic rather than as prose: the ten consumers
     // F2c measured as unreachable are exactly the ten the carry reached. Nothing was
     // re-pointed at a different source — the SOURCE started carrying the field.
@@ -497,14 +514,19 @@ describe('W-FAITH F2c · THE PROVENANCE SPLIT, EXECUTED (not merely source-scann
 });
 
 describe('W-FAITH F2c · THE RETIRED FIELD (inert to the seam, still legible on four surfaces)', () => {
-  test('the stored-field reader register is EXACTLY the four display surfaces', () => {
-    // SHRINK-ONLY. A new engine file reading `.temperamentAxis` for meaning is the
-    // regression D1's inertness promise exists to prevent, and it would land here.
+  test('the stored-field reader register is EMPTY — no src module reads the mirror for meaning', () => {
+    // SHRINK-ONLY, and it shrank to nothing (W-FAITH F7c, the §866 docket). A new
+    // file reading `.temperamentAxis` for meaning is the regression D1's inertness
+    // promise exists to prevent, and it would land here.
     const semantic = SRC_MODULES.filter((rel) => {
       if (rel === WRITE_TIME_WALL || EMBED_WRITERS.includes(rel)) return false;
       return /[.[]['"]?temperamentAxis/.test(codeOf(rel));
     });
     expect(semantic).toEqual([...STORED_FIELD_READERS].sort());
+    expect(STORED_FIELD_READERS).toHaveLength(0);
+    // ANCHORED: the scan itself is proven able to see — an embed writer DOES
+    // still carry the token, so an emptied SRC_MODULES walk cannot pass this.
+    expect(EMBED_WRITERS.some((rel) => /temperamentAxis/.test(codeOf(rel)))).toBe(true);
   });
 
   test('no worldPulse engine module makes a semantic read of the retired field', () => {
@@ -520,16 +542,27 @@ describe('W-FAITH F2c · THE RETIRED FIELD (inert to the seam, still legible on 
     expect(engine).toContain('src/domain/worldPulse/applyWorldPulse.js');
   });
 
-  test('an authored temper is invisible on all four stored-field surfaces — recorded, not fixed', () => {
-    // The honest consequence of the two findings together: those surfaces print the
-    // RETIRED mirror, and the mirror is minted from the axes, so an authored word
-    // would not show there even once the embed carries it. Named here so the next
-    // lane inherits the addresses instead of rediscovering them.
-    for (const rel of STORED_FIELD_READERS) {
-      expectAbsentWithAnchor(
-        codeOf(rel), 'authoredTemper', 'temperamentAxis',
-        `${rel} still prints the retired mirror`,
-      );
+  test('the authored word is now AUDIBLE on the former stored-field surfaces (F7c, executed)', () => {
+    // F2c recorded the opposite as "recorded, not fixed"; F7c fixed it, and the
+    // claim is executed rather than source-scanned: one deity whose stored
+    // mirror, axes and authored word all disagree, read through the same seam
+    // call the two self-resolving surfaces now make. The display answer is the
+    // authored word — the F3c provenance-split receipt, extended to display.
+    const embedded = deitySnapshotFrom({
+      name: 'Vharr', alignmentAxis: 'evil', lawAxis: 'chaotic',
+      temperamentAxis: 'warlike', authoredTemper: 'peacelike',
+    });
+    expect(deityTemper(embedded)).toBe('peacelike');
+    // …and the four former reader files no longer carry a semantic stored read
+    // at all (the emptied register arm above is the census; this is the anchor
+    // that the FILES still exist and still speak of temper at all).
+    for (const rel of [
+      'src/domain/display/warResolve.js',
+      'src/foundry/journalPages.js',
+      'src/pdf/lib/liveWorld.js',
+      'src/pdf/sections/FaithWar.jsx',
+    ]) {
+      expect(/\btemper\b/i.test(codeOf(rel)), `${rel} no longer mentions temper at all`).toBe(true);
     }
   });
 });

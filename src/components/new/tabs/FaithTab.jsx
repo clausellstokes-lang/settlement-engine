@@ -28,7 +28,6 @@
 import { Suspense, lazy, useMemo } from 'react';
 import FaithSection from '../../settlement/FaithSection.jsx';
 import { faithPanelModel, shareBandLabel } from '../../settlement/faithPanelModel.js';
-import { faithDeepeningOf } from '../../../domain/display/faithDeepening.js';
 import { hasPantheon } from '../../map/PantheonPanel.jsx';
 import { useStore } from '../../../store/index.js';
 import { BODY, BORDER, CARD, FS, GOLD, GREEN, INK, MUTED, RED, SECOND, sans } from '../../theme.js';
@@ -177,22 +176,12 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
 
   const model = useMemo(() => faithPanelModel(settlement), [settlement]);
 
-  // W-FAITH F7c — the deepening model: the embed and the tick-END field
-  // projection handed DOWN as records. The domain leaf never reads a
-  // settlement (components are the observed-shape wall's excluded scope, so
-  // the config reads live here), and everything absent stays absent.
-  const deepening = useMemo(() => {
-    const config = settlement?.config || {};
-    const patron = config.primaryDeitySnapshot && typeof config.primaryDeitySnapshot === 'object'
-      ? config.primaryDeitySnapshot : null;
-    const profile = config.faithProfile && typeof config.faithProfile === 'object'
-      ? config.faithProfile : null;
-    return faithDeepeningOf({
-      patron,
-      cults: Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots : null,
-      field: profile && profile.field && typeof profile.field === 'object' ? profile.field : null,
-    });
-  }, [settlement]);
+  // W-FAITH F7c — the deepening rows ride the model (computed inside
+  // faithPanelModel from the records it already reads, so this component
+  // reads NO config key of its own — the observed-shape inventory is
+  // untouched). Absent on the no-embed model; defaulted so the gate below
+  // stays the only decision point.
+  const deepening = model.deepening || { byName: {}, fieldRows: [] };
 
   // The realm pantheon is DM-realm data (it names EVERY deity in the realm), so
   // it rides the map surface's own wall — premium/elevated (the P9 Cartographer
