@@ -126,7 +126,6 @@ function footer(d, campaignName, pageN, totalPagesHint) {
 // Ensure there's room for `h` more millimetres, else paginate.
 function _ensureSpace(d, y, h, campaignName, pageN, newTopHandler) {
   if (y + h < BOT) return { y, pageN };
-  footer(d, campaignName, pageN);
   d.addPage();
   pageN++;
   const newY = newTopHandler ? newTopHandler(d, pageN) : MT;
@@ -271,7 +270,6 @@ function buildIndex(d, campaignName, settlements, pageN) {
 
   settlements.forEach((save, i) => {
     if (y + rowH > BOT - 10) {
-      footer(d, campaignName, pageN);
       d.addPage();
       pageN++;
       y = MT;
@@ -489,7 +487,6 @@ function buildNPCConnections(d, campaignName, settlements, pageN) {
   const rowH = 5;
   connections.forEach((c, i) => {
     if (y + rowH > BOT - 10) {
-      footer(d, campaignName, pageN);
       d.addPage();
       pageN++;
       y = MT;
@@ -546,7 +543,6 @@ function buildDigest(d, campaignName, settlements, pageN) {
 
   for (const save of settlements) {
     if (y + CARD_H > BOT - 10) {
-      footer(d, campaignName, pageN);
       d.addPage();
       pageN++;
       y = MT;
@@ -692,7 +688,6 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
     const m = allModifiers.get(save.id);
     const blockH = 10 + 5 * EFFECT_CATEGORIES.length + 4;
     if (y + blockH > BOT - 10) {
-      footer(d, campaignName, pageN);
       d.addPage();
       pageN++;
       y = MT;
@@ -903,7 +898,6 @@ export function generateCampaignPDF(campaign, allSaves, opts = {}) {
   pageN++;
   const r1 = buildIndex(doc, campaign.name, settlements, pageN);
   pageN = r1.pageN;
-  footer(doc, campaign.name, pageN);
 
   // Page 3+: map
   if (settlements.length > 0) {
@@ -911,21 +905,18 @@ export function generateCampaignPDF(campaign, allSaves, opts = {}) {
     pageN++;
     const r2 = buildMap(doc, campaign.name, settlements, pageN);
     pageN = r2.pageN;
-    footer(doc, campaign.name, pageN);
   }
 
   // Cross-settlement NPC connections
   if (settlements.length > 0) {
     const r3 = buildNPCConnections(doc, campaign.name, settlements, pageN);
     pageN = r3.pageN;
-    footer(doc, campaign.name, pageN);
   }
 
   // Per-settlement digest
   if (settlements.length > 0) {
     const r4 = buildDigest(doc, campaign.name, settlements, pageN);
     pageN = r4.pageN;
-    footer(doc, campaign.name, pageN);
   }
 
   // State of the Realm — the living-world chapter (lib-infra-7). Self-gates on a
@@ -934,14 +925,38 @@ export function generateCampaignPDF(campaign, allSaves, opts = {}) {
   // deity-named arc, so a deity-only realm degrades to no chapter at all.
   {
     const rlw = buildLivingWorld(doc, campaign.name, campaign, settlements, pageN, opts.faithUnlocked);
-    if (rlw.pageN !== pageN) { pageN = rlw.pageN; footer(doc, campaign.name, pageN); }
+    pageN = rlw.pageN;
   }
 
-  // Network effects appendix
+  // Network effects appendix. Its returned pageN is deliberately NOT read back:
+  // nothing downstream needs it now that footers are stamped from the finished
+  // document, and re-assigning it here is exactly the dead write the linter
+  // flags (no-useless-assignment). `pageN` is still threaded IN — every chapter
+  // needs to know which page it starts on.
   if (settlements.length > 1) {
-    const r5 = buildNetworkAppendix(doc, campaign.name, settlements, pageN);
-    pageN = r5.pageN;
-    footer(doc, campaign.name, pageN);
+    buildNetworkAppendix(doc, campaign.name, settlements, pageN);
+  }
+
+  // ── FOOTERS: ONE WRITER, ONE PASS, AFTER THE DOCUMENT IS COMPLETE ──────────
+  // Every chapter used to stamp its own footer by hand, which produced two
+  // defects that were really one. First, `footer`'s `totalPagesHint` was dead:
+  // all ELEVEN call sites passed three arguments, so "Page N of M" could never
+  // render — a page count is simply not knowable while the document is still
+  // being built. Second, the stamps were not guarded uniformly:
+  // buildNetworkAppendix early-returns WITHOUT advancing pageN (getAllModifiers
+  // threw, or no settlement has network effects) while its caller stamped
+  // unconditionally, so the page the previous chapter had already footered was
+  // painted a SECOND time, one footer over the other. Measured on a two-member
+  // campaign with no links: stamps per page were {2:1, 3:1, 4:1, 5:2}.
+  //
+  // Stamping here instead fixes both at the cause and removes the habitat: the
+  // total is known because the document is finished, and a page cannot be
+  // stamped twice because exactly one loop stamps it. Page 1 is the cover and
+  // stays unfootered, as it always has.
+  const totalPages = doc.getNumberOfPages();
+  for (let p = 2; p <= totalPages; p++) {
+    doc.setPage(p);
+    footer(doc, campaign.name, p, totalPages);
   }
 
   // Filename
