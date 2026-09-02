@@ -31,6 +31,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 import { assertOutsideRepository, runIdentity } from './archive.mjs';
+import { evaluateReceipt } from './evaluate.mjs';
 import { compareRuns, grid, workerCount } from './pool.mjs';
 
 /**
@@ -128,6 +129,46 @@ export function determinismFindings({ inPoolReceiptPath, soloReceiptPath }) {
   return compareRuns(inPool, solo);
 }
 
+/**
+ * THE CALLER RIDER (SOAKCHAIN Car 2). Every completed cell's receipt is evaluated against
+ * the tripwire registry at the pool's ONE completion seam — `child.on('close')` in
+ * `startOne` — so the registry finally has a caller on the pool path as well as on the CI
+ * step. Findings carry their `cell` and `cellKey` because that is exactly the shape
+ * `rollingReport` and the seed ledger's `recordRun` already read.
+ *
+ * ⛔ IT CANNOT BREAK SK-7's CANCELLATION AND IT DOES NOT FORK THE RUNNER. It is a pure
+ * read of a file the child already wrote, after that child has closed; a cell whose receipt
+ * is missing or unreadable (a crashed or cancelled worker) yields an EMPTY roster and a
+ * stated reason rather than a throw, because a runner that dies while reporting on a run
+ * that died is the worst possible moment to lose the report.
+ *
+ * @param {{cell: object, code: number}} result one entry of `executePlan`'s return
+ * @param {{profile?: string, rolling?: boolean}} [options]
+ * @returns {{cellKey: string, findings: Array<object>, observability: Array<object>,
+ *            firings: number, unreadable: string|null}}
+ */
+export function evaluateCompletedCell(result, { profile = '', rolling = true } = {}) {
+  const cell = result?.cell || {};
+  const cellKey = String(cell.key || '');
+  const empty = (unreadable) => ({ cellKey, findings: [], observability: [], firings: 0, unreadable });
+  if (!cell.receipt) return empty('the cell names no receipt path');
+  let receipt;
+  try {
+    receipt = JSON.parse(readFileSync(cell.receipt, 'utf8'));
+  } catch (error) {
+    return empty(`receipt unreadable (${error instanceof Error ? error.message : String(error)})`);
+  }
+  const evaluated = evaluateReceipt(receipt, { profile, rolling });
+  const withAddress = (firing) => ({ ...firing, cell, cellKey });
+  return {
+    cellKey,
+    findings: evaluated.findings.map(withAddress),
+    observability: evaluated.observability.map(withAddress),
+    firings: evaluated.deterministicFirings,
+    unreadable: null,
+  };
+}
+
 /** CLI. `node scripts/soak/run.mjs --substrate <dir> --tip <sha> --config <json>` */
 export async function main(argv = process.argv) {
   const arg = (name, dflt) => {
@@ -167,6 +208,32 @@ export async function main(argv = process.argv) {
   const failed = results.filter((row) => row.code !== 0);
   console.log(`[soak] ${results.length - failed.length}/${results.length} cells exit 0`);
   for (const row of failed) console.log(`  FAILED ${row.cell.key} (exit ${row.code})`);
+
+  // THE RIDER, at the one seam every cell passes through on its way out. A pool run is
+  // ROLLING by construction, so the annotation says so and the freeze gate keeps refusing
+  // it — which is correct, and is now stated rather than assumed.
+  const evaluations = results.map((row) => evaluateCompletedCell(row, {
+    profile: String(config.profile || 'cert-30'),
+    rolling: true,
+  }));
+  const findings = evaluations.flatMap((row) => row.findings);
+  const observability = evaluations.flatMap((row) => row.observability);
+  console.log(`[soak] tripwires: ${findings.length} deterministic finding(s), ${observability.length} host-observability note(s)`);
+  for (const row of evaluations) {
+    if (row.unreadable) console.log(`  UNEVALUATED ${row.cellKey} — ${row.unreadable}`);
+  }
+  for (const firing of findings) console.log(`  FINDING ${firing.cellKey} · ${firing.id} — ${firing.detail}`);
+  writeFileSync(join(receiptDir, 'firings.json'), `${JSON.stringify({
+    kind: 'soak_pool_firings',
+    tip: identity.sourceSha,
+    cells: evaluations.length,
+    // The seed ledger's `recordRun` reads `findings` and counts `firings: prior.firings + 1`
+    // per fresh identity; this is the roster it was always meant to be handed.
+    firings: findings.length,
+    findings,
+    observability,
+    unevaluated: evaluations.filter((row) => row.unreadable).map((row) => ({ cellKey: row.cellKey, reason: row.unreadable })),
+  }, null, 2)}\n`);
   return failed.length === 0 ? 0 : 1;
 }
 
