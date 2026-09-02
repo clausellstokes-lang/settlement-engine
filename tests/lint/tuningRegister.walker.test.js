@@ -52,7 +52,7 @@ import { execFileSync } from 'node:child_process';
 import { codeOnly } from '../helpers/codeOnlySource.js';
 import { gitResolvesCommit, UNRESOLVABLE_WELL_FORMED_SHA } from '../helpers/gitObjectStore.js';
 import {
-  measureTree, discoverTables, tableSpan, flattenLeaves, spanDigest,
+  measureTree, discoverTables, tableSpan, flattenLeaves, spanDigest, astKeyNames,
   countBareDecimals, countUnregisteredNamed, resolveDependents,
   loadTuningRegister, loadTuningInventory, signatureStateOf, tuningRegisterFingerprint,
   refreezeRefusals, signingRecordMalformations, tuningIdFor, REGISTER_REL,
@@ -71,8 +71,8 @@ const INVENTORY_PATH = join(ROOT, INVENTORY_REL);
 const CEILINGS = Object.freeze({
   BARE_DECIMAL_CEILING: 7003,
   UNREGISTERED_NAMED_CEILING: 534,
-  UNITLESS_TABLE_CEILING: 224,
-  DECLARED_DIVERGENCE_CEILING: 0,
+  UNITLESS_TABLE_CEILING: 220,
+  DECLARED_DIVERGENCE_CEILING: 4,
   PHANTOM_ALIAS_CEILING: 3,
   DECLARED_GROWTH_CEILING: 0,
 });
@@ -252,6 +252,31 @@ describe('tuning register — the detectors are honest', () => {
       expect(bare['src/domain/probe.js'], 'the 3.14 in the comment and the 9.99 and 1.5 in'
         + ' the string are prose; only the live 2.25 is a bare decimal').toBe(1);
     });
+  });
+
+  test('the key count comes from the syntax tree, so a shorthand table is not read as empty', () => {
+    const shorthand = `export const SHORT_TUNING = Object.freeze({\n  ALPHA,\n  BETA,\n  GAMMA,\n});\n`;
+    const span = tableSpan(shorthand);
+    expect(span.keys, 'the recon\'s machine counts depth-1 COLONS, and a shorthand table has'
+      + ' none — so on its own it reports an empty table').toBe(0);
+    expect(astKeyNames(span.spanText), 'the syntax tree sees a shorthand property exactly as it'
+      + ' sees a written one').toEqual(['ALPHA', 'BETA', 'GAMMA']);
+    // anchored: the colon-written fixture below is counted correctly by BOTH, so the machine
+    // is not simply broken — it is blind to one idiom, which is why the tree is authoritative.
+    expect(tableSpan(FIXTURE_FROZEN_TABLE).keys).toBe(3);
+  });
+
+  test('every measured table agrees between the span machine and the syntax tree', () => {
+    const problems = [];
+    for (const [id, table] of Object.entries(live.tables)) {
+      const declaredKeys = Object.keys(table.leaves).filter((path) => !path.includes('.'));
+      if (declaredKeys.length !== table.keys) {
+        problems.push(`${id}: keys ${table.keys} but ${declaredKeys.length} depth-1 leaves`);
+      }
+    }
+    expect(problems, 'the key count and the depth-1 leaf set are two readings of one fact and'
+      + ' must agree for every table. This arm is why the shorthand blindness was found: 21 of'
+      + ' 210 tables disagreed, one of them reading ZERO keys against its actual seventeen.').toEqual([]);
   });
 
   test('dependents follow one re-export hop', () => {
@@ -506,6 +531,224 @@ describe('tuning register — the inventory is frozen and honest', () => {
       + ' every consumer').toEqual([...UNIT_VOCABULARY]);
     expect(TREES_P1).toEqual(['src']);
     expect(TREES_P2P3).toEqual(['src/domain', 'src/generators']);
+  });
+});
+
+/* ================================================================= describe D */
+
+describe('tuning register — units and bands are finite', () => {
+  test('every declared unit is a word of the closed vocabulary', () => {
+    const problems = [];
+    for (const [id, row] of Object.entries(register.tables)) {
+      if (row.unit === null) continue;
+      for (const [key, unit] of Object.entries(row.unit)) {
+        if (!UNIT_VOCABULARY.includes(unit)) problems.push(`${id}.${key}: '${unit}'`);
+      }
+    }
+    for (const [name, role] of Object.entries(register.roles)) {
+      if (role.unit !== null && !UNIT_VOCABULARY.includes(role.unit)) problems.push(`role ${name}: '${role.unit}'`);
+    }
+    expect(problems, 'FINITE SEMANTICS: fourteen words, closed. A free-text unit is how a'
+      + " unit-less field acquires a different unit at every consumer, and 'weeks_ish' would"
+      + ' read as a unit right up until two lanes disagreed about what it meant.').toEqual([]);
+  });
+
+  test('a unit outside the vocabulary is refused rather than coerced', () => {
+    const forged = { ALPHA: 'weeks_ish' };
+    const outside = Object.entries(forged).filter(([, unit]) => !UNIT_VOCABULARY.includes(unit));
+    expect(outside.map(([key]) => key), 'the plant must be named').toEqual(['ALPHA']);
+    // anchored: a real word from the same list passes the same predicate one line below, so
+    // an emptied vocabulary could not produce both answers.
+    expect(UNIT_VOCABULARY.includes('weeks')).toBe(true);
+  });
+
+  test('units are all-or-none per table', () => {
+    const problems = [];
+    for (const [id, row] of Object.entries(register.tables)) {
+      if (row.unit === null) continue;
+      const measured = live.tables[id];
+      if (!measured) { problems.push(`${id}: declared units for a table that is not measured`); continue; }
+      const keys = Object.keys(measured.leaves);
+      const declared = Object.keys(row.unit);
+      for (const key of keys) if (!declared.includes(key)) problems.push(`${id}: ${key} has no unit`);
+      for (const key of declared) if (!keys.includes(key)) problems.push(`${id}: ${key} is a unit for no leaf`);
+    }
+    expect(problems, 'a HALF-united table is worse than an un-united one: it reads as enriched'
+      + ' while leaving the keys nobody thought about silently unlabelled.').toEqual([]);
+  });
+
+  test('every declared band contains the live value', () => {
+    const problems = [];
+    let banded = 0;
+    for (const [id, row] of Object.entries(register.tables)) {
+      if (row.band === null) continue;
+      banded += 1;
+      const measured = live.tables[id];
+      for (const [key, band] of Object.entries(row.band)) {
+        const value = measured?.leaves?.[key];
+        if (typeof value !== 'number') { problems.push(`${id}.${key}: banded but not a live number`); continue; }
+        if (value < band[0] || value > band[1]) problems.push(`${id}.${key}: ${value} outside [${band[0]}, ${band[1]}]`);
+      }
+    }
+    expect(problems, 'a band that does not contain the value it governs is not a band').toEqual([]);
+    // ⚠ VACUOUS TODAY, AND SAID RATHER THAN HIDDEN: no row carries a band, because a band is a
+    // claim about how far a value may travel and that is the SITTING'S business, not a lane's.
+    // The arm is armed now so the first band ever written is checked by the run that writes it.
+    expect(banded, 'no band is declared before the sitting').toBe(0);
+    const contains = (band, value) => value >= band[0] && value <= band[1];
+    expect(contains([0.1, 0.2], 0.05), 'and the predicate itself is proven by fixture, so the'
+      + ' vacuity is in the DATA and never in the check').toBe(false);
+    expect(contains([0.1, 0.2], 0.15)).toBe(true);
+  });
+
+  test('a unit-less table is not signed', () => {
+    const problems = [];
+    for (const [id, row] of Object.entries(register.tables)) {
+      if (row.status === 'signed' && row.unit === null) problems.push(id);
+    }
+    expect(problems, 'signing a table whose keys carry no unit signs a number whose meaning'
+      + ' nobody wrote down. The owner may sign a value; nobody may sign an unlabelled one.').toEqual([]);
+  });
+
+  test('the unit-less count only shrinks', () => {
+    const unitless = Object.values(register.tables).filter((row) => row.unit === null).length;
+    expect(unitless, 'enrichment is measurable rather than aspirational: a draft label on 220'
+      + ' tables is truer than silence, and this ceiling is the only thing that makes the'
+      + ' remaining work visible').toBeLessThanOrEqual(CEILINGS.UNITLESS_TABLE_CEILING);
+    const united = Object.keys(register.tables).length - unitless;
+    expect(united, 'and the desk roster enriched at this car is not zero').toBeGreaterThanOrEqual(4);
+  });
+});
+
+/* ================================================================= describe E */
+
+describe('tuning register — one value, one home', () => {
+  const leafValue = (member) => {
+    const hash = member.indexOf('#');
+    const rest = member.slice(hash + 1);
+    const dot = rest.indexOf('.');
+    const id = `${member.slice(0, hash)}#${rest.slice(0, dot)}`;
+    return live.tables[id]?.leaves?.[rest.slice(dot + 1)];
+  };
+
+  test('every role member resolves to a measured leaf', () => {
+    const problems = [];
+    for (const [name, role] of Object.entries(register.roles)) {
+      if (role.members.length === 0) problems.push(`${name}: a role with no members claims nothing`);
+      for (const member of role.members) {
+        if (leafValue(member) === undefined && !live.tables[member]) {
+          problems.push(`${name}: ${member} resolves to no measured leaf or table`);
+        }
+      }
+    }
+    expect(problems, 'THE CITATION LAW: a role asserts that each member exists at that exact'
+      + ' path. Members are MEASURED by leaf name rather than typed by hand, so a role cannot'
+      + ' quietly stop covering a site — but the assertion is still checked.').toEqual([]);
+  });
+
+  test('a member whose table carries units carries the role unit', () => {
+    const problems = [];
+    let checked = 0;
+    for (const [name, role] of Object.entries(register.roles)) {
+      if (role.unit === null) continue;
+      for (const member of role.members) {
+        const hash = member.indexOf('#');
+        const rest = member.slice(hash + 1);
+        const dot = rest.indexOf('.');
+        if (dot < 0) continue;
+        const id = `${member.slice(0, hash)}#${rest.slice(0, dot)}`;
+        const declared = register.tables[id]?.unit;
+        if (!declared) continue;
+        checked += 1;
+        const unit = declared[rest.slice(dot + 1)];
+        if (unit !== role.unit) problems.push(`${name}: ${member} is '${unit}', the role is '${role.unit}'`);
+      }
+    }
+    expect(problems, 'one role, one unit. Where a table has been enriched the two readings must'
+      + ' agree, and where it has not this arm says nothing rather than guessing.').toEqual([]);
+    expect(checked, 'and the arm is not vacuous: the enriched desk roster puts real members'
+      + ' under it').toBeGreaterThan(0);
+  });
+
+  test('one value, or a typed divergence', () => {
+    const problems = [];
+    for (const [name, role] of Object.entries(register.roles)) {
+      const values = role.members.map(leafValue).filter((value) => typeof value === 'number');
+      const distinct = [...new Set(values)];
+      if (distinct.length <= 1) continue;
+      if (!role.divergence) {
+        problems.push(`${name}: ${distinct.length} distinct values ${JSON.stringify(distinct)} and no typed divergence`);
+        continue;
+      }
+      if (!DIVERGENCE_REASONS.includes(role.divergence.reason)) {
+        problems.push(`${name}: divergence reason '${role.divergence.reason}' is outside the closed set`);
+      }
+      if (!/^TR-\d|^\u00a7\d/.test(String(role.divergence.odqRow ?? ''))) {
+        problems.push(`${name}: the divergence cites no owner row`);
+      }
+    }
+    expect(problems, 'two members of one role holding different values is either deliberate, a'
+      + ' unit difference, or drift — and saying WHICH is the whole point. An untyped'
+      + ' divergence is a value disagreement nobody has looked at.').toEqual([]);
+  });
+
+  test('a planted role member with a foreign value is named unless the divergence is typed', () => {
+    const untyped = { unit: 'weeks', canonical: null, members: register.roles.cooldown_weeks.members, divergence: null };
+    const values = untyped.members.map(leafValue).filter((value) => typeof value === 'number');
+    expect([...new Set(values)].length, 'the fixture role really does span two values').toBe(2);
+    expect(untyped.divergence, 'and stripped of its typing it is exactly what the arm above'
+      + ' convicts').toBeNull();
+    // anchored: the same members WITH their typed divergence are admitted by the live arm
+    // above, so this is a claim about the typing and not about the members.
+    expect(register.roles.cooldown_weeks.divergence.reason).toBe('distinct-by-design');
+  });
+
+  test('the homonym roles are split by unit rather than reconciled by value', () => {
+    const pairs = [
+      ['exodus_floor__fraction', 'exodus_floor__headcount'],
+      ['score_max__points', 'score_max__probability'],
+      ['cap__share', 'cap__count'],
+    ];
+    const problems = [];
+    for (const [a, b] of pairs) {
+      const left = register.roles[a];
+      const right = register.roles[b];
+      if (!left || !right) { problems.push(`${a}/${b}: one half of the homonym is missing`); continue; }
+      if (left.unit === right.unit) problems.push(`${a}/${b}: split into two roles but share a unit`);
+      const overlap = left.members.filter((member) => right.members.includes(member));
+      if (overlap.length) problems.push(`${a}/${b}: members appear on both sides: ${overlap.join(', ')}`);
+    }
+    expect(problems, 'EXODUS_FLOOR holds 0.04 in one home and 300 in another. That is not a'
+      + ' divergence to reconcile — it is one NAME doing two jobs, a fraction and a headcount,'
+      + ' and merging them would ask the sitting to rule on a disagreement that never existed.'
+      + ' FOLD 25: a unit-less field gets a different unit at every consumer.').toEqual([]);
+  });
+
+  test('the divergence count only shrinks', () => {
+    const divergent = Object.values(register.roles).filter((role) => role.divergence).length;
+    expect(divergent, 'a resolved divergence is banked so it cannot silently come back')
+      .toBeLessThanOrEqual(CEILINGS.DECLARED_DIVERGENCE_CEILING);
+    expect(divergent, 'and the ceiling is not vacuous — real divergences sit under it')
+      .toBeGreaterThan(0);
+  });
+
+  test('a signed table computed from another table cannot outrun its source', () => {
+    const problems = [];
+    for (const [id, row] of Object.entries(register.tables)) {
+      if (row.status !== 'signed') continue;
+      const measured = live.tables[id];
+      for (const [key, value] of Object.entries(measured?.leaves ?? {})) {
+        if (!value || typeof value !== 'object' || typeof value.expr !== 'string') continue;
+        const sources = Object.entries(register.tables)
+          .filter(([otherId, other]) => otherId !== id && live.tables[otherId]?.leaves?.[value.expr] !== undefined && other.status !== 'signed');
+        for (const [otherId] of sources) problems.push(`${id}.${key} is computed from unsigned ${otherId}`);
+      }
+    }
+    expect(problems, 'signing a table whose value is computed from an UNSIGNED source signs a'
+      + ' number that can still move underneath it. Vacuous today because nothing is signed —'
+      + ' and armed now so it is not written after the first signature makes it matter.').toEqual([]);
+    expect(Object.values(register.tables).every((row) => row.status === 'draft'),
+      'and the vacuity is in the data: every row is draft').toBe(true);
   });
 });
 
