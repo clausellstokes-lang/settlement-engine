@@ -69,6 +69,7 @@ import {
 } from '../../scripts/check-writer-reach.mjs';
 import { identityOf, sourceFiles } from '../../scripts/check-observed-shape-readers.mjs';
 import { scanReaders as scanLegacyReaders } from '../../scripts/lib/legacy-reader-shape-scan.mjs';
+import { buildLitDialCorpus, dialGatedOf } from '../../scripts/lib/writer-reach-lit-corpus.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (path) => readFileSync(join(ROOT, path), 'utf8');
@@ -76,6 +77,50 @@ const rel = (file) => (file.startsWith(ROOT) ? file.slice(ROOT.length + 1) : fil
 
 const baseline = JSON.parse(read(BASELINE_PATH));
 const osrBaseline = JSON.parse(read('scripts/.observed-shape-readers-baseline.json'));
+
+/**
+ * THE DIAL-GATED INVENTORY, frozen EXACT (Car 3). Every identity a world generated
+ * at the LIT dials writes that an otherwise identical shipped world does not. The
+ * set-equality law over `generation-dial` ROWS is OWED and blocked (clause W cannot
+ * admit either of the two drafted rows: one key is written by ASSIGNMENT and the
+ * other through a CONSTANT-named computed key, and neither is one of OSR's four
+ * measured write spellings). Until that chair-signed widening lands, THIS is the
+ * ratchet: an exact frozen roster, so a new dial-gated key reds BY NAME rather than
+ * waiting for a law that cannot yet be stated.
+ */
+const FROZEN_DIAL_GATED = Object.freeze([
+  'affects on stressors',
+  'agenda on factions',
+  'archetype on factions',
+  'authority on factions',
+  'contestsNiche on factions',
+  'controls on factions',
+  'customContentRoster on settlement',
+  'customDefinitionCategory on factions',
+  'customDefinitionCategory on stressors',
+  'customDefinitionCategory on traditions',
+  'densityRungRole on members',
+  'densityRungRole on npcs',
+  'description on stressors',
+  'disablesGoods on stressors',
+  'disablesInstitutions on stressors',
+  'epithet on traditions',
+  'importance on members',
+  'isCustom on factions',
+  'isCustom on stressors',
+  'isCustom on traditions',
+  'localUid on factions',
+  'localUid on stressors',
+  'localUid on traditions',
+  'methods on factions',
+  'motifAct on traditions',
+  'motifElement on traditions',
+  'name on stressors',
+  'scale on factions',
+  'source on factions',
+  'source on stressors',
+  'source on traditions',
+]);
 
 /** The synthetic key every mutant is built on. No real module writes or reads it. */
 const PLANTED_KEY = '__plantedWrittenKey';
@@ -926,5 +971,142 @@ describe('writer-with-no-reader ratchet: the MUTANTS', () => {
     } catch (error) { refused = error.message; }
     expect(refused).toContain('nothing to ratchet against');
     expect(scansRun, 'a refusing door must not spend a scan').toBe(before);
+  });
+});
+
+describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
+  let litShapes;
+  let controlShapes;
+  let dialConfigKeys;
+  let gated;
+  let confounded;
+  let packControlOnly;
+
+  beforeAll(async () => {
+    const lit = await buildLitDialCorpus({ root: ROOT });
+    const control = await buildLitDialCorpus({ root: ROOT, rollDials: false });
+    litShapes = lit.shapes;
+    controlShapes = control.shapes;
+    dialConfigKeys = lit.dialConfigKeys;
+    gated = dialGatedOf(litShapes, [controlShapes, live.corpus.shapes], live.knownShapes, dialConfigKeys);
+    packControlOnly = dialGatedOf(litShapes, [controlShapes], live.knownShapes, dialConfigKeys);
+    confounded = dialGatedOf(litShapes, [live.corpus.shapes], live.knownShapes, dialConfigKeys);
+  }, 300_000);
+
+  test('the lit corpus observed customContentRoster on settlement and the dark corpus did not — the MAT retro-control, executed', () => {
+    expect(litShapes.settlement.keys).toContain('customContentRoster'); // anchored: the dark side is asserted absent on the next line, so a corpus that carried it everywhere would fail there
+    expect(live.corpus.shapes.settlement.keys.includes('customContentRoster')).toBe(false);
+    expect(controlShapes.settlement.keys.includes('customContentRoster')).toBe(false);
+    expect(gated.has('customContentRoster on settlement')).toBe(true);
+    // The key is written, gated and read by nothing: a textbook writer without a
+    // reader that the walker's own corpus cannot see, because a dark world does not
+    // write it at all. That is the whole reason this arm exists.
+    expect(live.verdicts.has('customContentRoster on settlement')).toBe(false);
+  });
+
+  test('the density v2 roll is dial-gated: densityRungRole on npcs is present lit and absent dark', () => {
+    expect(litShapes.npcs.keys).toContain('densityRungRole'); // anchored: the dark side is asserted absent on the next line
+    expect(live.corpus.shapes.npcs.keys.includes('densityRungRole')).toBe(false);
+    expect(gated.has('densityRungRole on npcs')).toBe(true);
+    expect(gated.has('densityRungRole on members')).toBe(true);
+    expect(live.verdicts.has('densityRungRole on npcs')).toBe(false);
+  });
+
+  test('the dial-gated set is DOUBLY CONTROLLED: the pack is not a dial and neither is the producer set, and the uncontrolled reading fires the STOP', () => {
+    // §7.1 compares the lit corpus against the WALKER'S corpus, which moves two
+    // variables at once and misses a third. Every reading is asserted TOGETHER so
+    // the corrections are measured quantities rather than an argument.
+    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(55);
+    expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(34);
+    expect(gated.size, 'both controls applied').toBe(31);
+    expect(confounded.size - packControlOnly.size, '24 pack-attributable, less 3 the pack control also gains')
+      .toBe(21);
+    // The three the DARK-corpus control removes are keys a shipped world does write,
+    // through producers the 16-generation producer-1 control never runs.
+    expect([...packControlOnly].filter((identity) => !gated.has(identity)).sort()).toEqual([
+      'description on factions', 'name on traditions', 'severity on stressors',
+    ]);
+    expect(gated.size, 'STOP: |dialGated| > 40 — classify per dial before rowing').toBeLessThanOrEqual(40);
+    expect(confounded.size, 'the uncontrolled reading WOULD fire the STOP, which is why it is not the rule')
+      .toBeGreaterThan(40);
+    // An uncontrolled call is refused outright rather than answered wrongly.
+    expect(() => dialGatedOf(litShapes, [], live.knownShapes, dialConfigKeys))
+      .toThrow(/requires at least one CONTROL corpus/);
+  });
+
+  test('every dial-gated identity is in the frozen roster and every frozen entry is still dial-gated — a new dial-gated key reds by name', () => {
+    expect([...gated].sort()).toEqual([...FROZEN_DIAL_GATED]);
+    expect(FROZEN_DIAL_GATED.length).toBe(31);
+    expect(new Set(FROZEN_DIAL_GATED).size).toBe(FROZEN_DIAL_GATED.length);
+    for (const identity of FROZEN_DIAL_GATED) {
+      expect(identity).toMatch(/^\S+ on \S+$/);
+      const [, shape] = identity.split(' on ');
+      expect(live.knownShapes.has(shape), `${identity} names a shape the walker does not judge`).toBe(true);
+    }
+    // THE DIRECTION THAT IS LIVE TODAY: no generation-dial row may exist outside the
+    // gated set. It is currently empty and says so out loud, because clause W cannot
+    // admit either drafted row — the debt is stated, not hidden behind a vacuous pass.
+    const dialRows = WRITER_DARK_REGISTER.filter((row) => row.door?.kind === 'generation-dial');
+    expect(dialRows.length, 'no generation-dial row can be admitted until clause W accepts the executed bit')
+      .toBe(0);
+    for (const row of dialRows) expect(gated.has(row.identity)).toBe(true);
+  });
+
+  test('the lit arm changes no draw: the walker corpus is byte-identical beside the lit one, and the dials are passed on the arm’s own configs', () => {
+    expect(shapesDigestOf(live.corpus.shapes)).toBe(baseline.shapesDigest);
+    // THE PROMISE: a fixed reference world is never silently re-rolled. The arm never
+    // flips NEW_SETTLEMENT_*; it passes explicit versions on in-memory configs, which
+    // is why the walker's corpus is untouched by a lit run in the same process.
+    expect(dialConfigKeys.sort()).toEqual(['_densityLawVersion', '_livingContentLawVersion']);
+    for (const key of dialConfigKeys) {
+      expect(read('src/generators/generateSettlementPipeline.js')).not.toContain(`NEW_SETTLEMENT_${key}`); // anchored: the two dial keys are asserted non-empty above, so this cannot pass on an empty loop
+    }
+    expect(litShapes.settlement.rows).toBe(16);
+    expect(controlShapes.settlement.rows).toBe(16);
+  });
+
+  test('a lit-dial identity that gains a surface reader is convicted as struck, not silently lit', async () => {
+    // The row shape a widened clause W would admit, driven end to end against the
+    // real doors: the dial is dark (so D-dial passes) and the identity has gained a
+    // reader (so clause S convicts with the strike instruction).
+    const dialRow = {
+      identity: 'customContentRoster on settlement', key: 'customContentRoster', shape: 'settlement',
+      writer: 'src/generators/generateSettlementPipeline.js', reason: 'dark-by-construction',
+      door: {
+        kind: 'generation-dial', configKey: '_livingContentLawVersion',
+        dialModule: 'src/domain/content/livingContentLaw.js',
+        dialExport: 'NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION',
+        litModule: 'src/domain/content/livingContentLawVersion.js',
+        litExport: 'ROSTER_LIVING_CONTENT_LAW_VERSION',
+      },
+      lighting: 'x'.repeat(90), car: '§7 the probe', charter: '§866 the MAT pick',
+    };
+    let message = null;
+    try {
+      await assertWriterDarkRegisterEvidence([dialRow], {
+        root: ROOT,
+        readSource: (path) => (path === dialRow.writer
+          ? 'const settlement = { customContentRoster: roster };\n' : read(path)),
+        verdicts: new Map([[dialRow.identity, { verdict: 'LIT', reach: { 'web-display': 'R' } }]]),
+        dialGated: gated,
+      });
+    } catch (error) { message = error.message; }
+    expect(message).toContain('BANK THE WIN');
+    expect(message).toContain('strike the row');
+    // And with the dials EQUAL the same row dies at D-dial instead, before clause S.
+    let rolled = null;
+    try {
+      await assertWriterDarkRegisterEvidence([dialRow], {
+        root: ROOT,
+        readSource: (path) => (path === dialRow.writer
+          ? 'const settlement = { customContentRoster: roster };\n' : read(path)),
+        importModule: async () => ({
+          NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION: 2, ROSTER_LIVING_CONTENT_LAW_VERSION: 2,
+        }),
+        dialGated: gated,
+      });
+    } catch (error) { rolled = error.message; }
+    expect(rolled).toContain('D-dial');
+    expect(rolled).toContain('already EQUALS');
   });
 });
