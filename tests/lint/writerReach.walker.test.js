@@ -67,9 +67,9 @@ import {
 import {
   measure, liveViewOf, compareDark, cohortOf, reportOf, run, BASELINE_PATH, SENTINEL_FLOOR,
 } from '../../scripts/check-writer-reach.mjs';
-import { identityOf, sourceFiles } from '../../scripts/check-observed-shape-readers.mjs';
+import { identityOf, sourceFiles, writeShapesIn } from '../../scripts/check-observed-shape-readers.mjs';
 import { scanReaders as scanLegacyReaders } from '../../scripts/lib/legacy-reader-shape-scan.mjs';
-import { buildLitDialCorpus, dialGatedOf } from '../../scripts/lib/writer-reach-lit-corpus.mjs';
+import { dialGatedOf } from '../../scripts/lib/writer-reach-lit-corpus.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (path) => readFileSync(join(ROOT, path), 'utf8');
@@ -168,6 +168,7 @@ beforeAll(async () => {
       cls, new Set([...live.closures[cls]].map(rel)),
     ])),
     pendingCeiling: baseline.pendingSurfaceCeiling,
+    dialGated: live.dialGated,
   });
 }, 300_000);
 
@@ -273,11 +274,12 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
 
   test('the declared DARK register is structurally lawful and every row is live-verified', () => {
     expect(() => assertWriterDarkRegister()).not.toThrow();
-    expect(WRITER_DARK_REGISTER.length).toBe(4);
+    expect(WRITER_DARK_REGISTER.length).toBe(6);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
-      expect(row.spellings.length, `${row.identity}: clause W found no write spelling`).toBeGreaterThan(0);
+      expect(row.spellings.length, `${row.identity}: clause W produced no evidence`).toBeGreaterThan(0);
+      expect(row.writeProof, `${row.identity}: clause W recorded no write proof`).toBeTruthy();
     }
     expect(registerDigestOf()).toBe(baseline.registerDigest);
     expect(pendingSurfaceBacklog().length).toBe(baseline.pendingSurfaceCeiling);
@@ -427,6 +429,13 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     const comparison = compareDark(liveView, baseline);
     expect(comparison.struck.map((row) => row.identity)).toEqual([]);
     for (const row of WRITER_DARK_REGISTER) {
+      if (row.door?.kind === 'generation-dial') {
+        // A dial row's identity is EXPECTED absent: no shipped world writes it, and
+        // that absence IS the dormancy. Presence is what would convict it.
+        expect(live.verdicts.has(row.identity), `${row.identity} must be ABSENT: the dial is still dark`)
+          .toBe(false);
+        continue;
+      }
       expect(live.verdicts.get(row.identity)?.verdict, `${row.identity} must still be DARK`).toBe('DARK');
     }
   });
@@ -436,7 +445,13 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     expect(comparison.stale.map((row) => row.identity)).toEqual([]);
     const cohort = cohortOf(live.verdicts);
     expect(cohort.length).toBe(baseline.population.dark);
-    expect(baseline.darkUnregistered.length).toBe(cohort.length - WRITER_DARK_REGISTER.length);
+    // Only the registered rows that are actually IN the dark cohort come out of the
+    // bank. The two generation-dial rows are not written by any shipped world, so
+    // they were never in it — the arithmetic has to say so or it would drift by two.
+    const registeredAndDark = WRITER_DARK_REGISTER
+      .filter((row) => cohort.some((entry) => entry.identity === row.identity));
+    expect(registeredAndDark.length).toBe(4);
+    expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
   });
@@ -627,6 +642,7 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
     );
     const same = await convicts([dialRow], {
       readSource,
+      dialGated: new Set([dialRow.identity]),
       importModule: async () => ({
         NEW_SETTLEMENT_DENSITY_LAW_VERSION: 2, REGISTER_VII_DENSITY_LAW_VERSION: 2,
       }),
@@ -707,6 +723,7 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
     };
     const grown = await convicts([...WRITER_DARK_REGISTER, fifth], {
       pendingCeiling: baseline.pendingSurfaceCeiling,
+      dialGated: live.dialGated,
       readSource: (path) => (
         path === fifth.writer ? 'const s = { syntheticPendingKey: 1 };\n' : read(path)
       ),
@@ -730,19 +747,164 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
   });
 
   test('the structural law refuses a malformed, duplicated, wrong-reason, or foreign-field row', () => {
-    const row = WRITER_DARK_REGISTER[0];
+    // The row is named, never indexed: WRITER_DARK_REGISTER[0] changed reason when
+    // Car 4 admitted the dial rows, and an index would have quietly re-pointed every
+    // arm below at a row with a different canonical field set.
+    const row = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'cultureProfileKey on config');
+    const dialRow = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'densityRungRole on npcs');
+    expect(row.reason).toBe('engine-internal');
+    expect(dialRow.reason).toBe('dark-by-construction');
     expect(() => assertWriterDarkRegister([{ ...row, reason: 'because-i-said-so' }])).toThrow(/unknown reason/);
     expect(() => assertWriterDarkRegister([{ ...row, extraField: 1 }])).toThrow(/noncanonical fields/);
     expect(() => assertWriterDarkRegister([row, row])).toThrow(/DUPLICATED/);
     expect(() => assertWriterDarkRegister([{ ...row, identity: 'no-on-separator' }])).toThrow(/identity/);
     expect(() => assertWriterDarkRegister([{ ...row, shape: 'somethingElse' }])).toThrow(/does not name its own key/);
     expect(() => assertWriterDarkRegister([{ ...row, writer: 'scripts/notSrc.mjs' }])).toThrow(/repo-relative src/);
-    expect(() => assertWriterDarkRegister([{ ...row, why: 'too short' }])).toThrow(/at least 80 characters/);
     expect(() => assertWriterDarkRegister([{ ...row, charter: 'no section here' }])).toThrow(/chartering section/);
+    // BOTH prose fields carry the 80-character floor, each on the reason that owns it.
+    expect(() => assertWriterDarkRegister([{ ...row, why: 'too short' }])).toThrow(/at least 80 characters/);
+    expect(() => assertWriterDarkRegister([{ ...dialRow, lighting: 'too short' }]))
+      .toThrow(/at least 80 characters/);
+    // And each reason refuses the OTHER's prose field as foreign.
+    const { why: _why, ...dialShaped } = row;
+    expect(() => assertWriterDarkRegister([{ ...dialShaped, reason: 'dark-by-construction' }]))
+      .toThrow(/noncanonical fields/);
+    // The generation-dial door's own structure is law too.
+    expect(() => assertWriterDarkRegister([{ ...dialRow, door: { ...dialRow.door, configKey: 'noUnderscore' } }]))
+      .toThrow(/configKey must start with/);
+    expect(() => assertWriterDarkRegister([{ ...dialRow, door: { ...dialRow.door, dialModule: 'src/lib/x.js' } }]))
+      .toThrow(/must live under src\/domain/);
     expect(Object.keys(CANONICAL_FIELDS).sort()).toEqual([...DARK_REASONS].sort());
     for (const entry of WRITER_DARK_REGISTER) {
       expect(Object.keys(entry).sort().join(',')).toBe(CANONICAL_FIELDS[entry.reason]);
     }
+  });
+
+  test('the two generation-dial rows are LIVE-VERIFIED, and NEITHER writer writes in any of OSR’s four spellings — the executed bit is the write proof', () => {
+    const dialRows = WRITER_DARK_REGISTER.filter((row) => row.door?.kind === 'generation-dial');
+    expect(dialRows.map((row) => row.identity).sort())
+      .toEqual(['customContentRoster on settlement', 'densityRungRole on npcs']);
+    // THE WHOLE REASON FOR THE RULING, asserted rather than asserted-about: the text
+    // probe finds NOTHING at either writer. `customContentRoster` is written by an
+    // ASSIGNMENT and `densityRungRole` through a COMPUTED PROPERTY KEY behind
+    // RUNG_ROLE_FIELD, and OSR's four spellings (property, quoted, shorthand,
+    // token-in-string-literal) see neither. A clause that read only that probe
+    // convicted both as "the writer stopped writing", which is false.
+    for (const row of dialRows) {
+      expect(writeShapesIn(read(row.writer), row.key), `${row.identity}: the text probe must find NOTHING`)
+        .toEqual([]);
+      expect(live.dialGated.has(row.identity), `${row.identity} must be in the measured dialGated set`).toBe(true);
+    }
+    expect(read('src/generators/generateSettlementPipeline.js'))
+      .toContain('finalCtx.settlement.customContentRoster = livingContentRoster;');
+    expect(read('src/generators/density/applyDensityLaw.js')).toContain('[RUNG_ROLE_FIELD]:');
+    // And the evidence the live run recorded names the proof it actually used.
+    for (const row of liveEvidence.filter((entry) => dialRows.some((d) => d.identity === entry.identity))) {
+      expect(row.writeProof).toBe('dialGated membership (executed: present lit, absent dark)');
+    }
+    for (const row of liveEvidence.filter((entry) => !dialRows.some((d) => d.identity === entry.identity))) {
+      expect(row.writeProof).toMatch(/^source text \(/);
+    }
+  });
+
+  test('THE WIDENING IS NARROW: a generation-dial identity that is NOT dial-gated still convicts at clause W', async () => {
+    // The plant the ruling asks for. This row is spelled exactly like a real dial
+    // row — same reason, same door shape, a writer that writes by ASSIGNMENT and so
+    // is invisible to the text probe — and it differs in ONE respect: it is not in
+    // the measured dialGated set. If the widening had swallowed the clause, this
+    // would sail through. It must convict.
+    const notGated = {
+      identity: 'plantedAssignmentKey on settlement', key: 'plantedAssignmentKey', shape: 'settlement',
+      writer: 'src/generators/generateSettlementPipeline.js', reason: 'dark-by-construction',
+      door: {
+        kind: 'generation-dial', configKey: '_livingContentLawVersion',
+        dialModule: 'src/domain/content/livingContentLaw.js',
+        dialExport: 'NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION',
+        litModule: 'src/domain/content/livingContentLawVersion.js',
+        litExport: 'ROSTER_LIVING_CONTENT_LAW_VERSION',
+      },
+      lighting: 'x'.repeat(90), car: '§7 the probe', charter: '§7 the probe',
+    };
+    const readAssignment = (path) => (path === notGated.writer
+      ? 'ctx.settlement.plantedAssignmentKey = value;\n' : read(path));
+    // Its write is invisible to the probe, exactly like the two real rows…
+    expect(writeShapesIn('ctx.settlement.plantedAssignmentKey = value;\n', notGated.key)).toEqual([]);
+    // …and it convicts anyway, because it is not dial-gated.
+    const message = await convicts([notGated], {
+      readSource: readAssignment, dialGated: live.dialGated,
+    });
+    expect(message).toContain('clause W');
+    expect(message).toContain('not in the measured dialGated set');
+    expect(message).toContain('BIT claim');
+    // The ONLY thing that separates it from a row that passes is membership.
+    const admitted = await assertWriterDarkRegisterEvidence([notGated], {
+      root: ROOT,
+      readSource: readAssignment,
+      dialGated: new Set([...live.dialGated, notGated.identity]),
+    });
+    expect(admitted[0].writeProof).toBe('dialGated membership (executed: present lit, absent dark)');
+  });
+
+  test('THE WIDENING IS REASON-SCOPED: an engine-internal row whose writer writes only by assignment still convicts at clause W', async () => {
+    // The second half of narrowness. The same invisible write, on a row whose REASON
+    // is not generation-dial, gains nothing: the text probe still governs, because
+    // an engine-internal row's key IS written by a shipped world and the probe is
+    // the right instrument for it.
+    const row = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'cultureProfileKey on config');
+    const message = await convicts([row], {
+      readSource: (path) => (path === row.writer
+        ? 'ctx.config.cultureProfileKey = culturalIdentity.key;\n' : read(path)),
+      dialGated: live.dialGated,
+    });
+    expect(message).toContain('clause W');
+    expect(message).toContain('no longer writes');
+    expect(message).toContain('a row about nothing');
+    // …and a pending-surface row is governed by the probe too.
+    const pending = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'isolationSupport on settlement');
+    const pendingMessage = await convicts([pending], {
+      readSource: (path) => (path === pending.writer
+        ? 'ctx.settlement.isolationSupport = finding;\n' : read(path)),
+      dialGated: live.dialGated,
+    });
+    expect(pendingMessage).toContain('clause W');
+  });
+
+  test('clause S is REASON-AWARE: a dial row is EXPECTED absent from the judged population, and a dial that has ROLLED convicts with its own instruction', async () => {
+    const row = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'densityRungRole on npcs');
+    // Absent is CORRECT for this reason — the old clause S convicted exactly this
+    // and would have convicted every correct dial row.
+    const clean = await assertWriterDarkRegisterEvidence([row], {
+      root: ROOT, dialGated: live.dialGated, verdicts: live.verdicts,
+    });
+    expect(clean[0].identity).toBe(row.identity);
+    expect(live.verdicts.has(row.identity)).toBe(false);
+    // PRESENT and DARK: the dial rolled, and the row must retire rather than be kept.
+    const rolled = await convicts([row], {
+      dialGated: live.dialGated,
+      verdicts: new Map([[row.identity, { verdict: 'DARK', reach: {} }]]),
+    });
+    expect(rolled).toContain('the dial has ROLLED');
+    expect(rolled).toContain('judged normally');
+    // PRESENT and LIT: bank the win instead.
+    const lit = await convicts([row], {
+      dialGated: live.dialGated,
+      verdicts: new Map([[row.identity, { verdict: 'LIT', reach: { 'web-display': 'R' } }]]),
+    });
+    expect(lit).toContain('BANK THE WIN');
+    // And the ratchet's own comparison says the same thing rather than reporting
+    // every correct dial row as a win to bank.
+    expect(compareDark(liveView, baseline).struck).toEqual([]);
+  });
+
+  test('a generation-dial row with NO measured dialGated set convicts — an absent measurement is not an acquittal', async () => {
+    const row = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'customContentRoster on settlement');
+    const message = await convicts([row], { verdicts: live.verdicts });
+    expect(message).toContain('clause W');
+    expect(message).toContain('no measured dialGated set was supplied');
+    expect(message).toContain('not an acquittal');
+    // The doors carry the measurement themselves, which is why the live run passes.
+    expect(live.dialGated, 'measure() must build the dial corpora for the doors').toBeInstanceOf(Set);
+    expect(live.dialGated.size).toBe(31);
   });
 
   test('a second --genesis over an existing baseline is refused', async () => {
@@ -983,12 +1145,14 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
   let packControlOnly;
 
   beforeAll(async () => {
-    const lit = await buildLitDialCorpus({ root: ROOT });
-    const control = await buildLitDialCorpus({ root: ROOT, rollDials: false });
-    litShapes = lit.shapes;
-    controlShapes = control.shapes;
-    dialConfigKeys = lit.dialConfigKeys;
-    gated = dialGatedOf(litShapes, [controlShapes, live.corpus.shapes], live.knownShapes, dialConfigKeys);
+    // The dial corpora are built ONCE, inside `measure`, because clause W now reads
+    // `dialGated` as the write proof for every generation-dial row and the doors
+    // must carry that measurement themselves. Rebuilding here would cost two more
+    // producer-1 runs to reproduce a set the walker already holds.
+    litShapes = live.litShapes;
+    controlShapes = live.controlShapes;
+    dialConfigKeys = live.dialConfigKeys;
+    gated = live.dialGated;
     packControlOnly = dialGatedOf(litShapes, [controlShapes], live.knownShapes, dialConfigKeys);
     confounded = dialGatedOf(litShapes, [live.corpus.shapes], live.knownShapes, dialConfigKeys);
   }, 300_000);
@@ -1046,9 +1210,13 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     // THE DIRECTION THAT IS LIVE TODAY: no generation-dial row may exist outside the
     // gated set. It is currently empty and says so out loud, because clause W cannot
     // admit either drafted row — the debt is stated, not hidden behind a vacuous pass.
+    // Car 4 admitted the two rows the chair ruled on (ledger §882.15). The law that
+    // is LIVE in this direction: no generation-dial row may exist outside the gated
+    // set. The reverse — every gated identity carries a row — remains OWED for the
+    // other 29, and the frozen roster above is what guards them meanwhile.
     const dialRows = WRITER_DARK_REGISTER.filter((row) => row.door?.kind === 'generation-dial');
-    expect(dialRows.length, 'no generation-dial row can be admitted until clause W accepts the executed bit')
-      .toBe(0);
+    expect(dialRows.map((row) => row.identity).sort())
+      .toEqual(['customContentRoster on settlement', 'densityRungRole on npcs']);
     for (const row of dialRows) expect(gated.has(row.identity)).toBe(true);
   });
 
