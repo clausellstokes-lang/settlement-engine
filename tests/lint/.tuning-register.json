@@ -1025,7 +1025,9 @@
       "signedAt": null,
       "unit": {
         "JEALOUS_BOON_FADE": "fraction01",
-        "LEVEL_SCALE": "fraction01",
+        "LEVEL_SCALE.a_touch": "fraction01",
+        "LEVEL_SCALE.marked": "fraction01",
+        "LEVEL_SCALE.defining": "fraction01",
         "WRATH_SHARPEN_RUNGS": "rank"
       },
       "band": null,
@@ -1037,7 +1039,9 @@
       "signedAt": null,
       "unit": {
         "PATRON_AMP": "multiplier",
-        "STRENGTH": "fraction01",
+        "STRENGTH.faint": "fraction01",
+        "STRENGTH.firm": "fraction01",
+        "STRENGTH.heavy": "fraction01",
         "DAMP_MAX": "fraction01",
         "CAUSAL_SWING": "points"
       },
