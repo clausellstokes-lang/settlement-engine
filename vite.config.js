@@ -565,6 +565,25 @@ export default defineConfig({
             return 'det-math-decay';
           if (id.includes('/src/kernel/detMath.js'))
             return 'det-math';
+          // ── T13 Car 4 (v): detPow JOINS THE LAZY SIDE, and this rule is MEASURED ──
+          // detPow.js sat in `src/kernel/` with ZERO consumers until family (v) wired
+          // its four fractional-power sites, so Rollup tree-shook it and the eager
+          // `kernel` chunk never paid for it. The moment it gained consumers it was
+          // RETAINED in that eager chunk: MEASURED at build #6, kernel 10,683 -> 11,427 B
+          // (+744), which pushed the first-paint closure to 1,048,196 against the
+          // owner-ratified 1,048,000 — 196 B OVER. tests/build/vendorPdfLazy.test.js's
+          // own comment predicted the placement ("detPow.js ... legitimately rides THIS
+          // chunk the moment it gains a consumer") but nobody had priced it.
+          // It gets its OWN lazy chunk rather than joining `det-math`, because the
+          // det-math CORE chunk is itself a first-paint closure member (the two eager
+          // sites call detExp/detLog10) — folding detPow there would keep every one of
+          // those bytes in first paint, which is the defect, not the cure. All four of
+          // detPow's consumers are lazy domain leaves (eager-path probe: none reachable
+          // from main.jsx / lookups / src/kernel seeds), so nothing eager loses a byte.
+          // THE CURE IS THE PLACEMENT, NEVER THE CEILING — the ceiling was already
+          // raised once at §880.8 and is not the answer to a code change's own cost.
+          if (id.includes('/src/kernel/detPow.js'))
+            return 'det-pow';
 
           if (id.includes('/src/kernel/'))
             return 'kernel';
