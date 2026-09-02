@@ -88,10 +88,20 @@ export const SIGNATURE_STATES = Object.freeze(['draft', 'signed']);
  */
 export const TUNING_SHIFT_CAUSE_RE = /^tuning-register v(\d+) signed (§\S+)/;
 
-/** The typed refusals the refreeze ritual may return. FINITE SEMANTICS: seven, closed. */
+/**
+ * The typed refusals the refreeze ritual may return. FINITE SEMANTICS: eight, closed.
+ *
+ * ⚠ THE EIGHTH IS `GENESIS_REFUSED`, AND IT IS THIS LANE'S ADDITION TO THE SEVEN THE DESIGN
+ * NAMED. The design's list assumed an inventory already exists: with `previous` null, the
+ * growth comparison reads every file as `0 -> N` and the FIRST refreeze can never succeed.
+ * MEASURED, not reasoned — the genesis run refused itself with 221 phantom growth rows.
+ * The fix is not to skip the guard silently, because that is the WRWALKER hazard exactly
+ * (a second genesis would re-bank the whole live population with no history row). Genesis is
+ * therefore an EXPLICIT, CHARTERED act that refuses when a baseline already exists.
+ */
 export const REFUSALS = Object.freeze([
   'DIRTY_TREE', 'BLANK_PROVENANCE', 'POPULATION_GREW', 'SIGNED_DIGEST_MOVED',
-  'RECORD_VERSION_MISMATCH', 'RECORD_MALFORMED', 'ID_NOT_IN_RECORD',
+  'RECORD_VERSION_MISMATCH', 'RECORD_MALFORMED', 'ID_NOT_IN_RECORD', 'GENESIS_REFUSED',
 ]);
 
 export const INVENTORY_REL = 'tests/lint/.tuning-inventory.json';
@@ -882,6 +892,7 @@ export function refreezeRefusals({
   measured,
   register,
   record = null,
+  genesisCharter = null,
   allowedDirty = [INVENTORY_REL],
 }) {
   const who = String(measuredBy ?? '').trim();
@@ -918,10 +929,33 @@ export function refreezeRefusals({
     };
   }
 
+  // GENESIS — the first write, and the only one with nothing to be measured against.
+  const charter = String(genesisCharter ?? '').trim();
+  if (previous == null) {
+    if (!/^\u00a7\S+/.test(charter)) {
+      return {
+        ok: false,
+        refusal: 'GENESIS_REFUSED',
+        detail: 'there is no committed inventory, so this is a GENESIS and every population'
+          + ' would be banked from nothing. That is an explicit, chartered act: set'
+          + ' TUNING_INVENTORY_GENESIS to the charter section authorising it.',
+      };
+    }
+  } else if (charter !== '') {
+    return {
+      ok: false,
+      refusal: 'GENESIS_REFUSED',
+      detail: `a committed inventory already exists, so a GENESIS is refused. A second genesis`
+        + ' would silently re-bank the whole live population with no history row, which is the'
+        + ' one movement a shrink-only register can never recover from. Refreeze without'
+        + ' TUNING_INVENTORY_GENESIS, and let the growth door attribute what actually moved.',
+    };
+  }
+
   // POPULATION GROWTH — shrink-only, with DECLARED_GROWTH the one attributed door.
   const declaredGrowth = register?.declaredGrowth ?? {};
   const grew = [];
-  for (const population of ['unregisteredNamed', 'bareDecimals']) {
+  for (const population of previous == null ? [] : ['unregisteredNamed', 'bareDecimals']) {
     const before = previous?.[population] ?? {};
     const after = measured?.[population] ?? {};
     for (const [file, count] of Object.entries(after)) {

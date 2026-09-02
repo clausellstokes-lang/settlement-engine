@@ -96,6 +96,7 @@ function refreezeInventory(measured) {
     previous: committed,
     measured,
     register,
+    genesisCharter: process.env.TUNING_INVENTORY_GENESIS,
     record: process.env.TUNING_SIGNATURE_RECORD
       ? JSON.parse(readFileSync(join(ROOT, process.env.TUNING_SIGNATURE_RECORD), 'utf8'))
       : null,
@@ -496,7 +497,7 @@ describe('tuning register — the inventory is frozen and honest', () => {
     expect(UNIT_VOCABULARY.length, 'fourteen unit words, closed').toBe(14);
     expect(DIVERGENCE_REASONS.length).toBe(3);
     expect(IDIOMS.length).toBe(4);
-    expect(REFUSALS.length, 'seven typed refusals, closed').toBe(7);
+    expect(REFUSALS.length, 'eight typed refusals, closed').toBe(8);
     expect(register.unitVocabulary, 'the register carries the same closed list the lib does —'
       + ' two spellings of one vocabulary is how a unit-less field gets a different unit at'
       + ' every consumer').toEqual([...UNIT_VOCABULARY]);
