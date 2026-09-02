@@ -224,8 +224,18 @@ export function makeSourceCache() {
 export function tableSpan(text) {
   const eq = text.indexOf('=');
   if (eq < 0) return { ok: false, spanText: '', keys: 0, endOffset: 0, lineSpan: 0, wrapper: 'none', residue: 'no `=` on the definition' };
-  const open = text.indexOf('{', eq);
-  if (open < 0) return { ok: false, spanText: '', keys: 0, endOffset: 0, lineSpan: 0, wrapper: 'none', residue: 'no `{` after the `=`' };
+  // ⛔ WHICHEVER DELIMITER COMES FIRST, AND THIS IS NOT A NICETY. A rostered table may be a
+  // frozen ARRAY — `TIER_ORDER`, `IMPORTANCE_ORDER`, `FAITH_TUNING_COVERAGE`. Searching only
+  // for `{` walks straight PAST the array and finds the brace of the NEXT declaration in the
+  // file, so the span, and therefore the DIGEST, measured unrelated code. A signed digest over
+  // the wrong text is worse than no digest: it would be stable, plausible, and about something
+  // else entirely. MEASURED: three rostered arrays reported keys against zero leaves.
+  const braceAt = text.indexOf('{', eq);
+  const bracketAt = text.indexOf('[', eq);
+  const open = braceAt < 0 ? bracketAt
+    : bracketAt < 0 ? braceAt
+      : Math.min(braceAt, bracketAt);
+  if (open < 0) return { ok: false, spanText: '', keys: 0, endOffset: 0, lineSpan: 0, wrapper: 'none', residue: 'no `{` or `[` after the `=`' };
 
   const between = text.slice(eq + 1, open);
   const wrapper = /Object\.freeze\s*\(\s*$/.test(between) ? 'Object.freeze'
@@ -350,7 +360,7 @@ function objectNodeOf(spanText) {
   }
   let node = program.body[0]?.expression;
   while (node && node.type === 'CallExpression') node = node.arguments[0];
-  if (!node || node.type !== 'ObjectExpression') return null;
+  if (!node || (node.type !== 'ObjectExpression' && node.type !== 'ArrayExpression')) return null;
   // AST index X sits at expression index X-1 (the wrapping paren), which sits at
   // spanText index eq + 1 + lead + (X - 1).
   return { node, offset: eq + lead };
@@ -360,6 +370,11 @@ function objectNodeOf(spanText) {
 export function astKeyNames(spanText) {
   const parsed = objectNodeOf(spanText);
   if (!parsed) return null;
+  if (parsed.node.type === 'ArrayExpression') {
+    // A frozen ARRAY is a table whose keys are its positions, and the ORDER is the meaning
+    // (the tier ladder, the importance ladder). Indices are its key names.
+    return parsed.node.elements.map((_, index) => String(index));
+  }
   return parsed.node.properties
     .filter((property) => property.type === 'Property')
     .map((property) => keyNameOf(property))
@@ -399,13 +414,41 @@ export function flattenLeaves(spanText) {
   };
 
   const descend = (node, path) => {
+    if (node.type === 'ArrayExpression') {
+      node.elements.forEach((element, index) => {
+        const here = path ? `${path}.${index}` : String(index);
+        if (!element) { kinds.add('computed'); return; }
+        if (element.type === 'ObjectExpression' || element.type === 'ArrayExpression') { descend(element, here); return; }
+        const asNumber = literalNumber(element);
+        if (asNumber !== undefined) { leaves[here] = asNumber; kinds.add('literal'); return; }
+        if (element.type === 'Literal') { leaves[here] = element.value; kinds.add('literal'); return; }
+        if (element.type === 'Identifier') { leaves[here] = { expr: element.name }; kinds.add('aggregator'); return; }
+        leaves[here] = { expr: normalizeWhitespace(codeOnly(spanText.slice(offset + element.range[0], offset + element.range[1]))).slice(0, 120) };
+        kinds.add('computed');
+      });
+      return;
+    }
     for (const property of node.properties) {
       if (property.type !== 'Property') { kinds.add('computed'); continue; }
-      const name = keyNameOf(property);
-      if (name === null) { kinds.add('computed'); continue; }
+      // ⚠ A COMPUTED KEY IS STILL A KEY, AND DROPPING IT SILENTLY IS THE ONE THING A
+      // TOTALITY INSTRUMENT MAY NOT DO. `UPHEAVAL_TUNING.SENSITIVITY` is keyed by
+      // `[A_ARCH.MILITARY]` and friends; the first cut returned no leaf for any of them, so
+      // the table reported five keys and four leaves and a whole sensitivity ladder was
+      // invisible to the register. The key's SOURCE TEXT becomes the path segment, which is
+      // stable under reflow (the digest already ignores whitespace) and says plainly that
+      // the name is an expression rather than a word.
+      const name = keyNameOf(property)
+        ?? normalizeWhitespace(codeOnly(spanText.slice(offset + property.key.range[0], offset + property.key.range[1])));
+      if (!name) { kinds.add('computed'); continue; }
       const here = path ? `${path}.${name}` : name;
       const value = property.value;
-      if (value.type === 'ObjectExpression') { descend(value, here); continue; }
+      if (value.type === 'ObjectExpression' || value.type === 'ArrayExpression') { descend(value, here); continue; }
+      if (value.type === 'CallExpression') {
+        // `KEY: Object.freeze({...})` is a nested table, not an opaque expression.
+        let inner = value;
+        while (inner && inner.type === 'CallExpression') inner = inner.arguments[0];
+        if (inner && (inner.type === 'ObjectExpression' || inner.type === 'ArrayExpression')) { descend(inner, here); continue; }
+      }
       const asNumber = literalNumber(value);
       if (asNumber !== undefined) { leaves[here] = asNumber; kinds.add('literal'); continue; }
       if (value.type === 'Literal') { leaves[here] = value.value; kinds.add('literal'); continue; }
