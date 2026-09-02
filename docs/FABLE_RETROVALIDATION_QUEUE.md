@@ -2374,3 +2374,37 @@ The lane refused to mint eleven reader-facing words for `{complexity}`, correctl
 *What Fable re-derives:* the `{complexity}` deferral first, because it trades a measured variety loss for a refusal to author, and the owner has ruled that variety is the pools' purpose. Then the re-frozen control floors, which are the lane correcting a panel by measurement.
 
 *Priority:* MEDIUM for the deferral, LOW for the rest — the car itself is proven by difference over real renders and carries two working controls.
+
+---
+
+## §884.4 · THE PREVENTION CAR RE-BASES, THE CONSIST COMPOSES, AND TWO HAZARDS ARE BANKED (2026-09-02 ~22:5x ET, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**The act.** Lane CURE-CAPSULE-REBASE re-based the prevention car onto the moved tip: **`62be253f3278cf88cfd3656d39e8f9e2357e59bf`**, parent exactly `f5a6c3bbf`, **content blob-identical to the original car** — the re-base moved the message only, not one byte of source. Both the original (`c422ee824`) and the re-based car are sealed. The chair then **composed both held cars onto one dock**: CURE-CAPSULE + FILL-LAYER = **`36f04bfcdc2b2414f4bd3e08447003d69b700dad`**, 2 commits, **10 paths +1,179/−85**, porcelain 0, 2 trailers, **zero conflict markers on both dry runs and an EMPTY path intersection between the cars**. ⚠ **A build IS owed** (`economyStateProse.js` is inside the build-input set), unlike §884 which inherited its ceilings. ⭐ **One gate instead of two**, which CR-1 permits: its ground was that the prevention car must not ride *the landing it protects*, not that it must ride alone.
+
+### ⛔⛔ HAZARD 1 — THE HARNESS REPORTED A RED FULL-SUITE RUN AS GREEN
+
+The lane launched its ratchet backgrounded as `…; echo $? > sentinel`. **The task notification said "completed (exit code 0)" — because the final `echo` succeeded. The ratchet's true exit was 1.** Reading the notification instead of the sentinel would have banked a red full-suite run as green, on a landing gate, with the known-failure census at 10/10 and no headroom.
+
+> ⭐⭐ **THE LAW: a background task's reported exit is the exit of the LAST command in the chain.** Anything appended after the command you care about — `echo`, `tee`, a timestamp, a cleanup — **overwrites the status the harness reports, and the notification then lies with full confidence.** End every wrapper with `exit $TRUE_EXIT`, and read the captured status from the log, never the notification. This is a new door onto "trust no exit status you did not capture", and it is worse than the old one because the false status arrives from the *harness* rather than from the shell.
+
+*(The chair's own two wrappers this session, `run-gate-instr.sh` and `run-cr2.sh`, both end in `exit $TRUE_EXIT` and were therefore honest — verified, not assumed.)* **The red itself was proven not-the-car's:** an eleventh failure (`STACK_TRACE_ERROR`) at **load 40.87 on 8 cores** with a sibling holding the shared tier, inside §884's own `writerReach.walker.test.js` — a file this car cannot reach and which passes **56/56 standalone at this tip**. **Nothing was banked: a budget expiry is a cost failure, never debt.** ⭐ **This is why the chair is HOLDING the composed consist's gate until the box is quiet rather than gating beside two running analysis agents.**
+
+### ⚠ HAZARD 2 — THIS PROGRAM HAS TWO SEAT-TRAILER GRAMMARS AND NOTHING RECONCILES THEM
+
+The lane found its car carried `Seat: Opus 5 (lane CURE-CAPSULE)`, which matches **none** of the three alternations at `chair-commit.sh:34`, and rewrote it to `Seat: Opus 5 — Fable-unvalidated` plus a `Lane:` line preserving attribution. ⭐ **The finding is right and the inference is wrong, and the chair measured both.** That grep reads `$MSGFILE` — **the LEDGER message** — and never sees a product commit. The product convention is the other grammar, and it is consistent: **§884 21 of 23 · §883 T13 28 of 28 · §882 TAIL-F all of them** carry `Seat: <model> (lane <NAME>)`. Against the strict alternation §884 scores **2 of 23**; against the loose `^Seat: ` it scores **23 of 23**, which is what the §882.14 audit's 56/56 was measuring.
+
+⇒ **No §884 defect exists and the chair's §884 ratification stands.** But the real finding is the one neither party set out to make: **two grammars, one gated and one enforced by nothing, and the ungated one has now drifted once.** *Ruling:* the lane's edit is **RATIFIED on its outcome and its ground CORRECTED** — the car is marked and attributed either way, so the edit is harmless, and a car whose entire subject is enrolment is the right place to prefer the stricter form. ⛔ **But it must not be generalised into a re-write of the product convention**, which is 100% consistent across three landings and would cost a re-pick of every consist to change.
+
+### ⭐ THE LANE'S OTHER TWO ACTS, BOTH RATIFIED
+
+**RV-6, the message edits — RATIFIED.** The car's message asserted `Lighting 2497/370/2127/22491/6078`, **true at the old base and FALSE at this one**: a false citation, and this program's citation law is explicit that a string is a citation or a mint by the claim it makes. The lane replaced it with measured figures, **reported RUN 1's red rather than burying it**, and **retired** the stale OSR/typecheck/strict-domain readings rather than carrying them forward, since this act did not execute them. That last move is the sharpest: **carrying a green you did not run is the same defect as citing a figure from the wrong base.**
+
+**The negative control — RATIFIED, and it is the model.** Two parts. C-A deleted the column-law assertion and the battery **red**, then restored blob-identically. C-B drove **both real parsers over identical bytes** — nothing hand-copied, the transform asserted to touch exactly two lines with the parse expression proved byte-identical first — and reproduced **the false CLEAN at this base**: one dirty record trimmed pre-cure returns `[]`; with two records, record one **vanishes** and record two survives character-perfect; cured, it **throws and names the record**. 6 of 6 verdicts.
+
+**Both bills predicted then measured, both Δ=0:** lighting tuple `2503/370/2133/22665/6099` unmoved with the walker green at 34, ratchet `30,962 / 2,451` with the census still 10/10 and **none of its zero headroom consumed.** No refreeze owed on either.
+
+*What Fable re-derives:* Hazard 1 first — it is the only defect this session that produced a **false green on a full-suite run**, and the chair's guard against it is a shell convention rather than a gate. Then the two-grammar finding, and whether the ungated product convention should acquire a walker.
+
+*Priority:* ⛔ **HIGH for Hazard 1.** MEDIUM for the grammar drift. LOW for the ratified acts.
+
+*Deferred, PLAUSIBLE not confirmed, with a home:* OSR, typecheck and strict-domain were not re-measured on the re-based car (the OSR corpus is built by executing the domain pipeline, so a `scripts/` porcelain parser cannot mint a shape). **Owed at the composed consist's gate with everything else.**
