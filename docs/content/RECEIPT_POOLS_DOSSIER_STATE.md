@@ -135,23 +135,52 @@ destroys. It states an edge; it never forecasts a crossing.
 
 Every proper noun is a slot; nothing is baked.
 
-| Slot | Fills with |
-|---|---|
-| `{settlement}` | **the town whose page this is** (sibling R-DOS-A — always the page's own town) |
-| `{counterpart}` | the other end of a directed relation |
-| `{faction}` | the acting faction, seat, bloc or house |
-| `{institution}` | a named building or house on the settlement's roster |
-| `{npc}` | a cast person named on a member receipt; never minted, no fate resolved |
-| `{good}` | the named trade good |
-| `{resource}` | the named raw input |
-| `{chain}` | the supply chain by its own label |
-| `{route}` | the named road, lane, crossing or pass |
-| `{access}` | the trade-access word rendered in prose form: *the road · the river · the port · the crossroads · the pass* (`isolated` has no `{access}` fill — a variant needing one is not offered on an isolated town) |
-| `{complexity}` | the generator's `economicComplexity` string, passed through as a noun phrase |
-| `{season}` | the stockpile record's own season word |
-| `{band}` | a band word from a closed vocabulary — never a figure |
-| `{reason}` | the RECORDED reason, typed, from the field's own reason slot |
-| `{timeband_*}` | see §0d |
+**EVERY SLOT DECLARES A SHAPE (2026-09-02).** Until this row existed a slot had a NAME and
+a SEMANTIC gloss and no declared GRAMMATICAL shape: the sentence author assumed one, the
+fill author assumed another, and nothing in the tree compared them. Measured: `{access}`
+was specified above as *"the road"* while all eight of its seams already supplied their own
+determiner, so every settlement on a working approach read *"a stranger reads Thornwall's
+standing off its the road"* and *"a working the road, a working market"*. The SHAPE column
+is the missing half of the slot contract. It is machine-read by
+`scripts/lib/dossier-slot-shapes.mjs`: the projection REFUSES to run when a slot any
+variant uses carries no shape row, and the projection contract test renders all 2,734
+variants against it.
+
+| Shape | What the FILL must be | Who supplies the article |
+|---|---|---|
+| `proper` | a generated or authored NAME, capitalised, carrying no article of its own | the SENTENCE, where it wants one (`the {route}`) |
+| `bare-common` | a lowercase common-noun phrase carrying no article of its own | the SENTENCE, always |
+| `phrase` | a lowercase adverbial or predicative phrase | the FILL, which supplies its own |
+| `RESERVED` | nothing may fill it yet, and a fill table for it is refused | not declarable |
+
+No shape permits an em dash, a digit, a sentence stop or a snake_case engine token in a
+fill: those are §0d's and VOICE_AND_TONE §6's bans, checked at the FILL rather than at the
+type, which is where they were escaping.
+
+**MOST OF THESE SLOTS HAVE NO PRODUCER YET,** and the shapes below say so honestly. Four of
+the thirty-nine slots the corpus uses are filled by live code today — `{settlement}`,
+`{access}`, `{complexity}` and `{season}`, all in `economyStateProse.js`. The other
+thirty-five are declared from what their SEAMS demand, because that is the only evidence
+that exists. A shape whose producer lands later is RE-ASKED at that wiring against the real
+values, never assumed correct because it was written down first.
+
+| Slot | Shape | Fills with |
+|---|---|---|
+| `{settlement}` | proper | **the town whose page this is** (sibling R-DOS-A — always the page's own town) |
+| `{counterpart}` | proper | the other end of a directed relation |
+| `{faction}` | proper | the acting faction, seat, bloc or house |
+| `{institution}` | proper | a named building or house on the settlement's roster |
+| `{npc}` | proper | a cast person named on a member receipt; never minted, no fate resolved |
+| `{good}` | bare-common | the named trade good |
+| `{resource}` | bare-common | the named raw input |
+| `{chain}` | bare-common | the supply chain by its own label |
+| `{route}` | proper | the named road, lane, crossing or pass |
+| `{access}` | bare-common | the trade-access word as a BARE noun: *road · river · port · crossroads · pass*. All eight seams supply their own determiner (*"off its {access}"*, *"a working {access}"*, *"by the {access}"*), so a fill that carries one doubles it (`isolated` has no `{access}` fill — a variant needing one is not offered on an isolated town) |
+| `{complexity}` | bare-common | the economy's complexity as a bare common-noun phrase. **NOT the generator's `economicComplexity` display string**, which this row asserted for a month and which has never been a noun phrase: its eleven values are title-cased and five carry an em-dashed gloss (`Highly diversified — multiple major revenue streams`), so all five seams rendered *"the Highly diversified — multiple major revenue streams keeps more hands busy"*. The desk refuses a non-conforming fill and the five variants that name this slot go silent under anchored liveness until §0c-3 is ruled |
+| `{season}` | bare-common | the stockpile record's own season word |
+| `{band}` | RESERVED | a band word from a closed vocabulary — never a figure |
+| `{reason}` | bare-common | the RECORDED reason, typed, from the field's own reason slot |
+| `{timeband_*}` | phrase | see §0d |
 
 ### §0c-2 CLUSTER-MINTED SLOTS — the merged register
 
@@ -160,25 +189,25 @@ here so the file has ONE slot register; the minting rulings stay where they were
 written (WRITER-2's `SLOTS MINTED BY THIS CLUSTER`, WRITER-3's `W3-a`, and the
 per-block declarations of WRITER-4). Nothing is minted here.*
 
-| Slot | Fills with | Minted by |
-|---|---|---|
-| `{seat}` | the governing body **by its own generated name** — tier-scaled (*Headman's Authority*, *Town Council*, *Grand Merchant Oligarchy*); never a baked noun | WRITER-2 |
-| `{term}` | a treaty term by its own family label (**declared shared** with RECEIPT_POOLS_WAR.md) | WRITER-2 |
-| `{creed}` | the deity or faith by its authored name | WRITER-3 |
-| `{rival_creed}` | the opposing, rising or contesting creed | WRITER-3 |
-| `{faction2}` | the second party on a two-party record (a tension, a conflict, a `faction_split` clock) | WRITER-4 |
-| `{issue}` | the conflict record's own `issue` string | WRITER-4 |
-| `{stakes}` | the conflict record's own `stakes` string — offered **only** where the field is non-empty | WRITER-4 |
-| `{govFaction}` | the governing faction named on the temple-economy coherence note | WRITER-4 |
-| `{governing}` | the governing power as the legitimacy clock's framing names it | WRITER-4 |
-| `{controller}` | the holder of a hook's controlling interest, where the hook record names one | WRITER-4 |
-| `{steading}` | a satellite steading by its own name | WRITER-4 |
-| `{ruin}` | the ancient ruin by its own name | WRITER-4 |
-| `{event}` | a historical event by its recorded name | WRITER-4 |
-| `{founder}` | `founding.foundedBy` | WRITER-4 |
-| `{challenge}` | `founding.initialChallenge` | WRITER-4 |
-| `{defwork}` | the settlement's own wall-class work **by its recorded name** — the roster row `defenseProfile.institutions.walls` matched (wall · citadel · palisade · earthwork); never a baked or invented noun, and never offered to a settlement whose wall-class list is empty | CT-1a |
-| `{calamity}` | the recorded blow **by its own typed word** — from a fabric scar's `kind` where the mirror is the source (`DS-GEN-15`) or from a `historicalEvents[]` row's `type` where the record is (`DS-GEN-16`); never a baked or invented noun, and never offered to a settlement whose scar list or event record is empty. The kind-to-word and type-to-word tables are WIRING work and are raised at CT-0 R-3, so a composer that has not built them must not draw a pool that uses this slot | CT-2 |
+| Slot | Shape | Fills with | Minted by |
+|---|---|---|---|
+| `{seat}` | proper | the governing body **by its own generated name** — tier-scaled (*Headman's Authority*, *Town Council*, *Grand Merchant Oligarchy*); never a baked noun | WRITER-2 |
+| `{term}` | proper | a treaty term by its own family label (**declared shared** with RECEIPT_POOLS_WAR.md) | WRITER-2 |
+| `{creed}` | proper | the deity or faith by its authored name | WRITER-3 |
+| `{rival_creed}` | proper | the opposing, rising or contesting creed | WRITER-3 |
+| `{faction2}` | proper | the second party on a two-party record (a tension, a conflict, a `faction_split` clock) | WRITER-4 |
+| `{issue}` | phrase | the conflict record's own `issue` string | WRITER-4 |
+| `{stakes}` | phrase | the conflict record's own `stakes` string — offered **only** where the field is non-empty | WRITER-4 |
+| `{govFaction}` | proper | the governing faction named on the temple-economy coherence note | WRITER-4 |
+| `{governing}` | proper | the governing power as the legitimacy clock's framing names it | WRITER-4 |
+| `{controller}` | proper | the holder of a hook's controlling interest, where the hook record names one | WRITER-4 |
+| `{steading}` | proper | a satellite steading by its own name | WRITER-4 |
+| `{ruin}` | proper | the ancient ruin by its own name | WRITER-4 |
+| `{event}` | proper | a historical event by its recorded name | WRITER-4 |
+| `{founder}` | proper | `founding.foundedBy` | WRITER-4 |
+| `{challenge}` | phrase | `founding.initialChallenge` | WRITER-4 |
+| `{defwork}` | bare-common | the settlement's own wall-class work **by its recorded name** — the roster row `defenseProfile.institutions.walls` matched (wall · citadel · palisade · earthwork); never a baked or invented noun, and never offered to a settlement whose wall-class list is empty | CT-1a |
+| `{calamity}` | bare-common | the recorded blow **by its own typed word** — from a fabric scar's `kind` where the mirror is the source (`DS-GEN-15`) or from a `historicalEvents[]` row's `type` where the record is (`DS-GEN-16`); never a baked or invented noun, and never offered to a settlement whose scar list or event record is empty. The kind-to-word and type-to-word tables are WIRING work and are raised at CT-0 R-3, so a composer that has not built them must not draw a pool that uses this slot | CT-2 |
 
 **THE SLOTS-LINE CONVENTION, RECONCILED (§0h V1-h).** WRITER-2 declares each
 block's **permitted palette**; the other three declare the **used set**. The
@@ -186,6 +215,66 @@ merged rule is the permissive one: *a slot used in a variant MUST appear on its
 block's SLOTS line; a slot declared need not be used.* A selector may therefore
 read a SLOTS line as the fill contract for the block, and a walker may check the
 first half of that rule and not the second.
+
+### §0c-3 THE COMPLEXITY BAND — **OPEN, THE CHAIR'S** (2026-09-02)
+
+`{complexity}` has a producer and the producer emits nothing this slot can take.
+`deriveEconomicComplexity` (`src/generators/economy/prosperity.js`) returns eleven
+title-cased strings, five of them em-dashed clauses. Measured against `bare-common`:
+**11 of 11 are refused**, so today every variant naming `{complexity}` is ineligible and
+the DS-ECO-1 pools degrade under anchored liveness. **THIS IS DELIBERATELY DEFERRED AND
+DOCUMENTED, NOT A COVERAGE HOLE** — silence is correct under R-DST-K where the alternative
+is *"the Highly diversified — multiple major revenue streams keeps more hands busy"*.
+
+THE MEASURED COST, so the row can be ruled rather than guessed at. Eligible variants per
+DS-ECO-1 pool while the slot stays dark: C1 **1 of 3** · C2 2 of 3 · C3 2 of 3 · C4 3 of 3
+· C5 2 of 3. C1 at one variant means every high-rung, working-approach settlement in a
+world prints the SAME sentence, which is the one outcome the corpus exists to prevent.
+
+WHAT WOULD CLOSE IT: a closed vocabulary of bare common-noun phrases and a total map from
+the eleven producer values onto it. Two shapes were tried and REFUSED on evidence rather
+than taste. Lower-casing the display string yields *"a agricultural surplus with trade
+links"* and *"the specialized production and trade keeps"*; splitting at the em dash yields
+adjectives (*highly diversified*, *concentrated*, *limited*) that no seam can take. The
+values are reader-facing words in the dossier's own register, so they are the chair's to
+read and veto, and this lane has deliberately NOT chosen them.
+
+### §0c-4 THE SHAPE RESIDUE — recorded, deliberately deferred, with its cure named
+
+Three things the shape register makes visible and this car does not close. All three are
+recorded here rather than patched, so no later auditor re-finds them as bugs.
+
+- **A SENTENCE-INITIAL LOWERCASE SEAM, 20 sites over six slots** (`{timeband_since}` 8,
+  `{good}` 5, `{reason}` 3, `{stakes}` 2, `{issue}` 1, `{burden}` 1). A `bare-common` or
+  `phrase` fill is lowercase by contract, and at template index 0 it must be capitalised:
+  *"{timeband_since}, {settlement} is still living inside…"* wants *"Years on, Thornwall…"*.
+  THE CURE IS STRUCTURAL AND IS ~3 LINES: `fillSlots` capitalises a fill whose slot sits at
+  index 0. It is deterministic, pure, seed-free and total, and it makes the habitat
+  impossible rather than fixing twenty instances. IT IS NOT TAKEN HERE BECAUSE THE KERNEL
+  IS A SHARED SEAM: three separate designs each propose to edit `stateProseKernel.js`, and
+  three serial edits by three lanes to one 77-line pure leaf is three chances to void the
+  byte-identity guard that lets the whole register land dark. It belongs in ONE kernel
+  consist, landed together and proved byte-identical against the whole corpus in that same
+  commit.
+- **`{band}` IS ONE NAME FOR SIX INCOMPATIBLE ROLES**, measured at 37 uses across 26
+  blocks: proportion-of (*"{band} of the power in {settlement}"*), bare object (*"{steading}
+  holds {band}"*), degree adverbial (*"has {band} more"*, *"is {band} smaller"*),
+  attributive quantifier (*"scattered to {band} roads"*), plural subject and frequency. No
+  single fill satisfies all six, which is why its Shape cell reads `RESERVED` rather than
+  guessing one. THE CURE IS THE PRECEDENT §0d ALREADY SET: split it the way duration splits
+  into `{timeband}` / `{timeband_span}` / `{timeband_since}` / `{timeband_age}`. It renames
+  a slot on 26 SLOTS lines and it is ONE WAVE OR NONE — under anchored liveness a
+  half-finished split degrades QUIETLY instead of failing loudly, which is the worst
+  possible shape for a partial migration.
+- **`{reason}` IS THE SAME TENSION ONE SIZE SMALLER.** Of its 31 seams, five supply their
+  own determiner (*"out by the {reason} that followed"*) and the rest supply none
+  (*"because of {reason}"*). It is declared `bare-common` because that is what the
+  article-supplying seams require, and a MASS-noun fill satisfies both; a count-noun fill
+  satisfies neither. It has no producer, so this is decidable at wiring and not before.
+
+**AND ONE THING CHECKED AND FOUND CLEAN, recorded so nobody re-checks it:** §0d's digit ban
+holds. Zero of the 2,734 variants carry a digit outside a slot name — the twenty that a
+naive scan reports are all the `2` in `{faction2}`.
 
 ## §0d TIME BANDS (closed) AND QUANTITY BANDS (closed)
 

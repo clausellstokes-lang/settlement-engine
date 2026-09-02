@@ -29,8 +29,14 @@ import {
 import { DOSSIER_CAUSAL_PROSE } from '../../src/data/dossierCausalProse.generated.js';
 import { AUDIENCE_DM, AUDIENCE_PLAYER } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { parseSlotShapes, mergeSlotShapes, conformantFill } from '../../scripts/lib/dossier-slot-shapes.mjs';
 
 const MODULE = resolve(import.meta.dirname, '../../src/domain/display/stateProse/causalDossierProse.js');
+const DOCS = resolve(import.meta.dirname, '../../docs/content');
+const SHAPES = mergeSlotShapes([
+  parseSlotShapes(readFileSync(resolve(DOCS, 'RECEIPT_POOLS_DOSSIER_STATE.md'), 'utf8'), 'STATE'),
+  parseSlotShapes(readFileSync(resolve(DOCS, 'RECEIPT_POOLS_CAUSAL_DOSSIER.md'), 'utf8'), 'CAUSAL'),
+]);
 
 /** Render one variant's text with a slot bag, exactly as the reader would. */
 function renderVariant(variant, slots) {
@@ -38,11 +44,24 @@ function renderVariant(variant, slots) {
     (slots[name] === undefined ? whole : String(slots[name])));
 }
 
-/** A full slot bag for one family, so eligibility turns on the property under test. */
+/**
+ * A full slot bag for one family, so eligibility turns on the property under test.
+ *
+ * THE FILLS OBEY THE DECLARED SHAPE (§0c's Shape column, 2026-09-02). This fixture used to
+ * hand every slot `the ${slot}`, and because it is the de-facto contract example — the one
+ * place a desk implementer looks to learn what a fill is — it TAUGHT the defect that
+ * shipped: `ACCESS_PROSE.road = 'the road'` into eight seams that already carried their
+ * own determiner. Executed against the whole corpus, the old fixture produced 108 doubled
+ * determiners and this suite stayed green, because nothing here asserts on the rendered
+ * sentence. The grammar is asserted in
+ * tests/data/dossierStateProseProjection.contract.test.js; what this fixture owes is to
+ * stop being a wrong example.
+ */
 function fullSlots(familyId) {
   const pool = DOSSIER_CAUSAL_PROSE[familyId].pools['*'];
   return Object.fromEntries(
-    [...new Set(pool.flatMap((v) => v.slots))].map((slot) => [slot, `the ${slot}`]),
+    [...new Set(pool.flatMap((v) => v.slots))]
+      .map((slot) => [slot, conformantFill(SHAPES.shapeOf(slot), slot)]),
   );
 }
 
@@ -165,7 +184,10 @@ describe('anchored liveness at the join grain', () => {
         if (b) withoutCounterpart.push(b.text);
       }
     }
-    const counterpartLine = withAll.find((t) => t.includes('the counterpart'));
+    // `{counterpart}` is shape `proper`, so its conformant fixture is the capitalised
+    // name 'Counterpart' — DISTINCT from every other proper fill, which is what lets this
+    // probe tell "the line that named the counterpart" from "the line that named the town".
+    const counterpartLine = withAll.find((t) => t.includes('Counterpart'));
     expect(counterpartLine, 'the family must speak about its counterpart somewhere').toBeTruthy();
     expectPresentThenAbsent(withAll, withoutCounterpart, counterpartLine, 'counterpart record removed');
     expect(withoutCounterpart.length, 'the unanchored lines survive — the liveness anchor')

@@ -23,8 +23,14 @@
  * @enforced-by this file + scripts/generate-dossier-state-prose.mjs --check
  */
 import { execFileSync } from 'node:child_process';
-import { resolve } from 'node:path';
+import { readdirSync, readFileSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
+import { join, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import {
+  parseSlotShapes, mergeSlotShapes, assertSlotShapesTotal,
+  fillShapeViolation, conformantFill, determinerFill,
+} from '../../scripts/lib/dossier-slot-shapes.mjs';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
@@ -51,6 +57,121 @@ const allBlocks = [...allStateBlocks, ...Object.entries(DOSSIER_CAUSAL_PROSE)];
 /** @param {object} block */
 function variantCount(block) {
   return Object.values(block.pools).reduce((n, pool) => n + pool.length, 0);
+}
+
+// ── THE GRAMMAR CONTRACT (2026-09-02) ────────────────────────────────────────
+// None of the 2,445 test files in the estate rendered a state-prose variant with a real
+// fill and looked at the SENTENCE. Every assertion is about shape, arm, identity or
+// determinism, so `ACCESS_PROSE.road = 'the road'` sat in eight determiner-headed seams
+// for a month printing "off its the road" and "a working the road" while the suite was
+// green. These arms read the rendered string.
+
+const STATE_DOC = resolve(ROOT, 'docs/content/RECEIPT_POOLS_DOSSIER_STATE.md');
+const CAUSAL_DOC = resolve(ROOT, 'docs/content/RECEIPT_POOLS_CAUSAL_DOSSIER.md');
+const DESK_DIR = resolve(ROOT, 'src/domain/display/stateProse');
+
+const SHAPES = mergeSlotShapes([
+  parseSlotShapes(readFileSync(STATE_DOC, 'utf8'), 'RECEIPT_POOLS_DOSSIER_STATE.md'),
+  parseSlotShapes(readFileSync(CAUSAL_DOC, 'utf8'), 'RECEIPT_POOLS_CAUSAL_DOSSIER.md'),
+]);
+
+/** Every slot name any variant in either corpus actually uses. */
+const USED_SLOTS = [...new Set(allBlocks.flatMap(([, block]) => Object.values(block.pools)
+  .flat().flatMap((variant) => variant.slots)))].sort();
+
+/**
+ * WHOLE-STRING detectors, each compared against its own count in the TEMPLATE, so a hit
+ * the AUTHOR put there is never a defect and no allowlist is needed. Measured over all
+ * 2,734 templates: both of these fire ZERO times on the authored corpus, so every hit
+ * after filling was introduced by a fill.
+ */
+const RENDERED_DETECTORS = Object.freeze({
+  'ADJACENT-DETERMINERS': /\b(?:the|a|an|its|his|her|their|our)\s+(?:the|a|an)\b/gi,
+  'DOUBLED-WORD': /\b(the|a|an|of|to|in|on|at|by|its|and)\s+\1\b/gi,
+});
+
+/**
+ * The determiner-RUN detector — "a working {access}" meeting a fill that brought its own
+ * article — is ANCHORED TO THE FILL and never run over free prose.
+ *
+ * Unanchored it is a heuristic about English and it convicts authored sentences: "buys the
+ * Thornwall the time to make the next one" and "the town is poor, which is the complaint a
+ * visitor will hear" both match, and both are correct. Anchored, it fires only when a
+ * determiner opens the INSERTED text and another determiner stands within the three words
+ * before it — which is exactly the defect and nothing else.
+ */
+const RUN_RE = /\b(?:the|a|an|its|his|her|their|our)\s+(?:\w+\s+){0,2}(the|a|an)\b/gi;
+/** A fill may never carry these, whatever its shape. Scoped to the inserted span. */
+const IN_FILL_DETECTORS = Object.freeze({
+  'DASH-IN-FILL': /[—–]/,
+  'DIGIT-IN-FILL': /[0-9]/,
+  'RESIDUAL-SLOT-IN-FILL': /\{[a-zA-Z_]/,
+});
+
+/** @param {string} s @param {RegExp} rx */
+function hits(s, rx) {
+  return (s.match(new RegExp(rx.source, rx.flags)) || []).length;
+}
+
+/**
+ * Every desk module in the tree, with the fill tables and shape mirrors it declares.
+ * Discovered from the FILESYSTEM so a desk that lands next month is covered the day it
+ * lands; five of the six desks the annex describes are still unwritten, and a guard that
+ * imported one table by name would be a one-of-six guard on the morning of the second.
+ * @returns {Promise<Array<{file: string, declared: Record<string, Record<string,string>>, mirror: Record<string,string>, exports: Array<[string, unknown]>}>>}
+ */
+async function loadDeskModules() {
+  const out = [];
+  for (const file of readdirSync(DESK_DIR).filter((n) => n.endsWith('.js')).sort()) {
+    const mod = await import(pathToFileURL(join(DESK_DIR, file)).href);
+    out.push({
+      file,
+      declared: mod.SLOT_FILL_TABLES || {},
+      mirror: mod.SLOT_FILL_SHAPES || {},
+      exports: Object.entries(mod),
+    });
+  }
+  return out;
+}
+
+/**
+ * Render one variant, tracking where each fill landed, and return every defect the FILL
+ * introduced. The spans are what let the run detector be exact instead of heuristic.
+ * @param {string} id @param {object} variant @param {(slot: string) => string} fillFor
+ * @returns {string[]}
+ */
+function fillDefects(id, variant, fillFor) {
+  /** @type {Array<{slot: string, start: number, end: number, value: string}>} */
+  const spans = [];
+  let rendered = '';
+  let last = 0;
+  for (const m of variant.text.matchAll(/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g)) {
+    rendered += variant.text.slice(last, m.index);
+    const value = fillFor(m[1]);
+    spans.push({ slot: m[1], start: rendered.length, end: rendered.length + value.length, value });
+    rendered += value;
+    last = m.index + m[0].length;
+  }
+  rendered += variant.text.slice(last);
+
+  const out = [];
+  for (const [kind, rx] of Object.entries(RENDERED_DETECTORS)) {
+    if (hits(rendered, rx) > hits(variant.text, rx)) out.push(`${kind} :: ${id} :: ${rendered}`);
+  }
+  const starts = new Set(spans.map((s) => s.start));
+  for (const m of rendered.matchAll(RUN_RE)) {
+    // Index of the run's SECOND determiner. It is a defect only when the fill is what put
+    // it there — an authored "the … the" is the author's sentence and stays the author's.
+    if (starts.has(m.index + m[0].lastIndexOf(m[1]))) {
+      out.push(`DETERMINER-RUN :: ${id} :: ${rendered}`);
+    }
+  }
+  for (const span of spans) {
+    for (const [kind, rx] of Object.entries(IN_FILL_DETECTORS)) {
+      if (rx.test(span.value)) out.push(`${kind} :: ${id} :: {${span.slot}} = "${span.value}"`);
+    }
+  }
+  return out;
 }
 
 describe('the dossier state-prose projection', () => {
@@ -213,5 +334,176 @@ describe('the dossier state-prose projection', () => {
     // dossier-native register. If this hits zero the audience filter has nothing to do
     // and the truncation pin below it is vacuous.
     expect(dmOnly.length).toBeGreaterThanOrEqual(89);
+  });
+});
+
+describe('the slot SHAPE contract — a fill obeys the grammar its seam assumes', () => {
+  it('declares a shape for every slot any variant uses, and carries no dead wildcard', () => {
+    const { undeclared, deadPrefixes } = assertSlotShapesTotal(SHAPES, USED_SLOTS);
+    // A slot minted in §0c-2 or in the causal register without a shape reds HERE, at its
+    // authoring, rather than at its first wiring — which is where {access} was found, a
+    // month and one shipped defect later. The projection throws on the same condition, so
+    // this arm is the reader's copy of a gate that also runs at generation.
+    expect({ undeclared, deadPrefixes }).toEqual({ undeclared: [], deadPrefixes: [] });
+  });
+
+  it('covers the whole corpus: 39 slots over two annex registers', () => {
+    // Measured, not asserted from either annex's own arithmetic. The register is SPLIT:
+    // six of these ({house} {temple} {third_party} {war} {wound} {burden}) are declared
+    // only in RECEIPT_POOLS_CAUSAL_DOSSIER.md and a guard reading one file reports six
+    // phantom gaps. It only ratchets UP — a corpus that stops using a slot is lawful, a
+    // register that stops covering one is not, and that is the arm above.
+    expect(USED_SLOTS.length).toBeGreaterThanOrEqual(39);
+    const byShape = {};
+    for (const slot of USED_SLOTS) {
+      const shape = SHAPES.shapeOf(slot);
+      byShape[shape] = (byShape[shape] || 0) + 1;
+    }
+    expect(Object.keys(byShape).sort()).toEqual(['RESERVED', 'bare-common', 'phrase', 'proper']);
+  });
+
+  it('renders every variant grammatically against a shape-conformant fixture', () => {
+    const defects = [];
+    for (const [id, block] of allBlocks) {
+      for (const [key, pool] of Object.entries(block.pools)) {
+        for (const variant of pool) {
+          defects.push(...fillDefects(`${id} :: ${key}`, variant,
+            (slot) => conformantFill(SHAPES.shapeOf(slot), slot)));
+        }
+      }
+    }
+    expect(defects).toEqual([]);
+  });
+
+  it('convicts a determiner-bearing fixture — the detectors are not vacuous', () => {
+    // THE POSITIVE CONTROL. The arm above asserts an empty list, and an empty list is what
+    // a detector that stopped matching also produces. This is the same corpus rendered
+    // with each shape violated in exactly ONE way — a leading determiner, which is
+    // precisely what ACCESS_PROSE carried — and the floors are MEASURED, not guessed.
+    const byKind = {};
+    const sites = new Set();
+    for (const [id, block] of allBlocks) {
+      for (const [key, pool] of Object.entries(block.pools)) {
+        for (const variant of pool) {
+          for (const d of fillDefects(`${id} :: ${key}`, variant,
+            (slot) => determinerFill(SHAPES.shapeOf(slot), slot))) {
+            const kind = d.split(' :: ')[0];
+            byKind[kind] = (byKind[kind] || 0) + 1;
+            sites.add(`${kind} @ ${id}`);
+          }
+        }
+      }
+    }
+    // MEASURED at f5a6c3bbf over all 2,734 variants, then frozen as a floor: 108 / 101 /
+    // 150. The corpus only grows, so these only rise. They are DELIBERATELY lower than the
+    // figures a whole-string scan reports, because the run detector here is anchored to
+    // the fill span and the other two are differenced against the template — the arithmetic
+    // difference IS the false-positive population an unanchored version would convict.
+    expect(byKind['ADJACENT-DETERMINERS'] ?? 0).toBeGreaterThanOrEqual(108);
+    expect(byKind['DOUBLED-WORD'] ?? 0).toBeGreaterThanOrEqual(101);
+    expect(byKind['DETERMINER-RUN'] ?? 0).toBeGreaterThanOrEqual(150);
+    // The two blocks that carried the shipped defect must be named by the control, or it
+    // has gone green on a corpus that no longer contains the bug it was built for.
+    expect([...sites].sort()).toEqual(expect.arrayContaining([
+      'ADJACENT-DETERMINERS @ DS-ECO-1',
+      'ADJACENT-DETERMINERS @ DS-ECO-10',
+      'DETERMINER-RUN @ DS-ECO-1',
+      'DETERMINER-RUN @ DS-ECO-10',
+    ]));
+  });
+
+  it('holds every desk fill table in the tree to its slot\'s declared shape', async () => {
+    // ENUMERATED FROM THE FILESYSTEM, never from one import. A guard that named
+    // ACCESS_NOUN would be a one-of-six guard the day a second desk lands, and five of the
+    // six desks are unwritten. Every exported string map in the desk directory is a
+    // CANDIDATE fill table and must be classified: either the module declares it in
+    // SLOT_FILL_TABLES against a real slot, or it is one of the two declaration exports.
+    // A new table nobody declared is a red, not a silence.
+    const DECLARATION_EXPORTS = ['SLOT_FILL_TABLES', 'SLOT_FILL_SHAPES'];
+    // CLASSIFIED, NOT EXEMPTED. Every string map in the desk directory must be one of
+    // these two things, and adding a third costs a deliberate line here or in the module's
+    // SLOT_FILL_TABLES. That is the whole mechanism: a new fill table cannot arrive
+    // unnoticed, which is how `ACCESS_PROSE` arrived.
+    const NOT_A_FILL_TABLE = Object.freeze({
+      'dmFieldProjection.js::DM_FIELD_FRAMED_BY_BLOCK':
+        'blockId → settlement field path, consumed by projectBesideDmField; no value of it '
+        + 'ever reaches a {slot}',
+    });
+    const violations = [];
+    const undeclaredTables = [];
+    const shapeDrift = [];
+    let tablesChecked = 0;
+    let valuesChecked = 0;
+
+    for (const { file, declared, mirror, exports } of await loadDeskModules()) {
+      const declaredTables = new Set(Object.values(declared));
+
+      for (const [slot, table] of Object.entries(declared)) {
+        tablesChecked += 1;
+        const shape = SHAPES.shapeOf(slot);
+        if (shape === undefined) {
+          undeclaredTables.push(`${file} declares a table for {${slot}}, which no annex registers`);
+          continue;
+        }
+        for (const [key, value] of Object.entries(table)) {
+          valuesChecked += 1;
+          const rule = fillShapeViolation(shape, value);
+          if (rule) violations.push(`${file} ${slot}[${key}] = "${value}" — ${rule} (shape ${shape})`);
+        }
+      }
+
+      for (const [name, value] of exports) {
+        if (DECLARATION_EXPORTS.includes(name)) continue;
+        const isStringMap = value && typeof value === 'object' && !Array.isArray(value)
+          && Object.keys(value).length > 0
+          && Object.values(value).every((v) => typeof v === 'string');
+        if (isStringMap && !declaredTables.has(value) && !NOT_A_FILL_TABLE[`${file}::${name}`]) {
+          undeclaredTables.push(`${file} exports the string map ${name} and SLOT_FILL_TABLES does not name it`);
+        }
+      }
+
+      for (const [slot, shape] of Object.entries(mirror)) {
+        // The desk's mirror of §0c's Shape column. A runtime module cannot read markdown,
+        // so it carries a copy; this is the arm that keeps the copy from becoming a fork.
+        if (SHAPES.shapeOf(slot) !== shape) {
+          shapeDrift.push(`${file} believes {${slot}} is "${shape}"; the annex says "${SHAPES.shapeOf(slot)}"`);
+        }
+      }
+    }
+
+    expect({ violations, undeclaredTables, shapeDrift }).toEqual({
+      violations: [], undeclaredTables: [], shapeDrift: [],
+    });
+    // Non-vacuity: the walk found real tables with real values. A directory that stopped
+    // exporting anything would satisfy every list above by being empty.
+    expect(tablesChecked).toBeGreaterThanOrEqual(1);
+    expect(valuesChecked).toBeGreaterThanOrEqual(5);
+  });
+
+  it('renders every real fill table against every seam its slot occupies', async () => {
+    // The cross product that would have caught the bug on the day it landed: every value
+    // of every declared table, in every variant that names its slot, rendered and READ.
+    // Today that is 5 ACCESS_NOUN values x 7 {access} variants = 35 sentences; it grows
+    // with the tables because both sides are discovered, never listed.
+    const defects = [];
+    let renders = 0;
+    for (const { declared } of await loadDeskModules()) {
+      for (const [slot, table] of Object.entries(declared)) {
+        for (const value of Object.values(table)) {
+          for (const [id, block] of allBlocks) {
+            for (const [key, pool] of Object.entries(block.pools)) {
+              for (const variant of pool) {
+                if (!variant.slots.includes(slot)) continue;
+                renders += 1;
+                defects.push(...fillDefects(`${id} :: ${key}`, variant,
+                  (s) => (s === slot ? value : conformantFill(SHAPES.shapeOf(s), s))));
+              }
+            }
+          }
+        }
+      }
+    }
+    expect(defects).toEqual([]);
+    expect(renders).toBeGreaterThanOrEqual(35);
   });
 });

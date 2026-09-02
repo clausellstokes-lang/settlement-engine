@@ -109,30 +109,40 @@ page that lies by omission about every restraint the engine actually recorded.
 
 Every proper noun and every recorded cause is a slot; nothing is baked.
 
-| Slot | Fills with |
-|---|---|
-| `{settlement}` | **the town whose page this is** (see R-DOS-A) |
-| `{counterpart}` | the other end of the directed pair — enemy, partner, destination, host |
-| `{npc}` | a cast person named on a member receipt; never minted, never a fate resolved |
-| `{faction}` | the acting faction, seat, bloc or court |
-| `{house}` | the merchant house (a faction with books) |
-| `{temple}` | the temple, chapter house or observance |
-| `{band}` | a band word from a closed quantity/severity vocabulary — never a figure |
-| `{reason}` | the RECORDED reason, typed, from the receipt's own reason field |
-| `{good}` | the named trade good |
-| `{route}` | the named road, lane, crossing or pass |
-| `{third_party}` | a THIRD settlement, bloc or court named on the record as neither end of the directed pair — the neutral whose cargo was taken, the league the two towns both answer to, the market the embargo is evaded through |
+| Slot | Shape | Fills with |
+|---|---|---|
+| `{settlement}` | proper | **the town whose page this is** (see R-DOS-A) |
+| `{counterpart}` | proper | the other end of the directed pair — enemy, partner, destination, host |
+| `{npc}` | proper | a cast person named on a member receipt; never minted, never a fate resolved |
+| `{faction}` | proper | the acting faction, seat, bloc or court |
+| `{house}` | proper | the merchant house (a faction with books) |
+| `{temple}` | proper | the temple, chapter house or observance |
+| `{band}` | RESERVED | a band word from a closed quantity/severity vocabulary — never a figure |
+| `{reason}` | bare-common | the RECORDED reason, typed, from the receipt's own reason field |
+| `{good}` | bare-common | the named trade good |
+| `{route}` | proper | the named road, lane, crossing or pass |
+| `{third_party}` | proper | a THIRD settlement, bloc or court named on the record as neither end of the directed pair — the neutral whose cargo was taken, the league the two towns both answer to, the market the embargo is evaded through |
 
-Borrowed, cross-referenced, NOT minted here: `{creed}` and `{rival_creed}`
-(RECEIPT_POOLS_FAITH.md), `{war}` and `{term}` (RECEIPT_POOLS_WAR.md, declared
-shared), `{calamity}` (the typed calamity from its own receipt, shared with
-RECEIPT_POOLS_FAITH.md and RECEIPT_POOLS_POPULATIONS.md), `{burden}` (the
-typed burden term the interior volume's `attributed_pressure` record carries)
-and `{wound}` (the typed grudge term the war volume's burial record carries).
+Borrowed, cross-referenced, NOT minted here — and carrying a SHAPE all the same,
+because the shape is what the SEAM in THIS corpus demands and the seams are
+here (RECEIPT_POOLS_DOSSIER_STATE.md §0c defines the four shape tokens):
+
+| Slot | Shape | Fills with | Source volume |
+|---|---|---|---|
+| `{creed}` | proper | the deity or faith by its authored name | RECEIPT_POOLS_FAITH.md |
+| `{rival_creed}` | proper | the opposing, rising or contesting creed | RECEIPT_POOLS_FAITH.md |
+| `{war}` | proper | the war by its own name; the one seam reads *"for all that the {war} is over"* | RECEIPT_POOLS_WAR.md, declared shared |
+| `{term}` | proper | a treaty term by its own family label | RECEIPT_POOLS_WAR.md, declared shared |
+| `{calamity}` | bare-common | the typed calamity word from its own receipt; every seam supplies the article (*"The {calamity} is still legible"*) | shared with RECEIPT_POOLS_FAITH.md and RECEIPT_POOLS_POPULATIONS.md |
+| `{burden}` | bare-common | the typed burden term the interior volume's `attributed_pressure` record carries | RECEIPT_POOLS_INTERIOR.md |
+| `{wound}` | bare-common | the typed grudge term the war volume's burial record carries; the seam reads *"since the old {wound} is back"* | RECEIPT_POOLS_WAR.md |
+
 **These three were in live use across the corpus before this merge and were
 declared nowhere;** a slot the convention does not list is a slot the HERALD
 INDEX law cannot record as a ref, so they are named here rather than left to
-be discovered at wiring.
+be discovered at wiring. **NONE of the eighteen slots in this file has a
+producer in the tree today**, so every shape above is read off its seams and is
+re-asked at wiring against the real values.
 
 **ARMS.** Because the page owns `{settlement}` (R-DOS-A), a directed family can
 render on EITHER end of its join, and the two ends are different sentences.

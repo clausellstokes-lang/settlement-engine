@@ -90,7 +90,7 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  */
 
 /**
- * `tradeAccess` → the `{access}` fill, in the prose form §0c specifies.
+ * `tradeAccess` → the `{access}` fill: a BARE noun, the shape §0c declares for this slot.
  *
  * `isolated` HAS NO FILL, deliberately and per the annex: a town nothing reaches has no
  * approach to name, so every variant needing `{access}` becomes ineligible on it and the
@@ -98,13 +98,65 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * doing its work on a real enum rather than on a missing record.
  * @type {Readonly<Record<string, string>>}
  */
-const ACCESS_PROSE = Object.freeze({
-  road: 'the road',
-  river: 'the river',
-  port: 'the port',
-  crossroads: 'the crossroads',
-  mountain_pass: 'the pass',
+export const ACCESS_NOUN = Object.freeze({
+  road: 'road',
+  river: 'river',
+  port: 'port',
+  crossroads: 'crossroads',
+  mountain_pass: 'pass',
 });
+
+/**
+ * THE SHAPES THIS DESK BELIEVES ITS SLOTS HAVE, mirroring §0c's Shape column.
+ *
+ * The ANNEX is the authority and this is a checked mirror, not a second home: the
+ * projection contract test asserts this map equals the register parsed out of the annexes,
+ * slot for slot, so a desk that drifts from the corpus reds rather than rendering. A
+ * runtime module cannot read markdown, and the alternative — no declaration at all — is
+ * exactly the hole `{access}` fell through.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const SLOT_FILL_SHAPES = Object.freeze({
+  settlement: 'proper',
+  access: 'bare-common',
+  complexity: 'bare-common',
+  season: 'bare-common',
+});
+
+/**
+ * Every LITERAL fill table this desk owns, by the slot it fills. The guard walks this
+ * directory, treats every exported string map as a candidate fill table, and refuses one
+ * that is not declared here — so the next desk cannot land a table the shape check has
+ * never seen, which is how a one-table check becomes a one-of-six check.
+ * @type {Readonly<Record<string, Readonly<Record<string, string>>>>}
+ */
+export const SLOT_FILL_TABLES = Object.freeze({ access: ACCESS_NOUN });
+
+/**
+ * A `bare-common` fill, or `undefined` — the desk's own half of the shape contract.
+ *
+ * The refusal is scoped to the BARE-COMMON class on purpose. That is the class whose
+ * violation produces broken English at every seam that carries it ("the Highly diversified
+ * — multiple major revenue streams keeps more hands busy"), and refusing is the correct
+ * behaviour under R-DST-K: the kernel's anchored liveness drops the variants that name the
+ * slot and the pool degrades to the ones that never needed it. A `proper` fill is NOT
+ * refused — a name is a name, an odd one still reads, and blanking a whole page over a
+ * generator quirk would trade a small wrong for a large silence.
+ *
+ * The rules mirror `fillShapeViolation` in scripts/lib/dossier-slot-shapes.mjs, and the
+ * contract test proves the two agree over a probe corpus rather than trusting that they do.
+ * @param {string} value
+ * @returns {string|undefined}
+ */
+function bareCommonFill(value) {
+  if (!value) return undefined;
+  if (/^(?:the|a|an|its|his|her|their|our|this|that|these|those)\b/i.test(value)) return undefined;
+  if (/[—–]/.test(value)) return undefined;
+  if (/[.!?]\s|[.!?]$/.test(value)) return undefined;
+  if (/[0-9]/.test(value)) return undefined;
+  if (/[a-z]+_[a-z]+/.test(value)) return undefined;
+  return /^[a-z]/.test(value) ? value : undefined;
+}
 
 /** The two approaches DS-ECO-1 calls narrow. */
 const NARROW_ACCESS = Object.freeze(['isolated', 'mountain_pass']);
@@ -213,12 +265,17 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   const granary = readings.granaryOutlook;
   const foodBalance = readings.foodBalance;
 
+  // The generator's display string is the right thing for a LABEL ROW and the wrong thing
+  // for a SEAM: its eleven values are title-cased and five carry an em-dashed gloss. The
+  // row keeps the datum; the seam takes only what conforms to the slot's declared shape.
+  const complexityDisplay = text(eco.economicComplexity);
+
   const slots = {
     settlement: name,
-    // `isolated` deliberately contributes no fill — see ACCESS_PROSE.
-    access: ACCESS_PROSE[access],
-    complexity: text(eco.economicComplexity),
-    season: text(granary?.season),
+    // `isolated` deliberately contributes no fill — see ACCESS_NOUN.
+    access: ACCESS_NOUN[access],
+    complexity: bareCommonFill(complexityDisplay),
+    season: bareCommonFill(text(granary?.season)),
   };
 
   /** @param {string} blockId @param {string|null} poolKey */
@@ -226,14 +283,20 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
     ? readStateProse(CORPUS, blockId, poolKey, { ...options, slots })
     : null);
 
+  // The ROW composes its own article from the one noun table rather than a second table
+  // carrying its own. Byte-identical to what this row has always rendered: the SEAM form
+  // and the LABEL-ROW form are different facts and one table was serving both.
   const accessRow = access
-    ? { label: 'Approach', value: ACCESS_PROSE[access] || 'nothing that reaches it easily' }
+    ? {
+      label: 'Approach',
+      value: ACCESS_NOUN[access] ? `the ${ACCESS_NOUN[access]}` : 'nothing that reaches it easily',
+    }
     : null;
 
   /** @type {Array<{label: string, value: string}>} */
   const headerDetail = [];
   if (accessRow) headerDetail.push(accessRow);
-  if (slots.complexity) headerDetail.push({ label: 'Economy', value: slots.complexity });
+  if (complexityDisplay) headerDetail.push({ label: 'Economy', value: complexityDisplay });
 
   const headerKey = prosperityHeaderPoolKey(rank, access);
   const foodKey = foodTilePoolKey(foodBalance);

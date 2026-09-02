@@ -34,6 +34,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import url from 'node:url';
 import { ECONOMY_FRESHNESS_SENTENCES } from '../src/domain/display/economyFreshness.js';
+import { parseSlotShapes, mergeSlotShapes, assertSlotShapesTotal } from './lib/dossier-slot-shapes.mjs';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
 const checkOnly = process.argv.includes('--check');
@@ -496,6 +497,44 @@ const causalCount = assertNothingDropped(causalSrc, CAUSAL_HEADER, causalBlocks,
 
 const stateData = projectBlocks(stateBlocks);
 const causalData = projectBlocks(causalBlocks);
+
+/**
+ * THE SHAPE GATE. A slot has a NAME, a SEMANTIC gloss and — since 2026-09-02 — a declared
+ * GRAMMATICAL SHAPE (§0c). The projection refuses to run when a variant names a slot no
+ * register declares, so a slot can never again reach a desk implementer with its shape
+ * left to guess. That guess is what shipped `ACCESS_PROSE.road = 'the road'` into eight
+ * seams that already carried their own determiner.
+ *
+ * It runs HERE rather than in a test because a test can be skipped and a projection cannot:
+ * every path to a leaf byte goes through this line.
+ * @param {Record<string, object>} data
+ * @returns {string[]}
+ */
+function slotsUsedIn(data) {
+  return Object.values(data).flatMap((block) => Object.values(block.pools)
+    .flat().flatMap((variant) => variant.slots));
+}
+
+const slotShapes = mergeSlotShapes([
+  parseSlotShapes(stateSrc, 'RECEIPT_POOLS_DOSSIER_STATE.md §0c/§0c-2'),
+  parseSlotShapes(causalSrc, 'RECEIPT_POOLS_CAUSAL_DOSSIER.md §0c'),
+]);
+const shapeGaps = assertSlotShapesTotal(
+  slotShapes, [...slotsUsedIn(stateData), ...slotsUsedIn(causalData)],
+);
+if (shapeGaps.undeclared.length || shapeGaps.deadPrefixes.length) {
+  throw new Error(
+    'the slot SHAPE register is not total over the corpus.'
+    + (shapeGaps.undeclared.length
+      ? `\n  used but undeclared: ${shapeGaps.undeclared.map((s) => `{${s}}`).join(' ')}`
+        + '\n  Add a row to §0c (or §0c-2, or the causal annex\'s §0c) with a Shape cell.'
+      : '')
+    + (shapeGaps.deadPrefixes.length
+      ? `\n  declared but matching nothing: ${shapeGaps.deadPrefixes.join(' ')}`
+        + '\n  A wildcard row that covers no live slot hides the next missing declaration.'
+      : ''),
+  );
+}
 
 const emitted = [];
 for (const desk of DESKS) {
