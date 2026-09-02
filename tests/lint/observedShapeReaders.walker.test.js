@@ -1164,6 +1164,23 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // the lane's build-time 62/42 because the LANDING BASE had already moved them at
     // the schema-12 mint (ODQ §819); the lane's own delta on them is zero, which is
     // why a rebase moves this pin by −2/−1/−1 and nothing else.
+    // ⭐ MOVED 2026-09-01 BY lane PAID-REPAIR (repair 1/5), a DEAD-ARM STRIKE — the
+    // first shrink shape, not a file deletion. The campaign PDF and the World Book both
+    // read a top-level `settlement.culture`, a key NO writer in src/ produces; the
+    // exporters now read domain/resolveCulture.js (config.culture, then the
+    // materialized culturalIdentity.key). `culture on settlement` leaves
+    // generateCampaignPDF.js at ×2 and generateWorldBook.js at ×1, so reads fall by
+    // THREE and identities by TWO — one identity per file, both files keeping their
+    // other rows: 1996/1411 → 1993/1409.
+    // ⚠ FILES HOLDS AT 388 AND THAT IS THE LOAD-BEARING HALF. The cure introduces a
+    // NEW module, src/domain/resolveCulture.js, which reads `config.culture` and
+    // `culturalIdentity.key` — both abundantly written — plus the guarded sentinel
+    // compare. Had either resolved to a dead key the new file would have minted its own
+    // row and `files` would read 389 while reads/identities still fell: a mint and a
+    // shrink cancelling to look like a clean strike. 388 is what rules that out, and it
+    // is why the chokepoint could be introduced without a schema genesis (`--write`
+    // may never add a file).
+    // ⚠ bankedReads/taggedRows HOLD at 64/43 — this lane cleared no row and tagged none.
     // ⛔ THE EXPECTED SIDE IS NO LONGER A LITERAL, AND THAT IS THE REPAIR. It was
     // `{ reads: 1999, identities: 1412, files: 388, bankedReads: 64, taggedRows: 43 }` —
     // five hardcoded twins of figures the register already holds, which the governed
