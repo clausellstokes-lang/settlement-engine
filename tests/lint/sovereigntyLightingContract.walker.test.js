@@ -618,7 +618,67 @@ function measureCensus() {
   };
 }
 
-const gitOut = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+/**
+ * TWO READERS, BECAUSE GIT SPEAKS TWO SHAPES AND ONE TRIM CANNOT SERVE BOTH. `gitRaw` is the
+ * exec. `gitOut` is the SCALAR reader, and its `.trim()` is LOAD-BEARING exactly there: the one
+ * caller below is `gitOut('rev-parse', 'HEAD')`, whose value is written straight into the
+ * register's `measuredAtSha` provenance field, and an untrimmed read would carry a trailing
+ * newline into it. The LINE reader is `parsePorcelainPaths` below, and it must not travel
+ * through the scalar trimmer — that routing, not the trim itself, was the defect.
+ */
+const gitRaw = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' });
+const gitOut = (...args) => gitRaw(...args).trim();
+
+/**
+ * THE PORCELAIN READER, AND WHY IT IS NOT A ONE-LINE `.trim().split()` ANY MORE. It replaces
+ * one, and that one REFUSED THE SINGLE PATH THIS DOOR EXISTS TO PERMIT — but only sometimes,
+ * which is exactly why it survived a landing and two lanes disagreed about whether it was real.
+ *
+ * `git status --porcelain` emits one record per line, `XY<space>path`: X and Y are the two
+ * columns of the status field, column 3 is the separator, and THE PATH BEGINS AT COLUMN 4. For
+ * a worktree-only modification X is a SPACE, so the record reads ` M tests/lint/…`. Trimming
+ * the WHOLE command output — which is the right thing for a scalar and the wrong thing here —
+ * eats that leading space ON THE FIRST LINE ONLY, so a `slice(3)` correct for every other line
+ * takes one character too many from line one, and the mangled path fails the allowlist.
+ *
+ * MEASURED, NOT REASONED (lane CURE-PORCELAIN, at this file's own blob, both arms executed):
+ * a FIRST refreeze from a clean tree SUCCEEDS, because a clean tree has no line to mis-slice.
+ * A SECOND refreeze — the register dirty and therefore first, which is the state the first
+ * refreeze itself creates and which this register's documentation promises is permitted —
+ * refused itself with `Dirty: ests/lint/.lighting-census-baseline.json`, one letter short. So
+ * the promise that a refreeze is REPEATABLE was false, and the failure was silent in the
+ * safe-looking direction: it refuses when it should permit, and a refusal reads as caution.
+ *
+ * THE SEPARATOR IS ASSERTED, NOT ASSUMED, AND THAT IS THE PREVENTION. A column slice is only
+ * correct while the record really is `XY<space>path`, and this defect WAS a column slice
+ * applied to a record whose columns had shifted underneath it. A row without the separator now
+ * THROWS instead of being sliced on faith — which means the very mistake this cures can no
+ * longer happen quietly: put the whole-output trim back and the first record arrives as
+ * `M tests/…`, whose column 3 is a letter, and this parser says so out loud.
+ *
+ * NOT HANDLED, DELIBERATELY, AND IT FAILS IN THE CONSERVATIVE DIRECTION: a rename record spells
+ * `R  old -> new`, and a path needing quoting arrives C-quoted. Neither can ever equal the
+ * register's own path, so both land in the dirty list and the door REFUSES rather than permits.
+ * Reading them properly wants the NUL-separated form, which is a different command and a wider
+ * change than this one — `scripts/implementation-session.mjs` already spells it that way.
+ *
+ * PURE ON PURPOSE: it takes the bytes rather than fetching them, so the parse can one day be
+ * proved against canned records without a subprocess and without a dirty tree.
+ */
+function parsePorcelainPaths(raw) {
+  return raw
+    .split('\n')
+    .filter((line) => line !== '')
+    .map((line) => {
+      if (line.length < 4 || line[2] !== ' ') {
+        throw new Error('census refreeze REFUSED — this is not a `git status --porcelain`'
+          + ` record: ${JSON.stringify(line)}. The status field is columns 1-2, column 3 is the`
+          + ' separator, and the path begins at column 4. Refusing to slice a record whose shape'
+          + ' it cannot recognise is this parser\'s whole job. Nothing was written.');
+      }
+      return line.slice(3);
+    });
+}
 
 /**
  * THE REGENERATION PATH. One command, documented in the register's own `_doc`:
@@ -654,10 +714,7 @@ function refreezeCensusBaseline() {
       + ' LIGHTING_CENSUS_NOTE to the cause of the movement.');
   }
 
-  const dirty = gitOut('status', '--porcelain')
-    .split('\n')
-    .map((line) => line.slice(3).trim())
-    .filter(Boolean)
+  const dirty = parsePorcelainPaths(gitRaw('status', '--porcelain'))
     .filter((path) => path !== CENSUS_BASELINE_REL);
   if (dirty.length) {
     throw new Error('census refreeze REFUSED — the tree is dirty, and this census counts the'
