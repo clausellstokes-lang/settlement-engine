@@ -481,6 +481,14 @@ jobs:
       - name: Thirty-year realm-scale matrix (PASS/FAIL)
         run: npm run soak:weekly -- --output artifacts/soak/weekly.json
 
+      # THE TRIPWIRE REGISTRY'S CALLER (SOAKCHAIN Car 2). Until this step the registry
+      # had none: nothing in any committed pipeline evaluated population_collapse,
+      # negative_stock, unbounded_growth or memory_watermark. `if: always()` because a
+      # soak that FAILED is exactly the run whose findings a reader wants named.
+      - name: Tripwire registry over the weekly evidence
+        if: always()
+        run: node scripts/soak/evaluate-receipt.mjs --aggregate artifacts/soak/weekly.json
+
       # DIAGNOSTIC log-artifact steps (no process.exit — they only print tables).
       - name: Cause-lifecycle soak surfaces
         run: node scripts/audit/cause-lifecycle-soak.mjs
