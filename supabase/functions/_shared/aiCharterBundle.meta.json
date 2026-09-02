@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-02T01:19:07.952Z",
+  "generatedAt": "2026-09-02T14:50:33.713Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "a6a8e46d5ef21e53",
+  "sourceHash": "9d092c0e5a838621",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -108,6 +108,9 @@
     "src/domain/worldPulse/warReasonTaxonomy.js",
     "src/domain/worldPulse/worldSnapshot.js",
     "src/domain/worldPulse/worldState.js",
+    "src/kernel/detMath.js",
+    "src/kernel/detMathDecay.js",
+    "src/kernel/detPow.js",
     "src/kernel/math.js",
     "src/kernel/prng.js",
     "src/kernel/slugify.js",

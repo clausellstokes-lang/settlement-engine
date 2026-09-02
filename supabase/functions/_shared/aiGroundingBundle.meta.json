@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-02T01:19:07.897Z",
+  "generatedAt": "2026-09-02T14:50:33.644Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "810c3c00320dbcbb",
+  "sourceHash": "b04658b12f8b4384",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -56,8 +56,10 @@
     "src/domain/tradeRouteSemantics.js",
     "src/domain/userEdits.js",
     "src/domain/worldPulse/archetypeCatalog.js",
+    "src/domain/worldPulse/bandedStock.js",
     "src/domain/worldPulse/deityAxes.js",
     "src/domain/worldPulse/faithChannelBindings.js",
+    "src/domain/worldPulse/intervalWeeks.js",
     "src/domain/worldPulse/pulseHelpers.js",
     "src/domain/worldPulse/relationshipCompatibility.js",
     "src/domain/worldPulse/relationshipEvolution.js",
@@ -70,6 +72,8 @@
     "src/domain/worldPulse/warCoalitionGraph.js",
     "src/domain/worldPulse/warCoalitionLedger.js",
     "src/domain/worldPulse/warReasonTaxonomy.js",
+    "src/kernel/detMath.js",
+    "src/kernel/detMathDecay.js",
     "src/kernel/slugify.js",
     "src/lib/entities.js",
     "src/lib/text.js"
