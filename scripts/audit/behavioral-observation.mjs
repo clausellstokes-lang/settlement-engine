@@ -822,6 +822,28 @@ export function measureAddressChain(entries) {
 }
 
 /**
+ * The typed-event census of one composed year, EXPORTED so the estate's one decade fold
+ * (`scripts/audit/soakInvariants.mjs`) and READERREVIEW's liveness manifest read the same
+ * census the receipt carries instead of each re-deriving it from `result.selected`.
+ *
+ * It is the exact pass `observeBehavioralYear` used to run inline, in the same record
+ * order, so the object's KEY INSERTION ORDER — and therefore every composite hash that
+ * serializes it — is byte-identical to before the extraction.
+ *
+ * @returns {Record<string, number>}
+ */
+export function eventTypeCountsOf(result) {
+  /** @type {Record<string, number>} */
+  const counts = {};
+  for (const record of (Array.isArray(result?.selected) ? result.selected : [])) {
+    if (!record || typeof record !== 'object' || !isPublicOutcome(record)) continue;
+    const type = typeOf(record);
+    counts[type] = (counts[type] || 0) + 1;
+  }
+  return counts;
+}
+
+/**
  * Observe one simulated year.
  */
 export function observeBehavioralYear({
@@ -868,8 +890,10 @@ export function observeBehavioralYear({
   const postApplyMoverCounts = Object.fromEntries(
     BEHAVIORAL_MOVER_FAMILIES.map((family) => [family, 0]),
   );
-  /** @type {Record<string, number>} */
-  const eventTypeCounts = {};
+  // ⭐ THE SAME CENSUS, now taken by the exported function above rather than inline. The
+  // pass is identical and runs over the same `records` in the same order, so key insertion
+  // order — and every composite hash that serializes this object — is unchanged.
+  const eventTypeCounts = eventTypeCountsOf(result);
   /** @type {Record<string, number>} */
   const attentionCounts = {};
   const arcCounts = { constructive: 0, destructive: 0 };
@@ -878,8 +902,6 @@ export function observeBehavioralYear({
   let unclassifiedEventCount = 0;
 
   for (const record of records) {
-    const type = typeOf(record);
-    eventTypeCounts[type] = (eventTypeCounts[type] || 0) + 1;
     const family = moverFamilyOf(record);
     if (family) {
       moverCounts[family] += 1;
