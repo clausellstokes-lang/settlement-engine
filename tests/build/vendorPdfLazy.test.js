@@ -824,9 +824,9 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // identifier, so names are useless. (2) The obvious literal `6227020800` (1/13!) is
     // NOT present in the output at all — esbuild constant-folds `1 / 6227020800` to
     // `16059043836821613e-26` — and it is not detMath-specific anyway, because
-    // `detPow.js` carries the same factorial and legitimately rides THIS chunk the
-    // moment it gains a consumer. What survives folding AND belongs only to detMath is
-    // its log10 change-of-base constant, its underflow rail, and its Cody-Waite ln2
+    // `detPow.js` carries the same factorial — it DID ride this chunk the moment T13
+    // Car 4 (v) gave it consumers, at a MEASURED 744 B, so it is lazy now (vite.config).
+    // What survives folding AND belongs only to detMath is its log10 change-of-base constant, its underflow rail, and its Cody-Waite ln2
     // high word. Any ONE of them here means detMath leaked into first paint.
     const DET_MATH_FINGERPRINT = /3010299956639812|-1075|6931471803691238/;
     expect(
