@@ -1,13 +1,10 @@
 {
-  "total": 33,
+  "total": 26,
   "files": {
-    "src/domain/region/contestMath.js": 1,
-    "src/domain/relationships/canonicalRelationship.js": 1,
     "src/domain/roads/state.js": 1,
     "src/domain/spatial/moralDrift.js": 1,
     "src/domain/spatial/pestilence.js": 1,
     "src/domain/spatial/tradeFlow.js": 1,
-    "src/domain/worldPulse/attrition.js": 1,
     "src/domain/worldPulse/beliefMap.js": 3,
     "src/domain/worldPulse/corruptionWeb.js": 2,
     "src/domain/worldPulse/disposition.js": 2,
@@ -15,16 +12,14 @@
     "src/domain/worldPulse/fidelityNoise.js": 1,
     "src/domain/worldPulse/informationStatecraft.js": 1,
     "src/domain/worldPulse/martialReadiness.js": 1,
-    "src/domain/worldPulse/militaryStrength.js": 1,
     "src/domain/worldPulse/momentum.js": 1,
     "src/domain/worldPulse/npcCredibility.js": 1,
     "src/domain/worldPulse/npcGrowthKernel.js": 1,
     "src/domain/worldPulse/npcLadderKernel.js": 1,
     "src/domain/worldPulse/npcLadderState.js": 2,
-    "src/domain/worldPulse/occupation.js": 2,
+    "src/domain/worldPulse/occupation.js": 1,
     "src/domain/worldPulse/populationDynamics.js": 1,
-    "src/domain/worldPulse/relationshipMemory.js": 2,
-    "src/domain/worldPulse/relationshipRuleHelpers.js": 1,
+    "src/domain/worldPulse/relationshipMemory.js": 1,
     "src/domain/worldPulse/urbanFabricKernel.js": 2
   }
 }

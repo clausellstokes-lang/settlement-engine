@@ -9,6 +9,7 @@
  * state core, so both rule modules and the orchestrator depend on it with no cycle.
  */
 import { TIER_ORDER } from '../../data/constants.js';
+import { detLog10 } from '../../kernel/detMath.js';
 import { clamp01, normalizeRelationshipType, relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles, normalizeRelationshipEdge, ensureRelationshipState } from './relationshipState.js';
 
 const stablePart = (/** @type {any} */ value) =>
@@ -285,7 +286,7 @@ function warCostPenalty(/** @type {any} */ item) {
 // and the relationship gate can never diverge. 0..1.
 export function settlementStrength(/** @type {any} */ item, /** @type {any} */ pressure = {}) {
   const pop = populationFor(item);
-  const popScore = Math.min(1, Math.log10(Math.max(10, pop)) / 5);
+  const popScore = Math.min(1, detLog10(Math.max(10, pop)) / 5);
   // economy (0.12) is the war-layer homeostasis lever. conflict
   // stays 0.18 so war's direct effect isn't diluted; the weight came from tier/pop/
   // trade/legitimacy. Weights sum to 1.0. The war-cost penalty is then

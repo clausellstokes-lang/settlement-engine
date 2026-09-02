@@ -1,4 +1,5 @@
 import { TIER_ORDER } from '../../data/constants.js';
+import { detLog10 } from '../../kernel/detMath.js';
 import { truncateAtWord } from '../../lib/text.js';
 import {
   ensureRelationshipState,
@@ -88,7 +89,7 @@ function population(/** @type {any} */ item) {
 
 function settlementPower(/** @type {any} */ item) {
   if (!item) return 0.35;
-  const popScore = Math.min(1, Math.log10(Math.max(10, population(item))) / 5);
+  const popScore = Math.min(1, detLog10(Math.max(10, population(item))) / 5);
   const tierScore = tierRank(item) / Math.max(1, TIER_ORDER.length - 1);
   const scores = item.causal?.scores || {};
   const economy = (scores.trade_connectivity ?? 50) / 100;

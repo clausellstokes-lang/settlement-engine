@@ -30,6 +30,7 @@ import { resolveSettlementTerrain } from '../resolveTerrain.js';
 // W-F8: readiness quality — drilled/maintained forces bleed slower (decay) and hold the
 // opening tick gentler (first-tick). Both 1× at readiness 0 ⇒ byte-identical.
 import { attritionDecayMult, firstTickAttritionMult } from './martialReadiness.js';
+import { detLn } from '../../kernel/detMath.js';
 
 const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, Number(v) || 0));
 
@@ -172,7 +173,7 @@ export function relativeStrengthTilt(attackerCurrent, defenderCurrent, isAttacke
   const a = Math.max(1e-3, Number(attackerCurrent) || 0);
   const d = Math.max(1e-3, Number(defenderCurrent) || 0);
   // log-ratio so a 2× edge and a ½× edge are symmetric. Positive ⇒ attacker stronger.
-  const logRatio = Math.log(a / d);
+  const logRatio = detLn(a / d);
   // The side that is WEAKER bleeds more. For the attacker, a positive logRatio
   // (stronger) REDUCES its loss; for the defender it INCREASES the defender's loss.
   const signed = isAttacker ? -logRatio : logRatio;

@@ -29,6 +29,7 @@ import { defenseLedger } from '../defenseLedger.js';
 import { foodLedger } from '../foodLedger.js';
 import { deriveSystemVariable } from '../causalState.js';
 import { canonImports, canonExports } from '../canonicalAccessors.js';
+import { detLog10 } from '../../kernel/detMath.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { deityTemper } from './deityAxes.js';
@@ -173,7 +174,7 @@ export function deriveMilitaryCapacity(itemOrSettlement, ctx = {}) {
   const pop = populationOf(s);
   // log10-scaled population, like settlementStrength, so a metropolis doesn't
   // dwarf everything linearly; tier carries most of the manpower signal.
-  const popScore = pop > 0 ? Math.min(1, Math.log10(Math.max(10, pop)) / 5) : 0;
+  const popScore = pop > 0 ? Math.min(1, detLog10(Math.max(10, pop)) / 5) : 0;
   let manpower = clamp0100(tierFrac * 70 + popScore * 30);
   push('manpower', 'config.tier', 'tier', Math.round(tierFrac * 70),
     `Tier provides the structural body of fighters (${Math.round(tierFrac * 100)}% of max tier).`);

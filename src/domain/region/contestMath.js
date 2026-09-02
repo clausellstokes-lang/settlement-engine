@@ -13,15 +13,15 @@
  * to ~0 the instant ONE factor is weak, collapsing the field. Summing in LOG-ODDS
  * space and squashing ONCE keeps every factor's marginal influence alive.
  *
- * Cross-platform reproducibility caveat: logistic/logit/softmax use
- * Math.exp and Math.log, which the ECMAScript spec does NOT require to be
- * bit-identical across engines/platforms. In rare boundary cases — a contest
- * score sitting exactly on its pHold cutoff, or a near-tie cumulative-weight
- * boundary in stableSampleByWeight — the same seed could in principle resolve
- * differently on a different platform. This is inherent to transcendentals and
- * accepted as-is; if byte-identical cross-platform snapshots ever become a hard
- * requirement, quantize scores/weights to a fixed precision before the
- * threshold comparison.
+ * Cross-platform reproducibility: SETTLED, and no longer a caveat. logistic,
+ * logit and softmax once called Math.exp and Math.log, which the ECMAScript
+ * spec does NOT require to be bit-identical across engines — so the same seed
+ * could resolve a contest differently in Safari than in Chrome, and no
+ * same-engine golden we own could ever see it. T13 TRANS replaced all four
+ * sites with src/kernel/detMath.js's detExp and detLn, which are built only
+ * from the spec-exact operations (+, -, *, /, compare, floor). These three
+ * functions now answer identically on every conforming engine; the one-time
+ * numeric shift that cure introduced is named in T13's shift record.
  */
 
 // clamp01 is the kernel primitive (code-quality-4). The former local one-liner is
@@ -31,7 +31,7 @@
 // (kernel/math.js is the shared determinism-primitive layer — not src/generators,
 // so the region-must-not-import-prng law is preserved.)
 import { clamp01 } from '../../kernel/math.js';
-import { detExp } from '../../kernel/detMath.js';
+import { detExp, detLn } from '../../kernel/detMath.js';
 export { clamp01 };
 
 /**
@@ -71,7 +71,7 @@ export function logistic(x) {
  * @param {number} p @returns {number} */
 export function logit(p) {
   const c = Math.min(1 - 1e-6, Math.max(1e-6, clamp01(p)));
-  return Math.log(c / (1 - c));
+  return detLn(c / (1 - c));
 }
 
 /**
