@@ -67,6 +67,7 @@ describe('detMath — determinism is STRUCTURAL, and the scan is the proof', () 
     expect(decayCode).toContain(DECAY_SIGNATURE);
     // anchored: each source is pinned to contain its own export line on the lines above
     expect(code).not.toMatch(banned);
+    // anchored: the decay source is pinned to contain its own export line two lines above — an empty or wrong file cannot satisfy that pin, so this assertion cannot outlive its subject
     expect(decayCode).not.toMatch(banned);
   });
 
@@ -75,6 +76,7 @@ describe('detMath — determinism is STRUCTURAL, and the scan is the proof', () 
     expect(decayCode).toContain(DECAY_SIGNATURE);
     // anchored: same pins, same reason — an empty source cannot satisfy them
     expect(code).not.toMatch(/\*\*/);
+    // anchored: the same two pins above hold this line up — the decay source must contain its own export line before this can pass on an empty read
     expect(decayCode).not.toMatch(/\*\*/);
   });
 
