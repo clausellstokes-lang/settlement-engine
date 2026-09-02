@@ -59,6 +59,7 @@ import {
   pendingSurfaceBacklog, registerDigestOf,
 } from './lib/writer-dark-register.mjs';
 import { buildObservedCorpus } from './lib/observed-shape-corpus.mjs';
+import { buildLitDialCorpus, dialGatedOf } from './lib/writer-reach-lit-corpus.mjs';
 import { sourceFiles } from './check-observed-shape-readers.mjs';
 import { parseExactFlags, planExternalArtifactOutputs, publishJsonExclusive } from './lib/governed-artifact-io.mjs';
 
@@ -87,7 +88,9 @@ const headSha = (root) => execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root
  * doors share. `scansRun` is returned so the walker can pin that the gate does
  * exactly the scans it budgeted for.
  */
-export async function measure({ root = ROOT, corpus = null, files = null, scan = scanSurfaceReads } = {}) {
+export async function measure({
+  root = ROOT, corpus = null, files = null, scan = scanSurfaceReads, withDialCorpus = true,
+} = {}) {
   const observed = corpus ?? await buildObservedCorpus();
   const sources = files ?? sourceFiles(root);
   const index = buildIndex(sources);
@@ -108,9 +111,27 @@ export async function measure({ root = ROOT, corpus = null, files = null, scan =
   });
   const judged = judgeWriters({ corpus: observed, closures, reads, root, allowlist });
 
+  // ⭐ THE DIAL CORPORA (Car 3's arm, made a first-class part of the measurement by
+  // Car 4). Clause W now reads `dialGated` as the WRITE PROOF for every
+  // generation-dial row, and a missing set CONVICTS rather than excusing — so the
+  // doors must carry the measurement, not hope a caller supplies it. Two producer-1
+  // runs, about 1.3 s beside an 8.5 s corpus build.
+  let litShapes = null;
+  let controlShapes = null;
+  let dialConfigKeys = [];
+  let dialGated = null;
+  if (withDialCorpus) {
+    const lit = await buildLitDialCorpus({ root });
+    const control = await buildLitDialCorpus({ root, rollDials: false });
+    litShapes = lit.shapes;
+    controlShapes = control.shapes;
+    dialConfigKeys = lit.dialConfigKeys;
+    dialGated = dialGatedOf(litShapes, [controlShapes, observed.shapes], judged.knownShapes, dialConfigKeys);
+  }
+
   return {
     root, corpus: observed, index, edgesByFile, closures, web, liveComponents, union,
-    reads, scanStats: stats, allowlist, ...judged,
+    reads, scanStats: stats, allowlist, litShapes, controlShapes, dialConfigKeys, dialGated, ...judged,
   };
 }
 
@@ -154,11 +175,19 @@ export function compareDark(live, frozen, register = WRITER_DARK_REGISTER) {
     }))
     .sort((a, b) => (a.identity < b.identity ? -1 : 1));
 
+  // ⚠ REASON-AWARE, for the same reason clause S is (ledger §882.15). A
+  // generation-dial row's identity is EXPECTED to be missing from the dark cohort —
+  // that absence IS the dormancy it claims — so reading it as "struck" would report
+  // every correct dial row as a win to bank. What IS a finding for such a row is
+  // PRESENCE: the dial has rolled and a shipped world now writes the key.
+  const isDialRow = (row) => row.reason === 'dark-by-construction' && row.door?.kind === 'generation-dial';
   const struck = register
-    .filter((row) => !liveDark.has(row.identity))
+    .filter((row) => (isDialRow(row) ? liveJudged.has(row.identity) : !liveDark.has(row.identity)))
     .map((row) => ({
-      identity: row.identity, reason: row.reason,
+      identity: row.identity,
+      reason: row.reason,
       now: liveJudged.has(row.identity) ? (live.verdictOf.get(row.identity) ?? 'UNKNOWN') : 'NO LONGER WRITTEN',
+      dialRolled: isDialRow(row) && liveJudged.has(row.identity),
     }));
 
   const sentinel = [];
@@ -326,6 +355,7 @@ export async function run(argv = [], overrides = {}) {
       cls, new Set([...measured.closures[cls]].map((f) => (f.startsWith(root) ? f.slice(root.length + 1) : f))),
     ])),
     pendingCeiling: exists() ? readBaseline().pendingSurfaceCeiling : null,
+    dialGated: measured.dialGated,
   });
 
   if (flags.genesis) {
@@ -381,9 +411,11 @@ export async function run(argv = [], overrides = {}) {
       `DARK and unregistered: ${identity} — the engine writes it on every world and no counting surface reads it.`
       + ' Ceiling 0: light it, add a row naming its door, or bank it through the governed door.'
     )),
-    ...comparison.struck.map((row) => (
-      `BANK THE WIN — strike the row: ${row.identity} is registered ${row.reason} but is now ${row.now}.`
-      + ' A registered row that outlives its darkness is an exemption nobody is watching.'
+    ...comparison.struck.map((row) => (row.dialRolled
+      ? `THE DIAL HAS ROLLED: ${row.identity} is registered ${row.reason} but a shipped world now writes it`
+        + ` (judged ${row.now}). Retire the generation-dial row and let the identity be judged normally.`
+      : `BANK THE WIN — strike the row: ${row.identity} is registered ${row.reason} but is now ${row.now}.`
+        + ' A registered row that outlives its darkness is an exemption nobody is watching.'
     )),
     ...comparison.stale.map((row) => (
       `STALE bank member: ${row.identity} is now ${row.now}. Fold it out with --write; a banked identity that`

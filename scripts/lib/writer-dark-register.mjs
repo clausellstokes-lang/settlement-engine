@@ -65,7 +65,11 @@ export const CANONICAL_FIELDS = Object.freeze({
 export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
 
 /**
- * THE REGISTER. Rows 3 and 6 of the volume's six drafted rows, and nothing else:
+ * THE REGISTER. Rows 1, 2, 3 and 6 of the volume's six drafted rows. Rows 1 and 2
+ * are the generation-dial pair, admitted by Car 4 once the chair ruled clause W
+ * reason-aware (ledger §882.15) — before that ruling no instrument in the estate
+ * could hold them, because their writes are an assignment and a computed key.
+ * Rows 3 and 6 were Car 1's:
  * Car 0 adjudicated all six at C' (⟦G0-13⟧) and found rows 1–2 are Car 3's
  * (their keys are not written under the dark corpus at all), row 4's key never
  * reaches the population under `customContent: {}`, and row 5's three families
@@ -73,6 +77,52 @@ export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
  * `worldState` identity is judgeable).
  */
 export const WRITER_DARK_REGISTER = Object.freeze([
+  Object.freeze({
+    identity: 'customContentRoster on settlement',
+    key: 'customContentRoster',
+    shape: 'settlement',
+    writer: 'src/generators/generateSettlementPipeline.js',
+    reason: 'dark-by-construction',
+    door: Object.freeze({
+      kind: 'generation-dial',
+      configKey: '_livingContentLawVersion',
+      dialModule: 'src/domain/content/livingContentLaw.js',
+      dialExport: 'NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION',
+      litModule: 'src/domain/content/livingContentLawVersion.js',
+      litExport: 'ROSTER_LIVING_CONTENT_LAW_VERSION',
+    }),
+    lighting: 'The living-content roster is the v2 law\'s one additive key, and no shipped world writes it: the '
+      + 'dial ships at 1 while the roster law is 2, so livingContentRosterFor returns null before the registry is '
+      + 'ever consulted and the key is never allocated. It is therefore dark by CONSTRUCTION rather than by '
+      + 'neglect, and the bit is executed both ways every scan: a lit corpus writes it, the shipped corpus does '
+      + 'not. When the owner rolls the dial the key becomes an ordinary written fact and this row must die with '
+      + 'its premise, which is exactly what clause S convicts.',
+    car: '§7 WRWALKER Car 4, the reason-aware clauses ruled at ledger §882.15',
+    charter: '§866 the MAT pick that first wrote the roster key',
+  }),
+  Object.freeze({
+    identity: 'densityRungRole on npcs',
+    key: 'densityRungRole',
+    shape: 'npcs',
+    writer: 'src/generators/density/applyDensityLaw.js',
+    reason: 'dark-by-construction',
+    door: Object.freeze({
+      kind: 'generation-dial',
+      configKey: '_densityLawVersion',
+      dialModule: 'src/domain/density/densityLaw.js',
+      dialExport: 'NEW_SETTLEMENT_DENSITY_LAW_VERSION',
+      litModule: 'src/domain/density/densityLaw.js',
+      litExport: 'REGISTER_VII_DENSITY_LAW_VERSION',
+    }),
+    lighting: 'The Register VII density roll writes each seated member\'s rung role, and the shipped dial is 1 '
+      + 'against a register version of 2, so no world a player generates carries the key at all. The estate has '
+      + 'known this key was unread since D1 and says so in its own source at '
+      + 'src/generators/density/titularSuccession.js:29; what it lacked was an instrument that could hold the '
+      + 'claim, because the write is a computed property key behind RUNG_ROLE_FIELD and no text probe can see it. '
+      + 'The dormancy is now an executed bit rather than a comment.',
+    car: '§7 WRWALKER Car 4, the reason-aware clauses ruled at ledger §882.15',
+    charter: '§7 WRWALKER, the drafted register row 2, writer CONFIRMED at applyDensityLaw.js:428',
+  }),
   Object.freeze({
     identity: 'cultureProfileKey on config',
     key: 'cultureProfileKey',
@@ -278,15 +328,53 @@ export async function assertWriterDarkRegisterEvidence(entries = WRITER_DARK_REG
       throw new Error(`writer-reach dark register row ${label} is UNVERIFIABLE (clause ${clause}): ${message}`);
     };
 
-    // ── W ──
+    // ── W — REASON-AWARE (chair, ledger §882.15) ──
+    const isDialRow = row.reason === 'dark-by-construction' && row.door.kind === 'generation-dial';
     let writerSource;
     try { writerSource = readSource(row.writer); } catch {
       fail('W', `its writer cannot be read: ${row.writer}`);
     }
-    const spellings = writeShapesIn(writerSource, row.key);
-    if (!spellings.length) {
-      fail('W', `${row.writer} no longer writes ${JSON.stringify(row.key)} in any measured write spelling.`
-        + ' A row whose writer stopped writing is a row about nothing; strike it.');
+    let spellings = writeShapesIn(writerSource, row.key);
+    let writeProof;
+
+    if (isDialRow) {
+      // ⭐ THE WIDENING, AND IT IS NARROW BY CONSTRUCTION. A generation-dial row's
+      // key is written on a world nobody ships, so the TEXT probe is the wrong
+      // instrument twice over: `customContentRoster` is written by ASSIGNMENT
+      // (`finalCtx.settlement.customContentRoster = …`) and `densityRungRole`
+      // through a COMPUTED PROPERTY KEY behind a constant (`[RUNG_ROLE_FIELD]: …`),
+      // and neither is one of OSR's four measured spellings. Clause W therefore
+      // convicted both as "the writer stopped writing", which is FALSE — the estate
+      // says so itself at src/generators/density/titularSuccession.js:29:
+      // "`densityRungRole` (`RUNG_ROLE_FIELD`) has been WRITTEN since D1 and READ
+      // BY NOTHING."
+      //
+      // So for THIS REASON ONLY the write proof is MEMBERSHIP IN `dialGated` — the
+      // write OBSERVED BY EXECUTION (present in a lit corpus, absent from a shipped
+      // one) rather than inferred from source text. It is strictly stronger than the
+      // probe it replaces, and it is scoped: every other reason keeps the text probe,
+      // so a row that merely writes by assignment gains nothing from this clause.
+      //
+      // ⛔ AND IT NEVER PASSES ON MISSING EVIDENCE. Without a measured `dialGated`
+      // the row is UNVERIFIABLE, not excused — an absent measurement is the one
+      // input a conviction clause must never read as innocence.
+      if (!dialGated) {
+        fail('W', 'it is a generation-dial row and no measured dialGated set was supplied, so its write cannot'
+          + ' be observed. A dormancy claim is a BIT claim; build the lit corpus or strike the row. An absent'
+          + ' measurement is not an acquittal.');
+      }
+      if (!dialGated.has(row.identity)) {
+        fail('W', `it is not in the measured dialGated set, so a lit world does not write it either and there is`
+          + ' no dormancy to claim. A dormancy claim is a BIT claim: present lit, absent dark.');
+      }
+      writeProof = 'dialGated membership (executed: present lit, absent dark)';
+      spellings = spellings.length ? spellings : ['(none — written by assignment or a computed key)'];
+    } else {
+      if (!spellings.length) {
+        fail('W', `${row.writer} no longer writes ${JSON.stringify(row.key)} in any measured write spelling.`
+          + ' A row whose writer stopped writing is a row about nothing; strike it.');
+      }
+      writeProof = `source text (${spellings.join(', ')})`;
     }
 
     if (row.reason === 'dark-by-construction' && row.door.kind === 'simulation-flag') {
@@ -304,10 +392,10 @@ export async function assertWriterDarkRegisterEvidence(entries = WRITER_DARK_REG
           + ` (${JSON.stringify(dial)}), so the key is written on every world and this read must be judged`
           + ' normally. Retire the row rather than outliving its own premise.');
       }
-      if (dialGated && !dialGated.has(row.identity)) {
-        fail('D-dial', 'the identity is not in the measured dialGated set, so the dormancy bit has no present-lit'
-          + ' half. A dormancy claim is a BIT claim, not a version comparison.');
-      }
+      // The membership half of this clause MOVED TO W (ledger §882.15): "is it
+      // written" is W's question, and W now answers it with the same executed bit.
+      // What remains here is the door itself — is the shipped dial still behind the
+      // lit one — which is the question only this clause can ask.
     }
 
     if (row.reason === 'engine-internal') {
@@ -348,16 +436,33 @@ export async function assertWriterDarkRegisterEvidence(entries = WRITER_DARK_REG
 
     if (verdicts) {
       const live = verdicts.get(row.identity);
-      if (!live) {
-        fail('S', 'the identity is not in the judged population at all. A row about a key no shape carries above'
-          + ' MIN_ROWS is a row about nothing.');
-      }
-      if (live.verdict !== 'DARK') {
-        fail('S', `the identity is now ${live.verdict}, not DARK. BANK THE WIN — strike the row; a registered row`
-          + ' that outlives its darkness is an exemption nobody is watching.');
+      if (isDialRow) {
+        // ── S, INVERTED FOR THIS REASON (chair, ledger §882.15) ──
+        // A generation-dial identity is EXPECTED to be absent from the judged
+        // population: that absence IS the dormancy this row claims. Convicting it
+        // would convict every correct dial row. What convicts instead is PRESENCE,
+        // in two flavours that need different instructions.
+        if (live && live.verdict === 'LIT') {
+          fail('S', `the identity is now ${live.verdict}. BANK THE WIN — strike the row; a lit-dial identity that`
+            + ' gained a surface reader must be banked, never silently lit.');
+        }
+        if (live) {
+          fail('S', `the dial has ROLLED: a shipped world now writes ${row.identity} (judged ${live.verdict}), so`
+            + ' the dormancy premise is dead. Retire the generation-dial row and let the identity be judged'
+            + ' normally, as an ordinary written key.');
+        }
+      } else {
+        if (!live) {
+          fail('S', 'the identity is not in the judged population at all. A row about a key no shape carries above'
+            + ' MIN_ROWS is a row about nothing.');
+        }
+        if (live.verdict !== 'DARK') {
+          fail('S', `the identity is now ${live.verdict}, not DARK. BANK THE WIN — strike the row; a registered row`
+            + ' that outlives its darkness is an exemption nobody is watching.');
+        }
       }
     }
-    evidence.push({ identity: row.identity, reason: row.reason, writer: row.writer, spellings });
+    evidence.push({ identity: row.identity, reason: row.reason, writer: row.writer, spellings, writeProof });
   }
 
   if (pendingCeiling !== null && pending > pendingCeiling) {

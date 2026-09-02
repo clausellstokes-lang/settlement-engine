@@ -35,7 +35,6 @@
 import { join } from 'node:path';
 
 import { ROOT, CONFIGS, SEEDS, foldCorpus } from './observed-shape-corpus.mjs';
-import { MIN_ROWS } from './observed-shape-baseline.mjs';
 import { writerIdentity } from './writer-reach-scan.mjs';
 
 /**
