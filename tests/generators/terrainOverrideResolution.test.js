@@ -11,8 +11,8 @@
  * and hills each have coverage that survives a manifest regeneration:
  *   - the resolved terrainType equals the override;
  *   - a terrain-specific resource for that terrain is reachable;
- *   - a resource belonging to a DIFFERENT terrain is absent (getCompatibleResources
- *     gates each terrain-specific resource to its own terrain);
+ *   - a resource belonging to a DIFFERENT terrain is absent (the live gate is
+ *     resolveResources.js:131's filter on RESOURCE_DATA[k].terrain === terrainOverride);
  *   - a `terrainRequired` institution admits its terrains and is filtered out of
  *     the others (assembleInstitutions terrainRequired branch).
  *
@@ -72,8 +72,8 @@ describe('terrainOverride resolves to the terrain the pipeline generates', () =>
 
 describe('desert terrain — terrain-gated resources present, mountain resources absent', () => {
   // Robust across seeds: every desert settlement borders at least one desert
-  // resource, and never a mountain one (getCompatibleResources gates each
-  // terrain-specific resource to its own terrain).
+  // resource, and never a mountain one (the live gate is resolveResources.js:131's
+  // filter on RESOURCE_DATA[k].terrain; getCompatibleResources only pre-screens).
   const SEEDS = ['d0', 'd1', 'd2', 'd3', 'd4', 'd5'];
   // seed-loop: collected — this loop REGISTERS one test() per seed rather than
   // asserting inside one, so vitest reports the true per-seed count itself (the

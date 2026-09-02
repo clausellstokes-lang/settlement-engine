@@ -168,7 +168,7 @@ const LIT_COVERED_BY = {
   },
   settlementStrategyReads: {
     file: 'tests/domain/settlementStrategy.test.js',
-    evidence: 'a COLD_WAR edge thaws to rival',
+    evidence: "sweepForPeace('cold_war')",
     note: 'TE-CEIL minted this leaf at the ENGINE-HYGIENE landing by pure-leaf extraction from settlementStrategy.js, and — like treatyTermRoles below — it ships its proof THROUGH THE HEAD rather than by import, so AUTO cannot see it: the head keeps re-exporting all six symbols precisely so no consumer import path moved (36/36 declarations byte-identical under the stripped-block diff). The leaf IS the strength-and-edge read layer — HOSTILE_TYPES, hostileEdgeBetween, strongestNonHostileNeighbour, buildStrengthLookup — and settlementStrategy.js:1051 calls buildStrengthLookup on every lit chooser pass while :248/:423/:826/:828/:830 are the only hostileEdgeBetween callers in the tree. The named evidence is a de-escalation arm driven flag-ON through evaluateSettlementStrategyRules: a cold_war edge can only be RECOGNISED as hostile-family through HOSTILE_TYPES (whose members are exactly hostile/cold_war/rival) and RESOLVED through hostileEdgeBetween, so the directional claim cannot hold unless the leaf ran. Corroborated at the landing by a chooser-LIT probe of 722 rows / 640 distinct hashes reaching all twelve emitted moves, bit-identical across the pick.',
   },
   treatyTermRoles: {
