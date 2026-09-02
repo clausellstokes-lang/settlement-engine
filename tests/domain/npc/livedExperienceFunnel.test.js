@@ -781,7 +781,17 @@ describe('DARK BY CONSTRUCTION — two independent darknesses, one door', () => 
     // was convicted on TWO COMMENT LINES that say the funnel is not in its tree. It
     // imports nothing from the family. The roster it must equal is unchanged; only
     // the question "does this file depend on the family" is now asked properly.
-    expect(importers).toEqual(['src/domain/npc/livedExperienceSources.js']);
+    //
+    // AMENDED AGAIN BY CAR L7, the same way: the read model reads the funnel's order
+    // and its band words, so it names the family — and it is ITSELF imported by
+    // nobody (its own suite pins that, and the drift family's closure walker carries
+    // it as a member). The set stays EXACT, so a third namer still reds; what the
+    // dormancy claim rests on is unchanged, because neither named file is reachable
+    // from production.
+    expect(importers.sort()).toEqual([
+      'src/domain/npc/characterReadModel.js',
+      'src/domain/npc/livedExperienceSources.js',
+    ]);
   });
 
   test('⭐⭐ THE SHARPENED DETECTOR IS ANTI-VACUOUS, AND ITS SYMBOLS ARE UNIQUELY OWNED', () => {
