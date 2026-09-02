@@ -38,10 +38,11 @@
  * DETERMINISM: PURE — no Date, no Math.random, no mutation. A worldPulse leaf (the
  * lazy engine chunk — zero first-paint bytes); the ledger nests under
  * spatialLedgers (the FP-R consolidation — budget-free). NO rng is forked, so the
- * drift cannot perturb any other layer's PRNG stream. ZERO imports (the nested-ledger
- * read is inlined, not routed through distanceRead) so this leaf adds no cross-chunk
- * preload edge — the first-paint index manifest is byte-unchanged.
+ * drift cannot perturb any other layer's PRNG stream. ONE import since T13 Car 4 (vi) — the
+ * deterministic integer power, from the LAZY det-math chunk this leaf already shares a lane
+ * with; the nested-ledger read is still inlined, so no distanceRead edge exists.
  */
+import { detIntPow } from '../../kernel/detMathDecay.js';
 
 // ── Tuning (documented here; retuned in the checkpoint soak) ──────────────────
 export const MORAL_DRIFT_TUNING = Object.freeze({
@@ -218,7 +219,7 @@ export function advanceMoralDrift({ instigations, worldState, tick }) {
     let sinceTick = now;
     if (priorRec) {
       const silent = Math.max(0, now - Math.floor(finiteNumber(priorRec.lastTick, now)));
-      const decay = Math.pow(T.DECAY, silent);
+      const decay = detIntPow(T.DECAY, silent);
       malice = clamp01(finiteNumber(priorRec.malice, 0)) * decay;
       lawlessness = clamp01(finiteNumber(priorRec.lawlessness, 0)) * decay;
       instigCount = Math.max(0, Math.floor(finiteNumber(priorRec.instigations, 0)));

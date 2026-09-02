@@ -54,6 +54,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+import { detIntPow } from '../../kernel/detMathDecay.js';
 import { factionArchetype } from '../factionArchetypes.js';
 import { infoModeOf } from './simulationRules.js';
 import { settlementStrength, buildPressureSummary } from './relationshipEvolution.js';
@@ -560,8 +561,8 @@ function aggregateReports(reports, credibilityOf = null) {
   let weight = 0;
   let accWeighted = 0;
   for (const r of reports) {
-    let w = Math.pow(T.HOP_DECAY, Math.max(0, r.hopCount))
-      * Math.pow(T.RECENCY_DECAY, Math.max(0, r.ageTicks))
+    let w = detIntPow(T.HOP_DECAY, Math.max(0, r.hopCount))
+      * detIntPow(T.RECENCY_DECAY, Math.max(0, r.ageTicks))
       * (T.INDEP_BASE + T.INDEP_PER * Math.max(1, r.independentSources))
       * clamp01(r.completeness01);
     if (credibilityOf) w *= credibilityOf(r.sourceId || '');
@@ -692,7 +693,7 @@ function adjustedDecayBase(decayKeep01) {
  *  @returns {number} */
 export function decayedConfidence(confidence01, silentTicks, decayKeep01 = 0) {
   const n = Math.max(0, Math.floor(finiteNumber(silentTicks, 0)));
-  return clamp01(finiteNumber(confidence01, 0) * Math.pow(adjustedDecayBase(decayKeep01), n));
+  return clamp01(finiteNumber(confidence01, 0) * detIntPow(adjustedDecayBase(decayKeep01), n));
 }
 
 // ── The relationship neighbourhood (cold-start seed + true labels) ────────────

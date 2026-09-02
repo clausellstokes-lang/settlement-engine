@@ -58,6 +58,7 @@
  */
 
 import { clamp01 } from '../region/contestMath.js';
+import { detIntPow } from '../../kernel/detMathDecay.js';
 import { detLog10 } from '../../kernel/detMath.js';
 import { stablePart } from './worldState.js';
 // W-PEACE-2 occupation_hold: a peace that CEDES the occupation ("the garrison stays at
@@ -822,7 +823,7 @@ export function computeOccupierBenefit(occupations, occupiedItemFor) {
     const list = byOccupier[occupierId].sort((a, b) => (b.yield - a.yield) || codepoint(a.occupiedId, b.occupiedId));
     let total = 0;
     for (let rank = 0; rank < list.length; rank += 1) {
-      total += list[rank].yield * Math.pow(DIMINISHING_BASE, rank);
+      total += list[rank].yield * detIntPow(DIMINISHING_BASE, rank);
     }
     // HARD CONTAINMENT CAP — the anti-snowball ceiling.
     perOccupier[occupierId] = Math.min(OCCUPIER_BENEFIT_CONTAINMENT, total);
