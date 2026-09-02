@@ -27,7 +27,8 @@ import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { Linter } from 'eslint';
 import {
-  FIGURE_ORDER, PROVENANCE, capsuleFrom, hotFileCeilings, main, readAll,
+  FIGURE_ORDER, PROVENANCE, capsuleFrom, dirtyMeasuredPaths, hotFileCeilings, main,
+  parsePorcelainPaths, readAll,
 } from '../../scripts/base-state-capsule.mjs';
 import { enumerateInvariants } from '../lint/mutationCoverage.shared.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -279,7 +280,7 @@ describe('base-state capsule generator', () => {
     expect(read(CAPSULE), 'a refused run still wrote the artifact').toBe(before);
   });
 
-  it('throws and names the row when a home is missing, a shell-out reds, or the tree is dirty', async () => {
+  it('reads porcelain by its column law, and throws naming the row when a home is missing, a shell-out reds, or the tree is dirty', async () => {
     await expect(readAll(28032, { shell: (row) => { throw new Error(`boom in ${row}`); } }))
       .rejects.toThrow(/boom in/);
     await expect(readAll(28032, { shell: () => 'nothing the parser recognises' }))
@@ -291,6 +292,59 @@ describe('base-state capsule generator', () => {
     const withoutOne = { ...readings };
     delete withoutOne.lightingCensus;
     expect(() => capsuleFrom(withoutOne)).toThrow(/missing \[lightingCensus\]/);
+
+    // ── D1-D7 — THE PORCELAIN READER ITSELF, which until this car no test executed at all.
+    // `dirtyMeasuredPaths` was unexported and every arm that needed a dirty tree injected a
+    // REPLACEMENT for it (three of them are in this very arm, above), so the record parse and the
+    // DIRTY_SCOPES allowlist were proved by nothing. `dirtyMeasuredPaths` now takes the SHELL, so
+    // these drive the real parser and the real allowlist over canned records — no subprocess, no
+    // dirty tree, and nothing injected that is under test.
+    const scoped = (porcelain) => dirtyMeasuredPaths(() => porcelain);
+
+    // D1 — the exact record the whole-output-trim defect damages: a WORKTREE-ONLY modification,
+    // whose status field opens with a SPACE and whose path therefore starts at column 4.
+    expect(scoped(' M src/domain/worldPulse/peaceTerms.js\n'))
+      .toEqual(['src/domain/worldPulse/peaceTerms.js']);
+
+    // D2 — every status shape reaches column 4 the same way (unstaged, staged, untracked, added,
+    // both-columns), and the trailing newline yields no phantom entry.
+    expect(scoped(' M src/a.js\nM  scripts/b.mjs\n?? tests/c.test.js\nA  src/d.js\nMM src/e.js\n'))
+      .toEqual(['src/a.js', 'scripts/b.mjs', 'tests/c.test.js', 'src/d.js', 'src/e.js']);
+
+    // D3 — the allowlist is a SCOPE FILTER, not a pass-through. docs/ and api/ dirt is not this
+    // capsule's business; the artifact's own path is, and it is matched exactly rather than by
+    // prefix. A wrong answer here is a false-CLEAN, so both directions are pinned.
+    expect(scoped(' M docs/DESIGN_X.md\n M api/gallery-meta.js\n M README.md\n')).toEqual([]);
+    expect(scoped(` M ${CAPSULE}\n`)).toEqual([CAPSULE]);
+
+    // D4 ⭐ THE PREVENTION, AND THE REASON THESE CASES EXIST. Hand the reader the SAME records with
+    // the whole output trimmed — the one-line tidy on shellOut that would break this and nothing
+    // else — and it must REFUSE and NAME the offending record.
+    // MEASURED AGAINST THE PRE-CURE CODE, both shapes, and they fail differently: with these TWO
+    // records the trim silently DROPPED record one and kept record two, so the refusal named half
+    // a dirty tree; with a SINGLE record the list came back EMPTY and the generator went on to
+    // stamp a capsule at HEAD over a tree it had not measured. A silently shorter list is the
+    // failure in both, and a loud refusal is not.
+    const records = ' M scripts/base-state-capsule.mjs\n M src/domain/worldPulse/peaceTerms.js\n';
+    expect(scoped(records))
+      .toEqual(['scripts/base-state-capsule.mjs', 'src/domain/worldPulse/peaceTerms.js']);
+    expect(() => scoped(records.trim()))
+      .toThrow(/dirty-tree: this is not a `git status --porcelain` record: "M scripts\/base-state-capsule\.mjs"/);
+
+    // D5 — the column law is asserted PER RECORD, not as a special case for line one. Damage any
+    // record and that record is the one named.
+    expect(() => scoped(' M src/a.js\nM src/b.js\n')).toThrow(/record: "M src\/b\.js"/);
+
+    // D6 — a truncated record REFUSES rather than yielding an empty path that a `.filter(Boolean)`
+    // would drop without a word. Dropping is exactly how a record hides.
+    expect(() => parsePorcelainPaths('probe', ' M\n'))
+      .toThrow(/probe: this is not a `git status --porcelain` record/);
+
+    // D7 — the parser is PURE and returns paths UNSCOPED; filtering is a separate step. It also
+    // pins the deliberate rename behaviour: `R  old -> new` is read as one opaque string, which can
+    // only ever ADD a path to the dirty list, never remove one — the conservative direction.
+    expect(parsePorcelainPaths('probe', ' M docs/x.md\nR  old.js -> new.js\n'))
+      .toEqual(['docs/x.md', 'old.js -> new.js']);
   });
 
   it('stays outside the mutation-coverage enumeration, so no manifest row is owed', () => {
