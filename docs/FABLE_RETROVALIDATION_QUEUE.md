@@ -1824,3 +1824,121 @@ claim, and it does not touch the un-attributed corpus-sha move flagged above.**
 **§881.19 · THE FABLE SEAT RETURNS — the stratum is WALKED · 2026-09-02 03:37–04:1x ET · chair session 58f0a8e2 · SEAT: Fable 5.1.**
 
 The Opus-chair span (§881.16–§881.18: three ledger acts, three rows above) is retrovalidated: **14 calls — 13 RATIFIED · 1 AMENDED (precision) · 0 REVERSED · 0 EVIDENCE-THIN**; two re-derivations EXECUTED by the chair (the D-2 chunk attribution on both dist trees; the pick-14 bit probe and residual probe at `822c4f93a`). From this act forward the seat is the §447/§724 split again: the chair's acts carry `Seat: Fable 5.1 — validated`; the Opus lanes' own rows (TAILF-land's §6.6, T13-PRELAND's) land at their HOLDs and are ruled at the §882/§883 collections. The historical strata (§685's dark window, §687–§723) stay QUEUED at the owner's trigger — this file does not report itself empty.
+
+**§882.1 · TAILFPREP — THE FAITH-CHAIN COMPOSITION REHEARSAL, two seats across a cutoff: four cure commits, one STOP ruled R-TAILF-1 and implemented, sealed `refs/preserve/tailf-rehearsal-2026-09-01` = `66d6e9235` · 2026-09-01 · SEAT: Opus 5 (lane TAILFPREP).**
+
+## R§16 — RETROVALIDATION ROW (drafted by the lane, for the chair to accept or reverse)
+
+**§E3/TAIL-F · THE FAITH-CHAIN COMPOSITION REHEARSAL — resumed after a cutoff, four cure commits,
+one STOP · 2026-09-01 · SEAT: Opus 5 (lane TAILFPREP).**
+
+⛔ **BOUNDARY:** everything the chair architected is NOT in this row — the pre-board's TAIL-F ten,
+the pick order and the cure-car treatment, the §879 fence amendment, §6's restated STOP condition,
+and the phase-2 instruction list. Only the calls below are the lane's. The first two are the
+PREDECESSOR seat's, attributed to this lane per the brief and re-verified by this seat rather than
+inherited on trust.
+
+*What was judged:*
+**(1) CURE 3 (`3b8f5ef39`) — the deepening leaf re-pointed to the bindings leaf.** A composition
+import break invisible to both parents. The call worth reviewing is not the one-line fix but the
+decision to sweep the **class** — every named import in all 22 touched files resolved against the
+composed tree's real exports — and to check the fence's `importersOf` semantics for census-neutrality
+**by construction** rather than by re-running it. Re-verified this seat: the file is green in RUN 1.
+**(2) CURE 4 (`e441225f7`) — a rename, and seven re-addressed rows.** Two shapes answered
+differently on the strength of an exact-identity baseline; the `strength` → `strengthWord` rename
+follows HER-7's ruling on a character-identical shape and leaves the rendered sentence byte-identical.
+Re-verified this seat, and **upgraded**: the predecessor could only measure its effect at the cured
+file, and `tests/lint` WHOLE now shows the tip at **4 files / 6 tests — equal to the base control**,
+so the consist's entire lint bill is discharged, not merely the three arms it named.
+**(3) I RE-POINTED THE BASE CONTROL ARM** from `b82987ab8` to `893a66b0a` (`$SP/tailfprep-base`,
+detached, porcelain 0 either side, `node_modules` intact). The rehearsal had been rebased onto the
+newer coupled tip while its control was left one rebase behind; every classification in this receipt
+is a set difference against a control, and a control at the wrong base silently converts FOREIGN
+into COMPOSITION and back. Cheap, reversible, and it re-measured the chair's stated base tuple
+rather than trusting it.
+**(4) ⛔ I STOPPED ON THE ONE COMPOSITION RED INSTEAD OF CURING IT (R§10)** — the largest call in
+this row, and a deliberate departure from "cure COMPOSITION reds". The cure the red asks for is two
+names and a count; I executed it, confirmed it turns the suite **51/51 green**, and **restored the
+tree**, because it makes the estate's darkness claim false with no arm to say so. Enrolling a
+production-reachable consumer is a claim reversal on a structural guard another line minted
+deliberately; the alternative is re-architecting an F-chain car. Both are the landing's to rule.
+**I did not bank the clean half either** (the `deityFlaws.js` citation enrolment is honest on its
+own evidence) because arm 2 is one `toEqual` over the union — a partial edit turns nothing green
+and would blur the ledger.
+**(5) I WIDENED THE SWEEP** past the brief's named set, twice: the consumer census (29 suites found
+by grepping the estate for the 11 changed modules, rather than the chain's own test files) and the
+83 tree-scanning registers. The brief's "`tests/domain/**` the chain touches" I read as a census
+rather than the whole 964-file directory; the scanner sweep is what closes the gap that reading
+leaves, and it is what proved the registration bill is exactly one item.
+**(6) I EXECUTED TWO WRITERS TO VERIFY THEM, AND RESTORED IN THE SAME COMMAND** — `build:edge-shared`
+(twice, to read the metas' exact content) and the R§10 probe. Each run's restore was verified by
+`porcelain` and `HEAD`, not assumed. The judgment is that a writer run under an in-command restore
+is a measurement; the risk it carries is a session cut between write and restore, which is why the
+edit and its restore never occupied separate commands.
+**Also mine, smaller:** classifying the lighting-census red as EXPECTED-REGISTER on the strength of
+its presence at BOTH arms rather than its title; offering R§13's machinery rider without banking it.
+
+## R§22 — RETROVALIDATION ROW, ADDENDUM (the calls inside the chair-ruled act)
+R§16 was drafted before R-TAILF-1. These are the lane's calls *within* the ruling — the ruling
+itself is the chair's and is not in this row.
+
+**(7) I WIDENED THE EDGE MATCHER BEYOND THE RULING'S LETTER.** The ruling asked for the chain to be
+asserted positively; it could not have known the chain is unassertable with the file's own matcher,
+because the last hop is a dynamic import and the target is `.jsx`. I widened `reachersOf` to see
+both forms and both extensions rather than writing a bespoke matcher for the lit arm alone — a
+second matcher would have left the darkness proof still blind to lazy edges, which is the failure
+mode that matters. **I then re-measured the dark closure under the wider matcher instead of assuming
+it unaffected**; it is unchanged, and that is executed, not reasoned.
+**(8) I CORRECTED THE RULING'S CHAIN BY ONE HOP AND SAID SO.** The ruling named
+`FaithTab.jsx / FaithSection.jsx ← OutputContainer.jsx:725`; measured, the module edge runs through
+`dossierLazyTabs.js:57` and `:725` is the RENDER site, not an import. I asserted the true edges and
+the render separately rather than encoding the stated chain, because an arm that asserts a hop that
+does not exist would have reddened on the first honest run — and silently "fixing" a chair's chain
+without reporting it is how a correction becomes folklore.
+**(9) I BUILT PLANT A AS A SWAP, NOT AN ADDITION.** An addition reds the roster-union arm as well,
+which would have proved the old machinery still works rather than the new machinery. The swap keeps
+the union identical so **only the derived arms can convict** — the sharper claim, and the one the
+ruling actually asked to be true.
+**(10) I KEPT THE RETITLE COUNT-NEUTRAL AND ADDED EXACTLY ONE ARM**, then proved the census cost
+per-file across all 2494 files rather than reporting the aggregate delta. The landing's bill moves
++98 → +99 titles and nothing else; a lane that reported only "the tuple moved" would have left the
+landing to rediscover which of the five figures did.
+
+*RULED (§882, Fable 5.1 — re-derived at the object store BEFORE the landing, 2026-09-02 ~02:35 ET; the landing's own re-runs at the composed tip are the runtime proof):* **RATIFIED (1)–(10), all ten; three laws carried.** (1) CONFIRMED: `3b8f5ef39` is exactly the import re-point plus six comment lines (`8 1`); `faithChannelLift` is exported at `faithChannelBindings.js:165` at `fab576aba`, was `faithField.js:542` at the F-line tip `eabae6920`, and `faithField.js:456` at `fab576aba` records the move — a home that differs between the parents, the theorem class; the 22-file class sweep is the lane's execution (one unresolved specifier), re-proved by the order's 21/21 at the tip. (2) CONFIRMED: `e441225f7`'s `FaithTab.jsx` hunk is `g.strength` → `g.strengthWord` on one line (line-count neutral) and the baseline's seven rows move 332→335 ×2, 340→343 ×2, 410→413 ×3 with nothing else in that diff; the "4 files / 6 tests = base control" upgrade stands on R§28's four-arm table (the lane's execution; the landing's whole `tests/lint` at C′ re-proves it). (3) CONFIRMED: `tailfprep-base` reads `893a66b0a` today; the law kept — a control at the wrong base silently converts FOREIGN into COMPOSITION and back. (4) CONFIRMED in structure, RATIFIED in judgment: `ENROLLED_CONSUMERS` is present at `893a66b0a` and `fab576aba` and ABSENT at `eabae6920`, while `src/domain/display/faithDeepening.js` exists at `eabae6920` and `66d6e9235` and at neither base — a register on one parent governing a file on the other, exactly as the lane wrote; the executed cheap cure's 51/51 false-green is the lane's own run (the pre-cure blob's hand-written `reachersOf` rows are the mechanism); the chair's R-TAILF-1 (§880.4/§880.5) then ruled the claim narrowed, never retired — the STOP was the right call because the reversal was the chair's to make. (5) RATIFIED: structural enumeration over hand lists is the law the order's fold then strengthened (⟦A12⟧: run the whole 393); the 83-file scan found exactly the R§10 red. (6) RATIFIED as method: a writer run whose restore is in the same command, porcelain and HEAD verified after, is a measurement; the §881 landing's own `build:edge-shared` window later re-derived the same inputs (68 → 70, D4's) — consistent. (7) CONFIRMED: `66d6e9235`'s `reachersOf` (`:651`) and its docblock (`:642–644`) name both blind spots (`.jsx` → `FaithTabx`; dynamic `import()`); the dark closure's re-measure under the wider matcher is the lane's execution. (8) CONFIRMED hop by hop at `66d6e9235`: `faithPanelModel.js:25` imports `faithDeepening.js`; `FaithTab.jsx:30` imports the model and `:29` `FaithSection.jsx`, whose `:32` imports the model; `dossierLazyTabs.js:57` is `lazy(() => import('../new/tabs/FaithTab.jsx'))`; `OutputContainer.jsx:73` imports from the lazy registry and `:725` renders `<FaithTab`; `OutputContainer` names `FaithTab` only through that registry (`:70`) — the ruling's direct hop did not exist and the lane's corrected chain does; the same three hops read identically at `fab576aba`. (9) RATIFIED, with R§25's second lesson carried as LAW: plant A as a SWAP convicts on the derived arms alone; and a guard can convict for the WRONG reason (the anchor-equals-member misuse arm fired first) — read the conviction MESSAGE, never the exit code. (10) CONFIRMED: `it(` 51 at `893a66b0a` → 52 at `66d6e9235`; the +99 flows into the order's predicted 22437 (22338 + 99). ALSO CONFIRMED, R§27: `bead9fd71` parses NO `Seat:` trailer while `400b7eb9b` and `66d6e9235` parse `Opus 5 (lane TAILFPREP)`, and `bead9fd71`/`66d6e9235` share tree `5d66e8a50` — the third amend restored the trailer alone; the law (an `--amend` that appends prose after `Seat:` voids the trailer; re-verify through the parser) is banked, and the picked-car convention keeps each author's single trailer. Not re-derived (runtime; re-owed by nothing — the landing re-runs every arm at the composed tip): 51/51 and 52/52, the 83-scanner run, the per-file tuple probe, the two typechecks.
+
+**§882.2 · TAILF-land — THE TAIL-F LANDING — 12 commits onto `fab576aba` → `9a0584f0f`, ZERO landing cures, full-consist bit-identical at both probe arms · 2026-09-02 · SEAT: Opus 5 (lane TAILF-land).** *(The lane's row, verbatim from `825f209c…/scratchpad/laneTAILFLAND-receipt.md` §6.5/§6.6; the section number assigned by the chair.)*
+
+**BOUNDARY.** These are **this lane's own calls only.** Excluded as already-adopted or not mine: the TAILFPREP rehearsal's ten rows (R§16 (1)–(6) + the R§22 addendum (7)–(10)) which this landing carries **as its author wrote them, unamended**; the FOLD lane's ⟦A1⟧…⟦A17⟧ amendments; the chair's CR-1/CR-2 rows and its 2026-09-02 ~03:50 ruling on D-2. The **owner-visible** rows of §7 are stated, never decided, here.
+
+*What was judged:*
+
+**(1) ⛔ THE ONE THAT MATTERS — continuing past §3.5.4's STOP instead of halting the lane (D-2).** The order made a first-paint closure of **1,046,604 B** a written prediction and made any miss a STOP. The measured tip closure is **1,046,662 B — +58 B**. I judged that the STOP's *purpose* (an unexplained byte move is an unattributable composition fault) was discharged by measurement rather than by halting, and that the remaining acts were safe to run: I rebuilt `$SP/base-C` from scratch, reproduced 1,046,604 and engine 675,764 to the byte, hashed all eight first-paint chunks at both arms, found **seven byte-identical and the whole +58 B inside the eager `index` chunk (576,060 → 576,118)**, grepped the TAIL-F fingerprint in all eight (**0 hits**), and identified the cause as ⟦A9⟧(c) being *wrong*: Rollup cut a new **lazy** chunk `faithField-DvBYuqdu.js` and index's Vite preload map gained its 29-character filename exactly once. No ceiling is breached (margin **338 B** under the unraised `CLOSURE_BUDGET_BYTES = 1_047_000`; engine Δ 0 B, margin 236 B; `vendorPdfLazy` 40/40 with zero skips). **I proposed no cure, no co-location rule and no raise, and I took no act on it.** *(The chair has since ACCEPTED D-2 as a composition cost of the consist's own shape and RATIFIED the continuation — that ruling is the chair's, and is excluded above; what is validated here is my call to measure-then-continue, and the standing consequence I recorded: **the first-paint margin is 338 B, not 396 B**.)*
+
+**(2) The boarding shape, as ratified.** CR-1's shape executed literally: the **ten sealed rehearsal commits picked in chain order**, not "9 cars + 2 anchored patches re-applied" (§880.5's phrasing, corrected on the ledger), and **without `cherry-pick -x`** (COMP-4c refused at its fold point). Three cars were `-n` re-commits carrying an R-2a reconcile paragraph; each kept its author's `Seat:` trailer **and its author's date** via `--date` (CR-2), and no `--amend` was used anywhere (the trailer-voiding hazard). Consequence I accepted: the ten picks are new shas, so the composition's soundness rests on the blob comparator, not on identity — which is why I ran it.
+
+**(3) The three R-2a reconcile paragraphs as used.** Inserted verbatim from `$SP/p{1,2,5}.txt` at the ⟦A4⟧ position — paragraph, blank line, then the trailer BLOCK (before `Co-Authored-By:` for P1, before `Seat:` for P2/P5). The judgment is that a reconcile paragraph belongs in the picked car's body rather than in a separate landing commit, so the ledger reads the reconciliation at the car that needed it.
+
+**(4) The two register commits — the only commits this lane authored.** `6630ef956` refroze the lighting census and `9a0584f0f` banked the test-ratchet `--update`. Both were **predicted in writing before their instrument ran** (the lighting tuple to all five digits; the ratchet to five figures plus 14 magnitude measures), and in both cases the refreeze targets the **measured** figure, never the arithmetic (E4). I judged one commit per register — not one combined register commit — so each ratchet's provenance is a single sha.
+
+**(5) The `measuredBy` value.** I wrote **`"measuredBy": "TAILF-land"`** (not `Opus 5`, not `TAILF-landing`) into `tests/lint/.lighting-census-baseline.json` beside `measuredAtSha 1c7981bb9…`. It is a free-text provenance field with no validator; I chose the lane name the brief and the ledger use so the row greps to this receipt. If the chair wants a seat-shaped convention there, it is a one-line follow-up, not a re-measure.
+
+**(6) The base-arm verification, and ⛔ D-4 — the order's named control site is BLIND on probe C.** ⟦A11⟧ names `stressTypes.js:14` (`under_siege`, `probability 0.025 → 0.037`) as probe C's can-it-see control. Executed, it left `corpusSha 87e8b25c…f695` **completely unmoved** — the control proved nothing. I did not accept the tip comparison on a failed control and I did not invent a substitute: I executed ⟦A11⟧'s own written fallback (`stressTypes.js:162`, the `mass_migration` sibling row), which **moved the sha to `fb313037a…5ca7`** and then returned to `87e8b25c…f695` on restore. My judgment on *why*: `stressGenerator.js:87` reads the field into a threshold that a draw is compared against — the draw is consumed either way, so a 0.012 nudge moves an output only when some run's draw lands in the gap; probe C is 360 runs and probe A′ is 600 worlds, and the same `under_siege` perturbation moves A′ by exactly 5 rows. **The comparator is sensitive; the named row simply straddles no draw in 360.** I judged this a deviation of the ORDER's prescription, not a red.
+
+**(7) D-3's classification.** §5.4 predicted "exactly ONE red file"; two came back (`voiceMechanics` ×4, `enforcement-claims` ×1). I classified all five arms as **banked ratchet rows at their exact magnitudes** rather than as new reds, and continued. *(The chair has since recorded D-3 as a prediction miss of the order, not a red.)*
+
+**(8) ⟦A12⟧ executed as written — the WHOLE 393.** The order's amendment replaced I-2's unreproducible "128-file" family with a structural enumeration; I ran all 393 `*.test.*` files matching the read idiom in four batches rather than any curated subset, and the batch lists are on disk (`$SP/tailf-scanners*.txt`) so the family is reproducible by anyone.
+
+**(9) An instrument slip, recorded not banked.** A first §5.3 attempt carried `--reporter=basic`, which vitest 4 rejects — **a run that never ran**. Re-run clean. Recorded because the false-green shape is the hazard, not the typo.
+
+*What Fable re-derives:*
+ⓐ **The decisive one — D-2's cause.** Rebuild `$SP/base-C` and `$D`, hash the eight first-paint chunks at both arms, and confirm seven are identical, the delta is entirely `index` 576,060 → 576,118, and `faithField-DvBYuqdu.js` is a **lazy** chunk whose 29-char filename appears exactly once in index's preload map. This single receipt carries whether "composition cost of the consist's own shape" is the right classification, or whether a co-location rule is owed after all. **The standing figure to carry forward is the 338 B margin.**
+ⓑ **The composition comparator (the one that settles soundness without a rerun).** For each of the 25 paths the consist touches, `git rev-parse "9a0584f0f:<p>"` = `git rev-parse "<RT>:<p>"` — nothing printed. If this holds, the ten new-sha picks reproduce the sealed rehearsal blob for blob and the `-x`-less boarding shape (call 2) costs nothing.
+ⓒ **D-4's mechanism**, because it is a reusable instrument fact and the next lane will hit it: perturb `stressTypes.js:14` and `:162` in turn against `matseam-dormancy.mjs` and against `coupled-genA2.probe.mjs`, and confirm the asymmetry (0/360 vs 5/600 for `:14`; both move for `:162`). **The general law to bank if it holds: a threshold constant is a WEAK control — its visibility is a function of the corpus size, not of the comparator's sensitivity; a control site must be chosen for determinism, not for being nearby.**
+ⓓ **The two registers against their own instruments** — `node $SP/chair-tools/lighting-tuple-probe.mjs $D` = `2495/370/2125/22437/6069` = the committed baseline; and `scripts/.test-ratchet-baseline.json` `measuredAtSha 6630ef956…` / `totalTests 30731` / `totalFiles 2443` / 10 entries, with the plain gate printing **no** magnitude section.
+ⓔ **The five banked reds are the SAME five** at `fab576aba` and at `9a0584f0f`, title for title (`$SP/lint-after-final2.json` vs `$SP/lint-after-tailf.json`) — the cheapest proof that a 12-commit consist moved no walker.
+
+*Receipts:* Dock `$SP/laneINSTRLAND-tree` @ **`9a0584f0f`**, `git status --porcelain` **0 lines** at every boundary, **12** commits over `fab576aba`, **12/12** parser-visible `Seat:` trailers, `claude/composite-r4` still **`fab576aba`** (not CASed — the chair holds it). Probes: probe C `87e8b25c…f695` at both arms with a PASSED sibling-site control (`fb313037a…`) that returned; probe A′ `abe0a847…c4b7` at both arms, `diff` **0 lines**, control `4e1e506c…` moving exactly **5 of 600** rows — `hamlet-040` · `hamlet-041` · `hamlet-078` · `town-021` · `city-075` — and returning; the rebuilt A′ driver validated against the COUPLED spec TSV on columns tier/seed/faction-count, **0 diff lines**. Batteries: base **3 files / 28 tests**, tip **4 files / 41 tests**, both `TRUE_EXIT=0`; espionage fence blob-identical across the consist (`36f4b770d…`) with `PRE_COUPLING_CORPUS_SHA '72acacd8…'` unmoved; faith fence 13/13 at `SOURCES.length` 5; `DORMANT_GOLDEN '6e85308b0f396a77'` untouched. Whole `tests/lint` at the tip: **407 suites · 1857 tests · 1852 passed · 5 failed**, the five banked by name. Every vitest run `GATE_MUTEX_TIER=shared … --maxWorkers=2` with `TRUE_EXIT` captured on the mutex command; **no process of any sibling lane was killed at any point**; every source plant restored in the same command and blob-verified `7e3afd9b4…` (three times). Full act-by-act table above in this receipt.
+
+*Priority:* **HIGH for ⓐ** — it is the only call where I continued past a written STOP, it is a paid-surface-adjacent byte figure, and the 338 B margin it leaves is now a standing constraint on every consist that follows. **HIGH for ⓒ** — the blind-control shape is a false-green generator, and the next lane that copies ⟦A11⟧'s letter will believe a comparator it has not tested. **MEDIUM for ⓑ** (it retires the whole boarding-shape question in one loop) and **ⓓ**. **LOW for ⓔ** (already printed here, one file read to confirm). ⚠ **Owner-visible either way, and NOT mine to decide:** the §7 rows as written, plus the two the chair now carries — that the standing first-paint margin is **338 B**, and that D-2 was accepted with **no cure and no raise**.
+
+*RULED (§882, Fable 5.1):* **NINE CALLS — ALL RATIFIED; two re-derived by the chair's own reads BEFORE the gate, one law BANKED.** **(1) RATIFIED** — ruled at §881.19 (D-2 ACCEPTED as a composition cost, the continuation ratified, the standing first-paint margin 338 B); the chair's own eight-chunk re-derivation on both dist trees is ⓐ's receipt. **(2) RATIFIED — ⓑ EXECUTED by the chair at 04:03 ET:** over the 27 paths `fab576aba..9a0584f0f` touches, 25 blobs equal the sealed rehearsal `66d6e9235`'s and exactly TWO differ — `scripts/.test-ratchet-baseline.json` and `tests/lint/.lighting-census-baseline.json`, the two registers the landing's own acts refroze — so the `-x`-less chain-pick boarding shape cost nothing; ⟦A14⟧'s `%ai` check: the ten picks' author dates equal the ten rehearsal commits' to the second, and only the two register acts carry 2026-09-02. **(3) RATIFIED. (4) RATIFIED** — one commit per register, each predicted in writing before its instrument ran (E4). **(5) RATIFIED** — `measuredBy "TAILF-land"` greps to the receipt; a seat-shaped convention for that free-text field is DEFERRED here, documented, not a defect. **(6) RATIFIED, and the law BANKED:** ⟦A11⟧'s named control (`stressTypes.js:14`, `under_siege`) is blind on probe C at 360 runs while the same perturbation moves probe A′ by 5/600; the lane ran the order's own written fallback (`:162`, `mass_migration`) rather than accepting a failed control or inventing a site — exactly the discipline a can-it-see control exists for; ⓒ's mechanism (a threshold read against a consumed draw) is PLAUSIBLE, and its asymmetry is re-derived by the chair in `$SP/base-C` after the seal and before that extract's retirement; the memory row lands either way: **a threshold constant is a WEAK control — choose control sites for determinism, never proximity.** **(7) RATIFIED** — D-3 is the order's prediction miss. **(8) RATIFIED** — the 393-file lists are on disk (`$SP/tailf-scanners*.txt`). **(9) RATIFIED** — the `--reporter=basic` false-green shape is the hazard the estate already names, recorded not banked.
