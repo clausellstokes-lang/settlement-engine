@@ -316,7 +316,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
       : null,
     granaryTile: granaryKey
       ? legibilityRung(text(granary?.band), line('DS-ECO-2', granaryKey),
-        [{ label: 'Season', value: slots.season }])
+        [{ label: 'Season', value: text(slots.season) }])
       : null,
     foodSecurity: securityKey
       ? legibilityRung(text(eco.foodSecurity?.label) || securityKey,
