@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "c23a1091eda4dd16c2b7248f72a462015a9241cd",
-  "measuredBy": "TUNEREG car 2 (Opus 5)",
+  "measuredAtSha": "32573759efd7a75eca4daf07cab659d9d6c64691",
+  "measuredBy": "Opus 5 — lane INSTR-land, chair §883.8",
   "date": "2026-09-02",
-  "note": "keys and leaves re-measured after four detector cures: frozen-array spans, nested Object.freeze values, computed keys by source text, and the porcelain trim that mangled the permitted dirty path",
+  "note": "HORIZON-INSTR landing: the inventory was frozen against C-prime and the T13 landing (§883, 28 commits, 38 src files) moved the subject tree beneath it; the two growth rows are attributed to T13 Car P-prime 754856b12 by DECLARED_GROWTH.",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -360,7 +360,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 638,
+      "line": 632,
       "spanDigest": "1eda2a9a19616521403191b4fa770f2d1f9010a2f4e4b978917f9fc9a3aad5d6",
       "leaves": {
         "dragPerInstitution": 0.15,
@@ -829,7 +829,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 76,
-      "line": 221,
+      "line": 222,
       "spanDigest": "4022da79ff916d15332a466d7fa53eeefcac8566abf2308d49a97d08543811cc",
       "leaves": {
         "OBSERVANCE_LEAD_WEEKS": 2,
@@ -1032,7 +1032,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 14,
-      "line": 51,
+      "line": 52,
       "spanDigest": "7e0a55c8c7fedd78310dff8d25fad21dd4b9e82b408a29031e7e2b0883ed0263",
       "leaves": {
         "ARMY_SPEED_FACTOR": 1.5,
@@ -1379,7 +1379,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 891,
+      "line": 898,
       "spanDigest": "e17c17028a479e164380a608b2851e8aed39d2de911749869dd35201c7536787",
       "leaves": {
         "BASE_PRICE": 1,
@@ -1527,7 +1527,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 12,
-      "line": 47,
+      "line": 48,
       "spanDigest": "80b82df2251bd4abf9362564c04fcc1a539f06e78165ac3a0c08059328832692",
       "leaves": {
         "BASE_DRIFT": 0.12,
@@ -1596,7 +1596,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 29,
-      "line": 71,
+      "line": 72,
       "spanDigest": "fbe6ac5e2c16d4bf937e4d536821a88e28502e6163cc98729e540425daa8b940",
       "leaves": {
         "ONSET_BASE": 0.34,
@@ -1689,7 +1689,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 8,
-      "line": 48,
+      "line": 49,
       "spanDigest": "6cc8a60bc554467fb516023af36c2748e3b9d2d50b3a42a374ae3de56d5a42a3",
       "leaves": {
         "DECAY": 0.6,
@@ -2024,7 +2024,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 17,
-      "line": 317,
+      "line": 318,
       "spanDigest": "fc791d4c4e5108dca74a4f1a37ee919b55fe6d51c37433c956e3b3dace4df584",
       "leaves": {
         "BASE_ATTACKER_LOSS": {
@@ -2088,7 +2088,7 @@
       "exported": true,
       "idiom": "computed",
       "keys": 5,
-      "line": 67,
+      "line": 71,
       "spanDigest": "dcc4785c2247094a5d8e2157caaf49338b6757f3c813f4d0f16347e60084c68a",
       "leaves": {
         "a_season": {
@@ -2110,8 +2110,17 @@
       "dependents": [
         "src/domain/npc/livedExperienceFunnel.js",
         "src/domain/worldPulse/dispositionLedger.js",
+        "src/domain/worldPulse/factionPairLedger.js",
         "src/domain/worldPulse/habit/habitCurve.js",
-        "src/domain/worldPulse/secondOrderBelief.js"
+        "src/domain/worldPulse/informationStatecraft.js",
+        "src/domain/worldPulse/momentum.js",
+        "src/domain/worldPulse/npcCredibility.js",
+        "src/domain/worldPulse/npcGrowthKernel.js",
+        "src/domain/worldPulse/npcLadderKernel.js",
+        "src/domain/worldPulse/npcLadderState.js",
+        "src/domain/worldPulse/relationshipMemory.js",
+        "src/domain/worldPulse/secondOrderBelief.js",
+        "src/domain/worldPulse/urbanFabricKernel.js"
       ],
       "namedDependents": []
     },
@@ -2172,7 +2181,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 14,
-      "line": 109,
+      "line": 110,
       "spanDigest": "3652418d9624a9c38a515bb8b60572fca5a6f2bfe0f4294f7d7e94524b20eb3f",
       "leaves": {
         "SILENCE_DECAY": 0.92,
@@ -2238,7 +2247,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 8,
-      "line": 942,
+      "line": 943,
       "spanDigest": "8e4e0dec9b4c1ca83f1212585bea1dfeb9988273eefb8de924058703eb6da513",
       "leaves": {
         "SHARE_CONFIDENCE_FLOOR": 0.6,
@@ -2755,7 +2764,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 27,
-      "line": 113,
+      "line": 115,
       "spanDigest": "52564bd3fe1b519d52062a1ff100b7d06d027b8e4092ed9dd0504746548e3f54",
       "leaves": {
         "MAX_ASSETS_PER_PATRON": 3,
@@ -3149,7 +3158,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 7,
-      "line": 318,
+      "line": 319,
       "spanDigest": "fefc77e6885c9615ac171a6547daca5a67db96ec0be302a8c5df898382455e82",
       "leaves": {
         "W_GOV": {
@@ -3199,7 +3208,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 12,
-      "line": 594,
+      "line": 595,
       "spanDigest": "7f06acd00ed3028ad47fc71098986cba6ab8e82e6714b142a2b442b58abcad8b",
       "leaves": {
         "W_MAL_CONSCIENCE": {
@@ -3650,7 +3659,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 42,
+      "line": 43,
       "spanDigest": "013208ea5f6d2ddd20ac3378af66ffe3d2f0b54d3d00671e47ac35e748b01eec",
       "leaves": {
         "HALF_LIFE_WEEKS": 156,
@@ -3877,7 +3886,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 37,
+      "line": 38,
       "spanDigest": "3f01bf8288ecfde268211071db55d1d415befc71747149313310c5eb09402a31",
       "leaves": {
         "BASE_ERROR": 0.35,
@@ -4076,7 +4085,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 11,
-      "line": 158,
+      "line": 159,
       "spanDigest": "9ba19d8cb43ef7d0920e24ad6d3c258846e7e9120f6679938b684e6f4a519d5d",
       "leaves": {
         "SCORE_MAX": 12,
@@ -4113,7 +4122,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 23,
-      "line": 743,
+      "line": 744,
       "spanDigest": "170f4c16c27f0088f860cc97ee7afc207cc0b8fc746e6046c0a5c126bb0e128e",
       "leaves": {
         "SEE_DECAY_KEEP": 0.8,
@@ -4477,7 +4486,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 31,
-      "line": 53,
+      "line": 54,
       "spanDigest": "0f95e25f350549bbd8b008255d6c3cebfd2515e83bab78f6b83b9633435d9e88",
       "leaves": {
         "FOOTING_EXHAUSTION_W": 0.9,
@@ -4659,7 +4668,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 15,
-      "line": 77,
+      "line": 78,
       "spanDigest": "a6c4911b198552025c94b3846422f1804fb24aaf790629c46905310e1a6e03d7",
       "leaves": {
         "CLIFF_MULT": 10,
@@ -4696,7 +4705,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 12,
-      "line": 565,
+      "line": 566,
       "spanDigest": "56ce24e20397f6aef255e3d467129d027c4aee188b97d4e1e96da6d020790277",
       "leaves": {
         "TEMPERAMENT_SPAN": 0.7,
@@ -4727,7 +4736,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 856,
+      "line": 857,
       "spanDigest": "4e9ff2791e9f7179ce9e109bca2b5155b85c5e53cdb342ad9772b3cede0999fc",
       "leaves": {
         "CONSISTENT_W": 0.4,
@@ -4751,7 +4760,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 1019,
+      "line": 1020,
       "spanDigest": "1772b11f591b5d8e9c5d67ec1c79058c33864991a6c55d2ee9152bf3c369eb43",
       "leaves": {
         "CLIMB_DOWN_MAGNITUDE": 1,
@@ -4889,7 +4898,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 11,
-      "line": 79,
+      "line": 80,
       "spanDigest": "6fd87408dfd166f44b03047fc31082f5e0132a471e062fd0f811c7de218fe694",
       "leaves": {
         "SCORE_MAX": 12,
@@ -4916,7 +4925,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 13,
-      "line": 155,
+      "line": 156,
       "spanDigest": "66a7196026b447c2b2ae23baa10b981a0adc6f3a9c5fe00ab15e2d1eec0d2534",
       "leaves": {
         "HALF_LIFE_TICKS": 52,
@@ -5053,7 +5062,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 26,
-      "line": 44,
+      "line": 45,
       "spanDigest": "9d1ced79218f1e4475c990a9cff989f87df9e50fb0f076c42fd646573f47aba0",
       "leaves": {
         "STAND_MAX": 10,
@@ -5113,7 +5122,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 17,
-      "line": 1613,
+      "line": 1615,
       "spanDigest": "0f3911d51b455117b7b82ce58ac87d572ada6ecc2f80814f3976a5355f931b84",
       "leaves": {
         "STATE_LADDER": {
@@ -6797,7 +6806,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 15,
-      "line": 236,
+      "line": 237,
       "spanDigest": "176f9ee81f2fc0223350d028a6b5887a2f6c198ab40e018e7b9a0564bc96836e",
       "leaves": {
         "STOCK_HALF_LIFE_WEEKS": 260,
@@ -7188,6 +7197,7 @@
     "src/domain/region/graph.js": 3,
     "src/domain/region/neutralNeighbourEdges.js": 1,
     "src/domain/region/wizardNews.js": 2,
+    "src/domain/relationships/canonicalRelationship.js": 1,
     "src/domain/rulingPower.js": 1,
     "src/domain/rulingPowerCoup.js": 1,
     "src/domain/settlement.schema.js": 2,
@@ -7347,7 +7357,7 @@
     "src/domain/compendium/generated/compendiumData.generated.js": 3,
     "src/domain/conditionPromotion.js": 11,
     "src/domain/contradictions.js": 1,
-    "src/domain/corruption.js": 21,
+    "src/domain/corruption.js": 19,
     "src/domain/counterfactual.js": 1,
     "src/domain/crisisLifecycle.js": 3,
     "src/domain/density/densityCadence.js": 3,
@@ -7400,11 +7410,9 @@
     "src/domain/region/propagation.js": 24,
     "src/domain/region/wizardNews.js": 8,
     "src/domain/regionalGraph.js": 14,
-    "src/domain/relationships/canonicalRelationship.js": 1,
     "src/domain/roads/seaRoads.js": 1,
     "src/domain/roads/state.js": 5,
     "src/domain/roads/thirdPartyRansom.js": 2,
-    "src/domain/roads/travelersGeometry.js": 2,
     "src/domain/rulingPower.js": 15,
     "src/domain/rulingPowerCoup.js": 18,
     "src/domain/rulingPowerSeat.js": 9,
@@ -7415,7 +7423,7 @@
     "src/domain/spatial/dispatchEV.js": 8,
     "src/domain/spatial/distanceRead.js": 2,
     "src/domain/spatial/embattlement.js": 5,
-    "src/domain/spatial/generosityEV.js": 62,
+    "src/domain/spatial/generosityEV.js": 61,
     "src/domain/spatial/generosityGate.js": 1,
     "src/domain/spatial/generosityReactions.js": 3,
     "src/domain/spatial/intelActs.js": 6,
@@ -7495,7 +7503,6 @@
     "src/domain/worldPulse/armyTransitKernel.js": 23,
     "src/domain/worldPulse/assizeKernel.js": 8,
     "src/domain/worldPulse/attrition.js": 23,
-    "src/domain/worldPulse/bandedStock.js": 1,
     "src/domain/worldPulse/beliefMap.js": 24,
     "src/domain/worldPulse/blockadeTransport.js": 3,
     "src/domain/worldPulse/brokeragePlantHandoff.js": 1,
@@ -7532,7 +7539,7 @@
     "src/domain/worldPulse/deploymentReturn.js": 26,
     "src/domain/worldPulse/disinformationPlant.js": 2,
     "src/domain/worldPulse/disposition.js": 27,
-    "src/domain/worldPulse/dispositionLedger.js": 15,
+    "src/domain/worldPulse/dispositionLedger.js": 14,
     "src/domain/worldPulse/dispositionNews.js": 2,
     "src/domain/worldPulse/dispositionProfile.js": 1,
     "src/domain/worldPulse/envoyCasting.js": 1,
@@ -7542,7 +7549,7 @@
     "src/domain/worldPulse/factionCapture.js": 2,
     "src/domain/worldPulse/factionCompetition.js": 76,
     "src/domain/worldPulse/factionDensityKernel.js": 6,
-    "src/domain/worldPulse/factionPairLedger.js": 3,
+    "src/domain/worldPulse/factionPairLedger.js": 2,
     "src/domain/worldPulse/flows.js": 18,
     "src/domain/worldPulse/foodStockpile.js": 5,
     "src/domain/worldPulse/foundingCatalog.js": 12,
@@ -7550,7 +7557,7 @@
     "src/domain/worldPulse/generosityNews.js": 1,
     "src/domain/worldPulse/habit/habitCurve.js": 7,
     "src/domain/worldPulse/hegemony.js": 2,
-    "src/domain/worldPulse/informationStatecraft.js": 25,
+    "src/domain/worldPulse/informationStatecraft.js": 24,
     "src/domain/worldPulse/institutionLifecycle.js": 17,
     "src/domain/worldPulse/lawWord.js": 2,
     "src/domain/worldPulse/lineageNews.js": 3,
@@ -7562,7 +7569,7 @@
     "src/domain/worldPulse/mobilization.js": 7,
     "src/domain/worldPulse/mobilizationEffects.js": 3,
     "src/domain/worldPulse/mobilizationReactions.js": 6,
-    "src/domain/worldPulse/momentum.js": 47,
+    "src/domain/worldPulse/momentum.js": 46,
     "src/domain/worldPulse/moralInstitutionPressure.js": 15,
     "src/domain/worldPulse/moralMartialLean.js": 20,
     "src/domain/worldPulse/narrativeTempo.js": 1,
@@ -7571,14 +7578,13 @@
     "src/domain/worldPulse/negotiationPictures.js": 9,
     "src/domain/worldPulse/npcAgency.js": 97,
     "src/domain/worldPulse/npcCirculation.js": 4,
-    "src/domain/worldPulse/npcCredibility.js": 2,
+    "src/domain/worldPulse/npcCredibility.js": 1,
     "src/domain/worldPulse/npcDmVerbRecords.js": 3,
     "src/domain/worldPulse/npcGoalBranches.js": 11,
-    "src/domain/worldPulse/npcGrowthKernel.js": 10,
+    "src/domain/worldPulse/npcGrowthKernel.js": 9,
     "src/domain/worldPulse/npcLadderContest.js": 12,
     "src/domain/worldPulse/npcLadderGoals.js": 1,
-    "src/domain/worldPulse/npcLadderKernel.js": 8,
-    "src/domain/worldPulse/npcLadderState.js": 2,
+    "src/domain/worldPulse/npcLadderKernel.js": 7,
     "src/domain/worldPulse/npcReplacement.js": 6,
     "src/domain/worldPulse/npcVerdictApply.js": 5,
     "src/domain/worldPulse/npcVerdictTable.js": 3,
@@ -7605,7 +7611,7 @@
     "src/domain/worldPulse/reinforcement.js": 5,
     "src/domain/worldPulse/relationshipEvolution.js": 2,
     "src/domain/worldPulse/relationshipHierarchy.js": 15,
-    "src/domain/worldPulse/relationshipMemory.js": 103,
+    "src/domain/worldPulse/relationshipMemory.js": 102,
     "src/domain/worldPulse/relationshipRuleHelpers.js": 47,
     "src/domain/worldPulse/relationshipRulesAdversarial.js": 207,
     "src/domain/worldPulse/relationshipRulesCore.js": 302,
@@ -7634,11 +7640,12 @@
     "src/domain/worldPulse/stressorAftermath.js": 5,
     "src/domain/worldPulse/stressorDynamics.js": 144,
     "src/domain/worldPulse/stressorGates.js": 97,
-    "src/domain/worldPulse/stressors.js": 39,
+    "src/domain/worldPulse/stressors.js": 38,
     "src/domain/worldPulse/stressorsCore.js": 39,
     "src/domain/worldPulse/supplyCompleteness.js": 9,
     "src/domain/worldPulse/supplyKernel.js": 6,
     "src/domain/worldPulse/supplyWebWarfare.js": 56,
+    "src/domain/worldPulse/thievesGuild.js": 2,
     "src/domain/worldPulse/tierResourceDynamics.js": 40,
     "src/domain/worldPulse/tradeSalience.js": 25,
     "src/domain/worldPulse/tradeWar.js": 25,
@@ -7651,7 +7658,7 @@
     "src/domain/worldPulse/treatySuccessionVoice.js": 3,
     "src/domain/worldPulse/treatyTermRoles.js": 2,
     "src/domain/worldPulse/upswingKernel.js": 13,
-    "src/domain/worldPulse/urbanFabricKernel.js": 15,
+    "src/domain/worldPulse/urbanFabricKernel.js": 13,
     "src/domain/worldPulse/warAllianceRisk.js": 7,
     "src/domain/worldPulse/warArmyRecord.js": 8,
     "src/domain/worldPulse/warCapacityReads.js": 3,
@@ -7719,8 +7726,8 @@
   "totals": {
     "tables": 224,
     "keys": 2066,
-    "unregisteredNamed": 534,
-    "bareDecimals": 7003,
+    "unregisteredNamed": 535,
+    "bareDecimals": 6985,
     "zeroDependentTables": 8,
     "zeroNamedDependentTables": 139
   }

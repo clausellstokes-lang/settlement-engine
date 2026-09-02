@@ -69,12 +69,26 @@ const INVENTORY_PATH = join(ROOT, INVENTORY_REL);
  * Raising one is not a lane's act.
  */
 const CEILINGS = Object.freeze({
-  BARE_DECIMAL_CEILING: 7003,
-  UNREGISTERED_NAMED_CEILING: 534,
+  // ⭐ RATCHETED DOWN 7003 -> 6985 at the HORIZON-INSTR landing, banking sixteen measured wins
+  // that the T13 landing (§883) produced under a register frozen one landing back. A win is
+  // banked at the moment it is measured, or it silently restores the headroom it just bought.
+  BARE_DECIMAL_CEILING: 6985,
+  // ⛔ RAISED 534 -> 535, BY EXACTLY ONE UNIT, AND THE CAUSE IS NAMED RATHER THAN ABSORBED:
+  // src/domain/relationships/canonicalRelationship.js, landed by T13 at §883 (Car P′,
+  // 754856b125828dc555359d6df0e0632be9636a09), where a bare computed population bonus became the
+  // named constant POPULATION_SATURATION. The +1 here is the COUNTERPART of that same file's -1
+  // bare decimal in the same commit — the register scores naming a magic number as debt in one
+  // population while crediting it as a win in the other, which is a finding about this instrument
+  // and rides to §884. Raising a ceiling is not a LANE's act: this one is the CHAIR's, ruled at
+  // §883.8, attributed here and declared owner-visible on §884.
+  UNREGISTERED_NAMED_CEILING: 535,
   UNITLESS_TABLE_CEILING: 220,
   DECLARED_DIVERGENCE_CEILING: 5,
   PHANTOM_ALIAS_CEILING: 3,
-  DECLARED_GROWTH_CEILING: 0,
+  // RAISED 0 -> 2 for the two DECLARED_GROWTH rows this landing's cure 1/2 added, both citing
+  // T13 Car P′ 754856b12. This ceiling counts ATTRIBUTED rows, so it rises only when growth is
+  // cited to a real commit with a cause — an unattributed row cannot reach it.
+  DECLARED_GROWTH_CEILING: 2,
 });
 
 const register = loadTuningRegister(ROOT);
