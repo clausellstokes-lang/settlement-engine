@@ -60,6 +60,7 @@ import { npcId } from './npcAgency.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp01 } from '../../kernel/math.js';
+import { detExp } from '../../kernel/detMath.js';
 import { hasClandestineFacet, UNDERWAYS_TUNING } from './clandestineFacet.js';
 // D7 THE REFRAME LAYER (DESIGN_SIM_DEPTH_R2 §D7, consumer 3): a darkly-reframed obligation the
 // target bears toward the patron (extortion_endured — a resented debt) is leash-eligible material,
@@ -488,7 +489,7 @@ export function foreignGripOf(worldState, snapshot, patronId) {
   const assets = foreignAssetsByPatron(snapshot).get(String(patronId)) || [];
   if (!assets.length) return 0;
   // Saturating in the asset count (the guildStrength idiom): 1 - e^(-n * rate).
-  return clamp01(1 - Math.exp(-assets.length * CORRUPTION_WEB_TUNING.GRIP_SATURATION_RATE));
+  return clamp01(1 - detExp(-assets.length * CORRUPTION_WEB_TUNING.GRIP_SATURATION_RATE));
 }
 
 /**
@@ -508,7 +509,7 @@ export function directionBias(worldState, snapshot, targetId, patronId) {
   const assets = (foreignAssetsByPatron(snapshot).get(String(patronId)) || [])
     .filter((a) => a.targetId === String(targetId));
   if (!assets.length) return 0;
-  const grip = clamp01(1 - Math.exp(-assets.length * CORRUPTION_WEB_TUNING.GRIP_SATURATION_RATE));
+  const grip = clamp01(1 - detExp(-assets.length * CORRUPTION_WEB_TUNING.GRIP_SATURATION_RATE));
   return round4(CORRUPTION_WEB_TUNING.DIRECTION_MAX * grip);
 }
 

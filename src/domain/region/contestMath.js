@@ -31,6 +31,7 @@
 // (kernel/math.js is the shared determinism-primitive layer — not src/generators,
 // so the region-must-not-import-prng law is preserved.)
 import { clamp01 } from '../../kernel/math.js';
+import { detExp } from '../../kernel/detMath.js';
 export { clamp01 };
 
 /**
@@ -61,8 +62,8 @@ export function hash01(text) {
  * @param {number} x @returns {number} */
 export function logistic(x) {
   if (!Number.isFinite(x)) return x > 0 ? 1 : 0;
-  if (x >= 0) return 1 / (1 + Math.exp(-x));
-  const z = Math.exp(x);
+  if (x >= 0) return 1 / (1 + detExp(-x));
+  const z = detExp(x);
   return z / (1 + z);
 }
 
@@ -85,7 +86,7 @@ export function softmaxWeights(scores, k = 1) {
   if (!scores.length) return [];
   const scaled = scores.map((s) => k * (Number.isFinite(s) ? s : 0));
   const max = Math.max(...scaled);
-  const exps = scaled.map((s) => Math.exp(s - max));
+  const exps = scaled.map((s) => detExp(s - max));
   const total = exps.reduce((a, b) => a + b, 0) || 1;
   return exps.map((e) => e / total);
 }
