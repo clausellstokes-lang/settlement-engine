@@ -199,7 +199,7 @@ export const CHARACTER_NEWS_REGISTRATION_SEAM = Object.freeze({
   owed: Object.freeze([
     'an EXACT_SECTION row per ARTICLE_ACTIONS member (the events catch-all is explicit, never a fall-through)',
     'the envelope fields the census requires on the minted entry: id, settlementIds, severity',
-    'a producer that actually mints them — today no caller runs foldLivedExperience, so the vocabulary would guard nothing',
+    'a producer that actually mints them. Today no caller runs foldLivedExperience, so the vocabulary would guard nothing',
   ]),
 });
 
@@ -714,13 +714,13 @@ export const CHARACTER_READ_PROVENANCE = Object.freeze({
   status: 'CANDIDATE, OWNER-UNSIGNED (two vocabularies and four frames; nothing here is taste the pen has ruled)',
   signedBy: null,
   ownerRows: Object.freeze([
-    'THE THIRTY REASON CLAUSES — one per teaching kind. They are the reader-facing name of every experience the funnel can bind, and they are this car\'s largest authored surface',
-    'THE THREE LEVEL PHRASES (a little / notably / above all) — the only adverbs the read model owns',
+    'THE THIRTY REASON CLAUSES: one per teaching kind. They are the reader-facing name of every experience the funnel can bind, and they are this car\'s largest authored surface',
+    'THE THREE LEVEL PHRASES (a little / notably / above all): the only adverbs the read model owns',
     '⚠ THE FOUR FRAMES, and the ruling behind them: §5 illustrates a displacement with NOUNS ("bitterness has overtaken his patience") and car L1\'s catalog carries only ADJECTIVES, whose nominalization is irregular. The frames are adjectival. Signing the noun forms would mean a 34-row second vocabulary for one sentence shape',
-    'whether a crossing INTO neutral is news at all — today it is told as "no longer X", which is a real event and the only one the vocabulary can name from a band with no pole',
+    'whether a crossing INTO neutral is news at all. Today it is told as "no longer X", which is a real event and the only one the vocabulary can name from a band with no pole',
     'whether the dossier\'s default viewer stays MORTAL (fail-closed) on a surface whose reader is the DM',
   ]),
-  consumers: 'NONE in production by design — no caller runs the funnel, so no receipt exists to read; the herald registration is priced in CHARACTER_NEWS_REGISTRATION_SEAM and deliberately not taken',
+  consumers: 'NONE in production by design. No caller runs the funnel, so no receipt exists to read; the herald registration is priced in CHARACTER_NEWS_REGISTRATION_SEAM and deliberately not taken',
 });
 
 /**

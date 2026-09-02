@@ -236,7 +236,7 @@ const REFUSAL_LINE = Object.freeze({
 
 /** @type {Readonly<Record<string, string>>} */
 const REFUSAL_REASON = Object.freeze({
-  vetting: 'The records were read before the person was, and the records ended it — character speaks only for those the paperwork clears.',
+  vetting: 'The records were read before the person was, and the records ended it. Character speaks only for those the paperwork clears.',
   unwilling: 'The seat had cleared them and the work was fairly priced; the no was the person\'s own, and the record keeps it as one.',
   risk_above_window: 'The work asked more than they will carry, and declining it is a statement of character the principal now holds in writing.',
   risk_below_window: 'The work asked too little; a person of appetite refuses the errand that teaches nothing, and that refusal reads as ambition, not fear.',
@@ -271,7 +271,7 @@ export function missionAcceptedBeat({ decision, principalId, principalName, npcI
     reasons: [
       'The paperwork cleared, the willingness was real, and the work sat inside the risks this person carries well.',
       ...(rooted
-        ? ['The appetite that decided is the one they rooted with — the one who stayed is the one who chose.']
+        ? ['The appetite that decided is the one they rooted with. The one who stayed is the one who chose.']
         : []),
     ],
     npcIds: [text(npcId)],
@@ -504,7 +504,7 @@ export const GOING_NATIVE_VOICE_LAW = Object.freeze({
   rule: 'the voice speaks strain and never a turning: no line states or presupposes that dwelling can reverse a fidelity while the reversal fork is unsigned',
   spoken: Object.freeze(['no_road', 'event_only']),
   unspoken: Object.freeze(['reachable']),
-  measured: 'ambient dwelling rests at a whisper — one floor quantum per axis at every rung — and the axis the arc runs on carries zero reachable vice-ward sources in the real experience table',
+  measured: 'ambient dwelling rests at a whisper (one floor quantum per axis at every rung), and the axis the arc runs on carries zero reachable vice-ward sources in the real experience table',
   signedBy: null,
 });
 
@@ -538,7 +538,7 @@ const ARC_REASONS = Object.freeze({
   ]),
   event_only: Object.freeze([
     'The habits of the place have settled on them, and habits are not fidelity.',
-    'If the heart is ever to turn, it will be something that happens to them that turns it — never the slow weight of the streets, which rests at a whisper however many years it presses.',
+    'If the heart is ever to turn, it will be something that happens to them that turns it. Never the slow weight of the streets, which rests at a whisper however many years it presses.',
   ]),
 });
 
@@ -602,13 +602,13 @@ export function goingNativeArcBeat({ level, verdict, cadences, npcId, npcName, h
 export const OPERATIONS_VOICE_PROVENANCE = Object.freeze({
   status: 'CANDIDATE, OWNER-UNSIGNED (every sentence in this file is voice-taste awaiting the pen; the vocabularies are closed, the lines are candidates)',
   signedBy: null,
-  door: 'operationsVoiceEnabled — NAMED, NOT MINTED (the one-commit mint is a register edit this packet did not order); beneath it every surface inherits the doors of the subsystem whose receipts it voices',
+  door: 'operationsVoiceEnabled: NAMED, NOT MINTED (the one-commit mint is a register edit this packet did not order); beneath it every surface inherits the doors of the subsystem whose receipts it voices',
   ownerRows: Object.freeze([
     'every line and reason here is the pen\'s: the words are candidates, and none is signed',
-    'the going-native reversal line is DELIBERATELY UNWRITTEN — writing it is a ruling on the unsigned reversal fork, never a prose edit',
+    'the going-native reversal line is DELIBERATELY UNWRITTEN. Writing it is a ruling on the unsigned reversal fork, never a prose edit',
     'the audience split (mission beats and the long watch are the principal\'s; exposure moments are the town\'s) is a recorded judgment, vetoable',
     'the dwell span words are a first mint of three bands; the pen renames or re-cuts them',
-    'the four storied refusals are voiced and the three machine refusals are not — whether a malformed or unpriced operation ever deserves a sentence is the pen\'s call',
+    'the four storied refusals are voiced and the three machine refusals are not. Whether a malformed or unpriced operation ever deserves a sentence is the pen\'s call',
   ]),
   consumers: 'NONE by design. No src module imports this leaf; the feed envelope and desk registration belong to the wiring car, and until it lands nothing here is routed anywhere',
 });

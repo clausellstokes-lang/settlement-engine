@@ -164,9 +164,9 @@ export const ENVOY_TASK_CATALOG = Object.freeze([
     roadNote: 'peaceTermsCoalition.js imports planCoalitionSettlement, and peace terms are '
       + 'what a sue errand produces',
     sourceNote:
-      'FIVE of the thirteen frozen disposition source kinds are this family — '
+      'FIVE of the thirteen frozen disposition source kinds are this family: '
       + 'coalition_reimbursement_paid / _unpaid and coalition_settlement_profit / _honored / '
-      + '_shortfall — so a settled reimbursement teaches the ledger through a vocabulary that '
+      + '_shortfall, so a settled reimbursement teaches the ledger through a vocabulary that '
       + 'already exists and needs no new word',
     signedBy: null,
   }),
@@ -181,7 +181,7 @@ export const ENVOY_TASK_CATALOG = Object.freeze([
     roadLanded: true,
     roadNote: 'treatyDispositionDeltas is called from peaceTerms.js, the sue errand outcome path',
     sourceNote:
-      'the ONE outcome that already credits a THIRD party — the adapter reads mediatorId and '
+      'the ONE outcome that already credits a THIRD party. The adapter reads mediatorId and '
       + 'writes the win to the mediator, not to either side of the quarrel. That is exactly '
       + 'what a mediating envoy is for, and it is the reason this row needs no new receipt',
     signedBy: null,
@@ -195,12 +195,12 @@ export const ENVOY_TASK_CATALOG = Object.freeze([
     receiptModule: 'src/domain/worldPulse/ransomClaim.js',
     sourceVerdict: 'verified',
     roadLanded: true,
-    roadNote: 'the STRONGEST road of the four — envoyRansomStage.js imports envoyErrandsOf and '
+    roadNote: 'the STRONGEST road of the four: envoyRansomStage.js imports envoyErrandsOf and '
       + 'foreignGuestHoldsOf directly, so the errand, the custody record and the claim already '
       + 'meet in one production leaf',
     sourceNote:
       'WR-7d mints a real claim against a real custody hold, and the hold closes through its own '
-      + 'closed reason vocabulary — the whole resolution is receipted end to end',
+      + 'closed reason vocabulary. The whole resolution is receipted end to end',
     signedBy: null,
   }),
   Object.freeze({
@@ -221,11 +221,11 @@ export const ENVOY_TASK_CATALOG = Object.freeze([
       + 'both already in the sixteen',
     sourceNote:
       'the founding case, and the only row whose receipts are envoy-family receipts rather than '
-      + 'downstream ones — which is why it is the row that proves the sixteen cannot qualify a '
+      + 'downstream ones, which is why it is the row that proves the sixteen cannot qualify a '
       + 'kind alone: terms_agreed says terms were agreed, never which task was chartered. '
       + '⭐ AND ITS PRODUCER CORROBORATES THIS FILE\'S SIGHT LAW FROM THE INSIDE: the appraisal '
       + 'module\'s own header rules every read BELIEF-sourced, never truth, and it imports '
-      + 'readBeliefStrength from beliefMap — so pricing a treaty is ALREADY observer-scoped '
+      + 'readBeliefStrength from beliefMap, so pricing a treaty is ALREADY observer-scoped '
       + 'here, and the menu reading beliefs is this stack\'s discipline rather than a new one',
     signedBy: null,
   }),
@@ -253,7 +253,7 @@ export const PARKED_ENVOY_TASKS = Object.freeze([
     evidence: 'grep -rniE "ultimatum" over src/ and tests/ returns ZERO hits. The casus records '
       + 'that DO exist are casus_lineage_claim_parent / _child (lineage-driven) and '
       + 'casus_alliance_obligation (coalition-driven); none is written by a delivered demand',
-    unblockingAct: 'mint a casus kind whose producer is the delivery of a demand — a new receipt '
+    unblockingAct: 'mint a casus kind whose producer is the delivery of a demand: a new receipt '
       + 'family, therefore owner-visible',
     namedWave: null,
   }),
@@ -266,7 +266,7 @@ export const PARKED_ENVOY_TASKS = Object.freeze([
       + 'pardon, and no field links two holds. An exchange therefore records as two unilateral '
       + 'releases and is indistinguishable from two negotiate_ransom outcomes in every record',
     unblockingAct: 'a close reason, or a linking field, that makes a swap distinguishable from '
-      + 'two releases — a persisted vocabulary change, therefore owner-visible',
+      + 'two releases: a persisted vocabulary change, therefore owner-visible',
     namedWave: null,
   }),
   Object.freeze({
@@ -277,7 +277,7 @@ export const PARKED_ENVOY_TASKS = Object.freeze([
       + 'and tests/ returns ZERO hits, and there is no legitimacyRecord / legitimacyEvent / '
       + 'legitimacyLedger writer. Legitimacy is a quantity here, never an outcome family',
     unblockingAct: 'mint a standing-display receipt family, or rule the row out of the catalog '
-      + 'permanently — the owner-taste call §9 row 1 already reserves',
+      + 'permanently: the owner-taste call §9 row 1 already reserves',
     namedWave: null,
   }),
   Object.freeze({
@@ -285,7 +285,7 @@ export const PARKED_ENVOY_TASKS = Object.freeze([
     parkClass: 'road_unbuilt',
     claimedFamily: 'trade_contest',
     evidence: 'the family is REAL and is one of the frozen thirteen (dispositionDeltas.js types '
-      + 'tradeWar outcomes as trade_contest) — so (R) PASSES and only (E) fails. The commercial '
+      + 'tradeWar outcomes as trade_contest), so (R) PASSES and only (E) fails. The commercial '
       + 'purposeClass consumer is ERRAND_CONSUMERS row "factors" at built:false, and grep for '
       + 'tradeWar across the envoy stack and errandMint.js returns ZERO',
     unblockingAct: 'TR-8 landing factorErrand.js and flipping that registry row to built:true. '
@@ -297,7 +297,7 @@ export const PARKED_ENVOY_TASKS = Object.freeze([
     parkClass: 'no_family',
     claimedFamily: 'coalition settlement records',
     evidence: 'the row §4 spells "arrange_reimbursement/tribute" is TWO rows with TWO different '
-      + 'answers. Reimbursement is admitted above; tribute has no record writer at all — grep '
+      + 'answers. Reimbursement is admitted above; tribute has no record writer at all. Grep '
       + 'for tribute over src/domain/ returns only prose strings in factionRelationshipUpdate.js',
     unblockingAct: 'mint a recurring-obligation record, or fold tribute into the peace-terms '
       + 'clause machinery that already prices obligations',
@@ -411,7 +411,7 @@ export const NEGOTIATION_METHODS = Object.freeze([
     reads: Object.freeze(['counterpartNerve', 'envoyChart']),
     fitsNerve: Object.freeze(['restrained', 'measured']),
     misfiresOn: Object.freeze(['dominant']),
-    note: 'the volume\'s own line — threaten the cowardly court, never the brave one. Pressed '
+    note: 'the volume\'s own line: threaten the cowardly court, never the brave one. Pressed '
       + 'against a dominant court it hardens the very nerve it was meant to break',
   }),
   Object.freeze({
@@ -420,7 +420,7 @@ export const NEGOTIATION_METHODS = Object.freeze([
     fitsNerve: Object.freeze(['restrained']),
     misfiresOn: Object.freeze(['dominant', 'marked']),
     note: 'patience prices the other court\'s appetite for the wait, and reads NOTHING about '
-      + 'the envoy — the one method whose fit does not consult the person sent',
+      + 'the envoy: the one method whose fit does not consult the person sent',
   }),
 ]);
 
@@ -447,7 +447,7 @@ export const COUNTERPART_SIGHT_LAW = Object.freeze({
     + 'counterpart\'s own ledger',
   whyNotTheLedger: 'strategicPosture.courtRiskAppetiteOf takes the COUNTERPART\'S entry. That '
     + 'is ground truth about them. It is learned only from resolved outcomes, which makes it '
-    + 'RECEIPTED — and receipted is not the same as known-by-this-observer',
+    + 'RECEIPTED, and receipted is not the same as known-by-this-observer',
   observerScopedModel: 'src/domain/worldPulse/beliefMap.js',
   believedAttributesToday: Object.freeze([
     'readiness', 'strengthBand', 'allianceLabel', 'faithLabel', 'confidence01', 'lastUpdateTick',
@@ -609,7 +609,7 @@ export const ENVOY_TASK_PROVENANCE = Object.freeze({
     + 'state_visit\'s fate included)',
   signedBy: null,
   ownerRows: Object.freeze([
-    'the four admitted rows are receipt-verified, not taste — but WHICH of them a court may '
+    'the four admitted rows are receipt-verified, not taste, but WHICH of them a court may '
       + 'charter, and at what cadence, is the pen\'s',
     '⛔ state_visit: PARKED for want of any receipt family. The fork the owner actually holds '
       + 'is mint-a-standing-family versus cut-the-row, and §9 row 1 already reserves it',
@@ -619,9 +619,9 @@ export const ENVOY_TASK_PROVENANCE = Object.freeze({
     'the four method words and their nerve fits. The fits are derived from the volume\'s own '
       + 'sentence about threatening cowardly courts; a signed table is the pen\'s',
   ]),
-  door: 'envoyTaskCatalogEnabled — NAMED, NOT MINTED. The CR-WR10-C mint is a by-name === true '
+  door: 'envoyTaskCatalogEnabled: NAMED, NOT MINTED. The CR-WR10-C mint is a by-name === true '
     + 'read plus a manifest entry plus an authored VIRTUAL_SUBSYSTEM_ROWS row plus a dormancy '
-    + 'fence, ALL in one commit — a register edit this packet did not order',
+    + 'fence, ALL in one commit: a register edit this packet did not order',
   consumers: 'NONE. No src/ module imports this leaf; the darkness is pinned by a real planted '
     + 'importer in the battery, not by a grep that could pass by finding nothing',
   census: Object.freeze({

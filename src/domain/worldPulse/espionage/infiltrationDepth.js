@@ -96,35 +96,35 @@ export const INFILTRATION_LEVELS = Object.freeze([
   Object.freeze({
     level: 0,
     name: 'passing_ear',
-    access: 'waypoint hearing on a journey — the host\'s own beliefs',
+    access: 'waypoint hearing on a journey: the host\'s own beliefs',
     status: 'built',
     home: 'src/domain/worldPulse/espionage/espionageGauntlet.js#covertDwellRead',
   }),
   Object.freeze({
     level: 1,
     name: 'observer',
-    access: 'the target dwell — counting granaries, seeing the place',
+    access: 'the target dwell: counting granaries, seeing the place',
     status: 'built',
     home: 'src/domain/worldPulse/espionage/espionageGauntlet.js#covertDwellRead',
   }),
   Object.freeze({
     level: 2,
     name: 'rooted',
-    access: 'the gather-or-govern dwell — re-sampling on a ramping catch',
+    access: 'the gather-or-govern dwell: re-sampling on a ramping catch',
     status: 'built',
     home: 'src/domain/worldPulse/espionage/espionageGauntlet.js#gatherOrGovernRead',
   }),
   Object.freeze({
     level: 3,
     name: 'placed',
-    access: 'the INSTITUTION\'s interior — its roster, its backing, its doctrine posture',
+    access: 'the INSTITUTION\'s interior: its roster, its backing, its doctrine posture',
     status: 'new',
     home: 'src/domain/worldPulse/espionage/infiltrationDepth.js#PLACEMENT_MISSION_KINDS',
   }),
   Object.freeze({
     level: 4,
     name: 'seated',
-    access: 'a court or faction SEAT held under foreign will — the mole',
+    access: 'a court or faction SEAT held under foreign will: the mole',
     status: 'new',
     home: 'src/domain/worldPulse/espionage/infiltrationDepth.js#placementEnrollment',
   }),
@@ -345,7 +345,7 @@ export const PLACEMENT_MISSION_KINDS = Object.freeze([
     writerLanded: false,
     sourceNote:
       'the L3 placement operation; its FAILURE writes the covert-cause custody hold, which '
-      + 'is a live record family with a live cause word — but §6 holds the L3/L4 capture '
+      + 'is a live record family with a live cause word, but §6 holds the L3/L4 capture '
       + 'WRITE behind the arm the ES charter opens, so the family qualifies the kind and '
       + 'the writer has not landed',
     signedBy: null,
@@ -362,7 +362,7 @@ export const PLACEMENT_MISSION_KINDS = Object.freeze([
     sourceNote:
       'the L4 seating operation; F8 rules the placed seat IS the web\'s foreign-leashed '
       + 'seat reached by a second door, so its exposure runs the web\'s own §4 blowback '
-      + 'lane verbatim — grievance, credibility charge, legitimacy in both courts',
+      + 'lane verbatim: grievance, credibility charge, legitimacy in both courts',
     signedBy: null,
   }),
 ]);
@@ -401,18 +401,18 @@ export const ENROLLMENT_GATE_DISPOSITION = Object.freeze([
   Object.freeze({
     gate: 'pair_already_held',
     disposition: 'applies',
-    note: 'one live asset per (patron, target) pair — the web enforces it as a candidate '
+    note: 'one live asset per (patron, target) pair. The web enforces it as a candidate '
       + 'SKIP with no word of its own, because it scores targets and a placement names one',
   }),
   Object.freeze({
     gate: 'per_patron_cap',
     disposition: 'applies',
-    note: 'the realm-wide per-patron live-asset cap, verbatim — F8\'s named clause',
+    note: 'the realm-wide per-patron live-asset cap, verbatim: F8\'s named clause',
   }),
   Object.freeze({
     gate: 'upkeep_unaffordable',
     disposition: 'applies',
-    note: 'the rising-upkeep affordability floor, verbatim — F8\'s named degradation',
+    note: 'the rising-upkeep affordability floor, verbatim: F8\'s named degradation',
   }),
   Object.freeze({
     gate: 'e0_deferred',
@@ -574,10 +574,10 @@ export const STANDING_COVER_GATE = Object.freeze({
   status: 'RECON_COMPLETE_AWAITING_OWNER',
   signedBy: null,
   measured: Object.freeze([
-    'src/domain/worldPulse/errandMint.js#errandSpineFields — the only writer of declaredPurpose/truePurpose',
-    'src/domain/worldPulse/envoyErrandVocabulary.js#TERMINAL_STATES — home, lost',
-    'src/domain/worldPulse/envoyErrand.js — terminal errands are evicted from persistence',
-    'src/domain/npc/regenIdentityFold.js — four id-keyed maps already folded across a reroll',
+    'src/domain/worldPulse/errandMint.js#errandSpineFields (the only writer of declaredPurpose/truePurpose)',
+    'src/domain/worldPulse/envoyErrandVocabulary.js#TERMINAL_STATES (home, lost)',
+    'src/domain/worldPulse/envoyErrand.js (terminal errands are evicted from persistence)',
+    'src/domain/npc/regenIdentityFold.js (four id-keyed maps already folded across a reroll)',
   ]),
   owes: Object.freeze([
     'a persisted cover schema, owner-admitted',
@@ -588,15 +588,15 @@ export const STANDING_COVER_GATE = Object.freeze({
     Object.freeze({
       shape: 'persisted_cover_record',
       cost: 'new schema + a FIFTH regenIdentityFold entry in the same commit + an undo/restore round-trip',
-      grazes: 'GAP D — "no per-NPC memory store exists or may be minted" (knownCharacter.js)',
+      grazes: 'GAP D: "no per-NPC memory store exists or may be minted" (knownCharacter.js)',
     }),
     Object.freeze({
       shape: 'derived_cover_query',
       cost: 'the cover can assert only what is RECEIPTED',
-      grazes: 'nothing — no new key space, no fold entry, and the rebind hazard cannot arise',
+      grazes: 'nothing: no new key space, no fold entry, and the rebind hazard cannot arise',
     }),
   ]),
-  chairLean: 'derived_cover_query — §3 already words the cover as the R2 KNOWN-character read, '
+  chairLean: 'derived_cover_query: §3 already words the cover as the R2 KNOWN-character read, '
     + 'and "unreceipted stays private" is the substrate\'s stated feature rather than its gap',
 });
 

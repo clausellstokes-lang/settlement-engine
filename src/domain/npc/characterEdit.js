@@ -156,10 +156,10 @@ export const CHART_REFUSALS = Object.freeze([
 export const CHART_EDIT_PROVENANCE = Object.freeze({
   status: 'STRUCTURE DECIDED; the axis roster itself is owner-taste and UNSIGNED',
   signedBy: null,
-  wallRuling: 'the chart does NOT join EDITABLE_FIELDS — see finding 2 in the header',
+  wallRuling: 'the chart does NOT join EDITABLE_FIELDS. See finding 2 in the header',
   markerRuling: '_authored alone buys regen survival in all three modes (executed)',
   ownerRows: Object.freeze([
-    'the axis roster (DESIGN_W_LIVES §1.1 is a DRAFT for the pen) — until it is '
+    'the axis roster (DESIGN_W_LIVES §1.1 is a DRAFT for the pen): until it is '
       + 'signed, admission without an injected roster is SHAPE-ONLY and says so',
     'whether clearing a chart back to all-neutral should un-canon the NPC. This '
       + 'writer NEVER clears the marker: it cannot know whether a prose edit set '

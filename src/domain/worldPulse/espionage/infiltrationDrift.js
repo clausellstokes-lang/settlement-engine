@@ -172,7 +172,7 @@ export const DEPTH_EXPOSURE_OF = Object.freeze(Object.fromEntries(
  * @type {Readonly<{ruling: string, measured: string, rejected: string, signedBy: string|null}>}
  */
 export const DEPTH_PRICING_LAW = Object.freeze({
-  ruling: 'depth prices BREADTH — how many of the host chart\'s axes an embedding exposes a person to — and never the per-axis quantum',
+  ruling: 'depth prices BREADTH (how many of the host chart\'s axes an embedding exposes a person to), and never the per-axis quantum',
   measured: 'the ambient equilibrium is a two-regime step function, not a curve: below epsilon/retention it equals the quantum exactly, at or above it the offset climbs to quantum/(1-retention). Measured at this tip the ceiling sits 5.9% above faint for a source emitting once a season and 0.45% above it for one emitting every tick',
   rejected: 'the registers pack drafts the five depth words as a MILIEU MULTIPLIER; a multiplier is exactly the arithmetic the cliff refuses, because no multiplier above 1.0045 leaves an equilibrium anywhere below the clamp',
   signedBy: null,
@@ -669,7 +669,7 @@ export const CUSTODY_EXITS = Object.freeze([
     sourceNote:
       'npcDmVerbs.js:516 closes the hold with reason death inside the kill verb, and the '
       + 'W-LIVES F6 death receipt (characterLegacyRecord) is the lesson side. NOT a charter '
-      + 'exit: W-OPS §3 lists four and this is none of them, which is itself the finding — '
+      + 'exit: W-OPS §3 lists four and this is none of them, which is itself the finding: '
       + 'the vocabulary that closes holds and the list of exits do not agree',
     signedBy: null,
   }),
@@ -686,18 +686,18 @@ export const PARKED_CUSTODY_EXITS = Object.freeze([
     parkClass: 'unreceipted_distinction',
     evidence:
       'an extraction is home taking its man back against the captor\'s will, which the hold '
-      + 'ledger can only record as escape — and the row schema carries no field naming who '
+      + 'ledger can only record as escape, and the row schema carries no field naming who '
       + 'closed it (schemaVersion, id, npcId, errandId, encounterId, captorId, venueId, '
       + 'venueRef, heldSinceTick, cause, continuation). An extraction and a lucky escape are '
       + 'the same record. Compounded: escape has ZERO writers in src/',
-    unblockingAct: 'a linking field on the hold row, or a close reason that names the agent — a persisted schema change, owner-gated',
+    unblockingAct: 'a linking field on the hold row, or a close reason that names the agent: a persisted schema change, owner-gated',
   }),
   Object.freeze({
     kind: 'burn',
     parkClass: 'unreceipted_distinction',
     evidence:
-      'the exposure family is real and landed — corruptionWeb.applyForeignExposureBlowback, '
-      + 'which O3\'s seat_agent row already names with writerLanded true — but every exposure '
+      'the exposure family is real and landed: corruptionWeb.applyForeignExposureBlowback, '
+      + 'which O3\'s seat_agent row already names with writerLanded true, but every exposure '
       + 'it writes is one the web ROLLED. There is no door by which a principal elects one, so '
       + 'a burn records as being caught, which is the opposite sentence',
     unblockingAct: 'an elected-exposure door on the web\'s creation seam, which F8 rules applies verbatim to placed seats and therefore needs the web\'s own gate',
@@ -709,9 +709,9 @@ export const PARKED_CUSTODY_EXITS = Object.freeze([
       'the charter defines this exit as the FIDELITY reversal receipted, and both halves of '
       + 'that exist: the reversal receipt is minted by the W-LIVES experience funnel and FIDELITY is a '
       + 'catalog axis. But of the three FIDELITY rows in the experience table, one is vice-ward '
-      + 'and it is sourceUnverified — so ZERO reachable sources pull FIDELITY toward its vice '
+      + 'and it is sourceUnverified, so ZERO reachable sources pull FIDELITY toward its vice '
       + 'pole, at any depth, on any plane. The quantity the receipt reads cannot move',
-    unblockingAct: 'a reachable vice-ward FIDELITY source — a design act on the W-LIVES table, not a tuning row',
+    unblockingAct: 'a reachable vice-ward FIDELITY source: a design act on the W-LIVES table, not a tuning row',
   }),
   Object.freeze({
     kind: 'ride_the_r4_arc',
@@ -726,12 +726,12 @@ export const PARKED_CUSTODY_EXITS = Object.freeze([
     kind: 'ransom',
     parkClass: 'road_unbuilt',
     evidence:
-      'the family is REAL and named on both sides — ransomClaim.mintRansomClaim mints the claim '
+      'the family is REAL and named on both sides: ransomClaim.mintRansomClaim mints the claim '
       + 'and the ransomed_home kind is receipted at roadsKernel.js:ransom tag, sourceUnverified '
-      + 'false — but the hold it would close is closed by nobody: release is a frozen member of '
+      + 'false, but the hold it would close is closed by nobody: release is a frozen member of '
       + 'FOREIGN_GUEST_HOLD_CLOSE_REASONS with ZERO writers in src/. A ransom can be minted and '
       + 'cannot be concluded',
-    unblockingAct: 'a pulse-side close with reason release, which is a writer and not a schema change — the one park here with a dated road rather than a ruling',
+    unblockingAct: 'a pulse-side close with reason release, which is a writer and not a schema change: the one park here with a dated road rather than a ruling',
   }),
 ]);
 
@@ -778,7 +778,7 @@ export const INFILTRATION_DRIFT_PROVENANCE = Object.freeze({
   // sibling that merely NAMES it in a string literal reds it. Third sighting of the
   // same law in this one car: an import reds a dark sibling, and so does a mention.
   door: 'infiltrationDepthEnabled (W-OPS §6), beneath the W-LIVES drift door named in this module header',
-  gateRead: 'NOT WRITTEN. The CR-WR10-C mint is a by-name read plus a manifest entry plus an authored VIRTUAL_SUBSYSTEM_ROWS row plus a dormancy fence, all in one commit — a register edit this packet did not order',
+  gateRead: 'NOT WRITTEN. The CR-WR10-C mint is a by-name read plus a manifest entry plus an authored VIRTUAL_SUBSYSTEM_ROWS row plus a dormancy fence, all in one commit: a register edit this packet did not order',
   ownerRows: Object.freeze([
     'the depth breadth ladder: one host axis per rung, derived from the rung index. The registers pack drafts these five words as a MULTIPLIER instead; DEPTH_PRICING_LAW carries the measured reason that reading cannot be signed',
     'whether the ambient milieu term is meant to be capable of a paradigm reversal at all, or whether reversals are events-only by design. The measurement forces the question: ambient pull rests at one floor quantum at every depth',
