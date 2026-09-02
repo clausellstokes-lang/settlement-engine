@@ -32,6 +32,7 @@
  */
 
 import { chaos01 } from './deityAxes.js';
+import { detPow } from '../../kernel/detPow.js';
 import { pietyLocalMultOf, pietyLawMegaphoneOf } from './piety.js';
 
 export const FIDELITY_TUNING = Object.freeze({
@@ -79,7 +80,7 @@ export function fidelityErrorMagnitude(chaosPull) {
   const T = FIDELITY_TUNING;
   const cp = clamp(chaosPull, 0, T.CHAOS_PULL_MAX);
   if (cp <= 0) return 0;
-  return Math.min(T.MAX_ERROR, T.BASE_ERROR * Math.pow(cp, T.SUPERLINEAR_EXP));
+  return Math.min(T.MAX_ERROR, T.BASE_ERROR * detPow(cp, T.SUPERLINEAR_EXP));
 }
 
 /**

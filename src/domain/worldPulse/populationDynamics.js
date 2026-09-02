@@ -1,4 +1,5 @@
 import { activeChannelsFrom } from '../region/index.js';
+import { detPow } from '../../kernel/detPow.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
 import { hash01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
@@ -137,7 +138,7 @@ function hasConditionSignal(item, archetypes, systems = []) {
  */
 function intervalMagnitude(interval) {
   const months = monthsForInterval(interval);
-  return Math.max(0.25, Math.pow(months, 0.85));
+  return Math.max(0.25, detPow(months, 0.85));
 }
 
 /**
