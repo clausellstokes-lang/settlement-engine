@@ -84,6 +84,33 @@ export const REALM_SCALE_PROFILES = Object.freeze({
       Object.freeze({ years: 300, settlements: 12, seedIndices: Object.freeze([1]) }),
     ]),
   }),
+  // ── THE TWO LIT RESEARCH PROFILES (SOAKCHAIN Car 4; DESIGN_HORIZON §4.1) ─────
+  // ⭐ THE OVERLAY LIGHTS NOTHING IN PRODUCT. `lighting` is passed to the child soak as
+  // `--lighting k=v`, which `composeSoakRules` spreads into `fullRules` for that run only;
+  // the shipped preset is untouched and the dormancy pins keep proving it dark. The cell's
+  // `identity.lighting` in the soak register is MANDATORY so the figure cannot masquerade
+  // as a shipped-preset reading (§4.7 R10).
+  //
+  // WHY THE LIT OVERLAY AND NOT THE SHIPPED PRESET: the shipped 300-year behaviour is a
+  // documented finding whose weekly re-measurement informs nothing, while the lit engine's
+  // 300-year curve has NEVER been executed and is the tuning sitting's own input.
+  'research-lit': Object.freeze({
+    description: 'THE three-hundred-year lit cell the tuning sitting signs against; informative, never a launch gate.',
+    lighting: Object.freeze({ demographicsEnabled: true }),
+    cells: Object.freeze([
+      Object.freeze({ years: 300, settlements: 12, seedIndices: Object.freeze([1]) }),
+    ]),
+  }),
+  // ⚠ THE INTERIM CELL, AND A DIFFERENT REGISTER IDENTITY — never a substitute. §141 refuses
+  // shortened horizons by name, so what shrinks to fit a hosted six-hour job is the
+  // SETTLEMENT COUNT, labelled, and the horizon stays 300.
+  'research-lit-4s': Object.freeze({
+    description: 'The interim lit cell: three hundred years at four settlements, sized to fit a hosted six-hour job.',
+    lighting: Object.freeze({ demographicsEnabled: true }),
+    cells: Object.freeze([
+      Object.freeze({ years: 300, settlements: 4, seedIndices: Object.freeze([1]) }),
+    ]),
+  }),
 });
 
 function behavioralControlsFor(profileName, years, settlements, seedIndex) {
@@ -143,6 +170,9 @@ export function buildRealmScalePlan(profileName, seedPrefix = 'realm-scale') {
         settlements,
         seed: `${safeSlug(seedPrefix)}-${id}`,
         ...(behavioralControls ? { behavioralControls } : {}),
+        // The profile's lighting overlay is copied onto every case, so a plan read on its
+        // own states which world it measured rather than leaving it to be inferred.
+        ...(profile.lighting ? { lighting: { ...profile.lighting } } : {}),
       });
     }
   }
@@ -151,6 +181,34 @@ export function buildRealmScalePlan(profileName, seedPrefix = 'realm-scale') {
     description: profile.description,
     cases,
   };
+}
+
+/**
+ * The child soak's argv for one planned case — PURE, so a test can pin the invocation
+ * without executing a soak (§145.2 forbids the alternative).
+ *
+ * @param {object} testCase one entry of `buildRealmScalePlan(...).cases`
+ * @param {string} caseReceiptPath where the child writes its receipt
+ * @returns {string[]}
+ */
+export function soakArgsFor(testCase, caseReceiptPath) {
+  const args = [
+    '--years', String(testCase.years),
+    '--settlements', String(testCase.settlements),
+    '--seed', testCase.seed,
+    '--case-id', testCase.id,
+    '--receipt', String(caseReceiptPath),
+  ];
+  if (testCase.behavioralControls?.neighborYears) {
+    args.push('--neighbor-control-years', String(testCase.behavioralControls.neighborYears));
+  }
+  if (testCase.behavioralControls?.dark) args.push('--dark-control');
+  const lighting = testCase.lighting && typeof testCase.lighting === 'object' ? testCase.lighting : null;
+  const entries = lighting ? Object.entries(lighting) : [];
+  if (entries.length) {
+    args.push('--lighting', entries.map(([key, value]) => `${key}=${value}`).join(','));
+  }
+  return args;
 }
 
 /**
@@ -567,20 +625,8 @@ export async function runRealmScaleCertification(argv = process.argv.slice(2)) {
     rmSync(caseReceiptPath, { force: true });
     console.log(`\n# realm-scale case ${testCase.id}`);
     try {
-      const soakArgs = [
-        '--years', String(testCase.years),
-        '--settlements', String(testCase.settlements),
-        '--seed', testCase.seed,
-        '--case-id', testCase.id,
-        '--receipt', caseReceiptPath,
-      ];
-      if (testCase.behavioralControls?.neighborYears) {
-        soakArgs.push(
-          '--neighbor-control-years',
-          String(testCase.behavioralControls.neighborYears),
-        );
-      }
-      if (testCase.behavioralControls?.dark) soakArgs.push('--dark-control');
+      // ONE spelling of the child's argv, pure and pinnable (`soakArgsFor`, above).
+      const soakArgs = soakArgsFor(testCase, caseReceiptPath);
       await runSoak(soakArgs);
       const receipt = JSON.parse(readFileSync(caseReceiptPath, 'utf8'));
       if (!isPassingWholeWorldReceipt(receipt)) {
