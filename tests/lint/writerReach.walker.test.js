@@ -58,6 +58,7 @@ import {
   osrBuiltinMembersFromSource, writerIdentity, buildIndex, edgeMapOf, surfaceClosures,
   scanSurfaceReads, judgeWriters, keysToShapesOf, formatReach, parseReach, reviewableDark,
   shapesDigestOf, verdictDigestOf, detectorDigestOf, importEdgesOf, resolveSpecifier, reachFrom,
+  crossJoin, surfaceClassesOf,
 } from '../../scripts/lib/writer-reach-scan.mjs';
 import {
   WRITER_DARK_REGISTER, DARK_REASONS, CANONICAL_FIELDS,
@@ -67,6 +68,7 @@ import {
   measure, liveViewOf, compareDark, cohortOf, reportOf, run, BASELINE_PATH, SENTINEL_FLOOR,
 } from '../../scripts/check-writer-reach.mjs';
 import { identityOf, sourceFiles } from '../../scripts/check-observed-shape-readers.mjs';
+import { scanReaders as scanLegacyReaders } from '../../scripts/lib/legacy-reader-shape-scan.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (path) => readFileSync(join(ROOT, path), 'utf8');
@@ -85,6 +87,24 @@ const PLANTED_KEY = '__plantedWrittenKey';
  */
 let scansRun = 0;
 const countedScan = (args) => { scansRun += 1; return scanSurfaceReads(args); };
+
+/**
+ * Car 2's cross-join needs OSR's RAW findings, which come from OSR's own scanner,
+ * not this instrument's. It is a separate ~2.8 s pass and it is counted separately
+ * below, so the WRWALKER budget above stays exactly what it claims to be. Memoised:
+ * the two cross-join arms share the one pass.
+ */
+let osrScansRun = 0;
+let osrFindings = null;
+const ensureOsrScan = () => {
+  if (osrFindings) return osrFindings;
+  osrScansRun += 1;
+  osrFindings = scanLegacyReaders({
+    files: sourceFiles(ROOT), shapes: live.corpus.shapes, arrayShapes: live.corpus.arrayShapes,
+    singleHome: live.corpus.singleHome, rootShapes: live.corpus.rootShapes, minRows: MIN_ROWS, root: ROOT,
+  }).findings;
+  return osrFindings;
+};
 
 /** @type {Awaited<ReturnType<typeof measure>>} */
 let live;
@@ -219,6 +239,48 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     expect(DARK_REASONS).toEqual(['dark-by-construction', 'engine-internal', 'pending-surface']);
   });
 
+  test('the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity', () => {
+    const frozen = baseline.surfaceReach;
+    let checked = 0;
+    for (const row of live.verdicts.values()) {
+      if (row.verdict === 'THIN') continue;
+      const formatted = formatReach(row.reach);
+      expect(frozen[row.identity], `${row.identity} is missing from the frozen surfaceReach`).toBe(formatted);
+      expect(formatReach(parseReach(formatted)), `${row.identity} does not round-trip`).toBe(formatted);
+      if (row.verdict === 'LIT') checked += 1;
+    }
+    expect(checked).toBe(liveView.population.lit);
+    expect(Object.keys(frozen).length).toBe(live.verdicts.size);
+    // The frozen map is the thing Car 2 hands CHARSET and READERREVIEW, so its SIZE
+    // is a STOP of its own: never ship a multi-megabyte register.
+    expect(JSON.stringify(frozen).length, 'surfaceReach must stay under 1 MB').toBeLessThan(1_000_000);
+  });
+
+  test('CHARSET_SURFACES mirrors SURFACE_CLASSES minus news and minus web-transitive — the six RENDERING classes, pinned for the day CHARSET Car 1 lands', () => {
+    // §1.10 states CHARSET_SURFACES as SIX, "SURFACE_CLASSES minus `news` and minus
+    // `web-transitive`", and §1.11 gives `json-export` its own charset arithmetic
+    // ("web-display/foundry/json-export unbounded minus the bans"). The pin the same
+    // sentence SPELLS — filter(c => c !== 'news' && !REPORT_ONLY_CLASSES.includes(c))
+    // — yields FIVE, because REPORT_ONLY_CLASSES carries json-export as well as
+    // web-transitive. The cardinality and the arithmetic agree with each other and
+    // disagree with the spelling, so the SIX is pinned here and the contradiction is
+    // reported rather than silently resolved in code. CHARSET Car 1 will code to one
+    // of the two and red on the other; this is the target it must match.
+    const renderingClasses = SURFACE_CLASSES.filter((cls) => cls !== 'news' && cls !== 'web-transitive');
+    expect(renderingClasses).toEqual([
+      'web-display', 'dossier-pdf', 'campaign-pdf', 'world-book', 'foundry', 'json-export',
+    ]);
+    expect(renderingClasses.length).toBe(6);
+    expect(SURFACE_CLASSES.filter((cls) => cls !== 'news' && !REPORT_ONLY_CLASSES.includes(cls)).length)
+      .toBe(5);
+    expect(renderingClasses.every((cls) => SURFACE_CLASSES.includes(cls))).toBe(true);
+    // `surfaceClassesOf` is the accessor CHARSET and READERREVIEW consume (§7.4).
+    const lit = surfaceClassesOf('name on settlement', live.verdicts);
+    expect(lit.verdict).toBe('LIT');
+    expect(lit.formatted).toBe(formatReach(lit.reach));
+    expect(surfaceClassesOf('no such identity at all', live.verdicts)).toBeNull();
+  });
+
   test("the identity grammar is OSR's: writerIdentity(k, s) equals identityOf(a canonical six-field legacy finding carrying key k and shapes [s]), and the bare two-field form is refused", () => {
     const key = 'prosperity';
     const shape = 'economicState';
@@ -344,6 +406,104 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     const collapsed = { ...liveView, population: { ...liveView.population, judged: 1 } };
     expect(compareDark(collapsed, baseline).sentinel.length, 'a collapsed population must RED, not green')
       .toBeGreaterThan(0);
+  });
+
+  test('THE CROSS-JOIN NAMES THE CULTURE CLASS: a synthetic OSR finding "culture on settlement" in generateCampaignPDF.js joined with the written "culture on config" reports a shape-mismatched key on campaign-pdf', () => {
+    // The SYNTHETIC plant stays beside the live arm as the discrimination proof: it
+    // shows the join fires on a reader/writer shape mismatch inside a counting
+    // closure, independently of whatever the tree happens to contain today.
+    const planted = crossJoin({
+      osrFindings: [{
+        file: 'src/utils/generateCampaignPDF.js', key: 'culture', line: 1, pos: 0,
+        shapes: ['settlement'], text: 'settlement.culture',
+      }],
+      corpus: live.corpus, closures: live.closures, root: ROOT,
+    });
+    expect(planted.map((row) => `${row.key} ${row.readerShape} <- ${row.writerShape}`).sort())
+      .toEqual(['culture settlement <- _config', 'culture settlement <- config']);
+    // …and the same finding OUTSIDE every counting closure joins nothing.
+    const outside = crossJoin({
+      osrFindings: [{
+        file: 'src/generators/steps/resolveConfig.js', key: 'culture', line: 1, pos: 0,
+        shapes: ['settlement'], text: 'settlement.culture',
+      }],
+      corpus: live.corpus, closures: live.closures, root: ROOT,
+    });
+    expect(outside).toEqual([]);
+  });
+
+  test('THE CULTURE CLASS IS STILL LIVE: the dossier view model and the quick guide read culture on settlement and npcs while the writer is config — six rows, exact, a review-backlog wiring finding', () => {
+    // PAIDFIX repair 1 struck the three generateCampaignPDF.js sites and the campaign
+    // PDF IS gone from this join. Two readers remain, and the readers’ SHAPE is what
+    // is wrong, not the writer’s. When the review fixes them this arm re-records to
+    // EMPTY with an anchor: bank the win, never loosen the assertion.
+    const rows = crossJoin({
+      osrFindings: ensureOsrScan(), corpus: live.corpus, closures: live.closures, root: ROOT,
+    });
+    const culture = rows.filter((row) => row.key === 'culture')
+      .map((row) => `${row.file} | ${row.readerShape} <- ${row.writerShape}`).sort();
+    expect(culture).toEqual([
+      'src/domain/summary/settlementQuickGuide.js | settlement <- _config',
+      'src/domain/summary/settlementQuickGuide.js | settlement <- config',
+      'src/pdf/lib/viewModel.js | npcs <- _config',
+      'src/pdf/lib/viewModel.js | npcs <- config',
+      'src/pdf/lib/viewModel.js | settlement <- config',
+      'src/pdf/lib/viewModel.js | settlement <- _config',
+    ].sort());
+    expectAbsentWithAnchor(
+      culture.map((row) => row.split(' | ')[0]), 'src/utils/generateCampaignPDF.js',
+      'src/pdf/lib/viewModel.js',
+      'the campaign PDF left this join at PAIDFIX repair 1 and the view model did not — a win already banked, beside a debt still open',
+    );
+    // The join as SPECIFIED is spec-faithful and unusable as a bare alert, which is
+    // why Car 2 asserts named classes exactly and REPORTS the rest grouped by key.
+    expect(rows.length).toBeGreaterThan(5000);
+    const byKey = new Map();
+    for (const row of rows) byKey.set(row.key, (byKey.get(row.key) ?? 0) + 1);
+    expect([...byKey].sort((a, b) => b[1] - a[1])[0][0]).toBe('id');
+    expect(osrScansRun, 'the cross-join shares ONE OSR pass across both arms').toBe(1);
+  });
+
+  test("the web-only gap report lists identities LIT on web-display with no paid-PDF reach, and the recon's culture case is no longer among them", () => {
+    const gap = liveReport.webOnlyGap;
+    expect(gap.length).toBeGreaterThan(0);
+    for (const identity of gap) {
+      const row = live.verdicts.get(identity);
+      expect(row.verdict).toBe('LIT');
+      expect(row.reach['web-display']).toBeTruthy();
+      expect(row.reach['dossier-pdf']).toBeFalsy();
+      expect(row.reach['campaign-pdf']).toBeFalsy();
+      expect(row.reach['world-book']).toBeFalsy();
+    }
+    // `culture on config` reaches all three paid surfaces at grade R, so the recon’s
+    // case is a WIN already banked and must not reappear in this report.
+    const cultureReach = live.verdicts.get('culture on config').reach;
+    expect(cultureReach['campaign-pdf']).toBe('R');
+    expect(cultureReach['dossier-pdf']).toBe('R');
+    expect(cultureReach['world-book']).toBe('R');
+    expectAbsentWithAnchor(gap, 'culture on config', gap[0],
+      'the gap report is non-empty, so culture’s absence from it is a measurement and not an empty list');
+  });
+
+  test('pendingSurfaceBacklog returns exactly the pending-surface rows, sorted by surface then identity', () => {
+    const backlog = pendingSurfaceBacklog();
+    expect(backlog.map((row) => row.identity)).toEqual([
+      'isolationSupport on settlement',
+      'magicDependent on isolationSupport',
+      'requiredCapacity on isolationSupport',
+    ]);
+    for (const row of backlog) {
+      expect(row.surface).toBe('web-display');
+      expect(COUNTING_CLASSES).toContain(row.surface);
+      expect(row.car).toMatch(/§\d+/);
+      expect(() => read(row.carArtifact)).not.toThrow();
+      expect(live.verdicts.get(row.identity).verdict).toBe('DARK');
+    }
+    const sorted = [...backlog].sort((a, b) => (a.surface === b.surface
+      ? (a.identity < b.identity ? -1 : 1) : (a.surface < b.surface ? -1 : 1)));
+    expect(backlog).toEqual(sorted);
+    expect(backlog.length).toBe(baseline.pendingSurfaceCeiling);
+    expect(liveReport.pendingSurfaceBacklog).toEqual(backlog);
   });
 
   test('the export allowlist arm reaches json-export at grade A for exactly the allowlisted keys, and json-export does not count toward LIT', () => {
