@@ -22,7 +22,7 @@ import { readFileSync, writeFileSync, existsSync, renameSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  measureTree, loadTuningRegister, REGISTER_REL, UNIT_VOCABULARY, SCHEMA_VERSION,
+  measureTree, loadTuningRegister, deskSheet, REGISTER_REL, UNIT_VOCABULARY, SCHEMA_VERSION,
 } from './lib/tuning-inventory.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -213,6 +213,45 @@ function scaffoldDeclared() {
   console.log('Every row is DRAFT and every value is UNSIGNED. The owner signs at the sitting.');
 }
 
+/**
+ * THE SITTING SHEET. What the owner needs in front of them to sign a row: what it is, what
+ * unit it carries, what it holds now, and how much of the estate reads it. Roster-first,
+ * then united tables, then the rest — because the sitting works down from what it came to
+ * decide, not alphabetically.
+ *
+ * ⛔ IT PRINTS. IT DOES NOT PROPOSE. There is no recommended value in this output and there
+ * is no column for one.
+ */
+function desk() {
+  const register = loadTuningRegister(ROOT);
+  const inventory = measureTree(ROOT, register);
+  const roster = (register.homes ?? [])
+    .filter((home) => home.kind === 'tables')
+    .flatMap((home) => (home.exports ?? []).map((name) => `${home.file}#${name}`));
+  const { rows, moduleSideExcluded } = deskSheet(register, inventory, { roster });
+
+  console.log('THE TUNING SITTING — DESK SHEET');
+  console.log(`  ${rows.length} rows on the desk; every value below is UNSIGNED and is the owner's to sign.`);
+  console.log(`  module-side, not on the desk: ${moduleSideExcluded}`);
+  console.log('');
+  for (const row of rows) {
+    if (row.unit === null) continue;
+    console.log(`${row.onRoster ? '*' : ' '} ${row.id}`);
+    console.log(`    status ${row.status}   keys ${row.keys}   read by ${row.namedDependents} module(s) by name, ${row.dependents} by file`);
+    if (row.roles.length) console.log(`    role(s) ${row.roles.join(', ')}`);
+    for (const [key, unit] of Object.entries(row.unit)) {
+      const value = row.values[key];
+      const band = row.band?.[key];
+      console.log(`    ${key.padEnd(28)} ${String(unit).padEnd(12)} ${JSON.stringify(value)}${band ? `  band [${band[0]}, ${band[1]}]` : '  band -'}`);
+    }
+    console.log('');
+  }
+  const unitless = rows.filter((row) => row.unit === null);
+  console.log(`AWAITING A UNIT — not signable until each carries one: ${unitless.length}`);
+  for (const row of unitless.slice(0, 12)) console.log(`    ${row.id} (${row.keys} keys)`);
+  if (unitless.length > 12) console.log(`    ... and ${unitless.length - 12} more`);
+}
+
 function report() {
   const register = loadTuningRegister(ROOT);
   const inventory = measureTree(ROOT, register);
@@ -246,4 +285,5 @@ function report() {
 }
 
 if (has('--scaffold-declared')) scaffoldDeclared();
+else if (has('--desk')) desk();
 else report();
