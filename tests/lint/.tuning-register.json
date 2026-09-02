@@ -2081,8 +2081,20 @@
     }
   },
   "declaredGrowth": {
-    "unregisteredNamed": {},
-    "bareDecimals": {}
+    "unregisteredNamed": {
+      "src/domain/relationships/canonicalRelationship.js": {
+        "sites": 1,
+        "introducedAt": "754856b125828dc555359d6df0e0632be9636a09",
+        "cause": "T13 Car P-prime replaced a bare computed population bonus with the named constant POPULATION_SATURATION, so this file's +1 unregistered-named is the counterpart of its own -1 bare-decimal win in the same commit. The register is scoring the act it exists to encourage; the name earns its register row when the owner signs the estate, not by a landing."
+      }
+    },
+    "bareDecimals": {
+      "src/domain/worldPulse/thievesGuild.js": {
+        "sites": 2,
+        "introducedAt": "754856b125828dc555359d6df0e0632be9636a09",
+        "cause": "T13 Car P-prime retired an eager det-math call site by placement, and the two literals 0.6 and 0.4 arrived on a single placement-cure line beside the already-registered GUILD_TUNING table. No value was chosen here: they are the constants the retired call site already computed with, relocated rather than authored."
+      }
+    }
   },
   "soakBandAliases": {
     "BASE": {
