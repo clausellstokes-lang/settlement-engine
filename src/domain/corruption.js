@@ -20,6 +20,7 @@
 
 import { institutionHasTag, TAG } from '../lib/entities.js';
 import { prosperityRank01 } from './prosperityRank.js';
+import { detExp } from '../kernel/detMath.js';
 // TRAIT_ALIGNMENT lives in the zero-import leaf data/npcTraitWeights.js (npcData.js
 // re-exports it). npcAlignmentScore below reads it. corruption.js is EAGER (first paint),
 // so it imports the LIGHT leaf directly — importing from npcData.js would drag that 64 kB
@@ -529,7 +530,7 @@ export const GUILD_TUNING = Object.freeze({
 export function guildStrength({ capturedPowers = [], distinctArchetypes = 0 } = {}) {
   const totalShare = (Array.isArray(capturedPowers) ? capturedPowers : [])
     .reduce((a, p) => a + n01((Number(p) || 0) / 100), 0);
-  const base = 1 - Math.exp(-totalShare * GUILD_TUNING.powerRate); // saturating
+  const base = 1 - detExp(-totalShare * GUILD_TUNING.powerRate); // saturating
   const diversityMult = 0.6 + 0.4 * Math.min(1, (Number(distinctArchetypes) || 0) / GUILD_TUNING.diversityFull);
   return clamp(base * diversityMult, 0, 1);
 }

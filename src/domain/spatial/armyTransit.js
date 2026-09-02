@@ -46,6 +46,7 @@
 
 import { candidateRoutes, hopWeeks, hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
 import { chooseRoute, riskToleranceFromAlignment } from './embattlement.js';
+import { detExp } from '../../kernel/detMath.js';
 
 // ── Tuning (documented here; retuned in the M5 + checkpoint soaks) ─────────────
 export const ARMY_TRANSIT_TUNING = Object.freeze({
@@ -260,7 +261,7 @@ function round4(v) {
 }
 /** The standard logistic. @param {number} x @returns {number} */
 function logistic(x) {
-  return 1 / (1 + Math.exp(-x));
+  return 1 / (1 + detExp(-x));
 }
 
 // ── The activation gate (dormancy / byte-identity seam) ───────────────────────
