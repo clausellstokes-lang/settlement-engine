@@ -39,10 +39,14 @@
  * and a tick, and `bandCrossingReceipt` REFUSES any non-integer number in any field.
  * A float cannot reach prose through this grammar because a float cannot enter it.
  *
- * PURE. No world state, no store, no PRNG, no imports beyond the time base.
+ * PURE. No world state, no store, no PRNG. Two imports and no more: the one time base,
+ * and the deterministic half-life kernel that `halfLifeFactor` delegates to (T13 Car 5
+ * family (i) — the sentence above used to read "no imports beyond the time base", and
+ * routing the decay made it false, so it is corrected here rather than left to rot).
  * Consumed by nothing at land time — dark by construction (the lane-P precedent).
  */
 import { INTERVAL_WEEKS } from './intervalWeeks.js';
+import { halfLifeKeep } from '../../kernel/detMathDecay.js';
 
 /**
  * The shared half-life ladder, ASCENDING (fastest-forgetting first). Volumes pick a
@@ -106,6 +110,18 @@ export function halfLifeWeeksOf(band) {
  * neutral they do not have, so this helper takes no neutral, no clamp, no band and no
  * rounding — it is the factor and nothing else.
  *
+ * ⭐ THE ARITHMETIC IS THE KERNEL'S, NOT THE PLATFORM'S — T13 Car 5 family (i), and this is
+ * the LAST transcendental site in the six census trees. `Math.pow` is implementation-
+ * approximated per the ECMAScript spec, so this one expression could fork a same-seed world
+ * ACROSS engines while every same-engine golden, lint rule and worker byte-pin stayed green.
+ * `halfLifeKeep` computes the same quantity from +, -, *, / and compare only, so the factor
+ * is now bit-identical on every conforming engine. It is not merely a substitute: pow(0.5, k)
+ * IS 2^-k, so the kernel skips the log2 leg entirely and whole-period decay becomes EXACT —
+ * one half-life returns exactly 0.5, two exactly 0.25, forever, which the platform call did
+ * not guarantee. This is a DECLARED SHIFT, not a zero-shift cure: last-place digits move, and
+ * they move for every one of this function's twelve consumers at once. That is the whole
+ * point of the T13 window, and the movement is measured at the tip, never assumed away.
+ *
  * ⚠ UNITS — THE ONE INVARIANT. `age` and `halfLife` are consumed ONLY through their RATIO
  * and must be in the SAME unit AS EACH OTHER. Seven callers pass ticks and five pass weeks,
  * and both are correct, because neither number is ever compared with another caller's clock.
@@ -116,7 +132,7 @@ export function halfLifeWeeksOf(band) {
  * @returns {number} the surviving fraction
  */
 export function halfLifeFactor(age, halfLife) {
-  return Math.pow(0.5, age / halfLife);
+  return halfLifeKeep(age, halfLife);
 }
 
 /**

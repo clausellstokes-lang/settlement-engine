@@ -27,17 +27,29 @@
  *     `--update`.
  *
  * Math.sqrt is exempt BY SPEC (required correctly rounded — cross-engine exact).
+ *
+ * ⭐⭐ RETIRED AT ZERO — T13 Car 5, 2026-09-02. The trees carry NO transcendental site at
+ * all: CEILING is 0, the baseline is `{ total: 0, files: {} }`, and the declared-overrun
+ * ledger that used to widen this guard for `bandedStock.js` is DELETED, on the instruction
+ * the ledger wrote for its own removal. From here this file is a REGROWTH guard rather than
+ * a burn-down: the eslint transcendental ban (eslint.config.js, all eight determinism blocks,
+ * roster imported from this counter) refuses the SPELLINGS at edit time, and the arms below
+ * refuse the COUNT. Both are needed — the ban cannot see an eslint-ignored file, and the
+ * counter cannot see a spelling it does not lex.
+ *
+ * ⚠⚠ NO SHELL-OUT AND NO DIRECTORY SCAN MAY EVER BE WRITTEN INTO THIS FILE. It is one of
+ * the estate's two NAMED COUNTEREXAMPLES for the walker-census law's DELEGATED arm
+ * (tests/lint/testRatchet.test.js, "NO SINGLE ARM CLASSIFIES THEM ALL"): that pin asserts the
+ * NAME, TITLE and STRUCTURE arms all MISS this file and only A4 — the walk delegated to
+ * scripts/count-transcendental-math.mjs — reaches it. A3's predicate matches both a directory
+ * read and a shell-out, so writing either here flips the structure arm true and destroys the
+ * counterexample. That was MEASURED, not feared, when the attribution leg's first cut did it.
+ * The law outlived the ledger it was written for, so it is kept here, in the header.
  */
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
-import {
-  GIT_OBJECTS_REACHABLE,
-  UNRESOLVABLE_WELL_FORMED_SHA,
-  gitDirPresent,
-  gitResolvesCommit,
-} from '../helpers/gitObjectStore.js';
 import { countText, countTrees, TREES } from '../../scripts/count-transcendental-math.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -49,80 +61,38 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // with its draw stack (ODQ §725/§772), taking its one site with it. Banked here rather
 // than left as headroom, so the freed slot cannot be silently re-occupied — a deletion
 // earns the same monotone-down treatment a reformulation does.
-const CEILING = 48;
+//
+// ⭐⭐ 48 → 0 on 2026-09-02 (T13 Car 5, family (i)). THE RETIREMENT, and it is banked at
+// ZERO rather than at "one, declared". The last site was `bandedStock.js`'s `halfLifeFactor`
+// — the estate's ONE spelling of `Math.pow(0.5, age / halfLife)`, which T13 Car 3 had already
+// made canonical by routing twelve hand-spelled copies onto it. Car 5 routed that one
+// expression onto the kernel's `halfLifeKeep`, so the census fell 1 → 0 and this ceiling
+// follows it down in the SAME act, exactly as the declared-overrun row it replaces demanded
+// ("clearing it means reformulating the half-life itself … and deletes this row and the
+// ceiling with it"). MEASURED at the tip, not predicted: `node
+// scripts/count-transcendental-math.mjs` → `0 sites across 0 files`.
+//
+// ⛔ A CEILING OF ZERO IS A DIFFERENT KIND OF PROMISE, so read it as one. Every arm below
+// that compares the tree to the baseline is now comparing an empty set to an empty set, and
+// an empty-set comparison is the classic vacuous green. That is why the tree arm was
+// REDESIGNED rather than left alone: `current.total` is asserted to be EXACTLY 0 (a positive
+// claim about a live walk, not the absence of a complaint), and the detector's own countText
+// fixtures — synthetic text no cure can ever retire — carry the proof that the counter can
+// still count. Those two together are what a zero baseline needs and a shrinking one did not.
+const CEILING = 0;
 
 const baseline = JSON.parse(readFileSync(join(ROOT, 'tests/lint/.transcendental-math-baseline.json'), 'utf8'));
 const current = countTrees();
 
-// ── ⛔ THE DECLARED-OVERRUN LEDGER (2026-08-07 walker-census lane) ───────────
-//
-// TWO ROWS OF THIS FILE SAT IN scripts/.test-ratchet-baseline.json:
-//
-//   … :: frozen baseline governance baseline exactly matches the tree (airtight …)
-//   … :: frozen baseline governance no file exceeds its baseline (new files get 0) …
-//
-// Each is ONE assertion over an OPEN, tree-derived population, so freezing it froze THE
-// WHOLE POPULATION: a THIRD file growing a transcendental — or these two growing from
-// one site to twenty — produced the byte-identical failing verdict and reddened nothing.
-// A failing TEST is debt; a failing WALKER is a DISABLED GUARD (CONTRIBUTING.md, "The
-// gate"), and this ratchet is a walker: it enumerates six source trees through
-// scripts/count-transcendental-math.mjs and compares against a frozen inventory.
-//
-// AND THE INVENTORY HAD ALREADY GROWN UNSEEN — the recorded
-// A-RED-RATCHET'S-CONTENTS-GROW-INVISIBLY hazard, measured rather than feared. The
-// baseline was frozen at 7e77c680 (2026-07-21) at 49 sites across 32 files. The tree
-// now measures 51 across 34, and BOTH new files landed AFTER the freeze while this
-// ratchet's verdict was banked as debt:
-//
-//   src/domain/worldPulse/dispositionLedger.js   1 site / baseline 0   (+1)
-//   src/domain/worldPulse/bandedStock.js         1 site / baseline 0   (+1)
-//
-// ⚠ THE TWO ARE ONE SHAPE AND THE SECOND IS THE CURE FOR THE FIRST, WHICH IS WHY NEITHER
-// IS BURNED DOWN HERE. Both sites are the SAME expression — `Math.pow(0.5, age / halfLife)`,
-// the exponential half-life decay. bandedStock.js exists precisely to be the one home for
-// it (its own header records FIFTEEN hand-spelled call sites found on 2026-08-04), and
-// dispositionLedger.js:468 WAS such a site; T13 Car 3 ROUTED it and deleted its row.
-// Re-freezing here would bank a fork of a shared primitive; the honest cure is the routing
-// wave, and the sound long-run answer for the primitive itself is a rational/integer
-// reformulation, since `Math.pow` is implementation-approximated per the ECMAScript spec
-// and a same-seed world can therefore fork ACROSS engines. DECLARED DEBT, owed to that wave.
-//
-// MEASURED, NEVER TRANSCRIBED — `countTrees()` run inside an integrity-counted `git archive`
-// of committed abc5a78b (6,196 tracked paths in, 6,196 files out, `git status` clean), never
-// over the live shared tree (THE ARCHIVE-CENSUS LAW).
-//
-// ⛔ DO NOT run `--update` to make this list go away — it re-freezes the WHOLE TREE and would
-// bank both sites as permanent baseline, which is exactly the laundering this ledger exists
-// to refuse. Each row is cleared by ROUTING or REFORMULATING the site, then deleting the row.
-const DECLARED_OVERRUNS = Object.freeze({
-  'src/domain/worldPulse/bandedStock.js': {
-    sites: 1,
-    introducedAt: '59df13a97d3e01de7ade2048ab4534be1c5f7cd0',
-    cause: 'SP-A minted the shared band/decay shapes leaf, and the ONE canonical '
-      + '`Math.pow(0.5, age / weeks)` now sits in `halfLifeFactor` — T13 Car 3 collapsed the '
-      + 'other twelve copies onto it, so the site the family was always meant to reach is '
-      + 'reached. It is the LAST one to remove, not the first: clearing it means reformulating '
-      + 'the half-life itself, which is T13 Car 4 (i) and deletes this row and the ceiling with it.',
-  },
-});
-
-// A LITERAL total EXCESS over the frozen baseline, not a figure derived from the object it
-// is supposed to cap — a ceiling read out of its own list proves list == list and rises
-// silently with every row. MONOTONE DOWN. You may burn it; you may never pad it.
-const DECLARED_OVERRUN_CEILING = 1;
-
-/** Baseline allowance, widened ONLY by an attributed declared overrun. */
-const allowanceFor = (file) => DECLARED_OVERRUNS[file]?.sites ?? baseline.files[file] ?? 0;
-
-/** What the trees must look like: the frozen baseline OVERLAID with the declared overruns. */
-const expectedFiles = () => {
-  const out = { ...baseline.files };
-  for (const [file, d] of Object.entries(DECLARED_OVERRUNS)) out[file] = d.sites;
-  return out;
-};
-
-/** The excess a declared row carries over its baseline allowance (0 if it has none). */
-const excessOf = (file, d) => Math.max(0, d.sites - (baseline.files[file] ?? 0));
+// ── THE DECLARED-OVERRUN LEDGER IS GONE (T13 Car 5, 2026-09-02) ──────────────
+// It held exactly one row — `bandedStock.js`, 1 site, introduced at 59df13a97d3e — plus a
+// DECLARED_OVERRUN_CEILING of 1 and four governance arms of its own. It is deleted whole,
+// on the instruction it wrote for itself: "the ledger emptied — if both sites are genuinely
+// routed or reformulated, DELETE this ledger and this describe together and let the plain
+// baseline do the work again." The row was CURED, never laundered: the site was reformulated
+// onto the kernel, the census fell to zero, and the widening path was removed rather than
+// re-frozen. `--update` was never run, and never needed to be — the baseline was already
+// `{ total: 0, files: {} }` and stays byte-identical through this act.
 
 describe('transcendental-math ratchet — the detector is honest', () => {
   test('counts real transcendental calls and ** operators', () => {
@@ -167,7 +137,7 @@ describe('transcendental-math ratchet — frozen baseline governance', () => {
   test('no file exceeds its baseline (new files get 0) — reformulate, do not widen', () => {
     const regressions = [];
     for (const [file, count] of Object.entries(current.files)) {
-      const base = allowanceFor(file);
+      const base = baseline.files[file] ?? 0;
       if (count > base) regressions.push(`${file}: ${count} transcendental sites (allowance ${base})`);
     }
     expect(
@@ -186,158 +156,43 @@ describe('transcendental-math ratchet — frozen baseline governance', () => {
   });
 
   test('baseline exactly matches the tree (airtight against any drift mode)', () => {
-    // THE TOTALITY ARM, and the reason the declared overruns are OVERLAID rather than
-    // skipped: an exclusion would blind this comparison to the two files entirely, so a
-    // declared file could then drift to any count at all. Overlaying keeps EVERY file in
-    // the scanned trees under an exact-equality check — the declared two simply have a
-    // different, attributed, capped expected value.
-    expect(current.files).toEqual(expectedFiles());
-    const declaredExcess = Object.entries(DECLARED_OVERRUNS).reduce((a, [f, d]) => a + excessOf(f, d), 0);
-    expect(current.total).toBe(baseline.total + declaredExcess);
+    // THE TOTALITY ARM. It used to compare against the baseline OVERLAID with the declared
+    // overruns, because an exclusion would have blinded it to the declared files entirely.
+    // With the ledger cured away there is nothing to overlay: every file in the scanned trees
+    // is under a plain exact-equality check again, which is the state this ratchet was always
+    // burning down toward. Both sides are `{}` today — see the ZERO-BASELINE note above the
+    // ceiling for why that is not left as the only claim.
+    expect(current.files).toEqual(baseline.files);
+    expect(current.total).toBe(baseline.total);
   });
 
   test('the committed ceiling never rises (ratchet is monotone-down)', () => {
     expect(baseline.total).toBeLessThanOrEqual(CEILING);
   });
 
-  test('non-vacuity: the walker still reaches real sites in the real trees', () => {
+  test('THE TREE IS AT ZERO — a positive claim on a live walk, not an absent complaint', () => {
     // ⚠ THIS ARM WAS NAMED FOR A WALKER IT NEVER ASKED. Until T13 it read
     // `baseline.files[...]` — the FROZEN JSON on disk — so it proved a key existed in a
     // file, never that the scan reached the trees; a walker that returned {} would have
     // left it green. It also anchored on contestMath.js by NAME, and T13 TRANS cured that
     // file to zero, so the rotted anchor red on a site that had simply been FIXED. A
     // liveness anchor must never name a file the program exists to retire.
-    // The durable form asks the LIVE scan: while any governed site remains, the walk must
-    // find it. The detector's own countText fixtures above carry the other half — that the
-    // counter can still count — on synthetic text that no cure can retire.
-    // At CEILING = 0 (Car 5's retirement act) this arm becomes `current.total === 0` and
-    // the fixtures carry non-vacuity alone, exactly as §5 of the charter specifies.
-    expect(Object.keys(current.files).length).toBeGreaterThanOrEqual(1);
-    expect(current.total).toBeGreaterThanOrEqual(1);
-  });
-});
-
-// ── ⛔ THE DECLARED-OVERRUN LEDGER'S OWN GOVERNANCE ──────────────────────────
-// The ledger widens two live guards, so it carries the same discipline the test census it
-// replaced carries: every row ATTRIBUTED, the set EXACT in both directions, and both sizes
-// capped by literals that only ever go down. Without these arms the ledger is a softer
-// baseline with no `--update` guard on it at all.
-//
-// ── THE ATTRIBUTION ARM'S EXISTENCE LEG (F-S1-J8) ────────────────────────────
-// The arm below attested `introducedAt` BY 40-HEX SHAPE ALONE, and a shape check accepts any
-// well-formed string — `f`×40 satisfies it exactly as well as a real commit does. A sha that
-// LOOKS bisectable and is not is worse than a missing one, because the next lane plans
-// against it. This leg RESOLVES each declared sha against the real object store, ONE
-// `git cat-file -e <sha>^{commit}` PER ROW.
-//
-// ⚠ IT IS ENVIRONMENT-AWARE AND STILL FAIL-CLOSED, which are not in tension. The wave-end
-// attribution method runs this suite inside `git archive` extractions, and an archive tree
-// carries NO object store at all, so an unconditional shell-out would red this walker in
-// exactly the trees it is read in most — a disabled guard bought with rigour. So the branch
-// is ASSERTED, never trusted: where git answers, a well-formed FAKE sha must FAIL to resolve
-// before any row is believed (the negative control that stops this leg passing vacuously),
-// and where it does not, the tree must genuinely carry no `.git` entry — so "no git here"
-// can never become a silent downgrade back to the shape check.
-//
-// ⚠⚠ THE SHELL-OUT LIVES IN tests/helpers/gitObjectStore.js AND MAY NOT MOVE BACK IN HERE.
-// This file is one of the estate's two NAMED COUNTEREXAMPLES for the walker-census law's
-// DELEGATED arm (tests/lint/testRatchet.test.js, "NO SINGLE ARM CLASSIFIES THEM ALL"): the
-// pin asserts that the NAME, TITLE and STRUCTURE arms all MISS this file and only A4 reaches
-// it. A3's predicate matches a shell-out to git, so writing `execFileSync` here flips the
-// structure arm true and destroys the counterexample — MEASURED, not feared: the first cut of
-// this leg did exactly that and reds testRatchet's pin by name.
-
-describe('transcendental-math ratchet — the declared-overrun ledger is honest', () => {
-  const declaredFiles = Object.keys(DECLARED_OVERRUNS);
-
-  test('⛔ EVERY DECLARED OVERRUN IS ATTRIBUTED — an unattributed row is a defect laundered into debt', () => {
-    // THE EXISTENCE LEG'S OWN HONESTY, TAKEN BEFORE ANY ROW IS TRUSTED BY IT.
-    if (GIT_OBJECTS_REACHABLE) {
-      expect(
-        gitResolvesCommit(UNRESOLVABLE_WELL_FORMED_SHA),
-        'the existence leg cannot discriminate — a 40-hex sha that is a commit in NO repository'
-        + ' RESOLVED, so `git cat-file -e` is answering yes to everything and every row below'
-        + ' would pass this arm vacuously',
-      ).toBe(false);
-    } else {
-      expect(
-        gitDirPresent(),
-        'git could not read HEAD in a tree that HAS a `.git` entry — the existence leg was'
-        + ' skipped for a reason that is NOT "this is a `git archive` extraction". Repair the'
-        + ' environment; do not let the attribution arm quietly degrade back to a shape check.',
-      ).toBe(false);
+    //
+    // At CEILING = 0 the arm inverts, exactly as the charter's §5 specifies. While sites
+    // remained, non-vacuity meant "the walk must FIND one". With none left, that form would
+    // red forever, and its negation — "the walk finds none" — is satisfied just as well by a
+    // walk that reached nothing at all. So this arm asserts the ZERO as a measured quantity
+    // and proves the walk was REAL the only way left: by checking that the tree it walked is
+    // the tree that exists. The detector's own countText fixtures above carry the other half
+    // — that the counter can still count — on synthetic text no cure can retire.
+    expect(current.total).toBe(0);
+    expect(Object.keys(current.files)).toEqual([]);
+    // THE WALK REACHED SOMETHING: the six trees are real directories with real code in them.
+    // Without this, `countTrees()` returning `{}` because every path was wrong would satisfy
+    // the two assertions above perfectly.
+    expect(TREES.length).toBe(6);
+    for (const tree of TREES) {
+      expect(existsSync(join(ROOT, tree)), `${tree} is not a directory — the walk cannot have reached it`).toBe(true);
     }
-    for (const [file, d] of Object.entries(DECLARED_OVERRUNS)) {
-      expect(TREES.some((t) => file.startsWith(`${t}/`)), `${file} is outside the scanned trees`).toBe(true);
-      expect(Number.isInteger(d.sites) && d.sites > 0, `${file}: malformed site count`).toBe(true);
-      expect(
-        String(d.introducedAt),
-        `${file}: introducedAt must be a 40-hex sha — an overrun nobody can bisect cannot be argued about`,
-      ).toMatch(/^[0-9a-f]{40}$/);
-      // ...AND THE SHAPE IS NOT THE CLAIM. One `git cat-file -e` per row, so an invented but
-      // plausible sha reds HERE, named, instead of reading as an attribution forever.
-      if (GIT_OBJECTS_REACHABLE) {
-        expect(
-          gitResolvesCommit(String(d.introducedAt)),
-          `${file}: introducedAt ${d.introducedAt} resolves to NO commit in this repository — a`
-          + ' well-formed sha nobody can check out is a fabricated attribution, not a bisect point',
-        ).toBe(true);
-      }
-      expect(String(d.cause).length, `${file}: declared with a stub, not an argument`).toBeGreaterThan(60);
-    }
-  });
-
-  test('⛔ the ledger is EXACT — a stale or padded row reds, and so does an un-banked shrink', () => {
-    const problems = [];
-    for (const [file, d] of Object.entries(DECLARED_OVERRUNS)) {
-      const cur = current.files[file];
-      const base = baseline.files[file] ?? 0;
-      if (cur === undefined) {
-        problems.push(`${file}: carries NO transcendental site any more — delete its declared row (bank the win)`);
-        continue;
-      }
-      if (cur !== d.sites) {
-        problems.push(
-          `${file}: declared ${d.sites} site(s), MEASURED ${cur} — if it shrank, lower the declared`
-          + ' figure (bank the win); if it grew, that is a REGRESSION, reformulate instead of raising the row',
-        );
-        continue;
-      }
-      if (cur <= base) problems.push(`${file}: no longer exceeds its baseline (${base}) — delete its declared row, the baseline covers it`);
-    }
-    expect(problems, `the declared-overrun ledger disagrees with the trees:\n  ${problems.join('\n  ')}`).toEqual([]);
-    // anchored: the loop above walked every declared row against a LIVE countTrees(), so the
-    // non-emptiness floor below is a floor on a real population, not on an empty object.
-    expect(
-      declaredFiles.length,
-      'the ledger emptied — if both sites are genuinely routed or reformulated, DELETE this ledger'
-      + ' and this describe together and let the plain baseline do the work again.',
-    ).toBeGreaterThan(0);
-  });
-
-  test('⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)', () => {
-    // The mirror of the exactness arm: the regression arm above reads `allowanceFor`, so a
-    // file over baseline is silent there IF it is declared. This arm proves the converse —
-    // nothing is over baseline WITHOUT a declared row — so the two together partition the
-    // scanned trees with no unnamed slack in them.
-    const undeclared = [];
-    for (const [file, count] of Object.entries(current.files)) {
-      if (file in DECLARED_OVERRUNS) continue;
-      const base = baseline.files[file] ?? 0;
-      if (count > base) undeclared.push(`${file}: ${count} site(s) against baseline ${base}`);
-    }
-    expect(undeclared, `undeclared overruns:\n  ${undeclared.join('\n  ')}`).toEqual([]);
-  });
-
-  test('the ledger ceilings never rise (both are monotone-down literals)', () => {
-    // THE ANTI-LAUNDERING CAP. The exactness arms above are satisfied by ANY set that
-    // matches the trees — including a set that GREW — so without a frozen ceiling the
-    // cheapest way to absorb the next regression would be "add a row and write a nice
-    // cause". These two literals close that: new debt cannot be declared, only cured.
-    const declaredExcess = Object.entries(DECLARED_OVERRUNS).reduce((a, [f, d]) => a + excessOf(f, d), 0);
-    expect(declaredExcess, 'the declared transcendental excess GREW — reformulate or route, do not widen the ledger')
-      .toBeLessThanOrEqual(DECLARED_OVERRUN_CEILING);
-    expect(declaredFiles.length, 'a THIRD file was declared — the ledger is monotone-down in rows too')
-      .toBeLessThanOrEqual(2);
   });
 });
