@@ -859,6 +859,37 @@ const ARGUED_UNLAYERED = Object.freeze({
     ]),
     readsReason: 'both INFORMATION reads are the ES charter\'s own vocabularies, called at their one home rather than copied here, and that is DELIBERATE: DESIGN_W_OPS §0 rules that this volume re-rules none of the ES charter\'s math, so §3.12\'s deliberation verdict and ES-5\'s three-word doctrine targeting are IMPORTED — a copied threshold or a transcribed target set would become a second spelling of one law that nobody notices until the two drift, and declaring the reach is what keeps the extension one-directional and visible',
   }),
+  // ── W-OPS O2 (2026-09-01): THE ACCEPTANCE SEAM'S SUBSTRATE LEAF ──────────────────
+  //
+  // The operation family's THIRD substrate leaf, and the same argument the two rows
+  // above carry, taken one car further. DESIGN_W_OPS §1 rules that GOAL, MISSION and
+  // ERRAND are three classes of ONE grammar; this leaf is the ACCEPTANCE half of that
+  // grammar — whether a principal takes the operation it was offered, priced against the
+  // register the offer was rooted at. Acceptance is willed in the same three ports the
+  // grammar is: INTERIOR's npc agency accepts a goal, INFORMATION's espionage layer and
+  // the corruption web accept a mission, GRAMMAR's envoy spine accepts an errand. A
+  // vocabulary spoken by three ports owns none of their subjects, which is precisely the
+  // roster's own criterion.
+  //
+  // ⛔ THE LAYER DOOR IS SHUT BY ARITHMETIC, exactly as it is for the pair above.
+  // `Object.keys(LAYER_PATTERNS)` is asserted at EXACTLY 7 in this file, so an eighth OPS
+  // family is a new PORT — a chair conversation on the FP volume's own §5 wave order, not
+  // something a train car may take in passing. The baseline door is shut by doctrine as
+  // well: a new .js under src/domain/worldPulse takes a family or an argued entry in the
+  // SAME commit, NEVER a baseline row, and the census scope regex recurses, so
+  // `operations/` is inside it from the day it exists.
+  //
+  // ⚠ `reads` IS MEASURED, NOT COPIED ACROSS — the warning the two rows above carry, and
+  // here the empty declaration is STRUCTURAL rather than incidental: this leaf has ZERO
+  // relative import specifiers of any kind, so its layered reach is empty before any
+  // filter runs. It takes every world fact as an argument and reaches no module at all,
+  // which is the machine form of "spoken by every port, speaking none back". The day it
+  // reaches one, the coverage arm above reds it by name.
+  'src/domain/worldPulse/operations/missionAcceptance.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'W-OPS substrate — the ACCEPTANCE verdict of the ONE typed operation record: the vetting/willingness/risk seam order, the closed refusal vocabulary, and the register-rooted pricing a principal answers an offer with, spelled by every port that wills an operation (INTERIOR wills goals, INFORMATION and the corruption web will missions, GRAMMAR wills errands); it owns no subject, decides no port\'s state, holds no clock, rolls nothing and walks no WORLD roster, taking every world fact as an argument, so what it owns is the VERDICT SHAPE rather than any port\'s subject',
+    reads: Object.freeze([]),
+  }),
 });
 
 /** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
@@ -999,7 +1030,7 @@ const ARGUED_HOSTS = Object.freeze([
 // L5's rule table, extracted verbatim from the pre-program-baselined npcAgency.js; owns no
 // subject, one delegate consumer, zero cross-layer pairs proven at the coupling (the full
 // argument sits on its roster entry above). Deliberate, in this diff, per this anchor's law.
-const ARGUED_ROSTER_CEILING = 27;
+const ARGUED_ROSTER_CEILING = 28;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;
