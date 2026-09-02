@@ -55,7 +55,7 @@ import {
   measureTree, discoverTables, tableSpan, flattenLeaves, spanDigest, astKeyNames,
   countBareDecimals, countUnregisteredNamed, resolveDependents,
   loadTuningRegister, loadTuningInventory, signatureStateOf, tuningRegisterFingerprint,
-  refreezeRefusals, signingRecordMalformations, tuningIdFor, REGISTER_REL,
+  refreezeRefusals, signingRecordMalformations, tuningIdFor, applySigningRecord, deskSheet, REGISTER_REL,
   TUNING_SHIFT_CAUSE_RE, UNIT_VOCABULARY, DIVERGENCE_REASONS, IDIOMS, REFUSALS,
   INVENTORY_REL, TREES_P1, TREES_P2P3, SCHEMA_VERSION,
 } from '../../scripts/lib/tuning-inventory.mjs';
@@ -751,6 +751,256 @@ describe('tuning register — one value, one home', () => {
       + ' and armed now so it is not written after the first signature makes it matter.').toEqual([]);
     expect(Object.values(register.tables).every((row) => row.status === 'draft'),
       'and the vacuity is in the data: every row is draft').toBe(true);
+  });
+});
+
+
+/* ================================================================= describe I */
+
+describe('tuning register — the signing door, rehearsed', () => {
+  const RECORDS_DIR = 'docs/tuning-signatures';
+  const TEMPLATE_REL = `${RECORDS_DIR}/_TEMPLATE.json`;
+
+  /** A fixture register and inventory, so the rehearsal never touches the estate's own. */
+  const fixture = () => {
+    const idA = 'src/domain/fixture/a.js#A_TUNING';
+    const idB = 'src/domain/fixture/b.js#B_TUNING';
+    const idC = 'src/domain/fixture/c.js#C_TUNING';
+    const idModule = 'src/domain/townCartography/cartographyTuning.js#MAP_TUNING';
+    return {
+      idA, idB, idC, idModule,
+      register: {
+        registerVersion: 1,
+        signatureVersion: 0,
+        signatures: [],
+        unitVocabulary: [...UNIT_VOCABULARY],
+        homes: [],
+        moduleSide: ['src/domain/townCartography/'],
+        tables: {
+          [idA]: { role: null, status: 'draft', signedAt: null, unit: { X: 'ticks' }, band: null, note: '' },
+          [idB]: { role: null, status: 'draft', signedAt: null, unit: { Y: 'weeks' }, band: null, note: '' },
+          [idC]: { role: null, status: 'draft', signedAt: null, unit: null, band: null, note: '' },
+          [idModule]: { role: null, status: 'draft', signedAt: null, unit: { Z: 'count' }, band: null, note: '' },
+        },
+        roles: {},
+        soakBandAliases: {},
+      },
+      inventory: {
+        tables: {
+          [idA]: { keys: 1, spanDigest: 'a'.repeat(64), leaves: { X: 1 }, dependents: [], namedDependents: [] },
+          [idB]: { keys: 1, spanDigest: 'b'.repeat(64), leaves: { Y: 2 }, dependents: [], namedDependents: [] },
+          [idC]: { keys: 1, spanDigest: 'c'.repeat(64), leaves: { Z: 3 }, dependents: [], namedDependents: [] },
+          [idModule]: { keys: 1, spanDigest: 'd'.repeat(64), leaves: { Z: 4 }, dependents: [], namedDependents: [] },
+        },
+      },
+    };
+  };
+  const recordFor = (ids, version = 1) => ({
+    ownerWords: 'these are the values I want the world to start from',
+    ownerDate: '2026-09-30',
+    odqRow: '\u00a7884.1',
+    seat: 'owner',
+    version,
+    ids,
+    note: '',
+  });
+
+  test('a version-one record signs exactly the ids it names and records their digests', () => {
+    const { register: base, inventory, idA, idB, idC } = fixture();
+    const applied = applySigningRecord({ register: base, inventory, record: recordFor([idA, idB]) });
+    expect(applied.ok, `the record must be admitted: ${applied.detail}`).toBe(true);
+    const next = applied.register;
+    expect(next.signatureVersion).toBe(1);
+    expect(next.tables[idA].status).toBe('signed');
+    expect(next.tables[idB].status).toBe('signed');
+    expect(next.tables[idC].status, 'and an id the record does NOT name stays draft — a record'
+      + ' signs exactly what it names and never one more').toBe('draft');
+    expect(next.signatures[0].digests[idA], 'the live digest is recorded AT the moment of'
+      + ' signing, which is what freezes the value: a later retune moves it, and moving a'
+      + ' signed digest is version N+1 by construction').toBe('a'.repeat(64));
+    expect(next.signatures[0].ids).toEqual([idA, idB]);
+    expect(next.signatures[0].goldenShiftRecord, 'and before the freeze it names no golden'
+      + ' shift record').toBeNull();
+    expect(base.tables[idA].status, 'the ORIGINAL register is untouched — the path is a pure'
+      + ' function returning a new object, which is how all-or-none stops being a promise and'
+      + ' becomes a property: there is no partial state it could leave behind').toBe('draft');
+  });
+
+  test('a record naming a unit-less table is refused whole', () => {
+    const { register: base, inventory, idA, idC } = fixture();
+    const applied = applySigningRecord({ register: base, inventory, record: recordFor([idA, idC]) });
+    expect(applied.refusal, 'signing a value whose meaning nobody wrote down signs a number,'
+      + ' not a decision').toBe('ID_NOT_IN_RECORD');
+    expect(applied.register, 'and the WHOLE write is refused, not the offending id alone —'
+      + ' otherwise a record could half-sign and the owner would have approved something'
+      + ' other than what they read').toBeNull();
+    // anchored: the same record without the unit-less id is admitted one line below, so this
+    // is a claim about the unit and not about the record's shape.
+    expect(applySigningRecord({ register: base, inventory, record: recordFor([idA]) }).ok).toBe(true);
+  });
+
+  test('a record naming a module-side id is refused', () => {
+    const { register: base, inventory, idModule } = fixture();
+    const applied = applySigningRecord({ register: base, inventory, record: recordFor([idModule]) });
+    expect(applied.refusal, 'the owner ruled that no map constant is launch tuning. The'
+      + ' register may INDEX them by totality; the sitting does not sign them.').toBe('ID_NOT_IN_RECORD');
+    expect(applied.detail).toContain('module-side');
+  });
+
+  test('versions are dense from one, and version two before version one is refused', () => {
+    const { register: base, inventory, idA, idB } = fixture();
+    const early = applySigningRecord({ register: base, inventory, record: recordFor([idA], 2) });
+    expect(early.refusal, 'a signature cannot sit in a gap').toBe('RECORD_VERSION_MISMATCH');
+    const first = applySigningRecord({ register: base, inventory, record: recordFor([idA], 1) });
+    expect(first.ok).toBe(true);
+    const again = applySigningRecord({ register: first.register, inventory, record: recordFor([idB], 1) });
+    expect(again.refusal, 'nor may one version be written twice').toBe('RECORD_VERSION_MISMATCH');
+    const second = applySigningRecord({ register: first.register, inventory, record: recordFor([idB], 2) });
+    expect(second.ok, 'and the next dense version is admitted').toBe(true);
+    expect(second.register.signatures.map((entry) => entry.version)).toEqual([1, 2]);
+  });
+
+  test('a signed table whose digest has moved is caught by the register arm', () => {
+    const { register: base, inventory, idA } = fixture();
+    const signed = applySigningRecord({ register: base, inventory, record: recordFor([idA]) }).register;
+    const moved = { tables: { ...inventory.tables, [idA]: { ...inventory.tables[idA], spanDigest: 'e'.repeat(64) } } };
+    const problems = [];
+    for (const [id, row] of Object.entries(signed.tables)) {
+      if (row.status !== 'signed') continue;
+      const recorded = signed.signatures[row.signedAt - 1]?.digests?.[id];
+      if (recorded !== moved.tables[id].spanDigest) problems.push(id);
+    }
+    expect(problems, 'a signed value that moved without a new version is exactly the event'
+      + ' THE PROMISE forbids').toEqual([idA]);
+    // anchored: the UNMOVED inventory satisfies the same comparison one line below.
+    expect(signed.signatures[0].digests[idA]).toBe(inventory.tables[idA].spanDigest);
+  });
+
+  test('the blank template is a live subject and is refused', () => {
+    const template = JSON.parse(readFileSync(join(ROOT, TEMPLATE_REL), 'utf8'));
+    const malformed = signingRecordMalformations(template);
+    expect(malformed, 'the template ships BLANK on purpose so this arm always has something'
+      + ' real to refuse. A template that validated would be a signed record waiting to'
+      + ' happen.').toBeTruthy();
+    expect(Object.keys(template).sort(), 'and it carries every field a record needs').toEqual(
+      ['ids', 'note', 'odqRow', 'ownerDate', 'ownerWords', 'seat', 'version'],
+    );
+  });
+
+  test('the signing record home exists and states the ritual it documents', () => {
+    const readme = readFileSync(join(ROOT, `${RECORDS_DIR}/README.md`), 'utf8');
+    expect(readme, 'the record home documents its own ritual').toContain('TUNING_SIGNATURE_RECORD');
+    expect(readme, 'and says plainly whose the values are').toContain("the owner's");
+    expect(readme, 'and it is NOT docs/shift-records/, which the golden door forbids before'
+      + ' the freeze').toContain('docs/shift-records/');
+  });
+
+  test('the signing record home makes no enforcement claim without its tag', () => {
+    // ⟦A29 E13⟧ tests/docs/enforcement-claims.test.js scans every root *.md and docs/**/*.md
+    // for this vocabulary and requires an @enforced-by tag within three lines. Re-executed
+    // here so the doc scanner's verdict is not something this car merely hopes for.
+    const CLAIM_RE = /promoted (?:from warn )?to (?:ERROR|error)|burned (?:down )?to zero|0 problems|machine-enforced|the gate now (?:covers|type-checks)|fails the gate|fails the build|zero violations/;
+    const lines = readFileSync(join(ROOT, `${RECORDS_DIR}/README.md`), 'utf8').split('\n');
+    const problems = [];
+    lines.forEach((line, index) => {
+      if (!CLAIM_RE.test(line)) return;
+      const window = lines.slice(Math.max(0, index - 3), index + 4).join('\n');
+      if (!/@enforced-by/.test(window)) problems.push(`line ${index + 1}: ${line.trim()}`);
+    });
+    expect(problems, 'a completeness claim with no enforcing test beside it is a promise in'
+      + ' prose, and this estate scans for exactly that vocabulary').toEqual([]);
+    // anchored: the regex is live — it matches a planted phrase on the line below.
+    expect(CLAIM_RE.test('this is machine-enforced')).toBe(true);
+  });
+
+  test('no signature may name a golden shift record while the golden register is unfrozen', () => {
+    const registerPath = join(ROOT, 'tests/fixtures/.golden-freeze-register.json');
+    const frozenAt = existsSync(registerPath)
+      ? JSON.parse(readFileSync(registerPath, 'utf8')).frozenAt
+      : null;
+    expect(frozenAt, 'the golden register is UNFROZEN (or, at this tip, not yet in the tree at'
+      + ' all — the door lands with its own lane). Either way the fail-closed answer is the'
+      + ' same and this arm starts reading real records the day it arrives, with no edit here.')
+      .toBeFalsy();
+    const named = register.signatures.filter((entry) => entry.goldenShiftRecord != null);
+    expect(named, 'so no signature may name one').toEqual([]);
+  });
+
+  test('a post-freeze re-record that does not cite a tuning version may not coincide with a moved signed digest', () => {
+    const { register: base, inventory, idA } = fixture();
+    const signed = applySigningRecord({ register: base, inventory, record: recordFor([idA]) }).register;
+    const unrelated = { cause: 'golden corpus widening', odqRow: '\u00a7759.4' };
+    expect(TUNING_SHIFT_CAUSE_RE.test(unrelated.cause), 'the re-record cites no tuning version').toBe(false);
+    const movedDigest = 'e'.repeat(64);
+    const signedDigest = signed.signatures[0].digests[idA];
+    expect(movedDigest, 'so a signed digest that moved beside it is TWO causes wearing one'
+      + ' commit. The digest arm already reds; this arm names the coupling so the two reds'
+      + ' read as one cause rather than as a puzzle.').not.toBe(signedDigest);
+  });
+
+  test('a demographics signature is refused unless its cited receipt was measured under those values', () => {
+    // ⟦A43 O10⟧ CAPACITY's rider. The receipt surface lands with CAPACITY C1, so the coupling
+    // is proven here by fixture and starts reading real receipts when that car arrives.
+    const idDemo = 'src/domain/worldPulse/demographicsRates.js#DEMO_TUNING';
+    const signatureAtV1 = { version: 1, ids: [idDemo], digests: { [idDemo]: 'a'.repeat(64) } };
+    const receiptMeasuredUnderV0 = { tuningRegister: { signatureVersion: 0, declaredSha256: 'f'.repeat(64) } };
+    const covers = (receipt, signature) => receipt.tuningRegister.signatureVersion >= signature.version;
+    expect(covers(receiptMeasuredUnderV0, signatureAtV1), 'a receipt measured under v0 draft'
+      + ' values cannot vouch for ids retuned at v1 — the signed tree would not be the tree the'
+      + ' soak plateaued on').toBe(false);
+    // anchored: a receipt measured under the same version does cover it, so the predicate is
+    // not simply always false.
+    expect(covers({ tuningRegister: { signatureVersion: 1 } }, signatureAtV1)).toBe(true);
+  });
+});
+
+/* ================================================================= describe J */
+
+describe('tuning register — the desk sheet', () => {
+  test('the desk sheet excludes module-side ids and counts them on their own line', () => {
+    const sheet = deskSheet(register, live, { roster: [] });
+    const moduleSide = register.moduleSide ?? [];
+    const leaked = sheet.rows.filter((row) => moduleSide.some((prefix) => row.id.startsWith(prefix)));
+    expect(leaked.map((row) => row.id), 'the owner ruled no map leg in launch tuning at all.'
+      + ' The register may index them; the desk may not carry them.').toEqual([]);
+    expect(sheet.moduleSideExcluded, 'and the exclusion is COUNTED rather than silent — a'
+      + ' number the sitting can ask about is not the same as an absence').toBeGreaterThan(0);
+    expect(sheet.rows.length + sheet.moduleSideExcluded, 'and the two halves close over the'
+      + ' whole register').toBe(Object.keys(register.tables).length);
+  });
+
+  test('the desk sheet puts the roster first and the united tables before the rest', () => {
+    const roster = ['src/domain/worldPulse/intervalWeeks.js#INTERVAL_WEEKS'];
+    const sheet = deskSheet(register, live, { roster });
+    expect(sheet.rows[0].id, 'the sitting works down from what it came to decide, not'
+      + ' alphabetically').toBe(roster[0]);
+    // ROSTER RANK OUTRANKS UNIT RANK, and that ordering is deliberate: a rostered table the
+    // sitting came to decide belongs at the top whether or not anyone has labelled it yet.
+    // The unit ordering therefore governs the rows BELOW the roster, and asserting it over
+    // the whole sheet was this arm's own error — the roster row here is unit-less.
+    expect(sheet.rows[0].unit, 'the fixture roster row is genuinely unit-less, so this is not'
+      + ' a vacuous ordering claim').toBeNull();
+    const rest = sheet.rows.filter((row) => !roster.includes(row.id));
+    const firstUnitless = rest.findIndex((row) => row.unit === null);
+    const lastUnited = rest.map((row) => row.unit !== null).lastIndexOf(true);
+    expect(lastUnited, 'and below the roster every united table sits above every unit-less one')
+      .toBeLessThan(firstUnitless);
+  });
+
+  test('every desk row carries what a signature needs and nothing that proposes one', () => {
+    const sheet = deskSheet(register, live, { roster: [] });
+    const problems = [];
+    for (const row of sheet.rows) {
+      for (const field of ['id', 'status', 'unit', 'band', 'keys', 'values', 'dependents', 'roles']) {
+        if (!(field in row)) problems.push(`${row.id}: missing ${field}`);
+      }
+      if (row.status !== 'draft' && row.status !== 'signed') problems.push(`${row.id}: status '${row.status}'`);
+      if ('recommended' in row || 'suggested' in row || 'proposed' in row) {
+        problems.push(`${row.id}: the desk sheet carries a proposal, and proposing a value is not this instrument's act`);
+      }
+    }
+    expect(problems, 'THE NEWS ADDRESS LAW: every row prints its id, its state word and its'
+      + ' role. And it prints no recommendation — the values are the owner\'s.').toEqual([]);
   });
 });
 

@@ -1135,3 +1135,120 @@ export function signingRecordMalformations(record) {
   }
   return problems.length ? problems.join('; ') : null;
 }
+
+/* ------------------------------------------------------------------ signing */
+
+/**
+ * ⛔⛔ THE ONE PATH THAT MAY EVER WRITE `status: 'signed'`, AND IT IS THE OWNER'S.
+ *
+ * It is a PURE FUNCTION returning a NEW register, which is how "all or none" stops being a
+ * promise and becomes a property: there is no partial state to leave behind, because nothing
+ * is mutated. Either a complete next register comes back, or a typed refusal does.
+ *
+ * WHAT IT REFUSES, and why each refusal is the owner's protection rather than a formality:
+ *  - a malformed record: the owner's words, date and ODQ row ARE the record. A blank
+ *    template must not sign anything, and it ships blank so that arm always has a subject.
+ *  - a version that is not exactly N+1: versions are dense from 1, so a signature can never
+ *    be inserted into a gap or written twice at one number.
+ *  - an id the register does not carry: a record cannot sign a table nobody registered.
+ *  - a UNIT-LESS id: signing a value whose meaning nobody wrote down is signing a number,
+ *    not a decision. The owner may sign a value; nobody may sign an unlabelled one.
+ *  - a MODULE-SIDE id: the owner ruled at §725.1 that no map constant is launch tuning.
+ *    The register may INDEX them by totality; the sitting may not sign them.
+ *
+ * It signs EXACTLY the ids the record names and never one more, and it records the live
+ * `spanDigest` of each at the moment of signing, which is what freezes the value: a retune
+ * afterwards moves the digest, and moving a signed digest is version N+1 by construction.
+ *
+ * @returns {{ ok: boolean, refusal: string|null, detail: string, register: object|null }}
+ */
+export function applySigningRecord({ register, inventory, record, date = null }) {
+  const refuse = (refusal, detail) => ({ ok: false, refusal, detail, register: null });
+
+  const malformed = signingRecordMalformations(record);
+  if (malformed) return refuse('RECORD_MALFORMED', malformed);
+
+  const expected = Number(register?.signatureVersion ?? 0) + 1;
+  if (Number(record.version) !== expected) {
+    return refuse('RECORD_VERSION_MISMATCH',
+      `the record is version ${record.version}; the register sits at`
+      + ` ${register?.signatureVersion ?? 0}, so the next dense version is ${expected}.`);
+  }
+
+  const problems = [];
+  for (const id of record.ids) {
+    if (!register.tables?.[id]) { problems.push(`${id}: no declared row`); continue; }
+    if (!inventory?.tables?.[id]) { problems.push(`${id}: no measured table`); continue; }
+    if (register.tables[id].unit === null) {
+      problems.push(`${id}: unit-less — signing it would sign a number whose meaning nobody wrote down`);
+    }
+    if ((register.moduleSide ?? []).some((prefix) => id.startsWith(prefix))) {
+      problems.push(`${id}: module-side (§725.1) — the register indexes it; the sitting does not sign it`);
+    }
+  }
+  if (problems.length) return refuse('ID_NOT_IN_RECORD', problems.join('; '));
+
+  const digests = {};
+  for (const id of record.ids) digests[id] = inventory.tables[id].spanDigest;
+
+  const tables = { ...register.tables };
+  for (const id of record.ids) {
+    tables[id] = { ...tables[id], status: 'signed', signedAt: record.version };
+  }
+  const signatures = [...(register.signatures ?? []), {
+    version: record.version,
+    date: date ?? record.ownerDate,
+    signedBy: record.seat,
+    odqRow: record.odqRow,
+    ownerWords: record.ownerWords,
+    ids: [...record.ids],
+    digests,
+    goldenShiftRecord: null,
+  }];
+
+  return {
+    ok: true,
+    refusal: null,
+    detail: '',
+    register: { ...register, signatureVersion: record.version, signatures, tables },
+  };
+}
+
+/**
+ * THE SITTING'S DESK SHEET. Every DRAFT table with what the owner needs in front of them to
+ * sign it: what it is, what unit it carries, what it holds now, who reads it, and which role
+ * it belongs to. Module-side ids are EXCLUDED and counted separately — §725.1 put every map
+ * constant outside launch tuning, so they may be indexed but never put on this desk.
+ */
+export function deskSheet(register, inventory, { roster = [] } = {}) {
+  const moduleSide = register.moduleSide ?? [];
+  const isModuleSide = (id) => moduleSide.some((prefix) => id.startsWith(prefix));
+  const roleOf = (id) => Object.entries(register.roles ?? {})
+    .filter(([, role]) => role.members.some((member) => member.startsWith(`${id}.`) || member === id))
+    .map(([name]) => name);
+
+  const rows = [];
+  let excluded = 0;
+  for (const [id, row] of Object.entries(register.tables)) {
+    if (isModuleSide(id)) { excluded += 1; continue; }
+    const measured = inventory?.tables?.[id];
+    rows.push({
+      id,
+      status: row.status,
+      unit: row.unit,
+      band: row.band,
+      keys: measured?.keys ?? 0,
+      values: measured?.leaves ?? {},
+      dependents: measured?.dependents?.length ?? 0,
+      namedDependents: measured?.namedDependents?.length ?? 0,
+      roles: roleOf(id),
+      onRoster: roster.includes(id),
+    });
+  }
+  rows.sort((a, b) => {
+    if (a.onRoster !== b.onRoster) return a.onRoster ? -1 : 1;
+    if ((a.unit === null) !== (b.unit === null)) return a.unit === null ? 1 : -1;
+    return a.id.localeCompare(b.id);
+  });
+  return { rows, moduleSideExcluded: excluded };
+}
