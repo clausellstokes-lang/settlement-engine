@@ -29,6 +29,51 @@ import globals from 'globals';
 import visualBudget from './scripts/eslint-plugin-visual-budget.js';
 import analytics from './scripts/eslint-plugin-analytics.js';
 import jsxHygiene from './scripts/eslint-plugin-jsx-hygiene.js';
+import { TRANSCENDENTAL_FNS } from './scripts/count-transcendental-math.mjs';
+
+// ── The TRANSCENDENTAL BAN (T13 Car 5) ──────────────────────────────────────
+// The determinism blocks below banned entropy, wall-clock and locale, and left the
+// LAST cross-engine class unguarded: the implementation-approximated Math functions
+// (ECMAScript §21.3.2) and the `**` operator. Those are approximated PER ENGINE, so a
+// transcendental feeding a threshold in seeded code can fork same-seed worlds across
+// devices while lint, goldens and the worker byte-identity pin — all same-engine —
+// stay green. T13 burned the trees down to ZERO sites; this ban is what stops them
+// growing back, at edit time rather than at census time.
+//
+// ⭐ THE ROSTER IS IMPORTED, NEVER TRANSCRIBED. `TRANSCENDENTAL_FNS` is the counter's
+// own constant (scripts/count-transcendental-math.mjs), which is also what
+// tests/lint/transcendentalMathBaseline.test.js counts with. One list, two enforcers,
+// and no way for the eslint spelling-ban and the source census to disagree about what
+// a transcendental IS. A hand-copied roster is exactly how the two drift: the chair's
+// own dispatch brief for this car listed `Math.sqrt` as a member and omitted six real
+// ones, and pointing at the counter is what caught it.
+//
+// ⛔ `Math.sqrt` IS DELIBERATELY ABSENT and must stay absent — the spec requires it
+// CORRECTLY ROUNDED, so it is cross-engine exact and banning it would cost precision
+// for nothing. If you are tempted to add it here, add it to the counter instead and
+// watch tests/lint/determinismBanCoverage.test.js explain why not.
+//
+// SCOPE: the counter's six TREES — which resolve to EIGHT config blocks, because flat
+// config is LAST-WINS per rule and two of the trees carry a narrower block inside them
+// (`src/kernel/prng.js`, `src/domain/clock.js`). A narrow block that omits the ban is a
+// HOLE, not an inheritance, so every one of the eight carries it and
+// tests/lint/determinismBanCoverage.test.js asserts that per file.
+// @enforced-by tests/lint/determinismBanCoverage.test.js (the `required`-set extension
+//              + the liveness anchors) + tests/lint/transcendentalMathBaseline.test.js
+const TRANSCENDENTAL_BAN = [
+  ...TRANSCENDENTAL_FNS.map((fn) => ({
+    selector: `CallExpression[callee.object.name='Math'][callee.property.name='${fn}']`,
+    message: `Determinism: Math.${fn}() is implementation-approximated per the ECMAScript spec — the same seed can produce different bytes on a different engine. Use the deterministic kernel (src/kernel/detMath.js, detMathDecay.js, detPow.js), or reformulate with +, -, *, / and Math.sqrt, which the spec requires correctly rounded.`,
+  })),
+  {
+    selector: "BinaryExpression[operator='**']",
+    message: 'Determinism: the `**` operator is Math.pow and is implementation-approximated per the ECMAScript spec — the same seed can fork across engines. Use detPow/halfLifeKeep from src/kernel/, or exact repeated multiplication for a small integer exponent.',
+  },
+  {
+    selector: "AssignmentExpression[operator='**=']",
+    message: 'Determinism: the `**=` operator is Math.pow and is implementation-approximated per the ECMAScript spec — the same seed can fork across engines. Use detPow from src/kernel/, or exact repeated multiplication for a small integer exponent.',
+  },
+];
 
 // ── The size-ratchet baseline (code-quality-architecture-1 + -3) ─────────────
 // scripts/.size-baseline.json is the SINGLE SOURCE OF TRUTH for the per-file
@@ -197,6 +242,7 @@ export default [
     files: ['src/generators/**/*.js'],
     rules: {
       'no-restricted-syntax': ['error',
+        ...TRANSCENDENTAL_BAN,
         {
           selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
           message: 'Determinism: use random()/pick()/chance()/randInt() from rngContext.js, not Math.random() — a raw draw breaks same-seed replay.',
@@ -258,6 +304,7 @@ export default [
     files: ['src/pdf/**/*.{js,jsx}'],
     rules: {
       'no-restricted-syntax': ['error',
+        ...TRANSCENDENTAL_BAN,
         {
           selector: "CallExpression[callee.property.name='localeCompare']",
           message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
@@ -274,6 +321,29 @@ export default [
           selector: "CallExpression[callee.property.name='getRandomValues']",
           message: 'Determinism: crypto.getRandomValues() is non-reproducible entropy — the same-seed PDF export must be byte-stable given its viewmodel. Derive deterministic values from stable inputs (FNV-1a, see Editable.safeName).',
         },
+      ],
+    },
+  },
+
+  // ── [determinism-clock-transcendental] (T13 Car 5) ──────────────────────────
+  // src/domain/clock.js is the estate's SOLE sanctioned wall-clock seam, so the domain
+  // determinism block `ignores` it — and that exemption, which is correct on the
+  // wall-clock axis, left it with NO no-restricted-syntax block of any kind. It is still
+  // inside src/domain, which is one of the counter's six census TREES, so a
+  // transcendental written here would be invisible to eslint while the census counted it.
+  // This block closes exactly that hole and NOTHING else: the transcendental ban only,
+  // so `new Date()` and `Date.now()` stay legal here, which is the whole reason the file
+  // is exempt in the first place (and which tests/lint/determinismBanCoverage.test.js
+  // asserts from the other direction, as that layer's `forbidden` set).
+  //
+  // ⚠ IT REDS NOTHING TODAY, AND THAT IS THE POINT (ODQ 711.4 — say which greens are
+  // DISCOVERY and which are REGRESSION-prevention). clock.js carries zero transcendental
+  // sites; this is a ratchet over code that is already correct.
+  {
+    files: ['src/domain/clock.js'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        ...TRANSCENDENTAL_BAN,
       ],
     },
   },
@@ -301,6 +371,7 @@ export default [
     ignores: ['src/domain/clock.js'],
     rules: {
       'no-restricted-syntax': ['error',
+        ...TRANSCENDENTAL_BAN,
         {
           selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
           message: 'Determinism: the domain kernel must be pure — no Math.random(). Thread a seeded/derived value from the caller.',
@@ -379,6 +450,7 @@ export default [
     files: ['src/workers/**/*.js'],
     rules: {
       'no-restricted-syntax': ['error',
+        ...TRANSCENDENTAL_BAN,
         {
           selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
           message: 'Determinism: the advance worker must be pure — no Math.random(). Use the seeded rngContext draws or thread a value in; a raw draw forks worker-vs-main-thread bytes.',
@@ -423,6 +495,7 @@ export default [
     ignores: ['src/kernel/prng.js'],
     rules: {
       'no-restricted-syntax': ['error',
+        ...TRANSCENDENTAL_BAN,
         {
           selector: "NewExpression[callee.name='Date'][arguments.length=0]",
           message: 'Determinism: new Date() reads wall-clock on the sim path — thread `now` from the caller (the store boundary mints it; wallClockNow() in domain/clock.js is the domain seam).',
@@ -462,6 +535,7 @@ export default [
     files: ['src/kernel/prng.js'],
     rules: {
       'no-restricted-syntax': ['error',
+        ...TRANSCENDENTAL_BAN,
         {
           selector: "CallExpression[callee.property.name='localeCompare']",
           message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
@@ -517,6 +591,7 @@ export default [
     files: ['src/lib/instantWorld/**/*.js'],
     rules: {
       'no-restricted-syntax': ['error',
+        ...TRANSCENDENTAL_BAN,
         {
           selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
           message: 'Determinism: use random()/pick()/chance()/randInt() from rngContext.js, not Math.random() — a raw draw breaks same-seed replay.',
