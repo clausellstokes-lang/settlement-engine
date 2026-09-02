@@ -65,6 +65,7 @@
  */
 
 import { hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
+import { detIntPow } from '../../kernel/detMathDecay.js';
 import { isLiveInstitution } from '../institutions/institutionRoster.js';
 
 // ── Tuning (documented here; retuned in the M11a + checkpoint soaks) ──────────
@@ -209,7 +210,7 @@ export function careCapacity(roster) {
   const T = EPIDEMIC_TUNING;
   const r = roster || { church: 0, healingHouse: 0, druid: 0, alchemist: 0 };
   /** @param {number} n @returns {number} */
-  const within = (n) => 1 - Math.pow(T.CARE_DIMINISH_WITHIN, Math.max(0, Math.floor(finiteNumber(n, 0))));
+  const within = (n) => 1 - detIntPow(T.CARE_DIMINISH_WITHIN, Math.max(0, Math.floor(finiteNumber(n, 0))));
   const terms = [
     [T.CARE_W_CHURCH, within(r.church)],
     [T.CARE_W_HEALING_HOUSE, within(r.healingHouse)],

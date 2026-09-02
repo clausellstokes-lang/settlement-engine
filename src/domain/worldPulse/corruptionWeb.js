@@ -53,6 +53,7 @@
  */
 
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { detIntPow } from '../../kernel/detMathDecay.js';
 import { beliefsActive } from './beliefMap.js';
 import { resolveLeash } from '../corruptionLeash.js';
 import { npcCorruptibleFlaw } from '../corruption.js';
@@ -810,7 +811,7 @@ export function exposedCorruptionForPair(worldState, fromId, toId, tick) {
   const mag = clamp01(finiteNumber(rec.magnitude01, 0));
   if (mag <= 0) return 0;
   const age = Math.max(0, Math.floor(finiteNumber(tick, 0)) - Math.floor(finiteNumber(rec.tick, 0)));
-  return clamp01(round4(mag * Math.pow(CORRUPTION_WEB_TUNING.EXPOSED_DECAY_PER_TICK, age)));
+  return clamp01(round4(mag * detIntPow(CORRUPTION_WEB_TUNING.EXPOSED_DECAY_PER_TICK, age)));
 }
 
 /**
@@ -912,7 +913,7 @@ export function applyForeignExposureBlowback({ worldState, snapshot, exposures, 
     const mag = clamp01(finiteNumber(rec.magnitude01, 0));
     const at = Math.floor(finiteNumber(rec.tick, nowTick));
     // Prune once the read-decayed value falls below the war-reason MIN_SCORE floor.
-    if (mag * Math.pow(T.EXPOSED_DECAY_PER_TICK, Math.max(0, nowTick - at)) >= 0.05) {
+    if (mag * detIntPow(T.EXPOSED_DECAY_PER_TICK, Math.max(0, nowTick - at)) >= 0.05) {
       nextLedger[key] = { magnitude01: round4(mag), tick: at };
     }
   }

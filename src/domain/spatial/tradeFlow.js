@@ -42,6 +42,7 @@
  */
 
 import { hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
+import { detIntPow } from '../../kernel/detMathDecay.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 // ── Tuning (documented; retuned in the M6d + checkpoint soaks) ────────────────
@@ -186,7 +187,7 @@ export function advanceTradeFlowTally({ worldState, tick, arrivals = [] }) {
   for (const sid of Object.keys(prior || {})) {
     const rec = asObject(prior?.[sid]);
     const age = Math.max(0, now - Math.floor(finiteNumber(rec.lastTick, now)));
-    const factor = T.DECAY ** age;
+    const factor = detIntPow(T.DECAY, age);
     work.set(sid, { in: round2(nonNeg(rec.in) * factor), out: round2(nonNeg(rec.out) * factor) });
   }
   // ADD this tick's weighted arrivals: inbound at the destination, outbound at the source.
