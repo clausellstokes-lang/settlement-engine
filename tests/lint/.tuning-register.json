@@ -1023,17 +1023,26 @@
       "role": null,
       "status": "draft",
       "signedAt": null,
-      "unit": null,
+      "unit": {
+        "JEALOUS_BOON_FADE": "fraction01",
+        "LEVEL_SCALE": "fraction01",
+        "WRATH_SHARPEN_RUNGS": "rank"
+      },
       "band": null,
-      "note": ""
+      "note": "units read from FAITH_TUNING_COVERAGE; WRATH_SHARPEN_RUNGS counts demotion rungs, so it is a rank rather than a count of things."
     },
     "src/domain/worldPulse/faithTuningSurface.js#FAITH_FIELD_TUNING": {
       "role": null,
       "status": "draft",
       "signedAt": null,
-      "unit": null,
+      "unit": {
+        "PATRON_AMP": "multiplier",
+        "STRENGTH": "fraction01",
+        "DAMP_MAX": "fraction01",
+        "CAUSAL_SWING": "points"
+      },
       "band": null,
-      "note": ""
+      "note": "units read from FAITH_TUNING_COVERAGE, the F6c roster written as this surface's unit sheet. CAUSAL_SWING is score points per unit channel total and its VALUE lives in faithChannelBindings.js; this table carries the binding by reference."
     },
     "src/domain/worldPulse/faithTuningSurface.js#FAITH_TUNING_COVERAGE": {
       "role": null,
@@ -1047,9 +1056,12 @@
       "role": null,
       "status": "draft",
       "signedAt": null,
-      "unit": null,
+      "unit": {
+        "FULL_EXPOSURE": "fraction01",
+        "PART_EXPOSURE": "fraction01"
+      },
       "band": null,
-      "note": ""
+      "note": "units read from FAITH_TUNING_COVERAGE: both keys are exposure fractions."
     },
     "src/domain/worldPulse/feasibilityGate.js#FEASIBILITY_TUNING": {
       "role": null,
@@ -1319,9 +1331,23 @@
       "role": null,
       "status": "draft",
       "signedAt": null,
-      "unit": null,
+      "unit": {
+        "HALF_LIFE_TICKS": "ticks",
+        "MAX_LOOKBACK_TICKS": "ticks",
+        "STOCK_MAX": "points",
+        "DEPOSIT_SCALE": "multiplier",
+        "MINT_CLIFF": "points",
+        "RELINQUISH_FLOOR": "points",
+        "PRUNE_EPSILON": "points",
+        "MAX_ACQUIRED": "count",
+        "RESIST_SCALE": "multiplier",
+        "DOMAIN_OFF_MULT": "multiplier",
+        "IMPORTANCE_FLOOR": "fraction01",
+        "RECEIPT_CAP": "count",
+        "CALAMITY_WINDOW_YEARS": "years"
+      },
       "band": null,
-      "note": ""
+      "note": "units read from the table's own per-key comments (ticks, stock points, multipliers, a count cap, an importance fraction and a window in years). Values UNCHANGED and UNSIGNED."
     },
     "src/domain/worldPulse/npcLadderChallenge.js#CHALLENGE_TUNING": {
       "role": null,
@@ -1908,7 +1934,144 @@
       "note": ""
     }
   },
-  "roles": {},
+  "roles": {
+    "prune_epsilon": {
+      "unit": "points",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/factionPairLedger.js#FACTION_PAIR_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/informationStatecraft.js#CREDIBILITY_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/momentum.js#MOMENTUM_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/npcCredibility.js#NPC_CREDIBILITY_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/npcGrowthKernel.js#GROWTH_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/npcLadderState.js#LADDER_TUNING.PRUNE_EPSILON",
+        "src/domain/worldPulse/urbanFabricKernel.js#FABRIC_TUNING.PRUNE_EPSILON"
+      ],
+      "divergence": {
+        "reason": "drift-suspected",
+        "odqRow": "TR-5",
+        "note": "one member holds 0.02 and the rest 0.05. Same name, same role, different value, with nothing in the source saying why. The sitting rules; this lane only records."
+      }
+    },
+    "max_lookback_ticks": {
+      "unit": "ticks",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/informationStatecraft.js#CREDIBILITY_TUNING.MAX_LOOKBACK_TICKS",
+        "src/domain/worldPulse/momentum.js#MOMENTUM_TUNING.MAX_LOOKBACK_TICKS",
+        "src/domain/worldPulse/npcCredibility.js#NPC_CREDIBILITY_TUNING.MAX_LOOKBACK_TICKS",
+        "src/domain/worldPulse/npcGrowthKernel.js#GROWTH_TUNING.MAX_LOOKBACK_TICKS"
+      ],
+      "divergence": {
+        "reason": "drift-suspected",
+        "odqRow": "TR-5",
+        "note": "three members hold 260 and one holds 312. The charter recorded a fourth value of 24 at 60255ca8e; no member holds it at C-prime, so that spelling is GONE from this role and the divergence is now two-valued, not three."
+      }
+    },
+    "half_life_ladder": {
+      "unit": "weeks",
+      "canonical": "src/domain/worldPulse/bandedStock.js#HALF_LIFE_WEEKS",
+      "members": [
+        "src/domain/worldPulse/bandedStock.js#HALF_LIFE_WEEKS",
+        "src/domain/worldPulse/factionPairLedger.js#FACTION_PAIR_TUNING.HALF_LIFE_WEEKS"
+      ],
+      "divergence": null,
+      "note": "the routing wave owns the thirteen hand-keyed Math.pow(0.5, ...) sites; this role indexes the named ladder only, and claims nothing about them."
+    },
+    "interval_weeks": {
+      "unit": "weeks",
+      "canonical": "src/domain/worldPulse/intervalWeeks.js#INTERVAL_WEEKS",
+      "members": [
+        "src/domain/worldPulse/intervalWeeks.js#INTERVAL_WEEKS"
+      ],
+      "divergence": null,
+      "note": "the canonical interval table. Two private duplicates hold the same values in foodStockpile.js and populationDynamics.js and are HELD EQUAL by this role; folding them by import is car 4, which is optional and the owner's to drop."
+    },
+    "exodus_floor__fraction": {
+      "unit": "fraction01",
+      "canonical": null,
+      "members": [
+        "src/domain/spatial/calamity.js#CALAMITY_TUNING.EXODUS_FLOOR"
+      ],
+      "divergence": null,
+      "note": "TWO ROLES, not one divergence. The 0.04 member is a fraction of a population; the 300 member is a headcount. One name, two units, two roles - a unit-less field gets a different unit at every consumer, which is why the split is recorded and not argued."
+    },
+    "exodus_floor__headcount": {
+      "unit": "people",
+      "canonical": null,
+      "members": [
+        "src/domain/spatial/migrationRumors.js#MIGRATION_RUMOR_TUNING.EXODUS_FLOOR"
+      ],
+      "divergence": null,
+      "note": "the headcount half of the EXODUS_FLOOR homonym."
+    },
+    "score_max__points": {
+      "unit": "points",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/informationStatecraft.js#CREDIBILITY_TUNING.SCORE_MAX",
+        "src/domain/worldPulse/npcCredibility.js#NPC_CREDIBILITY_TUNING.SCORE_MAX"
+      ],
+      "divergence": null,
+      "note": "the 12-point score ceilings. A third member reads SCORE_MAX as a shorthand aggregator of a module const and is recorded as a computed leaf."
+    },
+    "score_max__probability": {
+      "unit": "probability",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/traditionsKernel.js#TRAD_TUNING.SCORE_MAX"
+      ],
+      "divergence": null,
+      "note": "the 0.95 member is a probability ceiling, not a score. Same name, different unit."
+    },
+    "cap__share": {
+      "unit": "share",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/eliteBleed.js#ELITE_BLEED_TUNING.CAP",
+        "src/domain/worldPulse/institutionTolerance.js#TOLERANCE_TUNING.CAP"
+      ],
+      "divergence": null,
+      "note": "the CAP members that bound a share of something."
+    },
+    "cap__count": {
+      "unit": "count",
+      "canonical": null,
+      "members": [
+        "src/domain/worldPulse/reframeKernel.js#REFRAME_TUNING.CAP"
+      ],
+      "divergence": null,
+      "note": "the CAP member that bounds a count of things."
+    },
+    "cooldown_weeks": {
+      "unit": "weeks",
+      "canonical": null,
+      "members": [
+        "src/domain/spatial/intelActs.js#INTEL_TRADE_TUNING.COOLDOWN_WEEKS",
+        "src/domain/worldPulse/npcLadderChallenge.js#CHALLENGE_TUNING.COOLDOWN_WEEKS"
+      ],
+      "divergence": {
+        "reason": "distinct-by-design",
+        "odqRow": "TR-5",
+        "note": "an intel-trade cooldown of 26 and a post-succession cooldown of 104 are different clocks that happen to share a key name. Recorded as distinct BY DESIGN so the sitting is not asked to reconcile two things that were never one."
+      },
+      "note": "the design named this role cooldown_ticks; every measured member is spelled COOLDOWN_WEEKS and carries weeks, so the role takes the measured spelling."
+    },
+    "severity_floor": {
+      "unit": "fraction01",
+      "canonical": null,
+      "members": [
+        "src/domain/spatial/pestilence.js#EPIDEMIC_TUNING.SEVERITY_FLOOR",
+        "src/domain/worldPulse/razingExecution.js#RAZING_EXECUTION_TUNING.SEVERITY_FLOOR",
+        "src/domain/worldPulse/routeNetworkCharter.js#ROUTE_CHARTER_TUNING.SEVERITY_FLOOR"
+      ],
+      "divergence": {
+        "reason": "drift-suspected",
+        "odqRow": "TR-5",
+        "note": "three members hold 0.2, 0.3 and 0.35 across an epidemic, a razing and a route charter. Plausibly deliberate, plausibly drift; nothing in the source says which."
+      }
+    }
+  },
   "declaredGrowth": {
     "unregisteredNamed": {},
     "bareDecimals": {}

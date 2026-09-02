@@ -325,10 +325,23 @@ const ESPREE_OPTIONS = Object.freeze({
   range: true,
 });
 
-/** Parse a span expression. Returns the ObjectExpression node, or null when unparsable. */
+/**
+ * Parse a span expression. Returns `{ node, offset }` where `offset` maps an AST range back
+ * to a `spanText` index, or null when unparsable.
+ *
+ * ⚠ THE OFFSET IS NOT DECORATION. The expression is trimmed and wrapped in parentheses
+ * before parsing, so AST ranges are shifted from `spanText` by the `=`, the leading
+ * whitespace AND the added `(`. Slicing `spanText` with a raw AST range therefore returns
+ * text from the wrong place — MEASURED: a computed leaf came back as the expression
+ * `"he intended texture. STRENGTH: Object.freeze({ faint:"`, which is a fragment of the
+ * table's own DOCBLOCK. It looked like a plausible `computed` fallback and was garbage.
+ */
 function objectNodeOf(spanText) {
   const eq = spanText.indexOf('=');
-  const expression = spanText.slice(eq + 1).trim().replace(/;\s*$/, '');
+  if (eq < 0) return null;
+  const rest = spanText.slice(eq + 1);
+  const lead = rest.length - rest.trimStart().length;
+  const expression = rest.trim().replace(/;\s*$/, '');
   let program;
   try {
     program = espreeParse(`(${expression})`, ESPREE_OPTIONS);
@@ -337,7 +350,20 @@ function objectNodeOf(spanText) {
   }
   let node = program.body[0]?.expression;
   while (node && node.type === 'CallExpression') node = node.arguments[0];
-  return node && node.type === 'ObjectExpression' ? node : null;
+  if (!node || node.type !== 'ObjectExpression') return null;
+  // AST index X sits at expression index X-1 (the wrapping paren), which sits at
+  // spanText index eq + 1 + lead + (X - 1).
+  return { node, offset: eq + lead };
+}
+
+/** The depth-1 key names an INDEPENDENT implementation reads from the syntax tree. */
+export function astKeyNames(spanText) {
+  const parsed = objectNodeOf(spanText);
+  if (!parsed) return null;
+  return parsed.node.properties
+    .filter((property) => property.type === 'Property')
+    .map((property) => keyNameOf(property))
+    .filter((name) => name !== null);
 }
 
 const keyNameOf = (property) => {
@@ -357,8 +383,9 @@ const keyNameOf = (property) => {
  * @returns {{ leaves: Record<string, unknown>, idiom: string, unparsed: boolean }}
  */
 export function flattenLeaves(spanText) {
-  const root = objectNodeOf(spanText);
-  if (!root) return { leaves: {}, idiom: 'computed', unparsed: true };
+  const parsed = objectNodeOf(spanText);
+  if (!parsed) return { leaves: {}, idiom: 'computed', unparsed: true };
+  const { node: root, offset } = parsed;
   const leaves = {};
   const kinds = new Set();
 
@@ -392,7 +419,7 @@ export function flattenLeaves(spanText) {
         kinds.add('aggregator');
         continue;
       }
-      leaves[here] = { expr: normalizeWhitespace(codeOnly(spanText.slice(value.range[0], value.range[1]))).slice(0, 120) };
+      leaves[here] = { expr: normalizeWhitespace(codeOnly(spanText.slice(offset + value.range[0], offset + value.range[1]))).slice(0, 120) };
       kinds.add('computed');
     }
   };
@@ -644,10 +671,20 @@ export function discoverTables(root, register = null, sourceOf = makeSourceCache
         continue;
       }
       const { leaves, idiom, unparsed } = flattenLeaves(span.spanText);
+      // ⚠ THE KEY COUNT COMES FROM THE SYNTAX TREE, NOT THE `:` COUNTER, AND THE DIFFERENCE
+      // IS NOT COSMETIC. The recon's machine counts depth-1 COLONS, so a SHORTHAND
+      // aggregator — `Object.freeze({ BASE_ATTACKER_LOSS, BASE_DEFENDER_LOSS, ... })` —
+      // carries no colon at all and reports ZERO keys for a real table. MEASURED: 21 of 210
+      // tables disagree, `attrition.js#ATTRITION_TUNING` reading 0 against its actual 17.
+      // The estate's own recon carried the same blind spot (it recorded "1,870 top-level
+      // keys" alongside "12 shorthand aggregators" without reconciling the two). The tree
+      // sees a shorthand property exactly as it sees a written one; the counter cannot.
+      const astNames = astKeyNames(span.spanText);
       tables.push({
         id, file, export: exportName, exported,
         idiom: unparsed ? 'computed' : idiom,
-        keys: span.keys,
+        keys: astNames ? astNames.length : span.keys,
+        machineKeys: span.keys,
         line: i + 1,
         spanText: span.spanText,
         spanStart: lineOffsets[i],
