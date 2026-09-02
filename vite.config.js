@@ -543,11 +543,11 @@ export default defineConfig({
           // Rollup emits as per-file lazy chunks plus applyWorldPulse), and the
           // eager kernel chunk is a first-paint closure member. MEASURED at the
           // T13 build base: detMath minifies to 2,086 B against a first-paint
-          // closure margin of 995 B (1,046,005 of 1,047,000), so routing it eager
-          // would red the budget by roughly 1,091 B and turn a code change into a
-          // ceiling-raise ask. Nor may it ride the big lazy `engine` chunk: that
-          // one is at 675,339 B against a 676,000 ceiling — 661 B of margin — so
-          // it would red bill row 13 instead.
+          // closure margin of 1,995 B (1,046,005 of 1,048,000 — the ceiling rose
+          // at ledger §880.8), so routing it eager STILL reds the budget, by ~91 B,
+          // and turns a code change into a ceiling-raise ask. Nor may it ride the
+          // big lazy `engine` chunk: 675,339 B against a 676,000 ceiling — 661 B
+          // of margin — so it would red bill row 13 instead.
           //
           // So it gets its OWN small lazy chunk, exactly the settlement-normalize /
           // custom-schema / content-identity precedent above ("pin the modules into

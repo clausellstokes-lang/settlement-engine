@@ -506,7 +506,63 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // goes green on someone else's headroom has measured nothing. It is chartered separately
 // as REC-3, each member still owing its own semantic pin (the FP-G11 law), and it is the
 // owner's move, not a lane's. Monotone-down and owner-signed discipline unchanged.
-const CLOSURE_BUDGET_BYTES = 1_047_000;
+//
+// ── RAISE 1,047,000 -> 1,048,000 (OWNER-RATIFIED 2026-09-01, T13 TRANS — ledger §880.8) ──
+// THE DECLARED COST IS THE DETERMINISTIC TRANSCENDENTAL KERNEL'S TWO GENUINELY-EAGER CALL
+// SITES, AND "TWO" IS THE LOAD-BEARING WORD: of the 42 census sites remaining at this tip
+// only these two sit in the first-paint graph, so this raise funds the WHOLE T13 wiring,
+// not a sample of it. Both are in the settlement slice's own mutation layer, reached by
+// static edges from main.jsx (traced with this config's own edge reader, ESD seeding
+// removed, dynamic `import()` excluded):
+//   • relationships/canonicalRelationship.js:230 — Math.log10 in the pop-tier score;
+//     main.jsx -> store/index.js -> settlementSlice.js -> events/mutate.js ->
+//     events/mutateWorld.js -> canonicalRelationship.js, 5 hops.
+//   • domain/corruption.js:532 — Math.exp in the saturating guild grip; the same chain
+//     through events/mutateEntities.js, 4 hops.
+// ⛔ NEITHER WAS CURABLE BY EXCISION, and that was proved by EXECUTION rather than by
+// citing FP-G7/FP-G11: both modules were added to ENGINE_SHARED_DOMAIN_EXCISIONS and the
+// eager set re-derived with the config's OWN derivation — eager modules 264, UNCHANGED,
+// and both STILL EAGER. They are not conservative ESD over-inclusion; they are genuinely
+// first-paint-reachable, and excising them would put reachable modules on the excision
+// list that tests/build/engineChunkLazy.test.js (FP-G17) exists to catch.
+// "REMAINDER" IS THE OTHER LOAD-BEARING WORD — two cures were already spent before this ask:
+//   • Car 1b routed detMath.js into its OWN LAZY chunk instead of the eager `kernel` chunk
+//     (the settlement-normalize precedent), which is why the eager `kernel` chunk and the
+//     lazy `engine` chunk are BYTE-IDENTICAL under full wiring.
+//   • Car 1c's byte diet took the eager det-math core 1,188 B -> 823 B: **-321 B of closure
+//     at ZERO precision cost**, every family's achieved error unchanged TO THE DIGIT
+//     (exp2Det 1.96e-16, log2Det 3.94e-16, detExp 2.21e-16, detLn 4.32e-16, detLog10
+//     2.22e-16, detTanh 4.59e-16, halfLifeKeep 2.17e-16, detIntPow 9.80e-15). It re-formed
+//     two Horner chains as integer-divisor loops — log2Det in LOCKSTEP with detPow.js so
+//     its bit-identity pin stays EXACT, never restated — and split the lazy decay wrappers
+//     into det-math-decay so the eager closure stops paying for halfLifeKeep it never calls.
+// MEASURED at the ratification (build #4, BOTH eager sites wired): **1,047,205** — 205 B
+// over the old ceiling, **795 B under this one**. The closure is NINE members there: the
+// eight that predate T13, unmoved, plus the 823 B det-math core. det-math-decay is ABSENT
+// from that list, and its absence is the split working — the eager closure never pays for
+// the decay wrappers. The lazy `engine` chunk measured 675,339 B, BYTE-IDENTICAL across all
+// four T13 builds, so bill row 13's own owner-ratified 676,000 ceiling is untouched here.
+//
+// ⛔⛔ THE COMPRESSED CEILINGS ARE NOT RAISED WITH IT, AND THAT REFUSAL IS THE POINT. At the
+// same measurement gzip is 332,532 / 337,000 (4,468 B spare) and Brotli 279,199 / 283,000
+// (3,801 B spare) — roughly 22x and 19x this overrun. The budgets that govern what a visitor
+// actually DOWNLOADS never came close, so raising them here would be exactly the INCIDENTAL
+// raise the block below this constant refuses in terms.
+// THE ALTERNATIVES WERE WEIGHED AND REFUSED, each on its own measurement, not on preference:
+//   • the ESD excision — REFUTED above by the config's own derivation.
+//   • the load-order seam — a 347 B stub at the two eager sites, the real kernel arriving on
+//     first use through a dynamic import. PREDICTED ~1,046,352, about 648 B under the OLD
+//     ceiling — and PLAUSIBLE, not measured. Refused because two SYNCHRONOUS store actions on
+//     the "Discover channels" path would have to become async (a public store-API change,
+//     owner-gated in its own right), and it mints a throw-on-early-use failure mode in the
+//     mutation layer that the codebase then keeps forever — for 205 B.
+//   • a platform-`Math` fallback at the two eager sites — never offered: it ships the very
+//     cross-engine fork T13 exists to cure, at the two sites nearest the store.
+// THE OWNER'S WORD, VERBATIM (2026-09-01, in chat, after the two options were put in plain
+// terms with their costs): **"do what you recommend"** — and the recommendation on the table
+// was this raise. Ledger §880.8; the seam is RECORDED AS PRICED AND NOT TAKEN, its prototype
+// kept out of the tree. Monotone-down and owner-signed discipline unchanged.
+const CLOSURE_BUDGET_BYTES = 1_048_000;
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
