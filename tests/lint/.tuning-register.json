@@ -2031,7 +2031,11 @@
         "src/domain/worldPulse/eliteBleed.js#ELITE_BLEED_TUNING.CAP",
         "src/domain/worldPulse/institutionTolerance.js#TOLERANCE_TUNING.CAP"
       ],
-      "divergence": null,
+      "divergence": {
+        "reason": "distinct-by-design",
+        "odqRow": "TR-5",
+        "note": "an elite-bleed cap of 0.05 and an institution-tolerance cap of 0.5 are two subsystems' ceilings that share a key name. Grouping them by that name was this register's doing, not the estate's, so the divergence is recorded as deliberate rather than handed to the sitting as a disagreement to reconcile. The sitting may overrule this typing; it may not be left untyped."
+      },
       "note": "the CAP members that bound a share of something."
     },
     "cap__count": {

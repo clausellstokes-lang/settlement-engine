@@ -72,7 +72,7 @@ const CEILINGS = Object.freeze({
   BARE_DECIMAL_CEILING: 7003,
   UNREGISTERED_NAMED_CEILING: 534,
   UNITLESS_TABLE_CEILING: 220,
-  DECLARED_DIVERGENCE_CEILING: 4,
+  DECLARED_DIVERGENCE_CEILING: 5,
   PHANTOM_ALIAS_CEILING: 3,
   DECLARED_GROWTH_CEILING: 0,
 });
@@ -269,9 +269,11 @@ describe('tuning register — the detectors are honest', () => {
   test('every measured table agrees between the span machine and the syntax tree', () => {
     const problems = [];
     for (const [id, table] of Object.entries(live.tables)) {
-      const declaredKeys = Object.keys(table.leaves).filter((path) => !path.includes('.'));
-      if (declaredKeys.length !== table.keys) {
-        problems.push(`${id}: keys ${table.keys} but ${declaredKeys.length} depth-1 leaves`);
+      // A nested table flattens to dotted paths, so the depth-1 KEY set is the set of first
+      // segments — not the leaves that happen to carry no dot.
+      const topLevel = new Set(Object.keys(table.leaves).map((path) => path.split('.')[0]));
+      if (topLevel.size !== table.keys) {
+        problems.push(`${id}: keys ${table.keys} but ${topLevel.size} depth-1 key(s)`);
       }
     }
     expect(problems, 'the key count and the depth-1 leaf set are two readings of one fact and'
