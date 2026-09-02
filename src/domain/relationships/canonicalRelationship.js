@@ -1,3 +1,5 @@
+import { detLog10 } from '../../kernel/detMath.js';
+
 const SYMMETRIC_TYPES = new Set([
   'neutral',
   'trade_partner',
@@ -227,7 +229,7 @@ function strengthScore(save) {
   const tier = String(save?.tier || save?.settlement?.tier || 'village').toLowerCase();
   // @ts-expect-error -- population is number | { total } across save generations; `.total ||` is the tolerant read
   const population = Number(save?.settlement?.population?.total || save?.settlement?.population || 0);
-  return (TIER_RANK[tier] ?? 2) + Math.min(0.8, Math.log10(Math.max(1, population)) / 8);
+  return (TIER_RANK[tier] ?? 2) + Math.min(0.8, detLog10(Math.max(1, population)) / 8);
 }
 
 /**

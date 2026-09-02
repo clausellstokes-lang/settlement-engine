@@ -208,11 +208,20 @@ describe('transcendental-math ratchet — frozen baseline governance', () => {
     expect(baseline.total).toBeLessThanOrEqual(CEILING);
   });
 
-  test('non-vacuity: the known caveat-carrier (contestMath.js) is seen by the walker', () => {
-    // contestMath.js documents the cross-engine caveat and holds real sites — if
-    // the walker ever stops seeing it, the scan silently broke.
-    expect(baseline.files['src/domain/region/contestMath.js']).toBeGreaterThanOrEqual(1);
-    expect(Object.keys(baseline.files).length).toBeGreaterThanOrEqual(10);
+  test('non-vacuity: the walker still reaches real sites in the real trees', () => {
+    // ⚠ THIS ARM WAS NAMED FOR A WALKER IT NEVER ASKED. Until T13 it read
+    // `baseline.files[...]` — the FROZEN JSON on disk — so it proved a key existed in a
+    // file, never that the scan reached the trees; a walker that returned {} would have
+    // left it green. It also anchored on contestMath.js by NAME, and T13 TRANS cured that
+    // file to zero, so the rotted anchor red on a site that had simply been FIXED. A
+    // liveness anchor must never name a file the program exists to retire.
+    // The durable form asks the LIVE scan: while any governed site remains, the walk must
+    // find it. The detector's own countText fixtures above carry the other half — that the
+    // counter can still count — on synthetic text that no cure can retire.
+    // At CEILING = 0 (Car 5's retirement act) this arm becomes `current.total === 0` and
+    // the fixtures carry non-vacuity alone, exactly as §5 of the charter specifies.
+    expect(Object.keys(current.files).length).toBeGreaterThanOrEqual(1);
+    expect(current.total).toBeGreaterThanOrEqual(1);
   });
 });
 

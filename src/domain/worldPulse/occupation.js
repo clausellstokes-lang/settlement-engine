@@ -58,6 +58,7 @@
  */
 
 import { clamp01 } from '../region/contestMath.js';
+import { detLog10 } from '../../kernel/detMath.js';
 import { stablePart } from './worldState.js';
 // W-PEACE-2 occupation_hold: a peace that CEDES the occupation ("the garrison stays at
 // the walls") must actually keep it standing after the army marches home. Read from the
@@ -592,7 +593,7 @@ export function resistanceTarget(item) {
   // Population mass: a populous town can field a resistance; a hamlet cannot sustain one.
   const popRaw = item?.settlement?.population;
   const pop = typeof popRaw === 'number' ? popRaw : num(popRaw?.total, 0);
-  const popMass = pop > 0 ? clamp01(Math.log10(Math.max(10, pop)) / 5) : 0;
+  const popMass = pop > 0 ? clamp01(detLog10(Math.max(10, pop)) / 5) : 0;
   // Intact, loyalist, populous → high resistance target. Weighted blend, 0..1.
   let target = clamp01(0.5 * usefulness + 0.3 * clamp01(legit) + 0.2 * popMass);
   // A COMPLIANT (installed-puppet) regime dampens the will to resist — the occupier has a
