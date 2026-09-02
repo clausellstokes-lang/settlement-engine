@@ -937,13 +937,13 @@
   },
   {
     "path": "src/domain/spatial/moralDrift.js",
-    "line": 314,
+    "line": 315,
     "category": "floatInterpolation",
     "snippet": "`The reckoning: its derived alignment drifts (malice ${r.malice.toFixed(2)}, lawlessness ${r.lawlessness.toFixed(2)}) — sharpest for a lawful-good aggressor.`"
   },
   {
     "path": "src/domain/spatial/moralDrift.js",
-    "line": 314,
+    "line": 315,
     "category": "twoDecimalScore",
     "snippet": "`The reckoning: its derived alignment drifts (malice ${r.malice.toFixed(2)}, lawlessness ${r.lawlessness.toFixed(2)}) — sharpest for a lawful-good aggressor.`"
   },

@@ -172,6 +172,23 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //     that is not a `"line"` value, as T11's note prescribes, and there is none.
 // The census ends at 225 against a 225 ceiling; floatInterpolation holds at 148. No ceiling
 // moved in either direction, and this consist authored no prose numeric that survives.
+// T13 TRANS LANDING (ODQ §883, 2026-09-02) — TWO PURE LINE MOVES, NO CEILING CHANGE, NO
+// DEBT MOTION. The cross-engine transcendental retirement's Car 4 family (vi) (`5eb02872d`)
+// rewrites moralDrift.js:221's integer-exponent power as an exact multiply and adds one net
+// line ABOVE the reckoning sentence, so the two rows that file owns re-address 314 -> 315.
+// Path, category and snippet are byte-identical on both — and they are TWO CATEGORIES, not
+// one: `floatInterpolation` and `twoDecimalScore` freeze the same sentence under two rules,
+// which is why the diff is four lines rather than two. Same shape as CR-FP-2's eighty-eight,
+// HK-1's six, TE-CH-4's one, TE-CAP's two, T7's seven, T11's eight, T12's one and TAIL-F's
+// seven; the whole baseline diff is four lines, two -/+ pairs, grepped for any changed line
+// that is not a `"line"` value, as T11's note prescribes, and there is none. ⚠ WORTH SAYING
+// PLAINLY: the consist's own pre-board read this register as UNMOVED and it was wrong — the
+// walker freezes debt by exact path AND line AND snippet, so a cure three hundred lines away
+// in the same file is enough to re-address it. A landing that only greps for NEW leaks will
+// miss this class every time; the check that catches it is the register's own run.
+// The census ends at 225 against a 225 ceiling; floatInterpolation holds at 148. No ceiling
+// moved in either direction, and this consist authored no prose numeric: its thirty cured
+// sites are arithmetic, and the two new kernel leaves emit no reader prose at all.
 // T12 · W-MEM LANDING (ODQ §834, 2026-08-31) — ONE PURE LINE MOVE, ZERO NEW LEAKS.
 // The Remembrance ledger's registration car inserts twelve lines into worldSnapshotPublic.js
 // at its hard-deny block, entirely ABOVE the one banked row that file carries, so that row
