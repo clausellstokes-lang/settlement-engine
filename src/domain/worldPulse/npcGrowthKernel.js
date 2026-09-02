@@ -53,6 +53,7 @@
  * never a named soul's FATE.
  */
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { halfLifeFactor } from './bandedStock.js';
 import { TRAIT_ALIGNMENT, TRAIT_AGGRESSION } from '../../data/npcTraitWeights.js';
 import { memoryHorizonMultiplierOf } from './relationshipEvolution.js';
 import { importanceWeight } from '../entities/npcs.js';
@@ -257,7 +258,7 @@ function decayedStock(cand, tick, bandMult) {
   if (!Number.isFinite(bandMult)) return stock; // undying ⇒ no time decay
   const halfLife = Math.max(1, GROWTH_TUNING.HALF_LIFE_TICKS * bandMult);
   if (age > GROWTH_TUNING.MAX_LOOKBACK_TICKS * bandMult) return 0;
-  return stock * Math.pow(0.5, age / halfLife);
+  return stock * halfLifeFactor(age, halfLife);
 }
 
 // ── Durable-signal reads (all pure over the freshest settlement + worldState) ──

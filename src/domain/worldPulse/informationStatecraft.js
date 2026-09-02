@@ -63,6 +63,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+import { halfLifeFactor } from './bandedStock.js';
 import { stablePart } from './stablePart.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, hasSpatialLedger } from '../spatial/distanceRead.js';
 import { ALLY_INTEL_TUNING, beliefsActive, GOVERNING_SEAT_KEY, strengthBandOf, governingCoalition } from './beliefMap.js';
@@ -201,7 +202,7 @@ export function decayedCredibilityScore(entry, tick) {
   const age = Math.max(0, Math.floor(finiteNumber(tick, 0)) - Math.floor(finiteNumber(entry.lastUpdateTick, 0)));
   const T = CREDIBILITY_TUNING;
   if (age > T.MAX_LOOKBACK_TICKS) return 0;
-  return score * Math.pow(0.5, age / Math.max(1, T.HALF_LIFE_TICKS));
+  return score * halfLifeFactor(age, Math.max(1, T.HALF_LIFE_TICKS));
 }
 
 /**

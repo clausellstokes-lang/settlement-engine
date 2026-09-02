@@ -35,6 +35,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+import { halfLifeFactor } from './bandedStock.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, hasSpatialLedger } from '../spatial/distanceRead.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
 
@@ -112,7 +113,7 @@ export function decayedNpcCredibilityScore(entry, tick) {
   const age = Math.max(0, Math.floor(finiteNumber(tick, 0)) - Math.floor(finiteNumber(entry.lastUpdateTick, 0)));
   const T = NPC_CREDIBILITY_TUNING;
   if (age > T.MAX_LOOKBACK_TICKS) return 0;
-  return score * Math.pow(0.5, age / Math.max(1, T.HALF_LIFE_TICKS));
+  return score * halfLifeFactor(age, Math.max(1, T.HALF_LIFE_TICKS));
 }
 
 /**

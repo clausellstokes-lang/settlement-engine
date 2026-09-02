@@ -48,7 +48,7 @@
  * a loss moves the stock down exactly as a win moves it up, so a stock can cross neutral
  * in both directions. THE REVERSAL PIN is what proves it.
  */
-import { decayTowardNeutral, bandCrossingReceipt } from './bandedStock.js';
+import { decayTowardNeutral, bandCrossingReceipt, halfLifeFactor } from './bandedStock.js';
 
 // Multiplier shape: ±MULTIPLIER_SPAN at full saturation, reached as |score| → SCORE_SAT.
 const MULTIPLIER_SPAN = 0.5;
@@ -465,7 +465,7 @@ function sourceEventIdsOf(delta) {
 /** @param {number} stock01 @param {number} age */
 function decayedStock01(stock01, age) {
   if (age <= 0 || stock01 === NEUTRAL_STOCK01) return stock01;
-  const keep = Math.pow(0.5, age / CHANNEL_HALF_LIFE_TICKS);
+  const keep = halfLifeFactor(age, CHANNEL_HALF_LIFE_TICKS);
   return roundStock(NEUTRAL_STOCK01 + (stock01 - NEUTRAL_STOCK01) * keep);
 }
 

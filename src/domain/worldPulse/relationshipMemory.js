@@ -1,4 +1,5 @@
 import { TIER_ORDER } from '../../data/constants.js';
+import { halfLifeFactor } from './bandedStock.js';
 import { detLog10 } from '../../kernel/detMath.js';
 import { truncateAtWord } from '../../lib/text.js';
 import {
@@ -126,7 +127,7 @@ export function relationshipMemoryWeight(
   if (!Number.isFinite(eventTick)) return 0;
   const age = Math.max(0, Number(currentTick || 0) - eventTick);
   if (age > maxLookbackTicks) return 0;
-  return clamp01(Math.pow(0.5, age / Math.max(1, halfLifeTicks)));
+  return clamp01(halfLifeFactor(age, Math.max(1, halfLifeTicks)));
 }
 
 function memoryEntry(/** @type {any} */ raw, /** @type {any} */ currentTick, /** @type {any} */ fallbackType) {

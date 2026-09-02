@@ -76,6 +76,7 @@
  *   window / goal / coherence / three-body / stigma / standing-loop pins).
  */
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { halfLifeFactor } from './bandedStock.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
 import { tickStreamSeedOf, yearStreamSeedOf } from '../advanceEpochLedger.js';
 import { isOffStage } from '../roads/state.js';
@@ -1035,7 +1036,7 @@ function factionLoopModifiers(a) {
   }
   const quality = n ? q / n : 0.5;
   const power = clamp(1 + LADDER_TUNING.LEADERSHIP_GAIN * (quality - 0.5) * 2, LADDER_TUNING.POWER_MOD_MIN, LADDER_TUNING.POWER_MOD_MAX);
-  const decayed = decayWeeks > 0 ? priorInstability * Math.pow(0.5, decayWeeks / LADDER_TUNING.INSTABILITY_HALF_LIFE_WEEKS) : priorInstability;
+  const decayed = decayWeeks > 0 ? priorInstability * halfLifeFactor(decayWeeks, LADDER_TUNING.INSTABILITY_HALF_LIFE_WEEKS) : priorInstability;
   const instab = clamp01(decayed + LADDER_TUNING.CHURN_BUMP * contests);
   const legit = clamp(1 - LADDER_TUNING.LEGIT_TAX * normBreakingWins, LADDER_TUNING.LEGIT_MOD_MIN, 1);
   return { power: round4(power), legit: round4(legit), instab: round4(instab) };

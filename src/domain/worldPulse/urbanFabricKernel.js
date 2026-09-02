@@ -80,6 +80,7 @@
  *   derivation, size governor, determinism, vocabulary pin).
  */
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { halfLifeFactor } from './bandedStock.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { settlementAlignment } from './settlementAlignment.js';
@@ -337,7 +338,7 @@ function calamitySeverity(stamp) {
 function decayed(v, deltaWeeks, halfLife) {
   if (!(v > 0)) return 0;
   if (!(deltaWeeks > 0)) return v;
-  return v * Math.pow(0.5, deltaWeeks / Math.max(1, halfLife));
+  return v * halfLifeFactor(deltaWeeks, Math.max(1, halfLife));
 }
 
 // ── Durable-signal reads (all pure over the freshest settlement + worldState) ──
@@ -632,7 +633,7 @@ export function advanceUrbanFabric({ snapshot, worldState, settlementUpdates, ti
     );
     const target = clamp01(1 - num(align.lawfulness01, 0.5));
     const drift = prior
-      ? target + (prior.drift - target) * Math.pow(0.5, Math.max(0, weeks - prior.week) / T.DRIFT_HALF_LIFE_WEEKS)
+      ? target + (prior.drift - target) * halfLifeFactor(Math.max(0, weeks - prior.week), T.DRIFT_HALF_LIFE_WEEKS)
       : target;
 
     // SCARS — decay each kind on its own masonry clock, then mint/refresh from

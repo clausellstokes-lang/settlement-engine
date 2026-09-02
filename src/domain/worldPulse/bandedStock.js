@@ -96,6 +96,30 @@ export function halfLifeWeeksOf(band) {
 }
 
 /**
+ * THE BARE HALF-LIFE FACTOR — the estate's ONE spelling of `0.5^(age / halfLife)`.
+ *
+ * WHY BARE, AND NOT `decayTowardNeutral`'s SHAPE. Twelve sites spelled this expression by
+ * hand, and each wrapped it differently: `v * f`, `clamp01(f)`, `base + (v - base) * f`, a
+ * rounding door, band multipliers, an `Infinity` band that must never fade. Those wraps are
+ * per-instance MEANING and stay with their instances; only the exponential is shared.
+ * Pushing the banded signature onto a multiplier-style caller would hand twelve callers a
+ * neutral they do not have, so this helper takes no neutral, no clamp, no band and no
+ * rounding — it is the factor and nothing else.
+ *
+ * ⚠ UNITS — THE ONE INVARIANT. `age` and `halfLife` are consumed ONLY through their RATIO
+ * and must be in the SAME unit AS EACH OTHER. Seven callers pass ticks and five pass weeks,
+ * and both are correct, because neither number is ever compared with another caller's clock.
+ * The function cannot observe a unit, which is exactly why it cannot mix two.
+ *
+ * @param {number} age       elapsed time since the value was written
+ * @param {number} halfLife  the time in which half of it is forgotten — SAME UNIT as `age`
+ * @returns {number} the surviving fraction
+ */
+export function halfLifeFactor(age, halfLife) {
+  return Math.pow(0.5, age / halfLife);
+}
+
+/**
  * THE ONE DECAY SHAPE. A stock relaxes toward its neutral on the named half-life.
  *
  * The anti-ratchet guarantee lives in this arithmetic and is asserted as a PROPERTY
@@ -122,7 +146,7 @@ export function decayTowardNeutral(value, neutral, ageWeeks, band) {
   // bit-identical to `v` for every double, and a stock that drifts by 2e-17 on a
   // zero-week read would put a phantom band crossing in a receipt at the edges.
   if (!(age > 0)) return v;
-  return n + (v - n) * Math.pow(0.5, age / weeks);
+  return n + (v - n) * halfLifeFactor(age, weeks);
 }
 
 /**

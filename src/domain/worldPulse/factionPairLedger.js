@@ -37,6 +37,7 @@
  * @enforced-by tests/domain/factionPairLedger.test.js
  */
 import { clamp01 } from '../../kernel/math.js';
+import { halfLifeFactor } from './bandedStock.js';
 import { compareCodepoint } from '../deterministicSort.js';
 
 export const FACTION_PAIR_TUNING = Object.freeze({
@@ -181,7 +182,7 @@ export function mintFactionPairIncident(worldState, { a, b, type, trustDelta = 0
 function decayScalar(/** @type {number} */ v, /** @type {number} */ deltaWeeks, /** @type {number} */ bandMult) {
   if (!(v > 0) || !(deltaWeeks > 0)) return v;
   if (!Number.isFinite(bandMult)) return v; // undying ⇒ never fades
-  return v * Math.pow(0.5, deltaWeeks / Math.max(1, FACTION_PAIR_TUNING.HALF_LIFE_WEEKS * bandMult));
+  return v * halfLifeFactor(deltaWeeks, Math.max(1, FACTION_PAIR_TUNING.HALF_LIFE_WEEKS * bandMult));
 }
 
 /**
