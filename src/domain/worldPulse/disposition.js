@@ -38,6 +38,7 @@
  */
 
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
+import { detTanh } from '../../kernel/detMathDecay.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { COUP_COERCION } from '../rulingPowerCoup.js';
 // The trait-weight leaf (FP-G3): the single source both TRAIT maps live in; npcData.js
@@ -216,7 +217,7 @@ const MULTIPLIER_SPAN = 0.5;
 /** tanh squash: a signed drive (roughly −1..+1) → a bounded signed value.
  * @param {number} x @returns {number} */
 function squash(x) {
-  return Math.tanh(x);
+  return detTanh(x);
 }
 
 // How hard war-weariness drags a regime's political footing. The exhaustion scar is
@@ -478,7 +479,7 @@ const OCCUPATION_MALICE_PER_HOLDING = 0.6;
  * @param {number} drive @returns {number} */
 function squash01(drive) {
   if (drive === 0) return 0.5;
-  return 0.5 + 0.5 * Math.tanh(drive);
+  return 0.5 + 0.5 * detTanh(drive);
 }
 
 /** The worldState id for a snapshot item, or null.
