@@ -960,8 +960,10 @@ describe('tuning register — the refreeze ritual refuses', () => {
    * ACTUAL dirt here makes each arm test the refusal it names; the dirty branch gets its own
    * arm below, driven in a throwaway repository so it never depends on this one's state.
    */
-  const currentlyDirty = () => gitOut('status', '--porcelain')
-    .split('\n').map((line) => line.slice(3).trim()).filter(Boolean);
+  // NOT `gitOut`, which trims the whole output and eats the leading space of the first
+  // porcelain line — see the lib's `gitPorcelainPaths` for the refusal that convicted it.
+  const currentlyDirty = () => execFileSync('git', ['status', '--porcelain'], { cwd: ROOT, encoding: 'utf8' })
+    .split('\n').filter((line) => line.length > 3).map((line) => line.slice(3).trim()).filter(Boolean);
 
   const baseArgs = () => ({
     root: ROOT,
