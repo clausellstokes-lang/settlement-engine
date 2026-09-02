@@ -119,6 +119,16 @@ function readHome(row, relPath) {
  * they compete for CPU with the very suite measuring them — a flakiness source bought for no extra
  * evidence. The battery therefore injects canned stdout to prove the PARSERS and the fail-closed
  * arms, and the real boundary is proved end to end by the landing's own executed generator run.
+ *
+ * ⛔ IT RETURNS STDOUT **UNTRIMMED**, AND THAT IS A CONTRACT, NOT AN OVERSIGHT. Two shapes travel
+ * this one boundary. The SCALAR rows trim at their own call site — `readAll` does
+ * `shell('stampedAt', …).trim()` — because a trailing newline inside a provenance field would be a
+ * defect. The LINE row, `dirtyMeasuredPaths`, must receive the bytes intact: `git status
+ * --porcelain` emits `XY<space>path` records, and trimming the whole output eats the leading status
+ * space of the FIRST RECORD ONLY, shifting its columns under a parser that is correct for every
+ * other line. Adding `.trim()` here is therefore a one-line change that silently breaks exactly one
+ * of four callers. It used to break it INVISIBLY; `parsePorcelainPaths` now asserts the column law,
+ * so the same mistake reds and names the record instead. Trim at the call site that needs it.
  */
 function shellOut(row, argv) {
   try {
@@ -428,9 +438,81 @@ export function capsuleFrom(readings) {
 }
 
 // ── the command line ─────────────────────────────────────────────────────────────────────────
-function dirtyMeasuredPaths() {
-  const porcelain = shellOut('dirty-tree', ['git', 'status', '--porcelain']);
-  return porcelain.split('\n').map((line) => line.slice(3).trim()).filter(Boolean)
+
+/**
+ * THE PORCELAIN RECORD PARSER, AND WHY IT ASSERTS RATHER THAN SLICING ON FAITH.
+ *
+ * `git status --porcelain` emits one record per line, `XY<space>path`: X and Y are the two columns
+ * of the status field, column 3 is the SEPARATOR, and THE PATH BEGINS AT COLUMN 4. For a
+ * worktree-only modification X is a SPACE, so a record reads ` M scripts/base-state-capsule.mjs`.
+ *
+ * ⛔ THE BYTES MUST ARRIVE UNTRIMMED, AND THIS PARSER NO LONGER TAKES THAT ON TRUST. Trimming the
+ * WHOLE command output — the right thing for a scalar, the wrong thing for a line stream — eats the
+ * leading space of the FIRST RECORD ONLY, so a `slice(3)` correct for every other record takes one
+ * character too many from record one. HERE THAT IS WORSE THAN A MANGLED STRING. `DIRTY_SCOPES` is a
+ * PREFIX ALLOWLIST, so ` M scripts/x` mangled to `ripts/x` matches nothing and is DROPPED: the
+ * dirty list comes back EMPTY and the generator stamps a capsule at HEAD naming a tree it did not
+ * measure — the exact lie `main`'s own refusal exists to prevent, in an artifact whose
+ * `consumptionLaw` then invites other lanes to cite it as EXECUTED.
+ *
+ * MEASURED, NOT REASONED (lane CURE-CAPSULE, five arms executed against this file's own committed
+ * blob BEFORE a byte of it changed). One dirty record, `shellOut` untrimmed: the door REFUSES and
+ * names it. The same tree with `.trim()` added to that return — six characters, nothing else
+ * changed: the door PERMITS. Two dirty records with the trim on: record one vanishes from the
+ * refusal while record two survives character-perfect. That last arm is the entire signature, and
+ * it is why the dependency is now written into `shellOut`'s contract instead of left to a caller's
+ * politeness.
+ *
+ * A RECORD WITHOUT THE SEPARATOR THEREFORE REFUSES, AND THAT ASSERTION IS THE PREVENTION. Put the
+ * whole-output trim back and record one arrives with a letter in column 3; this parser says so out
+ * loud, naming the record, instead of quietly returning a shorter list.
+ *
+ * NOT HANDLED, DELIBERATELY, AND IT FAILS IN THE CONSERVATIVE DIRECTION: a rename spells
+ * `R  old -> new`, and a path needing quoting arrives C-quoted. Both are read as opaque strings, so
+ * they can only ever ADD a path to the dirty list, never remove one — the door refuses rather than
+ * permits. Reading them properly wants `--porcelain=v1 -z`, a different command whose
+ * untracked-file semantics would have to be re-argued; `scripts/implementation-session.mjs` already
+ * spells that form, and it is not this file's to change.
+ *
+ * ⚠ IT IS A SECOND COPY, ON PURPOSE AND UNDER PROTEST. `tests/lint/sovereigntyLightingContract
+ * .walker.test.js` carries a twin from the same cure wave. It is not importable from here because
+ * it landed on a DESCENDANT of this file's base, and coupling a prevention car to an unlanded
+ * sibling would mean neither could land alone. The two deliberately share a NAME so that
+ * `git grep parsePorcelainPaths` finds every copy the day they fold into one `scripts/lib/` module;
+ * this one takes `row` first because inside this file every refusal names its row.
+ *
+ * PURE ON PURPOSE: it takes the bytes rather than fetching them, so it is provable against canned
+ * records with no subprocess and no dirty tree.
+ */
+export function parsePorcelainPaths(row, raw) {
+  return raw.split('\n').filter((line) => line !== '').map((line) => {
+    if (line.length < 4 || line[2] !== ' ') {
+      fail(row, `this is not a \`git status --porcelain\` record: ${JSON.stringify(line)}. The status`
+        + ' field is columns 1-2, column 3 is the separator, and the path begins at column 4.'
+        + ' Refusing to slice a record whose shape it cannot recognise is this parser\'s whole job.'
+        + ' The usual cause is the command output having been trimmed as a whole, which eats the'
+        + ' leading status space of the FIRST record and shifts its columns. Nothing was written.');
+    }
+    return line.slice(3);
+  });
+}
+
+/**
+ * The measured-path dirt gate.
+ *
+ * ⚠ `shell` IS A PARAMETER SO THE PARSE CAN BE PROVED. `main` accepts an
+ * `options.dirtyMeasuredPaths` that replaces this function WHOLESALE, which is right for the arms
+ * that need a dirty tree they cannot create — and proves nothing whatever about the parsing or the
+ * scoping below. Injecting the SHELL instead drives the real parser and the real allowlist over
+ * canned records.
+ *
+ * The per-path `.trim()` this once carried is deliberately GONE. It was a no-op in every real case
+ * (a path needing whitespace arrives C-quoted), and in the pathological case it would let a path
+ * differing from a scope only by whitespace compare equal — a false-CLEAN, the same direction as
+ * the defect above and the one this door must never fail in.
+ */
+export function dirtyMeasuredPaths(shell = shellOut) {
+  return parsePorcelainPaths('dirty-tree', shell('dirty-tree', ['git', 'status', '--porcelain']))
     .filter((path) => DIRTY_SCOPES.some((scope) => path === scope || path.startsWith(scope)));
 }
 
