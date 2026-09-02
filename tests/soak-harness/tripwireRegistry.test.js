@@ -42,7 +42,7 @@ describe('the tripwire registry', () => {
     expect([...TRIPWIRE_CLASSES]).toEqual(['deterministic', 'host-observability']);
     expect([...TRIPWIRE_IDS]).toEqual([
       'throw_or_assert', 'non_finite_ledger_figure', 'population_collapse',
-      'negative_stock', 'unbounded_growth',
+      'negative_stock', 'unbounded_growth', 'liveness_floor',
       'tick_duration_blowout', 'memory_watermark',
     ]);
     // TOTAL and DISJOINT: every row is in exactly one class, and both classes are live.
@@ -50,7 +50,10 @@ describe('the tripwire registry', () => {
     const observability = tripwiresOfClass('host-observability').map((row) => row.id);
     expect([...deterministic, ...observability].sort()).toEqual([...TRIPWIRE_IDS].sort());
     expect(deterministic.filter((id) => observability.includes(id))).toEqual([]);
-    expect(deterministic.length).toBe(5);
+    // SOAKCHAIN Car 1 adds `liveness_floor` — deterministic, so 5 -> 6 and 7 -> 8. The
+    // registry order is load-bearing (§10): the new row lands after `unbounded_growth` and
+    // before both host-observability rows.
+    expect(deterministic.length).toBe(6);
     expect(observability.length).toBe(2);
   });
 
@@ -143,6 +146,59 @@ describe('the tripwire registry', () => {
     // silences the class and not the cell.
     expect(evaluateTripwires({ ...pressured, stressorCounts: [-1] }).findings.map((row) => row.id))
       .toEqual(['negative_stock']);
+  });
+
+  it('liveness_floor ALWAYS folds live, convicts a frozen world, and names a writer that disagrees', () => {
+    const fired = (receipt) => evaluateTripwires(receipt).findings.map((row) => row.id);
+    const detailsOf = (receipt) => evaluateTripwires(receipt)
+      .findings.filter((row) => row.id === 'liveness_floor').map((row) => row.detail);
+    /** A decade of world, parameterised by how much it moves. */
+    const world = ({ years, types, moving }) => clean({
+      years,
+      yearlyHashes: Array.from({ length: years }, (_, i) => (moving ? `hash-${i}` : 'the-same-hash')),
+      behavioral: {
+        yearly: Array.from({ length: years }, (_, i) => ({
+          year: i + 1,
+          majorEventCount: 3,
+          eventTypeCounts: Object.fromEntries(types.map((type) => [`${type}_${i}`, 4])),
+        })),
+      },
+    });
+    const living = world({ years: 10, types: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'], moving: true });
+    const dead = { ...world({ years: 10, types: ['a'], moving: false }), behavioral: {
+      yearly: Array.from({ length: 10 }, (_, i) => ({ year: i + 1, majorEventCount: 0, eventTypeCounts: { only_one_type: 40 } })),
+    } };
+
+    // ⛔ THE SHAPE THE SOAK ONLY EVER PRINTED ABOUT: ten years, one typed event, a composite
+    // that stops moving. `frozenTail` computed exactly this and nothing consumed it.
+    expect(fired(dead)).toEqual(['liveness_floor', 'liveness_floor']);
+    expect(detailsOf(dead)[0]).toContain('monoculture: decade 1 (years 1-10) carried 1 distinct typed events');
+    expect(detailsOf(dead)[1]).toContain('frozen: decade 1 (years 1-10) moved the composite state in 1 of 10 years');
+    // A living decade fires nothing, so the row is a measurement and not a stamp.
+    expect(fired(living)).toEqual([]);
+    // ⭐ AN ARCHIVED RECEIPT STILL CONVICTS — the fold's evidence survives JSON.
+    expect(fired(JSON.parse(JSON.stringify(dead)))).toEqual(['liveness_floor', 'liveness_floor']);
+
+    // THE CROSS-CHECK. A writer-side block that AGREES with the live fold adds nothing…
+    const agreeing = { ...dead, liveness: { executable: true, failures: [
+      { kind: 'monoculture', decade: 1 }, { kind: 'frozen', decade: 1 },
+    ] } };
+    expect(fired(agreeing)).toEqual(['liveness_floor', 'liveness_floor']);
+    // …and a doctored one that claims the world is fine is NAMED rather than believed. A
+    // writer-side `failures: []` would otherwise silence the fold entirely.
+    const doctored = { ...dead, schemaVersion: 5, liveness: { executable: true, failures: [] } };
+    const doctoredDetails = detailsOf(doctored);
+    expect(doctoredDetails).toHaveLength(3);
+    expect(doctoredDetails[2]).toBe(
+      "liveness_writer_disagrees: the receipt's own liveness block (receiptSchemaVersion 5) "
+      + 'lists [none] where the live fold finds [monoculture@1,frozen@1]',
+    );
+
+    // Below one FULL decade the row measured nothing, so it reports nothing — neither a
+    // pass nor a finding (§206.2b's third status).
+    expect(fired(world({ years: 3, types: ['a'], moving: false }))).toEqual([]);
+    // And a receipt with no behavioral fold at all is silent rather than convicted.
+    expect(fired(clean())).toEqual([]);
   });
 
   it('every row is a REGISTRY ROW — a new class costs its row or the guard is invisible', () => {

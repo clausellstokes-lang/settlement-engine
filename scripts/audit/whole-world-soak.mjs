@@ -100,6 +100,16 @@ import {
   soakProperties,
 } from './soakRules.mjs';
 import {
+  LIVENESS_CHECK_TITLE,
+  POPULATION_ENVELOPE,
+  YEARLY_BYTES_PER_SETTLEMENT_CEILING,
+  foldDecades,
+  livenessVerdict,
+  nonFinitePaths,
+  populationEnvelopeVerdict,
+  wallTimeTrendVerdict,
+} from './soakInvariants.mjs';
+import {
   buildBehavioralObservation,
   buildDarkControl,
   buildNeighborControl,
@@ -316,22 +326,11 @@ function buildFixture(seed, { variant = 'baseline' } = {}) {
 }
 
 // ── NaN / Infinity deep scan (fail-fast every year) ──────────────────────────
-function findBadNumber(value, path = '$', out = [], seen = new Set()) {
-  if (out.length >= 5) return out;
-  if (typeof value === 'number') {
-    if (!Number.isFinite(value)) out.push(`${path} = ${value}`);
-    return out;
-  }
-  if (!value || typeof value !== 'object') return out;
-  if (seen.has(value)) return out;
-  seen.add(value);
-  if (Array.isArray(value)) {
-    for (let i = 0; i < value.length; i++) findBadNumber(value[i], `${path}[${i}]`, out, seen);
-    return out;
-  }
-  for (const key of Object.keys(value)) findBadNumber(value[key], `${path}.${key}`, out, seen);
-  return out;
-}
+// ONE spelling, in ./soakInvariants.mjs — this scan and `scripts/soak/tripwires.mjs`
+// carried a character-for-character copy each. The local alias keeps all three call
+// sites (the per-year throw, the restore probe's receipt census, the main receipt's)
+// reading exactly as they did, so the seam is a rename and not a re-shape.
+const findBadNumber = (value) => nonFinitePaths(value);
 
 // ── One N-year run: thread state year over year like the store does ──────────
 async function runYears(seed, years, label, {
@@ -839,8 +838,54 @@ const finalTotal = finalPops.reduce((a, b) => a + b, 0);
 const everyAlive = runA.yearlyPopulations.every((pops, y) => pops.every((p, i) => Number.isFinite(p) && (p > 0 || Boolean(runA.yearlyDiedFlags?.[y]?.[i]))));
 const ratio = startTotal > 0 ? finalTotal / startTotal : 0;
 check(everyAlive, 'every settlement population finite and > 0 every year (remnants excepted: a properly-died settlement holds zero by law)');
-check(ratio > 0.05 && ratio < 20, 'realm population bounded',
-  `${startTotal} → ${finalTotal} (×${ratio.toFixed(2)}; envelope 0.05–20)`);
+// The envelope is now ONE spelling (./soakInvariants.mjs POPULATION_ENVELOPE); the printed
+// line is built from that constant rather than from two inline numbers, so the log reads
+// byte-identically and the figures can no longer drift apart.
+const populationEnvelope = populationEnvelopeVerdict({ startTotal, finalTotal });
+check(populationEnvelope.passed, 'realm population bounded',
+  `${startTotal} → ${finalTotal} (×${ratio.toFixed(2)}; envelope ${POPULATION_ENVELOPE.min}–${POPULATION_ENVELOPE.max})`);
+
+// ── 4c. THE LIVENESS FLOOR (SOAKCHAIN Car 1; DESIGN_HORIZON §1.6, §4.1) ───────
+// ⛔ THE GAP THIS CLOSES, NAMED. `frozenTail` below is COMPUTED and PRINTED as a finding
+//    that nothing consumes, so a thirty-year world whose composite hash stops changing at
+//    year 5 passes every assertion this script owns, and the behavioral oracle's own
+//    tempo/motion rows are `release`-gated (behavioralContract.js:1031) while the weekly
+//    job runs `weekly`. Until now the weekly watchdog passed a frozen world by design.
+//    The fold is the estate's ONE fold and the floor is graded for EVERY profile.
+const liveness = livenessVerdict(
+  foldDecades({
+    yearlyEventTypeCounts: runA.yearlyBehavior.map((row) => row?.eventTypeCounts),
+    yearlyHashes: runA.yearlyHashes,
+    yearlyMajorCounts: runA.yearlyBehavior.map((row) => row?.majorEventCount),
+    settlements: SETTLEMENTS,
+  }),
+  { years: YEARS, settlements: SETTLEMENTS },
+);
+if (!liveness.executable) {
+  // §206.2b's third status. Below one FULL decade no world could pass this instrument, so
+  // the answer carries no information about liveness and it is not a failure.
+  notExecutable(LIVENESS_CHECK_TITLE, liveness.reason);
+} else {
+  check(
+    liveness.passed,
+    LIVENESS_CHECK_TITLE,
+    liveness.failures.length
+      ? liveness.failures.map((failure) => `${failure.kind}: ${failure.detail}`).join('; ')
+      : `${liveness.rows.length} decade(s); min distinct types ${liveness.reported.minDistinctTypesPerDecade}`
+        + ` (floor ${liveness.floor.minDistinctTypesPerDecade}), min hash moves ${liveness.reported.minHashMovesPerDecade}`
+        + ` (floor ${liveness.floor.minHashMovesPerDecade}), min events/settlement ${liveness.reported.minEventsPerSettlementDecade}`
+        + ` (floor ${liveness.floor.minEventsPerSettlementDecade})`,
+  );
+  // ⚠ REPORTED, NOT GRADED — the axis the floor cannot convict on. §1.6's LIVENESS_FLOOR
+  // carries no major band, so a world whose major-event stream has died still passes. It
+  // is printed here rather than left implied; see soakInvariants.mjs's header.
+  console.log(
+    `        majors: min ${liveness.reported.minMajorsPerDecade} per decade;`
+    + ` ${liveness.reported.majorSilentDecades} decade(s) with none`
+    + `${liveness.reported.majorSilentDecadeNumbers.length ? ` (${liveness.reported.majorSilentDecadeNumbers.join(', ')})` : ''}`
+    + ' — REPORTED, and no floor grades it',
+  );
+}
 
 // 4b. performance-scale-6 — the COST ENVELOPE. Serialized worldState+regionalGraph
 // bytes are REPORTED per year and asserted under a documented per-settlement ceiling
@@ -859,16 +904,23 @@ if (bytes.length >= 2) {
   // the accumulating (retention-capped) impact/relationship ledgers; ~900KB/settlement
   // is a wide envelope over the measured ~150KB/settlement at 6y (≈385KB/settlement
   // extrapolated to 30y).
-  const ceiling = 900_000 * SETTLEMENTS;
+  const ceiling = YEARLY_BYTES_PER_SETTLEMENT_CEILING * SETTLEMENTS;
   check(maxBytes < ceiling, 'serialized state under the house envelope',
     `max ${(maxBytes / 1e6).toFixed(2)}MB < ${(ceiling / 1e6).toFixed(2)}MB (${SETTLEMENTS} settlements)`);
-  // Wall-time trend (machine-tolerant — reported, generously bounded).
-  const ms = runA.yearlyMs;
-  const meanOf = (a, x, y) => { const s = a.slice(Math.floor(a.length * x), Math.floor(a.length * y)); return s.reduce((p, q) => p + q, 0) / Math.max(1, s.length); };
-  const q1 = meanOf(ms, 0, 0.25);
-  const q4 = meanOf(ms, 0.75, 1);
-  check(q4 <= q1 * 8 + 50, 'per-year wall-time trend not age-linear',
-    `Q1 ${q1.toFixed(1)}ms → Q4 ${q4.toFixed(1)}ms/year`);
+  // Wall-time trend (machine-tolerant — reported, generously bounded), NOW WITH THE SAMPLE
+  // FLOOR IT NEVER HAD. ⛔ THE DEFECT, NAMED: at three years `meanOf(ms, 0, 0.25)` averages
+  // an EMPTY slice and returns 0, so the band degenerated to `q4 <= 50` and the row read
+  // `Q1 0.0ms → Q4 11703.0ms` and FAILED a run whose every world assertion had passed (the
+  // D2bR probe receipt carries `passed: false, properties: []` for exactly that run). A
+  // precondition that did not hold is the third status, never a failure — and no receipt of
+  // four years or more changes by one byte.
+  const wallTime = wallTimeTrendVerdict(runA.yearlyMs);
+  if (!wallTime.executable) {
+    notExecutable('per-year wall-time trend not age-linear', wallTime.reason);
+  } else {
+    check(wallTime.passed, 'per-year wall-time trend not age-linear',
+      `Q1 ${wallTime.q1.toFixed(1)}ms → Q4 ${wallTime.q4.toFixed(1)}ms/year`);
+  }
   console.log(`\n## cost envelope (serialized worldState+regionalGraph bytes per year)`);
   console.log(`  ${bytes.map((b) => (b / 1e3).toFixed(0) + 'KB').join(' ')}`);
   console.log(`  max ${(maxBytes / 1e6).toFixed(2)}MB · final ${(bytes[bytes.length - 1] / 1e6).toFixed(2)}MB · ${(maxBytes / SETTLEMENTS / 1e3).toFixed(0)}KB/settlement`);
@@ -1020,6 +1072,21 @@ const receiptBody = {
     + (darkControl ? 1 : 0)
   ) * 52,
   frozenTail,
+  // ⭐ THE LIVENESS FOLD, ON THE RECEIPT. ADDITIVE and deliberately NOT a schema bump (the
+  // beliefDivergence precedent): every v5 field keeps its exact v5 meaning and no consumer
+  // is required to read this one. `RECEIPT_FIELD_ARITY` owes nothing for a key no metric
+  // row declares. ⚠ IT IS A CROSS-CHECK, NOT THE SOURCE OF TRUTH: `liveness_floor` ALWAYS
+  // folds live from `behavioral.yearly[].eventTypeCounts` and `yearlyHashes`, because two
+  // computation paths for one verdict would let the same world convict or pass by which
+  // soak version wrote the receipt — and a writer-side `failures: []` would silence the
+  // fold entirely. When the two disagree the registry names THIS block's schema version.
+  liveness: {
+    executable: liveness.executable,
+    reason: liveness.reason,
+    rows: liveness.rows,
+    failures: liveness.failures,
+    reported: liveness.reported,
+  },
   failures,
   // §206.2b — the assertions whose PRECONDITION did not hold, stated POSITIVELY with the
   // reason on their face. A silent omission would read exactly like a pass; this reads
