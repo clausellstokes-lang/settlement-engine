@@ -18,6 +18,114 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-09-02 — T13 TRANS: THE CROSS-ENGINE TRANSCENDENTAL RETIREMENT (ODQ §883; the §879.11
+ *   REC's declared-shift window). ZERO ROWS OF 525 MOVED IN THIS MANIFEST — it is NOT
+ *   re-recorded, and this block is the trace that a re-record which never happened must
+ *   leave. Sixteen cars landed on the TAIL-F tip `9a0584f0f`; thirty engine-approximated
+ *   `Math` sites in generation code were retired onto the estate's own deterministic
+ *   kernels, so a stored seed makes the same world on every JS engine. Measured at the
+ *   COMPOSED landing tip, both arms, with the base arm reproducing C′'s recorded figures
+ *   first: probe C `87e8b25c…f695` base AND tip; probe A′ `abe0a847…c4b7` base AND tip,
+ *   600/600 rows byte-identical; this suite 3/3 at both arms; the independent 525-row
+ *   census DRIFT_COUNT=0 with its poisoned-key negative control convicting exactly 1.
+ *   ⛔ THE COMPARATORS WERE PROVEN ABLE TO SEE FIRST, and deterministically, per §882's D-4:
+ *   ONE enumerable field planted on the object the pipeline returns moved probe C's sha to
+ *   `78b3cbb7…` and EVERY ONE of probe A′'s 600 rows; the blob-verified restore returned
+ *   both exactly. A threshold constant would have been the weak control D-4 forbids.
+ *
+ *   ROW (ii) — exp/logistic → detExp (`c17345595`, seven sites): 0 of 525. Worst-case
+ *   kernel error 2.21e-16. Totality control: the 525 key set identical; poisoned-key
+ *   negative control drifted exactly 1. DISCRETE FLIPS IN THIS MANIFEST: none.
+ *
+ *   ROW (iii) — log/log10 → detLn/detLog10 (`da8cd72fb`, seven sites): 0 of 525 here.
+ *   detLn 4.32e-16, detLog10 2.22e-16. ⭐ THE NAMED WEAKNESS THIS ROW CARRIED IS NOW
+ *   DISCHARGED, AND NOT IN THE DIRECTION ANYONE EXPECTED. The pre-board wrote: "measured
+ *   together with (ii), no single-variable revert control was run because there was no
+ *   movement to attribute — if movement ever appears here, attribution is UNPROVEN and
+ *   revert controls are owed FIRST." Movement DID appear at the composed tip, in the
+ *   momentum dormancy golden (see the row below), the revert controls WERE owed and WERE
+ *   run, and they landed on THIS family: `attrition.js`'s `relativeStrengthTilt()`, whose
+ *   log-ratio `Math.log(a / d)` became `detLn(a / d)`. The weakness was real, the debt was
+ *   paid at the moment it came due, and the family that carried it is the family that moved.
+ *
+ *   ROW (iv)+(v)+(vi) — tanh, fractional pow, integer pow (`83a806a38` · `821be1e01` ·
+ *   `5eb02872d`): 0 of 525 on eight golden instruments plus the independent 525-row probe
+ *   and the negative control. (vi) is exact by construction (integer exponents become
+ *   multiplies); (v)'s fractional powers carry 3.6e-14. The same measured-together
+ *   weakness applied and the same revert ladder answered it: neither family returns the
+ *   moved row. ⚠ NAMED, NOT COVERED OVER: `martialReadiness:239` and
+ *   `populationDynamics:140` are declared-shift sites with NO consumer suite of their own
+ *   and are covered only indirectly (CR-9); they are handed to the GOLDEN freeze.
+ *
+ *   ROW (i) — half-life → halfLifeKeep (`f95305812`, the ONE site the whole routed family
+ *   flows through): 0 of 525, with the negative control convicting. The declared shift is
+ *   measured in ULPs at the COMPOSED tip rather than cited from the dock: 686 of 8,988
+ *   real-domain pairs differ by exactly ONE ULP (7.632 %); the largest relative difference
+ *   is a single denormal, `5e-324 → 0` at age 3976 / halfLife 3.7, which is zero at every
+ *   consumer; whole-period exactness k=0..40 is 41/41 for kernel AND platform; the seven
+ *   edge cases are identical; the comparator can distinguish two different doubles. The
+ *   shift is REAL in the kernel and does not reach this corpus.
+ *
+ *   BASELINE — Car 2a (`779592644`), proven identical, not merely unmoved: `stressors:297`
+ *   literal fold (the frozen decimal's provenance recorded), `siteGenesis:376` x*x twice,
+ *   `generosityEV:299` halving ladder — three BIT claims proven base-vs-tip on the real
+ *   comparator, with the comparator's own control included.
+ *
+ *   BASELINE — Car 2b (`845fcfe38`): the four TRIG sites retired by CODE MOTION into
+ *   `src/components/map/` — no kernel, no shift, and the no-move receipt to show it. The
+ *   town map did not shift.
+ *
+ *   BASELINE — Car 3 (`bef11b0bd`): twelve hand-spelled half-life copies collapse onto one
+ *   bare factor — 8,988 pairs, 0 bit mismatches, negative control can fail, re-measured at
+ *   the composed tip. ⚠ THE MUTATION CONTROL CONVICTS 8 OF 13 SITES: the five module-private
+ *   decay functions `dispositionLedger:468` · `npcGrowthKernel:260` · `npcLadderKernel:1038`
+ *   · `npcLadderState:241` · `urbanFabricKernel:635` are an ESTATE coverage gap, named here
+ *   rather than claimed away (CR-9).
+ *
+ *   BASELINE — Car P′ (`822c4f93a`): `strongerFirst` as the lexicographic
+ *   (tier, min(pop, CAP)) ordering with the MEASURED crossing double
+ *   2511886.43150957906619 (the `10^6.4` literal sits 7 ULPs above it). At the composed tip:
+ *   15,071,406 integer comparisons, 3,000,000 random quadruples, cross-rank, above-cap and
+ *   NaN arms → 0 divergences; the differential probe 2,449,965 cases → 0. ⚠ THE RESIDUAL,
+ *   per §881.19's restatement: identical on every integer and reachable input, strictly
+ *   finer on non-integer doubles within one part in 7e13 — 0 reversals, 0 coarser, 56,948
+ *   old-tie→new-strict on adjacent doubles, and 0 integer-tie collapses of 2,511,885. A
+ *   named comparator gap for the GOLDEN handover, not a STOP.
+ *
+ *   ⭐ THE ONE FLIPPED ROW IN THE WHOLE WINDOW, AND IT IS NOT IN THIS MANIFEST.
+ *   `tests/property/momentumDormancyGolden.test.js` key `mo-b|8|one_month` — the
+ *   marching-war world driven eight one-month ticks — moved under this consist:
+ *   `76a3f0c3…` → `3ef86c32…`. Its siblings `mo-a` (4 ticks) and `mo-c` (6 weekly ticks)
+ *   are byte-identical. GREEN at C′ and RED at the composed tip, so it is a MOVE and not a
+ *   banked red; the base arm's 6/6 was taken as the totality control BEFORE anything was
+ *   re-recorded. ATTRIBUTED BY SINGLE-VARIABLE REVERT in a throwaway copy of the tip:
+ *   reverting `momentum.js` alone leaves it RED (so the suite's NAME is not its cause);
+ *   reverting every T13 src edit turns it GREEN; re-applying only `src/domain/worldPulse/*`
+ *   turns it RED; the family as of pick 7 is GREEN and as of pick 8 is RED; and advancing
+ *   one file at a time from the pick-7 green convicts `attrition.js` alone, with
+ *   `militaryStrength.js`, `occupation.js`, `relationshipMemory.js` and
+ *   `relationshipRuleHelpers.js` each green. THE MOVER IS
+ *   `src/domain/worldPulse/attrition.js` at `da8cd72fb` (Car 4 family (iii)), one line in
+ *   `relativeStrengthTilt()`. Re-recorded ONCE inside this window by the suite's own capture
+ *   path. This is the enumeration the REC signed for — "every flipped row is individually
+ *   named" — and it is one row, named, not an empty list.
+ *
+ *   THE WINDOW'S CLOSING LINE. T13 TRANS opened and closed with ZERO of 525 CORPUS rows
+ *   moved on every instrument at the composed landing tip: probe C and probe A′ identical
+ *   at base and tip with deterministic controls that saw and returned; this suite 3/3 at
+ *   both arms; the eight-golden battery green at both arms; `goldenViewModel` 4/4 (the paid
+ *   surface unmoved); the espionage, mission, rider and faith fences unmoved; and the WHOLE
+ *   `tests/property` golden/fence/dormancy family — 70 files enumerated by command, not
+ *   curated — 535 tests green at BOTH arms. Exactly ONE dormancy-golden row was
+ *   re-recorded, attributed above, and nothing else. THIS MANIFEST
+ *   (`tests/fixtures/generator-golden-master.json`) is byte-identical, blob
+ *   `b99a14d1aa949a60df93e3f74865947bdd0c87e1`, the same blob it carries at C′. The only
+ *   cured sites the generator reaches at all are `corruption.js` and
+ *   `canonicalRelationship.js` — re-derived at the composed tip, not assumed — and both
+ *   proved bit-identical on integer inputs. The declared ~1e-14 shift is REAL in the
+ *   kernels, measured per family, and invisible to this corpus, which is the result the
+ *   kernel grade was chosen to buy.
+ *
  * 2026-09-01 — THE ENGINE STOPS QUOTING A RULEBOOK (305 rows of 525 moved; 0 rows added,
  *   0 removed, 0 templates added or removed, 0 array-length moves). Lane TE-AGNOSTIC-1,
  *   cars `f2c1ad181` (car 3) and `97d119c9b` (car 4), landed at the ENGINE-HYGIENE consist.

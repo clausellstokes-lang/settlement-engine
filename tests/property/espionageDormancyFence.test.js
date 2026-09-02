@@ -188,6 +188,35 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-09-02, T13 TRANS — THE WINDOW OPENED AND CLOSED WITH ZERO MOVEMENT ──────────
+ * ⛔ THE STOP IS RE-ARMED TO EXACTLY ONE NAMED WINDOW. T13 TRANS (ODQ §879.11 REC, §883
+ * landing) retired every transcendental site in the six census trees — thirty declared-shift
+ * sites onto engine-exact kernels, the ratchet at ZERO with an eslint ban behind it — and this
+ * corpus did not move: at the composed landing tip the driven golden hashed 360/360 distinct
+ * settlements to `72acacd8…`, the value below, so this constant is NOT re-recorded (a re-record
+ * that never happens leaves the same trace as one that does — this block is that trace). The
+ * two cured sites the generator reaches (corruption.js's guild grip, now in thievesGuild.js, and
+ * canonicalRelationship's popScore, folded to a lexicographic key) proved bit-identical on every
+ * integer input, and the reach was RE-DERIVED at the composed tip rather than inherited: of the
+ * thirty-eight cured src leaves, exactly those two are reachable from the pipeline and the other
+ * thirty-six are not. ⚠ ONE ROW DID FLIP IN THE WINDOW, OUTSIDE THIS CORPUS, and it is named
+ * here because a seal that hides a mover is worth nothing: momentumDormancyGolden's
+ * `mo-b|8|one_month`, attributed by single-variable revert to `attrition.js` at `da8cd72fb`
+ * (family (iii)'s log-ratio) and re-recorded ONCE. It does not touch this corpus, which is
+ * generator-side; the fence's own 21/21 is the proof.
+ * Remaining chartered windows: ONE — the LIGHTING WAVE
+ * (ODQ §881.4, the owner's order: every dark door lights as a DECLARED SHIFT before the GOLDEN
+ * freeze), carrying the re-homed constituents MF-CH2B (§881.14 CR-3: its own SHIFT RECORD and
+ * revert control, fresh from the post-HORIZON tip) and CH-6b's §594.1 can-it-see control
+ * (CR-10). NON-MOVERS BY CONSTRUCTION, named so this seal names ALL chartered windows: HORIZON-
+ * INSTR and HORIZON-DARK (instrumentation and dark doors move no default-preset byte; each lands
+ * with this fence 21/21 as its proof). Any movement outside the LIGHTING WAVE's own recorded
+ * window is a STOP, never a re-record. TERMINAL — ZERO windows, permanent STOP, the posture the
+ * GOLDEN freeze then makes owner-keyed — is the LIGHTING WAVE's close act, immediately before
+ * the freeze; it is deliberately NOT this act (§881.4 supersedes the charter's §8a/§11.5).
+ * (Scope chain, executed: {WAR-mini iff generator-side · AGN@HYG · T13} → {T13 TRANS} →
+ * {LIGHTING WAVE} at this act.)
+ *
  * ── 2026-09-01, ENGINE-HYGIENE (`500cc111…` → `72acacd8…`) ──────────────────
  * THE MOVER WAS NAMED BEFORE IT LANDED, WHICH IS THE WHOLE POINT OF THIS FENCE.
  * TE-AGNOSTIC-1's two output-moving cars carry their own SHIFT RECORDS (commit
@@ -209,8 +238,9 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * TOO STRONG: AGN's chartered movement was already in flight. The amended scope was
  * {WAR-mini iff generator-side · AGN@HYG · T13}; WAR-mini measured generation-inert
  * (fence 21/21 on three arms) and AGN@HYG is discharged HERE, so the remaining named
- * window is exactly **{T13 TRANS}**. Any movement outside T13's own recorded window
- * is a STOP, never a re-record. ⭐ AND THE LAW THE AMENDMENT MINTED, kept where the
+ * window was exactly **{T13 TRANS}** — SPENT AND SUPERSEDED by the T13 TRANS block
+ * above, which closed that window with zero movement and re-armed the scope to
+ * {LIGHTING WAVE}. ⭐ AND THE LAW THE AMENDMENT MINTED, kept where the
  * next sealer will read it: A SEAL MUST NAME ALL CHARTERED WINDOWS, OR NONE.
  *
  * ── 2026-09-01, T8 (`a5207e29…` → `500cc111…`) ──────────────────────────────
@@ -293,7 +323,8 @@ describe('FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain 
       sha(rows.join('\n')),
       'THE DRIVEN CORPUS MOVED. This is a STOP, not a re-record. The constant is'
       + ' re-recorded ONLY inside a NAMED CHARTERED WINDOW, and after the'
-      + ' ENGINE-HYGIENE landing spent AGN\'s, exactly ONE remains: T13 TRANS.'
+      + ' ENGINE-HYGIENE landing spent AGN\'s, T13 TRANS closed with zero movement'
+      + ' (§883); exactly ONE remains: the LIGHTING WAVE (§881.4).'
       + ' Anything else moving this number is an unpriced same-seed shift in the world'
       + ' a player gets. FIND THE MOVER — and attribute it to zero residue — before'
       + ' touching this constant; see this file\'s golden header for how the last two'
