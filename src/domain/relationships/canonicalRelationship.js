@@ -1,5 +1,3 @@
-import { detLog10 } from '../../kernel/detMath.js';
-
 const SYMMETRIC_TYPES = new Set([
   'neutral',
   'trade_partner',
@@ -180,6 +178,22 @@ const TIER_RANK = {
   metropolis: 5,
 };
 
+// `strongerFirst` used to score each side as TIER_RANK plus a saturating population
+// bonus and compare the two sums. That ordering is LEXICOGRAPHIC in (tier, population)
+// and nothing else: TIER_RANK is an integer 0–5 and the bonus lies in [0, 0.8], so a
+// larger tier always wins, and inside one tier the bonus rises with population until it
+// saturates. Comparing the pair directly is the SAME ordering with no cross-engine-
+// approximated call in it. The saturation point below is the MEASURED double at which
+// the old bonus reached its cap — pinned rather than recomputed, and engine-invariant
+// because the kernel's decimal log is built from correctly-rounded operations only.
+// Bit-identity is proven over every integer population the comparator can see
+// (0 … 2,511,900 against all six tiers, 15,071,406 comparisons) plus three million
+// random pairs; the one residual — two NON-integer populations closer together than one
+// part in 7e13, which the summed score could not tell apart — is recorded as a named
+// comparator gap in T13's shift record, and no population writer in the engine produces
+// a non-integer population.
+const POPULATION_SATURATION = 2511886.43150957906619;
+
 export const RELATIONSHIP_SELECTIONS = [
   { value: 'neutral', label: 'Neutral' },
   { value: 'trade_partner', label: 'Trade partners' },
@@ -223,13 +237,24 @@ export function isAdversarialRelationship(relType) {
 
 /**
  * @param {SettlementSaveLike | null | undefined} save
- * @returns {number} tier rank plus a small population-scaled bonus
+ * @returns {number} tier rank, 0 (thorp) … 5 (metropolis), unknown tiers as village
  */
-function strengthScore(save) {
+function tierRank(save) {
   const tier = String(save?.tier || save?.settlement?.tier || 'village').toLowerCase();
+  return TIER_RANK[tier] ?? 2;
+}
+
+/**
+ * The population as the size heuristic orders it: floored at 1 and saturated at
+ * POPULATION_SATURATION, so two settlements past the saturation point rank equal
+ * exactly as they did under the summed score. A non-numeric population stays NaN.
+ * @param {SettlementSaveLike | null | undefined} save
+ * @returns {number}
+ */
+function populationKey(save) {
   // @ts-expect-error -- population is number | { total } across save generations; `.total ||` is the tolerant read
   const population = Number(save?.settlement?.population?.total || save?.settlement?.population || 0);
-  return (TIER_RANK[tier] ?? 2) + Math.min(0.8, detLog10(Math.max(1, population)) / 8);
+  return Math.min(POPULATION_SATURATION, Math.max(1, population));
 }
 
 /**
@@ -240,7 +265,18 @@ function strengthScore(save) {
  * @returns {{ from: string, to: string }} stronger endpoint first
  */
 function strongerFirst(sourceId, targetId, sourceSave, targetSave) {
-  return strengthScore(targetSave) > strengthScore(sourceSave)
+  const targetTier = tierRank(targetSave);
+  const sourceTier = tierRank(sourceSave);
+  const targetPopulation = populationKey(targetSave);
+  const sourcePopulation = populationKey(sourceSave);
+  // `>= 1` is the not-NaN test — the key is floored at 1, so only a non-numeric
+  // population fails it. The summed score went NaN there, and `NaN > x` is false
+  // on either side, which is the source-first branch below.
+  const targetStronger = targetPopulation >= 1 && sourcePopulation >= 1
+    && (targetTier === sourceTier
+      ? targetPopulation > sourcePopulation
+      : targetTier > sourceTier);
+  return targetStronger
     ? { from: String(targetId), to: String(sourceId) }
     : { from: String(sourceId), to: String(targetId) };
 }

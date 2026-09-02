@@ -20,7 +20,6 @@
 
 import { institutionHasTag, TAG } from '../lib/entities.js';
 import { prosperityRank01 } from './prosperityRank.js';
-import { detExp } from '../kernel/detMath.js';
 // TRAIT_ALIGNMENT lives in the zero-import leaf data/npcTraitWeights.js (npcData.js
 // re-exports it). npcAlignmentScore below reads it. corruption.js is EAGER (first paint),
 // so it imports the LIGHT leaf directly — importing from npcData.js would drag that 64 kB
@@ -521,19 +520,13 @@ export const GUILD_TUNING = Object.freeze({
   powerFloorRange: 55,  // …+ strength × range (up to ~85 at full strength)
 });
 
-/**
- * Guild strength (0..1) from the factions it has captured. Saturating in total
- * captured power (so it asymptotes, never runs away) and lifted by diversity
- * (crime spread across many factions is harder to root out than one).
- * @param {{capturedPowers?:number[], distinctArchetypes?:number}} args
- */
-export function guildStrength({ capturedPowers = [], distinctArchetypes = 0 } = {}) {
-  const totalShare = (Array.isArray(capturedPowers) ? capturedPowers : [])
-    .reduce((a, p) => a + n01((Number(p) || 0) / 100), 0);
-  const base = 1 - detExp(-totalShare * GUILD_TUNING.powerRate); // saturating
-  const diversityMult = 0.6 + 0.4 * Math.min(1, (Number(distinctArchetypes) || 0) / GUILD_TUNING.diversityFull);
-  return clamp(base * diversityMult, 0, 1);
-}
+// The strength FORMULA itself lives with its only caller, in
+// worldPulse/thievesGuild — `guildStrength` there reads the dials above. This
+// module is EAGER (first paint) and the formula's saturation curve is the one
+// deterministic-kernel call on the whole eager path; moving the function to the
+// lazy tick module that already owned its single call site keeps the kernel out
+// of the first-paint closure. The dials stay HERE, beside the corruption knobs
+// they balance against.
 
 /** Effective security after the guild's drag — bounded so it never reaches zero.
  *  @param {number} security @param {number} strength */
