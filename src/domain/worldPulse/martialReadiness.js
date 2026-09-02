@@ -46,6 +46,7 @@
  */
 
 import { deityTemper } from './deityAxes.js';
+import { detPow } from '../../kernel/detPow.js';
 import { pietyMultOf } from './piety.js';
 import { isLiveWarFront, warFrontsInto } from './warFrontReads.js';
 import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
@@ -236,7 +237,7 @@ export function rustMagnitude(experience01) {
   const T = MARTIAL_READINESS_TUNING;
   const inexp = clamp01((T.RUST_FLOOR_EXPERIENCE - clamp01(experience01)) / T.RUST_FLOOR_EXPERIENCE);
   if (inexp <= 0) return 0;
-  return Math.min(T.RUST_MAX_ERROR, T.RUST_MAX_ERROR * Math.pow(inexp, T.RUST_EXP));
+  return Math.min(T.RUST_MAX_ERROR, T.RUST_MAX_ERROR * detPow(inexp, T.RUST_EXP));
 }
 
 // ── site readers: identity short-circuit (absent record ⇒ neutral) ─────────────

@@ -32,6 +32,7 @@
  * @enforced-by tests/domain/roadsState.test.js + tests/property/roadsDormancyGolden.test.js
  */
 import { isInStasis } from '../npc/npcOps.js';
+import { detPow } from '../../kernel/detPow.js';
 import { importanceWeight } from '../entities/npcs.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp01 } from '../../kernel/math.js';
@@ -374,7 +375,7 @@ export function exposureOf(a) {
  */
 export function captureProbability(a) {
   const T = ROADS_TUNING;
-  const divisor = Math.pow(Math.max(0.01, num(a.protection, 1)), num(a.alpha, 1));
+  const divisor = detPow(Math.max(0.01, num(a.protection, 1)), num(a.alpha, 1));
   return clampNum(num(a.base, 0) * clamp01(a.exposure) / divisor, 0, T.CAPTURE_CAP);
 }
 
