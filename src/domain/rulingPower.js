@@ -15,6 +15,13 @@
  *   - the CHANGE_RULING_POWER canon event (events/mutate.js) — the DM
  *     deciding it directly.
  *
+ * ⭐⭐ AND THE SEAT CAN NOW BE LOST WITHOUT THE HOUSE BEING LOST (ODQ §865, on
+ * §810.8 R23's direction). A transfer by a LAWFUL cause on a Register VII world
+ * leaves the defeated house standing as a non-governing power carrying
+ * `fell_from_power`, its relationships intact; force (coup, conquest) still
+ * overwrites it, which is R23's own division. Every v1 world — every world the
+ * product makes today — is byte-identical to before that repair.
+ *
  * The coup CONTEST model (COUP_COERCION / coupContenders / resolveCoupVerdict)
  * lives in the sibling domain/rulingPowerCoup.js — it is reached ONLY by the
  * lazy worldPulse tick modules, and transferRulingPower (the eager entrance)
@@ -27,6 +34,13 @@
  */
 
 import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
+// ⚠ THE DENSITY LAW'S OWN GATE, NOT A SECOND DIAL. `rollsRegisterVii` reads the version
+// a world was BORN under, so a save, a load, a same-seed regen and an undo all replay the
+// law the world was born under (densityLaw.js property 3). It costs this module nothing at
+// the bundle: `domain/density/densityLaw.js` is ALREADY in the entry's first-paint static
+// closure via `domain/events/mutateEntities.js`, which imports this same symbol.
+// @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget).
+import { rollsRegisterVii } from './density/densityLaw.js';
 
 const A = FACTION_ARCHETYPES;
 
@@ -81,9 +95,17 @@ const A = FACTION_ARCHETYPES;
  */
 
 /**
+ * ⚠ `config` / `_config` ARE DECLARED BECAUSE THIS MODULE NOW READS THEM, and both
+ * spellings are declared because the estate genuinely carries both: `factionRoles.js`
+ * and `mutateEntities.js` each read `settlement.config || settlement._config`, and a
+ * declaration narrower than the call sites is the class of lie that reddens a strict
+ * arm later. It is the persisted generation-input bag — the same one that carries
+ * `_seed` and `_densityLawVersion`.
  * @typedef {Object} RulingPowerSettlement
  * @property {PowerStructure} [powerStructure]
  * @property {string} [tier]
+ * @property {Record<string, unknown>} [config]
+ * @property {Record<string, unknown>} [_config]
  */
 
 /** @param {number} value */
@@ -333,6 +355,51 @@ function rebandLegitimacy(prev, score) {
 
 export const RULING_POWER_CAUSES = Object.freeze(['coup', 'election', 'succession', 'conquest', 'appointment']);
 
+/**
+ * ⭐⭐ ODQ §810.8 R23 — THE CAUSES BY WHICH THE SEAT PASSES LAWFULLY, AND THEREFORE
+ * THE CAUSES UNDER WHICH THE DEFEATED HOUSE LIVES.
+ *
+ * The owner's own words split the world in two: a rebellion or coup "completely
+ * overthrows the ruling seat (factions and all)", while a rival "simply takes over
+ * because they legitimacy and challenged and won". R23 names the halves and states the
+ * distinction outright: *"the difference between transfer and overthrow is whether the
+ * old house lives, and that difference is where decades of story come from."*
+ *
+ *   TRANSFER  (these causes)      — the defeated house SURVIVES DEMOTED. Out of the
+ *                                   seat, still among the powers, keeping its grudges
+ *                                   and its possibility of revanche.
+ *   OVERTHROW (`coup`, `conquest`) — the house is removed. That is today's behaviour and
+ *                                   it is untouched by this repair; §810.8 says outright
+ *                                   that "the coup machinery already in the tree serves
+ *                                   this family".
+ */
+export const LAWFUL_PASSAGE_CAUSES = Object.freeze(['succession', 'election', 'appointment']);
+
+/** The modifier a house carries once it has lost the seat and lived. Sibling of the
+ *  succession grammar's `house_power_fell` lesson word. */
+export const DEPOSED_MODIFIER = 'fell_from_power';
+
+/**
+ * Does this transfer LEAVE THE DEFEATED HOUSE STANDING?
+ *
+ * Tri-state by design. An explicit `demoteIncumbent` is a caller's typed decision and
+ * wins outright (the succession grammar's wiring car will pass its own
+ * `defeatedHouse.disposition`); ABSENT, the answer is the world's own born-under law —
+ * ⭐ the same `rollsRegisterVii` gate every other density surface reads, never a global
+ * dial. Under v1 — every world the product makes today — this is false at every call
+ * site, so the whole function is byte-identical to the one that could not demote.
+ *
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @param {string} cause
+ * @param {boolean | undefined} requested
+ * @returns {boolean}
+ */
+function demotesIncumbent(settlement, cause, requested) {
+  if (typeof requested === 'boolean') return requested;
+  if (!LAWFUL_PASSAGE_CAUSES.includes(cause)) return false;
+  return rollsRegisterVii(settlement?.config || settlement?._config || null);
+}
+
 // New-regime legitimacy: base by cause, pulled by how the OLD ruler stood —
 // deposing a hated ruler (score 10) starts the new one warmer than deposing a
 // merely contested one. (50 - oldScore) * oldPull is that pull.
@@ -359,16 +426,23 @@ const MAX_PREVIOUS_GOVERNMENTS = 6;
  * @param {string | null | undefined} tier
  * @param {RulingFaction[]} factions
  * @param {RulingFaction | null} governing
+ * @param {boolean} [incumbentSurvives] when the defeated house will stay on the roster
+ *   under its own name, that name is TAKEN like any other faction's
  * @returns {string}
  */
-function resolveGovernmentLabel(archetype, tier, factions, governing) {
+function resolveGovernmentLabel(archetype, tier, factions, governing, incumbentSurvives = false) {
   const preferred = governmentLabelFor(archetype, tier);
   // A label is taken when another faction's name EQUALS it — or CONTAINS it: the
   // conquest occupier 'Ironhold occupation authority' contains the OCCUPATION label
   // 'Occupation Authority', and an exact-match check would relabel the seat into a
   // read-alike of the power behind it (two factions both reading "occupation
   // authority" — the round-3 warDeployment collision).
-  const names = factions.filter(f => f !== governing).map(f => nameOf(f).toLowerCase()).filter(Boolean);
+  // ⚠ THE INCUMBENT IS EXCLUDED ONLY WHEN IT IS ABOUT TO STOP EXISTING. Under a
+  // demotion the old house stays on the roster under its own name, so excluding it
+  // would let a CIVIC winner over a 'Town Council' seat produce two rows both called
+  // 'Town Council' — one polity, two identical names, and nothing would have thrown.
+  const names = factions.filter(f => f !== governing || incumbentSurvives)
+    .map(f => nameOf(f).toLowerCase()).filter(Boolean);
   const takenBy = (/** @type {string} */ label) => names.some(n => n === label.toLowerCase() || n.includes(label.toLowerCase()));
   if (!takenBy(preferred)) return preferred;
   const alt = ALT_GOVERNMENT_LABELS[archetype];
@@ -392,10 +466,20 @@ function resolveGovernmentLabel(archetype, tier, factions, governing) {
  *
  * @param {RulingPowerSettlement} settlement
  * @param {string} newPowerName    faction name (powerStructure.factions entry)
+ * ⭐⭐ §865 / §810.8 R23 — THE DEMOTION. Under a LAWFUL passage on a world born under
+ * Register VII, the defeated house does not leave: the governing ROW is still reshaped
+ * into the winner's government form (the body persists, keeping its roster position and
+ * any authored `id`), and the old house is appended as its own non-governing row
+ * carrying `fell_from_power`. Before this repair both causes produced byte-identical
+ * rosters apart from one modifier word, so R23's central distinction — whether the old
+ * house lives — was unreachable in the tree.
+ *
  * @param {Object} [opts]
  * @param {'coup'|'election'|'succession'|'conquest'|'appointment'} [opts.cause]
  * @param {number|null} [opts.tick]
  * @param {string[]} [opts.losers]  losing contender names (coup verdicts) — get grudge edges
+ * @param {boolean} [opts.demoteIncumbent] force the defeated house to survive (true) or
+ *   to be overwritten (false). ABSENT ⇒ derived: lawful cause AND a Register VII world.
  * @returns {{ settlement: Object, transfer: Object|null, error: string|null }}
  */
 export function transferRulingPower(settlement, newPowerName, opts = {}) {
@@ -421,7 +505,8 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
 
   const archetype = factionArchetype(winner);
   const fromGovernment = nameOf(governing);
-  const toGovernment = resolveGovernmentLabel(archetype, settlement.tier, factions, governing);
+  const demoted = demotesIncumbent(settlement, cause, opts.demoteIncumbent) && !!fromGovernment;
+  const toGovernment = resolveGovernmentLabel(archetype, settlement.tier, factions, governing, demoted);
   // A1.12 PART 2 — THE SEAT IS RETYPED, NOT MERELY RENAMED. A DECLARED FUTURE-TICK
   // SHIFT (owner-visible, vetoable), and it is a REPAIR of a reshape that was already
   // three-quarters done: the two lines below already stamp the winner's archetype onto
@@ -466,6 +551,26 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     return f;
   });
 
+  // ⭐ THE DEPOSED HOUSE, STILL STANDING. A NEW row rather than a moved one: the
+  // governing row is the persistent BODY and keeps its position and its authored `id`
+  // (which addresses that slot, and which two rows may never share). The house's own
+  // facts — name, category, description, standing — are copied verbatim, because a
+  // house that merely lost the seat has not changed what it is. Its MODIFIERS are not
+  // copied: that list is the SEAT's history (every past transfer appends its cause to
+  // it), and handing it to the house would claim the house had done what the office
+  // did. The one fact this row asserts is the one that is true.
+  //
+  // ⛔ NO INVENTED POWER DELTA. The house lost the seat, not its wealth or its people,
+  // and how far a fall costs a house is a tuning judgment no lane may sign.
+  const { id: _seatSlotId, ...houseFacts } = /** @type {RulingFaction & {id?: string}} */ (governing);
+  const rosterFactions = demoted ? [...nextFactions, {
+    ...houseFacts,
+    faction: fromGovernment,
+    ...(governing.name != null ? { name: fromGovernment } : {}),
+    isGoverning: false,
+    modifiers: [DEPOSED_MODIFIER],
+  }] : nextFactions;
+
   const oldLegitimacy = ps.publicLegitimacy || null;
   const oldScore = num(oldLegitimacy?.score, 50);
   const seed = LEGITIMACY_SEEDS[cause];
@@ -476,12 +581,19 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
   // that now connects the seat to its new power-behind CONVERTS to symbiotic
   // (whatever friction it carried died with the old order); the (coup) losers
   // get grudge edges.
+  //
+  // ⭐ UNDER A DEMOTION THE RE-KEY IS SKIPPED, AND THAT IS THE POINT. The rename exists
+  // because the old label CEASED TO NAME ANYTHING; when the house lives, that label still
+  // names it, and moving its edges onto the seat would hand the new government every
+  // grudge and every alliance the fallen house spent generations earning. §810.8 asks the
+  // defeated house to carry "grudges, and the possibility of revanche" — this is where
+  // those live.
   const winnerName = nameOf(winner);
   const symbioticNarrative = `${winnerName} is the power behind the ${toGovernment.toLowerCase()} — the seat answers to them now.`;
   let pairedWithWinner = false;
   const renamedRelationships = (ps.factionRelationships || []).map(rel => {
     if (!Array.isArray(rel?.pair)) return rel;
-    const pair = rel.pair.includes(fromGovernment)
+    const pair = !demoted && rel.pair.includes(fromGovernment)
       ? rel.pair.map(n => (n === fromGovernment ? toGovernment : n))
       : rel.pair;
     const next = pair === rel.pair ? rel : { ...rel, pair };
@@ -526,6 +638,12 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     authorityArchetype: archetype,
     cause,
     tick,
+    // ⭐ THE ADDRESS §810.8's DISTINCTION NEEDS. Every consumer that narrates a transfer
+    // reads this descriptor, and until now none of them could say whether the house it
+    // was writing about still existed. `demoted` is a fact this function can prove; the
+    // grammar's third disposition (`scattered`, the roster re-affiliated onto the victor)
+    // is NOT claimed here, because this primitive does not yet do it.
+    incumbent: { name: fromGovernment, demoted },
     legitimacyBefore: { score: oldScore, label: oldLegitimacy?.label || null },
     legitimacyAfter: { score: publicLegitimacy.score, label: publicLegitimacy.label },
   };
@@ -535,16 +653,26 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
       ...settlement,
       powerStructure: {
         ...ps,
-        factions: nextFactions,
+        factions: rosterFactions,
         governingName: toGovernment,
         government: toGovernment,
         previousGovernments,
         publicLegitimacy,
         factionRelationships: [...renamedRelationships, ...extraRelationships],
         stability: STABILITY_BY_CAUSE[cause],
+        // ⭐ THE THIRD BRANCH IS §810.8's WHOLE POINT SAID IN PLAIN WORDS. This is not a
+        // news beat; it is the prose the dossier, the summary tab, the power tab and the
+        // PDF's power section all read, so it is where a reader of the world actually
+        // meets the change. A coup and a lawful passage already read differently here;
+        // what no branch could say before is that the losing house is still standing.
+        // ⚠ SPELLED INLINE, NOT AS A HELPER. `transferRulingPower` is the EAGER entrance
+        // and this module sits in the first-paint static closure — a named formatter plus
+        // its argument object measured 100 bytes over the owner-ratified closure budget
+        // on the real dist. The bytes are the constraint here, not the taste.
         recentConflict: cause === 'coup'
           ? `${nameOf(winner)} overthrew the ${fromGovernment.toLowerCase()} and reshaped the government as a ${toGovernment.toLowerCase()}.`
-          : `Power passed to ${nameOf(winner)} by ${cause}; the government now sits as a ${toGovernment.toLowerCase()}.`,
+          : `Power passed to ${nameOf(winner)} by ${cause}; the government now sits as a ${toGovernment.toLowerCase()}${
+            demoted ? `, and the ${fromGovernment.toLowerCase()} keep their place among the powers` : ''}.`,
       },
     },
     transfer,

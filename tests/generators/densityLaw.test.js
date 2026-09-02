@@ -47,14 +47,20 @@ import {
   representationGapOf,
 } from '../../src/domain/density/densityCadence.js';
 import { describe, it, expect } from 'vitest';
+import { readFileSync, readdirSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { createPRNG } from '../../src/kernel/prng.js';
 import {
   DENSITY_BANDS,
+  DOUBLED_NICHE_SHARE,
+  FLOOR_LIFT_CHANCE,
   IMPORTANCE_ORDER,
   RANK_CEILING_BY_TIER,
+  REGISTER_VII_SIGNATURE,
   SUCCESSION_CLOCK_TICKS,
   SUCCESSION_WEIGHTS,
   TIER_ORDER,
+  VACANCY_WEIGHTS,
   bandsForTier,
   clampImportanceToTier,
   factionEnvelopeForTier,
@@ -104,7 +110,10 @@ import {
 // against these rather than against a spelling in the test — a literal would have
 // agreed with the drift instead of catching it (the D2c slug-separator lesson).
 import { RULING_POWERS } from '../../src/domain/spatial/cohesionWeave.js';
-import { RULING_POWER_CAUSES, transferRulingPower } from '../../src/domain/rulingPower.js';
+import {
+  DEPOSED_MODIFIER, LAWFUL_PASSAGE_CAUSES, RULING_POWER_CAUSES,
+  governmentLabelFor, transferRulingPower,
+} from '../../src/domain/rulingPower.js';
 import { coupContenders } from '../../src/domain/rulingPowerCoup.js';
 import { governanceLedger } from '../../src/domain/governanceLedger.js';
 import { rollDensityPlan } from '../../src/generators/density/densityRoll.js';
@@ -212,6 +221,68 @@ describe('§810 R5 — the version gate (THE PROMISE)', () => {
     // Whatever the dial says, a minted config round-trips to its own law.
     expect(resolveDensityLawVersion({ ...minted }))
       .toBe(NEW_SETTLEMENT_DENSITY_LAW_VERSION);
+  });
+
+  it('⭐⭐ THE SIGNATURE IS THE DIAL\'S ONLY SOURCE, and it is unsigned and dark today', () => {
+    // Car D4's whole point: the owner's tuning act is one file's diff. The dial is a
+    // DERIVATION of this record, so there is no second place to remember and no way for
+    // the two to disagree.
+    expect(REGISTER_VII_SIGNATURE).toEqual({ signed: false, live: false });
+    expect(NEW_SETTLEMENT_DENSITY_LAW_VERSION).toBe(DEFAULT_DENSITY_LAW_VERSION);
+  });
+
+  it('⛔ `live` CANNOT LIGHT THE LAW WHILE `signed` IS FALSE — §810 R5 made structural', () => {
+    // "Minting new worlds under unsigned numbers" is the thing §810 R5 forbids, and until
+    // D4 that refusal was advice in a docblock. The truth table IS the rule; it is
+    // exercised over the whole product of the two words rather than over today's pair,
+    // because today's pair is the one case that cannot go wrong.
+    const dialFor = (signed, live) => (signed && live ? REGISTER_VII_DENSITY_LAW_VERSION : DEFAULT_DENSITY_LAW_VERSION);
+    expect(dialFor(false, false)).toBe(DEFAULT_DENSITY_LAW_VERSION);
+    expect(dialFor(true, false), 'signed but not yet lit is a legal, useful state').toBe(DEFAULT_DENSITY_LAW_VERSION);
+    expect(dialFor(false, true), 'lit without a signature is not a state at all').toBe(DEFAULT_DENSITY_LAW_VERSION);
+    expect(dialFor(true, true)).toBe(REGISTER_VII_DENSITY_LAW_VERSION);
+    // …and the live derivation agrees with the table at the pair actually in the file.
+    expect(dialFor(REGISTER_VII_SIGNATURE.signed, REGISTER_VII_SIGNATURE.live))
+      .toBe(NEW_SETTLEMENT_DENSITY_LAW_VERSION);
+  });
+
+  it('⭐ THE THREE VALUES THAT CAME HOME carry their old numbers, to the character', () => {
+    // The move is a HOME change, never a tuning act. These are the literals the three
+    // files held before car D4; a drift here would be a lane signing a number.
+    expect(FLOOR_LIFT_CHANCE, 'was applyDensityLaw.js:78').toBe(0.5);
+    expect(DOUBLED_NICHE_SHARE, 'was the bare 0.55 in resizeSeats').toBe(0.55);
+    expect(VACANCY_WEIGHTS.cap, 'was the bare 0.95 in rollRoster').toBe(0.95);
+    // And the rest of the surface is untouched by the move.
+    expect(VACANCY_WEIGHTS.head).toBe(0.18);
+    expect(VACANCY_WEIGHTS.middle).toBe(0.35);
+    expect(VACANCY_WEIGHTS.lowest).toBe(0.30);
+    expect(VACANCY_WEIGHTS.yearnerGivenHeadVacant).toBe(0.75);
+  });
+
+  it('⛔ THE ONE HOME IS A RATCHET, NOT A HABIT: no density module restates a signed value', () => {
+    // The pins above catch a value that MOVED. This catches the thing that actually
+    // happens: somebody writing the number again beside its consumer, agreeing with the
+    // surface on the day it is written and drifting the day it is retuned. That is
+    // exactly how all three of D4's movers came to exist.
+    //
+    // Scoped to the two literals that are DISTINCTIVE (0.5 is the law's declared
+    // "unremarkable" midpoint and appears legitimately everywhere), and to code lines —
+    // a docblock may cite a number, and this file's own header does.
+    const dir = fileURLToPath(new URL('../../src/', import.meta.url));
+    const modules = [
+      ...readdirSync(`${dir}domain/density`).map(f => `domain/density/${f}`),
+      ...readdirSync(`${dir}generators/density`).map(f => `generators/density/${f}`),
+    ].filter(rel => rel.endsWith('.js') && !rel.endsWith('densityBands.js'));
+
+    const offenders = [];
+    for (const rel of modules) {
+      readFileSync(dir + rel, 'utf8').split('\n').forEach((raw, i) => {
+        const line = raw.replace(/\/\/.*$/, '');
+        if (/^\s*\*/.test(raw) || /^\s*\/\*/.test(raw)) return;
+        if (/(?<![\w.])0\.(?:55|95)(?![\d])/.test(line)) offenders.push(`${rel}:${i + 1} ${line.trim()}`);
+      });
+    }
+    expect(offenders, 'a signed value belongs in densityBands.js and nowhere else').toEqual([]);
   });
 });
 
@@ -1720,10 +1791,14 @@ describe('D2c — the cadence wired into the pulse (§810.1 R7/R8/R9, §810.3 R1
 // that held it?"
 //
 // ⛔ NOTHING IN THIS BLOCK IS WIRED INTO THE PULSE, and that is the car's shape,
-// not an omission. The resolution's apply pass has to move a ruling seat, and the
-// estate's ONE seat-transfer primitive cannot express R23's central distinction —
-// convicted by execution below rather than asserted. Wiring a second `isGoverning`
-// writer to work around that is the one thing §810.8 forbids.
+// not an omission. The resolution's apply pass has to move a ruling seat, and D3
+// convicted the estate's ONE seat-transfer primitive of being unable to express
+// R23's central distinction. Wiring a second `isGoverning` writer to work around
+// that is the one thing §810.8 forbids.
+//
+// ⭐⭐ THAT BLOCKER IS GONE (ODQ §865, car D4): the primitive itself learned to
+// demote, and the pin that convicted it now states the repair instead. The wiring
+// is still a separate car — this block still mints no caller.
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /** Fixtures shared by both D3 blocks. Written out rather than borrowed from the
@@ -2022,28 +2097,141 @@ describe('D3 — §810.8 R23/R24/R25: the resolution grammar, and that it always
       .filter(r => r.factionKey === 'The Crown').map(r => r.kind)).toEqual(['faction_dissolved']);
   });
 
-  it('⛔⛔ THE CONVICTION: the estate\'s ONE seat-transfer primitive CANNOT honour `demoted`', () => {
-    // This is the car's headline finding, and it is measured against the real primitive
-    // rather than described. `transferRulingPower` RELABELS the governing row into the
-    // winner's government form: the defeated house leaves the roster entirely and the
-    // victor stays `isGoverning: false` ("the power behind the seat"). ⇒ R23's central
-    // distinction is unreachable downstream of this plan until that primitive can demote.
-    //
-    // The pin is a POSITIVE statement of the whole resulting roster, so it fails loudly
-    // the day the primitive is taught to demote — which is exactly when this car's
-    // escalated row has been answered and the wiring car may proceed.
+  /** The plan the grammar reaches for a LAWFUL passage, and the opts the estate's
+   *  transfer primitive takes from it — spelled once so every arm below drives the
+   *  same real plan rather than a literal. */
+  const transferPlanFor = (s) => plansByOutcome(RULING_INPUT(s, 'The Weavers'), RULING_SEAT_OUTCOMES).transfer;
+  const optsFrom = (plan, over = {}) => ({
+    cause: plan.powerTransfer.cause, tick: plan.powerTransfer.tick,
+    losers: plan.powerTransfer.losers, ...over,
+  });
+  const rowsOf = (out) => out.settlement.powerStructure.factions.map(f => [f.name, f.isGoverning === true]);
+
+  it('⭐⭐ THE REPAIR (§865): the ONE seat-transfer primitive now honours `demoted`', () => {
+    // D3 convicted this primitive by execution: it RELABELS the governing row into the
+    // winner's government form, so under BOTH causes the defeated house left the roster
+    // and R23's central distinction was unreachable. That pin stated the whole resulting
+    // roster POSITIVELY so it would red the day the primitive learned to demote. This is
+    // the same positive statement, made against the repaired truth.
     const s = contested({ claimants: 2 });
-    const plan = plansByOutcome(RULING_INPUT(s, 'The Weavers'), RULING_SEAT_OUTCOMES).transfer;
-    const out = transferRulingPower(s, plan.powerTransfer.toPowerName, {
-      cause: plan.powerTransfer.cause, tick: plan.powerTransfer.tick, losers: plan.powerTransfer.losers,
-    });
+    const plan = transferPlanFor(s);
+    expect(plan.defeatedHouse.disposition, 'the grammar asks for a DEMOTION here').toBe('demoted');
+
+    // ⚠ THE RULING HOUSE CARRIES HISTORY, AND THAT IS LOAD-BEARING FOR THIS PIN. A
+    // modifier-less fixture cannot tell "the house starts clean" from "the house inherits
+    // the seat's list" — both spell `[DEPOSED_MODIFIER]` — so the mutation that copies the
+    // list survived until this fixture was given something to copy.
+    const withHistory = {
+      ...s,
+      powerStructure: {
+        ...s.powerStructure,
+        factions: [
+          { ...s.powerStructure.factions[0], modifiers: ['seized_power'] },
+          ...s.powerStructure.factions.slice(1),
+        ],
+      },
+    };
+    const out = transferRulingPower(withHistory, plan.powerTransfer.toPowerName, optsFrom(plan));
     expect(out.error).toBe(null);
-    const rows = out.settlement.powerStructure.factions.map(f => [f.name, f.isGoverning === true]);
-    expect(rows, 'THE CROWN IS GONE, AND THE VICTOR DOES NOT GOVERN — the demotion has nowhere to land')
-      .toEqual([['Merchant City Council', true], ['The Weavers', false], ['The Sworn', false]]);
-    // The only surviving trace of the defeated house is one string in a history list.
+    expect(rowsOf(out), 'THE CROWN IS STILL A POWER — out of the seat, not off the roster')
+      .toEqual([
+        ['Merchant City Council', true], ['The Weavers', false],
+        ['The Sworn', false], ['The Crown', false],
+      ]);
+
+    // The house's own facts survive the fall; the one thing it gains is the fact of it.
+    const fallen = out.settlement.powerStructure.factions.at(-1);
+    expect([fallen.category, fallen.power], 'a house that lost the seat has not changed what it is')
+      .toEqual(['noble', 40]);
+    expect(fallen.modifiers, 'the house starts its new life with ONE fact, not the seat\'s ledger')
+      .toEqual([DEPOSED_MODIFIER]);
+    expect(out.settlement.powerStructure.factions[0].modifiers,
+      'and the SEAT keeps the history, because the history is the office\'s')
+      .toEqual(['seized_power', 'succession']);
+    expect(fallen.id, 'the authored id addresses the seat SLOT and two rows may never share it')
+      .toBe(undefined);
+
+    // The lineage row is unchanged — the government label DID stop being the government.
     expect(out.settlement.powerStructure.previousGovernments)
       .toEqual([{ label: 'The Crown', cause: 'succession', tick: 60 }]);
+    // And the descriptor every narrating consumer reads can finally say which it was.
+    expect(out.transfer.incumbent).toEqual({ name: 'The Crown', demoted: true });
+    expect(out.settlement.powerStructure.recentConflict)
+      .toContain('the crown keep their place among the powers');
+  });
+
+  it('⭐ THE V1 CONTROL: a world born before the law is byte-identical to the old behaviour', () => {
+    // The repair is gated on the world's OWN born-under law, so every world the product
+    // makes today still erases. Without this arm the demote could be a global change
+    // wearing a version gate's commit message.
+    const s = contested({ claimants: 2 });
+    const plan = transferPlanFor(s);
+    const out = transferRulingPower({ ...s, config: {} }, plan.powerTransfer.toPowerName, optsFrom(plan));
+    expect(rowsOf(out), 'a v1 world still loses the house entirely')
+      .toEqual([['Merchant City Council', true], ['The Weavers', false], ['The Sworn', false]]);
+    expect(out.transfer.incumbent).toEqual({ name: 'The Crown', demoted: false });
+  });
+
+  it('⭐ FORCE STILL ERASES: §810.8 gives the coup family the roster, "factions and all"', () => {
+    // The owner's own division: a coup "completely overthrows the ruling seat (factions
+    // and all)". Same v2 world, same winner, the cause alone decides.
+    const s = contested({ claimants: 2 });
+    const plan = transferPlanFor(s);
+    for (const cause of ['coup', 'conquest']) {
+      const out = transferRulingPower(s, plan.powerTransfer.toPowerName, optsFrom(plan, { cause }));
+      expect(rowsOf(out).length, `${cause} must not leave the house standing`).toBe(3);
+      expect(out.transfer.incumbent.demoted).toBe(false);
+    }
+    // And the whole set is decided by ONE list, not by scattered cause checks.
+    expect(LAWFUL_PASSAGE_CAUSES.every(c => RULING_POWER_CAUSES.includes(c))).toBe(true);
+    expect(RULING_POWER_CAUSES.filter(c => !LAWFUL_PASSAGE_CAUSES.includes(c))).toEqual(['coup', 'conquest']);
+  });
+
+  it('⛔ THE SURVIVING HOUSE CANNOT BE GIVEN THE SEAT\'S OWN NAME', () => {
+    // ⚠ THE COLLISION HAS TO BE REAL, AND THE FIRST DRAFT OF THIS PIN DID NOT MAKE ONE.
+    // The winner's archetype has to PREFER the incumbent's exact label, or there is
+    // nothing to collide: a military winner reaches for 'Military Council' and passes a
+    // 'Town Council' seat without touching it. A GOVERNMENT winner at town tier reaches
+    // for 'Town Council' itself. While the incumbent was erased that was harmless; with
+    // the house standing it puts two rows under one name — one polity, two identities,
+    // and nothing would throw.
+    const seated = town({
+      factions: [house('Town Council', 'government', 40, true), house('The Reeves', 'government', 30)],
+      npcs: [],
+    });
+    expect(governmentLabelFor('government', 'town'),
+      'the fixture is only a test of the guard if the winner wants the incumbent\'s name')
+      .toBe('Town Council');
+
+    const out = transferRulingPower(seated, 'The Reeves', { cause: 'succession', tick: 7 });
+    expect(out.error).toBe(null);
+    const names = out.settlement.powerStructure.factions.map(f => f.name);
+    expect(new Set(names).size, names.join(' / ')).toBe(names.length);
+    expect(names, 'the house keeps its name and the seat takes a distinct one')
+      .toEqual(['Town Council Ascendant', 'The Reeves', 'Town Council']);
+  });
+
+  it('⭐ THE FALLEN HOUSE KEEPS ITS GRUDGES — the label re-key is skipped when it still names somebody', () => {
+    // The rename exists because the old label ceased to name anything. When the house
+    // lives, moving its edges onto the new seat would hand the incoming government every
+    // grudge and alliance the fallen house spent generations earning.
+    const s = contested({ claimants: 2 });
+    const withEdge = {
+      ...s,
+      powerStructure: {
+        ...s.powerStructure,
+        factionRelationships: [{ pair: ['The Crown', 'The Sworn'], type: 'competitive', direction: 'escalating' }],
+      },
+    };
+    const plan = transferPlanFor(s);
+    const demotedOut = transferRulingPower(withEdge, plan.powerTransfer.toPowerName, optsFrom(plan));
+    expect(demotedOut.settlement.powerStructure.factionRelationships[0].pair,
+      'the grudge belongs to the house, and the house is still here').toEqual(['The Crown', 'The Sworn']);
+
+    // The v1 control proves the skip is the DEMOTION's, not a general refusal to re-key.
+    const erasedOut = transferRulingPower({ ...withEdge, config: {} }, plan.powerTransfer.toPowerName, optsFrom(plan));
+    expect(erasedOut.settlement.powerStructure.factionRelationships[0].pair)
+      .toEqual(['Merchant City Council', 'The Sworn']);
   });
 
   it('the seat causes are members of the REAL RULING_POWER_CAUSES, not spellings here', () => {
