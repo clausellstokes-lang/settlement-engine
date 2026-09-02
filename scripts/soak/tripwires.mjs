@@ -25,42 +25,36 @@
  * so the class boundary is machinery rather than a naming convention.
  */
 
+import {
+  LIVENESS_FLOOR,
+  WALL_TIME_TREND,
+  YEARLY_BYTES_PER_SETTLEMENT_CEILING as INVARIANT_YEARLY_BYTES_CEILING,
+  foldDecades,
+  livenessVerdict,
+  nonFinitePaths,
+} from '../audit/soakInvariants.mjs';
+
 export const TRIPWIRE_CLASSES = Object.freeze(['deterministic', 'host-observability']);
 
 /**
- * ⭐ INHERITED VERBATIM from `scripts/audit/whole-world-soak.mjs:582` and its in-code
- * rationale at `:578-581`: "~900KB/settlement is a wide envelope over the measured
- * ~150KB/settlement at 6y (≈385KB/settlement extrapolated to 30y)". The soak asserts it
- * per run; the registry watches it per cell. ONE envelope, one spelling.
+ * ⭐ INHERITED VERBATIM, and now by IMPORT rather than by a second literal. The rationale
+ * is `scripts/audit/whole-world-soak.mjs`'s own: "~900KB/settlement is a wide envelope over
+ * the measured ~150KB/settlement at 6y (≈385KB/settlement extrapolated to 30y)". The soak
+ * asserts it per run; the registry watches it per cell. It is RE-EXPORTED under its
+ * existing name because the registry pin imports it from HERE — one envelope, one spelling,
+ * and the seam moves without moving any consumer (DESIGN_HORIZON §1.6).
  */
-export const YEARLY_BYTES_PER_SETTLEMENT_CEILING = 900_000;
+export const YEARLY_BYTES_PER_SETTLEMENT_CEILING = INVARIANT_YEARLY_BYTES_CEILING;
 
 /**
- * ⭐ ALSO INHERITED VERBATIM, from the same script's wall-time trend check
- * (`q4 <= q1 * 8 + 50`). It is machine-tolerant by design, which is exactly why it is
+ * ⭐ ALSO INHERITED, from the same script's wall-time trend check (`q4 <= q1 * 8 + 50`) and
+ * now from the same one home. Machine-tolerant by design, which is exactly why it is
  * HOST-OBSERVABILITY here and not a finding.
  */
-export const WALL_TIME_TREND_FACTOR = 8;
-export const WALL_TIME_TREND_SLACK_MS = 50;
+export const WALL_TIME_TREND_FACTOR = WALL_TIME_TREND.factor;
+export const WALL_TIME_TREND_SLACK_MS = WALL_TIME_TREND.slackMs;
 
 const finite = (value) => typeof value === 'number' && Number.isFinite(value);
-
-/** Every non-finite number in the receipt, as dotted paths — the soak's own scan idiom. */
-function nonFiniteFigures(node, path = '$', out = [], seen = new Set()) {
-  if (out.length >= 5) return out;
-  if (typeof node === 'number') {
-    if (!Number.isFinite(node)) out.push(`${path} = ${node}`);
-    return out;
-  }
-  if (!node || typeof node !== 'object' || seen.has(node)) return out;
-  seen.add(node);
-  if (Array.isArray(node)) {
-    for (let i = 0; i < node.length; i += 1) nonFiniteFigures(node[i], `${path}[${i}]`, out, seen);
-    return out;
-  }
-  for (const key of Object.keys(node)) nonFiniteFigures(node[key], `${path}.${key}`, out, seen);
-  return out;
-}
 
 const meanOf = (list, from, to) => {
   const slice = list.slice(Math.floor(list.length * from), Math.floor(list.length * to));
@@ -105,7 +99,7 @@ export const TRIPWIRES = Object.freeze([
       // class went unmeasured for it; the row does not manufacture a finding out of that
       // absence, because doing so would convict every archived receipt in the estate of a
       // defect none of them can be shown to have.
-      const live = nonFiniteFigures(receipt);
+      const live = nonFinitePaths(receipt);
       return [...new Set([...recorded.map(String), ...live])]
         .slice(0, 5)
         .map((line) => `non-finite figure ${line}`);
@@ -160,6 +154,56 @@ export const TRIPWIRES = Object.freeze([
       return max >= ceiling
         ? [`serialized state ${max} >= house envelope ${ceiling} (${settlements} settlements)`]
         : [];
+    },
+  }),
+  Object.freeze({
+    id: 'liveness_floor',
+    class: 'deterministic',
+    band: `${LIVENESS_FLOOR.minDistinctTypesPerDecade} distinct typed events, `
+      + `${LIVENESS_FLOOR.minHashMovesPerDecade} composite moves and `
+      + `${LIVENESS_FLOOR.minEventsPerSettlementDecade} event per settlement, per FULL decade`,
+    // ⛔⛔ THE ROW ALWAYS FOLDS LIVE, AND THAT IS THE WHOLE DESIGN (⟦A14 P9⟧). The fold is
+    // pure and cheap, so there is no reason to trust a writer. Two computation paths for one
+    // verdict would let the SAME world convict or pass depending on which soak version wrote
+    // the receipt, and a writer-side `failures: []` would silence the fold completely — the
+    // exact vacuity `non_finite_ledger_figure` above already paid for once. An ARCHIVED
+    // receipt therefore still convicts, because the evidence the fold needs
+    // (`behavioral.yearly[].eventTypeCounts` and `yearlyHashes`) survives serialization
+    // intact. The writer-side `receipt.liveness` block is a CROSS-CHECK: when it disagrees
+    // with the live fold the row names the schema version that wrote it.
+    home: 'scripts/audit/soakInvariants.mjs LIVENESS_FLOOR — Car 0 measured the distinct-type floor as max(6, floor(0.5 x 20)) over 43 decades of five series whose leanest carried 20; the hash-move and event floors are the observed 10/10 and the definitional 1',
+    detect: (receipt) => {
+      const yearly = Array.isArray(receipt?.behavioral?.yearly) ? receipt.behavioral.yearly : [];
+      const hashes = Array.isArray(receipt?.yearlyHashes) ? receipt.yearlyHashes : [];
+      const settlements = Number(receipt?.settlements) || 0;
+      if (!yearly.length || !hashes.length || !settlements) return [];
+      const years = Number(receipt?.years) || Math.min(yearly.length, hashes.length);
+      const verdict = livenessVerdict(
+        foldDecades({
+          yearlyEventTypeCounts: yearly.map((row) => row?.eventTypeCounts),
+          yearlyHashes: hashes,
+          yearlyMajorCounts: yearly.map((row) => row?.majorEventCount),
+          settlements,
+        }),
+        { years, settlements },
+      );
+      // A run below one full decade did not measure liveness; §206.2b forbids reading that
+      // silence as either a pass or a finding.
+      if (!verdict.executable) return [];
+      const out = verdict.failures.map((failure) => `${failure.kind}: ${failure.detail}`);
+      const written = receipt?.liveness;
+      if (written && typeof written === 'object' && Array.isArray(written.failures)) {
+        const live = verdict.failures.map((failure) => `${failure.kind}@${failure.decade}`).join(',');
+        const claimed = written.failures.map((failure) => `${failure?.kind}@${failure?.decade}`).join(',');
+        if (live !== claimed) {
+          out.push(
+            `liveness_writer_disagrees: the receipt's own liveness block (receiptSchemaVersion `
+            + `${receipt?.schemaVersion == null ? 'absent' : receipt.schemaVersion}) lists `
+            + `[${claimed || 'none'}] where the live fold finds [${live || 'none'}]`,
+          );
+        }
+      }
+      return out;
     },
   }),
   Object.freeze({
