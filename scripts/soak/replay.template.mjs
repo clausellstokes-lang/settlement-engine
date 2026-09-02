@@ -13,10 +13,10 @@
  * substrate and calling it the same finding.
  *
  * ⛔ AND IT REFUSES ON A NODE-MAJOR MISMATCH. Same-engine byte identity is guaranteed;
- * cross-engine identity is NOT — `scripts/count-transcendental-math.mjs` grandfathers a
- * non-zero transcendental baseline in its own header, so implementation-approximated
- * `Math` can fork same-seed worlds ACROSS engines while every same-engine golden stays
- * green. A hash mismatch under a mismatched engine is reported as ENGINE-VARIANCE, never
+ * cross-engine identity is not OBSERVED here — `scripts/count-transcendental-math.mjs`
+ * ONCE grandfathered a non-zero transcendental baseline; T13 TRANS (ODQ §883) drove it to
+ * ZERO with an eslint ban behind it, so `Math` no longer forks same-seed worlds by engine.
+ * A hash mismatch under a mismatched engine is reported as ENGINE-VARIANCE, never
  * as a finding. An explicit override flag runs anyway and prints the caveat.
  *
  * Rendering is a PURE string build: no filesystem, no clock, no rng.
