@@ -4,8 +4,9 @@ import {
   spawnCorruptionChance, onsetHazard, exposureChance,
   demoteImportance, demoteDotRank, canBeOuted, CORRUPTION_TUNING,
   readCorruptionClimate,
-  guildStrength, guildEffectiveSecurity, GUILD_TUNING,
+  guildEffectiveSecurity, GUILD_TUNING,
 } from '../../src/domain/corruption.js';
+import { guildStrength } from '../../src/domain/worldPulse/thievesGuild.js';
 import { PROSPERITY_RANK_NEUTRAL } from '../../src/domain/prosperityRank.js';
 
 describe('corruption — eligibility + vectors', () => {

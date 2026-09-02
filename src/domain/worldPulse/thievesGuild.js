@@ -13,10 +13,33 @@
  * Pure data transforms — no rng/Date.
  */
 import { stablePart } from './worldState.js';
-import { guildStrength, GUILD_TUNING } from '../corruption.js';
+import { GUILD_TUNING } from '../corruption.js';
+import { detExp } from '../../kernel/detMath.js';
+import { clamp01 } from '../../kernel/math.js';
 
 const CRIMINAL_NAME_RE = /thieves|criminal|gang|smuggl|fence|black\s*market|underworld|assassin|syndicate|racket|shadow|hidden\s*hand/i;
 const CAPTURED = new Set(['corrupted', 'capture']);
+
+/**
+ * Guild strength (0..1) from the factions it has captured. Saturating in total
+ * captured power (so it asymptotes, never runs away) and lifted by diversity
+ * (crime spread across many factions is harder to root out than one).
+ *
+ * Lives HERE rather than beside GUILD_TUNING in domain/corruption because
+ * computeGuildStrengthBy below is its only caller and corruption is an eager
+ * first-paint module: this is the whole reason the deterministic-kernel
+ * saturation call stays out of the first-paint closure. `clamp01` is the kernel
+ * primitive for corruption's private unit clamp — identical on every value this
+ * function can produce, which is always finite.
+ * @param {{capturedPowers?:number[], distinctArchetypes?:number}} args
+ */
+export function guildStrength({ capturedPowers = [], distinctArchetypes = 0 } = {}) {
+  const totalShare = (Array.isArray(capturedPowers) ? capturedPowers : [])
+    .reduce((a, p) => a + clamp01((Number(p) || 0) / 100), 0);
+  const base = 1 - detExp(-totalShare * GUILD_TUNING.powerRate); // saturating
+  const diversityMult = 0.6 + 0.4 * Math.min(1, (Number(distinctArchetypes) || 0) / GUILD_TUNING.diversityFull);
+  return clamp01(base * diversityMult);
+}
 
 /**
  * Per-settlement guild strength (0..1), from the captured factions in that
