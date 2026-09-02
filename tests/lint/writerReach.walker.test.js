@@ -1,0 +1,770 @@
+/**
+ * writerReach.walker.test.js — THE WRITER-WITH-NO-READER RATCHET, and the gate
+ * authority for WRWALKER (HORIZON §7, §1.10, §18.1).
+ *
+ * ── THE CLASS ────────────────────────────────────────────────────────────────
+ * OSR's walker asks the reader question: does this read find a key some writer
+ * produces? This file asks its DUAL: is this GENERATED FACT ever shown? The
+ * engine writes 6,520 identities on every world. If a key reaches no customer
+ * surface — no component, no display read model, no PDF, no world book, no
+ * Foundry module, no Herald — then the work that produced it is invisible, and
+ * "generated and silently unshown" is a defect with ceiling 0.
+ *
+ * The two instruments share ONE corpus builder and ONE identity grammar, so
+ * `writerIdentity` is pinned EQUAL to OSR's `identityOf` here, and the frozen
+ * `corpusMeta` is pinned EQUAL to OSR's frozen `corpusMeta`. They are one builder
+ * and TWO executions, so the `shapesDigest` pin is also here: nine equal COUNTS
+ * can be satisfied by two runs whose key sets differ, and counts-equal is not
+ * shapes-equal.
+ *
+ * ── ⭐ THE SPLIT, AND WHY THE COUNTING CLASS IS NARROW ───────────────────────
+ * Car 0 measured the design's single `web` class at 1,562 of 2,143 src files
+ * with 380 of 437 `src/domain/worldPulse` files inside it. A class that wide
+ * answers "is this key's NAME mentioned in three quarters of the codebase". So
+ * `web` split: `web-display` (components, display read models, the PDF tree)
+ * COUNTS; `web-transitive` is REPORTED. The tally moved 608/5,033/879 to
+ * 547/4,647/1,326 and the kernel leak-through stopped being a STOP, because no
+ * `worldPulse` file is under a display dir by construction. That last sentence
+ * is a TEST below, not a belief.
+ *
+ * ── ⚠⚠ THE SCAN BUDGET IS THE POINT OF THE ARCHITECTURE ─────────────────────
+ * A full-tree scan is ~0.6 s and the corpus build is ~8.5 s. This file runs
+ * EXACTLY TWO scans — one live, one over the planted mutants — and `scansRun` is
+ * pinned. A mutant suite that scans per plant would cost minutes per gate. When
+ * a new mutant is needed, add it to the ONE planted pass and judge it with a
+ * different closure set; `judgeWriters` is cheap and pure. SHARE THE SCAN — do
+ * NOT raise the timeout.
+ *
+ * The `beforeAll` budget is 300_000, re-priced from the volume's 900_000 against
+ * Car 0's measurement: the corpus builds in 8.3 s solo and ~26.5 s under 8-way
+ * concurrency. 300 s is more than ten times the saturation figure. If it is ever
+ * approached, CUT WORK — a budget sized against a figure this tree does not
+ * reproduce is a self-imposed constant nobody re-asked.
+ *
+ * @see docs/DESIGN_HORIZON.md §7, §1.10, §18.1  (the charter; on the ledger line)
+ * @see scripts/check-writer-reach.mjs           (the doors: report/write/genesis/rebank)
+ * @enforced-by this walker
+ */
+import { readFileSync, mkdtempSync, writeFileSync, mkdirSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { tmpdir } from 'node:os';
+import { describe, expect, test, beforeAll } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
+import {
+  SURFACE_CLASSES, COUNTING_CLASSES, REPORT_ONLY_CLASSES, SURFACE_ROOTS, SURFACE_CLOSURE_STOP,
+  WEB_DISPLAY_DIRS, BUILTIN_MEMBERS, NEWS_TAG_PATTERNS, MIN_ROWS,
+  osrBuiltinMembersFromSource, writerIdentity, buildIndex, edgeMapOf, surfaceClosures,
+  scanSurfaceReads, judgeWriters, keysToShapesOf, formatReach, parseReach, reviewableDark,
+  shapesDigestOf, verdictDigestOf, detectorDigestOf, importEdgesOf, resolveSpecifier, reachFrom,
+} from '../../scripts/lib/writer-reach-scan.mjs';
+import {
+  WRITER_DARK_REGISTER, DARK_REASONS, CANONICAL_FIELDS,
+  assertWriterDarkRegister, assertWriterDarkRegisterEvidence, pendingSurfaceBacklog, registerDigestOf,
+} from '../../scripts/lib/writer-dark-register.mjs';
+import {
+  measure, liveViewOf, compareDark, cohortOf, reportOf, run, BASELINE_PATH, SENTINEL_FLOOR,
+} from '../../scripts/check-writer-reach.mjs';
+import { identityOf, sourceFiles } from '../../scripts/check-observed-shape-readers.mjs';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const read = (path) => readFileSync(join(ROOT, path), 'utf8');
+const rel = (file) => (file.startsWith(ROOT) ? file.slice(ROOT.length + 1) : file).split('\\').join('/');
+
+const baseline = JSON.parse(read(BASELINE_PATH));
+const osrBaseline = JSON.parse(read('scripts/.observed-shape-readers-baseline.json'));
+
+/** The synthetic key every mutant is built on. No real module writes or reads it. */
+const PLANTED_KEY = '__plantedWrittenKey';
+
+/**
+ * ⚠⚠ EXACTLY TWO full-tree scans, both inside `beforeAll` hooks. Pinned below.
+ * Every mutant judgement re-runs `judgeWriters` over the SECOND scan's reads with
+ * a different closure set — pure, cheap, and free of another tree walk.
+ */
+let scansRun = 0;
+const countedScan = (args) => { scansRun += 1; return scanSurfaceReads(args); };
+
+/** @type {Awaited<ReturnType<typeof measure>>} */
+let live;
+let liveView;
+let liveReport;
+let liveEvidence;
+
+beforeAll(async () => {
+  live = await measure({ root: ROOT, scan: countedScan });
+  liveView = liveViewOf(live);
+  liveReport = reportOf(live);
+  liveEvidence = await assertWriterDarkRegisterEvidence(WRITER_DARK_REGISTER, {
+    root: ROOT,
+    verdicts: live.verdicts,
+    closures: Object.fromEntries(SURFACE_CLASSES.map((cls) => [
+      cls, new Set([...live.closures[cls]].map(rel)),
+    ])),
+    pendingCeiling: baseline.pendingSurfaceCeiling,
+  });
+}, 300_000);
+
+describe('writer-with-no-reader ratchet: the frozen register', () => {
+  test('the baseline is CONTENT-ADDRESSED, names the corpus and the detector it judged with, and every registered identity parses', () => {
+    expect(baseline.schema).toBe(1);
+    expect(baseline.frozenAtSha).toMatch(/^[0-9a-f]{40}$/);
+    expect(typeof baseline.charter).toBe('string');
+    expect(baseline.charter).toMatch(/§\d+/);
+    expect(baseline.minRows).toBe(MIN_ROWS);
+    for (const field of ['shapesDigest', 'detectorDigest', 'verdictDigest', 'registerDigest']) {
+      expect(baseline[field], `${field} must be a sha256`).toMatch(/^[0-9a-f]{64}$/);
+    }
+    expect(baseline.stopSet).toEqual([...SURFACE_CLOSURE_STOP]);
+    expect(baseline.webDisplayDirs).toEqual([...WEB_DISPLAY_DIRS]);
+    expect(baseline.countingClasses).toEqual([...COUNTING_CLASSES]);
+    expect(baseline.reportOnlyClasses).toEqual([...REPORT_ONLY_CLASSES]);
+    expect(Array.isArray(baseline.rebankHistory)).toBe(true);
+    for (const row of baseline.darkUnregistered) {
+      expect(row.identity).toBe(`${row.key} on ${row.shape}`);
+      expect(row.rows).toBeGreaterThanOrEqual(MIN_ROWS);
+    }
+    const banked = baseline.darkUnregistered.map((row) => row.identity);
+    expect(new Set(banked).size, 'the banked cohort carries no duplicate identity').toBe(banked.length);
+    for (const row of WRITER_DARK_REGISTER) {
+      expectAbsentWithAnchor(
+        banked, row.identity, baseline.darkUnregistered[0].identity,
+        'a hand-authored row is never ALSO banked — one identity, one door',
+      );
+    }
+  });
+
+  test('the frozen corpusMeta EQUALS the observed-shape register corpusMeta — one corpus, two walkers', () => {
+    const keys = Object.keys(osrBaseline.corpusMeta).sort();
+    expect(keys.length).toBe(9);
+    expect(Object.keys(baseline.corpusMeta).sort()).toEqual(keys);
+    for (const key of keys) {
+      expect(baseline.corpusMeta[key], `corpusMeta.${key} must equal OSR's frozen value`)
+        .toBe(osrBaseline.corpusMeta[key]);
+    }
+  });
+
+  test('the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count', () => {
+    expect(shapesDigestOf(live.corpus.shapes)).toBe(baseline.shapesDigest);
+    for (const key of Object.keys(osrBaseline.corpusMeta)) {
+      expect(live.corpus.meta[key], `live corpusMeta.${key} still equals OSR's frozen value`)
+        .toBe(osrBaseline.corpusMeta[key]);
+    }
+  });
+
+  test('the surface roots are real files, every counting class has a non-empty closure, and the STOP set is disjoint from every root', () => {
+    for (const [cls, roots] of Object.entries(SURFACE_ROOTS)) {
+      for (const root of roots) {
+        expect(() => read(root), `${cls} root ${root} must be a real file`).not.toThrow();
+        expect(
+          SURFACE_CLOSURE_STOP.some((prefix) => root.startsWith(prefix)),
+          `${cls} root ${root} must not itself be inside the STOP set`,
+        ).toBe(false);
+      }
+    }
+    for (const cls of COUNTING_CLASSES) {
+      expect(live.closures[cls].size, `the ${cls} closure must not be empty`).toBeGreaterThan(0);
+    }
+    expect(NEWS_TAG_PATTERNS.length).toBeGreaterThan(0);
+  });
+
+  test('web-display and web-transitive partition the web closure exactly, web-display contains no src/domain/worldPulse file, and only COUNTING_CLASSES count toward LIT', () => {
+    const display = new Set([...live.closures['web-display']].map(rel));
+    const transitive = new Set([...live.closures['web-transitive']].map(rel));
+    const whole = new Set([...live.web].map(rel));
+    expect(display.size + transitive.size).toBe(whole.size);
+    for (const file of display) expect(transitive.has(file), `${file} is in both halves`).toBe(false);
+    for (const file of whole) {
+      expect(display.has(file) || transitive.has(file), `${file} is in neither half`).toBe(true);
+    }
+    const pulseInDisplay = [...display].filter((f) => f.startsWith('src/domain/worldPulse/'));
+    expect(pulseInDisplay, 'no worldPulse file may be under a display dir — the leak is REPORTED, never counted')
+      .toEqual([]);
+    for (const file of display) {
+      expect(WEB_DISPLAY_DIRS.some((prefix) => file.startsWith(prefix)), `${file} is not under a display dir`)
+        .toBe(true);
+    }
+    expect([...COUNTING_CLASSES, ...REPORT_ONLY_CLASSES].sort()).toEqual([...SURFACE_CLASSES].sort());
+    for (const cls of COUNTING_CLASSES) {
+      expect(REPORT_ONLY_CLASSES.includes(cls), `${cls} cannot both count and be report-only`).toBe(false);
+    }
+    expect(REPORT_ONLY_CLASSES).toEqual(['web-transitive', 'json-export']);
+  });
+
+  test("the local BUILTIN_MEMBERS twin equals OSR's module-private set byte for byte, and no written key collides with it", () => {
+    const osr = osrBuiltinMembersFromSource(read('scripts/lib/legacy-reader-shape-scan.mjs'));
+    expect(osr.size).toBe(72);
+    expect([...BUILTIN_MEMBERS].sort()).toEqual([...osr].sort());
+    const written = new Set();
+    for (const [shape, record] of Object.entries(live.corpus.shapes)) {
+      if (record.rows < MIN_ROWS) continue;
+      for (const key of record.keys) written.add(key);
+      expect(typeof shape).toBe('string');
+    }
+    const collisions = [...written].filter((key) => osr.has(key)).sort();
+    expect(collisions, 'a written key inside the builtin set would be silently unscannable').toEqual([]);
+  });
+
+  test('the declared DARK register is structurally lawful and every row is live-verified', () => {
+    expect(() => assertWriterDarkRegister()).not.toThrow();
+    expect(WRITER_DARK_REGISTER.length).toBe(4);
+    expect(liveEvidence.map((row) => row.identity).sort())
+      .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
+    for (const row of liveEvidence) {
+      expect(row.spellings.length, `${row.identity}: clause W found no write spelling`).toBeGreaterThan(0);
+    }
+    expect(registerDigestOf()).toBe(baseline.registerDigest);
+    expect(pendingSurfaceBacklog().length).toBe(baseline.pendingSurfaceCeiling);
+    expect(DARK_REASONS).toEqual(['dark-by-construction', 'engine-internal', 'pending-surface']);
+  });
+
+  test("the identity grammar is OSR's: writerIdentity(k, s) equals identityOf(a canonical six-field legacy finding carrying key k and shapes [s]), and the bare two-field form is refused", () => {
+    const key = 'prosperity';
+    const shape = 'economicState';
+    const canonical = { file: 'src/probe.js', key, line: 1, pos: 0, shapes: [shape], text: `x.${key}` };
+    expect(identityOf(canonical)).toBe(`${key} on ${shape}`);
+    expect(writerIdentity(key, shape)).toBe(identityOf(canonical));
+    let refusal = null;
+    try { identityOf({ key, shapes: [shape] }); } catch (error) { refusal = error.message; }
+    expect(refusal, 'the volume\u2019s two-field shorthand is prose, not code').toContain('noncanonical fields'); // anchored: refusal is asserted non-null on the line below, so a silent accept cannot pass
+    expect(refusal).toContain('["key","shapes"]');
+  });
+});
+
+describe('writer-with-no-reader ratchet: the EXECUTED corpus and the closures', () => {
+  test('the producers ran and the write population is not empty', () => {
+    expect(Object.keys(live.corpus.shapes).length).toBe(osrBaseline.corpusMeta.shapeCount);
+    expect(live.verdicts.size).toBe(baseline.population.judged);
+    expect(live.verdicts.size).toBeGreaterThan(3000);
+    expect(live.knownShapes.size).toBe(baseline.population.knownShapes);
+    expect(live.thinKeys).toBe(baseline.population.thinKeys);
+    const dark = liveView.population.dark;
+    expect(dark / live.verdicts.size, 'the DARK share must stay under the 60 % STOP').toBeLessThan(0.6);
+  });
+
+  test('THE PREMISE HOLDS: a written key the probe measured DARK is written, and its shape carries a liveness anchor', () => {
+    const row = live.verdicts.get('isolationSupport on settlement');
+    expect(row.verdict).toBe('DARK');
+    expect(row.readers.R).toEqual([]);
+    expect(row.readers.N).toEqual([]);
+    const settlementKeys = live.corpus.shapes.settlement.keys;
+    expectAbsentWithAnchor(
+      settlementKeys.filter((key) => live.verdicts.get(`${key} on settlement`).verdict !== 'DARK'),
+      'isolationSupport', 'name',
+      'the settlement shape is genuinely alive — `name` is LIT — so `isolationSupport` is dark by measurement, not by an empty scan',
+    );
+    expect(live.verdicts.get('name on settlement').verdict).toBe('LIT');
+  });
+
+  test('the web closure contains the lazily-imported tabs — a dynamic import of an extensionless .jsx target is an edge', () => {
+    const whole = new Set([...live.web].map(rel));
+    expect(whole.has('src/components/dossier/dossierLazyTabs.js')).toBe(true);
+    // The `.jsx`-spelled dynamic import, and the EXTENSIONLESS one beside it. OSR's
+    // own `resolveSpec` resolves the literal only and would follow neither, which is
+    // exactly the blindness ODQ §880.5 recorded; the five-suffix resolution cures it.
+    expect(whole.has('src/components/new/tabs/FaithTab.jsx')).toBe(true);
+    expect(whole.has('src/components/new/SummaryTab.jsx')).toBe(true);
+    const registry = read('src/components/dossier/dossierLazyTabs.js');
+    expect(registry).toContain("import('../new/tabs/FaithTab.jsx')");
+    expect(registry).toContain("import('../new/SummaryTab')");
+  });
+
+  test('the dossier-pdf closure contains the view model and the sections, and the campaign-pdf and world-book closures are disjoint from src/pdf', () => {
+    const dossier = new Set([...live.closures['dossier-pdf']].map(rel));
+    expect(dossier.has('src/pdf/SettlementPDF.jsx')).toBe(true);
+    expect(dossier.has('src/pdf/lib/viewModel.js')).toBe(true);
+    for (const cls of ['campaign-pdf', 'world-book']) {
+      const files = [...live.closures[cls]].map(rel).filter((f) => f.startsWith('src/pdf/'));
+      expect(files, `${cls} is a jsPDF surface and must not pull in the @react-pdf tree`).toEqual([]);
+    }
+  });
+
+  test('the worker construction edge is followed: pdfRender.worker.js reaches SettlementPDF.jsx', () => {
+    const dossier = new Set([...live.closures['dossier-pdf']].map(rel));
+    expect(dossier.has('src/utils/pdfRender.worker.js')).toBe(true);
+    expect(dossier.has('src/pdf/SettlementPDF.jsx')).toBe(true);
+    expect(read('src/utils/generateSettlementPDF.js')).toContain('import.meta.url');
+  });
+
+  test('no closure enters the STOP set', () => {
+    const violations = [];
+    for (const cls of SURFACE_CLASSES) {
+      for (const file of live.closures[cls]) {
+        const path = rel(file);
+        if (SURFACE_CLOSURE_STOP.some((prefix) => path.startsWith(prefix))) violations.push(`${cls}: ${path}`);
+      }
+    }
+    expect(violations, 'the engine boundary is load-bearing at the file level').toEqual([]);
+  });
+});
+
+describe('writer-with-no-reader ratchet: the live judgment', () => {
+  test('the scan reached the tree and credited a real share of surface reads at grade R', () => {
+    expect(live.scanStats.files).toBe(live.union.size);
+    expect(live.scanStats.files).toBeGreaterThan(1000);
+    expect(live.scanStats.sites).toBeGreaterThan(10000);
+    expect(live.scanStats.rGrades).toBeGreaterThan(1000);
+    expect(live.scanStats.resolvedReceivers).toBeGreaterThan(1000);
+    expect(liveView.population.lit).toBeGreaterThan(0);
+    expect(liveView.population.litName).toBeGreaterThan(0);
+  });
+
+  test('every DARK identity is REGISTERED or BANKED — the shrink-only comparison is clean', () => {
+    const comparison = compareDark(liveView, baseline);
+    expect(comparison.violations, 'a DARK identity nobody rowed or banked is ceiling 0').toEqual([]);
+    expect(comparison.sentinel).toEqual([]);
+  });
+
+  test('no registered row is LIT — a row that outlives its darkness must be STRUCK (bank the win)', () => {
+    const comparison = compareDark(liveView, baseline);
+    expect(comparison.struck.map((row) => row.identity)).toEqual([]);
+    for (const row of WRITER_DARK_REGISTER) {
+      expect(live.verdicts.get(row.identity)?.verdict, `${row.identity} must still be DARK`).toBe('DARK');
+    }
+  });
+
+  test('the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent', () => {
+    const comparison = compareDark(liveView, baseline);
+    expect(comparison.stale.map((row) => row.identity)).toEqual([]);
+    const cohort = cohortOf(live.verdicts);
+    expect(cohort.length).toBe(baseline.population.dark);
+    expect(baseline.darkUnregistered.length).toBe(cohort.length - WRITER_DARK_REGISTER.length);
+    expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
+    expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
+  });
+
+  test('the population sentinel: judged and every counting closure hold above 90 % of the register', () => {
+    expect(SENTINEL_FLOOR).toBe(0.9);
+    expect(liveView.population.judged).toBeGreaterThanOrEqual(baseline.population.judged * SENTINEL_FLOOR);
+    for (const cls of SURFACE_CLASSES) {
+      expect(liveView.closureSizes[cls], `${cls} closure collapsed`)
+        .toBeGreaterThanOrEqual(baseline.closureSizes[cls] * SENTINEL_FLOOR);
+    }
+    const collapsed = { ...liveView, population: { ...liveView.population, judged: 1 } };
+    expect(compareDark(collapsed, baseline).sentinel.length, 'a collapsed population must RED, not green')
+      .toBeGreaterThan(0);
+  });
+
+  test('the export allowlist arm reaches json-export at grade A for exactly the allowlisted keys, and json-export does not count toward LIT', () => {
+    const graded = [...live.verdicts.values()].filter((row) => row.reach['json-export'] === 'A');
+    for (const row of graded) expect(live.allowlist.has(row.identity)).toBe(true);
+    // The arm is EXACTLY the allowlist intersected with the judged population. It is
+    // not the allowlist's size: five allowlisted keys are never written on `settlement`
+    // by any generated world at this tree, so no identity exists for them to grade.
+    // That gap is a REPORT, not a defect of this instrument — an export allowlist
+    // naming keys the engine does not produce is a finding for the review's backlog.
+    const unwritten = [...live.allowlist].filter((identity) => !live.verdicts.has(identity)).sort();
+    expect(graded.length).toBe(live.allowlist.size - unwritten.length);
+    expect(unwritten).toEqual([
+      'crossSettlementConflicts on settlement',
+      'dailyLife on settlement',
+      'interSettlementRelationships on settlement',
+      'neighbourNetwork on settlement',
+      'thesis on settlement',
+    ]);
+    expect(REPORT_ONLY_CLASSES).toContain('json-export');
+    const onlyExport = [...live.verdicts.values()]
+      .filter((row) => row.verdict === 'LIT' && COUNTING_CLASSES.every((cls) => row.reach[cls] !== 'R'));
+    expect(onlyExport, 'no identity may be LIT on the export arm alone').toEqual([]);
+  });
+});
+
+describe('writer-with-no-reader ratchet: the register doors convict what they cannot verify', () => {
+  const rowOf = (identity) => WRITER_DARK_REGISTER.find((row) => row.identity === identity);
+  const convicts = async (entries, options = {}) => {
+    let message = null;
+    try {
+      await assertWriterDarkRegisterEvidence(entries, { root: ROOT, ...options });
+    } catch (error) { message = error.message; }
+    expect(message, 'the door must CONVICT, and it stayed silent').not.toBeNull();
+    return message;
+  };
+
+  test('dark-by-construction (simulation-flag): the M13 clauses convict a lit flag, a non-virtual flag, and a writer that stopped writing', async () => {
+    const flagRow = {
+      identity: 'treasury on economicState', key: 'treasury', shape: 'economicState',
+      writer: 'src/domain/worldPulse/treasury.js', reason: 'dark-by-construction',
+      door: { kind: 'simulation-flag', flag: 'treasuryEnabled' },
+      lighting: 'x'.repeat(90), car: '§7 the probe', charter: '§7 the probe',
+    };
+    const reused = [];
+    await assertWriterDarkRegisterEvidence([flagRow], {
+      root: ROOT,
+      virtualEvidence: (entries) => { reused.push(...entries); return entries; },
+    });
+    expect(reused.map((row) => row.flag), 'the M13 machinery is REUSED, never re-implemented')
+      .toEqual(['treasuryEnabled']);
+    const thrown = await convicts([flagRow], {
+      virtualEvidence: () => { throw new Error('observed-shape virtual-dormant writer is UNVERIFIABLE (clause 4): [4b, a preset light]'); },
+    });
+    expect(thrown).toContain('clause 4');
+    const stopped = await convicts([{ ...flagRow, key: 'noSuchKeyIsEverWritten' }]);
+    expect(stopped).toContain('clause W');
+    expect(stopped).toContain('no longer writes');
+  });
+
+  test('dark-by-construction (generation-dial): a dial already at its lit version convicts the row', async () => {
+    const dialRow = {
+      identity: 'densityRungRole on npcs', key: 'densityRungRole', shape: 'npcs',
+      writer: 'src/generators/density/applyDensityLaw.js', reason: 'dark-by-construction',
+      door: {
+        kind: 'generation-dial', configKey: '_densityLawVersion',
+        dialModule: 'src/domain/density/densityLaw.js', dialExport: 'NEW_SETTLEMENT_DENSITY_LAW_VERSION',
+        litModule: 'src/domain/density/densityLaw.js', litExport: 'REGISTER_VII_DENSITY_LAW_VERSION',
+      },
+      lighting: 'x'.repeat(90), car: '§7 the probe', charter: '§7 the probe',
+    };
+    // A PROPERTY spelling, because `x.k = v` is an assignment and not one of the four
+    // write shapes OSR measures — clause W would fire first and mask the dial arm.
+    const readSource = (path) => (
+      path === dialRow.writer ? 'const npc = { densityRungRole: role };\n' : read(path)
+    );
+    const same = await convicts([dialRow], {
+      readSource,
+      importModule: async () => ({
+        NEW_SETTLEMENT_DENSITY_LAW_VERSION: 2, REGISTER_VII_DENSITY_LAW_VERSION: 2,
+      }),
+    });
+    expect(same).toContain('D-dial');
+    expect(same).toContain('already EQUALS');
+    const notGated = await convicts([dialRow], {
+      readSource,
+      importModule: async () => ({
+        NEW_SETTLEMENT_DENSITY_LAW_VERSION: 1, REGISTER_VII_DENSITY_LAW_VERSION: 2,
+      }),
+      dialGated: new Set(['some other identity']),
+    });
+    expect(notGated).toContain('dormancy claim is a BIT claim');
+  });
+
+  test('engine-internal: a consumer that does not read the key convicts; a consumer whose read is only in a comment or a string convicts (code-only)', async () => {
+    const row = rowOf('cultureProfileKey on config');
+    expect(row.consumer.file).toBe('src/generators/generateSettlementPipeline.js');
+    const missing = await convicts([{ ...row, consumer: { ...row.consumer, file: 'src/no/such/file.js' } }]);
+    expect(missing).toContain('clause E');
+    expect(missing).toContain('does not exist');
+    const absent = await convicts([{
+      ...row, consumer: { ...row.consumer, file: 'src/domain/display/publicSafe.js' },
+    }]);
+    expect(absent).toContain('clause E');
+    expect(absent).toContain('does not READ');
+    const stringOnly = await convicts([row], {
+      readSource: (path) => (path === row.consumer.file
+        ? "const ALLOWED = 'cultureProfileKey customTradeGoods'; // cultureProfileKey lives here\n"
+        : read(path)),
+    });
+    expect(stringOnly).toContain('citation law');
+    const realConsumer = await assertWriterDarkRegisterEvidence([row], { root: ROOT });
+    expect(realConsumer[0].identity).toBe(row.identity);
+  });
+
+  test('engine-internal: a consumer inside a counting closure convicts — that identity would be LIT', async () => {
+    const row = rowOf('cultureProfileKey on config');
+    const inClosure = await convicts([row], {
+      closures: { 'web-display': new Set([row.consumer.file]) },
+    });
+    expect(inClosure).toContain('clause E');
+    expect(inClosure).toContain('web-display');
+    expect(inClosure).toContain('would be LIT');
+  });
+
+  test('pending-surface: an uncited car convicts; a cited car on a surface the identity already reaches convicts; a car that resolves to no in-tree artifact convicts', async () => {
+    const row = rowOf('isolationSupport on settlement');
+    expect(COUNTING_CLASSES).toContain(row.surface);
+    const noArtifact = await convicts([{ ...row, carArtifact: 'docs/THIS_DOC_DOES_NOT_EXIST.md' }]);
+    expect(noArtifact).toContain('clause P');
+    expect(noArtifact).toContain('does not exist in this tree');
+    // `.npmrc` exists and names neither `isolationSupport` nor `settlement`; `package.json`
+    // would NOT convict, because the package name carries the word `settlement`.
+    const unrelated = await convicts([{ ...row, carArtifact: '.npmrc' }]);
+    expect(unrelated).toContain('citation that does not mention its subject');
+    const alreadyReached = await convicts([row], {
+      verdicts: new Map([[row.identity, { verdict: 'DARK', reach: { 'web-display': 'N' } }]]),
+    });
+    expect(alreadyReached).toContain('not pending');
+    expect(() => assertWriterDarkRegister([{ ...row, surface: 'web-transitive' }]))
+      .toThrow(/not\s+a COUNTING class/);
+  });
+
+  test('pending-surface: a row beyond the genesis-banked population is refused — the cohort ceiling shrinks and only --rebank --charter grows it', async () => {
+    const row = rowOf('isolationSupport on settlement');
+    // A FIFTH pending row, built so that ONLY the ceiling can fire: its writer is
+    // injected (clause W passes), its car artifact is real and names its shape
+    // (clause P passes), and `verdicts` is omitted so clause S does not run. If the
+    // ceiling did not exist, this row would sail through every other door — which is
+    // precisely why the ceiling exists: banking a row disarms the ratchet.
+    const fifth = {
+      ...row,
+      identity: 'syntheticPendingKey on settlement',
+      key: 'syntheticPendingKey',
+      writer: 'src/generators/steps/probeWriter.js',
+    };
+    const grown = await convicts([...WRITER_DARK_REGISTER, fifth], {
+      pendingCeiling: baseline.pendingSurfaceCeiling,
+      readSource: (path) => (
+        path === fifth.writer ? 'const s = { syntheticPendingKey: 1 };\n' : read(path)
+      ),
+    });
+    expect(grown).toContain('pending-surface population GREW');
+    expect(grown).toContain('shrink-only');
+    expect(grown).toContain('--rebank --charter');
+    expect(baseline.pendingSurfaceCeiling).toBe(pendingSurfaceBacklog().length);
+  });
+
+  test('clause S: a row whose identity is LIT is convicted with the strike instruction', async () => {
+    const row = rowOf('cultureProfileKey on config');
+    const lit = await convicts([row], {
+      verdicts: new Map([[row.identity, { verdict: 'LIT', reach: { 'web-display': 'R' } }]]),
+    });
+    expect(lit).toContain('BANK THE WIN');
+    expect(lit).toContain('strike the row');
+    const absent = await convicts([row], { verdicts: new Map() });
+    expect(absent).toContain('clause S');
+    expect(absent).toContain('not in the judged population');
+  });
+
+  test('the structural law refuses a malformed, duplicated, wrong-reason, or foreign-field row', () => {
+    const row = WRITER_DARK_REGISTER[0];
+    expect(() => assertWriterDarkRegister([{ ...row, reason: 'because-i-said-so' }])).toThrow(/unknown reason/);
+    expect(() => assertWriterDarkRegister([{ ...row, extraField: 1 }])).toThrow(/noncanonical fields/);
+    expect(() => assertWriterDarkRegister([row, row])).toThrow(/DUPLICATED/);
+    expect(() => assertWriterDarkRegister([{ ...row, identity: 'no-on-separator' }])).toThrow(/identity/);
+    expect(() => assertWriterDarkRegister([{ ...row, shape: 'somethingElse' }])).toThrow(/does not name its own key/);
+    expect(() => assertWriterDarkRegister([{ ...row, writer: 'scripts/notSrc.mjs' }])).toThrow(/repo-relative src/);
+    expect(() => assertWriterDarkRegister([{ ...row, why: 'too short' }])).toThrow(/at least 80 characters/);
+    expect(() => assertWriterDarkRegister([{ ...row, charter: 'no section here' }])).toThrow(/chartering section/);
+    expect(Object.keys(CANONICAL_FIELDS).sort()).toEqual([...DARK_REASONS].sort());
+    for (const entry of WRITER_DARK_REGISTER) {
+      expect(Object.keys(entry).sort().join(',')).toBe(CANONICAL_FIELDS[entry.reason]);
+    }
+  });
+
+  test('a second --genesis over an existing baseline is refused', async () => {
+    await expect(run(['--genesis', '--charter=§7 the probe'], {
+      root: ROOT, baselineExists: () => true, log: () => {},
+      writeBaseline: () => { throw new Error('the genesis door WROTE over an existing baseline'); },
+    })).rejects.toThrow(/--genesis REFUSED/);
+    await expect(run(['--genesis'], { root: ROOT, log: () => {} })).rejects.toThrow(/require --charter/);
+    await expect(run(['--write'], {
+      root: ROOT, baselineExists: () => false, log: () => {},
+    })).rejects.toThrow(/refuse to mint a baseline/);
+    await expect(run(['--report'], {
+      root: ROOT, baselineExists: () => false, log: () => {},
+    })).rejects.toThrow(/nothing to ratchet against/);
+  });
+});
+
+describe('writer-with-no-reader ratchet: the MUTANTS', () => {
+  let plantDir;
+  let plantPaths;
+  let mutantReads;
+  let mutantCorpus;
+  let plantClosureOf;
+
+  beforeAll(async () => {
+    plantDir = mkdtempSync(join(tmpdir(), 'wrw-mutants-'));
+    const write = (name, body) => {
+      const path = join(plantDir, name);
+      mkdirSync(dirname(path), { recursive: true });
+      writeFileSync(path, body, 'utf8');
+      return path;
+    };
+
+    // THE PLANTS. Each probe is addressed by its own file, so a mutant that fires
+    // in the wrong place is visible as the wrong path, not as a passing test.
+    plantPaths = {
+      groundedWebReader: write('groundedWebReader.js',
+        `export const show = (settlement) => settlement.${PLANTED_KEY};\n`),
+      nameOnlyReader: write('nameOnlyReader.js',
+        `export const show = (anything) => anything.${PLANTED_KEY};\n`),
+      dossierReader: write('dossierReader.js',
+        `export const draw = (settlement) => settlement.${PLANTED_KEY};\n`),
+      stopReader: write('stopReader.js',
+        `export const internal = (settlement) => settlement.${PLANTED_KEY};\n`),
+    };
+
+    // The write side: a synthetic key spread onto a COPY of corpus.shapes. The
+    // product tree is never touched and the real corpus is never edited.
+    mutantCorpus = {
+      ...live.corpus,
+      shapes: {
+        ...live.corpus.shapes,
+        settlement: {
+          ...live.corpus.shapes.settlement,
+          keys: [...live.corpus.shapes.settlement.keys, PLANTED_KEY],
+        },
+      },
+    };
+
+    // ONE extra scan: the real in-closure files PLUS every plant, with each plant
+    // reported at a synthetic repo-relative path so closure membership per mutant
+    // is a set choice rather than another tree walk.
+    const plantRel = new Map([
+      [plantPaths.groundedWebReader, 'src/components/planted/groundedWebReader.js'],
+      [plantPaths.nameOnlyReader, 'src/components/planted/nameOnlyReader.js'],
+      [plantPaths.dossierReader, 'src/pdf/planted/dossierReader.js'],
+      [plantPaths.stopReader, 'src/generators/planted/stopReader.js'],
+    ]);
+    const files = [...sourceFiles(ROOT), ...Object.values(plantPaths)];
+    const index = buildIndex(files);
+    const keysToShapes = keysToShapesOf(mutantCorpus);
+    mutantReads = countedScan({
+      index,
+      corpus: mutantCorpus,
+      files: [...live.union, ...Object.values(plantPaths)],
+      root: ROOT,
+      keysToShapes,
+      relOverride: (file) => plantRel.get(file)
+        ?? ((file.startsWith(ROOT) ? file.slice(ROOT.length + 1) : file).split('\\').join('/')),
+    });
+
+    // Judge with an arbitrary closure set. Pure and cheap: no scan.
+    plantClosureOf = (admitted = []) => {
+      const closures = {};
+      for (const cls of SURFACE_CLASSES) closures[cls] = new Set(live.closures[cls]);
+      for (const [cls, path] of admitted) closures[cls].add(join(ROOT, path));
+      return judgeWriters({
+        corpus: mutantCorpus, closures, reads: mutantReads.reads, root: ROOT, allowlist: live.allowlist,
+      });
+    };
+  }, 300_000);
+
+  const plantedVerdict = (judged) => judged.verdicts.get(`${PLANTED_KEY} on settlement`);
+
+  test('THE PARTITION HOLDS: each planted probe is addressed by its own file', () => {
+    const entry = mutantReads.reads.get(`${PLANTED_KEY} on settlement`);
+    expect([...entry.R].sort()).toEqual(['src/components/planted/groundedWebReader.js', 'src/pdf/planted/dossierReader.js', 'src/generators/planted/stopReader.js'].sort());
+    expect([...entry.N].sort()).toEqual([
+      'src/components/planted/groundedWebReader.js',
+      'src/components/planted/nameOnlyReader.js',
+      'src/generators/planted/stopReader.js',
+      'src/pdf/planted/dossierReader.js',
+    ]);
+    expect(new Set(Object.values(plantPaths)).size).toBe(4);
+  });
+
+  test('THE MUTANT REDS: a synthetic written key on a judged shape with no reader is DARK, unregistered, ceiling 0', () => {
+    const judged = plantClosureOf([]);
+    expect(plantedVerdict(judged).verdict).toBe('DARK');
+    const view = { ...liveViewOf({ ...live, verdicts: judged.verdicts, thinKeys: live.thinKeys, thinShapes: live.thinShapes, knownShapes: judged.knownShapes }) };
+    const comparison = compareDark(view, baseline);
+    expect(comparison.violations).toEqual([`${PLANTED_KEY} on settlement`]);
+  });
+
+  test('THE MUTANT LIGHTS AT GRADE R: a planted web root reading settlement.__plantedWrittenKey', () => {
+    const judged = plantClosureOf([['web-display', 'src/components/planted/groundedWebReader.js']]);
+    const row = plantedVerdict(judged);
+    expect(row.verdict).toBe('LIT');
+    expect(row.reach['web-display']).toBe('R');
+  });
+
+  test('THE MUTANT LIGHTS AT GRADE N ONLY: the same key read on an unresolvable receiver', () => {
+    const judged = plantClosureOf([['web-display', 'src/components/planted/nameOnlyReader.js']]);
+    const row = plantedVerdict(judged);
+    expect(row.verdict).toBe('LIT-NAME');
+    expect(row.reach['web-display']).toBe('N');
+  });
+
+  test('THE STOP HOLDS: the same read planted at a src/generators path lights nothing', () => {
+    const judged = plantClosureOf([]);
+    expect(plantedVerdict(judged).verdict).toBe('DARK');
+    const stopPath = 'src/generators/planted/stopReader.js';
+    const entry = mutantReads.reads.get(`${PLANTED_KEY} on settlement`);
+    expect(entry.R.has(stopPath), 'the read exists at the generators path').toBe(true);
+    for (const cls of SURFACE_CLASSES) {
+      const closure = new Set([...live.closures[cls]].map(rel));
+      expect(closure.has(stopPath), `${cls} must never contain a generators file`).toBe(false);
+    }
+  });
+
+  test('THE CLASS MAP DISCRIMINATES: a read planted in the dossier-pdf root set lights dossier-pdf and not campaign-pdf', () => {
+    const judged = plantClosureOf([['dossier-pdf', 'src/pdf/planted/dossierReader.js']]);
+    const row = plantedVerdict(judged);
+    expect(row.verdict).toBe('LIT');
+    expect(row.reach['dossier-pdf']).toBe('R');
+    expect(row.reach['campaign-pdf']).toBeUndefined();
+    expect(row.reach['world-book']).toBeUndefined();
+  });
+
+  test('EVERY EDGE KIND IS FOLLOWED: static, export-from, import(), new URL(…, import.meta.url), require, and the extensionless .jsx specifier', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'wrw-edges-'));
+    const put = (name, body) => {
+      const path = join(dir, name);
+      mkdirSync(dirname(path), { recursive: true });
+      writeFileSync(path, body, 'utf8');
+      return path;
+    };
+    const target = put('target.js', 'export const value = 1;\n');
+    const jsxTarget = put('tabs/FaithProbe.jsx', 'export default () => null;\n');
+    const chains = {
+      static: put('a-static.js', "import { value } from './target.js';\nexport default value;\n"),
+      exportFrom: put('b-export.js', "export { value } from './target.js';\n"),
+      dynamic: put('c-dynamic.js', "export const load = () => import('./target.js');\n"),
+      workerUrl: put('d-url.js', "export const w = new URL('./target.js', import.meta.url);\n"),
+      require: put('e-require.js', "const t = require('./target.js');\nexport default t;\n"),
+      extensionless: put('f-extensionless.js', "export const load = () => import('./tabs/FaithProbe');\n"),
+    };
+    const index = buildIndex([target, jsxTarget, ...Object.values(chains)]);
+    const edges = edgeMapOf(index);
+    for (const [kind, file] of Object.entries(chains)) {
+      const expected = kind === 'extensionless' ? jsxTarget : target;
+      expect([...(edges.get(file) ?? [])], `${kind} edge was not followed`).toEqual([expected]);
+      expect([...reachFrom([file], edges)].sort()).toEqual([file, expected].sort());
+    }
+    expect(resolveSpecifier(chains.extensionless, './tabs/FaithProbe', index.sources)).toBe(jsxTarget);
+    expect(resolveSpecifier(chains.static, 'typescript', index.sources)).toBeNull();
+    expect(importEdgesOf(index.sources.get(target), target, index.sources).size).toBe(0);
+  });
+
+  test('THE SWAP MUTANT: a new dark identity at constant count reds with its identity named', () => {
+    const judged = plantClosureOf([]);
+    const swapped = new Map(judged.verdicts);
+    const victim = baseline.darkUnregistered[0].identity;
+    swapped.delete(victim);
+    const view = liveViewOf({
+      ...live, verdicts: swapped, knownShapes: judged.knownShapes,
+    });
+    expect(view.population.dark).toBe(baseline.population.dark);
+    const comparison = compareDark(view, baseline);
+    expect(comparison.violations).toEqual([`${PLANTED_KEY} on settlement`]);
+    expect(comparison.stale.map((row) => row.identity)).toEqual([victim]);
+  });
+
+  test('THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds', async () => {
+    expect(compareDark(liveView, baseline).violations).toEqual([]);
+    const judged = plantClosureOf([]);
+    const view = liveViewOf({ ...live, verdicts: judged.verdicts, knownShapes: judged.knownShapes });
+    let refusal = null;
+    try {
+      await run(['--write'], {
+        root: ROOT, log: () => {}, measured: { ...live, verdicts: judged.verdicts, knownShapes: judged.knownShapes },
+        writeBaseline: () => { throw new Error('--write GREW the cohort'); },
+      });
+    } catch (error) { refusal = error.message; }
+    expect(refusal).toContain('--write REFUSED');
+    expect(refusal).toContain(`${PLANTED_KEY} on settlement`);
+    expect(view.population.dark).toBe(baseline.population.dark + 1);
+  });
+
+  test('\u26a0\u26a0 THE SCAN BUDGET: exactly TWO full-tree scans, never one per mutant', async () => {
+    expect(scansRun, 'a mutant suite that scans per plant costs minutes per gate').toBe(2);
+    expect(live.scanStats.files).toBe(live.union.size);
+    expect(mutantReads.stats.files).toBe(live.union.size + 4);
+    // AND a door that is going to REFUSE must refuse before it measures. This arm
+    // exists because the refusal tests above once spent a full corpus build and a
+    // full-tree scan on their way to a guard the flags had already decided — 25 s
+    // per refusal, and a scan this very budget could not see, because `run` calls
+    // the scanner directly rather than through the counter above.
+    const before = scansRun;
+    let refused = null;
+    try {
+      await run(['--report'], {
+        root: ROOT, baselineExists: () => false, log: () => {},
+        measured: (() => { throw new Error('the refusing door MEASURED before it refused'); }),
+      });
+    } catch (error) { refused = error.message; }
+    expect(refused).toContain('nothing to ratchet against');
+    expect(scansRun, 'a refusing door must not spend a scan').toBe(before);
+  });
+});
