@@ -313,17 +313,47 @@ describe('living-content materialization law', () => {
     ).toEqual({});
   });
 
-  it.each([
-    ['absent', undefined],
-    ['null', null],
-    ['garbage', 'yes please'],
-    ['the default itself', 1],
-    ['a version that has not shipped', 3],
-    ['a numeric string for an unshipped version', '3'],
-    ['NaN', Number.NaN],
-  ])('fails closed on %s', (_label, value) => {
-    expect(readLivingContentLawVersion(value)).toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
-    expect(materializesLivingContent({ [LIVING_CONTENT_LAW_CONFIG_KEY]: value })).toBe(false);
+  // ⚠ ONE NAMED TEST THAT LOOPS INSIDE — deliberately NOT `it.each`, and the reason
+  // is measured rather than stylistic. A parameterised callback generates titles the
+  // lighting census's reader cannot recognise statically, so `it.each` PARKS THIS
+  // WHOLE FILE, and a parked file's titles are census-invisible: it takes the other
+  // literal titles in this file out of evidence with it. Measured at the COUPLED
+  // landing on 2026-09-01: this file was the single member that pushed the estate's
+  // each-family park debt from 111 to 112 against a ceiling of 111. The census's own
+  // prescribed idiom is to loop INSIDE a named test, never to generate tests from a
+  // loop; every assertion below is still made PER CASE and still fails BY NAME.
+  it('fails closed on every non-shipping version marker', () => {
+    const FAIL_CLOSED_CASES = [
+      ['absent', undefined],
+      ['null', null],
+      ['garbage', 'yes please'],
+      ['the default itself', 1],
+      ['a version that has not shipped', 3],
+      ['a numeric string for an unshipped version', '3'],
+      ['NaN', Number.NaN],
+    ];
+    const offenders = [];
+    let examined = 0;
+    for (const [label, value] of FAIL_CLOSED_CASES) {
+      examined += 1;
+      const read = readLivingContentLawVersion(value);
+      if (read !== DEFAULT_LIVING_CONTENT_LAW_VERSION) {
+        offenders.push(`${label}: readLivingContentLawVersion returned ${String(read)},`
+          + ` not the default ${DEFAULT_LIVING_CONTENT_LAW_VERSION}`);
+      }
+      const materializes = materializesLivingContent({ [LIVING_CONTENT_LAW_CONFIG_KEY]: value });
+      if (materializes !== false) {
+        offenders.push(`${label}: materializesLivingContent returned ${String(materializes)}`
+          + ' — the law did not fail closed on this marker');
+      }
+    }
+    // Non-vacuity INSIDE the loop's own arm: a loop that ran zero times would
+    // otherwise report an empty offender list and pass.
+    expect(examined, 'the fail-closed sweep examined no marker').toBe(7);
+    expect(
+      offenders,
+      `the law did not fail closed:\n  ${offenders.join('\n  ')}`,
+    ).toEqual([]);
   });
 
   it('reads the config and nothing else', () => {
@@ -437,22 +467,29 @@ describe('living-content materialization law', () => {
   });
 
   // ── THE PAYMENT: THE 26 COME ALIVE UNDER THE LIT LAW ──────────────────────
-  it.each(BLIND_CASES)(
-    '$key materializes and discovers under the lit law',
-    (testCase) => {
+  // ⚠ LOOPS INSIDE ONE NAMED TEST — see the note on the fail-closed sweep above:
+  // `it.each` parks this whole file in the lighting census. Every assertion below is
+  // still made PER CASE and still names the offending case; they are collected so a
+  // failure reports EVERY unpaid case at once rather than only the first.
+  it('every blind case materializes and discovers under the lit law', () => {
+    const unpaid = [];
+    const undiscovered = [];
+    const promoted = [];
+    let examined = 0;
+    for (const testCase of BLIND_CASES) {
+      examined += 1;
       const { key, bucket } = testCase;
       const { materialized, subjectUid, reached } = probe(testCase, LIT_CONFIG);
 
-      expect(
-        materialized,
-        `${key}: the definition (${bucket}:${subjectUid}) still does not appear in the`
-        + ' generated settlement under the LIT law — the §866 bill is unpaid for this case.',
-      ).toBe(true);
-      expect(
-        reached.length,
-        `${key}: the definition materializes, but flipping this presentation field moved`
-        + ' NOTHING anywhere in the settlement, so the case still discovers nothing.',
-      ).toBeGreaterThan(0);
+      if (materialized !== true) {
+        unpaid.push(`${key}: the definition (${bucket}:${subjectUid}) still does not appear in the`
+          + ' generated settlement under the LIT law — the §866 bill is unpaid for this case.');
+        continue;
+      }
+      if (!(reached.length > 0)) {
+        undiscovered.push(`${key}: the definition materializes, but flipping this presentation field`
+          + ' moved NOTHING anywhere in the settlement, so the case still discovers nothing.');
+      }
 
       // ⛔ AND IT LANDED ON THE PRESENTATION SIDE — BY ENUMERATION, NOT BY DIGEST.
       // Every path the flip moved must be inside the additive roster key. This is
@@ -462,45 +499,63 @@ describe('living-content materialization law', () => {
       // presentation side of the governed split rather than promoting a
       // presentation field into a mechanic.
       const escaped = reached.filter(path => !path.startsWith(`$.${ROSTER_KEY}.`));
-      expect(
-        escaped,
-        `${key}: flipping a PRESENTATION field moved something outside the inert roster.`
-        + ' That is a presentation→mechanical promotion, which is OWNER-GATED and must'
-        + ` not arrive as a side effect of materialization. Escaped: ${escaped.join(', ')}`,
-      ).toEqual([]);
-    },
-  );
+      if (escaped.length) {
+        promoted.push(`${key}: flipping a PRESENTATION field moved something outside the inert roster.`
+          + ' That is a presentation→mechanical promotion, which is OWNER-GATED and must'
+          + ` not arrive as a side effect of materialization. Escaped: ${escaped.join(', ')}`);
+      }
+    }
+    // Non-vacuity INSIDE the loop's own arm: a loop that ran zero times would
+    // otherwise report three empty lists and pass.
+    expect(examined, 'the lit-law sweep examined no case').toBe(BLIND_CASES.length);
+    expect(examined, 'the blind-case ledger is empty — the sweep proves nothing').toBeGreaterThan(0);
+    expect(unpaid, `the §866 bill is unpaid:\n  ${unpaid.join('\n  ')}`).toEqual([]);
+    expect(undiscovered, `materialized but discovers nothing:\n  ${undiscovered.join('\n  ')}`).toEqual([]);
+    expect(promoted, `presentation→mechanical promotion:\n  ${promoted.join('\n  ')}`).toEqual([]);
+  });
 
   // ── THE F2c TRIPWIRE: THE LINE THIS LANE BUILDS UP TO AND DOES NOT CROSS ───
-  it.each(BLIND_CASES.filter(({ field }) => field.key === 'name'))(
-    '$key materializes WITHOUT adoption — the mechanical surfaces stay free',
-    (testCase) => {
-      const { bucket } = testCase;
+  // ⚠ LOOPS INSIDE ONE NAMED TEST — see the note on the fail-closed sweep above.
+  it('every name case materializes WITHOUT adoption — the mechanical surfaces stay free', () => {
+    const nameCases = BLIND_CASES.filter(({ field }) => field.key === 'name');
+    const adopted = [];
+    const missingFromRoster = [];
+    let examined = 0;
+    for (const testCase of nameCases) {
+      examined += 1;
+      const { key, bucket } = testCase;
       const { control, subjectUid } = probe(testCase, LIT_CONFIG);
 
       // The four surfaces `settlementContentProvenance.js` already scans for
       // living content. Their readers exist; keeping them EMPTY is the boundary.
       for (const surface of LIVING_CONTENT_ADOPTION_SURFACES) {
         const blob = JSON.stringify(at(control, surface) ?? null);
-        expect(
-          blob.includes(subjectUid) || blob.includes(`definition:${bucket}:`),
-          `${surface} ADOPTED a living-content definition. Materialization is not`
-          + ' adoption: the reference pack fixture states that a reviewed definition'
-          + ' "must not make a generated settlement silently adopt a deity, faction,'
-          + ' stressor, or tradition". Writing custom content into this surface is a'
-          + ' presentation→mechanical promotion and is OWNER-GATED — it does not land'
-          + ' as a side effect of this law.',
-        ).toBe(false);
+        if (blob.includes(subjectUid) || blob.includes(`definition:${bucket}:`)) {
+          adopted.push(`${key}: ${surface} ADOPTED a living-content definition. Materialization is not`
+            + ' adoption: the reference pack fixture states that a reviewed definition'
+            + ' "must not make a generated settlement silently adopt a deity, faction,'
+            + ' stressor, or tradition". Writing custom content into this surface is a'
+            + ' presentation→mechanical promotion and is OWNER-GATED — it does not land'
+            + ' as a side effect of this law.');
+        }
       }
 
       // And the roster genuinely holds it — otherwise the sweep above is
       // satisfied by a build that materializes nothing at all.
-      expect(
-        JSON.stringify(control[ROSTER_KEY]),
-        'THE CONTROL for the sweep above: the subject must really be in the roster',
-      ).toContain(subjectUid);
-    },
-  );
+      if (!JSON.stringify(control[ROSTER_KEY]).includes(subjectUid)) {
+        missingFromRoster.push(`${key}: THE CONTROL for the sweep above — the subject`
+          + ' must really be in the roster');
+      }
+    }
+    // Non-vacuity INSIDE the loop's own arm.
+    expect(examined, 'the adoption sweep examined no name case').toBe(nameCases.length);
+    expect(examined, 'there is no name case at all — the sweep proves nothing').toBeGreaterThan(0);
+    expect(adopted, `adoption escaped the boundary:\n  ${adopted.join('\n  ')}`).toEqual([]);
+    expect(
+      missingFromRoster,
+      `the control failed — the roster does not hold the subject:\n  ${missingFromRoster.join('\n  ')}`,
+    ).toEqual([]);
+  });
 
   it('the provenance receipt is untouched by the roster', () => {
     // The roster is NOT fed to `buildSettlementContentProvenance`. That receipt
