@@ -2329,3 +2329,24 @@ Net ceiling movement **−17** (one raise of +1, one ratchet-down of −18): the
 *What Fable re-derives:* the FILL-LAYER-over-everything ranking, which is a scheduling judgment the returning seat may reverse; and whether a standing heartbeat that carries a seat trailer in its text is safe at all, given a seat can change mid-arc while the cron text cannot.
 
 *Priority:* MEDIUM for the ranking. ⛔ **HIGH for the heartbeat defect** — an automated instruction that hard-codes a seat will keep issuing the wrong one for the rest of the arc.
+
+---
+
+## §884.2 · THE GUARD FIRED AND THE ACT DID NOT STOP (2026-09-02 ~21:4x ET, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**What was judged — a chair process failure, self-caught on read-back.** The §884.1 collection ran its asserting handoff edit FIRST, exactly as the §882.11 cure requires. The assertion **correctly fired** (`trees line span 862` against a wrongly-guessed bound of 1000–2000) and **the handoff was not written** — but the surrounding shell had no `set -e` and no `||  exit 1`, so **the act continued and committed a handoff that had not been refreshed.** The ledger row and the queue stratum landed correct; only the successor card was stale, by one fact: that two lanes were running.
+
+⛔ **THE MISSING HALF OF THE §882.11 CURE, NOW WRITTEN DOWN.** That cure said *an asserting anchor-replacement runs BEFORE any other file is written*. It is **necessary and not sufficient**. The full law:
+
+> **An asserting edit must ABORT THE ACT, not merely decline the edit.** Order it first *and* chain it so its
+> failure stops everything after it (`set -e`, or `python3 … || exit 1`). A guard whose failure is swallowed by
+> the shell is indistinguishable from no guard — it produces exactly the outcome it was written to prevent, and
+> it does so while reporting success.
+
+⚠ And the second-order lesson, which is the one that actually recurs: **the bound was wrong because the chair guessed it instead of measuring it.** Same shape as [[an-anchor-pair-must-assert-the-span]], where a first retry also failed its own bound (1000 guessed, 905 real). **Measure the span, then assert it.** Three times in one session a chair edit has gone wrong at an anchor, and every one was caught by a read-back rather than by a gate.
+
+*What Fable re-derives:* whether the collection ritual should stop being a shell script at all and become a single Python program that holds every assertion and every write in one transaction, so partial application is impossible by construction.
+
+*Receipts:* the §884.1 commit `17970ea7c` carries three files, of which `docs/HANDOFF_CURRENT.md` is byte-identical to its parent's. This act lands the refresh that commit should have carried.
+
+*Priority:* ⛔ **HIGH — it is a defect in the chair's own collection ritual and it has now bitten twice.**
