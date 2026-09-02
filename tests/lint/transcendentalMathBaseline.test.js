@@ -81,7 +81,7 @@ const current = countTrees();
 // IS BURNED DOWN HERE. Both sites are the SAME expression — `Math.pow(0.5, age / halfLife)`,
 // the exponential half-life decay. bandedStock.js exists precisely to be the one home for
 // it (its own header records FIFTEEN hand-spelled call sites found on 2026-08-04), and
-// dispositionLedger.js:468 is one of the sites that has not yet been routed through it.
+// dispositionLedger.js:468 WAS such a site; T13 Car 3 ROUTED it and deleted its row.
 // Re-freezing here would bank a fork of a shared primitive; the honest cure is the routing
 // wave, and the sound long-run answer for the primitive itself is a rational/integer
 // reformulation, since `Math.pow` is implementation-approximated per the ECMAScript spec
@@ -98,26 +98,18 @@ const DECLARED_OVERRUNS = Object.freeze({
   'src/domain/worldPulse/bandedStock.js': {
     sites: 1,
     introducedAt: '59df13a97d3e01de7ade2048ab4534be1c5f7cd0',
-    cause: 'SP-A minted the shared band/decay shapes leaf, and `decayToward` at :125 carries the '
-      + 'ONE canonical `Math.pow(0.5, age / weeks)`. This is the site the other fifteen are meant '
-      + 'to collapse into, so it is the LAST one to remove, not the first — clearing it means '
-      + 'reformulating the half-life itself (an integer/rational form), which is its own wave.',
-  },
-  'src/domain/worldPulse/dispositionLedger.js': {
-    sites: 1,
-    introducedAt: '7796954e7150c2d072e2ee217b9b41466a102a50',
-    cause: 'WR-2 DISPOSITION added `decayChannel` at :468 with a hand-rolled '
-      + '`Math.pow(0.5, age / CHANNEL_HALF_LIFE_TICKS)` — the sixteenth copy of the expression '
-      + "bandedStock.js was later minted to own (this file's own header names that leaf). Cleared "
-      + 'by routing the call through bandedStock, which is a behaviour-touching edit and belongs '
-      + 'to the routing wave, not to a ratchet-repair lane.',
+    cause: 'SP-A minted the shared band/decay shapes leaf, and the ONE canonical '
+      + '`Math.pow(0.5, age / weeks)` now sits in `halfLifeFactor` — T13 Car 3 collapsed the '
+      + 'other twelve copies onto it, so the site the family was always meant to reach is '
+      + 'reached. It is the LAST one to remove, not the first: clearing it means reformulating '
+      + 'the half-life itself, which is T13 Car 4 (i) and deletes this row and the ceiling with it.',
   },
 });
 
 // A LITERAL total EXCESS over the frozen baseline, not a figure derived from the object it
 // is supposed to cap — a ceiling read out of its own list proves list == list and rises
 // silently with every row. MONOTONE DOWN. You may burn it; you may never pad it.
-const DECLARED_OVERRUN_CEILING = 2;
+const DECLARED_OVERRUN_CEILING = 1;
 
 /** Baseline allowance, widened ONLY by an attributed declared overrun. */
 const allowanceFor = (file) => DECLARED_OVERRUNS[file]?.sites ?? baseline.files[file] ?? 0;

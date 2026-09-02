@@ -1,5 +1,5 @@
 {
-  "total": 26,
+  "total": 15,
   "files": {
     "src/domain/roads/state.js": 1,
     "src/domain/spatial/moralDrift.js": 1,
@@ -8,18 +8,9 @@
     "src/domain/worldPulse/beliefMap.js": 3,
     "src/domain/worldPulse/corruptionWeb.js": 2,
     "src/domain/worldPulse/disposition.js": 2,
-    "src/domain/worldPulse/factionPairLedger.js": 1,
     "src/domain/worldPulse/fidelityNoise.js": 1,
-    "src/domain/worldPulse/informationStatecraft.js": 1,
     "src/domain/worldPulse/martialReadiness.js": 1,
-    "src/domain/worldPulse/momentum.js": 1,
-    "src/domain/worldPulse/npcCredibility.js": 1,
-    "src/domain/worldPulse/npcGrowthKernel.js": 1,
-    "src/domain/worldPulse/npcLadderKernel.js": 1,
-    "src/domain/worldPulse/npcLadderState.js": 2,
     "src/domain/worldPulse/occupation.js": 1,
-    "src/domain/worldPulse/populationDynamics.js": 1,
-    "src/domain/worldPulse/relationshipMemory.js": 1,
-    "src/domain/worldPulse/urbanFabricKernel.js": 2
+    "src/domain/worldPulse/populationDynamics.js": 1
   }
 }

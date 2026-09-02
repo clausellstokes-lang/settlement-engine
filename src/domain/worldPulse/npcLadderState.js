@@ -11,6 +11,7 @@
  * leaf under the domain max-lines ceiling.
  */
 import { importanceWeight } from '../entities/npcs.js';
+import { halfLifeFactor } from './bandedStock.js';
 import { npcId } from './npcAgency.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
 import { slugify } from '../../kernel/slugify.js';
@@ -228,7 +229,7 @@ export function decayStandingTowardBaseline(stock, deltaWeeks) {
   const T = LADDER_TUNING;
   const base = T.STAND_BASELINE;
   if (!(deltaWeeks > 0)) return stock;
-  const factor = Math.pow(0.5, deltaWeeks / Math.max(1, T.STAND_HALF_LIFE_WEEKS));
+  const factor = halfLifeFactor(deltaWeeks, Math.max(1, T.STAND_HALF_LIFE_WEEKS));
   return base + (stock - base) * factor;
 }
 
@@ -238,7 +239,7 @@ export function decayStandingTowardBaseline(stock, deltaWeeks) {
 function decayMark(sev, deltaWeeks, halfLife, bandMult) {
   if (!(sev > 0) || !(deltaWeeks > 0)) return sev;
   if (!Number.isFinite(bandMult)) return sev; // undying ⇒ the mark never fades
-  return sev * Math.pow(0.5, deltaWeeks / Math.max(1, halfLife * bandMult));
+  return sev * halfLifeFactor(deltaWeeks, Math.max(1, halfLife * bandMult));
 }
 
 /**
