@@ -2317,3 +2317,15 @@ The tuning walker's P2 growth was **T13 giving a magic number a name**: `+const 
 ### WHAT ROSE AND WHAT TIGHTENED
 
 Net ceiling movement **−17** (one raise of +1, one ratchet-down of −18): the landing **tightens** the estate. Nothing was re-recorded — no golden, no fixture, no fence constant, no OSR row — and the one derived identity that moves, the realm-scale `sourceFingerprint`, moves **by design** and is committed nowhere. `L-6 DISCHARGED`: the porcelain cure's repeatability was demonstrated on a real landing rather than only on its own dock.
+
+---
+
+## §884.1 · THE POST-LANDING DISPATCH (2026-09-02 ~21:3x ET, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**What was judged.** The board came out of the §884 landing empty — zero of four running, no lock, all docks porcelain 0 — and the chair chose which two of the four free slots to fill. **CURE-CAPSULE-REBASE** (the §883.5 CR-1 ruling, now executable because §884 landed and moved the branch under it) and **FILL-LAYER** (§883.7's broken `{access}` fills). ⭐ **The chair ranked FILL-LAYER first on the board over every other queued item, including the chartered waves**, on the one-way-door ground: it is free today because the corpus has zero product consumers, and the tree's own ratchet baseline says the equivalent burn *"becomes impossible the day the stack is wired."* Both skeptics of the design panel independently reached the same sequencing.
+
+⚠ **A HEARTBEAT INSTRUCTION WAS REFUSED, and this is the row that records it.** The 30-minute dispatcher heartbeat carries stale text: it names `gate-tailf.log` (§882, landed 04:2x) and instructs the chair to commit with the trailer **`Seat: Fable 5.1 — validated`**. ⛔ **The seat has been OPUS 5 since §882.8.** Signing this span's work with a Fable trailer would mark unvalidated Opus work as Fable-validated — **precisely the class the retrovalidation mark exists to prevent**, and it would defeat the §882.14 enrolment gate rather than trip it. The chair followed the heartbeat's INTENT (survey, board, completions, checkpoint) and refused its stale specifics.
+
+*What Fable re-derives:* the FILL-LAYER-over-everything ranking, which is a scheduling judgment the returning seat may reverse; and whether a standing heartbeat that carries a seat trailer in its text is safe at all, given a seat can change mid-arc while the cron text cannot.
+
+*Priority:* MEDIUM for the ranking. ⛔ **HIGH for the heartbeat defect** — an automated instruction that hard-codes a seat will keep issuing the wrong one for the rest of the arc.
