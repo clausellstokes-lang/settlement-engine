@@ -833,6 +833,113 @@ describe('IA-1 implementation packet manifest and capsule', () => {
       .toBeGreaterThan(0);
   });
 
+  // ── HK-5 (ODQ §879.11 R4; §479.2 read PACKET-scoped) — THE MOVING-HEAD REFUSAL, FIGURE FORM ─
+  // HK-3 above catches the head spelled as a FILENAME. The same defect has a second spelling
+  // it cannot see: the head quoted as a bare FIGURE. Both specimens are live in the estate's
+  // own documents right now — docs/CURRENT_STATE.md:5 "migrations are contiguous to 200" and
+  // ARCHITECTURE.md:269 "**migrations/** (200)" — and a packet that pinned either would trap
+  // every later migration member exactly as WEB-1's filename row trapped WEB-2.
+  // ⚠ THE TABLES BELOW ARE `for` LOOPS INSIDE ONE `it` BODY, DELIBERATELY. A negative-controls
+  // table is the ordinary shape a per-row vitest table is written in, and the lighting walker
+  // PARKS a whole file on that shape: this file would lose all seventeen of its credited
+  // titles and move the literal-table park ceiling off its zero headroom. This file's own idiom
+  // (:187, :245, :294, and HK-3's arm above) is the loop in the body; it is kept.
+  it('reds a requiredSymbols row that pins a migration HEAD FIGURE on a §479.2 path, and only that shape', () => {
+    write(root, 'docs/CURRENT_STATE.md', [
+      '# Current state',
+      '',
+      '> Migrations are contiguous to 198 at the repository head.',
+      '',
+      'The stable anchor a packet may pin instead: Migrations are contiguous at the repository head',
+      '',
+      'Unrelated prose that carries a three-digit figure: 311 static route documents.',
+      '',
+    ].join('\n'));
+    write(root, 'ARCHITECTURE.md', [
+      '# Architecture',
+      '',
+      '- **migrations/** (198) — prod applied head tracked in `supabase/applied-head.json`.',
+      '',
+    ].join('\n'));
+    write(root, 'tests/lint/migrationTrainWall.walker.test.js',
+      'const MIGRATION_TRAIN_REPO_HEAD = 198;\n');
+
+    /** @param {{ path: string, symbol: string }} extraRow */
+    const withRow = (extraRow) => {
+      const candidate = clone(manifest);
+      candidate.packets[0].requiredSymbols.push(extraRow);
+      return validatePacketManifest(candidate, { rootDir: root });
+    };
+
+    // THE CLEAN CONTROL FIRST — without it a refusal proves nothing about this arm, only that
+    // the fixture is broken somewhere.
+    expect(validatePacketManifest(manifest, { rootDir: root })).toEqual({ ok: true, errors: [] });
+
+    // THE POSITIVE CONTROL HK-5 EXISTS FOR: the contiguity claim, replanted against the doc
+    // that really carries it. Note the doc DOES contain the string — the refusal is about the
+    // row's shape, so it fires while the figure is still current, which is the whole point.
+    const planted = withRow({ path: 'docs/CURRENT_STATE.md', symbol: 'contiguous to 198' });
+    expect(planted.ok).toBe(false);
+    expect(errorText(planted)).toContain('pins a MIGRATION HEAD FIGURE');
+    expect(errorText(planted)).toContain('contiguous to 198');
+    expect(errorText(planted)).toContain('docs/CURRENT_STATE.md');
+    expect(readFileSync(join(root, 'docs/CURRENT_STATE.md'), 'utf8')).toContain('contiguous to 198');
+
+    // EVERY SHAPE IN THE ROSTER, each on a §479.2 path, each refused and each naming its row.
+    for (const row of [
+      { path: 'docs/CURRENT_STATE.md', symbol: '198' },
+      { path: 'docs/CURRENT_STATE.md', symbol: 'Migrations are contiguous to 198 at the repository head.' },
+      { path: 'ARCHITECTURE.md', symbol: '**migrations/** (198)' },
+      { path: 'docs/DEPLOY.md', symbol: 'MIGRATION_TRAIN_REPO_HEAD = 198' },
+      { path: 'docs/ops/MIGRATION_REHEARSAL_RUNBOOK.md', symbol: 'rehearse against head 198' },
+      { path: 'scripts/ops/migrationRehearsalCore.mjs', symbol: 'MIGRATION_TRAIN_REPO_HEAD = 198' },
+    ]) {
+      const result = withRow(row);
+      expect(result.ok, `${row.path} :: ${row.symbol} must be refused`).toBe(false);
+      expect(errorText(result)).toContain('pins a MIGRATION HEAD FIGURE');
+      expect(errorText(result), 'the refusal must name the offending row').toContain(row.symbol);
+    }
+
+    // THE NEGATIVE CONTROLS, so the arm cannot be a blanket refusal of anything with digits:
+    //   a) a real stable anchor in the same doc, which is the spelling the message prescribes;
+    //   b) a three-digit figure in prose that is not a migration head at all;
+    //   c) the frozen head constant pinned at a path OUTSIDE the four — in scope for HK-3's
+    //      sibling rule and correct here, because §479.2 is packet-scoped, not doc-scoped;
+    //   d) the migration FILE pinned at its own path, which is the correct stable spelling and
+    //      is HK-3's business, not this arm's.
+    write(root, 'supabase/migrations/198_referral_funnel_report.sql',
+      '-- @rollback: documented-manual-reversal\nalter table referrals add column v int;\n');
+    for (const row of [
+      { path: 'docs/CURRENT_STATE.md', symbol: 'Migrations are contiguous at the repository head' },
+      { path: 'docs/CURRENT_STATE.md', symbol: 'Unrelated prose that carries a three-digit figure: 311 static route documents.' },
+      { path: 'tests/lint/migrationTrainWall.walker.test.js', symbol: 'const MIGRATION_TRAIN_REPO_HEAD = 198;' },
+      { path: 'supabase/migrations/198_referral_funnel_report.sql', symbol: 'referrals' },
+    ]) {
+      expect(withRow(row), `${row.path} :: ${row.symbol} must NOT be refused`)
+        .toEqual({ ok: true, errors: [] });
+    }
+
+    // AND THE LIVE MANIFEST — the claim the guard actually makes about the estate. Read from
+    // the repository, not from the fixture.
+    const live = loadPacketManifest();
+    expect(validatePacketManifest(live, {}).errors
+      .filter((message) => message.includes('pins a MIGRATION HEAD FIGURE')))
+      .toEqual([]);
+    // …with the population pinned as a FLOOR, because a refusal over an empty subject proves
+    // nothing: the estate really does pin rows on these four paths for this guard to be silent
+    // ABOUT, and it really does carry docs-path rows besides.
+    const governed = live.packets.flatMap((packet) => (packet.requiredSymbols ?? [])
+      .filter((symbolRow) => [
+        'docs/DEPLOY.md',
+        'ARCHITECTURE.md',
+        'docs/CURRENT_STATE.md',
+        'scripts/ops/migrationRehearsalCore.mjs',
+        'docs/ops/MIGRATION_REHEARSAL_RUNBOOK.md',
+      ].includes(String(symbolRow.path))));
+    expect(governed.length, 'no packet pins any §479.2 path — the guard has no live subject')
+      .toBeGreaterThan(0);
+  });
+
   // ── §731.3 (owner ruling ODQ §731, charter §11.5) — THE RETIREMENT PATH ───────────────
   // Every existence and verbatim assertion in this validator was written on a premise
   // nobody had stated: that the codebase only ever GROWS. The owner's order to strip the

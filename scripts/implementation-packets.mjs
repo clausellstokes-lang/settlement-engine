@@ -113,6 +113,49 @@ const GLOB_OR_NUL = /[\0*?[\]{}!]/;
 const MIGRATION_FILENAME_SYMBOL = /^\d{3}_.*\.sql$/;
 const DOCS_PATH_PREFIX = 'docs/';
 
+// HK-5 (ODQ §879.11 R4; §479.2 read PACKET-scoped) — THE MOVING-HEAD REFUSAL, SECOND SHAPE.
+// HK-3 above refuses a migration FILENAME pinned in a doc. The same defect has a second
+// spelling that HK-3 cannot see: the migration head quoted as a bare FIGURE. Both live in
+// the estate's own docs today — `docs/CURRENT_STATE.md` says "migrations are contiguous to
+// 200" and `ARCHITECTURE.md` says "**migrations/** (200)" — and either becomes a trap for
+// every later migration member the moment the next migration lands, exactly as WEB-1's
+// filename row trapped WEB-2. The scope is the four §479.2 paths named explicitly rather
+// than all of `docs/`: §479.2 is packet-scoped, the two `tests/docs/` freshness tests are
+// what compel the DOCUMENTS, and a blanket refusal over every doc would convict honest prose.
+// ⚠ `ARCHITECTURE.md` is at the repository ROOT, so it is deliberately NOT reachable through
+// DOCS_PATH_PREFIX — that is why this roster is a list of paths and not a prefix.
+const MIGRATION_HEAD_FIGURE_PATHS = Object.freeze([
+  'docs/DEPLOY.md',
+  'ARCHITECTURE.md',
+  'docs/CURRENT_STATE.md',
+  'scripts/ops/migrationRehearsalCore.mjs',
+  'docs/ops/MIGRATION_REHEARSAL_RUNBOOK.md',
+]);
+
+// Each shape is anchored at a phrase boundary, never as a loose substring, so a real heading
+// ("Current migration head"), an exported token, or a three-digit figure that is not a
+// migration head at all ("311 static route documents") is untouched.
+const MIGRATION_HEAD_FIGURE_SHAPES = Object.freeze([
+  { what: 'a bare migration head number', pattern: /^\s*\d{3}\s*$/ },
+  { what: 'the frozen head constant', pattern: /\bMIGRATION_TRAIN_REPO_HEAD\s*=\s*\d+/ },
+  { what: "the ARCHITECTURE migrations row's parenthesised head", pattern: /\bmigrations\/\*\*\s*\(\s*\d+\s*\)/ },
+  { what: 'a contiguity claim', pattern: /\bcontiguous to \d+/ },
+  { what: 'a bare head figure', pattern: /\bhead\s+\d{2,}(?!\d)/ },
+]);
+
+/**
+ * @param {string} path
+ * @param {string} symbol
+ * @returns {string | null} the shape's description, or null when the row is well-formed.
+ */
+function migrationHeadFigureShape(path, symbol) {
+  if (!MIGRATION_HEAD_FIGURE_PATHS.includes(path)) return null;
+  for (const shape of MIGRATION_HEAD_FIGURE_SHAPES) {
+    if (shape.pattern.test(symbol)) return shape.what;
+  }
+  return null;
+}
+
 // ── §731.3 THE RETIREMENT PATH (owner ruling ODQ §731, charter §11.5) ────────────────
 // A LANDED packet is a HISTORICAL RECORD, not a promise of immortality. Every existence
 // and verbatim assertion below was written on a premise nobody stated: that the codebase
@@ -723,6 +766,20 @@ export function validatePacketManifest(manifest, options = {}) {
           + ' FIGURE that moves with the next migration, so this row traps every later migration'
           + ' member against a packet it never touched. Pin a stable anchor in the doc, or pin the'
           + ' migration file itself under supabase/migrations/.',
+        );
+        continue;
+      }
+      // HK-5 — THE SAME DEFECT, SPELLED AS A FIGURE. Asserted here for HK-3's reason: it is a
+      // defect in the ROW'S SHAPE, not a claim about the tree, so it fires even on the one
+      // tree where the figure is current — which is exactly when such a row gets written.
+      const headShape = migrationHeadFigureShape(row.path, row.symbol);
+      if (headShape) {
+        addError(
+          errors,
+          `${at}.symbol pins a MIGRATION HEAD FIGURE in ${row.path}: ${row.symbol} (${headShape}).`
+          + ' The head is a figure that moves with the next migration, so this row traps every'
+          + ' later migration member against a packet it never touched. Pin a stable anchor in'
+          + ' the document, or pin the migration file itself under supabase/migrations/.',
         );
         continue;
       }
