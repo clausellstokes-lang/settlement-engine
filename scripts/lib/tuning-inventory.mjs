@@ -934,7 +934,22 @@ export function tuningRegisterFingerprint(root) {
 
 /* ------------------------------------------------------------------ the ritual */
 
-const gitOut = (root, ...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
+/**
+ * ⚠⚠ PORCELAIN LINES ARE READ WITHOUT TRIMMING THE OUTPUT, AND THAT IS A BUG THIS LANE
+ * ALREADY PAID FOR. `git status --porcelain` spells a modified-unstaged file as `" M path"`,
+ * with a LEADING SPACE that is part of the two-character status field. Trimming the whole
+ * output eats that space on the FIRST LINE ONLY, so a `slice(3)` that is correct for every
+ * other line strips one character too many from line one. MEASURED, verbatim from the
+ * refusal this produced: `Dirty: ests/lint/.tuning-inventory.json` — the permitted path,
+ * mangled, and therefore not matching the allowlist, so the refreeze refused itself for a
+ * file it was built to allow. The failure is SILENT in the safe direction, which is exactly
+ * why it survives: it refuses when it should permit, and a refusal reads as caution.
+ */
+const gitPorcelainPaths = (root) => execFileSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8' })
+  .split('\n')
+  .filter((line) => line.length > 3)
+  .map((line) => line.slice(3).trim())
+  .filter(Boolean);
 
 /** True when `sha` names a real commit in this checkout's object store. */
 export function gitResolvesCommitIn(root, sha) {
@@ -991,11 +1006,7 @@ export function refreezeRefusals({
   // would red in the trees it is read in most, so an unanswerable tree reports no dirt.
   const dirty = (() => {
     try {
-      return gitOut(root, 'status', '--porcelain')
-        .split('\n')
-        .map((line) => line.slice(3).trim())
-        .filter(Boolean)
-        .filter((path) => !allowedDirty.includes(path));
+      return gitPorcelainPaths(root).filter((path) => !allowedDirty.includes(path));
     } catch {
       return [];
     }
