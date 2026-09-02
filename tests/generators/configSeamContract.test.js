@@ -13,10 +13,27 @@
  *
  * This is a source WALKER, not a runtime test: it scans the writer + reader source
  * so the seam is pinned even when no fixture happens to exercise the key.
+ *
+ * NO LONGER a blind spot (2026-09-01, the COUPLED consist's landing): both
+ * detectors scanned RAW source, and in THIS direction that defect is SILENT --
+ * a config key merely NAMED in a comment or a string counted as a pipeline
+ * READ, so a prose mention could clear a key that no code consumes and HIDE the
+ * very G2 silent drop this walker exists to convict. (Its twin,
+ * tests/generators/configPatchAllowlistWalker.test.js, shares this alias
+ * vocabulary and these regexes verbatim, and the same defect convicted THERE on
+ * a docblock citing `vite.config.js` -- a censused config key named `js`.) Both
+ * detectors now run the estate's ONE shared strip, tests/helpers/codeOnlySource.js
+ * (`codeOnly`), over each source text before any regex, and the strip is applied
+ * INSIDE these functions so the STANDING CONTROL below drives the stripped path
+ * too. MEASURED at the cure: the reader census falls 75 -> 72 at the landing tip
+ * and 73 -> 72 at the landing base 60255ca8e with the two stripped sets
+ * IDENTICAL; UI writers hold at 17; `dropped` and `stale` stay []. The class: a
+ * detector making a USE claim must read CODE.
  */
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { codeOnly } from '../helpers/codeOnlySource.js';
 
 const ROOT = process.cwd();
 const read = (rel) => (existsSync(resolve(ROOT, rel)) ? readFileSync(resolve(ROOT, rel), 'utf-8') : '');
@@ -32,7 +49,10 @@ const UI_WRITERS = ['src/components/GenerateWizard.jsx', 'src/components/Configu
  */
 function writtenConfigKeysIn(sources) {
   const keys = new Set();
-  for (const src of sources) {
+  for (const raw of sources) {
+    // Comments and string CONTENTS blanked before the scan; template
+    // interpolations survive, so the standing control's plants are still code.
+    const src = codeOnly(raw);
     // Each updateConfig({ … }) object literal (allowing a leading `isRandom ? …` and
     // ONE level of nested braces for values like { ...state, [k]: v }).
     const callRe = /updateConfig\(\s*(?:[^)?]*\?\s*)?\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g;
@@ -77,7 +97,9 @@ function readConfigKeysIn(sources) {
   const keys = new Set();
   const dotRe = new RegExp(`(?:${CFG_ALIASES})\\.([a-zA-Z_][a-zA-Z0-9_]*)`, 'g');
   const destructRe = new RegExp(`\\{([^{}]+)\\}\\s*=\\s*(?:${CFG_ALIASES})\\b`, 'g');
-  for (const src of sources) {
+  for (const raw of sources) {
+    // The same strip as the writer twin: a key cited in prose is not a reader.
+    const src = codeOnly(raw);
     let m;
     while ((m = dotRe.exec(src))) keys.add(m[1]);
     while ((m = destructRe.exec(src))) {
