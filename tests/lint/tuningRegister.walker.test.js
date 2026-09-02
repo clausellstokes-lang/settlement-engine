@@ -55,7 +55,7 @@ import {
   measureTree, discoverTables, tableSpan, flattenLeaves, spanDigest,
   countBareDecimals, countUnregisteredNamed, resolveDependents,
   loadTuningRegister, loadTuningInventory, signatureStateOf, tuningRegisterFingerprint,
-  refreezeRefusals, signingRecordMalformations, tuningIdFor,
+  refreezeRefusals, signingRecordMalformations, tuningIdFor, REGISTER_REL,
   TUNING_SHIFT_CAUSE_RE, UNIT_VOCABULARY, DIVERGENCE_REASONS, IDIOMS, REFUSALS,
   INVENTORY_REL, TREES_P1, TREES_P2P3, SCHEMA_VERSION,
 } from '../../scripts/lib/tuning-inventory.mjs';
@@ -165,8 +165,8 @@ export const AGG_TUNING = Object.freeze({
 
 const FIXTURE_URL_TRAP = `// see https://example.test/docs/3.14/spec for the derivation
 export const TRAP_TUNING = Object.freeze({ REAL: 0.5 });
-const NOTE = 'the ratio 9.99 is discussed at http://example.test/a/1.5/b';
-const LIVE = 2.25;
+const note = 'the ratio 9.99 is discussed at http://example.test/a/1.5/b';
+const live = clamp(2.25);
 `;
 
 /* ================================================================= describe A */
@@ -244,8 +244,11 @@ describe('tuning register — the detectors are honest', () => {
     inTempTree({ 'src/domain/probe.js': FIXTURE_URL_TRAP }, (dir) => {
       const { tables } = discoverTables(dir, null);
       const bare = countBareDecimals(dir, tables, ['src/domain']);
-      // anchored: LIVE = 2.25 sits on the line after the string, so a strip that treated the
-      // `//` inside the URL as the start of a comment would swallow it and report zero here.
+      // anchored: the live 2.25 sits on the line AFTER the string, so a strip that treated
+      // the `//` inside the URL as the start of a comment would swallow the rest of the file
+      // and report zero here. It is deliberately spelled `const live = clamp(2.25)` and not
+      // `const LIVE = 2.25` — an UPPER_SNAKE numeric const is a P2 line, which P3 skips by
+      // design, and the first cut of this fixture convicted itself on exactly that.
       expect(bare['src/domain/probe.js'], 'the 3.14 in the comment and the 9.99 and 1.5 in'
         + ' the string are prose; only the live 2.25 is a bare decimal').toBe(1);
     });
@@ -703,6 +706,18 @@ describe('tuning register — the soak-band manifest resolves', () => {
 /* ================================================================= describe H */
 
 describe('tuning register — the refreeze ritual refuses', () => {
+  /**
+   * ⚠ THE DIRT OF THE TREE THIS RUNS IN IS NOT THE SUBJECT OF THESE ARMS, AND LETTING IT BE
+   * ONE MADE THEM LIE. The refusals are ORDERED, and DIRTY_TREE comes first — so in any
+   * working dock with an uncommitted file (which is every dock, mid-car) three of these arms
+   * received DIRTY_TREE and reported that the growth door and the signing door had failed.
+   * MEASURED: `expected 'DIRTY_TREE' to be 'SIGNED_DIGEST_MOVED'`. Accounting for the tree's
+   * ACTUAL dirt here makes each arm test the refusal it names; the dirty branch gets its own
+   * arm below, driven in a throwaway repository so it never depends on this one's state.
+   */
+  const currentlyDirty = () => gitOut('status', '--porcelain')
+    .split('\n').map((line) => line.slice(3).trim()).filter(Boolean);
+
   const baseArgs = () => ({
     root: ROOT,
     measuredBy: 'lane INSTR-TUNEREG (Opus 5)',
@@ -710,6 +725,7 @@ describe('tuning register — the refreeze ritual refuses', () => {
     previous: committed,
     measured: committed,
     register,
+    allowedDirty: [INVENTORY_REL, ...currentlyDirty()],
   });
 
   test('blank or placeholder provenance is refused', () => {
@@ -823,20 +839,50 @@ describe('tuning register — the refreeze ritual refuses', () => {
       + ' that this arm always has something real to refuse.').toEqual([]);
   });
 
-  test('a dirty tree is refused and the inventory file alone dirty is allowed', () => {
-    const dirty = gitOut('status', '--porcelain')
-      .split('\n').map((line) => line.slice(3).trim()).filter(Boolean);
-    const verdict = refreezeRefusals(baseArgs());
-    if (dirty.filter((path) => path !== INVENTORY_REL).length === 0) {
-      expect(verdict.refusal, 'on a clean tree the ritual does not refuse for dirt').not.toBe('DIRTY_TREE');
-    } else {
-      expect(verdict.refusal, 'this inventory measures the WORKING TREE, and in a shared tree'
-        + ' those paths may belong to another lane — charging their files to this measurement'
-        + ' writes a figure no checkout can reproduce').toBe('DIRTY_TREE');
+  test('a dirty tree is refused and the permitted path alone dirty is allowed', () => {
+    // Driven in a throwaway repository so this arm proves the BRANCH rather than reporting
+    // whatever state the dock happens to be in when the gate runs.
+    const dir = mkdtempSync(join(tmpdir(), 'tunereg-git-'));
+    try {
+      execFileSync('git', ['init', '-q'], { cwd: dir });
+      writeFileSync(join(dir, 'someone-elses-work.js'), 'export const x = 1;\n', 'utf8');
+      const args = {
+        root: dir,
+        measuredBy: 'lane INSTR-TUNEREG (Opus 5)',
+        note: 'a note long enough to be a real cause rather than a formality',
+        previous: committed,
+        measured: committed,
+        register,
+      };
+      const refused = refreezeRefusals({ ...args, allowedDirty: [] });
+      expect(refused.refusal, 'this inventory measures the WORKING TREE, and in a shared tree'
+        + ' that file may belong to another lane — charging it to this measurement writes a'
+        + ' figure no checkout of this commit could reproduce').toBe('DIRTY_TREE');
+      expect(refused.detail, 'and the refusal names the path, so the lane can see whose it is')
+        .toContain('someone-elses-work.js');
+
+      const allowed = refreezeRefusals({ ...args, allowedDirty: ['someone-elses-work.js'] });
+      // anchored: the SAME tree with the SAME single dirty path refused one line above, so a
+      // dirty check that had been emptied could not produce both answers.
+      expect(allowed.refusal, 'and the one permitted dirty path makes a refreeze repeatable')
+        .not.toBe('DIRTY_TREE');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
     }
-    const allowed = refreezeRefusals({ ...baseArgs(), allowedDirty: [INVENTORY_REL] });
     expect(REFUSALS, 'and the refusal vocabulary is closed').toContain('DIRTY_TREE');
-    expect(typeof allowed.ok).toBe('boolean');
+  });
+
+  test('a genesis is refused without a charter and refused again once a baseline exists', () => {
+    const unchartered = refreezeRefusals({ ...baseArgs(), previous: null });
+    expect(unchartered.refusal, 'the FIRST write banks every population from nothing, and'
+      + ' that is an explicit chartered act rather than a side effect of a missing file')
+      .toBe('GENESIS_REFUSED');
+    const chartered = refreezeRefusals({ ...baseArgs(), previous: null, genesisCharter: '§3.5' });
+    expect(chartered.refusal, 'with the charter cited it is admitted').toBeNull();
+    const second = refreezeRefusals({ ...baseArgs(), genesisCharter: '§3.5' });
+    expect(second.refusal, 'and a SECOND genesis over a committed inventory is refused: it'
+      + ' would silently re-bank the whole live population with no history row, the one'
+      + ' movement a shrink-only register can never recover from').toBe('GENESIS_REFUSED');
   });
 
   test('the ritual writes all or nothing and says so in the register it governs', () => {
