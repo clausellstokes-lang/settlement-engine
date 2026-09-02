@@ -2287,3 +2287,33 @@ R-T13L-1 **CR-17(a) executed as (b) for row 11 as well as row 12** — the dock-
 **Receipts.** The refusal text verbatim in the lane receipt (453 lines, rows `L-13`…`L-15`); `scripts/lib/tuning-inventory.mjs:1046-1075` for the growth door; `git merge-base --is-ancestor 754856b12 7f974e855` → true; `git show 754856b12 -- src/domain/relationships/canonicalRelationship.js` for the named constant.
 
 **Priority: ⛔ HIGH.** Two chair defects in one window, both caught — one by the lane, one by the chair's own read-back. **Neither was caught by a gate**, and that is the row worth a Fable seat's attention.
+
+---
+
+## §884 · THE HORIZON-INSTR LANDING'S STRATUM — five lanes, an order panel, and two chair errors (2026-09-02, chair session 58f0a8e2, SEAT: Opus 5)
+
+**The act.** `claude/composite-r4` `7f974e855` → **`f5a6c3bbfd86a268a218b36dffefacb04bd6bf9b`**, sealed `refs/preserve/landing-INSTR-2026-09-02`. 23 commits, 23 parser-visible `Seat:` trailers, porcelain 0, gate **GREEN ON THE FIRST RUN** in 1,068 s. **Every one of these 23 commits is Opus-seat work and every row below is OWED a Fable second look.**
+
+**The rows this landing enrols, by origin.** **CURE-PORCELAIN 6** (`J-1…J-6`) · **INSTR-TUNEREG 12** (`J-1…J-12`, four already ruled at §882.15) · **INSTR-WRW 9** (`R1…R9`, R3 and R5 discharged by ruling) · **INSTR-SOAK 10** (`S1…S10`) plus its **six HANDOVER rows `H-1…H-6`, which are NOT retrovalidation rows and must not be filed as such** · **the landing order's author 9** (`O-1…O-9`) · **Skeptic A 5** · **Skeptic B's SB-1** · **the fold 10** (`F-1…F-10`) · **lane INSTR-land 21** (`L-1…L-21`) · **the chair's four CR rulings** (§883.5) · **the chair's two re-rulings and two errors** (§883.6/§883.8 and below).
+
+### ⛔ THE TWO CHAIR ERRORS THIS LANDING RECORDED AGAINST ITSELF
+
+**(1) The §883.6 ruling was wrong, and a lane refuted it by execution.** The chair ruled a refreeze would clear four of five failing arms, having read `refreezeInventory`'s body and **not** the guard that runs before it. `refreezeRefusals` throws upstream of the wholesale write; the refreeze refused `POPULATION_GREW` with the inventory blob identical before and after. Re-ruled at §883.8 to take the `DECLARED_GROWTH` door, which executed exactly as the re-ruling predicted. ⭐ **The lane's conduct is the model: it predicted the refusal in writing, ran it, held rather than taking a door the ruling had closed, and when a second gate run produced a DIFFERENT red it stopped and diagnosed instead of running toward green** — a third run over a suite it had just measured at 0.392% flaky would have been a false green (`L-17`).
+
+**(2) CR-2 was a ruling the chair did not need to make, and its own re-run was the vacuous one.** CR-2 directed the chair to run the `dist/`-reading `tests/build` suites after the gate. ⛔ **`npm run check`'s final stage `verify:dist` already runs them**: it sets `VERIFY_DIST=1` itself (`check-test-ratchet.mjs:702`) and treats any build-test non-run as an unconditional failure, which is why the gate reported `52 files, 440 tests, zero non-run`. The chair's bare `npx vitest run tests/build` **skipped 57 of 440 and still exited 0** — the exact vacuity the flag exists to prevent. ⭐ **THE LAW: before ruling that a batch is unowned, check whether a later stage of the gate already owns it** — and a targeted re-run of a flag-gated suite without its flag is weaker than the gate, never stronger.
+
+### ⭐⭐ THE FINDING THAT OUTLIVES THE LANDING — the register scores the act it exists to encourage
+
+The tuning walker's P2 growth was **T13 giving a magic number a name**: `+const POPULATION_SATURATION = 2511886.43150957906619;`, **+1 unregisteredNamed and −1 bareDecimal in the same file in the same commit**. The instrument therefore charges a debt for the exact hygiene act it exists to promote, and will do so at every future naming until the name earns a register row. **A defect of the instrument, not of any consist.** *What Fable re-derives:* whether the fix is a rule change (a named constant that replaces a bare decimal in the same commit is net-zero, not +1) or a registration duty. *Priority:* **HIGH** — it will recur at every landing that names anything.
+
+### ⚠ THE FOREIGN DETERMINISM LEAK, DIAGNOSED AND DELIBERATELY NOT CURED HERE
+
+`wizardNews.js:552` — `createdAt: entry.createdAt || options.now || nowIso()`. A caller supplying neither gets a live clock, so two calls a millisecond apart serialise differently: **784 mismatches in 200,000 iterations, 0.392%**, first divergence exactly at `createdAt`. Blobs identical at C″ and at the tip ⇒ **FOREIGN and pre-existing**; it did not fire in the gate. ⛔ **THE GOLDEN FREEZE WOULD BAKE IT IN.** Recorded as a **deferral with a home, not a dropped thread**: cure it before the freeze, test-side, at `tests/domain/fieldBattleRegion.test.js:108-110`. *Priority:* **HIGH, and time-boxed by the freeze.**
+
+### THE STRUCTURAL LAW BANKED
+
+⛔ **Any register whose SUBJECT tree is `src/**` and whose freeze was taken on a dock one landing back carries the stale-base defect BY CONSTRUCTION.** The pre-board apparatus cannot see it: empty era intersections make the **path-local** bills additive and say nothing about a register whose *subject* the era moved. **Every remaining landing of this arc moves `src/`.** *What Fable re-derives:* whether the cure is a base-relative walker or a standing landing act. *Priority:* **HIGH.**
+
+### WHAT ROSE AND WHAT TIGHTENED
+
+Net ceiling movement **−17** (one raise of +1, one ratchet-down of −18): the landing **tightens** the estate. Nothing was re-recorded — no golden, no fixture, no fence constant, no OSR row — and the one derived identity that moves, the realm-scale `sourceFingerprint`, moves **by design** and is committed nowhere. `L-6 DISCHARGED`: the porcelain cure's repeatability was demonstrated on a real landing rather than only on its own dock.
