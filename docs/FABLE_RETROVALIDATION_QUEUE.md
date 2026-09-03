@@ -3066,3 +3066,33 @@ The lane found an in-tree ledger row calling a nullable stamp *"a schema change,
 *What Fable re-derives:* the short-circuit claim (`row.stamp ||` never reaching the resolver) and the walker-blindness finding.
 
 *Priority:* **HIGH** — it removes the trap behind a ~0.45% random landing-gate red.
+
+## §890.3 · O-17 LANDS, AND THE CHAIR RETRACTS A CLAIM IT MADE TO THE OWNER (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+### ⛔⛔ THE RETRACTION FIRST, BECAUSE IT WENT TO THE OWNER AS A FINDING
+
+The chair told the owner that **`pg` is not in `package.json` at all, in any section**, and called it a fragility that would stop a fresh clone running the landing gate. **That is FALSE.** `pg` is declared at `package.json:119` in **devDependencies**, `^8.22.0`, on the product branch AND the ledger branch, and the O-17 lane said so in its report.
+
+⭐⭐ **HOW THE FALSE CLAIM WAS MANUFACTURED, because the mechanism is the point:** the chair's probe was `node -e "…" 2>/dev/null || echo "  not in package.json at all"`. The `node` call **failed**, `2>/dev/null` **hid the error**, and the `||` fallback **printed a confident finding in its place.** ⇒ **THE THIRD FALSE STATEMENT TODAY PRODUCED BY A SWALLOWED ERROR**, after `echo "memory extended"` for a write that never happened and `"copied"` for twenty-six packages of which one silently failed. ⛔ **THE LAW, now stated at full strength: A FALLBACK BRANCH MUST NEVER PRINT A FINDING. `|| echo "<a claim>"` converts an unexplained failure into evidence.** A fallback may report *that the probe failed*; it may never report *what the probe would have found*.
+
+**The corrected picture, measured across five docks:** `pg` is **declared in every one**; it is **installed in two and missing in three**, because those docks never re-ran install after it was added. ⇒ **a dock-hygiene gap, not an undeclared dependency, and a fresh clone is fine.** The alarming half of the chair's report to the owner was the invented half.
+
+### O-17 — THE FAITH SURFACE IS CANDIDATE-LIT, AND THE LAW IS REPLACED RATHER THAN RELAXED
+
+Landed `8ae07b5fc`, sealed `refs/preserve/lighting-rows-2026-09-03`; three cars with O-12 and O-16. `FAITH_TUNING_SIGNATURE.live` false → true plus `faithTuningState()` returning a closed three-word vocabulary reached only through the owner's literal boolean. ⭐ **The lane refused the cheap reading:** dropping the `&&` alone would let the surface light silently with nothing in the old law's place. So the law is **replaced** — was *"a surface may not be lit while unsigned"*, is *"a surface may be lit while unsigned, and it MUST THEN SAY SO"* — a lit-unsigned surface reports **DRAFT**, and reporting **SIGNED is unconstructible**. **No value moved, `signed` stays false, `signedBy` stays null.**
+
+**Behaviour shift, plainly: nobody sees anything.** `faithTuningArmed()` has zero readers outside its own file and the faith door has no consumer at all. No output moves and **no golden was re-recorded**. What changes is the surface's self-report: the review reads it as lit-draft instead of dark.
+
+⭐ **DEITY DOCTRINE checked in code rather than argued, and found NOT ENGAGED:** `religionState.js:136 renormShares` redistributes to a fixed target so adding a god *divides* the adherent pool, and the witness ladder only steps down with the authored level as a ceiling — every magnitude is a function of adherent share and piety, and **nothing asserts a god exists or acts.** No row refused; no STOP owed.
+
+⭐⭐ **AND THE LANE CONVICTED ITS OWN FIRST DRAFT BY READING ITS OWN EARLIER COMMIT.** O-12's message records that its equivalent arm was first a bare `toContain` whose mutant **passed**, *"because the record quotes the same words"*. O-17 had exactly that hole — nothing pinned the original header bullet, so the silent overwrite this row forbids was still constructible. **The cure is the count: the §763 wording must appear TWICE.** 5 new arms (23 → 28) and **8 mutants all RED**, including one that deletes the original bullet and one that strips the attribution.
+
+### THE TWO INDEPENDENT TITLE MEASUREMENTS RECONCILE EXACTLY
+
+The chair's train (O-12 + O-16 + the Herald cure) measured **22823 → 22836 = +13** off the walker. The lane's train (O-12 + O-16 + O-17) predicted **+17** from per-file counting (O-12 +2, O-16 +10, O-17 +5). Overlap +12, plus the chair's one Herald arm = 13 ✓; plus O-17's five = 17 ✓. With O-17 composed the walker now demands **22841**, which is the chair's written prediction (22836 + 5) **exactly**. ⭐ The lane also explained *why* it counted per-file rather than reading `suiteTitles` off the walker: **that assertion sits after `titles` in the same test, so the first mismatch throws and it never evaluates** — the sequenced-arm blindness this program keeps rediscovering.
+
+⚠ **DOOR 3 is a TIMEOUT, not a parse failure** — *"Test timed out in 20000ms"* at 22–23 s, with one sibling lane still running. Contention, held rather than chased.
+
+*What Fable re-derives:* the deity-doctrine non-engagement read, and the claim that reporting SIGNED is unconstructible.
+
+*Priority:* **HIGH for the retraction** — a false finding reached the owner; MEDIUM for O-17.
