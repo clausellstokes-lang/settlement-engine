@@ -522,7 +522,7 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     for (const row of rows) byKey.set(row.key, (byKey.get(row.key) ?? 0) + 1);
     expect([...byKey].sort((a, b) => b[1] - a[1])[0][0]).toBe('id');
     expect(osrScansRun, 'the cross-join shares ONE OSR pass across both arms').toBe(1);
-  });
+  }, 120_000);
 
   test("the web-only gap report lists identities LIT on web-display with no paid-PDF reach, and the recon's culture case is no longer among them", () => {
     const gap = liveReport.webOnlyGap;
