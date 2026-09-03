@@ -2888,3 +2888,33 @@ Eight cars carry **seven** trailers: `394d758ee` has none, because the first lan
 *What Fable re-derives:* the three cure-the-leaf rulings against each arm's own assertion text — the question was never "how do I enrol this" but "should the leaf be reading this at all", and that is a judgment no test holds. Then the wall-clock race's two-direction measurement.
 
 *Priority:* **HIGH for the wall-clock cure** (it removes a random landing-gate failure); MEDIUM for the rest.
+
+## §889 · THE FOURTEENTH LANDING — fifteen cars, every sealed car in the program at once (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5)
+
+**The act.** `bbba1be24` → **`30c1667bc31b9b6f7c64683fddd79a904aad3fee`**, sealed `refs/preserve/landing-889-2026-09-03`. **Fifteen cars, 59 paths +4,746/−1,356**, porcelain 0, single-parent throughout, **trailers == cars exactly**. **Gate GREEN ON THE FIRST RUN**, 1,034 s, 20 stages, ratchet 10 known of 31,123, `STRICT DIST OK 52/440`, typecheck 173/173, domain-strict 1121/1121.
+
+**What landed.** The em dashes leave the prose a player reads. Two people who meet across a border can leave a bond, a respect or a rivalry on each other. A man's standing stops being handed to whoever takes his slot when a town rerolls. And the world clock stops leaking into generation **at every caller** — fourteen unpinned instants across six lifecycle paths.
+
+### ⭐⭐⭐ TWO INSTRUMENTS THAT KNOW NOTHING OF EACH OTHER AGREED TO THE UNIT
+
+The ratchet's shrink-only arm banked **voiceMechanics [em] 720 → 382**, a drop of **exactly 338** — the em-dash count the corpus lane measured and removed by an entirely different method (a structural field walk plus an espree AST cross-check). Total voice debt **1,108 → 770**, a 31% cut. ⭐ **Two independent measurements of one removal agreeing to the unit is the strongest receipt this program produces**, and it is what turns "the prose cure is plausible" into "the prose cure is real".
+
+### ⭐⭐ A DETERMINISM GUARD REFUSED TO BE SILENCED, AND IT WAS RIGHT
+
+ENC-2 minted `willed-leash-end::<tick>::<npcId>` — a fork label that **embeds the delimiter the kernel derives child seeds with**. That kernel concatenates without escaping, so `fork('a::b')` and `fork('a').fork('b')` are ONE STREAM: two substreams meant to be independent would draw identical values **forever**, and only a same-value coincidence across two lanes would ever surface it. The guard refuses any new embedded-delimiter family until someone proves no chain aliases it.
+
+The check, measured over **all 118 literal `.fork(` sites in `src`**: the head token appears at exactly ONE site, its own; the reserved root head `epoch` appears in ZERO fork labels; and the interpolated components cannot carry the delimiter — ⚠ **`now` is `Math.floor` of a TICK and pointedly not a wall clock, which inside a SEED LABEL would break THE PROMISE outright** — while `npcId` is `<slug>:npc_N`, single-colon. The only `::`-bearing id-shaped string in the tree is a `footholdCooldownKey` map key that never reaches `fork()`. **Enrolled after the check, with the check written beside the row.**
+
+### THE FIVE REGISTER ACTS, AND EVERY DERIVABLE FIGURE PREDICTED EXACT
+
+Lighting `2506/370/2136/22748/6122` → **`2510/370/2140/22823/6139`** (files predicted 2510 exact; closure identity 2140+370=2510). OSR **unchanged at 1,993/1,409/388**, predicted unchanged in writing on the reasoning that the em-dash cure moves prose TEXT and not prose SHAPES; what moved was line addresses, which `--write` absorbs because the walker treats generated leaves as inputs rather than detector sources. Prose-numerics: **one scalar**, `discoverDependencyCandidates.js` 443 → 461, proved a move rather than a merge before writing — and it moved because the determinism car added lines to that very file, so the register followed its own subject. Tuning inventory **225 tables and 2,094 keys, BOTH predicted exact** — the keys prediction only succeeded because §888's miss (+40 predicted, +26 measured) taught that the register declares dotted LEAF PATHS while the inventory counts TOP-LEVEL keys. Ratchet **31,048/2,454 → 31,123/2,458**, files exact, tests refused in advance.
+
+### ⚠⚠ TWO CHAIR ERRORS, BOTH BANKED LAWS BROKEN THE SAME DAY THEY WERE WRITTEN
+
+**(1)** The chair **`sed`-patched a shell script**; the `.*` ate a closing quote; **`sh -n` failed and the chair launched it anyway**, because only the trailing echo was gated on the check and the launch line ran unconditionally. Both halves — *never sed-patch a shell script* and *run `sh -n` before every launch* — were recorded that same morning after the identical failure. The stub was stopped after confirming the mutex lock was absent and no vitest was running; the wrapper was **rewritten from scratch**, and the launch is now genuinely conditional on the check.
+
+**(2)** A merge resolution **asserted AFTER writing**, so a wrong assertion still left a bad file on disk and the shell, lacking `set -e`, committed it. ⭐ **BUILD IN MEMORY, ASSERT, THEN WRITE.** Both subsequent edits followed that order and both caught real errors — one a sign-inverted length check, one an unpreserved indentation — **before anything reached disk**.
+
+*What Fable re-derives:* the fork-chain collision check (the load-bearing claim is that the head token appears at exactly one of 118 sites), and the three cure-the-leaf rulings' judgment.
+
+*Priority:* **HIGH for the fork-label enrolment** — it is a THE PROMISE claim; MEDIUM for the rest.
