@@ -349,6 +349,10 @@ export const WHAT_PHRASES = Object.freeze({
   flow_migration: 'people on the move',
   migration_pressure: 'people on the move',
   population_emigration: 'families leaving',
+  // CAPACITY C1: growth bounded by what the place itself can hold. Deliberately not
+  // an echo of `population_growth` or `population_decline` above, which are about the
+  // count moving; this one is about the count meeting a wall.
+  population_crowding: 'a settlement grown as full as its ground will hold',
   // D-1 (deep-couplings): a refugee column on the road (the demographic belief-axis substrate)
   migration_flight: 'families taking to the road',
   // institutions

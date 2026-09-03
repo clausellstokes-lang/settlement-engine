@@ -324,6 +324,157 @@ export const BINDING_KINDS = Object.freeze(['granary', 'walls']);
 /** The closed IMPORT-SOURCE vocabulary for the receipt. */
 export const IMPORT_SOURCES = Object.freeze(['routes', 'generated', 'none']);
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// THE TUNING SIGNATURE SURFACE (CAPACITY C1)
+// ═══════════════════════════════════════════════════════════════════════════════
+/**
+ * WHY A SIGNATURE SURFACE LIVES IN THIS FILE AND NOT IN A LEAF OF ITS OWN.
+ *
+ * THE PROMISE is constitutional: a tuning value is the owner's, signed last. The
+ * demographic family spends its dials across thirteen files, so "who signed these
+ * numbers" had no address at all. This roster is that address. It moves no value and
+ * it signs nothing; it names what signing would sign, and it records the two acts
+ * that are not the lane's to take.
+ *
+ * A THIN ROSTER HERE, over relocating ten tables into one surface file, and over a
+ * new `demographicsTuningSurface.js` leaf. The tables stay in their ten homes because
+ * this file alone has nineteen importers and a relocation moves every one of them for
+ * ninety bytes of record; a new leaf would owe the new-leaf censuses for the same
+ * ninety bytes. Vetoable: the veto is the relocation.
+ *
+ * ⭐⭐ THE ORDER IS LIGHT-DECLARED-THEN-SIGN, AND IT IS THE INVERSE OF THE ORDER THE
+ * DESIGN WAS BUILT IN. The sibling faith and density surfaces carry `{ signed, live }`
+ * and once read `signed && live`: nothing lit until the owner signed. The owner's word
+ * of 2026-09-02 ("light everything up before the exhaustive review") lights this term
+ * BEFORE its values are signed, so a `lit ⇒ signed` law would red the lighting itself.
+ * The word here is therefore `lit`, and it holds a LIGHTING RECORD rather than a
+ * boolean: a preset may light this term only in the same commit that writes down who
+ * lit it, on what date, under which row, and which presets moved.
+ *
+ * WHAT IS UNCONSTRUCTIBLE, STILL: a lit surface calling itself signed. `lit` and
+ * `signed` are separate words and no derivation reads one from the other.
+ *
+ * @enforced-by tests/domain/demographicsRates.test.js
+ */
+
+/**
+ * @typedef {Object} DemographicLightingRecord
+ * @property {string} odqRow      the owner-decision row that lit the term
+ * @property {string} litOn       the date of the lighting commit
+ * @property {ReadonlyArray<string>} presets  every shipped preset the flip moved, exact
+ */
+
+/**
+ * THE SIGNATURE RECORD. Two words, both at their unlit, unsigned rest state.
+ *
+ * `signed` is the pen's and moves ONLY in the tuning sitting's own diff. `lit` is the
+ * LIGHTING WAVE's and moves ONLY in the same commit that flips the presets, from
+ * `null` to a `DemographicLightingRecord`. Neither word is derived from the other.
+ * @type {Readonly<{ signed: boolean, lit: DemographicLightingRecord|null }>}
+ */
+export const DEMOGRAPHIC_TUNING_SIGNATURE = Object.freeze({ signed: false, lit: null });
+
+/**
+ * @typedef {Object} DemographicTuningProvenance
+ * @property {string} status
+ * @property {string|null} signedBy
+ * @property {string|null} odqRow
+ * @property {string|null} signedOn
+ * @property {string} ritual
+ * @property {string} coverage
+ */
+
+/**
+ * WHO SIGNED THESE NUMBERS, AND HOW ONE WOULD. Today: nobody, and the record says so
+ * in words rather than by an empty field a reader has to interpret.
+ * @type {DemographicTuningProvenance}
+ */
+export const DEMOGRAPHIC_TUNING_PROVENANCE = Object.freeze({
+  status: 'CANDIDATE, OWNER-UNSIGNED (wave P landed the values as the lane\'s claim, not the owner\'s word)',
+  signedBy: null,
+  odqRow: null,
+  signedOn: null,
+  ritual: 'To light: the lighting wave flips demographicsEnabled in every shipped preset and'
+    + ' writes lit {odqRow, litOn, presets} here in the same commit, as a declared shift.'
+    + ' To sign: set signed true and write signedBy, odqRow and signedOn here in one diff at'
+    + ' the tuning sitting. The register walker refuses a lit preset with no lighting record.',
+  coverage: 'DEMOGRAPHIC_TUNING_COVERAGE below is the roster: every frozen numeric export of'
+    + ' the demographic family, plus the one congestion dial the family reads from the legacy'
+    + ' migration lane, plus the eight closed vocabularies the receipt and the reading speak.',
+});
+
+/**
+ * @typedef {Object} DemographicTuningCoverageRow
+ * @property {'tunable'|'vocabulary'} kind
+ * @property {string} id     `<repo-relative file>#<exportName>[.<key>]`
+ * @property {string|null} unit  a word of the register's closed unit vocabulary; null for a vocabulary row
+ * @property {string} note
+ */
+
+/**
+ * WHAT SIGNING WOULD SIGN. Held to the tree BOTH WAYS by the roster arm: a numeric
+ * export added to the family without a row here reds, and a row naming a dead export
+ * reds too.
+ *
+ * ⚠ THE TWO DELIBERATE EXCLUSIONS, NAMED RATHER THAN SILENT. `demographicsObservation.js`
+ * exports `REALM_DEMOGRAPHY_VERSION`, which is a SCHEMA version and not a dial: signing
+ * it would be the finite-semantics error of treating a shape marker as a quantity. And
+ * `migrationKernel.js` carries `MIGRATION_KERNEL_TUNING` and `MIGRATION_TUNING`, which
+ * are the legacy migration lane's own estate; only the ONE congestion dial the demographic
+ * bound feeds is rostered here, by its real home.
+ * @type {ReadonlyArray<DemographicTuningCoverageRow>}
+ */
+export const DEMOGRAPHIC_TUNING_COVERAGE = Object.freeze(/** @type {ReadonlyArray<DemographicTuningCoverageRow>} */ ([
+  // ── the rates file: the bound, the two rate bands, and the crisis weights ──
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsRates.js#MOUTHS_PER_FOOD_UNIT', unit: 'mouths', note: 'How many mouths one daily food unit feeds, per tier. The K_food converter.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsRates.js#DENSITY_CEILINGS', unit: 'people', note: 'D_tier: how many can FIT, before terrain and infrastructure adjust it.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsRates.js#TERRAIN_DENSITY_ADJUST', unit: 'multiplier', note: 'What the ground does to the density ceiling, per terrain.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsRates.js#BIRTH_BANDS', unit: 'fraction01', note: 'The unsuppressed birth rate per tick, per tier.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsRates.js#NATURAL_DEATH_BANDS', unit: 'fraction01', note: 'The natural mortality floor per tick, per tier. It exists at zero pressure forever.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsRates.js#DEMOGRAPHIC_TUNING', unit: 'mixed', note: 'The eases, gains and caps that place the fixed point between 76 and 83 percent of the bound. The single most consequential row in this roster.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsRates.js#CRISIS_MORTALITY_WEIGHTS', unit: 'fraction01', note: 'How much each crisis class weighs into the death side.' }),
+  // ── the Herald: the floors a reading crosses before anything is said ──
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsHerald.js#HERALD_TUNING', unit: 'mixed', note: 'The hunger, departure and crowding floors, and the crowding severities and scores.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsHerald.js#QUANTITY_BANDS', unit: 'people', note: 'The seven head-count ceilings the Herald speaks a number through. UNSUFFIXED, so the _TUNING glob cannot see it: this row is why the roster is read from the tree rather than from the glob.' }),
+  // ── push and pull ──
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsPushPull.js#PUSH_DRIVER_BANDS', unit: 'fraction01', note: 'Per driver: the ease and full anchors, the blend weight, and the crisis anchor.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsPushPull.js#PUSH_PULL_TUNING', unit: 'mixed', note: 'The push/pull blend dials.' }),
+  // ── the overflow ladder and its responses ──
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsResponses.js#OVERFLOW_THRESHOLDS', unit: 'fraction01', note: 'Where filling, pressed and overflowing open on pressure01. The crowding line crosses these.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsResponses.js#RESPONSE_WEIGHTS', unit: 'fraction01', note: 'What each response weighs its evidence at.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsResponses.js#RESPONSE_TUNING', unit: 'mixed', note: 'The response selection dials.' }),
+  // ── the plans, the works, the ladder, the land ──
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsPlans.js#PLAN_TUNING', unit: 'mixed', note: 'Plan opening, holding and closing.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsWorks.js#WORKS_TUNING', unit: 'mixed', note: 'What a completed work buys: imports, infrastructure, emigration.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsLadder.js#LADDER_TUNING', unit: 'mixed', note: 'The viability ladder dials. ⚠ The export name collides with npcLadderState.js#LADDER_TUNING, which is why every id here is a file-and-export pair rather than a bare name.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsLand.js#SPATIAL_LAW_TUNING', unit: 'mixed', note: 'The placement law dials.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsLand.js#TIER_ELBOW', unit: 'fraction01', note: 'Where each tier elbows on the land curve. UNSUFFIXED.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsLand.js#MIN_SEPARATION_BANDS', unit: 'fraction01', note: 'The tier-by-tier minimum separation matrix. UNSUFFIXED.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsRisk.js#RISK_TUNING', unit: 'mixed', note: 'Crowding as a condition, with sanitation and traffic as accelerants on it.' }),
+  Object.freeze({ kind: 'tunable', id: 'src/domain/worldPulse/demographicsWar.js#WAR_DEMOGRAPHIC_TUNING', unit: 'mixed', note: 'Motive and capability, and what a court believes about a neighbour\'s grain.' }),
+  // ── the one dial outside the family, by its REAL home ──
+  Object.freeze({
+    kind: 'tunable',
+    id: 'src/domain/spatial/migration.js#MIGRATION_TUNING.CONGEST_DECAY',
+    unit: 'fraction01',
+    note: 'How much of a hub\'s richness gravity saturation takes away. It is rostered here because'
+      + ' the lit demographic bound becomes its pressure denominator, so signing the bound without'
+      + ' re-reading this dial signs half a coupling.'
+      + ' ⚠ HOME CORRECTED BY MEASUREMENT: the design volume homes this dial at'
+      + ' migrationKernel.js#MIGRATION_KERNEL_TUNING.CONGEST_DECAY, and no such export exists at'
+      + ' any tip. The value 0.85 lives here, and the citation is fixed rather than copied.',
+  }),
+  // ── the eight closed vocabularies the receipt and the reading speak ──
+  Object.freeze({ kind: 'vocabulary', id: 'src/domain/worldPulse/demographicsRates.js#BIRTH_BAND_WORDS', unit: null, note: 'The four birth words, thinnest first.' }),
+  Object.freeze({ kind: 'vocabulary', id: 'src/domain/worldPulse/demographicsRates.js#DEATH_BAND_WORDS', unit: null, note: 'The three death words. There is no band below ordinary.' }),
+  Object.freeze({ kind: 'vocabulary', id: 'src/domain/worldPulse/demographicsRates.js#BINDING_KINDS', unit: null, note: 'Which of the two bounds is the wall.' }),
+  Object.freeze({ kind: 'vocabulary', id: 'src/domain/worldPulse/demographicsRates.js#IMPORT_SOURCES', unit: null, note: 'Where the import side of K_food came from.' }),
+  Object.freeze({ kind: 'vocabulary', id: 'src/domain/worldPulse/demographicsPushPull.js#FOOD_FLOW_BANDS', unit: null, note: 'The four food-flow words.' }),
+  Object.freeze({ kind: 'vocabulary', id: 'src/domain/worldPulse/demographicsPushPull.js#RESERVE_BANDS', unit: null, note: 'The four reserve words.' }),
+  Object.freeze({ kind: 'vocabulary', id: 'src/domain/worldPulse/demographicsPushPull.js#URBAN_LOAD_BANDS', unit: null, note: 'The four urban-load words.' }),
+  Object.freeze({ kind: 'vocabulary', id: 'src/domain/worldPulse/demographicsResponses.js#OVERFLOW_BANDS', unit: null, note: 'The four overflow words the crowding line crosses and the reading reports.' }),
+]));
+
 const T = DEMOGRAPHIC_TUNING;
 
 // ═══════════════════════════════════════════════════════════════════════════════

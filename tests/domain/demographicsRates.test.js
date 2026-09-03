@@ -10,8 +10,8 @@
  * so a tuning change moves the expectation with the code instead of reddening a
  * transcription.
  */
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { readFileSync, readdirSync } from 'node:fs';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import {
@@ -23,6 +23,9 @@ import {
   DEATH_BAND_WORDS,
   DEMOGRAPHIC_TUNING,
   DENSITY_CEILINGS,
+  DEMOGRAPHIC_TUNING_COVERAGE,
+  DEMOGRAPHIC_TUNING_PROVENANCE,
+  DEMOGRAPHIC_TUNING_SIGNATURE,
   IMPORT_SOURCES,
   MOUTHS_PER_FOOD_UNIT,
   NATURAL_DEATH_BANDS,
@@ -779,5 +782,149 @@ describe('WAVE P4 — absent, the rates are what they always were', () => {
     expect(crisisStress01({ settlement: place(), worldState: LIT, settlementId: 'Ashford' })).toBe(0);
     expect(crisisStress01({ settlement: null, worldState: LIT, settlementId: 'Ashford' })).toBe(0);
     expect(crisisStress01({})).toBe(0);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+describe('THE SIGNATURE SURFACE — one word, draft until the pen', () => {
+  /** Where the family lives, and which files are IN it. The scope is a directory glob
+   *  rather than a hand-list, so a fourteenth `demographics*.js` file joins the census
+   *  the day it is written instead of the day somebody remembers to add it. */
+  const FAMILY_DIR = 'src/domain/worldPulse';
+  const FAMILY_FILE = /^demographics[A-Za-z0-9]*\.js$/;
+
+  /**
+   * ⛔ THE TWO DELIBERATE EXCLUSIONS, EACH WITH ITS REASON IN THE TABLE. An exclusion
+   * without a reason is a hole; an exclusion with one is a decision a reader can veto.
+   */
+  const EXCLUDED = Object.freeze({
+    'src/domain/worldPulse/demographicsObservation.js#REALM_DEMOGRAPHY_VERSION':
+      'a SCHEMA version, not a dial. Signing a shape marker as if it were a quantity is'
+      + ' precisely the finite-semantics error the roster exists to prevent.',
+  });
+
+  /** Does this frozen export carry a NUMBER anywhere inside it? The question the roster
+   *  answers, asked of the live value rather than of a name-shaped regex — which is the
+   *  whole reason `QUANTITY_BANDS`, `TIER_ELBOW` and `MIN_SEPARATION_BANDS` are rostered
+   *  at all: none of the three wears the `_TUNING` suffix the glob looks for.
+   *  @param {unknown} value @param {Set<unknown>} [seen] @returns {boolean} */
+  const carriesANumber = (value, seen = new Set()) => {
+    if (typeof value === 'number') return true;
+    if (value == null || typeof value !== 'object' || seen.has(value)) return false;
+    seen.add(value);
+    return Object.values(value).some((inner) => carriesANumber(inner, seen));
+  };
+
+  /** Every SHOUTED export of the family, as `<id>` → live value.
+   *  @returns {Promise<Map<string, unknown>>} */
+  const familyExports = async () => {
+    const files = readdirSync(join(P4_ROOT, FAMILY_DIR)).filter((f) => FAMILY_FILE.test(f)).sort();
+    /** @type {Map<string, unknown>} */
+    const out = new Map();
+    for (const file of files) {
+      const mod = await import(pathToFileURL(join(P4_ROOT, FAMILY_DIR, file)).href);
+      for (const [name, value] of Object.entries(mod)) {
+        if (/^[A-Z][A-Z0-9_]*$/.test(name)) out.set(`${FAMILY_DIR}/${file}#${name}`, value);
+      }
+    }
+    return out;
+  };
+
+  test('the signature record is EXACTLY { signed: false, lit: null }, and it is frozen', () => {
+    // ⚠ WHEN THE LIGHTING WAVE LIGHTS THE TERM, `lit` BECOMES A RECORD AND THIS ARM MOVES
+    // IN THAT SAME COMMIT — that is the ceremony, not drift. When the owner signs at the
+    // sitting, `signed` moves in the signing diff and this arm moves with it. Any OTHER
+    // state of this record is a tuning act that skipped its ceremony, which is the whole
+    // defect the surface exists to end.
+    expect(DEMOGRAPHIC_TUNING_SIGNATURE).toEqual({ signed: false, lit: null });
+    expect(Object.isFrozen(DEMOGRAPHIC_TUNING_SIGNATURE)).toBe(true);
+    // ⛔ AND THE TWO WORDS ARE INDEPENDENT. Neither is derived from the other, so a LIT
+    // surface can never report itself SIGNED by arithmetic.
+    expect(Object.keys(DEMOGRAPHIC_TUNING_SIGNATURE).sort()).toEqual(['lit', 'signed']);
+  });
+
+  test('the provenance carries signedBy null, odqRow null and a ritual that names both files', () => {
+    expect(DEMOGRAPHIC_TUNING_PROVENANCE.signedBy).toBeNull();
+    expect(DEMOGRAPHIC_TUNING_PROVENANCE.odqRow).toBeNull();
+    expect(DEMOGRAPHIC_TUNING_PROVENANCE.signedOn).toBeNull();
+    expect(DEMOGRAPHIC_TUNING_PROVENANCE.status).toContain('CANDIDATE');
+    expect(DEMOGRAPHIC_TUNING_PROVENANCE.status).toContain('OWNER-UNSIGNED');
+    expect(Object.isFrozen(DEMOGRAPHIC_TUNING_PROVENANCE)).toBe(true);
+    // THE RITUAL IS AN INSTRUCTION, NOT A MOOD. It must name the flag that lights, the
+    // record that must land in the same commit, and the word the pen moves.
+    const ritual = DEMOGRAPHIC_TUNING_PROVENANCE.ritual;
+    expect(ritual).toContain('demographicsEnabled');
+    expect(ritual).toContain('lit {odqRow, litOn, presets}');
+    expect(ritual).toContain('signed true');
+    expect(ritual).toContain('same commit');
+  });
+
+  test('the coverage roster names every frozen numeric export of the family, both ways', async () => {
+    const family = await familyExports();
+    expect(family.size, 'the family scan read nothing — it is broken, not clean').toBeGreaterThan(30);
+    // anchored: the non-empty scan above proves both sets below are built from real modules
+    const measured = [...family.entries()]
+      .filter(([id, value]) => carriesANumber(value) && !(id in EXCLUDED))
+      .map(([id]) => id)
+      .sort();
+    const rostered = DEMOGRAPHIC_TUNING_COVERAGE
+      .filter((row) => row.kind === 'tunable' && row.id.startsWith(`${FAMILY_DIR}/demographics`))
+      .map((row) => row.id)
+      .sort();
+    // BOTH WAYS. A numeric export added to the family with no roster row reds on the left;
+    // a roster row naming a dead export reds on the right.
+    expect(rostered).toEqual(measured);
+    // AND THE EXCLUSIONS ARE LIVE RATHER THAN HISTORICAL: each must still be a real
+    // numeric export, or the exemption is covering nothing and should be struck.
+    for (const id of Object.keys(EXCLUDED)) {
+      expect(family.has(id), `${id} is excluded from the roster but no longer exists`).toBe(true);
+      expect(carriesANumber(family.get(id)), `${id} is excluded as numeric but carries no number`).toBe(true);
+    }
+  });
+
+  test('every coverage row resolves to a real frozen export at its named home', async () => {
+    expect(DEMOGRAPHIC_TUNING_COVERAGE.length).toBeGreaterThan(0);
+    expect(Object.isFrozen(DEMOGRAPHIC_TUNING_COVERAGE)).toBe(true);
+    // anchored: the length assertion above proves the loop below runs over real rows
+    const units = new Set(['ticks', 'weeks', 'years', 'fraction01', 'probability', 'share',
+      'count', 'people', 'mouths', 'score100', 'points', 'multiplier', 'rank', 'mixed']);
+    let vocabularyRows = 0;
+    for (const row of DEMOGRAPHIC_TUNING_COVERAGE) {
+      expect(['tunable', 'vocabulary']).toContain(row.kind);
+      expect(Object.isFrozen(row), `${row.id} must be frozen`).toBe(true);
+      expect(row.note.length, `${row.id} must carry a note saying what signing it would sign`).toBeGreaterThan(20);
+      const [home, symbol] = row.id.split('#');
+      const [exportName, leafKey] = symbol.split('.');
+      // The home is READ, so a roster line cannot sit here looking authoritative over a
+      // file that no longer exports the name.
+      const mod = await import(pathToFileURL(join(P4_ROOT, home)).href);
+      const value = mod[exportName];
+      expect(value, `${row.id}: ${home} does not export ${exportName}`).toBeDefined();
+      expect(Object.isFrozen(value), `${row.id} must name a FROZEN export`).toBe(true);
+      if (leafKey) expect(value[leafKey], `${row.id}: ${exportName} has no key ${leafKey}`).toBeDefined();
+      if (row.kind === 'vocabulary') {
+        expect(row.unit, `${row.id}: a vocabulary row carries no unit`).toBeNull();
+        vocabularyRows += 1;
+      } else {
+        expect(units.has(row.unit), `${row.id}: ${row.unit} is not a word of the register's closed unit vocabulary`).toBe(true);
+      }
+    }
+    // The eight closed vocabularies the receipt and the reading speak, exactly.
+    expect(vocabularyRows).toBe(8);
+  });
+
+  test('guard the guards: the numeric detector convicts a planted table and acquits a word list', () => {
+    // ⛔ WITHOUT THIS ARM THE ROSTER CENSUS COULD BE VACUOUSLY GREEN. If `carriesANumber`
+    // returned false for everything, `measured` would be empty, `rostered` would have to be
+    // empty too — and it is not, so the equality would red. But if it returned TRUE for
+    // everything, the census would demand a row for every word list and red loudly. The
+    // failure mode that hides is a detector that misses a nested value, so it is driven.
+    expect(carriesANumber(Object.freeze({ PLANTED_TUNING: 1 }))).toBe(true);
+    expect(carriesANumber(Object.freeze({ deep: { deeper: { dial: 0.5 } } }))).toBe(true);
+    expect(carriesANumber(Object.freeze([[3, 'a few souls']]))).toBe(true);
+    expect(carriesANumber(Object.freeze([Number.POSITIVE_INFINITY]))).toBe(true);
+    expect(carriesANumber(Object.freeze(['easy', 'filling', 'pressed', 'overflowing']))).toBe(false);
+    expect(carriesANumber(Object.freeze({ a: 'granary', b: 'walls' }))).toBe(false);
+    expect(carriesANumber(null)).toBe(false);
   });
 });

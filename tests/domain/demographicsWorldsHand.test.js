@@ -40,7 +40,7 @@ import {
 } from '../../src/domain/worldPulse/demographicsLadder.js';
 import { evaluateWorldPulseRules } from '../../src/domain/worldPulse/candidateEvents.js';
 import { demographicRiskOf } from '../../src/domain/worldPulse/demographicsRisk.js';
-import { scoreResponses } from '../../src/domain/worldPulse/demographicsResponses.js';
+import { OVERFLOW_BANDS, scoreResponses } from '../../src/domain/worldPulse/demographicsResponses.js';
 import {
   demographyMembersFromSaves,
   measureRealmDemography,
@@ -53,7 +53,12 @@ import {
   warCapabilityOf,
 } from '../../src/domain/worldPulse/demographicsWar.js';
 import { scoreResourcePressure } from '../../src/domain/worldPulse/warReasons.js';
-import { demographicNewsEntries, quantityWords } from '../../src/domain/worldPulse/demographicsHerald.js';
+import {
+  HERALD_TUNING,
+  crowdingCrossingOf,
+  demographicNewsEntries,
+  quantityWords,
+} from '../../src/domain/worldPulse/demographicsHerald.js';
 import { advanceDemographics } from '../../src/domain/worldPulse/demographicsKernel.js';
 import { DEMOGRAPHIC_TUNING } from '../../src/domain/worldPulse/demographicsRates.js';
 import { deriveSettlementPressures } from '../../src/domain/worldPulse/pressureModel.js';
@@ -715,6 +720,204 @@ describe('P4.5 THE HERALD — the address chain, and no raw number in the prose'
     expect(quantityWords(0)).toBe('nobody');
     expect(quantityWords(3)).toBe('a few souls');
     expect(quantityWords(9000)).toBe('thousands');
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+describe('P4.5b THE CROWDING LINE — a crossing toward the fixed point, never a state', () => {
+  /** One demographic step receipt. The defaults are a settlement crossing UP into
+   *  `filling` against a granary wall: 620 to 632 souls against a bound of 900, which
+   *  is 0.689 then 0.702 on the ladder whose `filling` rung opens at 0.70. */
+  const step = (over = {}) => ({
+    id: 'ashford',
+    kind: 'demographic_step',
+    tick: 40,
+    before: 620,
+    after: 632,
+    births: 14,
+    deaths: 2,
+    bound: 900,
+    binding: 'granary',
+    foodCapacity: 900,
+    densityCeiling: 8625,
+    foodKnown: true,
+    importSource: 'generated',
+    arteries: 0,
+    pressure01: 0.702,
+    deficit01: 0,
+    crisis01: 0,
+    birthBand: 'steady',
+    deathBand: 'ordinary',
+    namedFloor: 0,
+    line: '',
+    ...over,
+  });
+  const nameOf = (id) => (id === 'ashford' ? 'Ashford' : id);
+  const lines = (receipts) => demographicNewsEntries({
+    receipts, migrationReceipts: [], tick: 40, now: null, nameOf,
+  });
+
+  test('a settlement that grows INTO the filling band is told its fields are full, by name, with the granary as the wall', () => {
+    const out = lines([step()]);
+    expect(out.length).toBe(1);
+    // anchored: the length pin above proves out[0] is a real entry
+    expect(out[0].impactKind).toBe('population_crowding');
+    expect(out[0].causeClass).toBe('crowding');
+    expect(out[0].headline).toBe('Ashford has grown as large as its fields will feed');
+    expect(out[0].summary).toBe('Ashford has filled what its fields can feed. Fewer children are born there now, and the place will hold rather than grow.');
+    // The brief's own sentence, carried verbatim into the record.
+    expect(out[0].reasons[1]).toBe('Growth slowed because the fields are full.');
+    // THE ADDRESS CHAIN and the tuning-table provenance of every number on the envelope.
+    expect(out[0].settlementIds).toEqual(['ashford']);
+    expect(out[0].settlementNames).toEqual(['Ashford']);
+    expect(out[0].sourceEventId).toBe('demographics.crowding.ashford.40');
+    expect(out[0].id).toBe('wizard_news.40.crowding.ashford');
+    expect(out[0].tags).toEqual(['world_pulse', 'demographics', 'crowding']);
+    expect(out[0].severity).toBe(HERALD_TUNING.CROWDING_FILLED_SEVERITY);
+    expect(out[0].score).toBe(HERALD_TUNING.CROWDING_FILLED_SCORE);
+    expect(crowdingCrossingOf(step())).toBe('filled');
+  });
+
+  test('a settlement that shrinks OUT of the overflowing band is told it has thinned to what its walls will hold', () => {
+    // 1000 then 900 against a bound of 900: 1.111 (overflowing) down to 1.000 (pressed).
+    // Deaths without a food deficit, so the hunger line has no cause and stays silent.
+    const receipt = step({ before: 1000, after: 900, binding: 'walls', births: 0, deaths: 100 });
+    const out = lines([receipt]);
+    expect(out.length).toBe(1);
+    // anchored: the length pin above proves out[0] is a real entry
+    expect(out[0].headline).toBe('Ashford has thinned to what its walls will hold');
+    expect(out[0].reasons[0]).toBe('Ashford had spilled past its walls, and the crowding thinned it.');
+    expect(out[0].severity).toBe(HERALD_TUNING.CROWDING_THINNED_SEVERITY);
+    expect(out[0].score).toBe(HERALD_TUNING.CROWDING_THINNED_SCORE);
+    expect(crowdingCrossingOf(receipt)).toBe('thinned');
+    // ⛔ AND UNKNOWN FOOD IS NEVER NARRATED AS FAMINE: with no receipted harvest the
+    // honest sentence is about the ground the place stands on, not about its fields.
+    const blind = lines([step({ before: 1000, after: 900, foodKnown: false, births: 0, deaths: 100 })]);
+    expect(blind.length).toBe(1);
+    expect(blind[0].headline).toBe('Ashford has thinned to what its ground will hold');
+  });
+
+  test('a settlement that SITS in the filling band says nothing — the line is a crossing, not a census', () => {
+    // ⭐ THIS IS THE WHOLE DESIGN OF THE LINE. The engine's fixed point sits at 76 to 83
+    // percent of the bound and birth suppression opens at 75, so at rest EVERY settled
+    // settlement is inside `filling` forever. A state-keyed line would print for all of
+    // them every week. 700 to 706 against 900 is 0.778 to 0.784: movement, same rung,
+    // and therefore no news.
+    expect(lines([step({ before: 700, after: 706 })])).toEqual([]);
+    expect(crowdingCrossingOf(step({ before: 700, after: 706 }))).toBeNull();
+    // The positive control that keeps the arm above from passing on a broken emitter.
+    expect(lines([step()]).length).toBe(1);
+  });
+
+  test('below the thorp ceiling a one-soul crossing says nothing', () => {
+    // 34 to 41 against a bound of 50 IS a real crossing (0.68 easy to 0.82 filling), and
+    // it is still not news: at that scale a single birth re-crosses the rung most weeks.
+    const tiny = step({ before: 34, after: 41, bound: 50, births: 7, deaths: 0 });
+    expect(crowdingCrossingOf(tiny)).toBe('filled');
+    // anchored: the crossing above is asserted real, so the silence below is the FLOOR's
+    // doing rather than a missing crossing
+    expect(lines([tiny])).toEqual([]);
+    // and the floor is the LARGER count, so a town thinning from many to few still speaks
+    const shed = step({ before: 200, after: 170, bound: 180, binding: 'walls', births: 0, deaths: 30 });
+    expect(crowdingCrossingOf(shed)).toBe('thinned');
+    expect(lines([shed]).length).toBe(1);
+  });
+
+  test('hunger takes precedence: a starving crossing is one line, not two', () => {
+    // The same thinning receipt as above, now with real hunger behind it. The crossing is
+    // still there — asserted, so the silence is precedence rather than absence.
+    const starving = step({
+      before: 1000, after: 900, binding: 'walls', births: 6, deaths: 106, deficit01: 0.44,
+    });
+    expect(crowdingCrossingOf(starving)).toBe('thinned');
+    // anchored: the crossing above is asserted real
+    const out = lines([starving]);
+    expect(out.length).toBe(1);
+    expect(out[0].causeClass).toBe('hunger');
+    expect(out[0].impactKind).toBe('hungry_gap');
+    // ONE CAUSE PER SETTLEMENT PER TICK is per SETTLEMENT, not global: a second, well-fed
+    // settlement crossing in the same tick still gets its own line.
+    const both = demographicNewsEntries({
+      receipts: [starving, step({ id: 'brill' })],
+      migrationReceipts: [],
+      tick: 40,
+      now: null,
+      nameOf: (id) => (id === 'brill' ? 'Brill' : 'Ashford'),
+    });
+    expect(both.length).toBe(2);
+    expect(both.map((e) => e.causeClass).sort()).toEqual(['crowding', 'hunger']);
+  });
+
+  test('LEGIBILITY: the crowding prose carries no digit, ratio, band token or id, and reads as one idea per sentence', () => {
+    const cells = [
+      step(),
+      step({ binding: 'walls' }),
+      step({ foodKnown: false }),
+      step({ before: 1000, after: 900, births: 0, deaths: 100 }),
+      step({ before: 1000, after: 900, binding: 'walls', births: 0, deaths: 100 }),
+      step({ before: 1000, after: 900, foodKnown: false, births: 0, deaths: 100 }),
+    ];
+    const seen = new Set();
+    for (const receipt of cells) {
+      const out = lines([receipt]);
+      expect(out.length, 'every one of the six cells must produce exactly one line').toBe(1);
+      // anchored: the length pin above proves out[0] is a real entry for every cell
+      const entry = out[0];
+      seen.add(entry.headline);
+      const prose = [entry.headline, entry.summary, ...entry.reasons].join(' ');
+      expect(prose.length).toBeGreaterThan(80);
+      expect(prose).toContain('Ashford');
+      // anchored: the two assertions above prove `prose` is real, named, non-empty text
+      expect(prose, `a raw digit reached the prose: ${prose}`).not.toMatch(/[0-9]/);
+      // anchored: same string, same liveness anchor three lines above
+      expect(prose, `a ratio reached the prose: ${prose}`).not.toMatch(/%/);
+      // ⛔ NO RUNG OF THE PRESSURE LADDER, CASE-INSENSITIVELY. `easy`, `filling`, `pressed`
+      // and `overflowing` are the engine's words for how full a place is and a reader must
+      // never meet one. This is why the authored table says the lean years WORE the count
+      // down rather than PRESSED it: the natural English verb collides with a rung, and the
+      // rung loses. `walls` and `granaries` are NOT tested here and the omission is
+      // deliberate — the authored table SPEAKS the binding in plain English, which is the
+      // game-grade law's translate-the-formula requirement, and `binding` is never rendered
+      // as a bare label anywhere.
+      for (const rung of OVERFLOW_BANDS) {
+        expect(prose.toLowerCase().includes(rung), `the ladder rung ${rung} reached the prose: ${prose}`).toBe(false);
+      }
+      for (const token of ['ashford', 'granary', 'pressure01', 'deficit01', 'foodKnown', 'bound', 'demographic_step']) {
+        expect(prose.includes(token), `the raw token ${token} reached the prose: ${prose}`).toBe(false);
+      }
+      // ONE IDEA PER SENTENCE: every summary is exactly two sentences, and no sentence runs
+      // past the length at which a second idea has plainly been smuggled into it.
+      const sentences = String(entry.summary).split('. ');
+      expect(sentences.length, `the summary is not two sentences: ${entry.summary}`).toBe(2);
+      for (const sentence of [...sentences, ...entry.reasons]) {
+        expect(sentence.length, `a sentence runs long enough to be two: ${sentence}`).toBeLessThan(130);
+      }
+      expect(entry.reasons.length).toBe(2);
+    }
+    // Six distinct cells, six distinct headlines: no cell is silently borrowing another's.
+    expect(seen.size).toBe(6);
+  });
+
+  test('DORMANCY: the line is dark by construction, and the crossing is INERT rather than crashing', () => {
+    // DARK: the flag is read once, inside the kernel, before any news is composed, so the
+    // third loop cannot run in a dark world at all.
+    const updates = [{ saveId: 'a', settlement: place({ population: 4000 }) }];
+    const snapshot = { settlements: [{ id: 'a', name: 'Ashford', settlement: updates[0].settlement }] };
+    const dark = advanceDemographics({
+      snapshot, worldState: { simulationRules: {} }, settlementUpdates: updates, rng: null, tick: 4,
+    });
+    expect(dark.newsEntries).toEqual([]);
+    expect(dark.settlementUpdates).toBe(updates);
+    // INERT, NEVER A CRASH, AND NEVER A DIVIDE BY ZERO. A settlement with no derived bound
+    // has no ladder to cross, and garbage is not a crossing either.
+    expect(crowdingCrossingOf(step({ bound: 0 }))).toBeNull();
+    expect(crowdingCrossingOf(step({ bound: -1 }))).toBeNull();
+    expect(crowdingCrossingOf(null)).toBeNull();
+    expect(crowdingCrossingOf(undefined)).toBeNull();
+    expect(crowdingCrossingOf({})).toBeNull();
+    expect(crowdingCrossingOf('nonsense')).toBeNull();
+    // and the hunger fixture, whose step never leaves `overflowing`, is not a crossing
+    expect(crowdingCrossingOf(step({ before: 1200, after: 1150 }))).toBeNull();
   });
 });
 

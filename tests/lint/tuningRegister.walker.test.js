@@ -909,6 +909,102 @@ describe('tuning register — the signing door, rehearsed', () => {
       + ' the freeze').toContain('docs/shift-records/');
   });
 
+  /**
+   * ⭐⭐ ARM 42 — THE `lit ⇒ DECLARED` LAW (CAPACITY C1).
+   *
+   * ⚠ IT IS NOT `lit ⇒ signed`, AND THE INVERSION IS THE OWNER'S WORD RATHER THAN A
+   * RELAXATION. The sibling faith and density surfaces were built sign-then-light. The
+   * owner's word of 2026-09-02 lights every dark door BEFORE the exhaustive review, and
+   * signs values LAST, so a `lit ⇒ signed` arm would red the lighting wave itself. What
+   * replaces it is not nothing: a preset may light the demographic term only in the same
+   * commit that writes down WHO lit it, WHEN, under WHICH row, and WHICH presets moved.
+   * A flip with no record is the silent tuning act this walker exists to refuse.
+   *
+   * BOTH READS GO THROUGH `codeOnly`, and that is measured rather than hoped: the preset
+   * file carries a docblock that names the flag and spells out the flip, and the rates
+   * file's own `ritual` STRING spells `lit {odqRow, litOn, presets}` in prose. A raw
+   * text scan would read either as a lit world. That is the §880.7 class exactly, and
+   * the two negative controls below drive it.
+   */
+  test('ARM 42 — a lit demographics preset requires a lighting record in the same surface', () => {
+    const PRESETS_REL = 'src/domain/worldPulse/simulationRules.js';
+    const RATES_REL = 'src/domain/worldPulse/demographicsRates.js';
+
+    /** How many shipped presets light the term, counted in CODE only.
+     *  @param {string} src @returns {number} */
+    const litPresetCount = (src) => (codeOnly(src).match(/demographicsEnabled:\s*true/g) ?? []).length;
+
+    /** The state of the signature's `lit` word, read from CODE only by brace-matching the
+     *  record's own span so a `lit:` written anywhere else in the file cannot answer for it.
+     *  @param {string} src @returns {'ABSENT'|'DARK'|'RECORD'} */
+    const litWordIn = (src) => {
+      const code = codeOnly(src);
+      const at = code.indexOf('const DEMOGRAPHIC_TUNING_SIGNATURE');
+      if (at < 0) return 'ABSENT';
+      const open = code.indexOf('{', at);
+      if (open < 0) return 'ABSENT';
+      let depth = 0;
+      let span = '';
+      for (let i = open; i < code.length; i += 1) {
+        if (code[i] === '{') depth += 1;
+        else if (code[i] === '}') {
+          depth -= 1;
+          if (depth === 0) { span = code.slice(open, i + 1); break; }
+        }
+      }
+      const found = span.match(/lit:\s*(null|\{)/);
+      if (found == null) return 'ABSENT';
+      return found[1] === 'null' ? 'DARK' : 'RECORD';
+    };
+
+    const presets = readFileSync(join(ROOT, PRESETS_REL), 'utf8');
+    const rates = readFileSync(join(ROOT, RATES_REL), 'utf8');
+    const lit = litPresetCount(presets);
+    const word = litWordIn(rates);
+
+    // THE SURFACE EXISTS AT ALL. Without this the law below could pass by absence.
+    expect(word, `${RATES_REL} must carry DEMOGRAPHIC_TUNING_SIGNATURE with a lit word`).not.toBe('ABSENT');
+    // THE LAW.
+    if (lit > 0) {
+      expect(word, `${lit} shipped preset(s) light demographicsEnabled, so the signature`
+        + ' surface owes a lighting record {odqRow, litOn, presets} written in the SAME'
+        + ' commit as the flips').toBe('RECORD');
+    }
+    // TODAY, MEASURED: the term is dark in every shipped preset and the word is null.
+    // ⚠ BOTH HALVES MOVE IN THE LIGHTING WAVE'S OWN COMMIT. That is the ceremony.
+    expect(lit).toBe(0);
+    expect(word).toBe('DARK');
+
+    // ── POSITIVE CONTROL: a flipped preset with no record IS convicted ──
+    const scratchPreset = 'export const SIMULATION_RULE_PRESETS = Object.freeze({\n'
+      + '  realistic_regional: preset("x", "X", { demographicsEnabled: true }),\n});\n';
+    const scratchRatesDark = 'export const DEMOGRAPHIC_TUNING_SIGNATURE = Object.freeze({ signed: false, lit: null });\n';
+    expect(litPresetCount(scratchPreset)).toBe(1);
+    expect(litWordIn(scratchRatesDark)).toBe('DARK');
+    // the pair the law refuses: lit above zero while the word is still DARK
+    expect(litPresetCount(scratchPreset) > 0 && litWordIn(scratchRatesDark) !== 'RECORD').toBe(true);
+
+    // ── and the pair it ACCEPTS, so the law is not simply always-refuse ──
+    const scratchRatesLit = 'export const DEMOGRAPHIC_TUNING_SIGNATURE = Object.freeze({\n'
+      + '  signed: false,\n  lit: { odqRow: "CAP-2", litOn: "2026-09-09", presets: ["realistic_regional"] },\n});\n';
+    expect(litWordIn(scratchRatesLit)).toBe('RECORD');
+
+    // ── NEGATIVE CONTROL 1: a DOCBLOCK naming a lit preset is not a lit preset ──
+    const commentedPreset = '/**\n * LIGHTING IT means writing demographicsEnabled: true here.\n */\n'
+      + 'export const SIMULATION_RULE_PRESETS = Object.freeze({ realistic_regional: preset("x", "X", {}) });\n';
+    expect(litPresetCount(commentedPreset), 'a docblock spelling the flip is not the flip').toBe(0);
+    // and a STRING spelling it is not the flip either
+    expect(litPresetCount('const ritual = "flip demographicsEnabled: true in every preset";\n')).toBe(0);
+
+    // ── NEGATIVE CONTROL 2: a DOCBLOCK or STRING spelling `lit:` is not a record ──
+    const commentedRates = 'export const DEMOGRAPHIC_TUNING_SIGNATURE = Object.freeze({\n'
+      + '  signed: false,\n  // lit: { odqRow: "CAP-2" } would go here\n  lit: null,\n});\n';
+    expect(litWordIn(commentedRates), 'a commented-out record is not a record').toBe('DARK');
+    const stringyRates = 'export const DEMOGRAPHIC_TUNING_SIGNATURE = Object.freeze({\n'
+      + '  signed: false,\n  lit: null,\n  ritual: "write lit: { odqRow } here",\n});\n';
+    expect(litWordIn(stringyRates), 'a ritual string spelling the record is not the record').toBe('DARK');
+  });
+
   test('the signing record home makes no enforcement claim without its tag', () => {
     // ⟦A29 E13⟧ tests/docs/enforcement-claims.test.js scans every root *.md and docs/**/*.md
     // for this vocabulary and requires an @enforced-by tag within three lines. Re-executed

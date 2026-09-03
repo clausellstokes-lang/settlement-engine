@@ -103,6 +103,12 @@ const EXPECTED_VOICE = {
   // quiet chronicle beat, NOT a town-crier proclamation — deliberately unvoiced (the
   // npc_growth precedent; catastrophe itself is already voiced via the calamity beat).
   urban_fabric: null,
+  // CAPACITY C1 — THE CROWDING LINE: a settlement meeting the wall of what its own
+  // fields or ground can hold is a chronicle beat that already names the place and
+  // says what the wall is, in two authored sentences. A crier category on top of that
+  // would put a generic voice over a line that already says the specific thing (the
+  // urban_fabric and npc_growth precedents exactly). The explicit null IS the decision.
+  population_crowding: null,
   // DOOR 1 — THE SPATIAL CONSEQUENCE LAYER (owner ruling #8): WHERE a calamity/intrigue
   // landed is district-precision chronicle detail, NOT a town-crier proclamation —
   // deliberately unvoiced (the urban_fabric precedent; the calamity itself is already

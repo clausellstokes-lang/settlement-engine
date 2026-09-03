@@ -19,16 +19,28 @@
  * applied to the one place a number would otherwise leak onto a surface: the engine
  * knows three hundred and seven people left, and the Herald says several hundred did.
  *
- * NO NEW VOCABULARY IS MINTED, AND THAT IS A DELIBERATE REFUSAL. A new `impactKind`
- * literal would red three registration walkers at once and its registrations live in
- * files this slice may not touch: WHAT_PHRASES (settlementRumors.js), EXPECTED_VOICE
- * (the impactKind walker) and the Herald routing table. So the two lines ride the two
- * EXISTING kinds that already mean exactly what they mean: `hungry_gap` (the lean
- * season, minted today by the seasons lane) and `migration_flight` (families taking to
- * the road, minted today by the M4 rumor lane). The demographic lane is distinguished
- * where the certification row's own precedent puts lane ownership: on the RECORD, in
- * `tags` and in the `sourceEventId`, exactly as the shared migration ledger is
- * distinguished by its per-column travelClass.
+ * WAVE P4 MINTED NO NEW VOCABULARY, AND THAT WAS A DELIBERATE REFUSAL. A new
+ * `impactKind` literal reds three registration walkers at once and its registrations
+ * live in files that slice could not touch: WHAT_PHRASES (settlementRumors.js),
+ * EXPECTED_VOICE (the impactKind walker) and the Herald routing table. So the first two
+ * lines ride the two EXISTING kinds that already mean exactly what they mean:
+ * `hungry_gap` (the lean season) and `migration_flight` (families taking to the road).
+ * The demographic lane is distinguished where the certification row's own precedent puts
+ * lane ownership: on the RECORD, in `tags` and in the `sourceEventId`, exactly as the
+ * shared migration ledger is distinguished by its per-column travelClass.
+ *
+ * ⭐⭐ SUPERSEDED IN SCOPE BY CAPACITY C1 (2026-09-03), AND THE PARAGRAPH ABOVE IS KEPT
+ * RATHER THAN REWRITTEN, BECAUSE IT RECORDS A REFUSAL A LATER READER WOULD OTHERWISE
+ * READ AS STILL BINDING. THE THIRD LINE MINTS `population_crowding`, AND IT PAYS THE
+ * COST THE PARAGRAPH ABOVE DECLINED TO PAY: all three registrations land in the SAME
+ * commit as the mint. The refusal was never "never mint"; it was "never mint without
+ * paying", and P4 could not pay because those three files were outside its slice.
+ *
+ * WHY A NEW KIND RATHER THAN RIDING `urban_fabric`, which already exists and is about
+ * towns being crowded: a typed cause must mean what it says. `urban_fabric` has one
+ * producer whose routing and voice were decided for ITS nature, and no existing kind
+ * means "this settlement's growth is bounded by what the place itself can hold".
+ * Vetoable; the veto rides `urban_fabric` and pays no registration.
  *
  * ALREADY NARRATED ELSEWHERE, recorded so nobody double-writes it: the M4 rumor lane
  * (src/domain/spatial/migrationRumors.js, behind `migrationRumorsEnabled`) reads the
@@ -48,6 +60,8 @@
  */
 
 /** @typedef {import('./demographicsKernel.js').DemographicReceipt} DemographicReceipt */
+
+import { overflowBandOf, overflowRankOf } from './demographicsResponses.js';
 
 /**
  * THE CLOSED QUANTITY VOCABULARY. The one place a head count would otherwise reach a
@@ -77,6 +91,17 @@ export const HERALD_TUNING = Object.freeze({
   // more consequential fact, and it is the one the plan lane acts on.
   REFUSED_FLOOR: 6,
   MAJOR_DEPARTURE_FLOOR: 200,
+  // ── THE CROWDING LINE (CAPACITY C1) ──
+  // Below the thorp ceiling a one-soul jitter would re-cross the band most weeks, so
+  // the crossing carries a head-count floor of its own before it is worth saying.
+  CROWDING_LINE_MIN_SOULS: 60,
+  // The two crowding severities and scores. They live in this table rather than as bare
+  // decimals in the code below for two reasons: the tuning register scores this file's
+  // bare decimals against a frozen baseline, and these are the owner's numbers to sign.
+  CROWDING_FILLED_SEVERITY: 0.35,
+  CROWDING_THINNED_SEVERITY: 0.5,
+  CROWDING_FILLED_SCORE: 48,
+  CROWDING_THINNED_SCORE: 56,
 });
 
 /** @param {unknown} v @returns {Record<string, unknown>} */
@@ -104,6 +129,140 @@ export function quantityWords(count) {
     if (n <= ceiling) return phrase;
   }
   return 'thousands';
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// THE CROWDING LINE — a CROSSING toward the fixed point, never a census
+// ═══════════════════════════════════════════════════════════════════════════════
+/**
+ * @typedef {'filled'|'thinned'} CrowdingDirection
+ */
+
+/** The three rungs the crossing reads, taken FROM the ladder rather than spelled as
+ *  numbers, so a rung inserted into OVERFLOW_BANDS moves this file with it. */
+const FILLING_RANK = overflowRankOf('filling');
+const PRESSED_RANK = overflowRankOf('pressed');
+const OVERFLOWING_RANK = overflowRankOf('overflowing');
+
+/**
+ * DID THIS STEP CROSS THE OVERFLOW LADDER, AND IN WHICH DIRECTION?
+ *
+ * WHY A CROSSING AND NOT A STATE, WHICH IS THE WHOLE DESIGN OF THIS LINE. The engine's
+ * equilibrium sits at 76 to 83 percent of the bound, and `BIRTH_EASE` opens suppression
+ * at 75 percent, so at rest EVERY settled settlement has suppressed births forever. A
+ * state-keyed line would therefore print for every settlement every week: wallpaper, and
+ * the exact opposite of a newspaper. A crossing fires when the reading MOVES between
+ * rungs, which happens rarely and means something when it does.
+ *
+ * Both directions are toward the fixed point and both are news: FILLED is a place that
+ * grew into its bound, THINNED is a place that had grown past it and paid for it.
+ *
+ * No persisted prior state and no new key: the step receipt already carries `before` and
+ * `after` against its own `bound`, so the crossing is a pure function of one receipt.
+ *
+ * @param {DemographicReceipt|Record<string, unknown>|null|undefined} receipt
+ * @returns {CrowdingDirection|null} null when there is no crossing, or no usable bound
+ */
+export function crowdingCrossingOf(receipt) {
+  const step = asObject(receipt);
+  const bound = num(step.bound, 0);
+  // A settlement with no derived bound has no ladder to cross. INERT, never a divide.
+  if (!(bound > 0)) return null;
+  // The same denominator `pressureOf` uses, so the Herald and the kernel read one ladder.
+  const denominator = Math.max(1, bound);
+  const rankBefore = overflowRankOf(overflowBandOf(Math.max(0, num(step.before, 0)) / denominator));
+  const rankAfter = overflowRankOf(overflowBandOf(Math.max(0, num(step.after, 0)) / denominator));
+  if (rankBefore < FILLING_RANK && rankAfter >= FILLING_RANK) return 'filled';
+  if (rankBefore === OVERFLOWING_RANK && rankAfter <= PRESSED_RANK) return 'thinned';
+  return null;
+}
+
+/**
+ * THE AUTHORED PROSE TABLE, direction by what the wall actually is.
+ *
+ * ⭐ THE GAME-GRADE LAW, APPLIED RATHER THAN CITED: translate the formula, never rename
+ * it. The engine's word `walls` means the DENSITY ceiling, so a sentence reading "the
+ * walls of Ashford are the wall" would land on a regular human as a typo rather than a
+ * translation. Each cell therefore says what a person at the market would say: the
+ * fields will not feed any more, or there is no ground left to build on.
+ *
+ * ⛔ AND NO RUNG OF THE PRESSURE LADDER APPEARS IN ANY CELL. `easy`, `filling`,
+ * `pressed` and `overflowing` are the engine's words for how full a place is; a reader
+ * must never meet one. That is why the lean-years reason says the years WORE the count
+ * down rather than PRESSED it, and why crowded quarters are crowded rather than packed:
+ * the natural English verb collides with a rung, and the rung loses.
+ *
+ * Every summary is TWO sentences, one idea each. 'Growth slowed because the fields are
+ * full.' is the design's own sentence and is carried verbatim.
+ *
+ * @param {CrowdingDirection} direction
+ * @param {string} binding one of BINDING_KINDS
+ * @param {boolean} foodKnown
+ * @param {string} name
+ * @returns {{ headline: string, summary: string, reasons: string[] }}
+ */
+function crowdingProse(direction, binding, foodKnown, name) {
+  // Unknown food is NEVER narrated as famine: with no receipted harvest to speak of,
+  // the honest sentence is about the ground the place stands on.
+  const wall = !foodKnown ? 'unknown' : binding === 'granary' ? 'granary' : 'walls';
+  if (direction === 'filled') {
+    if (wall === 'granary') {
+      return {
+        headline: `${name} has grown as large as its fields will feed`,
+        summary: `${name} has filled what its fields can feed. Fewer children are born there now, and the place will hold rather than grow.`,
+        reasons: [
+          `The granaries of ${name} are the wall, and the harvest reaches it.`,
+          'Growth slowed because the fields are full.',
+        ],
+      };
+    }
+    if (wall === 'walls') {
+      return {
+        headline: `${name} has grown as large as its walls will hold`,
+        summary: `${name} has filled the ground inside its walls. Fewer children are born there now, and the place will hold rather than grow.`,
+        reasons: [
+          `There is no ground left inside the walls of ${name} to build on.`,
+          'Growth slowed because there is no room left to build.',
+        ],
+      };
+    }
+    return {
+      headline: `${name} has grown as large as its ground will hold`,
+      summary: `${name} has filled the ground it stands on. Fewer children are born there now, and the place will hold rather than grow.`,
+      reasons: [
+        `The ground itself has no more room at ${name}.`,
+        'Growth slowed because the place is full.',
+      ],
+    };
+  }
+  if (wall === 'granary') {
+    return {
+      headline: `${name} has thinned to what its fields will feed`,
+      summary: `${name} has thinned to what its fields can feed. The count fits the harvest again.`,
+      reasons: [
+        `The granaries of ${name} are the wall, and the place had grown past it.`,
+        'The lean years wore the count down until it fit the harvest.',
+      ],
+    };
+  }
+  if (wall === 'walls') {
+    return {
+      headline: `${name} has thinned to what its walls will hold`,
+      summary: `${name} has thinned to the ground inside its walls. The count fits the ground again.`,
+      reasons: [
+        `${name} had spilled past its walls, and the crowding thinned it.`,
+        'Crowded quarters wore the count down until it fit the ground.',
+      ],
+    };
+  }
+  return {
+    headline: `${name} has thinned to what its ground will hold`,
+    summary: `${name} has thinned to the ground it stands on. The count fits the ground again.`,
+    reasons: [
+      `${name} had spilled past the ground itself, and the crowding thinned it.`,
+      'Crowded quarters wore the count down until it fit the ground.',
+    ],
+  };
 }
 
 /**
@@ -163,6 +322,9 @@ export function demographicNewsEntries(input) {
 
   /** @type {Array<Record<string, unknown>>} */
   const out = [];
+  /** Settlements the hunger line already spoke for this tick: ONE cause per
+   *  settlement per tick, and hunger outranks crowding. */
+  const hungry = new Set();
 
   // ── THE HUNGER LINE. A settlement burying measurably more than it bears, with a
   // real food deficit behind it: the granaries are the wall and the wall is being
@@ -176,6 +338,7 @@ export function demographicNewsEntries(input) {
     if (netLoss < HERALD_TUNING.HUNGER_NET_LOSS_FLOOR) continue;
     const id = String(receipt.id);
     const name = nameOf(id);
+    hungry.add(id);
     out.push(demographicNews({
       slug: 'hunger',
       impactKind: 'hungry_gap',
@@ -259,6 +422,42 @@ export function demographicNewsEntries(input) {
         ? `${quantityWords(departures)} left ${origin} ${road}.`
         : `${quantityWords(unplaced)} would have left ${origin}, and the realm had nowhere to put them.`,
       reasons,
+    }));
+  }
+
+  // ── THE CROWDING LINE. Not "this place is full" but "this place BECAME full", or
+  // "this place is no longer past what it can hold". The ladder crossing is the whole
+  // event; a settlement sitting at its own fixed point says nothing, forever. ──
+  for (const receipt of [...steps].sort((a, b) => codepoint(String(a.id), String(b.id)))) {
+    const id = String(receipt.id);
+    // ONE CAUSE PER SETTLEMENT PER TICK, AND HUNGER OUTRANKS CROWDING. A place burying
+    // more than it bears is not also filing a story about how much room it has left.
+    if (hungry.has(id)) continue;
+    const direction = crowdingCrossingOf(receipt);
+    if (direction == null) continue;
+    // The floor is the LARGER of the two counts, deliberately: a town that thins from
+    // two hundred to fifty crossed a real rung and has real news, and keying the floor
+    // to `after` alone would silence exactly that story.
+    const souls = Math.max(num(receipt.before, 0), num(receipt.after, 0));
+    if (souls < HERALD_TUNING.CROWDING_LINE_MIN_SOULS) continue;
+    const filled = direction === 'filled';
+    const prose = crowdingProse(direction, String(receipt.binding), receipt.foodKnown === true, nameOf(id));
+    out.push(demographicNews({
+      slug: 'crowding',
+      impactKind: 'population_crowding',
+      causeClass: 'crowding',
+      tick,
+      now,
+      key: id,
+      ids: [id],
+      names: [nameOf(id)],
+      scope: 'local',
+      significance: 'notable',
+      severity: filled ? HERALD_TUNING.CROWDING_FILLED_SEVERITY : HERALD_TUNING.CROWDING_THINNED_SEVERITY,
+      score: filled ? HERALD_TUNING.CROWDING_FILLED_SCORE : HERALD_TUNING.CROWDING_THINNED_SCORE,
+      headline: prose.headline,
+      summary: prose.summary,
+      reasons: prose.reasons,
     }));
   }
 

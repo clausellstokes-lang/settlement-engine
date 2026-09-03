@@ -173,6 +173,13 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   institution_build: 'trade', institution_closure: 'trade', institution_founding: 'trade',
   settlement_resettled: 'trade', steading_founded: 'trade',
   population_growth: 'trade', population_emigration: 'trade', population_decline: 'trade',
+  // ⛔ `population_crowding` IS ROUTED BY THE `population_` FAMILY PREFIX, NOT FROM HERE,
+  // AND THE REASON IS THE SAME ONE `occupation_posture` RECORDS ABOVE. CAPACITY C1's
+  // design bill called for an EXACT_SECTION row; building it MEASURED why that row must
+  // not exist: an exact row grows `kindPoolFloors.walker`'s routed-token census, and the
+  // new token has no phrased pool, so it also grows the LEGACY_UNVOICED_TOKENS backlog —
+  // a ceiling asserted SHRINK-ONLY, with no lawful growth cure. The family prefix files
+  // the beat at the SAME trade desk and costs no census at all.
   migration_flight: 'trade', mass_migration: 'trade', migration_pressure: 'trade',
   // ⛔ THE TREASURY BEATS ARE ROUTED BY PREFIX, NOT FROM HERE — see `['treasury_', 'trade']`
   // in PREFIX_RULES below, and the reason recorded there. An EXACT_SECTION row for either
