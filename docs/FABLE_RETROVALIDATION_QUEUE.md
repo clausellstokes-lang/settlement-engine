@@ -2856,3 +2856,35 @@ The ENC-1 test ratchet **refused twice**, both times naming `tests/simulation/ce
 *What Fable re-derives:* the claim that both refusals were contention rather than a defect — the decisive evidence is the 0 ms against a 900,000 ms budget with no failure message, not the load number.
 
 *Priority:* **HIGH** — the landing track is blocked on it, and the self-matching-predicate law generalises to every guard this program writes.
+
+## §888 · THE THIRTEENTH LANDING — chance meetings exist, and a random red that could fell any gate is cured at cause (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5)
+
+**The act.** `f12360185` → **`bbba1be240c84bf0fd969079fc9fd2aa97a18906`**, sealed `refs/preserve/landing-888-2026-09-03`. **Eight cars, 11 paths +1,848/−24**, porcelain 0, single-parent throughout, branch verified at base before the swap and the seal verified absent before it was taken. **Gate GREEN ON THE FIRST RUN**, 1,016 s, 20 stages, ratchet **10 known of 31,048 (ceiling 10)**, `STRICT DIST OK 52/440`, typecheck 173/173, domain-strict 1121/1121.
+
+**What landed.** Two named people in the same place at the same time can now **meet**, and the meeting can leave a mark that outlives it — a bond, a respect, a rivalry — **without the engine ever resolving either person's fate.**
+
+### ⭐⭐⭐ A ~0.45% RANDOM RED HAS BEEN LIVING IN THE LANDING GATE, AND EVERY GREEN THIS ARC ROLLED THAT DIE
+
+A byte-identity arm compares two separate appends whose `createdAt` comes from `new Date().toISOString()` — millisecond resolution — whenever the pin is null. Measured in both directions: **88 mismatches / 20,000 back-to-back on an idle box; 100% with a forced 3 ms gap; 0% with one threaded stamp**, and the region key absent from both sides in every mismatch. **Pre-existing, unrelated to this consist, cured at cause here.** ⚠ **TWO LANES REACHED IT INDEPENDENTLY FROM OPPOSITE ENDS** on the same afternoon — the determinism lane proved `now: null` is a pin that is not one (979 / 200,000 = 0.489%) from a determinism sweep; the census lane arrived from a failing byte-identity arm. **Independent convergence on one root cause is the strongest evidence this program has produced for a defect, and neither lane knew of the other.**
+
+### ⛔⛔ THE CORRECTION §887.2 OWED — A STARVED RUN REPORTS THE WRONG REASON
+
+§887.2 recorded both early ratchet refusals as "contention the chair created". **Incomplete, and the incompleteness is the lesson.** Contention was real, but what it did was **fire an EARLIER gate than the actual defect**: the SCOPE SENTINEL checks for unmeasurable suites *before* the census check, so a starved soak short-circuited both runs and reported a resource artifact while **five genuine census bills sat underneath, unmentioned.** ⭐⭐ **A STARVED RUN DOES NOT MERELY WASTE TIME — IT REPORTS THE WRONG REASON, AND THE CHAIR ACTED ON IT TWICE.**
+
+⭐ **§886's starvation signature is AMENDED.** It was banked as *"a DIFFERENT test failed each time — varied casualties"*. `centuryLegSoak` is the most expensive test in the tree, so under contention it is the **FIRST** casualty every time, not a random one; the same casualty twice is therefore NOT evidence of a real defect. **The true signature is a RESOURCE failure rather than an ASSERTION failure, on a test FOREIGN to the consist** — 0 ms against a 900,000 ms budget with no timeout signal, no assertion signal and no failure message did not fail; it never ran.
+
+### ⭐ THE LANE REFUSED THE EASY CURE ON THREE OF FIVE BILLS
+
+The leaf imported straight from the drift module. Enrolling that would have minted **a second production door** into a family whose whole invariant is one door, and adding it to the family list would have **exempted it from the writer seals** — the laundering the census exists to prevent. The easy road's cost was **measured, not asserted**: closure **10 modules / 211 KB → 111 / ~2.0 MB**, putting the world-state substrate and a clock behind eight lines of arithmetic in a file whose header says PURE. The value now arrives as an argument. Two arms were honest enrolments after proving the read correct and the leaf reached by nobody. **Behaviour identity: 268,800 receipts compared byte-for-byte, 0 diffs, negative control fires.**
+
+### THE REGISTERS, AND THE PREDICTIONS THEY WERE MEASURED AGAINST
+
+Tuning inventory **224 → 225 tables** (predicted **225 EXACT**; `unregisteredNamed` 535 and `bareDecimals` 6,985 **both unchanged across a 919-line new leaf** — it was written to the tuning discipline). Lighting census `2505/370/2134/22716/6110` → **`2506/370/2136/22748/6122`**, files predicted exact, closure identity holding. Test ratchet `31,016/2,453` → **`31,048/2,454`**, files predicted exact, **tests refused in advance and measured**. OSR **proven NOT owed** — exit 0, baseline undirtied. ⭐ One chair prediction MISSED and the miss was the useful part: inventory `keys` was predicted +40 from the register's unit map and moved **+26**; the register declares **dotted leaf paths** and the inventory counts **top-level keys**. The declaration was honest; the chair's arithmetic was not.
+
+### THE TRAILER GAP, RECORDED RATHER THAN REWRITTEN
+
+Eight cars carry **seven** trailers: `394d758ee` has none, because the first lane brief of the day omitted the requirement. It was **NOT rebased**, because `tests/lint/.tuning-inventory.json` cites that exact sha as its `measuredAtSha` and a rewrite would leave a register citing a commit that does not exist. **Trading a recorded gap for a dangling provenance reference makes the record worse.** The ledger and this stratum both name the car as Opus-seat and Fable-unvalidated, so §685's purpose is served; the cause is fixed forward in the brief template.
+
+*What Fable re-derives:* the three cure-the-leaf rulings against each arm's own assertion text — the question was never "how do I enrol this" but "should the leaf be reading this at all", and that is a judgment no test holds. Then the wall-clock race's two-direction measurement.
+
+*Priority:* **HIGH for the wall-clock cure** (it removes a random landing-gate failure); MEDIUM for the rest.
