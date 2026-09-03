@@ -55,6 +55,7 @@ import {
   DOSSIER_MOUNTS,
   MOUNT_RUNGS,
   UNMOUNTED_BLOCKS,
+  drawnAtMount,
   mountById,
   mountsForTab,
   sentenceMountForBlock,
@@ -480,10 +481,23 @@ describe('C2 mount registry — the guards can see the defects they guard', () =
   test('the routing ledger reds an unrouted block, a doubled block and a stranger', () => {
     // Unrouted: the corpus grew a block and nobody said where it goes. This is the plant
     // scripts/mutation-sweep.sh carries against the shipped registry.
+    // The mounts passed here are the SHIPPED ones, not `[]`. An empty table was the same
+    // thing as the shipped table on the day this walker landed, and the two parted company
+    // the moment the first desk car mounted a block: with `[]` every mounted block also
+    // reads as unrouted, and the control would red because the thing it controls changed
+    // rather than because the plant worked. The clean-table arm above already derives its
+    // dark half from the corpus for exactly this reason; this line is the same discipline.
     const short = UNMOUNTED_BLOCKS.filter((id) => id !== 'DS-CND-1');
-    expect(routingLedger([], short).unrouted).toEqual(['DS-CND-1']);
-    // Doubled: mounted AND still declared dark, so the darkness figure lies.
-    expect(routingLedger(CLEAN, UNMOUNTED_BLOCKS).doubled).toEqual(['DS-ECO-1', 'DS-GEN-1']);
+    expect(routingLedger(DOSSIER_MOUNTS, short).unrouted).toEqual(['DS-CND-1']);
+    // Doubled: mounted AND still declared dark, so the darkness figure lies. The plant is
+    // built from the dark list's OWN first member, which is still dark by construction, so
+    // this control cannot go stale as desk cars mount blocks out of that list — the way a
+    // hardcoded pair did the moment the economy desk car landed.
+    const stillDark = UNMOUNTED_BLOCKS[0];
+    const doubling = [{ ...CLEAN[0], blockId: stillDark, desk: DESK_OF_BLOCK.get(stillDark) }];
+    expect(routingLedger(doubling, UNMOUNTED_BLOCKS).doubled).toEqual([stillDark]);
+    // And the lawful shape stays silent: the SHIPPED table doubles nothing.
+    expect(routingLedger(DOSSIER_MOUNTS, UNMOUNTED_BLOCKS).doubled).toEqual([]);
     // A stranger: a name in the dark list that the corpus does not have.
     expect(routingLedger([], [...UNMOUNTED_BLOCKS, 'DS-GHOST-1']).strangers).toEqual(['DS-GHOST-1']);
   });
@@ -529,6 +543,40 @@ describe('C2 mount registry — the shipped table', () => {
       .toBe(UNMOUNTED_BLOCKS.length);
     expect([...UNMOUNTED_BLOCKS])
       .toEqual(CANONICAL_ORDER.filter((id) => UNMOUNTED_BLOCKS.includes(id)));
+  });
+
+  test('THE ROUTER READ: drawnAtMount hands a position the depth its ROW names', () => {
+    // The arm that makes a mount id a DRAW rather than a citation. The walker's
+    // reachability rule can only see that a literal appears once under src/components; it
+    // cannot see whether the component obeyed the table. This is that half, driven over
+    // the shipped rows so the two cannot part company.
+    const rung = Object.freeze({
+      glance: 'Deficit 12%',
+      sentence: 'The town does not grow what it eats.',
+      detail: Object.freeze([{ label: 'Produced against need', value: 'short' }]),
+      provenance: Object.freeze({ blockId: 'DS-ECO-2', poolKey: 'FOOD: deficit', angle: 'ledger' }),
+    });
+    // A SENTENCE row hands the rung back whole — the position may speak.
+    expect(drawnAtMount('economics.prosperityHeader', rung)).toBe(rung);
+    expect(drawnAtMount('economics.foodSecurity', rung)).toBe(rung);
+    // A GLANCE row keeps the band word and the rows and takes the sentence away — AND the
+    // provenance with it, because a trail describing a line that was not printed is the
+    // false-report shape.
+    const glanced = drawnAtMount('economics.foodTile', rung);
+    expect(glanced.glance).toBe('Deficit 12%');
+    expect(glanced.detail).toEqual(rung.detail);
+    expect(glanced.sentence).toBeNull();
+    expect(glanced.provenance).toBeNull();
+    // Non-vacuity: the two answers must actually DIFFER, or this arm proves nothing.
+    expect(glanced.sentence).not.toBe(rung.sentence);
+    // UNMOUNTED IS SILENCE (R-DST-K), not a fallback to speech; and a desk that built no
+    // rung for this state renders nothing rather than an empty frame.
+    expect(drawnAtMount('economics.__nowhere', rung)).toBeNull();
+    expect(drawnAtMount('economics.foodTile', null)).toBeNull();
+    expect(drawnAtMount('', rung)).toBeNull();
+    // Every shipped row is answerable — no position in the table is unreachable to the
+    // one function a component is allowed to ask.
+    for (const row of DOSSIER_MOUNTS) expect(drawnAtMount(row.mount, rung)).not.toBeNull();
   });
 
   test('SHRINK-ONLY: the dark half never grows past its committed baseline', () => {

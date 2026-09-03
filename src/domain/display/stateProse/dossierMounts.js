@@ -92,14 +92,48 @@ export const MOUNT_RUNGS = Object.freeze({
  */
 
 /**
- * THE REGISTRY. Empty at birth, and that is the honest state rather than a shortfall:
- * no desk has landed, so no component carries a position, and a row here naming a
- * position that does not exist would be the registry drifting into fiction on its first
- * day. Every desk car adds its rows and strikes the same blocks from UNMOUNTED_BLOCKS in
- * the SAME commit, and the walker holds both halves to each other.
+ * THE REGISTRY. It was empty at birth, and that was the honest state rather than a
+ * shortfall: no desk had landed, so no component carried a position, and a row naming a
+ * position that does not exist would have been the registry drifting into fiction on its
+ * first day. Every desk car adds its rows and strikes the same blocks from
+ * UNMOUNTED_BLOCKS in the SAME commit, and the walker holds both halves to each other.
+ *
+ * ── DESK CAR 1: THE ECONOMY DESK, THE FIVE POSITIONS BELOW ───────────────────────────
+ * `economyStateProse.js` is the only desk that exists, so these four blocks are the only
+ * four the tree can honestly route today. The other 64 are not parked by preference: a
+ * mount needs a desk to turn live state into a pool key, and five of the six desks are
+ * unwritten. A row without one would name a position no component could draw.
+ *
+ * WHY ONLY TWO OF THE FIVE SPEAK. R-DST-A — a composed page draws at most one of the
+ * SURFACE/LADDER pair and never both about the same fact:
+ *   • PROSPERITY. DS-ECO-1 (the rung read against the approach) speaks in the header,
+ *     which has paragraph room. DS-ECO-8 (the rung alone) therefore GLANCES on its tile;
+ *     a second prosperity sentence a few inches below the first is the page contradicting
+ *     itself about one fact. DS-ECO-8's speaking position is owed to another page-set
+ *     position, not to this tab.
+ *   • FOOD. DS-ECO-9 (the food-security ladder) speaks in the Food Security section.
+ *     DS-ECO-2 (the at-a-glance tiles) therefore glances at BOTH of its positions — which
+ *     car C3 would require in any case, since one block may draw its sentence rung at one
+ *     position and the food tile and the season tile are two.
  * @type {ReadonlyArray<DossierMount>}
  */
-export const DOSSIER_MOUNTS = Object.freeze([]);
+export const DOSSIER_MOUNTS = Object.freeze([
+  Object.freeze({
+    mount: 'economics.prosperityHeader', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'economics.economyTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-8', rung: 'glance',
+  }),
+  Object.freeze({
+    mount: 'economics.foodTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance',
+  }),
+  Object.freeze({
+    mount: 'economics.seasonTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance',
+  }),
+  Object.freeze({
+    mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence',
+  }),
+]);
 
 /**
  * The blocks the registry has not mounted yet: the corpus's darkness, as a number.
@@ -117,9 +151,9 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-DEF-1', 'DS-DEF-2', 'DS-DEF-3', 'DS-DEF-4',
   'DS-DEF-5', 'DS-DEF-6', 'DS-DEF-7', 'DS-DEF-8',
   'DS-DEF-9', 'DS-DEF-10', 'DS-DEF-11',
-  'DS-ECO-1', 'DS-ECO-2', 'DS-ECO-3', 'DS-ECO-4',
+  'DS-ECO-3', 'DS-ECO-4',
   'DS-ECO-5', 'DS-SUP-1', 'DS-ECO-6', 'DS-ECO-7',
-  'DS-ECO-8', 'DS-ECO-9', 'DS-SUP-2', 'DS-ECO-10',
+  'DS-SUP-2', 'DS-ECO-10',
   'DS-ECO-11', 'DS-ECO-12', 'DS-SUP-3',
   'DS-POP-1', 'DS-POP-2', 'DS-GEN-1', 'DS-GEN-2',
   'DS-GEN-3', 'DS-GEN-5', 'DS-GEN-6', 'DS-GEN-7',
@@ -178,4 +212,32 @@ export function sentenceMountForBlock(blockId) {
     (row) => row.blockId === blockId && row.rung === MOUNT_RUNGS.SENTENCE,
   );
   return speaking.length === 1 ? speaking[0] : null;
+}
+
+/**
+ * WHAT THIS POSITION MAY SHOW — the router read a component actually performs.
+ *
+ * A component holds a rung its desk built and asks the registry HOW DEEP it may draw
+ * here. It never decides its own depth: flip a row from `glance` to `sentence` in the
+ * table above and that position starts speaking with no edit at the call site, which is
+ * the whole difference between a component that ROUTES and one that merely names a
+ * string. The walker's reachability arm can only see that a mount id appears once under
+ * src/components; this function is what makes that appearance a draw rather than a
+ * citation.
+ *
+ * A GLANCE position keeps its band word and its rows and loses the sentence AND its
+ * provenance — the provenance describes a line that is not being printed, and a surface
+ * carrying the trail of a sentence it did not draw is the false-report shape.
+ *
+ * UNMOUNTED IS SILENCE, not a fallback to speech: a position with no row renders nothing
+ * at all, which is R-DST-K, and is why this returns null rather than the rung unchanged.
+ * @param {string} mount
+ * @param {{glance: string, sentence: string|null, detail: ReadonlyArray<{label: string, value: string}>, provenance: object|null}|null|undefined} rung
+ * @returns {object|null}
+ */
+export function drawnAtMount(mount, rung) {
+  const row = mountById(mount);
+  if (!row || !rung) return null;
+  if (row.rung === MOUNT_RUNGS.SENTENCE) return rung;
+  return Object.freeze({ ...rung, sentence: null, provenance: null });
 }

@@ -251,7 +251,16 @@ export function granaryPoolKey(granaryOutlook) {
  * @param {EconomyDeskSettlement|null|undefined} settlement
  * @param {{foodBalance?: FoodBalanceView|null, granaryOutlook?: GranaryOutlookView|null}} [readings]
  * @param {{seed?: string, audience?: string}} [options]
- * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurity: object|null}>}
+ * The last key is `foodSecurityRung`, NOT `foodSecurity`, and the difference is load
+ * bearing rather than cosmetic. Every other key here names a SURFACE or a RUNG; that one
+ * named an ENGINE RECORD — `economicState.foodSecurity`, a real container with `label`
+ * and `stockpile` and no `sentence` anywhere on it. The reader-with-no-writer walker
+ * binds a shape by member-access name and follows it through a function's return into
+ * its callers, so the old spelling handed every consumer of this desk a value whose NAME
+ * promised a record it is not, and the first consumer to read `.sentence` off it was
+ * convicted for it. A key that lies about its own shape is a defect at the seam, not at
+ * the call site.
+ * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurityRung: object|null}>}
  */
 export function economyStateProse(settlement, readings = {}, options = {}) {
   const eco = settlement?.economicState || {};
@@ -318,7 +327,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
       ? legibilityRung(text(granary?.band), line('DS-ECO-2', granaryKey),
         [{ label: 'Season', value: text(slots.season) }])
       : null,
-    foodSecurity: securityKey
+    foodSecurityRung: securityKey
       ? legibilityRung(text(eco.foodSecurity?.label) || securityKey,
         line('DS-ECO-9', securityKey), [])
       : null,
