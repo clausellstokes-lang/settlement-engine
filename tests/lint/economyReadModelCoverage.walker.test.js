@@ -173,6 +173,8 @@ const FROZEN_DEFERRED = {
     'Gallery facet vocabulary; the economicState.prosperity mention is a comment naming the label source.',
   'src/components/new/SupplyChainsPanel.jsx':
     'Child of a covered surface: mounted only inside EconomicsTab (and ChainRow inside SupplyChainsManager). The host tab carries the note above it.',
+  'src/components/new/tabs/EconomicsGlance.jsx':
+    'Child of a covered surface, on the SupplyChainsPanel.jsx standing directly above: the prosperity header and the at-a-glance tiles were lifted out of EconomicsTab.jsx verbatim (the tab sat exactly on its 600-line ceiling and the dossier mount registry needed a position layer), and this leaf renders only inside that tab. EconomicsTab still renders <EconomyFreshnessNote variant="tallies"> ABOVE it in the same return, so the tallies this leaf prints are already caveated on the same screen; a second note six inches below the first would double the caveat, not the honesty. The corpus sentences it routes are banded prose and carry no figure at all (§0d bans digits from dossier-state prose and the kernel rejects a numeric fill outright), so the lit half of this leaf makes no freshness claim of its own.',
   'src/components/new/dailyLifeLogic.js':
     'Derived-prose selection only: reads prosperity band + activeChains to CHOOSE descriptive paragraphs for DailyLifeTab, never to print a tally or a count.',
   'src/components/new/tabHelpers.js':

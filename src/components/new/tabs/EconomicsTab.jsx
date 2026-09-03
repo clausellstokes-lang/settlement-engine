@@ -20,6 +20,9 @@ import {
 } from '../../../domain/content/customSupplyChainPresentation.js';
 import { tradeLabelOwnership } from '../../../domain/content/customTradeLabelOwnership.js';
 import MarketPricesSection from './MarketPricesSection.jsx';
+import EconomicsGlance from './EconomicsGlance.jsx'; // the tab's glance surface + its four mount positions
+import { economyStateProse } from '../../../domain/display/stateProse/economyStateProse.js';
+import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import Button from '../../primitives/Button.jsx';
 
 // M6d FLOW-DERIVED ECONOMICS — the live trade-flow band → colour. Qualitative only
@@ -307,6 +310,14 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // EXACTLY on its frozen 600-line ceiling (measured — 605 with the colour written here),
   // which is why the band's accent is returned by the derivation instead.
   const granaryColor = granary.available ? (granary.band === 'nearly empty' ? '#8b1a1a' : granary.band === 'thin' ? '#a0762a' : '#1a5a28') : '#a0762a'; const treasury = deriveTreasuryGlance(s);
+  // THE ECONOMY DESK, read ONCE per render and routed by the mount registry below. The
+  // seed is the settlement's own stable identity, never a clock and never the transient
+  // {name} shape — the `_seed / id` convention RelationshipsTab already states, so THE
+  // PROMISE holds: same seed + same state ⇒ same sentence, forever. No `audience` is
+  // passed, so the kernel's law 2 reads it as the PLAYER's, which is the fail-closed
+  // half; this tab has no DM surface to widen it with.
+  const deskProse = economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary }, { seed: String(s?._seed ?? s?.id ?? '') });
+  const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
 
   return (
     <div style={{...sans}}>
@@ -314,41 +325,12 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 
       <EconomyFreshnessNote settlement={s} variant="tallies" />
 
-      {/* ── PROSPERITY HEADER ───────────────────────────────────────────── */}
-      <div style={{background:'linear-gradient(to right,#faf6ec,#f5ede0)',border:'1px solid #d8c090',borderLeft:`4px solid ${prosColor}`,padding:'12px 16px',marginBottom:14}}>
-        <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12,flexWrap:'wrap'}}>
-          <div>
-            <div style={{fontSize: FS['22'],fontWeight:700,color:prosColor,lineHeight:1.1,marginBottom:3}}>{eco.prosperity}</div>
-            <div style={{fontSize:FS.sm,color:swatch.inkMag3}}>{eco.economicComplexity}</div>
-          </div>
-          <div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'flex-start'}}>
-            <div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Trade</div>
-              <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag,textTransform:'capitalize'}}>{tradeLabel}</div>
-            </div>
-            {ecoScore>0&&<div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Output</div>
-              <div style={{fontSize:FS.md,fontWeight:700,color:ecoScore>=60?'#1a5a28':ecoScore>=35?'#a0762a':'#8b1a1a'}}>{ecoScore}/100</div>
-            </div>}
-          </div>
-        </div>
-        {eco.situationDesc&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'10px 0 0',borderTop:'1px solid #e0c890',paddingTop:8}}>{eco.situationDesc}</p>}
-      </div>
-
-      {/* ── AT-A-GLANCE TILES ───────────────────────────────────────────── */}
-      <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
-        {[
-          {label:'Economy',value:eco.prosperity,sub:ecoScore?`Output score: ${ecoScore}/100`:undefined,color:prosColor},
-          {label:'Food',value:foodLabel,sub:fb?`${formatCount(fb.dailyProduction)} / ${formatCount(fb.dailyNeed)} lbs/day`:undefined,color:foodColor},
-          ...(granary.available?[{label:'Season',value:granary.display.split(' — ')[0],sub:granary.display.split(' — ').slice(1).join(' — '),color:granaryColor}]:[]), ...(treasury.available?[{label:'Treasury',value:treasury.band,color:treasury.color}]:[]),
-        ].map(({label,value,sub,color})=>(
-          <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,padding:'8px 10px',minWidth:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>
-            <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,lineHeight:1.2,marginBottom:sub?2:0}}>{value}</div>
-            {sub&&<div style={{fontSize:FS.xxs,color:MUTED,lineHeight:1.3}}>{sub}</div>}
-          </div>
-        ))}
-      </div>
+      {/* ── PROSPERITY HEADER + AT-A-GLANCE TILES (the tab's glance surface) ── */}
+      <EconomicsGlance eco={eco} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
+        fb={fb} foodLabel={foodLabel} foodColor={foodColor}
+        granary={granary} granaryColor={granaryColor} treasury={treasury}
+        headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung}
+        foodRung={deskProse.foodTile} seasonRung={deskProse.granaryTile} />
 
       {/* ── INCOME SOURCES ──────────────────────────────────────────────── */}
       {eco.incomeSources?.length>0&&<Section title="Income Sources" collapsible defaultOpen>
@@ -495,6 +477,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             : `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`
           }
         </div>
+        {/* The town's own account of the same reading — ADDITIVE beside the arithmetic
+            above, never instead of it. Silent when the corpus has nothing to say
+            (R-DST-K), and silent when the registry mounts this position at a glance. */}
+        {drawnFoodLine?.sentence&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'8px 0 0',fontStyle:'italic'}}>{drawnFoodLine.sentence}</p>}
       </Section>}
 
       {/* ── ECONOMIC FLOWS (unified production chains + dependencies) ──────── */}
