@@ -176,23 +176,50 @@ const CRITICAL_CHANNEL_TYPES = new Set([
   'resource_competition',
 ]);
 
+// THE SUBJECT VOCABULARY of a regional-impact receipt. These were DATABASE LABELS
+// ('Conflict pressure') interpolated as the grammatical SUBJECT of six headline
+// frames, so a reader met "Conflict pressure takes hold in Elmspur" — a taxonomy
+// noun standing where a doer belongs. §754.3's positive clause wants a named actor
+// and a typed verb; the frames below now put the SETTLEMENT in the subject slot and
+// these phrases in the object slot, which is the only position a noun phrase can
+// honestly hold.
+//
+// THE VALUES MIRROR `WHAT_PHRASES` (settlementRumors.js) FOR THESE TWELVE KINDS, and
+// that is deliberate rather than incidental: the rumor surface has been telling the
+// reader "the drums of war" for the same `impactKind` this file spelled 'Conflict
+// pressure', so the two surfaces described one event in two registers. The mirror is
+// SPELLED OUT rather than imported for the reason stated at the top of this file for
+// WIZARD_NEWS_SECTIONS: the regional engine graph does not import the reader-only
+// display modules. tests/lint/newsSubjectVocabulary.walker.test.js imports BOTH and
+// pins them equal, so the duplication is machinery rather than a drift hazard.
+//
+// `relief` carries NO row: both prose functions intercept that kind ahead of every
+// label frame ([domain-events-region-7] G1d, extended to the summary here), so a row
+// would be unreachable. The walker asserts that unreachability by execution.
+// Exported for tests/lint/newsSubjectVocabulary.walker.test.js ONLY, which imports
+// this map and WHAT_PHRASES together and pins them equal. Nothing in src reads it
+// (the WHAT_PHRASES precedent: a table exported so its mirror can be enforced).
 /** @type {Readonly<Record<string, string>>} */
-const IMPACT_LABELS = Object.freeze({
-  import_shortage: 'Import shortage',
-  export_market_loss: 'Export market loss',
-  route_disruption: 'Route disruption',
-  authority_instability: 'Authority instability',
-  tax_revenue_disruption: 'Revenue disruption',
-  protection_gap: 'Protection gap',
-  service_disruption: 'Service disruption',
-  conflict_pressure: 'Conflict pressure',
-  migration_pressure: 'Migration pressure',
-  information_shock: 'Information shock',
-  criminal_pressure: 'Criminal pressure',
-  religious_pressure: 'Religious pressure',
-  // [domain-events-region-7] G1d — the relief lane's positive-sign beat.
-  relief: 'Regional relief',
+export const IMPACT_LABELS = Object.freeze({
+  import_shortage: 'a shortage of goods',
+  export_market_loss: 'lost markets',
+  route_disruption: 'the roads gone bad',
+  authority_instability: 'a shaken authority',
+  tax_revenue_disruption: 'coffers running short',
+  protection_gap: 'defences grown thin',
+  service_disruption: 'services faltering',
+  conflict_pressure: 'the drums of war',
+  migration_pressure: 'people on the move',
+  information_shock: 'unsettling news',
+  criminal_pressure: 'a rise in lawlessness',
+  religious_pressure: 'a stir among the faithful',
 });
+
+// The subject an unregistered regional kind takes. It is an in-world phrase and NOT
+// a de-underscored token: `human(kind)` used to serve here, which meant an engine
+// slug could reach a PERSISTED headline and, under THE PROMISE, stay in a save for
+// the life of that world. Refusing to mint vocabulary is the whole cure.
+const NEUTRAL_SUBJECT = 'a hard turn in its fortunes';
 
 // Reader-facing scoring receipts. The score and all numeric evidence remain on
 // the entry; these closed phrases are the only form the reasons take in prose.
@@ -265,11 +292,27 @@ function human(value) {
 }
 
 /**
+ * The in-world SUBJECT PHRASE for a regional impact kind. There is deliberately no
+ * compute arm: an unregistered kind takes the neutral phrase rather than a
+ * de-underscored slug, so this function SELECTS vocabulary and never mints it.
  * @param {string | null | undefined} kind
  * @returns {string}
  */
-function impactLabel(kind) {
-  return IMPACT_LABELS[/** @type {string} */ (kind)] || human(kind) || 'Regional pressure';
+function impactPhrase(kind) {
+  return IMPACT_LABELS[/** @type {string} */ (kind)] || NEUTRAL_SUBJECT;
+}
+
+/**
+ * Capitalize a leading name or neutral phrase. The frames below LEAD with the
+ * settlement, and the neutral stand-in ('a far settlement') is authored lowercase so
+ * one literal serves every position — the eager-byte law recorded at the C2/bar-4
+ * cure. This restores sentence case at the one position that needs it, instead of a
+ * capitalized twin literal.
+ * @param {string} value
+ * @returns {string}
+ */
+function leadCap(value) {
+  return value ? value.charAt(0).toUpperCase() + value.slice(1) : value;
 }
 
 /**
@@ -457,29 +500,41 @@ function scopeForImpact(impact) {
  * @returns {string}
  */
 function headlineForImpact(impact, transition, names) {
-  const label = impactLabel(impact.kind);
+  const phrase = impactPhrase(impact.kind);
   // C2 (bar 4): the neutral fallback speaks the world's register, never the
-  // software's — "a far settlement". The two templates that once LED with the
-  // target now lead with the label instead, so the lowercase phrase serves every
-  // position (and no capitalized twin literal is needed — the eager-byte law).
-  // Raw ids still never leak (finding-11's law holds).
+  // software's — "a far settlement". Raw ids still never leak (finding-11's law).
   const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || 'a far settlement';
+  // THE NAMED TOWN IS THE GRAMMATICAL SUBJECT of every frame below. It is the only
+  // address in the headline ON PURPOSE: `sourceSettlementId` is optional on a
+  // hand-built impact, so a frame that named a source would ASSERT an origin the
+  // record may not hold. The summary carries the full chain, and `settlementIds`
+  // carries it structurally on every entry either way.
+  //
+  // ⛔ THE HEADLINE IS A METRONOME SUPPRESSION KEY — `isMetronomeRepeat`
+  // (worldPulse/worldPulseFeedCuration.js) compares `prior.headline === entry.headline`
+  // over a six-tick window. These frames are SINGLE-VALUED for that reason: pooling
+  // them the way newsVoice pools its lines would give every repeat a different
+  // variant, silently disable the suppressor, let extra entries survive into the
+  // 240-cap feed and move the rumor-ledger golden. Identical inputs must keep
+  // yielding identical headlines, so the suppression equivalence class is unchanged
+  // BY CONSTRUCTION. Variety belongs at render, where it is byte-inert by contract.
+  const town = leadCap(target);
 
   if ((impact.waveDepth || 0) > 0 && (transition === 'queued' || transition === 'ready')) {
-    return `Regional cascade reaches ${target}`;
+    return `${town} feels the trouble spreading from town to town`;
   }
   // [domain-events-region-7] G1d — relief reads as a POSITIVE beat (pressure eases),
-  // not "faces relief" / "relief takes hold".
+  // not "faces relief" / "relief takes hold". Frozen byte-identically.
   if (impact.kind === 'relief') {
     if (transition === 'applied' || transition === 'resolved') return `Pressure eases in ${target}`;
     return `Relief reaches ${target}`;
   }
-  if (transition === 'ready') return `${label} reaches ${target}`;
-  if (transition === 'applied') return `${label} takes hold in ${target}`;
-  if (transition === 'resolved') return `${label} is resolved in ${target}`;
-  if (transition === 'ignored') return `${label} is dismissed for ${target}`;
-  if (transition === 'expired') return `${label} passes before reaching ${target}`;
-  return `${label} weighs on ${target}`;
+  if (transition === 'ready') return `${town} braces for ${phrase}`;
+  if (transition === 'applied') return `${town} wakes to ${phrase}`;
+  if (transition === 'resolved') return `${town} has seen the last of ${phrase}`;
+  if (transition === 'ignored') return `${town} pays no heed to ${phrase}`;
+  if (transition === 'expired') return `${town} is spared ${phrase}`;
+  return `${town} has word of ${phrase}`;
 }
 
 /**
@@ -490,8 +545,13 @@ function headlineForImpact(impact, transition, names) {
  * @returns {string}
  */
 function summaryForImpact(impact, transition, names, channels) {
-  const source = names.get(String(impact.sourceSettlementId)) || impact.sourceSettlementName || 'A regional source';
-  const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || 'the target';
+  // Both stand-ins speak the world's register rather than the software's, and both
+  // sit MID-SENTENCE in every frame below, so both stay lowercase — the same
+  // one-literal-serves-every-position law the headline's fallback follows. The two
+  // that used to sit here, 'A regional source' and 'the target', were the software
+  // naming its own parameters inside diegetic copy.
+  const source = names.get(String(impact.sourceSettlementId)) || impact.sourceSettlementName || 'a neighbouring town';
+  const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || 'a far settlement';
   const channel = channels.get(String(impact.channelId));
   const channelType = String(impact.channelType || channel?.type || '');
   const road = CHANNEL_PHRASES[channelType] || 'across the region';
@@ -504,13 +564,28 @@ function summaryForImpact(impact, transition, names, channels) {
     .slice(0, 3)
     .join(', ');
   const goodsPart = goods ? `, with ${goods} caught in the balance` : '';
-  const label = impactLabel(impact.kind).toLowerCase();
-  if (transition === 'ready') return `${impactLabel(impact.kind)} from ${source} now stands at ${target}'s door ${road}${goodsPart}.`;
-  if (transition === 'applied') return `${impactLabel(impact.kind)} from ${source} has taken hold in ${target} ${road}${goodsPart}.`;
-  if (transition === 'resolved') return `${target} has broken the ${label} that came from ${source} ${road}${goodsPart}.`;
-  if (transition === 'ignored') return `${target} has turned aside the ${label} that came from ${source} ${road}${goodsPart}.`;
-  if (transition === 'expired') return `${impactLabel(impact.kind)} from ${source} faded before it could reach ${target} ${road}${goodsPart}.`;
-  return `${impactLabel(impact.kind)} is moving from ${source} toward ${target} ${road}${goodsPart}.`;
+  const phrase = impactPhrase(impact.kind);
+  const town = leadCap(target);
+  // [domain-events-region-7] G1d, EXTENDED TO THE SUMMARY. The headline has read
+  // relief as a positive beat since that wave; the summary one line below it still
+  // ran the negative frames, so one entry carried both signs. The interception is
+  // what makes `relief` unreachable in IMPACT_LABELS, and the walker proves it.
+  if (impact.kind === 'relief') {
+    if (transition === 'applied' || transition === 'resolved') {
+      return `${town} feels the pressure easing, with help come from ${source} ${road}${goodsPart}.`;
+    }
+    return `${town} has word of relief on the road from ${source} ${road}${goodsPart}.`;
+  }
+  // THE NAMED TOWN IS THE SUBJECT here too, and the verbs are the headline's, so the
+  // lede and the detail read as one desk. Each frame adds what the headline withheld:
+  // the SOURCE, the ROAD it travelled and the GOODS caught in it — the address chain
+  // the record has always carried in `settlementIds` and never spoke aloud.
+  if (transition === 'ready') return `${town} braces for ${phrase}, come from ${source} ${road}${goodsPart}.`;
+  if (transition === 'applied') return `${town} wakes to ${phrase}, come from ${source} ${road}${goodsPart}.`;
+  if (transition === 'resolved') return `${town} has seen the last of ${phrase}, which came from ${source} ${road}${goodsPart}.`;
+  if (transition === 'ignored') return `${town} pays no heed to ${phrase}, come from ${source} ${road}${goodsPart}.`;
+  if (transition === 'expired') return `${town} is spared ${phrase}, which ${source} sent ${road}${goodsPart}.`;
+  return `${town} has word of ${phrase}, on the way from ${source} ${road}${goodsPart}.`;
 }
 
 /**

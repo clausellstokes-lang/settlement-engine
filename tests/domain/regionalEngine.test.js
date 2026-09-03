@@ -812,7 +812,16 @@ describe('wizard news feed', () => {
 
     expect(entries).toHaveLength(1);
     expect(entries[0].kind).toBe('ready');
-    expect(entries[0].headline).toMatch(/Route disruption/);
+    // THE SUBJECT LAW (§754.3's positive clause). This pin used to read
+    // `/Route disruption/` — the DATABASE LABEL standing as the grammatical subject
+    // of the sentence, which is the defect the subject-vocabulary cure removed. It
+    // now asserts the property that replaced it: the kind speaks in the world's
+    // words, and NO engine taxonomy noun leads the headline.
+    expect(entries[0].headline).toBe('A far settlement braces for the roads gone bad');
+    // The exact-equality pin above proves the headline exists and holds real prose,
+    // anchored: so this cannot pass on an absent or emptied field.
+    expect(entries[0].headline).not.toMatch(/Route disruption/i);
+    expect(entries[0].impactKind).toBe('route_disruption');
     expect(entries[0].tick).toBe(4);
   });
 
