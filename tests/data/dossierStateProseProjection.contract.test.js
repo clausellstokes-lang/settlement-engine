@@ -432,6 +432,9 @@ describe('the slot SHAPE contract — a fill obeys the grammar its seam assumes'
       'dmFieldProjection.js::DM_FIELD_FRAMED_BY_BLOCK':
         'blockId → settlement field path, consumed by projectBesideDmField; no value of it '
         + 'ever reaches a {slot}',
+      'dossierMounts.js::MOUNT_RUNGS':
+        'the two legibility depths a mount may draw at, consumed only by dossierMounts.js '
+        + 'as the router\u2019s rung vocabulary; no value of it ever reaches a {slot}',
     });
     const violations = [];
     const undeclaredTables = [];
