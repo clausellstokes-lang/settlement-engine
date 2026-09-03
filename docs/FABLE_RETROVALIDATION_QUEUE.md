@@ -2448,3 +2448,21 @@ The lane found its car carried `Seat: Opus 5 (lane CURE-CAPSULE)`, which matches
 *What Fable re-derives:* the metronome finding first — it is the one that converts an obvious cure into a wrong one, and everything downstream rests on it. Then the freeze-blocking ruling for Cure A. Then the chair's own scope finding that the lighting charter omits the corpus.
 
 *Priority:* ⛔ **HIGH.** Two lit defects, one of them printing twenty times in a century campaign, and one cure that becomes unfixable-in-place after the golden freeze.
+
+---
+
+## §884.6 · THE OWNER REFUTES §884.5's FREEZE-BLOCKING RULING — there are no saves, the product is entirely prelaunch (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**The owner, in chat, verbatim in substance:** *"note that there is no save before this fix. we are entirely prelaunch."*
+
+⛔ **§884.5's ruling that Cure A is FREEZE-BLOCKING is WITHDRAWN.** Its stated ground was that `normalizeEntry` passes persisted headlines through unchanged and THE PROMISE forbids migrating lived history, **so a save straddling the change would carry old-style and new-style headlines in one feed forever**, making "every day it waits a customer save that reads wrong permanently." ⭐ **That mechanism is correct and its PREMISE is false. There are no saves. There are no customers. The straddle case has no instances and cannot acquire one before launch.**
+
+**⛔ THE CHAIR'S ERROR, NAMED — and it is the THIRD of this shape today.** The lane's argument was excellent engineering reasoning anchored to a fact **nobody checked**, and the chair ratified it and wrote it into the ledger as a ruling without asking whether the premise held. The check was one question to the owner. Compare: §883.6 ruled from a function whose upstream guard the chair never opened; §884.2 asserted a span bound the chair guessed rather than measured. ⭐ **THE PATTERN: a mechanism can be perfectly derived and still be worthless, because a mechanism is a conditional and the chair keeps failing to verify the antecedent.** *"Confirm it, never assume it"* was written into this program in August about a cause; it applies with equal force to a PREMISE.
+
+**THE RE-RULING.** Cure A is **NOT freeze-blocking. It is freeze-PREFERRED, on an ordinary cost argument:** landing it before the GOLDEN freeze means the reference outputs are recorded with the new headlines and nothing is owed; landing it after means it moves output and owes a **declared golden shift**, which this program permits and makes visible. ⇒ **It is cheaper before and possible after. It has scheduling freedom it did not have an hour ago**, and it no longer outranks work that is genuinely one-way.
+
+**⭐ WHAT SURVIVES UNCHANGED, checked rather than assumed.** *(a)* **The FILL-LAYER one-way door STANDS.** Its ground was never persistence — it is that the corpus has **zero product consumers**, so the fix moves zero rendered bytes today and would move 122 shipped sentences plus a per-surface declared shift the day any desk is wired. Wiring, not saving. **Unaffected by this correction.** *(b)* The `createdAt` determinism leak's *"the GOLDEN FREEZE would bake it in"* **STANDS** — that is a statement about goldens, not saves. *(c)* Every measured figure in §884.5 stands; only the urgency ruling moves.
+
+*What Fable re-derives:* whether any COMMITTED fixture or golden corpus carries a persisted `wizardNews` headline — the lane reported finding none but labelled it **PLAUSIBLE-strong, not confirmed**, and with the customer-save argument withdrawn that fixture question is now the only remaining persistence exposure. It is cheap to settle and nobody has settled it.
+
+*Priority:* **MEDIUM** — the correction is recorded, the cure is unblocked either way, and the class-lesson (verify the antecedent, not just the mechanism) is the part worth a second look.
