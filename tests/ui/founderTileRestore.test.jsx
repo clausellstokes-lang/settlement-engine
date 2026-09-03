@@ -19,7 +19,19 @@ import { describe, test, expect, afterEach, beforeEach, vi } from 'vitest';
 import { render, cleanup, screen, fireEvent, waitFor } from '@testing-library/react';
 
 // An eligible worldbuilder with the recognition flag on and chairs unheld.
-vi.mock('../../src/hooks/useReaderAudience.js', () => ({ useReaderAudience: () => 'worldbuilder' }));
+//
+// ⚠ THE SEAM MOVED WITH ROW O-16 AND THE MOCK MOVED WITH IT. The tile no longer
+// reads a bare archetype: it reads the recognition verdict WITH its grounds, so
+// this fixture supplies the evidence shape the real hook returns. Stubbing only
+// the old `useReaderAudience` would leave the tile reading `undefined` grounds
+// and quietly stop exercising the gate.
+vi.mock('../../src/hooks/useReaderAudience.js', () => ({
+  useReaderAudience: () => 'worldbuilder',
+  useReaderAudienceEvidence: () => ({
+    audience: 'worldbuilder',
+    reasons: ['saves_at_least_five', 'neighbour_network_used'],
+  }),
+}));
 vi.mock('../../src/lib/flags.js', () => ({ flag: (k) => k === 'founderRecognition' }));
 vi.mock('../../src/store/index.js', () => {
   const state = { auth: { tier: 'free' } };
@@ -46,6 +58,10 @@ vi.mock('../../src/lib/founderSeats.js', async (importOriginal) => {
 vi.mock('../../src/lib/stripe.js', () => ({ startCheckout: (...a) => startCheckout(...a) }));
 
 import FounderTile from '../../src/components/pricing/FounderTile.jsx';
+import {
+  founderRecognitionEvidence,
+  FOUNDER_RECOGNITION_WITHHELD,
+} from '../../src/hooks/useFounderTileEligible.js';
 import { FOUNDER_SEAT_CAP } from '../../src/lib/founderSeats.js';
 import { viewToPath } from '../../src/lib/routes.js';
 
@@ -120,5 +136,69 @@ describe('FounderTile — the CTA asks for a chair, it does not buy one (ODQ §1
     expect(src).not.toMatch(/\(\s*'founder_lifetime'\s*\)/);
     // …and it still reads the shared cap rather than a literal 30.
     expect(src).toMatch(/FOUNDER_SEAT_CAP/);
+  });
+});
+
+// ── ROW O-16: THE LIT PAID SURFACE, AND WHO IT REACHES ──────────────────────
+//
+// `founderRecognition` shipped dark. On 2026-09-03 the owner handed row O-16 to
+// the chair and it is LIT. That makes these arms the paid-surface contract:
+// they hold the population the flip actually reaches, and — the one that
+// matters most — the population it must NOT reach.
+//
+// The gate is pure, so it is driven directly here rather than through the
+// component's mocked seams; the tile's own rendering is covered above.
+describe('founder recognition — the lit gate and its evidence (O-16)', () => {
+  const worldbuilder = {
+    recognitionEnabled: true,
+    audience: 'worldbuilder',
+    reasons: ['saves_at_least_five', 'neighbour_network_used'],
+  };
+
+  test('the recognition flag ships LIT', async () => {
+    // Read the real registry, not the mocked `flags.js` facade above.
+    const { FLAG_DEFAULTS } = await import('../../src/lib/flagRegistry.js');
+    // Anti-vacuity: the registry is really loaded and really has other flags.
+    expect(Object.keys(FLAG_DEFAULTS).length).toBeGreaterThan(20);
+    expect(FLAG_DEFAULTS.founderRecognition).toBe(true);
+  });
+
+  test('⛔ A PAYING SUBSCRIBER IS NEVER OFFERED A CHAIR — the flip changes nothing for them', () => {
+    const verdict = founderRecognitionEvidence({ ...worldbuilder, tier: 'premium' });
+    expect(verdict.eligible).toBe(false);
+    expect(verdict.withheldBy).toContain(FOUNDER_RECOGNITION_WITHHELD.ALREADY_PREMIUM);
+    // …and the refusal carries NO earning grounds, so a downstream receipt can
+    // never read "earned" off a reader who was refused.
+    expect([...verdict.earnedBy]).toEqual([]);
+  });
+
+  test('a demonstrated worldbuilder on a free tier is offered one, WITH the grounds', () => {
+    const verdict = founderRecognitionEvidence({ ...worldbuilder, tier: 'free' });
+    expect(verdict.eligible).toBe(true);
+    expect([...verdict.withheldBy]).toEqual([]);
+    expect([...verdict.earnedBy]).toEqual(['saves_at_least_five', 'neighbour_network_used']);
+  });
+
+  test('a refusal names EVERY ground it rests on, not merely the first', () => {
+    const verdict = founderRecognitionEvidence({
+      recognitionEnabled: false, audience: 'new', reasons: [], tier: 'premium',
+    });
+    expect(verdict.eligible).toBe(false);
+    expect([...verdict.withheldBy]).toEqual([
+      FOUNDER_RECOGNITION_WITHHELD.RECOGNITION_FLAG_DARK,
+      FOUNDER_RECOGNITION_WITHHELD.AUDIENCE_NOT_WORLDBUILDER,
+      FOUNDER_RECOGNITION_WITHHELD.ALREADY_PREMIUM,
+    ]);
+  });
+
+  test('the tile and the parent one-primary hook cannot disagree about one reader', () => {
+    // The old shape recomputed the same three conditions in two modules and kept
+    // them in agreement by a comment. Both now read this one composition.
+    for (const tier of ['anon', 'free', 'premium']) {
+      for (const audience of ['new', 'intermediate', 'worldbuilder']) {
+        const verdict = founderRecognitionEvidence({ ...worldbuilder, audience, tier });
+        expect(verdict.eligible).toBe(audience === 'worldbuilder' && tier !== 'premium');
+      }
+    }
   });
 });

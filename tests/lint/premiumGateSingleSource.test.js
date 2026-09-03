@@ -163,7 +163,15 @@ const EXEMPTIONS = {
   // content-visibility question the old combined tab carried.
   'src/components/new/tabs/FaithTab.jsx': 'content-visibility',
   'src/components/new/tabs/WarTab.jsx': 'content-visibility',
-  'src/components/pricing/FounderTile.jsx': 'sell-to-the-tier',
+  // ⬇ ROW O-16 STRUCK THIS ROW, AND THE STRIKE IS THE WIN, NOT A WAIVER.
+  // src/components/pricing/FounderTile.jsx used to spell `tier !== 'premium'`
+  // itself, in a copy of the same three-condition gate that
+  // hooks/useFounderTileEligible.js spells — two homes for one entitlement
+  // question, held in agreement by a comment. The tile now reads that hook's
+  // `useFounderRecognition()`, so the raw comparison exists in ONE place, the
+  // hook's row below covers it, and this census demanded the dead row go
+  // ("delete their EXEMPTIONS rows so the census cannot rot into a permissive
+  // allowlist"). One fewer raw premium comparison in `src/`.
   'src/components/pricing/PricingTierCards.jsx': 'sell-to-the-tier',
   'src/components/session/SessionMode.jsx': 'content-visibility',
   'src/components/settlement/FaithSection.jsx': 'content-visibility',
