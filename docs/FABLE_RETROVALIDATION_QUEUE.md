@@ -2573,3 +2573,28 @@ The lane reported that at the §885 gated tip **both registers were refrozen BEF
 *What Fable re-derives:* J1 first, because refusing an authored annex note is the largest single call and the chair added a ground the lane did not have. Then J7's flag, which is the one place a scarcity constraint is shaping a design.
 
 *Priority:* MEDIUM for the rulings. ⛔ **HIGH for O1**, which is a live block on the wave the owner most wants.
+
+---
+
+## §885.3 · THE OWNER RE-GRANTS EVERYTHING TO THE SOAK LINE (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**The owner, in chat, verbatim:** *"i give all permissions and leave everything to your best judgmeent. get to right before the soak"*
+
+**What this MOVES — the four rows that were blocking, now ruled by the chair.**
+- **O1, the 338 em dashes: RULED — they leave before any desk lights.** They are prose against `VOICE_AND_TONE` §3 and the grant covers taste. Ground: this is the corpus's one reader-facing defect that is **cheap now and permanent later**, and the ratchet already counts them, so removing them can only make banked debt fall. ⇒ **DESK WIRING IS UNBLOCKED.** *Veto shape:* rule them kept and the desk cars carry a declared voice exception per leaf.
+- **The 12 phrases and 6 frame wordings: RULED — the build lane authors them against the SPEC'S OWN TESTABLE REGISTER LAW** (`R1_FORBIDDEN`: no terminal stop, no digit, no underscore, no interpolation slot, no leading connective; plus the two-way frame-fit law extended to all six frames), and **the chair reviews before the car commits.** ⇒ **TRAIN 2 IS UNBLOCKED.** Ground: the register law makes the wording *testable*, so this is no longer taste-without-a-rule.
+- **O3, the 13-state authoring bill: RULED — record and light anyway.** The ratchet only falls; a thin state is visible and shrinkable, and holding a wave for corpus authoring inverts the cost.
+- **O4, DS-GEN-3: RULED a watch item, not a blocker**, at ~2.95 distinct of 3 across ten settlements.
+
+**⛔ WHAT THIS DOES **NOT** MOVE — the carve-outs survive every delegation by their nature, and the chair says so unprompted.**
+- **PAID-SURFACE BEHAVIOUR (O2) STAYS GATED.** It is on the canonical carve-out list. **The chair continues to operate under the conservative default `publicDossier ⇒ no state prose`** — the restrictive read, which needs no ruling to be safe.
+- **THE TUNING SIGNATURE AND EVERY TUNING VALUE STAY GATED.** They are after the soak, and the instruction is to stop *before* it.
+- **EVERY `git push` AND THE DEPLOY STAY GATED.** No delegation has ever covered these and this one does not either.
+- **THE OWNER'S WALK + ONE REGEN IS AN OWNER ACT** and sits *inside* the remaining arc, before the review. The chair cannot perform it. **It is flagged as OWED rather than absorbed.**
+- **THE 12 MUTILATED ANCHORS STAY UNREPAIRED.** ⚠ The grant is broad enough to re-open them, and the chair declines: they are pinned by a **prior owner ruling** (LEG-7) whose ground the chair would be guessing at, repairing them is **not on the launch path**, and *"all permissions"* is authority to decide, not a reason to churn a settled decision. **Recorded as a deliberate non-exercise of granted authority.**
+
+**⭐ THE READING OF "GET TO RIGHT BEFORE THE SOAK".** The chair executes: TRAIN 1 (dark prose) → TRAIN 2 (news) → desk wiring → HORIZON-DARK → ENCOUNTERS → the LIGHTING WAVE → the `createdAt` leak and its five siblings → the GOLDEN freeze → W-ARMS → the exhaustive review (§879.6) → **⛔ FULL STOP.** The owner's walk is owed somewhere before the review and only the owner can take it.
+
+*What Fable re-derives:* the O1 ruling first — it is the only one of the four that changes reader-facing bytes, and the chair ruled a taste question on a grant rather than a specification. Then the deliberate non-exercise on the twelve anchors, which is the chair declining authority it was given.
+
+*Priority:* MEDIUM. **The carve-out list is the row that matters if anything here is wrong.**
