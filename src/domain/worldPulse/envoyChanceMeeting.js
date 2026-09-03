@@ -159,7 +159,14 @@ export const CHANCE_MEETING_TUNING_PROVENANCE = Object.freeze({
  * THE VALUES THEMSELVES, every leaf a number so every leaf can carry a unit. The tuning
  * walker holds units ALL-OR-NONE per table and a status word has no honest unit, so the
  * provenance above is its own export rather than three unlabelled keys inside this one.
- * @type {Readonly<Record<string, unknown>>}
+ *
+ * ⚠ THERE IS NO `@type` TAG HERE AND THERE MAY NOT BE ONE. A widening annotation —
+ * `Readonly<Record<string, unknown>>` was the first draft's — erases every leaf's number,
+ * which erases `EIGHTHS`, which makes the die `unknown` at THIRTEEN arithmetic and
+ * argument sites in this file. The inferred frozen-literal type is both the honest type
+ * and the house idiom: thirty-two of the thirty-five `*_TUNING` tables under `src/` carry
+ * no annotation at all. If a later hand wants a name for this shape, that name must be a
+ * typedef that keeps the leaves numbers, never a `Record` of `unknown`.
  */
 export const CHANCE_MEETING_TUNING = Object.freeze({
   /** the die's face count: every chance is an integer number of these */
@@ -404,7 +411,21 @@ export function planeFromChart(axes, words) {
   };
   for (const [axisId, position] of Object.entries(asObject(axes))) {
     const at = asObject(position);
-    add(wordForAxisPosition({ axisId, pole: text(at.pole), level: text(at.level), word: text(at.word) }));
+    // `pole` is asserted, not coerced, and the assertion is the same one `axisRungs` makes
+    // twenty lines up. `AxisPole` is `'virtue'|'vice'` and it is COMPLETE — the string here
+    // is not a typo and the union is not short a member. What widens it is `text()`, which
+    // is total on `unknown` by design and cannot carry a literal type back out. Narrowing
+    // this at runtime instead (`=== 'vice' ? 'vice' : 'virtue'`) would MOVE THE OUTPUT: a
+    // chart whose pole is absent or garbage reads '' today and `wordForAxisPosition`
+    // returns null for it, and a coercion would hand that person a virtue word he does not
+    // have. The assertion states what the catalog already guarantees for real positions and
+    // leaves the garbage path byte-identical.
+    add(wordForAxisPosition({
+      axisId,
+      pole: /** @type {'virtue'|'vice'} */ (text(at.pole)),
+      level: text(at.level),
+      word: text(at.word),
+    }));
   }
   for (const raw of asArray(words)) {
     // A word the axes already speak for is not counted twice.
@@ -657,8 +678,11 @@ function normalizeParty(raw) {
 }
 
 /** The three owner terms of the compromise chance, each an integer rung.
+ *  `courts` is `unknown` because that is what this function actually accepts: it reads the
+ *  bag through `asObject` on both uses and never assumes a shape, and the caller hands it
+ *  the entry point's own `unknown` field straight through.
  *  @param {Record<string, unknown>} target @param {Record<string, unknown>} approacher
- *  @param {Record<string, unknown>} courts @param {string} band @returns {Record<string, number>} */
+ *  @param {unknown} courts @param {string} band @returns {Record<string, number>} */
 function compromiseTerms(target, approacher, courts, band) {
   const knownPlane = planeFromChart(target.knownAxes, target.words);
   // T1 — how different the target is from his OWN court, read on his KNOWN chart:
@@ -741,9 +765,14 @@ function markOutcome(roll, band, posture, rivalryStep) {
  * are the whole surface, and the widest of them is a LEASH the corruption web already
  * mints from a lean it may or may not consume.
  *
+ * `pickRoll` is on the contract because the function READS it (the census draws that arm
+ * one layer up and hands it down for the receipt). It is `unknown` like every sibling
+ * field — this entry point is total on garbage, and the body re-validates with
+ * `Number.isInteger` before the receipt ever carries it.
+ *
  * @param {{meetingKey?: unknown, kind?: unknown, venue?: unknown, nodeId?: unknown,
  *   tick?: unknown, seed?: unknown, a?: unknown, b?: unknown, courts?: unknown,
- *   posture?: unknown, wariness?: unknown}} [args]
+ *   posture?: unknown, wariness?: unknown, pickRoll?: unknown}} [args]
  * @returns {Record<string, unknown>}
  */
 export function resolveChanceMeeting({
