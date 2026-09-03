@@ -3032,3 +3032,37 @@ The chair's initial conclusion was *"ENC-3 is blocked on TE-VIRT-1, which never 
 ⇒ **The corrected dependency: the drift flag door is NOT waiting on a lane that never ran. It is a SHIPPED, DELIBERATE RESERVATION whose owning car landed and chose the emptiness.** Homing that flag is therefore **a NEW decision, not a pending one** — and by §868's own words a structural call rather than a landing's. ⛔ **It goes to the owner, or to a fresh charter; the chair may not take it, and dispatching "TE-VIRT-1" again would be dispatching a lane that already finished.**
 
 *The chair's second lesson in one act:* **an absence has a history, and the history is in the log.** The first error read an empty structure as available; the second read a missing ancestor as unlanded work. Both were cured the same way — by asking the repository instead of the inference.
+
+## §890.2 · THE WALL CLOCK LEAVES THE REGIONAL SEAMS — and the car turns out to be a CLASS, not two sites (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**Two cars at `03da380abf4e860c4cf81182e59e1b7caababb82`**, sealed `refs/preserve/nownull-2026-09-03` (unreferenced when the lane reported — the §882.14 shape, **seventh payout of that law today**). 15 paths, all modifications, **no new test file**, so no new-file census bill.
+
+### ⭐⭐ THE CAR'S REAL SHAPE WAS A CLASS, AND THE LANE'S OWN TEST CAUGHT IT MID-BUILD
+
+`now: null` now means **"no stamp"** at both regional seams, and all 20 outstanding `ensureRegionalGraph` sites are threaded (57 total, 54 threaded; 3 in-module, one a false positive that passes `options` through, two deferred with reason). But the focused test caught a **regression the lane itself introduced**: the estate's universal spelling for "no pinned instant" is `now = null` / `options.now || null` / `?? null` — **free while `null` and `undefined` were interchangeable, and a bug the instant they diverge.** Cured at four more sites (`graph.js nodeFromSave`, `propagation.js` ×2, `discoverDependencyCandidates.js` three defaults and eight coercions).
+
+⚠⚠ **AND EVERY OTHER ARM OF THE CLOCK-SEAM WALKER IS BLIND TO IT:** Arm A counts clock reads and a flattening adds none; Arm B reads call arguments and this lives in a **parameter list**; Arm C runs pinned paths and this **never executes** there. ⭐ **A guard family can be complete against the defect it was built for and structurally unable to see the defect its own cure creates.**
+
+### ⭐ THE MIGRATION QUESTION ANSWERED BETTER THAN IT WAS ASKED
+
+The owner's pre-launch directive is in-tree (`docs/PHASE6_DATA_LIFECYCLE.md:3`, 2026-07-10). **But the lane found a stronger answer that does not depend on it**, and the chair verified it by its own read of `graph.js:190/208/232/233`: the chain is `row.stamp || resolveStamp(now)`, so **a stored row that already carries a stamp SHORT-CIRCUITS and never reaches the resolver.** ⇒ **every persisted campaign is byte-unchanged, and no migration is owed whether or not saves exist.** Proved by an executed arm rather than asserted, and neither schema version is bumped. ⭐ **An argument that survives the loss of its premise is worth more than one that rests on it.**
+
+### THE STRICT BILL, CLEARED AT CAUSE TWICE
+
+Not four defects but **one lying annotation**: `neutralNeighbourEdges.js:289` constrained its generic as `updatedAt?: string`, so a `string|null` return failed the constraint, TS fell back to the constraint type, and the resulting union reddened all four sites (worldSnapshot 159/168/169, pulseKernel 2421). Widening it to `string|null|undefined` collapsed all four at once. It went red a second time mid-car when removing `= null` defaults left five stale `@param {string|null}` annotations. **1121/1121 exit 0, ceiling never touched, no `@ts-ignore`, no baseline edited.**
+
+### THE SPELLING BAN: NARROWED, NOT RETIRED — and the reasoning is the model
+
+The ban was **forced rather than chosen**: it scans `tests/` and skips only three files, so it **convicted the cure's own proof arms.** Its `null` half is **retired** because its stated ground — *"reads as a pin and is not one"* — is now false. Its `undefined` half is **kept and is permanent**: undefined must keep meaning *absent* for ~120 omitting callers and for object spreads, so that half of the trap **cannot be removed, only fenced.** A new arm bans the flattening, scoped to `src/domain/region/**` (elsewhere `now = null` is the correct 126-site news-author idiom) and placed in the **existing** walker file, because a new test file would red three censuses at landing.
+
+**Its negative control is the standard to hold others to:** replanting `now = null` reds **the walker AND the behaviour arm**, proving the guard convicts a real bug rather than a spelling; restored by `cp` with `cmp` identical and the sha shown on both sides; re-run 27/27. Whole-product byte identity with the **real** clock moved 1.2 s between runs: composer **564,663 B**, two-year advance **257,250 B**, both identical. Lifecycle exercised per path — create, read, persist+reload, regenerate, re-entry, clone, migrate, legacy-data — with **undo dispositioned rather than exercised**, and the reason given: regional undo is a wholesale snapshot restore that mints nothing.
+
+⭐ **And it refused to accept a quiet base run as exoneration:** of seven domain reds, five reproduced at base and the two that did not **passed in its own dock in isolation, 56/56 exit 0** — contention flakes of the parallel run, checked rather than assumed.
+
+### ⛔ THE OWNER-GATED LINE IT DECLINED TO CROSS — AND THE CHAIR'S RULING
+
+The lane found an in-tree ledger row calling a nullable stamp *"a schema change, which is owner-gated"*. It judged the **type widening** to be inside a repair (no stored byte moves; the record's siblings `RegionImpact.createdAt` and `RegionChannel.confirmedAt` are already `string|null`) and **did not take the further step of making any production caller WRITE a null.** ⭐ **That split is exactly right.** ⇒ **CHAIR RULING: the owner DELEGATED the `now: null` schema change in chat on 2026-09-03, so the further step is now AUTHORISED — and it is NOT NEEDED**, because the lane measured **zero `src/**` call sites that thread a null**, so no production byte moves either way. It stays unbuilt as unnecessary rather than as forbidden.
+
+*What Fable re-derives:* the short-circuit claim (`row.stamp ||` never reaching the resolver) and the walker-blindness finding.
+
+*Priority:* **HIGH** — it removes the trap behind a ~0.45% random landing-gate red.
