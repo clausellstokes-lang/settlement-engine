@@ -68,6 +68,23 @@ const EMBEDDED_DELIMITER_FAMILIES = Object.freeze({
   // chain, and no root segment, can reach the same seed. Added after that check, never to
   // silence the test.
   'exclusiveCoexist': ['src/generators/steps/assembleInstitutions.js'],
+  // ENC-2 (§889). `willed-leash-end::<tick>::<npcId>`, forked to roll the DISCOVERY end of a
+  // willed corruption leash so the decay the owner asked for is a draw and not a schedule.
+  // THE CHAIN CHECK THIS ROW REQUIRES, DONE BEFORE ADDING IT — measured over all 118 literal
+  // `.fork(` sites in `src`:
+  //   (a) the head token `willed-leash-end` appears at exactly ONE site, this family's own, so
+  //       no fork chain and no root segment can spell it at that position;
+  //   (b) the reserved root head `epoch` appears in ZERO fork labels and this label does not
+  //       open with it;
+  //   (c) the interpolated components cannot themselves carry the delimiter — `now` is
+  //       `Math.max(0, Math.floor(...))` of a TICK (a non-negative integer, and deliberately
+  //       not a wall clock, which in a SEED LABEL would break THE PROMISE outright), and
+  //       `npcId` is an npcStates key of the form `<slug>:npc_N`, SINGLE-colon. The only
+  //       `::`-bearing id-shaped string in the tree is `footholdCooldownKey`'s map key
+  //       (`cid1::rivalRef::npc7`), which is a pulseHistory lookup key and never reaches
+  //       `fork()`.
+  // Added after that check, never to silence the test.
+  'willed-leash-end': ['src/domain/worldPulse/corruptionWeb.js'],
 });
 
 /**
