@@ -2670,3 +2670,30 @@ The lane reports Cure A as **freeze-blocking**, citing persisted headlines and i
 *What Fable re-derives:* the wordings, since taste is the one thing no test holds — though the mirroring warrant makes them far more defensible than fresh authorship. Then the 26-vs-19 correction, and the seven tokens no walker could see.
 
 *Priority:* MEDIUM. **HIGH for the seven invisible tokens**, which are a live class rather than a finished one.
+
+---
+
+## §885.6 · THE LANDING IS HELD FOR THE MACHINE, NOT FOR A DEFECT (2026-09-03 ~04:1x ET, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**What happened.** TRAIN 2 is composed on the landing dock (4 cars incl. the census refreeze, porcelain 0). Its `--update` **REFUSED** on `tests/components/simulationRulesDialog.test.jsx`, a test **not in the census.**
+
+**⛔ THE CHAIR IS HOLDING RATHER THAN RE-RUNNING, and the ground is measured.**
+1. **The load is EXTERNAL and NAMED.** Top consumers at the moment of failure: **two instances of `build_hd_index`** (Apple Remote Desktop's drive indexer) at **57.4% and 57.0%**, plus a macOS periodic **`find -dx … -type d -empty -mtime +3`** sweep at **47.1%**, plus a JumpCloud EndpointSecurity extension at 19.1%. `UPDATE_LOAD_POST=94.64/88.60/64.79` on **8 cores**. ⭐ **No vitest, no node, nothing of the chair's was running.** The machine was doing its own housekeeping.
+2. **The refusing test passes 6/6 standalone, exit 0**, captured in-shell with no pipe.
+3. **It is nowhere in the consist's blast radius.** The consist touches `wizardNews.js`, `settlementRumors.js`, five test files, one manifest and the census baseline. The casualty is a **React dialog component test**.
+4. ⭐ **A DIFFERENT test failed than the last refusal** (that was `writerReach`). **Varied casualties on an overloaded box is the signature of resource starvation, not of a defect.**
+
+⇒ **Every instrument reading taken in this window is untrustworthy, so the correct act is to STOP, not to retry.** Re-running now would either bank a wrong figure or produce a green that proves nothing about the tree. **Nothing was banked. Nothing was hand-added to the census. The dock is unchanged and clean.**
+
+### ⚠ A REFINEMENT TO §885's `writerReach` CONCLUSION — offered as a refinement, NOT a reversal
+
+§885 recorded that `writerReach` *"passed in-suite at load 47 and failed in-suite at load 3.8, which DISPROVES the load diagnosis."* ⚠ **That inference assumed the load figures were comparable, and tonight shows they may not be**: the `LOAD_PRE`/`LOAD_AT_START` numbers include **external OS work that arrives and departs on its own schedule**, so a low reading at the *start* of a 20-minute run says little about the load *during* the minute a given test ran.
+⭐ **The §885 cure stands on its own evidence regardless** — that row blew a **20,000 ms** budget at **21,758 ms**, which is an arithmetic fact independent of why it was slow, and the fix was the instrument's own prescription. **But the confident word "DISPROVES" was over-stated**: the honest reading is that **load at run-start is a poor proxy for load at test-time**, and neither the load hypothesis nor its refutation was ever properly instrumented. ⭐ **THE LAW: a load figure sampled at the START of a long run is not evidence about a failure inside it.** To settle a contention question, sample load *at the moment of the failure* or do not claim to have settled it.
+
+### THE RESUME POINT
+Dock `laneINSTRLAND-tree` = **`108a02ef4`**, 4 cars over `2d5112851`, porcelain 0, census **refrozen and proven** (2504/370/2134/22696/6110, plain run 34/34 exit 0). **Owed, in order:** the ratchet `--update` on a quiet box → its register commit → the **pre-gate** (cheap stages, the new instrument's first real use) → the bare gate → chair-verify → CAS → seal → §886.
+⛔ **Resume condition, written down so it binds:** `build_hd_index` and the `find` sweep gone from the top of `ps -r`, and the **one-minute** load under ~5. Not a timer — a **measured** condition.
+
+*What Fable re-derives:* the "DISPROVES" refinement, because a confident word in a landing row is exactly the kind of thing a later seat inherits as settled.
+
+*Priority:* MEDIUM. The hold is correct and cheap; the over-stated word is the durable part.
