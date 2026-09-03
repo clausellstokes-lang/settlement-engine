@@ -96,9 +96,9 @@ const DECLARES_IDIOM = /(?:export\s+)?function\s+(?:hash01|softmaxWeights|stable
  * the argued-roster idiom, and it is why the constant is a COUNT rather than a list: a list
  * would restate what the registry already answers.
  */
-// 29 -> 30 at IN-1c-a (HBF-33, ODQ §85.1); 30 -> 31 at WF-8a (HBF-34, ODQ §350) — each move a
+// 29 -> 30 at IN-1c-a (HBF-33, ODQ §85.1); 30 -> 31 at WF-8a (HBF-34, ODQ §350); 31 -> 35 at ENC-1 (HBF-36..HBF-41, ODQ §885.7) — each move a
 // chair-authorized registry mint landing its fork row, never a lane absorbing a discovery.
-const DEFER_CEILING = 31;
+const DEFER_CEILING = 35;
 
 /** The named-domain checklist's row count, asserted rather than read off. */
 const NAMED_DOMAIN_ROWS = 14;
