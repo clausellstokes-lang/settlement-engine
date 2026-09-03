@@ -47,6 +47,7 @@ import { readFileSync } from 'node:fs';
 
 import {
   settlementRumors,
+  UNREGISTERED_SUBJECT,
   whatPhrase,
   WHAT_PHRASES,
 } from '../../src/domain/display/settlementRumors.js';
@@ -358,29 +359,53 @@ describe('THE STRICT NO-OP — a seedless call is byte-identical to before the w
     expect(whatPhrase('world_pulse', 'seeded')).toBe('unrest');
   });
 
-  it('a token in NEITHER corpus is inert to the seed', () => {
-    // The blast radius is the 170 pooled kinds. An unregistered token still degrades to
-    // its computed fallback exactly as it always did, seeded or not.
+  it('a token in NEITHER corpus is REFUSED, and is inert to the seed', () => {
+    // ⭐ RE-AUTHORED, AND THE CHANGE IS DECLARED. This pin used to assert
+    // `whatPhrase('flow_totally_unknown_token') === 'totally unknown token'` — it
+    // FROZE THE DEFECT: a display function de-underscoring an engine token into the
+    // reader's prose. The compute arm is gone, so an unregistered token now takes
+    // UNREGISTERED_SUBJECT. Seed-inertness is unchanged (the token still has no pool).
     const control = 'flow_totally_unknown_token';
     expectAbsentWithAnchor(FALLBACK_WIRED_KINDS, control, 'coup_detat', 'the §4 roster');
-    expect(whatPhrase(control)).toBe('totally unknown token');
+    expect(whatPhrase(control)).toBe(UNREGISTERED_SUBJECT);
+    // The line above pins the SAME call to an exact live constant, so a whatPhrase
+    // anchored: that returned nothing or drifted reds there before reaching this.
+    expect(whatPhrase(control)).not.toContain('totally unknown token');
     for (const seed of ['a', 'b', 'c', 'd', 'e']) {
-      expect(whatPhrase(control, seed)).toBe('totally unknown token');
+      expect(whatPhrase(control, seed)).toBe(UNREGISTERED_SUBJECT);
     }
   });
 
-  it('the prefix-strip behaviour itself is unchanged for unregistered tokens', () => {
-    // A sample across the strip regex's alternatives, none of them registered anywhere.
-    const cases = [
-      ['npc_zzz_unregistered', 'zzz unregistered'],
-      ['faction_zzz_unregistered', 'zzz unregistered'],
-      ['pantheon_zzz_unregistered', 'zzz unregistered'],
-      ['zzz_no_prefix_here', 'zzz no prefix here'],
-    ];
-    for (const [token, expected] of cases) {
-      expect(whatPhrase(token), `${token} seedless`).toBe(expected);
-      expect(whatPhrase(token, 'seeded-hard'), `${token} seeded`).toBe(expected);
+  it('the prefix-strip arm is UNREACHABLE for an unregistered token', () => {
+    // RE-AUTHORED from 'the prefix-strip behaviour itself is unchanged'. The strip is
+    // now gated on §4 registration, so none of these reaches it. The cases are the
+    // same sample across the strip regex's alternatives, and the point of keeping
+    // them is that each one used to produce readable-but-invented vocabulary.
+    for (const token of [
+      'npc_zzz_unregistered',
+      'faction_zzz_unregistered',
+      'pantheon_zzz_unregistered',
+      'zzz_no_prefix_here',
+    ]) {
+      expect(whatPhrase(token), `${token} seedless`).toBe(UNREGISTERED_SUBJECT);
+      expect(whatPhrase(token, 'seeded-hard'), `${token} seeded`).toBe(UNREGISTERED_SUBJECT);
+      // The two toBe assertions above pin this same call to the live refusal
+      // anchored: constant, so an empty or drifted return reds there, not here.
+      expect(whatPhrase(token), `${token} must not be de-underscored`).not.toMatch(/zzz/);
     }
+  });
+
+  it('THE GATE IS THE REGISTRATION, NOT THE SHAPE — the 107 are byte-identical', () => {
+    // The positive control on the two negatives above. Refusing everything would
+    // satisfy them both; this proves the gate admits exactly the governed corpus, and
+    // that the strip computation behind it still produces the same bytes it always
+    // did — including the twelve anchors it mutilates on purpose.
+    for (const kind of FALLBACK_WIRED_KINDS) {
+      expect(whatPhrase(kind), `${kind} must still compute its corpus canonical`)
+        .not.toBe(UNREGISTERED_SUBJECT);
+    }
+    expect(whatPhrase('coup_detat')).toBe('detat');
+    expect(whatPhrase('institution_capture')).toBe('capture');
   });
 });
 
@@ -569,14 +594,27 @@ describe.each(LIVE_PATH_KINDS)('THE LIVE PATH — %s hears the widened pool', (_
 });
 
 describe('THE LIVE PATH — the blast radius, on the read-model', () => {
-  it('an unregistered token on the same live path still renders one fixed phrase', () => {
+  it('an unregistered token REACHES THE READER REFUSED, not de-underscored', () => {
+    // ⭐ RE-AUTHORED, AND THE CHANGE IS DECLARED. This pin used to assert that every
+    // rendered headline for an unregistered token CONTAINED 'totally unknown token'
+    // — it froze the engine slug's arrival on the flagship fiction surface as
+    // correct behaviour. The compute arm is gone. The token now renders the neutral
+    // refusal phrase, still one fixed phrase (it has no pool), and the slug is
+    // asserted ABSENT from the rendered prose rather than required in it.
     const control = 'flow_totally_unknown_token';
     const feed = Array.from({ length: 8 }, (_, i) => tellingEvent(i, control));
     const rumors = settlementRumors({ worldState: worldWith(feed), settlementId: 'a' });
-    const subjects = new Set(
-      rumors.map((r) => (r.headline.toLowerCase().includes('totally unknown token') ? 'hit' : null)).filter(Boolean),
-    );
     expect(rumors.length).toBeGreaterThan(1);
-    expect([...subjects]).toEqual(['hit']);
+    const carrying = rumors.filter((r) => r.headline.toLowerCase().includes(UNREGISTERED_SUBJECT));
+    // The liveness anchor for the negative below: the refusal really did reach the
+    // rendered headline, so the absence assertion is a measurement and not a vacuum.
+    expect(carrying.length, 'no rendered headline carried the refusal phrase').toBeGreaterThan(1);
+    for (const r of rumors) {
+      // `carrying.length > 1` above proves these headlines exist AND carry the refusal
+      // anchored: phrase, so the loop cannot be running over an empty or prose-less feed.
+      expect(r.headline, 'an engine slug reached the reader').not.toMatch(/totally unknown token/i);
+      // anchored: same liveness anchor as the line above.
+      expect(r.headline).not.toMatch(/_/);
+    }
   });
 });

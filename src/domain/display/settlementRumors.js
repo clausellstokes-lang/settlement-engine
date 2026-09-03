@@ -108,10 +108,17 @@ function avalanche32(h) {
 // engine vocabulary onto the flagship fiction surface. This map turns every
 // known token into a noun phrase a townsperson would actually say — usable both
 // capitalized-first ("Soldiers marching to war in X") and after "word of …".
-// Any UNKNOWN token falls to whatPhrase()'s neutral fallback, never the raw token.
+// Any UNKNOWN token is REFUSED by whatPhrase(), never de-underscored into prose.
 // Pure display; byte-inert to the engine (goldens never import this).
-// Exported for the impactKind walker (tests/domain/settlementRumors.walker.test.js),
-// which source-scans every minted impactKind and reds until it is phrased here.
+//
+// ⚠ THE CITATION THIS COMMENT USED TO CARRY NAMED A FILE THAT HAS NEVER EXISTED
+// (`tests/domain/settlementRumors.walker.test.js`) — a guard claimed at an address
+// with no guard behind it. Corrected to the walkers that are really there:
+//   • tests/domain/impactKindWalkers.test.js — literal `impactKind:` mints
+//   • tests/lint/newsSubjectVocabulary.walker.test.js — the CONSUMER-side walker,
+//     which also resolves module-constant and template mints and CONVICTS a mint
+//     it cannot resolve instead of skipping it
+//   • tests/lint/heraldRouting.walker.test.js — every row here must be routed
 /** @type {Readonly<Record<string, string>>} */
 export const WHAT_PHRASES = Object.freeze({
   // war / conflict candidate types
@@ -409,6 +416,60 @@ export const WHAT_PHRASES = Object.freeze({
   commons_petition: 'a petition raised by the common folk',
   commons_gathering: 'the commons gathered in the square',
   commons_riot: 'the streets risen in a riot-band',
+  // ── THE REFUSAL COHORT (newsSubjectVocabulary) ────────────────────────────
+  // Twenty-seven kinds the engine mints TODAY and no corpus had ever voiced. Before
+  // this block each one reached the reader as whatever the compute arm made of its
+  // token: "settlement terminal death", "vassal tribute extraction", "war spoils
+  // ended", "verdict". They are authored here rather than merely refused because a
+  // refusal is honest but silent, and these are live beats a townsperson would
+  // certainly have words for.
+  //
+  // SEVEN OF THEM WERE STRUCTURALLY INVISIBLE until now: the npc_* rows below are
+  // minted through MODULE CONSTANTS (`candidateType: VERDICT_NEWS_TYPE`), which no
+  // raw-text walker in this tree could see. treatySuccessionVoice.js's docblock asks
+  // authors to spell literals on purpose for exactly that reason; the new walker
+  // resolves the constant instead of asking.
+  //
+  // None carries a variant pool: a row without a pool is the existing accepted shape
+  // (most rows in this map have none) and pools are corpus-governed work.
+  // THE BROKERAGE ACTS (brokerageServicesRules.js BROKERAGE_ACTS). Minted through a
+  // variable, so no literal walker ever saw them; they were voiced only by the compute
+  // arm, as "brokerage query" / "brokerage feed". Their own local census in
+  // tests/domain/brokerageServices.test.js requires the word `brokerage` to survive
+  // into the reader's phrase, which is why each keeps it. All four route by the
+  // `brokerage_` family prefix, so none needs an EXACT_SECTION row.
+  brokerage_query: 'a question put to the brokerage',
+  brokerage_feed: 'word fed through the brokerage',
+  brokerage_intercept: 'a message the brokerage intercepted',
+  brokerage_plant: 'a rumour planted through the brokerage',
+  envoy_dispatched: 'an envoy sent out',
+  npc_arrival: 'a new arrival',
+  npc_assignment: 'a post newly filled',
+  npc_death: 'a funeral bell',
+  npc_dispersal: 'a company scattered',
+  npc_pardon: 'a pardon granted',
+  npc_rejection: 'a petitioner turned away',
+  npc_verdict: 'a verdict handed down',
+  occupation_posture: 'the occupiers changing their bearing',
+  razing: 'buildings put to the torch',
+  // The regional relief beat. wizardNews intercepts it for its own positive-sign
+  // headline; the rumor net had no word for it at all.
+  relief: 'the worst of it past',
+  resource_discovery: 'a new find',
+  resource_removal: 'a source of goods run dry',
+  // The lifecycle pair, deliberately answering each other.
+  settlement_resettled: 'hearths lit again',
+  settlement_terminal_death: 'the last hearths going cold',
+  sovereignty_conveyed: 'a crown passing to another hand',
+  steading_forced: 'a new steading founded',
+  strategy_sue_for_peace: 'a suit for peace',
+  supply_raid_ordered: 'a raid on the supply trains',
+  trade_embargo_collapse: 'an embargo fallen away',
+  trade_embargo_declared: 'an embargo laid on trade',
+  vassal_rebellion: 'a sworn vassal in revolt',
+  vassal_tribute_extraction: 'tribute taken from a vassal',
+  war_exhaustion_cleared: 'the war weariness lifted',
+  war_spoils_ended: 'the last of the war spoils spent',
 });
 
 // Bare LIFECYCLE/transition kinds — when a rumor's subject falls back to the
@@ -421,15 +482,46 @@ const TRANSITION_KINDS = new Set([
   'proposal', 'condition', 'stirring', 'update', 'world_pulse',
 ]);
 
-// Engine prefixes the neutral fallback strips before de-underscoring an unknown
-// token, so a future candidateType degrades to readable words, never a raw slug.
+// Engine prefixes the §4 corpus strips before de-underscoring a GOVERNED token. It
+// is no longer reachable for an unregistered one: see whatPhrase's refusal arm.
 const WHAT_STRIP_PREFIX = /^(npc_|stressor_birth_|stressor_|party_|flow_|faction_|faith_|war_|institution_|occupation_|coup_|resource_|pantheon_)/;
+
+// The two neutral subjects, and they are DELIBERATELY DIFFERENT STRINGS.
+//
+// NEUTRAL_SUBJECT answers the empty and lifecycle-token arms, where the record
+// genuinely carries no subject of its own. It keeps the word it has always used, so
+// those arms are byte-identical.
+//
+// UNREGISTERED_SUBJECT answers a token that IS a subject but one nothing has voiced.
+// One phrase cannot serve both: 'unrest' over `treaty_signed` would narrate a peace
+// as a disturbance, which is a worse lie than the slug it replaces. This phrase is
+// deliberately neutral in SIGN as well as in content, because the refusal arm cannot
+// know whether the beat it is declining to name was good news or bad.
+const NEUTRAL_SUBJECT = 'unrest';
+// Exported so the pins that govern the refusal read the LIVE string rather than a
+// transcription of it: a test that spelled this phrase again could drift from what
+// it anchors, which is the same canonical-at-zero law the §4 corpus runs on.
+export const UNREGISTERED_SUBJECT = 'a matter of some moment';
 
 /**
  * A what-token → the in-world phrase a settlement would use for the rumor's
- * subject. Known tokens map explicitly; bare lifecycle kinds neutralize to
- * 'unrest'; any other unknown token strips its engine prefix and de-underscores
- * (readable, never a raw slug), falling to 'unrest' if nothing usable remains.
+ * subject. Known tokens map explicitly; bare lifecycle kinds neutralize; a GOVERNED
+ * §4 kind takes its corpus pool; and ANY OTHER TOKEN IS REFUSED.
+ *
+ * ⛔ THIS FUNCTION SELECTS VOCABULARY AND DOES NOT MINT IT. It used to end with a
+ * compute arm — strip an engine prefix, de-underscore the remainder, ship whatever
+ * came out — which is a DISPLAY function authoring the world's words. That arm is
+ * why a hundred-year campaign printed "Merchants bring word of settlement terminal
+ * death in Thornwall" twenty times while the Herald's own authored headline for the
+ * identical event read "Thornwall is dying". It is deleted.
+ *
+ * THE REFUSAL IS THE HALF NO SOURCE SCAN CAN REPLACE. A source walker can only see
+ * tokens spelled in the tree it scans; a token arriving from an OLD SAVE or a
+ * `source:'table'` import is invisible to every scan that will ever exist, and
+ * normalizeEntry passes `impactKind` straight off save data. The refusal is what
+ * closes that route. Conversely the walker is what stops the refusal from quietly
+ * becoming the common case as new kinds ship. NEITHER HALF IS SUFFICIENT ALONE, so
+ * do not delete one believing the other covers it.
  *
  * THE WIDENED POOLS (SP-6's legacy clause, RECEIPT_POOLS_LEGACY.md §3 and §4).
  * BOTH arms of this function now widen, from two corpora that differ only in where
@@ -448,22 +540,32 @@ const WHAT_STRIP_PREFIX = /^(npc_|stressor_birth_|stressor_|party_|flow_|faction
  *   • SEEDLESS IS BYTE-IDENTICAL — no seed means index 0, so every caller that asks
  *     for a phrase without a telling to key on (walkers, glossary checks, the
  *     impactKind census) reads exactly what it read before this wiring.
- *   • AN UNREGISTERED TOKEN IS UNTOUCHED — a token in neither corpus takes the same
- *     path it always took, seeded or not, so the blast radius is exactly the 170
- *     pooled kinds.
+ *   • AN UNREGISTERED TOKEN IS REFUSED — a token in neither corpus takes
+ *     UNREGISTERED_SUBJECT, seeded or not. It is inert to the seed for the same
+ *     reason it always was (no pool), but it no longer renders a computed slug.
  * @param {unknown} value
  * @param {string} [seed] the telling's stable ref; absent ⇒ the canonical row
  * @returns {string}
  */
 export function whatPhrase(value, seed = '') {
   const key = String(value || '').trim().toLowerCase();
-  if (!key) return 'unrest';
+  if (!key) return NEUTRAL_SUBJECT;
   const canonical = WHAT_PHRASES[key];
   if (canonical) return widenedPhrase(key, canonical, WHAT_PHRASE_POOLS[key], seed);
-  if (TRANSITION_KINDS.has(key)) return 'unrest';
-  const stripped = key.replace(WHAT_STRIP_PREFIX, '').replace(/_/g, ' ').trim();
-  if (!stripped) return 'unrest';
-  return widenedPhrase(key, stripped, FALLBACK_PHRASE_POOLS[key], seed);
+  if (TRANSITION_KINDS.has(key)) return NEUTRAL_SUBJECT;
+  // THE §4 ARM, GATED ON REGISTRATION. The strip-and-de-underscore computation is
+  // unchanged and still produces the byte-identical canonical for all 107 governed
+  // kinds — including the twelve MUTILATED anchors, which stay mutilated on purpose
+  // (owner-gated, wiring note LEG-7). What changed is that it is now reachable ONLY
+  // for a kind the §4 corpus actually holds. Gating rather than freezing 107 literals
+  // keeps the estate's own CANONICAL-AT-ZERO property: index 0 remains the live
+  // computation, never a transcription of it that could drift from what it anchors.
+  const legacyPool = FALLBACK_PHRASE_POOLS[key];
+  if (legacyPool) {
+    const stripped = key.replace(WHAT_STRIP_PREFIX, '').replace(/_/g, ' ').trim();
+    if (stripped) return widenedPhrase(key, stripped, legacyPool, seed);
+  }
+  return UNREGISTERED_SUBJECT;
 }
 
 /**

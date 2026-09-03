@@ -54,6 +54,7 @@ import { readFileSync } from 'node:fs';
 
 import {
   settlementRumors,
+  UNREGISTERED_SUBJECT,
   whatPhrase,
   WHAT_PHRASES,
 } from '../../src/domain/display/settlementRumors.js';
@@ -261,8 +262,11 @@ describe('THE STRICT NO-OP — a seedless call is byte-identical to before the w
     expect(whatPhrase(null)).toBe('unrest');
     expect(whatPhrase('applied')).toBe('unrest');
     expect(whatPhrase('applied', 'seed-does-not-matter-here')).toBe('unrest');
-    expect(whatPhrase('flow_totally_unknown_token')).toBe('totally unknown token');
-    expect(whatPhrase('flow_totally_unknown_token', 'seeded')).toBe('totally unknown token');
+    // ⭐ RE-AUTHORED, AND THE CHANGE IS DECLARED. The compute arm these two froze is
+    // gone: an unregistered token is refused rather than de-underscored. Seed
+    // inertness — the property this block is actually about — is unchanged.
+    expect(whatPhrase('flow_totally_unknown_token')).toBe(UNREGISTERED_SUBJECT);
+    expect(whatPhrase('flow_totally_unknown_token', 'seeded')).toBe(UNREGISTERED_SUBJECT);
   });
 
   it('an UNWIRED registered kind ignores the seed entirely', () => {

@@ -76,7 +76,7 @@ import { compactOutcomeForHistory } from '../../src/domain/worldPulse/pulseHelpe
 import { advanceInformationStatecraft } from '../../src/domain/worldPulse/informationStatecraft.js';
 import { GOVERNING_SEAT_KEY, reconcileBelief } from '../../src/domain/worldPulse/beliefMap.js';
 import { standingPlantsAgainst } from '../../src/domain/briefs/composers.js';
-import { WHAT_PHRASES, whatPhrase } from '../../src/domain/display/settlementRumors.js';
+import { UNREGISTERED_SUBJECT, WHAT_PHRASES, whatPhrase } from '../../src/domain/display/settlementRumors.js';
 import { SECTION_OF, HERALD_SECTIONS } from '../../src/domain/realm/heraldRouting.js';
 import { SIGNIFICANCE_CLASSES } from '../../src/domain/worldPulse/bandFamilies.js';
 import {
@@ -859,7 +859,13 @@ describe('IN-0a — lifecycle and registration', () => {
     // the shape being refused, so the negative measures a registration rather than a
     // collection that drifted away.
     expect(whatPhrase(PLANT_TOOK_KIND)).not.toBe(PLANT_TOOK_KIND.replace(/_/g, ' '));
-    expect(whatPhrase(`${PLANT_TOOK_KIND}_unregistered`)).toBe('plant took unregistered');
+    // ⭐ RE-AUTHORED CONTROL, AND THE CHANGE IS DECLARED. This line proved the
+    // UNREGISTERED arm was live by showing it de-underscored the token. That arm is
+    // gone; the arm that is live now REFUSES. The control still does its one job —
+    // it shows an unregistered kind takes a visibly different path from a registered
+    // one — so the negative above still measures a registration.
+    expect(whatPhrase(`${PLANT_TOOK_KIND}_unregistered`)).toBe(UNREGISTERED_SUBJECT);
+    expect(whatPhrase(`${PLANT_TOOK_KIND}_unregistered`)).not.toBe(whatPhrase(PLANT_TOOK_KIND));
     // heraldRouting: an EXPLICIT desk of the frozen vocabulary, filed with its own siblings.
     // Asserting membership alone would pass on the catch-all, i.e. on no registration at all.
     expect(HERALD_SECTIONS).toContain(SECTION_OF(PLANT_TOOK_KIND));

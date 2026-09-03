@@ -16,6 +16,7 @@ import {
   hasRumorLedgers,
   HEADLINE_FRAMES,
   settlementRumors,
+  UNREGISTERED_SUBJECT,
   whatPhrase,
 } from '../../src/domain/display/settlementRumors.js';
 import { WHAT_PHRASE_POOLS } from '../../src/domain/display/rumorPhrasePools.js';
@@ -301,9 +302,19 @@ describe('read-model mechanics', () => {
     expect(whatPhrase('')).toBe('unrest');
     expect(whatPhrase(null)).toBe('unrest');
     expect(whatPhrase('treaty_breached')).toBe('an oath between realms broken');
-    // An unknown future token degrades to readable words, never a raw slug.
-    expect(whatPhrase('npc_some_future_arc')).toBe('some future arc');
-    expect(whatPhrase('utterly_new_beat')).toBe('utterly new beat');
+    // ⭐ RE-AUTHORED, AND THE CHANGE IS DECLARED. These two used to assert that an
+    // unknown token "degrades to readable words" — which is precisely the defect:
+    // readable words this display layer INVENTED for a beat nobody had voiced. An
+    // unregistered token is now REFUSED, and the slug is asserted absent rather than
+    // required present.
+    expect(whatPhrase('npc_some_future_arc')).toBe(UNREGISTERED_SUBJECT);
+    // The line above pins the SAME call to the live refusal constant, and the
+    // anchored: registered-kind control below proves whatPhrase still resolves at all.
+    expect(whatPhrase('npc_some_future_arc')).not.toContain('some future arc');
+    expect(whatPhrase('utterly_new_beat')).toBe(UNREGISTERED_SUBJECT);
+    // The positive control on both: a REGISTERED kind still takes its own words, so
+    // the refusal above measures registration and not a function that stopped working.
+    expect(whatPhrase('treaty_breached')).toBe('an oath between realms broken');
   });
 
   // ── HEADLINE FRAME variety (content-vt-2) ──────────────────────────────────
