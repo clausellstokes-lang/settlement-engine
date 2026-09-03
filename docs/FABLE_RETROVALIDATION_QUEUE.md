@@ -3096,3 +3096,33 @@ The chair's train (O-12 + O-16 + the Herald cure) measured **22823 → 22836 = +
 *What Fable re-derives:* the deity-doctrine non-engagement read, and the claim that reporting SIGNED is unconstructible.
 
 *Priority:* **HIGH for the retraction** — a false finding reached the owner; MEDIUM for O-17.
+
+## §890.4 · THE `src/` PROSE SWEEP LANDS ON ITS DOCK — and the chair RULES IT INTO THE LIGHTING WAVE rather than minting a window (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+Sealed `refs/preserve/srcprose-2026-09-03` = **`8f4d5c648ce62fc51231110b9c4ace2127fbdd18`** — unreferenced when the lane reported; **the eighth payout of the §882.14 survival law today.** One commit, **200 paths, +1,084/−1,019.**
+
+**The measured shape.** **1,481** em dashes in `src/**/*.js` string literals, re-derived with a real parser — **1,001 cured as reader prose, 480 exempt with a written reason each** (developer registers 348, parse-coupled separators 51, diagnostics 30, generated leaves 24, structural/brand 18, the empty-value glyph 7, and 2 literals that are *compared* rather than displayed). Disposition judged per site: **COLON 437 · PERIOD 402 · COMMA 84 · PAREN 39 pairs**, with the colon/period split moving by 108 rows during review **in both directions** — a reviewer changing its own mind is the evidence the judgment was real. A re-sweep at the committed tip reports in-scope **zero**, and the prose diff is **989 insertions / 989 deletions with every individual file symmetric.**
+
+**The 28 byte-twins were bound by TEXT, not by the inherited line numbers** — 28/28 landing on exactly the lines the predecessor's ledger recorded, then **re-verified after the cure** by re-reading each annex row against its owning file's literals: 28/28, with the 17-file twin battery byte-identical to base.
+
+### ⭐⭐ THE GUARD'S COUNTER WAS A FALSE INSTRUMENT IN BOTH DIRECTIONS
+
+`structuralValidator.js` measured **39 exclamation points by its tokenizer and ZERO by a parser**, and **64 of 71 bangs over the unscanned directories were phantom.** Replaced with `espree`. ⭐ **That repair is what makes this car bankable at all:** under the old counter the documented refreeze would have thrown on `bang 10 → 15`, so this lane's own shrink could never have been banked. Under the parser both totals fall and the refreeze is legal — the E2 total arm went **green, 770 → 290.**
+
+⚠ **AND AN INSTRUMENT THAT PUNISHES ITS OWN CURE, reported rather than widened:** the E2 per-file `files` magnitude counts **drifted** files, so *removing* debt from 88 files pushes it **69 → 126.** The landing's refreeze clears it; the lane refused to widen a ceiling to make its own work pass.
+
+### FOUR PARSE-COUPLED PRODUCERS A `src/`-ONLY CENSUS CANNOT SEE
+
+Beyond three classifier bugs, the review found a **comparator** class (`safetyLabel === 'Dangerous — Criminal Governance'` would have been half-changed, **silently killing a crime-type branch**), a backtick-boundary bug hiding 23 appended fragments, an aside that could not pair across a quasi, and a sentence splitter **reading code punctuation** — a ternary's `?` ending a "sentence". Then four real defects, each reverted at cause: `customContentSchema.js`, whose parser's **own docstring says the dash is the delimiter** (curing it leaked glosses into the UI); the `heraldCausalVoice` headline register (**56 of 56 cases red**); `economicState`'s services rows; and the `NPC — ` journal prefix. ⭐ **THE LAW: A CONSUMER CAN LIVE IN `tests/`, IN A `.jsx` COMPONENT, OR INSIDE A REGEX** — a producer census scoped to `src/` will not find the thing that parses the character you are removing.
+
+⭐ **The lane also corrected its OWN earlier claim.** It first reported that no golden needed re-recording, on a **fragment search** — the wrong instrument, because **a golden storing a digest is invisible to a content search.** The full suite found two. And it refused to claim ~20 first-run "timeouts" as its own: 21 assertions failing at base pass at tip, so they were contention, and *"reporting those as mine would have been a false report."*
+
+### ⛔ THE BLOCKER, AND THE CHAIR'S RULING
+
+`espionageDormancyFence.test.js:332` states the constant is re-recorded **ONLY inside a NAMED CHARTERED WINDOW**, that ENGINE-HYGIENE spent one and T13 TRANS closed with zero movement, and that **"exactly ONE remains: the LIGHTING WAVE (§881.4)"** — anything else moving it being *"an unpriced same-seed shift in the world a player gets."* **The mover is this car, doing exactly what its declared shift says.** It re-recorded nothing; **8 files and 11 assertions stand owed.**
+
+⇒ **CHAIR RULING: THE PROSE CAR RIDES THE LIGHTING WAVE. The chair does not mint a second window.** The surviving window is named by **§881.4, an OWNER directive**; both spent windows were named the same way. The owner approved this sweep today and the shift is priced, measured and declared — so the *purpose* of the fence is satisfied — but **the mechanism requires a NAMED window and naming one is the owner's act, not the chair's.** Sequencing around a recorded constraint costs nothing but order; ruling past one is what the chair already did wrong once today (§890.1). ⭐ **The owner may charter this sweep as its own window with a single word if they want it sooner; until then the car is sealed and rides.**
+
+*What Fable re-derives:* the false-counter finding (39 by tokenizer, 0 by parser) and the four parse-coupled reverts.
+
+*Priority:* **HIGH** — 1,001 reader-facing sentences moved, and the car is gated only on a window.
