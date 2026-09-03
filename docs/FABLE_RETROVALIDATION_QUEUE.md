@@ -2626,3 +2626,47 @@ The lane reported that at the §885 gated tip **both registers were refrozen BEF
 *What Fable re-derives:* the census-delta-is-not-the-arm-delta finding first, because it silently mis-prices every future refreeze budget. Then the 14-not-13 correction, which moves an owner row.
 
 *Priority:* **HIGH for the census finding.** MEDIUM for the rest.
+
+---
+
+## §885.5 · TRAIN 2 IS BUILT AND ITS WORDINGS ARE APPROVED — the lane corrected the spec the chair ratified (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**Three cars** on branch `lane-NEWSTRAIN-2026-09-02`: `4b00f971b` Cure A · `af838ffbb` Cure B · `0362adcd4` the walker. Porcelain 0, three trailers, reachable by its own ref. Nine files, the largest being a **642-line** new walker.
+
+### ⭐ THE WORDINGS: APPROVED, AND ON A GROUND STRONGER THAN TASTE
+
+The chair reserved wording review at §885.3 and exercised it. ⭐⭐ **The decisive fact, CHAIR-VERIFIED BY EXECUTION: these are not new inventions — they MIRROR the vocabulary the product already speaks on an adjacent surface.** `conflict_pressure` renders **"the drums of war"** and `migration_pressure` renders **"people on the move"** in the *existing* `WHAT_PHRASES`, and the new `IMPACT_LABELS` use those exact strings. **The rumor surface has been saying "the drums of war" for the very `impactKind` this file spelled `'Conflict pressure'`.** ⇒ **The cure UNIFIES two registers rather than adding a third**, which is a far better warrant than either the lane's taste or the chair's.
+
+The twelve: `a shortage of goods` · `lost markets` · `the roads gone bad` · `a shaken authority` · `coffers running short` · `defences grown thin` · `services faltering` · `the drums of war` · `people on the move` · `unsettling news` · `a rise in lawlessness` · `a stir among the faithful`.
+
+**The chair ran the two-way frame-fit law by hand across all six frames** (the one law no test can hold). All twelve read. ⭐ **The `expired` frame is the best thing in the set — "Elmspur is spared the drums of war" REPORTS A NON-EVENT**, which is the Herald's own strongest trick and the thing most simulations cannot do at all. ⚠ **Two noted as weakest, as notes rather than blocks:** *"services faltering"* is the most awkward in the `expired` frame, and *"unsettling news"* is the most generic of the twelve. Neither is bad enough to hold a car.
+
+**APPROVED also:** the neutral fallbacks — `a hard turn in its fortunes`, `a neighbouring town`, `a far settlement` — which replace `'A regional source'` and `'the target'`, ⭐ **the software naming its own parameters inside diegetic copy.** And Cure B's refusal phrase `a matter of some moment`, **deliberately neutral in SIGN** because the arm cannot know whether the beat it declines to name was good or bad — `'unrest'` over `treaty_signed` would narrate a peace as a disturbance.
+
+### ⛔ THE LANE CORRECTED THE SPEC THE CHAIR RATIFIED
+
+**The spec's 19-token live roster is PARTLY UNSOUND and the lane refused to build on it.** It was measured by scanning `kind:` **anywhere** in `src`, which admits non-news properties: `siege_initiation` and `tier_change` are `proposalPayload.kind`; `settlement` is a briefs read-model item kind. The lane's sound enumeration is the `impactKind:`/`candidateType:` mint scan — **199 sites: 147 literal, 14 template families, 11 resolved through module constants, 27 unresolvable — yielding 26 unregistered tokens.** ⭐⭐ **And eleven sites resolve ONLY through module constants, seven of whose tokens NO WALKER IN THIS TREE COULD SEE** (`npc_verdict`, `npc_arrival`, `npc_death`, `npc_dispersal`, `npc_pardon`, `npc_rejection`, `npc_assignment`) — **exactly the class a docblock asks authors to avoid by convention.** The walker now sees them.
+
+**The honest bill was SIX pins, not the two the spec named** — all re-authored with the change stated in place, including one in the same file that *required* the slug in a rendered headline. ⭐ **A new POSITIVE control was added so the negative pins cannot pass by refusing everything.** And ⭐ **`BROKERAGE_ACTS` was a cohort the lane missed by reading and its own local census caught** — four acts voiced only by the compute arm, now registered.
+
+### THREE DIVERGENCES FROM THE SPEC, ALL RATIFIED
+
+*(1)* **The 107 §4 strings are GATED, not frozen as a 107-row literal table** — same bytes **by construction**, preserves the estate's canonical-at-zero law which a literal table would break, and two lines instead of 107 rows of eager bytes. **Better than the spec.** *(2)* **No `{source}` in the headline** — `sourceSettlementId` is **optional** on a hand-built impact, so the spec's exemplar frame **would assert an origin the record may not hold.** ⭐ That is the address law doing its job against a spec the chair approved. *(3)* `route_chartered`/`route_revived` **deferred and documented** — registering them needs an `EXACT_SECTION` row, which would **grow a shrink-only census**; the tree records that identical trap for another token in its own words. The reader is already protected; only the information is deferred.
+
+### ⛔ ONE CORRECTION THE CHAIR OWES THE LANE
+
+The lane reports Cure A as **freeze-blocking**, citing persisted headlines and immutable lived history. ⛔ **That was WITHDRAWN at §884.6: the owner stated there are no saves and the product is entirely prelaunch, so the straddle case has no instances.** The lane could not have known. **Cure A is freeze-PREFERRED, not freeze-blocking** — cheaper before the freeze, possible after with a declared shift.
+
+### VERIFICATION AND HYGIENE
+
+**Chair-verified by own reads:** the `createdAt` fallthrough and its five siblings are **untouched** (zero `nowIso` lines in the diff) · paid surface untouched · **zero em dashes in added non-comment `src` lines** ⚠ *(the chair's own first check mis-sliced — an apostrophe in `software's` opened a false string literal, which is the mis-slicing hazard this program documents, committed by the chair while checking for it)* · and ⭐ **the twelve mutilated anchors are not merely untouched, the lane ADDED A PIN locking them**: `expect(whatPhrase('coup_detat')).toBe('detat')`. Execution at the tip confirms all four still render their mutilated strings.
+
+⭐ **A LAW BANKED TONIGHT PAID OFF INSIDE A LANE:** a `nohup … &` sweep **reported exit 0 while its log had no `TRUE_EXIT` line and no summary** — the launcher's exit, not vitest's. **The lane discarded it and re-ran in the foreground.** That is §884.4's law catching a real false green one lane removed from where it was learned.
+
+⚠ **A flake observed and correctly NOT attributed:** `npcAuthoringScope.test.jsx` failed once in a large mixed batch, is green alone at tip, green at base in the identical batch, green in a 1,587-file batch, and did not reproduce.
+
+**Owed at landing, last:** one register act — the new walker moves the lighting census, `files` **2503 → 2504**, which was the lane's written E4 prediction and is confirmed. The refreeze **refuses on a dirty tree**, so it structurally cannot precede the commits.
+
+*What Fable re-derives:* the wordings, since taste is the one thing no test holds — though the mirroring warrant makes them far more defensible than fresh authorship. Then the 26-vs-19 correction, and the seven tokens no walker could see.
+
+*Priority:* MEDIUM. **HIGH for the seven invisible tokens**, which are a live class rather than a finished one.
