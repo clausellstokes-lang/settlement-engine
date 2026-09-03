@@ -550,6 +550,22 @@ describe('THE NPC READ MODEL STAYS DARK — the vocabulary is lit ONLY through t
     // `AXIS:pole:level` token rung-for-rung onto the funnel's band ladder
     // (§806/F14; W-LIVES §6). Reached by NOBODY.
     'src/domain/worldPulse/faithWitnessSource.js',
+    // ⭐ ENC-1's CHANCE-MEETING LEAF, enrolled as a THIRD dark consumer, and the row is
+    // classified rather than waved through. The leaf reads two legacy personality word
+    // lists as axis positions and projects them back to words — `axisPositionForWord`,
+    // `wordForAxisPosition` and `traitColumns`, which is this catalog's whole purpose and
+    // has no second home. It is a TRUE-LEAF read: the catalog imports nothing, so no
+    // darkness travels in with it, and the leaf itself is reached by NOBODY under src/
+    // (its stage is ENC-3, unbuilt) — proven by the closure law below, which the row is
+    // also enrolled in because DARK_CONSUMERS may not hold a member the closure cannot see.
+    //
+    // ⚠ AND THE ROW IS AN ENROLMENT, NOT A CURE, BECAUSE THE READ IS CORRECT. The leaf's
+    // OTHER character reads were defects and were cured in the leaf rather than enrolled
+    // here: it imported `characterDrift.js` (a second production door onto a family whose
+    // one door is enumerated) and hand-spelled the authored-core key off a KnownReading.
+    // Both now arrive as arguments. What is left is a new, legitimate, dark consumer of a
+    // vocabulary that exists to be consumed, so the honest act is to name it.
+    'src/domain/worldPulse/envoyChanceMeeting.js',
   ].sort());
 
   /**
@@ -610,6 +626,13 @@ describe('THE NPC READ MODEL STAYS DARK — the vocabulary is lit ONLY through t
     // the lighting day's subject, and this closure is where it stays dark until then.
     Object.freeze({ rel: 'src/domain/npc/characterReadModel.js',
       symbols: Object.freeze(['characterDossier', 'biographyOf', 'characterArticles', 'readingOf', 'leadLine']) }),
+    // ⭐ ENC-1's chance-meeting leaf, on the same hop as every other dark member: it reads
+    // the catalog and is itself read by nobody. The symbols are its entry points and its
+    // tuning table — the four names a reach into this leaf would have to spell — so a
+    // stage wired early reds HERE rather than lighting the vocabulary unannounced. ENC-3
+    // is the car that lights it, and it arrives with the flag door and the dormancy proof.
+    Object.freeze({ rel: 'src/domain/worldPulse/envoyChanceMeeting.js',
+      symbols: Object.freeze(['resolveChanceMeeting', 'censusChanceMeetingCandidates', 'selectChanceMeetings', 'CHANCE_MEETING_TUNING']) }),
   ]);
 
   const ENROLLED_CONSUMERS = [...DARK_CONSUMERS, ...LIT_CONSUMERS.map(({ rel }) => rel)].sort();
@@ -932,7 +955,10 @@ describe('THE NPC READ MODEL STAYS DARK — the vocabulary is lit ONLY through t
       expect(namers).toEqual([...ENROLLED_CONSUMERS, ...MIRROR_LEAVES, ...CITATION_LEAVES].sort());
       // anchored: the scan is over a real tree and really found the enrolled set,
       // so an empty or renamed roster could not pass this vacuously.
-      expect(namers.length).toBe(10);
+      // ⭐ TEN BECAME ELEVEN AT ENC-1, and the count moves with the roster on purpose:
+      // it is the arm that refuses a roster grown to swallow whatever the tree happens to
+      // hold, so it is edited by the car that names the eleventh file and by nobody else.
+      expect(namers.length).toBe(11);
     });
   });
 

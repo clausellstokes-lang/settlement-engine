@@ -54,10 +54,40 @@
  * ⛔ EVERY VALUE IN `CHANCE_MEETING_TUNING` IS A DRAFT AND UNSIGNED. Tuning is the owner's
  * and it is LAST (§12 row 7). Nothing here is taste this leaf claims.
  *
+ * ── EVERY CHARACTER READ ARRIVES AS AN ARGUMENT ─────────────────────────────────
+ *
+ * ⛔ THIS LEAF HOLDS NO OPINION ABOUT THE DRIFT MACHINERY. The (pole, level) → signed
+ * rung read is W-LIVES car L2's `positionValue`, and it reaches every function here as
+ * an ARGUMENT rather than as an import — the shape W-OPS car O5's depth-priced drift
+ * leaf already ships for L2's floor and clamp, whose header states the law: "every
+ * constant of theirs … arrives here as an ARGUMENT, so a second opinion about any of
+ * them is structurally unavailable rather than merely discouraged."
+ *
+ * ⚠ THAT LEAF IS NOT NAMED BY FILE HERE, AND THE OMISSION IS ITS OWN FINDING. Its
+ * darkness walker scans src for its basename on RAW text, so a comment CITING it is read
+ * as an import — the estate's settled citation law (comments and strings are citations,
+ * never dependencies) not yet applied to that one scan. Naming the car rather than the
+ * path keeps the address without convicting this file for explaining itself.
+ *
+ * Two other readings were live and both are refused. IMPORTING the drift module makes
+ * this leaf a SECOND production door onto a family whose one door is enumerated by name
+ * (`tests/domain/npc/characterDrift.test.js`, step 1), and reaching it through that door
+ * instead would put a pure leaf's whole world-state substrate behind an eight-line
+ * arithmetic. RESTATING those eight lines here is the fork O5's own driver pins shut in
+ * as many words — "the leaf declares no floor, no clamp and no decay band of its own".
+ * So the read is handed in, and a caller that hands none reads every position as making
+ * no claim, which is exactly what an unreadable position already reads as: this file's
+ * declared totality, not a new silence.
+ *
+ * ⚠ AND THE KNOWN CHART ARRIVES THE SAME WAY, as `knownAxes`. A party used to carry a
+ * whole KnownReading and this file dug the axes out of its authored-core key — a
+ * hand-spelled read of the one key in the estate whose readers are enumerated by file
+ * AND by count. The caller holds the reading; it hands down the axes that reading
+ * disclosed, and this leaf never names the key at all.
+ *
  * @enforced-by tests/domain/envoyChanceMeeting.test.js
  */
 import { hash01 } from '../region/contestMath.js';
-import { positionValue } from '../npc/characterDrift.js';
 import { axisPositionForWord, traitColumns, wordForAxisPosition } from '../npc/paradigmAxisCatalog.js';
 
 // ── THE CLOSED VOCABULARIES ───────────────────────────────────────────────────
@@ -364,13 +394,21 @@ export function legacyCoreAxes(words) {
 
 /**
  * Axis positions as signed rungs, −3..3, zero where the chart makes no claim.
- * @param {unknown} axes @returns {Record<string, number>}
+ *
+ * `positionValue` is L2's spectrum read, HANDED IN — see the header. It is the only
+ * thing this file needs from the drift family and it is never imported here.
+ * @param {unknown} axes
+ * @param {((position: {pole?: 'virtue'|'vice', level?: string}) => number)} [positionValue]
+ * @returns {Record<string, number>}
  */
-export function axisRungs(axes) {
+export function axisRungs(axes, positionValue) {
   /** @type {Record<string, number>} */
   const out = {};
+  // A caller that handed no spectrum read gets no rungs: a chart nobody can value makes
+  // no claim, which is the same answer an unreadable position has always produced.
+  if (typeof positionValue !== 'function') return out;
   for (const [axisId, position] of Object.entries(asObject(axes))) {
-    const value = positionValue(/** @type {{pole?: 'virtue'|'vice', level?: string}} */ (position));
+    const value = num(positionValue(/** @type {{pole?: 'virtue'|'vice', level?: string}} */ (position)));
     if (value !== 0) out[axisId] = value;
   }
   return out;
@@ -440,11 +478,13 @@ export function planeFromChart(axes, words) {
  * one speaks of, banded in three words. Two people who share no axis read two rungs apart
  * on each, which is the honest reading of strangers with nothing in common.
  * @param {unknown} axesA @param {unknown} axesB
+ * @param {((position: {pole?: 'virtue'|'vice', level?: string}) => number)} [positionValue]
+ *   L2's spectrum read, HANDED IN — see the header
  * @returns {{rungs: number, band: string}}
  */
-export function pairDistance(axesA, axesB) {
-  const one = axisRungs(axesA);
-  const two = axisRungs(axesB);
+export function pairDistance(axesA, axesB, positionValue) {
+  const one = axisRungs(axesA, positionValue);
+  const two = axisRungs(axesB, positionValue);
   const ids = [...new Set([...Object.keys(one), ...Object.keys(two)])];
   let rungs = 0;
   for (const axisId of ids) rungs += Math.abs(num(one[axisId]) - num(two[axisId]));
@@ -650,7 +690,9 @@ export function selectChanceMeetings(args = {}) {
  * @property {boolean} corruptible has a flaw the web could pull on
  * @property {boolean} hasRecord  a standing record exists at his home, or an orphan may be minted
  * @property {string[]} words     the legacy personality words: the TRUE chart on every generated world
- * @property {unknown} [known]    the counterpart's KnownReading of him, when the sight seam supplied one
+ * @property {unknown} [knownAxes] the axes the counterpart's KnownReading DISCLOSED, handed
+ *   down by the caller that holds the reading. ⚠ THE AXES, NEVER THE READING: the reading's
+ *   authored-core key has exactly one reader in this estate and it is not here.
  * @property {{e: number, c: number}} [truePlane] his conduct plane, TRUE
  */
 
@@ -659,7 +701,7 @@ function normalizeParty(raw) {
   const row = asObject(raw);
   const words = asArray(row.words).map(text).filter(Boolean);
   const trueAxes = legacyCoreAxes(words);
-  const knownAxes = asObject(asObject(asObject(row.known).character).axes);
+  const knownAxes = asObject(row.knownAxes);
   return {
     nid: text(row.nid),
     homeSid: text(row.homeSid),
@@ -711,11 +753,13 @@ function compromiseChance(target, terms) {
  * KNOWN for what he perceived: you are moved from where you really are, toward what you
  * saw. At most three axes, the three largest differences, codepoint tiebreak.
  * @param {Record<string, unknown>} subject @param {Record<string, unknown>} other
+ * @param {((position: {pole?: 'virtue'|'vice', level?: string}) => number)} [positionValue]
+ *   L2's spectrum read, HANDED IN — see the header
  * @returns {Record<string, string>[]}
  */
-function driftVector(subject, other) {
-  const mine = axisRungs(subject.trueAxes);
-  const theirs = axisRungs(other.knownAxes);
+function driftVector(subject, other, positionValue) {
+  const mine = axisRungs(subject.trueAxes, positionValue);
+  const theirs = axisRungs(other.knownAxes, positionValue);
   const firmGap = num(CHANCE_MEETING_TUNING.driftFirmGap);
   /** @type {{axisId: string, pole: string, band: string, gap: number}[]} */
   const pulls = [];
@@ -770,13 +814,19 @@ function markOutcome(roll, band, posture, rivalryStep) {
  * field — this entry point is total on garbage, and the body re-validates with
  * `Number.isInteger` before the receipt ever carries it.
  *
+ * `positionValue` is the ONE thing this leaf takes from the character family, and it is
+ * taken rather than imported — the header says why. A caller that hands none reads both
+ * charts as making no claim, which is the answer two unreadable charts already produce.
+ *
  * @param {{meetingKey?: unknown, kind?: unknown, venue?: unknown, nodeId?: unknown,
  *   tick?: unknown, seed?: unknown, a?: unknown, b?: unknown, courts?: unknown,
- *   posture?: unknown, wariness?: unknown, pickRoll?: unknown}} [args]
+ *   posture?: unknown, wariness?: unknown, pickRoll?: unknown,
+ *   positionValue?: ((position: {pole?: 'virtue'|'vice', level?: string}) => number)}} [args]
  * @returns {Record<string, unknown>}
  */
 export function resolveChanceMeeting({
   meetingKey, kind, venue, nodeId, tick, seed, a, b, courts, posture, wariness, pickRoll,
+  positionValue,
 } = {}) {
   const key = text(meetingKey);
   const seedText = text(seed);
@@ -827,7 +877,7 @@ export function resolveChanceMeeting({
     rolls,
   };
 
-  const distance = pairDistance(one.knownAxes, two.knownAxes);
+  const distance = pairDistance(one.knownAxes, two.knownAxes, positionValue);
   receipt.distance = { rungs: distance.rungs, band: distance.band };
 
   if (!(meetRoll < meetRung)) {
@@ -935,8 +985,8 @@ export function resolveChanceMeeting({
   // People rub off on each other whether or not they become friends, so the drift arm
   // runs on every meeting that HAPPENED, the `nothing` band included.
   receipt.drift = [
-    ...driftVector(one, two).map((pull) => ({ subjectNid: one.nid, ...pull })),
-    ...driftVector(two, one).map((pull) => ({ subjectNid: two.nid, ...pull })),
+    ...driftVector(one, two, positionValue).map((pull) => ({ subjectNid: one.nid, ...pull })),
+    ...driftVector(two, one, positionValue).map((pull) => ({ subjectNid: two.nid, ...pull })),
   ];
 
   return freezeReceipt(receipt);

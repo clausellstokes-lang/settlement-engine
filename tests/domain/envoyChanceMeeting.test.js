@@ -42,6 +42,11 @@ import {
 } from '../../src/domain/worldPulse/envoyChanceMeeting.js';
 import { npcTraitPlane } from '../../src/domain/worldPulse/clergyTraitPlane.js';
 import { TRAIT_COLUMNS } from '../../src/domain/npc/paradigmAxisCatalog.js';
+// ⭐ THE SPECTRUM READ IS IMPORTED HERE AND NOWHERE IN THE LEAF. `infiltrationDrift`'s
+// shape exactly: the src leaf holds no opinion about the drift machinery and takes L2's
+// read as an argument, while its DRIVER imports the live function — so a moved or
+// re-shaped `positionValue` reds these arms instead of drifting apart from them.
+import { positionValue } from '../../src/domain/npc/characterDrift.js';
 
 const COURTS = {
   S1: { lawfulness01: 0.5, malice01: 0.5 },
@@ -70,6 +75,7 @@ function meeting(over = {}) {
     courts: COURTS,
     posture: 'neutral',
     wariness: 0,
+    positionValue,
     ...over,
   });
 }
@@ -202,12 +208,12 @@ describe('ENC-1 — the charts', () => {
 
   test('axis positions are integer rungs and the distance bands are the closed three', () => {
     const axes = legacyCoreAxes(['brave', 'callous', 'compassionate']);
-    for (const value of Object.values(axisRungs(axes))) {
+    for (const value of Object.values(axisRungs(axes, positionValue))) {
       expect(Number.isInteger(value)).toBe(true);
       expect(Math.abs(value)).toBeLessThanOrEqual(3);
     }
-    const near = pairDistance(legacyCoreAxes(['callous']), legacyCoreAxes(['callous']));
-    const far = pairDistance(legacyCoreAxes(['callous']), legacyCoreAxes(['compassionate']));
+    const near = pairDistance(legacyCoreAxes(['callous']), legacyCoreAxes(['callous']), positionValue);
+    const far = pairDistance(legacyCoreAxes(['callous']), legacyCoreAxes(['compassionate']), positionValue);
     expect(near.rungs).toBe(0);
     expect(near.band).toBe('alike');
     expect(DISTANCE_BANDS).toContain(far.band);
@@ -561,13 +567,16 @@ describe('ENC-1 — the sight law: choose on KNOWN, resolve on TRUE', () => {
     const bare = person('n1', 'S1', words);
     const disclosed = person('n1', 'S1', words, {
       // The same man, seen differently: his words (his TRUE chart) do not move.
-      known: { character: { axes: { MERCY: { pole: 'vice', level: 'defining', word: 'callous' } } } },
+      // ⚠ THE AXES, NOT THE READING. The caller holds the KnownReading and hands down what
+      // it disclosed; the leaf never names the authored-core key, whose readers in src are
+      // enumerated by file AND by count in tests/domain/npc/characterDrift.test.js.
+      knownAxes: { MERCY: { pole: 'vice', level: 'defining', word: 'callous' } },
     });
     const other = person('n2', 'S2', ['compassionate', 'cautious', 'stern']);
     const run = (a) => resolveChanceMeeting({
       meetingKey: 'sight', kind: 'traveller_resident', venue: 'host_settlement',
       nodeId: 'S2', tick: 10, seed: 'seed-a', a, b: other, courts: COURTS,
-      posture: 'neutral', wariness: 0,
+      posture: 'neutral', wariness: 0, positionValue,
     });
     const plain = run(bare);
     const seen = run(disclosed);
@@ -592,9 +601,10 @@ describe('ENC-1 — the sight law: choose on KNOWN, resolve on TRUE', () => {
       meetingKey: 'core', kind: 'traveller_resident', venue: 'host_settlement', nodeId: 'S2',
       tick: 10, seed: 'seed-a', a: person('n1', 'S1', words),
       b: person('n2', 'S2', ['compassionate']), courts: COURTS, posture: 'neutral', wariness: 0,
+      positionValue,
     });
     expect(bare.distance.rungs)
-      .toBe(pairDistance(legacyCoreAxes(words), legacyCoreAxes(['compassionate'])).rungs);
+      .toBe(pairDistance(legacyCoreAxes(words), legacyCoreAxes(['compassionate']), positionValue).rungs);
   });
 });
 
