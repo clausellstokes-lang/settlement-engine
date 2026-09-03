@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "355ff603b606b5d61bdd6fa9df94fe98ce9d4843",
+ "frozenAtSha": "4233031ba0d71216f652d1fa189a25ac2f429ba9",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "25db1e98938bb667479b457d6a1993b1613e7bfa371e0b7c026596b544b0a26a",
  "detectorDigest": "74ab22c2f3a3ef149ff3a7a97edc5709dbe9cb3f2390b5c9f8637bc1fff977df",
- "verdictDigest": "f7fe8c326a1dfb99cb04adbfd908e590f3c85e80abac365edc97db9e1583a0a4",
+ "verdictDigest": "a325c87dcc9e406bbfd8d415ce12c6098dd2e9edcd0c78d417936d8f5d78b35b",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,12 +72,12 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 679,
-  "web-transitive": 883,
-  "dossier-pdf": 369,
-  "campaign-pdf": 73,
-  "world-book": 79,
-  "foundry": 317,
+  "web-display": 685,
+  "web-transitive": 887,
+  "dossier-pdf": 373,
+  "campaign-pdf": 74,
+  "world-book": 80,
+  "foundry": 321,
   "json-export": 8,
   "news": 28
  },
@@ -91,15 +91,15 @@
   "knownShapes": 337
  },
  "scanStats": {
-  "files": 1563,
-  "sites": 37419,
-  "propRead": 35403,
+  "files": 1573,
+  "sites": 37517,
+  "propRead": 35494,
   "elemRead": 0,
-  "destructure": 2005,
+  "destructure": 2012,
   "inOp": 11,
-  "rGrades": 5633,
-  "nGrades": 868513,
-  "resolvedReceivers": 6406
+  "rGrades": 5649,
+  "nGrades": 869813,
+  "resolvedReceivers": 6423
  },
  "registerDigest": "ac4734954adbaee04755427934180b8f129c0b0df21072ec00f49b7e797bd1b0",
  "pendingSurfaceCeiling": 3,
@@ -8679,7 +8679,7 @@
   "priorities on economicState": "",
   "prosperity on economicState": "campaign-pdf=R dossier-pdf=R foundry=R news=R web-display=R web-transitive=R world-book=R",
   "safetyProfile on economicState": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "situationDesc on economicState": "dossier-pdf=R web-display=R web-transitive=R",
+  "situationDesc on economicState": "dossier-pdf=R web-display=N web-transitive=R",
   "tier on economicState": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "tradeAccess on economicState": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "tradeDependencies on economicState": "dossier-pdf=R foundry=R web-display=R",
@@ -14211,7 +14211,7 @@
   "tierChange on selectedOutcomes": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "type on selectedOutcomes": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "_config on settlement": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "_seed on settlement": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
+  "_seed on settlement": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "activeConditions on settlement": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A news=N web-transitive=R world-book=R",
   "aiOverlays on settlement": "dossier-pdf=R foundry=R web-transitive=R",
   "arrivalScene on settlement": "campaign-pdf=R dossier-pdf=N foundry=N json-export=A web-display=N web-transitive=R world-book=R",
