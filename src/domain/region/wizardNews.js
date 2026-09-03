@@ -702,9 +702,27 @@ function normalizeEntry(entry, options = {}) {
     ...(WIZARD_NEWS_SECTIONS.has(entry.section)
       ? { section: entry.section }
       : {}),
+    // ⛔ THIS LIST MUST EQUAL heraldRouting.js#heraldSectionOfRecord's ACCEPTED SET.
+    // It is spelled here BY HAND rather than imported, following the estate's own
+    // precedent (brokerageStamps.js:333 keeps a local copy "rather than imported from
+    // domain/realm/heraldRouting.js"), because the engine chunk's margin is 236 B and a
+    // new cross-layer import is not worth it for four string literals. The two lists are
+    // held identical by an ARM in tests/lint/heraldRouting.walker.test.js, so a future
+    // divergence reds instead of ghosting.
+    //
+    // `sovereignty_registry` WAS MISSING HERE, and the router's own WR-10 comment names
+    // the consequence: "without this token those five file wrong while compiling and
+    // passing". Because normalizeEntry is an ALLOWLIST rebuilder run on every APPEND as
+    // well as every load, the authority was stripped the moment an entry was written, so
+    // heraldSectionOfRecord stopped honouring the authored desk and fell through to
+    // SECTION_OF — and SECTION_OF structurally never returns `adjudication`. The five
+    // measured casualties: cession_for_peace, bought_seat_fragility,
+    // kinship_opposes_the_sale and sale_books_diverged (all `adjudication`) landed in the
+    // `events` catch-all, and sovereignty_sale_judged (`faith`) agreed only by coincidence.
     ...((entry.sectionAuthority === 'war_rulings_registry'
         || entry.sectionAuthority === 'war_coalition_registry'
-        || entry.sectionAuthority === 'envoy_registry')
+        || entry.sectionAuthority === 'envoy_registry'
+        || entry.sectionAuthority === 'sovereignty_registry')
       && WIZARD_NEWS_SECTIONS.has(entry.section)
       ? { sectionAuthority: entry.sectionAuthority }
       : {}),

@@ -360,5 +360,54 @@ describe('Herald routing table — totality + single-home + consistency', () => 
       expect(routingKeyOf({ outcome: { candidateType: 'conquest' } })).toBe('conquest');
       expect(routingKeyOf({ stressor: { type: 'famine' } })).toBe('famine');
     });
+    test('⛔ the ROUTER and the PERSISTENCE REBUILDER accept the IDENTICAL authority set', () => {
+      // THIS ARM EXISTS BECAUSE THE TWO LISTS HAD ALREADY DRIFTED AND SHIPPED.
+      // heraldSectionOfRecord honours an AUTHORED Herald desk only for an authority on
+      // its list. normalizeEntry (wizardNews.js) is an ALLOWLIST rebuilder run on every
+      // APPEND as well as every load, so an authority it does not admit is stripped the
+      // moment an entry is written — after which the router stops honouring the authored
+      // desk and falls through to SECTION_OF, which structurally never returns
+      // `adjudication`.
+      //
+      // MEASURED at the drift: the router accepted four authorities, the rebuilder three
+      // (`sovereignty_registry` missing), and the router's own WR-10 comment names the
+      // price — "without this token those five file wrong while compiling and passing".
+      // The five: cession_for_peace, bought_seat_fragility, kinship_opposes_the_sale and
+      // sale_books_diverged (all `adjudication`) fell to the `events` catch-all, and
+      // sovereignty_sale_judged (`faith`) agreed only by coincidence.
+      //
+      // The set is spelled BY HAND in both files rather than shared, following
+      // brokerageStamps.js:333's precedent of keeping a local copy "rather than imported
+      // from domain/realm/heraldRouting.js" — the engine chunk's margin is 236 B and a
+      // cross-layer import is not worth four string literals. THIS ARM is what makes the
+      // hand-spelling safe: a divergence reds here instead of ghosting a desk.
+      const authoritiesIn = (rel) => {
+        const src = readFileSync(join(ROOT, rel), 'utf8');
+        const found = [...src.matchAll(/sectionAuthority === '([a-z_]+)'/g)].map((m) => m[1]);
+        return { set: new Set(found), count: found.length };
+      };
+      const router = authoritiesIn('src/domain/realm/heraldRouting.js');
+      const rebuilder = authoritiesIn('src/domain/region/wizardNews.js');
+
+      // NON-VACUITY: a regex that matched nothing would make two empty sets "equal".
+      expect(router.count, 'the router must spell at least one authority — an empty match'
+        + ' means the extraction broke, not that the estate has no authorities').toBeGreaterThan(0);
+      expect(router.set.has('sovereignty_registry'), 'the anchor the drift was found on').toBe(true);
+      expect(rebuilder.set.has('sovereignty_registry'), 'the rebuilder must persist the'
+        + ' authority the router honours, or the authored desk is stripped on write').toBe(true);
+
+      // SINGLE-BLOCK: each file spells the set in exactly ONE place. A second block
+      // elsewhere would make a whole-file extraction lie, so the counts are pinned to the
+      // set sizes — if a file grows a second list, this reds and someone must look.
+      expect(router.count, 'heraldRouting spells the set in exactly one block')
+        .toBe(router.set.size);
+      expect(rebuilder.count, 'wizardNews spells the set in exactly one block')
+        .toBe(rebuilder.set.size);
+
+      expect([...rebuilder.set].sort(), 'the rebuilder must admit EXACTLY what the router'
+        + ' honours — a router-only authority is stripped on append and its desk ghosts;'
+        + ' a rebuilder-only authority persists a claim the router will not read')
+        .toEqual([...router.set].sort());
+    });
   });
 });
