@@ -8,7 +8,58 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐ PICKUP AT §890 (2026-09-03 — the FIFTEENTH landing is down; the four lighting rows the owner delegated are ALL LANDED, a live news-desk bug is cured, and THREE DECISIONS SIT ON THE OWNER'S DESK each releasing finished work) — START HERE; supersedes every card below.
+## ⭐⭐⭐⭐⭐ PICKUP AT §891 — ⚠⚠ **ACCOUNT-SWITCH HANDOFF, 2026-09-03.** A SEVENTEEN-CAR TRAIN IS ONE BILL FROM ITS GATE. READ THIS WHOLE CARD BEFORE TOUCHING ANYTHING; it supersedes every card below.
+
+### ⭐ THE ONE ACT TO DO FIRST — everything else on this card is context
+The **§891 train is COMPOSED, SEALED and 17 cars deep** at `refs/preserve/train891-registers-2026-09-03` = **`4233031ba`**, in dock `laneKERNELMARK-tree`, porcelain 0, 17 trailers, base `ca651d54b`. **ALL SIX REGISTER ACTS ARE TAKEN AND GREEN.** Exactly **ONE bill** stands between it and its gate:
+
+```
+tests/lint/writerReach.walker.test.js :: the surfaceReach grammar round-trips
+  situationDesc on economicState is missing from the frozen surfaceReach:
+  expected 'dossier-pdf=R web-display=R …' to be 'dossier-pdf=R web-display=N …'
+```
+**It is a REGISTER, not a defect.** DESK CAR 1 mounted the economics prose so it now REACHES the web display; the frozen register still says that identity is dark (`N`). `.writer-reach-baseline.json` is named in the HORIZON-DARK carlist's standing-bill list as a landing register. **The door is `node scripts/check-writer-reach.mjs --write`** (it conflicts with `--genesis`/`--rebank`; use plain `--write`, this is a shrink/absorb, NOT a genesis). **PREDICT the movement in writing first, then measure.**
+
+**Then, in order:** ratchet (`sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update`; predicted `totalFiles 2458 → 2462 CERTAIN (+4)`, totalTests REFUSED IN ADVANCE) → bare gate (`npm run check`) → chair-verify → CAS `git update-ref refs/heads/claude/composite-r4 <tip> ca651d54b` → seal `landing-891-2026-09-03` → collect §891.
+
+### ⚠⚠ ACCOUNT-SWITCH SPECIFICS — read before you assume anything is gone
+**Run ids and background tasks DIE with the account; git and the filesystem do not.** The scratchpad root is `/private/tmp/claude-502/…` where **502 is the OS uid, NOT the Claude account** — so a new account on the SAME MACHINE as the same OS user CAN still read every path below. A new machine cannot, and then only what is in git survives. `$SP` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad`:
+- `$SP/horizondark-dock-residue/HORIZON-DARK-CARLIST.md` (27 KB) — **the derived HORIZON-DARK car list: 11 chair-class, 3 owner-gated, with §5's standing bill.** 6 of the 11 are built; **5 remain.**
+- `$SP/ENC4-TYPED-HOLES-FOR-THE-VOICE-SITTING.md` (10 KB) — **the owner's nine sentences, in the annex format they fill.**
+- `$SP/c2-HELD-outlook-surface.patch` (11 KB) — the 190-byte decision below, one `git apply` from taken.
+- `$SP/LANE-QUEUE.md` · 12 `$SP/receipt-*.md` · 5 `$SP/salvage-*/` dirs (byte-identical copies of every dirty path from the API mass-death).
+
+### THE BRANCH, AND WHAT IS SEALED BUT NOT LANDED
+**`claude/composite-r4` = `ca651d54bab1fc68d5c417226d6a5f719562cc5b` (§890, the FIFTEENTH landing).** Registers at that tip: lighting `2510/370/2140/22841/6142` · ratchet `31,141 / 2,458`, **census FULL at 10/10, ZERO headroom** · tuning 225 tables / 2,094 keys · OSR `1,993 / 1,409 / 388`.
+
+| sealed ref | tip | state |
+|---|---|---|
+| `train891-registers-2026-09-03` | `4233031ba` | **THE LIVE TRAIN, 17 cars, one bill from its gate** |
+| `srcprose-2026-09-03` | `8f4d5c648` | 1,001 cured sentences ⛔ **OWNER: the chartered window** |
+| (ENC-3) `laneENC-tree`, 13 dirty paths | — | built, uncommitted ⛔ **OWNER: the drift door** |
+
+### ⛔⛔ THE OWNER'S DESK — THREE DECISIONS AND TWO PRICED ITEMS, EACH RELEASING FINISHED WORK
+1. **THE PROSE WINDOW.** A landed fence (`espionageDormancyFence.test.js:332`) re-records the driven-corpus constant **ONLY inside a NAMED CHARTERED WINDOW**, and *"exactly ONE remains: the LIGHTING WAVE (§881.4)"*. The chair RULED the prose car **rides the lighting wave** rather than minting a second window, because both spent windows were named by owner directives. **One owner word charters it sooner.** 8 files / 11 assertions stand owed.
+2. **THE DRIFT DOOR.** ENC-3 is blocked. The funnel door is reserved to TE-VIRT-1 by a landed test, and **TE-VIRT-1 ALREADY RAN AND DELIBERATELY LEFT IT EMPTY** (*"two empty files, and the emptiness is the deliverable"*), so homing it is a **NEW decision, not a pending one.** ⚠ The chair's contrary ruling was **WITHDRAWN at §890.1** — do not re-make it.
+3. **ENC-4's NINE SENTENCES.** The pool floor needs 6 and 4; the design spells 2 and 1 plus the literal words *"· four more"*. Holes enumerated in `$SP/ENC4-TYPED-HOLES-FOR-THE-VOICE-SITTING.md`.
+4. ⭐ **190 BYTES** of a 1,004-byte first-paint margin buys the visible "Room to Grow" section — **built, green, and HELD rather than spent without asking.**
+5. ⭐ **THE REVIEW CORPUS IS DEITY-FREE** — 0 of 44 settlements ever carry a patron, the Faith tab is a shell on all 44, and `subsystemRowsBaseline.js:60` already records it. **Faith cannot be judged during the owner's walk until that roster widens, and widening it is the owner's act.**
+⛔ Permanently the owner's: **the walk · the tuning signature · every push.**
+
+### ⭐⭐ THE LAWS THIS DAY EARNED — a successor who reads only these still lands cleanly
+- ⛔ **A DOCK'S `node_modules` FORM CHANGES THE BUILT ARTIFACT.** Packages are symlinks **by design**; materialising 45 grew first paint **8,551 B past budget** and failed a gate (proved both directions). **NEVER materialise them.** The one exception is the edge-bundle sequence: materialise ONLY `immer`+`seedrandom` → `npm run build:edge-shared` → commit the bundles → **RESTORE THE SYMLINKS**. The reproducibility arm still verifies because its fallback read follows the link.
+- ⛔ **A FALLBACK BRANCH MUST NEVER PRINT A FINDING.** `cmd 2>/dev/null || echo "<a claim>"` turns an unexplained failure into evidence. Three false statements today came from this shape.
+- ⛔ **THE GUARD AND THE CONSEQUENCE MUST LIVE IN THE SAME PLACE.** A guard in Python with the act in shell declines its own edit while every later step proceeds. **`set -e` at the head of any multi-step act.**
+- ⭐ **VERIFY THE ANTECEDENT, NOT ONLY THE INFERENCE.** An empty structure held empty BY A LANDED TEST is the opposite of available. **An absence has a history, and the history is in the log.**
+- ⭐ **THE SUM OF INDEPENDENTLY-MEASURED DELTAS IS NOT THE COMPOSED DELTA** (four lanes summed +75 titles; the composed tree measured +78). Same shape as: **the arm count NEVER predicts the census delta.**
+- ⭐ **A LANE AND A LANDING ARE NOT THE SAME VANTAGE POINT** — a register act is legitimate at exactly one of them.
+- ⚠ **zsh does NOT word-split an unquoted parameter** (`for s in $shas` takes the whole string). ⚠ **A predicate that can match its own command line is not a gate** (`grep -c 'vitest'` counts its own grep; use `'[v]itest'`). ⚠ **A full-suite instrument needs a quiet window for its DURATION, not at its start** — `$SP/run-ratchet-quiet.sh` mechanizes it.
+- ⭐ **THE OWNER'S STANDING RULE, ADDED TODAY: WHEN THE OWNER ASKS A QUESTION, ANSWER IT FIRST, BEFORE ANY WORK.**
+
+### ⏱ LIVE STATE AT HANDOFF
+**RUNNING: 0 agents of 4.** No gate, no lock held. Board clean, ~7 GB free on `/private/tmp`. ⛔ **OWNER CAP: FOUR agents of ANY kind** — a lane's own recon child exceeded it once today, so **every brief must forbid subagents.** ⚠ The 30-minute heartbeat template is **STALE**: it names the §882/TAIL-F track and asks a `Seat: Fable 5.1` trailer. **The seat is OPUS 5** and the template is overridden, not obeyed — every ledger act carries `Seat: Opus 5 — Fable-unvalidated` AND maps `docs/FABLE_RETROVALIDATION_QUEUE.md` with a CHANGED blob.
+
+## (superseded) ⭐⭐⭐⭐ PICKUP AT §890 (2026-09-03 — the FIFTEENTH landing is down; the four lighting rows the owner delegated are ALL LANDED, a live news-desk bug is cured, and THREE DECISIONS SIT ON THE OWNER'S DESK each releasing finished work) — START HERE; supersedes every card below.
 
 ⭐⭐ **§890 IS LANDED.** `claude/composite-r4` = **`ca651d54bab1fc68d5c417226d6a5f719562cc5b`**, sealed `refs/preserve/landing-890-2026-09-03`. **8 cars, 22 paths +855/−88**, porcelain 0, trailers == cars. **Gate 1,058 s, 20 stages**: ratchet **10 known of 31,141** · `STRICT DIST OK 52/440` · typecheck **173/173** · domain-strict **1121/1121**. **WHAT IT PUTS ON THE BRANCH:** the eight war sub-flags are free of a stale ruling; **founder recognition is lit and the gate deciding who qualifies now CARRIES ITS EVIDENCE instead of asserting entitlement**; the faith tuning surface is **candidate-lit and must now SAY it is a draft** — reporting SIGNED is structurally unconstructible; and **five sovereignty headlines stop filing to the wrong desk** (`cession_for_peace`, `bought_seat_fragility`, `kinship_opposes_the_sale`, `sale_books_diverged`, `sovereignty_sale_judged`), because the persistence rebuilder was stripping the authority on EVERY APPEND while the router honoured four registries and it admitted three.
 

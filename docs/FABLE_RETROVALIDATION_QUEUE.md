@@ -3150,3 +3150,27 @@ The two requirements looked contradictory — symlinks make the bundle irreprodu
 *What Fable re-derives:* the two-direction proof (sibling dock green; restore returns green) — the correlation alone would not carry it.
 
 *Priority:* **HIGH** — it makes a load-bearing byte budget environment-dependent, and any lane can trip it.
+
+## §891 · THE ACCOUNT-SWITCH HANDOFF — a seventeen-car train one register from its gate (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**The §891 train is composed, sealed and seventeen cars deep** at `refs/preserve/train891-registers-2026-09-03` = `4233031ba`, base `ca651d54b`, porcelain 0, 17 trailers. **All six register acts taken and green.** One bill stands: `writerReach`'s frozen surfaceReach still calls `situationDesc on economicState` dark, and DESK CAR 1 made it reach the web display. **A register, not a defect**, with a `--write` door.
+
+⚠⚠ **THE SURVIVAL AUDIT CAUGHT THE LIVE TRAIN ITSELF.** At handoff time `laneKERNELMARK-tree` — the seventeen-car train, every register act in it — was reachable from **NO REF**. Sealed before anything else. ⭐ **That law has now paid out NINE separate times in one day**, and this was the most expensive instance it could have caught: an account switch discards run ids, and an unreferenced tip in a scratchpad is one `gc` from gone.
+
+### WHAT THE TRAIN CARRIES
+
+Five lanes batched into one gate rather than five: **CAPACITY C1/C2/C3** (a town says ONCE, as a crossing rather than a census, when it has grown as large as its fields will feed; and a reader can ask how much room is left at any year) · **the `now: null` root fix** (the wall clock leaves both regional seams) · **DESK CAR 1 + its correction** (the first four dossier blocks leave the dark half) · **CHARSET Car 1** (the product learns which letters it can actually draw, measured from its own renderers) · **READERREVIEW Car 2 + three cures** (the reader corpus can be READ at last).
+
+### THE REGISTER LOOP AT ITS BEST, AND ITS ONE INSTRUCTIVE MISS
+
+Six acts, every figure predicted in writing before its instrument ran: lighting **files 2515 EXACT**, tuning **225 tables and 2,099 keys BOTH EXACT** (predicted by the CAPACITY lane before it built and verified independently by the chair), prose numerics **225 → 225 with the debt SHAPE proven byte-identical**, OSR **1,993 / 1,409 / 388 unchanged**. ⭐ **The one miss taught the law:** four lanes' independently-measured title deltas summed to **+75**; the composed tree measured **+78**. **THE SUM OF INDEPENDENTLY-MEASURED DELTAS IS NOT THE COMPOSED DELTA** — the chair had written *"measured, not summed"* into the prediction beforehand, which is why the miss cost nothing.
+
+### TWO REGISTER ACTS WERE JUDGMENT, AND BOTH WENT THE HARDER WAY
+
+**The charset invariant could have taken a RATIONALE** — an entry asserting mutation testing is redundant, which the model earns by saying its catching power is *"EXECUTED IN THE TEST BODY"*. That file has five arms and **no executed plants**, so the sentence would have been **false**, and writing it would have laundered an unproven invariant into the very manifest built to prevent that. So the invariant was made to **earn a mutation entry**: plant 72 strikes ONE measured range from the dossier surface, the anchor proved unique first, and with it **2 of 5 arms red naming the exact codepoints that stop printing** — restored `cmp`-identical, 5/5 green. ⚠ **The sweep's own dirty-guard then convicted the chair** for adding a plant without listing the file it mutates: the sweep reverts with `git checkout --`, so an unlisted file means a manual run **destroys uncommitted work.** That is the checkout hazard turned into machinery.
+
+**The OSR act is the one a LANE REFUSED, and its refusal still stands.** At the charset lane's tip the same `--write` moved **twelve** manifest entries, only five its own, and it ran the write, measured it, and **reverted** rather than launder seven foreign entries under its sha. At the composed tip the instrument names exactly **one** generated input and declares it absorbable in its own words. ⭐ **A LANE AND A LANDING ARE NOT THE SAME VANTAGE POINT; a register act is legitimate at exactly one of them.**
+
+*What Fable re-derives:* the charset plant's catching power, and the claim that the twelve OSR entries collapse to one at the composed tip.
+
+*Priority:* **HIGH** — it is the live train and the handoff rests on it.
