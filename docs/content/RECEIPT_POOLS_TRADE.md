@@ -442,7 +442,7 @@ AUDIENCE: public
 2. The carters on the {route} have a new employer's name to learn.
 3. {house}'s book now carries the {route} among its standing interests, with the season noted.
 4. Whatever befalls the {route} now befalls {house}, and {house} will act as though it does.
-5. {house} bought no road — there is no road to buy. It bought the traffic, which is better.
+5. {house} bought no road. There is no road to buy. It bought the traffic, which is better.
 6. Travellers on the {route} report new sheds at the water stops, and the same mark on all of them.
 7. The interest was taken before the passes opened, which is when such things are taken.
 8. The ferryman at the crossing has a retainer now and has stopped arguing about the fare.
@@ -579,16 +579,16 @@ AUDIENCE: dm-only
 ### dossier.house_entry_line (TR-2) — town dossier, factions panel — significance: routine
 SLOTS: {settlement} {counterpart} {house} {npc} {band} {good} {route} {reason}
 AUDIENCE: public
-1. {house} — {band}; the {route}, the {good} trade; Factor {npc}, abroad at {counterpart}. *(volume exemplar, slotted)*
-2. {house} — {band}; interests in {good} only; Factor {npc}, at home.
-3. {house} — {band} and falling; the {route} interest sold this season; Factor {npc}, at {settlement}.
-4. {house} — dormant; books kept, no acts recorded; no factor cast.
-5. {house} — {band}; the word at the wharf is poor since the {reason}; Factor {npc}, abroad at {counterpart}.
-6. {house} — {band} and rising; new warehouses on the {settlement} quay; Factor {npc}, on the {route}.
-7. {house} — {band}; holds a stock of {good} and sells none of it; Factor {npc}, at home.
-8. {house} — {band}; lender to the seat of {settlement}; Factor {npc}, abroad at {counterpart}.
-9. {house} — {band}; an old name newly returned, credit unproven; Factor {npc}, at {settlement}.
-10. {house} — {band}; the {route} interest and a venture out to {counterpart}; Factor {npc}, overdue.
+1. {house}: {band}; the {route}, the {good} trade; Factor {npc}, abroad at {counterpart}. *(volume exemplar, slotted)*
+2. {house}: {band}; interests in {good} only; Factor {npc}, at home.
+3. {house}: {band} and falling; the {route} interest sold this season; Factor {npc}, at {settlement}.
+4. {house}: dormant; books kept, no acts recorded; no factor cast.
+5. {house}: {band}; the word at the wharf is poor since the {reason}; Factor {npc}, abroad at {counterpart}.
+6. {house}: {band} and rising; new warehouses on the {settlement} quay; Factor {npc}, on the {route}.
+7. {house}: {band}; holds a stock of {good} and sells none of it; Factor {npc}, at home.
+8. {house}: {band}; lender to the seat of {settlement}; Factor {npc}, abroad at {counterpart}.
+9. {house}: {band}; an old name newly returned, credit unproven; Factor {npc}, at {settlement}.
+10. {house}: {band}; the {route} interest and a venture out to {counterpart}; Factor {npc}, overdue.
 
 ---
 
@@ -600,7 +600,7 @@ these sentences only through arrivals, rumor, and plants.
 ### market.believed_dear (TR-3) — Herald, market desk — significance: routine
 SLOTS: {settlement} {counterpart} {good} {route}
 AUDIENCE: public
-1. {good} is dear in {counterpart}, they say — and dearer for the saying. *(volume exemplar, slotted)*
+1. {good} is dear in {counterpart}, they say, and dearer for the saying. *(volume exemplar, slotted)*
 2. Every carter at the {settlement} gate has the same rumour, and each has it from a different road.
 3. The factors of {settlement} have written {counterpart} down as dear in {good}, on the word of the last cart in.
 4. If the word holds, half the wagons in {settlement} will be on the {route} before the month is out.
@@ -678,11 +678,11 @@ AUDIENCE: public
 2. {good}: {band} here; nothing heard out of {counterpart} in a season.
 3. {good}: {band} here, and {band} on every road the carters name.
 4. {good}: {band} here; {counterpart} is said to be glutted, though the word is old.
-5. {good}: {band} here — and the town believes {counterpart} is worse off, which is why the wagons are loading.
+5. {good}: {band} here, and the town believes {counterpart} is worse off, which is why the wagons are loading.
 6. {good}: {band} here; the word out of {counterpart} is a season old and was good then.
 7. {good}: {band} here, and dearer every week the roads stay shut.
 8. {good}: {band} here; {counterpart} is said to be the same, which nobody trusts.
-9. {good}: {band} here — the last arrival from {counterpart} corrected the wharf sharply.
+9. {good}: {band} here. The last arrival from {counterpart} corrected the wharf sharply.
 10. {good}: {band} here; no road has brought word of {counterpart} at all, and the factors dispatch elsewhere.
 
 ### dossier.market_line_truth (TR-3) — town dossier, DM toggle — significance: routine
@@ -707,7 +707,7 @@ AUDIENCE: dm-only
 ### grain.arrival (TR-4) — Herald, granary desk — significance: routine
 SLOTS: {settlement} {counterpart} {route}
 AUDIENCE: public
-1. Fed by {counterpart}'s grain up the {route} — a handful of caravans a month. *(volume exemplar, slotted and de-digited)*
+1. Fed by {counterpart}'s grain up the {route}: a handful of caravans a month. *(volume exemplar, slotted and de-digited)*
 2. The wagons come up the {route} on their days, and the bakers of {settlement} plan by them.
 3. The granary book at {settlement} credits {counterpart} for the month's stores, load by load.
 4. So long as the {route} runs, {settlement} eats without asking after its own harvest.
@@ -804,10 +804,10 @@ AUDIENCE: public
 ### dossier.food_security_line (TR-4) — town dossier, food security line — significance: routine
 SLOTS: {settlement} {counterpart} {route} {band}
 AUDIENCE: public
-1. Fed by {counterpart}'s grain up the {route} — which closes in winter. *(volume exemplar, slotted)*
+1. Fed by {counterpart}'s grain up the {route}, which closes in winter. *(volume exemplar, slotted)*
 2. Fed from its own fields and nowhere else; a bad harvest here is a bad year.
 3. Fed by {counterpart}'s wagons on the {route}; stores {band}, and falling.
-4. Fed by the {route} alone — cut it, and {settlement} has a season's grace and no more.
+4. Fed by the {route} alone: cut it, and {settlement} has a season's grace and no more.
 5. Fed by many roads, no one of which matters, which is why {settlement} sleeps well.
 6. Fed by {counterpart} and by one other road; stores {band}, and steady.
 7. Fed by the {route} in summer and by its own lofts in winter; stores {band} at the turn.
@@ -919,16 +919,16 @@ AUDIENCE: public
 ### dossier.treaties_panel_line (TR-5) — town dossier, treaties panel — significance: routine
 SLOTS: {counterpart} {good} {route} {reason}
 AUDIENCE: public
-1. Grain compact with {counterpart} — honored, third year of ten. *(volume exemplar, slotted; the year-count is the volume's own, flagged)*
-2. Market access to {counterpart} — standing; no term, no renewal, no quarrel.
-3. Toll exemption on the {route} — honored; the gate takes nothing from this town's carts.
-4. Exclusivity in {good} to {counterpart} — strained; the guildhall wants it gone.
-5. Grain compact with {counterpart} — suspended this year; their reserve is below the floor.
-6. Grain compact with {counterpart} — broken; the reason recorded is {reason}.
-7. Provisioning compact with {counterpart} — proposed; the court has not answered.
-8. Wardenship of the {route} shared with {counterpart} — honored; neither side has claimed the credit.
-9. Exclusivity in {good} to {counterpart} — refused; a term of that family already stands.
-10. Market access to {counterpart} — renewed for a further term, with nothing renegotiated.
+1. Grain compact with {counterpart}: honored, third year of ten. *(volume exemplar, slotted; the year-count is the volume's own, flagged)*
+2. Market access to {counterpart}: standing; no term, no renewal, no quarrel.
+3. Toll exemption on the {route}: honored; the gate takes nothing from this town's carts.
+4. Exclusivity in {good} to {counterpart}: strained; the guildhall wants it gone.
+5. Grain compact with {counterpart}: suspended this year; their reserve is below the floor.
+6. Grain compact with {counterpart}: broken; the reason recorded is {reason}.
+7. Provisioning compact with {counterpart}: proposed; the court has not answered.
+8. Wardenship of the {route} shared with {counterpart}: honored; neither side has claimed the credit.
+9. Exclusivity in {good} to {counterpart}: refused; a term of that family already stands.
+10. Market access to {counterpart}: renewed for a further term, with nothing renegotiated.
 
 ---
 
@@ -1090,15 +1090,15 @@ AUDIENCE: public
 ### dossier.corner_market_line (TR-6) — town dossier, market line — significance: routine
 SLOTS: {house} {good} {band}
 AUDIENCE: public
-1. {good}: desperate — {house} holds the granaries. *(volume exemplar, slotted)*
-2. {good}: dear — one warehouse behind the stalls, and no wagons due.
-3. {good}: {band} — {house}'s stock is broken and the roads are open again.
-4. {good}: {band} — the granary was taken from {house} by the crowd in the spring.
+1. {good}: desperate, {house} holds the granaries. *(volume exemplar, slotted)*
+2. {good}: dear. One warehouse behind the stalls, and no wagons due.
+3. {good}: {band}, {house}'s stock is broken and the roads are open again.
+4. {good}: {band}. The granary was taken from {house} by the crowd in the spring.
 5. {good}: {band}; sole supplier {house}, standing these many years.
-6. {good}: {band} — {house} buys everything soft on every road, and has for a season.
-7. {good}: {band} — sold out of {house}'s book a week before the wagons came.
+6. {good}: {band}, {house} buys everything soft on every road, and has for a season.
+7. {good}: {band}, sold out of {house}'s book a week before the wagons came.
 8. {good}: {band}; on the shelves only because the seat met {house}'s asking, and the town knows what that cost.
-9. {good}: {band} — a second house keeps books here now, and the terms are argued again.
+9. {good}: {band}. A second house keeps books here now, and the terms are argued again.
 10. {good}: {band}; the stock came in by no road on any map, and the stalls asked nothing.
 
 ---
@@ -1198,16 +1198,16 @@ AUDIENCE: public
 ### dossier.venture_line (TR-7) — town dossier, house entry — significance: routine
 SLOTS: {counterpart} {route} {band}
 AUDIENCE: public
-1. The {counterpart} venture — underway, due by autumn. *(volume exemplar, slotted)*
-2. The {route} venture — proposed; the partners have not yet agreed.
-3. The {counterpart} venture — overdue; nothing heard since the pass closed.
-4. The {counterpart} venture — returned; the books are {band} for it.
-5. The {counterpart} venture — failed on the {route}; the stake is struck out.
-6. The {counterpart} venture — abandoned at the second stage; the stake is part recovered.
-7. The {counterpart} venture — jointly staked; the share is entered at {band}.
-8. The {route} venture — departed this season; nothing entered against it yet.
-9. The {counterpart} venture — returned early and light; the books are {band} and nobody is pleased.
-10. The {route} venture — revived from a proposal the partners refused once already.
+1. The {counterpart} venture: underway, due by autumn. *(volume exemplar, slotted)*
+2. The {route} venture: proposed; the partners have not yet agreed.
+3. The {counterpart} venture: overdue; nothing heard since the pass closed.
+4. The {counterpart} venture: returned; the books are {band} for it.
+5. The {counterpart} venture: failed on the {route}; the stake is struck out.
+6. The {counterpart} venture: abandoned at the second stage; the stake is part recovered.
+7. The {counterpart} venture: jointly staked; the share is entered at {band}.
+8. The {route} venture: departed this season; nothing entered against it yet.
+9. The {counterpart} venture: returned early and light; the books are {band} and nobody is pleased.
+10. The {route} venture: revived from a proposal the partners refused once already.
 
 ---
 
@@ -1231,7 +1231,7 @@ SLOTS: {settlement} {house} {npc}
 AUDIENCE: public
 1. Factor {npc} came back from the circuit with a head full of what every market pays.
 2. The inns of {settlement} had the news before the guildhall did, and the guildhall has stopped minding.
-3. Every band {npc} carried home is entered as an arrival would be — the best writing in the book.
+3. Every band {npc} carried home is entered as an arrival would be: the best writing in the book.
 4. {house} will dispatch on what {npc} saw for a season, and be right more often than its rivals.
 5. One rider, a season of roads, and the wharf's picture of the world is written again.
 6. {npc} came in dusty and was made to talk before being let to wash.
@@ -1285,7 +1285,7 @@ AUDIENCE: dm-only
 *The Q amendment's declared/true split; the public surface sees only the declared commercial errand.*
 1. {npc} rides declared for {house} and truly for {faction}, and the terms will tilt at the far end.
 2. The satchel carries two sets of instructions, and the second is not written down.
-3. Declared purpose commercial, true purpose covert — both entered, and only one visible to the courts.
+3. Declared purpose commercial, true purpose covert: both entered, and only one visible to the courts.
 4. Whatever {house} learns about its own terms, it will learn after {faction} does.
 5. The house vetted them thoroughly, and vetted them a year too late.
 6. {npc}'s pay comes out of two purses and is entered in one book.
@@ -1307,16 +1307,16 @@ AUDIENCE: public
 ### dossier.factor_line (TR-8) — town dossier, house entry — significance: routine
 SLOTS: {settlement} {counterpart} {faction} {npc} {route}
 AUDIENCE: public
-1. Factor {npc} — on the road to {counterpart}, expected by midsummer. *(volume exemplar, slotted)*
-2. Factor {npc} — overdue; no word since the spring. *(volume exemplar, slotted)*
-3. Factor {npc} — at home in {settlement}; no errand standing.
-4. Factor {npc} — held by {faction} on the {route}; ransom under discussion.
-5. Factor {npc} — returned from the circuit; the house's bands are fresh.
-6. Factor {npc} — home; the ransom to {faction} is paid and entered.
-7. Factor {npc} — on the circuit; expected back at {settlement} by the frosts.
-8. Factor {npc} — at {counterpart}, treating for the seat of {settlement}.
-9. Factor {npc} — turned back on the {route}; the errand stands open.
-10. Factor {npc} — home from {counterpart}; the terms came back unagreed.
+1. Factor {npc}: on the road to {counterpart}, expected by midsummer. *(volume exemplar, slotted)*
+2. Factor {npc}: overdue; no word since the spring. *(volume exemplar, slotted)*
+3. Factor {npc}: at home in {settlement}; no errand standing.
+4. Factor {npc}: held by {faction} on the {route}; ransom under discussion.
+5. Factor {npc}: returned from the circuit; the house's bands are fresh.
+6. Factor {npc}: home; the ransom to {faction} is paid and entered.
+7. Factor {npc}: on the circuit; expected back at {settlement} by the frosts.
+8. Factor {npc}: at {counterpart}, treating for the seat of {settlement}.
+9. Factor {npc}: turned back on the {route}; the errand stands open.
+10. Factor {npc}: home from {counterpart}; the terms came back unagreed.
 
 ---
 
@@ -1444,6 +1444,6 @@ AUDIENCE: public
 2. The old carters knew the way and were pleased to be asked.
 3. The route is entered revived, its flows resuming against its old charter.
 4. The reason it died has gone, and the reason it lived has not.
-5. Nothing is forgotten on this map — not even a road.
+5. Nothing is forgotten on this map, not even a road.
 6. Someone cleared the ford on the {route} by hand before the first carts came, and has not said who.
 7. The first season's traffic was light, and the second season's was not.

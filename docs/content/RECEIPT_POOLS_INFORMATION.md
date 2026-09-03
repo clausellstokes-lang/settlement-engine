@@ -86,7 +86,7 @@ SLOTS: {settlement}, {counterpart}, {house}, {band}
 AUDIENCE: dm-only
 1. The bought telling has taken at {counterpart}: what {settlement} paid for is now what that court holds.
 2. In {counterpart}'s council chamber the purchased word is quoted as common knowledge; nobody recalls who brought it in.
-3. {house}'s commission is discharged — the ledger closes, and the falsehood stands at {band} in a real court's reckoning.
+3. {house}'s commission is discharged. The ledger closes, and the falsehood stands at {band} in a real court's reckoning.
 4. The story arrived slowly, the way true things do, and was taken for one.
 5. It is held now. That was the whole of the purchase.
 6. In {counterpart}'s market the tale needs no teller now; it is simply what is known of {settlement}.
@@ -99,12 +99,12 @@ SLOTS: {settlement}, {counterpart}, {house}
 AUDIENCE: dm-only
 1. The bought story reached {counterpart} and found the court already better served; it went no further.
 2. Factors at {counterpart} had the matter from two roads already, and the bought telling agreed with neither; the tale thinned and stopped.
-3. {house} at {settlement} is paid all the same — the commission bought a telling, never a believing.
+3. {house} at {settlement} is paid all the same. The commission bought a telling, never a believing.
 4. Nothing came of it. Somewhere a ledger still shows the price.
 5. In {counterpart}'s taverns the tale was told once, badly, and not taken up.
 6. Carters out of {settlement} carried it as far as the first toll and found better talk waiting there.
 7. It had a season to take and did not; by spring nobody at {counterpart} could say where they had heard it.
-8. {settlement} will try again with another hand — the failure is entered as a cost of the trade.
+8. {settlement} will try again with another hand. The failure is entered as a cost of the trade.
 9. The man paid to tell it told it well. Some rooms are simply full.
 
 ### plant_exposed (IN-0a; extends `infowar_lie_exposed` to NAME THE MARKET) — Herald knowledge desk — significance: notable
@@ -113,7 +113,7 @@ AUDIENCE: public
 1. The word out of {house} at {settlement} is broken; what it sold of {counterpart} does not match what the roads bring.
 2. {house}'s stamp now needs a second road behind it before {counterpart}'s quays will take it, and everyone working those quays can say why.
 3. {house}'s stamp is worth {band} less this season than last; {reason} is written beside it in every counting-house.
-4. The market that sold the story now wears it — {settlement} keeps the coin and loses the custom.
+4. The market that sold the story now wears it: {settlement} keeps the coin and loses the custom.
 5. It was a good story. It was sold too often, and to the wrong court.
 6. {faction} bought the telling; the buying is on the record now, and the record travels.
 
@@ -134,7 +134,7 @@ AUDIENCE: public
 ### intercept_hum (IN-0b) `[POOL HANDLE]` — Herald knowledge desk (DM projection) — significance: routine
 SLOTS: {settlement}, {counterpart}, {house}, {faction}
 AUDIENCE: dm-only
-1. Word passes quietly between courts — and quieter still, someone reads it.
+1. Word passes quietly between courts, and quieter still, someone reads it.
 2. A packet out of {settlement} was opened, copied, and sealed again before the harbour bell.
 3. {house} keeps a room at {settlement} for reading what was never addressed to it.
 4. {faction} pays {house} to know what {counterpart} writes; the fee is entered as freight.
@@ -147,7 +147,7 @@ AUDIENCE: dm-only
 ### intercept_read (IN-0b) — the patron's DM intelligence block — significance: routine
 SLOTS: {settlement}, {counterpart}, {house}, {faction}, {route}, {band}
 AUDIENCE: dm-only
-1. {house} can say this much of {counterpart}'s traffic: a carriage went out, and to whom — no further.
+1. {house} can say this much of {counterpart}'s traffic: a carriage went out, and to whom. No further.
 2. The claim reaches {faction} at the rung it was bought at; the broker will not swear past it.
 3. What {counterpart} sent along {route} is known at {settlement} now, in outline and at {band} certainty.
 4. They know a letter went. They do not know what it said, and the price did not cover knowing.
@@ -162,7 +162,7 @@ SLOTS: {settlement}, {counterpart}, {house}, {faction}
 AUDIENCE: dm-only
 1. {house} took the question and returned the coin: the register holds nothing of {counterpart} this season.
 2. Nothing of {counterpart} has passed {settlement}'s readers; the honest answer is the whole answer.
-3. The broker at {settlement} would sooner refuse than invent — the register is empty, and says so.
+3. The broker at {settlement} would sooner refuse than invent. The register is empty, and says so.
 4. A silence is a poor purchase. It is what {faction} bought.
 5. The register is turned round on the table at {house} so {faction}'s man may read the blank himself.
 6. The broker's clerks at {settlement} give the shrug they keep for the truth.
@@ -189,12 +189,12 @@ AUDIENCE: public
 ### disclosure_feed (IN-0c) `[POOL HANDLE]` — the victor's DM intelligence block — significance: routine
 SLOTS: {settlement}, {counterpart}, {band}, {season}
 AUDIENCE: dm-only
-1. This season's accounting out of {settlement} reached {counterpart} at the term's fidelity — thin, and true enough.
+1. This season's accounting out of {settlement} reached {counterpart} at the term's fidelity: thin, and true enough.
 2. {counterpart} learns of {settlement}'s musters the slow legal way, a season stale and sworn to.
 3. The compelled word carries the loser's own doubts with it; {counterpart}'s file inherits both.
-4. What arrives under the article is what {settlement} had, when it had it — no better and no fresher.
+4. What arrives under the article is what {settlement} had, when it had it: no better and no fresher.
 5. Since {season} the returns have come at {band}, on time, and told {counterpart} nothing it did not expect.
-6. The returns are copied fair, sealed, and entered — {settlement}'s clerks make no error the article can catch.
+6. The returns are copied fair, sealed, and entered: {settlement}'s clerks make no error the article can catch.
 7. At {settlement} they call the treaty clerks the visitors, and give them the dull rooms.
 8. {counterpart} will plan on this and be a season behind for the whole of the term.
 9. Everything asked for was sent. Nothing more was.
@@ -202,7 +202,7 @@ AUDIENCE: dm-only
 ### disclosure_strained (IN-0c; renders the term's built `strained` compliance state — NO new vocabulary) — Herald knowledge desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {reason}, {season}
 AUDIENCE: public
-1. They signed the open door and barred it — {settlement}'s returns to {counterpart} come late and come short.
+1. They signed the open door and barred it: {settlement}'s returns to {counterpart} come late and come short.
 2. {counterpart}'s clerks were kept at the gate at {settlement} all {season}; the term does not say they may be.
 3. The article stands; the compliance does not. {reason} is entered against {settlement} in the treaty file.
 4. Nothing was refused outright. Nothing useful arrived either.
@@ -213,7 +213,7 @@ AUDIENCE: public
 SLOTS: {settlement}, {counterpart}, {place}
 AUDIENCE: public
 1. The term ran out at {settlement} and the door shut the same week; {counterpart}'s clerks rode home.
-2. {counterpart} hears nothing further out of {settlement}'s muster hall — the article's years are done.
+2. {counterpart} hears nothing further out of {settlement}'s muster hall. The article's years are done.
 3. The open-door years written at {place} close on the calendar they were written to.
 4. The clerks left on the day named in the instrument, and nobody asked them to stay.
 5. The last return is filed and the file closed on the date the instrument named.
@@ -244,7 +244,7 @@ AUDIENCE: public
 5. The town is safer. The town is also poorer, and the two facts share a cause.
 6. The counting-house at {settlement} shows fewer entries each quarter and the same wages to the same gate men.
 7. Ask any factor on the {route} road why he passes {settlement} by, and he will tell you about the questions.
-8. A season of shut gates has done what no rival could — the market at {counterpart} holds {settlement}'s custom now.
+8. A season of shut gates has done what no rival could. The market at {counterpart} holds {settlement}'s custom now.
 9. The stallholders keep their pitches out of habit. The habit is what is left.
 
 ### hide_toll_line (IN-0d; the dossier GLANCE line — settlement brief, trade lines) — settlement brief / town page trade lines — significance: routine (dossier line, not a Herald beat)
@@ -252,7 +252,7 @@ SLOTS: {band}
 AUDIENCE: public
 1. Sealed, and paying for it.
 2. Gates shut; trade at {band} of what the road would bear.
-3. Closed to strangers — the counting-house shows the price.
+3. Closed to strangers. The counting-house shows the price.
 4. A shut gate, and a thin book.
 5. Safe, and thinly supplied.
 6. Strangers turned back; the quay shows it.
@@ -272,12 +272,12 @@ AUDIENCE: public
 ### mirror_shift (IN-1) — Herald knowledge desk — significance: routine
 SLOTS: {settlement}, {counterpart}, {season}, {band}, {route}
 AUDIENCE: public
-1. By its own ledger, {settlement} has shown {counterpart} less than it did a year ago — and shown it nothing since {season}.
+1. By its own ledger, {settlement} has shown {counterpart} less than it did a year ago, and shown it nothing since {season}.
 2. What {settlement} sends {counterpart} now is weather and greetings; the figures stopped going out in {season}.
 3. The record of what {counterpart} has been shown thins to {band}; the last entry is a courtesy, not an accounting.
 4. Much was shown to {counterpart} once. The ledger has been closing ever since.
 5. Nothing has gone out along {route} to {counterpart} for a season, and the picture they were handed keeps its old shape.
-6. {settlement} has shown {counterpart} {band} of what it showed {counterpart} before the war — deliberately, and it is written down.
+6. {settlement} has shown {counterpart} {band} of what it showed {counterpart} before the war: deliberately, and it is written down.
 7. At {settlement}'s quay, {counterpart}'s factors ask now for what used to be handed to them unasked.
 8. Against {counterpart}'s name the chancery's list of sendings runs long, and then stops, and the stopping is dated.
 9. Whatever {counterpart} settles on next, it settles on paper {settlement} handed over before the war.
@@ -286,7 +286,7 @@ AUDIENCE: public
 SLOTS: {settlement}, {counterpart}, {reason}, {season}
 AUDIENCE: public
 1. {counterpart} moved on a matter {settlement} never showed them; the chancery's ledger is no longer a safe guide.
-2. Word is that {counterpart} did {reason} — nothing {settlement} ever sent could have told them that.
+2. Word is that {counterpart} did {reason}. Nothing {settlement} ever sent could have told them that.
 3. A telling of {settlement}'s was broken in {counterpart}'s court; whatever else was shown must be counted doubtful now.
 4. The clerks kept a careful ledger of what was shown. Since {season} it has stopped explaining what {counterpart} does.
 5. The chancery has begun marking old entries doubtful; this quarter the marks outnumber the entries.
@@ -346,7 +346,7 @@ SLOTS: {settlement}, {counterpart}, {temple}, {house}, {faction}
 AUDIENCE: dm-only
 1. A charter was shown at {temple} that no chancery had ever sealed, and the crowds at {settlement} read it as proof.
 2. {house} sold {faction} a neighbour full of the wrong devotion; the pews at {settlement} filled with the news.
-3. The document is old, the hand is older, and the ink is not — but {temple} has called it authentic and the calling is what travels.
+3. The document is old, the hand is older, and the ink is not, but {temple} has called it authentic and the calling is what travels.
 4. {counterpart}'s faith was never in question until a forgery raised it, and the raising cannot be unraised.
 5. The road to the shrine at {counterpart} carried pilgrims first and pikes after; the paper that sent them both is in {house}'s vault.
 6. The charter passed from hand to hand at {settlement} until the copies outnumbered the questions.
@@ -355,7 +355,7 @@ AUDIENCE: dm-only
 SLOTS: {settlement}, {counterpart}, {house}, {faction}
 AUDIENCE: dm-only
 1. {faction}'s captains had the tale out of {house} and better word off two roads besides; the muster stood down.
-2. The bait sat in {counterpart}'s court a whole season and moved nothing — good sourcing is armour.
+2. The bait sat in {counterpart}'s court a whole season and moved nothing. Good sourcing is armour.
 3. {house} at {settlement} is paid, the story is planted, and the mark has gone on knowing better.
 4. They were told a thing worth marching on. They asked someone else first.
 5. The muster roll is entered and struck through in one week; the clerk's note says the word did not hold.
@@ -367,7 +367,7 @@ AUDIENCE: dm-only
 ### lure_exposed_first (IN-2) — Herald knowledge desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {house}, {faction}, {band}
 AUDIENCE: public
-1. The story broke before the march did — {house}'s telling of {counterpart} is contradicted at every quay.
+1. The story broke before the march did: {house}'s telling of {counterpart} is contradicted at every quay.
 2. {faction} learns what it was sold before it spends a spear on it; the coin is gone, the war is not bought.
 3. {house}'s stamp falls {band} and the commission goes cold on the shelf; {settlement} wears the shame of the sale.
 4. It was found out in time. That is all the mercy in it.
@@ -379,7 +379,7 @@ SLOTS: {settlement}, {counterpart}, {house}, {faction}
 AUDIENCE: public
 1. {faction} marched on a bought weakness and learned the price after the fact; the grievance names {house} at {settlement} and the buyer both.
 2. The first page of {counterpart}'s case is not the march but the paper that arranged it, and {house} is named on that page.
-3. The war stands; the cause does not — and both courts can read who paid for it.
+3. The war stands; the cause does not. And both courts can read who paid for it.
 4. They got their war. They also got a name fastened to it, in {counterpart}'s hand.
 5. The bought march is a debt now, and {faction} will pay it in {counterpart}'s courts for a generation.
 6. In {counterpart}'s market they name the house before they name the army.
@@ -400,11 +400,11 @@ AUDIENCE: public
 1. Rumour calls {counterpart} weak, but the live muster shows an equal or stronger host; {faction}'s captains will not march on it.
 2. The word out of {settlement} says {counterpart} is spent; the scouts say otherwise, and the scouts were sent for.
 3. {faction}'s council heard the tale and counted the spears. The counting won.
-4. They were offered a weakness and declined it — the story stands, and stands unspent.
+4. They were offered a weakness and declined it. The story stands, and stands unspent.
 5. {house} sold a march and {faction} did not buy it; the coin was another court's, and it is still gone.
 6. The order was drawn and not sealed; the muster return is filed beside it, and the return is the reason.
 7. At {settlement} the taverns had the war for a fortnight and then gave it back.
-8. The tale keeps its currency and loses its use — {counterpart} will hear it repeated by men who never marched.
+8. The tale keeps its currency and loses its use: {counterpart} will hear it repeated by men who never marched.
 9. The scouts came back muddy and certain, and the certainty carried the room.
 
 ### grievance_named_lie (IN-2 / IN-5; scoreGrievance's incident-naming variant) — Herald knowledge desk / the war brief's grievance line — significance: notable
@@ -414,7 +414,7 @@ AUDIENCE: public
 2. {counterpart}'s case against {faction} begins not at a border but with a bought story out of {house} at {settlement}.
 3. The first entry is the forgery; every entry after it is what the forgery cost.
 4. They can name the lie at last. It does not give back the season it took.
-5. The case is drawn with the forgery as its first exhibit — dated, priced, and attributed.
+5. The case is drawn with the forgery as its first exhibit: dated, priced, and attributed.
 6. The naming will be read into every negotiation from here, and {faction} pays a little for it each time.
 
 ---
@@ -448,7 +448,7 @@ AUDIENCE: public
 SLOTS: {settlement}
 AUDIENCE: public
 1. {settlement}'s watch questioned every stranger for a season and found no one; the cost stands in the book.
-2. The gates were toothed and the gates were empty — no paid eye, no purse, no name.
+2. The gates were toothed and the gates were empty: no paid eye, no purse, no name.
 3. {settlement} paid for a hunt and bought a quiet town; the council calls it money well spent.
 4. They looked hard and there was nothing to find; some towns are simply quiet.
 5. The cost of the sweep is entered in full; against it the seat's book records no name and no purse.
@@ -460,7 +460,7 @@ AUDIENCE: public
 ### sweep_witch_hunt (IN-3 endings `witch_hunt`; mints the `false_accusation` receipt — REPUTATION only, no fate) — Herald knowledge desk — significance: notable
 SLOTS: {settlement}, {npc}
 AUDIENCE: public
-1. They found no spy at {settlement}, and named one anyway — the town remembers whose name it was.
+1. They found no spy at {settlement}, and named one anyway. The town remembers whose name it was.
 2. The sweep turned up nothing; {npc} was named on a season's association and nothing firmer.
 3. The seat wanted an answer more than it wanted the truth, and {npc}'s name was the nearest one to hand.
 4. {npc}'s custom fell away within the week; the charge was never proved and never withdrawn.
@@ -472,7 +472,7 @@ SLOTS: {settlement}, {counterpart}, {house}, {npc}
 AUDIENCE: dm-only
 1. {settlement}'s clerks read {npc}'s associations and found nothing crossed; the channel keeps its rung.
 2. The courier out of {house} is who the house says he is, and the seat will take his word at full weight.
-3. Ties, debts, and kin all counted — the source at {counterpart} stands clean in the file.
+3. Ties, debts, and kin all counted. The source at {counterpart} stands clean in the file.
 4. Nothing wrong with the man. The checking was the point.
 5. Debts, kin, and custom are set down on one page at {settlement}, and the page comes out even.
 6. The channel keeps its rung, and what it sends next will be taken at full weight.
@@ -484,7 +484,7 @@ AUDIENCE: dm-only
 SLOTS: {settlement}, {counterpart}, {house}, {npc}, {faction}, {band}
 AUDIENCE: dm-only
 1. {npc} carries {counterpart}'s word and {faction}'s debts; the seat at {settlement} discounts him {band}.
-2. {house} vouches for the courier and profits by his telling — the file says so plainly.
+2. {house} vouches for the courier and profits by his telling. The file says so plainly.
 3. The channel keeps its rung and loses a band; nothing is proved, and nothing is trusted either.
 4. He may be honest. His creditors are not, and the seat has read the ledger.
 5. The seat's file carries a note beside {npc}'s name and a band beside the note; both travel with all he sends.
@@ -500,7 +500,7 @@ AUDIENCE: dm-only
 2. The second rider's telling is {band} off the first's, and the road cannot account for the whole of it.
 3. {house}'s clerks lay the two reports side by side; their note says one man has been somewhere he should not have been.
 4. Both men rode the same {route}. Only one arrived with the story he left with.
-5. Two accounts, one cargo, a page each — {house}'s clerk has ruled a line between them and written nothing beneath it.
+5. Two accounts, one cargo, a page each: {house}'s clerk has ruled a line between them and written nothing beneath it.
 6. On the quay at {settlement} the two carriers no longer drink together, and the quay has noticed.
 7. Neither account will be trusted alone again; the seat sends in pairs from here on.
 8. The {route} road is long enough to explain a day and not long enough to explain the rest.
@@ -509,18 +509,18 @@ AUDIENCE: dm-only
 ### gates_closed_in_answer (IN-3, HIDE-AS-ANSWER — the deliberate entry path) `[POOL HANDLE]` — Herald knowledge desk — significance: notable
 SLOTS: {settlement}, {reason}, {season}, {npc}
 AUDIENCE: public
-1. {settlement} shuts its gates to strangers and the council names {reason} — a paid eye taken at the quay in {season}.
+1. {settlement} shuts its gates to strangers and the council names {reason}: a paid eye taken at the quay in {season}.
 2. After {npc} was found out at {settlement}, the harbour-master keeps a list, and the list is short.
 3. The seat did not grow fearful by degrees; it read the evidence and closed the door inside a week.
 4. They were watched. Now nobody is let in to watch.
-5. The order is entered with its cause beside it — the seat wants it known that the closing was earned.
+5. The order is entered with its cause beside it. The seat wants it known that the closing was earned.
 6. The tolls will fall and the council knows it; it has decided a shut gate is worth the thinner book.
 
 ### gates_reopened (IN-3; the pinned reversal — suspicion decays, gates reopen) `[POOL HANDLE]` — Herald knowledge desk — significance: routine
 SLOTS: {settlement}, {good}
 AUDIENCE: public
 1. The gates at {settlement} stand open again; nothing has surfaced in a year, and the tolls were missed.
-2. Strangers pass at {settlement} unasked once more — the fear outlived the evidence by a season, and then it did not.
+2. Strangers pass at {settlement} unasked once more. The fear outlived the evidence by a season, and then it did not.
 3. The watch rolls are closed and the quay is busy with {good} again; the council mentions neither.
 4. Fear is expensive. {settlement} has done the arithmetic.
 5. The watch line closes in the town's book and the toll line opens; the council reads both without comment.
@@ -557,7 +557,7 @@ SLOTS: {settlement}, {faction}, {house}
 AUDIENCE: dm-only
 1. {faction} calls its eyes home from {settlement} before the sweep reaches them; the retainer stops this quarter.
 2. The decision is written and dated: the risk at {settlement} outran the worth of the watching.
-3. {house} is told to close the arrangement cleanly — no letters, no last errand, no trace on the quay.
+3. {house} is told to close the arrangement cleanly: no letters, no last errand, no trace on the quay.
 4. Nobody was caught. The watching simply stopped being worth its price.
 5. The quarterly entry stops, and the line is ruled off with a date and no note.
 6. The man at {settlement} keeps his post and stops receiving letters, and the quay marks no difference.
@@ -570,7 +570,7 @@ SLOTS: {settlement}, {counterpart}, {faction}, {npc}
 AUDIENCE: dm-only
 1. Nothing has come out of {settlement} for {counterpart} in a year; the arrangement is neither closed nor answering.
 2. The retainer is still paid and the letters have stopped; {faction}'s clerks keep the line open out of habit.
-3. {npc} keeps his post and keeps his silence — whether from fear, or care, or a change of mind, the file does not say.
+3. {npc} keeps his post and keeps his silence. Whether from fear, or care, or a change of mind, the file does not say.
 4. No burning, no recall, no word. The thread frays where nobody is looking.
 5. The retainer line runs on, quarter after quarter, against an empty column of returns.
 6. At {settlement} he is where he always was, doing what he always did, and saying nothing to anyone.
@@ -584,7 +584,7 @@ AUDIENCE: public
 1. The house's ledger, read by lamplight, named its true patron.
 2. {house} at {settlement} has been {faction}'s all along, and the stamp on its word is worth {band} less this morning.
 3. Rivals who bought from {house} in good faith are reading every old report again, and liking none of them.
-4. Neutral for a generation and bought for a season — the quays had the story before the council did.
+4. Neutral for a generation and bought for a season. The quays had the story before the council did.
 5. It sold the truth honestly, and sold the buyer too.
 6. Every report {house} sold in the last years will be read again for whose interest it served.
 
@@ -592,7 +592,7 @@ AUDIENCE: public
 SLOTS: {settlement}, {counterpart}, {house}, {band}
 AUDIENCE: public
 1. The charge against {house} at {settlement} was loud for a season and proved nothing; the custom came back.
-2. {house}'s stamp holds — the ledgers were opened, and what was in them was dull.
+2. {house}'s stamp holds. The ledgers were opened, and what was in them was dull.
 3. {counterpart}'s factors returned to {house}'s counter inside the year, quietly, and did not raise the matter.
 4. The name was shaken and not broken. It is a difference of {band}, and of everything.
 5. The books were opened to the seat at {settlement} and closed again; the entry against {house} reads nothing proved.
@@ -625,7 +625,7 @@ AUDIENCE: public
 SLOTS: {settlement}, {counterpart}, {house}, {faction}
 AUDIENCE: dm-only
 1. {house} returned {faction}'s coin: {counterpart}'s gates are toothed this season, and the blowback prices above the fee.
-2. The commission is refused and the refusal is entered — {house} will not sell into a swept court.
+2. The commission is refused and the refusal is entered: {house} will not sell into a swept court.
 3. The broker at {settlement} names the risk and not the scruple; he would take the same work in a quieter year.
 4. Too hot, said the ledger, and the ledger is the conscience.
 5. The refusal is entered with its date and its reason; {house} keeps a record of the work it does not take.
@@ -656,7 +656,7 @@ SLOTS: {settlement}, {counterpart}, {npc}, {faction}, {route}
 AUDIENCE: dm-only
 1. {npc} was taken on the {route} road with {faction}'s cargo; what {counterpart} paid for will not arrive.
 2. The packet is in {settlement}'s hands, and the buyer's court is still waiting at the gate.
-3. {counterpart} reads the silence and draws its own conclusions — most of them wrong.
+3. {counterpart} reads the silence and draws its own conclusions: most of them wrong.
 4. The word was worth taking. That is why it was taken.
 5. The packet is entered in {settlement}'s book as taken on the road, and the fee is entered as forfeit.
 6. They took him at the ford where everyone is taken, as the {route} road has known for years.
@@ -665,7 +665,7 @@ AUDIENCE: dm-only
 SLOTS: {settlement}, {counterpart}, {npc}, {house}, {route}
 AUDIENCE: dm-only
 1. Nothing came off the {route} road this season; {npc} and the cargo are both unaccounted for at {counterpart}.
-2. The sale is void and the coin is spent — {house} will argue the point for a year.
+2. The sale is void and the coin is spent: {house} will argue the point for a year.
 3. Winter, water, or a bad turning: the file at {settlement} says only that it did not arrive.
 4. He went out with a packet and did not come in. The road keeps some.
 5. {house} enters the cargo unaccounted and leaves the line open, as the custom is for a year and a day.
@@ -735,10 +735,10 @@ SLOTS: {settlement}, {counterpart}, {npc}, {reason}
 AUDIENCE: public
 1. The word clearing {npc} reached {settlement} after the seat had already ruled on the story, and the hours between are in the record.
 2. {counterpart}'s letter came in on the evening tide; the gate had been answered at noon.
-3. Both tellings are filed together at {settlement} — the false one first, and the true one under it.
+3. Both tellings are filed together at {settlement}: the false one first, and the true one under it.
 4. The seat acted on {reason} and learned better in a fortnight; the acting cannot be taken back.
 5. Nobody lied. The road did the rest.
-6. The clearing letter is entered with its hour, and the hour is after the ruling's — the clerks were careful to write both.
+6. The clearing letter is entered with its hour, and the hour is after the ruling's. The clerks were careful to write both.
 
 ---
 
@@ -779,7 +779,7 @@ SLOTS: {settlement}, {counterpart}, {faction}, {npc}
 AUDIENCE: dm-only
 1. Someone at {settlement} counts the gate traffic every market day and is paid for it out of {counterpart}.
 2. The watching goes on; nothing has come of it this season, and nothing has gone wrong with it either.
-3. {faction}'s file on {settlement} grows a page a month — musters, tolls, and who dines with whom.
+3. {faction}'s file on {settlement} grows a page a month: musters, tolls, and who dines with whom.
 4. Nothing happened at {settlement} this season. It was carefully noted.
 5. {npc} has sent the same dull report a year running, and the dullness is the value.
 6. The quarterly return out of {settlement} is entered, read, and shelved; the shelf is where most watching ends.
@@ -792,7 +792,7 @@ SLOTS: {settlement}, {counterpart}, {season}, {reason}
 AUDIENCE: public
 1. The court knew, and sat still; the knowing is part of the account now.
 2. {settlement}'s council had corroborated word of {counterpart}'s muster and passed to the next business.
-3. The warning was read into the record at {settlement} and answered with nothing — no levy, no letter, no gate order.
+3. The warning was read into the record at {settlement} and answered with nothing: no levy, no letter, no gate order.
 4. They had the word in {season}, and the record shows what was done with it, which is nothing.
 5. It was not ignorance. It was a choice, and it is written down under {reason}.
 6. The commons at {settlement} learned later that the seat had the word first, and that is the part they repeat.
@@ -825,11 +825,11 @@ SLOTS: {settlement}, {faction}
 AUDIENCE: dm-only
 1. {faction} closed the arrangement at {settlement} before the sweep reached it; the account ends on a decision, not a discovery.
 2. The eyes came home. Nothing was proved, nothing was lost, and nothing further will be learned.
-3. The last entry is an order and a date — the cheapest ending these accounts allow.
+3. The last entry is an order and a date: the cheapest ending these accounts allow.
 4. They stopped watching. They chose to, which is rare.
 5. The last line in the account is an order, a date, and a sum that stops.
 6. Nobody at {settlement} marked the ending, which is what a clean ending looks like.
-7. {faction} keeps the name, the road, and the knowing of how it was done — the arrangement can be made again.
+7. {faction} keeps the name, the road, and the knowing of how it was done. The arrangement can be made again.
 8. They closed it before the sweep and before the winter, and both arrived to find nothing.
 9. It ends on a decision. Almost none of them do.
 
@@ -837,7 +837,7 @@ AUDIENCE: dm-only
 SLOTS: {settlement}, {faction}, {npc}
 AUDIENCE: dm-only
 1. The reports out of {settlement} thinned and stopped; the file stays open because nobody can say it is closed.
-2. No burning, no recall — {faction}'s clerks go on paying {npc}'s retainer into a silence.
+2. No burning, no recall: {faction}'s clerks go on paying {npc}'s retainer into a silence.
 3. The account has no ending, only a last page with a date on it.
 4. Something happened at {settlement}, or nothing did. The record cannot tell them which.
 5. The file is neither closed nor current; a clerk writes the date each quarter and nothing beside it.
@@ -861,7 +861,7 @@ SLOTS: {settlement}, {faction}, {house}, {reason}, {season}
 AUDIENCE: public
 1. The house that fell at {settlement} this season had been named a year before, in a matter nobody pursued.
 2. {faction}'s seat is emptied on {reason}, and the condition that named it has stood on the record since {season}.
-3. The turn at {settlement} surprised the chronicle and not the file — the exposure was there to read.
+3. The turn at {settlement} surprised the chronicle and not the file. The exposure was there to read.
 4. Everyone acted shocked. The evidence had been public for a year.
 5. {house} was compromised in the open, and it took a season for anyone to act on the reading.
 6. The fall is entered this season and the naming a year before it; anyone reading both sees the seat chose the delay.

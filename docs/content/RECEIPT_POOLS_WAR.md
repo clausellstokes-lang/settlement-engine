@@ -216,7 +216,7 @@ an R3 news summary there — and both pools stay, one per axis, cross-referenced
 SLOTS: {settlement}, {counterpart}, {reason}, {term}
 AUDIENCE: public
 1. The pact between {settlement} and {counterpart} held; the muster rolls went back into the chest unread.
-2. Men expected a war and got an assize instead — the compact stood, and {reason} went to the clerks.
+2. Men expected a war and got an assize instead. The compact stood, and {reason} went to the clerks.
 3. The captains of {settlement} were told the {term} forbade it, and told again.
 4. There was no march that season. The paper was worth what it cost, which surprised the quays.
 5. {settlement} kept its oath to {counterpart} quietly, and the grievance is still open on the ledger.
@@ -232,7 +232,7 @@ AUDIENCE: public
 1. {settlement} repudiated its compact with {counterpart} and named {reason} for it.
 2. {npc} put the treaty aside before the court, and the clerks struck every live {term} the same afternoon.
 3. The wagons owed under the old terms will not come; the factors of {counterpart} are already writing it down as debt.
-4. The oath was broken openly rather than quietly — a distinction {counterpart} will not be paid in.
+4. The oath was broken openly rather than quietly, a distinction {counterpart} will not be paid in.
 5. They broke it in daylight and let the roads carry it; the breach is a casus in {counterpart}'s book before the season turns.
 
 ### trade_war_escalation (WR-0c) — Herald, war desk — significance: notable
@@ -242,7 +242,7 @@ AUDIENCE: public
 2. What began at the toll house is an order in the war ledger now, and every ordinary gate still stands in front of it.
 3. The chandlers of {settlement} wanted redress and were given a deployment question instead.
 4. {settlement} names {counterpart} an enemy over {reason}; whether an army follows is another court's arithmetic.
-5. The tariff war ended the way tariff wars end — with a name written into the wrong ledger.
+5. The tariff war ended the way tariff wars end: with a name written into the wrong ledger.
 6. The factors who began the quarrel over {good} are asking one another, quietly, whether they meant this.
 
 ---
@@ -285,14 +285,14 @@ AUDIENCE: public
 1. Too much has been spent for {settlement} to turn now, and the spending is the argument.
 2. The dead are the reason the war continues, which is the oldest reason there is.
 3. {npc} could end it and could not survive ending it; the seat decides before the ledger does.
-4. It is not the cause and it is not the cost — it is the climbing down.
+4. It is not the cause and it is not the cost. It is the climbing down.
 5. The war carries itself; the court has become a passenger, and the stock of commitment reads {band}.
 6. There are fresh names cut into the chantry wall at {settlement}, and no council argues with a wall.
 
 ### war_cause_dissolved (WR-1) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {reason}
 AUDIENCE: public
-1. The war outlived its reason — men still dying for a god nobody worships. *(§8)*
+1. The war outlived its reason, men still dying for a god nobody worships. *(§8)*
 2. {reason} is gone from the ledger and the levies are still out.
 3. The clerks of {settlement} could not find the grievance this quarter; the captains found the enemy without difficulty.
 4. Whatever they are fighting for, it is not what they marched for.
@@ -333,7 +333,7 @@ AUDIENCE: dm-only
 1. The claim scored nothing: the live read of {counterpart} contradicts it, and the contradicting record is named.
 2. {settlement}'s court could argue the grievance; its own ledgers argue back.
 3. Nothing was minted, so nothing can ripen: the grievance waits on {reason} moving, not on the seat's temper.
-4. The clerks kept both entries — the claim, and the record that refuses it — and filed them on the same page.
+4. The clerks kept both entries (the claim, and the record that refuses it) and filed them on the same page.
 5. The cause exists on paper and dies against the state that produced it.
 6. The suppression carries the same address the claim would have carried: both seats, {reason}, and the entry that refuses it.
 7. Season after season the claim is raised and refused by the same entries, and the entries have not moved.
@@ -384,7 +384,7 @@ AUDIENCE: dm-only
 3. A town that has lost its wars and prays for rain is not made warlike by being asked.
 4. The court could be pressed and would not move; the ledger explains why before anyone asks.
 5. Incoherence is visible rather than silent: the score is nothing, and every record that made it nothing is on the sheet.
-6. The sheet names every input — the {temple}'s calendar, the book of losses, the town's temper — and each of them argues the other way.
+6. The sheet names every input (the {temple}'s calendar, the book of losses, the town's temper), and each of them argues the other way.
 7. Press the town again next season and the read returns the same nothing, unless the {temple} changes hands.
 8. Somebody wanted a war out of {settlement} and went looking for the temper to build it on; the sheet is what they found.
 9. The drill ground at {settlement} is pasture most of the year, and the reeve rents it out.
@@ -905,7 +905,7 @@ SLOTS: {settlement}, {counterpart}, {npc}
 AUDIENCE: public
 1. One envoy returned from {counterpart}, and the whole peace rests on {npc}'s telling of it.
 2. The account is reported, not corroborated, and the record says so plainly.
-3. A single source with a great deal riding on it — the ladder has a name for that.
+3. A single source with a great deal riding on it: the ladder has a name for that.
 4. The hall is deciding a war on a man's memory of a room.
 5. He may be honest and mistaken, and the sheet cannot tell them apart.
 6. The market heard the parley described before the council did, and from the same mouth.
@@ -913,7 +913,7 @@ AUDIENCE: public
 ### compromise_round_opened (WR-7c) — Herald, adjudication desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {route}
 AUDIENCE: public
-1. The vote was close, so both courts sent envoys out again — and the fighting did not pause for it.
+1. The vote was close, so both courts sent envoys out again, and the fighting did not pause for it.
 2. There is no ceasefire in this world; the talking rides alongside the war.
 3. {settlement} and {counterpart} are negotiating and campaigning in the same season, as everyone does.
 4. A near miss is an invitation, and both halls took it.

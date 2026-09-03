@@ -168,7 +168,7 @@ SLOTS: {settlement} {counterpart}
 AUDIENCE: public
 1. The peace was priced on a lie, and now the lie is out. `[exemplar]`
 2. The peace of {settlement} and {counterpart} was struck on a strength that was never there; the word is out, and the terms read differently by it.
-3. What {settlement} paid, it paid against a muster {counterpart} had invented — the clerks have the old sheet out again.
+3. What {settlement} paid, it paid against a muster {counterpart} had invented. The clerks have the old sheet out again.
 4. It is said in both courts that the treaty was bought with a false count; nobody is calling it void, and nobody is calling it fair.
 5. The lie is known and the terms it purchased still stand. That is the whole of the injury.
 
@@ -227,7 +227,7 @@ AUDIENCE: dm-only
 SLOTS: {settlement} {counterpart} {npc}
 AUDIENCE: public
 1. {npc} of {settlement} and {npc} of {counterpart} set their names to it. `[exemplar, slotted]`
-2. Sworn by {npc} for {settlement} — the seal is his own, and not the seat's.
+2. Sworn by {npc} for {settlement}: the seal is his own, and not the seat's.
 3. It is {npc}'s peace, and the market calls it that when it speaks of it at all.
 4. {npc} put a hand to it in {settlement}; whoever sits there after answers for the hand.
 5. Two names, one parchment, and no other word in it.
@@ -240,7 +240,7 @@ SLOTS: {settlement} {counterpart}
 AUDIENCE: public
 1. The seat swore it, and the seat keeps it.
 2. No name is set to this one; it binds the chair in {settlement}, whoever warms it.
-3. It was sworn by the office and not the man — older than the present court's memory.
+3. It was sworn by the office and not the man: older than the present court's memory.
 4. The parchment names {settlement} and {counterpart}, and nobody else.
 5. Whoever holds the seat has inherited it, unasked.
 6. The clerks can say which court signed it and not which hand; the register keeps towns, not people.
@@ -254,7 +254,7 @@ AUDIENCE: public
 2. The obligation is {npc}'s and not the seat's; the books in {settlement} say so plainly.
 3. {counterpart} took the {good} on one man's word, and the word was given in front of the market.
 4. A debt outlasts the hand that gave it: whoever answers for {npc}'s house answers for this.
-5. Sworn, sealed, and owed — {band} seasons to the maturity.
+5. Sworn, sealed, and owed: {band} seasons to the maturity.
 6. The {good} moved on a promise and not a payment, and the promise is what {settlement}'s books actually hold.
 7. If {npc} leaves the seat before the term is out, the debt does not leave with him.
 8. On the quays in {counterpart} they price the {good} and then they price the name behind it.
@@ -265,7 +265,7 @@ AUDIENCE: public
 1. Sworn by {npc} and {npc}, and it outlasted both their seats. `[exemplar, Law One]`
 2. Neither {settlement} nor {counterpart} is led by the hand that signed it, and the parchment held anyway.
 3. The men who swore for {settlement} and {counterpart} are out of the chair; the terms stayed on the table.
-4. It was a personal oath and it survived the persons — the clerks kept it going out of habit.
+4. It was a personal oath and it survived the persons. The clerks kept it going out of habit.
 5. {band} seats have turned over since the ink dried, and nobody ever asked whether it still bound.
 6. The last clerk in {settlement} who remembered the signing went home to his village long ago; the terms held after him.
 7. It stopped being anybody's peace some while ago and went on being a peace regardless.
@@ -278,7 +278,7 @@ AUDIENCE: public
 SLOTS: {settlement} {counterpart} {band} {reason} {route}
 AUDIENCE: public
 1. An offer has gone from {settlement} to {counterpart}: {reason}, and an answer is owed by spring.
-2. {settlement} has asked, and the asking is public — the market in {counterpart} had it before the court did.
+2. {settlement} has asked, and the asking is public. The market in {counterpart} had it before the court did.
 3. The court of {settlement} has put terms on paper and entered the date the answer falls due.
 4. A rider left {settlement} down the {route} with a sheet of terms; {reason} is what he carries.
 5. They have asked. Whether {counterpart} answers at all is another matter, and {band} weeks will tell.
@@ -339,7 +339,7 @@ AUDIENCE: public
 1. The terms with {counterpart} run out with the spring, and {settlement} has moved first.
 2. The terms expire within the year; {settlement}'s clerks have drawn a new sheet against the old one.
 3. Neither court wanted to be the one asking late, so {settlement} asked early.
-4. The old bargain fits neither of them now — the balance has moved, and both courts believe it has.
+4. The old bargain fits neither of them now. The balance has moved, and both courts believe it has.
 5. The parchment carries a date. {settlement} has read the date.
 6. The date is on the parchment and has been all along; this is only the season somebody finally acted on it.
 7. {settlement}'s court would rather negotiate a renewal than explain a lapse.
@@ -349,7 +349,7 @@ AUDIENCE: public
 SLOTS: {settlement} {counterpart} {good}
 AUDIENCE: public
 1. {good} for {good}: the courts have set their names to it. `[exemplar, slotted]`
-2. It is signed — {settlement} sends {good}, {counterpart} sends {good}, and the term runs to a named date.
+2. It is signed: {settlement} sends {good}, {counterpart} sends {good}, and the term runs to a named date.
 3. The market in {settlement} had priced the pact before the seals were dry.
 4. Neither court gave way and both took something away, which is what a treaty between equals looks like.
 5. Signed in peace, and the first wagons move at the turn of the season.
@@ -392,7 +392,7 @@ AUDIENCE: public
 ### nap_signed (GR-2) — Herald (the standalone non-aggression pact) — significance: major
 SLOTS: {settlement} {counterpart}
 AUDIENCE: public
-1. Neither shall march on the other — signed in peace, not extracted at a war's end. `[exemplar]`
+1. Neither shall march on the other: signed in peace, not extracted at a war's end. `[exemplar]`
 2. {settlement} and {counterpart} have sworn not to open a war between them, and no war was needed to arrange it.
 3. The clerks have entered it plainly: no march, either way, until the term runs out.
 4. The captains on both frontiers have been told to stand easy, and the parchment says why.
@@ -435,7 +435,7 @@ AUDIENCE: public
 1. {counterpart} read the same flows and saw a leash: what {settlement} offered would bind it too near.
 2. The terms were good, which is exactly what the court of {counterpart} mistrusted.
 3. The factors in {counterpart} say a town that eats another's {good} learns to ask permission.
-4. Refused for fear of reliance — the same numbers that argued for the pact argued against it.
+4. Refused for fear of reliance. The same numbers that argued for the pact argued against it.
 5. {counterpart}'s court asked what happens to the arrangement in a bad year, and did not like the answer it gave itself.
 6. It is said in {counterpart}'s market that the {good} would arrive with a rope attached.
 7. The refusal keeps the town poorer and keeps it its own.
@@ -456,7 +456,7 @@ AUDIENCE: public
 SLOTS: {settlement} {counterpart}
 AUDIENCE: public
 1. What was offered fell short of what {counterpart} holds the arrangement to be worth.
-2. The sheet did not clear the court's own reckoning — near, and not near enough.
+2. The sheet did not clear the court's own reckoning: near, and not near enough.
 3. In {counterpart}'s market they said the terms were thin, and the court agreed with the market.
 4. {settlement} drew the sheet against what it believed {counterpart} would take, and believed wrong.
 5. The clerks in {counterpart} weighed what was offered against what was asked and closed the matter.
@@ -530,7 +530,7 @@ SLOTS: {settlement} {counterpart} {temple} {route}
 AUDIENCE: public
 1. The {route} to {temple} is open to the faithful of {counterpart} by right, and the tolls are named in the same sheet.
 2. The road carries pilgrims lawfully now, and the innkeepers along it have raised their rates accordingly.
-3. {settlement} guarantees passage to the shrine for the term of the pact — passage, and no more than passage.
+3. {settlement} guarantees passage to the shrine for the term of the pact: passage, and no more than passage.
 4. What was suffered is now permitted, and the traffic on the {route} has grown to match.
 5. The season's first company came up the {route} with a writ and was never asked to show it.
 6. {temple} keeps a book of who comes and from where, which was no part of the bargain.
@@ -540,7 +540,7 @@ SLOTS: {settlement} {counterpart} {temple} {band}
 AUDIENCE: public
 1. {settlement} has forsworn the suppression of {counterpart}'s creed, and put a date on the promise.
 2. The doors opened: those who kept the faith quietly in {settlement} keep it aloud now.
-3. No purge, no eviction, no quiet ruin — the term names each and forbids it for its span.
+3. No purge, no eviction, no quiet ruin: the term names each and forbids it for its span.
 4. The creed is protected by parchment. Nothing in the parchment makes it loved.
 5. {band} congregations came up out of the cellars in one season, and the {temple} has not said what it thinks.
 6. The watch in {settlement} has new instructions and has been slow about reading them.
@@ -562,7 +562,7 @@ AUDIENCE: public
 1. {band} families may cross, and the fields they clear are theirs to work. `[exemplar, slotted]`
 2. The permits are written, and the gate clerks in {settlement} have their instructions.
 3. The {route} out of {counterpart} was carrying them anyway. Now it carries them lawfully.
-4. Crossing is a right for the term of the pact — and a right that expires.
+4. Crossing is a right for the term of the pact, and a right that expires.
 5. The first households came over before the ink was dry, having waited at the border for the news.
 6. {settlement}'s villages have been told to expect neighbours and have not all been glad of it.
 
@@ -572,7 +572,7 @@ AUDIENCE: public
 1. The hands of {counterpart} may work {settlement}'s season, and both courts have set the terms of it in writing.
 2. The compact colours the harvest: more hands at the sheaves, and {house} watching every one of them.
 3. On the quays they say the wages have run thin since the compact. Whether they have is another matter.
-4. Labour by agreement, for a term, at a named price — nothing grander than that.
+4. Labour by agreement, for a term, at a named price: nothing grander than that.
 5. The gangs come over at the start of the reaping and go home when it is in.
 6. {house} keeps a list of who was hired and where they slept, which the compact did not ask for.
 7. The harvest came in faster than it has in years, and the arguing about it began the same week.
@@ -584,7 +584,7 @@ AUDIENCE: public
 1. {settlement} sends {good} so that {counterpart}'s new village may stand its first winter.
 2. The provision runs by the season and stops at the date; after that the village feeds itself.
 3. Wagons went out over the {route} all autumn, and the founders were {band} short of enough.
-4. {good} for a settlement — the oldest bargain there is, and this time it is written down.
+4. {good} for a settlement: the oldest bargain there is, and this time it is written down.
 5. The wagons are counted out of {settlement} and counted in again at the new village, and the tallies are compared.
 6. Whether the place stands after the term runs out is not a question the parchment answers.
 
@@ -594,7 +594,7 @@ AUDIENCE: public
 1. If one is struck, both answer: so it is sworn. `[exemplar]`
 2. {settlement} and {counterpart} have bound their musters together for the term of the pact, and the frontier captains have been told.
 3. The word will reach {faction} before the season does, which is half the reason for signing it.
-4. Two towns, one war — whichever war comes.
+4. Two towns, one war: whichever war comes.
 
 ---
 
@@ -714,16 +714,16 @@ SLOTS: {settlement} {counterpart}
 AUDIENCE: public
 1. Openly repudiated: {settlement} has renounced the pact with {counterpart} before the whole court and defaulted every term in it.
 2. The herald read it out in the square, and the clerks defaulted the terms the same hour.
-3. No pretence of a lapse and no quiet shortfall — {settlement} broke it in the open, and left {counterpart} nothing to misread.
+3. No pretence of a lapse and no quiet shortfall: {settlement} broke it in the open, and left {counterpart} nothing to misread.
 4. They chose the loud way. The cost of the loud way is entered where such costs are entered.
 
 ### credibility_charge (GR-4) — Herald / receipt (the oathbreaker's price) — significance: notable
 SLOTS: {settlement} {counterpart} {band}
 AUDIENCE: public
-1. This line has disavowed {band} — who will set a name beside theirs now? `[exemplar, slotted]`
+1. This line has disavowed {band}. Who will set a name beside theirs now? `[exemplar, slotted]`
 2. The word of {settlement}'s seat is worth less this season than last, and the courts are pricing it accordingly.
 3. On the quays they say a promise out of {settlement} keeps about as well as fish.
-4. In {counterpart} they say nothing was seized and nothing burned — only the signature lost its value.
+4. In {counterpart} they say nothing was seized and nothing burned: only the signature lost its value.
 5. Envoys out of {settlement} are now asked for terms in advance and surety besides.
 6. The clerks in {counterpart} keep the record of what {settlement} has broken beside the record of what it has signed.
 
@@ -826,7 +826,7 @@ AUDIENCE: public
 SLOTS: {settlement} {counterpart}
 AUDIENCE: public
 1. The demand was drawn back to what the present balance will bear; {settlement} wanted more of {counterpart} and the sheet went out at the measure.
-2. The clerks cut the demand to the balance — no treaty takes past the strength of the day.
+2. The clerks cut the demand to the balance: no treaty takes past the strength of the day.
 3. Cooler heads in {settlement} trimmed the sheet before the rider took it.
 4. They asked for what they could hold, and not for what they wanted.
 5. The first draft never left {settlement}, and the second is the one {counterpart} will see.
@@ -838,7 +838,7 @@ AUDIENCE: public
 SLOTS: {settlement} {counterpart}
 AUDIENCE: public
 1. The demand was refused and the treaty stands; what that cost is being kept in {settlement}, quietly.
-2. {settlement} asked, {counterpart} said no, and the no went in the book — not as a cause for war, as a mark.
+2. {settlement} asked, {counterpart} said no, and the no went in the book: not as a cause for war, as a mark.
 3. On the streets of {settlement} they say the court was humiliated. The court says nothing.
 4. Nothing changed on the parchment, and something changed in the mood.
 5. The clerks entered the refusal without comment, which is the only form of comment available to them.
@@ -850,7 +850,7 @@ AUDIENCE: public
 SLOTS: {settlement} {counterpart} {band}
 AUDIENCE: public
 1. Not the first peace of this name between {settlement} and {counterpart}. `[exemplar, banded ordinal]`
-2. The record carries {band} acts — formed, amended, renewed — each with its date beside it.
+2. The record carries {band} acts (formed, amended, renewed) each with its date beside it.
 3. It has been rewritten since it was first sworn, and every superseded set is still in the book.
 4. The pair has been at this parchment for {band} years, on and off.
 5. Older than the seats that keep it, and amended more often than either court cares to say.
