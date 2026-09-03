@@ -283,6 +283,33 @@ export function composeReaderRegion(row, { now = READER_NOW } = {}) {
 }
 
 /**
+ * The chronicle at one year. Loaded lazily and cached so the advance keeps a light top-level
+ * import graph, and returns null rather than throwing: a chronicle the read model cannot build
+ * is a legitimate state of a young world, and the reader must be able to tell that apart from
+ * a year the runner never captured.
+ * @param {unknown} worldState
+ * @returns {unknown}
+ */
+function latestChronicleOf(worldState) {
+  try {
+    if (!chronicleReader) return null;
+    return chronicleReader(worldState) ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** @type {((worldState: unknown) => unknown) | null} */
+let chronicleReader = null;
+
+/** Install the chronicle read model before an advance. Called by `advanceReaderCampaign`. */
+async function ensureChronicleReader() {
+  if (chronicleReader) return;
+  const mod = await import('../../src/domain/display/chronicleReadModel.js');
+  chronicleReader = mod.latestChronicle;
+}
+
+/**
  * THE TWO ADVANCE REFUSALS, EXTRACTED SO THEY CAN BE PROVED WITHOUT BREAKING THE ENGINE.
  *
  * They lived inline until the manifest suite tried to plant a paused year and could not: the
@@ -322,6 +349,7 @@ export function refuseNonFiniteWorld({ composite, campaignId, year }) {
  * @returns {Promise<{ campaign: any, saves: any[], yearly: any[] }>}
  */
 export async function advanceReaderCampaign({ campaign, saves, years, seed, now = READER_NOW, onYear = null }) {
+  await ensureChronicleReader();
   let runningCampaign = campaign;
   let runningSaves = saves;
   const yearly = [];
@@ -379,6 +407,13 @@ export async function advanceReaderCampaign({ campaign, saves, years, seed, now 
       resolvedStressors: Array.isArray(result.resolvedStressors) ? result.resolvedStressors : [],
       addressChain: measureAddressChain(rawEntries),
       eventTypeCounts: eventTypeCountsOf(result),
+      // ⛔ THE CHRONICLE IS CAPTURED EVERY YEAR; THE RAW WORLD ONLY AT THE DECADE MARKS.
+      // These two must NOT share a field, and they did until this was caught: the chronicle
+      // producer read `worldStateAtYear`, which is deliberately null except at years 10/20/30
+      // to keep thirty full worlds out of memory — so 27 of 30 chronicle years rendered as
+      // `null` and every chronology question in the rubric was unanswerable on a document that
+      // hashed perfectly and looked complete.
+      chronicleAtYear: latestChronicleOf(result.worldState),
       worldStateAtYear: WORLD_DUMP_YEARS.includes(year) ? result.worldState : null,
       wizardNewsAtYear: result.wizardNews,
       simulationRulesAtYear: result.worldState?.simulationRules ?? null,
@@ -584,9 +619,7 @@ export async function renderReaderDocuments({
     format: 'json',
     body: stableJson(yearly.map((capture) => ({
       year: capture.year,
-      chronicle: capture.worldStateAtYear
-        ? P.chronicleReadModel.latestChronicle(capture.worldStateAtYear)
-        : null,
+      chronicle: capture.chronicleAtYear ?? null,
     }))),
   })));
 
@@ -646,9 +679,14 @@ export async function renderReaderDocuments({
     format: 'json',
     body: stableJson(P.worldBook.collectWorldBook(campaign, saves, { mode: 'dm', faithUnlocked: true })),
   })));
+  // ⚠ `mode` IS THE ONLY TERM THAT VARIES BETWEEN THE TWO WORLD BOOKS, deliberately. An
+  // earlier spelling also dropped `faithUnlocked` on the player book, which would have left a
+  // reader unable to say whether a difference came from the MODE or from the ENTITLEMENT. The
+  // entitlement axis has its own home — the dossier renders at free and at dm — so it is held
+  // fixed here and one question is asked at a time.
   docs.push(guarded('worldbook.player', () => ({
     format: 'json',
-    body: stableJson(P.worldBook.collectWorldBook(campaign, saves, { mode: 'player', faithUnlocked: false })),
+    body: stableJson(P.worldBook.collectWorldBook(campaign, saves, { mode: 'player', faithUnlocked: true })),
   })));
   docs.push(guarded('campaign-pdf', () => ({
     format: 'json',
