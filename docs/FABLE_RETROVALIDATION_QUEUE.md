@@ -2466,3 +2466,36 @@ The lane found its car carried `Seat: Opus 5 (lane CURE-CAPSULE)`, which matches
 *What Fable re-derives:* whether any COMMITTED fixture or golden corpus carries a persisted `wizardNews` headline — the lane reported finding none but labelled it **PLAUSIBLE-strong, not confirmed**, and with the customer-save argument withdrawn that fixture question is now the only remaining persistence exposure. It is cheap to settle and nobody has settled it.
 
 *Priority:* **MEDIUM** — the correction is recorded, the cure is unblocked either way, and the class-lesson (verify the antecedent, not just the mechanism) is the part worth a second look.
+
+---
+
+## §885 · THE TENTH LANDING — two lane cars, four chair cars, and four gate attempts (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5)
+
+**The act.** `f5a6c3bbf` → **`2d5112851c2efca87415abdbb6060d078ced19a8`**, sealed `refs/preserve/landing-885-2026-09-03`. Six cars, 13 paths +1,188/−94, porcelain 0, six trailers, gate green in 1,214 s. **Every commit is Opus-seat work and every row below is owed a Fable second look.**
+
+**What landed, in one line each.** CURE-CAPSULE — the landing gate's parser permitted where it should refuse, stamping a clean bill over an unmeasured tree; **its negative control drove both real parsers over identical bytes and reproduced the false CLEAN at this base**, 6/6 verdicts. FILL-LAYER — the broken slot fills, cured at the annex that owns the truth, **proven by template-differencing 3,696 real renders: 1,100 adjacent-determiner / 836 doubled-word / 660 determiner-then-capital / 140 dash → none**, with all seven generated leaves byte-identical. Plus four chair cars: a strict-type cure, both register refreezes, and a per-test budget.
+
+### ⛔⛔ THE LANDING'S REAL LESSON: FOUR GATE ATTEMPTS, AND THREE OF THE FOUR WERE THE CHAIR'S
+
+1. **Attempt 1 died at PARSE time** — `exit 2`, **no log at all**, because the chair built the wrapper by `sed`-patching the previous one and the pattern's `.*` consumed the line's closing quote. ⭐ **Two laws: never `sed`-patch a shell script, and run `sh -n` before every launch.** ⚠ **The failure SIGNATURE is diagnostic — exit 2 with no log means the wrapper never ran; exit 1 with a full log means the tree failed.** That distinction cost seconds instead of a re-run.
+2. **Attempt 2 red at `typecheck:domain:strict`** — a REAL find, and an instructive one: the FILL-LAYER car widened a slot's type **by design** (so the anchoring law can drop a sentence with no fill), and an existing consumer written months earlier consumed it as a plain string. **The defect was not in the line the car wrote; it was in a line the car's type change REACHED.** Cured with the module's own idiom, **verified behaviour-identical before applying** — `text(undefined)` returns `''`, and `legibilityRung` already discards a detail row whose value is `''` by exactly the rule it uses for `undefined`.
+3. **Attempt 3 red on a register the chair never refroze.** ⛔ **Lanes build cars and HOLD; the LANDING takes the register acts.** §884's landing lane took two; the chair composed two lane cars and went straight to the gate with none. **A whole 18-minute cycle spent discovering something knowable in seconds.**
+4. **Attempt 4 green.**
+
+### ⭐ THE `writerReach` STORY, RESOLVED — and an instrument that misreports its own budget
+
+It refused the ratchet `--update` once and passed once **with nothing changed**, and it **passed in-suite at load 47 while failing in-suite at load 3.8** — which **DISPROVES** the earlier lane's load-artifact diagnosis rather than inheriting it. Root cause, measured: it blew the suite-wide `testTimeout: 20000` at **21,758 ms**. ⛔ **AND THE RATCHET'S FAILURE MESSAGE MISREPORTED THE GOVERNING BUDGET** — *"against a 300000ms budget (vite.config.js testTimeout)"*, where 300,000 is that file's `beforeAll` budget and `vite.config.js` sets **20,000**. **A real expiry was presented as though it had fourteen times the headroom it had**, which is exactly what sent the first diagnosis hunting a mystery kill. Cured as the instrument itself prescribes: an **explicit per-test budget** (120,000, ~5.5× measured, against the file's own precedent of 300,000 for hooks measured at 26.5 s), **not banked in the census**, and **the suite-wide timeout untouched** because raising it hides the next one.
+
+⚠ **Two honesty rows on that cure.** It is **FOREIGN** — it predates the consist and belongs to no car in it; foreign normally halts, and it rode because it blocked the landing, the cure is prescribed, and it touches no `src` byte and no output. And ⚠ **whether other rows in that file sit near the same line is NOT ESTABLISHED** — the verbose reporter emitted no per-test durations and the check came back **inconclusive rather than clean**.
+
+### ⭐ THE STOPPING RULE THAT HELD
+
+Before re-running the refused `--update`, the chair wrote the rule to disk so it would bind: one more run; **both runs recorded, never only the green one**; a second refusal means HOLD, not a third attempt; and **never hand-add to the census, because an entry without attribution is a defect being laundered into debt.** The rule was honoured — both runs are in §884.4 and in the register commit's own message.
+
+### E4 HELD ON EVERY REGISTER
+
+Lighting predicted `2503/370/2133/22676/(unpredicted)` and measured **`2503/370/2133/22676/6101`** — four exact, and the fifth **deliberately not guessed** came in at +2. Ratchet predicted files **+0 exact** and tests **"≥ 11, exact count deliberately unnamed"** because a title and a test are different units; measured **+0 and +11**. ⭐ **Refusing to name a figure is a better outcome than guessing one and being right.**
+
+*What Fable re-derives:* the misreported budget first — an instrument that reports the wrong governing figure will mis-diagnose every future expiry the same way. Then the foreign cure riding a landing. Then the chair's skipped register act, which is a process defect rather than a code one and has no gate.
+
+*Priority:* ⛔ **HIGH for the misreported budget.** MEDIUM for the rest.
