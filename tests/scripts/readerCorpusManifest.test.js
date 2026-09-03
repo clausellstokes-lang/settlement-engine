@@ -253,6 +253,16 @@ describe('the reader corpus is composed from the golden key', () => {
     const failed = Object.entries(first.documents).filter(([, r]) => r.producerError).map(([id]) => id);
     expect(failed).toEqual([]);
 
+    // ⛔ AND NO PRODUCER MAY BE SILENTLY EMPTY, WHICH IS THE HARDER FAILURE. A document that
+    // renders, hashes and verifies while carrying nothing is invisible to every check above —
+    // `chronicle-advance` did exactly that, emitting `null` for 27 of 30 years because it read
+    // a field the runner deliberately keeps empty except at the decade dumps. A byte floor per
+    // document is crude, and crude is the point: it convicts the hole.
+    const empty = Object.entries(first.documents)
+      .filter(([id, r]) => !id.startsWith('world-y') && !r.notRendered && r.bytes < 32)
+      .map(([id]) => id);
+    expect(empty).toEqual([]);
+
     // ⛔ THE RUN ID IS A DIRECTORY NAME ONLY. A manifest whose hashes moved with the run id
     // could never verify anything, so the id must not be reachable inside any document.
     const built = readerCorpusManifest({
@@ -335,6 +345,14 @@ describe('the reader corpus is composed from the golden key', () => {
 
     // With no tab renderer injected the absence is RECORDED, never silently omitted.
     expect(documents.tabs.notRendered).toBe(true);
+
+    // ⛔ THE CHRONICLE IS CAPTURED EVERY YEAR, NOT ONLY AT THE DECADE DUMPS. The advance keeps
+    // the raw world only at years 10/20/30 to stay inside memory, and the chronicle producer
+    // used to read THAT field — so the document rendered, hashed and verified while 27 of its
+    // 30 years were null, and no reader could answer a chronology question from it.
+    const captured = advanced.yearly.filter((c) => 'chronicleAtYear' in c).length;
+    expect(captured).toBe(advanced.yearly.length);
+    expect(advanced.yearly.every((c) => c.worldStateAtYear === null || c.year % 10 === 0)).toBe(true);
   }, 180_000);
 
   // ── THE BACKLOG THE PANEL DISCHARGES INTO ──────────────────────────────────
