@@ -336,6 +336,46 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
     reason: 'GOAL ORIENTATION — which ambition KINDS pay off, the personality-forming loop the owner named. It is the goal-kind AXIS of the same symbol as the selection row, graded through the ladder\'s existing progress read, which already weights credit by office and domain. ⚠ The continuous grade must be BANDED by frozen edges before it enters the curve — a float grade would be a second scale',
     closeOwed: 'grade a goal KIND against the progress goals of that kind reached, banded rather than carried as a float',
   }),
+  // ── ENC-1: THE CHANCE-MEETING LEAF'S SIX ARMS ─────────────────────────────────
+  // Six symbols rather than one draw helper, because this registry holds one disposition
+  // per symbol: routing six questions through a shared helper would file four deferrals as
+  // whatever the helper was dispositioned as. ⛔ THE LEAF IS DARK AT THIS COMMIT — nothing
+  // under src/ imports it (the stage is ENC-3, and every writer it would feed sits behind
+  // an unruled owner row), so each arrival is a SOURCE FACT and not yet a behaviour.
+  fork({
+    forkId: 'HBF-36', module: 'src/domain/worldPulse/envoyChanceMeeting',
+    symbol: 'drawMeet', discovery: 'idiom', disposition: 'STAY',
+    reason: 'the coincidence gate: whether two people already standing in the same place on the same tick notice each other at all. ⛔ STAY-DETERMINISTIC on a MEASURED absence of a candidate set: there is no second act to choose, and neither party selects. The rung it is compared against carries weighted terms (the courts posture, the travellers covert craft) but those are CIRCUMSTANCES OF THE WORLD rather than preferences of an actor, and the only thing a habit load could teach here is to bump into strangers more often, which is a rate and not a choice. The ENCOUNTERS design rules it the same way at its Car 1 line, and this row records the reading rather than inheriting it',
+  }),
+  fork({
+    forkId: 'HBF-37', module: 'src/domain/worldPulse/envoyChanceMeeting',
+    symbol: 'drawPick', discovery: 'idiom', disposition: 'STAY',
+    reason: 'which of the eligible residents the traveller happens upon. ⛔ STAY-DETERMINISTIC, and it is HBF-35 verbatim one family over: the draw is UNWEIGHTED (nothing about a resident enters it: only the list length and the meeting key) over a list ALREADY canonically ordered by codepoint on a rename-stable id, and it exists solely so the pick is unbiased by alphabet. ⭐ The one dimension a habit load could tilt is WHICH PERSON a traveller meets, a preference over identities rather than over acts, which HBF-35 and HBF-22 both rule forbidden ground. ⚠ SAID OUT LOUD: the seed IS threaded into this key on purpose, so the pick is not stable across campaigns that share an errand episode; that is a determinism requirement, not a preference',
+  }),
+  fork({
+    forkId: 'HBF-38', module: 'src/domain/worldPulse/envoyChanceMeeting',
+    symbol: 'drawApproach', discovery: 'idiom', disposition: 'DEFER',
+    reason: 'whether an approacher makes an offer at all. Unlike the two rows above this is genuinely actor-addressable and genuinely weighted, since the rung reads how far the target stands from his own court and whether the approacher is covert, so the STAY reading is refused on evidence rather than deferred for want of a reading',
+    closeOwed: 'grade an approach against what it produced: a lean the web converted, a refusal, or a refusal that was spoken of. All three are already typed outcomes of the same receipt, so the close exists the moment the stage that emits it lands',
+  }),
+  fork({
+    forkId: 'HBF-39', module: 'src/domain/worldPulse/envoyChanceMeeting',
+    symbol: 'drawMark', discovery: 'idiom', disposition: 'DEFER',
+    reason: 'which mark a meeting leaves, drawn against a cumulative ladder over a four-member vocabulary (bond, respect, rivalry, nothing) weighted by how alike the two people read and by the posture between their courts. This is the clearest weighted chooser in the leaf and the one with a real action vocabulary',
+    closeOwed: 'grade a minted mark against whether it survived its own decay without being renewed, which the ladder record already carries; the mark and its half-life are one another\u2019s close',
+  }),
+  fork({
+    forkId: 'HBF-40', module: 'src/domain/worldPulse/envoyChanceMeeting',
+    symbol: 'drawCompromise', discovery: 'idiom', disposition: 'DEFER',
+    reason: 'the targets own will against an offer, drawn against a chance composed from three weighted terms in the owners own order. Whether a mans will resolving is a CHOOSER or a CONTEST is exactly the question HBF-08 leaves open for the ladder challenge, and one answer cannot be true there and false here',
+    closeOwed: 'grade a yielded will against whether the leash the web minted from it ever produced anything, and a refused one against whether the refusal was found out; ⚠ this row closes with HBF-08 or not at all, because both ask whether a will resolving is a choice',
+  }),
+  fork({
+    forkId: 'HBF-41', module: 'src/domain/worldPulse/envoyChanceMeeting',
+    symbol: 'drawExposure', discovery: 'idiom', disposition: 'DEFER',
+    reason: 'whether a refused approach is spoken of, drawn against a rung the host courts own wariness weights. The actor here is the watching court rather than either party to the meeting, which is a third shape neither of the two STAY rows above covers and which this lane has not read at its load point',
+    closeOwed: 'grade an exposure against the grievance it actually moved on the two courts edge, which the relationship plane already records; establish first whether a court WATCHING is an act it chooses or a property it has',
+  }),
   // ── THE FOURTH IDIOM: THE EXPLICIT GUARD-CHAIN REGISTER ───────────────────────
   fork({
     forkId: 'HBF-31', module: 'src/domain/worldPulse/espionage/espionageMath',

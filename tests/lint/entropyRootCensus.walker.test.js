@@ -839,7 +839,17 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // citation was never a caller, and the sixteen were right before and after.
     const callers = ALL_FILES.filter((f) => codeOnly(read(f)).split('\n')
       .some((l) => l.includes('hash01(') && !/function hash01\(/.test(l)));
-    expect(callers).toHaveLength(16);
+    // ⭐ RE-RECORDED 2026-09-03 BY ENCOUNTERS ENC-1: 16 -> 17, a DECLARED arrival rather than a
+    // discovered one. `src/domain/worldPulse/envoyChanceMeeting.js` is the chance-meeting leaf, and
+    // it takes the CURED root for the reason every caller above it did: its six arms are keyed
+    // hashes over (seed, meeting key, arm) and a raw `fnv % 8` would alias an eighth onto a parity
+    // class of meeting keys. ⛔ IT COMPOSES NO ROOT AND READS NO WORLD — the seed arrives as an
+    // ARGUMENT and the leaf never reaches for `worldState.rngSeed`, so this counter is the only arm
+    // of this file the arrival moves; COMPOSITIONS and READ_SITES both stay green, and the read site
+    // lands with the stage that supplies the seed. The caller is DARK at this commit (zero importers
+    // under src/, its only driver being tests/domain/envoyChanceMeeting.test.js), so the arrival is a
+    // source fact and not yet a behaviour — the W-OPS O1 disposition verbatim, one family over.
+    expect(callers).toHaveLength(17);
     // ⭐ AND THE TWO POPULATIONS NOW DIFFER IN KIND RATHER THAN BY LUCK. `mentions` stays a
     // RAW scan deliberately — it is the mention population, and the contrast is the claim.
     const mentions = ALL_FILES.filter((f) => read(f).includes('hash01'));
