@@ -2822,3 +2822,19 @@ The **pre-gate** cleared all 14 cheap stages in **81.9 s** at the final seven-ca
 *What Fable re-derives:* the mount **rung vocabulary and the one-fact-one-sentence rule** — a taste judgment no test holds — then the parser's closed-vocabulary reading against the neighbour it now mirrors, then the demotion channel's threshold placement in the kernel.
 
 *Priority:* **HIGH for the kernel demotion channel** (it changes which sentence a reader meets); MEDIUM for the registry, which ships dark.
+
+## §887.1 · THE CHAIR CORRECTS ITS OWN CARD — the encounters blocker was a phantom, and the record had been repeating it for several landings (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**The owner asked what "ENC-2 through ENC-7 need your seventeen ENCOUNTERS rows" meant.** Checking the record instead of restating the card showed the claim was **false**, and had been false since 2026-09-02.
+
+**What the design actually says**, in its own fold header: *"owner rows 17 (§12: fifteen numbered plus 1b and 5b), **three of them BLOCKING the build (1, 5, 5b)**"*. **All three were RULED at ODQ §882.13** on 2026-09-02 under the owner's restated delegation — row 1 YES (the two ledger keys), row 5 YES (the willed pin at the corruption web's creation seam), **row 5b NO** (the three fences stand; a meeting-born willed compromise never enters the ousting/replacement/verdict chain). **The build was unblocked the same day it was declared blocked, and the card never learned it.**
+
+**The corrected shape, from the design's own car list:** seven cars, five on the critical path. **ENC-2, ENC-3, ENC-4 and ENC-6 are BUILDABLE NOW** (ENC-6 must land before the lighting wave). ⛔ **ENC-5 — the words — is genuinely owner-gated**, since row 6's ruling reserves the pool sentences to the pen at the voice sitting. **ENC-7 is DEFERRED to the lighting wave by row 8's own ruling**, not blocked. The one held encounters row is **7, the tuning register's values**, which is the tuning signature, signed LAST for the whole program, and gates no build.
+
+### ⭐⭐ THE LAW THIS EARNS
+
+**A BLOCKER IS A CLAIM, AND A CLAIM DECAYS.** This program re-verifies figures at every tip and re-derives registers rather than trusting them — and then carried a *blocker* across four landings on nothing but a card that copied itself forward. ⭐ **A blocker must name the rows it rests on and be re-read against their rulings at every collection**, exactly as a register is re-derived against its inputs. The failure mode is worse than a stale figure: a stale figure gets refused by a gate, while **a stale blocker is obeyed silently and costs work that was never actually forbidden** — here, four buildable cars left unbuilt while lanes sat free.
+
+*What Fable re-derives:* the §882.13 rulings for rows 1, 5 and 5b against the design's §12 table, and the claim that ENC-5 alone is owner-gated.
+
+*Priority:* **HIGH** — it changes what is buildable right now.
