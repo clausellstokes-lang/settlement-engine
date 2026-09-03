@@ -106,9 +106,24 @@ describe('dormancy: the added key moves no byte on any world that fights no fiel
   test('a row with no region serializes IDENTICALLY to one normalized before the key existed', () => {
     // The bit claim, not the canonical-form claim. Every entry in every existing feed
     // lacks a region, so the conditional spread must add nothing to any of them.
-    const withoutKey = appendWizardNewsEntries({}, [battleRow()], { now: null });
-    const explicitlyEmpty = appendWizardNewsEntries({}, [battleRow({ region: '' })], { now: null });
+    //
+    // ⛔⛔ THE CLOCK IS THREADED, AND ITS ABSENCE WAS A RACE RATHER THAN A STYLE POINT.
+    // `{ now: null }` falls through `entry.createdAt || options.now || nowIso()` to
+    // `wallClockNow()` — `new Date().toISOString()`, millisecond-resolution — and this arm
+    // makes TWO appends and compares their BYTES. The two stamps agree only while both
+    // calls land inside the same millisecond, so the arm was green standalone and red
+    // whenever the machine was busy: measured at 88 mismatches in 20,000 back-to-back
+    // repetitions on an idle box, and 100% once a 3ms gap is forced between the calls.
+    // Threading one stamp removes the second variable and leaves the claim exactly as it
+    // was — the subject is the REGION key's byte-neutrality, never the wall clock.
+    const STAMP = '2026-01-01T00:00:00.000Z';
+    const withoutKey = appendWizardNewsEntries({}, [battleRow()], { now: STAMP });
+    const explicitlyEmpty = appendWizardNewsEntries({}, [battleRow({ region: '' })], { now: STAMP });
     expect(JSON.stringify(explicitlyEmpty)).toBe(JSON.stringify(withoutKey));
+    // anchored: the comparison is over two REAL feeds that each carry the threaded stamp
+    // and each really lack the key, so a frozen clock cannot make the equality vacuous.
+    expect(JSON.stringify(withoutKey)).toContain(STAMP);
+    expect(Object.prototype.hasOwnProperty.call(soleEntry(explicitlyEmpty), 'region')).toBe(false);
   });
 
   test('a non-engagement row is untouched by the field', () => {
