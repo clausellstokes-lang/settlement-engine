@@ -689,7 +689,10 @@ function admitStrongest(out, byId, next) {
  */
 export function deriveRegionalImpacts(localDelta, graph, options = {}) {
   if (!localDelta?.sourceSettlementId) return [];
-  const now = options.now ?? null;
+  // NOT `options.now ?? null`. That coercion flattened ABSENT into an explicit null, and
+  // the two now mean different things downstream: absent takes the documented wall-clock
+  // boundary fallback, null means NO STAMP. Pass the option through untouched.
+  const now = options.now;
   const current = ensureRegionalGraph(graph || {}, { now });
   const channels = activeChannelsFrom(graph, localDelta.sourceSettlementId, {
     includeSuggested: !!options.includeSuggested,
@@ -1122,7 +1125,9 @@ export function propagateRegionalEvent(args = {}) {
     includeSuggested = false,
     maxDepth = 1,
     waveDecay = 0.45,
-    now = null,
+    // No `= null` default: absent must stay absent (wall-clock boundary), and an
+    // explicitly threaded null must stay null (NO STAMP). See region/graph.js resolveStamp.
+    now,
     // SPATIAL (5.5-M item 4): when false, derive + audit the impacts but do NOT
     // queue them to the graph — the caller parks them in the worldState arrival
     // queue instead (they land later, at their travel-distance arrival tick).

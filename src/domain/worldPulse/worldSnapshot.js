@@ -98,7 +98,11 @@ export function buildWorldSnapshot({ campaign, saves = [], worldState = null, re
   // is skipped and the SAME graph object is returned. Byte-neutral (brand ⟺ normalized-and-
   // unmodified; unbranded graphs still get a full ensure — worst case a redundant normalize, never
   // a stale one), proven by the Wave-4 byte-identity receipt.
-  const ensuredGraph = ensureRegionalGraphOnce(regionalGraph || campaign?.regionalGraph || {});
+  // The branded fast path mints nothing, so the sim is untouched. An UNBRANDED (rehydrated)
+  // graph does take a full ensure, and that ensure used to mint every stamp-less row from
+  // the wall clock — making two snapshots of one stored campaign differ. The campaign's own
+  // stamp is the deterministic in-band answer, exactly as in migrateCampaign.
+  const ensuredGraph = ensureRegionalGraphOnce(regionalGraph || campaign?.regionalGraph || {}, { now: campaign?.updatedAt || campaign?.createdAt });
   const state = ensureWorldState(worldState || campaign?.worldState, campaign);
   const canonSaves = (saves || [])
     .filter(save => ids.has(saveId(save)))

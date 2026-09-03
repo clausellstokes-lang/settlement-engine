@@ -277,7 +277,14 @@ export function migrateCampaign(camp, inferredCustomContent = undefined) {
   // on → keep the random mint (distinct id-less campaigns must not collapse).
   if (!isUuid(next.id)) next.id = (next.id == null || next.id === '') ? newCampaignId() : uuidFromLegacyId(next.id);
   if (camp.mapState) next.mapState = migrateMapState(camp.mapState);
-  if (next.regionalGraph) next.regionalGraph = ensureRegionalGraph(next.regionalGraph);
+  // The graph half of the SAME law stated for the feed two lines below, and it was left
+  // un-threaded when the feed was cured: normalizing a graph whose rows carry no stamp
+  // mints one per row from the wall clock, so migrating the SAME stored campaign twice
+  // produced two different graphs. It takes the campaign's own stamp, exactly as the feed
+  // does, so the two halves of one migration can never disagree about when it happened.
+  if (next.regionalGraph) {
+    next.regionalGraph = ensureRegionalGraph(next.regionalGraph, { now: next.updatedAt || next.createdAt });
+  }
   // A MIGRATION MUST BE A FUNCTION OF THE CAMPAIGN IT MIGRATES. Normalizing a feed that
   // carries no `updatedAt` mints one, and that mint falls through to the wall clock — so
   // migrating the SAME stored campaign twice produced two different feeds. The campaign's

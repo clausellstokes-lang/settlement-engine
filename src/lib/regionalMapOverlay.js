@@ -54,7 +54,8 @@ export function buildRegionalMapOverlay({
   impactStatuses = ['queued', 'applied', 'resolved'],
   minSeverity = 0,
 } = /** @type {{ campaign?: any, placements?: any, includeGm?: boolean, includeHidden?: boolean, channelTypes?: string[]|null, impactStatuses?: string[]|null, minSeverity?: number }} */ ({})) {
-  const graph = ensureRegionalGraph(campaign?.regionalGraph);
+  // Overlay derivation is a READ; the campaign's own stamp keeps it deterministic.
+  const graph = ensureRegionalGraph(campaign?.regionalGraph, { now: campaign?.updatedAt || campaign?.createdAt });
   const points = pointBySettlement(placements);
   const nodeNames = new Map(graph.nodes.map(node => [String(node.id), node.name]));
   const channelsById = new Map(graph.channels.map(channel => [String(channel.id), channel]));

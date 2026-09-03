@@ -15,11 +15,11 @@ import {
 } from '../relationships/canonicalRelationship.js';
 import { wallClockNow } from '../clock.js';
 
-/** @typedef {{ id?: string, name?: string|null, tier?: string|null, settlementId?: string|null, updatedAt?: string }} RegionNode */
-/** @typedef {{ id?: string, from?: string, to?: string, relationshipType?: string, relation?: string, status?: string, channelIds?: string[], evidence?: any[], updatedAt?: string }} RegionEdge */
-/** @typedef {{ id?: string, type?: string, from?: string, to?: string, direction?: string, status?: string, visibility?: string, strength?: number, severity?: number, confidence?: number, goods?: any[], evidence?: any[], explanation?: string, relationshipType?: string|null, relationshipKey?: string|null, discoveredAt?: string, confirmedAt?: string|null, updatedAt?: string, [k: string]: any }} RegionChannel */
-/** @typedef {{ id?: string, status?: string, severity?: number, confidence?: number, delayTicks?: number, ageTicks?: number, maxAgeTicks?: number|null, waveDepth?: number, waveDecay?: number, createdAt?: string|null, updatedAt?: string, expiresAtTick?: number, conditionId?: string, appliedAt?: string, ignoredAt?: string, expiredAt?: string, resolvedAt?: string, [k: string]: any }} RegionImpact */
-/** @typedef {{ schemaVersion?: number, nodes?: RegionNode[], edges?: RegionEdge[], channels?: RegionChannel[], queuedImpacts?: RegionImpact[], eventLog?: any[], updatedAt?: string }} RegionGraph */
+/** @typedef {{ id?: string, name?: string|null, tier?: string|null, settlementId?: string|null, updatedAt?: string|null }} RegionNode */
+/** @typedef {{ id?: string, from?: string, to?: string, relationshipType?: string, relation?: string, status?: string, channelIds?: string[], evidence?: any[], updatedAt?: string|null }} RegionEdge */
+/** @typedef {{ id?: string, type?: string, from?: string, to?: string, direction?: string, status?: string, visibility?: string, strength?: number, severity?: number, confidence?: number, goods?: any[], evidence?: any[], explanation?: string, relationshipType?: string|null, relationshipKey?: string|null, discoveredAt?: string|null, confirmedAt?: string|null, updatedAt?: string|null, [k: string]: any }} RegionChannel */
+/** @typedef {{ id?: string, status?: string, severity?: number, confidence?: number, delayTicks?: number, ageTicks?: number, maxAgeTicks?: number|null, waveDepth?: number, waveDecay?: number, createdAt?: string|null, updatedAt?: string|null, expiresAtTick?: number, conditionId?: string, appliedAt?: string, ignoredAt?: string, expiredAt?: string, resolvedAt?: string, [k: string]: any }} RegionImpact */
+/** @typedef {{ schemaVersion?: number, nodes?: RegionNode[], edges?: RegionEdge[], channels?: RegionChannel[], queuedImpacts?: RegionImpact[], eventLog?: any[], updatedAt?: string|null }} RegionGraph */
 /** @typedef {Record<string, any>} RegionOptions */
 
 export const REGIONAL_GRAPH_SCHEMA_VERSION = 2;
@@ -100,6 +100,32 @@ function nowIso() {
   return wallClockNow();
 }
 
+/**
+ * Resolve a threaded instant into a stamp. THE THREE CASES ARE THREE, NOT TWO:
+ *
+ *   • `undefined` (the option was never supplied) → the documented BOUNDARY fallback,
+ *     mint from the wall clock. A spread of an option-less object yields exactly this,
+ *     and ~120 correct call sites depend on it surviving.
+ *   • `null` (the caller explicitly passed one) → NO STAMP. Honoured as written.
+ *   • a non-empty string → that instant.
+ *
+ * WHY THIS EXISTS. The chain used to be `row.updatedAt || now || nowIso()` — an `||`, so an
+ * explicitly passed `now: null`, which READS as "pin this to nothing" and is what callers and
+ * tests actually write, was falsy and landed on the wall clock at millisecond resolution.
+ * §884 measured 784 mismatches in 200,000 iterations; the determinism lane measured 979 in
+ * 200,000 (0.489%) and a byte-identity arm failing 88/20,000 on an idle box, 100% with a
+ * forced 3 ms gap — a ~0.45% random red every landing gate this arc has rolled and won.
+ * A guard was fenced around the trap; this removes the trap.
+ *
+ * An empty string collapses to null: it is not a valid instant, and letting it through would
+ * put `""` into a persisted stamp.
+ * @param {string | null | undefined} now
+ * @returns {string | null}
+ */
+function resolveStamp(now) {
+  return now === undefined ? nowIso() : (now || null);
+}
+
 // The regional layer's label normalizer now DELEGATES to the single canonical
 // alias table in relationships/canonicalRelationship.js, so the three regional
 // systems can no longer drift. The old local table only healed the legacy
@@ -152,24 +178,24 @@ export function channelIdFor(channel) {
 // fallback ONLY when no `now` is provided.
 /**
  * @param {RegionNode | null | undefined} node
- * @param {string | null} [now]
+ * @param {string | null} [now]  undefined = absent (wall clock); null = NO STAMP
  */
-function normalizeNode(node, now = null) {
+function normalizeNode(node, now) {
   if (!node?.id) return null;
   return {
     id: String(node.id),
     name: node.name || String(node.id),
     tier: node.tier || null,
     settlementId: node.settlementId || node.id,
-    updatedAt: node.updatedAt || now || nowIso(),
+    updatedAt: node.updatedAt || resolveStamp(now),
   };
 }
 
 /**
  * @param {RegionEdge | null | undefined} edge
- * @param {string | null} [now]
+ * @param {string | null} [now]  undefined = absent (wall clock); null = NO STAMP
  */
-function normalizeEdge(edge, now = null) {
+function normalizeEdge(edge, now) {
   if (!edge?.from || !edge?.to) return null;
   return {
     id: edge.id || edgeIdFor(edge.from, edge.to),
@@ -179,15 +205,15 @@ function normalizeEdge(edge, now = null) {
     status: edge.status || 'active',
     channelIds: Array.isArray(edge.channelIds) ? [...new Set(edge.channelIds)] : [],
     evidence: Array.isArray(edge.evidence) ? [...edge.evidence] : [],
-    updatedAt: edge.updatedAt || now || nowIso(),
+    updatedAt: edge.updatedAt || resolveStamp(now),
   };
 }
 
 /**
  * @param {RegionImpact | null | undefined} impact
- * @param {string | null} [now]
+ * @param {string | null} [now]  undefined = absent (wall clock); null = NO STAMP
  */
-function normalizeImpact(impact, now = null) {
+function normalizeImpact(impact, now) {
   if (!impact?.id) return null;
   const status = REGIONAL_IMPACT_STATUSES.includes(/** @type {string} */ (impact.status))
     ? impact.status
@@ -203,16 +229,16 @@ function normalizeImpact(impact, now = null) {
     maxAgeTicks: Number.isFinite(impact.maxAgeTicks) ? impact.maxAgeTicks : null,
     waveDepth: Math.max(0, Number.isFinite(impact.waveDepth) ? /** @type {number} */ (impact.waveDepth) : 0),
     waveDecay: clamp01(impact.waveDecay ?? 1),
-    createdAt: impact.createdAt || now || nowIso(),
-    updatedAt: impact.updatedAt || impact.createdAt || now || nowIso(),
+    createdAt: impact.createdAt || resolveStamp(now),
+    updatedAt: impact.updatedAt || impact.createdAt || resolveStamp(now),
   };
 }
 
 /**
  * @param {RegionChannel | null | undefined} channel
- * @param {string | null} [now]
+ * @param {string | null} [now]  undefined = absent (wall clock); null = NO STAMP
  */
-export function normalizeChannel(channel, now = null) {
+export function normalizeChannel(channel, now) {
   if (!channel?.from || !channel?.to || !channel?.type) return null;
   if (!REGIONAL_CHANNEL_TYPES.includes(/** @type {string} */ (channel.type))) return null;
   const status = REGIONAL_CHANNEL_STATUSES.includes(/** @type {string} */ (channel.status))
@@ -236,9 +262,9 @@ export function normalizeChannel(channel, now = null) {
     explanation: channel.explanation || '',
     relationshipType: channel.relationshipType || null,
     relationshipKey: channel.relationshipKey || null,
-    discoveredAt: channel.discoveredAt || now || nowIso(),
+    discoveredAt: channel.discoveredAt || resolveStamp(now),
     confirmedAt: channel.confirmedAt || null,
-    updatedAt: channel.updatedAt || now || nowIso(),
+    updatedAt: channel.updatedAt || resolveStamp(now),
   };
   normalized.id = channel.id || channelIdFor(normalized);
   return normalized;
@@ -277,7 +303,7 @@ export function ensureRegionalGraph(graph = {}, options = {}) {
   // byte-identical replays — without it, the channel_inferred edge minted for
   // an edgeless pair was the one record in a pulse apply still reading the
   // wall clock.
-  const now = options.now || null;
+  const now = options.now;
   const nodes = dedupeById((graph.nodes || []).map(node => normalizeNode(node, now)).filter(Boolean));
   const edges = dedupeById((graph.edges || []).map(edge => normalizeEdge(edge, now)).filter(Boolean));
   const channels = dedupeById((graph.channels || []).map(channel => normalizeChannel(channel, now)).filter(Boolean));
@@ -321,7 +347,7 @@ export function ensureRegionalGraph(graph = {}, options = {}) {
     channels,
     queuedImpacts,
     eventLog,
-    updatedAt: graph.updatedAt || now || nowIso(),
+    updatedAt: graph.updatedAt || resolveStamp(now),
   };
   // Brand as normalized (non-enumerable ⇒ invisible to JSON / spread / clone).
   Object.defineProperty(result, ENSURED_BRAND, { value: true, enumerable: false, writable: false, configurable: false });
@@ -348,18 +374,22 @@ export function ensureRegionalGraphOnce(graph = {}, options = {}) {
 
 /**
  * @param {import('./deriveRegionalState.js').RegionInput|null|undefined} save
- * @param {string | null} [now]
+ * @param {string | null} [now]  undefined = absent (wall clock); null = NO STAMP
  */
-function nodeFromSave(save, now = null) {
+function nodeFromSave(save, now) {
   const state = deriveRegionalState(save);
   if (!state.id) return null;
+  // `now` is threaded to normalizeNode's OWN parameter rather than pre-flattened into
+  // the raw row. The old spelling was `updatedAt: now || undefined` with no second
+  // argument, which collapsed an explicit `now: null` to undefined and then took the
+  // wall clock from normalizeNode's absent-`now` branch — the boundary fallback firing
+  // on a caller that had explicitly asked for NO STAMP.
   return normalizeNode({
     id: state.id,
     settlementId: state.settlementId,
     name: state.name,
     tier: state.tier,
-    updatedAt: now || undefined,
-  });
+  }, now);
 }
 
 /** @param {import('./deriveRegionalState.js').RegionInput|null|undefined} save */
@@ -398,7 +428,7 @@ function findTargetSave(link, saves) {
 export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, options = {}) {
   // Deterministic timestamps: callers thread options.now so a rebuild replay
   // stamps no wall-clock time (wall clock ONLY when not provided).
-  const now = options.now || null;
+  const now = options.now;
   const existing = ensureRegionalGraph(existingGraph || {}, { now });
   const nodes = [...existing.nodes];
   const edges = [...existing.edges];
@@ -453,7 +483,7 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
               ...(existingEdge.evidence || []).filter((/** @type {any} */ item) => item?.source !== 'neighbourNetwork'),
               { source: 'neighbourNetwork', reason: `Linked as ${liveType}.` },
             ],
-            updatedAt: now || nowIso(),
+            updatedAt: resolveStamp(now),
           };
           edges[edges.indexOf(existingEdge)] = refreshed;
           edgesById.set(refreshed.id, refreshed);
@@ -470,8 +500,7 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
           source: 'neighbourNetwork',
           reason: `Linked as ${liveType}.`,
         }],
-        updatedAt: now || undefined,
-      });
+      }, now);
       if (edge) {
         edges.push(edge);
         edgesById.set(edge.id, edge);
@@ -487,7 +516,7 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
     channels: existing.channels,
     queuedImpacts: existing.queuedImpacts,
     eventLog: existing.eventLog,
-    updatedAt: now || nowIso(),
+    updatedAt: resolveStamp(now),
   }, { now });
 }
 
@@ -533,7 +562,7 @@ function warLayerEvidenceRows(evidence) {
 export function addRegionalChannels(graph, channels = [], options = {}) {
   // Deterministic timestamps: callers thread options.now (replay must stamp
   // no wall-clock time); the wall clock is the fallback ONLY when absent.
-  const now = options.now || nowIso();
+  const now = resolveStamp(options.now);
   const current = ensureRegionalGraph(graph || {}, { now });
   const byId = new Map(current.channels.map(c => [c.id, c]));
   for (const raw of channels) {
@@ -592,7 +621,7 @@ function relationshipEvidence(relationshipType, options = {}) {
  * @param {RegionOptions} [options]
  */
 function relationshipChannel(raw, relationshipType, options = {}) {
-  const now = options.now || nowIso();
+  const now = resolveStamp(options.now);
   return normalizeChannel({
     status: options.status || 'confirmed',
     confidence: options.confidence ?? 0.75,
@@ -706,7 +735,7 @@ function isWarLayerMinted(channel) {
  * @param {RegionOptions} [options]
  */
 export function syncRelationshipChannelBundle(graph, edge, relationshipType, options = {}) {
-  const now = options.now || nowIso();
+  const now = resolveStamp(options.now);
   const current = ensureRegionalGraph(graph || {}, { now });
   const bundle = relationshipChannelBundle(edge, relationshipType, options);
   const nextIds = new Set(bundle.map(channel => channel.id));
@@ -765,7 +794,7 @@ export function syncRelationshipChannelBundle(graph, edge, relationshipType, opt
  */
 export function setRegionalChannelStatus(graph, channelId, status, options = {}) {
   if (!REGIONAL_CHANNEL_STATUSES.includes(status)) return ensureRegionalGraph(graph || {}, { now: options.now });
-  const now = options.now || nowIso();
+  const now = resolveStamp(options.now);
   const current = ensureRegionalGraph(graph || {}, { now });
   const channels = current.channels.map(channel => {
     if (channel.id !== channelId) return channel;
@@ -813,7 +842,7 @@ export function activeChannelsFrom(graph, settlementId, options = {}) {
  * @param {RegionOptions} [options]
  */
 export function appendRegionalEvent(graph, event, options = {}) {
-  const now = options.now || nowIso();
+  const now = resolveStamp(options.now);
   const current = ensureRegionalGraph(graph || {}, { now });
   return ensureRegionalGraph({
     ...current,
@@ -831,7 +860,7 @@ export function appendRegionalEvent(graph, event, options = {}) {
  * @param {RegionOptions} [options]
  */
 export function queueRegionalImpacts(graph, impacts = [], options = {}) {
-  const now = options.now || nowIso();
+  const now = resolveStamp(options.now);
   const current = ensureRegionalGraph(graph || {}, { now });
   const byId = new Map(current.queuedImpacts.map(i => [i.id, i]));
   for (const impact of impacts) {
@@ -876,7 +905,7 @@ export function queueRegionalImpacts(graph, impacts = [], options = {}) {
  */
 export function setRegionalImpactStatus(graph, impactId, status, patch = {}, options = {}) {
   if (!REGIONAL_IMPACT_STATUSES.includes(status)) return ensureRegionalGraph(graph || {}, { now: options.now });
-  const now = options.now || nowIso();
+  const now = resolveStamp(options.now);
   const current = ensureRegionalGraph(graph || {}, { now });
   const queuedImpacts = current.queuedImpacts.map(impact => {
     if (impact.id !== impactId) return impact;
@@ -905,7 +934,7 @@ export function isRegionalImpactAvailable(impact) {
  * @param {{ now?: string|null, currentTick?: number|null }} [options]
  */
 export function advanceRegionalImpacts(graph, ticks = 1, options = {}) {
-  const now = options.now || nowIso();
+  const now = resolveStamp(options.now);
   const current = ensureRegionalGraph(graph || {}, { now });
   const amount = Math.max(1, Math.floor(Number.isFinite(ticks) ? ticks : 1));
   const currentTick = /** @type {number | null} */ (Number.isFinite(options.currentTick) ? options.currentTick : null);
@@ -978,9 +1007,9 @@ export function buildRegionalIndexes(graph) {
  */
 export function mintDirectedChannel({
   type, from, to, strength = 0.7, confidence = 0.7, explanation = '',
-  visibility, status = 'confirmed', relationshipKey = null, source = 'directed_mint', now = null,
+  visibility, status = 'confirmed', relationshipKey = null, source = 'directed_mint', now = undefined,
 }) {
-  const stamp = now || nowIso();
+  const stamp = resolveStamp(now);
   return normalizeChannel({
     type,
     from,

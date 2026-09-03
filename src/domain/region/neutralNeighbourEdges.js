@@ -286,7 +286,15 @@ function selectNeighbourPairs(sorted, digest) {
  * "diplomatic known + minimal route awareness, NOT a trade route, no resource
  * flow" is precisely an edge without channels.
  *
- * @template {{ edges?: Array<Record<string, any>>, updatedAt?: string }} G
+ * The stamp is `string|null` because an ensureRegionalGraph output's own stamp is:
+ * an explicitly threaded `now: null` means NO STAMP, and the minted edges inherit
+ * that absence rather than silently minting a wall clock in its place. Narrowing
+ * this constraint back to `string` does not make the stamp non-null — it only makes
+ * the generic fail its constraint, and the graph then widens to this literal shape at
+ * every caller (that is what reddened worldSnapshot.js and pulseKernel.js once
+ * `ensureRegionalGraph` started telling the truth about its own return type).
+ *
+ * @template {{ edges?: Array<Record<string, any>>, updatedAt?: string|null }} G
  * @param {G} graph an ensureRegionalGraph output (edges already normalized)
  * @param {ReadonlyArray<string|number>} memberIds the campaign members participating this tick
  * @param {{ spatialCanonVersion?: number, spatialDigest?: import('../spatial/distanceRead.js').SpatialDigest }|null} [worldState] the

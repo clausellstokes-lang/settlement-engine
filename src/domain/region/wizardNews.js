@@ -67,7 +67,7 @@ const MAX_ENTRIES = 240;
  * @typedef {Object} WizardNewsEntry
  * @property {number} schemaVersion
  * @property {string} id
- * @property {string} createdAt
+ * @property {string | null} createdAt  null = NO STAMP (the caller threaded `now: null`).
  * @property {number} tick
  * @property {string} scope
  * @property {string} significance
@@ -105,7 +105,7 @@ const MAX_ENTRIES = 240;
  * A raw (possibly partial / persisted) entry accepted by normalizeEntry.
  * @typedef {Object} RawWizardNewsEntry
  * @property {string | number} [id]
- * @property {string} [createdAt]
+ * @property {string | null} [createdAt]
  * @property {number} [tick]
  * @property {string} [scope]
  * @property {string} [significance]
@@ -139,9 +139,10 @@ const MAX_ENTRIES = 240;
 
 /**
  * @typedef {Object} WizardNewsOptions
- * @property {string} [now]          deterministic timestamp for replay
+ * @property {string | null} [now]   deterministic timestamp for replay. ABSENT ⇒ the wall-clock
+ *   boundary fallback; `null` ⇒ NO STAMP; a string ⇒ that instant. See resolveStamp.
  * @property {number} [tick]
- * @property {string} [createdAt]
+ * @property {string | null} [createdAt]
  * @property {Object} [graph]
  * @property {string} [transition]
  * @property {WizardGraphEvent | null} [event]
@@ -153,7 +154,7 @@ const MAX_ENTRIES = 240;
  * @property {number} [schemaVersion]
  * @property {number} [currentTick]
  * @property {RawWizardNewsEntry[]} [entries]
- * @property {string} [updatedAt]
+ * @property {string | null} [updatedAt]
  */
 
 /** @type {Set<string | undefined>} */
@@ -260,6 +261,34 @@ const CHANNEL_PHRASES = Object.freeze({
 
 function nowIso() {
   return wallClockNow();
+}
+
+/**
+ * Resolve a threaded instant into a stamp. THE THREE CASES ARE THREE, NOT TWO — this is
+ * the news half of the same contract `region/graph.js` states for the regional graph, and
+ * the two are deliberately spelled identically so a reader of one recognises the other.
+ *
+ *   • `undefined` (the option was never supplied) → the documented BOUNDARY fallback,
+ *     mint from the wall clock. UNCHANGED, and it is why this module still holds exactly
+ *     one `wallClockNow` read (LEDGER_A's row for this file).
+ *   • `null` (the caller explicitly passed one) → NO STAMP. Honoured as written.
+ *   • a non-empty string → that instant.
+ *
+ * WHY THIS EXISTS. The six writers below all ended at `… || options.now || nowIso()` — an
+ * `||`, so an explicitly passed `now: null`, which READS as "pin this to nothing", was
+ * falsy and landed on the wall clock at millisecond resolution. Two calls a few
+ * milliseconds apart then produced different bytes ~0.4% of the time, which is a random
+ * red on every landing gate rather than an honest one. A spelling ban was fenced around
+ * the trap at these six writers; this removes the trap, and the ban narrows to the half
+ * that still deceives (`now: undefined`, which really does mean "absent").
+ *
+ * An empty string collapses to null: it is not a valid instant, and letting it through
+ * would put `""` into a persisted stamp.
+ * @param {string | null | undefined} now
+ * @returns {string | null}
+ */
+function resolveStamp(now) {
+  return now === undefined ? nowIso() : (now || null);
 }
 
 /**
@@ -624,7 +653,7 @@ function normalizeEntry(entry, options = {}) {
   return {
     schemaVersion: WIZARD_NEWS_SCHEMA_VERSION,
     id: String(entry.id),
-    createdAt: entry.createdAt || options.now || nowIso(),
+    createdAt: entry.createdAt || resolveStamp(options.now),
     tick: Math.max(0, Math.floor(finiteNumber(entry.tick, 0))),
     scope: entry.scope || 'regional',
     significance,
@@ -808,7 +837,7 @@ export function wizardNewsCurrentTick(feed) {
 /**
  * @param {WizardNewsFeed | null | undefined} [feed]
  * @param {WizardNewsOptions} [options]
- * @returns {{schemaVersion: number, currentTick: number, entries: WizardNewsEntry[], updatedAt: string}}
+ * @returns {{schemaVersion: number, currentTick: number, entries: WizardNewsEntry[], updatedAt: string | null}}
  */
 export function ensureWizardNewsFeed(feed = {}, options = {}) {
   const entries = /** @type {WizardNewsEntry[]} */ (Array.isArray(feed?.entries)
@@ -818,7 +847,7 @@ export function ensureWizardNewsFeed(feed = {}, options = {}) {
     schemaVersion: WIZARD_NEWS_SCHEMA_VERSION,
     currentTick: wizardNewsCurrentTick(feed),
     entries: capEntries(sortEntries(entries), MAX_ENTRIES),
-    updatedAt: feed?.updatedAt || options.now || nowIso(),
+    updatedAt: feed?.updatedAt || resolveStamp(options.now),
   };
 }
 
@@ -857,7 +886,7 @@ export function projectWizardNewsForAudience(feed, audience = 'dm') {
  * @param {WizardNewsFeed | null | undefined} [feed]
  * @param {number} [ticks]
  * @param {WizardNewsOptions} [options]
- * @returns {{schemaVersion: number, currentTick: number, entries: WizardNewsEntry[], updatedAt: string}}
+ * @returns {{schemaVersion: number, currentTick: number, entries: WizardNewsEntry[], updatedAt: string | null}}
  */
 export function advanceWizardNewsFeed(feed = {}, ticks = 1, options = {}) {
   const current = ensureWizardNewsFeed(feed, options);
@@ -865,7 +894,7 @@ export function advanceWizardNewsFeed(feed = {}, ticks = 1, options = {}) {
   return {
     ...current,
     currentTick: current.currentTick + amount,
-    updatedAt: options.now || nowIso(),
+    updatedAt: resolveStamp(options.now),
   };
 }
 
@@ -878,14 +907,14 @@ export function createWizardNewsEntryFromImpact(impact, options = {}) {
   if (!impact?.id) return null;
   // performance-scale-7: the diff below passes its already-ensured `after` graph per
   // changed impact — ensureRegionalGraphOnce skips the redundant re-normalization.
-  const graph = ensureRegionalGraphOnce(options.graph || {});
+  const graph = ensureRegionalGraphOnce(options.graph || {}, { now: options.now });
   const transition = options.transition || impact.status || 'queued';
   const tick = Math.max(0, Math.floor(finiteNumber(options.tick, 0)));
   const names = nodeNameMap(graph);
   const channels = channelMap(graph);
   const event = options.event || eventForImpact(graph, impact.id);
   const { significance, score, reasons } = significanceForImpact(impact, transition);
-  const createdAt = options.createdAt || options.now || nowIso();
+  const createdAt = options.createdAt || resolveStamp(options.now);
 
   return normalizeEntry({
     id: `wizard_news.${tick}.${transition}.${impact.id}`,
@@ -920,12 +949,12 @@ export function deriveWizardNewsEntriesFromGraphChange(beforeGraph = {}, afterGr
   // normalizing the whole graph ×2 here multiplied by the outcome count. The call
   // sites already hold ensureRegionalGraph outputs (branded), so the Once form skips
   // the redundant normalization; an unbranded/rehydrated graph still gets a full ensure.
-  const before = ensureRegionalGraphOnce(/** @type {import('./graph.js').RegionGraph} */ (beforeGraph || {}));
-  const after = ensureRegionalGraphOnce(/** @type {import('./graph.js').RegionGraph} */ (afterGraph || {}));
+  const before = ensureRegionalGraphOnce(/** @type {import('./graph.js').RegionGraph} */ (beforeGraph || {}), { now: options.now });
+  const after = ensureRegionalGraphOnce(/** @type {import('./graph.js').RegionGraph} */ (afterGraph || {}), { now: options.now });
   const beforeById = new Map(before.queuedImpacts.map(impact => [impact.id, impact]));
   const entries = [];
   const tick = Math.max(0, Math.floor(finiteNumber(options.tick, 0)));
-  const createdAt = options.createdAt || options.now || nowIso();
+  const createdAt = options.createdAt || resolveStamp(options.now);
 
   for (const impact of after.queuedImpacts) {
     const previous = beforeById.get(impact.id);
@@ -949,6 +978,12 @@ export function deriveWizardNewsEntriesFromGraphChange(beforeGraph = {}, afterGr
       transition,
       tick,
       createdAt,
+      // `now` MUST ride along with the already-resolved `createdAt`. When the caller
+      // threaded `now: null`, `createdAt` above resolves to null — and a null
+      // `options.createdAt` is falsy, so the callee re-resolves from ITS `options.now`.
+      // Without this line that is `undefined`, i.e. "absent", and the callee would mint
+      // a wall clock — reintroducing at the hand-off exactly the leak this cure closes.
+      now: options.now,
     });
     if (entry) entries.push(entry);
   }
@@ -960,7 +995,7 @@ export function deriveWizardNewsEntriesFromGraphChange(beforeGraph = {}, afterGr
  * @param {WizardNewsFeed | null | undefined} [feed]
  * @param {RawWizardNewsEntry[]} [entries]
  * @param {WizardNewsOptions} [options]
- * @returns {{schemaVersion: number, currentTick: number, entries: WizardNewsEntry[], updatedAt: string}}
+ * @returns {{schemaVersion: number, currentTick: number, entries: WizardNewsEntry[], updatedAt: string | null}}
  */
 export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
   const current = ensureWizardNewsFeed(feed, options);
@@ -973,7 +1008,7 @@ export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
   return {
     ...current,
     entries: capEntries(sortEntries([...byId.values()]), options.maxEntries || MAX_ENTRIES),
-    updatedAt: entries?.length ? (options.now || nowIso()) : current.updatedAt,
+    updatedAt: entries?.length ? resolveStamp(options.now) : current.updatedAt,
   };
 }
 
@@ -1087,7 +1122,13 @@ export function appendObservedWizardNewsEntries(feed = {}, entries = [], options
 export function applyPulseMover(result, worldState, settlementUpdates, wizardNews, now, receiptSink = null) {
   if (!result || !result.changed) return { worldState, settlementUpdates, wizardNews };
   const news = Array.isArray(result.newsEntries) && result.newsEntries.length
-    ? appendObservedWizardNewsEntries(wizardNews, /** @type {Parameters<typeof appendWizardNewsEntries>[1]} */ (result.newsEntries), { now: now ?? undefined }, receiptSink)
+    // `now` is passed THROUGH, not `now ?? undefined`. That coercion was a workaround from
+    // the era when a null `now` was silently a wall clock: turning it into `undefined` at
+    // least made the fallthrough honest about being one. Now that null means NO STAMP, the
+    // coercion would convert an explicit "no stamp" back into a live clock read. pulseKernel
+    // — this function's only caller family — pins a real instant (assertNowPinnedInTest), so
+    // no production byte moves; what changes is that a null caller is now obeyed.
+    ? appendObservedWizardNewsEntries(wizardNews, /** @type {Parameters<typeof appendWizardNewsEntries>[1]} */ (result.newsEntries), { now }, receiptSink)
     : wizardNews;
   return {
     worldState: result.worldState !== undefined ? result.worldState : worldState,
