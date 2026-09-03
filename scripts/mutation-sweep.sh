@@ -102,6 +102,7 @@ MUTATED_FILES=(
   src/domain/deitySnapshot.js
   src/domain/worldPulse/disposition.js
   src/domain/display/stateProse/dossierMounts.js
+  src/domain/content/customContentCharset.generated.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -983,6 +984,14 @@ check_caught "determinism/instantWorld Math.random()" src/lib/instantWorld/facti
 #     DS-CND-1 from the dark half without mounting it anywhere.
 perl -0pi -e "s/  'DS-STR-1', 'DS-STR-2', 'DS-CND-1',\n/  'DS-STR-1', 'DS-STR-2',\n/" src/domain/display/stateProse/dossierMounts.js
 check_caught "dossier-mounts/a corpus block leaves the dark list with no mount" src/domain/display/stateProse/dossierMounts.js "npx vitest run tests/lint/dossierMountRegistry.walker.test.js --no-file-parallelism"
+
+# 72. CHARSET Car 1 — the charset is DERIVED from a renderer, so the arm that matters is
+#     "every shipped name is printable in the dossier PDF". Strike one measured range from
+#     the DOSSIER surface only; the census must then name the codepoints it can no longer
+#     draw. Proved before landing: with the plant, 2 of 5 arms red and the message names
+#     U+00C1 U+00C9 U+00CD U+00D3 U+00D6 U+00DA U+00DC U+00DE; restored, 5/5 green.
+perl -0pi -e 's/"ranges": "D 20-7E A0-AC AE-132 /"ranges": "D 20-7E A0-AC /' src/domain/content/customContentCharset.generated.js
+check_caught "naming-charset/a range leaves the dossier surface and a shipped name stops printing" src/domain/content/customContentCharset.generated.js "npx vitest run tests/data/namingDataCharset.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
