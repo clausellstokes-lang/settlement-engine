@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "32573759efd7a75eca4daf07cab659d9d6c64691",
-  "measuredBy": "Opus 5 — lane INSTR-land, chair §883.8",
-  "date": "2026-09-02",
-  "note": "HORIZON-INSTR landing: the inventory was frozen against C-prime and the T13 landing (§883, 28 commits, 38 src files) moved the subject tree beneath it; the two growth rows are attributed to T13 Car P-prime 754856b12 by DECLARED_GROWTH.",
+  "measuredAtSha": "394d758ee0ae53cd8cc1193b382149a656c51370",
+  "measuredBy": "Opus 5 — chair, ENC-1 landing §888",
+  "date": "2026-09-03",
+  "note": "ENC-1 mints CHANCE_MEETING_TUNING, the chance-meeting leaf; every rung is a DRAFT and nothing here is signed. Enrolment only, per ODQ §882.13 encounters row 7 (values signed LAST by the owner).",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -3398,6 +3398,57 @@
         "CAP": 0.05,
         "CROSSING_THRESHOLD": 0.15,
         "GAIN": 0.2
+      },
+      "dependents": [],
+      "namedDependents": []
+    },
+    "src/domain/worldPulse/envoyChanceMeeting.js#CHANCE_MEETING_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 26,
+      "line": 171,
+      "spanDigest": "68748daad82b632c5372660ef2a966fd760775a7fb60d223d5f654dbb21c0b19",
+      "leaves": {
+        "eighths": 8,
+        "courtNeutralPoint": 0.5,
+        "baseRung.traveller_resident.host_settlement": 3,
+        "baseRung.traveller_resident.field_node": 0,
+        "baseRung.traveller_traveller.host_settlement": 4,
+        "baseRung.traveller_traveller.field_node": 2,
+        "posturePlus.friendly": 1,
+        "posturePlus.neutral": 0,
+        "posturePlus.hostile": -1,
+        "covertMeetStep": -1,
+        "approachBaseRung": 2,
+        "approachAtOddsRung": 4,
+        "approachAtOddsStep": 2,
+        "approachCovertStep": 1,
+        "compromiseFloor": 2,
+        "compromiseCapCorruptible": 6,
+        "compromiseCapPlain": 4,
+        "compromiseFastPath": 7,
+        "markLadder.alike.bond": 4,
+        "markLadder.alike.respect": 0,
+        "markLadder.alike.rivalry": 1,
+        "markLadder.differing.bond": 2,
+        "markLadder.differing.respect": 2,
+        "markLadder.differing.rivalry": 2,
+        "markLadder.opposed.bond": 0,
+        "markLadder.opposed.respect": 2,
+        "markLadder.opposed.rivalry": 3,
+        "markPostureStep": 1,
+        "markRefusedRivalryStep": 1,
+        "nothingFloor": 2,
+        "exposureBaseRung": 2,
+        "exposureCovertStep": 2,
+        "exposureWarinessCap": 2,
+        "exposureHostileStep": 1,
+        "distanceEdges.alike": 3,
+        "distanceEdges.differing": 8,
+        "driftAxisCap": 3,
+        "driftFirmGap": 4,
+        "lessonCadenceTicks": 13,
+        "leanTtlTicks": 52
       },
       "dependents": [],
       "namedDependents": []
@@ -7724,11 +7775,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 224,
-    "keys": 2066,
+    "tables": 225,
+    "keys": 2092,
     "unregisteredNamed": 535,
     "bareDecimals": 6985,
-    "zeroDependentTables": 8,
-    "zeroNamedDependentTables": 139
+    "zeroDependentTables": 9,
+    "zeroNamedDependentTables": 140
   }
 }
