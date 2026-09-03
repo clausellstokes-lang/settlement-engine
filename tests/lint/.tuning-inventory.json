@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "dfcc8eb72326bc5d1b0edc2cfa599ba087bfdc26",
-  "measuredBy": "Opus 5 — chair, §889 train",
+  "measuredAtSha": "250d4e46407826778c3dc38331fa3aed9cc63a9b",
+  "measuredBy": "Opus 5 — chair, §891 train",
   "date": "2026-09-03",
-  "note": "ENC-2 adds the two typed leash-ends the design owed (DISCOVERY and LAPSE) to CORRUPTION_WEB_TUNING. Enrolment only: both are DRAFT and nothing is signed.",
+  "note": "CAPACITY C1 gives the demographic family its signed address: HERALD_TUNING gains five leaves and RESPONSE_TUNING gains demographicsHerald.js as a dependent. Enrolment only; nothing signed.",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -2872,15 +2872,20 @@
     "src/domain/worldPulse/demographicsHerald.js#HERALD_TUNING": {
       "exported": true,
       "idiom": "literal",
-      "keys": 5,
-      "line": 69,
-      "spanDigest": "3811c39f5e76ddc8c8defbb501fd4ef7b32d0b3a523176e738298917fd52b6ae",
+      "keys": 10,
+      "line": 83,
+      "spanDigest": "2f820c03deb05c7229d4d20918911139e15521d0525abced9b7d25ca999bb169",
       "leaves": {
         "HUNGER_DEFICIT_FLOOR": 0.2,
         "HUNGER_NET_LOSS_FLOOR": 4,
         "EXODUS_DEPARTURE_FLOOR": 12,
         "REFUSED_FLOOR": 6,
-        "MAJOR_DEPARTURE_FLOOR": 200
+        "MAJOR_DEPARTURE_FLOOR": 200,
+        "CROWDING_LINE_MIN_SOULS": 60,
+        "CROWDING_FILLED_SEVERITY": 0.35,
+        "CROWDING_THINNED_SEVERITY": 0.5,
+        "CROWDING_FILLED_SCORE": 48,
+        "CROWDING_THINNED_SCORE": 56
       },
       "dependents": [
         "src/domain/worldPulse/demographicsKernel.js"
@@ -2982,6 +2987,7 @@
         "MIN_COLUMN": 3
       },
       "dependents": [
+        "src/domain/display/demographicReading.js",
         "src/domain/worldPulse/demographicsMigration.js",
         "src/domain/worldPulse/demographicsPlans.js",
         "src/domain/worldPulse/migrationKernel.js"
@@ -3016,6 +3022,7 @@
         "MIN_DENSITY_CEILING": 24
       },
       "dependents": [
+        "src/domain/display/demographicReading.js",
         "src/domain/worldPulse/candidateEvents.js",
         "src/domain/worldPulse/demographicsKernel.js",
         "src/domain/worldPulse/demographicsLadder.js",
@@ -3052,6 +3059,8 @@
         "NEUTRAL_SCORE": 0.5
       },
       "dependents": [
+        "src/domain/display/demographicReading.js",
+        "src/domain/worldPulse/demographicsHerald.js",
         "src/domain/worldPulse/demographicsPlans.js",
         "src/domain/worldPulse/sovereigntyMarketStage.js"
       ],
@@ -3765,7 +3774,7 @@
       "exported": true,
       "idiom": "mixed",
       "keys": 4,
-      "line": 124,
+      "line": 198,
       "spanDigest": "cf81478ded8975746d27dff983399924018fba979a2975bfcee40de13c2ba882",
       "leaves": {
         "PATRON_AMP": 1.6,
@@ -3792,7 +3801,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 175,
+      "line": 249,
       "spanDigest": "b6f693275ed1ace84dd5a66a09a391a4e52f62d187ebf20b9e6325fdd5169880",
       "leaves": {
         "JEALOUS_BOON_FADE": 1,
@@ -3815,7 +3824,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 197,
+      "line": 271,
       "spanDigest": "f4e25568d329b49b8d6a77388d667838664a5aa984f02edaad9de8b0092e0ff8",
       "leaves": {
         "FULL_EXPOSURE": 0.6,
@@ -3835,7 +3844,7 @@
       "exported": true,
       "idiom": "computed",
       "keys": 15,
-      "line": 233,
+      "line": 307,
       "spanDigest": "a8207ec1e96b8a70ed9c04271ae6f2e413e7125ed17a7f390c26c28038f187cc",
       "leaves": {
         "0": {
@@ -7778,7 +7787,7 @@
   "unclosed": [],
   "totals": {
     "tables": 225,
-    "keys": 2094,
+    "keys": 2099,
     "unregisteredNamed": 535,
     "bareDecimals": 6985,
     "zeroDependentTables": 9,
